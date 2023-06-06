@@ -210,7 +210,12 @@
 		if(cloned != OS_FILE_SUCCESS)
 			switch(cloned)
 				if(OS_FILE_NO_READ)
-					to_chat(user, SPAN_WARNING("You lack permission to clone the file '[href_list["PRG_clone"]]'."))
+					to_chat(user, SPAN_WARNING("You lack permission to read the file '[href_list["PRG_clone"]]'."))
+					return TOPIC_HANDLED
+				if(OS_FILE_NO_WRITE)
+					// Cheap hack to get the filename after cloning.
+					var/datum/computer_file/source_file = get_file(href_list["PRG_clone"], current_disk.get_dir_path(current_directory, TRUE))
+					to_chat(user, SPAN_WARNING("You lack permission to create the file '[href_list["PRG_clone"] + source_file.copy_string]'."))
 					return TOPIC_HANDLED
 				if(OS_NETWORK_ERROR)
 					to_chat(user, SPAN_WARNING("Unable to access file '[href_list["PRG_clone"]]' on the network."))

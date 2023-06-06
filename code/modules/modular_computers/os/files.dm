@@ -268,7 +268,7 @@
 	if(!istype(cloned_file))
 		return OS_FILE_NO_READ
 
-	var/success = store_file(cloned_file, directory, accesses, user)
+	var/success = store_file(cloned_file, directory, TRUE, accesses, user)
 	if(success != OS_FILE_SUCCESS)
 		qdel(cloned_file) // Clean up after ourselves
 	return success
@@ -488,16 +488,16 @@
 	return drive_slot?.stored_drive
 
 /datum/file_storage/disk/removable/check_errors()
-	. = ..()
-	if(.)
-		return
 	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
 	if(!istype(drive_slot))
 		return "HARDWARE ERROR: No drive slot was found."
 	if(!drive_slot.check_functionality())
-		return "HARDWARE ERROR: [drive_slot] is non-operational"
+		return "HARDWARE ERROR: [drive_slot] is non-operational."
 	if(!istype(drive_slot.stored_drive))
 		return "HARDWARE ERROR: No portable drive inserted."
+	. = ..()
+	if(.)
+		return
 
 // Datum tracking progress between of file transfer between two file streams
 /datum/file_transfer
