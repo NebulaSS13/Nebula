@@ -56,9 +56,9 @@ SUBSYSTEM_DEF(unit_tests)
 	// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
 	if(map_template.tallness == 1)
 		SSmapping.increment_world_z_size(/datum/level_data/unit_test)
-		var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
-		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
-		map_template.load(corner)
+		var/center = locate(world.maxx/2, world.maxy/2, world.maxz)
+		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(center)]")
+		map_template.load(center, centered = TRUE)
 	else // Multi-Z templates are loaded using different means
 		log_unit_test("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
 		map_template.load_new_z()
