@@ -155,11 +155,11 @@
 
 /datum/map_template/proc/load(turf/T, centered=FALSE)
 	if(centered)
-		T = locate(T.x - round(width/2) , T.y - round(height/2) , T.z)
+		T = locate(T.x - (round(width/2) - 1), T.y - (round(height/2) - 1), T.z)
 	if(!T)
-		CRASH("Can't load '[src]' on a null turf! Current world size ([world.maxx], [world.maxy]).")
-	if(((T.x + width) > world.maxx) || ((T.y + height) > world.maxy))
-		CRASH("Couldn't fit the entire template '[src]' (size: [width]x[height]) between lower left corner ([T.x], [T.y])[centered?"(WORLD CENTER)":""] and upper right corner ([T.x + width], [T.y + height]) in current world size ([world.maxx], [world.maxy]).")
+		CRASH("Can't load '[src]' (size: [width]x[height]) onto a null turf! Current world size ([WORLD_SIZE_TO_STRING]).")
+	if(!IS_WITHIN_WORLD((T.x + (width - 1)), (T.y + (height - 1))))
+		CRASH("Couldn't fit the entire template '[src]' (size: [width]x[height]) between lower left corner ([T.x], [T.y])[centered?"(WORLD CENTER)":""] and upper right corner ([T.x + width], [T.y + height]) in current world size ([WORLD_SIZE_TO_STRING]).")
 
 	var/list/atoms_to_initialise = list()
 	var/shuttle_state = pre_init_shuttles()
