@@ -83,7 +83,7 @@
 				to_chat(user, SPAN_WARNING("Someone is already performing a landing maneuver!"))
 				return
 
-			var/turf/eye_turf = locate(world.maxx/2, world.maxy/2, target_sector.map_z[target_sector.map_z.len]) // Center of the top z-level of the target sector.
+			var/turf/eye_turf = WORLD_CENTER_TURF(target_sector.map_z[target_sector.map_z.len]) // Center of the top z-level of the target sector.
 			if(landing_eye.look(user, list(shuttle_tag, target_sector))) // Placement of the eye was successful
 				landing_eye.extension_eye.forceMove(eye_turf)
 				return

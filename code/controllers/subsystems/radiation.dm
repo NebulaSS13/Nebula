@@ -134,5 +134,5 @@ SUBSYSTEM_DEF(radiation)
 /datum/controller/subsystem/radiation/proc/z_radiate(var/atom/source, power, var/respect_maint = FALSE)
 	if(!(power && source))
 		return
-	var/turf/epicentre = locate(round(world.maxx / 2), round(world.maxy / 2), source.z)
+	var/turf/epicentre = WORLD_CENTER_TURF(source.z)
 	flat_radiate(epicentre, power, world.maxx, respect_maint)

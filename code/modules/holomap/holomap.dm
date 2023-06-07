@@ -240,8 +240,8 @@
 	for(var/area/A in SSminimap.holomaps[z_level].holomap_areas)
 		if(A.holomap_color == saved_color)
 			var/image/area = image(SSminimap.holomaps[z_level].holomap_areas[A])
-			area.pixel_x = ((HOLOMAP_ICON_SIZE / 2) - world.maxx / 2) - pixel_x
-			area.pixel_y = ((HOLOMAP_ICON_SIZE / 2) - world.maxy / 2) - pixel_y
+			area.pixel_x = ((HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_X) - pixel_x
+			area.pixel_y = ((HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_Y) - pixel_y
 			overlays += area
 			has_areas = TRUE
 
@@ -320,8 +320,8 @@
 	if(length(global.using_map.overmap_ids))
 		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
 
-		var/current_z_offset_x = (HOLOMAP_ICON_SIZE / 2) - world.maxx / 2
-		var/current_z_offset_y = (HOLOMAP_ICON_SIZE / 2) - world.maxy / 2
+		var/current_z_offset_x = (HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_X
+		var/current_z_offset_y = (HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_Y
 
 		//For the given z level fetch the related map sector and build the list
 		if(istype(O))
@@ -350,8 +350,8 @@
 				map_image.color = COLOR_HOLOMAP_HOLOFIER
 				map_image.layer = HUD_BASE_LAYER
 
-				map_image.pixel_x = (HOLOMAP_ICON_SIZE / 2) - world.maxx / 2
-				map_image.pixel_y = (HOLOMAP_ICON_SIZE / 2) - world.maxy / 2
+				map_image.pixel_x = (HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_X
+				map_image.pixel_y = (HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_Y
 
 				//Store the image for future use
 				//LAZYADD(levels, map_image)
