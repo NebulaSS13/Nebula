@@ -54,7 +54,7 @@
 	var/ruin_category = MAP_TEMPLATE_CATEGORY_PLANET_SITE
 
 /datum/map_template/planetoid/random/is_runtime_generated()
-	return !length(mappaths)
+	return TRUE
 
 /datum/map_template/planetoid/random/get_spawn_weight()
 	return 100
