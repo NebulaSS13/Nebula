@@ -100,7 +100,7 @@
 	// Finish "open space" z block setup
 	if(!use_mapped_z_levels)
 		var/top_z = map_z[map_z.len]
-		var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), top_z)
+		var/turf/center_loc = WORLD_CENTER_TURF(top_z)
 		landmark = new (center_loc, shuttle)
 		add_landmark(landmark) // we don't restrict it but it does a more strict check in is_valid anyway
 	else

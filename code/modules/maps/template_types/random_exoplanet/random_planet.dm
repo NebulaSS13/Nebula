@@ -253,7 +253,7 @@
 			SSlighting.InitializeZlev(LD.level_z)
 		log_game("Z-level '[LD.name]'(planetoid:'[name]') loaded at [LD.level_z]")
 	loaded++
-	return locate(world.maxx/2, world.maxy/2, world.maxz)
+	return WORLD_CENTER_TURF(world.maxz)
 
 /datum/map_template/planetoid/proc/before_planet_gen(var/datum/planetoid_data/gen_data)
 	make_planet_name(gen_data)

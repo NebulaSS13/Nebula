@@ -151,7 +151,7 @@
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 	loaded++
 
-	return locate(world.maxx/2, world.maxy/2, world.maxz)
+	return WORLD_CENTER_TURF(world.maxz)
 
 /datum/map_template/proc/load(turf/T, centered=FALSE)
 	if(centered)
