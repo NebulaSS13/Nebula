@@ -12,6 +12,19 @@
 	if(drive_slot)
 		mounted_storage["media"] = new /datum/file_storage/disk/removable(src, "media")
 
+	// Auto-mounted mainframes.
+	var/datum/computer_file/data/automount_file = get_file("automount", "local")
+	if(istype(automount_file))
+		var/list/automounts = splittext(automount_file.stored_data, ";")
+		for(var/automount in automounts)
+			var/list/automount_split = splittext(automount, "|")
+			if(length(automount_split) != 2)
+				continue
+			var/root_name = automount_split[1]
+			var/mainframe_tag = automount_split[2]
+
+			mount_mainframe(root_name, mainframe_tag)
+
 /datum/extension/interactive/os/system_shutdown()
 	QDEL_LIST_ASSOC_VAL(mounted_storage)
 	. = ..()
@@ -47,6 +60,9 @@
 	return TRUE
 
 /datum/extension/interactive/os/proc/mount_mainframe(root_name, mainframe_tag)
+	var/sanitized_root_name = sanitize_for_file(root_name)
+	if(!length(sanitized_root_name))
+		return "I/O ERROR: Unable to mount mainframe as file system with root directory '[root_name]'."
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return "NETWORK ERROR: Cannot connect to network."
@@ -54,11 +70,11 @@
 	if(!istype(mainframe))
 		return "NETWORK ERROR: No mainframe with network tag '[mainframe_tag]' found."
 
-	var/datum/file_storage/network/created_storage = mount_storage(/datum/file_storage/network, root_name, FALSE)
+	var/datum/file_storage/network/created_storage = mount_storage(/datum/file_storage/network, sanitized_root_name, FALSE)
 	if(!created_storage)
-		return "I/O ERROR: Unable to mount mainframe as file system with root directory '[root_name]'."
+		return "I/O ERROR: Unable to mount mainframe as file system with root directory '[sanitized_root_name]'."
 	created_storage.server = mainframe_tag
-	return "Successfully mounted mainframe with network tag '[mainframe_tag]' as file system with root directory '[root_name]'."
+	return "Successfully mounted mainframe with network tag '[mainframe_tag]' as file system with root directory '[sanitized_root_name]'."
 
 // Rundown of the filesystem hierarchy:
 // The OS creates instances of /datum/file_storage as local or network disks, referenced in its mounted_storage list.
@@ -548,7 +564,7 @@
 	left_to_transfer = max(0, left_to_transfer - get_transfer_speed())
 	if(!left_to_transfer)
 		if(copying)
-			return transfer_to.store_file(transferring, directory_to, TRUE)
+			return transfer_to.store_file(transferring.Clone(), directory_to, TRUE)
 		else
 			. = transfer_from.delete_file(transferring) // Check if we can delete the file.
 			if(. == OS_FILE_SUCCESS)
