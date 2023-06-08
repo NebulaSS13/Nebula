@@ -175,3 +175,11 @@
 /obj/item/clothing/under/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)
+
+// This stub is so the linter stops yelling about sleeping during Initialize()
+// due to corpse props equipping themselves, which calls equip_to_slot, which
+// calls attackby(), which sometimes sleeps due to input(). Yeah.
+// Remove this if a better fix presents itself.
+/obj/item/clothing/under/proc/try_attach_accessory(var/obj/item/accessory, var/mob/user)
+	set waitfor = FALSE
+	attackby(accessory, user)
