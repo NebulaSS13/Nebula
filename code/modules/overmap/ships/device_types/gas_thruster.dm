@@ -32,7 +32,7 @@
 	var/datum/gas_mixture/removed = E.air_contents.remove_ratio((volume_per_burn * thrust_limit * partial) / E.air_contents.volume)
 	if(sample_only)
 		var/datum/gas_mixture/sample = new(removed.volume)
-		sample.copy_from(removed)
+		sample.copy_from_gasmix(removed)
 		E.air_contents.merge(removed)
 		return sample
 	return removed

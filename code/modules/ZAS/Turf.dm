@@ -275,5 +275,5 @@
 /turf/proc/c_copy_air()
 	if(!air)
 		air = new /datum/gas_mixture
-	air.copy_from(zone.air)
+	air.copy_from_gasmix(zone.air)
 	air.group_multiplier = 1

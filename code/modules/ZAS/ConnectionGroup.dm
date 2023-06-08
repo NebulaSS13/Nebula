@@ -230,7 +230,7 @@ Class Procs:
 		flow(A.movables(), abs(differential), differential < 0)
 
 	if(equiv)
-		A.air.copy_from(air)
+		A.air.copy_from_gasmix(air)
 		SSair.mark_edge_sleeping(src)
 
 	SSair.mark_zone_update(A)

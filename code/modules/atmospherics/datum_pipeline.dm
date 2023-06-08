@@ -64,7 +64,7 @@
 
 		if(air?.volume)
 			member.air_temporary = new
-			member.air_temporary.copy_from(air)
+			member.air_temporary.copy_from_gasmix(air)
 			member.air_temporary.volume = member.volume
 			member.air_temporary.multiply(member.volume / air.volume)
 
@@ -174,7 +174,7 @@
 		//Have to consider preservation of group statuses
 		var/datum/gas_mixture/turf_copy = new
 
-		turf_copy.copy_from(target.zone.air)
+		turf_copy.copy_from_gasmix(target.zone.air)
 		turf_copy.volume = target.zone.air.volume //Copy a good representation of the turf from parent group
 
 		equalize_gases(list(air_sample, turf_copy))

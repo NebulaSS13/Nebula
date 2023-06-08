@@ -169,10 +169,10 @@
 
 ///Handle a new level_data datum overwriting us.
 /datum/level_data/proc/replace_with(var/datum/level_data/new_level)
-	new_level.copy_from(src)
+	new_level.copy_from_level(src)
 
 ///Handle copying data from a previous level_data we're replacing.
-/datum/level_data/proc/copy_from(var/datum/level_data/old_level)
+/datum/level_data/proc/copy_from_level(var/datum/level_data/old_level)
 	return
 
 ///Initialize the turfs on the z-level.
@@ -386,7 +386,7 @@
 /datum/level_data/proc/get_exterior_atmosphere()
 	if(exterior_atmosphere)
 		var/datum/gas_mixture/gas = new
-		gas.copy_from(exterior_atmosphere)
+		gas.copy_from_gasmix(exterior_atmosphere)
 		return gas
 
 /datum/level_data/proc/get_display_name()

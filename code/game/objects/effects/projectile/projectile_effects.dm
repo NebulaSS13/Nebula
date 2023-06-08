@@ -18,7 +18,7 @@
 	alpha = 0
 	invisibility = INVISIBILITY_MAXIMUM
 
-/obj/effect/projectile/invislight/proc/copy_from(var/obj/effect/projectile/owner)
+/obj/effect/projectile/invislight/proc/copy_from_owner(var/obj/effect/projectile/owner)
 	light_range = initial(owner.light_range)
 	light_power = initial(owner.light_power)
 	light_color = initial(owner.light_color)

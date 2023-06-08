@@ -313,7 +313,7 @@
 			. += gas[g]
 
 //Copies gas and temperature from another gas_mixture.
-/datum/gas_mixture/proc/copy_from(const/datum/gas_mixture/sample)
+/datum/gas_mixture/proc/copy_from_gasmix(datum/gas_mixture/sample)
 	gas = sample.gas.Copy()
 	graphic = sample.graphic.Copy()
 	temperature = sample.temperature

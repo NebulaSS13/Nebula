@@ -319,13 +319,13 @@
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
 		var/obj/item/stack/newstack = new src.type(loc, transfer, material?.type)
-		newstack.copy_from(src)
+		newstack.copy_from_stack(src)
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(newstack)
 		return newstack
 	return null
 
-/obj/item/stack/proc/copy_from(var/obj/item/stack/other)
+/obj/item/stack/proc/copy_from_stack(var/obj/item/stack/other)
 	color = other.color
 
 /obj/item/stack/proc/get_amount()

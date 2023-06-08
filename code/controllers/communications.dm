@@ -234,7 +234,7 @@ var/global/datum/controller/radio/radio_controller
 	var/encryption
 	var/frequency = 0
 
-/datum/signal/proc/copy_from(datum/signal/model)
+/datum/signal/proc/copy_from_model(datum/signal/model)
 	source = model.source
 	data = model.data
 	encryption = model.encryption

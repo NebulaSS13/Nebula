@@ -138,7 +138,7 @@
 	if(!.)
 		return new /datum/gas_mixture
 	var/datum/gas_mixture/newgas = new
-	newgas.copy_from(.)
+	newgas.copy_from_gasmix(.)
 	if(newgas.temperature <= target_temp)	return
 
 	if((newgas.temperature - cooling_power) > target_temp)

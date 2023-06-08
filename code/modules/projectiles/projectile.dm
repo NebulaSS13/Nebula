@@ -325,7 +325,7 @@
 	if(hitscan && tracer_type && !(locate(/obj/effect/projectile) in loc))
 		var/obj/effect/projectile/invislight/light = new
 		light.forceMove(loc)
-		light.copy_from(tracer_type)
+		light.copy_from_owner(tracer_type)
 		QDEL_IN(light, 3)
 
 /obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)

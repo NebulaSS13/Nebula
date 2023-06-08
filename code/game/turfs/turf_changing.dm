@@ -135,7 +135,7 @@
 	if(other.zone)
 		if(!air)
 			make_air()
-		air.copy_from(other.zone.air)
+		air.copy_from_gasmix(other.zone.air)
 		other.zone.remove(other)
 	if(!istype(other, src.type))
 		return 0

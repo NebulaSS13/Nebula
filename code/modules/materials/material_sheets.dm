@@ -106,7 +106,7 @@
 	if(!QDELETED(M))
 		M.update_strings()
 
-/obj/item/stack/material/copy_from(var/obj/item/stack/material/other)
+/obj/item/stack/material/copy_from_stack(var/obj/item/stack/material/other)
 	..()
 	if(istype(other))
 		material = other.material
