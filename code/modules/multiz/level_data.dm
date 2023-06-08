@@ -383,11 +383,12 @@
 //
 // Accessors
 //
+// FIXME: this seems to be called with null `exterior_atmosphere` under some turf arrangements.
 /datum/level_data/proc/get_exterior_atmosphere()
-	if(exterior_atmosphere)
-		var/datum/gas_mixture/gas = new
+	var/datum/gas_mixture/gas = new
+	if(istype(exterior_atmosphere))
 		gas.copy_from_gasmix(exterior_atmosphere)
-		return gas
+	return gas
 
 /datum/level_data/proc/get_display_name()
 	if(!name)
