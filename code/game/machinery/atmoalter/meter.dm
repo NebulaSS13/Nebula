@@ -40,9 +40,7 @@
 		target = null
 
 /obj/machinery/meter/return_air()
-	if(target)
-		return target.return_air()
-	return ..()
+	return target?.return_air() || ..()
 
 /obj/machinery/meter/Destroy()
 	clear_target()

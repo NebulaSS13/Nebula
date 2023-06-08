@@ -123,7 +123,7 @@
 		pump_gas_passive(airtank, airtank.air_contents, atmo, transfer_moles)
 
 /obj/structure/closet/body_bag/rescue/return_air() //Used to make stasis bags protect from vacuum.
-	return atmo
+	return atmo || ..()
 
 /obj/structure/closet/body_bag/rescue/examine(mob/user)
 	. = ..()

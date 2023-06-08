@@ -46,6 +46,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/unary/tank/return_air()
+	SHOULD_CALL_PARENT(FALSE)
 	return air_contents
 
 /obj/machinery/atmospherics/unary/tank/deconstruction_pressure_check()

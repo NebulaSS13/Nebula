@@ -161,7 +161,7 @@ var/global/list/rad_collectors = list()
 	update_icon()
 
 /obj/machinery/rad_collector/return_air()
-	. =loaded_tank?.return_air()
+	return loaded_tank?.return_air() || new /datum/gas_mixture
 
 /obj/machinery/rad_collector/proc/eject()
 	locked = 0

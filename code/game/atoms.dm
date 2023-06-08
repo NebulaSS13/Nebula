@@ -88,7 +88,7 @@
 */
 /atom/proc/return_air()
 	RETURN_TYPE(/datum/gas_mixture)
-	return loc?.return_air()
+	return loc?.return_air() || new /datum/gas_mixture
 
 /**
 	Get the flags that should be added to the `users` sight var.

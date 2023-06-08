@@ -187,7 +187,8 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 
 //For some reasons that's not in the unary base class...
 /obj/machinery/atmospherics/unary/material/extractor/return_air()
-	return air_contents
+	SHOULD_CALL_PARENT(FALSE)
+	return air_contents || new /datum/gas_mixture
 
 //Remove trace amounts of reagents from the input tank, to prevent that from causing problems
 /obj/machinery/atmospherics/unary/material/extractor/proc/input_clear_remainder()

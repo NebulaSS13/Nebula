@@ -136,7 +136,7 @@
 	return ..()
 
 /obj/machinery/portable_atmospherics/return_air()
-	return air_contents
+	return air_contents || ..()
 
 /obj/machinery/portable_atmospherics/powered
 	uncreated_component_parts = null

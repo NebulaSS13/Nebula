@@ -86,7 +86,7 @@
 		owner.vomit(deliberate = TRUE)
 
 /obj/item/organ/internal/stomach/return_air()
-	return null
+	return new /datum/gas_mixture
 
 #define STOMACH_VOLUME 65
 

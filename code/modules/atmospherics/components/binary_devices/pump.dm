@@ -106,10 +106,8 @@ Thus, the two variables affect pump operation are set in New():
 	return 1
 
 /obj/machinery/atmospherics/binary/pump/return_air()
-	if(air1.return_pressure() > air2.return_pressure())
-		return air1
-	else
-		return air2
+	SHOULD_CALL_PARENT(FALSE)
+	return (air1.return_pressure() > air2.return_pressure()) ? air1 : air2
 
 /obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(stat & (BROKEN|NOPOWER))

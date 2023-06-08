@@ -200,7 +200,7 @@
 	airtank.adjust_gas(/decl/material/gas/nitrogen, MOLES_N2STANDARD)
 
 /obj/machinery/cryopod/lifepod/return_air()
-	return airtank
+	return airtank || ..()
 
 /obj/machinery/cryopod/lifepod/proc/launch()
 	launched = 1

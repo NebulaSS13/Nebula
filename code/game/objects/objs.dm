@@ -43,9 +43,6 @@
 /obj/remove_air(amount)
 	return loc?.remove_air(amount)
 
-/obj/return_air()
-	return loc?.return_air()
-
 /obj/proc/updateUsrDialog()
 	if(in_use)
 		var/is_in_use = 0

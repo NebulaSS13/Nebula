@@ -206,7 +206,9 @@
 	to_chat(user, "It menaces with reinforcements of [material].")
 
 /mob/living/exosuit/return_air()
-	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc.return_air()
+	if(body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit)
+		return body.cockpit || new /datum/gas_mixture
+	return ..()
 
 /mob/living/exosuit/GetIdCards()
 	. = ..()

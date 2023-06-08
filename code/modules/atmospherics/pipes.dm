@@ -83,10 +83,10 @@
 		hide(1)
 
 /obj/machinery/atmospherics/pipe/return_air()
+	SHOULD_CALL_PARENT(FALSE)
 	if(!parent)
 		parent = new /datum/pipeline()
 		parent.build_pipeline(src)
-
 	return parent.air
 
 /obj/machinery/atmospherics/pipe/build_network()

@@ -134,17 +134,18 @@
 	var/cooling_power = 40
 
 /obj/structure/closet/crate/freezer/return_air()
-	var/datum/gas_mixture/gas = (..())
-	if(!gas)	return null
-	var/datum/gas_mixture/newgas = new/datum/gas_mixture()
-	newgas.copy_from(gas)
+	. = ..()
+	if(!.)
+		return new /datum/gas_mixture
+	var/datum/gas_mixture/newgas = new
+	newgas.copy_from(.)
 	if(newgas.temperature <= target_temp)	return
 
 	if((newgas.temperature - cooling_power) > target_temp)
 		newgas.temperature -= cooling_power
 	else
 		newgas.temperature = target_temp
-	return newgas
+	. = newgas
 
 /obj/structure/closet/crate/freezer/ProcessAtomTemperature()
 	return PROCESS_KILL

@@ -217,7 +217,7 @@
 			return
 
 /obj/item/flamethrower/return_air()
-	return tank?.return_air()
+	return tank?.return_air() || ..()
 
 /obj/item/flamethrower/proc/attempt_lighting(var/mob/user, var/external)
 	if(!external) // if it's external input, we can't unlight it, but we don't need to check for an igniter either

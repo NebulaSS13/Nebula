@@ -231,7 +231,7 @@
 		var/datum/level_data/level = SSmapping.levels_by_z[z]
 		var/datum/gas_mixture/gas = level?.get_exterior_atmosphere()
 		if(!gas)
-			return
+			return new /datum/gas_mixture
 		var/initial_temperature = gas.temperature
 		if(weather)
 			initial_temperature = weather.adjust_temperature(initial_temperature)
@@ -246,8 +246,9 @@
 	. = air
 	if(!.)
 		. = make_air()
-		if(zone)
+		if(zone && SHOULD_PARTICIPATE_IN_ZONES(src))
 			c_copy_air()
+	return . || new /datum/gas_mixture
 
 /turf/remove_air(amount as num)
 	var/datum/gas_mixture/GM = return_air()
@@ -264,7 +265,7 @@
 	return FALSE
 
 /turf/proc/make_air()
-	air = new/datum/gas_mixture
+	air = new /datum/gas_mixture
 	air.temperature = temperature
 	if(initial_gas)
 		air.gas = initial_gas.Copy()
@@ -273,6 +274,6 @@
 
 /turf/proc/c_copy_air()
 	if(!air)
-		air = new/datum/gas_mixture
+		air = new /datum/gas_mixture
 	air.copy_from(zone.air)
 	air.group_multiplier = 1
