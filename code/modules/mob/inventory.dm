@@ -231,7 +231,7 @@
 	if(!length(slots))
 		return
 	for(var/slot in slots)
-		if(slots[slot] == I)
+		if(get_equipped_item(slot) == I)
 			return slot
 
 /mob/proc/get_inventory_slot_datum(var/slot)

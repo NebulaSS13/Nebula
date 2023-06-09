@@ -170,10 +170,11 @@ var/global/list/telecomms_hubs = list()
 				if(!istype(other_hub) || QDELETED(other_hub) || !other_hub.can_receive_message(FALSE))
 					continue
 				receiving_hubs |= other_hub
-				for(var/network_id in SSnetworking.networks)
-					var/datum/computer_network/internet_connection = check_network.get_internet_connection(network_id, NET_FEATURE_COMMUNICATION)
-					if(internet_connection && !checked_networks[internet_connection])
-						checking_networks |= internet_connection
+
+			for(var/network_id in SSnetworking.networks)
+				var/datum/computer_network/internet_connection = check_network.get_internet_connection(network_id, NET_FEATURE_COMMUNICATION)
+				if(internet_connection && !checked_networks[internet_connection])
+					checking_networks |= internet_connection
 
 	// Check if the hubs we can reach are capable of broadcasting our channel.
 	// If they are, collect their network for the actual broadcast checks.
@@ -247,7 +248,7 @@ var/global/list/telecomms_hubs = list()
 	data["channels"] = data_channels
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "telecomms_hub.tmpl", "Telecommunications Hub")
+		ui = new(user, src, ui_key, "telecomms_hub.tmpl", "Telecommunications Hub", 700, 400)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -310,13 +311,13 @@ var/global/list/telecomms_hubs = list()
 						. = TOPIC_REFRESH
 
 				if(href_list["change_colour"])
-					var/new_color = input(user, "Select a new display colour.", "Channel Configuration", channel_datum.color) as null|anything in global.telecomms_colours
-					if(new_color  && new_color != channel_datum.color && new_color && CanPhysicallyInteract(user))
-						channel_datum.color = new_color
+					var/new_colour = input(user, "Select a new display colour.", "Channel Configuration") as null|anything in global.telecomms_colours
+					if(new_colour && CanPhysicallyInteract(user))
+						channel_datum.color = global.telecomms_colours[new_colour]
 						. = TOPIC_REFRESH
 
 				if(href_list["change_access"])
-					var/choice = input(user, "How do you wish to modify the channel encryption?", "Channel Configuration") as null|anything in list("Add", "Remove", "Clear", "Sync to personal access")
+					var/choice = input(user, "How do you wish to modify the channel encryption?", "Channel Configuration") as null|anything in list("Add", "Remove", "Add Network Group", "Clear", "Sync to personal access")
 					if(choice && CanPhysicallyInteract(user))
 						switch(choice)
 							if("Add")
@@ -330,6 +331,25 @@ var/global/list/telecomms_hubs = list()
 									choice = input(user, "Which key do you wish to remove?", "Channel Configuration") as null|anything in channel_datum.secured
 									if(choice && CanPhysicallyInteract(user))
 										LAZYREMOVE(channel_datum.secured, choice)
+							if("Add Network Group")
+								var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
+								var/datum/computer_network/network = network_device?.get_network()
+								if(!network)
+									to_chat(user, SPAN_WARNING("Unable to connect to the network."))
+									return TOPIC_HANDLED
+
+								var/datum/extension/network_device/acl/net_acl = network.access_controller
+								if(!net_acl)
+									to_chat(user, SPAN_WARNING("No access controller on the network."))
+
+								var/list/all_groups = net_acl.get_all_groups()
+								if(!length(all_groups))
+									to_chat(user, SPAN_WARNING("No groups were found on the network access controller"))
+									return TOPIC_HANDLED
+
+								choice = input(user, "Which group do you wish to add? Adding a parent group will allow all members of its children groups to access the channel.", "Channel Configuration") as null|anything in all_groups
+								if(choice && CanPhysicallyInteract(user))
+									LAZYDISTINCTADD(channel_datum.secured, choice + ".[network.network_id]")
 							if("Clear")
 								channel_datum.secured = null
 							if("Sync to personal access")
