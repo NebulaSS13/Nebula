@@ -143,6 +143,13 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
+/decl/material/solid/cloth/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
+
 /decl/material/solid/cloth/yellow
 	name = "yellow"
 	uid = "solid_cotton_yellow"
@@ -288,6 +295,7 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
 	. += new/datum/stack_recipe/shoes(src)
 
 /decl/material/solid/skin/lizard
@@ -457,6 +465,7 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
 	. += new/datum/stack_recipe/shoes(src)
 	. += new/datum/stack_recipe/boots(src)
 
