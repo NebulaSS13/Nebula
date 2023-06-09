@@ -35,6 +35,23 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(!istype(W) || isnull(slot))
 		return FALSE
+
+	// Handle some special slots.
+	if(slot == slot_in_backpack_str)
+		remove_from_mob(W)
+		var/obj/item/back = get_equipped_item(slot_back_str)
+		if(back)
+			W.forceMove(back)
+		else
+			W.dropInto(loc)
+		return TRUE
+
+	if(slot == slot_tie_str)
+		var/obj/item/clothing/under/uniform = get_equipped_item(slot_w_uniform_str)
+		if(istype(uniform))
+			uniform.try_attach_accessory(W, src)
+		return TRUE
+
 	unequip(W)
 	if(!isnum(slot))
 		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
