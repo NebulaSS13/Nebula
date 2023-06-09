@@ -448,7 +448,7 @@
 		if(LD.level_z in _connected_siblings)
 			continue
 		. |= LD.level_z
-		. |= LD.get_all_connected_level_z()
+		. |= LD.get_all_connected_level_z(_connected_siblings)
 
 
 /datum/level_data/proc/find_connected_levels(var/list/found)
