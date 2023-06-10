@@ -28,7 +28,7 @@
 			"desc" = (functional ? "active" : "inactive")
 		))
 		if(functional)
-			for(var/obj/effect/overmap/entity in comms.get_nearby_entitities())
+			for(var/obj/effect/overmap/entity in comms.get_nearby_entities())
 				if(entity == linked)
 					continue
 				if(entity in printing_entities)
@@ -139,7 +139,7 @@
 /obj/machinery/shipcomms/proc/unregister(var/obj/effect/overmap/O)
 	return
 
-/obj/machinery/shipcomms/proc/get_nearby_entitities()
+/obj/machinery/shipcomms/proc/get_nearby_entities()
 	. = list()
 	var/obj/effect/overmap/O = global.overmap_sectors["[z]"]
 	if(!O)
@@ -226,7 +226,7 @@
 /obj/machinery/shipcomms/broadcaster/get_available_z_levels()
 	. = ..()
 	if(!(stat & (BROKEN|NOPOWER)) && has_clear_adjacent_turf())
-		for(var/obj/effect/overmap/other in get_nearby_entitities())
+		for(var/obj/effect/overmap/other in get_nearby_entities())
 			for(var/obj/machinery/shipcomms/receiver/antenna in other.comms_antennae)
 				. |= antenna.get_available_z_levels()
 
