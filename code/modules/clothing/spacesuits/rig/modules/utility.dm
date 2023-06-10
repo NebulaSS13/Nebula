@@ -279,11 +279,11 @@
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 
 	charges = list(
-		list("antidepressants", "antidepressants",  /decl/material/liquid/antidepressants,   30),
-		list("stimulants",      "stimulants",       /decl/material/liquid/stimulants,        30),
-		list("amphetamines",    "amphetamines",     /decl/material/liquid/amphetamines,      30),
-		list("painkillers",     "painkillers",      /decl/material/liquid/painkillers,       30),
-		list("glucose",         "glucose",          /decl/material/liquid/nutriment/glucose, 80)
+		list("antidepressants", "antidepressants",  /decl/material/liquid/antidepressants,    30),
+		list("stimulants",      "stimulants",       /decl/material/liquid/stimulants,         30),
+		list("amphetamines",    "amphetamines",     /decl/material/liquid/amphetamines,       30),
+		list("painkillers",     "painkillers",      /decl/material/liquid/painkillers/strong, 30),
+		list("glucose",         "glucose",          /decl/material/liquid/nutriment/glucose,  80)
 		)
 
 	interface_name = "combat chem dispenser"

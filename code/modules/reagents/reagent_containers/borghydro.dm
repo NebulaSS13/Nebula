@@ -19,10 +19,18 @@
 	var/list/reagent_names = list()
 
 /obj/item/chems/borghypo/surgeon
-	reagent_ids = list(/decl/material/liquid/brute_meds, /decl/material/liquid/oxy_meds, /decl/material/liquid/painkillers)
+	reagent_ids = list(
+		/decl/material/liquid/brute_meds,
+		/decl/material/liquid/oxy_meds,
+		/decl/material/liquid/painkillers
+	)
 
 /obj/item/chems/borghypo/crisis
-	reagent_ids = list(/decl/material/liquid/regenerator, /decl/material/liquid/stabilizer, /decl/material/liquid/painkillers)
+	reagent_ids = list(
+		/decl/material/liquid/regenerator,
+		/decl/material/liquid/stabilizer,
+		/decl/material/liquid/painkillers
+	)
 
 /obj/item/chems/borghypo/Initialize()
 	. = ..()

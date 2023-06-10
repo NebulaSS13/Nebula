@@ -62,6 +62,14 @@
 /obj/item/storage/pill_bottle/painkillers/WillContain()
 	return list(/obj/item/chems/pill/painkillers = 14)
 
+/obj/item/storage/pill_bottle/strong_painkillers
+	name = "pill bottle (strong painkillers)"
+	desc = "Contains pills used to relieve pain. Do not mix with alcohol consumption."
+	wrapper_color = COLOR_PURPLE_GRAY
+
+/obj/item/storage/pill_bottle/strong_painkillers/WillContain()
+	return list(/obj/item/chems/pill/strong_painkillers = 14)
+
 //Baycode specific Psychiatry pills.
 /obj/item/storage/pill_bottle/antidepressants
 	labeled_name = "antidepressants"

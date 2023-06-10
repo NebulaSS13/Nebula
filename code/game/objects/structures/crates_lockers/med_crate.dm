@@ -8,7 +8,8 @@
 		/obj/item/stack/medical/splint = 2,
 		/obj/item/stack/medical/advanced/bruise_pack = 10,
 		/obj/item/chems/pill/sugariron = 6,
-		/obj/item/storage/pill_bottle/painkillers = 2,
+		/obj/item/storage/pill_bottle/painkillers,
+		/obj/item/storage/pill_bottle/strong_painkillers,
 		/obj/item/storage/pill_bottle/stabilizer
 		)
 
@@ -22,7 +23,8 @@
 		/obj/item/defibrillator/loaded,
 		/obj/item/stack/medical/advanced/ointment = 10,
 		/obj/item/storage/pill_bottle/burn_meds,
-		/obj/item/storage/pill_bottle/painkillers = 2,
+		/obj/item/storage/pill_bottle/painkillers,
+		/obj/item/storage/pill_bottle/strong_painkillers,
 		/obj/item/storage/pill_bottle/antibiotics
 	)
 
