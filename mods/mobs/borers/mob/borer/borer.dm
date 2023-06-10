@@ -26,9 +26,9 @@
 	bleed_colour = "#816e12"
 
 	var/static/list/chemical_types = list(
-		"anti-trauma" = /decl/material/liquid/brute_meds,
-		"amphetamines" =  /decl/material/liquid/amphetamines,
-		"painkillers" = /decl/material/liquid/painkillers
+		"anti-trauma" =  /decl/material/liquid/brute_meds,
+		"amphetamines" = /decl/material/liquid/amphetamines,
+		"painkillers" =  /decl/material/liquid/painkillers
 	)
 
 	var/generation = 1
@@ -94,7 +94,7 @@
 	generation = gen
 	set_borer_name()
 
-	if(!roundstart) 
+	if(!roundstart)
 		request_player()
 
 /mob/living/simple_animal/borer/Destroy()

@@ -149,7 +149,7 @@
 			to_chat(user, "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>")
 
 		var/static/list/pinpoint = list(
-			/decl/material/liquid/painkillers = 5,
+			/decl/material/liquid/painkillers/strong = 5,
 			/decl/material/liquid/amphetamines = 1
 		)
 		var/static/list/dilating = list(

@@ -143,6 +143,14 @@
 /obj/item/chems/pill/painkillers/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/painkillers, 15)
 
+/obj/item/chems/pill/strong_painkillers
+	name = "strong painkillers (15u)"
+	desc = "A powerful painkiller. Do not mix with alcohol consumption."
+	icon_state = "pill3"
+
+/obj/item/chems/pill/strong_painkillers/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/painkillers/strong, 15)
+
 /obj/item/chems/pill/stabilizer
 	name = "stabilizer (30u)"
 	desc = "Used to stabilize patients."

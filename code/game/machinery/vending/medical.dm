@@ -46,7 +46,8 @@
 	products = list(
 		/obj/item/stack/medical/bruise_pack = 3,
 		/obj/item/stack/medical/ointment = 3,
-		/obj/item/chems/pill/painkillers = 4,
+		/obj/item/chems/pill/painkillers = 2,
+		/obj/item/chems/pill/strong_painkillers = 2,
 		/obj/item/storage/med_pouch/trauma,
 		/obj/item/storage/med_pouch/burn,
 		/obj/item/storage/med_pouch/oxyloss,
