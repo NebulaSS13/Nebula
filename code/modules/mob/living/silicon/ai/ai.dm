@@ -356,9 +356,6 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		return -1
 	return 0
 
-/mob/living/silicon/ai/restrained()
-	return 0
-
 /mob/living/silicon/ai/emp_act(severity)
 	if (prob(30))
 		view_core()

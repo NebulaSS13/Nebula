@@ -6,7 +6,7 @@ var/global/default_gyne
 	ghost_trap_message = "They are hatching from a kharmaan egg now."
 
 /decl/ghosttrap/kharmaani_egg/forced(var/mob/user)
-	request_player(new /mob/living/carbon/alien/ascent_nymph(get_turf(user)), "A mantid nymph is ready to hatch and needs a player.")
+	request_player(new /mob/living/simple_animal/alien/ascent_nymph(get_turf(user)), "A mantid nymph is ready to hatch and needs a player.")
 
 /obj/structure/insectoid_egg
 	name = "alien egg"
@@ -27,7 +27,7 @@ var/global/default_gyne
 	var/hatched = FALSE					// Whether or not this egg has already hatched.
 
 	material = /decl/material/solid/gemstone/crystal
-	
+
 /obj/structure/insectoid_egg/Initialize()
 	. = ..()
 	START_PROCESSING(SSprocessing, src)
@@ -76,11 +76,11 @@ var/global/default_gyne
 
 	last_tick = world.time
 	var/turf/T = get_turf(src)
-	
+
 	// Too high of temp will damage eggs.
 	if(T.temperature > (max_temperature * 1.5))
 		health = max(0, health - 5)
-	
+
 	if(T.temperature < min_temperature || T.temperature > max_temperature)
 		return
 
@@ -95,7 +95,7 @@ var/global/default_gyne
 	if(!health || maturity != 100 || hatched || hatching)
 		return
 
-	var/mob/living/carbon/alien/ascent_nymph/new_nymph = new(src, SPECIES_MANTID_NYMPH) // Spawn in the egg.
+	var/mob/living/simple_animal/alien/ascent_nymph/new_nymph = new(src, SPECIES_MANTID_NYMPH) // Spawn in the egg.
 	new_nymph.lastarea = get_area(src)
 	new_nymph.key = C.ckey
 	new_nymph.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [lineage]"
@@ -103,8 +103,8 @@ var/global/default_gyne
 	update_icon()
 	visible_message(SPAN_NOTICE("\icon[src] \The [src] trembles and cracks as it begins to hatch."))
 	addtimer(CALLBACK(src, .proc/finish_hatching), 2.5 SECONDS)
-	
-	
+
+
 /obj/structure/insectoid_egg/proc/finish_hatching()
 	hatched = TRUE
 	hatching = FALSE

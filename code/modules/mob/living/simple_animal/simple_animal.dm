@@ -443,7 +443,10 @@
 	density = 0
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
-	. = ..(gibbed,deathmessage,show_dead_message)
+	. = ..(gibbed, get_death_message(deathmessage), show_dead_message)
+
+/mob/living/simple_animal/get_death_message(var/deathmessage)
+	return deathmessage
 
 /mob/living/simple_animal/explosion_act(severity)
 	..()
@@ -452,9 +455,15 @@
 		if(1)
 			damage = 500
 		if(2)
+			SET_STATUS_MAX(src, STAT_TINNITUS, 30)
+			SET_STATUS_MAX(src, STAT_DEAF, 120)
 			damage = 120
 		if(3)
 			damage = 30
+			if (prob(50))
+				SET_STATUS_MAX(src, STAT_PARA, 1)
+			SET_STATUS_MAX(src, STAT_TINNITUS, 15)
+			SET_STATUS_MAX(src, STAT_DEAF, 60)
 	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
 /mob/living/simple_animal/adjustBruteLoss(damage)

@@ -1,3 +1,46 @@
+/mob/living/simple_animal/alien
+	name = "alien"
+	desc = "What IS that?"
+	pass_flags = PASS_FLAG_TABLE
+	health = 100
+	maxHealth = 100
+	mob_size = MOB_SIZE_TINY
+	mob_sort_value = 8
+	gender = NEUTER
+	var/instance_num
+
+/mob/living/simple_animal/alien/Initialize()
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+	SetName("[name] ([sequential_id(type)])")
+	. = ..()
+
+/mob/living/simple_animal/alien/get_admin_job_string()
+	return "Alien"
+
+/mob/living/simple_animal/alien/get_death_message(var/deathmessage)
+	var/static/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."
+	return death_msg
+
+/mob/living/simple_animal/alien/ventcrawl_carry()
+	return TRUE
+
+/mob/living/simple_animal/alien/add_blood_floor(var/turf/target)
+	var/obj/effect/decal/cleanable/blood/xeno/this = new(target)
+	this.blood_DNA["UNKNOWN BLOOD"] = "X*"
+	return this
+
+/mob/living/simple_animal/handle_mutations_and_radiation()
+	if(!radiation)
+		return
+	var/rads = radiation/25
+	radiation -= rads
+	adjust_nutrition(rads)
+	heal_overall_damage(rads,rads)
+	adjustOxyLoss(-(rads))
+	adjustToxLoss(-(rads))
+
+/*
 // Alien larva are quite simple.
 /mob/living/carbon/alien/Life()
 
@@ -14,18 +57,6 @@
 	//Status updates, death etc.
 	update_icon()
 
-/mob/living/carbon/alien/handle_mutations_and_radiation()
-
-	if(!radiation)
-		return
-
-	var/rads = radiation/25
-	radiation -= rads
-	adjust_nutrition(rads)
-	heal_overall_damage(rads,rads)
-	adjustOxyLoss(-(rads))
-	adjustToxLoss(-(rads))
-	return
 
 /mob/living/carbon/alien/handle_regular_status_updates()
 
@@ -70,7 +101,7 @@
 			blinded = 1
 			set_status(STAT_BLURRY, 1)
 		else if(GET_STATUS(src, STAT_BLIND))
-			ADJ_STATUS(src, STAT_BLIND, -1) 
+			ADJ_STATUS(src, STAT_BLIND, -1)
 			blinded = 1
 
 		update_icon()
@@ -123,9 +154,4 @@
 			to_chat(src, "<span class='danger'>You feel a searing heat!</span>")
 	else
 		if (fire) fire.icon_state = "fire0"
-
-/mob/living/carbon/alien/handle_fire()
-	if(..())
-		return
-	bodytemperature += BODYTEMP_HEATING_MAX //If you're on fire, you heat up!
-	return
+*/

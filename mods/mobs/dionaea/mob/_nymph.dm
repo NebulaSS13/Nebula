@@ -4,13 +4,13 @@
 #define DIONA_SCREEN_LOC_HEALTH ui_alien_health
 
 /datum/extension/hattable/diona_nymph/wear_hat(mob/wearer, obj/item/clothing/head/new_hat)
-	var/mob/living/carbon/alien/diona/doona = wearer
+	var/mob/living/simple_animal/alien/diona/doona = wearer
 	if(istype(doona) && (!doona.holding_item || doona.holding_item != new_hat))
 		. = ..()
 	if(.)
 		hat?.screen_loc = DIONA_SCREEN_LOC_HAT
 
-/mob/living/carbon/alien/diona
+/mob/living/simple_animal/alien/diona
 	name = "diona nymph"
 	desc = "It's a little skittery critter. Chirp."
 	icon = 'mods/mobs/dionaea/icons/nymph.dmi'
@@ -45,10 +45,10 @@
 	var/tmp/flower_color
 	var/tmp/last_glow
 
-/mob/living/carbon/alien/diona/get_jump_distance()
+/mob/living/simple_animal/alien/diona/get_jump_distance()
 	return 3
 
-/mob/living/carbon/alien/diona/Login()
+/mob/living/simple_animal/alien/diona/Login()
 	. = ..()
 	if(client)
 		if(holding_item)
@@ -59,13 +59,13 @@
 			hattable.hat.screen_loc = DIONA_SCREEN_LOC_HAT
 			client.screen |= hattable.hat
 
-/mob/living/carbon/alien/diona/sterile
+/mob/living/simple_animal/alien/diona/sterile
 	name = "sterile nymph"
 
-/mob/living/carbon/alien/diona/sterile/Initialize(var/mapload)
+/mob/living/simple_animal/alien/diona/sterile/Initialize(var/mapload)
 	. = ..(mapload, 0)
 
-/mob/living/carbon/alien/diona/Initialize(var/mapload, var/flower_chance = 15)
+/mob/living/simple_animal/alien/diona/Initialize(var/mapload, var/flower_chance = 15)
 
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	add_language(/decl/language/diona)
@@ -78,7 +78,7 @@
 
 	. = ..(mapload)
 
-/mob/living/carbon/alien/diona/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+/mob/living/simple_animal/alien/diona/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(holding_item)
 		to_chat(user, SPAN_NOTICE("It is holding [html_icon(holding_item)] \a [holding_item]."))
@@ -86,5 +86,5 @@
 	if(hattable?.hat)
 		to_chat(user, SPAN_NOTICE("It is wearing [html_icon(hattable.hat)] \a [hattable.hat]."))
 
-/mob/living/carbon/alien/diona/has_dexterity()
+/mob/living/simple_animal/alien/diona/has_dexterity()
 	return FALSE

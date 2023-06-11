@@ -281,7 +281,7 @@
 		step_away(src, user)
 
 /mob/living/slime/restrained()
-	return 0
+	return FALSE
 
 /mob/living/slime/toggle_throw_mode()
 	return

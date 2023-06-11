@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona/on_update_icon()
+/mob/living/simple_animal/alien/diona/on_update_icon()
 	..()
 	icon_state = ICON_STATE_WORLD
 	if(stat == DEAD)

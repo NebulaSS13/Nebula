@@ -457,9 +457,6 @@
 			for(var/datum/matter_synth/ms in module.synths)
 				stat("[ms.name]: [ms.energy]/[ms.max_energy_multiplied]")
 
-/mob/living/silicon/robot/restrained()
-	return 0
-
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
 	if(prob(75) && Proj.damage > 0)
@@ -1136,3 +1133,6 @@
 	if(!CO || !cell_use_power(CO.active_usage))
 		return FALSE
 	return TRUE
+
+/mob/living/silicon/robot/add_blood_floor(var/turf/target)
+	return new /obj/effect/decal/cleanable/blood/oil(target)

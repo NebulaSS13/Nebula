@@ -297,7 +297,14 @@
 #undef FULLY_BUCKLED
 
 /mob/proc/restrained()
-	return
+	if(get_equipped_item(slot_handcuffed_str))
+		return TRUE
+	if(istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket))
+		return TRUE
+	for(var/obj/item/grab/G in grabbed_by)
+		if(G.restrains())
+			return TRUE
+	return FALSE
 
 /mob/proc/reset_view(atom/A)
 	set waitfor = 0
@@ -1318,4 +1325,7 @@
 	return
 
 /mob/proc/toggle_internals(var/mob/living/user)
+	return
+
+/mob/proc/add_blood_floor(var/turf/target)
 	return

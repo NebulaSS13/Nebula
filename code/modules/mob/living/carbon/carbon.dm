@@ -275,9 +275,6 @@
 		return 0
 	return 1
 
-/mob/living/carbon/restrained()
-	return get_equipped_item(slot_handcuffed_str)
-
 /mob/living/carbon/verb/mob_sleep()
 	set name = "Sleep"
 	set category = "IC"

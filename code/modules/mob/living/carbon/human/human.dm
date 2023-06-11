@@ -121,20 +121,6 @@
 					return 1
 	return 0
 
-/mob/living/carbon/human/restrained()
-	if(get_equipped_item(slot_handcuffed_str))
-		return 1
-	if(grab_restrained())
-		return 1
-	if (istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket))
-		return 1
-	return 0
-
-/mob/living/carbon/human/proc/grab_restrained()
-	for (var/obj/item/grab/G in grabbed_by)
-		if(G.restrains())
-			return TRUE
-
 /mob/living/carbon/human/get_additional_stripping_options()
 	. = ..()
 	for(var/entry in worn_underwear)

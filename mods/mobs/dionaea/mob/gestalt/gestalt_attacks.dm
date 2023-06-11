@@ -1,6 +1,6 @@
 /obj/structure/diona_gestalt/attackby(var/obj/item/thing, var/mob/user)
 	. = ..()
-	if(thing.force) 
+	if(thing.force)
 		shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/hitby()
@@ -19,5 +19,5 @@
 		shed_count--
 		shed_atom(forcefully = TRUE)
 
-/obj/structure/diona_gestalt/proc/handle_member_click(var/mob/living/carbon/alien/diona/clicker)
+/obj/structure/diona_gestalt/proc/handle_member_click(var/mob/living/simple_animal/alien/diona/clicker)
 	return

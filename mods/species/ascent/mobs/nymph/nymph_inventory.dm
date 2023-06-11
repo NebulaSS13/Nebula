@@ -1,9 +1,9 @@
-/mob/living/carbon/alien/ascent_nymph/drop_from_inventory(var/obj/item/I)
+/mob/living/simple_animal/alien/ascent_nymph/drop_from_inventory(var/obj/item/I)
 	. = ..()
 	if(I == holding_item)
 		holding_item = null
 
-/mob/living/carbon/alien/ascent_nymph/put_in_hands(var/obj/item/W) // No hands. Use mouth.
+/mob/living/simple_animal/alien/ascent_nymph/put_in_hands(var/obj/item/W) // No hands. Use mouth.
 	if(can_collect(W))
 		collect(W)
 	else
@@ -11,13 +11,13 @@
 	return 1
 
 
-/mob/living/carbon/alien/ascent_nymph/hotkey_drop()
+/mob/living/simple_animal/alien/ascent_nymph/hotkey_drop()
 	if(holding_item)
 		drop_item()
 	else
 		to_chat(usr, SPAN_WARNING("You have nothing to drop."))
 
-/mob/living/carbon/alien/ascent_nymph/proc/can_collect(var/obj/item/collecting)
+/mob/living/carbon/simple_animal/ascent_nymph/proc/can_collect(var/obj/item/collecting)
 	return (!holding_item && \
 		istype(collecting) && \
 		collecting.loc != src && \
@@ -26,7 +26,7 @@
 		collecting.w_class <= can_pull_size \
 	)
 
-/mob/living/carbon/alien/ascent_nymph/proc/contains_crystals(var/obj/item/W)
+/mob/living/simple_animal/alien/ascent_nymph/proc/contains_crystals(var/obj/item/W)
 	for(var/mat in W.matter)
 		if(mat == /decl/material/solid/sand)
 			. += W.matter[mat]
@@ -37,7 +37,7 @@
 		else if(mat == /decl/material/solid/glass)
 			. += W.matter[mat]
 
-/mob/living/carbon/alien/ascent_nymph/proc/collect(var/obj/item/collecting)
+/mob/living/simple_animal/alien/ascent_nymph/proc/collect(var/obj/item/collecting)
 	collecting.forceMove(src)
 	holding_item = collecting
 	visible_message(SPAN_NOTICE("\The [src] engulfs \the [holding_item]."))
@@ -68,14 +68,14 @@
 		holding_item.equipped(src)
 		holding_item.screen_loc = ANYMPH_SCREEN_LOC_HELD
 
-/mob/living/carbon/alien/ascent_nymph/verb/drop_item_verb()
+/mob/living/simple_animal/alien/ascent_nymph/verb/drop_item_verb()
 	set name = "Drop Held Item"
 	set desc = "Drop the item you are currently holding inside."
 	set category = "IC"
 	set src = usr
 	drop_item()
 
-/mob/living/carbon/alien/ascent_nymph/drop_item()
+/mob/living/simple_animal/alien/ascent_nymph/drop_item()
 	var/item = holding_item
 	if(item && try_unequip(item))
 		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [item]."))
@@ -83,5 +83,5 @@
 	. = ..()
 
 // Makes it so that the held item's screen_loc isn't unset.
-/mob/living/carbon/alien/ascent_nymph/item_should_have_screen_presence(obj/item/item, slot)
+/mob/living/simple_animal/alien/ascent_nymph/item_should_have_screen_presence(obj/item/item, slot)
 	return (item == holding_item) || ..()

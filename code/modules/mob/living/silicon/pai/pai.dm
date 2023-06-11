@@ -119,9 +119,6 @@ var/global/list/possible_say_verbs = list(
 		return -1
 	return 0
 
-/mob/living/silicon/pai/restrained()
-	return !istype(loc, /obj/item/paicard) && ..()
-
 /mob/living/silicon/pai/emp_act(severity)
 	// Silence for 2 minutes
 	// 20% chance to kill

@@ -49,6 +49,9 @@
 /mob/living/silicon/has_dexterity(var/dex_level)
 	return dexterity >= dex_level
 
+/mob/living/silicon/restrained()
+	return FALSE
+
 /mob/living/silicon/Initialize()
 	global.silicon_mob_list += src
 	. = ..()

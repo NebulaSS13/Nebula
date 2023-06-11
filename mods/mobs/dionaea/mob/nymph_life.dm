@@ -1,5 +1,5 @@
 //Dionaea regenerate health and nutrition in light.
-/mob/living/carbon/alien/diona/handle_environment(datum/gas_mixture/environment)
+/mob/living/simple_animal/alien/diona/handle_environment(datum/gas_mixture/environment)
 
 	..()
 

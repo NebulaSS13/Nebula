@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona
+/mob/living/simple_animal/alien/diona
 	default_emotes = list(
 		/decl/emote/visible,
 		/decl/emote/visible/scratch,
