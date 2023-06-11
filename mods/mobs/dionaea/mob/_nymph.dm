@@ -10,18 +10,23 @@
 	if(.)
 		hat?.screen_loc = DIONA_SCREEN_LOC_HAT
 
+/mob/living/simple_animal/alien/diona/get_death_message(deathmessage)
+	return "expires with a pitiful chirrup..."
+
+/mob/living/simple_animal/alien/diona/setup_languages()
+	. = ..()
+	add_language(/decl/language/diona)
+
 /mob/living/simple_animal/alien/diona
 	name = "diona nymph"
 	desc = "It's a little skittery critter. Chirp."
 	icon = 'mods/mobs/dionaea/icons/nymph.dmi'
 	icon_state = ICON_STATE_WORLD
-	death_msg = "expires with a pitiful chirrup..."
 	health = 60
 	maxHealth = 60
 	available_maneuvers = list(/decl/maneuver/leap)
 	status_flags = NO_ANTAG
 
-	language = /decl/language/diona
 	species_language = /decl/language/diona
 	only_species_language = 1
 	voice_name = "diona nymph"

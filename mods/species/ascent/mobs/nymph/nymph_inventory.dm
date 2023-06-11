@@ -17,7 +17,7 @@
 	else
 		to_chat(usr, SPAN_WARNING("You have nothing to drop."))
 
-/mob/living/carbon/simple_animal/ascent_nymph/proc/can_collect(var/obj/item/collecting)
+/mob/living/simple_animal/alien/ascent_nymph/proc/can_collect(var/obj/item/collecting)
 	return (!holding_item && \
 		istype(collecting) && \
 		collecting.loc != src && \

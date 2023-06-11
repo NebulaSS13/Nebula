@@ -4,4 +4,4 @@
 		gestalt.shed_atom(src, TRUE, FALSE)
 	if(holding_item)
 		try_unequip(holding_item)
-	return ..(gibbed,death_msg)
+	return ..()

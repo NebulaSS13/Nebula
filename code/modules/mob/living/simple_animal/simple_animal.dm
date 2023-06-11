@@ -445,7 +445,7 @@
 	walk_to(src,0)
 	. = ..(gibbed, get_death_message(deathmessage), show_dead_message)
 
-/mob/living/simple_animal/get_death_message(var/deathmessage)
+/mob/living/simple_animal/proc/get_death_message(var/deathmessage)
 	return deathmessage
 
 /mob/living/simple_animal/explosion_act(severity)

@@ -9,12 +9,15 @@
 #define ANYMPH_NUTRITION_MOLT    125   // How much nutrition it takes to molt.
 #define ANYMPH_TIME_MOLT         300   // How long to wait between molts.
 
+/mob/living/simple_animal/alien/get_death_message(deathmessage)
+	return "expires with a pitiful hiss..."
+
 /mob/living/simple_animal/alien/ascent_nymph
 	name = SPECIES_MANTID_NYMPH
 	desc = "It's a little alien skittery critter. Hiss."
 	icon = 'mods/species/ascent/icons/species/nymph.dmi'
 	icon_state = ICON_STATE_WORLD
-	death_msg = "expires with a pitiful hiss..."
+
 	health = 60
 	maxHealth = 60
 	available_maneuvers = list(/decl/maneuver/leap)
@@ -61,11 +64,10 @@
 /mob/living/simple_animal/alien/ascent_nymph/has_dexterity()
 	return FALSE
 
-/mob/living/simple_animal/alien/ascent_nymph/death(gibbed)
+/mob/living/simple_animal/alien/ascent_nymph/death()
 	if(holding_item)
 		try_unequip(holding_item)
-
-	return ..(gibbed,death_msg)
+	return ..()
 
 /mob/living/simple_animal/alien/ascent_nymph/on_update_icon()
 	..()

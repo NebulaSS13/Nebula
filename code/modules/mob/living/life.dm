@@ -41,8 +41,27 @@
 
 	return 1
 
+/mob/living/proc/get_hunger_factor()
+	var/decl/species/my_species = get_species()
+	return my_species?.hunger_factor || 0
+
+/mob/living/proc/get_thirst_factor()
+	var/decl/species/my_species = get_species()
+	return my_species?.thirst_factor || 0
+
+/mob/living/proc/handle_need_updates()
+	if(get_nutrition() > 0)
+		var/hf = get_hunger_factor()
+		if(hf != 0)
+			adjust_nutrition(-hf)
+	if(get_hydration() > 0)
+		var/tf = get_thirst_factor()
+		if(tf != 0)
+			adjust_hydration(-tf)
+
 /mob/living/proc/handle_nutrition_and_hydration()
 	SHOULD_CALL_PARENT(TRUE)
+	handle_need_updates()
 	var/nut =    get_nutrition()
 	var/maxnut = get_max_nutrition()
 	if(nut < (maxnut * 0.3))
@@ -213,8 +232,15 @@
 	handle_hud_icons()
 	handle_vision()
 	handle_low_light_vision()
+	handle_needs_hud()
 
 	return 1
+
+/mob/living/proc/handle_needs_hud()
+	if(nutrition_icon)
+		nutrition_icon.icon_state = "nutrition[round(get_nutrition() / get_max_nutrition()) * 4]"
+	if(hydration_icon)
+		hydration_icon.icon_state = "hydration[round(get_hydration() / get_max_hydration()) * 4]"
 
 /mob/living/proc/handle_low_light_vision()
 

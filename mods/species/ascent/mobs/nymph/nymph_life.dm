@@ -5,6 +5,7 @@
 		return
 
 	// Generate some crystals over time.
+	var/nutrition = get_nutrition()
 	if(nutrition >= 300 && crystal_reserve < ANYMPH_MAX_CRYSTALS)
 		crystal_reserve = min(ANYMPH_MAX_CRYSTALS, crystal_reserve + 15)
 		adjust_nutrition(DEFAULT_HUNGER_FACTOR * -4)
@@ -16,37 +17,14 @@
 		adjust_nutrition(DEFAULT_HUNGER_FACTOR * -2)
 	else
 		adjust_nutrition(DEFAULT_HUNGER_FACTOR * -1)
-
-	if(hydration > 0)
+	if(get_hydration() > 0)
 		adjust_hydration(DEFAULT_THIRST_FACTOR * -1)
-
-	update_nymph_hud()
-
-/mob/living/simple_animal/alien/ascent_nymph/proc/update_nymph_hud()
-	// Update the HUD.
-	var/datum/hud/ascent_nymph/nymph_hud = hud_used
-	if(istype(nymph_hud))
-		if(nymph_hud.food)
-			switch(nutrition)
-				if(450 to INFINITY)				nymph_hud.food.icon_state = "nutrition0"
-				if(350 to 450)					nymph_hud.food.icon_state = "nutrition1"
-				if(250 to 350)					nymph_hud.food.icon_state = "nutrition2"
-				if(150 to 250)					nymph_hud.food.icon_state = "nutrition3"
-				else							nymph_hud.food.icon_state = "nutrition4"
-
-		if(nymph_hud.drink)
-			switch(hydration)
-				if(450 to INFINITY)				nymph_hud.drink.icon_state = "hydration0"
-				if(350 to 450)					nymph_hud.drink.icon_state = "hydration1"
-				if(250 to 350)					nymph_hud.drink.icon_state = "hydration2"
-				if(150 to 250)					nymph_hud.drink.icon_state = "hydration3"
-				else							nymph_hud.drink.icon_state = "hydration4"
 
 /mob/living/simple_animal/alien/ascent_nymph/proc/can_molt()
 	if(crystal_reserve < ANYMPH_CRYSTAL_MOLT)
 		to_chat(src, SPAN_WARNING("You don't have enough crystalline matter stored up to molt right now."))
 		return FALSE
-	if(nutrition < ANYMPH_NUTRITION_MOLT)
+	if(get_nutrition() < ANYMPH_NUTRITION_MOLT)
 		to_chat(src, SPAN_WARNING("You're too hungry to molt right now!"))
 		return FALSE
 	if(world.time - last_molt < ANYMPH_TIME_MOLT)
@@ -66,7 +44,7 @@
 			var/mob/living/carbon/human/H = new(get_turf(usr), SPECIES_MANTID_ALATE)
 			H.dna.lineage = nymph.dna.lineage
 			H.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [H.get_gyne_name()]"
-			H.nutrition = nymph.nutrition * 0.25 // Homgry after molt.
+			H.set_nutrition(round(nymph.get_nutrition() * 0.25)) // Homgry after molt.
 			nymph.mind.transfer_to(H)
 			qdel(nymph)
 			H.visible_message("\icon[H] [H] emerges from its molt as a new alate.")
@@ -81,7 +59,7 @@
 		animate(src, transform = M, time = 2, easing = QUAD_EASING)
 		transform = M
 		last_molt = world.time
-		nutrition = max(0, nutrition - ANYMPH_NUTRITION_MOLT)
+		adjust_nutrition(-(ANYMPH_NUTRITION_MOLT))
 		crystal_reserve = max(0, crystal_reserve - ANYMPH_CRYSTAL_MOLT)
 		new/obj/item/ascent_molt(get_turf(src))
 

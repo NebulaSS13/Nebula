@@ -619,13 +619,6 @@
 
 	return 1
 
-/mob/living/carbon/human/handle_nutrition_and_hydration()
-	if(nutrition > 0)
-		adjust_nutrition(-species.hunger_factor)
-	if(hydration > 0)
-		adjust_hydration(-species.thirst_factor)
-	..()
-
 /mob/living/carbon/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 		handle_hud_list()
@@ -722,22 +715,6 @@
 					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
 				healths_ma.overlays += health_images
 			healths.appearance = healths_ma
-
-		if(nutrition_icon)
-			switch(nutrition)
-				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
-				if(350 to 450)					nutrition_icon.icon_state = "nutrition1"
-				if(250 to 350)					nutrition_icon.icon_state = "nutrition2"
-				if(150 to 250)					nutrition_icon.icon_state = "nutrition3"
-				else							nutrition_icon.icon_state = "nutrition4"
-
-		if(hydration_icon)
-			switch(hydration)
-				if(450 to INFINITY)				hydration_icon.icon_state = "hydration0"
-				if(350 to 450)					hydration_icon.icon_state = "hydration1"
-				if(250 to 350)					hydration_icon.icon_state = "hydration2"
-				if(150 to 250)					hydration_icon.icon_state = "hydration3"
-				else							hydration_icon.icon_state = "hydration4"
 
 		if(isSynthetic())
 			var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
