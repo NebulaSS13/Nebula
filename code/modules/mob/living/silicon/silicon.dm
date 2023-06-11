@@ -453,3 +453,6 @@
 
 /mob/living/silicon/get_speech_bubble_state_modifier()
 	return "synth"
+
+/mob/living/silicon/handle_need_updates()
+	return

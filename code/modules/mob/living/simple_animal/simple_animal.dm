@@ -21,6 +21,8 @@
 	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
 
+	var/no_hunger_and_thirst = TRUE
+
 	var/list/speak = list("...")
 	var/speak_chance = 0
 	var/list/emote_hear = list()	//Hearable emotes
@@ -641,3 +643,7 @@
 	if(QDELETED(src) || stat || incapacitated())
 		return FALSE
 	return TRUE
+
+/mob/living/simple_animal/handle_need_updates()
+	if(!no_hunger_and_thirst)
+		return ..()

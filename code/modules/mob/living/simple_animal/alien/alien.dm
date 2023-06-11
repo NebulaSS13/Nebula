@@ -7,7 +7,7 @@
 	mob_size = MOB_SIZE_TINY
 	mob_sort_value = 8
 	gender = NEUTER
-	var/instance_num
+	no_hunger_and_thirst = FALSE
 
 /mob/living/simple_animal/alien/Initialize()
 	verbs += /mob/living/proc/ventcrawl
