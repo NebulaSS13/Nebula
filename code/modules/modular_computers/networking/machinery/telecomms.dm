@@ -245,6 +245,7 @@ var/global/list/telecomms_hubs = list()
 	var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
 	data["network_id"] = device.network_tag
 	data["authenticated"] = (access_keycard_auth in user.GetAccess())
+	data["allow_external"] = allow_external_signals
 	var/list/data_channels = list()
 	for(var/datum/radio_channel/channel_datum in channels)
 		var/list/channel_data = list()
@@ -403,3 +404,7 @@ var/global/list/telecomms_hubs = list()
 				channels = channel_data
 				rebuild_channels()
 				. = TOPIC_REFRESH
+
+		if(href_list["toggle_external"])
+			allow_external_signals = !allow_external_signals
+			return TOPIC_REFRESH
