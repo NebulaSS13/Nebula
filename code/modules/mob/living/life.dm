@@ -15,8 +15,10 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
 
-	if(stat != DEAD)
+	if(stat != DEAD && !is_in_stasis())
 		handle_nutrition_and_hydration()
+		//Mutations and radiation
+		handle_mutations_and_radiation()
 
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
@@ -356,3 +358,6 @@
 					SET_STATUS_MAX(src, STAT_WEAK, current_size)
 		apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
 	return ..()
+
+/mob/living/proc/is_in_stasis()
+	return FALSE

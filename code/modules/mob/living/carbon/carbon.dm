@@ -323,7 +323,7 @@
 		return
 	stasis_sources[source] = factor
 
-/mob/living/carbon/proc/InStasis()
+/mob/living/carbon/is_in_stasis()
 	if(!stasis_value)
 		return FALSE
 	return life_tick % stasis_value

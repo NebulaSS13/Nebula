@@ -13,8 +13,8 @@
 		return FALSE //M is too small to wield this
 	return TRUE
 
-/mob/living/proc/isSynthetic()
-	return 0
+/mob/proc/isSynthetic()
+	return FALSE
 
 /mob/living/carbon/human/isSynthetic()
 	if(isnull(full_prosthetic))
@@ -28,7 +28,7 @@
 	return full_prosthetic
 
 /mob/living/silicon/isSynthetic()
-	return 1
+	return TRUE
 
 /mob/proc/isMonkey()
 	return 0

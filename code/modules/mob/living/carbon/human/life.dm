@@ -63,7 +63,7 @@
 	voice = GetVoice()
 
 	//No need to update all of these procs if the guy is dead.
-	if(stat != DEAD && !InStasis())
+	if(stat != DEAD && !is_in_stasis())
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 

@@ -93,3 +93,13 @@
 
 /mob/living/simple_animal/alien/diona/has_dexterity()
 	return FALSE
+
+/mob/living/simple_animal/alien/diona/handle_mutations_and_radiation()
+	if(!radiation)
+		return
+	var/rads = radiation/25
+	radiation -= rads
+	adjust_nutrition(rads)
+	heal_overall_damage(rads,rads)
+	adjustOxyLoss(-(rads))
+	adjustToxLoss(-(rads))

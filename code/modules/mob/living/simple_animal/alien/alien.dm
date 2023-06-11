@@ -30,16 +30,6 @@
 	this.blood_DNA["UNKNOWN BLOOD"] = "X*"
 	return this
 
-/mob/living/simple_animal/handle_mutations_and_radiation()
-	if(!radiation)
-		return
-	var/rads = radiation/25
-	radiation -= rads
-	adjust_nutrition(rads)
-	heal_overall_damage(rads,rads)
-	adjustOxyLoss(-(rads))
-	adjustToxLoss(-(rads))
-
 /*
 // Alien larva are quite simple.
 /mob/living/carbon/alien/Life()

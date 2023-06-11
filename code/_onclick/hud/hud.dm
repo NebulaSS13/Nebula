@@ -39,6 +39,17 @@
 	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = FALSE
 
+	var/datum/hud_data/species_hud_data
+
+/datum/hud/proc/get_hud_data()
+	if(species_hud_data)
+		return species_hud_data
+	var/decl/species/my_species = mymob?.get_species()
+	species_hud_data = my_species?.hud || new
+
+/datum/hud/proc/should_show_needs()
+	return species_hud_data?.has_nutrition
+
 /datum/hud/New(mob/owner)
 	mymob = owner
 	instantiate()
@@ -111,7 +122,30 @@
 	return FALSE
 
 /datum/hud/proc/FinalizeInstantiation()
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	if(!mymob || !should_show_needs())
+		return
+	if(mymob.isSynthetic())
+		mymob.cells = new /obj/screen()
+		mymob.cells.icon = 'icons/mob/screen1_robot.dmi'
+		mymob.cells.icon_state = "charge-empty"
+		mymob.cells.SetName("cell")
+		mymob.cells.screen_loc = ui_nutrition
+		adding |= mymob.cells
+	else
+		mymob.nutrition_icon = new /obj/screen/food()
+		mymob.nutrition_icon.icon = 'icons/mob/status_hunger.dmi'
+		mymob.nutrition_icon.pixel_w = 8
+		mymob.nutrition_icon.icon_state = "nutrition1"
+		mymob.nutrition_icon.SetName("nutrition")
+		mymob.nutrition_icon.screen_loc = ui_nutrition_small
+		adding |= mymob.nutrition_icon
+		mymob.hydration_icon = new /obj/screen/drink()
+		mymob.hydration_icon.icon = 'icons/mob/status_hunger.dmi'
+		mymob.hydration_icon.icon_state = "hydration1"
+		mymob.hydration_icon.SetName("hydration")
+		mymob.hydration_icon.screen_loc = ui_nutrition_small
+		adding |= mymob.hydration_icon
 
 /datum/hud/proc/get_ui_style()
 	return ui_style2icon(mymob?.client?.prefs?.UI_style) || 'icons/mob/screen/white.dmi'

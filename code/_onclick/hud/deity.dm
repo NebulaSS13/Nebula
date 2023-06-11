@@ -14,7 +14,6 @@
 	mymob.client.screen += src.adding
 	D.sync_to_mob(mymob)
 
-
 /obj/screen/intent/deity
 	var/list/desc_screens = list()
 	screen_loc = "RIGHT-5:122,BOTTOM:8"

@@ -7,10 +7,9 @@
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	var/mob/living/carbon/human/target = mymob
-	var/datum/hud_data/hud_data = istype(target) ? target.species.hud : new()
-	if(hud_data.icon)
-		ui_style = hud_data.icon
+	get_hud_data() // generates the hud data datum
+	if(species_hud_data?.icon)
+		ui_style = species_hud_data.icon
 
 	adding = list()
 	other = list()
@@ -25,13 +24,13 @@
 	BuildInventoryUI()
 
 	// Draw the attack intent dialogue.
-	if(hud_data.has_a_intent)
+	if(species_hud_data.has_a_intent)
 		using = new /obj/screen/intent()
 		src.adding += using
 		action_intent = using
 		hud_elements |= using
 
-	if(hud_data.has_m_intent)
+	if(species_hud_data.has_m_intent)
 		using = new /obj/screen/movement()
 		using.SetName("movement method")
 		using.icon = ui_style
@@ -42,7 +41,7 @@
 		src.adding += using
 		move_intent = using
 
-	if(hud_data.has_drop)
+	if(species_hud_data.has_drop)
 		using = new /obj/screen()
 		using.SetName("drop")
 		using.icon = ui_style
@@ -52,10 +51,10 @@
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
 
-	if(hud_data.has_hands)
+	if(species_hud_data.has_hands)
 		BuildHandsUI()
 
-	if(hud_data.has_resist)
+	if(species_hud_data.has_resist)
 		using = new /obj/screen()
 		using.SetName("resist")
 		using.icon = ui_style
@@ -65,7 +64,7 @@
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
 
-	if(hud_data.has_throw)
+	if(species_hud_data.has_throw)
 		mymob.throw_icon = new /obj/screen()
 		mymob.throw_icon.icon = ui_style
 		mymob.throw_icon.icon_state = "act_throw_off"
@@ -76,7 +75,7 @@
 		src.hotkeybuttons += mymob.throw_icon
 		hud_elements |= mymob.throw_icon
 
-	if(hud_data.has_internals)
+	if(species_hud_data.has_internals)
 		mymob.internals = new /obj/screen()
 		mymob.internals.icon = ui_style
 		mymob.internals.icon_state = "internal0"
@@ -84,7 +83,7 @@
 		mymob.internals.screen_loc = ui_internal
 		hud_elements |= mymob.internals
 
-	if(hud_data.has_warnings)
+	if(species_hud_data.has_warnings)
 		mymob.healths = new /obj/screen()
 		mymob.healths.icon = ui_style
 		mymob.healths.icon_state = "health0"
@@ -113,7 +112,7 @@
 		mymob.fire.screen_loc = ui_fire
 		hud_elements |= mymob.fire
 
-	if(hud_data.has_pressure)
+	if(species_hud_data.has_pressure)
 		mymob.pressure = new /obj/screen/pressure()
 		mymob.pressure.icon = 'icons/mob/status_indicators.dmi'
 		mymob.pressure.icon_state = "pressure0"
@@ -121,7 +120,7 @@
 		mymob.pressure.screen_loc = ui_temp
 		hud_elements |= mymob.pressure
 
-	if(hud_data.has_bodytemp)
+	if(species_hud_data.has_bodytemp)
 		mymob.bodytemp = new /obj/screen/bodytemp()
 		mymob.bodytemp.icon = 'icons/mob/status_indicators.dmi'
 		mymob.bodytemp.icon_state = "temp1"
@@ -129,31 +128,7 @@
 		mymob.bodytemp.screen_loc = ui_temp
 		hud_elements |= mymob.bodytemp
 
-	if(target.isSynthetic())
-		target.cells = new /obj/screen()
-		target.cells.icon = 'icons/mob/screen1_robot.dmi'
-		target.cells.icon_state = "charge-empty"
-		target.cells.SetName("cell")
-		target.cells.screen_loc = ui_nutrition
-		hud_elements |= target.cells
-
-	else if(hud_data.has_nutrition)
-		mymob.nutrition_icon = new /obj/screen/food()
-		mymob.nutrition_icon.icon = 'icons/mob/status_hunger.dmi'
-		mymob.nutrition_icon.pixel_w = 8
-		mymob.nutrition_icon.icon_state = "nutrition1"
-		mymob.nutrition_icon.SetName("nutrition")
-		mymob.nutrition_icon.screen_loc = ui_nutrition_small
-		hud_elements |= mymob.nutrition_icon
-
-		mymob.hydration_icon = new /obj/screen/drink()
-		mymob.hydration_icon.icon = 'icons/mob/status_hunger.dmi'
-		mymob.hydration_icon.icon_state = "hydration1"
-		mymob.hydration_icon.SetName("hydration")
-		mymob.hydration_icon.screen_loc = ui_nutrition_small
-		hud_elements |= mymob.hydration_icon
-
-	if(hud_data.has_up_hint)
+	if(species_hud_data.has_up_hint)
 		mymob.up_hint = new /obj/screen()
 		mymob.up_hint.icon = ui_style
 		mymob.up_hint.icon_state = "uphint0"
@@ -172,13 +147,15 @@
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 	hud_elements |= mymob.zone_sel
 
-	target.attack_selector = new
-	target.attack_selector.set_owner(target)
-	target.attack_selector.icon = ui_style
-	target.attack_selector.color = ui_color
-	target.attack_selector.alpha = ui_alpha
-	target.attack_selector.update_icon()
-	hud_elements |= target.attack_selector
+	if(ishuman(mymob))
+		var/mob/living/carbon/human/human = mymob
+		human.attack_selector = new
+		human.attack_selector.set_owner(mymob)
+		human.attack_selector.icon = ui_style
+		human.attack_selector.color = ui_color
+		human.attack_selector.alpha = ui_alpha
+		human.attack_selector.update_icon()
+		hud_elements |= human.attack_selector
 
 	//Handle the gun settings buttons
 	mymob.gun_setting_icon = new /obj/screen/gun/mode(null)

@@ -22,7 +22,7 @@
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED
 
 /decl/species/starlight/shadow/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.InStasis() || H.stat == DEAD || H.isSynthetic())
+	if(H.is_in_stasis() || H.stat == DEAD || H.isSynthetic())
 		return
 	var/light_amount = 0
 	if(isturf(H.loc))

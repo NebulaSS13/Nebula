@@ -1134,5 +1134,5 @@
 		return FALSE
 	return TRUE
 
-/mob/living/silicon/robot/add_blood_floor(var/turf/target)
+/mob/living/silicon/robot/place_blood_splatter(var/turf/target, var/datum/reagents/holder)
 	return new /obj/effect/decal/cleanable/blood/oil(target)
