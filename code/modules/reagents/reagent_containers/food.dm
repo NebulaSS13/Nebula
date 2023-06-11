@@ -248,7 +248,7 @@
 	. = ..()
 
 /obj/item/chems/food/attack_animal(var/mob/user)
-	if(!isanimal(user) && !isalien(user))
+	if(!isanimal(user))
 		return
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
 	bitecount++

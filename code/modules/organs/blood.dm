@@ -5,6 +5,9 @@
 /mob/living/carbon/human
 	var/datum/reagents/vessel // Container for blood and BLOOD ONLY. Do not transfer other chems here.
 
+/mob/living/carbon/human/get_vessel()
+	return vessel
+
 //Initializes blood vessels
 /mob/living/carbon/human/proc/make_blood()
 	if(vessel)

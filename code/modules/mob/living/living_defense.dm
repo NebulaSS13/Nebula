@@ -98,6 +98,9 @@
 	return target_zone
 
 //Called when the mob is hit with an item in combat. Returns the blocked result
+/mob/living/proc/get_vessel()
+	return
+
 /mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	var/weapon_mention
 	if(I.attack_message_name())
@@ -110,8 +113,7 @@
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
 	if(I.damtype == BRUTE && prob(33)) // Added blood for whacking non-humans too
-		var/turf/simulated/location = get_turf(src)
-		if(istype(location)) location.add_blood_floor(src)
+		place_blood_splatter(get_turf(src), get_vessel())
 
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)

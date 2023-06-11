@@ -157,10 +157,6 @@
 		return 1 //we bloodied the floor
 	return 0
 
-// Only adds blood on the floor -- Skie
-/turf/simulated/proc/add_blood_floor(mob/living/carbon/M)
-	M.add_blood_floor(src)
-
 /turf/simulated/attackby(var/obj/item/thing, var/mob/user)
 	if(IS_COIL(thing) && try_build_cable(thing, user))
 		return TRUE

@@ -51,16 +51,11 @@
 	if(!istype(T) || REAGENT_VOLUME(holder, type) < 3)
 		return
 	var/weakref/W = LAZYACCESS(data, "donor")
-	if (!W)
-		blood_splatter(T, src, 1)
-		return
-	W = W.resolve()
-	if(ishuman(W))
-		blood_splatter(T, src, 1)
-	else if(isalien(W))
-		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, holder.my_atom, 1)
-		if(B)
-			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
+	var/mob/living/mob = W?.resolve()
+	if(istype(mob))
+		mob.place_blood_splatter(T, holder)
+	else
+		blood_splatter(T, holder, 1)
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))

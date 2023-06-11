@@ -1327,5 +1327,5 @@
 /mob/proc/toggle_internals(var/mob/living/user)
 	return
 
-/mob/proc/add_blood_floor(var/turf/target)
-	return
+/mob/proc/place_blood_splatter(var/turf/target, var/datum/reagents/holder)
+	return blood_splatter(target, holder, TRUE)

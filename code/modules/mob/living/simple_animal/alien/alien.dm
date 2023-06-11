@@ -25,7 +25,7 @@
 /mob/living/simple_animal/alien/ventcrawl_carry()
 	return TRUE
 
-/mob/living/simple_animal/alien/add_blood_floor(var/turf/target)
+/mob/living/simple_animal/alien/place_blood_splatter(var/turf/target, var/datum/reagents/holder)
 	var/obj/effect/decal/cleanable/blood/xeno/this = new(target)
 	this.blood_DNA["UNKNOWN BLOOD"] = "X*"
 	return this
