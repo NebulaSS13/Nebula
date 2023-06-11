@@ -71,7 +71,7 @@
 /obj/item/radio/proc/can_decrypt(var/list/secured)
 	if(decrypt_all_messages)
 		return TRUE
-	if(!secured)
+	if(!secured || !length(secured))
 		return TRUE
 	if(!islist(secured))
 		secured = list(secured)
@@ -415,41 +415,24 @@
 					use_frequency = channel.frequency
 					break
 
-	var/datum/radio_channel/channel
-	var/list/send_message_to
-	var/last_frequency = frequency
-	if(last_frequency != use_frequency)
-		set_frequency(use_frequency)
 	if(analog && istype(analog_radio_connection))
+		var/last_frequency = frequency
+		if(last_frequency != use_frequency)
+			set_frequency(use_frequency)
+
 		broadcast_analog_radio_message(analog_radio_connection, speaker, src, message, intercom, message_compression, current_sector, verb, speaking, analog_secured)
-		// does not populate send_message_to, so after this we just reset frequency and end the proc
+		if(frequency != last_frequency)
+			set_frequency(last_frequency)
 	else
+		// List passed around to make sure a hub only checks for transmission once.
+		var/list/checked_hubs = list()
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		var/datum/computer_network/network = network_device?.get_network()
 		for(var/weakref/H as anything in network?.connected_hubs)
 			var/obj/machinery/network/telecomms_hub/hub = H.resolve()
 			if(istype(hub) && !QDELETED(hub) && hub.can_receive_message(network))
-				send_message_to = hub.get_recipients(current_sector, network, use_frequency)
-				channel = hub.get_channel_from_freq_or_key(use_frequency)
-	if(frequency != last_frequency)
-		set_frequency(last_frequency)
-
-	if(!length(send_message_to))
-		return
-
-	var/formatted_msg = "<span style='color:[channel?.color || default_color]'><small><b>\[[channel?.name || format_frequency(frequency)]\]</b></small> <span class='name'>"
-	var/send_name = istype(speaker) ? speaker.real_name : ("[speaker]" || "unknown")
-
-	var/turf/T = get_turf(src)
-	var/obj/effect/overmap/visitable/send_overmap_object = istype(T) && global.overmap_sectors["[T.z]"]
-
-	for(var/mob/listener in send_message_to)
-		var/per_listener_send_name = send_name
-		// if we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's
-		if(send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != send_message_to[listener])
-			// then append the overmap object name to it, so they know where we're from
-			per_listener_send_name = "[per_listener_send_name] ([send_overmap_object.name])"
-		listener.hear_radio(message, verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name)
+				hub.transmit_message(speaker, message, verb, speaking, use_frequency, message_compression, checked_hubs)
+				break // Only one hub per message, since it transmits over the whole network.
 
 /obj/item/radio/proc/can_receive_message(var/check_network_membership)
 	. = on
