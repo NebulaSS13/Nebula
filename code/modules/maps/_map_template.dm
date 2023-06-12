@@ -147,29 +147,15 @@
 		bounds = extend_bounds_if_needed(bounds, M.bounds)
 	return M
 
-///Returns a list with an x and y coordinate where to place the template, depending on what it's aligned to, and its x/y offset
-/// * offset_x: the relative x offset of the template.
-/// * offset_y: the relative y offset of the template.
-/// * align_template_center: Whether we should offset the offset so the center of the template is at offset_x/y.
-/datum/map_template/proc/calculate_template_origin(var/offset_x = 1, var/offset_y = 1, var/align_template_center = FALSE)
-	if(align_template_center)
-		offset_x = offset_x - (FLOOR(width  / 2) - 1)
-		offset_y = offset_y - (FLOOR(height / 2) - 1)
-
-	if(offset_x < 0 || offset_y < 0)
-		PRINT_STACK_TRACE("Template '[src]'('[type]') alignement resulted in a negative offset!")
-	return list(offset_x, offset_y)
-
 ///Load the template onto a freshly created z-level.
 /// * If centered is TRUE, the template's center will be aligned to the world's center. Otherwise, the template will load at pos 1,1.
 /datum/map_template/proc/load_new_z(no_changeturf = TRUE, centered = TRUE)
 	//When we're set to centered we're aligning the center of the template to the center of the map
-	var/list/offset = calculate_template_origin(
-		centered? FLOOR(world.maxx/2) : 1,
-		centered? FLOOR(world.maxy/2) : 1,
-		centered)
-	var/x = offset[1]
-	var/y = offset[2]
+	var/x = max(round((world.maxx - width)  / 2), 1)
+	var/y = max(round((world.maxy - height) / 2), 1)
+	if(!centered)
+		x = 1
+		y = 1
 
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/list/atoms_to_initialise = list()
@@ -205,14 +191,9 @@
 	return WORLD_CENTER_TURF(world.maxz)
 
 /datum/map_template/proc/load(turf/T, centered=FALSE)
-	//When set to centered, we align the center of the template to the position we got.
-	var/list/offset = calculate_template_origin(T.x, T.y, centered)
-	var/x = offset[1]
-	var/y = offset[2]
-	//var/x_top_right = centered? (x + round(width/2))  : (x + width)  //Expected top right corner x of the template
-	//var/y_top_right = centered? (y + round(height/2)) : (y + height) //Expected top right corner y of the template
-
-	if(!T || (x <= 0) || (y <= 0))
+	if(centered)
+		T = locate(T.x - (round(width/2) - 1), T.y - (round(height/2) - 1), T.z)
+	if(!T)
 		CRASH("Can't load '[src]' (size: [width]x[height]) onto a null turf! Current world size ([WORLD_SIZE_TO_STRING]).")
 	if(!IS_WITHIN_WORLD((T.x + (width - 1)), (T.y + (height - 1))))
 		CRASH("Couldn't fit the entire template '[src]' (size: [width]x[height]) between lower left corner ([T.x], [T.y])[centered?"(WORLD CENTER)":""] and upper right corner ([T.x + width], [T.y + height]) in current world size ([WORLD_SIZE_TO_STRING]).")
@@ -226,7 +207,7 @@
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = load_a_path(mappath, x, y, T.z, null, initialized_areas_by_type, FALSE, TRUE)
+		var/datum/map_load_metadata/M = load_a_path(mappath, T.x, T.y, T.z, null, initialized_areas_by_type, FALSE, TRUE)
 		if (M)
 			atoms_to_initialise += M.atoms_to_initialise
 		else
@@ -243,7 +224,7 @@
 	if (SSlighting.initialized)
 		SSlighting.InitializeTurfs(atoms_to_initialise)	// Hopefully no turfs get placed on new coords by SSatoms.
 
-	log_game("[name] loaded at at [x],[y],[T.z]")
+	log_game("[name] loaded at at [T.x],[T.y],[T.z]")
 	loaded++
 
 	return TRUE
