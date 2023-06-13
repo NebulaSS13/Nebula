@@ -341,6 +341,7 @@ var/global/list/telecomms_hubs = list()
 								var/datum/extension/network_device/acl/net_acl = network.access_controller
 								if(!net_acl)
 									to_chat(user, SPAN_WARNING("No access controller on the network."))
+									return
 
 								var/list/all_groups = net_acl.get_all_groups()
 								if(!length(all_groups))
