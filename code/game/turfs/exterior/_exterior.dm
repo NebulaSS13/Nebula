@@ -17,11 +17,6 @@
 	///If this turf is on a level that belongs to a planetoid, this is a reference to that planetoid.
 	var/datum/planetoid_data/owner
 
-// Bit faster than return_air() for exoplanet exterior turfs
-/turf/exterior/get_air_graphic()
-	var/datum/level_data/level = SSmapping.levels_by_z[z]
-	return level?.exterior_atmosphere?.graphic
-
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
 	if(base_color)
@@ -47,10 +42,6 @@
 			ChangeArea(src, L.get_base_area_instance())
 
 	. = ..(mapload)	// second param is our own, don't pass to children
-
-	var/air_graphic = get_air_graphic()
-	if(length(air_graphic))
-		add_vis_contents(src, air_graphic)
 
 	if (no_update_icon)
 		return

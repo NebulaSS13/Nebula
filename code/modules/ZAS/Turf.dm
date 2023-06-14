@@ -230,14 +230,12 @@
 	if((!air && isnull(initial_gas)) || (external_atmosphere_participation && is_outside()))
 		var/datum/level_data/level = SSmapping.levels_by_z[z]
 		var/datum/gas_mixture/gas = level.get_exterior_atmosphere()
-		var/initial_temperature = gas.temperature
-		if(weather)
-			initial_temperature = weather.adjust_temperature(initial_temperature)
-		for(var/thing in affecting_heat_sources)
-			if((gas.temperature - initial_temperature) >= 100)
-				break
-			var/obj/structure/fire_source/heat_source = thing
-			gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
+		var/initial_temperature = weather ? weather.adjust_temperature(gas.temperature) : gas.temperature
+		if(length(affecting_heat_sources))
+			for(var/obj/structure/fire_source/heat_source as anything in affecting_heat_sources)
+				gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
+				if(abs(gas.temperature - initial_temperature) >= 100)
+					break
 		return gas
 
 	// Base behavior
