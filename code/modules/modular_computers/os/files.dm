@@ -12,6 +12,11 @@
 	if(drive_slot)
 		mounted_storage["media"] = new /datum/file_storage/disk/removable(src, "media")
 
+	// Auto-run: must happen after storage mount above
+	var/datum/computer_file/data/autorun = get_file("autorun", "local")
+	if(istype(autorun))
+		run_program(autorun.stored_data)
+
 	// Auto-mounted mainframes.
 	var/datum/computer_file/data/automount_file = get_file("automount", "local")
 	if(istype(automount_file))
