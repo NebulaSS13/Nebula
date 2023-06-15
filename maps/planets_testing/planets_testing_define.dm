@@ -6,7 +6,7 @@
 	allowed_spawns = list()
 	default_spawn  = null
 
-/datum/map/planet_testing/build_exoplanets()
+/datum/map/planet_testing/build_planets()
 	report_progress("Instantiating planets...")
 
 	//Spawn all templates once

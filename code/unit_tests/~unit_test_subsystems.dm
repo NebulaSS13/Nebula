@@ -12,6 +12,12 @@ SUBSYSTEM_DEF(unit_tests)
 	var/stage = 1
 	var/end_unit_tests
 
+	var/static/list/skipped_template_categories = list(
+		MAP_TEMPLATE_CATEGORY_AWAYSITE,
+		MAP_TEMPLATE_CATEGORY_PLANET,
+		MAP_TEMPLATE_CATEGORY_EXOPLANET,
+	)
+
 /datum/controller/subsystem/unit_tests/Initialize(timeofday)
 
 	#ifndef UNIT_TEST_COLOURED
@@ -37,12 +43,10 @@ SUBSYSTEM_DEF(unit_tests)
 	log_unit_test("[queue.len] unit tests loaded.")
 	. = ..()
 
-///Returns whether a template should be loaded for all unit tests or it's tested in a specific unit test on its own.
+///Returns whether a template should be loaded for all unit tests or if it's tested in a specific unit test on its own.
 /datum/controller/subsystem/unit_tests/proc/is_tested_separately(var/datum/map_template/map_template)
 	for(var/cat in map_template.template_categories)
-		if(cat == MAP_TEMPLATE_CATEGORY_AWAYSITE || \
-		   cat == MAP_TEMPLATE_CATEGORY_PLANET   || \
-		   cat == MAP_TEMPLATE_CATEGORY_EXOPLANET)
+		if(cat in skipped_template_categories)
 			return TRUE
 	return FALSE
 
@@ -51,10 +55,10 @@ SUBSYSTEM_DEF(unit_tests)
 		var/datum/map_template/map_template = SSmapping.get_template(map_template_name)
 		// Away sites are supposed to be tested separately in the Away Site environment
 		if(is_tested_separately(map_template))
-			report_progress("Skipping template '[map_template]' ([map_template.type]): Is tested separately")
+			report_progress("Skipping template '[map_template]' ([map_template.type]): Is tested separately.")
 			continue
 		if(map_template.is_runtime_generated())
-			report_progress("Skipping template '[map_template]' ([map_template.type]): Is Generated at Runtime")
+			report_progress("Skipping template '[map_template]' ([map_template.type]): Is generated at runtime.")
 			continue
 		load_template(map_template)
 		if(map_template.template_flags & TEMPLATE_FLAG_TEST_DUPLICATES)
