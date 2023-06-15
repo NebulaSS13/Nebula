@@ -361,3 +361,15 @@ SUBSYSTEM_DEF(mapping)
 			planetoid_data_by_z[z] = null
 
 	STOP_PROCESSING(SSobj, P)
+
+///Called by the roundstart hook once we toggle to in-game state
+/datum/controller/subsystem/mapping/proc/start_processing_all_planets()
+	for(var/pid in planetoid_data_by_id)
+		var/datum/planetoid_data/P = planetoid_data_by_id[pid]
+		if(!P)
+			continue
+		P.begin_processing()
+
+/hook/roundstart/proc/start_processing_all_planets()
+	SSmapping.start_processing_all_planets()
+	return TRUE
