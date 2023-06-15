@@ -297,5 +297,5 @@
 /mob/living/carbon/human/quantum/restrained()
 	return FALSE
 
-/mob/living/carbon/human/quantum/can_fall()
+/mob/living/carbon/human/quantum/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return fall_override ? FALSE : ..()
