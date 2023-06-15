@@ -72,6 +72,8 @@
 	)
 
 /mob/living/carbon/human/quantum/can_inject(mob/user, target_zone)
+	if(user == src)
+		return ..()
 	to_chat(user, SPAN_DANGER("\The [src] disarms you before you can inject them."))
 	user.drop_item()
 	return FALSE
@@ -163,7 +165,7 @@
 	name = "quantum mechanic's headset"
 	desc = "A quantum mechanic's headset. The letter 'Ω' is stamped on the side."
 	encryption_keys = list(
-		/obj/item/encryptionkey/binary, 
+		/obj/item/encryptionkey/binary,
 		/obj/item/encryptionkey/ert
 	)
 
