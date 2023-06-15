@@ -446,9 +446,9 @@
 		var/area/A = get_area(src)
 		. = A ? A.is_outside : OUTSIDE_NO
 
-	// If we are in a multiz volume, we return the outside value of
-	// the highest unenclosed turf in the stack.
-	if(HasAbove(z))
+	// If we are in a multiz volume and not already inside, we return
+	// the outside value of the highest unenclosed turf in the stack.
+	if((. != OUTSIDE_NO) && HasAbove(z))
 		. =  OUTSIDE_YES // assume for the moment we're unroofed until we learn otherwise.
 		var/turf/top_of_stack = src
 		while(HasAbove(top_of_stack.z))
