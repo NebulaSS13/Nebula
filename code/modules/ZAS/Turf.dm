@@ -4,12 +4,6 @@
 /turf/var/tmp/verbose = FALSE
 #endif
 
-/turf/proc/update_graphic(list/graphic_add = null, list/graphic_remove = null)
-	if(graphic_add && graphic_add.len)
-		add_vis_contents(src, graphic_add)
-	if(graphic_remove && graphic_remove.len)
-		remove_vis_contents(src, graphic_remove)
-
 /turf/proc/update_air_properties()
 
 	if(zone?.invalid) //this turf's zone is in the process of being rebuilt
