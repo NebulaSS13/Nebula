@@ -405,10 +405,8 @@
 	var/maxp=0;
 	for(var/dir in global.cardinal)
 		var/turf/T = get_step(loc,dir)
-		var/cp=0
-		if(T?.zone)
-			var/datum/gas_mixture/environment = T.return_air()
-			cp = environment?.return_pressure()
+		var/datum/gas_mixture/environment = T.return_air()
+		var/cp = environment?.return_pressure()
 		if(cp<minp)minp=cp
 		if(cp>maxp)maxp=cp
 	return abs(minp-maxp)
