@@ -1106,8 +1106,7 @@
 
 /mob/get_contained_external_atoms()
 	. = ..()
-	if(.)
-		LAZYREMOVE(., get_organs())
+	LAZYREMOVE(., get_organs())
 
 /mob/explosion_act(var/severity)
 	. = ..()
