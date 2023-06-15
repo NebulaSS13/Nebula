@@ -2,7 +2,11 @@
 	name = "sky"
 	desc = "Hope you don't have a fear of heights..."
 	icon = 'icons/turf/exterior/sky_static.dmi'
-	z_flags = 0
+	z_flags = ZM_PARTITION_STACK
+
+// No matter what, the sky will never be 'inside'.
+/turf/exterior/open/sky/is_outside()
+	return TRUE // you can't take the sky from meee
 
 /turf/exterior/open/sky/north
 	dir = NORTH

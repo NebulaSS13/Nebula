@@ -456,6 +456,10 @@
 			if(!next_turf.is_open())
 				return OUTSIDE_NO
 			top_of_stack = next_turf
+			// ZM_PARTITION_STACK partitions the z-stack such that
+			// for the purposes of this check, the z-stack ends with it.
+			if(top_of_stack.z_flags & ZM_PARTITION_STACK)
+				break
 		// If we hit the top of the stack without finding a roof, we ask the upmost turf if we're outside.
 		. = top_of_stack.is_outside()
 	last_outside_check = . // Cache this for later calls.
