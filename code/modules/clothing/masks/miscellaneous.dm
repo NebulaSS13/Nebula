@@ -63,6 +63,16 @@
 	body_parts_covered = 0
 	material = /decl/material/solid/plastic
 
+// This doesn't 'filter' water so much as allow us to breathe from the air above it.
+/obj/item/clothing/mask/snorkel/filters_water()
+	var/turf/source_turf = get_turf(src)
+	// Is our turf completely full of water?
+	// If the turf is raised, it needs less water to be full; if the turf is lowered it needs more.
+	if (source_turf.check_fluid_depth(min(FLUID_DEEP - source_turf.get_physical_height(), FLUID_MAX_DEPTH)))
+		// Can't breathe if there's nothing but water!
+		return FALSE
+	return TRUE
+
 /obj/item/clothing/mask/pig
 	name = "pig mask"
 	desc = "A rubber pig mask."
