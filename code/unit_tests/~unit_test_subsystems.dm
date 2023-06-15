@@ -40,9 +40,9 @@ SUBSYSTEM_DEF(unit_tests)
 ///Returns whether a template should be loaded for all unit tests or it's tested in a specific unit test on its own.
 /datum/controller/subsystem/unit_tests/proc/is_tested_separately(var/datum/map_template/map_template)
 	for(var/cat in map_template.template_categories)
-		if(cat  == MAP_TEMPLATE_CATEGORY_AWAYSITE ||
-			cat == MAP_TEMPLATE_CATEGORY_PLANET   ||
-			cat == MAP_TEMPLATE_CATEGORY_EXOPLANET)
+		if(cat == MAP_TEMPLATE_CATEGORY_AWAYSITE || \
+		   cat == MAP_TEMPLATE_CATEGORY_PLANET   || \
+		   cat == MAP_TEMPLATE_CATEGORY_EXOPLANET)
 			return TRUE
 	return FALSE
 
