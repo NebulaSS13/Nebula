@@ -10,7 +10,7 @@
 	report_progress("Instantiating planets...")
 
 	//Spawn all templates once
-	spawn_planet_templates(get_all_planet_templates())
+	spawn_planet_templates(list_values(get_all_planet_templates()))
 
 	report_progress("Finished instantiating planets.")
 
