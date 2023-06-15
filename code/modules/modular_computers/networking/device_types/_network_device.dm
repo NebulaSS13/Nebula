@@ -22,6 +22,9 @@
 	var/list/device_variables
 	var/list/device_methods
 
+	/// Tracking var for autojoin, to resolve an ordering issue in device creation/connection.
+	VAR_PRIVATE/_autojoin
+
 /datum/extension/network_device/New(datum/holder, n_id, n_key, r_type, autojoin = TRUE)
 	..()
 	network_id = n_id
@@ -31,8 +34,7 @@
 	address = uppertext(NETWORK_MAC)
 	var/obj/O = holder
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
-	if(autojoin)
-		SSnetworking.queue_connection(src)
+	_autojoin = autojoin
 
 	if(length(device_variables))
 		for(var/path in device_variables)
@@ -43,6 +45,12 @@
 
 	if(has_commands)
 		reload_commands()
+
+// Must be done here so that our holder's get_extension calls work.
+/datum/extension/network_device/post_construction()
+	. = ..()
+	if(_autojoin)
+		SSnetworking.try_connect(src)
 
 /datum/extension/network_device/Destroy()
 	disconnect()
