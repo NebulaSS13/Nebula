@@ -250,7 +250,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
 #endif
 
-/datum/map/proc/build_exoplanets()
+/datum/map/proc/build_planets()
 #ifdef UNIT_TEST
 	report_progress("Unit testing, so not loading planets.")
 	return
@@ -274,7 +274,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	report_progress("Finished instantiating planets.")
 #endif
 
-///Returns a list of all the planet templates we get to pick from
+///Returns an associative list of all the planet templates we get to pick from. The key is the template name, and the value is the template instance.
 /datum/map/proc/get_all_planet_templates()
 	return SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET) | SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_PLANET)
 
