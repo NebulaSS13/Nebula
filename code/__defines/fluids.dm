@@ -33,5 +33,5 @@
 	add_overlay(SSfluids.fluid_images[img_state]);
 
 #define FLUID_MAX_ALPHA 200
-#define FLUID_MIN_ALPHA 45
+#define FLUID_MIN_ALPHA 96
 #define TANK_WATER_MULTIPLIER 5
