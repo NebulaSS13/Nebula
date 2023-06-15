@@ -1,5 +1,5 @@
 /*
-(VOX) HEIST ROUNDTYPE
+HEIST ROUNDTYPE
 */
 
 /datum/game_mode/heist

@@ -1,7 +1,4 @@
-/*VOX SLUG
-Small, little HP, poisonous.
-*/
-
+// A SLUG: Small, little HP, poisonous.
 /mob/living/simple_animal/hostile/slug
 	name = "slug"
 	desc = "A vicious, viscous little creature, it has a mouth of too many teeth and a penchant for blood."
