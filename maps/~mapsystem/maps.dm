@@ -294,6 +294,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		//Let the planet know it can start processing daycycle and stuff
 		var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[world.maxz]
 		P.begin_processing()
+#ifdef UNIT_TEST
+		log_unit_test("Loaded template '[PT]' ([PT.type]) at Z-level [world.maxz] with a tallness of [PT.tallness]")
+#endif
 
 /datum/map/proc/get_network_access(var/network)
 	return 0
