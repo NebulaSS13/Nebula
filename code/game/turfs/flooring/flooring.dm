@@ -424,4 +424,7 @@
 	floor_smooth = SMOOTH_NONE
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
-	height = -FLUID_OVER_MOB_HEAD * 2
+	height = -FLUID_OVER_MOB_HEAD - 50
+
+/decl/flooring/pool/deep
+	height = -FLUID_DEEP - 50
