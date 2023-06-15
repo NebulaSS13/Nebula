@@ -11,6 +11,10 @@
 		return planet.atmosphere.temperature <= maximum_temperature
 	return TCMB <= maximum_temperature
 
+/decl/strata/proc/is_valid_level_stratum(datum/level_data/level_data)
+	var/temperature_to_check = istype(level_data.exterior_atmosphere) ? level_data.exterior_atmosphere.temperature : level_data.exterior_atmos_temp
+	return (temperature_to_check || TCMB) <= maximum_temperature
+
 /decl/strata/Initialize()
 	. = ..()
 
