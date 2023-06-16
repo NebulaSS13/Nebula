@@ -6,7 +6,13 @@
 
 	if (HasMovementHandler(/datum/movement_handler/mob/transformation/))
 		return
-	if (!loc)
+
+	// update the current life tick, can be used to e.g. only do something every 4 ticks
+	// This is handled before the loc check as unit tests use this to delay until the mob
+	// has processed a few times. Not really sure why but heigh ho.
+	life_tick++
+
+	if(!loc)
 		return
 
 	if(machine && (machine.CanUseTopic(src, machine.DefaultTopicState()) == STATUS_CLOSE)) // unsure if this is a good idea, but using canmousedrop was ???
@@ -21,6 +27,7 @@
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
+	handle_stasis()
 
 	if(stat != DEAD)
 		aura_check(AURA_TYPE_LIFE)

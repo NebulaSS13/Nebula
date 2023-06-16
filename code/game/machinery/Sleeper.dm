@@ -139,9 +139,8 @@
 		else
 			toggle_lavage()
 
-
-	if(iscarbon(occupant) && stasis > 1)
-		occupant.SetStasis(stasis)
+	if(isliving(occupant) && stasis > 1)
+		occupant.set_stasis(stasis)
 
 /obj/machinery/sleeper/on_update_icon()
 	cut_overlays()

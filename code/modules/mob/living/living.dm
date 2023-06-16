@@ -1113,3 +1113,8 @@ default behaviour is:
 
 /mob/living/proc/get_seconds_until_next_special_ability_string()
 	return ticks2readable(next_special_ability - world.time)
+
+/mob/living/proc/handle_some_updates()
+	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
+	return life_tick <= 5 || !timeofdeath || (timeofdeath >= 5 && (world.time-timeofdeath) <= 10 MINUTES)
+
