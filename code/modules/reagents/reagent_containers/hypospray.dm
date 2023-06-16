@@ -40,7 +40,7 @@
 	if (!istype(M))
 		return
 
-	var/allow = M.can_inject(user, check_zone(user.zone_sel.selecting, M))
+	var/allow = M.can_inject(user, check_zone(user.get_target_zone(), M))
 	if(!allow)
 		return
 

@@ -30,7 +30,7 @@
 	use_description = "Grab a patient, target the chest, then switch to help intent and use the grab on them to perform a check for wounds and damage."
 
 /decl/psionic_power/redaction/skinsight/invoke(var/mob/living/user, var/mob/living/target)
-	if(user.zone_sel.selecting != BP_CHEST)
+	if(user.get_target_zone() != BP_CHEST)
 		return FALSE
 	. = ..()
 	if(.)
@@ -51,7 +51,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, user.zone_sel.selecting)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, user.get_target_zone())
 
 		if(!E)
 			to_chat(user, SPAN_WARNING("They are missing that limb."))
@@ -159,7 +159,7 @@
 	admin_log = FALSE
 
 /decl/psionic_power/revive/invoke(var/mob/living/user, var/mob/living/target)
-	if(!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_HEAD)
+	if(!isliving(target) || !istype(target) || user.get_target_zone() != BP_HEAD)
 		return FALSE
 	. = ..()
 	if(.)

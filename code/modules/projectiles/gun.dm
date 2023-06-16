@@ -223,7 +223,7 @@
 	Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/gun/attack(atom/A, mob/living/user, def_zone)
-	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
+	if (A == user && user.get_target_zone() == BP_MOUTH && !mouthshoot)
 		handle_suicide(user)
 	else if(user.a_intent != I_HURT && user.aiming && user.aiming.active) //if aim mode, don't pistol whip
 		if (user.aiming.aiming_at != A)
@@ -707,7 +707,7 @@
 		else
 			M.setClickCooldown(DEFAULT_QUICK_COOLDOWN) // Spam prevention, essentially.
 			M.visible_message(SPAN_DANGER("\The [M] pulls the trigger reflexively!"))
-			Fire(aiming_at, M, target_zone = M.zone_sel.selecting)
+			Fire(aiming_at, M, target_zone = M.get_target_zone())
 			if(M.aiming)
 				M.aiming.toggle_active(FALSE, TRUE)
 

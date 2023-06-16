@@ -31,7 +31,7 @@
 
 /obj/item/storage/pill_bottle/proc/pop_pill(var/mob/user)
 
-	var/target_mouth = (user.zone_sel?.selecting == BP_MOUTH)
+	var/target_mouth = (user.get_target_zone() == BP_MOUTH)
 	if(target_mouth)
 		if(!user.can_eat())
 			to_chat(user, SPAN_WARNING("You can't eat anything!"))

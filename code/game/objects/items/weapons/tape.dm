@@ -39,7 +39,7 @@
 /obj/item/stack/tape_roll/duct_tape/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(!istype(H))
 		return
-	if(user.zone_sel.selecting == BP_EYES)
+	if(user.get_target_zone() == BP_EYES)
 
 		if(!GET_EXTERNAL_ORGAN(H, BP_HEAD))
 			to_chat(user, SPAN_WARNING("\The [H] doesn't have a head."))
@@ -77,7 +77,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), slot_glasses_str)
 		return TRUE
 
-	else if(user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
+	else if(user.get_target_zone() == BP_MOUTH || user.get_target_zone() == BP_HEAD)
 		if(!GET_EXTERNAL_ORGAN(H, BP_HEAD))
 			to_chat(user, SPAN_WARNING("\The [H] doesn't have a head."))
 			return
@@ -115,7 +115,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), slot_wear_mask_str)
 		return TRUE
 
-	else if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
+	else if(user.get_target_zone() == BP_R_HAND || user.get_target_zone() == BP_L_HAND)
 		if(!can_use(4))
 			to_chat(user, SPAN_WARNING("There's not enough [plural_name] in your [src] to tape \the [H]'s hands! You need at least 4 [plural_name]."))
 			return
@@ -126,7 +126,7 @@
 			qdel(T)
 		return TRUE
 
-	else if(user.zone_sel.selecting == BP_CHEST)
+	else if(user.get_target_zone() == BP_CHEST)
 		var/obj/item/clothing/suit/space/suit = H.get_equipped_item(slot_wear_suit_str)
 		if(istype(suit))
 			suit.attackby(src, user)//everything is handled by attackby

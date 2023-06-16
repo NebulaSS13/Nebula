@@ -93,7 +93,7 @@
 
 /obj/item/flashlight/attack(mob/living/M, mob/living/user)
 	add_fingerprint(user)
-	if(on && user.zone_sel.selecting == BP_EYES)
+	if(on && user.get_target_zone() == BP_EYES)
 
 		if((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head

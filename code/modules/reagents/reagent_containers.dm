@@ -232,7 +232,7 @@
 	return 1
 
 /obj/item/chems/do_surgery(mob/living/carbon/M, mob/living/user)
-	if(user.zone_sel.selecting != BP_MOUTH) //in case it is ever used as a surgery tool
+	if(user.get_target_zone() != BP_MOUTH) //in case it is ever used as a surgery tool
 		return ..()
 
 /obj/item/chems/examine(mob/user)
