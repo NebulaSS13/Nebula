@@ -44,9 +44,11 @@
 	host.status_flags |= PASSEMOTES
 	forceMove(host)
 
-	for(var/obj/thing in hud_elements)
-		thing.alpha =        255
-		thing.invisibility = 0
+	var/datum/hud/animal/borer/borer_hud = hud_used
+	if(istype(borer_hud))
+		for(var/obj/thing in borer_hud.borer_hud_elements)
+			thing.alpha =        255
+			thing.invisibility = 0
 
 	//Update their traitor status.
 	if(host.mind && !neutered)
