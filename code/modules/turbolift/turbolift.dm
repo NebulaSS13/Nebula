@@ -16,7 +16,7 @@
 	var/list/doors = list()                             // Doors inside the lift structure.
 	var/list/queued_floors = list()                     // Where are we moving to next?
 	var/list/floors = list()                            // All floors in this system.
-	var/move_delay = 3 SECONDS                          // Time between floor changes.
+	var/move_delay = 3 SECONDS                          // Default time between floor changes, can be overridden per-floor
 	var/floor_wait_delay = 9 SECONDS                    // Time to wait at floor stops.
 	var/obj/structure/lift/panel/control_panel_interior // Lift control panel.
 	var/doors_closing = 0								// Whether doors are in the process of closing
@@ -59,7 +59,7 @@
 				queued_floors.Cut()
 				return PROCESS_KILL
 			else if(!next_process)
-				next_process = world.time + move_delay
+				next_process = world.time + (isnull(current_floor?.delay_time) ?  move_delay : current_floor.delay_time)
 		if(LIFT_WAITING_A)
 			var/area/turbolift/origin = locate(current_floor.area_ref)
 			if(origin.lift_announce_str)
