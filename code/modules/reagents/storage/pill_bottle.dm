@@ -23,6 +23,8 @@
 
 	var/pop_sound = 'sound/effects/peelz.ogg'
 	var/wrapper_color
+	/// If a string, a label with this value will be added.
+	var/labeled_name = null
 
 /obj/item/storage/pill_bottle/remove_from_storage(obj/item/W, atom/new_location, NoUpdate)
 	. = ..()
@@ -68,6 +70,8 @@
 /obj/item/storage/pill_bottle/Initialize()
 	. = ..()
 	update_icon()
+	if(istext(labeled_name))
+		attach_label(null, null, labeled_name)
 
 /obj/item/storage/pill_bottle/on_update_icon()
 	. = ..()
