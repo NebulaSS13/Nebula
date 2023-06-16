@@ -37,7 +37,6 @@
 
 /mob/proc/remove_screen_obj_references()
 	QDEL_NULL_SCREEN(hands)
-	QDEL_NULL_SCREEN(purged)
 	QDEL_NULL_SCREEN(internals)
 	QDEL_NULL_SCREEN(oxygen)
 	QDEL_NULL_SCREEN(toxin)

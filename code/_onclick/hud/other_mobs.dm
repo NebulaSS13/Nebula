@@ -31,11 +31,5 @@
 		mymob.zone_sel.overlays.len = 0
 		mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 
-		mymob.purged = new /obj/screen()
-		mymob.purged.icon = 'icons/mob/screen1_construct.dmi'
-		mymob.purged.icon_state = "purge0"
-		mymob.purged.SetName("purged")
-		mymob.purged.screen_loc = ui_construct_purge
-
 	mymob.client.screen = list()
-	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.zone_sel, mymob.purged)
+	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.zone_sel)
