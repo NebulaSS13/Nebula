@@ -163,6 +163,7 @@
 #include "code\_onclick\hud\ability_screen_objects.dm"
 #include "code\_onclick\hud\action.dm"
 #include "code\_onclick\hud\ai.dm"
+#include "code\_onclick\hud\ai_hud.dm"
 #include "code\_onclick\hud\ai_screen_objects.dm"
 #include "code\_onclick\hud\animal.dm"
 #include "code\_onclick\hud\deity.dm"
