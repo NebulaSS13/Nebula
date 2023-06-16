@@ -60,30 +60,11 @@
 
 /mob/living/simple_animal/borer/Login()
 	. = ..()
-	if(client)
-		client.screen |= hud_elements
-		client.screen |= hud_intent_selector
 	if(mind && !neutered)
 		var/decl/special_role/borer/borers = GET_DECL(/decl/special_role/borer)
 		borers.add_antagonist(mind)
 
-/mob/living/simple_animal/borer/Logout()
-	. = ..()
-	if(client)
-		client.screen -= hud_elements
-		client.screen -= hud_intent_selector
-
 /mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
-	hud_intent_selector =  new
-	hud_inject_chemicals = new
-	hud_leave_host =       new
-	hud_elements = list(
-		hud_inject_chemicals,
-		hud_leave_host
-	)
-	if(!neutered)
-		hud_toggle_control = new
-		hud_elements += hud_toggle_control
 
 	. = ..()
 
@@ -96,17 +77,6 @@
 
 	if(!roundstart)
 		request_player()
-
-/mob/living/simple_animal/borer/Destroy()
-	if(client)
-		client.screen -= hud_elements
-		client.screen -= hud_intent_selector
-	QDEL_NULL_LIST(hud_elements)
-	QDEL_NULL(hud_intent_selector)
-	hud_toggle_control =   null
-	hud_inject_chemicals = null
-	hud_leave_host =       null
-	. = ..()
 
 /mob/living/simple_animal/borer/proc/set_borer_name()
 	truename = "[borer_names[min(generation, borer_names.len)]] [random_id("borer[generation]", 1000, 9999)]"
@@ -237,16 +207,20 @@
 #define COLOR_BORER_RED "#ff5555"
 /mob/living/simple_animal/borer/proc/set_ability_cooldown(var/amt)
 	set_special_ability_cooldown(amt)
-	for(var/obj/thing in hud_elements)
-		thing.color = COLOR_BORER_RED
+	var/datum/hud/animal/borer/borer_hud = hud_used
+	if(istype(borer_hud))
+		for(var/obj/thing in borer_hud.borer_hud_elements)
+			thing.color = COLOR_BORER_RED
 	addtimer(CALLBACK(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)
 #undef COLOR_BORER_RED
 
 /mob/living/simple_animal/borer/proc/leave_host()
 
-	for(var/obj/thing in hud_elements)
-		thing.alpha =        0
-		thing.invisibility = INVISIBILITY_MAXIMUM
+	var/datum/hud/animal/borer/borer_hud = hud_used
+	if(istype(borer_hud))
+		for(var/obj/thing in borer_hud.borer_hud_elements)
+			thing.alpha =        0
+			thing.invisibility = INVISIBILITY_MAXIMUM
 
 	if(!host) return
 
