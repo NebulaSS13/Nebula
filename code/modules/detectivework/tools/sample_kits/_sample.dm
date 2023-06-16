@@ -30,7 +30,7 @@
 		for(var/T in possible_evidence_types)
 			var/datum/forensics/F = forensics.evidence[T]
 			if(F)
-				LAZYADD(evidence, F.copy())
+				LAZYADD(evidence, F.Clone())
 				if(F.remove_on_transfer)
 					forensics.remove_data(T)
 
