@@ -9,6 +9,7 @@
 		TOOL_PROP_USES            = -1, \
 		TOOL_PROP_PEN_SIG         = null,\
 		TOOL_PROP_PEN_SHADE_COLOR = "black",\
+		TOOL_PROP_PEN_FONT        = PEN_FONT_DEFAULT,\
 		)
 
 /**Returns the signature to use when signing with a pen. Meant to help deal with chameleon pens and regular pens. */

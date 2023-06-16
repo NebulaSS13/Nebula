@@ -15,6 +15,8 @@
 	var/medium_name        = "ink"                               //Whatever the pen uses to leave its mark. Used in text strings.
 	var/max_uses           = -1                                  //-1 for unlimited uses.
 	var/pen_quality        = TOOL_QUALITY_DEFAULT                //What will be set as tool quality for the pen
+	///The type of font this pen's written text will be represented with
+	var/pen_font           = PEN_FONT_DEFAULT
 
 /obj/item/pen/Initialize(ml, material_key)
 	. = ..()
@@ -28,7 +30,8 @@
 				TOOL_PROP_COLOR_NAME = stroke_colour_name,
 				TOOL_PROP_COLOR      = stroke_colour,
 				TOOL_PROP_PEN_FLAG   = pen_flag,
-				TOOL_PROP_USES       = max_uses)))
+				TOOL_PROP_USES       = max_uses,
+				TOOL_PROP_PEN_FONT   = pen_font)))
 	make_pen_description()
 
 /obj/item/pen/attack(atom/A, mob/user, target_zone)
