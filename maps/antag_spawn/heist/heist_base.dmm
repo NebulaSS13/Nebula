@@ -227,7 +227,7 @@
 "aK" = (
 /obj/structure/bed,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/sign/monkey_painting{
+/obj/structure/sign/painting/monkey_painting{
 	pixel_x = -28;
 	pixel_y = 4
 	},

@@ -42,7 +42,7 @@
 "l" = (
 /obj/structure/table/marble,
 /obj/item/flashlight/lamp,
-/obj/structure/sign/monkey_painting{
+/obj/structure/sign/painting/monkey_painting{
 	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/dark,
@@ -91,7 +91,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
 "G" = (
-/obj/structure/sign/science_1{
+/obj/structure/sign/department/science_1{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,

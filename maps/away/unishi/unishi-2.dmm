@@ -255,7 +255,7 @@
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "aO" = (
-/obj/structure/sign/chemistry{
+/obj/structure/sign/department/chemistry{
 	dir = 4
 	},
 /turf/simulated/wall/r_wall,
@@ -1633,7 +1633,7 @@
 /area/unishi/xenobio)
 "eF" = (
 /obj/effect/wingrille_spawn/reinforced,
-/obj/structure/sign/xenobio_3,
+/obj/structure/sign/department/xenobio_3,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/xenobio)
@@ -1674,7 +1674,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/hydro)
 "eK" = (
-/obj/item/sign/medipolma,
+/obj/item/sign/diploma/fake/medical,
 /turf/simulated/wall/titanium,
 /area/unishi/xenobio)
 "eL" = (
@@ -1702,7 +1702,7 @@
 /area/unishi/xenobio)
 "eP" = (
 /obj/effect/wingrille_spawn/reinforced,
-/obj/structure/sign/xenobio_1{
+/obj/structure/sign/department/xenobio_1{
 	dir = 4
 	},
 /obj/machinery/door/firedoor,

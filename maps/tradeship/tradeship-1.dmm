@@ -2027,7 +2027,7 @@
 /obj/structure/disposalpipe/segment/bent{
 	dir = 4
 	},
-/obj/structure/sign/science_1{
+/obj/structure/sign/department/science_1{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled,
@@ -2475,7 +2475,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/structure/sign/xenoflora{
+/obj/structure/sign/department/xenoflora{
 	pixel_x = -30
 	},
 /obj/structure/disposalpipe/segment,

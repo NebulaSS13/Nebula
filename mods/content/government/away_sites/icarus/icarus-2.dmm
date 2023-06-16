@@ -1000,7 +1000,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dk" = (
-/obj/structure/sign/science_2{
+/obj/structure/sign/department/science_2{
 	pixel_x = 30
 	},
 /turf/simulated/floor/tiled,

@@ -768,7 +768,7 @@
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "cs" = (
-/obj/structure/sign/bluecross_1,
+/obj/structure/sign/department/bluecross_1,
 /turf/simulated/wall,
 /area/unishi/med)
 "ct" = (

@@ -1076,7 +1076,7 @@
 /area/nexus/engineering)
 "jH" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
-/obj/structure/sign/janitor{
+/obj/structure/sign/department/janitor{
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled,
