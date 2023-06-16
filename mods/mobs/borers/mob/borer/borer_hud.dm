@@ -1,11 +1,11 @@
-/datum/hud/animal/borer
+/datum/hud/borer
 	var/list/borer_hud_elements = list()
 	var/obj/screen/intent/hud_intent_selector
 	var/obj/screen/borer/toggle_host_control/hud_toggle_control
 	var/obj/screen/borer/inject_chemicals/hud_inject_chemicals
 	var/obj/screen/borer/leave_host/hud_leave_host
 
-/datum/hud/animal/borer/Destroy()
+/datum/hud/borer/Destroy()
 	QDEL_NULL_LIST(borer_hud_elements)
 	hud_toggle_control =   null
 	hud_inject_chemicals = null
@@ -13,7 +13,7 @@
 	QDEL_NULL(hud_intent_selector)
 	. = ..()
 
-/datum/hud/animal/borer/FinalizeInstantiation()
+/datum/hud/borer/FinalizeInstantiation()
 	hud_intent_selector =  new
 	adding = list(hud_intent_selector)
 	hud_inject_chemicals = new
@@ -28,14 +28,15 @@
 			hud_toggle_control = new
 			borer_hud_elements += hud_toggle_control
 	adding += borer_hud_elements
-	. = ..()
+	if(mymob?.client)
+		mymob.client.screen |= adding
 
 /mob/living/simple_animal/borer
-	hud_type = /datum/hud/animal/borer
+	hud_type = /datum/hud/borer
 
 /mob/living/simple_animal/borer/proc/reset_ui_callback()
 	if(!is_on_special_ability_cooldown())
-		var/datum/hud/animal/borer/borer_hud = hud_used
+		var/datum/hud/borer/borer_hud = hud_used
 		if(istype(borer_hud))
 			for(var/obj/thing in borer_hud.borer_hud_elements)
 				thing.color = null

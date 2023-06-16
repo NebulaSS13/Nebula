@@ -44,7 +44,7 @@
 	host.status_flags |= PASSEMOTES
 	forceMove(host)
 
-	var/datum/hud/animal/borer/borer_hud = hud_used
+	var/datum/hud/borer/borer_hud = hud_used
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
 			thing.alpha =        255
