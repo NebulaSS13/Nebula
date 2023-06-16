@@ -260,6 +260,10 @@
 	icon_state = "pod21"
 	var/smell_clean_time = 10 MINUTES
 
+// Don't overwrite the custom name.
+/obj/item/chems/pill/detergent/update_container_name()
+	return
+
 /obj/item/chems/pill/detergent/populate_reagents()
 	reagents.add_reagent(/decl/material/gas/ammonia, 30)
 
@@ -267,7 +271,10 @@
 	name = "master flavorpod item"
 	desc = "A cellulose pod containing some kind of flavoring."
 	icon_state = "pill4"
-	presentation_flags = PRESENTATION_FLAG_NAME
+
+// Don't overwrite the custom names.
+/obj/item/chems/pill/pod/update_container_name()
+	return
 
 /obj/item/chems/pill/pod/cream
 	name = "creamer pod"

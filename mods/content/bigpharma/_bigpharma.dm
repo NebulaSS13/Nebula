@@ -53,6 +53,9 @@ var/global/list/reagent_names_to_icon_state
 			chems.label_text = new_name
 			chems.update_container_name()
 		else
+			if(has_extension(thing, /datum/extension/labels))
+				var/datum/extension/labels/L = get_extension(thing, /datum/extension/labels)
+				L.RemoveAllLabels()
 			thing.attach_label(null, null, new_name)
 	if(meds.container_description)
 		thing.desc = meds.container_description
