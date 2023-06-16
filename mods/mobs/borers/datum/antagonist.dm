@@ -4,7 +4,7 @@
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_RANDSPAWN | ANTAG_OVERRIDE_JOB
 
 	mob_path = /mob/living/simple_animal/borer
-	welcome_text = "Use your Infest power to crawl into the ear of a host and fuse with their brain. You can only take control temporarily, and at risk of hurting your host, so be clever and careful; your host is encouraged to help you however they can. Talk to your fellow borers with ,z."
+	welcome_text = "Click a target while on GRAB intent to crawl into their ear and infiltrate their brain. You can only take control temporarily, and at risk of hurting your host, so be clever and careful; your host is encouraged to help you however they can. Talk to your host with Say, and your fellow borers with ,z."
 	antag_indicator = "hudborer"
 	antaghud_indicator = "hudborer"
 

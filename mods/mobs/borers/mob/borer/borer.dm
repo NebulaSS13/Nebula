@@ -207,7 +207,7 @@
 #define COLOR_BORER_RED "#ff5555"
 /mob/living/simple_animal/borer/proc/set_ability_cooldown(var/amt)
 	set_special_ability_cooldown(amt)
-	var/datum/hud/animal/borer/borer_hud = hud_used
+	var/datum/hud/borer/borer_hud = hud_used
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
 			thing.color = COLOR_BORER_RED
@@ -216,7 +216,7 @@
 
 /mob/living/simple_animal/borer/proc/leave_host()
 
-	var/datum/hud/animal/borer/borer_hud = hud_used
+	var/datum/hud/borer/borer_hud = hud_used
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
 			thing.alpha =        0
