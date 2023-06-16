@@ -227,11 +227,9 @@
 		return zone.air
 
 	// Exterior turf global atmosphere
-	if(external_atmosphere_participation && is_outside())
+	if((!air && isnull(initial_gas)) || (external_atmosphere_participation && is_outside()))
 		var/datum/level_data/level = SSmapping.levels_by_z[z]
-		var/datum/gas_mixture/gas = level?.get_exterior_atmosphere()
-		if(!gas)
-			return
+		var/datum/gas_mixture/gas = level.get_exterior_atmosphere()
 		var/initial_temperature = gas.temperature
 		if(weather)
 			initial_temperature = weather.adjust_temperature(initial_temperature)
