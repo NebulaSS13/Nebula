@@ -18,7 +18,7 @@
 	name = "Apex-Curated"
 	description = "It is rare, but not completely unheard of, for the apex to take a direct hand in the lives of \
 	their 'children'. Those vox who are singled out and marked by the machine-gods of the ark enjoy a heightened social \
-	standing, as they are seen as 'untouchable' in a way, but in turn are detatched from their previous social network. \
+	standing, as they are seen as 'untouchable' in a way, but in turn are detached from their previous social network. \
 	Being god-touched is lonely work and often backbreakingly difficult, but it is not without rewards. Physical and mental \
 	augmentation, ancient auralis technology and mind-enhancing persona editing may all be distributed by the apex to their \
 	favoured pawns."
