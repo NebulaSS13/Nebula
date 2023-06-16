@@ -83,8 +83,8 @@
 /obj/structure/closet/body_bag/cryobag/Process()
 	if(stasis_power < 2)
 		return PROCESS_KILL
-	var/mob/living/carbon/human/H = locate() in src
-	if(!H)
+	var/mob/living/patient = locate() in src
+	if(!patient)
 		return PROCESS_KILL
 	degradation_time--
 	if(degradation_time < 0)
@@ -93,8 +93,8 @@
 		animate(src, color = color_matrix_saturation(get_saturation()), time = 10)
 		update_icon()
 
-	if(H.stasis_sources[STASIS_CRYOBAG] != stasis_power)
-		H.SetStasis(stasis_power, STASIS_CRYOBAG)
+	if(LAZYACCESS(patient.stasis_sources, STASIS_CRYOBAG) != stasis_power)
+		patient.set_stasis(stasis_power, STASIS_CRYOBAG)
 
 /obj/structure/closet/body_bag/cryobag/return_air() //Used to make stasis bags protect from vacuum.
 	if(airtank)

@@ -52,3 +52,7 @@
 	var/stress = 0
 	var/currently_updating_stress = FALSE
 	var/list/stressors
+
+	var/life_tick
+	var/list/stasis_sources
+	var/stasis_value

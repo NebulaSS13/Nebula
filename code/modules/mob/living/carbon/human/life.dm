@@ -47,10 +47,6 @@
 
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
 
-	//TODO: seperate this out
-	// update the current life tick, can be used to e.g. only do something every 4 ticks
-	life_tick++
-
 	// This is not an ideal place for this but it will do for now.
 	if(wearing_rig && wearing_rig.offline)
 		wearing_rig = null
@@ -63,7 +59,7 @@
 	voice = GetVoice()
 
 	//No need to update all of these procs if the guy is dead.
-	if(stat != DEAD && !InStasis())
+	if(stat != DEAD && !is_in_stasis())
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
@@ -114,11 +110,6 @@
 	if(client && client.is_afk())
 		if(old_stat == UNCONSCIOUS && stat == CONSCIOUS)
 			playsound_local(null, 'sound/effects/bells.ogg', 100, is_global=TRUE)
-
-/mob/living/carbon/human/proc/handle_some_updates()
-	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
-		return 0
-	return 1
 
 /mob/living/carbon/human/breathe()
 	var/species_organ = species.breathing_organ
@@ -398,7 +389,7 @@
 			burn_dam = COLD_DAMAGE_LEVEL_2
 		else
 			burn_dam = COLD_DAMAGE_LEVEL_3
-		SetStasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
+		set_stasis(get_cryogenic_factor(bodytemperature), STASIS_COLD)
 		if(!has_chemical_effect(CE_CRYO, 1))
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 			fire_alert = max(fire_alert, 1)

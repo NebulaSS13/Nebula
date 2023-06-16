@@ -2351,6 +2351,7 @@
 #include "code\modules\mob\living\login.dm"
 #include "code\modules\mob\living\logout.dm"
 #include "code\modules\mob\living\say.dm"
+#include "code\modules\mob\living\stasis.dm"
 #include "code\modules\mob\living\stress.dm"
 #include "code\modules\mob\living\bot\bot.dm"
 #include "code\modules\mob\living\bot\cleanbot.dm"
