@@ -384,7 +384,7 @@
 //////////////////////////////////////////////////////////////////
 //	robotic organ detachment surgery step
 //////////////////////////////////////////////////////////////////
-/decl/surgery_step/robotics/detatch_organ_robotic
+/decl/surgery_step/robotics/detach_organ_robotic
 	name = "Decouple prosthetic organ"
 	description = "This procedure decouples a robotic internal organ for removal."
 	allowed_tools = list(
@@ -394,7 +394,7 @@
 	max_duration = 110
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
 
-/decl/surgery_step/robotics/detatch_organ_robotic/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+/decl/surgery_step/robotics/detach_organ_robotic/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/list/attached_organs
 	for(var/obj/item/organ/I in target.get_internal_organs())
 		if(I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
@@ -406,12 +406,12 @@
 		return FALSE
 	return show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 
-/decl/surgery_step/robotics/detatch_organ_robotic/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
+/decl/surgery_step/robotics/detach_organ_robotic/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts to decouple [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].", \
 	"You start to decouple [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool]." )
 	..()
 
-/decl/surgery_step/robotics/detatch_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+/decl/surgery_step/robotics/detach_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] has decoupled [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have decoupled [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
 	var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(target, LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
@@ -419,7 +419,7 @@
 	if(I && istype(I) && istype(affected))
 		target.remove_organ(I, detach = TRUE)
 
-/decl/surgery_step/robotics/detatch_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+/decl/surgery_step/robotics/detach_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips, unseating \the [tool].</span>", \
 	"<span class='warning'>Your hand slips, unseating \the [tool].</span>")
 

@@ -34,7 +34,7 @@
 	allowed_tools = list(/obj/item/stack/medical/resin = 100)
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_FLESH
 
-/decl/surgery_step/internal/detatch_organ/crystal
+/decl/surgery_step/internal/detach_organ/crystal
 	name = "Detach crystalline internal organ"
 	description = "This procedure severs a crystalline internal organ, allowing it to be removed."
 	allowed_tools = list(TOOL_DRILL = 100)

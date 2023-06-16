@@ -28,8 +28,14 @@
 			hud_toggle_control = new
 			borer_hud_elements += hud_toggle_control
 	adding += borer_hud_elements
-	if(mymob?.client)
-		mymob.client.screen |= adding
+	if(mymob)
+		var/mob/living/simple_animal/borer/borer = mymob
+		if(istype(borer) && borer.host)
+			for(var/obj/thing in borer_hud_elements)
+				thing.alpha =        255
+				thing.invisibility = 0
+		if(mymob.client)
+			mymob.client.screen |= adding
 
 /mob/living/simple_animal/borer
 	hud_type = /datum/hud/borer
@@ -167,7 +173,7 @@
 			to_chat(worm.host, SPAN_DANGER("Something slimy wiggles out of your ear and plops to the ground!"))
 			if(!worm.neutered)
 				to_chat(worm.host, SPAN_DANGER("As though waking from a dream, you shake off the insidious mind control of the brain worm. Your thoughts are your own again."))
-		worm.detatch()
+		worm.detach_from_host()
 		worm.leave_host()
 
 	return TRUE

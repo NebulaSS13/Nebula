@@ -12,7 +12,7 @@
 	. = ..()
 	var/mob/living/simple_animal/borer/borer = HAS_BRAIN_WORMS(src)
 	if(borer)
-		borer.detatch()
+		borer.detach_from_host()
 		borer.leave_host()
 
 /mob/living/carbon/human/handle_hud_list()
@@ -33,7 +33,7 @@
 	if(istype(owner))
 		var/mob/living/simple_animal/borer/borer = HAS_BRAIN_WORMS(owner)
 		if(borer)
-			borer.detatch()
+			borer.detach_from_host()
 	. = ..()
 
 /mob/living/carbon/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
@@ -42,7 +42,7 @@
 		var/mob/living/simple_animal/borer/worm = implant
 		if(worm.controlling)
 			release_control()
-		worm.detatch()
+		worm.detach_from_host()
 		worm.leave_host()
 
 /obj/item/glass_jar/Initialize()
@@ -52,5 +52,5 @@
 /mob/death()
 	var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
 	if(B && B.controlling)
-		B.detatch()
+		B.detach_from_host()
 	. = ..()

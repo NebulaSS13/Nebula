@@ -86,9 +86,9 @@
 			I.take_internal_damage(dam_amt)
 
 //////////////////////////////////////////////////////////////////
-//	 Organ detatchment surgery step
+//	 Organ detachment surgery step
 //////////////////////////////////////////////////////////////////
-/decl/surgery_step/internal/detatch_organ
+/decl/surgery_step/internal/detach_organ
 	name = "Detach organ"
 	description = "This procedure detaches an internal organ for removal."
 	allowed_tools = list(TOOL_SCALPEL = 100)
@@ -96,7 +96,7 @@
 	max_duration = 110
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 
-/decl/surgery_step/internal/detatch_organ/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+/decl/surgery_step/internal/detach_organ/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/list/attached_organs
 	for(var/obj/item/organ/I in target.get_internal_organs())
 		if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
@@ -111,13 +111,13 @@
 		return show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	return FALSE
 
-/decl/surgery_step/internal/detatch_organ/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
+/decl/surgery_step/internal/detach_organ/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts to separate [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].", \
 	"You start to separate [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool]." )
 	target.custom_pain("Someone's ripping out your [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)]!",100)
 	..()
 
-/decl/surgery_step/internal/detatch_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+/decl/surgery_step/internal/detach_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] has separated [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have separated [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
 	var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(target, LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
@@ -126,7 +126,7 @@
 		//First only detach the organ, without fully removing it
 		target.remove_organ(I, FALSE, TRUE)
 
-/decl/surgery_step/internal/detatch_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+/decl/surgery_step/internal/detach_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		user.visible_message("<span class='warning'>[user]'s hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>", \

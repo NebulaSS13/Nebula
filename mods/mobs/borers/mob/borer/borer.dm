@@ -153,7 +153,7 @@
 	if (client.statpanel == "Status")
 		stat("Chemicals", chemicals)
 
-/mob/living/simple_animal/borer/proc/detatch()
+/mob/living/simple_animal/borer/proc/detach_from_host()
 
 	if(!host || !controlling) return
 
@@ -162,7 +162,7 @@
 		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 		LAZYREMOVE(head.implants, src)
 
-	controlling = 0
+	controlling = FALSE
 
 	host.remove_language(/decl/language/corticalborer)
 	host.verbs -= /mob/living/carbon/proc/release_control
