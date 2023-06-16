@@ -47,18 +47,19 @@
 
 ///A display for diploma details
 /obj/structure/sign/plaque/diploma
-	name       = "laminated diploma"
-	desc       = "A wall-mounted laminated diploma."
-	icon       = 'icons/obj/signs/plaques.dmi'
-	icon_state = "goldenplaque"
-	material   = /decl/material/solid/wood/maple
-	matter     = list(
+	abstract_type = /obj/structure/sign/plaque/diploma
+	name          = "laminated diploma"
+	desc          = "A wall-mounted laminated diploma."
+	icon          = 'icons/obj/signs/plaques.dmi'
+	icon_state    = "goldenplaque"
+	material      = /decl/material/solid/wood/maple
+	matter        = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/paper = MATTER_AMOUNT_TRACE,
 	)
 	parts_type = /obj/item/sign/diploma
 	///Details on the diploma this plaque contains. Can be a path on definition, turns into an instance at runtime.
-	var/datum/diploma_details/details
+	var/datum/diploma_details/details = /datum/diploma_details
 
 /obj/structure/sign/plaque/diploma/Initialize(ml, _mat, _reinf_mat)
 	//Must be done before parent init
@@ -80,15 +81,16 @@
 
 ///A displayable diploma
 /obj/item/sign/diploma
-	name      = "diploma"
-	sign_type = /obj/structure/sign/plaque/diploma
-	material  = /decl/material/solid/wood/maple
-	matter    = list(
+	abstract_type = /obj/item/sign/diploma
+	name          = "diploma"
+	sign_type     = /obj/structure/sign/plaque/diploma
+	material      = /decl/material/solid/wood/maple
+	matter        = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/paper = MATTER_AMOUNT_TRACE,
 	)
 	///Details on the diploma this plaque contains.  Can be a path on definition, turns into an instance at runtime.
-	var/datum/diploma_details/details
+	var/datum/diploma_details/details = /datum/diploma_details
 
 /obj/item/sign/diploma/Initialize(ml, material_key)
 	. = ..()
@@ -145,8 +147,14 @@
 // Fake Diploma
 ////////////////////////////////////////////////////////
 
+/datum/diploma_details/fake
+	abstract_type = /datum/diploma_details/fake
+
 /datum/diploma_details/fake/get_description_string()
 	. = "[..()] You don't recognize the establishment though, and half of latin words they used do not actually exist."
+
+/obj/structure/sign/plaque/diploma/fake
+	abstract_type = /obj/structure/sign/plaque/diploma/fake
 
 ////////////////////////////////////////////////////////
 // Medical Diploma
