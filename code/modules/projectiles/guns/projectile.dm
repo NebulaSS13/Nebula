@@ -90,8 +90,7 @@
 		var/zone = BP_CHEST
 		if(isliving(firer))
 			var/mob/living/user = firer
-			if(user.zone_sel)
-				zone = user.zone_sel.selecting
+			zone = user.get_target_zone() || zone
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, zone)
 		if(E)
 			chambered.put_residue_on(E)

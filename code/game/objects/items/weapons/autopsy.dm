@@ -26,7 +26,7 @@
 		var/mob/living/carbon/human/M = A
 		set_target(M, user)
 		timeofdeath = M.timeofdeath
-		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(M, user.zone_sel.selecting)
+		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(M, user.get_target_zone())
 		if(!S)
 			visible_message(SPAN_WARNING("[src] states, 'The targeted bodypart is missing.'"))
 			return
@@ -42,8 +42,8 @@
 	else if(istype(A, /obj/item/organ/external))
 		set_target(A, user)
 		add_data(A)
-	
-	scan_title = "Autopsy Report ([target_name])" 
+
+	scan_title = "Autopsy Report ([target_name])"
 	scan_data = get_formatted_data()
 	playsound(src, 'sound/effects/fastbeep.ogg', 10)
 

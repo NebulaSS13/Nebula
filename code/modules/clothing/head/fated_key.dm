@@ -65,7 +65,7 @@
 		user.visible_message(SPAN_DANGER("\The [user] swings [G.his] [blade.name] in a blazing arc!"))
 		playsound(user.loc, 'sound/effects/sanctionedaction_cut.ogg', 100, 1)
 		var/obj/item/projectile/sanctionedaction/cut = new(user.loc)
-		cut.launch(get_edge_target_turf(get_turf(user.loc), user.dir), user.zone_sel.selecting)
+		cut.launch(get_edge_target_turf(get_turf(user.loc), user.dir), user.get_target_zone())
 		user.last_special = world.time + 10 SECONDS
 
 /obj/item/projectile/sanctionedaction

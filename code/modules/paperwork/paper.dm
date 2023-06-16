@@ -149,12 +149,12 @@
 	return TRUE
 
 /obj/item/paper/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(user.zone_sel.selecting == BP_EYES)
+	if(user.get_target_zone() == BP_EYES)
 		user.visible_message(SPAN_NOTICE("You show the paper to [M]."), \
 			SPAN_NOTICE("[user] holds up a paper and shows it to [M]."))
 		M.examinate(src)
 
-	else if(user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
+	else if(user.get_target_zone() == BP_MOUTH) // lipstick wiping
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H == user)

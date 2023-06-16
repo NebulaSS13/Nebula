@@ -130,13 +130,13 @@
 			usr.ClickOn(master)
 	return 1
 
-/obj/screen/zone_sel
+/obj/screen/zone_selector
 	name = "damage zone"
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
 	var/selecting = BP_CHEST
 
-/obj/screen/zone_sel/Click(location, control,params)
+/obj/screen/zone_selector/Click(location, control,params)
 	var/list/PL = params2list(params)
 	var/icon_x = text2num(PL["icon-x"])
 	var/icon_y = text2num(PL["icon-y"])
@@ -198,16 +198,19 @@
 	set_selected_zone(new_selecting)
 	return 1
 
-/obj/screen/zone_sel/proc/set_selected_zone(bodypart)
+/obj/screen/zone_selector/Initialize(mapload)
+	. = ..()
+	update_icon()
+
+/obj/screen/zone_selector/proc/set_selected_zone(bodypart)
 	var/old_selecting = selecting
 	selecting = bodypart
 	if(old_selecting != selecting)
 		update_icon()
 		return TRUE
 
-/obj/screen/zone_sel/on_update_icon()
-	overlays.Cut()
-	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
+/obj/screen/zone_selector/on_update_icon()
+	set_overlays(image('icons/mob/zone_sel.dmi', "[selecting]"))
 
 /obj/screen/intent
 	name = "intent"

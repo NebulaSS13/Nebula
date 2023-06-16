@@ -26,10 +26,9 @@
 		mymob.healths.SetName("health")
 		mymob.healths.screen_loc = ui_construct_health
 
-		mymob.zone_sel = new /obj/screen/zone_sel()
+		mymob.zone_sel = new
 		mymob.zone_sel.icon = 'icons/mob/screen1_construct.dmi'
-		mymob.zone_sel.overlays.len = 0
-		mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
+		mymob.zone_sel.update_icon()
 
 		mymob.purged = new /obj/screen()
 		mymob.purged.icon = 'icons/mob/screen1_construct.dmi'

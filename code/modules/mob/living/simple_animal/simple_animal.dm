@@ -371,7 +371,7 @@
 		return TRUE
 
 	if(istype(O, /obj/item/flash) && stat != DEAD)
-		return O.attack(src, user, user.zone_sel.selecting)
+		return O.attack(src, user, user.get_target_zone())
 
 	if(meat_type && (stat == DEAD) && meat_amount)
 		if(istype(O, /obj/item/knife/kitchen/cleaver))
@@ -396,7 +396,7 @@
 		if(!O.force || (O.item_flags & ITEM_FLAG_NO_BLUDGEON))
 			visible_message(SPAN_NOTICE("\The [user] gently taps [src] with \the [O]."))
 			return TRUE
-		return O.attack(src, user, user.zone_sel?.selecting || ran_zone())
+		return O.attack(src, user, user.get_target_zone() || ran_zone())
 
 	return ..()
 

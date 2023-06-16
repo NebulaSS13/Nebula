@@ -23,7 +23,7 @@ var/global/list/_default_hug_messages = list(
 			hug_3p = "$USER$ hugs $TARGET$ to make $TARGET_HIM$ feel better."
 			hug_1p = "You hug $TARGET$ to make $TARGET_HIM$ feel better."
 
-		var/list/use_hug_messages = target.get_hug_zone_messages(zone_sel.selecting)
+		var/list/use_hug_messages = target.get_hug_zone_messages(get_target_zone())
 		if(length(use_hug_messages) >= 2)
 			hug_3p = use_hug_messages[1]
 			hug_1p = use_hug_messages[2]

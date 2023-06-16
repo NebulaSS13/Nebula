@@ -26,7 +26,7 @@
 		var/mob/living/carbon/human/H = user
 		var/decl/natural_attack/attack = H.get_unarmed_attack(src)
 		if(istype(attack))
-			attack.show_attack(H, src, H.zone_sel.selecting, 1)
+			attack.show_attack(H, src, H.get_target_zone(), 1)
 			showed_msg = TRUE
 	if(!showed_msg)
 		visible_message(SPAN_DANGER("\The [user] squashes \the [src] flat!"))

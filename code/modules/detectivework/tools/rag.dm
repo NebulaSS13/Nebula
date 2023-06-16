@@ -102,7 +102,7 @@
 			admin_attack_log(user, M, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
 			M.IgniteMob()
 		else if(reagents.total_volume)
-			if(user.zone_sel.selecting == BP_MOUTH)
+			if(user.get_target_zone() == BP_MOUTH)
 				if (!M.has_danger_grab(user))
 					to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
 					return

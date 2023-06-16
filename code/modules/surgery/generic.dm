@@ -225,7 +225,7 @@
 		return affected
 
 /decl/surgery_step/generic/amputate/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
-	var/target_zone = user.zone_sel.selecting
+	var/target_zone = user.get_target_zone()
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(BP_IS_PROSTHETIC(affected))
 		return SURGERY_SKILLS_ROBOTIC
