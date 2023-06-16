@@ -42,6 +42,7 @@
 	boiling_point = -78 CELSIUS
 	gas_symbol_html = "CO<sub>2</sub>"
 	gas_symbol = "CO2"
+	gas_metabolically_inert = TRUE
 
 /decl/material/gas/carbon_monoxide
 	name = "carbon monoxide"
