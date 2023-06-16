@@ -55,6 +55,9 @@
 /obj/item/sign/proc/place_sign(var/turf/T, var/direction)
 	var/obj/structure/sign/S = new sign_type(T)
 	S.set_dir(direction)
+	copy_extension(src, S, /datum/extension/labels)
+	copy_extension(src, S, /datum/extension/forensic_evidence)
+	copy_extension(src, S, /datum/extension/scent)
 	transfer_fingerprints_to(S)
 	sign_type = null
 	return S
@@ -120,6 +123,9 @@
 		var/obj/item/sign/S = new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
 		S.set_sign(src)
 		//Copy our stuff over
+		copy_extension(src, S, /datum/extension/labels)
+		copy_extension(src, S, /datum/extension/forensic_evidence)
+		copy_extension(src, S, /datum/extension/scent)
 		transfer_fingerprints_to(S)
 	matter = null
 	material = null
