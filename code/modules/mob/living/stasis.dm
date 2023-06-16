@@ -21,10 +21,9 @@
 	if(isSynthetic())
 		return 0
 
-	var/decl/species/my_species = get_species()
-	var/cold_1 = my_species ? my_species.cold_level_1 : 243
-	var/cold_2 = my_species ? my_species.cold_level_2 : 200
-	var/cold_3 = my_species ? my_species.cold_level_3 : 120
+	var/cold_1 = get_temperature_threshold(COLD_LEVEL_1)
+	var/cold_2 = get_temperature_threshold(COLD_LEVEL_2)
+	var/cold_3 = get_temperature_threshold(COLD_LEVEL_3)
 
 	if(bodytemperature > cold_1)
 		return 0

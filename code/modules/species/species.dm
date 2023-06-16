@@ -126,9 +126,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	// Environment tolerance/life processes vars.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
-	var/breath_type = /decl/material/gas/oxygen                                  // Non-oxygen gas breathed, if any.
+	var/breath_type = /decl/material/gas/oxygen                 // Non-oxygen gas breathed, if any.
 	var/poison_types = list(/decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
-	var/exhale_type = /decl/material/gas/carbon_dioxide                          // Exhaled gas type.
+	var/exhale_type = /decl/material/gas/carbon_dioxide         // Exhaled gas type.
 	var/blood_reagent = /decl/material/liquid/blood
 
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
@@ -1067,3 +1067,20 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			if(!O || (O.status & ORGAN_DEAD))
 				return TRUE
 	return FALSE
+
+/decl/species/proc/get_species_temperature_threshold(var/threshold)
+	switch(threshold)
+		if(COLD_LEVEL_1)
+			return cold_level_1
+		if(COLD_LEVEL_2)
+			return cold_level_2
+		if(COLD_LEVEL_3)
+			return cold_level_3
+		if(HEAT_LEVEL_1)
+			return heat_level_1
+		if(HEAT_LEVEL_2)
+			return heat_level_2
+		if(HEAT_LEVEL_3)
+			return heat_level_3
+		else
+			CRASH("get_species_temperature_threshold() called with invalid threshold value.")

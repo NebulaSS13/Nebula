@@ -246,8 +246,9 @@
 		return
 
 	to_chat(choice, "<span class='danger'>You feel as if something cold passed through you!</span>")
-	if(choice.bodytemperature >= choice.species.cold_level_1 + 1)
-		choice.bodytemperature = max(choice.species.cold_level_1 + 1, choice.bodytemperature - 30)
+	var/temp_threshold = choice.get_temperature_threshold(COLD_LEVEL_1)
+	if(choice.bodytemperature >= temp_threshold + 1)
+		choice.bodytemperature = max(temp_threshold + 1, choice.bodytemperature - 30)
 	to_chat(src, "<span class='notice'>You pass through \the [choice], giving them a sudden chill.</span>")
 
 	log_and_message_admins("used ghost magic to chill \the [choice] - [x]-[y]-[z]")
