@@ -20,6 +20,10 @@
 /datum/extension/CanClone()
 	return FALSE
 
+/datum/extension/Clone()
+	SHOULD_CALL_PARENT(FALSE)
+	CRASH("Use 'copy_from()' on a new extension instance instead of using Clone()! Extensions cannot be created without a holder.")
+
 ///Workaround for extensions not supporting Clone(). Copy data from another extension, so we're essentially a clone of that other extension.
 /datum/extension/proc/copy_from(var/datum/extension/source)
 	SHOULD_CALL_PARENT(TRUE)
