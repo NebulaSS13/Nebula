@@ -1351,7 +1351,7 @@
 	},
 /area/centcom/holding)
 "aLJ" = (
-/obj/structure/sign/redcross,
+/obj/structure/sign/department/redcross,
 /turf/unsimulated/wall,
 /area/centcom/holding)
 "aLK" = (

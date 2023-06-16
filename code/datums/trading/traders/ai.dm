@@ -118,6 +118,6 @@ They sell generic supplies and ask for generic supplies.
 		/obj/structure/plushie           = TRADER_SUBTYPES_ONLY,
 		/obj/structure/sign              = TRADER_SUBTYPES_ONLY,
 		/obj/structure/sign/double       = TRADER_BLACKLIST_ALL,
-		/obj/structure/sign/goldenplaque = TRADER_BLACKLIST_ALL,
+		/obj/structure/sign/plaque/golden = TRADER_BLACKLIST_ALL,
 		/obj/structure/sign/poster       = TRADER_BLACKLIST
 	)

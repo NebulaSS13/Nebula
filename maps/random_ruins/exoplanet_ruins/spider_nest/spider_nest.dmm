@@ -147,7 +147,7 @@
 /area/template_noop)
 "A" = (
 /obj/random/loot,
-/obj/structure/sign/xenobio_1{
+/obj/structure/sign/department/xenobio_1{
 	pixel_y = 32
 	},
 /turf/template_noop,

@@ -1163,7 +1163,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/foresolar)
 "acC" = (
-/obj/structure/sign/goldenplaque,
+/obj/structure/sign/plaque/golden,
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
@@ -16901,7 +16901,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/main)
 "aJr" = (
-/obj/structure/sign/monkey_painting{
+/obj/structure/sign/painting/monkey_painting{
 	pixel_x = -28;
 	pixel_y = 4
 	},
@@ -28725,7 +28725,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/exodus/crew_quarters/locker/locker_toilet)
 "biW" = (
-/obj/structure/sign/directions/examroom,
+/obj/structure/sign/department/examroom,
 /turf/simulated/wall/prepainted,
 /area/exodus/medical/reception)
 "biX" = (
@@ -30202,7 +30202,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/storage)
 "blQ" = (
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay"
@@ -30797,7 +30797,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/research_port)
 "bmY" = (
-/obj/structure/sign/chemistry,
+/obj/structure/sign/department/chemistry,
 /turf/simulated/wall/r_wall/prepainted,
 /area/exodus/medical/chemistry)
 "bmZ" = (
@@ -32397,7 +32397,7 @@
 /area/exodus/medical/morgue)
 "bqq" = (
 /obj/machinery/door/firedoor,
-/obj/structure/sign/directions/examroom{
+/obj/structure/sign/department/examroom{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white,
@@ -33127,7 +33127,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_two)
 "brL" = (
-/obj/structure/sign/warning/science{
+/obj/structure/sign/department/science_1{
 	pixel_x = 32
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -34106,7 +34106,7 @@
 /turf/simulated/floor/bluegrid,
 /area/exodus/turret_protected/ai_upload)
 "btO" = (
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -34870,7 +34870,7 @@
 /obj/machinery/door/airlock/glass/medical{
 	name = "Chemistry Laboratory"
 	},
-/obj/structure/sign/chemistry{
+/obj/structure/sign/department/chemistry{
 	pixel_x = 32
 	},
 /obj/structure/disposalpipe/segment,
@@ -35718,7 +35718,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/chemistry)
 "bwY" = (
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -38826,7 +38826,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -39032,7 +39032,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/medical/genetics/cloning)
 "bDF" = (
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -41503,7 +41503,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/medbay3)
 "bIo" = (
-/obj/structure/sign/goldenplaque{
+/obj/structure/sign/plaque/golden{
 	desc = "Done No Harm.";
 	name = "Best Doctor 2552";
 	pixel_y = -32
@@ -41699,7 +41699,7 @@
 /turf/simulated/wall/prepainted,
 /area/exodus/research/storage)
 "bIK" = (
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -44873,7 +44873,7 @@
 "bPd" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance,
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -45532,7 +45532,7 @@
 "bQy" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance,
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -47282,7 +47282,7 @@
 /turf/simulated/floor/reinforced,
 /area/exodus/research/misc_lab)
 "bTT" = (
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -49299,7 +49299,7 @@
 /turf/simulated/wall/prepainted,
 /area/exodus/maintenance/research_port)
 "bYg" = (
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -49932,7 +49932,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/medical/medbay4)
 "bZq" = (
-/obj/structure/sign/greencross,
+/obj/structure/sign/department/greencross,
 /turf/simulated/wall/prepainted,
 /area/exodus/medical/medbay4)
 "bZr" = (
@@ -60098,7 +60098,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/engineering/storage)
 "cwX" = (
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";
@@ -64410,7 +64410,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/sign/redcross{
+/obj/structure/sign/department/redcross{
 	desc = "The Star of Life, a symbol of Medical Aid.";
 	icon_state = "lifestar";
 	name = "Medbay";

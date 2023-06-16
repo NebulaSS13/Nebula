@@ -82,7 +82,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "al" = (
-/obj/structure/sign/kiddieplaque{
+/obj/structure/sign/plaque/ai_dev{
 	desc = "A plaque with information regarding this particular lifepod. It reads: 'Armalev Industries Skyfin-E, Exoplanetary Suvival Pod' there's a registry number, and an assigned mothership, but they've both been scratched to illegiblity.";
 	name = "\improper Lifepod Plaque";
 	pixel_y = 30

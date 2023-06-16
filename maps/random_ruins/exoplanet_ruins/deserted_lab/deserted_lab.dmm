@@ -44,7 +44,7 @@
 /turf/template_noop,
 /area/template_noop)
 "aj" = (
-/obj/structure/sign/warning/science/anomalous_materials{
+/obj/structure/sign/warning/anomalous_materials{
 	pixel_y = 32
 	},
 /obj/effect/decal/cleanable/spiderling_remains,
@@ -124,7 +124,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
 "aA" = (
-/obj/structure/sign/monkey_painting{
+/obj/structure/sign/painting/monkey_painting{
 	pixel_y = -32
 	},
 /obj/effect/decal/cleanable/blood,
@@ -241,7 +241,7 @@
 /area/template_noop)
 "aW" = (
 /obj/item/beartrap,
-/obj/structure/sign/warning/science/anomalous_materials{
+/obj/structure/sign/warning/anomalous_materials{
 	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/steel_ridged,

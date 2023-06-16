@@ -3493,7 +3493,7 @@
 /area/exodus/engineering/atmos)
 "jq" = (
 /obj/item/wrench,
-/obj/structure/sign/atmosplaque{
+/obj/structure/sign/plaque/atmos{
 	pixel_y = 32
 	},
 /obj/machinery/cell_charger,

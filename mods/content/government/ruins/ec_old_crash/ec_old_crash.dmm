@@ -779,7 +779,7 @@
 /turf/simulated/floor/tiled/white/lowpressure,
 /area/map_template/ecship/science)
 "bO" = (
-/obj/structure/sign/warning/science,
+/obj/structure/sign/department/science_1,
 /turf/simulated/wall/titanium,
 /area/map_template/ecship/science)
 "bP" = (
