@@ -18,8 +18,8 @@
 
 /datum/forensics/proc/add_from_atom(atom/A)
 
-/datum/forensics/proc/copy()
-	var/datum/forensics/F = new type()
+/datum/forensics/PopulateClone(datum/forensics/clone)
+	var/datum/forensics/F = ..()
 	F.data = data.Copy()
 	return F
 

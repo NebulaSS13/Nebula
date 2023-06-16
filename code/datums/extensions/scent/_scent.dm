@@ -87,6 +87,14 @@ Scent intensity
 		intensity.PrintMessage(smeller, descriptor, scent)
 		LAZYSET(smeller.smell_cooldown, scent, world.time + intensity.cooldown)
 
+/datum/extension/scent/PopulateClone(datum/extension/scent/clone)
+	var/datum/extension/scent/populated_clone = ..()
+	populated_clone.scent      = scent
+	populated_clone.intensity  = intensity
+	populated_clone.descriptor = descriptor
+	populated_clone.range      = range
+	return populated_clone
+
 /*****
 Custom subtype
 	set_extension(atom, /datum/extension/scent/custom, scent = "scent", intensity = SCENT_INTENSITY_, ... etc)

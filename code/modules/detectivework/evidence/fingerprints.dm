@@ -19,8 +19,8 @@
 			return
 	..()
 
-/datum/forensics/fingerprints/copy()
-	var/datum/forensics/fingerprints/F = new()
+/datum/forensics/fingerprints/PopulateClone(datum/clone)
+	var/datum/forensics/fingerprints/F = ..()
 	for(var/datum/fingerprint/print in data)
 		F.add_data(print.copy())
 	return F

@@ -85,6 +85,12 @@
 	if(. && user)
 		to_chat(user, SPAN_WARNING("The label won't fit."))
 
+/datum/extension/labels/PopulateClone(datum/extension/labels/clone)
+	var/datum/extension/labels/populated_clone = ..()
+	for(var/L in labels)
+		populated_clone.AttachLabel(null, L)
+	return populated_clone
+
 /proc/get_attached_labels(var/atom/source)
 	if(has_extension(source, /datum/extension/labels))
 		var/datum/extension/labels/L = get_extension(source, /datum/extension/labels)
