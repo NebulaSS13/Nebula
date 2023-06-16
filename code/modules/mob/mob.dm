@@ -1320,3 +1320,20 @@
 
 /mob/proc/get_target_zone()
 	return zone_sel?.selecting
+
+/mob/proc/get_temperature_threshold(var/threshold)
+	switch(threshold)
+		if(COLD_LEVEL_1)
+			return 243
+		if(COLD_LEVEL_2)
+			return 200
+		if(COLD_LEVEL_3)
+			return 120
+		if(HEAT_LEVEL_1)
+			return 360
+		if(HEAT_LEVEL_2)
+			return 400
+		if(HEAT_LEVEL_3)
+			return 1000
+		else
+			CRASH("base get_temperature_threshold() called with invalid threshold value.")
