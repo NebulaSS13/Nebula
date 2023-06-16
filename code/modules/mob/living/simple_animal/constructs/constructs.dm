@@ -257,11 +257,7 @@
 	. = ..()
 	if(.)
 		if(fire)
-			if(fire_alert)							fire.icon_state = "fire1"
-			else									fire.icon_state = "fire0"
-		if(purged)
-			if(purge > 0)							purged.icon_state = "purge1"
-			else									purged.icon_state = "purge0"
+			fire.icon_state = "fire[!!fire_alert]"
 		silence_spells(purge)
 
 /mob/living/simple_animal/construct/armoured/Life()

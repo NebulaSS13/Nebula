@@ -30,11 +30,5 @@
 		mymob.zone_sel.icon = 'icons/mob/screen1_construct.dmi'
 		mymob.zone_sel.update_icon()
 
-		mymob.purged = new /obj/screen()
-		mymob.purged.icon = 'icons/mob/screen1_construct.dmi'
-		mymob.purged.icon_state = "purge0"
-		mymob.purged.SetName("purged")
-		mymob.purged.screen_loc = ui_construct_purge
-
 	mymob.client.screen = list()
-	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.zone_sel, mymob.purged)
+	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.zone_sel)
