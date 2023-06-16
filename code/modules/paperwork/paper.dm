@@ -24,10 +24,10 @@
 	pickup_sound           = 'sound/foley/paperpickup2.ogg'
 	item_flags             = ITEM_FLAG_CAN_TAPE
 	//#TODO: Fonts probably should be stored in the pens or something?
-	var/tmp/deffont        = "Verdana"
-	var/tmp/signfont       = "Times New Roman"
-	var/tmp/crayonfont     = "Comic Sans MS"
-	var/tmp/fancyfont      = "Segoe Script"
+	var/tmp/deffont        = PEN_FONT_DEFAULT
+	var/tmp/signfont       = PEN_FONT_SIGNATURE
+	var/tmp/crayonfont     = PEN_FONT_CRAYON
+	var/tmp/fancyfont      = PEN_FONT_FANCY_PEN
 	var/scan_file_type     = /datum/computer_file/data/text
 	var/persist_on_init    = TRUE
 	var/age                = 0
