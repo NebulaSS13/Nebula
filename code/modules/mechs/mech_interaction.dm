@@ -89,6 +89,15 @@
 /mob/living/exosuit/get_dexterity(var/silent = FALSE)
 	return DEXTERITY_FULL
 
+// Override as mechs will usually not have clients and therefore not have HUDs.
+/mob/living/exosuit/get_target_zone()
+	if(!istype(hud_used))
+		return
+	var/obj/screen/zone_selector/zone_selector = get_hud_element(/decl/hud_element/zone_selector)
+	if(istype(zone_selector))
+		return zone_selector.selecting
+	return zone_tracker
+
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
 	if(!user || incapacitated() || user.incapacitated())
@@ -134,10 +143,13 @@
 	// User is not necessarily the exosuit, or the same person, so update intent.
 	if(user != src)
 		a_intent = user.a_intent
-		if(user.zone_sel)
-			zone_sel.set_selected_zone(user.get_target_zone())
+		var/obj/screen/zone_selector/zone_selector = get_hud_element(/decl/hud_element/zone_selector)
+		var/set_zone = user.get_target_zone() || BP_CHEST
+		if(istype(zone_selector))
+			zone_selector.set_selected_zone(set_zone)
 		else
-			zone_sel.set_selected_zone(BP_CHEST)
+			zone_tracker = set_zone
+
 	// You may attack the target with your exosuit FIST if you're malfunctioning.
 	var/atom/movable/AM = A
 	var/fail_prob = (user != src && istype(AM) && AM.loc != src) ? (user.skill_check(SKILL_MECH, HAS_PERK) ? 0: 15 ) : 0

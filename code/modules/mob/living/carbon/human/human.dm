@@ -38,7 +38,6 @@
 	global.human_mob_list -= src
 	regenerate_body_icon = FALSE // don't bother regenerating if we happen to be queued to update icon
 	worn_underwear = null
-	QDEL_NULL(attack_selector)
 	QDEL_NULL(vessel)
 	LAZYCLEARLIST(smell_cooldown)
 	. = ..()
@@ -599,6 +598,7 @@
 	else if(has_extension(src, /datum/extension/scannable))
 		remove_extension(src, /datum/extension/scannable)
 
+	update_health()
 	return TRUE
 
 //Syncs cultural tokens to the currently set species, and may trigger a language update

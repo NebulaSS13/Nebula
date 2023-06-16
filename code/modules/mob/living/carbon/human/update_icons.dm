@@ -562,6 +562,8 @@ var/global/list/damage_icon_parts = list()
 		hud_used.hidden_inventory_update()
 		hud_used.persistant_inventory_update()
 		update_action_buttons()
-	if(internals && internal)
-		internals.icon_state = "internal1"
+		if(internal)
+			var/obj/screen/internals = get_hud_element(/decl/hud_element/internals)
+			if(internals)
+				internals.icon_state = "internal1"
 	queue_hand_rebuild()

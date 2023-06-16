@@ -1,178 +1,154 @@
-var/global/obj/screen/robot_inventory
+/mob/living/silicon/robot
+	var/obj/screen/hands
+	hud_used = /datum/hud/robot
 
-/obj/screen/robot_drop_grab
-	name = "drop grab"
-	icon = 'icons/mob/screen1_robot.dmi'
-	icon_state = "drop_grab"
+/decl/hud_element/condition/fire/robot
+	screen_icon = 'icons/mob/screen/robot_conditions.dmi'
+
+/decl/hud_element/condition/oxygen/robot
+	screen_icon = 'icons/mob/screen/robot_conditions.dmi'
+
+/decl/hud_element/condition/bodytemp/robot
+	screen_icon = 'icons/mob/screen/robot_conditions.dmi'
+
+/decl/hud_element/module
+	screen_name = "module"
+	screen_icon = 'icons/mob/screen/robot_modules.dmi'
+	screen_icon_state = "nomod"
+	screen_loc = ui_borg_module
+
+/decl/hud_element/radio
+	screen_name = "radio"
+	screen_icon_state = "radio"
+	screen_loc = ui_movi
+
+/decl/hud_element/radio/create_screen_object(datum/hud/hud)
+	var/obj/screen/elem = ..()
+	elem.set_dir(SOUTHWEST)
+	return elem
+
+/decl/hud_element/drop_grab
+	screen_name = "drop grab"
+	screen_object_type = /obj/screen/robot_drop_grab
+	screen_icon = 'icons/mob/screen/robot_drop_grab.dmi'
+	screen_icon_state = "drop_grab"
 	screen_loc = ui_borg_drop_grab
-	invisibility = INVISIBILITY_MAXIMUM
-	alpha = 0
+	update_in_life = TRUE
+
+/decl/hud_element/drop_grab/create_screen_object(datum/hud/hud)
+	var/obj/screen/elem = ..()
+	if(length(hud?.mymob?.get_active_grabs()))
+		elem.invisibility = 0
+		elem.alpha = 255
+	else
+		elem.invisibility = INVISIBILITY_MAXIMUM
+		elem.alpha = 0
+	return elem
+
+/decl/hud_element/drop_grab/refresh_screen_object(datum/hud/hud, obj/screen/elem, datum/gas_mixture/environment)
+	. = ..()
+	if(length(hud?.mymob?.get_active_grabs()))
+		elem.invisibility = 0
+		elem.alpha = 255
+	else
+		elem.invisibility = INVISIBILITY_MAXIMUM
+		elem.alpha = 0
 
 /obj/screen/robot_drop_grab/Click(location, control, params)
 	. = ..()
-	if(isrobot(usr) && !usr.incapacitated())
-		var/mob/living/silicon/robot/R = usr
-		R.drop_item()
-		set_invisibility(INVISIBILITY_MAXIMUM)
-		alpha = 0
+	if(!isrobot(usr) || usr.incapacitated())
+		return
 
-/mob/living/silicon/robot
-	hud_type = /datum/hud/robot
+	var/mob/living/silicon/robot/R = usr
+	R.drop_item()
+	invisibility = INVISIBILITY_MAXIMUM
+	alpha = 0
+
+/decl/hud_element/health/robot
+	screen_icon = 'icons/mob/screen/health_robot.dmi'
+	screen_loc = ui_borg_health
+
+/decl/hud_element/module_panel
+	screen_name = "panel"
+	screen_icon_state = "panel"
+	screen_loc = ui_borg_panel
+
+/decl/hud_element/robot_inventory
+	screen_name = "inventory"
+	screen_icon_state = "inventory"
+	screen_loc = ui_borg_inventory
+
+/datum/hud/robot
+	health_hud_type = /decl/hud_element/health/robot
+	hud_elements = list(
+		/decl/hud_element/health/robot,
+		/decl/hud_element/drop_grab,
+		/decl/hud_element/radio,
+		/decl/hud_element/module,
+		/decl/hud_element/module_panel,
+		/decl/hud_element/robot_inventory,
+		/decl/hud_element/condition/fire/robot,
+		/decl/hud_element/condition/oxygen/robot,
+		/decl/hud_element/condition/bodytemp/robot
+	)
+
+/datum/hud/robot/get_ui_color()
+	return COLOR_WHITE
+
+/datum/hud/robot/get_ui_alpha()
+	return 255
+
+/datum/hud/robot/get_ui_style()
+	return 'icons/mob/screen/robot.dmi'
 
 /datum/hud/robot/FinalizeInstantiation()
 
 	var/mob/living/silicon/robot/R = mymob
 	if(!istype(R))
 		..()
-		return
+		return ..()
 
+	var/mob/living/silicon/robot/R = mymob
 	var/obj/screen/using
-
-	//Radio
-	using = new /obj/screen()
-	using.SetName("radio")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "radio"
-	using.screen_loc = ui_movi
-	adding += using
+	var/ui_style = get_ui_style()
 
 	//Module select
-
 	using = new /obj/screen()
 	using.SetName("module1")
 	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
+	using.icon = ui_style
 	using.icon_state = "inv1"
 	using.screen_loc = ui_inv1
-	adding += using
+	misc_hud_elements += using
 	R.inv1 = using
 
 	using = new /obj/screen()
 	using.SetName("module2")
 	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
+	using.icon = ui_style
 	using.icon_state = "inv2"
 	using.screen_loc = ui_inv2
-	adding += using
+	misc_hud_elements += using
 	R.inv2 = using
 
 	using = new /obj/screen()
 	using.SetName("module3")
 	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
+	using.icon = ui_style
 	using.icon_state = "inv3"
 	using.screen_loc = ui_inv3
-	adding += using
+	misc_hud_elements += using
 	R.inv3 = using
-
 	//End of module select
 
-	// Drop UI
-	R.ui_drop_grab = new
-	adding += R.ui_drop_grab
-
-	//Intent
-	using = new /obj/screen()
-	using.SetName("act_intent")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = R.a_intent
-	using.screen_loc = ui_acti
-	adding += using
-	action_intent = using
-
-	//Cell
-	R.cells = new /obj/screen()
-	R.cells.icon = 'icons/mob/screen1_robot.dmi'
-	R.cells.icon_state = "charge-empty"
-	R.cells.SetName("cell")
-	R.cells.screen_loc = ui_toxin
-
-	//Health
-	R.healths = new /obj/screen()
-	R.healths.icon = 'icons/mob/screen1_robot.dmi'
-	R.healths.icon_state = "health0"
-	R.healths.SetName("health")
-	R.healths.screen_loc = ui_borg_health
-
-	//Installed Module
-	R.hands = new /obj/screen()
-	R.hands.icon = 'icons/mob/screen1_robot.dmi'
-	R.hands.icon_state = "nomod"
-	R.hands.SetName("module")
-	R.hands.screen_loc = ui_borg_module
-
-	//Module Panel
-	using = new /obj/screen()
-	using.SetName("panel")
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "panel"
-	using.screen_loc = ui_borg_panel
-	adding += using
-
-	//Store
-	R.throw_icon = new /obj/screen()
-	R.throw_icon.icon = 'icons/mob/screen1_robot.dmi'
-	R.throw_icon.icon_state = "store"
-	R.throw_icon.SetName("store")
-	R.throw_icon.screen_loc = ui_borg_store
-
-	//Inventory
-	robot_inventory = new /obj/screen()
-	robot_inventory.SetName("inventory")
-	robot_inventory.icon = 'icons/mob/screen1_robot.dmi'
-	robot_inventory.icon_state = "inventory"
-	robot_inventory.screen_loc = ui_borg_inventory
-
-	//Temp
-	R.bodytemp = new /obj/screen()
-	R.bodytemp.icon = 'icons/mob/status_indicators.dmi'
-	R.bodytemp.icon_state = "temp0"
-	R.bodytemp.SetName("body temperature")
-	R.bodytemp.screen_loc = ui_temp
-
-
-	R.oxygen = new /obj/screen()
-	R.oxygen.icon = 'icons/mob/screen1_robot.dmi'
-	R.oxygen.icon_state = "oxy0"
-	R.oxygen.SetName("oxygen")
-	R.oxygen.screen_loc = ui_oxygen
-
-	R.fire = new /obj/screen()
-	R.fire.icon = 'icons/mob/screen1_robot.dmi'
-	R.fire.icon_state = "fire0"
-	R.fire.SetName("fire")
-	R.fire.screen_loc = ui_fire
-
-	R.up_hint = new /obj/screen()
-	R.up_hint.icon = 'icons/mob/screen1_robot.dmi'
-	R.up_hint.icon_state = "uphint0"
-	R.up_hint.SetName("up hint")
-	R.up_hint.screen_loc = ui_up_hint
-
-	R.zone_sel = new
-	R.zone_sel.icon = 'icons/mob/screen1_robot.dmi'
-	R.zone_sel.update_icon()
-
-	//Handle the gun settings buttons
-	R.gun_setting_icon = new /obj/screen/gun/mode(null)
-	R.item_use_icon = new /obj/screen/gun/item(null)
-	R.gun_move_icon = new /obj/screen/gun/move(null)
-	R.radio_use_icon = new /obj/screen/gun/radio(null)
-
-	hud_elements = list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
-	..()
+	return ..()
 
 /datum/hud/proc/toggle_show_robot_modules()
 	if(!isrobot(mymob))
 		return
-
 	var/mob/living/silicon/robot/r = mymob
-
 	r.shown_robot_modules = !r.shown_robot_modules
 	update_robot_modules_display()
-
 
 /datum/hud/proc/update_robot_modules_display()
 	if(!isrobot(mymob) || !mymob.client)
@@ -183,8 +159,6 @@ var/global/obj/screen/robot_inventory
 	if(R.shown_robot_modules)
 		if(R.active_storage)
 			R.active_storage.close(R) //Closes the inventory ui.
-		//Modules display is shown
-		//R.client.screen += robot_inventory	//"store" icon
 
 		if(!R.module)
 			to_chat(usr, "<span class='danger'>No module selected</span>")
@@ -231,7 +205,6 @@ var/global/obj/screen/robot_inventory
 
 	else
 		//Modules display is hidden
-		//R.client.screen -= robot_inventory	//"store" icon
 		for(var/atom/A in R.module.equipment)
 			if( (A != R.module_state_1) && (A != R.module_state_2) && (A != R.module_state_3) )
 				//Module is not currently active

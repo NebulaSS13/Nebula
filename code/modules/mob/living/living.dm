@@ -195,6 +195,11 @@ default behaviour is:
 	if(update_icons)
 		queue_icon_update()
 
+/mob/living/proc/update_health_hud()
+	if(!client || !hud_used)
+		return
+	hud_used.update_health_hud()
+
 /mob/living/proc/should_be_dead()
 	return current_health <= 0
 
@@ -391,7 +396,8 @@ default behaviour is:
 
 // damage MANY external organs, in random order
 /mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
-	if(status_flags & GODMODE)	return 0	//godmode
+	if(status_flags & GODMODE)
+		return 0
 	adjustBruteLoss(brute)
 	adjustFireLoss(burn, do_update_health = TRUE)
 
@@ -1146,11 +1152,16 @@ default behaviour is:
 /mob/living/get_speech_bubble_state_modifier()
 	return isSynthetic() ? "synth" : ..()
 
-/mob/living/proc/is_on_special_ability_cooldown()
+/mob/proc/is_on_special_ability_cooldown()
+	return FALSE
+
+/mob/living/is_on_special_ability_cooldown()
 	return world.time < next_special_ability
 
 /mob/living/proc/set_special_ability_cooldown(var/amt)
 	next_special_ability = max(next_special_ability, world.time+amt)
+	if(hud_used)
+		hud_used.set_hud_cooldown((world.time - next_special_ability)-1) // -1 so it visually resets one tick after cooldown.
 
 /mob/living/proc/get_seconds_until_next_special_ability_string()
 	return ticks2readable(next_special_ability - world.time)

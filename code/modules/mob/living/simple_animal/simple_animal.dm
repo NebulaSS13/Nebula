@@ -44,7 +44,6 @@
 	var/maxbodytemp = 350
 	var/heat_damage_per_tick = 3	//amount of damage applied if animal's body temperature is higher than maxbodytemp
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
-	var/fire_alert = 0
 
 	//Atmos effect - Yes, you can make creatures that require arbitrary gasses to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/list/min_gas = list(/decl/material/gas/oxygen = 5)
@@ -68,7 +67,7 @@
 
 	//Null rod stuff
 	var/supernatural = 0
-	var/purge = 0
+	var/purged_time = 0 // TODO: make this a status condition
 
 	var/bleed_ticks = 0
 	var/bleed_colour = COLOR_BLOOD_HUMAN
@@ -171,8 +170,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	. = ..()
 
 /mob/living/simple_animal/handle_regular_status_updates()
-	if(purge)
-		purge -= 1
 	. = ..()
 	if(.)
 		if(can_bleed && bleed_ticks > 0)
@@ -264,14 +261,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			bodytemperature += ((environment.temperature - bodytemperature) / 5)
 
 	if(bodytemperature < minbodytemp)
-		fire_alert = 2
 		adjustBruteLoss(cold_damage_per_tick)
 	else if(bodytemperature > maxbodytemp)
-		fire_alert = 1
 		adjustBruteLoss(heat_damage_per_tick)
-	else
-		fire_alert = 0
-
 	if(!atmos_suitable)
 		adjustBruteLoss(unsuitable_atmos_damage)
 
@@ -404,7 +396,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		damage = (O.force / 8)
 	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2
-		purge = 3
+		purged_time = 3
 	adjustBruteLoss(damage)
 	if(O.edge || O.sharp)
 		adjustBleedTicks(damage)
@@ -413,12 +405,11 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/get_movement_delay(var/travel_dir)
 	var/tally = ..() //Incase I need to add stuff other than "speed" later
-
 	tally += speed
-	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
+	if(purged_time)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
 		if(tally <= 0)
 			tally = 1
-		tally *= purge
+		tally *= purged_time
 
 	return tally+config.animal_delay
 

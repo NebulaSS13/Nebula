@@ -63,7 +63,7 @@
 	spawn_flags =   SPECIES_CAN_JOIN
 
 	flesh_color = "#90edeb"
-	hud_type = /datum/hud_data/adherent
+	species_hud_type = /datum/hud_data/adherent
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
@@ -122,7 +122,6 @@
 	if(can_overcome_gravity(H)) return "\nThey are floating on a cloud of shimmering distortion."
 
 /datum/hud_data/adherent
-	has_internals = FALSE
 	inventory_slots = list(
 		/datum/inventory_slot/handcuffs,
 		/datum/inventory_slot/ear/adherent,

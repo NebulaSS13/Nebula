@@ -52,7 +52,9 @@
 
 /mob/living/simple_animal/hostile/slug/handle_regular_status_updates()
 	. = ..()
-	if(. && istype(src.loc, /obj/item/holder) && isliving(src.loc.loc)) //We in somebody
+	if(. == PROCESS_KILL)
+		return
+	if(istype(src.loc, /obj/item/holder) && isliving(src.loc.loc)) //We in somebody
 		var/mob/living/L = src.loc.loc
 		if(src.loc in L.get_visible_implants(0))
 			if(prob(1))

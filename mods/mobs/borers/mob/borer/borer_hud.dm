@@ -1,55 +1,39 @@
+#define COLOR_BORER_RED "#ff5555"
+
 /datum/hud/borer
-	var/list/borer_hud_elements = list()
-	var/obj/screen/intent/hud_intent_selector
-	var/obj/screen/borer/toggle_host_control/hud_toggle_control
-	var/obj/screen/borer/inject_chemicals/hud_inject_chemicals
-	var/obj/screen/borer/leave_host/hud_leave_host
-
-/datum/hud/borer/Destroy()
-	QDEL_NULL_LIST(borer_hud_elements)
-	hud_toggle_control =   null
-	hud_inject_chemicals = null
-	hud_leave_host =       null
-	QDEL_NULL(hud_intent_selector)
-	. = ..()
-
-/datum/hud/borer/FinalizeInstantiation()
-	hud_intent_selector =  new
-	adding += hud_intent_selector
-	hud_inject_chemicals = new
-	hud_leave_host =       new
-	borer_hud_elements = list(
-		hud_inject_chemicals,
-		hud_leave_host
+	hud_elements = list(
+		/decl/hud_element/borer/inject_chems,
+		/decl/hud_element/borer/leave_host,
+		/decl/hud_element/borer/toggle_control
 	)
-	if(isborer(mymob))
-		var/mob/living/simple_animal/borer/borer = mymob
-		if(!borer.neutered)
-			hud_toggle_control = new
-			borer_hud_elements += hud_toggle_control
-	adding += borer_hud_elements
-	if(mymob)
-		var/mob/living/simple_animal/borer/borer = mymob
-		if(istype(borer) && borer.host)
-			for(var/obj/thing in borer_hud_elements)
-				thing.alpha =        255
-				thing.set_invisibility(INVISIBILITY_NONE)
-	..()
 
-/mob/living/simple_animal/borer
-	hud_type = /datum/hud/borer
+/datum/hud/borer/sterile
+	hud_elements = list(
+		/decl/hud_element/borer/inject_chems,
+		/decl/hud_element/borer/leave_host
+	)
 
-/mob/living/simple_animal/borer/proc/reset_ui_callback()
-	if(!is_on_special_ability_cooldown())
-		var/datum/hud/borer/borer_hud = hud_used
-		if(istype(borer_hud))
-			for(var/obj/thing in borer_hud.borer_hud_elements)
-				thing.color = null
+/datum/hud/borer/should_show_ability_hud()
+	var/mob/living/simple_animal/borer/borer = mymob
+	return istype(borer) && borer.host
+
+/decl/hud_element/borer
+	abstract_type = /decl/hud_element/borer
+	apply_color_on_cooldown = TRUE
+	hidable = TRUE
+
+/decl/hud_element/borer/inject_chems
+	screen_object_type = /obj/screen/borer/inject_chemicals
+
+/decl/hud_element/borer/leave_host
+	screen_object_type = /obj/screen/borer/leave_host
+
+/decl/hud_element/borer/toggle_control
+	screen_object_type = /obj/screen/borer/toggle_host_control
 
 /obj/screen/borer
 	icon = 'mods/mobs/borers/icons/borer_ui.dmi'
 	alpha = 0
-	invisibility = INVISIBILITY_MAXIMUM
 
 /obj/screen/borer/Click(location, control, params)
 	if(!isborer(usr))

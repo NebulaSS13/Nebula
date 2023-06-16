@@ -14,10 +14,10 @@
 
 		var/turf/B = GetAbove(src)
 
-		for(var/thing in pilots)
-			var/mob/pilot = thing
-			if(pilot.up_hint)
-				pilot.up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
+		for(var/mob/pilot in pilots)
+			var/obj/screen/up_hint = pilot.get_hud_element(/decl/hud_element/up_hint)
+			if(up_hint)
+				up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
 
 /mob/living/exosuit/can_ztravel()
 	if(Process_Spacemove(1)) //Handle here

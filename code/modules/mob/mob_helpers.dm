@@ -13,7 +13,7 @@
 		return FALSE //M is too small to wield this
 	return TRUE
 
-/mob/living/proc/isSynthetic()
+/mob/proc/isSynthetic()
 	return 0
 
 /mob/living/carbon/human/isSynthetic()
@@ -371,6 +371,8 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	set name = "a-intent"
 	set hidden = 1
 
+	var/obj/screen/action_intent = get_hud_element(/decl/hud_element/action_intent)
+
 	if(can_change_intent())
 		switch(input)
 			if(I_HELP,I_DISARM,I_GRAB,I_HURT)
@@ -379,8 +381,8 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = intent_numeric((intent_numeric(a_intent)+1) % 4)
 			if("left")
 				a_intent = intent_numeric((intent_numeric(a_intent)+3) % 4)
-		if(hud_used && hud_used.action_intent)
-			hud_used.action_intent.icon_state = "intent_[a_intent]"
+		if(action_intent)
+			action_intent.icon_state = "intent_[a_intent]"
 
 	else if(isrobot(src))
 		switch(input)
@@ -390,11 +392,11 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = I_HURT
 			if("right","left")
 				a_intent = intent_numeric(intent_numeric(a_intent) - 3)
-		if(hud_used && hud_used.action_intent)
+		if(action_intent)
 			if(a_intent == I_HURT)
-				hud_used.action_intent.icon_state = I_HURT
+				action_intent.icon_state = I_HURT
 			else
-				hud_used.action_intent.icon_state = I_HELP
+				action_intent.icon_state = I_HELP
 
 /mob/proc/welding_eyecheck()
 	return

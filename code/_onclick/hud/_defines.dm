@@ -74,7 +74,6 @@
 #define ui_up_hint "RIGHT-1:28,TOP-1:29"
 #define ui_toxin "RIGHT-1:28,TOP-2:27"
 #define ui_fire "RIGHT-1:28,TOP-3:25"
-#define ui_oxygen "RIGHT-1:28,TOP-4:23"
 #define ui_pressure "RIGHT-1:28,TOP-5:21"
 
 #define ui_alien_toxin "RIGHT-1:28,TOP-2:25"

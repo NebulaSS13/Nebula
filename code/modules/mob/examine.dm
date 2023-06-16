@@ -62,8 +62,9 @@
 /mob/living/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	// Update our target dolly.
-	if(user.zone_sel)
+	var/obj/screen/zone_selector = user.get_hud_element(/decl/hud_element/zone_selector)
+	if(zone_selector)
 		if(should_have_limb(BP_TAIL))
-			user.zone_sel.icon_state = "zone_sel_tail"
+			zone_selector.icon_state = "zone_sel_tail"
 		else
-			user.zone_sel.icon_state = "zone_sel"
+			zone_selector.icon_state = "zone_sel"

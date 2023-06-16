@@ -44,8 +44,8 @@
 
 /mob/living/simple_animal/hostile/vagrant/handle_living_non_stasis_processes()
 	. = ..()
-	if(!.)
-		return FALSE
+	if(. == PROCESS_KILL)
+		return
 	if(gripping)
 		if(!(get_turf(src) == get_turf(gripping)))
 			gripping = null

@@ -27,8 +27,8 @@
 	equipment += id
 
 /obj/item/robot_module/syndicate/finalize_equipment(var/mob/living/silicon/robot/R)
-	R.internals = locate(/obj/item/tank/jetpack/carbondioxide) in equipment
 	. = ..()
+	R.set_internals(locate(/obj/item/tank/jetpack/carbondioxide) in equipment)
 
 /obj/item/robot_module/syndicate/Destroy()
 	equipment -= id

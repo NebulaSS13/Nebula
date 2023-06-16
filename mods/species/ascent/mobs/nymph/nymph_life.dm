@@ -1,25 +1,8 @@
 
 /mob/living/carbon/alien/ascent_nymph/handle_regular_hud_updates()
 	. = ..()
-	if(!.)
+	if(. == PROCESS_KILL || stat == DEAD)
 		return
-	var/datum/hud/ascent_nymph/nymph_hud = hud_used
-	if(!istype(nymph_hud))
-		return
-	if(nymph_hud.food)
-		switch(nutrition)
-			if(450 to INFINITY)				nymph_hud.food.icon_state = "nutrition0"
-			if(350 to 450)					nymph_hud.food.icon_state = "nutrition1"
-			if(250 to 350)					nymph_hud.food.icon_state = "nutrition2"
-			if(150 to 250)					nymph_hud.food.icon_state = "nutrition3"
-			else							nymph_hud.food.icon_state = "nutrition4"
-	if(nymph_hud.drink)
-		switch(hydration)
-			if(450 to INFINITY)				nymph_hud.drink.icon_state = "hydration0"
-			if(350 to 450)					nymph_hud.drink.icon_state = "hydration1"
-			if(250 to 350)					nymph_hud.drink.icon_state = "hydration2"
-			if(150 to 250)					nymph_hud.drink.icon_state = "hydration3"
-			else							nymph_hud.drink.icon_state = "hydration4"
 
 /mob/living/carbon/alien/ascent_nymph/handle_nutrition_and_hydration()
 	. = ..()

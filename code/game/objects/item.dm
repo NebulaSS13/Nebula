@@ -647,7 +647,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 
 	if(user.hud_used.hud_shown)
-		user.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
+		user.minimize_hud(zoom = TRUE)	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
 	user.client.view = viewsize
 	zoom = 1
 
@@ -695,7 +695,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	user.client.view = world.view
 	if(!user.hud_used.hud_shown)
-		user.toggle_zoom_hud()
+		user.minimize_hud(zoom = TRUE)
 	user.client.pixel_x = 0
 	user.client.pixel_y = 0
 	user.client.OnResize()

@@ -21,6 +21,7 @@
 	bone_material = null
 	bone_amount = 0
 
+	var/zone_tracker
 	var/emp_damage = 0
 
 	var/obj/item/radio/exosuit/radio
@@ -67,6 +68,7 @@
 	// Interface stuff.
 	var/list/hud_elements = list()
 	var/list/hardpoint_hud_elements = list()
+	// TODO: /datum/hud/exosuit
 	var/obj/screen/exosuit/health/hud_health
 	var/obj/screen/exosuit/toggle/hatch_open/hud_open
 	var/obj/screen/exosuit/power/hud_power

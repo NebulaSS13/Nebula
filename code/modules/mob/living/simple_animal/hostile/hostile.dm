@@ -184,8 +184,9 @@
 
 /mob/living/simple_animal/hostile/handle_regular_status_updates()
 	. = ..()
-	if(!.)
-		walk(src, 0)
+	if(. == PROCESS_KILL)
+		return
+	walk(src, 0)
 
 /mob/living/simple_animal/hostile/do_delayed_life_action()
 	..()

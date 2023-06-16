@@ -139,12 +139,12 @@
 	var/obj/item/organ/external/E = get_active_hand()
 	if(!check_can_attach_modular_limb(E))
 		return FALSE
+	set_special_ability_cooldown(2 SECONDS)
 	if(!do_after(src, 2 SECONDS, src))
 		return FALSE
 	if(!check_can_attach_modular_limb(E))
 		return FALSE
 
-	set_special_ability_cooldown(2 SECONDS)
 	drop_from_inventory(E)
 	src.add_organ(E)
 
@@ -173,12 +173,12 @@
 	var/obj/item/organ/external/E = input(usr, "Which limb do you wish to detach?", "Limb Removal") as null|anything in detachable_limbs
 	if(!check_can_detach_modular_limb(E))
 		return FALSE
+	set_special_ability_cooldown(2 SECONDS)
 	if(!do_after(src, 2 SECONDS, src))
 		return FALSE
 	if(!check_can_detach_modular_limb(E))
 		return FALSE
 
-	set_special_ability_cooldown(2 SECONDS)
 	remove_organ(E, update_icon = TRUE)
 	E.dropInto(loc)
 	put_in_hands(E)

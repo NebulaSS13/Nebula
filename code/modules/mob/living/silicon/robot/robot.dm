@@ -37,7 +37,6 @@
 	var/obj/screen/inv1 = null
 	var/obj/screen/inv2 = null
 	var/obj/screen/inv3 = null
-	var/obj/screen/robot_drop_grab/ui_drop_grab
 
 	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
 	var/obj/screen/robot_modules_background
@@ -199,6 +198,7 @@
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
 /mob/living/silicon/robot/Destroy()
+	QDEL_NULL(hands)
 	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
 		if(mind)
 			mmi.dropInto(loc)

@@ -31,7 +31,7 @@
 
 	to_chat(M, SPAN_WARNING("Something slimy begins probing at the opening of your ear canal..."))
 	to_chat(src, SPAN_NOTICE("You slither up [M] and begin probing at their ear canal..."))
-	set_ability_cooldown(5 SECONDS)
+	set_special_ability_cooldown(5 SECONDS)
 
 	if(!do_after(src, 3 SECONDS, M))
 		return
@@ -44,11 +44,8 @@
 	host.status_flags |= PASSEMOTES
 	forceMove(host)
 
-	var/datum/hud/borer/borer_hud = hud_used
-	if(istype(borer_hud))
-		for(var/obj/thing in borer_hud.borer_hud_elements)
-			thing.alpha =        255
-			thing.set_invisibility(INVISIBILITY_NONE)
+	if(hud_used)
+		hud_used.show_ability_hud()
 
 	//Update their traitor status.
 	if(host.mind && !neutered)

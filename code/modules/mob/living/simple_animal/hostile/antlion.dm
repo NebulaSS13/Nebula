@@ -27,6 +27,7 @@
 	var/heal_amount = 6
 
 /mob/living/simple_animal/hostile/antlion/handle_regular_status_updates()
+
 	. = ..()
 	process_healing() //this needs to occur before if(!.) because of stop_automation
 	if(. && !is_on_special_ability_cooldown() && can_act() && target_mob)

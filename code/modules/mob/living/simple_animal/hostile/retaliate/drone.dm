@@ -89,7 +89,9 @@
 	. = ..()
 	if(!.)
 		return
-
+	. = ..()
+	if(. == PROCESS_KILL)
+		return
 	//emps and lots of damage can temporarily shut us down
 	if(disabled > 0)
 		set_stat(UNCONSCIOUS)

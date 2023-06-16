@@ -1,6 +1,6 @@
 /obj/screen/ability_master
 	name = "Abilities"
-	icon = 'icons/mob/screen_spells.dmi'
+	icon = 'icons/mob/screen/spells.dmi'
 	icon_state = "grey_spell_ready"
 	var/list/obj/screen/ability/ability_objects = list()
 	var/list/obj/screen/ability/spell_objects = list()
@@ -27,11 +27,6 @@
 	. = ..()
 	remove_all_abilities() //Get rid of the ability objects.
 	ability_objects.Cut()
-	if(my_mob)             // After that, remove ourselves from the mob seeing us, so we can qdel cleanly.
-		my_mob.ability_master = null
-		if(my_mob.client && my_mob.client.screen)
-			my_mob.client.screen -= src
-		my_mob = null
 
 /obj/screen/ability_master/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(showing)
@@ -41,7 +36,6 @@
 /obj/screen/ability_master/Click()
 	if(!ability_objects.len) // If we're empty for some reason.
 		return
-
 	toggle_open()
 
 /obj/screen/ability_master/proc/toggle_open(var/forced_state = 0)
@@ -149,15 +143,11 @@
 		var/spell/S = screen.spell
 		M.learned_spells |= S
 
-/mob/Initialize()
-	. = ..()
-	ability_master = new /obj/screen/ability_master(null,src)
-
 ///////////ACTUAL ABILITIES////////////
 //This is what you click to do things//
 ///////////////////////////////////////
 /obj/screen/ability
-	icon = 'icons/mob/screen_spells.dmi'
+	icon = 'icons/mob/screen/spells.dmi'
 	icon_state = "grey_spell_base"
 	maptext_x = 3
 	var/background_base_state = "grey"
@@ -204,11 +194,13 @@
 	if(isnull(slot) || !isnum(slot))
 		to_chat(src,"<span class='warning'>.activate_ability requires a number as input, corrisponding to the slot you wish to use.</span>")
 		return // Bad input.
-	if(!mob.ability_master)
+
+	var/obj/screen/ability_master/ability_master = mob.get_hud_element(/decl/hud_element/ability_master)
+	if(!ability_master)
 		return // No abilities.
-	if(slot > mob.ability_master.ability_objects.len || slot <= 0)
+	if(slot > ability_master.ability_objects.len || slot <= 0)
 		return // Out of bounds.
-	var/obj/screen/ability/A = mob.ability_master.ability_objects[slot]
+	var/obj/screen/ability/A = ability_master.ability_objects[slot]
 	A.activate()
 
 //////////Verb Abilities//////////

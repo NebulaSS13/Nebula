@@ -54,6 +54,7 @@
 	access_scanner = new /obj(src)
 	access_scanner.req_access = req_access?.Copy()
 
+
 	if(on)
 		turn_on() // Update lights and other stuff
 	else

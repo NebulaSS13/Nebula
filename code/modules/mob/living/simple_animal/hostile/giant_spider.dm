@@ -206,6 +206,7 @@ Guard caste procs
 	expected_type = /mob/living/simple_animal/hostile/giant_spider/guard
 
 /datum/ai/giant_spider/guard/do_process(time_elapsed)
+
 	. = ..()
 	var/mob/living/simple_animal/hostile/giant_spider/guard/spooder = body
 	if(spooder.berserking)
@@ -309,6 +310,7 @@ Nurse caste procs
 	expected_type = /mob/living/simple_animal/hostile/giant_spider/nurse
 
 /datum/ai/giant_spider/nurse/do_process(time_elapsed)
+
 	. = ..()
 	var/mob/living/simple_animal/hostile/giant_spider/nurse/spooder = body
 	if(spooder.stance != HOSTILE_STANCE_IDLE)
@@ -447,9 +449,11 @@ Hunter caste procs
 Spitter caste procs
 ******************/
 /mob/living/simple_animal/hostile/giant_spider/spitter/handle_regular_status_updates()
+
 	. = ..()
-	if(!.)
-		return FALSE
+	if(. == PROCESS_KILL)
+		return
+
 	if(venom_charge <= 0)
 		ranged = FALSE
 		if(prob(25))

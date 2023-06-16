@@ -36,6 +36,9 @@
 	STOP_PROCESSING(SSblob, src)
 	. = ..()
 
+/obj/effect/blob/proc/get_max_health()
+	return blob_max_health
+
 /obj/effect/blob/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
 	if(air_group || height == 0)
 		return 1
@@ -210,7 +213,7 @@
 	var/times_to_pulse = 0
 
 /obj/effect/blob/core/proc/get_health_percent()
-	return ((health / blob_max_health) * 100)
+	return ((health / get_max_health()) * 100)
 
 /*
 the master core becomes more vulnereable to damage as it weakens,
@@ -294,7 +297,7 @@ regen() will cover update_icon() for this proc
 	return
 
 /obj/effect/blob/core/secondary/on_update_icon()
-	icon_state = (health / blob_max_health >= 0.5) ? "blob_node" : "blob_factory"
+	icon_state = (health / get_max_health() >= 0.5) ? "blob_node" : "blob_factory"
 
 /obj/effect/blob/shield
 	name = "shielding mass"
@@ -318,9 +321,10 @@ regen() will cover update_icon() for this proc
 	return ..()
 
 /obj/effect/blob/shield/on_update_icon()
-	if(health > blob_max_health * 2 / 3)
+	var/max_health = get_max_health()
+	if(health > max_health * 2 / 3)
 		icon_state = "blob_idle"
-	else if(health > blob_max_health / 3)
+	else if(health > max_health / 3)
 		icon_state = "blob"
 	else
 		icon_state = "blob_damaged"

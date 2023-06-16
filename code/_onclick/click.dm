@@ -351,8 +351,8 @@ var/global/list/click_catchers
 	return global.click_catchers
 
 /obj/screen/click_catcher
-	icon = 'icons/mob/screen_gen.dmi'
-	icon_state = "click_catcher"
+	icon = 'icons/mob/screen/fill.dmi'
+	icon_state = "blank"
 	plane = CLICKCATCHER_PLANE
 	mouse_opacity = MOUSE_OPACITY_PRIORITY
 	screen_loc = "CENTER-7,CENTER-7"

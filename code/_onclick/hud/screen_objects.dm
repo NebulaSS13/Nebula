@@ -8,7 +8,7 @@
 */
 /obj/screen
 	name = ""
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/midnight.dmi'
 	plane = HUD_PLANE
 	layer = HUD_BASE_LAYER
 	appearance_flags = NO_CLIENT_COLOR
@@ -138,10 +138,7 @@
 	return TRUE
 
 /obj/screen/default_attack_selector/Destroy()
-	if(owner)
-		if(owner.attack_selector == src)
-			owner.attack_selector = null
-		owner = null
+	owner = null
 	. = ..()
 
 /obj/screen/default_attack_selector/proc/set_owner(var/mob/living/carbon/human/_owner)
@@ -202,6 +199,10 @@
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
 	var/selecting = BP_CHEST
+
+/obj/screen/zone_selector/Initialize(mapload)
+	. = ..()
+	update_icon()
 
 /obj/screen/zone_selector/Click(location, control,params)
 	var/list/PL = params2list(params)
@@ -278,42 +279,20 @@
 
 /obj/screen/zone_selector/on_update_icon()
 	set_overlays(image('icons/mob/zone_sel.dmi', "[selecting]"))
-
-/obj/screen/intent
-	name = "intent"
-	icon = 'icons/mob/screen/white.dmi'
-	icon_state = "intent_help"
-	screen_loc = ui_acti
-	var/intent = I_HELP
-
-/obj/screen/intent/Click(var/location, var/control, var/params)
-	var/list/P = params2list(params)
-	var/icon_x = text2num(P["icon-x"])
-	var/icon_y = text2num(P["icon-y"])
-	intent = I_DISARM
-	if(icon_x <= world.icon_size/2)
-		if(icon_y <= world.icon_size/2)
-			intent = I_HURT
-		else
-			intent = I_HELP
-	else if(icon_y <= world.icon_size/2)
-		intent = I_GRAB
-	update_icon()
-	usr.a_intent = intent
-
-/obj/screen/intent/on_update_icon()
-	icon_state = "intent_[intent]"
+	compile_overlays()
 
 /obj/screen/Click(location, control, params)
-	if(!usr)	return 1
+	if(!usr?.client)
+		return 1
 
 	switch(name)
 		if("toggle")
 			if(usr.hud_used.inventory_shown)
-				usr.client.screen -= usr.hud_used.other
+				usr.client.screen -= usr.hud_used.hidable_hud_elements
 				usr.hud_used.hide_inventory()
 			else
-				usr.client.screen += usr.hud_used.other
+				if(length(usr.hud_used.hidable_hud_elements))
+					usr.client.screen |= usr.hud_used.hidable_hud_elements
 				usr.hud_used.show_inventory()
 
 		if("equip")
@@ -338,9 +317,6 @@
 			if(isliving(usr))
 				var/mob/living/M = usr
 				M.ui_toggle_internals()
-
-		if("act_intent")
-			usr.a_intent_change("right")
 
 		if("throw")
 			if(!usr.stat && isturf(usr.loc) && !usr.restrained())

@@ -30,6 +30,7 @@
 /datum/ai/opossum
 	expected_type = /mob/living/simple_animal/opossum
 /datum/ai/opossum/do_process(time_elapsed)
+
 	. = ..()
 	if(!prob(1))
 		return

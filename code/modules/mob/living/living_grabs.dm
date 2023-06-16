@@ -41,7 +41,8 @@
 
 	face_atom(target)
 	var/obj/item/grab/grab
-	if(ispath(grab_tag, /decl/grab) && can_grab(target, get_target_zone(), defer_hand = defer_hand) && target.can_be_grabbed(src, get_target_zone(), defer_hand))
+	var/target_zone = get_target_zone()
+	if(ispath(grab_tag, /decl/grab) && can_grab(target, target_zone, defer_hand = defer_hand) && target.can_be_grabbed(src, target_zone, defer_hand))
 		grab = new /obj/item/grab(src, target, grab_tag, defer_hand)
 
 	if(QDELETED(grab))

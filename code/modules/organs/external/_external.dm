@@ -418,7 +418,6 @@
 
 /obj/item/organ/external/update_organ_health()
 	damage = min(max_damage, (brute_dam + burn_dam))
-	return
 
 //If "in_place" is TRUE will make organs skip their install/uninstall effects and  the sub-limbs and internal organs
 /obj/item/organ/external/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)

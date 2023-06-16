@@ -2,7 +2,9 @@
 	set invisibility = FALSE
 	set background = BACKGROUND_ENABLED
 
-	..()
+	. = ..()
+	if(. == PROCESS_KILL)
+		return
 
 	if (HasMovementHandler(/datum/movement_handler/mob/transformation))
 		return
@@ -324,11 +326,23 @@
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
 	SHOULD_CALL_PARENT(TRUE)
+	if(machine && machine.check_eye(src) < 0)
+		reset_view(null)
 	if(!should_do_hud_updates())
 		return FALSE
 	handle_hud_icons()
 	handle_vision()
 	handle_low_light_vision()
+	if(hud_used)
+		hud_used.update_icons()
+	if(stat != DEAD)
+		if(is_blind())
+			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+		else
+			clear_fullscreen("blind")
+			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
+			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
+			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 	return TRUE
 
 /mob/living/proc/handle_low_light_vision()

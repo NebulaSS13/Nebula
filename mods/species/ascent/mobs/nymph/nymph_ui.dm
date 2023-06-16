@@ -1,3 +1,6 @@
+/decl/hud_element/action_intent/ascent_nymph
+	screen_object_type = /obj/screen/intent/ascent_nymph
+
 /obj/screen/intent/ascent_nymph
 	icon_state = "intent_harm"
 	screen_loc = ANYMPH_SCREEN_LOC_INTENT
@@ -30,10 +33,15 @@
 	if(istype(nymph)) nymph.molt()
 
 /datum/hud/ascent_nymph
+	health_hud_type = /decl/hud_element/health/ascent_nymph
+	hud_elements = list(
+		/decl/hud_element/health/ascent_nymph
+	)
 	var/obj/screen/ascent_nymph_held/held
 	var/obj/screen/ascent_nymph_molt/molt
-	var/obj/screen/food/food
-	var/obj/screen/drink/drink
+
+/decl/hud_element/health/ascent_nymph
+	screen_loc = ui_alien_health
 
 /datum/hud/ascent_nymph/get_ui_style()
 	return 'mods/species/ascent/icons/ui.dmi'
@@ -45,49 +53,17 @@
 	return 255
 
 /datum/hud/ascent_nymph/FinalizeInstantiation()
-
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
-
 	held = new
 	held.icon =  ui_style
 	held.color = ui_color
 	held.alpha = ui_alpha
-	adding += held
-
+	misc_hud_elements += held
 	molt = new
 	molt.icon =  ui_style
 	molt.color = ui_color
 	molt.alpha = ui_alpha
-	adding += molt
-
-	food = new
-	food.icon = 'icons/mob/status_hunger.dmi'
-	food.SetName("nutrition")
-	food.icon_state = "nutrition1"
-	food.pixel_w = 8
-	food.screen_loc = ui_nutrition_small
-	adding += food
-
-	drink = new
-	drink.icon = 'icons/mob/status_hunger.dmi'
-	drink.icon_state = "hydration1"
-	drink.SetName("hydration")
-	drink.screen_loc = ui_nutrition_small
-	adding += drink
-
-	action_intent = new /obj/screen/intent/ascent_nymph()
-	action_intent.icon =  ui_style
-	action_intent.color = ui_color
-	action_intent.alpha = ui_alpha
-	adding += action_intent
-
-	mymob.healths = new /obj/screen()
-	mymob.healths.icon =  ui_style
-	mymob.healths.color = ui_color
-	mymob.healths.alpha = ui_alpha
-	mymob.healths.SetName("health")
-	mymob.healths.screen_loc = ANYMPH_SCREEN_LOC_HEALTH
-	adding += mymob.healths
-	..()
+	misc_hud_elements += molt
+	return ..()

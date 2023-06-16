@@ -106,6 +106,7 @@
 			else
 				check_for_airtight_internals()
 	var/obj/item/tank/new_internals = get_internals()
+	var/obj/screen/internals = get_hud_element(/decl/hud_element/internals)
 	if(internals && old_internals != new_internals)
 		internals.icon_state = "internal[!!new_internals]"
 	if(istype(new_internals))

@@ -2,21 +2,20 @@
 	var/obj/screen/using
 	using = new /obj/screen/pai/software()
 	using.SetName("Software Interface")
-	adding += using
+	misc_hud_elements += using
 	using = new /obj/screen/pai/subsystems()
 	using.SetName("Subsystems")
-	adding += using
+	misc_hud_elements += using
 	using = new /obj/screen/pai/shell()
 	using.SetName("Toggle Chassis")
-	adding += using
+	misc_hud_elements += using
 	using = new /obj/screen/pai/rest()
 	using.SetName("Rest")
-	adding += using
+	misc_hud_elements += using
 	using = new /obj/screen/pai/light()
 	using.SetName("Toggle Light")
-	adding += using
-	..()
-	hide_inventory()
+	misc_hud_elements += using
+	return ..()
 
 /obj/screen/pai
 	icon = 'icons/mob/screen/pai.dmi'

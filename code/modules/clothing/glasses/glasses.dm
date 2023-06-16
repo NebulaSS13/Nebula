@@ -24,7 +24,7 @@
 	name = "science goggles"
 	desc = "Goggles fitted with a portable analyzer capable of determining the fabricator training potential of an item or components of a machine. Sensitive to EMP."
 	icon = 'icons/clothing/eyes/goggles_science.dmi'
-	hud_type = HUD_SCIENCE
+	glasses_hud_type = HUD_SCIENCE
 	toggleable = TRUE
 	electric = TRUE
 	anomaly_shielding = 0.1

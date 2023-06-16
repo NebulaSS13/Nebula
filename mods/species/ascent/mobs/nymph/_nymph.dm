@@ -2,7 +2,6 @@
 #define ANYMPH_SCREEN_LOC_HAT    "RIGHT-7:16,BOTTOM:5"
 #define ANYMPH_SCREEN_LOC_MOLT   "RIGHT-6:16,BOTTOM:5"
 #define ANYMPH_SCREEN_LOC_INTENT "RIGHT-2,BOTTOM:5"
-#define ANYMPH_SCREEN_LOC_HEALTH ui_alien_health
 
 #define ANYMPH_MAX_CRYSTALS      20000
 #define ANYMPH_CRYSTAL_MOLT      2000  // How much it takes to molt.
@@ -30,7 +29,7 @@
 	holder_type = /obj/item/holder/ascent_nymph
 	possession_candidate = 1
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_CHEM_CHANGE
-	hud_type = /datum/hud/ascent_nymph
+	hud_used = /datum/hud/ascent_nymph
 
 	var/obj/item/holding_item
 	var/crystal_reserve = 1000

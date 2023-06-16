@@ -243,14 +243,14 @@
 	var/obj/item/clothing/glasses/G = get_equipped_item(slot_glasses_str)
 	if(!istype(G))
 		return
-	if(G.hud_type & hudtype)
+	if(G.glasses_hud_type & hudtype)
 		return G
-	if(G.hud && (G.hud.hud_type & hudtype))
+	if(G.hud && (G.hud.glasses_hud_type & hudtype))
 		return G.hud
 
 /mob/living/silicon/robot/getHUDsource(hudtype)
 	for(var/obj/item/borg/sight/sight in list(module_state_1, module_state_2, module_state_3))
-		if(istype(sight) && (sight.hud_type & hudtype))
+		if(istype(sight) && (sight.borg_hud_type & hudtype))
 			return sight
 
 //Gets the computer network M's source of hudtype is using

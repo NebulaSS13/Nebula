@@ -1,12 +1,12 @@
 
 /mob
-	var/list/screens = list()
+	var/list/_screens
 
 /mob/proc/set_fullscreen(condition, screen_name, screen_type, arg)
 	condition ? overlay_fullscreen(screen_name, screen_type, arg) : clear_fullscreen(screen_name)
 
 /mob/proc/overlay_fullscreen(category, type, severity)
-	var/obj/screen/fullscreen/screen = screens[category]
+	var/obj/screen/fullscreen/screen = LAZYACCESS(_screens, category)
 
 	if(screen)
 		if(screen.type != type)
@@ -21,7 +21,7 @@
 	screen.icon_state = "[initial(screen.icon_state)][severity]"
 	screen.severity = severity
 
-	screens[category] = screen
+	LAZYSET(_screens, category, screen)
 	screen.transform = null
 	if(screen && client && (stat != DEAD || screen.allstate))
 		client.screen += screen
@@ -36,11 +36,11 @@
 		qdel(screen)
 
 /mob/proc/clear_fullscreen(category, animated = 10)
-	var/obj/screen/fullscreen/screen = screens[category]
+	var/obj/screen/fullscreen/screen = LAZYACCESS(_screens, category)
 	if(!screen)
 		return
 
-	screens -= category
+	LAZYREMOVE(_screens, category)
 
 	if(animated)
 		show_screen(screen, animated)
@@ -50,19 +50,19 @@
 		qdel(screen)
 
 /mob/proc/clear_fullscreens()
-	for(var/category in screens)
+	for(var/category in _screens)
 		clear_fullscreen(category)
 
 /mob/proc/hide_fullscreens()
 	if(client)
-		for(var/category in screens)
-			client.screen -= screens[category]
+		for(var/category in _screens)
+			client.screen -= _screens[category]
 
 /mob/proc/reload_fullscreen()
 	if(client)
 		var/largest_bound = max(client.last_view_x_dim, client.last_view_y_dim)
-		for(var/category in screens)
-			var/obj/screen/fullscreen/screen = screens[category]
+		for(var/category in _screens)
+			var/obj/screen/fullscreen/screen = _screens[category]
 			screen.transform = null
 			if(screen.screen_loc != ui_entire_screen && largest_bound > 7)
 				var/matrix/M = matrix()
@@ -71,7 +71,7 @@
 			client.screen |= screen
 
 /obj/screen/fullscreen
-	icon = 'icons/mob/screen_full.dmi'
+	icon = 'icons/mob/screen/full.dmi'
 	icon_state = "default"
 	screen_loc = ui_center_fullscreen
 	plane = FULLSCREEN_PLANE
@@ -101,7 +101,7 @@
 	layer = BLIND_LAYER
 
 /obj/screen/fullscreen/blackout
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/fill.dmi'
 	icon_state = "black"
 	screen_loc = ui_entire_screen
 	layer = BLIND_LAYER
@@ -111,13 +111,13 @@
 	layer = IMPAIRED_LAYER
 
 /obj/screen/fullscreen/blurry
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/fill.dmi'
 	screen_loc = ui_entire_screen
 	icon_state = "blurry"
 	alpha = 100
 
 /obj/screen/fullscreen/flash
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/fill.dmi'
 	screen_loc = ui_entire_screen
 	icon_state = "flash"
 
@@ -125,7 +125,7 @@
 	icon_state = "noise"
 
 /obj/screen/fullscreen/high
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/fill.dmi'
 	screen_loc = ui_entire_screen
 	icon_state = "druggy"
 	alpha = 180
@@ -138,7 +138,7 @@
 	alpha = 127
 
 /obj/screen/fullscreen/fadeout
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/fill.dmi'
 	icon_state = "black"
 	screen_loc = ui_entire_screen
 	alpha = 0

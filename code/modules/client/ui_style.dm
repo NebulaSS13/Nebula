@@ -29,6 +29,9 @@ var/global/all_tooltip_styles = list(
 	set desc = "Configure your user interface"
 	set category = "OOC"
 
+	if(!mob.hud_used)
+		return
+
 	if(!ishuman(mob))
 		to_chat(src, SPAN_WARNING("You must be human to use this verb."))
 		return
@@ -47,18 +50,15 @@ var/global/all_tooltip_styles = list(
 
 	UI_style_alpha_new = clamp(UI_style_alpha_new, 50, 255)
 
-	var/list/icons = mob.hud_used.adding + mob.hud_used.other + mob.hud_used.hotkeybuttons
-
-	icons.Add(
-		mob.zone_sel,
-		mob.gun_setting_icon,
-		mob.item_use_icon,
-		mob.gun_move_icon,
-		mob.radio_use_icon
-	)
+	var/list/icons = list()
+	if(length(mob.hud_used.misc_hud_elements))
+		icons |= mob.hud_used.misc_hud_elements
+	if(length(mob.hud_used.hidable_hud_elements))
+		icons |= mob.hud_used.hidable_hud_elements
+	if(length(mob.hud_used.hotkey_hud_elements))
+		icons |= mob.hud_used.hotkey_hud_elements
 
 	var/icon/UI_style_icon_new = all_ui_styles[UI_style_new]
-
 	apply_ui_style(icons, UI_style_icon_new, UI_style_color_new, UI_style_alpha_new)
 
 	if(alert("Like it? Save changes?",,"Yes", "No") == "Yes")

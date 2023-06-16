@@ -7,9 +7,9 @@
 	return TRUE
 
 /mob/living/proc/get_bodytemperature_difference()
-	var/decl/species/my_species = get_species()
-	if(my_species)
-		return (my_species.body_temperature - bodytemperature)
+	var/ideal_bodytemp = get_ideal_bodytemp()
+	if(!isnull(ideal_bodytemp))
+		return (ideal_bodytemp - bodytemperature)
 	return 0
 
 /mob/living/proc/stabilize_body_temperature()

@@ -1,6 +1,6 @@
 /decl/grab/normal
 	name = "grab"
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/grabs.dmi'
 	help_action = "inspect"
 	disarm_action = "pin"
 	grab_action = "jointlock"

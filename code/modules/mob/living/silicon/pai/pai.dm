@@ -24,10 +24,11 @@ var/global/list/possible_say_verbs = list(
 	icon = 'icons/mob/robots/pai/pai_drone.dmi'
 	icon_state = ICON_STATE_WORLD
 	mob_sort_value = 3
-	hud_type = /datum/hud/pai
+	hud_used = /datum/hud/pai
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
+	mob_default_max_health = 100
 
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER

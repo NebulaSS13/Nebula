@@ -354,4 +354,7 @@
 		var/summary = default_attack.summarize()
 		if(summary)
 			to_chat(src, SPAN_NOTICE(summary))
-	attack_selector?.update_icon()
+
+	var/obj/screen/default_attack_selector/attack_selector = get_hud_element(/decl/hud_element/attack_selector)
+	if(istype(attack_selector))
+		attack_selector.update_icon()

@@ -1,3 +1,6 @@
+/decl/hud_element/action_intent/diona_nymph
+	screen_object_type = /obj/screen/intent/diona_nymph
+
 /obj/screen/intent/diona_nymph
 	icon_state = "intent_harm"
 	screen_loc = DIONA_SCREEN_LOC_INTENT
@@ -32,30 +35,17 @@
 	return 255
 
 /datum/hud/diona_nymph/FinalizeInstantiation()
-
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
-
+	hat = new
+	hat.icon =  ui_style
+	hat.color = ui_color
+	hat.alpha = ui_alpha
+	misc_hud_elements += hat
 	held = new
 	held.icon =  ui_style
 	held.color = ui_color
 	held.alpha = ui_alpha
-	adding += held
-
-	action_intent = new /obj/screen/intent/diona_nymph()
-	action_intent.icon =  ui_style
-	action_intent.color = ui_color
-	action_intent.alpha = ui_alpha
-	adding += action_intent
-
-	mymob.healths = new /obj/screen()
-	mymob.healths.icon =  ui_style
-	mymob.healths.color = ui_color
-	mymob.healths.alpha = ui_alpha
-	mymob.healths.icon_state = "health0"
-	mymob.healths.SetName("health")
-	mymob.healths.screen_loc = DIONA_SCREEN_LOC_HEALTH
-	adding += mymob.healths
-
-	..()
+	misc_hud_elements += held
+	return ..()

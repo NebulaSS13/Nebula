@@ -51,8 +51,7 @@
 	var/target_zone = "(ZONE_SEL: N/A)"
 	if(attacker)
 		intent = "(INTENT: [uppertext(attacker.a_intent)])"
-		if (attacker.get_target_zone())
-			target_zone = "(ZONE_SEL: [uppertext(attacker.get_target_zone())])"
+		target_zone = "(ZONE_SEL: [uppertext(attacker.get_target_zone())])"
 		if(victim)
 			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[key_name(victim)] - [attacker_message] [intent] [target_zone]</font>")
 		else

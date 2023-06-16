@@ -107,14 +107,9 @@
 
 	refresh_client_images()
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
-	add_click_catcher()
+	reset_click_catchers()
 	update_action_buttons()
 	update_mouse_pointer()
-
-	if(ability_master)
-		ability_master.update_abilities(TRUE, src)
-		ability_master.toggle_open(1)
-		ability_master.synch_spells_to_mind(mind)
 
 	if(get_preference_value(/datum/client_preference/show_status_markers) == PREF_SHOW)
 		if(status_markers?.mob_image_personal)

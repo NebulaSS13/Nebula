@@ -13,8 +13,6 @@
 	QDEL_NULL(hud_used)
 	if(active_storage)
 		active_storage.close(src)
-	if(istype(ability_master))
-		QDEL_NULL(ability_master)
 	if(istype(skillset))
 		QDEL_NULL(skillset)
 	QDEL_NULL_LIST(grabbed_by)
@@ -22,7 +20,6 @@
 	if(istype(ai))
 		QDEL_NULL(ai)
 	QDEL_NULL(lighting_master)
-	remove_screen_obj_references()
 	if(client)
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
@@ -34,27 +31,6 @@
 	teleop = null
 	ghostize()
 	return ..()
-
-/mob/proc/remove_screen_obj_references()
-	QDEL_NULL_SCREEN(hands)
-	QDEL_NULL_SCREEN(internals)
-	QDEL_NULL_SCREEN(oxygen)
-	QDEL_NULL_SCREEN(toxin)
-	QDEL_NULL_SCREEN(fire)
-	QDEL_NULL_SCREEN(bodytemp)
-	QDEL_NULL_SCREEN(healths)
-	QDEL_NULL_SCREEN(throw_icon)
-	QDEL_NULL_SCREEN(nutrition_icon)
-	QDEL_NULL_SCREEN(hydration_icon)
-	QDEL_NULL_SCREEN(pressure)
-	QDEL_NULL_SCREEN(pain)
-	QDEL_NULL_SCREEN(up_hint)
-	QDEL_NULL_SCREEN(item_use_icon)
-	QDEL_NULL_SCREEN(radio_use_icon)
-	QDEL_NULL_SCREEN(gun_move_icon)
-	QDEL_NULL_SCREEN(gun_setting_icon)
-	QDEL_NULL_SCREEN(ability_master)
-	QDEL_NULL_SCREEN(zone_sel)
 
 /mob/Initialize()
 	if(ispath(skillset))
@@ -235,10 +211,11 @@
 
 /mob/proc/Life()
 	SHOULD_NOT_SLEEP(TRUE)
+	SHOULD_CALL_PARENT(TRUE)
 	if(QDELETED(src))
 		return PROCESS_KILL
-	if(ability_master)
-		ability_master.update_spells(0)
+	// Alerts will be set by logic higher in the call chain.
+	CLEAR_HUD_ALERTS(src)
 
 #define UNBUCKLED 0
 #define PARTIALLY_BUCKLED 1
@@ -965,13 +942,15 @@
 
 /mob/proc/throw_mode_off()
 	src.in_throw_mode = 0
-	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
-		src.throw_icon.icon_state = "act_throw_off"
+	var/obj/screen/throw_icon = get_hud_element(/decl/hud_element/throwing)
+	if(throw_icon) //in case we don't have the HUD and we use the hotkey
+		throw_icon.icon_state = "act_throw_off"
 
 /mob/proc/throw_mode_on()
 	src.in_throw_mode = 1
-	if(src.throw_icon)
-		src.throw_icon.icon_state = "act_throw_on"
+	var/obj/screen/throw_icon = get_hud_element(/decl/hud_element/throwing)
+	if(throw_icon)
+		throw_icon.icon_state = "act_throw_on"
 
 /mob/proc/toggle_antag_pool()
 	set name = "Toggle Add-Antag Candidacy"
@@ -993,7 +972,7 @@
 	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)
 
 /client/proc/check_has_body_select()
-	return mob && mob.hud_used && istype(mob.zone_sel, /obj/screen/zone_selector)
+	return istype(mob?.get_hud_element(/decl/hud_element/zone_selector), /obj/screen/zone_selector)
 
 /client/verb/body_toggle_head()
 	set name = "body-toggle-head"
@@ -1033,8 +1012,9 @@
 /client/proc/toggle_zone_sel(list/zones)
 	if(!check_has_body_select())
 		return
-	var/obj/screen/zone_selector/selector = mob.zone_sel
-	selector.set_selected_zone(next_in_list(mob.get_target_zone(),zones))
+	var/obj/screen/zone_selector/selector = mob?.get_hud_element(/decl/hud_element/zone_selector)
+	if(selector)
+		selector.set_selected_zone(next_in_list(selector.selecting, zones))
 
 /mob/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)
@@ -1333,8 +1313,18 @@
 /mob/proc/toggle_internals(var/mob/living/user)
 	return
 
+/mob/Move()
+	. = ..()
+	if(. && client)
+		var/obj/screen/up_hint = get_hud_element(/decl/hud_element/up_hint)
+		if(up_hint)
+			var/turf/above = GetAbove(src)
+			up_hint.icon_state = "uphint[!!(above && TURF_IS_MIMICKING(above))]"
+
 /mob/proc/get_target_zone()
-	return zone_sel?.selecting
+	var/obj/screen/zone_selector/zone_sel = get_hud_element(/decl/hud_element/zone_selector)
+	if(istype(zone_sel))
+		return zone_sel?.selecting
 
 /mob/proc/get_temperature_threshold(var/threshold)
 	switch(threshold)
@@ -1364,9 +1354,14 @@
 	RETURN_TYPE(/obj/item/card/id)
 	return LAZYACCESS(GetIdCards(exceptions), 1)
 
+/mob/proc/get_ideal_bodytemp()
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		return (my_species.body_temperature - bodytemperature)
+	return null
+
 /mob/get_overhead_text_x_offset()
 	return offset_overhead_text_x
 
 /mob/get_overhead_text_y_offset()
 	return offset_overhead_text_y
-

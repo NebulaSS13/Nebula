@@ -33,6 +33,7 @@
 	return 1
 
 /mob/living/carbon/proc/escape_handcuffs()
+
 	//This line represent a significant buff to grabs...
 	// We don't have to check the click cooldown because /mob/living/verb/resist() has done it for us, we can simply set the delay
 	setClickCooldown(100)

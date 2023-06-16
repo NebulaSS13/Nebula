@@ -25,6 +25,8 @@
 
 	bleed_colour = "#816e12"
 
+	hud_used = /datum/hud/borer
+
 	var/static/list/chemical_types = list(
 		"anti-trauma" =  /decl/material/liquid/brute_meds,
 		"amphetamines" = /decl/material/liquid/amphetamines,
@@ -60,12 +62,14 @@
 
 /mob/living/simple_animal/borer/Login()
 	. = ..()
+	if(hud_used)
+		hud_used.refresh_ability_hud()
 	if(mind && !neutered)
 		var/decl/special_role/borer/borers = GET_DECL(/decl/special_role/borer)
 		borers.add_antagonist(mind)
 
 /mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
-
+	hud_used = neutered ? /datum/hud/borer : /datum/hud/borer/sterile
 	. = ..()
 
 	add_language(/decl/language/corticalborer)
@@ -85,6 +89,9 @@
 	. = ..()
 	set_status(STAT_BLIND,  host ? GET_STATUS(host, STAT_BLIND)  : 0)
 	set_status(STAT_BLURRY, host ? GET_STATUS(host, STAT_BLURRY) : 0)
+	. = ..()
+	if(. == PROCESS_KILL)
+		return
 
 /mob/living/simple_animal/borer/handle_disabilities()
 	. = ..()
@@ -193,23 +200,10 @@
 
 	qdel(host_brain)
 
-#define COLOR_BORER_RED "#ff5555"
-/mob/living/simple_animal/borer/proc/set_ability_cooldown(var/amt)
-	set_special_ability_cooldown(amt)
-	var/datum/hud/borer/borer_hud = hud_used
-	if(istype(borer_hud))
-		for(var/obj/thing in borer_hud.borer_hud_elements)
-			thing.color = COLOR_BORER_RED
-	addtimer(CALLBACK(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)
-#undef COLOR_BORER_RED
-
 /mob/living/simple_animal/borer/proc/leave_host()
 
-	var/datum/hud/borer/borer_hud = hud_used
-	if(istype(borer_hud))
-		for(var/obj/thing in borer_hud.borer_hud_elements)
-			thing.alpha = 0
-			thing.set_invisibility(INVISIBILITY_ABSTRACT)
+	if(hud_used)
+		hud_used.hide_ability_hud()
 
 	if(!host) return
 

@@ -23,7 +23,7 @@
 		client.screen |= hud_elements
 
 /mob/living/exosuit/InitializeHud()
-	zone_sel = new
+
 	if(!LAZYLEN(hud_elements))
 		var/i = 1
 		for(var/hardpoint in hardpoints)

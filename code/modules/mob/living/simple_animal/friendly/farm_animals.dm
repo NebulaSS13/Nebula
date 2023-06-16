@@ -70,6 +70,13 @@
 	if(. && stat == CONSCIOUS && udder && prob(5))
 		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
 
+	if(!LAZYLEN(grabbed_by))
+		var/obj/effect/vine/food
+		food = locate(/obj/effect/vine) in oview(5,loc)
+		if(food)
+			var/step = get_step_to(src, food, 0)
+			Move(step)
+
 /mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
 	..()
 	if(stat == CONSCIOUS && prob(50))

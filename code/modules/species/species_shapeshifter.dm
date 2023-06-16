@@ -86,7 +86,7 @@ var/global/list/wrapped_species_by_ref = list()
 	set name = "Select Body Shape"
 	set category = "Abilities"
 
-	if(stat ||is_on_special_ability_cooldown())
+	if(stat || is_on_special_ability_cooldown())
 		return
 
 	set_special_ability_cooldown(5 SECONDS)

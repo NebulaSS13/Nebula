@@ -1,7 +1,6 @@
 #define DIONA_SCREEN_LOC_HELD   "RIGHT-8:16,BOTTOM:5"
 #define DIONA_SCREEN_LOC_HAT    "RIGHT-7:16,BOTTOM:5"
 #define DIONA_SCREEN_LOC_INTENT "RIGHT-2,BOTTOM:5"
-#define DIONA_SCREEN_LOC_HEALTH ui_alien_health
 
 /mob/living/carbon/alien/diona
 	name = "diona nymph"
@@ -27,7 +26,7 @@
 	holder_type = /obj/item/holder/diona
 	possession_candidate = 1
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_CHEM_CHANGE
-	hud_type = /datum/hud/diona_nymph
+	hud_used = /datum/hud/diona_nymph
 
 	ai = /datum/ai/nymph
 

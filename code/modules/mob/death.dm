@@ -74,14 +74,8 @@
 
 	SSstatistics.report_death(src)
 
-	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
-	if(healths)
-		healths.overlays.Cut() // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
-		if("health7" in icon_states(healths.icon))
-			healths.icon_state = "health7"
-		else
-			healths.icon_state = "health6"
-			log_debug("[src] ([src.type]) died but does not have a valid health7 icon_state (using health6 instead). report this error to Ccomp5950 or your nearest Developer")
+	if(hud_used)
+		hud_used.update_icons()
 
 	timeofdeath = world.time
 	if(mind)

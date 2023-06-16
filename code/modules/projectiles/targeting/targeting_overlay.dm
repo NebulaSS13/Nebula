@@ -32,29 +32,13 @@
 		target_permissions |= perm
 
 	// Update HUD icons.
-	if(owner.gun_move_icon)
-		if(!(target_permissions & TARGET_CAN_MOVE))
-			owner.gun_move_icon.icon_state = "no_walk0"
-			owner.gun_move_icon.SetName("Allow Movement")
-		else
-			owner.gun_move_icon.icon_state = "no_walk1"
-			owner.gun_move_icon.SetName("Disallow Movement")
+	if(!owner?.hud_used)
+		return
 
-	if(owner.item_use_icon)
-		if(!(target_permissions & TARGET_CAN_CLICK))
-			owner.item_use_icon.icon_state = "no_item0"
-			owner.item_use_icon.SetName("Allow Item Use")
-		else
-			owner.item_use_icon.icon_state = "no_item1"
-			owner.item_use_icon.SetName("Disallow Item Use")
-
-	if(owner.radio_use_icon)
-		if(!(target_permissions & TARGET_CAN_RADIO))
-			owner.radio_use_icon.icon_state = "no_radio0"
-			owner.radio_use_icon.SetName("Allow Radio Use")
-		else
-			owner.radio_use_icon.icon_state = "no_radio1"
-			owner.radio_use_icon.SetName("Disallow Radio Use")
+	for(var/gun_flag_elem in global.gun_hud_flag_decl_types)
+		var/obj/screen/gun_flag/gun_elem = owner.get_hud_element(gun_flag_elem)
+		if(istype(gun_elem))
+			gun_elem.update_from_aiming_overlay(src)
 
 	var/message = "no longer permitted to "
 	var/use_span = "warning"
@@ -206,7 +190,11 @@
 			if(!no_message)
 				to_chat(owner, "<span class='notice'>You will no longer aim rather than fire.</span>")
 			owner.client.remove_gun_icons()
-		owner.gun_setting_icon.icon_state = "gun[active]"
+
+		if(istype(owner.hud_used))
+			var/obj/screen/gun_mode/gun_mode = owner.get_hud_element(/decl/hud_element/gun_mode)
+			if(gun_mode)
+				gun_mode.icon_state = "gun[!!active]"
 
 /obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
 	if(!aiming_with || !aiming_at)

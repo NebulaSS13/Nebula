@@ -39,36 +39,6 @@
 
 	var/stat = CONSCIOUS //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
-	var/obj/screen/cells = null
-
-	var/obj/screen/hands = null
-	var/obj/screen/internals = null
-	var/obj/screen/oxygen = null
-	var/obj/screen/toxin = null
-	var/obj/screen/fire = null
-	var/obj/screen/bodytemp = null
-	var/obj/screen/healths = null
-	var/obj/screen/throw_icon = null
-	var/obj/screen/nutrition_icon = null
-	var/obj/screen/hydration_icon = null
-	var/obj/screen/pressure = null
-	var/obj/screen/pain = null
-	var/obj/screen/up_hint = null
-	var/obj/screen/gun/item/item_use_icon = null
-	var/obj/screen/gun/radio/radio_use_icon = null
-	var/obj/screen/gun/move/gun_move_icon = null
-	var/obj/screen/gun/mode/gun_setting_icon = null
-
-	var/obj/screen/ability_master/ability_master = null
-
-	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.
-	A variable should only be globally attached to turfs/objects/whatever, when it is in fact needed as such.
-	The current method unnecessarily clusters up the variable list, especially for humans (although rearranging won't really clean it up a lot but the difference will be noticable for other mobs).
-	I'll make some notes on where certain variable defines should probably go.
-	Changing this around would probably require a good look-over the pre-existing code.
-	*/
-	var/obj/screen/zone_selector/zone_sel = null
-
 	/// Cursor icon used when holding shift over things.
 	var/examine_cursor_icon = 'icons/effects/mouse_pointers/examine_pointer.dmi'
 

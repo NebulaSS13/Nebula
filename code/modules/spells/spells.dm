@@ -3,18 +3,8 @@
 
 /mob/Stat()
 	. = ..()
-	if(. && ability_master && ability_master.spell_objects)
-		for(var/obj/screen/ability/spell/screen in ability_master.spell_objects)
-			var/spell/S = screen.spell
-			if((!S.connected_button) || !statpanel(S.panel))
-				continue //Not showing the noclothes spell
-			switch(S.charge_type)
-				if(Sp_RECHARGE)
-					statpanel(S.panel,"[S.charge_counter/10.0]/[S.charge_max/10]",S.connected_button)
-				if(Sp_CHARGES)
-					statpanel(S.panel,"[S.charge_counter]/[S.charge_max]",S.connected_button)
-				if(Sp_HOLDVAR)
-					statpanel(S.panel,"[S.holder_var_type] [S.holder_var_amount]",S.connected_button)
+	if(. && istype(hud_used))
+		hud_used.refresh_stat_panel()
 
 /proc/restore_spells(var/mob/H)
 	if(H.mind && H.mind.learned_spells)
@@ -27,11 +17,14 @@
 
 		for(var/spell/spell_to_add in spells)
 			H.add_spell(spell_to_add)
-	H.ability_master.update_abilities(0,H)
+	var/obj/screen/ability_master/ability_master = H.get_hud_element(/decl/hud_element/ability_master)
+	if(ability_master)
+		ability_master.update_abilities(0,H)
 
 /mob/proc/add_spell(var/spell/spell_to_add, var/spell_base = "wiz_spell_ready")
+	var/obj/screen/ability_master/ability_master = get_hud_element(/decl/hud_element/ability_master)
 	if(!ability_master)
-		ability_master = new()
+		return
 	spell_to_add.holder = src
 	if(mind)
 		if(!mind.learned_spells)
@@ -46,6 +39,7 @@
 
 	if(mind)
 		mind.learned_spells -= spell_to_remove
+	var/obj/screen/ability_master/ability_master = get_hud_element(/decl/hud_element/ability_master)
 	if (ability_master)
 		ability_master.remove_ability(ability_master.get_ability_by_spell(spell_to_remove))
 	return 1
@@ -53,8 +47,6 @@
 /mob/proc/silence_spells(var/amount = 0)
 	if(amount < 0)
 		return
-
-	if(!ability_master)
-		return
-
-	ability_master.silence_spells(amount)
+	var/obj/screen/ability_master/ability_master = get_hud_element(/decl/hud_element/ability_master)
+	if(ability_master)
+		ability_master.silence_spells(amount)

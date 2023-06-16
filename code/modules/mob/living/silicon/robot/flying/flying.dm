@@ -22,7 +22,11 @@
 	components["armour"] =         new/datum/robot_component/armour/light(src)
 
 /mob/living/silicon/robot/flying/handle_regular_status_updates()
+
 	. = ..()
+	if(. == PROCESS_KILL)
+		return
+
 	if(incapacitated() || !is_component_functioning("actuator"))
 		stop_flying()
 	else

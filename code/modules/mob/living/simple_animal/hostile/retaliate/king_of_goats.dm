@@ -192,8 +192,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/handle_living_non_stasis_processes()
 	. = ..()
-	if(!.)
-		return FALSE
+	if(. == PROCESS_KILL)
+		return
 	if(special_attacks >= 6 && current_damtype != BRUTE)
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
 		current_damtype = BRUTE

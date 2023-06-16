@@ -218,7 +218,6 @@
 // End BS12 momentum-transfer code.
 
 /mob/living/attack_generic(var/mob/user, var/damage, var/attack_message)
-
 	if(!damage || !istype(user))
 		return
 

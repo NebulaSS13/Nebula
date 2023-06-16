@@ -1,12 +1,13 @@
 /mob/proc/flash_pain(var/target)
-	if(pain)
+	var/obj/screen/pain_overlay = get_hud_element(/decl/hud_element/pain)
+	if(pain_overlay)
 		var/matrix/M
 		if(client && max(client.last_view_x_dim, client.last_view_y_dim) > 7)
 			M = matrix()
 			M.Scale(CEILING(client.last_view_x_dim/7), CEILING(client.last_view_y_dim/7))
-		pain.transform = M
-		animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
-		animate(pain, alpha = 0, time = 20)
+		pain_overlay.transform = M
+		animate(pain_overlay, alpha = target, time = 15, easing = ELASTIC_EASING)
+		animate(pain_overlay, alpha = 0, time = 20)
 
 /mob/living/proc/can_feel_pain(var/check_organ)
 	if(check_organ)

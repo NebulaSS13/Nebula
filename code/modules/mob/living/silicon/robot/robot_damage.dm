@@ -54,6 +54,7 @@
 	if(!parts.len)	return
 	var/datum/robot_component/picked = pick(parts)
 	picked.heal_damage(brute,burn)
+	update_health()
 
 /mob/living/silicon/robot/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
 	var/list/components = get_damageable_components()
@@ -81,31 +82,29 @@
 		var/datum/robot_component/armour/A = get_armour()
 		if(A)
 			A.take_damage(brute, burn)
+			update_health()
 			return
 
 	var/datum/robot_component/C = pick(components)
 	C.take_damage(brute, burn)
+	update_health()
 
 /mob/living/silicon/robot/heal_overall_damage(var/brute, var/burn)
 	var/list/datum/robot_component/parts = get_damaged_components(brute,burn)
-
 	while(parts.len && (brute>0 || burn>0) )
 		var/datum/robot_component/picked = pick(parts)
-
 		var/brute_was = picked.brute_damage
 		var/burn_was = picked.electronics_damage
-
 		picked.heal_damage(brute,burn)
-
 		brute -= (brute_was-picked.brute_damage)
 		burn -= (burn_was-picked.electronics_damage)
-
 		parts -= picked
+	update_health()
 
 /mob/living/silicon/robot/take_overall_damage(var/brute = 0, var/burn = 0, var/sharp = 0, var/used_weapon = null)
-	if(status_flags & GODMODE)	return	//godmode
+	if(status_flags & GODMODE)
+		return
 	var/list/datum/robot_component/parts = get_damageable_components()
-
 	 //Combat shielding absorbs a percentage of damage directly into the cell.
 	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
 		var/obj/item/borg/combat/shield/shield = module_active

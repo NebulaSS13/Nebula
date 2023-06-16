@@ -194,18 +194,18 @@
 	origin_tech = "{'materials':2,'engineering':3,'programming':3,'magnets':3}"
 
 /obj/item/borg/upgrade/jetpack/action(var/mob/living/silicon/robot/R)
-	if(..()) return 0
+	if(..())
+		return FALSE
 
 	if(!R.module || !(type in R.module.supported_upgrades))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
 		to_chat(usr, "There's no mounting point for the module!")
-		return 0
-	else
-		R.module.equipment += new/obj/item/tank/jetpack/carbondioxide
-		for(var/obj/item/tank/jetpack/carbondioxide in R.module.equipment)
-			R.internals = src
-		//R.icon_state="Miner+j"
-		return 1
+		return FALSE
+
+	var/jetpack = new /obj/item/tank/jetpack/carbondioxide(R.module)
+	R.module.equipment += jetpack
+	R.set_internals(jetpack)
+	return TRUE
 
 /obj/item/borg/upgrade/rcd
 	name = "engineering robot RCD"
