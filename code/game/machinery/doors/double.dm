@@ -19,6 +19,7 @@
 	appearance_flags = 0
 	opacity = TRUE
 	width = 2
+	set_dir_on_update = FALSE
 
 /obj/machinery/door/airlock/double/update_connections(var/propagate = 0)
 	var/dirs = 0
