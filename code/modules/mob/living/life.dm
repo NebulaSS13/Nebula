@@ -81,7 +81,8 @@
 
 	radiation = clamp(radiation,0,500)
 	var/decl/species/my_species = get_species()
-	if(my_species && (my_species.appearance_flags & RADIATION_GLOWS))
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_species && my_bodytype && (my_bodytype.appearance_flags & RADIATION_GLOWS))
 		if(radiation)
 			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), my_species.get_flesh_colour(src))
 		else

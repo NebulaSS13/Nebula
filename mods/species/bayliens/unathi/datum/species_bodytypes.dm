@@ -11,6 +11,10 @@
 	health_hud_intensity =   2
 	associated_gender =      FEMALE
 	uniform_state_modifier = "_f"
+	movement_slowdown =      0.5
+	base_color = "#066000"
+	base_hair_color = "#192e19"
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 /decl/bodytype/lizard/masculine
 	name =                   "masculine"

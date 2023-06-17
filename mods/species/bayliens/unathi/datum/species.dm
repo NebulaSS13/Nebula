@@ -33,7 +33,6 @@
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
 	breath_pressure = 18
-	slowdown = 0.5
 	brute_mod = 0.8
 	flash_mod = 1.2
 	blood_volume = 800
@@ -56,12 +55,9 @@
 	heat_level_3 = 1100 //Default 1000
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34af10"
-	base_color = "#066000"
 	default_h_style = /decl/sprite_accessory/hair/lizard/frills_long
-	base_hair_color = "#192e19"
 	organs_icon = 'mods/species/bayliens/unathi/icons/organs.dmi'
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/doctor

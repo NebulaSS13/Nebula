@@ -16,8 +16,6 @@
 	name_plural = "Serpentids"
 	spawn_flags = SPECIES_IS_RESTRICTED
 
-	base_color =      "#336600"
-	base_eye_color =  "#3f0505"
 	preview_outfit = null
 
 	blood_types = list(/decl/blood_type/hemolymph)
@@ -72,7 +70,6 @@
 	)
 
 	darksight_range = 8
-	slowdown = -0.5
 	rarity_value = 4
 	hud_type = /datum/hud_data/serpentid
 	total_health = 200
@@ -95,7 +92,6 @@
 	heat_level_2 = 440 //Default 400
 	heat_level_3 = 800 //Default 1000
 	species_flags = SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_BLOCK | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NEED_DIRECT_ABSORB
-	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_SKIN_TONE_NORMAL
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	bump_flag = HEAVY
 	push_flags = ALLMOBS
@@ -199,10 +195,8 @@
 					continue
 				if(part)
 					image_key += "[part.bodytype.get_icon_cache_uid(part.owner)]"
-				if(BP_IS_PROSTHETIC(part))
-					image_key += "2[part.model ? "-[part.model]": ""]"
-				else if(part.status & ORGAN_DEAD)
-					image_key += "3"
+				if(!BP_IS_PROSTHETIC(part) && (part.status & ORGAN_DEAD))
+					image_key += "2"
 				else
 					image_key += "1"
 

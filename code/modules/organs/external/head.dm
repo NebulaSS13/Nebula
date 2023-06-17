@@ -18,8 +18,8 @@
 
 	var/draw_eyes = TRUE
 	var/glowing_eyes = FALSE
-	var/can_intake_reagents = 1
-	var/has_lips = 1
+	var/can_intake_reagents = TRUE
+	var/has_lips = TRUE
 	var/forehead_graffiti
 	var/graffiti_style
 
@@ -78,10 +78,8 @@
 /obj/item/organ/external/head/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 1, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 	has_lips = null
-	if(model)
-		var/decl/bodytype/prosthetic/R = GET_DECL(model)
-		can_intake_reagents = R.can_eat
-		draw_eyes = R.has_eyes
+	can_intake_reagents = bodytype.can_eat
+	draw_eyes = bodytype.has_eyes
 
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
 	. = ..()
@@ -109,7 +107,7 @@
 			if(eye_glow)
 				overlays |= eye_glow
 
-		if(owner.lip_style && !BP_IS_PROSTHETIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
+		if(owner.lip_style && (bodytype.appearance_flags & HAS_LIPS))
 			var/icon/lip_icon = new/icon(bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")
 			lip_icon.Blend(owner.lip_style, ICON_MULTIPLY)
 			overlays |= lip_icon

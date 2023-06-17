@@ -45,11 +45,8 @@
 	darksight_range = 4
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8cd7a3"
-	base_color = "#006666"
-	base_hair_color = "#006666"
 	default_h_style = /decl/sprite_accessory/hair/skrell/short
 	organs_icon = 'mods/species/bayliens/skrell/icons/body/organs.dmi'
 

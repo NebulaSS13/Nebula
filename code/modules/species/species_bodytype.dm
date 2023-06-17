@@ -2,6 +2,8 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype
 	var/name = "default"
+	/// Seen when examining a prosthetic limb, if non-null.
+	var/desc
 	var/icon_base
 	var/icon_deformed
 	var/lip_icon
@@ -18,7 +20,29 @@ var/global/list/bodytypes_by_category = list()
 	var/icon_template =   'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
 	var/ignited_icon =    'icons/mob/OnFire.dmi'
 	var/associated_gender
+	var/appearance_flags = 0 // Appearance/display related features.
+
+	/// What tech levels should limbs of this type use/need?
+	var/limb_tech = "{'biotech':2}"
 	var/icon_cache_uid
+	/// Determines if eyes should render on heads using this bodytype.
+	var/has_eyes = TRUE
+	/// Determines if heads with this bodytype can ingest food/drink.
+	var/can_eat = TRUE
+	/// Prefixed to the initial name of the limb, if non-null.
+	var/modifier_string
+	/// Modifies min and max broken damage for the limb.
+	var/hardiness = 1
+	/// Applies a slowdown value to this limb.
+	var/movement_slowdown = 0
+	/// Determines if this bodytype can be repaired by nanopaste, sparks when damaged, can malfunction, and can take EMP damage.
+	var/is_robotic = FALSE
+	/// For hands, determines the dexterity value passed to get_manual_dexterity(). If null, defers to species.
+	var/manual_dexterity = null
+	/// Determines how the limb behaves with regards to manual attachment/detachment.
+	var/modular_limb_tier = MODULAR_BODYPART_INVALID
+	/// Modifies the return from human can_feel_pain().
+	var/can_feel_pain = TRUE
 
 	var/uniform_state_modifier
 	var/health_hud_intensity = 1
@@ -63,6 +87,11 @@ var/global/list/bodytypes_by_category = list()
 		'sound/foley/metal1.ogg'
 	)
 
+	// Used for initializing prefs/preview
+	var/base_color =      COLOR_BLACK
+	var/base_eye_color =  COLOR_BLACK
+	var/base_hair_color = COLOR_BLACK
+
 /decl/bodytype/Initialize()
 	. = ..()
 	if(!icon_deformed)
@@ -90,3 +119,18 @@ var/global/list/bodytypes_by_category = list()
 			. += "deprecated \"torso\" state present in icon_deformed"
 		if(!check_state_in_icon(BP_CHEST, icon_deformed))
 			. += "\"[BP_CHEST]\" state not present in icon_deformed"
+	if((appearance_flags & HAS_SKIN_COLOR) && isnull(base_color))
+		. += "uses skin color but missing base_color"
+	if((appearance_flags & HAS_HAIR_COLOR) && isnull(base_hair_color))
+		. += "uses hair color but missing base_hair_color"
+	if((appearance_flags & HAS_EYE_COLOR) && isnull(base_eye_color))
+		. += "uses eye color but missing base_eye_color"
+
+/decl/bodytype/proc/max_skin_tone()
+	if(appearance_flags & HAS_SKIN_TONE_GRAV)
+		return 100
+	if(appearance_flags & HAS_SKIN_TONE_SPCR)
+		return 165
+	if(appearance_flags & HAS_SKIN_TONE_TRITON)
+		return 80
+	return 220

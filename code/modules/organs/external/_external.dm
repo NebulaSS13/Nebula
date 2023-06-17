@@ -31,7 +31,6 @@
 	// Appearance vars.
 	var/body_part = null               // Part flag
 	var/icon_position = 0              // Used in mob overlay layering calculations.
-	var/model                          // Used when caching robolimb icons.
 	var/icon/mob_icon                  // Cached icon for use in mob overlays.
 	var/skin_tone                      // Skin tone.
 	var/skin_colour                    // skin colour
@@ -123,12 +122,15 @@
 /obj/item/organ/external/set_species(specie_name)
 	. = ..()
 	skin_blend = bodytype.limb_blend
-	slowdown = species.get_slowdown(owner) // TODO make this a getter so octopodes can override it based on flooding
 	for(var/attack_type in species.unarmed_attacks)
 		var/decl/natural_attack/attack = GET_DECL(attack_type)
 		if(istype(attack) && (organ_tag in attack.usable_with_limbs))
 			LAZYADD(unarmed_attacks, attack_type)
 	get_icon()
+
+/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype)
+	. = ..()
+	slowdown = bodytype.movement_slowdown
 
 /obj/item/organ/external/proc/check_pain_disarm()
 	if(owner && prob((pain/max_damage)*100))
@@ -1254,62 +1256,20 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return 0
 
 /obj/item/organ/external/proc/get_manual_dexterity()
-	if(model)
-		var/decl/bodytype/prosthetic/R = GET_DECL(model)
-		if(R)
-			return R.manual_dexterity
+	if(!isnull(bodytype?.manual_dexterity))
+		return bodytype.manual_dexterity
 	if(species)
 		return species.get_manual_dexterity(owner)
 
 //Completely override, so we can slap in the model
 /obj/item/organ/external/setup_as_prosthetic()
-	. = ..(model ? model : /decl/bodytype/prosthetic/basic_human)
+	. = ..(istype(bodytype, /decl/bodytype/prosthetic) ? bodytype : /decl/bodytype/prosthetic/basic_human)
 
 /obj/item/organ/external/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 
 	slowdown = 0
 
-	// Don't override our existing model unless a specific model is being passed in.
-	if(!company)
-		company = model || /decl/bodytype/prosthetic
-
-	var/decl/bodytype/prosthetic/R
-	if(istype(company, /decl/bodytype/prosthetic))
-		//Handling for decl
-		R = company
-		company = R.type
-	else
-		//Handling for paths
-		if(!ispath(company))
-			PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
-			company = /decl/bodytype/prosthetic/basic_human
-		R = GET_DECL(company)
-
-	if(!check_species)
-		check_species = owner?.get_species_name() || global.using_map.default_species
-	if(!check_bodytype)
-		if(owner)
-			check_bodytype = owner.get_bodytype_category()
-		else
-			var/decl/species/species_data = get_species_by_key(check_species)
-			if(species_data)
-				check_bodytype = species_data.default_bodytype.bodytype_category
-			else
-				check_bodytype = global.using_map.default_bodytype
-
-	//If can't install fallback to defaults.
-	if(!R.check_can_install(organ_tag, check_bodytype))
-		company = /decl/bodytype/prosthetic/basic_human
-		R = GET_DECL(company)
-
-	model = company
-	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
-	desc = "[R.desc] It looks like it was produced by [R.name]."
-	origin_tech = R.limb_tech
-	slowdown = R.movement_slowdown
-	max_damage *= R.hardiness
-	min_broken_damage *= R.hardiness
 	status &= (~ORGAN_DISLOCATED)
 	limb_flags &= (~ORGAN_FLAG_CAN_DISLOCATE)
 	remove_splint()
@@ -1585,10 +1545,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		. += max_delay * CLAMP01(damage/max_damage)
 
 /obj/item/organ/external/proc/is_robotic()
-	. = FALSE
-	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/bodytype/prosthetic/R = GET_DECL(model)
-		. = R && R.is_robotic
+	return bodytype.is_robotic
 
 /obj/item/organ/external/proc/has_growths()
 	return FALSE

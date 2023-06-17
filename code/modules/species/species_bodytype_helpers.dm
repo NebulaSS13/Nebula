@@ -29,3 +29,15 @@
 
 /decl/bodytype/proc/get_base_icon(var/mob/living/carbon/human/H, var/get_deform)
 	return get_deform ? icon_deformed : icon_base
+
+/decl/bodytype/proc/handle_post_bodytype_pref_set(var/datum/preferences/pref)
+	if(!pref)
+		return
+
+	pref.skin_colour = base_color
+	pref.eye_colour = base_eye_color
+	pref.hair_colour = base_hair_color
+	pref.facial_hair_colour = base_hair_color
+
+/decl/bodytype/proc/apply_appearance(var/mob/living/carbon/human/H)
+	H.skin_colour = base_color

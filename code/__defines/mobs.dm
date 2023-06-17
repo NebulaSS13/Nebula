@@ -261,14 +261,6 @@
 #define SPECIES_ALIEN            "Humanoid"
 #define SPECIES_GOLEM            "Golem"
 
-#define BODY_FLAG_EXCLUDE        BITFLAG(0)
-#define BODY_FLAG_HUMANOID       BITFLAG(1)
-#define BODY_FLAG_MONKEY         BITFLAG(2)
-
-#define BODYTYPE_HUMANOID        "humanoid body"
-#define BODYTYPE_OTHER           "alien body"
-#define BODYTYPE_MONKEY          "small humanoid body"
-
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
 #define SURGERY_RETRACTED 2

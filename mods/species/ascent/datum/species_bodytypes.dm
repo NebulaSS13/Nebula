@@ -5,6 +5,8 @@
 	blood_overlays =    'mods/species/ascent/icons/species/body/alate/blood_overlays.dmi'
 	associated_gender = MALE
 	bodytype_flag =     BODY_FLAG_ALATE
+	movement_slowdown = -1
+	appearance_flags =  0
 
 /decl/bodytype/gyne
 	name =              "gyne"
@@ -18,6 +20,7 @@
 	antaghud_offset_x = 4
 	associated_gender = FEMALE
 	bodytype_flag =     BODY_FLAG_GYNE
+	movement_slowdown = 2
 
 /decl/bodytype/gyne/Initialize()
 	equip_adjust = list(

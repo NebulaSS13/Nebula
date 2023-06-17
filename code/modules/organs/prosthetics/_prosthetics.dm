@@ -9,11 +9,7 @@
 // External organ procs:
 // Does this bodypart count as a modular limb, and if so, what kind?
 /obj/item/organ/external/proc/get_modular_limb_category()
-	. = MODULAR_BODYPART_INVALID
-	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/bodytype/prosthetic/manufacturer = GET_DECL(model)
-		if(!isnull(manufacturer?.modular_prosthetic_tier))
-			. = manufacturer.modular_prosthetic_tier
+	return isnull(bodytype.modular_limb_tier) ? MODULAR_BODYPART_INVALID : bodytype.modular_limb_tier
 
 // Checks if a limb could theoretically be removed.
 // Note that this does not currently bother checking if a child or internal organ is vital.

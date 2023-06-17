@@ -63,7 +63,7 @@
 		var/obj/item/organ/target_limb = path
 		if(!ispath(target_limb, /obj/item/organ))
 			return FALSE
-		return company.check_can_install(initial(target_limb.organ_tag), species.default_bodytype.bodytype_category, robofab.picked_prosthetic_species)
+		return company.check_can_install(initial(target_limb.organ_tag), species.default_bodytype.bodytype_category)
 
 /datum/fabricator_recipe/robotics/prosthetic/get_resources()
 	. = ..()

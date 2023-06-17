@@ -43,11 +43,6 @@ var/global/list/stored_shock_by_ref = list()
 			if(!LAZYACCESS(pref.body_markings, mark_type))
 				LAZYSET(pref.body_markings, mark_type, base_markings[mark_type])
 
-	pref.skin_colour = base_color
-	pref.eye_colour = base_eye_color
-	pref.hair_colour = base_hair_color
-	pref.facial_hair_colour = base_hair_color
-
 /decl/species/proc/customize_preview_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
 
 	if(length(base_markings))
@@ -59,11 +54,11 @@ var/global/list/stored_shock_by_ref = list()
 					LAZYSET(O.markings, mark_type, base_markings[mark_type])
 
 	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
-		E.skin_colour = base_color
+		E.skin_colour = default_bodytype.base_color
 
-	mannequin.eye_colour = base_eye_color
-	mannequin.hair_colour = base_hair_color
-	mannequin.facial_hair_colour = base_hair_color
+	mannequin.eye_colour = default_bodytype.base_eye_color
+	mannequin.hair_colour = default_bodytype.base_hair_color
+	mannequin.facial_hair_colour = default_bodytype.base_hair_color
 	set_default_hair(mannequin)
 
 	if(preview_outfit)

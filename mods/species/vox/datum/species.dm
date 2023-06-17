@@ -43,9 +43,6 @@
 
 	default_h_style = /decl/sprite_accessory/hair/vox/short
 
-	base_hair_color = "#160900"
-	base_eye_color = "#d60093"
-	base_color = "#526d29"
 	base_markings = list(
 		/decl/sprite_accessory/marking/vox/beak =   "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
@@ -96,7 +93,6 @@
 
 	species_flags = SPECIES_FLAG_NO_SCAN
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR
 
 	blood_types = list(/decl/blood_type/vox)
 	flesh_color = "#808d11"

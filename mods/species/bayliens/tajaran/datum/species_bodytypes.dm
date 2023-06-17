@@ -9,6 +9,11 @@
 	lip_icon =             'mods/species/bayliens/tajaran/icons/lips.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag =        BODY_FLAG_FELINE
+	movement_slowdown =    -0.5
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	base_hair_color = "#46321c"
+	base_color = "#ae7d32"
+	base_eye_color = "#00aa00"
 
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(

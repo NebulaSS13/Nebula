@@ -12,7 +12,7 @@
 	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
 	movement_slowdown = 1
 	is_robotic = FALSE
-	modular_prosthetic_tier = MODULAR_BODYPART_PROSTHETIC
+	modular_limb_tier = MODULAR_BODYPART_ANYWHERE
 	bodytype_category = BODYTYPE_HUMANOID
 
 DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/bodytype/prosthetic/wooden, pirate, 0)

@@ -65,9 +65,6 @@
 /decl/species/proc/get_radiation_mod(var/mob/living/carbon/human/H)
 	. = (H && H.isSynthetic() ? 0.5 : radiation_mod)
 
-/decl/species/proc/get_slowdown(var/mob/living/carbon/human/H)
-	. = (H && H.isSynthetic() ? 0 : slowdown)
-
 /decl/species/proc/get_root_species_name(var/mob/living/carbon/human/H)
 	return name
 

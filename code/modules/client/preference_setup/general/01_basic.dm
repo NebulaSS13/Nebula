@@ -128,6 +128,7 @@
 				pref.gender = new_body.associated_gender
 			if(!(pref.f_style in S.get_facial_hair_style_types(new_body.associated_gender)))
 				ResetFacialHair()
+			new_body.handle_post_bodytype_pref_set(pref)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["spawnpoint"])

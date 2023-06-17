@@ -60,8 +60,7 @@
 	name = "Vey-Med (Feminine)"
 	desc = "This high quality limb is nearly indistinguishable from an organic one."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/veymed/veymed_female.dmi'
-	can_eat = 1
-	skintone = 1
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 	bodytype_category = BODYTYPE_HUMANOID
 
 /decl/bodytype/prosthetic/veymed/masculine

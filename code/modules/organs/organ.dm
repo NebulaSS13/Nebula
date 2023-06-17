@@ -61,7 +61,7 @@
 /obj/item/organ/proc/is_broken()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
-//Third rgument may be a dna datum; if null will be set to holder's dna.
+//Third argument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
 	. = ..(mapload, material_key)
 	if(. != INITIALIZE_HINT_QDEL)
@@ -127,6 +127,22 @@
 	blood_DNA[dna.unique_enzymes] = dna.b_type
 	set_species(dna.species)
 
+/obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype)
+	if(isnull(new_bodytype))
+		CRASH("Null bodytype passed to set_bodytype!")
+	if(ispath(new_bodytype, /decl/bodytype))
+		new_bodytype = GET_DECL(new_bodytype)
+	if(!istype(new_bodytype))
+		CRASH("Invalid bodytype [new_bodytype]")
+	vital_to_owner = null
+	bodytype = new_bodytype
+	if(bodytype.modifier_string)
+		name = "[bodytype.modifier_string] [initial(name)]"
+	desc = bodytype.desc
+	origin_tech = bodytype.limb_tech
+	max_damage *= bodytype.hardiness
+	min_broken_damage *= bodytype.hardiness
+
 /obj/item/organ/proc/set_species(var/specie_name)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
 	if(istext(specie_name))
@@ -137,7 +153,7 @@
 		species = get_species_by_key(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
 
-	bodytype = owner?.bodytype || species.default_bodytype
+	set_bodytype(owner?.bodytype || species.default_bodytype)
 	species.resize_organ(src)
 
 	// Adjust limb health proportinate to total species health.
@@ -340,6 +356,38 @@
 	vital_to_owner = null
 	BP_SET_PROSTHETIC(src)
 	QDEL_NULL(dna)
+	// Don't override our existing bodytype unless a specific model is being passed in.
+	if(!company)
+		company = istype(bodytype, /decl/bodytype/prosthetic) ? bodytype : /decl/bodytype/prosthetic/basic_human
+
+	var/decl/bodytype/prosthetic/model
+	if(istype(company, /decl/bodytype/prosthetic))
+		//Handling for decl
+		model = company
+	else
+		//Handling for paths
+		if(!ispath(company, /decl/bodytype/prosthetic))
+			PRINT_STACK_TRACE("Organ [type] robotize() was supplied an invalid prosthetic bodytype: '[company]'")
+			company = /decl/bodytype/prosthetic/basic_human
+		model = GET_DECL(company)
+
+	if(!check_species)
+		check_species = owner?.get_species_name() || global.using_map.default_species
+	if(!check_bodytype)
+		if(owner)
+			check_bodytype = owner.get_bodytype_category()
+		else
+			var/decl/species/species_data = get_species_by_key(check_species)
+			if(species_data)
+				check_bodytype = species_data.default_bodytype.bodytype_category
+			else
+				check_bodytype = global.using_map.default_bodytype
+
+	//If can't install fallback to defaults.
+	if(!model.check_can_install(organ_tag, check_bodytype))
+		model = GET_DECL(/decl/bodytype/prosthetic/basic_human)
+
+	set_bodytype(model)
 	reagents?.clear_reagents()
 	material = GET_DECL(apply_material)
 	matter = null
@@ -370,7 +418,7 @@
 	target.attackby(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
-	return (!BP_IS_PROSTHETIC(src) && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))
+	return !(species.species_flags & SPECIES_FLAG_NO_PAIN) && bodytype.can_feel_pain
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))

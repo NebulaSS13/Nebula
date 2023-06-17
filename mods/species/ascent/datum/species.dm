@@ -59,7 +59,6 @@
 	flash_mod =               2 // Highly photosensitive.
 
 	age_descriptor = /datum/appearance_descriptor/age/kharmaani
-	slowdown =               -1
 	rarity_value =            3
 	gluttonous =              2
 	siemens_coefficient =     0
@@ -71,7 +70,6 @@
 
 	available_pronouns = list(/decl/pronouns/male)
 
-	appearance_flags =        0
 	species_flags =           SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags =             SPECIES_IS_RESTRICTED
 
@@ -155,7 +153,6 @@
 	available_pronouns = list(/decl/pronouns/female)
 
 	gluttonous =              3
-	slowdown =                2
 	rarity_value =           10
 
 	age_descriptor = /datum/appearance_descriptor/age/kharmaani/gyne

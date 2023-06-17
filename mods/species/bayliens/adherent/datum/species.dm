@@ -52,8 +52,6 @@
 	mob_size =                MOB_SIZE_LARGE
 	strength =                STR_HIGH
 
-	base_eye_color = COLOR_LIME
-
 	speech_sounds = list('mods/species/bayliens/adherent/sound/chime.ogg')
 	speech_chance = 25
 
@@ -68,9 +66,7 @@
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
 	spawn_flags =   SPECIES_CAN_JOIN
 
-	appearance_flags = HAS_EYE_COLOR
 	flesh_color = "#90edeb"
-	slowdown = -1
 	hud_type = /datum/hud_data/adherent
 
 	available_cultural_info = list(
@@ -126,9 +122,6 @@
 
 /decl/species/adherent/can_fall(var/mob/living/carbon/human/H)
 	. = !can_overcome_gravity(H)
-
-/decl/species/adherent/get_slowdown(var/mob/living/carbon/human/H)
-	return slowdown
 
 /decl/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	var/float_is_usable = FALSE

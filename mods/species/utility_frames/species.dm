@@ -22,12 +22,11 @@
 		BP_CELL
 	)
 
-	available_bodytypes = list(/decl/bodytype/utility_frame)
+	available_bodytypes = list(/decl/bodytype/prosthetic/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
 	hidden_from_codex =     FALSE
 	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_SYNTHETIC
 	spawn_flags =           SPECIES_CAN_JOIN
-	appearance_flags =      HAS_SKIN_COLOR | HAS_EYE_COLOR
 	strength =              STR_HIGH
 	warning_low_pressure =  50
 	hazard_low_pressure =  -1
@@ -45,8 +44,6 @@
 
 	preview_outfit = null
 
-	base_color = "#333355"
-	base_eye_color = "#00ccff"
 	base_markings = list(
 		/decl/sprite_accessory/marking/frame/plating = "#8888cc",
 		/decl/sprite_accessory/marking/frame/plating/legs = "#8888cc",

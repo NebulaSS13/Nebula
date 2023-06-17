@@ -660,7 +660,7 @@
 //Drop anything that cannot be worn by the current species of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
 
-	if(!(species.appearance_flags & HAS_UNDERWEAR))
+	if(!(bodytype.appearance_flags & HAS_UNDERWEAR))
 		QDEL_NULL_LIST(worn_underwear)
 
 	var/list/new_slots
@@ -687,7 +687,6 @@
 /mob/living/carbon/human/proc/apply_species_appearance()
 	if(!species)
 		icon_state = lowertext(SPECIES_HUMAN)
-		skin_colour = COLOR_BLACK
 	else
 		species.apply_appearance(src)
 
@@ -700,6 +699,13 @@
 
 	// Rebuild the HUD and visual elements only if we got a client.
 	hud_reset(TRUE)
+
+// Like above, but for bodytype. Not as complicated.
+/mob/living/carbon/human/proc/apply_bodytype_appearance()
+	if(!bodytype)
+		skin_colour = COLOR_BLACK
+	else
+		bodytype.apply_appearance(src)
 
 /mob/living/carbon/human/proc/update_languages()
 	if(!length(cultural_info))
@@ -895,13 +901,11 @@
 	return (species && species.has_organ[organ_check])
 
 /mob/living/carbon/human/can_feel_pain(var/obj/item/organ/check_organ)
-	if(isSynthetic())
-		return 0
 	if(check_organ)
 		if(!istype(check_organ))
 			return 0
 		return check_organ.can_feel_pain()
-	return !(species.species_flags & SPECIES_FLAG_NO_PAIN)
+	return !(species.species_flags & SPECIES_FLAG_NO_PAIN) && bodytype.can_feel_pain
 
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()
@@ -1251,13 +1255,13 @@
 	set_species(species_name)
 
 	if(!skin_colour)
-		skin_colour = species.base_color
+		skin_colour = bodytype.base_color
 	if(!hair_colour)
-		hair_colour = species.base_hair_color
+		hair_colour = bodytype.base_hair_color
 	if(!facial_hair_colour)
-		facial_hair_colour = species.base_hair_color
+		facial_hair_colour = bodytype.base_hair_color
 	if(!eye_colour)
-		eye_colour = species.base_eye_color
+		eye_colour = bodytype.base_eye_color
 	species.set_default_hair(src, override_existing = FALSE, defer_update_hair = TRUE)
 	if(!b_type && length(species?.blood_types))
 		b_type = pickweight(species.blood_types)
@@ -1273,6 +1277,7 @@
 		species.create_missing_organs(src) //Syncs DNA when adding organs
 	apply_species_cultural_info()
 	apply_species_appearance()
+	apply_bodytype_appearance()
 	species.handle_post_spawn(src)
 
 	UpdateAppearance() //Apply dna appearance to mob, causes DNA to change because filler values are regenerated

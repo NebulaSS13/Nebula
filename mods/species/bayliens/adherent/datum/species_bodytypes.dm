@@ -6,6 +6,9 @@
 	damage_overlays =   'mods/species/bayliens/adherent/icons/damage_overlay.dmi'
 	blood_overlays =    'mods/species/bayliens/adherent/icons/blood_overlays.dmi'
 	antaghud_offset_y = 14
+	movement_slowdown = -1
+	appearance_flags = HAS_EYE_COLOR
+	base_eye_color = COLOR_LIME
 
 /decl/bodytype/adherent/Initialize()
 	equip_adjust = list(

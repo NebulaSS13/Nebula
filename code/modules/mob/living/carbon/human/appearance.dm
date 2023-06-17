@@ -21,6 +21,7 @@
 	species.create_missing_organs(src, TRUE) //Not fully replacing would cause problem with organs not being updated
 	UpdateAppearance()
 	apply_species_appearance()
+	apply_bodytype_appearance()
 	apply_species_cultural_info()
 	species.handle_post_spawn(src)
 	reset_blood()
@@ -103,7 +104,7 @@
 	return FALSE
 
 /mob/living/carbon/human/proc/change_skin_color(var/new_colour)
-	if(skin_colour == new_colour || !(species.appearance_flags & HAS_SKIN_COLOR))
+	if(skin_colour == new_colour || !(bodytype.appearance_flags & HAS_SKIN_COLOR))
 		return FALSE
 	skin_colour = new_colour
 	force_update_limbs()
@@ -111,7 +112,7 @@
 	return TRUE
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
-	if(skin_tone == tone || !(species.appearance_flags & HAS_A_SKIN_TONE))
+	if(skin_tone == tone || !(bodytype.appearance_flags & HAS_A_SKIN_TONE))
 		return
 	skin_tone = tone
 	force_update_limbs()

@@ -46,10 +46,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	/// The rate at which low light vision adjusts towards the final value, as a fractional multiplier of the difference between the current and target alphas. ie. set to 0.15 for a 15% shift towards the target value each tick.
 	var/low_light_vision_adjustment_speed = 0.15
 
-	// Used for initializing prefs/preview
-	var/base_color =      COLOR_BLACK
-	var/base_eye_color =  COLOR_BLACK
-	var/base_hair_color = COLOR_BLACK
 	var/list/base_markings
 
 	var/static/list/hair_styles
@@ -171,9 +167,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight_range = 2       // Native darksight distance.
 	var/species_flags = 0         // Various specific features.
-	var/appearance_flags = 0      // Appearance/display related features.
 	var/spawn_flags = 0           // Flags that specify who can spawn as this species
-	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	// Move intents. Earlier in list == default for that type of movement.
 	var/list/move_intents = list(
 		/decl/move_intent/walk,
@@ -319,16 +313,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		codex_traits += "<li>Has excellent traction.</li>"
 	if(species_flags & SPECIES_FLAG_NO_POISON)
 		codex_traits += "<li>Immune to most poisons.</li>"
-	if(appearance_flags & HAS_A_SKIN_TONE)
-		codex_traits += "<li>Has a variety of skin tones.</li>"
-	if(appearance_flags & HAS_SKIN_COLOR)
-		codex_traits += "<li>Has a variety of skin colours.</li>"
-	if(appearance_flags & HAS_EYE_COLOR)
-		codex_traits += "<li>Has a variety of eye colours.</li>"
 	if(species_flags & SPECIES_FLAG_IS_PLANT)
 		codex_traits += "<li>Has a plantlike physiology.</li>"
-	if(slowdown)
-		codex_traits += "<li>Moves [slowdown > 0 ? "slower" : "faster"] than most.</li>"
 
 	var/list/codex_damage_types = list(
 		"physical trauma" = brute_mod,
@@ -500,12 +486,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	else if(low_light_vision_adjustment_speed < 0)
 		. += "low light vision adjustment speed is less than 0 (below 0%)"
 
-	if((appearance_flags & HAS_SKIN_COLOR) && isnull(base_color))
-		. += "uses skin color but missing base_color"
-	if((appearance_flags & HAS_HAIR_COLOR) && isnull(base_hair_color))
-		. += "uses hair color but missing base_hair_color"
-	if((appearance_flags & HAS_EYE_COLOR) && isnull(base_eye_color))
-		. += "uses eye color but missing base_eye_color"
 	if(isnull(default_h_style))
 		. += "null default_h_style (use a bald/hairless hairstyle if 'no hair' is intended)"
 	if(isnull(default_f_style))
@@ -885,15 +865,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] face is horribly mangled!\n")
 
-/decl/species/proc/max_skin_tone()
-	if(appearance_flags & HAS_SKIN_TONE_GRAV)
-		return 100
-	if(appearance_flags & HAS_SKIN_TONE_SPCR)
-		return 165
-	if(appearance_flags & HAS_SKIN_TONE_TRITON)
-		return 80
-	return 220
-
 /decl/species/proc/get_hair_style_types(var/gender = NEUTER, var/check_gender = TRUE)
 	if(!check_gender)
 		gender = NEUTER
@@ -1010,7 +981,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 //Consider this might be called post-init
 /decl/species/proc/apply_appearance(var/mob/living/carbon/human/H)
 	H.icon_state = lowertext(src.name)
-	H.skin_colour = src.base_color
 	update_appearance_descriptors(H)
 
 /decl/species/proc/update_appearance_descriptors(var/mob/living/carbon/human/H)
