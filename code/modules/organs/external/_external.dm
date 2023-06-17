@@ -553,7 +553,7 @@
 /*
 This function completely restores a damaged organ to perfect condition.
 */
-/obj/item/organ/external/rejuvenate(var/ignore_prosthetic_prefs)
+/obj/item/organ/external/rejuvenate(var/ignore_organ_aspects)
 
 	damage_state = "00"
 	brute_dam = 0
@@ -571,7 +571,7 @@ This function completely restores a damaged organ to perfect condition.
 
 	// handle internal organs
 	for(var/obj/item/organ/current_organ in internal_organs)
-		current_organ.rejuvenate(ignore_prosthetic_prefs)
+		current_organ.rejuvenate(ignore_organ_aspects)
 
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
