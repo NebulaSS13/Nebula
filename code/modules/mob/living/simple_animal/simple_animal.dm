@@ -81,7 +81,6 @@
 
 	//for simple animals with abilities, mostly megafauna
 	var/ability_cooldown
-	var/time_last_used_ability
 
 	//for simple animals that reflect damage when attacked in melee
 	var/return_damage_min
@@ -617,16 +616,6 @@
 
 /mob/living/simple_animal/get_speech_bubble_state_modifier()
 	return ..() || "rough"
-
-/mob/living/simple_animal/proc/can_perform_ability()
-	if(!can_act() || time_last_used_ability > world.time)
-		return FALSE
-	return TRUE
-
-/mob/living/simple_animal/proc/cooldown_ability(var/time)
-	if(!time)
-		time = ability_cooldown
-	time_last_used_ability = world.time + ability_cooldown
 
 /mob/living/simple_animal/proc/can_act()
 	if(QDELETED(src) || stat || incapacitated())

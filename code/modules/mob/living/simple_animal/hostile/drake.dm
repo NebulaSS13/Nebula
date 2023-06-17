@@ -30,19 +30,12 @@
 /mob/living/simple_animal/hostile/drake/lava_act(datum/gas_mixture/air, temperature, pressure)
 	return
 
-/mob/living/simple_animal/hostile/drake/can_perform_ability()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!target_mob)
-		return FALSE
-
 /mob/living/simple_animal/hostile/drake/AttackingTarget()
 	. = ..()
 	if(empowered_attack)
 		depower()
 		return
-	if(can_perform_ability())
+	if(can_act() && !is_on_special_ability_cooldown() && target_mob)
 		empower()
 
 /mob/living/simple_animal/hostile/drake/get_natural_weapon()
@@ -57,9 +50,9 @@
 	empowered_attack = TRUE
 	if(prob(25) && !gas_spent)
 		vent_gas()
-		cooldown_ability(ability_cooldown * 1.5)
+		set_special_ability_cooldown(ability_cooldown * 1.5)
 		return
-	cooldown_ability(ability_cooldown)
+	set_special_ability_cooldown(ability_cooldown)
 
 /mob/living/simple_animal/hostile/drake/proc/vent_gas()
 	visible_message(SPAN_MFAUNA("\The [src] raises its wings, vents a miasma of burning gas, and spreads it about with a flap!"))

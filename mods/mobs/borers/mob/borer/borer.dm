@@ -236,7 +236,7 @@
 
 #define COLOR_BORER_RED "#ff5555"
 /mob/living/simple_animal/borer/proc/set_ability_cooldown(var/amt)
-	last_special = world.time + amt
+	set_special_ability_cooldown(amt)
 	for(var/obj/thing in hud_elements)
 		thing.color = COLOR_BORER_RED
 	addtimer(CALLBACK(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)

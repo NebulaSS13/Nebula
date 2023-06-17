@@ -1105,3 +1105,11 @@ default behaviour is:
 /mob/living/get_speech_bubble_state_modifier()
 	return isSynthetic() ? "synth" : ..()
 
+/mob/living/proc/is_on_special_ability_cooldown()
+	return world.time < next_special_ability
+
+/mob/living/proc/set_special_ability_cooldown(var/amt)
+	next_special_ability = max(next_special_ability, world.time+amt)
+
+/mob/living/proc/get_seconds_until_next_special_ability_string()
+	return ticks2readable(next_special_ability - world.time)

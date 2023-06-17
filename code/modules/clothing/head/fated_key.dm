@@ -44,7 +44,7 @@
 		to_chat(user, SPAN_WARNING("You are in no fit state to perform division."))
 		return
 
-	if(world.time < user.last_special)
+	if(user.is_on_special_ability_cooldown())
 		to_chat(user, SPAN_WARNING("You have not yet regained enough focus to perform division."))
 		return
 
@@ -66,7 +66,7 @@
 		playsound(user.loc, 'sound/effects/sanctionedaction_cut.ogg', 100, 1)
 		var/obj/item/projectile/sanctionedaction/cut = new(user.loc)
 		cut.launch(get_edge_target_turf(get_turf(user.loc), user.dir), user.get_target_zone())
-		user.last_special = world.time + 10 SECONDS
+		user.set_special_ability_cooldown(10 SECONDS)
 
 /obj/item/projectile/sanctionedaction
 	name = "rending slash"

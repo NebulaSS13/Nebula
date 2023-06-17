@@ -20,9 +20,9 @@
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You are not in position for maneuvering."))
 		return FALSE
-	if(world.time < user.last_special)
+	if(user.is_on_special_ability_cooldown())
 		if(!silent)
-			to_chat(user, SPAN_WARNING("You cannot maneuver again for another [FLOOR((user.last_special - world.time)*0.1)] second\s."))
+			to_chat(user, SPAN_WARNING("You cannot maneuver again for another [user.get_seconds_until_next_special_ability_string()]"))
 		return FALSE
 	if(user.get_stamina() < stamina_cost)
 		if(!silent)
@@ -40,6 +40,6 @@
 		user.face_atom(target)
 		. = (!delay || reflexively || (do_after(user, delay) && can_be_used_by(user, target)))
 		if(cooldown)
-			user.last_special = world.time + cooldown
+			user.set_special_ability_cooldown(cooldown)
 		if(stamina_cost)
 			user.adjust_stamina(stamina_cost)
