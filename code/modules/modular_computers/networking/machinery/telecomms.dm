@@ -237,7 +237,7 @@ var/global/list/telecomms_hubs = list()
 		if(QDELETED(other_hub) || !other_hub.can_receive_message(check_network_membership))
 			continue
 		// Don't allow further chaining of the message.
-		other_hub.transmit_message(speaker, message, message_verb, speaking, frequency, message_compression, checked_hubs, encryption, send_overmap_object, FALSE)
+		other_hub.transmit_message(speaker, message, message_verb, speaking, frequency, message_compression, checked_hubs, encryption.Copy(), send_overmap_object, FALSE)
 
 /obj/machinery/network/telecomms_hub/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
