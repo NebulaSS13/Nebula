@@ -49,6 +49,8 @@
 	. = ..()
 
 /datum/computer_network/proc/add_device(datum/extension/network_device/D)
+	if(QDELETED(D))
+		return FALSE
 	if(D.network_id != network_id)
 		return FALSE
 	if(D.key != network_key)
