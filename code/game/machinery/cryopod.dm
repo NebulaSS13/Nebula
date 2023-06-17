@@ -154,7 +154,7 @@
 	var/allow_occupant_types = list(/mob/living/carbon/human)
 	var/disallow_occupant_types = list()
 
-	var/mob/occupant = null       // Person waiting to be despawned.
+	var/mob/living/occupant       // Person waiting to be despawned.
 	var/time_till_despawn = 9000  // Down to 15 minutes //30 minutes-ish is too long
 	var/time_entered = 0          // Used to keep track of the safe period.
 
@@ -291,9 +291,8 @@
 //Lifted from Unity stasis.dm and refactored.
 /obj/machinery/cryopod/Process()
 	if(occupant)
-		if(applies_stasis && isliving(occupant) && (world.time > time_entered + 20 SECONDS))
-			var/mob/living/patient = occupant
-			patient.set_stasis(2)
+		if(applies_stasis && (world.time > time_entered + 20 SECONDS))
+			occupant.set_stasis(2)
 
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		// Only provide the gap if the occupant hasn't ghosted
