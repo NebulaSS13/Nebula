@@ -82,11 +82,11 @@ var/global/list/bodytypes_by_category = list()
 	. = ..()
 	if(icon_base)
 		if(check_state_in_icon("torso", icon_base))
-			. += "torso state present in icon_base"
+			. += "deprecated \"torso\" state present in icon_base"
 		if(!check_state_in_icon(BP_CHEST, icon_base))
-			. += "chest state not present in icon_base"
+			. += "\"[BP_CHEST]\" state not present in icon_base"
 	if(icon_deformed && icon_deformed != icon_base)
 		if(check_state_in_icon("torso", icon_deformed))
-			. += "torso state present in icon_deformed"
+			. += "deprecated \"torso\" state present in icon_deformed"
 		if(!check_state_in_icon(BP_CHEST, icon_deformed))
-			. += "chest state not present in icon_deformed"
+			. += "\"[BP_CHEST]\" state not present in icon_deformed"

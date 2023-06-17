@@ -20,7 +20,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/holder_icon
 	var/list/available_bodytypes = list()
 	var/decl/bodytype/default_bodytype
-	var/base_prosthetics_model = /decl/prosthetics_manufacturer/basic_human
+	var/base_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 
 	var/list/blood_types = list(
 		/decl/blood_type/aplus,

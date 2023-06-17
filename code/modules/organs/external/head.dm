@@ -75,11 +75,11 @@
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
-/obj/item/organ/external/head/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 1, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/external/head/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 1, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 	has_lips = null
 	if(model)
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		can_intake_reagents = R.can_eat
 		draw_eyes = R.has_eyes
 

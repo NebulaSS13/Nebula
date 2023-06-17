@@ -94,7 +94,7 @@
 
 //Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
 // NOTE: This wouldn't be necessary if prothetics were a subclass
-/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer/basic_human)
+/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/bodytype/prosthetic/basic_human)
 	if(!species)
 		if(owner?.species)
 			set_species(owner.species)
@@ -336,7 +336,7 @@
 	if(can_recover())
 		damage = clamp(0, damage - round(amount, 0.1), max_damage)
 
-/obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/proc/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	vital_to_owner = null
 	BP_SET_PROSTHETIC(src)
 	QDEL_NULL(dna)

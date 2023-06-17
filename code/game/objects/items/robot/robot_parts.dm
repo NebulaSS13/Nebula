@@ -19,15 +19,15 @@
 /obj/item/robot_parts/Initialize(mapload, var/model)
 	. = ..(mapload)
 	if(model_info)
-		if(!ispath(model, /decl/prosthetics_manufacturer))
-			model = /decl/prosthetics_manufacturer/basic_human
+		if(!ispath(model, /decl/bodytype/prosthetic))
+			model = /decl/bodytype/prosthetic/basic_human
 		model_info = model
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		if(R)
 			SetName("[R.name] [initial(name)]")
 			desc = "[R.desc]"
-			if(icon_state in icon_states(R.icon))
-				icon = R.icon
+			if(icon_state in icon_states(R.icon_base))
+				icon = R.icon_base
 	else
 		SetDefaultName()
 

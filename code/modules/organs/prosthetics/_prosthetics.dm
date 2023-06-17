@@ -11,7 +11,7 @@
 /obj/item/organ/external/proc/get_modular_limb_category()
 	. = MODULAR_BODYPART_INVALID
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/manufacturer = GET_DECL(model)
+		var/decl/bodytype/prosthetic/manufacturer = GET_DECL(model)
 		if(!isnull(manufacturer?.modular_prosthetic_tier))
 			. = manufacturer.modular_prosthetic_tier
 

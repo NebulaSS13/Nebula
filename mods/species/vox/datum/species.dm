@@ -22,7 +22,7 @@
 /decl/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
-	base_prosthetics_model = /decl/prosthetics_manufacturer/vox/crap
+	base_prosthetics_model = /decl/bodytype/prosthetic/vox/crap
 
 	vital_organs = list(
 		BP_STACK,

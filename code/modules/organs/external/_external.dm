@@ -1255,7 +1255,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/get_manual_dexterity()
 	if(model)
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		if(R)
 			return R.manual_dexterity
 	if(species)
@@ -1263,19 +1263,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 //Completely override, so we can slap in the model
 /obj/item/organ/external/setup_as_prosthetic()
-	. = ..(model ? model : /decl/prosthetics_manufacturer/basic_human)
+	. = ..(model ? model : /decl/bodytype/prosthetic/basic_human)
 
-/obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/external/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
 	. = ..()
 
 	slowdown = 0
 
 	// Don't override our existing model unless a specific model is being passed in.
 	if(!company)
-		company = model || /decl/prosthetics_manufacturer
+		company = model || /decl/bodytype/prosthetic
 
-	var/decl/prosthetics_manufacturer/R
-	if(istype(company, /decl/prosthetics_manufacturer))
+	var/decl/bodytype/prosthetic/R
+	if(istype(company, /decl/bodytype/prosthetic))
 		//Handling for decl
 		R = company
 		company = R.type
@@ -1283,7 +1283,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//Handling for paths
 		if(!ispath(company))
 			PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
-			company = /decl/prosthetics_manufacturer/basic_human
+			company = /decl/bodytype/prosthetic/basic_human
 		R = GET_DECL(company)
 
 	if(!check_species)
@@ -1299,8 +1299,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 				check_bodytype = global.using_map.default_bodytype
 
 	//If can't install fallback to defaults.
-	if(!R.check_can_install(organ_tag, check_bodytype, check_species))
-		company = /decl/prosthetics_manufacturer/basic_human
+	if(!R.check_can_install(organ_tag, check_bodytype))
+		company = /decl/bodytype/prosthetic/basic_human
 		R = GET_DECL(company)
 
 	model = company
@@ -1587,7 +1587,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/is_robotic()
 	. = FALSE
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		. = R && R.is_robotic
 
 /obj/item/organ/external/proc/has_growths()

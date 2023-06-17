@@ -11,61 +11,44 @@
 #define ASPECTS_PHYSICAL  BITFLAG(0)
 #define ASPECTS_MENTAL    BITFLAG(1)
 
-#define DEFINE_ROBOLIMB_MODEL_ASPECTS_WITH_SPECIES_BODYTYPE(MODEL_PATH, MODEL_ID, COST, SPECIES, BODYTYPE) \
+#define DEFINE_ROBOLIMB_MODEL_ASPECTS(MODEL_PATH, MODEL_ID, COST) \
 /decl/aspect/prosthetic_limb/left_hand/##MODEL_ID {                                                        \
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/left_hand;                                                       \
 	aspect_cost = COST * 0.5;                                                                              \
-	check_bodytype = BODYTYPE;                                                                             \
-	check_species = SPECIES;                                                                               \
 }                                                                                                          \
 /decl/aspect/prosthetic_limb/left_arm/##MODEL_ID {                                                         \
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/left_arm;                                                        \
 	aspect_cost = COST;                                                                                    \
-	check_bodytype = BODYTYPE;                                                                             \
-	check_species = SPECIES;                                                                               \
 }                                                                                                          \
 /decl/aspect/prosthetic_limb/right_hand/##MODEL_ID {                                                       \
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/right_hand;                                                      \
 	aspect_cost = COST * 0.5;                                                                              \
-	check_bodytype = BODYTYPE;                                                                             \
-	check_species = SPECIES;                                                                               \
 }                                                                                                          \
 /decl/aspect/prosthetic_limb/right_arm/##MODEL_ID {                                                        \
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/right_arm;                                                       \
 	aspect_cost = COST;                                                                                    \
-	check_bodytype = BODYTYPE;                                                                             \
-	check_species = SPECIES;                                                                               \
 }                                                                                                          \
 /decl/aspect/prosthetic_limb/left_foot/##MODEL_ID {                                                        \
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/left_foot;                                                       \
 	aspect_cost = COST * 0.5;                                                                              \
-	check_bodytype = BODYTYPE;                                                                             \
-	check_species = SPECIES;                                                                               \
 }                                                                                                          \
 /decl/aspect/prosthetic_limb/left_leg/##MODEL_ID {                                                         \
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/left_leg;                                                        \
 	aspect_cost = COST;                                                                                    \
-	check_bodytype = BODYTYPE;                                                                             \
-	check_species = SPECIES;                                                                               \
 }                                                                                                          \
 /decl/aspect/prosthetic_limb/right_foot/##MODEL_ID {                                                       \
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/right_foot;                                                      \
 	aspect_cost = COST * 0.5;                                                                              \
-	check_bodytype = BODYTYPE;                                                                             \
-	check_species = SPECIES;                                                                               \
 }                                                                                                          \
 /decl/aspect/prosthetic_limb/right_leg/##MODEL_ID {                                                        \
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/right_leg;                                                       \
 	aspect_cost = COST;                                                                                    \
-	check_bodytype = BODYTYPE;                                                                             \
-	check_species = SPECIES;                                                                               \
 }
-#define DEFINE_ROBOLIMB_MODEL_ASPECTS(MODEL_PATH, MODEL_ID, COST) DEFINE_ROBOLIMB_MODEL_ASPECTS_WITH_SPECIES_BODYTYPE(MODEL_PATH, MODEL_ID, COST, null, null)
