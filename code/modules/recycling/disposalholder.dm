@@ -126,10 +126,10 @@
 
 	var/mob/living/U = user
 
-	if (U.stat || U.last_special <= world.time)
+	if (U.stat || U.is_on_special_ability_cooldown())
 		return
 
-	U.last_special = world.time+100
+	U.set_special_ability_cooldown(10 SECONDS)
 
 	var/turf/our_turf = get_turf(src)
 	if (our_turf)

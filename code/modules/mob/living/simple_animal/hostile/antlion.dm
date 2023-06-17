@@ -36,15 +36,8 @@
 	if(!.)
 		return
 
-	if(can_perform_ability())
+	if(!is_on_special_ability_cooldown() && can_act() && target_mob)
 		vanish()
-
-/mob/living/simple_animal/hostile/antlion/can_perform_ability()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!target_mob)
-		return FALSE
 
 /mob/living/simple_animal/hostile/antlion/proc/vanish()
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
@@ -83,7 +76,7 @@
 	visible_message(SPAN_WARNING("\The [src] erupts from \the [T]!"))
 	set_invisibility(initial(invisibility))
 	prep_burrow(FALSE)
-	cooldown_ability(ability_cooldown)
+	set_special_ability_cooldown(ability_cooldown)
 	for(var/mob/living/carbon/human/H in get_turf(src))
 		H.attackby(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))

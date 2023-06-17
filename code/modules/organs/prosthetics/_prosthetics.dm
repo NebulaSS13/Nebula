@@ -83,7 +83,7 @@
 
 // Proc helper for attachment verb.
 /mob/living/carbon/human/proc/check_can_attach_modular_limb(var/obj/item/organ/external/E)
-	if(world.time < last_special + (2 SECONDS) || get_active_hand() != E)
+	if(is_on_special_ability_cooldown() || get_active_hand() != E)
 		return FALSE
 	if(incapacitated() || restrained())
 		to_chat(src, SPAN_WARNING("You can't do that in your current state!"))
@@ -114,7 +114,7 @@
 
 // Proc helper for detachment verb.
 /mob/living/carbon/human/proc/check_can_detach_modular_limb(var/obj/item/organ/external/E)
-	if(world.time < last_special + (2 SECONDS))
+	if(is_on_special_ability_cooldown())
 		return FALSE
 	if(incapacitated() || restrained())
 		to_chat(src, SPAN_WARNING("You can't do that in your current state!"))
@@ -148,7 +148,7 @@
 	if(!check_can_attach_modular_limb(E))
 		return FALSE
 
-	last_special = world.time
+	set_special_ability_cooldown(2 SECONDS)
 	drop_from_inventory(E)
 	src.add_organ(E)
 
@@ -182,7 +182,7 @@
 	if(!check_can_detach_modular_limb(E))
 		return FALSE
 
-	last_special = world.time
+	set_special_ability_cooldown(2 SECONDS)
 	remove_organ(E)
 	E.dropInto(loc)
 	put_in_hands(E)

@@ -21,15 +21,15 @@
 	set desc = "Infect others with your very breath."
 	set category = "Abilities"
 
-	if (last_special > world.time)
-		to_chat(src, "<span class='warning'>You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds.</span>")
+	if(is_on_special_ability_cooldown())
+		to_chat(src, "<span class='warning'>You aren't ready to do that! Wait [get_seconds_until_next_special_ability_string()].</span>")
 		return
-	
+
 	if (incapacitated())
 		to_chat(src, "<span class='warning'>You can't do that while you're incapacitated!</span>")
 		return
 
-	last_special = world.time + 60 SECONDS
+	set_special_ability_cooldown(60 SECONDS)
 
 	var/turf/T = get_turf(src)
 	var/obj/effect/effect/water/chempuff/chem = new(T)
@@ -43,10 +43,10 @@
 	set desc = "Regain life by consuming it from others."
 	set category = "Abilities"
 
-	if (last_special > world.time)
-		to_chat(src, "<span class='warning'>You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds.</span>")
+	if (is_on_special_ability_cooldown())
+		to_chat(src, "<span class='warning'>You aren't ready to do that! Wait [get_seconds_until_next_special_ability_string()].</span>")
 		return
-	
+
 	if (incapacitated())
 		to_chat(src, "<span class='warning'>You can't do that while you're incapacitated!</span>")
 		return
@@ -60,7 +60,7 @@
 		to_chat(src, "<span class='warning'>You aren't on top of a victim!</span>")
 		return
 
-	last_special = world.time + 5 SECONDS
+	set_special_ability_cooldown(5 SECONDS)
 
 	src.visible_message("<span class='danger'>\The [src] hunkers down over \the [target], tearing into their flesh.</span>")
 	if(do_mob(src, target, 5 SECONDS))
