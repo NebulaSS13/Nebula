@@ -27,10 +27,11 @@
 	update_icon()
 
 /obj/structure/door_assembly/set_dir(new_dir)
-	if(new_dir & (EAST|WEST))
-		new_dir = WEST
-	else
-		new_dir = SOUTH
+	if(width == 1) // This logic doesn't support multitle doors.
+		if(new_dir & (EAST|WEST))
+			new_dir = WEST
+		else
+			new_dir = SOUTH
 
 	. = ..(new_dir)
 
