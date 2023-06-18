@@ -115,8 +115,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/hatch/autoname/command,
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_x = -32
 	},
 /obj/machinery/door/firedoor,
@@ -3988,12 +3987,10 @@
 	id_tag = "radaway";
 	opacity = 0
 	},
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_x = -32
 	},
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_x = 32
 	},
 /turf/simulated/floor/plating,
@@ -5365,9 +5362,8 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/structure/sign{
+/obj/structure/sign/warning/radioactive{
 	dir = 4;
-	icon_state = "radiation";
 	pixel_x = 32
 	},
 /turf/simulated/floor/plating,
@@ -5641,9 +5637,8 @@
 "xW" = (
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/sign{
-	dir = 4;
-	icon_state = "radiation"
+/obj/structure/sign/warning/radioactive{
+	dir = 4
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -7561,8 +7556,7 @@
 	pixel_x = -24
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals6,
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_y = 32
 	},
 /obj/machinery/vending/cigarette,
@@ -7598,8 +7592,7 @@
 /obj/machinery/light_switch{
 	pixel_x = 27
 	},
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/monotile,
