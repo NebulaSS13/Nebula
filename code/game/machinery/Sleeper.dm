@@ -79,6 +79,11 @@
 	to_chat(user, SPAN_NOTICE("You remove \the [canister] from \the [src]."))
 	return TRUE
 
+/obj/machinery/sleeper/get_contained_external_atoms()
+	. = ..()
+	LAZYREMOVE(., loaded_canisters)
+	LAZYREMOVE(., beaker)
+
 /obj/machinery/sleeper/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
 	if(populate_parts)
@@ -371,9 +376,7 @@
 	if(open_sound)
 		playsound(src, open_sound, 40)
 
-	for(var/obj/O in (contents - (component_parts + loaded_canisters))) // In case an object was dropped inside or something. Excludes the beaker and component parts.
-		if(O != beaker)
-			O.dropInto(loc)
+	dump_contents() // In case an object was dropped inside or something. Excludes the beaker and component parts.
 	toggle_filter()
 
 /obj/machinery/sleeper/proc/set_occupant(var/mob/living/carbon/occupant)

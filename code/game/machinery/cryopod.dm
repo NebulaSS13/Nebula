@@ -461,7 +461,7 @@
 	icon_state = base_icon_state
 
 	//Eject any items that aren't meant to be in the pod.
-	var/list/items = contents - component_parts
+	var/list/items = get_contained_external_atoms()
 	if(occupant) items -= occupant
 
 	for(var/obj/item/W in items)
