@@ -202,8 +202,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_y = 30
 	},
 /obj/machinery/door/blast/regular/open{
@@ -3128,8 +3127,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/cryo)
 "fy" = (
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_y = 30
 	},
 /obj/structure/reagent_dispensers/fueltank,

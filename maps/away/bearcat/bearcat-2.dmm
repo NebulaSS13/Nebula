@@ -4598,12 +4598,10 @@
 	id_tag = "radaway";
 	opacity = 0
 	},
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_x = -32
 	},
-/obj/structure/sign{
-	icon_state = "radiation";
+/obj/structure/sign/warning/radioactive{
 	pixel_x = 32
 	},
 /turf/simulated/floor/usedup,

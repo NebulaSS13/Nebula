@@ -69,3 +69,6 @@
 	name = "skipjack control console"
 	initial_access = list(access_raider)
 	shuttle_tag = "Skipjack"
+
+/obj/structure/sign/warning/nosmoking_1/heist
+	desc = "A warning sign which reads 'NO SMOKING'. Someone has scratched a variety of crude words in gutter across the entire sign."
