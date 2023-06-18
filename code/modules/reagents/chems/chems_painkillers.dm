@@ -112,14 +112,15 @@
 
 /decl/material/liquid/painkillers/affect_overdose(var/mob/living/M)
 	..()
-	SET_STATUS_MAX(M, STAT_DRUGGY, 10)
 	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
-	M.add_chemical_effect(CE_TOXIN, 1)
 	if(narcotic)
+		SET_STATUS_MAX(M, STAT_DRUGGY, 10)
 		M.set_hallucination(120, 30)
 		M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*2) //ODing on opiates can be deadly.
 		if(isboozed(M))
 			M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*4) //Don't drink and OD on opiates folks
+	else
+		M.add_chemical_effect(CE_TOXIN, 1)
 
 /decl/material/liquid/painkillers/proc/isboozed(var/mob/living/carbon/M)
 	. = 0
