@@ -28,7 +28,7 @@
 		group_multiplier = _group_multiplier
 
 	//Since we may have values defined on creation, update everything.
-	if(volume)
+	if(volume && length(gas))
 		update_values()
 
 /datum/gas_mixture/proc/get_gas(gasid)
