@@ -129,7 +129,7 @@
 ///Handle loading a single map path its bottom left corner starting at x,y,z.
 /// Returns a /datum/map_load_metadata if loading was successful.
 /// Meant to be overridden for handling extra per-map file processing.
-/datum/map_template/proc/load_a_path(var/mappath, var/x, var/y, var/z, var/list/bounds, var/list/initialized_areas_by_type, var/no_changeturf, var/cropMap)
+/datum/map_template/proc/load_single_path(var/mappath, var/x, var/y, var/z, var/list/bounds, var/list/initialized_areas_by_type, var/no_changeturf, var/cropMap)
 	var/datum/map_load_metadata/M = maploader.load_map(
 		dmm_file                  = file(mappath),
 		x_offset                  = x,
@@ -166,7 +166,7 @@
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = load_a_path(mappath, x, y, world.maxz + 1, bounds, initialized_areas_by_type, no_changeturf, FALSE)
+		var/datum/map_load_metadata/M = load_single_path(mappath, x, y, world.maxz + 1, bounds, initialized_areas_by_type, no_changeturf, FALSE)
 		if (M)
 			atoms_to_initialise += M.atoms_to_initialise
 		else
@@ -207,7 +207,7 @@
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = load_a_path(mappath, T.x, T.y, T.z, null, initialized_areas_by_type, FALSE, TRUE)
+		var/datum/map_load_metadata/M = load_single_path(mappath, T.x, T.y, T.z, null, initialized_areas_by_type, FALSE, TRUE)
 		if (M)
 			atoms_to_initialise += M.atoms_to_initialise
 		else
