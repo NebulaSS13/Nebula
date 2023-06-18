@@ -266,6 +266,13 @@
 /obj/item/storage/box/smokes/WillContain()
 	return list(/obj/item/grenade/smokebomb = 5)
 
+/obj/item/storage/box/metalfoam
+	name = "box of metal foam grenades"
+	desc = "A box containing 5 metal foam grenades."
+	icon_state = "flashbang"
+/obj/item/storage/box/metalfoam/WillContain()
+	return list(/obj/item/grenade/chem_grenade/metalfoam = 5)
+
 /obj/item/storage/box/anti_photons
 	name = "box of anti-photon grenades"
 	desc = "A box containing 5 experimental photon disruption grenades."
