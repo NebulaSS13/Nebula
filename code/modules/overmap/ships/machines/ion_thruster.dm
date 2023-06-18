@@ -31,7 +31,7 @@
 
 /obj/machinery/ion_thruster
 	name = "ion thruster"
-	desc = "An advanced propulsion device, using energy and minutes amount of gas to generate thrust."
+	desc = "An advanced propulsion device, using energy and minute amounts of gas to generate thrust."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle2"
 	density = 1
