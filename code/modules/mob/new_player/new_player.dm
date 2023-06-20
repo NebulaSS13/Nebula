@@ -309,9 +309,11 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	// END MAIN MAP JOBS
 
 	// SUBMAP JOBS
-	for(var/thing in SSmapping.submaps)
-		var/datum/submap/submap = thing
-		if(submap && submap.available())
+	var/list/ordered_submaps = null
+	if(length(SSmapping.submaps))
+		ordered_submaps = sortTim(SSmapping.submaps.Copy(), /proc/cmp_submap_asc)
+	for(var/datum/submap/submap as anything in ordered_submaps)
+		if(submap?.available())
 			dat += "<tr><td colspan = 3><b>[submap.name] ([submap.archetype.descriptor]):</b></td></tr>"
 			job_summaries = list()
 			for(var/otherthing in submap.jobs)
