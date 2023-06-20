@@ -173,8 +173,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
-	else if(!href_list["late_join"])
-		show_lobby_menu()
 
 	if(href_list["invalid_jobs"])
 		show_invalid_jobs = !show_invalid_jobs
