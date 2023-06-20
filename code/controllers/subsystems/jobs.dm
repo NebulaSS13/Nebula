@@ -88,8 +88,9 @@ SUBSYSTEM_DEF(jobs)
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
-	primary_job_datums = sortTim(primary_job_datums, /proc/cmp_job_desc)
-	job_lists_by_map_name = list("[global.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
+	if(length(primary_job_datums))
+		primary_job_datums = sortTim(primary_job_datums, /proc/cmp_job_desc)
+		job_lists_by_map_name = list("[global.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
 	for(var/atype in submap_archetypes)
 		var/list/submap_job_datums
