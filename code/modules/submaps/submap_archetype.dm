@@ -7,6 +7,8 @@
 	var/list/crew_jobs = list(
 		/datum/job/submap
 	)
+	/// Used to order submaps on the occupation preference menu.
+	var/sort_priority = 0
 
 /decl/submap_archetype/Initialize()
 	if(islist(whitelisted_species) && !length(whitelisted_species))

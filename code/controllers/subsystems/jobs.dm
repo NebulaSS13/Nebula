@@ -57,6 +57,7 @@ SUBSYSTEM_DEF(jobs)
 				job = get_by_path(jobtype)
 			if(job)
 				archetype_job_datums |= job
+	submap_archetypes = sortTim(submap_archetypes, /proc/cmp_submap_archetype_asc, TRUE)
 
 	// Load job configuration (is this even used anymore?)
 	if(job_config_file && config.load_jobs_from_txt)
