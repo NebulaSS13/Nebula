@@ -33,7 +33,10 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
-	for(var/jobtype in (list(global.using_map.default_job_type) | global.using_map.allowed_jobs))
+	var/list/available_jobs = global.using_map.allowed_jobs.Copy()
+	if(global.using_map.default_job_type)
+		LAZYDISTINCTADD(available_jobs, global.using_map.default_job_type)
+	for(var/jobtype in available_jobs)
 		var/datum/job/job = get_by_path(jobtype)
 		if(!job)
 			job = new jobtype
