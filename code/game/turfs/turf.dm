@@ -494,6 +494,11 @@
 	return TRUE
 
 /turf/proc/get_air_graphic()
+	if(zone && !zone.invalid)
+		return zone.air?.graphic
+	if(external_atmosphere_participation && is_outside())
+		var/datum/level_data/level = SSmapping.levels_by_z[z]
+		return level.exterior_atmosphere.graphic
 	var/datum/gas_mixture/environment = return_air()
 	return environment?.graphic
 
