@@ -102,7 +102,7 @@ SUBSYSTEM_DEF(jobs)
 				LAZYADD(submap_job_datums, job)
 		if(LAZYLEN(submap_job_datums))
 			submap_job_datums = sortTim(submap_job_datums, /proc/cmp_job_desc)
-			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
+			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = arch.default_to_hidden)
 
 	// Update global map blacklists and whitelists.
 	for(var/mappath in global.all_maps)
