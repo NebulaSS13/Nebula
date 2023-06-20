@@ -69,6 +69,8 @@
 			setup_as_organic(given_dna)
 		else
 			setup_as_prosthetic()
+		// TODO: Remove the above procs and just have a unified setup chain.
+		initialize_reagents()
 
 /obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
 	//Null DNA setup
@@ -89,7 +91,6 @@
 			given_dna.check_integrity() //Defaults everything
 
 	set_dna(given_dna)
-	initialize_reagents()
 	return TRUE
 
 //Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
