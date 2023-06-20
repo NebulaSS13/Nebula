@@ -252,7 +252,15 @@
 /datum/level_data/proc/setup_strata()
 	//If no strata, pick a random one
 	if(isnull(strata))
-		strata = pick(decls_repository.get_decl_paths_of_subtype(/decl/strata))
+		var/list/all_strata      = decls_repository.get_decls_of_subtype(/decl/strata)
+		var/list/possible_strata = list()
+
+		for(var/stype in all_strata)
+			var/decl/strata/strata = all_strata[stype]
+			if(strata.is_valid_level_stratum(src))
+				possible_strata += stype
+
+		strata = DEFAULTPICK(possible_strata, GET_DECL(/decl/strata/sedimentary))
 	//Make sure we have a /decl/strata instance
 	if(ispath(strata))
 		strata = GET_DECL(strata)
