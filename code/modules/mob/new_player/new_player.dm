@@ -326,7 +326,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			if(LAZYLEN(job_summaries))
 				dat += job_summaries
 			else
-				dat += "No available positions."
+				dat += "<tr><td colspan = 3>No available positions.</td></tr>"
 	// END SUBMAP JOBS
 
 	dat += "</table></center>"
