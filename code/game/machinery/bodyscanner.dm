@@ -15,6 +15,11 @@
 	var/open_sound = 'sound/machines/podopen.ogg'
 	var/close_sound = 'sound/machines/podclose.ogg'
 
+// Don't dump out the occupant!
+/obj/machinery/bodyscanner/proc/dump_obj_contents()
+	for(var/obj/O in get_contained_external_atoms())
+		O.dropInto(loc)
+
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()
 	if (occupant && user.Adjacent(src))
@@ -47,7 +52,7 @@
 /obj/machinery/bodyscanner/proc/go_out()
 	if ((!( src.occupant ) || src.locked))
 		return
-	dump_contents()
+	dump_obj_contents()
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
@@ -89,7 +94,7 @@
 	src.occupant = target
 
 	update_use_power(POWER_USE_ACTIVE)
-	dump_contents()
+	dump_obj_contents()
 	SetName("[name] ([occupant])")
 
 	src.add_fingerprint(user)
