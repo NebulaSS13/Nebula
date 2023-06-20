@@ -53,7 +53,8 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		output += lobby_footer
 	output += "</div>"
 
-	panel = new(src, "Welcome","Welcome to [global.using_map.full_name]", 560, 280, src)
+	if(!panel)
+		panel = new(src, "Welcome","Welcome to [global.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(JOINTEXT(output))
 	panel.open()
@@ -103,7 +104,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			ready = !ready
 
 	if(href_list["refresh"])
-		panel.close()
 		show_lobby_menu()
 
 	if(href_list["lobby_observe"])
