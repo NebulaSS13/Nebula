@@ -49,14 +49,14 @@
 
 	// And the genes that actually do the work. (domutcheck improvements)
 	var/list/blocks_assigned[DNA_SE_LENGTH]
-	for(var/gene_type in typesof(/datum/dna/gene))
-		var/datum/dna/gene/G = new gene_type
-		if(G.block)
-			if(G.block in blocks_assigned)
-				warning("DNA2: Gene [G.name] trying to use already-assigned block [G.block] (used by [english_list(blocks_assigned[G.block])])")
-			dna_genes.Add(G)
+	var/list/all_genes = decls_repository.get_decls_of_subtype(/decl/gene)
+	for(var/gene_type in all_genes)
+		var/decl/gene/gene = all_genes[gene_type]
+		if(gene.block)
+			if(gene.block in blocks_assigned)
+				warning("DNA2: Gene [gene.name] trying to use already-assigned block [gene.block] (used by [english_list(blocks_assigned[gene.block])])")
 			var/list/assignedToBlock[0]
-			if(blocks_assigned[G.block])
-				assignedToBlock=blocks_assigned[G.block]
-			assignedToBlock.Add(G.name)
-			blocks_assigned[G.block]=assignedToBlock
+			if(blocks_assigned[gene.block])
+				assignedToBlock=blocks_assigned[gene.block]
+			assignedToBlock.Add(gene.name)
+			blocks_assigned[gene.block]=assignedToBlock
