@@ -25,3 +25,5 @@
 		)
 	)
 	. = ..()
+
+DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/utility_frame, utility_frame)
