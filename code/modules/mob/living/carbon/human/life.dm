@@ -210,7 +210,9 @@
 			heal_organ_damage(0,1)
 
 	// DNA2 - Gene processing.
-	for(var/datum/dna/gene/gene in dna_genes)
+	var/list/all_genes = decls_repository.get_decls_of_subtype(/decl/gene)
+	for(var/gene_type in all_genes)
+		var/decl/gene/gene = all_genes[gene_type]
 		if(!gene.block)
 			continue
 		if(gene.is_active(src))

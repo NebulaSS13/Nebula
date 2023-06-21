@@ -2,82 +2,82 @@
 // POWERS
 ///////////////////////////////////
 
-/datum/dna/gene/basic/nobreath
+/decl/gene/basic/nobreath
 	name="No Breathing"
-	activation_messages=list("You feel no need to breathe.")
+	activation_messages="You feel no need to breathe."
 	mutation=mNobreath
 
-/datum/dna/gene/basic/nobreath/New()
-	..()
+/decl/gene/basic/nobreath/Initialize()
+	. = ..()
 	block=global.NOBREATHBLOCK
 
-/datum/dna/gene/basic/remoteview
+/decl/gene/basic/remoteview
 	name="Remote Viewing"
-	activation_messages=list("Your mind expands.")
+	activation_messages="Your mind expands."
 	mutation=mRemote
 
-/datum/dna/gene/basic/remoteview/New()
-	..()
+/decl/gene/basic/remoteview/Initialize()
+	. = ..()
 	block=global.REMOTEVIEWBLOCK
 
-/datum/dna/gene/basic/remoteview/activate(var/mob/M, var/connected, var/flags)
+/decl/gene/basic/remoteview/activate(var/mob/M, var/connected, var/flags)
 	..(M,connected,flags)
 	M.verbs += /mob/living/carbon/human/proc/remoteobserve
 
-/datum/dna/gene/basic/regenerate
+/decl/gene/basic/regenerate
 	name="Regenerate"
-	activation_messages=list("You feel better.")
+	activation_messages="You feel better."
 	mutation=mRegen
 
-/datum/dna/gene/basic/regenerate/New()
-	..()
+/decl/gene/basic/regenerate/Initialize()
+	. = ..()
 	block=global.REGENERATEBLOCK
 
-/datum/dna/gene/basic/regenerate
+/decl/gene/basic/regenerate
 	name="Super Speed"
-	activation_messages=list("Your leg muscles pulsate.")
+	activation_messages="Your leg muscles pulsate."
 	mutation=mRun
 
-/datum/dna/gene/basic/nobreath/New()
-	..()
+/decl/gene/basic/regenerate/Initialize()
+	. = ..()
 	block=global.INCREASERUNBLOCK
 
-/datum/dna/gene/basic/remotetalk
+/decl/gene/basic/remotetalk
 	name="Telepathy"
-	activation_messages=list("You expand your mind outwards.")
+	activation_messages="You expand your mind outwards."
 	mutation=mRemotetalk
 
-/datum/dna/gene/basic/remotetalk/New()
-	..()
+/decl/gene/basic/remotetalk/Initialize()
+	. = ..()
 	block=global.REMOTETALKBLOCK
 
-/datum/dna/gene/basic/remotetalk/activate(var/mob/M, var/connected, var/flags)
+/decl/gene/basic/remotetalk/activate(var/mob/M, var/connected, var/flags)
 	..(M,connected,flags)
 	M.verbs += /mob/living/carbon/human/proc/remotesay
 
-/datum/dna/gene/basic/morph
+/decl/gene/basic/morph
 	name="Morph"
-	activation_messages=list("Your skin feels strange.")
+	activation_messages="Your skin feels strange."
 	mutation=mMorph
 
-/datum/dna/gene/basic/morph/New()
-	..()
+/decl/gene/basic/noshock/Initialize()
+	. = ..()
 	block=global.MORPHBLOCK
 
-/datum/dna/gene/basic/morph/activate(var/mob/M)
+/decl/gene/basic/morph/activate(var/mob/M)
 	..(M)
 	M.verbs += /mob/living/carbon/human/proc/morph
 
-/datum/dna/gene/basic/cold_resist
+/decl/gene/basic/cold_resist
 	name="Cold Resistance"
-	activation_messages=list("Your body is filled with warmth.")
+	activation_messages="Your body is filled with warmth."
 	mutation=MUTATION_COLD_RESISTANCE
 
-/datum/dna/gene/basic/cold_resist/New()
-	..()
+/decl/gene/basic/cold_resist/Initialize()
+	. = ..()
 	block=global.FIREBLOCK
 
-/datum/dna/gene/basic/cold_resist/can_activate(var/mob/M,var/flags)
+/decl/gene/basic/cold_resist/can_activate(var/mob/M,var/flags)
 	if(flags & MUTCHK_FORCED)
 		return 1
 	// Probability check
@@ -87,32 +87,32 @@
 	if(probinj(_prob,(flags&MUTCHK_FORCED)))
 		return 1
 
-/datum/dna/gene/basic/cold_resist/OnDrawUnderlays(var/mob/M,var/g)
+/decl/gene/basic/cold_resist/OnDrawUnderlays(var/mob/M,var/g)
 	return "fire_s"
 
-/datum/dna/gene/basic/noprints
+/decl/gene/basic/noprints
 	name="No Prints"
-	activation_messages=list("Your fingers feel numb.")
+	activation_messages="Your fingers feel numb."
 	mutation=mFingerprints
 
-/datum/dna/gene/basic/noprints/New()
-	..()
+/decl/gene/basic/noprints/Initialize()
+	. = ..()
 	block=global.NOPRINTSBLOCK
 
-/datum/dna/gene/basic/noshock
+/decl/gene/basic/noshock
 	name="Shock Immunity"
-	activation_messages=list("Your skin feels strange.")
+	activation_messages="Your skin feels strange."
 	mutation=mShock
 
-/datum/dna/gene/basic/noshock/New()
-	..()
+/decl/gene/basic/noshock/Initialize()
+	. = ..()
 	block=global.SHOCKIMMUNITYBLOCK
 
-/datum/dna/gene/basic/xray
+/decl/gene/basic/xray
 	name="X-Ray Vision"
-	activation_messages=list("The walls suddenly disappear.")
+	activation_messages="The walls suddenly disappear."
 	mutation=MUTATION_XRAY
 
-/datum/dna/gene/basic/xray/New()
-	..()
+/decl/gene/basic/xray/Initialize()
+	. = ..()
 	block=global.XRAYBLOCK
