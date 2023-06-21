@@ -30,7 +30,7 @@
 	show_ssd =               "quiescent"
 
 	base_prosthetics_model = null
-	available_bodytypes = list(/decl/bodytype/alate)
+	available_bodytypes = list(/decl/bodytype/prosthetic/crystalline/alate)
 
 	description = "When human surveyors finally arrived at the outer reaches of explored space, they hoped to find \
 	new frontiers and new planets to exploit. They were largely not expecting to have entire expeditions lost \
@@ -70,7 +70,7 @@
 
 	available_pronouns = list(/decl/pronouns/male)
 
-	species_flags =           SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
+	species_flags =           SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =             SPECIES_IS_RESTRICTED
 
 	heat_discomfort_strings = list(
@@ -137,10 +137,6 @@
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/mantid/apply_species_organ_modifications(var/obj/item/organ/org)
-	..()
-	org.status &= ~ORGAN_BRITTLE
-
 /decl/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
 	return
 
@@ -149,7 +145,7 @@
 	name =        SPECIES_MANTID_GYNE
 	name_plural = "Kharmaan Gynes"
 
-	available_bodytypes = list(/decl/bodytype/gyne)
+	available_bodytypes = list(/decl/bodytype/prosthetic/crystalline/gyne)
 	available_pronouns = list(/decl/pronouns/female)
 
 	gluttonous =              3

@@ -96,9 +96,8 @@
 				var/limb_path = organ_data["path"]
 				E = new limb_path(holder)
 		if(istype(E))
-			// this should be pre-validated by is_available_to(), force bodytype/species based on holder.
-			var/holder_species = holder.get_species_name()
-			E.robotize(model || get_base_model(holder_species), check_bodytype = holder.get_bodytype_category(), check_species = holder_species)
+			// this should be pre-validated by is_available_to()
+			E.set_bodytype(model || get_base_model(holder.get_species_name()))
 
 /decl/aspect/prosthetic_limb/left_hand
 	bodypart_name = "Left Hand"

@@ -385,6 +385,7 @@
 	. = bodytype.bodytype_category
 
 /mob/living/carbon/human/get_bodytype()
+	RETURN_TYPE(/decl/bodytype)
 	return bodytype
 
 /mob/living/carbon/human/check_has_mouth()

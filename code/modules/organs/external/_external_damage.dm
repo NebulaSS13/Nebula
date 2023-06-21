@@ -206,14 +206,14 @@
 
 // Geneloss/cloneloss.
 /obj/item/organ/external/proc/get_genetic_damage()
-	if(species?.species_flags & SPECIES_FLAG_NO_SCAN)
+	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
 		return 0
 	if(BP_IS_PROSTHETIC(src))
 		return 0
 	return genetic_degradation
 
 /obj/item/organ/external/proc/remove_genetic_damage(var/amount)
-	if((species.species_flags & SPECIES_FLAG_NO_SCAN) || BP_IS_PROSTHETIC(src))
+	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
 		genetic_degradation = 0
 		status &= ~ORGAN_MUTATED
 		return
@@ -226,7 +226,7 @@
 	return -(genetic_degradation - last_gene_dam)
 
 /obj/item/organ/external/proc/add_genetic_damage(var/amount)
-	if((species.species_flags & SPECIES_FLAG_NO_SCAN) || BP_IS_PROSTHETIC(src))
+	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
 		genetic_degradation = 0
 		status &= ~ORGAN_MUTATED
 		return

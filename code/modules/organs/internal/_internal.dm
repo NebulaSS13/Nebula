@@ -82,11 +82,6 @@
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
 
-/obj/item/organ/internal/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	. = ..()
-	min_bruised_damage += 5
-	min_broken_damage += 10
-
 /obj/item/organ/internal/proc/getToxLoss()
 	if(BP_IS_PROSTHETIC(src))
 		return damage * 0.5

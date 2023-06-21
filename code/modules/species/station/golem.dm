@@ -1,4 +1,4 @@
-/decl/bodytype/golem
+/decl/bodytype/prosthetic/crystalline/golem
 	name =              "humanoid"
 	bodytype_category = BODYTYPE_HUMANOID
 	icon_base =         'icons/mob/human_races/species/golem/body.dmi'
@@ -8,10 +8,10 @@
 	name = SPECIES_GOLEM
 	name_plural = "Golems"
 
-	available_bodytypes = list(/decl/bodytype/golem)
+	available_bodytypes = list(/decl/bodytype/prosthetic/crystalline/golem)
 
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
-	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_CRYSTALLINE
+	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 

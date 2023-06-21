@@ -166,7 +166,7 @@
 /obj/item/organ/internal/voxstack/Initialize(mapload, datum/dna/given_dna)
 	. = ..()
 	do_backup()
-	robotize()
+	set_bodytype(species.base_prosthetics_model)
 
 /obj/item/organ/internal/voxstack/examine(mob/user)
 	. = ..()

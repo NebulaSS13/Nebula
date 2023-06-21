@@ -37,12 +37,6 @@ var/global/list/wrapped_species_by_ref = list()
 		H.facial_hair_colour = H.skin_colour
 	..()
 
-/decl/species/shapeshifter/apply_species_organ_modifications(var/obj/item/organ/org)
-	..()
-	var/obj/item/organ/external/E = org
-	if(istype(E) && E.owner)
-		E.sync_colour_to_human(E.owner)
-
 /decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_pain_emote(H, pain_power)

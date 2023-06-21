@@ -92,6 +92,21 @@ var/global/list/bodytypes_by_category = list()
 	var/base_eye_color =  COLOR_BLACK
 	var/base_hair_color = COLOR_BLACK
 
+	/// Used to initialize organ material
+	var/material =        /decl/material/solid/meat
+	/// Used to initialize organ matter
+	var/matter =          null
+	/// The reagent organs are filled with, which currently affects what mobs that eat the organ will receive.
+	/// TODO: Remove this in a later matter edibility refactor.
+	var/edible_reagent =  /decl/material/liquid/nutriment/protein
+	/// A bitfield representing various bodytype-specific features.
+	var/body_flags = 0
+	/// Used to modify the arterial_bleed_severity of organs.
+	var/arterial_bleed_multiplier = 1
+	/// Associative list of organ_tag = "encased value". If set, sets the organ's encased var to the corresponding value; used in surgery.
+	/// If the list is set, organ tags not present in the list will get encased set to null.
+	var/list/apply_encased
+
 /decl/bodytype/Initialize()
 	. = ..()
 	if(!icon_deformed)
@@ -134,3 +149,10 @@ var/global/list/bodytypes_by_category = list()
 	if(appearance_flags & HAS_SKIN_TONE_TRITON)
 		return 80
 	return 220
+
+/decl/bodytype/proc/apply_bodytype_organ_modifications(obj/item/organ/org)
+	if(istype(org, /obj/item/organ/external))
+		var/obj/item/organ/external/E = org
+		E.arterial_bleed_severity *= arterial_bleed_multiplier
+		if(islist(apply_encased))
+			E.encased = apply_encased[E.organ_tag]

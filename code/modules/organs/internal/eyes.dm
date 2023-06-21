@@ -25,19 +25,16 @@
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
+	bodytype = /decl/bodytype/prosthetic/basic_human
 	organ_properties = ORGAN_PROP_PROSTHETIC
 	icon = 'icons/obj/robot_component.dmi'
 	flash_mod = 1
 	darksight_range = 2
-	material = /decl/material/solid/metal/steel
 
 /obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna)
 	. = ..()
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
-
-/obj/item/organ/internal/eyes/robot/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	return
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = eye_colour
@@ -112,15 +109,25 @@
 	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+// TODO: FIND A BETTER WAY TO DO THIS
+// MAYBE JUST REMOVE IT ENTIRELY?
+/obj/item/organ/internal/eyes/reset_status()
 	. = ..()
-	name = "optical sensor"
-	icon = 'icons/obj/robot_component.dmi'
-	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
-	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
+	if(BP_IS_PROSTHETIC(src))
+		name = "optical sensor"
+		icon = 'icons/obj/robot_component.dmi'
+		flash_mod = 1
+		darksight_range = 2
+		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
+	else
+		name = initial(name)
+		icon = initial(icon)
+		flash_mod = initial(flash_mod)
+		darksight_range = initial(darksight_range)
+		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	update_colour()
-	flash_mod = 1
-	darksight_range = 2
 
 /obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
 	return "retinal overlayed [name]"

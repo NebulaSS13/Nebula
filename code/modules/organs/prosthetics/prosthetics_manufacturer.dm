@@ -7,8 +7,21 @@
 	can_eat = FALSE
 	is_robotic = TRUE
 	can_feel_pain = FALSE
+	body_flags = BODY_FLAG_NO_DNA
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
+
+/decl/bodytype/prosthetic/apply_bodytype_organ_modifications(obj/item/organ/org)
+	..()
+	BP_SET_PROSTHETIC(org)
+	if(istype(org, /obj/item/organ/external))
+		var/obj/item/organ/external/external_organ = org
+		external_organ.limb_flags &= (~ORGAN_FLAG_CAN_DISLOCATE)
+		if(external_organ.owner)
+			for(var/obj/item/organ/thing in external_organ.internal_organs)
+				if(!thing.is_vital_to_owner() && !BP_IS_PROSTHETIC(thing))
+					qdel(thing)
+			external_organ.owner.refresh_modular_limb_verbs()
 
 /**
  * Used to check if a prosthetic bodytype can be installed with a certain base bodytype/for a certain organ slot.

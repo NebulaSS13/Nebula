@@ -128,9 +128,10 @@
 			LAZYADD(unarmed_attacks, attack_type)
 	get_icon()
 
-/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype)
+/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null)
 	. = ..()
 	slowdown = bodytype.movement_slowdown
+	update_icon(TRUE)
 
 /obj/item/organ/external/proc/check_pain_disarm()
 	if(owner && prob((pain/max_damage)*100))
@@ -1260,38 +1261,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return bodytype.manual_dexterity
 	if(species)
 		return species.get_manual_dexterity(owner)
-
-//Completely override, so we can slap in the model
-/obj/item/organ/external/setup_as_prosthetic()
-	. = ..(istype(bodytype, /decl/bodytype/prosthetic) ? bodytype : /decl/bodytype/prosthetic/basic_human)
-
-/obj/item/organ/external/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	. = ..()
-
-	slowdown = 0
-
-	status &= (~ORGAN_DISLOCATED)
-	limb_flags &= (~ORGAN_FLAG_CAN_DISLOCATE)
-	remove_splint()
-	update_icon(1)
-	unmutate()
-
-	for(var/obj/item/organ/external/T in children)
-		T.robotize(company, 1)
-
-	if(owner)
-
-		if(!skip_prosthetics)
-			owner.full_prosthetic = null // Will be rechecked next isSynthetic() call.
-
-		if(!keep_organs)
-			for(var/obj/item/organ/thing in internal_organs)
-				if(!thing.is_vital_to_owner() && !BP_IS_PROSTHETIC(thing))
-					qdel(thing)
-
-		owner.refresh_modular_limb_verbs()
-
-	return 1
 
 /obj/item/organ/external/proc/get_damage()	//returns total damage
 	return (brute_dam+burn_dam)	//could use max_damage?

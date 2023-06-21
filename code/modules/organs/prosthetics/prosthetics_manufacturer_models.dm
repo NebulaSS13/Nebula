@@ -1,7 +1,6 @@
 /decl/bodytype/prosthetic/basic_human
 	name = "Unbranded"
 	bodytype_category = BODYTYPE_HUMANOID
-	bodytype_category = BODYTYPE_HUMANOID
 
 /decl/bodytype/prosthetic/wooden
 	name = "crude wooden"
@@ -14,5 +13,6 @@
 	is_robotic = FALSE
 	modular_limb_tier = MODULAR_BODYPART_ANYWHERE
 	bodytype_category = BODYTYPE_HUMANOID
+	material = /decl/material/solid/wood
 
 DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/bodytype/prosthetic/wooden, pirate, 0)

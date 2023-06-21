@@ -31,14 +31,14 @@
 	)
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
-		/decl/bodytype/adherent,
-		/decl/bodytype/adherent/emerald,
-		/decl/bodytype/adherent/amethyst,
-		/decl/bodytype/adherent/sapphire,
-		/decl/bodytype/adherent/ruby,
-		/decl/bodytype/adherent/topaz,
-		/decl/bodytype/adherent/quartz,
-		/decl/bodytype/adherent/jet
+		/decl/bodytype/prosthetic/crystalline/adherent,
+		/decl/bodytype/prosthetic/crystalline/adherent/emerald,
+		/decl/bodytype/prosthetic/crystalline/adherent/amethyst,
+		/decl/bodytype/prosthetic/crystalline/adherent/sapphire,
+		/decl/bodytype/prosthetic/crystalline/adherent/ruby,
+		/decl/bodytype/prosthetic/crystalline/adherent/topaz,
+		/decl/bodytype/prosthetic/crystalline/adherent/quartz,
+		/decl/bodytype/prosthetic/crystalline/adherent/jet
 	)
 	cyborg_noun =             null
 
@@ -63,7 +63,7 @@
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
-	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
+	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =   SPECIES_CAN_JOIN
 
 	flesh_color = "#90edeb"
@@ -158,23 +158,6 @@
 		/datum/inventory_slot/id,
 		/datum/inventory_slot/belt
 	)
-
-/decl/species/adherent
-	var/static/list/apply_encased = list(
-		BP_CHEST,
-		BP_GROIN,
-		BP_HEAD
-	)
-
-/decl/species/adherent/apply_species_organ_modifications(var/obj/item/organ/org)
-	..()
-	org.robotize(/decl/bodytype/prosthetic/adherent, FALSE, TRUE, /decl/material/solid/gemstone/crystal, BODYTYPE_ADHERENT, SPECIES_ADHERENT)
-	if(istype(org, /obj/item/organ/external))
-		var/obj/item/organ/external/E = org
-		E.arterial_bleed_severity = 0
-		if(E.organ_tag in apply_encased)
-			E.encased = "ceramic hull"
-
 /datum/inventory_slot/ear/adherent
 	ui_loc = ui_iclothing
 /datum/inventory_slot/head/adherent

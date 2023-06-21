@@ -1,4 +1,4 @@
-/decl/bodytype/alate
+/decl/bodytype/prosthetic/crystalline/alate
 	name =              "alate"
 	bodytype_category = BODYTYPE_MANTID_SMALL
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
@@ -7,8 +7,9 @@
 	bodytype_flag =     BODY_FLAG_ALATE
 	movement_slowdown = -1
 	appearance_flags =  0
+	is_brittle = FALSE
 
-/decl/bodytype/gyne
+/decl/bodytype/prosthetic/crystalline/gyne
 	name =              "gyne"
 	bodytype_category = BODYTYPE_MANTID_LARGE
 	icon_base =         'mods/species/ascent/icons/species/body/gyne/body.dmi'
@@ -22,7 +23,7 @@
 	bodytype_flag =     BODY_FLAG_GYNE
 	movement_slowdown = 2
 
-/decl/bodytype/gyne/Initialize()
+/decl/bodytype/prosthetic/crystalline/gyne/Initialize()
 	equip_adjust = list(
 		BP_L_HAND = list(
 			"[NORTH]" = list("x" = -4, "y" = 12),

@@ -2840,6 +2840,7 @@
 #include "code\modules\organs\internal\voice.dm"
 #include "code\modules\organs\internal\species\golem.dm"
 #include "code\modules\organs\prosthetics\_prosthetics.dm"
+#include "code\modules\organs\prosthetics\prosthetics_crystalline.dm"
 #include "code\modules\organs\prosthetics\prosthetics_manufacturer.dm"
 #include "code\modules\organs\prosthetics\prosthetics_manufacturer_models.dm"
 #include "code\modules\overmap\_defines.dm"

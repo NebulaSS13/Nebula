@@ -66,7 +66,7 @@
 		if(length(limb.children))
 			. -= limb.children
 
-// Called in robotize(), replaced() and removed() to update our modular limb verbs.
+// Called in bodytype.apply_bodytype_organ_modifications(), replaced() and removed() to update our modular limb verbs.
 /mob/living/carbon/human/proc/refresh_modular_limb_verbs()
 	if(length(get_modular_limbs(return_first_found = TRUE, validate_proc = /obj/item/organ/external/proc/can_attach_modular_limb_here)))
 		verbs |= .proc/attach_limb_verb
@@ -179,7 +179,7 @@
 		return FALSE
 
 	set_special_ability_cooldown(2 SECONDS)
-	remove_organ(E)
+	remove_organ(E, update_icon = TRUE)
 	E.dropInto(loc)
 	put_in_hands(E)
 	var/decl/pronouns/G = get_pronouns()

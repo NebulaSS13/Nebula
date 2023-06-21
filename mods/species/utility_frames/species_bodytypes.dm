@@ -8,6 +8,7 @@
 	modular_limb_tier = MODULAR_BODYPART_CYBERNETIC
 	base_color = "#333355"
 	base_eye_color = "#00ccff"
+	material = /decl/material/solid/metal/steel
 
 /decl/bodytype/prosthetic/utility_frame/Initialize()
 	equip_adjust = list(

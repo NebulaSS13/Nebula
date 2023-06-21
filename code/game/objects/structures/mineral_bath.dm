@@ -110,7 +110,7 @@
 		var/repaired_organ
 
 		// Replace limbs for crystalline species.
-		if((H.species.species_flags & SPECIES_FLAG_CRYSTALLINE) && prob(10))
+		if((H.bodytype & BODY_FLAG_CRYSTAL_REFORM) && prob(10))
 			for(var/limb_type in H.species.has_limbs)
 				var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, limb_type)
 				if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))

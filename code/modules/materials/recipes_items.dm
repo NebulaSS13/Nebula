@@ -228,7 +228,7 @@
 	var/obj/item/organ/external/limb = ..()
 	if(limb)
 		limb.set_species(prosthetic_species)
-		limb.robotize(prosthetic_model, apply_material = use_material, check_species = prosthetic_species)
+		limb.set_bodytype(prosthetic_model, override_material = use_material)
 		limb.status |= ORGAN_CUT_AWAY
 	return limb
 

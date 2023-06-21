@@ -1,5 +1,6 @@
-/decl/bodytype/adherent
+/decl/bodytype/prosthetic/crystalline/adherent
 	name = "turquoise"
+	desc = "A gleaming crystalline mass."
 	bodytype_category = BODYTYPE_ADHERENT
 	icon_template =     'mods/species/bayliens/adherent/icons/template.dmi'
 	icon_base =         'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
@@ -9,8 +10,18 @@
 	movement_slowdown = -1
 	appearance_flags = HAS_EYE_COLOR
 	base_eye_color = COLOR_LIME
+	can_eat = FALSE
+	can_feel_pain = FALSE
+	modifier_string = "crystalline"
+	is_robotic = FALSE
+	arterial_bleed_multiplier = 0
+	apply_encased = list(
+		BP_CHEST = "ceramic hull",
+		BP_GROIN = "ceramic hull",
+		BP_HEAD  = "ceramic hull"
+	)
 
-/decl/bodytype/adherent/Initialize()
+/decl/bodytype/prosthetic/crystalline/adherent/Initialize()
 	equip_adjust = list(
 		"[BP_L_HAND]" = list(
 			"[NORTH]" = list("x" = 0, "y" = 14),
@@ -63,30 +74,30 @@
 	)
 	. = ..()
 
-/decl/bodytype/adherent/emerald
+/decl/bodytype/prosthetic/crystalline/adherent/emerald
 	name = "emerald"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_emerald.dmi'
 
-/decl/bodytype/adherent/amethyst
+/decl/bodytype/prosthetic/crystalline/adherent/amethyst
 	name = "amethyst"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_amethyst.dmi'
 
-/decl/bodytype/adherent/sapphire
+/decl/bodytype/prosthetic/crystalline/adherent/sapphire
 	name = "sapphire"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_sapphire.dmi'
 
-/decl/bodytype/adherent/ruby
+/decl/bodytype/prosthetic/crystalline/adherent/ruby
 	name = "ruby"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_ruby.dmi'
 
-/decl/bodytype/adherent/topaz
+/decl/bodytype/prosthetic/crystalline/adherent/topaz
 	name = "topaz"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_topaz.dmi'
 
-/decl/bodytype/adherent/quartz
+/decl/bodytype/prosthetic/crystalline/adherent/quartz
 	name = "quartz"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_quartz.dmi'
 
-/decl/bodytype/adherent/jet
+/decl/bodytype/prosthetic/crystalline/adherent/jet
 	name = "jet"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_jet.dmi'

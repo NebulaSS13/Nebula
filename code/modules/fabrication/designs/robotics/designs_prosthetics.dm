@@ -91,7 +91,7 @@
 	if(species)
 		for(var/obj/item/organ/external/E in .)
 			E.set_species(species_name)
-			E.robotize(model, check_species = species_name)
+			E.set_bodytype(model)
 			E.status |= ORGAN_CUT_AWAY
 
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/basic_human, generic)

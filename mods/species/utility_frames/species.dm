@@ -25,7 +25,7 @@
 	available_bodytypes = list(/decl/bodytype/prosthetic/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
 	hidden_from_codex =     FALSE
-	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_SYNTHETIC
+	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
 	spawn_flags =           SPECIES_CAN_JOIN
 	strength =              STR_HIGH
 	warning_low_pressure =  50
@@ -84,12 +84,6 @@
 
 /obj/item/organ/external/head/utility_frame
 	glowing_eyes = TRUE
-
-/decl/species/utility_frame/apply_species_organ_modifications(obj/item/organ/org)
-	..()
-	if(istype(org, /obj/item/organ/external))
-		var/obj/item/organ/external/E = org
-		E.robotize(/decl/bodytype/prosthetic/utility_frame, FALSE, TRUE, /decl/material/solid/metal/steel, BODYTYPE_HUMANOID, SPECIES_FRAME)
 
 /decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

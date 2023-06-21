@@ -4,7 +4,8 @@
 	icon_base =         'icons/mob/human_races/species/humanoid/body.dmi'
 	bandages_icon =     'icons/mob/bandage.dmi'
 	limb_blend =        ICON_MULTIPLY
-	appearance_flags = HAS_SKIN_COLOR
+	appearance_flags =  HAS_SKIN_COLOR
+	body_flags =        BODY_FLAG_NO_DNA
 
 /decl/bodytype/alium/Initialize()
 	if(prob(10))
@@ -18,7 +19,6 @@
 	description = "Some alien humanoid species, unknown to humanity. How exciting."
 	rarity_value = 5
 
-	species_flags = SPECIES_FLAG_NO_SCAN
 	spawn_flags = SPECIES_IS_RESTRICTED
 
 	available_bodytypes = list(/decl/bodytype/alium)

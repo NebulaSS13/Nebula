@@ -4,7 +4,6 @@
 	germ_level = 0
 	w_class = ITEM_SIZE_TINY
 	default_action_type = /datum/action/item_action/organ
-	material = /decl/material/solid/meat
 	origin_tech = "{'materials':1,'biotech':1}"
 	throwforce = 2
 	abstract_type = /obj/item/organ
@@ -64,15 +63,12 @@
 //Third argument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
 	. = ..(mapload, material_key)
-	if(. != INITIALIZE_HINT_QDEL)
-		if(!BP_IS_PROSTHETIC(src))
-			setup_as_organic(given_dna)
-		else
-			setup_as_prosthetic()
-		// TODO: Remove the above procs and just have a unified setup chain.
-		initialize_reagents()
+	if(. == INITIALIZE_HINT_QDEL)
+		return .
+	setup(given_dna)
+	initialize_reagents()
 
-/obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
+/obj/item/organ/proc/setup(datum/dna/given_dna)
 	//Null DNA setup
 	if(!given_dna)
 		if(dna)
@@ -82,31 +78,19 @@
 				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
 			else
 				//The owner having no DNA can be a valid reason to keep our dna null in some cases
-				log_debug("obj/item/organ/setup_as_organic(): [src] had null dna, with a owner with null dna!")
+				log_debug("obj/item/organ/Initialize(): [src] had null dna, with a owner with null dna!")
 				dna = null //#TODO: Not sure that's really legal
 				return
 		else
 			//If we have NO OWNER and given_dna, just make one up for consistency
 			given_dna = new/datum/dna()
 			given_dna.check_integrity() //Defaults everything
-
-	set_dna(given_dna)
-	return TRUE
-
-//Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
-// NOTE: This wouldn't be necessary if prothetics were a subclass
-/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/bodytype/prosthetic/basic_human)
-	if(!species)
-		if(owner?.species)
-			set_species(owner.species)
-		else
-			set_species(global.using_map.default_species)
-
-	if(istype(material))
-		robotize(forced_model, apply_material = material.type)
+	if(BP_IS_PROSTHETIC(src) || !given_dna) // if we start with the prosthetic flag ignore provided dna
+		// set_bodytype will unset invalid dna anyway, so set_dna(null) is unnecessary
+		set_species(owner?.species || global.using_map.default_species)
+		set_bodytype(bodytype || species.base_prosthetics_model, override_material = material?.type)
 	else
-		robotize(forced_model)
-	return TRUE
+		set_dna(given_dna)
 
 //Called on initialization to add the neccessary reagents
 
@@ -116,19 +100,28 @@
 	create_reagents(5 * (w_class-1)**2)
 	. = ..()
 
+// todo: make this redundant with matter shenanigans
 /obj/item/organ/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
+	var/reagent_to_add = /decl/material/liquid/nutriment/protein
+	if(bodytype)
+		reagent_to_add = bodytype.edible_reagent // can set this to null and skip the next block
+	if(reagent_to_add)
+		reagents.add_reagent(reagent_to_add, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
-	QDEL_NULL(dna)
-	dna = new_dna.Clone()
+	if(istype(bodytype) && bodytype.body_flags & BODY_FLAG_NO_DNA)
+		QDEL_NULL(dna)
+		return
+	if(new_dna != dna) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
+		QDEL_NULL(dna)
+		dna = new_dna.Clone()
 	if(!blood_DNA)
 		blood_DNA = list()
 	blood_DNA.Cut()
 	blood_DNA[dna.unique_enzymes] = dna.b_type
 	set_species(dna.species)
 
-/obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype)
+/obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null)
 	if(isnull(new_bodytype))
 		CRASH("Null bodytype passed to set_bodytype!")
 	if(ispath(new_bodytype, /decl/bodytype))
@@ -143,6 +136,15 @@
 	origin_tech = bodytype.limb_tech
 	max_damage *= bodytype.hardiness
 	min_broken_damage *= bodytype.hardiness
+	material = GET_DECL(override_material) || GET_DECL(bodytype.material)
+	matter = bodytype.matter
+	create_matter()
+	// maybe this should be a generalized repopulate_reagents helper??
+	if(reagents)
+		reagents.clear_reagents()
+		populate_reagents()
+	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
+		QDEL_NULL(dna)
 
 /obj/item/organ/proc/set_species(var/specie_name)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
@@ -323,9 +325,10 @@
 				aspect.apply(owner)
 
 /obj/item/organ/proc/reset_status()
+	vital_to_owner = null // organ modifications might need this to be recalculated
 	status = initial(status)
-	if(species) // qdel clears species ref
-		species.apply_species_organ_modifications(src)
+	if(bodytype) // qdel clears bodytype ref
+		bodytype.apply_bodytype_organ_modifications(src)
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
@@ -352,47 +355,6 @@
 /obj/item/organ/proc/heal_damage(amount)
 	if(can_recover())
 		damage = clamp(0, damage - round(amount, 0.1), max_damage)
-
-/obj/item/organ/proc/robotize(var/company = /decl/bodytype/prosthetic/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	vital_to_owner = null
-	BP_SET_PROSTHETIC(src)
-	QDEL_NULL(dna)
-	// Don't override our existing bodytype unless a specific model is being passed in.
-	if(!company)
-		company = istype(bodytype, /decl/bodytype/prosthetic) ? bodytype : /decl/bodytype/prosthetic/basic_human
-
-	var/decl/bodytype/prosthetic/model
-	if(istype(company, /decl/bodytype/prosthetic))
-		//Handling for decl
-		model = company
-	else
-		//Handling for paths
-		if(!ispath(company, /decl/bodytype/prosthetic))
-			PRINT_STACK_TRACE("Organ [type] robotize() was supplied an invalid prosthetic bodytype: '[company]'")
-			company = /decl/bodytype/prosthetic/basic_human
-		model = GET_DECL(company)
-
-	if(!check_species)
-		check_species = owner?.get_species_name() || global.using_map.default_species
-	if(!check_bodytype)
-		if(owner)
-			check_bodytype = owner.get_bodytype_category()
-		else
-			var/decl/species/species_data = get_species_by_key(check_species)
-			if(species_data)
-				check_bodytype = species_data.default_bodytype.bodytype_category
-			else
-				check_bodytype = global.using_map.default_bodytype
-
-	//If can't install fallback to defaults.
-	if(!model.check_can_install(organ_tag, check_bodytype))
-		model = GET_DECL(/decl/bodytype/prosthetic/basic_human)
-
-	set_bodytype(model)
-	reagents?.clear_reagents()
-	material = GET_DECL(apply_material)
-	matter = null
-	create_matter()
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))

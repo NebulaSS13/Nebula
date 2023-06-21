@@ -303,8 +303,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		codex_traits += "<li>Does not have blood.</li>"
 	if(!breathing_organ)
 		codex_traits += "<li>Does not breathe.</li>"
-	if(species_flags & SPECIES_FLAG_NO_SCAN)
-		codex_traits += "<li>Does not have DNA.</li>"
 	if(species_flags & SPECIES_FLAG_NO_PAIN)
 		codex_traits += "<li>Does not feel pain.</li>"
 	if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
@@ -549,18 +547,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	return FALSE
 
 //Checks if an existing limbs is the species default
+//Things that use this should also check /decl/bodytype/is_default_limb()
 /decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
-	// Crystalline/synthetic species should only count crystalline/synthetic limbs as default.
-	// DO NOT change to (species_flags & SPECIES_FLAG_X) && !BP_IS_X(E)
-	if(!(species_flags & SPECIES_FLAG_CRYSTALLINE) != !BP_IS_CRYSTAL(E))
-		return FALSE
-	if(!(species_flags & SPECIES_FLAG_SYNTHETIC) != !BP_IS_PROSTHETIC(E))
-		return FALSE
-	for(var/tag in has_limbs)
-		if(E.organ_tag == tag)
-			var/list/organ_data = has_limbs[tag]
-			if(ispath(E.type, organ_data["path"]))
-				return TRUE
+	var/list/organ_data = has_limbs[E.organ_tag]
+	if(organ_data && ispath(E.type, organ_data["path"]) && (E.bodytype in available_bodytypes))
+		return TRUE
 	return FALSE
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
@@ -921,13 +912,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(23 to 30) 	. = 0
 		if(31 to 45)	. = 4
 		else			. = 8
-
-// This should only ever be called via the species set on the organ; calling it across species will cause weirdness.
-/decl/species/proc/apply_species_organ_modifications(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	SHOULD_CALL_PARENT(TRUE)
-	if(species_flags & SPECIES_FLAG_CRYSTALLINE)
-		org.status |= ORGAN_BRITTLE
-		org.organ_properties |= ORGAN_PROP_CRYSTAL
 
 /decl/species/proc/check_no_slip(var/mob/living/carbon/human/H)
 	if(can_overcome_gravity(H))
