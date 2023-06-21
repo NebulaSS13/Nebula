@@ -16,303 +16,410 @@
 <h1>planetoid_data <aside>/<a href="datum.html">datum</a>/<a href="datum/planetoid_data.html">planetoid_data</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L5">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 5"/></a></h1>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L8">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 8"/></a></h1>
 
-<p>Runtime data for a planetoid. Used by SSmapping for keeping track of a lot of data about planetoids</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+<p>Data for a planetoid. Used by SSmapping for keeping track of a lot of details about specific planetoids.</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/_budget_override">_budget_override</a></th><td>Subtemplate budget override. If something overrode the map_template's base budget, this will be set. Otherwise, it'll stay null. (Used in manual exoplanet generation verb)</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/_theme_forced">_theme_forced</a></th><td>Enforces a single theme. If something overrode the map template's base random themes list, this will be set. Otherwise it'll stay null. (Used in manual exoplanet generation verb)</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/atmosphere">atmosphere</a></th><td>The cached planet's atmosphere.</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/connected_level_ids">connected_level_ids</a></th><td>A cached list of connected level_ids loaded from child level_data.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/atmosphere">atmosphere</a></th><td>The cached planet's atmosphere that sub-levels of this planet should use. Can be a type path at definition, and an instance at runtime.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/day_duration">day_duration</a></th><td>How often do we change day and night. Null means it will stay either night or day forever.
 Ensure that the minimum is larger than [maxx * daycycle_column_delay]. Otherwise the right side of the exoplanet can get stuck in a forever day.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/engraving_generator">engraving_generator</a></th><td>A xenoarch flavor text generator instance for this planet. Used for unique engravings and weird visions stuff.</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/fauna">fauna</a></th><td>The instance of the fauna generator currently managing our fauna if any</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/flora">flora</a></th><td>The flora generator instance that generates and keep track of the flora types for this planet.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/fauna">fauna</a></th><td>The instance of the fauna generator currently managing our fauna if any. May be set to a path to instantiate.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/flora">flora</a></th><td>The flora generator instance that generates and keep track of the flora types for this planet. May be set to a path to instantiate.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/habitability_class">habitability_class</a></th><td>The habitability rating for this planetoid</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/has_rings">has_rings</a></th><td>Whether this planetoid has rings, used by the overmap marker to draw rings in the skybox and etc..</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/height">height</a></th><td>Preferred height for all the planet z-levels. Null means it's up to each z-levels. Not reliable for telling the height of the levels under this planet.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/id">id</a></th><td>Unique internal Id string for looking up this planetoid in SSmapping</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/overmap_marker">overmap_marker</a></th><td>A weak reference to the overmap marker for this template instance if any exists.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/initial_weather_state">initial_weather_state</a></th><td>What weather state to use for this planet initially. If null, will not initialize any weather system. May be type path at definition or instance at runtime.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/overmap_marker">overmap_marker</a></th><td>A weak reference to the overmap marker for this template instance if any exists. Or at definition the type path of the marker to use</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/ring_color">ring_color</a></th><td>If we have rings, this is the color they'll have on the overmap</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/ring_type_name">ring_type_name</a></th><td>If we have rings, this is the sprite we picked for it</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/rock_color">rock_color</a></th><td>The color for rocks on this planet. Null is the rock wall's material's default.</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/strata">strata</a></th><td>The overall strata of the planet.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/strata">strata</a></th><td>The overall strata of the planet. May be a type path at definition, or instance at runtime.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/subtemplates">subtemplates</a></th><td>List of subtemplates types we picked and spawned on this planet.</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/surface_area">surface_area</a></th><td>A reference to the surface area of the planet. Don't set manually.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/surface_area">surface_area</a></th><td>A reference to the surface area of the planet.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/surface_color">surface_color</a></th><td>Color of the primary layer of the skybox image. Used by the overmap marker.</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/surface_level_id">surface_level_id</a></th><td>Level data id for the level that's considered to be the planet's surface.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/surface_level_id">surface_level_id</a></th><td>Level data id for the level that's considered to be the planet's surface. In other words, the topmost firm ground level of the root z stack.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/surface_light_color">surface_light_color</a></th><td>Lighjting color used for the entire surface.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/surface_light_level">surface_light_level</a></th><td>Ambient lighting level across the surface. All surface height levels will be set to this.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/tallness">tallness</a></th><td>Preferred amount of vertically connected z-levels for this planets. Null means it's up to each z-levels.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/temperature_max">temperature_max</a></th><td>The maximum temperature that can be reached on the planet.(For instance via meteo or sunlight/shade or whatever)</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/temperature_min">temperature_min</a></th><td>The minimum temperature that can be reached on the planet.(For instance via meteo or sunlight/shade or whatever)</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/themes">themes</a></th><td>List of theme types that were randomly picked from the possible list at runtime. Also used by the overmap marker.</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#var/topmost_level_id">topmost_level_id</a></th><td>Topmost level data datum id (ID only, because this datum has an uncontrolled lifetime, and we don't want dangling refs)</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#var/topmost_level_id">topmost_level_id</a></th><td>Topmost level data datum id of the root z stack (ID only, because this datum has an uncontrolled lifetime, and we don't want dangling refs)</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/water_color">water_color</a></th><td>Color of the secondary layer of the skybox image. Is usually water-like features. Used by the overmap marker.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#var/width">width</a></th><td>Preferred width for all the planet z-levels. Null means it's up to each z-levels. Not reliable for telling the width of the levels under this planet.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/SetName">SetName</a></th><td>Sets the name of the planetoid, and causes updates to happen to anything linked to us.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/begin_processing">begin_processing</a></th><td>Registers to neccessary processors and begin running all processing needed by the planet</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/end_processing">end_processing</a></th><td>Stop running any processing needed by the planet, and unregister from processors.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/generate_life">generate_life</a></th><td>Make our fauna and flora gen setup.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/generate_planetoid_id">generate_planetoid_id</a></th><td>Generate and sets the planetary id for this planetoid if it doesn't have one yet. Called on instantiation.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/generate_weather">generate_weather</a></th><td>Setup the initial weather state for the planet. Doesn't apply it to our z levels however.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/get_grass_color">get_grass_color</a></th><td>Returns the color of grass picked for this planet or null.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/get_linked_level_ids">get_linked_level_ids</a></th><td>Returns a list of all the level id of the levels associated to this planet</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/get_rock_color">get_rock_color</a></th><td>Returns the color of rock walls on this planet, or null.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/get_strata">get_strata</a></th><td>Returns the strata picked for the planet, if there is one.</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#proc/has_fauna">has_fauna</a></th><td>Is there any live fauna on this planetoid?</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#proc/has_flora">has_flora</a></th><td>Is there any live flora on this planetoid?</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/has_fauna">has_fauna</a></th><td>Is there any currently live fauna on this planetoid?</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/has_flora">has_flora</a></th><td>Is there any flora species on this planetoid?</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/is_native_animal">is_native_animal</a></th><td>If the animal is native of this planet returns TRUE.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/is_native_plant">is_native_plant</a></th><td>If the plant is native of this planet it will return TRUE.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/reset_weather">reset_weather</a></th><td>Resets the given weather state to our planet replacing the old one, and trigger updates. Can be a type path or instance.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/set_atmosphere">set_atmosphere</a></th><td>Sets the atmosphere of the planet to the given gas_mixture instance or type path. Will Clone() the mixture in the arguments for itself.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/set_engraving_generator">set_engraving_generator</a></th><td>Sets the xenoarch engraving generator for the planet. The argument can be either an instance, or a type path.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/set_habitability">set_habitability</a></th><td>Sets the habitability of the planetoid for generation and display. Causes the overmap marker to be updated to reflect the changes.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/set_overmap_marker">set_overmap_marker</a></th><td>Associate an overmap marker with this planetoid data so we can synchronize the information displayed on the overmap with the actual state of the planet.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/set_strata">set_strata</a></th><td>Sets the planet's strata to the given one. The argument may be a type path or instance. Shouldn't be used outside of setup after the world was generated.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/set_surface_level">set_surface_level</a></th><td>Sets the id of the surface level of the planetoid. Argument can be a level_data, or level_id string(make sure the level_data is reachable from SSmapping's level_data by id list).
+Should be set only once during setup. Also updates our base surface area var.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/set_topmost_level">set_topmost_level</a></th><td>Set the id of the topmost level of the planetoid. Argument can be a level_data, or level_id string. Should only be set once during setup ideally.</td></tr>
             <tr><th><a href="datum/planetoid_data.html#proc/setup_fauna_generator">setup_fauna_generator</a></th><td>Create the specified type of fauna manager type for this planetoid</td></tr>
-            <tr><th><a href="datum/planetoid_data.html#proc/setup_flora_generator">setup_flora_generator</a></th><td>Create the specified type of flora manager type for this planetoid</td></tr></table>
+            <tr><th><a href="datum/planetoid_data.html#proc/setup_flora_data">setup_flora_data</a></th><td>Create the specified type of flora data type for this planetoid</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/setup_planetoid">setup_planetoid</a></th><td>Initializes the internal state of the planetoid, so its data can be used. Should be called no earlier than when SSmapping is running.</td></tr>
+            <tr><th><a href="datum/planetoid_data.html#proc/try_update_overmap_marker">try_update_overmap_marker</a></th><td>Force any overmap markers linked to us to update to match our state</td></tr></table>
     <h2 id="var">Var Details</h2><h3 id="var/_budget_override"><aside class="declaration">var </aside>_budget_override
             <aside>&ndash; /tmp</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L82">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 82"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L89">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 89"/></a></h3>
         <p>Subtemplate budget override. If something overrode the map_template's base budget, this will be set. Otherwise, it'll stay null. (Used in manual exoplanet generation verb)</p><h3 id="var/_theme_forced"><aside class="declaration">var </aside>_theme_forced
             <aside>&ndash; /tmp</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L86">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 86"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L93">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 93"/></a></h3>
         <p>Enforces a single theme. If something overrode the map template's base random themes list, this will be set. Otherwise it'll stay null. (Used in manual exoplanet generation verb)</p><h3 id="var/atmosphere"><aside class="declaration">var </aside>atmosphere
             <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/gas_mixture.html">gas_mixture</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L31">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 31"/></a></h3>
-        <p>The cached planet's atmosphere.</p><h3 id="var/connected_level_ids"><aside class="declaration">var </aside>connected_level_ids
-            <aside>&ndash; /tmp/list</aside>
-        
-    
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L25">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 25"/></a></h3>
-        <p>A cached list of connected level_ids loaded from child level_data.</p><h3 id="var/day_duration"><aside class="declaration">var </aside>day_duration
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L32">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 32"/></a></h3>
+        <p>The cached planet's atmosphere that sub-levels of this planet should use. Can be a type path at definition, and an instance at runtime.</p><h3 id="var/day_duration"><aside class="declaration">var </aside>day_duration
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L67">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 67"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L74">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 74"/></a></h3>
         <p>How often do we change day and night. Null means it will stay either night or day forever.
 Ensure that the minimum is larger than [maxx * daycycle_column_delay]. Otherwise the right side of the exoplanet can get stuck in a forever day.</p><h3 id="var/engraving_generator"><aside class="declaration">var </aside>engraving_generator
             <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/xenoarch_engraving_flavor.html">xenoarch_engraving_flavor</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L59">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 59"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L66">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 66"/></a></h3>
         <p>A xenoarch flavor text generator instance for this planet. Used for unique engravings and weird visions stuff.</p><h3 id="var/fauna"><aside class="declaration">var </aside>fauna
             <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/fauna_generator.html">fauna_generator</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L77">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 77"/></a></h3>
-        <p>The instance of the fauna generator currently managing our fauna if any</p><h3 id="var/flora"><aside class="declaration">var </aside>flora
-            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/flora_generator.html">flora_generator</a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 84"/></a></h3>
+        <p>The instance of the fauna generator currently managing our fauna if any. May be set to a path to instantiate.</p><h3 id="var/flora"><aside class="declaration">var </aside>flora
+            <aside>&ndash; /<a href="datum.html">datum</a>/<a href="datum/planet_flora.html">planet_flora</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L75">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 75"/></a></h3>
-        <p>The flora generator instance that generates and keep track of the flora types for this planet.</p><h3 id="var/habitability_class"><aside class="declaration">var </aside>habitability_class
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 82"/></a></h3>
+        <p>The flora generator instance that generates and keep track of the flora types for this planet. May be set to a path to instantiate.</p><h3 id="var/habitability_class"><aside class="declaration">var </aside>habitability_class
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L29">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 29"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L30">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 30"/></a></h3>
         <p>The habitability rating for this planetoid</p><h3 id="var/has_rings"><aside class="declaration">var </aside>has_rings
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L43">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 43"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L50">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 50"/></a></h3>
         <p>Whether this planetoid has rings, used by the overmap marker to draw rings in the skybox and etc..</p><h3 id="var/height"><aside class="declaration">var </aside>height
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L15">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 15"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L18">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 18"/></a></h3>
         <p>Preferred height for all the planet z-levels. Null means it's up to each z-levels. Not reliable for telling the height of the levels under this planet.</p><h3 id="var/id"><aside class="declaration">var </aside>id
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L7">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 7"/></a></h3>
-        <p>Unique internal Id string for looking up this planetoid in SSmapping</p><h3 id="var/overmap_marker"><aside class="declaration">var </aside>overmap_marker
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L10">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 10"/></a></h3>
+        <p>Unique internal Id string for looking up this planetoid in SSmapping</p><h3 id="var/initial_weather_state"><aside class="declaration">var </aside>initial_weather_state
+            <aside>&ndash; /decl/state/weather</aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L38">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 38"/></a></h3>
+        <p>What weather state to use for this planet initially. If null, will not initialize any weather system. May be type path at definition or instance at runtime.</p><h3 id="var/overmap_marker"><aside class="declaration">var </aside>overmap_marker
             <aside>&ndash; /weakref</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L35">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 35"/></a></h3>
-        <p>A weak reference to the overmap marker for this template instance if any exists.</p><h3 id="var/ring_color"><aside class="declaration">var </aside>ring_color
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L42">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 42"/></a></h3>
+        <p>A weak reference to the overmap marker for this template instance if any exists. Or at definition the type path of the marker to use</p><h3 id="var/ring_color"><aside class="declaration">var </aside>ring_color
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L45">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 45"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L52">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 52"/></a></h3>
         <p>If we have rings, this is the color they'll have on the overmap</p><h3 id="var/ring_type_name"><aside class="declaration">var </aside>ring_type_name
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L47">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 47"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L54">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 54"/></a></h3>
         <p>If we have rings, this is the sprite we picked for it</p><h3 id="var/rock_color"><aside class="declaration">var </aside>rock_color
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L41">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 41"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L48">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 48"/></a></h3>
         <p>The color for rocks on this planet. Null is the rock wall's material's default.</p><h3 id="var/strata"><aside class="declaration">var </aside>strata
             <aside>&ndash; /decl/strata</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L49">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 49"/></a></h3>
-        <p>The overall strata of the planet.</p><h3 id="var/subtemplates"><aside class="declaration">var </aside>subtemplates
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L56">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 56"/></a></h3>
+        <p>The overall strata of the planet. May be a type path at definition, or instance at runtime.</p><h3 id="var/subtemplates"><aside class="declaration">var </aside>subtemplates
             <aside>&ndash; /list</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L55">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 55"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L62">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 62"/></a></h3>
         <p>List of subtemplates types we picked and spawned on this planet.</p><h3 id="var/surface_area"><aside class="declaration">var </aside>surface_area
             <aside>&ndash; /<a href="area.html">area</a></aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L23">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 23"/></a></h3>
-        <p>A reference to the surface area of the planet. Don't set manually.</p><h3 id="var/surface_color"><aside class="declaration">var </aside>surface_color
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 26"/></a></h3>
+        <p>A reference to the surface area of the planet.</p><h3 id="var/surface_color"><aside class="declaration">var </aside>surface_color
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L37">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 37"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L44">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 44"/></a></h3>
         <p>Color of the primary layer of the skybox image. Used by the overmap marker.</p><h3 id="var/surface_level_id"><aside class="declaration">var </aside>surface_level_id
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L21">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 21"/></a></h3>
-        <p>Level data id for the level that's considered to be the planet's surface.</p><h3 id="var/surface_light_color"><aside class="declaration">var </aside>surface_light_color
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 24"/></a></h3>
+        <p>Level data id for the level that's considered to be the planet's surface. In other words, the topmost firm ground level of the root z stack.</p><h3 id="var/surface_light_color"><aside class="declaration">var </aside>surface_light_color
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L72">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 72"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L78">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 78"/></a></h3>
         <p>Lighjting color used for the entire surface.</p><h3 id="var/surface_light_level"><aside class="declaration">var </aside>surface_light_level
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L70">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 70"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L76">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 76"/></a></h3>
         <p>Ambient lighting level across the surface. All surface height levels will be set to this.</p><h3 id="var/tallness"><aside class="declaration">var </aside>tallness
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L17">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 17"/></a></h3>
-        <p>Preferred amount of vertically connected z-levels for this planets. Null means it's up to each z-levels.</p><h3 id="var/themes"><aside class="declaration">var </aside>themes
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 20"/></a></h3>
+        <p>Preferred amount of vertically connected z-levels for this planets. Null means it's up to each z-levels.</p><h3 id="var/temperature_max"><aside class="declaration">var </aside>temperature_max
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L36">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 36"/></a></h3>
+        <p>The maximum temperature that can be reached on the planet.(For instance via meteo or sunlight/shade or whatever)</p><h3 id="var/temperature_min"><aside class="declaration">var </aside>temperature_min
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 34"/></a></h3>
+        <p>The minimum temperature that can be reached on the planet.(For instance via meteo or sunlight/shade or whatever)</p><h3 id="var/themes"><aside class="declaration">var </aside>themes
             <aside>&ndash; /list</aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L53">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 53"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L60">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 60"/></a></h3>
         <p>List of theme types that were randomly picked from the possible list at runtime. Also used by the overmap marker.</p><h3 id="var/topmost_level_id"><aside class="declaration">var </aside>topmost_level_id
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L19">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 19"/></a></h3>
-        <p>Topmost level data datum id (ID only, because this datum has an uncontrolled lifetime, and we don't want dangling refs)</p><h3 id="var/water_color"><aside class="declaration">var </aside>water_color
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 22"/></a></h3>
+        <p>Topmost level data datum id of the root z stack (ID only, because this datum has an uncontrolled lifetime, and we don't want dangling refs)</p><h3 id="var/water_color"><aside class="declaration">var </aside>water_color
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L39">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 39"/></a></h3>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L46">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 46"/></a></h3>
         <p>Color of the secondary layer of the skybox image. Is usually water-like features. Used by the overmap marker.</p><h3 id="var/width"><aside class="declaration">var </aside>width
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L13">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 13"/></a></h3>
-        <p>Preferred width for all the planet z-levels. Null means it's up to each z-levels. Not reliable for telling the width of the levels under this planet.</p><h2 id="proc">Proc Details</h2><h3 id="proc/begin_processing"><aside class="declaration">proc </aside>begin_processing<aside>() 
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L16">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 16"/></a></h3>
+        <p>Preferred width for all the planet z-levels. Null means it's up to each z-levels. Not reliable for telling the width of the levels under this planet.</p><h2 id="proc">Proc Details</h2><h3 id="proc/SetName"><aside class="declaration">proc </aside>SetName<aside>(newname) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L173">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 173"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L138">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 138"/></a></aside>
+        </h3>
+        <p>Sets the name of the planetoid, and causes updates to happen to anything linked to us.</p><h3 id="proc/begin_processing"><aside class="declaration">proc </aside>begin_processing<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L247">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 247"/></a></aside>
         </h3>
         <p>Registers to neccessary processors and begin running all processing needed by the planet</p><h3 id="proc/end_processing"><aside class="declaration">proc </aside>end_processing<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L178">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 178"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L252">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 252"/></a></aside>
         </h3>
         <p>Stop running any processing needed by the planet, and unregister from processors.</p><h3 id="proc/generate_life"><aside class="declaration">proc </aside>generate_life<aside>(/list/breathable_gas, /list/toxic_gases) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L226">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 226"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L280">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 280"/></a></aside>
         </h3>
-        <p>Make our fauna and flora gen setup.</p><h3 id="proc/get_grass_color"><aside class="declaration">proc </aside>get_grass_color<aside>() 
+        <p>Make our fauna and flora gen setup.</p><h3 id="proc/generate_planetoid_id"><aside class="declaration">proc </aside>generate_planetoid_id<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L149">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 149"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L104">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 104"/></a></aside>
+        </h3>
+        <p>Generate and sets the planetary id for this planetoid if it doesn't have one yet. Called on instantiation.</p><h3 id="proc/generate_weather"><aside class="declaration">proc </aside>generate_weather<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L285">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 285"/></a></aside>
+        </h3>
+        <p>Setup the initial weather state for the planet. Doesn't apply it to our z levels however.</p><h3 id="proc/get_grass_color"><aside class="declaration">proc </aside>get_grass_color<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L221">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 221"/></a></aside>
         </h3>
         <p>Returns the color of grass picked for this planet or null.</p><h3 id="proc/get_linked_level_ids"><aside class="declaration">proc </aside>get_linked_level_ids<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L221">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 221"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L275">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 275"/></a></aside>
         </h3>
         <p>Returns a list of all the level id of the levels associated to this planet</p><h3 id="proc/get_rock_color"><aside class="declaration">proc </aside>get_rock_color<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L153">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 153"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L225">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 225"/></a></aside>
         </h3>
         <p>Returns the color of rock walls on this planet, or null.</p><h3 id="proc/get_strata"><aside class="declaration">proc </aside>get_strata<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L145">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 145"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L217">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 217"/></a></aside>
         </h3>
         <p>Returns the strata picked for the planet, if there is one.</p><h3 id="proc/has_fauna"><aside class="declaration">proc </aside>has_fauna<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L133">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 133"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L205">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 205"/></a></aside>
         </h3>
-        <p>Is there any live fauna on this planetoid?</p><h3 id="proc/has_flora"><aside class="declaration">proc </aside>has_flora<aside>() 
+        <p>Is there any currently live fauna on this planetoid?</p><h3 id="proc/has_flora"><aside class="declaration">proc </aside>has_flora<aside>() 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L129">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 129"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L201">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 201"/></a></aside>
         </h3>
-        <p>Is there any live flora on this planetoid?</p><h3 id="proc/is_native_animal"><aside class="declaration">proc </aside>is_native_animal<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/simple_animal/A) 
+        <p>Is there any flora species on this planetoid?</p><h3 id="proc/is_native_animal"><aside class="declaration">proc </aside>is_native_animal<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/simple_animal/A) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L137">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 137"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L209">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 209"/></a></aside>
         </h3>
-        <p>If the animal is native of this planet returns TRUE.</p><h3 id="proc/is_native_plant"><aside class="declaration">proc </aside>is_native_plant<aside>(/<a href="datum.html">datum</a>/seed/S) 
+        <p>If the animal is native of this planet returns TRUE.</p><h3 id="proc/is_native_plant"><aside class="declaration">proc </aside>is_native_plant<aside>(/<a href="datum.html">datum</a>/<a href="datum/seed.html">seed</a>/S) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L141">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 141"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L213">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 213"/></a></aside>
         </h3>
-        <p>If the plant is native of this planet it will return TRUE.</p><h3 id="proc/setup_fauna_generator"><aside class="declaration">proc </aside>setup_fauna_generator<aside>(generator_type) 
+        <p>If the plant is native of this planet it will return TRUE.</p><h3 id="proc/reset_weather"><aside class="declaration">proc </aside>reset_weather<aside>(/decl/state/weather/W) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L165">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 165"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L158">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 158"/></a></aside>
         </h3>
-        <p>Create the specified type of fauna manager type for this planetoid</p><h3 id="proc/setup_flora_generator"><aside class="declaration">proc </aside>setup_flora_generator<aside>(generator_type) 
+        <p>Resets the given weather state to our planet replacing the old one, and trigger updates. Can be a type path or instance.</p><h3 id="proc/set_atmosphere"><aside class="declaration">proc </aside>set_atmosphere<aside>(/<a href="datum.html">datum</a>/<a href="datum/gas_mixture.html">gas_mixture</a>/A) 
         
     
-            <a href="https://github.com/NebulaSS13/Nebula/blob/3b3c0d9202c2915e2bb86127b601342a06bc67bd/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L157">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 157"/></a></aside>
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L150">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 150"/></a></aside>
         </h3>
-        <p>Create the specified type of flora manager type for this planetoid</p></main>
+        <p>Sets the atmosphere of the planet to the given gas_mixture instance or type path. Will Clone() the mixture in the arguments for itself.</p><h3 id="proc/set_engraving_generator"><aside class="declaration">proc </aside>set_engraving_generator<aside>(/<a href="datum.html">datum</a>/<a href="datum/xenoarch_engraving_flavor.html">xenoarch_engraving_flavor</a>/X) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L182">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 182"/></a></aside>
+        </h3>
+        <p>Sets the xenoarch engraving generator for the planet. The argument can be either an instance, or a type path.</p><h3 id="proc/set_habitability"><aside class="declaration">proc </aside>set_habitability<aside>(habitability) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L144">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 144"/></a></aside>
+        </h3>
+        <p>Sets the habitability of the planetoid for generation and display. Causes the overmap marker to be updated to reflect the changes.</p><h3 id="proc/set_overmap_marker"><aside class="declaration">proc </aside>set_overmap_marker<aside>(/<a href="obj.html">obj</a>/<a href="obj/effect/overmap/visitable.html">effect/overmap/visitable</a>/<a href="obj/effect/overmap/visitable/sector/planetoid.html">sector/planetoid</a>/P) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L168">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 168"/></a></aside>
+        </h3>
+        <p>Associate an overmap marker with this planetoid data so we can synchronize the information displayed on the overmap with the actual state of the planet.</p><h3 id="proc/set_strata"><aside class="declaration">proc </aside>set_strata<aside>(/decl/strata/_strata) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L176">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 176"/></a></aside>
+        </h3>
+        <p>Sets the planet's strata to the given one. The argument may be a type path or instance. Shouldn't be used outside of setup after the world was generated.</p><h3 id="proc/set_surface_level"><aside class="declaration">proc </aside>set_surface_level<aside>(/<a href="datum.html">datum</a>/<a href="datum/level_data.html">level_data</a>/LD) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L193">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 193"/></a></aside>
+        </h3>
+        <p>Sets the id of the surface level of the planetoid. Argument can be a level_data, or level_id string(make sure the level_data is reachable from SSmapping's level_data by id list).
+Should be set only once during setup. Also updates our base surface area var.</p><h3 id="proc/set_topmost_level"><aside class="declaration">proc </aside>set_topmost_level<aside>(/<a href="datum.html">datum</a>/<a href="datum/level_data.html">level_data</a>/LD) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L188">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 188"/></a></aside>
+        </h3>
+        <p>Set the id of the topmost level of the planetoid. Argument can be a level_data, or level_id string. Should only be set once during setup ideally.</p><h3 id="proc/setup_fauna_generator"><aside class="declaration">proc </aside>setup_fauna_generator<aside>(generator_type) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L239">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 239"/></a></aside>
+        </h3>
+        <p>Create the specified type of fauna manager type for this planetoid</p><h3 id="proc/setup_flora_data"><aside class="declaration">proc </aside>setup_flora_data<aside>(flora_data_type) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L229">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 229"/></a></aside>
+        </h3>
+        <p>Create the specified type of flora data type for this planetoid</p><h3 id="proc/setup_planetoid"><aside class="declaration">proc </aside>setup_planetoid<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L110">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 110"/></a></aside>
+        </h3>
+        <p>Initializes the internal state of the planetoid, so its data can be used. Should be called no earlier than when SSmapping is running.</p><h3 id="proc/try_update_overmap_marker"><aside class="declaration">proc </aside>try_update_overmap_marker<aside>() 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/e314719d6a37e6a0b6df4d4046cc3676de4e188e/code/modules/maps/template_types/random_exoplanet/planetoid_data.dm#L290">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;template_types&#x2F;random_exoplanet&#x2F;planetoid_data.dm 290"/></a></aside>
+        </h3>
+        <p>Force any overmap markers linked to us to update to match our state</p></main>
 <footer>
     nebula.dme
-    <a href="https://github.com/NebulaSS13/Nebula/tree/3b3c0d9202c2915e2bb86127b601342a06bc67bd">3b3c0d9</a>
+    <a href="https://github.com/NebulaSS13/Nebula/tree/e314719d6a37e6a0b6df4d4046cc3676de4e188e">e314719</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
 </body>
 </html>
