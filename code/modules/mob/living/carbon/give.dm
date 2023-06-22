@@ -43,6 +43,6 @@
 		to_chat(usr, SPAN_WARNING("Their hands are full."))
 		return
 
-	if(usr.unEquip(I))
+	if(usr.try_unequip(I))
 		target.put_in_hands(I) // If this fails it will just end up on the floor.
 		usr.visible_message(SPAN_NOTICE("\The [usr] handed \the [I] to \the [target]."), SPAN_NOTICE("You give \the [I] to \the [target]."))

@@ -27,14 +27,15 @@
 var/global/list/submap_spawnpoints_by_z = list()
 INITIALIZE_IMMEDIATE(/obj/abstract/submap_landmark/spawnpoint)
 /obj/abstract/submap_landmark/spawnpoint
+	movable_flags = MOVABLE_FLAG_ALWAYS_SHUTTLEMOVE
 	icon_state = "x3"
 
 /obj/abstract/submap_landmark/spawnpoint/Initialize()
 	. = ..()
-	LAZYADD(global.submap_spawnpoints_by_z["[z]"], src)
+	LAZYADD(global.submap_spawnpoints_by_z[num2text(z)], src)
 
 /obj/abstract/submap_landmark/spawnpoint/Destroy()
-	LAZYREMOVE(global.submap_spawnpoints_by_z["[z]"], src)
+	LAZYREMOVE(global.submap_spawnpoints_by_z[num2text(z)], src)
 	. = ..()
 
 /obj/abstract/submap_landmark/spawnpoint/survivor

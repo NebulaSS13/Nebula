@@ -72,13 +72,13 @@
 	add_overlay(I)
 
 /obj/structure/closet/body_bag/cryobag/proc/get_saturation()
-	return -155 * (1 - stasis_power/initial(stasis_power))
+	return stasis_power / initial(stasis_power)
 
 /obj/structure/closet/body_bag/cryobag/fold(var/user)
 	var/obj/item/bodybag/cryobag/folded = ..()
 	if(istype(folded))
 		folded.stasis_power = stasis_power
-		folded.color = color_saturation(get_saturation())
+		folded.color = color_matrix_saturation(get_saturation())
 
 /obj/structure/closet/body_bag/cryobag/Process()
 	if(stasis_power < 2)
@@ -90,7 +90,7 @@
 	if(degradation_time < 0)
 		degradation_time = initial(degradation_time)
 		stasis_power = round(0.75 * stasis_power)
-		animate(src, color = color_saturation(get_saturation()), time = 10)
+		animate(src, color = color_matrix_saturation(get_saturation()), time = 10)
 		update_icon()
 
 	if(H.stasis_sources[STASIS_CRYOBAG] != stasis_power)

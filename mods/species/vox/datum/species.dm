@@ -24,6 +24,11 @@
 	name_plural = SPECIES_VOX
 	base_prosthetics_model = /decl/prosthetics_manufacturer/vox/crap
 
+	vital_organs = list(
+		BP_STACK,
+		BP_BRAIN
+	)
+
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
 	)
@@ -50,19 +55,19 @@
 
 	rarity_value = 4
 
-	description = {"The Vox are the broken remnants of a once-proud race, now reduced to little more 
-	than scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient 
-	arkships alive. They are four to five feet tall, reptillian, beaked, tailed and quilled; human 
-	crews often refer to them as 'shitbirds' for their violent and offensive nature, as well as their 
+	description = {"The Vox are the broken remnants of a once-proud race, now reduced to little more
+	than scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient
+	arkships alive. They are four to five feet tall, reptillian, beaked, tailed and quilled; human
+	crews often refer to them as 'shitbirds' for their violent and offensive nature, as well as their
 	horrible smell.
 	<br/><br/>
-	Most humans will never meet a Vox raider, instead learning of this insular species through dealing 
+	Most humans will never meet a Vox raider, instead learning of this insular species through dealing
 	with their traders and merchants; those that do rarely enjoy the experience."}
 
-	codex_description = {"The Vox are a hostile, deeply untrustworthy species from the edges of human 
-	space. They prey on isolated stations, ships or settlements without any apparent logic or reason, 
-	and tend to refuse communications or negotiations except when their backs are to the wall or they 
-	are in dire need of resources. They are four to five feet tall, reptillian, beaked, tailed and 
+	codex_description = {"The Vox are a hostile, deeply untrustworthy species from the edges of human
+	space. They prey on isolated stations, ships or settlements without any apparent logic or reason,
+	and tend to refuse communications or negotiations except when their backs are to the wall or they
+	are in dire need of resources. They are four to five feet tall, reptillian, beaked, tailed and
 	quilled."}
 
 	hidden_from_codex = FALSE
@@ -116,7 +121,10 @@
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 	)
 
-	available_pronouns = list(/decl/pronouns/neuter)
+	available_pronouns = list(
+		/decl/pronouns/neuter,
+		/decl/pronouns/neuter/person
+	)
 	available_bodytypes = list(/decl/bodytype/vox)
 
 	appearance_descriptors = list(

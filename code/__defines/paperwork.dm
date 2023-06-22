@@ -6,3 +6,12 @@
 
 #define TONER_USAGE_PAPER 1 //Amount of toner a paper uses
 #define TONER_USAGE_PHOTO 5 //Amount of toner a photo uses
+
+///The default font for pen writing
+#define PEN_FONT_DEFAULT   "Verdana"
+///The font for default pen signature
+#define PEN_FONT_SIGNATURE "Times New Roman"
+///The font for crayon writing
+#define PEN_FONT_CRAYON    "Comic Sans MS"
+///The font for fancy pen writing
+#define PEN_FONT_FANCY_PEN "Segoe Script"

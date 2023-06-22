@@ -76,6 +76,8 @@
 	power_channel = EQUIP
 	idle_power_usage = 1000
 	use_power = POWER_USE_IDLE
+	is_spawnable_type = FALSE
+	simulated = FALSE // Otherwise it would be lost to space edge handling.
 
 /datum/unit_test/area_power_tally_accuracy/proc/check_power(var/area/A)
 	var/list/old_values = list(A.used_equip, A.used_light, A.used_environ)

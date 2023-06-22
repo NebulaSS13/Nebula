@@ -13,7 +13,6 @@
 	throw_speed = 4
 	throw_range = 20
 	material = /decl/material/liquid/cleaner
-	health = 5
 	max_health = 5
 	var/key_data
 
@@ -30,7 +29,7 @@
 
 /obj/item/soap/populate_reagents()
 	wet()
-	
+
 /obj/item/soap/Initialize()
 	. = ..()
 	initialize_reagents()
@@ -89,7 +88,7 @@
 /obj/item/soap/attack(mob/living/target, mob/living/user, var/target_zone)
 	if(ishuman(target) && user?.a_intent != I_HURT)
 		var/mob/living/carbon/human/victim = target
-		if(user.zone_sel?.selecting == BP_MOUTH && victim.check_has_mouth())
+		if(user.get_target_zone() == BP_MOUTH && victim.check_has_mouth())
 			user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
 			if(reagents)
 				reagents.trans_to_mob(target, reagents.total_volume / 2, CHEM_INGEST)
@@ -118,6 +117,6 @@
 		add_overlay("soap_key_overlay")
 	else if(decal_name)
 		add_overlay("decal-[decal_name]")
-	
+
 #undef SOAP_MAX_VOLUME
 #undef SOAP_CLEANER_ON_WET

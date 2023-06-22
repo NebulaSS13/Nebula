@@ -55,7 +55,7 @@
 		if(beaker)
 			return TRUE
 		else
-			if(!user.unEquip(O, src))
+			if(!user.try_unequip(O, src))
 				return FALSE
 			beaker = O
 			update_icon()
@@ -109,7 +109,7 @@
 		to_chat(user, SPAN_NOTICE("\The [O] is not suitable for grinding."))
 		return TRUE
 
-	if(!user.unEquip(O, src))
+	if(!user.try_unequip(O, src))
 		return FALSE
 	holdingitems += O
 	SSnano.update_uis(src)

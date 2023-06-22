@@ -91,7 +91,7 @@
 /obj/item/clothing/accessory/toggleable/hawaii/random/Initialize()
 	. = ..()
 	icon = pick('icons/clothing/accessories/clothing/hawaiian.dmi', 'icons/clothing/accessories/clothing/hawaiian_alt.dmi')
-	color = color_rotation(rand(-11,12)*15)
+	color = color_matrix_rotate_hue(rand(-11,12)*15)
 
 /obj/item/clothing/accessory/toggleable/zhongshan
 	name = "zhongshan suit jacket"

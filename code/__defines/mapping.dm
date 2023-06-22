@@ -1,3 +1,5 @@
+#define LEVELS_ARE_Z_CONNECTED(ZA, ZB) ((ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz) && ((ZA == ZB) || ((length(SSmapping.connected_z_cache) >= ZA && SSmapping.connected_z_cache[ZA] && length(SSmapping.connected_z_cache[ZA]) >= ZB) ? SSmapping.connected_z_cache[ZA][ZB] : SSmapping.are_connected_levels(ZA, ZB))))
+
 // Maploader bounds indices
 #define MAP_MINX 1
 #define MAP_MINY 2
@@ -31,6 +33,9 @@ if(other_init) { \
 #define ADJUST_TAG_VAR(variable, map_hash) (istext(variable) && (variable += map_hash))
 
 /// Map template categories for mass retrieval.
-#define MAP_TEMPLATE_CATEGORY_EXOPLANET "exoplanet_template"
-#define MAP_TEMPLATE_CATEGORY_SPACE     "space_template"
-#define MAP_TEMPLATE_CATEGORY_AWAYSITE  "awaysite_template"
+#define MAP_TEMPLATE_CATEGORY_EXOPLANET      "exoplanet_template"
+#define MAP_TEMPLATE_CATEGORY_EXOPLANET_SITE "exoplanet_site_template"
+#define MAP_TEMPLATE_CATEGORY_PLANET         "planet_template"
+#define MAP_TEMPLATE_CATEGORY_PLANET_SITE    "planet_site_template"
+#define MAP_TEMPLATE_CATEGORY_SPACE          "space_template"
+#define MAP_TEMPLATE_CATEGORY_AWAYSITE       "awaysite_template"

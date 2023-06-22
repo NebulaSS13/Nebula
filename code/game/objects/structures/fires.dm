@@ -53,21 +53,20 @@
 
 	if(lit != FIRE_LIT)
 		for(var/thing in affected_exterior_turfs)
-			var/turf/exterior/T = thing
+			var/turf/T = thing
 			LAZYREMOVE(T.affecting_heat_sources, src)
 		affected_exterior_turfs = null
 	else
 		var/list/new_affecting
-		for(var/turf/exterior/T in RANGE_TURFS(loc, light_range_high))
-			LAZYADD(new_affecting, T)
-		for(var/thing in affected_exterior_turfs)
-			var/turf/exterior/T = thing
-			if(!(thing in new_affecting))
+		for(var/turf/T as anything in RANGE_TURFS(loc, light_range_high))
+			if(T.external_atmosphere_participation)
+				LAZYADD(new_affecting, T)
+		for(var/turf/T as anything in affected_exterior_turfs)
+			if(!(T in new_affecting) || !T.external_atmosphere_participation)
 				LAZYREMOVE(T.affecting_heat_sources, src)
 				LAZYREMOVE(affected_exterior_turfs, T)
 			LAZYREMOVE(new_affecting, T)
-		for(var/thing in new_affecting)
-			var/turf/exterior/T = thing
+		for(var/turf/T as anything in new_affecting)
 			LAZYDISTINCTADD(T.affecting_heat_sources, src)
 			LAZYDISTINCTADD(affected_exterior_turfs, T)
 
@@ -140,7 +139,7 @@
 
 /obj/structure/fire_source/attack_hand(var/mob/user)
 
-	if(length(contents))
+	if(length(contents) && user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		var/obj/item/removing = pick(contents)
 		removing.dropInto(loc)
 		user.put_in_hands(removing)
@@ -158,7 +157,7 @@
 			qdel(src)
 		return TRUE
 
-	. = ..()
+	return ..()
 
 /obj/structure/fire_source/grab_attack(var/obj/item/grab/G)
 	var/mob/living/affecting_mob = G.get_affecting_mob()
@@ -209,7 +208,7 @@
 		light()
 		return TRUE
 
-	if((lit != FIRE_LIT || user.a_intent == I_HURT) && user.unEquip(thing, src))
+	if((lit != FIRE_LIT || user.a_intent == I_HURT) && user.try_unequip(thing, src))
 		user.visible_message(SPAN_NOTICE("\The [user] drops \the [thing] into \the [src]."))
 		update_icon()
 		return TRUE

@@ -30,3 +30,7 @@
 	global.all_limb_tags_by_depth.Insert(global.all_limb_tags_by_depth.Find(BP_L_HAND)+1, BP_L_HAND_UPPER)
 	global.all_limb_tags_by_depth.Insert(global.all_limb_tags_by_depth.Find(BP_R_HAND)+1, BP_R_HAND_UPPER)
 	global.all_limb_tags_by_depth.Insert(global.all_limb_tags_by_depth.Find(BP_CHEST)+1,  BP_M_HAND)
+
+	global.all_inventory_slots |= BP_L_HAND_UPPER
+	global.all_inventory_slots |= BP_R_HAND_UPPER
+	global.all_inventory_slots |= BP_M_HAND

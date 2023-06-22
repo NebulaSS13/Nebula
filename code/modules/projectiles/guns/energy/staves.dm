@@ -43,3 +43,9 @@
 	desc = "An artefact that channels the will of the user into destructive bolts of force. If you aren't careful with it, you might poke someone's brain out."
 	icon = 'icons/obj/guns/focus_staff.dmi'
 	projectile_type = /obj/item/projectile/forcebolt
+
+/obj/item/gun/energy/staff/fire
+	name = "flaming staff"
+	desc = "A long, everburning torch."
+	icon = 'icons/obj/guns/fire_staff.dmi'
+	projectile_type = /obj/item/projectile/firebolt

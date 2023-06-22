@@ -172,6 +172,7 @@
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	weight = MAT_VALUE_NORMAL
 	wall_support_value = MAT_VALUE_VERY_HEAVY // Ideal construction material.
+	hardness = MAT_VALUE_HARD
 	integrity = 150
 	brute_armor = 5
 	icon_base = 'icons/turf/walls/solid.dmi'
@@ -200,7 +201,6 @@
 	. += new/datum/stack_recipe_list("tiling", create_recipe_list(/datum/stack_recipe/tile/metal))
 	. += new/datum/stack_recipe/furniture/computerframe(src)
 	. += new/datum/stack_recipe/furniture/machine(src)
-	. += new/datum/stack_recipe/furniture/turret(src)
 	. += new/datum/stack_recipe_list("airlock assemblies", create_recipe_list(/datum/stack_recipe/furniture/door_assembly))
 	. += new/datum/stack_recipe/grenade(src)
 	. += new/datum/stack_recipe/light(src)

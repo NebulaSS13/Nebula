@@ -25,7 +25,7 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return FALSE
-	return ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
+	return LEVELS_ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
 
 /datum/nano_module/program/shields_monitor/proc/get_shields()
 	var/list/shields = list()

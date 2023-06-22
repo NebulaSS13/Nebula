@@ -51,7 +51,7 @@
 	strength = 1
 	density = 1
 	invisibility = 0
-	//is_spawnable_type = FALSE
+	is_spawnable_type = FALSE
 	var/datum/artifact_effect/forcefield/owner
 
 /obj/effect/energy_field/artifact/Initialize(var/ml, var/_owner)

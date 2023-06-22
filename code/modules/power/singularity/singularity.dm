@@ -1,344 +1,214 @@
 var/global/list/singularities = list()
-/obj/singularity
+/obj/effect/singularity
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
-	anchored = 1
-	density = 1
+	anchored =   TRUE
+	density =    TRUE
+	unacidable = TRUE //Don't comment this out.
 	layer = SINGULARITY_LAYER
+	light_power = 1
 	light_range = 6
-	unacidable = 1 //Don't comment this out.
+	is_spawnable_type = FALSE // No...
 
-	var/current_size = 1
-	var/allowed_size = 1
-	var/energy = 100 //How strong are we?
-	var/dissipate = 1 //Do we lose energy over time?
-	var/dissipate_delay = 10
-	var/dissipate_track = 0
-	var/dissipate_strength = 1 //How much energy do we lose?
-	var/move_self = 1 //Do we move on our own?
-	var/grav_pull = 4 //How many tiles out do we pull?
-	var/consume_range = 0 //How many tiles out do we eat.
-	var/event_chance = 15 //Prob for event each tick.
-	var/target = null //Its target. Moves towards the target if it has one.
-	var/last_failed_movement = 0 //Will not move in the same dir if it couldnt before, will help with the getting stuck on fields thing.
+	/// Category used for investigation entries relating to this atom.
+	var/const/investigation_label = "singulo"
+	/// A list of events. Toxins is in here twice to double the chance of proccing.
+	var/static/list/singularity_events = list(
+		/decl/singularity_event/empulse   = 1,
+		/decl/singularity_event/toxins    = 2,
+		/decl/singularity_event/mesmerize = 1,
+		/decl/singularity_event/nothing   = 1
+	)
+
+	/// When did we last emit a warning about a containment failure?
 	var/last_warning
+	/// What are our current values, icons, strings, etc?
+	var/decl/singularity_stage/current_stage
+	/// How strong/large are we? How much have we eaten?
+	var/energy = 100
+	/// Will we wander, if our stage permits it? Only set by var edit or mapped subtype.
+	var/move_self = TRUE
+	/// Our current target. Moves towards the target if it has one.
+	var/weakref/target
+	/// Will not move in the same dir if it couldnt before, will help with the getting stuck on fields thing.
+	var/last_failed_movement = 0
+	/// How many atoms can we pull in a single tick?
+	var/const/max_atoms_assessed_per_tick = 100
 
-	var/chained = 0//Adminbus chain-grab
-
-/obj/singularity/Initialize(mapload, var/starting_energy = 50, var/temp = 0)
+/obj/effect/singularity/Initialize(mapload, var/starting_energy = 50, var/temp = 0)
 	. = ..(mapload)
-
-	//CARN: admin-alert for chuckle-fuckery.
-	admin_investigate_setup()
+	var/found_containment = locate(/obj/effect/containment_field) in orange(30, src)
+	if(!found_containment)
+		last_warning = world.time
+		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
+	investigate_log("was created. [found_containment ? "" : "<font color='red'>No containment fields were active.</font>"]", investigation_label)
+	current_stage = GET_DECL(/decl/singularity_stage/stage_one)
 	energy = starting_energy
 	global.singularities += src
 	if (temp)
 		QDEL_IN(src, temp)
 	START_PROCESSING(SSobj, src)
-	for(var/obj/machinery/singularity_beacon/singubeacon in SSmachines.machinery)
-		if(singubeacon.use_power == POWER_USE_ACTIVE)
-			target = singubeacon
-			break
 
-/obj/singularity/Destroy()
+/obj/effect/singularity/Destroy()
 	global.singularities -= src
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/singularity/attack_hand(mob/user)
-	consume(user)
-	return 1
+/obj/effect/singularity/Process_Spacemove(allow_movement)
+	return TRUE
 
-/obj/singularity/explosion_act(severity)
+/obj/effect/singularity/proc/consume(atom/A)
+	energy += A.singularity_act(src, current_stage.stage_size)
+
+/obj/effect/singularity/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
-	if(current_size == STAGE_SUPER)//IT'S UNSTOPPABLE
+	if(current_stage.stage_size == STAGE_SUPER)//IT'S UNSTOPPABLE
 		return
-	switch(severity)
-		if(1.0)
-			if(prob(25))
-				investigate_log("has been destroyed by an explosion.", I_SINGULO)
-				qdel(src)
-				return
-			else
-				energy += 50
-		if(2.0 to 3.0)
-			energy += round((rand(20,60)/2),1)
-			return
-
-/obj/singularity/bullet_act(obj/item/projectile/P)
-	return 0 //Will there be an impact? Who knows. Will we see it? No.
-
-/obj/singularity/Bump(atom/A)
-	consume(A)
-
-/obj/singularity/Bumped(atom/A)
-	consume(A)
-
-/obj/singularity/Process()
-	eat()
-	dissipate()
-	check_energy()
-
-	if (current_size >= STAGE_TWO)
-		move()
-		pulse()
-
-		if (prob(event_chance)) //Chance for it to run a special event TODO: Come up with one or two more that fit.
-			event()
-
-/obj/singularity/attack_ai() //To prevent ais from gibbing themselves when they click on one.
-	return
-
-/obj/singularity/proc/admin_investigate_setup()
-	last_warning = world.time
-	var/count = locate(/obj/machinery/containment_field) in orange(30, src)
-
-	if (!count)
-		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
-
-	investigate_log("was created. [count ? "" : "<font color='red'>No containment fields were active.</font>"]", I_SINGULO)
-
-/obj/singularity/proc/dissipate()
-	if (!dissipate)
-		return
-
-	if(dissipate_track >= dissipate_delay)
-		energy -= dissipate_strength
-		dissipate_track = 0
+	if(severity == 1)
+		if(prob(25))
+			investigate_log("has been destroyed by an explosion.", investigation_label)
+			qdel(src)
+		else
+			energy += 50
 	else
-		dissipate_track++
+		energy += round((rand(20,60)/2), 1)
 
-/obj/singularity/proc/expand(var/force_size = 0, var/growing = 1)
-	if(current_size == STAGE_SUPER)//if this is happening, this is an error
-		message_admins("expand() was called on a super singulo. This should not happen. Contact a coder immediately!")
-		return
-	var/temp_allowed_size = allowed_size
-
-	if (force_size)
-		temp_allowed_size = force_size
-
-	switch (temp_allowed_size)
-		if (STAGE_ONE)
-			SetName("gravitational singularity")
-			desc = "A gravitational singularity."
-			current_size = STAGE_ONE
-			icon = 'icons/obj/singularity.dmi'
-			icon_state = "singularity_s1"
-			pixel_x = 0
-			pixel_y = 0
-			grav_pull = 4
-			consume_range = 0
-			dissipate_delay = 10
-			dissipate_track = 0
-			dissipate_strength = 1
-			overlays.Cut()
-			if(chained)
-				overlays = list("chain_s1")
-			visible_message("<span class='notice'>The singularity has shrunk to a rather pitiful size.</span>")
-		if (STAGE_TWO) //1 to 3 does not check for the turfs if you put the gens right next to a 1x1 then its going to eat them.
-			SetName("gravitational singularity")
-			desc = "A gravitational singularity."
-			current_size = STAGE_TWO
-			icon = 'icons/effects/96x96.dmi'
-			icon_state = "singularity_s3"
-			pixel_x = -32
-			pixel_y = -32
-			grav_pull = 6
-			consume_range = 1
-			dissipate_delay = 5
-			dissipate_track = 0
-			dissipate_strength = 5
-			overlays.Cut()
-			if(chained)
-				overlays = list("chain_s3")
-			if(growing)
-				visible_message("<span class='notice'>The singularity noticeably grows in size.</span>")
-			else
-				visible_message("<span class='notice'>The singularity has shrunk to a less powerful size.</span>")
-		if (STAGE_THREE)
-			if ((check_turfs_in(1, 2)) && (check_turfs_in(2, 2)) && (check_turfs_in(4, 2)) && (check_turfs_in(8, 2)))
-				SetName("gravitational singularity")
-				desc = "A gravitational singularity."
-				current_size = STAGE_THREE
-				icon = 'icons/effects/160x160.dmi'
-				icon_state = "singularity_s5"
-				pixel_x = -64
-				pixel_y = -64
-				grav_pull = 8
-				consume_range = 2
-				dissipate_delay = 4
-				dissipate_track = 0
-				dissipate_strength = 20
-				overlays.Cut()
-				if(chained)
-					overlays = list("chain_s5")
-				if(growing)
-					visible_message("<span class='notice'>The singularity expands to a reasonable size.</span>")
-				else
-					visible_message("<span class='notice'>The singularity has returned to a safe size.</span>")
-		if(STAGE_FOUR)
-			if ((check_turfs_in(1, 3)) && (check_turfs_in(2, 3)) && (check_turfs_in(4, 3)) && (check_turfs_in(8, 3)))
-				SetName("gravitational singularity")
-				desc = "A gravitational singularity."
-				current_size = STAGE_FOUR
-				icon = 'icons/effects/224x224.dmi'
-				icon_state = "singularity_s7"
-				pixel_x = -96
-				pixel_y = -96
-				grav_pull = 10
-				consume_range = 3
-				dissipate_delay = 10
-				dissipate_track = 0
-				dissipate_strength = 10
-				overlays.Cut()
-				if(chained)
-					overlays = list("chain_s7")
-				if(growing)
-					visible_message("<span class='warning'>The singularity expands to a dangerous size.</span>")
-				else
-					visible_message("<span class='notice'>Miraculously, the singularity reduces in size, and can be contained.</span>")
-		if(STAGE_FIVE) //This one also lacks a check for gens because it eats everything.
-			SetName("gravitational singularity")
-			desc = "A gravitational singularity."
-			current_size = STAGE_FIVE
-			icon = 'icons/effects/288x288.dmi'
-			icon_state = "singularity_s9"
-			pixel_x = -128
-			pixel_y = -128
-			grav_pull = 10
-			consume_range = 4
-			dissipate = 0 //It cant go smaller due to e loss.
-			overlays.Cut()
-			if(chained)
-				overlays = list("chain_s9")
-			if(growing)
-				visible_message("<span class='danger'><font size='2'>The singularity has grown out of control!</font></span>")
-			else
-				visible_message("<span class='warning'>The singularity miraculously reduces in size and loses its supermatter properties.</span>")
-		if(STAGE_SUPER)//SUPERSINGULO
-			SetName("super gravitational singularity")
-			desc = "A gravitational singularity with the properties of supermatter. <b>It has the power to destroy worlds.</b>"
-			current_size = STAGE_SUPER
-			icon = 'icons/effects/352x352.dmi'
-			icon_state = "singularity_s11"//uh, whoever drew that, you know that black holes are supposed to look dark right? What's this, the clown's singulo?
-			pixel_x = -160
-			pixel_y = -160
-			grav_pull = 16
-			consume_range = 5
-			dissipate = 0 //It cant go smaller due to e loss
-			event_chance = 25 //Events will fire off more often.
-			if(chained)
-				overlays = list("chain_s9")
-			visible_message("<span class='sinister'><font size='3'>You witness the creation of a destructive force that cannot possibly be stopped by human hands.</font></span>")
-
-	if (current_size == allowed_size)
-		investigate_log("<font color='red'>grew to size [current_size].</font>", I_SINGULO)
-		return 1
-	else if (current_size < (--temp_allowed_size) && current_size != STAGE_SUPER)
-		expand(temp_allowed_size)
-	else
-		return 0
-
-/obj/singularity/proc/check_energy()
-	if (energy <= 0)
-		investigate_log("collapsed.", I_SINGULO)
-		qdel(src)
-		return 0
-
-	switch (energy) //Some of these numbers might need to be changed up later -Mport.
-		if (1 to 199)
-			allowed_size = STAGE_ONE
-		if (200 to 499)
-			allowed_size = STAGE_TWO
-		if (500 to 999)
-			allowed_size = STAGE_THREE
-		if (1000 to 1999)
-			allowed_size = STAGE_FOUR
-		if(2000 to 49999)
-			allowed_size = STAGE_FIVE
-		if(50000 to INFINITY)
-			allowed_size = STAGE_SUPER
-
-	if (current_size != allowed_size && current_size != STAGE_SUPER)
-		expand(null, current_size < allowed_size)
-	return 1
-
-/obj/singularity/proc/eat()
-	for(var/atom/X in orange(grav_pull, src))
-		var/dist = get_dist(X, src)
-		var/obj/singularity/S = src
-		if(!istype(src))
-			return
-		if(dist > consume_range)
-			X.singularity_pull(S, current_size)
-		else if(dist <= consume_range)
-			consume(X)
-
-	return
-
-/obj/singularity/proc/consume(const/atom/A)
-	src.energy += A.singularity_act(src, current_size)
-	return
-
-/obj/singularity/proc/move(force_move_direction = 0)
-	if(!move_self)
-		return FALSE
-
-	var/movement_dir = pick(global.alldirs - last_failed_movement)
-
-	if(force_move_direction)
-		movement_dir = force_move_direction
-
-	if(target && prob(60))
-		movement_dir = get_dir(src,target) //moves to a singulo beacon, if there is one
-	else
-		var/location
-		if(prob(16))
-			location = GetAbove(src)
-			if (location)
-				src.Move(location, UP)
-				return TRUE
-		else if(prob(16))
-			location = GetBelow(src)
-			if (location)
-				src.Move(location, DOWN)
-				return TRUE
-
-	if(current_size >= 9)//The superlarge one does not care about things in its way
-		spawn(0)
-			step(src, movement_dir)
-		spawn(1)
-			step(src, movement_dir)
-		return TRUE
-	else if(check_turfs_in(movement_dir))
-		last_failed_movement = 0 // Reset this because we moved
-		spawn(0)
-			step(src, movement_dir)
-		return TRUE
-	else
-		last_failed_movement = movement_dir
+/obj/effect/singularity/bullet_act(obj/item/projectile/P)
 	return FALSE
 
-/obj/singularity/proc/check_turfs_in(var/direction = 0, var/step = 0)
+/obj/effect/singularity/Process()
+
+	// Eat or pull anything close to us.
+	var/consumed = 0
+	for(var/atom/consuming in range(current_stage.grav_pull, src))
+		if(consuming == src)
+			continue
+		var/dist = get_dist(consuming, src)
+		if(dist <= current_stage.consume_range)
+			consume(consuming)
+		else
+			consuming.singularity_pull(src, current_stage.stage_size)
+		if(consumed++ >= max_atoms_assessed_per_tick || TICK_CHECK)
+			break
+
+	if(TICK_CHECK)
+		return
+
+	// Check if we should be shrinking this tick, and apply it if we should.
+	current_stage.handle_dissipation(src)
+
+	// Check if we're large and energetic enough to move.
+	if(!check_energy() || !current_stage.wander)
+		return // Just hangs out for now.
+
+	// Refresh our beacon target, if needed.
+	var/obj/machinery/singularity_beacon/target_beacon
+	if(length(global.singularity_beacons))
+		if(target)
+			target_beacon = target.resolve()
+			if(!istype(target_beacon) || target_beacon.use_power != POWER_USE_ACTIVE)
+				target_beacon = null
+				target = null
+		if(!target)
+			for(var/obj/machinery/singularity_beacon/singubeacon as anything in global.singularity_beacons)
+				if(singubeacon.use_power == POWER_USE_ACTIVE)
+					target_beacon = singubeacon
+					target = weakref(singubeacon)
+					break
+
+	// Move randomly towards our target, or in a random direction.
+	if(move_self)
+
+		// Get a direction to move.
+		var/movement_dir
+		if(target_beacon && prob(60))
+			//moves to a singulo beacon, if there is one
+			if(target_beacon.z == z)
+				movement_dir = get_dir(src, target_beacon)
+			else if(target_beacon.z > z && GetAbove(src))
+				movement_dir = UP
+			else if(target_beacon.z < z && GetBelow(src))
+				movement_dir = DOWN
+
+		else if(prob(16) && !(locate(/obj/effect/containment_field) in orange(7, src)))
+			var/list/available_vertical_moves = list()
+			if(GetAbove(src))
+				available_vertical_moves += UP
+			if(GetBelow(src))
+				available_vertical_moves += DOWN
+			if(length(available_vertical_moves))
+				movement_dir = pick(available_vertical_moves)
+		if(!movement_dir || movement_dir == last_failed_movement)
+			movement_dir = pick(global.alldirs - last_failed_movement)
+
+		// Try to move in it.
+		if(!try_move(movement_dir, (movement_dir == UP || movement_dir == DOWN)))
+			last_failed_movement = movement_dir
+
+	// Feed any nearby rad collectors.
+	for(var/obj/machinery/rad_collector/R in global.rad_collectors)
+		if (get_dist(R, src) <= 15) //Better than using orange() every process.
+			R.receive_pulse(energy)
+
+	// Handle random events.
+	if(prob(current_stage.event_chance))
+		if(current_stage.stage_size >= STAGE_SUPER)
+			var/decl/singularity_event/wave_event = GET_DECL(/decl/singularity_event/supermatter_wave)
+			wave_event.handle_event(src)
+		var/decl/singularity_event/singularity_event = pickweight(singularity_events)
+		singularity_event = GET_DECL(singularity_event)
+		singularity_event.handle_event(src)
+
+/obj/effect/singularity/proc/try_move(var/movement_dir, var/vertical_move)
+	set waitfor = FALSE
+	if(current_stage.stage_size >= STAGE_FIVE)//The superlarge one does not care about things in its way
+		step(src, movement_dir)
+		if(!vertical_move)
+			sleep(1)
+			if(!QDELETED(src))
+				step(src, movement_dir)
+	else if(check_turfs_in(movement_dir))
+		last_failed_movement = 0 // Reset this because we moved
+		step(src, movement_dir)
+		return TRUE
+	return FALSE
+
+/obj/effect/singularity/proc/check_energy()
+	if (energy <= 0)
+		investigate_log("collapsed.", investigation_label)
+		qdel(src)
+		return FALSE
+
+	. = TRUE
+	var/list/singulo_stages = decls_repository.get_decls_of_subtype(/decl/singularity_stage)
+	for(var/stage_type in singulo_stages)
+		var/decl/singularity_stage/stage = singulo_stages[stage_type]
+		if(stage != current_stage && energy >= stage.min_energy && energy < stage.max_energy && stage.has_expansion_room(src))
+			set_stage(stage)
+			return
+
+/obj/effect/singularity/proc/set_stage(decl/singularity_stage/next_stage)
+	if(!next_stage || next_stage == current_stage)
+		return FALSE
+	if(next_stage.stage_size < current_stage.stage_size)
+		next_stage.shrink_to(src)
+		investigate_log("<font color='red'>shrank to size [next_stage.stage_size].</font>", investigation_label)
+	else if(next_stage.stage_size > current_stage.stage_size)
+		next_stage.grow_to(src)
+		investigate_log("<font color='red'>grew to size [next_stage.stage_size].</font>", investigation_label)
+	current_stage = next_stage
+	update_icon()
+	update_strings()
+	return TRUE
+
+/obj/effect/singularity/proc/check_turfs_in(var/direction = 0, var/step = 0)
 	if(!direction)
 		return 0
-	var/steps = 0
+	var/steps
 	if(!step)
-		switch(current_size)
-			if(1)
-				steps = 1
-			if(3)
-				steps = 3//Yes this is right
-			if(5)
-				steps = 3
-			if(7)
-				steps = 4
-			if(9)
-				steps = 5
-			if(11)
-				steps = 6
+		steps = current_stage?.footprint || 1
 	else
 		steps = step
 	var/list/turfs = list()
@@ -375,11 +245,11 @@ var/global/list/singularities = list()
 			return 0
 	return 1
 
-/obj/singularity/proc/can_move(const/turf/T)
+/obj/effect/singularity/proc/can_move(const/turf/T)
 	if (!isturf(T))
 		return 0
 
-	if ((locate(/obj/machinery/containment_field) in T) || (locate(/obj/machinery/shieldwall) in T))
+	if ((locate(/obj/effect/containment_field) in T) || (locate(/obj/machinery/shieldwall) in T))
 		return 0
 	else if (locate(/obj/machinery/field_generator) in T)
 		var/obj/machinery/field_generator/G = locate(/obj/machinery/field_generator) in T
@@ -393,103 +263,56 @@ var/global/list/singularities = list()
 			return 0
 	return 1
 
-/obj/singularity/proc/event()
-	var/numb = pick(1, 2, 3, 4, 5, 6)
-
-	switch (numb)
-		if (1) //EMP.
-			emp_area()
-		if (2, 3) //Tox damage all carbon mobs in area.
-			toxmob()
-		if (4) //Stun mobs who lack optic scanners.
-			mezzer()
-		else
-			return 0
-	if(current_size == 11)
-		smwave()
-	return 1
-
-
-/obj/singularity/proc/toxmob()
-	var/toxrange = 10
-	var/toxdamage = 4
-	var/radiation = 15
-	if (src.energy>200)
-		toxdamage = round(((src.energy-150)/50)*4,1)
-		radiation = round(((src.energy-150)/50)*5,1)
-	SSradiation.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
-	for(var/mob/living/M in view(toxrange, src.loc))
-		if(M.status_flags & GODMODE)
-			continue
-		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
-
-/obj/singularity/proc/mezzer()
-	for(var/mob/living/carbon/M in oviewers(8, src))
-		if(istype(M, /mob/living/carbon/brain)) //Ignore brains
-			continue
-		if(M.status_flags & GODMODE)
-			continue
-		if(M.stat == CONSCIOUS)
-			if (istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				if(istype(H.get_equipped_item(slot_glasses_str), /obj/item/clothing/glasses/meson) && current_size != 11)
-					to_chat(H, "<span class=\"notice\">You look directly into \the [src], good thing you had your protective eyewear on!</span>")
-					return
-				else
-					to_chat(H, "<span class=\"warning\">You look directly into \the [src], but your eyewear does absolutely nothing to protect you from it!</span>")
-		to_chat(M, "<span class='danger'>You look directly into \the [src] and feel [current_size == 11 ? "helpless" : "weak"].</span>")
-		M.apply_effect(3, STUN)
-		M.visible_message(SPAN_DANGER("\The [M] stares blankly at \the [src]!"))
-
-/obj/singularity/proc/emp_area()
-	if(current_size != 11)
-		empulse(src, 8, 10)
+/obj/effect/singularity/proc/update_strings()
+	if(current_stage)
+		SetName(current_stage.name)
+		desc = current_stage.desc
 	else
-		empulse(src, 12, 16)
+		SetName(initial(name))
+		desc = initial(desc)
 
-/obj/singularity/proc/smwave()
-	for(var/mob/living/M in view(10, src.loc))
-		if(prob(67))
-			to_chat(M, "<span class=\"warning\">You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-			to_chat(M, "<span class=\"notice\">Miraculously, it fails to kill you.</span>")
-		else
-			to_chat(M, "<span class=\"danger\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-			to_chat(M, "<span class=\"danger\">You don't even have a moment to react as you are reduced to ashes by the intense radiation.</span>")
-			M.dust()
-	SSradiation.radiate(src, rand(energy))
-	return
+/obj/effect/singularity/on_update_icon()
+	. = ..()
+	var/last_pixel_x = default_pixel_x
+	var/last_pixel_y = default_pixel_y
+	if(current_stage)
+		icon =            current_stage.icon
+		icon_state =      current_stage.icon_state
+		default_pixel_x = current_stage.pixel_x
+		default_pixel_y = current_stage.pixel_y
+	else
+		icon =            initial(icon)
+		icon_state =      initial(icon_state)
+		default_pixel_x = initial(default_pixel_x)
+		default_pixel_y = initial(default_pixel_y)
+	if(last_pixel_x != default_pixel_x || last_pixel_y != default_pixel_y)
+		reset_offsets(0)
 
-/obj/singularity/proc/pulse()
-	for(var/obj/machinery/rad_collector/R in rad_collectors)
-		if (get_dist(R, src) <= 15) //Better than using orange() every process.
-			R.receive_pulse(energy)
-
-/obj/singularity/proc/on_capture()
-	chained = 1
-	overlays.Cut()
-	move_self = 0
-	switch (current_size)
-		if(1)
-			overlays += image('icons/obj/singularity.dmi',"chain_s1")
-		if(3)
-			overlays += image('icons/effects/96x96.dmi',"chain_s3")
-		if(5)
-			overlays += image('icons/effects/160x160.dmi',"chain_s5")
-		if(7)
-			overlays += image('icons/effects/224x224.dmi',"chain_s7")
-		if(9)
-			overlays += image('icons/effects/288x288.dmi',"chain_s9")
-
-/obj/singularity/proc/on_release()
-	chained = 0
-	overlays.Cut()
-	move_self = 1
-
-/obj/singularity/singularity_act(S, size)
-	if(current_size <= size)
+/obj/effect/singularity/singularity_act(S, size)
+	if(current_stage.stage_size <= size)
 		var/gain = (energy/2)
-		var/dist = max((current_size - 2), 1)
+		var/dist = max((current_stage.stage_size - 2), 1)
 		explosion(src.loc,(dist),(dist*2),(dist*4))
-		spawn(0)
-			qdel(src)
+		QDEL_IN(src, 1)
 		return gain
+	return 0
+
+// Various overrides used to consume things interacting with the singularity.
+/obj/effect/singularity/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
+	consume(user)
+	return TRUE
+
+/obj/effect/singularity/Bump(atom/A)
+	consume(A)
+
+/obj/effect/singularity/Bumped(atom/A)
+	consume(A)
+
+/obj/effect/singularity/attack_ai() //To prevent ais from gibbing themselves when they click on one.
+	return TRUE
+
+/obj/effect/singularity/attack_robot(mob/user)
+	if(Adjacent(user))
+		consume(user)
+	return TRUE

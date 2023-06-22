@@ -75,7 +75,7 @@
 
 	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
 		return
-	if(ARE_Z_CONNECTED(old_loc.z, new_loc.z))
+	if(LEVELS_ARE_Z_CONNECTED(old_loc.z, new_loc.z))
 		return
 
 	// None of the tests passed, good bye
@@ -122,8 +122,9 @@
 	hat_y = -12
 
 /mob/living/silicon/robot/drone/init()
-	additional_law_channels["Drone"] = ":d"
-	if(!module) module = new module_type(src)
+	additional_law_channels["Drone"] = "d"
+	if(!module)
+		module = new module_type(src)
 
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with a logo and the subscript: '[global.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)

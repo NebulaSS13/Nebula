@@ -7,10 +7,10 @@
 	var/do_not_edit = 0				// Whether the user will be reminded that the file probably shouldn't be edited.
 	var/read_only = 0				// Protects files that should never be edited by the user due to special properties.
 
-/datum/computer_file/data/clone()
-	var/datum/computer_file/data/temp = ..()
-	temp.stored_data = stored_data
-	return temp
+/datum/computer_file/data/PopulateClone(datum/computer_file/data/clone)
+	clone = ..()
+	clone.stored_data = stored_data
+	return clone
 
 // Calculates file size from amount of characters in saved string
 /datum/computer_file/data/proc/calculate_size()

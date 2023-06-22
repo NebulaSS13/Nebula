@@ -11,7 +11,7 @@
 
 /decl/hierarchy/outfit/job/medical/cmo
 	name = "Job - Chief Medical Officer"
-	l_ear  =/obj/item/radio/headset/heads/cmo
+	l_ear = /obj/item/radio/headset/heads/cmo
 	uniform = /obj/item/clothing/under/chief_medical_officer
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	shoes = /obj/item/clothing/shoes/color/brown

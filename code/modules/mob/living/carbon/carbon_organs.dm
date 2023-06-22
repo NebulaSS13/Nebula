@@ -44,23 +44,12 @@
 	. = ..()
 
 /mob/living/carbon/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE,  var/in_place = FALSE, var/update_icon = TRUE)
-	if(!in_place && species.is_vital_organ(src, O) && usr)
+	if(istype(O) && !in_place && O.is_vital_to_owner() && usr)
 		admin_attack_log(usr, src, "Removed a vital organ ([src]).", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
-
 	if(!(. = ..()))
 		return
-
 	LAZYREMOVE(organs_by_tag, O.organ_tag)
 	if(O.is_internal())
 		LAZYREMOVE(internal_organs, O)
 	else
 		LAZYREMOVE(external_organs, O)
-
-//Should handle vital organ checks, icon updates, events
-/mob/living/carbon/on_lost_organ(var/obj/item/organ/O)
-	if(!(. = ..()))
-		return
-
-	//Check if we should die
-	if(species.is_vital_organ(src, O))
-		death()

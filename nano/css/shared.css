@@ -747,8 +747,8 @@ th.bot {
 	visibility		: hidden;
 	opacity			: 0;
 	transition		: opacity 0.3s linear;
-	padding			: 10px; 
-	margin-left		: 8px; 
+	padding			: 10px;
+	margin-left		: 8px;
 	width			: 200px;
 	z-index			: 999;
 }
@@ -815,4 +815,11 @@ th.bot {
 	margin: 0 1em 0 0;
 	background: #3d3d3d;
 	color:#1b3015;
+}
+
+.rect {
+	display: inline;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
 }

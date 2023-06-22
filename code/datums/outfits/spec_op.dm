@@ -42,13 +42,12 @@
 	name = "Spec Ops - Mercenary"
 	uniform = /obj/item/clothing/under/syndicate
 	shoes = /obj/item/clothing/shoes/jackboots/swat/combat
-	l_ear = /obj/item/radio/headset/syndicate/alt
+	l_ear = /obj/item/radio/headset/mercenary
 	belt = /obj/item/storage/belt/holster/security
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_pocket = /obj/item/chems/pill/cyanide
 	pda_type = /obj/item/modular_computer/pda/mercenary
-
 	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/syndicate
 	id_pda_assignment = "Mercenary"

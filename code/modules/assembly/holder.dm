@@ -119,28 +119,19 @@
 			var/obj/item/S = special_assembly
 			S.on_found(finder)
 
-
 /obj/item/assembly_holder/Move()
-	..()
-	if(a_left && a_right)
+	. = ..()
+	if(. && a_left && a_right)
 		a_left.holder_movement()
 		a_right.holder_movement()
-//	if(special_assembly)
-//		special_assembly:holder_movement()
-	return
-
 
 /obj/item/assembly_holder/attack_hand()//Perhapse this should be a holder_pickup proc instead, can add if needbe I guess
 	if(a_left && a_right)
 		a_left.holder_movement()
 		a_right.holder_movement()
-//	if(special_assembly)
-//		special_assembly:Holder_Movement()
-	..()
-	return
+	return ..()
 
-
-/obj/item/assembly_holder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/assembly_holder/attackby(obj/item/W, mob/user)
 	if(IS_SCREWDRIVER(W))
 		if(!a_left || !a_right)
 			to_chat(user, "<span class='warning'>BUG:Assembly part missing, please report this!</span>")

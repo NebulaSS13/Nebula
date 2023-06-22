@@ -157,7 +157,7 @@
 	startedAt = world.time
 
 	if(!affecting_z)
-		affecting_z = global.using_map.station_levels
+		affecting_z = SSmapping.station_levels
 
 	setup()
 	..()
@@ -165,5 +165,5 @@
 /datum/event/proc/location_name()
 	if(!length(global.using_map.overmap_ids))
 		return station_name()
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[pick(affecting_z)]"]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(pick(affecting_z))]
 	return O?.name || "Unknown Location"

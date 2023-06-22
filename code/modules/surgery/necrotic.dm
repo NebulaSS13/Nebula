@@ -21,10 +21,10 @@
 	. = ..()
 	if(.)
 		var/obj/item/organ/external/affected = .
-		if(affected.status & ORGAN_DEAD && affected.germ_level > INFECTION_LEVEL_ONE)
+		if(affected.status & ORGAN_DEAD)
 			return TRUE
 		for(var/obj/item/organ/O in affected.internal_organs)
-			if(O.status & ORGAN_DEAD && O.germ_level > INFECTION_LEVEL_ONE)
+			if(O.status & ORGAN_DEAD)
 				return TRUE
 		return FALSE
 
@@ -36,13 +36,13 @@
 		return FALSE
 
 	var/list/dead_organs
-	if((E.status & ORGAN_DEAD) && E.germ_level > INFECTION_LEVEL_ONE)
+	if(E.status & ORGAN_DEAD)
 		var/image/radial_button = image(icon = E.icon, icon_state = E.icon_state)
 		radial_button.name = "Debride \the [E]"
 		LAZYSET(dead_organs, E.organ_tag, radial_button)
 
 	for(var/obj/item/organ/internal/I in E.internal_organs)
-		if(I && (I.status & ORGAN_DEAD) && I.germ_level > INFECTION_LEVEL_ONE && I.parent_organ == target_zone)
+		if(I && (I.status & ORGAN_DEAD) && I.parent_organ == target_zone)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Debride \the [I]"
 			LAZYSET(dead_organs, I.organ_tag, radial_button)

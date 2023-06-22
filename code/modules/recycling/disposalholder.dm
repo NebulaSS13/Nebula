@@ -20,7 +20,7 @@
 	// initialize a holder from the contents of a disposal unit
 /obj/structure/disposalholder/proc/init(var/obj/machinery/disposal/D, var/datum/gas_mixture/flush_gas)
 	gas = flush_gas// transfer gas resv. into holder object -- let's be explicit about the data this proc consumes, please.
-	var/stuff = D.contents - D.component_parts
+	var/stuff = D.get_contained_external_atoms()
 	//Check for any living mobs trigger hasmob.
 	//hasmob effects whether the package goes to cargo or its tagged destination.
 	hasmob = length(check_mob(stuff))
@@ -126,10 +126,10 @@
 
 	var/mob/living/U = user
 
-	if (U.stat || U.last_special <= world.time)
+	if (U.stat || U.is_on_special_ability_cooldown())
 		return
 
-	U.last_special = world.time+100
+	U.set_special_ability_cooldown(10 SECONDS)
 
 	var/turf/our_turf = get_turf(src)
 	if (our_turf)

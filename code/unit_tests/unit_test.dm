@@ -56,6 +56,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	var/disabled = 0    // If we want to keep a unit test in the codebase but not run it for some reason.
 	var/async = 0       // If the check can be left to do it's own thing, you must define a check_result() proc if you use this.
 	var/reported = 0	// If it's reported a success or failure.  Any tests that have not are assumed to be failures.
+	var/priority = 0    // Unit tests with higher priorities run first. UTs with the same priority are sorted alphabetically.
 	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
 	var/static/safe_landmark
@@ -153,9 +154,9 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 /proc/load_unit_test_changes()
 /*
 	//This takes about 60 seconds to run during unit testing and is only used for the ZAS vacume check on The Asteroid.
-	if(config.generate_map != 1)
+	if(config.roundstart_level_generation != 1)
 		log_unit_test("Overiding Configuration option for Asteroid Generation to ENABLED")
-		config.generate_map = 1	// The default map requires it, the example config doesn't have this enabled.
+		config.roundstart_level_generation = 1	// The default map requires it, the example config doesn't have this enabled.
  */
 
 /proc/get_test_datums()

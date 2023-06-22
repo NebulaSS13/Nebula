@@ -69,7 +69,7 @@
 		selected_report.rename_file()
 	if(program.computer.store_file(selected_report))
 		saved_report = selected_report
-		selected_report = saved_report.clone()
+		selected_report = saved_report.Clone()
 		to_chat(user, "The report has been saved as '[saved_report.filename].[saved_report.filetype]'.")
 	else
 		to_chat(user, "Error storing file. Please check your hard drive.")
@@ -96,7 +96,7 @@
 				return
 			can_view_only = 0
 		saved_report = chosen_report
-		selected_report = chosen_report.clone()
+		selected_report = chosen_report.Clone()
 		return 1
 
 /datum/nano_module/program/reports/Topic(href, href_list)
@@ -174,7 +174,7 @@
 		var/datum/computer_network/net = program.computer.get_network()
 		for(var/datum/computer_file/report/report in net.fetch_reports(get_access(user), user))
 			if(report.uid == uid)
-				selected_report = report.clone()
+				selected_report = report.Clone()
 				can_view_only = 0
 				switch_state(REPORTS_VIEW)
 				return 1

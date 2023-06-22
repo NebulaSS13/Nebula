@@ -163,13 +163,16 @@
 
 /obj/item/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
+	max_health = null //Buildable variant may take damage
 	material = /decl/material/solid/metal/steel
 
 /decl/stock_part_preset/terminal_connect
 	expected_part_type = /obj/item/stock_parts/power/terminal
 
-/decl/stock_part_preset/terminal_connect/apply(obj/machinery/machine, var/obj/item/stock_parts/power/terminal/part)
-	var/obj/machinery/power/terminal/term = locate() in machine.loc
+/decl/stock_part_preset/terminal_connect/apply(obj/machinery/machine, var/obj/item/stock_parts/power/terminal/part, var/turf/picked_turf)
+	if(!picked_turf)
+		picked_turf = machine.loc
+	var/obj/machinery/power/terminal/term = locate() in picked_turf
 	if(istype(term) && !term.master)
 		part.set_terminal(machine, term)
 
@@ -179,3 +182,10 @@
 /decl/stock_part_preset/terminal_setup/apply(obj/machinery/machine, var/obj/item/stock_parts/power/terminal/part)
 	if(isturf(machine.loc))
 		part.make_terminal(machine)
+
+//Offset terminals towards the owner's facing direction
+/decl/stock_part_preset/terminal_connect/offset_dir/apply(obj/machinery/machine, obj/item/stock_parts/power/terminal/part, turf/picked_turf)
+	. = ..(machine, part, get_step(machine.loc, machine.dir))
+
+/decl/stock_part_preset/terminal_setup/offset_dir/apply(obj/machinery/machine, obj/item/stock_parts/power/terminal/part)
+	. = ..(machine, part)

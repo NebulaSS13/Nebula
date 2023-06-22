@@ -20,5 +20,5 @@
 	var/old_invisibility = invisibility
 	if(old_invisibility != new_invisibility)
 		invisibility = new_invisibility
-		events_repository.raise_event(/decl/observ/invisibility_set, src, old_invisibility, new_invisibility)
+		RAISE_EVENT(/decl/observ/invisibility_set, src, old_invisibility, new_invisibility)
 		update_above()

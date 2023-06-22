@@ -83,7 +83,8 @@
 
 	if(opacity)
 		updateVisibility(src)
-
+	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
+		QDEL_NULL(atom_codex_ref)
 	return ..()
 
 // Called if an atom is deleted before it initializes. Only call Destroy in this if you know what you're doing.
@@ -105,6 +106,10 @@
 	// Changing this behavior will almost certainly break power; update accordingly.
 	if (!ml && loc)
 		loc.Entered(src, null)
+
+/atom/movable/EarlyDestroy(force = FALSE)
+	loc = null // should NOT use forceMove, in order to avoid events
+	return ..()
 
 /atom/movable/Destroy()
 	// Clear this up early so it doesn't complain about events being disposed while it's listening.
@@ -132,3 +137,35 @@
 
 	vis_locs = null //clears this atom out of all vis_contents
 	clear_vis_contents(src)
+
+/atom/GetCloneArgs()
+	return list(loc)
+
+/atom/PopulateClone(atom/clone)
+	//Not entirely sure about icon stuff. Some legacy things would need it copied, but not more recently coded atoms..
+	clone.appearance = appearance
+	clone.set_invisibility(invisibility)
+
+	clone.SetName(name)
+	clone.set_density(density)
+	clone.set_opacity(opacity)
+	clone.set_gender(gender, FALSE)
+	clone.set_dir(dir)
+
+	clone.blood_DNA    = listDeepClone(blood_DNA, TRUE)
+	clone.was_bloodied = was_bloodied
+	clone.blood_color  = blood_color
+	clone.germ_level   = germ_level
+	clone.temperature  = temperature
+
+	//Setup reagents
+	QDEL_NULL(clone.reagents)
+	clone.reagents = reagents?.Clone()
+	if(clone.reagents)
+		clone.reagents.set_holder(clone) //Holder MUST be set after cloning reagents
+	return clone
+
+/atom/movable/PopulateClone(atom/movable/clone)
+	clone = ..()
+	clone.anchored = anchored
+	return clone

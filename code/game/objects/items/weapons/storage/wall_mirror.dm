@@ -71,7 +71,9 @@
 	..()
 
 /obj/structure/mirror/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	use_mirror(user)
+	return TRUE
 
 /obj/structure/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
 	if(shattered)

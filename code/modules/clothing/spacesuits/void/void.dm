@@ -6,13 +6,13 @@
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 	heat_protection = SLOT_HEAD
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
@@ -26,13 +26,13 @@
 	w_class = ITEM_SIZE_HUGE//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit)
 	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
@@ -175,7 +175,7 @@ else if(##equipment_var) {\
 			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [head].</span>")
 			return
 		if(H.equip_to_slot_if_possible(helmet, slot_head_str))
-			helmet.pickup(H)
+			helmet.on_picked_up(H)
 			helmet.canremove = 0
 			playsound(loc, helmet_deploy_sound, 30)
 			to_chat(H, "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>")
@@ -197,8 +197,8 @@ else if(##equipment_var) {\
 
 	if(!istype(H)) return
 	if(H.incapacitated()) return
-	var/slot = H.get_inventory_slot(src)
-	if(slot != slot_wear_suit_str && !(slot in H.held_item_slots))
+	var/slot = H.get_equipped_slot_for_item(src)
+	if(slot != slot_wear_suit_str && !(slot in H.get_held_item_slots()))
 		return// let them eject those tanks when they're in hand or stuff for ease of use
 
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
@@ -216,7 +216,7 @@ else if(##equipment_var) {\
 		return ..()
 
 	if(IS_SCREWDRIVER(W))
-		if(user.get_inventory_slot(src) == slot_wear_suit_str)//maybe I should make this into a proc?
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)//maybe I should make this into a proc?
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 
@@ -241,39 +241,39 @@ else if(##equipment_var) {\
 			to_chat(user, "\The [src] does not have anything installed.")
 		return
 	else if(istype(W,/obj/item/clothing/head/helmet/space))
-		if(user.get_inventory_slot(src) == slot_wear_suit_str)
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(helmet)
 			to_chat(user, "\The [src] already has a helmet installed.")
 		else
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "You attach \the [W] to \the [src]'s helmet mount.")
 			src.helmet = W
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
-		if(user.get_inventory_slot(src) == slot_wear_suit_str)
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(boots)
 			to_chat(user, "\The [src] already has magboots installed.")
 		else
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "You attach \the [W] to \the [src]'s boot mounts.")
 			boots = W
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/tank))
-		if(user.get_inventory_slot(src) == slot_wear_suit_str)
+		if(user.get_equipped_slot_for_item(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(tank)
 			to_chat(user, "\The [src] already has an airtank installed.")
 		else
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
 			tank = W

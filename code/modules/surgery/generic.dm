@@ -225,7 +225,7 @@
 		return affected
 
 /decl/surgery_step/generic/amputate/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
-	var/target_zone = user.zone_sel.selecting
+	var/target_zone = user.get_target_zone()
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(BP_IS_PROSTHETIC(affected))
 		return SURGERY_SKILLS_ROBOTIC
@@ -268,7 +268,7 @@
 
 /decl/surgery_step/generic/amputate/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	if(user.unEquip(tool, affected))
+	if(user.try_unequip(tool, affected))
 		user.visible_message(
 			SPAN_DANGER("\The [user] manages to get \the [tool] stuck in \the [target]'s [affected.name]!"), \
 			SPAN_DANGER("You manage to get \the [tool] stuck in \the [target]'s [affected.name]!"))

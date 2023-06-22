@@ -77,7 +77,7 @@
 
 /mob/living/carbon/alien/ascent_nymph/drop_item()
 	var/item = holding_item
-	if(item && unEquip(item))
+	if(item && try_unequip(item))
 		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [item]."))
 		return TRUE
 	. = ..()

@@ -26,7 +26,7 @@
 		if(disk)
 			to_chat(user, SPAN_WARNING("\The [src] already has a disk inserted."))
 			return
-		if(user.unEquip(I, src))
+		if(user.try_unequip(I, src))
 			visible_message("\The [user] slots \the [I] into \the [src].")
 			disk = I
 			return

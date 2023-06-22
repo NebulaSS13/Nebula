@@ -17,7 +17,7 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/plastic
 
 /obj/item/storage/firstaid/empty
@@ -110,7 +110,7 @@
 		/obj/item/storage/pill_bottle/burn_meds,
 		/obj/item/storage/pill_bottle/oxygen,
 		/obj/item/storage/pill_bottle/antitoxins,
-		/obj/item/storage/pill_bottle/painkillers,
+		/obj/item/storage/pill_bottle/strong_painkillers,
 		/obj/item/storage/pill_bottle/antibiotics,
 		/obj/item/stack/medical/splint,
 		)

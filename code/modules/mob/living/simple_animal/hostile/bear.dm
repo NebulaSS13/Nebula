@@ -98,7 +98,7 @@
 		stance = HOSTILE_STANCE_ALERT
 		stance_step = 6
 		target_mob = user
-	. = ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/bear/FindTarget()
 	. = ..()

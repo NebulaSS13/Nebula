@@ -5,7 +5,8 @@
 	gender = PLURAL
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
-	part_flags = PART_FLAG_QDEL | PART_FLAG_NODAMAGE
+	part_flags = PART_FLAG_QDEL
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/list/materials
 
 /obj/item/stock_parts/building_material/Destroy()

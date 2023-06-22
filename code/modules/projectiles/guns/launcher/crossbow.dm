@@ -61,18 +61,18 @@
 	var/draw_time = 20						// Time needed to draw the bow back by one "tension"
 
 /obj/item/gun/launcher/crossbow/toggle_safety(var/mob/user)
-	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
+	to_chat(user, SPAN_WARNING("There's no safety on \the [src]!"))
 
 /obj/item/gun/launcher/crossbow/update_release_force()
 	release_force = tension*release_speed
 
-/obj/item/gun/launcher/crossbow/consume_next_projectile(mob/user=null)
-	if(tension <= 0)
-		to_chat(user, "<span class='warning'>\The [src] is not drawn back!</span>")
+/obj/item/gun/launcher/crossbow/consume_next_projectile(atom/movable/firer)
+	if(tension <= 0 && isliving(firer))
+		to_chat(firer, SPAN_WARNING("\The [src] is not drawn back!"))
 		return null
 	return bolt
 
-/obj/item/gun/launcher/crossbow/handle_post_fire(mob/user, atom/target)
+/obj/item/gun/launcher/crossbow/handle_post_fire(atom/movable/firer, atom/target)
 	bolt = null
 	tension = 0
 	update_icon()
@@ -103,12 +103,12 @@
 		return
 
 	current_user = user
-	user.visible_message("[user] begins to draw back the string of [src].","<span class='notice'>You begin to draw back the string of [src].</span>")
+	user.visible_message("[user] begins to draw back the string of [src].",SPAN_NOTICE("You begin to draw back the string of [src]."))
 	tension = 1
 
 	while(bolt && tension && loc == current_user)
 		if(!do_after(user, draw_time, src)) //crossbow strings don't just magically pull back on their own.
-			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
+			user.visible_message("[usr] stops drawing and relaxes the string of [src].",SPAN_WARNING("You stop drawing back and relax the string of [src]."))
 			tension = 0
 			update_icon()
 			return
@@ -125,7 +125,7 @@
 			to_chat(usr, "[src] clunks as you draw the string to its maximum tension!")
 			return
 
-		user.visible_message("[usr] draws back the string of [src]!","<span class='notice'>You continue drawing back the string of [src]!</span>")
+		user.visible_message("[usr] draws back the string of [src]!",SPAN_NOTICE("You continue drawing back the string of [src]!"))
 
 /obj/item/gun/launcher/crossbow/proc/increase_tension(var/mob/user)
 
@@ -134,10 +134,10 @@
 
 
 /obj/item/gun/launcher/crossbow/attackby(obj/item/W, mob/user)
-	
+
 	if(istype(W, /obj/item/rcd))
 		var/obj/item/rcd/rcd = W
-		if(rcd.crafting && user.unEquip(rcd) && user.unEquip(src))
+		if(rcd.crafting && user.try_unequip(rcd) && user.try_unequip(src))
 			new /obj/item/gun/launcher/crossbow/rapidcrossbowdevice(get_turf(src))
 			qdel(rcd)
 			qdel_self()
@@ -146,7 +146,7 @@
 		return
 
 	if(!bolt)
-		if (istype(W,/obj/item/arrow) && user.unEquip(W, src))
+		if (istype(W,/obj/item/arrow) && user.try_unequip(W, src))
 			bolt = W
 			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
 			update_icon()
@@ -164,22 +164,22 @@
 
 	if(istype(W, /obj/item/cell))
 		if(!cell)
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			cell = W
-			to_chat(user, "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>")
+			to_chat(user, SPAN_NOTICE("You jam [cell] into [src] and wire it to the firing coil."))
 			superheat_rod(user)
 		else
-			to_chat(user, "<span class='notice'>[src] already has a cell installed.</span>")
+			to_chat(user, SPAN_NOTICE("[src] already has a cell installed."))
 
 	else if(IS_SCREWDRIVER(W))
 		if(cell)
 			var/obj/item/C = cell
 			C.dropInto(user.loc)
-			to_chat(user, "<span class='notice'>You jimmy [cell] out of [src] with [W].</span>")
+			to_chat(user, SPAN_NOTICE("You jimmy [cell] out of [src] with [W]."))
 			cell = null
 		else
-			to_chat(user, "<span class='notice'>[src] doesn't have a cell installed.</span>")
+			to_chat(user, SPAN_WARNING("[src] doesn't have a cell installed."))
 
 	else
 		..()
@@ -190,7 +190,7 @@
 	if(bolt.throwforce >= 15) return
 	if(!istype(bolt,/obj/item/arrow/rod)) return
 
-	to_chat(user, "<span class='notice'>[bolt] plinks and crackles as it begins to glow red-hot.</span>")
+	to_chat(user, SPAN_NOTICE("[bolt] plinks and crackles as it begins to glow red-hot."))
 	bolt.throwforce = 15
 	bolt.icon_state = "metal-rod-superheated"
 	cell.use(500)
@@ -228,10 +228,10 @@
 	if(stored_matter >= boltcost && !bolt)
 		bolt = new/obj/item/arrow/rapidcrossbowdevice(src)
 		stored_matter -= boltcost
-		to_chat(user, "<span class='notice'>The RCD flashforges a new bolt!</span>")
+		to_chat(user, SPAN_NOTICE("The RCD flashforges a new bolt!"))
 		queue_icon_update()
 	else
-		to_chat(user, "<span class='warning'>The \'Low Ammo\' light on the device blinks yellow.</span>")
+		to_chat(user, SPAN_WARNING("The \'Low Ammo\' light on the device blinks yellow."))
 		flick("[icon_state]-empty", src)
 
 
@@ -248,23 +248,23 @@
 	if(istype(W, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/cartridge = W
 		if((stored_matter + cartridge.remaining) > max_stored_matter)
-			to_chat(user, "<span class='notice'>The RCD can't hold that many additional matter-units.</span>")
+			to_chat(user, SPAN_NOTICE("The RCD can't hold that many additional matter-units."))
 			return
 		stored_matter += cartridge.remaining
 		qdel(W)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
+		to_chat(user, SPAN_NOTICE("The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
 		update_icon()
 
 	if(istype(W, /obj/item/arrow/rapidcrossbowdevice))
 		var/obj/item/arrow/rapidcrossbowdevice/A = W
 		if((stored_matter + 10) > max_stored_matter)
-			to_chat(user, "<span class='notice'>Unable to reclaim flashforged bolt. The RCD can't hold that many additional matter-units.</span>")
+			to_chat(user, SPAN_NOTICE("Unable to reclaim flashforged bolt. The RCD can't hold that many additional matter-units."))
 			return
 		stored_matter += 10
 		qdel(A)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>Flashforged bolt reclaimed. The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
+		to_chat(user, SPAN_NOTICE("Flashforged bolt reclaimed. The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
 		update_icon()
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/on_update_icon()

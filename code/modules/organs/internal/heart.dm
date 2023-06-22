@@ -35,7 +35,7 @@
 	..()
 
 /obj/item/organ/internal/heart/proc/handle_pulse()
-	if(BP_IS_PROSTHETIC(src))
+	if(BP_IS_PROSTHETIC(src) || !owner || owner.vital_organ_missing_time)
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
 
@@ -186,10 +186,7 @@
 			owner.drip(blood_max)
 
 /obj/item/organ/internal/heart/proc/is_working()
-	if(!is_usable())
-		return FALSE
-
-	return pulse > PULSE_NONE || BP_IS_PROSTHETIC(src) || (owner.status_flags & FAKEDEATH)
+	return is_usable() && (pulse > PULSE_NONE || BP_IS_PROSTHETIC(src) || (owner.status_flags & FAKEDEATH))
 
 /obj/item/organ/internal/heart/listen()
 	if(BP_IS_PROSTHETIC(src) && is_working())

@@ -1,9 +1,9 @@
-/obj/turbolift_map_holder/exodus
+/obj/abstract/turbolift_spawner/exodus
 	depth = 2
 	lift_size_x = 3
 	lift_size_y = 3
 
-/obj/turbolift_map_holder/exodus/sec
+/obj/abstract/turbolift_spawner/exodus/sec
 	name = "Exodus turbolift map placeholder - Securiy"
 	dir = EAST
 
@@ -12,7 +12,7 @@
 		/area/turbolift/security_station
 		)
 
-/obj/turbolift_map_holder/exodus/research
+/obj/abstract/turbolift_spawner/exodus/research
 	name = "Exodus turbolift map placeholder - Research"
 	dir = WEST
 
@@ -21,7 +21,7 @@
 		/area/turbolift/research_station
 		)
 
-/obj/turbolift_map_holder/exodus/engineering
+/obj/abstract/turbolift_spawner/exodus/engineering
 	name = "Exodus turbolift map placeholder - Engineering"
 	icon = 'icons/obj/turbolift_preview_3x3.dmi'
 	dir = EAST
@@ -33,7 +33,7 @@
 		/area/turbolift/engineering_station
 		)
 
-/obj/turbolift_map_holder/exodus/cargo
+/obj/abstract/turbolift_spawner/exodus/cargo
 	name = "Exodus turbolift map placeholder - Cargo"
 
 	areas_to_use = list(

@@ -90,7 +90,7 @@
 
 /obj/structure/kitchenspike/attack_hand(var/mob/user)
 
-	if(!occupant)
+	if(!occupant || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
 
 	if(occupant_state == CARCASS_FRESH)
@@ -102,7 +102,7 @@
 		update_icon()
 	else
 		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
-		return
+	return TRUE
 
 /obj/structure/kitchenspike/receive_mouse_drop(var/atom/dropping, var/mob/user)
 	. = ..()

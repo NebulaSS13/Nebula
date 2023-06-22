@@ -121,22 +121,20 @@
 
 
 /obj/structure/sign/poster/attack_hand(mob/user)
-
-	if(ruined)
-		return
-
-	if(alert("Do I want to rip the poster from the wall?","You think...","Yes","No") == "Yes")
-
-		if(ruined || !user.Adjacent(src))
-			return
-
-		visible_message("<span class='warning'>\The [user] rips \the [src] in a single, decisive motion!</span>" )
-		playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
-		ruined = 1
-		icon_state = "poster_ripped"
-		SetName("ripped poster")
-		desc = "You can't make out anything from the poster's original print. It's ruined."
-		add_fingerprint(user)
+	if(ruined || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	if(!alert("Do I want to rip the poster from the wall?","You think...","Yes","No") == "Yes")
+		return TRUE
+	if(ruined || !CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_GRIP))
+		return TRUE
+	visible_message("<span class='warning'>\The [user] rips \the [src] in a single, decisive motion!</span>" )
+	playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
+	ruined = TRUE
+	icon_state = "poster_ripped"
+	SetName("ripped poster")
+	desc = "You can't make out anything from the poster's original print. It's ruined."
+	add_fingerprint(user)
+	return TRUE
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
 	new /obj/item/contraband/poster(newloc, null, poster_type)

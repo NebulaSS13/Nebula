@@ -11,7 +11,7 @@
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/singletooldrop1.ogg'
 
 	var/handle_color
@@ -44,7 +44,7 @@
 		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")
-		C.unEquip(cuffs)
+		C.try_unequip(cuffs)
 		qdel(cuffs)
 		if(C.buckled && C.buckled.buckle_require_restraints)
 			C.buckled.unbuckle_mob()

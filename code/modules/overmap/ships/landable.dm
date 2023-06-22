@@ -9,6 +9,7 @@
 	var/use_mapped_z_levels = FALSE                     // If true, it will use the z level block on which it's mapped as the "Open Space" block; if false it creates a new block for that.
 	                                                    // If you use this, use /obj/effect/shuttle_landmark/ship as the landmark (set the landmark tag to match on the shuttle; no other setup needed)
 	var/status = SHIP_STATUS_LANDED
+	var/level_type = /datum/level_data/space
 	icon_state = "shuttle"
 	moving_state = "shuttle_moving"
 
@@ -52,7 +53,7 @@
 	if(!child_shuttle || !istype(child_shuttle))
 		return
 	if(child_shuttle.current_location.flags & SLANDMARK_FLAG_DISCONNECTED) // Keep an eye on the distance between the shuttle and the sector if we aren't fully docked.
-		var/obj/effect/overmap/visitable/ship/landable/encounter = global.overmap_sectors["[child_shuttle.current_location.z]"]
+		var/obj/effect/overmap/visitable/ship/landable/encounter = global.overmap_sectors[num2text(child_shuttle.current_location.z)]
 		if((get_dist(src, encounter) > min(child_shuttle.range, 1))) // Some leeway so 0 range shuttles are still able to chase.
 			child_shuttle.attempt_force_move(landmark)
 		if(istype(encounter))
@@ -63,11 +64,8 @@
 /obj/effect/overmap/visitable/ship/landable/find_z_levels()
 	if(!use_mapped_z_levels)
 		for(var/i = 0 to multiz)
-			INCREMENT_WORLD_Z_SIZE
+			SSmapping.increment_world_z_size(level_type)
 			map_z += world.maxz
-
-		if(multiz)
-			new /obj/abstract/map_data(locate(1, 1, world.maxz), (multiz + 1))
 	else
 		..()
 
@@ -102,7 +100,7 @@
 	// Finish "open space" z block setup
 	if(!use_mapped_z_levels)
 		var/top_z = map_z[map_z.len]
-		var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), top_z)
+		var/turf/center_loc = WORLD_CENTER_TURF(top_z)
 		landmark = new (center_loc, shuttle)
 		add_landmark(landmark) // we don't restrict it but it does a more strict check in is_valid anyway
 	else
@@ -143,7 +141,7 @@
 	. = ..()
 
 /obj/effect/shuttle_landmark/ship/Destroy()
-	var/obj/effect/overmap/visitable/ship/landable/ship = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/ship/landable/ship = global.overmap_sectors[num2text(z)]
 	if(istype(ship) && ship.landmark == src)
 		ship.landmark = null
 	. = ..()
@@ -207,7 +205,7 @@
 	on_landing(from, into)
 
 /obj/effect/overmap/visitable/ship/landable/proc/on_landing(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
-	var/obj/effect/overmap/visitable/target = global.overmap_sectors["[into.z]"]
+	var/obj/effect/overmap/visitable/target = global.overmap_sectors[num2text(into.z)]
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
 	if(into.landmark_tag == shuttle_datum.motherdock) // If our motherdock is a landable ship, it won't be found properly here so we need to find it manually.
 		for(var/obj/effect/overmap/visitable/ship/landable/landable in SSshuttle.ships)
@@ -235,7 +233,7 @@
 			return "Docked with an unknown object."
 		if(SHIP_STATUS_ENCOUNTER)
 			var/datum/shuttle/autodock/overmap/child_shuttle = SSshuttle.shuttles[shuttle]
-			var/obj/effect/overmap/visitable/location = global.overmap_sectors["[child_shuttle.current_location.z]"]
+			var/obj/effect/overmap/visitable/location = global.overmap_sectors[num2text(child_shuttle.current_location.z)]
 			return "Maneuvering nearby \the [location.name]."
 		if(SHIP_STATUS_TRANSIT)
 			return "Maneuvering under secondary thrust."

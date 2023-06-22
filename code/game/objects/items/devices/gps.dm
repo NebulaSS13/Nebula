@@ -123,9 +123,9 @@ var/global/list/all_gps_units = list()
 
 	var/list/adding_sites
 	if(long_range)
-		adding_sites = (global.using_map.station_levels|global.using_map.contact_levels|global.using_map.player_levels)
+		adding_sites = (SSmapping.station_levels|SSmapping.contact_levels|SSmapping.player_levels)
 	else
-		adding_sites = GetConnectedZlevels(origin.z)
+		adding_sites = SSmapping.get_connected_levels(origin.z)
 
 	if(LAZYLEN(adding_sites))
 		LAZYDISTINCTADD(reachable_z_levels, adding_sites)
@@ -247,14 +247,14 @@ var/global/list/all_gps_units = list()
 	.["curr_x"] = curr.x
 	.["curr_y"] = curr.y
 	.["curr_z"] = curr.z
-	.["curr_z_name"] = strip_improper(using_map.get_zlevel_name(curr.z))
+	.["curr_z_name"] = strip_improper(SSmapping.get_gps_level_name(curr.z))
 	.["local_mode"] = local_mode
 
 	var/z_level_detection
 	if(long_range)
-		z_level_detection = (global.using_map.station_levels|global.using_map.contact_levels|global.using_map.player_levels)
+		z_level_detection = (SSmapping.station_levels|SSmapping.contact_levels|SSmapping.player_levels)
 	else
-		z_level_detection = GetConnectedZlevels(curr.z)
+		z_level_detection = SSmapping.get_connected_levels(curr.z)
 	.["z_level_detection"] = z_level_detection
 
 	var/list/gps_list = list()
@@ -276,7 +276,7 @@ var/global/list/all_gps_units = list()
 		gps_data["area_name"] = strip_improper(A.name)
 
 		var/turf/T = get_turf(G)
-		gps_data["z_name"] =    strip_improper(using_map.get_zlevel_name(T.z))
+		gps_data["z_name"] =    strip_improper(SSmapping.get_gps_level_name(T.z))
 		gps_data["direction"] = get_compass_direction_string(curr, T)
 		gps_data["degrees"] =   round(Get_Angle(curr,T))
 		gps_data["distX"] =     T.x - curr.x

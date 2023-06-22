@@ -53,15 +53,27 @@
 		return
 
 	var/turf/T = get_turf(src)
-	if(T)
-		var/footsound = T.get_footstep_sound(src)
-		if(footsound)
-			var/range = -(world.view - 2)
-			var/volume = 70
-			if(MOVING_DELIBERATELY(src))
-				volume -= 45
-				range -= 0.333
-			if(!get_equipped_item(slot_shoes_str))
-				volume -= 60
-				range -= 0.333
-			playsound(T, footsound, volume, 1, range)
+	if(!T)
+		return
+
+	var/footsound = T.get_footstep_sound(src)
+	if(!footsound)
+		return
+
+	var/range = -(world.view - 2)
+	var/volume = 70
+	if(MOVING_DELIBERATELY(src))
+		volume -= 45
+		range -= 0.333
+	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
+	if(istype(shoes))
+		volume *= shoes.footstep_volume_mod
+		range  *= shoes.footstep_range_mod
+	else if(!shoes)
+		volume -= 60
+		range -= 0.333
+
+	range = round(range)
+	volume = round(volume)
+	if(volume > 0 && range > 0)
+		playsound(T, footsound, volume, 1, range)

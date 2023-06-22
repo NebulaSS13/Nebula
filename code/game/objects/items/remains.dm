@@ -36,11 +36,14 @@
 	icon_state = "lizard"
 
 /obj/item/remains/attack_hand(mob/user)
-	to_chat(user, "<span class='notice'>[src] sinks together into a pile of ash.</span>")
+	SHOULD_CALL_PARENT(FALSE)
+	to_chat(user, SPAN_NOTICE("\The [src] sinks together into a pile of ash."))
 	var/turf/simulated/floor/F = get_turf(src)
 	if (istype(F))
 		new /obj/effect/decal/cleanable/ash(F)
 	qdel(src)
+	return TRUE
 
 /obj/item/remains/robot/attack_hand(mob/user)
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	return TRUE

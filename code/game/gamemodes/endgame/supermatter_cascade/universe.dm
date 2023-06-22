@@ -60,7 +60,7 @@ var/global/universe_has_ended = 0
 
 	var/spawned_exit = FALSE
 	if(length(global.endgame_exits))
-		spawned_exit = new /obj/singularity/narsie/large/exit(pick(global.endgame_exits))
+		spawned_exit = new /obj/effect/wormhole_exit(pick(global.endgame_exits))
 
 	addtimer(CALLBACK(src, /datum/universal_state/supermatter_cascade/proc/announce_end_of_universe, spawned_exit), rand(30, 60) SECONDS)
 	addtimer(CALLBACK(src, /datum/universal_state/supermatter_cascade/proc/finalize_end_of_universe), 5 MINUTES)

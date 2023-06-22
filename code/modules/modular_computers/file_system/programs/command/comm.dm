@@ -20,11 +20,10 @@
 	category = PROG_COMMAND
 	var/datum/comm_message_listener/message_core = new
 
-/datum/computer_file/program/comm/clone()
-	var/datum/computer_file/program/comm/temp = ..()
-	temp.message_core.messages = null
-	temp.message_core.messages = message_core.messages.Copy()
-	return temp
+/datum/computer_file/program/comm/PopulateClone(datum/computer_file/program/comm/clone)
+	clone = ..()
+	clone.message_core = message_core.Clone()
+	return clone
 
 /datum/nano_module/program/comm
 	name = "Command and Communications Program"
@@ -166,7 +165,7 @@
 				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
 				if(!input || !can_still_topic() || filter_block_message(usr, input))
 					return 1
-				var/affected_zlevels = GetConnectedZlevels(get_host_z())
+				var/affected_zlevels = SSmapping.get_connected_levels(get_host_z())
 				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
@@ -319,6 +318,11 @@ var/global/last_message_id = 0
 /datum/comm_message_listener/proc/Remove(var/list/message)
 	messages -= list(message)
 
+/datum/comm_message_listener/PopulateClone(datum/comm_message_listener/clone)
+	clone = ..()
+	clone.messages = listDeepClone(messages)
+	return clone
+
 /proc/post_status(var/command, var/data1, var/data2)
 
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
@@ -326,7 +330,6 @@ var/global/last_message_id = 0
 	if(!frequency) return
 
 	var/datum/signal/status_signal = new
-	status_signal.transmission_method = 1
 	status_signal.data["command"] = command
 
 	switch(command)

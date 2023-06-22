@@ -10,7 +10,7 @@
 	desc              = "A wrapped package."
 	icon              = 'icons/obj/items/storage/deliverypackage.dmi'
 	icon_state        = "parcel"
-	item_flags        = ITEM_FLAG_HOLLOW
+	obj_flags         = OBJ_FLAG_HOLLOW
 	material          = /decl/material/solid/paper
 	attack_verb       = list("delivered a hit", "expedited on", "shipped at", "went postal on")
 	base_parry_chance = 40 //Boxes tend to be good at parrying
@@ -136,7 +136,7 @@
 	//And then put it in the user's hands if it makes sense
 	if(ismob(AM.loc))
 		var/mob/M = AM.loc
-		if(!M.unEquip(AM, src))
+		if(!M.try_unequip(AM, src))
 			CRASH("Tried to make a parcel from an item in a mob's inventory that cannot be unequipped. Should have been filtered out before. [log_info_line(src)]")
 		if(M == user)
 			user.put_in_hands(src)
@@ -173,9 +173,9 @@
 	unwrap(user)
 
 /obj/item/parcel/attack_hand(mob/user)
-	//Prevent picking up furnitures and human mobs
-	if(w_class < ITEM_SIZE_NO_CONTAINER)
-		. = ..()
+	if(w_class >= ITEM_SIZE_NO_CONTAINER)
+		return TRUE
+	return ..()
 
 /obj/item/parcel/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/destTagger))
@@ -241,7 +241,7 @@
 		var/list/cuttings = material.place_cuttings(get_turf(src), matter[material.type])
 		//Make the bits of paper the right color
 		for(var/obj/item/C in cuttings)
-			C.applies_material_colour = FALSE //Prevents the update_icon code from recoloring this white
+			C.material_alteration &= ~(MAT_FLAG_ALTERATION_COLOR) //Prevents the update_icon code from recoloring this white
 			C.set_color(trash_color)
 	. = ..()
 

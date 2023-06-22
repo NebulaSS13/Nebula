@@ -107,7 +107,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 
 		var/colour_name = replace_colours[colour] || colour
 		if(colour_name in wireColourNames)
-			colour_name = wireColourNames[colour_name] 
+			colour_name = wireColourNames[colour_name]
 
 		html += "<tr>"
 		html += "<td[row_options1]><font color='[colour_name]'>&#9724;</font>[capitalize(colour_name)]</td>"
@@ -180,7 +180,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 				// Attach
 				else
 					if(istype(I, /obj/item/assembly/signaler))
-						if(L.unEquip(I))
+						if(L.try_unequip(I))
 							Attach(colour, I)
 					else
 						to_chat(L, "<span class='error'>You need a remote signaller!</span>")

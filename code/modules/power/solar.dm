@@ -173,7 +173,7 @@ var/global/list/solars_list = list()
 	// On planets, we take fewer steps because the light is mostly up
 	// Also, many planets barely have any spots with enough clear space around
 	if(isturf(loc))
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[loc.z]"]
+		var/obj/effect/overmap/visitable/sector/planetoid/E = global.overmap_sectors[num2text(loc.z)]
 		if(istype(E))
 			steps = 5
 
@@ -210,10 +210,6 @@ var/global/list/solars_list = list()
 	var/tracker = 0
 	var/glass_type
 	var/glass_reinforced
-
-/obj/item/solar_assembly/attack_hand(var/mob/user)
-	if(!anchored && isturf(loc)) // You can't pick it up
-		..()
 
 // Give back the glass type we were supplied with
 /obj/item/solar_assembly/proc/give_glass()

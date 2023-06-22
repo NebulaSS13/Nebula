@@ -18,7 +18,7 @@
 // Checks if a limb could theoretically be removed.
 // Note that this does not currently bother checking if a child or internal organ is vital.
 /obj/item/organ/external/proc/can_remove_modular_limb(var/mob/living/carbon/human/user)
-	if(vital || !(limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+	if((owner?.species && is_vital_to_owner()) || !(limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
 		return FALSE
 	var/bodypart_cat = get_modular_limb_category()
 	if(bodypart_cat == MODULAR_BODYPART_CYBERNETIC)
@@ -55,22 +55,20 @@
 	. =  damage >= min_broken_damage || (status & ORGAN_BROKEN) // can't use is_broken() as the limb has ORGAN_CUT_AWAY
 
 // Human mob procs:
-// Checks the organ list for limbs meeting a predicate. Way overengineered for such a limited use 
+// Checks the organ list for limbs meeting a predicate. Way overengineered for such a limited use
 // case but I can see it being expanded in the future if meat limbs or doona limbs use it.
 /mob/living/carbon/human/proc/get_modular_limbs(var/return_first_found = FALSE, var/validate_proc)
-	for(var/bp in get_external_organs())
-		var/obj/item/organ/external/E = bp
-		if(!validate_proc || call(E, validate_proc)(src) > MODULAR_BODYPART_INVALID)
-			LAZYADD(., E)
+	for(var/obj/item/organ/external/limb as anything in get_external_organs())
+		if(!validate_proc || call(limb, validate_proc)(src) > MODULAR_BODYPART_INVALID)
+			LAZYADD(., limb)
 			if(return_first_found)
-				return 
+				return
 	// Prune children so we can't remove every individual component of an entire prosthetic arm
 	// piece by piece. Technically a circular dependency here would remove the limb entirely but
 	// if there's a parent whose child is also its parent, there's something wrong regardless.
-	for(var/bp in .)
-		var/obj/item/organ/external/E = bp
-		if(length(E.children))
-			. -= E.children
+	for(var/obj/item/organ/external/limb as anything in .)
+		if(length(limb.children))
+			. -= limb.children
 
 // Called in robotize(), replaced() and removed() to update our modular limb verbs.
 /mob/living/carbon/human/proc/refresh_modular_limb_verbs()
@@ -85,7 +83,7 @@
 
 // Proc helper for attachment verb.
 /mob/living/carbon/human/proc/check_can_attach_modular_limb(var/obj/item/organ/external/E)
-	if(world.time < last_special + (2 SECONDS) || get_active_hand() != E)
+	if(is_on_special_ability_cooldown() || get_active_hand() != E)
 		return FALSE
 	if(incapacitated() || restrained())
 		to_chat(src, SPAN_WARNING("You can't do that in your current state!"))
@@ -116,7 +114,7 @@
 
 // Proc helper for detachment verb.
 /mob/living/carbon/human/proc/check_can_detach_modular_limb(var/obj/item/organ/external/E)
-	if(world.time < last_special + (2 SECONDS))
+	if(is_on_special_ability_cooldown())
 		return FALSE
 	if(incapacitated() || restrained())
 		to_chat(src, SPAN_WARNING("You can't do that in your current state!"))
@@ -150,7 +148,7 @@
 	if(!check_can_attach_modular_limb(E))
 		return FALSE
 
-	last_special = world.time
+	set_special_ability_cooldown(2 SECONDS)
 	drop_from_inventory(E)
 	src.add_organ(E)
 
@@ -184,7 +182,7 @@
 	if(!check_can_detach_modular_limb(E))
 		return FALSE
 
-	last_special = world.time
+	set_special_ability_cooldown(2 SECONDS)
 	remove_organ(E)
 	E.dropInto(loc)
 	put_in_hands(E)

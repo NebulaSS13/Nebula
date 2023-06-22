@@ -79,6 +79,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/cockpit)
 "ao" = (
@@ -310,6 +311,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/cryo)
 "aT" = (
@@ -405,6 +407,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/cryo)
 "bf" = (
@@ -479,6 +482,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/white/lowpressure,
 /area/map_template/ecship/cryo)
 "bm" = (
@@ -509,6 +513,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/crew)
 "bp" = (
@@ -774,7 +779,7 @@
 /turf/simulated/floor/tiled/white/lowpressure,
 /area/map_template/ecship/science)
 "bO" = (
-/obj/structure/sign/warning/science,
+/obj/structure/sign/department/science_1,
 /turf/simulated/wall/titanium,
 /area/map_template/ecship/science)
 "bP" = (
@@ -788,6 +793,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor,
 /area/map_template/ecship/crew)
 "bQ" = (
@@ -970,6 +976,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor,
 /area/map_template/ecship/science)
 "ci" = (
@@ -1222,6 +1229,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/lowpressure,
 /area/map_template/ecship/engineering)
 "cJ" = (
@@ -1352,14 +1360,14 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/machinery/atmospherics/pipe/manifold/visible/cyan{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/yellow{
 	dir = 9
 	},
 /obj/structure/emergency_dispenser/west,
 /obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/manifold/visible/cyan{
+	dir = 8
+	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "cZ" = (
@@ -1914,6 +1922,7 @@
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/abstract/landmark/clear,
+/obj/abstract/landmark/allowed_leak,
 /turf/template_noop,
 /area/template_noop)
 "mD" = (
@@ -1962,6 +1971,15 @@
 /obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
+"XP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/tiled/airless,
+/area/map_template/ecship/crew)
 "YW" = (
 /obj/structure/catwalk,
 /obj/abstract/landmark/scorcher,
@@ -2742,7 +2760,7 @@ aO
 bf
 by
 bB
-bf
+XP
 cu
 cC
 cI

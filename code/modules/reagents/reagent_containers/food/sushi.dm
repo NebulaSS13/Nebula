@@ -88,7 +88,7 @@
 		if(slices + other_sashimi.slices > 5)
 			to_chat(user, "<span class='warning'>Show some restraint, would you?</span>")
 			return
-		if(!user.unEquip(I))
+		if(!user.try_unequip(I))
 			return
 		slices += other_sashimi.slices
 		bitesize = slices
@@ -103,7 +103,7 @@
 		if(slices > 1)
 			to_chat(user, "<span class='warning'>Putting more than one slice of fish on your sushi is just greedy.</span>")
 		else
-			if(!user.unEquip(I))
+			if(!user.try_unequip(I))
 				return
 			new /obj/item/chems/food/sushi(get_turf(src), I, src)
 		return

@@ -20,7 +20,7 @@
 	expected_target_type = /obj/item
 
 /decl/interaction_handler/pick_up/invoked(atom/target, mob/user, obj/item/prop)
-	target.attack_hand(user)
+	target.attack_hand_with_interaction_checks(user)
 
 /decl/interaction_handler/drop
 	name = "Drop"
@@ -28,4 +28,4 @@
 	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_INVENTORY
 
 /decl/interaction_handler/drop/invoked(atom/target, mob/user, obj/item/prop)
-	user.unEquip(target, user.loc)
+	user.try_unequip(target, user.loc)

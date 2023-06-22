@@ -5,7 +5,8 @@
 	icon_state = "0"
 	layer = PLATING_LAYER
 	open_turf_type = /turf/exterior/open
-	turf_flags = TURF_FLAG_BACKGROUND
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
+	zone_membership_candidate = TRUE
 	var/base_color
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
@@ -13,14 +14,8 @@
 	var/icon_edge_layer = -1
 	var/icon_edge_states
 	var/icon_has_corners = FALSE
-	var/list/affecting_heat_sources
-	var/obj/effect/overmap/visitable/sector/exoplanet/owner
-
-// Bit faster than return_air() for exoplanet exterior turfs
-/turf/exterior/get_air_graphic()
-	if(owner)
-		return owner.atmosphere?.graphic
-	return global.using_map.exterior_atmosphere?.graphic
+	///If this turf is on a level that belongs to a planetoid, this is a reference to that planetoid.
+	var/datum/planetoid_data/owner
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
@@ -31,19 +26,22 @@
 
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
-	owner = LAZYACCESS(global.overmap_sectors, "[z]")
+
+	//Grab owner and set base area if we don't have a valid area
+	owner = LAZYACCESS(SSmapping.planetoid_data_by_z, z)
 	if(!istype(owner))
 		owner = null
-	else
+	else if(istype(loc, world.area))
 		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		if(owner.planetary_area && istype(loc, world.area))
-			ChangeArea(src, owner.planetary_area)
+		//If on the surface level, and the planet defines a surface area, prioritize it.
+		var/datum/level_data/L = SSmapping.levels_by_z[z]
+		if(L.level_id == owner.surface_level_id && owner.surface_area)
+			ChangeArea(src, owner.surface_area)
+		//Otherwise fall back to the level_data's base_area
+		else if(L.base_area)
+			ChangeArea(src, L.get_base_area_instance())
 
 	. = ..(mapload)	// second param is our own, don't pass to children
-
-	var/air_graphic = get_air_graphic()
-	if(length(air_graphic))
-		add_vis_contents(src, air_graphic)
 
 	if (no_update_icon)
 		return
@@ -61,13 +59,6 @@
 /turf/exterior/is_floor()
 	return !density && !is_open()
 
-/turf/exterior/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
-	var/last_affecting_heat_sources = affecting_heat_sources
-	var/turf/exterior/ext = ..()
-	if(istype(ext))
-		ext.affecting_heat_sources = last_affecting_heat_sources
-	return ext
-
 /turf/exterior/is_plating()
 	return !density
 
@@ -76,36 +67,14 @@
 
 /turf/exterior/Destroy()
 	owner = null
-	for(var/thing in affecting_heat_sources)
-		var/obj/structure/fire_source/heat_source = thing
-		LAZYREMOVE(heat_source.affected_exterior_turfs, src)
-	affecting_heat_sources = null
 	. = ..()
-
-/turf/exterior/return_air()
-	var/datum/gas_mixture/gas
-	if(owner)
-		gas = new
-		gas.copy_from(owner.atmosphere)
-	else
-		gas = global.using_map.get_exterior_atmosphere()
-
-	var/initial_temperature = gas.temperature
-	if(weather)
-		initial_temperature = weather.adjust_temperature(initial_temperature)
-	for(var/thing in affecting_heat_sources)
-		if((gas.temperature - initial_temperature) >= 100)
-			break
-		var/obj/structure/fire_source/heat_source = thing
-		gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
-	return gas
 
 /turf/exterior/levelupdate()
 	for(var/obj/O in src)
 		O.hide(0)
 
 /turf/exterior/attackby(obj/item/C, mob/user)
-
+	//#TODO: Add some way to dig to lower levels?
 	if(diggable && IS_SHOVEL(C))
 		if(C.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS))
 			new /obj/structure/pit(src)
@@ -182,3 +151,10 @@
 					else if(direction & WEST)
 						I.pixel_x -= world.icon_size
 					add_overlay(I)
+
+/turf/exterior/on_defilement()
+	..()
+	if(density)
+		ChangeTurf(/turf/simulated/wall/cult)
+	else
+		ChangeTurf(/turf/simulated/floor/cult)

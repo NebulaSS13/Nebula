@@ -217,6 +217,8 @@
 	frame_type = /obj/structure/door_assembly/door_assembly_highsecurity
 	paintable = 0
 
+/obj/machinery/door/airlock/highsecurity/get_damage_leakthrough(var/damage, damtype=BRUTE)
+	return 0
 /obj/machinery/door/airlock/highsecurity/bolted
 	locked = TRUE
 
@@ -256,5 +258,7 @@
 	frame_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
 	paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
 
+/obj/machinery/door/airlock/vault/get_damage_leakthrough(var/damage, damtype=BRUTE)
+	return 0
 /obj/machinery/door/airlock/vault/bolted
 	locked = TRUE

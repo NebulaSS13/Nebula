@@ -11,10 +11,11 @@
 /datum/computer_file/directory/Destroy()
 	for(var/weakref/file_ref in held_files)
 		var/datum/computer_file/held_file = file_ref.resolve()
-		if(held_file)
-			holder.remove_file(held_file, forced = TRUE)
-	
-	QDEL_NULL(temp_file_refs)
+		var/obj/item/stock_parts/computer/hard_drive/hard_drive = holder?.resolve()
+		if(held_file && hard_drive)
+			hard_drive.remove_file(held_file, forced = TRUE)
+
+	temp_file_refs.Cut()
 	. = ..()
 
 /datum/computer_file/directory/proc/get_held_files()
@@ -48,7 +49,7 @@
 // * OS_WRITE_ACCESS on all contained files is required for transferring/deleting directories.
 /datum/computer_file/directory/proc/get_held_perms(list/accesses, mob/user, list/counted_dirs = list())
 	. = get_file_perms(accesses, user)
-	
+
 	if(!accesses || (isghost(user) && check_rights(R_ADMIN, 0, user))) // As with normal file perms, either internal use or admin-ghost usage.
 		return
 
@@ -57,7 +58,7 @@
 		var/datum/computer_file/held_file = file_ref.resolve()
 		if(!held_file)
 			held_files -= file_ref
-		
+
 		if(istype(held_file, /datum/computer_file/directory))
 			var/datum/computer_file/directory/dir = held_file
 			if(dir in counted_dirs)
@@ -65,25 +66,25 @@
 			. += dir.get_held_perms(accesses, user, counted_dirs)
 		else
 			. &= held_file.get_file_perms(accesses, user)
-		
+
 		if(. == 0) // We've already lost all permissions, don't bother checking anything else.
 			return
 
 /datum/computer_file/directory/get_file_path()
 	var/parent_paths = ..()
 	if(parent_paths)
-		return parent_paths + "/" + filename 
+		return parent_paths + "/" + filename
 	return filename
 
-/datum/computer_file/directory/clone(var/rename = 0)
-	var/datum/computer_file/directory/temp = ..()
-	temp.inherit_perms = inherit_perms
+/datum/computer_file/directory/PopulateClone(datum/computer_file/directory/clone)
+	clone = ..()
+	clone.inherit_perms = inherit_perms
 	// Add copies of all of our stored files
 	for(var/datum/computer_file/stored in get_held_files())
 		// Do not rename cloned files.
-		var/datum/computer_file/stored_clone = stored.clone(FALSE)
+		var/datum/computer_file/stored_clone = stored.Clone(FALSE)
 		if(stored_clone)
-			temp.held_files += weakref(stored_clone)
-			temp.temp_file_refs += stored_clone
+			clone.held_files += weakref(stored_clone)
+			clone.temp_file_refs += stored_clone
 
-	return temp
+	return clone

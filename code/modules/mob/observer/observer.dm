@@ -98,3 +98,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 
 /mob/observer/get_speech_bubble_state_modifier()
 	return "ghost"
+
+/mob/observer/refresh_lighting_master()
+	..()
+	lighting_master.alpha = 255 // don't bother animating it

@@ -56,14 +56,15 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			if(hattable.hat)
 				to_chat(user, SPAN_WARNING("\The [src] is already wearing \the [hattable.hat]."))
 				return TRUE
-			if(user.unEquip(I) && hattable.wear_hat(src, I))
+			if(user.try_unequip(I) && hattable.wear_hat(src, I))
 				user.visible_message(SPAN_NOTICE("\The [user] puts \the [I] on \the [src]."))
 				return TRUE
 
-	return I.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
+	return I.attack(src, user, user.get_target_zone() || ran_zone())
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
-	if(user == src && user.zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
+	var/user_zone_sel = user.get_target_zone()
+	if(user == src && user_zone_sel == BP_MOUTH && can_devour(I, silent = TRUE))
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)
 			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
@@ -71,7 +72,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if(devour(I))
 			return TRUE
 	if(user.a_intent == I_HELP)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user.zone_sel.selecting)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, user_zone_sel)
 		if(E)
 			for(var/datum/ailment/ailment in E.ailments)
 				if(ailment.treated_by_item(I))

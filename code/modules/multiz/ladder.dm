@@ -37,10 +37,14 @@
 	if(maploading)
 		for(var/obj/structure/ladder/ladder in loc)
 			if(ladder != src)
+				log_warning("Deleting duplicate ladder at ([x], [y], [z])!")
 				qdel(ladder)
-		if(HasBelow(z) && (locate(/obj/structure/ladder) in GetBelow(src)))
-			var/turf/T = get_turf(src)
+		var/turf/T = get_turf(src)
+		if((locate(/obj/structure/ladder) in GetBelow(src)) && (!(locate(/obj/structure/lattice) in loc) || !T.is_open()))
+			var/old_turf_type = T.type
 			T.ReplaceWithLattice()
+			//Gonna keep logging those, since it's not clear if it's always a desired behavior. Since mappers would probably not want to rely on this.
+			log_debug("Ladder replaced turf type '[old_turf_type]' at ([x], [y], [z]) with a lattice and open turf '[loc]' of type '[loc.type]'.")
 	find_connections()
 	set_extension(src, /datum/extension/turf_hand)
 
@@ -130,8 +134,11 @@
 		I.forceMove(landing)
 		landing.visible_message(SPAN_DANGER("\The [I] falls from the top of \the [target_down]!"))
 
-/obj/structure/ladder/attack_hand(var/mob/M)
-	climb(M)
+/obj/structure/ladder/attack_hand(var/mob/user)
+	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return ..()
+	climb(user)
+	return TRUE
 
 /obj/structure/ladder/attack_ai(var/mob/M)
 	var/mob/living/silicon/ai/ai = M
@@ -242,7 +249,7 @@
 			var/atom/movable/M = A
 			if(istype(M) && M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 				if(isnull(I) || istype(I, /obj/item/grab))
-					M.attack_hand(user)
+					M.attack_hand_with_interaction_checks(user)
 				else
 					M.attackby(I, user)
 			return FALSE

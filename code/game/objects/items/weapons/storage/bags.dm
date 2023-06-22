@@ -7,7 +7,7 @@
 	use_to_pickup = 1
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/plastic
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 
 /obj/item/storage/bag/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	. = ..()
@@ -114,3 +114,21 @@
 	w_class = ITEM_SIZE_SMALL
 	can_hold = list(/obj/item/coin, /obj/item/cash)
 	material = /decl/material/solid/leather/synth
+
+/obj/item/storage/bag/cash/filled/Initialize()
+	. = ..()
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	new /obj/item/cash/c1000(src)
+	make_exact_fit()

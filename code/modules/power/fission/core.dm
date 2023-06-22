@@ -213,7 +213,7 @@
 		if(length(fuel_rods) >= MAX_RODS)
 			to_chat(user, SPAN_WARNING("\The [src] is full!"))
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		fuel_rods[W] = FALSE // Rod is not exposed to begin with.
 		visible_message(SPAN_NOTICE("\The [user] inserts \a [W] into \the [src]."), SPAN_NOTICE("You insert \a [W] into \the [src]."))

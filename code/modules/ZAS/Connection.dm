@@ -50,8 +50,8 @@ Class Procs:
 */
 
 /connection
-	var/turf/simulated/A
-	var/turf/simulated/B
+	var/turf/A
+	var/turf/B
 	var/zone/zoneA
 	var/zone/zoneB
 
@@ -65,14 +65,14 @@ Class Procs:
 	var/tmp/verbose = FALSE
 	#endif
 
-/connection/New(turf/simulated/A, turf/simulated/B)
+/connection/New(turf/A, turf/B)
 	#ifdef ZASDBG
 	ASSERT(TURF_HAS_VALID_ZONE(A))
 	#endif
 	src.A = A
 	src.B = B
 	zoneA = A.zone
-	if(!istype(B))
+	if(!SHOULD_PARTICIPATE_IN_ZONES(B))
 		mark_space()
 		edge = SSair.get_edge(A.zone,B)
 		edge.add_connection(src)
@@ -82,7 +82,7 @@ Class Procs:
 		edge.add_connection(src)
 
 #ifdef ZASDBG
-/connection/simulated/New(turf/simulated/A, turf/simulated/B)
+/connection/simulated/New(turf/A, turf/B)
 	. = ..()
 	ASSERT(TURF_HAS_VALID_ZONE(B))
 #endif
@@ -131,7 +131,7 @@ Class Procs:
 		zas_log("Updated, \...")
 	#endif
 
-	if(!istype(A,/turf/simulated))
+	if(!SHOULD_PARTICIPATE_IN_ZONES(A))
 		#ifdef ZASDBG
 		if(verbose)
 			zas_log("Invalid A. Erasing...")
@@ -154,7 +154,7 @@ Class Procs:
 	else
 		mark_direct()
 
-	var/b_is_space = !istype(B,/turf/simulated)
+	var/b_is_space = !SHOULD_PARTICIPATE_IN_ZONES(B)
 
 	if(state & CONNECTION_SPACE)
 		if(!b_is_space)

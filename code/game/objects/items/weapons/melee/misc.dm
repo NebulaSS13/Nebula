@@ -51,7 +51,7 @@
 	icon = 'icons/obj/items/weapon/parade_sword.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 
 /obj/item/sword/replica/officersword/army
 	name = "army NCO's sword"

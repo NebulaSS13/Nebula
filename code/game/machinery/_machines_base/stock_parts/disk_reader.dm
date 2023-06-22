@@ -13,11 +13,12 @@
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass   = MATTER_AMOUNT_REINFORCEMENT,
 	)
-	max_health = 56
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/obj/item/disk/disk //Disk currently inserted
 
 /obj/item/stock_parts/item_holder/disk_reader/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
+	max_health = 56
 
 /obj/item/stock_parts/item_holder/disk_reader/Destroy()
 	QDEL_NULL(disk)

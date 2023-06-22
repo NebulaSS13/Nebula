@@ -53,7 +53,7 @@ The latter will result in a linter warning and will not work correctly.
 // Movable-level flags (/atom/movable/movable_flags)
 #define MOVABLE_FLAG_PROXMOVE             BITFLAG(0) // Does this object require proximity checking in Enter()?
 #define MOVABLE_FLAG_Z_INTERACT           BITFLAG(1) // Should attackby and attack_hand be relayed through ladders and open spaces?
-#define MOVABLE_FLAG_EFFECTMOVE           BITFLAG(2) // Is this an effect that should move?
+#define MOVABLE_FLAG_ALWAYS_SHUTTLEMOVE   BITFLAG(2) // Is this an effect that should move?
 #define MOVABLE_FLAG_DEL_SHUTTLE          BITFLAG(3) // Shuttle transistion will delete this.
 #define MOVABLE_FLAG_WHEELED              BITFLAG(4) // Movable has reduced stamina cost/speed reduction when pulled.
 
@@ -63,6 +63,7 @@ The latter will result in a linter warning and will not work correctly.
 #define OBJ_FLAG_ROTATABLE                BITFLAG(2) // Can be rotated with alt-click
 #define OBJ_FLAG_NOFALL                   BITFLAG(3) // Will prevent mobs from falling
 #define OBJ_FLAG_MOVES_UNSUPPORTED        BITFLAG(4) // Object moves with shuttle transition even if turf below is a background turf.
+#define OBJ_FLAG_HOLLOW                   BITFLAG(5) // Modifies initial matter values to be lower than w_class normally sets.
 
 // Item-level flags (/obj/item/item_flags)
 #define ITEM_FLAG_NO_BLUDGEON             BITFLAG(0) // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
@@ -79,8 +80,7 @@ The latter will result in a linter warning and will not work correctly.
 #define ITEM_FLAG_NOCUFFS                 BITFLAG(11) // Gloves that have this flag prevent cuffs being applied
 #define ITEM_FLAG_CAN_HIDE_IN_SHOES       BITFLAG(12) // Items that can be hidden in shoes that permit it
 #define ITEM_FLAG_PADDED                  BITFLAG(13) // When set on gloves, will act like pulling punches in unarmed combat.
-#define ITEM_FLAG_HOLLOW                  BITFLAG(14) // Modifies initial matter values to be lower than w_class normally sets.
-#define ITEM_FLAG_CAN_TAPE                BITFLAG(15) //Whether the item can be be taped onto something using tape
+#define ITEM_FLAG_CAN_TAPE                BITFLAG(14) //Whether the item can be be taped onto something using tape
 
 // Flags for pass_flags (/atom/var/pass_flags)
 #define PASS_FLAG_TABLE                   BITFLAG(0)

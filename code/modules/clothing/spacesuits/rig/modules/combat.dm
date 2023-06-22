@@ -377,15 +377,8 @@
 		return 0
 
 /obj/item/rig_module/mounted/energy_blade/deactivate()
-
 	..()
-
-	var/mob/living/M = holder?.wearer
-
-	if(!M)
-		return
-
-	for(var/obj/item/energy_blade/ninja/blade in M.contents)
+	for(var/obj/item/energy_blade/ninja/blade in (holder?.wearer))
 		qdel(blade)
 
 /obj/item/rig_module/fabricator

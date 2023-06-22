@@ -28,7 +28,7 @@
 		holder_image.vis_contents.Cut()
 		QDEL_NULL(holder_image)
 	return ..()
-	
+
 /obj/screen/scan_radius/on_update_icon()
 	cut_overlays()
 	if(scan_range <= 1)
@@ -99,7 +99,7 @@
 	)
 
 	/// Color of the glow effect when scanning.
-	var/glow_colour = COLOR_LIME    
+	var/glow_colour = COLOR_LIME
 	/// Multiplier for the base scan delay.
 	var/scan_speed_modifier = 1
 	/// How many tiles away it can scan. Changing this also changes the box size.
@@ -181,12 +181,12 @@
 		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 		return TRUE
 	return ..()
-	
+
 /obj/item/cataloguer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/disk/survey))
 		if(loaded_disk)
 			to_chat(user, SPAN_WARNING("\The [src] already has a disk loaded."))
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			loaded_disk = W
 			playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 			to_chat(user, SPAN_NOTICE("You slot \the [W] into \the [src]."))
@@ -214,7 +214,7 @@
 		playsound(src, 'sound/machines/buzz-two.ogg', 50)
 		scan_radius_overlay.color = COLOR_RED
 
-	scan_radius_overlay.fade_out(user, fade_out)		
+	scan_radius_overlay.fade_out(user, fade_out)
 	scanning = null
 	update_icon()
 

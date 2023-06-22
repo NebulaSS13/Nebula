@@ -6,6 +6,7 @@
 	opacity =      FALSE
 	density =      FALSE
 	invisibility = INVISIBILITY_MAXIMUM
+	is_spawnable_type = FALSE
 	var/decl/radio_chatter/owner
 
 /obj/item/radio/virtual/Initialize(var/ml, var/decl/radio_chatter/_owner)
@@ -21,9 +22,6 @@
 
 /obj/item/radio/virtual/Destroy(var/force)
 	return !force ? QDEL_HINT_LETMELIVE : ..()
-
-/obj/item/radio/virtual/receive_range(freq, level)
-	return 0 // needs to return more than -1 to get the signal.
 
 /obj/item/radio/virtual/emp_act(severity)
 	SHOULD_CALL_PARENT(FALSE)

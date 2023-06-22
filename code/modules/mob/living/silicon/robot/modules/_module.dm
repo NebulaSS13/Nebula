@@ -57,9 +57,6 @@
 	add_subsystems(R)
 	apply_status_flags(R)
 
-	if(R.silicon_radio)
-		R.silicon_radio.recalculateChannels()
-
 	build_equipment(R)
 	build_emag(R)
 	build_synths(R)
@@ -112,7 +109,7 @@
 /obj/item/robot_module/proc/finalize_emag()
 	if(istype(emag))
 		emag.canremove = FALSE
-	else
+	else if(emag)
 		log_debug("Invalid var type in [type] emag creation - [emag]")
 		emag = null
 
@@ -122,8 +119,6 @@
 	remove_subsystems(R)
 	remove_status_flags(R)
 	reset_skills(R)
-	if(R.silicon_radio)
-		R.silicon_radio.recalculateChannels()
 	R.choose_icon(list("Basic" = initial(R.icon)))
 
 /obj/item/robot_module/proc/get_sprites_for(var/mob/living/silicon/robot/R)

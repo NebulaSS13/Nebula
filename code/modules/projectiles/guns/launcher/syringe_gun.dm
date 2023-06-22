@@ -21,7 +21,7 @@
 		underlays += syringe.filling
 
 /obj/item/syringe_cartridge/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/chems/syringe) && user.unEquip(I, src))
+	if(istype(I, /obj/item/chems/syringe) && user.try_unequip(I, src))
 		syringe = I
 		to_chat(user, "<span class='notice'>You carefully insert [syringe] into [src].</span>")
 		sharp = 1
@@ -103,19 +103,22 @@
 	add_fingerprint(user)
 
 /obj/item/gun/launcher/syringe/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		if(!darts.len)
-			to_chat(user, "<span class='warning'>[src] is empty.</span>")
-			return
-		if(next)
-			to_chat(user, "<span class='warning'>[src]'s cover is locked shut.</span>")
-			return
-		var/obj/item/syringe_cartridge/C = darts[1]
-		darts -= C
-		user.put_in_hands(C)
-		user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
-	else
-		..()
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	if(!darts.len)
+		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		return TRUE
+	if(next)
+		to_chat(user, SPAN_WARNING("\The [src]'s cover is locked shut."))
+		return TRUE
+	var/obj/item/syringe_cartridge/C = darts[1]
+	darts -= C
+	user.put_in_hands(C)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] removes \a [C] from \the [src]."),
+		SPAN_NOTICE("You remove \a [C] from \the [src].")
+	)
+	return TRUE
 
 /obj/item/gun/launcher/syringe/attackby(var/obj/item/A, mob/user)
 	if(istype(A, /obj/item/syringe_cartridge))
@@ -123,7 +126,7 @@
 		if(darts.len >= max_darts)
 			to_chat(user, "<span class='warning'>[src] is full!</span>")
 			return
-		if(!user.unEquip(C, src))
+		if(!user.try_unequip(C, src))
 			return
 		darts += C //add to the end
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")

@@ -2,7 +2,7 @@
 	origin_tech = "{'magnets':3,'biotech':5}"
 	slot_flags = SLOT_HEAD | SLOT_OVER_BODY | SLOT_HOLSTER
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT
+		ARMOR_BIO = ARMOR_BIO_RESISTANT
 	)
 
 // Yes, you can wear a nymph on your head instead of a radiation mask.

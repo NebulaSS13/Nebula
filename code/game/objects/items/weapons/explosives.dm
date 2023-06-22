@@ -54,7 +54,7 @@
 	user.do_attack_animation(target)
 
 	if(do_after(user, 50, target) && in_range(user, target))
-		if(!user.unEquip(src))
+		if(!user.try_unequip(src))
 			return
 		src.target = target
 		forceMove(null)

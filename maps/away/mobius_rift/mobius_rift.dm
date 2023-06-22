@@ -16,6 +16,7 @@
 	)
 
 /obj/effect/step_trigger/mobius_rift/seamless_portal
+	is_spawnable_type = FALSE
 	var/obj/effect/step_trigger/mobius_rift/seamless_portal/dest
 	var/x_shift = 0
 	var/y_shift = 0
@@ -43,6 +44,7 @@
 
 //spawns and presets portals to their destinations, must be in left lower chamber center
 /obj/effect/mobius_rift/portals_setup
+	is_spawnable_type = FALSE // Should only be mapped in, spawning it in has unpredictable results.
 	var/grid_number = 4//amount of rooms in a square pattern grid
 	var/grid_size = 31//lenfth from center of one room to another, or size of a chamber(room length, 12?) + corridor length. Corridor length is (view-range * 2) (16?)
 
@@ -81,6 +83,7 @@
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/mobius_rift/chamber
+	is_spawnable_type = FALSE
 	var/list/portals = list()
 
 /obj/effect/mobius_rift/chamber/Initialize(var/mapload, var/grid_size)//NORTH, SOUTH, EAST, WEST

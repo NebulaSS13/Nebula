@@ -93,17 +93,17 @@
 					continue
 				N.update_connections()
 
-/obj/structure/net/show_examined_damage(mob/user, var/perc)
+/obj/structure/net/get_examined_damage_string(health_ratio)
 	if(maxhealth == -1)
 		return
-	if(perc >= 1)
-		to_chat(user, SPAN_NOTICE("It looks fully intact."))
-	else if (perc < 0.2)
-		to_chat(perc, SPAN_DANGER("\The [src] is barely hanging on by the last few threads."))
-	else if (perc < 0.5)
-		to_chat(user, SPAN_WARNING("Large swathes of \the [src] have been cut."))
-	else if (perc < 0.9)
-		to_chat(user, SPAN_NOTICE("A few strands of \the [src] have been severed."))
+	if(health_ratio >= 1)
+		return SPAN_NOTICE("It looks fully intact.")
+	else if (health_ratio < 0.2)
+		return SPAN_DANGER("\The [src] is barely hanging on by the last few threads.")
+	else if (health_ratio < 0.5)
+		return SPAN_WARNING("Large swathes of \the [src] have been cut.")
+	else if (health_ratio < 0.9)
+		return SPAN_NOTICE("A few strands of \the [src] have been severed.")
 
 /obj/structure/net/attackby(obj/item/W, mob/user)
 	if(W.sharp || W.edge)

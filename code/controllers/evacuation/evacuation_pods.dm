@@ -46,7 +46,7 @@
 	else
 		// FTL Jump
 		priority_announcement.Announce(replacetext(replacetext(global.using_map.shuttle_leaving_dock, "%dock_name%", "[global.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
-		SetUniversalState(/datum/universal_state/jump, arguments=list(global.using_map.station_levels))
+		SetUniversalState(/datum/universal_state/jump, arguments=list(SSmapping.station_levels))
 
 /datum/evacuation_controller/starship/finish_evacuation()
 	..()

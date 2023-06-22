@@ -77,7 +77,7 @@
 	if(!can_open)
 		to_chat(user, "<span class='notice'>You push \the [src], but nothing happens.</span>")
 		playsound(src, hitsound, 25, 1)
-	else
+	else if (isnull(construction_stage) || !reinf_material)
 		toggle_open(user)
 
 /turf/simulated/wall/attack_hand(var/mob/user)
@@ -225,7 +225,6 @@
 				else if(IS_WIRECUTTER(W))
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
-					SSmaterials.create_object(/decl/material/solid/metal/steel, src, 1, /obj/item/stack/material/rods)
 					to_chat(user, "<span class='notice'>You cut the outer grille.</span>")
 					update_icon()
 					return TRUE
@@ -240,12 +239,12 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the support lines.</span>")
 					return
-				else if( istype(W, /obj/item/stack/material/rods) )
-					var/obj/item/stack/O = W
-					if(O.use(1))
+				else if(istype(W,/obj/item/weldingtool))
+					var/obj/item/weldingtool/WT = W
+					if(WT.weld(0,user))
 						construction_stage = 6
 						update_icon()
-						to_chat(user, "<span class='notice'>You replace the outer grille.</span>")
+						to_chat(user, SPAN_NOTICE("You repair the outer grille."))
 						return TRUE
 			if(4)
 				var/cut_cover
@@ -315,8 +314,7 @@
 						return
 					construction_stage = 0
 					update_icon()
-					SSmaterials.create_object(/decl/material/solid/metal/steel, src, 1, /obj/item/stack/material/rods)
-					to_chat(user, "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>")
+					to_chat(user, "<span class='notice'>You cut the support rods loose from the frame.</span>")
 					return
 			if(0)
 				if(IS_CROWBAR(W))

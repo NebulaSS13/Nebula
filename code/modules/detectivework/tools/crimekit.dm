@@ -16,5 +16,5 @@
 		/obj/item/forensics/sample_kit/swabs,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
-		/obj/item/storage/csi_markers
+		/obj/item/storage/box/csi_markers
 		)

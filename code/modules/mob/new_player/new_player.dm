@@ -2,6 +2,7 @@
 	universal_speak = TRUE
 	mob_sort_value = 10
 	invisibility = 101
+	simulated = FALSE
 
 	density = 0
 	stat = DEAD
@@ -207,7 +208,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		var/obj/S = job.get_roundstart_spawnpoint()
 		spawn_turf = get_turf(S)
 
-	if(!SSjobs.check_unsafe_spawn(src, spawn_turf))
+	if(!job.no_warn_unsafe && !SSjobs.check_unsafe_spawn(src, spawn_turf))
 		return
 
 	// Just in case someone stole our position while we were waiting for input from alert() proc
@@ -243,14 +244,12 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 	qdel(src)
 
-
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 	if (GAME_STATE == RUNLEVEL_GAME)
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
-		var/obj/item/radio/announcer = get_global_announcer()
-		announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
+		do_telecomms_announcement(character, "A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name

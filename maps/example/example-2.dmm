@@ -328,7 +328,9 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/second)
 "ug" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data_spawner/main_level{
+	name = "Example Second Deck";
+},
 /turf/space,
 /area/space)
 "uk" = (

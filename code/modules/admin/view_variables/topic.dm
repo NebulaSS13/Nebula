@@ -598,6 +598,55 @@
 			return
 		log_and_message_admins("removed \the [choice] to \the [L]")
 		qdel(choice)
+
+	else if(href_list["addstressor"])
+		if(!check_rights(R_DEBUG))
+			return
+		var/mob/living/L = locate(href_list["addstressor"])
+		if(!istype(L))
+			return
+		var/static/list/_all_stressors
+		if(!_all_stressors)
+			_all_stressors = SSmanaged_instances.get_category(/datum/stressor)
+		var/datum/stressor/stressor = input("Select a stressor to add or refresh.", "Add Stressor") as null|anything in _all_stressors
+		if(!stressor)
+			return
+		var/duration = clamp(input("Enter a duration ([STRESSOR_DURATION_INDEFINITE] for permanent).", "Add Stressor") as num|null, STRESSOR_DURATION_INDEFINITE, INFINITY)
+		if(duration && L.add_stressor(stressor, duration))
+			log_and_message_admins("added [stressor] to \the [src] for duration [duration].")
+
+	else if(href_list["removestressor"])
+		if(!check_rights(R_DEBUG))
+			return
+		var/mob/living/L = locate(href_list["removestressor"])
+		if(!istype(L))
+			return
+		if(!length(L.stressors))
+			to_chat(usr, "Nothing to remove.")
+			return
+		var/datum/stressor/stressor = input("Select a stressor to remove.", "Remove Stressor") as null|anything in L.stressors
+		if(L.remove_stressor(stressor))
+			log_and_message_admins("removed [stressor] from \the [src].")
+
+	else if(href_list["setmaterial"])
+		if(!check_rights(R_DEBUG))	return
+
+		var/obj/item/I = locate(href_list["setmaterial"])
+		if(!istype(I))
+			to_chat(usr, "This can only be done to instances of type /obj/item")
+			return
+
+		var/new_material = input("Please choose a new material.","Materials",null) as null|anything in SSmaterials.materials_by_name
+		if(!new_material)
+			return
+		if(QDELETED(I))
+			to_chat(usr, "Item doesn't exist anymore")
+			return
+
+		var/decl/material/M = SSmaterials.materials_by_name[new_material]
+		I.set_material(M.type)
+		to_chat(usr, "Set material of [I] to [I.get_material()].")
+
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
 		if(istype(DAT, /datum) || istype(DAT, /client))

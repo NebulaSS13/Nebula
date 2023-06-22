@@ -179,10 +179,6 @@
 	if(severity == 1)
 		qdel(src)
 
-/mob/living/slime/u_equip(obj/item/W)
-	SHOULD_CALL_PARENT(FALSE)
-	return FALSE
-
 /mob/living/slime/attack_ui(slot)
 	return
 
@@ -267,7 +263,8 @@
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
 			adjustBruteLoss(damage)
 			return TRUE
-	. = ..()
+
+	return ..()
 
 /mob/living/slime/attackby(var/obj/item/W, var/mob/user)
 	if(W.force > 0)
@@ -302,6 +299,9 @@
 		if(powerlevel > 10)
 			powerlevel = 10
 			adjustToxLoss(-10)
+
+/mob/living/slime/get_nutrition()
+	return nutrition
 
 /mob/living/slime/adjust_nutrition(var/amt)
 	nutrition = clamp(nutrition + amt, 0, get_max_nutrition())

@@ -268,7 +268,7 @@ var/global/list/machine_path_to_circuit_type
 			continue
 		if((. = part.attack_hand(user)))
 			return
-	return construct_state && construct_state.attack_hand(user, src)
+	return construct_state?.attack_hand(user, src)
 
 /*
 Standard helpers for users interacting with machinery parts.
@@ -305,7 +305,7 @@ Standard helpers for users interacting with machinery parts.
 		var/obj/item/stack/stack = part
 		install_component(stack.split(number, TRUE))
 	else
-		user.unEquip(part, src)
+		user.try_unequip(part, src)
 		install_component(part)
 	user.visible_message(SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"), SPAN_NOTICE("You install \the [part] in \the [src]!"))
 	return TRUE

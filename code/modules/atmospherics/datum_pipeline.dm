@@ -162,7 +162,7 @@
 
 	return network
 
-/datum/pipeline/proc/mingle_with_turf(turf/simulated/target, mingle_volume)
+/datum/pipeline/proc/mingle_with_turf(turf/target, mingle_volume)
 
 	if(!isturf(target))
 		return
@@ -170,7 +170,7 @@
 	var/datum/gas_mixture/air_sample = air.remove_ratio(mingle_volume/air.volume)
 	air_sample.volume = mingle_volume
 
-	if(istype(target) && target.zone)
+	if(target.zone)
 		//Have to consider preservation of group statuses
 		var/datum/gas_mixture/turf_copy = new
 
@@ -201,18 +201,16 @@
 	var/total_heat_capacity = air.heat_capacity()
 	var/partial_heat_capacity = total_heat_capacity*(share_volume/air.volume)
 
-	if(istype(target, /turf/simulated) && !target.blocks_air)
-		var/turf/simulated/modeled_location = target
-
+	if(SHOULD_PARTICIPATE_IN_ZONES(target) && !target.blocks_air)
 		var/delta_temperature = 0
 		var/sharer_heat_capacity = 0
 
-		if(modeled_location.zone)
-			delta_temperature = (air.temperature - modeled_location.zone.air.temperature)
-			sharer_heat_capacity = modeled_location.zone.air.heat_capacity()
+		if(target.zone)
+			delta_temperature = (air.temperature - target.zone.air.temperature)
+			sharer_heat_capacity = target.zone.air.heat_capacity()
 		else
-			delta_temperature = (air.temperature - modeled_location.air.temperature)
-			sharer_heat_capacity = modeled_location.air.heat_capacity()
+			delta_temperature = (air.temperature - target.air.temperature)
+			sharer_heat_capacity = target.air.heat_capacity()
 
 		var/self_temperature_delta = 0
 		var/sharer_temperature_delta = 0
@@ -228,10 +226,10 @@
 
 		air.temperature += self_temperature_delta
 
-		if(modeled_location.zone)
-			modeled_location.zone.air.temperature += sharer_temperature_delta/modeled_location.zone.air.group_multiplier
+		if(target.zone)
+			target.zone.air.temperature += sharer_temperature_delta/target.zone.air.group_multiplier
 		else
-			modeled_location.air.temperature += sharer_temperature_delta
+			target.air.temperature += sharer_temperature_delta
 
 	else if(istype(target, /turf/exterior) && !target.blocks_air)
 		var/turf/exterior/modeled_location = target

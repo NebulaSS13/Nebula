@@ -17,12 +17,27 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/Destroy()
 	. = ..()
 	UNQUEUE_REACTIONS(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
+	if(SSfluids.holders_to_update[src])
+		SSfluids.holders_to_update -= src
 	reagent_volumes = null
 	reagent_data = null
 	if(my_atom)
 		if(my_atom.reagents == src)
 			my_atom.reagents = null
 		my_atom = null
+
+/datum/reagents/GetCloneArgs()
+	return list(maximum_volume, global.temp_reagents_holder) //Always clone with the dummy holder to prevent things being done on the owner atom
+
+//Don't forget to call set_holder() after getting the copy!
+/datum/reagents/PopulateClone(datum/reagents/clone)
+	clone.primary_reagent = primary_reagent
+	clone.reagent_volumes = reagent_volumes?.Copy()
+	clone.reagent_data    = listDeepClone(reagent_data, TRUE)
+	clone.total_volume    = total_volume
+	clone.maximum_volume  = maximum_volume
+	clone.cached_color    = cached_color
+	return clone
 
 /datum/reagents/proc/get_reaction_loc()
 	return my_atom
@@ -162,8 +177,16 @@ var/global/obj/temp_reagents_holder = new
 	if(my_atom)
 		my_atom.on_reagent_change()
 
-/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
+///Set and call updates on the target holder.
+/datum/reagents/proc/set_holder(var/obj/new_holder)
+	if(my_atom == new_holder)
+		return
+	my_atom = new_holder
+	if(my_atom)
+		my_atom.on_reagent_change()
+	handle_update()
 
+/datum/reagents/proc/add_reagent(var/reagent_type, var/amount, var/data = null, var/safety = 0, var/defer_update = FALSE)
 	amount = NONUNIT_FLOOR(min(amount, REAGENTS_FREE_SPACE(src)), MINIMUM_CHEMICAL_VOLUME)
 	if(amount <= 0)
 		return FALSE

@@ -5,7 +5,6 @@
 	icon_state = "posibrain"
 	organ_tag = BP_POSIBRAIN
 	parent_organ = BP_CHEST
-	vital = 0
 	force = 1.0
 	w_class = ITEM_SIZE_NORMAL
 	throwforce = 1
@@ -170,7 +169,6 @@
 	dead_icon = "cell_bork"
 	organ_tag = BP_CELL
 	parent_organ = BP_CHEST
-	vital = 1
 	organ_properties = ORGAN_PROP_PROSTHETIC //triggers robotization on init
 	var/open
 	var/obj/item/cell/cell = /obj/item/cell/hyper
@@ -247,7 +245,7 @@
 		if(open)
 			if(cell)
 				to_chat(user, "<span class ='warning'>There is a power cell already installed.</span>")
-			else if(user.unEquip(W, src))
+			else if(user.try_unequip(W, src))
 				cell = W
 				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
 
@@ -268,7 +266,6 @@
 	icon_state = "mmi-empty"
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
-	vital = TRUE
 	organ_properties = ORGAN_PROP_PROSTHETIC //triggers robotization on init
 	scale_max_damage_to_species_health = FALSE
 	var/obj/item/mmi/stored_mmi

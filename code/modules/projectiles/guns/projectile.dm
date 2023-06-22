@@ -29,6 +29,7 @@
 	var/auto_eject_sound = null
 	var/mag_insert_sound = 'sound/weapons/guns/interaction/pistol_magin.ogg'
 	var/mag_remove_sound = 'sound/weapons/guns/interaction/pistol_magout.ogg'
+	var/manual_unload = TRUE //Whether or not the gun can be unloaded by hand.
 
 	var/is_jammed = 0           //Whether this gun is jammed
 	var/jam_chance = 0          //Chance it jams on fire
@@ -82,13 +83,14 @@
 		chambered.expend()
 		process_chambered()
 
-/obj/item/gun/projectile/process_point_blank(obj/projectile, mob/user, atom/target)
+/obj/item/gun/projectile/process_point_blank(obj/projectile, atom/movable/firer, atom/target)
 	..()
 	if(chambered && ishuman(target))
 		var/mob/living/carbon/human/H = target
 		var/zone = BP_CHEST
-		if(user && user.zone_sel)
-			zone = user.zone_sel.selecting
+		if(isliving(firer))
+			var/mob/living/user = firer
+			zone = user.get_target_zone() || zone
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, zone)
 		if(E)
 			chambered.put_residue_on(E)
@@ -105,8 +107,8 @@
 		if(EJECT_CASINGS) //eject casing onto ground.
 			chambered.dropInto(loc)
 			chambered.throw_at(get_ranged_target_turf(get_turf(src),turn(loc.dir,270),1), rand(0,1), 5)
-			if(LAZYLEN(chambered.fall_sounds))
-				playsound(loc, pick(chambered.fall_sounds), 50, 1)
+			if(chambered.drop_sound)
+				playsound(loc, pick(chambered.drop_sound), 50, 1)
 		if(CYCLE_CASINGS) //cycle the casing back to the end.
 			if(ammo_magazine)
 				ammo_magazine.stored_ammo += chambered
@@ -135,7 +137,7 @@
 					to_chat(user, "<span class='warning'>[src] already has a magazine loaded.</span>")//already a magazine here
 
 					return
-				if(!user.unEquip(AM, src))
+				if(!user.try_unequip(AM, src))
 					return
 				ammo_magazine = AM
 				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
@@ -165,7 +167,7 @@
 		if(loaded.len >= max_shells)
 			to_chat(user, "<span class='warning'>[src] is full.</span>")
 			return
-		if(!user.unEquip(C, src))
+		if(!user.try_unequip(C, src))
 			return
 		loaded.Insert(1, C) //add to the head of the list
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
@@ -194,8 +196,8 @@
 			var/turf/T = get_turf(user)
 			if(T)
 				for(var/obj/item/ammo_casing/C in loaded)
-					if(LAZYLEN(C.fall_sounds))
-						playsound(loc, pick(C.fall_sounds), 50, 1)
+					if(LAZYLEN(C.drop_sound))
+						playsound(loc, pick(C.drop_sound), 50, 1)
 					C.forceMove(T)
 					count++
 				loaded.Cut()
@@ -217,14 +219,16 @@
 /obj/item/gun/projectile/attack_self(mob/user)
 	if(firemodes.len > 1)
 		..()
-	else
+	else if(manual_unload)
 		unload_ammo(user)
+	else
+		to_chat(user, SPAN_WARNING("You can't unload \the [src] manually. Maybe try a crowbar?"))
 
 /obj/item/gun/projectile/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload_ammo(user, allow_dump=0)
-	else
+	if(!user.is_holding_offhand(src) || !manual_unload || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
+	unload_ammo(user, allow_dump=0)
+	return TRUE
 
 /obj/item/gun/projectile/afterattack(atom/A, mob/living/user)
 	..()

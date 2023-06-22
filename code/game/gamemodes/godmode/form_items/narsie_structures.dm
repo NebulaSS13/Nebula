@@ -20,18 +20,17 @@
 
 /obj/structure/deity/blood_forge/attack_hand(var/mob/user)
 	if(!linked_god || !linked_god.is_follower(user, silent = 1) || !ishuman(user))
-		return
-
+		return ..()
 	var/list/recipes = linked_god.feats[recipe_feat_list]
 	if(!recipes)
-		return
-
+		return TRUE
 	var/dat = "<center><b>Recipes</b></center><br><br><i>Item - [text_modifications["Cost"]] Cost</i><br>"
 	for(var/type in recipes)
 		var/atom/a = type
 		var/cost = recipes[type]
 		dat += "<A href='?src=\ref[src];make_recipe=\ref[type];'>[initial(a.name)]</a> - [cost]<br><i>[initial(a.desc)]</i><br><br>"
 	show_browser(user, dat, "window=forge")
+	return TRUE
 
 /obj/structure/deity/blood_forge/CanUseTopic(var/user)
 	if(!linked_god || !linked_god.is_follower(user, silent = 1) || !ishuman(user))
@@ -80,8 +79,7 @@
 
 /obj/structure/deity/blood_stone/attack_hand(var/mob/user)
 	if(!linked_god || !linked_god.is_follower(user, silent = 1) || !ishuman(user))
-		return
-
+		return ..()
 	var/mob/living/carbon/human/H = user
 	user.visible_message("<span class='warning'>\The [user] calmly slices their finger on \the [src], smeering it over the black stone.</span>","<span class='warning'>You slowly slide your finger down one of \the [src]'s sharp edges, smeering it over its smooth surface.</span>")
 	while(do_after(H,50,src))
@@ -91,3 +89,4 @@
 		else
 			H.adjustBruteLoss(5)
 		linked_god.adjust_power_min(1,1)
+	return TRUE

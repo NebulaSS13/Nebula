@@ -60,13 +60,13 @@
 		to_chat(user, "There is nothing to remove in \the [src].")
 
 /obj/item/gun/launcher/pneumatic/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload_hopper(user)
-	else
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
+	unload_hopper(user)
+	return TRUE
 
 /obj/item/gun/launcher/pneumatic/attackby(obj/item/W, mob/user)
-	if(!tank && istype(W,/obj/item/tank) && user.unEquip(W, src))
+	if(!tank && istype(W,/obj/item/tank) && user.try_unequip(W, src))
 		tank = W
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
 		update_icon()
@@ -76,11 +76,11 @@
 /obj/item/gun/launcher/pneumatic/attack_self(mob/user)
 	eject_tank(user)
 
-/obj/item/gun/launcher/pneumatic/consume_next_projectile(mob/user=null)
+/obj/item/gun/launcher/pneumatic/consume_next_projectile(atom/movable/firer)
 	if(!item_storage.contents.len)
 		return null
 	if (!tank)
-		to_chat(user, "There is no gas tank in [src]!")
+		to_chat(firer, "There is no gas tank in [src]!")
 		return null
 
 	var/environment_pressure = 10
@@ -92,7 +92,7 @@
 
 	fire_pressure = (tank.air_contents.return_pressure() - environment_pressure)*pressure_setting/100
 	if(fire_pressure < 10)
-		to_chat(user, "There isn't enough gas in the tank to fire [src].")
+		to_chat(firer, "There isn't enough gas in the tank to fire [src].")
 		return null
 
 	var/obj/item/launched = item_storage.contents[1]
@@ -136,7 +136,7 @@
 
 /obj/item/gun/launcher/pneumatic/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && tank)
-		overlay.icon_state += "-tank" 
+		overlay.icon_state += "-tank"
 	. = ..()
 
 /obj/item/gun/launcher/pneumatic/small

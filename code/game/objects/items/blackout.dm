@@ -12,7 +12,7 @@
 	desc = "A complicated eletronic device of unknown purpose"
 	icon = 'icons/obj/items/blackout.dmi'
 	icon_state = "device_blackout-off"
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/severity = 2
 	var/shots = 1
 	var/last_use = 0

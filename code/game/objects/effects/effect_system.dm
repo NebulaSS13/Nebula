@@ -178,9 +178,15 @@ steam.start() -- spawns the effect
 	pixel_x = -32
 	pixel_y = -32
 
-/obj/effect/effect/smoke/Initialize()
+/obj/effect/effect/smoke/Initialize(mapload, smoke_duration)
 	. = ..()
-	QDEL_IN(src, time_to_live)
+	if(smoke_duration)
+		time_to_live = smoke_duration
+	addtimer(CALLBACK(src, .proc/end_of_life), time_to_live)
+
+/obj/effect/effect/smoke/proc/end_of_life()
+	if(!QDELETED(src))
+		qdel(src)
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M)
 	..()
@@ -326,7 +332,7 @@ steam.start() -- spawns the effect
 			holder = null
 		else
 			src.location = get_turf(holder)
-	var/obj/effect/effect/smoke/smoke = new smoke_type(location)
+	var/obj/effect/effect/smoke/smoke = new smoke_type(location, rand(8.5 SECONDS, 10.5 SECONDS))
 	src.total_smoke++
 	var/direction = src.direction
 	if(!direction)
@@ -337,7 +343,6 @@ steam.start() -- spawns the effect
 			total_smoke--
 			return
 		step(smoke,direction)
-	QDEL_IN(smoke, smoke.time_to_live*0.75+rand(10,30))
 	total_smoke--
 
 /datum/effect/effect/system/smoke_spread/bad
@@ -402,6 +407,10 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/trail/proc/stop()
 	src.processing = 0
 	src.on = 0
+
+/datum/effect/effect/system/trail/Destroy()
+	stop()
+	return ..()
 
 /datum/effect/effect/system/trail/proc/effect(var/obj/effect/effect/T)
 	T.set_dir(src.holder.dir)

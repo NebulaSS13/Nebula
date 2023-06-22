@@ -39,8 +39,8 @@
 
 	if(chambered)//We have a shell in the chamber
 		chambered.dropInto(loc)//Eject casing
-		if(LAZYLEN(chambered.fall_sounds))
-			playsound(loc, pick(chambered.fall_sounds), 50, 1)
+		if(chambered.drop_sound)
+			playsound(loc, pick(chambered.drop_sound), 50, 1)
 		chambered = null
 
 	if(loaded.len)
@@ -91,7 +91,7 @@
 			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
 			return
 		if(do_after(user, 30, src))	//SHIT IS STEALTHY EYYYYY
-			user.unEquip(src)
+			user.try_unequip(src)
 			var/obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty/buddy = new(loc)
 			transfer_fingerprints_to(buddy)
 			qdel(src)

@@ -30,17 +30,12 @@
 	machine_id = "[station_name()] Acc. DB #[num_financial_terminals++]"
 
 /obj/machinery/computer/account_database/attackby(obj/O, mob/user)
-	if(!istype(O, /obj/item/card/id))
-		return ..()
-
-	if(!held_card)
-		if(!user.unEquip(O, src))
-			return
-		held_card = O
-
-		SSnano.update_uis(src)
-
-	attack_hand(user)
+	if(istype(O, /obj/item/card/id) && !held_card)
+		if(user.try_unequip(O, src))
+			held_card = O
+			SSnano.update_uis(src)
+		return TRUE
+	return ..()
 
 /obj/machinery/computer/account_database/interface_interact(mob/user)
 	ui_interact(user)
@@ -140,13 +135,14 @@
 					if(ishuman(usr) && !usr.get_active_hand())
 						usr.put_in_hands(held_card)
 					held_card = null
-
+					SSnano.update_uis(src)
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/card/id))
-						if(!usr.unEquip(I, src))
+						if(!usr.try_unequip(I, src))
 							return
 						held_card = I
+						SSnano.update_uis(src)
 
 			if("view_account_detail")
 				var/index = text2num(href_list["account_index"])

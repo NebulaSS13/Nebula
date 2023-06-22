@@ -16,8 +16,8 @@
 	var/thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/minimum_temperature_difference = 20
 
-	maximum_pressure = 360*ONE_ATMOSPHERE
-	fatigue_pressure = 300*ONE_ATMOSPHERE
+	maximum_pressure = 360 ATM
+	fatigue_pressure = 300 ATM
 
 	can_buckle = 1
 	buckle_lying = 1

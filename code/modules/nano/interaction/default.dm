@@ -38,7 +38,7 @@ var/global/datum/topic_state/default/default_topic_state = new
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
 	var/turf/A = get_turf(src)
-	if(!A || !T || !AreConnectedZLevels(A.z, T.z))
+	if(!A || !T || !SSmapping.are_connected_levels(A.z, T.z))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it

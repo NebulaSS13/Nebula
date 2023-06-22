@@ -52,181 +52,42 @@
 		-->
 		<div class="commit sansserif">
 
-			<h2 class="date">27 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed bad icons on /obj/machinery/partyalarm.</li>
-				<li class="bugfix">Fixed bad icons on /obj/machinery/dummy_airlock_controller.</li>
-				<li class="bugfix">Fixed bad icons on /obj/machinery/button/holosign.</li>
-				<li class="bugfix">Fixed bad icons on /obj/item/personal_shield.</li>
-				<li class="bugfix">Fixed bad icons on /obj/item/shield/energy.</li>
-				<li class="bugfix">Fixed bad icons on /turf/simulated/floor/tiled/stone.</li>
-				<li class="bugfix">Fixed bad icons on /obj/item/bone/skull.</li>
-				<li class="bugfix">Fixed bad icons on /obj/item/bee_smoker.</li>
-				<li class="bugfix">Fixed bad icons on /obj/item/shovel/spade.</li>
-				<li class="bugfix">Fixed bad icons on /obj/structure/crystal.</li>
-				<li class="bugfix">Fixed bad icons on /obj/item/storage/belt/archaeology.</li>
-				<li class="bugfix">Fixed /obj/abstract/map_data not showing up in mapping tool.</li>
-				<li class="bugfix">Fixed /obj/item/underwear not showing up in mapping tool.</li>
-				<li class="bugfix">Fixed /obj/abstract not showing up in mapping tool.</li>
-				<li class="bugfix">Fixed easily missed bad icon_state name on /obj/item/crowbar/brace_jack.</li>
-				<li class="bugfix">Fixed easily missed bad icon_state name on /turf/simulated/floor/tiled/monofloor.</li>
-				<li class="bugfix">Fixed some metallic materials causing runtimes from not having wall icon states defined properly.</li>
-				<li class="bugfix">Made a bunch of /obj/structure/closet/crate show a more accurate icon in the map editor instead of the default blank locker icon.</li>
-				<li class="imageadd">Added simple directional icons for airlock controller buttons and sensors.</li>
-				<li class="tweak">Allowed connecting fuel pipes to TEG circulators.</li>
-			</ul>
-
-			<h2 class="date">25 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fix mapped network machinery fields.</li>
-				<li class="bugfix">Fixed bad switch case in robot_component/take_damage() causing BURN and ELECTROCUTE damage to get ignored.</li>
-			</ul>
-
-			<h2 class="date">23 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed /obj/item/chems being shattered in nullspace causing a runtime.</li>
-			</ul>
-
-			<h2 class="date">22 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">Added some fairly bad wrapped package icons, and wrapped gifts icons.</li>
-			</ul>
-
-			<h2 class="date">20 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fix disconnected pipes + blastdoors button on desperado/mercenary base.</li>
-			</ul>
-
-			<h2 class="date">17 November 2022</h2>
+			<h2 class="date">22 June 2023</h2>
 			<h3 class="author">MistakeNot4892 updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Liver and brain regeneration has been tweaked, and all internal organs will now regenerate slowly to a point.</li>
+				<li class="tweak">Strong (narcotic) painkillers and mild (non-narcotic) painkillers are now distinct chemicals.</li>
 			</ul>
-
-			<h2 class="date">15 November 2022</h2>
 			<h3 class="author">PsyCommando updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="bugfix">Fix limb reattachment surgery not properly installing any contained internal organs once the last step was completed.</li>
+				<li class="tweak">Signs are easier to place now, and do a better job keeping their info when installed and removed repeatedly.</li>
 			</ul>
 
-			<h2 class="date">11 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Prevent mapped security cameras from becoming completely unlocked and accessible by anyone whenever there's a network outage.</li>
-			</ul>
-
-			<h2 class="date">10 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Engineer borgs now have upgraded from a crowbar to a brace jack.</li>
-			</ul>
-
-			<h2 class="date">08 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed welderpack getting stuck in the inventory.</li>
-				<li class="tweak">Welderpack now has its own attached welding gun, which works a lot like defibrillator paddles.</li>
-				<li class="bugfix">Telescreen can no longer be used when held, as it was intended.</li>
-				<li class="bugfix">Telescreen now properly install on walls.</li>
-				<li class="imageadd">Added basic directional icon states for the telescreen.</li>
-				<li class="imageadd">Added construction state icons for the telescreen.</li>
-				<li class="tweak">Changed all instances of telescreens in the map files to use auto directional offset, and face proper direction.</li>
-				<li class="bugfix">Fixed some empty box variants having no storage slots on spawn.</li>
-			</ul>
-
-			<h2 class="date">06 November 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Tweaked police tape. Now called barricade tape, and the tape itself now handles neighbours better.</li>
-				<li class="tweak">Photo cameras now have skilled interactions. And can eject their film cartridge.</li>
-				<li class="tweak">Hand labeler can now be refilled with paper sheets, or paper material sheets. It can also now remove labels. And has a new menu for changing mode.</li>
-				<li class="tweak">Fax machine is now buildable, and make use of the network system.</li>
-				<li class="tweak">Fax machine has a new UI, and new functionalities. Like history logging and contact saving. The data is saved to a data disk and can be transferred from machine to machine.</li>
-				<li class="tweak">Numerous paperwork simple browser UIs have had some touch up and polish.</li>
-				<li class="bugfix">fixed item drop sound playing when throwing something.</li>
-				<li class="soundadd">added a balloon bursting sound effect.</li>
-			</ul>
-
-			<h2 class="date">31 October 2022</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Ambient light will now apply to simulated turfs.</li>
-			</ul>
-
-			<h2 class="date">30 October 2022</h2>
-			<h3 class="author">noelle-lavenza updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds inhalers.</li>
-				<li class="rscadd">Sleepers can now remove chemicals from the lungs via a lung lavage.</li>
-				<li class="tweak">Autoinjectors in oxygen deprivation pouches have been replaced with oxygel inhalers.</li>
-				<li class="tweak">Chemicals can now be properly inhaled into the lungs.</li>
-				<li class="tweak">Coughing removes one to two units of reagents from your lungs.</li>
-				<li class="tweak">Coughing can now only be manually done once every three seconds.</li>
-			</ul>
-
-			<h2 class="date">28 October 2022</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Antag PDAs have been customised.</li>
-			</ul>
-
-			<h2 class="date">24 October 2022</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Using 'say' or 'me' in the client text bar will now show the typing indicator as though you used the F3 hotkey.</li>
-				<li class="tweak">Synthetic mobs and ghosts now have their own speech overlay appearance.</li>
-			</ul>
-
-			<h2 class="date">23 October 2022</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Raiders, mercs, wizards and ninjas no longer share a single access type.</li>
-				<li class="imageadd">Some stock parts have been resprited using icons from Azlan.</li>
-			</ul>
-
-			<h2 class="date">16 October 2022</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Browser tables look nicer.</li>
-				<li class="tweak">Some coloured text may be different. It is a mystery.</li>
-			</ul>
-
-			<h2 class="date">13 October 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fix possible duplicate reagent init for reagent containing rings.</li>
-			</ul>
-
-			<h2 class="date">09 October 2022</h2>
-			<h3 class="author">tetra zeta  updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">new guitar sprites!</li>
-			</ul>
-
-			<h2 class="date">07 October 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Reagent dispensers can now be refilled via alt interactions.</li>
-				<li class="tweak">Made the welder pack printable, and made it now have an integrated welding tool. Its now much more useful.</li>
-			</ul>
-
-			<h2 class="date">04 October 2022</h2>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Ores now stack.</li>
-				<li class="tweak">Can now pick a random ore stack from the ore box.</li>
-				<li class="tweak">Ore box has alt interactions.</li>
-			</ul>
-
-			<h2 class="date">02 October 2022</h2>
+			<h2 class="date">18 June 2023</h2>
 			<h3 class="author">Penelope Haze updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Drinking smaller amounts makes you more sensitive to tastes</li>
+				<li class="imageadd">Dirt turfs look darker now, courtesy of some Polaris sprites.</li>
+			</ul>
+
+			<h2 class="date">04 June 2023</h2>
+			<h3 class="author">Loaf updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Total rewrite of telecomms, refer to GitHub PR for details.</li>
+			</ul>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Some significant changes to the core atmospherics simulation; please report bugs.</li>
+			</ul>
+
+			<h2 class="date">29 May 2023</h2>
+			<h3 class="author">Penelope Haze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Energy armor now protects against electrocution damage. However, unlike insulated equipment, it doesn't do anything to prevent electrocution in the first place.</li>
+			</ul>
+
+			<h2 class="date">11 May 2023</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Many interactions with empty hands now have dexterity checks associated.</li>
 			</ul>
 </div>
 </td></tr></table>

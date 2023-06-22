@@ -16,11 +16,20 @@
 	var/list/graphic = list()
 	//Cache of gas overlay objects
 	var/list/tile_overlay_cache
+	///The last cached color of the gas mixture
+	var/tmp/cached_mix_color
 
-/datum/gas_mixture/New(_volume = CELL_VOLUME, _temperature = 0, _group_multiplier = 1)
-	volume = _volume
-	temperature = _temperature
-	group_multiplier = _group_multiplier
+/datum/gas_mixture/New(_volume, _temperature, _group_multiplier)
+	if(!isnull(_volume))
+		volume = _volume
+	if(!isnull(_temperature))
+		temperature = _temperature
+	if(!isnull(_group_multiplier))
+		group_multiplier = _group_multiplier
+
+	//Since we may have values defined on creation, update everything.
+	if(volume && length(gas))
+		update_values()
 
 /datum/gas_mixture/proc/get_gas(gasid)
 	if(!gas.len)
@@ -86,11 +95,11 @@
 	update_values()
 
 
-//Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
-//Does not modify giver in any way.
+/// Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
+/// Does not modify giver in any way.
 /datum/gas_mixture/proc/merge(const/datum/gas_mixture/giver)
 	if(!giver)
-		return
+		return FALSE
 
 	if(abs(temperature-giver.temperature)>MINIMUM_TEMPERATURE_DELTA_TO_CONSIDER)
 		var/self_heat_capacity = heat_capacity()
@@ -107,6 +116,7 @@
 			gas[g] += giver.gas[g]
 
 	update_values()
+	return TRUE
 
 // Used to equalize the mixture between two zones before sleeping an edge.
 /datum/gas_mixture/proc/equalize(datum/gas_mixture/sharer)
@@ -217,6 +227,8 @@
 		else
 			total_moles += gas[g]
 
+	//Mark the cached color for update
+	cached_mix_color = null
 
 //Returns the pressure of the gas mix.  Only accurate if there have been no gas modifications since update_values() has been called.
 /datum/gas_mixture/proc/return_pressure()
@@ -314,6 +326,15 @@
 	temperature = sample.temperature
 	update_values()
 	return 1
+
+/datum/gas_mixture/GetCloneArgs()
+	return list(volume, temperature, group_multiplier)
+
+/datum/gas_mixture/PopulateClone(datum/gas_mixture/clone)
+	clone.gas         = gas.Copy()
+	clone.total_moles = total_moles
+	update_values()
+	return clone
 
 //Checks if we are within acceptable range of another gas_mixture to suspend processing or merge.
 /datum/gas_mixture/proc/compare(const/datum/gas_mixture/sample, var/vacuum_exception = 0)
@@ -519,3 +540,34 @@
 	var/M = get_total_moles()
 	if(M)
 		return get_mass()/M
+
+///Returns a color blended from all materials the gas mixture contains
+/datum/gas_mixture/proc/get_overall_color()
+	if(!cached_mix_color)
+		if(!LAZYLEN(gas))
+			cached_mix_color = "#ffffffff"
+			return cached_mix_color
+
+		if(LAZYLEN(gas) == 1)
+			var/decl/material/G = GET_DECL(gas[1])
+			cached_mix_color = G.color + num2hex(G.opacity * 255)
+			return cached_mix_color
+
+		//If we really have to, add up all colors
+		var/list/colors        = list(0, 0, 0, 0)
+		var/total_color_weight = 0
+
+		for(var/mat_path in gas)
+			var/decl/material/G = GET_DECL(mat_path)
+			if(G.color_weight <= 0)
+				continue
+			var/hex = uppertext(G.color) + num2hex(G.opacity * 255)
+			var/mod = gas[mat_path] * G.color_weight
+			colors[1] += HEX_RED(hex)   * mod
+			colors[2] += HEX_GREEN(hex) * mod
+			colors[3] += HEX_BLUE(hex)  * mod
+			colors[4] += HEX_ALPHA(hex) * mod
+			total_color_weight += mod
+		cached_mix_color = rgb(colors[1] / total_color_weight, colors[2] / total_color_weight, colors[3] / total_color_weight, colors[4] / total_color_weight)
+
+	return cached_mix_color

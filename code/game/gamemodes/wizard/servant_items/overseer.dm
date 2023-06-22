@@ -2,11 +2,11 @@
 	name = "grim hood"
 	desc = "Darker than dark. What... what is this <i>made</i> of?"
 	armor = list(
-		melee = ARMOR_MELEE_SHIELDED, 
-		bullet = ARMOR_BALLISTIC_HEAVY, 
-		laser = ARMOR_LASER_HEAVY,
-		energy = ARMOR_ENERGY_SHIELDED, 
-		bomb = ARMOR_BOMB_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_SHIELDED,
+		ARMOR_BULLET = ARMOR_BALLISTIC_HEAVY,
+		ARMOR_LASER = ARMOR_LASER_HEAVY,
+		ARMOR_ENERGY = ARMOR_ENERGY_SHIELDED,
+		ARMOR_BOMB = ARMOR_BOMB_SHIELDED
 		)
 	icon = 'icons/clothing/head/necromancer.dmi'
 	item_flags = ITEM_FLAG_AIRTIGHT
@@ -20,11 +20,11 @@
 	desc = "The void of space woven into fabric. It's hard to tell where its edges are."
 	icon = 'icons/clothing/suit/wizard/servant/overseer.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SHIELDED, 
-		bullet = ARMOR_BALLISTIC_HEAVY, 
-		laser = ARMOR_LASER_HEAVY,
-		energy = ARMOR_ENERGY_SHIELDED, 
-		bomb = ARMOR_BOMB_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_SHIELDED,
+		ARMOR_BULLET = ARMOR_BALLISTIC_HEAVY,
+		ARMOR_LASER = ARMOR_LASER_HEAVY,
+		ARMOR_ENERGY = ARMOR_ENERGY_SHIELDED,
+		ARMOR_BOMB = ARMOR_BOMB_SHIELDED
 		)
 	item_flags = ITEM_FLAG_AIRTIGHT
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE

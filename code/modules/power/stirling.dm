@@ -49,7 +49,7 @@
 
 	// Some passive equilibrium between the lines.
 	var/passive_heat_transfer = min(HEAT_TRANSFER*abs(delta_t), line_equilibrium_heat)
-	
+
 	air1.add_thermal_energy(-sign(delta_t)*passive_heat_transfer)
 	air2.add_thermal_energy(sign(delta_t)*passive_heat_transfer)
 
@@ -63,7 +63,7 @@
 	if((stat & BROKEN) || !air1.total_moles || !air2.total_moles || !working_volume?.total_moles || !working_volume?.return_pressure())
 		stop_engine()
 		return
-	
+
 	// A rough approximation of a Stirling cycle with perfect regeneration e.g. Carnot efficiency.
 	var/working_heatcap = working_volume.heat_capacity()
 
@@ -101,10 +101,10 @@
 	// We multiply by the cycle frequency to get reasonable values for power generation.
 	// Energy is still conserved, but the efficiency of the engine is slightly overestimated.
 
-	// The hot line and cold line will not receive or give more than the heat required to reach equilibrium. 
+	// The hot line and cold line will not receive or give more than the heat required to reach equilibrium.
 	var/air1_dq = -heat_dir*min(work_coefficient*air1.temperature*cycle_frequency, line_equilibrium_heat)
 	var/air2_dq = heat_dir*min(work_coefficient*air2.temperature*cycle_frequency, line_equilibrium_heat)
-	
+
 	var/work_done = -(air1_dq + air2_dq)
 
 	var/power_generated = 0.75*work_done
@@ -140,13 +140,13 @@
 	if((istype(W, /obj/item/tank/stirling)))
 		if(inserted_cylinder)
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
 		inserted_cylinder = W
 		update_icon()
 		return TRUE
-	
+
 	if(!panel_open)
 		if(IS_CROWBAR(W) && inserted_cylinder)
 			inserted_cylinder.dropInto(get_turf(src))
@@ -169,7 +169,7 @@
 
 	if((stat & BROKEN) || active || panel_open)
 		return ..()
-	
+
 	if(!inserted_cylinder)
 		to_chat(user, SPAN_WARNING("You must insert a stirling piston cylinder into \the [src] before you can start it!"))
 		return
@@ -184,7 +184,7 @@
 	if (stat & (BROKEN))
 		return
 	if (genlev != 0)
-		add_overlay(emissive_overlay('icons/obj/power.dmi', "stirling-op[genlev]")) 
+		add_overlay(emissive_overlay('icons/obj/power.dmi', "stirling-op[genlev]"))
 
 /obj/machinery/atmospherics/binary/stirling/proc/update_sound()
 	if(!sound_id)
@@ -217,7 +217,7 @@
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null
-	starting_pressure = list(/decl/material/gas/hydrogen = 2*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/hydrogen = 2 ATM)
 
 	volume = 30
 	failure_temp = 1000

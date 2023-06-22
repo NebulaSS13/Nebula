@@ -38,22 +38,13 @@
 	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
 
 /obj/assume_air(datum/gas_mixture/giver)
-	if(loc)
-		return loc.assume_air(giver)
-	else
-		return null
+	return loc?.assume_air(giver)
 
 /obj/remove_air(amount)
-	if(loc)
-		return loc.remove_air(amount)
-	else
-		return null
+	return loc?.remove_air(amount)
 
 /obj/return_air()
-	if(loc)
-		return loc.return_air()
-	else
-		return null
+	return loc?.return_air()
 
 /obj/proc/updateUsrDialog()
 	if(in_use)
@@ -147,7 +138,7 @@
 /obj/attack_hand(mob/user)
 	if(Adjacent(user))
 		add_fingerprint(user)
-	..()
+	return ..()
 
 /obj/is_fluid_pushable(var/amt)
 	return ..() && w_class <= round(amt/20)
@@ -205,7 +196,7 @@
 	if(directional_offset)
 		update_directional_offset()
 
-/** 
+/**
  * Applies the offset stored in the directional_offset json list depending on the current direction.
  * force will force the default offset to be 0 if there are no directional_offset string.
  */
@@ -227,8 +218,8 @@
 		default_pixel_z = curoff["z"] || 0
 	reset_offsets(0)
 
-/** 
- * Returns whether the object should be considered as hanging off a wall. 
+/**
+ * Returns whether the object should be considered as hanging off a wall.
  * This is userful because wall-mounted things are actually on the adjacent floor tile offset towards the wall.
  * Which means we have to deal with directional offsets differently. Such as with buttons mounted on a table, or on a wall.
  */
@@ -237,7 +228,7 @@
 	if(obj_flags & OBJ_FLAG_MOVES_UNSUPPORTED || anchor_fall)
 		var/turf/forward = get_step(get_turf(src), dir)
 		var/turf/reverse = get_step(get_turf(src), global.reverse_dir[dir])
-		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset. 
+		//If we're wall mounted and don't have a wall either facing us, or in the opposite direction, don't apply the offset.
 		// This is mainly for things that can be both wall mounted and floor mounted. Like buttons, which mappers seem to really like putting on tables.
 		// Its sort of a hack for now. But objects don't handle being on a wall or not. (They don't change their flags, layer, etc when on a wall or anything)
 		if(!forward?.is_wall() && !reverse?.is_wall())
@@ -263,9 +254,19 @@
 /obj/proc/populate_reagents()
 	return
 
+//#TODO: Implement me for all other objects!
+/obj/PopulateClone(obj/clone)
+	clone = ..()
+	clone.req_access  = deepCopyList(req_access)
+	clone.matter      = matter?.Copy()
+	clone.anchor_fall = anchor_fall
+
+	//#TODO: once item damage in, check health!
+	return clone
+
 /**
  * Returns a list with the contents that may be spawned in this object.
- * This shouldn't include things that are necessary for the object to operate, like machine components. 
+ * This shouldn't include things that are necessary for the object to operate, like machine components.
  * Its mainly for populating storage and the like.
  */
 /obj/proc/WillContain()
@@ -274,6 +275,22 @@
 ////////////////////////////////////////////////////////////////
 // Interactions
 ////////////////////////////////////////////////////////////////
+/**Returns a text string to describe the current damage level of the item, or null if non-applicable. */
+/obj/proc/get_examined_damage_string(var/health_ratio)
+	if(health_ratio >= 1)
+		return SPAN_NOTICE("It looks fully intact.")
+	else if(health_ratio > 0.75)
+		return SPAN_NOTICE("It has a few cracks.")
+	else if(health_ratio > 0.5)
+		return SPAN_WARNING("It looks slightly damaged.")
+	else if(health_ratio > 0.25)
+		return SPAN_WARNING("It looks moderately damaged.")
+	else
+		return SPAN_DANGER("It looks heavily damaged.")
+
+//
+// Alt Interactions
+//
 /obj/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/rotate)

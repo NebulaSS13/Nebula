@@ -1,13 +1,4 @@
 //Hairstyles
-
-/decl/sprite_accessory/facial_hair/shaved/Initialize()
-	. = ..()
-	species_allowed |= SPECIES_TAJARA
-
-/decl/sprite_accessory/hair/bald/Initialize()
-	. = ..()
-	species_allowed |= SPECIES_TAJARA
-
 /decl/sprite_accessory/hair/taj
 	name = "Tajaran Rattail"
 	icon_state = "hair_rattail"
@@ -139,45 +130,40 @@
 	name = "Tajaran Small Moustache"
 	icon_state = "facial_smallstache"
 
-/decl/sprite_accessory/skin/tajaran
-	name = "Default Tajaran skin"
-	icon_state = "default"
-	icon = 'mods/species/bayliens/tajaran/icons/body.dmi'
-	species_allowed = list(SPECIES_TAJARA)
-
 /decl/sprite_accessory/marking/tajaran
-	name = "Tajaran Wide Ears"
+	name = "Tajaran Nose"
+	icon_state = "nose"
 	icon = 'mods/species/bayliens/tajaran/icons/markings.dmi'
 	species_allowed = list(SPECIES_TAJARA)
 	body_parts = list(BP_HEAD)
-	icon_state = "ears_plain"
 	blend = ICON_MULTIPLY
 
-/decl/sprite_accessory/marking/tajaran/nose
-	name = "Tajaran Nose"
-	icon_state = "nose"
+/decl/sprite_accessory/marking/tajaran/ears
+	name = "Tajaran Wide Ears"
+	icon_state = "ears_plain"
+	mask_to_bodypart = FALSE
 
-/decl/sprite_accessory/marking/tajaran/wide_ears_inner
+/decl/sprite_accessory/marking/tajaran/ears/wide_inner
 	name = "Tajaran Wide Ears Interior"
 	icon_state = "ears_plain_inner"
 
-/decl/sprite_accessory/marking/tajaran/wide_ears_tuft
+/decl/sprite_accessory/marking/tajaran/ears/wide_tuft
 	name = "Tajaran Wide Ears Tuft"
 	icon_state = "ears_plain_tuft"
 
-/decl/sprite_accessory/marking/tajaran/narrow_ears
+/decl/sprite_accessory/marking/tajaran/ears/narrow
 	name = "Tajaran Narrow Ears"
 	icon_state = "ears_narrow"
 
-/decl/sprite_accessory/marking/tajaran/narrow_ears_inner
+/decl/sprite_accessory/marking/tajaran/ears/narrow_inner
 	name = "Tajaran Narrow Ears Interior"
 	icon_state = "ears_narrow_inner"
 
-/decl/sprite_accessory/marking/tajaran/narrow_ears_tuft
+/decl/sprite_accessory/marking/tajaran/ears/narrow_tuft
 	name = "Tajaran Narrow Ears Tuft"
 	icon_state = "ears_narrow_tuft"
 
-/decl/sprite_accessory/marking/tajaran/earrings
+/decl/sprite_accessory/marking/tajaran/ears/earrings
 	name = "Tajaran Earrings"
 	icon_state = "taj_earrings"
 

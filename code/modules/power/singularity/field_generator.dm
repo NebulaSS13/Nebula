@@ -28,7 +28,7 @@ field_generator power level display
 	var/power = 30000  // Current amount of power
 	var/state = 0
 	var/warming_up = 0
-	var/list/obj/machinery/containment_field/fields
+	var/list/obj/effect/containment_field/fields
 	var/list/obj/machinery/field_generator/connected_gens
 	var/clean_up = 0
 
@@ -201,7 +201,7 @@ field_generator power level display
 	for(var/obj/machinery/field_generator/FG in connected_gens)
 		if (!isnull(FG))
 			power_draw += gen_power_draw
-	for (var/obj/machinery/containment_field/F in fields)
+	for (var/obj/effect/containment_field/F in fields)
 		if (!isnull(F))
 			power_draw += field_power_draw
 	power_draw /= 2	//because this will be mirrored for both generators
@@ -264,7 +264,7 @@ field_generator power level display
 			if(ismob(A))
 				continue
 			if(!istype(A,/obj/machinery/field_generator))
-				if((istype(A,/obj/machinery/door)||istype(A,/obj/machinery/the_singularitygen))&&(A.density))
+				if((istype(A,/obj/machinery/door)||istype(A,/obj/machinery/singularity_generator))&&(A.density))
 					return 0
 		steps += 1
 		G = locate(/obj/machinery/field_generator) in T
@@ -279,8 +279,8 @@ field_generator power level display
 	for(var/dist = 0, dist < steps, dist += 1) // creates each field tile
 		var/field_dir = get_dir(T,get_step(G.loc, NSEW))
 		T = get_step(T, NSEW)
-		if(!locate(/obj/machinery/containment_field) in T)
-			var/obj/machinery/containment_field/CF = new/obj/machinery/containment_field()
+		if(!locate(/obj/effect/containment_field) in T)
+			var/obj/effect/containment_field/CF = new/obj/effect/containment_field()
 			CF.set_master(src,G)
 			fields += CF
 			G.fields += CF
@@ -308,7 +308,7 @@ field_generator power level display
 
 /obj/machinery/field_generator/proc/cleanup()
 	clean_up = 1
-	for (var/obj/machinery/containment_field/F in fields)
+	for (var/obj/effect/containment_field/F in fields)
 		if (QDELETED(F))
 			continue
 		qdel(F)
@@ -329,7 +329,7 @@ field_generator power level display
 	//I want to avoid using global variables.
 	spawn(1)
 		var/temp = 1 //stops spam
-		for(var/obj/singularity/O in SSmachines.machinery)
+		for(var/obj/effect/singularity/O in SSmachines.machinery)
 			if(O.last_warning && temp)
 				if((world.time - O.last_warning) > 50) //to stop message-spam
 					temp = 0

@@ -64,6 +64,11 @@
 	if (!.)
 		. = B.qdels - A.qdels
 
+/proc/cmp_unit_test_priority(datum/unit_test/A, datum/unit_test/B)
+	. = A.priority - B.priority
+	if (!.)
+		. = sorttext(B, A)
+
 /proc/cmp_timer(datum/timedevent/a, datum/timedevent/b)
 	return a.timeToRun - b.timeToRun
 

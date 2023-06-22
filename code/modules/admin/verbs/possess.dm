@@ -2,7 +2,7 @@
 	set name = "Possess Obj"
 	set category = "Object"
 
-	if(istype(O,/obj/singularity))
+	if(istype(O,/obj/effect/singularity))
 		if(config.forbid_singulo_possession)
 			to_chat(usr, "It is forbidden to possess singularities.")
 			return

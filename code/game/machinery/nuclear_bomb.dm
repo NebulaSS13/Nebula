@@ -71,15 +71,15 @@ var/global/bomb_set
 		return
 
 	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
-		return attack_hand(user)
+		return attack_hand_with_interaction_checks(user)
 
 	if(extended)
 		if(istype(O, /obj/item/disk/nuclear))
-			if(!user.unEquip(O, src))
+			if(!user.try_unequip(O, src))
 				return
 			auth = O
 			add_fingerprint(user)
-			return attack_hand(user)
+			return attack_hand_with_interaction_checks(user)
 
 	if(anchored)
 		switch(removal_stage)
@@ -232,7 +232,7 @@ var/global/bomb_set
 		else
 			var/obj/item/I = usr.get_active_hand()
 			if(istype(I, /obj/item/disk/nuclear))
-				if(!usr.unEquip(I, src))
+				if(!usr.try_unequip(I, src))
 					return 1
 				auth = I
 	if(is_auth(usr))
@@ -414,25 +414,25 @@ var/global/bomb_set
 	. = ..()
 	var/obj/item/paper/R = new(src)
 	R.set_content({"<center><b>Warning: Classified<br>[global.using_map.station_name] Self-Destruct System - Instructions</b></center><br><br>
-	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's 
+	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's
 	on-board nuclear self-destruct system. Please read carefully.<br><br>
 	1) (Optional) Announce the imminent activation to any surviving crew members, and begin evacuation procedures.<br>
 	2) Notify two heads of staff, both with ID cards with access to the ship's Keycard Authentication Devices.<br>
 	3) Proceed to the self-destruct chamber, located on Deck One by the stairwell.<br>
 	4) Unbolt the door and enter the chamber.<br>
-	5) Both heads of staff should stand in front of their own Keycard Authentication Devices. On the KAD interface, select 
+	5) Both heads of staff should stand in front of their own Keycard Authentication Devices. On the KAD interface, select
 	Grant Nuclear Authentication Code. Both heads of staff should then swipe their ID cards simultaneously.<br>
 	6) The KAD will now display the Authentication Code. Memorize this code.<br>
 	7) Insert the nuclear authentication disk into the self-destruct terminal.<br>
 	8) Enter the code into the self-destruct terminal.<br>
-	9) Authentication procedures are now complete. Open the two cabinets containing the nuclear cylinders. They are 
+	9) Authentication procedures are now complete. Open the two cabinets containing the nuclear cylinders. They are
 	located on the back wall of the chamber.<br>
 	10) Place the cylinders upon the six nuclear cylinder inserters.<br>
 	11) Activate the inserters. The cylinders will be pulled down into the self-destruct system.<br>
 	12) Return to the terminal. Enter the desired countdown time.<br>
 	13) When ready, disable the safety switch.<br>
 	14) Start the countdown.<br><br>
-	This concludes the instructions."}, 
+	This concludes the instructions."},
 		"vessel self-destruct instructions")
 
 	//stamp the paper

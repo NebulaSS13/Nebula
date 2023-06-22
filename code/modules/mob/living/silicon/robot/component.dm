@@ -37,6 +37,13 @@
 	installed = -1
 	uninstall()
 
+/datum/robot_component/Destroy()
+	if(owner)
+		owner.components -= src
+	owner = null
+	wrapped = null
+	return ..()
+
 /datum/robot_component/proc/repair()
 	if (istype(wrapped, /obj/item/robot_parts/robot_component))
 		var/obj/item/robot_parts/robot_component/comp = wrapped
@@ -119,6 +126,10 @@
 	..()
 	stored_cell = owner.cell
 	owner.cell = null
+
+/datum/robot_component/cell/Destroy()
+	QDEL_NULL(stored_cell)
+	return ..()
 
 /datum/robot_component/cell/repair()
 	owner.cell = stored_cell
@@ -211,34 +222,43 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
 	material = /decl/material/solid/metal/steel
-
-	var/brute = 0
-	var/burn = 0
+	health = 30
+	max_health = 30
+	var/burn_damage = 0
+	var/brute_damage = 0
 	var/icon_state_broken = "broken"
-	var/total_dam = 0
-	var/max_dam = 30
 
-/obj/item/robot_parts/robot_component/take_damage(amount, damtype, silent)
-	switch(damtype)
-		if(BURN, ELECTROCUTE)
-			burn += amount
-		if(BRUTE)
-			brute += amount
-		else
-			return 0 //Only care about burn and brute
+/obj/item/robot_parts/robot_component/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
+	if(lastdamage > 0)
+		if(lastdamtype == BRUTE)
+			brute_damage = clamp(lastdamage, 0, max_health)
+		if(lastdamtype == BURN || lastdamtype == ELECTROCUTE)
+			burn_damage = clamp(lastdamage, 0, max_health)
 
-	total_dam = brute+burn
-	if(total_dam >= max_dam)
-		var/obj/item/stock_parts/circuitboard/broken/broken_device = new (get_turf(src))
-		if(icon_state_broken != "broken")
-			broken_device.icon = src.icon
-			broken_device.icon_state = icon_state_broken
-		broken_device.name = "broken [name]"
-		return broken_device
-	return 0
+	//Health works differently for this thing
+	health = clamp(max_health - (brute_damage + burn_damage), 0, max_health)
+	. = ..()
+
+/obj/item/robot_parts/robot_component/proc/set_bruteloss(var/amount)
+	brute_damage = clamp(amount, 0, max_health)
+	health = max_health - (brute_damage + burn_damage)
+	check_health(amount, BRUTE)
+
+/obj/item/robot_parts/robot_component/proc/set_burnloss(var/amount)
+	burn_damage = clamp(amount, 0, max_health)
+	health = max_health - (brute_damage + burn_damage)
+	check_health(amount, BURN)
+
+/obj/item/robot_parts/robot_component/physically_destroyed(skip_qdel)
+	var/obj/item/stock_parts/circuitboard/broken/broken_device = new (get_turf(src))
+	if(icon_state_broken != "broken")
+		broken_device.icon = src.icon
+		broken_device.icon_state = icon_state_broken
+	broken_device.name = "broken [name]"
+	. = ..()
 
 /obj/item/robot_parts/robot_component/proc/is_functional()
-	return ((brute + burn) < max_dam)
+	return ((brute_damage + burn_damage) < max_health)
 
 /obj/item/robot_parts/robot_component/binary_communication_device
 	name = "binary communication device"

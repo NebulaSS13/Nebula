@@ -58,7 +58,7 @@
 	new /obj/item/pinpointer/nukeop(src)
 	new /obj/item/modular_computer/pda/mercenary(src)
 	var/obj/item/radio/uplink/U = new(src)
-	U.hidden_uplink.uses = 40
+	U.tc_amount = 40
 	return
 
 /obj/structure/closet/syndicate/resources

@@ -409,7 +409,7 @@ Class Procs:
 		var/line = "<span class='notice'>	[C.name]</span>"
 		if(!C.health)
 			line = "<span class='warning'>	[C.name] (destroyed)</span>"
-		else if(C.health < 0.75 * C.max_health)
+		else if(C.get_percent_health() < 75)
 			line = "<span class='notice'>	[C.name] (damaged)</span>"
 		to_chat(user, line)
 	for(var/path in uncreated_component_parts)
@@ -492,3 +492,8 @@ Class Procs:
 
 /obj/machinery/get_matter_amount_modifier()
 	. = ..() * HOLLOW_OBJECT_MATTER_MULTIPLIER // machine matter is largely just the frame, and the components contribute most of the matter/value.
+
+///Handles updating stock parts and internal id tag when changing it to something else
+/obj/machinery/proc/set_id_tag(var/new_id_tag)
+	id_tag = new_id_tag
+	//#TODO: Add handling for components, when we're sure it will work for any kind of machinery. Some machines do not use the same id_tag on receiver and transmitters for example.

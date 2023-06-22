@@ -2,11 +2,11 @@
 	name = "tactical turtleneck"
 	desc = "It's some non-descript, slightly suspicious looking, civilian clothing."
 	icon = 'icons/clothing/under/uniform_tacticool.dmi'
-	has_sensor = 0
+	has_sensor = SUIT_NO_SENSORS
 	armor = list(
-		melee = ARMOR_MELEE_SMALL, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_SMALL,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR
 		)
 	siemens_coefficient = 0.9
 	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_TRACE)

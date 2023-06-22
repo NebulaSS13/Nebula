@@ -64,6 +64,8 @@
 	return ..() + {"
 		<option value='?_src_=vars;addaura=\ref[src]'>Add Aura</option>
 		<option value='?_src_=vars;removeaura=\ref[src]'>Remove Aura</option>
+		<option value='?_src_=vars;addstressor=\ref[src]'>Add Stressor</option>
+		<option value='?_src_=vars;removestressor=\ref[src]'>Remove Stressor</option>
 		"}
 
 /mob/living/carbon/human/get_view_variables_options()
@@ -85,6 +87,11 @@
 		<option value='?_src_=vars;delall=\ref[src]'>Delete all of type</option>
 		<option value='?_src_=vars;explode=\ref[src]'>Trigger explosion</option>
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
+		"}
+
+/obj/item/get_view_variables_options()
+	return ..() + {"
+		<option value='?_src_=vars;setmaterial=\ref[src]'>Set material</option>
 		"}
 
 /turf/get_view_variables_options()

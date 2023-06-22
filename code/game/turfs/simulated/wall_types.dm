@@ -1,26 +1,24 @@
 //Commonly used
 /turf/simulated/wall/prepainted
-	paint_color = COLOR_GUNMETAL
-
+	color = COLOR_GUNMETAL
+	paint_color = COLOR_WALL_GUNMETAL
+	stripe_color = COLOR_GUNMETAL
 /turf/simulated/wall/r_wall/prepainted
-	paint_color = COLOR_GUNMETAL
+	color = COLOR_GUNMETAL
+	paint_color = COLOR_WALL_GUNMETAL
+	stripe_color = COLOR_GUNMETAL
 
 /turf/simulated/wall/r_wall
+	color = "#a8a9b2"
 	icon_state = "reinforced_solid"
 	material = /decl/material/solid/metal/plasteel
 	reinf_material = /decl/material/solid/metal/plasteel
 
 /turf/simulated/wall/r_wall/hull
 	name = "hull"
+	color = COLOR_HULL
 	paint_color = COLOR_HULL
 	stripe_color = COLOR_HULL
-
-/turf/simulated/wall/prepainted
-	paint_color = COLOR_WALL_GUNMETAL
-	stripe_color = COLOR_GUNMETAL
-/turf/simulated/wall/r_wall/prepainted
-	paint_color = COLOR_WALL_GUNMETAL
-	stripe_color = COLOR_GUNMETAL
 
 /turf/simulated/wall/r_wall/hull/Initialize()
 	. = ..()
@@ -44,6 +42,7 @@
 	material = /decl/material/solid/metal/titanium
 
 /turf/simulated/wall/r_titanium
+	color = "#d1e6e3"
 	icon_state = "reinforced_solid"
 	material = /decl/material/solid/metal/titanium
 	reinf_material = /decl/material/solid/metal/titanium
@@ -54,8 +53,18 @@
 	reinf_material = /decl/material/solid/metal/plasteel/ocp
 
 /turf/simulated/wall/iron
+	color = "#5c5454"
 	icon_state = "metal"
 	material = /decl/material/solid/metal/iron
+
+/turf/simulated/wall/plastic
+	color = COLOR_EGGSHELL
+	icon_state = "plastic"
+	material = /decl/material/solid/plastic
+
+// A plastic wall with a plastic girder. Very flimsy but very easy to move or remove with just a crowbar.
+/turf/simulated/wall/plastic/facade
+	girder_material = /decl/material/solid/plastic
 
 /turf/simulated/wall/sandstone
 	color = COLOR_GOLD
@@ -96,6 +105,12 @@
 	icon_state = "cult"
 	color = COLOR_RED_GRAY
 	material = /decl/material/solid/stone/cult
+
+/turf/simulated/wall/cult/on_defilement()
+	return
+
+/turf/simulated/wall/cult/is_defiled()
+	return TRUE
 
 /turf/simulated/wall/cult/reinf
 	icon_state = "reinforced_cult"

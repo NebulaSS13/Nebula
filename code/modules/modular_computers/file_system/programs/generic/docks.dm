@@ -32,7 +32,7 @@
 /datum/nano_module/program/docking/proc/refresh_docks()
 	docking_controllers.Cut()
 	docking_beacons.Cut()
-	var/list/zlevels = GetConnectedZlevels(get_host_z())
+	var/list/zlevels = SSmapping.get_connected_levels(get_host_z())
 	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
 		if(D.z in zlevels)
 			var/shuttleside = 0
@@ -42,15 +42,15 @@
 					if(S.shuttle_docking_controller.id_tag == D.program.id_tag)
 						shuttleside = 1
 						break
-			if(shuttleside)	
+			if(shuttleside)
 				continue
 			docking_controllers += D.program.id_tag
-		
+
 	// Add magnetic docking beacons.
 	var/datum/computer_network/network = get_network()
 	if(network)
 		docking_beacons |= network.get_tags_by_type(/obj/machinery/docking_beacon)
-	
+
 /datum/nano_module/program/docking/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	var/list/docks = list()
@@ -70,7 +70,7 @@
 				"docked" = docked,
 				"codes" = P.docking_codes ? P.docking_codes : "Unset"
 				)))
-	
+
 	for(var/beacontag in docking_beacons)
 		var/datum/extension/network_device/D = network.get_device_by_tag(beacontag)
 		var/obj/machinery/docking_beacon/beacon = D.holder
@@ -96,7 +96,7 @@
 /datum/nano_module/program/docking/Topic(href, href_list, state)
 	if(..())
 		return TOPIC_HANDLED
-	
+
 	if(istext(href_list["edit_docking_codes"]))
 		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[href_list["edit_docking_codes"]]
 		if(P)
@@ -118,7 +118,7 @@
 		if(P)
 			P.receive_user_command("undock")
 		return TOPIC_HANDLED
-	
+
 	if(istext(href_list["beacon"]))
 		var/datum/computer_network/network = get_network()
 		var/datum/extension/network_device/device = network.get_device_by_tag(href_list["beacon"])

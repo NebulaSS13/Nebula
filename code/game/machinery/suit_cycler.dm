@@ -162,7 +162,7 @@
 	//Hacking init.
 	if(IS_MULTITOOL(I) || IS_WIRECUTTER(I))
 		if(panel_open)
-			attack_hand(user)
+			physical_attack_hand(user)
 		return
 	//Other interface stuff.
 	if(istype(I, /obj/item/grab))
@@ -183,7 +183,7 @@
 		if(boots)
 			to_chat(user, SPAN_WARNING("The cycler already contains some boots."))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		boots = I
@@ -199,7 +199,7 @@
 		if(helmet)
 			to_chat(user, SPAN_WARNING("The cycler already contains a helmet."))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
@@ -217,7 +217,7 @@
 			to_chat(user, SPAN_WARNING("The cycler already contains a voidsuit."))
 			return
 
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		suit = I
@@ -245,9 +245,9 @@
 	return 1
 
 /obj/machinery/suit_cycler/physical_attack_hand(mob/user)
-	if(electrified != 0)
-		if(shock(user, 100))
-			return TRUE
+	if(electrified != 0 && shock(user, 100))
+		return TRUE
+	return ..()
 
 /obj/machinery/suit_cycler/interface_interact(mob/user)
 	interact(user)

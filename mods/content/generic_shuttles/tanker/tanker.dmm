@@ -447,7 +447,7 @@
 /area/tanker)
 "So" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 4;
+	dir = 8;
 	id_tag = "tanker_input"
 	},
 /turf/simulated/floor/reinforced/oxygen,

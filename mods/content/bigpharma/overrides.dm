@@ -27,3 +27,12 @@
 
 /obj/item/chems/pill/gleam
 	obfuscated_meds_type = null
+
+/obj/item/storage/pill_bottle/assorted
+	obfuscated_meds_type = null
+
+/obj/item/chems/pill/detergent
+	obfuscated_meds_type = null
+
+/obj/item/chems/pill/pod
+	obfuscated_meds_type = null

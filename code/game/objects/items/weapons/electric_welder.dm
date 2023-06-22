@@ -2,7 +2,6 @@
 	name = "arc welder"
 	desc = "A man-portable arc welding tool."
 	icon = 'icons/obj/items/tool/welders/welder_arc.dmi'
-	icon_state = "welder_arc"
 	welding_resource = "stored charge"
 	tank = null
 	waterproof = TRUE
@@ -60,7 +59,7 @@
 	else if(istype(W, /obj/item/cell))
 		if(cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.unEquip(W))
+		else if(user.try_unequip(W))
 			cell = W
 			cell.forceMove(src)
 			to_chat(user, SPAN_NOTICE("You slot \the [cell] into \the [src]."))

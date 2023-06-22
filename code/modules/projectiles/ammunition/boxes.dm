@@ -62,14 +62,17 @@
 		overlays += I
 
 /obj/item/ammo_magazine/shotholder/attack_hand(mob/user)
-	if((user.a_intent == I_HURT) && (stored_ammo.len))
-		var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
-		stored_ammo-=C
-		user.put_in_hands(C)
-		user.visible_message("\The [user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
-		update_icon()
-	else
-		..()
+	if(loc != user || user.a_intent != I_HURT || !length(stored_ammo) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+	stored_ammo -= C
+	user.put_in_hands(C)
+	user.visible_message(
+		"\The [user] removes \a [C] from [src].",
+		SPAN_NOTICE("You remove \a [C] from [src].")
+	)
+	update_icon()
+	return TRUE
 
 /obj/item/ammo_magazine/shotholder/shell
 	name = "shotgun shell holder"
@@ -148,6 +151,10 @@
 	labels = list("flash")
 	ammo_type = /obj/item/ammo_casing/pistol/flash
 
+/obj/item/ammo_magazine/pistol/emp
+	labels = list("haywire")
+	ammo_type = /obj/item/ammo_casing/pistol/emp
+
 /obj/item/ammo_magazine/pistol/small
 	icon_state = "holdout"
 	material = /decl/material/solid/metal/steel
@@ -223,6 +230,16 @@
 	labels = list("practice")
 	ammo_type = /obj/item/ammo_casing/rifle/practice
 
+/obj/item/ammo_magazine/rifle/drum
+	name = "machine gun drum magazine"
+	icon_state = "drum"
+	origin_tech = "{'combat':2}"
+	mag_type = MAGAZINE
+	caliber = CALIBER_RIFLE
+	material = /decl/material/solid/metal/steel
+	ammo_type = /obj/item/ammo_casing/rifle
+	max_ammo = 100
+
 /obj/item/ammo_magazine/caps
 	name = "speed loader"
 	desc = "A cheap plastic speed loader for some kind of revolver."
@@ -232,6 +249,14 @@
 	material = /decl/material/solid/metal/steel
 	max_ammo = 7
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/speedloader/rubber
+	labels = list("rubber")
+	ammo_type = /obj/item/ammo_casing/pistol/magnum/rubber
+
+/obj/item/ammo_magazine/speedloader/practice
+	labels = list("practice")
+	ammo_type = /obj/item/ammo_casing/pistol/magnum/practice
 
 /obj/item/ammo_magazine/speedloader/laser_revolver
 	caliber = CALIBER_PISTOL_LASBULB

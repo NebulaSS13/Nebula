@@ -44,10 +44,10 @@
 					break
 	return 1
 
-/datum/computer_file/program/revelation/clone()
-	var/datum/computer_file/program/revelation/temp = ..()
-	temp.armed = armed
-	return temp
+/datum/computer_file/program/revelation/PopulateClone(datum/computer_file/program/revelation/clone)
+	clone = ..()
+	clone.armed = armed
+	return clone
 
 /datum/nano_module/program/revelation
 	name = "Revelation Virus"

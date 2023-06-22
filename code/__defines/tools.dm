@@ -72,3 +72,5 @@
 #define TOOL_PROP_PEN_FLAG        "pen_flag"     //Property for pens to specify additional properties about themselves
 #define TOOL_PROP_PEN_SIG         "signature"    //Property for pens specifically. Returns a stored forged signature if there's one.
 #define TOOL_PROP_PEN_SHADE_COLOR "shade_color"  //Property for pens returns the shade color if applicable
+///Property for pens returns the font the pen uses
+#define TOOL_PROP_PEN_FONT        "pen_font"

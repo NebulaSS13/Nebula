@@ -59,3 +59,7 @@ var/global/list/crashed_pod_areas = list()
 		"Adder",		"Bumblebee")
 	name = "[pick("SEV", "SIC", "FTUV", "ICV", "HMS")] [pick(possible_ship_names)]"
 	. = ..()
+
+/obj/structure/sign/plaque/ai_dev/pod
+	desc = "A plaque with information regarding this particular lifepod. It reads: 'Armalev Industries Skyfin-E, Exoplanetary Suvival Pod' there's a registry number, and an assigned mothership, but they've both been scratched to illegiblity."
+	name = "\improper Lifepod Plaque"

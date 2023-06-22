@@ -133,7 +133,3 @@
 	name = "Wing Feathers, Additive (Right)"
 	icon_state = "wing_feathers-add"
 	blend = ICON_ADD
-
-/decl/sprite_accessory/hair/bald/Initialize()
-	. = ..()
-	LAZYADD(species_allowed, SPECIES_AVIAN)

@@ -212,7 +212,7 @@ var/global/list/global/tank_gauge_cache = list()
 
 	if(istype(W, /obj/item/flamethrower))
 		var/obj/item/flamethrower/F = W
-		if(!F.secured || F.tank || !user.unEquip(src, F))
+		if(!F.secured || F.tank || !user.try_unequip(src, F))
 			return
 
 		master = F
@@ -354,10 +354,9 @@ var/global/list/global/tank_gauge_cache = list()
 	return air_contents
 
 /obj/item/tank/assume_air(datum/gas_mixture/giver)
-	air_contents.merge(giver)
+	. = air_contents.merge(giver)
 	check_status()
 	queue_icon_update()
-	return 1
 
 /obj/item/tank/proc/remove_air_volume(volume_to_return)
 	if(!air_contents)
@@ -545,6 +544,11 @@ var/global/list/global/tank_gauge_cache = list()
 	var/obj/item/tank/tank = null
 	var/obj/item/assembly_holder/assembly = null
 
+/obj/item/tankassemblyproxy/Destroy()
+	tank = null // We aren't responsible for our tank
+	QDEL_NULL(assembly) // but we're responsible for the assembly.
+	return ..()
+
 /obj/item/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
 
@@ -556,7 +560,7 @@ var/global/list/global/tank_gauge_cache = list()
 	if(isigniter(S.a_left) == isigniter(S.a_right))		//Check if either part of the assembly has an igniter, but if both parts are igniters, then fuck it
 		return
 
-	if(!M.unEquip(src))
+	if(!M.try_unequip(src))
 		return					//Remove the tank from your character,in case you were holding it
 	M.put_in_hands(src)			//Equips the bomb if possible, or puts it on the floor.
 

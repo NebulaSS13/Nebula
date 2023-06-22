@@ -58,7 +58,7 @@
 				set_sample(B.stored_item)
 				B.empty()
 				return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, SPAN_NOTICE("You insert \the [W] into  \the [src]."))
 		set_sample(W)

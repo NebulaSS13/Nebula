@@ -271,7 +271,7 @@
 		set_pin_data(IC_OUTPUT, 13, H.nutrilevel)
 		set_pin_data(IC_OUTPUT, 14, H.harvest)
 		set_pin_data(IC_OUTPUT, 15, H.dead)
-		set_pin_data(IC_OUTPUT, 16, H.health)
+		set_pin_data(IC_OUTPUT, 16, H.plant_health)
 	push_data()
 	activate_pin(2)
 
@@ -652,7 +652,6 @@
 
 /obj/item/integrated_circuit/input/signaler/Destroy()
 	radio_controller.remove_object(src,frequency)
-	QDEL_NULL(radio_connection)
 	frequency = 0
 	return ..()
 
@@ -687,7 +686,6 @@
 
 /obj/item/integrated_circuit/input/signaler/proc/create_signal()
 	var/datum/signal/signal = new()
-	signal.transmission_method = 1
 	signal.source = src
 	if(isnum(code))
 		signal.encryption = code
@@ -735,7 +733,6 @@
 
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
 	var/datum/signal/signal = new()
-	signal.transmission_method = 1
 	signal.data["tag"] = code
 	signal.data["command"] = command
 	signal.encryption = 0
@@ -769,7 +766,7 @@
 	. += "Please select a teleporter to lock in on:"
 	for(var/obj/machinery/teleport/hub/R in SSmachines.machinery)
 		var/obj/machinery/computer/teleporter/com = R.com
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable() && ARE_Z_CONNECTED(get_z(src), get_z(com)))
+		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable() && LEVELS_ARE_Z_CONNECTED(get_z(src), get_z(com)))
 			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
 	.["None (Dangerous)"] = "tport=random"
 
@@ -927,7 +924,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/pu = get_pin_data(IC_INPUT, 1)
-	if(pu && !user.unEquip(A,get_turf(src)))
+	if(pu && !user.try_unequip(A,get_turf(src)))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()

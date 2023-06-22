@@ -68,16 +68,16 @@
 	toggle_paddles()
 
 /obj/item/defibrillator/attack_hand(mob/user)
-	if(loc == user)
-		toggle_paddles()
-	else
-		..()
+	if(loc != user || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	toggle_paddles()
+	return TRUE
 
 // what is this proc doing?
 /obj/item/defibrillator/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(ismob(loc))
 		var/mob/M = loc
-		if(M.unEquip(src))
+		if(M.try_unequip(src))
 			add_fingerprint(usr)
 			M.put_in_hands(src)
 			return TRUE
@@ -90,7 +90,7 @@
 		if(bcell)
 			to_chat(user, "<span class='notice'>\the [src] already has a cell.</span>")
 		else
-			if(!user.unEquip(W))
+			if(!user.try_unequip(W))
 				return
 			W.forceMove(src)
 			bcell = W
@@ -204,7 +204,7 @@
 	w_class = ITEM_SIZE_LARGE
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_SECONDARY, /decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 	var/safety = 1 //if you can zap people with the paddles on harm mode
 	var/combat = 0 //If it can be used to revive people wearing thick clothing (e.g. spacesuits)

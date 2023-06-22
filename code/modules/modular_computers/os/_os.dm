@@ -15,9 +15,11 @@
 	var/menu_icon = "menu"									// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
 	var/screensaver_icon = "standby"
 	var/default_icon = "generic"							//Overlay icon for programs that have a screen overlay the host doesn't have.
+	var/os_name = "GOOSE"
+	var/os_full_name = "GOOSE v2.0.4b"
 
 	// Used for deciding if various tray icons need to be updated
-	var/last_battery_percent							
+	var/last_battery_percent
 	var/last_world_time
 	var/list/last_header_icons
 
@@ -62,7 +64,7 @@
 	var/datum/computer_file/data/account/access_account = get_account()
 	if(access_account)
 		var/datum/computer_network/network = get_network()
-		if(network) 	
+		if(network)
 			var/location = "[network.network_id]"
 			. += "[access_account.login]@[location]" // User access uses '@'
 			for(var/group in access_account.groups)
@@ -73,7 +75,7 @@
 		var/obj/item/card/id/I = user.GetIdCard()
 		if(I)
 			. += I.GetAccess(access_account?.login) // Ignore any access that's already on the user account.
-	
+
 // Returns the current account, if possible. User var is passed only for updating program access from ID, if no account is found.
 /datum/extension/interactive/os/proc/get_account(var/mob/user)
 	if(!current_account)
@@ -137,7 +139,7 @@
 	var/new_password = sanitize(input(user, "Enter your account password:", "Account password", default_password) as text|null)
 	if(!new_password || !CanUseTopic(user, global.default_topic_state))
 		return
-	
+
 	if(login_account(new_login, new_password, user))
 		to_chat(user, SPAN_NOTICE("Account login successful: Welcome [new_login]!"))
 	else
@@ -147,7 +149,7 @@
 	on = FALSE
 	for(var/datum/computer_file/program/P in running_programs)
 		kill_program(P, 1)
-	
+
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
@@ -170,9 +172,6 @@
 
 /datum/extension/interactive/os/proc/system_boot()
 	on = TRUE
-	var/datum/computer_file/data/autorun = get_file("autorun", "local")
-	if(istype(autorun))
-		run_program(autorun.stored_data)
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
@@ -215,8 +214,8 @@
 		P.program_state = PROGRAM_STATE_ACTIVE
 		active_program = P
 	else if(P.can_run(get_access(user), user, TRUE))
-		P.on_startup(user, src)
 		active_program = P
+		P.on_startup(user, src)
 	else
 		return
 	running_programs |= P
@@ -308,3 +307,19 @@
 	var/datum/computer_file/program/email_client/e_client = locate() in running_programs
 	if(e_client)
 		e_client.mail_received(received)
+
+/datum/extension/interactive/os/proc/run_script(mob/user, var/datum/computer_file/data/script)
+	open_terminal(user)
+	var/datum/terminal/T = has_terminal(user)
+	if(!istype(T))
+		return  TOPIC_HANDLED
+
+	T.show_terminal(user)
+	T.append_to_history(">Running '[script.filename].[script.filetype]'")
+	var/list/lines = splittext(script.stored_data, "\[br\]")
+	for(var/line in lines)
+		var/output = T.parse(line, user)
+		if(QDELETED(T)) // Check for exit.
+			return TOPIC_HANDLED
+		T.append_to_history(output)
+		CHECK_TICK

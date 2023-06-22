@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle19"
 	material = /decl/material/solid/glass
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	var/slime_type = /mob/living/simple_animal/slime
 	var/can_tame_adults = FALSE
 

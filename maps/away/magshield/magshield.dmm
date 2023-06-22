@@ -400,6 +400,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "2-8"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "bj" = (
@@ -1046,6 +1047,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "cV" = (
@@ -1428,6 +1430,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "ej" = (
@@ -1483,6 +1486,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "eo" = (
@@ -2054,12 +2058,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
-"fV" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/red{
-	dir = 1
-	},
-/turf/simulated/floor/airless,
-/area/magshield/east)
 "fW" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
@@ -2146,12 +2144,6 @@
 "gk" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 5
-	},
-/turf/simulated/floor/airless,
-/area/magshield/east)
-"gl" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 9
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2444,6 +2436,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "hh" = (
@@ -2730,6 +2723,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "hZ" = (
@@ -2765,6 +2759,7 @@
 /area/magshield/west)
 "ie" = (
 /obj/machinery/seed_storage,
+/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
 /area/magshield/east)
 "if" = (
@@ -3394,6 +3389,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/magshield/south)
 "kb" = (
@@ -3755,13 +3751,13 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "le" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
-/area/magshield/south)
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/airless,
+/area/magshield/smes_storage)
 "lf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
@@ -3897,6 +3893,11 @@
 /obj/effect/shuttle_landmark/nav_magshield/nav3,
 /turf/space,
 /area/space)
+"qp" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging,
+/obj/abstract/landmark/allowed_leak,
+/turf/space,
+/area/space)
 "uL" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
@@ -3909,6 +3910,51 @@
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
+"JW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/tiled,
+/area/magshield/south)
+"KZ" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 4
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/space,
+/area/space)
+"Oa" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/tiled/dark,
+/area/magshield/west)
+"TY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/airless,
+/area/magshield/north)
+"Uw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/tiled,
+/area/magshield/south)
 
 (1,1,1) = {"
 aa
@@ -19371,7 +19417,7 @@ hM
 hM
 hM
 hM
-it
+Oa
 it
 it
 iK
@@ -20144,7 +20190,7 @@ bc
 bc
 bO
 bc
-bc
+qp
 aa
 ao
 aa
@@ -20346,10 +20392,10 @@ bc
 bc
 bc
 bc
-bc
+qp
 aa
 aa
-bN
+KZ
 ab
 de
 de
@@ -20547,7 +20593,7 @@ bc
 bc
 bc
 bc
-bc
+qp
 aa
 aa
 aa
@@ -21165,7 +21211,7 @@ dl
 dj
 dH
 dg
-ej
+TY
 dg
 dj
 de
@@ -23574,7 +23620,7 @@ aD
 aU
 bi
 bg
-aU
+le
 aU
 aU
 bZ
@@ -27058,7 +27104,7 @@ iq
 iq
 iq
 iq
-le
+kz
 iq
 ip
 ip
@@ -27865,7 +27911,7 @@ iq
 iq
 iq
 iq
-kx
+JW
 ip
 jl
 jl
@@ -28066,7 +28112,7 @@ jg
 ix
 jZ
 kt
-ix
+Uw
 ku
 kc
 jD
@@ -28446,7 +28492,7 @@ fi
 fi
 fU
 fi
-fU
+fi
 fi
 fi
 gF
@@ -28646,9 +28692,9 @@ fh
 fi
 fi
 fi
-fV
-ge
-gl
+fU
+fi
+fi
 fi
 fi
 fi

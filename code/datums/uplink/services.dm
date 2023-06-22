@@ -61,7 +61,7 @@
 	w_class = ITEM_SIZE_TINY
 	icon = 'icons/obj/items/device/flash_synthetic.dmi'
 	icon_state = ICON_STATE_WORLD
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/state = AWAITING_ACTIVATION
 	var/service_label = "Unnamed Service"
 	var/service_duration = 0 SECONDS
@@ -86,7 +86,7 @@
 	if(state != AWAITING_ACTIVATION)
 		to_chat(user, "<span class='warning'>\The [src] won't activate again.</span>")
 		return
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[get_z(src)]"]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(get_z(src))]
 	var/choice = alert(user, "This will only affect your current location[istype(O) ? " ([O])" : ""]. Proceed?","Confirmation", "Yes", "No")
 	if(choice != "Yes")
 		return
@@ -161,7 +161,7 @@
 	service_label = "Ion Storm Announcement"
 
 /obj/item/uplink_service/fake_ion_storm/enable(var/mob/user = usr)
-	ion_storm_announcement(GetConnectedZlevels(get_z(src)))
+	ion_storm_announcement(SSmapping.get_connected_levels(get_z(src)))
 	. = ..()
 
 /*****************
@@ -191,7 +191,7 @@
 
 	if(CanUseTopic(user, global.hands_topic_state) != STATUS_INTERACTIVE)
 		return FALSE
-	command_announcement.Announce(message, title, msg_sanitized = 1, zlevels = GetConnectedZlevels(get_z(src)))
+	command_announcement.Announce(message, title, msg_sanitized = 1, zlevels = SSmapping.get_connected_levels(get_z(src)))
 	return TRUE
 
 /*********************************
@@ -213,7 +213,7 @@
 	if(I)
 		new_record.set_name(I.registered_name)
 		new_record.set_formal_name("[I.formal_name_prefix][I.registered_name][I.formal_name_suffix]")
-		new_record.set_sex(I.sex)
+		new_record.set_gender(I.card_gender)
 		new_record.set_age(I.age)
 		new_record.set_job(I.assignment)
 		new_record.set_fingerprint(I.fingerprint_hash)
@@ -243,7 +243,9 @@
 		new_record.set_skillset(jointext(skills,"\n"))
 
 	if(istype(job) && job.announced)
-		AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), "has completed cryogenic revival", get_announcement_frequency(job))
+		var/announce_channel = get_announcement_frequency(job)
+		if(announce_channel)
+			do_telecomms_announcement(user, "[new_record.get_name()], [new_record.get_job()], has completed cryogenic revival.", "Arrivals Announcement Computer", announce_channel)
 	. = ..()
 
 #undef COPY_VALUE

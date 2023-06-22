@@ -9,7 +9,7 @@
 	plane         = LIGHTING_PLANE
 	invisibility  = INVISIBILITY_LIGHTING
 	simulated     = FALSE
-	blend_mode    = BLEND_MULTIPLY
+	blend_mode    = BLEND_OVERLAY
 
 	var/needs_update = FALSE
 
@@ -145,15 +145,6 @@
 /atom/movable/lighting_overlay/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	return
-
-/atom/movable/lighting_overlay/singularity_act()
-	return
-
-/atom/movable/lighting_overlay/singularity_pull()
-	return
-
-/atom/movable/lighting_overlay/singuloCanEat()
-	return FALSE
 
 /atom/movable/lighting_overlay/can_fall()
 	return FALSE

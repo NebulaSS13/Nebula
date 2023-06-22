@@ -27,15 +27,16 @@
 	return locate(/obj/item/tank) in contents
 
 /obj/structure/fuel_port/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	if(!open)
 		to_chat(user, SPAN_WARNING("The door is secured tightly. You'll need a crowbar to open it."))
-		return
-	else
-		var/obj/item/tank/tank = locate_tank()
-		if(tank)
-			user.put_in_hands(tank)
-
+		return TRUE
+	var/obj/item/tank/tank = locate_tank()
+	if(tank)
+		user.put_in_hands(tank)
 	update_icon()
+	return TRUE
 
 /obj/structure/fuel_port/on_update_icon()
 	..()
@@ -68,7 +69,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank inside!"))
 			return
 		else
-			user.unEquip(W, src)
+			user.try_unequip(W, src)
 
 	update_icon()
 

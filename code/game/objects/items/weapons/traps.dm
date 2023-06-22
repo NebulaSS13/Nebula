@@ -38,7 +38,7 @@
 			"You hear the slow creaking of a spring."
 			)
 
-		if (do_after(user, 60, src) && user.unEquip(src))
+		if (do_after(user, 60, src) && user.try_unequip(src))
 			user.visible_message(
 				"<span class='danger'>\The [user] has deployed \the [src].</span>",
 				"<span class='danger'>You have deployed \the [src]!</span>",
@@ -50,24 +50,27 @@
 			anchored = 1
 
 /obj/item/beartrap/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	if(buckled_mob)
 		user_unbuckle_mob(user)
-	else if(deployed && can_use(user))
+		return TRUE
+	if(!deployed || !can_use(user))
+		return FALSE
+	user.visible_message(
+		SPAN_DANGER("\The [user] starts to disarm \the [src]."),
+		SPAN_NOTICE("You begin disarming \the [src]!"),
+		"You hear a latch click followed by the slow creaking of a spring."
+	)
+	if(do_after(user, 60, src))
 		user.visible_message(
-			"<span class='danger'>[user] starts to disarm \the [src].</span>",
-			"<span class='notice'>You begin disarming \the [src]!</span>",
-			"You hear a latch click followed by the slow creaking of a spring."
-			)
-		if(do_after(user, 60, src))
-			user.visible_message(
-				"<span class='danger'>[user] has disarmed \the [src].</span>",
-				"<span class='notice'>You have disarmed \the [src]!</span>"
-				)
-			deployed = 0
-			anchored = 0
-			update_icon()
-	else
-		..()
+			SPAN_DANGER("\The [user] has disarmed \the [src]."),
+			SPAN_NOTICE("You have disarmed \the [src]!")
+		)
+		deployed = 0
+		anchored = 0
+		update_icon()
+	return TRUE
 
 /obj/item/beartrap/proc/attack_mob(mob/L)
 

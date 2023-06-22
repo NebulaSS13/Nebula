@@ -1,0 +1,30 @@
+<h2>Ship Communications</h2>
+
+{{if data.allow_ident_change}}
+    {{if data.ident_enabled}}
+        {{:helper.link('Disable ident transmitter (conceal comms origin)', 'unlocked', {'toggle_comms_visibility' : 1}, null)}}
+    {{else}}
+        {{:helper.link('Enable ident transmitter (show comms origin)', 'locked', {'toggle_comms_visibility' : 1}, null)}}
+    {{/if}}
+{{/if}}
+
+<h3>Local Entities</h3>
+<table width = '100%' align='center'>
+{{for data.entities}}
+    <tr><td width = '35%'>{{:value.name}}</td><td width = '15%'>{{:value.coords}}</td><td width = '25%'>{{:value.desc}}</td><td width = '25%'>{{:value.status}}</td></tr>
+{{/for}}
+</table>
+
+<h3>Comms Broadcasters</h3>
+<table width = '100%' align='center'>
+{{for data.broadcasters}}
+    <tr><td width = '35%'>{{:value.name}}</td><td width = '15%'>{{:value.coords}}</td><td width = '50%'>{{:value.desc}}</td></tr>
+{{/for}}
+</table>
+
+<h3>Comms Receivers</h3>
+<table width = '100%' align='center'>
+{{for data.receivers}}
+    <tr><td width = '35%'>{{:value.name}}</td><td width = '15%'>{{:value.coords}}</td><td width = '50%'>{{:value.desc}}</td></tr>
+{{/for}}
+</table>

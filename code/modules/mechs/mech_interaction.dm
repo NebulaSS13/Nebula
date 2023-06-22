@@ -9,12 +9,12 @@
 		return TRUE
 	. = ..()
 
-/mob/living/exosuit/RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+/mob/living/exosuit/RelayMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	if(user && (user in pilots) && user.loc == src)
 		return OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
 	return ..()
 
-/mob/living/exosuit/OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+/mob/living/exosuit/OnMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	if(!user || incapacitated() || user.incapacitated())
 		return FALSE
 
@@ -24,6 +24,36 @@
 	//This is handled at active module level really, it is the one who has to know if it's supposed to act
 	if(selected_system)
 		return selected_system.MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
+
+/mob/living/exosuit/RelayMouseDown(atom/object, location, control, params, mob/user)
+	if(user && (user in pilots) && user.loc == src)
+		return OnMouseDown(object, location, control, params, user)
+	return ..()
+
+/mob/living/exosuit/OnMouseDown(atom/object, location, control, params, mob/user)
+	if(!user || incapacitated() || user.incapacitated())
+		return FALSE
+
+	if(!(user in pilots) && user != src)
+		return FALSE
+
+	if(selected_system)
+		return selected_system.MouseDownInteraction(object, location, control, params, user)
+
+/mob/living/exosuit/RelayMouseUp(atom/object, location, control, params, mob/user)
+	if(user && (user in pilots) && user.loc == src)
+		return OnMouseUp(object, location, control, params, user)
+	return ..()
+
+/mob/living/exosuit/OnMouseUp(atom/object, location, control, params, mob/user)
+	if(!user || incapacitated() || user.incapacitated())
+		return FALSE
+
+	if(!(user in pilots) && user != src)
+		return FALSE
+
+	if(selected_system)
+		return selected_system.MouseUpInteraction(object, location, control, params, user)
 
 /datum/click_handler/default/mech/OnClick(var/atom/A, var/params)
 	var/mob/living/exosuit/E = user.loc
@@ -105,7 +135,7 @@
 	if(user != src)
 		a_intent = user.a_intent
 		if(user.zone_sel)
-			zone_sel.set_selected_zone(user.zone_sel.selecting)
+			zone_sel.set_selected_zone(user.get_target_zone())
 		else
 			zone_sel.set_selected_zone(BP_CHEST)
 	// You may attack the target with your exosuit FIST if you're malfunctioning.
@@ -435,7 +465,7 @@
 					to_chat(user, SPAN_WARNING("There is already a cell in there!"))
 					return
 
-				if(user.unEquip(thing))
+				if(user.try_unequip(thing))
 					thing.forceMove(body)
 					body.cell = thing
 					to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))
@@ -490,7 +520,7 @@
 	SetName(new_name)
 	to_chat(user, SPAN_NOTICE("You have redesignated this exosuit as \the [name]."))
 
-/mob/living/exosuit/get_inventory_slot(obj/item/I)
+/mob/living/exosuit/get_equipped_slot_for_item(obj/item/I)
 	for(var/h in hardpoints)
 		if(hardpoints[h] == I)
 			return h

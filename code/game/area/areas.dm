@@ -12,6 +12,7 @@ var/global/list/areas = list()
 	mouse_opacity = 0
 
 	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
+	var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
 
 	var/fire
 	var/party
@@ -56,6 +57,8 @@ var/global/list/areas = list()
 	var/list/blurbed_stated_to = list() //This list of names is here to make sure we don't state our descriptive blurb to a person more than once.
 
 	var/tmp/is_outside = OUTSIDE_NO
+
+	var/tmp/saved_map_hash // Used for cleanup when loaded via map templates.
 
 /area/New()
 	icon_state = ""
@@ -122,6 +125,7 @@ var/global/list/areas = list()
 		if(adjacent_turf)
 			T.update_registrations_on_adjacent_area_change()
 
+	T.last_outside_check = OUTSIDE_UNCERTAIN
 	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
 		T.update_weather()
 
@@ -360,7 +364,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 	if(LAZYLEN(forced_ambience) && !(L in forced_ambiance_list))
 		forced_ambiance_list += L
 		L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = sound_channels.lobby_channel))
-	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
+	if(LAZYLEN(ambience) && prob(5) && (world.time >= L.client.played + 3 MINUTES))
 		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = sound_channels.ambience_channel))
 		L.client.played = world.time
 

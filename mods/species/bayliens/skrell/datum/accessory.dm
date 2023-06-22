@@ -1,9 +1,3 @@
-/decl/sprite_accessory/skin/skrell
-	name = "Default skrell skin"
-	icon_state = "default"
-	icon = 'mods/species/bayliens/skrell/icons/body/body.dmi'
-	species_allowed = list(SPECIES_SKRELL)
-
 /decl/sprite_accessory/hair/skrell
 	name = "Kanin - Very Short Headtails"
 	icon = 'mods/species/bayliens/skrell/icons/body/hair.dmi'

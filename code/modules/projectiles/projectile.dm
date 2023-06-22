@@ -15,7 +15,7 @@
 
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
-	var/mob/firer = null//Who shot it
+	var/atom/movable/firer = null//Who shot it
 	var/silenced = 0	//Attack message
 	var/yo = null
 	var/xo = null
@@ -153,19 +153,19 @@
 	return TRUE
 
 //called to launch a projectile
-/obj/item/projectile/proc/launch(atom/target, target_zone, mob/user, params, Angle_override, forced_spread = 0)
+/obj/item/projectile/proc/launch(atom/target, target_zone, atom/movable/shooter, params, Angle_override, forced_spread = 0)
 	original = target
 	def_zone = check_zone(target_zone)
-	firer = user
+	firer = shooter
 	var/direct_target
 	if(get_turf(target) == get_turf(src))
 		direct_target = target
-	preparePixelProjectile(target, user? user : get_turf(src), params, forced_spread)
+	preparePixelProjectile(target, shooter ? shooter : get_turf(src), params, forced_spread)
 	return fire(Angle_override, direct_target)
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, Angle_override, forced_spread, var/obj/item/gun/launcher)
-	return launch(target, target_zone, user, params)
+/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, atom/movable/shooter, params, Angle_override, forced_spread, var/obj/item/gun/launcher)
+	return launch(target, target_zone, shooter, params)
 
 /obj/item/projectile/proc/set_clickpoint(var/params)
 	var/list/mouse_control = params2list(params)
@@ -181,7 +181,7 @@
 		p_y = clamp(0, p_y + gaussian(0, radius) * 0.25, world.icon_size)
 
 //Used to change the direction of the projectile in flight.
-/obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null, var/is_ricochet = FALSE)
+/obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/atom/movable/new_firer=null, var/is_ricochet = FALSE)
 	var/turf/starting_turf = get_turf(src)
 	var/turf/new_target = locate(new_x, new_y, src.z)
 

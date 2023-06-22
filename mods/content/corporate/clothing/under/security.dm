@@ -3,7 +3,7 @@
 	desc = "A durable uniform worn by Expeditionary Corps Organisation security."
 	icon = 'mods/content/corporate/icons/clothing/under/guard.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.9
 

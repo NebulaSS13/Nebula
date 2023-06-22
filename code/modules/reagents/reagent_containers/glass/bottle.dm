@@ -16,26 +16,26 @@
 	obj_flags = 0
 	volume = 60
 	material = /decl/material/solid/glass
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 	var/label_color
 	var/lid_color = COLOR_GRAY80
 	var/autolabel = TRUE  		// if set, will add label with the name of the first initial reagent
 
-/obj/item/chems/glass/bottle/pickup(mob/user)
-	..()
+/obj/item/chems/glass/bottle/on_picked_up(mob/user)
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/bottle/dropped(mob/user)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/bottle/attack_hand()
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/bottle/on_update_icon()
-	..()
+	. = ..()
 	cut_overlays()
 
 	if(reagents?.total_volume)

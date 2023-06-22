@@ -5,6 +5,7 @@
 	pda_type = /obj/item/modular_computer/pda/heads/captain
 	r_pocket = /obj/item/radio
 	id_type = /obj/item/card/id/gold
+	l_ear = /obj/item/radio/headset/heads/captain
 
 /decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
@@ -25,3 +26,4 @@
 	hands = list(/obj/item/clipboard)
 	id_type = /obj/item/card/id/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop
+	l_ear = /obj/item/radio/headset/heads/hop

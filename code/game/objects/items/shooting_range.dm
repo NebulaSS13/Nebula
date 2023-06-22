@@ -28,10 +28,9 @@
 
 /obj/item/target/attack_hand(var/mob/user)
 	// taking pinned targets off!
-	if (stake)
-		stake.attack_hand(user)
-	else
+	if(!stake || !user.check_dexterity(DEXTERITY_GRIP))
 		return ..()
+	return stake.attack_hand(user)
 
 /obj/item/target/syndicate
 	icon_state = "target_s"

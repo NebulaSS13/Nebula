@@ -6,7 +6,7 @@
 	var/obj/screen/borer/leave_host/hud_leave_host
 
 /mob/living/simple_animal/borer/proc/reset_ui_callback()
-	if(world.time >= last_special)
+	if(!is_on_special_ability_cooldown())
 		for(var/obj/thing in hud_elements)
 			thing.color = null
 
@@ -81,7 +81,7 @@
 	worm.host.verbs += /mob/living/carbon/proc/spawn_larvae
 
 	return TRUE
-	
+
 /obj/screen/borer/inject_chemicals
 	name = "Inject Chemicals"
 	icon_state = "inject_chemicals"

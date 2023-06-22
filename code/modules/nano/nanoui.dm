@@ -204,7 +204,7 @@ nanoui is used to open and update nano browser uis
 			"showMap" = show_map,
 			"mapName" = global.using_map.path,
 			"mapZLevel" = map_z_level,
-			"mapZLevels" = global.using_map.map_levels,
+			"mapZLevels" = SSmapping.map_levels,
 			"user" = list("name" = user.name),
 			"currency" = cur.name,
 			"templateFileName" = global.template_file_name

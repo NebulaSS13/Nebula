@@ -93,7 +93,7 @@
 		to_chat(user, "You try to insert [I] into [src], but its ID card slot is occupied.")
 		return FALSE
 
-	if(user && !user.unEquip(I, src))
+	if(user && !user.try_unequip(I, src))
 		return FALSE
 
 	stored_card = I

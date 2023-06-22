@@ -12,7 +12,7 @@
 /obj/item/storage/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	opened = 0 //if an item has been removed from this container
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/cardboard
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 
@@ -153,7 +153,7 @@
 	if(!istype(M, /mob))
 		return
 
-	if(M == user && user.zone_sel.selecting == BP_MOUTH && contents.len > 0 && !user.get_equipped_item(slot_wear_mask_str))
+	if(M == user && user.get_target_zone() == BP_MOUTH && contents.len > 0 && !user.get_equipped_item(slot_wear_mask_str))
 		// Find ourselves a cig. Note that we could be full of lighters.
 		var/obj/item/clothing/mask/smokable/cigarette/cig = null
 		for(var/obj/item/clothing/mask/smokable/cigarette/C in contents)
@@ -321,7 +321,7 @@
 
 /obj/item/storage/fancy/cigar/remove_from_storage(obj/item/W, atom/new_location)
 	var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
-	if(!istype(C)) 
+	if(!istype(C))
 		return
 	reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 	return ..()

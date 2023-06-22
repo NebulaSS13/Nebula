@@ -339,7 +339,7 @@
 /area/icarus/vessel)
 "bu" = (
 /obj/machinery/door/firedoor,
-/obj/structure/sign/greencross{
+/obj/structure/sign/department/greencross{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled,
@@ -682,7 +682,7 @@
 "cx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/sign/greencross{
+/obj/structure/sign/department/greencross{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled,
@@ -1149,6 +1149,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dX" = (
@@ -1996,6 +1997,7 @@
 "gy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "gz" = (
@@ -2096,6 +2098,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/icarus/open)
 "gR" = (
@@ -2383,6 +2386,9 @@
 	dir = 4;
 	id_tag = "d1starboardnacelle"
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
 /turf/simulated/floor/reinforced,
 /area/icarus/vessel)
 "hH" = (
@@ -2525,7 +2531,9 @@
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "id" = (
-/obj/machinery/atmospherics/unary/engine,
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1
+	},
 /turf/simulated/wall/r_wall,
 /area/icarus/open)
 "ie" = (
@@ -2661,6 +2669,19 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
+"rK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/tiled,
+/area/icarus/open)
+"sK" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/plating,
+/area/icarus/open)
 
 (1,1,1) = {"
 aa
@@ -22008,7 +22029,7 @@ en
 en
 ei
 et
-hD
+sK
 eA
 hX
 et
@@ -22124,7 +22145,7 @@ dD
 dK
 dD
 dD
-dD
+rK
 ee
 ei
 ei
@@ -22207,7 +22228,7 @@ aq
 gR
 hd
 eA
-hD
+sK
 et
 aq
 hD
@@ -25760,7 +25781,7 @@ cf
 dL
 dY
 dD
-dD
+rK
 eA
 ei
 ei

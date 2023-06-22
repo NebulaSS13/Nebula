@@ -37,7 +37,8 @@
 #define SOUTHDOWN (SOUTH|DOWN)
 #define WESTDOWN (WEST|DOWN)
 
-#define TURF_HAS_VALID_ZONE(T) (istype(T, /turf/simulated) && T:zone && !T:zone:invalid)
+#define TURF_HAS_VALID_ZONE(T) (isturf(T) && T:zone && !T:zone:invalid)
+#define SHOULD_PARTICIPATE_IN_ZONES(T) (isturf(T) && T:zone_membership_candidate && (!T:external_atmosphere_participation || !T:is_outside()))
 
 #ifdef MULTIZAS
 

@@ -130,11 +130,15 @@
 	return ..()
 
 /obj/item/chems/weldpack/attack_hand(mob/user)
-	if(is_welder_attached())
-		var/curslot = user.get_inventory_slot(src)
-		if(curslot == slot_back_str || curslot == slot_s_store_str || user.is_holding_offhand(src))
-			detach_gun(user)
-			return TRUE
+	if(!is_welder_attached() || !user.check_dexterity(DEXTERITY_GRIP))
+		return ..()
+	if(user.is_holding_offhand(src))
+		detach_gun(user)
+		return TRUE
+	var/curslot = user.get_equipped_slot_for_item(src)
+	if(curslot == slot_back_str || curslot == slot_s_store_str)
+		detach_gun(user)
+		return TRUE
 	return ..()
 
 /obj/item/chems/weldpack/check_mousedrop_adjacency(atom/over, mob/user)
@@ -144,7 +148,7 @@
 	if(loc == user && !user.incapacitated())
 		if(istype(over, /obj/screen/inventory))
 			var/obj/screen/inventory/I = over
-			if(user.unEquip(src))
+			if(user.try_unequip(src))
 				user.equip_to_slot_if_possible(src, I.slot_id)
 				return TRUE
 	return ..()
@@ -184,7 +188,7 @@
 		welder.turn_off(user)
 
 	if(user && (user == welder.loc))
-		if(!user.unEquip(welder, src))
+		if(!user.try_unequip(welder, src))
 			return
 	else
 		welder.forceMove(src)

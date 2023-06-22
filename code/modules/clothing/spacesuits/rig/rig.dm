@@ -18,13 +18,13 @@
 	// These values are passed on to all component pieces.
 	armor_type = /datum/extension/armor/rig
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
@@ -182,11 +182,19 @@
 	update_icon(1)
 
 /obj/item/rig/Destroy()
-	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
-		qdel(piece)
+	QDEL_NULL(gloves)
+	QDEL_NULL(boots)
+	QDEL_NULL(helmet)
+	QDEL_NULL(chest)
+	QDEL_NULL(wires)
+	QDEL_NULL(air_supply)
+	QDEL_NULL(cell)
+	QDEL_NULL(selected_module)
+	QDEL_NULL(visor)
+	QDEL_NULL(speech)
+	QDEL_LIST(installed_modules)
+	wearer = null
 	STOP_PROCESSING(SSobj, src)
-	qdel(wires)
-	wires = null
 	return ..()
 
 /obj/item/rig/proc/set_slowdown_and_vision(var/active)
@@ -672,7 +680,7 @@
 
 		if(!do_after(M,seal_delay,src))
 			if(M && M.get_equipped_item(slot_back_str) == src)
-				if(!M.unEquip(src))
+				if(!M.try_unequip(src))
 					return
 			src.dropInto(loc)
 			return
@@ -762,7 +770,7 @@
 		for(var/list/slot in list(slot_head_str, slot_gloves_str, slot_shoes_str, slot_wear_suit_str))
 			var/obj/item/garbage = H.get_equipped_item(slot)
 			if(garbage)
-				H.unEquip(garbage)
+				H.try_unequip(garbage)
 				qdel(garbage)
 
 	for(var/piece in list("helmet","gauntlets","chest","boots"))

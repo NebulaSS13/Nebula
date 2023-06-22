@@ -48,11 +48,11 @@
 
 /datum/computer/file/embedded_program/airlock/reset_id_tags(base_tag)
 	. = ..()
-	if(cycle_to_external_air)
-		tag_pump_out_external = "[id_tag]_pump_out_external"
-		tag_pump_out_internal = "[id_tag]_pump_out_internal"
 	if(istype(master, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
 		var/obj/machinery/embedded_controller/radio/airlock/controller = master
+		if(cycle_to_external_air)
+			tag_pump_out_external = SET_AIRLOCK_TAG(controller.tag_pump_out_external, "[id_tag]_pump_out_external")
+			tag_pump_out_internal = SET_AIRLOCK_TAG(controller.tag_pump_out_internal, "[id_tag]_pump_out_internal")
 		tag_exterior_door = SET_AIRLOCK_TAG(controller.tag_exterior_door, "[id_tag]_outer")
 		tag_interior_door = SET_AIRLOCK_TAG(controller.tag_interior_door, "[id_tag]_inner")
 		tag_airpump = SET_AIRLOCK_TAG(controller.tag_airpump, "[id_tag]_pump")
@@ -89,24 +89,30 @@
 	if(!receive_tag) return
 
 	if(receive_tag==tag_chamber_sensor)
-		if(signal.data["pressure"])
+		if("pressure" in signal.data)
 			memory["chamber_sensor_pressure"] = text2num(signal.data["pressure"])
 
 	else if(receive_tag==tag_exterior_sensor)
-		memory["external_sensor_pressure"] = text2num(signal.data["pressure"])
+		if("pressure" in signal.data)
+			memory["external_sensor_pressure"] = text2num(signal.data["pressure"])
 
 	else if(receive_tag==tag_interior_sensor)
-		memory["internal_sensor_pressure"] = text2num(signal.data["pressure"])
+		if("pressure" in signal.data)
+			memory["internal_sensor_pressure"] = text2num(signal.data["pressure"])
 
 	else if(receive_tag==tag_exterior_door)
-		memory["exterior_status"]["state"] = signal.data["door_status"]
-		memory["exterior_status"]["lock"] = signal.data["lock_status"]
+		if("door_status" in signal.data)
+			memory["exterior_status"]["state"] = signal.data["door_status"]
+		if("lock_status" in signal.data)
+			memory["exterior_status"]["lock"] = signal.data["lock_status"]
 
 	else if(receive_tag==tag_interior_door)
-		memory["interior_status"]["state"] = signal.data["door_status"]
-		memory["interior_status"]["lock"] = signal.data["lock_status"]
+		if("door_status" in signal.data)
+			memory["interior_status"]["state"] = signal.data["door_status"]
+		if("lock_status" in signal.data)
+			memory["interior_status"]["lock"] = signal.data["lock_status"]
 
-	else if(receive_tag==tag_airpump || receive_tag==tag_pump_out_internal)
+	else if((receive_tag==tag_airpump || receive_tag==tag_pump_out_internal) && ("power" in signal.data))
 		if(signal.data["power"])
 			memory["pump_status"] = signal.data["direction"]
 		else
@@ -259,8 +265,7 @@
 						signalPump(tag_pump_out_external, 0)
 				else
 					cycleDoors(target_state)
-					state = STATE_IDLE
-					target_state = TARGET_NONE
+					stop_cycling()
 
 
 		if(STATE_DEPRESSURIZE)
@@ -278,8 +283,7 @@
 							state = STATE_PREPARE
 					else
 						cycleDoors(target_state)
-						state = STATE_IDLE
-						target_state = TARGET_NONE
+						stop_cycling()
 
 
 	memory["processing"] = (state != target_state)
@@ -294,12 +298,14 @@
 	memory["purge"] = cycle_to_external_air
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/begin_dock_cycle()
 	state = STATE_IDLE
 	target_state = TARGET_INOPEN
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
 	state = STATE_IDLE
@@ -307,6 +313,7 @@
 	memory["purge"] = cycle_to_external_air
 	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
 	shutAlarm()
+	signalCycling(TRUE)
 
 /datum/computer/file/embedded_program/airlock/proc/close_doors()
 	toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
@@ -315,6 +322,7 @@
 /datum/computer/file/embedded_program/airlock/proc/stop_cycling()
 	state = STATE_IDLE
 	target_state = TARGET_NONE
+	signalCycling(FALSE)
 
 /datum/computer/file/embedded_program/airlock/proc/done_cycling()
 	return (state == STATE_IDLE && target_state == TARGET_NONE)
@@ -367,6 +375,28 @@
 		if(TARGET_INOPEN)
 			toggleDoor(memory["exterior_status"], tag_exterior_door, memory["secure"], "close")
 			toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "open")
+
+/datum/computer/file/embedded_program/proc/signalCycling(var/cycling = TRUE)
+	var/datum/signal/signal = new
+	//Send signal to buttons first
+	signal.data["tag"] = id_tag
+	signal.data["set_airlock_cycling"] = cycling
+	post_signal(signal)
+
+/datum/computer/file/embedded_program/airlock/signalCycling(cycling = TRUE)
+	. = ..()
+	var/datum/signal/signal = new
+	signal.data["set_airlock_cycling"] = cycling
+	//Send signal to sensors
+	if(length(tag_chamber_sensor))
+		signal.data["tag"] = tag_chamber_sensor
+		post_signal(signal)
+	if(length(tag_interior_sensor))
+		signal.data["tag"] = tag_interior_sensor
+		post_signal(signal)
+	if(length(tag_exterior_sensor))
+		signal.data["tag"] = tag_exterior_sensor
+		post_signal(signal)
 
 /*----------------------------------------------------------
 toggleDoor()

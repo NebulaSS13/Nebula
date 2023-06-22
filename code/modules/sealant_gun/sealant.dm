@@ -15,11 +15,11 @@
 	var/splatted = FALSE // Used to prevent doubled effects if throwcode wonks up.
 	var/hardened = FALSE // Set manually post-equip so that the blob can't be removed without breaking.
 	var/static/list/splat_try_equip_slots = list(
-		slot_head_str, 
+		slot_head_str,
 		BP_L_HAND,
-		BP_R_HAND, 
-		slot_wear_mask_str, 
-		slot_wear_suit_str, 
+		BP_R_HAND,
+		slot_wear_mask_str,
+		slot_wear_suit_str,
 		slot_shoes_str
 	)
 
@@ -32,6 +32,7 @@
 		hardened = TRUE
 
 /obj/item/clothing/sealant/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	break_apart(user)
 	return TRUE
 
@@ -46,7 +47,7 @@
 /obj/item/clothing/sealant/proc/break_apart(var/mob/user)
 	canremove = TRUE
 	if(user)
-		user.unEquip(src, user.loc)
+		user.try_unequip(src, user.loc)
 		user.visible_message(SPAN_NOTICE("\The [user] smashes \the [src]!"), SPAN_NOTICE("You smash \the [src]!"), SPAN_NOTICE("You hear a smashing sound."))
 		user.setClickCooldown(1 SECOND)
 	qdel(src)

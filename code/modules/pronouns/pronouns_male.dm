@@ -1,6 +1,6 @@
 /decl/pronouns/male
 	name = MALE
-	formal_term = "male"
+	bureaucratic_term  = "male"
 	informal_term = "guy"
 
 	He   = "He"
@@ -14,17 +14,17 @@
 	self = "himself"
 	s    = "s"
 	es   = "es"
-	
+
 	// Thanks oldcoders.
 	var/static/list/weird_euphemisms_for_your_balls = list(
-		"testicles", 
-		"crown jewels", 
-		"clockweights", 
-		"family jewels", 
-		"marbles", 
-		"bean bags", 
-		"teabags", 
-		"sweetmeats", 
+		"testicles",
+		"crown jewels",
+		"clockweights",
+		"family jewels",
+		"marbles",
+		"bean bags",
+		"teabags",
+		"sweetmeats",
 		"goolies",
 		"boys",
 		"nutsack",

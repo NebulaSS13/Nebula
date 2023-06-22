@@ -50,16 +50,16 @@
 		return
 	if(!CanInteract(usr, global.conscious_topic_state))
 		return
-
-	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
-		if(src in E.animals)
+	for(var/planet_id in SSmapping.planetoid_data_by_id)
+		var/datum/planetoid_data/E = SSmapping.planetoid_data_by_id[planet_id]
+		if(istype(E) && (src in E.fauna.live_fauna))
 			var/newname = input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null
 			newname = sanitize_name(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 			if(newname && CanInteract(usr, global.conscious_topic_state))
 				if(E.rename_species(type, newname))
-					to_chat(usr,"<span class='notice'>This species will be known from now on as '[newname]'.</span>")
+					to_chat(usr, SPAN_NOTICE("This species will be known from now on as '[newname]'."))
 				else
-					to_chat(usr,"<span class='warning'>This species has already been named!</span>")
+					to_chat(usr, SPAN_WARNING("This species has already been named!"))
 			return
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak
@@ -78,7 +78,7 @@
 	emote_see = list("paws the ground","shakes its mane","stomps")
 	emote_hear = list("snuffles")
 	natural_armor = list(
-		melee = ARMOR_MELEE_KNIVES
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 		)
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak/alt
@@ -155,7 +155,7 @@
 	speak_chance = 1
 	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT
 		)
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
@@ -172,7 +172,7 @@
 	harm_intent_damage = 1
 	blood_color = COLOR_NT_RED
 	natural_armor = list(
-		laser = ARMOR_LASER_HANDGUNS
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS
 		)
 
 /obj/item/natural_weapon/charbaby

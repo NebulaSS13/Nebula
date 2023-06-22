@@ -26,7 +26,7 @@
 
 	var/old_name = atom_holder.name
 	atom_holder.name = "[atom_holder.name] ([label])"
-	events_repository.raise_event(/decl/observ/name_set, src, old_name, atom_holder.name)
+	RAISE_EVENT(/decl/observ/name_set, src, old_name, atom_holder.name)
 	return TRUE
 
 /datum/extension/labels/proc/RemoveLabel(var/mob/user, var/label)
@@ -41,7 +41,7 @@
 	var/index = findtextEx(atom_holder.name, full_label)
 	if(!index) // Playing it safe, something might not have set the name properly
 		return
-	
+
 	if(user)
 		user.visible_message(SPAN_NOTICE("\The [user] removes a label from \the [atom_holder]."), \
 							 SPAN_NOTICE("You remove a label, '[label]', from \the [atom_holder]."))
@@ -49,7 +49,7 @@
 	var/old_name = atom_holder.name
 	// We find and replace the first instance, since that's the one we removed from the list
 	atom_holder.name = replacetext(atom_holder.name, full_label, "", index, index + length(full_label))
-	events_repository.raise_event(/decl/observ/name_set, src, old_name, atom_holder.name)
+	RAISE_EVENT(/decl/observ/name_set, src, old_name, atom_holder.name)
 	return TRUE
 
 /datum/extension/labels/proc/RemoveAllLabels()
@@ -84,6 +84,12 @@
 	. = . > 64 ? TRUE : FALSE
 	if(. && user)
 		to_chat(user, SPAN_WARNING("The label won't fit."))
+
+/datum/extension/labels/PopulateClone(datum/extension/labels/clone)
+	var/datum/extension/labels/populated_clone = ..()
+	for(var/L in labels)
+		populated_clone.AttachLabel(null, L)
+	return populated_clone
 
 /proc/get_attached_labels(var/atom/source)
 	if(has_extension(source, /datum/extension/labels))

@@ -371,17 +371,6 @@
 			else
 				return null
 
-
-/proc/text_starts_with(text, start)
-	if(copytext(text, 1, length(start) + 1) == start)
-		return 1
-	else
-		return 0
-
-
-
-
-
 /proc/SDQL_tokenize(query_text)
 
 	var/list/whitespace = list(" ", "\n", "\t")

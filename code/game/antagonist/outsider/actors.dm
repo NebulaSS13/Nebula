@@ -3,9 +3,7 @@
 	name_plural = "Actors"
 	welcome_text = "You've been hired to entertain people through the power of television!"
 	landmark_id = "ActorSpawn"
-
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_SET_APPEARANCE | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
-
 	hard_cap = 7
 	hard_cap_round = 10
 	initial_spawn_req = 1
@@ -13,6 +11,7 @@
 	show_objectives_on_creation = 0 //actors are not antagonists and do not need the antagonist greet text
 	required_language = /decl/language/human/common
 	default_outfit = /decl/hierarchy/outfit/actor
+	default_access = list()
 	id_title = "Actor"
 
 /decl/hierarchy/outfit/actor

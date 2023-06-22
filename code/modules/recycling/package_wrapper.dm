@@ -166,13 +166,14 @@
 // Borg Wrapping Paper Synthesizer
 ///////////////////////////////////////////////////////////////////////////////////////
 /obj/item/stack/package_wrap/cyborg
-	name             = "package wrapper synthesizer"
-	gender           = NEUTER
-	material         = null
-	matter           = null
-	uses_charge      = TRUE
-	charge_costs     = list(1)
-	stack_merge_type = /obj/item/stack/package_wrap
+	name              = "package wrapper synthesizer"
+	gender            = NEUTER
+	material          = null
+	matter            = null
+	uses_charge       = TRUE
+	charge_costs      = list(1)
+	stack_merge_type  = /obj/item/stack/package_wrap
+	is_spawnable_type = FALSE
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Cardboard Tube
@@ -190,4 +191,4 @@
 	throw_speed = 4
 	throw_range = 5
 	material    = /decl/material/solid/cardboard
-	item_flags  = ITEM_FLAG_HOLLOW
+	obj_flags   = OBJ_FLAG_HOLLOW

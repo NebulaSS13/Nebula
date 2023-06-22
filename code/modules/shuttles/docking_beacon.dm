@@ -312,13 +312,13 @@
 			break
 		area_turf = get_step(area_turf, dir)
 
-	// Otherwise, use the planetary or world area.
+	// Otherwise, use the level or world area.
 	if(!base_area)
-		var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[z]"]
-		if(istype(planet))
-			base_area = ispath(planet.planetary_area) ? planet.planetary_area : planet.planetary_area.type
+		var/datum/level_data/LD = SSmapping.levels_by_z[z]
+		if(istype(LD))
+			base_area = LD.get_base_area_instance()
 		else
-			base_area = world.area
+			base_area = locate(world.area)
 
 	var/turf/center_turf
 	switch(dir)

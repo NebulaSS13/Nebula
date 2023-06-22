@@ -40,7 +40,7 @@
 		if(installed_gun)
 			to_chat(user, "<span class='warning'>There's already a weapon installed.</span>")
 			return
-		if(!user.unEquip(gun,src))
+		if(!user.try_unequip(gun,src))
 			return
 		installed_gun = gun
 		to_chat(user, "<span class='notice'>You slide \the [gun] into the firing mechanism.</span>")
@@ -184,7 +184,7 @@
 	if(istype(G))
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
-		else if(user.unEquip(G,src))
+		else if(user.try_unequip(G,src))
 			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
 			attach_grenade(G)
 			G.forceMove(src)
@@ -273,7 +273,7 @@
 			if(2)
 				if(TR.seed) //Could be that they're just using it as a de-weeder
 					TR.age = 0
-					TR.health = 0
+					TR.plant_health = 0
 					if(TR.harvest)
 						TR.harvest = FALSE //To make sure they can't just put in another seed and insta-harvest it
 					qdel(TR.seed)
@@ -292,7 +292,7 @@
 						TR.dead = 0
 						TR.seed = O
 						TR.age = 1
-						TR.health = TR.seed.get_trait(TRAIT_ENDURANCE)
+						TR.plant_health = TR.seed.get_trait(TRAIT_ENDURANCE)
 						TR.lastcycle = world.time
 						O.forceMove(TR)
 						TR.update_icon()
@@ -518,7 +518,7 @@
 	// If the item is in mob's inventory, try to remove it from there.
 	if(ismob(A.loc))
 		var/mob/living/M = A.loc
-		if(!M.unEquip(A))
+		if(!M.try_unequip(A))
 			return
 
 	// If the item is in a grabber circuit we'll update the grabber's outputs after we've thrown it.
@@ -569,7 +569,7 @@
 	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
 	var/step_dir = get_pin_data(IC_INPUT, 2)
 
-	if(!ARE_Z_CONNECTED(get_z(src), get_z(tporter)))
+	if(!LEVELS_ARE_Z_CONNECTED(get_z(src), get_z(tporter)))
 		tporter = null
 
 	var/turf/rift_location = get_turf(src)
@@ -634,7 +634,7 @@
 		to_chat(user, "<span class='warning'>There is already a card in there!</span>")
 		return
 	var/mob/living/L = locate(/mob/living) in card.contents
-	if(L && L.key && user.unEquip(card))
+	if(L && L.key && user.try_unequip(card))
 		L.forceMove(src)
 		controlling = L
 		card.dropInto(src)
@@ -688,7 +688,7 @@
 		return
 
 	// Doesn't work with anchorable assemblies
-	if(assembly.circuit_flags & IC_FLAG_ANCHORABLE)
+	if(obj_flags & OBJ_FLAG_ANCHORABLE)
 		visible_message("<span class='warning'>\The [get_object()]'s anchoring bolt circuitry blinks red. The preinstalled assembly anchoring bolts are in the way of the pop-out bolts!</span>")
 		return
 

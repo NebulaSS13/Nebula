@@ -188,26 +188,23 @@
 
 /obj/item/pizzabox/attack_hand(mob/user)
 
-	if( open && pizza )
-		user.put_in_hands( pizza )
-
-		to_chat(user, "<span class='warning'>You take \the [src.pizza] out of \the [src].</span>")
-		src.pizza = null
-		update_icon()
+	if(open && pizza)
+		if(user.check_dexterity(DEXTERITY_GRIP))
+			user.put_in_hands(pizza)
+			to_chat(user, SPAN_NOTICE("You take \the [src.pizza] out of \the [src]."))
+			pizza = null
+			update_icon()
 		return TRUE
 
-	if( boxes.len > 0 )
-		if(!user.is_holding_offhand(src))
-			return ..()
-
+	if(length(boxes) && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_GRIP))
 		var/obj/item/pizzabox/box = boxes[boxes.len]
 		boxes -= box
-
-		user.put_in_hands( box )
-		to_chat(user, "<span class='warning'>You remove the topmost [src] from your hand.</span>")
+		user.put_in_hands(box)
+		to_chat(user, SPAN_WARNING("You remove the topmost [src] from your hand."))
 		box.update_icon()
 		update_icon()
 		return TRUE
+
 	return ..()
 
 /obj/item/pizzabox/attack_self(mob/user)
@@ -234,7 +231,7 @@
 				boxestoadd += i
 
 			if( (boxes.len+1) + boxestoadd.len <= 5 )
-				if(!user.unEquip(box, src))
+				if(!user.try_unequip(box, src))
 					return TRUE
 				box.boxes = list()// clear the box boxes so we don't have boxes inside boxes. - Xzibit
 				src.boxes.Add( boxestoadd )
@@ -253,7 +250,7 @@
 	if( istype(I, /obj/item/chems/food/sliceable/pizza/) )
 
 		if( src.open )
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return TRUE
 			src.pizza = I
 

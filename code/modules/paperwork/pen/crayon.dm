@@ -10,6 +10,7 @@
 	pen_flag           = PEN_FLAG_ACTIVE | PEN_FLAG_CRAYON | PEN_FLAG_DEL_EMPTY
 	pen_quality        = TOOL_QUALITY_BAD //Writing with those things is awkward
 	max_uses           = 30
+	pen_font           = PEN_FONT_CRAYON
 	var/shade_colour   = "#220000" //RGB
 
 /obj/item/pen/crayon/make_pen_description()

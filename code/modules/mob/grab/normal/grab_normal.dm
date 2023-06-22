@@ -108,7 +108,7 @@
 /decl/grab/normal/resolve_openhand_attack(var/obj/item/grab/G)
 	if(G.assailant.a_intent != I_HELP)
 		if(G.target_zone == BP_HEAD)
-			if(G.assailant.zone_sel.selecting == BP_EYES)
+			if(G.assailant.get_target_zone() == BP_EYES)
 				if(attack_eye(G))
 					return TRUE
 			else

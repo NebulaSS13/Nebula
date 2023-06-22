@@ -250,7 +250,7 @@
 				add_hiddenprint(user)
 			else
 				visible_message(SPAN_NOTICE("\The [src] clicks and reactivates itself."))
-			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 			icon_state = initial(icon_state)
 			add_hiddenprint(user)
 		else
@@ -259,7 +259,7 @@
 				add_hiddenprint(user)
 			else
 				visible_message(SPAN_NOTICE("\The [src] clicks and shuts down."))
-			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 			icon_state = "[initial(icon_state)]1"
 		update_coverage()
 
@@ -343,3 +343,51 @@
 
 /decl/stock_part_preset/network_lock/camera/do_apply(obj/machinery/camera/machine, obj/item/stock_parts/network_receiver/network_lock/part)
 	part.auto_deny_all = TRUE
+
+/obj/machinery/camera
+	public_methods = list(
+		/decl/public_access/public_method/toggle_camera
+	)
+
+	public_variables = list(
+		/decl/public_access/public_variable/camera_state,
+		/decl/public_access/public_variable/camera_name,
+		/decl/public_access/public_variable/camera_channels
+	)
+
+/obj/machinery/camera/proc/toggle_status()
+	set_status(!status)
+
+/decl/public_access/public_method/toggle_camera
+	name = "toggle camera"
+	desc = "Toggles camera on or off."
+	call_proc = /obj/machinery/camera/proc/toggle_status
+
+/decl/public_access/public_variable/camera_state
+	expected_type = /obj/machinery/camera
+	name = "camera status"
+	desc = "Status of the camera."
+	can_write = FALSE
+
+/decl/public_access/public_variable/camera_state/access_var(obj/machinery/camera/C)
+	return C.status ? "enabled" : "disabled"
+
+/decl/public_access/public_variable/camera_name
+	expected_type = /obj/machinery/camera
+	name = "camera name"
+	desc = "Displayed name of the camera."
+	can_write = FALSE
+
+/decl/public_access/public_variable/camera_name/access_var(obj/machinery/camera/C)
+	var/datum/extension/network_device/camera/camera_device = get_extension(C, /datum/extension/network_device/)
+	return camera_device?.display_name
+
+/decl/public_access/public_variable/camera_channels
+	expected_type = /obj/machinery/camera
+	name = "camera channels"
+	desc = "List of the channels this camera broadcasts on."
+	can_write = FALSE
+
+/decl/public_access/public_variable/camera_channels/access_var(obj/machinery/camera/C)
+	var/datum/extension/network_device/camera/camera_device = get_extension(C, /datum/extension/network_device/)
+	return english_list(camera_device?.channels)

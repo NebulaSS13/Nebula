@@ -1,5 +1,5 @@
 // Map object.
-/obj/turbolift_map_holder
+/obj/abstract/turbolift_spawner
 	name = "turbolift map placeholder"
 	icon = 'icons/obj/turbolift_preview_3x3.dmi'
 	dir = SOUTH         // Direction of the holder determines the placement of the lift control panel and doors.
@@ -21,9 +21,19 @@
 	var/floor_departure_sound
 	var/floor_arrival_sound
 
-
-/obj/turbolift_map_holder/Initialize()
+INITIALIZE_IMMEDIATE(/obj/abstract/turbolift_spawner)
+/obj/abstract/turbolift_spawner/Initialize()
 	. = ..()
+	if(SSmapping.initialized)
+		build_turbolift()
+	else
+		SSmapping.turbolifts_to_initialize += src
+
+/obj/abstract/turbolift_spawner/Destroy()
+	SSmapping.turbolifts_to_initialize -= src
+	return ..()
+
+/obj/abstract/turbolift_spawner/proc/build_turbolift()
 	// Create our system controller.
 	var/datum/turbolift/lift = new()
 	if(floor_departure_sound)
@@ -62,7 +72,7 @@
 
 		if(NORTH)
 
-			int_panel_x = ux + FLOOR(lift_size_x/2) 
+			int_panel_x = ux + FLOOR(lift_size_x/2)
 			int_panel_y = uy + 1
 			ext_panel_x = ux
 			ext_panel_y = ey + 2
@@ -79,7 +89,7 @@
 
 		if(SOUTH)
 
-			int_panel_x = ux + FLOOR(lift_size_x/2) 
+			int_panel_x = ux + FLOOR(lift_size_x/2)
 			int_panel_y = ey - 1
 			ext_panel_x = ex
 			ext_panel_y = uy - 2
@@ -208,19 +218,6 @@
 		panel_ext.set_dir(udir)
 		cfloor.ext_panel = panel_ext
 
-		// Place lights
-		if(light_type)
-			var/turf/placing1 = locate(light_x1, light_y1, cz)
-			var/turf/placing2 = locate(light_x2, light_y2, cz)
-			var/obj/machinery/light/light1 = new light_type(placing1, light)
-			var/obj/machinery/light/light2 = new light_type(placing2, light)
-			if(udir == NORTH || udir == SOUTH)
-				light1.set_dir(WEST)
-				light2.set_dir(EAST)
-			else
-				light1.set_dir(SOUTH)
-				light2.set_dir(NORTH)
-
 		// Update area.
 		if(az > areas_to_use.len)
 			log_debug("Insufficient defined areas in turbolift datum, aborting.")
@@ -234,6 +231,22 @@
 	lift.control_panel_interior.set_dir(udir)
 	lift.current_floor = lift.floors[1]
 
-	lift.open_doors()
+	// Place interior lights
+	if(light_type)
+		var/turf/placing1 = locate(light_x1, light_y1, uz)
+		var/turf/placing2 = locate(light_x2, light_y2, uz)
+		var/obj/machinery/light/light1 = new light_type(placing1, light)
+		var/obj/machinery/light/light2 = new light_type(placing2, light)
+		if(udir == NORTH || udir == SOUTH)
+			light1.set_dir(WEST)
+			light2.set_dir(EAST)
+		else
+			light1.set_dir(SOUTH)
+			light2.set_dir(NORTH)
+
+	if(SSmisc_late.initialized)
+		lift.open_doors()
+	else
+		SSmisc_late.turbolifts_to_open += lift
 
 	qdel(src) // We're done.

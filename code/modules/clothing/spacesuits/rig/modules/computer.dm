@@ -221,7 +221,7 @@
 						return 0
 				else
 					return 0
-			else if(user.unEquip(ai, src))
+			else if(user.try_unequip(ai, src))
 				ai_card = ai
 				to_chat(ai_mob, "<span class='notice'>You have been transferred to \the [holder]'s [src.name].</span>")
 				to_chat(user, "<span class='notice'>You load \the [ai_mob] into \the [holder]'s [src.name].</span>")

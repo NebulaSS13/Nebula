@@ -6,7 +6,7 @@
 	material = /decl/material/solid/fiberglass
 	base_type = /obj/item/stock_parts/console_screen
 	part_flags = PART_FLAG_HAND_REMOVE
-	health = 20
+	max_health = 20
 	ignore_damage_types = list(ELECTROCUTE) // emp damage is annoying enough without destroying purely physical or mechanical components
 
 /obj/item/stock_parts/console_screen/on_refresh(obj/machinery/machine)

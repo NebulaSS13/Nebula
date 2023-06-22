@@ -69,6 +69,9 @@ FLOOR SAFES
 		icon_state = initial(icon_state)
 
 /obj/structure/safe/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
+
 	user.set_machine(src)
 	var/dat = "<center>"
 	dat += "<a href='?src=\ref[src];open=1'>[open ? "Close" : "Open"] [src]</a> | <a href='?src=\ref[src];decrement=1'>-</a> [dial * 5] <a href='?src=\ref[src];increment=1'>+</a>"
@@ -79,7 +82,7 @@ FLOOR SAFES
 			dat += "<tr><td><a href='?src=\ref[src];retrieve=\ref[P]'>[P.name]</a></td></tr>"
 		dat += "</table></center>"
 	show_browser(user, "<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=safe;size=350x300")
-
+	return TRUE
 
 /obj/structure/safe/Topic(href, href_list)
 	if(!ishuman(usr))	return
@@ -138,7 +141,7 @@ FLOOR SAFES
 /obj/structure/safe/attackby(obj/item/I, mob/user)
 	if(open)
 		if(I.w_class + space <= maxspace)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			space += I.w_class
 			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")

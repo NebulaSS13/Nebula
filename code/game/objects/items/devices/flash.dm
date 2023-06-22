@@ -27,7 +27,7 @@
 /obj/item/flash/proc/clown_check(var/mob/user)
 	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
-		user.unEquip(src)
+		user.try_unequip(src)
 		return 0
 	return 1
 
@@ -101,7 +101,7 @@
 /obj/item/flash/attack_self(mob/user, flag = 0, emp = 0)
 	if(!user || !general_flash_check(user))
 		return FALSE
-	
+
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	do_flash_animation(user)
 	for(var/mob/living/carbon/M in oviewers(3, null))

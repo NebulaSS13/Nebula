@@ -2,6 +2,9 @@
 	name = "overlay"
 	unacidable = 1
 
+/obj/effect/overlay/singularity_pull()
+	return
+
 /obj/effect/overlay/beam//Not actually a projectile, just an effect.
 	name="beam"
 	icon='icons/effects/beam.dmi'

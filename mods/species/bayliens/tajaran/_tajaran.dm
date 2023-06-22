@@ -9,4 +9,4 @@
 		bodytype_equip_flags |= BODY_FLAG_FELINE
 
 /mob/living/carbon/human/tajaran/Initialize(mapload)
-	..(mapload, SPECIES_TAJARA)
+	. = ..(mapload, SPECIES_TAJARA)

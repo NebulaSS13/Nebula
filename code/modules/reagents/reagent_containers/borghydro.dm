@@ -7,7 +7,7 @@
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 	var/mode = 1
 	var/charge_cost = 50
@@ -19,10 +19,18 @@
 	var/list/reagent_names = list()
 
 /obj/item/chems/borghypo/surgeon
-	reagent_ids = list(/decl/material/liquid/brute_meds, /decl/material/liquid/oxy_meds, /decl/material/liquid/painkillers)
+	reagent_ids = list(
+		/decl/material/liquid/brute_meds,
+		/decl/material/liquid/oxy_meds,
+		/decl/material/liquid/painkillers/strong
+	)
 
 /obj/item/chems/borghypo/crisis
-	reagent_ids = list(/decl/material/liquid/regenerator, /decl/material/liquid/stabilizer, /decl/material/liquid/painkillers)
+	reagent_ids = list(
+		/decl/material/liquid/regenerator,
+		/decl/material/liquid/stabilizer,
+		/decl/material/liquid/painkillers/strong
+	)
 
 /obj/item/chems/borghypo/Initialize()
 	. = ..()

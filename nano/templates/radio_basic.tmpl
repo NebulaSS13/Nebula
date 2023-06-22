@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Title: Basic Radio UI
 Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 -->
@@ -25,6 +25,45 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 	{{:helper.syndicateMode()}}
 {{/if}}
 
+{{if data.network}}
+<div class="item">
+	<div class="itemLabelWide">
+		Network Connectivity
+	</div>
+	<div class="itemContentMedium">
+		{{:helper.link(data.network, null, { 'network_settings': 1 }, null)}}
+		{{:helper.link("Sync with hub", null, { 'sync': 1 }, null)}}
+	</div>
+</div>
+{{/if}}
+
+{{if data.can_use_analog}}
+{{if data.network}}
+<div class="item">
+	<div class="itemLabelWide">
+		Analog Transmission
+	</div>
+	<div class="itemContentMedium">
+		{{:helper.link('On',  null, {'analog' : 1}, data.analog ? 'selected' : null)}}
+		{{:helper.link('Off', null, {'analog' : 0}, data.analog ? null : 'selected')}}
+	</div>
+</div>
+{{/if}}
+{{if data.analog && (data.available_keys || data.analog_secured)}}
+<div class="item">
+	<div class="itemLabelWide">
+		Analog Encryption
+	</div>
+	<div class="itemContentMedium">
+		{{for data.available_keys}}
+			{{:helper.link(value, null, {'analog_secured': value}, null, (data.analog_secured[value]) ? 'linkOn' : null)}}
+		{{/for}}
+		{{:helper.link('Clear', null, {'clear_analog_secured' : 1}, null)}}
+	</div>
+</div>
+{{/if}}
+{{/if}}
+
 <div class="item">
 	<div class="itemLabelWide">
 		Microphone
@@ -49,24 +88,12 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 			{{:helper.link('On', null, null, 'disabled')}}
 			{{:helper.link('Off', null, null, 'disabled')}}
 		{{else}}
-			{{:helper.link('On', null, {'listen' : 0}, data.speaker ? 'selected' : null)}}
-			{{:helper.link('Off', null, {'listen' : 1}, data.speaker ? null : 'selected')}}
+			{{:helper.link('On', null, {'reception' : 0}, data.speaker ? 'selected' : null)}}
+			{{:helper.link('Off', null, {'reception' : 1}, data.speaker ? null : 'selected')}}
 		{{/if}}
 	</div>
 </div>
 
-{{if data.has_subspace}}
-	<div class="item">
-		<div class="itemLabelWide">
-			Subspace Transmission:
-		</div>
-		<div class="itemContentMedium">
-			{{:helper.link('On', null, {'mode' : 1}, data.subspace ? 'selected' : null)}}
-			{{:helper.link('Off', null, {'mode' : 0}, data.subspace ? null : 'selected')}}
-		</div>
-	</div>
-{{/if}}
-		
 {{if data.has_loudspeaker}}
 	<div class="item">
 		<div class="itemLabelWide">
@@ -97,23 +124,23 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 	</div>
 	<div class="itemContentMedium">
 		{{:helper.link('--', null, {'freq' : -10})}}
-		{{:helper.link('-', null, {'freq' : -2})}}
-		{{:helper.link('+', null, {'freq' : 2})}}
+		{{:helper.link('-', null, {'freq' : -1})}}
+		{{:helper.link('+', null, {'freq' : 1})}}
 		{{:helper.link('++', null, {'freq' : 10})}}
 	</div>
 </div>
 
-{{if data.chan_list_len >= 1}}
+{{if data.show_channels}}
 	<h3>Channels</h3>
 	<div class="item">
-	{{for data.chan_list}}
+	{{for data.channel_list}}
 		<div class="itemLabelWide">
 			<span class='{{:value.chan_span}}'>&#9724</span>{{:value.display_name}}
 		</div>
 		<div class="itemContentMedium">
 			{{if value.secure_channel}}
-				{{:helper.link('On', null, {'ch_name' : value.chan, 'listen' : value.sec_channel_listen}, value.sec_channel_listen ? null : 'selected')}}
-				{{:helper.link('Off', null, {'ch_name' : value.chan, 'listen' : value.sec_channel_listen}, value.sec_channel_listen ? 'selected' : null)}}
+				{{:helper.link('On', null, {'ch_name' : value.chan,  'listen' : 1}, value.listening ? 'selected' : null)}}
+				{{:helper.link('Off', null, {'ch_name' : value.chan, 'listen' : 0}, value.listening ? null : 'selected')}}
 			{{else}}
 				{{:helper.link('Switch', null, {'spec_freq' : value.chan}, data.rawfreq == value.chan ? 'selected' : null)}}
 			{{/if}}

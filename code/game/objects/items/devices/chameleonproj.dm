@@ -86,6 +86,7 @@
 	desc = ""
 	density = 0
 	anchored = 1
+	is_spawnable_type = FALSE
 	var/can_move = 1
 	var/obj/item/chameleon/master = null
 
@@ -106,9 +107,11 @@
 	master.disrupt()
 
 /obj/effect/dummy/chameleon/attack_hand()
+	SHOULD_CALL_PARENT(FALSE)
 	for(var/mob/M in src)
-		to_chat(M, "<span class='warning'>Your chameleon-projector deactivates.</span>")
+		to_chat(M, SPAN_DANGER("Your chameleon-projector deactivates."))
 	master.disrupt()
+	return TRUE
 
 /obj/effect/dummy/chameleon/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)

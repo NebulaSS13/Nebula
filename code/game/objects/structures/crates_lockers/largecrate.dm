@@ -15,7 +15,10 @@
 		I.forceMove(src)
 
 /obj/structure/largecrate/attack_hand(mob/user)
+	if(user.a_intent == I_HURT)
+		return ..()
 	to_chat(user, SPAN_WARNING("You need a crowbar to pry this open!"))
+	return TRUE
 
 /obj/structure/largecrate/attackby(obj/item/W, mob/user)
 	if(IS_CROWBAR(W))
@@ -26,7 +29,7 @@
 		)
 		physically_destroyed()
 		return TRUE
-	return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/largecrate/animal
 	name = "animal crate"

@@ -37,7 +37,7 @@
 /obj/effect/overmap/visitable/ship/proc/recalculate_vessel_mass()
 	var/list/zones = list()
 	for(var/area/A in get_areas())
-		for(var/turf/simulated/T in A)
+		for(var/turf/T in A)
 			if(T.is_open())
 				continue
 
@@ -51,7 +51,9 @@
 				if(W.girder_material)
 					. += W.girder_material.weight * 5
 
-			zones |= T.zone
+			if(T.zone)
+				zones |= T.zone
+
 			for(var/atom/movable/C in T)
 				if(!C.simulated)
 					continue

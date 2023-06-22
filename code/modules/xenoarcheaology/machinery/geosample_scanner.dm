@@ -93,17 +93,17 @@
 				to_chat(user, SPAN_INFO("You remove [amount_transferred]u of coolant from [src]."))
 				update_coolant()
 				return TRUE
-	
+
 	//Let base class handle standard interactions
 	if(..())
 		return TRUE
-	
+
 	//Now let people insert whatever into the scanner
 	if(istype(I))
 		if(scanned_item)
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [scanned_item] inside!"))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		scanned_item = I
 		to_chat(user, SPAN_NOTICE("You put \the [I] into \the [src]."))

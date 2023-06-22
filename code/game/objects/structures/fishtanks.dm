@@ -63,7 +63,10 @@ var/global/list/fishtank_cache = list()
 	reagents.add_reagent(fill_type, reagents.maximum_volume)
 
 /obj/structure/glass_tank/attack_hand(var/mob/user)
+	if(user.a_intent == I_HURT)
+		return ..()
 	visible_message(SPAN_NOTICE("\The [user] taps on \the [src]."))
+	return TRUE
 
 /obj/structure/glass_tank/attackby(var/obj/item/W, var/mob/user)
 	if(W.force < 5 || user.a_intent != I_HURT)

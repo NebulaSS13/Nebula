@@ -45,13 +45,13 @@
 		qdel(src)
 		return
 
-	var/obj/effect/overmap/visitable/cell = global.overmap_sectors["[associated_z]"]
+	var/obj/effect/overmap/visitable/cell = global.overmap_sectors[num2text(associated_z)]
 	if(istype(cell))
 		sync_cell(cell)
 
 	// Add the spawn points to the appropriate job list.
 	var/registered_spawnpoint
-	for(var/check_z in GetConnectedZlevels(associated_z))
+	for(var/check_z in SSmapping.get_connected_levels(associated_z))
 		for(var/obj/abstract/submap_landmark/spawnpoint/landmark in LAZYACCESS(global.submap_spawnpoints_by_z, "[check_z]"))
 			var/datum/job/submap/job = jobs[landmark.name]
 			if(istype(job))

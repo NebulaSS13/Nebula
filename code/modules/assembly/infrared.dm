@@ -1,4 +1,10 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
+/obj/effect/ir_beam
+	name = "ir beam"
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "ibeam"
+	anchored =  TRUE
+	simulated = FALSE
 
 /obj/item/assembly/infra
 	name = "infrared emitter"
@@ -24,7 +30,7 @@
 	. = ..()
 	beams = list()
 	seen_turfs = list()
-	proximity_trigger = new(src, /obj/item/assembly/infra/proc/on_beam_entered, /obj/item/assembly/infra/proc/on_visibility_change, world.view, PROXIMITY_EXCLUDE_HOLDER_TURF)
+	proximity_trigger = new(src, /obj/item/assembly/infra/proc/on_beam_entered, /obj/item/assembly/infra/proc/on_visibility_change, world.view, proximity_flags = PROXIMITY_EXCLUDE_HOLDER_TURF)
 
 /obj/item/assembly/infra/Destroy()
 	qdel(proximity_trigger)
@@ -129,7 +135,7 @@
 	var/list/turfs_that_need_beams = seen_turfs.Copy()
 
 	for(var/b in existing_beams)
-		var/obj/effect/beam/ir_beam/beam = b
+		var/obj/effect/ir_beam/beam = b
 		if(beam.loc in turfs_that_need_beams)
 			turfs_that_need_beams -= beam.loc
 			beam.set_invisibility(visible ? 0 : INVISIBILITY_MAXIMUM)
@@ -141,13 +147,6 @@
 		return
 
 	for(var/t in turfs_that_need_beams)
-		var/obj/effect/beam/ir_beam/beam = new(t)
+		var/obj/effect/ir_beam/beam = new(t)
 		existing_beams += beam
 		beam.set_dir(dir)
-
-/obj/effect/beam/ir_beam
-	name = "ir beam"
-	icon = 'icons/obj/projectiles.dmi'
-	icon_state = "ibeam"
-	anchored = 1
-	simulated = 0

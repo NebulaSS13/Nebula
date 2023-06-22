@@ -113,7 +113,7 @@
 			to_chat(user, "<span class='warning'>You have already inserted a cell!</span>")
 			return
 		else
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			src.cell = W
 			to_chat(user, "<span class='notice'>You insert the cell!</span>")
@@ -145,12 +145,12 @@
 		to_chat(user, "<span class='notice'>You have already inserted the eyes!</span>")
 		return
 	else if(src.flash1)
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		src.flash2 = W
 		to_chat(user, "<span class='notice'>You insert the flash into the eye socket!</span>")
 	else
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		src.flash1 = W
 		to_chat(user, "<span class='notice'>You insert the flash into the eye socket!</span>")

@@ -83,7 +83,7 @@
 
 /**Insert the given item into the bundle, optionally at the index specified, or otherwise at the end. */
 /obj/item/paper_bundle/proc/insert_sheet_at(var/mob/user, var/obj/item/sheet, var/index = null)
-	if (user && !user.unEquip(sheet, src))
+	if (user && !user.try_unequip(sheet, src))
 		return
 	else if(!user)
 		sheet.forceMove(src)
@@ -368,7 +368,7 @@
 		//Merge the thing
 		insert_sheet_at(user, I, at_hint)
 		if(user)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				to_chat(user, SPAN_WARNING("You can't unequip \the [I]!"))
 				return
 			I.add_fingerprint(user)
@@ -459,18 +459,11 @@
 	LAZYADD(., /decl/interaction_handler/rename/paper_bundle)
 	LAZYADD(., /decl/interaction_handler/unbundle/paper_bundle)
 
-/obj/item/paper_bundle/proc/Clone()
-	var/obj/item/paper_bundle/copy = new
+/obj/item/paper_bundle/PopulateClone(obj/item/paper_bundle/clone)
+	clone = ..()
 	for(var/obj/item/I in pages)
-		if(istype(I, /obj/item/paper))
-			var/obj/item/paper/P = I
-			copy.merge(P.Clone())
-		else if(istype(I, /obj/item/photo))
-			var/obj/item/photo/Ph = I
-			copy.merge(Ph.Clone())
-		else
-			CRASH("Tried to clone a bundle with an invalid item type inside '[I.type]'")
-	return copy
+		clone.merge(I.Clone())
+	return clone
 
 /obj/item/paper_bundle/verb/rename()
 	set name = "Rename Bundle"
@@ -517,7 +510,7 @@
 	return //Don't merge
 
 /obj/item/paper_bundle/refill/break_bundle(mob/user)
-	user?.unEquip(src)
+	user?.try_unequip(src)
 	var/turf/T = get_turf(src)
 	for(var/i = 1 to bundle_size)
 		new /obj/item/paper(T)

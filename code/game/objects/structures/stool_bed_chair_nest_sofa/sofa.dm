@@ -71,87 +71,85 @@
 	if(!CanPhysicallyInteract(user) || anchored)
 		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
 		return
-
 	set_dir(turn(dir, 90))
 	update_icon()
 
-/obj/structure/bed/sofa/m/rotate(mob/user)
+/obj/structure/bed/sofa/middle/rotate(mob/user)
 	if(!CanPhysicallyInteract(user) || anchored)
 		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
 		return
-
 	set_dir(turn(dir, 45))
 	update_icon()
 
-/obj/structure/bed/sofa/m/red
+/obj/structure/bed/sofa/middle/red
 	reinf_material = /decl/material/solid/carpet
-/obj/structure/bed/sofa/m/brown
+/obj/structure/bed/sofa/middle/brown
 	reinf_material = /decl/material/solid/leather
-/obj/structure/bed/sofa/m/teal
+/obj/structure/bed/sofa/middle/teal
 	reinf_material = /decl/material/solid/cloth/teal
-/obj/structure/bed/sofa/m/black
+/obj/structure/bed/sofa/middle/black
 	reinf_material = /decl/material/solid/cloth/black
-/obj/structure/bed/sofa/m/green
+/obj/structure/bed/sofa/middle/green
 	reinf_material = /decl/material/solid/cloth/green
-/obj/structure/bed/sofa/m/purple
+/obj/structure/bed/sofa/middle/purple
 	reinf_material = /decl/material/solid/cloth/purple
-/obj/structure/bed/sofa/m/blue
+/obj/structure/bed/sofa/middle/blue
 	reinf_material = /decl/material/solid/cloth/blue
-/obj/structure/bed/sofa/m/beige
+/obj/structure/bed/sofa/middle/beige
 	reinf_material = /decl/material/solid/cloth/beige
-/obj/structure/bed/sofa/m/lime
+/obj/structure/bed/sofa/middle/lime
 	reinf_material = /decl/material/solid/cloth/lime
-/obj/structure/bed/sofa/m/yellow
+/obj/structure/bed/sofa/middle/yellow
 	reinf_material = /decl/material/solid/cloth/yellow
 
-/obj/structure/bed/sofa/r
+/obj/structure/bed/sofa/right
 	name = "sofa"
 	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with colored cloth."
 	icon_state = "sofa_r"
 
-/obj/structure/bed/sofa/r/red
+/obj/structure/bed/sofa/right/red
 	reinf_material = /decl/material/solid/carpet
-/obj/structure/bed/sofa/r/brown
+/obj/structure/bed/sofa/right/brown
 	reinf_material = /decl/material/solid/leather
-/obj/structure/bed/sofa/r/teal
+/obj/structure/bed/sofa/right/teal
 	reinf_material = /decl/material/solid/cloth/teal
-/obj/structure/bed/sofa/r/black
+/obj/structure/bed/sofa/right/black
 	reinf_material = /decl/material/solid/cloth/black
-/obj/structure/bed/sofa/r/green
+/obj/structure/bed/sofa/right/green
 	reinf_material = /decl/material/solid/cloth/green
-/obj/structure/bed/sofa/r/purple
+/obj/structure/bed/sofa/right/purple
 	reinf_material = /decl/material/solid/cloth/purple
-/obj/structure/bed/sofa/r/blue
+/obj/structure/bed/sofa/right/blue
 	reinf_material = /decl/material/solid/cloth/blue
-/obj/structure/bed/sofa/r/beige
+/obj/structure/bed/sofa/right/beige
 	reinf_material = /decl/material/solid/cloth/beige
-/obj/structure/bed/sofa/r/lime
+/obj/structure/bed/sofa/right/lime
 	reinf_material = /decl/material/solid/cloth/lime
-/obj/structure/bed/sofa/r/yellow
+/obj/structure/bed/sofa/right/yellow
 	reinf_material = /decl/material/solid/cloth/yellow
 
-/obj/structure/bed/sofa/l
+/obj/structure/bed/sofa/left
 	name = "sofa"
 	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with colored cloth."
 	icon_state = "sofa_l"
 
-/obj/structure/bed/sofa/l/red
+/obj/structure/bed/sofa/left/red
 	reinf_material = /decl/material/solid/carpet
-/obj/structure/bed/sofa/l/brown
+/obj/structure/bed/sofa/left/brown
 	reinf_material = /decl/material/solid/leather
-/obj/structure/bed/sofa/l/teal
+/obj/structure/bed/sofa/left/teal
 	reinf_material = /decl/material/solid/cloth/teal
-/obj/structure/bed/sofa/l/black
+/obj/structure/bed/sofa/left/black
 	reinf_material = /decl/material/solid/cloth/black
-/obj/structure/bed/sofa/l/green
+/obj/structure/bed/sofa/left/green
 	reinf_material = /decl/material/solid/cloth/green
-/obj/structure/bed/sofa/l/purple
+/obj/structure/bed/sofa/left/purple
 	reinf_material = /decl/material/solid/cloth/purple
-/obj/structure/bed/sofa/l/blue
+/obj/structure/bed/sofa/left/blue
 	reinf_material = /decl/material/solid/cloth/blue
-/obj/structure/bed/sofa/l/beige
+/obj/structure/bed/sofa/left/beige
 	reinf_material = /decl/material/solid/cloth/beige
-/obj/structure/bed/sofa/l/lime
+/obj/structure/bed/sofa/left/lime
 	reinf_material = /decl/material/solid/cloth/lime
-/obj/structure/bed/sofa/l/yellow
+/obj/structure/bed/sofa/left/yellow
 	reinf_material = /decl/material/solid/cloth/yellow

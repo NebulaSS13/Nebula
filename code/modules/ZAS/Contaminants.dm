@@ -72,7 +72,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	if(vsc.contaminant_control.CLOTH_CONTAMINATION) contaminate()
 
 	//Anything else requires them to not be dead.
-	if(stat >= 2)
+	if((stat >= DEAD) || (status_flags & GODMODE))
 		return
 
 	//Burn skin if exposed.

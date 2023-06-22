@@ -10,7 +10,7 @@
 
 /obj/structure/undies_wardrobe/attackby(var/obj/item/underwear/underwear, var/mob/user)
 	if(istype(underwear))
-		if(!user.unEquip(underwear))
+		if(!user.try_unequip(underwear))
 			return
 		qdel(underwear)
 		user.visible_message("<span class='notice'>\The [user] inserts \their [underwear.name] into \the [src].</span>", "<span class='notice'>You insert your [underwear.name] into \the [src].</span>")
@@ -40,9 +40,9 @@
 
 /obj/structure/undies_wardrobe/attack_hand(var/mob/user)
 	if(!human_who_can_use_underwear(user))
-		to_chat(user, "<span class='warning'>Sadly there's nothing in here for you to wear.</span>")
-		return
+		return ..()
 	interact(user)
+	return TRUE
 
 /obj/structure/undies_wardrobe/interact(var/mob/living/carbon/human/H)
 	var/id = H.GetIdCard()

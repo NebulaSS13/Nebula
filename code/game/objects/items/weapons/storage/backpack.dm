@@ -52,6 +52,11 @@
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
+/obj/item/storage/backpack/holding/singularity_act(S, current_size)
+	var/dist = max((current_size - 2), 1)
+	explosion(src.loc,(dist),(dist*2),(dist*4))
+	return 1000
+
 /obj/item/storage/backpack/holding/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/advanced))
 		to_chat(user, "<span class='warning'>The spatial interfaces of the two devices conflict and malfunction.</span>")
@@ -385,7 +390,7 @@
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-[marking_state]")
 		I.color = marking_colour
 		I.appearance_flags |= RESET_COLOR
-		overlay.add_overlay(I)	
+		overlay.add_overlay(I)
 	. = ..()
 
 /obj/item/storage/backpack/ert/commander

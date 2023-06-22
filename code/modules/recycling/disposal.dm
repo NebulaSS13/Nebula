@@ -105,7 +105,7 @@ var/global/list/diversion_junctions = list()
 				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 		return
 
-	if(!user.unEquip(I, src) || QDELETED(I))
+	if(!user.try_unequip(I, src) || QDELETED(I))
 		return
 
 	user.visible_message("\The [user] places \the [I] into \the [src].", "You place \the [I] into \the [src].")
@@ -295,7 +295,7 @@ var/global/list/diversion_junctions = list()
 
 // eject the contents of the disposal unit
 /obj/machinery/disposal/proc/eject()
-	for(var/atom/movable/AM in (contents - component_parts))
+	for(var/atom/movable/AM in get_contained_external_atoms())
 		AM.forceMove(src.loc)
 		AM.pipe_eject(0)
 	update_icon()
@@ -380,7 +380,7 @@ var/global/list/diversion_junctions = list()
 	var/wrapcheck = 0
 	var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 												// travels through the pipes.
-	var/list/stuff = contents - component_parts
+	var/list/stuff = get_contained_external_atoms()
 	//Hacky test to get drones to mail themselves through disposals.
 	for(var/mob/living/silicon/robot/drone/D in stuff)
 		wrapcheck = 1

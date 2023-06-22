@@ -92,7 +92,7 @@
 	if(component_attackby(O, user))
 		return TRUE
 	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
-		attack_hand(user)
+		attack_hand_with_interaction_checks(user)
 		return TRUE
 	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(O))
 		return ..()
@@ -130,7 +130,7 @@
 		updateUsrDialog()
 		return TRUE
 	// Take everything if we have a recycler.
-	if(can_ingest(O) && !is_robot_module(O) && user.unEquip(O))
+	if(can_ingest(O) && !is_robot_module(O) && user.try_unequip(O))
 		var/result = max(take_materials(O, user), max(reagents_taken, take_reagents(O, user, TRUE)))
 		show_intake_message(user, result, atom_name)
 		if(result == SUBSTANCE_TAKEN_NONE)

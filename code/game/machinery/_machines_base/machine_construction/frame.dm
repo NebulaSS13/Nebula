@@ -2,7 +2,7 @@
 
 /decl/machine_construction/frame/unwrenched/state_is_valid(obj/machinery/machine)
 	return !machine.anchored
-	
+
 /decl/machine_construction/frame/unwrenched/validate_state(obj/machinery/constructable_frame/machine)
 	. = ..()
 	if(!.)
@@ -94,7 +94,7 @@
 			if(!user.canUnEquip(I))
 				return FALSE
 			TRANSFER_STATE(/decl/machine_construction/frame/awaiting_parts)
-			user.unEquip(I, machine)
+			user.try_unequip(I, machine)
 			playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You add the circuit board to \the [machine].</span>")
 			machine.circuit = I

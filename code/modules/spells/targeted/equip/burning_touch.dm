@@ -21,11 +21,11 @@
 	force = 10
 	damtype = BURN
 	simulated = 0
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/burn_power = 0
 	var/burn_timer
 
-/obj/item/flame/hands/pickup(var/mob/user)
+/obj/item/flame/hands/on_picked_up(var/mob/user)
 	burn_power = 0
 	burn_timer = world.time + 10 SECONDS
 	START_PROCESSING(SSobj,src)

@@ -268,6 +268,10 @@
 	title = "cloak"
 	result_type = /obj/item/clothing/accessory/cloak/hide
 
+/datum/stack_recipe/banner
+	title = "banner"
+	result_type = /obj/item/banner
+
 /datum/stack_recipe/shoes
 	title = "shoes"
 	result_type = /obj/item/clothing/shoes/craftable

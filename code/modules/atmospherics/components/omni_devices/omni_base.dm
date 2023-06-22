@@ -140,7 +140,7 @@
 	for(var/datum/omni_port/P in ports)
 		int_pressure += P.air.return_pressure()
 	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_pressure - env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+	if ((int_pressure - env_air.return_pressure()) > (2 ATM))
 		return FALSE
 	return TRUE
 
@@ -262,7 +262,7 @@
 		QDEL_NULL(P.network)
 		if(P.mode == 0)
 			continue
-		
+
 		for(var/obj/machinery/atmospherics/target in get_step(src, P.direction))
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))

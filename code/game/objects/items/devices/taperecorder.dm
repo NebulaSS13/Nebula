@@ -53,7 +53,7 @@
 		if(mytape)
 			to_chat(user, "<span class='notice'>There's already a tape inside.</span>")
 			return
-		if(!user.unEquip(I))
+		if(!user.try_unequip(I))
 			return
 		I.forceMove(src)
 		mytape = I
@@ -70,10 +70,10 @@
 
 
 /obj/item/taperecorder/attack_hand(mob/user)
-	if(user.is_holding_offhand(src) && mytape)
+	if(user.is_holding_offhand(src) && mytape && user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
 		eject()
-		return
-	..()
+		return TRUE
+	return ..()
 
 
 /obj/item/taperecorder/verb/eject()
@@ -420,12 +420,12 @@
 
 
 /obj/item/magnetic_tape/proc/ruin()
-	ruined = 1
+	ruined = TRUE
 	update_icon()
 
 
 /obj/item/magnetic_tape/proc/fix()
-	ruined = 0
+	ruined = FALSE
 	update_icon()
 
 
@@ -488,7 +488,7 @@
 	if(max_capacity + other.max_capacity > initial(max_capacity))
 		to_chat(user, "<span class='notice'>You can't fit this much tape in!</span>")
 		return
-	if(user.unEquip(other))
+	if(user.try_unequip(other))
 		to_chat(user, "<span class='notice'>You join ends of the tape together.</span>")
 		max_capacity += other.max_capacity
 		used_capacity = min(used_capacity + other.used_capacity, max_capacity)
@@ -535,7 +535,7 @@
 	desc = "Quantum-enriched self-repairing nanotape, used for magnetic storage of information."
 	icon = 'icons/obj/items/device/tape_casette.dmi'
 	icon_state = "magtape"
-	ruined = 1
+	ruined = TRUE
 
 /obj/item/magnetic_tape/loose/fix()
 	return

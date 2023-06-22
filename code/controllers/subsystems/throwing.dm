@@ -80,7 +80,7 @@ SUBSYSTEM_DEF(throwing)
 	src.thrower = thrower
 	src.callback = callback
 	if(!QDELETED(thrower))
-		src.target_zone = thrower.zone_sel ? thrower.zone_sel.selecting : null
+		src.target_zone = thrower.get_target_zone()
 
 	dist_x = abs(target.x - thrownthing.x)
 	dist_y = abs(target.y - thrownthing.y)

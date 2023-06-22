@@ -75,7 +75,7 @@
 	name = "janitor's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_janitor.dmi'
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 
 /obj/item/clothing/under/lawyer

@@ -89,7 +89,7 @@
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		beaker = W
 		to_chat(user, "You attach \the [W] to \the [src].")
@@ -141,18 +141,18 @@
 			queue_icon_update()
 
 /obj/structure/iv_drip/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+		return ..()
 	if(attached)
 		drip_detach()
 	else if(beaker)
 		beaker.dropInto(loc)
 		beaker = null
 		queue_icon_update()
-	else
-		return ..()
+	return TRUE
 
 /obj/structure/iv_drip/attack_robot(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/iv_drip/verb/drip_detach()
 	set category = "Object"

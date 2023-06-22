@@ -274,7 +274,6 @@
 		adjust_blood(species.blood_volume - vessel.total_volume)
 	for (var/o in get_external_organs())
 		var/obj/item/organ/organ = o
-		organ.vital = 0
 		if (!BP_IS_PROSTHETIC(organ))
 			organ.rejuvenate(1)
 			organ.max_damage *= 3

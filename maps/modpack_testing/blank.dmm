@@ -12,6 +12,10 @@
 /obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled,
 /area/space)
+"R" = (
+/obj/abstract/level_data_spawner/player,
+/turf/space,
+/area/space)
 
 (1,1,1) = {"
 a
@@ -27,7 +31,7 @@ a
 "}
 (2,1,1) = {"
 a
-a
+R
 a
 a
 a

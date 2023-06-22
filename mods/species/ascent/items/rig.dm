@@ -6,13 +6,13 @@
 
 	suit_type = "support exosuit"
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR,
-		bullet = 1.1 * ARMOR_BALLISTIC_RESISTANT,
-		laser = 1.1 * ARMOR_LASER_RIFLES,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = 1.1 * ARMOR_BALLISTIC_RESISTANT,
+		ARMOR_LASER = 1.1 * ARMOR_LASER_RIFLES,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 	armor_type = /datum/extension/armor/ablative
 	armor_degradation_speed = 0.05
@@ -140,11 +140,11 @@
 	volume = 180
 
 /obj/item/tank/mantid/methyl_bromide
-	starting_pressure = list(/decl/material/gas/methyl_bromide = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/methyl_bromide = 6 ATM)
 
 /obj/item/tank/mantid/oxygen
 	name = "mantid oxygen tank"
-	starting_pressure = list(OXYGEN = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(OXYGEN = 6 ATM)
 
 // Boilerplate due to hard typechecks in jetpack code. Todo: make it an extension.
 /obj/item/tank/jetpack/ascent
@@ -157,7 +157,7 @@
 
 /obj/item/tank/jetpack/ascent/Initialize()
 	starting_pressure = list()
-	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
+	starting_pressure[refill_gas_type] = 6 ATM
 	. = ..()
 
 /obj/item/tank/jetpack/ascent/Process()
@@ -175,7 +175,7 @@
 
 /obj/item/tank/mantid/reactor/Initialize()
 	starting_pressure = list()
-	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
+	starting_pressure[refill_gas_type] = 6 ATM
 	. = ..()
 
 /obj/item/tank/mantid/reactor/Process()
@@ -193,23 +193,23 @@
 	icon = 'mods/species/ascent/icons/ascent.dmi'
 	icon_state = "injector"
 	charges = list(
-		list("bromide",             "bromide",             /decl/material/liquid/bromide, 80),
-		list("crystallizing agent", "crystallizing agent", /decl/material/liquid/crystal_agent,       80),
-		list("antibiotics",         "antibiotics",         /decl/material/liquid/antibiotics,   80),
-		list("painkillers",         "painkillers",         /decl/material/liquid/painkillers,   80)
+		list("bromide",             "bromide",             /decl/material/liquid/bromide,            80),
+		list("crystallizing agent", "crystallizing agent", /decl/material/liquid/crystal_agent,      80),
+		list("antibiotics",         "antibiotics",         /decl/material/liquid/antibiotics,        80),
+		list("painkillers",         "painkillers",         /decl/material/liquid/painkillers/strong, 80)
 	)
 
 // Rig definitions.
 /obj/item/rig/mantid/gyne
 	name = "gyne support exosuit"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_RIFLES,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_RIFLE,
+		ARMOR_LASER = ARMOR_LASER_RIFLES,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 	mantid_caste = SPECIES_MANTID_GYNE
 	initial_modules = list(

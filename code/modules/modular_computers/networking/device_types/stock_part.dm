@@ -15,6 +15,9 @@
 	return term.get_graph()
 
 /datum/extension/network_device/stock_part/get_command_target()
+	return get_top_holder()
+
+/datum/extension/network_device/stock_part/get_top_holder()
 	var/atom/A = holder
 	var/obj/machinery/M = A.loc
 	if(istype(M))

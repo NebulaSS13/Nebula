@@ -49,14 +49,14 @@
 
 
 /obj/structure/mech_wreckage/attack_hand(var/mob/user)
-	if(contents.len)
-		var/obj/item/thing = pick(contents)
-		if(istype(thing))
-			thing.forceMove(get_turf(user))
-			user.put_in_hands(thing)
-			to_chat(user, "You retrieve \the [thing] from \the [src].")
-			return
-	return ..()
+	var/list/contained_atoms = get_contained_external_atoms()
+	if(!length(contained_atoms) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	var/obj/item/thing = pick(contained_atoms)
+	thing.forceMove(get_turf(user))
+	user.put_in_hands(thing)
+	to_chat(user, "You retrieve \the [thing] from \the [src].")
+	return TRUE
 
 /obj/structure/mech_wreckage/attackby(var/obj/item/W, var/mob/user)
 

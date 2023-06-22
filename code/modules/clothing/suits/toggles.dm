@@ -1,14 +1,14 @@
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/storage/toggle
-	var/buttons // null means no toggle, TRUE means unbuttoned, FALSE means buttoned closed
+	var/buttons // null means no toggle, TRUE means unbuttoned, FALSE means buttoned closed. Set during Initialize() based on icon
 	var/obj/item/clothing/head/hood
 
 /obj/item/clothing/suit/storage/toggle/Initialize()
-	. = ..()
 	if(check_state_in_icon("[icon_state]_open", icon))
 		buttons = TRUE
 	if(ispath(hood))
 		hood = new hood(src)
+	. = ..()
 
 /obj/item/clothing/suit/storage/toggle/Destroy()
 	if(istype(hood))
@@ -41,13 +41,14 @@
 		var/mob/M = hood.loc
 		M.drop_from_inventory(hood)
 	hood.forceMove(src)
+	update_clothing_icon()
 
 /obj/item/clothing/suit/storage/toggle/proc/toggle_buttons(var/mob/user)
 	if(!CanPhysicallyInteract(usr) || isnull(buttons))
 		return FALSE
 	buttons = !buttons
 	if(user)
-		to_chat(user, "You [buttons ? "un" : ""]button up the coat.")
+		to_chat(user, SPAN_NOTICE("You [buttons ? "unbutton" : "button up"] \the [src]."))
 	update_icon()
 	update_clothing_icon()	//so our overlays update
 
@@ -81,6 +82,7 @@
 		remove_hood()
 	else
 		M.equip_to_slot_if_possible(hood, slot_head_str, 0, 0, 1)
+	update_clothing_icon()
 	return TRUE
 
 // Short-circuit this for quick interaction when worn.
@@ -125,7 +127,7 @@
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 	armor = list(
-		bio = ARMOR_BIO_MINOR
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 	hood = /obj/item/clothing/head/winterhood
 	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/chems/drinks/flask)
@@ -147,11 +149,11 @@
 	icon = 'icons/clothing/suit/wintercoat/captain.dmi'
 	hood = /obj/item/clothing/head/winterhood/captain
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_MINOR
 	)
 
 /obj/item/clothing/head/winterhood/captain
@@ -162,11 +164,11 @@
 	icon = 'icons/clothing/suit/wintercoat/sec.dmi'
 	hood = /obj/item/clothing/head/winterhood/security
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_MINOR
 	)
 
 /obj/item/clothing/head/winterhood/security
@@ -177,7 +179,7 @@
 	icon = 'icons/clothing/suit/wintercoat/med.dmi'
 	hood = /obj/item/clothing/head/winterhood/medical
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT
+		ARMOR_BIO = ARMOR_BIO_RESISTANT
 	)
 
 /obj/item/clothing/head/winterhood/medical
@@ -188,7 +190,7 @@
 	icon = 'icons/clothing/suit/wintercoat/sci.dmi'
 	hood = /obj/item/clothing/head/winterhood/science
 	armor = list(
-		bomb = ARMOR_BOMB_MINOR
+		ARMOR_BOMB = ARMOR_BOMB_MINOR
 	)
 
 /obj/item/clothing/head/winterhood/science
@@ -199,7 +201,7 @@
 	icon = 'icons/clothing/suit/wintercoat/eng.dmi'
 	hood = /obj/item/clothing/head/winterhood/engineering
 	armor = list(
-		rad = ARMOR_RAD_MINOR
+		ARMOR_RAD = ARMOR_RAD_MINOR
 	)
 
 /obj/item/clothing/head/winterhood/engineering
@@ -234,7 +236,7 @@
 	hood = /obj/item/clothing/head/winterhood/mining
 	icon = 'icons/clothing/suit/wintercoat/mining.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 	)
 
 /obj/item/clothing/head/winterhood/mining

@@ -1,10 +1,11 @@
 /turf/simulated/floor/attack_hand(mob/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
-		if(hand && try_graffiti(H, hand))
-			return TRUE
-	. = ..()
+	if(!ishuman(user))
+		return ..()
+	var/mob/living/carbon/human/H = user
+	var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
+	if(hand && try_graffiti(H, hand))
+		return TRUE
+	return ..()
 
 /turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
 
@@ -176,11 +177,14 @@
 
 /turf/simulated/floor/proc/welder_melt()
 	if(!(is_plating()) || broken || burnt)
-		return 0
-	burnt = 1
+		return FALSE
+	// if burnt/broken is nonzero plating just chooses a random icon
+	// so it doesn't really matter what we set this to as long as it's truthy
+	// let's keep it a string for consistency with the other uses of it
+	burnt = "1"
 	remove_decals()
 	update_icon()
-	return 1
+	return TRUE
 
 /turf/simulated/floor/why_cannot_build_cable(var/mob/user, var/cable_error)
 	switch(cable_error)

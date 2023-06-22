@@ -20,7 +20,7 @@
 /proc/random_name(gender, species)
 	if(species)
 		var/decl/species/current_species = get_species_by_key(species)
-		if(current_species) 
+		if(current_species)
 			var/decl/cultural_info/current_culture = GET_DECL(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)
 				return current_culture.get_random_name(null, gender)
@@ -116,7 +116,7 @@
 			. = 0
 			break
 
-		if(target_zone && user.zone_sel.selecting != target_zone)
+		if(target_zone && user.get_target_zone() != target_zone)
 			. = 0
 			break
 

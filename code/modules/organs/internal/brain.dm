@@ -3,7 +3,6 @@
 	desc = "A piece of juicy meat found in a person's head."
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
-	vital = 1
 	icon_state = "brain2"
 	force = 1.0
 	w_class = ITEM_SIZE_SMALL
@@ -211,7 +210,7 @@
 	var/held = owner.get_active_hand()
 	if(damage >= 0.5*max_damage && prob(1) && held)
 		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
-		owner.unEquip(held)
+		owner.try_unequip(held)
 	if(damage >= 0.6*max_damage)
 		SET_STATUS_MAX(owner, STAT_SLUR, 2)
 	if(is_broken())

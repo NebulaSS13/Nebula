@@ -32,7 +32,7 @@
 
 		dat += "<td>[al.intent]</td>"
 
-		dat += "<td>[al.zone_sel]</td>"
+		dat += "<td>[al.target_zone]</td>"
 
 		if(al.victim)
 			dat += "<td>[al.victim.key_name(check_if_offline = FALSE)] <a HREF='?_src_=holder;adminplayeropts=[al.victim.ref]'>PP</a></td>"

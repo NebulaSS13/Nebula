@@ -19,7 +19,7 @@
 	if(new_opacity != opacity)
 		var/old_opacity = opacity
 		opacity = new_opacity
-		events_repository.raise_event(/decl/observ/opacity_set, src, old_opacity, new_opacity)
+		RAISE_EVENT(/decl/observ/opacity_set, src, old_opacity, new_opacity)
 		return TRUE
 	else
 		return FALSE

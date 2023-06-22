@@ -26,9 +26,9 @@
 	bleed_colour = "#816e12"
 
 	var/static/list/chemical_types = list(
-		"anti-trauma" = /decl/material/liquid/brute_meds,
-		"amphetamines" =  /decl/material/liquid/amphetamines,
-		"painkillers" = /decl/material/liquid/painkillers
+		"anti-trauma" =  /decl/material/liquid/brute_meds,
+		"amphetamines" = /decl/material/liquid/amphetamines,
+		"painkillers" =  /decl/material/liquid/painkillers
 	)
 
 	var/generation = 1
@@ -94,7 +94,7 @@
 	generation = gen
 	set_borer_name()
 
-	if(!roundstart) 
+	if(!roundstart)
 		request_player()
 
 /mob/living/simple_animal/borer/Destroy()
@@ -236,7 +236,7 @@
 
 #define COLOR_BORER_RED "#ff5555"
 /mob/living/simple_animal/borer/proc/set_ability_cooldown(var/amt)
-	last_special = world.time + amt
+	set_special_ability_cooldown(amt)
 	for(var/obj/thing in hud_elements)
 		thing.color = COLOR_BORER_RED
 	addtimer(CALLBACK(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)

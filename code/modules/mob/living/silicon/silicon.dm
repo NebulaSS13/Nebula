@@ -72,8 +72,10 @@
 	global.silicon_mob_list -= src
 	QDEL_NULL(silicon_radio)
 	QDEL_NULL(silicon_camera)
+	QDEL_NULL(idcard)
 	for(var/datum/alarm_handler/AH in SSalarm.all_handlers)
 		AH.unregister_alarm(src)
+	QDEL_NULL_LIST(stock_parts)
 	return ..()
 
 /mob/living/silicon/fully_replace_character_name(new_name)
@@ -116,7 +118,7 @@
 
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
 
-	if (istype(source, /obj/machinery/containment_field))
+	if (istype(source, /obj/effect/containment_field))
 		spark_at(loc, amount=5, cardinal_only = TRUE)
 
 		shock_damage *= 0.75	//take reduced damage
@@ -268,9 +270,6 @@
 
 	flavor_text =  sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text)
 
-/mob/living/silicon/binarycheck()
-	return TRUE
-
 /mob/living/silicon/explosion_act(severity)
 	..()
 	var/brute
@@ -288,7 +287,7 @@
 	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
-	if(!(alarm.alarm_z() in GetConnectedZlevels(get_z(src))))
+	if(!(alarm.alarm_z() in SSmapping.get_connected_levels(get_z(src))))
 		return // Didn't actually hear it as far as we're concerned.
 	if(!next_alarm_notice)
 		next_alarm_notice = world.time + SecondsToTicks(10)
@@ -392,7 +391,7 @@
 
 
 /mob/living/silicon/proc/try_stock_parts_install(obj/item/stock_parts/W, mob/user)
-	if(istype(W) && user.unEquip(W))
+	if(istype(W) && user.try_unequip(W))
 		W.forceMove(src)
 		stock_parts += W
 		to_chat(usr, "<span class='notice'>You install the [W.name].</span>")

@@ -62,7 +62,7 @@
 				to_chat(user, "\The [src] already has a tank installed.")
 				return
 
-			if(!user.unEquip(W)) return
+			if(!user.try_unequip(W)) return
 			air_supply = W
 			W.forceMove(src)
 			to_chat(user, "You slot [W] into [src] and tighten the connecting valve.")
@@ -102,7 +102,7 @@
 				return
 			if(!user || !W)
 				return
-			if(!user.unEquip(mod)) return
+			if(!user.try_unequip(mod)) return
 			to_chat(user, "You install \the [mod] into \the [src].")
 			installed_modules |= mod
 			mod.forceMove(src)
@@ -112,7 +112,7 @@
 
 		else if(!cell && istype(W,/obj/item/cell))
 
-			if(!user.unEquip(W)) return
+			if(!user.try_unequip(W)) return
 			to_chat(user, "You jack \the [W] into \the [src]'s battery mount.")
 			W.forceMove(src)
 			src.cell = W
@@ -203,11 +203,9 @@
 
 
 /obj/item/rig/attack_hand(var/mob/user)
-
-	if(electrified != 0)
-		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
-			return
-	..()
+	if(electrified != 0 && shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
+		return TRUE
+	return ..()
 
 /obj/item/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)

@@ -69,19 +69,18 @@
 
 // SMES itself
 /obj/machinery/power/smes/buildable
-	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
-	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
-	wires = /datum/wires/smes
-	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
-	var/RCon = 1				// Cut to disable AI and remote control.
-	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
-	var/emp_proof = 0			// Whether the SMES is EMP proof
-
 	charge = 0
+	wires = /datum/wires/smes
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/buildable
 	maximum_component_parts = list(/obj/item/stock_parts/smes_coil = 6, /obj/item/stock_parts = 15)
 	interact_offline = TRUE
+	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
+	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
+	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
+	var/RCon = 1				// Cut to disable AI and remote control.
+	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
+	var/emp_proof = 0			// Whether the SMES is EMP proof
 
 /obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()

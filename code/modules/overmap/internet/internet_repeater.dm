@@ -7,10 +7,16 @@ var/global/list/internet_repeaters = list()
 	icon_state = "bus"
 	density = 1
 	anchored = 1
-	stat_immune = 0
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 50
 	active_power_usage = 5000
+	construct_state = /decl/machine_construction/default/panel_closed
+	stock_part_presets = list(
+		/decl/stock_part_preset/terminal_setup,
+	)
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/terminal,
+	)
 
 /obj/machinery/internet_repeater/Initialize()
 	. = ..()
@@ -32,7 +38,7 @@ var/global/list/internet_repeaters = list()
 /obj/machinery/internet_repeater/on_update_icon()
 	icon_state = initial(icon_state)
 	if(panel_open)
-		icon_state = "[icon_state]_o" 
+		icon_state = "[icon_state]_o"
 	if(use_power != POWER_USE_ACTIVE || !operable())
 		icon_state = "[icon_state]_off"
 
@@ -45,7 +51,7 @@ var/global/list/internet_repeaters = list()
 	var/data = list()
 	data["powered"] = (use_power == POWER_USE_ACTIVE)
 
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[get_z(src)]"]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(get_z(src))]
 
 	if(sector)
 		var/list/internet_connections = sector.get_internet_connections()

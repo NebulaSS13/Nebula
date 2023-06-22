@@ -129,7 +129,7 @@ SUBSYSTEM_DEF(typing)
 		return
 	if(display)
 		if(!target.typing_indicator)
-			target.typing_indicator = new(target)
+			target.typing_indicator = new(null, target)
 		target.is_typing = TRUE
 		target.typing_indicator.show_typing_indicator()
 	else if(target.typing_indicator)
@@ -143,26 +143,30 @@ I IS TYPIN'!'
 Updated 09/10/2022 to include chatbar using Spookerton's SStyping system from Polaris.
 */
 
-/atom/movable/overlay/typing_indicator
-	expected_master_type = /atom/movable
-	follow_proc = /atom/movable/proc/move_to_turf_or_null
+/atom/movable/typing_indicator
 	icon = 'icons/mob/talk.dmi'
 	icon_state = "typing"
 	mouse_opacity = 0
 	vis_flags = VIS_INHERIT_ID
-	follow_proc = null // Sits in vis_contents instead.
+	var/atom/movable/master
 
-/atom/movable/overlay/typing_indicator/Destroy()
-	if(ismovable(master))
-		var/atom/movable/AM = master
-		remove_vis_contents(AM, src)
+/atom/movable/typing_indicator/Initialize(ml, _master)
+	. = ..()
+	master = _master
+	if(!ismovable(master))
+		PRINT_STACK_TRACE("Typing indicator initialized with [isnull(master) ? "null" : master] as master.")
+		return INITIALIZE_HINT_QDEL
+
+/atom/movable/typing_indicator/Destroy()
+	if(master)
+		remove_vis_contents(master, src)
 		if(ismob(master))
 			var/mob/owner = master
 			if(owner.typing_indicator == src)
 				owner.typing_indicator = null
 	return ..()
 
-/atom/movable/overlay/typing_indicator/proc/hide_typing_indicator()
+/atom/movable/typing_indicator/proc/hide_typing_indicator()
 	set waitfor = FALSE
 	if(ismob(master))
 		var/mob/owner = master
@@ -175,7 +179,7 @@ Updated 09/10/2022 to include chatbar using Spookerton's SStyping system from Po
 		var/atom/movable/owner = master
 		remove_vis_contents(owner, src)
 
-/atom/movable/overlay/typing_indicator/proc/show_typing_indicator()
+/atom/movable/typing_indicator/proc/show_typing_indicator()
 
 	// Make it visible after being hidden.
 	set_invisibility(0)
@@ -199,6 +203,3 @@ Updated 09/10/2022 to include chatbar using Spookerton's SStyping system from Po
 	transform = M
 	alpha = 0
 	animate(src, transform = 0, alpha = 255, time = 0.2 SECONDS, easing = EASE_IN)
-
-/atom/movable/overlay/typing_indicator/SetInitLoc()
-	forceMove(null)

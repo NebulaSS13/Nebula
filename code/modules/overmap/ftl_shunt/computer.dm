@@ -24,7 +24,7 @@
 /obj/machinery/computer/ship/ftl/proc/recalc_cost()
 	if(!linked_core)
 		return INFINITY
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(z)]
 	if(!istype(sector))
 		return INFINITY
 	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, sector.z))
@@ -35,7 +35,7 @@
 	if(!linked_core)
 		return INFINITY
 
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(z)]
 	if(!istype(sector))
 		return INFINITY
 

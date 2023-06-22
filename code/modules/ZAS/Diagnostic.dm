@@ -2,17 +2,16 @@
 	set category = "Debug"
 	if(!T)
 		return
-	if(istype(T,/turf/simulated) && T:zone)
-		T:zone:dbg_data(src)
+	if(isturf(T) && T.zone)
+		T.zone.dbg_data(src)
+		if(length(T.zone.contents) < ZONE_MIN_SIZE)
+			to_chat(mob, SPAN_NOTICE("This turf's zone is below the minimum size, and will merge over zone blockers."))
 	else
 		to_chat(mob, "ZONE: No zone here.")
 		var/datum/gas_mixture/mix = T.return_air()
 		to_chat(mob, "ZONE: [mix.return_pressure()] kPa [mix.temperature] k")
 		for(var/g in mix.gas)
 			to_chat(mob, "ZONE GASES: [g]: [mix.gas[g]]\n")
-
-		if((T:zone && (length(T:zone:contents) > ZONE_MIN_SIZE)))
-			to_chat(mob, SPAN_NOTICE("This turf's zone is below the minimum size, and will merge over zone blockers."))
 
 /client/proc/Test_ZAS_Connection(var/turf/simulated/T)
 	set category = "Debug"

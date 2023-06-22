@@ -19,4 +19,4 @@
 
 /atom/Entered(atom/movable/enterer, atom/old_loc)
 	..()
-	events_repository.raise_event(/decl/observ/entered, src, enterer, old_loc)
+	RAISE_EVENT(/decl/observ/entered, src, enterer, old_loc)

@@ -7,10 +7,28 @@
 	var/obj/item/stock_parts/computer/hard_drive = get_component(PART_HDD)
 	if(hard_drive)
 		mounted_storage["local"] = new /datum/file_storage/disk(src, "local")
-		programs_dir = "local" + "/" + OS_PROGRAMS_DIR	
+		programs_dir = "local" + "/" + OS_PROGRAMS_DIR
 	var/obj/item/stock_parts/computer/drive_slot/drive_slot = get_component(PART_D_SLOT)
 	if(drive_slot)
 		mounted_storage["media"] = new /datum/file_storage/disk/removable(src, "media")
+
+	// Auto-run: must happen after storage mount above
+	var/datum/computer_file/data/autorun = get_file("autorun", "local")
+	if(istype(autorun))
+		run_program(autorun.stored_data)
+
+	// Auto-mounted mainframes.
+	var/datum/computer_file/data/automount_file = get_file("automount", "local")
+	if(istype(automount_file))
+		var/list/automounts = splittext(automount_file.stored_data, ";")
+		for(var/automount in automounts)
+			var/list/automount_split = splittext(automount, "|")
+			if(length(automount_split) != 2)
+				continue
+			var/root_name = automount_split[1]
+			var/mainframe_tag = automount_split[2]
+
+			mount_mainframe(root_name, mainframe_tag)
 
 /datum/extension/interactive/os/system_shutdown()
 	QDEL_LIST_ASSOC_VAL(mounted_storage)
@@ -20,13 +38,13 @@
 /datum/extension/interactive/os/proc/mount_storage(storage_type, root_name, hidden)
 	if(!ispath(storage_type, /datum/file_storage) || !length(root_name))
 		return
-	
+
 	var/mount_name = root_name
 	var/i = 0
 	while(mounted_storage[mount_name])
 		i++
 		mount_name = root_name + "_[i]"
-	
+
 	var/datum/file_storage/new_storage = new storage_type(src, mount_name, hidden)
 	mounted_storage[mount_name] = new_storage
 	return new_storage
@@ -35,11 +53,11 @@
 	var/datum/file_storage/removed = mounted_storage[root_name]
 	if(!removed)
 		return FALSE
-	
+
 	// Tell programs to clean up any lingering references.
 	for(var/datum/computer_file/program/P in running_programs)
 		P.on_file_storage_removal(removed)
-	
+
 	mounted_storage[root_name] = null
 	mounted_storage -= root_name
 
@@ -47,18 +65,21 @@
 	return TRUE
 
 /datum/extension/interactive/os/proc/mount_mainframe(root_name, mainframe_tag)
+	var/sanitized_root_name = sanitize_for_file(root_name)
+	if(!length(sanitized_root_name))
+		return "I/O ERROR: Unable to mount mainframe as file system with root directory '[root_name]'."
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return "NETWORK ERROR: Cannot connect to network."
 	var/datum/extension/network_device/mainframe/mainframe = network.get_device_by_tag(mainframe_tag)
 	if(!istype(mainframe))
 		return "NETWORK ERROR: No mainframe with network tag '[mainframe_tag]' found."
-	
-	var/datum/file_storage/network/created_storage = mount_storage(/datum/file_storage/network, root_name, FALSE)
+
+	var/datum/file_storage/network/created_storage = mount_storage(/datum/file_storage/network, sanitized_root_name, FALSE)
 	if(!created_storage)
-		return "I/O ERROR: Unable to mount mainframe as file system with root directory '[root_name]'."
+		return "I/O ERROR: Unable to mount mainframe as file system with root directory '[sanitized_root_name]'."
 	created_storage.server = mainframe_tag
-	return "Successfully mounted mainframe with network tag '[mainframe_tag]' as file system with root directory '[root_name]'."
+	return "Successfully mounted mainframe with network tag '[mainframe_tag]' as file system with root directory '[sanitized_root_name]'."
 
 // Rundown of the filesystem hierarchy:
 // The OS creates instances of /datum/file_storage as local or network disks, referenced in its mounted_storage list.
@@ -76,7 +97,7 @@
 		directories.Cut(1, 2)
 	if(!length(directories[directories.len]))
 		directories.Cut(directories.len)
-	
+
 	var/datum/file_storage/storage = mounted_storage[directories[1]]
 	if(!storage)
 		return OS_DIR_NOT_FOUND
@@ -122,7 +143,7 @@
 	var/list/file_loc = parse_directory(dir_path, create_directories)
 	if(!islist(file_loc))
 		return file_loc
-	
+
 	var/datum/file_storage/storage = file_loc[1]
 	return storage.store_file(file, file_loc[2], create_directories, accesses, user, overwrite)
 
@@ -131,7 +152,7 @@
 	var/list/file_loc = parse_directory(dir_path)
 	if(!islist(file_loc))
 		return file_loc
-	
+
 	var/datum/file_storage/storage = file_loc[1]
 	return storage.try_store_file(file, file_loc[2], accesses, user)
 
@@ -140,21 +161,21 @@
 	filename = sanitize_for_file(filename)
 	if(!length(filename))
 		return OS_BAD_NAME
-	
+
 	var/list/file_loc = parse_directory(dir_path)
 	if(!islist(file_loc))
 		return file_loc
 
 	var/datum/file_storage/storage = file_loc[1]
-	
+
 	return storage.create_file(filename, file_loc[2], data, file_type, metadata, accesses, user)
 
 // Saves or creates the file with the given name in the passed directory. Returns file on success, error code on failure.
-/datum/extension/interactive/os/proc/save_file(filename, dir_path, new_data, file_type = /datum/computer_file/data/text, list/metadata, list/accesses, mob/user)	
+/datum/extension/interactive/os/proc/save_file(filename, dir_path, new_data, file_type = /datum/computer_file/data/text, list/metadata, list/accesses, mob/user)
 	filename = sanitize_for_file(filename)
 	if(!length(filename))
 		return OS_BAD_NAME
-	
+
 	var/list/file_loc = parse_directory(dir_path)
 	if(!islist(file_loc))
 		return file_loc
@@ -201,7 +222,7 @@
 
 /datum/file_storage/proc/check_errors()
 	if(!istype(os))
-		return "No GOOSE compatible device found."
+		return "No compatible device found."
 
 /datum/file_storage/proc/get_transfer_speed()
 	return 1
@@ -220,7 +241,7 @@
 		for(var/file in all_files)
 			if(!all_files[file]) // No directory associated with the file.
 				. += file
-	
+
 	return sortTim(., /proc/cmp_files_sort)
 
 // The following procs should return OS_FILE_SUCCESS on success (or the target file), or error codes on failure.
@@ -237,7 +258,7 @@
 /datum/file_storage/proc/create_file(filename, directory, data, file_type = /datum/computer_file/data, list/metadata, list/accesses, mob/user)
 	if(check_errors())
 		return OS_HARDDRIVE_ERROR
-	
+
 	filename = sanitize_for_file(filename)
 	if(!length(filename))
 		return OS_BAD_NAME
@@ -263,12 +284,12 @@
 		return F
 	if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
 		return OS_FILE_NO_READ
-	
-	var/datum/computer_file/cloned_file = F.clone(TRUE)
+
+	var/datum/computer_file/cloned_file = F.Clone(TRUE)
 	if(!istype(cloned_file))
 		return OS_FILE_NO_READ
-	
-	var/success = store_file(cloned_file, directory, accesses, user)
+
+	var/success = store_file(cloned_file, directory, TRUE, accesses, user)
 	if(success != OS_FILE_SUCCESS)
 		qdel(cloned_file) // Clean up after ourselves
 	return success
@@ -277,7 +298,7 @@
 	if(current_directory)
 		if(full)
 			return "[root_name]/" + current_directory.get_file_path()
-		return current_directory.filename	
+		return current_directory.filename
 	return root_name
 
 /datum/file_storage/proc/parse_directory(directory_path, create_directories = FALSE)
@@ -488,16 +509,16 @@
 	return drive_slot?.stored_drive
 
 /datum/file_storage/disk/removable/check_errors()
-	. = ..()
-	if(.)
-		return
 	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
 	if(!istype(drive_slot))
 		return "HARDWARE ERROR: No drive slot was found."
 	if(!drive_slot.check_functionality())
-		return "HARDWARE ERROR: [drive_slot] is non-operational"
+		return "HARDWARE ERROR: [drive_slot] is non-operational."
 	if(!istype(drive_slot.stored_drive))
 		return "HARDWARE ERROR: No portable drive inserted."
+	. = ..()
+	if(.)
+		return
 
 // Datum tracking progress between of file transfer between two file streams
 /datum/file_transfer
@@ -548,7 +569,7 @@
 	left_to_transfer = max(0, left_to_transfer - get_transfer_speed())
 	if(!left_to_transfer)
 		if(copying)
-			return transfer_to.store_file(transferring, directory_to, TRUE)
+			return transfer_to.store_file(transferring.Clone(), directory_to, TRUE)
 		else
 			. = transfer_from.delete_file(transferring) // Check if we can delete the file.
 			if(. == OS_FILE_SUCCESS)
@@ -591,7 +612,7 @@
 	if(file)
 		var/req_access = copy ? OS_READ_ACCESS : OS_WRITE_ACCESS
 		var/move_string = copy ? "copy" : "transfer"
-			
+
 		if(istype(file, /datum/computer_file/directory))
 			var/datum/computer_file/directory/dir = file
 			if(!copy)

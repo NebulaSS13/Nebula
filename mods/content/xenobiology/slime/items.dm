@@ -77,8 +77,8 @@
 /obj/effect/golemrune/Process()
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
-		if(!O.client)	continue
-		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
+		if(!O.client || (O.mind && O.mind.current && O.mind.current.stat != DEAD))
+			continue
 		ghost = O
 		break
 	if(ghost)
@@ -87,6 +87,7 @@
 		icon_state = "golem"
 
 /obj/effect/golemrune/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
 		if(!O.client)
@@ -97,7 +98,7 @@
 		break
 	if(!ghost)
 		to_chat(user, SPAN_WARNING("The rune fizzles uselessly."))
-		return
+		return TRUE
 	visible_message(SPAN_WARNING("A craggy humanoid figure coalesces into being!"))
 
 	var/mob/living/carbon/human/G = new(src.loc)
@@ -115,7 +116,7 @@
 	to_chat(G, FONT_LARGE(SPAN_BOLD("You are a golem. Serve [user] and assist them at any cost.")))
 	to_chat(G, SPAN_ITALIC("You move slowly and are vulnerable to trauma, but are resistant to heat and cold."))
 	qdel(src)
-
+	return TRUE
 
 /obj/effect/golemrune/proc/announce_to_ghosts()
 	for(var/mob/observer/ghost/G in global.player_list)

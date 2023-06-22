@@ -27,4 +27,4 @@
 
 // Another stub for when leaving a state.
 /decl/state/proc/exited_state(datum/holder)
-	return 
+	return

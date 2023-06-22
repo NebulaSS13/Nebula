@@ -266,10 +266,9 @@
 		enemy_mp = 20
 		gameover = 0
 		blocked = 0
-		emagged = 1
-
+		emagged = TRUE
 		enemy_name = "Cuban Pete"
 		name = "Outbomb Cuban Pete"
-
-		attack_hand(user)
-		return 1
+		attack_hand_with_interaction_checks(user)
+		return TRUE
+	return ..()

@@ -73,7 +73,7 @@
 		to_chat(user, "You try to insert [I] into [src], but its [get_currency_name()]-stick slot is occupied.")
 		return FALSE
 
-	if(user && !user.unEquip(I, src))
+	if(user && !user.try_unequip(I, src))
 		return FALSE
 
 	stored_stick = I

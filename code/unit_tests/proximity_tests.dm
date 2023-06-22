@@ -69,7 +69,8 @@
 	name = "Shall see the number of expected turfs on init"
 	expected_number_of_turfs_by_trigger_type = list(
 		/datum/proximity_trigger/line = 3,
-		/datum/proximity_trigger/square = 5*5
+		/datum/proximity_trigger/square = 5*5,
+		/datum/proximity_trigger/angle = 5*3
 	)
 
 
@@ -77,7 +78,8 @@
 	name = "Shall see the number of expected turfs after opacity change"
 	expected_number_of_turfs_by_trigger_type = list(
 		/datum/proximity_trigger/line = 5,
-		/datum/proximity_trigger/square = (5*5)+6
+		/datum/proximity_trigger/square = (5*5)+6,
+		/datum/proximity_trigger/angle = (5*3)+6
 	)
 
 /datum/unit_test/proximity/visibility/shall_see_the_number_of_expected_turfs_after_opacity_change/AfterSetTrigger()
@@ -93,7 +95,8 @@
 	name = "Shall see the number of expected turfs after opacity changes"
 	expected_number_of_turfs_by_trigger_type = list(
 		/datum/proximity_trigger/line = 5,
-		/datum/proximity_trigger/square = 9*9
+		/datum/proximity_trigger/square = 9*9,
+		/datum/proximity_trigger/angle = 9*5
 	)
 
 /datum/unit_test/proximity/visibility/shall_see_the_number_of_expected_turfs_after_opacity_changes/AfterSetTrigger()
@@ -107,7 +110,8 @@
 	name = "Shall see the number of expected turfs after multiple opacity changes"
 	expected_number_of_turfs_by_trigger_type = list(
 		/datum/proximity_trigger/line = 3,
-		/datum/proximity_trigger/square = 5*5
+		/datum/proximity_trigger/square = 5*5,
+		/datum/proximity_trigger/angle = 5*3
 	)
 
 /datum/unit_test/proximity/visibility/shall_see_the_number_of_expected_turfs_after_multiple_opacity_changes/AfterSetTrigger()
@@ -129,7 +133,7 @@
 
 /obj/proximity_listener/proc/SetTrigger(trigger_type, listener_flags)
 	QDEL_NULL(trigger)
-	trigger = new trigger_type(src, /obj/proximity_listener/proc/OnTurfEntered, /obj/proximity_listener/proc/OnTurfsChanged, 7, listener_flags)
+	trigger = new trigger_type(src, /obj/proximity_listener/proc/OnTurfEntered, /obj/proximity_listener/proc/OnTurfsChanged, 7, listener_flags, null, 90, 270)
 	trigger.register_turfs()
 
 /obj/proximity_listener/Destroy()

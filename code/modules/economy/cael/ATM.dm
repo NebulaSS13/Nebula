@@ -87,12 +87,12 @@
 
 		var/obj/item/card/id/idcard = I
 		if(!held_card)
-			if(!user.unEquip(idcard, src))
+			if(!user.try_unequip(idcard, src))
 				return
 			held_card = idcard
 			if(authenticated_account && held_card.associated_account_number != authenticated_account.account_number)
 				authenticated_account = null
-			attack_hand(user)
+			attack_hand_with_interaction_checks(user)
 
 	else if(authenticated_account)
 		if(istype(I,/obj/item/cash))
@@ -103,7 +103,7 @@
 				playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 50, 1)
 
 				to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
-				src.attack_hand(user)
+				attack_hand_with_interaction_checks(user)
 				qdel(I)
 
 		if(istype(I,/obj/item/charge_stick))
@@ -116,7 +116,7 @@
 					playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 50, 1)
 
 					to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
-					src.attack_hand(user)
+					attack_hand_with_interaction_checks(user)
 					qdel(I)
 	else
 		..()
@@ -377,7 +377,7 @@
 
 					var/obj/item/paper/R = new(src.loc, null, txt, "Account balance: [authenticated_account.owner_name]")
 					R.apply_custom_stamp(
-						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR), 
+						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR),
 						"by the [machine_id]")
 
 				if(prob(50))
@@ -387,7 +387,7 @@
 			if ("print_transaction")
 				if(authenticated_account)
 					var/txt
-					
+
 					txt = "<b>Transaction logs</b><br>"
 					txt += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
 					txt += "<i>Account number:</i> [authenticated_account.account_number]<br>"
@@ -414,7 +414,7 @@
 					txt += "</table>"
 					var/obj/item/paper/R = new(src.loc, null, txt, "Transaction logs: [authenticated_account.owner_name]")
 					R.apply_custom_stamp(
-						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR), 
+						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR),
 						"by the [machine_id]")
 
 				if(prob(50))
@@ -430,7 +430,7 @@
 					else
 						var/obj/item/I = usr.get_active_hand()
 						if (istype(I, /obj/item/card/id))
-							if(!usr.unEquip(I, src))
+							if(!usr.try_unequip(I, src))
 								return
 							held_card = I
 				else

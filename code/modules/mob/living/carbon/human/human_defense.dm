@@ -99,13 +99,10 @@ meteor_act
 	return siemens_coefficient
 
 /mob/living/carbon/human/proc/check_head_coverage()
-
 	for(var/slot in global.standard_headgear_slots)
-		var/bp = get_equipped_item(slot)
-		if(bp && istype(bp ,/obj/item/clothing))
-			var/obj/item/clothing/C = bp
-			if(C.body_parts_covered & SLOT_HEAD)
-				return TRUE
+		var/obj/item/clothing/clothes = get_equipped_item(slot)
+		if(istype(clothes) && (clothes.body_parts_covered & SLOT_HEAD))
+			return TRUE
 	return FALSE
 
 //Used to check if they can be fed food/drinks/pills
@@ -289,7 +286,7 @@ meteor_act
 	return 0
 
 /mob/living/carbon/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
-	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, user.zone_sel.selecting)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, user.get_target_zone())
 	if(!affecting || !affecting.is_robotic())
 		to_chat(user, "<span class='warning'>That limb isn't robotic.</span>")
 		return -1

@@ -82,10 +82,10 @@
 /obj/structure/deity/altar/OnTopic(var/user, var/list/href_list)
 	if(href_list["resist"])
 		var/mob/living/M = locate(href_list["resist"])
-		if(!istype(M) || target != M || M.stat || M.last_special > world.time)
+		if(!istype(M) || target != M || M.stat || M.is_on_special_ability_cooldown())
 			return TOPIC_HANDLED
 
-		M.last_special = world.time + 10 SECONDS
+		M.set_special_ability_cooldown(10 SECONDS)
 		M.visible_message("<span class='warning'>\The [M] writhes on top of \the [src]!</span>", "<span class='notice'>You struggle against the intruding thoughts, keeping them at bay!</span>")
 		to_chat(linked_god, "<span class='warning'>\The [M] slows its conversion through willpower!</span>")
 		cycles_before_converted++

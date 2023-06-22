@@ -17,6 +17,10 @@ var/global/list/navbeacons = list()
 	initial_access = list(access_engine)
 
 /obj/machinery/navbeacon/Initialize()
+
+	if(istext(codes)) // Mapping helper.
+		codes = cached_json_decode(codes)
+
 	. = ..()
 
 	var/turf/T = loc

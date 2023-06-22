@@ -29,7 +29,6 @@
 	var/limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 	// Appearance vars.
-	var/icon_name = null               // Icon state base.
 	var/body_part = null               // Part flag
 	var/icon_position = 0              // Used in mob overlay layering calculations.
 	var/model                          // Used when caching robolimb icons.
@@ -220,7 +219,7 @@
 
 			var/mob/M = loc
 			if(istype(M))
-				M.unEquip(src, E)
+				M.try_unequip(src, E)
 			else
 				dropInto(loc)
 				forceMove(E)
@@ -241,7 +240,7 @@
 				to_chat(usr, SPAN_WARNING("You cannot connect additional limbs to \the [src]."))
 				return
 
-			if(!user.unEquip(E, src))
+			if(!user.try_unequip(E, src))
 				return
 
 			if(istype(E.owner))
@@ -848,10 +847,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if (owner && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN) && W.can_autoheal() && W.wound_damage() && brute_ratio < 0.5 && burn_ratio < 0.5)
 			heal_amt += 0.5
 
-		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
+		// we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
 		heal_amt = heal_amt * wound_update_accuracy
-		//configurable regen speed woo, no-regen hardcore or instaheal hugbox, choose your destiny
+		// configurable regen speed woo, no-regen hardcore or instaheal hugbox, choose your destiny
 		heal_amt = heal_amt * config.organ_regeneration_multiplier
+		// Apply a modifier based on how stressed we currently are.
+		if(owner)
+			var/stress_modifier = owner.get_stress_modifier()
+			if(stress_modifier)
+				heal_amt *= 1-(config.stress_healing_recovery_constant * stress_modifier)
 		// amount of healing is spread over all the wounds
 		heal_amt = heal_amt / (LAZYLEN(wounds) + 1)
 		// making it look prettier on scanners
@@ -1110,7 +1114,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		holder.visible_message(\
 			"\The [cuffs] falls off of [holder.name].",\
 			"\The [cuffs] falls off you.")
-		holder.unEquip(cuffs)
+		holder.try_unequip(cuffs)
 
 // checks if all wounds on the organ are bandaged
 /obj/item/organ/external/proc/is_bandaged()
@@ -1322,7 +1326,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		if(!keep_organs)
 			for(var/obj/item/organ/thing in internal_organs)
-				if(!thing.vital && !BP_IS_PROSTHETIC(thing))
+				if(!thing.is_vital_to_owner() && !BP_IS_PROSTHETIC(thing))
 					qdel(thing)
 
 		owner.refresh_modular_limb_verbs()
@@ -1619,3 +1623,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 			owner.gib()
 	else
 		return ..()
+
+/obj/item/organ/external/is_vital_to_owner()
+	if(isnull(vital_to_owner))
+		. = ..()
+		if(!.)
+			for(var/obj/item/organ/O in children)
+				if(O.is_vital_to_owner())
+					vital_to_owner = TRUE
+					break
+	return vital_to_owner

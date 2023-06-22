@@ -7,7 +7,7 @@
 /obj/random/technology_scanner/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/t_scanner =            5,
-		/obj/item/radio =                2,
+		/obj/item/radio/off =            2,
 		/obj/item/scanner/reagent =      2,
 		/obj/item/scanner/spectrometer = 2,
 		/obj/item/scanner/gas =          5

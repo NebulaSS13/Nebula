@@ -38,7 +38,7 @@
 		data["id_rank"] = id_card && id_card.assignment ? id_card.assignment : "Unassigned"
 		data["id_owner"] = id_card && id_card.registered_name ? id_card.registered_name : "-----"
 		data["id_name"] = id_card ? id_card.name : "-----"
-		data["sex"] = id_card ? id_card.sex : "UNSET"
+		data["gender"] = id_card ? id_card.card_gender : "UNSET"
 		data["age"] = id_card ? id_card.age : "UNSET"
 		data["dna_hash"] = id_card ? id_card.dna_hash : "UNSET"
 		data["fingerprint_hash"] = id_card ? id_card.fingerprint_hash : "UNSET"
@@ -165,7 +165,7 @@
 								<u>Network password:</u> [stars(id_card.associated_network_account["password"], 0)]
 								<u>Blood Type:</u> [id_card.blood_type]<br><br>
 								<u>Age:</u> [id_card.age]<br><br>
-								<u>Sex:</u> [id_card.sex]<br><br>
+								<u>Gender:</u> [id_card.card_gender]<br><br>
 								<u>Access:</u><br>
 							"}
 
@@ -222,10 +222,10 @@
 				else if(href_list["apswd"])
 					var/account_password = input("Enter network account password.", "Network account password")
 					id_card.associated_network_account["password"] = account_password
-				else if(href_list["sex"])
-					var/sex = input("Type gender.", "Gender", id_card.sex)
-					if(!isnull(sex) && CanUseTopic(user))
-						id_card.sex = sex
+				else if(href_list["gender"])
+					var/new_gender = input("Type gender.", "Gender", id_card.card_gender)
+					if(!isnull(new_gender) && CanUseTopic(user))
+						id_card.card_gender = new_gender
 				else if(href_list["age"])
 					var/sug_age = text2num(input("Enter age.", "Age", id_card.age))
 					if(!isnull(sug_age) && CanUseTopic(user))
@@ -262,7 +262,7 @@
 						id_card.rank = selected_CR.get_rank()
 						id_card.dna_hash = selected_CR.get_dna()
 						id_card.fingerprint_hash = selected_CR.get_fingerprint()
-						id_card.sex = selected_CR.get_sex()
+						id_card.card_gender = selected_CR.get_gender()
 						id_card.age = selected_CR.get_age()
 						id_card.blood_type = selected_CR.get_bloodtype()
 						id_card.front = selected_CR.photo_front

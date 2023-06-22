@@ -1,14 +1,15 @@
 /decl/tool_archetype/pen
 	name        = "pen"
 	use_message = "writing"
-	use_sound   = list('sound/effects/pen1.ogg','sound/effects/pen2.ogg') 
-	properties  = list(\
-		TOOL_PROP_COLOR           = "black", \
-		TOOL_PROP_COLOR_NAME      = "black", \
-		TOOL_PROP_PEN_FLAG        = 0, \
-		TOOL_PROP_USES            = -1, \
-		TOOL_PROP_PEN_SIG         = null,\
-		TOOL_PROP_PEN_SHADE_COLOR = "black",\
+	use_sound   = list('sound/effects/pen1.ogg','sound/effects/pen2.ogg')
+	properties  = list(
+		TOOL_PROP_COLOR           = "black",
+		TOOL_PROP_COLOR_NAME      = "black",
+		TOOL_PROP_PEN_FLAG        = 0,
+		TOOL_PROP_USES            = -1,
+		TOOL_PROP_PEN_SIG         = null,
+		TOOL_PROP_PEN_SHADE_COLOR = "black",
+		TOOL_PROP_PEN_FONT        = PEN_FONT_DEFAULT,
 		)
 
 /**Returns the signature to use when signing with a pen. Meant to help deal with chameleon pens and regular pens. */
@@ -17,7 +18,7 @@
 	if(!.)
 		if(user?.real_name)
 			. = user.real_name
-		else 
+		else
 			. = "Anonymous"
 
 /decl/tool_archetype/pen/proc/decrement_uses(var/mob/user, var/obj/item/tool, var/decrement = 1)

@@ -144,6 +144,7 @@
 	take_damage(tforce)
 
 /obj/structure/window/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (user.a_intent && user.a_intent == I_HURT)
 
@@ -163,6 +164,7 @@
 		user.visible_message("[user.name] knocks on the [src.name].",
 							"You knock on the [src.name].",
 							"You hear a knocking sound.")
+	return TRUE
 
 /obj/structure/window/do_simple_ranged_interaction(var/mob/user)
 	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))
@@ -574,8 +576,9 @@
 	icon_state = "light[active]"
 
 //Centcomm windows
-/obj/structure/window/reinforced/crescent/attack_hand()
-	return
+/obj/structure/window/reinforced/crescent/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
+	return TRUE
 
 /obj/structure/window/reinforced/crescent/attackby()
 	return

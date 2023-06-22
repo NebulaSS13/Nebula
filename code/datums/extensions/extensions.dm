@@ -15,6 +15,28 @@
 	holder = null
 	. = ..()
 
+///Extensions can't be cloned from a Clone() call, because they need a holder on New, and cannot be cloned onto the same object.
+/// Use copy_from instead!
+/datum/extension/CanClone()
+	return FALSE
+
+/datum/extension/Clone()
+	SHOULD_CALL_PARENT(FALSE)
+	CRASH("Use 'copy_from()' on a new extension instance instead of using Clone()! Extensions cannot be created without a holder.")
+
+///Workaround for extensions not supporting Clone(). Copy data from another extension, so we're essentially a clone of that other extension.
+/datum/extension/proc/copy_from(var/datum/extension/source)
+	SHOULD_CALL_PARENT(TRUE)
+	//Make sure our types are compatible
+	if(!istype(src, source.type))
+		CRASH("Tried to copy extension data from a different extension type! source: [source.type], destination: [type].")
+
+	if(isnull(holder))
+		CRASH("Extension [type] must have a holder set before calling copy_from()!")
+
+	//Use the standard clone proc populate here for coherence
+	source.PopulateClone(src)
+
 /datum
 	var/list/datum/extension/extensions
 
@@ -75,3 +97,24 @@
 	if(!islist(source.extensions[base_type]))
 		qdel(source.extensions[base_type])
 	LAZYREMOVE(source.extensions, base_type)
+
+///Copy the extension instance on the 'source' and put it on the 'destination'.
+/proc/copy_extension(var/datum/source, var/datum/destination, var/base_type)
+	if(!istype(source) || !istype(destination))
+		CRASH("Tried to copy extension to or from invalid datums. source: [source], destination: [destination]")
+
+	//Get and validate the source
+	var/datum/extension/SE = get_extension(source, base_type)
+	if(isnull(SE))
+		return //This is a valid case, and we just have nothing to copy
+	if(!istype(destination, SE.expected_type))
+		CRASH("Tried to copy extension [SE] type to an unexpected type [destination.type]")
+
+	//Get and fill the destination
+	var/datum/extension/DE = get_or_create_extension(destination, base_type)
+
+	//Copy data over from the other extension
+	DE.copy_from(SE)
+
+	//Return the copied extension
+	return DE

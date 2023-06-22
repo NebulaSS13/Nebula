@@ -11,6 +11,7 @@
 	anchored = 1
 	animate_movement=1
 	light_range = 3
+	abstract_type = /obj/vehicle
 
 	can_buckle = 1
 	buckle_movable = 1
@@ -226,7 +227,7 @@
 		return
 	if(!istype(C))
 		return
-	if(!H.unEquip(C, src))
+	if(!H.try_unequip(C, src))
 		return
 	cell = C
 	powercheck()

@@ -23,7 +23,7 @@
 
 // called when power status changes
 /area/proc/power_change()
-	events_repository.raise_event(/decl/observ/area_power_change, src)
+	RAISE_EVENT(/decl/observ/area_power_change, src)
 	if (atmosalm || fire || eject || party)
 		update_icon()
 

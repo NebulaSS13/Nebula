@@ -25,6 +25,10 @@ var/global/list/overmap_unknown_ids = list()
 	var/last_burn = 0                   // worldtime when ship last acceleated
 	var/burn_delay = 1 SECOND           // how often ship can do burns
 
+	var/list/comms_masers
+	var/list/comms_antennae
+	var/can_switch_ident = TRUE
+	var/ident_transmitter = TRUE
 	var/overmap_id = OVERMAP_ID_SPACE   // Which overmap datum this object expects to be dealing with
 	var/adjacency_radius = 0            // draws a circle under the effect scaled to this size, 1 = 1 turf
 

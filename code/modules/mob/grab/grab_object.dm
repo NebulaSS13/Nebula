@@ -35,7 +35,7 @@
 	affecting = target
 	if(!istype(affecting))
 		return INITIALIZE_HINT_QDEL
-	target_zone = assailant.zone_sel?.selecting
+	target_zone = assailant.get_target_zone()
 
 	var/mob/living/affecting_mob = get_affecting_mob()
 	if(affecting_mob)
@@ -141,7 +141,7 @@
 	This section is for newly defined useful procs.
 */
 
-/obj/item/grab/proc/on_target_change(obj/screen/zone_sel/zone, old_sel, new_sel)
+/obj/item/grab/proc/on_target_change(obj/screen/zone_selector/zone, old_sel, new_sel)
 	if(src != assailant.get_active_hand())
 		return // Note that because of this condition, there's no guarantee that target_zone = old_sel
 	if(target_zone == new_sel)

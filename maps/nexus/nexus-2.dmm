@@ -907,7 +907,9 @@
 /turf/simulated/floor/carpet/blue3,
 /area/nexus/civilian/bar)
 "Oa" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data_spawner/main_level{
+	name = "Nexus Upper Deck";
+},
 /turf/space,
 /area/space)
 "Ok" = (

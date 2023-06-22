@@ -517,7 +517,7 @@
 	..()
 
 /decl/surgery_step/robotics/install_mmi/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	if(!user.unEquip(tool) || !ishuman(target))
+	if(!user.try_unequip(tool) || !ishuman(target))
 		return
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='notice'>[user] has installed \the [tool] into [target]'s [affected.name].</span>", \

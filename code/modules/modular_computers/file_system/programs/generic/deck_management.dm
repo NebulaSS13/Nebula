@@ -265,7 +265,7 @@
 			if(href_list["flight_plan"])
 				prog_state = DECK_REPORT_EDIT
 				if(selected_mission.flight_plan)
-					selected_report = selected_mission.flight_plan.clone()//We always make a new one to buffer changes until submitted.
+					selected_report = selected_mission.flight_plan.Clone()//We always make a new one to buffer changes until submitted.
 				else
 					selected_report = create_report(/datum/computer_file/report/flight_plan, selected_shuttle)
 			else
@@ -278,9 +278,9 @@
 				prog_state = DECK_REPORT_EDIT
 				var/datum/computer_file/report/old_report = locate(prototype.type) in selected_mission.other_reports
 				if(old_report)
-					selected_report = old_report.clone()
+					selected_report = old_report.Clone()
 				else
-					var/datum/computer_file/report/recipient/shuttle/new_report = prototype.clone()
+					var/datum/computer_file/report/recipient/shuttle/new_report = prototype.Clone()
 					new_report.shuttle.set_value(selected_shuttle.name)
 					new_report.mission.set_value(selected_mission.name)
 					selected_report = new_report
@@ -340,8 +340,7 @@
 			return 1
 		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		if(world.time - my_log.last_spam >= 1 MINUTE) //Slow down with that spam button
-			var/obj/item/radio/announcer = get_global_announcer()
-			announcer.autosay("The [selected_shuttle.name] is planning to depart on a mission promptly at [time]. The following crew members are to make their way to \the [place] immediately: [crew].", "Hangar Announcement System")
+			do_telecomms_announcement(user, "The [selected_shuttle.name] is planning to depart on a mission promptly at [time]. The following crew members are to make their way to \the [place] immediately: [crew].", "Hangar Announcement System")
 			my_log.last_spam = world.time
 		else
 			to_chat(user, "<span class='warning'>It's too soon after the previous announcement!</span>")

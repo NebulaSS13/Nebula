@@ -93,7 +93,7 @@
 
 /obj/item/flashlight/attack(mob/living/M, mob/living/user)
 	add_fingerprint(user)
-	if(on && user.zone_sel.selecting == BP_EYES)
+	if(on && user.get_target_zone() == BP_EYES)
 
 		if((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
@@ -149,7 +149,7 @@
 			to_chat(user, "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>")
 
 		var/static/list/pinpoint = list(
-			/decl/material/liquid/painkillers = 5,
+			/decl/material/liquid/painkillers/strong = 5,
 			/decl/material/liquid/amphetamines = 1
 		)
 		var/static/list/dilating = list(

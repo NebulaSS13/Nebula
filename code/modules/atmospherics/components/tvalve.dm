@@ -43,7 +43,7 @@
 
 /obj/machinery/atmospherics/tvalve/proc/paired_dirs() // these two dirs are connected
 	if(state) // "go to side"
-		return list(turn(dir, 180), turn(dir, -90)) 
+		return list(turn(dir, 180), turn(dir, -90))
 	else      // "go straight"
 		return list(turn(dir, 180), dir)
 
@@ -119,7 +119,7 @@
 /obj/machinery/atmospherics/tvalve/deconstruction_pressure_check()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 		return FALSE
 	return TRUE
 
@@ -156,11 +156,11 @@
 		"valve_toggle" = /decl/public_access/public_method/tvalve_toggle
 	)
 
-//Mirrored editions		
+//Mirrored editions
 /obj/machinery/atmospherics/tvalve/mirrored
 	icon_state = "map_tvalvem0"
 	base_icon_state = "tvalvem"
-	
+
 	connect_dir_type = SOUTH | EAST | NORTH
 	build_icon_state = "map_tvalvem0"
 	base_type = /obj/machinery/atmospherics/tvalve/mirrored/buildable
@@ -179,7 +179,7 @@
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_tvalve.dmi'
 	icon_state = "map_tvalve0"
-	
+
 	build_icon = 'icons/atmos/digital_tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 

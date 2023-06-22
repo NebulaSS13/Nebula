@@ -17,7 +17,7 @@
 /obj/item/chems/food/fish/attackby(var/obj/item/W, var/mob/user)
 	if(is_sharp(W) && (locate(/obj/structure/table) in loc))
 		var/mob/M = loc
-		if(istype(M) && !M.unEquip(src))
+		if(istype(M) && !M.try_unequip(src))
 			return
 
 		var/toxin_amt = REAGENT_VOLUME(reagents, /decl/material/liquid/carpotoxin)
@@ -36,7 +36,7 @@
 
 /obj/item/chems/food/fish/poison
 	fish_type = "space carp"
-	
+
 /obj/item/chems/food/fish/poison/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/carpotoxin, 6)

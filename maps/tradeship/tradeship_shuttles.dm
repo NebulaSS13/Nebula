@@ -1,12 +1,22 @@
 /obj/machinery/computer/shuttle_control/explore/tradeship
 	name = "exploration shuttle console"
-	shuttle_tag = "Exploration Shuttle"
+	shuttle_tag = "Bee Shuttle"
+
+/obj/machinery/computer/shuttle_control/explore/rescue
+	name = "rescue shuttle console"
+	shuttle_tag = "Rescue Shuttle"
 
 /datum/shuttle/autodock/overmap/exploration
-	name = "Exploration Shuttle"
-	shuttle_area = /area/ship/trade/shuttle/outgoing
-	dock_target = "tradeship_shuttle"
+	name = "Bee Shuttle"
+	shuttle_area = list(/area/ship/trade/shuttle/outgoing/general, /area/ship/trade/shuttle/outgoing/engineering)
+	dock_target = "bee_star"
 	current_location = "nav_tradeship_port_dock_shuttle"
+
+/datum/shuttle/autodock/overmap/rescue
+	name = "Rescue Shuttle"
+	shuttle_area = /area/ship/trade/shuttle/rescue
+	dock_target = "rescue_shuttle"
+	current_location = "nav_tradeship_starboard_dock_rescue"
 
 //In case multiple shuttles can dock at a location,
 //subtypes can be used to hold the shuttle-specific data
@@ -14,8 +24,8 @@
 	name = "Tradeship Starboard-side Docking Arm"
 	docking_controller = "tradeship_starboard_dock"
 
-/obj/effect/shuttle_landmark/docking_arm_starboard/pod
-	landmark_tag = "nav_tradeship_starboard_dock_pod"
+/obj/effect/shuttle_landmark/docking_arm_starboard/rescue
+	landmark_tag = "nav_tradeship_starboard_dock_rescue"
 
 /obj/effect/shuttle_landmark/docking_arm_port
 	name = "Tradeship Port-side Docking Arm"
@@ -33,8 +43,9 @@
 	landmark_tag = "nav_tradeship_below_starboardastern"
 
 // Essentially a bare platform that moves up and down.
-/obj/turbolift_map_holder/tradeship
+/obj/abstract/turbolift_spawner/tradeship
 	name = "Tradeship cargo elevator placeholder"
+	icon = 'icons/obj/turbolift_preview_nowalls_4x4.dmi'
 	depth = 4
 	lift_size_x = 3
 	lift_size_y = 3

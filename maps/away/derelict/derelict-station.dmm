@@ -1360,7 +1360,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "eG" = (
-/obj/structure/sign/warning/science,
+/obj/structure/sign/department/science_1,
 /turf/simulated/wall,
 /area/constructionsite/hallway/fore)
 "eH" = (
@@ -2213,7 +2213,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hJ" = (
-/obj/structure/sign/directions/examroom,
+/obj/structure/sign/department/examroom,
 /turf/simulated/wall,
 /area/constructionsite/medical)
 "hK" = (
@@ -2382,6 +2382,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "iv" = (
@@ -2469,7 +2470,7 @@
 /turf/simulated/wall,
 /area/constructionsite/medical)
 "iE" = (
-/obj/structure/sign/bluecross_2,
+/obj/structure/sign/department/bluecross_2,
 /turf/simulated/wall,
 /area/constructionsite/hallway/aft)
 "iF" = (
@@ -2717,6 +2718,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 5
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "jr" = (
@@ -3399,7 +3401,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "mc" = (
-/obj/machinery/the_singularitygen,
+/obj/machinery/singularity_generator,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "md" = (
@@ -3420,6 +3422,11 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
+"nn" = (
+/obj/machinery/atmospherics/pipe/simple/visible,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/tiled/dark/airless,
+/area/constructionsite/atmospherics)
 "ob" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "constructionsite_vent"
@@ -3454,6 +3461,11 @@
 /obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
+"Yw" = (
+/obj/machinery/atmospherics/pipe/simple/visible,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/airless,
+/area/constructionsite/atmospherics)
 
 (1,1,1) = {"
 aa
@@ -24565,9 +24577,9 @@ hr
 hr
 hr
 hr
-hV
+nn
 ie
-ie
+Yw
 hr
 hs
 hr
@@ -25974,10 +25986,10 @@ hr
 hr
 hs
 hr
-hV
+nn
 hV
 ie
-ie
+Yw
 hs
 hr
 hs

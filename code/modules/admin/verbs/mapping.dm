@@ -207,13 +207,8 @@ var/global/list/debug_verbs = list (
 	if(!check_rights(R_DEBUG)) return
 	testZAScolors_remove()
 
-	var/turf/simulated/location = get_turf(usr)
-
-	if(!istype(location, /turf/simulated))
-		to_chat(src, SPAN_WARNING("This debug tool can only be used while on a simulated turf."))
-		return
-
-	if(!location.zone)
+	var/turf/location = get_turf(usr)
+	if(!location?.zone)
 		to_chat(src, SPAN_WARNING("The turf you are standing on does not have a zone."))
 		return
 

@@ -43,7 +43,7 @@
 
 	var/list/construct_spells = list()
 
-/mob/living/simple_animal/construct/cultify()
+/mob/living/simple_animal/construct/on_defilement()
 	return
 
 /mob/living/simple_animal/construct/Initialize()
@@ -73,19 +73,13 @@
 		return
 	return ..()
 
-/mob/living/simple_animal/construct/examine(mob/user)
+/mob/living/simple_animal/construct/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..(user)
-	var/msg = "<span cass='info'>*---------*\nThis is [html_icon(src)] \a <EM>[src]</EM>!\n"
-	if (src.health < src.maxHealth)
-		msg += "<span class='warning'>"
-		if (src.health >= src.maxHealth/2)
-			msg += "It looks slightly dented.\n"
+	if(health < maxHealth)
+		if(health >= maxHealth/2)
+			to_chat(user, SPAN_WARNING("It looks slightly dented."))
 		else
-			msg += "<B>It looks severely dented!</B>\n"
-		msg += "</span>"
-	msg += "*---------*</span>"
-
-	to_chat(user, msg)
+			to_chat(user, SPAN_DANGER("It looks severely dented!"))
 
 /obj/item/ectoplasm
 	name = "ectoplasm"
@@ -263,11 +257,7 @@
 	. = ..()
 	if(.)
 		if(fire)
-			if(fire_alert)							fire.icon_state = "fire1"
-			else									fire.icon_state = "fire0"
-		if(purged)
-			if(purge > 0)							purged.icon_state = "purge1"
-			else									purged.icon_state = "purge0"
+			fire.icon_state = "fire[!!fire_alert]"
 		silence_spells(purge)
 
 /mob/living/simple_animal/construct/armoured/Life()

@@ -27,7 +27,8 @@
 	use_description = "Target the eyes or mouth on disarm intent and click anywhere to use a radial attack that blinds, deafens and disorients everyone near you."
 
 /decl/psionic_power/coercion/blindstrike/invoke(var/mob/living/user, var/mob/living/target)
-	if(user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES)
+	var/user_target_zone = user.get_target_zone()
+	if(user_target_zone != BP_MOUTH && user_target_zone != BP_EYES)
 		return FALSE
 	. = ..()
 	if(.)
@@ -60,7 +61,7 @@
 	use_description = "Target the head on disarm intent at melee range to attempt to read a victim's surface thoughts."
 
 /decl/psionic_power/coercion/mindread/invoke(var/mob/living/user, var/mob/living/target)
-	if(!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_HEAD)
+	if(!isliving(target) || !istype(target) || user.get_target_zone() != BP_HEAD)
 		return FALSE
 	. = ..()
 	if(!.)
@@ -98,13 +99,14 @@
 /decl/psionic_power/coercion/agony/invoke(var/mob/living/user, var/mob/living/target)
 	if(!istype(target))
 		return FALSE
-	if(user.zone_sel.selecting != BP_CHEST && user.zone_sel.selecting != BP_GROIN)
+	var/user_zone_sel = user.get_target_zone()
+	if(user_zone_sel != BP_CHEST && user_zone_sel != BP_GROIN)
 		return FALSE
 	. = ..()
 	if(.)
 		user.visible_message("<span class='danger'>\The [target] has been struck by \the [user]!</span>")
 		playsound(user.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
-		target.stun_effect_act(0, 60, user.zone_sel.selecting)
+		target.stun_effect_act(0, 60, user_zone_sel)
 		return TRUE
 
 /decl/psionic_power/coercion/spasm
@@ -120,7 +122,7 @@
 	if(!istype(target))
 		return FALSE
 
-	if(!(user.zone_sel.selecting in list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND)))
+	if(!(user.get_target_zone() in list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND)))
 		return FALSE
 
 	. = ..()
@@ -130,10 +132,10 @@
 		to_chat(target, "<span class='danger'>The muscles in your arms cramp horrendously!</span>")
 		if(prob(75))
 			target.emote("scream")
-		for(var/bp in target.held_item_slots)
-			var/datum/inventory_slot/inv_slot = target.held_item_slots[bp]
-			if(inv_slot?.holding?.simulated && prob(75) && target.unEquip(inv_slot.holding))
-				var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, bp)
+		for(var/hand_slot in target.get_held_item_slots())
+			var/obj/item/thing = target.get_equipped_item(hand_slot)
+			if(thing?.simulated && prob(75) && target.try_unequip(thing))
+				var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, hand_slot)
 				target.visible_message(SPAN_DANGER("\The [target] drops what they were holding as their [E ? E.name : "hand"] spasms!"))
 		return TRUE
 
@@ -146,7 +148,7 @@
 	use_description = "Grab a victim, target the eyes, then use the grab on them while on disarm intent, in order to convert them into a loyal mind-slave. The process takes some time, and failure is punished harshly."
 
 /decl/psionic_power/coercion/mindslave/invoke(var/mob/living/user, var/mob/living/target)
-	if(!istype(target) || user.zone_sel.selecting != BP_EYES)
+	if(!istype(target) || user.get_target_zone() != BP_EYES)
 		return FALSE
 	. = ..()
 	if(.)
@@ -180,7 +182,7 @@
 	use_description = "Grab a patient, target the head, then use the grab on them while on disarm intent, in order to perform a deep coercive-redactive probe of their psionic potential."
 
 /decl/psionic_power/coercion/assay/invoke(var/mob/living/user, var/mob/living/target)
-	if(user.zone_sel.selecting != BP_HEAD)
+	if(user.get_target_zone() != BP_HEAD)
 		return FALSE
 	. = ..()
 	if(.)
@@ -204,7 +206,7 @@
 	use_description = "Grab a patient, target the mouth, then use the grab on them while on disarm intent, in order to cure ailments of the mind."
 
 /decl/psionic_power/coercion/focus/invoke(var/mob/living/user, var/mob/living/target)
-	if(user.zone_sel.selecting != BP_MOUTH)
+	if(user.get_target_zone() != BP_MOUTH)
 		return FALSE
 	. = ..()
 	if(.)

@@ -14,6 +14,7 @@ var/global/datum/global_hud/hud
 	var/obj/screen/thermal
 	var/obj/screen/meson
 	var/obj/screen/science
+	var/obj/screen/holomap
 
 // makes custom colored overlay, can also generate scanline
 /datum/global_hud/proc/setup_overlay(icon_state, color)
@@ -36,3 +37,13 @@ var/global/datum/global_hud/hud
 	thermal = setup_overlay("scanline", "#ff0000")
 	meson = setup_overlay("scanline", "#9fd800")
 	science = setup_overlay("scanline", "#d600d6")
+
+	//Holomap screen object is invisible and work
+	//By setting it as n images location, without icon changes
+	//Make it part of global hud since it's inmutable
+	holomap = new /obj/screen()
+	holomap.name = "holomap"
+	holomap.icon = null
+	holomap.layer = HUD_BASE_LAYER
+	holomap.screen_loc = UI_HOLOMAP
+	holomap.mouse_opacity = 0

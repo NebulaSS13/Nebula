@@ -46,7 +46,7 @@
 			to_chat(user, "This device does not have a battery installed.")
 			return
 
-		if(user.unEquip(G))
+		if(user.try_unequip(G))
 			G.forceMove(src)
 			charging = G
 			update_icon()

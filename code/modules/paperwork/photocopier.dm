@@ -165,7 +165,7 @@
 	//Printer header stuff
 	if(printer)
 		LAZYADD(., printer.ui_data(user))
-	
+
 	//Photocopier stuff
 	LAZYSET(., "src",                "\ref[src]")
 	LAZYSET(., "is_sillicon_mode",   issilicon(user))
@@ -188,7 +188,7 @@
 
 /obj/machinery/photocopier/OnTopic(user, href_list, state)
 	//We don't plug in the printer's own OnTopic here since we don't want to allow the user control over it
-	
+
 	if(href_list["eject"])
 		eject_item(user)
 		return TOPIC_REFRESH
@@ -223,7 +223,7 @@
 
 /obj/machinery/photocopier/proc/insert_item(var/obj/item/I, var/mob/user)
 	if(!scanner_item)
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		scanner_item = I
 		to_chat(user, SPAN_NOTICE("You insert \the [I] into \the [src]."))
@@ -251,7 +251,7 @@
 
 /**Creates a clone of the specified item. Returns a list of cloned items. */
 /obj/machinery/photocopier/proc/scan_item(var/obj/item/I)
-	LAZYADD(., clone_paper_work_item(I))
+	LAZYADD(., I.Clone())
 
 /**Check if the amount of toner and paper are available */
 /obj/machinery/photocopier/proc/has_enough_to_print(var/req_toner = TONER_USAGE_PAPER, var/req_paper = 1)

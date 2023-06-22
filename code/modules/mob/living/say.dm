@@ -1,98 +1,7 @@
-var/global/list/department_radio_keys = list(
-	  ":r" = "right ear",	".r" = "right ear",
-	  ":l" = "left ear",	".l" = "left ear",
-	  ":i" = "intercom",	".i" = "intercom",
-	  ":h" = "department",	".h" = "department",
-	  ":+" = "special",		".+" = "special", //activate radio-specific special functions
-	  ":c" = "Command",		".c" = "Command",
-	  ":n" = "Science",		".n" = "Science",
-	  ":m" = "Medical",		".m" = "Medical",
-	  ":e" = "Engineering", ".e" = "Engineering",
-	  ":s" = "Security",	".s" = "Security",
-	  ":w" = "whisper",		".w" = "whisper",
-	  ":t" = "Mercenary",	".t" = "Mercenary",
-	  ":x" = "Raider",		".x" = "Raider",
-	  ":u" = "Supply",		".u" = "Supply",
-	  ":v" = "Service",		".v" = "Service",
-	  ":p" = "AI Private",	".p" = "AI Private",
-	  ":z" = "Entertainment",".z" = "Entertainment",
-	  ":y" = "Exploration",		".y" = "Exploration",
-
-	  ":R" = "right ear",	".R" = "right ear",
-	  ":L" = "left ear",	".L" = "left ear",
-	  ":I" = "intercom",	".I" = "intercom",
-	  ":H" = "department",	".H" = "department",
-	  ":C" = "Command",		".C" = "Command",
-	  ":N" = "Science",		".N" = "Science",
-	  ":M" = "Medical",		".M" = "Medical",
-	  ":E" = "Engineering",	".E" = "Engineering",
-	  ":S" = "Security",	".S" = "Security",
-	  ":W" = "whisper",		".W" = "whisper",
-	  ":T" = "Mercenary",	".T" = "Mercenary",
-	  ":X" = "Raider",		".X" = "Raider",
-	  ":U" = "Supply",		".U" = "Supply",
-	  ":V" = "Service",		".V" = "Service",
-	  ":P" = "AI Private",	".P" = "AI Private",
-	  ":Z" = "Entertainment",".Z" = "Entertainment",
-	  ":Y" = "Exploration",		".Y" = "Exploration",
-
-//russian version below
-	  ":к" = "right ear",	".к" = "right ear",
-	  ":д" = "left ear",	".д" = "left ear",
-	  ":ш" = "intercom",	".ш" = "intercom",
-	  ":р" = "department",	".р" = "department",
-	  ":с" = "Command",		".с" = "Command",
-	  ":т" = "Science",		".т" = "Science",
-	  ":ь" = "Medical",		".ь" = "Medical",
-	  ":у" = "Engineering",	".у" = "Engineering",
-	  ":ы" = "Security",	".ы" = "Security",
-	  ":ц" = "whisper",		".ц" = "whisper",
-	  ":е" = "Mercenary",	".е" = "Mercenary",
-	  ":г" = "Supply",		".г" = "Supply",
-	  ":ч" = "Raider",		".ч" = "Raider",
-	  ":м" = "Service",		".м" = "Service",
-	  ":з" = "AI Private",	".з" = "AI Private",
-	  ":я" = "Entertainment",".я" = "Entertainment",
-	  ":н" = "Exploration",		".н" = "Exploration",
-
-	  ":К" = "right ear",	".К" = "right ear",
-	  ":Д" = "left ear",	".Д" = "left ear",
-	  ":Ш" = "intercom",	".Ш" = "intercom",
-	  ":Р" = "department",	".Р" = "department",
-	  ":С" = "Command",		".С" = "Command",
-	  ":Т" = "Science",		".Т" = "Science",
-	  ":Ь" = "Medical",		".Ь" = "Medical",
-	  ":У" = "Engineering",	".У" = "Engineering",
-	  ":Ы" = "Security",	".Ы" = "Security",
-	  ":Ц" = "whisper",		".Ц" = "whisper",
-	  ":Е" = "Mercenary",	".Е" = "Mercenary",
-	  ":Г" = "Supply",		".Г" = "Supply",
-	  ":Ч" = "Raider",		".Ч" = "Raider",
-	  ":М" = "Service",		".М" = "Service",
-	  ":З" = "AI Private",	".З" = "AI Private",
-	  ":Я" = "Entertainment",".Я" = "Entertainment",
-	  ":Н" = "Exploration",		".Н" = "Exploration",
-)
-
-
-var/global/list/channel_to_radio_key = new
-/proc/get_radio_key_from_channel(var/channel)
-	var/key = channel_to_radio_key[channel]
-	if(!key)
-		for(var/radio_key in department_radio_keys)
-			if(department_radio_keys[radio_key] == channel)
-				key = radio_key
-				break
-		if(!key)
-			key = ""
-		channel_to_radio_key[channel] = key
-
-	return key
-
 /mob/living/proc/binarycheck()
 	for(var/slot in global.ear_slots)
 		var/obj/item/radio/headset/dongle = get_equipped_item(slot)
-		if(istype(dongle) && dongle.translate_binary)
+		if(dongle?.can_transmit_binary())
 			return TRUE
 	return FALSE
 
@@ -143,12 +52,9 @@ var/global/list/channel_to_radio_key = new
 // determine relevancy. See handle_message_mode below.
 /mob/living/proc/get_radios(var/message_mode)
 
-	if(!message_mode)
-		return
-
 	var/list/possible_radios
-	if(message_mode == "right ear" || message_mode == "left ear")
-		var/use_right = message_mode == "right ear"
+	if(message_mode == MESSAGE_MODE_RIGHT || message_mode == MESSAGE_MODE_LEFT)
+		var/use_right = (message_mode == MESSAGE_MODE_RIGHT)
 		var/obj/item/thing = get_equipped_item(use_right ? slot_r_ear_str : slot_l_ear_str)
 		if(thing)
 			LAZYDISTINCTADD(possible_radios, thing)
@@ -156,13 +62,18 @@ var/global/list/channel_to_radio_key = new
 			thing = get_equipped_item(use_right ? BP_R_HAND : BP_L_HAND)
 			if(thing)
 				LAZYDISTINCTADD(possible_radios, thing)
-	else
+	else if(message_mode == MESSAGE_MODE_INTERCOM)
+		if(!restrained())
+			for(var/obj/item/radio/I in view(1))
+				if(I.intercom_handling)
+					LAZYDISTINCTADD(possible_radios, I)
+	else if(message_mode != MESSAGE_MODE_WHISPER)
 		for(var/slot in global.ear_slots)
 			var/thing = get_equipped_item(slot)
 			if(thing)
 				LAZYDISTINCTADD(possible_radios, thing)
 
-	if(length(possible_radios))
+	if(LAZYLEN(possible_radios))
 		for(var/atom/movable/thing as anything in possible_radios)
 			var/obj/item/radio/radio = thing.get_radio(message_mode)
 			if(istype(radio))
@@ -172,16 +83,15 @@ var/global/list/channel_to_radio_key = new
 // It then processes the message_mode to implement an additional behavior needed for the message, such
 // as retrieving radios or looking for an intercom nearby.
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	if(!message_mode)
+		return
 	var/list/assess_items_as_radios = get_radios(message_mode)
-	if(message_mode == "intercom" && !restrained())
-		for(var/obj/item/radio/I in view(1))
-			if(I.intercom_handling)
-				LAZYDISTINCTADD(assess_items_as_radios, I)
-	for(var/obj/item/radio/radio as anything in assess_items_as_radios)
-		used_radios += radio
+	if(!LAZYLEN(assess_items_as_radios))
+		return
+	used_radios |= assess_items_as_radios
+	for(var/obj/item/radio/radio as anything in used_radios)
 		radio.add_fingerprint(src)
 		radio.talk_into(src, message, message_mode, verb, speaking)
-		. = TRUE
 
 /mob/living/proc/handle_speech_sound()
 	var/list/returns[2]
@@ -227,12 +137,12 @@ var/global/list/channel_to_radio_key = new
 		return custom_emote(1, copytext(message,2))
 
 	//parse the radio code and consume it
-	var/message_mode = parse_message_mode(message, "headset")
-	if (message_mode)
-		if (message_mode == "headset")
-			message = copytext_char(message,2)	//it would be really nice if the parse procs could do this for us.
+	var/message_mode = parse_message_mode(message, standard_mode = MESSAGE_MODE_DEFAULT)
+	if(message_mode)
+		if(message_mode == MESSAGE_MODE_DEFAULT)
+			message = copytext_char(message, 2)
 		else
-			message = copytext_char(message,3)
+			message = copytext_char(message, 3)
 
 	message = trim_left(message)
 
@@ -281,7 +191,7 @@ var/global/list/channel_to_radio_key = new
 	if(!message || message == "")
 		return 0
 
-	var/list/obj/item/used_radios = new
+	var/list/obj/item/used_radios = list()
 	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name))
 		return 1
 

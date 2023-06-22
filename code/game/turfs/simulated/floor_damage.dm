@@ -10,9 +10,9 @@
 	if(!flooring || !(flooring.flags & TURF_CAN_BREAK) || !isnull(broken))
 		return
 	if(flooring.has_damage_range)
-		broken = rand(0,flooring.has_damage_range)
+		broken = text2num(rand(0,flooring.has_damage_range))
 	else
-		broken = 0
+		broken = "0"
 	remove_decals()
 	update_icon()
 
@@ -20,8 +20,8 @@
 	if(!flooring || !(flooring.flags & TURF_CAN_BURN) || !isnull(burnt))
 		return
 	if(flooring.has_burn_range)
-		burnt = rand(0,flooring.has_burn_range)
+		burnt = text2num(rand(0,flooring.has_burn_range))
 	else
-		burnt = 0
+		burnt = "0"
 	remove_decals()
 	update_icon()

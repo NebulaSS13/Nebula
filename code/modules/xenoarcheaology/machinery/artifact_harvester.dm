@@ -59,7 +59,7 @@
 /obj/machinery/artifact_harvester/attackby(var/obj/I, var/mob/user)
 	if(istype(I,/obj/item/anobattery))
 		if(!inserted_battery)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
 			inserted_battery = I
@@ -171,7 +171,7 @@
 		if(!analysed)
 			state("Cannot harvest. No noteworthy energy signature isolated.")
 			return TOPIC_HANDLED
-			
+
 		set_artifact(analysed)
 
 		//see if we can clear out an old effect
@@ -194,7 +194,7 @@
 			if(!battery_matches_secondary_id && !battery_matches_primary_id)
 				state("Cannot harvest. Battery is charged with a different energy signature.")
 				return TOPIC_HANDLED
-	
+
 		if(cur_artifact.my_effect.activated)
 			source_effect = cur_artifact.my_effect
 
@@ -210,7 +210,7 @@
 				inserted_battery.battery_effect = source_effect.copy()
 				inserted_battery.battery_effect.holder = inserted_battery
 				inserted_battery.stored_charge = 0
-		
+
 		. = TOPIC_REFRESH
 
 	else if (href_list["stopharvest"])
@@ -242,6 +242,6 @@
 		. = TOPIC_REFRESH
 
 
-#undef	MODE_DRAINING 
+#undef	MODE_DRAINING
 #undef 	MODE_INACTIVE
-#undef 	MODE_HARVESTING 
+#undef 	MODE_HARVESTING

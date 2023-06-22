@@ -7,7 +7,7 @@
 	slot_flags = SLOT_OVER_BODY
 	allowed = list(/obj/item/tank/emergency/oxygen)
 	high_visibility = TRUE
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(ARMOR_MELEE = 0, ARMOR_BULLET = 0, ARMOR_LASER = 0,ARMOR_ENERGY = 0, ARMOR_BOMB = 0, ARMOR_BIO = 0, ARMOR_RAD = 0)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	siemens_coefficient = 0.9
 
@@ -23,7 +23,7 @@
 	color = get_random_colour(TRUE)
 	. = ..()
 
-// Cloaks should layer over and under everything, so set the layer directly rather 
+// Cloaks should layer over and under everything, so set the layer directly rather
 // than relying on overlay order. This also overlays over inhands but it looks ok.
 /obj/item/clothing/accessory/cloak/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype, var/image/overlay, var/slot, var/bodypart)
 
@@ -128,8 +128,7 @@
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
 	material = /decl/material/solid/leather
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	armor_type = /datum/extension/armor/ablative
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	material_armor_multiplier = 0.5

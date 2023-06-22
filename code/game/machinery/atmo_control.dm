@@ -7,7 +7,7 @@
 	var/frequency = 1441
 	var/datum/radio_frequency/radio_connection
 
-	var/pressure_setting = ONE_ATMOSPHERE * 45
+	var/pressure_setting = 45 ATM
 	var/input_flow_setting = 200
 	var/list/input_info = list()
 	var/list/output_info = list()
@@ -143,7 +143,6 @@
 		return TOPIC_HANDLED
 
 	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
 	signal.source = src
 
 	if(href_list["in_refresh_status"])
@@ -300,7 +299,6 @@
 		automation = !automation
 
 		var/datum/signal/signal = new
-		signal.transmission_method = 1 //radio signal
 		signal.source = src
 		signal.data = list(
 			"tag" = device_tag,
@@ -323,7 +321,6 @@
 					injecting = 1
 
 		var/datum/signal/signal = new
-		signal.transmission_method = 1 //radio signal
 		signal.source = src
 
 		signal.data = list(

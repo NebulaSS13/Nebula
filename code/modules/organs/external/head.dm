@@ -1,6 +1,5 @@
 /obj/item/organ/external/head
 	organ_tag = BP_HEAD
-	icon_name = "head"
 	name = "head"
 	slot_flags = SLOT_LOWER_BODY
 	max_damage = 75
@@ -127,13 +126,11 @@
 
 	if(owner.f_style)
 		var/decl/sprite_accessory/facial_hair_style = GET_DECL(owner.f_style)
-		if(facial_hair_style)
-			if(!facial_hair_style.species_allowed || (species.get_root_species_name(owner) in facial_hair_style.species_allowed))
-				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
-					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-					if(owner.facial_hair_colour && facial_hair_style.do_colouration)
-						facial_s.Blend(owner.facial_hair_colour, facial_hair_style.blend)
-					res.overlays |= facial_s
+		if(facial_hair_style?.accessory_is_available(owner, owner.species, owner.bodytype.bodytype_flag, owner.gender))
+			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
+			if(owner.facial_hair_colour && facial_hair_style.do_colouration)
+				facial_s.Blend(owner.facial_hair_colour, facial_hair_style.blend)
+			res.overlays |= facial_s
 
 	if(owner.h_style)
 		var/decl/sprite_accessory/hair/hair_style = GET_DECL(owner.h_style)
@@ -141,28 +138,27 @@
 		if(head && (head.flags_inv & BLOCK_HEAD_HAIR))
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GET_DECL(/decl/sprite_accessory/hair/short)
-		if(hair_style)
-			if(!hair_style.species_allowed || (species.get_root_species_name(owner) in hair_style.species_allowed))
-				if(!hair_style.subspecies_allowed || (species.name in hair_style.subspecies_allowed))
-					var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-					if(hair_style.do_colouration && hair_colour)
-						hair_s.Blend(hair_colour, hair_style.blend)
-					res.overlays |= hair_s
+		if(hair_style?.accessory_is_available(owner, owner.species, owner.bodytype.bodytype_flag, owner.gender))
+			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
+			if(hair_style.do_colouration && hair_colour)
+				hair_s.Blend(hair_colour, hair_style.blend)
+			res.overlays |= hair_s
 
 	for (var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_HAIR)
-			var/icon/mark_icon = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]")
+
+			var/mark_color
 			if (!mark_style.do_colouration && owner.h_style)
 				var/decl/sprite_accessory/hair/hair_style = GET_DECL(owner.h_style)
 				if ((~hair_style.flags & HAIR_BALD) && hair_colour)
-					mark_icon.Blend(hair_colour, ICON_ADD)
+					mark_color = hair_colour
 				else //only baseline human skin tones; others will need species vars for coloration
-					mark_icon.Blend(rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone), ICON_ADD)
+					mark_color = rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone)
 			else
-				mark_icon.Blend(markings[M], ICON_ADD)
-			res.overlays |= mark_icon
-			icon_cache_key += "[M][markings[M]]"
+				mark_color = markings[M]
+			res.overlays |= mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			icon_cache_key += "[M][mark_color]"
 
 	return res
 

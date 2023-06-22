@@ -238,7 +238,7 @@
 	return FTL_START_CONFIRMED
 
 /obj/machinery/ftl_shunt/core/proc/calculate_jump_requirements()
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 	if(O)
 		var/shunt_distance
 		var/vessel_mass = ftl_computer.linked.get_vessel_mass()
@@ -275,7 +275,7 @@
 		cancel_shunt()
 		return //If for some reason we don't have fuel now, just return.
 
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 	if(O)
 		var/destination = locate(shunt_x, shunt_y, O.z)
 		var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
@@ -420,7 +420,7 @@
 				H.show_message(SPAN_DANGER("The light around \the [src] warps before it emits a flash of incredibly bright, searing light!"), VISIBLE_MESSAGE)
 				H.flash_eyes(FLASH_PROTECTION_NONE)
 
-			new /obj/singularity/(get_turf(src))
+			new /obj/effect/singularity/(get_turf(src))
 
 
 	ftl_announcement.Announce(announcetxt, "FTL Shunt Management System", new_sound = sound('sound/misc/ftlsiren.ogg'))
@@ -589,7 +589,7 @@
 		if(!fuel)
 			if(!do_after(user, 2 SECONDS, src) || fuel)
 				return
-			if(!user || !user.unEquip(O, src))
+			if(!user || !user.try_unequip(O, src))
 				return
 			fuel = O
 			max_fuel = get_fuel_joules(TRUE)

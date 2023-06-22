@@ -54,6 +54,9 @@
 /decl/flooring/proc/on_remove()
 	return
 
+/decl/flooring/proc/get_movement_delay(var/travel_dir, var/mob/mover)
+	return movement_delay
+
 /decl/flooring/grass
 	name = "grass"
 	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
@@ -159,7 +162,8 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "tiled"
 	color = COLOR_DARK_GUNMETAL
-	has_damage_range = 4
+	has_damage_range = 2
+	has_burn_range = 2
 	damage_temperature = T0C+1400
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
 	build_type = /obj/item/stack/tile/floor
@@ -396,6 +400,18 @@
 	build_type = null
 	can_engrave = FALSE
 	footstep_type = /decl/footsteps/snow
+	movement_delay = 2
+
+/decl/flooring/snow/get_movement_delay(travel_dir, mob/mover)
+	. = ..()
+	if(mover)
+		var/obj/item/clothing/shoes/shoes = mover.get_equipped_item(slot_shoes_str)
+		if(shoes)
+			. += shoes.snow_slowdown_mod
+		var/decl/species/my_species = mover.get_species()
+		if(my_species)
+			. += my_species.snow_slowdown_mod
+		. = max(., 0)
 
 /decl/flooring/pool
 	name = "pool floor"
@@ -408,4 +424,7 @@
 	floor_smooth = SMOOTH_NONE
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
-	height = -FLUID_OVER_MOB_HEAD * 2
+	height = -FLUID_OVER_MOB_HEAD - 50
+
+/decl/flooring/pool/deep
+	height = -FLUID_DEEP - 50

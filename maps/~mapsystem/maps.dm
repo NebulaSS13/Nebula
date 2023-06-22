@@ -25,23 +25,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	// TODO: move all the lobby stuff onto this handler.
 	var/lobby_handler = /decl/lobby_handler
-
-	var/list/station_levels = list() // Z-levels the station exists on
-	var/list/admin_levels =   list() // Z-levels for admin functionality (Centcom, shuttle transit, etc)
-	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
-	var/list/player_levels =  list() // Z-levels a character can typically reach
-	var/list/sealed_levels =  list() // Z-levels that don't allow random transit at edge
-
-	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
-
-	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
-
-	var/base_floor_type = /turf/simulated/floor/airless // The turf type used when generating floors between Z-levels at startup.
-	var/base_floor_area                                 // Replacement area, if a base_floor_type is generated. Leave blank to skip.
-
-	//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
-	var/list/accessible_z_levels = list()
-
 	var/list/allowed_jobs	       //Job datums to use.
 	                               //Works a lot better so if we get to a point where three-ish maps are used
 	                               //We don't have to C&P ones that are only common between two of them
@@ -58,6 +41,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/company_short = "BM"
 	var/system_name = "Uncharted System"
 	var/ground_noun = "ground"
+
+	var/default_announcement_frequency = "Common"
 
 	// Current game year. Uses current system year + game_year num.
 	var/game_year = 288
@@ -119,9 +104,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
 	var/num_exoplanets = 0
+	var/force_exoplanet_type // Used to override exoplanet weighting and always pick the same exoplanet.
 	//dimensions of planet zlevels, defaults to world size if smaller, INCREASES world size if larger.
 	//Due to how maps are generated, must be (2^n+1) e.g. 17,33,65,129 etc. Map will just round up to those if set to anything other.
 	var/list/planet_size = list()
+	///The amount of z-levels generated for exoplanets. Default is 1. Be careful with this, since exoplanets are already pretty expensive.
+	var/planet_depth = 1
 	var/away_site_budget = 0
 
 	var/list/loadout_blacklist	//list of types of loadout items that will not be pickable
@@ -202,11 +190,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		allowed_spawns -= spawn_type
 		allowed_spawns += GET_DECL(spawn_type)
 
-	if(!map_levels)
-		map_levels = station_levels.Copy()
+	if(!SSmapping.map_levels)
+		SSmapping.map_levels = SSmapping.station_levels.Copy()
 
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
+	if(planet_depth <= 0)
+		planet_depth = 1
 
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
 
@@ -226,9 +216,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return
 
 /datum/map/proc/send_welcome()
-	return
-
-/datum/map/proc/perform_map_generation()
 	return
 
 /datum/map/proc/build_away_sites()
@@ -263,44 +250,57 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
 #endif
 
-/datum/map/proc/build_exoplanets()
-	if(!length(overmap_ids))
-		return
-	if(LAZYLEN(planet_size))
-		if(world.maxx < planet_size[1])
-			world.maxx = planet_size[1]
-		if(world.maxy < planet_size[2])
-			world.maxy = planet_size[2]
-	for(var/i = 0, i < num_exoplanets, i++)
-		var/exoplanet_type = pick_exoplanet()
-		INCREMENT_WORLD_Z_SIZE
-		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
-		new_planet.build_level(planet_size[1], planet_size[2])
+/datum/map/proc/build_planets()
+#ifdef UNIT_TEST
+	report_progress("Unit testing, so not loading planets.")
+	return
+#else
+	report_progress("Instantiating planets...")
+	var/list/planets_spawn_weight = list()
+	var/list/planets_to_spawn     = list()
 
-/datum/map/proc/pick_exoplanet()
-	var/planets = list()
-	for(var/T in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
-		var/obj/effect/overmap/visitable/sector/exoplanet/planet_type = T
-		planets[T] = initial(planet_type.spawn_weight)
-	return pickweight(planets)
+	//Fill up our lists of planets to spawn
+	generate_planet_spawn_lists(get_all_planet_templates(), planets_spawn_weight, planets_to_spawn)
 
-// Used to apply various post-compile procedural effects to the map.
-/datum/map/proc/refresh_mining_turfs(var/zlevel)
+	//Pick the random planets we want to spawn
+	var/datum/map_template/planetoid/forced_planet = ispath(force_exoplanet_type)? SSmapping.get_template_by_type(force_exoplanet_type) : null
+	var/random_planets_to_pick                     = max(num_exoplanets - length(planets_to_spawn), 0) //subtract guaranteed planets
+	for(var/i = 0, i < random_planets_to_pick, i++)
+		planets_to_spawn += forced_planet || pickweight(planets_spawn_weight)
 
-	set background = 1
-	set waitfor = 0
+	//Actually spawn the templates
+	spawn_planet_templates(planets_to_spawn)
 
-	for(var/thing in mining_floors["[zlevel]"])
-		var/turf/simulated/floor/asteroid/M = thing
-		if(istype(M))
-			M.updateMineralOverlays()
+	report_progress("Finished instantiating planets.")
+#endif
+
+///Returns an associative list of all the planet templates we get to pick from. The key is the template name, and the value is the template instance.
+/datum/map/proc/get_all_planet_templates()
+	return SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET) | SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_PLANET)
+
+///Fill up the list of planet_spawn_weight and guaranteed_planets
+/datum/map/proc/generate_planet_spawn_lists(var/list/planets_templates, var/list/planets_spawn_weight, var/list/guaranteed_planets)
+	for(var/template_name in planets_templates)
+		var/datum/map_template/planetoid/E = planets_templates[template_name]
+		if((E.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED))
+			guaranteed_planets += E
+		else
+			planets_spawn_weight[E] = E.get_spawn_weight()
+
+///Spawns all the templates in the given list, one after the other
+/datum/map/proc/spawn_planet_templates(var/list/templates_to_spawn)
+	for(var/datum/map_template/planetoid/PT in templates_to_spawn)
+		PT.load_new_z()
+#ifdef UNIT_TEST
+		log_unit_test("Loaded template '[PT]' ([PT.type]) at Z-level [world.maxz] with a tallness of [PT.tallness]")
+#endif
 
 /datum/map/proc/get_network_access(var/network)
 	return 0
 
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)
-	var/list/candidates = global.using_map.accessible_z_levels.Copy()
+	var/list/candidates = SSmapping.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
 	if(!candidates.len)
@@ -348,25 +348,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/revoke_maint_all_access(var/radstorm = 0)
 	maint_all_access = 0
 	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
-
-// Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
-// This list needs to be purged but people insist on adding more cruft to the radio.
-/datum/map/proc/default_internal_channels()
-	return list(
-		num2text(PUB_FREQ)   = list(),
-		num2text(AI_FREQ)    = list(access_synth),
-		num2text(ENT_FREQ)   = list(),
-		num2text(ERT_FREQ)   = list(access_cent_specops),
-		num2text(COMM_FREQ)  = list(access_bridge),
-		num2text(ENG_FREQ)   = list(access_engine_equip, access_atmospherics),
-		num2text(MED_FREQ)   = list(access_medical_equip),
-		num2text(MED_I_FREQ) = list(access_medical_equip),
-		num2text(SEC_FREQ)   = list(access_security),
-		num2text(SEC_I_FREQ) = list(access_security),
-		num2text(SCI_FREQ)   = list(access_tox,access_robotics,access_xenobiology),
-		num2text(SUP_FREQ)   = list(access_cargo),
-		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
-	)
 
 /datum/map/proc/show_titlescreen(client/C)
 	set waitfor = FALSE
@@ -441,15 +422,3 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/populate_overmap_events()
 	for(var/overmap_id in global.overmaps_by_name)
 		SSmapping.overmap_event_handler.create_events(global.overmaps_by_name[overmap_id])
-
-/datum/map/proc/get_zlevel_name(var/z)
-	z = "[z]"
-	if(!z)
-		return "Unknown Sector"
-	var/obj/abstract/level_data/level = global.levels_by_z[z]
-	if(level?.level_name)
-		return level.level_name
-	var/obj/effect/overmap/overmap_entity = global.overmap_sectors[z]
-	if(overmap_entity?.name)
-		return overmap_entity.name
-	return "Sector #[z]"

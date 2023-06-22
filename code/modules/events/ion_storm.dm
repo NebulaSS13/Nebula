@@ -8,7 +8,7 @@
 
 /datum/event/ionstorm/get_skybox_image()
 	if(!cloud_hueshift)
-		cloud_hueshift = color_rotation(rand(-3,3)*15)
+		cloud_hueshift = color_matrix_rotate_hue(rand(-3,3)*15)
 	var/image/res = overlay_image('icons/skybox/ionbox.dmi', "ions", cloud_hueshift, RESET_COLOR)
 	res.blend_mode = BLEND_ADD
 	return res

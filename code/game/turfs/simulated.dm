@@ -5,6 +5,7 @@
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	open_turf_type = /turf/simulated/open
+	zone_membership_candidate = TRUE
 
 	var/wet = 0
 	var/image/wet_overlay = null
@@ -66,16 +67,16 @@
 /turf/simulated/Entered(atom/A, atom/OL)
 	. = ..()
 	if (istype(A))
-		A.OnSimulatedTurfEntered(src)
+		A.OnSimulatedTurfEntered(src, OL)
 
-/atom/proc/OnSimulatedTurfEntered(turf/simulated/T)
+/atom/proc/OnSimulatedTurfEntered(turf/simulated/T, old_loc)
 	set waitfor = FALSE
 	return
 
-/mob/living/OnSimulatedTurfEntered(turf/simulated/T)
+/mob/living/OnSimulatedTurfEntered(turf/simulated/T, old_loc)
 	T.update_dirt()
 
-	HandleBloodTrail(T)
+	HandleBloodTrail(T, old_loc)
 
 	if(lying || !T.wet)
 		return
@@ -102,10 +103,10 @@
 			step(src, dir)
 			sleep(1)
 
-/mob/living/proc/HandleBloodTrail(turf/simulated/T)
+/mob/living/proc/HandleBloodTrail(turf/simulated/T, old_loc)
 	return
 
-/mob/living/carbon/human/HandleBloodTrail(turf/simulated/T)
+/mob/living/carbon/human/HandleBloodTrail(turf/simulated/T, old_loc)
 	// Tracking blood
 	var/obj/item/source
 	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
@@ -114,12 +115,12 @@
 		if(shoes.coating && shoes.coating.total_volume > 1)
 			source = shoes
 	else
-		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, bp)
+		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, foot_tag)
 			if(stomper && stomper.coating && stomper.coating.total_volume > 1)
 				source = stomper
 	if(!source)
-		species.handle_trail(src, T)
+		species.handle_trail(src, T, old_loc)
 		return
 
 	var/list/bloodDNA
@@ -135,9 +136,9 @@
 
 	if(species.get_move_trail(src))
 		T.AddTracks(species.get_move_trail(src),bloodDNA, dir, 0, bloodcolor) // Coming
-		var/turf/simulated/from = get_step(src, global.reverse_dir[dir])
-		if(istype(from))
-			from.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
+		if(istype(old_loc, /turf/simulated))
+			var/turf/simulated/old_turf = old_loc
+			old_turf.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
 
 //returns 1 if made bloody, returns 0 otherwise
 /turf/simulated/add_blood(mob/living/carbon/human/M)
@@ -173,13 +174,4 @@
 	var/area/A = loc
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
-	. = ..()
-
-/turf/simulated/Destroy()
-	if (zone)
-		if (can_safely_remove_from_zone())
-			c_copy_air()
-			zone.remove(src)
-		else
-			zone.rebuild()
 	. = ..()

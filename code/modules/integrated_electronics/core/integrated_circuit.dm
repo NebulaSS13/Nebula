@@ -5,6 +5,7 @@
 	icon_state = "template"
 	w_class = ITEM_SIZE_TINY
 	matter = list()				// To be filled later
+	max_health = 25 //#TODO: Use material for health
 	var/obj/item/electronic_assembly/assembly // Reference to the assembly holding this circuit, if any.
 	var/extended_desc
 	var/list/inputs
@@ -70,7 +71,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	else
 		return CanUseTopic(user)
 
-/obj/item/integrated_circuit/Initialize()
+/obj/item/integrated_circuit/Initialize(ml, material_key)
 	displayed_name = name
 	setup_io(inputs, /datum/integrated_io, inputs_default, IC_INPUT)
 	inputs_default = null

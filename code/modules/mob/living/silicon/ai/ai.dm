@@ -31,7 +31,6 @@ var/global/list/ai_verbs_default = list(
 	/mob/living/silicon/proc/access_computer,
 	/mob/living/silicon/ai/proc/ai_power_override,
 	/mob/living/silicon/ai/proc/ai_shutdown,
-	/mob/living/silicon/ai/proc/ai_reset_radio_keys,
 	/mob/living/silicon/ai/proc/run_program,
 	/mob/living/silicon/ai/proc/pick_color
 )
@@ -132,7 +131,7 @@ var/global/list/ai_verbs_default = list(
 
 	aiMulti = new(src)
 
-	additional_law_channels["Holopad"] = ":h"
+	additional_law_channels["Holopad"] = "h"
 
 	if (isturf(loc))
 		add_ai_verbs(src)
@@ -168,37 +167,35 @@ var/global/list/ai_verbs_default = list(
 		return
 
 	ai_radio = silicon_radio
-	ai_radio.myAi = src
 	return base_return_val
 
 /mob/living/silicon/ai/proc/on_mob_init()
-	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
-	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
-	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
-	to_chat(src, "To use something, simply click on it.")
-	to_chat(src, "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad.")
-	to_chat(src, "For department channels, use the following say commands:")
-
-	var/radio_text = ""
-	for(var/i = 1 to silicon_radio.channels.len)
-		var/channel = silicon_radio.channels[i]
-		var/key = get_radio_key_from_channel(channel)
-		radio_text += "[key] - [channel]"
-		if(i != silicon_radio.channels.len)
-			radio_text += ", "
-
-	to_chat(src, radio_text)
-	show_laws()
-	to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
-
 	//Prevents more than one active core spawning on the same tile. Technically just a sanitization for roundstart join
 	for(var/obj/structure/aicore/C in src.loc)
 		qdel(C)
-
 	job = "AI"
 	setup_icon()
 	eyeobj.possess(src)
 	CreateModularRecord(src, /datum/computer_file/report/crew_record/synth)
+	show_join_message()
+
+// Give our radio a bit of time to connect to the network and get its channels.
+/mob/living/silicon/ai/proc/show_join_message()
+	set waitfor = FALSE
+	var/timeout_mob_init = world.time + 5 SECONDS
+	while(world.time < timeout_mob_init && length(ai_radio?.get_accessible_channel_descriptions(src)) <= 1)
+		sleep(1)
+	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
+	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
+	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
+	to_chat(src, "To use something, simply click on it.")
+	var/list/channel_descriptions = ai_radio?.get_accessible_channel_descriptions(src)
+	if(length(channel_descriptions))
+		to_chat(src, "You can speak on comms channels with the following [length(channel_descriptions) == 1 ? "shortcut" : "shortcuts"]:")
+		for(var/line in channel_descriptions)
+			to_chat(src, line)
+	show_laws()
+	to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
 
 /mob/living/silicon/ai/Destroy()
 	for(var/robot in connected_robots)
@@ -659,13 +656,6 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 
 	multitool_mode = !multitool_mode
 	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
-
-/mob/living/silicon/ai/proc/ai_reset_radio_keys()
-	set name = "Reset Radio Encryption Keys"
-	set category = "Silicon Commands"
-
-	silicon_radio.recalculateChannels()
-	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
 
 /mob/living/silicon/ai/on_update_icon()
 	..()

@@ -428,7 +428,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 //Clausius–Clapeyron relation
 /decl/material/proc/get_boiling_temp(var/pressure = ONE_ATMOSPHERE)
-	return (1 / (1/max(boiling_point, TCMB)) - ((R_IDEAL_GAS_EQUATION * log(pressure / ONE_ATMOSPHERE)) / (latent_heat * molar_mass)))
+	var/pressure_ratio = (pressure > 0)? log(pressure / ONE_ATMOSPHERE) : 0
+	return (1 / (1/max(boiling_point, TCMB)) - ((R_IDEAL_GAS_EQUATION * pressure_ratio) / (latent_heat * molar_mass)))
 
 /// Returns the phase of the matterial at the given temperature and pressure
 /// Defaults to standard temperature and pressure (20c at one atmosphere)
@@ -447,8 +448,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	hidden_from_codex = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 
-// Generic material product (sheets, bricks, etc). Used ALL THE TIME.
-// May return an instance list, a single instance, or nothing if there is no instance produced.
+/// Generic material product (sheets, bricks, etc). Used ALL THE TIME.
+/// May return an instance list, a single instance, or nothing if there is no instance produced.
 /decl/material/proc/create_object(var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
 
 	if(!object_type)
@@ -523,7 +524,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/get_wall_texture()
 	return
 
-/decl/material/proc/on_leaving_metabolism(var/atom/parent, var/metabolism_class)
+/decl/material/proc/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	return
 
 #define ACID_MELT_DOSE 10
@@ -638,6 +639,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	if(M.status_flags & GODMODE)
+		return
+
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
@@ -645,17 +649,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		M.add_chemical_effect(CE_TOXIN, toxicity)
 		var/dam = (toxicity * removed)
 		if(toxicity_targets_organ && ishuman(M))
-			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, toxicity_targets_organ)
-			if(I)
-				var/can_damage = I.max_damage - I.damage
-				if(can_damage > 0)
-					if(dam > can_damage)
-						I.take_internal_damage(can_damage, silent=TRUE)
-						dam -= can_damage
-					else
-						I.take_internal_damage(dam, silent=TRUE)
-						dam = 0
+			var/organ_damage = dam * M.get_toxin_resistance()
+			if(organ_damage > 0)
+				var/mob/living/carbon/human/H = M
+				var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, toxicity_targets_organ)
+				if(I)
+					var/can_damage = I.max_damage - I.damage
+					if(can_damage > 0)
+						if(organ_damage > can_damage)
+							I.take_internal_damage(can_damage, silent=TRUE)
+							dam -= can_damage
+						else
+							I.take_internal_damage(organ_damage, silent=TRUE)
+							dam = 0
 		if(dam > 0)
 			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
 
@@ -729,7 +735,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				var/obj/item/thing = H.get_equipped_item(slot)
 				if(!istype(thing))
 					continue
-				if(thing.unacidable || !H.unEquip(thing))
+				if(thing.unacidable || !H.try_unequip(thing))
 					to_chat(H, SPAN_NOTICE("Your [thing] protects you from the acid."))
 					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 					return

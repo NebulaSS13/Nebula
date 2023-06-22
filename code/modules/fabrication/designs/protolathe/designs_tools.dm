@@ -65,6 +65,12 @@
 /datum/fabricator_recipe/protolathe/tool/adv_reagent_scanner
 	path = /obj/item/scanner/reagent/adv
 
+/datum/fabricator_recipe/protolathe/tool/health_scanner
+	path = /obj/item/scanner/health
+
+/datum/fabricator_recipe/protolathe/tool/breath_scanner
+	path = /obj/item/scanner/breath
+
 /datum/fabricator_recipe/protolathe/tool/nanopaste
 	path = /obj/item/stack/nanopaste
 

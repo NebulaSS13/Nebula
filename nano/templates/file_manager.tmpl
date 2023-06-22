@@ -15,17 +15,17 @@
 	<h2>An error has occured:</h2>
 	Additional information: {{:data.error}}<br>
 	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
-	{{:helper.link('Back to menu', null, { "PRG_closefile" : 1 })}}
+	{{:helper.link('Back to menu', null, { "PRG_clear_error" : 1 })}}
+{{else data.file_error}}
+	<h2>An error with the selected file has occured:</h2>
+	Additional information: {{:data.file_error}}<br>
+	{{:helper.link('Back to menu', null, { "PRG_clear_error" : 1 })}}
+{{else data.disk_error}}
+	<h2>An error with the selected disk has occured:</h2>
+	Additional information: {{:data.disk_error}}<br>
+	{{:helper.link('Back to menu', null, { "PRG_clear_error" : 1 })}}
 {{else}}
-	{{if data.filename}}
-		<h2>Viewing file {{:data.filename}}</h2>
-		<div class='item'>
-		{{:helper.link('CLOSE', null, { "PRG_closefile" : 1 })}}
-		{{:helper.link('EDIT', null, { "PRG_edit" : 1 })}}
-		{{:helper.link('PRINT', null, { "PRG_printfile" : 1 })}}
-		</div><hr>
-		{{:data.filedata}}
-	{{else}}
+	{{if data.file_mode == 0}}
 		<table><tr>
 		{{for data.disks}}
 			{{:helper.link(value.name, null, { "PRG_change_disk" : value.index }, value.selected ? 'selected' : null)}}
@@ -49,21 +49,24 @@
 						<tr><td>{{:helper.link(value.name, 'folder-collapsed', { "PRG_openfile" : value.name})}}
 						<td>
 						<td>
-						<td>{{:helper.link('RENAME', null, { "PRG_rename" : value.name}, value.unrenamable ? 'disabled' : null)}}
+						<td>
+							{{:helper.link('RENAME', null, { "PRG_rename" : value.name}, value.unrenamable ? 'disabled' : null)}}
 							{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name}, value.undeletable ? 'disabled' : null)}}
 							{{:helper.link('CLONE', null, { "PRG_clone" : value.name}, value.undeletable ? 'disabled' : null)}}
 							{{:helper.link('TRANSFER TO', null, { "PRG_transferto" : value.name}, value.unsendable ? 'disabled' : null)}}
-					{{else}}
+							{{:helper.link('MANAGE PERMS', null, { "PRG_modifyperms" : value.name})}}
+						{{else}}
 						<tr><td>{{:value.name}}
 						<td>.{{:value.type}}
 						<td>{{:value.size}}GQ
 						<td>
 							{{:helper.link('VIEW', null, { "PRG_openfile" : value.name})}}
-							{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name}, value.undeletable ? 'disabled' : null)}}
 							{{:helper.link('RENAME', null, { "PRG_rename" : value.name}, value.undeletable ? 'disabled' : null)}}
+							{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name}, value.undeletable ? 'disabled' : null)}}
 							{{:helper.link('CLONE', null, { "PRG_clone" : value.name}, value.undeletable ? 'disabled' : null)}}
 							{{:helper.link('TRANSFER TO', null, { "PRG_transferto" : value.name}, value.unsendable ? 'disabled' : null)}}
-					{{/if}}
+							{{:helper.link('MANAGE PERMS', null, { "PRG_modifyperms" : value.name})}}
+						{{/if}}
 				{{/for}}
 			</table>
 			{{:helper.link('NEW DATA FILE', null, { "PRG_newtextfile" : 1 })}}
@@ -73,16 +76,93 @@
 			<table>
 			<tr><th>Disk
 			<th>Description
-			<th>Action</th>
+			<th>Actions</th>
 			{{for data.avail_disks}}
 				<tr><td>{{:helper.link(value.name, null, { "PRG_select_disk" : value.name})}}
 				<td>{{:value.desc}}
 				{{if value.is_network}}
-					<td>{{:helper.link('UNMOUNT', null, { "PRG_unmount_network" : value.name})}}
+				<td>{{:helper.link('MOUNT SETTINGS', null, { "PRG_mount_settings" : value.name})}}
 				{{/if}}
 				{{/for}}
 			</table>
 			{{:helper.link('MOUNT NETWORK DRIVE', null, { "PRG_mount_network" : 1 })}}
 		{{/if}}
+	{{else data.file_mode == 1}}<!--Viewing file data-->
+		<h2>Viewing file {{:data.filename}}</h2>
+		<div class='item'>
+		{{:helper.link('CLOSE', null, { "PRG_closefile" : 1 })}}
+		{{:helper.link('EDIT', null, { "PRG_edit" : 1 })}}
+		{{:helper.link('PRINT', null, { "PRG_printfile" : 1 })}}
+		{{:helper.link('RUN', null, { "PRG_runfile" : 1 })}}
+		</div><hr>
+		{{:data.filedata}}
+	{{else data.file_mode == 2}} <!--Modifying Permissions-->
+		<h2>Modifying permissions for {{:data.filename}}</h2>
+		<i>Users must be a member of at least one group in every access pattern to have file access</i>
+		<br>
+		{{:helper.link('READ ACCESS', null, {"PRG_change_perm" : "read"}, (data.current_perm == "read") ? 'selected' : null)}}
+		{{:helper.link('WRITE ACCESS', null, {"PRG_change_perm" : "write"}, (data.current_perm == "write") ? 'selected' : null)}}
+		{{:helper.link('PERMISSION MODIFICATION ACCESS', null, {"PRG_change_perm" : "mod"}, (data.current_perm == "mod") ? 'selected' : null)}}
+		<br><hr>
+		<table>
+			<tr><th>Pattern
+			<th>Groups
+			<th>Operations
+			</tr>
+			{{for data.patterns}}
+				<tr class="candystripe">
+				<td>{{:helper.link("Pattern " + value.index, null, { "PRG_select_pattern" : value.index}, (data.selected_pattern == value.index) ? 'selected' : null)}}
+				<td>{{:value.perm_list}}
+				<td>{{:helper.link('Delete pattern', null, { "PRG_remove_pattern" : value.index})}}
+			{{/for}}
+		</table>
+		{{:helper.link('Add pattern', null, { "PRG_add_pattern" : 1}, null)}}
+		<br>
+		{{if data.selected_pattern}}
+			<hr>
+			{{if data.parent_groups}}
+				<h2>Parent Groups:</h2>
+				<table>
+					<tr><th>Group
+					<th>Operations
+					{{for data.parent_groups}}
+						<tr><td>{{:helper.link(value.parent_group, null, { "PRG_select_parent_group" : value.parent_group })}}
+						<td>
+							{{if value.assigned}}
+								{{:helper.link('REMOVE', null, { "PRG_remove_group" : value.parent_group })}}
+							{{else}}
+								{{:helper.link('ASSIGN', null, { "PRG_assign_group" : value.parent_group })}}
+							{{/if}}
+					{{/for}}
+				</table>
+			{{else data.selected_parent_group}}
+				<h2>Viewing Child Groups for: {{:data.selected_parent_group}}</h2>
+				{{if data.child_groups}}
+					<h2>Child Groups:</h2>
+					<table>
+						<tr><th>Group
+						<th>Operations
+						{{for data.child_groups}}
+							<tr><td>{{:value.child_group}}
+							<td>
+								{{if value.assigned}}
+									{{:helper.link('REMOVE', null, { "PRG_remove_group" : value.child_group })}}
+								{{else}}
+									{{:helper.link('ASSIGN', null, { "PRG_assign_group" : value.child_group })}}
+								{{/if}}
+						{{/for}}
+					</table>
+				{{else}}
+					<i> No child groups found! </i>
+				{{/if}}
+				<div class='item'>
+					{{:helper.link('Back to parent group listing', null, { "PRG_select_parent_group" : null })}}
+				</div>
+			{{else}}
+				<i>No groups found on network!</i>
+			{{/if}}
+		{{/if}}
+		<hr>
+		{{:helper.link('CLOSE', null, { "PRG_closefile" : 1 })}}{{:helper.link('SAVE CHANGES', null, { "PRG_apply_perms" : 1})}}
 	{{/if}}
 {{/if}}

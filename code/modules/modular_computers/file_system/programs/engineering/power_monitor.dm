@@ -87,7 +87,7 @@
 // Refreshes list of active sensors kept on this computer.
 /datum/nano_module/program/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
-	var/connected_z_levels = GetConnectedZlevels(get_host_z())
+	var/connected_z_levels = SSmapping.get_connected_levels(get_host_z())
 	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
 		if(get_z(S) in connected_z_levels) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			grid_sensors += S

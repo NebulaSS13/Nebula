@@ -138,9 +138,9 @@
 	if(!network)
 		return FALSE
 
-	if(!ARE_Z_CONNECTED(network.get_router_z(), get_z(M)))
+	if(!LEVELS_ARE_Z_CONNECTED(network.get_router_z(), get_z(M)))
 		return FALSE
-	
+
 	if(istype(M, /obj/machinery/power/smes))
 		var/obj/machinery/power/smes/buildable/SMES = M
 		return SMES.RCon_tag && SMES.RCon_tag != "NO_TAG" && SMES.RCon

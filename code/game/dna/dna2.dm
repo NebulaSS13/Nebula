@@ -85,22 +85,22 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	//#TODO: Keep track of bodytype!!!!!
 
 // Make a copy of this strand.
-// USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
-/datum/dna/proc/Clone()
-	var/datum/dna/new_dna = new()
-	new_dna.lineage=lineage
-	new_dna.unique_enzymes=unique_enzymes
-	new_dna.b_type=b_type
-	new_dna.real_name=real_name
-	new_dna.species=species || global.using_map.default_species
-	new_dna.body_markings=body_markings.Copy()
-	for(var/b=1;b<=DNA_SE_LENGTH;b++)
-		new_dna.SE[b]=SE[b]
-		if(b<=DNA_UI_LENGTH)
-			new_dna.UI[b]=UI[b]
-	new_dna.UpdateUI()
-	new_dna.UpdateSE()
-	return new_dna
+/datum/dna/PopulateClone(datum/dna/clone)
+	clone = ..()
+	clone.lineage        = lineage
+	clone.unique_enzymes = unique_enzymes
+	clone.b_type         = b_type
+	clone.real_name      = real_name
+	clone.species        = species || global.using_map.default_species
+	clone.body_markings  = deepCopyList(body_markings)
+	for(var/b in 1 to DNA_SE_LENGTH)
+		clone.SE[b] = SE[b]
+		if(b <= DNA_UI_LENGTH)
+			clone.UI[b] = UI[b]
+	clone.UpdateUI()
+	clone.UpdateSE()
+	return clone
+
 ///////////////////////////////////////
 // UNIQUE IDENTITY
 ///////////////////////////////////////
@@ -141,15 +141,10 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIState(DNA_UI_GENDER, character.gender!=MALE, 1)
 
 	// Hair
-	// FIXME:  Species-specific defaults pls
-	if(!character.h_style)
-		character.h_style = /decl/sprite_accessory/hair/bald
 	var/list/hair_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
 	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair_types.Find(character.h_style),  length(hair_types), 1)
 
 	// Facial Hair
-	if(!character.f_style)
-		character.f_style = /decl/sprite_accessory/facial_hair/shaved
 	var/list/beard_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard_types.Find(character.f_style), length(beard_types), 1)
 
@@ -157,6 +152,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	for(var/obj/item/organ/external/E in character.get_external_organs())
 		if(LAZYLEN(E.markings))
 			body_markings[E.organ_tag] = E.markings.Copy()
+
+	b_type = character.b_type
 
 	UpdateUI()
 

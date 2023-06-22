@@ -37,7 +37,7 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return FALSE
-	for(var/z_level in GetConnectedZlevels(network.get_router_z()))
+	for(var/z_level in SSmapping.get_connected_levels(network.get_router_z()))
 		if (crew_repository.has_health_alert(z_level))
 			return TRUE
 	return FALSE
@@ -61,7 +61,7 @@
 	var/list/crewmembers = list()
 	var/datum/computer_network/network = get_network()
 	if(network)
-		for(var/z_level in GetConnectedZlevels(network.get_router_z()))
+		for(var/z_level in SSmapping.get_connected_levels(network.get_router_z()))
 			crewmembers += crew_repository.health_data(z_level)
 		data["crewmembers"] = sortTim(crewmembers, /proc/cmp_list_name_key_asc)
 	else

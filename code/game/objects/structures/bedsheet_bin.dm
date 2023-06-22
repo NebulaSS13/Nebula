@@ -136,7 +136,7 @@ LINEN BINS
 		if(curamount >= max_stored)
 			to_chat(user, SPAN_WARNING("\The [src] is full!"))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		LAZYDISTINCTADD(sheets, I)
 		update_icon()
@@ -148,7 +148,7 @@ LINEN BINS
 
 	if(!.)
 		if(curamount && !hidden && I.w_class < w_class)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			hidden = I
 			to_chat(user, SPAN_NOTICE("You hide [I] among the sheets."))
@@ -162,10 +162,12 @@ LINEN BINS
 
 /obj/structure/bedsheetbin/attack_hand(var/mob/user)
 	var/obj/item/bedsheet/B = remove_sheet()
-	if(B)
-		user.put_in_hands(B)
-		to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
-		add_fingerprint(user)
+	if(!B)
+		return ..()
+	user.put_in_hands(B)
+	to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
+	add_fingerprint(user)
+	return TRUE
 
 /obj/structure/bedsheetbin/do_simple_ranged_interaction(var/mob/user)
 	remove_sheet()

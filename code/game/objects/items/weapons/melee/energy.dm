@@ -35,7 +35,7 @@
 	var/active_armour_pen =   50
 	var/active_edge =         1
 	var/active_sharp =        1
-	var/active_descriptor =   "energized" 
+	var/active_descriptor =   "energized"
 	var/active_hitsound =     'sound/weapons/blade1.ogg'
 	var/active_sound =        'sound/weapons/saberon.ogg'
 	var/inactive_sound =      'sound/weapons/saberoff.ogg'
@@ -151,12 +151,14 @@
 
 /obj/item/energy_blade/on_update_icon()
 	. = ..()
+	z_flags &= ~ZMM_MANGLE_PLANES
 	icon_state = get_world_inventory_state()
 	if(active && check_state_in_icon("[icon_state]-extended", icon))
 		if(plane == HUD_PLANE)
 			add_overlay(image(icon, "[icon_state]-extended"))
 		else
 			add_overlay(emissive_overlay(icon, "[icon_state]-extended"))
+			z_flags |= ZMM_MANGLE_PLANES
 
 /obj/item/energy_blade/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-extended", overlay.icon))

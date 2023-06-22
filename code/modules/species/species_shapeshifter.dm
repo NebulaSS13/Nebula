@@ -53,10 +53,10 @@ var/global/list/wrapped_species_by_ref = list()
 	set name = "Select Hair"
 	set category = "Abilities"
 
-	if(stat || world.time < last_special)
+	if(stat || is_on_special_ability_cooldown())
 		return
 
-	last_special = world.time + 10
+	set_special_ability_cooldown(1 SECOND)
 
 	visible_message("<span class='notice'>\The [src]'s form contorts subtly.</span>")
 	var/list/hairstyles = species.get_hair_styles(bodytype.associated_gender)
@@ -74,10 +74,10 @@ var/global/list/wrapped_species_by_ref = list()
 	set name = "Select Gender"
 	set category = "Abilities"
 
-	if(stat || world.time < last_special)
+	if(stat || is_on_special_ability_cooldown())
 		return
 
-	last_special = world.time + 50
+	set_special_ability_cooldown(5 SECONDS)
 
 	var/new_gender = input("Please select a gender.", "Shapeshifter Gender") as null|anything in list(FEMALE, MALE, NEUTER, PLURAL)
 	if(!new_gender)
@@ -91,10 +91,10 @@ var/global/list/wrapped_species_by_ref = list()
 	set name = "Select Body Shape"
 	set category = "Abilities"
 
-	if(stat || world.time < last_special)
+	if(stat ||is_on_special_ability_cooldown())
 		return
 
-	last_special = world.time + 50
+	set_special_ability_cooldown(5 SECONDS)
 
 	var/new_species = input("Please select a species to emulate.", "Shapeshifter Body") as null|anything in species.get_valid_shapeshifter_forms(src)
 	if(!new_species || !get_species_by_key(new_species) || wrapped_species_by_ref["\ref[src]"] == new_species)
@@ -109,10 +109,10 @@ var/global/list/wrapped_species_by_ref = list()
 	set name = "Select Body Colour"
 	set category = "Abilities"
 
-	if(stat || world.time < last_special)
+	if(stat || is_on_special_ability_cooldown())
 		return
 
-	last_special = world.time + 50
+	set_special_ability_cooldown(5 SECONDS)
 
 	var/new_skin = input("Please select a new body color.", "Shapeshifter Colour") as color
 	if(!new_skin)

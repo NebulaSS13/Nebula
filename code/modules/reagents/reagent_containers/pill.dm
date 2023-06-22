@@ -143,6 +143,14 @@
 /obj/item/chems/pill/painkillers/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/painkillers, 15)
 
+/obj/item/chems/pill/strong_painkillers
+	name = "strong painkillers (15u)"
+	desc = "A powerful painkiller. Do not mix with alcohol consumption."
+	icon_state = "pill3"
+
+/obj/item/chems/pill/strong_painkillers/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/painkillers/strong, 15)
+
 /obj/item/chems/pill/stabilizer
 	name = "stabilizer (30u)"
 	desc = "Used to stabilize patients."
@@ -260,6 +268,10 @@
 	icon_state = "pod21"
 	var/smell_clean_time = 10 MINUTES
 
+// Don't overwrite the custom name.
+/obj/item/chems/pill/detergent/update_container_name()
+	return
+
 /obj/item/chems/pill/detergent/populate_reagents()
 	reagents.add_reagent(/decl/material/gas/ammonia, 30)
 
@@ -267,6 +279,10 @@
 	name = "master flavorpod item"
 	desc = "A cellulose pod containing some kind of flavoring."
 	icon_state = "pill4"
+
+// Don't overwrite the custom names.
+/obj/item/chems/pill/pod/update_container_name()
+	return
 
 /obj/item/chems/pill/pod/cream
 	name = "creamer pod"

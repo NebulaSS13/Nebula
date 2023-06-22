@@ -15,11 +15,12 @@
 	var/acceleration = 1
 	var/owner_follows_eye = 0
 	var/living_eye = TRUE 	// Whether or not the eye uses normal living vision handling.
-	
+
 	var/click_handler_type = /datum/click_handler/eye/ // Set if the eye uses special click handling. Distinct from parent mob click handling for AI etc.
-	
+
 	see_in_dark = 7
 	invisibility = INVISIBILITY_EYE
+	is_spawnable_type = FALSE // No, don't.
 
 	ghost_image_flag = GHOST_IMAGE_ALL
 	var/mob/owner = null
@@ -159,7 +160,7 @@
 /mob/observer/eye/ClickOn(var/atom/A, var/params)
 	if(owner)
 		return owner.ClickOn(A, params)
-	
+
 	return ..()
 
 /datum/click_handler/eye/OnClick(var/atom/A, params)

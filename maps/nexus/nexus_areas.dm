@@ -1,10 +1,12 @@
 /area/nexus
 	name = "Nexus Area"
+	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 //Engineering
 
 /area/nexus/engineering
 	name = "Engineering Office"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/nexus/engineering/engine
 	name = "Engine Bay"
@@ -36,6 +38,7 @@
 
 /area/nexus/hallway
 	name = "Central Hallway"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/nexus/hallway/port
 	name = "Port Docking Pylon"
@@ -73,6 +76,7 @@
 
 /area/nexus/maint
 	area_flags = AREA_FLAG_RAD_SHIELDED
+	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
 /area/nexus/maint/custodial
 	name = "Cleaning Supplies"

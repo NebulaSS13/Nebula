@@ -15,6 +15,9 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
 
+	if(stat != DEAD)
+		handle_nutrition_and_hydration()
+
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
@@ -37,6 +40,29 @@
 	handle_status_effects()
 
 	return 1
+
+/mob/living/proc/handle_nutrition_and_hydration()
+	SHOULD_CALL_PARENT(TRUE)
+	var/nut =    get_nutrition()
+	var/maxnut = get_max_nutrition()
+	if(nut < (maxnut * 0.3))
+		add_stressor(/datum/stressor/hungry_very, STRESSOR_DURATION_INDEFINITE)
+	else
+		remove_stressor(/datum/stressor/hungry_very)
+		if(nut < (maxnut * 0.5))
+			add_stressor(/datum/stressor/hungry, STRESSOR_DURATION_INDEFINITE)
+		else
+			remove_stressor(/datum/stressor/hungry)
+	var/hyd =    get_hydration()
+	var/maxhyd = get_max_hydration()
+	if(hyd < (maxhyd * 0.3))
+		add_stressor(/datum/stressor/thirsty_very, STRESSOR_DURATION_INDEFINITE)
+	else
+		remove_stressor(/datum/stressor/thirsty_very)
+		if(hyd < (maxhyd * 0.5))
+			add_stressor(/datum/stressor/thirsty, STRESSOR_DURATION_INDEFINITE)
+		else
+			remove_stressor(/datum/stressor/thirsty)
 
 /mob/living/proc/handle_breathing()
 	return
@@ -118,7 +144,7 @@
 	// If we're standing in the rain, use the turf weather.
 	. = istype(actual_loc) && actual_loc.weather
 	if(!.) // If we're under or inside shelter, use the z-level rain (for ambience)
-		. = global.weather_by_z["[my_turf.z]"]
+		. = SSweather.get_weather_for_level(my_turf.z)
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
 
@@ -186,8 +212,36 @@
 
 	handle_hud_icons()
 	handle_vision()
+	handle_low_light_vision()
 
 	return 1
+
+/mob/living/proc/handle_low_light_vision()
+
+	// No client means nothing to update.
+	if(!client || !lighting_master)
+		return
+
+	// No loc or species means we should just assume no adjustment.
+	var/decl/species/species = get_species()
+	var/turf/my_turf = get_turf(src)
+	if(!isturf(my_turf) || !species)
+		lighting_master.set_alpha(255)
+		return
+
+	// TODO: handling for being inside atoms.
+	var/target_value = 255 * (1-species.base_low_light_vision)
+	var/loc_lumcount = my_turf.get_lumcount()
+	if(loc_lumcount < species.low_light_vision_threshold)
+		target_value = round(target_value * (1-species.low_light_vision_effectiveness))
+
+	if(lighting_master.alpha == target_value)
+		return
+
+	var/difference = round((target_value-lighting_master.alpha) * species.low_light_vision_adjustment_speed)
+	if(abs(difference) > 1)
+		target_value = lighting_master.alpha + difference
+	lighting_master.set_alpha(target_value)
 
 /mob/living/proc/handle_vision()
 	update_sight()
@@ -253,3 +307,26 @@
 
 /mob/living/proc/handle_hud_icons_health()
 	return
+
+/mob/living/singularity_act()
+	if(!simulated)
+		return 0
+	investigate_log("has been consumed by a singularity", "singulo")
+	gib()
+	return 20
+
+/mob/living/singularity_pull(S, current_size)
+	if(simulated)
+		if(current_size >= STAGE_THREE)
+			for(var/obj/item/hand in get_held_items())
+				if(prob(current_size*5) && hand.w_class >= (11-current_size)/2 && try_unequip(hand))
+					to_chat(src, SPAN_WARNING("\The [S] pulls \the [hand] from your grip!"))
+					hand.singularity_pull(S, current_size)
+			var/obj/item/shoes = get_equipped_item(slot_shoes_str)
+			if(!lying && !(shoes?.item_flags & ITEM_FLAG_NOSLIP))
+				var/decl/species/my_species = get_species()
+				if(!my_species?.check_no_slip(src) && prob(current_size*5))
+					to_chat(src, SPAN_DANGER("A strong gravitational force slams you to the ground!"))
+					SET_STATUS_MAX(src, STAT_WEAK, current_size)
+		apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
+	return ..()

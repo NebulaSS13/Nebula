@@ -37,7 +37,7 @@ var/global/list/terminal_commands
 
 	var/cur_string = ""
 	var/list/arguments = list()
-	
+
 	var/last_was_escape = FALSE
 	for(var/i in 1 to length(argtext)) // Allow players to escape spaces by using '\'.
 		var/char = argtext[i]
@@ -312,7 +312,7 @@ Subtypes
 			file_data += "[F.filename] - DIR"
 		else
 			file_data += "[F.filename].[F.filetype] - [F.size] GQ"
-	
+
 	return print_as_page(file_data, "file", selected_page, terminal.history_max_length - 1)
 
 /datum/terminal_command/remove
@@ -366,7 +366,7 @@ Subtypes
 	var/error = check_file_transfer(destination[2], F, copying, terminal.get_access(user), user)
 	if(error)
 		return "mv: [error]."
-	
+
 	terminal.current_move = new(file_loc[1], destination[1], destination[2], F, copying)
 	return "mv: Beginning file move..."
 
@@ -393,8 +393,8 @@ Subtypes
 
 	var/datum/file_storage/disk = file_loc[1]
 	var/datum/computer_file/file = file_loc[3]
-	
-	var/datum/computer_file/copy = file.clone(TRUE)
+
+	var/datum/computer_file/copy = file.Clone(TRUE)
 	if(!istype(copy))
 		return
 	var/success = disk.store_file(copy, file_loc[2], FALSE, terminal.get_access(user), user)
@@ -417,7 +417,7 @@ Subtypes
 	// Errored!
 	if(!islist(file_loc))
 		return "rename: [get_terminal_error(file_path, file_loc)]."
-	
+
 	var/datum/computer_file/F = file_loc[3]
 	var/new_name = sanitize_for_file(rename_args[2])
 
@@ -441,7 +441,7 @@ Subtypes
 	var/list/file_loc = terminal.parse_directory(mkdir_args[1], TRUE)
 	if(!islist(file_loc) || (length(file_loc) > 1 && file_loc[2] == null)) // Don't return the error directly since we're attempting to create a directory, not just parse one.
 		return "mkdir: Unable to create directory '[mkdir_args[1]]'."
-	
+
 	var/datum/computer_file/directory/created_dir = file_loc[2]
 	return "mkdir: Successfully created directory '[created_dir.get_file_path()]'."
 
@@ -513,7 +513,7 @@ Subtypes
 	var/list/file_loc = terminal.parse_file(file_path)
 	if(!islist(file_loc))
 		return "permmod: [get_terminal_error(file_path, file_loc)]."
-	
+
 	var/datum/computer_file/F = file_loc[3]
 
 	if(length(permmod_args) < 3)

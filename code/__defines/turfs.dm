@@ -19,6 +19,19 @@
 #define SMOOTH_BLACKLIST 3 //Smooth with all but a blacklist of subtypes
 
 #define RANGE_TURFS(CENTER, RADIUS) block(locate(max(CENTER.x-(RADIUS), 1), max(CENTER.y-(RADIUS),1), CENTER.z), locate(min(CENTER.x+(RADIUS), world.maxx), min(CENTER.y+(RADIUS), world.maxy), CENTER.z))
+#define BLOCK_TURFS(X1, Y1, X2, Y2, Z) block(locate(X1, Y1, Z), locate(X2, Y2, Z))
+
+//Here are a few macros to help with people always forgetting to round the coordinates somewhere, and forgetting that not everything automatically rounds decimals.
+///Helper macro for the x coordinate of the turf at the center of the world. Handles rounding.
+#define WORLD_CENTER_X round(world.maxx / 2)
+///Helper macro for the y coordinate of the turf at the center of the world. Handles rounding.
+#define WORLD_CENTER_Y round(world.maxy / 2)
+///Helper macro for getting the center turf on a given z-level. Handles rounding.
+#define WORLD_CENTER_TURF(Z) locate(WORLD_CENTER_X, WORLD_CENTER_Y, Z)
+///Helper macro to check if a position is within the world's bounds.
+#define IS_WITHIN_WORLD(X, Y) ((X > 0) && (Y > 0) && (X <= world.maxx) && (Y <= world.maxy))
+///Helper macro for printing to text the world's x,y,z size to a string.
+#define WORLD_SIZE_TO_STRING "[world.maxx]x[world.maxy]x[world.maxz]"
 
 #define EXT_LAYER_CONSTANT     0.001
 #define EXT_EDGE_OCEAN         (10 * EXT_LAYER_CONSTANT)

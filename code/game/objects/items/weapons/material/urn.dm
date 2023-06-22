@@ -3,8 +3,7 @@
 	desc = "A vase used to store the ashes of the deceased."
 	icon = 'icons/obj/items/urn.dmi'
 	icon_state = "urn"
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/wood
 

@@ -48,7 +48,7 @@
 		if(cash.currency != currency)
 			to_chat(user, SPAN_WARNING("You can't mix two different currencies, it would be uncivilized."))
 			return
-		if(user.unEquip(W))
+		if(user.try_unequip(W))
 			adjust_worth(cash.absolute_worth)
 			var/decl/currency/cur = GET_DECL(currency)
 			to_chat(user, SPAN_NOTICE("You add [cash.get_worth()] [cur.name] to the pile."))

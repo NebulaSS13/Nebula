@@ -104,20 +104,38 @@
 #define PIPE_COLOR_WHITE       "#ffffff"
 #define PIPE_COLOR_PURPLE      "#880088"
 
-#define	COMMS_COLOR_DEFAULT    "#ff00ff"
-#define	COMMS_COLOR_ENTERTAIN  "#666666"
-#define	COMMS_COLOR_AI         "#ff00ff"
+#define COMMS_COLOR_DEFAULT    "#ff00ff"
+#define COMMS_COLOR_ENTERTAIN  "#666666"
+#define COMMS_COLOR_AI         "#ff00ff"
 #define	COMMS_COLOR_COMMON     "#408010"
-#define	COMMS_COLOR_SERVICE    "#709b00"
-#define	COMMS_COLOR_SUPPLY     "#7f6539"
-#define	COMMS_COLOR_SCIENCE    "#993399"
-#define	COMMS_COLOR_MEDICAL    "#009190"
-#define	COMMS_COLOR_EXPLORER   "#929820"
-#define	COMMS_COLOR_ENGINEER   "#a66300"
-#define	COMMS_COLOR_SECURITY   "#930000"
-#define	COMMS_COLOR_COMMAND    "#204090"
-#define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
-#define	COMMS_COLOR_SYNDICATE  "#6d3f40"
+#define COMMS_COLOR_SERVICE    "#709b00"
+#define COMMS_COLOR_SUPPLY     "#7f6539"
+#define COMMS_COLOR_SCIENCE    "#993399"
+#define COMMS_COLOR_MEDICAL    "#009190"
+#define COMMS_COLOR_EXPLORER   "#929820"
+#define COMMS_COLOR_ENGINEER   "#a66300"
+#define COMMS_COLOR_SECURITY   "#930000"
+#define COMMS_COLOR_COMMAND    "#204090"
+#define COMMS_COLOR_CENTCOMM   "#5c5c7c"
+#define COMMS_COLOR_SYNDICATE  "#6d3f40"
+#define COMMS_COLOR_ANALOG     "#64706b" // special case, not in telecomms_colours
+
+var/global/list/telecomms_colours = list(
+	"Default Pink" = COMMS_COLOR_DEFAULT,
+	"Entertainment Grey" = COMMS_COLOR_ENTERTAIN,
+	"A.I. Pink" = COMMS_COLOR_AI,
+	"Common Green" = COMMS_COLOR_COMMON,
+	"Service Lime" = COMMS_COLOR_SERVICE,
+	"Supply Drab" = COMMS_COLOR_SUPPLY,
+	"Scientific Purple" = COMMS_COLOR_SCIENCE,
+	"Medical Blue" = COMMS_COLOR_MEDICAL,
+	"Explorer Yellow" = COMMS_COLOR_EXPLORER,
+	"Engineering Orange" = COMMS_COLOR_ENGINEER,
+	"Security Red" = COMMS_COLOR_SECURITY,
+	"Command Blue" = COMMS_COLOR_COMMAND,
+	"Steel Blue" = COMMS_COLOR_CENTCOMM,
+	"Syndicate Red" = COMMS_COLOR_SYNDICATE
+)
 
 #define WOOD_COLOR_GENERIC     "#d5a66e"
 #define WOOD_COLOR_RICH        "#792f27"

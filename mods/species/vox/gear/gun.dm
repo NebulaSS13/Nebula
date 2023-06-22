@@ -4,7 +4,7 @@
 /datum/extension/voxform/proc/check_held_user(var/mob/living/carbon/human/user, var/atom/movable/thing)
 	if(!istype(user))
 		return FALSE
-	if(user.get_bodytype_category() != BODYTYPE_VOX && user.unEquip(thing))
+	if(user.get_bodytype_category() != BODYTYPE_VOX && user.try_unequip(thing))
 		to_chat(user, SPAN_WARNING("\The [thing] hisses and wriggles out of your grasp!"))
 		playsound(user, 'sound/voice/BugHiss.ogg', 50, 1)
 		return FALSE

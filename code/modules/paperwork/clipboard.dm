@@ -9,8 +9,7 @@
 	throw_speed             = 3
 	throw_range             = 10
 	slot_flags              = SLOT_LOWER_BODY
-	applies_material_name   = FALSE
-	applies_material_colour = TRUE
+	material_alteration     = MAT_FLAG_ALTERATION_COLOR
 	material                = /decl/material/solid/wood
 	drop_sound              = 'sound/foley/tooldrop5.ogg'
 	pickup_sound            = 'sound/foley/paperpickup2.ogg'
@@ -32,7 +31,7 @@
 	if(ishuman(user) && istype(over, /obj/screen/inventory))
 		var/obj/screen/inventory/inv = over
 		add_fingerprint(user)
-		if(user.unEquip(src))
+		if(user.try_unequip(src))
 			user.equip_to_slot_if_possible(src, inv.slot_id)
 			return TRUE
 	. = ..()
@@ -43,7 +42,7 @@
 		to_chat(user, "It's holding \a [stored_pen].")
 	if(!LAZYLEN(papers))
 		to_chat(user, "It contains [length(papers)] / [max_papers] paper\s.")
-	else 
+	else
 		to_chat(user, "It has room for [max_papers] paper\s.")
 
 /obj/item/clipboard/proc/top_paper()
@@ -70,7 +69,7 @@
 		I.pixel_x = 0
 		I.pixel_y = 0
 		I.pixel_w = 0
-		I.pixel_z = 0 //randpixel 
+		I.pixel_z = 0 //randpixel
 		add_overlay(I)
 	if(stored_pen)
 		add_overlay(overlay_image(icon, "clipboard_pen", stored_pen.color, RESET_COLOR))
@@ -79,7 +78,7 @@
 /obj/item/clipboard/attackby(obj/item/W, mob/user)
 	var/obj/item/top_paper = top_paper()
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		push_paper(W)
 		to_chat(user, SPAN_NOTICE("You clip the [W] onto \the [src]."))
@@ -129,7 +128,7 @@
 	return
 
 /obj/item/clipboard/proc/add_pen(var/obj/item/I, var/mob/user)
-	if(!stored_pen && I.w_class <= ITEM_SIZE_TINY && IS_PEN(I) && user.unEquip(I, src))
+	if(!stored_pen && I.w_class <= ITEM_SIZE_TINY && IS_PEN(I) && user.try_unequip(I, src))
 		stored_pen = I
 		to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
 		updateUsrDialog()
@@ -152,7 +151,7 @@
 	else if(!stored_pen)
 		to_chat(user, SPAN_WARNING("There is no pen in \the [src]."))
 	else
-		to_chat(user, SPAN_WARNING("Your hands are full.")) 
+		to_chat(user, SPAN_WARNING("Your hands are full."))
 
 /obj/item/clipboard/DefaultTopicState()
 	return global.physical_topic_state

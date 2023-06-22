@@ -84,7 +84,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	update_icon()
 	return ..()
 
-/obj/item/stack/tape_roll/barricade_tape/pickup(mob/user)
+/obj/item/stack/tape_roll/barricade_tape/on_picked_up(mob/user)
 	stop_unrolling()
 	update_icon()
 	return ..()
@@ -306,21 +306,22 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 		add_overlay(ovr)
 
 /obj/structure/tape_barricade/attack_hand(mob/user)
-	if (user.a_intent == I_HELP && allowed(user))
-		if(TAPE_BARRICADE_IS_CORNER_NEIGHBORS(neighbors) || (TAPE_BARRICADE_GET_NB_NEIGHBORS(neighbors) > 2))
-			to_chat(user, SPAN_WARNING("You can't lift up the pole. Try lifting the line itself."))
-			return
+	if (user.a_intent != I_HELP || !allowed(user) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 
-		if(!allowed(user))
-			user.visible_message(SPAN_NOTICE("\The [user] carelessly pulls \the [src] out of the way."))
-			crumple()
-		else
-			user.visible_message(SPAN_NOTICE("\The [user] lifts \the [src], officially allowing passage."))
-
-		for(var/obj/structure/tape_barricade/B in get_tape_line())
-			B.lift(10 SECONDS) //~10 seconds
+	if(TAPE_BARRICADE_IS_CORNER_NEIGHBORS(neighbors) || (TAPE_BARRICADE_GET_NB_NEIGHBORS(neighbors) > 2))
+		to_chat(user, SPAN_WARNING("You can't lift up the pole. Try lifting the line itself."))
 		return TRUE
-	. = ..()
+
+	if(!allowed(user))
+		user.visible_message(SPAN_NOTICE("\The [user] carelessly pulls \the [src] out of the way."))
+		crumple()
+	else
+		user.visible_message(SPAN_NOTICE("\The [user] lifts \the [src], officially allowing passage."))
+
+	for(var/obj/structure/tape_barricade/B in get_tape_line())
+		B.lift(10 SECONDS) //~10 seconds
+	return TRUE
 
 /obj/structure/tape_barricade/dismantle()
 	for (var/obj/structure/tape_barricade/B in get_tape_line())

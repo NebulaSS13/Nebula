@@ -188,7 +188,7 @@ var/global/template_file_name = "all_templates.json"
 	merge_and_register_templates()
 
 	var/list/mapnames = list()
-	for(var/z in global.using_map.map_levels)
+	for(var/z in SSmapping.map_levels)
 		mapnames += map_image_file_name(z)
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)

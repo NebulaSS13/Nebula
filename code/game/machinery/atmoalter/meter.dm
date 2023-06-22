@@ -64,16 +64,16 @@
 		return 0
 
 	var/env_pressure = environment.return_pressure()
-	if(env_pressure <= 0.15*ONE_ATMOSPHERE)
+	if(env_pressure <= (0.15 ATM))
 		icon_state = "meter0"
-	else if(env_pressure <= 1.8*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*0.3) + 0.5)
+	else if(env_pressure <= (1.8 ATM))
+		var/val = round(env_pressure/(0.3 ATM) + 0.5)
 		icon_state = "meter1_[val]"
-	else if(env_pressure <= 30*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*5)-0.35) + 1
+	else if(env_pressure <= (30 ATM))
+		var/val = round(env_pressure/(5 ATM)-0.35) + 1
 		icon_state = "meter2_[val]"
-	else if(env_pressure <= 59*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*5) - 6) + 1
+	else if(env_pressure <= (59 ATM))
+		var/val = round(env_pressure/(5 ATM) - 6) + 1
 		icon_state = "meter3_[val]"
 	else
 		icon_state = "meter4"

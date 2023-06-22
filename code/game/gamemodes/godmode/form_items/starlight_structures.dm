@@ -179,8 +179,7 @@
 				. += M.current
 
 /obj/structure/deity/radiant_statue/attack_hand(var/mob/L)
-	if(!istype(L))
-		return
+	SHOULD_CALL_PARENT(FALSE)
 	var/obj/O = L.get_equipped_item(slot_wear_suit_str)
 	if(O && has_extension(O,/datum/extension/deity_be_near))
 		if(activate_charging())
@@ -189,6 +188,7 @@
 			to_chat(L, "<span class='warning'>\The [src] is already activated</span>")
 	else
 		to_chat(L, "<span class='warning'>\The [src] does not recognize you as a herald of \the [linked_god]. You must wear a full set of herald's armor.</span>")
+	return TRUE
 
 /obj/structure/deity/radiant_statue/attack_deity(var/mob/living/deity/deity)
 	if(activate_charging())

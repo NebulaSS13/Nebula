@@ -158,7 +158,7 @@ Contains helper procs for airflow, called by /connection_group.
 
 /zone/proc/movables()
 	. = list()
-	for(var/turf/T in contents)
+	for(var/turf/T as anything in contents)
 		for(var/atom/movable/A in T)
 			if(!A.simulated || A.anchored || istype(A, /obj/effect) || isobserver(A))
 				continue

@@ -15,6 +15,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	connect_types = CONNECT_TYPE_REGULAR | CONNECT_TYPE_FUEL
 
 	var/max_temperature = T20C + 680
 	var/internal_volume = 600	//L

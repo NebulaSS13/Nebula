@@ -18,18 +18,6 @@
 	update_icon()
 	events_repository.register(/decl/observ/dir_set, src, src, .proc/update_layers)
 
-/obj/structure/defensive_barrier/show_examined_damage(mob/user, perc)
-	if(maxhealth == -1)
-		return
-	else if(perc >= 1)
-		to_chat(user, SPAN_NOTICE("It is undamaged."))
-	else if(perc < 0.7)
-		to_chat(user, SPAN_WARNING("It has a few small dents."))
-	else if(perc < 0.35)
-		to_chat(user, SPAN_WARNING("It has several large dents."))
-	else
-		to_chat(user, SPAN_DANGER("It is on the verge of breaking apart!"))
-
 /obj/structure/defensive_barrier/physically_destroyed(var/skip_qdel)
 	visible_message(SPAN_DANGER("\The [src] was destroyed!"))
 	playsound(src, 'sound/effects/clang.ogg', 100, 1)
@@ -112,6 +100,9 @@
 	try_pack_up(user)
 
 /obj/structure/defensive_barrier/attack_hand(mob/user)
+
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 
 	var/decl/species/species = user.get_species()
 	if(ishuman(user) && species?.can_shred(user) && user.a_intent == I_HURT)

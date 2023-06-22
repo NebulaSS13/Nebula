@@ -1,6 +1,6 @@
 /mob/living/carbon/human/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
 	if(!hit_zone)
-		hit_zone = zone_sel.selecting
+		hit_zone = get_target_zone()
 	var/list/available_attacks = get_natural_attacks()
 	var/decl/natural_attack/use_attack = default_attack
 	if(!use_attack || !use_attack.is_usable(src, target, hit_zone) || !(use_attack.type in available_attacks))
@@ -25,14 +25,14 @@
 			. |= limb.unarmed_attacks
 
 /mob/living/carbon/human/default_help_interaction(mob/user)
-	if(user != src && ishuman(user) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(user.zone_sel.selecting == BP_R_ARM || user.zone_sel.selecting == BP_L_ARM))
+	if(user != src && ishuman(user) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(user.get_target_zone() == BP_R_ARM || user.get_target_zone() == BP_L_ARM))
 		if (performing_cpr)
 			performing_cpr = FALSE
 		else
 			performing_cpr = TRUE
 			start_compressions(user, TRUE)
 		return TRUE
-	if(!(user == src && apply_pressure(user, user.zone_sel.selecting)))
+	if(!(user == src && apply_pressure(user, user.get_target_zone())))
 		help_shake_act(user)
 		return TRUE
 	. = ..()
@@ -62,7 +62,7 @@
 	var/rand_damage = rand(1, 5)
 	var/block = 0
 	var/accurate = 0
-	var/hit_zone = H.zone_sel.selecting
+	var/hit_zone = H.get_target_zone()
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, hit_zone)
 
 	// See what attack they use
@@ -171,11 +171,11 @@
 	// Should this all be in Touch()?
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
+			if(H != src && check_shields(0, null, H, H.get_target_zone(), H.name))
 				H.do_attack_animation(src)
 				return TRUE
 
-	. = ..()
+	return ..()
 
 /mob/living/carbon/human/proc/start_compressions(mob/living/carbon/human/H, starting = FALSE, cpr_mode)
 	if(length(H.get_held_items()))

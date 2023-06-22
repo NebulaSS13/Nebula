@@ -97,7 +97,7 @@
 			if(istype(thing, checktype))
 				if(container)
 					to_chat(user, SPAN_WARNING("\The [src] is already holding \the [container]."))
-				else if(user.unEquip(thing))
+				else if(user.try_unequip(thing))
 					thing.forceMove(src)
 					container = thing
 					visible_message(SPAN_NOTICE("\The [user] places \the [container] on \the [src]."))

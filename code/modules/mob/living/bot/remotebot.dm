@@ -18,7 +18,7 @@
 		tally += (2 * holding.w_class)
 	return tally
 
-/mob/living/bot/remotebot/examine(mob/user)
+/mob/living/bot/remotebot/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(holding)
 		to_chat(user, "<span class='notice'>It is holding \the [html_icon(holding)] [holding].</span>")
@@ -165,7 +165,7 @@
 	desc = "The cover says 'control your own cardboard nuclear powered robot. Comes with real plutonium!"
 	icon = 'icons/obj/items/bot_kit.dmi'
 	icon_state = "remotebot"
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/cardboard
 
 /obj/item/bot_kit/attack_self(var/mob/user)

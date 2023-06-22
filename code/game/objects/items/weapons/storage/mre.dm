@@ -12,7 +12,7 @@ MRE Stuff
 	opened = FALSE
 	open_sound = 'sound/effects/rip1.ogg'
 	material = /decl/material/solid/plastic
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	var/main_meal = /obj/item/storage/mrebag
 	var/meal_desc = "This one is menu 1, meat pizza."
 

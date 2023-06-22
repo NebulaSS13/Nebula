@@ -46,7 +46,7 @@
 	// 	to_chat(user, SPAN_WARNING("\The [src] seems to be lacking power..."))
 	// 	return
 	use_power_oneoff(60)
-	user.unEquip(I, src)
+	user.try_unequip(I, src)
 
 	//If the material is too hard damage the shredder
 	var/decl/material/M = I.material
@@ -212,8 +212,7 @@
 	throwforce   = 0
 	w_class      = ITEM_SIZE_TINY
 	material     = /decl/material/solid/paper
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/shreddedp/get_matter_amount_modifier()
 	return 0.2

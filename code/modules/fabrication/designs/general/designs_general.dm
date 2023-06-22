@@ -19,8 +19,11 @@
 /datum/fabricator_recipe/radio_headset
 	path = /obj/item/radio/headset
 
-/datum/fabricator_recipe/radio_bounced
+/datum/fabricator_recipe/radio_dual
 	path = /obj/item/radio/off
+
+/datum/fabricator_recipe/radio_shortwave
+	path = /obj/item/radio/shortwave/off
 
 /datum/fabricator_recipe/suit_cooler
 	path = /obj/item/suit_cooling_unit

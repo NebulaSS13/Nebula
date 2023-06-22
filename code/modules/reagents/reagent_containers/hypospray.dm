@@ -40,7 +40,7 @@
 	if (!istype(M))
 		return
 
-	var/allow = M.can_inject(user, check_zone(user.zone_sel.selecting, M))
+	var/allow = M.can_inject(user, check_zone(user.get_target_zone(), M))
 	if(!allow)
 		return
 
@@ -99,7 +99,7 @@
 	insert_vial(new /obj/item/chems/glass/beaker/vial(src))
 
 /obj/item/chems/hypospray/vial/proc/insert_vial(var/obj/item/chems/glass/beaker/vial/V, var/mob/user)
-	if(user && !user.unEquip(V, src))
+	if(user && !user.try_unequip(V, src))
 		return
 
 	var/usermessage = ""
@@ -142,13 +142,13 @@
 	return TRUE
 
 /obj/item/chems/hypospray/vial/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		if(!loaded_vial)
-			to_chat(user, SPAN_NOTICE("There is no vial loaded in the [src]."))
-			return
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	if(!loaded_vial)
+		to_chat(user, SPAN_NOTICE("There is no vial loaded in \the [src]."))
+	else
 		remove_vial(user)
-		return TRUE
-	return ..()
+	return TRUE
 
 /obj/item/chems/hypospray/vial/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/chems/glass/beaker/vial))

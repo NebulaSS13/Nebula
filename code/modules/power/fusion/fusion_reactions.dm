@@ -105,7 +105,7 @@
 	set waitfor = FALSE
 	. = 1
 	var/datum/event/wormholes/WM = /datum/event/wormholes
-	WM.setup(affected_z_levels = GetConnectedZlevels(holder))
+	WM.setup(affected_z_levels = SSmapping.get_connected_levels(holder))
 	new WM(new /datum/event_meta(EVENT_LEVEL_MAJOR))
 
 	var/turf/origin = get_turf(holder)

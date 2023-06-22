@@ -22,7 +22,7 @@
 		if(get_dist(M, turf_source) <= maxdistance)
 			var/turf/T = get_turf(M)
 
-			if(T && (T.z == turf_source.z || (zrange && AreConnectedZLevels(T.z, turf_source.z) && abs(T.z - turf_source.z) <= zrange)) && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == PREF_YES))
+			if(T && (T.z == turf_source.z || (zrange && SSmapping.are_connected_levels(T.z, turf_source.z) && abs(T.z - turf_source.z) <= zrange)) && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == PREF_YES))
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)
 
 var/global/const/FALLOFF_SOUNDS = 0.5
@@ -55,11 +55,8 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 
 	volume *= pressure_factor
 
-	if(istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
-		var/turf/simulated/sim_source = turf_source
-		var/turf/simulated/sim_destination = T
-		if(sim_destination.zone != sim_source.zone)
-			volume -= 30
+	if(!turf_source.blocks_air && (T.zone || turf_source.zone) && T.zone != turf_source.zone)
+		volume -= 30
 	return volume
 
 /mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)

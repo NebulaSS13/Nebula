@@ -52,6 +52,7 @@ var/global/list/registered_cyborg_weapons = list()
 /obj/item/gun/energy/Destroy()
 	if(self_recharge)
 		STOP_PROCESSING(SSobj, src)
+	QDEL_NULL(power_supply)
 	return ..()
 
 /obj/item/gun/energy/get_cell()
@@ -144,13 +145,14 @@ var/global/list/registered_cyborg_weapons = list()
 
 //For removable cells.
 /obj/item/gun/energy/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src)|| isnull(accepts_cell_type) || isnull(power_supply) )
+	if(!user.is_holding_offhand(src) || isnull(accepts_cell_type) || isnull(power_supply) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
 	user.put_in_hands(power_supply)
 	power_supply = null
 	user.visible_message(SPAN_NOTICE("\The [user] unloads \the [src]."))
 	playsound(src,'sound/weapons/guns/interaction/smg_magout.ogg' , 50)
 	update_icon()
+	return TRUE
 
 /obj/item/gun/energy/attackby(var/obj/item/A, mob/user)
 
@@ -176,7 +178,7 @@ var/global/list/registered_cyborg_weapons = list()
 		if(!do_after(user, 5, A, can_move = TRUE))
 			return TRUE
 
-		if(user.unEquip(A, src))
+		if(user.try_unequip(A, src))
 			power_supply = A
 			user.visible_message(SPAN_WARNING("\The [user] loads \the [A] into \the [src]!"))
 			playsound(src, 'sound/weapons/guns/interaction/energy_magin.ogg', 80)

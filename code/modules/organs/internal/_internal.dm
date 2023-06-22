@@ -95,9 +95,6 @@
 /obj/item/organ/internal/proc/bruise()
 	damage = max(damage, min_bruised_damage)
 
-/obj/item/organ/internal/proc/is_damaged()
-	return damage > 0
-
 /obj/item/organ/internal/proc/is_bruised()
 	return damage >= min_bruised_damage
 
@@ -246,3 +243,17 @@
 
 /obj/item/organ/internal/proc/past_damage_threshold(var/threshold)
 	return (get_current_damage_threshold() > threshold)
+
+/obj/item/organ/internal/on_add_effects()
+	. = ..()
+	if(parent_organ && owner)
+		var/obj/item/organ/O = owner.get_organ(parent_organ)
+		if(O)
+			O.vital_to_owner = null
+
+/obj/item/organ/internal/on_remove_effects(mob/living/last_owner)
+	. = ..()
+	if(parent_organ && last_owner)
+		var/obj/item/organ/O = last_owner.get_organ(parent_organ)
+		if(O)
+			O.vital_to_owner = null

@@ -52,7 +52,7 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return FALSE
-	return ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
+	return LEVELS_ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
 
 // Refreshes list of active supermatter crystals
 /datum/nano_module/program/supermatter_monitor/proc/refresh()

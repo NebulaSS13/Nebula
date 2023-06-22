@@ -11,7 +11,7 @@
 	var/seek_alternatives = 5     // How many ticks we wait before seeking other power sources, if we can provide the machine with power. Set to 0 to never do this.
 
 /obj/item/stock_parts/power/battery/Destroy()
-	qdel(cell)
+	QDEL_NULL(cell)
 	. = ..()
 
 /obj/item/stock_parts/power/battery/on_install(var/obj/machinery/machine)
@@ -27,15 +27,16 @@
 		remove_cell()
 	..()
 
-/obj/item/stock_parts/power/battery/take_damage(amount, damtype)
+/obj/item/stock_parts/power/battery/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
+	if(can_take_damage() && lastdamage > 0)
+		switch(lastdamtype)
+			if(ELECTROCUTE)
+				if(prob(50) && cell && (get_percent_health() < 50))
+					cell.emp_act(3)
+			if(BRUTE)
+				if(prob(20) && cell && (get_percent_health() < 50))
+					cell.explosion_act(3)
 	. = ..()
-	switch(damtype)
-		if(ELECTROCUTE)
-			if(prob(50) && cell && health < initial(health)/2)
-				cell.emp_act(3)
-		if(BRUTE)
-			if(prob(20) && cell && health < initial(health)/2)
-				cell.explosion_act(3)
 
 // None of these helpers actually change the cell's loc. They only manage internal references and state.
 /obj/item/stock_parts/power/battery/proc/add_cell(var/obj/machinery/machine, var/obj/item/cell/new_cell)
@@ -162,7 +163,7 @@
 			to_chat(user, "\The [I] is too [I.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
 			return TRUE
 
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		add_cell(machine, I)
 		user.visible_message(\
@@ -182,7 +183,7 @@
 	return ..()
 
 /obj/item/stock_parts/power/battery/attack_hand(mob/user)
-	if(cell && istype(loc, /obj/machinery))
+	if(cell && istype(loc, /obj/machinery) && user.check_dexterity(DEXTERITY_GRIP))
 		user.put_in_hands(cell)
 		extract_cell(user)
 		return TRUE
@@ -195,6 +196,7 @@
 	return "The machine can receive power from an installed power cell."
 
 /obj/item/stock_parts/power/battery/buildable
+	max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel
 

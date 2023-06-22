@@ -38,6 +38,6 @@
 		if(istype(affecting_mob))
 			var/obj/item/clothing/C = affecting_mob.get_equipped_item(slot_head_str)
 			if(istype(C)) //hardsuit helmets etc
-				if((C.max_pressure_protection) && C.armor["melee"] > 20)
+				if((C.max_pressure_protection) && C.armor[ARMOR_MELEE] > 20)
 					to_chat(G.assailant, SPAN_WARNING("\The [C] is in the way!"))
 					return FALSE

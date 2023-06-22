@@ -96,7 +96,7 @@
 	var/datum/computer_file/directory/target = parse_directory(directory, create_directories)
 	if(!istype(target) && directory) // The directory could not be parsed or created
 		return target
-	var/store_file = try_store_file(F, target)
+	var/store_file = try_store_file(F, target, accesses, user)
 	if(store_file != OS_FILE_SUCCESS)
 		if(store_file == OS_FILE_EXISTS)
 			if(!overwrite)
@@ -105,11 +105,11 @@
 			var/datum/computer_file/old = find_file_by_name(F.filename, target)
 			if(!istype(old)) // Something went wrong since we already found this file earlier.
 				return OS_HARDDRIVE_ERROR
-			
+
 			var/removed = remove_file(old, accesses, user)
 			if(removed != OS_FILE_SUCCESS)
 				return removed // Return the error code from removing the file.
-			
+
 			// If we've reached this point, we are able to store the file, since we successfully removed the old version.
 			// try_store_file() is intentionally written so that existing file checks are returned only if all other checks pass.
 		else
@@ -118,11 +118,11 @@
 		var/datum/computer_file/directory/dir = F
 		for(var/datum/computer_file/child in dir.get_held_files())
 			stored_files[child] = dir
-			child.holder = src
-		
+			child.holder = weakref(src)
+
 		dir.temp_file_refs.Cut() // No longer need these references to the directory's stored files.
 
-	F.holder = src
+	F.holder = weakref(src)
 	if(target)
 		if(target.inherit_perms) // Add the permissions of the directory to the file's.
 			if(LAZYLEN(target.read_access))
@@ -149,7 +149,7 @@
 	if(!forced)
 		if(!check_functionality())
 			return OS_HARDDRIVE_ERROR
-		
+
 		if(F.undeletable)
 			return OS_FILE_NO_WRITE
 
@@ -172,10 +172,10 @@
 		// Store references to the removed files temporarily to prevent them being GC'd, in case we're
 		// transferring this directory elsewhere.
 		dir.temp_file_refs += dir_files
-	
+
 	for(var/datum/computer_file/removed in removed_files)
 		var/datum/computer_file/directory/dir = stored_files[removed]
-		
+
 		// File is being removed without the directory, they're going their seperate ways.
 		if(dir && !(dir in removed_files))
 			dir.held_files -= weakref(removed)
@@ -188,13 +188,13 @@
 // Saves a file, either overwriting the data of a previous file or saving a new one.
 /obj/item/stock_parts/computer/hard_drive/proc/save_file(filename, directory, new_data, list/metadata, list/accesses, mob/user, file_type = /datum/computer_file/data)
 	var/datum/computer_file/F = find_file_by_name(filename, directory)
-	
+
 	if(istype(F) && !(F.get_file_perms(accesses, user) & OS_WRITE_ACCESS))
 		return OS_FILE_NO_WRITE
 	//Try to save file, possibly won't fit size-wise
 	var/datum/computer_file/backup
 	if(istype(F))
-		backup = F.clone()
+		backup = F.Clone()
 		remove_file(F)
 	else
 		F = new file_type()
@@ -204,13 +204,13 @@
 		D.stored_data = new_data
 		D.calculate_size()
 	F.metadata = metadata && metadata.Copy()
-	
+
 	var/success = store_file(F, directory, FALSE, accesses, user)
 	if(success != OS_FILE_SUCCESS)
 		if(backup)
 			store_file(backup, directory)
 		return success
-	
+
 	if(backup)
 		qdel(backup)
 	return F
@@ -239,7 +239,7 @@
 /obj/item/stock_parts/computer/hard_drive/proc/try_store_file(var/datum/computer_file/F, var/directory, var/list/accesses, var/mob/user)
 	if(!istype(F))
 		return OS_FILE_NOT_FOUND
-	
+
 	var/file_size = F.size
 	if(istype(F, /datum/computer_file/directory))
 		var/datum/computer_file/directory/dir = F
@@ -254,7 +254,7 @@
 
 	// Safety check
 	F.filename = sanitize_for_file(F.filename)
-	
+
 	var/datum/computer_file/directory/D = parse_directory(directory)
 	if(directory && !D)
 		return OS_DIR_NOT_FOUND
@@ -284,7 +284,7 @@
 		return OS_HARDDRIVE_ERROR
 
 	var/datum/computer_file/directory/target = parse_directory(directory)
-		
+
 	if(istype(target))
 		var/list/held_files = target.get_held_files()
 		for(var/datum/computer_file/file in held_files)
@@ -318,7 +318,7 @@
 	directories.Cut(directories.len) // Remove the final directory.
 
 	var/datum/computer_file/directory/new_dir = new()
-	new_dir.filename = new_directory	
+	new_dir.filename = new_directory
 	if(!length(directories))
 		var/success = store_file(new_dir)
 		if(success != OS_FILE_SUCCESS)

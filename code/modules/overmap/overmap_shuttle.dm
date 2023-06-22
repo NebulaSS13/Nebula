@@ -1,4 +1,4 @@
-#define waypoint_sector(waypoint) global.overmap_sectors["[waypoint.z]"]
+#define waypoint_sector(waypoint) global.overmap_sectors[num2text(waypoint.z)]
 
 /datum/shuttle/autodock/overmap
 	warmup_time = 10

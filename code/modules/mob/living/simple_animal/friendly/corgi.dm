@@ -89,7 +89,7 @@
 					else
 						set_dir(SOUTH)
 
-					if(isturf(movement_target.loc) )
+					if(isturf(movement_target.loc) && Adjacent(movement_target))
 						UnarmedAttack(movement_target)
 					else if(ishuman(movement_target.loc) && prob(20))
 						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
@@ -136,7 +136,7 @@
 			"[EAST]" =  list( 5, -14),
 			"[WEST]" =  list(-5, -14)
 		)
-	..()
+	. = ..()
 	gender = pick(MALE, FEMALE)
 
 //pupplies cannot wear anything.

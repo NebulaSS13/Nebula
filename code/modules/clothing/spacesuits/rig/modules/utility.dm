@@ -279,11 +279,11 @@
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 
 	charges = list(
-		list("antidepressants", "antidepressants",  /decl/material/liquid/antidepressants,   30),
-		list("stimulants",      "stimulants",       /decl/material/liquid/stimulants,        30),
-		list("amphetamines",    "amphetamines",     /decl/material/liquid/amphetamines,      30),
-		list("painkillers",     "painkillers",      /decl/material/liquid/painkillers,       30),
-		list("glucose",         "glucose",          /decl/material/liquid/nutriment/glucose, 80)
+		list("antidepressants", "antidepressants",  /decl/material/liquid/antidepressants,    30),
+		list("stimulants",      "stimulants",       /decl/material/liquid/stimulants,         30),
+		list("amphetamines",    "amphetamines",     /decl/material/liquid/amphetamines,       30),
+		list("painkillers",     "painkillers",      /decl/material/liquid/painkillers/strong, 30),
+		list("glucose",         "glucose",          /decl/material/liquid/nutriment/glucose,  80)
 		)
 
 	interface_name = "combat chem dispenser"
@@ -402,7 +402,7 @@
 		if(jets)
 			to_chat(user, SPAN_WARNING("There's already a propellant tank inside of \the [src]!"))
 			return
-		if(user.unEquip(W))
+		if(user.try_unequip(W))
 			to_chat(user, SPAN_NOTICE("You insert \the [W] into [src]."))
 			W.forceMove(src)
 			jets = W
@@ -471,13 +471,11 @@
 	device = /obj/item/paper_bin
 
 /obj/item/rig_module/device/paperdispenser/engage(atom/target)
-
 	if(!..() || !device)
-		return 0
-
+		return FALSE
 	if(!target)
-		device.attack_hand(holder.wearer)
-		return 1
+		device.attack_hand_with_interaction_checks(holder.wearer)
+		return TRUE
 
 /obj/item/rig_module/device/pen
 	name = "mounted pen"

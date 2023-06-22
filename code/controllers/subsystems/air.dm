@@ -36,13 +36,13 @@ Class Procs:
 		Called when zones have a direct connection and equivalent pressure and temperature.
 		Merges the zones to create a single zone.
 
-	connect(turf/simulated/A, turf/B)
-		Called by turf/update_air_properties(). The first argument must be simulated.
+	connect(turf/A, turf/B)
+		Called by turf/update_air_properties(). The first argument must participate in ZAS.
 		Creates a connection between A and B.
 
 	mark_zone_update(zone/Z)
 		Adds zone to the update list. Unlike mark_for_update(), this one is called automatically whenever
-		air is returned from a simulated turf.
+		air is returned from a turf.
 
 	equivalent_pressure(zone/A, zone/B)
 		Currently identical to A.air.compare(B.air). Returns 1 when directly connected zones are ready to be merged.
@@ -133,10 +133,11 @@ SUBSYSTEM_DEF(air)
 	report_progress("Processing Geometry...")
 
 	var/simulated_turf_count = 0
-	for(var/turf/simulated/S)
+	for(var/turf/T in world)
+		if(!SHOULD_PARTICIPATE_IN_ZONES(T))
+			continue
 		simulated_turf_count++
-		S.update_air_properties()
-
+		T.update_air_properties()
 		CHECK_TICK
 
 	report_progress({"Total Simulated Turfs: [simulated_turf_count]
@@ -312,21 +313,24 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		B.c_merge(A)
 		mark_zone_update(A)
 
-/datum/controller/subsystem/air/proc/connect(turf/simulated/A, turf/simulated/B)
+/datum/controller/subsystem/air/proc/connect(turf/A, turf/B)
 	#ifdef ZASDBG
-	ASSERT(istype(A))
+	ASSERT(isturf(A))
 	ASSERT(isturf(B))
 	ASSERT(A.zone)
 	ASSERT(!A.zone.invalid)
-	//ASSERT(B.zone)
 	ASSERT(A != B)
 	#endif
 
+	if(!SHOULD_PARTICIPATE_IN_ZONES(A))
+		return
+
 	var/block = air_blocked(A,B)
-	if(block & AIR_BLOCKED) return
+	if(block & AIR_BLOCKED)
+		return
 
 	var/direct = !(block & ZONE_BLOCKED)
-	var/space = !istype(B)
+	var/space = !SHOULD_PARTICIPATE_IN_ZONES(B)
 
 	if(!space)
 		if(min(A.zone.contents.len, B.zone.contents.len) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || times_fired == 0)))
@@ -358,7 +362,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	#ifdef ZASDBG
 	ASSERT(isturf(T))
 	#endif
-	if(T.needs_air_update)
+	if(T.needs_air_update || !SHOULD_PARTICIPATE_IN_ZONES(T))
 		return
 	tiles_to_update += T
 	#ifdef ZASDBG

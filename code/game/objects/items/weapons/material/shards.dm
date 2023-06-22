@@ -14,9 +14,7 @@
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	material = /decl/material/solid/glass
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
-	unbreakable = 1 //It's already broken.
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
 
@@ -130,6 +128,21 @@
 					return
 				check -= picked
 			return
+
+//Prevent the shard from being allowed to shatter
+/obj/item/shard/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
+	if(health > 0 || !can_take_damage())
+		return //If invincible, or if we're not dead yet, skip
+	if(lastdamtype == BURN)
+		melt()
+		return
+	physically_destroyed()
+
+/obj/item/shard/shatter(consumed)
+	physically_destroyed()
+
+/obj/item/shard/can_take_wear_damage()
+	return FALSE
 
 // Preset types - left here for the code that uses them
 /obj/item/shard/borosilicate

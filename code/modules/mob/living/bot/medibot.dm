@@ -40,7 +40,7 @@
 	//The last time we were tipped/righted and said a voice line, to avoid spam
 	var/last_tipping_action_voice = 0
 
-/mob/living/bot/medbot/examine(mob/user)
+/mob/living/bot/medbot/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(tipped_status == MEDBOT_PANIC_NONE)
 		return
@@ -165,7 +165,7 @@
 			to_chat(user, "<span class='notice'>There is already a beaker loaded.</span>")
 			return
 
-		if(!user.unEquip(O, src))
+		if(!user.try_unequip(O, src))
 			return
 		reagent_glass = O
 		to_chat(user, "<span class='notice'>You insert [O].</span>")

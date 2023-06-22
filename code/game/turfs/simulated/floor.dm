@@ -6,8 +6,10 @@
 	thermal_conductivity = 0.040
 	heat_capacity = 10000
 	explosion_resistance = 1
+	turf_flags = TURF_IS_HOLOMAP_PATH
 
 	// Damage to flooring.
+	// These are icon state suffixes, NOT booleans!
 	var/broken
 	var/burnt
 	// Plating data.
@@ -22,11 +24,14 @@
 	var/decl/flooring/flooring
 	var/lava = 0
 
+/turf/simulated/floor/can_climb_from_below(var/mob/climber)
+	return TRUE
+
 /turf/simulated/floor/is_plating()
 	return !flooring
 
-/turf/simulated/floor/get_base_movement_delay()
-	return flooring?.movement_delay || ..()
+/turf/simulated/floor/get_base_movement_delay(var/travel_dir, var/mob/mover)
+	return flooring?.get_movement_delay(travel_dir, mover) || ..()
 
 /turf/simulated/floor/protects_atom(var/atom/A)
 	return (A.level <= 1 && !is_plating()) || ..()
@@ -121,3 +126,11 @@
 
 /turf/simulated/floor/is_floor()
 	return TRUE
+
+/turf/simulated/floor/on_defilement()
+	if(flooring?.type != /decl/flooring/reinforced/cult)
+		..()
+		set_flooring(GET_DECL(/decl/flooring/reinforced/cult))
+
+/turf/simulated/floor/is_defiled()
+	return flooring?.type == /decl/flooring/reinforced/cult || ..()

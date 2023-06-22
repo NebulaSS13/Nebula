@@ -33,8 +33,6 @@
 	return 1
 
 /mob/living/carbon/proc/escape_handcuffs()
-	//if(!(last_special <= world.time)) return
-
 	//This line represent a significant buff to grabs...
 	// We don't have to check the click cooldown because /mob/living/verb/resist() has done it for us, we can simply set the delay
 	setClickCooldown(100)
@@ -80,12 +78,13 @@
 			return
 		if(!cuffs || buckled)
 			return
-	if (cuffs.health) // Improvised cuffs can break because their health is > 0
-		cuffs.health = cuffs.health - initial(cuffs.health) / 2
-		if (cuffs.health < 1)
+	if (cuffs.can_take_damage() && cuffs.health > 0) // Improvised cuffs can break because their health is > 0
+		var/cuffs_name = "\the [cuffs]"
+		cuffs.take_damage(cuffs.max_health / 2)
+		if (QDELETED(cuffs) || cuffs.health < 1)
 			visible_message(
-				SPAN_DANGER("\The [src] manages to remove \the [cuffs], breaking them!"),
-				SPAN_NOTICE("You successfully remove \the [cuffs], breaking them!"), range = 2
+				SPAN_DANGER("\The [src] manages to remove [cuffs_name], breaking them!"),
+				SPAN_NOTICE("You successfully remove [cuffs_name], breaking them!"), range = 2
 				)
 			QDEL_NULL(cuffs)
 			if(buckled && buckled.buckle_require_restraints)
@@ -119,7 +118,7 @@
 			"<span class='warning'>You successfully break your [cuffs].</span>"
 		)
 
-		unEquip(cuffs)
+		try_unequip(cuffs)
 		qdel(cuffs)
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()

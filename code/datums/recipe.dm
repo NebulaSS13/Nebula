@@ -216,4 +216,8 @@
 		var/total = holder.total_volume
 		for(var/atom/a as anything in results)
 			holder.trans_to(a, total / length(results))
+
+	for(var/obj/item/chems/food/food in results)
+		food.cooked_food = TRUE
+
 	return results

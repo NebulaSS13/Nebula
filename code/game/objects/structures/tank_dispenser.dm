@@ -63,10 +63,11 @@
 			add_overlay("hydrogen-5")
 
 /obj/structure/tank_rack/attack_robot(mob/user)
-	if(CanPhysicallyInteract(user))
-		return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/tank_rack/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	var/list/dat = list()
 	var/oxycount = LAZYLEN(oxygen_tanks)
 	dat += "Oxygen tanks: [oxycount] - [oxycount ? "<A href='?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
@@ -75,6 +76,7 @@
 	var/datum/browser/popup = new(user, "window=tank_rack")
 	popup.set_content(jointext(dat, "<br>"))
 	popup.open()
+	return TRUE
 
 /obj/structure/tank_rack/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/tank))
@@ -89,12 +91,12 @@
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
 			UNSETEMPTY(adding_to_list)
 			return TRUE
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return TRUE
 		LAZYADD(adding_to_list, weakref(I))
 		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
 		update_icon()
-		attack_hand(user)
+		attack_hand_with_interaction_checks(user)
 		return TRUE
 	return ..()
 
@@ -116,7 +118,7 @@
 			O.dropInto(loc)
 			to_chat(user, SPAN_NOTICE("You take \the [O] out of \the [src]."))
 			update_icon()
-			attack_hand(user)
+			attack_hand_with_interaction_checks(user)
 		return TOPIC_REFRESH
 
 /*

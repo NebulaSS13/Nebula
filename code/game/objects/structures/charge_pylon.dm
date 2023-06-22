@@ -9,11 +9,12 @@
 	var/next_use
 
 /obj/structure/charge_pylon/attack_ai(var/mob/user)
-	if(Adjacent(user))
-		attack_hand(user)
+	return attack_hand_with_interaction_checks(user) || ..()
 
 /obj/structure/charge_pylon/attack_hand(var/mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	charge_user(user)
+	return TRUE
 
 /obj/structure/charge_pylon/proc/charge_user(var/mob/living/user)
 	if(next_use > world.time) return

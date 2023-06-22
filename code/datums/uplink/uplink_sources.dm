@@ -40,7 +40,7 @@ var/global/list/default_uplink_source_priority = list(
 	var/obj/item/uplink/T = new(P, M.mind, amount)
 	P.hidden_uplink = T
 	var/datum/computer_file/program/uplink/program = new(pda_pass)
-	var/datum/computer_file/directory/program_dir = HDD.parse_directory(OS_PROGRAMS_DIR, TRUE) // This is almost certainly already created, but just in case. 
+	var/datum/computer_file/directory/program_dir = HDD.parse_directory(OS_PROGRAMS_DIR, TRUE) // This is almost certainly already created, but just in case.
 	if(HDD.store_file(program, program_dir, TRUE, overwrite = TRUE) != OS_FILE_SUCCESS)
 		return SETUP_FAILED	//Not enough space or other issues.
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in TaxQuickly program to unlock its hidden features.</span>")
@@ -58,21 +58,11 @@ var/global/list/default_uplink_source_priority = list(
 	if(!R)
 		return SETUP_FAILED
 
-	var/freq = PUBLIC_LOW_FREQ
-	var/list/freqlist = list()
-	while (freq <= PUBLIC_HIGH_FREQ)
-		if (freq < 1451 || freq > PUB_FREQ)
-			freqlist += freq
-		freq += 2
-		if ((freq % 2) == 0)
-			freq += 1
-
-	freq = freqlist[rand(1, freqlist.len)]
 	var/obj/item/uplink/T = new(R, M.mind, amount)
 	R.hidden_uplink = T
-	R.traitor_frequency = freq
-	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features.</span>")
-	M.StoreMemory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).", /decl/memory_options/system)
+	R.traitor_frequency = sanitize_frequency(rand(PUBLIC_LOW_FREQ+1, PUB_FREQ-1))
+	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(R.traitor_frequency)] to unlock its hidden features.</span>")
+	M.StoreMemory("<B>Radio Freq:</B> [format_frequency(R.traitor_frequency)] ([R.name]).", /decl/memory_options/system)
 
 /decl/uplink_source/implant
 	name = "Implant"

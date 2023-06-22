@@ -1,7 +1,7 @@
 //A storage item intended to be used by other items to provide storage functionality.
 //Types that use this should consider overriding emp_act() and hear_talk(), unless they shield their contents somehow.
 /obj/item/storage/internal
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	abstract_type = /obj/item/storage/internal
 	is_spawnable_type = FALSE
 	var/obj/item/master_item
@@ -20,7 +20,8 @@
 	. = ..()
 
 /obj/item/storage/internal/attack_hand()
-	return		//make sure this is never picked up
+	SHOULD_CALL_PARENT(FALSE)
+	return TRUE //make sure this is never picked up
 
 /obj/item/storage/internal/mob_can_equip()
 	return FALSE //make sure this is never picked up
@@ -52,7 +53,7 @@
 		if(!user.incapacitated())
 			var/obj/screen/inventory/inv = over_object
 			master_item.add_fingerprint(user)
-			if(user.unEquip(master_item))
+			if(user.try_unequip(master_item))
 				user.equip_to_slot_if_possible(master_item, inv.slot_id)
 			return 0
 	return 0
@@ -67,7 +68,7 @@
 		for(var/slot in global.pocket_slots)
 			var/obj/item/pocket = H.get_equipped_item(slot)
 			if(pocket == master_item && !H.get_active_hand())
-				H.unEquip(master_item)
+				H.try_unequip(master_item)
 				H.put_in_hands(master_item)
 				return FALSE
 

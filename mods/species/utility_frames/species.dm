@@ -17,6 +17,10 @@
 	base_prosthetics_model = null
 
 	blood_types = list(/decl/blood_type/coolant)
+	vital_organs = list(
+		BP_POSIBRAIN,
+		BP_CELL
+	)
 
 	available_bodytypes = list(/decl/bodytype/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame

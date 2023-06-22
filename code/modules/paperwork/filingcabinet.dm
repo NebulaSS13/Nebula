@@ -29,7 +29,7 @@
 
 /obj/structure/filing_cabinet/attackby(obj/item/P, mob/user)
 	if(is_type_in_list(P, can_hold))
-		if(!user.unEquip(P, src))
+		if(!user.try_unequip(P, src))
 			return
 		add_fingerprint(user)
 		to_chat(user, SPAN_NOTICE("You put [P] in [src]."))
@@ -47,6 +47,7 @@
 	show_browser(user, "<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=filingcabinet;size=350x300")
 
 /obj/structure/filing_cabinet/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return interact(user)
 
 /obj/structure/filing_cabinet/OnTopic(mob/user, href_list, datum/topic_state/state)
@@ -113,7 +114,7 @@
 /obj/structure/filing_cabinet/records/medical/collate_data(var/datum/computer_file/report/crew_record/record)
 	. = list()
 	. += "<b>Name:</b> [record.get_name()]"
-	. += "<b>Gender:</b> [record.get_sex()]"
+	. += "<b>Gender:</b> [record.get_gender()]"
 	. += "<b>Species:</b> [record.get_species_name()]"
 	. += "<b>Blood Type:</b> [record.get_bloodtype()]"
 	. += "<b>Details:</b> [record.get_medical_record()]"
@@ -126,7 +127,7 @@
 /obj/structure/filing_cabinet/records/medical/collate_data(var/datum/computer_file/report/crew_record/record)
 	. = list()
 	. += "<b>Name:</b> [record.get_name()]"
-	. += "<b>Gender:</b> [record.get_sex()]"
+	. += "<b>Gender:</b> [record.get_gender()]"
 	. += "<b>Species:</b> [record.get_species_name()]"
 	. += "<b>Details:</b> [record.get_employment_record()]"
 	return jointext(., "<br>")

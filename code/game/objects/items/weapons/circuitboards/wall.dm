@@ -74,11 +74,13 @@
 	buildtype_select = TRUE
 
 /obj/item/stock_parts/circuitboard/airlock_controller/get_buildable_types()
+	var/static/list/AirlockControllerSubtypes = subtypesof(/obj/machinery/embedded_controller/radio) | subtypesof(/obj/machinery/embedded_controller/radio/airlock)
 	. = list()
-	for(var/path in typesof(/obj/machinery/embedded_controller/radio))
+	for(var/path in AirlockControllerSubtypes)
 		var/obj/machinery/embedded_controller/radio/controller = path
 		var/base_type = initial(controller.base_type) || path
 		. |= base_type
+	. |= /obj/machinery/dummy_airlock_controller //Let us build the dummy controller
 
 /obj/item/stock_parts/circuitboard/camera
 	name = "circuitboard (camera)"

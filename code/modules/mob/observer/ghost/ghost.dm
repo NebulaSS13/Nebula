@@ -11,6 +11,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	anchored = 1	//  don't get pushed around
 	universal_speak = TRUE
 	mob_sort_value = 9
+	is_spawnable_type = FALSE
 
 	mob_flags = MOB_FLAG_HOLY_BAD
 	movement_handlers = list(/datum/movement_handler/mob/multiz_connected, /datum/movement_handler/mob/incorporeal)
@@ -55,8 +56,9 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 	else
 		spawn(10) // wait for the observer mob to receive the client's key
-			mind = new /datum/mind(key)
-			mind.current = src
+			if(!QDELETED(src))
+				mind = new /datum/mind(key)
+				mind.current = src
 	if(!T)
 		var/list/spawn_locs = global.latejoin_locations | global.latejoin_cryo_locations | global.latejoin_gateway_locations
 		if(length(spawn_locs))

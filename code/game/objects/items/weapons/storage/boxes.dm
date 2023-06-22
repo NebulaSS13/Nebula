@@ -28,7 +28,7 @@
 	max_storage_space = DEFAULT_BOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
 	material = /decl/material/solid/cardboard
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	var/foldable = /obj/item/stack/material/cardstock	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 
 /obj/item/storage/box/large
@@ -58,7 +58,7 @@
 	if(. || length(contents) || !ispath(foldable) || !istype(material))
 		return
 	var/sheet_amount = FLOOR(LAZYACCESS(matter, material.type) / SHEET_MATERIAL_AMOUNT)
-	if(sheet_amount <= 0 || !user.unEquip(src))
+	if(sheet_amount <= 0 || !user.try_unequip(src))
 		return
 
 	to_chat(user, SPAN_NOTICE("You fold \the [src] flat."))
@@ -186,6 +186,9 @@
 /obj/item/storage/box/ammo/shotgunammo/WillContain()
 	return list(/obj/item/ammo_magazine/shotholder = 2)
 
+/obj/item/storage/box/ammo/shotgunammo/large/WillContain()
+	return list(/obj/item/ammo_magazine/shotholder = 4)
+
 /obj/item/storage/box/ammo/shotgunshells
 	name = "box of shotgun shells"
 /obj/item/storage/box/ammo/shotgunshells/WillContain()
@@ -200,6 +203,9 @@
 	name = "box of stun shells"
 /obj/item/storage/box/ammo/stunshells/WillContain()
 	return list(/obj/item/ammo_magazine/shotholder/stun = 2)
+
+/obj/item/storage/box/ammo/stunshells/large/WillContain()
+	return list(/obj/item/ammo_magazine/shotholder/stun = 4)
 
 /obj/item/storage/box/ammo/sniperammo
 	name = "box of sniper shells"
@@ -259,6 +265,13 @@
 	icon_state = "flashbang"
 /obj/item/storage/box/smokes/WillContain()
 	return list(/obj/item/grenade/smokebomb = 5)
+
+/obj/item/storage/box/metalfoam
+	name = "box of metal foam grenades"
+	desc = "A box containing 5 metal foam grenades."
+	icon_state = "flashbang"
+/obj/item/storage/box/metalfoam/WillContain()
+	return list(/obj/item/grenade/chem_grenade/metalfoam = 5)
 
 /obj/item/storage/box/anti_photons
 	name = "box of anti-photon grenades"
@@ -499,11 +512,11 @@
 	icon_state = "box"
 /obj/item/storage/box/glowsticks/WillContain()
 	return list(
-			/obj/item/flashlight/flare/glowstick        = 1, 
+			/obj/item/flashlight/flare/glowstick        = 1,
 			/obj/item/flashlight/flare/glowstick/red    = 1,
 			/obj/item/flashlight/flare/glowstick/blue   = 1,
 			/obj/item/flashlight/flare/glowstick/orange = 1,
-			/obj/item/flashlight/flare/glowstick/yellow = 1, 
+			/obj/item/flashlight/flare/glowstick/yellow = 1,
 			/obj/item/flashlight/flare/glowstick/random = 1
 		)
 
@@ -694,6 +707,9 @@
 
 /obj/item/storage/box/snack/chips/WillContain()
 	return list(/obj/item/chems/food/chips = 7)
+
+/obj/item/storage/box/snack/buns/WillContain()
+	return list(/obj/item/chems/food/bun = 7)
 
 //canned goods in cardboard
 /obj/item/storage/box/canned

@@ -217,6 +217,8 @@
 	connected_ai = null
 	QDEL_NULL(module)
 	QDEL_NULL(wires)
+	QDEL_NULL(cell)
+	QDEL_LIST_ASSOC_VAL(components)
 	. = ..()
 
 /mob/living/silicon/robot/proc/reset_module(var/suppress_alert = null)
@@ -473,7 +475,7 @@
 		for(var/V in components)
 			var/datum/robot_component/C = components[V]
 			if(!C.installed && C.accepts_component(W))
-				if(!user.unEquip(W))
+				if(!user.try_unequip(W))
 					return
 				C.installed = 1
 				C.wrapped = W
@@ -482,8 +484,8 @@
 
 				var/obj/item/robot_parts/robot_component/WC = W
 				if(istype(WC))
-					C.brute_damage = WC.brute
-					C.electronics_damage = WC.burn
+					C.brute_damage = WC.brute_damage
+					C.electronics_damage = WC.burn_damage
 
 				to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
 				return
@@ -557,8 +559,8 @@
 					var/datum/robot_component/C = components[remove]
 					var/obj/item/robot_parts/robot_component/I = C.wrapped
 					if(istype(I))
-						I.brute = C.brute_damage
-						I.burn = C.electronics_damage
+						I.set_bruteloss(C.brute_damage)
+						I.set_burnloss(C.electronics_damage)
 
 					removed_item = I
 					if(C.installed == 1)
@@ -588,7 +590,7 @@
 			to_chat(user, "There is a power cell already installed.")
 		else if(W.w_class != ITEM_SIZE_NORMAL)
 			to_chat(user, "\The [W] is too [W.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			cell = W
 			handle_selfinsert(W, user) //Just in case.
 			to_chat(user, "You insert the power cell.")
@@ -643,7 +645,7 @@
 			to_chat(usr, "The upgrade is locked and cannot be used yet!")
 		else
 			if(U.action(src))
-				if(!user.unEquip(U, src))
+				if(!user.try_unequip(U, src))
 					return
 				to_chat(usr, "You apply the upgrade to [src]!")
 				handle_selfinsert(W, user)
@@ -760,7 +762,7 @@
 			dat += text("[obj]: <B>Activated</B><BR>")
 		else
 			dat += text("[obj]: <A HREF=?src=\ref[src];act=\ref[obj]>Activate</A><BR>")
-	if (emagged)
+	if (emagged && module.emag)
 		if(activated(module.emag))
 			dat += text("[module.emag]: <B>Activated</B><BR>")
 		else
@@ -1126,3 +1128,11 @@
 	flick("blspell", animation)
 	sleep(5)
 	qdel(animation)
+
+/mob/living/silicon/robot/proc/handle_radio_transmission()
+	if(!is_component_functioning("radio"))
+		return FALSE
+	var/datum/robot_component/CO = get_component("radio")
+	if(!CO || !cell_use_power(CO.active_usage))
+		return FALSE
+	return TRUE

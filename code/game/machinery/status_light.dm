@@ -15,6 +15,9 @@
 	update_icon()
 	radio_connection = register_radio_to_controller(src, frequency, frequency, RADIO_ATMOSIA)
 
+/obj/machinery/status_light/Destroy()
+	radio_controller.remove_object(src,frequency)
+	return ..()
 
 /obj/machinery/status_light/on_update_icon()
 	if(stat & (NOPOWER|BROKEN))

@@ -1426,6 +1426,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "eR" = (
@@ -1516,6 +1517,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating{
 	icon_state = "dmg1"
 	},
@@ -2439,6 +2441,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/ammo_casing/pistol/magnum,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "rb" = (

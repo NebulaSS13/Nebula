@@ -14,7 +14,7 @@
 /turf/unsimulated/beach/water
 	name = "Water"
 	icon_state = "water"
-	turf_flags = TURF_IS_WET
+	turf_flags = TURF_IS_WET | TURF_IS_HOLOMAP_PATH
 
 /turf/unsimulated/beach/water/Initialize(var/ml)
 	. = ..()

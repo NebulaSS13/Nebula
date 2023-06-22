@@ -15,7 +15,7 @@
 	material_health_multiplier = 0.5
 	stack_merge_type           = /obj/item/stack/material/ore
 	randpixel                  = 8
-	applies_material_name      = FALSE //Handled in override
+	material_alteration        = MAT_FLAG_ALTERATION_COLOR //Name is handled in override
 	randpixel                  = 6
 	is_spawnable_type          = TRUE
 

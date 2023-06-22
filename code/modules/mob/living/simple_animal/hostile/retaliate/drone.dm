@@ -246,7 +246,7 @@
 			C.SetName("Corrupted drone morality core")
 			C.origin_tech = "{'[TECH_ESOTERIC]':[rand(3, 6)]}"
 
-	..()
+	return ..()
 
 /obj/item/projectile/beam/drone
 	damage = 15

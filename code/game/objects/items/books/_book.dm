@@ -57,7 +57,7 @@
 	if(carved == 1)
 		if(!store)
 			if(W.w_class < ITEM_SIZE_NORMAL)
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				store = W
 				to_chat(user, "<span class='notice'>You put [W] in [title].</span>")
@@ -121,7 +121,7 @@
 		..()
 
 /obj/item/book/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(user.zone_sel.selecting == BP_EYES)
+	if(user.get_target_zone() == BP_EYES)
 		user.visible_message("<span class='notice'>You open up the book and show it to [M]. </span>", \
 			"<span class='notice'> [user] opens up a book and shows it to [M]. </span>")
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam

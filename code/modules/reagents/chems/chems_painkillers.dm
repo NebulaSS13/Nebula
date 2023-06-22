@@ -1,28 +1,45 @@
 /decl/material/liquid/painkillers
-	name = "painkillers"
+	name = "mild painkillers"
 	uid = "chem_painkillers"
-	lore_text = "A highly effective opioid painkiller. Do not mix with alcohol."
-	taste_description = "sourness"
-	color = "#cb68fc"
-	overdose = 30
+	lore_text = "A mild painkiller, used to treat headaches and other low-grade pain."
+	taste_description = "bitterness"
+	color = "#c8a5dc"
+	overdose = 60
 	scannable = 1
 	metabolism = 0.05
 	ingest_met = 0.02
 	flags = IGNORE_MOB_SIZE
 	value = 1.8
-	var/pain_power = 80 //magnitude of painkilling effect
-	var/effective_dose = 0.5 //how many units it need to process to reach max power
-	var/additional_effect_threshold = 20 // cumulative dosage at which slowdown and drowsiness are applied
-	var/sedation = 0 //how strong is this chemical as a sedative
-	var/breathloss_severity = 1 //how strong will breathloss related effects be
+	/// Magnitude of painkilling effect
+	var/pain_power = 35
+	/// How many units it need to process to reach max power
+	var/effective_dose = 0.5
+	/// Cumulative dosage at which slowdown and drowsiness are applied
+	var/additional_effect_threshold = 20
+	/// how strong is this chemical as a sedative
+	var/sedation = 0
+	/// how strong will breathloss related effects be
+	var/breathloss_severity = 1
 	var/slowdown_severity = 1.2
 	var/blurred_vision = 0.5
 	var/stuttering_severity = 0.5
 	var/slur_severity = 0
-	var/confusion_severity = 0.2 //confusion randomizes your movement
-	var/weakness_severity = 0 //weakness makes you remain floored
+	/// confusion randomizes your movement
+	var/confusion_severity = 0.2
+	/// weakness makes you remain floored
+	var/weakness_severity = 0
 	var/dizziness_severity = 1
-	var/narcotic = TRUE
+	var/narcotic = FALSE
+
+/decl/material/liquid/painkillers/strong
+	name = "strong painkillers"
+	lore_text = "A highly effective opioid painkiller. Do not mix with alcohol."
+	taste_description = "sourness"
+	uid = "chem_painkillers_strong"
+	pain_power = 80
+	color = "#cb68fc"
+	overdose = 30
+	narcotic = TRUE
 
 /decl/material/liquid/painkillers/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -95,14 +112,15 @@
 
 /decl/material/liquid/painkillers/affect_overdose(var/mob/living/M)
 	..()
-	if(!narcotic)
-		return
-	M.set_hallucination(120, 30)
-	SET_STATUS_MAX(M, STAT_DRUGGY, 10)
 	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
-	M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*2) //ODing on opiates can be deadly.
-	if(isboozed(M))
-		M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*4) //Don't drink and OD on opiates folks
+	if(narcotic)
+		SET_STATUS_MAX(M, STAT_DRUGGY, 10)
+		M.set_hallucination(120, 30)
+		M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*2) //ODing on opiates can be deadly.
+		if(isboozed(M))
+			M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*4) //Don't drink and OD on opiates folks
+	else
+		M.add_chemical_effect(CE_TOXIN, 1)
 
 /decl/material/liquid/painkillers/proc/isboozed(var/mob/living/carbon/M)
 	. = 0

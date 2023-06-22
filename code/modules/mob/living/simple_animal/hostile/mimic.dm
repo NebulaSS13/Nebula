@@ -139,7 +139,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 /mob/living/simple_animal/hostile/mimic/Destroy()
 	copy_of = null
 	creator = null
-	..()
+	return ..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping
 	wander = 0
@@ -161,7 +161,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 
 /mob/living/simple_animal/hostile/mimic/sleeping/attack_hand()
 	trigger()
-	..()
+	return ..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping/DestroySurroundings()
 	if(awake)

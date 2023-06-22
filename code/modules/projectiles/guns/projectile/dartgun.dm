@@ -42,7 +42,7 @@
 		icon_state = get_world_inventory_state()
 
 /obj/item/gun/projectile/dartgun/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	if(overlay && (slot in user_mob?.held_item_slots) && ammo_magazine)
+	if(overlay && (slot in user_mob?.get_held_item_slots()) && ammo_magazine)
 		overlay.icon_state += "-[clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
 	. = ..()
 
@@ -75,7 +75,7 @@
 	if(beakers.len >= max_beakers)
 		to_chat(user, "<span class='warning'>[src] already has [max_beakers] beakers in it - another one isn't going to fit!</span>")
 		return
-	if(!user.unEquip(B, src))
+	if(!user.try_unequip(B, src))
 		return
 	beakers |= B
 	user.visible_message("\The [user] inserts \a [B] into [src].", "<span class='notice'>You slot [B] into [src].</span>")

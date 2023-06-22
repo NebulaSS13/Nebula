@@ -51,5 +51,5 @@
 	faction = "cult"
 	supernatural = 1
 
-/mob/living/simple_animal/hostile/scarybat/cult/cultify()
+/mob/living/simple_animal/hostile/scarybat/cult/on_defilement()
 	return

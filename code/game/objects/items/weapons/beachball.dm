@@ -14,5 +14,5 @@
 	material = /decl/material/solid/plastic
 
 /obj/item/beach_ball/afterattack(atom/target, mob/user)
-	if(user.unEquip(src))
+	if(user.try_unequip(src))
 		src.throw_at(target, throw_range, throw_speed, user)

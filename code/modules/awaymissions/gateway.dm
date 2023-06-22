@@ -106,14 +106,16 @@
 
 
 /obj/machinery/gateway/centerstation/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
 	if(!ready)
 		detect()
-		return
+		return TRUE
 	if(!active)
 		toggleon(user)
-		return
+		return TRUE
 	toggleoff()
-
+	return TRUE
 
 //okay, here's the good teleporting stuff
 /obj/machinery/gateway/centerstation/Bumped(atom/movable/M)
@@ -198,13 +200,16 @@
 
 
 /obj/machinery/gateway/centeraway/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
 	if(!ready)
 		detect()
-		return
+		return TRUE
 	if(!active)
 		toggleon(user)
-		return
+		return TRUE
 	toggleoff()
+	return TRUE
 
 /obj/machinery/gateway/centeraway/Bumped(atom/movable/M)
 	if(!ready)	return

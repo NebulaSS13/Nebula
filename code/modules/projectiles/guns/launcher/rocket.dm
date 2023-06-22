@@ -26,7 +26,7 @@
 /obj/item/gun/launcher/rocket/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/ammo_casing/rocket))
 		if(rockets.len < max_rockets)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			rockets += I
 			to_chat(user, "<span class='notice'>You put the rocket in [src].</span>")
@@ -43,6 +43,6 @@
 		return M
 	return null
 
-/obj/item/gun/launcher/rocket/handle_post_fire(mob/user, atom/target)
-	log_and_message_admins("fired a rocket from a rocket launcher ([src.name]) at [target].")
+/obj/item/gun/launcher/rocket/handle_post_fire(atom/movable/firer, atom/target)
+	log_and_message_admins("fired a rocket from a rocket launcher ([src.name]) at [target].", firer)
 	..()

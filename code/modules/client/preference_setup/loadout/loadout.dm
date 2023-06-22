@@ -417,28 +417,39 @@ var/global/list/gear_datums = list()
 	if(metadata && !islist(metadata))
 		PRINT_STACK_TRACE("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
 
-/decl/loadout_option/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_and_validate_item(H, metadata)
+/decl/loadout_option/proc/spawn_on_mob(mob/living/carbon/human/wearer, metadata)
+	var/obj/item/item = spawn_and_validate_item(wearer, metadata)
 	if(!item)
 		return
 
-	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
+	var/obj/item/old_item = wearer.get_equipped_item(slot)
+	if(wearer.equip_to_slot_if_possible(item, slot, del_on_fail = TRUE, force = TRUE, delete_old_item = FALSE))
 		. = item
+		if(!old_item)
+			return
+		wearer.unequip(old_item)
+		if(old_item.type != item.type)
+			place_in_storage_or_drop(wearer, old_item)
+		else
+			qdel(old_item)
 
-/decl/loadout_option/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_and_validate_item(H, metadata)
+/decl/loadout_option/proc/spawn_in_storage_or_drop(mob/living/carbon/human/wearer, metadata)
+	var/obj/item/item = spawn_and_validate_item(wearer, metadata)
 	if(!item)
 		return
 
-	var/atom/placed_in = H.equip_to_storage(item)
+	place_in_storage_or_drop(wearer, item)
+
+/decl/loadout_option/proc/place_in_storage_or_drop(mob/living/carbon/human/wearer, obj/item/item)
+	var/atom/placed_in = wearer.equip_to_storage(item)
 	if(placed_in)
-		to_chat(H, "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>")
-	else if(H.equip_to_appropriate_slot(item))
-		to_chat(H, "<span class='notice'>Placing \the [item] in your inventory!</span>")
-	else if(H.put_in_hands(item))
-		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
+		to_chat(wearer, SPAN_NOTICE("Placing \the [item] in your [placed_in.name]!"))
+	else if(wearer.equip_to_appropriate_slot(item))
+		to_chat(wearer, SPAN_NOTICE("Placing \the [item] in your inventory!"))
+	else if(wearer.put_in_hands(item))
+		to_chat(wearer, SPAN_NOTICE("Placing \the [item] in your hands!"))
 	else
-		to_chat(H, "<span class='danger'>Dropping \the [item] on the ground!</span>")
+		to_chat(wearer, SPAN_DANGER("Dropping \the [item] on the ground!"))
 
 /decl/loadout_option/proc/spawn_and_validate_item(mob/living/carbon/human/H, metadata)
 	PRIVATE_PROC(TRUE)

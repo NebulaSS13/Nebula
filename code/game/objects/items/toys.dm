@@ -41,7 +41,8 @@
 	icon_state                    = "waterballoon-e"
 	item_state                    = "balloon-empty"
 	w_class                       = ITEM_SIZE_TINY
-	item_flags                    = ITEM_FLAG_NO_BLUDGEON | ITEM_FLAG_HOLLOW
+	item_flags                    = ITEM_FLAG_NO_BLUDGEON
+	obj_flags                     = OBJ_FLAG_HOLLOW
 	atom_flags                    = ATOM_FLAG_OPEN_CONTAINER
 	hitsound                      = 'sound/weapons/throwtap.ogg'
 	throw_speed                   = 4
@@ -225,18 +226,17 @@
 //all credit to skasi for toy mech fun ideas
 /obj/item/toy/prize/attack_self(mob/user)
 	if(cooldown < world.time - 8)
-		to_chat(user, "<span class='notice'>You play with [src].</span>")
+		to_chat(user, SPAN_NOTICE("You play with \the [src]."))
 		playsound(user, 'sound/mecha/mechstep.ogg', 20, 1)
 		cooldown = world.time
 
 /obj/item/toy/prize/attack_hand(mob/user)
-	if(loc == user)
-		if(cooldown < world.time - 8)
-			to_chat(user, "<span class='notice'>You play with [src].</span>")
-			playsound(user, 'sound/mecha/mechturn.ogg', 20, 1)
-			cooldown = world.time
-			return
-	..()
+	if(loc != user || cooldown >= world.time - 8)
+		return ..()
+	to_chat(user, SPAN_NOTICE("You play with \the [src]."))
+	playsound(user, 'sound/mecha/mechturn.ogg', 20, 1)
+	cooldown = world.time
+	return TRUE
 
 /obj/item/toy/prize/powerloader
 	name = "toy ripley"
@@ -550,6 +550,8 @@
 	var/phrase = "I don't want to exist anymore!"
 
 /obj/structure/plushie/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if(user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'><b>\The [user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
@@ -559,7 +561,8 @@
 		user.visible_message("<span class='warning'><b>\The [user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
 	else
 		user.visible_message("<span class='notice'><b>\The [user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
-		visible_message("[src] says, \"[phrase]\"")
+		audible_message("<span class='game say'><span class='name'>\The [src]</span> says, <span class='message'><span class='body'>\"[phrase]\"</span></span></span>")
+	return TRUE
 
 /obj/structure/plushie/ian
 	name = "plush corgi"
@@ -691,6 +694,8 @@
 	anchored = 1
 
 /obj/item/toy/ringbell/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] rings \the [src], signalling the beginning of the contest.</span>")
 		playsound(user.loc, 'sound/items/oneding.ogg', 60)
@@ -700,6 +705,7 @@
 	else if (user.a_intent == I_HURT)
 		user.visible_message("<span class='warning'>[user] rings \the [src] repeatedly, signalling a disqualification!</span>")
 		playsound(user.loc, 'sound/items/manydings.ogg', 60)
+	return TRUE
 
 //Office Desk Toys
 

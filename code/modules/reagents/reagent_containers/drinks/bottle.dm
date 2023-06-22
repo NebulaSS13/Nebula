@@ -3,7 +3,7 @@
 //Bottles now weaken and break when smashed on people's heads. - Giacom
 
 //#TODO: Maybe merge this with /obj/item/glass/bottle?
-/obj/item/chems/drinks/bottle 
+/obj/item/chems/drinks/bottle
 	amount_per_transfer_from_this = 10
 	volume = 100
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
@@ -114,7 +114,7 @@
 /obj/item/chems/drinks/bottle/proc/insert_rag(obj/item/chems/glass/rag/R, mob/user)
 	if(!isGlass || rag) return
 
-	if(user.unEquip(R))
+	if(user.try_unequip(R))
 		to_chat(user, SPAN_NOTICE("You stuff [R] into [src]."))
 		rag = R
 		rag.forceMove(src)
@@ -214,8 +214,8 @@
 			sleep(sleep_not_stacking) //Not stacking
 			stop_spin_bottle = FALSE
 
-/obj/item/chems/drinks/bottle/pickup(mob/living/user)
-	animate(src, transform = null, time = 0) //Restore bottle to its original position
+/obj/item/chems/drinks/bottle/on_picked_up(mob/living/user)
+	animate(src, transform = null, time = 0) //Restore bottle to its original position - animate() is needed to interrupt SpinAnimation()
 
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/broken_bottle
@@ -231,7 +231,7 @@
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = 1
 	edge = 0
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/glass
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 

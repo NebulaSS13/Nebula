@@ -34,7 +34,11 @@
 /datum/unit_test/observation/proc/sanity_check_events(var/phase)
 	for(var/entry in global.all_observable_events)
 		var/decl/observ/event = entry
-		if(null in event.global_listeners)
+		var/null_count = 0
+		for(var/null_candidate in event.global_listeners)
+			if(isnull(event.global_listeners[null_candidate]))
+				null_count++
+		if(null_count > 0)
 			fail("[phase]: [event] - The global listeners list contains a null entry.")
 
 		for(var/event_source in event.event_sources)
@@ -320,10 +324,18 @@
 	qdel(O)
 
 	var/decl/observ/name_set/name_set_event = GET_DECL(/decl/observ/name_set)
-	if(null in name_set_event.global_listeners)
-		fail("The global listener list contains a null entry.")
+	var/null_count = 0
+	for(var/null_candidate in name_set_event.global_listeners)
+		if (isnull(name_set_event.event_sources[null_candidate]))
+			null_count++
+	if(null_count > 0)
+		fail("The global listener list contains a null value.")
 	else
-		pass("The global listener list does not contain a null entry.")
+		pass("The global listener list does not contain a null value.")
+	if(name_set_event.global_listeners && (null in name_set_event.global_listeners))
+		fail("The global listener list contains a null key.")
+	else
+		pass("The global listener list does not contain a null key.")
 
 	return 1
 
@@ -339,10 +351,18 @@
 	qdel(event_source)
 
 	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
-	if(null in moved_event.event_sources)
-		fail("The event source list contains a null entry.")
+	var/null_count = 0
+	for(var/null_candidate in moved_event.event_sources)
+		if (isnull(moved_event.event_sources[null_candidate]))
+			null_count++
+	if(null_count > 0)
+		fail("The event source list contains a null value.")
 	else
-		pass("The event source list does not contain a null entry.")
+		pass("The event source list does not contain a null value.")
+	if(moved_event.event_sources && (null in moved_event.event_sources))
+		fail("The event source list contains a null key.")
+	else
+		pass("The event source list does not contain a null key.")
 
 	qdel(listener)
 	return 1
@@ -360,10 +380,17 @@
 
 	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
 	var/listeners = moved_event.event_sources[event_source]
-	if(listeners && (null in listeners))
-		fail("The event source listener list contains a null entry.")
+	var/null_count = 0
+	for(var/null_candidate in listeners)
+		if (isnull(listeners[null_candidate]))
+			null_count++
+	if(null_count > 0)
+		fail("The event source listener list contains a null value.")
 	else
-		pass("The event source listener list does not contain a null entry.")
-
+		pass("The event source listener list does not contain a null value.")
+	if(listeners && (null in listeners))
+		fail("The event source listener list contains a null key.")
+	else
+		pass("The event source listener list does not contain a null key.")
 	qdel(event_source)
 	return 1

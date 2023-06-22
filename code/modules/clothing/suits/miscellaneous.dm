@@ -132,7 +132,7 @@
 			var/mob/living/carbon/C = user
 			var/obj/item/cuffs = C.get_equipped_item(slot_handcuffed_str)
 			if(cuffs)
-				C.unEquip(cuffs)
+				C.try_unequip(cuffs)
 		user.drop_held_items()
 
 /obj/item/clothing/suit/ianshirt
@@ -145,8 +145,7 @@
 /obj/item/clothing/suit/leathercoat
 	name = "longcoat"
 	icon = 'icons/clothing/suit/leathercoat.dmi'
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	material_armor_multiplier = 0.8
 	material = /decl/material/solid/leather
 	var/shine

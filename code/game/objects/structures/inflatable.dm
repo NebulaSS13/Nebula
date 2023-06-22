@@ -74,14 +74,6 @@
 /obj/structure/inflatable/Process()
 	check_environment()
 
-/obj/structure/inflatable/show_examined_damage(mob/user, var/perc)
-	if(perc >= 1)
-		to_chat(user, SPAN_NOTICE("It's undamaged."))
-	else if(perc > 0.5)
-		to_chat(user, SPAN_WARNING("It's showing signs of damage."))
-	else if(perc > 0)
-		to_chat(user, SPAN_DANGER("It's heavily damaged!"))
-
 /obj/structure/inflatable/proc/check_environment()
 	var/min_pressure = INFINITY
 	var/max_pressure = 0
@@ -113,9 +105,6 @@
 			physically_destroyed()
 		else if(severity == 2 || (severity == 3 && prob(50)))
 			deflate(TRUE)
-
-/obj/structure/inflatable/attack_hand(mob/user)
-	add_fingerprint(user)
 
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
 	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && (health < maxhealth)
@@ -207,12 +196,14 @@
 			return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/attack_hand(mob/user)
+	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group)
 		return state
-	if(istype(mover, /obj/effect/beam))
+	if(istype(mover, /obj/effect/ir_beam))
 		return !opacity
 	return !density
 
@@ -308,6 +299,6 @@
 
 /obj/item/storage/briefcase/inflatable/WillContain()
 	return list(
-			/obj/item/inflatable/door = 2, 
+			/obj/item/inflatable/door = 2,
 			/obj/item/inflatable      = 3
 		)

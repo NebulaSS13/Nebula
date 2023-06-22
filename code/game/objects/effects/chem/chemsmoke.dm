@@ -11,8 +11,6 @@
 	var/turf/destination
 
 /obj/effect/effect/smoke/chem/Initialize(mapload, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
-	time_to_live = smoke_duration
-
 	. = ..()
 
 	create_reagents(500)
@@ -36,8 +34,7 @@
 /obj/effect/effect/smoke/chem/Destroy()
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	set_opacity(0)
-	// TODO - fadeOut() sleeps.  Sleeping in /Destroy is Bad, this needs to be fixed.
-	fadeOut()
+	set_density(0)
 	return ..()
 
 /obj/effect/effect/smoke/chem/Move()
@@ -64,14 +61,15 @@
 				reagents.splash(AM, splash_amount, copy = 1)
 
 // Fades out the smoke smoothly using it's alpha variable.
-/obj/effect/effect/smoke/chem/proc/fadeOut(var/frames = 16)
-	if(!alpha) return //already transparent
-
-	frames = max(frames, 1) //We will just assume that by 0 frames, the coder meant "during one frame".
-	var/alpha_step = round(alpha / frames)
-	while(alpha > 0)
-		alpha = max(0, alpha - alpha_step)
-		sleep(world.tick_lag)
+/obj/effect/effect/smoke/chem/end_of_life()
+	if(QDELETED(src))
+		return
+	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
+	set_opacity(0)
+	set_density(0)
+	animate(src, alpha = 0, time = 0.5 SECONDS)
+	sleep(0.5 SECONDS)
+	..()
 
 /////////////////////////////////////////////
 // Chem Smoke Effect System

@@ -33,7 +33,7 @@
 		if(!do_mob(user, M, 2 SECONDS))
 			return
 
-		if(user.unEquip(src))
+		if(user.try_unequip(src))
 			if(!M.equip_to_slot_if_possible(src, slot_wear_suit_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
 				user.put_in_active_hand(src)
 			return 1
@@ -46,7 +46,7 @@
 
 /obj/item/auto_cpr/attack_hand(mob/user)
 	skilled_setup = user.skill_check(SKILL_ANATOMY, SKILL_BASIC) && user.skill_check(SKILL_MEDICAL, SKILL_BASIC)
-	..()
+	return ..()
 
 /obj/item/auto_cpr/dropped(mob/user)
 	STOP_PROCESSING(SSobj,src)
@@ -57,7 +57,7 @@
 		return PROCESS_KILL
 
 	var/mob/living/carbon/human/H = loc
-	if(H.get_inventory_slot(src) != slot_wear_suit_str)
+	if(H.get_equipped_slot_for_item(src) != slot_wear_suit_str)
 		return PROCESS_KILL
 
 	if(world.time > last_pump + 15 SECONDS)

@@ -124,7 +124,8 @@ var/global/list/gamemode_cache = list()
 	var/max_character_aspects = 5
 
 	var/welder_vision = 1
-	var/generate_map = 0
+	///If false, skips all level generation.
+	var/roundstart_level_generation = 1
 	var/no_click_cooldown = 0
 
 	//Used for modifying movement speed for mobs.
@@ -253,6 +254,9 @@ var/global/list/gamemode_cache = list()
 	var/no_throttle_localhost
 
 	var/dex_malus_brainloss_threshold = 30 //The threshold of when brainloss begins to affect dexterity.
+	var/grant_default_darksight = FALSE
+	var/default_darksight_range = 2
+	var/default_darksight_effectiveness = 0.05
 
 	var/static/list/protected_vars = list(
 		"comms_password",
@@ -263,6 +267,17 @@ var/global/list/gamemode_cache = list()
 	var/expanded_alt_interactions = FALSE // Set to true to enable look, grab, drop, etc. in the alt interaction menu.
 
 	var/show_typing_indicator_for_whispers = FALSE // Do whispers show typing indicators overhead?
+
+	// Stress-related healing vars.
+	var/adjust_healing_from_stress =       FALSE
+	var/stress_shock_recovery_constant =   0.5
+	var/stress_healing_recovery_constant = 0.3
+	var/stress_blood_recovery_constant =   0.3
+
+	var/exoplanet_min_day_duration = 10 MINUTES
+	var/exoplanet_max_day_duration = 40 MINUTES
+	///If true, exoplanets won't have daycycles
+	var/disable_daycycle = FALSE
 
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
@@ -398,8 +413,8 @@ var/global/list/gamemode_cache = list()
 				if ("log_runtime")
 					config.log_runtime = 1
 
-				if ("generate_asteroid")
-					config.generate_map = 1
+				if ("roundstart_level_generation")
+					config.roundstart_level_generation = text2num(value)
 
 				if ("no_click_cooldown")
 					config.no_click_cooldown = 1
@@ -904,6 +919,30 @@ var/global/list/gamemode_cache = list()
 					config.use_loyalty_implants = 1
 				if("dexterity_malus_brainloss_threshold")
 					config.dex_malus_brainloss_threshold = text2num(value)
+				if("grant_default_darksight")
+					config.grant_default_darksight = TRUE
+				if("default_darksight_range")
+					config.default_darksight_range = max(text2num(value), 0)
+				if("default_darksight_effectiveness")
+					config.default_darksight_effectiveness = clamp(text2num(value), 0, 1)
+
+				if("adjust_healing_from_stress")
+					config.adjust_healing_from_stress = TRUE
+				if("stress_shock_recovery_constant")
+					config.stress_shock_recovery_constant = text2num(value)
+				if("stress_healing_recovery_constant")
+					config.stress_healing_recovery_constant = text2num(value)
+				if("stress_blood_recovery_constant")
+					config.stress_blood_recovery_constant = text2num(value)
+
+
+
+				if("exoplanet_min_day_duration")
+					config.exoplanet_min_day_duration = text2num(value)
+				if("exoplanet_max_day_duration")
+					config.exoplanet_max_day_duration = text2num(value)
+				if("disable_daycycle")
+					config.disable_daycycle = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

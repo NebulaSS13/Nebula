@@ -42,7 +42,7 @@
 	prefix = "mods/content/government/away_sites/"
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
 	cost = 2
-	generate_mining_by_z = list(1, 2)
+	level_data_type = /datum/level_data/mining_level
 	area_usage_test_exempted_root_areas = list(/area/icarus)
 	area_coherency_test_exempt_areas = list(/area/icarus/vessel, /area/icarus/open)
 	apc_test_exempt_areas = list(
@@ -66,14 +66,15 @@
 	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/structure/broken_cryo/icarus
-	remains_type = /obj/item/icarus/dead_personnel
+	remains_type = /obj/item/dead_personnel
 
-/obj/item/icarus/dead_personnel
+/obj/item/dead_personnel
 	name = "partial skeleton remains"
 	desc = "Human bones wrapped in the shredded remnants of a familiar black uniform."
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "dead_personnel"
 	w_class = ITEM_SIZE_LARGE//pile of bones
+	material = /decl/material/solid/bone
 
 /obj/item/disk/icarus
 	name = "black box backup disk"

@@ -232,7 +232,7 @@
 	base_parry_chance = 0 //Irrelevant for exosuits, revise if this changes
 	max_force = 25
 	material_force_multiplier = 0.75 // Equals 20 AP with 25 force
-	unbreakable = TRUE //Else we need a whole system for replacement blades
+	max_health = ITEM_HEALTH_NO_DAMAGE //Else we need a whole system for replacement blades
 
 /obj/item/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
@@ -265,7 +265,7 @@
 			playsound(E, 'sound/mecha/mechmove03.ogg', 35, 1)
 			if (do_after(E, 1.2 SECONDS, get_turf(user)) && E && MC)
 				for (var/mob/living/M in orange(1, E))
-					attack(M, E, E.zone_sel.selecting, FALSE)
+					attack(M, E, E.get_target_zone(), FALSE)
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
 				playsound(E, 'sound/mecha/mechturn.ogg', 40, 1)
 

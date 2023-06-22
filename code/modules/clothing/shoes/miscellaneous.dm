@@ -15,12 +15,12 @@
 	name = "\improper SWAT boots"
 	desc = "When you want to turn up the heat."
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_RIFLE,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 	item_flags = ITEM_FLAG_NOSLIP
 	siemens_coefficient = 0.6
@@ -28,21 +28,21 @@
 /obj/item/clothing/shoes/jackboots/swat/combat //Basically SWAT shoes combined with galoshes.
 	name = "combat boots"
 	desc = "When you REALLY want to turn up the heat."
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#694e30"
 	force = 5
 
 /obj/item/clothing/shoes/jackboots/jungleboots
 	name = "jungle boots"
 	desc = "A pair of durable brown boots. Waterproofed for use planetside."
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#694e30"
 	artificail_shine = 0
 
 /obj/item/clothing/shoes/jackboots/desertboots
 	name = "desert boots"
 	desc = "A pair of durable tan boots. Designed for use in hot climates."
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#9c8c6a"
 	artificail_shine = 0
 
@@ -54,7 +54,7 @@
 /obj/item/clothing/shoes/jackboots/tactical
 	name = "tactical boots"
 	desc = "Tan boots with extra padding and armor."
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	color = "#9c8c6a"
 	artificail_shine = 0
 

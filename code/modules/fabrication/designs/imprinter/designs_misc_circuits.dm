@@ -68,17 +68,14 @@
 /datum/fabricator_recipe/imprinter/circuit/robocontrol
 	path = /obj/item/stock_parts/circuitboard/robotics
 
-/datum/fabricator_recipe/imprinter/circuit/comm_monitor
-	path = /obj/item/stock_parts/circuitboard/comm_monitor
-
-/datum/fabricator_recipe/imprinter/circuit/comm_server
-	path = /obj/item/stock_parts/circuitboard/comm_server
-
 /datum/fabricator_recipe/imprinter/circuit/message_monitor
 	path = /obj/item/stock_parts/circuitboard/message_monitor
 
 /datum/fabricator_recipe/imprinter/circuit/message_server
-	path = /obj/item/stock_parts/circuitboard/telecomms/message_server
+	path = /obj/item/stock_parts/circuitboard/message_server
+
+/datum/fabricator_recipe/imprinter/circuit/telecomms_hub
+	path = /obj/item/stock_parts/circuitboard/telecomms_hub
 
 /datum/fabricator_recipe/imprinter/circuit/guestpass
 	path = /obj/item/stock_parts/circuitboard/guestpass
@@ -266,6 +263,9 @@
 /datum/fabricator_recipe/imprinter/circuit/design_console
 	path = /obj/item/stock_parts/circuitboard/design_console
 
+/datum/fabricator_recipe/imprinter/circuit/design_database
+	path = /obj/item/stock_parts/circuitboard/design_database
+
 /datum/fabricator_recipe/imprinter/circuit/sensors
 	path = /obj/item/stock_parts/circuitboard/sensors
 
@@ -319,24 +319,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/disperser_console
 	path = /obj/item/stock_parts/circuitboard/disperser
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_server
-	path = /obj/item/stock_parts/circuitboard/telecomms/server
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_processor
-	path = /obj/item/stock_parts/circuitboard/telecomms/processor
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_bus
-	path = /obj/item/stock_parts/circuitboard/telecomms/bus
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_hub
-	path = /obj/item/stock_parts/circuitboard/telecomms/hub
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_broadcaster
-	path = /obj/item/stock_parts/circuitboard/telecomms/broadcaster
-
-/datum/fabricator_recipe/imprinter/circuit/tcom_receiver
-	path = /obj/item/stock_parts/circuitboard/telecomms/receiver
 
 /datum/fabricator_recipe/imprinter/circuit/comms_relay
 	path = /obj/item/stock_parts/circuitboard/commsrelay
@@ -443,6 +425,9 @@
 /datum/fabricator_recipe/imprinter/circuit/merchant_pad
 	path = /obj/item/stock_parts/circuitboard/merchant_pad
 
+/datum/fabricator_recipe/imprinter/circuit/radiocarbon_spectrometer
+	path = /obj/item/stock_parts/circuitboard/radiocarbon_spectrometer
+
 /datum/fabricator_recipe/imprinter/circuit/jukebox
 	path = /obj/item/stock_parts/circuitboard/jukebox
 
@@ -470,11 +455,17 @@
 /datum/fabricator_recipe/imprinter/circuit/router_wall_mounted
 	path = /obj/item/stock_parts/circuitboard/router/wall_mounted
 
+/datum/fabricator_recipe/imprinter/circuit/modem
+	path = /obj/item/stock_parts/circuitboard/modem
+
 /datum/fabricator_recipe/imprinter/circuit/relay
 	path = /obj/item/stock_parts/circuitboard/relay
 
 /datum/fabricator_recipe/imprinter/circuit/relay_wall_mounted
 	path = /obj/item/stock_parts/circuitboard/relay/wall_mounted
+
+/datum/fabricator_recipe/imprinter/circuit/long_range_relay
+	path = /obj/item/stock_parts/circuitboard/relay/long_range
 
 /datum/fabricator_recipe/imprinter/circuit/inertial_damper
 	path = /obj/item/stock_parts/circuitboard/inertial_damper
@@ -487,3 +478,9 @@
 
 /datum/fabricator_recipe/imprinter/circuit/photocopier
 	path = /obj/item/stock_parts/circuitboard/photocopier
+
+/datum/fabricator_recipe/imprinter/circuit/holomap
+	path = /obj/item/stock_parts/circuitboard/holomap
+
+/datum/fabricator_recipe/imprinter/circuit/geothermal_generator
+	path = /obj/item/stock_parts/circuitboard/geothermal

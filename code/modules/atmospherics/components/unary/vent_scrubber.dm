@@ -200,7 +200,7 @@
 			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
-		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
 	return ..()
 
@@ -249,6 +249,8 @@
 		to_chat(user, "You are too far away to read the gauge.")
 	if(welded)
 		to_chat(user, "It seems welded shut.")
+	if(!(stat & NOPOWER) && use_power && user.skill_check(SKILL_ATMOS,SKILL_BASIC))
+		to_chat(user, "It's running in [scrubbing] mode.")
 
 /obj/machinery/atmospherics/unary/vent_scrubber/refresh()
 	..()

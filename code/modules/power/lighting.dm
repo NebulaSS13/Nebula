@@ -253,7 +253,7 @@
 		if(!istype(W, accepts_light_type))
 			to_chat(user, "This type of light requires a [get_fitting_name()].")
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, "You insert [W].")
 		insert_bulb(W)
@@ -472,7 +472,7 @@
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state

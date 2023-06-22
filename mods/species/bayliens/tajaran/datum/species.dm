@@ -16,6 +16,9 @@
 	name_plural = "Tajaran"
 	base_prosthetics_model = null
 
+	low_light_vision_effectiveness = 0.15
+	low_light_vision_adjustment_speed = 0.3
+
 	description = "A small mammalian carnivore. If you are reading this, you are probably a Tajaran."
 	hidden_from_codex = FALSE
 
@@ -40,7 +43,7 @@
 	)
 
 	flesh_color = "#ae7d32"
-	base_markings = list(/decl/sprite_accessory/marking/tajaran = "#ae7d32")
+	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
 	base_hair_color = "#46321c"
 	base_color = "#ae7d32"
 	base_eye_color = "#00aa00"

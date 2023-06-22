@@ -94,7 +94,7 @@
 	destruction_desc        = "tears"
 	icon_base               = 'icons/turf/walls/solid.dmi'
 	icon_reinf              = 'icons/turf/walls/reinforced.dmi'
-	integrity               = 3
+	integrity               = 10 //Probably don't wanna go below 10, because of the health multiplier on things, that would result in a value smaller than 1.
 	use_reinf_state         = null
 	flags                   = MAT_FLAG_BRITTLE
 	reflectiveness          = MAT_VALUE_DULL
@@ -142,6 +142,13 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
+
+/decl/material/solid/cloth/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
 
 /decl/material/solid/cloth/yellow
 	name = "yellow"
@@ -258,6 +265,7 @@
 	default_solid_form = /obj/item/stack/material/slab
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
+	hitsound = 'sound/effects/squelch1.ogg'
 
 /decl/material/solid/skin
 	name = "skin"
@@ -279,6 +287,7 @@
 	default_solid_form = /obj/item/stack/material/skin
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
+	hitsound = "punch"
 	var/tans_to = /decl/material/solid/leather
 
 /decl/material/solid/skin/generate_recipes(var/reinforce_material)
@@ -286,6 +295,7 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
 	. += new/datum/stack_recipe/shoes(src)
 
 /decl/material/solid/skin/lizard
@@ -455,6 +465,7 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
 	. += new/datum/stack_recipe/shoes(src)
 	. += new/datum/stack_recipe/boots(src)
 

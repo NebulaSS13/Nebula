@@ -94,27 +94,37 @@
 	var/busy=0
 
 /obj/structure/casino/roulette/attack_hand(mob/user)
-	if (busy)
-		to_chat(user,"<span class='notice'>You cannot spin now! \The [src] is already spinning.</span> ")
-		return
-	visible_message("<span class='notice'>\ [user]  spins the roulette and throws inside little ball.</span>")
-	busy = 1
+
+	if(user.a_intent == I_HURT || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+
+	if(busy)
+		to_chat(user, SPAN_WARNING("\The [src] is already spinning."))
+		return TRUE
+
+	visible_message(SPAN_NOTICE("\The [user] spins \the [src] and tosses the ball inside."))
+	busy = TRUE
 	var/n = rand(0,36)
-	var/color = "green"
+	var/result_color = "green"
 	add_fingerprint(user)
 	if ((n>0 && n<11) || (n>18 && n<29))
 		if (n%2)
-			color="red"
+			result_color="red"
 	else
-		color="black"
+		result_color="black"
 	if ( (n>10 && n<19) || (n>28) )
 		if (n%2)
-			color="black"
+			result_color="black"
 	else
-		color="red"
-	spawn(5 SECONDS)
-		visible_message("<span class='notice'>\The [src] stops spinning, the ball landing on [n], [color].</span>")
-		busy=0
+		result_color="red"
+	announce_result(n, result_color)
+	return TRUE
+
+/obj/structure/casino/roulette/proc/announce_result(n, result_color)
+	set waitfor = FALSE
+	sleep(5 SECONDS)
+	visible_message("<span class='notice'>\The [src] stops spinning, the ball landing on [n], [result_color].</span>")
+	busy = FALSE
 
 /obj/structure/casino/roulette_chart
 	name = "roulette chart"

@@ -16,7 +16,7 @@
 	density = 0
 	interact_offline = 1
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':32}, 'EAST':{'x':-24}, 'WEST':{'x':-24}}"
+	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':32}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
 
 	//Used for logging people entering cryosleep and important items they are carrying.
 	var/list/frozen_crew = list()
@@ -85,7 +85,7 @@
 		if(!allow_items) return
 
 		if(frozen_items.len == 0)
-			to_chat(user, "<span class='notice'>There is nothing to recover from storage.</span>")
+			to_chat(user, SPAN_NOTICE("There is nothing to recover from storage."))
 			return TOPIC_HANDLED
 
 		var/obj/item/I = input(user, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
@@ -93,10 +93,10 @@
 			return TOPIC_HANDLED
 
 		if(!(I in frozen_items))
-			to_chat(user, "<span class='notice'>\The [I] is no longer in storage.</span>")
+			to_chat(user, SPAN_NOTICE("\The [I] is no longer in storage."))
 			return TOPIC_HANDLED
 
-		visible_message("<span class='notice'>The console beeps happily as it disgorges \the [I].</span>", range = 3)
+		visible_message(SPAN_NOTICE("The console beeps happily as it disgorges \the [I]."), range = 3)
 
 		I.dropInto(loc)
 		frozen_items -= I
@@ -106,10 +106,10 @@
 		if(!allow_items) return TOPIC_HANDLED
 
 		if(frozen_items.len == 0)
-			to_chat(user, "<span class='notice'>There is nothing to recover from storage.</span>")
+			to_chat(user, SPAN_NOTICE("There is nothing to recover from storage."))
 			return TOPIC_HANDLED
 
-		visible_message("<span class='notice'>The console beeps happily as it disgorges the desired objects.</span>", range = 3)
+		visible_message(SPAN_NOTICE("The console beeps happily as it disgorges the desired objects."), range = 3)
 
 		for(var/obj/item/I in frozen_items)
 			I.dropInto(loc)
@@ -211,21 +211,26 @@
 			B.force_open()
 			break
 
-	var/list/possible_locations = list()
-	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
-	if(istype(O))
-		for(var/obj/effect/overmap/visitable/OO in range(O,2))
-			if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
-				possible_locations |= text2num(level)
+	var/newz
+	if(prob(10))
+		var/list/possible_locations
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
+		if(istype(O))
+			for(var/obj/effect/overmap/visitable/OO in range(O,2))
+				if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/planetoid))
+					LAZYDISTINCTADD(possible_locations, text2num(level))
+		if(length(possible_locations))
+			newz = pick(possible_locations)
+	if(!newz)
+		var/datum/level_data/level = SSmapping.increment_world_z_size(/datum/level_data/space)
+		newz = level.level_z
 
-	var/newz = get_empty_zlevel(/turf/space)
-	if(possible_locations.len && prob(10))
-		newz = pick(possible_locations)
-	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)
-	if(!isspaceturf(nloc))
-		explosion(nloc, 1, 2, 3)
-	playsound(loc,'sound/effects/rocket.ogg',100)
-	forceMove(nloc)
+	if(newz)
+		var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), newz)
+		if(!isspaceturf(nloc))
+			explosion(nloc, 1, 2, 3)
+		playsound(loc,'sound/effects/rocket.ogg',100)
+		forceMove(nloc)
 
 //Don't use these for in-round leaving
 // don't tell me what to do chinsky
@@ -388,8 +393,7 @@
 		control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
-	var/obj/item/radio/announcer = get_global_announcer()
-	announcer.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
+	do_telecomms_announcement(src, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 
 	//This should guarantee that ghosts don't spawn.
 	occupant.ckey = null
@@ -435,7 +439,7 @@
 	if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
 		if(occupant)
-			to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] is in use."))
 			return
 
 		if(!ismob(grab.affecting))
@@ -457,7 +461,7 @@
 	icon_state = base_icon_state
 
 	//Eject any items that aren't meant to be in the pod.
-	var/list/items = contents - component_parts
+	var/list/items = get_contained_external_atoms()
 	if(occupant) items -= occupant
 
 	for(var/obj/item/W in items)
@@ -492,7 +496,7 @@
 			return
 
 		if(src.occupant)
-			to_chat(usr, "<span class='notice'><B>\The [src] is in use.</B></span>")
+			to_chat(usr, SPAN_NOTICE("<B>\The [src] is in use.</B>"))
 			return
 
 		set_occupant(usr)
@@ -527,8 +531,8 @@
 
 	if(occupant.client)
 		if(!silent)
-			to_chat(occupant, "<span class='notice'>[on_enter_occupant_message]</span>")
-			to_chat(occupant, "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>")
+			to_chat(occupant, SPAN_NOTICE("[on_enter_occupant_message]"))
+			to_chat(occupant, SPAN_NOTICE("<b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"))
 		occupant.client.perspective = EYE_PERSPECTIVE
 		occupant.client.eye = src
 	occupant.forceMove(src)
@@ -554,15 +558,18 @@
 	var/remains_type = /obj/item/remains/human
 
 /obj/structure/broken_cryo/attack_hand(mob/user)
-	..()
-	if (closed)
-		to_chat(user, "<span class='notice'>You tug at the glass but can't open it with your hands alone.</span>")
+	. = ..()
+	if(.)
+		return
+	if(closed)
+		to_chat(user, SPAN_NOTICE("You tug at the glass, but can't open it further without a crowbar."))
 	else
-		to_chat(user, "<span class='notice'>The glass is already open.</span>")
+		to_chat(user, SPAN_NOTICE("The glass is already open."))
+	return TRUE
 
 /obj/structure/broken_cryo/attackby(obj/item/W, mob/user)
 	if (busy)
-		to_chat(user, "<span class='notice'>Someone else is attempting to open this.</span>")
+		to_chat(user, SPAN_NOTICE("Someone else is attempting to open this."))
 		return
 	if (closed)
 		if (IS_CROWBAR(W))
@@ -578,7 +585,7 @@
 			var/obj/dead = new remains_type(loc)
 			dead.set_dir(dir) //skeleton is oriented as cryo
 	else
-		to_chat(user, "<span class='notice'>The glass cover is already open.</span>")
+		to_chat(user, SPAN_NOTICE("The glass cover is already open."))
 
 /obj/machinery/cryopod/proc/on_mob_spawn()
 	playsound(src, 'sound/machines/ding.ogg', 30, 1)

@@ -103,7 +103,7 @@
 
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
-		var/mod = (lying + (nutrition / initial(nutrition))) / 2
+		var/mod = (lying + (nutrition / get_max_nutrition())) / 2
 		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
@@ -535,14 +535,6 @@
 		update_eyes()
 		return TRUE
 
-// Check if we should die.
-/mob/living/carbon/human/proc/handle_death_check()
-	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
-		if(!brain || (brain.status & ORGAN_DEAD))
-			return TRUE
-	return species.handle_death_check(src)
-
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
 		return 0
@@ -555,12 +547,6 @@
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		updatehealth()	//TODO
-
-		if(handle_death_check())
-			death()
-			blinded = 1
-			set_status(STAT_SILENCE, 0)
-			return 1
 
 		if(hallucination_power)
 			handle_hallucinations()
@@ -626,18 +612,19 @@
 					total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
 			adjustToxLoss(total_contamination)
 
-		// nutrition decrease
-		if(nutrition > 0)
-			adjust_nutrition(-species.hunger_factor)
-		if(hydration > 0)
-			adjust_hydration(-species.thirst_factor)
-
 		if(stasis_value > 1 && GET_STATUS(src, STAT_DROWSY) < stasis_value * 4)
 			ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
 
 	return 1
+
+/mob/living/carbon/human/handle_nutrition_and_hydration()
+	if(nutrition > 0)
+		adjust_nutrition(-species.hunger_factor)
+	if(hydration > 0)
+		adjust_hydration(-species.thirst_factor)
+	..()
 
 /mob/living/carbon/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
@@ -842,7 +829,7 @@
 			playsound_local(T,pick(global.scarySounds),50, 1, -1)
 
 	var/area/A = get_area(src)
-	if(client && world.time >= client.played + 600)
+	if(client && world.time >= client.played + 60 SECONDS)
 		A.play_ambience(src)
 	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
 		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
@@ -851,16 +838,22 @@
 	if(mind && mind.changeling)
 		mind.changeling.regenerate()
 
+#define BASE_SHOCK_RECOVERY 1
 /mob/living/carbon/human/proc/handle_shock()
 	if(!can_feel_pain() || (status_flags & GODMODE))
 		shock_stage = 0
 		return
 
+	var/stress_modifier = get_stress_modifier()
+	if(stress_modifier)
+		stress_modifier *= config.stress_shock_recovery_constant
+
 	if(is_asystole())
-		shock_stage = max(shock_stage + 1, 61)
+		shock_stage = max(shock_stage + (BASE_SHOCK_RECOVERY + stress_modifier), 61)
+
 	var/traumatic_shock = get_shock()
 	if(traumatic_shock >= max(30, 0.8*shock_stage))
-		shock_stage += 1
+		shock_stage += (1 + stress_modifier)
 	else if (!is_asystole())
 		shock_stage = min(shock_stage, 160)
 		var/recovery = 1
@@ -868,53 +861,64 @@
 			recovery++
 		if(traumatic_shock < 0.25 * shock_stage)
 			recovery++
-		shock_stage = max(shock_stage - recovery, 0)
+		shock_stage = max(shock_stage - (recovery * (1-stress_modifier)), 0)
 		return
-	if(stat) return 0
 
-	if(shock_stage == 10)
+	if(stat != CONSCIOUS)
+		return
+
+	// If we haven't adjusted by at least one full unit, don't run the message logic below.
+	var/next_rounded_shock_stage = round(shock_stage)
+	if(next_rounded_shock_stage == rounded_shock_stage)
+		return
+
+	rounded_shock_stage = next_rounded_shock_stage
+	if(rounded_shock_stage <= 0)
+		return
+
+	if(rounded_shock_stage == 10)
 		// Please be very careful when calling custom_pain() from within code that relies on pain/trauma values. There's the
 		// possibility of a feedback loop from custom_pain() being called with a positive power, incrementing pain on a limb,
 		// which triggers this proc, which calls custom_pain(), etc. Make sure you call it with nohalloss = TRUE in these cases!
 		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 10, nohalloss = TRUE)
 
-	if(shock_stage >= 30)
-		if(shock_stage == 30)
+	if(rounded_shock_stage >= 30)
+		if(rounded_shock_stage == 30)
 			var/decl/pronouns/G = get_pronouns()
 			visible_message("<b>\The [src]</b> is having trouble keeping [G.his] eyes open.")
 		if(prob(30))
 			SET_STATUS_MAX(src, STAT_BLURRY, 2)
 			SET_STATUS_MAX(src, STAT_STUTTER, 5)
 
-	if (shock_stage >= 60)
-		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
+	if (rounded_shock_stage >= 60)
+		if(rounded_shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
-			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", rounded_shock_stage, nohalloss = TRUE)
 			SET_STATUS_MAX(src, STAT_WEAK, 3)
 
-	if(shock_stage >= 80)
+	if(rounded_shock_stage >= 80)
 		if (prob(5))
-			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", rounded_shock_stage, nohalloss = TRUE)
 			SET_STATUS_MAX(src, STAT_WEAK, 5)
 
-	if(shock_stage >= 120)
+	if(rounded_shock_stage >= 120)
 		if(!HAS_STATUS(src, STAT_PARA) && prob(2))
-			custom_pain("[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!", shock_stage, nohalloss = TRUE)
+			custom_pain("[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!", rounded_shock_stage, nohalloss = TRUE)
 			SET_STATUS_MAX(src, STAT_PARA, 5)
 
-	if(shock_stage == 150)
+	if(rounded_shock_stage == 150)
 		visible_message("<b>[src]</b> can no longer stand, collapsing!")
 
-	if(shock_stage >= 150)
+	if(rounded_shock_stage >= 150)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
+
+#undef BASE_SHOCK_RECOVERY
 
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
 	we only set those statuses and icons upon changes.  Then those HUD items will simply add those pre-made images.
 	This proc below is only called when those HUD elements need to change as determined by the mobs hud_updateflag.
 */
-
-
 /mob/living/carbon/human/proc/handle_hud_list()
 	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]

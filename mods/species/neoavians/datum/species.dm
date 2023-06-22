@@ -19,6 +19,8 @@
 	of Hyperion. Neo-avian naming conventions tend to be a chosen name followed by the species of the person, followed by the location they were hatched."
 	base_prosthetics_model = null
 
+	snow_slowdown_mod = -1
+
 	age_descriptor = /datum/appearance_descriptor/age/neoavian
 	holder_icon = 'mods/species/neoavians/icons/holder.dmi'
 

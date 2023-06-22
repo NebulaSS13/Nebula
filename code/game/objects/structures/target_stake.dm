@@ -9,17 +9,17 @@
 	var/obj/item/target/pinned_target
 
 /obj/structure/target_stake/attackby(var/obj/item/W, var/mob/user)
-	if (!pinned_target && istype(W, /obj/item/target) && user.unEquip(W, get_turf(src)))
+	if (!pinned_target && istype(W, /obj/item/target) && user.try_unequip(W, get_turf(src)))
 		to_chat(user, "<span class='notice'>You slide [W] into the stake.</span>")
 		set_target(W)
 
 /obj/structure/target_stake/attack_hand(var/mob/user)
-	. = ..()
-	if (pinned_target && ishuman(user))
-		var/obj/item/target/T = pinned_target
-		to_chat(user, "<span class='notice'>You take [T] out of the stake.</span>")
-		set_target(null)
-		user.put_in_hands(T)
+	if (!pinned_target || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	to_chat(user, SPAN_NOTICE("You take \the [pinned_target] off the stake."))
+	user.put_in_hands(pinned_target)
+	set_target(null)
+	return TRUE
 
 /obj/structure/target_stake/proc/set_target(var/obj/item/target/T)
 	if (T)
@@ -34,11 +34,12 @@
 		pinned_target = T
 	else
 		set_density(1)
-		pinned_target.set_density(0)
-		pinned_target.layer = OBJ_LAYER
-		events_repository.unregister(/decl/observ/moved, pinned_target, src)
-		events_repository.unregister(/decl/observ/moved, src, pinned_target)
-		pinned_target.stake = null
+		if(pinned_target)
+			pinned_target.set_density(0)
+			pinned_target.layer = OBJ_LAYER
+			events_repository.unregister(/decl/observ/moved, pinned_target, src)
+			events_repository.unregister(/decl/observ/moved, src, pinned_target)
+			pinned_target.stake = null
 		pinned_target = null
 
 /obj/structure/target_stake/Destroy()

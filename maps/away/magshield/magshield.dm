@@ -70,7 +70,10 @@
 		var/turf/T = get_turf(src)
 		var/area/A = get_area(src)
 		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A.proper_name] ([T.x], [T.y], [T.z])")
-		visible_message("<span class='notice'>\the [src] suddenly activates.</span>", "<span class='notice'>Few lightnings jump between [src]'s rotating hands. You feel everything metal being pulled towards \the [src].</span>")
+		visible_message(
+			SPAN_DANGER("\The [src] suddenly activates!"),
+			SPAN_DANGER("Electricity arcs between \the [src]'s rotating spokes as a powerful magnetic field tugs on every metallic object nearby.")
+		)
 		for(var/mob/living/carbon/M in hear(10, get_turf(src)))
 			eye_safety = M.eyecheck()
 			if(eye_safety < FLASH_PROTECTION_MODERATE)
@@ -78,33 +81,36 @@
 				SET_STATUS_MAX(M, STAT_STUN, 2)
 
 /obj/structure/magshield/maggen/attack_hand(mob/user)
-	..()
-	to_chat(user, "<span class='notice'> You don't see how you could turn off \the [src]. You can try to stick something in rotating hands.</span>")
+	SHOULD_CALL_PARENT(FALSE)
+	to_chat(user, SPAN_NOTICE("You don't see how you could turn off \the [src]. You could possibly jam something into the rotating spokes."))
+	return TRUE
 
 /obj/structure/magshield/maggen/attackby(obj/item/W, mob/user)
 	if (being_stopped)
-		to_chat(user, "<span class='notice'> Somebody is already interacting with \the [src].</span>")
-		return
+		to_chat(user, SPAN_WARNING("Somebody is already interacting with \the [src]."))
+		return TRUE
 	if(istype(W, /obj/item/stack/material/rods))
 		var/obj/item/stack/material/rods/R = W
-		to_chat(user, "<span class='notice'> You start to stick [R.singular_name] into rotating hands to make them stuck.</span>")
+		to_chat(user, SPAN_NOTICE("You start to jam \a [R.singular_name] into the rotating spokes."))
 		being_stopped = 1
 		if (!do_after(user, 100, src))
-			to_chat(user, "<span class='notice'> You pull back [R.singular_name].</span>")
+			to_chat(user, SPAN_NOTICE("You pull \the [R.singular_name] away."))
 			being_stopped = 0
-			return
+			return TRUE
 		R.use(1)
-		visible_message("<span class='warning'>\The [src] stops rotating and releases cloud of sparks. Better get to safe distance!</span>")
+		visible_message(SPAN_DANGER("\The [src] stops rotating and releases a cloud of sparks. Better get to a safe distance!"))
 		spark_at(src, amount=10)
 		sleep(50)
-		visible_message("<span class='warning'>\The [src] explodes!</span>")
+		visible_message(SPAN_DANGER("\The [src] explodes!"))
 		var/turf/T = get_turf(src)
 		explosion(T, 2, 3, 4, 10, 1)
 		empulse(src, heavy_range*2, lighter_range*2, 1)
 		qdel(src)
 	if(istype(W, /obj/item/mop))
-		to_chat(user, "<span class='notice'> You stick [W] into rotating hands. It breaks to smallest pieces.</span>")
+		to_chat(user, SPAN_NOTICE("You stick \the [W] into the rotating spokes, and it immediately breaks into tiny pieces."))
 		qdel(W)
+		return TRUE
+	return ..()
 
 /obj/structure/magshield/rad_sensor
 	name = "radiation sensor"

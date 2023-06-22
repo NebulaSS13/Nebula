@@ -3,11 +3,11 @@
 	desc = "A dark hood with blood-red trim. Something about the fabric blocks more light than it should."
 	icon = 'icons/clothing/head/fiend_hood.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL, 
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 	flags_inv = HIDEEARS | BLOCK_HEAD_HAIR
@@ -18,11 +18,11 @@
 	icon = 'icons/clothing/suit/wizard/servant/fiend_cowl.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT, 
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 
 /obj/item/clothing/under/lawyer/fiendsuit

@@ -7,7 +7,8 @@
 		icon_state += "-sleeping"
 	else
 
-		add_overlay(emissive_overlay(icon = icon, icon_state = "[icon_state]-eyes"))	
+		add_overlay(emissive_overlay(icon = icon, icon_state = "[icon_state]-eyes"))
+		z_flags |= ZMM_MANGLE_PLANES
 		if(flower_color)
 			var/image/flower = image(icon = icon, icon_state = "flower_back")
 			var/image/I = image(icon = icon, icon_state = "flower_fore")

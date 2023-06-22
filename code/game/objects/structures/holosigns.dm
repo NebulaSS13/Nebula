@@ -20,10 +20,10 @@
 
 /obj/structure/holosign/attack_hand(mob/user)
 	. =  ..()
-	if(.)
-		return
-	visible_message(SPAN_NOTICE("\The [user] waves through \the [src], causing it to dissipate."))
-	deactivate(user)
+	if(!.)
+		visible_message(SPAN_NOTICE("\The [user] waves through \the [src], causing it to dissipate."))
+		deactivate(user)
+		return TRUE
 
 /obj/structure/holosign/attackby(obj/W, mob/user)
 	visible_message(SPAN_NOTICE("\The [user] waves \a [W] through \the [src], causing it to dissipate."))

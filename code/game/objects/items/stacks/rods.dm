@@ -38,7 +38,8 @@
 	matter = null
 	uses_charge = 1
 	charge_costs = list(500)
-	health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
+	is_spawnable_type = FALSE
 
 /obj/item/stack/material/rods/Initialize()
 	. = ..()

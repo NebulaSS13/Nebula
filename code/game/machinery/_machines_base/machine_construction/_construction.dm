@@ -84,7 +84,6 @@
 	if(!validate_state(machine))
 		PRINT_STACK_TRACE("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
 		machine.attack_hand(user)
-		return TRUE
 
 /decl/machine_construction/proc/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(!validate_state(machine))

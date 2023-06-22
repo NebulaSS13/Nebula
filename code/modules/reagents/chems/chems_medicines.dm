@@ -60,6 +60,7 @@
 #define ADJUSTED_REGEN_VAL(X) (6+(6/(1+200*2.71828**(-0.05*(X)))))
 /decl/material/liquid/brute_meds/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
+	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
 	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.getBruteLoss())))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
@@ -77,6 +78,7 @@
 
 /decl/material/liquid/burn_meds/affect_blood(mob/living/M, removed, var/datum/reagents/holder)
 	..()
+	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
 	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.getFireLoss())))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 #undef ADJUSTED_REGEN_VAL
@@ -325,6 +327,7 @@
 
 /decl/material/liquid/regenerator/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
+	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
 	M.add_chemical_effect_max(CE_REGEN_BRUTE, 3 * removed)
 	M.add_chemical_effect_max(CE_REGEN_BURN, 3 * removed)
 

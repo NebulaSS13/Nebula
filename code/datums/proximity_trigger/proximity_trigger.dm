@@ -24,6 +24,9 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	var/on_turfs_changed
 
 	var/range_
+	var/l_angle_
+	var/r_angle_
+
 
 	var/list/turfs_in_range
 	var/list/seen_turfs_
@@ -38,7 +41,10 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /datum/proximity_trigger/square
 	turf_selection = /decl/turf_selection/square
 
-/datum/proximity_trigger/New(var/holder, var/on_turf_entered, var/on_turfs_changed, var/range = 2, var/proximity_flags = 0, var/proc_owner)
+/datum/proximity_trigger/angle
+	turf_selection = /decl/turf_selection/angle
+
+/datum/proximity_trigger/New(var/holder, var/on_turf_entered, var/on_turfs_changed, var/range = 2, var/proximity_flags = 0, var/proc_owner, var/l_angle = 0, var/r_angle = 0)
 	..()
 
 	if(!ispath(turf_selection, /decl/turf_selection))
@@ -49,6 +55,8 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	src.on_turf_entered = on_turf_entered
 	src.on_turfs_changed = on_turfs_changed
 	range_ = range
+	l_angle_ = l_angle
+	r_angle_ = r_angle
 	src.proximity_flags = proximity_flags
 	src.proc_owner = proc_owner || holder
 
@@ -61,6 +69,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	on_turfs_changed = null
 	on_turf_entered = null
 	holder = null
+	proc_owner = null
 	. = ..()
 
 /datum/proximity_trigger/proc/is_active()
@@ -130,9 +139,21 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /datum/proximity_trigger/proc/on_turf_entered(var/turf/T, var/atom/enterer)
 	if(enterer == holder) // We have an explicit call for holder, in case it moved somewhere we're not listening to.
 		return
+	// For opaque movables, we need to recheck visibility on destruction, when their opacity is changed, or when they move out of range.
 	if(enterer.opacity)
+		events_repository.register(/decl/observ/opacity_set, enterer, src, /datum/proximity_trigger/proc/update_opaque_atom)
+		events_repository.register(/decl/observ/destroyed, enterer, src, /datum/proximity_trigger/proc/update_opaque_atom)
+		events_repository.register(/decl/observ/moved, enterer, src, /datum/proximity_trigger/proc/update_opaque_atom)
 		on_turf_visibility_changed()
 	call(proc_owner, on_turf_entered)(enterer)
+
+/datum/proximity_trigger/proc/update_opaque_atom(var/atom/opaque_atom)
+	var/turf/atom_loc = get_turf(opaque_atom)
+	if(QDELETED(opaque_atom) || !opaque_atom.opacity || !atom_loc || !(atom_loc in turfs_in_range))
+		events_repository.unregister(/decl/observ/opacity_set, opaque_atom, src, /datum/proximity_trigger/proc/update_opaque_atom)
+		events_repository.unregister(/decl/observ/destroyed, opaque_atom, src, /datum/proximity_trigger/proc/update_opaque_atom)
+		events_repository.unregister(/decl/observ/moved, opaque_atom, src, /datum/proximity_trigger/proc/update_opaque_atom)
+		on_turf_visibility_changed()
 
 /datum/proximity_trigger/proc/get_seen_turfs()
 	. = list()
@@ -146,10 +167,9 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	END_FOR_DVIEW
 
 /datum/proximity_trigger/proc/acquire_relevant_turfs()
-	. = turf_selection.get_turfs(holder, range_)
+	. = turf_selection.get_turfs(holder, range_, l_angle_, r_angle_)
 	if(proximity_flags & PROXIMITY_EXCLUDE_HOLDER_TURF)
 		. -= get_turf(holder)
-
 
 /obj/item/proxy_debug
 	abstract_type = /obj/item/proxy_debug

@@ -61,6 +61,7 @@
 	. += new/datum/stack_recipe/beehive_assembly(src)
 	. += new/datum/stack_recipe/beehive_frame(src)
 	. += new/datum/stack_recipe/furniture/bookcase(src)
+	. += new/datum/stack_recipe/furniture/book_cart(src)
 	. += new/datum/stack_recipe/zipgunframe(src)
 	. += new/datum/stack_recipe/coilgun(src)
 	. += new/datum/stack_recipe/stick(src)

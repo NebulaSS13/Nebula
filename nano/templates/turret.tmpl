@@ -1,0 +1,88 @@
+<div style="min-width: 480px">
+	{{if data.network}}
+	<div class='item'>
+		<div class='itemBody'>{{:helper.link("Network Settings", null, { "settings" : 1 })}}</div>
+	</div>
+	<hr>
+	{{/if}}
+	<h3>Power System</h3>
+	<div class="item">
+		<div class="itemLabel">
+			Power:
+		</div>
+		<div class="itemContentNarrow">
+			{{:helper.link('On', 'power', {'set_enabled' : 1}, data.enabled ? 'selected' : null)}}
+			{{:helper.link('Off', 'close', {'set_enabled' : 0}, data.enabled ? null : 'selected')}}
+		</div>
+	</div>
+	<h3>Weapon System</h3>
+	<div class="item">
+		<div class="itemLabel">
+			Installed Weapon:
+		</div>
+		<div class="itemContent">
+			{{if data.weaponName == null}}
+				<div class="itemContent bad">
+					No weapon detected!
+				</div>
+			{{else}}
+				{{:helper.link(data.weaponName, 'alert', {'eject_gun' : 1})}}
+			{{/if}}
+		</div>
+	</div>
+	{{if data.firemodes}}
+		<div class="item">
+			<div class="itemLabel">
+				Fire modes:
+			</div>
+			<div class="itemContent">
+				{{for data.firemodes}}
+					{{:helper.link(value.name, null, {'switch_firemode' : value.index}, value.selected ? 'selected' : null)}}
+				{{/for}}
+			</div>
+		</div>
+	{{/if}}
+	<h3>Targeting Settings</h3>
+		{{for data.settings}}
+			<div class="item">
+				<div class="itemLabelWide">
+					{{:value.category}}
+				</div>
+				<div class="itemContentNarrow">
+					{{:helper.link('On', null, {'targeting_comm' : value.setting, 'targeting_value' : 1},  value.value ? 'selected' : null)}}
+					{{:helper.link('Off',null, {'targeting_comm' : value.setting, 'targeting_value' : 0}, !value.value ? 'selected' : null)}}
+				</div>
+			</div>
+		{{/for}}
+	<h3>Manual Control</h3>
+	<div class="item">
+		<div class="itemLabel">
+			Bearing:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('-10&deg;', 'triangle-1-w', {'adjust_bearing' : -10})}}
+			{{:helper.link('-5&deg;', 'triangle-1-w', {'adjust_bearing' : -5})}}
+			{{:helper.link(data.currentBearing+'&deg;', null, {'set_bearing' : 1})}}
+			{{:helper.link('+5&deg;', 'triangle-1-e', {'adjust_bearing' : 5})}}
+			{{:helper.link('+10&deg;', 'triangle-1-e', {'adjust_bearing' : 10})}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Default Bearing:
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.defaultBearing+'&deg;', null, {'set_default' : 1})}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Control:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Manual Fire', 'alert', {'manual_fire' : 1}, null, data.weaponName ? 'redButton' : 'disabled')}}
+		</div>
+	</div>
+</div>
+
+

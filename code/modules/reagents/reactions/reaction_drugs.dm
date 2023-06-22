@@ -5,9 +5,23 @@
 	result_amount = 3
 
 /decl/chemical_reaction/painkillers
-	name = "Painkillers"
+	name = "Mild Painkillers"
 	result = /decl/material/liquid/painkillers
-	required_reagents = list(/decl/material/liquid/stabilizer = 1, /decl/material/liquid/ethanol = 1, /decl/material/liquid/acetone = 1)
+	required_reagents = list(
+		/decl/material/liquid/painkillers/strong = 1,
+		/decl/material/liquid/water = 1,
+		/decl/material/liquid/nutriment/sugar = 1
+	)
+	result_amount = 3
+
+/decl/chemical_reaction/strong_painkillers
+	name = "Strong Painkillers"
+	result = /decl/material/liquid/painkillers/strong
+	required_reagents = list(
+		/decl/material/liquid/stabilizer = 1,
+		/decl/material/liquid/ethanol = 1,
+		/decl/material/liquid/acetone = 1
+	)
 	result_amount = 3
 
 /decl/chemical_reaction/antiseptic

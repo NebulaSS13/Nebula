@@ -750,6 +750,26 @@ proc/dd_sortedObjectList(list/incoming)
 		if(islist(.[i]))
 			.[i] = .(.[i])
 
+/**
+ * Deep copy/clone everything in the list, or reference things that cannot be cloned. Use with caution.
+ * atom_refs_only: If true, the proc will only reference /atom subtypes, and will not clone them.
+ */
+/proc/listDeepClone(var/list/L, var/atom_refs_only = FALSE)
+	if(atom_refs_only && isatom(L))
+		return L
+	if(istype(L, /datum))
+		var/datum/D = L
+		return D.CanClone()? D.Clone() : D //If the datum can be cloned, clone it, or just reference it otherwise
+	//Anything else that's not a list just return the ref
+	if(!islist(L))
+		return L
+
+	. = L.Copy()
+	for(var/i = 1 to length(L))
+		var/I = .[i]
+		if(islist(I) || istype(I, /datum))
+			.[i] = listDeepClone(I)
+
 #define IS_VALID_INDEX(list, index) (list.len && index > 0 && index <= list.len)
 
 // Returns the first key where T fulfills ispath

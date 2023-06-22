@@ -130,7 +130,7 @@
 
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
 
-// Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
+/// Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
 #define ADD_SORTED(list, A, cmp_proc) if(!list.len) {list.Add(A)} else {list.Insert(FindElementIndex(A, list, cmp_proc), A)}
 
 //Currently used in SDQL2 stuff
@@ -167,12 +167,14 @@
 #define SPAN_MAROON(X)   SPAN_CLASS("font_maroon",   X)
 #define SPAN_PINK(X)     SPAN_CLASS("font_pink",     X)
 #define SPAN_PALEPINK(X) SPAN_CLASS("font_palepink", X)
-
+#define SPAN_SINISTER(X) SPAN_CLASS("sinister", X)
 // placeholders
 #define SPAN_GOOD(X)     SPAN_GREEN(X)
 #define SPAN_NEUTRAL(X)  SPAN_BLUE(X)
 #define SPAN_BAD(X)      SPAN_RED(X)
 #define SPAN_HARDSUIT(X) SPAN_BLUE(X)
+
+#define CSS_CLASS_RADIO "radio"
 
 #define STYLE_SMALLFONTS(X, S, C1) "<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>"
 

@@ -13,7 +13,7 @@
 	. = ..()
 
 /mob/living/proc/set_psi_rank(var/faculty, var/rank, var/take_larger, var/defer_update, var/temporary)
-	if(!src.zone_sel)
+	if(!get_target_zone()) // Can't target a zone, so you can't really invoke psionics.
 		to_chat(src, SPAN_NOTICE("You feel something strange brush against your mind... but your brain is not able to grasp it."))
 		return
 	if(!psi)

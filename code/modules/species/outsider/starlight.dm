@@ -27,11 +27,6 @@
 		TAG_CULTURE = /decl/cultural_info/culture/other
 	)
 
-/decl/species/starlight/handle_death_check(var/mob/living/carbon/human/H)
-	if(H.health == 0)
-		return TRUE
-	return FALSE
-
 /decl/species/starlight/handle_death(var/mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,/mob/proc/dust),0)
 

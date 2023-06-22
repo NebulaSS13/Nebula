@@ -11,9 +11,8 @@
 // Override for action buttons.
 /obj/item/clothing/attack_self(mob/user)
 	if(loc == user && user.get_active_hand() != src)
-		attack_hand(user)
-	else
-		. = ..()
+		return attack_hand_with_interaction_checks(user)
+	return ..()
 
 /obj/item/clothing/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/clothing/accessory))
@@ -24,7 +23,7 @@
 
 		var/obj/item/clothing/accessory/A = I
 		if(can_attach_accessory(A))
-			if(!user.unEquip(A))
+			if(!user.try_unequip(A))
 				return
 			attach_accessory(user, A)
 			return
@@ -41,11 +40,11 @@
 
 /obj/item/clothing/attack_hand(var/mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
-	if(accessories.len && src.loc == user)
-		for(var/obj/item/clothing/accessory/A in accessories)
-			A.attack_hand(user)
-		return
-	return ..()
+	if(!length(accessories) || loc != user)
+		return ..()
+	for(var/obj/item/clothing/accessory/A in accessories)
+		. = A.attack_hand(user) || .
+	return TRUE
 
 /obj/item/clothing/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen)) || ..()
@@ -54,7 +53,7 @@
 	if(ishuman(user) && loc == user && istype(over, /obj/screen/inventory))
 		var/obj/screen/inventory/inv = over
 		add_fingerprint(user)
-		if(user.unEquip(src))
+		if(user.try_unequip(src))
 			user.equip_to_slot_if_possible(src, inv.slot_id)
 		return TRUE
 	. = ..()

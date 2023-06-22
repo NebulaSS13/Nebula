@@ -7,7 +7,7 @@
 	var/gas_regen_cap = 50
 
 /obj/item/tank/skrell/Initialize()
-	starting_pressure = list(refill_gas_type = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(refill_gas_type = 6 ATM)
 	. = ..()
 
 

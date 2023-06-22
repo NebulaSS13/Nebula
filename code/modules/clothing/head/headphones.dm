@@ -71,7 +71,7 @@
 	var/static/list/allowed_slots = list(slot_l_ear_str, slot_r_ear_str, slot_head_str)
 	if(!user || !user.client)
 		return
-	if(!(user.get_inventory_slot(src) in allowed_slots))
+	if(!(user.get_equipped_slot_for_item(src) in allowed_slots))
 		return
 	if(current_track)
 		var/decl/music_track/track = GET_DECL(global.music_tracks[current_track])

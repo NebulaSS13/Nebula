@@ -67,7 +67,7 @@
 	addtimer(CALLBACK(src, /obj/machinery/washing_machine/proc/wash), 20 SECONDS)
 
 /obj/machinery/washing_machine/proc/wash()
-	for(var/atom/A in (contents - component_parts))
+	for(var/atom/A as anything in get_contained_external_atoms())
 		if(detergent)
 			A.clean_blood()
 		if(isitem(A))
@@ -119,12 +119,12 @@
 /obj/machinery/washing_machine/attackby(obj/item/W, mob/user)
 	if(!(state & WASHER_STATE_CLOSED))
 		if(!crayon && IS_PEN(W))
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			crayon = W
 			return TRUE
 		if(!detergent && istype(W,/obj/item/chems/pill/detergent))
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			detergent = W
 			return TRUE
@@ -173,7 +173,7 @@
 
 		if(contents.len < 5)
 			if(!(state & WASHER_STATE_CLOSED))
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				state |= WASHER_STATE_FULL
 				update_icon()
@@ -200,8 +200,7 @@
 			var/mob/M = locate(/mob/living) in src
 			if(M)
 				M.gib()
-		for(var/atom/movable/O in (contents - component_parts))
-			O.dropInto(loc)
+		dump_contents()
 		state &= ~WASHER_STATE_FULL
 		update_icon()
 		crayon = null

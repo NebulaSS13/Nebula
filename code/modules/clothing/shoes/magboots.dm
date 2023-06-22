@@ -68,7 +68,7 @@
 	var/mob/living/carbon/human/H = M
 	if(slot == slot_shoes_str && istype(H))
 		check_shoes = H.get_equipped_item(slot_shoes_str)
-		if(istype(check_shoes) && (!check_shoes.can_fit_under_magboots || !H.unEquip(check_shoes, src)))
+		if(istype(check_shoes) && (!check_shoes.can_fit_under_magboots || !H.try_unequip(check_shoes, src)))
 			to_chat(M, SPAN_WARNING("You are unable to wear \the [src] as \the [check_shoes] are in the way."))
 			return FALSE
 	. = ..()

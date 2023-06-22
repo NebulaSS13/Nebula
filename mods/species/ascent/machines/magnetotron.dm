@@ -15,8 +15,11 @@
 			to_chat(M, "\icon[src] " + SPAN_WARNING("\The [src] flashes in a variety of ") + make_rainbow("rainbow hues") + SPAN_WARNING("."))
 
 /obj/machinery/ascent_magnetotron/attack_hand(var/mob/user)
-	var/mob/living/carbon/human/target = locate() in contents
 
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
+
+	var/mob/living/carbon/human/target = locate() in contents
 	if(isnull(target))
 		display_message("No biological signature detected in [src].")
 		return TRUE
@@ -50,6 +53,9 @@
 				E.add_pain(rand(15,40))
 		visible_message(SPAN_NOTICE("\icon[src] [src] shuts down with a loud bang, signaling the end of the process."))
 		playsound(src, 'sound/weapons/flashbang.ogg', 100)
+	return TRUE
+
+
 
 /obj/machinery/ascent_magnetotron/proc/get_total_gynes()
 	for(var/mob/living/carbon/human/H in global.living_mob_list_)

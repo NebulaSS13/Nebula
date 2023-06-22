@@ -45,9 +45,8 @@
 #define ui_monkey_back "LEFT+5:14,BOTTOM:5"	//monkey
 
 #define ui_construct_health "RIGHT:00,CENTER:15" //same height as humans, hugging the right border
-#define ui_construct_purge "RIGHT:00,CENTER-1:15"
 #define ui_construct_fire "RIGHT-1:16,CENTER+1:13" //above health, slightly to the left
-#define ui_construct_pull "RIGHT-1:28,BOTTOM+1:10" //above the zone_sel icon
+#define ui_construct_pull "RIGHT-1:28,BOTTOM+1:10" //above the zone selector icon
 
 //Lower right, persistant menu
 #define ui_dropbutton "RIGHT-4:22,BOTTOM:5"

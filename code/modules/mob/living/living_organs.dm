@@ -55,7 +55,7 @@
 /mob/living/proc/on_lost_organ(var/obj/item/organ/O)
 	if(QDELETED(src))
 		return FALSE //When deleting don't bother running effects
-	events_repository.raise_event(/decl/observ/dismembered, src, O)
+	RAISE_EVENT(/decl/observ/dismembered, src, O)
 	O.on_remove_effects(src)
 	return TRUE
 

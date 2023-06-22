@@ -821,3 +821,40 @@
 		res.overlays += I
 
 	return res
+
+/datum/seed/PopulateClone(datum/seed/clone)
+	clone = ..()
+	//!! - Cloning means having an independent working copy, so leave its unique uid - !!
+	clone.roundstart       = FALSE
+	clone.name             = "[seed_name][(roundstart ? " strain #[clone.uid]" : "")]"
+	clone.seed_name        = clone.name
+	clone.display_name     = "[display_name][(roundstart ? " strain #[clone.uid]" : "")]"
+	clone.seed_noun        = seed_noun
+
+	//Seed traits
+	clone.traits           = traits.Copy()
+	clone.mutants          = mutants?.Copy()
+	clone.chems            = chems?.Copy()
+	clone.consume_gasses   = consume_gasses?.Copy()
+	clone.exude_gasses     = exude_gasses?.Copy()
+
+	//Appearence
+	clone.growth_stages    = growth_stages
+	clone.force_layer      = force_layer
+	clone.splat_type       = splat_type
+
+	//things that probably should be traits
+	clone.mysterious       = mysterious
+	clone.req_CO2_moles    = req_CO2_moles
+	clone.hydrotray_only   = hydrotray_only
+	clone.can_self_harvest = can_self_harvest
+
+	//misc data
+	clone.kitchen_tag      = kitchen_tag
+	clone.trash_type       = trash_type
+	clone.product_type     = product_type
+	clone.base_seed_value  = base_seed_value
+	clone.scannable_result = scannable_result
+
+	clone.update_growth_stages()
+	return clone

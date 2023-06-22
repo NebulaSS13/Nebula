@@ -334,4 +334,4 @@
 
 /obj/effect/shield/attack_hand(var/mob/user)
 	impact_effect(3) // Harmless, but still produces the 'impact' effect.
-	..()
+	return ..()

@@ -21,6 +21,7 @@
 	clear_fullscreen()
 	if(istype(ai))
 		QDEL_NULL(ai)
+	QDEL_NULL(lighting_master)
 	remove_screen_obj_references()
 	if(client)
 		for(var/atom/movable/AM in client.screen)
@@ -36,7 +37,6 @@
 
 /mob/proc/remove_screen_obj_references()
 	QDEL_NULL_SCREEN(hands)
-	QDEL_NULL_SCREEN(purged)
 	QDEL_NULL_SCREEN(internals)
 	QDEL_NULL_SCREEN(oxygen)
 	QDEL_NULL_SCREEN(toxin)
@@ -215,7 +215,7 @@
 	. = 0
 	if(isturf(loc))
 		var/turf/T = loc
-		. += T.get_movement_delay(travel_dir)
+		. += T.get_terrain_movement_delay(travel_dir, src)
 	if(HAS_STATUS(src, STAT_DROWSY))
 		. += 6
 	if(lying) //Crawling, it's slower
@@ -319,7 +319,70 @@
 		client.perspective = EYE_PERSPECTIVE
 		client.eye = loc
 
-/mob/proc/show_inv(mob/user)
+/mob/proc/get_descriptive_slot_name(var/slot)
+	return global.descriptive_slot_names[slot] || slot
+
+/mob/proc/show_stripping_window(mob/user)
+
+	if(user.incapacitated()  || !user.Adjacent(src) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return
+
+	user.set_machine(src)
+
+	var/dat = list()
+	dat += "<B><HR><FONT size=3>[name]</FONT></B>"
+	dat += "<HR>"
+
+	var/list/my_held_item_slots = get_held_item_slots()
+	for(var/hand_slot in my_held_item_slots)
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		if(!inv_slot || inv_slot.skip_on_strip_display)
+			continue
+		var/obj/item/held = inv_slot.get_equipped_item()
+		dat += "<b>[capitalize(inv_slot.slot_name)]:</b> <A href='?src=\ref[src];item=[hand_slot]'>[held?.name || "nothing"]</A>"
+
+	var/list/all_slots = get_all_valid_equipment_slots()
+	if(all_slots)
+		for(var/slot in (all_slots-global.pocket_slots))
+			if(slot in my_held_item_slots)
+				continue
+			var/obj/item/thing_in_slot = get_equipped_item(slot)
+			dat += "<B>[capitalize(get_descriptive_slot_name(slot))]:</b> <a href='?src=\ref[src];item=[slot]'>[thing_in_slot || "nothing"]</a>"
+			if(istype(thing_in_slot, /obj/item/clothing))
+				var/obj/item/clothing/C = thing_in_slot
+				if(C.accessories.len)
+					dat += "<A href='?src=\ref[src];item=[slot_tie_str];holder=\ref[C]'>Remove accessory</A>"
+
+	// Do they get an option to set internals?
+	if(istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask) || istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/helmet/space))
+		for(var/slot in list(slot_back_str, slot_belt_str, slot_s_store_str))
+			var/obj/item/tank/tank = get_equipped_item(slot)
+			if(istype(tank))
+				dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
+				break
+
+	// Other incidentals.
+	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
+	if(istype(suit))
+		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
+		if(suit.has_sensor == SUIT_HAS_SENSORS)
+			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
+		if (suit.has_sensor && user.get_multitool())
+			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>[suit.has_sensor == SUIT_LOCKED_SENSORS ? "Unl" : "L"]ock sensors</A>"
+	if(get_equipped_item(slot_handcuffed_str))
+		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed_str]'>Handcuffed</A>"
+
+	var/list/strip_add = get_additional_stripping_options()
+	if(length(strip_add))
+		dat += strip_add
+
+	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
+
+	var/datum/browser/popup = new(user, "[name]", "Inventory of \the [name]", 325, 500, src)
+	popup.set_content(jointext(dat, "<br>"))
+	popup.open()
+
+/mob/proc/get_additional_stripping_options()
 	return
 
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
@@ -361,7 +424,7 @@
 		if(source_turf && source_turf.z == target_turf?.z)
 			distance = get_dist(source_turf, target_turf)
 
-	events_repository.raise_event(/decl/observ/mob_examining, src, A)
+	RAISE_EVENT(/decl/observ/mob_examining, src, A)
 
 	if(!A.examine(src, distance))
 		PRINT_STACK_TRACE("Improper /examine() override: [log_info_line(A)]")
@@ -486,6 +549,16 @@
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
+
+	if(href_list["refresh"])
+		show_stripping_window(user)
+		return TOPIC_HANDLED
+
+	if(href_list["item"])
+		if(!handle_strip(href_list["item"], user, locate(href_list["holder"])))
+			show_stripping_window(user)
+		return TOPIC_HANDLED
+
 	if(href_list["flavor_more"])
 		var/text = "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>"
 		show_browser(user, text, "window=[name];size=500x200")
@@ -517,7 +590,7 @@
 
 /mob/handle_mouse_drop(atom/over, mob/user)
 	if(over == user && user != src && !istype(user, /mob/living/silicon/ai))
-		show_inv(user)
+		show_stripping_window(user)
 		return TRUE
 	if(!anchored && istype(over, /obj/vehicle/train))
 		var/obj/vehicle/train/beep = over
@@ -540,6 +613,16 @@
 
 /mob/proc/is_ready()
 	return client && !!mind
+
+/mob/proc/can_touch(var/atom/touching)
+	if(!touching.Adjacent(src) || incapacitated())
+		return FALSE
+	if(restrained())
+		to_chat(src, SPAN_WARNING("You are restrained."))
+		return FALSE
+	if (buckled)
+		to_chat(src, SPAN_WARNING("You are buckled down."))
+	return TRUE
 
 /mob/proc/see(message)
 	if(!is_active())
@@ -902,7 +985,7 @@
 	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)
 
 /client/proc/check_has_body_select()
-	return mob && mob.hud_used && istype(mob.zone_sel, /obj/screen/zone_sel)
+	return mob && mob.hud_used && istype(mob.zone_sel, /obj/screen/zone_selector)
 
 /client/verb/body_toggle_head()
 	set name = "body-toggle-head"
@@ -942,8 +1025,8 @@
 /client/proc/toggle_zone_sel(list/zones)
 	if(!check_has_body_select())
 		return
-	var/obj/screen/zone_sel/selector = mob.zone_sel
-	selector.set_selected_zone(next_in_list(mob.zone_sel.selecting,zones))
+	var/obj/screen/zone_selector/selector = mob.zone_sel
+	selector.set_selected_zone(next_in_list(mob.get_target_zone(),zones))
 
 /mob/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)
@@ -954,7 +1037,7 @@
 /mob/proc/can_drown()
 	return 0
 
-/mob/proc/get_sex()
+/mob/proc/get_gender()
 	return gender
 
 /mob/is_fluid_pushable(var/amt)
@@ -1022,8 +1105,7 @@
 
 /mob/get_contained_external_atoms()
 	. = ..()
-	if(.)
-		LAZYREMOVE(., get_organs())
+	LAZYREMOVE(., get_organs())
 
 /mob/explosion_act(var/severity)
 	. = ..()
@@ -1150,7 +1232,7 @@
 		return FALSE
 
 	// Not in a connected z-volume.
-	if(!(N.z in GetConnectedZlevels(T.z)))
+	if(!(N.z in SSmapping.get_connected_levels(T.z)))
 		return FALSE
 
 	// Are they below us?
@@ -1219,3 +1301,22 @@
 		SStyping.set_indicator_state(client, FALSE)
 	if (message)
 		whisper(message)
+
+// Darksight procs.
+/mob/proc/refresh_lighting_master()
+	if(!lighting_master)
+		lighting_master = new
+	if(client)
+		client.screen |= lighting_master
+
+/mob/proc/set_internals(obj/item/tank/source, source_string)
+	return
+
+/mob/proc/get_internals()
+	return
+
+/mob/proc/toggle_internals(var/mob/living/user)
+	return
+
+/mob/proc/get_target_zone()
+	return zone_sel?.selecting

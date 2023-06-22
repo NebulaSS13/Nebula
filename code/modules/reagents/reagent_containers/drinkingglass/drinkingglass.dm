@@ -33,7 +33,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME | PRESENTATION_FLAG_DESC
 	temperature_coefficient = 4
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 
 	var/custom_name
 	var/custom_desc
@@ -231,3 +231,10 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	. = ..()
 	if(old_temp != temperature)
 		update_icon()
+
+/obj/item/chems/drinks/glass2/physically_destroyed(var/skip_qdel)
+	reagents.splash(loc, reagents.total_volume)
+	if(istype(material))
+		playsound(src, "shatter", 30, 1)
+		material.place_shards(get_turf(src), w_class)
+	return ..()

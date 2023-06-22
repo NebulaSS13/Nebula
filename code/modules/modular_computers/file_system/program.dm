@@ -34,16 +34,16 @@
 /datum/computer_file/program/nano_host()
 	return computer && computer.nano_host()
 
-/datum/computer_file/program/clone()
-	var/datum/computer_file/program/temp = ..()
-	temp.read_access = read_access
-	temp.nanomodule_path = nanomodule_path
-	temp.filedesc = filedesc
-	temp.program_icon_state = program_icon_state
-	temp.requires_network = requires_network
-	temp.requires_network_feature = requires_network_feature
-	temp.usage_flags = usage_flags
-	return temp
+/datum/computer_file/program/PopulateClone(datum/computer_file/program/clone)
+	clone = ..()
+	clone.read_access        = deepCopyList(read_access)
+	clone.nanomodule_path    = nanomodule_path
+	clone.filedesc           = filedesc
+	clone.program_icon_state = program_icon_state
+	clone.requires_network   = requires_network
+	clone.requires_network_feature = requires_network_feature
+	clone.usage_flags        = usage_flags
+	return clone
 
 // Used by programs that manipulate files.
 /datum/computer_file/program/proc/get_file(var/filename, var/directory, var/list/accesses, var/mob/user)

@@ -68,13 +68,13 @@
 		h_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
-		h_style = /decl/sprite_accessory/hair/bald
+		h_style = species?.default_h_style || /decl/sprite_accessory/hair/bald
 
 	if(length(valid_facial_hairstyles))
 		f_style = pick(valid_facial_hairstyles)
 	else
 		//this shouldn't happen
-		f_style = /decl/sprite_accessory/facial_hair/shaved
+		f_style = species?.default_f_style || /decl/sprite_accessory/facial_hair/shaved
 
 	update_hair()
 

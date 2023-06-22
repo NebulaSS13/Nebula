@@ -17,6 +17,7 @@
 	teleport(AM)
 
 /obj/effect/portal/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	teleport(user)
 	return TRUE
 

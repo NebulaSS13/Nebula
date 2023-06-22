@@ -21,7 +21,7 @@
 		if(pressure < SOUND_MINIMUM_PRESSURE && get_dist(speaker, src) > 1)
 			return
 
-		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
+		if (pressure < (0.4 ATM)) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
@@ -131,7 +131,7 @@
 
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
-		if(H.voice)
+		if(H.voice && !vname)
 			speaker_name = H.voice
 
 	if(hard_to_hear)
@@ -188,7 +188,7 @@
 			track = "<a href='byond://?src=\ref[src];trackname=[html_encode(speaker_name)];track=\ref[speaker]'>[speaker_name] ([jobname])</a>"
 
 	if(isghost(src))
-		if(speaker) //speaker is null when the arrivals annoucement plays
+		if(istype(speaker)) //speaker is null when the arrivals annoucement plays
 			if(speaker_name != speaker.real_name && !isAI(speaker)) //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
 				speaker_name = "[speaker.real_name] ([speaker_name])"
 			track = "([ghost_follow_link(speaker, src)]) [speaker_name]"

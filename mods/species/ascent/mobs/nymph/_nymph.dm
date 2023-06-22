@@ -1,7 +1,7 @@
-#define ANYMPH_SCREEN_LOC_HELD   "EAST-8:16,SOUTH:5"
-#define ANYMPH_SCREEN_LOC_HAT    "EAST-7:16,SOUTH:5"
-#define ANYMPH_SCREEN_LOC_MOLT   "EAST-6:16,SOUTH:5"
-#define ANYMPH_SCREEN_LOC_INTENT "EAST-2,SOUTH:5"
+#define ANYMPH_SCREEN_LOC_HELD   "RIGHT-8:16,BOTTOM:5"
+#define ANYMPH_SCREEN_LOC_HAT    "RIGHT-7:16,BOTTOM:5"
+#define ANYMPH_SCREEN_LOC_MOLT   "RIGHT-6:16,BOTTOM:5"
+#define ANYMPH_SCREEN_LOC_INTENT "RIGHT-2,BOTTOM:5"
 #define ANYMPH_SCREEN_LOC_HEALTH ui_alien_health
 
 #define ANYMPH_MAX_CRYSTALS      20000
@@ -53,7 +53,7 @@
 	. = ..(mapload)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 
-/mob/living/carbon/alien/ascent_nymph/examine(mob/user)
+/mob/living/carbon/alien/ascent_nymph/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(holding_item)
 		to_chat(user, SPAN_NOTICE("It is holding \icon[holding_item] \a [holding_item]."))
@@ -63,7 +63,7 @@
 
 /mob/living/carbon/alien/ascent_nymph/death(gibbed)
 	if(holding_item)
-		unEquip(holding_item)
+		try_unequip(holding_item)
 
 	return ..(gibbed,death_msg)
 

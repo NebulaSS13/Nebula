@@ -82,3 +82,6 @@
 
 /datum/fabricator_recipe/protolathe/stock/printer
 	path = /obj/item/stock_parts/printer
+
+/datum/fabricator_recipe/protolathe/stock/ammo_box
+	path = /obj/item/stock_parts/ammo_box
