@@ -49,10 +49,10 @@
 	update_icon()
 
 /mob/living/simple_animal/hostile/retaliate/goose/proc/enrage(var/potency)
-	var/obj/item/W = get_natural_weapon()
-	if(W)
-		W.force = min((W.force + potency), max_damage)
-	if(!loose && prob(25) && (W && W.force >= loose_threshold)) //second wind
+	var/obj/item/attacking_with = get_natural_weapon()
+	if(attacking_with)
+		attacking_with.force = min((attacking_with.force + potency), max_damage)
+	if(!loose && prob(25) && (attacking_with && attacking_with.force >= loose_threshold)) //second wind
 		loose = TRUE
 		health = (initial(health) * 1.5)
 		maxHealth = (initial(maxHealth) * 1.5)

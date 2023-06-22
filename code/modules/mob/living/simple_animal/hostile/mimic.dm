@@ -76,17 +76,17 @@ var/global/list/protected_objects = list(/obj/machinery,
 		O.forceMove(src)
 		copy_of = weakref(O)
 
-		var/obj/item/W = get_natural_weapon()
+		var/obj/item/attacking_with = get_natural_weapon()
 		if(istype(O, /obj/structure))
 			health = (anchored * 50) + 50
 			destroy_objects = 1
 			if(O.density && O.anchored)
 				knockdown_people = 1
-				W.force = 2 * initial(W.force)
+				attacking_with.force = 2 * initial(attacking_with.force)
 		else if(istype(O, /obj/item))
 			var/obj/item/I = O
 			health = 15 * I.w_class
-			W.force = 2 + initial(I.force)
+			attacking_with.force = 2 + initial(I.force)
 			move_to_delay = 2 * I.w_class
 
 		maxHealth = health
