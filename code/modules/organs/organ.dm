@@ -381,7 +381,7 @@
 	target.attackby(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
-	return !(species.species_flags & SPECIES_FLAG_NO_PAIN) && bodytype.can_feel_pain
+	return !(bodytype.body_flags & BODY_FLAG_NO_PAIN)
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))

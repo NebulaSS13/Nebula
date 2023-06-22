@@ -78,7 +78,7 @@
 /obj/item/organ/external/head/set_bodytype(decl/bodytype/new_bodytype, override_material = null)
 	. = ..()
 	has_lips = bodytype.appearance_flags & HAS_LIPS
-	can_intake_reagents = bodytype.can_eat
+	can_intake_reagents = !(bodytype.body_flags & BODY_FLAG_NO_EAT)
 	draw_eyes = bodytype.has_eyes
 
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)

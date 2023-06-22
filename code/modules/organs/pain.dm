@@ -8,12 +8,14 @@
 		animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
 		animate(pain, alpha = 0, time = 20)
 
+/mob/living/proc/can_feel_pain(var/check_organ)
+	if(check_organ)
+		return get_organ(check_organ)?.can_feel_pain()
+	return !(get_bodytype()?.body_flags & BODY_FLAG_NO_PAIN)
+
 // message is the custom message to be displayed
 // power decides how much painkillers will stop the message
 // force means it ignores anti-spam timer
-/mob/living/proc/can_feel_pain(var/check_organ)
-	return TRUE
-
 /mob/living/proc/custom_pain(var/message, var/power, var/force, var/obj/item/organ/external/affecting, var/nohalloss)
 	set waitfor = FALSE
 	if(!message || stat || !can_feel_pain() || has_chemical_effect(CE_PAINKILLER, power))

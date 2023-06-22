@@ -63,7 +63,7 @@
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
-	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
+	species_flags = SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =   SPECIES_CAN_JOIN
 
 	flesh_color = "#90edeb"

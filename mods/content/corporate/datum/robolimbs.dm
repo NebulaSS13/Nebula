@@ -40,7 +40,7 @@
 	name = "Ward-Takahashi"
 	desc = "This limb features sleek black and white polymers."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/wardtakahashi/wardtakahashi_main.dmi'
-	can_eat = 1
+	body_flags = BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN
 	bodytype_category = BODYTYPE_HUMANOID
 
 /decl/bodytype/prosthetic/morpheus
@@ -61,6 +61,7 @@
 	desc = "This high quality limb is nearly indistinguishable from an organic one."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/veymed/veymed_female.dmi'
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	body_flags = BODY_FLAG_NO_DNA
 	bodytype_category = BODYTYPE_HUMANOID
 
 /decl/bodytype/prosthetic/veymed/masculine

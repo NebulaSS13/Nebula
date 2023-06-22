@@ -10,6 +10,8 @@
 /decl/bodytype/alium/Initialize()
 	if(prob(10))
 		movement_slowdown += pick(-1,1)
+	if(prob(5))
+		body_flags |= BODY_FLAG_NO_PAIN
 	base_color  = RANDOM_RGB
 	. = ..()
 
@@ -98,8 +100,6 @@
 		species_flags |= SPECIES_FLAG_NO_SLIP
 	if(prob(10))
 		species_flags |= SPECIES_FLAG_NO_TANGLE
-	if(prob(5))
-		species_flags |= SPECIES_FLAG_NO_PAIN
 
 	. = ..()
 

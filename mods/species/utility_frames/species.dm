@@ -25,7 +25,7 @@
 	available_bodytypes = list(/decl/bodytype/prosthetic/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
 	hidden_from_codex =     FALSE
-	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
+	species_flags =         SPECIES_FLAG_NO_POISON
 	spawn_flags =           SPECIES_CAN_JOIN
 	strength =              STR_HIGH
 	warning_low_pressure =  50

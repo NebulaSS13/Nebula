@@ -4,10 +4,8 @@
 	desc = "A generic unbranded robotic prosthesis."
 	limb_tech = "{'engineering':1,'materials':1,'magnets':1}"
 	modifier_string = "robotic"
-	can_eat = FALSE
 	is_robotic = TRUE
-	can_feel_pain = FALSE
-	body_flags = BODY_FLAG_NO_DNA
+	body_flags = BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 

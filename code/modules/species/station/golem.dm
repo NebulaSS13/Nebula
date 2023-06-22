@@ -3,6 +3,7 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	icon_base =         'icons/mob/human_races/species/golem/body.dmi'
 	husk_icon =         'icons/mob/human_races/species/golem/husk.dmi'
+	body_flags =        BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN
 
 /decl/species/golem
 	name = SPECIES_GOLEM
@@ -11,7 +12,7 @@
 	available_bodytypes = list(/decl/bodytype/prosthetic/crystalline/golem)
 
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
-	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
+	species_flags = SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 

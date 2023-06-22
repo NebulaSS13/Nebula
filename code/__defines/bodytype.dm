@@ -22,5 +22,5 @@
 // Bodytype feature flags
 #define BODY_FLAG_NO_DNA              BITFLAG(0) // Does not create DNA. Replaces SPECIES_FLAG_NO_SCAN.
 #define BODY_FLAG_NO_PAIN             BITFLAG(1) // Cannot suffer halloss/recieves deceptive health indicator.
-#define BODY_FLAG_CAN_INGEST_REAGENTS BITFLAG(2) // Can eat food/drink drinks if a stomach organ is present.
+#define BODY_FLAG_NO_EAT              BITFLAG(2) // Cannot eat food/drink drinks even if a stomach organ is present.
 #define BODY_FLAG_CRYSTAL_REFORM      BITFLAG(3) // Can regenerate missing limbs from mineral baths.

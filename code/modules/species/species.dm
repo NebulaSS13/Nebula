@@ -303,8 +303,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		codex_traits += "<li>Does not have blood.</li>"
 	if(!breathing_organ)
 		codex_traits += "<li>Does not breathe.</li>"
-	if(species_flags & SPECIES_FLAG_NO_PAIN)
-		codex_traits += "<li>Does not feel pain.</li>"
 	if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
 		codex_traits += "<li>Has thick skin/scales.</li>"
 	if(species_flags & SPECIES_FLAG_NO_SLIP)
@@ -918,9 +916,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		return TRUE
 	return (species_flags & SPECIES_FLAG_NO_SLIP)
 
+// This assumes you've already checked that their bodytype can feel pain.
 /decl/species/proc/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
-	if(!(species_flags & SPECIES_FLAG_NO_PAIN))
-		return
 	for(var/pain_emotes in pain_emotes_with_pain_level)
 		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
 		if(pain_level >= pain_power)

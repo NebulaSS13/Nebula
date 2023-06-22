@@ -27,8 +27,6 @@ var/global/list/bodytypes_by_category = list()
 	var/icon_cache_uid
 	/// Determines if eyes should render on heads using this bodytype.
 	var/has_eyes = TRUE
-	/// Determines if heads with this bodytype can ingest food/drink.
-	var/can_eat = TRUE
 	/// Prefixed to the initial name of the limb, if non-null.
 	var/modifier_string
 	/// Modifies min and max broken damage for the limb.
@@ -41,8 +39,6 @@ var/global/list/bodytypes_by_category = list()
 	var/manual_dexterity = null
 	/// Determines how the limb behaves with regards to manual attachment/detachment.
 	var/modular_limb_tier = MODULAR_BODYPART_INVALID
-	/// Modifies the return from human can_feel_pain().
-	var/can_feel_pain = TRUE
 
 	var/uniform_state_modifier
 	var/health_hud_intensity = 1

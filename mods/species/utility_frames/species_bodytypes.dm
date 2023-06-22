@@ -6,6 +6,7 @@
 	limb_blend =        ICON_MULTIPLY
 	appearance_flags =  HAS_SKIN_COLOR | HAS_EYE_COLOR
 	modular_limb_tier = MODULAR_BODYPART_CYBERNETIC
+	body_flags =        BODY_FLAG_NO_PAIN | BODY_FLAG_NO_DNA
 	base_color = "#333355"
 	base_eye_color = "#00ccff"
 	material = /decl/material/solid/metal/steel

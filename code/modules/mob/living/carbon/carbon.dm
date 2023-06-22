@@ -301,11 +301,6 @@
 /mob/living/carbon/proc/can_devour(atom/movable/victim)
 	return FALSE
 
-/mob/living/carbon/can_feel_pain(var/check_organ)
-	if(isSynthetic())
-		return FALSE
-	return !(species && species.species_flags & SPECIES_FLAG_NO_PAIN)
-
 /mob/living/carbon/proc/need_breathe()
 	return
 

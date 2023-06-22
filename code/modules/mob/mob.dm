@@ -1130,9 +1130,11 @@
 	return TRUE
 
 /mob/proc/get_species()
+	RETURN_TYPE(/decl/species)
 	return
 
 /mob/proc/get_bodytype()
+	RETURN_TYPE(/decl/bodytype)
 	return
 
 /// Update the mouse pointer of the attached client in this mob.

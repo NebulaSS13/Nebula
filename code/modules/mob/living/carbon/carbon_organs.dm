@@ -1,4 +1,5 @@
 /mob/living/carbon/get_organ(var/organ_tag, var/expected_type)
+	RETURN_TYPE(expected_type)
 	var/obj/item/organ = LAZYACCESS(organs_by_tag, organ_tag)
 	if(!expected_type || istype(organ, expected_type))
 		return organ
