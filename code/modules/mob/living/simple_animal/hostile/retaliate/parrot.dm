@@ -319,7 +319,9 @@
 				return
 
 			//Time for the hurt to begin!
-			L.attackby(get_natural_weapon(), src)
+			var/attacking_with = get_natural_weapon()
+			if(attacking_with)
+				L.attackby(attacking_with, src)
 			return
 
 		//Otherwise, fly towards the mob!
