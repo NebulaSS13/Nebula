@@ -276,7 +276,14 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 ///Returns an associative list of all the planet templates we get to pick from. The key is the template name, and the value is the template instance.
 /datum/map/proc/get_all_planet_templates()
-	return SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET) | SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_PLANET)
+	. = list()
+	var/list/exoplanet_templates = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_EXOPLANET)
+	if(islist(exoplanet_templates))
+		. |= exoplanet_templates
+
+	var/list/planets_templates = SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_PLANET)
+	if(islist(planets_templates))
+		. |= planets_templates
 
 ///Fill up the list of planet_spawn_weight and guaranteed_planets
 /datum/map/proc/generate_planet_spawn_lists(var/list/planets_templates, var/list/planets_spawn_weight, var/list/guaranteed_planets)
