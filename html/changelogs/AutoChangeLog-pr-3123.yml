@@ -1,5 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - tweak: Signs are easier to place now, and do a better job keeping their info when
-      installed and removed repeatedly.
