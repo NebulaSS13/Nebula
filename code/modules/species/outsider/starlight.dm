@@ -1,5 +1,5 @@
 /decl/species/starlight
-	name = "Starlight Base"
+	abstract_type = /decl/species/starlight
 
 	meat_type = null
 	bone_material = null
@@ -27,18 +27,33 @@
 		TAG_CULTURE = /decl/cultural_info/culture/other
 	)
 
+/decl/bodytype/starborn
+	name =             "starborn"
+	desc =             "A blazing mass of light."
+	icon_base =        'icons/mob/human_races/species/starborn/body.dmi'
+	icon_deformed =    'icons/mob/human_races/species/starborn/body.dmi'
+	husk_icon =        'icons/mob/human_races/species/starborn/husk.dmi'
+	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN
+
+/decl/blood_type/starstuff
+	name = "starstuff"
+	antigen_category = "starstuff"
+	splatter_name = "starstuff"
+	splatter_desc = "A puddle of starstuff."
+	splatter_colour = "#ffff00"
+
 /decl/species/starlight/handle_death(var/mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,/mob/proc/dust),0)
 
 /decl/species/starlight/starborn
 	name = "Starborn"
 	name_plural = "Starborn"
-	icobase = 'icons/mob/human_races/species/starborn/body.dmi'
-	deform = 'icons/mob/human_races/species/starborn/body.dmi'
-	husk_icon = 'icons/mob/human_races/species/starborn/husk.dmi'
 	description = "Beings of fire and light, split off from a sun deity of unbelievable power."
+	default_bodytype = /decl/bodytype/starborn
 
-	blood_color = "#ffff00"
+	blood_types = list(
+		/decl/blood_type/starstuff
+	)
 	flesh_color = "#ffff00"
 
 	unarmed_attacks = list(/decl/natural_attack/punch/starborn)
@@ -69,7 +84,7 @@
 
 	total_health = 250
 	body_temperature = T0C + 500 //We are being of fire and light.
-	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE | SPECIES_FLAG_NO_PAIN
+	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 
 	base_auras = list(
 		/obj/aura/starborn
@@ -83,14 +98,26 @@
 	F.reagents.add_reagent(/decl/material/liquid/fuel, 20)
 	T.hotspot_expose(FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 
+/decl/bodytype/blueforged
+	name =             "blueforged"
+	desc =             "A mass of carved and shaped spacetime."
+	icon_base =        'icons/mob/human_races/species/blueforged/body.dmi'
+	icon_deformed =    'icons/mob/human_races/species/blueforged/body.dmi'
+	body_flags =       BODY_FLAG_NO_DNA
+
+/decl/blood_type/spacestuff
+	name = "spacestuff"
+	antigen_category = "spacestuff"
+	splatter_name = "spacestuff"
+	splatter_desc = "A puddle of spacestuff."
+	splatter_colour = "#2222ff"
+
 /decl/species/starlight/blueforged
 	name = "Blueforged"
 	name_plural = "Blueforged"
-	icobase = 'icons/mob/human_races/species/blueforged/body.dmi'
-	deform = 'icons/mob/human_races/species/blueforged/body.dmi'
 	description = "Living chunks of spacetime, carved out of the original dimension and given life by a being of unbelievable power."
+	default_bodytype = /decl/bodytype/blueforged
 
-	blood_color = "#2222ff"
 	flesh_color = "#2222ff"
 
 	warning_low_pressure = 50
@@ -103,7 +130,7 @@
 	oxy_mod = 0
 	toxins_mod = 0
 	radiation_mod = 0
-	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
+	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 

@@ -3236,6 +3236,8 @@
 #include "code\modules\species\species_shapeshifter.dm"
 #include "code\modules\species\species_shapeshifter_bodytypes.dm"
 #include "code\modules\species\outsider\random.dm"
+#include "code\modules\species\outsider\shadow.dm"
+#include "code\modules\species\outsider\starlight.dm"
 #include "code\modules\species\station\golem.dm"
 #include "code\modules\species\station\human.dm"
 #include "code\modules\species\station\human_bodytypes.dm"
