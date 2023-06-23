@@ -150,6 +150,8 @@ var/global/list/bodytypes_by_category = list()
 	var/default_h_style = /decl/sprite_accessory/hair/bald
 	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
 
+	var/list/base_markings
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
@@ -253,7 +255,7 @@ var/global/list/bodytypes_by_category = list()
 		if(E.parent_organ)
 			var/list/parent_organ_data = has_limbs[E.parent_organ]
 			parent_organ_data["has_children"]++
-		H.add_organ(E, null, FALSE, FALSE)
+		H.add_organ(E, GET_EXTERNAL_ORGAN(H, E.parent_organ), FALSE, FALSE)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
@@ -312,3 +314,33 @@ var/global/list/bodytypes_by_category = list()
 		. = TRUE
 	if(. && !defer_update_hair)
 		organism.update_hair()
+
+/decl/bodytype/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
+	if(length(base_markings))
+		for(var/mark_type in base_markings)
+			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
+			for(var/bodypart in mark_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
+				if(O && !LAZYACCESS(O.markings, mark_type))
+					LAZYSET(O.markings, mark_type, base_markings[mark_type])
+
+	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
+		E.skin_colour = base_color
+
+	mannequin.eye_colour = base_eye_color
+	mannequin.hair_colour = base_hair_color
+	mannequin.facial_hair_colour = base_hair_color
+	set_default_hair(mannequin)
+
+	mannequin.force_update_limbs()
+	mannequin.update_mutations(0)
+	mannequin.update_body(0)
+	mannequin.update_underwear(0)
+	mannequin.update_hair(0)
+	mannequin.update_icon()
+
+/decl/species/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
+	if(mannequin.species.preview_outfit)
+		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
+		outfit.equip(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
+	mannequin.update_transform()

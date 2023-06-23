@@ -21,6 +21,8 @@
 		BP_TAIL = /obj/item/organ/external/tail/cat
 	)
 
+	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
+
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(
 		slot_glasses_str =   list("[NORTH]" = list("x" =  0, "y" = 2), "[EAST]" = list("x" = 0, "y" = 2), "[SOUTH]" = list("x" =  0, "y" = 2),  "[WEST]" = list("x" = 0, "y" = 2)),

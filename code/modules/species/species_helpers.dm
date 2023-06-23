@@ -35,43 +35,11 @@ var/global/list/stored_shock_by_ref = list()
 /decl/species/proc/get_digestion_product()
 	return /decl/material/liquid/nutriment
 
-/decl/species/proc/handle_post_species_pref_set(var/datum/preferences/pref)
-	if(!pref)
-		return
-	if(length(base_markings))
-		for(var/mark_type in base_markings)
-			if(!LAZYACCESS(pref.body_markings, mark_type))
-				LAZYSET(pref.body_markings, mark_type, base_markings[mark_type])
-
-/decl/species/proc/customize_preview_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
-
-	if(length(base_markings))
-		for(var/mark_type in base_markings)
-			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
-			for(var/bodypart in mark_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
-				if(O && !LAZYACCESS(O.markings, mark_type))
-					LAZYSET(O.markings, mark_type, base_markings[mark_type])
-
-	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
-		E.skin_colour = default_bodytype.base_color
-
-	mannequin.eye_colour = default_bodytype.base_eye_color
-	mannequin.hair_colour = default_bodytype.base_hair_color
-	mannequin.facial_hair_colour = default_bodytype.base_hair_color
-	default_bodytype.set_default_hair(mannequin)
-
-	if(preview_outfit)
-		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
-		outfit.equip(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
-
-	mannequin.force_update_limbs()
-	mannequin.update_mutations(0)
-	mannequin.update_body(0)
-	mannequin.update_underwear(0)
-	mannequin.update_hair(0)
-	mannequin.update_icon()
-	mannequin.update_transform()
+/decl/species/proc/handle_post_species_pref_set(datum/preferences/pref)
+	pref.skin_colour = default_bodytype.base_color
+	pref.eye_colour = default_bodytype.base_eye_color
+	pref.hair_colour = default_bodytype.base_hair_color
+	pref.facial_hair_colour = default_bodytype.base_hair_color
 
 /decl/species/proc/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))

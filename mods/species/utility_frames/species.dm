@@ -40,12 +40,6 @@
 
 	preview_outfit = null
 
-	base_markings = list(
-		/decl/sprite_accessory/marking/frame/plating = "#8888cc",
-		/decl/sprite_accessory/marking/frame/plating/legs = "#8888cc",
-		/decl/sprite_accessory/marking/frame/plating/head = "#8888cc"
-	)
-
 	heat_discomfort_strings = list(
 		"You are dangerously close to overheating!"
 	)

@@ -20,6 +20,11 @@
 		BP_EYES      = /obj/item/organ/internal/eyes/robot/utility_frame,
 		BP_CELL = /obj/item/organ/internal/cell
 	)
+	base_markings = list(
+		/decl/sprite_accessory/marking/frame/plating = "#8888cc",
+		/decl/sprite_accessory/marking/frame/plating/legs = "#8888cc",
+		/decl/sprite_accessory/marking/frame/plating/head = "#8888cc"
+	)
 
 /decl/bodytype/prosthetic/utility_frame/Initialize()
 	equip_adjust = list(

@@ -135,8 +135,6 @@
 			pref.bodytype = new_body.name
 			if(new_body.associated_gender) // Set to default for male/female to avoid confusing people
 				pref.gender = new_body.associated_gender
-			if(!(pref.f_style in S.get_facial_hair_style_types(new_body.associated_gender)))
-				ResetFacialHair()
 			new_body.handle_post_bodytype_pref_set(pref)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 

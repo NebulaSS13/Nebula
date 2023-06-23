@@ -26,8 +26,6 @@
 
 	meat_type = /obj/item/chems/food/meat/chicken
 
-	base_markings = list(/decl/sprite_accessory/marking/avian = "#454545")
-
 	preview_outfit = /decl/hierarchy/outfit/job/generic/assistant/avian
 
 	available_bodytypes = list(

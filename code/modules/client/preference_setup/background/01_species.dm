@@ -92,14 +92,14 @@
 
 			pref.species = choice
 			pref.sanitize_preferences()
-
-			//reset hair colour and skin colour
+			//reset hairstyle prefs
 			ResetAllHair()
-			pref.hair_colour = COLOR_BLACK
-			pref.skin_tone = 0
-			pref.body_markings.Cut() // Basically same as above.
-			var/decl/species/mob_species = get_species_by_key(pref.species)
+			// reset colors
+			var/decl/species/mob_species = pref.get_species_decl()
 			mob_species.handle_post_species_pref_set(pref)
+			// reset markings
+			var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
+			mob_bodytype.handle_post_bodytype_pref_set(pref)
 
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 

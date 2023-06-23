@@ -42,7 +42,6 @@
 	)
 
 	flesh_color = "#ae7d32"
-	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
 
 	organs_icon = 'mods/species/bayliens/tajaran/icons/organs.dmi'
 

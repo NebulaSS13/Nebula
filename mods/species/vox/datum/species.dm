@@ -36,13 +36,6 @@
 		/decl/natural_attack/bite/strong
 	)
 
-	base_markings = list(
-		/decl/sprite_accessory/marking/vox/beak =   "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/crest =  "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/claws =  "#a0a654"
-	)
-
 	rarity_value = 4
 
 	description = {"The Vox are the broken remnants of a once-proud race, now reduced to little more

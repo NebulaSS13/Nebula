@@ -46,8 +46,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	/// The rate at which low light vision adjusts towards the final value, as a fractional multiplier of the difference between the current and target alphas. ie. set to 0.15 for a 15% shift towards the target value each tick.
 	var/low_light_vision_adjustment_speed = 0.15
 
-	var/list/base_markings
-
 	var/static/list/hair_styles
 	var/static/list/facial_hair_styles
 
@@ -842,8 +840,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(name)]")
 		if(mannequin)
 
-			mannequin.change_species(name)
-			default_bodytype.customize_preview_mannequin(mannequin)
+			mannequin.change_species(name) // handles species/bodytype init
+			default_bodytype.customize_preview_mannequin(mannequin) // handles body colors/styles setup
+			customize_preview_mannequin(mannequin) // handles 'cultural' things like default outfit
 
 			preview_icon = icon(mannequin?.get_bodytype().icon_template)
 			var/mob_width = preview_icon.Width()

@@ -36,6 +36,13 @@
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 	)
 
+	base_markings = list(
+		/decl/sprite_accessory/marking/vox/beak =   "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/crest =  "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/claws =  "#a0a654"
+	)
+
 
 /decl/bodytype/vox/Initialize()
 	if(!equip_adjust)
