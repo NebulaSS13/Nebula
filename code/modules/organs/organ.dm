@@ -95,7 +95,7 @@
 	bodytype = new_bodytype // used in later setup procs
 	if((bodytype?.body_flags & BODY_FLAG_NO_DNA) || !given_dna)
 		// set_bodytype will unset invalid dna anyway, so set_dna(null) is unnecessary
-		set_species(owner?.get_species() || global.using_map.default_species)
+		set_species(given_dna?.species || owner?.get_species() || global.using_map.default_species)
 	else
 		set_dna(given_dna)
 

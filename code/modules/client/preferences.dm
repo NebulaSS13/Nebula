@@ -344,8 +344,8 @@ var/global/list/time_prefs_fixed = list()
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	character.personal_aspects = list()
-	character.change_species(species, character.species.get_bodytype_by_name(bodytype) || character.species.default_bodytype)
-	character.set_bodytype((character.species.get_bodytype_by_name(bodytype) || character.species.default_bodytype))
+	var/decl/species/new_species = get_species_decl()
+	character.change_species(species, new_species.get_bodytype_by_name(bodytype) || new_species.default_bodytype)
 
 	if(be_random_name)
 		var/decl/cultural_info/culture = GET_DECL(cultural_info[TAG_CULTURE])
@@ -410,6 +410,8 @@ var/global/list/time_prefs_fixed = list()
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()
 
+	character.dna.ready_dna(character)
+	character.dna.b_type = client.prefs.b_type
 	character.force_update_limbs()
 	character.update_mutations(0)
 	character.update_body(0)

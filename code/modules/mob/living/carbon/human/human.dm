@@ -565,8 +565,9 @@
 /mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype)
 	if(ispath(new_bodytype))
 		new_bodytype = GET_DECL(new_bodytype)
-	var/decl/bodytype/old_root_bodytype = get_bodytype()
-	if(istype(new_bodytype) && old_root_bodytype != new_bodytype)
+	// No check to see if it's the same as our current one, because we don't have a 'mob bodytype' anymore
+	// just the torso. It's assumed if we call this we want a full regen.
+	if(istype(new_bodytype))
 		mob_size = new_bodytype.mob_size
 		UpdateAppearance() // sync vars to DNA
 		new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
