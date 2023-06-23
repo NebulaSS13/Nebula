@@ -400,7 +400,7 @@ default behaviour is:
 
 	// shut down ongoing problems
 	radiation = 0
-	bodytemperature = T20C
+	bodytemperature = get_species()?.body_temperature || initial(bodytemperature)
 	sdisabilities = 0
 	disabilities = 0
 
