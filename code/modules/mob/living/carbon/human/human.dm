@@ -383,11 +383,7 @@
 	return
 
 /mob/living/carbon/human/get_bodytype_category()
-	. = bodytype.bodytype_category
-
-/mob/living/carbon/human/get_bodytype()
-	RETURN_TYPE(/decl/bodytype)
-	return bodytype
+	. = get_bodytype().bodytype_category
 
 /mob/living/carbon/human/check_has_mouth()
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
@@ -569,11 +565,11 @@
 /mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype)
 	if(ispath(new_bodytype))
 		new_bodytype = GET_DECL(new_bodytype)
-	if(istype(new_bodytype) && bodytype != new_bodytype)
-		bodytype = new_bodytype
-		mob_size = bodytype.mob_size
+	var/decl/bodytype/old_root_bodytype = get_bodytype()
+	if(istype(new_bodytype) && old_root_bodytype != new_bodytype)
+		mob_size = new_bodytype.mob_size
 		UpdateAppearance() // sync vars to DNA
-		bodytype.create_missing_organs(src) // actually rebuild the body
+		new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
@@ -662,7 +658,7 @@
 //Drop anything that cannot be worn by the current species of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
 
-	if(!(bodytype.appearance_flags & HAS_UNDERWEAR))
+	if(!(get_bodytype().appearance_flags & HAS_UNDERWEAR))
 		QDEL_NULL_LIST(worn_underwear)
 
 	var/list/new_slots
@@ -692,10 +688,11 @@
 	else
 		species.apply_appearance(src)
 
-	force_update_limbs() //updates bodytype
-	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
-	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
-	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
+	force_update_limbs()
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	default_pixel_x = initial(pixel_x) + root_bodytype.pixel_offset_x
+	default_pixel_y = initial(pixel_y) + root_bodytype.pixel_offset_y
+	default_pixel_z = initial(pixel_z) + root_bodytype.pixel_offset_z
 
 	reset_offsets()
 
@@ -704,10 +701,11 @@
 
 // Like above, but for bodytype. Not as complicated.
 /mob/living/carbon/human/proc/apply_bodytype_appearance()
-	if(!bodytype)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(!root_bodytype)
 		skin_colour = COLOR_BLACK
 	else
-		bodytype.apply_appearance(src)
+		root_bodytype.apply_appearance(src)
 
 /mob/living/carbon/human/proc/update_languages()
 	if(!length(cultural_info))
@@ -1241,15 +1239,15 @@
 		species_name = global.using_map.default_species //Humans cannot exist without a species!
 
 	set_species(species_name, new_bodytype)
-
+	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
 	if(!skin_colour)
-		skin_colour = bodytype.base_color
+		skin_colour = root_bodytype.base_color
 	if(!hair_colour)
-		hair_colour = bodytype.base_hair_color
+		hair_colour = root_bodytype.base_hair_color
 	if(!facial_hair_colour)
-		facial_hair_colour = bodytype.base_hair_color
+		facial_hair_colour = root_bodytype.base_hair_color
 	if(!eye_colour)
-		eye_colour = bodytype.base_eye_color
+		eye_colour = root_bodytype.base_eye_color
 	species.set_default_hair(src, override_existing = FALSE, defer_update_hair = TRUE)
 	if(!b_type && length(species?.blood_types))
 		b_type = pickweight(species.blood_types)
@@ -1261,8 +1259,6 @@
 		dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
 
 	species.handle_pre_spawn(src)
-	if(!LAZYLEN(get_external_organs()))
-		new_bodytype.create_missing_organs(src) //Syncs DNA when adding organs
 	apply_species_cultural_info()
 	apply_species_appearance()
 	apply_bodytype_appearance()

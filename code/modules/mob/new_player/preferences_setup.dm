@@ -68,7 +68,7 @@
 		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], branch, rank)
 		update_icon = TRUE
 
-	if(!(mannequin.bodytype.appearance_flags & HAS_UNDERWEAR))
+	if(!(mannequin.get_bodytype().appearance_flags & HAS_UNDERWEAR))
 		if(all_underwear)
 			all_underwear.Cut()
 

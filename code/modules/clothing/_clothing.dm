@@ -81,14 +81,12 @@
 			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
 
 		if(!(slot in user_mob?.get_held_item_slots()))
-			if(ishuman(user_mob))
-				var/mob/living/carbon/human/user_human = user_mob
-				if(blood_DNA)
-					var/mob_blood_overlay = user_human.bodytype.get_blood_overlays(user_human)
-					if(mob_blood_overlay)
-						var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
-						bloodsies.appearance_flags |= NO_CLIENT_COLOR
-						overlay.overlays += bloodsies
+			if(blood_DNA)
+				var/mob_blood_overlay = user_mob.get_bodytype()?.get_blood_overlays(user_mob)
+				if(mob_blood_overlay)
+					var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
+					bloodsies.appearance_flags |= NO_CLIENT_COLOR
+					overlay.overlays += bloodsies
 			if(markings_icon && markings_color)
 				overlay.overlays += mutable_appearance(overlay.icon, markings_icon, markings_color)
 
@@ -137,7 +135,7 @@
 	. = ..()
 	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.get_held_item_slots()))
 		var/mob/living/carbon/human/H = M
-		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.bodytype.bodytype_flag) : (bodytype_equip_flags & H.bodytype.bodytype_flag)
+		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.get_bodytype().bodytype_flag) : (bodytype_equip_flags & H.get_bodytype().bodytype_flag)
 		if(!. && !disable_warning)
 			to_chat(H, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
 

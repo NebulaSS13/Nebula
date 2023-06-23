@@ -1,4 +1,4 @@
-/mob/living/carbon/get_organ(var/organ_tag, var/expected_type)
+/mob/living/carbon/get_organ(var/organ_tag, var/expected_type = /obj/item/organ)
 	RETURN_TYPE(expected_type)
 	var/obj/item/organ = LAZYACCESS(organs_by_tag, organ_tag)
 	if(!expected_type || istype(organ, expected_type))
@@ -54,3 +54,7 @@
 		LAZYREMOVE(internal_organs, O)
 	else
 		LAZYREMOVE(external_organs, O)
+
+/mob/living/carbon/get_bodytype()
+	RETURN_TYPE(/decl/bodytype)
+	return get_organ(BP_CHEST, /obj/item/organ)?.bodytype

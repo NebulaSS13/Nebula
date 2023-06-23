@@ -33,10 +33,10 @@
 		var/image/cloverlay
 
 		var/bodyicon = get_icon_for_bodytype(bodytype)
+		var/decl/bodytype/root_bodytype = user_mob.get_bodytype()
 		if(user_mob && bodytype != user_mob.get_bodytype_category())
-			var/mob/living/carbon/human/H = user_mob
-			underlay =  H.bodytype.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-underlay", color, slot)
-			cloverlay = H.bodytype.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-overlay", color, slot)
+			underlay =  root_bodytype.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-underlay", color, slot)
+			cloverlay = root_bodytype.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-overlay", color, slot)
 		else
 			underlay = image(bodyicon, "[bodytype]-underlay")
 			cloverlay = image(bodyicon, "[bodytype]-overlay")

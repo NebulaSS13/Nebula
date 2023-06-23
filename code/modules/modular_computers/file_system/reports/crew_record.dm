@@ -74,12 +74,13 @@ var/global/arrest_security_status =  "Arrest"
 	set_medical_record((medical_record && !jobban_isbanned(H, "Records")) ? html_decode(medical_record) : "No record supplied")
 
 	if(H)
+		var/decl/bodytype/root_bodytype = H.get_bodytype()
 		var/organ_data = list("\[*\]")
 		for(var/obj/item/organ/external/E in H.get_external_organs())
-			if(E.bodytype != H.bodytype)
+			if(E.bodytype != root_bodytype)
 				organ_data += "[E.bodytype] [E.name] [BP_IS_PROSTHETIC(E) ? "prosthetic" : "graft"]"
 		for(var/obj/item/organ/internal/I in H.get_internal_organs())
-			if(I.bodytype != H.bodytype)
+			if(I.bodytype != root_bodytype)
 				organ_data += "[I.bodytype] [I.name] [BP_IS_PROSTHETIC(I) ? "prosthetic" : "graft"]"
 		set_implants(jointext(organ_data, "\[*\]"))
 
