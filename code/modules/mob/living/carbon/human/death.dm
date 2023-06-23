@@ -72,11 +72,9 @@
 
 /mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
 	for(var/obj/item/organ/external/limb in get_external_organs())
-		var/limb_can_amputate = (limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
-		limb.limb_flags |= ORGAN_FLAG_CAN_AMPUTATE
+		if(!limb.parent_organ) // don't dismember root
+			continue
 		limb.dismember(TRUE, droplimb_type, TRUE, TRUE)
-		if(!QDELETED(limb) && !limb_can_amputate)
-			limb.limb_flags &= ~ORGAN_FLAG_CAN_AMPUTATE
 	dump_contents()
 	if(!skip_qdel && !QDELETED(src))
 		qdel(src)
