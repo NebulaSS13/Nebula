@@ -17,10 +17,8 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		return affected
-	else if(ishuman(target))
-		var/mob/living/carbon/human/H = target
-		var/list/organ_data = H.species.has_limbs["[target_zone]"]
-		return !isnull(organ_data)
+	var/list/organ_data = target.get_bodytype()?.has_limbs?["[target_zone]"]
+	return !isnull(organ_data)
 
 //////////////////////////////////////////////////////////////////
 //	 limb attachment surgery step

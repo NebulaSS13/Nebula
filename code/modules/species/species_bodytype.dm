@@ -102,12 +102,76 @@ var/global/list/bodytypes_by_category = list()
 	/// Associative list of organ_tag = "encased value". If set, sets the organ's encased var to the corresponding value; used in surgery.
 	/// If the list is set, organ tags not present in the list will get encased set to null.
 	var/list/apply_encased
+	/// Associative list of organ_tag = organ_data.
+	/// Organ data currently supports setting "path" and "descriptor", while "has_children" is automatically set.
+	var/list/has_limbs = list(
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
+	)
+	/// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
+	/// with the zone. Used for species with body layouts that do not map directly to a standard humanoid body.
+	var/list/limb_mapping
+	/// This list is merged into has_limbs in bodytype initialization.
+	/// Used for species that only need to change one or two entries in has_limbs.
+	var/list/override_limb_types
+	/// Associative list of organ tags (ex. BP_HEART) to paths.
+	/// Used to initialize organs and to check if a bodytype 'should have' (this can mean 'can have' or 'needs') an organ.
+	var/list/has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_APPENDIX = /obj/item/organ/internal/appendix,
+		BP_EYES =     /obj/item/organ/internal/eyes
+	)
+
+	var/vision_organ              // If set, this organ is required for vision.
+	var/breathing_organ           // If set, this organ is required for breathing.
+
+	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
+
+	/// Losing an organ from this list will give a grace period of `vital_organ_failure_death_delay` then kill the mob.
+	var/list/vital_organs = list(BP_BRAIN)
+	/// The grace period before mob death when an organ in `vital_organs` is lost
+	var/vital_organ_failure_death_delay = 25 SECONDS
+	var/mob_size = MOB_SIZE_MEDIUM
 
 /decl/bodytype/Initialize()
 	. = ..()
-	if(!icon_deformed)
-		icon_deformed = icon_base
+	icon_deformed ||= icon_base
 	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
+	//If the species has eyes, they are the default vision organ
+	if(!vision_organ && has_organ[BP_EYES])
+		vision_organ = BP_EYES
+	//If the species has lungs, they are the default breathing organ
+	if(!breathing_organ && has_organ[BP_LUNGS])
+		breathing_organ = BP_LUNGS
+
+	// Modify organ lists if necessary.
+	if(islist(override_organ_types))
+		for(var/ltag in override_organ_types)
+			has_organ[ltag] = override_organ_types[ltag]
+
+	if(islist(override_limb_types))
+		for(var/ltag in override_limb_types)
+			has_limbs[ltag] = list("path" = override_limb_types[ltag])
+
+	//Build organ descriptors
+	for(var/limb_type in has_limbs)
+		var/list/organ_data = has_limbs[limb_type]
+		var/obj/item/organ/limb_path = organ_data["path"]
+		organ_data["descriptor"] = initial(limb_path.name)
 
 /decl/bodytype/proc/apply_limb_colouration(var/obj/item/organ/external/E, var/icon/applying)
 	return applying
@@ -152,3 +216,82 @@ var/global/list/bodytypes_by_category = list()
 		E.arterial_bleed_severity *= arterial_bleed_multiplier
 		if(islist(apply_encased))
 			E.encased = apply_encased[E.organ_tag]
+
+//fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
+/decl/bodytype/proc/create_missing_organs(mob/living/carbon/human/H, fully_replace = FALSE)
+	if(fully_replace)
+		H.delete_organs()
+
+	//Clear invalid limbs
+	if(H.has_external_organs())
+		for(var/obj/item/organ/external/E in H.get_external_organs())
+			if(!is_default_limb(E))
+				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+				qdel(E)
+
+	//Clear invalid internal organs
+	if(H.has_internal_organs())
+		for(var/obj/item/organ/O in H.get_internal_organs())
+			if(!is_default_organ(O))
+				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+				qdel(O)
+
+	//Create missing limbs
+	for(var/limb_type in has_limbs)
+		if(GET_EXTERNAL_ORGAN(H, limb_type)) //Skip existing
+			continue
+		var/list/organ_data = has_limbs[limb_type]
+		var/limb_path = organ_data["path"]
+		var/obj/item/organ/external/E = new limb_path(H, null, H.dna, src) //explicitly specify the dna and bodytype
+		if(E.parent_organ)
+			var/list/parent_organ_data = has_limbs[E.parent_organ]
+			parent_organ_data["has_children"]++
+		H.add_organ(E, null, FALSE, FALSE)
+
+	//Create missing internal organs
+	for(var/organ_tag in has_organ)
+		if(GET_INTERNAL_ORGAN(H, organ_tag)) //Skip existing
+			continue
+		var/organ_type = has_organ[organ_tag]
+		var/obj/item/organ/O = new organ_type(H, null, H.dna, src)
+		if(organ_tag != O.organ_tag)
+			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
+			O.organ_tag = organ_tag
+		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE)
+
+//Checks if an existing organ is the bodytype default
+/decl/bodytype/proc/is_default_organ(obj/item/organ/internal/O)
+	return has_organ[O.organ_tag] && istype(O, has_organ[O.organ_tag]) && (O.bodytype == src)
+
+//Checks if an existing limb is the bodytype default
+/decl/bodytype/proc/is_default_limb(obj/item/organ/external/E)
+	var/list/organ_data = has_limbs[E.organ_tag]
+	if(organ_data && istype(E, organ_data["path"]) && (E.bodytype == src))
+		return TRUE
+	return FALSE
+
+/decl/bodytype/proc/get_limb_from_zone(limb)
+	. = length(LAZYACCESS(limb_mapping, limb)) ? pick(limb_mapping[limb]) : limb
+
+/decl/bodytype/proc/check_vital_organ_missing(mob/living/carbon/H)
+	if(length(vital_organs))
+		for(var/organ_tag in vital_organs)
+			var/obj/item/organ/O = H.get_organ(organ_tag, /obj/item/organ)
+			if(!O || (O.status & ORGAN_DEAD))
+				return TRUE
+	return FALSE
+
+/decl/bodytype/proc/get_resized_organ_w_class(var/organ_w_class)
+	. = clamp(organ_w_class + mob_size_difference(mob_size, MOB_SIZE_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
+
+/decl/bodytype/proc/resize_organ(obj/item/organ/organ)
+	if(!istype(organ))
+		return
+	organ.w_class = get_resized_organ_w_class(initial(organ.w_class))
+	if(!istype(organ, /obj/item/organ/external))
+		return
+	var/obj/item/organ/external/limb = organ
+	for(var/bp_tag in has_organ)
+		var/obj/item/organ/internal/I = has_organ[bp_tag]
+		if(initial(I.parent_organ) == organ.organ_tag)
+			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))

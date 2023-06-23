@@ -56,7 +56,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/default_h_style = /decl/sprite_accessory/hair/bald
 	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
 
-	var/mob_size = MOB_SIZE_MEDIUM
 	var/strength = STR_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/short_sighted                         // Permanent weldervision.
@@ -181,47 +180,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/stomach_capacity = 5      // How much stuff they can stick in their stomach
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
-	var/list/has_organ = list(    // which required-organ checks are conducted.
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_STOMACH =  /obj/item/organ/internal/stomach,
-		BP_LUNGS =    /obj/item/organ/internal/lungs,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_APPENDIX = /obj/item/organ/internal/appendix,
-		BP_EYES =     /obj/item/organ/internal/eyes
-		)
-
-	var/vision_organ              // If set, this organ is required for vision.
-	var/breathing_organ           // If set, this organ is required for breathing.
-
-	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
-
-	// Losing an organ from the list below will give a grace period (also below) then kill the mob.
-	var/list/vital_organs = list(BP_BRAIN)
-	var/vital_organ_failure_death_delay = 25 SECONDS
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
-
-	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Used for species with body layouts that do not map directly to a standard humanoid body.
-	var/list/limb_mapping
-
-	var/list/has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
-	)
-
-	var/list/override_limb_types // Used for species that only need to change one or two entries in has_limbs.
 
 	var/decl/pronouns/default_pronouns
 	var/list/available_pronouns = list(
@@ -299,10 +259,16 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		codex_traits += "<li>Often present among humans.</li>"
 	if(spawn_flags & SPECIES_IS_WHITELISTED)
 		codex_traits += "<li>Whitelist restricted.</li>"
-	if(!has_organ[BP_HEART])
+	if(!default_bodytype.has_organ[BP_HEART])
 		codex_traits += "<li>Does not have blood.</li>"
-	if(!breathing_organ)
+	if(!default_bodytype.breathing_organ)
 		codex_traits += "<li>Does not breathe.</li>"
+	if(default_bodytype.body_flags & BODY_FLAG_NO_PAIN)
+		codex_traits += "<li>Does not feel pain.</li>"
+	if(default_bodytype.body_flags & BODY_FLAG_NO_DNA)
+		codex_traits += "<li>Does not have DNA.</li>"
+	if(default_bodytype.body_flags & BODY_FLAG_NO_EAT)
+		codex_traits += "<li>Lacks a mouth capable of eating.</li>"
 	if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
 		codex_traits += "<li>Has thick skin/scales.</li>"
 	if(species_flags & SPECIES_FLAG_NO_SLIP)
@@ -414,47 +380,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		appearance_descriptors.Insert(1, age.name)
 		appearance_descriptors[age.name] = age
 
-	//If the species has eyes, they are the default vision organ
-	if(!vision_organ && has_organ[BP_EYES])
-		vision_organ = BP_EYES
-	//If the species has lungs, they are the default breathing organ
-	if(!breathing_organ && has_organ[BP_LUNGS])
-		breathing_organ = BP_LUNGS
-
-	// Modify organ lists if necessary.
-	if(islist(override_organ_types))
-		for(var/ltag in override_organ_types)
-			has_organ[ltag] = override_organ_types[ltag]
-
-	if(islist(override_limb_types))
-		for(var/ltag in override_limb_types)
-			has_limbs[ltag] = list("path" = override_limb_types[ltag])
-
-	//Build organ descriptors
-	for(var/limb_type in has_limbs)
-		var/list/organ_data = has_limbs[limb_type]
-		var/obj/item/organ/limb_path = organ_data["path"]
-		organ_data["descriptor"] = initial(limb_path.name)
-
 	build_codex_strings()
 
 /decl/species/validate()
 	. = ..()
-
-	for(var/decl/bodytype/bodytype in available_bodytypes)
-		var/bodytype_base_icon = bodytype.get_base_icon()
-		var/deformed_base_icon = bodytype.get_base_icon(get_deform = TRUE)
-		for(var/organ_tag in has_limbs)
-			if(organ_tag == BP_TAIL) // Tails are handled specially due to overlays and animations, will not be present in the base bodytype icon(s).
-				continue
-			if(bodytype_base_icon && !check_state_in_icon(organ_tag, bodytype_base_icon))
-				. += "missing state \"[organ_tag]\" from base icon [bodytype_base_icon] on bodytype [bodytype.type]"
-			if(deformed_base_icon && bodytype_base_icon != deformed_base_icon && !check_state_in_icon(organ_tag, deformed_base_icon))
-				. += "missing state \"[organ_tag]\" from deformed icon [deformed_base_icon] on bodytype [bodytype.type]"
-
-	for(var/organ_tag in vital_organs)
-		if(!(organ_tag in has_organ) && !(organ_tag in has_limbs))
-			. += "vital organ \"[organ_tag]\" not present in organ/limb lists"
 
 	for(var/trait_type in traits)
 		var/trait_level = traits[trait_type]
@@ -535,64 +464,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity
-
-//Checks if an existing organ is the species default
-/decl/species/proc/is_default_organ(var/obj/item/organ/O)
-	for(var/tag in has_organ)
-		if(O.organ_tag == tag)
-			if(ispath(O.type, has_organ[tag]))
-				return TRUE
-	return FALSE
-
-//Checks if an existing limbs is the species default
-//Things that use this should also check /decl/bodytype/is_default_limb()
-/decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
-	var/list/organ_data = has_limbs[E.organ_tag]
-	if(organ_data && ispath(E.type, organ_data["path"]) && (E.bodytype in available_bodytypes))
-		return TRUE
-	return FALSE
-
-//fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
-/decl/species/proc/create_missing_organs(var/mob/living/carbon/human/H, var/fully_replace = FALSE)
-	if(fully_replace)
-		H.delete_organs()
-
-	//Clear invalid limbs
-	if(H.has_external_organs())
-		for(var/obj/item/organ/external/E in H.get_external_organs())
-			if(!is_default_limb(E))
-				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
-				qdel(E)
-
-	//Clear invalid internal organs
-	if(H.has_internal_organs())
-		for(var/obj/item/organ/O in H.get_internal_organs())
-			if(!is_default_organ(O))
-				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
-				qdel(O)
-
-	//Create missing limbs
-	for(var/limb_type in has_limbs)
-		if(GET_EXTERNAL_ORGAN(H, limb_type)) //Skip existing
-			continue
-		var/list/organ_data = has_limbs[limb_type]
-		var/limb_path = organ_data["path"]
-		var/obj/item/organ/external/E = new limb_path(H, null, H.dna) //explicitly specify the dna
-		if(E.parent_organ)
-			var/list/parent_organ_data = has_limbs[E.parent_organ]
-			parent_organ_data["has_children"]++
-		H.add_organ(E, null, FALSE, FALSE)
-
-	//Create missing internal organs
-	for(var/organ_tag in has_organ)
-		if(GET_INTERNAL_ORGAN(H, organ_tag)) //Skip existing
-			continue
-		var/organ_type = has_organ[organ_tag]
-		var/obj/item/organ/O = new organ_type(H, null, H.dna)
-		if(organ_tag != O.organ_tag)
-			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
-			O.organ_tag = organ_tag
-		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE)
 
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
@@ -991,7 +862,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			mannequin.change_species(name)
 			customize_preview_mannequin(mannequin)
 
-			preview_icon = icon(mannequin.bodytype.icon_template)
+			preview_icon = icon(mannequin?.get_bodytype().icon_template)
 			var/mob_width = preview_icon.Width()
 			preview_icon.Scale((mob_width * 2)+16, preview_icon.Height()+16)
 
@@ -1010,14 +881,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
-
-/decl/species/proc/check_vital_organ_missing(var/mob/living/carbon/H)
-	if(length(vital_organs))
-		for(var/organ_tag in vital_organs)
-			var/obj/item/organ/O = H.get_organ(organ_tag, /obj/item/organ)
-			if(!O || (O.status & ORGAN_DEAD))
-				return TRUE
-	return FALSE
 
 /decl/species/proc/get_species_temperature_threshold(var/threshold)
 	switch(threshold)

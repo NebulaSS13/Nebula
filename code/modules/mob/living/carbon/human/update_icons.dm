@@ -357,14 +357,15 @@ var/global/list/damage_icon_parts = list()
 	//Create a new, blank icon for our mob to use.
 	if(stand_icon)
 		qdel(stand_icon)
-	stand_icon = new(bodytype.icon_template || 'icons/mob/human.dmi',"blank")
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi',"blank")
 
-	var/icon_key = "[bodytype.get_icon_cache_uid(src)][skin_tone][skin_colour]"
+	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][skin_colour]"
 	if(lip_style)
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = get_organ((species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	var/obj/item/organ/internal/eyes/eyes = get_organ((root_bodytype.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
 	for(var/limb_tag in global.all_limb_tags)
@@ -475,6 +476,7 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
+	// todo: make this use bodytype
 	overlays_standing[HO_SKIN_LAYER] = species.update_skin(src)
 	if(update_icons)
 		queue_icon_update()

@@ -1,4 +1,4 @@
-/decl/bodytype/shadow
+/decl/bodytype/starlight/shadow
 	name =             "shadow"
 	desc =             "A wound of darkness inflicted upon the world."
 	icon_base =        'icons/mob/human_races/species/shadow/body.dmi'
@@ -20,6 +20,8 @@
 	meat_type = null
 	bone_material = null
 	skin_material = null
+
+	available_bodytypes = list(/decl/bodytype/starlight/shadow)
 
 	unarmed_attacks = list(/decl/natural_attack/claws/strong, /decl/natural_attack/bite/sharp)
 	darksight_range = 8

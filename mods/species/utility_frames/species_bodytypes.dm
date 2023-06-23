@@ -10,6 +10,16 @@
 	base_color = "#333355"
 	base_eye_color = "#00ccff"
 	material = /decl/material/solid/metal/steel
+	vital_organs = list(
+		BP_POSIBRAIN,
+		BP_CELL
+	)
+	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/utility_frame)
+	has_organ = list(
+		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
+		BP_EYES      = /obj/item/organ/internal/eyes/robot/utility_frame,
+		BP_CELL = /obj/item/organ/internal/cell
+	)
 
 /decl/bodytype/prosthetic/utility_frame/Initialize()
 	equip_adjust = list(

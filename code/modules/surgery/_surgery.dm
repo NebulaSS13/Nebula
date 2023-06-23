@@ -209,12 +209,11 @@ var/global/list/surgery_tool_exception_cache = list()
 	if(!zone)
 		return FALSE // Erroneous mob interaction
 
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(length(LAZYACCESS(H.species.limb_mapping, zone)) > 1)
-			zone = input("Which bodypart do you wish to operate on?", "Non-standard surgery") as null|anything in H.species.limb_mapping[zone]
-			if(!zone)
-				return FALSE
+	var/decl/bodytype/root_bodytype = M.get_bodytype()
+	if(root_bodytype && length(LAZYACCESS(root_bodytype.limb_mapping, zone)) > 1)
+		zone = input("Which bodypart do you wish to operate on?", "Non-standard surgery") as null|anything in root_bodytype.limb_mapping[zone]
+		if(!zone)
+			return FALSE
 
 	if(zone in global.surgeries_in_progress["\ref[M]"])
 		to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))

@@ -20,7 +20,3 @@
 		/decl/natural_attack/punch,
 		/decl/natural_attack/bite/sharp
 	)
-
-	override_organ_types = list(
-		BP_LUNGS = /obj/item/organ/internal/lungs/gills
-	)

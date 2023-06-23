@@ -103,11 +103,11 @@
 			playsound_local(null, 'sound/effects/bells.ogg', 100, is_global=TRUE)
 
 /mob/living/carbon/human/breathe()
-	var/species_organ = species.breathing_organ
+	var/breathing_organ = get_bodytype().breathing_organ
 
-	if(species_organ)
+	if(breathing_organ)
 		var/active_breaths = 0
-		var/obj/item/organ/internal/lungs/L = get_organ(species_organ, /obj/item/organ/internal/lungs)
+		var/obj/item/organ/internal/lungs/L = get_organ(breathing_organ, /obj/item/organ/internal/lungs)
 		if(L)
 			active_breaths = L.active_breathing
 		..(active_breaths)
@@ -162,10 +162,11 @@
 	..()
 	//Vision
 	var/obj/item/organ/vision
-	if(species.vision_organ)
-		vision = GET_INTERNAL_ORGAN(src, species.vision_organ)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype.vision_organ)
+		vision = GET_INTERNAL_ORGAN(src, root_bodytype.vision_organ)
 
-	if(!species.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
+	if(!root_bodytype.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
 		set_status(STAT_BLIND, 0)
 		blinded =    0
 		set_status(STAT_BLURRY, 0)
@@ -238,11 +239,11 @@
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
 		return
-	var/species_organ = species.breathing_organ
-	if(!species_organ)
+	var/breathing_organ = get_bodytype().breathing_organ
+	if(!breathing_organ)
 		return
 
-	var/obj/item/organ/internal/lungs/L = get_organ(species_organ, /obj/item/organ/internal/lungs)
+	var/obj/item/organ/internal/lungs/L = get_organ(breathing_organ, /obj/item/organ/internal/lungs)
 	if(!L || nervous_system_failure())
 		failed_last_breath = 1
 	else

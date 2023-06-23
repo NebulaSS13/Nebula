@@ -61,14 +61,14 @@
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
 //Third argument may be a dna datum; if null will be set to holder's dna.
-/obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
+/obj/item/organ/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	. = ..(mapload, material_key)
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
-	setup(given_dna)
+	setup(given_dna, new_bodytype)
 	initialize_reagents()
 
-/obj/item/organ/proc/setup(datum/dna/given_dna)
+/obj/item/organ/proc/setup(datum/dna/given_dna, decl/bodytype/new_bodytype)
 	//Null DNA setup
 	if(!given_dna)
 		if(dna)
@@ -78,17 +78,24 @@
 				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
 			else
 				//The owner having no DNA can be a valid reason to keep our dna null in some cases
-				log_debug("obj/item/organ/Initialize(): [src] had null dna, with a owner with null dna!")
+				log_debug("obj/item/organ/setup(): [src] had null dna, with a owner with null dna!")
 				dna = null //#TODO: Not sure that's really legal
 				return
 		else
 			//If we have NO OWNER and given_dna, just make one up for consistency
 			given_dna = new/datum/dna()
 			given_dna.check_integrity() //Defaults everything
-	if(BP_IS_PROSTHETIC(src) || !given_dna) // if we start with the prosthetic flag ignore provided dna
+	// order of bodytype preference: new, current, owner, species
+	new_bodytype ||= bodytype || owner?.get_bodytype()
+	if(ispath(new_bodytype, /decl/bodytype))
+		new_bodytype = GET_DECL(new_bodytype)
+	if(!new_bodytype)
+		// this can be fine if dna with species is passed
+		log_debug("obj/item/organ/setup(): [src] had null bodytype, with an owner with null bodytype!")
+	bodytype = new_bodytype // used in later setup procs
+	if((bodytype?.body_flags & BODY_FLAG_NO_DNA) || !given_dna)
 		// set_bodytype will unset invalid dna anyway, so set_dna(null) is unnecessary
-		set_species(owner?.species || global.using_map.default_species)
-		set_bodytype(bodytype || species.base_prosthetics_model, override_material = material?.type)
+		set_species(owner?.get_species() || global.using_map.default_species)
 	else
 		set_dna(given_dna)
 
@@ -136,6 +143,7 @@
 	origin_tech = bodytype.limb_tech
 	max_damage *= bodytype.hardiness
 	min_broken_damage *= bodytype.hardiness
+	bodytype.resize_organ(src)
 	material = GET_DECL(override_material) || GET_DECL(bodytype.material)
 	matter = bodytype.matter
 	create_matter()
@@ -146,7 +154,7 @@
 	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
 		QDEL_NULL(dna)
 
-/obj/item/organ/proc/set_species(var/specie_name)
+/obj/item/organ/proc/set_species(specie_name)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
 	if(istext(specie_name))
 		species = get_species_by_key(specie_name)
@@ -156,8 +164,7 @@
 		species = get_species_by_key(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
 
-	set_bodytype(owner?.bodytype || species.default_bodytype)
-	species.resize_organ(src)
+	set_bodytype(bodytype || species.default_bodytype, override_material = material?.type)
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
@@ -584,9 +591,10 @@ var/global/list/ailment_reference_cache = list()
 	return !owner && ..()
 
 /obj/item/organ/proc/is_vital_to_owner()
+	var/decl/bodytype/root_bodytype = owner?.get_bodytype()
 	if(isnull(vital_to_owner))
-		if(!owner?.species)
+		if(!root_bodytype)
 			vital_to_owner = null
 			return FALSE
-		vital_to_owner = (organ_tag in owner.species.vital_organs)
+		vital_to_owner = (organ_tag in root_bodytype.vital_organs)
 	return vital_to_owner

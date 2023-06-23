@@ -72,7 +72,8 @@
 						low_nut_warning(regen_organ.name)
 
 	if(prob(grow_chance))
-		for(var/limb_type in H.species.has_limbs)
+		var/decl/bodytype/root_bodytype = H.get_bodytype()
+		for(var/limb_type in root_bodytype.has_limbs)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, limb_type)
 			if(E && E.organ_tag != BP_HEAD && !E.is_vital_to_owner() && !E.is_usable())	//Skips heads and vital bits...
 				if (H.nutrition > grow_threshold)
@@ -82,7 +83,7 @@
 				else
 					low_nut_warning(E.name)
 			if(!E)
-				var/list/organ_data = H.species.has_limbs[limb_type]
+				var/list/organ_data = root_bodytype.has_limbs[limb_type]
 				var/limb_path = organ_data["path"]
 				var/obj/item/organ/external/O = new limb_path(H)
 				external_regeneration_effect(O,H)

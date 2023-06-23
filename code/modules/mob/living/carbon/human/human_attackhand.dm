@@ -255,14 +255,15 @@
 				to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
 				return TRUE
 
-		if(!GET_INTERNAL_ORGAN(H, H.species.breathing_organ))
+		var/decl/bodytype/root_bodytype = H.get_bodytype()
+		if(!GET_INTERNAL_ORGAN(H, root_bodytype.breathing_organ))
 			to_chat(H, SPAN_WARNING("You need lungs for mouth-to-mouth resuscitation!"))
 			return TRUE
 
 		if(!need_breathe())
 			return TRUE
 
-		var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
+		var/obj/item/organ/internal/lungs/L = get_organ(root_bodytype.breathing_organ, /obj/item/organ/internal/lungs)
 		if(!L)
 			return
 

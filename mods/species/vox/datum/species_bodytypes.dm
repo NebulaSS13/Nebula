@@ -13,6 +13,29 @@
 	base_color =        "#526d29"
 	body_flags =        BODY_FLAG_NO_DNA
 
+	vital_organs = list(
+		BP_STACK,
+		BP_BRAIN
+	)
+
+	override_limb_types = list(
+		BP_GROIN = /obj/item/organ/external/groin/vox,
+		BP_TAIL = /obj/item/organ/external/tail/vox
+	)
+
+	has_organ = list(
+		BP_STOMACH =    /obj/item/organ/internal/stomach/vox,
+		BP_HEART =      /obj/item/organ/internal/heart/vox,
+		BP_LUNGS =      /obj/item/organ/internal/lungs/vox,
+		BP_LIVER =      /obj/item/organ/internal/liver/vox,
+		BP_KIDNEYS =    /obj/item/organ/internal/kidneys/vox,
+		BP_BRAIN =      /obj/item/organ/internal/brain,
+		BP_EYES =       /obj/item/organ/internal/eyes/vox,
+		BP_STACK =      /obj/item/organ/internal/voxstack,
+		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
+	)
+
+
 /decl/bodytype/vox/Initialize()
 	if(!equip_adjust)
 		equip_adjust = list(

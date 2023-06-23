@@ -29,7 +29,7 @@
 	if(href_list["bodytype"] && can_change(APPEARANCE_BODY))
 		var/decl/species/species = owner.get_species()
 		var/decl/bodytype/B = species.get_bodytype_by_name(href_list["bodytype"])
-		if(istype(B) && (B in owner.species.available_bodytypes) && owner.set_bodytype(B, TRUE))
+		if(istype(B) && (B in owner.species.available_bodytypes) && owner.set_bodytype(B))
 			return TRUE
 
 	if(href_list["skin_tone"] && can_change_skin_tone())

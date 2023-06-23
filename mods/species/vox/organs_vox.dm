@@ -163,8 +163,8 @@
 	var/datum/mind/backup
 	var/prompting = FALSE // Are we waiting for a user prompt?
 
-/obj/item/organ/internal/voxstack/Initialize(mapload, datum/dna/given_dna)
-	. = ..()
+/obj/item/organ/internal/voxstack/Initialize(mapload, datum/dna/given_dna, decl/bodytype/new_bodytype)
+	. = ..(mapload, given_dna, species.base_prosthetics_model)
 	do_backup()
 	set_bodytype(species.base_prosthetics_model)
 

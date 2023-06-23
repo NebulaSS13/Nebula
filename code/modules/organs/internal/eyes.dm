@@ -31,7 +31,7 @@
 	flash_mod = 1
 	darksight_range = 2
 
-/obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna)
+/obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	. = ..()
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow

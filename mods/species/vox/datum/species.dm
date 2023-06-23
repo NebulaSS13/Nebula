@@ -24,11 +24,6 @@
 	name_plural = SPECIES_VOX
 	base_prosthetics_model = /decl/bodytype/prosthetic/vox/crap
 
-	vital_organs = list(
-		BP_STACK,
-		BP_BRAIN
-	)
-
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
 	)
@@ -98,23 +93,6 @@
 
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5
-
-	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_TAIL = /obj/item/organ/external/tail/vox
-	)
-
-	has_organ = list(
-		BP_STOMACH =    /obj/item/organ/internal/stomach/vox,
-		BP_HEART =      /obj/item/organ/internal/heart/vox,
-		BP_LUNGS =      /obj/item/organ/internal/lungs/vox,
-		BP_LIVER =      /obj/item/organ/internal/liver/vox,
-		BP_KIDNEYS =    /obj/item/organ/internal/kidneys/vox,
-		BP_BRAIN =      /obj/item/organ/internal/brain,
-		BP_EYES =       /obj/item/organ/internal/eyes/vox,
-		BP_STACK =      /obj/item/organ/internal/voxstack,
-		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
-	)
 
 	available_pronouns = list(
 		/decl/pronouns/neuter,

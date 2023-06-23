@@ -10,10 +10,11 @@
 
 #define SETUP_RANDOM_COLOR_SETTER(X, Y)\
 /mob/living/carbon/human/proc/randomize_##X(){\
-	if(!bodytype){\
+	var/decl/bodytype/root_bodytype = get_bodytype();\
+	if(!root_bodytype){\
 		return;\
 	}\
-	var/colour = bodytype.get_random_##X();\
+	var/colour = root_bodytype.get_random_##X();\
 	if(colour){\
 		Y(colour);\
 	}\
@@ -61,9 +62,10 @@ SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)
 	return random_skin_tone(src)
 
 /mob/living/carbon/human/proc/randomize_skin_tone()
-	if(!bodytype)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(!root_bodytype)
 		return
-	var/new_tone = bodytype.get_random_skin_tone()
+	var/new_tone = root_bodytype.get_random_skin_tone()
 	if(!isnull(new_tone))
 		change_skin_tone(new_tone)
 

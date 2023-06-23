@@ -15,6 +15,11 @@
 	base_color = "#ae7d32"
 	base_eye_color = "#00aa00"
 
+	override_limb_types = list(
+		BP_EYES = /obj/item/organ/internal/eyes/taj,
+		BP_TAIL = /obj/item/organ/external/tail/cat
+	)
+
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(
 		slot_glasses_str =   list("[NORTH]" = list("x" =  0, "y" = 2), "[EAST]" = list("x" = 0, "y" = 2), "[SOUTH]" = list("x" =  0, "y" = 2),  "[WEST]" = list("x" = 0, "y" = 2)),

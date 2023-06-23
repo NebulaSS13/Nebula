@@ -16,6 +16,13 @@
 	base_hair_color = "#192e19"
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
+	override_organ_types = list(
+		BP_EYES = /obj/item/organ/internal/eyes/lizard,
+		BP_BRAIN = /obj/item/organ/internal/brain/lizard
+	)
+
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
+
 /decl/bodytype/lizard/masculine
 	name =                   "masculine"
 	icon_base =              'mods/species/bayliens/unathi/icons/body_male.dmi'

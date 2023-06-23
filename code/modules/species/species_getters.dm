@@ -68,9 +68,6 @@
 /decl/species/proc/get_root_species_name(var/mob/living/carbon/human/H)
 	return name
 
-/decl/species/proc/get_limb_from_zone(var/limb)
-	. = length(LAZYACCESS(limb_mapping, limb)) ? pick(limb_mapping[limb]) : limb
-
 /decl/species/proc/get_bodytype_by_name(var/bodytype_name)
 	bodytype_name = trim(lowertext(bodytype_name))
 	if(!bodytype_name)

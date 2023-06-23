@@ -5,6 +5,15 @@
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
 
+// These two should always return a decl, NEVER null.
+/datum/preferences/proc/get_species_decl()
+	RETURN_TYPE(/decl/species)
+	return get_species_by_key(species || global.using_map.default_species)
+
+/datum/preferences/proc/get_bodytype_decl()
+	RETURN_TYPE(/decl/bodytype)
+	return get_species_decl().get_bodytype_by_name(bodytype || global.using_map.default_bodytype)
+
 /datum/category_item/player_setup_item/physical/basic
 	name = "Basic"
 	sort_order = 1

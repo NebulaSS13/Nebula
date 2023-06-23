@@ -8,6 +8,17 @@
 	appearance_flags =  HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	base_color = "#252525"
 	base_eye_color = "#f5c842"
+	mob_size = MOB_SIZE_SMALL
+	has_organ = list(
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes/avian
+	)
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/avian)
 
 	var/tail =              "tail_avian"
 	var/tail_icon =         'mods/species/neoavians/icons/tail.dmi'
@@ -59,36 +70,36 @@
 	. = ..()
 
 /obj/item/organ/external/tail/avian/get_tail()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))
-		var/decl/bodytype/avian/bird_bod = owner.bodytype
+	if(istype(bodytype, /decl/bodytype/avian))
+		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail
 
 /obj/item/organ/external/tail/avian/get_tail_animation()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))
-		var/decl/bodytype/avian/bird_bod = owner.bodytype
+	if(istype(bodytype, /decl/bodytype/avian))
+		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_animation
 
 /obj/item/organ/external/tail/avian/get_tail_icon()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))
-		var/decl/bodytype/avian/bird_bod = owner.bodytype
+	if(istype(bodytype, /decl/bodytype/avian))
+		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_icon
 
 /obj/item/organ/external/tail/avian/get_tail_states()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))
-		var/decl/bodytype/avian/bird_bod = owner.bodytype
+	if(istype(bodytype, /decl/bodytype/avian))
+		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_states
 
 /obj/item/organ/external/tail/avian/get_tail_blend()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))
-		var/decl/bodytype/avian/bird_bod = owner.bodytype
+	if(istype(bodytype, /decl/bodytype/avian))
+		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_blend
 
 /obj/item/organ/external/tail/avian/get_tail_hair()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))
-		var/decl/bodytype/avian/bird_bod = owner.bodytype
+	if(istype(bodytype, /decl/bodytype/avian))
+		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_hair
 
 /obj/item/organ/external/tail/avian/get_tail_hair_blend()
-	if(istype(owner?.bodytype, /decl/bodytype/avian))
-		var/decl/bodytype/avian/bird_bod = owner.bodytype
+	if(istype(bodytype, /decl/bodytype/avian))
+		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail_hair_blend

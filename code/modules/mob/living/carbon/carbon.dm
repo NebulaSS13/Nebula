@@ -346,6 +346,7 @@
 		..()
 
 /mob/living/carbon/get_species()
+	RETURN_TYPE(/decl/species)
 	return species
 
 /mob/living/carbon/get_species_name()

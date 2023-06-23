@@ -61,8 +61,8 @@
 
 	// Update our target dolly.
 	if(user.zone_sel)
-		var/decl/species/target_species = get_species()
-		if(target_species && (BP_TAIL in target_species.has_limbs))
+		var/decl/bodytype/target_bodytype = get_bodytype()
+		if(target_bodytype && (BP_TAIL in target_bodytype.has_limbs))
 			user.zone_sel.icon_state = "zone_sel_tail"
 		else
 			user.zone_sel.icon_state = "zone_sel"
