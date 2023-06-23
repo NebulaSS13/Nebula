@@ -85,7 +85,7 @@
 
 		while(length(eating))
 			var/atom/movable/thing = pick_n_take(eating)
-			if((thing == src) || thing.anchored || prob(15))
+			if(QDELETED(thing) || (thing == src) || thing.anchored || prob(15))
 				continue
 
 			if(prob(30))
