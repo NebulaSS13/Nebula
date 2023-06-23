@@ -43,7 +43,6 @@
 
 	flesh_color = "#ae7d32"
 	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
-	default_h_style = /decl/sprite_accessory/hair/taj/lynx
 
 	organs_icon = 'mods/species/bayliens/tajaran/icons/organs.dmi'
 

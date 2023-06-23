@@ -23,6 +23,8 @@
 
 	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
 
+	default_h_style = /decl/sprite_accessory/hair/lizard/frills_long
+
 /decl/bodytype/lizard/masculine
 	name =                   "masculine"
 	icon_base =              'mods/species/bayliens/unathi/icons/body_male.dmi'

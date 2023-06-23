@@ -1160,7 +1160,7 @@
 	return active_hand.get_manual_dexterity()
 
 /mob/living/carbon/human/lose_hair()
-	if(species.set_default_hair(src))
+	if(get_bodytype().set_default_hair(src))
 		. = TRUE
 	if(species.handle_additional_hair_loss(src))
 		. = TRUE
@@ -1249,7 +1249,7 @@
 		facial_hair_colour = root_bodytype.base_hair_color
 	if(!eye_colour)
 		eye_colour = root_bodytype.base_eye_color
-	species.set_default_hair(src, override_existing = FALSE, defer_update_hair = TRUE)
+	root_bodytype.set_default_hair(src, override_existing = FALSE, defer_update_hair = TRUE)
 	if(!b_type && length(species?.blood_types))
 		b_type = pickweight(species.blood_types)
 

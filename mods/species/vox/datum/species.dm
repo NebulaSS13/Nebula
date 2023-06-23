@@ -36,8 +36,6 @@
 		/decl/natural_attack/bite/strong
 	)
 
-	default_h_style = /decl/sprite_accessory/hair/vox/short
-
 	base_markings = list(
 		/decl/sprite_accessory/marking/vox/beak =   "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",

@@ -47,7 +47,6 @@
 	spawn_flags = SPECIES_CAN_JOIN
 
 	flesh_color = "#8cd7a3"
-	default_h_style = /decl/sprite_accessory/hair/skrell/short
 	organs_icon = 'mods/species/bayliens/skrell/icons/body/organs.dmi'
 
 	blood_types = list(

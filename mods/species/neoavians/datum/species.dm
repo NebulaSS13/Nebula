@@ -27,7 +27,6 @@
 	meat_type = /obj/item/chems/food/meat/chicken
 
 	base_markings = list(/decl/sprite_accessory/marking/avian = "#454545")
-	default_h_style = /decl/sprite_accessory/hair/avian
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/assistant/avian
 

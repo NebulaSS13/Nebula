@@ -19,6 +19,7 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/avian
 	)
 	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/avian)
+	default_h_style = /decl/sprite_accessory/hair/avian
 
 	var/tail =              "tail_avian"
 	var/tail_icon =         'mods/species/neoavians/icons/tail.dmi'

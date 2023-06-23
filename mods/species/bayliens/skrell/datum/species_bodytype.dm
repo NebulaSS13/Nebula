@@ -17,3 +17,4 @@
 		BP_BRAIN =   /obj/item/organ/internal/brain,
 		BP_EYES =    /obj/item/organ/internal/eyes/skrell
 	)
+	default_h_style = /decl/sprite_accessory/hair/skrell/short

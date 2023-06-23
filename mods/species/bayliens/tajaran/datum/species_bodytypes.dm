@@ -14,6 +14,7 @@
 	base_hair_color = "#46321c"
 	base_color = "#ae7d32"
 	base_eye_color = "#00aa00"
+	default_h_style = /decl/sprite_accessory/hair/taj/lynx
 
 	override_limb_types = list(
 		BP_EYES = /obj/item/organ/internal/eyes/taj,

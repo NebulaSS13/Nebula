@@ -147,6 +147,9 @@ var/global/list/bodytypes_by_category = list()
 	var/vital_organ_failure_death_delay = 25 SECONDS
 	var/mob_size = MOB_SIZE_MEDIUM
 
+	var/default_h_style = /decl/sprite_accessory/hair/bald
+	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
@@ -200,6 +203,10 @@ var/global/list/bodytypes_by_category = list()
 		. += "uses hair color but missing base_hair_color"
 	if((appearance_flags & HAS_EYE_COLOR) && isnull(base_eye_color))
 		. += "uses eye color but missing base_eye_color"
+	if(isnull(default_h_style))
+		. += "null default_h_style (use a bald/hairless hairstyle if 'no hair' is intended)"
+	if(isnull(default_f_style))
+		. += "null default_f_style (use a shaved/hairless facial hair style if 'no facial hair' is intended)"
 
 /decl/bodytype/proc/max_skin_tone()
 	if(appearance_flags & HAS_SKIN_TONE_GRAV)
@@ -295,3 +302,13 @@ var/global/list/bodytypes_by_category = list()
 		var/obj/item/organ/internal/I = has_organ[bp_tag]
 		if(initial(I.parent_organ) == organ.organ_tag)
 			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))
+
+/decl/bodytype/proc/set_default_hair(mob/living/carbon/human/organism, override_existing = TRUE, defer_update_hair = FALSE)
+	if(!organism.h_style || (override_existing && (organism.h_style != default_h_style)))
+		organism.h_style = default_h_style
+		. = TRUE
+	if(!organism.h_style || (override_existing && (organism.f_style != default_f_style)))
+		organism.f_style = default_f_style
+		. = TRUE
+	if(. && !defer_update_hair)
+		organism.update_hair()

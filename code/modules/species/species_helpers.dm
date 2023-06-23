@@ -59,7 +59,7 @@ var/global/list/stored_shock_by_ref = list()
 	mannequin.eye_colour = default_bodytype.base_eye_color
 	mannequin.hair_colour = default_bodytype.base_hair_color
 	mannequin.facial_hair_colour = default_bodytype.base_hair_color
-	set_default_hair(mannequin)
+	default_bodytype.set_default_hair(mannequin)
 
 	if(preview_outfit)
 		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)

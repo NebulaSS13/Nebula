@@ -12,6 +12,7 @@
 	base_eye_color =    "#d60093"
 	base_color =        "#526d29"
 	body_flags =        BODY_FLAG_NO_DNA
+	default_h_style = /decl/sprite_accessory/hair/vox/short
 
 	vital_organs = list(
 		BP_STACK,

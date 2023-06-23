@@ -53,9 +53,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	var/organs_icon		//species specific internal organs icons
 
-	var/default_h_style = /decl/sprite_accessory/hair/bald
-	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
-
 	var/strength = STR_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/short_sighted                         // Permanent weldervision.
@@ -411,10 +408,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	else if(low_light_vision_adjustment_speed < 0)
 		. += "low light vision adjustment speed is less than 0 (below 0%)"
 
-	if(isnull(default_h_style))
-		. += "null default_h_style (use a bald/hairless hairstyle if 'no hair' is intended)"
-	if(isnull(default_f_style))
-		. += "null default_f_style (use a shaved/hairless facial hair style if 'no facial hair' is intended)"
 	if(!length(blood_types))
 		. += "missing at least one blood type"
 	if(default_bodytype && !(default_bodytype in available_bodytypes))
@@ -626,16 +619,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 				if(H.equipment_light_protection)
 					light -= H.equipment_light_protection
 	return clamp(max(prescriptions, light), 0, 7)
-
-/decl/species/proc/set_default_hair(mob/living/carbon/human/organism, override_existing = TRUE, defer_update_hair = FALSE)
-	if(!organism.h_style || (override_existing && (organism.h_style != default_h_style)))
-		organism.h_style = default_h_style
-		. = TRUE
-	if(!organism.h_style || (override_existing && (organism.f_style != default_f_style)))
-		organism.f_style = default_f_style
-		. = TRUE
-	if(. && !defer_update_hair)
-		organism.update_hair()
 
 /decl/species/proc/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
 	return FALSE
@@ -860,7 +843,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(mannequin)
 
 			mannequin.change_species(name)
-			customize_preview_mannequin(mannequin)
+			default_bodytype.customize_preview_mannequin(mannequin)
 
 			preview_icon = icon(mannequin?.get_bodytype().icon_template)
 			var/mob_width = preview_icon.Width()
