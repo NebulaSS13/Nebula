@@ -383,7 +383,7 @@
 	return
 
 /mob/living/carbon/human/get_bodytype_category()
-	. = get_bodytype().bodytype_category
+	. = get_bodytype()?.bodytype_category
 
 /mob/living/carbon/human/check_has_mouth()
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
