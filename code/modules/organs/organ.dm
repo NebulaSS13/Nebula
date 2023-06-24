@@ -144,7 +144,7 @@
 	max_damage *= bodytype.hardiness
 	min_broken_damage *= bodytype.hardiness
 	bodytype.resize_organ(src)
-	material = GET_DECL(override_material) || GET_DECL(bodytype.material)
+	set_material(override_material || bodytype.material)
 	matter = bodytype.matter
 	create_matter()
 	// maybe this should be a generalized repopulate_reagents helper??
