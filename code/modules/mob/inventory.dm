@@ -175,13 +175,11 @@
 
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
-/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null, var/play_dropsound = TRUE)
-	if(W)
-		remove_from_mob(W, target, play_dropsound)
-		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
-		update_icon()
-		return 1
-	return 0
+/mob/proc/drop_from_inventory(var/obj/item/dropping_item, var/atom/target = null, var/play_dropsound = TRUE)
+	if(dropping_item)
+		remove_from_mob(dropping_item, target, play_dropsound)
+		return TRUE
+	return FALSE
 
 // Drops a held item from a given slot.
 /mob/proc/drop_from_hand(var/slot, var/atom/Target)
