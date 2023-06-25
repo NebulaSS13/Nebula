@@ -52,7 +52,7 @@
 	for (var/mappath in mappaths)
 		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, z_offset, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE, clear_contents=(template_flags & TEMPLATE_FLAG_CLEAR_CONTENTS), level_data_type=src.level_data_type)
 		if(M)
-			bounds = extend_bounds_if_needed(bounds, M.bounds)
+			extend_bounds_if_needed(bounds, M.bounds)
 			z_offset++
 		else
 			return FALSE
@@ -144,7 +144,7 @@
 	if(!M)
 		PRINT_STACK_TRACE("Template '[src]' failed to load map '[mappath]' at ([x], [y], [z]).")
 	else if(bounds)
-		bounds = extend_bounds_if_needed(bounds, M.bounds)
+		extend_bounds_if_needed(bounds, M.bounds)
 	return M
 
 ///Load the template onto a freshly created z-level.
@@ -238,7 +238,7 @@
 	subtemplates_to_spawn = null
 
 /datum/map_template/proc/extend_bounds_if_needed(var/list/existing_bounds, var/list/new_bounds)
-	var/list/bounds_to_combine = existing_bounds.Copy()
+	var/list/bounds_to_combine = existing_bounds
 	for (var/min_bound in list(MAP_MINX, MAP_MINY, MAP_MINZ))
 		bounds_to_combine[min_bound] = min(existing_bounds[min_bound], new_bounds[min_bound])
 	for (var/max_bound in list(MAP_MAXX, MAP_MAXY, MAP_MAXZ))
