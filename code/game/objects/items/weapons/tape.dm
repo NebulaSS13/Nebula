@@ -16,7 +16,7 @@
 
 /obj/item/stack/tape_roll/can_split()
 	return FALSE
-/obj/item/stack/tape_roll/can_merge()
+/obj/item/stack/tape_roll/can_merge_stacks(var/obj/item/stack/other)
 	return FALSE
 
 ///////////////////////////////////////////////

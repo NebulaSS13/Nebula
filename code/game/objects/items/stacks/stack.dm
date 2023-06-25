@@ -355,8 +355,6 @@
 	return max_amount
 
 /obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
-	if(!can_merge())
-		return
 	var/list/stacks = list()
 	if(check_hands && user)
 		for(var/obj/item/stack/item in user.get_held_items())
@@ -364,7 +362,7 @@
 	for (var/obj/item/stack/item in user?.loc)
 		stacks |= item
 	for (var/obj/item/stack/item in stacks)
-		if (item==src)
+		if(item == src || !(can_merge_stacks(item) || item.can_merge_stacks(src)))
 			continue
 		var/transfer = src.transfer_to(item)
 		if(user && transfer)
@@ -396,7 +394,7 @@
 	return TRUE
 
 /obj/item/stack/attackby(obj/item/W, mob/user)
-	if (istype(W, /obj/item/stack) && can_merge())
+	if (istype(W, /obj/item/stack) && can_merge_stacks(W))
 		var/obj/item/stack/S = W
 		. = src.transfer_to(S)
 
@@ -414,5 +412,5 @@
 	return !(uses_charge && !force) //#TODO: The !force was a hacky way to tell if its a borg or rigsuit module. Probably would be good to find a better way..
 
 /**Whether a stack type has the capability to be merged. */
-/obj/item/stack/proc/can_merge()
+/obj/item/stack/proc/can_merge_stacks(var/obj/item/stack/other)
 	return !(uses_charge && !force)
