@@ -44,19 +44,13 @@ class DMM:
             return bio.getvalue()
 
     def generate_new_key(self):
-        free_keys = self._ensure_free_keys(1)
+        self._ensure_free_keys(1)
+        max_key = max_key_for(self.key_length)
         # choose one of the free keys at random
-        key = 0
-        while free_keys:
-            if key not in self.dictionary:
-                # this construction is used to avoid needing to construct the
-                # full set in order to random.choice() from it
-                if random.random() < 1 / free_keys:
-                    return key
-                free_keys -= 1
-            key += 1
-
-        raise RuntimeError("ran out of keys, this shouldn't happen")
+        key = random.randint(0, max_key - 1)
+        while key in self.dictionary:
+            key = random.randint(0, max_key - 1)
+        return key
 
     def overwrite_key(self, key, fixed, bad_keys):
         try:
@@ -74,6 +68,14 @@ class DMM:
         for k, v in self.grid.items():
             # reassign the grid entries which used the old key
             self.grid[k] = bad_keys.get(v, v)
+
+    def remove_unused_keys(self, modified_keys = None):
+        unused_keys = list(set(modified_keys)) if modified_keys is not None else self.dictionary.keys()
+        for key in self.grid.values():
+            if key in unused_keys:
+                unused_keys.remove(key)
+        for key in unused_keys:
+            del self.dictionary[key]
 
     def _presave_checks(self):
         # last-second handling of bogus keys to help prevent and fix broken maps
