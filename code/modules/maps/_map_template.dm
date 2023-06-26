@@ -156,37 +156,8 @@
 	if(!centered)
 		x = 1
 		y = 1
-
-	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
-	var/list/atoms_to_initialise = list()
-	var/shuttle_state = pre_init_shuttles()
-	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
-	ASSERT(isnull(global._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
-	global._preloader.current_map_hash = map_hash
-
-	var/initialized_areas_by_type = list()
-	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = load_single_path(mappath, x, y, world.maxz + 1, bounds, initialized_areas_by_type, no_changeturf, FALSE)
-		if (M)
-			atoms_to_initialise += M.atoms_to_initialise
-		else
-			//Abort if loading failed
-			global._preloader.current_map_hash = null //Clear current map hash to prevent problems if we load something else later and cause false positives
-			CRASH("Failed to load '[src]''s '[mappath]' map file!")
-
-	global._preloader.current_map_hash = null
-
-	//initialize things that are normally initialized after map load
-	init_atoms(atoms_to_initialise)
-	init_shuttles(shuttle_state, map_hash, initialized_areas_by_type)
-	after_load()
-	for(var/z_index = bounds[MAP_MINZ] to bounds[MAP_MAXZ])
-		var/datum/level_data/level = SSmapping.levels_by_z[z_index]
-		level.after_template_load(src)
-		if(SSlighting.initialized)
-			SSlighting.InitializeZlev(z_index)
-	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
-	loaded++
+	SSmapping.increment_world_z_size(/datum/level_data/space)
+	load(locate(x, y, world.maxz), FALSE, no_changeturf)
 
 	return WORLD_CENTER_TURF(world.maxz)
 
