@@ -79,9 +79,12 @@ SUBSYSTEM_DEF(lighting)
 /datum/controller/subsystem/lighting/proc/InitializeZlev(zlev)
 	for (var/thing in Z_ALL_TURFS(zlev))
 		var/turf/T = thing
-		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) && !T.lighting_overlay)	// Can't assume that one hasn't already been created on bay/neb.
-			new /atom/movable/lighting_overlay(T)
-			. += 1
+		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+			if (T.lighting_overlay)
+				log_ss(name, "Found unexpected lighting overlay at [T.x],[T.y],[T.z]")
+			else
+				new /atom/movable/lighting_overlay(T)
+				. += 1
 			if (T.ambient_light)
 				T.generate_missing_corners()	// Forcibly generate corners.
 
