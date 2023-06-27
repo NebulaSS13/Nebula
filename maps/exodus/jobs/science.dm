@@ -104,7 +104,7 @@
 		"Xenobotanist",
 		"Xenoarcheologist",
 		"Anomalist",
-		"Phoron Researcher"
+		"High Energy Researcher"
 	)
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/science/scientist

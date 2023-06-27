@@ -444,7 +444,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	// Vary volume by power produced.
 	if(power)
-		// Volume will be 1 at no power, ~12.5 at ENERGY_NITROGEN, and 20+ at ENERGY_PHORON.
+		// Volume will be 1 at no power, ~12.5 at ENERGY_NITROGEN, and 20+ at ENERGY_HYDROGEN.
+		// (this is probably wrong since hydrogen heat cap is changed from phoron)
 		// Capped to 20 volume since higher volumes get annoying and it sounds worse.
 		// Formula previously was min(round(power/10)+1, 20)
 		soundloop.volume = clamp((50 + (power / 50)), 50, 100)
