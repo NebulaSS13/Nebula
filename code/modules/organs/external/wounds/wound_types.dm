@@ -309,7 +309,7 @@
 
 	..(damage_amt)
 
-/datum/wound/lost_limb/can_merge(var/datum/wound/other)
+/datum/wound/lost_limb/can_merge_wounds(var/datum/wound/other)
 	return 0 //cannot be merged
 
 /** CRYSTALLINE WOUNDS **/

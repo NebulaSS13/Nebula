@@ -621,16 +621,16 @@ By design, d1 is the smallest direction and d2 is the highest
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !
 //   - Cable coil : merge cables
-/obj/item/stack/cable_coil/can_merge(var/obj/item/stack/cable_coil/C)
-	return color == C.color
+/obj/item/stack/cable_coil/can_merge_stacks(var/obj/item/stack/other)
+	return !other || (istype(other) && other.color == color)
 
-/obj/item/stack/cable_coil/cyborg/can_merge()
-	return 1
+/obj/item/stack/cable_coil/cyborg/can_merge_stacks(var/obj/item/stack/other)
+	return TRUE
 
 /obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/S)
 	if(!istype(S))
 		return 0
-	if(!(can_merge(S) || S.can_merge(src)))
+	if(!(can_merge_stacks(S) || S.can_merge_stacks(src)))
 		return 0
 
 	return ..()
