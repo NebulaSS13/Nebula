@@ -181,7 +181,7 @@
 		return
 
 	if(!tank)
-		to_chat(user, SPAN_WARNING("Attach a phoron tank first!"))
+		to_chat(user, SPAN_WARNING("Attach a fuel tank first!"))
 		return
 
 	var/list/options = list(
