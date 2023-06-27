@@ -117,7 +117,7 @@
 	if ((old_opacity != opacity) || (tidlu != old_dynamic_lighting) || force_lighting_update)
 		reconsider_lights()
 
-	if (tidlu != old_dynamic_lighting)
+	if (SSlighting.initialized && (tidlu != old_dynamic_lighting))
 		if (tidlu)
 			lighting_build_overlay()
 		else

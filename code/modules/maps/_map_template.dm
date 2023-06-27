@@ -161,7 +161,7 @@
 
 	return WORLD_CENTER_TURF(world.maxz)
 
-/datum/map_template/proc/load(turf/T, centered=FALSE)
+/datum/map_template/proc/load(turf/T, centered=FALSE, no_changeturf = FALSE)
 	if(centered)
 		T = locate(T.x - (round(width/2) - 1), T.y - (round(height/2) - 1), T.z)
 	if(!T)
@@ -178,7 +178,7 @@
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = load_single_path(mappath, T.x, T.y, T.z, null, initialized_areas_by_type, FALSE, TRUE)
+		var/datum/map_load_metadata/M = load_single_path(mappath, T.x, T.y, T.z, null, initialized_areas_by_type, no_changeturf, TRUE)
 		if (M)
 			atoms_to_initialise += M.atoms_to_initialise
 		else
@@ -192,7 +192,7 @@
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state, map_hash, initialized_areas_by_type)
 	after_load()
-	if (SSlighting.initialized)
+	if (no_changeturf && SSlighting.initialized)
 		SSlighting.InitializeTurfs(atoms_to_initialise)	// Hopefully no turfs get placed on new coords by SSatoms.
 
 	log_game("[name] loaded at at [T.x],[T.y],[T.z]")
