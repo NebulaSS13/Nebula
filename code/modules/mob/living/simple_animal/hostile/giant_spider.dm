@@ -165,9 +165,9 @@
 	. = ..()
 	if(isliving(.))
 		if(health < maxHealth)
-			var/obj/item/W = get_natural_weapon()
-			if(W)
-				health += (0.2 * W.force) //heal a bit on hit
+			var/obj/item/attacking_with = get_natural_weapon()
+			if(attacking_with)
+				health += (0.2 * attacking_with.force) //heal a bit on hit
 		if(ishuman(.))
 			var/mob/living/carbon/human/H = .
 			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
@@ -241,9 +241,9 @@ Guard caste procs
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
 	audible_message("<span class='danger'>\The [src] chitters wildly!</span>")
-	var/obj/item/W = get_natural_weapon()
-	if(W)
-		W.force = initial(W.force) + 5
+	var/obj/item/attacking_with = get_natural_weapon()
+	if(attacking_with)
+		attacking_with.force = initial(attacking_with.force) + 5
 	move_to_delay--
 	break_stuff_probability = 45
 	addtimer(CALLBACK(src, .proc/calm_down), 3 MINUTES)
@@ -251,9 +251,9 @@ Guard caste procs
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/calm_down()
 	berserking = FALSE
 	visible_message("<span class='notice'>\The [src] calms down and surveys the area.</span>")
-	var/obj/item/W = get_natural_weapon()
-	if(W)
-		W.force = initial(W.force)
+	var/obj/item/attacking_with = get_natural_weapon()
+	if(attacking_with)
+		attacking_with.force = initial(attacking_with.force)
 	move_to_delay++
 	break_stuff_probability = 10
 

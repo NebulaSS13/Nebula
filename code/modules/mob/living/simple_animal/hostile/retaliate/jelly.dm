@@ -42,9 +42,9 @@
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/Initialize()
 	. = ..()
 	set_scale(jelly_scale)
-	var/obj/item/W = get_natural_weapon()
-	if(W)
-		W.force *= jelly_scale
+	var/obj/item/attacking_with = get_natural_weapon()
+	if(attacking_with)
+		attacking_with.force *= jelly_scale
 	if(!megajelly_color)
 		megajelly_color = color_matrix_rotate_hue(round(rand(0,360),20))
 	color = megajelly_color

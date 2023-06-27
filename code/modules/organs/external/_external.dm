@@ -666,7 +666,7 @@ This function completely restores a damaged organ to perfect condition.
 			W.autoheal_cutoff = 0
 		else
 			for(var/datum/wound/other in wounds)
-				if(other.can_merge(W))
+				if(other.can_merge_wounds(W))
 					other.merge_wound(W)
 					return
 		LAZYADD(wounds, W)

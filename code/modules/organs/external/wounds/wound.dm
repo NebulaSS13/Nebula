@@ -89,7 +89,7 @@
 				return salved
 
 	// Checks whether other other can be merged into src.
-/datum/wound/proc/can_merge(var/datum/wound/other)
+/datum/wound/proc/can_merge_wounds(var/datum/wound/other)
 	if (other.type != src.type) return 0
 	if (other.current_stage != src.current_stage) return 0
 	if (other.damage_type != src.damage_type) return 0

@@ -804,7 +804,7 @@ About the new airlock wires panel:
 	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/simple_animal))
 		var/mob/living/simple_animal/A = user
 		var/obj/item/I = A.get_natural_weapon()
-		if(I.force >= 10)
+		if(I?.force >= 10)
 			if(density)
 				visible_message(SPAN_DANGER("\The [A] forces \the [src] open!"))
 				open(1)
