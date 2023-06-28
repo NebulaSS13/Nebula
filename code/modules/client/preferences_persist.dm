@@ -1,4 +1,6 @@
 #define PREF_SER_VERSION 1
+/datum/preferences
+	var/comments_record_id
 
 /datum/preferences/proc/get_path(ckey, record_key, extension="json")
 	return "data/player_saves/[copytext(ckey,1,2)]/[ckey]/[record_key].[extension]"
@@ -42,9 +44,28 @@
 		R = new /datum/pref_record_reader/null_reader(PREF_SER_VERSION)
 	player_setup.load_preferences(R)
 
+/datum/preferences/proc/validate_comments_record(var/validate_slot)
+	if(!SScharacter_info.initialized)
+		return "The comments subsystem is still loading, or something has gone wrong. Please wait for server initialization to finish, and contact an admin if this message persists afterwards."
+	if(isnull(validate_slot))
+		validate_slot = default_slot
+	var/slot_key = validate_slot && get_slot_key(validate_slot)
+	if(!slot_key || !LAZYACCESS(slot_names, slot_key)) // Not actually a character slot.
+		return "You have tried to validate an invalid slot ('[validate_slot || "null"]'). Please report this as a bug on the issue tracker."
+	comments_record_id = SScharacter_info.get_record_id("[client_ckey]-[get_slot_key(validate_slot || default_slot)]")
+	var/datum/character_information/comments = SScharacter_info.get_record(comments_record_id, TRUE)
+	if(!comments)
+		comments = SScharacter_info.get_or_create_record(comments_record_id, TRUE)
+		comments.ckey = client_ckey
+		comments.char_name = slot_names[slot_key] || "Unknown" // this may be inaccurate but it doesn't really matter at this point.
+		comments.update_fields()
+	comments_record_id = comments.record_id
+
 /datum/preferences/proc/save_preferences()
 	var/datum/pref_record_writer/json_list/W = new(PREF_SER_VERSION)
 	player_setup.save_preferences(W)
+	if(istext(comments_record_id) && length(comments_record_id))
+		SScharacter_info.queue_to_save(comments_record_id)
 	save_pref_record("preferences", W.data)
 
 /datum/preferences/proc/get_slot_key(slot)
@@ -60,14 +81,22 @@
 			default_slot = slot
 			SScharacter_setup.queue_preferences_save(src)
 
+	var/record_id = "[client_ckey]-[get_slot_key(default_slot)]"
 	if(slot == SAVE_RESET)
 		// If we're resetting, set everything to null. Sanitization will clean it up
 		var/datum/pref_record_reader/null_reader/R = new(PREF_SER_VERSION)
+		SScharacter_info.clear_record(record_id)
 		player_setup.load_character(R)
 	else
 		var/datum/pref_record_reader/R = load_pref_record(get_slot_key(slot))
 		if(!R)
 			R = new /datum/pref_record_reader/null_reader(PREF_SER_VERSION)
+		// Load/reload our character info record - mass preload is
+		// done if comments are enabled, but not done otherwise.
+		if(!SScharacter_info.get_record(record_id, TRUE))
+			SScharacter_info.load_record(record_id)
+		else
+			SScharacter_info.reload_record(record_id)
 		player_setup.load_character(R)
 
 	update_preview_icon()

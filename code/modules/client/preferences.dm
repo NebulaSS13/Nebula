@@ -189,6 +189,17 @@ var/global/list/time_prefs_fixed = list()
 		update_preview_icon()
 	show_character_previews()
 
+	// This is a bit out of place; we do this here because it means that loading and viewing
+	// a character slot is sufficient to refresh our comment history. Otherwise, you would
+	// have to go back and edit your comments every X days for them to stay visible.
+	if(comments_record_id)
+		for(var/record_id in SScharacter_info._comment_holders_by_id)
+			var/datum/character_information/record = SScharacter_info._comment_holders_by_id[record_id]
+			if(record)
+				for(var/datum/character_comment/comment in record.comments)
+					if(comment.author_id == comments_record_id)
+						comment.last_updated = REALTIMEOFDAY
+
 	var/dat = list("<center>")
 	if(is_guest)
 		dat += SPAN_WARNING("Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance.")
@@ -342,6 +353,8 @@ var/global/list/time_prefs_fixed = list()
 
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
+	validate_comments_record() // Make sure a record has been generated for this character.
+	character.comments_record_id = comments_record_id
 	character.personal_aspects = list()
 	var/decl/bodytype/new_bodytype = get_bodytype_decl()
 	if(species == character.get_species_name())

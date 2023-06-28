@@ -28,7 +28,9 @@
 		/decl/config/toggle/assistant_maint,
 		/decl/config/toggle/ghost_interaction,
 		/decl/config/toggle/aliens_allowed,
-		/decl/config/toggle/ninjas_allowed
+		/decl/config/toggle/ninjas_allowed,
+		/decl/config/toggle/allow_character_comments,
+		/decl/config/num/hide_comments_older_than
 	)
 
 /decl/config/num/movement_human
@@ -162,3 +164,11 @@
 /decl/config/toggle/ninjas_allowed
 	uid = "ninjas_allowed"
 	desc = "Remove the # to let ninjas spawn."
+
+/decl/config/toggle/allow_character_comments
+	uid = "allow_character_comments"
+	desc = "Remove the # to allow people to leave public comments on each other's characters via the comments system."
+
+/decl/config/num/hide_comments_older_than
+	uid = "hide_comments_older_than"
+	desc = "Specify a number of days after which to hide comments on public profiles (to avoid bloat from retired characters)."

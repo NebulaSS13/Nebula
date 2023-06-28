@@ -1189,3 +1189,9 @@
 			add_stressor(/datum/stressor/thirsty, STRESSOR_DURATION_INDEFINITE)
 		else
 			remove_stressor(/datum/stressor/thirsty)
+
+/mob/living/carbon/human/get_comments_record()
+	if(comments_record_id)
+		return SScharacter_info.get_record(comments_record_id, TRUE)
+	return ..()
+

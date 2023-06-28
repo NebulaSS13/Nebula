@@ -17,6 +17,15 @@ SUBSYSTEM_DEF(configuration)
 	load_sql()
 	load_event()
 
+	for(var/client/C)
+		C.update_post_config_load()
+
+/client/proc/update_post_config_load()
+	if(get_config_value(/decl/config/toggle/allow_character_comments))
+		verbs |= /client/proc/view_character_information
+	else
+		verbs -= /client/proc/view_character_information
+
 /datum/controller/subsystem/configuration/proc/write_default_configuration(var/list/specific_files, var/modify_write_prefix)
 
 	if(!specific_files)
