@@ -198,11 +198,13 @@ var/global/obj/temp_reagents_holder = new
 		var/tmp_data = newreagent.initialize_data(data)
 		if(tmp_data)
 			LAZYSET(reagent_data, reagent_type, tmp_data)
+		if(reagent_volumes.len == 1) // if this is the first reagent, uncache color
+			cached_color = null
 	else
 		reagent_volumes[reagent_type] += amount
 		if(!isnull(data))
 			LAZYSET(reagent_data, reagent_type, newreagent.mix_data(src, data, amount))
-	if(reagent_volumes.len > 1)
+	if(reagent_volumes.len > 1) // otherwise if we have a mix of reagents, uncache as well
 		cached_color = null
 	UNSETEMPTY(reagent_volumes)
 
