@@ -6,42 +6,17 @@ SUBSYSTEM_DEF(customitems)
 	var/list/custom_icons_by_ckey = list()
 
 /datum/controller/subsystem/customitems/proc/get_json_paths_from_directory(var/category, var/directory)
-
-	. = list()
-
 	if(!fexists(directory))
 		report_progress("[capitalize(category)] directory [directory] does not exist, no [category] config will be loaded.")
 		return
-
-	var/dir_count = 0
-	var/item_count = 0
-	var/list/directories_to_check = list(directory)
-	while(length(directories_to_check))
-
-		var/checkdir = directories_to_check[1]
-		directories_to_check -= checkdir
-		if(checkdir == "[directory]examples/")
-			continue
-
-		for(var/checkfile in flist(checkdir))
-
-			checkfile = "[checkdir][checkfile]"
-
-			if(copytext(checkfile, -1) == "/")
-				directories_to_check += checkfile
-				dir_count++
-
-			else if(copytext(checkfile, -5) == ".json")
-				if(checkfile in .)
-					PRINT_STACK_TRACE("Duplicate file load for [checkfile].")
-				else
-					try
-						.[checkfile] = safe_file2text(checkfile)
-						item_count++
-					catch(var/exception/e)
-						PRINT_STACK_TRACE("Exception loading [category] [checkfile]: [e] on [e.file]:[e.line]")
-
+	var/list/loaded_manifest = load_text_from_directory(directory, ".json")
+	if(!islist(loaded_manifest) || !length(loaded_manifest["files"]))
+		report_progress("[capitalize(category)] directory returned no files on load.")
+		return
+	var/dir_count  = loaded_manifest["dir_count"]  || 0
+	var/item_count = loaded_manifest["item_count"] || 0
 	report_progress("Loaded [item_count] [category]\s from [dir_count] director[dir_count == 1 ? "y" : "ies"].")
+	return loaded_manifest["files"]
 
 /datum/controller/subsystem/customitems/Initialize()
 
