@@ -113,7 +113,7 @@
 	var/obj/effect/shuttle_landmark/shuttle_destination
 
 /datum/unit_test/zas_supply_shuttle_moved/subsystems_to_await()
-	return list(SSmapping, SSair, SStimer, SSmachines, SSsupply, SSshuttle)
+	return list(SSair, SStimer, SSmachines, SSsupply, SSshuttle)
 
 /datum/unit_test/zas_supply_shuttle_moved/start_test()
 
@@ -143,10 +143,9 @@
 
 /datum/unit_test/zas_supply_shuttle_moved/check_result()
 	if(shuttle.moving_status == SHUTTLE_INTRANSIT || shuttle.moving_status == SHUTTLE_WARMUP)
-		return //Return null to keep checking async
+		return 0 //Return 0 to keep checking async
 
-	//Restore shuttle movetime for any following tests
-	SSsupply.movetime = initial_movetime
+	testing("Supply shuttle is now idle.")
 
 	//Check if we moved
 	if(shuttle.current_location == shuttle_start)
@@ -165,3 +164,8 @@
 			if(SKIP)    skip(test["msg"])
 			else        fail(test["msg"])
 	return 1
+
+/datum/unit_test/zas_supply_shuttle_moved/teardown_test()
+	//Restore shuttle movetime for any following tests
+	SSsupply.movetime = initial_movetime
+	return ..()
