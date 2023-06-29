@@ -81,6 +81,9 @@
 
 	var/vital_organ_missing_time
 
+	/// Used to look up records when the client is logged out.
+	var/comments_record_id
+
 	ai = /datum/ai/human
 
 /mob/living/carbon/human/proc/get_age()

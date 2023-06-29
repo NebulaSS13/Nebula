@@ -22,4 +22,6 @@
 
 /datum/inventory_slot/belt/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
+		if(user == owner)
+			return "You have [_holding.get_examine_line()] about your waist."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] about [pronouns.his] waist."

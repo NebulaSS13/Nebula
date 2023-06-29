@@ -14,4 +14,6 @@
 
 /datum/inventory_slot/glasses/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEEYES))
+		if(user == owner)
+			return "You have [_holding.get_examine_line()] covering your eyes."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] covering [pronouns.his] eyes."

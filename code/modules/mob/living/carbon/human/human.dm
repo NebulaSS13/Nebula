@@ -789,7 +789,7 @@
 	var/hands_exposed = 1
 	var/feet_exposed = 1
 
-	var/list/equipment = list(
+	var/static/list/equipment = list(
 		slot_head_str,
 		slot_wear_mask_str,
 		slot_glasses_str,

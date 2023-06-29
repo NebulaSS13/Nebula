@@ -24,4 +24,6 @@
 
 /datum/inventory_slot/suit_storage/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDESUITSTORAGE))
+		if(user == owner)
+			return "[.]\nYou are carrying [_holding.get_examine_line()] on your [_holding.name]."
 		return "[.]\n[pronouns.He] [pronouns.is] carrying [_holding.get_examine_line()] on [pronouns.his] [_holding.name]."

@@ -141,4 +141,6 @@
 
 /datum/inventory_slot/proc/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
+		if(user == owner)
+			return "You are wearing [_holding.get_examine_line()]."
 		return "[pronouns.He] [pronouns.is] wearing [_holding.get_examine_line()]."
