@@ -97,6 +97,10 @@
 	name       = "\improper RADIOACTIVE AREA"
 	icon_state = "radiation"
 
+/obj/structure/sign/warning/radioactive/alt
+	name       = "\improper IONIZING RADIATION"
+	icon_state = "radiation_2"
+
 /obj/structure/sign/warning/fire
 	name       = "\improper DANGER: FIRE"
 	icon_state = "fire"
@@ -108,6 +112,10 @@
 /obj/structure/sign/warning/hot_exhaust
 	name       = "\improper HOT EXHAUST"
 	icon_state = "fire"
+
+/obj/structure/sign/warning/laser
+	name       = "\improper LASER HAZARD"
+	icon_state = "beam"
 
 /obj/structure/sign/warning/internals_required
 	name = "\improper INTERNALS REQUIRED"
