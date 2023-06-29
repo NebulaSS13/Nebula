@@ -5687,7 +5687,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
-/obj/structure/sign/warning/secure_area/armory{
+/obj/structure/sign/warning/armory{
 	dir = 4;
 	pixel_x = -32
 	},

@@ -30,7 +30,7 @@
 
 /obj/structure/sign/warning/deathsposal
 	name       = "\improper DISPOSAL LEADS TO SPACE"
-	icon       = 'icons/obj/signs/warnings.dmi'
+	icon       = 'icons/obj/signs/warnings.dmi' //This one is a full-size sign
 	icon_state = "deathsposal"
 
 /obj/structure/sign/warning/compressed_gas
@@ -43,10 +43,6 @@
 /obj/structure/sign/warning/engineering_access
 	name = "\improper ENGINEERING ACCESS"
 
-/obj/structure/sign/warning/mail_delivery
-	name       = "\improper MAIL DELIVERY"
-	icon_state = "mail"
-
 /obj/structure/sign/warning/moving_parts
 	name       = "\improper MOVING PARTS"
 	icon_state = "movingparts"
@@ -57,10 +53,12 @@
 
 /obj/structure/sign/warning/nosmoking_2
 	name       = "\improper NO SMOKING"
+	icon       = 'icons/obj/signs/warnings.dmi' //This one is a full-size sign
 	icon_state = "nosmoking2"
 
 /obj/structure/sign/warning/nosmoking_burned
 	name       = "\improper NO SMOKING"
+	icon       = 'icons/obj/signs/warnings.dmi' //This one is a full-size sign
 	icon_state = "nosmoking2_b"
 /obj/structure/sign/warning/nosmoking_burned/update_description()
 	. = ..()
@@ -77,7 +75,7 @@
 	name       = "\improper SECURE AREA"
 	icon_state = "securearea2"
 
-/obj/structure/sign/warning/secure_area/armory
+/obj/structure/sign/warning/armory
 	name       = "\improper ARMORY"
 	icon_state = "armory"
 
@@ -149,7 +147,7 @@
 /obj/structure/sign/warning/mass_spectrometry
 	name = "\improper MASS SPECTROMETRY"
 
-
+//legacy stuff - The exodus map still uses it
 /obj/structure/sign/warning/pods
 	name       = "\improper ESCAPE PODS"
 	icon       = 'icons/obj/signs/directions.dmi'

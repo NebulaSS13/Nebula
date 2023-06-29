@@ -98,6 +98,11 @@
 	desc       = "A sign labelling the area as a cargo bay."
 	icon_state = "cargo"
 
+/obj/structure/sign/department/mail_delivery
+	name       = "\improper MAIL DELIVERY"
+	desc       = "A sign labelling a mail delivery point."
+	icon_state = "mail"
+
 /obj/structure/sign/department/bridge
 	name       = "\improper BRIDGE"
 	desc       = "A sign indicating the Bridge. Not the kind you cross rivers with, the other kind."
