@@ -184,6 +184,8 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 
 //For async tests. Returns 1 if done.
 /proc/check_unit_test(datum/unit_test/test, end_time)
+	if(test.reported)
+		return 1 //The test reported failure/success/skip already
 	if(world.time > end_time)
 		test.fail("Unit Tests Ran out of Time")// If we're going to run out of time, most likely it's here.  If you can't speed up your unit tests then add time to the timeout at the top.
 		return 1
