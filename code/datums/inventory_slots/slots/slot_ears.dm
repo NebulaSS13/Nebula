@@ -14,6 +14,8 @@
 
 /datum/inventory_slot/ear/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEEARS))
+		if(user == owner)
+			return "You have [_holding.get_examine_line()] on your [lowertext(slot_name)]."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] on [pronouns.his] [lowertext(slot_name)]."
 
 /datum/inventory_slot/ear/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)

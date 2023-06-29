@@ -17,6 +17,8 @@
 /datum/inventory_slot/gripper/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(owner, slot_id)
+		if(user == owner)
+			return "You are holding [_holding.get_examine_line()] in your [E?.name || lowertext(slot_name)]."
 		return "[pronouns.He] [pronouns.is] holding [_holding.get_examine_line()] in [pronouns.his] [E?.name || lowertext(slot_name)]."
 
 // Hand subtypes below

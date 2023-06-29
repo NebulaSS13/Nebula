@@ -15,8 +15,12 @@
 
 /datum/inventory_slot/shoes/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDESHOES))
+		if(user == owner)
+			return "You are wearing [_holding.get_examine_line()] on your feet."
 		return "[pronouns.He] [pronouns.is] wearing [_holding.get_examine_line()] on [pronouns.his] feet."
 	for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(owner, bp)
 		if(E && E.coating)
+			if(user == owner)
+				return "There's <font color='[E.coating.get_color()]'>something on your feet</font>!"
 			return "There's <font color='[E.coating.get_color()]'>something on [pronouns.his] feet</font>!"

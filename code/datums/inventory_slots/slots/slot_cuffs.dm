@@ -26,4 +26,6 @@
 
 /datum/inventory_slot/handcuffs/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
+		if(user == owner)
+			return SPAN_WARNING("You are [html_icon(_holding)] restrained with \the [_holding]!")
 		return SPAN_WARNING("[pronouns.He] [pronouns.is] [html_icon(_holding)] restrained with \the [_holding]!")

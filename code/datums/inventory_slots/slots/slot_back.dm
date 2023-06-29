@@ -11,4 +11,6 @@
 
 /datum/inventory_slot/back/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
+		if(user == owner)
+			return "You have [_holding.get_examine_line()] on your back."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] on [pronouns.his] back."

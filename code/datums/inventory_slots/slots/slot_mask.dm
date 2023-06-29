@@ -17,4 +17,6 @@
 
 /datum/inventory_slot/mask/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEMASK))
+		if(user == owner)
+			return "You are wearing [_holding.get_examine_line()] on your face."
 		return "[pronouns.He] [pronouns.is] wearing [_holding.get_examine_line()] on [pronouns.his] face."

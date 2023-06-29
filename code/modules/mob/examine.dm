@@ -29,7 +29,11 @@
 				. += slot_desc
 
 	if(buckled)
-		. += SPAN_WARNING("[pronouns.He] [pronouns.is] [html_icon(buckled)] buckled to [buckled]!")
+		if(user == src)
+			. += SPAN_WARNING("You are [html_icon(buckled)] buckled to [buckled]!")
+		else
+			. += SPAN_WARNING("[pronouns.He] [pronouns.is] [html_icon(buckled)] buckled to [buckled]!")
+
 	if(length(.))
 		to_chat(user, jointext(., "\n"))
 
