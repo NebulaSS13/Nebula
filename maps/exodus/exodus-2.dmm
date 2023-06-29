@@ -2174,7 +2174,7 @@
 /area/exodus/security/detectives_office)
 "aeL" = (
 /obj/machinery/deployable/barrier,
-/obj/structure/sign/warning/secure_area/armory{
+/obj/structure/sign/warning/armory{
 	pixel_y = 32
 	},
 /obj/machinery/camera/network/security{
@@ -2190,7 +2190,7 @@
 /area/exodus/security/warden)
 "aeN" = (
 /obj/structure/closet/l3closet/security,
-/obj/structure/sign/warning/secure_area/armory{
+/obj/structure/sign/warning/armory{
 	pixel_y = 32
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -10262,7 +10262,9 @@
 /turf/simulated/floor/carpet,
 /area/exodus/crew_quarters/sleep/bedrooms)
 "avy" = (
-/obj/structure/sign/warning/pods,
+/obj/structure/sign/directions/pods{
+	dir = 1
+	},
 /turf/simulated/wall/prepainted,
 /area/exodus/hallway/secondary/entry/pods)
 "avz" = (
@@ -29954,7 +29956,7 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
-/obj/structure/sign/warning/mail_delivery,
+/obj/structure/sign/department/mail_delivery,
 /turf/simulated/wall/prepainted,
 /area/exodus/quartermaster/office)
 "bln" = (
@@ -49788,7 +49790,9 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/sleep/engi_wash)
 "bZc" = (
-/obj/structure/sign/warning/pods,
+/obj/structure/sign/directions/pods{
+	dir = 1
+	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/exodus/engineering/engine_eva)
 "bZd" = (

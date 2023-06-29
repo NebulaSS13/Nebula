@@ -50,6 +50,10 @@
 	name       = "\improper Infirmary"
 	icon_state = "direction_infirm"
 
+/obj/structure/sign/directions/pods
+	name       = "\improper ESCAPE PODS"
+	icon_state = "direction_pods"
+
 /////////////////////////////////////////////////////
 // Deck Signs
 /////////////////////////////////////////////////////
@@ -59,7 +63,7 @@
 	abstract_type = /obj/structure/sign/deck
 	name          = "current level sign"
 	desc          = "A sign indicating on what level the observer is currently on."
-	icon          = 'icons/obj/signs/decks.dmi'
+	icon          = 'icons/obj/signs/slim_decks.dmi'
 
 /////////////////////////////////////////////////////
 // Deck Signs Definition

@@ -17518,7 +17518,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/obj/structure/sign/warning/secure_area/armory{
+/obj/structure/sign/warning/armory{
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled,
