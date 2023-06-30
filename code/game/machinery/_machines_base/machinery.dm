@@ -486,6 +486,12 @@ Class Procs:
 	. = ..()
 	LAZYREMOVE(., component_parts)
 
+// This only includes external atoms by default, so we need to add components back.
+/obj/machinery/get_contained_matter()
+	. = ..()
+	for(var/obj/component in component_parts)
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., component.get_contained_matter())
+
 /obj/machinery/proc/get_auto_access()
 	var/area/A = get_area(src)
 	return A?.req_access?.Copy()

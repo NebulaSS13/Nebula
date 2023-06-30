@@ -272,6 +272,16 @@
 /obj/proc/WillContain()
 	return
 
+/**
+ * Returns the sum of this obj's matter plus the matter of all its contents.
+ * Overrides may add extra handling for things like material storage.
+ * Most useful for calculating worth or deconstructing something along with its contents.
+ */
+/obj/proc/get_contained_matter()
+	. = matter?.Copy()
+	for(var/obj/contained_obj in get_contained_external_atoms()) // machines handle component parts separately
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., contained_obj.get_contained_matter())
+
 ////////////////////////////////////////////////////////////////
 // Interactions
 ////////////////////////////////////////////////////////////////

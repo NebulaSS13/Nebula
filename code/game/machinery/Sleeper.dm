@@ -84,6 +84,12 @@
 	LAZYREMOVE(., loaded_canisters)
 	LAZYREMOVE(., beaker)
 
+/obj/machinery/sleeper/get_contained_matter()
+	. = ..()
+	. = MERGE_ASSOCS_WITH_NUM_VALUES(., beaker.get_contained_matter())
+	for(var/obj/canister in loaded_canisters)
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., canister.get_contained_matter())
+
 /obj/machinery/sleeper/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
 	if(populate_parts)
