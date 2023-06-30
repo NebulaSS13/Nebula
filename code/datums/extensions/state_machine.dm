@@ -93,7 +93,10 @@ var/global/list/state_machines = list()
 	var/datum/holder_instance = get_holder()
 	if(istype(current_state))
 		current_state.exited_state(holder_instance)
-	current_state = GET_DECL(new_state_type)
+	if(ispath(new_state_type))
+		current_state = GET_DECL(new_state_type)
+	else // need to include null here, so we can't do an istype
+		current_state = new_state_type
 	if(istype(current_state))
 		current_state.entered_state(holder_instance)
 		return current_state
