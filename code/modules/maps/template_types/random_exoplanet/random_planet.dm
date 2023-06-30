@@ -234,7 +234,7 @@
 
 ///Make sure all levels of this planet have the weather system setup.
 /datum/map_template/planetoid/random/proc/generate_weather(var/datum/planetoid_data/gen_data, var/datum/level_data/topmost_level_data)
-	if(!ispath(gen_data.initial_weather_state, /decl/state/weather))
+	if(!gen_data.initial_weather_state)
 		return
 	gen_data.reset_weather(gen_data.initial_weather_state)
 

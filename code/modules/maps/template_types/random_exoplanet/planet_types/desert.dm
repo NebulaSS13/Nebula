@@ -74,6 +74,7 @@
 	habitability_class             = null //Generate randomly
 	atmosphere_gen_temperature_min = 40 CELSIUS
 	atmosphere_gen_temperature_max = 120 CELSIUS
+	initial_weather_state          = null // No weather.
 	surface_light_gen_level_min    = 0.5
 	surface_light_gen_level_max    = 0.95
 	flora                          = /datum/planet_flora/random/desert
