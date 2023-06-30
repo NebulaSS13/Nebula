@@ -96,4 +96,7 @@
 	icon = 'icons/effects/weather.dmi'
 	icon_state = "full"
 	alpha = 0
-	invisibility = 0
+
+/obj/abstract/lightning_overlay/Initialize()
+	. = ..()
+	invisibility = 0 // This is set to maximum in parent regardless of what we set, because we can't have nice things.
