@@ -426,11 +426,10 @@
 		var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in item
 		if (!ore_box)
 			continue
-		var/list/atoms_in_range = range(1, at_turf)
-		for(var/obj/item/stack/material/ore/ore in atoms_in_range)
+		for(var/obj/item/stack/material/ore/ore in range(1, at_turf))
 			if (!(get_dir(owner, ore) & owner.dir))
 				continue
-			ore.Move(ore_box)
+			ore_box.insert_ore(ore)
 
 /obj/item/mech_equipment/drill/afterattack(atom/target, mob/living/user, inrange, params)
 	if (!..()) // /obj/item/mech_equipment/afterattack implements a usage guard
