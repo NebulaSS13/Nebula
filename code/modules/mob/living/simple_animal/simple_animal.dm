@@ -67,6 +67,7 @@
 	var/armor_type = /datum/extension/armor
 	var/list/natural_armor //what armor animal has
 	var/flash_vulnerability = 1 // whether or not the mob can be flashed; 0 = no, 1 = yes, 2 = very yes
+	var/is_aquatic = FALSE
 
 	//Null rod stuff
 	var/supernatural = 0
@@ -95,6 +96,13 @@
 
 /mob/living/simple_animal/Initialize()
 	. = ..()
+
+	// Aquatic creatures only care about water, not atmos.
+	if(is_aquatic)
+		max_gas = list()
+		min_gas = list()
+		minbodytemp = 0
+
 	check_mob_icon_states()
 	if(isnull(base_animal_type))
 		base_animal_type = type
@@ -121,13 +129,17 @@
 		mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
 	if(check_state_in_icon("world-gib", icon))
 		mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
+	if(check_state_in_icon("world-dying", icon))
+		mob_icon_state_flags |= MOB_ICON_HAS_DYING_STATE
 
 /mob/living/simple_animal/on_update_icon()
 
 	..()
 
 	icon_state = ICON_STATE_WORLD
-	if(stat == DEAD && (mob_icon_state_flags & MOB_ICON_HAS_DEAD_STATE))
+	if(is_aquatic && stat != DEAD && HAS_STATUS(src, STAT_PARA) && (mob_icon_state_flags & MOB_ICON_HAS_DYING_STATE))
+		icon_state += "-dying"
+	else if(stat == DEAD && (mob_icon_state_flags & MOB_ICON_HAS_DEAD_STATE))
 		icon_state += "-dead"
 	else if(stat == UNCONSCIOUS && (mob_icon_state_flags & MOB_ICON_HAS_SLEEP_STATE))
 		icon_state += "-sleeping"
@@ -160,6 +172,11 @@
 	. = ..()
 
 /mob/living/simple_animal/Life()
+	if(is_aquatic && !submerged() && stat != DEAD)
+		walk(src, 0)
+		if(PENDING_STATUS(src, STAT_PARA))
+			SET_STATUS_MAX(src, STAT_PARA, 3)
+			update_icon()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -245,30 +262,29 @@
 
 /mob/living/simple_animal/proc/handle_atmos(var/atmos_suitable = 1)
 	//Atmos
-
 	if(!loc)
 		return
 
+	// don't bother checking it twice if we got a supplied 0 val.
 	var/datum/gas_mixture/environment = loc.return_air()
-	if(!(MUTATION_SPACERES in mutations) && environment)
-
-		if(abs(environment.temperature - bodytemperature) > 40 )
-			bodytemperature += ((environment.temperature - bodytemperature) / 5)
-
-		 // don't bother checking it twice if we got a supplied 0 val.
+	if(environment)
 		if(atmos_suitable)
-			if(LAZYLEN(min_gas))
+			if(is_aquatic)
+				atmos_suitable = submerged()
+			else if(LAZYLEN(min_gas))
 				for(var/gas in min_gas)
 					if(environment.gas[gas] < min_gas[gas])
 						atmos_suitable = FALSE
 						break
-			if(atmos_suitable && LAZYLEN(max_gas))
-				for(var/gas in max_gas)
-					if(environment.gas[gas] > max_gas[gas])
-						atmos_suitable = FALSE
-						break
+				if(atmos_suitable && LAZYLEN(max_gas))
+					for(var/gas in max_gas)
+						if(environment.gas[gas] > max_gas[gas])
+							atmos_suitable = FALSE
+							break
+		//Atmos effect
+		if(!(MUTATION_SPACERES in mutations) && abs(environment.temperature - bodytemperature) > 40)
+			bodytemperature += ((environment.temperature - bodytemperature) / 5)
 
-	//Atmos effect
 	if(bodytemperature < minbodytemp)
 		fire_alert = 2
 		adjustBruteLoss(cold_damage_per_tick)
@@ -618,6 +634,4 @@
 	return ..() || "rough"
 
 /mob/living/simple_animal/proc/can_act()
-	if(QDELETED(src) || stat || incapacitated())
-		return FALSE
-	return TRUE
+	return !(QDELETED(src) || incapacitated() || (is_aquatic && !submerged()))
