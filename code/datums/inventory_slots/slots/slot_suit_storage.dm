@@ -8,7 +8,7 @@
 /datum/inventory_slot/suit_storage/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	user.update_inv_s_store(redraw_mob)
 
-/datum/inventory_slot/suit_storage/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
+/datum/inventory_slot/suit_storage/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..()
 	if(.)
 		// They need a suit to use suit storage.

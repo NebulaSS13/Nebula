@@ -2,7 +2,7 @@
 	name = "skrell tentacle wear"
 	desc = "Some stuff worn by skrell to adorn their head tentacles."
 
-/obj/item/clothing/ears/skrell/mob_can_equip(mob/living/M, slot, disable_warning = 0)
+/obj/item/clothing/ears/skrell/mob_can_equip(mob/living/M, slot, disable_warning = 0, ignore_equipped = 0)
 	. = ..()
 	var/mob/living/carbon/human/H = M
 	if(. && istype(H) && H.bodytype.name != BODYTYPE_SKRELL)

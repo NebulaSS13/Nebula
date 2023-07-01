@@ -17,7 +17,7 @@
 	var/last_pump
 	var/skilled_setup
 
-/obj/item/auto_cpr/mob_can_equip(mob/living/carbon/human/H, slot, disable_warning = 0, force = 0)
+/obj/item/auto_cpr/mob_can_equip(mob/living/carbon/human/H, slot, disable_warning = 0, force = 0, ignore_equipped = 0)
 	. = ..()
 	if(. && slot == slot_wear_suit_str)
 		. = H.get_bodytype_category() == BODYTYPE_HUMANOID
