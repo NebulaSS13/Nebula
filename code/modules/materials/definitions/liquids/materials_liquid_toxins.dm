@@ -9,7 +9,8 @@
 	toxicity_targets_organ = null
 	toxicity = 0
 	hidden_from_codex = TRUE
-	exoplanet_rarity = MAT_RARITY_NOWHERE // It's useless, don't use it.
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // It's useless, don't use it.
 
 /decl/material/liquid/plasticide
 	name = "plasticide"
@@ -20,7 +21,8 @@
 	toxicity = 5
 	taste_mult = 1.2
 	metabolism = REM * 0.25
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/amatoxin
 	name = "amatoxin"
@@ -36,7 +38,8 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/carpotoxin
 	name = "carpotoxin"
@@ -53,7 +56,8 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/venom
 	name = "spider venom"
@@ -70,7 +74,8 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/venom/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
@@ -86,7 +91,8 @@
 	toxicity = 20
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -103,7 +109,8 @@
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
 	taste_mult = 1.2
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -137,7 +144,8 @@
 		/decl/material/solid/metal/copper = 0.4
 	)
 	taste_mult = 1.2
-	exoplanet_rarity = MAT_RARITY_EXOTIC
+	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
@@ -164,6 +172,7 @@
 	toxicity = 0.5 // It's not THAT poisonous.
 	color = "#664330"
 	metabolism = REM * 0.25
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/weedkiller
 	name = "weedkiller"
@@ -179,7 +188,8 @@
 	heating_point = 100 CELSIUS
 	metabolism = REM * 0.25
 	defoliant = TRUE
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/tar
 	name = "tar"
@@ -197,6 +207,7 @@
 	heating_message = "separates"
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/hair_remover
 	name = "hair remover"
@@ -207,6 +218,7 @@
 	toxicity = 1
 	overdose = REAGENTS_OVERDOSE
 	taste_mult = 1.2
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // i am so tired of seeing hair remover planets
 	metabolism = REM * 0.25
 
 /decl/material/liquid/hair_remover/affect_touch(var/mob/M, var/removed, var/datum/reagents/holder)
@@ -224,7 +236,8 @@
 	metabolism = REM * 5
 	overdose = 30
 	hidden_from_codex = TRUE
-	exoplanet_rarity = MAT_RARITY_EXOTIC
+	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	var/amount_to_zombify = 5
 
 /decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)

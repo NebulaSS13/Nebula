@@ -6,6 +6,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_pigment_paralytics"
 
 /decl/material/liquid/paralytics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -40,6 +41,7 @@
 		/decl/material/liquid/nutriment/sugar = 0.4
 	)
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_pigment_presyncopics"
 
 /decl/material/liquid/presyncopics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)

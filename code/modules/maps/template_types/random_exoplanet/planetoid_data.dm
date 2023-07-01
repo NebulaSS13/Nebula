@@ -450,18 +450,25 @@
 	for(var/mat_type in all_materials)
 		var/decl/material/mat = all_materials[mat_type]
 		//Check if this material is allowed
-		if((mat.gas_flags & blacklisted_flags) || (mat.exoplanet_rarity == MAT_RARITY_NOWHERE))
+		if((mat.gas_flags & blacklisted_flags) || (mat.exoplanet_rarity_gas == MAT_RARITY_NOWHERE))
+			continue
+		// No gaseous ice.
+		// Maybe consider adding heating products instead, but it'd have to change how this loop is done.
+		// Also that'd result in a ton of water vapor when really we'd only be interested in the volatiles...
+		if(!isnull(mat.heating_point) && length(mat.heating_products) && atmos_temperature >= mat.heating_point)
+			continue
+		if(!isnull(mat.chilling_point) && length(mat.chilling_products) && atmos_temperature <= mat.chilling_point)
 			continue
 		//Check if this gas can exist in the atmosphere
-		var/mat_phase       = mat.phase_at_temperature(atmos_temperature, atmos_pressure)
 		var/will_condensate = !isnull(mat.gas_condensation_point) && (atmos_temperature <= mat.gas_condensation_point)
-		if(mat_phase == MAT_PHASE_LIQUID)
-			if(will_condensate)
-				continue //A liquid below dew point cannot be in the atmosphere
-			//Otherwise allow liquids if they may exist as vapor
-		else if(mat_phase == MAT_PHASE_SOLID || mat_phase == MAT_PHASE_PLASMA)
-			continue //In any other cases if we're not a gas skip
-		candidates[mat.type] = mat.exoplanet_rarity
+		switch(mat.phase_at_temperature(atmos_temperature, atmos_pressure))
+			if(MAT_PHASE_LIQUID)
+				if(will_condensate)
+					continue //A liquid below dew point cannot be in the atmosphere
+				//Otherwise allow liquids if they may exist as vapor
+			if(MAT_PHASE_SOLID, MAT_PHASE_PLASMA)
+				continue //In any other cases if we're not a gas skip
+		candidates[mat.type] = mat.exoplanet_rarity_gas
 
 	if(prob(50)) //alium gas should be slightly less common than mundane shit
 		candidates -= /decl/material/gas/alien

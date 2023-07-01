@@ -5,6 +5,7 @@
 	color = "#888888"
 	overdose = 5
 	hidden_from_codex = TRUE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_pigment"
 
 /decl/material/liquid/pigment/red
@@ -70,6 +71,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	color_weight = 0
 	uid = "chem_pigment_paint"
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/paint/proc/apply_paint(var/atom/painting, var/datum/reagents/holder)
 	if(istype(painting) && istype(holder))

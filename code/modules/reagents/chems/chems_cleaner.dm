@@ -8,3 +8,4 @@
 	dirtiness = DIRTINESS_CLEAN
 	turf_touch_threshold = 0.1
 	uid = "chem_cleaner"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
