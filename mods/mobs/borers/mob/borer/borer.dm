@@ -81,7 +81,7 @@
 /mob/living/simple_animal/borer/proc/set_borer_name()
 	truename = "[borer_names[min(generation, borer_names.len)]] [random_id("borer[generation]", 1000, 9999)]"
 
-/mob/living/simple_animal/borer/Life()
+/mob/living/simple_animal/borer/handle_regular_status_updates()
 
 	sdisabilities = 0
 	if(host)
@@ -95,49 +95,46 @@
 		set_status(STAT_BLIND, 0)
 		set_status(STAT_BLURRY, 0)
 
-	. = ..()
-	if(!.)
-		return FALSE
+	..()
+	if(!host || stat || host.stat)
+		return
 
-	if(host)
-
-		if(!stat && !host.stat)
-
-			if(host.reagents.has_reagent(/decl/material/liquid/nutriment/sugar))
-				if(!docile)
-					if(controlling)
-						to_chat(host, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
-					else
-						to_chat(src, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
-					docile = 1
-			else
-				if(docile)
-					if(controlling)
-						to_chat(host, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
-					else
-						to_chat(src, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
-					docile = 0
-
-			if(chemicals < 250 && host.nutrition >= (neutered ? 200 : 50))
-				host.nutrition--
-				chemicals++
-
+	if(host.reagents.has_reagent(/decl/material/liquid/nutriment/sugar))
+		if(!docile)
 			if(controlling)
+				to_chat(host, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
+			else
+				to_chat(src, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
+			docile = 1
+	else
+		if(docile)
+			if(controlling)
+				to_chat(host, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
+			else
+				to_chat(src, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
+			docile = 0
 
-				if(neutered)
-					host.release_control()
-					return
+	if(chemicals < 250 && host.nutrition >= (neutered ? 200 : 50))
+		host.nutrition--
+		chemicals++
 
-				if(docile)
-					to_chat(host, SPAN_NOTICE("You are feeling far too docile to continue controlling your host..."))
-					host.release_control()
-					return
+	if(!controlling)
+		return
 
-				if(prob(5))
-					host.adjustBrainLoss(0.1)
+	if(neutered)
+		host.release_control()
+		return
 
-				if(prob(host.getBrainLoss()/20))
-					INVOKE_ASYNC(host, /mob/proc/say, "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
+	if(docile)
+		to_chat(host, SPAN_NOTICE("You are feeling far too docile to continue controlling your host..."))
+		host.release_control()
+		return
+
+	if(prob(5))
+		host.adjustBrainLoss(0.1)
+
+	if(prob(host.getBrainLoss()/20))
+		INVOKE_ASYNC(host, /mob/proc/say, "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()
