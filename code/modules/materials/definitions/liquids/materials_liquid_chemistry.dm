@@ -1,6 +1,6 @@
 /decl/material/liquid/surfactant // Foam precursor
-	name = "surfacant"
-	uid = "liquid_surfacant"
+	name = "surfactant"
+	uid = "liquid_surfactant"
 	lore_text = "A isocyanate liquid that forms a foam when mixed with water."
 	taste_description = "metal"
 	color = "#9e6b38"
