@@ -576,16 +576,16 @@
 
 				// Make sure atmosphere is not flammable
 				var/decl/material/mat = GET_DECL(picked_gas)
-				if((!(mat.gas_flags & XGM_GAS_OXIDIZER) && !(mat.gas_flags & XGM_GAS_FUEL)) || \
-					((current_merged_flags & XGM_GAS_OXIDIZER) && !(mat.gas_flags & XGM_GAS_FUEL)) || \
-					((current_merged_flags & XGM_GAS_FUEL) && !(mat.gas_flags & XGM_GAS_OXIDIZER)))
+				if(((current_merged_flags & XGM_GAS_OXIDIZER) && (mat.gas_flags & XGM_GAS_FUEL)) || \
+					((current_merged_flags & XGM_GAS_FUEL) && (mat.gas_flags & XGM_GAS_OXIDIZER)))
+					continue
 
-					current_merged_flags |= mat.gas_flags
-					var/part = available_moles * (rand(10,90)/100) //allocate percentage to it
-					if(i == number_gases || !length(candidate_gases)) //if it's last gas, let it have all remaining moles
-						part = available_moles
-					new_atmos.gas[picked_gas] += part
-					available_moles = max(available_moles - part, 0)
+				current_merged_flags |= mat.gas_flags
+				var/part = available_moles * (rand(10,90)/100) //allocate percentage to it
+				if(i == number_gases || !length(candidate_gases)) //if it's last gas, let it have all remaining moles
+					part = available_moles
+				new_atmos.gas[picked_gas] += part
+				available_moles = max(available_moles - part, 0)
 				i++
 
 	new_atmos.update_values()
