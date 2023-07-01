@@ -136,8 +136,8 @@
 				if(prob(5))
 					host.adjustBrainLoss(0.1)
 
-				if(prob(host.getBrainLoss()/20))
-					INVOKE_ASYNC(host, TYPE_PROC_REF(/mob, say), "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
+	if(prob(host.getBrainLoss()/20))
+		INVOKE_ASYNC(host, TYPE_PROC_REF(/mob, say), "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()
