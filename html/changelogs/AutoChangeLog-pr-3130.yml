@@ -1,4 +1,0 @@
-author: Penelope Haze
-delete-after: true
-changes:
-  - bugfix: Decompiler grenades will no longer waste the contents of consumed objects.
