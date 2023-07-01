@@ -21,8 +21,9 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
 
-	if(stat != DEAD)
+	if(stat != DEAD && !is_in_stasis())
 		handle_nutrition_and_hydration()
+		handle_immunity()
 
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
@@ -74,8 +75,64 @@
 /mob/living/proc/handle_breathing()
 	return
 
+#define RADIATION_SPEED_COEFFICIENT 0.025
 /mob/living/proc/handle_mutations_and_radiation()
-	return
+	SHOULD_CALL_PARENT(TRUE)
+
+	radiation = clamp(radiation,0,500)
+	var/decl/species/my_species = get_species()
+	if(my_species && (my_species.appearance_flags & RADIATION_GLOWS))
+		if(radiation)
+			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), my_species.get_flesh_colour(src))
+		else
+			set_light(0)
+
+	if(radiation <= 0)
+		return
+
+	var/damage = 0
+	radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+	if(prob(25))
+		damage = 2
+
+	if (radiation > 50)
+		damage = 2
+		radiation -= 2 * RADIATION_SPEED_COEFFICIENT
+		if(!isSynthetic())
+			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
+				radiation -= 5 * RADIATION_SPEED_COEFFICIENT
+				to_chat(src, "<span class='warning'>You feel weak.</span>")
+				SET_STATUS_MAX(src, STAT_WEAK, 3)
+				if(!lying)
+					emote("collapse")
+			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
+				lose_hair()
+
+	if (radiation > 75)
+		damage = 3
+		radiation -= 3 * RADIATION_SPEED_COEFFICIENT
+		if(!isSynthetic())
+			if(prob(5))
+				take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
+			if(prob(1))
+				to_chat(src, "<span class='warning'>You feel strange!</span>")
+				adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
+				emote("gasp")
+	if(radiation > 150)
+		damage = 8
+		radiation -= 4 * RADIATION_SPEED_COEFFICIENT
+
+	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
+	if(damage)
+		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
+		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
+		updatehealth()
+		var/list/limbs = get_external_organs()
+		if(!isSynthetic() && LAZYLEN(limbs))
+			var/obj/item/organ/external/O = pick(limbs)
+			if(istype(O))
+				O.add_autopsy_data("Radiation Poisoning", damage)
+#undef RADIATION_SPEED_COEFFICIENT
 
 // Get valid, unique reagent holders for metabolizing. Avoids metabolizing the same holder twice in a tick.
 /mob/living/proc/get_unique_metabolizing_reagent_holders()

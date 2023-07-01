@@ -217,25 +217,19 @@
 	uid = "chem_antibiotics"
 
 /decl/material/liquid/antibiotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	var/mob/living/carbon/human/H = M
-	if(!istype(H))
-		return
 	var/volume = REAGENT_VOLUME(holder, type)
-	H.immunity = max(H.immunity - 0.1, 0)
-	H.add_chemical_effect(CE_ANTIBIOTIC, 1)
+	M.immunity = max(M.immunity - 0.1, 0)
+	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
 	if(volume > 10)
-		H.immunity = max(H.immunity - 0.3, 0)
-	if(LAZYACCESS(H.chem_doses, type) > 15)
-		H.immunity = max(H.immunity - 0.25, 0)
+		M.immunity = max(M.immunity - 0.3, 0)
+	if(LAZYACCESS(M.chem_doses, type) > 15)
+		M.immunity = max(M.immunity - 0.25, 0)
 
 /decl/material/liquid/antibiotics/affect_overdose(var/mob/living/M)
 	..()
-	var/mob/living/carbon/human/H = M
-	if(!istype(H))
-		return
-	H.immunity = max(H.immunity - 0.25, 0)
+	M.immunity = max(M.immunity - 0.25, 0)
 	if(prob(2))
-		H.immunity_norm = max(H.immunity_norm - 1, 0)
+		M.immunity_norm = max(M.immunity_norm - 1, 0)
 
 /decl/material/liquid/retrovirals
 	name = "retrovirals"

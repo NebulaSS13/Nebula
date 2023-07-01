@@ -22,6 +22,4 @@
 		// eye, ear, brain damages
 		handle_disabilities()
 
-		handle_immunity()
-
 		. = 1

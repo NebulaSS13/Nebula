@@ -15,17 +15,14 @@
 	update_icon()
 
 /mob/living/carbon/alien/handle_mutations_and_radiation()
-
-	if(!radiation)
-		return
-
-	var/rads = radiation/25
-	radiation -= rads
-	adjust_nutrition(rads)
-	heal_overall_damage(rads,rads)
-	adjustOxyLoss(-(rads))
-	adjustToxLoss(-(rads))
-	return
+	..()
+	if(radiation)
+		var/rads = radiation/25
+		radiation -= rads
+		adjust_nutrition(rads)
+		heal_overall_damage(rads,rads)
+		adjustOxyLoss(-(rads))
+		adjustToxLoss(-(rads))
 
 /mob/living/carbon/alien/handle_regular_status_updates()
 
@@ -70,7 +67,7 @@
 			blinded = 1
 			set_status(STAT_BLURRY, 1)
 		else if(GET_STATUS(src, STAT_BLIND))
-			ADJ_STATUS(src, STAT_BLIND, -1) 
+			ADJ_STATUS(src, STAT_BLIND, -1)
 			blinded = 1
 
 		update_icon()
