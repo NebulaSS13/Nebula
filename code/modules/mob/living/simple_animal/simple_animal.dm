@@ -103,7 +103,7 @@
 		min_gas = list()
 		minbodytemp = 0
 
-	check_mob_icon_states()
+	check_mob_icon_states(TRUE)
 	if(isnull(base_animal_type))
 		base_animal_type = type
 	if(LAZYLEN(natural_armor))
@@ -117,20 +117,27 @@
 /mob/living/simple_animal/proc/setup_languages()
 	add_language(/decl/language/animal)
 
-/mob/living/simple_animal/proc/check_mob_icon_states()
-	mob_icon_state_flags = 0
-	if(check_state_in_icon("world", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_LIVING_STATE
-	if(check_state_in_icon("world-dead", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_DEAD_STATE
-	if(check_state_in_icon("world-sleeping", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_SLEEP_STATE
-	if(check_state_in_icon("world-resting", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
-	if(check_state_in_icon("world-gib", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
-	if(check_state_in_icon("world-dying", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_DYING_STATE
+var/global/list/simplemob_icon_bitflag_cache = list()
+/mob/living/simple_animal/proc/check_mob_icon_states(var/sa_initializing = FALSE)
+	if(sa_initializing) // Let people force-rebuild the mob cache with proccall if needed.
+		mob_icon_state_flags = global.simplemob_icon_bitflag_cache[type]
+	else
+		mob_icon_state_flags = null
+	if(isnull(mob_icon_state_flags))
+		mob_icon_state_flags = 0
+		if(check_state_in_icon("world", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_LIVING_STATE
+		if(check_state_in_icon("world-dead", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_DEAD_STATE
+		if(check_state_in_icon("world-sleeping", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_SLEEP_STATE
+		if(check_state_in_icon("world-resting", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
+		if(check_state_in_icon("world-gib", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
+		if(check_state_in_icon("world-dying", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_DYING_STATE
+		global.simplemob_icon_bitflag_cache[type] = mob_icon_state_flags
 
 /mob/living/simple_animal/on_update_icon()
 
