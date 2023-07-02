@@ -4,7 +4,7 @@
 
 	..()
 
-	if (HasMovementHandler(/datum/movement_handler/mob/transformation/))
+	if (HasMovementHandler(/datum/movement_handler/mob/transformation))
 		return
 
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
