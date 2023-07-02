@@ -1,5 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - tweak: Reworked examine to show 'you are' for self-examination. Reordered some
-      examine elements.
