@@ -60,7 +60,7 @@
 			flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
 			to_chat(usr, "You push the [src] up out of your face.")
 		update_icon()
-		update_vision()
+		update_wearer_vision()
 		usr.update_action_buttons()
 
 /obj/item/clothing/head/welding/on_update_icon()

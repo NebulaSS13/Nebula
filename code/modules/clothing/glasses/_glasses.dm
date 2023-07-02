@@ -69,7 +69,7 @@
 		active = _active
 		update_icon()
 		update_clothing_icon()
-		update_vision()
+		update_wearer_vision()
 
 /obj/item/clothing/glasses/on_update_icon()
 	. = ..()
