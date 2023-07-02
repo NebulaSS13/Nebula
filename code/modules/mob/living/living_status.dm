@@ -10,7 +10,7 @@
 	if(!cond.check_can_set(src))
 		return FALSE
 	amount = clamp(amount, 0, 1000)
-	if(amount == HAS_STATUS(src, condition))
+	if(amount == PENDING_STATUS(src, condition))
 		return FALSE
 	LAZYSET(pending_status_counters, condition, amount)
 	addtimer(CALLBACK(src, PROC_REF(apply_pending_status_changes)), 0, TIMER_UNIQUE)
