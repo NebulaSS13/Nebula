@@ -21,7 +21,7 @@
 	components["comms"] =          new/datum/robot_component/binary_communication(src)
 	components["armour"] =         new/datum/robot_component/armour/light(src)
 
-/mob/living/silicon/robot/flying/Life()
+/mob/living/silicon/robot/flying/handle_regular_status_updates()
 	. = ..()
 	if(incapacitated() || !is_component_functioning("actuator"))
 		stop_flying()
