@@ -108,9 +108,10 @@ Works together with spawning an observer, noted above.
 */
 
 /mob/observer/ghost/Life()
-	..()
-	if(!loc) return
-	if(!client) return 0
+
+	. = ..()
+	if(!. || !loc || !client)
+		return FALSE
 
 	handle_hud_glasses()
 
