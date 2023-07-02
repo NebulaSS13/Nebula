@@ -152,7 +152,7 @@
 
 /obj/item/clothing/equipped(var/mob/user)
 	if(needs_vision_update())
-		update_vision()
+		update_wearer_vision()
 	return ..()
 
 /obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)

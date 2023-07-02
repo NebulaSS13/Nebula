@@ -135,7 +135,11 @@
 		return ONE_ATMOSPHERE + pressure_difference
 
 /mob/living/carbon/human/handle_impaired_vision()
-	..()
+
+	. = ..()
+	if(!.)
+		return
+
 	//Vision
 	var/obj/item/organ/vision
 	var/decl/bodytype/root_bodytype = get_bodytype()
@@ -154,10 +158,9 @@
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
-	if(stat != DEAD)
-		if ((disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
-			drop_held_items()
-			cough()
+	if(stat != DEAD && (disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
+		drop_held_items()
+		cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(getFireLoss())

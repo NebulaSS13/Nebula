@@ -203,7 +203,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		handle_bleeding()
 	if(is_aquatic && !submerged())
 		walk(src, 0)
-		if(PENDING_STATUS(src, STAT_PARA))
+		if(HAS_STATUS(src, STAT_PARA))
 			SET_STATUS_MAX(src, STAT_PARA, 3)
 			update_icon()
 
