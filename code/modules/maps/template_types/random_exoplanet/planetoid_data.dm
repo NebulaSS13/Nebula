@@ -581,7 +581,16 @@
 					continue
 
 				current_merged_flags |= mat.gas_flags
-				var/part = available_moles * (rand(10,90)/100) //allocate percentage to it
+				var/min_percent = 10
+				var/max_percent = 90
+				switch(mat.exoplanet_rarity_gas)
+					if(MAT_RARITY_UNCOMMON)
+						min_percent = 5
+						max_percent = 60
+					if(MAT_RARITY_EXOTIC)
+						min_percent = 1
+						max_percent = 10
+				var/part = available_moles * (rand(min_percent, max_percent)/100) //allocate percentage to it
 				if(i == number_gases || !length(candidate_gases)) //if it's last gas, let it have all remaining moles
 					part = available_moles
 				new_atmos.gas[picked_gas] += part
