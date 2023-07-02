@@ -95,3 +95,4 @@
 	hidden_from_codex = TRUE
 	toxicity = 4
 	value = 0
+	exoplanet_rarity_gas = MAT_RARITY_UNCOMMON

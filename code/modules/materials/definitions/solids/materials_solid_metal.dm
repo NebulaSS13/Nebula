@@ -18,6 +18,7 @@
 	abstract_type = /decl/material/solid/metal
 	icon_base = 'icons/turf/walls/metal.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/uranium
 	name = "uranium"

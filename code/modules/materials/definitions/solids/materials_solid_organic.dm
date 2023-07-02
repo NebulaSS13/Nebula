@@ -293,6 +293,7 @@
 	sound_manipulate = 'sound/foley/meat1.ogg'
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = "punch"
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	var/tans_to = /decl/material/solid/leather
 
 /decl/material/solid/skin/generate_recipes(var/reinforce_material)

@@ -58,6 +58,7 @@
 	taste_mult = 0.7
 	color = "#365e30"
 	overdose = REAGENTS_OVERDOSE
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/frostoil
 	name = "chilly oil"
