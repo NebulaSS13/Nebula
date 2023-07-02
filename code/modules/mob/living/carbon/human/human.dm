@@ -9,7 +9,6 @@
 
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
-	var/obj/item/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/step_count
 
 /mob/living/carbon/human/Initialize(mapload, var/species_name = null, var/datum/dna/new_dna = null)
@@ -90,12 +89,12 @@
 		if(potato?.cell)
 			stat("Battery charge:", "[potato.get_charge()]/[potato.cell.maxcharge]")
 
-		var/obj/item/rig/suit = get_equipped_item(slot_back_str)
-		if(istype(suit))
+		var/obj/item/rig/rig = get_rig()
+		if(rig)
 			var/cell_status = "ERROR"
-			if(suit.cell)
-				cell_status = "[suit.cell.charge]/[suit.cell.maxcharge]"
-			stat(null, "Suit charge: [cell_status]")
+			if(rig.cell)
+				cell_status = "[rig.cell.charge]/[rig.cell.maxcharge]"
+			stat(null, "Hardsuit charge: [cell_status]")
 
 		if(mind)
 			if(mind.changeling)
@@ -195,10 +194,7 @@
 	if(!H || (H.status & ORGAN_DISFIGURED) || !real_name || is_husked() || (mask && (mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
 		if(istype(mask) && mask.visible_name)
 			return mask.visible_name
-		else if(istype(wearing_rig) && wearing_rig.visible_name)
-			return wearing_rig.visible_name
-		else
-			return "Unknown"
+		return get_rig()?.visible_name || "Unknown"
 	return real_name
 
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
@@ -853,14 +849,14 @@
 
 
 /mob/living/carbon/human/can_stand_overridden()
-	if(wearing_rig && wearing_rig.ai_can_move_suit(check_for_ai = 1))
+	if(get_rig()?.ai_can_move_suit(check_for_ai = 1))
 		// Actually missing a leg will screw you up. Everything else can be compensated for.
 		for(var/limbcheck in list(BP_L_LEG,BP_R_LEG))
 			var/obj/item/organ/affecting = GET_EXTERNAL_ORGAN(src, limbcheck)
 			if(!affecting)
-				return 0
-		return 1
-	return 0
+				return FALSE
+		return TRUE
+	return FALSE
 
 
 // Similar to get_pulse, but returns only integer numbers instead of text.
@@ -1262,15 +1258,6 @@
 
 /mob/living/carbon/human/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
 	. = ..(species.breath_type, species.poison_types)
-
-/mob/living/carbon/human/get_equipped_internals_sources()
-	. = ..() | list(
-		"suit" =         list(get_equipped_item(slot_s_store_str), "on"),
-		"belt" =         list(get_equipped_item(slot_belt_str),    "on"),
-		"left pocket" =  list(get_equipped_item(slot_l_store_str), "in"),
-		"right pocket" = list(get_equipped_item(slot_r_store_str), "in"),
-		"rig" =          list(wearing_rig?.air_supply, "in")
-	)
 
 //Set and force the mob to update according to the given DNA
 // Will reset the entire mob's state, regrow limbs/organ etc

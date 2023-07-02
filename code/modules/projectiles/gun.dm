@@ -380,9 +380,9 @@
 
 		if(ishuman(user) && user.is_cloaked()) //shooting will disable a rig cloaking device
 			var/mob/living/carbon/human/H = user
-			var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
-			if(istype(R))
-				for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
+			var/obj/item/rig/rig = H.get_rig()
+			if(rig)
+				for(var/obj/item/rig_module/stealth_field/S in rig.installed_modules)
 					S.deactivate()
 
 		if(space_recoil)

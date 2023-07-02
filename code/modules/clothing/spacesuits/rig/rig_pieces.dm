@@ -5,8 +5,8 @@
 	return 0
 
 /mob/living/carbon/human/check_rig_status(check_offline)
-	var/obj/item/rig/rig = get_equipped_item(slot_back_str)
-	if(!istype(rig) || rig.canremove)
+	var/obj/item/rig/rig = get_rig()
+	if(!rig || rig.canremove)
 		return 0 //not wearing a rig control unit or it's offline or unsealed
 	if(check_offline)
 		return !rig.offline

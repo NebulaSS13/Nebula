@@ -47,10 +47,6 @@
 
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
 
-	// This is not an ideal place for this but it will do for now.
-	if(wearing_rig && wearing_rig.offline)
-		wearing_rig = null
-
 	..()
 
 	if(life_tick%30==15)
@@ -274,8 +270,8 @@
 	if(internal)
 
 		var/obj/item/tank/rig_supply
-		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
-		if(istype(rig) && !rig.offline && (rig.air_supply && internal == rig.air_supply))
+		var/obj/item/rig/rig = get_rig()
+		if(rig && !rig.offline && (rig.air_supply && internal == rig.air_supply))
 			rig_supply = rig.air_supply
 
 		if(!rig_supply)
