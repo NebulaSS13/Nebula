@@ -10,9 +10,6 @@
 		return FALSE
 	return TRUE
 
-/atom/movable/proc/get_object_size()
-	return ITEM_SIZE_NORMAL
-
 /atom/movable/proc/buckled_grab_check(var/mob/grabber)
 	if(grabber.buckled == src && buckled_mob == grabber)
 		return TRUE
@@ -21,3 +18,14 @@
 	if(grabber.buckled)
 		return FALSE
 	return TRUE
+
+/atom/movable/handle_grab_interaction(var/mob/user)
+
+	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
+	// NOTE: /mob/living overrides this to return FALSE in favour of using default_grab_interaction
+	if(isliving(user) && user.a_intent == I_GRAB && !user.lying && !anchored)
+		return try_make_grab(user)
+	return ..()
+
+/atom/movable/proc/try_make_grab(var/mob/living/user, var/defer_hand = FALSE)
+	return istype(user) && CanPhysicallyInteract(user) && !user.lying && user.make_grab(src)

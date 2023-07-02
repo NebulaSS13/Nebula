@@ -321,14 +321,6 @@
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
 
-/atom/movable/handle_grab_interaction(var/mob/user)
-
-	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
-	// NOTE: /mob/living overrides this to return FALSE in favour of using default_grab_interaction
-	if(isliving(user) && user.a_intent == I_GRAB && !user.lying && !anchored)
-		return try_make_grab(user)
-	return ..()
-
 /atom/movable/proc/pushed(var/pushdir)
 	set waitfor = FALSE
 	step(src, pushdir)
@@ -451,9 +443,6 @@
 /atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	return
 
-/atom/movable/proc/try_make_grab(var/mob/living/user, var/defer_hand = FALSE)
-	return istype(user) && CanPhysicallyInteract(user) && !user.lying && user.make_grab(src)
-
 /atom/movable/singularity_act()
 	if(!simulated)
 		return 0
@@ -465,3 +454,6 @@
 /atom/movable/singularity_pull(S, current_size)
 	if(simulated && !anchored)
 		step_towards(src, S)
+
+/atom/movable/proc/get_object_size()
+	return ITEM_SIZE_NORMAL
