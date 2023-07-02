@@ -589,6 +589,7 @@
 #include "code\game\atoms_movable.dm"
 #include "code\game\atoms_movable_grabs.dm"
 #include "code\game\atoms_movable_interactions.dm"
+#include "code\game\atoms_movable_overlay.dm"
 #include "code\game\atoms_temperature.dm"
 #include "code\game\base_turf.dm"
 #include "code\game\images.dm"
