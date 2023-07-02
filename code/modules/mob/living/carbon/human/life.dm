@@ -428,7 +428,7 @@
 			var/zzzchance = min(5, 5*sleepy/30)
 			if((prob(zzzchance) || sleepy >= 60))
 				if(stat == CONSCIOUS)
-					to_chat(src, SPAN_NOICE("You are about to fall asleep..."))
+					to_chat(src, SPAN_NOTICE("You are about to fall asleep..."))
 				SET_STATUS_MAX(src, STAT_ASLEEP, 5)
 
 
