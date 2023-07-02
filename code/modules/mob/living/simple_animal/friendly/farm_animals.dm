@@ -28,10 +28,9 @@
 	expected_type = /mob/living/simple_animal/hostile/retaliate/goat
 
 /datum/ai/goat/do_process(time_elapsed)
-	. = ..()
-	var/mob/living/simple_animal/hostile/retaliate/goat/goat = body
 
 	//chance to go crazy and start wacking stuff
+	var/mob/living/simple_animal/hostile/retaliate/goat/goat = body
 	if(!length(goat.enemies) && prob(1))
 		goat.Retaliate()
 
