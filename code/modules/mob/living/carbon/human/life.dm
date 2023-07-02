@@ -47,25 +47,6 @@
 	handle_pain()
 	handle_stamina()
 
-/mob/living/carbon/human/Life()
-
-	. = ..()
-	if(!.)
-		return
-
-	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
-
-	if(life_tick%30==15)
-		hud_updateflag = 1022
-
-	voice = GetVoice()
-
-	if(!handle_some_updates())
-		return											//We go ahead and process them 5 times for HUD images and other stuff though.
-
-	//Update our name based on whether our face is obscured/disfigured
-	SetName(get_visible_name())
-
 /mob/living/carbon/human/get_stamina()
 	return stamina
 
@@ -384,10 +365,16 @@
 		return TRUE
 
 /mob/living/carbon/human/handle_regular_status_updates()
-	if(!handle_some_updates())
-		return 0
 
-	if(status_flags & GODMODE)	return 0
+	voice = GetVoice()
+	SetName(get_visible_name())
+
+	. = ..()
+	if(!.)
+		return
+
+	if(status_flags & GODMODE)
+		return FALSE
 
 	update_health() // TODO: unify with parent call, Life() PR
 	//SSD check, if a logged player is awake put them back to sleep!
@@ -468,6 +455,9 @@
 	return 1
 
 /mob/living/carbon/human/handle_regular_hud_updates()
+	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
+	if(life_tick%30==15)
+		hud_updateflag = 1022
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 		handle_hud_list()
 	. = ..()
