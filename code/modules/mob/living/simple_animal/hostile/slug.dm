@@ -50,7 +50,7 @@
 		if(prob(H.getBruteLoss()/2))
 			attach(H)
 
-/mob/living/simple_animal/hostile/slug/Life()
+/mob/living/simple_animal/hostile/slug/handle_regular_status_updates()
 	. = ..()
 	if(. && istype(src.loc, /obj/item/holder) && isliving(src.loc.loc)) //We in somebody
 		var/mob/living/L = src.loc.loc
