@@ -27,7 +27,7 @@
 		if(P.refresh_time)
 			P.refresh_time += amount
 
-/mob/living/deity/Life()
+/mob/living/deity/handle_regular_status_updates()
 	. = ..()
 	if(.)
 		if(silenced > 0)
