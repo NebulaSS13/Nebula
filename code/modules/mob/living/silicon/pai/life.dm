@@ -17,10 +17,3 @@
 
 /mob/living/silicon/pai/death(gibbed, deathmessage, show_dead_message)
 	return ..(deathmessage = "gives one shrill beep before falling lifeless.")
-
-/mob/living/silicon/pai/updatehealth()
-	if(status_flags & GODMODE)
-		health = 100
-		set_stat(CONSCIOUS)
-	else
-		health = 100 - getBruteLoss() - getFireLoss()

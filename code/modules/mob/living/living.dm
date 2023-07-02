@@ -202,10 +202,12 @@ default behaviour is:
 	return (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
 
 /mob/living/proc/update_health()
+	SHOULD_CALL_PARENT(TRUE)
 	if(status_flags & GODMODE)
 		current_health = get_max_health()
 		set_stat(CONSCIOUS)
 		return
+
 	var/max_health = get_max_health()
 	current_health = clamp(max_health-get_total_life_damage(), -(max_health), max_health)
 	if(stat != DEAD && should_be_dead())

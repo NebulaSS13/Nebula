@@ -67,7 +67,7 @@
 	return !container || ..()
 
 /mob/living/carbon/brain/should_be_dead()
-	return !container && (health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life))
+	return !container && (current_health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life))
 
 /mob/living/carbon/brain/handle_regular_status_updates()
 
