@@ -57,7 +57,14 @@
 			.[parse_zone(slot)] = list(checking, "in")
 
 /mob/living/proc/get_equipped_internals_sources()
-	. = list("back" = list(get_equipped_item(slot_back_str), "on"))
+	. = list(
+		"back" =         list(get_equipped_item(slot_back_str),    "on"),
+		"suit" =         list(get_equipped_item(slot_s_store_str), "on"),
+		"belt" =         list(get_equipped_item(slot_belt_str),    "on"),
+		"left pocket" =  list(get_equipped_item(slot_l_store_str), "in"),
+		"right pocket" = list(get_equipped_item(slot_r_store_str), "in"),
+		"rig"  =         list(get_rig()?.air_supply,               "in")
+	)
 
 /mob/living/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
 

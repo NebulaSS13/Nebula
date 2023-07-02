@@ -243,7 +243,7 @@ var/global/list/possible_say_verbs = list(
 	if(istype(src.loc,/obj/item/paicard))
 		resting = 0
 		var/obj/item/rig/rig = src.get_rig()
-		if(istype(rig))
+		if(rig)
 			rig.force_rest(src)
 	else
 		resting = !resting

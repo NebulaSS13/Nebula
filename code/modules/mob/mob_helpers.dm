@@ -721,17 +721,19 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	var/obj/item/I = get_active_hand()
 	if(IS_PEN(I))
 		return I
-
 	//Look if we're holding a pen elsewhere
 	for(I in get_held_items())
 		if(IS_PEN(I))
 			return I
-
 	//Try looking if we got a rig module with integrated pen
-	var/obj/item/rig/R = get_equipped_item(slot_back_str)
-	if(istype(R))
-		var/obj/item/rig_module/device/pen/P = locate(/obj/item/rig_module/device/pen) in R.installed_modules
-		if(!R.offline && P)
-			return P.device
-
-	//Base mob only has slot_back and slot_wear_mask, so not much else to check
+	var/obj/item/rig/rig = get_rig()
+	if(rig && !rig.offline)
+		var/pen = locate(/obj/item/rig_module/device/pen) in rig.installed_modules
+		if(pen)
+			return pen
+	//Look for other slots
+	var/static/list/PEN_CHECK_SLOTS = list(slot_l_ear_str, slot_r_ear_str, slot_l_store_str, slot_r_store_str, slot_s_store_str)
+	for(var/slot in PEN_CHECK_SLOTS)
+		I = get_equipped_item(slot)
+		if(IS_PEN(I))
+			return I

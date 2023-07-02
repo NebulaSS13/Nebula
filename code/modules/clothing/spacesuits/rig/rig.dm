@@ -413,9 +413,6 @@
 				electrified = 0
 			for(var/obj/item/rig_module/module in installed_modules)
 				module.deactivate()
-		else
-			if(istype(wearer) && !wearer.wearing_rig)
-				wearer.wearing_rig = src
 
 		set_slowdown_and_vision(!offline)
 		if(istype(chest))
@@ -690,7 +687,6 @@
 			SPAN_HARDSUIT("<b>[M] struggles into \the [src].</b>"),
 			SPAN_HARDSUIT("<b>You struggle into \the [src].</b>"))
 		wearer = M
-		wearer.wearing_rig = src
 		update_icon()
 
 /obj/item/rig/proc/toggle_piece(var/piece, var/mob/initiator, var/deploy_mode)
@@ -781,7 +777,6 @@
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, user, ONLY_RETRACT)
 	if(wearer)
-		wearer.wearing_rig = null
 		wearer = null
 
 /obj/item/rig/proc/deselect_module()
@@ -935,15 +930,18 @@
 
 // This returns the rig if you are contained inside one, but not if you are wearing it
 /atom/proc/get_rig()
-	if(loc)
-		return loc.get_rig()
-	return null
+	RETURN_TYPE(/obj/item/rig)
+	return loc?.get_rig()
 
 /obj/item/rig/get_rig()
+	RETURN_TYPE(/obj/item/rig)
 	return src
 
-/mob/living/carbon/human/get_rig()
-	return wearing_rig
+/mob/living/get_rig()
+	RETURN_TYPE(/obj/item/rig)
+	var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+	if(istype(rig))
+		return rig
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT

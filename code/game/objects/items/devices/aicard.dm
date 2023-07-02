@@ -141,6 +141,6 @@
 /obj/item/aicard/relaymove(var/mob/user, var/direction)
 	if(user.incapacitated(INCAPACITATION_KNOCKOUT))
 		return
-	var/obj/item/rig/rig = src.get_rig()
-	if(istype(rig))
+	var/obj/item/rig/rig = get_rig()
+	if(rig)
 		rig.forced_move(direction, user)

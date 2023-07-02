@@ -65,8 +65,8 @@
 		if(istype(mask))
 			add_clothing_protection(mask)
 
-		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
-		if(istype(rig))
+		var/obj/item/rig/rig = get_rig()
+		if(rig)
 			process_rig(rig)
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
@@ -120,8 +120,9 @@
 				PDA.SetName(replacetext(PDA.name, old_name, new_name))
 				search_pda = 0
 
-	if(wearing_rig && wearing_rig.update_visible_name)
-		wearing_rig.visible_name = real_name
+	var/obj/item/rig/rig = get_rig()
+	if(rig?.update_visible_name)
+		rig.visible_name = real_name
 
 /mob/living/carbon/human
 	var/next_sonar_ping = 0
@@ -298,14 +299,3 @@
 		if(get_equipped_item(slot) == I)
 			return TRUE
 	return FALSE
-
-/mob/living/carbon/human/get_accessible_pen()
-	if((. = ..()))
-		return .
-
-	//Look for other slots
-	var/static/list/PEN_CHECK_SLOTS = list(slot_l_ear_str, slot_r_ear_str, slot_l_store_str, slot_r_store_str, slot_s_store_str)
-	for(var/slot in PEN_CHECK_SLOTS)
-		var/obj/item/I = get_equipped_item(slot)
-		if(IS_PEN(I))
-			return I

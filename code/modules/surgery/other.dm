@@ -121,21 +121,20 @@
 		var/obj/item/weldingtool/welder = tool
 		if(!welder.isOn() || !welder.weld(1,user))
 			return FALSE
-	var/obj/item/rig/rig = target.get_equipped_item(slot_back_str)
-	return (target_zone == BP_CHEST) && istype(rig) && !(rig.canremove)
+	var/obj/item/rig/rig = target.get_rig()
+	return (target_zone == BP_CHEST) && rig && !(rig.canremove)
 
 /decl/surgery_step/hardsuit/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/rig = target.get_equipped_item(slot_back_str)
+	var/obj/item/rig/rig = target.get_rig()
 	user.visible_message("[user] starts cutting through the support systems of [target]'s [rig] with \the [tool]." , \
 	"You start cutting through the support systems of [target]'s [rig] with \the [tool].")
 	..()
 
 /decl/surgery_step/hardsuit/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 
-	var/obj/item/rig/rig = target.get_equipped_item(slot_back_str)
-	if(!istype(rig))
-		return
-	rig.reset()
+	var/obj/item/rig/rig = target.get_rig()
+	if(rig)
+		rig.reset()
 	user.visible_message("<span class='notice'>[user] has cut through the support systems of [target]'s [rig] with \the [tool].</span>", \
 		"<span class='notice'>You have cut through the support systems of [target]'s [rig] with \the [tool].</span>")
 
