@@ -174,16 +174,17 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	. = ..()
 
 /mob/living/simple_animal/handle_regular_status_updates()
-	. = ..()
 	if(purge)
 		purge -= 1
-	if(can_bleed && bleed_ticks > 0)
-		handle_bleeding()
-	if(is_aquatic && !submerged())
-		walk(src, 0)
-		if(HAS_STATUS(src, STAT_PARA))
-			SET_STATUS_MAX(src, STAT_PARA, 3)
-			update_icon()
+	. = ..()
+	if(.)
+		if(can_bleed && bleed_ticks > 0)
+			handle_bleeding()
+		if(is_aquatic && !submerged())
+			walk(src, 0)
+			if(HAS_STATUS(src, STAT_PARA))
+				SET_STATUS_MAX(src, STAT_PARA, 3)
+				update_icon()
 
 /mob/living/simple_animal/handle_some_updates()
 	. = ..() && (!z || living_observers_present(SSmapping.get_connected_levels(z)))
@@ -244,7 +245,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 					visible_emote("[pick(emote_see)].")
 
 /mob/living/simple_animal/handle_environment(datum/gas_mixture/environment)
-
+	. = ..()
 	var/atmos_suitable = TRUE
 	if(environment)
 		// don't bother checking it twice if we got a supplied FALSE val.

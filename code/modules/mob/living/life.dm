@@ -265,12 +265,12 @@
 			sound_to(src, sound(send_sound, repeat = TRUE, wait = 0, volume = 30, channel = sound_channels.weather_channel))
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
-/mob/living/proc/should_be_dead()
-	return health < 0
-
 /mob/living/proc/handle_regular_status_updates()
 
 	SHOULD_CALL_PARENT(TRUE)
+
+	// Check if we are (or should be) dead at this point.
+	update_health()
 
 	if(!handle_some_updates())
 		return FALSE
@@ -289,14 +289,8 @@
 	if(gloves && germ_level > gloves.germ_level && prob(10))
 		gloves.germ_level++
 
-	// Check if we are (or should be) dead at this point.
+	// If we're dead, don't continue further.
 	if(stat == DEAD)
-		return FALSE
-	updatehealth()
-	if(should_be_dead() && stat != DEAD)
-		death()
-		set_status(STAT_BLIND,   0)
-		set_status(STAT_SILENCE, 0)
 		return FALSE
 
 	// Handle some general state updates.

@@ -1,10 +1,6 @@
 /mob/living/silicon/ai/should_be_dead()
 	return get_health_percent() <= 0 || backup_capacitor() <= 0
 
-
-/mob/living/silicon/ai/should_be_dead()
-	return ((hardware_integrity() <= 0) || (backup_capacitor() <= 0))
-
 /mob/living/silicon/ai/handle_regular_status_updates()
 	. = ..()
 	if(stat != CONSCIOUS)

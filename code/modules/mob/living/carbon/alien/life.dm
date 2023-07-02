@@ -11,7 +11,7 @@
 /mob/living/carbon/alien/handle_regular_status_updates()
 
 	. = ..()
-	update_health() // TODO: unify with parent call, Life() PR
+
 	if(stat == DEAD)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
