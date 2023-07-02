@@ -175,28 +175,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/handle_regular_status_updates()
 	. = ..()
-	if(!.)
-		return FALSE
-	if(is_aquatic && !submerged() && stat != DEAD)
-		walk(src, 0)
-		if(!HAS_STATUS(src, STAT_PARA)) // gated to avoid redundant update_icon() calls.
-			SET_STATUS_MAX(src, STAT_PARA, 3)
-			update_icon()
-	if(z && !living_observers_present(SSmapping.get_connected_levels(z)))
-
-	if(health <= 0)
-		death()
-	else if(health > maxHealth)
-		health = maxHealth
-
-	if(stat == DEAD)
-		if(current_health > 0)
-			switch_from_dead_to_living_mob_list()
-			set_stat(CONSCIOUS)
-			set_density(1)
-			update_icon()
-		return
-
 	if(purge)
 		purge -= 1
 	if(can_bleed && bleed_ticks > 0)

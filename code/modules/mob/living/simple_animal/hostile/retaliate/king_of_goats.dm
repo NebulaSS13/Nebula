@@ -190,7 +190,7 @@
 		set_scale(1.25)
 	default_pixel_y = 10
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/handle_regular_status_updates()
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)
 		return FALSE
