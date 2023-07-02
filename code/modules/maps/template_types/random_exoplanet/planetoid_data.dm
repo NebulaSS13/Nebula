@@ -460,6 +460,11 @@
 		if(!isnull(mat.chilling_point) && length(mat.chilling_products) && atmos_temperature <= mat.chilling_point)
 			continue
 		//Check if this gas can exist in the atmosphere
+		// For now, we skip materials above their ignition point entirely.
+		// However, it's also checked in generate_atmosphere and applies the fuel flag,
+		// so if including them is ever desirable it'll be handled properly.
+		if(!isnull(mat.ignition_point) && atmos_temperature >= mat.ignition_point)
+			continue
 		var/will_condensate = !isnull(mat.gas_condensation_point) && (atmos_temperature <= mat.gas_condensation_point)
 		switch(mat.phase_at_temperature(atmos_temperature, atmos_pressure))
 			if(MAT_PHASE_LIQUID)
@@ -579,6 +584,14 @@
 				if(((current_merged_flags & XGM_GAS_OXIDIZER) && (mat.gas_flags & XGM_GAS_FUEL)) || \
 					((current_merged_flags & XGM_GAS_FUEL) && (mat.gas_flags & XGM_GAS_OXIDIZER)))
 					continue
+				
+				// If we have an ignition point we're basically XGM_GAS_FUEL, kind of. TODO: Combine those somehow?
+				// These don't actually burn but it's still weird to see vaporized skin gas in an oxygen-rich atmosphere,
+				// so skip them.
+				if(!isnull(mat.ignition_point) && new_atmos.temperature >= mat.ignition_point)
+					if(current_merged_flags & XGM_GAS_OXIDIZER)
+						continue
+					current_merged_flags |= XGM_GAS_FUEL
 
 				current_merged_flags |= mat.gas_flags
 				var/min_percent = 10
