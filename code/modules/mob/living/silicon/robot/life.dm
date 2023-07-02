@@ -1,38 +1,11 @@
-/mob/living/silicon/robot/Life()
-
-	SHOULD_CALL_PARENT(FALSE)
-
-	set invisibility = FALSE
-	set background = 1
-
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
-		return
-
-	//Status updates, death etc.
-	clamp_values()
-	handle_regular_status_updates()
-	handle_actions()
-
-	if(client)
-		handle_regular_hud_updates()
-		update_items()
-	if (src.stat != DEAD) //still using power
+/mob/living/silicon/robot/handle_living_non_stasis_processes()
+	. = ..()
+	if(.)
 		use_power()
 		process_killswitch()
 		process_locks()
 		process_queued_alarms()
 		process_os()
-
-	handle_status_effects()
-	UpdateLyingBuckledAndVerbStatus()
-
-/mob/living/silicon/robot/proc/clamp_values()
-	set_status(STAT_PARA, min(GET_STATUS(src, STAT_PARA), 30))
-	set_status(STAT_ASLEEP, 0)
-	adjustBruteLoss(0)
-	adjustToxLoss(0)
-	adjustOxyLoss(0)
-	adjustFireLoss(0)
 
 /mob/living/silicon/robot/proc/use_power()
 	used_power_this_tick = 0
@@ -74,6 +47,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	update_health()
 
+	set_status(STAT_PARA, min(GET_STATUS(src, STAT_PARA), 30))
 	if(HAS_STATUS(src, STAT_ASLEEP))
 		SET_STATUS_MAX(src, STAT_PARA, 3)
 
@@ -232,6 +206,7 @@
 			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 
+	update_items()
 	return 1
 
 /mob/living/silicon/robot/handle_vision()
