@@ -60,15 +60,17 @@
 		turn_off()
 
 /mob/living/bot/Life()
-	..()
-	if(stat == DEAD)
-		return
-	set_status(STAT_WEAK, 0)
-	set_status(STAT_STUN, 0)
-	set_status(STAT_PARA, 0)
-
-	if(on && !client && !busy)
+	. = ..()
+	if(stat != DEAD && on && !client && !busy)
 		handleAI()
+
+/mob/living/bot/handle_regular_status_updates()
+	. = ..()
+	if(stat == DEAD)
+	else
+		set_status(STAT_WEAK, 0)
+		set_status(STAT_STUN, 0)
+		set_status(STAT_PARA, 0)
 
 /mob/living/bot/get_total_life_damage()
 	return getFireLoss() + getBruteLoss()

@@ -173,7 +173,7 @@
 	..(gibbed, deathmessage, show_dead_message)
 	walk(src, 0)
 
-/mob/living/simple_animal/hostile/Life()
+/mob/living/simple_animal/hostile/handle_regular_status_updates()
 	. = ..()
 	if(!.)
 		walk(src, 0)

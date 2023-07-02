@@ -42,7 +42,7 @@
 	if(stat == DEAD && !QDELETED(src) && !gibbed)
 		gib()
 
-/mob/living/simple_animal/hostile/vagrant/Life()
+/mob/living/simple_animal/hostile/vagrant/handle_regular_status_updates()
 	. = ..()
 	if(!.)
 		return FALSE

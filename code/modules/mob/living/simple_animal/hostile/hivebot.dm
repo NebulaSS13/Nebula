@@ -110,12 +110,9 @@ The megabot
 	. = ..()
 	switch_mode(ATTACK_MODE_ROCKET)
 
-/mob/living/simple_animal/hostile/hivebot/mega/Life()
+/mob/living/simple_animal/hostile/hivebot/mega/handle_regular_status_updates()
 	. = ..()
-	if(!.)
-		return
-
-	if(!is_on_special_ability_cooldown())
+	if(. && !is_on_special_ability_cooldown())
 		switch_mode(ATTACK_MODE_ROCKET)
 
 /mob/living/simple_animal/hostile/hivebot/mega/emp_act(severity)

@@ -9,14 +9,10 @@
 	if(stat != DEAD && !is_in_stasis())
 		//Mutations and radiation
 		handle_mutations_and_radiation()
-
 		//Chemicals in the body
 		handle_chemicals_in_body()
-
 		//Random events (vomiting etc)
 		handle_random_events()
-
 		// eye, ear, brain damages
 		handle_disabilities()
-
 		. = 1

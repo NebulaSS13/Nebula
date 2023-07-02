@@ -1,13 +1,3 @@
-// Alien larva are quite simple.
-/mob/living/carbon/alien/Life()
-	set invisibility = FALSE
-	set background = TRUE
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))	return
-	if(!loc)			return
-	..()
-	//Status updates, death etc.
-	update_icon()
-
 /mob/living/carbon/alien/handle_mutations_and_radiation()
 	..()
 	if(radiation)
@@ -19,7 +9,7 @@
 		adjustToxLoss(-(rads))
 
 /mob/living/carbon/alien/handle_regular_status_updates()
-
+	blinded = null
 	if(status_flags & GODMODE)	return 0
 
 	update_health() // TODO: unify with parent call, Life() PR

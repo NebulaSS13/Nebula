@@ -183,14 +183,13 @@
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
 
-/mob/living/simple_animal/chick/Life()
+/mob/living/simple_animal/chick/handle_regular_status_updates()
 	. = ..()
-	if(!.)
-		return FALSE
-	amount_grown += rand(1,2)
-	if(amount_grown >= 100)
-		new /mob/living/simple_animal/chicken(src.loc)
-		qdel(src)
+	if(.)
+		amount_grown += rand(1,2)
+		if(amount_grown >= 100)
+			new /mob/living/simple_animal/chicken(src.loc)
+			qdel(src)
 
 var/global/const/MAX_CHICKENS = 50
 var/global/chicken_count = 0
@@ -250,11 +249,9 @@ var/global/chicken_count = 0
 	else
 		..()
 
-/mob/living/simple_animal/chicken/Life()
+/mob/living/simple_animal/chicken/handle_regular_status_updates()
 	. = ..()
-	if(!.)
-		return FALSE
-	if(prob(3) && eggsleft > 0)
+	if(. && prob(3) && eggsleft > 0)
 		visible_message("[src] [pick("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")]")
 		eggsleft--
 		var/obj/item/chems/food/egg/E = new(get_turf(src))
