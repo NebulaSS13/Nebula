@@ -704,10 +704,9 @@
 	return 0
 
 //Updates lying and icons
-/mob/proc/UpdateLyingBuckledAndVerbStatus()
-	var/last_lying = lying
+/mob/proc/update_lying()
 	if(!resting && cannot_stand() && can_stand_overridden())
-		lying = 0
+		lying = FALSE
 	else if(buckled)
 		anchored = TRUE
 		if(istype(buckled))
@@ -720,12 +719,16 @@
 	else
 		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 
+/mob/proc/UpdateLyingBuckledAndVerbStatus()
+	var/last_lying = lying
+	update_lying()
+	if(buckled)
+		anchored = (!istype(buckled) || !buckled.buckle_movable)
 	if(lying)
 		set_density(0)
 		drop_held_items()
 	else
 		set_density(initial(density))
-
 	reset_layer()
 
 	//Temporarily moved here from the various life() procs

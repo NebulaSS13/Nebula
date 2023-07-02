@@ -460,12 +460,9 @@
 /mob/living/carbon/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 		handle_hud_list()
-
-	// now handle what we see on our screen
-
-	if(!..())
+	. = ..()
+	if(!.)
 		return
-
 	if(stat != DEAD)
 		var/half_health = get_max_health()/2
 		if(stat == UNCONSCIOUS && current_health < half_health)

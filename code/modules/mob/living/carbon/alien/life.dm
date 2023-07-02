@@ -48,6 +48,9 @@
 	return 1
 
 /mob/living/carbon/alien/handle_regular_hud_updates()
+	. = ..()
+	if(!.)
+		return
 	update_sight()
 	if (healths)
 		if(stat != DEAD)
@@ -80,7 +83,6 @@
 		if(machine)
 			if(machine.check_eye(src) < 0)
 				reset_view(null)
-	return 1
 
 /mob/living/carbon/alien/handle_environment(var/datum/gas_mixture/environment)
 	..()

@@ -131,6 +131,9 @@
 	return 1
 
 /mob/living/carbon/brain/handle_regular_hud_updates()
+	. = ..()
+	if(!.)
+		return
 	update_sight()
 	if (healths)
 		if (stat != DEAD)

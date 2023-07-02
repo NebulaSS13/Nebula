@@ -1,6 +1,8 @@
 
 /mob/living/carbon/alien/ascent_nymph/handle_regular_hud_updates()
 	. = ..()
+	if(!.)
+		return
 	var/datum/hud/ascent_nymph/nymph_hud = hud_used
 	if(!istype(nymph_hud))
 		return

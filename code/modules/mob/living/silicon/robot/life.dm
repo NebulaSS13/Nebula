@@ -115,8 +115,9 @@
 	return 1
 
 /mob/living/silicon/robot/handle_regular_hud_updates()
-	..()
-
+	. = ..()
+	if(!.)
+		return
 	var/obj/item/borg/sight/hud/hud = (locate(/obj/item/borg/sight/hud) in src)
 	if(hud && hud.hud)
 		hud.hud.process_hud(src)

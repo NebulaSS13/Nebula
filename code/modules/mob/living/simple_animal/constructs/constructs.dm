@@ -262,7 +262,7 @@
 
 /mob/living/simple_animal/construct/armoured/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(250 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if(208 to 249)			healths.icon_state = "juggernaut_health1"
@@ -276,7 +276,7 @@
 
 /mob/living/simple_animal/construct/behemoth/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(750 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if(625 to 749)			healths.icon_state = "juggernaut_health1"
@@ -289,7 +289,7 @@
 
 /mob/living/simple_animal/construct/builder/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(50 to INFINITY)		healths.icon_state = "artificer_health0"
 			if(42 to 49)			healths.icon_state = "artificer_health1"
@@ -304,7 +304,7 @@
 
 /mob/living/simple_animal/construct/wraith/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(75 to INFINITY)		healths.icon_state = "wraith_health0"
 			if(62 to 74)			healths.icon_state = "wraith_health1"
@@ -318,7 +318,7 @@
 
 /mob/living/simple_animal/construct/harvester/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(150 to INFINITY)		healths.icon_state = "harvester_health0"
 			if(125 to 149)			healths.icon_state = "harvester_health1"

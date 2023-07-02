@@ -59,11 +59,6 @@
 	else
 		turn_off()
 
-/mob/living/bot/Life()
-	. = ..()
-	if(stat != DEAD && on && !client && !busy)
-		handleAI()
-
 /mob/living/bot/handle_regular_status_updates()
 	. = ..()
 	if(stat == DEAD)
@@ -206,7 +201,12 @@
 /mob/living/bot/emag_act(var/remaining_charges, var/mob/user)
 	return 0
 
-/mob/living/bot/proc/handleAI()
+/mob/living/bot/handle_legacy_ai()
+	. = ..()
+	if(on && !busy)
+		handle_async_ai()
+
+/mob/living/bot/proc/handle_async_ai()
 	set waitfor = FALSE
 	if(ignore_list.len)
 		for(var/atom/A in ignore_list)

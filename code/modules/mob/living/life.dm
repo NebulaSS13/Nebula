@@ -41,8 +41,14 @@
 		// eye, ear, brain damages
 		handle_disabilities()
 		handle_immunity()
+
 		//Body temperature adjusts itself (self-regulation)
 		stabilize_body_temperature()
+
+		// Only handle AI stuff if we're not being played.
+		if(!key)
+			handle_legacy_ai()
+		. = 1
 
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
@@ -81,6 +87,10 @@
 	if(my_species)
 		return my_species.hunger_factor
 	return 0
+
+// Used to handle non-datum AI.
+/mob/living/proc/handle_legacy_ai()
+	return
 
 /mob/living/proc/handle_nutrition_and_hydration()
 	SHOULD_CALL_PARENT(TRUE)
@@ -290,15 +300,18 @@
 	if((sdisabilities & DEAFENED) || stat) //disabled-deaf, doesn't get better on its own
 		SET_STATUS_MAX(src, STAT_TINNITUS, 2)
 
+/mob/living/proc/should_do_hud_updates()
+	return client
+
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
-	if(!client)	return 0
-
+	SHOULD_CALL_PARENT(TRUE)
+	if(!should_do_hud_updates())
+		return FALSE
 	handle_hud_icons()
 	handle_vision()
 	handle_low_light_vision()
-
-	return 1
+	return TRUE
 
 /mob/living/proc/handle_low_light_vision()
 
