@@ -8,11 +8,7 @@
 
 	if(!body && !QDELETED(src))
 		physically_destroyed()
-		return
-
-	updatehealth()
-	if(health <= 0 && stat != DEAD)
-		death()
+		return FALSE
 
 	. = ..()
 

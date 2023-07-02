@@ -28,30 +28,29 @@
 	var/pressure_alert = 0
 	var/stamina = 100
 
-/mob/living/carbon/human/Life()
-	set invisibility = FALSE
-	set background = BACKGROUND_ENABLED
+/mob/living/carbon/human/handle_living_non_stasis_processes()
+	//Updates the number of stored chemicals for powers
+	handle_changeling()
+	last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+	//Organs and blood
+	handle_organs()
+	stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
+	handle_shock()
+	handle_pain()
+	handle_stamina()
 
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
+/mob/living/carbon/human/Life()
+
+	. = ..()
+	if(!.)
 		return
 
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
-
-	..()
 
 	if(life_tick%30==15)
 		hud_updateflag = 1022
 
 	voice = GetVoice()
-
-	//No need to update all of these procs if the guy is dead.
-	if(stat != DEAD && !is_in_stasis())
-		last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
-		//Organs and blood
-		handle_organs()
-		handle_shock()
-		handle_pain()
-		handle_stamina()
 
 	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.

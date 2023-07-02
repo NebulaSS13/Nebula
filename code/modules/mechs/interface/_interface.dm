@@ -59,7 +59,7 @@
 /mob/living/exosuit/should_do_hud_updates()
 	. = ..()
 	if(!. && length(pilots))
-		for(var/mob/pilot in pilots)
+		for(var/mob/living/pilot in pilots)
 			if(pilot.should_do_hud_updates())
 				return TRUE
 

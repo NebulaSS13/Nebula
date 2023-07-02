@@ -61,8 +61,7 @@
 
 /mob/living/bot/handle_regular_status_updates()
 	. = ..()
-	if(stat == DEAD)
-	else
+	if(.)
 		set_status(STAT_WEAK, 0)
 		set_status(STAT_STUN, 0)
 		set_status(STAT_PARA, 0)
