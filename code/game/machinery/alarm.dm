@@ -146,7 +146,8 @@
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
 	area_uid = alarm_area.uid
 
-	// breathable air according to human/Life()
+	// breathable air according to default human species
+	// TODO: make it use map default species?
 	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
 	TLV[gas_mat.gas_name] =	list(16, 19, 135, 140) // Partial pressure, kpa
 	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
