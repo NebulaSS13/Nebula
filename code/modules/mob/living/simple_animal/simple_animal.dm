@@ -207,13 +207,12 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/handle_some_updates()
 	. = ..() && (!z || living_observers_present(SSmapping.get_connected_levels(z)))
 
-/mob/living/simple_animal/Life()
+/mob/living/simple_animal/handle_legacy_ai()
 	. = ..()
-	if(.)
-		delayed_life_action()
+	handle_async_life_action()
 
 // Handles timed stuff in Life()
-/mob/living/simple_animal/proc/delayed_life_action()
+/mob/living/simple_animal/proc/handle_async_life_action()
 	set waitfor = FALSE
 	if(performing_delayed_life_action)
 		return
@@ -264,6 +263,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 					visible_emote("[pick(emote_see)].")
 
 /mob/living/simple_animal/handle_environment(datum/gas_mixture/environment)
+
+	var/atmos_suitable = TRUE
 	if(environment)
 		// don't bother checking it twice if we got a supplied FALSE val.
 		if(atmos_suitable)
