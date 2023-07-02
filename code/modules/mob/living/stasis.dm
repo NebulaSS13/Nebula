@@ -16,6 +16,11 @@
 				stasis_value += stasis_sources[source]
 		stasis_sources = null
 
+	if(stasis_value > 1 && GET_STATUS(src, STAT_DROWSY) < stasis_value * 4)
+		ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
+		if(stat == CONSCIOUS && prob(1))
+			to_chat(src, SPAN_NOTICE("You feel slow and sluggish..."))
+
 /mob/living/proc/get_cryogenic_factor(var/bodytemperature)
 
 	if(isSynthetic())

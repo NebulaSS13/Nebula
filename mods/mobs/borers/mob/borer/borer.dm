@@ -95,9 +95,9 @@
 		if(host.sdisabilities & DEAFENED)
 			sdisabilities |= DEAFENED
 
-/mob/living/simple_animal/borer/handle_regular_status_updates()
+/mob/living/simple_animal/borer/handle_living_non_stasis_processes()
 	. = ..()
-	if(!host || stat || host.stat)
+	if(!. || !host || host.stat)
 		return
 	if(host.reagents.has_reagent(/decl/material/liquid/nutriment/sugar))
 		if(!docile)

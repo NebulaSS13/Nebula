@@ -282,6 +282,10 @@
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
+	// If you're dirty, your gloves will become dirty, too.
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
+	if(gloves && germ_level > gloves.germ_level && prob(10))
+		gloves.germ_level++
 
 	// Check if we are (or should be) dead at this point.
 	if(stat == DEAD)
@@ -289,6 +293,8 @@
 	updatehealth()
 	if(should_be_dead() && stat != DEAD)
 		death()
+		set_status(STAT_BLIND,   0)
+		set_status(STAT_SILENCE, 0)
 		return FALSE
 
 	// Handle some general state updates.

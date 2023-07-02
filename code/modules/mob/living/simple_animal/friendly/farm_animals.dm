@@ -65,7 +65,7 @@
 	QDEL_NULL(udder)
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/handle_regular_status_updates()
+/mob/living/simple_animal/hostile/retaliate/goat/handle_living_non_stasis_processes()
 	. = ..()
 	if(. && stat == CONSCIOUS && udder && prob(5))
 		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
@@ -139,7 +139,7 @@
 		return TRUE
 	. = ..()
 
-/mob/living/simple_animal/cow/handle_regular_status_updates()
+/mob/living/simple_animal/cow/handle_living_non_stasis_processes()
 	. = ..()
 	if(. && udder && prob(5))
 		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
@@ -183,7 +183,7 @@
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
 
-/mob/living/simple_animal/chick/handle_regular_status_updates()
+/mob/living/simple_animal/chick/handle_living_non_stasis_processes()
 	. = ..()
 	if(.)
 		amount_grown += rand(1,2)
@@ -249,7 +249,7 @@ var/global/chicken_count = 0
 	else
 		..()
 
-/mob/living/simple_animal/chicken/handle_regular_status_updates()
+/mob/living/simple_animal/chicken/handle_living_non_stasis_processes()
 	. = ..()
 	if(. && prob(3) && eggsleft > 0)
 		visible_message("[src] [pick("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")]")

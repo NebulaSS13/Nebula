@@ -71,6 +71,7 @@
 	return current_health < config.health_threshold_dead
 
 /mob/living/silicon/robot/handle_regular_status_updates()
+	SHOULD_CALL_PARENT(FALSE)
 	update_health()
 
 	if(HAS_STATUS(src, STAT_ASLEEP))
