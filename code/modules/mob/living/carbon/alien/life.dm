@@ -9,8 +9,9 @@
 		adjustToxLoss(-(rads))
 
 /mob/living/carbon/alien/handle_regular_status_updates()
-	blinded = null
-	if(status_flags & GODMODE)	return 0
+	. = ..()
+	if(!.)
+		return
 
 	update_health() // TODO: unify with parent call, Life() PR
 	if(stat == DEAD)

@@ -59,7 +59,7 @@
 // End placeholder.
 
 // Updates the vision of the mob wearing the clothing item, if any
-/obj/item/clothing/proc/update_vision()
+/obj/item/clothing/proc/update_wearer_vision()
 	if(isliving(src.loc))
 		var/mob/living/L = src.loc
 		L.handle_vision()

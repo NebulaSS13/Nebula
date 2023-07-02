@@ -20,58 +20,46 @@
 
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
-
-	// Increase germ_level regularly
-	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
-		germ_level++
-
-	if(stat != DEAD && !is_in_stasis())
-		// hungy
-		handle_nutrition_and_hydration()
-		//Body temperature adjusts itself (self-regulation)
-		stabilize_body_temperature()
-		// Breathing, if applicable
-		handle_breathing()
-		// Mutations and radiation
-		handle_mutations_and_radiation()
-		// Chemicals in the body
-		handle_chemicals_in_body()
-		// Random events (vomiting etc)
-		handle_random_events()
-		// eye, ear, brain damages
-		handle_disabilities()
-		handle_immunity()
-
-		//Body temperature adjusts itself (self-regulation)
-		stabilize_body_temperature()
-
-		// Only handle AI stuff if we're not being played.
-		if(!key)
-			handle_legacy_ai()
-		. = 1
-
-	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
 	handle_stasis()
 
 	if(stat != DEAD)
+		if(!is_in_stasis())
+			. = handle_living_non_stasis_processes()
 		aura_check(AURA_TYPE_LIFE)
-
-	//Check if we're on fire
-	handle_fire()
 
 	for(var/obj/item/grab/G in get_active_grabs())
 		G.Process()
 
+	//Check if we're on fire
+	handle_fire()
 	handle_actions()
-
 	UpdateLyingBuckledAndVerbStatus()
-
 	handle_regular_hud_updates()
-
 	handle_status_effects()
 
 	return 1
+
+/mob/living/proc/handle_living_non_stasis_processes()
+	// hungy
+	handle_nutrition_and_hydration()
+	// Breathing, if applicable
+	handle_breathing()
+	// Mutations and radiation
+	handle_mutations_and_radiation()
+	// Chemicals in the body
+	handle_chemicals_in_body()
+	// Random events (vomiting etc)
+	handle_random_events()
+	// eye, ear, brain damages
+	handle_disabilities()
+	handle_immunity()
+	//Body temperature adjusts itself (self-regulation)
+	stabilize_body_temperature()
+	// Only handle AI stuff if we're not being played.
+	if(!key)
+		handle_legacy_ai()
+	return TRUE
 
 /mob/living/proc/experiences_hunger_and_thirst()
 	return TRUE
@@ -275,16 +263,39 @@
 			sound_to(src, sound(send_sound, repeat = TRUE, wait = 0, volume = 30, channel = sound_channels.weather_channel))
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
+/mob/living/proc/should_be_dead()
+	return health < 0
+
 /mob/living/proc/handle_regular_status_updates()
-	update_health()
-	if(stat != DEAD)
-		if(HAS_STATUS(src, STAT_PARA))
-			set_stat(UNCONSCIOUS)
-		else if (status_flags & FAKEDEATH)
-			set_stat(UNCONSCIOUS)
-		else
-			set_stat(CONSCIOUS)
+
+	SHOULD_CALL_PARENT(TRUE)
+
+	// Godmode just skips most of this processing.
+	if(status_flags & GODMODE)
+		set_stat(CONSCIOUS)
+		germ_level = 0
 		return TRUE
+
+	// Increase germ_level regularly
+	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
+		germ_level++
+
+	// Check if we are (or should be) dead at this point.
+	if(stat == DEAD)
+		return FALSE
+	updatehealth()
+	if(should_be_dead() && stat != DEAD)
+		death()
+		return FALSE
+
+	// Handle some general state updates.
+	if(HAS_STATUS(src, STAT_PARA))
+		set_stat(UNCONSCIOUS)
+	else if (status_flags & FAKEDEATH)
+		set_stat(UNCONSCIOUS)
+	else
+		set_stat(CONSCIOUS)
+	return TRUE
 
 /mob/living/proc/handle_disabilities()
 	handle_impaired_vision()
@@ -339,11 +350,10 @@
 	lighting_master.set_alpha(target_value)
 
 /mob/living/proc/handle_vision()
+	blinded = FALSE
 	update_sight()
-
 	if(stat == DEAD)
 		return
-
 	if(is_blind())
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else
@@ -351,9 +361,7 @@
 		set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
 		set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 		set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
-
 	set_fullscreen(stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
-
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)
