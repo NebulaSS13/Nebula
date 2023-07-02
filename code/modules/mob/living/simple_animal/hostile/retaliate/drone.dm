@@ -85,8 +85,8 @@
 			. -= M
 
 //self repair systems have a chance to bring the drone back to life
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Life()
-
+/mob/living/simple_animal/hostile/retaliate/malf_drone/handle_regular_status_updates()
+	. = ..()
 	//emps and lots of damage can temporarily shut us down
 	if(disabled > 0)
 		set_stat(UNCONSCIOUS)
@@ -148,7 +148,7 @@
 			if(!disabled && exploding)
 				explosion(get_turf(src), 0, 1, 4, 7)
 				death()
-	..()
+
 	update_icon()
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/on_update_icon()
