@@ -272,6 +272,9 @@
 
 	SHOULD_CALL_PARENT(TRUE)
 
+	if(!handle_some_updates())
+		return FALSE
+
 	// Godmode just skips most of this processing.
 	if(status_flags & GODMODE)
 		set_stat(CONSCIOUS)
