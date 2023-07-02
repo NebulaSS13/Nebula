@@ -43,6 +43,7 @@
 	skin_amount =   5
 
 	glowing_eyes = TRUE
+	ai = /datum/ai/giant_spider
 
 	var/poison_per_bite = 6
 	var/poison_type = /decl/material/liquid/venom
@@ -179,16 +180,17 @@
 			if(prob(poison_per_bite))
 				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 
-/mob/living/simple_animal/hostile/giant_spider/Life()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(stance == HOSTILE_STANCE_IDLE)
+/datum/ai/giant_spider
+	expected_type = /mob/living/simple_animal/hostile/giant_spider
+
+/datum/ai/giant_spider/do_process()
+	var/mob/living/simple_animal/hostile/giant_spider/spooder = body
+	if(spooder.stance == HOSTILE_STANCE_IDLE)
 		//chance to skitter madly away
-		if(!busy && prob(hunt_chance))
-			stop_automated_movement = 1
-			walk_to(src, pick(orange(20, src)), 1, move_to_delay)
-			addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
+		if(!spooder.busy && prob(spooder.hunt_chance))
+			spooder.stop_automated_movement = 1
+			walk_to(spooder, pick(orange(20, spooder)), 1, spooder.move_to_delay)
+			addtimer(CALLBACK(spooder, /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
 	stop_automated_movement = 0
@@ -201,16 +203,21 @@
 /****************
 Guard caste procs
 ****************/
-/mob/living/simple_animal/hostile/giant_spider/guard/Life()
+/mob/living/simple_animal/hostile/giant_spider/guard
+	ai = /datum/ai/giant_spider/guard
+
+/datum/ai/giant_spider/guard
+	expected_type = /mob/living/simple_animal/hostile/giant_spider/guard
+
+/datum/ai/giant_spider/guard/do_process(time_elapsed)
 	. = ..()
-	if(!.)
-		return FALSE
-	if(berserking)
-		return FALSE
-	if(!paired_nurse)
-		find_nurse()
-	if(paired_nurse && !busy && stance == HOSTILE_STANCE_IDLE)
-		protect(paired_nurse)
+	var/mob/living/simple_animal/hostile/giant_spider/guard/spooder = body
+	if(spooder.berserking)
+		return
+	if(!spooder.paired_nurse)
+		spooder.find_nurse()
+	if(spooder.paired_nurse && !spooder.busy && spooder.stance == HOSTILE_STANCE_IDLE)
+		spooder.protect(spooder.paired_nurse)
 
 /mob/living/simple_animal/hostile/giant_spider/guard/death()
 	. = ..()
@@ -237,7 +244,7 @@ Guard caste procs
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/protect(mob/nurse)
 	stop_automated_movement = 1
 	walk_to(src, nurse, 2, move_to_delay)
-	addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
+	addtimer(CALLBACK(src, /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
 	audible_message("<span class='danger'>\The [src] chitters wildly!</span>")
@@ -299,109 +306,114 @@ Nurse caste procs
 			busy = 0
 			stop_automated_movement = 0
 
-/mob/living/simple_animal/hostile/giant_spider/nurse/Life()
+/mob/living/simple_animal/hostile/giant_spider/nurse
+	ai = /datum/ai/giant_spider/nurse
+
+/datum/ai/giant_spider/nurse
+	expected_type = /mob/living/simple_animal/hostile/giant_spider/nurse
+
+/datum/ai/giant_spider/nurse/do_process(time_elapsed)
 	. = ..()
-	if(!.)
-		return FALSE
-	if(stance == HOSTILE_STANCE_IDLE)
-		var/list/can_see = view(src, 10)
-		//30% chance to stop wandering and do something
-		if(!busy && prob(30))
-			//first, check for potential food nearby to cocoon
-			for(var/mob/living/C in can_see)
-				if(is_type_in_list(C, cocoon_blacklist))
-					continue
-				if(C.stat)
-					cocoon_target = C
-					busy = MOVING_TO_TARGET
-					walk_to(src, C, 1, move_to_delay)
-					//give up if we can't reach them after 10 seconds
-					GiveUp(C)
-					return
+	var/mob/living/simple_animal/hostile/giant_spider/nurse/spooder = body
+	if(spooder.stance != HOSTILE_STANCE_IDLE)
+		spooder.busy = 0
+		spooder.stop_automated_movement = 0
+		return
 
-			//second, spin a sticky spiderweb on this tile
-			var/obj/effect/spider/stickyweb/W = locate() in get_turf(src)
-			if(!W)
-				busy = SPINNING_WEB
-				src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance.</span>")
-				stop_automated_movement = 1
-				spawn(40)
-					if(busy == SPINNING_WEB)
-						new /obj/effect/spider/stickyweb(src.loc)
-						busy = 0
-						stop_automated_movement = 0
+	var/list/can_see = view(spooder, 10)
+	//30% chance to stop wandering and do something
+	if(!spooder.busy && prob(30))
+		//first, check for potential food nearby to cocoon
+		for(var/mob/living/C in can_see)
+			if(is_type_in_list(C, spooder.cocoon_blacklist))
+				continue
+			if(C.stat)
+				spooder.cocoon_target = C
+				spooder.busy = MOVING_TO_TARGET
+				walk_to(spooder, C, 1, spooder.move_to_delay)
+				//give up if we can't reach them after 10 seconds
+				spooder.GiveUp(C)
+				return
+
+		//second, spin a sticky spiderweb on this tile
+		var/obj/effect/spider/stickyweb/W = locate() in get_turf(spooder)
+		if(!W)
+			spooder.busy = SPINNING_WEB
+			spooder.visible_message(SPAN_NOTICE("\The [spooder] begins to secrete a sticky substance."))
+			spooder.stop_automated_movement = 1
+			spawn(4 SECONDS)
+				if(spooder.busy == SPINNING_WEB)
+					new /obj/effect/spider/stickyweb(spooder.loc)
+					spooder.busy = 0
+					spooder.stop_automated_movement = 0
+		else
+			//third, lay an egg cluster there
+			var/obj/effect/spider/eggcluster/E = locate() in get_turf(spooder)
+			if(!E && spooder.fed > 0 && spooder.max_eggs)
+				spooder.busy = LAYING_EGGS
+				spooder.visible_message(SPAN_NOTICE("\The [spooder] begins to lay a cluster of eggs."))
+				spooder.stop_automated_movement = 1
+				spawn(5 SECONDS)
+					if(spooder.busy == LAYING_EGGS)
+						E = locate() in get_turf(spooder)
+						if(!E)
+							new /obj/effect/spider/eggcluster(spooder.loc, spooder)
+							spooder.max_eggs--
+							spooder.fed--
+						spooder.busy = 0
+						spooder.stop_automated_movement = 0
 			else
-				//third, lay an egg cluster there
-				var/obj/effect/spider/eggcluster/E = locate() in get_turf(src)
-				if(!E && fed > 0 && max_eggs)
-					busy = LAYING_EGGS
-					src.visible_message("<span class='notice'>\The [src] begins to lay a cluster of eggs.</span>")
-					stop_automated_movement = 1
-					spawn(50)
-						if(busy == LAYING_EGGS)
-							E = locate() in get_turf(src)
-							if(!E)
-								new /obj/effect/spider/eggcluster(loc, src)
-								max_eggs--
-								fed--
-							busy = 0
-							stop_automated_movement = 0
-				else
-					//fourthly, cocoon any nearby items so those pesky pinkskins can't use them
-					for(var/obj/O in can_see)
+				//fourthly, cocoon any nearby items so those pesky pinkskins can't use them
+				for(var/obj/O in can_see)
 
-						if(O.anchored)
-							continue
+					if(O.anchored)
+						continue
 
-						if(is_type_in_list(O, cocoon_blacklist))
-							continue
+					if(is_type_in_list(O, spooder.cocoon_blacklist))
+						continue
 
-						if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
-							cocoon_target = O
-							busy = MOVING_TO_TARGET
-							stop_automated_movement = 1
-							walk_to(src, O, 1, move_to_delay)
-							//give up if we can't reach them after 10 seconds
-							GiveUp(O)
+					if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
+						spooder.cocoon_target = O
+						spooder.busy = MOVING_TO_TARGET
+						spooder.stop_automated_movement = 1
+						walk_to(spooder, O, 1, spooder.move_to_delay)
+						//give up if we can't reach them after 10 seconds
+						spooder.GiveUp(O)
 
-		else if(busy == MOVING_TO_TARGET && cocoon_target)
-			if(get_dist(src, cocoon_target) <= 1)
-				busy = SPINNING_COCOON
-				src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance around \the [cocoon_target].</span>")
-				stop_automated_movement = 1
-				walk(src,0)
-				spawn(50)
-					if(busy == SPINNING_COCOON)
-						if(cocoon_target && isturf(cocoon_target.loc) && get_dist(src,cocoon_target) <= 1)
-							var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
-							var/large_cocoon = 0
-							C.pixel_x = cocoon_target.pixel_x
-							C.pixel_y = cocoon_target.pixel_y
-							for(var/mob/living/M in C.loc)
-								large_cocoon = 1
-								fed++
-								max_eggs++
-								src.visible_message("<span class='warning'>\The [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.</span>")
+	else if(spooder.busy == MOVING_TO_TARGET && spooder.cocoon_target)
+		if(spooder.Adjacent(spooder.cocoon_target))
+			spooder.busy = SPINNING_COCOON
+			spooder.visible_message(SPAN_NOTICE("\The [spooder] begins to secrete a sticky substance around \the [spooder.cocoon_target]."))
+			spooder.stop_automated_movement = 1
+			walk(spooder,0)
+			spawn(5 SECONDS)
+				if(spooder.busy == SPINNING_COCOON)
+					if(spooder.cocoon_target && isturf(spooder.cocoon_target.loc) && get_dist(spooder, spooder.cocoon_target) <= 1)
+						var/obj/effect/spider/cocoon/C = new(spooder.cocoon_target.loc)
+						var/large_cocoon = 0
+						C.pixel_x = spooder.cocoon_target.pixel_x
+						C.pixel_y = spooder.cocoon_target.pixel_y
+						for(var/mob/living/M in C.loc)
+							large_cocoon = 1
+							spooder.fed++
+							spooder.max_eggs++
+							spooder.visible_message(SPAN_WARNING("\The [spooder] sticks a proboscis into \the [spooder.cocoon_target] and sucks a viscous substance out."))
+							M.forceMove(C)
+							C.pixel_x = M.pixel_x
+							C.pixel_y = M.pixel_y
+							break
+						for(var/obj/item/I in C.loc)
+							I.forceMove(C)
+						for(var/obj/structure/S in C.loc)
+							if(!S.anchored)
+								S.forceMove(C)
+						for(var/obj/machinery/M in C.loc)
+							if(!M.anchored)
 								M.forceMove(C)
-								C.pixel_x = M.pixel_x
-								C.pixel_y = M.pixel_y
-								break
-							for(var/obj/item/I in C.loc)
-								I.forceMove(C)
-							for(var/obj/structure/S in C.loc)
-								if(!S.anchored)
-									S.forceMove(C)
-							for(var/obj/machinery/M in C.loc)
-								if(!M.anchored)
-									M.forceMove(C)
-							if(large_cocoon)
-								C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
-						busy = 0
-						stop_automated_movement = 0
-
-	else
-		busy = 0
-		stop_automated_movement = 0
+						if(large_cocoon)
+							C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
+					spooder.busy = 0
+					spooder.stop_automated_movement = 0
 
 /*****************
 Hunter caste procs
@@ -438,7 +450,7 @@ Hunter caste procs
 /******************
 Spitter caste procs
 ******************/
-/mob/living/simple_animal/hostile/giant_spider/spitter/Life()
+/mob/living/simple_animal/hostile/giant_spider/spitter/handle_regular_status_updates()
 	. = ..()
 	if(!.)
 		return FALSE
