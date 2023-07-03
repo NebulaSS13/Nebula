@@ -1,0 +1,15 @@
+#ifndef MODPACK_MODERN_NIGHTS
+#define MODPACK_MODERN_NIGHTS
+// BEGIN INCLUDE
+#include "modern_nights.dm"
+#include "datum\culture.dm"
+#include "datum\faction.dm"
+#include "datum\language.dm"
+#include "datum\location.dm"
+#include "machinery/lighting.dm"
+#include "structures/billboards.dm"
+#include "structures/city_objects.dm"
+#include "structures/city_signs.dm"
+#include "turfs/city_turfs.dm"
+#endif
+// END_INCLUDE
