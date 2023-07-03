@@ -1,7 +1,8 @@
 /obj/structure/bed/sofa
 	name = "sofa"
 	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with colored cloth."
-	icon_state = "sofa"
+	icon_state = "sofa_preview"
+	base_icon = "sofa"
 	color = "#666666"
 	buckle_dir = FALSE
 	buckle_lying = FALSE //force people to sit up in chairs when buckled
@@ -34,6 +35,7 @@
 
 /obj/structure/bed/sofa/on_update_icon()
 	..()
+	icon_state = base_icon
 	var/image/I = image(icon, "[icon_state]_over")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
@@ -105,7 +107,8 @@
 /obj/structure/bed/sofa/right
 	name = "sofa"
 	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with colored cloth."
-	icon_state = "sofa_r"
+	icon_state = "sofa_r_previewo"
+	base_icon = "sofa_r"
 
 /obj/structure/bed/sofa/right/red
 	reinf_material = /decl/material/solid/carpet
@@ -131,7 +134,8 @@
 /obj/structure/bed/sofa/left
 	name = "sofa"
 	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with colored cloth."
-	icon_state = "sofa_l"
+	icon_state = "sofa_l_preview"
+	base_icon = "sofa_l"
 
 /obj/structure/bed/sofa/left/red
 	reinf_material = /decl/material/solid/carpet

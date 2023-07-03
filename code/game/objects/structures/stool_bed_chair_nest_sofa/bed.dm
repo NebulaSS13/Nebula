@@ -23,6 +23,7 @@
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
+	var/base_icon = "bed"
 
 /obj/structure/bed/user_can_mousedrop_onto(var/mob/user, var/atom/being_dropped, var/incapacitation_flags)
 	if(user == being_dropped)
