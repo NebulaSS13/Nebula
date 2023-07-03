@@ -1,9 +1,4 @@
 #if !defined(USING_MAP_DATUM)
-	#include "../../mods/persistence/_persistence.dme"
-	#include "../chargen/chargen_areas.dm"
-	#include "../chargen/chargen_objects.dm"
-	#include "../utility/cargo_shuttle_tmpl.dm"
-
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/modern_nights/_modern_nights.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
