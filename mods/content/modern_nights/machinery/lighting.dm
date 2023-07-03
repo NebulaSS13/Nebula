@@ -74,7 +74,7 @@
 	accepts_light_type = /obj/item/light/bulb/street
 	frame_type = null // todo: create custom frame item
 	construct_state = /decl/machine_construction/noninteractive // todo: create custom construction states
-	directional_offset = "{'NORTH':{'y':8}, 'SOUTH':{'y':12}, 'EAST':{'x':10}, 'WEST':{'x':-10}}" // designed for use with asymmetrical pavement turfs where the south dir is smaller
+	//directional_offset = "{'NORTH':{'y':8}, 'SOUTH':{'y':12}, 'EAST':{'x':10}, 'WEST':{'x':-10}}" // designed for use with asymmetrical pavement turfs where the south dir is smaller
 	//on_wall = FALSE
 
 // todo: move toggle into base game

@@ -7,7 +7,7 @@
 	access = list()
 	minimal_access = list()
 	alt_titles = list("Resident","Tourist","Socialite","Visitor", "Expat", "Entrepreneur")
-	outfit_type = /decl/hierarchy/outfit/job/generic/assistant
+	outfit_type = /decl/hierarchy/outfit/job/assistant
 	department_types = list(/decl/department/civilian)
 
 /datum/job/assistant/get_access()
@@ -15,6 +15,9 @@
 		return list(access_maint_tunnels)
 	else
 		return list()
+
+/decl/hierarchy/outfit/job/assistant
+	name = "Job - Civilian"
 
 /datum/job/chaplain
 	title = "Chaplain"
