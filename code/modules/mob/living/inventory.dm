@@ -168,7 +168,7 @@
 		if(held)
 			drop_from_inventory(held)
 		qdel(inv_slot)
-	LAZYREMOVE(_inventory_slots, slot)
+	LAZYREMOVE(_inventory_slots, inv_slot.slot_id)
 
 /mob/living/proc/get_jetpack()
 	var/obj/item/tank/jetpack/thrust = get_equipped_item(slot_back_str)
