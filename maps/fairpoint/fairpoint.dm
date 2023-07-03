@@ -30,7 +30,6 @@
 	#include "fairpoint_jobs.dm"
 	#include "fairpoint_loadout.dm"
 	#include "fairpoint_shuttles.dm"
-	#include "fairpoint_network.dm"
 	#include "fairpoint_supply.dm"
 	#include "fairpoint_zlevels.dm"
 
