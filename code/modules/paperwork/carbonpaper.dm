@@ -26,7 +26,7 @@
 	var/copycontents = copy.info
 	copycontents = replacetext(copycontents, "<font face=\"[original.deffont]\" color=", "<font face=\"[original.deffont]\" nocolor=")
 	copycontents = replacetext(copycontents, "<font face=\"[original.crayonfont]\" color=", "<font face=\"[original.crayonfont]\" nocolor=")
-	copy.set_content("<font color = #101010>[copycontents]</font>", "Copy - [original.name]")
+	copy.set_content("<font color = #101010>[copycontents]</font>", (original.name != initial(original.name))? "Copy - [original.name]" : null)
 	original.update_icon()
 
 	qdel(src)
@@ -36,7 +36,9 @@
 
 ///Copy our contents to a regular sheet of paper
 /obj/item/paper/carbon/proc/copy_to(var/obj/item/paper/other)
-	other.SetName(name)
+	//Don't copy the default name of the carbon paper
+	if(name != initial(name))
+		other.SetName(name)
 	other.fields             = fields
 	other.last_modified_ckey = last_modified_ckey
 	other.free_space         = free_space
