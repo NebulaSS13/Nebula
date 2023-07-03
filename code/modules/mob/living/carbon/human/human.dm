@@ -1208,6 +1208,10 @@
 	if(getBrainLoss() && getBrainLoss() > config.dex_malus_brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
 		dex_malus = round(clamp(round(getBrainLoss()-config.dex_malus_brainloss_threshold)/10, DEXTERITY_NONE, DEXTERITY_FULL))
 	if(!active_hand)
+		// todo: move dexterity onto inventory slot?
+		var/datum/inventory_slot/gripper/gripper = get_inventory_slot_datum(force_active_hand)
+		if(istype(gripper) && isnull(gripper.requires_organ_tag))
+			return species.get_manual_dexterity(src)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your hand is missing!"))
 		return FALSE

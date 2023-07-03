@@ -172,7 +172,7 @@
 	for(var/hand_slot in get_held_item_slots())
 		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
 		var/holding = inv_slot?.get_equipped_item()
-		if(holding)
+		if(holding && inv_slot.requires_organ_tag)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
 			if((!E || !E.is_usable() || E.is_parent_dislocated()) && try_unequip(holding))
 				grasp_damage_disarm(E)
