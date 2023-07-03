@@ -12,7 +12,7 @@
 
 /obj/item/paper/carbon/proc/remove_copy(var/mob/user)
 	//Make a new paper that copies our contents
-	var/obj/item/paper/original = new
+	var/obj/item/paper/original = new (arglist(GetCloneArgs()))
 	original.PopulateClone(src)
 	original.updateinfolinks()
 	var/obj/item/paper/copy = original.Clone()

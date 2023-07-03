@@ -56,9 +56,7 @@
 
 /obj/item/paper/PopulateClone(obj/item/paper/clone)
 	clone = ..()
-	clone.info               = info
 	clone.fields             = fields
-	clone.free_space         = free_space
 	clone.last_modified_ckey = last_modified_ckey
 	clone.rigged             = rigged
 	clone.is_crumpled        = is_crumpled
