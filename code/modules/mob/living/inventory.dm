@@ -30,7 +30,7 @@
 		qdel(existing_slot)
 	LAZYDISTINCTADD(_held_item_slots, held_slot.slot_id)
 	add_inventory_slot(held_slot)
-	if(!get_active_hand())
+	if(!get_active_held_item_slot())
 		select_held_item_slot(held_slot.slot_id)
 	queue_hand_rebuild()
 
