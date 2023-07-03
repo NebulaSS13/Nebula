@@ -138,13 +138,13 @@
 				break
 		if(!inv_box)
 			inv_box = new /obj/screen/inventory()
-		var/datum/inventory_slot/inv_slot = mymob.get_inventory_slot_datum(hand_tag)
+		var/datum/inventory_slot/gripper/inv_slot = mymob.get_inventory_slot_datum(hand_tag)
 		inv_box.SetName(hand_tag)
 		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_base"
 
 		inv_box.cut_overlays()
-		inv_box.add_overlay("hand_[hand_tag]")
+		inv_box.add_overlay("hand_[(istype(inv_slot) && inv_slot.hand_overlay) || hand_tag]")
 		if(inv_slot.ui_label)
 			inv_box.add_overlay("hand_[inv_slot.ui_label]")
 		if(mymob.get_active_held_item_slot() == hand_tag)

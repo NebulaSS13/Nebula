@@ -1,5 +1,7 @@
 /datum/inventory_slot/gripper
 	var/can_use_held_item = TRUE
+	/// If set, use this icon_state for the hand slot overlay; otherwise, use slot_id.
+	var/hand_overlay
 	// For reference, grippers do not use ui_loc, they have it set dynamically during /datum/hud/proc/rebuild_hands()
 
 /datum/inventory_slot/gripper/GetCloneArgs()
