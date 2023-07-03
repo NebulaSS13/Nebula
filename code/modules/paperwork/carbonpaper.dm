@@ -17,6 +17,11 @@
 	LAZYSET(copy.metadata, "is_copy", TRUE)
 	copy.set_color("#ffccff")
 
+	//Make all stamps on the copy be grayscale
+	for(var/image/stamp in copy.applied_stamps)
+		stamp.filters += filter(type = "color", color = list(1,0,0, 0,0,0, 0,0,1), space = FILTER_COLOR_HSV)
+		stamp.appearance_flags |= RESET_COLOR
+
 	//Silly hack to make all the text grayscale, since nobody is using standard css classes for pens we could override instead. Also, all using deprecated tags as well.
 	var/copycontents = copy.info
 	copycontents = replacetext(copycontents, "<font face=\"[original.deffont]\" color=", "<font face=\"[original.deffont]\" nocolor=")
