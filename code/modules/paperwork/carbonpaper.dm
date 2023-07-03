@@ -12,11 +12,8 @@
 
 /obj/item/paper/carbon/proc/remove_copy(var/mob/user)
 	//Make a new paper that copies our contents
-	var/obj/item/paper/original = new (arglist(GetCloneArgs()))
-	original.PopulateClone(src)
-	original.updateinfolinks()
-	var/obj/item/paper/copy = original.Clone()
-
+	var/obj/item/paper/original = copy_to(new /obj/item/paper)
+	var/obj/item/paper/copy     = original.Clone()
 	LAZYSET(copy.metadata, "is_copy", TRUE)
 	copy.set_color("#ffccff")
 
@@ -25,11 +22,27 @@
 	copycontents = replacetext(copycontents, "<font face=\"[original.deffont]\" color=", "<font face=\"[original.deffont]\" nocolor=")
 	copycontents = replacetext(copycontents, "<font face=\"[original.crayonfont]\" color=", "<font face=\"[original.crayonfont]\" nocolor=")
 	copy.set_content("<font color = #101010>[copycontents]</font>", "Copy - [original.name]")
+	original.update_icon()
 
 	qdel(src)
 	user.put_in_active_hand(original)
 	user.put_in_hands(copy)
 	return copy
+
+///Copy our contents to a regular sheet of paper
+/obj/item/paper/carbon/proc/copy_to(var/obj/item/paper/other)
+	other.SetName(name)
+	other.fields             = fields
+	other.last_modified_ckey = last_modified_ckey
+	other.free_space         = free_space
+	other.rigged             = rigged
+	other.is_crumpled        = is_crumpled
+	other.info               = info
+	other.stamp_text         = stamp_text
+	other.applied_stamps     = LAZYLEN(applied_stamps)? listDeepClone(applied_stamps) : null
+	other.metadata           = LAZYLEN(metadata)?       listDeepClone(metadata, TRUE) : null
+	other.updateinfolinks()
+	return other
 
 /obj/item/paper/carbon/get_alt_interactions(mob/user)
 	. = ..()
