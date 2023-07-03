@@ -183,8 +183,8 @@
 			inv_box = sublist[2]
 			inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
 		hand_y_offset += world.icon_size
-		if(mymob.client)
-			mymob.client.screen |= inv_box
+	if(mymob.client)
+		mymob.client.screen |= hand_hud_objects
 
 	// Make sure all held items are on the screen and set to the correct screen loc.
 	var/datum/inventory_slot/inv_slot
