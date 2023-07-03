@@ -121,7 +121,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/maintenance/arrivals)
 "bKt" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/maintenance/arrivals)
 "ccd" = (
 /obj/effect/decal/cleanable/dirt,

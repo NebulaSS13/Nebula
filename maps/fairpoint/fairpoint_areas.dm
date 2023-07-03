@@ -682,16 +682,16 @@
 /area/turbolift/sewer_entrance
 	name = "Sewer Access - Maintenance"
 	lift_announce_str = "Arriving at the sewer access level"
-	base_turf = /turf/simulated/floor/reinforced/elevator_shaft
+	base_turf = /turf/simulated/floor/plating
 
 /area/turbolift/sewer_exit/mining
 	name = "Sewer Access - Mining Surface"
 	lift_announce_str = "Ascending from the sewers, mining access."
 
 /area/turbolift/sewer_entrance/mining
-	name = "Sewer Access- Mining Sewers"
+	name = "Sewer Access - Mining Sewers"
 	lift_announce_str = "Descending to the Sewers, mining access"
-	base_turf = /turf/simulated/floor/reinforced/elevator_shaft
+	base_turf = /turf/simulated/floor/plating
 
 /area/turbolift/metro_station
 	name = "Metro Station - Surface"
@@ -700,12 +700,12 @@
 /area/turbolift/metro_maintenance
 	name = "Metro Station - Underground"
 	lift_announce_str = "Arriving at the Fairpoint Downtown Metro Station, underground level."
-	base_turf = /turf/simulated/floor/reinforced/elevator_shaft
+	base_turf = /turf/simulated/floor/plating
 
 /area/turbolift/pd_ground
 	name = "Police Station - Ground Floor"
 	lift_announce_str = "Now arriving at: Station Main, Floor One."
-	base_turf = /turf/simulated/floor/reinforced/elevator_shaft
+	base_turf = /turf/simulated/floor/plating
 
 /area/turbolift/pd_top
 	name = "Police Station - Top Floor"
@@ -722,7 +722,7 @@
 /area/turbolift/hospital_sewers
 	name = "Hospital - Morgue"
 	lift_announce_str = "Now arriving at: Morgue, Recovery and Cold Storage, Basement."
-	base_turf = /turf/simulated/floor/reinforced/elevator_shaft
+	base_turf = /turf/simulated/floor/plating
 
 
 /////////////////

@@ -299,7 +299,7 @@
 /turf/simulated/floor/reinforced/elevator_shaft,
 /area/turbolift/metro_maintenance)
 "jm" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/maintenance/arrivals)
 "jI" = (
 /obj/effect/floor_decal/corner/lightgrey/border{

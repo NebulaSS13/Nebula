@@ -3676,7 +3676,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/law)
 "dSf" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/maintenance/arrivals)
 "dSq" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -4310,7 +4310,7 @@
 /turf/simulated/floor/wood/bamboo,
 /area/fairpoint/medical/psych)
 "eGd" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/street/east)
 "eGn" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -7062,7 +7062,7 @@
 /turf/simulated/floor/wood/ebony,
 /area/fairpoint/police/cop)
 "huf" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/street/west)
 "hun" = (
 /obj/effect/floor_decal/industrial/warning/dust,

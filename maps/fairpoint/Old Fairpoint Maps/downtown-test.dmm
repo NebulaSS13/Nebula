@@ -1541,7 +1541,7 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/janitor)
 "bRr" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/street/east)
 "bRK" = (
 /obj/structure/table/woodentable/mahogany,
@@ -5065,7 +5065,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/street/east)
 "fFq" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/maintenance/arrivals)
 "fFz" = (
 /obj/item/clothing/under/dress/dress_green,
@@ -18619,7 +18619,7 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/police/detectives_office)
 "tGJ" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/street/west)
 "tGQ" = (
 /obj/effect/floor_decal/corner/paleblue{

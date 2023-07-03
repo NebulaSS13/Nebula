@@ -1438,7 +1438,7 @@
 /turf/exterior/concrete/reinforced/road,
 /area/fairpoint/street)
 "bKt" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/shipping/miningdock)
 "bKQ" = (
 /obj/effect/floor_decal/borderfloorwhite{
@@ -16880,7 +16880,7 @@
 /turf/simulated/floor,
 /area/fairpoint/medical/medbay)
 "xEU" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/street/outskirts)
 "xFj" = (
 /obj/effect/wallframe_spawn/reinforced,

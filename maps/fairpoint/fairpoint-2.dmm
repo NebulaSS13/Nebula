@@ -2328,7 +2328,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/range)
 "hn" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/street/west)
 "ho" = (
 /obj/structure/mopbucket,
@@ -5569,7 +5569,7 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/cityhall)
 "rB" = (
-/turf/exterior/barren/mining,
+/turf/exterior/barren,
 /area/fairpoint/street/east)
 "rC" = (
 /obj/effect/floor_decal/corner/red/diagonal,
