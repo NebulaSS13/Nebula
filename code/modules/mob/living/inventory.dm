@@ -143,4 +143,4 @@
 		if(held)
 			drop_from_inventory(held)
 		qdel(inv_slot)
-	LAZYREMOVE(_inventory_slots, slot)
+	LAZYREMOVE(_inventory_slots, inv_slot.slot_id)
