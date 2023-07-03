@@ -46,10 +46,10 @@
 /mob/living/remove_held_item_slot(var/slot)
 	var/datum/inventory_slot/inv_slot = istype(slot, /datum/inventory_slot) ? slot : get_inventory_slot_datum(slot)
 	if(inv_slot)
-		LAZYREMOVE(_held_item_slots, slot)
+		LAZYREMOVE(_held_item_slots, inv_slot.slot_id)
 		remove_inventory_slot(inv_slot)
 		var/held_slots = get_held_item_slots()
-		if(get_active_held_item_slot() == slot && length(held_slots))
+		if(!get_active_held_item_slot() && length(held_slots))
 			select_held_item_slot(held_slots[1])
 		queue_hand_rebuild()
 
