@@ -11,8 +11,12 @@
 		add_overlay("paper_stack_words")
 
 /obj/item/paper/carbon/proc/remove_copy(var/mob/user)
-	var/obj/item/paper/original = Clone()
-	var/obj/item/paper/copy     = Clone()
+	//Make a new paper that copies our contents
+	var/obj/item/paper/original = new
+	original.PopulateClone(src)
+	original.updateinfolinks()
+	var/obj/item/paper/copy = original.Clone()
+
 	LAZYSET(copy.metadata, "is_copy", TRUE)
 	copy.set_color("#ffccff")
 
@@ -27,7 +31,7 @@
 	user.put_in_hands(copy)
 	return copy
 
-/obj/item/paint_sprayer/get_alt_interactions(mob/user)
+/obj/item/paper/carbon/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/carbon_paper_remove)
 
