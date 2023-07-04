@@ -102,6 +102,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	if(href_list["lobby_ready"])
 		if(GAME_STATE <= RUNLEVEL_LOBBY)
 			ready = !ready
+		show_lobby_menu()
 
 	if(href_list["refresh"])
 		show_lobby_menu()
