@@ -142,7 +142,9 @@
 		src.dna.UpdateUI()
 
 	dna.check_integrity()
+
 	fingerprint        = dna.fingerprint
+	unique_enzymes     = dna.unique_enzymes
 	hair_colour        = rgb(dna.GetUIValueRange(DNA_UI_HAIR_R,255),  dna.GetUIValueRange(DNA_UI_HAIR_G,255),  dna.GetUIValueRange(DNA_UI_HAIR_B,255))
 	facial_hair_colour = rgb(dna.GetUIValueRange(DNA_UI_BEARD_R,255), dna.GetUIValueRange(DNA_UI_BEARD_G,255), dna.GetUIValueRange(DNA_UI_BEARD_B,255))
 	skin_colour        = rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255))

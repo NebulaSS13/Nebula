@@ -1290,6 +1290,3 @@
 		if(safety > FLASH_PROTECTION_NONE)
 			flash_strength = (flash_strength / 2)
 	. = ..()
-
-/mob/living/carbon/human/get_blood_type()
-	return blood_type || ..()

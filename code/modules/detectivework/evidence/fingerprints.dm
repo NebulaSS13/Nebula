@@ -90,7 +90,7 @@
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, get_active_held_item_slot())
 		if(E)
 			return E.get_fingerprint()
-	return md5(unique_mob_number)
+	return fingerprint
 
 /mob/living/carbon/get_full_print(var/ignore_blockers = FALSE)
 	if (!ignore_blockers && (mFingerprints in mutations))

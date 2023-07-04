@@ -475,7 +475,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	//DNA
 	new_character.dna.ready_dna(new_character)
 	if(record_found)//Pull up their name from database records if they did have a mind.
-		new_character.dna.unique_enzymes = record_found.get_dna()//Enzymes are based on real name but we'll use the record for conformity.
+		new_character.dna.unique_enzymes = record_found.get_dna()
 	new_character.key = G_found.key
 
 	/*

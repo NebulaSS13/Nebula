@@ -57,5 +57,8 @@
 	var/list/stasis_sources
 	var/stasis_value
 
-	var/unique_mob_number
+	var/original_fingerprint_seed
 	var/fingerprint
+	var/original_genetic_seed
+	var/unique_enzymes
+	var/blood_type = "A+"

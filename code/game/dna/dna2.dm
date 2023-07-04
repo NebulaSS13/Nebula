@@ -61,7 +61,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	// DO NOT FUCK WITH THESE OR BYOND WILL EAT YOUR FACE
 	var/uni_identity="" // Encoded UI
 	var/struc_enzymes="" // Encoded SE
-	var/unique_enzymes="" // MD5 of player name
+	var/unique_enzymes="" // MD5 of player genetic marker value
 
 	var/fingerprint
 
@@ -141,7 +141,8 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 	SetUIState(DNA_UI_GENDER, character.gender!=MALE, 1)
 
-	fingerprint = md5(character.unique_mob_number)
+	fingerprint    = character.get_full_print(ignore_blockers = TRUE)
+	unique_enzymes = character.get_unique_enzymes()
 
 	// Hair
 	var/list/hair_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
@@ -156,7 +157,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 		if(LAZYLEN(E.markings))
 			body_markings[E.organ_tag] = E.markings.Copy()
 
-	b_type = character.blood_type
+	b_type = character.get_blood_type()
 
 	UpdateUI()
 
@@ -356,7 +357,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 			ResetSE()
 
 		if(length(unique_enzymes) != 32)
-			unique_enzymes = md5(character.real_name)
+			unique_enzymes = md5(num2text(character.original_genetic_seed))
 	else
 		if(!species)
 			species = global.using_map.default_species
@@ -370,5 +371,4 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 /datum/dna/proc/ready_dna(mob/living/carbon/human/character)
 	ResetUIFrom(character)
 	ResetSE()
-	unique_enzymes = md5(character.real_name)
-	global.reg_dna[unique_enzymes] = character.real_name
+	unique_enzymes = character.get_unique_enzymes()
