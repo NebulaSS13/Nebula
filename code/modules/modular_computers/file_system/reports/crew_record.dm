@@ -87,7 +87,7 @@ var/global/arrest_security_status =  "Arrest"
 	// Security record
 	set_criminalStatus(global.default_security_status)
 	set_dna(H?.get_unique_enzymes() || "")
-	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
+	set_fingerprint(H?.get_full_print(ignore_blockers = TRUE) || "")
 
 	var/security_record = records[PREF_SEC_RECORD]
 	set_security_record((security_record && !jobban_isbanned(H, "Records")) ? html_decode(security_record) : "No record supplied")

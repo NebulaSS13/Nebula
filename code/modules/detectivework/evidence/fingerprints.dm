@@ -82,18 +82,19 @@
 	return TRUE
 
 // Mob fingerprint getters
-/mob/proc/get_full_print()
+/mob/proc/get_full_print(var/ignore_blockers = FALSE)
 	return FALSE
 
-/mob/living/carbon/get_full_print()
-	if (!dna || (mFingerprints in mutations))
+/mob/living/carbon/get_full_print(var/ignore_blockers = FALSE)
+	if (!dna || (!ignore_blockers && (mFingerprints in mutations)))
 		return FALSE
 	return md5(dna.uni_identity)
 
-/mob/living/carbon/human/get_full_print()
-	if(!..())
+/mob/living/carbon/human/get_full_print(var/ignore_blockers = FALSE)
+	. = ..()
+	if(!.)
 		return FALSE
-
-	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, get_active_held_item_slot())
-	if(E)
-		return E.get_fingerprint()
+	if(!ignore_blockers)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, get_active_held_item_slot())
+		if(E)
+			return E.get_fingerprint()
