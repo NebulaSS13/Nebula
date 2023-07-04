@@ -1,7 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: fixed carbon paper creating a copy of itself when trying to split the
-      original and copy.
-  - bugfix: fixed the paint spray having an interaction to remove a carbon copy from
-      it for reasons.
