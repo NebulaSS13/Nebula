@@ -69,7 +69,7 @@ var/global/arrest_security_status =  "Arrest"
 	set_public_record((public_record && !jobban_isbanned(H, "Records")) ? html_decode(public_record) : "No record supplied")
 
 	// Medical record
-	set_bloodtype(H ? H.b_type : "Unset")
+	set_bloodtype(H?.get_blood_type() || "Unset")
 	var/medical_record = records[PREF_MED_RECORD]
 	set_medical_record((medical_record && !jobban_isbanned(H, "Records")) ? html_decode(medical_record) : "No record supplied")
 

@@ -263,7 +263,7 @@
 	if(ishuman(source))
 		var/mob/living/carbon/human/donor = source
 		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
-		blood_type = donor.b_type
+		blood_type = donor.get_blood_type()
 	else if(isatom(source))
 		var/atom/donor = source
 		blood_data = REAGENT_DATA(donor.reagents, /decl/material/liquid/blood)

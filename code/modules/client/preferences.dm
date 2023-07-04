@@ -87,7 +87,7 @@ var/global/list/time_prefs_fixed = list()
 	real_name = get_random_name()
 
 	var/decl/species/species = get_species_by_key(global.using_map.default_species)
-	b_type = pickweight(species.blood_types)
+	blood_type = pickweight(species.blood_types)
 
 	if(client)
 		if(IsGuestKey(client.key))
@@ -365,7 +365,7 @@ var/global/list/time_prefs_fixed = list()
 	character.fully_replace_character_name(real_name)
 
 	character.set_gender(gender)
-	character.b_type = b_type
+	character.blood_type = blood_type
 
 	character.eye_colour = eye_colour
 

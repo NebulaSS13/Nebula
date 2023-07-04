@@ -151,7 +151,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 		if(LAZYLEN(E.markings))
 			body_markings[E.organ_tag] = E.markings.Copy()
 
-	b_type = character.b_type
+	b_type = character.blood_type
 
 	UpdateUI()
 
