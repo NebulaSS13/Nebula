@@ -3436,6 +3436,8 @@
 #include "maps\away_sites_testing\away_sites_testing_define.dm"
 #include "maps\example\example_define.dm"
 #include "maps\exodus\exodus_define.dm"
+#include "maps\fairpoint\fairpoint.dm"
+#include "maps\fairpoint\fairpoint_defines.dm"
 #include "maps\ministation\ministation_define.dm"
 #include "maps\modpack_testing\modpack_testing_define.dm"
 #include "maps\nexus\nexus_define.dm"
