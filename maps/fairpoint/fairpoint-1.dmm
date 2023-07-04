@@ -75,11 +75,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "ce" = (
 /obj/machinery/vending/coffee{
@@ -170,11 +166,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "eY" = (
 /obj/structure/disposalpipe/segment{
@@ -320,11 +312,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "jM" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -435,11 +423,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "mK" = (
 /obj/machinery/firealarm{
@@ -453,11 +437,7 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/exam_room)
 "mU" = (
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "mZ" = (
 /obj/structure/disposalpipe/segment{
@@ -719,11 +699,7 @@
 /area/fairpoint/medical/biostorage)
 "un" = (
 /obj/machinery/light/small,
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "uB" = (
 /obj/machinery/power/apc{
@@ -764,11 +740,6 @@
 /area/fairpoint/medical/medbay)
 "wd" = (
 /obj/effect/floor_decal/corner/blue/border,
-/obj/machinery/light/small{
-	brightness_color = "#DA0205";
-	brightness_power = 1;
-	brightness_range = 5
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/fairpoint/hallway/secondary/exit)
 "wH" = (
@@ -824,19 +795,10 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/obj/machinery/light/small{
-	brightness_color = "#DA0205";
-	brightness_power = 1;
-	brightness_range = 5
-	},
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "yh" = (
 /obj/structure/closet/secure_closet/personal/patient,
@@ -912,22 +874,14 @@
 /obj/structure/flora/pottedplant{
 	pixel_y = 10
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "AM" = (
 /turf/simulated/wall/r_wall/hull,
 /area/fairpoint/maintenance/arrivals)
 "AN" = (
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "AS" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1033,12 +987,6 @@
 /turf/simulated/floor/plating,
 /area/turbolift/hospital_sewers)
 "Es" = (
-/obj/machinery/power/apc{
-	cell_type = /obj/item/weapon/cell/super;
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
 /obj/machinery/vending/games,
 /turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
@@ -1111,11 +1059,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "GW" = (
 /turf/simulated/wall/iron,
@@ -1452,20 +1396,13 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/techmaint{
-	name = "landing floor";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/hallway/secondary/exit)
 "RE" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "RQ" = (
 /obj/structure/closet/crate/freezer,
@@ -1586,12 +1523,6 @@
 	},
 /area/fairpoint/medical/biostorage)
 "Wy" = (
-/obj/machinery/light/small{
-	brightness_color = "#DA0205";
-	brightness_power = 1;
-	brightness_range = 5;
-	dir = 8
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/fairpoint/hallway/secondary/exit)
 "WH" = (
@@ -1602,11 +1533,7 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "WN" = (
 /obj/structure/closet/secure_closet/freezer{
@@ -1698,11 +1625,7 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	outdoors = 1
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "Zk" = (
 /obj/effect/decal/cleanable/dirt,
