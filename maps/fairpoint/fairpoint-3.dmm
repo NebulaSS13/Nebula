@@ -2938,10 +2938,6 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/computer/cryopod{
-	layer = 3.3;
-	pixel_y = 32
-	},
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/prison)
 "xH" = (
@@ -5576,6 +5572,10 @@
 	},
 /obj/machinery/camera/network/security{
 	c_tag = "SEC - Prison Living Quarters"
+	},
+/obj/machinery/computer/cryopod{
+	layer = 3.3;
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/prison/dorm)

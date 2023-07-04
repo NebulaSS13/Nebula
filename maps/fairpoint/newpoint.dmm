@@ -2099,13 +2099,6 @@
 /obj/machinery/porta_turret,
 /turf/simulated/floor/tiled/monofloor,
 /area/fairpoint/police/cop)
-"cxo" = (
-/obj/machinery/floor_light/prebuilt,
-/obj/machinery/cryopod{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/monofloor,
-/area/fairpoint/crew_quarters/sleep/cryo)
 "cxX" = (
 /obj/structure/table/steel,
 /turf/simulated/floor/tiled/old_tile,
@@ -7140,10 +7133,6 @@
 /obj/structure/table/reinforced,
 /obj/machinery/light/small{
 	dir = 1
-	},
-/obj/machinery/computer/cryopod{
-	layer = 3.3;
-	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/prison)
@@ -16025,6 +16014,10 @@
 /obj/machinery/camera/network/security{
 	c_tag = "SEC - Prison Living Quarters"
 	},
+/obj/machinery/computer/cryopod{
+	layer = 3.3;
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/prison/dorm)
 "qMw" = (
@@ -16290,9 +16283,8 @@
 /area/fairpoint/police)
 "rbi" = (
 /obj/machinery/floor_light/prebuilt,
-/obj/machinery/cryopod,
 /turf/simulated/floor/tiled/monofloor,
-/area/fairpoint/crew_quarters/sleep/cryo)
+/area/fairpoint/street)
 "rbC" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -67697,10 +67689,10 @@ kWF
 kWF
 kWF
 elf
-cxo
+rbi
 iRJ
 iRJ
-cxo
+rbi
 gQj
 bWi
 yaH
