@@ -308,7 +308,7 @@
 /turf/simulated/wall,
 /area/unishi/living)
 "bg" = (
-/obj/structure/sign/warning/secure_area/armory,
+/obj/structure/sign/warning/armory,
 /turf/simulated/wall,
 /area/unishi/living)
 "bh" = (

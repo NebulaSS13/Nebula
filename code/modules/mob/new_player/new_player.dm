@@ -53,7 +53,8 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		output += lobby_footer
 	output += "</div>"
 
-	panel = new(src, "Welcome","Welcome to [global.using_map.full_name]", 560, 280, src)
+	if(!panel)
+		panel = new(src, "Welcome","Welcome to [global.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(JOINTEXT(output))
 	panel.open()
@@ -103,7 +104,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			ready = !ready
 
 	if(href_list["refresh"])
-		panel.close()
 		show_lobby_menu()
 
 	if(href_list["lobby_observe"])
@@ -173,8 +173,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
-	else if(!href_list["late_join"])
-		show_lobby_menu()
 
 	if(href_list["invalid_jobs"])
 		show_invalid_jobs = !show_invalid_jobs
@@ -271,49 +269,52 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	dat += "Choose from the following open/valid positions:<br>"
 	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Hide":"Show"] unavailable jobs</a><br>"
 	dat += "<table>"
-	dat += "<tr><td colspan = 3><b>[global.using_map.station_name]:</b></td></tr>"
-
-	// MAIN MAP JOBS
 	var/list/job_summaries = list()
 	var/list/hidden_reasons = list()
-	for(var/datum/job/job in SSjobs.primary_job_datums)
+	if(length(SSjobs.primary_job_datums))
+		dat += "<tr><td colspan = 3><b>[global.using_map.station_name]:</b></td></tr>"
 
-		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
-		if(summary)
+		// MAIN MAP JOBS
+		for(var/datum/job/job in SSjobs.primary_job_datums)
 
-			var/decl/department/dept = job.primary_department && SSjobs.get_department_by_type(job.primary_department)
-			var/summary_key = (dept || "No Department")
-			var/list/existing_summaries = job_summaries[summary_key]
-			if(!existing_summaries)
-				existing_summaries = list()
-				job_summaries[summary_key] = existing_summaries
-			if(job.head_position)
-				existing_summaries.Insert(1, summary)
+			var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
+			if(summary)
+
+				var/decl/department/dept = job.primary_department && SSjobs.get_department_by_type(job.primary_department)
+				var/summary_key = (dept || "No Department")
+				var/list/existing_summaries = job_summaries[summary_key]
+				if(!existing_summaries)
+					existing_summaries = list()
+					job_summaries[summary_key] = existing_summaries
+				if(job.head_position)
+					existing_summaries.Insert(1, summary)
+				else
+					existing_summaries.Add(summary)
 			else
-				existing_summaries.Add(summary)
-		else
-			for(var/raisin in job.get_unavailable_reasons(client))
-				hidden_reasons[raisin] = TRUE
+				for(var/raisin in job.get_unavailable_reasons(client))
+					hidden_reasons[raisin] = TRUE
 
-	var/added_job = FALSE
-	if(length(job_summaries))
-		job_summaries = sortTim(job_summaries, /proc/cmp_departments_dsc, FALSE)
-		for(var/job_category in job_summaries)
-			if(length(job_summaries[job_category]))
-				var/decl/department/job_dept = job_category
-				// TODO: use bgcolor='[job_dept.display_color]' when less pastel/bright colours are chosen.
-				dat += "<tr><td bgcolor='#333333' colspan = 3><b><font color = '#ffffff'><center>[istype(job_dept) ? job_dept.name : job_dept]</center></font></b></td></tr>"
-				dat += job_summaries[job_category]
-				added_job = TRUE
+		var/added_job = FALSE
+		if(length(job_summaries))
+			job_summaries = sortTim(job_summaries, /proc/cmp_departments_dsc, FALSE)
+			for(var/job_category in job_summaries)
+				if(length(job_summaries[job_category]))
+					var/decl/department/job_dept = job_category
+					// TODO: use bgcolor='[job_dept.display_color]' when less pastel/bright colours are chosen.
+					dat += "<tr><td bgcolor='#333333' colspan = 3><b><font color = '#ffffff'><center>[istype(job_dept) ? job_dept.name : job_dept]</center></font></b></td></tr>"
+					dat += job_summaries[job_category]
+					added_job = TRUE
 
-	if(!added_job)
-		dat += "<tr><td colspan = 3>No available positions.</td></tr>"
+		if(!added_job)
+			dat += "<tr><td colspan = 3>No available positions.</td></tr>"
 	// END MAIN MAP JOBS
 
 	// SUBMAP JOBS
-	for(var/thing in SSmapping.submaps)
-		var/datum/submap/submap = thing
-		if(submap && submap.available())
+	var/list/ordered_submaps = null
+	if(length(SSmapping.submaps))
+		ordered_submaps = sortTim(SSmapping.submaps.Copy(), /proc/cmp_submap_asc)
+	for(var/datum/submap/submap as anything in ordered_submaps)
+		if(submap?.available())
 			dat += "<tr><td colspan = 3><b>[submap.name] ([submap.archetype.descriptor]):</b></td></tr>"
 			job_summaries = list()
 			for(var/otherthing in submap.jobs)
@@ -328,7 +329,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			if(LAZYLEN(job_summaries))
 				dat += job_summaries
 			else
-				dat += "No available positions."
+				dat += "<tr><td colspan = 3>No available positions.</td></tr>"
 	// END SUBMAP JOBS
 
 	dat += "</table></center>"
@@ -416,6 +417,8 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/proc/close_spawn_windows()
 	close_browser(src, "window=latechoices") //closes late choices window
 	close_browser(src, "window=preferences_window") //closes preferences window
+	if(client?.prefs)
+		client.prefs.close_load_dialog(src)
 	panel.close()
 
 /mob/new_player/proc/check_species_allowed(var/decl/species/S, var/show_alert=1)

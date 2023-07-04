@@ -325,7 +325,7 @@
 /datum/shuttle/autodock/proc/get_location_name()
 	if(moving_status == SHUTTLE_INTRANSIT)
 		return "In transit"
-	return current_location.name
+	return "\the [current_location]"
 
 /datum/shuttle/autodock/proc/get_destination_name()
 	if(!next_location)

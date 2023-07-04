@@ -34,7 +34,7 @@
 			else if(cannot_depart)
 				shuttle_status = cannot_depart
 			else
-				shuttle_status = "Standing-by at \the [shuttle.get_location_name()]."
+				shuttle_status = "Standing-by at [shuttle.get_location_name()]."
 
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."

@@ -7,6 +7,10 @@
 	var/list/crew_jobs = list(
 		/datum/job/submap
 	)
+	/// Used to order submaps on the occupation preference menu.
+	var/sort_priority = 0
+	/// Whether the job preferences for this submap archetype are collapsed by default.
+	var/default_to_hidden = TRUE
 
 /decl/submap_archetype/Initialize()
 	if(islist(whitelisted_species) && !length(whitelisted_species))

@@ -3697,7 +3697,7 @@
 /obj/effect/floor_decal/industrial/loading{
 	dir = 8
 	},
-/obj/structure/sign/warning/secure_area/armory{
+/obj/structure/sign/warning/armory{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techfloor,

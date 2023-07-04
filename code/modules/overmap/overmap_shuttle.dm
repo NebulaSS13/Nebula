@@ -77,7 +77,7 @@
 /datum/shuttle/autodock/overmap/get_location_name()
 	if(moving_status == SHUTTLE_INTRANSIT)
 		return "In transit"
-	return "[waypoint_sector(current_location)] - [current_location]"
+	return "\the [waypoint_sector(current_location)] - [current_location]"
 
 /datum/shuttle/autodock/overmap/get_destination_name()
 	if(!next_location)
