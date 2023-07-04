@@ -46,6 +46,7 @@
 	atmosphere_gen_pressure_max    = 0.05 ATM
 	atmosphere_gen_temperature_min = -240 CELSIUS //-240c is about the surface temp of pluto for ref
 	atmosphere_gen_temperature_max = 450 CELSIUS //450c is the temperature at the surface of mercury for ref
+	initial_weather_state          = null // No weather.
 	possible_rock_colors           = list(
 		COLOR_BEIGE,
 		COLOR_GRAY80,

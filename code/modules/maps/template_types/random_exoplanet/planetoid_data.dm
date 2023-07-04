@@ -34,8 +34,8 @@
 	var/temperature_min = 0 CELSIUS
 	///The maximum temperature that can be reached on the planet.(For instance via meteo or sunlight/shade or whatever)
 	var/temperature_max = 25 CELSIUS
-	///What weather state to use for this planet initially. If null, will not initialize any weather system. May be type path at definition or instance at runtime.
-	var/decl/state/weather/initial_weather_state
+	///What weather state to use for this planet initially. If null, will not initialize any weather system. Must be a typepath rather than an instance.
+	var/decl/state/weather/initial_weather_state = /decl/state/weather/calm
 
 	// *** Appearence ***
 	///A weak reference to the overmap marker for this template instance if any exists. Or at definition the type path of the marker to use
@@ -156,8 +156,6 @@
 
 ///Resets the given weather state to our planet replacing the old one, and trigger updates. Can be a type path or instance.
 /datum/planetoid_data/proc/reset_weather(var/decl/state/weather/W)
-	if(ispath(W))
-		W = GET_DECL(W)
 	initial_weather_state = W
 	if(!(topmost_level_id in SSmapping.levels_by_id))
 		return //It's entire possible the levels weren't initialized yet, so don't bother.
