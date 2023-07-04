@@ -7,6 +7,7 @@
 	metabolism = REM * 0.15
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_amphetamines"
 
 /decl/material/liquid/amphetamines/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -22,6 +23,7 @@
 	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 	value = 2
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_narcotics"
 
 /decl/material/liquid/narcotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -42,6 +44,7 @@
 	overdose = 6
 	scannable = 1
 	value = 2
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_nicotine"
 
 /decl/material/liquid/nicotine/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -67,6 +70,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	value = 2
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_sedatives"
 
 /decl/material/liquid/sedatives/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -101,6 +105,7 @@
 	narcosis = 7
 	fruit_descriptor = "rich"
 	euphoriant = 15
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_psychoactives"
 
 /decl/material/liquid/psychoactives/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -116,6 +121,7 @@
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
 	value = 2
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_hallucinogenics"
 
 /decl/material/liquid/hallucinogenics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -132,6 +138,7 @@
 	value = 2
 	euphoriant = 30
 	fruit_descriptor = "hallucinogenic"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_psychotropics"
 
 /decl/material/liquid/psychotropics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -166,6 +173,7 @@
 	color = "#ccccff"
 	metabolism = REM
 	overdose = 25
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_gleam"
 
 	// M A X I M U M C H E E S E

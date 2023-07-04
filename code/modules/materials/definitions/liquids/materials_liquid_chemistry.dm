@@ -1,10 +1,11 @@
 /decl/material/liquid/surfactant // Foam precursor
-	name = "surfacant"
-	uid = "liquid_surfacant"
+	name = "surfactant"
+	uid = "liquid_surfactant"
 	lore_text = "A isocyanate liquid that forms a foam when mixed with water."
 	taste_description = "metal"
 	color = "#9e6b38"
 	value = 0.1
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
 	name = "foaming agent"
@@ -13,6 +14,7 @@
 	taste_description = "metal"
 	color = "#664b63"
 	value = 0.1
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/lube
 	name = "lubricant"
@@ -22,3 +24,4 @@
 	color = SYNTH_BLOOD_COLOR
 	value = 0.1
 	slipperiness = 80
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC

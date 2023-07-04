@@ -4,7 +4,8 @@
 	lore_text = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
 	color = "#f2f3f4"
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/luminol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	O.reveal_blood()
@@ -17,6 +18,7 @@
 	lore_text = "A popular party drug for adventurous types who want to BE the glowstick. Rumoured to be hallucinogenic in high doses."
 	overdose = 15
 	color = "#9eefff"
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE // No sap air.
 	uid = "chem_glowsap"
 
 /decl/material/liquid/glowsap/affect_ingest(mob/living/M, removed, var/datum/reagents/holder)
@@ -56,6 +58,7 @@
 	taste_mult = 0.7
 	color = "#365e30"
 	overdose = REAGENTS_OVERDOSE
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/frostoil
 	name = "chilly oil"
@@ -65,6 +68,7 @@
 	color = "#07aab2"
 	value = 2
 	fruit_descriptor = "numbing"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_frostoil"
 
 /decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -81,6 +85,7 @@
 	color = "#b31008"
 	fruit_descriptor = "spicy"
 	uid = "chem_capsaicin"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 	heating_point = T100C
 	heating_message = "darkens and thickens as it seperates from its water content"
@@ -134,6 +139,7 @@
 	heating_message = null
 	heating_products = null
 	heating_point = null
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/capsaicin/condensed/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/eyes_covered = 0
@@ -210,6 +216,8 @@
 	taste_description = "slime"
 	taste_mult = 0.9
 	color = "#13bc5e"
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_mutagenics"
 
 /decl/material/liquid/mutagenics/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -248,7 +256,8 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM*2
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_lactate"
 
 /decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -269,7 +278,8 @@
 	scannable = 1
 	overdose = 5
 	metabolism = 1
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nanoblood"
 
 /decl/material/liquid/nanoblood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -328,7 +338,8 @@
 	scent_intensity = null
 	scent_descriptor = null
 	scent_range = null
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_nicotinesolution"
 
 /decl/material/liquid/menthol
@@ -340,6 +351,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
 	hidden_from_codex = TRUE
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_tobacco_menthol"
 
 /decl/material/liquid/menthol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -354,6 +366,8 @@
 	color = "#c2c2d6"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_nanite_fluid"
 
 /decl/material/liquid/nanitefluid/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -374,12 +388,14 @@
 	touch_met = 5
 	dirtiness = DIRTINESS_STERILE
 	turf_touch_threshold = 0.1
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_antiseptic"
 
 /decl/material/liquid/crystal_agent
 	name = "crystallizing agent"
 	taste_description = "sharpness"
 	color = "#13bc5e"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_crystalizing_agent"
 
 /decl/material/liquid/crystal_agent/proc/do_material_check(var/mob/living/carbon/M)

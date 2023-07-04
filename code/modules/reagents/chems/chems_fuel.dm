@@ -7,7 +7,8 @@
 	fuel_value = 1
 	burn_product = /decl/material/gas/carbon_monoxide
 	gas_flags = XGM_GAS_FUEL
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_UNCOMMON
 	uid = "chem_fuel"
 
 	glass_name = "welder fuel"
