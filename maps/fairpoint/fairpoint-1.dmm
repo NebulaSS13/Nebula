@@ -3,6 +3,13 @@
 /obj/machinery/optable,
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/morgue)
+"aw" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/structure/lift/button/standalone,
+/turf/simulated/floor/tiled/white,
+/area/turbolift/hospital_sewers)
 "az" = (
 /obj/structure/morgue{
 	dir = 4
@@ -71,6 +78,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "ce" = (
@@ -133,7 +141,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
-/area/fairpoint/medical/medbay)
+/area/turbolift/hospital_sewers)
 "dN" = (
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 8
@@ -165,6 +173,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "eY" = (
@@ -203,11 +212,10 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/ward)
 "go" = (
-/obj/machinery/computer/modular/telescreen/preset/medical,
 /turf/simulated/wall/prepainted{
 	color = "FFFEFD"
 	},
-/area/fairpoint/medical/exam_room)
+/area/turbolift/hospital_sewers)
 "gs" = (
 /obj/structure/curtain{
 	color = "#72AFED";
@@ -275,7 +283,7 @@
 "iH" = (
 /obj/structure/sign/warning/moving_parts,
 /turf/simulated/wall/concrete,
-/area/fairpoint/hallway/secondary/exit)
+/area/turbolift/metro_maintenance)
 "iN" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/box/bloodpacks,
@@ -296,7 +304,7 @@
 	level = 3;
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/metro_maintenance)
 "jm" = (
 /turf/exterior/barren,
@@ -315,6 +323,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "jM" = (
@@ -345,8 +354,8 @@
 /turf/simulated/wall/concrete,
 /area/fairpoint/maintenance/arrivals)
 "kp" = (
-/obj/machinery/door/blast/shutters/indestructible,
-/turf/simulated/wall/r_titanium/indestructible,
+/obj/machinery/door/blast/regular,
+/turf/simulated/wall/r_wall/hull,
 /area/fairpoint/maintenance/arrivals)
 "kr" = (
 /turf/simulated/floor/tiled/techmaint,
@@ -429,6 +438,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "mK" = (
@@ -446,7 +456,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
-
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "mZ" = (
@@ -470,13 +480,11 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "nl" = (
-/obj/machinery/door/blast/shutters/indestructible,
-/turf/simulated/floor/plating,
-/area/fairpoint/maintenance/arrivals)
+/turf/simulated/wall/elevator,
+/area/turbolift/sewer_exit)
 "nq" = (
-/obj/effect/floor_decal/corner/blue/border,
 /turf/simulated/floor/tiled/steel_grid,
-/area/fairpoint/hallway/secondary/exit)
+/area/turbolift/sewer_exit)
 "nD" = (
 /obj/structure/disposalpipe/junction/yjunction{
 	dir = 1
@@ -506,7 +514,7 @@
 /area/fairpoint/maintenance/arrivals)
 "oY" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/sewer_exit)
 "ps" = (
 /obj/turbolift_map_holder/fairpoint/cargo,
@@ -666,7 +674,7 @@
 /obj/effect/floor_decal/corner/paleblue,
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
-/area/fairpoint/medical/medbay)
+/area/turbolift/hospital_sewers)
 "tL" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 8
@@ -714,6 +722,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "uB" = (
@@ -754,9 +763,14 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "wd" = (
-/obj/machinery/door/blast/shutters/indestructible,
-/turf/exterior/water,
-/area/fairpoint/maintenance/arrivals)
+/obj/effect/floor_decal/corner/blue/border,
+/obj/machinery/light/small{
+	brightness_color = "#DA0205";
+	brightness_power = 1;
+	brightness_range = 5
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/fairpoint/hallway/secondary/exit)
 "wH" = (
 /obj/structure/closet/secure_closet/freezer{
 	name = "blood storage"
@@ -810,12 +824,18 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
+/obj/machinery/light/small{
+	brightness_color = "#DA0205";
+	brightness_power = 1;
+	brightness_range = 5
+	},
 /obj/structure/railing{
 	dir = 8
 	},
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "yh" = (
@@ -895,16 +915,18 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "AM" = (
-/turf/simulated/wall/r_titanium/indestructible,
+/turf/simulated/wall/r_wall/hull,
 /area/fairpoint/maintenance/arrivals)
 "AN" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "AS" = (
@@ -925,7 +947,7 @@
 /area/fairpoint/medical/biostorage)
 "Bi" = (
 /obj/turbolift_map_holder/fairpoint/sewer1,
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/sewer_exit)
 "Bp" = (
 /obj/effect/floor_decal/corner/paleblue/full{
@@ -1008,9 +1030,15 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/maintenance/hospital)
 "El" = (
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/hospital_sewers)
 "Es" = (
+/obj/machinery/power/apc{
+	cell_type = /obj/item/weapon/cell/super;
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
 /obj/machinery/vending/games,
 /turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
@@ -1039,7 +1067,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/fairpoint/hallway/secondary/exit)
+/area/turbolift/metro_maintenance)
 "Ft" = (
 /obj/effect/catwalk_plated,
 /obj/structure/catwalk,
@@ -1086,6 +1114,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "GW" = (
@@ -1100,7 +1129,7 @@
 "Ha" = (
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
-/area/fairpoint/medical/medbay)
+/area/turbolift/hospital_sewers)
 "Hc" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -1118,7 +1147,7 @@
 /turf/simulated/wall/prepainted{
 	color = "FFFEFD"
 	},
-/area/fairpoint/medical/medbay)
+/area/turbolift/hospital_sewers)
 "Hj" = (
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/biostorage)
@@ -1182,7 +1211,7 @@
 /turf/simulated/wall/iron,
 /area/fairpoint/street/outskirts)
 "Jh" = (
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/sewer_exit)
 "Jk" = (
 /obj/random/vendor,
@@ -1256,7 +1285,7 @@
 	tag = "icon-bordercolor (EAST)";
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/metro_maintenance)
 "LK" = (
 /turf/simulated/wall/prepainted{
@@ -1327,6 +1356,13 @@
 	color = "#FFFEFD"
 	},
 /area/fairpoint/medical/exam_room)
+"OX" = (
+/turf/simulated/wall/iron,
+/area/turbolift/sewer_exit)
+"Pn" = (
+/obj/structure/lift/button,
+/turf/simulated/wall/concrete,
+/area/turbolift/metro_maintenance)
 "Pr" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -1367,6 +1403,10 @@
 "QB" = (
 /turf/simulated/floor/tiled/steel_ridged,
 /area/fairpoint/maintenance/arrivals)
+"QF" = (
+/obj/structure/lift/button/standalone,
+/turf/simulated/floor/plating,
+/area/turbolift/sewer_exit)
 "QN" = (
 /obj/structure/closet/secure_closet/freezer{
 	name = "blood storage"
@@ -1414,6 +1454,7 @@
 	},
 /turf/simulated/floor/tiled/techmaint{
 	name = "landing floor";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "RE" = (
@@ -1423,6 +1464,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "RQ" = (
@@ -1526,7 +1568,7 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "Vl" = (
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/metro_maintenance)
 "Vm" = (
 /obj/structure/closet/crate/secure/biohazard/alt,
@@ -1536,7 +1578,7 @@
 /obj/turbolift_map_holder/fairpoint/hospital{
 	level = 3
 	},
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/hospital_sewers)
 "Wi" = (
 /turf/simulated/wall/concrete{
@@ -1544,6 +1586,12 @@
 	},
 /area/fairpoint/medical/biostorage)
 "Wy" = (
+/obj/machinery/light/small{
+	brightness_color = "#DA0205";
+	brightness_power = 1;
+	brightness_range = 5;
+	dir = 8
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/fairpoint/hallway/secondary/exit)
 "WH" = (
@@ -1557,6 +1605,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "WN" = (
@@ -1627,11 +1676,6 @@
 /area/fairpoint/medical/ward)
 "Yy" = (
 /obj/effect/floor_decal/corner/blue/border,
-/obj/machinery/light/small{
-	brightness_color = "#DA0205";
-	brightness_power = 1;
-	brightness_range = 5
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/fairpoint/hallway/secondary/exit)
 "YQ" = (
@@ -1657,6 +1701,7 @@
 /turf/simulated/floor/tiled{
 	color = "";
 	name = "exterior tiles";
+	outdoors = 1
 	},
 /area/fairpoint/hallway/secondary/exit)
 "Zk" = (
@@ -1937,17 +1982,17 @@ kt
 kt
 kt
 AM
-wd
-wd
-wd
-wd
-wd
-wd
-wd
-wd
-wd
-wd
-wd
+tD
+tD
+tD
+tD
+tD
+tD
+tD
+tD
+tD
+tD
+tD
 AM
 kt
 kt
@@ -5531,7 +5576,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -5664,7 +5709,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (26,1,1) = {"
@@ -5690,7 +5735,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -5823,7 +5868,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (27,1,1) = {"
@@ -5849,7 +5894,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -5982,7 +6027,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (28,1,1) = {"
@@ -6008,7 +6053,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -6141,7 +6186,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (29,1,1) = {"
@@ -6167,7 +6212,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -6300,7 +6345,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (30,1,1) = {"
@@ -6326,7 +6371,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 cY
 cY
@@ -6459,7 +6504,7 @@ cY
 cY
 cY
 lv
-nl
+Ud
 kp
 "}
 (31,1,1) = {"
@@ -6909,7 +6954,7 @@ AN
 RB
 RB
 UM
-Yy
+wd
 jT
 kt
 kt
@@ -7227,7 +7272,7 @@ Wy
 UM
 UM
 UM
-nq
+Yy
 jT
 kt
 kt
@@ -7681,7 +7726,7 @@ kt
 kt
 kt
 jT
-jT
+Pn
 Fq
 Fq
 Fq
@@ -17558,12 +17603,12 @@ UE
 gb
 ZJ
 zq
-jM
+aw
 Hg
-Ca
-Ca
-Ca
-Ca
+go
+go
+go
+go
 RA
 iV
 jM
@@ -19149,7 +19194,7 @@ bl
 sC
 zq
 jM
-go
+pY
 pY
 pY
 pY
@@ -30693,7 +30738,7 @@ Jh
 Jh
 Jh
 Bi
-NN
+nl
 NN
 kt
 kt
@@ -30852,7 +30897,7 @@ Jh
 Jh
 Jh
 Jh
-NN
+nl
 NN
 kt
 kt
@@ -31011,7 +31056,7 @@ Jh
 Jh
 Jh
 Jh
-NN
+nl
 kt
 kt
 kt
@@ -31170,7 +31215,7 @@ Jh
 Jh
 Jh
 Jh
-NN
+nl
 kt
 kt
 kt
@@ -31329,7 +31374,7 @@ oY
 oY
 oY
 oY
-NN
+nl
 kt
 kt
 kt
@@ -31483,12 +31528,12 @@ kt
 kr
 kr
 NN
-kt
-pE
-Ud
-Ud
-Ud
-kt
+OX
+nq
+Jh
+Jh
+QF
+OX
 kt
 kt
 kt
@@ -32126,17 +32171,17 @@ Cj
 Cj
 cP
 kt
-AM
-AM
-AM
-AM
-AM
-AM
-AM
-AM
-AM
-AM
-AM
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
 kt
 AS
 AS
@@ -33354,7 +33399,7 @@ iR
 iR
 iR
 iR
-iR
+AM
 AM
 AM
 AM
