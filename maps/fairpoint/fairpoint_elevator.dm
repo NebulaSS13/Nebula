@@ -5,7 +5,7 @@
 
 // POLICE STATION
 /obj/turbolift_map_holder/fairpoint/sec
-	name = "Fairpoint turbolift map placeholder - Securiy"
+	name = "Fairpoint turbolift map placeholder - Security"
 	dir = EAST
 
 	areas_to_use = list(
@@ -19,7 +19,8 @@
 
 	areas_to_use = list(
 		/area/turbolift/hospital_sewers,
-		/area/turbolift/hospital_surface
+		/area/turbolift/hospital_surface,
+		/area/turbolift/hospital_top
 		)
 
 // DIRECT SEWER ACCESS
