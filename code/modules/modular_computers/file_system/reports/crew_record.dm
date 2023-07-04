@@ -86,7 +86,7 @@ var/global/arrest_security_status =  "Arrest"
 
 	// Security record
 	set_criminalStatus(global.default_security_status)
-	set_dna(H ? H.dna.unique_enzymes : "")
+	set_dna(H?.get_unique_enzymes() || "")
 	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
 
 	var/security_record = records[PREF_SEC_RECORD]

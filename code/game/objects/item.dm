@@ -593,8 +593,10 @@
 		forensics.add_data(/datum/forensics/blood_dna, sample_dna)
 	add_coating(/decl/material/liquid/blood, amount, blood_data)
 
-	if(!LAZYACCESS(blood_DNA, M.dna.unique_enzymes))
-		LAZYSET(blood_DNA, M.dna.unique_enzymes, M.dna.b_type)
+	var/unique_enzymes = M.get_unique_enzymes()
+	var/blood_type = M.get_blood_type()
+	if(unique_enzymes && blood_type && !LAZYACCESS(blood_DNA, unique_enzymes))
+		LAZYSET(blood_DNA, unique_enzymes, blood_type)
 
 	return TRUE
 

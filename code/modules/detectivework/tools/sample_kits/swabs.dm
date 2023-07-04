@@ -32,7 +32,8 @@
 			to_chat(user, SPAN_WARNING("\The [H]'s [cover] is in the way."))
 			return
 
-		if(!H.dna || !H.dna.unique_enzymes)
+		var/unique_enzymes = H.get_unique_enzymes()
+		if(!unique_enzymes)
 			to_chat(user, SPAN_WARNING("They don't seem to have DNA!"))
 			return
 
@@ -42,7 +43,7 @@
 
 		user.visible_message(SPAN_NOTICE("[user] swabs \the [H]'s mouth for a saliva sample."))
 		var/datum/forensics/trace_dna/trace = new()
-		trace.data = list(H.dna.unique_enzymes)
+		trace.data = list(unique_enzymes)
 		var/obj/item/forensics/sample/swab/S = new(get_turf(user))
 		S.merge_evidence_list(list(trace))
 		S.update_icon()

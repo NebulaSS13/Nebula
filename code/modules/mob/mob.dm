@@ -1350,3 +1350,6 @@
 
 /mob/proc/get_unique_enzymes()
 	return dna?.unique_enzymes
+
+/mob/proc/get_blood_type()
+	return dna?.b_type

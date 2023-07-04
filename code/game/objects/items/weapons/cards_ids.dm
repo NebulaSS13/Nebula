@@ -259,9 +259,9 @@ var/global/const/NO_EMAG_ACT = -50
 		id_card.card_gender = "Unset"
 	id_card.set_id_photo(src)
 
+	id_card.blood_type		= get_blood_type()     || "Unset"
+	id_card.dna_hash		= get_unique_enzymes() || "Unset"
 	if(dna)
-		id_card.blood_type		= dna.b_type
-		id_card.dna_hash		= dna.unique_enzymes
 		id_card.fingerprint_hash= md5(dna.uni_identity)
 
 /mob/living/carbon/human/set_id_info(var/obj/item/card/id/id_card)

@@ -158,8 +158,9 @@
 				var/default = dna_hash
 				if(default == initial(dna_hash) && ishuman(user))
 					var/mob/living/carbon/human/H = user
-					if(H.dna)
-						default = H.dna.unique_enzymes
+					var/unique_enzymes = H.get_unique_enzymes()
+					if(unique_enzymes)
+						default = unique_enzymes
 				var/new_dna_hash = sanitize(input(user,"What DNA hash would you like to be written on this card?","Agent Card DNA Hash",default) as null|text)
 				if(!isnull(new_dna_hash) && CanUseTopic(user, state))
 					src.dna_hash = new_dna_hash
