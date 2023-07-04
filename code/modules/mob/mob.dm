@@ -1347,3 +1347,6 @@
 			return 1000
 		else
 			CRASH("base get_temperature_threshold() called with invalid threshold value.")
+
+/mob/proc/get_unique_enzymes()
+	return dna?.unique_enzymes
