@@ -1,4 +1,6 @@
 /mob/living/Initialize()
+	unique_mob_number = sequential_id(/mob)
+	fingerprint = md5(unique_mob_number)
 	. = ..()
 	if(stat == DEAD)
 		add_to_dead_mob_list()

@@ -63,6 +63,8 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	var/struc_enzymes="" // Encoded SE
 	var/unique_enzymes="" // MD5 of player name
 
+	var/fingerprint
+
 	// Internal dirtiness checks
 	var/dirtyUI=0
 	var/dirtySE=0
@@ -87,6 +89,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	clone = ..()
 	clone.lineage        = lineage
 	clone.unique_enzymes = unique_enzymes
+	clone.fingerprint    = fingerprint
 	clone.b_type         = b_type
 	clone.real_name      = real_name
 	clone.species        = species || global.using_map.default_species
@@ -137,6 +140,8 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.skin_tone, 220,           1) // Value can be negative.
 
 	SetUIState(DNA_UI_GENDER, character.gender!=MALE, 1)
+
+	fingerprint = md5(character.unique_mob_number)
 
 	// Hair
 	var/list/hair_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
@@ -320,7 +325,6 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 			newBlock+=copytext(oldBlock,i,i+1)
 	//testing("SetSESubBlock([block],[subBlock],[newSubBlock],[defer]): [oldBlock] -> [newBlock]")
 	SetSEBlock(block,newBlock,defer)
-
 
 /proc/EncodeDNABlock(var/value)
 	return add_zero2(num2hex(value,1), 3)

@@ -56,3 +56,6 @@
 	var/life_tick
 	var/list/stasis_sources
 	var/stasis_value
+
+	var/unique_mob_number
+	var/fingerprint
