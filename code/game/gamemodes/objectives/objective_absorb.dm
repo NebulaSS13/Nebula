@@ -7,7 +7,7 @@
 				n_p ++
 	else if (GAME_STATE == RUNLEVEL_GAME)
 		for(var/mob/living/carbon/human/P in global.player_list)
-			if(P.client && !(P.mind.changeling) && P.mind!=owner)
+			if(P.client && P.mind!=owner)
 				n_p ++
 	target_amount = min(target_amount, n_p)
 

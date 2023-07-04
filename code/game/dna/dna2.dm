@@ -73,8 +73,8 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	var/list/UI[DNA_UI_LENGTH]
 
 	// From old dna.
-	var/b_type = "A+"  // Should probably change to an integer => string map but I'm lazy.
-	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for changelings,
+	var/b_type = "A+" // Should probably change to an integer => string map but I'm lazy.
+	var/real_name     // Stores the real name of the person who originally got this dna datum.
 
 	// New stuff
 	var/species

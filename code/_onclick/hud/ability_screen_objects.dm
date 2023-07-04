@@ -243,31 +243,6 @@
 	if(my_mob.client)
 		toggle_open(2) //forces the icons to refresh on screen
 
-//Changeling Abilities
-/obj/screen/ability/verb_based/changeling
-	icon_state = "ling_spell_base"
-	background_base_state = "ling"
-
-/obj/screen/ability_master/proc/add_ling_ability(var/object_given, var/verb_given, var/name_given, var/ability_icon_given, var/arguments)
-	if(!object_given)
-		message_admins("ERROR: add_ling_ability() was not given an object in its arguments.")
-	if(!verb_given)
-		message_admins("ERROR: add_ling_ability() was not given a verb/proc in its arguments.")
-	if(get_ability_by_proc_ref(verb_given))
-		return // Duplicate
-	var/obj/screen/ability/verb_based/changeling/A = new /obj/screen/ability/verb_based/changeling()
-	A.ability_master = src
-	A.object_used = object_given
-	A.verb_to_call = verb_given
-	A.ability_icon_state = ability_icon_given
-	A.SetName(name_given)
-	if(arguments)
-		A.arguments_to_use = arguments
-	ability_objects.Add(A)
-	if(my_mob.client)
-		toggle_open(2) //forces the icons to refresh on screen
-
-
 /////////Obj Abilities////////
 //Buttons to trigger objects//
 //////////////////////////////
