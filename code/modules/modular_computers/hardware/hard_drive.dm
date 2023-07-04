@@ -3,7 +3,7 @@
 	desc = "A small power efficient solid state drive, with 128GQ of storage capacity for use in basic computers where power efficiency is desired."
 	power_usage = 25					// SSD or something with low power usage
 	icon_state = "hdd_normal"
-	hardware_size = 1
+	w_class = ITEM_SIZE_TINY
 	origin_tech = "{'programming':1,'engineering':1}"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
@@ -18,7 +18,7 @@
 	origin_tech = "{'programming':2,'engineering':2}"
 	power_usage = 50 					// Hybrid, medium capacity and medium power storage
 	icon_state = "hdd_advanced"
-	hardware_size = 2
+	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -29,7 +29,7 @@
 	origin_tech = "{'programming':3,'engineering':3}"
 	power_usage = 100					// High-capacity but uses lots of power, shortening battery life. Best used with APC link.
 	icon_state = "hdd_super"
-	hardware_size = 2
+	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -40,7 +40,7 @@
 	origin_tech = "{'programming':4,'engineering':4}"
 	max_capacity = 2048
 	icon_state = "hdd_cluster"
-	hardware_size = 3
+	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -52,7 +52,7 @@
 	origin_tech = "{'programming':2,'engineering':2}"
 	max_capacity = 64
 	icon_state = "hdd_small"
-	hardware_size = 1
+	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -63,7 +63,7 @@
 	origin_tech = "{'programming':1,'engineering':1}"
 	max_capacity = 32
 	icon_state = "hdd_micro"
-	hardware_size = 1
+	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 

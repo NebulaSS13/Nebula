@@ -2,12 +2,12 @@
 	name = "RFID card slot"
 	desc = "Slot that allows this computer to write data on RFID cards. Necessary for some programs to run properly."
 	power_usage = 10 //W
-	critical = 0
+	critical = FALSE
 	icon_state = "cardreader"
-	hardware_size = 1
+	w_class = ITEM_SIZE_TINY
 	origin_tech = "{'programming':2}"
 	usage_flags = PROGRAM_ALL & ~PROGRAM_PDA
-	external_slot = TRUE
+	part_flags = PART_FLAG_HAND_REMOVE | PART_FLAG_INTERACT_CLOSED
 	material = /decl/material/solid/metal/steel
 
 	// TODO: reimplment RFID card write access and can_write

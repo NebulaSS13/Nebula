@@ -136,15 +136,16 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
 
 // obj/item/stock_parts status flags
-#define PART_STAT_INSTALLED  1
-#define PART_STAT_PROCESSING 2
-#define PART_STAT_ACTIVE     4
-#define PART_STAT_CONNECTED  8
+#define PART_STAT_INSTALLED  BITFLAG(0)
+#define PART_STAT_PROCESSING BITFLAG(1)
+#define PART_STAT_ACTIVE     BITFLAG(2)
+#define PART_STAT_CONNECTED  BITFLAG(3)
 
 // part_flags
-#define PART_FLAG_LAZY_INIT   1 // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
-#define PART_FLAG_QDEL        2 // Will delete on uninstall
-#define PART_FLAG_HAND_REMOVE 4 // Can be removed by hand
+#define PART_FLAG_LAZY_INIT       BITFLAG(0) // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
+#define PART_FLAG_QDEL            BITFLAG(1) // Will delete on uninstall
+#define PART_FLAG_HAND_REMOVE     BITFLAG(2) // Can be removed by hand
+#define PART_FLAG_INTERACT_CLOSED BITFLAG(3) // Attackby will be passed to this part even with a closed panel
 
 // Machinery process flags, for use with START_PROCESSING_MACHINE
 #define MACHINERY_PROCESS_SELF       1
@@ -176,3 +177,4 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define  PART_SCANNER  	/obj/item/stock_parts/computer/scanner							// One of several optional scanner attachments.
 #define  PART_D_SLOT	/obj/item/stock_parts/computer/drive_slot				// Portable drive slot.
 #define  PART_MSTICK	/obj/item/stock_parts/computer/charge_stick_slot		// Charge-slot component for transactions /w charge sticks.
+#define  PART_DSKSLOT	/obj/item/stock_parts/item_holder/disk_reader

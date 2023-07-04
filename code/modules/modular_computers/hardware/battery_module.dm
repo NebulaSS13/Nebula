@@ -4,7 +4,7 @@
 	name = "standard battery"
 	desc = "A standard power cell, commonly seen in high-end portable microcomputers or low-end laptops. It's rating is 75 Wh."
 	icon_state = "battery_normal"
-	critical = 1
+	critical = TRUE
 	origin_tech = "{'powerstorage':1,'engineering':1}"
 	material = /decl/material/solid/metal/steel
 
@@ -16,7 +16,7 @@
 	desc = "An advanced power cell, often used in most laptops. It is too large to be fitted into smaller devices. It's rating is 110 Wh."
 	icon_state = "battery_advanced"
 	origin_tech = "{'powerstorage':2,'engineering':2}"
-	hardware_size = 2
+	w_class = ITEM_SIZE_SMALL
 	battery_rating = 110
 	material = /decl/material/solid/metal/steel
 
@@ -25,7 +25,7 @@
 	desc = "A very advanced power cell, often used in high-end devices, or as uninterruptable power supply for important consoles or servers. It's rating is 150 Wh."
 	icon_state = "battery_super"
 	origin_tech = "{'powerstorage':3,'engineering':3}"
-	hardware_size = 2
+	w_class = ITEM_SIZE_SMALL
 	battery_rating = 150
 	material = /decl/material/solid/metal/steel
 
@@ -34,7 +34,7 @@
 	desc = "A very advanced large power cell. It's often used as uninterruptable power supply for critical consoles or servers. It's rating is 200 Wh."
 	icon_state = "battery_ultra"
 	origin_tech = "{'powerstorage':5,'engineering':4}"
-	hardware_size = 3
+	w_class = ITEM_SIZE_NORMAL
 	battery_rating = 200
 	material = /decl/material/solid/metal/steel
 
@@ -60,7 +60,7 @@
 	name = "lambda coil"
 	desc = "A very complex power source compatible with various computers. It is capable of providing power for nearly unlimited duration."
 	icon_state = "battery_lambda"
-	hardware_size = 1
+	w_class = ITEM_SIZE_TINY
 	battery_rating = 3000
 	battery = /obj/item/cell/infinite
 

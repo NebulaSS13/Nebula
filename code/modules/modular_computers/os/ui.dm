@@ -74,14 +74,14 @@
 		return TOPIC_REFRESH
 	if(href_list["PC_enable_component"] )
 		var/obj/item/stock_parts/computer/H = locate(href_list["PC_enable_component"]) in holder
-		if(H && istype(H) && !H.enabled)
-			H.enabled = 1
+		if(H && istype(H) && !(H.status & PART_STAT_ACTIVE))
+			H.set_status(holder, PART_STAT_ACTIVE)
 			H.on_enable(src)
 		return TOPIC_REFRESH
 	if(href_list["PC_disable_component"] )
 		var/obj/item/stock_parts/computer/H = locate(href_list["PC_disable_component"]) in holder
-		if(H && istype(H) && H.enabled)
-			H.enabled = 0
+		if(H && istype(H) && (H.status & PART_STAT_ACTIVE))
+			H.unset_status(holder, PART_STAT_ACTIVE)
 			H.on_disable()
 		return TOPIC_REFRESH
 	if( href_list["PC_enable_update"] )
@@ -195,7 +195,7 @@
 		data["PC_showbatteryicon"] = battery_module ? 1 : 0
 
 	var/obj/item/stock_parts/computer/tesla_link/tesla_link = get_component(PART_TESLA)
-	if(tesla_link && tesla_link.enabled)
+	if(tesla_link && (tesla_link.status & PART_STAT_ACTIVE))
 		data["PC_apclinkicon"] = "charging.gif"
 
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)

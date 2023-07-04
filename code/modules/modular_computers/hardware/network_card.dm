@@ -3,9 +3,9 @@
 	desc = "A basic network card for usage with standard network protocols."
 	power_usage = 50
 	origin_tech = "{'programming':2,'engineering':1}"
-	critical = 0
+	critical = FALSE
 	icon_state = "netcard_basic"
-	hardware_size = 1
+	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/fiberglass
 
 	var/long_range = 0
@@ -36,7 +36,7 @@
 	origin_tech = "{'programming':4,'engineering':2}"
 	power_usage = 100 // Better range but higher power usage.
 	icon_state = "netcard_advanced"
-	hardware_size = 1
+	w_class = ITEM_SIZE_TINY
 
 // Returns a string identifier of this network card
 /obj/item/stock_parts/computer/network_card/proc/get_network_tag()
@@ -54,7 +54,7 @@
 // 0 - No signal, 1 - Low signal, 2 - High signal. 3 - Wired Connection
 /obj/item/stock_parts/computer/network_card/proc/get_signal(var/specific_action = 0)
 	. = 0
-	if(!enabled)
+	if(!(status & PART_STAT_ACTIVE))
 		return
 
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)

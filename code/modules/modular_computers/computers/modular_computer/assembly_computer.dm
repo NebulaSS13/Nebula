@@ -23,19 +23,19 @@
 		PART_SCANNER	= 1,
 		PART_MSTICK		= 1
 	)
-	critical_parts = list(PART_CPU, PART_HDD, PART_NETWORK)
+	critical_parts = list(PART_CPU, PART_HDD, PART_BATTERY)
 
-/datum/extension/assembly/modular_computer/try_install_component(var/mob/living/user, var/obj/item/stock_parts/computer/P)
-	if(!istype(P) || !(P.usage_flags & hardware_flag))
-		to_chat(user, "This computer isn't compatible with [P].")
+/datum/extension/assembly/modular_computer/try_install_component(var/mob/living/user, var/obj/item/stock_parts/computer/computer_part)
+	if(istype(computer_part) && !(computer_part.usage_flags & hardware_flag))
+		to_chat(user, "This computer isn't compatible with [computer_part].")
 		return
-	var/obj/item/stock_parts/computer/C = P
-	if(istype(C) && C.hardware_size > max_hardware_size)
+	var/obj/item/stock_parts/stock_part = computer_part
+	if(istype(stock_part) && stock_part.w_class > max_hardware_size)
 		to_chat(user, "This component is too large for \the [holder].")
 		return
 	. = ..()
-	if(.)
-		P.do_after_install(holder, !!user)
+	if(. && istype(computer_part))
+		computer_part.do_after_install(holder, !!user)
 		return TRUE
 
 /datum/extension/assembly/modular_computer/uninstall_component(var/mob/living/user, var/obj/item/stock_parts/P)

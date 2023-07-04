@@ -94,7 +94,7 @@
 	var/obj/item/stock_parts/computer/scanner/scanner = prog.computer.get_component(PART_SCANNER)
 	if(scanner)
 		data["scanner_name"] = scanner.name
-		data["scanner_enabled"] = scanner.enabled
+		data["scanner_enabled"] = (scanner.status & PART_STAT_ACTIVE)
 		data["can_view_scan"] = scanner.can_view_scan
 		data["can_save_scan"] = (scanner.can_save_scan && prog.data_buffer)
 	data["using_scanner"] = prog.using_scanner

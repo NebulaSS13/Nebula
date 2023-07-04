@@ -3,9 +3,9 @@
 	desc = "Small integrated printer with paper recycling module."
 	power_usage = 50
 	origin_tech = "{'programming':2,'engineering':2}"
-	critical = 0
+	critical = FALSE
 	icon_state = "printer"
-	hardware_size = 1
+	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
 
 	var/stored_paper = 50
@@ -29,7 +29,7 @@
 /obj/item/stock_parts/computer/nano_printer/proc/printer_ready()
 	if(!stored_paper)
 		return 0
-	if(!enabled)
+	if(!(status & PART_STAT_ACTIVE))
 		return 0
 	if(!check_functionality())
 		return 0

@@ -59,7 +59,7 @@
 	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':24}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
 	idle_power_usage   = 75
 	active_power_usage = 300
-	max_hardware_size  = 2 //make sure we can only put smaller components in here
+	max_hardware_size  = ITEM_SIZE_SMALL //make sure we can only put smaller components in here
 	construct_state    = /decl/machine_construction/wall_frame/panel_closed
 	base_type          = /obj/machinery/computer/modular/telescreen
 	frame_type         = /obj/item/frame/modular_telescreen

@@ -5,7 +5,7 @@
 	icon_state = "console-off"
 	var/list/interact_sounds  = list("keyboard", "keystroke")
 	var/wired_connection      = FALSE // Whether or not this console will start with a wired connection beneath it.
-	var/tmp/max_hardware_size = 3 //Enum to tell whether computer parts are too big to fit in this machine.
+	var/tmp/max_hardware_size = ITEM_SIZE_NORMAL //Enum to tell whether computer parts are too big to fit in this machine.
 	var/tmp/os_type           = /datum/extension/interactive/os/console //The type of the OS extension to create for this machine.
 
 /obj/machinery/computer/modular/Initialize()
@@ -57,15 +57,6 @@
 	var/obj/item/stock_parts/circuitboard/modular_computer/MB = get_component_of_type(/obj/item/stock_parts/circuitboard/modular_computer)
 	return MB && MB.emag_act(remaining_charges, user)
 
-/obj/machinery/computer/modular/components_are_accessible(var/path)
-	. = ..()
-	if(.)
-		return
-	if(!ispath(path, /obj/item/stock_parts/computer))
-		return FALSE
-	var/obj/item/stock_parts/computer/P = path
-	return initial(P.external_slot)
-
 /obj/machinery/computer/modular/CouldUseTopic(var/mob/user)
 	..()
 	if(LAZYLEN(interact_sounds) && CanPhysicallyInteract(user))
@@ -75,7 +66,7 @@
 	..()
 	var/extra_power = 0
 	for(var/obj/item/stock_parts/computer/part in component_parts)
-		if(part.enabled)
+		if((part.status & PART_STAT_ACTIVE))
 			extra_power += part.power_usage
 	change_power_consumption(initial(active_power_usage) + extra_power, POWER_USE_ACTIVE)
 
@@ -90,7 +81,7 @@
 /obj/machinery/computer/modular/can_add_component(obj/item/stock_parts/component, mob/user)
 	var/obj/item/stock_parts/computer/C = component
 	if(istype(C))
-		if(C.hardware_size > max_hardware_size)
+		if(C.w_class > max_hardware_size)
 			to_chat(user, "This component is too large for \the [src].")
 			return 0
 	. = ..()

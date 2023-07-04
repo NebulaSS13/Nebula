@@ -1,7 +1,7 @@
 /obj/item/stock_parts/computer/scanner/paper
 	name = "paper scanner module"
 	desc = "A paper scanning module. It can scan writing and save it to a file."
-	external_slot = TRUE
+	part_flags = PART_FLAG_HAND_REMOVE | PART_FLAG_INTERACT_CLOSED
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 

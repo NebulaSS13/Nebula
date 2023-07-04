@@ -30,7 +30,7 @@
 			to_chat(user, "This device doesn't have any components installed.")
 			return TRUE
 		var/list/component_names = list()
-		for(var/obj/item/stock_parts/computer/H in parts)
+		for(var/obj/item/stock_parts/H in parts)
 			component_names.Add(H.name)
 
 		var/choice = input(usr, "Which component do you want to uninstall?", "[assembly_name] maintenance", null) as null|anything in component_names

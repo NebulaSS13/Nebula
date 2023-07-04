@@ -3,11 +3,11 @@
 	name = "inteliCard slot"
 	desc = "An IIS interlink with connection uplinks that allow the device to interface with most common inteliCard models. Too large to fit into tablets. Uses a lot of power when active."
 	icon_state = "aislot"
-	hardware_size = 1
-	critical = 0
+	w_class = ITEM_SIZE_TINY
+	critical = FALSE
 	power_usage = 100
 	origin_tech = "{'powerstorage':2,'programming':3}"
-	external_slot = TRUE
+	part_flags = PART_FLAG_HAND_REMOVE | PART_FLAG_INTERACT_CLOSED
 	material = /decl/material/solid/metal/steel
 
 	var/obj/item/aicard/stored_card

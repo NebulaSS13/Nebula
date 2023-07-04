@@ -4,7 +4,7 @@
 	power_usage = 30
 	origin_tech = "{'programming':1,'engineering':1}"
 	icon_state = "netcard_ethernet"
-	hardware_size = 3
+	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/glass
 	var/obj/structure/network_cable/terminal/terminal
 

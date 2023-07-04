@@ -50,15 +50,17 @@
 
 	var/list/all_entries[0]
 	var/list/hardware = program.computer.get_all_components()
-	for(var/obj/item/stock_parts/computer/H in hardware)
-		all_entries.Add(list(list(
-		"name" = H.name,
-		"desc" = H.desc,
-		"enabled" = H.enabled,
-		"critical" = H.critical,
-		"powerusage" = H.power_usage,
-		"ref" = "\ref[H]"
-		)))
+	for(var/obj/item/stock_parts/computer/computer_part in hardware)
+		var/list/entry = list(
+			"name" = computer_part.name,
+			"desc" = computer_part.desc,
+			"enabled" = (computer_part.status & PART_STAT_ACTIVE),
+			"critical" = computer_part.critical,
+			"powerusage" = computer_part.power_usage,
+			"ref" = "\ref[computer_part]"
+		)
+		// this saves an extra list alloc because list.Add(list()) adds the list's contents, not the list
+		all_entries[++all_entries.len] = entry
 
 	data["hardware"] = all_entries
 

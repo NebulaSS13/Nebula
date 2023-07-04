@@ -222,10 +222,10 @@ var/global/list/machine_path_to_circuit_type
 		. += comps[path]
 
 // Use to block interactivity if panel is not open, etc.
-/obj/machinery/proc/components_are_accessible(var/path)
+/obj/machinery/proc/components_are_accessible(var/obj/item/stock_parts/path)
 	if(ispath(path, /obj/item/stock_parts/access_lock) || ispath(path, /obj/item/stock_parts/item_holder))
 		return TRUE
-	return panel_open
+	return panel_open || (initial(path.part_flags) & PART_FLAG_INTERACT_CLOSED)
 
 // Installation. Returns number of such components which can be inserted, or 0.
 /obj/machinery/proc/can_add_component(var/obj/item/stock_parts/component, var/mob/user)

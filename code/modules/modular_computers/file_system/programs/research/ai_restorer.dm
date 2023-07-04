@@ -15,7 +15,7 @@
 /datum/computer_file/program/aidiag/proc/get_ai()
 	var/obj/item/stock_parts/computer/ai_slot/ai_slot = computer.get_component(PART_AI)
 
-	if(ai_slot && ai_slot.check_functionality() && ai_slot.enabled && ai_slot.stored_card)
+	if(ai_slot && ai_slot.check_functionality() && (ai_slot.status & PART_STAT_ACTIVE) && ai_slot.stored_card)
 		return ai_slot.stored_card.carded_ai
 
 /datum/computer_file/program/aidiag/Topic(href, href_list)

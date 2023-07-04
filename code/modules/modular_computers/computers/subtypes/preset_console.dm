@@ -5,22 +5,19 @@
 
 /obj/machinery/computer/modular/preset/full
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/computer/card_slot,
 		/obj/item/stock_parts/computer/ai_slot,
-		)
+	)
 
 /obj/machinery/computer/modular/preset/aislot
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/computer/ai_slot
-		)
+	)
 
 /obj/machinery/computer/modular/preset/cardslot
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/computer/card_slot
-		)
+	)
 
 /obj/machinery/computer/modular/preset/Initialize()
 	. = ..()

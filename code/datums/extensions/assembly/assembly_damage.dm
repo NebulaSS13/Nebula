@@ -28,7 +28,7 @@
 		damage = clamp(0, damage, max_damage)
 
 	if(component_probability)
-		for(var/obj/item/stock_parts/computer/H in get_all_components())
+		for(var/obj/item/stock_parts/H in get_all_components())
 			if(prob(component_probability))
 				H.take_damage(round(amount / 2))
 

@@ -43,7 +43,7 @@
 /datum/extension/assembly/proc/calculate_power_usage()
 	var/power_usage = screen_on ? base_active_power_usage : base_idle_power_usage
 	for(var/obj/item/stock_parts/computer/P in parts)
-		if(P.enabled)
+		if(P.status & PART_STAT_ACTIVE)
 			power_usage += P.power_usage
 	return power_usage
 

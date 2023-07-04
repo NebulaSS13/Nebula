@@ -91,7 +91,7 @@
  */
 /datum/extension/assembly/modular_computer/cyberbrain
 	hardware_flag = PROGRAM_PDA
-	max_hardware_size = 1
+	max_hardware_size = ITEM_SIZE_TINY
 	enabled_by_default = TRUE
 	max_parts = list(
 		PART_BATTERY 	= 1,

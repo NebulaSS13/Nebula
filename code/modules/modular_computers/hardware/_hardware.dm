@@ -1,14 +1,13 @@
-/obj/item/stock_parts/computer/
+/obj/item/stock_parts/computer
 	name = "Hardware"
 	desc = "Unknown Hardware."
 	icon = 'icons/obj/items/stock_parts/modular_components.dmi'
 	part_flags = PART_FLAG_HAND_REMOVE
-	var/power_usage = 0 			// If the hardware uses extra power, change this.
-	var/enabled = 1					// If the hardware is turned off set this to 0.
-	var/critical = 1				// Prevent disabling for important component, like the HDD.
-	var/hardware_size = 1			// Limits which devices can contain this component. 1: Tablets/Laptops/Consoles, 2: Laptops/Consoles, 3: Consoles only
+	status = PART_STAT_ACTIVE			// Computer parts start enabled.
+	w_class = ITEM_SIZE_TINY			// Limits which devices can contain this component. 1: Tablets/Laptops/Consoles, 2: Laptops/Consoles, 3: Consoles only
+	var/critical = TRUE					// Prevent disabling for important component, like the HDD.
+	var/power_usage = 0 				// If the hardware uses extra power, change this.
 	var/usage_flags = PROGRAM_ALL
-	var/external_slot				// Whether attackby will be passed on it even with a closed panel
 
 /obj/item/stock_parts/computer/attackby(var/obj/item/W, var/mob/user)
 	// Multitool. Runs diagnostics
@@ -31,10 +30,6 @@
 /obj/item/stock_parts/computer/proc/diagnostics()
 	return list("Hardware Integrity Test... (Corruption: [get_percent_damage()]%)")
 
-/obj/item/stock_parts/computer/Initialize()
-	. = ..()
-	w_class = hardware_size
-
 /obj/item/stock_parts/computer/Destroy()
 	if(istype(loc, /obj/item/modular_computer))
 		var/datum/extension/assembly/modular_computer/assembly = get_extension(loc, /datum/extension/assembly)
@@ -45,7 +40,7 @@
 // Handles damage checks
 /obj/item/stock_parts/computer/proc/check_functionality()
 	// Turned off
-	if(!enabled)
+	if(!(status & PART_STAT_ACTIVE))
 		return 0
 	return is_functional()
 

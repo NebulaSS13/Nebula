@@ -36,7 +36,7 @@
 			var/existing_parts = get_components_by_type(max_part_type)
 			if(length(existing_parts) >= max_parts[max_part_type])
 				if(user)
-					to_chat(user, "This [assembly_name]'s does not have room for additional [P].")
+					to_chat(user, "This [assembly_name] does not have room for \the [P].")
 				return
 	parts += P
 	if(user)
@@ -52,7 +52,7 @@
 	else
 		var/atom/movable/H = holder
 		P.dropInto(H.loc)
-	if(enabled && (P.type in critical_parts))
+	if(enabled && is_type_in_list(P, critical_parts))
 		critical_shutdown()
 
 /datum/extension/assembly/proc/add_replace_component(var/mob/living/user, var/part_type, var/obj/item/stock_parts/P)
@@ -84,16 +84,16 @@
 
 /datum/extension/assembly/proc/shutdown_device()
 	enabled = FALSE
-	for(var/obj/item/stock_parts/computer/P in parts)
-		P.enabled = FALSE
+	for(var/obj/item/stock_parts/P in parts)
+		P.unset_status(holder, PART_STAT_ACTIVE)
 
 /datum/extension/assembly/proc/critical_shutdown()
 	shutdown_device()
 
 /datum/extension/assembly/proc/turn_on(var/mob/user)
 	enabled = TRUE
-	for(var/obj/item/stock_parts/computer/P in parts)
-		P.enabled = TRUE
+	for(var/obj/item/stock_parts/P in parts)
+		P.set_status(holder, PART_STAT_ACTIVE)
 
 /datum/extension/assembly/Process()
 	if(!enabled) // The computer is turned off
