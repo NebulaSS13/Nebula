@@ -48,8 +48,8 @@
 		/decl/language/human/hindi
 	)
 
-/decl/cultural_info/culture/asia
-	name = "Asian"
+/decl/cultural_info/culture/mainasia
+	name = "Central or Eastern Asian"
 	description = "Your family is, ethnically or culturally, from somewhere in Central, Eastern or Northeastern Asia. China, mainland or not, Japan, Korea, Macau, Hong Kong and Borneo are all valid examples."
 	language = /decl/language/human/english
 	secondary_langs = list(

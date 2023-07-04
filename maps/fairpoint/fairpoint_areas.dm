@@ -136,15 +136,6 @@
 	icon_state = "engineering_break"
 	sound_env = MEDIUM_SOFTFLOOR
 
-/area/fairpoint/engineering/drone_fabrication
-	name = "\improper Maintenance Drone Fabrication"
-	icon_state = "drone_fab"
-	sound_env = SMALL_ENCLOSED
-
-/area/fairpoint/engineering/workshop
-	name = "\improper Maintenance Workshop"
-	icon_state = "engineering_workshop"
-
 /area/fairpoint/engineering/sublevel_access
 	name = "\improper Maintenance Sewer Access"
 
@@ -250,20 +241,9 @@
 	name = "\improper Patient Wing"
 	icon_state = "patients"
 
-/area/fairpoint/medical/patient_wing/washroom
-	name = "\improper Patient Wing Washroom"
-	req_access = list()
-
 /area/fairpoint/medical/ward
 	name = "\improper Recovery Ward"
 	icon_state = "patients"
-
-// Virology
-
-/area/fairpoint/medical/virology
-	name = "\improper Virology"
-	icon_state = "virology"
-	req_access = list(access_virology)
 
 
 //RESEARCH. UNTOUCHED FOR NOW, PENDING DIRECTION FOR THEME
@@ -283,19 +263,6 @@
 	name = "\improper Miscellaneous Research"
 	icon_state = "toxmisc"
 
-/area/fairpoint/research/xenobiology
-	name = "\improper Xenobiology Lab"
-	icon_state = "xeno_lab"
-	req_access = list(access_xenobiology, access_research)
-
-/area/fairpoint/research/xenobiology/xenoflora
-	name = "\improper Xenoflora Lab"
-	icon_state = "xeno_f_lab"
-
-/area/fairpoint/research/xenobiology/xenoflora_storage
-	name = "\improper Xenoflora Storage"
-	icon_state = "xeno_f_store"
-
 //Robotics
 
 /area/fairpoint/research/robotics
@@ -303,16 +270,7 @@
 	icon_state = "robotics"
 	req_access = list(access_robotics)
 
-/area/fairpoint/research/chargebay
-	name = "\improper Mech Bay"
-	icon_state = "mechbay"
-	req_access = list(access_robotics)
-
 //Misc
-
-/area/fairpoint/research/docking
-	name = "\improper Research Dock"
-	icon_state = "research_dock"
 
 /area/fairpoint/research/server
 	name = "\improper Research Server Room"
@@ -459,32 +417,9 @@
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
 
-/area/fairpoint/crew_quarters/sleep
-	name = "\improper Dormitories"
-	icon_state = "Sleep"
-
 /area/fairpoint/crew_quarters/sleep/cryo
 	name = "\improper Cryogenic Storage"
 	icon_state = "Sleep"
-
-/area/fairpoint/crew_quarters/sleep/engi_wash
-	name = "\improper Maintenance Washroom"
-	icon_state = "toilet"
-	sound_env = SMALL_ENCLOSED
-
-/area/fairpoint/crew_quarters/locker
-	name = "\improper Locker Room"
-	icon_state = "locker"
-
-/area/fairpoint/crew_quarters/locker/locker_toilet
-	name = "\improper Locker Toilets"
-	icon_state = "toilet"
-	sound_env = SMALL_ENCLOSED
-
-/area/fairpoint/crew_quarters/toilet
-	name = "\improper Dormitory Toilets"
-	icon_state = "toilet"
-	sound_env = SMALL_ENCLOSED
 
 /area/fairpoint/crew_quarters/fitness
 	name = "\improper Fitness Room"
@@ -573,7 +508,7 @@
 //SHUTTLE.
 
 /area/shuttle/arrival
-	name = "\improper Arrival Train"
+	name = "\improper Arrival Metro Stop"
 
 /area/shuttle/arrival/station
 	icon_state = "shuttle"
@@ -595,41 +530,11 @@
 	name = "\improper Sewers"
 	icon_state = "maint_arrivals"
 
-/area/fairpoint/maintenance/bar
-	name = "\improper Bar Maintenance"
-	icon_state = "maint_bar"
-	req_access = list(list(access_bar, access_kitchen, access_maint_tunnels))
-
-/area/fairpoint/maintenance/cargo
-	name = "\improper Cargo Maintenance"
-	icon_state = "maint_cargo"
-	req_access = list(list(access_cargo, access_maint_tunnels))
-
-/area/fairpoint/maintenance/dormitory
-	name = "\improper Dormitory Maintenance"
-	icon_state = "maint_dormitory"
-
-/area/fairpoint/maintenance/library
-	name = "\improper Library Maintenance"
-	icon_state = "maint_library"
-	req_access = list(list(access_library, access_maint_tunnels))
-
 /area/fairpoint/maintenance/hospital
 	name = "\improper Hospital Maintenance"
 	icon_state = "maint_medbay"
 	req_access = list(list(access_medical, access_maint_tunnels))
 
-/area/fairpoint/maintenance/research_port
-	name = "\improper Research Maintenance"
-	icon_state = "maint_research_port"
-
-/area/fairpoint/maintenance/research_starboard
-	name = "\improper Research Maintenance - Starboard"
-	icon_state = "maint_research_starboard"
-
-/area/fairpoint/maintenance/police
-	name = "\improper Precinct Maintenance"
-	icon_state = "maint_security_starboard"
 
 //MISC. MAINTENANCE.
 

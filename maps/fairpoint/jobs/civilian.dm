@@ -268,7 +268,7 @@
 		access_maint_tunnels
 	)
 	minimal_access = list(access_library)
-	alt_titles = list("Museum Curator")
+	alt_titles = list("Assistant Curator")
 	outfit_type = /decl/hierarchy/outfit/job/librarian
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,

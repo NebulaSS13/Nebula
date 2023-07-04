@@ -3,6 +3,13 @@
 /obj/machinery/optable,
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/morgue)
+"aw" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/structure/lift/button/standalone,
+/turf/simulated/floor/tiled/white,
+/area/turbolift/hospital_sewers)
 "az" = (
 /obj/structure/morgue{
 	dir = 4
@@ -15,12 +22,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/exam_room)
-"aM" = (
-/obj/structure/disposalpipe/trunk{
-	dir = 1
-	},
-/turf/simulated/wall/iron,
-/area/fairpoint/maintenance/arrivals)
 "aX" = (
 /obj/effect/floor_decal/floordetail/tiled,
 /turf/simulated/floor/tiled/techmaint,
@@ -68,10 +69,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "ce" = (
 /obj/machinery/vending/coffee{
@@ -133,7 +131,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
-/area/fairpoint/medical/medbay)
+/area/turbolift/hospital_sewers)
 "dN" = (
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 8
@@ -162,21 +160,8 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
-"eY" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/grey/border{
-	tag = "icon-bordercolor (WEST)";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/steel_ridged,
-/area/fairpoint/maintenance/arrivals)
 "fd" = (
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
 	dir = 8
@@ -203,11 +188,10 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/ward)
 "go" = (
-/obj/machinery/computer/modular/telescreen/preset/medical,
 /turf/simulated/wall/prepainted{
 	color = "FFFEFD"
 	},
-/area/fairpoint/medical/exam_room)
+/area/turbolift/hospital_sewers)
 "gs" = (
 /obj/structure/curtain{
 	color = "#72AFED";
@@ -227,12 +211,6 @@
 /obj/item/chems/ivbag/blood/APlus,
 /turf/simulated/floor/tiled/freezer,
 /area/fairpoint/medical/biostorage)
-"hc" = (
-/obj/structure/disposalpipe/junction{
-	dir = 8
-	},
-/turf/exterior/water/chlorine,
-/area/fairpoint/maintenance/arrivals)
 "hk" = (
 /obj/structure/morgue,
 /turf/simulated/floor/tiled/freezer,
@@ -262,10 +240,6 @@
 /obj/structure/window/reinforced,
 /turf/simulated/floor/tiled/freezer,
 /area/fairpoint/medical/morgue)
-"in" = (
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/steel_ridged,
-/area/fairpoint/maintenance/arrivals)
 "it" = (
 /obj/structure/bed/chair/office/light{
 	dir = 8
@@ -275,7 +249,7 @@
 "iH" = (
 /obj/structure/sign/warning/moving_parts,
 /turf/simulated/wall/concrete,
-/area/fairpoint/hallway/secondary/exit)
+/area/turbolift/metro_maintenance)
 "iN" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/box/bloodpacks,
@@ -296,7 +270,7 @@
 	level = 3;
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/metro_maintenance)
 "jm" = (
 /turf/exterior/barren,
@@ -312,10 +286,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "jM" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -345,8 +316,8 @@
 /turf/simulated/wall/concrete,
 /area/fairpoint/maintenance/arrivals)
 "kp" = (
-/obj/machinery/door/blast/shutters/indestructible,
-/turf/simulated/wall/r_titanium/indestructible,
+/obj/machinery/door/blast/regular,
+/turf/simulated/wall/r_wall/hull,
 /area/fairpoint/maintenance/arrivals)
 "kr" = (
 /turf/simulated/floor/tiled/techmaint,
@@ -426,10 +397,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "mK" = (
 /obj/machinery/firealarm{
@@ -443,19 +411,8 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/exam_room)
 "mU" = (
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
-"mZ" = (
-/obj/structure/disposalpipe/segment{
-	dir = 2;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/wall/iron,
-/area/fairpoint/maintenance/arrivals)
 "ne" = (
 /obj/effect/floor_decal/corner/paleblue,
 /turf/simulated/floor/tiled/white,
@@ -470,13 +427,11 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "nl" = (
-/obj/machinery/door/blast/shutters/indestructible,
-/turf/simulated/floor/plating,
-/area/fairpoint/maintenance/arrivals)
+/turf/simulated/wall/elevator,
+/area/turbolift/sewer_exit)
 "nq" = (
-/obj/effect/floor_decal/corner/blue/border,
 /turf/simulated/floor/tiled/steel_grid,
-/area/fairpoint/hallway/secondary/exit)
+/area/turbolift/sewer_exit)
 "nD" = (
 /obj/structure/disposalpipe/junction/yjunction{
 	dir = 1
@@ -492,21 +447,13 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
-"ow" = (
-/obj/structure/disposalpipe/segment,
-/obj/effect/floor_decal/industrial/warning/dust{
-	dir = 1;
-	tag = "icon-warning_dust (NORTH)"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/fairpoint/maintenance/arrivals)
 "oT" = (
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall/iron,
 /area/fairpoint/maintenance/arrivals)
 "oY" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/sewer_exit)
 "ps" = (
 /obj/turbolift_map_holder/fairpoint/cargo,
@@ -562,12 +509,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/fairpoint/maintenance/arrivals)
-"rD" = (
-/obj/structure/disposalpipe/junction{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/fairpoint/maintenance/arrivals)
 "rH" = (
 /turf/simulated/wall/iron,
 /area/fairpoint/maintenance/hospital)
@@ -601,13 +542,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
-"sh" = (
-/obj/structure/disposalpipe/segment{
-	dir = 2;
-	icon_state = "pipe-c"
-	},
-/turf/exterior/water/chlorine,
-/area/fairpoint/maintenance/arrivals)
 "si" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 1
@@ -623,13 +557,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
-"sL" = (
-/obj/structure/disposalpipe/junction{
-	dir = 8;
-	icon_state = "pipe-j2"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/fairpoint/maintenance/arrivals)
 "sP" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 1
@@ -666,23 +593,13 @@
 /obj/effect/floor_decal/corner/paleblue,
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
-/area/fairpoint/medical/medbay)
+/area/turbolift/hospital_sewers)
 "tL" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
-"tT" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/grey/border{
-	tag = "icon-bordercolor (WEST)";
-	dir = 4
-	},
-/turf/simulated/floor/tiled/steel_ridged,
-/area/fairpoint/maintenance/arrivals)
 "tU" = (
 /obj/structure/closet/secure_closet/freezer{
 	name = "blood storage"
@@ -711,10 +628,7 @@
 /area/fairpoint/medical/biostorage)
 "un" = (
 /obj/machinery/light/small,
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "uB" = (
 /obj/machinery/power/apc{
@@ -754,9 +668,9 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "wd" = (
-/obj/machinery/door/blast/shutters/indestructible,
-/turf/exterior/water,
-/area/fairpoint/maintenance/arrivals)
+/obj/effect/floor_decal/corner/blue/border,
+/turf/simulated/floor/tiled/steel_grid,
+/area/fairpoint/hallway/secondary/exit)
 "wH" = (
 /obj/structure/closet/secure_closet/freezer{
 	name = "blood storage"
@@ -795,39 +709,12 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/fairpoint/maintenance/arrivals)
-"xN" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/wall/iron,
-/area/fairpoint/maintenance/arrivals)
-"xZ" = (
-/obj/effect/floor_decal/corner/lightgrey/border{
-	tag = "icon-bordercolor (WEST)";
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/warning/dust{
-	dir = 8
-	},
-/obj/structure/railing{
-	dir = 8
-	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
-/area/fairpoint/hallway/secondary/exit)
 "yh" = (
 /obj/structure/closet/secure_closet/personal/patient,
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/ward)
 "yR" = (
 /obj/machinery/door/airlock/hatch/maintenance,
-/obj/structure/disposalpipe/segment{
-	dir = 2;
-	icon_state = "pipe-c"
-	},
 /turf/simulated/wall/iron,
 /area/fairpoint/maintenance/arrivals)
 "yS" = (
@@ -842,13 +729,6 @@
 "zq" = (
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
-"zs" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	icon_state = "pipe-c"
-	},
-/turf/exterior/water/chlorine,
-/area/fairpoint/maintenance/arrivals)
 "zA" = (
 /turf/simulated/floor/pool,
 /turf/simulated/wall/iron,
@@ -865,16 +745,6 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/fairpoint/medical/morgue)
-"Ar" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/exterior/water/chlorine,
-/area/fairpoint/maintenance/arrivals)
-"Au" = (
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/techmaint,
-/area/fairpoint/maintenance/arrivals)
 "Av" = (
 /turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/street/outskirts)
@@ -892,20 +762,14 @@
 /obj/structure/flora/pottedplant{
 	pixel_y = 10
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "AM" = (
-/turf/simulated/wall/r_titanium/indestructible,
+/turf/simulated/wall/r_wall/hull,
 /area/fairpoint/maintenance/arrivals)
 "AN" = (
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "AS" = (
 /obj/effect/decal/cleanable/dirt,
@@ -925,7 +789,7 @@
 /area/fairpoint/medical/biostorage)
 "Bi" = (
 /obj/turbolift_map_holder/fairpoint/sewer1,
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/sewer_exit)
 "Bp" = (
 /obj/effect/floor_decal/corner/paleblue/full{
@@ -934,12 +798,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/exam_room)
-"BD" = (
-/obj/structure/disposalpipe/junction{
-	dir = 1
-	},
-/turf/simulated/wall/iron,
-/area/fairpoint/maintenance/arrivals)
 "BY" = (
 /turf/simulated/floor/tiled/freezer,
 /area/fairpoint/medical/biostorage)
@@ -970,13 +828,6 @@
 /obj/machinery/vending/hotfood,
 /turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
-"Df" = (
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
-/turf/exterior/water/chlorine,
-/area/fairpoint/maintenance/arrivals)
 "Dk" = (
 /turf/simulated/floor/tiled/white/monotile,
 /area/fairpoint/medical/morgue)
@@ -1008,7 +859,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/maintenance/hospital)
 "El" = (
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/hospital_sewers)
 "Es" = (
 /obj/machinery/vending/games,
@@ -1039,7 +890,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/fairpoint/hallway/secondary/exit)
+/area/turbolift/metro_maintenance)
 "Ft" = (
 /obj/effect/catwalk_plated,
 /obj/structure/catwalk,
@@ -1058,10 +909,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
-"GA" = (
-/obj/structure/disposalpipe/segment,
-/turf/simulated/wall/iron,
-/area/fairpoint/maintenance/arrivals)
 "GD" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 1;
@@ -1083,10 +930,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "GW" = (
 /turf/simulated/wall/iron,
@@ -1100,13 +944,7 @@
 "Ha" = (
 /obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
-/area/fairpoint/medical/medbay)
-"Hc" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/steel_ridged,
-/area/fairpoint/maintenance/arrivals)
+/area/turbolift/hospital_sewers)
 "He" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
@@ -1118,7 +956,7 @@
 /turf/simulated/wall/prepainted{
 	color = "FFFEFD"
 	},
-/area/fairpoint/medical/medbay)
+/area/turbolift/hospital_sewers)
 "Hj" = (
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/biostorage)
@@ -1127,12 +965,6 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techmaint,
-/area/fairpoint/maintenance/arrivals)
-"Hr" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/simulated/wall/iron,
 /area/fairpoint/maintenance/arrivals)
 "Hw" = (
 /obj/structure/catwalk,
@@ -1182,7 +1014,7 @@
 /turf/simulated/wall/iron,
 /area/fairpoint/street/outskirts)
 "Jh" = (
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/sewer_exit)
 "Jk" = (
 /obj/random/vendor,
@@ -1256,7 +1088,7 @@
 	tag = "icon-bordercolor (EAST)";
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/metro_maintenance)
 "LK" = (
 /turf/simulated/wall/prepainted{
@@ -1299,13 +1131,6 @@
 /obj/effect/floor_decal/sign/b,
 /turf/simulated/floor/tiled/freezer,
 /area/fairpoint/medical/biostorage)
-"NZ" = (
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/fairpoint/maintenance/arrivals)
 "Oc" = (
 /obj/structure/sign/warning/moving_parts,
 /turf/simulated/wall/prepainted{
@@ -1327,13 +1152,13 @@
 	color = "#FFFEFD"
 	},
 /area/fairpoint/medical/exam_room)
-"Pr" = (
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
-	},
+"OX" = (
 /turf/simulated/wall/iron,
-/area/fairpoint/maintenance/arrivals)
+/area/turbolift/sewer_exit)
+"Pn" = (
+/obj/structure/lift/button,
+/turf/simulated/wall/concrete,
+/area/turbolift/metro_maintenance)
 "PD" = (
 /obj/structure/bed/padded,
 /turf/simulated/floor/tiled/white,
@@ -1367,6 +1192,10 @@
 "QB" = (
 /turf/simulated/floor/tiled/steel_ridged,
 /area/fairpoint/maintenance/arrivals)
+"QF" = (
+/obj/structure/lift/button/standalone,
+/turf/simulated/floor/plating,
+/area/turbolift/sewer_exit)
 "QN" = (
 /obj/structure/closet/secure_closet/freezer{
 	name = "blood storage"
@@ -1412,18 +1241,13 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/techmaint{
-	name = "landing floor";
-	},
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/hallway/secondary/exit)
 "RE" = (
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "RQ" = (
 /obj/structure/closet/crate/freezer,
@@ -1436,13 +1260,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
-"Se" = (
-/obj/structure/disposalpipe/segment{
-	dir = 2;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/fairpoint/maintenance/arrivals)
 "Sf" = (
 /obj/structure/closet/secure_closet/freezer{
 	name = "blood storage"
@@ -1489,10 +1306,6 @@
 /obj/structure/bed/padded,
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/exam_room)
-"Tx" = (
-/obj/structure/disposalpipe/segment,
-/turf/exterior/water/chlorine,
-/area/fairpoint/maintenance/arrivals)
 "Tz" = (
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/techmaint,
@@ -1526,7 +1339,7 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "Vl" = (
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/metro_maintenance)
 "Vm" = (
 /obj/structure/closet/crate/secure/biohazard/alt,
@@ -1536,16 +1349,13 @@
 /obj/turbolift_map_holder/fairpoint/hospital{
 	level = 3
 	},
-/turf/simulated/floor/reinforced/elevator_shaft,
+/turf/simulated/floor/plating,
 /area/turbolift/hospital_sewers)
 "Wi" = (
 /turf/simulated/wall/concrete{
 	color = "#FFFEFD"
 	},
 /area/fairpoint/medical/biostorage)
-"Wy" = (
-/turf/simulated/floor/tiled/steel_grid,
-/area/fairpoint/hallway/secondary/exit)
 "WH" = (
 /obj/effect/floor_decal/corner/lightgrey/border{
 	tag = "icon-bordercolor (WEST)";
@@ -1554,10 +1364,7 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "WN" = (
 /obj/structure/closet/secure_closet/freezer{
@@ -1625,27 +1432,12 @@
 /obj/structure/iv_drip,
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/ward)
-"Yy" = (
-/obj/effect/floor_decal/corner/blue/border,
-/obj/machinery/light/small{
-	brightness_color = "#DA0205";
-	brightness_power = 1;
-	brightness_range = 5
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/fairpoint/hallway/secondary/exit)
 "YQ" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
-"YT" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/fairpoint/maintenance/arrivals)
 "Ze" = (
 /obj/effect/floor_decal/corner/blue/border{
 	tag = "icon-bordercolor (WEST)";
@@ -1654,10 +1446,7 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/turf/simulated/floor/tiled{
-	color = "";
-	name = "exterior tiles";
-	},
+/turf/simulated/floor/tiled,
 /area/fairpoint/hallway/secondary/exit)
 "Zk" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1937,17 +1726,17 @@ kt
 kt
 kt
 AM
-wd
-wd
-wd
-wd
-wd
-wd
-wd
-wd
-wd
-wd
-wd
+tD
+tD
+tD
+tD
+tD
+tD
+tD
+tD
+tD
+tD
+tD
 AM
 kt
 kt
@@ -5531,7 +5320,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -5664,7 +5453,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (26,1,1) = {"
@@ -5690,7 +5479,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -5823,7 +5612,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (27,1,1) = {"
@@ -5849,7 +5638,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -5982,7 +5771,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (28,1,1) = {"
@@ -6008,7 +5797,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -6141,7 +5930,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (29,1,1) = {"
@@ -6167,7 +5956,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 Ud
 Ud
@@ -6300,7 +6089,7 @@ Ud
 Ud
 Ud
 lv
-nl
+Ud
 kp
 "}
 (30,1,1) = {"
@@ -6326,7 +6115,7 @@ Ud
 Ud
 Ud
 kp
-nl
+Ud
 lv
 cY
 cY
@@ -6423,7 +6212,7 @@ WH
 Ze
 WH
 Ze
-xZ
+jI
 Zl
 eF
 Ze
@@ -6459,7 +6248,7 @@ cY
 cY
 cY
 lv
-nl
+Ud
 kp
 "}
 (31,1,1) = {"
@@ -6909,7 +6698,7 @@ AN
 RB
 RB
 UM
-Yy
+wd
 jT
 kt
 kt
@@ -7215,7 +7004,6 @@ UM
 UM
 UM
 UM
-Wy
 UM
 UM
 UM
@@ -7223,11 +7011,12 @@ UM
 UM
 UM
 UM
-Wy
 UM
 UM
 UM
-nq
+UM
+UM
+wd
 jT
 kt
 kt
@@ -7681,7 +7470,7 @@ kt
 kt
 kt
 jT
-jT
+Pn
 Fq
 Fq
 Fq
@@ -9516,10 +9305,10 @@ kt
 kt
 kt
 kt
-GA
-GA
-GA
-GA
+kt
+kt
+kt
+kt
 kt
 kt
 kt
@@ -9679,7 +9468,7 @@ kt
 kt
 kt
 kt
-Hr
+kt
 kt
 It
 It
@@ -9838,7 +9627,7 @@ kt
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 It
@@ -9997,7 +9786,7 @@ kt
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -10156,7 +9945,7 @@ kt
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -10315,7 +10104,7 @@ kt
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -10474,7 +10263,7 @@ kt
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -10633,7 +10422,7 @@ kt
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -10783,16 +10572,16 @@ kr
 kr
 kt
 kt
-xN
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-Pr
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
 kt
 kt
 kt
@@ -10942,7 +10731,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kr
@@ -11101,7 +10890,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kr
@@ -11260,7 +11049,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -11419,7 +11208,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -11578,7 +11367,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -11737,7 +11526,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -11896,7 +11685,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -11904,55 +11693,55 @@ KF
 KF
 KF
 KF
-zs
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-GA
-in
-in
-GA
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-in
-in
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-in
-in
-Tx
-Tx
-Tx
-Tx
-Tx
-Df
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+kt
+QB
+QB
+kt
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+QB
+QB
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+QB
+QB
+KF
+KF
+KF
+KF
+KF
+KF
 KF
 KF
 KF
@@ -12055,7 +11844,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -12063,7 +11852,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 KF
 KF
 KF
@@ -12111,7 +11900,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 KF
 KF
 KF
@@ -12214,7 +12003,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -12222,7 +12011,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 Ud
 Ud
@@ -12270,7 +12059,7 @@ kt
 kt
 KF
 KF
-Ar
+KF
 KF
 KF
 kt
@@ -12373,7 +12162,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -12381,7 +12170,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 kr
 kr
@@ -12429,36 +12218,36 @@ kt
 kt
 KF
 KF
-sh
-Tx
-Tx
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-GA
-Au
-NZ
+KF
+KF
+KF
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kr
+kr
 kr
 kr
 kr
@@ -12532,7 +12321,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -12540,7 +12329,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -12617,7 +12406,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kr
 kr
@@ -12691,7 +12480,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -12699,7 +12488,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -12776,7 +12565,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 kt
@@ -12850,7 +12639,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -12858,7 +12647,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -12935,7 +12724,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -13009,7 +12798,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -13017,7 +12806,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -13094,7 +12883,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -13168,7 +12957,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -13176,7 +12965,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -13253,7 +13042,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -13327,7 +13116,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -13335,7 +13124,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -13412,7 +13201,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -13486,7 +13275,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -13494,7 +13283,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -13571,7 +13360,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -13645,7 +13434,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -13653,7 +13442,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -13730,7 +13519,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -13804,7 +13593,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -13812,7 +13601,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -13889,7 +13678,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -13963,7 +13752,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -13971,7 +13760,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -14048,7 +13837,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -14122,7 +13911,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -14130,7 +13919,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -14207,7 +13996,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -14281,7 +14070,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -14289,7 +14078,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -14366,7 +14155,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -14440,7 +14229,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -14448,7 +14237,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -14525,7 +14314,7 @@ KF
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -14599,7 +14388,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -14607,7 +14396,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -14684,7 +14473,7 @@ KF
 KF
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -14758,7 +14547,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -14766,7 +14555,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -14843,7 +14632,7 @@ KF
 KF
 KF
 QB
-YT
+kr
 kr
 kt
 ea
@@ -14917,58 +14706,58 @@ kr
 kr
 kt
 kt
-Hr
-kr
-kr
-kt
-KF
-KF
-KF
-KF
-Ar
-Ud
-QB
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
 kt
 kr
 kr
 kt
+KF
+KF
+KF
+KF
+KF
+Ud
+QB
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kr
+kr
+kt
 kt
 kt
 kt
@@ -15002,7 +14791,7 @@ QB
 QB
 QB
 QB
-YT
+kr
 kr
 kt
 ea
@@ -15076,58 +14865,58 @@ kr
 kr
 kt
 kt
-Hr
-kr
-kr
-kt
-KF
-KF
-KF
-KF
-Ar
-Ud
-QB
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
 kt
 kr
 kr
 kt
+KF
+KF
+KF
+KF
+KF
+Ud
+QB
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kr
+kr
+kt
 kt
 kt
 kt
@@ -15161,7 +14950,7 @@ QB
 QB
 QB
 QB
-YT
+kr
 kr
 kt
 ea
@@ -15235,58 +15024,58 @@ kr
 kr
 kt
 kt
-Hr
-kr
-kr
-kt
-KF
-KF
-KF
-KF
-Ar
-Ud
-QB
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
-kt
 kt
 kr
 kr
 kt
+KF
+KF
+KF
+KF
+KF
+Ud
+QB
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kr
+kr
+kt
 kt
 kt
 kt
@@ -15320,7 +15109,7 @@ QB
 QB
 QB
 QB
-YT
+kr
 kr
 kt
 ea
@@ -15394,7 +15183,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -15402,7 +15191,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -15479,7 +15268,7 @@ KF
 KF
 KF
 QB
-YT
+kr
 kr
 kt
 ea
@@ -15553,7 +15342,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -15561,7 +15350,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -15638,7 +15427,7 @@ KF
 KF
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -15712,7 +15501,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -15720,7 +15509,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -15797,7 +15586,7 @@ KF
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -15871,7 +15660,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -15879,7 +15668,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -15956,7 +15745,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -16030,7 +15819,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -16038,7 +15827,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -16115,7 +15904,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -16189,7 +15978,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -16197,7 +15986,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -16274,7 +16063,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -16348,7 +16137,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -16356,7 +16145,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -16433,7 +16222,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -16507,7 +16296,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -16515,7 +16304,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -16592,7 +16381,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -16666,7 +16455,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -16674,7 +16463,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -16751,7 +16540,7 @@ kt
 kt
 kt
 kr
-sL
+kr
 kr
 kt
 ea
@@ -16825,7 +16614,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -16833,7 +16622,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -16910,7 +16699,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -16984,7 +16773,7 @@ kr
 kr
 kt
 kt
-Hr
+kt
 kr
 kr
 kt
@@ -16992,7 +16781,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -17069,7 +16858,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 ea
@@ -17143,7 +16932,7 @@ kr
 Si
 kt
 kt
-Hr
+kt
 GD
 kr
 kt
@@ -17151,7 +16940,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -17228,7 +17017,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -17302,7 +17091,7 @@ kr
 Si
 kt
 kt
-Hr
+kt
 GD
 kr
 kt
@@ -17310,7 +17099,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -17387,7 +17176,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -17462,13 +17251,13 @@ Si
 ZG
 kr
 yR
-ow
-Au
-GA
-Tx
-Tx
-Tx
-Tx
+GD
+kr
+kt
+KF
+KF
+KF
+KF
 nD
 Ud
 QB
@@ -17546,7 +17335,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -17558,12 +17347,12 @@ UE
 gb
 ZJ
 zq
-jM
+aw
 Hg
-Ca
-Ca
-Ca
-Ca
+go
+go
+go
+go
 RA
 iV
 jM
@@ -17628,7 +17417,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -17705,7 +17494,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -17787,7 +17576,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -17864,7 +17653,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -17946,7 +17735,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -18023,7 +17812,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -18105,7 +17894,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -18182,7 +17971,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -18264,7 +18053,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -18341,7 +18130,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -18423,7 +18212,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -18500,7 +18289,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -18582,7 +18371,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -18659,7 +18448,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -18741,7 +18530,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -18818,7 +18607,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -18900,7 +18689,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -18977,7 +18766,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -19059,7 +18848,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -19136,7 +18925,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -19149,7 +18938,7 @@ bl
 sC
 zq
 jM
-go
+pY
 pY
 pY
 pY
@@ -19218,7 +19007,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -19295,7 +19084,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -19377,7 +19166,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -19454,7 +19243,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -19536,7 +19325,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -19613,7 +19402,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -19695,7 +19484,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -19772,7 +19561,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 vu
@@ -19854,7 +19643,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -19931,7 +19720,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 Ca
@@ -20013,7 +19802,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -20090,7 +19879,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 Ca
@@ -20172,7 +19961,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -20249,7 +20038,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 Ca
@@ -20331,7 +20120,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -20408,7 +20197,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 Ca
@@ -20490,7 +20279,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -20567,7 +20356,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kt
 kt
@@ -20642,14 +20431,14 @@ WU
 kt
 kt
 kt
-Au
-Au
-GA
-Tx
-Tx
-Tx
-Tx
-hc
+kr
+kr
+kt
+KF
+KF
+KF
+KF
+KF
 Ud
 QB
 kt
@@ -20726,7 +20515,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kr
 kr
@@ -20808,7 +20597,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 QB
 kt
@@ -20885,7 +20674,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kr
 kr
@@ -20967,7 +20756,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 kr
 kr
@@ -21044,7 +20833,7 @@ kt
 kt
 kt
 jN
-tT
+jN
 kt
 kt
 kt
@@ -21126,7 +20915,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 Ud
 Ud
 Ud
@@ -21203,7 +20992,7 @@ KF
 KF
 KF
 QB
-Hc
+QB
 KF
 KF
 KF
@@ -21285,60 +21074,60 @@ KF
 KF
 KF
 KF
-sh
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Tx
-Df
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
+KF
 KF
 KF
 KF
@@ -21362,7 +21151,7 @@ KF
 KF
 KF
 QB
-Hc
+QB
 KF
 KF
 KF
@@ -21497,7 +21286,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 KF
 KF
 KF
@@ -21521,7 +21310,7 @@ KF
 KF
 KF
 QB
-Hc
+QB
 KF
 KF
 KF
@@ -21656,7 +21445,7 @@ KF
 KF
 KF
 KF
-Ar
+KF
 KF
 KF
 KF
@@ -21680,7 +21469,7 @@ KF
 KF
 KF
 QB
-Hc
+QB
 KF
 KF
 KF
@@ -21815,7 +21604,7 @@ KF
 KF
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -21839,7 +21628,7 @@ kt
 kt
 KF
 QB
-Hc
+QB
 KF
 KF
 KF
@@ -21974,7 +21763,7 @@ KF
 KF
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -21998,7 +21787,7 @@ kt
 kt
 kt
 rI
-eY
+rI
 kt
 kt
 kt
@@ -22133,7 +21922,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -22157,7 +21946,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -22292,7 +22081,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -22316,7 +22105,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -22451,7 +22240,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -22475,7 +22264,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -22610,7 +22399,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -22634,7 +22423,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -22769,7 +22558,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -22793,7 +22582,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -22928,7 +22717,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -22952,7 +22741,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -23087,7 +22876,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -23111,7 +22900,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -23246,7 +23035,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -23270,7 +23059,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kr
 kr
@@ -23405,7 +23194,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -23429,7 +23218,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kr
 kr
 kr
@@ -23564,7 +23353,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -23588,7 +23377,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -23723,7 +23512,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -23747,7 +23536,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -23882,7 +23671,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -23906,7 +23695,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -24041,7 +23830,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -24065,7 +23854,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -24200,7 +23989,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -24224,7 +24013,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -24359,7 +24148,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -24383,7 +24172,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -24518,7 +24307,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -24542,7 +24331,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -24677,7 +24466,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -24701,7 +24490,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -24836,7 +24625,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -24860,7 +24649,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -24995,7 +24784,7 @@ KF
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -25019,7 +24808,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -25154,13 +24943,13 @@ KF
 kt
 kt
 kt
-mZ
 kt
 kt
 kt
 kt
 kt
-GA
+kt
+kt
 kt
 kt
 kt
@@ -25178,7 +24967,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -25326,18 +25115,18 @@ kt
 kt
 kt
 kt
-GA
-GA
-GA
-GA
-GA
-GA
-GA
 kt
 kt
-GA
-Au
-rD
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kr
+kr
 kt
 kt
 kt
@@ -25496,7 +25285,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -25655,7 +25444,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -25814,7 +25603,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -25973,7 +25762,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -26132,7 +25921,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -26291,7 +26080,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -26450,7 +26239,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -26609,7 +26398,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -26768,7 +26557,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -26927,7 +26716,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -27086,7 +26875,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -27245,7 +27034,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -27404,7 +27193,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -27563,7 +27352,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -27722,7 +27511,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -27881,7 +27670,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -28040,7 +27829,7 @@ kt
 kt
 kt
 kr
-YT
+kr
 kt
 kt
 kt
@@ -28199,13 +27988,13 @@ kt
 kt
 kt
 kr
-Se
-GA
-GA
-GA
-BD
-GA
-aM
+kr
+kt
+kt
+kt
+kt
+kt
+kt
 kt
 kt
 kt
@@ -28362,7 +28151,7 @@ QB
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -28521,7 +28310,7 @@ QB
 KF
 KF
 KF
-Ar
+KF
 KF
 KF
 KF
@@ -28680,7 +28469,7 @@ QB
 KF
 KF
 KF
-Ar
+KF
 KF
 KF
 KF
@@ -28839,7 +28628,7 @@ QB
 KF
 KF
 KF
-Ar
+KF
 KF
 KF
 KF
@@ -28998,7 +28787,7 @@ QB
 KF
 KF
 KF
-Ar
+KF
 KF
 KF
 KF
@@ -29157,7 +28946,7 @@ QB
 kt
 kt
 kt
-Ar
+KF
 KF
 KF
 KF
@@ -29316,7 +29105,7 @@ kr
 kt
 kt
 kt
-Ar
+KF
 KF
 KF
 kt
@@ -29475,7 +29264,7 @@ kr
 kt
 kt
 kt
-Ar
+KF
 KF
 KF
 kt
@@ -29634,7 +29423,7 @@ kr
 kt
 kt
 kt
-Ar
+KF
 KF
 kt
 kt
@@ -29793,7 +29582,7 @@ kr
 kr
 kr
 QB
-Hc
+QB
 QB
 QB
 QB
@@ -29952,7 +29741,7 @@ kr
 kr
 kr
 QB
-Hc
+QB
 QB
 QB
 QB
@@ -30111,7 +29900,7 @@ kr
 kt
 kt
 kt
-Ar
+KF
 KF
 KF
 kt
@@ -30270,7 +30059,7 @@ kr
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -30429,7 +30218,7 @@ kr
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -30588,7 +30377,7 @@ kr
 kt
 kt
 kt
-Hr
+kt
 kt
 kt
 kt
@@ -30693,7 +30482,7 @@ Jh
 Jh
 Jh
 Bi
-NN
+nl
 NN
 kt
 kt
@@ -30852,7 +30641,7 @@ Jh
 Jh
 Jh
 Jh
-NN
+nl
 NN
 kt
 kt
@@ -31011,7 +30800,7 @@ Jh
 Jh
 Jh
 Jh
-NN
+nl
 kt
 kt
 kt
@@ -31170,7 +30959,7 @@ Jh
 Jh
 Jh
 Jh
-NN
+nl
 kt
 kt
 kt
@@ -31222,8 +31011,8 @@ kt
 kt
 kt
 kt
-GA
-GA
+kt
+kt
 kt
 kt
 kt
@@ -31329,7 +31118,7 @@ oY
 oY
 oY
 oY
-NN
+nl
 kt
 kt
 kt
@@ -31483,12 +31272,12 @@ kt
 kr
 kr
 NN
-kt
-pE
-Ud
-Ud
-Ud
-kt
+OX
+nq
+Jh
+Jh
+QF
+OX
 kt
 kt
 kt
@@ -32126,17 +31915,17 @@ Cj
 Cj
 cP
 kt
-AM
-AM
-AM
-AM
-AM
-AM
-AM
-AM
-AM
-AM
-AM
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
+kt
 kt
 AS
 AS
@@ -33354,7 +33143,7 @@ iR
 iR
 iR
 iR
-iR
+AM
 AM
 AM
 AM
