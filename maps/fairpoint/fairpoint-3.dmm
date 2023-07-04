@@ -2168,15 +2168,6 @@
 /obj/structure/table/reinforced,
 /turf/simulated/floor/tiled/freezer,
 /area/fairpoint/police/detectives_office)
-"rx" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/fairpoint/turret_protected/ai_server_room)
 "ry" = (
 /turf/simulated/wall/r_wall,
 /area/fairpoint/police/detectives_office)
@@ -2967,7 +2958,7 @@
 	req_access = list(63)
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
-/turf/space,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/fairpoint/police/brig/interrogation)
 "xM" = (
 /obj/machinery/door/window/southleft,
@@ -4812,10 +4803,6 @@
 "MS" = (
 /turf/simulated/wall/r_wall,
 /area/fairpoint/police)
-"MT" = (
-/obj/machinery/light/small,
-/turf/exterior/open,
-/area/fairpoint/street)
 "MU" = (
 /turf/simulated/wall/concrete,
 /area/fairpoint/police/armoury)
@@ -5552,8 +5539,6 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/turret_protected/ai_server_room)
 "TR" = (
@@ -5712,9 +5697,6 @@
 /obj/machinery/light_switch/on{
 	dir = 1;
 	pixel_y = -18
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/turret_protected/ai_server_room)
@@ -6071,15 +6053,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police)
-"XF" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/fairpoint/turret_protected/ai_server_room)
 "XI" = (
 /obj/effect/floor_decal/corner/white/border,
 /turf/simulated/floor/reinforced,
@@ -6165,10 +6138,6 @@
 "Yv" = (
 /turf/simulated/wall/r_wall,
 /area/fairpoint/police/warden)
-"Yw" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled/techfloor,
-/area/fairpoint/turret_protected/ai_server_room)
 "Yy" = (
 /obj/machinery/vending/wallmed1,
 /turf/simulated/wall/prepainted{
@@ -16443,8 +16412,8 @@ by
 by
 ui
 SJ
-Yw
-rx
+SJ
+SJ
 Uq
 Kn
 kK
@@ -16603,7 +16572,7 @@ db
 Iv
 jz
 Xb
-XF
+SJ
 TQ
 sr
 kK
@@ -18659,7 +18628,7 @@ UB
 UB
 UB
 UB
-MT
+UB
 UB
 vA
 by
