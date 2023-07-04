@@ -27,7 +27,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 5
 	},
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/greengrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "ak" = (
 /obj/structure/table/woodentable/walnut,
@@ -91,10 +91,6 @@
 "be" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 9
-	},
-/obj/machinery/flasher{
-	id = "Cell 3";
-	pixel_y = -32
 	},
 /obj/structure/bed,
 /turf/simulated/floor/tiled/dark,
@@ -239,7 +235,7 @@
 /obj/structure/cable/blue{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/greengrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "cl" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -253,11 +249,6 @@
 	dir = 10
 	},
 /obj/machinery/papershredder,
-/obj/machinery/light/small{
-	brightness_color = "#DA0205";
-	brightness_power = 1;
-	brightness_range = 5
-	},
 /turf/simulated/floor/lino,
 /area/fairpoint/police/detectives_office)
 "ct" = (
@@ -369,12 +360,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/fairpoint/medical/psych)
 "du" = (
-/turf/simulated/floor/bluegrid{
-	name = "Mainframe Base";
-	nitrogen = 100;
-	oxygen = 0;
-	temperature = 80
-	},
+/turf/simulated/floor/bluegrid,
 /area/fairpoint/maintenance/telecomms)
 "dv" = (
 /obj/machinery/door/airlock/glass/security,
@@ -672,16 +658,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/cop)
 "fO" = (
-/obj/structure/window/reinforced{
-	dir = 5;
-	health = 1e+007
-	},
-/obj/machinery/door/blast/shutters{
-	dir = 2;
-	id = "mcpd_chief";
-	layer = 3.1;
-	name = "Privacy Shutters"
-	},
+/obj/machinery/door/blast/shutters/open,
+/obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/cop)
 "fQ" = (
@@ -843,7 +821,7 @@
 	dir = 10
 	},
 /obj/machinery/camera/network/engineering,
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/greengrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "gX" = (
 /obj/effect/decal/cleanable/dirt,
@@ -956,9 +934,6 @@
 	color = "FFFEFD"
 	},
 /area/turbolift/hospital_top)
-"hU" = (
-/turf/simulated/floor/tiled/dark,
-/area/fairpoint/police/prison)
 "hW" = (
 /turf/simulated/wall/r_wall,
 /area/fairpoint/police/vacantoffice)
@@ -1324,7 +1299,7 @@
 /area/fairpoint/police/cop)
 "kT" = (
 /obj/machinery/network/mainframe/logs,
-/turf/simulated/floor/greengrid,
+/turf/simulated/floor/blackgrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "kY" = (
 /obj/structure/bedsheetbin,
@@ -1539,7 +1514,7 @@
 	dir = 8
 	},
 /obj/structure/cable/blue,
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/greengrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "mn" = (
 /obj/structure/bed/chair/office/light{
@@ -1987,13 +1962,6 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/fairpoint/police/brig/processing)
 "qf" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "Secure Gate";
-	name = "Security Blast Door";
-	opacity = 0
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
@@ -2364,12 +2332,7 @@
 /area/fairpoint/medical/biostorage)
 "sH" = (
 /obj/machinery/network/relay/long_range,
-/turf/simulated/floor/bluegrid{
-	name = "Mainframe Base";
-	nitrogen = 100;
-	oxygen = 0;
-	temperature = 80
-	},
+/turf/simulated/floor/bluegrid,
 /area/fairpoint/maintenance/telecomms)
 "sM" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -2448,7 +2411,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 1
 	},
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/greengrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "tF" = (
 /obj/item/storage/toolbox/repairs,
@@ -2469,7 +2432,7 @@
 /area/fairpoint/police/prison)
 "tN" = (
 /obj/structure/backup_server,
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/blackgrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "tP" = (
 /obj/machinery/power/smes/buildable/max_cap_in_out,
@@ -2605,10 +2568,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/police/armoury)
 "uM" = (
-/obj/machinery/flasher{
-	id = "holdflash";
-	name = "Floor mounted flash"
-	},
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/prison)
 "uP" = (
@@ -2764,13 +2723,6 @@
 	},
 /turf/simulated/floor/tiled/monofloor,
 /area/fairpoint/police/cop)
-"wk" = (
-/obj/machinery/flasher{
-	id = "permaflash";
-	name = "Floor mounted flash"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/fairpoint/police/prison)
 "wl" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/wingrille_spawn/reinforced/polarized,
@@ -2962,10 +2914,6 @@
 /obj/machinery/door/airlock/glass/security,
 /turf/simulated/floor/tiled/monotile,
 /area/fairpoint/police/vacantoffice)
-"xu" = (
-/obj/effect/floor_decal/corner/blue/diagonal,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/fairpoint/police/brig/interrogation)
 "xv" = (
 /obj/machinery/network/mainframe/records,
 /obj/machinery/camera/network/engineering,
@@ -3092,18 +3040,6 @@
 	color = "FFFEFD"
 	},
 /area/fairpoint/medical/biostorage)
-"yu" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 9
-	},
-/obj/machinery/power/apc{
-	cell_type = /obj/item/weapon/cell/super;
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
-/turf/simulated/floor/tiled,
-/area/fairpoint/police/vacantoffice)
 "yB" = (
 /obj/structure/closet/medical_wall/filled,
 /turf/simulated/wall/concrete,
@@ -3158,12 +3094,6 @@
 "zo" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
-	},
-/obj/machinery/power/apc{
-	cell_type = /obj/item/weapon/cell/super;
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/police/vacantoffice)
@@ -3307,12 +3237,7 @@
 /area/fairpoint/police/prison/dorm)
 "As" = (
 /obj/machinery/telecomms/receiver/preset_right,
-/turf/simulated/floor/bluegrid{
-	name = "Mainframe Base";
-	nitrogen = 100;
-	oxygen = 0;
-	temperature = 80
-	},
+/turf/simulated/floor/bluegrid,
 /area/fairpoint/maintenance/telecomms)
 "Av" = (
 /obj/structure/window/reinforced{
@@ -3801,7 +3726,7 @@
 /area/fairpoint/police/armoury)
 "ED" = (
 /obj/machinery/network/mainframe/software,
-/turf/simulated/floor/greengrid,
+/turf/simulated/floor/blackgrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "EE" = (
 /turf/simulated/floor/wood,
@@ -4124,13 +4049,6 @@
 /turf/simulated/floor/reinforced,
 /area/fairpoint/police/cop)
 "GX" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "Secure Gate";
-	name = "Security Blast Door";
-	opacity = 0
-	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
@@ -4170,9 +4088,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/patient_c)
-"Hc" = (
-/turf/simulated/floor/bluegrid,
-/area/fairpoint/turret_protected/ai_server_room)
 "Hg" = (
 /obj/structure/window/reinforced{
 	dir = 4;
@@ -4336,13 +4251,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/turret_protected/ai_server_room)
 "Iy" = (
-/obj/machinery/button/flasher{
-	id = "permaflash";
-	pixel_y = 32;
-	req_access = list(5)
+/obj/effect/wingrille_spawn/reinforced,
+/obj/machinery/door/blast/shutters/open{
+	dir = 8
 	},
-/turf/simulated/floor/tiled/monotile,
-/area/fairpoint/street)
+/turf/simulated/floor/tiled/dark,
+/area/fairpoint/police/cop)
 "ID" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/tiled,
@@ -4567,12 +4481,7 @@
 /area/fairpoint/medical/patient_c)
 "Kg" = (
 /obj/machinery/telecomms/hub/preset,
-/turf/simulated/floor/bluegrid{
-	name = "Mainframe Base";
-	nitrogen = 100;
-	oxygen = 0;
-	temperature = 80
-	},
+/turf/simulated/floor/bluegrid,
 /area/fairpoint/maintenance/telecomms)
 "Ki" = (
 /turf/simulated/floor/tiled/steel_ridged,
@@ -4695,10 +4604,6 @@
 "Lr" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
-	},
-/obj/machinery/flasher{
-	id = "Cell 4";
-	pixel_y = -32
 	},
 /obj/structure/bed,
 /turf/simulated/floor/tiled/dark,
@@ -4833,7 +4738,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/greengrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "Mw" = (
 /obj/structure/table/woodentable,
@@ -5014,12 +4919,6 @@
 /area/fairpoint/police/brig/processing)
 "NM" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/power/apc{
-	cell_type = /obj/item/weapon/cell/super;
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/fairpoint/police/brig/interrogation)
 "NR" = (
@@ -5071,7 +4970,7 @@
 	dir = 10
 	},
 /obj/effect/decal/cleanable/cobweb2,
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/greengrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "OJ" = (
 /obj/effect/floor_decal/corner/red{
@@ -5265,12 +5164,7 @@
 /area/fairpoint/turret_protected/ai_server_room)
 "QC" = (
 /obj/machinery/telecomms/broadcaster/preset_right,
-/turf/simulated/floor/bluegrid{
-	name = "Mainframe Base";
-	nitrogen = 100;
-	oxygen = 0;
-	temperature = 80
-	},
+/turf/simulated/floor/bluegrid,
 /area/fairpoint/maintenance/telecomms)
 "QG" = (
 /turf/simulated/floor/tiled/steel_grid,
@@ -5378,7 +5272,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/greengrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "Rv" = (
 /turf/simulated/wall/r_wall,
@@ -5643,9 +5537,6 @@
 	},
 /turf/simulated/floor/wood/ebony,
 /area/fairpoint/crew_quarters/bar)
-"TM" = (
-/turf/simulated/floor/greengrid,
-/area/fairpoint/turret_protected/ai_server_room)
 "TO" = (
 /obj/structure/sign/telecomms,
 /turf/simulated/wall/r_wall,
@@ -5738,14 +5629,6 @@
 "Ud" = (
 /turf/simulated/wall/elevator,
 /area/turbolift/pd_top)
-"Ue" = (
-/obj/machinery/button/flasher{
-	id = "holdflash";
-	pixel_y = 32;
-	req_access = list(5)
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/fairpoint/street)
 "Uf" = (
 /obj/effect/floor_decal/carpet/blue2,
 /obj/effect/floor_decal/carpet/blue2{
@@ -6294,7 +6177,7 @@
 /area/fairpoint/medical/exam_room)
 "Yz" = (
 /obj/machinery/network/mainframe/records,
-/turf/simulated/floor/greengrid,
+/turf/simulated/floor/blackgrid,
 /area/fairpoint/turret_protected/ai_server_room)
 "YA" = (
 /turf/simulated/floor/tiled/monotile,
@@ -16829,11 +16712,11 @@ mT
 mT
 mT
 mT
-sM
-sM
-sM
-sM
-sM
+Iy
+Iy
+Iy
+Iy
+Iy
 sM
 cI
 ND
@@ -17480,7 +17363,7 @@ QQ
 cx
 bY
 ou
-yu
+ou
 LK
 LK
 LK
@@ -18304,8 +18187,8 @@ UB
 vA
 by
 Yz
-TM
-Hc
+bM
+bM
 tN
 by
 oK
@@ -18464,7 +18347,7 @@ vA
 by
 xv
 bM
-TM
+bM
 kT
 Tb
 jR
@@ -18621,8 +18504,8 @@ UB
 UB
 vA
 by
-Hc
-TM
+bM
+bM
 bM
 MZ
 Tb
@@ -18755,9 +18638,9 @@ JL
 JL
 wl
 Xt
-xu
-xu
-xu
+NM
+NM
+NM
 hl
 UV
 Zx
@@ -18782,7 +18665,7 @@ vA
 by
 Na
 bM
-TM
+bM
 ED
 Tb
 Wi
@@ -18915,8 +18798,8 @@ JL
 SD
 Gj
 yT
-xu
-xu
+NM
+NM
 xL
 UV
 Zx
@@ -18939,8 +18822,8 @@ UB
 UB
 vA
 by
-Hc
-TM
+bM
+bM
 bM
 bM
 Tb
@@ -20959,14 +20842,14 @@ mS
 mS
 lB
 wX
-hU
+uM
 Sk
-hU
-hU
-hU
-hU
-hU
-hU
+uM
+uM
+uM
+uM
+uM
+uM
 wX
 KN
 eu
@@ -21120,11 +21003,11 @@ lB
 wX
 lY
 aa
-hU
-hU
-hU
-hU
-hU
+uM
+uM
+uM
+uM
+uM
 xf
 wX
 MS
@@ -21278,12 +21161,12 @@ mS
 lB
 wX
 CG
-hU
-hU
+uM
+uM
 rS
 rS
-hU
-hU
+uM
+uM
 oQ
 bn
 NA
@@ -21437,13 +21320,13 @@ mS
 lB
 wX
 CG
-hU
-hU
+uM
+uM
 rS
 rS
-hU
-wk
-hU
+uM
+uM
+uM
 Dg
 tL
 tL
@@ -21596,13 +21479,13 @@ mS
 lB
 wX
 CG
-hU
-hU
-hU
-hU
-hU
-hU
-hU
+uM
+uM
+uM
+uM
+uM
+uM
+uM
 Nv
 gP
 gP
@@ -21756,14 +21639,14 @@ lB
 wX
 CG
 nn
-hU
-hU
-hU
-hU
-hU
-hU
+uM
+uM
+uM
+uM
+uM
+uM
 wX
-Iy
+gP
 gP
 gP
 gP
@@ -22079,7 +21962,7 @@ vP
 vP
 bj
 wX
-hU
+uM
 zE
 zE
 oQ
@@ -22238,9 +22121,9 @@ vP
 vP
 Cw
 wX
-hU
-hU
-hU
+uM
+uM
+uM
 km
 wX
 gP
@@ -22397,10 +22280,10 @@ vP
 HQ
 Ui
 wX
-hU
-hU
 uM
-hU
+uM
+uM
+uM
 Nv
 gP
 gP
@@ -22556,12 +22439,12 @@ vP
 Um
 PF
 wX
-hU
-hU
-hU
-hU
+uM
+uM
+uM
+uM
 wX
-Ue
+gP
 gP
 tL
 LN
@@ -22716,9 +22599,9 @@ Ul
 Sj
 wX
 xG
-hU
-hU
-hU
+uM
+uM
+uM
 wX
 gP
 gP
@@ -22875,8 +22758,8 @@ wX
 wX
 wX
 kG
-hU
-hU
+uM
+uM
 ae
 wX
 Pc
@@ -23030,12 +22913,12 @@ gy
 Bi
 JE
 rS
-hU
-hU
-hU
-hU
-hU
-hU
+uM
+uM
+uM
+uM
+uM
+uM
 xf
 wX
 wX
@@ -23189,17 +23072,17 @@ Bi
 Bi
 wX
 II
-hU
-hU
-hU
-hU
-hU
-hU
+uM
+uM
+uM
+uM
+uM
+uM
 ON
 wX
-hU
-hU
-hU
+uM
+uM
+uM
 Xa
 vX
 vX
@@ -23348,13 +23231,13 @@ Bi
 Bi
 wX
 pH
-hU
+uM
 zE
-hU
-hU
+uM
+uM
 zE
 zE
-hU
+uM
 wX
 te
 YK
