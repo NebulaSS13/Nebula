@@ -1,11 +1,12 @@
 /obj/structure/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
 	desc = "You sit in this, either by will or force."
-	icon_state = "chair"
+	icon_state = "chair_preview"
 	color = "#666666"
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	obj_flags = OBJ_FLAG_ROTATABLE
+	base_icon = "chair"
 
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 	var/has_special_overlay = FALSE
@@ -21,33 +22,34 @@
 
 /obj/structure/bed/chair/on_update_icon()
 	..()
-	var/image/I = image(icon, "[icon_state]_over")
+	icon_state = base_icon
+	var/image/I = image(icon, "[base_icon]_over")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		I.appearance_flags |= RESET_COLOR
 		I.color = material.color
 	add_overlay(I)
-	I = image(icon, "[icon_state]_armrest")
+	I = image(icon, "[base_icon]_armrest")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		I.appearance_flags |= RESET_COLOR
 		I.color = material.color
 	add_overlay(I)
 	if(reinf_material)
-		I =  image(icon, "[icon_state]_padding_over")
+		I =  image(icon, "[base_icon]_padding_over")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
 			I.color = reinf_material.color
 		add_overlay(I)
-		I = image(icon, "[icon_state]_padding_armrest")
+		I = image(icon, "[base_icon]_padding_armrest")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
 			I.color = reinf_material.color
 		add_overlay(I)
 	if(has_special_overlay)
-		I = image(icon, "[icon_state]_special")
+		I = image(icon, "[base_icon]_special")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
@@ -87,7 +89,8 @@
 /obj/structure/bed/chair/comfy
 	name = "comfy chair"
 	desc = "It's a chair. It looks comfy."
-	icon_state = "comfychair"
+	icon_state = "comfychair_preview"
+	base_icon = "comfychair"
 
 /obj/structure/bed/chair/comfy/brown
 	reinf_material = /decl/material/solid/leather
@@ -113,7 +116,8 @@
 /obj/structure/bed/chair/comfy/captain
 	name = "captain chair"
 	desc = "It's a chair. Only for the highest ranked asses."
-	icon_state = "capchair"
+	icon_state = "capchair_preview"
+	base_icon = "capchair"
 	buckle_movable = 1
 	material = /decl/material/solid/metal/steel
 	reinf_material = /decl/material/solid/cloth/blue
@@ -122,7 +126,8 @@
 /obj/structure/bed/chair/armchair
 	name = "armchair"
 	desc = "It's an armchair. It looks comfy."
-	icon_state = "armchair"
+	icon_state = "armchair_preview"
+	base_icon = "armchair"
 
 /obj/structure/bed/chair/armchair/brown
 	reinf_material = /decl/material/solid/leather
@@ -147,7 +152,8 @@
 
 /obj/structure/bed/chair/office
 	name = "office chair"
-	icon_state = "officechair"
+	icon_state = "officechair_preview"
+	base_icon = "officechair"
 	anchored = 0
 	buckle_movable = 1
 	movable_flags = MOVABLE_FLAG_WHEELED
@@ -197,7 +203,8 @@
 /obj/structure/bed/chair/office/comfy
 	name = "comfy office chair"
 	desc = "It's an office chair. It looks comfy."
-	icon_state = "comfyofficechair"
+	icon_state = "comfyofficechair_preview"
+	base_icon = "comfyofficechair"
 
 /obj/structure/bed/chair/office/comfy/brown
 	reinf_material = /decl/material/solid/leather
@@ -223,7 +230,8 @@
 /obj/structure/bed/chair/rounded
 	name = "rounded chair"
 	desc = "It's a rounded chair. It looks comfy."
-	icon_state = "roundedchair"
+	icon_state = "roundedchair_preview"
+	base_icon = "roundedchair"
 
 /obj/structure/bed/chair/rounded/brown
 	reinf_material = /decl/material/solid/leather
@@ -249,7 +257,8 @@
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
-	icon_state = "shuttle_chair"
+	icon_state = "shuttle_chair_preview"
+	base_icon = "shuttle_chair"
 	buckle_sound = 'sound/effects/metal_close.ogg'
 	material = /decl/material/solid/metal/steel
 	has_special_overlay = TRUE
@@ -271,7 +280,8 @@
 /obj/structure/bed/chair/wood
 	name = "classic chair"
 	desc = "Old is never too old to not be in fashion."
-	icon_state = "wooden_chair"
+	icon_state = "wooden_chair_preview"
+	base_icon = "wooden_chair"
 	color = WOOD_COLOR_GENERIC
 	material = /decl/material/solid/wood
 
@@ -295,7 +305,9 @@
 
 /obj/structure/bed/chair/wood/wings
 	name = "winged chair"
-	icon_state = "wooden_chair_wings"
+	icon_state = "wooden_chair_wings_preview"
+	base_icon = "wooden_chair_wings"
+
 /obj/structure/bed/chair/wood/wings/mahogany
 	color = WOOD_COLOR_RICH
 	material = /decl/material/solid/wood/mahogany
@@ -313,6 +325,7 @@
 	name = "pew"
 	desc = "A long, simple bench with a backboard, commonly found in places of worship, courtrooms and so on. Not known for being particularly comfortable."
 	icon_state = "pew"
+	base_icon = "pew"
 	color = WOOD_COLOR_GENERIC
 	material = /decl/material/solid/wood
 	obj_flags = 0
