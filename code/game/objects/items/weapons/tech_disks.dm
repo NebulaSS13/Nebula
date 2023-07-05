@@ -50,7 +50,8 @@
 	if(!F || (F.read_only && !force))
 		return FALSE
 	free_blocks = clamp(round(free_blocks + F.block_size), 0, block_capacity)
-	qdel(LAZYACCESS(stored_files, name))
+	// do not qdel; should be GC'd once it has no references anyway
+	F.holder = null
 	LAZYREMOVE(stored_files, name)
 	return TRUE
 

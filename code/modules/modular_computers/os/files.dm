@@ -10,7 +10,10 @@
 		programs_dir = "local" + "/" + OS_PROGRAMS_DIR
 	var/obj/item/stock_parts/computer/drive_slot/drive_slot = get_component(PART_D_SLOT)
 	if(drive_slot)
-		mounted_storage["media"] = new /datum/file_storage/disk/removable(src, "media")
+		drive_slot.mount_filesystem(src)
+	var/obj/item/stock_parts/computer/data_disk_drive/disk_drive = get_component(PART_DSKSLOT)
+	if(disk_drive)
+		disk_drive.mount_filesystem(src)
 
 	// Auto-run: must happen after storage mount above
 	var/datum/computer_file/data/autorun = get_file("autorun", "local")
@@ -272,10 +275,8 @@
 		return F
 	qdel(F)
 	return success
-
 /datum/file_storage/proc/create_directory(filename, directory, list/accesses, mob/user)
 	return create_file(filename, directory, null, /datum/computer_file/directory, null, accesses, user)
-
 /datum/file_storage/proc/clone_file(filename, directory, list/accesses, mob/user)
 	if(check_errors())
 		return OS_HARDDRIVE_ERROR
@@ -519,6 +520,103 @@
 	. = ..()
 	if(.)
 		return
+
+// Storing data files on a data disk.
+/datum/file_storage/disk/datadisk
+	desc = "Data Disk Drive"
+	root_name = "data"
+
+/datum/file_storage/disk/datadisk/get_disk()
+	var/obj/item/stock_parts/computer/data_disk_drive/diskslot = os.get_component(PART_DSKSLOT)
+	return diskslot?.stored_disk
+
+/datum/file_storage/disk/datadisk/check_errors()
+	var/obj/item/stock_parts/computer/data_disk_drive/drive_slot = os.get_component(PART_DSKSLOT)
+	if(!istype(drive_slot))
+		return "HARDWARE ERROR: No drive slot was found."
+	if(!drive_slot.check_functionality())
+		return "HARDWARE ERROR: [drive_slot] is non-operational."
+	if(!istype(drive_slot.stored_disk))
+		return "HARDWARE ERROR: No portable drive inserted."
+	if(!istype(os))
+		return "No compatible device found."
+
+/datum/file_storage/disk/datadisk/get_file(filename, directory)
+	if(check_errors())
+		return OS_HARDDRIVE_ERROR
+	if(directory)
+		return OS_DIR_NOT_FOUND
+	var/obj/item/disk/disk = get_disk()
+	return disk.read_file(filename)
+
+/datum/file_storage/disk/datadisk/store_file(datum/computer_file/file, directory, create_directories, list/accesses, mob/user, overwrite = TRUE)
+	. = try_store_file(file)
+	if(. == OS_FILE_EXISTS && overwrite)
+		var/datum/computer_file/data/target = get_file(file.filename)
+		if(target && !(target.get_file_perms(accesses, user) & OS_WRITE_ACCESS))
+			return OS_FILE_NO_WRITE
+		var/obj/item/disk/disk = get_disk()
+		return disk.write_file(file)
+	return .
+
+/datum/file_storage/disk/datadisk/try_store_file(datum/computer_file/file, directory, list/accesses, mob/user)
+	if(check_errors())
+		return OS_HARDDRIVE_ERROR
+	if(directory)
+		return OS_DIR_NOT_FOUND
+	if(!istype(file, /datum/computer_file/data))
+		return OS_BAD_TYPE
+	var/obj/item/disk/disk = get_disk()
+	if(!disk.can_write_file(file))
+		return OS_HARDDRIVE_SPACE
+	if(disk.read_file(file.filename))
+		return OS_FILE_EXISTS // this MUST be the last code returned before we succeed
+	return disk.write_file(file)
+
+/datum/file_storage/disk/datadisk/save_file(filename, directory, new_data, metadata, accesses, user, file_type = /datum/computer_file/data)
+	if(check_errors())
+		return OS_HARDDRIVE_ERROR
+	if(directory)
+		return OS_DIR_NOT_FOUND
+	if(!ispath(file_type, /datum/computer_file/data))
+		return OS_BAD_TYPE
+	var/obj/item/disk/disk = get_disk()
+	var/datum/computer_file/data/target = get_file(filename)
+	if(istype(target))
+		if(!(target.get_file_perms(accesses, user) & OS_WRITE_ACCESS))
+			return OS_FILE_NO_WRITE
+		else
+			disk.delete_file(filename)
+	target = new file_type(metadata)
+	target.stored_data = new_data
+	target.calculate_size()
+	return disk.write_file(target, filename)
+
+/datum/file_storage/disk/datadisk/delete_file(datum/computer_file/file, list/accesses, mob/user)
+	if(check_errors())
+		return OS_HARDDRIVE_ERROR
+	if(!get_file(file.filename))
+		return OS_FILE_NOT_FOUND
+	var/obj/item/disk/disk = get_disk()
+	if(disk.delete_file(file.filename))
+		return OS_FILE_SUCCESS
+
+/datum/file_storage/disk/datadisk/get_transfer_speed()
+	if(check_errors())
+		return 0
+	return NETWORK_SPEED_DISK
+
+/datum/file_storage/disk/datadisk/get_all_files()
+	if(check_errors())
+		return FALSE
+	var/obj/item/disk/disk = get_disk()
+	. = list()
+	for(var/key in disk.stored_files)
+		. += disk.stored_files[key]
+
+// Directories are not supported, so always return root (null dir).
+/datum/file_storage/disk/datadisk/parse_directory(directory_path, create_directories)
+	return list(src, null)
 
 // Datum tracking progress between of file transfer between two file streams
 /datum/file_transfer
