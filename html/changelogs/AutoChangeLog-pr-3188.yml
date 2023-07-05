@@ -1,0 +1,4 @@
+author: Tennessee
+delete-after: true
+changes:
+  - imageadd: Chairs now have mapping previews.
