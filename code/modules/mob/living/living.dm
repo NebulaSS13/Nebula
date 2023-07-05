@@ -862,9 +862,6 @@ default behaviour is:
 		magnitude = min(old_magnitude, magnitude)
 	LAZYSET(chem_effects, effect, magnitude)
 
-/mob/living/proc/adjust_immunity(var/amt)
-	return
-
 /mob/living/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	if(skill_check(SKILL_LITERACY, SKILL_ADEPT))
 		. = text_content

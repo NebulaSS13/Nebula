@@ -40,11 +40,8 @@
 
 /decl/material/liquid/drink/juice/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.immunity = min(H.immunity + 0.25, H.immunity_norm*1.5)
+	if(!M.HasTrait(/decl/trait/metabolically_inert))
+		M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
 
 /decl/material/liquid/drink/juice/banana
 	name = "banana juice"
