@@ -361,7 +361,7 @@
 			return
 
 		if(F)
-			current_disk.save_file(F.filename, current_directory, newtext, null, accesses, user)
+			current_disk.save_file(F.filename, current_directory, newtext, null, accesses, user, F.type)
 			return TOPIC_REFRESH
 
 	if(href_list["PRG_printfile"])

@@ -72,6 +72,15 @@
 		drive_slot.insert_drive(I, user)
 		return TRUE
 
+	if(istype(W, /obj/item/disk))
+		var/obj/item/disk/disk = W
+		var/obj/item/stock_parts/computer/data_disk_drive/disk_drive = get_component(PART_DSKSLOT)
+		if(!disk_drive)
+			to_chat(user, SPAN_WARNING("You try to insert [disk] into [holder], but it does not have a disk slot installed."))
+			return TRUE
+		disk_drive.insert_disk(disk, user)
+		return TRUE
+
 	if(istype(W, /obj/item/paper))
 		var/obj/item/paper/paper = W
 		if(paper.info)
