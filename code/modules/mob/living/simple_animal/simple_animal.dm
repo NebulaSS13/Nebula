@@ -135,8 +135,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
 		if(check_state_in_icon("world-gib", icon))
 			mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
-		if(check_state_in_icon("world-dying", icon))
-			mob_icon_state_flags |= MOB_ICON_HAS_DYING_STATE
+		if(check_state_in_icon("world-paralyzed", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_PARALYZED_STATE
 		global.simplemob_icon_bitflag_cache[type] = mob_icon_state_flags
 
 /mob/living/simple_animal/on_update_icon()
@@ -144,8 +144,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	..()
 
 	icon_state = ICON_STATE_WORLD
-	if(is_aquatic && stat != DEAD && HAS_STATUS(src, STAT_PARA) && (mob_icon_state_flags & MOB_ICON_HAS_DYING_STATE))
-		icon_state += "-dying"
+	if(stat != DEAD && HAS_STATUS(src, STAT_PARA) && (mob_icon_state_flags & MOB_ICON_HAS_PARALYZED_STATE))
+		icon_state += "-paralyzed"
 	else if(stat == DEAD && (mob_icon_state_flags & MOB_ICON_HAS_DEAD_STATE))
 		icon_state += "-dead"
 	else if(stat == UNCONSCIOUS && (mob_icon_state_flags & MOB_ICON_HAS_SLEEP_STATE))
