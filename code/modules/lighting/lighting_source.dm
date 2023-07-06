@@ -144,6 +144,8 @@
 		lum_g = 1
 		lum_b = 1
 
+#define POLAR_TO_CART_X(R,T) ((R) * cos(T))
+#define POLAR_TO_CART_Y(R,T) ((R) * sin(T))
 #define DETERMINANT(A_X,A_Y,B_X,B_Y) ((A_X)*(B_Y) - (A_Y)*(B_X))
 #define MINMAX(NUM) ((NUM) < 0 ? -round(-(NUM)) : round(NUM))
 #define ARBITRARY_NUMBER 10
@@ -196,9 +198,9 @@
 	limit_b_y = MINMAX(limit_b_y)
 
 #undef ARBITRARY_NUMBER
-#undef POLAR_TO_CART_X
-#undef POLAR_TO_CART_Y
 #undef MINMAX
+#undef POLAR_TO_CART_Y
+#undef POLAR_TO_CART_X
 
 /datum/light_source/proc/remove_lum(now = FALSE)
 	applied = FALSE
