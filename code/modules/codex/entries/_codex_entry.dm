@@ -11,7 +11,10 @@
 	var/antag_text
 	var/disambiguator
 	var/list/categories
-	var/skip_hardcoded_generation // if TRUE, don't create this entry in codex init. where possible consider using abstract_type instead
+	/// If TRUE, don't create this entry in codex init. Where possible, consider using abstract_type or store_codex_entry = FALSE instead.
+	var/skip_hardcoded_generation = FALSE
+	/// If TRUE, associated_paths is set to include each path's subtypes in New().
+	var/include_subtypes = TRUE
 
 /datum/codex_entry/temporary
 	store_codex_entry = FALSE
@@ -25,6 +28,12 @@
 	if(_mechanics_text)     mechanics_text =     _mechanics_text
 	if(_antag_text)         antag_text =         _antag_text
 
+	if(include_subtypes && length(associated_paths))
+		var/new_assoc_paths = list()
+		for(var/path in associated_paths)
+			new_assoc_paths |= typesof(path)
+		associated_paths = new_assoc_paths
+
 	if(store_codex_entry && length(associated_paths))
 		for(var/tpath in associated_paths)
 			var/atom/thing = tpath
@@ -33,8 +42,11 @@
 				thing_name = "[thing_name] ([disambiguator])"
 			LAZYDISTINCTADD(associated_strings, thing_name)
 		for(var/associated_path in associated_paths)
+			// This fix assumes more specific codex entries always follow more general ones.
+			// TODO: Refactor to be order-agnostic.
 			if(SScodex.entries_by_path[associated_path])
-				PRINT_STACK_TRACE("Trying to save codex entry for [name] by path [associated_path] but one already exists!")
+				log_debug("Trying to save codex entry for [name] by path [associated_path] but one already exists, overwriting.")
+				SScodex.entries_by_path[associated_path].associated_paths -= SScodex.entries_by_path[associated_path]
 			SScodex.entries_by_path[associated_path] = src
 
 	if(!name)
@@ -54,8 +66,11 @@
 			if(clean_string != associated_string)
 				associated_strings -= associated_string
 				associated_strings |= clean_string
+			// This fix assumes more specific codex entries always follow more general ones.
+			// TODO: Refactor to be order-agnostic.
 			if(SScodex.entries_by_string[clean_string])
-				PRINT_STACK_TRACE("Trying to save codex entry for [name] by string [clean_string] but one already exists!")
+				log_debug("Trying to save codex entry for [name] by string [clean_string] but one already exists, overwriting.")
+				SScodex.entries_by_string[clean_string].associated_strings -= clean_string
 			SScodex.entries_by_string[clean_string] = src
 
 	..()

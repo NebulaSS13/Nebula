@@ -37,6 +37,7 @@
 	* PDA usually come with a pen, which can be remove with the right click menu(or Remove-Pen verb). The pen can be inserted again by using it on the PDA."
 	antag_text = "You can use an emag on the computer to reveal a secret list of downloadable software."
 	disambiguator = "machine"
+	include_subtypes = FALSE
 
 /datum/codex_entry/conveyor_construct
 	associated_paths = list(/obj/machinery/conveyor, /obj/item/conveyor_construct)
@@ -44,7 +45,7 @@
 	disambiguator = "machine"
 
 /datum/codex_entry/conveyor_switch
-	associated_paths = list(/obj/machinery/conveyor_switch,/obj/machinery/conveyor_switch/oneway,/obj/item/conveyor_switch_construct,/obj/item/conveyor_switch_construct/oneway)
+	associated_paths = list(/obj/machinery/conveyor_switch,/obj/item/conveyor_switch_construct)
 	mechanics_text = "This device can connect to a number of conveyor belts and control their movement. A two-way switch will allow you to make the conveyors run in forward and reverse mode, the one-way switch will only allow one direction. Can be removed with a crowbar."
 	disambiguator = "machine"
 
@@ -116,7 +117,7 @@
 	associated_paths = list(/obj/machinery/vending)
 	associated_strings = list("vending machine", "vendor")
 	mechanics_text = "A machine that dispenses items from a category of items at the user's selection.<BR>Vending machines sometimes require payment via an ID card, cash or charge card. Some dispense items for free, and such vending machines are usually access restricted. Items that have been dispensed can sometimes be returned simply by inserting it back into the vending machine by hand. Vending machines can also be restocked with an appropriate Vendor Restock, usually ordered via supply management, and then click+dragged onto the vending machine.<BR><BR>Vending machines can be <span codexlink='hacking'>hacked</span>.<BR><b>Vending machine hacking</b><BR>* The orange light shows if the vending machine is electrified.<BR>* The red light indicates whether or not the vending machine is firing out its contents randomly. Sometimes this can happen as a random event.<BR>* The green light indicates whether or not the vending machine is dispensing it's hidden inventory. Nearly every vending machine has a list of secret goods that are usually considered to be contraband.<BR>* The purple or yellow light shows whether or not the ID scanner for the vending machine is working. When this function is disabled, anyone can access the vending machine, even if it normally has restricted access."
-	antag_text = "Accessing the secret inventory of a vending machine can sometimes be very useful, especially for department focused machines."
+	antag_text = "Accessing the secret inventory of a vending machine can sometimes be very useful, especially for department-focused machines."
 	disambiguator = "machine"
 
 /datum/codex_entry/internet_uplink
