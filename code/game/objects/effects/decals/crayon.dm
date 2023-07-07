@@ -5,7 +5,7 @@
 
 /obj/effect/decal/cleanable/crayon/Initialize(mapload, main = "#ffffff", shade = "#000000", var/type = "rune")
 	name = type
-	desc = "A [type] drawn in crayon."
+	desc = "\A [type] drawn in crayon."
 
 	switch(type)
 		if("rune")
