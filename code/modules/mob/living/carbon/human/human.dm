@@ -688,7 +688,7 @@
 
 	//recheck species-restricted clothing
 	for(var/obj/item/carrying in get_equipped_items(include_carried = TRUE))
-		if(!carrying.mob_can_equip(src, get_equipped_slot_for_item(carrying), TRUE, TRUE))
+		if(!carrying.mob_can_equip(src, get_equipped_slot_for_item(carrying), TRUE, TRUE, TRUE))
 			drop_from_inventory(carrying)
 
 //This handles actually updating our visual appearance

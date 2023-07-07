@@ -14,7 +14,7 @@
 /datum/inventory_slot/pocket/prop_can_fit_in_slot(var/obj/item/prop)
 	return ..() || prop.w_class <= ITEM_SIZE_SMALL
 
-/datum/inventory_slot/pocket/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
+/datum/inventory_slot/pocket/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..()
 	if(.)
 		// If they have a uniform slot, they need a uniform to have pockets.

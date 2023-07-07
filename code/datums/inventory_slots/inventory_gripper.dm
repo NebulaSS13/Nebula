@@ -29,7 +29,7 @@
 	requires_organ_tag = null
 	can_use_held_item = FALSE
 
-/datum/inventory_slot/gripper/mouth/can_equip_to_slot(mob/user, obj/item/prop, disable_warning)
+/datum/inventory_slot/gripper/mouth/can_equip_to_slot(mob/user, obj/item/prop, disable_warning, ignore_equipped)
 	. = ..() && prop.w_class <= user.can_pull_size
 
 /datum/inventory_slot/gripper/mouth/equipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE, var/delete_old_item = TRUE)

@@ -448,7 +448,8 @@
 
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
 //Set disable_warning to 1 if you wish it to not give you outputs.
-/obj/item/proc/mob_can_equip(mob/M, slot, disable_warning = FALSE, force = FALSE)
+//Set ignore_equipped to 1 if you wish to ignore covering checks etc. when this item is already equipped.
+/obj/item/proc/mob_can_equip(mob/M, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	if(!slot || !M)
 		return FALSE
 
@@ -471,14 +472,23 @@
 				return FALSE
 
 	var/datum/inventory_slot/inv_slot = M.get_inventory_slot_datum(slot)
-	if(!inv_slot || !inv_slot.is_accessible(M, src, disable_warning) || !inv_slot.can_equip_to_slot(M, src, disable_warning))
+	if(!inv_slot)
 		return FALSE
+
 	var/already_equipped = inv_slot.get_equipped_item()
-	if(already_equipped)
-		if(!force)
+	if(!ignore_equipped || already_equipped != src)
+		if(already_equipped)
+			if(!force)
+				return FALSE
+			inv_slot.clear_slot()
+			qdel(already_equipped)
+
+		if(!inv_slot.is_accessible(M, src, disable_warning))
 			return FALSE
-		inv_slot.clear_slot()
-		qdel(already_equipped)
+
+	if(!inv_slot.can_equip_to_slot(M, src, disable_warning, ignore_equipped))
+		return FALSE
+
 	return TRUE
 
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)

@@ -71,7 +71,7 @@
 	canremove = 1
 	return ..()
 
-/obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot)
+/obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot, var/disable_warning, var/force, var/ignore_equipped)
 	. = ..()
 	if(. && (slot == slot_head_str || slot == slot_wear_mask_str))
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, BP_HEAD)

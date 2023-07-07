@@ -21,7 +21,7 @@
 	if(. && user.buckled?.buckle_require_restraints)
 		user.buckled.unbuckle_mob()
 
-/datum/inventory_slot/handcuffs/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
+/datum/inventory_slot/handcuffs/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..() && istype(prop, /obj/item/handcuffs)
 
 /datum/inventory_slot/handcuffs/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)

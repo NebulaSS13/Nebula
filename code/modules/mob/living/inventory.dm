@@ -122,16 +122,29 @@
 		for(var/slot in get_held_item_slots())
 			if(slot in old_slots)
 				LAZYSET(_inventory_slots, slot, old_slots[slot])
+				old_slots -= slot
 
 	// Check if we need to replace any existing slots.
 	for(var/new_slot_id in new_slots)
 		var/datum/inventory_slot/new_slot = new_slots[new_slot_id]
 		var/datum/inventory_slot/old_slot = LAZYACCESS(old_slots, new_slot_id)
-		if(old_slot && new_slot != old_slot)
-			new_slot.set_slot(old_slot.get_equipped_item())
-			old_slot.clear_slot()
-			qdel(old_slot)
+		if(old_slot)
+			if(old_slot != new_slot)
+				// Transfer the item from the old slot to the new slot
+				new_slot.set_slot(old_slot.get_equipped_item())
+				old_slot.clear_slot()
+				qdel(old_slot)
+
+			old_slots -= new_slot_id
+
 		LAZYSET(_inventory_slots, new_slot.slot_id, new_slot)
+
+	// For any old slots which had no equivalent, drop the item into the world
+	for(var/old_slot_id in old_slots)
+		var/datum/inventory_slot/old_slot = old_slots[old_slot_id]
+		drop_from_inventory(old_slot.get_equipped_item())
+		old_slot.clear_slot() // Call this manually since it is no longer in _inventory_slots
+		qdel(old_slot)
 
 /mob/living/add_inventory_slot(var/datum/inventory_slot/inv_slot)
 	LAZYSET(_inventory_slots, inv_slot.slot_id, inv_slot)
