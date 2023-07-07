@@ -44,9 +44,10 @@
 		for(var/associated_path in associated_paths)
 			// This fix assumes more specific codex entries always follow more general ones.
 			// TODO: Refactor to be order-agnostic.
-			if(SScodex.entries_by_path[associated_path])
-				log_debug("Trying to save codex entry for [name] by path [associated_path] but one already exists, overwriting.")
-				SScodex.entries_by_path[associated_path].associated_paths -= SScodex.entries_by_path[associated_path]
+			var/datum/codex_entry/predecessor = SScodex.entries_by_path[associated_path]
+			if(predecessor)
+				log_debug("Trying to save codex entry for [name] by path [associated_path] but entry [predecessor.name] already uses it, overwriting.")
+				predecessor.associated_paths -= SScodex.entries_by_path[associated_path]
 			SScodex.entries_by_path[associated_path] = src
 
 	if(!name)
@@ -68,9 +69,10 @@
 				associated_strings |= clean_string
 			// This fix assumes more specific codex entries always follow more general ones.
 			// TODO: Refactor to be order-agnostic.
-			if(SScodex.entries_by_string[clean_string])
-				log_debug("Trying to save codex entry for [name] by string [clean_string] but one already exists, overwriting.")
-				SScodex.entries_by_string[clean_string].associated_strings -= clean_string
+			var/datum/codex_entry/predecessor = SScodex.entries_by_string[clean_string]
+			if(predecessor)
+				log_debug("Trying to save codex entry for [name] by string [clean_string] but entry [predecessor.name] already uses it, overwriting.")
+				predecessor.associated_strings -= clean_string
 			SScodex.entries_by_string[clean_string] = src
 
 	..()
