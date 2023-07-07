@@ -50,7 +50,7 @@
 	return material.get_recipes(reinf_material && reinf_material.type)
 
 /obj/item/stack/material/get_codex_value()
-	return (material && !material.hidden_from_codex) ? "[lowertext(material.solid_name)] (material)" : ..()
+	return (material && !material.hidden_from_codex) ? "[lowertext(material.codex_name)] (substance)" : ..()
 
 /obj/item/stack/material/get_material()
 	return material
@@ -69,7 +69,7 @@
 		gender = PLURAL
 	else
 		SetName("[material.use_name] [singular_name]")
-		desc = "A [singular_name] of [material.use_name]."
+		desc = "\A [singular_name] of [material.use_name]."
 		gender = NEUTER
 	if(reinf_material)
 		SetName("reinforced [name]")
