@@ -8,6 +8,7 @@ var/global/list/floor_decals = list()
 	icon = 'icons/turf/flooring/decals.dmi'
 	layer = DECAL_LAYER
 	appearance_flags = RESET_COLOR
+	abstract_type = /obj/effect/floor_decal
 	var/supplied_dir
 	var/detail_overlay
 	var/detail_color
