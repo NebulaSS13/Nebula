@@ -66,16 +66,16 @@
 	var/contraband_icons = icon_states('icons/obj/contraband.dmi')
 	var/list/invalid_posters = list()
 
-	var/list/all_posters = decls_repository.get_decls_of_subtype(/decl/poster)
-	for(var/poster_type in all_posters)
-		var/decl/poster/P = all_posters[poster_type]
+	var/list/all_posters = decls_repository.get_decls_of_subtype(/decl/poster_design)
+	for(var/poster_design in all_posters)
+		var/decl/poster_design/P = all_posters[poster_design]
 		if(!(P.icon_state in contraband_icons))
-			invalid_posters += poster_type
+			invalid_posters += poster_design
 
 	if(invalid_posters.len)
-		fail("/decl/poster with missing icon states: [english_list(invalid_posters)]")
+		fail("/decl/poster_design with missing icon states: [english_list(invalid_posters)]")
 	else
-		pass("All /decl/poster subtypes have valid icon states.")
+		pass("All /decl/poster_design subtypes have valid icon states.")
 	return 1
 
 /datum/unit_test/icon_test/item_modifiers_shall_have_icon_states
