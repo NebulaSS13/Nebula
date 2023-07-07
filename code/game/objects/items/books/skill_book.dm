@@ -207,9 +207,6 @@ Skill books that increase your skills while you activate and hold them
 	remove_buff()
 	. = ..()
 
-/obj/item/book/skill/get_codex_value()
-	return "textbook"
-
 ////////////////////////////////
 //THIS IS WHERE THE BOOKS LIVE//
 ////////////////////////////////

@@ -91,9 +91,6 @@ var/global/list/airlock_overlays = list()
 /obj/machinery/door/airlock/proc/get_window_material()
 	return GET_DECL(window_material)
 
-/obj/machinery/door/airlock/get_codex_value()
-	return "airlock"
-
 /obj/machinery/door/airlock/Process()
 	if(main_power_lost_until > 0 && world.time >= main_power_lost_until)
 		regainMainPower()
