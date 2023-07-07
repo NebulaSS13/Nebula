@@ -781,6 +781,9 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/corner/research/bordercee
 	icon_state = "bordercolorcee"
 
+/obj/effect/floor_decal/spline
+	abstract_type = /obj/effect/floor_decal/spline
+
 /obj/effect/floor_decal/spline/plain
 	name = "spline - plain"
 	icon_state = "spline_plain"
@@ -853,6 +856,9 @@ var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal/spline/fancy/wood/three_quarters
 	icon_state = "spline_fancy_full"
+
+/obj/effect/floor_decal/industrial
+	abstract_type = /obj/effect/floor_decal/industrial
 
 /obj/effect/floor_decal/industrial/danger
 	name = "hazard stripes"
@@ -1089,6 +1095,9 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/chapel
 	name = "chapel"
 	icon_state = "chapel"
+
+/obj/effect/floor_decal/ss13
+	abstract_type = /obj/effect/floor_decal/ss13
 
 /obj/effect/floor_decal/ss13/l1
 	name = "L1"

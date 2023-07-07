@@ -56,7 +56,7 @@
 
 /obj/structure/sign/directions/cryo
 	name = "\improper Cryogenic Storage"
-	icon_state = "direction_cry"
+	icon_state = "direction_cryo"
 
 
 /////////////////////////////////////////////////////
@@ -65,7 +65,7 @@
 /obj/structure/sign/hangar
 	abstract_type = /obj/structure/sign/hangar
 	name          = "hangar sign"
-	desc          = "A sign indicating what hangar the observe is near."
+	desc          = "A sign indicating which hangar the observer is near."
 	icon          = 'icons/obj/signs/hangars.dmi'
 
 /obj/structure/sign/hangar/one

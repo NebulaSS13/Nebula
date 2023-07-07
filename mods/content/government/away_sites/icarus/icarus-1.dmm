@@ -186,7 +186,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aR" = (
-/obj/structure/sign/icarus/solgov{
+/obj/structure/sign/solgov{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled,
