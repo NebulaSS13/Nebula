@@ -19,7 +19,8 @@
 
 	areas_to_use = list(
 		/area/turbolift/hospital_sewers,
-		/area/turbolift/hospital_surface
+		/area/turbolift/hospital_surface,
+		/area/turbolift/hospital_top
 		)
 
 // DIRECT SEWER ACCESS
