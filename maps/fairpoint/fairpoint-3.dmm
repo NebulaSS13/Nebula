@@ -658,8 +658,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/cop)
 "fO" = (
-/obj/machinery/door/blast/shutters/open,
 /obj/effect/wingrille_spawn/reinforced,
+/obj/machinery/door/blast/shutters/open,
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/cop)
 "fQ" = (
@@ -802,12 +802,10 @@
 /area/fairpoint/police/warden)
 "gN" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 8
+	dir = 1
 	},
-/obj/effect/floor_decal/industrial/warning/dust,
-/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled/white,
-/area/turbolift/hospital_top)
+/area/fairpoint/medical/medbay)
 "gP" = (
 /turf/simulated/floor/tiled/monotile,
 /area/fairpoint/street)
@@ -944,6 +942,12 @@
 /area/fairpoint/medical/cmo)
 "ia" = (
 /obj/structure/bookcase/manuals/medical,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "ie" = (
@@ -1282,9 +1286,6 @@
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 1
 	},
-/obj/structure/railing/mapped{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark,
 /area/turbolift/pd_top)
 "kN" = (
@@ -1431,6 +1432,9 @@
 "lH" = (
 /obj/structure/bookcase{
 	name = "bookcase (Fiction)"
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
@@ -2282,6 +2286,9 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/police/tactical)
+"sg" = (
+/turf/simulated/wall/elevator,
+/area/fairpoint/police)
 "sh" = (
 /obj/structure/window/reinforced{
 	health = 1e+006
@@ -2301,16 +2308,8 @@
 /turf/simulated/floor,
 /area/fairpoint/medical/medbay)
 "sr" = (
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
 /obj/machinery/door/airlock/glass/engineering,
 /obj/machinery/door/firedoor,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable{
-	icon_state = "2-4"
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/fairpoint/turret_protected/ai_server_room)
 "st" = (
@@ -2325,6 +2324,11 @@
 /obj/machinery/network/relay/long_range,
 /turf/simulated/floor/bluegrid,
 /area/fairpoint/maintenance/telecomms)
+"sL" = (
+/obj/effect/floor_decal/corner/paleblue,
+/obj/effect/floor_decal/industrial/warning/dust,
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "sM" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/tiled/dark,
@@ -2676,6 +2680,9 @@
 /area/fairpoint/police)
 "vW" = (
 /obj/structure/coatrack,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "vX" = (
@@ -2961,11 +2968,10 @@
 /turf/simulated/floor/tiled/monofloor,
 /area/fairpoint/engineering/ce)
 "xP" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 10
+/obj/structure/sign/warning/fall,
+/turf/simulated/wall/prepainted{
+	color = "FFFEFD"
 	},
-/obj/structure/railing/mapped,
-/turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "xS" = (
 /obj/structure/table/woodentable/walnut,
@@ -3075,6 +3081,12 @@
 	},
 /turf/simulated/floor/carpet/blue,
 /area/fairpoint/police/detectives_office)
+"zk" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "zm" = (
 /turf/simulated/wall/concrete,
 /area/fairpoint/police/detectives_office)
@@ -3543,7 +3555,7 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/psych)
 "CM" = (
-/turf/simulated/open,
+/turf/unsimulated/mask,
 /area/turbolift/pd_top)
 "CQ" = (
 /turf/simulated/floor/tiled/steel_ridged,
@@ -3582,6 +3594,13 @@
 /obj/structure/noticeboard,
 /turf/simulated/wall/r_wall,
 /area/fairpoint/police/cop)
+"Dz" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning/dust,
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "DC" = (
 /obj/structure/table/reinforced,
 /obj/machinery/photocopier/faxmachine,
@@ -3659,10 +3678,25 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/exam_room)
+"Ee" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "Ef" = (
 /obj/machinery/telecomms/bus/preset_two,
 /turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/maintenance/telecomms)
+"Er" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "Es" = (
 /obj/structure/window/reinforced{
 	health = 1e+006
@@ -4127,9 +4161,6 @@
 "HG" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/cable{
-	icon_state = "0-8"
-	},
 /turf/simulated/floor,
 /area/fairpoint/turret_protected/ai_server_room)
 "HN" = (
@@ -4450,7 +4481,6 @@
 /turf/simulated/floor/lino,
 /area/fairpoint/police/detectives_office)
 "JY" = (
-/obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
 /area/turbolift/hospital_top)
 "Ka" = (
@@ -4917,15 +4947,8 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/police/vacantoffice)
 "Oo" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 5
-	},
-/obj/structure/railing/mapped{
-	dir = 1
-	},
-/obj/structure/lift/button/standalone,
-/turf/simulated/floor/tiled/dark,
-/area/turbolift/pd_top)
+/turf/simulated/wall/elevator,
+/area/fairpoint/police/cop)
 "Or" = (
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/monotile,
@@ -5026,7 +5049,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/fairpoint/engineering/sysadmin)
 "Pw" = (
-/turf/simulated/open,
+/turf/unsimulated/mask,
 /area/turbolift/hospital_top)
 "Py" = (
 /turf/simulated/floor/tiled/white,
@@ -5077,9 +5100,6 @@
 "PK" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
-	},
-/obj/structure/railing/mapped{
-	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/turbolift/pd_top)
@@ -5163,16 +5183,18 @@
 /turf/simulated/floor/carpet/blue2,
 /area/fairpoint/police/cop)
 "QJ" = (
-/obj/structure/sign/warning/fall,
-/turf/simulated/wall/prepainted{
-	color = "FFFEFD"
-	},
-/area/fairpoint/medical/exam_room)
+/obj/effect/floor_decal/industrial/warning/dust,
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "QL" = (
 /turf/simulated/wall/prepainted{
 	color = "FFFEFD"
 	},
 /area/fairpoint/medical/patient_wing)
+"QN" = (
+/obj/effect/floor_decal/corner/paleblue,
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "QO" = (
 /obj/effect/floor_decal/carpet/blue2{
 	dir = 4
@@ -5260,6 +5282,13 @@
 "Rv" = (
 /turf/simulated/wall/r_wall,
 /area/fairpoint/police/prison/dorm)
+"Rx" = (
+/obj/effect/floor_decal/corner/paleblue{
+	tag = "icon-corner_white (NORTH)";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "RA" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
@@ -5381,9 +5410,6 @@
 "SK" = (
 /obj/machinery/power/terminal{
 	dir = 8
-	},
-/obj/structure/cable{
-	icon_state = "0-4"
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor,
@@ -5532,11 +5558,8 @@
 /turf/simulated/floor/carpet/blue2,
 /area/fairpoint/medical/medbay)
 "TQ" = (
-/obj/structure/cable{
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/fairpoint/turret_protected/ai_server_room)
+/turf/simulated/floor/tiled/dark,
+/area/turbolift/pd_top)
 "TR" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
@@ -5691,9 +5714,6 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/police/vacantoffice)
 "Uq" = (
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
 /obj/machinery/light_switch/on{
 	dir = 1;
 	pixel_y = -18
@@ -6058,11 +6078,14 @@
 /turf/simulated/floor/reinforced,
 /area/fairpoint/panicroom)
 "XL" = (
-/obj/effect/floor_decal/corner/paleblue,
-/obj/effect/floor_decal/industrial/warning/dust,
-/obj/structure/railing/mapped,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
 /turf/simulated/floor/tiled/white,
-/area/turbolift/hospital_top)
+/area/fairpoint/medical/medbay)
 "XO" = (
 /obj/structure/table/reinforced,
 /obj/item/clothing/gloves/latex,
@@ -6327,12 +6350,13 @@
 /area/fairpoint/police/vacantoffice)
 "ZZ" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 10
+	dir = 5
 	},
-/obj/structure/railing/mapped,
-/obj/structure/lift/button/standalone,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/white,
-/area/turbolift/hospital_top)
+/area/fairpoint/medical/medbay)
 
 (1,1,1) = {"
 gi
@@ -16573,7 +16597,7 @@ Iv
 jz
 Xb
 SJ
-TQ
+SJ
 sr
 kK
 kK
@@ -18591,14 +18615,14 @@ cy
 cy
 cy
 cy
-cy
+Oo
 Ud
 Ud
 Ud
 Ud
 Ud
 oj
-Oo
+PK
 yH
 Zl
 hl
@@ -18750,13 +18774,13 @@ cy
 cy
 cy
 cy
-cy
+Oo
+CM
+CM
+CM
+CM
+CM
 Ud
-CM
-CM
-CM
-CM
-CM
 kL
 yH
 Zl
@@ -18909,13 +18933,13 @@ cy
 cy
 cy
 cy
-cy
-Ud
+Oo
 CM
 CM
 CM
 CM
 CM
+TQ
 aG
 yH
 Zl
@@ -19068,13 +19092,13 @@ cy
 cy
 cy
 cy
-cy
-Ud
+Oo
 CM
 CM
 CM
 CM
 CM
+TQ
 aG
 yH
 hz
@@ -19227,13 +19251,13 @@ cy
 cy
 cy
 cy
-cy
-Ud
+Oo
 CM
 CM
 CM
 CM
 CM
+TQ
 aG
 yH
 fL
@@ -19342,7 +19366,7 @@ MH
 MH
 MH
 yj
-ny
+qA
 ny
 ny
 ny
@@ -19386,13 +19410,13 @@ cy
 cy
 cy
 cy
-cy
+Oo
+CM
+CM
+CM
+CM
+CM
 Ud
-CM
-CM
-CM
-CM
-CM
 kL
 yH
 Zl
@@ -19501,7 +19525,7 @@ wQ
 xV
 xV
 sA
-ny
+Rx
 ny
 ny
 ny
@@ -19545,7 +19569,7 @@ JT
 JT
 JT
 JT
-JT
+sg
 Ud
 Ji
 Ud
@@ -19660,7 +19684,7 @@ wQ
 xV
 xV
 xV
-ny
+Ee
 ny
 ny
 zK
@@ -19819,7 +19843,7 @@ VS
 VS
 VS
 gA
-ny
+qA
 ny
 ny
 uh
@@ -19978,7 +20002,7 @@ gj
 RP
 RP
 gA
-ny
+qA
 ny
 ny
 BS
@@ -20137,7 +20161,7 @@ mN
 yj
 yj
 yj
-ny
+qA
 ny
 ny
 ny
@@ -20293,15 +20317,15 @@ DX
 mN
 mN
 mN
+ZZ
+UX
+UX
+gN
 ny
 ny
 ny
 ny
-ny
-ny
-ny
-ny
-ny
+mA
 mM
 ny
 ny
@@ -20452,11 +20476,11 @@ pe
 Ir
 ok
 mN
+qA
 ny
 ny
 ny
-ny
-ny
+QN
 vW
 vW
 lH
@@ -20611,11 +20635,11 @@ gq
 an
 Cc
 mN
+qA
 ny
 ny
 ny
-ny
-ny
+mA
 QL
 QL
 QL
@@ -20770,11 +20794,11 @@ gq
 an
 Cc
 mN
+qA
 ny
 ny
 ny
-ny
-ny
+mA
 QL
 Iu
 Iu
@@ -20929,11 +20953,11 @@ dn
 Lv
 KW
 mN
+qA
 ny
 ny
 ny
-ny
-ny
+mA
 QL
 Iu
 Iu
@@ -21088,11 +21112,11 @@ UC
 bi
 bi
 mN
+qA
 ny
 ny
 ny
-ny
-ny
+mA
 QL
 Iu
 Iu
@@ -21243,11 +21267,11 @@ mN
 Wr
 mN
 mN
-qA
 ny
-ny
-ny
-ny
+zk
+UX
+UX
+gN
 ny
 ny
 ny
@@ -21402,15 +21426,15 @@ iD
 EE
 um
 mN
-qA
+Ee
 ny
 ny
 ny
-ny
-ny
-ny
-ny
-ny
+QN
+vg
+vg
+vg
+XL
 QL
 Iu
 Iu
@@ -21565,7 +21589,7 @@ qA
 ny
 ny
 ny
-ny
+mA
 qi
 qi
 qi
@@ -21724,7 +21748,7 @@ qA
 ny
 ny
 ny
-ny
+mA
 qi
 qL
 gd
@@ -21883,7 +21907,7 @@ qA
 ny
 ny
 ny
-ny
+mA
 qi
 qL
 EU
@@ -22040,9 +22064,9 @@ qQ
 qQ
 qA
 ny
-ny
-ny
-ny
+QN
+vg
+XL
 qi
 gJ
 KL
@@ -22199,9 +22223,9 @@ uJ
 qQ
 ji
 ny
-ny
-ZZ
+mA
 hT
+Vy
 Vy
 Vy
 Vy
@@ -22358,8 +22382,8 @@ pm
 SP
 ny
 ny
-ny
-gN
+Dz
+Vy
 Pw
 Pw
 Pw
@@ -22517,7 +22541,7 @@ So
 qQ
 fd
 ny
-ny
+QJ
 JY
 Pw
 Pw
@@ -22676,7 +22700,7 @@ So
 SF
 qA
 ny
-ny
+QJ
 JY
 Pw
 Pw
@@ -22835,7 +22859,7 @@ So
 SF
 qA
 ny
-ny
+QJ
 JY
 Pw
 Pw
@@ -22994,8 +23018,8 @@ So
 qQ
 gH
 ny
-ny
-XL
+sL
+Vy
 Pw
 Pw
 Pw
@@ -23153,9 +23177,9 @@ aX
 qQ
 qA
 ny
-ny
+mA
 xP
-QJ
+Tg
 Tg
 Tg
 Tg
@@ -23312,8 +23336,8 @@ qQ
 Mj
 ES
 ny
-ny
-mA
+zk
+Er
 Tg
 ey
 Zr

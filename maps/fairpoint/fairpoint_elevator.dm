@@ -1,11 +1,11 @@
 /obj/turbolift_map_holder/fairpoint
 	depth = 2
-	lift_size_x = 3
-	lift_size_y = 3
+	lift_size_x = 4
+	lift_size_y = 4
 
 // POLICE STATION
 /obj/turbolift_map_holder/fairpoint/sec
-	name = "Fairpoint turbolift map placeholder - Security"
+	name = "Fairpoint turbolift map placeholder - Securiy"
 	dir = EAST
 
 	areas_to_use = list(
@@ -19,8 +19,7 @@
 
 	areas_to_use = list(
 		/area/turbolift/hospital_sewers,
-		/area/turbolift/hospital_surface,
-		/area/turbolift/hospital_top
+		/area/turbolift/hospital_surface
 		)
 
 // DIRECT SEWER ACCESS

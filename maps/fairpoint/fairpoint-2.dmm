@@ -3544,11 +3544,9 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/crew_quarters/kitchen)
 "fia" = (
-/obj/structure/sign/warning,
-/turf/simulated/wall/prepainted{
-	color = "FFFEFD"
-	},
-/area/turbolift/hospital_surface)
+/obj/effect/floor_decal/industrial/warning/dust,
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "fjf" = (
 /turf/simulated/floor/tiled/steel_grid,
 /area/fairpoint/crew_quarters/sleep/cryo)
@@ -4991,7 +4989,6 @@
 /turf/simulated/floor/tiled/freezer,
 /area/fairpoint/street/north)
 "hpB" = (
-/obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
 /area/turbolift/hospital_surface)
 "hpF" = (
@@ -5000,12 +4997,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/fairpoint/shipping/storage)
-"hpM" = (
-/obj/structure/sign/warning/fall,
-/turf/simulated/wall/prepainted{
-	color = "FFFEFD"
-	},
-/area/fairpoint/medical/exam_room)
 "hqc" = (
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -5368,14 +5359,6 @@
 "hTM" = (
 /turf/simulated/floor/tiled,
 /area/fairpoint/science/rd)
-"hTT" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 10
-	},
-/obj/structure/railing/mapped,
-/obj/structure/lift/button/standalone,
-/turf/simulated/floor/tiled/white,
-/area/turbolift/hospital_surface)
 "hUi" = (
 /obj/structure/sign/warning/nosmoking_2,
 /turf/simulated/wall/concrete,
@@ -5785,9 +5768,8 @@
 "iEt" = (
 /obj/effect/floor_decal/corner/paleblue,
 /obj/effect/floor_decal/industrial/warning/dust,
-/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled/white,
-/area/turbolift/hospital_surface)
+/area/fairpoint/medical/medbay)
 "iEx" = (
 /obj/structure/table/woodentable,
 /obj/effect/floor_decal/corner/pink/diagonal,
@@ -6139,10 +6121,6 @@
 /obj/structure/table/woodentable/ebony,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/fairpoint/crew_quarters/bar)
-"jaR" = (
-/obj/machinery/vending/games,
-/turf/simulated/floor/tiled,
-/area/fairpoint/hallway/secondary/exit)
 "jbq" = (
 /turf/simulated/wall/concrete,
 /area/fairpoint/research/lab)
@@ -6777,9 +6755,8 @@
 /turf/simulated/floor/wood,
 /area/fairpoint/crew_quarters/fitness)
 "kfr" = (
-/obj/structure/table/woodentable,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/steel_grid,
+/turf/simulated/wall/elevator,
 /area/turbolift/sewer_entrance)
 "kfK" = (
 /obj/effect/floor_decal/corner/paleblue,
@@ -8200,7 +8177,7 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/surgeryobs)
 "mbO" = (
-/turf/simulated/open,
+/turf/unsimulated/mask,
 /area/turbolift/sewer_entrance)
 "mca" = (
 /obj/machinery/button/blast_door{
@@ -9424,7 +9401,7 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/crew_quarters/kitchen)
 "nTq" = (
-/turf/simulated/open,
+/turf/unsimulated/mask,
 /area/turbolift/metro_station)
 "nTU" = (
 /turf/simulated/wall/concrete,
@@ -9508,7 +9485,7 @@
 /turf/simulated/floor/plating,
 /area/fairpoint/street/east)
 "ocy" = (
-/turf/simulated/open,
+/turf/unsimulated/mask,
 /area/turbolift/hospital_surface)
 "odj" = (
 /obj/item/beach_ball/holoball,
@@ -9739,9 +9716,8 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/hydroponics)
 "otU" = (
-/obj/structure/sign/warning/fall,
-/turf/simulated/wall/concrete,
-/area/fairpoint/street/east)
+/turf/simulated/floor/tiled/dark,
+/area/turbolift/pd_ground)
 "ouU" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -10342,7 +10318,7 @@
 /turf/simulated/wall/concrete,
 /area/fairpoint/police/brig/interrogation)
 "pkH" = (
-/turf/simulated/open,
+/turf/unsimulated/mask,
 /area/fairpoint/street/east)
 "plq" = (
 /obj/machinery/vending/coffee,
@@ -11041,9 +11017,11 @@
 /turf/exterior/water,
 /area/fairpoint/street/west)
 "qfx" = (
-/obj/structure/sign/warning/fall,
-/turf/simulated/wall/concrete,
-/area/turbolift/metro_station)
+/obj/machinery/vending/games{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/fairpoint/hallway/secondary/exit)
 "qfP" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/white{
@@ -11658,6 +11636,9 @@
 /area/fairpoint/police/brig)
 "qYB" = (
 /obj/structure/table/steel,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
 /obj/item/mop,
 /turf/simulated/floor/tiled,
 /area/fairpoint/janitor)
@@ -11702,7 +11683,6 @@
 /turf/simulated/floor/beach/water,
 /area/fairpoint/law)
 "rdJ" = (
-/obj/structure/lift/button,
 /turf/simulated/wall/concrete,
 /area/turbolift/metro_station)
 "rdT" = (
@@ -15332,13 +15312,6 @@
 /obj/item/storage/box/cups,
 /turf/simulated/floor/tiled/monotile,
 /area/fairpoint/cityhall)
-"wjj" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 5
-	},
-/obj/structure/lift/button/standalone,
-/turf/simulated/floor/tiled/dark,
-/area/turbolift/pd_ground)
 "wkn" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/white{
@@ -15721,14 +15694,6 @@
 /obj/structure/closet/crate/trashcart,
 /turf/exterior/concrete/pavement/empty,
 /area/fairpoint/street)
-"wHH" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/warning/dust,
-/obj/structure/railing/mapped,
-/turf/simulated/floor/tiled/white,
-/area/turbolift/hospital_surface)
 "wHK" = (
 /obj/structure/window/reinforced,
 /turf/simulated/floor/tiled/dark,
@@ -15812,9 +15777,9 @@
 /area/fairpoint/cityhall)
 "wLZ" = (
 /obj/effect/floor_decal/corner/paleblue{
-	dir = 10
+	dir = 8
 	},
-/obj/structure/railing/mapped,
+/obj/effect/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "wOg" = (
@@ -15959,9 +15924,14 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/shipping/office)
 "wZC" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/steel_grid,
-/area/turbolift/sewer_entrance)
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/fairpoint/medical/medbay)
 "wZG" = (
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1
@@ -22797,7 +22767,7 @@ rdJ
 cAk
 cAk
 cAk
-qfx
+rdJ
 fhi
 fhi
 wEM
@@ -22952,7 +22922,7 @@ fpv
 fpv
 fpv
 nTU
-jaR
+dsM
 tJW
 tJW
 tJW
@@ -23432,7 +23402,7 @@ nTU
 lJr
 tJW
 tJW
-dsM
+qfx
 jCq
 jDL
 tqN
@@ -29068,7 +29038,7 @@ uMb
 uMb
 uMb
 dtN
-wjj
+gnW
 mof
 iaK
 pkf
@@ -29221,12 +29191,12 @@ rML
 rML
 pWB
 rPk
-uMb
 mqf
 mqf
 lVO
 lVO
 vVS
+uMb
 bvd
 mof
 iaK
@@ -29380,12 +29350,12 @@ xfY
 rML
 pWB
 rPk
-uMb
 qDh
 qDh
 qDh
 qDh
 qDh
+otU
 gXH
 mof
 hep
@@ -29539,12 +29509,12 @@ xfY
 rML
 pWB
 rPk
-uMb
 uVf
 uVf
 uVf
 uVf
 uVf
+otU
 gXH
 mof
 mof
@@ -29698,12 +29668,12 @@ xfY
 rML
 uJE
 rPk
-uMb
 mqf
 mqf
 lVO
 mqf
 ttC
+otU
 gXH
 mof
 kUg
@@ -29857,12 +29827,12 @@ xfY
 rML
 pWB
 rPk
-uMb
 mqf
 mqf
 lVO
 lVO
 ttC
+uMb
 bvd
 mof
 iaK
@@ -32510,8 +32480,8 @@ xZb
 amd
 nSl
 kpd
-uJq
 sNO
+mLQ
 mLQ
 mLQ
 mLQ
@@ -32669,9 +32639,9 @@ whQ
 nMd
 xsH
 ugG
-uJq
-hTT
-fia
+aIb
+peD
+peD
 peD
 peD
 peD
@@ -32828,8 +32798,8 @@ qBI
 dSp
 hAI
 uJq
-uJq
-wHH
+wLZ
+peD
 ocy
 ocy
 ocy
@@ -32987,7 +32957,7 @@ ykh
 tdt
 xOf
 bUy
-uJq
+fia
 hpB
 ocy
 ocy
@@ -33146,7 +33116,7 @@ nAd
 xkl
 xsH
 yjp
-uJq
+fia
 hpB
 ocy
 ocy
@@ -33305,7 +33275,7 @@ vjM
 uwr
 xte
 swf
-uJq
+fia
 hpB
 ocy
 ocy
@@ -33464,8 +33434,8 @@ bOA
 fVY
 uwr
 ugG
-uJq
 iEt
+peD
 ocy
 ocy
 ocy
@@ -33623,9 +33593,9 @@ bOA
 dNA
 qQt
 uJq
-uJq
-wLZ
-hpM
+aIb
+dJK
+vDC
 vDC
 vDC
 vDC
@@ -33782,8 +33752,8 @@ bOA
 frg
 uwr
 bUy
-uJq
-aIb
+jqc
+wZC
 vDC
 nGf
 swT
@@ -43816,8 +43786,8 @@ pkH
 pkH
 pkH
 pkH
-otU
-nHY
+dWz
+mav
 nHY
 wCx
 wCx
@@ -43976,7 +43946,7 @@ pkH
 pkH
 pkH
 mav
-nHY
+mav
 nHY
 wCx
 wCx
@@ -44135,7 +44105,7 @@ pkH
 pkH
 pkH
 mav
-nHY
+mav
 nHY
 wCx
 wCx
@@ -44294,7 +44264,7 @@ pkH
 pkH
 pkH
 mav
-nHY
+mav
 nHY
 wCx
 wCx
@@ -44453,7 +44423,7 @@ pkH
 pkH
 pkH
 dWz
-nHY
+mav
 nHY
 wCx
 wCx
@@ -46595,7 +46565,7 @@ pFA
 sLB
 uCX
 knD
-wZC
+kfr
 doo
 doo
 doo
