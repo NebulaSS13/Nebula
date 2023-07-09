@@ -70,25 +70,27 @@
 		return 1
 
 /datum/random_map/noise/ore/apply_to_turf(var/x,var/y)
+	. = list()
 
 	var/tx = ((origin_x-1)+x)*chunk_size
 	var/ty = ((origin_y-1)+y)*chunk_size
 
+	for(var/T in range(locate(tx, ty, origin_z)))
 	for(var/i=0,i<chunk_size,i++)
 		for(var/j=0,j<chunk_size,j++)
 			var/turf/T = locate(tx+j, ty+i, origin_z)
 			if(!istype(T))
 				continue
 
-			LAZYADD(., T)
+			. += T
 
 			CHECK_TICK
-			var/datum/extension/buried_resources/resources = get_or_create_extension(T, /datum/extension/buried_resources)
-			LAZYINITLIST(resources.resources)
+			var/list/resources
+			LAZYINITLIST(resources)
 
 			for(var/val in common_resources)
 				var/list/ranges = common_resources[val]
-				resources.resources[val] = rand(ranges[1], ranges[2])
+				resources[val] = rand(ranges[1], ranges[2])
 
 			var/tmp_cell
 			TRANSLATE_AND_VERIFY_COORD(x, y)
@@ -103,7 +105,8 @@
 
 			for(var/val in spawning)
 				var/list/ranges = spawning[val]
-				resources.resources[val] = rand(ranges[1], ranges[2])
+				resources[val] = rand(ranges[1], ranges[2])
+			set_extension(T, /datum/extension/buried_resources, resources)
 
 /datum/random_map/noise/ore/get_map_char(var/value)
 	if(value < rare_val)
