@@ -24,6 +24,7 @@
 	4.) Use a wrench on to take the frame apart.<BR> \
 	5.) Use a welder to cut the frame into sheets."
 	disambiguator = "machine"
+	include_subtypes = TRUE
 
 /datum/codex_entry/computer/modular
 	associated_paths = list(/obj/machinery/computer/modular)
