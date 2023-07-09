@@ -28,12 +28,6 @@
 	if(_mechanics_text)     mechanics_text =     _mechanics_text
 	if(_antag_text)         antag_text =         _antag_text
 
-	if(include_subtypes && length(associated_paths))
-		var/new_assoc_paths = list()
-		for(var/path in associated_paths)
-			new_assoc_paths |= typesof(path)
-		associated_paths = new_assoc_paths
-
 	if(store_codex_entry && length(associated_paths))
 		for(var/tpath in associated_paths)
 			var/atom/thing = tpath
@@ -41,6 +35,12 @@
 			if(disambiguator)
 				thing_name = "[thing_name] ([disambiguator])"
 			LAZYDISTINCTADD(associated_strings, thing_name)
+		// Don't move this any earlier, adding strings for subtypes can cause overlaps.
+		if(include_subtypes)
+			var/new_assoc_paths = list()
+			for(var/path in associated_paths)
+				new_assoc_paths |= typesof(path)
+			associated_paths = new_assoc_paths
 		for(var/associated_path in associated_paths)
 			// This fix assumes more specific codex entries always follow more general ones.
 			// TODO: Refactor to be order-agnostic.
