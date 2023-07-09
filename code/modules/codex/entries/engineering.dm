@@ -50,7 +50,7 @@
 	associated_strings = list("hacking")
 	mechanics_text = "Airlocks, vending machines, and various other machinery can be hacked by opening them up and fiddling with the wires. \
 	While it might sound like a unlawful deed (and it usually is) this process is also performed by engineers, usually to fix said criminal deeds. \
-	Hacking also benefits from the <l>Electrical Engineering</l> skill: a low skill may cause wires to tangle, and a high enough skill will let you examine wires to see what they do. \
+	Hacking also benefits from the <span codexlink='Electrical Engineering (skill)'>Electrical Engineering</span> skill: a low skill may cause wires to tangle, and a high enough skill will let you examine wires to see what they do. \
 	<BR>Hacking makes use of several items: \
 	<ul><li>a <span codexlink='" + TOOL_CODEX_SCREWDRIVER + "'>screwdriver</span>, for opening maintenance panels.</li> \
 	<li>a <span codexlink='" + TOOL_CODEX_MULTITOOL + "'>multitool</span>, for pulsing wires (optional for many tasks, but very useful)</li> \
