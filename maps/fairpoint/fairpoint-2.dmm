@@ -1040,7 +1040,7 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/stone,
+/turf/exterior/concrete,
 /area/fairpoint/street/west)
 "byL" = (
 /obj/structure/window/reinforced,
@@ -5224,7 +5224,7 @@
 /area/fairpoint/shipping/qm)
 "hQf" = (
 /obj/machinery/door/airlock/glass/civilian,
-/turf/simulated/floor/tiled/monofloor,
+/turf/exterior/concrete/pavement/brick_paving,
 /area/fairpoint/street)
 "hQg" = (
 /obj/effect/decal/cleanable/dirt,
@@ -5535,7 +5535,7 @@
 /obj/machinery/camera/network/security{
 	c_tag = "SEC - Prison Courtyard West"
 	},
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police)
 "ioC" = (
 /obj/machinery/conveyor{
@@ -7116,7 +7116,7 @@
 	dir = 8
 	},
 /obj/structure/railing/mapped,
-/turf/simulated/floor/tiled/stone,
+/turf/exterior/concrete,
 /area/fairpoint/street/west)
 "kFH" = (
 /obj/structure/sign/neon/casino,
@@ -8091,7 +8091,7 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/surgeryobs)
 "mbO" = (
-/turf/unsimulated/mask,
+/turf/simulated/open,
 /area/turbolift/sewer_entrance)
 "mca" = (
 /obj/machinery/button/blast_door{
@@ -10751,7 +10751,7 @@
 /turf/exterior/concrete,
 /area/fairpoint/street/north)
 "pWB" = (
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police)
 "pWN" = (
 /obj/effect/floor_decal/corner/blue/full{
@@ -11093,9 +11093,6 @@
 /area/fairpoint/hydroponics)
 "qrN" = (
 /obj/abstract/level_data/main_level,
-/obj/abstract/map_data{
-	height = 3
-	},
 /turf/simulated/wall/r_wall/hull,
 /area/fairpoint/street/west)
 "qrZ" = (
@@ -11481,9 +11478,6 @@
 /obj/structure/grille,
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/crew_quarters/bar)
-"qVu" = (
-/turf/simulated/floor/tiled/monofloor,
-/area/fairpoint/street)
 "qVA" = (
 /obj/effect/floor_decal/beach{
 	dir = 4
@@ -13443,7 +13437,7 @@
 /area/fairpoint/maintenance/surface)
 "tDr" = (
 /obj/structure/railing/mapped,
-/turf/simulated/floor/tiled/stone,
+/turf/exterior/concrete,
 /area/fairpoint/street/west)
 "tEe" = (
 /obj/structure/table/reinforced,
@@ -14185,7 +14179,7 @@
 /area/fairpoint/street/east)
 "uJE" = (
 /obj/machinery/porta_turret,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police)
 "uJY" = (
 /obj/structure/closet/secure_closet/personal/cabinet{
@@ -14501,7 +14495,7 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/stone,
+/turf/exterior/concrete,
 /area/fairpoint/street/west)
 "vgF" = (
 /obj/effect/floor_decal/borderfloorwhite/corner{
@@ -19332,25 +19326,25 @@ fpv
 fpv
 fpv
 xAk
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
 tDr
 fhi
 nse
@@ -19505,11 +19499,11 @@ fpv
 dfi
 dfi
 dfi
-bOc
-bOc
+rHw
+rHw
 rKs
-bOc
-bOc
+rHw
+rHw
 ajS
 fhi
 nse
@@ -19664,11 +19658,11 @@ fpv
 dfi
 tfZ
 dfi
-bOc
-bOc
+rHw
+rHw
 kwZ
-bOc
-bOc
+rHw
+rHw
 ajS
 fhi
 nse
@@ -19823,11 +19817,11 @@ fpv
 dfi
 dfi
 dfi
-bOc
-bOc
+rHw
+rHw
 rKs
-bOc
-bOc
+rHw
+rHw
 ajS
 fhi
 nse
@@ -19968,25 +19962,25 @@ fpv
 fpv
 fpv
 eRp
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
 tDr
 fhi
 nse
@@ -20127,25 +20121,25 @@ fpv
 fpv
 fpv
 xAk
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
 tDr
 fhi
 nse
@@ -20300,11 +20294,11 @@ fpv
 fpv
 fpv
 fpv
-bOc
-bOc
+rHw
+rHw
 fpv
-bOc
-bOc
+rHw
+rHw
 grX
 fhi
 nse
@@ -20459,11 +20453,11 @@ mix
 mix
 mix
 mix
-bOc
-bOc
+rHw
+rHw
 uVi
-bOc
-bOc
+rHw
+rHw
 grX
 fhi
 nse
@@ -20618,11 +20612,11 @@ mix
 mix
 mix
 mix
-bOc
-bOc
+rHw
+rHw
 iWU
-bOc
-bOc
+rHw
+rHw
 grX
 fhi
 nse
@@ -20764,24 +20758,24 @@ wTG
 efX
 imx
 mix
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
 uVi
-bOc
-bOc
+rHw
+rHw
 grX
 fhi
 nse
@@ -20923,24 +20917,24 @@ vUV
 mtP
 imx
 uDW
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
-bOc
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
+rHw
 iWU
-bOc
-bOc
+rHw
+rHw
 grX
 fhi
 nse
@@ -21082,7 +21076,7 @@ vUV
 mtP
 imx
 mix
-bOc
+rHw
 mix
 cui
 mix
@@ -21095,8 +21089,8 @@ iWU
 iWU
 iWU
 iWU
-bOc
-bOc
+rHw
+rHw
 jpI
 qrZ
 rFA
@@ -21254,8 +21248,8 @@ vfI
 vfI
 vfI
 kFo
-bOc
-bOc
+rHw
+rHw
 byu
 vfI
 vfI
@@ -29480,7 +29474,7 @@ uMe
 hSS
 eQu
 eQu
-qVu
+ctl
 hQf
 ctl
 ctl
@@ -29639,7 +29633,7 @@ uMe
 hSS
 eQu
 eQu
-qVu
+ctl
 hQf
 ctl
 ctl

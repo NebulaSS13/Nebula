@@ -499,7 +499,8 @@
 /area/fairpoint/police/prison)
 "eC" = (
 /obj/structure/ladder,
-/turf/simulated/floor/tiled,
+/obj/structure/lattice,
+/turf/simulated/open,
 /area/fairpoint/cityhall)
 "eE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
@@ -741,7 +742,7 @@
 /area/fairpoint/medical/biostorage)
 "gy" = (
 /obj/machinery/porta_turret,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police/prison)
 "gA" = (
 /obj/machinery/recharger/wallcharger,
@@ -1190,7 +1191,7 @@
 /obj/machinery/camera/network/security{
 	c_tag = "SEC - Prison Courtyard West"
 	},
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police/prison)
 "jX" = (
 /obj/effect/wingrille_spawn/reinforced,
@@ -1433,7 +1434,7 @@
 /obj/item/rig/ce/equipped,
 /obj/item/clothing/mask/gas/half,
 /obj/item/tank/oxygen/yellow,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/engineering/ce)
 "lX" = (
 /obj/structure/bed/sofa,
@@ -2043,7 +2044,7 @@
 "qT" = (
 /obj/structure/window/borosilicate_reinforced,
 /obj/structure/sealant_injector,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/engineering/ce)
 "qU" = (
 /obj/machinery/camera/network/security{
@@ -2346,8 +2347,11 @@
 /obj/item/storage/toolbox/mechanical,
 /obj/item/storage/toolbox/electrical,
 /obj/structure/table/reinforced,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/engineering/ce)
+"tG" = (
+/turf/simulated/open,
+/area/fairpoint/crew_quarters/bar)
 "tL" = (
 /turf/simulated/floor/tiled/dark,
 /area/fairpoint/street)
@@ -2424,7 +2428,7 @@
 /area/fairpoint/medical/patient_b)
 "uA" = (
 /obj/machinery/porta_turret,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police/armoury)
 "uB" = (
 /obj/effect/floor_decal/corner/red{
@@ -2568,7 +2572,7 @@
 /area/fairpoint/police/vacantoffice)
 "vN" = (
 /obj/structure/window/borosilicate_reinforced,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/engineering/ce)
 "vP" = (
 /turf/simulated/floor/tiled/dark,
@@ -2607,7 +2611,7 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/medbay)
 "vX" = (
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police/armoury)
 "wa" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -2640,7 +2644,7 @@
 /obj/machinery/camera/network/security{
 	c_tag = "SEC - Prison Courtyard West"
 	},
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police/cop)
 "wl" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -2881,7 +2885,7 @@
 /area/fairpoint/police/brig/interrogation)
 "xM" = (
 /obj/machinery/door/window/southleft,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/engineering/ce)
 "xP" = (
 /obj/structure/sign/warning/fall,
@@ -3190,7 +3194,7 @@
 /area/fairpoint/maintenance/telecomms)
 "AV" = (
 /obj/machinery/porta_turret,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police/cop)
 "AW" = (
 /obj/effect/floor_decal/corner/grey{
@@ -3231,7 +3235,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/fairpoint/police/cop)
 "Bi" = (
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police/prison)
 "Bj" = (
 /obj/structure/table/reinforced,
@@ -3403,7 +3407,7 @@
 /turf/simulated/floor/wood/ebony,
 /area/fairpoint/police/cop)
 "Cp" = (
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/engineering/ce)
 "Cq" = (
 /obj/machinery/door/blast/shutters{
@@ -3492,6 +3496,13 @@
 "Dh" = (
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/patient_c)
+"Dm" = (
+/obj/abstract/map_data{
+	height = 3
+	},
+/obj/abstract/level_data/main_level,
+/turf/simulated/wall/concrete,
+/area/fairpoint/street/outskirts)
 "Dn" = (
 /obj/structure/sign/warning/secure_area,
 /turf/simulated/wall/r_wall,
@@ -4014,7 +4025,7 @@
 /area/fairpoint/police/cop)
 "Hl" = (
 /obj/machinery/door/window/southright,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/engineering/ce)
 "Hm" = (
 /obj/effect/floor_decal/corner/paleblue/full{
@@ -4035,7 +4046,7 @@
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/cmo)
 "Hp" = (
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techmaint,
 /area/fairpoint/police/cop)
 "Hs" = (
 /obj/structure/window/reinforced{
@@ -5208,7 +5219,7 @@
 /turf/simulated/floor/tiled,
 /area/fairpoint/police/detectives_office)
 "RT" = (
-/turf/exterior/open,
+/turf/simulated/open,
 /area/fairpoint/medical/medbay)
 "RW" = (
 /obj/structure/bed/chair/armchair/lime{
@@ -5773,7 +5784,7 @@
 /obj/structure/sealant_rack,
 /obj/item/gun/launcher/sealant,
 /obj/machinery/camera/network/engineering,
-/turf/simulated/floor/tiled/monofloor,
+/turf/simulated/floor/tiled/techfloor,
 /area/fairpoint/engineering/ce)
 "Wr" = (
 /obj/structure/door/walnut{
@@ -6362,7 +6373,7 @@ gi
 gi
 gi
 yC
-yC
+Dm
 "}
 (2,1,1) = {"
 mS
@@ -26341,13 +26352,13 @@ nB
 nB
 nB
 Yg
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 Yg
 Yg
@@ -26500,15 +26511,15 @@ nB
 nB
 nB
 Yg
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -26659,15 +26670,15 @@ nB
 nB
 nB
 Yg
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -26818,15 +26829,15 @@ nB
 nB
 nB
 Yg
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -26977,15 +26988,15 @@ Yg
 Yg
 Yg
 Yg
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -27136,15 +27147,15 @@ wS
 wS
 wS
 BI
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -27295,15 +27306,15 @@ wS
 wS
 wS
 BI
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -27454,15 +27465,15 @@ wS
 wS
 wS
 BI
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -27613,15 +27624,15 @@ wS
 wS
 wS
 BI
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -27772,15 +27783,15 @@ wS
 wS
 wS
 BI
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB
@@ -27931,15 +27942,15 @@ Qr
 Qr
 Qr
 BI
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
-SN
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
+tG
 Yg
 UB
 UB

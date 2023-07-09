@@ -611,6 +611,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/fairpoint/medical/exam_room)
+"uP" = (
+/obj/abstract/level_data/main_level,
+/turf/simulated/wall/r_wall/hull,
+/area/fairpoint/maintenance/arrivals)
 "uY" = (
 /obj/effect/floor_decal/corner/white/border{
 	dir = 4
@@ -1112,7 +1116,6 @@
 /turf/simulated/wall/iron,
 /area/turbolift/sewer_exit)
 "Pn" = (
-/obj/structure/lift/button,
 /turf/simulated/wall/concrete,
 /area/turbolift/metro_maintenance)
 "PD" = (
@@ -1597,7 +1600,7 @@ AM
 AM
 AM
 AM
-AM
+uP
 "}
 (2,1,1) = {"
 iR
