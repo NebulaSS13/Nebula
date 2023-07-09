@@ -154,16 +154,17 @@
 		map = next_map
 
 	if(smooth_single_tiles)
-		var/list/buddies = list()
+		var/lonely
 		for(var/x in 1 to limit_x - 1)
 			for(var/y in 1 to limit_y - 1)
 				var/mapcell = get_map_cell(x,y)
-				var/list/neighbors = get_neighbors(x, y)
-				buddies.Cut()
+				var/list/neighbors = get_neighbors(x, y, TRUE)
+				lonely = TRUE
 				for(var/cell in neighbors)
-					if(noise2value(map[cell]) == noise2value(map[mapcell]))
-						buddies |= cell
-				if(!length(buddies))
+					if(get_appropriate_path(map[cell]) == get_appropriate_path(map[mapcell]))
+						lonely = FALSE
+						break
+				if(lonely)
 					map[mapcell] = map[pick(neighbors)]
 
 /datum/random_map/noise/proc/get_neighbors(x, y, include_diagonals)
