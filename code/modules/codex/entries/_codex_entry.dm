@@ -14,7 +14,7 @@
 	/// If TRUE, don't create this entry in codex init. Where possible, consider using abstract_type or store_codex_entry = FALSE instead.
 	var/skip_hardcoded_generation = FALSE
 	/// If TRUE, associated_paths is set to include each path's subtypes in New().
-	var/include_subtypes = TRUE
+	var/include_subtypes = FALSE
 
 /datum/codex_entry/temporary
 	store_codex_entry = FALSE

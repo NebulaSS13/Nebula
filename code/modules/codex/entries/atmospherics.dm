@@ -5,6 +5,7 @@
 	<br>Pipes generally do not exchange thermal energy with the environment (ie. they do not heat up or cool down their turf), but heat exchange pipes are an exception. \
 	<br>To join three or more pipe segments, you can use a pipe manifold.\
 	<br>To terminate a pipeline, use a cap to prevent the gas escaping into the environment."
+	include_subtypes = TRUE
 	disambiguator = "atmospherics"
 
 //T-shaped valves

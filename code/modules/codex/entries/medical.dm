@@ -40,6 +40,7 @@
 	occupant will not use up the bag, and you can pick it back up.<br>\
 	<br>\
 	You can use a health analyzer to scan the occupant's vitals without opening the bag by clicking the occupied bag with the analyzer."
+	include_subtypes = TRUE
 
 /datum/codex_entry/autopump
 	associated_paths = list(/obj/item/auto_cpr/)

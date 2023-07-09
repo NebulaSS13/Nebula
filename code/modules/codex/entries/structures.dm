@@ -10,12 +10,14 @@
 	mechanics_text = "A powered and knotted wire underneath this will cause the grille (provided it is made of a conductive material) to shock anyone not wearing insulated gloves.<br>\
 	Wirecutters will turn the grille into rods instantly.  Grilles are typically made with steel rods."
 	disambiguator = "structure"
+	include_subtypes = TRUE
 
 /datum/codex_entry/lattice
 	associated_paths = list(/obj/structure/lattice)
 	mechanics_text = "Add a metal floor tile to build a floor on top of the lattice.<br>\
 	Lattices can be made by applying rods to a space tile."
 	disambiguator = "structure"
+	include_subtypes = TRUE
 
 /datum/codex_entry/bed
 	associated_paths = list(/obj/structure/bed)
