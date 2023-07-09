@@ -15,7 +15,6 @@
 			skill_info += "<h4>[level]</h4>[skill.levels[level]]"
 		var/datum/codex_entry/entry = new(
 			_display_name = "[skill.name] (skill)",
-			_associated_strings = list(skill.name),
 			_lore_text = skill.desc,
 			_mechanics_text = jointext(skill_info, "<br>"),
 		)
