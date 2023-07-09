@@ -37,7 +37,7 @@
 /datum/random_map/noise/ore/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	rare_val = cell_range * rare_val
 	deep_val = cell_range * deep_val
-	..(tx, ty, tz, (tlx / chunk_size), (tly / chunk_size), do_not_apply, do_not_announce)
+	..(tx / chunk_size, ty / chunk_size, tz, (tlx / chunk_size), (tly / chunk_size), do_not_apply, do_not_announce)
 
 /datum/random_map/noise/ore/check_map_sanity()
 
@@ -123,7 +123,7 @@
 /datum/random_map/noise/ore/rich
 	deep_val = 0.7
 	rare_val = 0.5
-	
+
 /datum/random_map/noise/ore/poor
 	deep_val = 0.8
 	rare_val = 0.7
