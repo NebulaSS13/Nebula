@@ -81,8 +81,6 @@
 
 	if(voice_sub)
 		return voice_sub
-	if(mind && mind.changeling && mind.changeling.mimicking)
-		return mind.changeling.mimicking
 	return real_name
 
 /mob/living/carbon/human/say_quote(var/message, var/decl/language/speaking = null)

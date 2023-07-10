@@ -49,8 +49,6 @@
 
 	var/has_been_rev = 0//Tracks if this mind has been a rev or not
 
-	var/datum/changeling/changeling		//changeling holder
-
 	var/rev_cooldown = 0
 
 	// the world.time since the mob has been brigged, or -1 if not at all
@@ -69,7 +67,6 @@
 /datum/mind/Destroy()
 	QDEL_NULL_LIST(memories)
 	QDEL_NULL_LIST(objectives)
-	QDEL_NULL(changeling)
 	SSticker.minds -= src
 	if(current?.mind == src)
 		current.mind = null
@@ -90,12 +87,9 @@
 /datum/mind/proc/transfer_to(mob/living/new_character)
 	if(!istype(new_character))
 		to_world_log("## DEBUG: transfer_to(): Some idiot has tried to transfer_to() a non mob/living mob. Please inform Carn")
-	if(current)					//remove ourself from our old body's mind variable
-		if(changeling)
-			current.remove_changeling_powers()
-			current.verbs -= /datum/changeling/proc/EvolutionMenu
-		current.mind = null
-
+	if(current) //remove ourself from our old body's mind variable
+		if(current?.mind == src)
+			current.mind = null
 		SSnano.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 	if(new_character.mind)		//remove any mind currently in our new body's mind variable
 		new_character.mind.current = null
@@ -107,9 +101,6 @@
 
 	if(learned_spells && learned_spells.len)
 		restore_spells(new_character)
-
-	if(changeling)
-		new_character.make_changeling()
 
 	if(active)
 		new_character.key = key		//now transfer the key to link the client to our new body
@@ -288,7 +279,7 @@
 			if(!def_value)//If it's a custom objective, it will be an empty string.
 				def_value = "custom"
 
-		var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "mercenary", "capture", "absorb", "custom")
+		var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "mercenary", "capture", "custom")
 		if (!new_obj_type) return
 
 		var/datum/objective/new_objective = null
@@ -346,7 +337,7 @@
 				new_objective = new /datum/objective/steal
 				new_objective.owner = src
 
-			if("download","capture","absorb")
+			if("download","capture")
 				var/def_num
 				if(objective&&objective.type==text2path("/datum/objective/[new_obj_type]"))
 					def_num = objective.target_amount
@@ -362,9 +353,6 @@
 					if("capture")
 						new_objective = new /datum/objective/capture
 						new_objective.explanation_text = "Accumulate [target_number] capture points."
-					if("absorb")
-						new_objective = new /datum/objective/absorb
-						new_objective.explanation_text = "Absorb [target_number] compatible genomes."
 				new_objective.owner = src
 				new_objective.target_amount = target_number
 
@@ -504,7 +492,6 @@
 	assigned_special_role = null
 	role_alt_title =        null
 	assigned_job =          null
-	changeling =            null
 	initial_account =       null
 	objectives =            list()
 	has_been_rev =          0

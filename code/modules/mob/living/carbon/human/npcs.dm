@@ -33,7 +33,7 @@
 
 /mob/living/carbon/human/blank/Initialize(mapload)
 	. = ..(mapload, SPECIES_HUMAN)
-	var/number = "[pick(possible_changeling_IDs)]-[rand(1,30)]"
+	var/number = "[pick(global.greek_letters)]-[rand(1,30)]"
 	fully_replace_character_name("Subject [number]")
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/blank_subject)
 	outfit.equip(src)

@@ -58,9 +58,6 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !is_in_stasis())
-		//Updates the number of stored chemicals for powers
-		handle_changeling()
-
 		last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
 
 		//Organs and blood
@@ -777,10 +774,6 @@
 		A.play_ambience(src)
 	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
 		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
-
-/mob/living/carbon/human/proc/handle_changeling()
-	if(mind && mind.changeling)
-		mind.changeling.regenerate()
 
 #define BASE_SHOCK_RECOVERY 1
 /mob/living/carbon/human/proc/handle_shock()
