@@ -235,8 +235,7 @@
 		storage_start.overlays += stored_continue
 		storage_start.overlays += stored_end
 
-		O.reset_offsets()
-		O.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[round((startpoint+endpoint)/2)+2-O.pixel_x],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED-O.pixel_y]"
+		O.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[round((startpoint+endpoint)/2)+2],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED]"
 		O.maptext = ""
 		O.hud_layerise()
 
