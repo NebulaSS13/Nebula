@@ -1070,7 +1070,7 @@
 	return DEXTERITY_BASE
 
 /mob/proc/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent = FALSE)
-	. = !!(get_dexterity(silent) & dex_level)
+	. = (get_dexterity(silent) & dex_level) == dex_level
 	if(!. && !silent)
 		to_chat(src, FEEDBACK_YOU_LACK_DEXTERITY)
 

@@ -1201,6 +1201,10 @@
 	var/check_slot = get_active_held_item_slot()
 	var/obj/item/organ/external/active_hand = check_slot && GET_EXTERNAL_ORGAN(src, check_slot)
 	if(!active_hand)
+		// todo: move dexterity onto inventory slot?
+		var/datum/inventory_slot/gripper/gripper = get_inventory_slot_datum(check_slot)
+		if(istype(gripper) && isnull(gripper.requires_organ_tag))
+			return species.get_manual_dexterity(src)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your [check_slot ? parse_zone(check_slot) : "hand"] is missing!"))
 		return DEXTERITY_NONE
