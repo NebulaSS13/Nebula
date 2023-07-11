@@ -105,3 +105,56 @@
 	else
 		pass("All item modifiers have valid icon states.")
 	return 1
+
+/datum/unit_test/icon_test/signs_shall_have_existing_icon_states
+	name = "ICON STATE - Signs shall have existing icon states"
+
+/datum/unit_test/icon_test/signs_shall_have_existing_icon_states/start_test()
+	var/list/failures = list()
+	for(var/sign_type in typesof(/obj/structure/sign))
+		var/obj/structure/sign/sign = sign_type
+		if(TYPE_IS_ABSTRACT(sign))
+			continue
+		var/check_state = initial(sign.icon_state)
+		if(!check_state)
+			failures += "[sign] - null icon_state"
+			continue
+		var/check_icon = initial(sign.icon)
+		if(!check_icon)
+			failures += "[sign] - null icon_state"
+			continue
+		if(!check_state_in_icon(check_state, check_icon, TRUE))
+			failures += "[sign] - missing icon_state '[check_state]' in icon '[check_icon]"
+	if(failures.len)
+		fail("Signs with missing icon states: [english_list(failures)]")
+	else
+		pass("All signs have valid icon states.")
+	return 1
+
+/datum/unit_test/icon_test/floor_decals_shall_have_existing_icon_states
+	name = "ICON STATE - Floor decals shall have existing icon states"
+	var/static/list/excepted_types = list(
+		/obj/effect/floor_decal/reset,
+		/obj/effect/floor_decal/undo
+	)
+/datum/unit_test/icon_test/floor_decals_shall_have_existing_icon_states/start_test()
+	var/list/failures = list()
+	for(var/decal_type in typesof(/obj/effect/floor_decal))
+		var/obj/effect/floor_decal/decal = decal_type
+		if(TYPE_IS_ABSTRACT(decal) || is_path_in_list(decal_type, excepted_types))
+			continue
+		var/check_state = initial(decal.icon_state)
+		if(!check_state)
+			failures += "[decal] - null icon_state"
+			continue
+		var/check_icon = initial(decal.icon)
+		if(!check_icon)
+			failures += "[decal] - null icon_state"
+			continue
+		if(!check_state_in_icon(check_state, check_icon, TRUE))
+			failures += "[decal] - missing icon_state '[check_state]' in icon '[check_icon]"
+	if(failures.len)
+		fail("Decals with missing icon states: [english_list(failures)]")
+	else
+		pass("All decals have valid icon states.")
+	return 1

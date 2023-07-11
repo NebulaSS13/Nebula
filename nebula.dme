@@ -1270,6 +1270,7 @@
 #include "code\game\objects\structures\displaycase.dm"
 #include "code\game\objects\structures\dogbed.dm"
 #include "code\game\objects\structures\door_assembly.dm"
+#include "code\game\objects\structures\double_sign.dm"
 #include "code\game\objects\structures\drain.dm"
 #include "code\game\objects\structures\emergency_dispenser.dm"
 #include "code\game\objects\structures\extinguisher.dm"

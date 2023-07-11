@@ -6,6 +6,7 @@
 	name = "painting"
 	desc = "A painting."
 	icon = 'icons/obj/signs/paintings.dmi'
+	abstract_type = /obj/structure/sign/painting
 
 ///A painting of amonkey
 /obj/structure/sign/painting/monkey_painting
