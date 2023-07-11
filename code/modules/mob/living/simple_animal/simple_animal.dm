@@ -181,7 +181,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/Life()
 	if(is_aquatic && !submerged() && stat != DEAD)
 		walk(src, 0)
-		if(PENDING_STATUS(src, STAT_PARA))
+		if(!HAS_STATUS(src, STAT_PARA)) // gated to avoid redundant update_icon() calls.
 			SET_STATUS_MAX(src, STAT_PARA, 3)
 			update_icon()
 	. = ..()
@@ -272,9 +272,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(!loc)
 		return
 
-	// don't bother checking it twice if we got a supplied 0 val.
 	var/datum/gas_mixture/environment = loc.return_air()
 	if(environment)
+		// don't bother checking it twice if we got a supplied FALSE val.
 		if(atmos_suitable)
 			if(is_aquatic)
 				atmos_suitable = submerged()
