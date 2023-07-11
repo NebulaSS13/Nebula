@@ -1,0 +1,4 @@
+author: Penelope Haze
+delete-after: true
+changes:
+  - bugfix: Some exoplanet terrain should be generated more smoothly, as intended.
