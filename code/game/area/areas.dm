@@ -123,7 +123,7 @@ var/global/list/areas = list()
 	for(var/direction in global.cardinal)
 		var/turf/adjacent_turf = get_step(T, direction)
 		if(adjacent_turf)
-			T.update_registrations_on_adjacent_area_change()
+			adjacent_turf.update_registrations_on_adjacent_area_change()
 
 	T.last_outside_check = OUTSIDE_UNCERTAIN
 	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)

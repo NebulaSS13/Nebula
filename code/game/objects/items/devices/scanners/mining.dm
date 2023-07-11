@@ -4,6 +4,10 @@
 	var/list/resources
 	var/surveyed = FALSE
 
+/datum/extension/buried_resources/New(datum/holder, list/resource_list)
+	resources = resource_list
+	..()
+
 /obj/item/scanner/mining
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
@@ -20,10 +24,10 @@
 	. = ..()
 	to_chat(user,"A tiny indicator on the [src] shows it holds [survey_data] good explorer points.")
 
-/obj/item/scanner/mining/is_valid_scan_target(turf/simulated/T)
+/obj/item/scanner/mining/is_valid_scan_target(turf/T)
 	return istype(T)
 
-/obj/item/scanner/mining/scan(turf/simulated/T, mob/user)
+/obj/item/scanner/mining/scan(turf/T, mob/user)
 	scan_title = "Mineral scan data"
 	var/list/scan_results = mineral_scan_results(T)
 	if(!scan_data)
@@ -71,7 +75,7 @@
 	to_chat(user,"A tiny indicator on the [src] shows it holds [data] good explorer points.")
 
 //Returns list of two elements, 1 is text output, 2 is amoutn of GEP data
-/proc/mineral_scan_results(turf/simulated/target)
+/proc/mineral_scan_results(turf/target)
 	var/list/metals = list(
 		ORE_SURFACE = 0,
 		ORE_PRECIOUS = 0,

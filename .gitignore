@@ -45,6 +45,7 @@ tags
 # ignore built libs
 lib/*.dll
 lib/*.so
+/prof.dll
 
 # python
 *.pyc

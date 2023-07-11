@@ -20,6 +20,7 @@
 	exterior_atmos_temp = null
 	level_generators    = list(
 		/datum/random_map/noise/exoplanet/meat,
+		/datum/random_map/noise/ore/poor,
 	)
 
 ////////////////////////////////////////////////////////////////////////////
@@ -93,9 +94,6 @@
 	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/meat
 	prefered_level_data_per_z  = null
-	map_generators = list(
-		/datum/random_map/noise/ore/poor
-	)
 
 /datum/map_template/planetoid/random/exoplanet/meat/get_spawn_weight()
 	return 10
