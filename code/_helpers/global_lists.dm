@@ -79,11 +79,13 @@ var/global/list/string_slot_flags = list(
 	return 1
 
 // This is all placeholder procs for an eventual PR to change them to use decls.
-var/global/list/all_species = list()
-var/global/list/playable_species = list() // A list of ALL playable species, whitelisted, latejoin or otherwise.
+var/global/list/all_species
+var/global/list/playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise.
 /proc/build_species_lists()
-	global.all_species.Cut()
-	global.playable_species.Cut()
+	if(global.all_species)
+		return
+	global.all_species      = list()
+	global.playable_species = list()
 	var/list/species_decls = decls_repository.get_decls_of_subtype(/decl/species)
 	for(var/species_type in species_decls)
 		var/decl/species/species = species_decls[species_type]
