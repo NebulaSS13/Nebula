@@ -1,13 +1,13 @@
 /obj/item/book/manual/medical_diagnostics_manual
-	name = "Medical Diagnostics Manual"
+	name = "medical diagnostics manual"
 	desc = "First, do no harm. A detailed medical practitioner's guide."
 	icon_state = "bookMedical"
 	author = "Medical Department"
 	title = "Medical Diagnostics Manual"
-	url = "Guide_to_Medicine"
 
 /obj/item/book/manual/medical_diagnostics_manual/Initialize()
 	. = ..()
+	var/datum/codex_entry/ailments/ailment_entry = SScodex.get_codex_entry("Medical Ailments")
 	dat = {"<html>
 				<head>
 				<style>
@@ -39,17 +39,63 @@
 				</ol><br>
 
 				<HR COLOR="steelblue" WIDTH="60%" ALIGN="LEFT">
-
-				<iframe width='100%' height='100%' src="[url]&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
+				<h1>Ailments</h1>
+				<blockquote>[ailment_entry.lore_text]</blockquote>
+				[ailment_entry.mechanics_text]
 				</body>
 			</html>
 
 		"}
 
+/obj/item/book/manual/surgical
+	name = "surgery textbook"
+	icon_state = "bookMedical"
+	author = "Dr. Holmes MD"
+	title = "Guide to Surgery"
+
+/obj/item/book/manual/surgical/Initialize()
+	. = ..()
+	dat = {"<html>
+				<head>
+				<style>
+				h1 {font-size: 18px; margin: 15px 0px 5px;}
+				h2 {font-size: 15px; margin: 15px 0px 5px;}
+				h3 {font-size: 13px; margin: 15px 0px 5px;}
+				li {margin: 2px 0px 2px 15px;}
+				ul {margin: 5px; padding: 0px;}
+				ol {margin: 5px; padding: 0px 15px;}
+				body {font-size: 13px; font-family: Verdana;}
+				</style>
+				</head>
+				<body>
+				[SScodex.get_guide(/decl/codex_category/surgery)]
+				</body>
+			</html>
+			"}
+
 /obj/item/book/manual/chemistry_recipes
-	name = "Guide to Medicines & Drugs"
-	desc = "A thick manual of chemistry, formulae and recipes useful for a Chemist."
+	name = "pharmacy textbook"
+	desc = "A thick manual of chemistry, formulae and recipes useful for a chemist."
 	icon_state = "bookChemistry"
 	author = "Big Pharma"
 	title = "Guide to Medicines & Drugs"
-	url = "List_of_Medical_Chemicals"
+
+/obj/item/book/manual/chemistry_recipes/Initialize()
+	. = ..()
+	dat = {"<html>
+				<head>
+				<style>
+				h1 {font-size: 18px; margin: 15px 0px 5px;}
+				h2 {font-size: 15px; margin: 15px 0px 5px;}
+				h3 {font-size: 13px; margin: 15px 0px 5px;}
+				li {margin: 2px 0px 2px 15px;}
+				ul {margin: 5px; padding: 0px;}
+				ol {margin: 5px; padding: 0px 15px;}
+				body {font-size: 13px; font-family: Verdana;}
+				</style>
+				</head>
+				<body>
+				[SScodex.get_guide(/decl/codex_category/chemistry)]
+				</body>
+			</html>
+			"}
