@@ -30,7 +30,7 @@
 	var/mob/living/carbon/human/H = M
 	var/obj/item/gloves = M.get_equipped_item(slot_gloves_str)
 	if(slot == slot_gloves_str && istype(H) && gloves)
-		if(!ignore_equipped || gloves != src)
+		if(!ignore_equipped && gloves != src)
 			check_ring = gloves
 			if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !H.try_unequip(check_ring, src))
 				if(!disable_warning)

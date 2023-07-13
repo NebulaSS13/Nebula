@@ -475,15 +475,8 @@
 	if(!inv_slot)
 		return FALSE
 
-	var/already_equipped = inv_slot.get_equipped_item()
-	if(!ignore_equipped || already_equipped != src)
-		if(already_equipped)
-			if(!force)
-				return FALSE
-			inv_slot.clear_slot()
-			qdel(already_equipped)
-
-		if(!inv_slot.is_accessible(M, src, disable_warning))
+	if(!force)
+		if(!ignore_equipped && !inv_slot.is_accessible(M, src, disable_warning))
 			return FALSE
 
 	if(!inv_slot.can_equip_to_slot(M, src, disable_warning, ignore_equipped))
