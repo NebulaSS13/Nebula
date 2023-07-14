@@ -1,7 +1,7 @@
 /obj/turbolift_map_holder/fairpoint
 	depth = 2
-	lift_size_x = 3
-	lift_size_y = 3
+	lift_size_x = 4
+	lift_size_y = 4
 
 // POLICE STATION
 /obj/turbolift_map_holder/fairpoint/sec
