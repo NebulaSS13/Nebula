@@ -5,16 +5,12 @@
 	mob_size = MOB_SIZE_SMALL
 	emote_see = list("glubs", "blubs", "bloops")
 	base_animal_type = /mob/living/simple_animal/aquatic
-
-	// They only really care if there's water around them or not.
-	max_gas = list()
-	min_gas = list()
-	minbodytemp = 0
+	is_aquatic = TRUE
 
 	meat_type = /obj/item/chems/food/fish
-	meat_amount = 3
-	bone_amount = 5
-	skin_amount = 5
+	meat_amount = 1
+	bone_amount = 1
+	skin_amount = 2
 	bone_material = /decl/material/solid/bone/fish
 	skin_material = /decl/material/solid/skin/fish
 
@@ -23,18 +19,3 @@
 	default_pixel_x = rand(-12,12)
 	default_pixel_y = rand(-12,12)
 	reset_offsets(0)
-
-/mob/living/simple_animal/aquatic/Life()
-	if(!submerged())
-		walk(src, 0)
-		SET_STATUS_MAX(src, STAT_PARA, 3)
-	. = ..()
-	update_icon()
-
-/mob/living/simple_animal/aquatic/on_update_icon()
-	. = ..()
-	if(stat != DEAD && HAS_STATUS(src, STAT_PARA))
-		icon_state += "-dying"
-
-/mob/living/simple_animal/aquatic/handle_atmos(var/atmos_suitable = 1)
-	. = ..(atmos_suitable = submerged())

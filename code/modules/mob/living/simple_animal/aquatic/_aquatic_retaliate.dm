@@ -7,26 +7,11 @@
 	mob_size = MOB_SIZE_MEDIUM
 	emote_see = list("gnashes")
 	base_animal_type = /mob/living/simple_animal/aquatic // used for language, ignore actual type
+	is_aquatic = TRUE
 
-	// They only really care if there's water around them or not.
-	max_gas = list()
-	min_gas = list()
-	minbodytemp = 0
-
-/mob/living/simple_animal/hostile/retaliate/aquatic/Life()
-	if(!submerged())
-		walk(src, 0)
-		SET_STATUS_MAX(src, STAT_PARA, 3)
-	. = ..()
-	update_icon()
-
-/mob/living/simple_animal/hostile/retaliate/aquatic/on_update_icon()
-	. = ..()
-	if(stat != DEAD && HAS_STATUS(src, STAT_PARA))
-		icon_state += "-dying"
-
-/mob/living/simple_animal/hostile/retaliate/aquatic/handle_atmos(var/atmos_suitable = 1)
-	. = ..(atmos_suitable = submerged())
-
-/mob/living/simple_animal/hostile/retaliate/aquatic/can_act()
-	. = ..() && submerged()
+	meat_type = /obj/item/chems/food/fish
+	meat_amount = 3
+	bone_amount = 5
+	skin_amount = 5
+	bone_material = /decl/material/solid/bone/fish
+	skin_material = /decl/material/solid/skin/fish
