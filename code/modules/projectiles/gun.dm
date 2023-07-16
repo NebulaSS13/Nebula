@@ -616,6 +616,8 @@
 
 	sel_mode = next_mode
 	var/datum/firemode/new_mode = firemodes[sel_mode]
+	if(!istype(new_mode))
+		CRASH("Invalid or null gun mode selected by [type]: [new_mode || "NULL"]")
 	new_mode.apply_to(src)
 	playsound(loc, selector_sound, 50, 1)
 	return new_mode
