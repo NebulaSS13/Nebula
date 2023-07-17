@@ -184,3 +184,31 @@ SUBSYSTEM_DEF(materials)
 
 	if(istype(location.owner))
 		return location.owner.get_rock_color()
+
+// There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
+// This could eventually be removed if we used decls for damage types.
+/datum/controller/subsystem/materials/proc/get_armor_key(damage_type, damage_flags)
+	var/key
+	switch(damage_type)
+		if(BRUTE)
+			if(damage_flags & DAM_BULLET)
+				key = ARMOR_BULLET
+			else if(damage_flags & DAM_EXPLODE)
+				key = ARMOR_BOMB
+			else
+				key = ARMOR_MELEE
+		if(BURN)
+			if(damage_flags & DAM_LASER)
+				key = ARMOR_LASER
+			else if(damage_flags & DAM_EXPLODE)
+				key = ARMOR_BOMB
+			else
+				key = ARMOR_ENERGY
+		if(TOX)
+			if(damage_flags & DAM_BIO)
+				key = ARMOR_BIO // Otherwise just not blocked by default.
+		if(IRRADIATE)
+			key = ARMOR_RAD
+		if(ELECTROCUTE)
+			key = ARMOR_ENERGY
+	return key
