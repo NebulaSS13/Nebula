@@ -27,7 +27,7 @@
 	pref.skin_colour =            R.read("skin_colour")
 	pref.eye_colour =             R.read("eye_colour")
 	pref.skin_tone =              R.read("skin_tone")
-	pref.blood_type =                 R.read("b_type")
+	pref.blood_type =             R.read("b_type")
 	pref.appearance_descriptors = R.read("appearance_descriptors")
 	pref.bgstate =                R.read("bgstate")
 

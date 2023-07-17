@@ -150,7 +150,6 @@
 	skin_colour        = rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255))
 	eye_colour         = rgb(dna.GetUIValueRange(DNA_UI_EYES_R,255),  dna.GetUIValueRange(DNA_UI_EYES_G,255),  dna.GetUIValueRange(DNA_UI_EYES_B,255))
 	skin_tone          = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
-	update_eyes()
 
 	// TODO: update DNA gender to not be a bool - use bodytype and pronouns
 	//Body markings
@@ -180,9 +179,8 @@
 		f_style = beard_subtypes[beard]
 
 	force_update_limbs()
-	update_body()
+	update_hair(update_icons = FALSE)
 	update_eyes()
-	update_hair()
 	return TRUE
 
 // Used below, simple injection modifier.

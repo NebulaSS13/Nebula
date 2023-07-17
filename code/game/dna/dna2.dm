@@ -59,9 +59,9 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 /datum/dna
 	// READ-ONLY, GETS OVERWRITTEN
 	// DO NOT FUCK WITH THESE OR BYOND WILL EAT YOUR FACE
-	var/uni_identity="" // Encoded UI
-	var/struc_enzymes="" // Encoded SE
-	var/unique_enzymes="" // MD5 of player genetic marker value
+	var/uni_identity=""   // Encoded UI
+	var/struc_enzymes=""  // Encoded SE
+	var/unique_enzymes="" // MD5 of mob genetic marker value
 
 	var/fingerprint
 
