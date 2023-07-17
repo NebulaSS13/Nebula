@@ -30,7 +30,7 @@
 	show_ssd =               "quiescent"
 
 	base_prosthetics_model = null
-	available_bodytypes = list(/decl/bodytype/prosthetic/crystalline/alate)
+	available_bodytypes = list(/decl/bodytype/crystalline/alate)
 
 	description = "When human surveyors finally arrived at the outer reaches of explored space, they hoped to find \
 	new frontiers and new planets to exploit. They were largely not expecting to have entire expeditions lost \
@@ -117,7 +117,7 @@
 	name =        SPECIES_MANTID_GYNE
 	name_plural = "Kharmaan Gynes"
 
-	available_bodytypes = list(/decl/bodytype/prosthetic/crystalline/gyne)
+	available_bodytypes = list(/decl/bodytype/crystalline/gyne)
 	available_pronouns = list(/decl/pronouns/female)
 
 	gluttonous =              3

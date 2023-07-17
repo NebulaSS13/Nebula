@@ -1,4 +1,4 @@
-/decl/bodytype/prosthetic/crystalline/alate
+/decl/bodytype/crystalline/alate
 	name =              "alate"
 	bodytype_category = BODYTYPE_MANTID_SMALL
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
@@ -36,7 +36,7 @@
 
 	limb_mapping = list(BP_CHEST = list(BP_CHEST, BP_M_HAND))
 
-/decl/bodytype/prosthetic/crystalline/gyne
+/decl/bodytype/crystalline/gyne
 	name =              "gyne"
 	bodytype_category = BODYTYPE_MANTID_LARGE
 	icon_base =         'mods/species/ascent/icons/species/body/gyne/body.dmi'
@@ -58,7 +58,7 @@
 		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid,
 	)
 
-/decl/bodytype/prosthetic/crystalline/gyne/Initialize()
+/decl/bodytype/crystalline/gyne/Initialize()
 	equip_adjust = list(
 		BP_L_HAND = list(
 			"[NORTH]" = list("x" = -4, "y" = 12),

@@ -1,4 +1,4 @@
-/decl/bodytype/prosthetic/crystalline/adherent
+/decl/bodytype/crystalline/adherent
 	name = "turquoise"
 	desc = "A gleaming crystalline mass."
 	bodytype_category =         BODYTYPE_ADHERENT
@@ -46,7 +46,7 @@
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
 
-/decl/bodytype/prosthetic/crystalline/adherent/Initialize()
+/decl/bodytype/crystalline/adherent/Initialize()
 	equip_adjust = list(
 		"[BP_L_HAND]" = list(
 			"[NORTH]" = list("x" = 0, "y" = 14),
@@ -99,30 +99,34 @@
 	)
 	. = ..()
 
-/decl/bodytype/prosthetic/crystalline/adherent/emerald
+/decl/bodytype/crystalline/adherent/apply_bodytype_organ_modifications(obj/item/organ/org)
+	. = ..()
+	BP_SET_PROSTHETIC(org)
+
+/decl/bodytype/crystalline/adherent/emerald
 	name = "emerald"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_emerald.dmi'
 
-/decl/bodytype/prosthetic/crystalline/adherent/amethyst
+/decl/bodytype/crystalline/adherent/amethyst
 	name = "amethyst"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_amethyst.dmi'
 
-/decl/bodytype/prosthetic/crystalline/adherent/sapphire
+/decl/bodytype/crystalline/adherent/sapphire
 	name = "sapphire"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_sapphire.dmi'
 
-/decl/bodytype/prosthetic/crystalline/adherent/ruby
+/decl/bodytype/crystalline/adherent/ruby
 	name = "ruby"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_ruby.dmi'
 
-/decl/bodytype/prosthetic/crystalline/adherent/topaz
+/decl/bodytype/crystalline/adherent/topaz
 	name = "topaz"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_topaz.dmi'
 
-/decl/bodytype/prosthetic/crystalline/adherent/quartz
+/decl/bodytype/crystalline/adherent/quartz
 	name = "quartz"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_quartz.dmi'
 
-/decl/bodytype/prosthetic/crystalline/adherent/jet
+/decl/bodytype/crystalline/adherent/jet
 	name = "jet"
 	icon_base = 'mods/species/bayliens/adherent/icons/body_jet.dmi'

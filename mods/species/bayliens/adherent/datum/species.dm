@@ -28,14 +28,14 @@
 
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
-		/decl/bodytype/prosthetic/crystalline/adherent,
-		/decl/bodytype/prosthetic/crystalline/adherent/emerald,
-		/decl/bodytype/prosthetic/crystalline/adherent/amethyst,
-		/decl/bodytype/prosthetic/crystalline/adherent/sapphire,
-		/decl/bodytype/prosthetic/crystalline/adherent/ruby,
-		/decl/bodytype/prosthetic/crystalline/adherent/topaz,
-		/decl/bodytype/prosthetic/crystalline/adherent/quartz,
-		/decl/bodytype/prosthetic/crystalline/adherent/jet
+		/decl/bodytype/crystalline/adherent,
+		/decl/bodytype/crystalline/adherent/emerald,
+		/decl/bodytype/crystalline/adherent/amethyst,
+		/decl/bodytype/crystalline/adherent/sapphire,
+		/decl/bodytype/crystalline/adherent/ruby,
+		/decl/bodytype/crystalline/adherent/topaz,
+		/decl/bodytype/crystalline/adherent/quartz,
+		/decl/bodytype/crystalline/adherent/jet
 	)
 	cyborg_noun =             null
 
