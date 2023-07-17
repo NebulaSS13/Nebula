@@ -92,9 +92,11 @@
 	var/last_fire_message_time
 
 /obj/item/gun/Initialize()
-	. = ..()
+	// must have firemodes initialized prior to any update_icon_calls
+	// including reconsider_single_icon(), which is done in ..()
 	for(var/i in 1 to firemodes.len)
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
+	. = ..()
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 	if(scope_zoom)
@@ -628,9 +630,9 @@
 		. = 1
 
 /obj/item/gun/attack_self(mob/user)
-	var/datum/firemode/new_mode = switch_firemodes(user)
+	var/datum/firemode/new_mode = switch_firemodes()
 	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		new_mode = switch_firemodes(user)
+		new_mode = switch_firemodes()
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
