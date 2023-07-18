@@ -645,3 +645,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/handle_nutrition_and_hydration()
 	return // They need a reliable way to recover nutrition/hydration before this is made general.
+
+/mob/living/simple_animal/get_nutrition()
+	return get_max_nutrition()
+
+/mob/living/simple_animal/get_hydration()
+	return get_max_hydration()

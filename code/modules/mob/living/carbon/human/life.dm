@@ -526,13 +526,6 @@
 
 	return 1
 
-/mob/living/carbon/human/handle_nutrition_and_hydration()
-	if(nutrition > 0)
-		adjust_nutrition(-species.hunger_factor)
-	if(hydration > 0)
-		adjust_hydration(-species.thirst_factor)
-	..()
-
 /mob/living/carbon/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 		handle_hud_list()

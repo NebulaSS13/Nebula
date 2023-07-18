@@ -1290,3 +1290,30 @@
 		if(safety > FLASH_PROTECTION_NONE)
 			flash_strength = (flash_strength / 2)
 	. = ..()
+
+/mob/living/carbon/human/handle_nutrition_and_hydration()
+	..()
+	apply_nutrition_and_hydration_stressors()
+
+/mob/living/carbon/human/proc/apply_nutrition_and_hydration_stressors()
+	SHOULD_CALL_PARENT(TRUE)
+	var/nut =    get_nutrition()
+	var/maxnut = get_max_nutrition()
+	if(nut < (maxnut * 0.3))
+		add_stressor(/datum/stressor/hungry_very, STRESSOR_DURATION_INDEFINITE)
+	else
+		remove_stressor(/datum/stressor/hungry_very)
+		if(nut < (maxnut * 0.5))
+			add_stressor(/datum/stressor/hungry, STRESSOR_DURATION_INDEFINITE)
+		else
+			remove_stressor(/datum/stressor/hungry)
+	var/hyd =    get_hydration()
+	var/maxhyd = get_max_hydration()
+	if(hyd < (maxhyd * 0.3))
+		add_stressor(/datum/stressor/thirsty_very, STRESSOR_DURATION_INDEFINITE)
+	else
+		remove_stressor(/datum/stressor/thirsty_very)
+		if(hyd < (maxhyd * 0.5))
+			add_stressor(/datum/stressor/thirsty, STRESSOR_DURATION_INDEFINITE)
+		else
+			remove_stressor(/datum/stressor/thirsty)
