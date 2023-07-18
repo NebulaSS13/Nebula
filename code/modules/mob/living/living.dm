@@ -855,7 +855,7 @@ default behaviour is:
 	return nutrition
 
 /mob/living/proc/adjust_nutrition(var/amt)
-	set_nutrition(nutrition + amt)
+	set_nutrition(get_nutrition() + amt)
 
 /mob/living/proc/get_max_hydration()
 	return 500
@@ -867,7 +867,7 @@ default behaviour is:
 	hydration = clamp(amt, 0, get_max_hydration())
 
 /mob/living/proc/adjust_hydration(var/amt)
-	set_hydration(hydration + amt)
+	set_hydration(get_hydration() + amt)
 
 /mob/living/proc/has_chemical_effect(var/chem, var/threshold_over, var/threshold_under)
 	var/val = GET_CHEMICAL_EFFECT(src, chem)

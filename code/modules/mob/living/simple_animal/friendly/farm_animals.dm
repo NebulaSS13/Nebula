@@ -41,12 +41,13 @@
 		goat.visible_message(SPAN_NOTICE("\The [goat] calms down."))
 
 	var/obj/effect/vine/SV = locate() in goat.loc
-	if(SV && prob(60))
-		goat.visible_message(SPAN_NOTICE("\The [goat] eats the plants."))
-		SV.die_off(1)
-		var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in goat.loc
-		if(SP)
-			qdel(SP)
+	if(SV)
+		if(prob(60))
+			goat.visible_message(SPAN_NOTICE("\The [goat] eats the plants."))
+			SV.die_off(1)
+			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in goat.loc
+			if(SP)
+				qdel(SP)
 		else if(prob(20))
 			goat.visible_message(SPAN_NOTICE("\The [goat] chews on the plants."))
 		return

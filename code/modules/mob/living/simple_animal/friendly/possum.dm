@@ -28,8 +28,6 @@
 	ai = /datum/ai/opossum
 	var/is_angry = FALSE
 
-	var/is_angry = FALSE
-
 /datum/ai/opossum
 	expected_type = /mob/living/simple_animal/opossum
 /datum/ai/opossum/do_process(time_elapsed)

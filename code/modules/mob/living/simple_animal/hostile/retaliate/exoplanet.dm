@@ -1,12 +1,16 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast
 	ai = /datum/ai/beast
-	var/list/prey = list()
+	nutrition = 300
+	var/list/prey
+
+/mob/living/simple_animal/hostile/retaliate/beast/get_max_nutrition()
+	return 300
 
 /mob/living/simple_animal/hostile/retaliate/beast/ListTargets(var/dist = 7)
 	. = ..()
 	if(!length(.))
-		if(length(prey))
+		if(LAZYLEN(prey))
 			. = list()
 			for(var/weakref/W in prey)
 				var/mob/M = W.resolve()
@@ -15,7 +19,7 @@
 		else if(get_nutrition() < get_max_nutrition() * 0.75) //time to look for some food
 			for(var/mob/living/L in view(src, dist))
 				if(!attack_same && L.faction != faction)
-					prey |= weakref(L)
+					LAZYDISTINCTADD(prey, weakref(L))
 
 /datum/ai/beast
 	expected_type = /mob/living/simple_animal/hostile/retaliate/beast
@@ -25,7 +29,7 @@
 	var/nut = beast.get_nutrition()
 	var/max_nut = beast.get_max_nutrition()
 	if(nut > max_nut * 0.75 || beast.incapacitated())
-		beast.prey.Cut()
+		LAZYCLEARLIST(beast.prey)
 		return
 	for(var/mob/living/simple_animal/S in range(beast,1))
 		if(S == beast)

@@ -263,7 +263,7 @@
 			set_stat(UNCONSCIOUS)
 		else
 			set_stat(CONSCIOUS)
-		return 1
+		return TRUE
 
 /mob/living/proc/handle_disabilities()
 	handle_impaired_vision()
