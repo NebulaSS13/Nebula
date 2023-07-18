@@ -854,48 +854,6 @@
 	return FALSE
 
 
-// Similar to get_pulse, but returns only integer numbers instead of text.
-/mob/living/carbon/human/proc/get_pulse_as_number()
-	var/obj/item/organ/internal/heart/heart_organ = get_organ(BP_HEART, /obj/item/organ/internal/heart)
-	if(!heart_organ)
-		return 0
-
-	switch(pulse())
-		if(PULSE_NONE)
-			return 0
-		if(PULSE_SLOW)
-			return rand(40, 60)
-		if(PULSE_NORM)
-			return rand(60, 90)
-		if(PULSE_FAST)
-			return rand(90, 120)
-		if(PULSE_2FAST)
-			return rand(120, 160)
-		if(PULSE_THREADY)
-			return PULSE_MAX_BPM
-	return 0
-
-//generates realistic-ish pulse output based on preset levels as text
-/mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
-	var/obj/item/organ/internal/heart/heart_organ = get_organ(BP_HEART, /obj/item/organ/internal/heart)
-	if(!heart_organ)
-		// No heart, no pulse
-		return "0"
-	if(heart_organ.open && !method)
-		// Heart is a open type (?) and cannot be checked unless it's a machine
-		return "muddled and unclear; you can't seem to find a vein"
-
-	var/bpm = get_pulse_as_number()
-	if(bpm >= PULSE_MAX_BPM)
-		return method ? ">[PULSE_MAX_BPM]" : "extremely weak and fast, patient's artery feels like a thread"
-
-	return "[method ? bpm : bpm + rand(-10, 10)]"
-// output for machines ^	 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ output for people
-
-/mob/living/carbon/human/proc/pulse()
-	var/obj/item/organ/internal/heart/H = get_organ(BP_HEART, /obj/item/organ/internal/heart)
-	return H ? H.pulse : PULSE_NONE
-
 /mob/living/carbon/human/can_devour(atom/movable/victim, var/silent = FALSE)
 
 	if(!should_have_organ(BP_STOMACH))
@@ -949,7 +907,7 @@
 	. = ..()
 	var/obj/item/organ/internal/heart/H = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	if(H && !H.open)
-		. *= (!BP_IS_PROSTHETIC(H)) ? pulse()/PULSE_NORM : 1.5
+		. *= (!BP_IS_PROSTHETIC(H)) ? get_pulse()/PULSE_NORM : 1.5
 
 /mob/living/carbon/human/need_breathe()
 	if(mNobreath in mutations)

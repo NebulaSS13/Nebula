@@ -66,7 +66,7 @@
 			spawn(0)
 				user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
 				if(do_after(user, 15, src))
-					if(pulse() == PULSE_NONE)
+					if(get_pulse() == PULSE_NONE)
 						to_chat(user, "<span class='deadsay'>[use_He] [use_has] no pulse.</span>")
 					else
 						to_chat(user, "<span class='deadsay'>[use_He] [use_has] a pulse!</span>")

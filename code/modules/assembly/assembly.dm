@@ -40,7 +40,7 @@
 /obj/item/assembly/proc/pulsed(var/radio = 0)						//Called when another assembly acts on this one, var/radio will determine where it came from for wire calcs
 	return
 
-/obj/item/assembly/proc/pulse(var/radio = 0)						//Called when this device attempts to act on another device, var/radio determines if it was sent via radio or direct
+/obj/item/assembly/proc/get_pulse(var/radio = 0)						//Called when this device attempts to act on another device, var/radio determines if it was sent via radio or direct
 	return
 
 /obj/item/assembly/proc/toggle_secure()								//Code that has to happen when the assembly is un\secured goes here
@@ -75,7 +75,7 @@
 	return 1
 
 
-/obj/item/assembly/pulse(var/radio = 0)
+/obj/item/assembly/get_pulse(var/radio = 0)
 	if(holder && (wires & WIRE_PULSE))
 		holder.process_activation(src, 1, 0)
 	if(holder && (wires & WIRE_PULSE_SPECIAL))

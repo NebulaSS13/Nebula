@@ -117,13 +117,13 @@
 		if(H.status_flags & FAKEDEATH)
 			pulse_result = 0
 		else
-			pulse_result = H.get_pulse(GETPULSE_TOOL)
+			pulse_result = H.get_pulse_as_string(GETPULSE_TOOL)
 		pulse_result = "[pulse_result]bpm"
-		if(H.pulse() == PULSE_NONE)
+		if(H.get_pulse() == PULSE_NONE)
 			pulse_result = "<span class='scan_danger'>[pulse_result]</span>"
-		else if(H.pulse() < PULSE_NORM)
+		else if(H.get_pulse() < PULSE_NORM)
 			pulse_result = "<span class='scan_notice'>[pulse_result]</span>"
-		else if(H.pulse() > PULSE_NORM)
+		else if(H.get_pulse() > PULSE_NORM)
 			pulse_result = "<span class='scan_warning'>[pulse_result]</span>"
 	else
 		pulse_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
