@@ -24,6 +24,7 @@
 	4.) Use a wrench on to take the frame apart.<BR> \
 	5.) Use a welder to cut the frame into sheets."
 	disambiguator = "machine"
+	include_subtypes = TRUE
 
 /datum/codex_entry/computer/modular
 	associated_paths = list(/obj/machinery/computer/modular)
@@ -44,7 +45,7 @@
 	disambiguator = "machine"
 
 /datum/codex_entry/conveyor_switch
-	associated_paths = list(/obj/machinery/conveyor_switch,/obj/machinery/conveyor_switch/oneway,/obj/item/conveyor_switch_construct,/obj/item/conveyor_switch_construct/oneway)
+	associated_paths = list(/obj/machinery/conveyor_switch, /obj/machinery/conveyor_switch/oneway, /obj/item/conveyor_switch_construct, /obj/item/conveyor_switch_construct/oneway)
 	mechanics_text = "This device can connect to a number of conveyor belts and control their movement. A two-way switch will allow you to make the conveyors run in forward and reverse mode, the one-way switch will only allow one direction. Can be removed with a crowbar."
 	disambiguator = "machine"
 
@@ -59,7 +60,7 @@
 	disambiguator = "machine"
 
 /datum/codex_entry/disposal
-	associated_paths = list(/obj/machinery/disposal)
+	associated_paths = list(/obj/machinery/disposal/buildable)
 	mechanics_text = "A high-tech garbage bin. Inserting an item causes the disposal unit (after a delay) to pneumatically launch the item through a series of pipes leading to either a garbage processing room, or space, depending on the ship/station. Larger objects can be inserted via click+drag. <BR> You can remove a disposal unit by turning it off, using a screwdriver, then a welding tool, and removing the floor tile underneath it."
 	antag_text = "People can be inserted into the disposal unit. If they're capable of moving however, it's easy for them to get out. Be careful though, putting things in disposal units doesn't always mean they're gone forever. <BR>If you turn it off, it can be used to hide in. Just be careful no one turns it back on while you're still in there!"
 	disambiguator = "machine"
@@ -116,8 +117,9 @@
 	associated_paths = list(/obj/machinery/vending)
 	associated_strings = list("vending machine", "vendor")
 	mechanics_text = "A machine that dispenses items from a category of items at the user's selection.<BR>Vending machines sometimes require payment via an ID card, cash or charge card. Some dispense items for free, and such vending machines are usually access restricted. Items that have been dispensed can sometimes be returned simply by inserting it back into the vending machine by hand. Vending machines can also be restocked with an appropriate Vendor Restock, usually ordered via supply management, and then click+dragged onto the vending machine.<BR><BR>Vending machines can be <span codexlink='hacking'>hacked</span>.<BR><b>Vending machine hacking</b><BR>* The orange light shows if the vending machine is electrified.<BR>* The red light indicates whether or not the vending machine is firing out its contents randomly. Sometimes this can happen as a random event.<BR>* The green light indicates whether or not the vending machine is dispensing it's hidden inventory. Nearly every vending machine has a list of secret goods that are usually considered to be contraband.<BR>* The purple or yellow light shows whether or not the ID scanner for the vending machine is working. When this function is disabled, anyone can access the vending machine, even if it normally has restricted access."
-	antag_text = "Accessing the secret inventory of a vending machine can sometimes be very useful, especially for department focused machines."
+	antag_text = "Accessing the secret inventory of a vending machine can sometimes be very useful, especially for department-focused machines."
 	disambiguator = "machine"
+	include_subtypes = TRUE
 
 /datum/codex_entry/internet_uplink
 	associated_paths = list(/obj/machinery/internet_uplink, /obj/machinery/computer/internet_uplink)

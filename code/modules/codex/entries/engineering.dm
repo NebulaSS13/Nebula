@@ -17,7 +17,7 @@
 /datum/codex_entry/apc
 	associated_paths = list(/obj/machinery/power/apc)
 	mechanics_text = "An APC (Area Power Controller) regulates and supplies backup power for the area they are in. Their power channels are divided \
-	out into 'environmental' (Items that manipulate airflow and temperature), 'lighting' (the lights), and 'equipment' (Everything else that consumes power).  \
+	out into 'environmental' (items that manipulate airflow and temperature), 'lighting' (the lights), and 'equipment' (everything else that consumes power).  \
 	Power consumption and backup power cell charge can be seen from the interface, further controls (turning a specific channel on, off or automatic, \
 	toggling the APC's ability to charge the backup cell, or toggling power for the entire area via master breaker) first requires the interface to be unlocked \
 	with an ID with Engineering access or by one of the station's robots or the artificial intelligence."
@@ -29,7 +29,7 @@
 	mechanics_text = "Inflate by using it in your hand.  The inflatable barrier will inflate on your tile.  To deflate it, use the 'deflate' verb. Hitting this with any object will probably puncture and break it forever.<br>Walls are static, but doors may be clicked to open or close them. They only stop air while closed."
 
 /datum/codex_entry/welding_pack
-	associated_paths = list(/obj/item/chems/weldpack)
+	associated_paths = list(/obj/item/chems/weldpack, /obj/item/chems/weldpack/empty)
 	mechanics_text = "This pack acts as a portable source of welding fuel. Use a welder on it to refill its tank - but make sure it's not lit! You can use this kit on a fuel tank or appropriate reagent dispenser to replenish its reserves."
 	lore_text = "The Shenzhen Chain of 2133 was an industrial accident of noteworthy infamy that occurred at Earth's L3 Lagrange Point. An apprentice welder, working for the Shenzhen Space Fabrication Group, failed to properly seal her fuel port, triggering a chain reaction that spread from laborer to laborer, instantly vaporizing a crew of fourteen. Don't let this happen to you!"
 	antag_text = "In theory, you could hold an open flame to this pack and produce some pretty catastrophic results. The trick is getting out of the blast radius."
@@ -39,6 +39,7 @@
 	associated_paths = list(/obj/item/gripper)
 	mechanics_text = "Click an item to pick it up with your gripper. Use it as you would normally use anything in your hand. The Drop Item verb will allow you to release the item."
 	disambiguator = "equipment"
+	include_subtypes = TRUE
 
 /datum/codex_entry/diffuser_item
 	associated_paths = list(/obj/item/shield_diffuser)
@@ -47,8 +48,23 @@
 
 /datum/codex_entry/hacking
 	associated_strings = list("hacking")
-	mechanics_text = "Airlocks, vending machines, and various other machinery can be hacked by opening them up and fiddling with the wires. While it might sound like a unlawful deed (and it usually is) this process is also performed by engineers, usually to fix said criminal deeds. Hacking also benifits from the Electrical Engineering skill; A low skill may cause wires to tangle, and a high enough skill will let you examine wires to see what they do. <BR>Hacking makes use of several items:<BR>* Screwdriver, for opening maintenance panels.<BR>* Multitool, for pulsing wires (Optional but very useful)<BR>* Wirecutters, for cutting wires<BR>* Insulated gloves, to prevent electrocution (Optional but highly reccomended) <BR>* Crowbar, if you're hacking a door to open it.<BR><BR>The first step to most hacking procedures, is to use the screwdriver to open a maintenance panel. After, you can click on the machine to view the wires. You then use the multitool to pulse the wires, and in response some of the displayed information may change, causing certain effects to occur or allowing for certain benifits. If you don't have a multitool, you can cut the wires. Pulsing tends to cause temporary changes or toggles something, whereas cutting a wire is usually longer lasting, but this is not always the case. Note that the corresponding wires and effects are randomized between rounds of the game. You can also attatch a signaler to pulse wires remotely."
-	antag_text = "Practice somewhere quietly out of the way and learn the wires you need before doing it for real."
+	mechanics_text = "Airlocks, vending machines, and various other machinery can be hacked by opening them up and fiddling with the wires. \
+	While it might sound like a unlawful deed (and it usually is) this process is also performed by engineers, usually to fix said criminal deeds. \
+	Hacking also benefits from the <span codexlink='Electrical Engineering (skill)'>Electrical Engineering</span> skill: a low skill may cause wires to tangle, and a high enough skill will let you examine wires to see what they do. \
+	<BR>Hacking makes use of several items: \
+	<ul><li>a <span codexlink='" + TOOL_CODEX_SCREWDRIVER + "'>screwdriver</span>, for opening maintenance panels.</li> \
+	<li>a <span codexlink='" + TOOL_CODEX_MULTITOOL + "'>multitool</span>, for pulsing wires (optional for many tasks, but very useful)</li> \
+	<li><span codexlink='" + TOOL_CODEX_WIRECUTTERS + "'>wirecutters</span>, for cutting wires</li> \
+	<li>insulated gloves, to prevent electrocution (optional but highly recommended)</li> \
+	<li>a <span codexlink='" + TOOL_CODEX_CROWBAR + "'>crowbar</span>, if you're hacking a door to open it.</li></ul> \
+	<BR>The first step to most hacking procedures is to use the screwdriver to open a maintenance panel and access the wiring. \
+	After, you can click on the machine to view the wires. \
+	You then use the multitool to pulse the wires, and in response some of the displayed information may change, causing certain effects to occur or allowing for certain benefits. \
+	If you don't have a multitool, you can cut the wires. \
+	Pulsing tends to cause temporary changes or toggles something, whereas cutting a wire is usually longer lasting, but this is not always the case. \
+	Note that the corresponding wires and effects are randomized between rounds of the game. \
+	You can also attach a signaler to pulse wires remotely."
+	antag_text = "To avoid suspicion or accidents, practice quietly somewhere out of the way and learn the wires you need before doing it for real."
 
 /datum/codex_entry/solars
 	associated_paths = list(/obj/item/solar_assembly, /obj/machinery/power/solar, /obj/machinery/power/tracker, /obj/machinery/power/solar_control)
@@ -67,14 +83,15 @@
 	If at any point you need to move a solar panel, use a crowbar to remove the glass, a wrench to unsecure the assembly, and a wirecutter to remove the cables."
 
 /datum/codex_entry/cable
-	associated_paths = list(/obj/structure/cable/, /obj/item/stack/cable_coil)
+	associated_paths = list(/obj/structure/cable, /obj/item/stack/cable_coil)
 	associated_strings = list("cables")
-	mechanics_text = "Cable are used to transfer power and form power networks. Usually power is transfered via cables from a SMES to an APC for the majority of the ship/station. Cables also serve a purpose in constructing machinery, as a component. <BR>Hold a cable coil in one hand, and click it with the other to split the stack. Cables come in a variety of colours and can be painted using a cable painter. Right click on a cable coil to make cable restraints using 15 cables.<BR><BR> \
-	<B>Laying Cables</B><BR> \
-	* Cables can only be placed on plating. Tiles must be removed using a crowbar, if any.<BR> \
-	* When using a cable coil on the plating you are standing on, a cable 'knot' is created in the middle with the cable extending outwards in the direction you are facing.<BR> \
-	* When using a cable coil on an adjacent plating to the one you are standing upon, a knot is created with the cable extended towards you. <BR> \
-	* If you use a cable coil on a knot on an adjacent plating, the cable will be 'pulled' towards you from the knot end with the other end still in place, allowing you to curve cables for more complicated networks.<BR> \
-	* Knots are also used for certain machines to connect directly to a power network, usually by having the machine secured to the same plating as the knot is on, like the SMES. However, knots shouldn't exist within the network otherwise. Try to smooth those out. <BR>\
-	* To lay a cable between decks (z-levels), use a cable on an open space from the deck above, dropping it down to the level below."
+	mechanics_text = "Cables are used to transfer power and form power networks. Usually power is transfered via cables from a SMES to an APC for the majority of the ship/station. Cables also serve a purpose in constructing machinery, as a component. <BR>Hold a cable coil in one hand, and click it with the other to split the stack. Cables come in a variety of colours and can be painted using a cable painter. Right click on a cable coil to make cable restraints using 15 cables.<BR><BR> \
+	<B>Laying Cables</B><ul> \
+	<li>Cables can only be placed on plating. Tiles must be removed using a crowbar, if any.</li> \
+	<li>When using a cable coil on the plating you are standing on, a cable 'knot' is created in the middle with the cable extending outwards in the direction you are facing.</li> \
+	<li>When using a cable coil on an adjacent plating to the one you are standing upon, a knot is created with the cable extended towards you.</li> \
+	<li>If you use a cable coil on a knot on an adjacent plating, the cable will be 'pulled' towards you from the knot end with the other end still in place, allowing you to curve cables for more complicated networks.</li> \
+	<li>Knots are also used for certain machines to connect directly to a power network, usually by having the machine secured to the same plating as the knot is on, like the SMES. However, knots shouldn't exist within the network otherwise. Try to smooth those out.</li> \
+	<li>To lay a cable between decks (z-levels), use a cable on an open space from the deck above, dropping it down to the level below.</li></ul>"
 	antag_text = "Sometimes a carefully cut cable in the right place can cause power issues over a wide area once APCs start to run out. Just make sure to hide it after."
+	include_subtypes = TRUE

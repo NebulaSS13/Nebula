@@ -11,6 +11,10 @@
 	var/antag_text
 	var/disambiguator
 	var/list/categories
+	/// If TRUE, don't create this entry in codex init. Where possible, consider using abstract_type or store_codex_entry = FALSE instead.
+	var/skip_hardcoded_generation = FALSE
+	/// If TRUE, associated_paths is set to include each path's subtypes in New().
+	var/include_subtypes = FALSE
 
 /datum/codex_entry/temporary
 	store_codex_entry = FALSE
@@ -31,9 +35,19 @@
 			if(disambiguator)
 				thing_name = "[thing_name] ([disambiguator])"
 			LAZYDISTINCTADD(associated_strings, thing_name)
+		// Don't move this any earlier, adding strings for subtypes can cause overlaps.
+		if(include_subtypes)
+			var/new_assoc_paths = list()
+			for(var/path in associated_paths)
+				new_assoc_paths |= typesof(path)
+			associated_paths = new_assoc_paths
 		for(var/associated_path in associated_paths)
-			if(SScodex.entries_by_path[associated_path])
-				PRINT_STACK_TRACE("Trying to save codex entry for [name] by path [associated_path] but one already exists!")
+			// This fix assumes more specific codex entries always follow more general ones.
+			// TODO: Refactor to be order-agnostic.
+			var/datum/codex_entry/predecessor = SScodex.entries_by_path[associated_path]
+			if(predecessor)
+				log_debug("Trying to save codex entry for [name] by path [associated_path] but entry [predecessor.name] already uses it, overwriting.")
+				predecessor.associated_paths -= SScodex.entries_by_path[associated_path]
 			SScodex.entries_by_path[associated_path] = src
 
 	if(!name)
@@ -53,8 +67,12 @@
 			if(clean_string != associated_string)
 				associated_strings -= associated_string
 				associated_strings |= clean_string
-			if(SScodex.entries_by_string[clean_string])
-				PRINT_STACK_TRACE("Trying to save codex entry for [name] by string [clean_string] but one already exists!")
+			// This fix assumes more specific codex entries always follow more general ones.
+			// TODO: Refactor to be order-agnostic.
+			var/datum/codex_entry/predecessor = SScodex.entries_by_string[clean_string]
+			if(predecessor)
+				log_debug("Trying to save codex entry for [name] by string [clean_string] but entry [predecessor.name] already uses it, overwriting.")
+				predecessor.associated_strings -= clean_string
 			SScodex.entries_by_string[clean_string] = src
 
 	..()
@@ -103,14 +121,14 @@
 			. += header
 			. += "</span>"
 
-	. += "<span class='dmCodexBody'>"
+	. += "<div class='dmCodexBody'>"
 	if(lore_text)
-		. += "<p><span class='codexLore'>[TRIM_LINEBREAKS(lore_text)]</span></p>"
+		. += "<p><div class='codexLore'>[TRIM_LINEBREAKS(lore_text)]</div></p>"
 	if(mechanics_text)
-		. += "<h3>OOC Information</h3>\n<p><span class='codexMechanics'>[TRIM_LINEBREAKS(mechanics_text)]</span></p>"
+		. += "<h3>OOC Information</h3>\n<p><div class='codexMechanics'>[TRIM_LINEBREAKS(mechanics_text)]</div></p>"
 	if(antag_text && (!presenting_to || (presenting_to.mind && player_is_antag(presenting_to.mind))))
-		. += "<h3>Antagonist Information</h3>\n<p><span class='codexAntag'>[TRIM_LINEBREAKS(antag_text)]</span></p>"
-	. += "</span>"
+		. += "<h3>Antagonist Information</h3>\n<p><div class='codexAntag'>[TRIM_LINEBREAKS(antag_text)]</div></p>"
+	. += "</div>"
 
 	if(include_footer)
 		var/footer = get_codex_footer(presenting_to)

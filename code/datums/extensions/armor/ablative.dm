@@ -14,7 +14,7 @@
 	if(!(damage_type == BRUTE || damage_type == BURN))
 		return
 	if(armor_degradation_coef)
-		var/key = get_armor_key(damage_type, damage_flags)
+		var/key = SSmaterials.get_armor_key(damage_type, damage_flags)
 		var/damage_blocked = round(damage * blocked)
 		if(damage_blocked)
 			var/new_armor = max(0, get_value(key) - armor_degradation_coef * damage_blocked)

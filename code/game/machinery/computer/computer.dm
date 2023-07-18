@@ -24,9 +24,6 @@
 	overlay_layer = layer
 	update_icon()
 
-/obj/machinery/computer/get_codex_value()
-	return "computer"
-
 /obj/machinery/computer/emp_act(severity)
 	if(prob(20/severity)) set_broken(TRUE)
 	..()

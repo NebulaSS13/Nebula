@@ -54,12 +54,10 @@
 /obj/item/gun/energy/gun/nuclear/on_update_icon()
 	indicator_color = get_charge_color()
 	. = ..()
-	var/list/new_overlays = list()
 	var/reactor_icon = fail_counter ? "danger" : "clean"
-	new_overlays += mutable_appearance(icon, "[get_world_inventory_state()]_[reactor_icon]")
+	add_overlay("[get_world_inventory_state()]_[reactor_icon]")
 	var/datum/firemode/current_mode = firemodes[sel_mode]
-	new_overlays += mutable_appearance(icon, "[get_world_inventory_state()]_[current_mode.name]")
-	overlays += new_overlays
+	add_overlay("[get_world_inventory_state()]_[current_mode.name]")
 
 /obj/item/gun/energy/gun/nuclear/get_charge_state(var/initial_state)
 	return "[initial_state]_charge"

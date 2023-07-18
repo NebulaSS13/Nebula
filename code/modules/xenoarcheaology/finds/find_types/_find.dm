@@ -34,10 +34,6 @@ var/global/list/responsive_carriers = list(
 	if(!length(descriptors))
 		descriptors += "This item is completely [pick("alien","bizarre")]."
 
-	var/new_name = generate_name()
-	if(modification_flags & XENOFIND_APPLY_PREFIX)
-		new_name = "[pick(name_prefixes)] [new_name]"
-	I.SetName(new_name)
 	if(modification_flags & XENOFIND_REPLACE_ICON)
 		I.icon = new_icon()
 		I.has_inventory_icon = check_state_in_icon(ICON_STATE_INV, I.icon)
@@ -45,6 +41,7 @@ var/global/list/responsive_carriers = list(
 	I.desc = jointext(descriptors, "\n")
 	I.forceMove(location)
 	I.set_material(/decl/material/solid/metal/aliumium)
+	var/new_name = generate_name()
 	if(modification_flags & XENOFIND_APPLY_PREFIX)
 		new_name = "[pick(name_prefixes)] [new_name]"
 	I.SetName(new_name)
@@ -89,7 +86,7 @@ var/global/list/responsive_carriers = list(
 	var/material_descriptor
 	if(prob(40))
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
-	var/result = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of an alien alloy, all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality"
+	var/result = "\A [material_descriptor ? "[material_descriptor] [item_type]" : item_type] made of an alien alloy, all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality"
 	var/list/descriptors = list()
 	if(prob(30))
 		descriptors.Add("is encrusted with [pick("","synthetic ","multi-faceted ","uncut ","sparkling ") + pick("rubies","emeralds","diamonds","opals","lapiz lazuli")]")

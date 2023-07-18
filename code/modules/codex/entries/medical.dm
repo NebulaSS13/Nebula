@@ -6,14 +6,17 @@
 	Click your target with Grab intent, then click on the scanner to place them in it. Click the red terminal to operate. \
 	Right-click the scanner and click 'Eject Occupant' to remove them.  You can enter the scanner yourself in a similar way, using the 'Enter Body Scanner' \
 	verb."
+	disambiguator = "machinery"
 
 /datum/codex_entry/optable
 	associated_paths = list(/obj/machinery/optable)
 	mechanics_text = "Click your target with Grab intent, then click on the table with an empty hand, to place them on it.<br>Click on table after that to enable knockout function."
+	disambiguator = "machinery"
 
 /datum/codex_entry/operating
 	associated_paths = list(/obj/machinery/computer/operating)
 	mechanics_text = "This console gives information on the status of the patient on the adjacent operating table, notably their consciousness."
+	disambiguator = "machinery"
 
 /datum/codex_entry/sleeper
 	associated_paths = list(/obj/machinery/sleeper)
@@ -22,12 +25,13 @@
 	Click your target with Grab intent, then click on the sleeper to place them in it. Click the green console, with an empty hand, to open the menu. \
 	Click 'Start Dialysis' to begin filtering unwanted chemicals from the occupant's blood. The beaker contained will begin to fill with their \
 	contaminated blood, and will need to be emptied when full.<br>\
-	There's similar function for ingested reagents, 'Stomach Pump'.<br>\
+	There's similar functions for ingested or inhaled reagents, 'stomach pump' and 'lung lavage'.<br>\
 	<br>\
 	You can also inject common medicines directly into their bloodstream.\
 	<br>\
 	Right-click the cell and click 'Eject Occupant' to remove them.  You can enter the cell yourself by right clicking and selecting 'Enter Sleeper'. \
 	Note that you cannot control the sleeper while inside of it."
+	disambiguator = "machinery"
 
 /datum/codex_entry/cryobag
 	associated_paths = list(/obj/item/bodybag/cryobag, /obj/structure/closet/body_bag/cryobag)
@@ -40,6 +44,7 @@
 	occupant will not use up the bag, and you can pick it back up.<br>\
 	<br>\
 	You can use a health analyzer to scan the occupant's vitals without opening the bag by clicking the occupied bag with the analyzer."
+	include_subtypes = TRUE
 
 /datum/codex_entry/autopump
 	associated_paths = list(/obj/item/auto_cpr/)
