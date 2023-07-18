@@ -51,13 +51,33 @@
 
 	return 1
 
-/mob/living/proc/handle_nutrition_and_hydration()
+/mob/living/proc/experiences_hunger_and_thirst()
+	return TRUE
+
+/mob/living/proc/get_hunger_factor()
 	var/decl/species/my_species = get_species()
 	if(my_species)
-		if(nutrition > 0 && my_species.hunger_factor)
-			adjust_nutrition(-(my_species.hunger_factor))
-		if(hydration > 0 && my_species.thirst_factor)
-			adjust_hydration(-(my_species.thirst_factor))
+		return my_species.hunger_factor
+	return 0
+
+/mob/living/proc/get_thirst_factor()
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		return my_species.hunger_factor
+	return 0
+
+/mob/living/proc/handle_nutrition_and_hydration()
+	SHOULD_CALL_PARENT(TRUE)
+	if(!experiences_hunger_and_thirst())
+		return
+	if(get_nutrition() > 0)
+		var/hunger_factor = get_hunger_factor()
+		if(hunger_factor)
+			adjust_nutrition(-(hunger_factor))
+	if(get_hydration() > 0)
+		var/thirst_factor = get_thirst_factor()
+		if(thirst_factor)
+			adjust_hydration(-(thirst_factor))
 
 /mob/living/proc/handle_breathing()
 	return

@@ -1293,10 +1293,11 @@
 
 /mob/living/carbon/human/handle_nutrition_and_hydration()
 	..()
-	apply_nutrition_and_hydration_stressors()
 
-/mob/living/carbon/human/proc/apply_nutrition_and_hydration_stressors()
-	SHOULD_CALL_PARENT(TRUE)
+	// Apply stressors.
+	if(!client)
+		return
+
 	var/nut =    get_nutrition()
 	var/maxnut = get_max_nutrition()
 	if(nut < (maxnut * 0.3))

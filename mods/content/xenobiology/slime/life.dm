@@ -80,9 +80,13 @@
 	if(length(contents) != last_contents_length)
 		queue_icon_update()
 
-/mob/living/slime/handle_nutrition_and_hydration()
+/mob/living/slime/get_hunger_factor()
+	return (0.1 + 0.05 * is_adult)
 
-	adjust_nutrition(-(0.1 + 0.05 * is_adult))
+/mob/living/slime/get_thirst_factor()
+	return 0
+
+/mob/living/slime/handle_nutrition_and_hydration()
 
 	// Digest whatever we've got floating around in our goop.
 	if(length(contents))

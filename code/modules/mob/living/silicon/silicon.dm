@@ -75,8 +75,8 @@
 	QDEL_NULL_LIST(stock_parts)
 	return ..()
 
-/mob/living/silicon/handle_nutrition_and_hydration()
-	return // Doesn't really apply to robots. Maybe unify this with cells in the future.
+/mob/living/silicon/experiences_hunger_and_thirst()
+	return FALSE // Doesn't really apply to robots. Maybe unify this with cells in the future.
 
 /mob/living/silicon/get_nutrition()
 	return get_max_nutrition()
