@@ -1136,3 +1136,13 @@
 	if(!CO || !cell_use_power(CO.active_usage))
 		return FALSE
 	return TRUE
+
+/mob/living/silicon/robot/need_breathe()
+	return FALSE
+
+/mob/living/silicon/robot/should_breathe()
+	return FALSE
+
+/mob/living/silicon/robot/try_breathe()
+	return FALSE
+

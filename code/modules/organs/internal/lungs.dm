@@ -147,7 +147,7 @@
 		if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 			rupture()
 
-/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, var/forced)
+/obj/item/organ/internal/lungs/proc/handle_owner_breath(datum/gas_mixture/breath, var/forced)
 
 	if(!owner)
 		return 1

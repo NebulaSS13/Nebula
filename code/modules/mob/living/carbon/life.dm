@@ -7,9 +7,6 @@
 		germ_level++
 
 	if(stat != DEAD && !is_in_stasis())
-		//Breathing, if applicable
-		handle_breathing()
-
 		//Mutations and radiation
 		handle_mutations_and_radiation()
 

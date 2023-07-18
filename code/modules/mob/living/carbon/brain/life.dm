@@ -1,5 +1,8 @@
-/mob/living/carbon/brain/handle_breathing()
-	return
+/mob/living/carbon/brain/need_breathe()
+	return FALSE
+
+/mob/living/carbon/brain/should_breathe()
+	return FALSE
 
 /mob/living/carbon/brain/handle_mutations_and_radiation()
 	..()

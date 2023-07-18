@@ -893,20 +893,6 @@
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	return root_bodytype?.has_organ[organ_check]
 
-/mob/living/carbon/human/get_breath_volume()
-	. = ..()
-	var/obj/item/organ/internal/heart/H = get_organ(BP_HEART, /obj/item/organ/internal/heart)
-	if(H && !H.open)
-		. *= (!BP_IS_PROSTHETIC(H)) ? get_pulse()/PULSE_NORM : 1.5
-
-/mob/living/carbon/human/need_breathe()
-	if(mNobreath in mutations)
-		return FALSE
-	var/breathing_organ = get_bodytype().breathing_organ
-	if(!breathing_organ || !should_have_organ(breathing_organ))
-		return FALSE
-	return TRUE
-
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
 
@@ -1036,35 +1022,6 @@
 		. += 1
 	if(skill_check(SKILL_WEAPONS, SKILL_PROF))
 		. += 2
-
-/mob/living/carbon/human/can_drown()
-	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
-	if(!internal && (!istype(mask) || !mask.filters_water()))
-		var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
-		return (!L || L.can_drown())
-	return FALSE
-
-/mob/living/carbon/human/get_breath_from_environment(var/volume_needed = STD_BREATH_VOLUME, var/atom/location = src.loc)
-	var/datum/gas_mixture/breath = ..(volume_needed, location)
-	var/turf/T = get_turf(src)
-	if(istype(T) && T.is_flooded(lying) && should_have_organ(BP_LUNGS))
-		if(T == location) //Can we surface?
-			if(!lying && T.above && !T.above.is_flooded() && T.above.is_open() && can_overcome_gravity())
-				return ..(volume_needed, T.above)
-		var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
-		var/can_breathe_water = (istype(mask) && mask.filters_water()) ? TRUE : FALSE
-		if(!can_breathe_water)
-			var/obj/item/organ/internal/lungs/lungs = get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
-			if(lungs && lungs.can_drown())
-				can_breathe_water = TRUE
-		if(can_breathe_water)
-			if(!breath)
-				breath = new
-				breath.volume = volume_needed
-				breath.temperature = T.temperature
-			breath.adjust_gas(/decl/material/gas/oxygen, ONE_ATMOSPHERE*volume_needed/(R_IDEAL_GAS_EQUATION*T20C))
-			T.show_bubbles()
-	return breath
 
 /mob/living/carbon/human/fluid_act(var/datum/reagents/fluids)
 	species.fluid_act(src, fluids)
