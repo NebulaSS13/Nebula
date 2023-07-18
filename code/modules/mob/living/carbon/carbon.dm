@@ -319,24 +319,6 @@
 /mob/living/carbon/get_max_hydration()
 	return 400
 
-/mob/living/carbon/proc/set_nutrition(var/amt)
-	nutrition = clamp(amt, 0, get_max_nutrition())
-
-/mob/living/carbon/get_nutrition(var/amt)
-	return nutrition
-
-/mob/living/carbon/adjust_nutrition(var/amt)
-	set_nutrition(nutrition + amt)
-
-/mob/living/carbon/get_hydration(var/amt)
-	return hydration
-
-/mob/living/carbon/proc/set_hydration(var/amt)
-	hydration = clamp(amt, 0, get_max_hydration())
-
-/mob/living/carbon/adjust_hydration(var/amt)
-	set_hydration(hydration + amt)
-
 /mob/living/carbon/fluid_act(var/datum/reagents/fluids)
 	var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching.total_volume)
 	if(saturation > 0)
