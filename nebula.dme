@@ -3568,7 +3568,6 @@
 #include "maps\exodus\exodus_define.dm"
 #include "maps\ministation\ministation_define.dm"
 #include "maps\modpack_testing\modpack_testing_define.dm"
-#include "maps\nexus\nexus_define.dm"
 #include "maps\planets_testing\planets_testing_define.dm"
 #include "maps\random_ruins\exoplanet_ruins\crashed_pod\crashed_pod.dm"
 #include "maps\random_ruins\exoplanet_ruins\datacapsule\datacapsule.dm"
