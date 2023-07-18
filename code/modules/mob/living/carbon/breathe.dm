@@ -15,10 +15,10 @@
 
 	//First, check if we can breathe at all
 	if(handle_drowning() || (is_asystole() && !GET_CHEMICAL_EFFECT(src, CE_STABLE) && active_breathe)) //crit aka circulatory shock
-		losebreath = max(2, losebreath + 1)
+		ticks_since_last_successful_breath = max(2, ticks_since_last_successful_breath + 1)
 
-	if(losebreath>0) //Suffocating so do not take a breath
-		losebreath--
+	if(ticks_since_last_successful_breath>0) //Suffocating so do not take a breath
+		ticks_since_last_successful_breath--
 		if (prob(10) && !is_asystole() && active_breathe) //Gasp per 10 ticks? Sounds about right.
 			INVOKE_ASYNC(src, .proc/emote, "gasp")
 	else

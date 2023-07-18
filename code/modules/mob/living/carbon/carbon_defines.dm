@@ -7,7 +7,6 @@
 	var/pose = null
 	var/datum/reagents/metabolism/bloodstr
 	var/datum/reagents/metabolism/touching
-	var/losebreath = 0 //if we failed to breathe last tick
 
 	var/coughedtime = null
 	var/ignore_rads = FALSE

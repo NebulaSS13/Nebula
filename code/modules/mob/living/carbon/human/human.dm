@@ -478,7 +478,7 @@
 				brain.mind.transfer_to(src)
 				qdel(brain.loc)
 				break
-	losebreath = 0
+	ticks_since_last_successful_breath = 0
 	UpdateAppearance()
 	..()
 

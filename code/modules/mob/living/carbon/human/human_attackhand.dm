@@ -271,7 +271,7 @@
 		var/fail = L.handle_breath(breath, 1)
 		if(!fail)
 			if(!L.is_bruised())
-				losebreath = 0
+				ticks_since_last_successful_breath = 0
 			to_chat(src, SPAN_NOTICE("You feel a breath of fresh air enter your lungs. It feels good."))
 
 	// Again.

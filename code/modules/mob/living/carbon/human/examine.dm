@@ -60,7 +60,7 @@
 
 	if (src.stat)
 		msg += "<span class='warning'>[use_He] [use_is]n't responding to anything around [use_him] and seems to be unconscious.</span>\n"
-		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)
+		if((stat == DEAD || is_asystole() || src.ticks_since_last_successful_breath) && distance <= 3)
 			msg += "<span class='warning'>[use_He] [use_does] not appear to be breathing.</span>\n"
 		if(ishuman(user) && !user.incapacitated() && Adjacent(user))
 			spawn(0)
