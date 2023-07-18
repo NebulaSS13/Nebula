@@ -28,7 +28,7 @@
 /datum/ai/commanded/do_process(time_elapsed)
 	..()
 	var/mob/living/simple_animal/hostile/commanded/com = body
-	while(com.command_buffer.len > 0)
+	while(com.command_buffer.len > 1)
 		var/mob/speaker = com.command_buffer[1]
 		var/text = com.command_buffer[2]
 		var/filtered_name = lowertext(html_decode(com.name))
