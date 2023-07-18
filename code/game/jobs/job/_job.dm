@@ -9,7 +9,7 @@
 	var/current_positions = 0                 // How many players have this job
 	var/availablity_chance = 100              // Percentage chance job is available each round
 	var/guestbanned = FALSE                   // If set to 1 this job will be unavalible to guests
-	var/must_fill = FALSE                     // If set to 1 this job will be have priority over other job preferences. Do not reccommend on jobs with more that one position.
+	var/must_fill = FALSE                     // If set to 1 this job will be have priority over other job preferences. Do not recommend on jobs with more than one position.
 	var/not_random_selectable = FALSE         // If set to 1 this job will not be selected when a player asks for a random job.
 	var/description                           // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
 	var/list/event_categories                 // A set of tags used to check jobs for suitability for things like random event selection.

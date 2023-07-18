@@ -286,13 +286,13 @@
 	var/new_y = AM.y
 
 	//Get the position inside the destination level's bounds to teleport the thing to
-	if(T.x <= LDsrc.level_inner_min_x)
+	if(T.x < LDsrc.level_inner_min_x)
 		new_x = LDdst.level_inner_max_x
-	else if (T.x >= LDsrc.level_inner_max_x)
+	else if (T.x > LDsrc.level_inner_max_x)
 		new_x = LDdst.level_inner_min_x
-	else if (T.y <= LDsrc.level_inner_min_y)
+	else if (T.y < LDsrc.level_inner_min_y)
 		new_y = LDdst.level_inner_max_y
-	else if (T.y >= LDsrc.level_inner_max_y)
+	else if (T.y > LDsrc.level_inner_max_y)
 		new_y = LDdst.level_inner_min_y
 	else
 		return //If we're teleporting into the same spot just quit early

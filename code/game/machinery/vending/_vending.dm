@@ -126,9 +126,6 @@
 	product_records = null
 	return ..()
 
-/obj/machinery/vending/get_codex_value()
-	return "vendomat"
-
 /obj/machinery/vending/explosion_act(severity)
 	..()
 	if(!QDELETED(src))

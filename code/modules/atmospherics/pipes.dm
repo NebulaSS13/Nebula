@@ -1,6 +1,8 @@
 #define SOUND_ID "pipe_leakage"
 
 /obj/machinery/atmospherics/pipe
+	name = "atmospherics pipe" // mostly for codex purposes, subtypes will override it
+	abstract_type = /obj/machinery/atmospherics/pipe
 
 	use_power = POWER_USE_OFF
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER

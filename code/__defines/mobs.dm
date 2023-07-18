@@ -230,6 +230,9 @@
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
 
+// One 'unit' of taste sensitivity probability, used in mob/living/carbon/proc/ingest
+#define TASTE_DEGREE_PROB 15
+
 //Used by show_message() and emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2

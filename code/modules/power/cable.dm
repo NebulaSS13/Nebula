@@ -588,7 +588,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(get_amount() == 1)
-		to_chat(user, "A [singular_name] of cable.")
+		to_chat(user, "\A [singular_name] of cable.")
 	else if(get_amount() == 2)
 		to_chat(user, "Two [plural_name] of cable.")
 	else

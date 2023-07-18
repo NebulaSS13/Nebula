@@ -13,7 +13,7 @@
 	. = ..()
 	if(. && holding)
 		var/obj/item/gun/M = holding
-		return M.switch_firemodes(user)
+		return M.switch_firemodes()
 
 /obj/item/gun/projectile/automatic/get_hardpoint_status_value()
 	if(!isnull(ammo_magazine))

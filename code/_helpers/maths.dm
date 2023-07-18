@@ -137,12 +137,12 @@
 	mid = (mid - start) < 0 ? mid - start + 360 : mid - start
 	return mid <= end
 
-#define POLAR_TO_CART_X(R,T) ((R) * sin(T))
-#define POLAR_TO_CART_Y(R,T) ((R) * cos(T))
+#define POLAR_TO_BYOND_X(R,T) ((R) * sin(T))
+#define POLAR_TO_BYOND_Y(R,T) ((R) * cos(T))
 
 /proc/polar2turf(x, y, z, angle, distance)
-	var/x_offset = POLAR_TO_CART_X(distance, angle)
-	var/y_offset = POLAR_TO_CART_Y(distance, angle)
+	var/x_offset = POLAR_TO_BYOND_X(distance, angle)
+	var/y_offset = POLAR_TO_BYOND_Y(distance, angle)
 	return locate(CEILING(x + x_offset), CEILING(y + y_offset), z)
 
 /proc/get_turf_from_angle(x, y, z, angle, ideal_distance)

@@ -62,7 +62,7 @@
 	if(victim)
 		update_icon()
 	if(beep && victim && victim.pulse())
-		playsound(src, 'sound/machines/quiet_beep.ogg')
+		playsound(src, 'sound/machines/quiet_beep.ogg', 40)
 
 /obj/machinery/vitals_monitor/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(ishuman(over))

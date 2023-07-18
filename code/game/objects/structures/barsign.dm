@@ -1,4 +1,5 @@
 /obj/structure/sign/double/barsign
+	name = "barsign"
 	desc = "A jumbo-sized LED sign. This one seems to be showing its age."
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"

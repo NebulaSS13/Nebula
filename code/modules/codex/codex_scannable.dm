@@ -14,6 +14,7 @@ var/global/list/unlocked_codex_scannables = list()
 
 /datum/codex_entry/scannable
 	name = null
+	skip_hardcoded_generation = TRUE
 	var/secret_text
 	var/has_scannable_secrets = FALSE
 	var/worth_points = 1

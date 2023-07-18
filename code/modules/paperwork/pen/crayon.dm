@@ -48,7 +48,7 @@
 /obj/item/pen/crayon/attack(mob/living/M, mob/user)
 	if(istype(M) && M == user)
 		var/decl/tool_archetype/pen/parch = GET_DECL(TOOL_PEN)
-		playsound(src, 'sound/weapons/bite.ogg')
+		playsound(src, 'sound/weapons/bite.ogg', 40)
 		to_chat(M, SPAN_NOTICE("You take a bite of the crayon and swallow it."))
 		M.adjust_nutrition(1)
 		var/uses = get_tool_property(TOOL_PEN, TOOL_PROP_USES)
