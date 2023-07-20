@@ -122,7 +122,7 @@
 	else
 		new expandType(T, min(health, 30))
 
-/obj/effect/blob/proc/get_pulse(var/forceLeft, var/list/dirs)
+/obj/effect/blob/proc/do_pulse(var/forceLeft, var/list/dirs)
 	set waitfor = FALSE
 	sleep(4)
 	var/pushDir = pick(dirs)
@@ -133,7 +133,7 @@
 			expand(T)
 		return
 	if(forceLeft)
-		B.get_pulse(forceLeft - 1, dirs)
+		B.do_pulse(forceLeft - 1, dirs)
 
 /obj/effect/blob/proc/attack_living(var/mob/L)
 	if(!L)
@@ -272,7 +272,7 @@ regen() will cover update_icon() for this proc
 	process_core_health()
 	regen()
 	for(var/I in 1 to times_to_pulse)
-		get_pulse(20, global.alldirs)
+		do_pulse(20, global.alldirs)
 	attempt_attack(global.alldirs)
 	attempt_attack(global.alldirs)
 	blob_may_process = 1
