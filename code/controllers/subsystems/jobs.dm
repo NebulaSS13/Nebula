@@ -546,6 +546,9 @@ SUBSYSTEM_DEF(jobs)
 
 	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
 
+	if(job.description)
+		to_chat(H, SPAN_BOLD("[job.description]"))
+
 	if(job.supervisors)
 		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 

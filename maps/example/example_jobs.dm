@@ -8,6 +8,7 @@
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "your conscience"
+	description = "You need to goof off, have fun, and be silly."
 	economic_power = 1
 	access = list()
 	minimal_access = list()
