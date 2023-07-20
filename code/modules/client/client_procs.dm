@@ -243,6 +243,10 @@ var/global/list/localhost_addresses = list(
 	if(SSinput.initialized)
 		set_macros()
 
+	// If the map has a special logo, modify the server logo.
+	if(global.using_map.window_icon)
+		winset(src, "mainwindow", "icon=[global.using_map.window_icon]")
+
 	//////////////
 	//DISCONNECT//
 	//////////////
