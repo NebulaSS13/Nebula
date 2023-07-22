@@ -57,7 +57,7 @@
 	slot_id = BP_L_HAND_UPPER
 	requires_organ_tag = BP_L_HAND_UPPER
 	ui_label = "UL"
-	ui_loc = "CENTER:16,BOTTOM+1:14"
+	hand_sort_priority = 2
 
 /obj/item/organ/external/hand/insectoid/upper
 	name = "left raptorial"
@@ -81,7 +81,7 @@
 	slot_id = BP_R_HAND_UPPER
 	requires_organ_tag = BP_R_HAND_UPPER
 	ui_label = "UR"
-	ui_loc = "CENTER-1:16,BOTTOM+1:14"
+	hand_sort_priority = 2
 
 /obj/item/organ/external/hand/right/insectoid/upper
 	name = "right raptorial"

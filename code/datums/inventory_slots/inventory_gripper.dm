@@ -1,4 +1,5 @@
 /datum/inventory_slot/gripper
+	var/hand_sort_priority = 1
 	var/can_use_held_item = TRUE
 	// For reference, grippers do not use ui_loc, they have it set dynamically during /datum/hud/proc/rebuild_hands()
 
@@ -19,6 +20,9 @@
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(owner, slot_id)
 		return "[pronouns.He] [pronouns.is] holding [_holding.get_examine_line()] in [pronouns.his] [E?.name || lowertext(slot_name)]."
 
+/datum/inventory_slot/gripper/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
+	return ..() && user.check_dexterity(DEXTERITY_GRIP)
+
 // Hand subtypes below
 // Mouths are used by diona nymphs and Ascent babies to eat stuff, not just hold stuff in the mouth.
 /datum/inventory_slot/gripper/mouth
@@ -26,6 +30,7 @@
 	slot_id = BP_MOUTH
 	requires_organ_tag = null
 	can_use_held_item = FALSE
+	hand_sort_priority = 3
 
 /datum/inventory_slot/gripper/mouth/can_equip_to_slot(mob/user, obj/item/prop, disable_warning)
 	. = ..() && prop.w_class <= user.can_pull_size

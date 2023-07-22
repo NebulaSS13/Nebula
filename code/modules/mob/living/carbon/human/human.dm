@@ -1209,7 +1209,7 @@
 		dex_malus = round(clamp(round(getBrainLoss()-config.dex_malus_brainloss_threshold)/10, DEXTERITY_NONE, DEXTERITY_FULL))
 	if(!active_hand)
 		if(!silent)
-			to_chat(src, SPAN_WARNING("Your hand is missing!"))
+			to_chat(src, SPAN_WARNING("Your [parse_zone(force_active_hand)] is missing!"))
 		return FALSE
 	if(!active_hand.is_usable())
 		to_chat(src, SPAN_WARNING("Your [active_hand.name] is unusable!"))
