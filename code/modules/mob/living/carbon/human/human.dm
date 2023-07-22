@@ -369,7 +369,7 @@
 		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(istype(I))
 			return I.darksight_range
-	return get_species().darksight_range
+	return root_bodytype.darksight_range
 
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
 	if(full_body)

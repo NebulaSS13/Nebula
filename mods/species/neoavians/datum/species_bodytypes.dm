@@ -5,6 +5,7 @@
 	blood_overlays =    'mods/species/neoavians/icons/blood_avian.dmi'
 	limb_blend =        ICON_MULTIPLY
 	bodytype_flag =     BODY_FLAG_AVIAN
+	eye_icon = 'mods/species/neoavians/icons/eyes.dmi'
 	appearance_flags =  HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	base_color = "#252525"
 	base_eye_color = "#f5c842"

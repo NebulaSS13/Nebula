@@ -12,24 +12,30 @@
 	max_damage = 45
 	z_flags = ZMM_MANGLE_PLANES
 
-	var/contaminant_guard = 0
 	var/eye_colour = COLOR_BLACK
-	var/innate_flash_protection = FLASH_PROTECTION_NONE
-	var/eye_icon = 'icons/mob/human_races/species/default_eyes.dmi'
-	var/apply_eye_colour = TRUE
 	var/tmp/last_cached_eye_colour
 	var/tmp/last_eye_cache_key
-	var/flash_mod
-	var/darksight_range
-	var/eye_blend = ICON_ADD
+
+/obj/item/organ/internal/eyes/proc/get_innate_flash_protection()
+	return bodytype.eye_innate_flash_protection
+
+/obj/item/organ/internal/eyes/proc/get_flash_mod()
+	return bodytype.eye_flash_mod
+
+/obj/item/organ/internal/eyes/proc/get_darksight_range()
+	return bodytype.eye_darksight_range
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
 	bodytype = /decl/bodytype/prosthetic/basic_human
 	organ_properties = ORGAN_PROP_PROSTHETIC
 	icon = 'icons/obj/robot_component.dmi'
-	flash_mod = 1
-	darksight_range = 2
+
+/obj/item/organ/internal/eyes/robot/get_flash_mod()
+	return 1
+
+/obj/item/organ/internal/eyes/robot/get_darksight_range()
+	return 2
 
 /obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	. = ..()
@@ -38,17 +44,17 @@
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = eye_colour
-	last_eye_cache_key = "[type]-[eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
+	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
 	return last_eye_cache_key
 
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
 	var/cache_key = get_eye_cache_key()
 	if(!human_icon_cache[cache_key])
-		var/icon/eyes_icon = icon(icon = eye_icon, icon_state = "")
+		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = "")
 		if(bodytype.eye_offset)
 			eyes_icon.Shift(NORTH, bodytype.eye_offset)
-		if(apply_eye_colour)
-			eyes_icon.Blend(last_cached_eye_colour, eye_blend)
+		if(bodytype.apply_eye_colour)
+			eyes_icon.Blend(last_cached_eye_colour, bodytype.eye_blend)
 		human_icon_cache[cache_key] = eyes_icon
 	return human_icon_cache[cache_key]
 
@@ -83,13 +89,8 @@
 	if(is_broken())
 		owner.set_status(STAT_BLIND, 20)
 
-/obj/item/organ/internal/eyes/set_species(species_name)
-	. = ..()
-	flash_mod 		= species.flash_mod
-	darksight_range = species.darksight_range
-
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
-	return (flash_protection + innate_flash_protection)
+	return (flash_protection + bodytype.eye_innate_flash_protection)
 
 /obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
 	return -1

@@ -73,9 +73,6 @@
 /decl/species/neoavian/get_holder_color(var/mob/living/carbon/human/H)
 	return H.skin_colour
 
-/obj/item/organ/internal/eyes/avian
-	eye_icon = 'mods/species/neoavians/icons/eyes.dmi'
-
 /decl/hierarchy/outfit/job/generic/assistant/avian
 	name = "Job - Avian Assistant"
 	uniform = /obj/item/clothing/under/avian_smock/worker

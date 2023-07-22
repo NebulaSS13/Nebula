@@ -104,9 +104,5 @@
 
 	autohiss_exempt = list(LANGUAGE_TAJARA)
 
-/obj/item/organ/internal/eyes/taj
-	eye_blend = ICON_MULTIPLY
-	eye_icon = 'mods/species/bayliens/tajaran/icons/eyes.dmi'
-
 /decl/species/tajaran/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
 	. = H && H.change_skin_color(rgb(189, 171, 143))

@@ -5,6 +5,7 @@
 	icon_deformed =     'mods/species/vox/icons/body/deformed_body.dmi'
 	husk_icon =         'mods/species/vox/icons/body/husk.dmi'
 	blood_overlays =    'mods/species/vox/icons/body/blood_overlays.dmi'
+	eye_icon =          'mods/species/vox/icons/body/soldier/eyes.dmi'
 	bodytype_flag =     BODY_FLAG_VOX
 	limb_blend =        ICON_MULTIPLY
 	appearance_flags =  HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR

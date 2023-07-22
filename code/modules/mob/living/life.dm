@@ -290,22 +290,22 @@
 		return
 
 	// No loc or species means we should just assume no adjustment.
-	var/decl/species/species = get_species()
+	var/decl/bodytype/my_bodytype = get_bodytype()
 	var/turf/my_turf = get_turf(src)
-	if(!isturf(my_turf) || !species)
+	if(!isturf(my_turf) || !my_bodytype)
 		lighting_master.set_alpha(255)
 		return
 
 	// TODO: handling for being inside atoms.
-	var/target_value = 255 * (1-species.base_low_light_vision)
+	var/target_value = 255 * (1-my_bodytype.eye_base_low_light_vision)
 	var/loc_lumcount = my_turf.get_lumcount()
-	if(loc_lumcount < species.low_light_vision_threshold)
-		target_value = round(target_value * (1-species.low_light_vision_effectiveness))
+	if(loc_lumcount < my_bodytype.eye_low_light_vision_threshold)
+		target_value = round(target_value * (1-my_bodytype.eye_low_light_vision_effectiveness))
 
 	if(lighting_master.alpha == target_value)
 		return
 
-	var/difference = round((target_value-lighting_master.alpha) * species.low_light_vision_adjustment_speed)
+	var/difference = round((target_value-lighting_master.alpha) * my_bodytype.eye_low_light_vision_adjustment_speed)
 	if(abs(difference) > 1)
 		target_value = lighting_master.alpha + difference
 	lighting_master.set_alpha(target_value)

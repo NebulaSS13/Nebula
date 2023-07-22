@@ -45,6 +45,9 @@
 		BP_CELL =         /obj/item/organ/internal/cell/adherent,
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
+	eye_contaminant_guard = TRUE
+	eye_innate_flash_protection = FLASH_PROTECTION_MAJOR
+	eye_icon = 'mods/species/bayliens/adherent/icons/eyes.dmi'
 
 /decl/bodytype/crystalline/adherent/Initialize()
 	equip_adjust = list(

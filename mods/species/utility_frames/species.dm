@@ -63,9 +63,6 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/obj/item/organ/internal/eyes/robot/utility_frame
-	eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
-
 /obj/item/organ/external/head/utility_frame
 	glowing_eyes = TRUE
 

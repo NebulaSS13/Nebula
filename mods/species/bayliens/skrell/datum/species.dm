@@ -31,7 +31,6 @@
 
 	burn_mod = 0.9
 	oxy_mod = 1.3
-	flash_mod = 1.2
 	toxins_mod = 0.8
 	siemens_coefficient = 1.3
 	warning_low_pressure = WARNING_LOW_PRESSURE * 1.4
@@ -41,8 +40,6 @@
 	water_soothe_amount = 5
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
-
-	darksight_range = 4
 
 	spawn_flags = SPECIES_CAN_JOIN
 
@@ -156,5 +153,3 @@
 	name = "amphibian eyes"
 	desc = "Large black orbs, belonging to some sort of giant frog by looks of it."
 	icon = 'mods/species/bayliens/skrell/icons/body/organs.dmi'
-	eye_icon = 'mods/species/bayliens/skrell/icons/body/eyes.dmi'
-	apply_eye_colour = FALSE

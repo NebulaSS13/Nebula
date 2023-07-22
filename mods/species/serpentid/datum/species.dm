@@ -38,7 +38,6 @@
 		/decl/bodytype/serpentid/green
 	)
 
-	darksight_range = 8
 	rarity_value = 4
 	hud_type = /datum/hud_data/serpentid
 	total_health = 200

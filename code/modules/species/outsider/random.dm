@@ -15,6 +15,11 @@
 	base_color  = RANDOM_RGB
 	. = ..()
 
+/decl/bodytype/alium/Initialize()
+	. = ..()
+	MULT_BY_RANDOM_COEF(eye_flash_mod, 0.5, 1.5)
+	eye_darksight_range = rand(1,8)
+
 /decl/species/alium
 	name = SPECIES_ALIEN
 	name_plural = "Humanoids"
@@ -53,7 +58,6 @@
 	MULT_BY_RANDOM_COEF(oxy_mod, 0.5, 1.5)
 	MULT_BY_RANDOM_COEF(toxins_mod, 0, 2)
 	MULT_BY_RANDOM_COEF(radiation_mod, 0, 2)
-	MULT_BY_RANDOM_COEF(flash_mod, 0.5, 1.5)
 
 	if(brute_mod < 1 && prob(40))
 		species_flags |= SPECIES_FLAG_NO_MINOR_CUT
@@ -93,7 +97,6 @@
 	hazard_low_pressure += pressure_comfort_shift
 
 	//Misc traits
-	darksight_range = rand(1,8)
 	if(prob(40))
 		available_pronouns = list(/decl/pronouns)
 	if(prob(10))

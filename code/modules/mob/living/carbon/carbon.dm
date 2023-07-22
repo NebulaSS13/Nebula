@@ -349,6 +349,9 @@
 	RETURN_TYPE(/decl/species)
 	return species
 
+/mob/living/carbon/get_bodytype()
+	return bodytype
+
 /mob/living/carbon/get_species_name()
 	return species.name
 
