@@ -61,13 +61,11 @@
 
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"])
-		var/decl/natural_attack/attack = owner.get_unarmed_attack()
-		to_chat(owner, SPAN_NOTICE("Your current default attack is <b>[attack?.name || "unset"]</b>."))
-		if(attack)
-			var/summary = attack.summarize()
+		to_chat(owner, SPAN_NOTICE("Your current default attack is <b>[owner.default_attack?.name || "unset"]</b>."))
+		if(owner.default_attack)
+			var/summary = owner.default_attack.summarize()
 			if(summary)
 				to_chat(owner, SPAN_NOTICE(summary))
-
 		return
 
 	owner.set_default_unarmed_attack(src)
@@ -88,7 +86,7 @@
 		update_icon()
 
 /obj/screen/default_attack_selector/on_update_icon()
-	var/decl/natural_attack/attack = owner?.get_unarmed_attack()
+	var/decl/natural_attack/attack = owner?.default_attack
 	icon_state = attack?.selector_icon_state || "attack_none"
 
 /obj/screen/item_action

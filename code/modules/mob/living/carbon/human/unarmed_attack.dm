@@ -2,6 +2,7 @@ var/global/list/sparring_attack_cache = list()
 
 //Species unarmed attacks
 /decl/natural_attack
+	abstract_type = /decl/natural_attack
 	var/name
 	var/selector_icon_state
 	var/attack_verb = list("attacks")	// Empty hand hurt intent verb.
@@ -26,7 +27,7 @@ var/global/list/sparring_attack_cache = list()
 		for(var/check_icon_name in global.all_ui_styles)
 			var/check_icon = global.all_ui_styles[check_icon_name]
 			if(!check_state_in_icon(selector_icon_state, check_icon))
-				. += "missing state 'selector_icon_state' from icon '[check_icon]'"
+				. += "missing state '[selector_icon_state]' from icon '[check_icon]'"
 	else
 		. += "no selector_icon_state set"
 
@@ -338,6 +339,7 @@ var/global/list/sparring_attack_cache = list()
 /decl/natural_attack/light_strike
 	name = "light strike"
 	deal_halloss = 3
+	selector_icon_state = "attack_light_strike"
 	attack_noun = list("limb")
 	attack_verb = list("tapped", "lightly struck")
 	shredding = 0
