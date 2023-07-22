@@ -51,7 +51,7 @@
 
 /obj/screen/default_attack_selector
 	name = "default attack selector"
-	icon_state = "attack_selector"
+	icon_state = "attack_none"
 	screen_loc = ui_attack_selector
 	var/mob/living/carbon/human/owner
 
@@ -89,10 +89,7 @@
 
 /obj/screen/default_attack_selector/on_update_icon()
 	var/decl/natural_attack/attack = owner?.get_unarmed_attack()
-	if(!attack)
-		maptext = "<center>[STYLE_SMALLFONTS_OUTLINE("NONE", 5, COLOR_WHITE, COLOR_BLACK)]</center>"
-	else
-		maptext = "<center>[STYLE_SMALLFONTS_OUTLINE("[uppertext(attack.name)]", 5, COLOR_WHITE, COLOR_BLACK)]</center>"
+	icon_state = attack?.selector_icon_state || "attack_none"
 
 /obj/screen/item_action
 	var/obj/item/owner
