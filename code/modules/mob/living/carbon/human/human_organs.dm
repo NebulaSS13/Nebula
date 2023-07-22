@@ -171,9 +171,11 @@
 /mob/living/carbon/human/proc/handle_grasp()
 	for(var/hand_slot in get_held_item_slots())
 		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		if(!inv_slot?.requires_organ_tag)
+			continue
 		var/holding = inv_slot?.get_equipped_item()
 		if(holding)
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, hand_slot)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.requires_organ_tag)
 			if((!E || !E.is_usable() || E.is_parent_dislocated()) && try_unequip(holding))
 				grasp_damage_disarm(E)
 

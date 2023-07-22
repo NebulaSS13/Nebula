@@ -113,7 +113,7 @@ var/global/list/special_channel_keys = list(
 
 /mob/proc/is_muzzled()
 	// Can't talk with something in your mouth.
-	var/datum/inventory_slot/mouth_slot = get_inventory_slot_datum(BP_HEAD)
+	var/datum/inventory_slot/mouth_slot = get_inventory_slot_datum(BP_MOUTH)
 	. = mouth_slot?.get_equipped_item()
 	if(!.)
 		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
