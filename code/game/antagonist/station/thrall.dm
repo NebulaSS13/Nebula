@@ -17,7 +17,7 @@
 
 /decl/special_role/beguiled/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance, var/mob/new_controller)
 	if(!new_controller)
-		return 0
+		return FALSE
 	. = ..()
 	if(.)
 		minion_controllers["\ref[player]"] = new_controller
