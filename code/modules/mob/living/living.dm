@@ -1113,3 +1113,7 @@ default behaviour is:
 
 /mob/living/proc/get_seconds_until_next_special_ability_string()
 	return ticks2readable(next_special_ability - world.time)
+
+/mob/living/proc/get_mob_footstep(var/footstep_type)
+	var/decl/species/my_species = get_species()
+	return my_species?.get_footstep(src, footstep_type)

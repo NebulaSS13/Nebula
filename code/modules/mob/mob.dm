@@ -1049,9 +1049,6 @@
 		return TRUE
 	return FALSE
 
-/mob/proc/get_footstep(var/footstep_type)
-	return
-
 /mob/proc/handle_embedded_and_stomach_objects()
 	return
 
