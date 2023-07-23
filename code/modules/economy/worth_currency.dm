@@ -16,7 +16,7 @@
 	marked_value = value
 	overlay = image(currency, state)
 	overlay.color = colour
-	overlay.appearance_flags |= RESET_COLOR | PIXEL_SCALE
+	overlay.appearance_flags |= RESET_COLOR
 	overlay.plane = FLOAT_PLANE
 	overlay.layer = FLOAT_LAYER
 	if(mark)

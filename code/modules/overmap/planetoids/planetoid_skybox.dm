@@ -51,7 +51,6 @@
 		return
 	var/image/secondary = image(skybox_icon, "water")
 	secondary.color = water_color
-	secondary.appearance_flags = PIXEL_SCALE
 	secondary.transform = secondary.transform.Turn(rand(0,360))
 	return secondary
 
