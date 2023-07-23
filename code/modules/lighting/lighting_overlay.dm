@@ -4,7 +4,7 @@
 	icon          = LIGHTING_ICON
 	icon_state    = LIGHTING_BASE_ICON_STATE
 	color         = LIGHTING_BASE_MATRIX
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	layer         = LIGHTING_LAYER
 	plane         = LIGHTING_PLANE
 	invisibility  = INVISIBILITY_LIGHTING

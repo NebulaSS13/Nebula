@@ -12,7 +12,7 @@
 	cinematic.icon_state = "station_intact"
 	cinematic.plane = HUD_PLANE
 	cinematic.layer = HUD_ABOVE_ITEM_LAYER
-	cinematic.mouse_opacity = 2
+	cinematic.mouse_opacity = MOUSE_OPACITY_PRIORITY
 	cinematic.screen_loc = "LEFT+1,BOTTOM"
 
 /datum/universal_state/nuclear_explosion/OnEnter()

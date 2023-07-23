@@ -43,7 +43,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_growing.dmi'
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_NORMAL
 
 	var/health = 10
 	var/max_health = 100
@@ -83,7 +83,7 @@
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD) == 2)
-		mouse_opacity = 2
+		mouse_opacity = MOUSE_OPACITY_PRIORITY
 		max_growth = VINE_GROWTH_STAGES
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		growth_type = seed.get_growth_type()

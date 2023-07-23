@@ -60,7 +60,7 @@
 		below.above = src
 
 	if (!(z_flags & (ZM_MIMIC_OVERWRITE|ZM_NO_OCCLUDE)) && mouse_opacity)
-		mouse_opacity = 2
+		mouse_opacity = MOUSE_OPACITY_PRIORITY
 
 	update_mimic(!mapload)	// Only recursively update if the map isn't loading.
 

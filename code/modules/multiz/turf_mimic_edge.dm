@@ -9,7 +9,7 @@
 /obj/effect/overlay/click_bait
 	name = "distant terrain"
 	desc = "You need to come over there to take a better look."
-	mouse_opacity = 2
+	mouse_opacity = MOUSE_OPACITY_PRIORITY
 
 ////////////////////////////////
 // Shared Mimic Edges

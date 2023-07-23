@@ -146,7 +146,7 @@
 	plane = DEFAULT_PLANE
 	pixel_x = 8
 	pixel_y = 4
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/aura/mechshield/Initialize(var/maploading, var/obj/item/mech_equipment/shields/holder)
 	. = ..()
@@ -375,7 +375,7 @@
 	var/obj/item/mech_equipment/ballistic_shield/shield = null
 	layer = MECH_UNDER_LAYER
 	plane = DEFAULT_PLANE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/aura/mech_ballistic/Initialize(maploading, obj/item/mech_equipment/ballistic_shield/holder)
 	. = ..()

@@ -10,7 +10,7 @@ var/global/datum/cinematic/cinematic = new
 /datum/cinematic/proc/station_explosion_cinematic(var/station_missed=0, var/datum/game_mode/override)
 	set waitfor = FALSE
 
-	if(cinematic_screen)	
+	if(cinematic_screen)
 		return	//already a cinematic in progress!
 
 	if(!override)
@@ -26,7 +26,7 @@ var/global/datum/cinematic/cinematic = new
 	cinematic_screen.icon_state = "station_intact"
 	cinematic_screen.plane = HUD_PLANE
 	cinematic_screen.layer = HUD_ABOVE_ITEM_LAYER
-	cinematic_screen.mouse_opacity = 0
+	cinematic_screen.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	cinematic_screen.screen_loc = "LEFT+1,BOTTOM"
 
 	//Let's not discuss how this worked previously.
