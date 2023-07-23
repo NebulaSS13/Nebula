@@ -29,7 +29,7 @@ var/global/list/zasdbgovl_dirzoneblock = list(
 	icon = 'icons/Testing/Zone.dmi'
 	invisibility = INVISIBILITY_OBSERVER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	plane = ABOVE_LIGHTING_PLANE
 	layer = FLY_LAYER
 
 /obj/effect/zasdbg/assigned

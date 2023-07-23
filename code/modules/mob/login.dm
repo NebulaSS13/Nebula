@@ -74,6 +74,7 @@
 	..()
 
 	my_client = client
+	create_renderers()
 
 	if(loc && !isturf(loc))
 		client.eye = loc
@@ -81,6 +82,7 @@
 	else
 		client.eye = src
 		client.perspective = MOB_PERSPECTIVE
+
 
 	if(eyeobj)
 		eyeobj.possess(src)

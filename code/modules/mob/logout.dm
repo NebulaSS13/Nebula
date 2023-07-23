@@ -5,6 +5,8 @@
 	global.player_list -= src
 	log_access("Logout: [key_name(src)]")
 
+	remove_renderers()
+
 	hide_client_images()
 	SStyping.set_indicator_state(client, FALSE)
 

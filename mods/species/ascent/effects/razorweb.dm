@@ -59,8 +59,8 @@
 	if(decays)
 		addtimer(CALLBACK(src, /obj/effect/razorweb/proc/decay), 15 MINUTES)
 
-	web = image(icon = icon, icon_state = "razorweb")
-	gleam = emissive_overlay(icon = icon, icon_state = "razorweb-gleam")
+	web = image(icon, "razorweb")
+	gleam = emissive_overlay(icon, "razorweb-gleam")
 	var/turf/T = get_turf(src)
 	if(T) last_light = T.get_lumcount()
 	icon_state = ""

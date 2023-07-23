@@ -245,7 +245,6 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 		for(var/neighbordir in global.cardinal)
 			if(neighbors & neighbordir)
 				add_overlay(neighbor_connectors["[neighbordir]"])
-				// emissive_overlay is not setting dir and setting plane/layer directly also causes dir to break :(
 				var/image/neighborglow = neighbor_connectors_glow["[neighbordir]"]
 				neighborglow.alpha = glow_alpha
 				add_overlay(neighborglow)

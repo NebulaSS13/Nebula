@@ -20,7 +20,6 @@
 	/// (BOOL) If it can be spawned normally
 	var/is_spawnable_type = FALSE
 
-
 	/// (DICTIONARY) A lazy map. The `key` is a MD5 player name and the `value` is the blood type.
 	var/list/blood_DNA
 	/// (BOOL) If this atom was bloodied before.
@@ -30,12 +29,10 @@
 	/// (1 | 2 | 3) If it shows up under UV light. 0 doesn't, 1 does, 2 is currently glowing due to UV light. TODO: Use defines
 	var/fluorescent
 
-
 	/// (LIST) A list of all mobs that are climbing or currently on this atom
 	var/list/climbers
 	/// (FLOAT) The climbing speed multiplier for this atom
 	var/climb_speed_mult = 1
-
 
 	/// (FLOAT) The horizontal scaling that should be applied.
 	var/icon_scale_x = 1
@@ -52,6 +49,8 @@
 	var/tmp/default_pixel_z
 	var/tmp/default_pixel_w
 
+	/// Stores overlays managed by update_overlays() to prevent removing overlays that were not added by the same proc
+	var/list/managed_overlays
 
 /**
 	Adjust variables prior to Initialize() based on the map
@@ -322,6 +321,12 @@
 	on_update_icon(arglist(args))
 	RAISE_EVENT(/decl/observ/updated_icon, src)
 
+/atom/movable/update_icon()
+	..()
+	var/emissive_blocker = update_emissive_blocker()
+	if (emissive_blocker)
+		add_overlay(emissive_blocker)
+
 /**
 	Update this atom's icon.
 
@@ -330,6 +335,11 @@
 /atom/proc/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE) //Don't call the stub plz
 	return
+
+/** Updates the overlays of the atom */
+/atom/proc/update_overlays()
+	SHOULD_CALL_PARENT(TRUE)
+	. = list()
 
 /// Return a list of all simulated atoms inside this one.
 /atom/proc/get_contained_external_atoms()

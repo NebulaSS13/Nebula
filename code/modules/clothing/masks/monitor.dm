@@ -53,7 +53,7 @@
 			monitor_state_index = initial(monitor_state_index)
 		var/check_state = "[overlay.icon_state]-[monitor_states[monitor_state_index]]"
 		if(check_state_in_icon(check_state, overlay.icon))
-			overlay.overlays +=  emissive_overlay(overlay.icon, check_state)
+			overlay.overlays += emissive_overlay(overlay.icon, check_state)
 	. = ..()
 
 /obj/item/clothing/mask/monitor/set_dir()

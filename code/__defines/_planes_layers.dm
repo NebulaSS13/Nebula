@@ -43,22 +43,23 @@ What is the naming convention for planes or layers?
 /*
 	from stddef.dm, planes & layers built into byond.
 
-	FLOAT_LAYER = -1
-	AREA_LAYER = 1
-	TURF_LAYER = 2
-	OBJ_LAYER = 3
-	MOB_LAYER = 4
-	FLY_LAYER = 5
-	EFFECTS_LAYER = 5000
-	TOPDOWN_LAYER = 10000
+	FLOAT_LAYER      = -1
+	AREA_LAYER       = 1
+	TURF_LAYER       = 2
+	OBJ_LAYER        = 3
+	MOB_LAYER        = 4
+	FLY_LAYER        = 5
+	EFFECTS_LAYER    = 5000
+	TOPDOWN_LAYER    = 10000
 	BACKGROUND_LAYER = 20000
-	EFFECTS_LAYER = 5000
-	TOPDOWN_LAYER = 10000
+	EFFECTS_LAYER    = 5000
+	TOPDOWN_LAYER    = 10000
 	BACKGROUND_LAYER = 20000
 	------
-
 	FLOAT_PLANE = -32767
 */
+
+#define LOWEST_PLANE -200
 
 #define CLICKCATCHER_PLANE -100
 
@@ -74,6 +75,8 @@ What is the naming convention for planes or layers?
 // Openspace uses planes -80 through -70.
 
 #define OVER_OPENSPACE_PLANE        -3
+
+#define BLACKNESS_PLANE                 0 //Blackness plane as per DM documentation.
 
 #define DEFAULT_PLANE                   0
 	#define PLATING_LAYER               1
@@ -167,23 +170,20 @@ What is the naming convention for planes or layers?
   #define LIGHTBULB_LAYER          1
   #define LIGHTING_LAYER           2
 
-#define EMISSIVE_PLANE           3 // For over-lighting overlays (ex. cigarette glows)
-  #define EMISSIVE_LAYER           1
-
-#define ABOVE_LIGHTING_PLANE     4 // laser beams, etc. that shouldn't be affected by darkness
+#define ABOVE_LIGHTING_PLANE     3 // laser beams, etc. that shouldn't be affected by darkness
   #define ABOVE_LIGHTING_LAYER     1
   #define BEAM_PROJECTILE_LAYER    2
   #define SUPERMATTER_WALL_LAYER   3
   #define OBFUSCATION_LAYER        4
 
-#define FULLSCREEN_PLANE         5 // for fullscreen overlays that do not cover the hud.
+#define FULLSCREEN_PLANE         4 // for fullscreen overlays that do not cover the hud.
   #define FULLSCREEN_LAYER         0
   #define DAMAGE_LAYER             1
   #define IMPAIRED_LAYER           2
   #define BLIND_LAYER              3
   #define CRIT_LAYER               4
 
-#define HUD_PLANE                6
+#define HUD_PLANE                5
   #define UNDER_HUD_LAYER          0
   #define HUD_BASE_LAYER           2
   #define HUD_ITEM_LAYER           3

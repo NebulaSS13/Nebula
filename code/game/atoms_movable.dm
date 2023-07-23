@@ -37,6 +37,11 @@
 	var/inertia_move_delay = 5
 	var/atom/movable/inertia_ignore
 
+	/// Either [EMISSIVE_BLOCK_NONE], [EMISSIVE_BLOCK_GENERIC], or [EMISSIVE_BLOCK_UNIQUE]
+	var/blocks_emissive = EMISSIVE_BLOCK_NONE
+	///Internal holder for emissive blocker object, DO NOT USE DIRECTLY. Use blocks_emissive
+	var/mutable_appearance/em_block
+
 // This proc determines if the instance is preserved when the process() despawn of crypods occurs.
 /atom/movable/proc/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
 	return FALSE

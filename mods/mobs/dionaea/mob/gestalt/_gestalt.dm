@@ -19,7 +19,7 @@
 	return TRUE
 
 /obj/structure/diona_gestalt/Initialize(var/mapload)
-	eyes_overlay = emissive_overlay(icon = icon, icon_state = "eyes_gestalt")
+	eyes_overlay = emissive_overlay(icon, "eyes_gestalt")
 	update_icon()
 	. = ..(mapload)
 

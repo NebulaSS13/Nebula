@@ -205,9 +205,7 @@
 	if(stat & (BROKEN|NOPOWER))
 		set_light(0)
 	else
-		var/image/I = emissive_overlay(icon, "[icon_state]_on")
-		I.color = COLOR_CYAN
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[icon_state]_on", color = COLOR_CYAN))
 		set_light(0.8, 1, 6, l_color = COLOR_CYAN)
 
 /obj/machinery/shipcomms/broadcaster

@@ -16,6 +16,8 @@
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
 
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
+
 	var/panel_icon = 'icons/mob/robots/_panels.dmi'
 
 	var/lights_on = 0 // Is our integrated light on?

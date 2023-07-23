@@ -205,7 +205,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		return
 
 	if (now)
-		update_overlays(TRUE)
+		update_corner_overlays(TRUE)
 	else
 		needs_update = TRUE
 		SSlighting.corner_queue += src
@@ -230,7 +230,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		needs_update = TRUE
 		SSlighting.corner_queue += src
 	else
-		update_overlays(TRUE)
+		update_corner_overlays(TRUE)
 
 /datum/lighting_corner/proc/update_ambient_lumcount(delta_r, delta_g, delta_b, skip_update = FALSE)
 	ambient_r += delta_r
@@ -295,7 +295,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 #undef UPDATE_APPARENT
 
-/datum/lighting_corner/proc/update_overlays(now = FALSE)
+/datum/lighting_corner/proc/update_corner_overlays(now = FALSE)
 	var/lr = apparent_r
 	var/lg = apparent_g
 	var/lb = apparent_b

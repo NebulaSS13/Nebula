@@ -1,35 +1,39 @@
-var/global/const/PREF_YES = "Yes"
-var/global/const/PREF_NO = "No"
-var/global/const/PREF_ALL_SPEECH = "All Speech"
-var/global/const/PREF_NEARBY = "Nearby"
-var/global/const/PREF_ALL_EMOTES = "All Emotes"
-var/global/const/PREF_ALL_CHATTER = "All Chatter"
-var/global/const/PREF_SHORT = "Short"
-var/global/const/PREF_LONG = "Long"
-var/global/const/PREF_SHOW = "Show"
-var/global/const/PREF_HIDE = "Hide"
-var/global/const/PREF_FANCY = "Fancy"
-var/global/const/PREF_PLAIN = "Plain"
-var/global/const/PREF_PRIMARY = "Primary"
-var/global/const/PREF_ALL = "All"
-var/global/const/PREF_ON = "On"
-var/global/const/PREF_OFF = "Off"
-var/global/const/PREF_BASIC = "Basic"
-var/global/const/PREF_FULL = "Full"
-var/global/const/PREF_MIDDLE_CLICK = "Middle click"
-var/global/const/PREF_ALT_CLICK = "Alt click"
-var/global/const/PREF_DOUBLE_CLICK = "Double click"
-var/global/const/PREF_CTRL_CLICK = "Ctrl click"
+var/global/const/PREF_YES              = "Yes"
+var/global/const/PREF_NO               = "No"
+var/global/const/PREF_ALL_SPEECH       = "All Speech"
+var/global/const/PREF_NEARBY           = "Nearby"
+var/global/const/PREF_ALL_EMOTES       = "All Emotes"
+var/global/const/PREF_ALL_CHATTER      = "All Chatter"
+var/global/const/PREF_SHORT            = "Short"
+var/global/const/PREF_LONG             = "Long"
+var/global/const/PREF_SHOW             = "Show"
+var/global/const/PREF_HIDE             = "Hide"
+var/global/const/PREF_FANCY            = "Fancy"
+var/global/const/PREF_PLAIN            = "Plain"
+var/global/const/PREF_PRIMARY          = "Primary"
+var/global/const/PREF_ALL              = "All"
+var/global/const/PREF_ON               = "On"
+var/global/const/PREF_OFF              = "Off"
+var/global/const/PREF_BASIC            = "Basic"
+var/global/const/PREF_FULL             = "Full"
+var/global/const/PREF_MIDDLE_CLICK     = "Middle click"
+var/global/const/PREF_ALT_CLICK        = "Alt click"
+var/global/const/PREF_DOUBLE_CLICK     = "Double click"
+var/global/const/PREF_CTRL_CLICK       = "Ctrl click"
 var/global/const/PREF_CTRL_SHIFT_CLICK = "Ctrl+shift click"
-var/global/const/PREF_HEAR = "Hear"
-var/global/const/PREF_SILENT = "Silent"
-var/global/const/PREF_SHORTHAND = "Shorthand"
-var/global/const/PREF_NON_ANTAG = "Non-Antag Only"
-var/global/const/PREF_NEVER = "Never"
-var/global/const/PREF_ALWAYS = "Always"
-var/global/const/PREF_MYSELF = "Only Against Self"
-var/global/const/PREF_DARKMODE = "Darkmode"
-var/global/const/PREF_LIGHTMODE = "Lightmode"
+var/global/const/PREF_HEAR             = "Hear"
+var/global/const/PREF_SILENT           = "Silent"
+var/global/const/PREF_SHORTHAND        = "Shorthand"
+var/global/const/PREF_NON_ANTAG        = "Non-Antag Only"
+var/global/const/PREF_NEVER            = "Never"
+var/global/const/PREF_ALWAYS           = "Always"
+var/global/const/PREF_MYSELF           = "Only Against Self"
+var/global/const/PREF_DARKMODE         = "Darkmode"
+var/global/const/PREF_LIGHTMODE        = "Lightmode"
+var/global/const/PREF_LOW              = "Low"
+var/global/const/PREF_MED              = "Medium"
+var/global/const/PREF_HIGH             = "High"
+
 var/global/list/_client_preferences
 var/global/list/_client_preferences_by_key
 var/global/list/_client_preferences_by_type
@@ -249,6 +253,17 @@ var/global/list/_client_preferences_by_type
 	description = "Examining messages"
 	key = "EXAMINE_MESSAGES"
 	options = list(PREF_SHOW, PREF_HIDE)
+
+/datum/client_preference/graphics_quality
+	description = "Graphics quality (where relevant it will reduce effects)"
+	key = "GRAPHICS_QUALITY"
+	options = list(PREF_LOW, PREF_MED, PREF_HIGH)
+	default_value = PREF_HIGH
+
+/datum/client_preference/graphics_quality/changed(mob/preference_mob, new_value)
+	if(preference_mob?.client)
+		for(var/atom/movable/renderer/R as anything in preference_mob.renderers)
+			R.GraphicsUpdate()
 
 /datum/client_preference/floating_messages
 	description = "Floating chat messages"

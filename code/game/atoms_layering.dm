@@ -1,3 +1,4 @@
+/// Integer (One of `*_PLANE`). The atom's rendering plane. See `code\__defines\_planes_layers.dm` for a list of valid planes. Also see the DM Reference for `plane var (atom)`.
 /atom
 	plane = DEFAULT_PLANE
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS

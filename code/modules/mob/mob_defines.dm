@@ -5,6 +5,8 @@
 	abstract_type = /mob
 	is_spawnable_type = TRUE
 
+	blocks_emissive = EMISSIVE_BLOCK_GENERIC
+
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | LONG_GLIDE
 	animate_movement = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE

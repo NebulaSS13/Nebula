@@ -14,6 +14,8 @@
 
 	global.using_map.show_titlescreen(client)
 	my_client = client
+	create_renderers()
+
 	set_sight(sight|SEE_TURFS)
 	global.player_list |= src
 

@@ -154,7 +154,8 @@ var/global/list/ventcrawl_machinery = list(
 	for(var/datum/pipeline/pipeline in network.line_members)
 		for(var/obj/machinery/atmospherics/A in (pipeline.members || pipeline.edges))
 			if(!A.pipe_image)
-				A.pipe_image = emissive_overlay(icon = A, loc = A.loc, dir = A.dir)
+				A.pipe_image = emissive_overlay(A.icon, dir = A.dir)
+				A.pipe_image.loc = A.loc
 			pipes_shown += A.pipe_image
 			client.images += A.pipe_image
 

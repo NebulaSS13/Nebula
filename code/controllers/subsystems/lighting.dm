@@ -137,7 +137,7 @@ SUBSYSTEM_DEF(lighting)
 		var/datum/lighting_corner/C = curr_corners[cq_idex++]
 
 		if (C.needs_update)
-			C.update_overlays()
+			C.update_corner_overlays()
 
 			C.needs_update = FALSE
 

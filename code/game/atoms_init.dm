@@ -96,6 +96,7 @@
 
 /atom/movable/Initialize(ml, ...)
 	. = ..()
+
 	if (!follow_repository.excluded_subtypes[type] && follow_repository.followed_subtypes_tcache[type])
 		follow_repository.add_subject(src)
 
@@ -106,6 +107,13 @@
 	// Changing this behavior will almost certainly break power; update accordingly.
 	if (!ml && loc)
 		loc.Entered(src, null)
+
+	// Handle emissive blockers here to avoid an override in atoms_movable.dm.
+	var/emissive_block = update_emissive_blocker()
+	if(emissive_block)
+		overlays += emissive_block
+		// Since this overlay is managed by the update_overlays proc
+		LAZYADD(managed_overlays, emissive_block)
 
 /atom/movable/EarlyDestroy(force = FALSE)
 	loc = null // should NOT use forceMove, in order to avoid events
@@ -121,6 +129,8 @@
 		qdel(thing)
 
 	unregister_all_movement(loc, src) // unregister events before destroy to avoid expensive checking
+
+	QDEL_NULL(em_block)
 
 	. = ..()
 
@@ -169,3 +179,4 @@
 	clone = ..()
 	clone.anchored = anchored
 	return clone
+
