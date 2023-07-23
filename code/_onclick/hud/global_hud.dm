@@ -26,10 +26,8 @@ var/global/datum/global_hud/hud
 	screen.layer = FULLSCREEN_LAYER
 	screen.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	screen.alpha = 125
-
 	screen.blend_mode = BLEND_MULTIPLY
 	screen.color = color
-
 	return screen
 
 /datum/global_hud/New()
