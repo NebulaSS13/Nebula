@@ -5,7 +5,7 @@
 	anchored = 1
 	simulated = 0
 	opacity = 0
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	layer = FLY_LAYER
 	alpha = 0
 	color = COLOR_LIQUID_WATER

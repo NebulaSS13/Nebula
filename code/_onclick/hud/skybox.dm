@@ -1,7 +1,7 @@
 var/global/const/SKYBOX_DIMENSION = 736 // Largest measurement for icon sides, used for offsets/scaling
 /obj/skybox
 	name = "skybox"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	anchored = TRUE
 	simulated = FALSE
 	plane = SKYBOX_PLANE

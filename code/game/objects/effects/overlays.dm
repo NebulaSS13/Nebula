@@ -49,7 +49,7 @@
 	anchored = 1
 	density = 1
 	layer = ABOVE_TILE_LAYER
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/effect/overlay/wallrot/Initialize()
 	. = ..()

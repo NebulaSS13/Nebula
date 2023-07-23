@@ -20,7 +20,7 @@
 			else
 				create_duplicate(M)
 	for(var/mob/goast in global.ghost_mob_list)
-		goast.mouse_opacity = 0	//can't let you click that Dave
+		goast.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE	//can't let you click that Dave
 		goast.set_invisibility(SEE_INVISIBLE_LIVING)
 		goast.alpha = 255
 	old_accessible_z_levels = SSmapping.accessible_z_levels.Copy()

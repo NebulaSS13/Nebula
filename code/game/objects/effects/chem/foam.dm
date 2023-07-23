@@ -9,7 +9,7 @@
 	anchored = 1
 	density = 0
 	layer = ABOVE_OBJ_LAYER
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	animate_movement = 0
 	var/amount = 3
 	var/metal = 0

@@ -9,7 +9,7 @@
 	light_color = "#00ffff"
 	light_range = 2
 	light_power = 1
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	appearance_flags = 0
 	var/overlay_state
 	var/overlay_color

@@ -75,7 +75,7 @@
 	icon_state = "default"
 	screen_loc = ui_center_fullscreen
 	plane = FULLSCREEN_PLANE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/severity = 0
 	var/allstate = 0 //shows if it should show up for dead people too
 
