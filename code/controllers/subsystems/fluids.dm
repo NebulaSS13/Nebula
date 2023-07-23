@@ -127,6 +127,9 @@ SUBSYSTEM_DEF(fluids)
 			qdel(current_fluid)
 			continue
 
+		// Wash our turf.
+		current_turf.fluid_act(reagent_holder)
+
 		if(isspaceturf(current_turf) || istype(current_turf, /turf/exterior))
 			removing = round(current_depth * 0.5)
 			if(removing > 0)

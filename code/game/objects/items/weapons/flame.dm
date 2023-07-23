@@ -17,7 +17,10 @@
 
 /obj/item/flame/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!waterproof && lit)
+	if(!QDELETED(src) && fluids?.total_volume && !waterproof && lit)
+		var/turf/location = get_turf(src)
+		if(location)
+			location.hotspot_expose(700, 5) // Potentially set fire to fuel etc.
 		extinguish(no_message = TRUE)
 
 /obj/item/flame/get_heat()
