@@ -115,12 +115,12 @@ SUBSYSTEM_DEF(fluids)
 		current_depth = reagent_holder?.total_volume || 0
 
 		// How is this happening
-		if(current_depth == -1.#IND || current_depth == 1.#IND)
+		if(QDELETED(reagent_holder) || current_depth == -1.#IND || current_depth == 1.#IND)
 			qdel(current_fluid)
 			continue
 
 		// Evaporation: todo, move liquid into current_turf.zone air contents if applicable.
-		if(current_depth <= FLUID_MINIMUM_TRANSFER && prob(15))
+		if(current_depth <= FLUID_PUDDLE && prob(60))
 			current_turf.remove_fluids(min(current_depth, 1), defer_update = TRUE)
 			current_depth = current_turf.get_fluid_depth()
 		if(current_depth <= FLUID_QDEL_POINT)
