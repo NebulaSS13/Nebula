@@ -578,7 +578,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			for(var/obj/effect/overlay/wallrot/E in W)
 				W.visible_message(SPAN_NOTICE("\The [E] is completely dissolved by the solution!"))
 				qdel(E)
-		if(slipperiness != 0)
+		if(slipperiness != 0 && !T.check_fluid_depth()) // Don't make floors slippery if they have an active fluid on top of them please.
 			if(slipperiness < 0)
 				W.unwet_floor(TRUE)
 			else
