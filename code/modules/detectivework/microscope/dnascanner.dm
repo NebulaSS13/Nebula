@@ -5,7 +5,7 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "dna_open"
 	anchored = 1
-	density = 1
+	density = TRUE
 	stat_immune = 0
 	base_type = /obj/machinery/forensic/dnascanner
 

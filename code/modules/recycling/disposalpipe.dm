@@ -5,7 +5,7 @@
 	name = "disposal pipe"
 	desc = "An underfloor disposal pipe."
 	anchored = 1
-	density = 0
+	density = FALSE
 	maxhealth = 10
 	level = 1			// underfloor only
 	dir = 0				// dir will contain dominant direction for junction pipes

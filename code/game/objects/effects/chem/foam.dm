@@ -7,7 +7,7 @@
 	icon_state = "foam"
 	opacity = 0
 	anchored = 1
-	density = 0
+	density = FALSE
 	layer = ABOVE_OBJ_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	animate_movement = 0

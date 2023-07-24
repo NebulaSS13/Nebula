@@ -4,7 +4,7 @@
 	desc = "A portable generator for emergency backup power."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
-	density = 1
+	density = TRUE
 	anchored = 0
 	interact_offline = TRUE
 

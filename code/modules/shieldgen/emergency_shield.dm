@@ -3,7 +3,7 @@
 	desc = "An energy shield used to contain hull breaches."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield-old"
-	density = 1
+	density = TRUE
 	opacity = 0
 	anchored = 1
 	unacidable = 1
@@ -107,7 +107,7 @@
 	desc = "Used to seal minor hull breaches."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "shieldoff"
-	density = 1
+	density = TRUE
 	opacity = 0
 	anchored = 0
 	initial_access = list(access_engine)

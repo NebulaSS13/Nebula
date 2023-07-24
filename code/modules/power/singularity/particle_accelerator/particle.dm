@@ -6,7 +6,7 @@
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	icon_state = "particle"//Need a new icon for this
 	anchored = 1
-	density = 1
+	density = TRUE
 	var/movement_range = 10
 	var/energy = 10		//energy in eV
 	var/mega_energy = 0	//energy in MeV

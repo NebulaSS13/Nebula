@@ -2,7 +2,7 @@
 	name = "wall frame window grille spawner"
 	icon = 'icons/obj/structures/grille.dmi'
 	icon_state = "wingrille"
-	density = 1
+	density = TRUE
 	anchored = 1.0
 	var/win_path = /obj/structure/window/basic/full
 	var/frame_path = /obj/structure/wall_frame/standard

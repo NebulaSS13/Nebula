@@ -3,7 +3,7 @@
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock-dark"
 	blocks_air = 1
-	density = 1
+	density = TRUE
 	opacity = 1
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 

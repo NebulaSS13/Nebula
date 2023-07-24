@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/handcart.dmi'
 	icon_state = "cart"
 	anchored = 0
-	density = 1
+	density = TRUE
 	movable_flags = MOVABLE_FLAG_WHEELED
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	material = /decl/material/solid/metal/steel

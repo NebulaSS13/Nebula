@@ -24,7 +24,7 @@
 	var/stored_energy = 0
 	var/temperature_overlay
 
-	density = 1
+	density = TRUE
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 

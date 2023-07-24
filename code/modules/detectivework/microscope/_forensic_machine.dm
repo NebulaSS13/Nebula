@@ -4,7 +4,7 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "microscope"
 	anchored = 1
-	density = 1
+	density = TRUE
 	base_type = /obj/machinery/forensic
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

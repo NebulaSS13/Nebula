@@ -2,7 +2,7 @@
 	name = "base network machine"
 	icon = 'icons/obj/machines/tcomms/bus.dmi'
 	icon_state = "bus"
-	density = 1
+	density = TRUE
 	anchored = 1
 
 	var/main_template = "network_mainframe.tmpl"

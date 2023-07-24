@@ -6,7 +6,7 @@
 	icon = 'icons/obj/items/device/rcd.dmi'
 	icon_state = "rcd"
 	opacity = 0
-	density = 0
+	density = FALSE
 	anchored = 0.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER

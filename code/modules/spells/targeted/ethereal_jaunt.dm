@@ -30,7 +30,7 @@
 			animation.set_density(0)
 			animation.anchored = 1
 			animation.icon = 'icons/mob/mob.dmi'
-			animation.layer = FLY_LAYER 
+			animation.layer = FLY_LAYER
 			target.ExtinguishMob()
 			if(target.buckled)
 				target.buckled = null
@@ -82,7 +82,7 @@
 	icon_state = "nothing"
 	var/canmove = 1
 	var/reappearing = 0
-	density = 0
+	density = FALSE
 	anchored = 1
 	var/turf/last_valid_turf
 

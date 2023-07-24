@@ -3,7 +3,7 @@
 	desc = "An integrated catalytic water cracking system used to break H2O down into H and O."
 	icon = 'icons/obj/machines/cracker.dmi'
 	icon_state = "cracker"
-	density = 1
+	density = TRUE
 	anchored = 1
 	waterproof = TRUE
 	volume = 5000

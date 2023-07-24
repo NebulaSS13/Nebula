@@ -3,7 +3,7 @@
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "riveted"
 	opacity = 1
-	density = 1
+	density = TRUE
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
 /turf/unsimulated/wall/fakeglass

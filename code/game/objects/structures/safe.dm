@@ -11,7 +11,7 @@ FLOOR SAFES
 	icon = 'icons/obj/structures/safe.dmi'
 	icon_state = "safe"
 	anchored = 1
-	density = 1
+	density = TRUE
 	var/open = 0		//is the safe open?
 	var/tumbler_1_pos	//the tumbler position- from 0 to 72
 	var/tumbler_1_open	//the tumbler position to open at- 0 to 72
@@ -164,7 +164,7 @@ FLOOR SAFES
 /obj/structure/safe/floor
 	name = "floor safe"
 	icon_state = "floorsafe"
-	density = 0
+	density = FALSE
 	level = 1	//underfloor
 	layer = BELOW_OBJ_LAYER
 

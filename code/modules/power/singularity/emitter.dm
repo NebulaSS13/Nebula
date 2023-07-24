@@ -6,7 +6,7 @@
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "emitter"
 	anchored = 0
-	density = 1
+	density = TRUE
 	initial_access = list(access_engine_equip)
 	active_power_usage = 100 KILOWATTS
 

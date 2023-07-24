@@ -6,7 +6,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -150,7 +150,7 @@
 "au" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -305,7 +305,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -644,7 +644,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -700,7 +700,7 @@
 "ng" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
@@ -926,7 +926,7 @@
 /area/ship/trade/comms)
 "Db" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -1100,7 +1100,7 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
@@ -1113,7 +1113,7 @@
 /area/ship/trade/command/bridge_upper)
 "QK" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -1158,7 +1158,7 @@
 "SQ" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
@@ -1177,7 +1177,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -1215,7 +1215,7 @@
 "Vp" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";

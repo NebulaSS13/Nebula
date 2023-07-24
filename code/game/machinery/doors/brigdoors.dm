@@ -20,7 +20,7 @@
 	desc = "A remote control for a door."
 	initial_access = list(access_brig)
 	anchored = 1.0    		// can't pick it up
-	density = 0       		// can walk through it.
+	density = FALSE       		// can walk through it.
 	var/releasetime = 0		// when world.timeofday reaches it - release the prisoner
 	var/timing = 1    		// boolean, true/1 timer is on, false/0 means it's not timing
 	var/picture_state		// icon_state of alert picture, if not displaying text/numbers

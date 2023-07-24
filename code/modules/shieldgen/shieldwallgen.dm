@@ -5,7 +5,7 @@
 	icon = 'icons/obj/machines/shieldgen.dmi'
 	icon_state = "Shield_Gen"
 	anchored = 0
-	density = 1
+	density = TRUE
 	initial_access = list(list(access_engine_equip, access_research))
 	var/active = 0
 	var/power = 0
@@ -263,7 +263,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldwall"
 	anchored = 1
-	density = 1
+	density = TRUE
 	unacidable = 1
 	light_range = 3
 	var/needs_power = 0

@@ -5,7 +5,7 @@
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "TheSingGen"
 	anchored = 0
-	density = 1
+	density = TRUE
 	use_power = POWER_USE_OFF
 	matter = list(
 		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,

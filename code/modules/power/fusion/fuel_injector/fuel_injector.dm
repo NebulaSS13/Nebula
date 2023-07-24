@@ -2,7 +2,7 @@
 	name = "fuel injector"
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "injector0"
-	density = 1
+	density = TRUE
 	anchored = 0
 	initial_access = list(access_engine)
 	idle_power_usage = 10

@@ -19,7 +19,7 @@
 	},
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -40,7 +40,7 @@
 	},
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -70,7 +70,7 @@
 "ai" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -109,7 +109,7 @@
 /area/ship/trade/cargo/lower)
 "am" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -122,7 +122,7 @@
 "an" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -160,7 +160,7 @@
 "at" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -265,7 +265,7 @@
 	id_tag = "eva_in"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -1002,7 +1002,7 @@
 "cr" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -1189,7 +1189,7 @@
 "cZ" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
@@ -1670,7 +1670,7 @@
 "er" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
@@ -2953,7 +2953,7 @@
 "LA" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";

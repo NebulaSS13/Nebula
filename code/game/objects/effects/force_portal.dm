@@ -4,7 +4,7 @@
 	icon = 'icons/effects/portal.dmi'
 	icon_state = "portal"
 	blend_mode = BLEND_SUBTRACT
-	density = 1
+	density = TRUE
 	unacidable = 1
 	anchored = 1
 	var/boom_time = 1

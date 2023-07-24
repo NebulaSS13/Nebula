@@ -1,7 +1,7 @@
 /obj/effect/mine
 	name = "Mine"
 	desc = "I Better stay away from that thing."
-	density = 1
+	density = TRUE
 	anchored = 1
 	layer = OBJ_LAYER
 	icon = 'icons/obj/items/weapon/landmine.dmi'

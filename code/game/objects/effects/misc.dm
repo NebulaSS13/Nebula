@@ -4,7 +4,7 @@
 	desc = "It's a ... present?"
 	icon = 'icons/obj/items/gift_wrapped.dmi'
 	icon_state = "strangepresent"
-	density = 1
+	density = TRUE
 	anchored = 0
 
 /obj/effect/stop

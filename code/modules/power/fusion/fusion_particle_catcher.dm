@@ -1,6 +1,6 @@
 /obj/effect/fusion_particle_catcher
 	icon = 'icons/effects/effects.dmi'
-	density = 1
+	density = TRUE
 	anchored = 1
 	invisibility = 101
 	light_color = COLOR_BLUE

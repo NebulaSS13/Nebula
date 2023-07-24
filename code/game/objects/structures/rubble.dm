@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/rubble.dmi'
 	icon_state = "base"
 	opacity = 1
-	density = 1
+	density = TRUE
 	anchored = 1
 	maxhealth = 50
 

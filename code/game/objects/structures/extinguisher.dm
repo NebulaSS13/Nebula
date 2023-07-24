@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/extinguisher.dmi'
 	icon_state = "extinguisher_closed"
 	anchored = 1
-	density = 0
+	density = FALSE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-29}, 'SOUTH':{'y':29}, 'EAST':{'x':-29}, 'WEST':{'x':29}}"
 	var/obj/item/chems/spray/extinguisher/has_extinguisher

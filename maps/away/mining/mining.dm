@@ -206,7 +206,7 @@
 	desc = "Some kind of post, pillar, plinth, column, or totem."
 	icon = 'icons/obj/structures/totem.dmi'
 	icon_state = "totem"
-	density = 1
+	density = TRUE
 	anchored = 1
 	unacidable = 1
 	var/number

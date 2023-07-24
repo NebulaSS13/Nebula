@@ -644,7 +644,7 @@
 "bo" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
@@ -836,7 +836,7 @@
 "bC" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
@@ -1271,7 +1271,7 @@
 "cp" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "merchantdesk";
@@ -1579,7 +1579,7 @@
 /obj/structure/table/steel,
 /obj/effect/paint/silver,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "merchantdesk";
@@ -8095,7 +8095,7 @@
 "QE" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";

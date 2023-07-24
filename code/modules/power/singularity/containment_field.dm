@@ -6,7 +6,7 @@
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "Contain_F"
 	anchored = 1
-	density = 0
+	density = FALSE
 	unacidable = 1
 	light_range = 4
 	movable_flags = MOVABLE_FLAG_PROXMOVE

@@ -1233,7 +1233,7 @@
 	name = "Ship External Access"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "ninjadoor";
 	name = "Blast Door";

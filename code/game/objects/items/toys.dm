@@ -546,7 +546,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ianplushie"
 	anchored = 0
-	density = 1
+	density = TRUE
 	var/phrase = "I don't want to exist anymore!"
 
 /obj/structure/plushie/attack_hand(mob/user)

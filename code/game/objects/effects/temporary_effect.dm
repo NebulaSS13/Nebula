@@ -3,7 +3,7 @@
 	anchored = 1
 	unacidable = 1
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	density = 0
+	density = FALSE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/effect/temporary/Initialize(var/mapload, var/duration = 30, var/_icon = 'icons/effects/effects.dmi', var/_state)

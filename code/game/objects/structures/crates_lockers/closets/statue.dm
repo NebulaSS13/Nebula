@@ -3,7 +3,7 @@
 	desc = "An incredibly lifelike marble carving."
 	icon = 'icons/obj/structures/statue.dmi'
 	icon_state = "human_male"
-	density = 1
+	density = TRUE
 	anchored = 1
 	setup = 0
 	health = 0 //destroying the statue kills the mob within

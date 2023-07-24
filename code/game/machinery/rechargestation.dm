@@ -3,7 +3,7 @@
 	desc = "A heavy duty rapid charging system, designed to quickly recharge autonomous system power reserves."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "borgcharger0"
-	density = 1
+	density = TRUE
 	anchored = 1
 	idle_power_usage = 50
 	base_type = /obj/machinery/recharge_station

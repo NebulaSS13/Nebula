@@ -3,7 +3,7 @@
 	desc = "It's a secure wall-mounted storage unit for storing the nuclear cylinders."
 	icon = 'icons/obj/machines/self_destruct.dmi'
 	anchored = 1
-	density = 0
+	density = FALSE
 	wall_mounted = 1
 	req_access = list(access_heads_vault)
 	storage_types = CLOSET_STORAGE_ITEMS

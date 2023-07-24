@@ -8,7 +8,7 @@
 	icon_state = "shield_normal"
 	anchored = 1
 	layer = PROJECTILE_LAYER
-	density = 0
+	density = FALSE
 	invisibility = 101
 	var/strength = 0
 	var/ticks_recovering = 10

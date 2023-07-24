@@ -2450,7 +2450,7 @@
 /area/map_template/rescue_base/start)
 "eV" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
@@ -2462,7 +2462,7 @@
 /area/map_template/rescue_base/start)
 "eW" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "rescuedock";
 	name = "Blast Shutters";
@@ -2698,7 +2698,7 @@
 /area/map_template/rescue_base/base)
 "fC" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
@@ -2760,7 +2760,7 @@
 /area/map_template/rescue_base/start)
 "fJ" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "rescueeva";
@@ -3167,7 +3167,7 @@
 "gU" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
@@ -3220,7 +3220,7 @@
 "hb" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "rescueinfirm";

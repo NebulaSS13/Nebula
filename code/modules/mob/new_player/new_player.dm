@@ -4,7 +4,7 @@
 	invisibility = 101
 	simulated = FALSE
 
-	density = 0
+	density = FALSE
 	stat = DEAD
 
 	movement_handlers = list()

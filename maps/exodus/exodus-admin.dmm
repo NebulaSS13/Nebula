@@ -1312,7 +1312,7 @@
 /area/shuttle/escape_shuttle)
 "aLF" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "CentComPort";
 	name = "Security Doors";

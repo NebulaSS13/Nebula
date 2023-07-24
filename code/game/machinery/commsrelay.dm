@@ -4,7 +4,7 @@
 	icon = 'icons/obj/machines/tcomms/bs_relay.dmi'
 	icon_state = "bspacerelay"
 	anchored = 1
-	density = 1
+	density = TRUE
 	idle_power_usage = 15000
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

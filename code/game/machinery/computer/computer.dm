@@ -2,7 +2,7 @@
 	name = "computer console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "computer"
-	density = 1
+	density = TRUE
 	anchored = 1.0
 	idle_power_usage = 300
 	active_power_usage = 300

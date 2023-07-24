@@ -4,7 +4,7 @@
 	icon = 'icons/obj/machines/teleporter.dmi'
 	icon_state = "tele0"
 	anchored = 1
-	density = 0
+	density = FALSE
 
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed

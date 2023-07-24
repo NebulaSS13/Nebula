@@ -3,7 +3,7 @@
 	desc = "Extracts and bags seeds from produce."
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "sextractor"
-	density = 1
+	density = TRUE
 	anchored = 1
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 10

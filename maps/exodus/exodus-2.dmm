@@ -677,7 +677,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
@@ -2795,7 +2795,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
@@ -3234,7 +3234,7 @@
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -3276,7 +3276,7 @@
 /area/exodus/crew_quarters/heads/hos)
 "ahg" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
@@ -3311,7 +3311,7 @@
 "ahk" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "lawyer_blast";
@@ -4124,7 +4124,7 @@
 "ajc" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "lawyer_blast";
@@ -4201,7 +4201,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -4302,7 +4302,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -4317,7 +4317,7 @@
 "ajq" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "brigobs";
@@ -4340,7 +4340,7 @@
 "ajs" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "brigobs";
@@ -4369,7 +4369,7 @@
 "aju" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "brigobs";
 	name = "Security Blast Door";
@@ -4474,7 +4474,7 @@
 "ajG" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -5482,7 +5482,7 @@
 "alx" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -5930,7 +5930,7 @@
 "amw" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -5960,7 +5960,7 @@
 /area/exodus/maintenance/substation/security)
 "amy" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
@@ -6106,7 +6106,7 @@
 "amO" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -6273,7 +6273,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
@@ -6315,7 +6315,7 @@
 "ang" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "lawyer_blast";
@@ -6341,7 +6341,7 @@
 /area/exodus/maintenance/dormitory)
 "ani" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
@@ -6452,7 +6452,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -6515,7 +6515,7 @@
 "any" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
@@ -8011,7 +8011,7 @@
 /area/exodus/lawoffice)
 "aqH" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "lawyer_blast";
@@ -8572,7 +8572,7 @@
 "arL" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -8604,7 +8604,7 @@
 /area/exodus/maintenance/dormitory)
 "arO" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
@@ -8622,7 +8622,7 @@
 /area/exodus/hallway/primary/fore)
 "arP" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
@@ -8743,7 +8743,7 @@
 /area/exodus/maintenance/evahallway)
 "asc" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -9225,7 +9225,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "visit_blast";
@@ -9278,14 +9278,14 @@
 "ate" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
 	opacity = 0
 	},
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "visit_blast";
@@ -9693,7 +9693,7 @@
 /area/exodus/chapel/main)
 "aun" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -10124,7 +10124,7 @@
 "avj" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -10637,7 +10637,7 @@
 /area/exodus/security/prison/dorm)
 "awl" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
@@ -14447,7 +14447,7 @@
 "aEA" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "heads_meeting";
@@ -14520,7 +14520,7 @@
 "aEG" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "heads_meeting";
@@ -14561,7 +14561,7 @@
 "aEK" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "heads_meeting";
@@ -14737,7 +14737,7 @@
 "aFb" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -14975,7 +14975,7 @@
 "aFz" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -15292,7 +15292,7 @@
 "aGc" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -15331,7 +15331,7 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -15359,7 +15359,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -15390,7 +15390,7 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -15649,7 +15649,7 @@
 "aGO" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 8;
 	icon_state = "shutter0";
 	id_tag = "chemwindow";
@@ -15999,7 +15999,7 @@
 	dir = 8
 	},
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "chapel";
@@ -17753,7 +17753,7 @@
 "aLg" = (
 /obj/structure/closet/coffin,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "chapel";
@@ -19988,7 +19988,7 @@
 /area/exodus/crew_quarters/bar)
 "aPL" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -20220,7 +20220,7 @@
 /area/exodus/hallway/secondary/exit)
 "aQp" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 8;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -20677,7 +20677,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "acute1";
@@ -20938,7 +20938,7 @@
 "aSa" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
@@ -20956,7 +20956,7 @@
 "aSc" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
@@ -20968,7 +20968,7 @@
 "aSd" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
@@ -21050,7 +21050,7 @@
 "aSk" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 8;
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
@@ -21102,7 +21102,7 @@
 "aSp" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
@@ -21114,7 +21114,7 @@
 "aSq" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 0;
 	icon_state = "shutter0";
 	id_tag = "staffroom";
@@ -21202,7 +21202,7 @@
 "aSA" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 8;
 	icon_state = "shutter0";
 	id_tag = "staffroom";
@@ -21465,7 +21465,7 @@
 	name = "Research Division Delivery"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -21484,7 +21484,7 @@
 /area/exodus/hydroponics/garden)
 "aTf" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -21747,7 +21747,7 @@
 "aTH" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
@@ -21760,7 +21760,7 @@
 "aTI" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
@@ -21883,7 +21883,7 @@
 /area/exodus/crew_quarters/bar)
 "aTY" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "misclab";
@@ -21896,7 +21896,7 @@
 /area/exodus/research/misc_lab)
 "aTZ" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "misclab";
@@ -21949,7 +21949,7 @@
 "aUg" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "scanhideside";
@@ -23106,7 +23106,7 @@
 "aWW" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -23119,7 +23119,7 @@
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -23159,7 +23159,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -23351,7 +23351,7 @@
 /area/exodus/medical/patient_c)
 "aXx" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -23367,7 +23367,7 @@
 "aXy" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -23465,7 +23465,7 @@
 "aXL" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -23633,7 +23633,7 @@
 "aYe" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "chemcounter";
@@ -23916,7 +23916,7 @@
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -24276,7 +24276,7 @@
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -24496,7 +24496,7 @@
 "aZS" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "surgeryobs";
@@ -25556,7 +25556,7 @@
 "bce" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -25618,7 +25618,7 @@
 "bck" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "surgeryobs";
@@ -25735,7 +25735,7 @@
 "bcx" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 8;
 	icon_state = "shutter0";
 	id_tag = "surgeryobs2";
@@ -27376,7 +27376,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio3";
@@ -29816,7 +29816,7 @@
 "bkV" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "medbayquar";
@@ -29845,7 +29845,7 @@
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "medbayquar";
@@ -30451,7 +30451,7 @@
 "bmq" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio3";
@@ -30895,7 +30895,7 @@
 	},
 /obj/item/chems/glass/beaker/sulphuric,
 /obj/structure/reagent_dispensers/acid{
-	density = 0;
+	density = FALSE;
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -30913,7 +30913,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio2";
@@ -32253,7 +32253,7 @@
 "bpX" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio2";
@@ -32919,7 +32919,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio1";
@@ -33231,7 +33231,7 @@
 "brW" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio1";
@@ -34878,7 +34878,7 @@
 /area/exodus/medical/chemistry)
 "bvl" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "medbayrecquar";
@@ -34895,7 +34895,7 @@
 /area/exodus/medical/reception)
 "bvm" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "medbayrecquar";
@@ -34965,7 +34965,7 @@
 /area/exodus/maintenance/incinerator)
 "bvt" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "medbayrecquar";
@@ -34980,7 +34980,7 @@
 /area/exodus/medical/reception)
 "bvu" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "medbayrecquar";
@@ -35095,7 +35095,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -35221,7 +35221,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio4";
@@ -35233,7 +35233,7 @@
 "bvX" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio4";
@@ -35261,7 +35261,7 @@
 "bvZ" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio5";
@@ -35275,7 +35275,7 @@
 "bwa" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio5";
@@ -35365,7 +35365,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio6";
@@ -35399,7 +35399,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio6";
@@ -35470,7 +35470,7 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -37618,7 +37618,7 @@
 /area/exodus/research/robotics)
 "bAP" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
@@ -37760,7 +37760,7 @@
 /area/exodus/security/prison/dorm)
 "bBb" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
@@ -38312,7 +38312,7 @@
 /area/exodus/research)
 "bCl" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
@@ -39579,7 +39579,7 @@
 /area/exodus/teleporter)
 "bEJ" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 8;
 	icon_state = "shutter0";
 	id_tag = "medbayquar";
@@ -40959,7 +40959,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -41348,7 +41348,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -41414,7 +41414,7 @@
 "bIh" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "acute1";
@@ -41429,7 +41429,7 @@
 "bIi" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "acute1";
@@ -44289,7 +44289,7 @@
 /area/exodus/janitor)
 "bNZ" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "acutesep";
@@ -45807,7 +45807,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "acute2";
@@ -46985,7 +46985,7 @@
 /area/exodus/storage/tech)
 "bTs" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "scanhide";
@@ -47003,7 +47003,7 @@
 /area/exodus/research)
 "bTu" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "scanhide";
@@ -47021,7 +47021,7 @@
 /area/exodus/storage/tech)
 "bTx" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "shutter0";
 	id_tag = "scanhide";
@@ -47250,7 +47250,7 @@
 /area/exodus/maintenance/medbay)
 "bTS" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "misclab";
@@ -47285,7 +47285,7 @@
 /area/exodus/maintenance/medbay)
 "bTU" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "misclab";
@@ -48304,7 +48304,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "scanhideside";
@@ -48903,7 +48903,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "scanhideside";
@@ -49863,7 +49863,7 @@
 	dir = 4
 	},
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "scanhideside";
@@ -51331,7 +51331,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -51352,7 +51352,7 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "hop_office_desk";
@@ -54111,7 +54111,7 @@
 /area/exodus/research/xenobiology)
 "chT" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -56347,7 +56347,7 @@
 /area/exodus/engineering/locker_room)
 "cmM" = (
 /obj/machinery/door/blast/regular/open{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Door"
@@ -57323,7 +57323,7 @@
 /area/exodus/medical/surgery2)
 "coW" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "virologyquar";
@@ -57340,7 +57340,7 @@
 /area/exodus/medical/virology/access)
 "coX" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "virologyquar";
@@ -57370,7 +57370,7 @@
 /area/exodus/research/xenobiology)
 "cpb" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -57390,7 +57390,7 @@
 /area/exodus/medical/surgery)
 "cpd" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio3";
@@ -57681,7 +57681,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
@@ -58011,7 +58011,7 @@
 "cqO" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "EngineRadiatorViewport";
@@ -58672,7 +58672,7 @@
 "csI" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "EngineRadiatorViewport";
@@ -59009,7 +59009,7 @@
 "ctK" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "EngineRadiatorViewport";
@@ -59021,7 +59021,7 @@
 "ctM" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "EngineRadiatorViewport";
@@ -59067,7 +59067,7 @@
 /area/exodus/medical/virology)
 "ctS" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio2";
@@ -60291,7 +60291,7 @@
 /area/exodus/medical/virology)
 "cxV" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "xenobio1";
@@ -60940,7 +60940,7 @@
 	req_access = list("ACCESS_XENOBIO")
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio4";
@@ -61142,7 +61142,7 @@
 	req_access = list("ACCESS_XENOBIO")
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio5";
@@ -61791,7 +61791,7 @@
 	req_access = list("ACCESS_XENOBIO")
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "xenobio6";

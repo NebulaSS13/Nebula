@@ -4,7 +4,7 @@
 	icon = 'icons/obj/pipes.dmi'
 	icon_state = "compressor"
 	anchored = 1
-	density = 1
+	density = TRUE
 	var/obj/machinery/turbine/turbine
 	var/datum/gas_mixture/gas_contained
 	var/turf/simulated/inturf
@@ -23,7 +23,7 @@
 	icon = 'icons/obj/pipes.dmi'
 	icon_state = "turbine"
 	anchored = 1
-	density = 1
+	density = TRUE
 	var/obj/machinery/compressor/compressor
 	var/turf/simulated/outturf
 	var/lastgen
@@ -39,7 +39,7 @@
 	icon_keyboard = "tech_key"
 	icon_screen = "turbinecomp"
 	anchored = 1
-	density = 1
+	density = TRUE
 	var/obj/machinery/compressor/compressor
 	var/list/obj/machinery/door/blast/doors
 	var/door_status = 0

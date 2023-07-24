@@ -5,7 +5,7 @@
 	icon_state = "nozzle"
 	layer = STRUCTURE_LAYER
 	opacity = 1
-	density = 1
+	density = TRUE
 	atmos_canpass = CANPASS_NEVER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	construct_state = /decl/machine_construction/default/panel_closed

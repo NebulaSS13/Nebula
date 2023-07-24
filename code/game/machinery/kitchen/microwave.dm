@@ -3,7 +3,7 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
-	density = 1
+	density = TRUE
 	anchored = 1
 	idle_power_usage = 5
 	active_power_usage = 100

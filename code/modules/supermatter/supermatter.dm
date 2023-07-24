@@ -108,7 +108,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon = 'icons/obj/supermatter_48.dmi'
 	icon_state = "supermatter"
-	density = 1
+	density = TRUE
 	anchored = 0
 	light_range = 4
 	layer = ABOVE_HUMAN_LAYER

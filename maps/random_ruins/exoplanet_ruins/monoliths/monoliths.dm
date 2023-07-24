@@ -12,7 +12,7 @@
 	icon = 'icons/obj/structures/monolith.dmi'
 	icon_state = "jaggy1"
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	anchored = 1
 	material = /decl/material/solid/metal/aliumium
 	material_alteration = MAT_FLAG_ALTERATION_COLOR

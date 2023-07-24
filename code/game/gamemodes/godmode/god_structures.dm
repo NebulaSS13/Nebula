@@ -18,7 +18,7 @@
 /obj/structure/deity
 	icon = 'icons/obj/cult.dmi'
 	maxhealth = 10
-	density = 1
+	density = TRUE
 	anchored = 1
 	icon_state = "tomealtar"
 	is_spawnable_type = FALSE // will usually runtime without a linked god

@@ -4,7 +4,7 @@
 	desc = "The name isn't descriptive enough?"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "grinder"
-	density = 1
+	density = TRUE
 	anchored = 1
 	initial_access = list(list(access_kitchen, access_morgue))
 	construct_state = /decl/machine_construction/default/panel_closed

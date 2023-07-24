@@ -59,7 +59,7 @@ var/global/list/ai_status_emotions = list(
 	icon_state = "frame"
 	name = "AI display"
 	anchored = 1
-	density = 0
+	density = FALSE
 
 	var/mode = 0	// 0 = Blank
 					// 1 = AI emoticon

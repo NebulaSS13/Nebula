@@ -8,7 +8,7 @@
 	icon_state = "generic"
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
-	density = 1
+	density = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	clicksound = "button"
 	clickvol = 40

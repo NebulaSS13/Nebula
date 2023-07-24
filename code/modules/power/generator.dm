@@ -3,7 +3,7 @@
 	desc = "It's a high efficiency thermoelectric generator."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "teg-unassembled"
-	density = 1
+	density = TRUE
 	anchored = 0
 
 	use_power = POWER_USE_IDLE

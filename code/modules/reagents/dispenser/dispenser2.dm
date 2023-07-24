@@ -21,7 +21,7 @@
 	var/amount = 30
 
 	idle_power_usage = 100
-	density = 1
+	density = TRUE
 	anchored = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	core_skill = SKILL_CHEMISTRY

@@ -4,7 +4,7 @@
 	name = "superluminal artillery control"
 	icon_state = "control_boxp1"
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
-	density = 1
+	density = TRUE
 	anchored = 1
 
 /obj/machinery/artillerycontrol/Process()
@@ -15,11 +15,11 @@
 	name = "artillery"
 	icon = 'icons/obj/machines/artillery.dmi'
 	anchored = 1
-	density = 1
+	density = TRUE
 	desc = "The ship's old superluminal artillery cannon. Looks inoperative."
 
 /obj/structure/artilleryplaceholder/decorative
-	density = 0
+	density = FALSE
 
 /obj/machinery/artillerycontrol/interface_interact(mob/user)
 	interact(user)

@@ -4,7 +4,7 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "cart"
 	anchored = 1
-	density = 1
+	density = TRUE
 	var/active = 1
 
 /obj/machinery/acting/wardrobe/attack_hand(var/mob/user)
@@ -26,7 +26,7 @@
 	icon = 'icons/obj/machines/fabricators/bioprinter.dmi'
 	icon_state = "bioprinter"
 	anchored = 1
-	density = 1
+	density = TRUE
 
 /obj/machinery/acting/changer/attack_hand(var/mob/user)
 	SHOULD_CALL_PARENT(FALSE)
@@ -49,4 +49,4 @@
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mirror_broke"
 	anchored = 1
-	density = 0
+	density = FALSE

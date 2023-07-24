@@ -675,7 +675,7 @@
 /area/magshield/engine)
 "cc" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
@@ -737,7 +737,7 @@
 /area/magshield/engine)
 "ck" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "EngineBlast";

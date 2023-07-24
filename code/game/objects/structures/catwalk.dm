@@ -3,7 +3,7 @@
 	desc = "Cats really don't like these things."
 	icon = 'icons/obj/structures/catwalks.dmi'
 	icon_state = "catwalk"
-	density = 0
+	density = FALSE
 	anchored = 1.0
 	layer = CATWALK_LAYER
 	footstep_type = /decl/footsteps/catwalk
@@ -169,7 +169,7 @@
 	name = "plated catwalk spawner"
 	icon = 'icons/obj/structures/catwalks.dmi'
 	icon_state = "catwalk_plated"
-	density = 1
+	density = TRUE
 	anchored = 1.0
 	layer = CATWALK_LAYER
 	var/activated = FALSE
