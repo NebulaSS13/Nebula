@@ -10,7 +10,6 @@
 	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
 	mob_default_max_health = 75
-	health = 75
 	speed = -1
 	harm_intent_damage = 8
 	can_escape = TRUE

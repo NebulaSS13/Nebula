@@ -11,7 +11,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	health = 5
 	mob_default_max_health = 5
 	response_harm = "stamps on"
 	density = FALSE
@@ -133,7 +132,6 @@
 	icon = 'icons/mob/simple_animal/rat.dmi'
 	skin_material = /decl/material/solid/organic/skin/fur/gray
 	mob_default_max_health = 20
-	health = 20
 
 /mob/living/simple_animal/mouse/rat/set_mouse_icon()
 	return

@@ -6,7 +6,6 @@
 	desc = "a cloud of tiny, tiny robots."
 	icon = 'icons/mob/simple_animal/nanomachines.dmi'
 	natural_weapon = /obj/item/natural_weapon/nanomachine
-	health = 10
 	mob_default_max_health = 10
 	can_escape = TRUE
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")

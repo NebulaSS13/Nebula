@@ -5,7 +5,6 @@
 	icon = 'icons/mob/simple_animal/jelly.dmi'
 	move_to_delay = 1
 	mob_default_max_health = 75
-	health = 75
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/tentecles
 	speak_chance = 1
@@ -31,7 +30,6 @@
 	name = "zeq queen"
 	desc = "A gigantic jellyfish-like creature. Its bell wobbles about almost as if it's ready to burst."
 	mob_default_max_health = 300
-	health = 300
 	gets_random_color = FALSE
 	can_escape = TRUE
 
@@ -70,7 +68,6 @@
 	name = "zeq duchess"
 	desc = "A huge jellyfish-like creature."
 	mob_default_max_health = 150
-	health = 150
 	can_escape = TRUE
 	jelly_scale = 1.5
 	split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/quarter
@@ -78,7 +75,6 @@
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/quarter
 	name = "zeqling"
 	desc = "A jellyfish-like creature."
-	health = 75
 	mob_default_max_health = 75
 	jelly_scale = 0.75
 	can_escape = FALSE
@@ -87,7 +83,6 @@
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/fourth
 	name = "zeqetta"
 	desc = "A tiny jellyfish-like creature."
-	health = 40
 	mob_default_max_health = 40
 	jelly_scale = 0.375
 	split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/eighth
@@ -95,7 +90,6 @@
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/eighth
 	name = "zeqttina"
 	desc = "An absolutely tiny jellyfish-like creature."
-	health = 20
 	mob_default_max_health = 20
 	jelly_scale = 0.1875
 	split_type = null

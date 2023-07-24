@@ -2,7 +2,6 @@
 	name = "megaleech"
 	desc = "A green leech the size of a common snake."
 	icon = 'icons/mob/simple_animal/megaleech.dmi'
-	health = 15
 	mob_default_max_health = 15
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite/weak

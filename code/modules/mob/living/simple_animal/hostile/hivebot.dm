@@ -2,7 +2,6 @@
 	name = "hivebot"
 	desc = "A junky looking robot with four spiky legs."
 	icon = 'icons/mob/simple_animal/hivebot.dmi'
-	health = 55
 	mob_default_max_health = 55
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
 	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
@@ -37,7 +36,6 @@
 
 /mob/living/simple_animal/hostile/hivebot/strong
 	desc = "A junky looking robot with four spiky legs - this one has thick armour plating."
-	health = 120
 	mob_default_max_health = 120
 	ranged = 1
 	can_escape = 1
@@ -60,7 +58,6 @@ Teleporter beacon, and its subtypes
 	desc = "Some odd beacon thing."
 	icon = 'icons/obj/structures/hivebot_props.dmi'
 	icon_state = "def_radar-off"
-	health = 200
 	mob_default_max_health = 200
 	status_flags = 0
 	anchored = TRUE
@@ -140,7 +137,6 @@ The megabot
 	name = "hivemind"
 	desc = "A huge quadruped robot equipped with a myriad of weaponry."
 	icon = 'icons/mob/simple_animal/megabot.dmi'
-	health = 440
 	mob_default_max_health = 440
 	natural_weapon = /obj/item/natural_weapon/circular_saw
 	speed = 0

@@ -13,7 +13,6 @@
 	response_harm = "pokes"
 	stop_automated_movement_when_pulled = 0
 	mob_default_max_health = 60
-	health = 60
 	natural_weapon = /obj/item/natural_weapon/claws/strong
 	can_escape = TRUE
 	faction = "russian"

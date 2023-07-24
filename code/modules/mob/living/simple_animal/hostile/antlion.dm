@@ -9,8 +9,6 @@
 	response_harm = "strikes"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
-
-	health = 65
 	mob_default_max_health = 65
 	natural_weapon = /obj/item/natural_weapon/bite
 	natural_armor = list(
@@ -98,7 +96,6 @@
 	desc = "A huge antlion. It looks displeased."
 	icon = 'icons/mob/simple_animal/antlion_queen.dmi'
 	mob_size = MOB_SIZE_LARGE
-	health = 275
 	mob_default_max_health = 275
 	natural_weapon = /obj/item/natural_weapon/bite/megalion
 	natural_armor = list(

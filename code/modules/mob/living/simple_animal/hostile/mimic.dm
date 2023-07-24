@@ -22,15 +22,11 @@ var/global/list/protected_objects = list(/obj/machinery,
 	icon =  'icons/obj/closets/bases/crate.dmi'
 	color = COLOR_STEEL
 	icon_state = "crate"
-
 	meat_type = /obj/item/chems/food/fish
 	speed = 4
 	mob_default_max_health = 100
-	health = 100
-
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
-
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0

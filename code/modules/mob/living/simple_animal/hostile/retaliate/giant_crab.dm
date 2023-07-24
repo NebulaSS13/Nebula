@@ -13,7 +13,6 @@
 	break_stuff_probability = 15
 	faction = "crabs"
 	pry_time = 2 SECONDS
-	health = 350
 	mob_default_max_health = 350
 	natural_weapon = /obj/item/natural_weapon/pincers/giant
 	return_damage_min = 2

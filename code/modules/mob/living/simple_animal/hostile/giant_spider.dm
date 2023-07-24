@@ -16,7 +16,6 @@
 	see_in_dark = 10
 	response_harm = "pokes"
 	mob_default_max_health = 125
-	health = 125
 	natural_weapon = /obj/item/natural_weapon/bite
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
@@ -66,7 +65,6 @@
 	desc = "A monstrously huge brown spider with shimmering eyes."
 	meat_amount = 4
 	mob_default_max_health = 200
-	health = 200
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 5
 	speed = 2
@@ -83,7 +81,6 @@
 	desc = "A monstrously huge beige spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_beige.dmi'
 	mob_default_max_health = 80
-	health = 80
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
@@ -108,7 +105,6 @@
 	desc = "A monstrously huge black spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_black.dmi'
 	mob_default_max_health = 150
-	health = 150
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 10
 	speed = -1
@@ -129,7 +125,6 @@
 	desc = "A monstrously huge iridescent spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_purple.dmi'
 	mob_default_max_health = 90
-	health = 90
 	poison_per_bite = 15
 	ranged = TRUE
 	move_to_delay = 2

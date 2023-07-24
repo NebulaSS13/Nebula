@@ -4,7 +4,6 @@
 	desc = "A bound spirit"
 	icon = 'icons/mob/simple_animal/shade.dmi'
 	mob_default_max_health = 50
-	health = 50
 	universal_speak = TRUE
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")

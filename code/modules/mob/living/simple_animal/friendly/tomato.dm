@@ -5,7 +5,6 @@
 	speak_chance = 0
 	turns_per_move = 5
 	mob_default_max_health = 15
-	health = 15
 	response_help_3p = "$USER$ pokes $TARGET$."
 	response_help_1p = "You poke $TARGET$."
 	harm_intent_damage = 5

@@ -7,7 +7,6 @@
 	emote_hear = list("honks","flaps its wings","clacks")
 	emote_see = list("flaps its wings", "scratches the ground")
 	natural_weapon = /obj/item/natural_weapon/goosefeet
-	health = 45
 	mob_default_max_health = 45
 	pass_flags = PASS_FLAG_TABLE
 	faction = "geese"
@@ -64,7 +63,6 @@
 	name = "dire goose"
 	desc = "A large bird. It radiates destructive energy."
 	icon = 'icons/mob/simple_animal/goose_dire.dmi'
-	health = 250
 	mob_default_max_health = 250
 	enrage_potency = 3
 	loose_threshold = 20
