@@ -30,9 +30,9 @@
 	return 1
 
 /mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
-	var/oldhealth = health
+	var/oldhealth = current_health
 	. = ..()
-	if(isliving(Proj.firer) && (target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
+	if(isliving(Proj.firer) && (target_mob != Proj.firer) && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
 		target_mob = Proj.firer
 		turns_per_move = 3
 		MoveToTarget()
@@ -54,7 +54,7 @@
 			var/blood_volume = round(gripping.vessel.total_volume)
 			if(blood_volume > 5)
 				gripping.vessel.remove_any(blood_per_tick)
-				health = min(health + health_per_tick, get_max_health())
+				heal_overall_damage(health_per_tick)
 				if(prob(15))
 					to_chat(gripping, "<span class='danger'>You feel your fluids being drained!</span>")
 			else
@@ -66,7 +66,7 @@
 	if(stance == HOSTILE_STANCE_IDLE && !cloaked)
 		cloaked = 1
 		update_icon()
-	if(health >= get_max_health())
+	if(current_health >= get_max_health())
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		gib()
@@ -95,7 +95,7 @@
 			return
 		//This line ensures there's always a reasonable chance of grabbing, while still
 		//Factoring in health
-		if(!gripping && (cloaked || prob(health + ((get_max_health() - health) * 2))))
+		if(!gripping && (cloaked || prob(current_health + ((get_max_health() - current_health) * 2))))
 			gripping = H
 			cloaked = 0
 			update_icon()

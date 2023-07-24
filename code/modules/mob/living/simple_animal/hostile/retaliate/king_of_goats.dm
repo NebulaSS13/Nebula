@@ -153,15 +153,16 @@
 			visible_message("<span class='cultannounce'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
 			stop_automation = TRUE
 			if(do_after(src, 6 SECONDS, src))
-				var/health_holder = health
+				var/initial_brute = getBruteLoss()
+				var/initial_burn = getFireLoss()
 				visible_message(SPAN_MFAUNA("\The [src] raises its fore-hooves and stomps them into the ground with incredible force!"))
 				explosion(get_step(src,pick(global.cardinal)), -1, 2, 2, 3, 6)
 				explosion(get_step(src,pick(global.cardinal)), -1, 1, 4, 4, 6)
 				explosion(get_step(src,pick(global.cardinal)), -1, 3, 4, 3, 6)
 				stop_automation = FALSE
 				spellscast += 2
-				if(!health < health_holder)
-					health = health_holder //our own magicks cannot harm us
+				setBruteLoss(initial_brute)
+				setFireLoss(initial_burn)
 			else
 				visible_message(SPAN_NOTICE("The [src] loses concentration and huffs haughtily."))
 				stop_automation = FALSE
@@ -171,7 +172,8 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/proc/phase3_transition()
 	phase3 = TRUE
 	spellscast = 0
-	health = 750
+	mob_default_max_health = 750
+	current_health = mob_default_max_health
 	new /obj/item/grenade/flashbang/instant(src.loc)
 	QDEL_NULL(boss_theme)
 	boss_theme = play_looping_sound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
@@ -196,7 +198,7 @@
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
 		current_damtype = BRUTE
 
-	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
+	if(current_health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()

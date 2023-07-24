@@ -18,6 +18,12 @@
 		adjustOxyLoss(-(rads))
 		adjustToxLoss(-(rads))
 
+/mob/living/carbon/alien/updatehealth()
+	. = ..()
+	if(stat == DEAD)
+		blinded = 1
+		set_status(STAT_SILENCE, 0)
+
 /mob/living/carbon/alien/handle_regular_status_updates()
 
 	if(status_flags & GODMODE)	return 0
@@ -27,10 +33,7 @@
 		set_status(STAT_SILENCE, 0)
 	else
 		updatehealth()
-		if(health <= 0)
-			death()
-			SET_STATUS_MAX(src, STAT_BLIND, 2)
-			set_status(STAT_SILENCE, 0)
+		if(stat == DEAD)
 			return 1
 
 		if(HAS_STATUS(src, STAT_PARA))
@@ -65,7 +68,7 @@
 	update_sight()
 	if (healths)
 		if(stat != DEAD)
-			switch(health)
+			switch(current_health)
 				if(100 to INFINITY)
 					healths.icon_state = "health0"
 				if(80 to 100)

@@ -53,8 +53,9 @@
 		attacking_with.force = min((attacking_with.force + potency), max_damage)
 	if(!loose && prob(25) && (attacking_with && attacking_with.force >= loose_threshold)) //second wind
 		loose = TRUE
-		health = (initial(health) * 1.5)
 		set_max_health(initial(mob_default_max_health) * 1.5)
+		setBruteLoss(0)
+		setFireLoss(0)
 		enrage_potency = enrage_potency_loose
 		desc += " The [name] is loose! Oh no!"
 		update_icon()

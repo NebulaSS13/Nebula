@@ -81,10 +81,8 @@
 		SET_STATUS_MAX(H, STAT_WEAK, 1)
 
 /mob/living/simple_animal/hostile/antlion/proc/process_healing()
-	if(!incapacitated() && healing)
-		var/old_health = health
-		if(old_health < get_max_health())
-			health = old_health + heal_amount
+	if(!incapacitated() && healing && current_health < get_max_health())
+		heal_overall_damage(rand(heal_amount), rand(heal_amount))
 
 /mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
 	stop_automated_movement = new_bool

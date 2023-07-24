@@ -106,7 +106,7 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/borg/upgrade/restart/action(var/mob/living/silicon/robot/R)
-	if(R.health < 0)
+	if(R.current_health < 0)
 		to_chat(usr, "You have to repair the robot before using this module!")
 		return 0
 

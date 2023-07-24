@@ -37,8 +37,8 @@
 		if(istype(S) && !length(S.breaches))
 			return
 		H.remove_blood_simple(suck_potency)
-		if(health < get_max_health())
-			health += suck_potency / 1.5
+		if(current_health < get_max_health())
+			heal_overall_damage(suck_potency / 1.5)
 		belly += clamp(suck_potency, 0, 100)
 
 /obj/structure/leech_spawner

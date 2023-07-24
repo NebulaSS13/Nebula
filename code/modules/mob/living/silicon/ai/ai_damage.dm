@@ -14,15 +14,21 @@
 
 /mob/living/silicon/ai/adjustFireLoss(var/amount)
 	if(status_flags & GODMODE) return
-	fireloss = max(0, fireloss + min(amount, health))
+	fireloss = max(0, fireloss + min(amount, current_health))
 
 /mob/living/silicon/ai/adjustBruteLoss(var/amount)
 	if(status_flags & GODMODE) return
-	bruteloss = max(0, bruteloss + min(amount, health))
+	bruteloss = max(0, bruteloss + min(amount, current_health))
 
 /mob/living/silicon/ai/adjustOxyLoss(var/amount)
 	if(status_flags & GODMODE) return
 	oxyloss = max(0, oxyloss + min(amount, get_max_health() - oxyloss))
+
+/mob/living/silicon/ai/setBruteLoss(var/amount)
+	if(status_flags & GODMODE)
+		bruteloss = 0
+		return
+	bruteloss = max(0, amount)
 
 /mob/living/silicon/ai/setFireLoss(var/amount)
 	if(status_flags & GODMODE)
@@ -49,7 +55,3 @@
 /mob/living/silicon/ai/proc/backup_capacitor()
 	var/current_max_health = get_max_health()
 	return ((getOxyLoss() - current_max_health) / current_max_health) * (-100)
-
-// Returns percentage of AI's remaining hardware integrity (maxhealth - (bruteloss + fireloss))
-/mob/living/silicon/ai/proc/hardware_integrity()
-	return (health / get_max_health()) * 100

@@ -11,7 +11,7 @@
 
 	src.updatehealth()
 
-	if ((hardware_integrity() <= 0) || (backup_capacitor() <= 0))
+	if ((get_health_percent() <= 0) || (backup_capacitor() <= 0))
 		death()
 		return
 

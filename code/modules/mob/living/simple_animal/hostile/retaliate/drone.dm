@@ -102,7 +102,8 @@
 	if(prob(1))
 		src.visible_message("<span class='warning'>[html_icon(src)] [src] shudders and shakes as some of it's damaged systems come back online.</span>")
 		spark_at(src, cardinal_only = TRUE)
-		health += rand(25,100)
+		adjustBruteLoss(-(rand(10,50)))
+		adjustFireLoss(-(rand(10,50)))
 
 	//spark for no reason
 	if(prob(5))
@@ -111,16 +112,16 @@
 	//sometimes our targetting sensors malfunction, and we attack anyone nearby
 	Haywire()
 
-	var/current_max_health = get_max_health()
-	if(health / current_max_health > 0.9)
+	var/current_health_ratio = get_health_ratio()
+	if(current_health_ratio > 0.9)
 		explode_chance = 0
-	else if(health / current_max_health > 0.7)
+	else if(current_health_ratio > 0.7)
 		explode_chance = 0
-	else if(health / current_max_health > 0.5)
+	else if(current_health_ratio > 0.5)
 		explode_chance = 0.5
-	else if(health / current_max_health > 0.3)
+	else if(current_health_ratio > 0.3)
 		explode_chance = 5
-	else if(health > 0)
+	else if(current_health > 0)
 		//if health gets too low, shut down
 		exploding = 0
 		if(!disabled)
@@ -154,16 +155,16 @@
 	. = ..()
 	if(stat != DEAD)
 		var/current_max_health = get_max_health()
-		if(health / current_max_health <= 0.3)
+		if(current_health / current_max_health <= 0.3)
 			icon_state = "[icon_state]-shield3"
-		else if(health / current_max_health <= 0.5)
+		else if(current_health / current_max_health <= 0.5)
 			icon_state = "[icon_state]-shield1"
-		else if(health / current_max_health <= 0.7)
+		else if(current_health / current_max_health <= 0.7)
 			icon_state = "[icon_state]-shield2"
 
 //ion rifle!
 /mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
-	health -= rand(3,15) * (severity + 1)
+	adjustFireLoss(rand(3,15) * (severity + 1))
 	disabled = rand(150, 600)
 	hostile_drone = 0
 	walk(src,0)

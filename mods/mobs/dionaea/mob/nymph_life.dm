@@ -3,7 +3,7 @@
 
 	..()
 
-	if(health <= 0 || stat == DEAD)
+	if(stat == DEAD)
 		return
 
 	var/turf/checking = get_turf(src)

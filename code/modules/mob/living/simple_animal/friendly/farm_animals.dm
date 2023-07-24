@@ -11,7 +11,7 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	faction = "goat"
-	health = 40
+	mob_default_max_health = 40
 	natural_weapon = /obj/item/natural_weapon/hooves
 
 	meat_type = /obj/item/chems/food/meat/goat
@@ -100,7 +100,7 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	health = 50
+	mob_default_max_health = 50
 
 	meat_type = /obj/item/chems/food/meat/beef
 	meat_amount = 6
@@ -167,7 +167,7 @@
 	emote_see = list("pecks at the ground","flaps its tiny wings")
 	speak_chance = 2
 	turns_per_move = 2
-	health = 1
+	mob_default_max_health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_SIZE_MINISCULE
 
@@ -206,7 +206,7 @@ var/global/chicken_count = 0
 	emote_see = list("pecks at the ground","flaps its wings viciously")
 	speak_chance = 2
 	turns_per_move = 3
-	health = 10
+	mob_default_max_health = 10
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
 
