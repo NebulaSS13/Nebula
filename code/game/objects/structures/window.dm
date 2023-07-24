@@ -497,7 +497,7 @@
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
-	opacity = 1
+	opacity = TRUE
 	color = GLASS_COLOR_TINTED
 
 /obj/structure/window/reinforced/tinted/frosted

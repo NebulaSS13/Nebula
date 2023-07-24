@@ -38,7 +38,7 @@
 	desc = "An inflated membrane. Do not puncture."
 	density = TRUE
 	anchored = TRUE
-	opacity = 0
+	opacity = FALSE
 	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "wall"
 	maxhealth = 20
@@ -179,7 +179,7 @@
 	name = "inflatable door"
 	density = TRUE
 	anchored = TRUE
-	opacity = 0
+	opacity = FALSE
 
 	icon_state = "door_closed"
 	undeploy_path = /obj/item/inflatable/door

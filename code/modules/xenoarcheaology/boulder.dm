@@ -4,7 +4,7 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "boulder1"
 	density = TRUE
-	opacity = 1
+	opacity = TRUE
 	anchored = TRUE
 	material = /decl/material/solid/stone/sandstone
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME

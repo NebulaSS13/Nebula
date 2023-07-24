@@ -24,7 +24,7 @@
 
 /obj/effect/dead_plant
 	anchored = TRUE
-	opacity = 0
+	opacity = FALSE
 	density = FALSE
 	color = DEAD_PLANT_COLOUR
 

@@ -2454,7 +2454,7 @@
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2466,7 +2466,7 @@
 	icon_state = "pdoor0";
 	id_tag = "rescuedock";
 	name = "Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2703,7 +2703,7 @@
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2765,7 +2765,7 @@
 	icon_state = "pdoor0";
 	id_tag = "rescueeva";
 	name = "Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -3172,7 +3172,7 @@
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,
@@ -3225,7 +3225,7 @@
 	icon_state = "pdoor0";
 	id_tag = "rescueinfirm";
 	name = "Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,

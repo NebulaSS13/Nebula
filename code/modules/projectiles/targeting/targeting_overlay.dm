@@ -5,7 +5,7 @@
 	icon_state = "locking"
 	anchored = TRUE
 	density = FALSE
-	opacity = 0
+	opacity = FALSE
 	layer = ABOVE_HUMAN_LAYER
 	simulated = 0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE

@@ -24,7 +24,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
@@ -45,7 +45,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
@@ -75,7 +75,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -114,7 +114,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/airless,
@@ -127,7 +127,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -165,7 +165,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -270,7 +270,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/trade/maintenance/eva)
@@ -1007,7 +1007,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor,
@@ -1194,7 +1194,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor,
@@ -1674,7 +1674,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/eva)
@@ -2957,7 +2957,7 @@
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)

@@ -2075,7 +2075,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2224,7 +2224,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor,
 /area/unishi/smresearch)
@@ -2355,7 +2355,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/item/remains,
 /turf/simulated/floor,
@@ -2749,7 +2749,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/item/remains,
 /obj/random/shoes,

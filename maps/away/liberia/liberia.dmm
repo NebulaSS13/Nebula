@@ -179,7 +179,7 @@
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/window/northleft{
 	dir = 8;
@@ -209,7 +209,7 @@
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor,
 /area/liberia/engineeringreactor)
@@ -649,7 +649,7 @@
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -841,7 +841,7 @@
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -1276,7 +1276,7 @@
 	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1584,7 +1584,7 @@
 	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/blue{
 	icon_state = "4-8"
@@ -8100,7 +8100,7 @@
 	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,

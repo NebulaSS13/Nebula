@@ -4,7 +4,7 @@
 	icon_state = "rock-dark"
 	blocks_air = 1
 	density = TRUE
-	opacity = 1
+	opacity = TRUE
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
 /**********************Asteroid**************************/

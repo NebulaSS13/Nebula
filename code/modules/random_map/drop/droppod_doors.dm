@@ -5,7 +5,7 @@
 	icon_state = "droppod_door_closed"
 	anchored = TRUE
 	density = TRUE
-	opacity = 1
+	opacity = TRUE
 	layer = ABOVE_DOOR_LAYER
 	var/deploying
 	var/deployed

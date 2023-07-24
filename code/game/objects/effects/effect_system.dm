@@ -168,7 +168,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke
 	name = "smoke"
 	icon_state = "smoke"
-	opacity = 1
+	opacity = TRUE
 	anchored = FALSE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/time_to_live = 100
@@ -209,7 +209,7 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/illumination
 	name = "illumination"
-	opacity = 0
+	opacity = FALSE
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "sparks"
 

@@ -112,7 +112,7 @@
 	icon_state = "pdoor0";
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bridge)
@@ -144,7 +144,7 @@
 	icon_state = "pdoor0";
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bridge)
@@ -1819,7 +1819,7 @@
 	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -1912,7 +1912,7 @@
 	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -2159,7 +2159,7 @@
 	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_security)

@@ -4,7 +4,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield-old"
 	density = TRUE
-	opacity = 0
+	opacity = FALSE
 	anchored = TRUE
 	unacidable = 1
 	var/const/max_health = 200
@@ -108,7 +108,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "shieldoff"
 	density = TRUE
-	opacity = 0
+	opacity = FALSE
 	anchored = FALSE
 	initial_access = list(access_engine)
 	var/const/max_health = 100

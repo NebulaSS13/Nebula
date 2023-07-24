@@ -1316,7 +1316,7 @@
 	icon_state = "pdoor0";
 	id_tag = "CentComPort";
 	name = "Security Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/unsimulated/floor{
 	icon_state = "steel"

@@ -4,7 +4,7 @@
 	icon_state = "puddle"
 	anchored = TRUE
 	simulated = 0
-	opacity = 0
+	opacity = FALSE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	layer = FLY_LAYER
 	alpha = 0

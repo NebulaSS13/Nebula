@@ -681,7 +681,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Security Maintenance"
@@ -2799,7 +2799,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Security Maintenance"
@@ -3108,7 +3108,7 @@
 /area/exodus/security/main)
 "agN" = (
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/machinery/navbeacon/SecurityD,
 /obj/machinery/door/firedoor,
@@ -3239,7 +3239,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/security/brig)
@@ -3280,7 +3280,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance{
@@ -3316,7 +3316,7 @@
 	icon_state = "shutter0";
 	id_tag = "lawyer_blast";
 	name = "Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/security/brig)
@@ -4129,7 +4129,7 @@
 	icon_state = "shutter0";
 	id_tag = "lawyer_blast";
 	name = "Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/lawoffice)
@@ -4206,7 +4206,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -4307,7 +4307,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-8"
@@ -4322,7 +4322,7 @@
 	icon_state = "pdoor0";
 	id_tag = "brigobs";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -4345,7 +4345,7 @@
 	icon_state = "pdoor0";
 	id_tag = "brigobs";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-8"
@@ -4373,7 +4373,7 @@
 	icon_state = "pdoor0";
 	id_tag = "brigobs";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -4479,7 +4479,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-2"
@@ -5487,7 +5487,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -5935,7 +5935,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -5964,7 +5964,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/airlock/atmos{
 	name = "Atmospherics Maintenance"
@@ -6111,7 +6111,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green,
 /obj/structure/disposalpipe/segment{
@@ -6277,7 +6277,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/security/prison)
@@ -6320,7 +6320,7 @@
 	icon_state = "shutter0";
 	id_tag = "lawyer_blast";
 	name = "Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -6345,7 +6345,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -6457,7 +6457,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
@@ -6519,7 +6519,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
@@ -8016,7 +8016,7 @@
 	icon_state = "shutter0";
 	id_tag = "lawyer_blast";
 	name = "Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
@@ -8577,7 +8577,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-8"
@@ -8608,7 +8608,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/security{
@@ -8626,7 +8626,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Prison Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/security{
@@ -8748,7 +8748,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -9230,7 +9230,7 @@
 	icon_state = "shutter0";
 	id_tag = "visit_blast";
 	name = "Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/security/prison/dorm)
@@ -9282,7 +9282,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/blast/shutters{
 	density = FALSE;
@@ -9290,7 +9290,7 @@
 	icon_state = "shutter0";
 	id_tag = "visit_blast";
 	name = "Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -9698,7 +9698,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -10129,7 +10129,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -10642,7 +10642,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Secure Gate";
 	name = "Security Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/brigdoor/eastleft{
@@ -14452,7 +14452,7 @@
 	icon_state = "shutter0";
 	id_tag = "heads_meeting";
 	name = "Meeting Room Window Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-2"
@@ -14525,7 +14525,7 @@
 	icon_state = "shutter0";
 	id_tag = "heads_meeting";
 	name = "Meeting Room Window Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-2"
@@ -14566,7 +14566,7 @@
 	icon_state = "shutter0";
 	id_tag = "heads_meeting";
 	name = "Meeting Room Window Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green,
 /obj/machinery/door/firedoor,
@@ -14742,7 +14742,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/airlock/research{
 	name = "Mech Bay"
@@ -14980,7 +14980,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 2;
@@ -15297,7 +15297,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/robotics)
@@ -15336,7 +15336,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/robotics)
@@ -15364,7 +15364,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/lab)
@@ -15395,7 +15395,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/lab)
@@ -15654,7 +15654,7 @@
 	icon_state = "shutter0";
 	id_tag = "chemwindow";
 	name = "Chemistry Window Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/hallway/primary/central_two)
@@ -16004,7 +16004,7 @@
 	icon_state = "shutter0";
 	id_tag = "chapel";
 	name = "Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/office)
@@ -16802,7 +16802,7 @@
 "aJb" = (
 /obj/machinery/navbeacon/Bar,
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading{
@@ -16822,7 +16822,7 @@
 /area/exodus/gateway)
 "aJd" = (
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/machinery/navbeacon/Kitchen,
 /obj/machinery/door/firedoor,
@@ -17666,7 +17666,7 @@
 "aKW" = (
 /obj/machinery/navbeacon/Hydroponics,
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading,
@@ -17758,7 +17758,7 @@
 	icon_state = "shutter0";
 	id_tag = "chapel";
 	name = "Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/window/westleft{
 	name = "Coffin Storage"
@@ -19993,7 +19993,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -20225,7 +20225,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -20682,7 +20682,7 @@
 	icon_state = "shutter0";
 	id_tag = "acute1";
 	name = "EMT Storage Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/sleeper)
@@ -20943,7 +20943,7 @@
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
 	name = "CMO Office Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay3)
@@ -20961,7 +20961,7 @@
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
 	name = "CMO Office Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay)
@@ -20973,7 +20973,7 @@
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
 	name = "CMO Office Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay2)
@@ -21055,7 +21055,7 @@
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
 	name = "CMO Office Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay)
@@ -21107,7 +21107,7 @@
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
 	name = "CMO Office Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay2)
@@ -21119,7 +21119,7 @@
 	icon_state = "shutter0";
 	id_tag = "staffroom";
 	name = "Staff Room Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/cryo)
@@ -21207,7 +21207,7 @@
 	icon_state = "shutter0";
 	id_tag = "staffroom";
 	name = "Staff Room Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay2)
@@ -21470,7 +21470,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced{
@@ -21489,7 +21489,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -21752,7 +21752,7 @@
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
 	name = "CMO Office Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
@@ -21765,7 +21765,7 @@
 	icon_state = "shutter0";
 	id_tag = "cmooffice";
 	name = "CMO Office Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay4)
@@ -21888,7 +21888,7 @@
 	icon_state = "pdoor0";
 	id_tag = "misclab";
 	name = "Test Chamber Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -21901,7 +21901,7 @@
 	icon_state = "pdoor0";
 	id_tag = "misclab";
 	name = "Test Chamber Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -21954,7 +21954,7 @@
 	icon_state = "shutter0";
 	id_tag = "scanhideside";
 	name = "Diagnostics Room Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay4)
@@ -23111,7 +23111,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
@@ -23124,7 +23124,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
@@ -23164,7 +23164,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
@@ -23356,7 +23356,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -23372,7 +23372,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/airlock/research{
 	name = "Toxins Launch Room Access"
@@ -23470,7 +23470,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/airlock/research{
 	name = "Toxins Launch Room"
@@ -23638,7 +23638,7 @@
 	icon_state = "shutter0";
 	id_tag = "chemcounter";
 	name = "Pharmacy Counter Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/westright{
@@ -23921,7 +23921,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology/xenoflora_storage)
@@ -24281,7 +24281,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology/xenoflora)
@@ -24501,7 +24501,7 @@
 	icon_state = "shutter0";
 	id_tag = "surgeryobs";
 	name = "Operating Theatre Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/surgeryobs)
@@ -25561,7 +25561,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research/xenobiology)
@@ -25623,7 +25623,7 @@
 	icon_state = "shutter0";
 	id_tag = "surgeryobs";
 	name = "Operating Theatre Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/surgery)
@@ -25740,7 +25740,7 @@
 	icon_state = "shutter0";
 	id_tag = "surgeryobs2";
 	name = "Operating Theatre Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/surgery2)
@@ -27381,7 +27381,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio3";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -29821,7 +29821,7 @@
 	icon_state = "shutter0";
 	id_tag = "medbayquar";
 	name = "Medbay Emergency Quarantine Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -29850,7 +29850,7 @@
 	icon_state = "shutter0";
 	id_tag = "medbayquar";
 	name = "Medbay Emergency Quarantine Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -30456,7 +30456,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio3";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -30918,7 +30918,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -32258,7 +32258,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -32924,7 +32924,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio1";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -32978,7 +32978,7 @@
 	id_tag = "packageExternal"
 	},
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -33236,7 +33236,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio1";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -34883,7 +34883,7 @@
 	icon_state = "shutter0";
 	id_tag = "medbayrecquar";
 	name = "Medbay Emergency Quarantine Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -34900,7 +34900,7 @@
 	icon_state = "shutter0";
 	id_tag = "medbayrecquar";
 	name = "Medbay Emergency Quarantine Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -34970,7 +34970,7 @@
 	icon_state = "shutter0";
 	id_tag = "medbayrecquar";
 	name = "Medbay Emergency Quarantine Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "2-8"
@@ -34985,7 +34985,7 @@
 	icon_state = "shutter0";
 	id_tag = "medbayrecquar";
 	name = "Medbay Emergency Quarantine Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "4-8"
@@ -35100,7 +35100,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -35226,7 +35226,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio4";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
@@ -35238,7 +35238,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio4";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
@@ -35266,7 +35266,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio5";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green,
@@ -35280,7 +35280,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio5";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
@@ -35370,7 +35370,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio6";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
@@ -35404,7 +35404,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio6";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
@@ -35475,7 +35475,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
@@ -37623,7 +37623,7 @@
 	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -37764,7 +37764,7 @@
 	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -38317,7 +38317,7 @@
 	icon_state = "pdoor0";
 	id_tag = "researchlockdown";
 	name = "Research Division Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -5;
@@ -38553,7 +38553,7 @@
 "bCL" = (
 /obj/machinery/navbeacon/Research,
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading{
@@ -39584,7 +39584,7 @@
 	icon_state = "shutter0";
 	id_tag = "medbayquar";
 	name = "Medbay Emergency Quarantine Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading{
@@ -40964,7 +40964,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology/xenoflora)
@@ -41353,7 +41353,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -41419,7 +41419,7 @@
 	icon_state = "shutter0";
 	id_tag = "acute1";
 	name = "EMT Storage Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
@@ -41434,7 +41434,7 @@
 	icon_state = "shutter0";
 	id_tag = "acute1";
 	name = "EMT Storage Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/light_switch{
 	pixel_x = 22
@@ -42427,7 +42427,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/westleft{
 	name = "Server Room";
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/machinery/door/window/eastleft{
 	name = "Server Room"
@@ -44282,7 +44282,7 @@
 "bNY" = (
 /obj/machinery/navbeacon/Janitor,
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -44294,7 +44294,7 @@
 	icon_state = "shutter0";
 	id_tag = "acutesep";
 	name = "Acute Separation Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/corner/paleblue{
@@ -45812,7 +45812,7 @@
 	icon_state = "shutter0";
 	id_tag = "acute2";
 	name = "Acute Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/corner/pink{
 	dir = 9
@@ -46990,7 +46990,7 @@
 	icon_state = "shutter0";
 	id_tag = "scanhide";
 	name = "Diagnostics Room Separation Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/medical/sleeper)
@@ -47008,7 +47008,7 @@
 	icon_state = "shutter0";
 	id_tag = "scanhide";
 	name = "Diagnostics Room Separation Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -47026,7 +47026,7 @@
 	icon_state = "shutter0";
 	id_tag = "scanhide";
 	name = "Diagnostics Room Separation Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -47255,7 +47255,7 @@
 	icon_state = "pdoor0";
 	id_tag = "misclab";
 	name = "Test Chamber Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/window/southright{
 	name = "Test Chamber"
@@ -47290,7 +47290,7 @@
 	icon_state = "pdoor0";
 	id_tag = "misclab";
 	name = "Test Chamber Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/window/southleft{
 	name = "Test Chamber"
@@ -48266,7 +48266,7 @@
 "bWa" = (
 /obj/machinery/navbeacon/Medbay,
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/sleeper)
@@ -48309,7 +48309,7 @@
 	icon_state = "shutter0";
 	id_tag = "scanhideside";
 	name = "Diagnostics Room Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -48908,7 +48908,7 @@
 	icon_state = "shutter0";
 	id_tag = "scanhideside";
 	name = "Diagnostics Room Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "4-8"
@@ -49868,7 +49868,7 @@
 	icon_state = "shutter0";
 	id_tag = "scanhideside";
 	name = "Diagnostics Room Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/corner/pink{
 	dir = 9
@@ -51336,7 +51336,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
@@ -51357,7 +51357,7 @@
 	icon_state = "shutter0";
 	id_tag = "hop_office_desk";
 	name = "HoP Office Privacy Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "4-8"
@@ -54116,7 +54116,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
@@ -55560,7 +55560,7 @@
 "clg" = (
 /obj/machinery/navbeacon/Engineering,
 /obj/structure/plasticflaps{
-	opacity = 1
+	opacity = TRUE
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading{
@@ -57328,7 +57328,7 @@
 	icon_state = "pdoor0";
 	id_tag = "virologyquar";
 	name = "Virology Emergency Quarantine Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -57345,7 +57345,7 @@
 	icon_state = "pdoor0";
 	id_tag = "virologyquar";
 	name = "Virology Emergency Quarantine Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -57375,7 +57375,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
@@ -57395,7 +57395,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio3";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/window/westright{
@@ -57686,7 +57686,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -58016,7 +58016,7 @@
 	icon_state = "pdoor0";
 	id_tag = "EngineRadiatorViewport";
 	name = "Engine Radiator Viewport Shutter";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
@@ -58677,7 +58677,7 @@
 	icon_state = "pdoor0";
 	id_tag = "EngineRadiatorViewport";
 	name = "Engine Radiator Viewport Shutter";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
@@ -59014,7 +59014,7 @@
 	icon_state = "pdoor0";
 	id_tag = "EngineRadiatorViewport";
 	name = "Engine Radiator Viewport Shutter";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
@@ -59026,7 +59026,7 @@
 	icon_state = "pdoor0";
 	id_tag = "EngineRadiatorViewport";
 	name = "Engine Radiator Viewport Shutter";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /turf/simulated/floor/plating,
@@ -59072,7 +59072,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio2";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/window/westright{
@@ -60296,7 +60296,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio1";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/window/westright{
@@ -60945,7 +60945,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio4";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/reinforced,
@@ -61147,7 +61147,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio5";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/reinforced,
@@ -61796,7 +61796,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xenobio6";
 	name = "Containment Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/reinforced,

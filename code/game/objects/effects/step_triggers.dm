@@ -104,7 +104,7 @@
 /* Random teleporter, teleports atoms to locations ranging from teleport_x - teleport_x_offset, etc */
 
 /obj/effect/step_trigger/teleporter/random
-	opacity = 1
+	opacity = TRUE
 	var/teleport_x_offset = 0
 	var/teleport_y_offset = 0
 	var/teleport_z_offset = 0

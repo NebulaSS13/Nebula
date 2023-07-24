@@ -9,7 +9,7 @@ var/global/list/BUMP_TELEPORTERS = list()
 	invisibility = 101 		//nope, can't see this
 	anchored = TRUE
 	density = TRUE
-	opacity = 0
+	opacity = FALSE
 
 /obj/effect/bump_teleporter/Initialize()
 	. = ..()

@@ -17,7 +17,7 @@
 	icon_state = "open"
 	initial_access = list(list(access_atmospherics, access_engine_equip))
 	autoset_access = FALSE
-	opacity = 0
+	opacity = FALSE
 	density = FALSE
 	layer = BELOW_DOOR_LAYER
 	open_layer = BELOW_DOOR_LAYER

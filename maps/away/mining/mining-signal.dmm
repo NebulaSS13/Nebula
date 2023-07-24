@@ -968,7 +968,7 @@
 /obj/machinery/door/airlock/medical{
 	density = FALSE;
 	icon_state = "door_open";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/holosign/surgery,
 /turf/simulated/floor/tiled/airless,
@@ -1990,7 +1990,7 @@
 /obj/machinery/door/airlock/external{
 	density = FALSE;
 	icon_state = "door_open";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/blast/regular/open,
 /obj/machinery/door/firedoor,

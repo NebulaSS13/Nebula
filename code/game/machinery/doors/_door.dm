@@ -7,7 +7,7 @@
 	icon = 'icons/obj/doors/Doorint.dmi'
 	icon_state = "door1"
 	anchored = TRUE
-	opacity = 1
+	opacity = TRUE
 	density = TRUE
 	layer = CLOSED_DOOR_LAYER
 	interact_offline = TRUE

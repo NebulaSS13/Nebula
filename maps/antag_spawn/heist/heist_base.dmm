@@ -1022,7 +1022,7 @@
 	icon_state = "pdoor0";
 	id_tag = "SkipjackShuttersNorth";
 	name = "Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1389,7 +1389,7 @@
 	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1418,7 +1418,7 @@
 	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersEast";
 	name = "Skipjack Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1492,7 +1492,7 @@
 	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,

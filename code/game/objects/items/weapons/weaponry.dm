@@ -111,7 +111,7 @@
 	icon_state = "energynet"
 
 	density = TRUE
-	opacity = 0
+	opacity = FALSE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
 	anchored = TRUE
 	can_buckle = 0 //no manual buckling or unbuckling

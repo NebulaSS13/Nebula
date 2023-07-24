@@ -3,7 +3,7 @@
 	desc = "One man's garbage is another man's treasure."
 	icon = 'icons/obj/structures/rubble.dmi'
 	icon_state = "base"
-	opacity = 1
+	opacity = TRUE
 	density = TRUE
 	anchored = TRUE
 	maxhealth = 50

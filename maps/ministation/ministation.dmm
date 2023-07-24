@@ -13214,7 +13214,7 @@
 	},
 /obj/structure/curtain/open/bed{
 	icon_state = "closed";
-	opacity = 1
+	opacity = TRUE
 	},
 /turf/simulated/floor/plating,
 /area/ministation/disused_office)

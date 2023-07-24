@@ -5,7 +5,7 @@
 /obj/effect/effect/foam
 	name = "foam"
 	icon_state = "foam"
-	opacity = 0
+	opacity = FALSE
 	anchored = TRUE
 	density = FALSE
 	layer = ABOVE_OBJ_LAYER
