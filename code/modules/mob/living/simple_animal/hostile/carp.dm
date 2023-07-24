@@ -5,7 +5,7 @@
 	speak_chance = 0
 	turns_per_move = 3
 	speed = 2
-	maxHealth = 50
+	mob_default_max_health = 50
 	health = 50
 
 	harm_intent_damage = 8
@@ -34,8 +34,8 @@
 	update_icon()
 
 /mob/living/simple_animal/hostile/carp/proc/carp_randomify()
-	maxHealth = rand(initial(maxHealth), (1.5 * initial(maxHealth)))
-	health = maxHealth
+	mob_default_max_health = rand(initial(mob_default_max_health), (1.5 * initial(mob_default_max_health)))
+	health = mob_default_max_health
 	if(prob(1))
 		carp_color = pick(COLOR_WHITE, COLOR_BLACK)
 	else

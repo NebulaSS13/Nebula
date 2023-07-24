@@ -12,7 +12,7 @@
 	pixel_x = -16
 
 	health = 150
-	maxHealth = 150
+	mob_default_max_health = 150
 
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite/pike

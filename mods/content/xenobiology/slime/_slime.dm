@@ -8,7 +8,7 @@
 	icon_state = ICON_STATE_WORLD
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
-	maxHealth = 150
+	mob_default_max_health = 150
 	health = 150
 	gender = NEUTER
 	update_icon = 0
@@ -51,7 +51,7 @@
 	return /decl/material/liquid/slimejelly
 
 /mob/living/slime/adjustToxLoss(var/amount)
-	toxloss = clamp(toxloss + amount, 0, maxHealth)
+	toxloss = clamp(toxloss + amount, 0, get_max_health())
 
 /mob/living/slime/setToxLoss(var/amount)
 	adjustToxLoss(amount-getToxLoss())
@@ -87,7 +87,7 @@
 
 	var/tally = ..()
 
-	var/health_deficiency = (maxHealth - health)
+	var/health_deficiency = (get_max_health() - health)
 	if(health_deficiency >= 30) tally += (health_deficiency / 25)
 
 	if (bodytemperature < 183.222)
@@ -146,7 +146,7 @@
 	. = ..()
 
 	statpanel("Status")
-	stat(null, "Health: [round((health / maxHealth) * 100)]%")
+	stat(null, "Health: [round((health / get_max_health()) * 100)]%")
 	stat(null, "Intent: [a_intent]")
 
 	if (client.statpanel == "Status")
@@ -344,7 +344,7 @@
 	else if (nutrition < get_hunger_nutrition())
 		. += "<span class='warning'>Warning:\tthe slime is hungry.</span>"
 	. += "Electric charge strength:\t[powerlevel]"
-	. += "Health:\t[round((health * 100) / maxHealth)]%"
+	. += "Health:\t[round((health * 100) / get_max_health())]%"
 
 	var/list/mutations = slime_data.descendants?.Copy()
 	if(!mutations.len)

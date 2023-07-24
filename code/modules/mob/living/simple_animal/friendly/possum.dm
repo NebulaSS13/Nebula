@@ -11,7 +11,7 @@
 	speak_chance = 1
 	turns_per_move = 3
 	see_in_dark = 6
-	maxHealth = 50
+	mob_default_max_health = 50
 	health = 50
 	response_harm = "stamps on"
 	density = FALSE

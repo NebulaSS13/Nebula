@@ -23,12 +23,9 @@
 	name = "carcinus"
 	desc = "A small crab said to be made of stone and starlight."
 	icon = 'icons/mob/simple_animal/evilcrab.dmi'
-
 	speak_emote = list("chitters","clicks")
-
-
 	health = 200
-	maxHealth = 200
+	mob_default_max_health = 200
 	natural_weapon = /obj/item/natural_weapon/pincers/strong
 	resistance = 9
 	can_escape = TRUE //snip snip
@@ -50,7 +47,7 @@
 	speak_emote = list("gnashes")
 
 	health = 100
-	maxHealth = 100
+	mob_default_max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite
 	can_escape = TRUE
 
@@ -71,7 +68,7 @@
 	response_help_3p = "$USER$ thinks better of touching $TARGET$."
 
 	health = 150
-	maxHealth = 150
+	mob_default_max_health = 150
 	natural_weapon = /obj/item/natural_weapon/horror
 
 	wizardy_spells = list(/spell/targeted/torment)
@@ -97,7 +94,7 @@
 	speak_emote = list("entones")
 	mob_size = MOB_SIZE_SMALL
 	health = 25
-	maxHealth = 25
+	mob_default_max_health = 25
 	wizardy_spells = list(
 		/spell/targeted/heal_target,
 		/spell/targeted/heal_target/area
@@ -116,7 +113,7 @@
 	response_harm = "stamps on"
 
 	health = 15
-	maxHealth = 15
+	mob_default_max_health = 15
 	natural_weapon = /obj/item/natural_weapon/bite/mouse
 	can_escape = TRUE
 
@@ -136,6 +133,6 @@
 	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_SMALL
 	health = 25
-	maxHealth = 25
+	mob_default_max_health = 25
 	natural_weapon = /obj/item/natural_weapon/claws/weak
 	wizardy_spells = list(/spell/targeted/subjugation)

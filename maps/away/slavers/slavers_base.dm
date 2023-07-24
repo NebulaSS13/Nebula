@@ -134,7 +134,7 @@
 	turns_per_move = 5
 	speed = 4
 	stop_automated_movement_when_pulled = 0
-	maxHealth = 100
+	mob_default_max_health = 100
 	health = 100
 	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE

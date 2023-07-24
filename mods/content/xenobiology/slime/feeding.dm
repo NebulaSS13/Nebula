@@ -31,7 +31,7 @@
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [src] is dead."))
 		return FEED_RESULT_DEAD
-	if(M.getCloneLoss() >= M.maxHealth * 1.5)
+	if(M.getCloneLoss() >= M.get_max_health() * 1.5)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [M] is too degraded to feed upon."))
 		return FEED_RESULT_DEAD

@@ -5,7 +5,7 @@
 	speak_chance = 0
 	turns_per_move = 3
 	speed = 4
-	maxHealth = 20
+	mob_default_max_health = 20
 	health = 20
 
 	harm_intent_damage = 8

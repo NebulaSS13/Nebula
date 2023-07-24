@@ -77,5 +77,5 @@ var/global/list/slime_pain_messages = list(
 	if(prob(15) && client)
 		handle_additional_slime_effects()
 	. = 15 * protection
-	if(stat == DEAD || getCloneLoss() >= maxHealth)
+	if(stat == DEAD || getCloneLoss() >= get_max_health())
 		eaten_by_slime()

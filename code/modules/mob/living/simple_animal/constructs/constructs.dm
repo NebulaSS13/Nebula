@@ -65,7 +65,7 @@
 
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
-		if(health < maxHealth)
+		if(health < get_max_health())
 			adjustBruteLoss(-5)
 			user.visible_message("<span class='notice'>\The [user] mends some of \the [src]'s wounds.</span>")
 		else
@@ -75,8 +75,9 @@
 
 /mob/living/simple_animal/construct/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..(user)
-	if(health < maxHealth)
-		if(health >= maxHealth/2)
+	var/current_max_health = get_max_health()
+	if(health < current_max_health)
+		if(health >= current_max_health/2)
 			to_chat(user, SPAN_WARNING("It looks slightly dented."))
 		else
 			to_chat(user, SPAN_DANGER("It looks severely dented!"))
@@ -98,7 +99,7 @@
 	real_name = "Juggernaut"
 	desc = "A possessed suit of armour driven by the will of the restless dead"
 	icon = 'icons/mob/simple_animal/construct_behemoth.dmi'
-	maxHealth = 250
+	mob_default_max_health = 250
 	health = 250
 	speak_emote = list("rumbles")
 	response_harm = "harmlessly punches"
@@ -156,7 +157,7 @@
 	real_name = "Wraith"
 	desc = "A wicked bladed shell contraption piloted by a bound spirit"
 	icon = 'icons/mob/simple_animal/construct_floating.dmi'
-	maxHealth = 75
+	mob_default_max_health = 75
 	health = 75
 	natural_weapon = /obj/item/natural_weapon/wraith
 	speed = -1
@@ -181,7 +182,7 @@
 	real_name = "Artificer"
 	desc = "A bulbous construct dedicated to building and maintaining The Cult of Nar-Sie's armies"
 	icon = 'icons/mob/simple_animal/construct_artificer.dmi'
-	maxHealth = 50
+	mob_default_max_health = 50
 	health = 50
 	response_harm = "viciously beaten"
 	harm_intent_damage = 5
@@ -208,7 +209,7 @@
 	real_name = "Behemoth"
 	desc = "The pinnacle of occult technology, Behemoths are the ultimate weapon in the Cult of Nar-Sie's arsenal."
 	icon = 'icons/mob/simple_animal/construct_behemoth.dmi'
-	maxHealth = 750
+	mob_default_max_health = 750
 	health = 750
 	speak_emote = list("rumbles")
 	response_harm = "harmlessly punches"
@@ -232,7 +233,7 @@
 	real_name = "Harvester"
 	desc = "The promised reward of the livings who follow Nar-Sie. Obtained by offering their bodies to the geometer of blood"
 	icon = 'icons/mob/simple_animal/construct_harvester.dmi'
-	maxHealth = 150
+	mob_default_max_health = 150
 	health = 150
 	natural_weapon = /obj/item/natural_weapon/harvester
 	speed = -1

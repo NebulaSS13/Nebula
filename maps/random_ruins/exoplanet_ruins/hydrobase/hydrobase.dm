@@ -85,7 +85,7 @@
 	name = "goat"
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
 	health = 100
-	maxHealth = 100
+	mob_default_max_health = 100
 	natural_weapon = /obj/item/natural_weapon/hooves/strong
 	faction = "farmbots"
 
@@ -100,7 +100,7 @@
 	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")
 	faction = "farmbots"
 	health = 225
-	maxHealth = 225
+	mob_default_max_health = 225
 	malfunctioning = 0
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/Initialize()

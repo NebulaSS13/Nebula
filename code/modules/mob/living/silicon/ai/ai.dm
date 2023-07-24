@@ -56,7 +56,11 @@ var/global/list/ai_verbs_default = list(
 	density = TRUE
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
-	maxHealth = 200
+	mob_default_max_health = 200
+
+	silicon_camera = /obj/item/camera/siliconcam/ai_camera
+	silicon_radio = /obj/item/radio/headset/heads/ai_integrated
+
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -65,9 +69,6 @@ var/global/list/ai_verbs_default = list(
 	var/icon/holo_icon_longrange //Yellow hologram.
 	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/multitool/aiMulti = null
-
-	silicon_camera = /obj/item/camera/siliconcam/ai_camera
-	silicon_radio = /obj/item/radio/headset/heads/ai_integrated
 	var/obj/item/radio/headset/heads/ai_integrated/ai_radio
 
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.

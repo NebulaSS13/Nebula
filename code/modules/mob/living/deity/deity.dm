@@ -6,7 +6,7 @@
 	pixel_x = -128
 	pixel_y = -128
 	health = 100
-	maxHealth = 100 //I dunno what to do with health at this point.
+	mob_default_max_health = 100 //I dunno what to do with health at this point.
 	universal_understand = TRUE
 	mob_sort_value = 5
 

@@ -25,7 +25,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 
 	meat_type = /obj/item/chems/food/fish
 	speed = 4
-	maxHealth = 100
+	mob_default_max_health = 100
 	health = 100
 
 	harm_intent_damage = 5
@@ -89,7 +89,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 			attacking_with.force = 2 + initial(I.force)
 			move_to_delay = 2 * I.w_class
 
-		maxHealth = health
+		set_max_health(health)
 		if(creator)
 			src.creator = weakref(creator)
 			faction = "\ref[creator]" // very unique

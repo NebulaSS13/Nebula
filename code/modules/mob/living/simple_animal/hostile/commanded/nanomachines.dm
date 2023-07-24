@@ -7,7 +7,7 @@
 	icon = 'icons/mob/simple_animal/nanomachines.dmi'
 	natural_weapon = /obj/item/natural_weapon/nanomachine
 	health = 10
-	maxHealth = 10
+	mob_default_max_health = 10
 	can_escape = TRUE
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")
 	gene_damage = -1
@@ -27,7 +27,7 @@
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/Life()
 	regen_time++
-	if(regen_time == 2 && health < maxHealth) //slow regen
+	if(regen_time == 2 && health < get_max_health()) //slow regen
 		regen_time = 0
 		health++
 	. = ..()
@@ -59,7 +59,7 @@
 	if(!Adjacent(target_mob) || SA_attackable(target_mob))
 		stance = COMMANDED_HEAL
 		return 0
-	if(target_mob.stat || target_mob.health >= target_mob.maxHealth) //he's either dead or healthy, move along.
+	if(target_mob.stat || target_mob.health >= target_mob.get_max_health()) //he's either dead or healthy, move along.
 		allowed_targets -= target_mob
 		target_mob = null
 		stance = COMMANDED_HEAL
