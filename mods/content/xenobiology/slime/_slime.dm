@@ -86,7 +86,7 @@
 
 	var/tally = ..()
 
-	var/health_deficiency = (get_max_health() - health)
+	var/health_deficiency = (get_max_health() - current_health)
 	if(health_deficiency >= 30) tally += (health_deficiency / 25)
 
 	if (bodytemperature < 183.222)
@@ -99,7 +99,7 @@
 		if(reagents.has_reagent(/decl/material/liquid/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
 			tally *= 5
 
-	if(health <= 0) // if damaged, the slime moves twice as slow
+	if(current_health <= 0) // if damaged, the slime moves twice as slow
 		tally *= 2
 
 	return tally + config.slime_delay
@@ -145,7 +145,7 @@
 	. = ..()
 
 	statpanel("Status")
-	stat(null, "Health: [round((health / get_max_health()) * 100)]%")
+	stat(null, "Health: [get_health_percent()]%")
 	stat(null, "Intent: [a_intent]")
 
 	if (client.statpanel == "Status")
@@ -343,7 +343,7 @@
 	else if (nutrition < get_hunger_nutrition())
 		. += "<span class='warning'>Warning:\tthe slime is hungry.</span>"
 	. += "Electric charge strength:\t[powerlevel]"
-	. += "Health:\t[round((health * 100) / get_max_health())]%"
+	. += "Health:\t[get_health_percent()]%"
 
 	var/list/mutations = slime_data.descendants?.Copy()
 	if(!mutations.len)

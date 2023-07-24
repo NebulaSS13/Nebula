@@ -73,9 +73,8 @@
 		return FALSE
 	transformer.status_flags &= ~GODMODE
 	if(share_damage)
-		var/ratio = target.health/target.get_max_health()
 		var/transformer_max_health = transformer.get_max_health()
-		var/damage = transformer.set_max_health(transformer_max_health-round(transformer_max_health*(ratio)))
+		var/damage = transformer.set_max_health(transformer_max_health-round(transformer_max_health*(transformer.get_health_ratio())))
 		for(var/i in 1 to CEILING(damage/10))
 			transformer.adjustBruteLoss(10)
 	if(target.mind)

@@ -1,5 +1,6 @@
 /mob/living/Initialize()
 
+	current_health = get_max_health()
 	original_fingerprint_seed = sequential_id(/mob)
 	fingerprint               = md5(num2text(original_fingerprint_seed))
 	original_genetic_seed     = sequential_id(/mob)
@@ -10,7 +11,6 @@
 		add_to_dead_mob_list()
 	else
 		add_to_living_mob_list()
-	health = get_max_health()
 
 /mob/living/get_ai_type()
 	var/decl/species/my_species = get_species()
@@ -187,8 +187,8 @@ default behaviour is:
 /mob/living/verb/succumb()
 	set hidden = 1
 	var/current_max_health = get_max_health()
-	if ((health < current_max_health/2)) // Health below half of maxhealth.
-		adjustBrainLoss(health + current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
+	if (current_health < (current_max_health/2)) // Health below half of maxhealth.
+		adjustBrainLoss(current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
 		updatehealth()
 		to_chat(src, SPAN_NOTICE("You have given up life and succumbed to death."))
 
@@ -197,17 +197,18 @@ default behaviour is:
 		queue_icon_update()
 
 /mob/living/proc/should_be_dead()
-	return health <= 0
+	return current_health <= 0
 
 /mob/living/proc/get_total_life_damage()
 	return (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
 
 /mob/living/proc/updatehealth()
-	health = get_max_health()
 	if(status_flags & GODMODE)
+		current_health = get_max_health()
 		set_stat(CONSCIOUS)
 		return
-	health -= get_total_life_damage()
+	var/max_health = get_max_health()
+	current_health = clamp(max_health-get_total_life_damage(), -(max_health), max_health)
 	if(stat != DEAD && should_be_dead())
 		death()
 
@@ -240,13 +241,16 @@ default behaviour is:
 
 	return btemperature
 
+/mob/living/proc/setBruteLoss(var/amount)
+	adjustBruteLoss((amount * 0.5)-getBruteLoss())
+
 /mob/living/proc/getBruteLoss()
-	return get_max_health() - health
+	return get_max_health() - current_health
 
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if (status_flags & GODMODE)
 		return
-	health = clamp(health - amount, 0, get_max_health())
+	current_health = clamp(current_health - amount, 0, get_max_health())
 
 /mob/living/proc/getOxyLoss()
 	return 0
@@ -300,7 +304,7 @@ default behaviour is:
 	return
 
 /mob/living/proc/get_health_ratio() // ratio might be the wrong word
-	return health/get_max_health()
+	return current_health/get_max_health()
 
 /mob/living/proc/get_health_percent(var/sigfig = 1)
 	return round(get_health_ratio()*100, sigfig)

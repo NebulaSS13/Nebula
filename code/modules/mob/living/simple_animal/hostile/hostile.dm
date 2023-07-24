@@ -219,9 +219,9 @@
 			target_mob = null
 
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
-	var/oldhealth = health
+	var/oldhealth = current_health
 	. = ..()
-	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
 		MoveToTarget(move_only = TRUE)
 
@@ -232,9 +232,9 @@
 		MoveToTarget(move_only = TRUE)
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
-	var/oldhealth = health
+	var/oldhealth = current_health
 	. = ..()
-	if(isliving(Proj.firer) && !target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(isliving(Proj.firer) && !target_mob && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
 		MoveToTarget(move_only = TRUE)
 

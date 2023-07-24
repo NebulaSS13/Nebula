@@ -104,9 +104,9 @@
 					emagged = !emagged
 
 /mob/living/bot/secbot/attackby(var/obj/item/O, var/mob/user)
-	var/curhealth = health
+	var/curhealth = current_health
 	. = ..()
-	if(health < curhealth)
+	if(current_health < curhealth)
 		react_to_attack(user)
 
 /mob/living/bot/secbot/emag_act(var/remaining_charges, var/mob/user)
@@ -119,11 +119,11 @@
 		return 1
 
 /mob/living/bot/secbot/bullet_act(var/obj/item/projectile/P)
-	var/curhealth = health
+	var/curhealth = current_health
 	var/mob/shooter = P.firer
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
-	if(!target && health < curhealth && istype(shooter) && (shooter in view(world.view, src)))
+	if(!target && current_health < curhealth && istype(shooter) && (shooter in view(world.view, src)))
 		react_to_attack(shooter)
 
 /mob/living/bot/secbot/proc/begin_arrest(mob/target, var/threat)

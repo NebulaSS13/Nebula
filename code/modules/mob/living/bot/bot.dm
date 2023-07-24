@@ -54,8 +54,6 @@
 	access_scanner = new /obj(src)
 	access_scanner.req_access = req_access?.Copy()
 
-/mob/living/bot/Initialize()
-	. = ..()
 	if(on)
 		turn_on() // Update lights and other stuff
 	else
@@ -101,10 +99,9 @@
 			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
 	else if(IS_WELDER(O))
-		var/current_max_health = get_max_health()
-		if(health < current_max_health)
+		if(current_health < get_max_health())
 			if(open)
-				health = min(current_max_health, health + 10)
+				heal_overall_damage(10)
 				user.visible_message("<span class='notice'>\The [user] repairs \the [src].</span>","<span class='notice'>You repair \the [src].</span>")
 			else
 				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")

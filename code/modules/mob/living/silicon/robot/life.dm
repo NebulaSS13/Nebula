@@ -68,7 +68,7 @@
 		set_light(0)
 
 /mob/living/silicon/robot/should_be_dead()
-	return health < config.health_threshold_dead
+	return current_health < config.health_threshold_dead
 
 /mob/living/silicon/robot/handle_regular_status_updates()
 	updatehealth()
@@ -137,7 +137,7 @@
 	if (src.healths)
 		if (src.stat != DEAD)
 			if(isdrone(src))
-				switch(health)
+				switch(current_health)
 					if(35 to INFINITY)
 						src.healths.icon_state = "health0"
 					if(25 to 34)
@@ -153,7 +153,7 @@
 					else
 						src.healths.icon_state = "health6"
 			else
-				switch(health)
+				switch(current_health)
 					if(200 to INFINITY)
 						src.healths.icon_state = "health0"
 					if(150 to 200)
@@ -165,7 +165,7 @@
 					if(0 to 50)
 						src.healths.icon_state = "health4"
 					else
-						if(health > config.health_threshold_dead)
+						if(current_health > config.health_threshold_dead)
 							src.healths.icon_state = "health5"
 						else
 							src.healths.icon_state = "health6"

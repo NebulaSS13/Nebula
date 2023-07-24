@@ -29,12 +29,12 @@
 	user.set_machine(src)
 	var/health_text = ""
 	if(src.occupant)
-		if(src.occupant.health <= -100)
+		if(src.occupant.current_health <= -100)
 			health_text = "<FONT color=red>Dead</FONT>"
-		else if(src.occupant.health < 0)
-			health_text = "<FONT color=red>[round(src.occupant.health,0.1)]</FONT>"
+		else if(src.occupant.current_health < 0)
+			health_text = "<FONT color=red>[round(src.occupant.current_health,0.1)]</FONT>"
 		else
-			health_text = "[round(src.occupant.health,0.1)]"
+			health_text = "[round(src.occupant.current_health,0.1)]"
 
 	var/dat ="<B>Implanter Status</B><BR>"
 

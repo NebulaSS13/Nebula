@@ -74,7 +74,7 @@ var/global/list/carp_count = list() // a list of Z levels (string), associated w
 			break
 
 /datum/event/carp_migration/proc/check_gib(var/mob/living/simple_animal/hostile/carp/M)	//awesome road kills
-	if(M.health <= 0 && prob(60))
+	if(M.current_health <= 0 && prob(60))
 		M.gib()
 
 /proc/get_random_edge_turf(var/direction, var/clearance = TRANSITIONEDGE + 1, var/Z)

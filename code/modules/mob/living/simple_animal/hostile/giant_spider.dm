@@ -145,8 +145,7 @@
 	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
-	mob_default_max_health = rand(initial(mob_default_max_health), (1.4 * initial(mob_default_max_health)))
-	health = mob_default_max_health
+	set_max_health(rand(initial(mob_default_max_health), (1.4 * initial(mob_default_max_health))))
 	eye_colour = pick(allowed_eye_colours)
 	update_icon()
 
@@ -162,10 +161,10 @@
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
 	. = ..()
 	if(isliving(.))
-		if(health < get_max_health())
+		if(current_health < get_max_health())
 			var/obj/item/attacking_with = get_natural_weapon()
 			if(attacking_with)
-				health += (0.2 * attacking_with.force) //heal a bit on hit
+				heal_overall_damage(0.2 * attacking_with.force) //heal a bit on hit
 		if(ishuman(.))
 			var/mob/living/carbon/human/H = .
 			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)

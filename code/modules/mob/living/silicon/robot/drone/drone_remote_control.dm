@@ -14,7 +14,7 @@
 		to_chat(user, SPAN_WARNING("You cannot take control of an autonomous, active drone."))
 		return
 
-	if(health < -35 || emagged)
+	if(current_health < -(get_max_health()) || emagged)
 		to_chat(user, SPAN_WARNING("<b>WARNING:</b> connection timed out."))
 		return
 
