@@ -1,10 +1,3 @@
-/mob/living/silicon/robot/updatehealth()
-	health = get_max_health()
-	if(status_flags & GODMODE)
-		stat = CONSCIOUS
-		return
-	health -= (getBruteLoss() + getFireLoss())
-
 /mob/living/silicon/robot/getBruteLoss()
 	var/amount = 0
 	for(var/V in components)

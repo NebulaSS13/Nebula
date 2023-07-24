@@ -36,8 +36,6 @@
 				M.deactivate()
 
 	updatehealth()
-	if(health <= 0 && stat != DEAD)
-		death()
 
 	if(emp_damage > 0)
 		emp_damage -= min(1, emp_damage) //Reduce emp accumulation over time

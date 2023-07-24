@@ -37,12 +37,9 @@
 	oxyloss = max(0, amount)
 
 /mob/living/silicon/ai/updatehealth()
-	health = get_max_health()
+	..()
 	if(status_flags & GODMODE)
-		set_stat(CONSCIOUS)
 		setOxyLoss(0)
-	else
-		health -= (getFireLoss() - getBruteLoss()) // Oxyloss is not part of health as it represents AIs backup power. AI is immune against ToxLoss as it is machine.
 
 /mob/living/silicon/ai/rejuvenate()
 	..()

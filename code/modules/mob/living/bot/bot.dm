@@ -64,8 +64,7 @@
 
 /mob/living/bot/Life()
 	..()
-	if(health <= 0)
-		death()
+	if(stat == DEAD)
 		return
 	set_status(STAT_WEAK, 0)
 	set_status(STAT_STUN, 0)
@@ -74,14 +73,13 @@
 	if(on && !client && !busy)
 		handleAI()
 
-/mob/living/bot/updatehealth()
-	health = get_max_health()
-	if(status_flags & GODMODE)
-		set_stat(CONSCIOUS)
-	else
-		health -= (getFireLoss()+getBruteLoss())
+/mob/living/bot/get_total_life_damage()
+	return getFireLoss() + getBruteLoss()
 
 /mob/living/bot/death()
+	if(stat == DEAD)
+		return
+	set_stat(DEAD)
 	explode()
 
 /mob/living/bot/attackby(var/obj/item/O, var/mob/user)
