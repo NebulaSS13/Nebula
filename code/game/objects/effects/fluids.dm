@@ -104,7 +104,7 @@
 			set_light(0)
 
 // Map helper.
-/obj/effect/fluid_mapped
+/obj/abstract/fluid_mapped
 	name = "mapped flooded area"
 	alpha = 125
 	icon_state = "shallow_still"
@@ -113,14 +113,14 @@
 	var/fluid_type = /decl/material/liquid/water
 	var/fluid_initial = FLUID_MAX_DEPTH
 
-/obj/effect/fluid_mapped/Initialize()
+/obj/abstract/fluid_mapped/Initialize()
 	..()
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		T.add_fluid(fluid_type, fluid_initial)
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/fluid_mapped/fuel
+/obj/abstract/fluid_mapped/fuel
 	name = "spilled fuel"
 	fluid_type = /decl/material/liquid/fuel
 	fluid_initial = 10
