@@ -3,7 +3,6 @@
 	desc = "A ferocious fish with many, many teeth."
 	icon = 'icons/mob/simple_animal/shark.dmi'
 	mob_default_max_health = 150
-	health = 150
 	natural_weapon = /obj/item/natural_weapon/bite/shark
 	break_stuff_probability = 15
 	faction = "sharks"
@@ -28,7 +27,6 @@
 	speed = 0
 	mob_size = MOB_SIZE_LARGE
 	pixel_x = -16
-	health = 400
 	mob_default_max_health = 400
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite/giantshark

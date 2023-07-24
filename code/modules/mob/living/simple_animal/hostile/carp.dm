@@ -6,8 +6,6 @@
 	turns_per_move = 3
 	speed = 2
 	mob_default_max_health = 50
-	health = 50
-
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite
 	pry_time = 10 SECONDS

@@ -9,7 +9,6 @@
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
 	mob_default_max_health = 150
-	health = 150
 	gender = NEUTER
 	update_icon = 0
 	see_in_dark = 8

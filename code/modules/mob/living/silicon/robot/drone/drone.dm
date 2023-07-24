@@ -3,7 +3,6 @@
 	real_name = "drone"
 	icon = 'icons/mob/robots/drones/drone.dmi'
 	mob_default_max_health = 35
-	health = 35
 	cell_emp_mult = 1
 	universal_speak = FALSE
 	universal_understand = TRUE
@@ -18,8 +17,6 @@
 	local_transmit = 1
 	possession_candidate = 1
 	speed = -1
-
-	mob_default_max_health = 35
 
 	can_pull_size = ITEM_SIZE_NORMAL
 	can_pull_mobs = MOB_PULL_SMALLER

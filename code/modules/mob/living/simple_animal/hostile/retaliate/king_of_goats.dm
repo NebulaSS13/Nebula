@@ -13,7 +13,6 @@
 	emote_see = list("stamps a mighty foot, shaking the surroundings")
 	meat_amount = 12
 	response_harm = "assaults"
-	health = 500
 	mob_default_max_health = 500
 	mob_size = MOB_SIZE_LARGE
 	mob_bump_flag = HEAVY
@@ -59,7 +58,6 @@
 	desc = "The King of Kings, God amongst men, and your superior in every way."
 	icon = 'icons/mob/simple_animal/goat_king_phase_2.dmi'
 	meat_amount = 36
-	health = 750
 	mob_default_max_health = 750
 	natural_weapon = /obj/item/natural_weapon/goatking/unleashed
 	elemental_weapons = list(
@@ -94,7 +92,6 @@
 	name = "honour guard"
 	desc = "A very handsome and noble beast."
 	icon = 'icons/mob/simple_animal/goat_guard.dmi'
-	health = 125
 	mob_default_max_health = 125
 	natural_weapon = /obj/item/natural_weapon/goathorns
 
@@ -108,7 +105,6 @@
 	name = "master of the guard"
 	desc = "A very handsome and noble beast - the most trusted of all the king's men."
 	icon = 'icons/mob/simple_animal/goat_master.dmi'
-	health = 200
 	mob_default_max_health = 200
 	natural_weapon = /obj/item/natural_weapon/goathorns
 	move_to_delay = 3

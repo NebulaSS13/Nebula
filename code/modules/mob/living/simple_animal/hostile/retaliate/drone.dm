@@ -12,7 +12,6 @@
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
-	health = 300
 	mob_default_max_health = 300
 	speed = 8
 	move_to_delay = 6

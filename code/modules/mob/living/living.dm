@@ -10,6 +10,7 @@
 		add_to_dead_mob_list()
 	else
 		add_to_living_mob_list()
+	health = get_max_health()
 
 /mob/living/get_ai_type()
 	var/decl/species/my_species = get_species()
