@@ -1,7 +1,7 @@
 /mob/living/simple_animal
 	name = "animal"
 	health = 20
-	maxHealth = 20
+	mob_default_max_health = 20
 	universal_speak = FALSE
 	mob_sort_value = 12
 
@@ -197,8 +197,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		death()
 		return
 
-	if(health > maxHealth)
-		health = maxHealth
+	var/current_max_health = get_max_health()
+	if(health > current_max_health)
+		health = current_max_health
 
 	handle_supernatural()
 	handle_impaired_vision()
@@ -376,7 +377,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			var/obj/item/stack/medical/MED = O
 			if(!MED.animal_heal)
 				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
-			else if(health < maxHealth && MED.can_use(1))
+			else if(health < get_max_health() && MED.can_use(1))
 				adjustBruteLoss(-MED.animal_heal)
 				visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
 				MED.use(1)
@@ -452,11 +453,11 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	. = ..()
 
 	if(statpanel("Status") && show_stat_health)
-		stat(null, "Health: [round((health / maxHealth) * 100)]%")
+		stat(null, "Health: [get_health_percent()]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
 	density = FALSE
-	adjustBruteLoss(maxHealth) //Make sure dey dead.
+	adjustBruteLoss(get_max_health()) //Make sure dey dead.
 	walk_to(src,0)
 	. = ..(gibbed,deathmessage,show_dead_message)
 
@@ -609,8 +610,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/setCloneLoss(amount)
 	if(gene_damage >= 0)
-		gene_damage = clamp(amount, 0, maxHealth)
-		if(gene_damage >= maxHealth)
+		var/current_max_health = get_max_health()
+		gene_damage = clamp(amount, 0, current_max_health)
+		if(gene_damage >= current_max_health)
 			death()
 
 /mob/living/simple_animal/get_admin_job_string()

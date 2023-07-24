@@ -14,7 +14,7 @@
 	meat_amount = 12
 	response_harm = "assaults"
 	health = 500
-	maxHealth = 500
+	mob_default_max_health = 500
 	mob_size = MOB_SIZE_LARGE
 	mob_bump_flag = HEAVY
 	can_escape = TRUE
@@ -60,7 +60,7 @@
 	icon = 'icons/mob/simple_animal/goat_king_phase_2.dmi'
 	meat_amount = 36
 	health = 750
-	maxHealth = 750
+	mob_default_max_health = 750
 	natural_weapon = /obj/item/natural_weapon/goatking/unleashed
 	elemental_weapons = list(
 		BURN = /obj/item/natural_weapon/goatking/fire/unleashed,
@@ -95,7 +95,7 @@
 	desc = "A very handsome and noble beast."
 	icon = 'icons/mob/simple_animal/goat_guard.dmi'
 	health = 125
-	maxHealth = 125
+	mob_default_max_health = 125
 	natural_weapon = /obj/item/natural_weapon/goathorns
 
 /obj/item/natural_weapon/goathorns
@@ -109,7 +109,7 @@
 	desc = "A very handsome and noble beast - the most trusted of all the king's men."
 	icon = 'icons/mob/simple_animal/goat_master.dmi'
 	health = 200
-	maxHealth = 200
+	mob_default_max_health = 200
 	natural_weapon = /obj/item/natural_weapon/goathorns
 	move_to_delay = 3
 
@@ -235,6 +235,6 @@
 	. = ..()
 	if(current_damtype != BRUTE)
 		special_attacks++
-	
+
 /mob/living/simple_animal/hostile/retaliate/goat/king/Process_Spacemove()
 	return 1

@@ -10,7 +10,7 @@
 	icon_state = ICON_STATE_WORLD
 	death_msg = "expires with a pitiful chirrup..."
 	health = 60
-	maxHealth = 60
+	mob_default_max_health = 60
 	available_maneuvers = list(/decl/maneuver/leap)
 	status_flags = NO_ANTAG
 

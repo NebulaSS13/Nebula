@@ -14,7 +14,7 @@
 	faction = "crabs"
 	pry_time = 2 SECONDS
 	health = 350
-	maxHealth = 350
+	mob_default_max_health = 350
 	natural_weapon = /obj/item/natural_weapon/pincers/giant
 	return_damage_min = 2
 	return_damage_max = 5

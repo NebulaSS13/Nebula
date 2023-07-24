@@ -3,7 +3,7 @@
 	desc = "What IS that?"
 	pass_flags = PASS_FLAG_TABLE
 	health = 100
-	maxHealth = 100
+	mob_default_max_health = 100
 	mob_size = MOB_SIZE_TINY
 	mob_sort_value = 8
 	var/dead_icon

@@ -13,7 +13,7 @@
 	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
 	health = 300
-	maxHealth = 300
+	mob_default_max_health = 300
 	speed = 8
 	move_to_delay = 6
 	projectiletype = /obj/item/projectile/beam/drone
@@ -112,13 +112,14 @@
 	//sometimes our targetting sensors malfunction, and we attack anyone nearby
 	Haywire()
 
-	if(health / maxHealth > 0.9)
+	var/current_max_health = get_max_health()
+	if(health / current_max_health > 0.9)
 		explode_chance = 0
-	else if(health / maxHealth > 0.7)
+	else if(health / current_max_health > 0.7)
 		explode_chance = 0
-	else if(health / maxHealth > 0.5)
+	else if(health / current_max_health > 0.5)
 		explode_chance = 0.5
-	else if(health / maxHealth > 0.3)
+	else if(health / current_max_health > 0.3)
 		explode_chance = 5
 	else if(health > 0)
 		//if health gets too low, shut down
@@ -153,11 +154,12 @@
 /mob/living/simple_animal/hostile/retaliate/malf_drone/on_update_icon()
 	. = ..()
 	if(stat != DEAD)
-		if(health / maxHealth <= 0.3)
+		var/current_max_health = get_max_health()
+		if(health / current_max_health <= 0.3)
 			icon_state = "[icon_state]-shield3"
-		else if(health / maxHealth <= 0.5)
+		else if(health / current_max_health <= 0.5)
 			icon_state = "[icon_state]-shield1"
-		else if(health / maxHealth <= 0.7)
+		else if(health / current_max_health <= 0.7)
 			icon_state = "[icon_state]-shield2"
 
 //ion rifle!

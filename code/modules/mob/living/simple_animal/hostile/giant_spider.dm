@@ -15,7 +15,7 @@
 	turns_per_move = 5
 	see_in_dark = 10
 	response_harm = "pokes"
-	maxHealth = 125
+	mob_default_max_health = 125
 	health = 125
 	natural_weapon = /obj/item/natural_weapon/bite
 	heat_damage_per_tick = 20
@@ -65,7 +65,7 @@
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
 	meat_amount = 4
-	maxHealth = 200
+	mob_default_max_health = 200
 	health = 200
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 5
@@ -82,7 +82,7 @@
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "A monstrously huge beige spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_beige.dmi'
-	maxHealth = 80
+	mob_default_max_health = 80
 	health = 80
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
@@ -98,14 +98,16 @@
 	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
 	//things we can't encase in a cocoon
-	var/list/cocoon_blacklist = list(/mob/living/simple_animal/hostile/giant_spider,
-									 /obj/structure/closet)
+	var/static/list/cocoon_blacklist = list(
+		/mob/living/simple_animal/hostile/giant_spider,
+		/obj/structure/closet
+	)
 
 //hunters - the most damage, fast, average health and the only caste tenacious enough to break out of nets
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_black.dmi'
-	maxHealth = 150
+	mob_default_max_health = 150
 	health = 150
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 10
@@ -126,7 +128,7 @@
 /mob/living/simple_animal/hostile/giant_spider/spitter
 	desc = "A monstrously huge iridescent spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider_purple.dmi'
-	maxHealth = 90
+	mob_default_max_health = 90
 	health = 90
 	poison_per_bite = 15
 	ranged = TRUE
@@ -148,8 +150,8 @@
 	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
-	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
-	health = maxHealth
+	mob_default_max_health = rand(initial(mob_default_max_health), (1.4 * initial(mob_default_max_health)))
+	health = mob_default_max_health
 	eye_colour = pick(allowed_eye_colours)
 	update_icon()
 
@@ -165,7 +167,7 @@
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
 	. = ..()
 	if(isliving(.))
-		if(health < maxHealth)
+		if(health < get_max_health())
 			var/obj/item/attacking_with = get_natural_weapon()
 			if(attacking_with)
 				health += (0.2 * attacking_with.force) //heal a bit on hit

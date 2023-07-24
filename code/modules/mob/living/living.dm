@@ -185,22 +185,22 @@ default behaviour is:
 
 /mob/living/verb/succumb()
 	set hidden = 1
-	if ((src.health < src.maxHealth/2)) // Health below half of maxhealth.
-		src.adjustBrainLoss(src.health + src.maxHealth * 2) // Deal 2x health in BrainLoss damage, as before but variable.
+	var/current_max_health = get_max_health()
+	if ((health < current_max_health/2)) // Health below half of maxhealth.
+		adjustBrainLoss(health + current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
 		updatehealth()
-		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
+		to_chat(src, SPAN_NOTICE("You have given up life and succumbed to death."))
 
 /mob/living/proc/update_body(var/update_icons=1)
 	if(update_icons)
 		queue_icon_update()
 
 /mob/living/proc/updatehealth()
+	health = get_max_health()
 	if(status_flags & GODMODE)
-		health = maxHealth
 		set_stat(CONSCIOUS)
 	else
-		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss()
-
+		health -= (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage
@@ -232,12 +232,12 @@ default behaviour is:
 	return btemperature
 
 /mob/living/proc/getBruteLoss()
-	return maxHealth - health
+	return get_max_health() - health
 
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if (status_flags & GODMODE)
 		return
-	health = clamp(health - amount, 0, maxHealth)
+	health = clamp(health - amount, 0, get_max_health())
 
 /mob/living/proc/getOxyLoss()
 	return 0
@@ -293,11 +293,18 @@ default behaviour is:
 /mob/living/proc/adjustCloneLoss(var/amount)
 	return
 
-/mob/living/proc/getMaxHealth()
-	return maxHealth
+/mob/living/proc/get_health_ratio() // ratio might be the wrong word
+	return health/get_max_health()
 
-/mob/living/proc/setMaxHealth(var/newMaxHealth)
-	maxHealth = newMaxHealth
+/mob/living/proc/get_health_percent(var/sigfig = 1)
+	return round(get_health_ratio()*100, sigfig)
+
+/mob/living/proc/get_max_health()
+	return mob_default_max_health
+
+/mob/living/proc/set_max_health(var/val)
+	mob_default_max_health = val
+	updatehealth()
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 

@@ -74,7 +74,7 @@
 	faction = "samak"
 	icon = 'icons/mob/simple_animal/samak.dmi'
 	move_to_delay = 2
-	maxHealth = 125
+	mob_default_max_health = 125
 	health = 125
 	speed = 2
 	natural_weapon = /obj/item/natural_weapon/claws
@@ -97,7 +97,7 @@
 	faction = "diyaab"
 	icon = 'icons/mob/simple_animal/diyaab.dmi'
 	move_to_delay = 1
-	maxHealth = 25
+	mob_default_max_health = 25
 	health = 25
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws/weak
@@ -114,7 +114,7 @@
 	faction = "shantak"
 	icon = 'icons/mob/simple_animal/shantak.dmi'
 	move_to_delay = 1
-	maxHealth = 75
+	mob_default_max_health = 75
 	health = 75
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws
@@ -154,7 +154,7 @@
 	faction = "crab"
 	icon = 'icons/mob/simple_animal/royalcrab.dmi'
 	move_to_delay = 3
-	maxHealth = 150
+	mob_default_max_health = 150
 	health = 150
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/pincers
@@ -170,7 +170,7 @@
 	icon = 'icons/mob/simple_animal/char.dmi'
 	mob_size = MOB_SIZE_LARGE
 	health = 45
-	maxHealth = 45
+	mob_default_max_health = 45
 	natural_weapon = /obj/item/natural_weapon/charbaby
 	speed = 2
 	return_damage_min = 2

@@ -6,7 +6,7 @@
 	speak_emote = list("blares","buzzes","beeps")
 	speak_chance = 1
 	health = 50
-	maxHealth = 50
+	mob_default_max_health = 50
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
 	faction = "silicon"
 	min_gas = null

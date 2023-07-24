@@ -7,9 +7,8 @@
 	desc = "A little security robot.  He looks less than thrilled."
 	icon = 'icons/mob/bot/secbot.dmi'
 	icon_state = "secbot0"
-	var/attack_state = "secbot-c"
 	layer = MOB_LAYER
-	maxHealth = 50
+	mob_default_max_health = 50
 	health = 50
 	req_access = list(list(access_security, access_forensics_lockers))
 	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
@@ -20,6 +19,7 @@
 
 	RequiresAccessToToggle = 1 // Haha no
 
+	var/attack_state = "secbot-c"
 	var/idcheck = 0 // If true, arrests for having weapons without authorization.
 	var/check_records = 0 // If true, arrests people without a record.
 	var/check_arrest = 1 // If true, arrests people who are set to arrest.

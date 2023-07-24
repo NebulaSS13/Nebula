@@ -2,7 +2,7 @@
 	name = "maintenance drone"
 	real_name = "drone"
 	icon = 'icons/mob/robots/drones/drone.dmi'
-	maxHealth = 35
+	mob_default_max_health = 35
 	health = 35
 	cell_emp_mult = 1
 	universal_speak = FALSE

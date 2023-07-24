@@ -80,9 +80,11 @@
 		if(body_armor)
 			. += body_armor
 
+/mob/living/exosuit/get_max_health()
+	return (body ? body.mech_health : 0)
+
 /mob/living/exosuit/updatehealth()
-	maxHealth = body ? body.mech_health : 0
-	health = maxHealth-(getFireLoss()+getBruteLoss())
+	health = get_max_health()-(getFireLoss()+getBruteLoss())
 
 /mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
 	if(MC)
@@ -164,7 +166,7 @@
 	if(!hatch_closed || (body.pilot_coverage < 100)) //Open, environment is the source
 		return .
 	var/list/after_armor = modify_damage_by_armor(null, ., IRRADIATE, DAM_DISPERSED, src, 0, TRUE)
-	return after_armor[1]	
+	return after_armor[1]
 
 /mob/living/exosuit/getFireLoss()
 	var/total = 0
@@ -200,6 +202,6 @@
 			for(var/thing in pilots)
 				var/mob/pilot = thing
 				pilot.emp_act(severity)
-				
+
 /mob/living/exosuit/get_bullet_impact_effect_type(def_zone)
 	return BULLET_IMPACT_METAL

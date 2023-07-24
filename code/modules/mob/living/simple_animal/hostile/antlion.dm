@@ -11,7 +11,7 @@
 	bleed_colour = COLOR_SKY_BLUE
 
 	health = 65
-	maxHealth = 65
+	mob_default_max_health = 65
 	natural_weapon = /obj/item/natural_weapon/bite
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
@@ -85,7 +85,7 @@
 /mob/living/simple_animal/hostile/antlion/proc/process_healing()
 	if(!incapacitated() && healing)
 		var/old_health = health
-		if(old_health < maxHealth)
+		if(old_health < get_max_health())
 			health = old_health + heal_amount
 
 /mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
@@ -99,7 +99,7 @@
 	icon = 'icons/mob/simple_animal/antlion_queen.dmi'
 	mob_size = MOB_SIZE_LARGE
 	health = 275
-	maxHealth = 275
+	mob_default_max_health = 275
 	natural_weapon = /obj/item/natural_weapon/bite/megalion
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT

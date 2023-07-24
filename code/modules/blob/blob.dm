@@ -12,7 +12,7 @@
 
 	layer = BLOB_SHIELD_LAYER
 
-	var/maxHealth = 30
+	var/blob_max_health = 30
 	var/health
 	var/regen_rate = 5
 	var/brute_resist = 4.3
@@ -28,7 +28,7 @@
 
 /obj/effect/blob/Initialize()
 	. = ..()
-	health = maxHealth
+	health = blob_max_health
 	update_icon()
 	START_PROCESSING(SSblob, src)
 
@@ -46,7 +46,7 @@
 	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_resist)
 
 /obj/effect/blob/on_update_icon()
-	if(health > maxHealth / 2)
+	if(health > blob_max_health / 2)
 		icon_state = "blob"
 	else
 		icon_state = "blob_damaged"
@@ -66,7 +66,7 @@
 		update_icon()
 
 /obj/effect/blob/proc/regen()
-	health = min(health + regen_rate, maxHealth)
+	health = min(health + regen_rate, blob_max_health)
 	update_icon()
 
 /obj/effect/blob/proc/expand(var/turf/T)
@@ -196,7 +196,7 @@
 	name = "master nucleus"
 	desc = "A massive, fragile nucleus guarded by a shield of thick tendrils."
 	icon_state = "blob_core"
-	maxHealth = 450
+	blob_max_health = 450
 	damage_min = 30
 	damage_max = 40
 	expandType = /obj/effect/blob/shield
@@ -210,7 +210,7 @@
 	var/times_to_pulse = 0
 
 /obj/effect/blob/core/proc/get_health_percent()
-	return ((health / maxHealth) * 100)
+	return ((health / blob_max_health) * 100)
 
 /*
 the master core becomes more vulnereable to damage as it weakens,
@@ -282,7 +282,7 @@ regen() will cover update_icon() for this proc
 	name = "auxiliary nucleus"
 	desc = "An interwoven mass of tendrils. A glowing nucleus pulses at its center."
 	icon_state = "blob_node"
-	maxHealth = 125
+	blob_max_health = 125
 	regen_rate = 1
 	damage_min = 15
 	damage_max = 20
@@ -294,13 +294,13 @@ regen() will cover update_icon() for this proc
 	return
 
 /obj/effect/blob/core/secondary/on_update_icon()
-	icon_state = (health / maxHealth >= 0.5) ? "blob_node" : "blob_factory"
+	icon_state = (health / blob_max_health >= 0.5) ? "blob_node" : "blob_factory"
 
 /obj/effect/blob/shield
 	name = "shielding mass"
 	desc = "A pulsating mass of interwoven tendrils. These seem particularly robust, but not quite as active."
 	icon_state = "blob_idle"
-	maxHealth = 120
+	blob_max_health = 120
 	damage_min = 13
 	damage_max = 25
 	attack_freq = 7
@@ -318,9 +318,9 @@ regen() will cover update_icon() for this proc
 	return ..()
 
 /obj/effect/blob/shield/on_update_icon()
-	if(health > maxHealth * 2 / 3)
+	if(health > blob_max_health * 2 / 3)
 		icon_state = "blob_idle"
-	else if(health > maxHealth / 3)
+	else if(health > blob_max_health / 3)
 		icon_state = "blob"
 	else
 		icon_state = "blob_damaged"
@@ -331,7 +331,7 @@ regen() will cover update_icon() for this proc
 /obj/effect/blob/ravaging
 	name = "ravaging mass"
 	desc = "A mass of interwoven tendrils. They thrash around haphazardly at anything in reach."
-	maxHealth = 20
+	blob_max_health = 20
 	damage_min = 27
 	damage_max = 36
 	attack_freq = 3

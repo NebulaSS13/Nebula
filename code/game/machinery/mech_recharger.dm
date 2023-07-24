@@ -90,7 +90,7 @@
 
 // An ugly proc, but apparently mechs don't have maxhealth var of any kind.
 /obj/machinery/mech_recharger/proc/fully_repaired()
-	return charging && (charging.health == charging.maxHealth)
+	return charging && (charging.health == charging.get_max_health())
 
 /obj/machinery/mech_recharger/proc/start_charging(var/mob/living/exosuit/M)
 	if(stat & (NOPOWER | BROKEN))
