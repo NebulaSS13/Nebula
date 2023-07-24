@@ -111,9 +111,8 @@
 	// Handle emissive blockers here to avoid an override in atoms_movable.dm.
 	var/emissive_block = update_emissive_blocker()
 	if(emissive_block)
-		overlays += emissive_block
-		// Since this overlay is managed by the update_overlays proc
-		LAZYADD(managed_overlays, emissive_block)
+		set_z_mangle()
+		add_overlay(emissive_block, priority = TRUE)
 
 /atom/movable/EarlyDestroy(force = FALSE)
 	loc = null // should NOT use forceMove, in order to avoid events

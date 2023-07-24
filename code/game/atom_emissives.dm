@@ -14,9 +14,3 @@
 			)
 			em_block = gen_emissive_blocker
 		return em_block
-
-/atom/movable/update_overlays()
-	. = ..()
-	var/emissive_blocker = update_emissive_blocker()
-	if (emissive_blocker)
-		. += emissive_blocker

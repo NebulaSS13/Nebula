@@ -153,13 +153,18 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	else if(resting && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
 
-	z_flags &= ~ZMM_MANGLE_PLANES
 	if(stat == CONSCIOUS)
 		var/image/I = get_eye_overlay()
 		if(I)
 			if(glowing_eyes)
-				z_flags |= ZMM_MANGLE_PLANES
+				set_z_mangle()
+			else
+				unset_z_mangle()
 			add_overlay(I)
+		else
+			unset_z_mangle()
+	else
+		unset_z_mangle()
 
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	var/image/I = hattable?.get_hat_overlay(src)

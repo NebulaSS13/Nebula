@@ -50,12 +50,12 @@
 	if(stat & (NOPOWER|BROKEN))
 		icon_state = "light-p"
 		set_light(0)
-		z_flags &= ~ZMM_MANGLE_PLANES
+		unset_z_mangle()
 	else
 		icon_state = "light[on]"
 		add_overlay(emissive_overlay(icon, "[icon_state]-overlay"))
 		set_light(2, 0.25, on ? "#82ff4c" : "#f86060")
-		z_flags |= ZMM_MANGLE_PLANES
+		set_z_mangle()
 
 /obj/machinery/light_switch/examine(mob/user, distance)
 	. = ..()

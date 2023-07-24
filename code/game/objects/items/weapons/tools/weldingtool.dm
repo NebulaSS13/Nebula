@@ -274,18 +274,19 @@
 
 /obj/item/weldingtool/on_update_icon()
 	. = ..()
-	z_flags &= ~ZMM_MANGLE_PLANES
 	if(tank)
 		add_overlay("[icon_state]-[tank.icon_state]")
 	if(welding && check_state_in_icon("[icon_state]-lit", icon))
 		if(plane == HUD_PLANE)
 			add_overlay(image(icon, "[icon_state]-lit"))
+			unset_z_mangle()
 		else
 			add_overlay(emissive_overlay(icon, "[icon_state]-lit"))
-			z_flags |= ZMM_MANGLE_PLANES
+			set_z_mangle()
 		set_light(2.5, 0.6, lit_colour)
 	else
 		set_light(0)
+		unset_z_mangle()
 	update_held_icon()
 
 /**Handles updating damage depening on whether the welder is on or off */

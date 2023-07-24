@@ -28,16 +28,20 @@
 
 /obj/item/grenade/on_update_icon()
 	. = ..()
-	z_flags &= ~ZMM_MANGLE_PLANES
 	if(active)
 		if(check_state_in_icon("[icon_state]-active", icon))
 			if(plane == HUD_PLANE)
 				add_overlay("[icon_state]-active")
+				unset_z_mangle()
 			else
 				add_overlay(emissive_overlay(icon, "[icon_state]-active"))
-				z_flags |= ZMM_MANGLE_PLANES
-	else if(check_state_in_icon("[icon_state]-pin", icon))
-		add_overlay("[icon_state]-pin")
+				set_z_mangle()
+		else
+			unset_z_mangle()
+	else
+		unset_z_mangle()
+		if(check_state_in_icon("[icon_state]-pin", icon))
+			add_overlay("[icon_state]-pin")
 
 /obj/item/grenade/proc/clown_check(var/mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))

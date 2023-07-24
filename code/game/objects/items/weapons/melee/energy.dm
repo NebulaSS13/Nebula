@@ -151,14 +151,16 @@
 
 /obj/item/energy_blade/on_update_icon()
 	. = ..()
-	z_flags &= ~ZMM_MANGLE_PLANES
 	icon_state = get_world_inventory_state()
 	if(active && check_state_in_icon("[icon_state]-extended", icon))
 		if(plane == HUD_PLANE)
 			add_overlay(image(icon, "[icon_state]-extended"))
+			unset_z_mangle()
 		else
 			add_overlay(emissive_overlay(icon, "[icon_state]-extended"))
-			z_flags |= ZMM_MANGLE_PLANES
+			set_z_mangle()
+	else
+		unset_z_mangle()
 
 /obj/item/energy_blade/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-extended", overlay.icon))

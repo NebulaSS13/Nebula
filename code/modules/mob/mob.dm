@@ -1150,11 +1150,14 @@
 
 /mob/proc/check_emissive_equipment()
 	var/old_zflags = z_flags
-	z_flags &= ~ZMM_MANGLE_PLANES
+	var/set_mangle = FALSE
 	for(var/atom/movable/AM in get_equipped_items(TRUE))
 		if(AM.z_flags & ZMM_MANGLE_PLANES)
-			z_flags |= ZMM_MANGLE_PLANES
+			set_mangle = TRUE
+			set_z_mangle()
 			break
+	if(!set_mangle)
+		unset_z_mangle()
 	if(old_zflags != z_flags)
 		UPDATE_OO_IF_PRESENT
 

@@ -3,12 +3,13 @@
 	icon_state = ICON_STATE_WORLD
 	if(stat == DEAD)
 		icon_state += "-dead"
+		unset_z_mangle()
 	else if(lying || stat == UNCONSCIOUS)
 		icon_state += "-sleeping"
+		unset_z_mangle()
 	else
-
 		add_overlay(emissive_overlay(icon, "[icon_state]-eyes"))
-		z_flags |= ZMM_MANGLE_PLANES
+		set_z_mangle()
 		if(flower_color)
 			var/image/flower = image(icon, "flower_back")
 			var/image/I = image(icon, "flower_fore")

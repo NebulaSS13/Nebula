@@ -28,13 +28,15 @@
 
 /obj/item/powersink/on_update_icon()
 	. = ..()
-	z_flags &= ~ZMM_MANGLE_PLANES
 	if(mode == OPERATING)
 		if(plane == HUD_PLANE)
 			add_overlay("[icon_state]-on")
+			unset_z_mangle()
 		else
 			add_overlay(emissive_overlay(icon, "[icon_state]-on"))
-			z_flags |= ~ZMM_MANGLE_PLANES
+			set_z_mangle()
+	else
+		unset_z_mangle()
 
 /obj/item/powersink/proc/set_mode(value)
 	if(value == mode)

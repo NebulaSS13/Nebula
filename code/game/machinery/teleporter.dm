@@ -193,17 +193,18 @@
 	queue_icon_update()
 
 /obj/machinery/teleport/hub/on_update_icon()
-	z_flags &= ~ZMM_MANGLE_PLANES
 	cut_overlays()
 	if (com?.station?.engaged)
 		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
-		z_flags |= ZMM_MANGLE_PLANES
+		set_z_mangle()
 		set_light(4, 0.4)
 	else
 		set_light(0)
 		if(operable())
 			add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
-			z_flags |= ZMM_MANGLE_PLANES
+			set_z_mangle()
+		else
+			unset_z_mangle()
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	if (com?.station?.engaged)
@@ -250,12 +251,12 @@
 	cut_overlays()
 	if (engaged)
 		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
-		z_flags |= ZMM_MANGLE_PLANES
+		set_z_mangle()
 	else if (operable())
 		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
-		z_flags |= ZMM_MANGLE_PLANES
+		set_z_mangle()
 	else
-		z_flags &= ~ZMM_MANGLE_PLANES
+		unset_z_mangle()
 
 /obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
 	return attack_hand_with_interaction_checks(user) || ..()

@@ -462,3 +462,10 @@
 
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
+
+/atom/movable/proc/set_z_mangle()
+	z_flags |= ZMM_MANGLE_PLANES
+
+/atom/movable/proc/unset_z_mangle()
+	if(blocks_emissive <= EMISSIVE_BLOCK_NONE)
+		z_flags &= ~ZMM_MANGLE_PLANES

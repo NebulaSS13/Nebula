@@ -25,12 +25,12 @@
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	cut_overlays()
 	if(operable())
-		z_flags |= ZMM_MANGLE_PLANES
+		set_z_mangle()
 		add_overlay(emissive_overlay(icon, "indicator_power"))
 		if(use_power)
 			add_overlay(emissive_overlay(icon, "nozzle_idle"))
 	else
-		z_flags &= ~ZMM_MANGLE_PLANES
+		unset_z_mangle()
 
 /obj/machinery/atmospherics/unary/engine/attackby(obj/item/I, mob/user)
 	if(IS_MULTITOOL(I) && !panel_open)
