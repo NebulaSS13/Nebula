@@ -135,7 +135,7 @@
 	name = "fire-safety wall closet"
 	desc = "It's a storage unit for fire-fighting supplies."
 	closet_appearance = /decl/closet_appearance/wall/hydrant
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
@@ -164,7 +164,7 @@
 	name = "first-aid wall closet"
 	desc = "It's a wall-mounted storage unit for first aid supplies."
 	closet_appearance = /decl/closet_appearance/wall/medical
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
@@ -186,7 +186,7 @@
 	name = "shipping supplies wall closet"
 	desc = "It's a wall-mounted storage unit containing supplies for preparing shipments."
 	closet_appearance = /decl/closet_appearance/wall/shipping
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS

@@ -53,7 +53,7 @@
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "wizard_mark"
 
-	anchored = 1
+	anchored = TRUE
 	unacidable = 1
 	layer = TURF_LAYER
 	is_spawnable_type = FALSE // invalid without spell passed

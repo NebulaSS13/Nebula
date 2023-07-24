@@ -91,7 +91,7 @@ var/global/list/all_apcs = list()
 
 	icon_state = "apc0"
 	icon = 'icons/obj/apc.dmi'
-	anchored = 1
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	use_power = POWER_USE_IDLE // Has custom handling here.
 	power_channel = LOCAL      // Do not manipulate this; you don't want to power the APC off itself.

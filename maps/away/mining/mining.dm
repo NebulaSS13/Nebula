@@ -207,7 +207,7 @@
 	icon = 'icons/obj/structures/totem.dmi'
 	icon_state = "totem"
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	unacidable = 1
 	var/number
 

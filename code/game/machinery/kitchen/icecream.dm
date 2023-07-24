@@ -15,7 +15,7 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "icecream_vat"
 	density = TRUE
-	anchored = 0
+	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
 	idle_power_usage = 100
 

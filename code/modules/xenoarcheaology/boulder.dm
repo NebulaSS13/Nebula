@@ -5,7 +5,7 @@
 	icon_state = "boulder1"
 	density = TRUE
 	opacity = 1
-	anchored = 1
+	anchored = TRUE
 	material = /decl/material/solid/stone/sandstone
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/excavation_level = 0

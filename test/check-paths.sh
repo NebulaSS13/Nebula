@@ -50,6 +50,7 @@ exactly 1 "direct usage of decls_repository.get_decl()" 'decls_repository\.get_d
 exactly 21 "direct loc set" -P '(\t|;|\.)loc\s*=(?!=)'
 exactly 0 "magic number mouse opacity set" -P 'mouse_opacity\s*=\s*[0-2]'
 exactly 1 "magic number density set" -P 'density\s*=\s*[01]'
+exactly 0 "magic number anchored set" -P 'anchored\s*=\s*[01]'
 
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 

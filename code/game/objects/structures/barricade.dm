@@ -3,7 +3,7 @@
 	name = "barricade"
 	icon = 'icons/obj/structures/barricade.dmi'
 	icon_state = "barricade"
-	anchored = 1.0
+	anchored = TRUE
 	density = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER

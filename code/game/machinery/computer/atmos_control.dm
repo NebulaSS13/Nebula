@@ -9,7 +9,7 @@
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
 	density = TRUE
-	anchored = 1.0
+	anchored = TRUE
 	initial_access = list(list(access_engine_equip, access_atmospherics))
 	var/list/monitored_alarm_ids = null
 	var/datum/nano_module/atmos_control/atmos_control

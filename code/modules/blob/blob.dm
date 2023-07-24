@@ -7,7 +7,7 @@
 	light_color = BLOB_COLOR_PULS
 	density = TRUE
 	opacity = 1
-	anchored = 1
+	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_PRIORITY
 
 	layer = BLOB_SHIELD_LAYER

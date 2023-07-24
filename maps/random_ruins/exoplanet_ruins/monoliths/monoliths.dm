@@ -13,7 +13,7 @@
 	icon_state = "jaggy1"
 	layer = ABOVE_HUMAN_LAYER
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	material = /decl/material/solid/metal/aliumium
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/active = 0

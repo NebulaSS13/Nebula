@@ -6,7 +6,7 @@
 	name = "exotic particle harvester"
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "xenoarchaeology_harvester"
-	anchored = 1
+	anchored = TRUE
 	density = TRUE
 	idle_power_usage = 50
 	active_power_usage = 750

@@ -185,7 +185,7 @@
 	if(T)
 		forceMove(T)
 		visible_message(SPAN_DANGER("[src] is pinned to the wall by [O]!"),SPAN_DANGER("You are pinned to the wall by [O]!"))
-		src.anchored = 1
+		src.anchored = TRUE
 		LAZYADD(pinned, O)
 		if(!LAZYISIN(embedded,O))
 			embed(O)

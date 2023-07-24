@@ -1,6 +1,6 @@
 /obj/effect/bmode
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	plane = HUD_PLANE
 	layer = HUD_BASE_LAYER
 	icon = 'icons/misc/buildmode.dmi'

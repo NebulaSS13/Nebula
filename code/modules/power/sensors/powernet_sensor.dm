@@ -10,7 +10,7 @@
 /obj/machinery/power/sensor
 	name = "Powernet Sensor"
 	desc = "Small machine which transmits data about specific powernet."
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	level = 1
 	icon = 'icons/obj/objects.dmi'

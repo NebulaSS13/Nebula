@@ -3,7 +3,7 @@
 	desc = "A small wall mounted cabinet designed to hold a fire extinguisher."
 	icon = 'icons/obj/structures/extinguisher.dmi'
 	icon_state = "extinguisher_closed"
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-29}, 'SOUTH':{'y':29}, 'EAST':{'x':-29}, 'WEST':{'x':29}}"

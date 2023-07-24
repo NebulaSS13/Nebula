@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/catwalks.dmi'
 	icon_state = "catwalk"
 	density = FALSE
-	anchored = 1.0
+	anchored = TRUE
 	layer = CATWALK_LAYER
 	footstep_type = /decl/footsteps/catwalk
 	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
@@ -170,7 +170,7 @@
 	icon = 'icons/obj/structures/catwalks.dmi'
 	icon_state = "catwalk_plated"
 	density = TRUE
-	anchored = 1.0
+	anchored = TRUE
 	layer = CATWALK_LAYER
 	var/activated = FALSE
 	var/plating_type = /decl/flooring/tiling/mono

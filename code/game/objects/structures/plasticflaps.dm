@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/plastic_flaps.dmi'
 	icon_state = "plasticflaps"
 	density = FALSE
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 

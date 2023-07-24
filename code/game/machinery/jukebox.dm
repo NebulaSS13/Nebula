@@ -4,7 +4,7 @@
 	icon = 'icons/obj/jukebox_new.dmi'
 	icon_state = "jukebox3-nopower"
 	var/state_base = "jukebox3"
-	anchored = 1
+	anchored = TRUE
 	density = TRUE
 	power_channel = EQUIP
 	idle_power_usage = 10

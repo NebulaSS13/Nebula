@@ -3,7 +3,7 @@
 	gender = PLURAL
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "remains"
-	anchored = 0
+	anchored = FALSE
 	material = /decl/material/solid/bone
 
 /obj/item/remains/human

@@ -101,7 +101,7 @@
 /obj/effect/suspension_field
 	name = "energy field"
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
+	anchored = TRUE
 	density = TRUE
 	var/victim_number  //number of mobs it affected, needed for generator powerdraw calc
 

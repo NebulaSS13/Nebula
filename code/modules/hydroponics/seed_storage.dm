@@ -27,7 +27,7 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "seeds"
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 100
 	obj_flags = OBJ_FLAG_ANCHORABLE
 

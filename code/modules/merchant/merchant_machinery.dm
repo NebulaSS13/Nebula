@@ -3,7 +3,7 @@
 	desc = "Place things here to trade."
 	icon = 'icons/obj/machines/teleporter.dmi'
 	icon_state = "tele0"
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 
 	uncreated_component_parts = null

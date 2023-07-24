@@ -2,7 +2,7 @@
 /obj/structure/lift
 	name = "turbolift control component"
 	icon = 'icons/obj/turbolift.dmi'
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	layer = ABOVE_OBJ_LAYER
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED

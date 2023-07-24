@@ -149,7 +149,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	var/hitstaken = 0      //Death at 3 hits from an item with force>=15
 	var/datum/feed_channel/viewing_channel = null
 	light_range = 0
-	anchored = 1
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_WINDOW_LAYER
 
@@ -888,7 +888,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 				src.scribble = s
 				src.attack_self(user)
 				return TRUE
-			return 
+			return
 	return ..()
 
 ////////////////////////////////////helper procs

@@ -2,7 +2,7 @@
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "puddle"
-	anchored = 1
+	anchored = TRUE
 	simulated = 0
 	opacity = 0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE

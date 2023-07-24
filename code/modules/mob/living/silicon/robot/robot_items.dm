@@ -140,7 +140,7 @@
 	icon = 'icons/effects/lens_flare.dmi'
 	icon_state = "party_strobe"
 	simulated = 0
-	anchored = 1
+	anchored = TRUE
 	pixel_x = -30
 	pixel_y = -4
 

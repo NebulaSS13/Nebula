@@ -19,7 +19,7 @@
 	icon = 'icons/obj/cult.dmi'
 	maxhealth = 10
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	icon_state = "tomealtar"
 	is_spawnable_type = FALSE // will usually runtime without a linked god
 

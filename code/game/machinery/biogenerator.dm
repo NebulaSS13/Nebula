@@ -10,7 +10,7 @@
 	icon = 'icons/obj/biogenerator.dmi'
 	icon_state = "biogen-stand"
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 40
 	base_type = /obj/machinery/biogenerator
 	construct_state = /decl/machine_construction/default/panel_closed

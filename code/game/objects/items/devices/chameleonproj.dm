@@ -85,7 +85,7 @@
 	name = ""
 	desc = ""
 	density = FALSE
-	anchored = 1
+	anchored = TRUE
 	is_spawnable_type = FALSE
 	var/can_move = 1
 	var/obj/item/chameleon/master = null

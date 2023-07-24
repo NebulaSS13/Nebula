@@ -2,7 +2,7 @@
 	name = "nuclear cylinder closet"
 	desc = "It's a secure wall-mounted storage unit for storing the nuclear cylinders."
 	icon = 'icons/obj/machines/self_destruct.dmi'
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	wall_mounted = 1
 	req_access = list(access_heads_vault)

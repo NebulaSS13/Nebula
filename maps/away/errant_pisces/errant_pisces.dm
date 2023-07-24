@@ -78,7 +78,7 @@
 	desc = "A sturdy industrial net of synthetic belts reinforced with plasteel threads."
 	icon = 'maps/away/errant_pisces/icons/net.dmi'
 	icon_state = "net_f"
-	anchored = 1
+	anchored = TRUE
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	maxhealth = 100
 

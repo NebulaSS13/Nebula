@@ -9,7 +9,7 @@
 	name = "deployable barrier"
 	desc = "A deployable barrier. Swipe your ID card to lock/unlock it."
 	icon = 'icons/obj/objects.dmi'
-	anchored = 0.0
+	anchored = FALSE
 	density = TRUE
 	icon_state = "barrier0"
 	var/health = 100.0

@@ -4,7 +4,7 @@
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER

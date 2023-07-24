@@ -3,7 +3,7 @@
 	desc = "A wheeled cart used to make heavy things less difficult to move through the power of lever-arm and the wheel."
 	icon = 'icons/obj/structures/handcart.dmi'
 	icon_state = "cart"
-	anchored = 0
+	anchored = FALSE
 	density = TRUE
 	movable_flags = MOVABLE_FLAG_WHEELED
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR

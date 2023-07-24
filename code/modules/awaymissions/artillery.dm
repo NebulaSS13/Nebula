@@ -5,7 +5,7 @@
 	icon_state = "control_boxp1"
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 
 /obj/machinery/artillerycontrol/Process()
 	if(src.reload<180)
@@ -14,7 +14,7 @@
 /obj/structure/artilleryplaceholder
 	name = "artillery"
 	icon = 'icons/obj/machines/artillery.dmi'
-	anchored = 1
+	anchored = TRUE
 	density = TRUE
 	desc = "The ship's old superluminal artillery cannon. Looks inoperative."
 

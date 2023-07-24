@@ -133,7 +133,7 @@
 	desc = "A bewildering tangle of machinery and pipes."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
-	anchored = 1
+	anchored = TRUE
 	dir = WEST
 
 //Cryopods themselves.
@@ -143,7 +143,7 @@
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	dir = WEST
 
 	var/base_icon_state = "body_scanner_0"
@@ -550,7 +550,7 @@
 	desc = "Whoever was inside isn't going to wake up now. It looks like you could pry it open with a crowbar."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "broken_cryo"
-	anchored = 1
+	anchored = TRUE
 	density = TRUE
 	var/closed = 1
 	var/busy = 0

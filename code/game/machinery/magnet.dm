@@ -14,7 +14,7 @@ var/global/list/magnetic_modules = list()
 	desc = "A device that uses powernet to create points of magnetic energy."
 	level = 1		// underfloor
 	layer = ABOVE_WIRE_LAYER
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 50
 
 	var/freq = 1449		// radio frequency
@@ -188,7 +188,7 @@ var/global/list/magnetic_modules = list()
 	icon = 'icons/obj/airlock_machines.dmi' // uses an airlock machine icon, THINK GREEN HELP THE ENVIRONMENT - RECYCLING!
 	icon_state = "airlock_control_off"
 	density = TRUE
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 45
 	var/frequency = 1449
 	var/code = 0

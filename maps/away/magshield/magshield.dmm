@@ -687,7 +687,7 @@
 /area/magshield/engine)
 "cd" = (
 /obj/machinery/atmospherics/binary/circulator{
-	anchored = 1;
+	anchored = TRUE;
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -775,7 +775,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/generator{
-	anchored = 1
+	anchored = TRUE
 	},
 /turf/simulated/floor/plating,
 /area/magshield/engine)
@@ -856,7 +856,7 @@
 /area/magshield/engine)
 "cx" = (
 /obj/machinery/atmospherics/binary/circulator{
-	anchored = 1;
+	anchored = TRUE;
 	dir = 8
 	},
 /turf/simulated/floor/plating,

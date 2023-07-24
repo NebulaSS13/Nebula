@@ -5,7 +5,7 @@
 	icon_state = "base"
 	opacity = 1
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	maxhealth = 50
 
 	var/list/loot = list(

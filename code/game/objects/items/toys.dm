@@ -545,7 +545,7 @@
 	desc = "A very generic plushie. It seems to not want to exist."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ianplushie"
-	anchored = 0
+	anchored = FALSE
 	density = TRUE
 	var/phrase = "I don't want to exist anymore!"
 
@@ -691,7 +691,7 @@
 	desc = "A bell used to signal the beginning and end of various ring sports."
 	icon = 'icons/obj/toy.dmi'
 	icon_state= "ringbell"
-	anchored = 1
+	anchored = TRUE
 
 /obj/item/toy/ringbell/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))

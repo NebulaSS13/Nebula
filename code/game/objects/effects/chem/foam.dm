@@ -6,7 +6,7 @@
 	name = "foam"
 	icon_state = "foam"
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	layer = ABOVE_OBJ_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE

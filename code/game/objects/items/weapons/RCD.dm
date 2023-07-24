@@ -7,7 +7,7 @@
 	icon_state = "rcd"
 	opacity = 0
 	density = FALSE
-	anchored = 0.0
+	anchored = FALSE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
 	force = 10.0

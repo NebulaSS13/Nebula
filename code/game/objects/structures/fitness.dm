@@ -1,5 +1,5 @@
 /obj/structure/fitness
-	anchored = 1
+	anchored = TRUE
 	var/being_used = 0
 
 /obj/structure/fitness/punchingbag

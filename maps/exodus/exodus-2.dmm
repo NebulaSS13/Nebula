@@ -7059,7 +7059,7 @@
 /area/exodus/maintenance/auxsolarstarboard)
 "aoK" = (
 /obj/machinery/faxmachine{
-	anchored = 0;
+	anchored = FALSE;
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/newscaster{
@@ -47206,7 +47206,7 @@
 /area/exodus/maintenance/medbay)
 "bTP" = (
 /obj/machinery/shieldwallgen{
-	anchored = 1
+	anchored = TRUE
 	},
 /obj/structure/cable/green{
 	icon_state = "0-2"
@@ -59437,7 +59437,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/generator{
-	anchored = 1;
+	anchored = TRUE;
 	dir = 4
 	},
 /obj/structure/cable/yellow,
@@ -62142,7 +62142,7 @@
 /area/exodus/engineering/engine_room)
 "cIa" = (
 /obj/machinery/emitter{
-	anchored = 1;
+	anchored = TRUE;
 	id_tag = "EngineEmitter";
 	state = 2
 	},
@@ -62308,7 +62308,7 @@
 /area/exodus/engineering/engine_room)
 "cIF" = (
 /obj/machinery/atmospherics/binary/circulator{
-	anchored = 1;
+	anchored = TRUE;
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -62324,7 +62324,7 @@
 /area/exodus/engineering/engine_room)
 "cIH" = (
 /obj/machinery/atmospherics/binary/circulator{
-	anchored = 1
+	anchored = TRUE
 	},
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
@@ -62677,7 +62677,7 @@
 /area/exodus/maintenance/engi_engine)
 "cJZ" = (
 /obj/machinery/generator{
-	anchored = 1;
+	anchored = TRUE;
 	dir = 4
 	},
 /obj/structure/cable/yellow,

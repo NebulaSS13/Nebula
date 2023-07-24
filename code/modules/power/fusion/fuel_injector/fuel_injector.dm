@@ -3,7 +3,7 @@
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "injector0"
 	density = TRUE
-	anchored = 0
+	anchored = FALSE
 	initial_access = list(access_engine)
 	idle_power_usage = 10
 	active_power_usage = 500
@@ -36,7 +36,7 @@
 	. = ..()
 
 /obj/machinery/fusion_fuel_injector/mapped
-	anchored = 1
+	anchored = TRUE
 
 /obj/machinery/fusion_fuel_injector/Process()
 	if(injecting)

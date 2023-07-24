@@ -4,7 +4,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	volume = 100
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

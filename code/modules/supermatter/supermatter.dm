@@ -109,7 +109,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	icon = 'icons/obj/supermatter_48.dmi'
 	icon_state = "supermatter"
 	density = TRUE
-	anchored = 0
+	anchored = FALSE
 	light_range = 4
 	layer = ABOVE_HUMAN_LAYER
 	matter = list(
@@ -292,7 +292,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		return
 
 	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
-	anchored = 1
+	anchored = TRUE
 	grav_pulling = 1
 	exploded = 1
 	sleep(pull_time)

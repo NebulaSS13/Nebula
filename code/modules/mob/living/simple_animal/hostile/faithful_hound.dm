@@ -10,7 +10,7 @@
 	density = FALSE
 	stop_automated_movement = 1
 	wander = 0
-	anchored = 1
+	anchored = TRUE
 	faction = "cute ghost dogs"
 	supernatural = 1
 

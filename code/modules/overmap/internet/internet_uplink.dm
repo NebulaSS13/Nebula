@@ -7,7 +7,7 @@ var/global/list/internet_uplinks = list()
 	icon = 'icons/obj/machines/internet_uplink.dmi'
 	icon_state = "unpowered"
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/terminal,

@@ -116,7 +116,7 @@
 	w_class = ITEM_SIZE_STRUCTURE
 	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = 56
-	anchored = 1
+	anchored = TRUE
 	density = FALSE
 	cant_hold = list(/obj/item/storage/secure/briefcase)
 	lock_type = /datum/extension/lockable/storage/safe

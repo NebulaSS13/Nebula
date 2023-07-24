@@ -4,7 +4,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "sextractor"
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 10
 	active_power_usage = 2000

@@ -101,7 +101,7 @@ var/global/list/hygiene_props = list()
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "toilet00"
 	density = FALSE
-	anchored = 1
+	anchored = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 
 	var/open = 0			//if the lid is up
@@ -207,7 +207,7 @@ var/global/list/hygiene_props = list()
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "urinal"
 	density = FALSE
-	anchored = 1
+	anchored = TRUE
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
@@ -229,7 +229,7 @@ var/global/list/hygiene_props = list()
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "shower"
 	density = FALSE
-	anchored = 1
+	anchored = TRUE
 	clogged = -1
 	can_drain = 1
 	drainage = 0.2 			//showers are tiny, drain a little slower
@@ -278,7 +278,7 @@ var/global/list/hygiene_props = list()
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mist"
 	layer = MOB_LAYER + 1
-	anchored = 1
+	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/effect/mist/Initialize()
@@ -352,7 +352,7 @@ var/global/list/hygiene_props = list()
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "sink"
 	desc = "A sink used for washing one's hands and face."
-	anchored = 1
+	anchored = TRUE
 	var/busy = 0 	//Something's being washed at the moment
 
 /obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
@@ -544,7 +544,7 @@ var/global/list/hygiene_props = list()
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "faucet"
 	desc = "An outlet for liquids. Water you waiting for?"
-	anchored = 1
+	anchored = TRUE
 	drainage = 0
 	clogged = -1
 

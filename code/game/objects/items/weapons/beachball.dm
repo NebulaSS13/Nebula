@@ -4,7 +4,7 @@
 	name = "beach ball"
 	item_state = "beachball"
 	density = FALSE
-	anchored = 0
+	anchored = FALSE
 	w_class = ITEM_SIZE_HUGE
 	force = 0.0
 	throwforce = 0

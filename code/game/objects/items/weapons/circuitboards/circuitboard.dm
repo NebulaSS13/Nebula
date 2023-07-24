@@ -4,7 +4,7 @@
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'programming':2}"
 	density = FALSE
-	anchored = 0
+	anchored = FALSE
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0

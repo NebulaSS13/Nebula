@@ -7,7 +7,7 @@
 	icon = 'icons/obj/closets/bases/wall.dmi'
 	closet_appearance = /decl/closet_appearance/wall
 	density = FALSE
-	anchored = 1
+	anchored = TRUE
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0

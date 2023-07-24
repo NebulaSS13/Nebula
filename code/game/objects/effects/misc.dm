@@ -5,7 +5,7 @@
 	icon = 'icons/obj/items/gift_wrapped.dmi'
 	icon_state = "strangepresent"
 	density = TRUE
-	anchored = 0
+	anchored = FALSE
 
 /obj/effect/stop
 	var/victim = null

@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures/grille.dmi'
 	icon_state = "grille"
 	density = TRUE
-	anchored = 1
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1

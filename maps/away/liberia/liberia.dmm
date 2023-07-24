@@ -324,7 +324,7 @@
 	dir = 9
 	},
 /obj/structure/closet/emcloset{
-	anchored = 1;
+	anchored = TRUE;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2454,7 +2454,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/emcloset{
-	anchored = 1;
+	anchored = TRUE;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -7984,7 +7984,7 @@
 	dir = 6
 	},
 /obj/structure/closet/emcloset{
-	anchored = 1;
+	anchored = TRUE;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/techfloor,

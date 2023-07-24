@@ -21,7 +21,7 @@
 	icon_state = "palm1"
 	density = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/overlay/palmtree_l
 	name = "Palm tree"
@@ -29,7 +29,7 @@
 	icon_state = "palm2"
 	density = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/overlay/coconut
 	name = "Coconuts"
@@ -46,7 +46,7 @@
 	name = "wallrot"
 	desc = "Ick..."
 	icon = 'icons/effects/wallrot.dmi'
-	anchored = 1
+	anchored = TRUE
 	density = TRUE
 	layer = ABOVE_TILE_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
