@@ -1138,3 +1138,8 @@ default behaviour is:
 /mob/living/proc/handle_some_updates()
 	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 	return life_tick <= 5 || !timeofdeath || (timeofdeath >= 5 && (world.time-timeofdeath) <= 10 MINUTES)
+
+/mob/living/proc/get_mob_footstep(var/footstep_type)
+	var/decl/species/my_species = get_species()
+	return my_species?.get_footstep(src, footstep_type)
+

@@ -1157,9 +1157,6 @@
 			else
 				reagents.trans_to_obj(vomit, 5)
 
-/mob/living/carbon/human/get_footstep(var/footstep_type)
-	. = species.get_footstep(src, footstep_type) || ..()
-
 /mob/living/carbon/human/get_sound_volume_multiplier()
 	. = ..()
 	for(var/slot in list(slot_l_ear_str, slot_r_ear_str, slot_head_str))

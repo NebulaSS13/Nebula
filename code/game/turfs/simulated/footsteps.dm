@@ -1,30 +1,26 @@
-/proc/get_footstep(var/footstep_type, var/mob/caller)
-	. = caller && caller.get_footstep(footstep_type)
+/proc/get_footstep_for_mob(var/footstep_type, var/mob/living/caller)
+	. = istype(caller) && caller.get_mob_footstep(footstep_type)
 	if(!.)
 		var/decl/footsteps/FS = GET_DECL(footstep_type)
 		. = pick(FS.footstep_sounds)
 
-/turf/get_footstep_sound(var/mob/caller)
+/turf/proc/get_footstep_sound(var/mob/caller)
+
 	for(var/obj/structure/S in contents)
 		if(S.footstep_type)
-			return get_footstep(S.footstep_type, caller)
+			return get_footstep_for_mob(S.footstep_type, caller)
 
 	if(check_fluid_depth(10) && !is_flooded(TRUE))
-		return get_footstep(/decl/footsteps/water, caller)
+		return get_footstep_for_mob(/decl/footsteps/water, caller)
 
 	if(footstep_type)
-		return get_footstep(footstep_type, caller)
+		return get_footstep_for_mob(footstep_type, caller)
 
 	if(is_plating())
-		return get_footstep(/decl/footsteps/plating, caller)
+		return get_footstep_for_mob(/decl/footsteps/plating, caller)
 
 /turf/simulated/floor/get_footstep_sound(var/mob/caller)
-	. = ..()
-	if(!.)
-		if(!flooring || !flooring.footstep_type)
-			return get_footstep(/decl/footsteps/blank, caller)
-		else
-			return get_footstep(flooring.footstep_type, caller)
+	. = ..() || get_footstep_for_mob(flooring?.footstep_type || /decl/footsteps/blank, caller)
 
 /mob/living/carbon/human/proc/has_footsteps()
 	if(species.silent_steps || buckled || lying || throwing)
@@ -60,7 +56,7 @@
 	if(!footsound)
 		return
 
-	var/range = -(world.view - 2)
+	var/range = world.view - 2
 	var/volume = 70
 	if(MOVING_DELIBERATELY(src))
 		volume -= 45
@@ -73,7 +69,7 @@
 		volume -= 60
 		range -= 0.333
 
-	range = round(range)
+	range  = round(range)
 	volume = round(volume)
 	if(volume > 0 && range > 0)
 		playsound(T, footsound, volume, 1, range)
