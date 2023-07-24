@@ -193,10 +193,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	handle_atmos()
 
-	if(health <= 0)
-		death()
-		return
-
 	var/current_max_health = get_max_health()
 	if(health > current_max_health)
 		health = current_max_health

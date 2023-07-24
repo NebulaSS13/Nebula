@@ -7,11 +7,6 @@
 			slime_feed()
 		ingested.metabolize()
 
-/mob/living/slime/updatehealth()
-	. = ..()
-	if(stat != DEAD && health <= 0)
-		death()
-
 /mob/living/slime/fluid_act(datum/reagents/fluids)
 	. = ..()
 	if(!QDELETED(src) && fluids?.total_volume >= FLUID_SHALLOW && stat == DEAD)

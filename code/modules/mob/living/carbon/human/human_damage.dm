@@ -1,18 +1,12 @@
+/mob/living/carbon/human/get_total_life_damage()
+	return getBrainLoss()
+
 //Updates the mob's health from organs and mob damage variables
 /mob/living/carbon/human/updatehealth()
-
-	var/current_max_health = get_max_health()
-	health = current_max_health
-	if(status_flags & GODMODE)
-		set_stat(CONSCIOUS)
-		return
-
-	health -= getBrainLoss()
-
+	..()
 	//TODO: fix husking
-	if(((current_max_health - getFireLoss()) < config.health_threshold_dead) && stat == DEAD)
+	if(stat == DEAD && (get_max_health() - getFireLoss()) < config.health_threshold_dead)
 		make_husked()
-	return
 
 /mob/living/carbon/human/adjustBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode

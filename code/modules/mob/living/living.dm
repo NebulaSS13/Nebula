@@ -195,12 +195,20 @@ default behaviour is:
 	if(update_icons)
 		queue_icon_update()
 
+/mob/living/proc/should_be_dead()
+	return health <= 0
+
+/mob/living/proc/get_total_life_damage()
+	return (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
+
 /mob/living/proc/updatehealth()
 	health = get_max_health()
 	if(status_flags & GODMODE)
 		set_stat(CONSCIOUS)
-	else
-		health -= (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
+		return
+	health -= get_total_life_damage()
+	if(stat != DEAD && should_be_dead())
+		death()
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage

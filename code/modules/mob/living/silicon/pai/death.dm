@@ -8,6 +8,6 @@
 			fold()
 	if(mind)
 		qdel(mind)
-	..(gibbed, deathmessage, "You have suffered a critical system failure, and are dead.")
+	..(gibbed, "gives one shrill beep before falling lifeless.", "You have suffered a critical system failure, and are dead.")
 	ghostize()
 	qdel(src)

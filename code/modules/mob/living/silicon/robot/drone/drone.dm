@@ -19,6 +19,8 @@
 	possession_candidate = 1
 	speed = -1
 
+	mob_default_max_health = 35
+
 	can_pull_size = ITEM_SIZE_NORMAL
 	can_pull_mobs = MOB_PULL_SMALLER
 
@@ -180,7 +182,7 @@
 
 		if(stat == DEAD)
 
-			if(!config.allow_drone_spawn || emagged || health < -35) //It's dead, Dave.
+			if(!config.allow_drone_spawn || emagged || should_be_dead()) //It's dead, Dave.
 				to_chat(user, "<span class='danger'>The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one.</span>")
 				return
 
@@ -244,31 +246,14 @@
 		to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and [G.his] commands."))
 	return 1
 
-//DRONE LIFE/DEATH
-//For some goddamn reason robots have this hardcoded. Redefining it for our fragile friends here.
-/mob/living/silicon/robot/drone/updatehealth()
-	if(status_flags & GODMODE)
-		health = 35
-		set_stat(CONSCIOUS)
-		return
-	health = 35 - (getBruteLoss() + getFireLoss())
-	return
-
-//Easiest to check this here, then check again in the robot proc.
-//Standard robots use config for crit, which is somewhat excessive for these guys.
-//Drones killed by damage will gib.
-/mob/living/silicon/robot/drone/handle_regular_status_updates()
-	if(health <= -35 && src.stat != DEAD)
+/mob/living/silicon/robot/drone/death()
+	if(stat != DEAD && should_be_dead())
 		self_destruct()
 		return
-	if(health <= 0 && src.stat != DEAD)
-		death()
-		return
-	..()
+	return ..()
 
 /mob/living/silicon/robot/drone/self_destruct()
 	timeofdeath = world.time
-	death() //Possibly redundant, having trouble making death() cooperate.
 	gib()
 
 //DRONE MOVEMENT.

@@ -67,6 +67,9 @@
 		lights_on = 0
 		set_light(0)
 
+/mob/living/silicon/robot/should_be_dead()
+	return health < config.health_threshold_dead
+
 /mob/living/silicon/robot/handle_regular_status_updates()
 	updatehealth()
 
@@ -75,9 +78,6 @@
 
 	if(src.resting)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
-
-	if(health < config.health_threshold_dead && src.stat != DEAD) //die only once
-		death()
 
 	if (src.stat != DEAD) //Alive.
 		if (incapacitated(INCAPACITATION_DISRUPTED) || !has_power)
