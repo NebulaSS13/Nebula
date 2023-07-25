@@ -16,7 +16,7 @@
 		if(fill_amount <= 0)
 			to_chat(user, SPAN_WARNING("\The [O] is full."))
 			return TRUE
-		O.reagents.add_reagent(reagent_type, fill_amount)
 		user.visible_message(SPAN_NOTICE("\The [user] fills \the [O] from \the [src]."), SPAN_NOTICE("You fill \the [O] from \the [src]."))
+		O.reagents.add_reagent(reagent_type, fill_amount)
 		return TRUE
 	. = ..()

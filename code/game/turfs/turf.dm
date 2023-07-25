@@ -398,9 +398,6 @@
 /turf/proc/is_floor()
 	return FALSE
 
-/turf/proc/get_footstep_sound(var/mob/caller)
-	return
-
 /turf/proc/update_weather(var/obj/abstract/weather_system/new_weather, var/force_update_below = FALSE)
 
 	if(isnull(new_weather))

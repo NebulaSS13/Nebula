@@ -59,7 +59,7 @@ var/global/list/flooring_cache = list()
 						add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES)))
 
 	for(var/image/I in decals)
-		if(I.layer != DECAL_PLATING_LAYER)
+		if(I.layer < layer)
 			continue
 		add_overlay(I)
 
