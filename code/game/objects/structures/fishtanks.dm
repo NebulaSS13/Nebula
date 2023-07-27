@@ -2,7 +2,7 @@ var/global/list/fishtank_cache = list()
 
 /obj/effect/glass_tank_overlay
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/obj/structure/glass_tank/aquarium
 
 /obj/effect/glass_tank_overlay/Initialize(ml, _aquarium)

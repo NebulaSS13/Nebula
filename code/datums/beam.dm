@@ -134,7 +134,7 @@ var/global/list/beam_icon_cache = list() // shut up chinsky I do not have a cach
 /obj/effect/ebeam
 	simulated = FALSE
 	anchored = TRUE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /atom/proc/Beam(atom/BeamTarget, icon_state="b_beam", icon='icons/effects/beam.dmi', time = 5 SECONDS, maxdistance = 10, beam_type = /obj/effect/ebeam, beam_sleep_time = 3, beam_color = null)
 	var/datum/beam/newbeam = new(src,BeamTarget,icon,icon_state,time,maxdistance,beam_type,beam_sleep_time,beam_color)

@@ -2,7 +2,7 @@
 	name = null
 	plane = HUD_PLANE
 	layer = UNDER_HUD_LAYER
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	screen_loc = "CENTER,CENTER"
 	icon = 'icons/screen/scanner.dmi'
 	icon_state = "blank"

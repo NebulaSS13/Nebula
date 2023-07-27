@@ -354,7 +354,7 @@ var/global/list/click_catchers
 	icon = 'icons/mob/screen_gen.dmi'
 	icon_state = "click_catcher"
 	plane = CLICKCATCHER_PLANE
-	mouse_opacity = 2
+	mouse_opacity = MOUSE_OPACITY_PRIORITY
 	screen_loc = "CENTER-7,CENTER-7"
 	var/x_offset = 0
 	var/y_offset = 0

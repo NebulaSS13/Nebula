@@ -14,7 +14,7 @@
 	//Let mappers see the damn thing by just making them invisible here
 	opacity       =  FALSE
 	alpha         =  0
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	invisibility  =  INVISIBILITY_MAXIMUM+1
 
 /obj/abstract/explosion_act()

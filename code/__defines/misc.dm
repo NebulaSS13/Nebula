@@ -300,3 +300,10 @@
 
 //Damage stuff
 #define ITEM_HEALTH_NO_DAMAGE -1
+
+/// Causes the atom to ignore clicks, hovers, etc.
+#define MOUSE_OPACITY_UNCLICKABLE 0
+/// Causes the atom to catch clicks, hovers, etc.
+#define MOUSE_OPACITY_NORMAL 1
+/// Causes the atom to catch clicks, hovers, etc, taking priority over NORMAL for a shared pointer target.
+#define MOUSE_OPACITY_PRIORITY 2
