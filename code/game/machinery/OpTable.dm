@@ -94,7 +94,7 @@
 	icon_state = "table2-idle"
 	if(ishuman(victim))
 		var/mob/living/carbon/human/H = victim
-		if(H.pulse())
+		if(H.get_pulse())
 			icon_state = "table2-active"
 
 /obj/machinery/optable/Process()

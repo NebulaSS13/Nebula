@@ -184,7 +184,7 @@
 			SPAN_NOTICE("\The [usr] begins counting [G.his] pulse."), \
 			SPAN_NOTICE("You begin counting your pulse."))
 
-	if(pulse())
+	if(get_pulse())
 		to_chat(usr, "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>")
 	else
 		to_chat(usr, "<span class='danger'>[src] has no pulse!</span>")//it is REALLY UNLIKELY that a dead person would check his own pulse
@@ -192,7 +192,7 @@
 
 	to_chat(usr, "You must[self ? "" : " both"] remain still until counting is finished.")
 	if(do_mob(usr, src, 60))
-		var/message = "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].</span>"
+		var/message = "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse_as_string(GETPULSE_HAND)].</span>"
 		to_chat(usr, message)
 	else
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")

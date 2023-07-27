@@ -860,7 +860,7 @@
 		else if(is_asystole())
 			holder.icon_state = "flatline"
 		else
-			holder.icon_state = "[pulse()]"
+			holder.icon_state = "[get_pulse()]"
 		hud_list[HEALTH_HUD] = holder
 
 	if (BITTEST(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])

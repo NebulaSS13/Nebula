@@ -2347,6 +2347,7 @@
 #include "code\modules\mob\living\living_maneuvers.dm"
 #include "code\modules\mob\living\living_organs.dm"
 #include "code\modules\mob\living\living_powers.dm"
+#include "code\modules\mob\living\living_pulse.dm"
 #include "code\modules\mob\living\living_status.dm"
 #include "code\modules\mob\living\login.dm"
 #include "code\modules\mob\living\logout.dm"

@@ -51,7 +51,7 @@
 	reset_plane_and_layer()
 	armed = 0
 	update_icon()
-	pulse(0)
+	pulse_device(0)
 
 /obj/item/assembly/mousetrap/proc/toggle_arming(var/mob/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))

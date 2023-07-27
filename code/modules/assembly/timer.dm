@@ -41,7 +41,7 @@
 
 /obj/item/assembly/timer/timer_end()
 	if(!secured)	return 0
-	pulse(0)
+	pulse_device(0)
 	if(!holder)
 		visible_message("[html_icon(src)] *beep* *beep*", "*beep* *beep*")
 	cooldown = 2
