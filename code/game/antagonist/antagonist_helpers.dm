@@ -1,7 +1,7 @@
 /decl/special_role/proc/can_become_antag(var/datum/mind/player, var/ignore_role)
 
 	if(player.current)
-		if(isliving(player.current) && player.current.stat)
+		if(isliving(player.current) && player.current.stat == DEAD)
 			return FALSE
 		if(jobban_isbanned(player.current, name))
 			return FALSE

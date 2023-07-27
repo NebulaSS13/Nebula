@@ -8,9 +8,9 @@
 	antag_indicator = "hudborer"
 	antaghud_indicator = "hudborer"
 
-	faction_name = "Borer Thrall"
+	faction_name = "Borer Host"
 	faction_descriptor = "Unity"
-	faction_welcome = "You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head."
+	faction_welcome = "You are now host to a cortical borer. Please listen to what they have to say; they're in your head."
 	faction = "borer"
 	faction_indicator = "hudalien"
 
