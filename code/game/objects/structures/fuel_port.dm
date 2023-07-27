@@ -27,7 +27,7 @@
 	return locate(/obj/item/tank) in contents
 
 /obj/structure/fuel_port/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(!open)
 		to_chat(user, SPAN_WARNING("The door is secured tightly. You'll need a crowbar to open it."))

@@ -90,7 +90,7 @@
 
 /obj/structure/kitchenspike/attack_hand(var/mob/user)
 
-	if(!occupant || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!occupant || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
 	if(occupant_state == CARCASS_FRESH)

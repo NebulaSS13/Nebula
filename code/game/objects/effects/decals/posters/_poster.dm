@@ -73,7 +73,7 @@
 /obj/structure/sign/poster/attack_hand(mob/user)
 	if(user.a_intent != I_HURT || ruined)
 		return ..()
-	if(!CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_GRIP))
+	if(!CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return TRUE
 	add_fingerprint(user)
 	visible_message(SPAN_WARNING("\The [user] rips \the '[src]' in a single, decisive motion!"))

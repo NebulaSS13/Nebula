@@ -81,7 +81,7 @@
 	. = ..()
 
 /obj/structure/flora/plant/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
 	if(dead)

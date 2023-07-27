@@ -92,7 +92,7 @@
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user as mob)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if (loc == user && lock.locked)

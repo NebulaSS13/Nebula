@@ -183,7 +183,7 @@
 	..()
 
 /obj/structure/bed/roller/attack_hand(mob/user)
-	if(!beaker || buckled_mob || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!beaker || buckled_mob || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	remove_beaker(user)
 	return TRUE

@@ -550,7 +550,7 @@
 	var/phrase = "I don't want to exist anymore!"
 
 /obj/structure/plushie/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if(user.a_intent == I_HELP)

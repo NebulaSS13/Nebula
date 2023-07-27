@@ -35,7 +35,7 @@
 	update_icon()
 
 /obj/structure/banner_frame/attack_hand(mob/user)
-	if(banner && user.check_dexterity(DEXTERITY_GRIP))
+	if(banner && user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		user.put_in_hands(banner)
 		var/old_banner = banner
 		set_banner(null)

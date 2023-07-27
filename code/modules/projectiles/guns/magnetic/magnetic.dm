@@ -190,7 +190,7 @@
 	. = ..()
 
 /obj/item/gun/magnetic/attack_hand(var/mob/user)
-	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/item/removing
 	if(loaded)

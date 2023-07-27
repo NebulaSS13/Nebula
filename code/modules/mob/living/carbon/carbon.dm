@@ -343,9 +343,6 @@
 /mob/living/carbon/adjust_hydration(var/amt)
 	set_hydration(hydration + amt)
 
-/mob/living/carbon/has_dexterity(var/dex_level)
-	. = ..() && (species.get_manual_dexterity() >= dex_level)
-
 /mob/living/carbon/fluid_act(var/datum/reagents/fluids)
 	var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching.total_volume)
 	if(saturation > 0)

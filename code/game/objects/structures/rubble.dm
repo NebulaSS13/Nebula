@@ -47,7 +47,7 @@
 		add_overlay("twinkle[rand(1,3)]")
 
 /obj/structure/rubble/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(!is_rummaging)
 		if(!lootleft)

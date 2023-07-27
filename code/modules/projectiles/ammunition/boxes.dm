@@ -62,7 +62,7 @@
 		overlays += I
 
 /obj/item/ammo_magazine/shotholder/attack_hand(mob/user)
-	if(loc != user || user.a_intent != I_HURT || !length(stored_ammo) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(loc != user || user.a_intent != I_HURT || !length(stored_ammo) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
 	stored_ammo -= C

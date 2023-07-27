@@ -79,7 +79,7 @@
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1)
 
 /obj/structure/sealant_injector/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(loaded_tank)
 		loaded_tank.dropInto(get_turf(src))

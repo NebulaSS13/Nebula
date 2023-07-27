@@ -36,7 +36,7 @@
 				break
 
 /obj/structure/coatrack/attack_hand(mob/user)
-	if(!length(contents) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!length(contents) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/item/removing = contents[contents.len]
 	user.visible_message( \

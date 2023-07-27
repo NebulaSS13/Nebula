@@ -1185,31 +1185,30 @@
 
 				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.get_blood_color(src))
 
-/mob/living/carbon/human/has_dexterity(var/dex_level)
-	. = check_dexterity(dex_level, silent = TRUE)
-
-/mob/living/carbon/human/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent, var/force_active_hand)
-	if(isnull(force_active_hand))
-		force_active_hand = get_active_held_item_slot()
-	var/obj/item/organ/external/active_hand = GET_EXTERNAL_ORGAN(src, force_active_hand)
+/mob/living/carbon/human/get_dexterity(var/silent = FALSE)
+	var/check_slot = get_active_held_item_slot()
+	var/obj/item/organ/external/active_hand = check_slot && GET_EXTERNAL_ORGAN(src, check_slot)
+	if(!active_hand)
+		// todo: move dexterity onto inventory slot?
+		var/datum/inventory_slot/gripper/gripper = get_inventory_slot_datum(check_slot)
+		if(istype(gripper) && isnull(gripper.requires_organ_tag))
+			return species.get_manual_dexterity(src)
+		if(!silent)
+			to_chat(src, SPAN_WARNING("Your [check_slot ? parse_zone(check_slot) : "hand"] is missing!"))
+		return DEXTERITY_NONE
+	if(!active_hand.is_usable())
+		if(!silent)
+			to_chat(src, SPAN_WARNING("Your [active_hand.name] is unusable!"))
+		return DEXTERITY_NONE
 	var/dex_malus = 0
 	if(getBrainLoss() && getBrainLoss() > config.dex_malus_brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
-		dex_malus = round(clamp(round(getBrainLoss()-config.dex_malus_brainloss_threshold)/10, DEXTERITY_NONE, DEXTERITY_FULL))
-	if(!active_hand)
-		if(!silent)
-			to_chat(src, SPAN_WARNING("Your hand is missing!"))
-		return FALSE
-	if(!active_hand.is_usable())
-		to_chat(src, SPAN_WARNING("Your [active_hand.name] is unusable!"))
-		return
-	if((active_hand.get_dexterity()-dex_malus) < dex_level)
-		if(!silent && !dex_malus)
-			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't have the dexterity to use that!"))
-		else if(!silent)
-			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't respond properly!"))
-		return FALSE
-	return TRUE
-
+		dex_malus = clamp(CEILING((getBrainLoss()-config.dex_malus_brainloss_threshold)/10), 0, length(global.dexterity_levels))
+		if(dex_malus > 0)
+			dex_malus = global.dexterity_levels[dex_malus]
+			if(!silent)
+				to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't respond properly!"))
+			return (active_hand.get_manual_dexterity() & ~dex_malus)
+	return active_hand.get_manual_dexterity()
 
 /mob/living/carbon/human/lose_hair()
 	if(species.set_default_hair(src))

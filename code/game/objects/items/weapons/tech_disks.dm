@@ -111,7 +111,7 @@
 	var/datum/fabricator_recipe/blueprint
 
 /obj/item/disk/design_disk/attack_hand(mob/user)
-	if(user.a_intent != I_HURT || !blueprint || !user.has_dexterity(DEXTERITY_KEYBOARDS))
+	if(user.a_intent != I_HURT || !blueprint || !user.check_dexterity(DEXTERITY_KEYBOARDS))
 		return ..()
 	blueprint = null
 	SetName(initial(name))

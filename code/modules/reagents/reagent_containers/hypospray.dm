@@ -142,7 +142,7 @@
 	return TRUE
 
 /obj/item/chems/hypospray/vial/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(!loaded_vial)
 		to_chat(user, SPAN_NOTICE("There is no vial loaded in \the [src]."))

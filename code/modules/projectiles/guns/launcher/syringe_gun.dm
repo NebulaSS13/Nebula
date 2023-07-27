@@ -103,7 +103,7 @@
 	add_fingerprint(user)
 
 /obj/item/gun/launcher/syringe/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(!darts.len)
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))

@@ -130,7 +130,7 @@
 	return ..()
 
 /obj/item/chems/weldpack/attack_hand(mob/user)
-	if(!is_welder_attached() || !user.check_dexterity(DEXTERITY_GRIP))
+	if(!is_welder_attached() || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return ..()
 	if(user.is_holding_offhand(src))
 		detach_gun(user)

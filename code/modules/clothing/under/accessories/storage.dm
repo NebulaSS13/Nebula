@@ -22,7 +22,7 @@
 	hold = new/obj/item/storage/internal/pockets(src, slots, max_w_class)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE) || !hold)
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE) || !hold)
 		return ..()
 	if(istype(loc, /obj/item/clothing))
 		hold.open(user)

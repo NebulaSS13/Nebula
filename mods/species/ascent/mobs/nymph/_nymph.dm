@@ -58,8 +58,8 @@
 	if(holding_item)
 		to_chat(user, SPAN_NOTICE("It is holding \icon[holding_item] \a [holding_item]."))
 
-/mob/living/carbon/alien/ascent_nymph/has_dexterity()
-	return FALSE
+/mob/living/carbon/alien/ascent_nymph/get_dexterity(var/silent = FALSE)
+	return DEXTERITY_NONE
 
 /mob/living/carbon/alien/ascent_nymph/death(gibbed)
 	if(holding_item)

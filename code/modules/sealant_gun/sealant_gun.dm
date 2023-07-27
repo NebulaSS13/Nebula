@@ -46,7 +46,7 @@
 	. = ..()
 
 /obj/item/gun/launcher/sealant/attack_hand(mob/user)
-	if(!(src in user.get_held_items()) || !loaded_tank || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!(src in user.get_held_items()) || !loaded_tank || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	unload_tank(user)
 	return TRUE

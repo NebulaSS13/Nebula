@@ -31,7 +31,7 @@
 	playsound(loc, 'sound/effects/bonerattle.ogg', 40)
 
 /obj/structure/skele_stand/attack_hand(mob/user)
-	if(length(swag) && user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(length(swag) && user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		var/obj/item/clothing/C = input("What piece of clothing do you want to remove?", "Skeleton Undressing") as null|anything in list_values(swag)
 		if(C)
 			swag -= get_key_by_value(swag, C)

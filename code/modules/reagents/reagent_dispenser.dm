@@ -159,7 +159,7 @@
 		to_chat(user, SPAN_WARNING("There is some kind of device rigged to the tank."))
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand(var/mob/user)
-	if (!rig || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if (!rig || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	visible_message(SPAN_NOTICE("\The [user] begins to detach \the [rig] from \the [src]."))
 	if(!user.do_skilled(2 SECONDS, SKILL_ELECTRICAL, src))
@@ -251,7 +251,7 @@
 	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
-	if(user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return dispense_cup(user)
 	return ..()
 

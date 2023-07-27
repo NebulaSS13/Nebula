@@ -29,7 +29,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(handle_grab_interaction(user))
 		return TRUE
-	if(!LAZYLEN(climbers) || (user in climbers) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!LAZYLEN(climbers) || (user in climbers) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return FALSE
 	user.visible_message(
 		SPAN_DANGER("\The [user] shakes \the [src]!"),
