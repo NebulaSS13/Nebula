@@ -11,6 +11,7 @@ var/global/list/stored_shock_by_ref = list()
 		to_chat(H, "<span class='notice'>You are now [H.pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
 
 /decl/species/proc/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
+	SHOULD_CALL_PARENT(TRUE)
 	var/water = REAGENT_VOLUME(fluids, /decl/material/liquid/water)
 	if(water >= 40 && H.getHalLoss())
 		H.adjustHalLoss(-(water_soothe_amount))

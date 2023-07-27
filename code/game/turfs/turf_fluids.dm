@@ -88,9 +88,11 @@
 	return flooring?.height || 0
 
 /turf/fluid_act(var/datum/reagents/fluids)
-	fluids.touch(src)
-	for(var/atom/movable/AM as anything in get_contained_external_atoms())
-		AM.fluid_act(fluids)
+	..()
+	if(!QDELETED(src) && fluids?.total_volume)
+		fluids.touch_turf(src)
+		for(var/atom/movable/AM as anything in get_contained_external_atoms())
+			AM.fluid_act(fluids)
 
 /turf/proc/remove_fluids(var/amount, var/defer_update)
 	var/obj/effect/fluid/F = locate() in src

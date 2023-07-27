@@ -49,5 +49,8 @@
 		set_extension(src, scent_type, cleanable_scent, scent_intensity, scent_descriptor, scent_range)
 
 /obj/effect/decal/cleanable/fluid_act(var/datum/reagents/fluid)
-	reagents?.trans_to(fluid, reagents.total_volume)
-	qdel(src)
+	SHOULD_CALL_PARENT(FALSE)
+	if(fluid?.total_volume && !QDELETED(src))
+		if(reagents?.total_volume)
+			reagents.trans_to(fluid, reagents.total_volume)
+		qdel(src)

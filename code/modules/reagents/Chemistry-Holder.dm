@@ -359,15 +359,22 @@ var/global/obj/temp_reagents_holder = new
 //If for some reason touch effects are bypassed (e.g. injecting stuff directly into a reagent container or person),
 //call the appropriate trans_to_*() proc.
 /datum/reagents/proc/trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE)
-	touch(target) //First, handle mere touch effects
-
 	if(ismob(target))
+		touch_mob(target)
+		if(QDELETED(target))
+			return TRUE
 		return splash_mob(target, amount, copy, defer_update = defer_update)
 	if(isturf(target))
+		touch_turf(target)
+		if(QDELETED(target))
+			return TRUE
 		return trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update)
-	if(isobj(target) && ATOM_IS_OPEN_CONTAINER(target))
-		return trans_to_obj(target, amount, multiplier, copy, defer_update = defer_update)
-	return 0
+	if(isobj(target))
+		touch_obj(target)
+		if(!QDELETED(target) && ATOM_IS_OPEN_CONTAINER(target))
+			return trans_to_obj(target, amount, multiplier, copy, defer_update = defer_update)
+		return TRUE
+	return FALSE
 
 //Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well.
 /datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/min_spill=0, var/max_spill=60, var/defer_update = FALSE)
@@ -476,25 +483,16 @@ var/global/obj/temp_reagents_holder = new
 	. = F.trans_to_holder(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
 	qdel(F)
 
-// When applying reagents to an atom externally, touch() is called to trigger any on-touch effects of the reagent.
-// This does not handle transferring reagents to things.
+// When applying reagents to an atom externally, touch procs are called to trigger any on-touch effects of the reagent.
+// Options are touch_turf(), touch_mob() and touch_obj(). This does not handle transferring reagents to things.
 // For example, splashing someone with water will get them wet and extinguish them if they are on fire,
 // even if they are wearing an impermeable suit that prevents the reagents from contacting the skin.
-/datum/reagents/proc/touch(var/atom/target)
-	if(ismob(target))
-		touch_mob(target)
-	if(isturf(target))
-		touch_turf(target)
-	if(isobj(target))
-		touch_obj(target)
-
 /datum/reagents/proc/touch_mob(var/mob/target)
 	if(!target || !istype(target) || !target.simulated)
 		return
 	for(var/rtype in reagent_volumes)
 		var/decl/material/current = GET_DECL(rtype)
 		current.touch_mob(target, REAGENT_VOLUME(src, rtype), src)
-	update_total()
 
 /datum/reagents/proc/touch_turf(var/turf/target)
 	if(!istype(target) || !target.simulated)
@@ -526,7 +524,6 @@ var/global/obj/temp_reagents_holder = new
 				if(istype(target, /turf/simulated))
 					var/turf/simulated/simulated_turf = target
 					simulated_turf.dirt = 0
-	update_total()
 
 /datum/reagents/proc/touch_obj(var/obj/target)
 	if(!target || !istype(target) || !target.simulated)
@@ -534,7 +531,6 @@ var/global/obj/temp_reagents_holder = new
 	for(var/rtype in reagent_volumes)
 		var/decl/material/current = GET_DECL(rtype)
 		current.touch_obj(target, REAGENT_VOLUME(src, rtype), src)
-	update_total()
 
 // Attempts to place a reagent on the mob's skin.
 // Reagents are not guaranteed to transfer to the target.

@@ -1083,18 +1083,18 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "dJ" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/structure/table/steel,
 /obj/random/bomb_supply,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "dK" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/structure/bed/chair,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "dL" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/structure/bed/chair,
 /obj/machinery/light/small/emergency{
 	dir = 1;
@@ -1177,7 +1177,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dZ" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/structure/sign/directions/medical{
 	dir = 8
 	},
@@ -1185,8 +1185,8 @@
 /area/outpost/abandoned)
 "ea" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/fluid_mapped/fuel,
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eb" = (
@@ -1198,11 +1198,11 @@
 /area/outpost/abandoned)
 "ec" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "ed" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/effect/decal/cleanable/blood/oil,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -1286,7 +1286,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "et" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/structure/table,
 /obj/structure/window/reinforced{
 	dir = 1
@@ -1298,14 +1298,14 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "eu" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /mob/living/bot/medbot,
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "ev" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "ex" = (
@@ -1314,7 +1314,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "ey" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
@@ -1472,7 +1472,7 @@
 "eW" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
 	dir = 4
 	},
@@ -2268,7 +2268,7 @@
 /area/outpost/abandoned)
 "hp" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "hq" = (
@@ -2369,13 +2369,13 @@
 "hD" = (
 /obj/random/junk,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "hE" = (
 /obj/structure/table/reinforced,
 /obj/random/material,
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "hF" = (
@@ -2384,7 +2384,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "hG" = (
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /obj/structure/closet/crate/radiation,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
@@ -2392,7 +2392,7 @@
 /area/outpost/abandoned)
 "hH" = (
 /obj/structure/reagent_dispensers/fueltank,
-/obj/effect/fluid_mapped/fuel,
+/obj/abstract/fluid_mapped/fuel,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "hL" = (

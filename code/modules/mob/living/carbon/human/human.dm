@@ -1127,8 +1127,9 @@
 	return breath
 
 /mob/living/carbon/human/fluid_act(var/datum/reagents/fluids)
-	species.fluid_act(src, fluids)
 	..()
+	if(!QDELETED(src) && fluids?.total_volume)
+		species.fluid_act(src, fluids)
 
 /mob/living/carbon/human/proc/set_cultural_value(var/token, var/decl/cultural_info/_culture, var/defer_language_update)
 	if(ispath(_culture, /decl/cultural_info))
