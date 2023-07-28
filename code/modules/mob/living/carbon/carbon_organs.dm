@@ -56,4 +56,5 @@
 
 /mob/living/carbon/get_bodytype()
 	RETURN_TYPE(/decl/bodytype)
+	// If the root organ ever changes/isn't always the chest, this will need to be changed.
 	return get_organ(BP_CHEST, /obj/item/organ)?.bodytype

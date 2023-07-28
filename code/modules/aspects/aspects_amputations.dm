@@ -41,7 +41,7 @@
 
 /decl/aspect/amputation/is_available_to(datum/preferences/pref)
 	. = ..()
-	if(. && pref.species && pref.bodytype)
+	if(. && pref.bodytype)
 		var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
 		if(!istype(mob_bodytype))
 			return FALSE
