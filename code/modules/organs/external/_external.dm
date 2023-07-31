@@ -133,6 +133,11 @@
 	slowdown = bodytype.movement_slowdown
 	update_icon(TRUE)
 
+/obj/item/organ/external/proc/set_bodytype_with_children(decl/bodytype/new_bodytype, override_material = null)
+	set_bodytype(new_bodytype, override_material)
+	for(var/obj/item/organ/external/child in children)
+		child.set_bodytype_with_children(new_bodytype, override_material)
+
 /obj/item/organ/external/proc/check_pain_disarm()
 	if(owner && prob((pain/max_damage)*100))
 		owner.grasp_damage_disarm(src)

@@ -12,7 +12,8 @@
 
 /datum/preferences/proc/get_bodytype_decl()
 	RETURN_TYPE(/decl/bodytype)
-	return get_species_decl().get_bodytype_by_name(bodytype || global.using_map.default_bodytype)
+	var/decl/species/species_decl = get_species_decl()
+	return species_decl.get_bodytype_by_name(bodytype) || species_decl.default_bodytype
 
 /datum/category_item/player_setup_item/physical/basic
 	name = "Basic"

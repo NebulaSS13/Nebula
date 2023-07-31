@@ -97,7 +97,7 @@
 				E = new limb_path(holder, null, model || get_base_model(holder.get_species_name()))
 		if(istype(E) && E.bodytype != model) // sometimes in the last line we save ourselves some work here
 			// this should be pre-validated by is_available_to()
-			E.set_bodytype(model || get_base_model(holder.get_species_name()))
+			E.set_bodytype_with_children(model || get_base_model(holder.get_species_name()))
 
 /decl/aspect/prosthetic_limb/left_hand
 	bodypart_name = "Left Hand"

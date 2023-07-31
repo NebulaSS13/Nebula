@@ -135,7 +135,6 @@
 		new_bodytype = GET_DECL(new_bodytype)
 	if(!istype(new_bodytype))
 		CRASH("Invalid bodytype [new_bodytype]")
-	vital_to_owner = null
 	bodytype = new_bodytype
 	if(bodytype.modifier_string)
 		name = "[bodytype.modifier_string] [initial(name)]"
@@ -153,6 +152,7 @@
 		populate_reagents()
 	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
 		QDEL_NULL(dna)
+	reset_status()
 
 /obj/item/organ/proc/set_species(specie_name)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
