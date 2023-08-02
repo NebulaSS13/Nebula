@@ -23,7 +23,7 @@
 	var/min_bruised_damage = 10       // Damage before considered bruised
 	var/damage_reduction = 0.5     //modifier for internal organ injury
 
-/obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna)
+/obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	if(!alive_icon)
 		alive_icon = initial(icon_state)
 	. = ..()
@@ -81,11 +81,6 @@
 
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
-
-/obj/item/organ/internal/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	. = ..()
-	min_bruised_damage += 5
-	min_broken_damage += 10
 
 /obj/item/organ/internal/proc/getToxLoss()
 	if(BP_IS_PROSTHETIC(src))

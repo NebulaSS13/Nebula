@@ -15,9 +15,6 @@ IGNORE_INCLUDE = [
     r'code/unit_tests/*.dm',
     # Ditto, todo: modularise or remove
     r'code/datums/music_tracks/*.dm',
-    # Deity species, TODO: include or remove
-    r'code/modules/species/outsider/shadow.dm',
-    r'code/modules/species/outsider/starlight.dm',
 ]
 
 lines = []

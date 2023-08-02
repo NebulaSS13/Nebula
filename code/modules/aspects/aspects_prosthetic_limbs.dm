@@ -6,7 +6,6 @@
 	aspect_flags = ASPECTS_PHYSICAL
 	abstract_type = /decl/aspect/prosthetic_limb
 	var/check_bodytype
-	var/check_species
 	var/bodypart_name
 	var/apply_to_limb = BP_L_HAND
 	var/list/incompatible_with_limbs = list(BP_L_HAND)
@@ -14,7 +13,7 @@
 
 /decl/aspect/prosthetic_limb/proc/get_base_model(var/species_name)
 	if(!species_name)
-		return /decl/prosthetics_manufacturer/basic_human
+		return /decl/bodytype/prosthetic/basic_human
 	var/decl/species/species = species_name ? get_species_by_key(species_name) : global.using_map.default_species
 	return species?.base_prosthetics_model
 
@@ -25,7 +24,7 @@
 		aspect_cost = CEILING(aspect_cost)
 	if(bodypart_name)
 		if(model)
-			var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
+			var/decl/bodytype/prosthetic/model_manufacturer = GET_DECL(model)
 			name = "[capitalize(model_manufacturer.name)] [bodypart_name]"
 			desc = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
 		else
@@ -43,8 +42,6 @@
 				continue
 			// The base model aspect does not exclude itself from specific models, but specific models will exclude from all others.
 			var/decl/aspect/prosthetic_limb/aspect = check_aspects[aspect_type]
-			if(!aspect.name)
-				continue // remove when abstract decl handling from dev is merged
 			if(!(aspect.apply_to_limb in incompatible_with_limbs))
 				continue
 			// Base model is only incompatible with itself.
@@ -59,8 +56,6 @@
 	// If our model has any additional aspect handling, do it here.
 	// Without a model, we will rely on is_available_to() to check get_base_model() for the user species.
 	blocked_species = null
-	var/decl/prosthetics_manufacturer/model_decl = GET_DECL(model)
-	permitted_species = model_decl?.species_restricted?.Copy()
 
 /decl/aspect/prosthetic_limb/applies_to_organ(var/organ)
 	return apply_to_limb && organ == apply_to_limb
@@ -69,12 +64,12 @@
 	. = ..()
 	if(.)
 		if(model)
-			var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+			var/decl/bodytype/prosthetic/R = GET_DECL(model)
 			if(!istype(R))
 				return FALSE
 			var/decl/species/S = get_species_by_key(pref.species) || get_species_by_key(global.using_map.default_species)
 			var/decl/bodytype/B = S.get_bodytype_by_name(pref.bodytype)
-			if(!R.check_can_install(apply_to_limb, target_bodytype = (check_bodytype || B.bodytype_category), target_species = (check_species || S.name)))
+			if(!R.check_can_install(apply_to_limb, target_bodytype = (check_bodytype || B.bodytype_category)))
 				return FALSE
 		else if(!get_base_model(pref.species))
 			return FALSE
@@ -96,14 +91,13 @@
 	if(. && apply_to_limb)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(holder, apply_to_limb)
 		if(!istype(E))
-			var/list/organ_data = holder.species.has_limbs[apply_to_limb]
+			var/list/organ_data = holder.get_bodytype().has_limbs[apply_to_limb]
+			var/limb_path = organ_data["path"]
 			if("path" in organ_data)
-				var/limb_path = organ_data["path"]
-				E = new limb_path(holder)
-		if(istype(E))
-			// this should be pre-validated by is_available_to(), force bodytype/species based on holder.
-			var/holder_species = holder.get_species_name()
-			E.robotize(model || get_base_model(holder_species), check_bodytype = holder.get_bodytype_category(), check_species = holder_species)
+				E = new limb_path(holder, null, model || get_base_model(holder.get_species_name()))
+		if(istype(E) && E.bodytype != model) // sometimes in the last line we save ourselves some work here
+			// this should be pre-validated by is_available_to()
+			E.set_bodytype_with_children(model || get_base_model(holder.get_species_name()))
 
 /decl/aspect/prosthetic_limb/left_hand
 	bodypart_name = "Left Hand"

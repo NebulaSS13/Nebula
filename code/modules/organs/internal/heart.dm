@@ -217,7 +217,7 @@
 /obj/item/organ/internal/heart/get_mechanical_assisted_descriptor()
 	return "pacemaker-assisted [name]"
 
-/obj/item/organ/internal/heart/rejuvenate(ignore_prosthetic_prefs)
+/obj/item/organ/internal/heart/rejuvenate(ignore_organ_aspects)
 	. = ..()
 	if(!BP_IS_PROSTHETIC(src))
 		pulse = PULSE_NORM

@@ -65,14 +65,8 @@
 /decl/species/proc/get_radiation_mod(var/mob/living/carbon/human/H)
 	. = (H && H.isSynthetic() ? 0.5 : radiation_mod)
 
-/decl/species/proc/get_slowdown(var/mob/living/carbon/human/H)
-	. = (H && H.isSynthetic() ? 0 : slowdown)
-
 /decl/species/proc/get_root_species_name(var/mob/living/carbon/human/H)
 	return name
-
-/decl/species/proc/get_limb_from_zone(var/limb)
-	. = length(LAZYACCESS(limb_mapping, limb)) ? pick(limb_mapping[limb]) : limb
 
 /decl/species/proc/get_bodytype_by_name(var/bodytype_name)
 	bodytype_name = trim(lowertext(bodytype_name))

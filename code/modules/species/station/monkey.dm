@@ -9,7 +9,6 @@
 	available_bodytypes = list(/decl/bodytype/monkey)
 	holder_icon = 'icons/mob/human_races/species/monkey/holder.dmi'
 
-	mob_size = MOB_SIZE_SMALL
 	show_ssd = null
 
 	gibbed_anim = "gibbed-m"
@@ -32,10 +31,6 @@
 
 	pass_flags = PASS_FLAG_TABLE
 	holder_type = /obj/item/holder
-	override_limb_types = list(
-		BP_HEAD = /obj/item/organ/external/head/no_eyes,
-		BP_TAIL = /obj/item/organ/external/tail/monkey
-	)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 0.6,

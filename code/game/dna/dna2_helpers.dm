@@ -133,7 +133,7 @@
 
 // Simpler. Don't specify UI in order for the mob to use its own.
 /mob/proc/UpdateAppearance(var/list/UI=null)
-	if(istype(src, /mob/living/carbon/human))
+	if(istype(src, /mob/living/carbon/human) && dna)
 		if(UI!=null)
 			src.dna.UI=UI
 			src.dna.UpdateUI()
@@ -143,7 +143,6 @@
 		H.facial_hair_colour = rgb(dna.GetUIValueRange(DNA_UI_BEARD_R,255), dna.GetUIValueRange(DNA_UI_BEARD_G,255), dna.GetUIValueRange(DNA_UI_BEARD_B,255))
 		H.skin_colour =        rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255))
 		H.eye_colour =         rgb(dna.GetUIValueRange(DNA_UI_EYES_R,255),  dna.GetUIValueRange(DNA_UI_EYES_G,255),  dna.GetUIValueRange(DNA_UI_EYES_B,255))
-		H.update_eyes()
 		H.skin_tone   = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
 
 		// TODO: update DNA gender to not be a bool - use bodytype and pronouns

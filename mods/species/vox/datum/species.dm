@@ -22,12 +22,7 @@
 /decl/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
-	base_prosthetics_model = /decl/prosthetics_manufacturer/vox/crap
-
-	vital_organs = list(
-		BP_STACK,
-		BP_BRAIN
-	)
+	base_prosthetics_model = /decl/bodytype/prosthetic/vox/crap
 
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
@@ -39,18 +34,6 @@
 		/decl/natural_attack/claws/strong/gloves,
 		/decl/natural_attack/punch,
 		/decl/natural_attack/bite/strong
-	)
-
-	default_h_style = /decl/sprite_accessory/hair/vox/short
-
-	base_hair_color = "#160900"
-	base_eye_color = "#d60093"
-	base_color = "#526d29"
-	base_markings = list(
-		/decl/sprite_accessory/marking/vox/beak =   "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/crest =  "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/claws =  "#a0a654"
 	)
 
 	rarity_value = 4
@@ -94,32 +77,13 @@
 	poison_types = list(/decl/material/gas/oxygen = TRUE)
 	siemens_coefficient = 0.2
 
-	species_flags = SPECIES_FLAG_NO_SCAN
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR
 
 	blood_types = list(/decl/blood_type/vox)
 	flesh_color = "#808d11"
 
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5
-
-	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_TAIL = /obj/item/organ/external/tail/vox
-	)
-
-	has_organ = list(
-		BP_STOMACH =    /obj/item/organ/internal/stomach/vox,
-		BP_HEART =      /obj/item/organ/internal/heart/vox,
-		BP_LUNGS =      /obj/item/organ/internal/lungs/vox,
-		BP_LIVER =      /obj/item/organ/internal/liver/vox,
-		BP_KIDNEYS =    /obj/item/organ/internal/kidneys/vox,
-		BP_BRAIN =      /obj/item/organ/internal/brain,
-		BP_EYES =       /obj/item/organ/internal/eyes/vox,
-		BP_STACK =      /obj/item/organ/internal/voxstack,
-		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
-	)
 
 	available_pronouns = list(
 		/decl/pronouns/neuter,

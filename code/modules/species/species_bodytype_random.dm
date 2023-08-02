@@ -1,6 +1,6 @@
 #define SETUP_RANDOM_COLOR_GETTER(X, Y, Z, W)  \
-/decl/species/var/list/random_##Y = W;\
-/decl/species/proc/get_random_##X(){\
+/decl/bodytype/var/list/random_##Y = W;\
+/decl/bodytype/proc/get_random_##X(){\
 	if(!(appearance_flags & Z) || !random_##Y.len){\
 		return;\
 	}\
@@ -10,10 +10,11 @@
 
 #define SETUP_RANDOM_COLOR_SETTER(X, Y)\
 /mob/living/carbon/human/proc/randomize_##X(){\
-	if(!species){\
+	var/decl/bodytype/root_bodytype = get_bodytype();\
+	if(!root_bodytype){\
 		return;\
 	}\
-	var/colour = species.get_random_##X();\
+	var/colour = root_bodytype.get_random_##X();\
 	if(colour){\
 		Y(colour);\
 	}\
@@ -52,18 +53,19 @@ SETUP_RANDOM_COLOR_GETTER(eye_color, eye_colors, HAS_EYE_COLOR, list(
 	/decl/color_generator/albino_eye))
 SETUP_RANDOM_COLOR_SETTER(eye_color, change_eye_color)
 
-/decl/species/proc/get_random_facial_hair_color()
+/decl/bodytype/proc/get_random_facial_hair_color()
 	return get_random_hair_color()
 
 SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)
 
-/decl/species/proc/get_random_skin_tone()
+/decl/bodytype/proc/get_random_skin_tone()
 	return random_skin_tone(src)
 
 /mob/living/carbon/human/proc/randomize_skin_tone()
-	if(!species)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(!root_bodytype)
 		return
-	var/new_tone = species.get_random_skin_tone()
+	var/new_tone = root_bodytype.get_random_skin_tone()
 	if(!isnull(new_tone))
 		change_skin_tone(new_tone)
 

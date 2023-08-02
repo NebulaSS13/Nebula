@@ -45,12 +45,8 @@
 	darksight_range = 4
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8cd7a3"
-	base_color = "#006666"
-	base_hair_color = "#006666"
-	default_h_style = /decl/sprite_accessory/hair/skrell/short
 	organs_icon = 'mods/species/bayliens/skrell/icons/body/organs.dmi'
 
 	blood_types = list(
@@ -109,16 +105,6 @@
 			/decl/cultural_info/religion/skrell/starspiritual,
 			/decl/cultural_info/religion/other
 		)
-	)
-
-	has_organ = list(
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_STOMACH =  /obj/item/organ/internal/stomach,
-		BP_LUNGS =    /obj/item/organ/internal/lungs/gills,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes/skrell
 	)
 
 	exertion_effect_chance = 10

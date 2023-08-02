@@ -7,7 +7,7 @@
 	W.write("species", pref.species)
 
 /datum/category_item/player_setup_item/background/species/load_character(datum/pref_record_reader/R)
-	pref.species = R.read("species") 
+	pref.species = R.read("species")
 
 /datum/category_item/player_setup_item/background/species/sanitize_character()
 	. = ..()
@@ -18,6 +18,7 @@
 	if(!pref.species || !get_species_by_key(pref.species))
 		pref.species = global.using_map.default_species
 	var/decl/species/mob_species = get_species_by_key(pref.species)
+	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 	var/decl/pronouns/pronouns = get_pronouns_by_gender(pref.gender)
 	if(!istype(pronouns) || !(pronouns in mob_species.available_pronouns))
 		pronouns = mob_species.available_pronouns[1]
@@ -25,17 +26,14 @@
 
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
 
-	if(pref.all_underwear && !has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
+	if(pref.all_underwear && !(mob_bodytype.appearance_flags & HAS_UNDERWEAR))
 		pref.all_underwear.Cut()
-
-/datum/category_item/player_setup_item/background/species/proc/has_flag(var/decl/species/mob_species, var/flag)
-	return mob_species && (mob_species.appearance_flags & flag)
 
 /datum/category_item/player_setup_item/background/species/content(var/mob/user)
 	var/decl/species/current_species = get_species_by_key(pref.species)
 	var/list/prefilter = get_playable_species()
 	var/list/playables = list()
-	
+
 	for(var/s in prefilter)
 		if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
 			var/decl/species/checking_species = get_species_by_key(s)
@@ -61,15 +59,15 @@
 
 	var/icon/use_preview_icon = current_species.get_preview_icon()
 	if(use_preview_icon)
-		send_rsc(user, use_preview_icon, current_species.preview_icon_path)		
+		send_rsc(user, use_preview_icon, current_species.preview_icon_path)
 		. += "<td width = '200px' align='center'><img src='[current_species.preview_icon_path]' width='[current_species.preview_icon_width]px' height='[current_species.preview_icon_height]px'></td>"
 	else
 		. += "<td width = '200px' align='center'>No preview available.</td>"
-		
+
 	var/desc = current_species.description ? "<h3>Species Summary</h3><p>[current_species.description]</p>" : null
 	if(current_species.roleplay_summary)
 		desc = "[desc]<h3>Roleplaying Summary</h3><p>[current_species.roleplay_summary]</p>"
-		
+
 	if(hide_species && length(desc) > 200)
 		desc = "[copytext(desc, 1, 194)] <small>\[...\]</small>"
 	. += "<td width>[desc]</td>"
@@ -94,14 +92,14 @@
 
 			pref.species = choice
 			pref.sanitize_preferences()
-
-			//reset hair colour and skin colour
+			//reset hairstyle prefs
 			ResetAllHair()
-			pref.hair_colour = COLOR_BLACK
-			pref.skin_tone = 0
-			pref.body_markings.Cut() // Basically same as above.
-			var/decl/species/mob_species = get_species_by_key(pref.species)
+			// reset colors
+			var/decl/species/mob_species = pref.get_species_decl()
 			mob_species.handle_post_species_pref_set(pref)
+			// reset markings
+			var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
+			mob_bodytype.handle_post_bodytype_pref_set(pref)
 
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 

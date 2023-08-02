@@ -400,7 +400,7 @@ default behaviour is:
 
 	// shut down ongoing problems
 	radiation = 0
-	bodytemperature = T20C
+	bodytemperature = get_species()?.body_temperature || initial(bodytemperature)
 	sdisabilities = 0
 	disabilities = 0
 
@@ -734,6 +734,9 @@ default behaviour is:
 	if(auras)
 		for(var/a in auras)
 			remove_aura(a)
+	// done in this order so that icon updates aren't triggered once all our organs are obliterated
+	delete_inventory(TRUE)
+	delete_organs()
 	return ..()
 
 /mob/living/proc/melee_accuracy_mods()

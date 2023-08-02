@@ -29,13 +29,15 @@
 	if(href_list["bodytype"] && can_change(APPEARANCE_BODY))
 		var/decl/species/species = owner.get_species()
 		var/decl/bodytype/B = species.get_bodytype_by_name(href_list["bodytype"])
-		if(istype(B) && (B in owner.species.available_bodytypes) && owner.set_bodytype(B, TRUE))
+		if(istype(B) && (B in owner.species.available_bodytypes) && owner.set_bodytype(B))
 			return TRUE
 
 	if(href_list["skin_tone"] && can_change_skin_tone())
-		var/new_s_tone = input(usr, "Choose your character's skin-tone:\n1 (lighter) - [owner.species.max_skin_tone()] (darker)", "Skin Tone", -owner.skin_tone + 35) as num|null
-		if(isnum(new_s_tone) && can_still_topic(state) && owner.species.appearance_flags & HAS_SKIN_TONE_NORMAL)
-			new_s_tone = 35 - max(min(round(new_s_tone), owner.species.max_skin_tone()), 1)
+		var/decl/bodytype/root_bodytype = owner.get_bodytype()
+		var/new_s_tone = input(usr, "Choose your character's skin-tone:\n1 (lighter) - [root_bodytype.max_skin_tone()] (darker)", "Skin Tone", -owner.skin_tone + 35) as num|null
+		root_bodytype = owner.get_bodytype() // gotta make sure just in case, since input sleeps
+		if(isnum(new_s_tone) && can_still_topic(state) && root_bodytype.appearance_flags & HAS_SKIN_TONE_NORMAL)
+			new_s_tone = 35 - max(min(round(new_s_tone), root_bodytype.max_skin_tone()), 1)
 			return owner.change_skin_tone(new_s_tone)
 
 	if(href_list["skin_color"] && can_change_skin_color())
@@ -98,7 +100,7 @@
 			genders[++genders.len] =  list("gender_name" = G.pronoun_string, "gender_key" = G.name)
 		data["genders"] = genders
 
-	data["bodytype"] = capitalize(owner.bodytype.name)
+	data["bodytype"] = capitalize(owner.get_bodytype().name)
 	data["change_bodytype"] = can_change(APPEARANCE_BODY)
 	if(data["change_bodytype"])
 		var/bodytypes[0]
@@ -147,7 +149,7 @@
 	return owner && (flags & flag)
 
 /datum/nano_module/appearance_changer/proc/can_change_skin_tone()
-	return owner && (flags & APPEARANCE_SKIN) && owner.species.appearance_flags & HAS_A_SKIN_TONE
+	return owner && (flags & APPEARANCE_SKIN) && owner.get_bodytype().appearance_flags & HAS_A_SKIN_TONE
 
 /datum/nano_module/appearance_changer/proc/can_change_skin_color()
-	return owner && (flags & APPEARANCE_SKIN) && owner.species.appearance_flags & HAS_SKIN_COLOR
+	return owner && (flags & APPEARANCE_SKIN) && owner.get_bodytype().appearance_flags & HAS_SKIN_COLOR

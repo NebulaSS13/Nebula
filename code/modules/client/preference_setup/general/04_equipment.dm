@@ -65,7 +65,8 @@
 					break
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	if(!(mob_species && mob_species.appearance_flags & HAS_UNDERWEAR))
+	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+	if(!(mob_bodytype.appearance_flags & HAS_UNDERWEAR))
 		pref.all_underwear.Cut()
 
 	if(!istype(pref.all_underwear_metadata))

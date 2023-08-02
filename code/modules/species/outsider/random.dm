@@ -4,6 +4,16 @@
 	icon_base =         'icons/mob/human_races/species/humanoid/body.dmi'
 	bandages_icon =     'icons/mob/bandage.dmi'
 	limb_blend =        ICON_MULTIPLY
+	appearance_flags =  HAS_SKIN_COLOR
+	body_flags =        BODY_FLAG_NO_DNA
+
+/decl/bodytype/alium/Initialize()
+	if(prob(10))
+		movement_slowdown += pick(-1,1)
+	if(prob(5))
+		body_flags |= BODY_FLAG_NO_PAIN
+	base_color  = RANDOM_RGB
+	. = ..()
 
 /decl/species/alium
 	name = SPECIES_ALIEN
@@ -11,12 +21,9 @@
 	description = "Some alien humanoid species, unknown to humanity. How exciting."
 	rarity_value = 5
 
-	species_flags = SPECIES_FLAG_NO_SCAN
 	spawn_flags = SPECIES_IS_RESTRICTED
 
 	available_bodytypes = list(/decl/bodytype/alium)
-
-	appearance_flags = HAS_SKIN_COLOR
 
 	force_cultural_info = list(
 		TAG_CULTURE = /decl/cultural_info/culture/hidden/alium
@@ -38,7 +45,6 @@
 	//Coloring
 	blood_color = RANDOM_RGB
 	flesh_color = RANDOM_RGB
-	base_color  = RANDOM_RGB
 
 	//Combat stats
 	MULT_BY_RANDOM_COEF(total_health, 0.8, 1.2)
@@ -91,13 +97,9 @@
 	if(prob(40))
 		available_pronouns = list(/decl/pronouns)
 	if(prob(10))
-		slowdown += pick(-1,1)
-	if(prob(10))
 		species_flags |= SPECIES_FLAG_NO_SLIP
 	if(prob(10))
 		species_flags |= SPECIES_FLAG_NO_TANGLE
-	if(prob(5))
-		species_flags |= SPECIES_FLAG_NO_PAIN
 
 	. = ..()
 

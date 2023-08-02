@@ -37,12 +37,6 @@ var/global/list/wrapped_species_by_ref = list()
 		H.facial_hair_colour = H.skin_colour
 	..()
 
-/decl/species/shapeshifter/apply_species_organ_modifications(var/obj/item/organ/org)
-	..()
-	var/obj/item/organ/external/E = org
-	if(istype(E) && E.owner)
-		E.sync_colour_to_human(E.owner)
-
 /decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_pain_emote(H, pain_power)
@@ -59,12 +53,13 @@ var/global/list/wrapped_species_by_ref = list()
 	set_special_ability_cooldown(1 SECOND)
 
 	visible_message("<span class='notice'>\The [src]'s form contorts subtly.</span>")
-	var/list/hairstyles = species.get_hair_styles(bodytype.associated_gender)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	var/list/hairstyles = species.get_hair_styles(root_bodytype.associated_gender, check_gender = FALSE)
 	if(length(hairstyles))
 		var/decl/sprite_accessory/new_hair = input("Select a hairstyle.", "Shapeshifter Hair") as null|anything in hairstyles
 		change_hair(new_hair ? new_hair.type : /decl/sprite_accessory/hair/bald)
 
-	var/list/beardstyles = species.get_facial_hair_styles(bodytype.associated_gender)
+	var/list/beardstyles = species.get_facial_hair_styles(root_bodytype.associated_gender, check_gender = FALSE)
 	if(length(beardstyles))
 		var/decl/sprite_accessory/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in beardstyles
 		change_facial_hair(new_hair ? new_hair.type : /decl/sprite_accessory/facial_hair/shaved)

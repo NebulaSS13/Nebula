@@ -100,9 +100,10 @@
 	var/list/shown_objects = list()
 	var/list/hidden_bleeders = list()
 
-	for(var/organ_tag in species.has_limbs)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	for(var/organ_tag in root_bodytype.has_limbs)
 
-		var/list/organ_data = species.has_limbs[organ_tag]
+		var/list/organ_data = root_bodytype.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, organ_tag)
 

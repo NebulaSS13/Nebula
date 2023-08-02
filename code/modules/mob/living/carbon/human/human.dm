@@ -11,7 +11,7 @@
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/step_count
 
-/mob/living/carbon/human/Initialize(mapload, var/species_name = null, var/datum/dna/new_dna = null)
+/mob/living/carbon/human/Initialize(mapload, species_name = null, datum/dna/new_dna = null, decl/bodytype/new_bodytype = null)
 	setup_hud_overlays()
 	var/list/newargs = args.Copy(2)
 	setup(arglist(newargs))
@@ -364,11 +364,12 @@
 	set_flavor()
 
 /mob/living/carbon/human/proc/get_darksight_range()
-	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(istype(I))
 			return I.darksight_range
-	return species.darksight_range
+	return get_species().darksight_range
 
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
 	if(full_body)
@@ -382,10 +383,7 @@
 	return
 
 /mob/living/carbon/human/get_bodytype_category()
-	. = bodytype.bodytype_category
-
-/mob/living/carbon/human/get_bodytype()
-	return bodytype
+	. = get_bodytype()?.bodytype_category
 
 /mob/living/carbon/human/check_has_mouth()
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
@@ -470,7 +468,7 @@
 
 /mob/living/carbon/human/revive()
 
-	species.create_missing_organs(src) // Reset our organs/limbs.
+	get_bodytype().create_missing_organs(src) // Reset our organs/limbs.
 	restore_all_organs()       // Reapply robotics/amputated status from preferences.
 	reset_blood()
 
@@ -564,13 +562,15 @@
 		custom_pain(msg,40,affecting = organ)
 	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
 
-/mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype, var/rebuild_body = FALSE)
+/mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype)
 	if(ispath(new_bodytype))
 		new_bodytype = GET_DECL(new_bodytype)
-	if(istype(new_bodytype) && bodytype != new_bodytype)
-		bodytype = new_bodytype
-		if(bodytype && rebuild_body)
-			UpdateAppearance() // force_update_limbs is insufficient because of internal organs
+	// No check to see if it's the same as our current one, because we don't have a 'mob bodytype' anymore
+	// just the torso. It's assumed if we call this we want a full regen.
+	if(istype(new_bodytype))
+		mob_size = new_bodytype.mob_size
+		UpdateAppearance() // sync vars to DNA
+		new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
@@ -597,7 +597,6 @@
 	if(species.holder_type)
 		holder_type = species.holder_type
 	maxHealth = species.total_health
-	mob_size = species.mob_size
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
@@ -610,7 +609,7 @@
 	//Handle bodytype
 	if(!new_bodytype)
 		new_bodytype = species.get_bodytype_by_pronouns(new_pronouns)
-	set_bodytype(new_bodytype, FALSE)
+	set_bodytype(new_bodytype)
 
 	available_maneuvers = species.maneuvers.Copy()
 
@@ -660,7 +659,7 @@
 //Drop anything that cannot be worn by the current species of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
 
-	if(!(species.appearance_flags & HAS_UNDERWEAR))
+	if(!(get_bodytype().appearance_flags & HAS_UNDERWEAR))
 		QDEL_NULL_LIST(worn_underwear)
 
 	var/list/new_slots
@@ -687,19 +686,27 @@
 /mob/living/carbon/human/proc/apply_species_appearance()
 	if(!species)
 		icon_state = lowertext(SPECIES_HUMAN)
-		skin_colour = COLOR_BLACK
 	else
 		species.apply_appearance(src)
 
-	force_update_limbs() //updates bodytype
-	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
-	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
-	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
+	force_update_limbs()
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	default_pixel_x = initial(pixel_x) + root_bodytype.pixel_offset_x
+	default_pixel_y = initial(pixel_y) + root_bodytype.pixel_offset_y
+	default_pixel_z = initial(pixel_z) + root_bodytype.pixel_offset_z
 
 	reset_offsets()
 
 	// Rebuild the HUD and visual elements only if we got a client.
 	hud_reset(TRUE)
+
+// Like above, but for bodytype. Not as complicated.
+/mob/living/carbon/human/proc/apply_bodytype_appearance()
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(!root_bodytype)
+		skin_colour = COLOR_BLACK
+	else
+		root_bodytype.apply_appearance(src)
 
 /mob/living/carbon/human/proc/update_languages()
 	if(!length(cultural_info))
@@ -879,29 +886,12 @@
 
 /mob/living/carbon/human/move_to_stomach(atom/movable/victim)
 	var/obj/item/organ/internal/stomach = GET_INTERNAL_ORGAN(src, BP_STOMACH)
-	if(istype(stomach))
+	if(stomach)
 		victim.forceMove(stomach)
 
 /mob/living/carbon/human/should_have_organ(var/organ_check)
-
-	var/obj/item/organ/external/affecting
-	if(organ_check in list(BP_HEART, BP_LUNGS))
-		affecting = GET_EXTERNAL_ORGAN(src, BP_CHEST)
-	else if(organ_check in list(BP_LIVER, BP_KIDNEYS))
-		affecting = GET_EXTERNAL_ORGAN(src, BP_GROIN)
-
-	if(affecting && BP_IS_PROSTHETIC(affecting))
-		return 0
-	return (species && species.has_organ[organ_check])
-
-/mob/living/carbon/human/can_feel_pain(var/obj/item/organ/check_organ)
-	if(isSynthetic())
-		return 0
-	if(check_organ)
-		if(!istype(check_organ))
-			return 0
-		return check_organ.can_feel_pain()
-	return !(species.species_flags & SPECIES_FLAG_NO_PAIN)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	return root_bodytype?.has_organ[organ_check]
 
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()
@@ -912,7 +902,8 @@
 /mob/living/carbon/human/need_breathe()
 	if(mNobreath in mutations)
 		return FALSE
-	if(!species.breathing_organ || !should_have_organ(species.breathing_organ))
+	var/breathing_organ = get_bodytype().breathing_organ
+	if(!breathing_organ || !should_have_organ(breathing_organ))
 		return FALSE
 	return TRUE
 
@@ -984,10 +975,10 @@
 		return
 	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	if(heart && !(heart.status & ORGAN_DEAD))
-		var/species_organ = species.breathing_organ
+		var/breathing_organ = get_bodytype().breathing_organ
 		var/active_breaths = 0
-		if(species_organ)
-			var/obj/item/organ/internal/lungs/L = get_organ(species_organ, /obj/item/organ/internal/lungs)
+		if(breathing_organ)
+			var/obj/item/organ/internal/lungs/L = get_organ(breathing_organ, /obj/item/organ/internal/lungs)
 			if(L)
 				active_breaths = L.active_breathing
 		if(!nervous_system_failure() && active_breaths)
@@ -1169,7 +1160,7 @@
 	return active_hand.get_manual_dexterity()
 
 /mob/living/carbon/human/lose_hair()
-	if(species.set_default_hair(src))
+	if(get_bodytype().set_default_hair(src))
 		. = TRUE
 	if(species.handle_additional_hair_loss(src))
 		. = TRUE
@@ -1241,24 +1232,24 @@
 		mind.name = newname
 
 //Human mob specific init code. Meant to be used only on init.
-/mob/living/carbon/human/proc/setup(var/species_name = null, var/datum/dna/new_dna = null)
+/mob/living/carbon/human/proc/setup(species_name = null, datum/dna/new_dna = null, decl/bodytype/new_bodytype = null)
 	if(new_dna)
 		species_name = new_dna.species
 		src.dna = new_dna
 	else if(!species_name)
 		species_name = global.using_map.default_species //Humans cannot exist without a species!
 
-	set_species(species_name)
-
+	set_species(species_name, new_bodytype)
+	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
 	if(!skin_colour)
-		skin_colour = species.base_color
+		skin_colour = root_bodytype.base_color
 	if(!hair_colour)
-		hair_colour = species.base_hair_color
+		hair_colour = root_bodytype.base_hair_color
 	if(!facial_hair_colour)
-		facial_hair_colour = species.base_hair_color
+		facial_hair_colour = root_bodytype.base_hair_color
 	if(!eye_colour)
-		eye_colour = species.base_eye_color
-	species.set_default_hair(src, override_existing = FALSE, defer_update_hair = TRUE)
+		eye_colour = root_bodytype.base_eye_color
+	root_bodytype.set_default_hair(src, override_existing = FALSE, defer_update_hair = TRUE)
 	if(!b_type && length(species?.blood_types))
 		b_type = pickweight(species.blood_types)
 
@@ -1269,10 +1260,9 @@
 		dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
 
 	species.handle_pre_spawn(src)
-	if(!LAZYLEN(get_external_organs()))
-		species.create_missing_organs(src) //Syncs DNA when adding organs
 	apply_species_cultural_info()
 	apply_species_appearance()
+	apply_bodytype_appearance()
 	species.handle_post_spawn(src)
 
 	UpdateAppearance() //Apply dna appearance to mob, causes DNA to change because filler values are regenerated

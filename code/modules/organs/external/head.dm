@@ -18,19 +18,19 @@
 
 	var/draw_eyes = TRUE
 	var/glowing_eyes = FALSE
-	var/can_intake_reagents = 1
-	var/has_lips = 1
+	var/can_intake_reagents = TRUE
+	var/has_lips = TRUE
 	var/forehead_graffiti
 	var/graffiti_style
 
 /obj/item/organ/external/head/proc/get_eye_overlay()
 	if(glowing_eyes || owner?.has_chemical_effect(CE_GLOWINGEYES, 1))
-		var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+		var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 		if(eyes)
 			return eyes.get_special_overlay()
 
 /obj/item/organ/external/head/proc/get_eyes()
-	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	if(eyes)
 		return eyes.get_onhead_icon()
 
@@ -75,13 +75,11 @@
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
-/obj/item/organ/external/head/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 1, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+/obj/item/organ/external/head/set_bodytype(decl/bodytype/new_bodytype, override_material = null)
 	. = ..()
-	has_lips = null
-	if(model)
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
-		can_intake_reagents = R.can_eat
-		draw_eyes = R.has_eyes
+	has_lips = bodytype.appearance_flags & HAS_LIPS
+	can_intake_reagents = !(bodytype.body_flags & BODY_FLAG_NO_EAT)
+	draw_eyes = bodytype.has_eyes
 
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
 	. = ..()
@@ -109,7 +107,7 @@
 			if(eye_glow)
 				overlays |= eye_glow
 
-		if(owner.lip_style && !BP_IS_PROSTHETIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
+		if(owner.lip_style && (bodytype.appearance_flags & HAS_LIPS))
 			var/icon/lip_icon = new/icon(bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")
 			lip_icon.Blend(owner.lip_style, ICON_MULTIPLY)
 			overlays |= lip_icon
@@ -126,7 +124,7 @@
 
 	if(owner.f_style)
 		var/decl/sprite_accessory/facial_hair_style = GET_DECL(owner.f_style)
-		if(facial_hair_style?.accessory_is_available(owner, owner.species, owner.bodytype.bodytype_flag, owner.gender))
+		if(facial_hair_style?.accessory_is_available(owner, species, bodytype.bodytype_flag, owner.gender))
 			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 			if(owner.facial_hair_colour && facial_hair_style.do_colouration)
 				facial_s.Blend(owner.facial_hair_colour, facial_hair_style.blend)
@@ -138,7 +136,7 @@
 		if(head && (head.flags_inv & BLOCK_HEAD_HAIR))
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GET_DECL(/decl/sprite_accessory/hair/short)
-		if(hair_style?.accessory_is_available(owner, owner.species, owner.bodytype.bodytype_flag, owner.gender))
+		if(hair_style?.accessory_is_available(owner, species, bodytype.bodytype_flag, owner.gender))
 			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
 			if(hair_style.do_colouration && hair_colour)
 				hair_s.Blend(hair_colour, hair_style.blend)

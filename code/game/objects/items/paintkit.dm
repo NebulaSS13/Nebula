@@ -57,7 +57,7 @@
 
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			bodytype_equip_flags = H.bodytype.bodytype_flag
+			bodytype_equip_flags = H.get_bodytype().bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE
@@ -76,7 +76,7 @@
 
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			bodytype_equip_flags = H.bodytype.bodytype_flag
+			bodytype_equip_flags = H.get_bodytype().bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE

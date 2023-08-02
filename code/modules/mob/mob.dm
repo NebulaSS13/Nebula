@@ -1130,10 +1130,18 @@
 	return TRUE
 
 /mob/proc/get_species()
+	RETURN_TYPE(/decl/species)
 	return
 
 /mob/proc/get_bodytype()
+	RETURN_TYPE(/decl/bodytype)
 	return
+
+/mob/proc/has_body_flag(flag, default = FALSE)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(istype(root_bodytype))
+		return root_bodytype.body_flags & flag
+	return default
 
 /// Update the mouse pointer of the attached client in this mob.
 /mob/proc/update_mouse_pointer()

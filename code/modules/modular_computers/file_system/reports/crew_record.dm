@@ -74,17 +74,15 @@ var/global/arrest_security_status =  "Arrest"
 	set_medical_record((medical_record && !jobban_isbanned(H, "Records")) ? html_decode(medical_record) : "No record supplied")
 
 	if(H)
-		if(H.isSynthetic())
-			set_implants("Fully synthetic body")
-		else
-			var/organ_data = list("\[*\]")
-			for(var/obj/item/organ/external/E in H.get_external_organs())
-				if(BP_IS_PROSTHETIC(E))
-					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
-			for(var/obj/item/organ/internal/I in H.get_internal_organs())
-				if (BP_IS_PROSTHETIC(I))
-					organ_data += "[I.name] prosthetic"
-			set_implants(jointext(organ_data, "\[*\]"))
+		var/decl/bodytype/root_bodytype = H.get_bodytype()
+		var/organ_data = list("\[*\]")
+		for(var/obj/item/organ/external/E in H.get_external_organs())
+			if(E.bodytype != root_bodytype)
+				organ_data += "[E.bodytype] [E.name] [BP_IS_PROSTHETIC(E) ? "prosthetic" : "graft"]"
+		for(var/obj/item/organ/internal/I in H.get_internal_organs())
+			if(I.bodytype != root_bodytype)
+				organ_data += "[I.bodytype] [I.name] [BP_IS_PROSTHETIC(I) ? "prosthetic" : "graft"]"
+		set_implants(jointext(organ_data, "\[*\]"))
 
 	// Security record
 	set_criminalStatus(global.default_security_status)

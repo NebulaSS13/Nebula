@@ -130,7 +130,7 @@
 
 /mob/living/carbon/human/getOxyLoss()
 	if(need_breathe())
-		var/obj/item/organ/internal/lungs/breathe_organ = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
+		var/obj/item/organ/internal/lungs/breathe_organ = get_organ(get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
 		return breathe_organ ? breathe_organ.oxygen_deprivation : species.total_health
 	return 0
 
@@ -139,7 +139,7 @@
 
 /mob/living/carbon/human/adjustOxyLoss(var/amount)
 	if(need_breathe())
-		var/obj/item/organ/internal/lungs/breathe_organ = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
+		var/obj/item/organ/internal/lungs/breathe_organ = get_organ(get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
 		if(breathe_organ)
 			breathe_organ.adjust_oxygen_deprivation(amount)
 			BITSET(hud_updateflag, HEALTH_HUD)
@@ -312,12 +312,12 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 /*
 This function restores all organs.
 */
-/mob/living/carbon/human/restore_all_organs(var/ignore_prosthetic_prefs)
-	species?.create_missing_organs(src)
+/mob/living/carbon/human/restore_all_organs(var/ignore_organ_aspects)
+	get_bodytype()?.create_missing_organs(src) // root body part should never be missing on a mob
 	for(var/bodypart in global.all_limb_tags_by_depth)
 		var/obj/item/organ/external/current_organ = GET_EXTERNAL_ORGAN(src, bodypart)
 		if(current_organ)
-			current_organ.rejuvenate(ignore_prosthetic_prefs)
+			current_organ.rejuvenate(ignore_organ_aspects)
 	recheck_bad_external_organs()
 	verbs -= /mob/living/carbon/human/proc/undislocate
 

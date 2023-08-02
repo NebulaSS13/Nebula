@@ -207,9 +207,10 @@ Please contact me on #coderbus IRC. ~Carn x
 		visible_overlays = overlays_standing
 		visible_underlays = underlays_standing
 
+	var/decl/bodytype/root_bodytype = get_bodytype()
 	var/matrix/M = matrix()
-	if(lying && (bodytype.prone_overlay_offset[1] || bodytype.prone_overlay_offset[2]))
-		M.Translate(bodytype.prone_overlay_offset[1], bodytype.prone_overlay_offset[2])
+	if(lying && (root_bodytype.prone_overlay_offset[1] || root_bodytype.prone_overlay_offset[2]))
+		M.Translate(root_bodytype.prone_overlay_offset[1], root_bodytype.prone_overlay_offset[2])
 
 	for(var/i = 1 to LAZYLEN(visible_overlays))
 		var/entry = visible_overlays[i]
@@ -299,8 +300,8 @@ var/global/list/damage_icon_parts = list()
 		return
 
 	previous_damage_appearance = damage_appearance
-
-	var/image/standing_image = image(bodytype.get_damage_overlays(src), icon_state = "00")
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	var/image/standing_image = image(root_bodytype.get_damage_overlays(src), icon_state = "00")
 
 	// blend the individual damage states with our icons
 	for(var/obj/item/organ/external/O in get_external_organs())
@@ -312,7 +313,7 @@ var/global/list/damage_icon_parts = list()
 		var/use_colour = (BP_IS_PROSTHETIC(O) ? SYNTH_BLOOD_COLOR : O.species.get_blood_color(src))
 		var/cache_index = "[O.damage_state]/[O.bodytype.type]/[O.icon_state]/[use_colour]/[species.name]"
 		if(damage_icon_parts[cache_index] == null)
-			DI = new /icon(bodytype.get_damage_overlays(src), O.damage_state) // the damage icon for whole human
+			DI = new /icon(O.bodytype.get_damage_overlays(src), O.damage_state) // the damage icon for whole human
 			DI.Blend(get_limb_mask_for(O.bodytype, O.icon_state), ICON_MULTIPLY)  // mask with this organ's pixels
 			DI.Blend(use_colour, ICON_MULTIPLY)
 			damage_icon_parts[cache_index] = DI
@@ -327,7 +328,7 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/update_bandages(var/update_icons=1)
-	var/bandage_icon = bodytype.get_bandages_icon(src)
+	var/bandage_icon = get_bodytype().get_bandages_icon(src)
 	if(!bandage_icon)
 		return
 	var/image/standing_image = overlays_standing[HO_DAMAGE_LAYER]
@@ -357,14 +358,15 @@ var/global/list/damage_icon_parts = list()
 	//Create a new, blank icon for our mob to use.
 	if(stand_icon)
 		qdel(stand_icon)
-	stand_icon = new(bodytype.icon_template || 'icons/mob/human.dmi',"blank")
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi',"blank")
 
-	var/icon_key = "[bodytype.get_icon_cache_uid(src)][skin_tone][skin_colour]"
+	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][skin_colour]"
 	if(lip_style)
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = get_organ((species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	var/obj/item/organ/internal/eyes/eyes = get_organ((root_bodytype.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
 	for(var/limb_tag in global.all_limb_tags)
@@ -382,10 +384,8 @@ var/global/list/damage_icon_parts = list()
 				icon_key += "[part.skin_blend]"
 			for(var/M in part.markings)
 				icon_key += "[M][part.markings[M]]"
-		if(BP_IS_PROSTHETIC(part))
-			icon_key += "2[part.model ? "-[part.model]": ""]"
-		else if(part.status & ORGAN_DEAD)
-			icon_key += "3"
+		if(!BP_IS_PROSTHETIC(part) && (part.status & ORGAN_DEAD))
+			icon_key += "2"
 		else
 			icon_key += "1"
 
@@ -396,13 +396,13 @@ var/global/list/damage_icon_parts = list()
 		base_icon = human_icon_cache[icon_key]
 	else
 		//BEGIN CACHED ICON GENERATION.
-		base_icon = icon(bodytype.icon_template)
+		base_icon = icon(root_bodytype.icon_template)
 		for(var/obj/item/organ/external/part in limbs)
 			var/icon/temp = part.get_icon()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
-				var/icon/temp2 = icon(bodytype.icon_template)
+				var/icon/temp2 = icon(root_bodytype.icon_template)
 				temp2.Insert(new /icon(temp,dir=NORTH),dir=NORTH)
 				temp2.Insert(new /icon(temp,dir=SOUTH),dir=SOUTH)
 				if(!(part.icon_position & LEFT))
@@ -425,7 +425,7 @@ var/global/list/damage_icon_parts = list()
 
 		//Handle husk overlay.
 		if(husk)
-			var/husk_icon = bodytype.get_husk_icon(src)
+			var/husk_icon = root_bodytype.get_husk_icon(src)
 			if(husk_icon)
 				var/icon/mask = new(base_icon)
 				var/icon/husk_over = new(husk_icon, "")
@@ -451,8 +451,9 @@ var/global/list/damage_icon_parts = list()
 		if (!UW || !UW.icon) // Avoid runtimes for nude underwear types
 			continue
 		var/image/I
-		if(UW.slot_offset_str && LAZYACCESS(bodytype.equip_adjust, UW.slot_offset_str))
-			I = bodytype.get_offset_overlay_image(FALSE, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
+		var/decl/bodytype/root_bodytype = get_bodytype()
+		if(UW.slot_offset_str && LAZYACCESS(root_bodytype.equip_adjust, UW.slot_offset_str))
+			I = root_bodytype.get_offset_overlay_image(FALSE, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
 		else
 			I = image(icon = UW.icon, icon_state = UW.icon_state)
 			I.color = UW.color
@@ -477,6 +478,7 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
+	// todo: make this use bodytype
 	overlays_standing[HO_SKIN_LAYER] = species.update_skin(src)
 	if(update_icons)
 		queue_icon_update()
@@ -546,7 +548,7 @@ var/global/list/damage_icon_parts = list()
 
 		overlays_standing[HO_GLOVES_LAYER]	= null
 		if(blood_color)
-			var/mob_blood_overlay = bodytype.get_blood_overlays(src)
+			var/mob_blood_overlay = get_bodytype().get_blood_overlays(src)
 			if(mob_blood_overlay)
 				var/image/bloodsies	= overlay_image(mob_blood_overlay, "bloodyhands", blood_color, RESET_COLOR)
 				overlays_standing[HO_GLOVES_LAYER]	= bloodsies
@@ -605,7 +607,7 @@ var/global/list/damage_icon_parts = list()
 
 		overlays_standing[HO_SHOES_LAYER] = null
 		if(blood_color)
-			var/mob_blood_overlay = bodytype.get_blood_overlays(src)
+			var/mob_blood_overlay = get_bodytype().get_blood_overlays(src)
 			if(mob_blood_overlay)
 				var/image/bloodsies = overlay_image(mob_blood_overlay, "shoeblood", blood_color, RESET_COLOR)
 				overlays_standing[HO_SHOES_LAYER] = bloodsies
@@ -738,13 +740,13 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/get_tail_icon(var/obj/item/organ/external/tail/tail_organ)
 	if(!istype(tail_organ))
 		return
-	var/icon_key = "[tail_organ.get_tail()]\ref[tail_organ.icon][tail_organ.get_tail_blend(src)][species.appearance_flags & HAS_SKIN_COLOR][skin_colour][tail_organ.get_tail_hair()][tail_organ.get_tail_hair_blend()][hair_colour]"
+	var/icon_key = "[tail_organ.get_tail()]\ref[tail_organ.icon][tail_organ.get_tail_blend(src)][tail_organ.bodytype.appearance_flags & HAS_SKIN_COLOR][skin_colour][tail_organ.get_tail_hair()][tail_organ.get_tail_hair_blend()][hair_colour]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
 		//generate a new one
 		var/tail_anim = tail_organ.get_tail_animation() || tail_organ.get_tail_icon()
 		tail_icon = new/icon(tail_anim)
-		if(species.appearance_flags & HAS_SKIN_COLOR)
+		if(tail_organ.bodytype.appearance_flags & HAS_SKIN_COLOR)
 			tail_icon.Blend(skin_colour, tail_organ.get_tail_blend(src))
 		// The following will not work with animated tails.
 		var/use_tail = tail_organ.get_tail_hair()
@@ -851,7 +853,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_fire(var/update_icons=1)
 	overlays_standing[HO_FIRE_LAYER] = null
 	if(on_fire)
-		var/image/standing = overlay_image(bodytype.get_ignited_icon(src) || 'icons/mob/OnFire.dmi', "Standing", RESET_COLOR)
+		var/image/standing = overlay_image(get_bodytype().get_ignited_icon(src) || 'icons/mob/OnFire.dmi', "Standing", RESET_COLOR)
 		overlays_standing[HO_FIRE_LAYER] = standing
 	if(update_icons)
 		queue_icon_update()

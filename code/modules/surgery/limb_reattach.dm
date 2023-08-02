@@ -17,10 +17,8 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		return affected
-	else if(ishuman(target))
-		var/mob/living/carbon/human/H = target
-		var/list/organ_data = H.species.has_limbs["[target_zone]"]
-		return !isnull(organ_data)
+	var/list/organ_data = target.get_bodytype()?.has_limbs?["[target_zone]"]
+	return !isnull(organ_data)
 
 //////////////////////////////////////////////////////////////////
 //	 limb attachment surgery step
@@ -50,11 +48,10 @@
 	if(BP_IS_PROSTHETIC(P))
 		if(!BP_IS_PROSTHETIC(E))
 			to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
-		if(P.model)
-			var/decl/prosthetics_manufacturer/robo_model = GET_DECL(P.model)
-			if(!istype(robo_model) || !robo_model.check_can_install(E.organ_tag, target.get_bodytype_category(), target.get_species_name()))
-				to_chat(user, SPAN_WARNING("That model of prosthetic is incompatible with \the [target]."))
-				return FALSE
+		var/decl/bodytype/prosthetic/robo_model = P.bodytype
+		if(!istype(robo_model) || !robo_model.check_can_install(E.organ_tag, target.get_bodytype_category()))
+			to_chat(user, SPAN_WARNING("That model of prosthetic is incompatible with \the [target]."))
+			return FALSE
 
 	if(BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a crystalline body."))

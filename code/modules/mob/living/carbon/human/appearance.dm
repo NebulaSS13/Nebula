@@ -18,9 +18,9 @@
 
 	//Handle spawning stuff
 	species.handle_pre_spawn(src)
-	species.create_missing_organs(src, TRUE) //Not fully replacing would cause problem with organs not being updated
 	UpdateAppearance()
 	apply_species_appearance()
+	apply_bodytype_appearance()
 	apply_species_cultural_info()
 	species.handle_post_spawn(src)
 	reset_blood()
@@ -68,13 +68,13 @@
 		h_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
-		h_style = species?.default_h_style || /decl/sprite_accessory/hair/bald
+		h_style = get_bodytype()?.default_h_style || /decl/sprite_accessory/hair/bald
 
 	if(length(valid_facial_hairstyles))
 		f_style = pick(valid_facial_hairstyles)
 	else
 		//this shouldn't happen
-		f_style = species?.default_f_style || /decl/sprite_accessory/facial_hair/shaved
+		f_style = get_bodytype()?.default_f_style || /decl/sprite_accessory/facial_hair/shaved
 
 	update_hair()
 
@@ -103,7 +103,7 @@
 	return FALSE
 
 /mob/living/carbon/human/proc/change_skin_color(var/new_colour)
-	if(skin_colour == new_colour || !(species.appearance_flags & HAS_SKIN_COLOR))
+	if(skin_colour == new_colour || !(get_bodytype().appearance_flags & HAS_SKIN_COLOR))
 		return FALSE
 	skin_colour = new_colour
 	force_update_limbs()
@@ -111,7 +111,7 @@
 	return TRUE
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
-	if(skin_tone == tone || !(species.appearance_flags & HAS_A_SKIN_TONE))
+	if(skin_tone == tone || !(get_bodytype().appearance_flags & HAS_A_SKIN_TONE))
 		return
 	skin_tone = tone
 	force_update_limbs()
@@ -142,10 +142,10 @@
 	return valid_species
 
 /mob/living/carbon/human/proc/get_valid_hairstyle_types(var/check_gender = TRUE)
-	return species.get_hair_style_types(bodytype.associated_gender, check_gender)
+	return species.get_hair_style_types(get_bodytype().associated_gender, check_gender)
 
 /mob/living/carbon/human/proc/get_valid_facial_hairstyle_types(var/check_gender = TRUE)
-	return species.get_facial_hair_style_types(bodytype.associated_gender, check_gender)
+	return species.get_facial_hair_style_types(get_bodytype().associated_gender, check_gender)
 
 /mob/living/carbon/human/proc/force_update_limbs()
 	for(var/obj/item/organ/external/O in get_external_organs())

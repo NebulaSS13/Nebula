@@ -6,7 +6,6 @@
 	description = "A medium-sized creature prone to great ambition. If you are reading this, you are probably a human."
 	hidden_from_codex = FALSE
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
 
 	available_bodytypes = list(

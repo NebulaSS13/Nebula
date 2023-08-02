@@ -5,6 +5,16 @@
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
 
+// These two should always return a decl, NEVER null.
+/datum/preferences/proc/get_species_decl()
+	RETURN_TYPE(/decl/species)
+	return get_species_by_key(species || global.using_map.default_species)
+
+/datum/preferences/proc/get_bodytype_decl()
+	RETURN_TYPE(/decl/bodytype)
+	var/decl/species/species_decl = get_species_decl()
+	return species_decl.get_bodytype_by_name(bodytype) || species_decl.default_bodytype
+
 /datum/category_item/player_setup_item/physical/basic
 	name = "Basic"
 	sort_order = 1
@@ -126,8 +136,7 @@
 			pref.bodytype = new_body.name
 			if(new_body.associated_gender) // Set to default for male/female to avoid confusing people
 				pref.gender = new_body.associated_gender
-			if(!(pref.f_style in S.get_facial_hair_style_types(new_body.associated_gender)))
-				ResetFacialHair()
+			new_body.handle_post_bodytype_pref_set(pref)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["spawnpoint"])

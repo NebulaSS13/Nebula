@@ -108,10 +108,10 @@
 			if(max_health < 1)
 				//Make sure to warn us if the values we set make the max_health be under 1
 				log_warning("The 'max_health' of '[src]'([type]) made out of '[material]' was calculated as [material_health_multiplier] * [material.integrity] == [max_health], which is smaller than 1.")
-				
+
 		if(isnull(health)) //only set health if we didn't specify one already, so damaged objects on spawn and etc can be a thing
 			health = max_health
-		
+
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)

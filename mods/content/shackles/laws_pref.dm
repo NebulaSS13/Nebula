@@ -30,18 +30,18 @@
 /datum/category_item/player_setup_item/law_pref/sanitize_character()
 	if(!istype(pref.laws))	pref.laws = list()
 
-	var/decl/species/species = get_species_by_key(pref.species)
-	if(!species?.can_be_shackled)
+	var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
+	if(!mob_bodytype?.can_be_shackled)
 		pref.is_shackled = FALSE
 	else
 		pref.is_shackled = sanitize_bool(pref.is_shackled, initial(pref.is_shackled))
 
 /datum/category_item/player_setup_item/law_pref/content()
 	. = list()
-	var/decl/species/species = get_species_by_key(pref.species)
+	var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
 
-	if(!species?.can_be_shackled)
-		. += "<b>Your current species cannot be shackled.</b><br>"
+	if(!mob_bodytype?.can_be_shackled)
+		. += "<b>Your current bodytype cannot be shackled.</b><br>"
 	else
 		. += "<b>Shackle: </b>"
 		if(!pref.is_shackled)
@@ -101,12 +101,12 @@
 	if(!ishuman(.))
 		return
 	var/mob/living/carbon/human/new_character = .
-	if(new_character.client?.prefs?.is_shackled && new_character.species.can_be_shackled && new_character.mind)
+	if(new_character.client?.prefs?.is_shackled && new_character.get_bodytype().can_be_shackled && new_character.mind)
 		new_character.mind.set_shackle(new_character.client.prefs.get_lawset(), TRUE) // Silent as laws will be announced on Login() anyway.
 
-/decl/species
+/decl/bodytype
 	var/can_be_shackled
 
-/decl/species/Initialize()
+/decl/bodytype/Initialize()
 	. = ..()
 	can_be_shackled = !!(BP_POSIBRAIN in has_organ)

@@ -65,10 +65,10 @@ var/global/list/icon_state_cache = list()
 	if(!use_single_icon)
 		var/mob_state = (item_state || icon_state)
 		var/mob_icon = global.default_onmob_icons[slot]
-		if(ishuman(user_mob))
-			var/mob/living/carbon/human/user_human = user_mob
-			var/use_slot = (bodypart in user_human.bodytype.equip_adjust) ? bodypart : slot
-			return user_human.bodytype.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
+		var/decl/bodytype/root_bodytype = user_mob.get_bodytype()
+		if(istype(root_bodytype))
+			var/use_slot = (bodypart in root_bodytype.equip_adjust) ? bodypart : slot
+			return root_bodytype.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
 		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 	var/bodytype = user_mob?.get_bodytype_category() || BODYTYPE_HUMANOID
@@ -112,12 +112,13 @@ var/global/list/icon_state_cache = list()
 /obj/item/proc/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/H = user_mob
-		if(H.get_bodytype_category() != bodytype)
+		var/decl/bodytype/root_bodytype = H.get_bodytype()
+		if(root_bodytype.bodytype_category != bodytype)
 			var/list/overlays_to_offset = overlay.overlays
-			overlay = H.bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, (bodypart || slot))
+			overlay = root_bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, (bodypart || slot))
 			for(var/thing in overlays_to_offset)
 				var/image/I = thing // Technically an appearance but don't think we can cast to those
-				var/image/adjusted_overlay = H.bodytype.get_offset_overlay_image(FALSE, I.icon, I.icon_state, I.color, (bodypart || slot))
+				var/image/adjusted_overlay = root_bodytype.get_offset_overlay_image(FALSE, I.icon, I.icon_state, I.color, (bodypart || slot))
 				adjusted_overlay.appearance_flags = I.appearance_flags
 				adjusted_overlay.plane =            I.plane
 				adjusted_overlay.layer =            I.layer

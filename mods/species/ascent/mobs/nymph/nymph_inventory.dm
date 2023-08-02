@@ -1,6 +1,6 @@
-/mob/living/carbon/alien/ascent_nymph/drop_from_inventory(var/obj/item/I)
+/mob/living/carbon/alien/ascent_nymph/drop_from_inventory(var/obj/item/dropping_item)
 	. = ..()
-	if(I == holding_item)
+	if(dropping_item == holding_item)
 		holding_item = null
 
 /mob/living/carbon/alien/ascent_nymph/put_in_hands(var/obj/item/W) // No hands. Use mouth.

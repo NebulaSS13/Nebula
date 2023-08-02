@@ -29,7 +29,6 @@
 	preview_outfit = /decl/hierarchy/outfit/job/generic/engineer
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	blood_types = list(
 		/decl/blood_type/feline/mplus,
@@ -43,16 +42,10 @@
 	)
 
 	flesh_color = "#ae7d32"
-	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
-	base_hair_color = "#46321c"
-	base_color = "#ae7d32"
-	base_eye_color = "#00aa00"
-	default_h_style = /decl/sprite_accessory/hair/taj/lynx
 
 	organs_icon = 'mods/species/bayliens/tajaran/icons/organs.dmi'
 
 	darksight_range = 7
-	slowdown = -0.5
 	flash_mod = 2
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
@@ -110,19 +103,6 @@
 	)
 
 	autohiss_exempt = list(LANGUAGE_TAJARA)
-
-	has_organ = list(
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_STOMACH =  /obj/item/organ/internal/stomach,
-		BP_LUNGS =    /obj/item/organ/internal/lungs,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_APPENDIX = /obj/item/organ/internal/appendix,
-		BP_EYES =     /obj/item/organ/internal/eyes/taj
-	)
-
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/cat)
 
 /obj/item/organ/internal/eyes/taj
 	eye_blend = ICON_MULTIPLY

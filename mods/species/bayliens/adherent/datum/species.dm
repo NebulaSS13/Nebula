@@ -25,20 +25,17 @@
 	skin_material = null
 
 	blood_types = list(/decl/blood_type/coolant)
-	vital_organs = list(
-		BP_BRAIN,
-		BP_CELL
-	)
+
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
-		/decl/bodytype/adherent,
-		/decl/bodytype/adherent/emerald,
-		/decl/bodytype/adherent/amethyst,
-		/decl/bodytype/adherent/sapphire,
-		/decl/bodytype/adherent/ruby,
-		/decl/bodytype/adherent/topaz,
-		/decl/bodytype/adherent/quartz,
-		/decl/bodytype/adherent/jet
+		/decl/bodytype/crystalline/adherent,
+		/decl/bodytype/crystalline/adherent/emerald,
+		/decl/bodytype/crystalline/adherent/amethyst,
+		/decl/bodytype/crystalline/adherent/sapphire,
+		/decl/bodytype/crystalline/adherent/ruby,
+		/decl/bodytype/crystalline/adherent/topaz,
+		/decl/bodytype/crystalline/adherent/quartz,
+		/decl/bodytype/crystalline/adherent/jet
 	)
 	cyborg_noun =             null
 
@@ -49,10 +46,7 @@
 
 	warning_low_pressure =    50
 	hazard_low_pressure =     -1
-	mob_size =                MOB_SIZE_LARGE
 	strength =                STR_HIGH
-
-	base_eye_color = COLOR_LIME
 
 	speech_sounds = list('mods/species/bayliens/adherent/sound/chime.ogg')
 	speech_chance = 25
@@ -65,12 +59,10 @@
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
-	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
+	species_flags = SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =   SPECIES_CAN_JOIN
 
-	appearance_flags = HAS_EYE_COLOR
 	flesh_color = "#90edeb"
-	slowdown = -1
 	hud_type = /datum/hud_data/adherent
 
 	available_cultural_info = list(
@@ -89,29 +81,6 @@
 		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
 	)
 
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest/crystal),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin/crystal),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/crystal),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/crystal),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/crystal),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/crystal),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/crystal),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/tendril),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/tendril/two),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/tendril/three),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/tendril/four)
-	)
-
-	has_organ = list(
-		BP_BRAIN =        /obj/item/organ/internal/brain/adherent,
-		BP_EYES =         /obj/item/organ/internal/eyes/adherent,
-		BP_JETS =         /obj/item/organ/internal/powered/jets,
-		BP_FLOAT =        /obj/item/organ/internal/powered/float,
-		BP_CELL =         /obj/item/organ/internal/cell/adherent,
-		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
-		)
-
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3
 	blood_volume = 0
@@ -126,9 +95,6 @@
 
 /decl/species/adherent/can_fall(var/mob/living/carbon/human/H)
 	. = !can_overcome_gravity(H)
-
-/decl/species/adherent/get_slowdown(var/mob/living/carbon/human/H)
-	return slowdown
 
 /decl/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	var/float_is_usable = FALSE
@@ -165,23 +131,6 @@
 		/datum/inventory_slot/id,
 		/datum/inventory_slot/belt
 	)
-
-/decl/species/adherent
-	var/static/list/apply_encased = list(
-		BP_CHEST,
-		BP_GROIN,
-		BP_HEAD
-	)
-
-/decl/species/adherent/apply_species_organ_modifications(var/obj/item/organ/org)
-	..()
-	org.robotize(/decl/prosthetics_manufacturer/adherent, FALSE, TRUE, /decl/material/solid/gemstone/crystal, BODYTYPE_ADHERENT, SPECIES_ADHERENT)
-	if(istype(org, /obj/item/organ/external))
-		var/obj/item/organ/external/E = org
-		E.arterial_bleed_severity = 0
-		if(E.organ_tag in apply_encased)
-			E.encased = "ceramic hull"
-
 /datum/inventory_slot/ear/adherent
 	ui_loc = ui_iclothing
 /datum/inventory_slot/head/adherent

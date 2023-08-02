@@ -57,7 +57,7 @@
 	show_browser(H, dat, "window=wardrobe;size=400x250")
 
 /obj/structure/undies_wardrobe/proc/human_who_can_use_underwear(var/mob/living/carbon/human/H)
-	if(!istype(H) || !H.species || !(H.species.appearance_flags & HAS_UNDERWEAR))
+	if(!istype(H) || !(H.get_bodytype()?.appearance_flags & HAS_UNDERWEAR))
 		return FALSE
 	return TRUE
 

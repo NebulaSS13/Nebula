@@ -148,7 +148,8 @@
 		owner.add_held_item_slot(new gripper_type)
 
 /obj/item/organ/external/hand/do_uninstall(in_place, detach, ignore_children, update_icon)
-	owner?.remove_held_item_slot(organ_tag)
+	if(!in_place)
+		owner?.remove_held_item_slot(organ_tag)
 	. = ..()
 
 /obj/item/organ/external/hand/right

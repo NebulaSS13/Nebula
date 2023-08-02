@@ -41,12 +41,12 @@
 
 /decl/aspect/amputation/is_available_to(datum/preferences/pref)
 	. = ..()
-	if(. && pref.species)
-		var/decl/species/species = global.all_species[pref.species]
-		if(!istype(species))
+	if(. && pref.bodytype)
+		var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
+		if(!istype(mob_bodytype))
 			return FALSE
 		for(var/limb in apply_to_limbs)
-			if(!(limb in species.has_limbs))
+			if(!(limb in mob_bodytype.has_limbs))
 				return FALSE
 
 /decl/aspect/amputation/apply(var/mob/living/carbon/human/holder)
