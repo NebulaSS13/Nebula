@@ -39,6 +39,8 @@
 	amount = 50;                                                           \
 }
 
+STACK_SUBTYPES(oxygen,         "oxygen",                        gas/oxygen,                 aerogel,    null)
+STACK_SUBTYPES(hydrogen,       "hydrogen",                      gas/hydrogen,               aerogel,    null)
 STACK_SUBTYPES(tritium,        "tritium",                       gas/hydrogen/tritium,       aerogel,    null)
 STACK_SUBTYPES(deuterium,      "deuterium",                     gas/hydrogen/deuterium,     aerogel,    null)
 STACK_SUBTYPES(iron,           "iron",                          solid/metal/iron,           ingot,      null)
@@ -103,5 +105,7 @@ STACK_SUBTYPES(steel,          "steel",                         solid/metal/stee
 STACK_SUBTYPES(plastic,        "plastic",                       solid/plastic,              strut,      null)
 STACK_SUBTYPES(aluminium,      "aluminium",                     solid/metal/aluminium,      strut,      null)
 STACK_SUBTYPES(titanium,       "titanium",                      solid/metal/titanium,       strut,      null)
+
+STACK_SUBTYPES(acid,           "sulphuric acid",                liquid/acid,                aerogel,    null)
 
 #undef STACK_SUBTYPES

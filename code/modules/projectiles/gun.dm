@@ -5,6 +5,7 @@
 	If the fire mode value for a setting is null, it will be replaced with the initial value of that gun's variable when the firemode is created.
 	Obviously not compatible with variables that take a null value. If a setting is not present, then the corresponding var will not be modified.
 */
+
 /datum/firemode
 	var/name = "default"
 	var/list/settings = list()

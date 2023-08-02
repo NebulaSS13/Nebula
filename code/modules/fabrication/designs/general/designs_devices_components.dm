@@ -76,11 +76,17 @@
 	path = /obj/item/beartrap
 	hidden = TRUE
 
+/datum/fabricator_recipe/device_component/cell
+	path = /obj/item/cell
+
+/datum/fabricator_recipe/device_component/cell_apc
+	path = /obj/item/cell/apc
+
 /datum/fabricator_recipe/device_component/cell_device
 	path = /obj/item/cell/device
 
-/datum/fabricator_recipe/device_component/cell
-	path = /obj/item/cell
+/datum/fabricator_recipe/device_component/cell_fuel
+	path = /obj/item/cell/fuel
 
 /datum/fabricator_recipe/device_component/ecigcartridge
 	path = /obj/item/chems/ecig_cartridge/blank

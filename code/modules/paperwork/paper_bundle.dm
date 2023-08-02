@@ -40,7 +40,7 @@
 	return ..()
 
 /obj/item/paper_bundle/on_update_icon()
-	if(pages[cur_page]?.length(info))
+	if(length(pages[cur_page]?.info))
 		add_overlay("paper_words")
 
 /obj/item/paper_bundle/attackby(obj/item/W, mob/user)

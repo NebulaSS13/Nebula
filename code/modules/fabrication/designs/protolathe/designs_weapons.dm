@@ -6,12 +6,6 @@
 /datum/fabricator_recipe/protolathe/weapon/get_product_name()
 	. = "weapon ([..()])"
 
-/datum/fabricator_recipe/protolathe/weapon/build()
-	. = ..()
-	for(var/obj/O in .)
-		for(var/obj/item/cell/C in O.contents)
-			C.charge = 0
-
 //projectile
 
 /datum/fabricator_recipe/protolathe/weapon/doublebarrel

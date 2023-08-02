@@ -72,10 +72,10 @@
 	if(!can_use(user))
 		return
 	if(is_valid_scan_target(A) && A.simulated)
-		user.visible_message("<span class='notice'>[user] runs \the [src] over \the [A].</span>", range = 2)
 		if(power_usage && !cell?.checked_use(power_usage * CELLRATE))
 			to_chat(user,SPAN_WARNING("\The [src] doesn't have enough power."))
 			return
+		user.visible_message("<span class='notice'>[user] runs \the [src] over \the [A].</span>", range = 2)
 		if(scan_sound)
 			playsound(src, scan_sound, 30)
 		if(check_state_in_icon("[icon_state]_active", icon))

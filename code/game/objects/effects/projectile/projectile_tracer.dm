@@ -34,6 +34,12 @@
 	icon_state = "xray"
 	light_color = LIGHT_COLOR_GREEN
 
+/obj/effect/projectile/tracer/xray/heavy
+	name = "heavy xray laser"
+	icon_state = "beam_heavy_white"
+	overlay_state = "_overlay"
+	color = LIGHT_COLOR_GREEN
+
 /obj/effect/projectile/tracer/pulse
 	name = "pulse laser"
 	icon_state = "u_laser"

@@ -59,7 +59,7 @@
 //Shotgun
 
 /obj/item/ammo_magazine/shotholder
-	name = "shotgun shell holder"
+	name = "shell holder"
 	desc = "A convenient pouch that holds shotgun shells."
 	icon_state = "shotholder"
 	caliber = CALIBER_SHOTGUN
@@ -99,6 +99,7 @@
 //Speedloaders
 
 /obj/item/ammo_magazine/speedloader
+	name = "speedloader"
 	icon = 'icons/obj/ammo/speedloader.dmi'
 	icon_state = ICON_STATE_WORLD
 	caliber = CALIBER_PISTOL_MAGNUM

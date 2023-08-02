@@ -143,7 +143,7 @@
 //Shotgun
 
 /obj/item/ammo_casing/shotgun
-	name = "shotgun shell"
+	name = "slug shell"
 	desc = "A shotgun slug."
 	icon_state = "slshell"
 	spent_icon = "slshell-spent"
@@ -154,12 +154,14 @@
 	matter = CASING_MATTER_SHELL
 
 /obj/item/ammo_casing/shotgun/pellet
+	name = "pellet shell"
 	desc = "A shotshell."
 	icon_state = "gshell"
 	spent_icon = "gshell-spent"
 	projectile_type = /obj/item/projectile/bullet/pellet/shotgun
 
 /obj/item/ammo_casing/shotgun/beanbag
+	name = "beanbag shell"
 	desc = "A beanbag shell."
 	icon_state = "bshell"
 	spent_icon = "bshell-spent"
@@ -167,6 +169,7 @@
 	matter = CASING_MATTER_BEANBAG
 
 /obj/item/ammo_casing/shotgun/practice
+	name = "practice shell"
 	desc = "A practice shell."
 	icon_state = "pshell"
 	spent_icon = "pshell-spent"
@@ -174,13 +177,15 @@
 	matter = CASING_MATTER_PRACTICE
 
 /obj/item/ammo_casing/shotgun/flash
-	desc = "A chemical shell used to signal distress, provide illumination.. or stun someone."
+	name = "flash shell"
+	desc = "A chemical shell used to signal distress or provide illumination."
 	icon_state = "netshell" //icon was missing and there's no nets anyway, also blanks were useless so I removed them
 	spent_icon = "netshell-spent"
 	projectile_type = /obj/item/projectile/energy/flash/flare
 	matter = CASING_MATTER_FLASH
 
 /obj/item/ammo_casing/shotgun/stun
+	name = "stun shell"
 	desc = "A shell fitted with a stun electrode launcher."
 	icon_state = "stunshell"
 	spent_icon = "stunshell-spent"
@@ -189,6 +194,7 @@
 	matter = CASING_MATTER_STUN
 
 /obj/item/ammo_casing/shotgun/emp
+	name = "haywire shell"
 	desc = "A shotgun slug fitted with a single-use ion pulse generator."
 	icon_state = "empshell"
 	spent_icon = "empshell-spent"

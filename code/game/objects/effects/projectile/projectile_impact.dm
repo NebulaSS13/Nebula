@@ -22,6 +22,12 @@
 	icon_state = "impact_xray"
 	light_color = LIGHT_COLOR_GREEN
 
+/obj/effect/projectile/impact/xray/heavy
+	name = "heavy xray impact"
+	icon_state = "impact_laser_heavy_white"
+	overlay_state = "_overlay"
+	color = LIGHT_COLOR_GREEN
+
 /obj/effect/projectile/impact/pulse
 	name = "pulse impact"
 	icon_state = "impact_u_laser"
@@ -88,7 +94,7 @@
 	icon_state = "impact_laser_white"
 	overlay_state = "_overlay"
 	light_color = COLOR_WHITE
-	
+
 /obj/effect/projectile/impact/variable_heavy
 	icon_state = "impact_laser_heavy_white"
 	overlay_state = "_overlay"

@@ -11,9 +11,9 @@
 	obj_flags = OBJ_FLAG_HOLLOW
 
 	var/leaves_residue = TRUE
-	var/caliber = ""					//Which kind of guns it can be loaded into
-	var/projectile_type					//The bullet type to create when New() is called
-	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
+	var/caliber = ""                    //Which kind of guns it can be loaded into
+	var/projectile_type                 //The bullet type to create when New() is called
+	var/obj/item/projectile/BB = null   //The loaded bullet - make it so that the projectiles are created only when needed?
 	var/spent_icon = "pistolcasing-spent"
 	var/bullet_color = COLOR_COPPER
 	var/marking_color

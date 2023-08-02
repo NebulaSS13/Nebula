@@ -139,7 +139,7 @@
 	icon = 'icons/obj/guns/xray_sniper.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':4,'magnets':4,'materials':3,'powerstorage':3}"
-	projectile_type = /obj/item/projectile/beam/xray/sniper
+	projectile_type = /obj/item/projectile/beam/xray/heavy
 	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
 	charge_cost = 40

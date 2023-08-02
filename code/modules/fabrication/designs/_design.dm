@@ -77,3 +77,10 @@
 	else
 		for(var/i = 1, i <= order.multiplier, i++)
 			. += new path(location)
+	for(var/obj/item/cell/C in .) //NO YOU DON'T DO POWER OUT OF THIN AIR
+		if(!istype(C,/obj/item/cell/fuel))
+			C.charge = 0
+	for(var/obj/item/I in .)
+		for(var/obj/item/cell/W in I)
+			if(!istype(W,/obj/item/cell/fuel))
+				W.charge = 0

@@ -168,9 +168,13 @@
 /obj/item/cell/device/empty
 	charge = 0
 
+//Variable
+
 /obj/item/cell/device/variable/Initialize(mapload, charge_amount)
 	maxcharge = charge_amount
 	return ..(mapload)
+
+//High
 
 /obj/item/cell/device/high
 	name = "advanced device power cell"
@@ -187,6 +191,26 @@
 	)
 
 /obj/item/cell/device/high/empty
+	charge = 0
+
+//Super
+
+/obj/item/cell/device/super
+	name = "enhanced device power cell"
+	desc = "A small power cell designed to power miniature critical systems."
+	icon_state = "device_super"
+	origin_tech = "{'powerstorage':3}"
+	maxcharge = 200
+	matter = list(
+		/decl/material/liquid/acid           = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/lead      = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/silver    = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold      = MATTER_AMOUNT_TRACE
+	)
+
+/obj/item/cell/device/super/empty
 	charge = 0
 
 //High
@@ -330,11 +354,12 @@
 	. = ..()
 	for(var/mat in active_mats) //Just set mats according to current charge
 		if(charge)
-			matter[mat] = round(active_mats[mat] * percent()/100)
+			matter[mat] = round(active_mats[mat] * charge/maxcharge, 5)
 		else
 			matter.Remove(mat)
-	for(var/mat in product_mats)
-		matter[mat] = round(product_mats[mat] * 1-(percent()/100))
+	if(charge < maxcharge)
+		for(var/mat in product_mats)
+			matter[mat] = round(product_mats[mat] * 1-charge/maxcharge,5)
 
 /obj/item/cell/fuel/give(var/amount)
 	if(prob(70) && (use(amount*2) || use(charge))) //No fireworks if it's dead
@@ -380,7 +405,7 @@
 	name = "fission cell"
 	desc = "A non-rechargable nuclear fission power cell.\nA warning label on the side reads: <span class='warning'>IONIZIING RADIATION</span>"
 	icon_state = "cell_nuclear"
-	maxcharge = 3000
+	maxcharge = 3500
 	origin_tech = "{'materials':3,'engineering': 3,'powerstorage': 3}"
 	active_mats = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_PRIMARY)
 	product_mats = list(/decl/material/solid/metal/depleted_uranium = MATTER_AMOUNT_PRIMARY * 0.6,
@@ -406,7 +431,7 @@
 	name = "old fission cell"
 	desc = "A non-rechargable nuclear fission power cell. This one looks old.\nA warning label on the side reads: <span class='warning'>IONIZIING RADIATION</span>"
 	icon_state = "cell_nuclear_crap"
-	maxcharge = 2000
+	maxcharge = 3000
 
 /obj/item/cell/fuel/nuclear/crap/empty
 	charge = 0
@@ -437,7 +462,7 @@
 	name = "microfusion cell"
 	desc = "A self-contained fusion cell. Alkaline batteries walked so this could run."
 	icon_state = "cell_fusion"
-	maxcharge = 5000
+	maxcharge = 5500
 	origin_tech = "{'materials':6,'engineering': 6,'powerstorage': 6}"
 	active_mats = list(/decl/material/gas/hydrogen  = MATTER_AMOUNT_SECONDARY,
 					/decl/material/gas/hydrogen/deuterium = MATTER_AMOUNT_SECONDARY) //doesn't have to be realistic, we'll have a realistic one when we have fusion chemistry
@@ -457,7 +482,7 @@
 	name = "advanced microfusion cell"
 	desc = "An advanced self-contained fusion cell."
 	icon_state = "cell_fusion_high"
-	maxcharge = 7000
+	maxcharge = 6500
 	origin_tech = "{'materials':7,'engineering': 7,'powerstorage': 7}"
 	active_mats = list(/decl/material/gas/hydrogen  = MATTER_AMOUNT_PRIMARY,
 					/decl/material/gas/hydrogen/deuterium = MATTER_AMOUNT_PRIMARY)

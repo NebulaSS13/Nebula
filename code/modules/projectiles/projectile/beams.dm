@@ -18,9 +18,11 @@
 	sharp        = TRUE
 
 	invisibility = 101
-	muzzle_type = /obj/effect/projectile/muzzle/laser
-	tracer_type = /obj/effect/projectile/tracer/laser
-	impact_type = /obj/effect/projectile/impact/laser
+	muzzle_type = /obj/effect/projectile/muzzle/variable
+	tracer_type = /obj/effect/projectile/tracer/variable
+	impact_type = /obj/effect/projectile/impact/variable
+	color = COLOR_RED
+	light_color = COLOR_RED_LIGHT
 
 //Lasers
 
@@ -67,22 +69,27 @@
 	name = "x-ray beam"
 	fire_sound = 'sound/weapons/laser3.ogg'
 
-	armor_penetration = 50
-	penetration_modifier = 2
+	damage = 80
+	armor_penetration = 80
+	penetration_modifier = 3
 
 	muzzle_type = /obj/effect/projectile/muzzle/xray
 	tracer_type = /obj/effect/projectile/tracer/xray
 	impact_type = /obj/effect/projectile/impact/xray
 
-/obj/item/projectile/beam/xray/sniper
-	name = "sniper x-ray beam"
+/obj/item/projectile/beam/xray/heavy
+	name = "heavy x-ray beam"
 	fire_sound = 'sound/weapons/marauder.ogg'
 
-	damage = 80
-	armor_penetration = 80
-	penetration_modifier = 3
+	damage = 160
+	armor_penetration = 160
+	penetration_modifier = 4
 	stun = 10
 	weaken = 10
+
+	muzzle_type = /obj/effect/projectile/muzzle/xray/heavy
+	tracer_type = /obj/effect/projectile/tracer/xray/heavy
+	impact_type = /obj/effect/projectile/impact/xray/heavy
 
 //Capacitor
 
