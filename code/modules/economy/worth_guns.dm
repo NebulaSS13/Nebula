@@ -1,10 +1,10 @@
-// Can't think of a good way to get gun price from projectile (due to 
+// Can't think of a good way to get gun price from projectile (due to
 // firemodes, projectile types, etc) so this'll have to  do for now.
 /obj/item/gun/get_base_value()
-	. = 100
+	. = 100 + ..()
 
 /obj/item/gun/energy/get_base_value()
-	. = 150
+	. = 50 + ..()
 
 /obj/item/gun/get_base_value()
 	. = 0

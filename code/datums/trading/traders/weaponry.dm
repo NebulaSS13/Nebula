@@ -25,7 +25,6 @@
 		/obj/item/ammo_magazine/rifle/empty          = TRADER_BLACKLIST,
 		/obj/item/ammo_magazine/pistol/small/empty   = TRADER_BLACKLIST,
 		/obj/item/ammo_magazine/pistol/empty         = TRADER_BLACKLIST,
-		/obj/item/ammo_magazine/box/pistol/empty     = TRADER_BLACKLIST,
 		/obj/item/ammo_magazine/smg/empty            = TRADER_BLACKLIST,
 		/obj/item/clothing/accessory/storage/holster = TRADER_ALL
 	)

@@ -102,7 +102,7 @@
 		/obj/item/storage/box/snappops = 3,
 		/obj/item/spirit_board = 1,
 		/obj/item/gun/projectile/revolver/capgun = 1,
-		/obj/item/ammo_magazine/caps = 4
+		/obj/item/ammo_magazine/speedloader/caps = 4
 	)
 
 //Cajoes/Kyos/BloodyMan's Lavatory Articles Dispensiary

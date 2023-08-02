@@ -54,12 +54,12 @@
 	return order_data
 
 //Fill out the data for the displayed buildable designs
-/obj/machinery/fabricator/proc/ui_fabricator_build_options_data()
+/obj/machinery/fabricator/proc/ui_fabricator_build_options_data(mob/user)
 	var/list/build_options
 	for(var/datum/fabricator_recipe/R in design_cache)
 		if(!R.is_available_to_fab(src))
 			continue
-		if(R.hidden && !(fab_status_flags & FAB_HACKED))
+		if(R.hidden && !(fab_status_flags & FAB_HACKED) && !user.skill_check(SKILL_DEVICES,SKILL_PROF))
 			continue
 		if(show_category != "All" && show_category != R.category)
 			continue
@@ -182,7 +182,7 @@
 
 /obj/machinery/fabricator/proc/ui_data_build_options(mob/user, ui_key)
 	var/list/data = list()
-	data["build_options"] = ui_fabricator_build_options_data()
+	data["build_options"] = ui_fabricator_build_options_data(user)
 	return data
 
 //Shouldn't need to override this in subclasses.

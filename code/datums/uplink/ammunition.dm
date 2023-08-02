@@ -41,13 +41,6 @@
 	path = /obj/item/storage/box/ammo/sniperammo
 	antag_roles = list(/decl/special_role/mercenary)
 
-/datum/uplink_item/item/ammo/sniperammo/apds
-	name = "Ammobox of APDS Sniper Rounds"
-	desc = "A container of armor piercing rounds for the anti-materiel rifle. Contains 3 rounds."
-	item_cost = 12
-	path = /obj/item/storage/box/ammo/sniperammo/apds
-	antag_roles = list(/decl/special_role/mercenary)
-
 /datum/uplink_item/item/ammo/shotgun_shells
 	name = "Ammobox of Shotgun Shells"
 	desc = "An ammobox with 2 sets of shell holders. Contains 8 buckshot shells total."
@@ -79,7 +72,7 @@
 	item_cost = 8
 	path = /obj/item/magnetic_ammo
 	antag_roles = list(/decl/special_role/mercenary)
-
+/*
 /datum/uplink_item/item/ammo/pistol_emp
 	name = "Standard EMP Ammo Box"
 	desc = "A box of EMP ammo for standard pistols. Contains 15 rounds."
@@ -91,3 +84,4 @@
 	desc = "A box of EMP ammo for small pistols and revolvers. Contains 8 rounds."
 	item_cost = 6
 	path = /obj/item/ammo_magazine/box/emp/smallpistol
+*/

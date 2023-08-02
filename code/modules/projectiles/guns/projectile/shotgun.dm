@@ -1,22 +1,34 @@
-/obj/item/gun/projectile/shotgun/pump
-	name = "shotgun"
-	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
-	icon = 'icons/obj/guns/shotgun/pump.dmi'
-	icon_state = ICON_STATE_WORLD
-	max_shells = 4
+/obj/item/gun/projectile/shotgun/
+	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 	w_class = ITEM_SIZE_HUGE
-	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
+	force = 10
+
 	caliber = CALIBER_SHOTGUN
-	origin_tech = "{'combat':4,'materials':2}"
+	ammo_type = /obj/item/ammo_casing/shotgun
+
+	accuracy_power   = 10
+	one_hand_penalty = 10
+	bulk             = 5
+
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
+
+//Pump shotgun
+
+/obj/item/gun/projectile/shotgun/pump
+	name = "pump shotgun"
+	desc = "A favourite weapon of police and security forces on many worlds. Useful for sweeping alleys."
+	icon = 'icons/obj/guns/shotgun/pump.dmi'
+
 	load_method = SINGLE_CASING
-	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	handle_casings = HOLD_CASINGS
-	one_hand_penalty = 8
-	bulk = 6
+	max_shells = 4
+
 	var/recentpump = 0 // to prevent spammage
-	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+
+/obj/item/gun/projectile/shotgun/pump/empty
+	starts_loaded = FALSE
 
 /obj/item/gun/projectile/shotgun/update_base_icon()
 	if(length(loaded))
@@ -50,23 +62,16 @@
 
 	update_icon()
 
+//Doublebarrel shotgun
+
 /obj/item/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
-	desc = "A true classic."
+	desc = "A true classic, has primitive yet extremely reliable design."
 	icon = 'icons/obj/guns/shotgun/doublebarrel.dmi'
-	//SPEEDLOADER because rapid unloading.
-	//In principle someone could make a speedloader for it, so it makes sense.
+
 	load_method = SINGLE_CASING|SPEEDLOADER
 	handle_casings = CYCLE_CASINGS
 	max_shells = 2
-	w_class = ITEM_SIZE_HUGE
-	force = 10
-	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BACK
-	caliber = CALIBER_SHOTGUN
-	origin_tech = "{'combat':3,'materials':1}"
-	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
-	one_hand_penalty = 2
 
 	burst_delay = 0
 	firemodes = list(
@@ -74,8 +79,28 @@
 		list(mode_name="fire both barrels at once", burst=2),
 		)
 
+/obj/item/gun/projectile/shotgun/doublebarrel/empty
+	starts_loaded = FALSE
+
 /obj/item/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
 	..(user, allow_dump=1)
+
+//Sawn-off
+
+/obj/item/gun/projectile/shotgun/doublebarrel/sawn
+	name = "sawn-off shotgun"
+	desc = "Omar's coming!"
+	icon = 'icons/obj/guns/shotgun/sawnoff.dmi'
+	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
+	w_class = ITEM_SIZE_NORMAL
+	force = 5
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+
+	bulk = 2
+	one_hand_penalty = 4
+
+/obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty
+	starts_loaded = FALSE
 
 //this is largely hacky and bad :(	-Pete
 /obj/item/gun/projectile/shotgun/doublebarrel/attackby(var/obj/item/A, mob/user)
@@ -99,16 +124,3 @@
 	else
 		..()
 
-/obj/item/gun/projectile/shotgun/doublebarrel/sawn
-	name = "sawn-off shotgun"
-	desc = "Omar's coming!"
-	icon = 'icons/obj/guns/shotgun/sawnoff.dmi'
-	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
-	ammo_type = /obj/item/ammo_casing/shotgun/pellet
-	w_class = ITEM_SIZE_NORMAL
-	force = 5
-	one_hand_penalty = 4
-	bulk = 2
-
-/obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty
-	starts_loaded = FALSE

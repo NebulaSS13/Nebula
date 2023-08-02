@@ -2,23 +2,23 @@
 	name = "bullet casing"
 	desc = "A bullet casing."
 	icon = 'icons/obj/ammo.dmi'
-	icon_state = "pistolcasing"
+	drop_sound = list('sound/weapons/guns/casingfall1.ogg','sound/weapons/guns/casingfall2.ogg','sound/weapons/guns/casingfall3.ogg')
 	randpixel = 10
+
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
-	throwforce = 1
 	w_class = ITEM_SIZE_TINY
 	obj_flags = OBJ_FLAG_HOLLOW
-	material = /decl/material/solid/metal/brass
 
-	var/leaves_residue = 1
+	var/leaves_residue = TRUE
 	var/caliber = ""					//Which kind of guns it can be loaded into
 	var/projectile_type					//The bullet type to create when New() is called
 	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
 	var/spent_icon = "pistolcasing-spent"
 	var/bullet_color = COLOR_COPPER
 	var/marking_color
-	drop_sound = list('sound/weapons/guns/casingfall1.ogg','sound/weapons/guns/casingfall2.ogg','sound/weapons/guns/casingfall3.ogg')
+
+	material = /decl/material/solid/metal/brass
 
 /obj/item/ammo_casing/Initialize()
 	if(ispath(projectile_type))
@@ -40,6 +40,9 @@
 	// Aurora forensics port, gunpowder residue.
 	if(leaves_residue)
 		leave_residue()
+
+	matter = list() //kill material, no more infinite ammo through lathes
+	create_matter() //update matter to src.material
 
 	update_icon()
 
@@ -115,27 +118,25 @@
 	. = ..()
 	if(caliber)
 		to_chat(user, "Its caliber is [caliber].")
-	if (!BB)
+	if(!BB)
 		to_chat(user, "This one is spent.")
 
 //An item that holds casings and can be used to put them inside guns
 /obj/item/ammo_magazine
 	name = "magazine"
 	desc = "A magazine for some kind of gun."
-	icon_state = "357"
 	icon = 'icons/obj/ammo.dmi'
+
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
-	item_state = "syringe_kit"
-	material = /decl/material/solid/metal/steel
-	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
-	throw_speed = 4
+
+	throwforce = 5
 	throw_range = 10
 
 	var/list/stored_ammo = list()
 	var/mag_type = SPEEDLOADER //ammo_magazines can only be used with compatible guns. This is not a bitflag, the load_method var on guns is.
-	var/caliber = "357"
+	var/caliber = ""
 	var/max_ammo = 7
 
 	var/ammo_type = /obj/item/ammo_casing //ammo type that is initially loaded
@@ -147,8 +148,7 @@
 	var/list/icon_keys = list()		//keys
 	var/list/ammo_states = list()	//values
 
-/obj/item/ammo_magazine/box
-	w_class = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/ammo_magazine/Initialize()
 	. = ..()
@@ -193,7 +193,6 @@
 		C.set_dir(pick(global.alldirs))
 	stored_ammo.Cut()
 	update_icon()
-
 
 /obj/item/ammo_magazine/attack_hand(mob/user)
 	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))

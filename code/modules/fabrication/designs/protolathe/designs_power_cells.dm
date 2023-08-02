@@ -25,7 +25,7 @@
 
 /datum/fabricator_recipe/protolathe/cell_device
 	category = "Power Storage"
-	path = /obj/item/cell/device/standard
+	path = /obj/item/cell/device
 
 /datum/fabricator_recipe/protolathe/cell_device/get_product_name()
 	. = "device cell model ([..()])"

@@ -2,12 +2,10 @@
 	name = "gun"
 	desc = "A gun that fires bullets."
 	icon = 'icons/obj/guns/pistol.dmi'
-	origin_tech = "{'combat':2,'materials':2}"
 	w_class = ITEM_SIZE_NORMAL
-	material = /decl/material/solid/metal/steel
 	screen_shake = 1
 	space_recoil = 1
-	combustion = 1
+	combustion = TRUE
 
 	var/caliber = CALIBER_PISTOL		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
@@ -95,6 +93,12 @@
 		if(E)
 			chambered.put_residue_on(E)
 			H.apply_damage(3, BURN, used_weapon = "Gunpowder Burn", given_organ = E)
+
+/obj/item/gun/projectile/process_projectile(obj/projectile, atom/movable/firer, atom/target, var/target_zone, var/params=null)
+	. = ..()
+	var/obj/item/projectile/bullet/P = .
+	if(istype(P) && caliber)
+		P.caliber = caliber
 
 /obj/item/gun/projectile/handle_click_empty()
 	..()
@@ -266,7 +270,7 @@
 /obj/item/gun/projectile/on_update_icon()
 	..()
 	if(ammo_indicator)
-		overlays += get_ammo_indicator()
+		add_overlay(get_ammo_indicator())
 
 /obj/item/gun/projectile/proc/get_ammo_indicator()
 	var/base_state = get_world_inventory_state()

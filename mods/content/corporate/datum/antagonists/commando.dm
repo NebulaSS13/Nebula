@@ -22,7 +22,7 @@
 	glasses = /obj/item/clothing/glasses/thermal
 	mask =    /obj/item/clothing/mask/gas/syndicate
 	l_ear =   /obj/item/radio/headset/hacked
-	backpack_contents = list(/obj/item/ammo_magazine/box/pistol = 1)
+//	backpack_contents = list(/obj/item/ammo_magazine/box/pistol = 1)
 	hands = list(
 		/obj/item/gun/energy/laser,
 		/obj/item/energy_blade/sword

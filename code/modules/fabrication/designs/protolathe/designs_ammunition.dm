@@ -1,5 +1,6 @@
 /datum/fabricator_recipe/protolathe/ammo
 	category = "Ammunition"
+	/*
 	path = /obj/item/ammo_magazine/box/smallpistol
 
 /datum/fabricator_recipe/protolathe/ammo/get_product_name()
@@ -16,3 +17,4 @@
 
 /datum/fabricator_recipe/protolathe/ammo/ammo_emp_slug
 	path = /obj/item/ammo_casing/shotgun/emp
+*/

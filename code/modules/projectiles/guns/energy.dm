@@ -8,7 +8,7 @@ var/global/list/registered_cyborg_weapons = list()
 	icon_state = "energy"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	fire_sound_text = "laser blast"
-	accuracy = 1
+	accuracy = 5
 
 	var/obj/item/cell/power_supply // What type of power cell this starts with. Uses accepts_cell_type or variable cell if unset.
 	var/charge_cost = 20           // How much energy is needed to fire.
@@ -23,7 +23,7 @@ var/global/list/registered_cyborg_weapons = list()
 	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon.
 
 	// Which projectile type to create when firing.
-	var/projectile_type = /obj/item/projectile/beam/practice
+	var/projectile_type = /obj/item/projectile/beam
 
 /obj/item/gun/energy/switch_firemodes()
 	. = ..()
@@ -123,7 +123,7 @@ var/global/list/registered_cyborg_weapons = list()
 	if(overlay && charge_meter)
 		var/charge_state = get_charge_state(overlay.icon_state)
 		if(charge_state && check_state_in_icon(charge_state, overlay.icon))
-			overlay.overlays += mutable_appearance(overlay.icon, charge_state, get_charge_color())
+			overlay.add_overlay(mutable_appearance(overlay.icon, charge_state, get_charge_color()))
 	. = ..()
 
 /obj/item/gun/energy/proc/get_charge_state(var/initial_state)
@@ -134,7 +134,7 @@ var/global/list/registered_cyborg_weapons = list()
 
 /obj/item/gun/energy/proc/update_charge_meter()
 	if(use_single_icon)
-		overlays += mutable_appearance(icon, "[get_world_inventory_state()][get_charge_ratio()]", indicator_color)
+		add_overlay(mutable_appearance(icon, "[get_world_inventory_state()][get_charge_ratio()]", indicator_color))
 		return
 	if(power_supply)
 		if(modifystate)

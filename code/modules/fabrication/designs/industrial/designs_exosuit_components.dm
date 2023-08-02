@@ -87,20 +87,6 @@
 /datum/fabricator_recipe/industrial/exosuit_gear/mounted
 	path = /obj/item/mech_equipment/mounted_system/taser
 
-// Add the resources from whatever is mounted on the system
-/datum/fabricator_recipe/industrial/exosuit_gear/mounted/get_resources()
-	. = ..()
-	if(!ispath(path, /obj/item/mech_equipment/mounted_system))
-		return
-	var/obj/item/mech_equipment/mounted_system/system = path
-
-	var/mounted_type = initial(system.holding_type)
-	if(!mounted_type)
-		return
-	var/list/mounted_cost = atom_info_repository.get_matter_for(mounted_type)
-	for(var/mat in mounted_cost)
-		resources[mat] += mounted_cost[mat] * FABRICATOR_EXTRA_COST_FACTOR
-
 /datum/fabricator_recipe/industrial/exosuit_gear/mounted/plasma
 	path = /obj/item/mech_equipment/mounted_system/taser/plasma
 

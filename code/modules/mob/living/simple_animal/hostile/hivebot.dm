@@ -6,7 +6,7 @@
 	maxHealth = 55
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
 	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	projectiletype = /obj/item/projectile/beam/smalllaser
+	projectiletype = /obj/item/projectile/beam
 	faction = "hivebot"
 	min_gas = null
 	max_gas = null

@@ -1,16 +1,17 @@
+//SMG
+
 /obj/item/gun/projectile/automatic/smg
 	name = "submachine gun"
-	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced for paramilitary and private use."
+	desc = "A compact submachine gun with different firemodes."
 	icon = 'icons/obj/guns/sec_smg.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
 	w_class = ITEM_SIZE_NORMAL
 	caliber = CALIBER_PISTOL_SMALL
-	origin_tech = "{'combat':5,'materials':2}"
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/smg/rubber
+	magazine_type = /obj/item/ammo_magazine/smg
 	allowed_magazines = /obj/item/ammo_magazine/smg
 	accuracy_power = 7
 	one_hand_penalty = 3
@@ -20,8 +21,8 @@
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
+	/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY,
+	/decl/material/solid/plastic         = MATTER_AMOUNT_PRIMARY
 	)
 	ammo_indicator = TRUE
 
@@ -32,19 +33,23 @@
 		list(mode_name="full auto",      burst=1, fire_delay=0,    burst_delay=1,      one_hand_penalty=5,                 burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(1.6, 1.6, 2.0, 2.0, 2.4), autofire_enabled=1)
 	)
 
+/obj/item/gun/projectile/automatic/smg/empty
+	starts_loaded = FALSE
+
 /obj/item/gun/projectile/automatic/smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		overlays += image(icon, "[get_world_inventory_state()]mag-[round(ammo_magazine.stored_ammo.len,5)]")
+		add_overlay(image(icon, "[get_world_inventory_state()]mag-[round(ammo_magazine.stored_ammo.len,5)]"))
+
+//Assault rifle
 
 /obj/item/gun/projectile/automatic/assault_rifle
 	name = "assault rifle"
-	desc = "The Z8 Bulldog is an older model bullpup carbine. Makes you feel like a space marine when you hold it."
+	desc = "A bullpup carbine. Makes you feel like a space marine when you hold it."
 	icon = 'icons/obj/guns/bullpup_rifle.dmi'
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	caliber = CALIBER_RIFLE
-	origin_tech = "{'combat':7,'materials':3}"
 	ammo_type = /obj/item/ammo_casing/rifle
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
@@ -55,20 +60,22 @@
 	accuracy = 2
 	accuracy_power = 7
 	one_hand_penalty = 8
-	bulk = GUN_BULK_RIFLE
 	burst_delay = 1
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
+	/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY,
+	/decl/material/solid/plastic         = MATTER_AMOUNT_PRIMARY
 	)
 	firemodes = list(
 		list(mode_name="semi auto",      burst=1,    fire_delay=null, one_hand_penalty=8,  burst_accuracy=null,            dispersion=null),
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, one_hand_penalty=9,  burst_accuracy=list(0,-1,-1),   dispersion=list(0.0, 0.6, 1.0)),
 		list(mode_name="full auto",      burst=1,    fire_delay=0,    burst_delay=1,       one_hand_penalty=7,             burst_accuracy = list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0), autofire_enabled=1)
 	)
+
+/obj/item/gun/projectile/automatic/assault_rifle/empty
+	starts_loaded = FALSE
 
 /obj/item/gun/projectile/automatic/assault_rifle/update_base_icon()
 	if(ammo_magazine)
@@ -79,10 +86,11 @@
 	else
 		icon_state = get_world_inventory_state()
 
+//GL integrated rifle
+
 /obj/item/gun/projectile/automatic/assault_rifle/grenade
 	name = "assault rifle"
-	desc = "The Z8 Bulldog is an older model bullpup carbine. This one has an underslung grenade launcher. REALLY makes you feel like a space marine when you hold it."
-	origin_tech = "{'combat':8,'materials':3}"
+	desc = "A bullpup carbine. This one has an underslung grenade launcher. REALLY makes you feel like a space marine when you hold it."
 
 	firemodes = list(
 		list(mode_name="semi auto",      burst=1,    fire_delay=null, use_launcher=null, one_hand_penalty=8,  burst_accuracy=null,            dispersion=null),
@@ -132,20 +140,18 @@
 // Admin-spawn machine gun. Mech subtype is meant to be used, but this can be spawned for hulks.
 /obj/item/gun/projectile/automatic/machine
 	name = "massive machine gun"
-	desc = "The XC-67 \"Creosote\" is a massive machine gun, and ranks high on most tin-pot dictators' wish lists. Firing this thing without some sort of weapons platform is a hopeless task."
+	desc = "A massive machine gun, and ranks high on most tin-pot dictators' wish lists. Firing this thing without some sort of weapons platform is a hopeless task."
 	icon = 'icons/obj/guns/machine.dmi'
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	caliber = CALIBER_RIFLE
-	origin_tech = "{'combat':9,'materials':3}"
 	ammo_type = /obj/item/ammo_casing/rifle
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/rifle/drum
-	allowed_magazines = /obj/item/ammo_magazine/rifle/drum
+	magazine_type = /obj/item/ammo_magazine/machinegun
+	allowed_magazines = /obj/item/ammo_magazine/machinegun
 	accuracy = 1
 	accuracy_power = 7
 	one_hand_penalty = 3000
-	bulk = GUN_BULK_RIFLE
 
 	burst_delay = 1
 	burst = 3

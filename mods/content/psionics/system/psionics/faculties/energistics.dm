@@ -73,11 +73,11 @@
 
 		switch(user_rank)
 			if(PSI_RANK_PARAMOUNT)
-				pew = new /obj/item/projectile/beam/heavylaser(get_turf(user))
+				pew = new /obj/item/projectile/beam/heavy(get_turf(user))
 				pew.name = "gigawatt mental laser"
 				pew_sound = 'sound/weapons/lasercannonfire.ogg'
 			if(PSI_RANK_GRANDMASTER)
-				pew = new /obj/item/projectile/beam/midlaser(get_turf(user))
+				pew = new /obj/item/projectile/beam(get_turf(user))
 				pew.name = "megawatt mental laser"
 				pew_sound = 'sound/weapons/Laser.ogg'
 			if(PSI_RANK_MASTER)

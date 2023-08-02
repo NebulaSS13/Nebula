@@ -1,3 +1,19 @@
+/obj/item/projectile/beam/particle
+	name = "particle lance"
+	icon_state = "particle"
+	damage = 35
+	armor_penetration = 50
+	muzzle_type = /obj/effect/projectile/muzzle/particle
+	tracer_type = /obj/effect/projectile/tracer/particle
+	impact_type = /obj/effect/projectile/impact/particle
+	penetration_modifier = 0.5
+
+/obj/item/projectile/beam/particle/small
+	name = "particle beam"
+	damage = 20
+	armor_penetration = 20
+	penetration_modifier = 0.3
+
 /obj/item/gun/energy/particle
 	name = "particle lance"
 	desc = "A long, thick-bodied energy rifle of some kind, clad in a curious indigo polymer and lit from within by Cherenkov radiation. The grip is clearly not designed for human hands."
@@ -17,7 +33,7 @@
 	has_safety = FALSE
 	firemodes = list(
 		list(mode_name="stun",   projectile_type = /obj/item/projectile/beam/stun),
-		list(mode_name="shock",  projectile_type = /obj/item/projectile/beam/stun/shock),
+		list(mode_name="shock",  projectile_type = /obj/item/projectile/beam/stun/heavy),
 		list(mode_name="lethal", projectile_type = /obj/item/projectile/beam/particle)
 		)
 	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/particle_rifle/inhands_gyne.dmi')
@@ -35,7 +51,7 @@
 	projectile_type = /obj/item/projectile/beam/particle/small
 	firemodes = list(
 		list(mode_name="stun",   projectile_type = /obj/item/projectile/beam/stun),
-		list(mode_name="shock",  projectile_type = /obj/item/projectile/beam/stun/shock),
+		list(mode_name="shock",  projectile_type = /obj/item/projectile/beam/stun/heavy),
 		list(mode_name="lethal", projectile_type = /obj/item/projectile/beam/particle/small)
 		)
 

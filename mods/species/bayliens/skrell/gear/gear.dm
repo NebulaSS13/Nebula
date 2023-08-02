@@ -64,7 +64,7 @@
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, indicator_color=COLOR_CYAN),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, indicator_color=COLOR_YELLOW),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/heavy, indicator_color=COLOR_YELLOW),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, indicator_color=COLOR_RED),
 		)
 

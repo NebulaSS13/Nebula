@@ -13,24 +13,24 @@
 	randpixel = 0
 	is_spawnable_type = FALSE
 
-	var/bumped = 0		//Prevents it from hitting more than one guy at once
-	var/def_zone = ""	//Aiming at
-	var/atom/movable/firer = null//Who shot it
-	var/silenced = 0	//Attack message
+	var/bumped = 0 //Prevents it from hitting more than one guy at once
+	var/def_zone = "" //Aiming at
+	var/atom/movable/firer = null //Who shot it
+	var/silenced = 0 //Attack message
 	var/yo = null
 	var/xo = null
 	var/current = null
-	var/shot_from = "" // name of the object which shot us
-	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
-	var/turf/starting = null // the projectile's starting turf
-	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
+	var/shot_from = "" //name of the object which shot us
+	var/atom/original = null //the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
+	var/turf/starting = null //the projectile's starting turf
+	var/list/permutated = list() //we've passed through these atoms, don't try to hit them again
 
 	var/p_x = 16
-	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
+	var/p_y = 16 //the pixel location of the tile that the player clicked. Default is the center
 
 	var/hitchance_mod = 0
 	var/dispersion = 0.0
-	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
+	var/distance_falloff = 2 //multiplier, higher value means accuracy drops faster with distance
 
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
@@ -38,7 +38,8 @@
 	var/damage_flags = DAM_BULLET
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
 	var/life_span = 50 //This will de-increment every process(). When 0, it will delete the projectile.
-		//Effects
+
+	//Effects
 	var/stun = 0
 	var/weaken = 0
 	var/paralyze = 0
@@ -48,13 +49,13 @@
 	var/drowsy = 0
 	var/agony = 0
 
-	var/embed = 0 // whether or not the projectile can embed itself in the mob
-	var/space_knockback = 0	//whether or not it will knock things back in space
+	var/embed = 0 //whether or not the projectile can embed itself in the mob
+	var/space_knockback = 0 //whether or not it will knock things back in space
 	var/penetration_modifier = 0.2 //How much internal damage this projectile can deal, as a multiplier.
 
-	var/step_delay = 1	// the delay between iterations if not a hitscan projectile
+	var/step_delay = 1 //the delay between iterations if not a hitscan projectile
 
-	// effect types to be used
+	//Effect types to be used
 	var/muzzle_type
 	var/tracer_type
 	var/impact_type
@@ -63,33 +64,34 @@
 	var/fire_sound_vol = 50
 	var/miss_sounds
 	var/ricochet_sounds
-	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
+	var/list/impact_sounds //for different categories, IMPACT_MEAT etc
 	var/shrapnel_type = /obj/item/shard/shrapnel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
-//Movement parameters
-	var/speed = 0.4		//Amount of deciseconds it takes for projectile to travel
-	var/pixel_speed = 33	//pixels per move - DO NOT FUCK WITH THIS UNLESS YOU ABSOLUTELY KNOW WHAT YOU ARE DOING OR UNEXPECTED THINGS /WILL/ HAPPEN!
+
+	//Movement parameters
+	var/speed = 0.4 //Amount of deciseconds it takes for projectile to travel
+	var/pixel_speed = 33 //Pixels per move - DO NOT FUCK WITH THIS UNLESS YOU ABSOLUTELY KNOW WHAT YOU ARE DOING OR UNEXPECTED THINGS /WILL/ HAPPEN!
 	var/Angle = 0
-	var/original_Angle = 0		//Angle at firing
+	var/original_Angle = 0 //Angle at firing
 	var/nondirectional_sprite = FALSE //Set TRUE to prevent projectiles from having their sprites rotated based on firing Angle
-	var/forcedodge = FALSE		//to pass through everything
+	var/forcedodge = FALSE //To pass through everything
 
 	//Fired processing vars
-	var/fired = FALSE	//Have we been fired yet
-	var/paused = FALSE	//for suspending the projectile midair
+	var/fired = FALSE //Have we been fired yet
+	var/paused = FALSE //For suspending the projectile midair
 	var/last_projectile_move = 0
 	var/last_process = 0
 	var/time_offset = 0
 	var/datum/point/vector/trajectory
-	var/trajectory_ignore_forcemove = FALSE	//instructs forceMove to NOT reset our trajectory to the new location!
+	var/trajectory_ignore_forcemove = FALSE //Instructs forceMove to NOT reset our trajectory to the new location!
 	var/range = 50 //This will de-increment every step. When 0, it will deletze the projectile.
 
 	//Hitscan
-	var/hitscan = FALSE		//Whether this is hitscan. If it is, speed is basically ignored.
-	var/list/beam_segments	//assoc list of datum/point or datum/point/vector, start = end. Used for hitscan effect generation.
+	var/hitscan = FALSE //Whether this is hitscan. If it is, speed is basically ignored.
+	var/list/beam_segments //assoc list of datum/point or datum/point/vector, start = end. Used for hitscan effect generation.
 	var/datum/point/beam_index
-	var/turf/hitscan_last	//last turf touched during hitscanning.
+	var/turf/hitscan_last //last turf touched during hitscanning.
 
 /obj/item/projectile/Initialize()
 	damtype = damage_type //TODO unify these vars properly
@@ -189,7 +191,7 @@
 	if(new_firer)
 		firer = src
 	var/new_Angle = Atan2(starting_turf, new_target)
-	if(is_ricochet) // Add some dispersion.
+	if(is_ricochet) //Add some dispersion.
 		new_Angle += (rand(-5,5) * 5)
 	setAngle(new_Angle)
 
@@ -378,7 +380,7 @@
 		return
 	if(isnum(Angle))
 		setAngle(Angle)
-	// trajectory dispersion
+	//trajectory dispersion
 	var/turf/starting = get_turf(src)
 	if(!starting)
 		return
@@ -577,7 +579,7 @@
 
 /obj/item/projectile/proc/vol_by_damage()
 	if(src.damage)
-		return clamp((src.damage) * 0.67, 30, 100)// Multiply projectile damage by 0.67, then CLAMP the value between 30 and 100
+		return clamp((src.damage) * 0.67, 30, 100)//Multiply projectile damage by 0.67, then CLAMP the value between 30 and 100
 	else
 		return 50 //if the projectile doesn't do damage, play its hitsound at 50% volume.
 

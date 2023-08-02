@@ -35,7 +35,7 @@
 	return ..()
 
 /obj/proc/get_matter_amount_modifier()
-	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
+	. = round(w_class * BASE_OBJECT_MATTER_MULTPLIER,0.25) //there was a CEILING() I removed it so that it calculates correctly (modifier was the same for small and normal items)
 
 /obj/assume_air(datum/gas_mixture/giver)
 	return loc?.assume_air(giver)

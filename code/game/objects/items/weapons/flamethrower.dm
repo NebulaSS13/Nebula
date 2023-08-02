@@ -311,5 +311,4 @@
 	igniter = new /obj/item/assembly/igniter(src)
 	igniter.secured = FALSE
 	secured = TRUE
-	tank = new /obj/item/tank/hydrogen(src)
 	return ..()

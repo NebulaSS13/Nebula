@@ -31,22 +31,22 @@
 /obj/item/gun
 	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/obj/guns/pistol.dmi'
+	icon_state = ICON_STATE_WORLD
+	drop_sound = 'sound/foley/drop1.ogg'
+	pickup_sound = 'sound/foley/pickup2.ogg'
+
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
-	material = /decl/material/solid/metal/steel
 	w_class = ITEM_SIZE_NORMAL
+
 	throwforce = 5
-	throw_speed = 4
 	throw_range = 5
 	force = 5
-	origin_tech = "{'combat':1}"
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
-	drop_sound = 'sound/foley/drop1.ogg'
-	pickup_sound = 'sound/foley/pickup2.ogg'
+	material = /decl/material/solid/metal/steel
 
 	var/waterproof = FALSE
 	var/burst = 1
@@ -67,7 +67,7 @@
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
 	var/one_hand_penalty
-	var/combustion	//whether it creates hotspot when fired
+	var/combustion = 0	//whether it creates hotspot when fired
 
 	var/next_fire_time = 0
 
@@ -547,7 +547,7 @@
 			playsound(user, shot_sound, 10, 1)
 		else
 			playsound(user, shot_sound, 50, 1)
-		if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
+		if(istype(in_chamber, /obj/item/projectile/beam/lasertag))
 			user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 			mouthshoot = 0
 			return

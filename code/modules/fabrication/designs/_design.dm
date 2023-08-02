@@ -65,6 +65,10 @@
 	if(reagents && length(reagents.reagent_volumes))
 		for(var/R in reagents.reagent_volumes)
 			.[R] = FLOOR(REAGENT_VOLUME(reagents, R) / REAGENT_UNITS_PER_MATERIAL_UNIT)
+	for(var/obj/O in contents)
+		var/cost = O.building_cost()
+		for(var/mat in cost)
+			.[mat] += cost[mat]
 
 /datum/fabricator_recipe/proc/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = list()

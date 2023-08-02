@@ -164,13 +164,6 @@
 	desc = "A sturdy metal box with several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	use_sound = 'sound/effects/closet_open.ogg'
 
-/obj/item/storage/box/ammo/blanks
-	name = "box of blank shells"
-	desc = "It has a picture of a gun and several warning symbols on the front."
-
-/obj/item/storage/box/ammo/blanks/WillContain()
-	return list(/obj/item/ammo_casing/shotgun/blank = 8)
-
 /obj/item/storage/box/ammo/practiceshells
 	name = "box of practice shells"
 /obj/item/storage/box/ammo/practiceshells/WillContain()
@@ -192,7 +185,7 @@
 /obj/item/storage/box/ammo/shotgunshells
 	name = "box of shotgun shells"
 /obj/item/storage/box/ammo/shotgunshells/WillContain()
-	return list(/obj/item/ammo_magazine/shotholder/shell = 2)
+	return list(/obj/item/ammo_magazine/shotholder/pellet = 2)
 
 /obj/item/storage/box/ammo/flashshells
 	name = "box of illumination shells"
@@ -210,12 +203,7 @@
 /obj/item/storage/box/ammo/sniperammo
 	name = "box of sniper shells"
 /obj/item/storage/box/ammo/sniperammo/WillContain()
-	return list(/obj/item/ammo_casing/shell = 7)
-
-/obj/item/storage/box/ammo/sniperammo/apds
-	name = "box of sniper APDS shells"
-/obj/item/storage/box/ammo/sniperammo/apds/WillContain()
-	return list(/obj/item/ammo_casing/shell/apds = 3)
+	return list(/obj/item/ammo_casing/rifle/shell = 7)
 
 /obj/item/storage/box/flashbangs
 	name = "box of flashbangs"

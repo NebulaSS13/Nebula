@@ -11,61 +11,65 @@ var/global/list/laser_wavelengths
 	name = "638nm"
 	color = COLOR_RED
 	light_color = COLOR_RED_LIGHT
-	damage_multiplier = 1
+	damage_multiplier = 1.3
 	armour_multiplier = 0.1
 
 /decl/laser_wavelength/yellow
 	name = "589nm"
 	color = COLOR_GOLD
 	light_color = COLOR_GOLD
-	damage_multiplier = 0.9
+	damage_multiplier = 1.2
 	armour_multiplier = 0.2
 
 /decl/laser_wavelength/green
 	name = "515nm"
 	color = COLOR_LIME
 	light_color = COLOR_LIME
-	damage_multiplier = 0.8
+	damage_multiplier = 1.1
 	armour_multiplier = 0.3
 
 /decl/laser_wavelength/blue
 	name = "473nm"
 	color = COLOR_CYAN
 	light_color = COLOR_BLUE_LIGHT
-	damage_multiplier = 0.7
+	damage_multiplier = 1
 	armour_multiplier = 0.4
 
 /decl/laser_wavelength/violet
 	name = "405nm"
 	color = "#ff00dc"
 	light_color = "#ff00dc"
-	damage_multiplier = 0.6
+	damage_multiplier = 0.9
 	armour_multiplier = 0.5
+
+//this is a cool gun we should use it more there was literally 0 chance to find it ingame
 
 /obj/item/gun/energy/capacitor
 	name = "capacitor pistol"
 	desc = "An excitingly chunky directed energy weapon that uses a modular capacitor array to charge each shot."
 	icon = 'icons/obj/guns/capacitor_pistol.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'materials':4,'powerstorage':4}"
+	z_flags = ZMM_MANGLE_PLANES
 	w_class = ITEM_SIZE_NORMAL
-	charge_cost = 100
-	accuracy = 2
-	fire_delay = 10
 	slot_flags = SLOT_LOWER_BODY
-	power_supply = /obj/item/cell/high
+
+	fire_delay = 10
+
+	origin_tech = "{'combat':2,'magnets':2,'materials':1,'powerstorage':1}"
 	material = /decl/material/solid/metal/steel
-	projectile_type = /obj/item/projectile/beam/variable
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass      = MATTER_AMOUNT_REINFORCEMENT
 	)
-	z_flags = ZMM_MANGLE_PLANES
+
+	accepts_cell_type = /obj/item/cell
+	power_supply = /obj/item/cell/high
+	projectile_type = /obj/item/projectile/beam/variable
 
 	var/wiring_color = COLOR_CYAN_BLUE
 	var/max_capacitors = 2
 	var/list/capacitors = /obj/item/stock_parts/capacitor
-	var/const/charge_iteration_delay = 3
+	var/const/charge_iteration_delay = 5 //delay between charge cycles
 	var/const/capacitor_charge_constant = 10
 	var/decl/laser_wavelength/charging
 	var/decl/laser_wavelength/selected_wavelength
@@ -108,23 +112,11 @@ var/global/list/laser_wavelengths
 			capacitor.charge = 0
 			user.put_in_hands(capacitor)
 			LAZYREMOVE(capacitors, capacitor)
-		else if(power_supply)
-			user.put_in_hands(power_supply)
-			power_supply = null
 		else
-			to_chat(user, SPAN_WARNING("\The [src] does not have a cell or capacitor installed."))
+			to_chat(user, SPAN_WARNING("\The [src] does not have any capacitors installed."))
 			return TRUE
 		playsound(loc, 'sound/items/Screwdriver2.ogg', 25)
 		update_icon()
-		return TRUE
-
-	if(istype(W, /obj/item/cell))
-		if(power_supply)
-			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.try_unequip(W, src))
-			power_supply = W
-			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [src]."))
-			update_icon()
 		return TRUE
 
 	if(istype(W, /obj/item/stock_parts/capacitor))
@@ -138,23 +130,42 @@ var/global/list/laser_wavelengths
 
 	. = ..()
 
-/obj/item/gun/energy/capacitor/attack_self(var/mob/user)
+//wavelength setting moved to altclick
 
-	if(charging)
-		for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
-			capacitor.charge = 0
-		update_icon()
-		charging = FALSE
+/obj/item/gun/energy/capacitor/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/capacitor_change_wavelength)
+
+/decl/interaction_handler/capacitor_change_wavelength
+	name = "Change Wavelength"
+	expected_target_type = /obj/item/gun/energy/capacitor
+
+/decl/interaction_handler/capacitor_change_wavelength/invoked(var/atom/target, var/mob/user)
+	var/obj/item/gun/energy/capacitor/R = target
+	if(R.charging)
+		R.update_icon()
+		R.charging = FALSE
 	else
-		var/new_wavelength = input("Select the desired laser wavelength.", "Capacitor Laser Wavelength", selected_wavelength) as null|anything in global.laser_wavelengths
-		if(!charging && new_wavelength != selected_wavelength && (loc == user || user.Adjacent(src)) && !user.incapacitated())
-			selected_wavelength = new_wavelength
-			to_chat(user, SPAN_NOTICE("You dial \the [src] wavelength to [selected_wavelength.name]."))
-			update_icon()
+		var/new_wavelength = input("Select the desired laser wavelength.", "Capacitor Laser Wavelength", R.selected_wavelength) as null|anything in global.laser_wavelengths
+		if(!R.charging && new_wavelength != R.selected_wavelength && (R.loc == user || user.Adjacent(R)) && !user.incapacitated())
+			if(!new_wavelength)
+				return TRUE
+			R.selected_wavelength = new_wavelength
+			to_chat(user, SPAN_NOTICE("You dial \the [R] wavelength to [R.selected_wavelength.name]."))
+			R.update_icon()
 	return TRUE
 
 /obj/item/gun/energy/capacitor/Process()
 	. = ..()
+
+/obj/item/gun/energy/capacitor/attack_self(var/mob/user)
+	if(!power_supply)
+		to_chat(user,SPAN_WARNING("\The [src] has no power cell installed, you can't charge it!"))
+		return
+	if(charging)
+		to_chat(user,SPAN_WARNING("\The [src] is already charging!"))
+		return
+	charge(user)
 
 /obj/item/gun/energy/capacitor/proc/charge(var/mob/user)
 	. = FALSE
@@ -166,9 +177,10 @@ var/global/list/laser_wavelengths
 			for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
 				if(capacitor.charge < capacitor.max_charge)
 					charged = FALSE
-					var/use_charge_cost = min(charge_cost * capacitor.rating, round((capacitor.max_charge - capacitor.charge) / capacitor_charge_constant))
-					if(power_supply.use(use_charge_cost))
-						capacitor.charge(use_charge_cost * capacitor_charge_constant)
+					var/use_charge_cost = round((capacitor.max_charge - capacitor.charge) / capacitor_charge_constant)
+					var/charge = power_supply?.use(use_charge_cost)
+					if(charge)
+						capacitor.charge(charge * capacitor_charge_constant)
 						update_icon()
 					else
 						charging = FALSE
@@ -240,25 +252,26 @@ var/global/list/laser_wavelengths
 					I.alpha = clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
 					I.color = selected_wavelength.color
 					I.appearance_flags |= RESET_COLOR
-					overlay.overlays += I
+					overlay.add_overlay(I)
 	. = ..()
 
 /obj/item/gun/energy/capacitor/consume_next_projectile()
 
-	var/charged = charge(loc)
 	var/total_charge = 0
 	for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
 		total_charge += capacitor.charge
 		capacitor.charge = 0
 	update_icon()
 
-	if(charged)
-		var/obj/item/projectile/P = new projectile_type(src)
-		P.color = selected_wavelength.color
-		P.set_light(l_color = selected_wavelength.light_color)
-		P.damage = FLOOR(sqrt(total_charge) * selected_wavelength.damage_multiplier)
-		P.armor_penetration = FLOOR(sqrt(total_charge) * selected_wavelength.armour_multiplier)
-		. = P
+	if(!total_charge)
+		return null
+
+	var/obj/item/projectile/P = new projectile_type(src)
+	P.color = selected_wavelength.color
+	P.set_light(l_color = selected_wavelength.light_color)
+	P.damage = round(FLOOR(sqrt(total_charge) * selected_wavelength.damage_multiplier),5)
+	P.armor_penetration = round(FLOOR(sqrt(total_charge) * selected_wavelength.armour_multiplier),5)
+	. = P
 
 // Subtypes.
 /obj/item/gun/energy/capacitor/rifle
@@ -271,11 +284,13 @@ var/global/list/laser_wavelengths
 	fire_delay = 20
 	w_class = ITEM_SIZE_HUGE
 	power_supply = /obj/item/cell/super
+	projectile_type = /obj/item/projectile/beam/variable/heavy
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion
 	name = "linear fusion rifle"
 	desc = "A chunky, angular, carbon-fiber-finish capacitor rifle, shipped complete with a self-charging power cell. The operating instructions seem to be written in backwards Cyrillic."
 	color = COLOR_GRAY40
+	accepts_cell_type = null
 	power_supply = /obj/item/cell/infinite
 	capacitors = /obj/item/stock_parts/capacitor/super
 	projectile_type = /obj/item/projectile/beam/variable/split

@@ -38,6 +38,8 @@
 	var/stacks_used = 0
 
 	var/mat_colour = thing.color
+	for(var/obj/O in thing.contents)
+		take_materials(O,user)
 	for(var/mat in thing.matter)
 
 		var/decl/material/material_def = GET_DECL(mat)

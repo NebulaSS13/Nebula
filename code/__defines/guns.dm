@@ -6,7 +6,7 @@
 #define CALIBER_PISTOL_LASBULB   "11mm lasbulb"
 
 #define CALIBER_RIFLE            "6x45mm"
-#define CALIBER_ANTI_MATERIEL    "15×99mm"
+#define CALIBER_ANTI_MATERIEL    "15x99mm"
 
 #define CALIBER_SHOTGUN          "12g"
 #define CALIBER_CAPS             "caps"
@@ -21,9 +21,6 @@
 #define SINGLE_CASING 	1	//The gun only accepts ammo_casings. ammo_magazines should never have this as their mag_type.
 #define SPEEDLOADER 	2	//Transfers casings from the mag to the gun when used.
 #define MAGAZINE 		4	//The magazine item itself goes inside the gun
-
-
-#define GUN_BULK_RIFLE  5
 
 #define BULLET_IMPACT_NONE  "none"
 #define BULLET_IMPACT_METAL "metal"

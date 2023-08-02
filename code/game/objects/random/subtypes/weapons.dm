@@ -10,7 +10,7 @@
 		/obj/item/gun/energy/gun =                    3,
 		/obj/item/gun/energy/lasercannon =            2,
 		/obj/item/gun/energy/xray =                   3,
-		/obj/item/gun/energy/sniperrifle =            1,
+		/obj/item/gun/energy/xray/sniper =            1,
 		/obj/item/gun/energy/gun/nuclear =            1,
 		/obj/item/gun/energy/ionrifle =               2,
 		/obj/item/gun/energy/toxgun =                 3,

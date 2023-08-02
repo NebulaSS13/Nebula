@@ -50,7 +50,6 @@
 
 /obj/item/projectile/bullet/pellet/Move()
 	. = ..()
-
 	//If this is a shrapnel explosion, allow mobs that are prone to get hit, too
 	if(. && !base_spread && isturf(loc))
 		for(var/mob/living/M in loc)
@@ -63,7 +62,8 @@
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 30
+	embed = TRUE
+	damage = 40
 	pellets = 6
 	range_step = 1
 	spread_step = 10

@@ -8121,8 +8121,8 @@
 /area/ship/trade/shuttle/outgoing/engineering)
 "Zc" = (
 /obj/structure/closet/secure_closet/engineering_electrical,
-/obj/item/cell/device/standard,
-/obj/item/cell/device/standard,
+/obj/item/cell/device,
+/obj/item/cell/device,
 /obj/machinery/power/apc{
 	dir = 8;
 	pixel_x = -22

@@ -121,7 +121,10 @@
 		/obj/item/stack/material/reinforced/mapped/plasteel/ten =      4,
 		/obj/item/stack/material/ingot/mapped/copper/fifty =           4,
 		/obj/item/stack/material/pane/mapped/glass/fifty =             4,
-		/obj/item/stack/material/reinforced/mapped/fiberglass/fifty =  4
+		/obj/item/stack/material/reinforced/mapped/fiberglass/fifty =  4,
+		/obj/item/stack/material/ingot/mapped/brass/fifty =            4,
+		/obj/item/stack/material/ingot/mapped/lead/fifty =             4,
+		/obj/item/stack/material/brick/mapped/carbon/fifty =           4
 	)
 	contraband = list(
 		/obj/item/stack/material/reinforced/mapped/ocp/ten = 3

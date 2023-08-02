@@ -150,7 +150,7 @@
 
 /obj/item/shard/shrapnel
 	name = "shrapnel"
-	material = /decl/material/solid/metal/steel
+	material = /decl/material/solid/metal/lead
 	w_class = ITEM_SIZE_TINY	//it's real small
 
 /obj/item/shard/plastic

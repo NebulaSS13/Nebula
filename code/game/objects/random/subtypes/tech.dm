@@ -28,7 +28,7 @@
 		/obj/item/cell/gun=              5,
 		/obj/item/cell/super =           2,
 		/obj/item/cell/hyper =           1,
-		/obj/item/cell/device/standard = 7,
+		/obj/item/cell/device          = 7,
 		/obj/item/cell/device/high =     5
 	)
 	return spawnable_choices

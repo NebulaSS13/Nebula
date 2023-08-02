@@ -36,7 +36,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 	contents = list(
 		/obj/item/gun/energy/laser,
 		/obj/item/gun/energy/laser,
-		/obj/item/gun/energy/sniperrifle,
+//		/obj/item/gun/energy/sniperrifle,
 		/obj/item/gun/energy/ionrifle)
 
 /datum/supply_drop_loot/ballistics

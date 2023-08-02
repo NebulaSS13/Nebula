@@ -70,6 +70,7 @@
 	force = 7
 	material = /decl/material/solid/metal/steel
 	slot_flags = SLOT_LOWER_BODY
+	origin_tech = "{'biotech':2,'combat':1}"
 
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic thunk"
@@ -138,6 +139,7 @@
 	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots."
 	icon = 'icons/obj/guns/launcher/syringe_rapid.dmi'
 	max_darts = 5
+	origin_tech = "{'biotech':3,'combat':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 

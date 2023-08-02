@@ -13,7 +13,7 @@
 	var/obj/item/cell/cigcell
 	var/cartridge_type = /obj/item/chems/ecig_cartridge/med_nicotine
 	var/obj/item/chems/ecig_cartridge/ec_cartridge
-	var/cell_type = /obj/item/cell/device/standard
+	var/cell_type = /obj/item/cell/device
 	var/power_usage = 450 //value for simple ecig, enough for about 1 cartridge, in JOULES!
 	var/ecig_colors = list(null, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_PURPLE_GRAY)
 	var/idle = 0
