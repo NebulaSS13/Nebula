@@ -9,8 +9,8 @@
 	for(var/atom/movable/organ in get_organs())
 		. += organ.get_combined_monetary_worth()
 
-/mob/living/carbon/get_value_multiplier()
-	. = species?.rarity_value || 1
+/mob/living/carbon/get_single_monetary_worth()
+	. = ..() * (species?.rarity_value || 1)
 
 /mob/living/get_single_monetary_worth()
 	. = ..()

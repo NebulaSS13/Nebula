@@ -8,13 +8,9 @@
 	force = 7
 	throwforce = 7
 	lit_colour = COLOR_CYAN_BLUE
-	var/obj/item/cell/cell = /obj/item/cell/high
+	cell = /obj/item/cell/high
+	cell_allowed = /obj/item/cell
 	var/fuel_cost_multiplier = 10
-
-/obj/item/weldingtool/electric/Initialize()
-	if(ispath(cell))
-		cell = new cell(src)
-	. = ..()
 
 /obj/item/weldingtool/electric/examine(mob/user, distance)
 	. = ..()
@@ -44,26 +40,6 @@
 
 /obj/item/weldingtool/electric/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/chems/welder_tank))
-		return
-	if(IS_SCREWDRIVER(W))
-		if(cell)
-			cell.dropInto(get_turf(src))
-			user.put_in_hands(cell)
-			to_chat(user, SPAN_NOTICE("You pop \the [cell] out of \the [src]."))
-			welding = FALSE
-			cell = null
-			update_icon()
-		else
-			to_chat(user, SPAN_WARNING("\The [src] has no cell installed."))
-		return
-	else if(istype(W, /obj/item/cell))
-		if(cell)
-			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.try_unequip(W))
-			cell = W
-			cell.forceMove(src)
-			to_chat(user, SPAN_NOTICE("You slot \the [cell] into \the [src]."))
-			update_icon()
 		return
 	. = ..()
 

@@ -11,7 +11,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 
-	var/obj/item/cell/device/cell
+	cell = /obj/item/cell/device/high
 	var/enabled = 0
 
 /obj/item/shield_diffuser/on_update_icon()
@@ -20,10 +20,6 @@
 		icon_state = "hdiffuser_on"
 	else
 		icon_state = "hdiffuser_off"
-
-/obj/item/shield_diffuser/Initialize()
-	. = ..()
-	cell = new(src)
 
 /obj/item/shield_diffuser/Destroy()
 	QDEL_NULL(cell)
@@ -56,5 +52,4 @@
 
 /obj/item/shield_diffuser/examine(mob/user)
 	. = ..()
-	to_chat(user, "The charge meter reads [cell ? cell.percent() : 0]%")
 	to_chat(user, "It is [enabled ? "enabled" : "disabled"].")

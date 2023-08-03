@@ -1,3 +1,6 @@
+/obj/item/rig/cell_cover_open()
+	return open
+
 /obj/item/rig/attackby(obj/item/W, mob/user)
 
 	if(!istype(user,/mob/living)) return 0

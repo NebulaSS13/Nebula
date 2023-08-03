@@ -106,7 +106,6 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 	</div>
 {{/if}}
 
-
 {{if data.charge}}
 	<div class="item">
 		<div class="itemLabelWide">
@@ -114,6 +113,15 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 		</div>
 		<div class="itemContentMedium">
 			{{:data.charge}}
+		</div>
+	</div>
+	<div class="item">
+		{{:helper.link('Remove cell', null, {'remove_cell' : 1})}}
+	</div>
+{{else}}
+	<div class="item">
+		<div class="itemLabelWide">
+			No battery
 		</div>
 	</div>
 {{/if}}

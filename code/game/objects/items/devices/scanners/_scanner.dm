@@ -20,30 +20,23 @@
 	var/use_delay
 	var/scan_sound
 	var/printout_color
-	var/paper_left = 5
-	var/obj/item/cell/device/cell = /obj/item/cell/device
-	var/power_usage = 450 //100 scans
 
-/obj/item/scanner/Initialize()
-	. = ..()
-	if(ispath(cell))
-		cell = new(src)
+	var/paper_left = 5
+	cell = /obj/item/cell/device
+	cell_allowed = /obj/item/cell/device
+	power_usage = 500
 
 /obj/item/scanner/attack_self(mob/user)
 	show_menu(user)
 
 /obj/item/scanner/attackby(var/obj/item/I,var/mob/user)
-	if(istype(I,/obj/item/paper))
+	if(istype(I,/obj/item/paper)) //paper economy ruined
 		if(paper_left >= initial(paper_left))
 			to_chat(user,SPAN_NOTICE("\the [src] paper storage is full."))
 			return TRUE
 		paper_left++
 		qdel(I)
 		to_chat(user,SPAN_NOTICE("You insert \the [I] in \the [src]."))
-		return TRUE
-	if(!cell && power_usage && istype(I, /obj/item/cell/device) && user.try_unequip(I, target = src))
-		to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
-		cell = I
 		return TRUE
 	. = ..()
 
@@ -55,14 +48,16 @@
 /obj/item/scanner/proc/get_header()
 	. = "<a href='?src=\ref[src];print=1'>Print Report</a><a href='?src=\ref[src];clear=1'>Clear data</a>"
 	if(cell && power_usage)
-		. += "<a href='?src=\ref[src];cell=1'>Remove cell</a>"
+		. += "<a href='?src=\ref[src];cell=1'>Remove cell ([cell.percent()]%)</a>"
 	else if(power_usage)
 		. += "No cell"
 
 /obj/item/scanner/proc/can_use(mob/user)
-	if (user.incapacitated())
+	if(user.incapacitated())
 		return
-	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+		return
+	if(!power_check(user))
 		return
 	return TRUE
 
@@ -72,9 +67,6 @@
 	if(!can_use(user))
 		return
 	if(is_valid_scan_target(A) && A.simulated)
-		if(power_usage && !cell?.checked_use(power_usage * CELLRATE))
-			to_chat(user,SPAN_WARNING("\The [src] doesn't have enough power."))
-			return
 		user.visible_message("<span class='notice'>[user] runs \the [src] over \the [A].</span>", range = 2)
 		if(scan_sound)
 			playsound(src, scan_sound, 30)
@@ -117,10 +109,7 @@
 		return 1
 	if(href_list["cell"])
 		if(cell)
-			var/mob/U = user
-			U.put_in_hands(cell)
-			to_chat(user, SPAN_NOTICE("You remove [cell] from \the [src]."))
-			cell = null
+			remove_cell(user)
 		. = TOPIC_REFRESH
 
 /obj/item/scanner/proc/print_report(var/mob/living/user)
@@ -130,8 +119,7 @@
 	if(!scan_data)
 		to_chat(user, "There is no scan data to print.")
 		return
-	if(power_usage && !cell?.checked_use(power_usage * CELLRATE))
-		to_chat(user,SPAN_WARNING("\The [src] doesn't have enough power."))
+	if(!power_check(user))
 		return
 	playsound(loc, "sound/machines/dotprinter.ogg", 20, 1)
 	var/obj/item/paper/P = new(get_turf(src), null, scan_data, "paper - [scan_title]")

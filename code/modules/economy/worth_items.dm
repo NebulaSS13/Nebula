@@ -6,11 +6,9 @@
 	return force
 
 /obj/item/get_base_value()
-
-	if(holographic)
-		return 0
-
 	. = ..()
+	if(istype(src,/obj/item/stack))
+		return .
 
 	if(origin_tech)
 		var/largest_tech_val = 0

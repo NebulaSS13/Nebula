@@ -94,7 +94,8 @@
 	bp_tag = BP_CHEST
 	material = /decl/material/solid/metal/steel
 	var/wires = 0.0
-	var/obj/item/cell/cell = null
+	cell_allowed = /obj/item/cell
+	cell_indicator = FALSE
 
 /obj/item/robot_parts/chest/can_install(mob/user)
 	var/success = TRUE
@@ -107,16 +108,7 @@
 	return success && ..()
 
 /obj/item/robot_parts/chest/attackby(obj/item/W, mob/user)
-	..()
-	if(istype(W, /obj/item/cell))
-		if(src.cell)
-			to_chat(user, "<span class='warning'>You have already inserted a cell!</span>")
-			return
-		else
-			if(!user.try_unequip(W, src))
-				return
-			src.cell = W
-			to_chat(user, "<span class='notice'>You insert the cell!</span>")
+	. = ..()
 	if(IS_COIL(W))
 		if(src.wires)
 			to_chat(user, "<span class='warning'>You have already inserted wire!</span>")

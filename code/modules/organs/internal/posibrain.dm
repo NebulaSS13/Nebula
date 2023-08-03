@@ -170,20 +170,15 @@
 	organ_tag = BP_CELL
 	parent_organ = BP_CHEST
 	organ_properties = ORGAN_PROP_PROSTHETIC //triggers robotization on init
-	var/open
-	var/obj/item/cell/cell = /obj/item/cell/hyper
+	cell_cover = TRUE
+	cell_crowbar = TRUE
+	cell = /obj/item/cell/hyper
+	cell_allowed = /obj/item/cell
 	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
 	var/servo_cost = 0.8
 
-/obj/item/organ/internal/cell/Initialize()
-	if(ispath(cell))
-		cell = new cell(src)
-	. = ..()
-
 /obj/item/organ/internal/cell/proc/percent()
-	if(!cell)
-		return 0
-	return get_charge()/cell.maxcharge * 100
+	return cell?.percent()
 
 /obj/item/organ/internal/cell/proc/get_charge()
 	if(!cell)
@@ -219,35 +214,6 @@
 		if(!owner.lying && !owner.buckled)
 			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
 		SET_STATUS_MAX(owner, STAT_PARA, 3)
-
-/obj/item/organ/internal/cell/emp_act(severity)
-	..()
-	if(cell)
-		cell.emp_act(severity)
-
-/obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
-		if(open)
-			open = 0
-			to_chat(user, "<span class='notice'>You screw the battery panel in place.</span>")
-		else
-			open = 1
-			to_chat(user, "<span class='notice'>You unscrew the battery panel.</span>")
-
-	if(IS_CROWBAR(W))
-		if(open)
-			if(cell)
-				user.put_in_hands(cell)
-				to_chat(user, "<span class='notice'>You remove \the [cell] from \the [src].</span>")
-				cell = null
-
-	if (istype(W, /obj/item/cell))
-		if(open)
-			if(cell)
-				to_chat(user, "<span class ='warning'>There is a power cell already installed.</span>")
-			else if(user.try_unequip(W, src))
-				cell = W
-				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
 
 /obj/item/organ/internal/cell/on_add_effects()
 	. = ..()

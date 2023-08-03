@@ -7,6 +7,7 @@
 	canhear_range = 0 // can't hear headsets from very far away
 	slot_flags = SLOT_EARS
 	cell = null
+	cell_allowed = null
 	power_usage = 0
 	can_use_analog = FALSE
 	encryption_keys = list(/obj/item/encryptionkey)

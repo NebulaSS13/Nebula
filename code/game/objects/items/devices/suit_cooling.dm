@@ -19,10 +19,12 @@
 	origin_tech = "{'magnets':2,'materials':2}"
 
 	var/on = 0								//is it turned on?
-	var/cover_open = 0						//is the cover open?
-	var/obj/item/cell/cell
+	cell_cover = TRUE
+	cell = /obj/item/cell/high
+	cell_allowed = /obj/item/cell
+	power_usage = 2 KILOWATTS
 	var/max_cooling = 12					// in degrees per second - probably don't need to mess with heat capacity here
-	var/charge_consumption = 2 KILOWATTS	// energy usage at full power
+		// energy usage at full power
 	var/thermostat = T20C
 
 /obj/item/suit_cooling_unit/ui_action_click()
@@ -31,8 +33,7 @@
 /obj/item/suit_cooling_unit/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
-	cell = new/obj/item/cell/high()		// 10K rated cell.
-	cell.forceMove(src)
+//there was a note about 10k cell. what is this code from, 2016?
 
 /obj/item/suit_cooling_unit/Destroy()
 	. = ..()
@@ -52,14 +53,14 @@
 	if (temp_adj < 0.5)	//only cools, doesn't heat, also we don't need extreme precision
 		return
 
-	var/charge_usage = (temp_adj/max_cooling)*charge_consumption
+	var/charge_usage = (temp_adj/max_cooling)*power_usage
 
 	H.bodytemperature -= temp_adj
 
 	cell.use(charge_usage * CELLRATE)
 	update_icon()
 
-	if(cell.charge <= 0)
+	if(cell.charge <= 0) //i feel like this is really ancient but okay
 		turn_off(1)
 
 // Checks whether the cooling unit is being worn on the back/suit slot.
@@ -85,18 +86,8 @@
 	update_icon()
 
 /obj/item/suit_cooling_unit/attack_self(var/mob/user)
-	if(cover_open && cell)
-		if(ishuman(user))
-			user.put_in_hands(cell)
-		else
-			cell.dropInto(loc)
-
-		cell.add_fingerprint(user)
-		cell.update_icon()
-
-		to_chat(user, "You remove \the [src.cell].")
-		src.cell = null
-		update_icon()
+	if(cell_cover && cell)
+		remove_cell(user)
 		return
 
 	toggle(user)
@@ -108,34 +99,9 @@
 		turn_on()
 	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
 
-/obj/item/suit_cooling_unit/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
-		if(cover_open)
-			cover_open = 0
-			to_chat(user, "You screw the panel into place.")
-		else
-			cover_open = 1
-			to_chat(user, "You unscrew the panel.")
-		update_icon()
-		return
-
-	if (istype(W, /obj/item/cell))
-		if(cover_open)
-			if(cell)
-				to_chat(user, "There is a [cell] already installed here.")
-			else
-				if(!user.try_unequip(W, src))
-					return
-				cell = W
-				to_chat(user, "You insert the [cell].")
-		update_icon()
-		return
-
-	return ..()
-
 /obj/item/suit_cooling_unit/on_update_icon()
 	. = ..()
-	if(cover_open)
+	if(cell_cover)
 		add_overlay("[icon_state]-open")
 		if(cell)
 			add_overlay("[icon_state]-cell")
@@ -162,14 +128,7 @@
 	. = ..()
 	if(distance >= 1)
 		return
-
 	if (on)
 		to_chat(user, "It's switched on and running.")
 	else
 		to_chat(user, "It is switched off.")
-
-	if (cover_open)
-		to_chat(user, "The panel is open.")
-
-	if (cell)
-		to_chat(user, "The charge meter reads [round(cell.percent())]%.")

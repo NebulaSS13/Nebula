@@ -8,6 +8,7 @@
 /datum/stored_items/vending_products
 	item_name = "generic" // Display name for the product
 	var/price = 0              // Price to buy one
+	var/price_og = 0 //original item price
 	var/display_color = null   // Display color for vending machine listing
 	var/category = CAT_NORMAL  // CAT_HIDDEN for contraband
 

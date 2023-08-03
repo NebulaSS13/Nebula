@@ -9,7 +9,7 @@
 	idle_power_usage = 4
 	active_power_usage = 30 KILOWATTS
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/gun/energy, /obj/item/gun/magnetic/railgun, /obj/item/baton, /obj/item/cell, /obj/item/modular_computer/, /obj/item/suit_sensor_jammer, /obj/item/stock_parts/computer/battery_module, /obj/item/shield_diffuser, /obj/item/clothing/mask/smokable/ecig, /obj/item/radio)
+	var/list/allowed_devices = list()
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -24,9 +24,11 @@
 	. = ..()
 
 /obj/machinery/recharger/attackby(obj/item/G, mob/user)
-	var/allowed = 0
-	for (var/allowed_type in allowed_devices)
-		if (istype(G, allowed_type)) allowed = 1
+	var/allowed = FALSE
+	for(var/allowed_type in allowed_devices)
+		if (istype(G, allowed_type)) allowed = TRUE
+	if(!LAZYLEN(allowed_devices) && G.get_cell())
+		allowed = TRUE
 
 	if(allowed)
 		. = TRUE

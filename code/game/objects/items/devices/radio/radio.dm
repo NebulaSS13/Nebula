@@ -34,12 +34,14 @@
 	slot_flags = SLOT_LOWER_BODY
 	throw_speed = 2
 	throw_range = 9
-	w_class = ITEM_SIZE_SMALL
+
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-	var/obj/item/cell/cell = /obj/item/cell/device
-	var/power_usage = 2800
+	cell = /obj/item/cell/device
+	cell_allowed = /obj/item/cell/device
+	power_usage = 800
+
 	var/last_radio_sound = -INFINITY
 	var/initial_network_id
 	var/initial_network_key
@@ -64,6 +66,12 @@
 	var/analog = FALSE
 	var/analog_secured = list() // list of accesses used for encrypted analog, mainly for mercs/raiders
 	var/datum/radio_frequency/analog_radio_connection
+
+/obj/item/radio/on_update_icon()
+	if(!cell?.percent() || !(broadcasting || listening))
+		icon_state = "[initial(icon_state)]-off"
+	else
+		icon_state = initial(icon_state)
 
 /obj/item/radio/get_radio(var/message_mode)
 	return src
@@ -93,8 +101,6 @@
 /obj/item/radio/Initialize()
 	. = ..()
 	wires = new(src)
-	if(ispath(cell))
-		cell = new(src)
 
 	global.listening_objects += src
 	set_frequency(sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ))
@@ -212,9 +218,6 @@
 /obj/item/radio/proc/has_channel_access(var/mob/user, var/freq)
 	return TRUE // TODO: add antag/valid bounds checking
 
-/obj/item/radio/get_cell()
-	return cell
-
 /obj/item/radio/proc/toggle_broadcast()
 	broadcasting = !broadcasting && !(wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
 
@@ -282,13 +285,10 @@
 		. = TOPIC_REFRESH
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
 		return TOPIC_HANDLED
-
 	if(href_list["remove_cell"])
 		if(cell)
 			var/mob/user = usr
-			user.put_in_hands(cell)
-			to_chat(user, SPAN_NOTICE("You remove [cell] from \the [src]."))
-			cell = null
+			remove_cell(user)
 		. = TOPIC_REFRESH
 	if(href_list["network_settings"])
 		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
@@ -364,13 +364,16 @@
 		var/obj/item/cell/has_cell = get_cell()
 		if(!has_cell)
 			return 0
-		if(!has_cell.checked_use(power_usage * CELLRATE))
+		if(!power_check())
 			return 0
 		if(has_cell.percent() < 20)
 			message_compression = max(0, 80 - has_cell.percent()*3)
 
 	if(loc && loc == speaker)
 		playsound(loc, 'sound/effects/walkietalkie.ogg', 20, 0, -1)
+
+	icon_state = "[initial(icon_state)]-active"
+	addtimer(CALLBACK(src, /atom/proc/update_icon), 20)
 
 	if(message_mode == MESSAGE_MODE_SPECIAL && can_transmit_binary())
 		var/decl/language/binary/binary = GET_DECL(/decl/language/binary)
@@ -490,11 +493,6 @@
 			return TRUE
 		return toggle_panel(user)
 
-	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.try_unequip(W, target = src))
-		to_chat(user, SPAN_NOTICE("You slot \the [W] into \the [src]."))
-		cell = W
-		return TRUE
-
 	. = ..()
 
 /obj/item/radio/proc/toggle_panel(var/mob/user)
@@ -509,8 +507,6 @@
 	var/list/current_channels = get_available_channels()
 	for(var/channel in current_channels)
 		LAZYSET(channels, channel, FALSE)
-	if(cell)
-		cell.emp_act(severity)
 	..()
 
 /obj/item/radio/CouldUseTopic(var/mob/user)
@@ -519,4 +515,23 @@
 		playsound(src, "button", 10)
 
 /obj/item/radio/off
+	listening = FALSE
+
+//a big radio. for you. (use normal cells but waste space, I guess)
+
+/obj/item/radio/utility
+	name = "utility radio"
+	desc = "A bulky job-site radio station that can make powerful transmissions in analog or digital modes. Has a sensitive microphone. Favored for its big cell compartment."
+	icon_state = "radio_utility"
+	power_usage = 8000
+	cell = /obj/item/cell
+	cell_allowed = /obj/item/cell
+	canhear_range = 7
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+				/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
+				/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
+	w_class = ITEM_SIZE_LARGE //to balance for big cells
+
+/obj/item/radio/utility/off
 	listening = FALSE

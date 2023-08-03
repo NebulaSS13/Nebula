@@ -77,7 +77,7 @@
 		I.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM)
 		I.maptext_x = 2
 		I.maptext_y = 2
-		I.maptext = STYLE_SMALLFONTS_OUTLINE(get_amount(), 6, (color || COLOR_WHITE), COLOR_BLACK)
+		I.maptext = STYLE_SMALLFONTS_OUTLINE(get_amount(), 6, COLOR_WHITE, COLOR_BLACK)
 		add_overlay(I)
 
 /obj/item/stack/Move()

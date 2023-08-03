@@ -11,6 +11,10 @@
 	origin_tech = "{'magnets':1,'engineering':1}"
 	action_button_name = "Toggle T-Ray scanner"
 
+	cell = /obj/item/cell/device
+	cell_allowed = /obj/item/cell/device
+	power_usage = 100 //15 mins
+
 	var/scan_range = 3
 
 	var/on = 0
@@ -31,8 +35,11 @@
 /obj/item/t_scanner/emp_act()
 	audible_message(src, "<span class = 'notice'> \The [src] buzzes oddly.</span>")
 	set_active(FALSE)
+	. = ..()
 
 /obj/item/t_scanner/attack_self(mob/user)
+	if(!power_check(user))
+		return
 	set_active(!on)
 	user.update_action_buttons()
 
@@ -79,6 +86,10 @@
 	for(var/obj/O in update_remove)
 		user_client.images -= active_scanned[O]
 		active_scanned -= O
+
+	if(!power_check())
+		audible_message(SPAN_WARNING("\The [src] beeps unhappily."))
+		set_active(FALSE)
 
 //creates a new overlay for a scanned object
 /obj/item/t_scanner/proc/get_overlay(var/atom/movable/scanned)

@@ -16,15 +16,28 @@
 	var/open = FALSE
 	var/closed_attack_verbs = list("prodded", "tapped") //initial doesnt work with lists, rip
 
-/obj/item/knife/folding/attack_self(mob/user)
+/obj/item/knife/folding/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/folding_knife_adjust)
+
+/decl/interaction_handler/folding_knife_adjust
+	name = "Adjust Tool Behavior"
+	expected_target_type = /obj/item/knife/folding
+
+/decl/interaction_handler/folding_knife_adjust/invoked(var/atom/target, var/mob/user)
+	var/obj/item/knife/folding/R = target
+	var/datum/extension/tool/tool = get_extension(R, /datum/extension/tool)
+	return (tool?.handle_physical_manipulation(user))
+
+/obj/item/knife/folding/attack_self(var/mob/user)
 	open = !open
 	update_force()
 	update_icon()
 	if(open)
-		user.visible_message("<span class='warning'>\The [user] opens \the [src].</span>")
+		user.visible_message(SPAN_WARNING("\The [user] opens \the [src]."))
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 	else
-		user.visible_message("<span class='notice'>\The [user] closes \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] closes \the [src]."))
 	add_fingerprint(user)
 
 /obj/item/knife/folding/update_force()

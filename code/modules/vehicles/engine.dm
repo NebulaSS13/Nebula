@@ -30,8 +30,8 @@
 	desc = "A battery-powered engine used to power a small vehicle."
 	icon_state = "engine_electric"
 	trail_type = /datum/effect/effect/system/trail/ion
-	cost_per_move = 200	// W
-	var/obj/item/cell/cell
+	cost_per_move = 500	// W
+	cell_foreign = TRUE
 
 /obj/item/engine/electric/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I,/obj/item/cell))

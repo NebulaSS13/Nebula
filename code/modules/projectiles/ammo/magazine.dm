@@ -7,7 +7,7 @@
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
 	ammo_type = /obj/item/ammo_casing/pistol
-	max_ammo = 16
+	max_ammo = 12
 	multiple_sprites = TRUE
 
 /obj/item/ammo_magazine/pistol/empty

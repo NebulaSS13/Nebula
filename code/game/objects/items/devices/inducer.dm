@@ -12,16 +12,11 @@
 
 	var/powertransfer = 500
 	var/coefficient = 0.9
-	var/opened = FALSE
 	var/failsafe = 0
-	var/obj/item/cell/cell = /obj/item/cell
+	cell = /obj/item/cell/high
+	cell_allowed = /obj/item/cell
+	cell_cover = TRUE
 	var/recharging = FALSE
-
-/obj/item/inducer/Initialize()
-	. = ..()
-	if(ispath(cell))
-		cell = new cell(src)
-	update_icon()
 
 /obj/item/inducer/proc/induce(obj/item/cell/target)
 	var/obj/item/cell/MyC = get_cell()
@@ -34,11 +29,6 @@
 
 /obj/item/inducer/get_cell()
 	return cell
-
-/obj/item/inducer/emp_act(severity)
-	..()
-	if(cell)
-		cell.emp_act(severity)
 
 /obj/item/inducer/afterattack(obj/O, mob/living/carbon/user, var/proximity)
 	if (!proximity || user.a_intent == I_HURT || CannotUse(user) || !recharge(O, user))
@@ -53,31 +43,6 @@
 		to_chat(user, "<span class='warning'>\The [src]'s battery is dead!</span>")
 		return TRUE
 	return FALSE
-
-
-/obj/item/inducer/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
-		opened = !opened
-		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the battery compartment.</span>")
-		update_icon()
-	if(istype(W, /obj/item/cell))
-		if (istype(W, /obj/item/cell/device))
-			to_chat(user, "<span class='warning'>\The [src] only takes full-size power cells.</span>")
-			return
-		if(opened)
-			if(!cell)
-				if(!user.try_unequip(W, src))
-					return
-				to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
-				cell = W
-				update_icon()
-				return
-			else
-				to_chat(user, "<span class='notice'>\The [src] already has \a [cell] installed!</span>")
-				return
-	if(CannotUse(user) || recharge(W, user))
-		return
-	return ..()
 
 /obj/item/inducer/proc/recharge(atom/A, mob/user)
 	if(!isturf(A) && user.loc == A)
@@ -137,35 +102,14 @@
 /obj/item/inducer/attack(mob/M, mob/user)
 	return
 
-
 /obj/item/inducer/attack_self(mob/user)
-	if(opened && cell)
-		user.visible_message("\The [user] removes \the [cell] from \the [src]!","<span class='notice'>You remove \the [cell].</span>")
-		cell.update_icon()
-		user.put_in_hands(cell)
-		cell = null
-		update_icon()
-
-
-/obj/item/inducer/examine(mob/living/M)
-	. = ..()
-	var/obj/item/cell/MyC = get_cell()
-	if(MyC)
-		to_chat(M, "<span class='notice'>Its display shows: [MyC.percent()]%.</span>")
-	else
-		to_chat(M,"<span class='notice'>Its display is dark.</span>")
-	if(opened)
-		to_chat(M,"<span class='notice'>Its battery compartment is open.</span>")
+	if(cell_cover && cell)
+		remove_cell(user)
 
 /obj/item/inducer/on_update_icon()
 	. = ..()
-	if(opened)
+	if(cell_cover)
 		add_overlay("inducer-[get_cell()? "bat" : "nobat"]")
-
-/obj/item/inducer/Destroy()
-	. = ..()
-	if(!ispath(cell))
-		QDEL_NULL(cell)
 
 // module version
 

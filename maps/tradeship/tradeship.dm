@@ -1,7 +1,8 @@
 #if !defined(USING_MAP_DATUM)
 
-	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
+//	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
+/*
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
@@ -10,19 +11,21 @@
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
 	#include "../../mods/content/psionics/_psionics.dme"
 	#include "../../mods/content/scaling_descriptors.dm"
+*/
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
-	#include "../../mods/content/matchmaking/_matchmaking.dme"
+//	#include "../../mods/content/matchmaking/_matchmaking.dme"
 
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
 	#include "../../mods/mobs/borers/_borers.dme"
 
-	#include "../../mods/species/ascent/_ascent.dme"
-	#include "../../mods/species/serpentid/_serpentid.dme"
+	//#include "../../mods/species/ascent/_ascent.dme"
+	//#include "../../mods/species/serpentid/_serpentid.dme"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/neoavians/_neoavians.dme"
 	#include "../../mods/species/bayliens/_bayliens.dme"
-	#include "../../mods/species/vox/_vox.dme"
+	//#include "../../mods/species/vox/_vox.dme"
 
+/*
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/casino/casino.dm"
 	#include "../away/derelict/derelict.dm"
@@ -36,6 +39,7 @@
 	#include "../away/unishi/unishi.dm"
 	#include "../away/yacht/yacht.dm"
 	#include "../away/liberia/liberia.dm"
+*/
 
 	#include "tradeship_antagonists.dm"
 	#include "tradeship_areas.dm"

@@ -2,7 +2,7 @@
 	name = "battery backup"
 	desc = "A self-contained battery backup system, using replaceable cells to provide backup power."
 	icon_state = "battery0"
-	var/obj/item/cell/cell
+	cell_foreign = TRUE
 	var/charge_channel = ENVIRON  // The channel it attempts to charge from.
 	var/charge_rate = 1           // This is in battery units, per tick.
 	var/can_charge = TRUE
@@ -53,7 +53,7 @@
 	update_icon()
 	return cell
 
-/obj/item/stock_parts/power/battery/proc/remove_cell()
+/obj/item/stock_parts/power/battery/remove_cell()
 	if(cell)
 		events_repository.unregister(/decl/observ/destroyed, cell, src)
 		. = cell

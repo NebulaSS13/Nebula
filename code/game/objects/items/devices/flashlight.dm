@@ -26,11 +26,31 @@
 	light_wedge = LIGHT_WIDE
 	var/spawn_dir // a way for mappers to force which way a flashlight faces upon spawning
 
+	cell = /obj/item/cell/device
+	cell_allowed = /obj/item/cell/device
+	power_usage = 6.25 //2 hours of power
+
 /obj/item/flashlight/Initialize()
 	. = ..()
-
+	START_PROCESSING(SSobj, src)
 	set_flashlight()
 	update_icon()
+
+/obj/item/flashlight/Destroy()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
+
+/obj/item/flashlight/Process()
+	if(on && !power_check())
+		visible_message(SPAN_WARNING("\The [src] flickers and shuts off."))
+		on = FALSE
+		if(activation_sound)
+			playsound(get_turf(src), activation_sound, 75, 1)
+		set_flashlight()
+		update_icon()
+		var/mob/M = loc
+		if(istype(M))
+			M.update_action_buttons()
 
 /obj/item/flashlight/on_update_icon()
 	. = ..()
@@ -43,7 +63,10 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/item/flashlight/attack_self(mob/user)
-	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
+	if(!power_check(user))
+		return 0
+
+	if(flashlight_flags & FLASHLIGHT_ALWAYS_ON)
 		to_chat(user, "You cannot toggle the [name].")
 		return 0
 
@@ -175,6 +198,7 @@
 	item_state = "biglight"
 	flashlight_range = 6
 	flashlight_power = 3
+	power_usage = 3.125
 
 /obj/item/flashlight/flashdark
 	name = "flashdark"
@@ -195,6 +219,7 @@
 	w_class = ITEM_SIZE_TINY
 	flashlight_range = 2
 	light_wedge = LIGHT_OMNI
+	cell_allowed = null //its toooo small
 
 /obj/item/flashlight/pen/Initialize()
 	set_extension(src, /datum/extension/tool, list(TOOL_PEN = TOOL_QUALITY_DEFAULT), list(TOOL_PEN = list(TOOL_PROP_COLOR = "black", TOOL_PROP_COLOR_NAME = "black")))
@@ -225,9 +250,12 @@
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	flashlight_range = 2
 	light_wedge = LIGHT_OMNI
 	light_color = LIGHT_COLOR_FIRE
+	cell = /obj/item/cell
+	cell_allowed = /obj/item/cell
+	power_usage = 60
+	flashlight_range = 8
 
 /obj/item/flashlight/lantern/on_update_icon()
 	. = ..()
@@ -246,6 +274,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_TINY
 	flashlight_range = 2
+	cell_allowed = null
 
 
 // the desk lamps are a bit special
@@ -256,9 +285,10 @@
 	item_state = "lamp"
 	w_class = ITEM_SIZE_LARGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	flashlight_range = 5
+	flashlight_range = 2
 	light_wedge = LIGHT_OMNI
 	on = 1
+	power_usage = 1
 
 // green-shaded desk lamp
 /obj/item/flashlight/lamp/green
@@ -292,6 +322,7 @@
 	flashlight_range = 5
 	flashlight_power = 3
 	light_wedge = LIGHT_OMNI
+	cell_allowed = null
 
 	var/fuel = 0
 	var/on_damage = 7
@@ -367,7 +398,7 @@
 	randpixel = 12
 	produce_heat = 0
 	activation_sound = 'sound/effects/glowstick.ogg'
-
+	cell_allowed = null
 	flashlight_range = 3
 	flashlight_power = 2
 
@@ -429,7 +460,7 @@
 	w_class = ITEM_SIZE_TINY
 	on = TRUE //Bio-luminesence has one setting, on.
 	flashlight_flags = FLASHLIGHT_ALWAYS_ON
-
+	cell_allowed = null
 	flashlight_range = 5
 	light_wedge = LIGHT_OMNI
 
@@ -448,6 +479,9 @@
 	flashlight_power = 1
 	flashlight_range = 7
 	light_wedge = LIGHT_WIDE
+	cell = /obj/item/cell
+	cell_allowed = /obj/item/cell
+	power_usage = 80
 
 /obj/item/flashlight/lamp/floodlamp/green
 	icon_state = "greenfloodlamp"
