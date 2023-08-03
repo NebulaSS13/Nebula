@@ -78,7 +78,7 @@
 			var/obj/item/radio/radio = thing.get_radio(message_mode)
 			if(istype(radio))
 				LAZYDISTINCTADD(., radio)
-
+me
 // This proc takes in a string (message_mode) which maps to a radio key in global.department_radio_keys
 // It then processes the message_mode to implement an additional behavior needed for the message, such
 // as retrieving radios or looking for an intercom nearby.
