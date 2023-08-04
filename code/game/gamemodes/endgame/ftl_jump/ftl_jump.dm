@@ -141,4 +141,3 @@
 	color = "#ff9900"
 	alpha = 100
 	blend_mode = BLEND_SUBTRACT
-	layer = FULLSCREEN_LAYER
