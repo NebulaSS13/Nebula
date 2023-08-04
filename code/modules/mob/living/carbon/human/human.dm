@@ -569,8 +569,10 @@
 	// just the torso. It's assumed if we call this we want a full regen.
 	if(istype(new_bodytype))
 		mob_size = new_bodytype.mob_size
-		UpdateAppearance() // sync vars to DNA
 		new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
+		update_body(update_icons = FALSE)
+		update_hair(update_icons = FALSE)
+		update_eyes()
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
@@ -1249,7 +1251,7 @@
 		facial_hair_colour = root_bodytype.base_hair_color
 	if(!eye_colour)
 		eye_colour = root_bodytype.base_eye_color
-	root_bodytype.set_default_hair(src, override_existing = FALSE, defer_update_hair = TRUE)
+	root_bodytype.set_default_hair(src, override_existing = TRUE, defer_update_hair = TRUE)
 	if(!b_type && length(species?.blood_types))
 		b_type = pickweight(species.blood_types)
 
