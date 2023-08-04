@@ -17,7 +17,7 @@
 		BP_LIVER =    /obj/item/organ/internal/liver,
 		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes/avian
+		BP_EYES =     /obj/item/organ/internal/eyes
 	)
 	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/avian)
 	default_h_style = /decl/sprite_accessory/hair/avian

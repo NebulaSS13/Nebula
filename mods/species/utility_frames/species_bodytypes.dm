@@ -18,8 +18,8 @@
 	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/utility_frame)
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES      = /obj/item/organ/internal/eyes/robot/utility_frame,
-		BP_CELL = /obj/item/organ/internal/cell
+		BP_EYES      = /obj/item/organ/internal/eyes,
+		BP_CELL      = /obj/item/organ/internal/cell
 	)
 	base_markings = list(
 		/decl/sprite_accessory/marking/frame/plating = "#8888cc",

@@ -112,6 +112,7 @@
 	desc =             "A mass of carved and shaped spacetime."
 	icon_base =        'icons/mob/human_races/species/blueforged/body.dmi'
 	icon_deformed =    'icons/mob/human_races/species/blueforged/body.dmi'
+	eye_icon =         'icons/mob/human_races/species/blueforged/eyes.dmi'
 	body_flags =       BODY_FLAG_NO_DNA
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 
@@ -150,4 +151,3 @@
 	name = "bluespace prism"
 	desc = "You can see an endless blue plane when looking through it. Your eyes tingle if you stare too hard."
 	icon = 'icons/mob/human_races/species/blueforged/organs.dmi'
-	eye_icon = 'icons/mob/human_races/species/blueforged/eyes.dmi'

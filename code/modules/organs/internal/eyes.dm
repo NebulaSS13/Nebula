@@ -117,15 +117,11 @@
 	if(BP_IS_PROSTHETIC(src))
 		name = "optical sensor"
 		icon = 'icons/obj/robot_component.dmi'
-		flash_mod = 1
-		darksight_range = 2
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	else
 		name = initial(name)
 		icon = initial(icon)
-		flash_mod = initial(flash_mod)
-		darksight_range = initial(darksight_range)
 		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
 		verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	update_colour()
