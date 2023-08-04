@@ -499,13 +499,13 @@
 	if(!turret_stand)
 		turret_stand = image(icon, "turretCover")
 		turret_stand.layer = src.layer - 0.02
-		turret_stand.appearance_flags = KEEP_APART|RESET_TRANSFORM|TILE_BOUND|PIXEL_SCALE
+		turret_stand.appearance_flags |= KEEP_APART|RESET_TRANSFORM|TILE_BOUND
 		add_overlay(turret_stand)
 
 	if(!turret_ray)
 		turret_ray = image(icon, "turret_ray")
 		turret_ray.plane = ABOVE_LIGHTING_PLANE
-		turret_ray.appearance_flags = KEEP_APART|RESET_COLOR|TILE_BOUND|PIXEL_SCALE
+		turret_ray.appearance_flags |= KEEP_APART|RESET_COLOR|TILE_BOUND
 		turret_ray.mouse_opacity = FALSE
 
 		var/matrix/M = matrix(turret_ray.transform)
@@ -518,7 +518,7 @@
 	if(!transverse_left && leftmost_traverse)
 		transverse_left = image(icon, "transverse_indicator_left")
 		transverse_left.layer = src.layer - 0.01
-		transverse_left.appearance_flags = KEEP_APART|RESET_TRANSFORM|TILE_BOUND|PIXEL_SCALE
+		transverse_left.appearance_flags |= KEEP_APART|RESET_TRANSFORM|TILE_BOUND
 
 		// Rotate according to transverse
 		var/matrix/M = matrix(transverse_left.transform)
@@ -529,7 +529,7 @@
 	if(!transverse_right && rightmost_traverse)
 		transverse_right = image(icon, "transverse_indicator_right")
 		transverse_right.layer = src.layer - 0.01
-		transverse_right.appearance_flags = KEEP_APART|RESET_TRANSFORM|TILE_BOUND|PIXEL_SCALE
+		transverse_right.appearance_flags |= KEEP_APART|RESET_TRANSFORM|TILE_BOUND
 
 		// Rotate according to transverse
 		var/matrix/M = matrix(transverse_right.transform)

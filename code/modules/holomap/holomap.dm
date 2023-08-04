@@ -210,7 +210,7 @@
 	maptext_width = 128
 	layer = HUD_ITEM_LAYER
 	pixel_x = HOLOMAP_LEGEND_X
-	appearance_flags = PIXEL_SCALE | RESET_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	var/saved_color
 	var/datum/station_holomap/owner = null
 	var/has_areas = FALSE
@@ -360,7 +360,7 @@
 				var/obj/screen/maptext_overlay = new(null)
 				maptext_overlay.icon = null
 				maptext_overlay.layer = HUD_ITEM_LAYER
-				maptext_overlay.appearance_flags |= RESET_COLOR | PIXEL_SCALE
+				maptext_overlay.appearance_flags |= RESET_COLOR
 				maptext_overlay.maptext = STYLE_SMALLFONTS_OUTLINE("<center>LEVEL [level-1]</center>", 7, COLOR_WHITE, COLOR_BLACK)
 				maptext_overlay.maptext_width = 96
 				maptext_overlay.pixel_x = (HOLOMAP_ICON_SIZE / 2) - (maptext_overlay.maptext_width / 2)
