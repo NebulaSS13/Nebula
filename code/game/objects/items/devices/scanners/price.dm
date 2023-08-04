@@ -18,12 +18,12 @@
 		scanner_currency = global.using_map.default_currency
 
 /obj/item/scanner/price/is_valid_scan_target(atom/movable/target)
-	return istype(target) && target.get_combined_monetary_worth() > 0
+	return istype(target) && target.price() > 0
 
 /obj/item/scanner/price/scan(atom/movable/target, mob/user)
 	scan_title = "Price estimations"
 	var/decl/currency/cur = GET_DECL(scanner_currency)
-	var/data = "\The [target]: [cur.format_value(target.get_combined_monetary_worth())]"
+	var/data = "\The [target]: [cur.format_value(target.price())]"
 	if(!scan_data)
 		scan_data = data
 	else

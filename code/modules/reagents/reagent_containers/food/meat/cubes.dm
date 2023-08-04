@@ -17,10 +17,10 @@
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
-/obj/item/chems/food/monkeycube/get_single_monetary_worth()
-	. = (monkey_type ? round(atom_info_repository.get_combined_worth_for(monkey_type) * 1.25) : 5)
+/obj/item/chems/food/monkeycube/worth()
+	. = (monkey_type ? round(atom_info_repository.get_worth_for(monkey_type)) : 1)
 	if(wrapper_type)
-		. += atom_info_repository.get_combined_worth_for(wrapper_type)
+		. += atom_info_repository.get_worth_for(wrapper_type)
 
 /obj/item/chems/food/monkeycube/attack_self(var/mob/user)
 	if(wrapper_type)

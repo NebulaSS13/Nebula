@@ -11,6 +11,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_WINDOW_LAYER
 	cell = null
+	cell_allowed = null
 	power_usage = 0
 	intercom = TRUE
 	intercom_handling = TRUE
@@ -62,9 +63,14 @@
 		if (on != old_on)
 			update_icon()
 
+/obj/item/radio/intercom/can_receive_message()
+	var/area/A = get_area(src)
+	if(!A) return FALSE
+	return ..() && A.powered(EQUIP)
+
 /obj/item/radio/intercom/on_update_icon()
 	. = ..()
-	if(!on)
+	if(!can_receive_message())
 		icon_state = "intercom-p"
 	else
 		icon_state = "intercom_[broadcasting][listening]"

@@ -3,17 +3,11 @@
 /obj/item/radio/proc/can_receive_analog(datum/radio_frequency/connection, level)
 	if(!analog || !istype(analog_radio_connection) || connection != analog_radio_connection)
 		return FALSE
-	if(!listening)
-		return FALSE
-	if (!on)
-		return FALSE
 	if(QDELETED(src))
-		return FALSE
-	if (wires.IsIndexCut(WIRE_RECEIVE))
 		return FALSE
 	if(!(0 in level) && !(get_z(src) in level))
 		return FALSE
-	return TRUE
+	return can_receive_message(FALSE)
 
 /proc/broadcast_analog_radio_message(datum/radio_frequency/connection, mob/speaker,
 	obj/item/radio/radio, message, intercom_only = FALSE,
@@ -88,6 +82,7 @@
 /obj/item/radio/shortwave
 	name = "shortwave radio"
 	desc = "A shortwave radio. Unlike modern radios which support digital mode, this radio is dirt-cheap and solely supports analog connections."
+	icon_state = "walkietalkie" //its yellow cuz emergency n stuff
 	radio_device_type = null // can only use analog
 	can_use_analog = TRUE
 	analog = TRUE

@@ -1,6 +1,6 @@
 /datum/computer_file/program/wordprocessor
 	filename = "wordprocessor"
-	filedesc = "NanoWord"
+	filedesc = "Word Processor"
 	extended_desc = "This program allows the editing and preview of text documents."
 	program_icon_state = "word"
 	program_key_state = "atmos_key"
@@ -117,7 +117,7 @@
 			saving.stored_data = loaded_data
 			view_file_browser(usr, "saveas_file", /datum/computer_file/data/text, OS_WRITE_ACCESS, browser_desc, saving)
 			return TOPIC_HANDLED
-		
+
 		save_file(usr)
 		return TOPIC_REFRESH
 

@@ -10,7 +10,7 @@
 	// code sharing between scrubbers and vents
 	var/controlled = TRUE	// if true, report to air alarm, if false, probably in direct contact with something else by radio (e.g. airlocks)
 
-/obj/machinery/atmospherics/unary/get_single_monetary_worth()
+/obj/machinery/atmospherics/unary/worth()
 	. = ..()
 	for(var/gas in air_contents?.gas)
 		var/decl/material/gas_data = GET_DECL(gas)
@@ -34,7 +34,7 @@
 /obj/machinery/atmospherics/unary/physically_destroyed()
 	if(loc && air_contents)
 		loc.assume_air(air_contents)
-	. = ..()	
+	. = ..()
 
 /obj/machinery/atmospherics/unary/dismantle()
 	if(loc && air_contents)

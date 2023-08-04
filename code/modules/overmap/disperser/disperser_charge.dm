@@ -12,7 +12,7 @@
 	var/chargetype
 	var/chargedesc
 
-/obj/structure/ship_munition/disperser_charge/get_single_monetary_worth()
+/obj/structure/ship_munition/disperser_charge/price()
 	. = round(..() * 3) // Artificially inflate the value a bit.
 
 /obj/structure/ship_munition/disperser_charge/Initialize(ml, _mat, _reinf_mat)

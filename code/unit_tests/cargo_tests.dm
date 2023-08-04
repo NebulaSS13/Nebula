@@ -42,7 +42,7 @@
 	for(var/decl/hierarchy/supply_pack/supply_pack in SSsupply.master_supply_list)
 		var/sell_price = supply_pack.cost * SSsupply.slip_return_rebate
 		if(supply_pack.containertype)
-			sell_price += atom_info_repository.get_single_worth_for(supply_pack.containertype) * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.crate_return_rebate
+			sell_price += atom_info_repository.get_price_for(supply_pack.containertype) * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.crate_return_rebate
 		if(supply_pack.cost <= sell_price)
 			log_bad("[supply_pack.name] ([supply_pack.type]) costs [supply_pack.cost], but can be sold for [sell_price].")
 			fail = TRUE

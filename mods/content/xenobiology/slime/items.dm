@@ -15,7 +15,7 @@
 	var/Uses = 1 // uses before it goes inert
 	var/enhanced = 0 //has it been enhanced before?
 
-/obj/item/slime_extract/get_base_value()
+/obj/item/slime_extract/worth()
 	. = ..() * Uses
 
 /obj/item/slime_extract/attackby(obj/item/O, mob/user)

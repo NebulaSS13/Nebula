@@ -30,7 +30,7 @@
 		return user.Adjacent(src) && !user.incapacitated(INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
 	return ..()
 
-/obj/structure/bed/get_base_value()
+/obj/structure/bed/price()
 	. = round(..() * 2.5) // Utility structures should be worth more than their matter (wheelchairs, rollers, etc).
 
 /obj/structure/bed/update_material_name()
@@ -273,8 +273,11 @@
 	)
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 
-/obj/item/roller/get_single_monetary_worth()
-	. = structure_form_type ? atom_info_repository.get_combined_worth_for(structure_form_type) : ..()
+/obj/item/roller/worth()
+	. = structure_form_type ? atom_info_repository.get_worth_for(structure_form_type) : ..()
+
+/obj/item/roller/price()
+	. = structure_form_type ? atom_info_repository.get_price_for(structure_form_type) : ..()
 
 /obj/item/roller/attack_self(mob/user)
 	var/obj/structure/bed/roller/R = new structure_form_type(user.loc)

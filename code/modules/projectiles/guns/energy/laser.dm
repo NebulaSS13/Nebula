@@ -181,8 +181,8 @@
 	material = null //no recycling antique shit
 	matter = list()
 
-/obj/item/gun/energy/captain/get_base_value()
-	. = ..() * 200 //now its actually fucking pricy
+/obj/item/gun/energy/captain/price()
+	. = ..() * 50 //now its actually pricy, antique, handcrafted, basically a treasure
 
 //Lasertag
 

@@ -179,7 +179,7 @@ var/global/list/telecomms_hubs = list()
 		var/list/check_channels = R.get_available_channels()
 		if(!LAZYACCESS(check_channels, channel))
 			continue
-
+		R.received_chatter(FALSE, FALSE)
 		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors["[speaking_from.z]"]
 		for(var/mob/listener in hearers(R.canhear_range, speaking_from))
 			// If we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's

@@ -10,6 +10,7 @@
 	lit_colour = COLOR_CYAN_BLUE
 	cell = /obj/item/cell/high
 	cell_allowed = /obj/item/cell
+	cell_indicator = FALSE
 	var/fuel_cost_multiplier = 10
 
 /obj/item/weldingtool/electric/examine(mob/user, distance)

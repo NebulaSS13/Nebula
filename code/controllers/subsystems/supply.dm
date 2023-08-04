@@ -86,7 +86,7 @@ SUBSYSTEM_DEF(supply)
 			if(istype(AM, /obj/structure/closet/crate/))
 				var/obj/structure/closet/crate/CR = AM
 				callHook("sell_crate", list(CR, subarea))
-				add_points_from_source(CR.get_single_monetary_worth() * crate_return_rebate * 0.1, "crate")
+				add_points_from_source(CR.price() * crate_return_rebate * 0.1, "crate")
 				var/find_slip = 1
 
 				for(var/atom in CR)
@@ -101,12 +101,12 @@ SUBSYSTEM_DEF(supply)
 
 					// Sell materials
 					if(is_type_in_list(A.type, saleable_materials))
-						add_points_from_source(A.get_combined_monetary_worth() * goods_sale_modifier * 0.1, "goods")
+						add_points_from_source(A.price() * goods_sale_modifier * 0.1, "goods")
 
 					// Must sell ore detector disks in crates
 					if(istype(A, /obj/item/disk/survey))
 						var/obj/item/disk/survey/D = A
-						add_points_from_source(D.get_combined_monetary_worth() * 0.005, "data")
+						add_points_from_source(D.price(), "data")
 
 			qdel(AM)
 

@@ -12,7 +12,6 @@
 	assembly_name = "computer"
 	max_parts = list(
 		PART_D_SLOT		= 1,
-		PART_BATTERY 	= 1,
 		PART_CPU		= 1,
 		PART_NETWORK	= 1,
 		PART_HDD		= 1,

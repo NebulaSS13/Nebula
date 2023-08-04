@@ -5,10 +5,11 @@
 /obj/item/proc/get_max_weapon_value()
 	return force
 
-/obj/item/get_base_value()
+/obj/item/price()
 	. = ..()
+
 	if(istype(src,/obj/item/stack))
-		return .
+		return worth() //please no
 
 	if(origin_tech)
 		var/largest_tech_val = 0
@@ -68,7 +69,7 @@
 #undef MUNDANE_ARMOUR_VALUE
 #undef BASE_ARMOUR_WORTH
 
-/obj/item/organ/get_single_monetary_worth()
+/obj/item/organ/price()
 	. = ..()
 	if(species)
 		. = round(. * species.rarity_value)

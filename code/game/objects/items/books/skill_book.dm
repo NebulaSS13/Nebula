@@ -85,7 +85,7 @@ Skill books that increase your skills while you activate and hold them
 /datum/skill_buff/skill_book
 	limit = 1 // you can only read one book at a time nerd, therefore you can only get one buff at a time
 
-/obj/item/book/skill/get_single_monetary_worth()
+/obj/item/book/skill/price()
 	. = max(..(), 200) + (100 * skill_req)
 
 /obj/item/book/skill/proc/check_can_read(mob/user)

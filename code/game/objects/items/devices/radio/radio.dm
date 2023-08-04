@@ -24,7 +24,7 @@
 	desc = "A radio that can transmit in analog or digital modes."
 	icon = 'icons/obj/items/device/radio/radio.dmi'
 	suffix = "\[3\]"
-	icon_state = "walkietalkie"
+	icon_state = "walkietalkie_gray"
 	item_state = "walkietalkie"
 
 	var/intercom = FALSE // If an intercom, will receive data == 1 packets.
@@ -68,10 +68,15 @@
 	var/datum/radio_frequency/analog_radio_connection
 
 /obj/item/radio/on_update_icon()
-	if(!cell?.percent() || !(broadcasting || listening))
+	. = ..()
+	if(!can_receive_message(FALSE) && check_state_in_icon("[initial(icon_state)]-off", icon))
 		icon_state = "[initial(icon_state)]-off"
 	else
 		icon_state = initial(icon_state)
+		if(radio_device_type && analog && check_state_in_icon("[initial(icon_state)]-analog", icon))
+			add_overlay("[initial(icon_state)]-analog")
+	if(cell && check_state_in_icon("[initial(icon_state)]-cell", icon))
+		add_overlay("[initial(icon_state)]-cell")
 
 /obj/item/radio/get_radio(var/message_mode)
 	return src
@@ -184,7 +189,7 @@
 		data["charge"] = charge ? "[charge]%" : "NONE"
 	data["mic_cut"] = (wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
 	data["spk_cut"] = (wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
-
+	data["poweruse"] = power_usage
 	var/list/current_channels = get_available_channels()
 	if(length(current_channels))
 		data["show_channels"] = TRUE
@@ -205,7 +210,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
+		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 600, 430)
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -214,6 +219,11 @@
 	if((last_radio_sound + 1 SECOND) < world.time)
 		playsound(loc, 'sound/effects/radio_chatter.ogg', 10, 0, -6)
 		last_radio_sound = world.time
+		if(check_state_in_icon("[initial(icon_state)]-active", icon))
+			icon_state = "[initial(icon_state)]-active"
+			if(radio_device_type && analog && check_state_in_icon("[initial(icon_state)]-analog", icon))
+				icon_state = "[initial(icon_state)]-analog-active"
+			addtimer(CALLBACK(src, /atom/proc/update_icon), 30)
 
 /obj/item/radio/proc/has_channel_access(var/mob/user, var/freq)
 	return TRUE // TODO: add antag/valid bounds checking
@@ -223,11 +233,6 @@
 
 /obj/item/radio/proc/toggle_reception()
 	listening = !listening && !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
-
-/obj/item/radio/CanUseTopic()
-	if(!on)
-		return STATUS_CLOSE
-	return ..()
 
 /obj/item/radio/OnTopic(href, href_list)
 	if((. = ..()))
@@ -326,7 +331,7 @@
 
 /obj/item/radio/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
 	set waitfor = FALSE
-	if(!on) return 0 // the device has to be on
+	if(!can_receive_message(FALSE)) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return 0
 
@@ -372,8 +377,12 @@
 	if(loc && loc == speaker)
 		playsound(loc, 'sound/effects/walkietalkie.ogg', 20, 0, -1)
 
-	icon_state = "[initial(icon_state)]-active"
-	addtimer(CALLBACK(src, /atom/proc/update_icon), 20)
+	if(check_state_in_icon("[initial(icon_state)]-active", icon))
+		if(radio_device_type && analog && check_state_in_icon("[initial(icon_state)]-analog", icon))
+			icon_state = "[initial(icon_state)]-analog-active"
+		else
+			icon_state = "[initial(icon_state)]-active"
+		addtimer(CALLBACK(src, /atom/proc/update_icon), 30)
 
 	if(message_mode == MESSAGE_MODE_SPECIAL && can_transmit_binary())
 		var/decl/language/binary/binary = GET_DECL(/decl/language/binary)
@@ -438,7 +447,7 @@
 				break // Only one hub per message, since it transmits over the whole network.
 
 /obj/item/radio/proc/can_receive_message(var/check_network_membership)
-	. = on
+	. = listening && (round(cell?.percent()) || !power_usage) && !wires?.IsIndexCut(WIRE_RECEIVE) && on
 	if(. && check_network_membership)
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		return network_device?.get_network() == check_network_membership
@@ -520,8 +529,8 @@
 //a big radio. for you. (use normal cells but waste space, I guess)
 
 /obj/item/radio/utility
-	name = "utility radio"
-	desc = "A bulky job-site radio station that can make powerful transmissions in analog or digital modes. Has a sensitive microphone. Favored for its big cell compartment."
+	name = "dual-band utility radio"
+	desc = "A bulky job site radio station that can make powerful multi-band transmissions. The speaker is really loud and the microphone is sensitive. Favored for its big cell compartment."
 	icon_state = "radio_utility"
 	power_usage = 8000
 	cell = /obj/item/cell
@@ -531,7 +540,7 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 				/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 				/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
-	w_class = ITEM_SIZE_LARGE //to balance for big cells
+	w_class = ITEM_SIZE_LARGE //to balance for big cells and wide hear range
 
 /obj/item/radio/utility/off
 	listening = FALSE

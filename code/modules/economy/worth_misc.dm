@@ -1,2 +1,2 @@
-/obj/item/disk/survey/get_base_value()
+/obj/item/disk/survey/price()
 	. = sqrt(data) * 5

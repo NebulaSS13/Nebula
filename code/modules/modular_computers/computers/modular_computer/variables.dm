@@ -21,3 +21,7 @@
 	var/list/default_hardware = list()
 	var/list/default_programs = list()
 	var/computer_type = /datum/extension/assembly/modular_computer
+
+//battery parts were removed in favor to this, yeah. they were conceptually wrong
+	cell = /obj/item/cell/device
+	cell_allowed = /obj/item/cell/device

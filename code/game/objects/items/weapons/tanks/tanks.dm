@@ -83,7 +83,7 @@ var/global/list/global/tank_gauge_cache = list()
 
 	. = ..()
 
-/obj/item/tank/get_single_monetary_worth()
+/obj/item/tank/worth()
 	. = ..()
 	for(var/gas in air_contents?.gas)
 		var/decl/material/gas_data = GET_DECL(gas)

@@ -11,6 +11,7 @@
 	var/protects_against_weather = FALSE
 	var/image/light_overlay_image
 	var/light_overlay = "helmet_light"
+	var/light_overlay_override = FALSE //all light icons are currently in src.icon, external overlay is wrong
 	var/light_applied
 	var/brightness_on
 	var/on = 0
@@ -20,9 +21,9 @@
 	..(user, slot)
 
 /obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	if(overlay && on && slot == slot_head_str)
-		overlay.overlays += overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
 	. = ..()
+	if(overlay && on && slot == slot_head_str && light_overlay_override)
+		overlay.add_overlay(overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR))
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -75,12 +76,12 @@
 		var/cache_key = "[icon]-[get_world_inventory_state()]_icon"
 		if(!light_overlay_cache[cache_key])
 			light_overlay_cache[cache_key] = image(icon, "[get_world_inventory_state()]_light")
-		overlays |= light_overlay_cache[cache_key]
+		add_overlay(light_overlay_cache[cache_key])
 		return
 
-	if(!light_overlay_cache["[light_overlay]_icon"])
-		light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
-	overlays |= light_overlay_cache["[light_overlay]_icon"]
+//	if(!light_overlay_cache["[light_overlay]_icon"])
+//		light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
+//	add_overlay(light_overlay_cache["[light_overlay]_icon"])
 
 /obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))
@@ -89,7 +90,7 @@
 			var/mob/living/carbon/human/H = user_mob
 			if(H.get_bodytype_category() != bodytype)
 				light_overlay = H.bodytype.get_offset_overlay_image(FALSE, light_overlay.icon, light_overlay.icon_state, null, slot)
-		overlay.overlays += light_overlay
+		overlay.add_overlay(light_overlay)
 	. = ..()
 
 /obj/item/clothing/head/update_clothing_icon()

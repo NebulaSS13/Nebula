@@ -61,6 +61,10 @@
 /obj/item/t_scanner/Process()
 	if(!on) return
 
+	if(!power_check())
+		audible_message(SPAN_WARNING("\The [src] beeps unhappily."))
+		set_active(FALSE)
+
 	//handle clients changing
 	var/client/loc_client = null
 	if(ismob(src.loc))
@@ -86,10 +90,6 @@
 	for(var/obj/O in update_remove)
 		user_client.images -= active_scanned[O]
 		active_scanned -= O
-
-	if(!power_check())
-		audible_message(SPAN_WARNING("\The [src] beeps unhappily."))
-		set_active(FALSE)
 
 //creates a new overlay for a scanned object
 /obj/item/t_scanner/proc/get_overlay(var/atom/movable/scanned)

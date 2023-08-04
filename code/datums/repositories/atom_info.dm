@@ -2,8 +2,8 @@ var/global/repository/atom_info/atom_info_repository = new()
 
 /repository/atom_info
 	var/list/matter_cache =         list()
-	var/list/combined_worth_cache = list()
-	var/list/single_worth_cache =   list()
+	var/list/worth_cache =          list()
+	var/list/price_cache =          list()
 	var/list/name_cache =           list()
 	var/list/matter_mult_cache =    list()
 
@@ -31,14 +31,14 @@ var/global/repository/atom_info/atom_info_repository = new()
 			for(var/obj/thing in instance)
 				var/list/thing_matter = thing.building_cost()
 				for(var/mat in thing_matter)
-					matter_cache[mat] += thing_matter[mat] 
+					matter_cache[mat] += thing_matter[mat]
 		matter_cache[key] = matter_list
-	if(!combined_worth_cache[key])
+	if(!worth_cache[key])
 		instance = instance || get_instance_of(path, material, amount)
-		combined_worth_cache[key] = instance.get_combined_monetary_worth()
-	if(!single_worth_cache[key])
+		worth_cache[key] = instance.worth()
+	if(!price_cache[key])
 		instance = instance || get_instance_of(path, material, amount)
-		single_worth_cache[key] = instance.get_single_monetary_worth()
+		price_cache[key] = instance.price()
 	if(!name_cache[key])
 		instance = instance || get_instance_of(path, material, amount)
 		name_cache[key] = instance.name
@@ -53,15 +53,15 @@ var/global/repository/atom_info/atom_info_repository = new()
 	update_cached_info_for(path, material, amount, key)
 	. = matter_cache[key]
 
-/repository/atom_info/proc/get_combined_worth_for(var/path, var/material, var/amount)
+/repository/atom_info/proc/get_worth_for(var/path, var/material, var/amount)
 	var/key = create_key_for(path, material, amount)
 	update_cached_info_for(path, material, amount, key)
-	. = combined_worth_cache[key]
+	. = worth_cache[key]
 
-/repository/atom_info/proc/get_single_worth_for(var/path, var/material, var/amount)
+/repository/atom_info/proc/get_price_for(var/path, var/material, var/amount)
 	var/key = create_key_for(path, material, amount)
 	update_cached_info_for(path, material, amount, key)
-	. = single_worth_cache[key]
+	. = price_cache[key]
 
 /repository/atom_info/proc/get_name_for(var/path, var/material, var/amount)
 	var/key = create_key_for(path, material, amount)

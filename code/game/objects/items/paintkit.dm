@@ -9,7 +9,7 @@
 	var/uses = 1                 // Uses before the kit deletes itself.
 	var/custom = FALSE
 
-/obj/item/kit/get_single_monetary_worth()
+/obj/item/kit/price()
 	. = max(round(..()), (custom ? 100 : 750) * uses) // Luxury good, value is entirely artificial.
 
 /obj/item/kit/examine(mob/user)

@@ -121,7 +121,7 @@
 		return 0
 	var/decl/starting_cash_choice/cash = GET_DECL(H.client.prefs.starting_cash_choice)
 	for(var/obj/item/thing in cash.get_cash_objects(H, M))
-		. += thing.get_base_value()
+		. += thing.price()
 		H.equip_to_storage_or_put_in_hands(thing)
 
 /datum/job/proc/get_total_starting_money(var/mob/living/carbon/human/H)

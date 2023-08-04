@@ -11,7 +11,7 @@
 	var/destroyed = 0
 	var/start_pressure = ONE_ATMOSPHERE
 
-/obj/machinery/portable_atmospherics/get_single_monetary_worth()
+/obj/machinery/portable_atmospherics/worth()
 	. = ..()
 	for(var/gas in air_contents?.gas)
 		var/decl/material/gas_data = GET_DECL(gas)

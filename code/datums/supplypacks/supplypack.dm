@@ -23,10 +23,10 @@ var/global/list/cargoprices = list()
 	if(isnull(cost))
 		cost = 0
 		for(var/entry in contains)
-			cost += atom_info_repository.get_combined_worth_for(entry) * max(1, contains[entry])
-		var/container_value = containertype ? atom_info_repository.get_single_worth_for(containertype) : 0
+			cost += atom_info_repository.get_price_for(entry) * max(1, contains[entry])
+		var/container_value = containertype ? atom_info_repository.get_price_for(containertype) : 0
 		if(container_value)
-			cost += atom_info_repository.get_single_worth_for(containertype)
+			cost += atom_info_repository.get_price_for(containertype)
 		cost = max(1, NONUNIT_CEILING((cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup), WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
 	global.cargoprices[name] = cost
 

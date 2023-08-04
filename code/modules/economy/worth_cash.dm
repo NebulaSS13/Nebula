@@ -24,8 +24,8 @@
 	if(absolute_worth > 0)
 		update_from_worth()
 
-/obj/item/cash/get_base_value()
-	. = holographic ? 0 : absolute_worth
+/obj/item/cash/price()
+	. = absolute_worth
 
 /obj/item/cash/proc/set_currency(var/new_currency)
 	currency = new_currency
@@ -163,7 +163,6 @@
 	currency = /decl/currency/trader
 	absolute_worth = 200
 
-
 /obj/item/cash/scavbucks
 	currency = /decl/currency/scav
 	absolute_worth = 10
@@ -218,8 +217,8 @@
 			var/decl/currency/cur = GET_DECL(currency)
 			to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [FLOOR(loaded_worth / cur.absolute_value)]."))
 
-/obj/item/charge_stick/get_base_value()
-	. = holographic ? 0 : loaded_worth
+/obj/item/charge_stick/price()
+	. = loaded_worth
 
 /obj/item/charge_stick/attackby(var/obj/item/W, var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
