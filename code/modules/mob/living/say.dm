@@ -165,9 +165,9 @@
 		return 1
 
 	if(!speaking || !(speaking.flags & LANG_FLAG_SIGNLANG))
-		var/obj/item/muzzled = is_muzzled()
-		if(muzzled)
-			to_chat(src, SPAN_WARNING("You're can't speak, \the [muzzled] is in the way!"))
+		var/obj/item/muzzle = get_item_blocking_speech()
+		if(muzzle)
+			to_chat(src, SPAN_WARNING("You're can't speak, \the [muzzle] is in the way!"))
 			return
 
 	if (speaking)

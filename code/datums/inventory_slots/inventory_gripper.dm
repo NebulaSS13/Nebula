@@ -37,10 +37,6 @@
 	ui_label = "M"
 	hand_sort_priority = 3
 
-/datum/inventory_slot/gripper/mouth/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
-	if(_holding)
-		return "[pronouns.He] [pronouns.is] holding [_holding.get_examine_line()] in [pronouns.his] mouth."
-
 /datum/inventory_slot/gripper/mouth/can_equip_to_slot(mob/user, obj/item/prop, disable_warning)
 	. = ..() && prop.w_class <= user.can_pull_size
 

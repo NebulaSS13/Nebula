@@ -251,7 +251,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 					to_chat(user, "<span class='warning'>You can't cast spells while incapacitated!</span>")
 					return 0
 
-			if(ishuman(user) && !(invocation_type in list(SpI_EMOTE, SpI_NONE)) && user.is_muzzled())
+			if(ishuman(user) && !(invocation_type in list(SpI_EMOTE, SpI_NONE)) && user.get_item_blocking_speech())
 				to_chat(user, "Mmmf mrrfff!")
 				return 0
 

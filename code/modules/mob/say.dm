@@ -109,9 +109,9 @@ var/global/list/special_channel_keys = list(
 			return L
 
 /mob/proc/is_silenced()
-	. = !!is_muzzled()
+	. = !!get_item_blocking_speech()
 
-/mob/proc/is_muzzled()
+/mob/proc/get_item_blocking_speech()
 	// Can't talk with something in your mouth.
 	var/datum/inventory_slot/mouth_slot = get_inventory_slot_datum(BP_MOUTH)
 	. = mouth_slot?.get_equipped_item()
