@@ -116,7 +116,7 @@
 		reagents.add_reagent(reagent_to_add, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
-	if(istype(bodytype) && bodytype.body_flags & BODY_FLAG_NO_DNA)
+	if(istype(bodytype) && (bodytype.body_flags & BODY_FLAG_NO_DNA))
 		QDEL_NULL(dna)
 		return
 	if(new_dna != dna) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?

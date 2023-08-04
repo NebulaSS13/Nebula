@@ -3,7 +3,7 @@
 	desc =             "A wound of darkness inflicted upon the world."
 	icon_base =        'icons/mob/human_races/species/shadow/body.dmi'
 	icon_deformed =    'icons/mob/human_races/species/shadow/body.dmi'
-	body_flags =       BODY_FLAG_NO_DNA
+	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	eye_darksight_range = 8
 
 /decl/blood_type/shadowstuff

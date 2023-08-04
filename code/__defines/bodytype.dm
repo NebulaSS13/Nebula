@@ -24,3 +24,5 @@
 #define BODY_FLAG_NO_PAIN             BITFLAG(1) // Cannot suffer halloss/recieves deceptive health indicator.
 #define BODY_FLAG_NO_EAT              BITFLAG(2) // Cannot eat food/drink drinks even if a stomach organ is present.
 #define BODY_FLAG_CRYSTAL_REFORM      BITFLAG(3) // Can regenerate missing limbs from mineral baths.
+#define BODY_FLAG_NO_STASIS           BITFLAG(4) // Does not experience stasis effects (sleeper, cryo)
+#define BODY_FLAG_NO_DEFIB            BITFLAG(5) // Cannot be revived with a defibrilator.

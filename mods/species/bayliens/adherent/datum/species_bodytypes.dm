@@ -9,7 +9,7 @@
 	antaghud_offset_y =         14
 	movement_slowdown =         -1
 	appearance_flags =          HAS_EYE_COLOR
-	body_flags =                BODY_FLAG_CRYSTAL_REFORM | BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT
+	body_flags =                BODY_FLAG_CRYSTAL_REFORM | BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	base_eye_color =            COLOR_LIME
 	modifier_string =           "crystalline"
 	is_robotic =                FALSE
