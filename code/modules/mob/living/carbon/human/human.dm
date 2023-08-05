@@ -570,7 +570,8 @@
 	if(istype(new_bodytype))
 		mob_size = new_bodytype.mob_size
 		new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
-		update_body(update_icons = FALSE)
+		apply_bodytype_appearance()
+		force_update_limbs()
 		update_hair(update_icons = FALSE)
 		update_eyes()
 
@@ -602,6 +603,7 @@
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
+	apply_species_appearance()
 
 	var/decl/pronouns/new_pronouns = get_pronouns_by_gender(get_gender())
 	if(!istype(new_pronouns) || !(new_pronouns in species.available_pronouns))
@@ -692,12 +694,6 @@
 		species.apply_appearance(src)
 
 	force_update_limbs()
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	default_pixel_x = initial(pixel_x) + root_bodytype.pixel_offset_x
-	default_pixel_y = initial(pixel_y) + root_bodytype.pixel_offset_y
-	default_pixel_z = initial(pixel_z) + root_bodytype.pixel_offset_z
-
-	reset_offsets()
 
 	// Rebuild the HUD and visual elements only if we got a client.
 	hud_reset(TRUE)
@@ -709,6 +705,11 @@
 		skin_colour = COLOR_BLACK
 	else
 		root_bodytype.apply_appearance(src)
+		default_pixel_x = initial(pixel_x) + root_bodytype.pixel_offset_x
+		default_pixel_y = initial(pixel_y) + root_bodytype.pixel_offset_y
+		default_pixel_z = initial(pixel_z) + root_bodytype.pixel_offset_z
+
+	reset_offsets()
 
 /mob/living/carbon/human/proc/update_languages()
 	if(!length(cultural_info))
@@ -1263,8 +1264,6 @@
 
 	species.handle_pre_spawn(src)
 	apply_species_cultural_info()
-	apply_species_appearance()
-	apply_bodytype_appearance()
 	species.handle_post_spawn(src)
 
 	UpdateAppearance() //Apply dna appearance to mob, causes DNA to change because filler values are regenerated
