@@ -27,7 +27,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/stack/materi
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "extractor"
 	layer = MOB_LAYER+1 // Overhead
-	density = 1
+	density = TRUE
 
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT //We wanna disable those to trigger reactions on our own terms
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE

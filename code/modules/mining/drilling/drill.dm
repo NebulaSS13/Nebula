@@ -1,8 +1,8 @@
 /obj/machinery/mining
 	icon = 'icons/obj/mining_drill.dmi'
-	anchored = 0
+	anchored = FALSE
 	use_power = POWER_USE_OFF //The drill takes power directly from a cell.
-	density = 1
+	density = TRUE
 	layer = ABOVE_HUMAN_LAYER //So it draws over mobs in the tile north of it.
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

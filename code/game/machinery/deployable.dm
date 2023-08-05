@@ -9,8 +9,8 @@
 	name = "deployable barrier"
 	desc = "A deployable barrier. Swipe your ID card to lock/unlock it."
 	icon = 'icons/obj/objects.dmi'
-	anchored = 0.0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	icon_state = "barrier0"
 	var/health = 100.0
 	var/maxhealth = 100.0
@@ -91,7 +91,7 @@
 /obj/machinery/deployable/barrier/physically_destroyed(skip_qdel)
 	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 1, /obj/item/stack/material/rods)
 	. = ..()
-	
+
 /obj/machinery/deployable/barrier/proc/explode()
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	spark_at(src, cardinal_only = TRUE)

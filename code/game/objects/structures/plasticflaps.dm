@@ -3,8 +3,8 @@
 	desc = "Completely impassable - or are they?"
 	icon = 'icons/obj/structures/plastic_flaps.dmi'
 	icon_state = "plasticflaps"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 
@@ -74,5 +74,5 @@
 	atmos_canpass = CANPASS_ALWAYS
 	update_nearby_tiles()
 
-/obj/structure/plasticflaps/airtight // airtight defaults to on 
+/obj/structure/plasticflaps/airtight // airtight defaults to on
 	airtight = TRUE

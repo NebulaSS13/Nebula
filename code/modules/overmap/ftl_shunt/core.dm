@@ -1,5 +1,5 @@
 /obj/machinery/ftl_shunt
-	anchored = 1
+	anchored = TRUE
 	icon = 'icons/obj/shunt_drive.dmi'
 	var/initial_id_tag = "ftl"
 

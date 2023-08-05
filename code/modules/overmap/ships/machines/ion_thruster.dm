@@ -34,7 +34,7 @@
 	desc = "An advanced propulsion device, using energy and minute amounts of gas to generate thrust."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle2"
-	density = 1
+	density = TRUE
 	power_channel = ENVIRON
 	idle_power_usage = 100
 	anchored = TRUE

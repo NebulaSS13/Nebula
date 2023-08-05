@@ -8,8 +8,8 @@
 	name = "cooker"
 	desc = "You shouldn't be seeing this!"
 	icon = 'icons/obj/cooking_machines.dmi'
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 5
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

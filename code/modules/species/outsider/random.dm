@@ -151,7 +151,7 @@
 	desc = "Your true form is calling. Use this to become an alien humanoid."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "ano51"
-	anchored = 1
+	anchored = TRUE
 
 /obj/structure/aliumizer/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)

@@ -4,11 +4,11 @@
 	invisibility = 101
 	simulated = FALSE
 
-	density = 0
+	density = FALSE
 	stat = DEAD
 
 	movement_handlers = list()
-	anchored = 1	//  don't get pushed around
+	anchored = TRUE	//  don't get pushed around
 
 	virtual_mob = null // Hear no evil, speak no evil
 

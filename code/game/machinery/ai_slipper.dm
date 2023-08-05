@@ -2,7 +2,7 @@
 	name = "\improper AI Liquid Dispenser"
 	icon = 'icons/obj/items/device/motion_detector.dmi'
 	icon_state = "motion0"
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 10
 	var/uses = 20
 	var/disabled = 1

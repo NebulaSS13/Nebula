@@ -3,8 +3,8 @@
 	desc = "A flimsy lattice of rods, with screws to secure it to the floor."
 	icon = 'icons/obj/structures/grille.dmi'
 	icon_state = "grille"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
@@ -249,7 +249,7 @@
 /obj/structure/grille/broken
 	destroyed = 1
 	icon_state = "broken"
-	density = 0
+	density = FALSE
 
 /obj/structure/grille/broken/Initialize()
 	. = ..()

@@ -3,8 +3,8 @@
 	desc = "A hollow space used to insert nuclear cylinders for arming the self destruct."
 	icon = 'icons/obj/machines/self_destruct.dmi'
 	icon_state = "empty"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	var/obj/item/nuclear_cylinder/cylinder
 	var/armed = 0
 	var/damaged = 0
@@ -31,7 +31,7 @@
 		user.visible_message("[user] begins to carefully place [W] onto the Inserter.", "You begin to carefully place [W] onto the Inserter.")
 		if(do_after(user, 80, src) && user.try_unequip(W, src))
 			cylinder = W
-			density = 1
+			density = TRUE
 			user.visible_message("[user] places [W] onto the Inserter.", "You place [W] onto the Inserter.")
 			update_icon()
 			return
@@ -55,13 +55,13 @@
 			if(do_after(user, 40, src))
 				user.visible_message("[user] extracts [cylinder].", "You extract [cylinder].")
 				armed = 0
-				density = 1
+				density = TRUE
 				flick("unloading", src)
 		else if(!damaged)
 			user.visible_message("[user] begins to arm [cylinder].", "You begin to arm [cylinder].")
 			if(do_after(user, 40, src))
 				armed = 1
-				density = 0
+				density = FALSE
 				user.visible_message("[user] arms [cylinder].", "You arm [cylinder].")
 				flick("loading", src)
 				playsound(src.loc,'sound/effects/caution.ogg',50,1,5)

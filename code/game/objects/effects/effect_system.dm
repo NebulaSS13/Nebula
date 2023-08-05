@@ -55,7 +55,7 @@ steam.start() -- spawns the effect
 	name = "steam"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "extinguish"
-	density = 0
+	density = FALSE
 
 /datum/effect/effect/system/steam_spread
 
@@ -97,7 +97,7 @@ steam.start() -- spawns the effect
 	name = "sparks"
 	icon_state = "sparks"
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1.0
+	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/effect/sparks/Initialize()
@@ -168,8 +168,8 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke
 	name = "smoke"
 	icon_state = "smoke"
-	opacity = 1
-	anchored = 0.0
+	opacity = TRUE
+	anchored = FALSE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/time_to_live = 100
 
@@ -209,7 +209,7 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/illumination
 	name = "illumination"
-	opacity = 0
+	opacity = FALSE
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "sparks"
 
@@ -419,7 +419,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/ion_trails
 	name = "ion trails"
 	icon_state = "ion_trails"
-	anchored = 1.0
+	anchored = TRUE
 
 /datum/effect/effect/system/trail/ion
 	trail_type = /obj/effect/effect/ion_trails
@@ -434,7 +434,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/thermal_trail
 	name = "therman trail"
 	icon_state = "explosion_particle"
-	anchored = 1
+	anchored = TRUE
 
 /datum/effect/effect/system/trail/thermal
 	trail_type = /obj/effect/effect/thermal_trail

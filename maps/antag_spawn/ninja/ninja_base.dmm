@@ -1233,11 +1233,11 @@
 	name = "Ship External Access"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "ninjadoor";
 	name = "Blast Door";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"

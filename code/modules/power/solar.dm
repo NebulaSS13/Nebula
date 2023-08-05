@@ -8,8 +8,8 @@ var/global/list/solars_list = list()
 	desc = "A solar electrical generator."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "sp_base"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	idle_power_usage = 0
 	active_power_usage = 0
 	var/health = 10
@@ -52,7 +52,7 @@ var/global/list/solars_list = list()
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /decl/material/solid/glass
-		S.anchored = 1
+		S.anchored = TRUE
 	S.forceMove(src)
 	if(S.glass_reinforced) //if the panel is in reinforced glass
 		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
@@ -205,7 +205,7 @@ var/global/list/solars_list = list()
 	icon_state = "sp_base"
 	item_state = "electropack"
 	w_class = ITEM_SIZE_HUGE // Pretty big!
-	anchored = 0
+	anchored = FALSE
 	material = /decl/material/solid/metal/steel
 	var/tracker = 0
 	var/glass_type
@@ -222,7 +222,7 @@ var/global/list/solars_list = list()
 
 	if(!anchored && isturf(loc))
 		if(IS_WRENCH(W))
-			anchored = 1
+			anchored = TRUE
 			default_pixel_x = 0
 			default_pixel_y = 0
 			default_pixel_z = 0
@@ -232,7 +232,7 @@ var/global/list/solars_list = list()
 			return 1
 	else
 		if(IS_WRENCH(W))
-			anchored = 0
+			anchored = FALSE
 			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from it's place.</span>")
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
@@ -276,8 +276,8 @@ var/global/list/solars_list = list()
 	desc = "A controller for solar panel arrays."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "solar"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 250
 	construct_state = /decl/machine_construction/default/panel_closed/computer

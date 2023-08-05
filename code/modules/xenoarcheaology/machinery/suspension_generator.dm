@@ -3,7 +3,7 @@
 	desc = "Multi-phase mobile suspension field generator MK II \"Steadfast\". It has stubby legs bolted up against it's body for stabilising."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "suspension2"
-	density = 1
+	density = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -93,7 +93,7 @@
 		icon_state = "suspension3"
 	else
 		icon_state = "suspension2"
-	
+
 /obj/machinery/suspension_gen/Destroy()
 	deactivate()
 	return ..()
@@ -101,8 +101,8 @@
 /obj/effect/suspension_field
 	name = "energy field"
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/victim_number  //number of mobs it affected, needed for generator powerdraw calc
 
 /obj/effect/suspension_field/examine(mob/user)
@@ -115,7 +115,7 @@
 	. = ..()
 	suspend_things()
 	START_PROCESSING(SSobj, src)
-	
+
 /obj/effect/suspension_field/Destroy()
 	for(var/mob/living/M in loc)
 		to_chat(M, SPAN_NOTICE("You no longer feel like floating."))
@@ -126,7 +126,7 @@
 
 /obj/effect/suspension_field/Process()
 	suspend_things()
-	
+
 /obj/effect/suspension_field/proc/suspend_things()
 	victim_number = 0
 	var/turf/T = get_turf(src)

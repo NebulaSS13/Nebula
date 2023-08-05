@@ -5,9 +5,9 @@
 	desc = "Used to implant occupants with loyalty implants."
 	icon = 'icons/obj/machines/implantchair.dmi'
 	icon_state = "implantchair"
-	density = 1
-	opacity = 0
-	anchored = 1
+	density = TRUE
+	opacity = FALSE
+	anchored = TRUE
 
 	var/ready = 1
 	var/list/obj/item/implant/loyalty/implant_list = list()

@@ -4,7 +4,7 @@
 	name = "tracking beacon"
 	desc = "A device that uses zero-point energy to create a permanent tracking beacon."
 	level = 1		// underfloor
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 0
 	var/obj/item/radio/beacon/beacon
 

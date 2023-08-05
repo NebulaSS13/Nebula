@@ -4,8 +4,8 @@
 	desc = "A high tech machine that is designed to read DNA samples properly."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "dna_open"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	stat_immune = 0
 	base_type = /obj/machinery/forensic/dnascanner
 

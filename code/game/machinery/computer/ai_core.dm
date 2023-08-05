@@ -1,8 +1,8 @@
 var/global/list/empty_playable_ai_cores = list()
 
 /obj/structure/aicore
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	name = "\improper AI core"
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "0"
@@ -201,7 +201,7 @@ var/global/list/deactivated_ai_cores = list()
 	name = "inactive AI"
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "ai-empty"
-	anchored = 1
+	anchored = TRUE
 	tool_interaction_flags =  (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 
 /obj/structure/aicore/deactivated/Initialize()

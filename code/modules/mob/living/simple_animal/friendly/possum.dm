@@ -14,7 +14,7 @@
 	maxHealth = 50
 	health = 50
 	response_harm = "stamps on"
-	density = 0
+	density = FALSE
 	minbodytemp = 223
 	maxbodytemp = 323
 	universal_speak = FALSE
@@ -26,7 +26,7 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
 
-	var/is_angry = FALSE 
+	var/is_angry = FALSE
 
 /mob/living/simple_animal/opossum/Life()
 	. = ..()

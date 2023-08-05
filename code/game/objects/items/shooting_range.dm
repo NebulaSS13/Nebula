@@ -4,7 +4,7 @@
 	desc = "A shooting target."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_h"
-	density = 0
+	density = FALSE
 	material = /decl/material/solid/plastic
 	var/obj/structure/target_stake/stake
 	var/hp = 1800

@@ -244,7 +244,7 @@
 
 /obj/item/stack/flag/proc/set_up()
 	upright = 1
-	anchored = 1
+	anchored = TRUE
 	update_icon()
 
 /obj/item/stack/flag/on_update_icon()
@@ -266,5 +266,5 @@
 
 /obj/item/stack/flag/proc/knock_down()
 	upright = 0
-	anchored = 0
+	anchored = FALSE
 	update_icon()

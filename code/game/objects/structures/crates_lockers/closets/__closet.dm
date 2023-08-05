@@ -5,7 +5,7 @@ var/global/list/closets = list()
 	desc = "It's a basic storage unit."
 	icon = 'icons/obj/closets/bases/closet.dmi'
 	icon_state = "base"
-	density = 1
+	density = TRUE
 	maxhealth = 100
 	material = /decl/material/solid/metal/steel
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
@@ -115,7 +115,7 @@ var/global/list/closets = list()
 
 	src.opened = 1
 	playsound(src.loc, open_sound, 50, 1, -3)
-	density = 0
+	density = FALSE
 	update_icon()
 	return 1
 
@@ -130,7 +130,7 @@ var/global/list/closets = list()
 
 	playsound(src.loc, close_sound, 50, 0, -3)
 	if(!wall_mounted)
-		density = 1
+		density = TRUE
 
 	update_icon()
 

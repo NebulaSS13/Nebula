@@ -31,9 +31,9 @@
 	name = "FORCEWALL"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "m_shield"
-	anchored = 1.0
-	opacity = 0
-	density = 1
+	anchored = TRUE
+	opacity = FALSE
+	density = TRUE
 	unacidable = 1
 
 /obj/effect/forcefield/bullet_act(var/obj/item/projectile/Proj, var/def_zone)

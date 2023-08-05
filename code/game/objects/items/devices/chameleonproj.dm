@@ -84,8 +84,8 @@
 /obj/effect/dummy/chameleon
 	name = ""
 	desc = ""
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	is_spawnable_type = FALSE
 	var/can_move = 1
 	var/obj/item/chameleon/master = null

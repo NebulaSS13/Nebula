@@ -4,8 +4,8 @@
 	desc = "There is no candy at the bottom."
 	icon = 'icons/obj/quicksand.dmi'
 	icon_state = "open"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	can_buckle = 1
 	buckle_dir = SOUTH
 	var/exposed = 0
