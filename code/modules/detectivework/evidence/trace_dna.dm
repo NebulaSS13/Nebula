@@ -7,5 +7,6 @@
 		return
 	if(M.isSynthetic())
 		return
-	if(istype(M.dna))
-		add_data(M.dna.unique_enzymes)
+	var/unique_enzymes = M.get_unique_enzymes()
+	if(unique_enzymes)
+		add_data(unique_enzymes)

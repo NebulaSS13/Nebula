@@ -122,10 +122,7 @@
 	if(new_dna != dna) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
 		QDEL_NULL(dna)
 		dna = new_dna.Clone()
-	if(!blood_DNA)
-		blood_DNA = list()
-	blood_DNA.Cut()
-	blood_DNA[dna.unique_enzymes] = dna.b_type
+	blood_DNA = list(dna.unique_enzymes = dna.b_type)
 	set_species(dna.species)
 
 /obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null)

@@ -217,9 +217,7 @@
 			var/DNAstring = input("Input DNA string to search for." , "Please Enter String." , "")
 			if(!DNAstring)
 				return
-			for(var/mob/living/carbon/M in SSmobs.mob_list)
-				if(!M.dna)
-					continue
-				if(M.dna.unique_enzymes == DNAstring)
+			for(var/mob/living/M in SSmobs.mob_list)
+				if(M.get_unique_enzymes() == DNAstring)
 					target = weakref(M)
 					break

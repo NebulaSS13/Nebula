@@ -1,6 +1,6 @@
 /datum/preferences
 	var/species
-	var/b_type                           //blood type
+	var/blood_type                           //blood type
 
 	var/h_style = /decl/sprite_accessory/hair/bald
 	var/f_style = /decl/sprite_accessory/facial_hair/shaved
@@ -27,7 +27,7 @@
 	pref.skin_colour =            R.read("skin_colour")
 	pref.eye_colour =             R.read("eye_colour")
 	pref.skin_tone =              R.read("skin_tone")
-	pref.b_type =                 R.read("b_type")
+	pref.blood_type =             R.read("b_type")
 	pref.appearance_descriptors = R.read("appearance_descriptors")
 	pref.bgstate =                R.read("bgstate")
 
@@ -67,7 +67,7 @@
 	W.write("facial_hair_colour",     pref.facial_hair_colour)
 	W.write("skin_colour",            pref.skin_colour)
 	W.write("eye_colour",             pref.eye_colour)
-	W.write("b_type",                 pref.b_type)
+	W.write("b_type",                 pref.blood_type)
 	W.write("appearance_descriptors", pref.appearance_descriptors)
 	W.write("bgstate",                pref.bgstate)
 
@@ -89,14 +89,14 @@
 	pref.facial_hair_colour = pref.facial_hair_colour || COLOR_BLACK
 	pref.eye_colour  =        pref.eye_colour         || COLOR_BLACK
 
-	pref.b_type = sanitize_text(pref.b_type, initial(pref.b_type))
+	pref.blood_type = sanitize_text(pref.blood_type, initial(pref.blood_type))
 
 	if(!pref.species || !(pref.species in get_playable_species()))
 		pref.species = global.using_map.default_species
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	if(!pref.b_type || !(pref.b_type in mob_species.blood_types))
-		pref.b_type = pickweight(mob_species.blood_types)
+	if(!pref.blood_type || !(pref.blood_type in mob_species.blood_types))
+		pref.blood_type = pickweight(mob_species.blood_types)
 
 	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 	var/low_skin_tone = mob_bodytype ? (35 - mob_bodytype.max_skin_tone()) : -185
@@ -135,7 +135,7 @@
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
-	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
+	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.blood_type]</a><br>"
 	. += "<a href='?src=\ref[src];random=1'>Randomize Appearance</A><br>"
 
 	if(mob_bodytype.appearance_flags & HAS_A_SKIN_TONE)
@@ -232,7 +232,7 @@
 		if(new_b_type && CanUseTopic(user))
 			mob_species = get_species_by_key(pref.species)
 			if(new_b_type in mob_species.blood_types)
-				pref.b_type = new_b_type
+				pref.blood_type = new_b_type
 				return TOPIC_REFRESH
 
 	else if(href_list["hair_color"])

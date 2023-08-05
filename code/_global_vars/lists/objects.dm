@@ -4,7 +4,6 @@ var/global/list/jani_hud_users = list()
 var/global/list/hud_icon_reference = list()
 var/global/list/listening_objects = list() // List of objects that need to be able to hear, used to avoid recursive searching through contents.
 var/global/list/global_mutations = list() // List of hidden mutation things.
-var/global/list/reg_dna = list()
 var/global/list/global_map = list()
 
 var/global/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
