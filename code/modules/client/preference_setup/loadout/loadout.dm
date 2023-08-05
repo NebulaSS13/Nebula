@@ -427,7 +427,6 @@ var/global/list/gear_datums = list()
 		. = item
 		if(!old_item)
 			return
-		wearer.unequip(old_item)
 		if(old_item.type != item.type)
 			place_in_storage_or_drop(wearer, old_item)
 		else

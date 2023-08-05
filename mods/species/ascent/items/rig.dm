@@ -228,7 +228,7 @@
 		/obj/item/rig_module/maneuvering_jets
 	)
 
-/obj/item/rig/mantid/mob_can_equip(var/mob/M, var/slot)
+/obj/item/rig/mantid/mob_can_equip(var/mob/M, var/slot, ignore_equipped = FALSE)
 	. = ..()
 	if(. && slot == slot_back_str)
 		var/mob/living/carbon/human/H = M
