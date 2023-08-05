@@ -169,7 +169,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
-	if(user.is_muzzled())
+	if(user.get_item_blocking_speech())
 		return 0
 	for(var/slot in list(slot_wear_mask_str, slot_head_str, slot_wear_suit_str))
 		var/obj/item/clothing/C = user.get_equipped_item(slot)

@@ -52,7 +52,7 @@
 	if(m_type != use_emote.message_type && use_emote.conscious && stat != CONSCIOUS)
 		return
 
-	if(use_emote.message_type == AUDIBLE_MESSAGE && is_muzzled())
+	if(use_emote.message_type == AUDIBLE_MESSAGE && get_item_blocking_speech())
 		audible_message("<b>\The [src]</b> makes a muffled sound.")
 		return
 	else

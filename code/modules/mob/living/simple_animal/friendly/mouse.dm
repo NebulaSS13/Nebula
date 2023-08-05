@@ -35,7 +35,7 @@
 	var/body_color //brown, gray and white, leave blank for random
 	var/splatted = FALSE
 
-/mob/living/simple_animal/mouse/check_dexterity(dex_level, silent)
+/mob/living/simple_animal/mouse/has_dexterity(dex_level)
 	return FALSE // Mice are troll bait, give them no power.
 
 /mob/living/simple_animal/mouse/Life()
