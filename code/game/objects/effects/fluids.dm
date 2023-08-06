@@ -10,6 +10,7 @@
 	alpha = 0
 	color = COLOR_LIQUID_WATER
 
+	var/last_slipperiness = 0
 	var/last_flow_strength = 0
 	var/last_flow_dir = 0
 	var/update_lighting = FALSE
@@ -34,6 +35,12 @@
 
 /obj/effect/fluid/on_reagent_change()
 	. = ..()
+
+	if(reagents?.total_volume)
+		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
+		if(primary_reagent)
+			last_slipperiness = primary_reagent.slipperiness
+
 	ADD_ACTIVE_FLUID(src)
 	for(var/checkdir in global.cardinal)
 		var/obj/effect/fluid/F = locate() in get_step(loc, checkdir)
@@ -51,8 +58,8 @@
 	REMOVE_ACTIVE_FLUID(src)
 	SSfluids.pending_flows -= src
 	. = ..()
-	if(istype(T) && reagents?.total_volume > 0)
-		T.wet_floor()
+	if(istype(T) && last_slipperiness > 0)
+		T.wet_floor(last_slipperiness)
 
 /obj/effect/fluid/on_update_icon()
 
@@ -97,7 +104,7 @@
 			set_light(0)
 
 // Map helper.
-/obj/effect/fluid_mapped
+/obj/abstract/fluid_mapped
 	name = "mapped flooded area"
 	alpha = 125
 	icon_state = "shallow_still"
@@ -106,14 +113,14 @@
 	var/fluid_type = /decl/material/liquid/water
 	var/fluid_initial = FLUID_MAX_DEPTH
 
-/obj/effect/fluid_mapped/Initialize()
+/obj/abstract/fluid_mapped/Initialize()
 	..()
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		T.add_fluid(fluid_type, fluid_initial)
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/fluid_mapped/fuel
+/obj/abstract/fluid_mapped/fuel
 	name = "spilled fuel"
 	fluid_type = /decl/material/liquid/fuel
 	fluid_initial = 10

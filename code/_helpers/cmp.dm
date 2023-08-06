@@ -130,3 +130,6 @@
 
 /proc/cmp_submap_asc(var/datum/submap/A, var/datum/submap/B)
 	return A.archetype.sort_priority - B.archetype.sort_priority
+
+/proc/cmp_gripper_asc(datum/inventory_slot/gripper/a, datum/inventory_slot/gripper/b)
+	return a.hand_sort_priority - b.hand_sort_priority

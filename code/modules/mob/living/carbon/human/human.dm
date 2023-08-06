@@ -1067,8 +1067,9 @@
 	return breath
 
 /mob/living/carbon/human/fluid_act(var/datum/reagents/fluids)
-	species.fluid_act(src, fluids)
 	..()
+	if(!QDELETED(src) && fluids?.total_volume)
+		species.fluid_act(src, fluids)
 
 /mob/living/carbon/human/proc/set_cultural_value(var/token, var/decl/cultural_info/_culture, var/defer_language_update)
 	if(ispath(_culture, /decl/cultural_info))
@@ -1158,6 +1159,7 @@
 				to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't respond properly!"))
 			return (active_hand.get_manual_dexterity() & ~dex_malus)
 	return active_hand.get_manual_dexterity()
+
 
 /mob/living/carbon/human/lose_hair()
 	if(get_bodytype().set_default_hair(src))

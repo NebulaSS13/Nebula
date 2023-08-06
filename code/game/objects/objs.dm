@@ -318,3 +318,8 @@
 /decl/interaction_handler/rotate/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/O = target
 	O.rotate(user)
+
+/obj/fluid_act(var/datum/reagents/fluids)
+	..()
+	if(!QDELETED(src) && fluids?.total_volume)
+		fluids.touch_obj(src)

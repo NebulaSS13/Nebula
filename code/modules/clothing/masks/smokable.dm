@@ -116,7 +116,10 @@
 
 /obj/item/clothing/mask/smokable/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!waterproof && lit)
+	if(!QDELETED(src) && fluids?.total_volume && !waterproof && lit)
+		var/turf/location = get_turf(src)
+		if(location)
+			location.hotspot_expose(700, 5)
 		extinguish(no_message = TRUE)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")

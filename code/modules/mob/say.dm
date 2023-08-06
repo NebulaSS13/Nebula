@@ -109,8 +109,13 @@ var/global/list/special_channel_keys = list(
 			return L
 
 /mob/proc/is_silenced()
-	. = is_muzzled()
+	. = !!get_item_blocking_speech()
 
-/mob/proc/is_muzzled()
-	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
-	return istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/clothing/sealant)
+/mob/proc/get_item_blocking_speech()
+	// Can't talk with something in your mouth.
+	var/datum/inventory_slot/mouth_slot = get_inventory_slot_datum(BP_MOUTH)
+	. = mouth_slot?.get_equipped_item()
+	if(!.)
+		var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+		if(istype(mask, /obj/item/clothing/mask/muzzle) || istype(mask, /obj/item/clothing/sealant))
+			. = mask
