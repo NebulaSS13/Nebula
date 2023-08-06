@@ -14,8 +14,8 @@ var/global/list/singularity_beacons = list()
 	icon = 'icons/obj/items/syndibeacon.dmi'
 	icon_state = "syndbeacon"
 
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 
 	var/temptext = ""
 	var/selfdestructing = 0
@@ -89,8 +89,8 @@ var/global/list/singularity_beacons = list()
 	icon_state = "beaconsynd"
 
 	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal)
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	layer = BASE_ABOVE_OBJ_LAYER //so people can't hide it and it's REALLY OBVIOUS
 	stat = 0
 	use_power = POWER_USE_OFF
@@ -140,11 +140,11 @@ var/global/list/singularity_beacons = list()
 			return
 
 		if(anchored)
-			anchored = 0
+			anchored = FALSE
 			to_chat(user, "<span class='notice'>You unscrew the beacon from the floor.</span>")
 			return
 		else
-			anchored = 1
+			anchored = TRUE
 			to_chat(user, "<span class='notice'>You screw the beacon to the floor.</span>")
 			return
 	..()

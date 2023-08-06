@@ -72,9 +72,9 @@
 				P.visible_message( \
 					message = SPAN_NOTICE("\The [M] presses [G.his] thumb against \the [P]."), \
 					blind_message = SPAN_NOTICE("\The [P] makes a sharp clicking sound as it extracts DNA material from \the [M]."))
-				var/datum/dna/dna = M.dna
-				to_chat(P, SPAN_NOTICE("<h3>[M]'s UE string : [dna.unique_enzymes]</h3>"))
-				if(dna.unique_enzymes == P.master_dna)
+				var/unique_enzymes = M.get_unique_enzymes()
+				to_chat(P, SPAN_NOTICE("<h3>[M]'s UE string : [unique_enzymes || "NULL"]</h3>"))
+				if(unique_enzymes == P.master_dna)
 					to_chat(P, "<b>DNA is a match to stored Master DNA.</b>")
 				else
 					to_chat(P, "<b>DNA does not match stored Master DNA.</b>")
@@ -95,7 +95,7 @@
 	data["listening"] = user.silicon_radio.broadcasting
 	data["frequency"] = format_frequency(user.silicon_radio.frequency)
 	var/channels[0]
-	var/list/pai_channels = user.silicon_radio.get_available_channels() 
+	var/list/pai_channels = user.silicon_radio.get_available_channels()
 	for(var/datum/radio_channel/channel in pai_channels)
 		var/ch_dat[0]
 		ch_dat["name"] = channel.name || format_frequency(channel.frequency)

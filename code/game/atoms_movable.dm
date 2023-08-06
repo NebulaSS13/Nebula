@@ -1,6 +1,6 @@
 /atom/movable
 	layer = OBJ_LAYER
-	appearance_flags = TILE_BOUND | PIXEL_SCALE | LONG_GLIDE
+	appearance_flags = TILE_BOUND | DEFAULT_APPEARANCE_FLAGS | LONG_GLIDE
 	glide_size = 8
 	abstract_type = /atom/movable
 
@@ -18,7 +18,7 @@
 
 	var/movable_flags
 	var/last_move = null
-	var/anchored = 0
+	var/anchored = FALSE
 	// var/elevation = 2    - not used anywhere
 	var/move_speed = 10
 	var/l_move_time = 1

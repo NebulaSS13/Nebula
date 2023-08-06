@@ -44,8 +44,8 @@
 	desc = "A large three-handed generator with rotating top. It is used to create high-power magnetic fields in hard vacuum."
 	icon = 'magshield_sprites.dmi'
 	icon_state = "maggen"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	light_range = 3
 	light_power = 1
 	light_color = "#ffea61"
@@ -117,15 +117,15 @@
 	desc = "Very sensitive vacuum radiation sensor. On top of the metal stand two modified Wilson Cloud Chambers filled with deuterium and tritium water."
 	icon = 'magshield_sprites.dmi'
 	icon_state = "rad_sensor"
-	anchored = 1
+	anchored = TRUE
 
 /obj/structure/magshield/nav_light
 	name = "navigation light"
 	desc = "Large and bright light regularly emitting green flashes."
 	icon = 'magshield_sprites.dmi'
 	icon_state = "nav_light_green"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	light_range = 10
 	light_power = 1
 	light_color = "#00ee00"

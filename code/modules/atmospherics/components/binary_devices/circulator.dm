@@ -6,7 +6,7 @@
 	desc = "A gas circulator turbine and heat exchanger."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "circ-unassembled"
-	anchored = 0
+	anchored = FALSE
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	layer = STRUCTURE_LAYER
@@ -24,7 +24,7 @@
 	var/stored_energy = 0
 	var/temperature_overlay
 
-	density = 1
+	density = TRUE
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 

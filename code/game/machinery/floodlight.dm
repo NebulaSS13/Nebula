@@ -2,7 +2,7 @@
 	name = "emergency floodlight"
 	icon = 'icons/obj/machines/floodlight.dmi'
 	icon_state = "flood00"
-	density = 1
+	density = TRUE
 	obj_flags = OBJ_FLAG_ROTATABLE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

@@ -46,12 +46,12 @@
 		vessel.maximum_volume = species.blood_volume
 
 	LAZYSET(vessel.reagent_data, species.blood_reagent, list(
-		"donor" =        weakref(src),
-		"species" =      species.name,
-		"blood_DNA" =    dna?.unique_enzymes,
+		"donor"       = weakref(src),
+		"species"     = get_species_name(),
+		"blood_DNA"   = get_unique_enzymes(),
 		"blood_color" = species.get_blood_color(src),
-		"blood_type" =   dna?.b_type,
-		"trace_chem" = null
+		"blood_type"  = get_blood_type(),
+		"trace_chem"  = null
 	))
 
 //Makes a blood drop, leaking amt units of blood from the mob
@@ -203,19 +203,30 @@
 		adjust_blood(amount, get_blood_data())
 	return amount
 
-/mob/living/carbon/proc/get_blood_data()
+/mob/living/proc/get_blood_data()
+
 	var/data = list()
-	data["donor"] = weakref(src)
-	data["blood_DNA"] = dna.unique_enzymes
-	data["blood_type"] = dna.b_type
-	data["species"] = species.name
-	data["has_oxy"] = species.blood_oxy
+	data["donor"]      = weakref(src)
+	data["blood_DNA"]  = get_unique_enzymes()
+	data["blood_type"] = get_blood_type()
+	data["species"]    = get_species_name()
+
 	var/list/temp_chem = list()
 	for(var/R in reagents.reagent_volumes)
 		temp_chem[R] = REAGENT_VOLUME(reagents, R)
-	data["trace_chem"] = temp_chem
-	data["dose_chem"] = chem_doses ? chem_doses.Copy() : list()
-	data["blood_color"] = species.get_blood_color(src)
+	data["trace_chem"]  = temp_chem
+	data["dose_chem"]   = chem_doses ? chem_doses.Copy() : list()
+
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		data["has_oxy"]     = my_species.blood_oxy
+		data["blood_color"] = my_species.get_blood_color(src)
+	else if(isSynthetic())
+		data["has_oxy"]     = FALSE
+		data["blood_color"] = SYNTH_BLOOD_COLOR
+	else
+		data["has_oxy"]     = TRUE
+		data["blood_color"] = COLOR_BLOOD_HUMAN
 	return data
 
 /proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
@@ -252,7 +263,7 @@
 	if(ishuman(source))
 		var/mob/living/carbon/human/donor = source
 		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
-		blood_type = donor.b_type
+		blood_type = donor.get_blood_type()
 	else if(isatom(source))
 		var/atom/donor = source
 		blood_data = REAGENT_DATA(donor.reagents, /decl/material/liquid/blood)

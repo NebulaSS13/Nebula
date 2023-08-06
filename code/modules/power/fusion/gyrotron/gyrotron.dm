@@ -20,7 +20,7 @@
 	base_type = /obj/machinery/emitter/gyrotron
 
 /obj/machinery/emitter/gyrotron/anchored
-	anchored = 1
+	anchored = TRUE
 	state = 2
 
 /obj/machinery/emitter/gyrotron/Initialize()

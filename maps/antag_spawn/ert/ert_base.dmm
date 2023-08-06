@@ -2450,11 +2450,11 @@
 /area/map_template/rescue_base/start)
 "eV" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2462,11 +2462,11 @@
 /area/map_template/rescue_base/start)
 "eW" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "rescuedock";
 	name = "Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2698,12 +2698,12 @@
 /area/map_template/rescue_base/base)
 "fC" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2760,12 +2760,12 @@
 /area/map_template/rescue_base/start)
 "fJ" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "rescueeva";
 	name = "Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -3167,12 +3167,12 @@
 "gU" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,
@@ -3220,12 +3220,12 @@
 "hb" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "rescueinfirm";
 	name = "Blast Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,

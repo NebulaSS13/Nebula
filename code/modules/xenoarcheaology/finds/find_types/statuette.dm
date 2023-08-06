@@ -111,8 +111,10 @@
 		to_chat(M, "<span class='warning'>The skin on your [parse_zone(target.organ_tag)] feels like it's ripping apart, and a stream of blood flies out.</span>")
 		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)
 		B.target_turf = pick(range(1, src))
-		B.blood_DNA = list()
-		B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+		var/blood_type = M.get_blood_type()
+		var/unique_enzymes = M.get_unique_enzymes()
+		if(blood_type && unique_enzymes)
+			LAZYSET(B.blood_DNA, unique_enzymes, blood_type)
 		M.vessel.remove_any(rand(25,50))
 
 //animated blood 2 SPOOKY
@@ -153,7 +155,7 @@
 	name = "shadow wight"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "shade"
-	density = 1
+	density = TRUE
 
 /obj/effect/shadow_wight/Initialize()
 	. = ..()

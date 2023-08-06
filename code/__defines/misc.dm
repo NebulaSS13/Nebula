@@ -307,3 +307,7 @@
 #define MOUSE_OPACITY_NORMAL 1
 /// Causes the atom to catch clicks, hovers, etc, taking priority over NORMAL for a shared pointer target.
 #define MOUSE_OPACITY_PRIORITY 2
+
+// Set on many base types.
+#define DEFAULT_APPEARANCE_FLAGS (PIXEL_SCALE)
+

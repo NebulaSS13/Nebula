@@ -2,8 +2,8 @@
 	name = "explosive particles"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "explosion_particle"
-	opacity = 1
-	anchored = 1
+	opacity = TRUE
+	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/effect/expl_particles/Initialize()
@@ -33,8 +33,8 @@
 	name = "explosive particles"
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "explosion"
-	opacity = 1
-	anchored = 1
+	opacity = TRUE
+	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	pixel_x = -32
 	pixel_y = -32

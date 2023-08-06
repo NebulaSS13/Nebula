@@ -462,7 +462,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
-	density = 0
+	density = FALSE
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
 	. = ..(gibbed,deathmessage,show_dead_message)

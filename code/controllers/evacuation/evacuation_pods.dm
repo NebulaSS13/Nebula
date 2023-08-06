@@ -137,7 +137,6 @@
 	screen_loc = ui_entire_screen
 	color = "#ff9900"
 	blend_mode = BLEND_SUBTRACT
-	layer = FULLSCREEN_LAYER
 
 #undef EVAC_OPT_ABANDON_SHIP
 #undef EVAC_OPT_JUMP

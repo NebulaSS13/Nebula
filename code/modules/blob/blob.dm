@@ -5,9 +5,9 @@
 	icon_state = "blob"
 	light_range = 2
 	light_color = BLOB_COLOR_PULS
-	density = 1
-	opacity = 1
-	anchored = 1
+	density = TRUE
+	opacity = TRUE
+	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_PRIORITY
 
 	layer = BLOB_SHIELD_LAYER

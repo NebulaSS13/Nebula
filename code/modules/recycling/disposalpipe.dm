@@ -4,8 +4,8 @@
 	icon = 'icons/obj/pipes/disposal.dmi'
 	name = "disposal pipe"
 	desc = "An underfloor disposal pipe."
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	maxhealth = 10
 	level = 1			// underfloor only
 	dir = 0				// dir will contain dominant direction for junction pipes
@@ -227,7 +227,7 @@
 	var/obj/structure/disposalconstruct/C = new (src.loc, src)
 	src.transfer_fingerprints_to(C)
 	C.set_density(0)
-	C.anchored = 1
+	C.anchored = TRUE
 	C.update()
 
 	qdel(src)

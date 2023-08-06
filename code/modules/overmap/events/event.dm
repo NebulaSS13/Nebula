@@ -168,7 +168,7 @@
 	name = "event"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "blank"
-	opacity = 1
+	opacity = TRUE
 	color = "#880000"
 
 	// Events must be detected by sensors, but are otherwise instantly visible.
@@ -219,7 +219,7 @@
 /obj/effect/overmap/event/electric
 	name = "electrical storm"
 	events = list(/datum/event/electrical_storm)
-	opacity = 0
+	opacity = FALSE
 	event_icon_states = list("electrical1", "electrical2", "electrical3", "electrical4")
 	difficulty = EVENT_LEVEL_MAJOR
 	weaknesses = OVERMAP_WEAKNESS_EMP
@@ -235,7 +235,7 @@
 /obj/effect/overmap/event/ion
 	name = "ion cloud"
 	events = list(/datum/event/ionstorm, /datum/event/computer_damage)
-	opacity = 0
+	opacity = FALSE
 	event_icon_states = list("ion1", "ion2", "ion3", "ion4")
 	difficulty = EVENT_LEVEL_MAJOR
 	weaknesses = OVERMAP_WEAKNESS_EMP
@@ -244,7 +244,7 @@
 /obj/effect/overmap/event/carp
 	name = "carp shoal"
 	events = list(/datum/event/carp_migration/overmap)
-	opacity = 0
+	opacity = FALSE
 	difficulty = EVENT_LEVEL_MODERATE
 	event_icon_states = list("carp1", "carp2")
 	weaknesses = OVERMAP_WEAKNESS_EXPLOSIVE | OVERMAP_WEAKNESS_FIRE
@@ -262,7 +262,7 @@
 	var/radius = 2
 	var/count = 6
 	var/hazards
-	var/opacity = 1
+	var/opacity = TRUE
 	var/continuous = TRUE //if it should form continous blob, or can have gaps
 	var/overmap_id = OVERMAP_ID_SPACE
 
@@ -277,7 +277,7 @@
 	name = "electrical storm"
 	count = 11
 	radius = 3
-	opacity = 0
+	opacity = FALSE
 	hazards = /obj/effect/overmap/event/electric
 
 /datum/overmap_event/dust
@@ -290,14 +290,14 @@
 	name = "ion cloud"
 	count = 8
 	radius = 3
-	opacity = 0
+	opacity = FALSE
 	hazards = /obj/effect/overmap/event/ion
 
 /datum/overmap_event/carp
 	name = "carp shoal"
 	count = 8
 	radius = 3
-	opacity = 0
+	opacity = FALSE
 	continuous = FALSE
 	hazards = /obj/effect/overmap/event/carp
 

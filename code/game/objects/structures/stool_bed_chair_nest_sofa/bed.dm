@@ -144,7 +144,7 @@
 	name = "roller bed"
 	icon = 'icons/obj/structures/rollerbed.dmi'
 	icon_state = "down"
-	anchored = 0
+	anchored = FALSE
 	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 6)
 	movable_flags = MOVABLE_FLAG_WHEELED
 	var/item_form_type = /obj/item/roller	//The folded-up object path.
@@ -296,7 +296,7 @@
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "mattress"
 	desc = "A bare mattress. It doesn't look very comfortable."
-	anchored = 0
+	anchored = FALSE
 
 /obj/structure/mattress/dirty
 	name = "dirty mattress"

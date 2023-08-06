@@ -3,9 +3,9 @@
 	desc = "Stick 'em up!"
 	icon = 'icons/effects/Targeted.dmi'
 	icon_state = "locking"
-	anchored = 1
-	density = 0
-	opacity = 0
+	anchored = TRUE
+	density = FALSE
+	opacity = FALSE
 	layer = ABOVE_HUMAN_LAYER
 	simulated = 0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE

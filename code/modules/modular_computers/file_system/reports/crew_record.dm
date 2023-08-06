@@ -69,7 +69,7 @@ var/global/arrest_security_status =  "Arrest"
 	set_public_record((public_record && !jobban_isbanned(H, "Records")) ? html_decode(public_record) : "No record supplied")
 
 	// Medical record
-	set_bloodtype(H ? H.b_type : "Unset")
+	set_bloodtype(H?.get_blood_type() || "Unset")
 	var/medical_record = records[PREF_MED_RECORD]
 	set_medical_record((medical_record && !jobban_isbanned(H, "Records")) ? html_decode(medical_record) : "No record supplied")
 
@@ -86,8 +86,8 @@ var/global/arrest_security_status =  "Arrest"
 
 	// Security record
 	set_criminalStatus(global.default_security_status)
-	set_dna(H ? H.dna.unique_enzymes : "")
-	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
+	set_dna(H?.get_unique_enzymes() || "")
+	set_fingerprint(H?.get_full_print(ignore_blockers = TRUE) || "")
 
 	var/security_record = records[PREF_SEC_RECORD]
 	set_security_record((security_record && !jobban_isbanned(H, "Records")) ? html_decode(security_record) : "No record supplied")

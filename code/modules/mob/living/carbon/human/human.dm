@@ -1253,8 +1253,8 @@
 	if(!eye_colour)
 		eye_colour = root_bodytype.base_eye_color
 	root_bodytype.set_default_hair(src, override_existing = TRUE, defer_update_hair = TRUE)
-	if(!b_type && length(species?.blood_types))
-		b_type = pickweight(species.blood_types)
+	if(!blood_type && length(species?.blood_types))
+		blood_type = pickweight(species.blood_types)
 
 	if(new_dna)
 		set_real_name(new_dna.real_name)

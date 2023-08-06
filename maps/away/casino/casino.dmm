@@ -107,12 +107,12 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 2;
 	icon_state = "pdoor0";
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bridge)
@@ -139,12 +139,12 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bridge)
@@ -1814,12 +1814,12 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -1907,12 +1907,12 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -1949,7 +1949,7 @@
 "fA" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
-	density = 0;
+	density = FALSE;
 	dir = 8;
 	icon_state = "pdoor0";
 	id_tag = "casino_main"
@@ -2154,12 +2154,12 @@
 	name = "Casino"
 	},
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_security)

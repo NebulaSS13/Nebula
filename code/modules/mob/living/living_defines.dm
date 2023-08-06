@@ -56,3 +56,9 @@
 	var/life_tick
 	var/list/stasis_sources
 	var/stasis_value
+
+	var/original_fingerprint_seed
+	var/fingerprint
+	var/original_genetic_seed
+	var/unique_enzymes
+	var/blood_type = "A+"

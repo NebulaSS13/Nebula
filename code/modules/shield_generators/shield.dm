@@ -4,9 +4,9 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
 	alpha = 100
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	invisibility = 0
 	atmos_canpass = CANPASS_PROC
 	var/obj/machinery/shield_generator/gen = null

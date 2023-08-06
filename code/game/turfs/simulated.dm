@@ -147,11 +147,13 @@
 
 	if(istype(M))
 		for(var/obj/effect/decal/cleanable/blood/B in contents)
-			if(M.dna?.unique_enzymes && !LAZYACCESS(B.blood_DNA, M.dna.unique_enzymes))
-				LAZYSET(B.blood_DNA, M.dna.unique_enzymes, M.dna.b_type)
-				LAZYSET(B.blood_data, M.dna.unique_enzymes, REAGENT_DATA(M.vessel, M.species.blood_reagent))
+			var/unique_enzymes = M.get_unique_enzymes()
+			var/blood_type     = M.get_blood_type()
+			if(unique_enzymes && blood_type && !LAZYACCESS(B.blood_DNA, unique_enzymes))
+				LAZYSET(B.blood_DNA, unique_enzymes, blood_type)
+				LAZYSET(B.blood_data, unique_enzymes, REAGENT_DATA(M.vessel, M.species.blood_reagent))
 				var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)
-				forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
+				forensics.add_data(/datum/forensics/blood_dna, unique_enzymes)
 			return 1 //we bloodied the floor
 		blood_splatter(src, M, 1)
 		return 1 //we bloodied the floor

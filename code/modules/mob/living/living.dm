@@ -1,4 +1,10 @@
 /mob/living/Initialize()
+
+	original_fingerprint_seed = sequential_id(/mob)
+	fingerprint               = md5(num2text(original_fingerprint_seed))
+	original_genetic_seed     = sequential_id(/mob)
+	unique_enzymes            = md5(num2text(original_genetic_seed))
+
 	. = ..()
 	if(stat == DEAD)
 		add_to_dead_mob_list()
@@ -1141,6 +1147,12 @@ default behaviour is:
 /mob/living/proc/handle_some_updates()
 	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 	return life_tick <= 5 || !timeofdeath || (timeofdeath >= 5 && (world.time-timeofdeath) <= 10 MINUTES)
+
+/mob/living/get_unique_enzymes()
+	return unique_enzymes
+
+/mob/living/get_blood_type()
+	return blood_type
 
 /mob/living/proc/get_mob_footstep(var/footstep_type)
 	var/decl/species/my_species = get_species()

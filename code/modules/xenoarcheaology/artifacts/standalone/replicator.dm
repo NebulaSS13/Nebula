@@ -3,7 +3,7 @@
 	desc = "It's some kind of pod with strange wires and gadgets all over it."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "borgcharger0(old)"
-	density = 1
+	density = TRUE
 
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/noninteractive

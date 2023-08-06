@@ -1,6 +1,6 @@
 /obj/machinery/embedded_controller
 	name = "Embedded Controller"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 10
 	layer = ABOVE_WINDOW_LAYER
 	clicksound = "button"

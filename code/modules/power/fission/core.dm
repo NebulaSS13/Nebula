@@ -17,7 +17,7 @@
 	icon = 'icons/obj/machines/power/fission.dmi'
 	icon_state = "fission_core"
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	stat_immune = NOINPUT | NOSCREEN
 	base_type = /obj/machinery/atmospherics/unary/fission_core
 	construct_state = /decl/machine_construction/default/panel_closed

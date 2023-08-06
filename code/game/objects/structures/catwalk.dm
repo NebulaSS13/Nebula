@@ -3,8 +3,8 @@
 	desc = "Cats really don't like these things."
 	icon = 'icons/obj/structures/catwalks.dmi'
 	icon_state = "catwalk"
-	density = 0
-	anchored = 1.0
+	density = FALSE
+	anchored = TRUE
 	layer = CATWALK_LAYER
 	footstep_type = /decl/footsteps/catwalk
 	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
@@ -169,8 +169,8 @@
 	name = "plated catwalk spawner"
 	icon = 'icons/obj/structures/catwalks.dmi'
 	icon_state = "catwalk_plated"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	layer = CATWALK_LAYER
 	var/activated = FALSE
 	var/plating_type = /decl/flooring/tiling/mono

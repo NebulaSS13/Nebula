@@ -7,7 +7,7 @@
 	base_type = /obj/machinery/fabricator/pipe
 	stat_immune = NOSCREEN//Doesn't need screen, just input for the parts wanted
 	power_channel = EQUIP
-	anchored = 0
+	anchored = FALSE
 	use_power = POWER_USE_OFF
 	color_selectable = TRUE
 
@@ -17,7 +17,7 @@
 	if(!anchored)
 		return STATUS_CLOSE
 	return ..()
-	
+
 /obj/machinery/fabricator/pipe/wrench_floor_bolts()
 	..()
 	update_use_power(anchored ? POWER_USE_IDLE : POWER_USE_OFF)

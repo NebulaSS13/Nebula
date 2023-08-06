@@ -12,7 +12,7 @@
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
 	power_adjustment = 1
-	density = 0
+	density = FALSE
 	var/weakref/target_ref
 	var/start_time = 0
 	var/power_drain = 7

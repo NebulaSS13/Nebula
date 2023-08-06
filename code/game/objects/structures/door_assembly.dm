@@ -2,8 +2,8 @@
 	name = "airlock assembly"
 	icon = 'icons/obj/doors/station/door.dmi'
 	icon_state = "construction"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/state = 0
 	var/base_name = "Airlock"

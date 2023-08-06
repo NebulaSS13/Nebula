@@ -7,7 +7,7 @@
 	min_broken_damage = 30
 	dir = SOUTH
 	organ_tag = "limb"
-	appearance_flags = PIXEL_SCALE | LONG_GLIDE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | LONG_GLIDE
 	scale_max_damage_to_species_health = TRUE
 
 	var/slowdown = 0
@@ -78,11 +78,14 @@
 
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
+	var/fingerprint
 
 /obj/item/organ/external/proc/get_fingerprint()
 
-	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && dna && !BP_IS_PROSTHETIC(src))
-		return md5(dna.uni_identity)
+	if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !BP_IS_PROSTHETIC(src))
+		if(!owner) // We need to generate a fingerprint as we've never been supplied one before.
+			fingerprint = md5(sequential_id(/mob))
+		return fingerprint
 
 	for(var/obj/item/organ/external/E in children)
 		var/print = E.get_fingerprint()
@@ -423,6 +426,11 @@
 
 	//If attached to an owner mob
 	if(istype(owner))
+
+		// Initialize fingerprints if we don't already have some (TODO: we're assuming this is our first owner, maybe check for this elsewhere?).
+		if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !fingerprint && !BP_IS_PROSTHETIC(src))
+			fingerprint = owner.get_full_print(ignore_blockers = TRUE)
+
 		//If we expect a parent organ set it up here
 		if(!affected && parent_organ)
 			parent = GET_EXTERNAL_ORGAN(owner, parent_organ)

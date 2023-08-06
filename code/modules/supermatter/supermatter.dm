@@ -108,8 +108,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon = 'icons/obj/supermatter_48.dmi'
 	icon_state = "supermatter"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	light_range = 4
 	layer = ABOVE_HUMAN_LAYER
 	matter = list(
@@ -292,7 +292,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		return
 
 	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
-	anchored = 1
+	anchored = TRUE
 	grav_pulling = 1
 	exploded = 1
 	sleep(pull_time)

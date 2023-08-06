@@ -2,7 +2,7 @@
 	name = "wreckage"
 	desc = "It might have some salvagable parts."
 	density = TRUE
-	opacity = 1
+	opacity = TRUE
 	anchored = TRUE
 	icon_state = "wreck"
 	icon = 'icons/mecha/mech_part_items.dmi'

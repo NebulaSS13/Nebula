@@ -10,7 +10,7 @@
 	level = 1
 	layer = EXPOSED_WIRE_TERMINAL_LAYER
 	var/obj/item/stock_parts/power/terminal/master
-	anchored = 1
+	anchored = TRUE
 
 	stat_immune = NOINPUT | NOSCREEN | NOPOWER
 	interact_offline = TRUE
@@ -36,7 +36,7 @@
 			to_chat(user, SPAN_WARNING("You must remove the floor plating in front of \the [machine] first!"))
 			return
 
-		 // If this is a terminal that's somehow been left behind, let it be removed freely. 
+		 // If this is a terminal that's somehow been left behind, let it be removed freely.
 		if(machine && !machine.components_are_accessible(/obj/item/stock_parts/power/terminal))
 			to_chat(user, SPAN_WARNING("You must open the panel on \the [machine] first!"))
 			return
@@ -88,7 +88,7 @@
 	. = ..()
 	if(master)
 		var/obj/machinery/machine = master_machine()
-		
+
 		// Wall frames and SMES have directional terminals.
 		if(!master.terminal_dir && !ispath(machine.frame_type, /obj/item/frame) && master.loc == loc)
 			icon_state = "term-omni"

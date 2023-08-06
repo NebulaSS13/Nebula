@@ -73,7 +73,7 @@
 	name = "echo"
 	desc = "It's not going to punch you, is it?"
 	var/mob/living/carbon/human/daddy
-	anchored = 1
+	anchored = TRUE
 	var/reality = 0
 	simulated = 0
 
@@ -141,4 +141,3 @@
 	color = "#ff9900"
 	alpha = 100
 	blend_mode = BLEND_SUBTRACT
-	layer = FULLSCREEN_LAYER

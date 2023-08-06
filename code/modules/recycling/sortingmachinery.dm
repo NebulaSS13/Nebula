@@ -1,7 +1,7 @@
 /obj/machinery/disposal/deliveryChute
 	name = "delivery chute"
 	desc = "A chute for big and small packages alike!"
-	density = 1
+	density = TRUE
 	icon_state = "intake"
 	base_type = /obj/machinery/disposal/deliveryChute/buildable
 	frame_type = /obj/structure/disposalconstruct/machine/chute

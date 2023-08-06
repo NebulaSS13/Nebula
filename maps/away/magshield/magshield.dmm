@@ -675,19 +675,19 @@
 /area/magshield/engine)
 "cc" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/magshield/engine)
 "cd" = (
 /obj/machinery/atmospherics/binary/circulator{
-	anchored = 1;
+	anchored = TRUE;
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -737,12 +737,12 @@
 /area/magshield/engine)
 "ck" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/yellow{
@@ -775,7 +775,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/generator{
-	anchored = 1
+	anchored = TRUE
 	},
 /turf/simulated/floor/plating,
 /area/magshield/engine)
@@ -856,7 +856,7 @@
 /area/magshield/engine)
 "cx" = (
 /obj/machinery/atmospherics/binary/circulator{
-	anchored = 1;
+	anchored = TRUE;
 	dir = 8
 	},
 /turf/simulated/floor/plating,

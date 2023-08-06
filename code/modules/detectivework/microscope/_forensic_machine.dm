@@ -3,8 +3,8 @@
 	desc = "A highly advanced microscope capable of analyzing any type of forensic evidence."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "microscope"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	base_type = /obj/machinery/forensic
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

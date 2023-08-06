@@ -3,9 +3,9 @@
 	desc = "One man's garbage is another man's treasure."
 	icon = 'icons/obj/structures/rubble.dmi'
 	icon_state = "base"
-	opacity = 1
-	density = 1
-	anchored = 1
+	opacity = TRUE
+	density = TRUE
+	anchored = TRUE
 	maxhealth = 50
 
 	var/list/loot = list(
@@ -35,7 +35,6 @@
 				I.color = initial(A.color)
 			if(!lootleft)
 				I.color = "#54362e"
-		I.appearance_flags = PIXEL_SCALE
 		I.pixel_x = rand(-16,16)
 		I.pixel_y = rand(-16,16)
 		var/matrix/M = matrix()

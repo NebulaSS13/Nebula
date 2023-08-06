@@ -1018,11 +1018,11 @@
 /area/map_template/skipjack_station/start)
 "cz" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "SkipjackShuttersNorth";
 	name = "Blast Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1384,12 +1384,12 @@
 /area/map_template/skipjack_station/start)
 "dt" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1413,12 +1413,12 @@
 /area/map_template/skipjack_station/start)
 "dy" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 8;
 	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersEast";
 	name = "Skipjack Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1487,12 +1487,12 @@
 /area/map_template/skipjack_station/start)
 "dI" = (
 /obj/machinery/door/blast/shutters{
-	density = 0;
+	density = FALSE;
 	dir = 4;
 	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,

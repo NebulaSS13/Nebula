@@ -11,7 +11,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	braintype = "Drone"
 	lawupdate = 0
-	density = 1
+	density = TRUE
 	req_access = list(access_engine, access_robotics)
 	integrated_light_power = 0.4
 	integrated_light_range = 3

@@ -6,8 +6,8 @@ var/global/list/internet_uplinks = list()
 	desc = "A machine designed to route massive amounts of data to and from PLEXUS receivers in a local area using a miniaturized wormhole."
 	icon = 'icons/obj/machines/internet_uplink.dmi'
 	icon_state = "unpowered"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/terminal,

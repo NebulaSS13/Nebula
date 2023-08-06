@@ -154,7 +154,7 @@
 	name = "office chair"
 	icon_state = "officechair_preview"
 	base_icon = "officechair"
-	anchored = 0
+	anchored = FALSE
 	buckle_movable = 1
 	movable_flags = MOVABLE_FLAG_WHEELED
 
