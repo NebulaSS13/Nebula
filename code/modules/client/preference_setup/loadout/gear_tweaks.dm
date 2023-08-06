@@ -215,7 +215,6 @@
 
 /datum/gear_tweak/tablet
 	var/list/ValidProcessors = list(/obj/item/stock_parts/computer/processor_unit/small)
-	var/list/ValidBatteries = list(/obj/item/stock_parts/computer/battery_module/nano, /obj/item/stock_parts/computer/battery_module/micro, /obj/item/stock_parts/computer/battery_module)
 	var/list/ValidHardDrives = list(/obj/item/stock_parts/computer/hard_drive/micro, /obj/item/stock_parts/computer/hard_drive/small, /obj/item/stock_parts/computer/hard_drive)
 	var/list/ValidNetworkCards = list(/obj/item/stock_parts/computer/network_card, /obj/item/stock_parts/computer/network_card/advanced)
 	var/list/ValidNanoPrinters = list(null, /obj/item/stock_parts/computer/nano_printer)
@@ -228,9 +227,6 @@
 	if (metadata.len != 7)
 		return
 	O = ValidProcessors[metadata[1]]
-	if(O)
-		names += initial(O.name)
-	O = ValidBatteries[metadata[2]]
 	if(O)
 		names += initial(O.name)
 	O = ValidHardDrives[metadata[3]]
@@ -271,12 +267,6 @@
 
 	names = list()
 	counter = 1
-	for(var/i in ValidBatteries)
-		if(i)
-			var/obj/O = i
-			names[initial(O.name)] = counter++
-		else
-			names["None"] = counter++
 
 	if (!user || !user.client)
 		return
@@ -365,9 +355,6 @@
 	if(ValidProcessors[metadata[1]])
 		var/t = ValidProcessors[metadata[1]]
 		assembly.add_replace_component(null, PART_CPU, new t(I))
-	if(ValidBatteries[metadata[2]])
-		var/t = ValidBatteries[metadata[2]]
-		assembly.add_replace_component(null, PART_BATTERY, new t(I))
 	if(ValidHardDrives[metadata[3]])
 		var/t = ValidHardDrives[metadata[3]]
 		assembly.add_replace_component(null, PART_HDD, new t(I))

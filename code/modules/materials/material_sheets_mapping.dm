@@ -45,10 +45,14 @@ STACK_SUBTYPES(tritium,        "tritium",                       gas/hydrogen/tri
 STACK_SUBTYPES(deuterium,      "deuterium",                     gas/hydrogen/deuterium,     aerogel,    null)
 STACK_SUBTYPES(iron,           "iron",                          solid/metal/iron,           ingot,      null)
 STACK_SUBTYPES(copper,         "copper",                        solid/metal/copper,         ingot,      null)
+STACK_SUBTYPES(tungsten,       "tungsten",                      solid/metal/tungsten,       ingot,      null)
+STACK_SUBTYPES(neptunium,      "neptunium",                     solid/metal/neptunium,      ingot,      null)
+STACK_SUBTYPES(plutonium,      "plutonium",                     solid/metal/plutonium,      ingot,      null)
 STACK_SUBTYPES(sandstone,      "sandstone",                     solid/stone/sandstone,      brick,      null)
 STACK_SUBTYPES(marble,         "marble",                        solid/stone/marble,         brick,      null)
 STACK_SUBTYPES(graphite,       "graphite",                      solid/graphite,             brick,      null)
 STACK_SUBTYPES(carbon,         "carbon",                        solid/carbon,               brick,      null)
+STACK_SUBTYPES(silicon,        "silicon",                       solid/silicon,              brick,      null)
 STACK_SUBTYPES(diamond,        "diamond",                       solid/gemstone/diamond,     gemstone,   null)
 STACK_SUBTYPES(uranium,        "uranium",                       solid/metal/uranium,        puck,       null)
 STACK_SUBTYPES(plastic,        "plastic",                       solid/plastic,              panel,      null)
@@ -88,7 +92,6 @@ STACK_SUBTYPES(blackbronze,    "black bronze",                  solid/metal/blac
 STACK_SUBTYPES(redgold,        "red gold",                      solid/metal/redgold,        ingot,      null)
 STACK_SUBTYPES(stainlesssteel, "stainless steel",               solid/metal/stainlesssteel, ingot,      null)
 STACK_SUBTYPES(ice,            "ice",                           liquid/water,               cubes,      null)
-
 
 STACK_SUBTYPES(cloth,          "cloth",                         solid/cloth,                bolt,       null)
 STACK_SUBTYPES(yellow,         "yellow cloth",                  solid/cloth/yellow,         bolt,       null)

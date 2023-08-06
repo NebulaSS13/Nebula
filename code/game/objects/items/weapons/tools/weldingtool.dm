@@ -371,6 +371,9 @@
 //////////////////////////////////////////////////////////////////
 // Welding Tool Variants
 //////////////////////////////////////////////////////////////////
+/obj/item/weldingtool/empty
+	tank = null
+
 /obj/item/weldingtool/mini
 	tank = /obj/item/chems/welder_tank/mini
 
@@ -395,6 +398,7 @@
 	icon              = 'icons/obj/items/tool/welders/welder_tanks.dmi'
 	icon_state        = "tank_normal"
 	w_class           = ITEM_SIZE_SMALL
+	atom_flags        = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags         = OBJ_FLAG_HOLLOW
 	force             = 5
 	throwforce        = 5
@@ -407,9 +411,11 @@
 	var/size_in_use   = ITEM_SIZE_NORMAL
 	var/unlit_force   = 7
 	var/lit_force     = 11
+	var/starts_empty = FALSE
 
 /obj/item/chems/welder_tank/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/fuel, reagents.maximum_volume)
+	if(!starts_empty)
+		reagents.add_reagent(/decl/material/liquid/fuel, reagents.maximum_volume)
 
 /obj/item/chems/welder_tank/examine(mob/user, distance)
 	. = ..()
@@ -422,7 +428,7 @@
 	to_chat(user, " It can hold up to [reagents.maximum_volume] units.")
 
 /obj/item/chems/welder_tank/afterattack(obj/O, mob/user, proximity, click_parameters)
-	if (!ATOM_IS_OPEN_CONTAINER(src) || !proximity)
+	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity)
 		return
 	if(standard_dispenser_refill(user, O))
 		return TRUE
@@ -470,6 +476,9 @@
 	if(!can_refuel)
 		LAZYREMOVE(., /decl/interaction_handler/set_transfer/chems)
 
+/obj/item/chems/welder_tank/empty
+	starts_empty = TRUE
+
 /obj/item/chems/welder_tank/mini
 	name        = "small welding tank"
 	base_name   = "small welding tank"
@@ -482,6 +491,9 @@
 	unlit_force = 5
 	lit_force   = 7
 
+/obj/item/chems/welder_tank/mini/empty
+	starts_empty = TRUE
+
 /obj/item/chems/welder_tank/large
 	name        = "large welding tank"
 	base_name   = "large welding tank"
@@ -491,6 +503,9 @@
 	force       = 6
 	throwforce  = 6
 	size_in_use = ITEM_SIZE_NORMAL
+
+/obj/item/chems/welder_tank/large/empty
+	starts_empty = TRUE
 
 /obj/item/chems/welder_tank/huge
 	name        = "huge welding tank"
@@ -503,6 +518,9 @@
 	size_in_use = ITEM_SIZE_LARGE
 	unlit_force = 9
 	lit_force   = 15
+
+/obj/item/chems/welder_tank/huge/empty
+	starts_empty = TRUE
 
 /obj/item/chems/welder_tank/experimental
 	name              = "experimental welding tank"

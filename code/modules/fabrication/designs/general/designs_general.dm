@@ -71,19 +71,15 @@
 	path = /obj/item/pen/green
 
 /datum/fabricator_recipe/clipboard_steel
-	name = "clipboard, steel"
 	path = /obj/item/clipboard/steel
 
 /datum/fabricator_recipe/clipboard_alum
-	name = "clipboard, aluminium"
 	path = /obj/item/clipboard/aluminium
 
 /datum/fabricator_recipe/clipboard_glass
-	name = "clipboard, glass"
 	path = /obj/item/clipboard/glass
 
-/datum/fabricator_recipe/clipboard_alum
-	name = "clipboard, plastic"
+/datum/fabricator_recipe/clipboard_plastic
 	path = /obj/item/clipboard/plastic
 
 /datum/fabricator_recipe/destTagger
@@ -117,48 +113,24 @@
 	name = "strut, steel"
 	path = /obj/item/stack/material/strut/mapped/steel
 
-/datum/fabricator_recipe/struts/get_resources()
-	resources = list(
-		/decl/material/solid/metal/steel =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
-	)
-
 /datum/fabricator_recipe/struts/plastic
 	name = "strut, plastic"
 	path = /obj/item/stack/material/strut/mapped/plastic
 
-/datum/fabricator_recipe/struts/plastic/get_resources()
-	resources = list(
-		/decl/material/solid/plastic =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
-	)
-
 /datum/fabricator_recipe/struts/aluminium
 	name = "strut, aluminium"
 	path = /obj/item/stack/material/strut/mapped/aluminium
-	fabricator_types = list(FABRICATOR_CLASS_INDUSTRIAL)
-
-/datum/fabricator_recipe/struts/aluminium/get_resources()
-	resources = list(
-		/decl/material/solid/metal/aluminium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
-	)
 
 /datum/fabricator_recipe/struts/titanium
 	name = "strut, titanium"
 	path = /obj/item/stack/material/strut/mapped/titanium
 	fabricator_types = list(FABRICATOR_CLASS_INDUSTRIAL)
 
-/datum/fabricator_recipe/struts/titanium/get_resources()
-	resources = list(
-		/decl/material/solid/metal/titanium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
-	)
-
 /datum/fabricator_recipe/umbrella
 	path = /obj/item/umbrella
 
 /datum/fabricator_recipe/network_id
 	path = /obj/item/card/id/network
-	fabricator_types = list(
-		FABRICATOR_CLASS_GENERAL
-	)
 
 /datum/fabricator_recipe/emergency_tank
 	path = /obj/item/tank/emergency

@@ -23,6 +23,9 @@
 
 	var/static/list/overlay_cache = list() //cache recent overlays
 
+/obj/item/t_scanner/empty
+	cell = null
+
 /obj/item/t_scanner/Destroy()
 	. = ..()
 	if(on)

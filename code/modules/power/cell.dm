@@ -22,6 +22,7 @@
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)
 
+	var/empmult = 1 //EMP charge loss multiplier
 	var/charge = null //Current charge
 	var/maxcharge = 250 //Capacity in Wh
 	//GODDAMnit why does it have to be 1 kwh. 1 kwh is THE    HIGH   CAPACITY  CELL. ITS ALWAYS BEEN THIS WAY
@@ -29,16 +30,29 @@
 	//. THIS HAS BUGGED ME FOR YEARS, like, from 2018
 	//I changed it to 250 wh from 1 kwh
 
+	//Non-rechargable cells bits
+	var/list/active_mats = list() //If set, cell will be considered non-rechargable. These materials will be reduced as the cell discharges
+	var/list/product_mats = list() //"waste" like depleted uranium and water. Yeah, this is petty but, well
+
 /obj/item/cell/Initialize()
 	. = ..()
 	if(isnull(charge))
 		charge = maxcharge
+	if(active_mats.len)
+		use(0) //just update mats if cell is dead
 	update_icon()
+
+/obj/item/cell/create_matter() //this is required to properly init materials for fabs and etc
+	. = ..()
+	for(var/mat in active_mats)
+		matter[mat] = round(active_mats[mat] * get_matter_amount_modifier())
 
 /obj/item/cell/examine(mob/user)
 	. = ..()
 	to_chat(user, "The label states it's capacity is [maxcharge] Wh.")
 	to_chat(user, "The charge meter reads [round(src.percent(), 0.1)]%.")
+	if(charge == 0 && active_mats)
+		to_chat(user,SPAN_NOTICE("It's dead. Kicked the.. whatever batteries kick when they die. You can't recharge it."))
 
 /obj/item/cell/on_update_icon()
 	. = ..()
@@ -65,9 +79,9 @@
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/R = loc
 		severity *= R.cell_emp_mult
-	// Lose 1/2, 1/4, 1/6 of the current charge per hit or 1/4, 1/8, 1/12 of the max charge per hit, whichever is highest
-	charge -= max(charge / (2 * severity), maxcharge/(4 * severity))
-	if (charge < 0)
+	//Lose 1/2, 1/4, 1/6 of the current charge per hit or 1/4, 1/8, 1/12 of the max charge per hit, whichever is highest
+	charge -= max(charge / (2 * severity), maxcharge/(4 * severity)) * empmult
+	if(charge < 0)
 		charge = 0
 	..()
 
@@ -92,9 +106,24 @@
 	charge -= used
 	update_icon()
 	. = used
+	if(active_mats.len)
+		for(var/mat in active_mats) //Just set mats according to current charge
+			if(charge)
+				matter[mat] = round(active_mats[mat] * charge/maxcharge, 5)
+			else
+				matter.Remove(mat)
+		if(charge < maxcharge)
+			for(var/mat in product_mats)
+				matter[mat] = round(product_mats[mat] * 1-charge/maxcharge,5)
 
 //Recharge a cell, returns the amount actually absorbed
 /obj/item/cell/proc/give(var/amount)
+	if(active_mats.len)
+		if(maxcharge > 500 && prob(70) && (use(amount*2) || use(charge))) //No fireworks if it's dead or low power (for PDAs since they have tesla link)
+			var/turf/T = get_turf(src)
+			T.visible_message(SPAN_WARNING("\The [src] sparks violently!"))
+			spark_at(T, amount=rand(1,3), cardinal_only = TRUE)
+		return 0
 	var/amount_used = min(maxcharge-charge,amount)
 	charge += amount_used
 	update_icon()
@@ -163,7 +192,7 @@
 	throw_range = 7
 	maxcharge = 25
 	//LITERALLY THE SAME FUCKING THING, TWO IDENTICAL CELLS. WHY DOES THIS KEEPS HAPPENING. Changed to 25 wh
-	//actually 25 wh is really close to real life cells, this is like a generic laptop cell
+	//actually 25 wh is really close to real life cells, this is like a generic laptop cell, but now it's in your pocket, literally
 
 /obj/item/cell/device/empty
 	charge = 0
@@ -200,7 +229,7 @@
 	desc = "A small power cell designed to power miniature critical systems."
 	icon_state = "device_super"
 	origin_tech = "{'powerstorage':3}"
-	maxcharge = 200
+	maxcharge = 200 //eh, it's okay. gold and silver, remember?
 	matter = list(
 		/decl/material/liquid/acid           = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/lead      = MATTER_AMOUNT_REINFORCEMENT,
@@ -211,6 +240,40 @@
 	)
 
 /obj/item/cell/device/super/empty
+	charge = 0
+
+//Fuel device cells (finally, nuclear AA cells!)
+//don't even try to UNDERSTAND how this is even possible, it just works.
+
+/obj/item/cell/device/fuel
+	name = "fission device cell"
+	desc = "A cheap miniature fission power cell.\nA warning label on the side reads: <span class='warning'>DO NOT INGEST. CONTAINS NEPTUNIUM</span>"
+	icon_state = "device_nuclear" //also needs a better icon
+	maxcharge = 150
+	empmult = 3 //no space for shielding
+	active_mats = list(/decl/material/solid/metal/neptunium = MATTER_AMOUNT_PRIMARY)
+	product_mats = list(/decl/material/solid/metal/fission_byproduct = MATTER_AMOUNT_PRIMARY * 0.2)
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY) //cheap!
+
+/obj/item/cell/device/fuel/empty
+	charge = 0
+
+/obj/item/cell/device/fuel/on_update_icon() //pls remove once there's a better icon
+	return
+
+//High
+
+/obj/item/cell/device/fuel/high
+	name = "advanced fission device cell"
+	desc = "A miniature fission device cell.\nA warning label on the side reads: <span class='warning'>DO NOT INGEST. CONTAINS PLUTONIUM</span>"
+	icon_state = "device_nuclear_high"
+	maxcharge = 250
+	active_mats = list(/decl/material/solid/metal/plutonium = MATTER_AMOUNT_PRIMARY)
+	product_mats = list(/decl/material/solid/metal/fission_byproduct = MATTER_AMOUNT_PRIMARY * 0.5)
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY,
+				/decl/material/solid/metal/copper = MATTER_AMOUNT_SECONDARY)
+
+/obj/item/cell/device/fuel/high/empty
 	charge = 0
 
 //High
@@ -329,44 +392,12 @@
 	icon_state = "cell_fuel"
 	maxcharge = 1500
 	origin_tech = "{'materials':1,'engineering': 1,'powerstorage': 1}"
-	var/list/active_mats = list(/decl/material/gas/hydrogen = MATTER_AMOUNT_PRIMARY * 2,/decl/material/gas/oxygen = MATTER_AMOUNT_PRIMARY)
-	var/list/product_mats = list(/decl/material/liquid/water = MATTER_AMOUNT_PRIMARY * 3)
+	active_mats = list(/decl/material/gas/hydrogen = MATTER_AMOUNT_PRIMARY * 2,/decl/material/gas/oxygen = MATTER_AMOUNT_PRIMARY)
+	product_mats = list(/decl/material/liquid/water = MATTER_AMOUNT_PRIMARY * 3)
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY
 	)
-
-/obj/item/cell/fuel/examine(var/mob/user)
-	. = ..()
-	if(charge == 0)
-		to_chat(user,SPAN_NOTICE("It's dead. Kicked the.. whatever batteries kick when they die. You can't recharge it."))
-
-/obj/item/cell/fuel/create_matter()
-	. = ..()
-	for(var/mat in active_mats)
-		matter[mat] = round(active_mats[mat] * get_matter_amount_modifier())
-
-/obj/item/cell/fuel/Initialize()
-	. = ..()
-	use(0)
-
-/obj/item/cell/fuel/use(var/amount)
-	. = ..()
-	for(var/mat in active_mats) //Just set mats according to current charge
-		if(charge)
-			matter[mat] = round(active_mats[mat] * charge/maxcharge, 5)
-		else
-			matter.Remove(mat)
-	if(charge < maxcharge)
-		for(var/mat in product_mats)
-			matter[mat] = round(product_mats[mat] * 1-charge/maxcharge,5)
-
-/obj/item/cell/fuel/give(var/amount)
-	if(prob(70) && (use(amount*2) || use(charge))) //No fireworks if it's dead
-		var/turf/T = get_turf(src)
-		T.visible_message(SPAN_WARNING("\The [src] sparks violently!"))
-		spark_at(T, amount=rand(1,3), cardinal_only = TRUE)
-	return 0
 
 /obj/item/cell/fuel/empty
 	charge = 0
@@ -386,9 +417,10 @@
 
 /obj/item/cell/fuel/high
 	name = "advanced hydrogen cell"
-	desc = "An efficient one-use hydrogen fuel cell."
+	desc = "An efficient one-use hydrogen fuel cell. This one has a layer of EMP protection."
 	icon_state = "cell_fuel_high"
 	maxcharge = 2500
+	empmult = 0.5
 	origin_tech = "{'materials':2,'engineering': 2,'powerstorage': 2}"
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_PRIMARY,
@@ -406,6 +438,7 @@
 	desc = "A non-rechargable nuclear fission power cell.\nA warning label on the side reads: <span class='warning'>IONIZIING RADIATION</span>"
 	icon_state = "cell_nuclear"
 	maxcharge = 3500
+	empmult = 0.5
 	origin_tech = "{'materials':3,'engineering': 3,'powerstorage': 3}"
 	active_mats = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_PRIMARY)
 	product_mats = list(/decl/material/solid/metal/depleted_uranium = MATTER_AMOUNT_PRIMARY * 0.6,
@@ -443,6 +476,7 @@
 	desc = "A powerful one-use nuclear fission power cell.\nA warning label on the side reads: <span class='warning'>IONIZIING RADIATION</span>"
 	icon_state = "cell_nuclear_high"
 	maxcharge = 4500
+	empmult = 0.4
 	origin_tech = "{'materials':4,'engineering': 4,'powerstorage': 4}"
 	active_mats = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_PRIMARY * 2)
 	product_mats = list(/decl/material/solid/metal/depleted_uranium = MATTER_AMOUNT_PRIMARY * 0.6 * 2,
@@ -463,6 +497,7 @@
 	desc = "A self-contained fusion cell. Alkaline batteries walked so this could run."
 	icon_state = "cell_fusion"
 	maxcharge = 5500
+	empmult = 0.3
 	origin_tech = "{'materials':6,'engineering': 6,'powerstorage': 6}"
 	active_mats = list(/decl/material/gas/hydrogen  = MATTER_AMOUNT_SECONDARY,
 					/decl/material/gas/hydrogen/deuterium = MATTER_AMOUNT_SECONDARY) //doesn't have to be realistic, we'll have a realistic one when we have fusion chemistry
@@ -483,6 +518,7 @@
 	desc = "An advanced self-contained fusion cell."
 	icon_state = "cell_fusion_high"
 	maxcharge = 6500
+	empmult = 0.2
 	origin_tech = "{'materials':7,'engineering': 7,'powerstorage': 7}"
 	active_mats = list(/decl/material/gas/hydrogen  = MATTER_AMOUNT_PRIMARY,
 					/decl/material/gas/hydrogen/deuterium = MATTER_AMOUNT_PRIMARY)

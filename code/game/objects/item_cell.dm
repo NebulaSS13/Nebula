@@ -27,7 +27,7 @@
 	. = ..()
 
 /obj/item/proc/cell_cover_open()
-	return !initial(cell_cover) || initial(cell_cover) && cell_cover && cell_allowed //if no cells are allowed there is no cover
+	return initial(cell_cover) && cell_cover && cell_allowed || !initial(cell_cover)
 
 //try to use amount/power_usage joules from cell
 /obj/item/proc/power_check(var/mob/user,var/amount) //amount is in joules since its an item thus probably a small device
@@ -35,6 +35,8 @@
 	if(!amount)
 		amount = power_usage
 	if(!amount) //no amount supplied, no power usage
+		return TRUE
+	if(!initial(cell) && !initial(cell_allowed)) //no starting cell and can't insert one
 		return TRUE
 	if(!get_cell()?.checked_use(amount * CELLRATE))
 		if(user) to_chat(user,SPAN_WARNING("\The [src] doesn't have enough power."))
@@ -46,10 +48,10 @@
 		return
 	if(cell_indicator && (initial(cell) || cell_allowed))
 		if(cell)
-			to_chat(user,"Its charge indicator reads: [cell.percent()]%")
+			to_chat(user,"Its charge indicator reads: [round(cell.percent())]%")
 		else
 			to_chat(user,"Its charge indicator is dark.")
-	if(initial(cell_cover) && cell_allowed && cell_cover_open())
+	if(cell_cover_open() && initial(cell_cover))
 		to_chat(user,SPAN_NOTICE("Its battery compartment is open."))
 
 //oh shit this egun code copypaste..
@@ -105,7 +107,7 @@
 		to_chat(user,SPAN_WARNING("\The [src]'s battery compartment is closed."))
 		return
 	if(!cell)
-		to_chat(user,SPAN_WARNING("\The [src]'s has no cell inside."))
+		to_chat(user,SPAN_WARNING("\The [src] has no cell inside."))
 		return
 	if(cell_crowbar)
 		to_chat(user,SPAN_WARNING("You need a crowbar to take out \the [src]'s cell."))
@@ -122,6 +124,8 @@
 
 /decl/interaction_handler/item_remove_cell
 	name = "Remove cell"
+	icon = 'icons/screen/radial.dmi'
+	icon_state = "cable_invalid"
 	expected_target_type = /obj/item
 
 /decl/interaction_handler/item_remove_cell/invoked(var/obj/item/target, var/mob/user)

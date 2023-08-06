@@ -130,9 +130,9 @@
 
 /datum/extension/interactive/os/proc/regular_ui_update()
 	var/ui_update_needed = 0
-	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
-	if(battery_module)
-		var/batery_percent = battery_module.battery.percent()
+	var/obj/item/cell/C = get_component(/obj/item/cell)
+	if(C)
+		var/batery_percent = C.percent()
 		if(last_battery_percent != batery_percent) //Let's update UI on percent change
 			ui_update_needed = 1
 			last_battery_percent = batery_percent
@@ -172,9 +172,9 @@
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
 /datum/extension/interactive/os/proc/get_header_data(file_browser = FALSE)
 	var/list/data = list()
-	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
-	if(battery_module)
-		switch(battery_module.battery.percent())
+	var/obj/item/cell/C = get_component(/obj/item/cell)
+	if(C)
+		switch(C.percent())
 			if(80 to 200) // 100 should be maximal but just in case..
 				data["PC_batteryicon"] = "batt_100.gif"
 			if(60 to 80)
@@ -187,12 +187,12 @@
 				data["PC_batteryicon"] = "batt_20.gif"
 			else
 				data["PC_batteryicon"] = "batt_5.gif"
-		data["PC_batterypercent"] = "[round(battery_module.battery.percent())] %"
+		data["PC_batterypercent"] = "[round(C.percent())] %"
 		data["PC_showbatteryicon"] = 1
 	else
 		data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "N/C"
-		data["PC_showbatteryicon"] = battery_module ? 1 : 0
+		data["PC_showbatteryicon"] = C ? 1 : 0
 
 	var/obj/item/stock_parts/computer/tesla_link/tesla_link = get_component(PART_TESLA)
 	if(tesla_link && tesla_link.enabled)

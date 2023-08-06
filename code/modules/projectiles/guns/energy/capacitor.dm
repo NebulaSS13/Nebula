@@ -170,7 +170,7 @@ var/global/list/laser_wavelengths
 /obj/item/gun/energy/capacitor/proc/charge(var/mob/user)
 	. = FALSE
 	if(!charging && istype(user))
-		charging = selected_wavelength
+		charging = TRUE
 		playsound(loc, 'sound/effects/capacitor_whine.ogg', 100, 0)
 		while(!QDELETED(user) && length(capacitors) && charging && user.get_active_hand() == src)
 			var/charged = TRUE

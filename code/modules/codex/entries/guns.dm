@@ -113,7 +113,7 @@
 	mechanics_text = "This weapon is an energy weapon; they run on battery charge rather than traditional ammunition. You can recharge \
 		an energy weapon by placing it in a wall-mounted or table-mounted charger, such as those found in Security or around the \
 		place. Additionally, most energy weapons can go straight through windows and hit whatever is on the other side, and are \
-		hitscan, making them accurate and useful against distant targets. \
+		hitscan, making them accurate and useful against distant targets. Most weapons have an open battery compartment to replace the power cell.\
 		<br><br>"
 
 /datum/codex_entry/ballistic_weapons

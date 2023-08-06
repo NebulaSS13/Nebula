@@ -18,7 +18,7 @@ var/global/list/plant_seed_sprites = list()
 	. = ..()
 
 /obj/item/seeds/worth()
-	. = ..() + seed ? seed.get_monetary_value() : ..()
+	. = ..() + seed?.get_monetary_value()
 
 // Used for extracts/seed sampling purposes.
 /obj/item/seeds/modified

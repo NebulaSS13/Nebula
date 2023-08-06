@@ -5,7 +5,6 @@
 		/obj/item/stock_parts/computer/tesla_link,
 		/obj/item/stock_parts/computer/hard_drive/micro,
 		/obj/item/stock_parts/computer/network_card,
-		/obj/item/stock_parts/computer/battery_module/nano,
 		/obj/item/stock_parts/computer/drive_slot
 	)
 
@@ -17,7 +16,6 @@
 		/obj/item/stock_parts/computer/network_card/advanced,
 		/obj/item/stock_parts/computer/nano_printer,
 		/obj/item/stock_parts/computer/card_slot,
-		/obj/item/stock_parts/computer/battery_module,
 		/obj/item/stock_parts/computer/drive_slot
 	)
 
@@ -27,7 +25,6 @@
 		/obj/item/stock_parts/computer/tesla_link,
 		/obj/item/stock_parts/computer/hard_drive/small,
 		/obj/item/stock_parts/computer/network_card,
-		/obj/item/stock_parts/computer/battery_module/micro,
 		/obj/item/stock_parts/computer/drive_slot
 	)
 //Map presets
@@ -40,7 +37,6 @@
 		/obj/item/stock_parts/computer/network_card/advanced,
 		/obj/item/stock_parts/computer/nano_printer,
 		/obj/item/stock_parts/computer/card_slot,
-		/obj/item/stock_parts/computer/battery_module,
 		/obj/item/stock_parts/computer/scanner/paper,
 		/obj/item/stock_parts/computer/drive_slot
 	)

@@ -86,7 +86,7 @@
 		if(ELECTROCUTE)
 			cause = "sparks"
 	visible_message(SPAN_WARNING("Something [cause] inside \the [machine]."), range = 2)
-	SetName("broken [name]")
+	SetName("broken [initial(name)]") //prevent broken broken broken airlock electronics
 
 /obj/item/stock_parts/proc/is_functional()
 	return (!can_take_damage()) || (health > 0)

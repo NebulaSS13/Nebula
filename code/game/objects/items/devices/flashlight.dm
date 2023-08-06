@@ -12,7 +12,8 @@
 	slot_flags = SLOT_LOWER_BODY
 
 	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+				/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
 
 	action_button_name = "Toggle Flashlight"
 
@@ -28,7 +29,7 @@
 
 	cell = /obj/item/cell/device
 	cell_allowed = /obj/item/cell/device
-	power_usage = 6.25 //2 hours of power
+	power_usage = 3.5 //around 3.5 hours of power
 
 /obj/item/flashlight/Initialize()
 	. = ..()
@@ -198,7 +199,7 @@
 	item_state = "biglight"
 	flashlight_range = 6
 	flashlight_power = 3
-	power_usage = 3.125
+	power_usage = 2
 
 /obj/item/flashlight/flashdark
 	name = "flashdark"
@@ -219,6 +220,7 @@
 	w_class = ITEM_SIZE_TINY
 	flashlight_range = 2
 	light_wedge = LIGHT_OMNI
+	cell = null
 	cell_allowed = null //its toooo small
 
 /obj/item/flashlight/pen/Initialize()
@@ -232,8 +234,7 @@
 	item_state = "maglight"
 	force = 10
 	attack_verb = list ("smacked", "thwacked", "thunked")
-	material = /decl/material/solid/metal/aluminium
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
 	light_wedge = LIGHT_NARROW
 
 /******************************Lantern*******************************/
@@ -249,12 +250,11 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	light_wedge = LIGHT_OMNI
 	light_color = LIGHT_COLOR_FIRE
 	cell = /obj/item/cell
 	cell_allowed = /obj/item/cell
-	power_usage = 60
+	power_usage = 60 //2 hours but you can use big cells
 	flashlight_range = 8
 
 /obj/item/flashlight/lantern/on_update_icon()
@@ -274,8 +274,8 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_TINY
 	flashlight_range = 2
+	cell = null
 	cell_allowed = null
-
 
 // the desk lamps are a bit special
 /obj/item/flashlight/lamp
@@ -296,7 +296,6 @@
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
 	light_color = "#ffc58f"
-	flashlight_range = 4
 
 /obj/item/flashlight/lamp/verb/toggle_light()
 	set name = "Toggle light"
@@ -322,7 +321,10 @@
 	flashlight_range = 5
 	flashlight_power = 3
 	light_wedge = LIGHT_OMNI
+	cell = null
 	cell_allowed = null
+
+	material = /decl/material/solid/
 
 	var/fuel = 0
 	var/on_damage = 7

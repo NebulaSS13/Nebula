@@ -95,3 +95,17 @@
 	<li>To lay a cable between decks (z-levels), use a cable on an open space from the deck above, dropping it down to the level below.</li></ul>"
 	antag_text = "Sometimes a carefully cut cable in the right place can cause power issues over a wide area once APCs start to run out. Just make sure to hide it after."
 	include_subtypes = TRUE
+
+/datum/codex_entry/cell
+	associated_paths = list(/obj/item/cell)
+	associated_strings = list("power cell","cell")
+	lore_text = list("Modern rechargable power cells are derived from the old lead-acid batteries and use the same technology employing more efficient materials.")
+	mechanics_text = list("Power cells are used to power most portable devices. They can be recharged using rechargers found in engineering and security.<BR> \
+	If you have a need to calculate how much a cell will function, divide its rating by power usage multiplied by 2.")
+
+/datum/codex_entry/cell/fuel
+	associated_paths = list(/obj/item/cell/fuel,/obj/item/cell/device/fuel)
+	lore_text = list("Non-rechargable chemical batteries were completely blown out by the emerging hydrogen cells and miniature fission technology.<BR> \
+	They are still non-rechargable, but their capacity is usually better and advanced models have some space for EMP protection.")
+	mechanics_text = list("\"Fuel\" cells can be produced en masse by protolathe and offer significantly better power rating than<BR> \
+	their rechargable counterparts. Low-tier cells can be produced by autolathe using hydrogen and oxygen or neptunium.")

@@ -22,7 +22,6 @@
 	default_hardware = list(
 		/obj/item/stock_parts/computer/hard_drive/micro,
 		/obj/item/stock_parts/computer/processor_unit/small,
-		/obj/item/stock_parts/computer/battery_module/nano,
 		/obj/item/stock_parts/computer/drive_slot
 	)
 

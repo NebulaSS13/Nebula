@@ -88,6 +88,9 @@
 /datum/fabricator_recipe/device_component/cell_fuel
 	path = /obj/item/cell/fuel
 
+/datum/fabricator_recipe/device_component/cell_fuel_device
+	path = /obj/item/cell/device/fuel
+
 /datum/fabricator_recipe/device_component/ecigcartridge
 	path = /obj/item/chems/ecig_cartridge/blank
 
@@ -109,25 +112,15 @@
 /datum/fabricator_recipe/device_component/heatsink
 	path = /obj/item/stock_parts/shielding/heat
 
-/datum/fabricator_recipe/device_component/comp_accessory
-	category = "Computer Components"
-	path = /obj/item/stock_parts/computer/ai_slot
+/datum/fabricator_recipe/device_component/comp_part/get_product_name()
+	. = "computer part ([..()])"
 
-/datum/fabricator_recipe/device_component/comp_accessory/get_product_name()
-	. = "computer accessory ([..()])"
+/datum/fabricator_recipe/device_component/comp_part
+	category = "Computer Parts"
+	path = /obj/item/stock_parts/computer/card_slot
 
-/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu
-	category = "CPU Designs"
+/datum/fabricator_recipe/device_component/comp_part/cpu
 	path = /obj/item/stock_parts/computer/processor_unit
 
-/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu/get_product_name()
-	. = "CPU design ([..()])"
-
-/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu/small
+/datum/fabricator_recipe/device_component/comp_part/cpu_small
 	path = /obj/item/stock_parts/computer/processor_unit/small
-
-/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu/photonic
-	path = /obj/item/stock_parts/computer/processor_unit/photonic
-
-/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu/photonic/small
-	path = /obj/item/stock_parts/computer/processor_unit/photonic/small

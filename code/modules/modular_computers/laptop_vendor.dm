@@ -72,18 +72,6 @@
 				if(fabricate)
 					assembly.add_replace_component(null, PART_CPU, new/obj/item/stock_parts/computer/processor_unit(fabricated_laptop))
 				total_price += 299
-		switch(dev_battery)
-			if(1) // Basic(750C)
-				if(fabricate)
-					assembly.add_replace_component(null, PART_BATTERY, new/obj/item/stock_parts/computer/battery_module(fabricated_laptop))
-			if(2) // Upgraded(1100C)
-				if(fabricate)
-					assembly.add_replace_component(null, PART_BATTERY, new/obj/item/stock_parts/computer/battery_module/advanced(fabricated_laptop))
-				total_price += 199
-			if(3) // Advanced(1500C)
-				if(fabricate)
-					assembly.add_replace_component(null, PART_BATTERY, new/obj/item/stock_parts/computer/battery_module/super(fabricated_laptop))
-				total_price += 499
 		switch(dev_disk)
 			if(1) // Basic(128GQ)
 				if(fabricate)
@@ -130,18 +118,6 @@
 			assembly = get_extension(fabricated_laptop, /datum/extension/assembly)
 			assembly.add_replace_component(null, PART_CPU, new/obj/item/stock_parts/computer/processor_unit/small(fabricated_tablet))
 		total_price = 199
-		switch(dev_battery)
-			if(1) // Basic(300C)
-				if(fabricate)
-					assembly.add_replace_component(null, PART_BATTERY, new/obj/item/stock_parts/computer/battery_module/nano(fabricated_tablet))
-			if(2) // Upgraded(500C)
-				if(fabricate)
-					assembly.add_replace_component(null, PART_BATTERY, new/obj/item/stock_parts/computer/battery_module/micro(fabricated_tablet))
-				total_price += 199
-			if(3) // Advanced(750C)
-				if(fabricate)
-					assembly.add_replace_component(null, PART_BATTERY, new/obj/item/stock_parts/computer/battery_module(fabricated_tablet))
-				total_price += 499
 		switch(dev_disk)
 			if(1) // Basic(32GQ)
 				if(fabricate)

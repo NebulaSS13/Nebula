@@ -500,7 +500,8 @@
 	base_state = "ltube"
 	item_state = "c_tube"
 	material = /decl/material/solid/glass
-	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,/decl/material/gas/hydrogen = MATTER_AMOUNT_REINFORCEMENT)
+	//hydrogen has other uses, made it required here to not overflow lathe with various materials
 
 	b_range = 8
 	b_power = 0.8
@@ -532,6 +533,8 @@
 	item_state = "contvapour"
 	broken_chance = 3
 	material = /decl/material/solid/glass
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,/decl/material/solid/metal/tungsten = MATTER_AMOUNT_REINFORCEMENT)
+	//it is now.. INCANDESCENT.
 	b_color = LIGHT_COLOR_TUNGSTEN
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),

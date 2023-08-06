@@ -2705,7 +2705,6 @@
 #include "code\modules\modular_computers\file_system\reports\warrant.dm"
 #include "code\modules\modular_computers\hardware\_hardware.dm"
 #include "code\modules\modular_computers\hardware\ai_slot.dm"
-#include "code\modules\modular_computers\hardware\battery_module.dm"
 #include "code\modules\modular_computers\hardware\card_slot.dm"
 #include "code\modules\modular_computers\hardware\charge_stick_slot.dm"
 #include "code\modules\modular_computers\hardware\drive_slot.dm"

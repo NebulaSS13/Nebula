@@ -9,9 +9,11 @@
 // Tries to use power from battery. Passing 0 as parameter results in this proc returning whether battery is functional or not.
 /datum/extension/assembly/proc/battery_power(var/power_usage = 0)
 	apc_powered = FALSE
-	for(var/obj/item/stock_parts/computer/battery_module/battery_module in parts)
-		if(battery_module.check_functionality() && battery_module.battery.checked_use(power_usage * CELLRATE))
-			return TRUE
+	var/obj/item/I = holder
+	if(istype(I))
+		var/obj/item/cell/C = I.get_cell()
+		return C?.checked_use(power_usage * CELLRATE)
+	return FALSE
 
 // Tries to use power from APC, if present.
 /datum/extension/assembly/proc/apc_power(var/power_usage = 0)
@@ -31,13 +33,17 @@
 		return FALSE
 
 	// At this point, we know that APC can power us for this tick. Check if we also need to charge our battery, and then actually use the power.
-	for(var/obj/item/stock_parts/computer/battery_module/battery_module in parts)
-		if(battery_module.check_functionality() && (battery_module.battery.charge < battery_module.battery.maxcharge) && power_usage > 0)
+	var/obj/item/I = holder
+	if(istype(I))
+		var/obj/item/cell/C = I.get_cell()
+		if(!C)
+			return FALSE
+		if((C.charge < C.maxcharge) && power_usage > 0)
 			power_usage += tesla_link.passive_charging_rate
-			battery_module.battery.give(tesla_link.passive_charging_rate * CELLRATE)
-
-	A.use_power_oneoff(power_usage, EQUIP)
-	return TRUE
+			C.give(tesla_link.passive_charging_rate * CELLRATE)
+		A.use_power_oneoff(power_usage, EQUIP)
+		return TRUE
+	return FALSE
 
 // Handles power-related things, such as battery interaction, recharging, shutdown when it's discharged
 /datum/extension/assembly/proc/calculate_power_usage()
@@ -50,7 +56,7 @@
 /datum/extension/assembly/proc/handle_power()
 	last_power_usage = calculate_power_usage()
 
-	// First tries to charge from an APC, if APC is unavailable switches to battery power. 
+	// First tries to charge from an APC, if APC is unavailable switches to battery power.
 	// If neither works the computer fails.
 	if(apc_power(last_power_usage)) return
 	if(battery_power(last_power_usage)) return

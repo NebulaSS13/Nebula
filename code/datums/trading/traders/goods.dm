@@ -72,7 +72,6 @@
 				)
 
 	possible_trading_items = list(
-		/obj/item/stock_parts/computer/battery_module          = TRADER_SUBTYPES_ONLY,
 		/obj/item/stock_parts/circuitboard                     = TRADER_SUBTYPES_ONLY,
 		/obj/item/stock_parts/circuitboard/unary_atmos         = TRADER_BLACKLIST,
 		/obj/item/stock_parts/circuitboard/arcade              = TRADER_BLACKLIST,

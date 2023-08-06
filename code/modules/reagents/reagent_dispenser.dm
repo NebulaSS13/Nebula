@@ -221,6 +221,9 @@
 		try_detonate_reagents()
 	return ..()
 
+/obj/structure/reagent_dispensers/fueltank/handle_default_welder_attackby(var/mob/user, var/obj/item/weldingtool/welder)
+	return welder?.afterattack(src, user, TRUE)
+
 /obj/structure/reagent_dispensers/peppertank
 	name             = "pepper spray refiller"
 	desc             = "Refills pepper spray canisters."

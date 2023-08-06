@@ -71,27 +71,15 @@
 /datum/fabricator_recipe/protolathe/device_cell/super
 	path = /obj/item/cell/device/super
 
-//Computer cells
+//Fuel device cells
 
-/datum/fabricator_recipe/protolathe/comp_cell/get_product_name()
-	. = "computer battery model ([..()])"
+/datum/fabricator_recipe/protolathe/device_cell_fuel/get_product_name()
+	. = "fuel device cell model ([..()])"
 
-/datum/fabricator_recipe/protolathe/comp_cell
+/datum/fabricator_recipe/protolathe/device_cell_fuel
 	category = "Power Storage"
 	fabricator_types = list(FABRICATOR_CLASS_PROTOLATHE)
-	path = /obj/item/stock_parts/computer/battery_module
+	path = /obj/item/cell/device/fuel
 
-/datum/fabricator_recipe/protolathe/comp_cell/advanced
-	path = /obj/item/stock_parts/computer/battery_module/advanced
-
-/datum/fabricator_recipe/protolathe/comp_cell/super
-	path = /obj/item/stock_parts/computer/battery_module/super
-
-/datum/fabricator_recipe/protolathe/comp_cell/ultra
-	path = /obj/item/stock_parts/computer/battery_module/ultra
-
-/datum/fabricator_recipe/protolathe/comp_cell/nano
-	path = /obj/item/stock_parts/computer/battery_module/nano
-
-/datum/fabricator_recipe/protolathe/comp_cell/micro
-	path = /obj/item/stock_parts/computer/battery_module/micro
+/datum/fabricator_recipe/protolathe/device_cell_fuel/high
+	path = /obj/item/cell/device/fuel/high

@@ -10,7 +10,6 @@
 		/obj/item/stock_parts/computer/processor_unit/small,
 		/obj/item/stock_parts/computer/hard_drive/small,
 		/obj/item/stock_parts/computer/network_card,
-		/obj/item/stock_parts/computer/battery_module/nano,
 		/obj/item/stock_parts/computer/tesla_link
 	)
 
@@ -94,7 +93,6 @@
 	max_hardware_size = 1
 	enabled_by_default = TRUE
 	max_parts = list(
-		PART_BATTERY 	= 1,
 		PART_CPU		= 1,
 		PART_NETWORK	= 1,
 		PART_HDD		= 1,

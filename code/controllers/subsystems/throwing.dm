@@ -182,7 +182,8 @@ SUBSYSTEM_DEF(throwing)
 
 		if(!hit)
 			thrownthing.throw_impact(get_turf(thrownthing), src)  // we haven't hit something yet and we still must, let's hit the ground.
-			thrownthing.space_drift(init_dir)
+			if(thrownthing) //runtime fix
+				thrownthing.space_drift(init_dir)
 
 	if(t_target)
 		thrownthing.throw_impact(t_target, src)

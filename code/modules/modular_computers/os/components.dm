@@ -69,10 +69,6 @@
 	if(hard_drive)
 		qdel(hard_drive)
 
-	var/obj/item/stock_parts/computer/battery_module = get_component(PART_BATTERY)
-	if(battery_module && prob(25))
-		qdel(battery_module)
-
 	var/obj/item/stock_parts/computer/tesla_link = get_component(PART_TESLA)
 	if(tesla_link && prob(50))
 		qdel(tesla_link)

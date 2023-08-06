@@ -2,11 +2,11 @@
 #define SHEET_UNIT "<small>cm<sup>3</sup></small>"
 
 #define REAGENT_UNITS_PER_MATERIAL_UNIT (REAGENT_UNITS_PER_MATERIAL_SHEET / SHEET_MATERIAL_AMOUNT)
-#define REAGENT_UNITS_PER_MATERIAL_SHEET 20 //touch this instead
-#define REAGENT_UNITS_PER_GAS_MOLE 10 //and this
+#define REAGENT_UNITS_PER_MATERIAL_SHEET 100 //touch this instead, sanity note, this is 100 (was 20)
+#define REAGENT_UNITS_PER_GAS_MOLE 50 //and this, sanity note, this is 50 (was 10) all this should be obsolete once reagents and matter are united
 #define MATERIAL_UNITS_TO_REAGENTS_UNITS(AMT) (AMT * REAGENT_UNITS_PER_MATERIAL_UNIT)
 
-#define MATERIAL_WORTH_MULTIPLIER 0.05 //dont touch this shit please and the shit below too
+#define MATERIAL_WORTH_MULTIPLIER 0.05 //dont touch this shit please and the shit below too (the shit below is REALLY important)
 #define REAGENT_WORTH_MULTIPLIER 1 / REAGENT_UNITS_PER_MATERIAL_SHEET * SHEET_MATERIAL_AMOUNT * MATERIAL_WORTH_MULTIPLIER
 #define GAS_WORTH_MULTIPLIER 1 * REAGENT_UNITS_PER_GAS_MOLE * REAGENT_WORTH_MULTIPLIER
 

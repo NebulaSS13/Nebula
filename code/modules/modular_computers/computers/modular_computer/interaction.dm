@@ -5,7 +5,7 @@
 	else
 		verbs -= /obj/item/modular_computer/proc/remove_pen
 
-	if(assembly.get_component(PART_CARD))
+	if(assembly?.get_component(PART_CARD))
 		verbs |= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 	else
 		verbs -= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id

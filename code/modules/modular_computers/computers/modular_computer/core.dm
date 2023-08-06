@@ -147,12 +147,6 @@
 
 /obj/item/modular_computer/proc/update_name()
 
-/obj/item/modular_computer/get_cell()
-	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	var/obj/item/stock_parts/computer/battery_module/battery_module = assembly.get_component(PART_CARD)
-	if(battery_module)
-		return battery_module.get_cell()
-
 /obj/item/modular_computer/explosion_act(var/severity)
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	assembly.ex_act(severity)

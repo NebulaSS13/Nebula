@@ -73,8 +73,6 @@
 		icon_state = "[initial(icon_state)]-off"
 	else
 		icon_state = initial(icon_state)
-		if(radio_device_type && analog && check_state_in_icon("[initial(icon_state)]-analog", icon))
-			add_overlay("[initial(icon_state)]-analog")
 	if(cell && check_state_in_icon("[initial(icon_state)]-cell", icon))
 		add_overlay("[initial(icon_state)]-cell")
 
@@ -221,7 +219,7 @@
 		last_radio_sound = world.time
 		if(check_state_in_icon("[initial(icon_state)]-active", icon))
 			icon_state = "[initial(icon_state)]-active"
-			if(radio_device_type && analog && check_state_in_icon("[initial(icon_state)]-analog", icon))
+			if(radio_device_type && analog && check_state_in_icon("[initial(icon_state)]-analog-active", icon))
 				icon_state = "[initial(icon_state)]-analog-active"
 			addtimer(CALLBACK(src, /atom/proc/update_icon), 30)
 
