@@ -13,12 +13,9 @@
 	if(prob(5))
 		body_flags |= BODY_FLAG_NO_PAIN
 	base_color  = RANDOM_RGB
-	. = ..()
-
-/decl/bodytype/alium/Initialize()
-	. = ..()
 	MULT_BY_RANDOM_COEF(eye_flash_mod, 0.5, 1.5)
 	eye_darksight_range = rand(1,8)
+	. = ..()
 
 /decl/species/alium
 	name = SPECIES_ALIEN

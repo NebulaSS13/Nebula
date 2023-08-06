@@ -552,4 +552,4 @@ meteor_act
 		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(I) // get_organ with a type passed already does a typecheck
 			return I.get_flash_mod()
-	return bodytype.eye_flash_mod
+	return root_bodytype.eye_flash_mod

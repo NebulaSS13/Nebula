@@ -90,7 +90,7 @@
 		owner.set_status(STAT_BLIND, 20)
 
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
-	return (flash_protection + bodytype.eye_innate_flash_protection)
+	return (flash_protection + get_innate_flash_protection())
 
 /obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
 	return -1
