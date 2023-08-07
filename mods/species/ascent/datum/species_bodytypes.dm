@@ -1,11 +1,5 @@
-/decl/bodytype/crystalline/alate
-	name =              "alate"
-	bodytype_category = BODYTYPE_MANTID_SMALL
-	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
-	blood_overlays =    'mods/species/ascent/icons/species/body/alate/blood_overlays.dmi'
-	associated_gender = MALE
-	bodytype_flag =     BODY_FLAG_ALATE
-	movement_slowdown = -1
+/decl/bodytype/crystalline/mantid
+	abstract_type = /decl/bodytype/crystalline/mantid
 	appearance_flags =  0
 	is_brittle = FALSE
 	has_limbs = list(
@@ -17,10 +11,10 @@
 		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
 		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
 		BP_M_HAND = list("path" = /obj/item/organ/external/hand/insectoid/midlimb),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid)
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid/mantid),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid/mantid),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid/mantid),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid/mantid)
 	)
 
 	has_organ = list(
@@ -33,10 +27,18 @@
 		BP_EYES =              /obj/item/organ/internal/eyes/insectoid,
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
-
 	limb_mapping = list(BP_CHEST = list(BP_CHEST, BP_M_HAND))
 
-/decl/bodytype/crystalline/gyne
+/decl/bodytype/crystalline/mantid/alate
+	name =              "alate"
+	bodytype_category = BODYTYPE_MANTID_SMALL
+	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
+	blood_overlays =    'mods/species/ascent/icons/species/body/alate/blood_overlays.dmi'
+	associated_gender = MALE
+	bodytype_flag =     BODY_FLAG_ALATE
+	movement_slowdown = -1
+
+/decl/bodytype/crystalline/mantid/gyne
 	name =              "gyne"
 	bodytype_category = BODYTYPE_MANTID_LARGE
 	icon_base =         'mods/species/ascent/icons/species/body/gyne/body.dmi'
@@ -50,15 +52,13 @@
 	bodytype_flag =     BODY_FLAG_GYNE
 	movement_slowdown = 2
 	override_limb_types = list(
-		BP_HEAD = /obj/item/organ/external/head/insectoid/mantid,
-		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne,
+		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne
 	)
-
 	override_organ_types = list(
 		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid,
 	)
 
-/decl/bodytype/crystalline/gyne/Initialize()
+/decl/bodytype/crystalline/mantid/gyne/Initialize()
 	equip_adjust = list(
 		BP_L_HAND = list(
 			"[NORTH]" = list("x" = -4, "y" = 12),
