@@ -8,8 +8,6 @@
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 
-	src.blinded = null
-
 	//Status updates, death etc.
 	clamp_values()
 	handle_regular_status_updates()
@@ -80,6 +78,7 @@
 	if(health < config.health_threshold_dead && src.stat != 2) //die only once
 		death()
 
+	var/is_blind = FALSE
 	if (src.stat != DEAD) //Alive.
 		if (incapacitated(INCAPACITATION_DISRUPTED) || !has_power)
 			src.set_stat(UNCONSCIOUS)
@@ -89,25 +88,22 @@
 				ADJ_STATUS(src, STAT_WEAK, -1)
 			if (HAS_STATUS(src, STAT_PARA) > 0)
 				ADJ_STATUS(src, STAT_PARA, -1)
-				src.blinded = 1
-			else
-				src.blinded = 0
-
+				is_blind = TRUE
 		else	//Not stunned.
 			src.set_stat(CONSCIOUS)
 
 	else //Dead.
 		cameranet.update_visibility(src, FALSE)
-		src.blinded = 1
+		is_blind = TRUE
 		src.set_stat(DEAD)
 
 	if(HAS_STATUS(src, STAT_BLIND))
 		ADJ_STATUS(src, STAT_BLIND, -1)
-		src.blinded = 1
+		is_blind = TRUE
 
 	src.set_density(!src.lying)
 	if(src.sdisabilities & BLINDED)
-		src.blinded = 1
+		is_blind = TRUE
 	if(src.sdisabilities & DEAFENED)
 		src.set_status(STAT_DEAF, 1)
 
@@ -121,11 +117,12 @@
 		else
 			silicon_radio.on = 1
 
-	if(isnull(components["camera"]) || is_component_functioning("camera"))
-		src.blinded = 0
-	else
-		src.blinded = 1
+	if(!isnull(components["camera"]) && !is_component_functioning("camera"))
+		is_blind = TRUE
 		cameranet.update_visibility(src, FALSE)
+
+	if(is_blind)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	return 1
 
@@ -237,7 +234,7 @@
 			src.oxygen.icon_state = "oxy1"
 
 	if(stat != DEAD)
-		if(blinded)
+		if(is_blind())
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		else
 			clear_fullscreen("blind")

@@ -1,16 +1,10 @@
 // Alien larva are quite simple.
 /mob/living/carbon/alien/Life()
-
 	set invisibility = 0
 	set background = 1
-
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))	return
 	if(!loc)			return
-
 	..()
-
-	blinded = null
-
 	//Status updates, death etc.
 	update_icon()
 
@@ -28,19 +22,20 @@
 
 	if(status_flags & GODMODE)	return 0
 
+	var/is_blind = FALSE
 	if(stat == DEAD)
-		blinded = 1
+		is_blind = TRUE
 		set_status(STAT_SILENCE, 0)
 	else
 		updatehealth()
 		if(health <= 0)
 			death()
-			blinded = 1
+			is_blind = TRUE
 			set_status(STAT_SILENCE, 0)
 			return 1
 
 		if(HAS_STATUS(src, STAT_PARA))
-			blinded = 1
+			is_blind = TRUE
 			set_stat(UNCONSCIOUS)
 			if(getHalLoss() > 0)
 				adjustHalLoss(-3)
@@ -50,7 +45,7 @@
 			if (mind)
 				if(mind.active && client != null)
 					ADJ_STATUS(src, STAT_ASLEEP, -1)
-			blinded = 1
+			is_blind = TRUE
 			set_stat(UNCONSCIOUS)
 		else if(resting)
 			if(getHalLoss() > 0)
@@ -64,13 +59,16 @@
 		// Eyes and blindness.
 		if(!check_has_eyes())
 			set_status(STAT_BLIND, 1)
-			blinded = 1
+			is_blind = TRUE
 			set_status(STAT_BLURRY, 1)
 		else if(GET_STATUS(src, STAT_BLIND))
 			ADJ_STATUS(src, STAT_BLIND, -1)
-			blinded = 1
+			is_blind = TRUE
 
 		update_icon()
+
+	if(is_blind)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	return 1
 
@@ -97,7 +95,7 @@
 			healths.icon_state = "health7"
 
 	if(stat != DEAD)
-		if(blinded)
+		if(is_blind())
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		else
 			clear_fullscreen("blind")

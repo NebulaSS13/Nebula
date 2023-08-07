@@ -85,7 +85,6 @@
 
 	sdisabilities = 0
 	if(host)
-		blinded = host.blinded
 		set_status(STAT_BLIND, GET_STATUS(host, STAT_BLIND))
 		set_status(STAT_BLURRY, GET_STATUS(host, STAT_BLURRY))
 		if(host.sdisabilities & BLINDED)
@@ -93,7 +92,6 @@
 		if(host.sdisabilities & DEAFENED)
 			sdisabilities |= DEAFENED
 	else
-		blinded = FALSE
 		set_status(STAT_BLIND, 0)
 		set_status(STAT_BLURRY, 0)
 

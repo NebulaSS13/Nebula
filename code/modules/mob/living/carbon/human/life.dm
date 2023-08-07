@@ -153,11 +153,9 @@
 
 	if(!root_bodytype.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
 		set_status(STAT_BLIND, 0)
-		blinded =    0
 		set_status(STAT_BLURRY, 0)
 	else if(!vision || (vision && !vision.is_usable()))   // Vision organs cut out or broken? Permablind.
 		set_status(STAT_BLIND, 1)
-		blinded =    1
 		set_status(STAT_BLURRY, 1)
 	// Non-genetic blindness; covered eyes will heal faster.
 	else if(!(sdisabilities & BLINDED) && equipment_tint_total >= TINT_BLIND)
@@ -390,8 +388,9 @@
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!
+	var/is_blind = FALSE
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
-		blinded = 1
+		is_blind = TRUE
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		updatehealth()	//TODO
@@ -406,7 +405,7 @@
 			SET_STATUS_MAX(src, STAT_PARA, 10)
 
 		if(HAS_STATUS(src, STAT_PARA) ||HAS_STATUS(src, STAT_ASLEEP))
-			blinded = 1
+			is_blind = TRUE
 			set_stat(UNCONSCIOUS)
 			animate_tail_reset()
 			adjustHalLoss(-3)
@@ -464,6 +463,9 @@
 			ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
+
+	if(is_blind)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	return 1
 
