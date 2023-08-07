@@ -93,7 +93,7 @@
 		if(host.sdisabilities & DEAFENED)
 			sdisabilities |= DEAFENED
 	else
-		blinded =    FALSE
+		blinded = FALSE
 		set_status(STAT_BLIND, 0)
 		set_status(STAT_BLURRY, 0)
 

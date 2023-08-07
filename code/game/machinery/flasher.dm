@@ -83,7 +83,7 @@
 					H.flash_eyes()
 					E.damage += rand(1, 5)
 
-		if(!O.blinded)
+		if(!O.is_blind())
 			do_flash(O, flash_time)
 
 /obj/machinery/flasher/proc/do_flash(var/mob/living/victim, var/flash_time)
