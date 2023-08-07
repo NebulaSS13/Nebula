@@ -22,20 +22,19 @@
 
 	if(status_flags & GODMODE)	return 0
 
-	var/is_blind = FALSE
 	if(stat == DEAD)
-		is_blind = TRUE
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
 	else
 		updatehealth()
 		if(health <= 0)
 			death()
-			is_blind = TRUE
+			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			set_status(STAT_SILENCE, 0)
 			return 1
 
 		if(HAS_STATUS(src, STAT_PARA))
-			is_blind = TRUE
+			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			set_stat(UNCONSCIOUS)
 			if(getHalLoss() > 0)
 				adjustHalLoss(-3)
@@ -45,7 +44,7 @@
 			if (mind)
 				if(mind.active && client != null)
 					ADJ_STATUS(src, STAT_ASLEEP, -1)
-			is_blind = TRUE
+			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			set_stat(UNCONSCIOUS)
 		else if(resting)
 			if(getHalLoss() > 0)
@@ -59,16 +58,11 @@
 		// Eyes and blindness.
 		if(!check_has_eyes())
 			set_status(STAT_BLIND, 1)
-			is_blind = TRUE
 			set_status(STAT_BLURRY, 1)
 		else if(GET_STATUS(src, STAT_BLIND))
 			ADJ_STATUS(src, STAT_BLIND, -1)
-			is_blind = TRUE
 
 		update_icon()
-
-	if(is_blind)
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	return 1
 

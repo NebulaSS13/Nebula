@@ -388,9 +388,8 @@
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!
-	var/is_blind = FALSE
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
-		is_blind = TRUE
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		updatehealth()	//TODO
@@ -405,7 +404,7 @@
 			SET_STATUS_MAX(src, STAT_PARA, 10)
 
 		if(HAS_STATUS(src, STAT_PARA) ||HAS_STATUS(src, STAT_ASLEEP))
-			is_blind = TRUE
+			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			set_stat(UNCONSCIOUS)
 			animate_tail_reset()
 			adjustHalLoss(-3)
@@ -463,9 +462,6 @@
 			ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
-
-	if(is_blind)
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	return 1
 
