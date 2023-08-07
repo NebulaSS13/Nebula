@@ -473,7 +473,7 @@
 				if(flash_time <= 0)
 					return
 
-			if(!O.blinded)
+			if(!O.is_blind())
 				O.flash_eyes(FLASH_PROTECTION_MODERATE - protection)
 				SET_STATUS_MAX(O, STAT_BLURRY, flash_time)
 				SET_STATUS_MAX(O, STAT_CONFUSE, (flash_time + 2))
@@ -519,7 +519,7 @@
 				if(flash_time <= 0)
 					return
 
-			if(!O.blinded)
+			if(!O.is_blind())
 				O.flash_eyes(FLASH_PROTECTION_MAJOR - protection)
 				SET_STATUS_MAX(O, STAT_BLURRY, flash_time)
 				SET_STATUS_MAX(O, STAT_CONFUSE, (flash_time + 2))

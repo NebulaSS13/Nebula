@@ -251,7 +251,7 @@
 	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
 
 /mob/proc/is_blind()
-	return ((sdisabilities & BLINDED) || blinded || incapacitated(INCAPACITATION_KNOCKOUT))
+	return (blinded || (sdisabilities & BLINDED) || incapacitated(INCAPACITATION_KNOCKOUT))
 
 /mob/proc/is_deaf()
 	return ((sdisabilities & DEAFENED) || incapacitated(INCAPACITATION_KNOCKOUT))
@@ -393,8 +393,8 @@
 	if(!usr || !usr.client)
 		return
 
-	if((is_blind(src) || usr.stat) && !isobserver(src))
-		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
+	if(is_blind() && !isobserver(src))
+		to_chat(src, SPAN_WARNING("Something is there but you can't see it."))
 		return TRUE
 
 	face_atom(A)
@@ -1114,7 +1114,7 @@
 	if(!QDELETED(src))
 		if(severity == 1)
 			physically_destroyed()
-		else if(!blinded)
+		else if(!is_blind())
 			flash_eyes()
 
 /mob/proc/get_telecomms_race_info()

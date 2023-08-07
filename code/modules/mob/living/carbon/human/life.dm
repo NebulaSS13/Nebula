@@ -159,11 +159,9 @@
 		set_status(STAT_BLIND, 1)
 		blinded =    1
 		set_status(STAT_BLURRY, 1)
-	else
-		//blindness
-		if(!(sdisabilities & BLINDED))
-			if(equipment_tint_total >= TINT_BLIND)	// Covered eyes, heal faster
-				ADJ_STATUS(src, STAT_BLURRY, -1)
+	// Non-genetic blindness; covered eyes will heal faster.
+	else if(!(sdisabilities & BLINDED) && equipment_tint_total >= TINT_BLIND)
+		ADJ_STATUS(src, STAT_BLURRY, -1)
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
