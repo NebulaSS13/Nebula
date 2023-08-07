@@ -410,8 +410,7 @@ default behaviour is:
 	sdisabilities = 0
 	disabilities = 0
 
-	// fix blindness and deafness
-	blinded =     0
+	// fix all status conditions including blind/deaf
 	clear_status_effects()
 
 	heal_overall_damage(getBruteLoss(), getFireLoss())

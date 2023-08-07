@@ -29,7 +29,6 @@
 		//Body temperature adjusts itself (self-regulation)
 		stabilize_body_temperature()
 
-	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
 	handle_stasis()

@@ -251,10 +251,10 @@
 	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
 
 /mob/proc/is_blind()
-	return (blinded || (sdisabilities & BLINDED) || incapacitated(INCAPACITATION_KNOCKOUT))
+	return ((sdisabilities & BLINDED) || incapacitated(INCAPACITATION_KNOCKOUT) || HAS_STATUS(src, STAT_BLIND))
 
 /mob/proc/is_deaf()
-	return ((sdisabilities & DEAFENED) || incapacitated(INCAPACITATION_KNOCKOUT))
+	return ((sdisabilities & DEAFENED) || incapacitated(INCAPACITATION_KNOCKOUT) || HAS_STATUS(src, STAT_DEAF))
 
 /mob/proc/is_physically_disabled()
 	return incapacitated(INCAPACITATION_DISABLED)
