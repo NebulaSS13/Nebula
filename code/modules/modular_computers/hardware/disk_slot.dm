@@ -23,12 +23,15 @@
 	set src in view(1)
 
 	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
+		to_chat(usr, SPAN_WARNING("You can't reach it."))
 		return
 
 	var/obj/item/stock_parts/computer/data_disk_drive/device = src
 	if (!istype(device))
 		device = locate() in src
+
+	if(!istype(device))
+		return
 
 	if(!device.stored_disk)
 		if(usr)
