@@ -21,19 +21,12 @@
 	item_flags        = ITEM_FLAG_CAN_TAPE
 	health            = 10
 	max_health        = 10
-	var/tmp/cur_page  = 1           // current page
-	var/tmp/max_pages = 100         //Maximum number of papers that can be in the bundle
-	var/list/pages                  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
-	var/static/list/cached_overlays //Cached images used by all paper bundles for generating the overlays and underlays
-
-/**Creates frequently used images globally, so we can re-use them. */
-/obj/item/paper_bundle/proc/cache_overlays()
-	if(LAZYLEN(cached_overlays))
-		return
-	LAZYSET(cached_overlays, "clip",   image('icons/obj/bureaucracy.dmi', "clip"))
-	LAZYSET(cached_overlays, "paper",  image('icons/obj/bureaucracy.dmi', "paper"))
-	LAZYSET(cached_overlays, "photo",  image('icons/obj/bureaucracy.dmi', "photo"))
-	LAZYSET(cached_overlays, "refill", image('icons/obj/bureaucracy.dmi', "paper_refill_label"))
+	///Index of the page currently being viewed.
+	var/tmp/cur_page  = 1
+	///Maximum number of papers that can be in the bundle.
+	var/tmp/max_pages = 100
+	/// Ordered list of pages as they are to be displayed. Can be different order than src.contents.
+	var/list/pages
 
 /obj/item/paper_bundle/Destroy()
 	LAZYCLEARLIST(pages) //Get rid of refs
@@ -64,6 +57,7 @@
 		. = P.attackby(W, user)
 		update_icon()
 		updateUsrDialog()
+		update_held_icon()
 		return TRUE
 
 	else if(IS_PEN(W) || IS_STAMP(W))
@@ -72,6 +66,7 @@
 		. = P.attackby(W, user)
 		update_icon()
 		updateUsrDialog()
+		update_held_icon()
 		return .
 
 	return ..()
@@ -101,6 +96,7 @@
 		to_chat(user, SPAN_NOTICE("You add \the [sheet] as the [get_ordinal_string(index)] page in \the [name]."))
 	updateUsrDialog()
 	update_icon()
+	update_held_icon()
 	return TRUE
 
 /obj/item/paper_bundle/proc/remove_sheet(var/obj/item/I, var/mob/user, var/skip_qdel = FALSE)
@@ -131,6 +127,7 @@
 		cur_page = 1 //Reset current page
 		updateUsrDialog()
 		update_icon()
+		update_held_icon()
 	return TRUE
 
 /obj/item/paper_bundle/proc/remove_sheet_at(var/index, var/mob/user, var/skip_qdel = FALSE)
@@ -155,6 +152,7 @@
 
 	updateUsrDialog()
 	update_icon()
+	update_held_icon()
 	return TRUE
 
 /**Delete the bundle and drop all pages */
@@ -163,7 +161,7 @@
 		user.drop_from_inventory(src)
 
 	close_browser(user, "window=[name]")
-	for(var/obj/item/I in src)
+	for(var/obj/item/I in get_contained_external_atoms())
 		if(user && user.get_empty_hand_slot())
 			user.put_in_hands(I)
 		else
@@ -179,8 +177,8 @@
 		to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
 		return
 	user.visible_message( \
-		"<span class='[span_class]'>\The [user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
-		"<span class='[span_class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
+		SPAN_CLASS(span_class, "\The [user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."), \
+		SPAN_CLASS(span_class, "You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."))
 	new /obj/effect/decal/cleanable/ash(loc)
 	qdel(src)
 
@@ -190,8 +188,8 @@
 	var/span_class = istype(P, /obj/item/flame/lighter/zippo) ? "rose" : "warning"
 	var/decl/pronouns/G = user.get_pronouns()
 	user.visible_message( \
-		"<span class='[span_class]'>\The [user] holds \the [P] up to \the [src]. It looks like [G.he] [G.is] trying to burn it!</span>", \
-		"<span class='[span_class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
+		SPAN_CLASS(span_class, "\The [user] holds \the [P] up to \the [src]. It looks like [G.he] [G.is] trying to burn it!"), \
+		SPAN_CLASS(span_class, "You hold \the [P] up to \the [src], burning it slowly."))
 	addtimer(CALLBACK(src, .proc/burn_callback, P, user, span_class), 2 SECONDS)
 
 /obj/item/paper_bundle/examine(mob/user, distance)
@@ -302,30 +300,34 @@
 
 	if(. & TOPIC_REFRESH)
 		update_icon()
+		update_held_icon()
 		updateUsrDialog()
 
 /obj/item/paper_bundle/on_update_icon()
+	//Sanity check if someone decides to split off the icons, and forgets to update the overlays icon states uses here
+	ASSERT(icon == 'icons/obj/bureaucracy.dmi')
 	. = ..()
-	if(!LAZYLEN(cached_overlays))
-		cache_overlays()
 	underlays.Cut()
 
-	var/obj/item/paper/P = pages[1]
-	icon       = P.icon
-	icon_state = P.icon_state
-	copy_overlays(P.overlays)
+	var/obj/item/first_page = pages[1]
+	icon             = first_page.icon
+	icon_state       = first_page.icon_state
+	color            = first_page.color
+	filters          = first_page.filters
+	appearance_flags |= RESET_COLOR
+	copy_overlays(first_page)
 
 	var/paper_count = 0
 	var/photo_count = 0
-
-	for(var/obj/O in pages)
+	var/list/underpages = pages - pages[1] //Get all the other pages but page 1
+	for(var/obj/O in underpages)
 		if(istype(O, /obj/item/paper) && (paper_count < MAX_PAPER_UNDERLAYS))
-			//We can't even see them, so don't bother create appearences form each paper's icon, and use a generic one
-			var/mutable_appearance/img = new(cached_overlays["paper"])
-			img.color       = O.color
+			//We can't fully see them, so don't bother being too accurate
+			var/mutable_appearance/img = new(O)
 			img.pixel_x     -= min(paper_count, 2)
 			img.pixel_y     -= min(paper_count, 2)
-			default_pixel_x = min(0.5 * paper_count, 1)
+			img.appearance_flags |= RESET_COLOR
+			default_pixel_x = CEILING(0.5 * paper_count)
 			default_pixel_y = min(paper_count, 2)
 			reset_offsets(0)
 			underlays += img
@@ -336,7 +338,7 @@
 			if(photo_count < 1)
 				add_overlay(Ph.tiny)
 			else
-				add_overlay(cached_overlays["photo"]) //We can't even see them, so don't bother create new unique appearences
+				add_overlay("photo") //We can't even see them, so don't bother creating new unique appearences
 			photo_count++
 
 		//Break if we have nothing else to do
@@ -353,7 +355,7 @@
 	else if(photo_count > 0)
 		desc += "\nThere is a photo attached to it."
 
-	add_overlay(cached_overlays["clip"])
+	add_overlay("clip")
 
 /**
  * Merge another bundle or paper into us.
@@ -377,6 +379,7 @@
 
 		//Update
 		update_icon()
+		update_held_icon()
 		updateUsrDialog()
 		return TRUE
 
@@ -407,6 +410,7 @@
 
 		//Update
 		update_icon()
+		update_held_icon()
 		updateUsrDialog()
 
 		//If old stack now empty, delete it
@@ -518,7 +522,7 @@
 
 /obj/item/paper_bundle/refill/on_update_icon()
 	. = ..()
-	add_overlay(cached_overlays["refill"])
+	add_overlay("refill")
 
 ///////////////////////////////////////////////////////////////////////////
 // Interaction Rename
