@@ -22,13 +22,13 @@
 	bone_amount = 0
 	ai = /datum/ai/slime
 	hud_type = /datum/hud/slime
+	nutrition = 800
 
 	var/is_adult = FALSE
 	var/mutation_chance = 30 // Chance of mutating, should be between 25 and 35
 	var/powerlevel = 0 // 0-10 controls how much electricity they are generating
 	var/amount_grown = 0 // controls how long the slime has been overfed, if 10, grows or reproduces
 	var/weakref/feeding_on
-	var/nutrition = 800
 	var/toxloss = 0
 	var/hurt_temperature = T0C-50 // slime keeps taking damage when its bodytemperature is below this
 	var/die_temperature = 50 // slime dies instantly when its bodytemperature is below this
@@ -292,6 +292,12 @@
 /mob/living/slime/check_has_mouth()
 	return 0
 
+/mob/living/slime/set_nutrition(amt)
+	..()
+
+/mob/living/slime/get_hydration()
+	return get_nutrition()
+
 /mob/living/slime/proc/gain_nutrition(var/amount)
 	adjust_nutrition(amount)
 	if(prob(amount * 2)) // Gain around one level per 50 nutrition
@@ -299,12 +305,6 @@
 		if(powerlevel > 10)
 			powerlevel = 10
 			adjustToxLoss(-10)
-
-/mob/living/slime/get_nutrition()
-	return nutrition
-
-/mob/living/slime/adjust_nutrition(var/amt)
-	nutrition = clamp(nutrition + amt, 0, get_max_nutrition())
 
 /mob/living/slime/proc/get_hunger_state()
 	. = 0

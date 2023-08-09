@@ -51,28 +51,33 @@
 
 	return 1
 
+/mob/living/proc/experiences_hunger_and_thirst()
+	return TRUE
+
+/mob/living/proc/get_hunger_factor()
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		return my_species.hunger_factor
+	return 0
+
+/mob/living/proc/get_thirst_factor()
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		return my_species.hunger_factor
+	return 0
+
 /mob/living/proc/handle_nutrition_and_hydration()
 	SHOULD_CALL_PARENT(TRUE)
-	var/nut =    get_nutrition()
-	var/maxnut = get_max_nutrition()
-	if(nut < (maxnut * 0.3))
-		add_stressor(/datum/stressor/hungry_very, STRESSOR_DURATION_INDEFINITE)
-	else
-		remove_stressor(/datum/stressor/hungry_very)
-		if(nut < (maxnut * 0.5))
-			add_stressor(/datum/stressor/hungry, STRESSOR_DURATION_INDEFINITE)
-		else
-			remove_stressor(/datum/stressor/hungry)
-	var/hyd =    get_hydration()
-	var/maxhyd = get_max_hydration()
-	if(hyd < (maxhyd * 0.3))
-		add_stressor(/datum/stressor/thirsty_very, STRESSOR_DURATION_INDEFINITE)
-	else
-		remove_stressor(/datum/stressor/thirsty_very)
-		if(hyd < (maxhyd * 0.5))
-			add_stressor(/datum/stressor/thirsty, STRESSOR_DURATION_INDEFINITE)
-		else
-			remove_stressor(/datum/stressor/thirsty)
+	if(!experiences_hunger_and_thirst())
+		return
+	if(get_nutrition() > 0)
+		var/hunger_factor = get_hunger_factor()
+		if(hunger_factor)
+			adjust_nutrition(-(hunger_factor))
+	if(get_hydration() > 0)
+		var/thirst_factor = get_thirst_factor()
+		if(thirst_factor)
+			adjust_hydration(-(thirst_factor))
 
 /mob/living/proc/handle_breathing()
 	return

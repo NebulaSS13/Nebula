@@ -57,6 +57,9 @@
 	var/list/stasis_sources
 	var/stasis_value
 
+	var/nutrition = 400
+	var/hydration = 400
+
 	var/original_fingerprint_seed
 	var/fingerprint
 	var/original_genetic_seed
