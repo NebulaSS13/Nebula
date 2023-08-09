@@ -9,6 +9,7 @@
 #define TOOL_WRENCH      /decl/tool_archetype/wrench
 #define TOOL_SHOVEL      /decl/tool_archetype/shovel
 #define TOOL_PEN         /decl/tool_archetype/pen
+#define TOOL_STAMP       /decl/tool_archetype/stamp
 
 // Surgical tools.
 #define TOOL_SCALPEL       /decl/tool_archetype/scalpel
@@ -48,6 +49,7 @@
 #define IS_HATCHET(A)     IS_TOOL(A, TOOL_HATCHET)
 #define IS_SHOVEL(A)      IS_TOOL(A, TOOL_SHOVEL)
 #define IS_PEN(A)         IS_TOOL(A, TOOL_PEN)
+#define IS_STAMP(A)       IS_TOOL(A, TOOL_STAMP)
 
 // Structure interaction flags
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)
@@ -64,13 +66,25 @@
 #define TOOL_CODEX_MULTITOOL    "multitool (tool)"
 
 // Tool properties for tool specific stuff
-#define TOOL_PROP_COLOR_NAME    "color_name"     //Property containing a color name for some tools. Namely the pen tool.
-#define TOOL_PROP_COLOR         "color"          //Property for specifying a color, for something like a pen.
-#define TOOL_PROP_USES          "uses_left"      //Property for things that have a fixed amount of uses. -1 is unlimited.
+///Property containing a color name for some tools. Namely the pen tool.
+#define TOOL_PROP_COLOR_NAME    "color_name"
+///Property for specifying a color, for something like a pen.
+#define TOOL_PROP_COLOR         "color"
+///Property for things that have a fixed amount of uses. -1 is unlimited.
+#define TOOL_PROP_USES          "uses_left"
 
-//Pen specific stuff
-#define TOOL_PROP_PEN_FLAG        "pen_flag"     //Property for pens to specify additional properties about themselves
-#define TOOL_PROP_PEN_SIG         "signature"    //Property for pens specifically. Returns a stored forged signature if there's one.
-#define TOOL_PROP_PEN_SHADE_COLOR "shade_color"  //Property for pens returns the shade color if applicable
+///Property for pens to specify additional properties about themselves
+#define TOOL_PROP_PEN_FLAG        "pen_flag"
+///Property for pens specifically. Returns a stored forged signature if there's one.
+#define TOOL_PROP_PEN_SIG         "signature"
+///Property for pens returns the shade color if applicable
+#define TOOL_PROP_PEN_SHADE_COLOR "shade_color"
 ///Property for pens returns the font the pen uses
 #define TOOL_PROP_PEN_FONT        "pen_font"
+
+///The property for specifying the stamp decl that a stamp uses
+#define TOOL_PROP_STAMP_SYMBOL  "stamp_definition"
+///The actual image to apply to the target of the stamp tool.
+#define TOOL_PROP_STAMP_OVERLAY "stamp_overlay"
+///The message placed on the target document when stamped with this stamp.
+#define TOOL_PROP_STAMP_MESSAGE "stamp_msg"

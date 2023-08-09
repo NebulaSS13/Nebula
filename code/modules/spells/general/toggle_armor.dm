@@ -107,7 +107,7 @@
 	name = "Toggle Counterfeit Kit"
 	invocation_type = SpI_EMOTE
 	invocation = "flicks /his wrists, one at a time"
-	armor_pieces = list(/obj/item/stamp/chameleon = BP_L_HAND,
+	armor_pieces = list(/obj/item/stamp/multi/chameleon = BP_L_HAND,
 						/obj/item/pen/chameleon = BP_R_HAND)
 	hud_state = "forgery"
 

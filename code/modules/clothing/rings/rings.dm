@@ -81,28 +81,72 @@
 
 /////////////////////////////////////////
 //Seals and Signet Rings
+/decl/stamp_type/ring_secretary_general
+	name                = "secretary-general"
+	owner_name          = "secretary-general"
+	stamp_color_name    = "red"
+	stamp_overlay_state = "paper_seal-signet"
+
 /obj/item/clothing/ring/seal
 	name = "Secretary-General's official seal"
 	desc = "The official seal of the Secretary-General of the Sol Central Government, featured prominently on a silver ring."
 	icon = 'icons/clothing/rings/ring_seal_secgen.dmi'
+	///
+	var/decl/stamp_type/stamp_symbol = /decl/stamp_type/ring_secretary_general
+	///Maximum amount of uses given by a single fill. If -1, means infinite.
+	var/max_uses = -1
+
+/obj/item/clothing/ring/seal/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_STAMP = TOOL_QUALITY_GOOD), TOOL_STAMP = list(TOOL_PROP_USES = max_uses))
+	if(ispath(stamp_symbol))
+		set_stamp_symbol(stamp_symbol)
+
+/obj/item/clothing/ring/seal/proc/set_stamp_symbol(var/decl/stamp_type/_stamp_symbol)
+	if(ispath(_stamp_symbol))
+		_stamp_symbol = GET_DECL(_stamp_symbol)
+	stamp_symbol = _stamp_symbol
+	set_tool_property(TOOL_STAMP, TOOL_PROP_STAMP_SYMBOL, stamp_symbol)
+
+//Mason Ring
+/decl/stamp_type/ring_mason
+	name                = "mason"
+	stamp_color_name    = "bronze"
+	stamp_overlay_state = "paper_seal-masonic"
 
 /obj/item/clothing/ring/seal/mason
-	name = "masonic ring"
-	desc = "The Square and Compasses feature prominently on this Masonic ring."
-	icon = 'icons/clothing/rings/ring_seal_masonic.dmi'
+	name         = "masonic ring"
+	desc         = "The Square and Compasses feature prominently on this Masonic ring."
+	icon         = 'icons/clothing/rings/ring_seal_masonic.dmi'
+	stamp_symbol = /decl/stamp_type/ring_mason
 
+//Signet Ring
 /obj/item/clothing/ring/seal/signet
-	name = "signet ring"
-	desc = "A signet ring, for when you're too sophisticated to sign letters."
-	icon = 'icons/clothing/rings/ring_seal_signet.dmi'
-	var/nameset = 0
+	name           = "signet ring"
+	desc           = "A signet ring, for when you're too sophisticated to sign letters."
+	icon           = 'icons/clothing/rings/ring_seal_signet.dmi'
+	stamp_symbol   = null
+	var/owner_name
 
-/obj/item/clothing/ring/seal/signet/attack_self(mob/user)
-	if(nameset)
+/obj/item/clothing/ring/seal/signet/Initialize(ml, material_key)
+	. = ..()
+	set_tool_property(TOOL_STAMP, TOOL_PROP_STAMP_OVERLAY, overlay_image('icons/obj/items/rubber_stamps_overlays.dmi', "paper_seal-signet", null, RESET_COLOR))
+	set_tool_property(TOOL_STAMP, TOOL_PROP_STAMP_MESSAGE, "stamped by [name]")
+
+/obj/item/clothing/ring/seal/signet/proc/set_signet_owner(var/mob/living/user)
+	if(length(owner_name))
 		to_chat(user, SPAN_NOTICE("The [src] has already been claimed!"))
 		return
-
-	nameset = 1
-	to_chat(user, SPAN_NOTICE("You claim the [src] as your own!"))
-	name = "[user]'s signet ring"
+	if(!length(user.real_name))
+		to_chat(user, SPAN_NOTICE("You must actually have a name to claim \the [src]!"))
+		return
+	owner_name = user.real_name
+	to_chat(user, SPAN_NOTICE("You claim \the [src] as your own!"))
+	SetName("[user]'s signet ring")
 	desc = "A signet ring belonging to [user], for when you're too sophisticated to sign letters."
+	set_tool_property(TOOL_STAMP, TOOL_PROP_STAMP_MESSAGE, "stamped by \the [src]")
+
+/obj/item/clothing/ring/seal/signet/attack_self(mob/user)
+	if(length(owner_name))
+		return ..()
+	set_signet_owner(user)

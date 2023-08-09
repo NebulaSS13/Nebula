@@ -222,11 +222,16 @@ var/global/req_console_information = list()
 				reset_message()
 				to_chat(user, "<span class='warning'>You are not authorized to send announcements.</span>")
 			SSnano.update_uis(src)
-	if (istype(O, /obj/item/stamp))
-		if(inoperable(MAINT)) return
-		if(screen == RCS_MESSAUTH)
-			var/obj/item/stamp/T = O
-			msgStamped = "<font color='blue'><b>Stamped with the [T.name]</b></font>"
+	if (IS_STAMP(O))
+		if(inoperable(MAINT))
+			return
+		if(screen == RCS_MESSAUTH && \
+		   O.do_tool_interaction(TOOL_STAMP, user, src, fuel_expenditure = 1, check_skill = SKILL_FINANCE, check_skill_threshold = SKILL_BASIC, check_skill_prob = 10))
+			var/smsg = O.get_tool_property(TOOL_STAMP, TOOL_PROP_STAMP_MESSAGE)
+			if(length(smsg))
+				msgStamped = "<font color='blue'><b>[smsg]</b></font>"
+			else
+				msgStamped = "<font color='blue'><b>Stamped by \the [O]</b></font>"
 			SSnano.update_uis(src)
 	return ..()
 

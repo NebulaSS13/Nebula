@@ -495,13 +495,15 @@
 	interface_desc = "Leave your mark."
 	engage_string = "Toggle stamp type"
 	usable = 1
-	var/stamp
-	var/deniedstamp
+	var/obj/item/stamp/stamp        = /obj/item/stamp/multi/rig
+	var/obj/item/stamp/denied_stamp = /obj/item/stamp/denied/rig
 
-/obj/item/rig_module/device/stamp/Initialize()
+/obj/item/rig_module/device/stamp/Initialize(ml, material_key)
 	. = ..()
-	stamp = new /obj/item/stamp(src)
-	deniedstamp = new /obj/item/stamp/denied(src)
+	if(ispath(stamp))
+		stamp        = new stamp(src)
+	if(ispath(denied_stamp))
+		denied_stamp = new denied_stamp(src)
 	device = stamp
 
 /obj/item/rig_module/device/stamp/engage(atom/target)
@@ -510,11 +512,11 @@
 
 	if(!target)
 		if(device == stamp)
-			device = deniedstamp
-			to_chat(holder.wearer, "<span class='notice'>Switched to denied stamp.</span>")
-		else if(device == deniedstamp)
+			device = denied_stamp
+			to_chat(holder.wearer, SPAN_NOTICE("Switched to denied stamp."))
+		else if(device == denied_stamp)
 			device = stamp
-			to_chat(holder.wearer, "<span class='notice'>Switched to rubber stamp.</span>")
+			to_chat(holder.wearer, SPAN_NOTICE("Switched to rubber stamp."))
 		return 1
 
 /obj/item/rig_module/device/decompiler

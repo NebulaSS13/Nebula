@@ -57,7 +57,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
-	) 
+	)
 
 /obj/item/storage/backpack/chameleon/sydie_kit/WillContain()
 	return list(
@@ -85,7 +85,7 @@
 	return list(
 			/obj/item/stack/package_wrap/twenty_five,
 			/obj/item/hand_labeler,
-			/obj/item/stamp/chameleon,
+			/obj/item/stamp/multi/chameleon,
 			/obj/item/pen/chameleon,
 			/obj/item/destTagger,
 		)

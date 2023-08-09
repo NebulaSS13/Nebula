@@ -380,12 +380,19 @@
 			interact(user, readonly = FALSE)
 		return TRUE
 
-	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
-		apply_custom_stamp(
-			image('icons/obj/bureaucracy.dmi', icon_state = "paper_[P.icon_state]", pixel_x = rand(-2, 2), pixel_y = rand(-2, 2)),
-			"with \the [P]")
-		playsound(src, 'sound/effects/stamp.ogg', 50, TRUE)
-		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))
+	else if(IS_STAMP(P))
+		if(P.do_tool_interaction(TOOL_STAMP, user, src, 1 SECOND, null, null, null, 1, SKILL_FINANCE))
+			var/mutable_appearance/symbol = new(P.get_tool_property(TOOL_STAMP, TOOL_PROP_STAMP_OVERLAY))
+			symbol.appearance_flags = RESET_COLOR
+			symbol.pixel_x = rand(-2, 2)
+			symbol.pixel_y = rand(-2, 2)
+
+			//If we got a custom color apply it
+			var/icon_color = P.get_tool_property(TOOL_STAMP, TOOL_PROP_COLOR)
+			if(icon_color)
+				symbol.color = icon_color
+
+			apply_custom_stamp(symbol, P.get_tool_property(TOOL_STAMP, TOOL_PROP_STAMP_MESSAGE))
 		return TRUE
 
 	else if(istype(P, /obj/item/flame))
@@ -448,9 +455,11 @@
 /**Stamp the paper with the  specified values.
  * stamper_name: what is stamped. Or what comes after the sentence "This paper has been stamped "
 */
-/obj/item/paper/proc/apply_custom_stamp(var/image/stamp, var/stamper_name)
+/obj/item/paper/proc/apply_custom_stamp(var/image/stamp, var/stamped_msg)
 	LAZYADD(applied_stamps, stamp)
-	stamp_text += "[length(stamp_text)? "<BR>" : "<HR>"]<i>This paper has been stamped [length(stamper_name)? stamper_name : "by the generic stamp"].</i>"
+	if(!length(stamped_msg))
+		stamped_msg = "this paper has been stamped by the generic stamp"
+	stamp_text += "[length(stamp_text)? "<BR>" : "<HR>"]<i>[capitalize(stamped_msg)].</i>"
 	update_icon()
 
 /**Merge the paper with other papers or bundles inside "location" */

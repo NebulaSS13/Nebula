@@ -3394,6 +3394,7 @@
 #include "code\modules\tools\_tool_defines.dm"
 #include "code\modules\tools\tool_archetype.dm"
 #include "code\modules\tools\tool_archetype_definition_pen.dm"
+#include "code\modules\tools\tool_archetype_definition_stamp.dm"
 #include "code\modules\tools\tool_archetype_definitions.dm"
 #include "code\modules\tools\tool_archetype_definitions_surgery.dm"
 #include "code\modules\tools\tool_archetype_definitions_welder.dm"

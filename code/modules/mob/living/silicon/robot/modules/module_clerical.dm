@@ -106,7 +106,7 @@
 		/obj/item/crowbar,
 		/obj/item/stack/package_wrap/cyborg
 	)
-	emag = /obj/item/stamp/chameleon
+	emag = /obj/item/stamp/multi/chameleon
 	synths = list(
 		/datum/matter_synth/package_wrap
 	)

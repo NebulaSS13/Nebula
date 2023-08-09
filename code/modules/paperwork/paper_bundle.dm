@@ -66,7 +66,7 @@
 		updateUsrDialog()
 		return TRUE
 
-	else if(IS_PEN(W) || istype(W, /obj/item/stamp))
+	else if(IS_PEN(W) || IS_STAMP(W))
 		close_browser(user, "window=[name]")
 		var/obj/P = pages[cur_page]
 		. = P.attackby(W, user)
