@@ -70,7 +70,9 @@
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 
-	user.visible_message(SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.use_message] \the [target] with \the [holder]."), SPAN_NOTICE("You begin [start_message || tool_archetype.use_message] \the [target] with \the [holder]."))
+	//Skip start messages if we don't have any
+	if(start_message || tool_archetype.use_message)
+		user.visible_message(SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.use_message] \the [target] with \the [holder]."), SPAN_NOTICE("You begin [start_message || tool_archetype.use_message] \the [target] with \the [holder]."))
 	var/use_sound = LAZYACCESS(tool_use_sounds, archetype)
 	 //If no sound overrides, grab the archetype's sound/sound list
 	if(!use_sound)
