@@ -1274,6 +1274,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return bodytype.manual_dexterity
 	if(species)
 		return species.get_manual_dexterity(owner)
+	return DEXTERITY_NONE
 
 /obj/item/organ/external/proc/get_damage()	//returns total damage
 	return (brute_dam+burn_dam)	//could use max_damage?

@@ -133,4 +133,6 @@
 	return out
 
 /obj/structure/artifact/fluid_act(datum/reagents/fluids)
-	check_triggers(/datum/artifact_trigger/proc/on_fluid_act, fluids)
+	..()
+	if(!QDELETED(src) && fluids?.total_volume)
+		check_triggers(/datum/artifact_trigger/proc/on_fluid_act, fluids)

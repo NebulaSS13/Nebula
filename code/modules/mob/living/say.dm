@@ -164,9 +164,11 @@
 		speaking.broadcast(src,trim(message))
 		return 1
 
-	if((is_muzzled()) && !(speaking && (speaking.flags & LANG_FLAG_SIGNLANG)))
-		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
-		return
+	if(!speaking || !(speaking.flags & LANG_FLAG_SIGNLANG))
+		var/obj/item/muzzle = get_item_blocking_speech()
+		if(muzzle)
+			to_chat(src, SPAN_WARNING("You're can't speak, \the [muzzle] is in the way!"))
+			return
 
 	if (speaking)
 		if(whispering)

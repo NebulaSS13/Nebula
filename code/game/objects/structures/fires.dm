@@ -100,7 +100,7 @@
 
 /obj/structure/fire_source/fluid_act(datum/reagents/fluids)
 	. = ..()
-	if(fluids.total_volume > 0)
+	if(!QDELETED(src) && fluids?.total_volume)
 		take_reagents(fluids)
 
 /obj/structure/fire_source/explosion_act()

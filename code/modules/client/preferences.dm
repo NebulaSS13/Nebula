@@ -413,8 +413,11 @@ var/global/list/time_prefs_fixed = list()
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()
 
-	character.dna.ready_dna(character)
-	character.dna.b_type = client.prefs.blood_type
+	if(character.dna)
+		character.dna.ready_dna(character)
+		if(client.prefs?.blood_type)
+			character.dna.b_type = client.prefs.blood_type
+
 	character.force_update_limbs()
 	character.update_mutations(0)
 	character.update_body(0)
