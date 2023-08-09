@@ -7,6 +7,8 @@
 	is_robotic = TRUE
 	body_flags = BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT
 	material = /decl/material/solid/metal/steel
+	eye_flash_mod = 1
+	eye_darksight_range = 2
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 

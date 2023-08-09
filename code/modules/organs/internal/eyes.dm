@@ -31,12 +31,6 @@
 	organ_properties = ORGAN_PROP_PROSTHETIC
 	icon = 'icons/obj/robot_component.dmi'
 
-/obj/item/organ/internal/eyes/robot/get_flash_mod()
-	return 1
-
-/obj/item/organ/internal/eyes/robot/get_darksight_range()
-	return 2
-
 /obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	. = ..()
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color

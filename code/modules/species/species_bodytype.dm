@@ -162,7 +162,6 @@ var/global/list/bodytypes_by_category = list()
 	/// The rate at which low light vision adjusts towards the final value, as a fractional multiplier of the difference between the current and target alphas. ie. set to 0.15 for a 15% shift towards the target value each tick.
 	var/eye_low_light_vision_adjustment_speed = 0.15
 
-
 	// Other eye vars.
 	var/eye_contaminant_guard = 0
 	var/eye_innate_flash_protection = FLASH_PROTECTION_NONE
