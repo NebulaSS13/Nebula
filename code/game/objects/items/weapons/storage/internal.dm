@@ -23,7 +23,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return TRUE //make sure this is never picked up
 
-/obj/item/storage/internal/mob_can_equip()
+/obj/item/storage/internal/mob_can_equip(mob/M, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	return FALSE //make sure this is never picked up
 
 //Helper procs to cleanly implement internal storages - storage items that provide inventory slots for other items.
