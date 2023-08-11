@@ -3,7 +3,8 @@
 	desc =             "A wound of darkness inflicted upon the world."
 	icon_base =        'icons/mob/human_races/species/shadow/body.dmi'
 	icon_deformed =    'icons/mob/human_races/species/shadow/body.dmi'
-	body_flags =       BODY_FLAG_NO_DNA
+	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	eye_darksight_range = 8
 
 /decl/blood_type/shadowstuff
 	name = "shadowstuff"
@@ -24,7 +25,6 @@
 	available_bodytypes = list(/decl/bodytype/starlight/shadow)
 
 	unarmed_attacks = list(/decl/natural_attack/claws/strong, /decl/natural_attack/bite/sharp)
-	darksight_range = 8
 	siemens_coefficient = 0
 
 	blood_types = list(

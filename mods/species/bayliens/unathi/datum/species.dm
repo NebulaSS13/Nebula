@@ -29,12 +29,10 @@
 	)
 
 	primitive_form = "Stok"
-	darksight_range = 3
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
 	breath_pressure = 18
 	brute_mod = 0.8
-	flash_mod = 1.2
 	blood_volume = 800
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 2

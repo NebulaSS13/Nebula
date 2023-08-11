@@ -152,9 +152,30 @@ var/global/list/bodytypes_by_category = list()
 
 	var/list/base_markings
 
+	// Darksight handling
+	/// Fractional multiplier (0 to 1) for the base alpha of the darkness overlay. A value of 1 means darkness is completely invisible.
+	var/eye_base_low_light_vision = 0
+	/// The lumcount (turf luminosity) threshold under which adaptive low light vision will begin processing.
+	var/eye_low_light_vision_threshold = 0.3
+	/// Fractional multiplier for the overall effectiveness of low light vision for this species. Caps the final alpha value of the darkness plane.
+	var/eye_low_light_vision_effectiveness = 0
+	/// The rate at which low light vision adjusts towards the final value, as a fractional multiplier of the difference between the current and target alphas. ie. set to 0.15 for a 15% shift towards the target value each tick.
+	var/eye_low_light_vision_adjustment_speed = 0.15
+
+	// Other eye vars.
+	var/eye_contaminant_guard = 0
+	var/eye_innate_flash_protection = FLASH_PROTECTION_NONE
+	var/eye_icon = 'icons/mob/human_races/species/default_eyes.dmi'
+	var/apply_eye_colour = TRUE
+	var/eye_darksight_range = 2
+	var/eye_blend = ICON_ADD
+	/// Stun from blindness modifier.
+	var/eye_flash_mod = 1
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
+
 	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
 	//If the species has eyes, they are the default vision organ
 	if(!vision_organ && has_organ[BP_EYES])
@@ -162,6 +183,10 @@ var/global/list/bodytypes_by_category = list()
 	//If the species has lungs, they are the default breathing organ
 	if(!breathing_organ && has_organ[BP_LUNGS])
 		breathing_organ = BP_LUNGS
+
+	if(config.grant_default_darksight)
+		eye_darksight_range = max(eye_darksight_range, config.default_darksight_range)
+		eye_low_light_vision_effectiveness = max(eye_low_light_vision_effectiveness, config.default_darksight_effectiveness)
 
 	// Modify organ lists if necessary.
 	if(islist(override_organ_types))
@@ -189,6 +214,27 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/validate()
 	. = ..()
+
+	if(eye_base_low_light_vision > 1)
+		. += "base low light vision is greater than 1 (over 100%)"
+	else if(eye_base_low_light_vision < 0)
+		. += "base low light vision is less than 0 (below 0%)"
+
+	if(eye_low_light_vision_threshold > 1)
+		. += "low light vision threshold is greater than 1 (over 100%)"
+	else if(eye_low_light_vision_threshold < 0)
+		. += "low light vision threshold is less than 0 (below 0%)"
+
+	if(eye_low_light_vision_effectiveness > 1)
+		. += "low light vision effectiveness is greater than 1 (over 100%)"
+	else if(eye_low_light_vision_effectiveness < 0)
+		. += "low light vision effectiveness is less than 0 (below 0%)"
+
+	if(eye_low_light_vision_adjustment_speed > 1)
+		. += "low light vision adjustment speed is greater than 1 (over 100%)"
+	else if(eye_low_light_vision_adjustment_speed < 0)
+		. += "low light vision adjustment speed is less than 0 (below 0%)"
+
 	if(icon_base)
 		if(check_state_in_icon("torso", icon_base))
 			. += "deprecated \"torso\" state present in icon_base"

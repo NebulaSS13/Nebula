@@ -3,7 +3,7 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	icon_base =         'icons/mob/human_races/species/golem/body.dmi'
 	husk_icon =         'icons/mob/human_races/species/golem/husk.dmi'
-	body_flags =        BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN
+	body_flags =        BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	has_organ = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/golem
 	)

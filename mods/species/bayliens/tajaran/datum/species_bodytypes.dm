@@ -16,8 +16,15 @@
 	base_eye_color = "#00aa00"
 	default_h_style = /decl/sprite_accessory/hair/taj/lynx
 
+	eye_darksight_range = 7
+	eye_flash_mod = 2
+	eye_blend = ICON_MULTIPLY
+	eye_icon = 'mods/species/bayliens/tajaran/icons/eyes.dmi'
+	eye_low_light_vision_effectiveness = 0.15
+	eye_low_light_vision_adjustment_speed = 0.3
+
 	override_limb_types = list(
-		BP_EYES = /obj/item/organ/internal/eyes/taj,
+		BP_EYES = /obj/item/organ/internal/eyes,
 		BP_TAIL = /obj/item/organ/external/tail/cat
 	)
 

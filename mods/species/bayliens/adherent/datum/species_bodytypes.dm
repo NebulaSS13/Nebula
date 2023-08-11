@@ -9,7 +9,7 @@
 	antaghud_offset_y =         14
 	movement_slowdown =         -1
 	appearance_flags =          HAS_EYE_COLOR
-	body_flags =                BODY_FLAG_CRYSTAL_REFORM | BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT
+	body_flags =                BODY_FLAG_CRYSTAL_REFORM | BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	base_eye_color =            COLOR_LIME
 	modifier_string =           "crystalline"
 	is_robotic =                FALSE
@@ -45,6 +45,9 @@
 		BP_CELL =         /obj/item/organ/internal/cell/adherent,
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
+	eye_contaminant_guard = TRUE
+	eye_innate_flash_protection = FLASH_PROTECTION_MAJOR
+	eye_icon = 'mods/species/bayliens/adherent/icons/eyes.dmi'
 
 /decl/bodytype/crystalline/adherent/Initialize()
 	equip_adjust = list(

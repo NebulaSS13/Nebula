@@ -16,9 +16,6 @@
 	name_plural = "Tajaran"
 	base_prosthetics_model = null
 
-	low_light_vision_effectiveness = 0.15
-	low_light_vision_adjustment_speed = 0.3
-
 	description = "A small mammalian carnivore. If you are reading this, you are probably a Tajaran."
 	hidden_from_codex = FALSE
 
@@ -44,9 +41,6 @@
 	flesh_color = "#ae7d32"
 
 	organs_icon = 'mods/species/bayliens/tajaran/icons/organs.dmi'
-
-	darksight_range = 7
-	flash_mod = 2
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
 	gluttonous = GLUT_TINY
@@ -103,10 +97,6 @@
 	)
 
 	autohiss_exempt = list(LANGUAGE_TAJARA)
-
-/obj/item/organ/internal/eyes/taj
-	eye_blend = ICON_MULTIPLY
-	eye_icon = 'mods/species/bayliens/tajaran/icons/eyes.dmi'
 
 /decl/species/tajaran/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
 	. = H && H.change_skin_color(rgb(189, 171, 143))

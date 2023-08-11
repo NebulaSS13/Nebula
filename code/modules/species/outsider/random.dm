@@ -5,7 +5,7 @@
 	bandages_icon =     'icons/mob/bandage.dmi'
 	limb_blend =        ICON_MULTIPLY
 	appearance_flags =  HAS_SKIN_COLOR
-	body_flags =        BODY_FLAG_NO_DNA
+	body_flags =        BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 
 /decl/bodytype/alium/Initialize()
 	if(prob(10))
@@ -13,6 +13,8 @@
 	if(prob(5))
 		body_flags |= BODY_FLAG_NO_PAIN
 	base_color  = RANDOM_RGB
+	MULT_BY_RANDOM_COEF(eye_flash_mod, 0.5, 1.5)
+	eye_darksight_range = rand(1,8)
 	. = ..()
 
 /decl/species/alium
@@ -53,7 +55,6 @@
 	MULT_BY_RANDOM_COEF(oxy_mod, 0.5, 1.5)
 	MULT_BY_RANDOM_COEF(toxins_mod, 0, 2)
 	MULT_BY_RANDOM_COEF(radiation_mod, 0, 2)
-	MULT_BY_RANDOM_COEF(flash_mod, 0.5, 1.5)
 
 	if(brute_mod < 1 && prob(40))
 		species_flags |= SPECIES_FLAG_NO_MINOR_CUT
@@ -93,7 +94,6 @@
 	hazard_low_pressure += pressure_comfort_shift
 
 	//Misc traits
-	darksight_range = rand(1,8)
 	if(prob(40))
 		available_pronouns = list(/decl/pronouns)
 	if(prob(10))

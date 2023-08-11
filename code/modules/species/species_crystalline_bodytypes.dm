@@ -8,7 +8,7 @@
 	limb_tech = "{'materials':4}"
 	is_robotic = FALSE
 	material = /decl/material/solid/gemstone/crystal
-	body_flags = BODY_FLAG_CRYSTAL_REFORM | BODY_FLAG_NO_DNA
+	body_flags = BODY_FLAG_CRYSTAL_REFORM | BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	var/is_brittle
 
 /decl/bodytype/crystalline/apply_bodytype_organ_modifications(obj/item/organ/org)

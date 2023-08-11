@@ -1,5 +1,7 @@
 /decl/bodytype/crystalline/mantid
 	abstract_type = /decl/bodytype/crystalline/mantid
+	eye_flash_mod =     2 // Highly photosensitive.
+
 	appearance_flags =  0
 	is_brittle = FALSE
 	has_limbs = list(
@@ -50,6 +52,7 @@
 	antaghud_offset_x = 4
 	associated_gender = FEMALE
 	bodytype_flag =     BODY_FLAG_GYNE
+	eye_flash_mod =     2 // Highly photosensitive.
 	movement_slowdown = 2
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne

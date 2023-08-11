@@ -1,6 +1,6 @@
 /mob/living/proc/set_stasis(var/factor, var/source = "misc")
 	var/decl/bodytype/my_bodytype = get_bodytype()
-	if(my_bodytype?.body_flags & BODY_FLAG_NO_DNA)
+	if(my_bodytype?.body_flags & BODY_FLAG_NO_STASIS)
 		return
 	LAZYSET(stasis_sources, source, factor)
 
@@ -11,7 +11,7 @@
 	stasis_value = 0
 	if(stasis_sources)
 		var/decl/bodytype/my_bodytype = get_bodytype()
-		if(!(my_bodytype?.body_flags & BODY_FLAG_NO_DNA))
+		if(!(my_bodytype?.body_flags & BODY_FLAG_NO_STASIS))
 			for(var/source in stasis_sources)
 				stasis_value += stasis_sources[source]
 		stasis_sources = null

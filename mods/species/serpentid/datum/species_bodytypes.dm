@@ -22,6 +22,11 @@
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
 
+	eye_darksight_range = 8
+	eye_innate_flash_protection = FLASH_PROTECTION_VULNERABLE
+	eye_contaminant_guard = 1
+	eye_icon = 'mods/species/serpentid/icons/eyes.dmi'
+
 	has_limbs = list(
 		BP_CHEST =        list("path" = /obj/item/organ/external/chest/insectoid/serpentid),
 		BP_GROIN =        list("path" = /obj/item/organ/external/groin/insectoid/serpentid),

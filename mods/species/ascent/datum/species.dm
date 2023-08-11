@@ -56,7 +56,6 @@
 	oxy_mod =               0.8 // Don't need as much breathable gas as humans.
 	toxins_mod =            0.8 // Not as biologically fragile as meatboys.
 	radiation_mod =         0.5 // Not as biologically fragile as meatboys.
-	flash_mod =               2 // Highly photosensitive.
 
 	age_descriptor = /datum/appearance_descriptor/age/kharmaani
 	rarity_value =            3

@@ -260,7 +260,7 @@
 
 //Checks for various conditions to see if the mob is revivable
 /obj/item/shockpaddles/proc/can_defib(mob/living/carbon/human/H) //This is checked before doing the defib operation
-	if(H.has_body_flag(BODY_FLAG_NO_DNA))
+	if(H.has_body_flag(BODY_FLAG_NO_DEFIB))
 		return "buzzes, \"Unrecogized physiology. Operation aborted.\""
 
 	if(!check_contact(H))
