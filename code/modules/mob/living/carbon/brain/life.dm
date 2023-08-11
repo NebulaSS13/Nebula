@@ -75,14 +75,13 @@
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 	updatehealth()
 
-	var/is_blind = FALSE
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
-		is_blind = TRUE
+		SET_STATUS_MAX(src, STAT_BLIND, 1)
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		if( !container && (health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
 			death()
-			is_blind = TRUE
+			SET_STATUS_MAX(src, STAT_BLIND, 1)
 			set_status(STAT_SILENCE, 0)
 			return 1
 
@@ -96,10 +95,9 @@
 				if(31 to INFINITY)
 					emp_damage = 30//Let's not overdo it
 				if(21 to 30)//High level of EMP damage, unable to see, hear, or speak
-					set_status(STAT_BLIND, 1)
-					is_blind = TRUE
+					SET_STATUS_MAX(src, STAT_BLIND, 1)
 					SET_STATUS_MAX(src, STAT_DEAF, 1)
-					set_status(STAT_SILENCE, 1)
+					SET_STATUS_MAX(src, STAT_SILENCE, 1)
 					if(!alert)//Sounds an alarm, but only once per 'level'
 						emote("alarm")
 						to_chat(src, "<span class='warning'>Major electrical distruption detected: System rebooting.</span>")
@@ -137,9 +135,6 @@
 					alert = 0
 					to_chat(src, "<span class='warning'>All systems restored.</span>")
 					emp_damage -= 1
-
-	if(is_blind)
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	return 1
 

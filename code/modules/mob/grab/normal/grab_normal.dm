@@ -186,11 +186,9 @@
 	if(istype(affecting_mob) && G.special_target_functional)
 		switch(G.target_zone)
 			if(BP_MOUTH)
-				if(GET_STATUS(affecting_mob, STAT_SILENCE) < 2)
-					affecting_mob.set_status(STAT_SILENCE, 2)
+				SET_STATUS_MAX(affecting_mob, STAT_SILENCE, 2)
 			if(BP_EYES)
-				if(GET_STATUS(affecting_mob, STAT_BLIND) < 2)
-					affecting_mob.set_status(STAT_BLIND, 2)
+				SET_STATUS_MAX(affecting_mob, STAT_BLIND, 2)
 
 // Handles when they change targeted areas and something is supposed to happen.
 /decl/grab/normal/special_target_change(var/obj/item/grab/G, old_zone, new_zone)

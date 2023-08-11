@@ -270,7 +270,7 @@
 
 /mob/living/proc/handle_impaired_vision()
 	if((sdisabilities & BLINDED) || stat) //blindness from disability or unconsciousness doesn't get better on its own
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
+		SET_STATUS_MAX(src, STAT_BLIND, 1)
 
 /mob/living/proc/handle_impaired_hearing()
 	if((sdisabilities & DEAFENED) || stat) //disabled-deaf, doesn't get better on its own

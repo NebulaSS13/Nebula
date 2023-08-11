@@ -213,8 +213,8 @@
 			to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
 		if (E.damage >= E.min_bruised_damage)
 			to_chat(src, "<span class='danger'>You go blind!</span>")
-			set_status(STAT_BLIND, 5)
-			set_status(STAT_BLURRY, 5)
+			SET_STATUS_MAX(src, STAT_BLIND, 5)
+			SET_STATUS_MAX(src, STAT_BLURRY, 5)
 			disabilities |= NEARSIGHTED
 			spawn(100)
 				disabilities &= ~NEARSIGHTED
