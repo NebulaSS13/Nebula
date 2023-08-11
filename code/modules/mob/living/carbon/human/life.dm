@@ -155,8 +155,8 @@
 		set_status(STAT_BLIND, 0)
 		set_status(STAT_BLURRY, 0)
 	else if(!vision || (vision && !vision.is_usable()))   // Vision organs cut out or broken? Permablind.
-		set_status(STAT_BLIND, 1)
-		set_status(STAT_BLURRY, 1)
+		SET_STATUS_MAX(src, STAT_BLIND, 1)
+		SET_STATUS_MAX(src, STAT_BLURRY, 1)
 	// Non-genetic blindness; covered eyes will heal faster.
 	else if(!(sdisabilities & BLINDED) && equipment_tint_total >= TINT_BLIND)
 		ADJ_STATUS(src, STAT_BLURRY, -1)
@@ -389,7 +389,7 @@
 
 	//SSD check, if a logged player is awake put them back to sleep!
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
+		SET_STATUS_MAX(src, STAT_BLIND, 1)
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		updatehealth()	//TODO
@@ -404,7 +404,7 @@
 			SET_STATUS_MAX(src, STAT_PARA, 10)
 
 		if(HAS_STATUS(src, STAT_PARA) ||HAS_STATUS(src, STAT_ASLEEP))
-			SET_STATUS_MAX(src, STAT_BLIND, 2)
+			SET_STATUS_MAX(src, STAT_BLIND, 1)
 			set_stat(UNCONSCIOUS)
 			animate_tail_reset()
 			adjustHalLoss(-3)

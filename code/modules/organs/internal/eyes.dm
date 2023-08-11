@@ -79,9 +79,9 @@
 	if(!owner)
 		return
 	if(is_bruised())
-		owner.set_status(STAT_BLURRY, 20)
+		SET_STATUS_MAX(owner, STAT_BLURRY, 20)
 	if(is_broken())
-		owner.set_status(STAT_BLIND, 20)
+		SET_STATUS_MAX(owner, STAT_BLIND, 20)
 
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
 	return (flash_protection + get_innate_flash_protection())
