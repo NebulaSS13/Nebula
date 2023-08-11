@@ -270,11 +270,11 @@
 
 /mob/living/proc/handle_impaired_vision()
 	if((sdisabilities & BLINDED) || stat) //blindness from disability or unconsciousness doesn't get better on its own
-		SET_STATUS_MAX(src, STAT_BLIND, 1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 /mob/living/proc/handle_impaired_hearing()
 	if((sdisabilities & DEAFENED) || stat) //disabled-deaf, doesn't get better on its own
-		SET_STATUS_MAX(src, STAT_TINNITUS, 1)
+		SET_STATUS_MAX(src, STAT_TINNITUS, 2)
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
