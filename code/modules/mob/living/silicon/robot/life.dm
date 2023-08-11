@@ -11,7 +11,6 @@
 	//Status updates, death etc.
 	clamp_values()
 	handle_regular_status_updates()
-	handle_status_effects()
 	handle_actions()
 
 	if(client)
@@ -23,6 +22,8 @@
 		process_locks()
 		process_queued_alarms()
 		process_os()
+
+	handle_status_effects()
 	UpdateLyingBuckledAndVerbStatus()
 
 /mob/living/silicon/robot/proc/clamp_values()
