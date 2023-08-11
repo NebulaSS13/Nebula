@@ -82,8 +82,8 @@
 			H.co2_alert = 0
 	else if(istype(H))
 		H.co2_alert = 0
-	if(istype(H) && dosage > 1 && H.losebreath < 15)
-		H.losebreath++
+	if(istype(H) && dosage > 1 && H.ticks_since_last_successful_breath < 15)
+		H.ticks_since_last_successful_breath++
 	if(warning_message && prob(warning_prob))
 		to_chat(M, SPAN_WARNING("You feel [warning_message]."))
 

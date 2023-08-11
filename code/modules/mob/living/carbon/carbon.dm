@@ -300,9 +300,6 @@
 /mob/living/carbon/proc/can_devour(atom/movable/victim)
 	return FALSE
 
-/mob/living/carbon/proc/need_breathe()
-	return
-
 /mob/living/carbon/check_has_mouth()
 	// carbon mobs have mouths by default
 	// behavior of this proc for humans is overridden in human.dm

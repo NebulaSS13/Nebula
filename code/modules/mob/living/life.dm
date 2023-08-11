@@ -22,6 +22,8 @@
 	handle_environment(loc.return_air())
 
 	if(stat != DEAD && !is_in_stasis())
+		//Breathing, if applicable
+		handle_breathing()
 		handle_nutrition_and_hydration()
 		handle_immunity()
 		//Body temperature adjusts itself (self-regulation)
@@ -78,9 +80,6 @@
 		var/thirst_factor = get_thirst_factor()
 		if(thirst_factor)
 			adjust_hydration(-(thirst_factor))
-
-/mob/living/proc/handle_breathing()
-	return
 
 #define RADIATION_SPEED_COEFFICIENT 0.025
 /mob/living/proc/handle_mutations_and_radiation()

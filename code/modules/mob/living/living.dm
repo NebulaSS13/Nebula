@@ -772,7 +772,13 @@ default behaviour is:
 		. -= 3
 
 /mob/living/can_drown()
-	return TRUE
+	if(get_internals())
+		return FALSE
+	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+	if(istype(mask) && mask.filters_water())
+		return FALSE
+	var/obj/item/organ/internal/lungs/L = get_organ(BP_LUNGS, /obj/item/organ/internal/lungs)
+	return (!L || L.can_drown())
 
 /mob/living/handle_drowning()
 	var/turf/T = get_turf(src)

@@ -93,7 +93,7 @@
 		return
 
 	if(owner.vital_organ_missing_time)
-		owner.losebreath = max(10, owner.losebreath)
+		owner.ticks_since_last_successful_breath = max(10, owner.ticks_since_last_successful_breath)
 		return
 
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
@@ -125,7 +125,7 @@
 			else
 				to_chat(owner, "<span class='danger'>You're having trouble getting enough [breath_type]!</span>")
 
-			owner.losebreath = max(3, owner.losebreath)
+			owner.ticks_since_last_successful_breath = max(3, owner.ticks_since_last_successful_breath)
 
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
@@ -147,7 +147,7 @@
 		if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 			rupture()
 
-/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, var/forced)
+/obj/item/organ/internal/lungs/proc/handle_owner_breath(datum/gas_mixture/breath, var/forced)
 
 	if(!owner)
 		return 1

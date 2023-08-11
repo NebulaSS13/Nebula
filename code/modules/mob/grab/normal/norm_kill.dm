@@ -27,4 +27,4 @@
 	SET_STATUS_MAX(affecting, STAT_WEAK, 5)	//Should keep you down unless you get help.
 	if(iscarbon(affecting))
 		var/mob/living/carbon/C = affecting
-		C.losebreath = max(C.losebreath + 2, 3)
+		C.ticks_since_last_successful_breath = max(C.ticks_since_last_successful_breath + 2, 3)
