@@ -82,13 +82,7 @@
 	if (src.stat != DEAD) //Alive.
 		if (incapacitated(INCAPACITATION_DISRUPTED) || !has_power)
 			src.set_stat(UNCONSCIOUS)
-			if (HAS_STATUS(src, STAT_STUN))
-				ADJ_STATUS(src, STAT_STUN, -1)
-			if(HAS_STATUS(src, STAT_WEAK))
-				ADJ_STATUS(src, STAT_WEAK, -1)
-			if (HAS_STATUS(src, STAT_PARA) > 0)
-				ADJ_STATUS(src, STAT_PARA, -1)
-				SET_STATUS_MAX(src, STAT_BLIND, 2)
+			SET_STATUS_MAX(src, STAT_BLIND, 2)
 		else	//Not stunned.
 			src.set_stat(CONSCIOUS)
 
@@ -96,9 +90,6 @@
 		cameranet.update_visibility(src, FALSE)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		src.set_stat(DEAD)
-
-	if(HAS_STATUS(src, STAT_BLIND))
-		ADJ_STATUS(src, STAT_BLIND, -1)
 
 	src.set_density(!src.lying)
 	if(src.sdisabilities & BLINDED)
