@@ -41,9 +41,6 @@
 
 		if(HAS_STATUS(src, STAT_ASLEEP))
 			adjustHalLoss(-3)
-			if (mind)
-				if(mind.active && client != null)
-					ADJ_STATUS(src, STAT_ASLEEP, -1)
 			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			set_stat(UNCONSCIOUS)
 		else if(resting)
@@ -59,8 +56,6 @@
 		if(!check_has_eyes())
 			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			SET_STATUS_MAX(src, STAT_BLURRY, 1)
-		else if(GET_STATUS(src, STAT_BLIND))
-			ADJ_STATUS(src, STAT_BLIND, -1)
 
 		update_icon()
 
