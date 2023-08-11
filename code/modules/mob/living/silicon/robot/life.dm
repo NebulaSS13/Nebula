@@ -98,7 +98,6 @@
 
 	if(HAS_STATUS(src, STAT_BLIND))
 		ADJ_STATUS(src, STAT_BLIND, -1)
-		SET_STATUS_MAX(src, STAT_BLIND, 1)
 
 	src.set_density(!src.lying)
 	if(src.sdisabilities & BLINDED)

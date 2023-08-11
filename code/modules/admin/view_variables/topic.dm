@@ -613,7 +613,7 @@
 			return
 		var/duration = clamp(input("Enter a duration ([STRESSOR_DURATION_INDEFINITE] for permanent).", "Add Stressor") as num|null, STRESSOR_DURATION_INDEFINITE, INFINITY)
 		if(duration && L.add_stressor(stressor, duration))
-			log_and_message_admins("added [stressor] to \the [src] for duration [duration].")
+			log_and_message_admins("added [stressor] to \the [L] for duration [duration].")
 
 	else if(href_list["removestressor"])
 		if(!check_rights(R_DEBUG))
@@ -626,7 +626,28 @@
 			return
 		var/datum/stressor/stressor = input("Select a stressor to remove.", "Remove Stressor") as null|anything in L.stressors
 		if(L.remove_stressor(stressor))
-			log_and_message_admins("removed [stressor] from \the [src].")
+			log_and_message_admins("removed [stressor] from \the [L].")
+
+	else if(href_list["setstatuscond"])
+		if(!check_rights(R_DEBUG))
+			return
+		var/mob/living/L = locate(href_list["removestressor"])
+		if(!istype(L))
+			return
+		var/list/all_status_conditions = decls_repository.get_decls_of_subtype(/decl/status_condition)
+		var/list/select_from_conditions = list()
+		for(var/status_cond in all_status_conditions)
+			select_from_conditions += all_status_conditions[status_cond]
+		var/decl/status_condition/selected_condition = input("Select a status condition to set.", "Set Status Condition") as null|anything in select_from_conditions
+		if(!selected_condition || QDELETED(L) || !check_rights(R_DEBUG))
+			return
+		var/amt = input("Enter an amount to set the condition to.", "Set Status Condition") as num|null
+		if(isnull(amt) || QDELETED(L) || !check_rights(R_DEBUG))
+			return
+		if(amt < 0)
+			amt += GET_STATUS(L, selected_condition.type)
+		L.set_status(selected_condition.type, amt)
+		log_and_message_admins("set [selected_condition.name] to [amt] on \the [L].")
 
 	else if(href_list["setmaterial"])
 		if(!check_rights(R_DEBUG))	return
