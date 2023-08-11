@@ -631,7 +631,7 @@
 	else if(href_list["setstatuscond"])
 		if(!check_rights(R_DEBUG))
 			return
-		var/mob/living/L = locate(href_list["removestressor"])
+		var/mob/living/L = locate(href_list["setstatuscond"])
 		if(!istype(L))
 			return
 		var/list/all_status_conditions = decls_repository.get_decls_of_subtype(/decl/status_condition)

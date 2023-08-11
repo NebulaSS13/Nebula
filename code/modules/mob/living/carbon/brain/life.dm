@@ -76,12 +76,12 @@
 	updatehealth()
 
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
-		SET_STATUS_MAX(src, STAT_BLIND, 1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		if( !container && (health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
 			death()
-			SET_STATUS_MAX(src, STAT_BLIND, 1)
+			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			set_status(STAT_SILENCE, 0)
 			return 1
 
@@ -95,9 +95,9 @@
 				if(31 to INFINITY)
 					emp_damage = 30//Let's not overdo it
 				if(21 to 30)//High level of EMP damage, unable to see, hear, or speak
-					SET_STATUS_MAX(src, STAT_BLIND, 1)
-					SET_STATUS_MAX(src, STAT_DEAF, 1)
-					SET_STATUS_MAX(src, STAT_SILENCE, 1)
+					SET_STATUS_MAX(src, STAT_BLIND, 2)
+					SET_STATUS_MAX(src, STAT_DEAF, 2)
+					SET_STATUS_MAX(src, STAT_SILENCE, 2)
 					if(!alert)//Sounds an alarm, but only once per 'level'
 						emote("alarm")
 						to_chat(src, "<span class='warning'>Major electrical distruption detected: System rebooting.</span>")
@@ -111,8 +111,8 @@
 					set_status(STAT_SILENCE, 0)
 					emp_damage -= 1
 				if(11 to 19)//Moderate level of EMP damage, resulting in nearsightedness and ear damage
-					set_status(STAT_BLURRY, 1)
-					set_status(STAT_TINNITUS, 1)
+					set_status(STAT_BLURRY, 2)
+					set_status(STAT_TINNITUS, 2)
 					if(!alert)
 						emote("alert")
 						to_chat(src, "<span class='warning'>Primary systems are now online.</span>")

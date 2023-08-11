@@ -534,7 +534,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			H.set_see_invisible(max(min(H.see_invisible, H.equipment_see_invis), vision[2]))
 
 	if(H.equipment_tint_total >= TINT_BLIND)
-		SET_STATUS_MAX(H, STAT_BLIND, 1)
+		SET_STATUS_MAX(H, STAT_BLIND, 2)
 
 	if(!H.client)//no client, no screen to update
 		return 1

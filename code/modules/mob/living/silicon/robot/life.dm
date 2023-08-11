@@ -88,13 +88,13 @@
 				ADJ_STATUS(src, STAT_WEAK, -1)
 			if (HAS_STATUS(src, STAT_PARA) > 0)
 				ADJ_STATUS(src, STAT_PARA, -1)
-				SET_STATUS_MAX(src, STAT_BLIND, 1)
+				SET_STATUS_MAX(src, STAT_BLIND, 2)
 		else	//Not stunned.
 			src.set_stat(CONSCIOUS)
 
 	else //Dead.
 		cameranet.update_visibility(src, FALSE)
-		SET_STATUS_MAX(src, STAT_BLIND, 1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		src.set_stat(DEAD)
 
 	if(HAS_STATUS(src, STAT_BLIND))
@@ -102,7 +102,7 @@
 
 	src.set_density(!src.lying)
 	if(src.sdisabilities & BLINDED)
-		SET_STATUS_MAX(src, STAT_BLIND, 1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	if(src.sdisabilities & DEAFENED)
 		src.set_status(STAT_DEAF, 1)
@@ -118,7 +118,7 @@
 			silicon_radio.on = 1
 
 	if(!isnull(components["camera"]) && !is_component_functioning("camera"))
-		SET_STATUS_MAX(src, STAT_BLIND, 1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		cameranet.update_visibility(src, FALSE)
 
 	return 1
