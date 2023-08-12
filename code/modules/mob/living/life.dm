@@ -132,7 +132,7 @@
 	if(damage)
 		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
-		updatehealth()
+		update_health()
 		var/list/limbs = get_external_organs()
 		if(!isSynthetic() && LAZYLEN(limbs))
 			var/obj/item/organ/external/O = pick(limbs)
@@ -182,9 +182,6 @@
 			LAZYSET(chem_doses, T, dose)
 			if(LAZYACCESS(chem_doses, T) <= 0)
 				LAZYREMOVE(chem_doses, T)
-
-	if(apply_chemical_effects())
-		updatehealth()
 
 	return TRUE
 
@@ -254,7 +251,7 @@
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
 /mob/living/proc/handle_regular_status_updates()
-	updatehealth()
+	update_health()
 	if(stat != DEAD)
 		if(HAS_STATUS(src, STAT_PARA))
 			set_stat(UNCONSCIOUS)

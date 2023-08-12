@@ -69,7 +69,7 @@
 	A.adjustFireLoss(-4)
 	A.adjustBruteLoss(-4)
 	A.adjustOxyLoss(-4)
-	A.updatehealth()
+	A.update_health()
 	// If the AI is dead, revive it.
 	if (A.stat == DEAD && !A.should_be_dead())
 		A.set_stat(CONSCIOUS)

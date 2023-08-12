@@ -71,7 +71,7 @@
 	return current_health < config.health_threshold_dead
 
 /mob/living/silicon/robot/handle_regular_status_updates()
-	updatehealth()
+	update_health()
 
 	if(HAS_STATUS(src, STAT_ASLEEP))
 		SET_STATUS_MAX(src, STAT_PARA, 3)

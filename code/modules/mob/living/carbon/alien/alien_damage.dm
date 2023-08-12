@@ -19,4 +19,4 @@
 			SET_STATUS_MAX(src, STAT_DEAF, 60)
 	adjustBruteLoss(b_loss)
 	adjustFireLoss(f_loss)
-	updatehealth()
+	update_health()

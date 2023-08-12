@@ -9,7 +9,7 @@
 		src.cameraFollow = null
 		src.reset_view(null)
 
-	src.updatehealth()
+	update_health()
 
 	if ((get_health_percent() <= 0) || (backup_capacitor() <= 0))
 		death()

@@ -19,7 +19,7 @@
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			R.adjustBruteLoss(-15)
 			R.adjustFireLoss(-15)
-			R.updatehealth()
+			R.update_health()
 			use(1)
 			user.visible_message("<span class='notice'>\The [user] applied some [src] on [R]'s damaged areas.</span>",\
 				"<span class='notice'>You apply some [src] at [R]'s damaged areas.</span>")
@@ -44,7 +44,7 @@
 			else if(can_use(1))
 				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				S.heal_damage(15, 15, robo_repair = 1)
-				H.updatehealth()
+				H.update_health()
 				use(1)
 				user.visible_message("<span class='notice'>\The [user] applies some nanite paste on [user != M ? "[M]'s [S.name]" : "[S]"] with [src].</span>",\
 				"<span class='notice'>You apply some nanite paste on [user == M ? "your" : "[M]'s"] [S.name].</span>")

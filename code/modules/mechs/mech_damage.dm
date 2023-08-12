@@ -154,7 +154,7 @@
 	if((damagetype == BRUTE || damagetype == BURN) && prob(25+(damage*2)))
 		sparks.set_up(3,0,src)
 		sparks.start()
-	updatehealth()
+	update_health()
 
 	return 1
 

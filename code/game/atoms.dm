@@ -735,7 +735,7 @@
 				H.adjustBruteLoss(damage)
 
 			H.UpdateDamageIcon()
-			H.updatehealth()
+			H.update_health()
 	return
 
 /// Get the current color of this atom.

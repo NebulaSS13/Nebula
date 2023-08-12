@@ -18,7 +18,7 @@
 		adjustOxyLoss(-(rads))
 		adjustToxLoss(-(rads))
 
-/mob/living/carbon/alien/updatehealth()
+/mob/living/carbon/alien/update_health()
 	. = ..()
 	if(stat == DEAD)
 		blinded = 1
@@ -32,7 +32,7 @@
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
 	else
-		updatehealth()
+		update_health()
 		if(stat == DEAD)
 			return 1
 

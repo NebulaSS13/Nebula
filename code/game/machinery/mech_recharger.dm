@@ -75,7 +75,7 @@
 				remaining_energy -= repair * repair_power_usage
 			if(remaining_energy <= 0)
 				break
-		charging.updatehealth()
+		charging.update_health()
 		if(fully_repaired())
 			charging.show_message(SPAN_NOTICE("Exosuit integrity has been fully restored."))
 

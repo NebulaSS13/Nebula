@@ -35,7 +35,7 @@
 			if(istype(M) && M.active && M.passive_power_use)
 				M.deactivate()
 
-	updatehealth()
+	update_health()
 
 	if(emp_damage > 0)
 		emp_damage -= min(1, emp_damage) //Reduce emp accumulation over time

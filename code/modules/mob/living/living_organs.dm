@@ -26,7 +26,7 @@
 	//Only run install effects if we're not detached and we're not adding in place
 	if(!in_place && !(O.status & ORGAN_CUT_AWAY))
 		on_gained_organ(O)
-		updatehealth()
+		update_health()
 	return TRUE
 
 //Can be called when the organ is detached or attached.
@@ -41,7 +41,7 @@
 		if(client)
 			client.screen -= O
 
-		updatehealth()
+		update_health()
 
 		if(drop_organ)
 			var/drop_loc = get_turf(src)
