@@ -58,6 +58,8 @@ SUBSYSTEM_DEF(minimap)
 	small_map.Blend(COLOR_HOLOMAP_HOLOFIER, ICON_MULTIPLY)
 	small_map.Blend(combinedareas, ICON_OVERLAY)
 	small_map.Scale(WORLD_ICON_SIZE, WORLD_ICON_SIZE)
+	var/const/border_size = 6 // the width of the border (non-map) section of the icon
+	small_map.Shift(NORTHEAST, border_size)
 
 	// And rotate it in every direction of course!
 	var/icon/actual_small_map = icon(small_map)
