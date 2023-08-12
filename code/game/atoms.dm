@@ -713,30 +713,19 @@
 		if(M.lying) return //No spamming this on people.
 
 		SET_STATUS_MAX(M, STAT_WEAK, 3)
-		to_chat(M, "<span class='danger'>You topple as \the [src] moves under you!</span>")
-
+		to_chat(M, SPAN_DANGER("You topple as \the [src] moves under you!"))
 		if(prob(25))
-
 			var/damage = rand(15,30)
-			var/mob/living/carbon/human/H = M
-			if(!istype(H))
-				to_chat(H, "<span class='danger'>You land heavily!</span>")
+			var/obj/item/organ/external/affecting = SAFEPICK(M.get_external_organs())
+			if(!affecting)
+				to_chat(M, SPAN_DANGER("You land heavily!"))
 				M.adjustBruteLoss(damage)
-				return
-
-			var/obj/item/organ/external/affecting = pick(H.get_external_organs())
-			if(affecting)
-				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
+				M.update_health()
+			else
+				to_chat(M, SPAN_DANGER("You land heavily on your [affecting.name]!"))
 				affecting.take_external_damage(damage, 0)
 				if(affecting.parent)
 					affecting.parent.add_autopsy_data("Misadventure", damage)
-			else
-				to_chat(H, "<span class='danger'>You land heavily!</span>")
-				H.adjustBruteLoss(damage)
-
-			H.UpdateDamageIcon()
-			H.update_health()
-	return
 
 /// Get the current color of this atom.
 /atom/proc/get_color()

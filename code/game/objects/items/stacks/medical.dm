@@ -54,8 +54,7 @@
 			if(istype(suit))
 				to_chat(user, SPAN_WARNING("You can't apply [src] through [suit]!"))
 				return 1
-
-		H.UpdateDamageIcon()
+		// TODO: readd the actual healing logic that goes here, or check that it's applied in afterattack or something
 		H.update_health()
 	else
 

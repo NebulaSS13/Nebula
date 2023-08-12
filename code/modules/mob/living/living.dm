@@ -489,7 +489,7 @@ default behaviour is:
 			brain.update_icon()
 	..(repair_brain)
 
-/mob/living/proc/UpdateDamageIcon()
+/mob/living/proc/update_damage_icon()
 	return
 
 /mob/living/handle_grabs_after_move(var/turf/old_loc, var/direction)

@@ -89,12 +89,10 @@
 /mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
 	if(MC)
 		MC.take_burn_damage(amount)
-		MC.update_health()
 
 /mob/living/exosuit/adjustBruteLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
 	if(MC)
 		MC.take_brute_damage(amount)
-		MC.update_health()
 
 /mob/living/exosuit/proc/zoneToComponent(var/zone)
 	switch(zone)
