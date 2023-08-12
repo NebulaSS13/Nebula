@@ -23,8 +23,7 @@
 		adjustToxLoss(200)
 		death()
 	else if(bodytemperature <= hurt_temperature)
-		adjustToxLoss(30)
-		update_health()
+		adjustToxLoss(30, do_update_health = TRUE)
 
 /mob/living/slime/proc/adjust_body_temperature(current, loc_temp, boost)
 	var/delta = abs(current-loc_temp)

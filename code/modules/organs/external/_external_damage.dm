@@ -192,7 +192,7 @@
 		status &= ~ORGAN_BROKEN
 
 	//Sync the organ's damage with its wounds
-	src.update_damages()
+	update_damages()
 	owner.update_health()
 
 	return update_damstate()

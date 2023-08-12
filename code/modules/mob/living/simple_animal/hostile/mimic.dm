@@ -151,9 +151,9 @@ var/global/list/protected_objects = list(/obj/machinery,
 		src.visible_message("<b>\The [src]</b> starts to move!")
 		awake = 1
 
-/mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(var/damage)
-	trigger()
+/mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(var/damage, var/do_update_health = FALSE)
 	..(damage)
+	trigger()
 
 /mob/living/simple_animal/hostile/mimic/sleeping/attack_hand()
 	trigger()

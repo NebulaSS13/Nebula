@@ -225,8 +225,7 @@
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
 	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
-	adjustBruteLoss(damage)
-	update_health()
+	adjustBruteLoss(damage, do_update_health = TRUE)
 	user.do_attack_animation(src)
 	return 1
 

@@ -463,21 +463,17 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			damage = 30
 	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
-/mob/living/simple_animal/adjustBruteLoss(damage)
-	..()
-	update_health()
+/mob/living/simple_animal/adjustBruteLoss(damage, do_update_health)
+	..(damage, do_update_health = TRUE)
 
-/mob/living/simple_animal/adjustFireLoss(damage)
-	..()
-	update_health()
+/mob/living/simple_animal/adjustFireLoss(damage, do_update_health)
+	..(damage, do_update_health = TRUE)
 
-/mob/living/simple_animal/adjustToxLoss(damage)
-	..()
-	update_health()
+/mob/living/simple_animal/adjustToxLoss(damage, do_update_health)
+	..(damage, do_update_health = TRUE)
 
-/mob/living/simple_animal/adjustOxyLoss(damage)
-	..()
-	update_health()
+/mob/living/simple_animal/adjustOxyLoss(damage, do_update_health)
+	..(damage, do_update_health = TRUE)
 
 /mob/living/simple_animal/proc/SA_attackable(target_mob)
 	if (isliving(target_mob))

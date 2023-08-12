@@ -2,6 +2,7 @@
 
 	SHOULD_CALL_PARENT(FALSE)
 
+	update_health()
 	if (src.stat == DEAD)
 		return
 
@@ -28,4 +29,3 @@
 			to_chat(src, SPAN_NOTICE("Communication circuit reinitialized. Speech and messaging functionality restored."))
 
 	handle_status_effects()
-	update_health()

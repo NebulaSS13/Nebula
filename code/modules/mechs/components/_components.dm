@@ -77,13 +77,13 @@
 
 /obj/item/mech_component/proc/take_brute_damage(var/amt)
 	brute_damage = max(0, brute_damage + amt)
-	update_health()
+	update_component_health()
 	if(total_damage == max_damage)
 		take_component_damage(amt,0)
 
 /obj/item/mech_component/proc/take_burn_damage(var/amt)
 	burn_damage = max(0, burn_damage + amt)
-	update_health()
+	update_component_health()
 	if(total_damage == max_damage)
 		take_component_damage(0,amt)
 

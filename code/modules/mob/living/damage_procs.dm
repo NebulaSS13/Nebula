@@ -24,15 +24,15 @@
 
 	switch(damagetype)
 		if(BRUTE)
-			adjustBruteLoss(damage)
+			adjustBruteLoss(damage, do_update_health = TRUE)
 		if(BURN)
 			if(MUTATION_COLD_RESISTANCE in mutations)
-				damage = 0
-			adjustFireLoss(damage)
+				return
+			adjustFireLoss(damage, do_update_health = TRUE)
 		if(TOX)
-			adjustToxLoss(damage)
+			adjustToxLoss(damage, do_update_health = TRUE)
 		if(OXY)
-			adjustOxyLoss(damage)
+			adjustOxyLoss(damage, do_update_health = TRUE)
 		if(CLONE)
 			adjustCloneLoss(damage)
 		if(PAIN)
@@ -41,8 +41,6 @@
 			electrocute_act(damage, used_weapon, 1, def_zone)
 		if(IRRADIATE)
 			apply_radiation(damage)
-
-	update_health()
 	return TRUE
 
 
@@ -64,7 +62,6 @@
 
 /mob/living/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	if(!effect || (blocked >= 100))	return FALSE
-
 	switch(effecttype)
 		if(STUN)
 			SET_STATUS_MAX(src, STAT_STUN, effect * blocked_mult(blocked))
@@ -81,7 +78,6 @@
 			SET_STATUS_MAX(src, STAT_BLURRY, effect * blocked_mult(blocked))
 		if(DROWSY)
 			SET_STATUS_MAX(src, STAT_DROWSY, effect * blocked_mult(blocked))
-	update_health()
 	return TRUE
 
 /mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)

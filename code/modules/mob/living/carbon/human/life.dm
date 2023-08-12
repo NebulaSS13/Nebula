@@ -387,12 +387,12 @@
 
 	if(status_flags & GODMODE)	return 0
 
+	update_health() // TODO: unify with parent call, Life() PR
 	//SSD check, if a logged player is awake put them back to sleep!
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
-		update_health()	//TODO
 
 		if(hallucination_power)
 			handle_hallucinations()

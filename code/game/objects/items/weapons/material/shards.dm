@@ -120,7 +120,6 @@
 			continue
 		to_chat(M, SPAN_DANGER("You step on \the [src]!"))
 		affecting.take_external_damage(5, 0)
-		M.updatehealth()
 		if(affecting.can_feel_pain())
 			SET_STATUS_MAX(M, STAT_WEAK, 3)
 		return
