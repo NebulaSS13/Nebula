@@ -152,7 +152,7 @@
 	name = "\improper Fabrication Bay"
 	icon_state = "yellow"
 	req_access = list(access_research)
-	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/ship/trade/crew/medbay/chemistry
 	name = "\improper Chemistry Bay"
