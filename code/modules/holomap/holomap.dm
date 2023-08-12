@@ -286,8 +286,6 @@
 
 /datum/station_holomap/proc/initialize_holomap(turf/T, isAI = null, mob/user = null, reinit = FALSE)
 	z = T.z
-	if(!station_map || reinit)
-		station_map = image(SSminimap.holomaps[z].holomap_combined)
 	if(!cursor || reinit)
 		cursor = image('icons/misc/holomap_markers.dmi', "you")
 		cursor.layer = HUD_ABOVE_ITEM_LAYER

@@ -5,8 +5,6 @@
 /datum/holomapdata
 	var/icon/holomap_base
 	var/list/icon/holomap_areas = list()
-	var/icon/holomap_combined
-	var/icon/holomap_areas_combined
 	var/icon/holomap_small
 
 SUBSYSTEM_DEF(minimap)
@@ -41,15 +39,12 @@ SUBSYSTEM_DEF(minimap)
 			single.Blend(A.holomap_color, ICON_MULTIPLY)
 		combinedareas.Blend(single, ICON_OVERLAY)
 
-	data.holomap_areas_combined = combinedareas
-
 	var/icon/map_base = icon(data.holomap_base)
 
 	// Generate the full sized map by blending the base and areas onto the backdrop
 	var/icon/big_map = icon(HOLOMAP_ICON, "stationmap")
 	big_map.Blend(map_base, ICON_OVERLAY)
 	big_map.Blend(combinedareas, ICON_OVERLAY)
-	data.holomap_combined = big_map
 
 	// Generate the "small" map
 	var/icon/small_map = icon(HOLOMAP_ICON, "blank")
