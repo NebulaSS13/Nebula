@@ -40,7 +40,7 @@
 		var/turf/T = get_turf(S)
 		var/obj/item/remains/xeno/X = new(T)
 		X.desc += "These look like they belong to \a [S.name]."
-		beast.adjust_nutrition(5 * S.maxHealth)
+		beast.adjust_nutrition(5 * S.get_max_health())
 		if(prob(5))
 			S.gib()
 		else
