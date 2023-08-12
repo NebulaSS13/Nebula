@@ -140,16 +140,13 @@
 	return
 
 /mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
-
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
 			if(BRUTE)
-				adjustBruteLoss(Proj.damage)
+				adjustBruteLoss(Proj.damage, do_update_health = TRUE)
 			if(BURN)
-				adjustFireLoss(Proj.damage)
-
+				adjustFireLoss(Proj.damage, do_update_health = TRUE)
 	Proj.on_hit(src,100) //wow this is a terrible hack
-	update_health()
 	return 100
 
 /mob/living/silicon/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)

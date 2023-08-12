@@ -18,24 +18,17 @@
 		adjustOxyLoss(-(rads))
 		adjustToxLoss(-(rads))
 
-/mob/living/carbon/alien/update_health()
-	. = ..()
-	if(stat == DEAD)
-		blinded = 1
-		set_status(STAT_SILENCE, 0)
-
 /mob/living/carbon/alien/handle_regular_status_updates()
 
 	if(status_flags & GODMODE)	return 0
 
+	update_health() // TODO: unify with parent call, Life() PR
 	if(stat == DEAD)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
 	else
-		update_health()
 		if(stat == DEAD)
 			return 1
-
 		if(HAS_STATUS(src, STAT_PARA))
 			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			set_stat(UNCONSCIOUS)

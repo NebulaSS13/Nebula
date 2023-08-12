@@ -47,12 +47,12 @@
 		if(prob(10))
 			poss.is_angry = TRUE
 
-/mob/living/simple_animal/opossum/adjustBruteLoss(damage)
+/mob/living/simple_animal/opossum/adjustBruteLoss(damage, do_update_health = FALSE)
 	. = ..()
 	if(damage >= 3)
 		respond_to_damage()
 
-/mob/living/simple_animal/opossum/adjustFireLoss(damage)
+/mob/living/simple_animal/opossum/adjustFireLoss(damage, do_update_health)
 	. = ..()
 	if(damage >= 3)
 		respond_to_damage()

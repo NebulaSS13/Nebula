@@ -12,13 +12,14 @@
 		if(C.installed != 0) amount += C.electronics_damage
 	return amount
 
-/mob/living/silicon/robot/adjustBruteLoss(var/amount)
+/mob/living/silicon/robot/adjustBruteLoss(var/amount, var/do_update_health)
+	SHOULD_CALL_PARENT(FALSE) // take/heal overall call update_health regardless of arg
 	if(amount > 0)
 		take_overall_damage(amount, 0)
 	else
 		heal_overall_damage(-amount, 0)
 
-/mob/living/silicon/robot/adjustFireLoss(var/amount)
+/mob/living/silicon/robot/adjustFireLoss(var/amount, var/do_update_health)
 	if(amount > 0)
 		take_overall_damage(0, amount)
 	else
@@ -125,20 +126,16 @@
 	var/datum/robot_component/armour/A = get_armour()
 	if(A)
 		A.take_damage(brute,burn,sharp)
-		return
-
-	while(parts.len && (brute>0 || burn>0) )
-		var/datum/robot_component/picked = pick(parts)
-
-		var/brute_was = picked.brute_damage
-		var/burn_was = picked.electronics_damage
-
-		picked.take_damage(brute,burn)
-
-		brute	-= (picked.brute_damage - brute_was)
-		burn	-= (picked.electronics_damage - burn_was)
-
-		parts -= picked
+	else
+		while(parts.len && (brute>0 || burn>0) )
+			var/datum/robot_component/picked = pick(parts)
+			var/brute_was = picked.brute_damage
+			var/burn_was = picked.electronics_damage
+			picked.take_damage(brute,burn)
+			brute	-= (picked.brute_damage - brute_was)
+			burn	-= (picked.electronics_damage - burn_was)
+			parts -= picked
+	update_health()
 
 /mob/living/silicon/robot/emp_act(severity)
 	uneq_all()

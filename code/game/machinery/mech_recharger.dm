@@ -68,14 +68,17 @@
 	var/remaining_energy = active_power_usage
 
 	if(repair && !fully_repaired())
+		var/repaired = FALSE
 		for(var/obj/item/mech_component/MC in charging)
 			if(MC)
 				MC.repair_brute_damage(repair)
 				MC.repair_burn_damage(repair)
 				remaining_energy -= repair * repair_power_usage
+				repaired = TRUE
 			if(remaining_energy <= 0)
 				break
-		charging.update_health()
+		if(repaired)
+			charging.update_health() // TODO: do this during component repair.
 		if(fully_repaired())
 			charging.show_message(SPAN_NOTICE("Exosuit integrity has been fully restored."))
 

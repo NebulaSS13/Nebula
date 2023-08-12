@@ -17,25 +17,21 @@
 			if(1 to 49)
 				radiation--
 				if(prob(25))
-					adjustToxLoss(1)
-					update_health()
+					adjustToxLoss(1, do_update_health = TRUE)
 
 			if(50 to 74)
 				radiation -= 2
-				adjustToxLoss(1)
+				adjustToxLoss(1, do_update_health = TRUE)
 				if(prob(5))
 					radiation -= 5
 					if(!container)
 						to_chat(src, "<span class='warning'>You feel weak.</span>")
 					else
 						to_chat(src, "<span class='warning'>STATUS: DANGEROUS LEVELS OF RADIATION DETECTED.</span>")
-				update_health()
 
 			if(75 to 100)
 				radiation -= 3
-				adjustToxLoss(3)
-				update_health()
-
+				adjustToxLoss(3, do_update_health = TRUE)
 
 /mob/living/carbon/brain/handle_environment(datum/gas_mixture/environment)
 	..()
@@ -54,16 +50,11 @@
 
 /mob/living/carbon/brain/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
 	if(status_flags & GODMODE) return
-
 	if(exposed_temperature > bodytemperature)
 		var/discomfort = min( abs(exposed_temperature - bodytemperature)*(exposed_intensity)/2000000, 1.0)
-		//adjustFireLoss(2.5*discomfort)
-		//adjustFireLoss(5.0*discomfort)
 		adjustFireLoss(20.0*discomfort)
-
 	else
 		var/discomfort = min( abs(exposed_temperature - bodytemperature)*(exposed_intensity)/2000000, 1.0)
-		//adjustFireLoss(2.5*discomfort)
 		adjustFireLoss(5.0*discomfort)
 
 /mob/living/carbon/brain/apply_chemical_effects()
@@ -75,15 +66,10 @@
 /mob/living/carbon/brain/should_be_dead()
 	return (!container && (current_health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
 
-/mob/living/carbon/brain/update_health()
-	. = ..()
-	if(stat == DEAD)
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
-		set_status(STAT_SILENCE, 0)
-
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 
-	update_health()
+	update_health() // TODO: unify with parent call, Life() PR
+
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		return 1
 
@@ -98,7 +84,6 @@
 				emp_damage = 30//Let's not overdo it
 			if(21 to 30)//High level of EMP damage, unable to see, hear, or speak
 				set_status(STAT_BLIND, 1)
-				blinded = 1
 				SET_STATUS_MAX(src, STAT_DEAF, 1)
 				set_status(STAT_SILENCE, 1)
 				if(!alert)//Sounds an alarm, but only once per 'level'
@@ -109,7 +94,6 @@
 					emp_damage -= 1
 			if(20)
 				alert = 0
-				blinded = 0
 				set_status(STAT_BLIND,   0)
 				set_status(STAT_DEAF,    0)
 				set_status(STAT_SILENCE, 0)

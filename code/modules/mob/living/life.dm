@@ -130,14 +130,14 @@
 
 	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
-		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
-		update_health()
+		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT, do_update_health = TRUE)
 		var/list/limbs = get_external_organs()
 		if(!isSynthetic() && LAZYLEN(limbs))
 			var/obj/item/organ/external/O = pick(limbs)
 			if(istype(O))
 				O.add_autopsy_data("Radiation Poisoning", damage)
+
 #undef RADIATION_SPEED_COEFFICIENT
 
 // Get valid, unique reagent holders for metabolizing. Avoids metabolizing the same holder twice in a tick.

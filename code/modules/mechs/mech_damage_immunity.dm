@@ -14,7 +14,8 @@
 /mob/living/exosuit/setOxyLoss()
 	return 0
 
-/mob/living/exosuit/adjustOxyLoss()
+/mob/living/exosuit/adjustOxyLoss(var/damage, var/do_update_health)
+	SHOULD_CALL_PARENT(FALSE)
 	return 0
 
 /mob/living/exosuit/getToxLoss()
@@ -23,7 +24,7 @@
 /mob/living/exosuit/setToxLoss()
 	return 0
 
-/mob/living/exosuit/adjustToxLoss()
+/mob/living/exosuit/adjustToxLoss(var/amount, var/do_update_health)
 	return 0
 
 /mob/living/exosuit/getBrainLoss()
@@ -32,7 +33,8 @@
 /mob/living/exosuit/setBrainLoss()
 	return 0
 
-/mob/living/exosuit/adjustBrainLoss()
+/mob/living/exosuit/adjustBrainLoss(var/amount, var/do_update_health)
+	SHOULD_CALL_PARENT(FALSE)
 	return 0
 
 /mob/living/exosuit/getCloneLoss()

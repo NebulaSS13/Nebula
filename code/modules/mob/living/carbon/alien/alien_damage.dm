@@ -18,5 +18,4 @@
 			SET_STATUS_MAX(src, STAT_TINNITUS, 15)
 			SET_STATUS_MAX(src, STAT_DEAF, 60)
 	adjustBruteLoss(b_loss)
-	adjustFireLoss(f_loss)
-	update_health()
+	adjustFireLoss(f_loss, do_update_health = TRUE)
