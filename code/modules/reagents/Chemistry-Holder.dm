@@ -264,10 +264,11 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/clear_reagents()
 	for(var/reagent in reagent_volumes)
-		clear_reagent(reagent, TRUE)
+		clear_reagent(reagent, defer_update = TRUE)
 	LAZYCLEARLIST(reagent_volumes)
 	LAZYCLEARLIST(reagent_data)
 	total_volume = 0
+	my_atom?.on_reagent_change()
 
 /datum/reagents/proc/get_overdose(var/decl/material/current)
 	if(current)
