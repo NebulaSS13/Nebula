@@ -321,8 +321,10 @@
 	if(length(global.using_map.overmap_ids))
 		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
 
-		var/current_z_offset_x = (HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_X
-		var/current_z_offset_y = (HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_Y
+		if(isAI)
+			T = get_turf(user.client.eye)
+		cursor.pixel_x = (T.x - 6 + (HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_X) * PIXEL_MULTIPLIER
+		cursor.pixel_y = (T.y - 6 + (HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_Y) * PIXEL_MULTIPLIER
 
 		//For the given z level fetch the related map sector and build the list
 		if(istype(O))
@@ -371,11 +373,6 @@
 
 			//Reset to starting zlevel
 			set_level(current_z_index)
-		if(isAI)
-			T = get_turf(user.client.eye)
-		cursor.pixel_x = (T.x - 6 + current_z_offset_x) * PIXEL_MULTIPLIER
-		cursor.pixel_y = (T.y - 6 + current_z_offset_y) * PIXEL_MULTIPLIER
-
 
 /datum/station_holomap/proc/set_level(level)
 	if(level > z_levels.len)
