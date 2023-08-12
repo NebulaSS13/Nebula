@@ -189,7 +189,7 @@ default behaviour is:
 	var/current_max_health = get_max_health()
 	if (current_health < (current_max_health/2)) // Health below half of maxhealth.
 		adjustBrainLoss(current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
-		updatehealth()
+		update_health()
 		to_chat(src, SPAN_NOTICE("You have given up life and succumbed to death."))
 
 /mob/living/proc/update_body(var/update_icons=1)
@@ -202,7 +202,7 @@ default behaviour is:
 /mob/living/proc/get_total_life_damage()
 	return (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
 
-/mob/living/proc/updatehealth()
+/mob/living/proc/update_health()
 	if(status_flags & GODMODE)
 		current_health = get_max_health()
 		set_stat(CONSCIOUS)
@@ -315,9 +315,10 @@ default behaviour is:
 /mob/living/proc/get_max_health()
 	return mob_default_max_health
 
-/mob/living/proc/set_max_health(var/val)
+/mob/living/proc/set_max_health(var/val, var/skip_health_update = FALSE)
 	mob_default_max_health = val
-	updatehealth()
+	if(!skip_health_update)
+		update_health()
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
@@ -367,27 +368,28 @@ default behaviour is:
 /mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
 	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
-	src.updatehealth()
+	update_health()
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
-	if(!(status_flags & GODMODE))
-		adjustBruteLoss(brute)
-		adjustFireLoss(burn)
-		updatehealth()
+	if(status_flags & GODMODE)
+		return
+	adjustBruteLoss(brute)
+	adjustFireLoss(burn)
+	update_health()
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
 	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
-	src.updatehealth()
+	update_health()
 
 // damage MANY external organs, in random order
 /mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
 	if(status_flags & GODMODE)	return 0	//godmode
 	adjustBruteLoss(brute)
 	adjustFireLoss(burn)
-	src.updatehealth()
+	update_health()
 
 /mob/living/proc/restore_all_organs()
 	return

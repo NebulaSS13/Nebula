@@ -601,7 +601,7 @@ This function completely restores a damaged organ to perfect condition.
 	. = ..() // Clear damage, reapply aspects.
 
 	if(owner)
-		owner.updatehealth()
+		owner.update_health()
 
 //#TODO: Rejuvination hacks should probably be removed
 /obj/item/organ/external/remove_rejuv()

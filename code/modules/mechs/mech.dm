@@ -119,7 +119,7 @@
 		if(source_frame.material)
 			material = source_frame.material
 
-	updatehealth()
+	update_health()
 
 	// Generate hardpoint list.
 	var/list/component_descriptions

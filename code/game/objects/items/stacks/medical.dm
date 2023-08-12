@@ -56,7 +56,7 @@
 				return 1
 
 		H.UpdateDamageIcon()
-
+		H.update_health()
 	else
 
 		M.heal_organ_damage((src.heal_brute/2), (src.heal_burn/2))
@@ -66,7 +66,6 @@
 		)
 		use(1)
 
-	M.updatehealth()
 /obj/item/stack/medical/bruise_pack
 	name = "roll of gauze"
 	singular_name = "gauze length"

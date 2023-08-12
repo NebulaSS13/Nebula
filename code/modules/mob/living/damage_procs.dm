@@ -42,7 +42,7 @@
 		if(IRRADIATE)
 			apply_radiation(damage)
 
-	updatehealth()
+	update_health()
 	return TRUE
 
 
@@ -81,7 +81,7 @@
 			SET_STATUS_MAX(src, STAT_BLURRY, effect * blocked_mult(blocked))
 		if(DROWSY)
 			SET_STATUS_MAX(src, STAT_DROWSY, effect * blocked_mult(blocked))
-	updatehealth()
+	update_health()
 	return TRUE
 
 /mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)

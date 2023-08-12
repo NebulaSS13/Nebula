@@ -28,4 +28,4 @@
 			to_chat(src, SPAN_NOTICE("Communication circuit reinitialized. Speech and messaging functionality restored."))
 
 	handle_status_effects()
-	updatehealth()
+	update_health()

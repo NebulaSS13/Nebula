@@ -222,12 +222,12 @@
 	if(!damage || !istype(user))
 		return
 
-	adjustBruteLoss(damage)
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
 	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
+	adjustBruteLoss(damage)
+	update_health()
 	user.do_attack_animation(src)
-	spawn(1) updatehealth()
 	return 1
 
 /mob/living/proc/IgniteMob()

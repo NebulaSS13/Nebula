@@ -392,7 +392,7 @@
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
-		updatehealth()	//TODO
+		update_health()	//TODO
 
 		if(hallucination_power)
 			handle_hallucinations()

@@ -18,7 +18,7 @@
 				radiation--
 				if(prob(25))
 					adjustToxLoss(1)
-					updatehealth()
+					update_health()
 
 			if(50 to 74)
 				radiation -= 2
@@ -29,12 +29,12 @@
 						to_chat(src, "<span class='warning'>You feel weak.</span>")
 					else
 						to_chat(src, "<span class='warning'>STATUS: DANGEROUS LEVELS OF RADIATION DETECTED.</span>")
-				updatehealth()
+				update_health()
 
 			if(75 to 100)
 				radiation -= 3
 				adjustToxLoss(3)
-				updatehealth()
+				update_health()
 
 
 /mob/living/carbon/brain/handle_environment(datum/gas_mixture/environment)
@@ -75,7 +75,7 @@
 /mob/living/carbon/brain/should_be_dead()
 	return (!container && (current_health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
 
-/mob/living/carbon/brain/updatehealth()
+/mob/living/carbon/brain/update_health()
 	. = ..()
 	if(stat == DEAD)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
@@ -83,7 +83,7 @@
 
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 
-	updatehealth()
+	update_health()
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		return 1
 

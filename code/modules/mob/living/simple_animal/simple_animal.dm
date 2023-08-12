@@ -465,19 +465,19 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	..()
-	updatehealth()
+	update_health()
 
 /mob/living/simple_animal/adjustFireLoss(damage)
 	..()
-	updatehealth()
+	update_health()
 
 /mob/living/simple_animal/adjustToxLoss(damage)
 	..()
-	updatehealth()
+	update_health()
 
 /mob/living/simple_animal/adjustOxyLoss(damage)
 	..()
-	updatehealth()
+	update_health()
 
 /mob/living/simple_animal/proc/SA_attackable(target_mob)
 	if (isliving(target_mob))
