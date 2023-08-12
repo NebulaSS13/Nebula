@@ -889,7 +889,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(update_surgery)
 			owner.update_surgery()
 		if (update_damstate())
-			owner.UpdateDamageIcon(1)
+			owner.update_damage_icon(TRUE)
 
 //Updates brute_damn and burn_damn from wound damages. Updates BLEEDING status.
 /obj/item/organ/external/proc/update_damages()
