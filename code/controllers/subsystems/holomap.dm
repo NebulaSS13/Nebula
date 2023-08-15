@@ -39,16 +39,11 @@ SUBSYSTEM_DEF(minimap)
 			single.Blend(A.holomap_color, ICON_MULTIPLY)
 		combinedareas.Blend(single, ICON_OVERLAY)
 
-	var/icon/map_base = icon(data.holomap_base)
-
-	// Generate the full sized map by blending the base and areas onto the backdrop
-	var/icon/big_map = icon(HOLOMAP_ICON, "stationmap")
-	big_map.Blend(map_base, ICON_OVERLAY)
-	big_map.Blend(combinedareas, ICON_OVERLAY)
-
 	// Generate the "small" map
 	var/icon/small_map = icon(HOLOMAP_ICON, "blank")
+
 	//Make it green.
+	var/icon/map_base = icon(data.holomap_base)
 	small_map.Blend(map_base, ICON_OVERLAY)
 	small_map.Blend(COLOR_HOLOMAP_HOLOFIER, ICON_MULTIPLY)
 	small_map.Blend(combinedareas, ICON_OVERLAY)
