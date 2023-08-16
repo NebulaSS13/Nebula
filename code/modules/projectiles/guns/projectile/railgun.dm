@@ -77,7 +77,7 @@
 		overlays_to_add += image(icon, "[icon_state]_green")
 	if(loaded)
 		overlays_to_add += image(icon, "[icon_state]_loaded")
-		var/obj/item/magnetic_ammo/mag = loaded
+//		var/obj/item/magnetic_ammo/mag = loaded
 //		if(istype(mag))
 //			if(mag.remaining)
 //				overlays_to_add += image(icon, "[icon_state]_ammo")
@@ -150,8 +150,8 @@
 			if(loaded)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
 				return
-			var/obj/item/magnetic_ammo/mag = thing
-			if(istype(mag))
+//			var/obj/item/magnetic_ammo/mag = thing
+//			if(istype(mag))
 //				if(!(load_type == mag.basetype))
 //					to_chat(user, "<span class='warning'>\The [src] doesn't seem to accept \a [mag].</span>")
 //					return
@@ -294,9 +294,7 @@
 	capacitor = /obj/item/stock_parts/capacitor/adv
 	slot_flags = SLOT_BACK
 	power_cost = 100
-	load_type = /obj/item/magnetic_ammo
 	projectile_type = /obj/item/projectile/bullet/magnetic/flechette
-	loaded = /obj/item/magnetic_ammo
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/gold       = MATTER_AMOUNT_PRIMARY,

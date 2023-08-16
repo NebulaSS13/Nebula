@@ -14,7 +14,7 @@
 	icon = 'icons/clothing/suit/bluetag.dmi'
 	blood_overlay_type = "armor"
 	body_parts_covered = SLOT_UPPER_BODY
-	allowed = list (/obj/item/gun/energy/lasertag/blue)
+	allowed = list (/obj/item/gun/energy/laser/tag/blue)
 	siemens_coefficient = 3.0
 
 /obj/item/clothing/suit/redtag
@@ -23,7 +23,7 @@
 	icon = 'icons/clothing/suit/redtag.dmi'
 	blood_overlay_type = "armor"
 	body_parts_covered = SLOT_UPPER_BODY
-	allowed = list (/obj/item/gun/energy/lasertag/red)
+	allowed = list (/obj/item/gun/energy/laser/tag)
 	siemens_coefficient = 3.0
 
 /*

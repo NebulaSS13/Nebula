@@ -5,25 +5,23 @@
 	desc = "A compact submachine gun with different firemodes."
 	icon = 'icons/obj/guns/sec_smg.dmi'
 	icon_state = ICON_STATE_WORLD
-	safety_icon = "safety"
-	w_class = ITEM_SIZE_NORMAL
-	caliber = CALIBER_PISTOL_SMALL
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
-	ammo_type = /obj/item/ammo_casing/pistol/small
+
+	safety_icon = "safety"
 	load_method = MAGAZINE
+	caliber = CALIBER_PISTOL_SMALL
+	ammo_type = /obj/item/ammo_casing/pistol/small
 	magazine_type = /obj/item/ammo_magazine/smg
 	allowed_magazines = /obj/item/ammo_magazine/smg
-	accuracy_power = 7
-	one_hand_penalty = 3
-	bulk = -1
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
-	auto_eject = 1
+	auto_eject = TRUE
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	material = /decl/material/solid/metal/steel
+
 	matter = list(
 	/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY,
 	/decl/material/solid/plastic         = MATTER_AMOUNT_PRIMARY
 	)
+
 	ammo_indicator = TRUE
 
 	firemodes = list(

@@ -1,13 +1,12 @@
-
 //Pistol
 
 /obj/item/ammo_magazine/pistol
 	name = "pistol magazine"
-	icon_state = "pistolds"
+	icon_state = "pistolds" //unused cool icon. previous one looks old
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
 	ammo_type = /obj/item/ammo_casing/pistol
-	max_ammo = 12
+	max_ammo = 10
 	multiple_sprites = TRUE
 
 /obj/item/ammo_magazine/pistol/empty
@@ -88,6 +87,10 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	marking_color = COLOR_PAKISTAN_GREEN
 
+/obj/item/ammo_magazine/shotholder/practice
+	ammo_type = /obj/item/ammo_casing/shotgun/practice
+	marking_color = COLOR_GRAY40
+
 /obj/item/ammo_magazine/shotholder/flash
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
 	marking_color = COLOR_PALE_YELLOW
@@ -95,6 +98,10 @@
 /obj/item/ammo_magazine/shotholder/stun
 	ammo_type = /obj/item/ammo_casing/shotgun/stun
 	marking_color = COLOR_MUZZLE_FLASH
+
+/obj/item/ammo_magazine/shotholder/emp
+	ammo_type = /obj/item/ammo_casing/shotgun/emp
+	marking_color = COLOR_LUMINOL
 
 //Speedloaders
 
@@ -170,6 +177,13 @@
 /obj/item/ammo_magazine/speedloader/lasbulb
 	caliber = CALIBER_PISTOL_LASBULB
 	ammo_type = /obj/item/ammo_casing/lasbulb
+
+/obj/item/ammo_magazine/speedloader/lasbulb/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/speedloader/lasbulb/stun
+	labels = list("stun")
+	ammo_type = /obj/item/ammo_casing/lasbulb/stun
 
 //toyys
 

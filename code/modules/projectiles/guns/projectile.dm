@@ -138,8 +138,19 @@
 					to_chat(user, "<span class='warning'>\The [A] won't fit into [src].</span>")
 					return
 				if(ammo_magazine)
-					to_chat(user, "<span class='warning'>[src] already has a magazine loaded.</span>")//already a magazine here
-
+					if(user.skill_check(SKILL_WEAPONS,SKILL_ADEPT)) // "tactical" reload
+						ammo_magazine.dropInto(loc)
+						ammo_magazine.update_icon()
+						user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src].</span>")
+						ammo_magazine = null
+						playsound(loc, mag_remove_sound, 50, 1)
+						if(!user.try_unequip(AM, src))
+							return
+						ammo_magazine = AM
+						user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
+						playsound(loc, mag_insert_sound, 50, 1)
+						return
+					to_chat(user, "<span class='warning'>[src] already has a magazine loaded.</span>") //already a magazine here
 					return
 				if(!user.try_unequip(AM, src))
 					return

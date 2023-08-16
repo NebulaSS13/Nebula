@@ -22,7 +22,29 @@
 	tracer_type = /obj/effect/projectile/tracer/variable
 	impact_type = /obj/effect/projectile/impact/variable
 	color = COLOR_RED
-	light_color = COLOR_RED_LIGHT
+	var/variable_beam = FALSE
+
+/obj/item/projectile/beam/Initialize()
+	if(ispath(tracer_type,/obj/effect/projectile/tracer/variable))
+		variable_beam = TRUE
+	. = ..()
+
+/obj/item/projectile/beam/after_move()
+	. = ..()
+	if(variable_beam)
+		var/obj/effect/projectile/invislight/light = locate() in loc
+		if(light)
+			light.light_color = color
+			light.set_light(l_color = light.light_color)
+	else
+		color = null
+
+/obj/item/projectile/beam/update_effect(var/obj/effect/projectile/effect)
+	if(variable_beam)
+		effect.color = color
+		effect.set_light(l_color = effect.light_color)
+	else
+		color = null
 
 //Lasers
 
@@ -41,19 +63,16 @@
 	eyeblur = 10
 	penetration_modifier = 1
 
-	muzzle_type = /obj/effect/projectile/muzzle/heavy_laser
-	tracer_type = /obj/effect/projectile/tracer/heavy_laser
-	impact_type = /obj/effect/projectile/impact/heavy_laser
+	muzzle_type = /obj/effect/projectile/muzzle/variable/heavy
+	tracer_type = /obj/effect/projectile/tracer/variable/heavy
+	impact_type = /obj/effect/projectile/impact/variable/heavy
 
 /obj/item/projectile/beam/heavy/pop
 	fire_sound = 'sound/weapons/gunshot/laserbulb.ogg'
 	fire_sound_vol = 100
 
 	penetration_modifier = 1.5
-
-	muzzle_type = /obj/effect/projectile/muzzle/laser/blue
-	tracer_type = /obj/effect/projectile/tracer/laser/blue
-	impact_type = /obj/effect/projectile/impact/laser/blue
+	color = COLOR_VIOLET
 
 /obj/item/projectile/beam/practice
 	fire_sound = 'sound/weapons/Taser.ogg'
@@ -73,9 +92,7 @@
 	armor_penetration = 80
 	penetration_modifier = 3
 
-	muzzle_type = /obj/effect/projectile/muzzle/xray
-	tracer_type = /obj/effect/projectile/tracer/xray
-	impact_type = /obj/effect/projectile/impact/xray
+	color = COLOR_GREEN
 
 /obj/item/projectile/beam/xray/heavy
 	name = "heavy x-ray beam"
@@ -87,9 +104,9 @@
 	stun = 10
 	weaken = 10
 
-	muzzle_type = /obj/effect/projectile/muzzle/xray/heavy
-	tracer_type = /obj/effect/projectile/tracer/xray/heavy
-	impact_type = /obj/effect/projectile/impact/xray/heavy
+	muzzle_type = /obj/effect/projectile/muzzle/variable/heavy
+	tracer_type = /obj/effect/projectile/tracer/variable/heavy
+	impact_type = /obj/effect/projectile/impact/variable/heavy
 
 //Capacitor
 
@@ -99,26 +116,15 @@
 	impact_type = /obj/effect/projectile/impact/variable
 
 /obj/item/projectile/beam/variable/heavy
-	muzzle_type = /obj/effect/projectile/muzzle/variable_heavy
-	tracer_type = /obj/effect/projectile/tracer/variable_heavy
-	impact_type = /obj/effect/projectile/impact/variable_heavy
-
-/obj/item/projectile/beam/variable/after_move()
-	. = ..()
-	var/obj/effect/projectile/invislight/light = locate() in loc
-	if(light)
-		light.light_color = color
-		light.set_light(l_color = light.light_color)
-
-/obj/item/projectile/beam/variable/update_effect(var/obj/effect/projectile/effect)
-	effect.color = color
-	effect.set_light(l_color = effect.light_color)
+	muzzle_type = /obj/effect/projectile/muzzle/variable/heavy
+	tracer_type = /obj/effect/projectile/tracer/variable/heavy
+	impact_type = /obj/effect/projectile/impact/variable/heavy
 
 /obj/item/projectile/beam/variable/split
-	muzzle_type = /obj/effect/projectile/muzzle/variable_heavy
-	tracer_type = /obj/effect/projectile/tracer/variable_heavy
-	impact_type = /obj/effect/projectile/impact/variable_heavy
-	var/split_type = /obj/item/projectile/beam/variable
+	muzzle_type = /obj/effect/projectile/muzzle/variable/heavy
+	tracer_type = /obj/effect/projectile/tracer/variable/heavy
+	impact_type = /obj/effect/projectile/impact/variable/heavy
+	var/split_type = /obj/item/projectile/beam/variable/heavy
 	var/split_count = 3
 
 /obj/item/projectile/beam/variable/split/on_impact(var/atom/A)
@@ -239,27 +245,22 @@
 
 //Lasertag
 
-/obj/item/projectile/beam/lasertag
+/obj/item/projectile/beam/tag
 	name = "lasertag beam"
 	damage = 0
 	no_attack_log = TRUE
-	var/required_suit = null
+	var/required_suit = /obj/item/clothing/suit/bluetag
 
-/obj/item/projectile/beam/lasertag/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/tag/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
 		if(istype(M.get_equipped_item(slot_wear_suit_str), required_suit))
 			SET_STATUS_MAX(M, STAT_WEAK, 5)
 	return 1
 
-/obj/item/projectile/beam/lasertag/blue
+/obj/item/projectile/beam/tag/blue
 	required_suit = /obj/item/clothing/suit/redtag
-	muzzle_type = /obj/effect/projectile/muzzle/laser/blue
-	tracer_type = /obj/effect/projectile/tracer/laser/blue
-	impact_type = /obj/effect/projectile/impact/laser/blue
-
-/obj/item/projectile/beam/lasertag/red
-	required_suit = /obj/item/clothing/suit/bluetag
+	color = COLOR_BLUE
 
 //PD
 

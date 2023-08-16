@@ -524,6 +524,9 @@
 /obj/item/radio/off
 	listening = FALSE
 
+/obj/item/radio/off/empty
+	cell = null
+
 //a big radio. for you. (use normal cells but waste space, I guess)
 
 /obj/item/radio/utility
@@ -542,3 +545,6 @@
 
 /obj/item/radio/utility/off
 	listening = FALSE
+
+/obj/item/radio/utility/off/empty
+	cell = null

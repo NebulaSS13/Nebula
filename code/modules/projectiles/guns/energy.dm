@@ -8,43 +8,44 @@ var/global/list/registered_cyborg_weapons = list()
 	icon_state = "energy"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	fire_sound_text = "laser blast"
+
 	accuracy = 5
 
 	var/obj/item/cell/power_supply // What type of power cell this starts with. Uses accepts_cell_type or variable cell if unset.
+	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon.
+	var/starts_loaded = TRUE       // Start with power_supply (don't disable this for guns without accepts_cell_type)
 	var/charge_cost = 20           // How much energy is needed to fire.
 	var/max_shots = 10             // Determines the capacity of the weapon's power cell. Setting power_supply or accepts_cell_type will override this value.
+
 	var/modifystate                // Changes the icon_state used for the charge overlay.
-	var/charge_meter = 1           // If set, the icon state will be chosen based on the current charge
+	var/charge_meter = TRUE        // If set, the icon state will be chosen based on the current charge
 	var/indicator_color            // Color used for overlay based charge meters
-	var/self_recharge = 0          // If set, the weapon will recharge itself
-	var/use_external_power = 0     // If set, the weapon will look for an external power source to draw from, otherwise it recharges magically
+
+	var/use_external_power = FALSE // If set, the weapon will look for an external power source to draw from, otherwise it recharges magically
+	var/self_recharge = FALSE      // If set, the weapon will recharge itself
 	var/recharge_time = 4          // How many ticks between recharges.
 	var/charge_tick = 0            // Current charge tick tracker.
-	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon.
 
-	// Which projectile type to create when firing.
+	//Which projectile type to create when firing.
 	var/projectile_type = /obj/item/projectile/beam
 
 /obj/item/gun/energy/switch_firemodes()
 	. = ..()
-	if(.)
-		update_icon()
+	update_icon()
 
 /obj/item/gun/energy/emp_act(severity)
 	..()
 	update_icon()
 
 /obj/item/gun/energy/Initialize()
-
-	if(ispath(power_supply))
-		power_supply = new power_supply(src)
-	else if(accepts_cell_type)
-		power_supply = new accepts_cell_type(src)
-	else
-		power_supply = new /obj/item/cell/device/variable(src, max_shots*charge_cost)
-
+	if(starts_loaded)
+		if(ispath(power_supply))
+			power_supply = new power_supply(src)
+		else if(accepts_cell_type)
+			power_supply = new accepts_cell_type(src)
+		else
+			power_supply = new /obj/item/cell/device/variable(src, max_shots*charge_cost)
 	. = ..()
-
 	if(self_recharge)
 		START_PROCESSING(SSobj, src)
 	update_icon()
@@ -59,20 +60,20 @@ var/global/list/registered_cyborg_weapons = list()
 	return power_supply
 
 /obj/item/gun/energy/Process()
-	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
+	if(self_recharge && power_supply) //Every [recharge_time] ticks, recharge a shot for the cyborg
 		charge_tick++
-		if(charge_tick < recharge_time) return 0
+		if(charge_tick < recharge_time)
+			return 0
 		charge_tick = 0
-
-		if(!power_supply || power_supply.charge >= power_supply.maxcharge)
-			return 0 // check if we actually need to recharge
-
+		if(power_supply.charge >= power_supply.maxcharge)
+			return 0
 		if(use_external_power)
-			var/obj/item/cell/external = get_external_power_supply()
-			if(!external || !external.use(charge_cost)) //Take power from the borg...
+			var/obj/item/cell/external = null
+			if(isrobot(loc) || istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/mech_equipment))
+				external = loc.get_cell()
+			if(!external?.use(charge_cost))
 				return 0
-
-		power_supply.give(charge_cost) //... to recharge the shot
+		power_supply.give(charge_cost)
 		update_icon()
 	return 1
 
@@ -85,15 +86,13 @@ var/global/list/registered_cyborg_weapons = list()
 		return null
 	return new projectile_type(src)
 
-/obj/item/gun/energy/proc/get_external_power_supply()
-	if(isrobot(loc) || istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/mech_equipment))
-		return loc.get_cell()
-
 /obj/item/gun/energy/proc/get_shots_remaining()
 	. = round(power_supply.charge / charge_cost)
 
 /obj/item/gun/energy/examine(mob/user)
 	. = ..(user)
+	if(accepts_cell_type)
+		to_chat(user, "It has a cell socket.")
 	if(!power_supply)
 		to_chat(user, "Seems like it's dead.")
 		return
@@ -142,8 +141,8 @@ var/global/list/registered_cyborg_weapons = list()
 		else
 			icon_state = "[initial(icon_state)][get_charge_ratio()]"
 
+//Whoever added this truly blessed us, cell changing below
 
-//For removable cells.
 /obj/item/gun/energy/attack_hand(mob/user)
 	if(!user.is_holding_offhand(src) || isnull(accepts_cell_type) || isnull(power_supply) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()

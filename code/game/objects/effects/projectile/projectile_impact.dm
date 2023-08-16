@@ -95,7 +95,7 @@
 	overlay_state = "_overlay"
 	light_color = COLOR_WHITE
 
-/obj/effect/projectile/impact/variable_heavy
+/obj/effect/projectile/impact/variable/heavy
 	icon_state = "impact_laser_heavy_white"
 	overlay_state = "_overlay"
 	light_color = COLOR_WHITE

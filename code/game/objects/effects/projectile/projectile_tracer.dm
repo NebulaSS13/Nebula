@@ -120,7 +120,7 @@
 	overlay_state = "_overlay"
 	light_color = COLOR_WHITE
 
-/obj/effect/projectile/tracer/variable_heavy
+/obj/effect/projectile/tracer/variable/heavy
 	icon_state = "beam_heavy_white"
 	overlay_state = "_overlay"
 	light_color = COLOR_WHITE

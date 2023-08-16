@@ -250,7 +250,7 @@
 	interface_name = "mounted laser cannon"
 	interface_desc = "A shoulder-mounted cell-powered laser cannon."
 
-	gun = /obj/item/gun/energy/lasercannon/mounted
+	gun = /obj/item/gun/energy/laser/cannon/mounted
 
 /obj/item/rig_module/mounted/egun
 

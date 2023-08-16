@@ -1,52 +1,39 @@
+//Tasers
+
 /obj/item/gun/energy/taser
 	name = "electrolaser"
 	desc = "A small, low capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
 	icon = 'icons/obj/guns/taser.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
-	item_state = null	//so the human update icon uses the icon_state instead.
-	accepts_cell_type = /obj/item/cell
-	power_supply = /obj/item/cell/gun
-	charge_cost = 150
-	projectile_type = /obj/item/projectile/beam/stun
+	item_state = null //so the human update icon uses the icon_state instead.
+
+	max_shots = 10
+
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/heavy),
-		)
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/heavy)
+	)
+
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/fiberglass      = MATTER_AMOUNT_SECONDARY
 	) //things that dont kill should be cheap (less people killed?)
-	origin_tech = "{'combat':1,'magnets':1}" //and easy to research too
-
-/obj/item/gun/energy/taser/empty
-	power_supply = null
 
 /obj/item/gun/energy/taser/mounted
 	name = "mounted electrolaser"
-	self_recharge = 1
-	use_external_power = 1
+	self_recharge      = TRUE
+	use_external_power = TRUE
 	has_safety = FALSE
 
-/obj/item/gun/energy/taser/mounted/cyborg
-	name = "electrolaser"
-	max_shots = 6
-	recharge_time = 10 //Time it takes for shots to recharge (in ticks)
-
 /obj/item/gun/energy/taser/light
-	name = "light taser"
+	name = "soft taser"
 	desc = "A small, low capacity, and short-ranged energy projector intended for personal defense with minimal risk of permanent damage or cross-fire."
 	icon = 'icons/obj/guns/confuseray.dmi'
-	icon_state = ICON_STATE_WORLD
-	safety_icon = "safety"
-	origin_tech = "{'combat':1,'magnets':2}"
 	w_class = ITEM_SIZE_SMALL
-	accepts_cell_type = null
-	power_supply = null
-	max_shots = 4
+	max_shots = 5
 	projectile_type = /obj/item/projectile/beam/stun/light
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_SECONDARY)
 	firemodes = list()
 
 //Ion
@@ -56,50 +43,50 @@
 	desc = "A man portable anti-armor weapon designed to disable mechanical threats."
 	icon = 'icons/obj/guns/ion_rifle.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':3,'magnets':4}"
 	w_class = ITEM_SIZE_HUGE
-	force = 10
-	charge_cost = 375
-	accepts_cell_type = /obj/item/cell/fuel
-	power_supply = /obj/item/cell/fuel/nuclear/
-	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
-	one_hand_penalty = 4
-	charge_cost = 30
+
+	force = 10
+	charge_cost = 350
 	fire_delay = 30
+	accepts_cell_type = /obj/item/cell/fuel
+	power_supply = /obj/item/cell/fuel/nuclear
 	projectile_type = /obj/item/projectile/ion
+
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/gas/hydrogen         = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/uranium  = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/gold     = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/platinum = MATTER_AMOUNT_REINFORCEMENT
 	)
 
 /obj/item/gun/energy/ionrifle/empty
-	power_supply = null
+	starts_loaded = FALSE
 
 /obj/item/gun/energy/ionrifle/emp_act(severity)
-	..(max(severity, 2)) //so it doesn't EMP itself, I guess
+	return
+
+//Plasmacutter
 
 /obj/item/gun/energy/plasmacutter
 	name = "plasma cutter"
 	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
-	charge_meter = 0
 	icon = 'icons/obj/guns/plasmacutter.dmi'
 	icon_state = ICON_STATE_WORLD
+	charge_meter = 0
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
-	w_class = ITEM_SIZE_NORMAL
-	force = 8
-	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
-	material = /decl/material/solid/metal/steel
+
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
-	self_recharge = 1
+	self_recharge = TRUE
+
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/gold    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass    = MATTER_AMOUNT_REINFORCEMENT
 	)
 
 /obj/item/gun/energy/plasmacutter/Initialize()
@@ -111,8 +98,7 @@
 
 /obj/item/gun/energy/plasmacutter/mounted
 	name = "mounted plasma cutter"
-	use_external_power = 1
-	max_shots = 4
+	use_external_power = TRUE
 	has_safety = FALSE
 
 /obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)

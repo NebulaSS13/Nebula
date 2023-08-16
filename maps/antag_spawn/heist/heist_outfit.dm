@@ -42,7 +42,6 @@
 	var/list/raider_guns = list(
 		/obj/item/gun/energy/laser,
 		/obj/item/gun/projectile/revolver/lasvolver,
-		/obj/item/gun/energy/xray,
 		/obj/item/gun/energy/toxgun,
 		/obj/item/gun/energy/ionrifle,
 		/obj/item/gun/energy/taser,

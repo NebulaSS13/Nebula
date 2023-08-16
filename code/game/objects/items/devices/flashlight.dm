@@ -324,7 +324,9 @@
 	cell = null
 	cell_allowed = null
 
-	material = /decl/material/solid/
+	material = /decl/material/solid/metal/aluminium
+	matter = list(/decl/material/solid/carbon = MATTER_AMOUNT_PRIMARY,
+				  /decl/material/gas/oxygen   = MATTER_AMOUNT_PRIMARY)
 
 	var/fuel = 0
 	var/on_damage = 7
@@ -345,8 +347,10 @@
 		if(T)
 			T.hotspot_expose(produce_heat, 5)
 	fuel = max(fuel - 1, 0)
-	if (fuel <= 0)
+	if(fuel <= 0)
 		on = FALSE
+		matter = list()
+		create_matter()
 	if(!on)
 		update_damage()
 		set_flashlight()
@@ -403,6 +407,9 @@
 	cell_allowed = null
 	flashlight_range = 3
 	flashlight_power = 2
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/phosphorus = MATTER_AMOUNT_SECONDARY,
+				  /decl/material/solid/carbon     = MATTER_AMOUNT_SECONDARY)
 
 /obj/item/flashlight/flare/glowstick/Initialize()
 	. = ..()
@@ -410,14 +417,12 @@
 	light_color = color
 
 /obj/item/flashlight/flare/glowstick/on_update_icon()
-	var/nofuel = fuel <= 0
-	if(nofuel)
+	if(fuel <= 0)
 		on = FALSE
 	. = ..()
-	icon_state = nofuel? "glowstick-empty" : icon_state
 	item_state = initial(item_state)
 	if(on)
-		var/image/I = overlay_image(icon, "glowstick-on", color)
+		var/image/I = overlay_image(icon, "glowstick-on-overlay", color)
 		I.blend_mode = BLEND_ADD
 		add_overlay(I)
 		item_state = "glowstick-on"

@@ -32,6 +32,9 @@
 /datum/fabricator_recipe/tool/weldertool_tank_mini
 	path = /obj/item/chems/welder_tank/mini/empty
 
+/datum/fabricator_recipe/tool/welderpack
+	path = /obj/item/chems/weldpack/empty
+
 /datum/fabricator_recipe/tool/weldertool_tank_large
 	path = /obj/item/chems/welder_tank/large/empty
 	hidden = TRUE

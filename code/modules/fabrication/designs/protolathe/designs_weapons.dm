@@ -5,7 +5,7 @@
 
 /datum/fabricator_recipe/protolathe/weapon/get_product_name()
 	. = "weapon ([..()])"
-
+/*
 //projectile
 
 /datum/fabricator_recipe/protolathe/weapon/doublebarrel
@@ -106,3 +106,4 @@
 
 /datum/fabricator_recipe/protolathe/weapon/anti_photon
 	path = /obj/item/grenade/anti_photon
+	*/

@@ -67,6 +67,7 @@
 		use(1)
 
 	M.updatehealth()
+
 /obj/item/stack/medical/bruise_pack
 	name = "roll of gauze"
 	singular_name = "gauze length"
@@ -76,6 +77,8 @@
 	animal_heal = 5
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
 	amount = 10
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/stack/medical/bruise_pack/attack(var/mob/living/carbon/M, var/mob/user)
 	if(..())
@@ -133,6 +136,8 @@
 	origin_tech = "{'biotech':1}"
 	animal_heal = 4
 	apply_sounds = list('sound/effects/ointment.ogg')
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/stack/medical/ointment/attack(var/mob/living/carbon/M, var/mob/user)
 	if(..())

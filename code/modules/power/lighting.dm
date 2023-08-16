@@ -505,7 +505,7 @@
 
 	b_range = 8
 	b_power = 0.8
-	b_color = LIGHT_COLOR_HALOGEN
+	b_color = LIGHT_COLOR_HALOGEN //pls tweak this later to be more cyan
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
 	)
@@ -534,7 +534,7 @@
 	broken_chance = 3
 	material = /decl/material/solid/glass
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,/decl/material/solid/metal/tungsten = MATTER_AMOUNT_REINFORCEMENT)
-	//it is now.. INCANDESCENT.
+	//it is now.. truly INCANDESCENT.
 	b_color = LIGHT_COLOR_TUNGSTEN
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),

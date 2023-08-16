@@ -57,8 +57,6 @@
 		return
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return
-	if(!power_check(user))
-		return
 	return TRUE
 
 /obj/item/scanner/afterattack(atom/A, mob/user, proximity)
@@ -67,6 +65,8 @@
 	if(!can_use(user))
 		return
 	if(is_valid_scan_target(A) && A.simulated)
+		if(!power_check(user))
+			return
 		user.visible_message("<span class='notice'>[user] runs \the [src] over \the [A].</span>", range = 2)
 		if(scan_sound)
 			playsound(src, scan_sound, 30)

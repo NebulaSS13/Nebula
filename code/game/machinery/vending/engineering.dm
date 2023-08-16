@@ -115,26 +115,25 @@
 	vend_delay = 21
 	base_type = /obj/machinery/vending/materials
 	products = list(
-		/obj/item/stack/material/sheet/mapped/steel/fifty =            4,
-		/obj/item/stack/material/panel/mapped/plastic/fifty =          4,
-		/obj/item/stack/material/shiny/mapped/aluminium/fifty =        4,
+		/obj/item/stack/material/sheet/mapped/steel/fifty =                4,
+		/obj/item/stack/material/panel/mapped/plastic/fifty =              4,
+		/obj/item/stack/material/shiny/mapped/aluminium/fifty =            4,
+		/obj/item/stack/material/reinforced/mapped/plasteel/ten =          4,
 
-		/obj/item/stack/material/reinforced/mapped/plasteel/ten =      4,
+		/obj/item/stack/material/ingot/mapped/copper/twentyfive =          4,
+		/obj/item/stack/material/ingot/mapped/lead/twentyfive =            4,
+		/obj/item/stack/material/ingot/mapped/brass/twentyfive =           4,
+		/obj/item/stack/material/ingot/mapped/tungsten/twentyfive =        4,
+		/obj/item/stack/material/aerogel/mapped/acid/twentyfive =          4,
 
-		/obj/item/stack/material/ingot/mapped/tungsten/fifty =         4,
-		/obj/item/stack/material/ingot/mapped/copper/fifty =           4,
-		/obj/item/stack/material/ingot/mapped/lead/fifty =             4,
-		/obj/item/stack/material/ingot/mapped/brass/fifty =            4,
+		/obj/item/stack/material/pane/mapped/glass/fifty =                 4,
+		/obj/item/stack/material/reinforced/mapped/fiberglass/twentyfive = 4,
 
-		/obj/item/stack/material/pane/mapped/glass/fifty =             4,
-		/obj/item/stack/material/reinforced/mapped/fiberglass/fifty =  4,
-
-		/obj/item/stack/material/brick/mapped/silicon/twentyfive =     4,
-		/obj/item/stack/material/brick/mapped/carbon/twentyfive =      4,
-		/obj/item/stack/material/aerogel/mapped/acid/twentyfive =      4,
-		/obj/item/stack/material/ingot/mapped/neptunium/twentyfive =   4,
-		/obj/item/stack/material/aerogel/mapped/hydrogen/twentyfive =  4,
-		/obj/item/stack/material/aerogel/mapped/oxygen/twentyfive =    4
+		/obj/item/stack/material/brick/mapped/silicon/ten =                4,
+		/obj/item/stack/material/brick/mapped/carbon/ten =                 4,
+		/obj/item/stack/material/brick/mapped/phosphorus/ten =             4,
+		/obj/item/stack/material/aerogel/mapped/hydrogen/ten =             4,
+		/obj/item/stack/material/aerogel/mapped/oxygen/ten =               4
 	)
 	contraband = list(
 		/obj/item/stack/material/reinforced/mapped/ocp/ten = 3

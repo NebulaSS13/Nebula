@@ -44,10 +44,8 @@
 	modification_flags = XENOFIND_APPLY_DECOR | XENOFIND_REPLACE_ICON
 	responsive_reagent = /decl/material/solid/metal/iron
 	possible_types = list(
-		/obj/item/gun/energy/laser/practice,
 		/obj/item/gun/energy/laser,
-		/obj/item/gun/energy/xray,
-		/obj/item/gun/energy/captain
+		/obj/item/gun/energy/laser/captain
 	)
 	var/egun_icons = list(
 		'icons/obj/guns/xenoarch/egun_1.dmi',

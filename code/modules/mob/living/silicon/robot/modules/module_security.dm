@@ -75,4 +75,4 @@
 		/obj/item/borg/combat/mobility,
 		/obj/item/crowbar
 	)
-	emag = /obj/item/gun/energy/lasercannon/mounted
+	emag = /obj/item/gun/energy/laser/cannon/mounted

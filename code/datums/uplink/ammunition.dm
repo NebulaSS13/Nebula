@@ -65,14 +65,14 @@
 	desc = "A speedloader for magnum revolvers. Contains 6 rounds."
 	item_cost = 8
 	path = /obj/item/ammo_magazine/speedloader
-
+/*
 /datum/uplink_item/item/ammo/flechette
 	name = "Flechette Rifle Magazine"
 	desc = "A rifle magazine loaded with flechette rounds. Contains 9 rounds."
 	item_cost = 8
 	path = /obj/item/magnetic_ammo
 	antag_roles = list(/decl/special_role/mercenary)
-/*
+
 /datum/uplink_item/item/ammo/pistol_emp
 	name = "Standard EMP Ammo Box"
 	desc = "A box of EMP ammo for standard pistols. Contains 15 rounds."

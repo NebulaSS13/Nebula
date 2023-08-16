@@ -220,7 +220,6 @@
 		/obj/item/baton,
 		/obj/item/stack/tape_roll,
 		/obj/item/holowarrant,
-		/obj/item/magnetic_ammo,
 		/obj/item/binoculars,
 		/obj/item/clothing/gloves
 		)
@@ -252,7 +251,6 @@
 		/obj/item/baton,
 		/obj/item/stack/tape_roll,
 		/obj/item/holowarrant,
-		/obj/item/magnetic_ammo,
 		/obj/item/binoculars,
 		/obj/item/clothing/gloves,
 		/obj/item/cell/gun

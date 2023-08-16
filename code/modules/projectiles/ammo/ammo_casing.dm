@@ -1,14 +1,16 @@
 //I mean that's only handy
 
-#define CASING_MATTER          list(/decl/material/solid/metal/lead      = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/carbon = MATTER_AMOUNT_SECONDARY)
-#define CASING_MATTER_RUBBER   list(/decl/material/solid/plastic         = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/carbon = MATTER_AMOUNT_SECONDARY)
+#define CASING_MATTER          list(/decl/material/solid/metal/lead      = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/carbon          = MATTER_AMOUNT_SECONDARY)
+#define CASING_MATTER_RUBBER   list(/decl/material/solid/plastic         = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/carbon          = MATTER_AMOUNT_SECONDARY)
+#define CASING_MATTER_FLASH    list(/decl/material/solid/phosphorus      = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/carbon          = MATTER_AMOUNT_SECONDARY)
+#define CASING_MATTER_EMP      list(/decl/material/solid/metal/uranium   = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
+#define CASING_MATTER_LASBULB  list(/decl/material/gas/hydrogen          = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
+
 #define CASING_MATTER_PRACTICE list(/decl/material/solid/metal/lead      = MATTER_AMOUNT_TRACE,         /decl/material/solid/carbon = MATTER_AMOUNT_TRACE)
-#define CASING_MATTER_FLASH    list(/decl/material/solid/carbon          = MATTER_AMOUNT_SECONDARY)
-#define CASING_MATTER_EMP      list(/decl/material/solid/metal/uranium   = MATTER_AMOUNT_SECONDARY)
+
 #define CASING_MATTER_SHELL    list(/decl/material/solid/metal/lead      = MATTER_AMOUNT_SECONDARY,     /decl/material/solid/carbon = MATTER_AMOUNT_PRIMARY)
-#define CASING_MATTER_BEANBAG  list(/decl/material/solid/cloth           = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/carbon = MATTER_AMOUNT_SECONDARY)
-#define CASING_MATTER_STUN     list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/carbon = MATTER_AMOUNT_SECONDARY)
-#define CASING_MATTER_LASBULB  list(/decl/material/solid/fiberglass      = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/glass  = MATTER_AMOUNT_SECONDARY)
+#define CASING_MATTER_BEANBAG  list(/decl/material/solid/cloth           = MATTER_AMOUNT_SECONDARY,     /decl/material/solid/carbon = MATTER_AMOUNT_PRIMARY)
+#define CASING_MATTER_STUN     list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY,     /decl/material/solid/carbon = MATTER_AMOUNT_PRIMARY)
 
 //Pistol
 
@@ -126,6 +128,11 @@
 	bullet_color = COLOR_BLUE_LIGHT
 	material = /decl/material/solid/metal/steel
 	matter = CASING_MATTER_LASBULB
+
+/obj/item/ammo_casing/lasbulb/stun
+	projectile_type = /obj/item/projectile/beam/stun/heavy
+	bullet_color = COLOR_YELLOW
+	marking_color = COLOR_YELLOW
 
 //Toyy
 

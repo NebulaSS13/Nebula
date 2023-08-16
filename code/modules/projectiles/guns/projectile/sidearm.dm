@@ -2,7 +2,7 @@
 
 /obj/item/gun/projectile/pistol
 	name = "pistol"
-	desc = "A rather bleak medium-sized pistol."
+	desc = "A medium-sized pistol."
 	icon = 'icons/obj/guns/pistol.dmi'
 	load_method = MAGAZINE
 	caliber = CALIBER_PISTOL
@@ -12,7 +12,7 @@
 	safety_icon = "safety"
 	ammo_indicator = TRUE
 
-	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/gun/projectile/pistol/empty
 	starts_loaded = FALSE
@@ -28,14 +28,12 @@
 
 /obj/item/gun/projectile/pistol/holdout
 	name = "holdout pistol"
-	desc = "A small pocket-sized pistol. Still powerful despite having a rather low caliber."
+	desc = "A small pocket-sized pistol."
 	icon = 'icons/obj/guns/holdout_pistol.dmi'
 	w_class = ITEM_SIZE_SMALL
 	caliber = CALIBER_PISTOL_SMALL
 	magazine_type = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
-
-	accuracy_power = 2
 
 	ammo_indicator = FALSE
 
@@ -94,16 +92,14 @@
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/rev_magout.ogg'
 	icon_state = ICON_STATE_WORLD
+
 	handle_casings = CYCLE_CASINGS
 	caliber = CALIBER_PISTOL_MAGNUM
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	max_shells = 6
-
-	accuracy_power = 10
-
 	safety_icon = "safety"
-	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 
+	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY)
 
 /obj/item/gun/projectile/revolver/empty

@@ -189,6 +189,7 @@
 	base_name = "metal cup"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	material = /decl/material/solid/metal/steel
 
 /obj/item/chems/drinks/glass2/coffeecup/STC
 	name = "\improper ICCG coffee cup"

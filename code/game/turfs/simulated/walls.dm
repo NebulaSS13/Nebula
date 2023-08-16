@@ -125,9 +125,6 @@ var/global/list/wall_fullblend_objects = list(
 		else if(Proj.damage_type == BRUTE)
 			proj_damage /= reinf_material.brute_armor
 
-	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
-	var/damage = min(proj_damage, 100)
-
 	take_damage(damage)
 
 /turf/simulated/wall/hitby(AM, var/datum/thrownthing/TT)

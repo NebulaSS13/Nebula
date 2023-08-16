@@ -1,0 +1,10 @@
+#ifndef MODPACK_STYLEPACK
+#define MODPACK_STYLEPACK
+// BEGIN_INCLUDE
+#include "_stylepack.dm"
+#include "airlock.dm"
+#include "flooring.dm"
+#include "footsteps.dm"
+#include "interface.dm"
+// END_INCLUDE
+#endif

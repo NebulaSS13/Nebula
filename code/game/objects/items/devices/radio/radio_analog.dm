@@ -92,3 +92,6 @@
 
 /obj/item/radio/shortwave/off
 	listening = FALSE
+
+/obj/item/radio/shortwave/off/empty
+	cell = null

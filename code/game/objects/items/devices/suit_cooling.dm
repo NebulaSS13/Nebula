@@ -27,6 +27,9 @@
 		// energy usage at full power
 	var/thermostat = T20C
 
+/obj/item/suit_cooling_unit/empty
+	cell = null
+
 /obj/item/suit_cooling_unit/ui_action_click()
 	toggle(usr)
 

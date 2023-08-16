@@ -247,8 +247,8 @@
 
 /obj/item/cell/device/fuel
 	name = "fission device cell"
-	desc = "A cheap miniature fission power cell.\nA warning label on the side reads: <span class='warning'>DO NOT INGEST. CONTAINS NEPTUNIUM</span>"
-	icon_state = "device_nuclear" //also needs a better icon
+	desc = "A cheap miniature fission power cell."
+	icon_state = "device_nuclear"
 	maxcharge = 150
 	empmult = 3 //no space for shielding
 	active_mats = list(/decl/material/solid/metal/neptunium = MATTER_AMOUNT_PRIMARY)
@@ -265,7 +265,7 @@
 
 /obj/item/cell/device/fuel/high
 	name = "advanced fission device cell"
-	desc = "A miniature fission device cell.\nA warning label on the side reads: <span class='warning'>DO NOT INGEST. CONTAINS PLUTONIUM</span>"
+	desc = "A miniature fission device cell."
 	icon_state = "device_nuclear_high"
 	maxcharge = 250
 	active_mats = list(/decl/material/solid/metal/plutonium = MATTER_AMOUNT_PRIMARY)
@@ -438,7 +438,6 @@
 	desc = "A non-rechargable nuclear fission power cell.\nA warning label on the side reads: <span class='warning'>IONIZIING RADIATION</span>"
 	icon_state = "cell_nuclear"
 	maxcharge = 3500
-	empmult = 0.5
 	origin_tech = "{'materials':3,'engineering': 3,'powerstorage': 3}"
 	active_mats = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_PRIMARY)
 	product_mats = list(/decl/material/solid/metal/depleted_uranium = MATTER_AMOUNT_PRIMARY * 0.6,

@@ -15,6 +15,7 @@
 	#include "../../mods/content/mouse_highlights/_mouse_highlight.dme"
 	#include "../../mods/content/psionics/_psionics.dme"
 	#include "../../mods/content/shackles/_shackles.dme"
+	#include "../../mods/content/stylepack/_stylepack.dme"
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
 
 	#include "../../mods/mobs/dionaea/_dionaea.dme"

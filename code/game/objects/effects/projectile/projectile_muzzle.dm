@@ -89,7 +89,7 @@
 	overlay_state = "_overlay"
 	light_color = COLOR_WHITE
 
-/obj/effect/projectile/muzzle/variable_heavy
+/obj/effect/projectile/muzzle/variable/heavy
 	icon_state = "muzzle_laser_heavy_white"
 	overlay_state = "_overlay"
 	light_color = COLOR_WHITE

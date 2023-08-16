@@ -42,7 +42,7 @@ var/global/list/laser_wavelengths
 	damage_multiplier = 0.9
 	armour_multiplier = 0.5
 
-//this is a cool gun we should use it more there was literally 0 chance to find it ingame
+//This is a cool gun we should use it more there was literally 0 chance to find it ingame
 
 /obj/item/gun/energy/capacitor
 	name = "capacitor pistol"
@@ -58,8 +58,8 @@ var/global/list/laser_wavelengths
 	origin_tech = "{'combat':2,'magnets':2,'materials':1,'powerstorage':1}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass      = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/fiberglass   = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass        = MATTER_AMOUNT_REINFORCEMENT
 	)
 
 	accepts_cell_type = /obj/item/cell
@@ -130,7 +130,7 @@ var/global/list/laser_wavelengths
 
 	. = ..()
 
-//wavelength setting moved to altclick
+//Wavelength setting moved to altclick
 
 /obj/item/gun/energy/capacitor/get_alt_interactions(var/mob/user)
 	. = ..()
@@ -295,9 +295,3 @@ var/global/list/laser_wavelengths
 	capacitors = /obj/item/stock_parts/capacitor/super
 	projectile_type = /obj/item/projectile/beam/variable/split
 	wiring_color = COLOR_GOLD
-
-/obj/item/gun/energy/capacitor/rifle/linear_fusion/attackby(obj/item/W, mob/user)
-	if(IS_SCREWDRIVER(W))
-		to_chat(user, SPAN_WARNING("\The [src] is hermetically sealed; you can't get the components out."))
-		return TRUE
-	. = ..()

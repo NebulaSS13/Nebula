@@ -72,7 +72,7 @@
 
 	var/next_fire_time = 0
 
-	var/sel_mode = 1 //index of the currently selected mode
+	var/sel_mode //index of the currently selected mode
 	var/list/firemodes = list()
 	var/selector_sound = 'sound/weapons/guns/selector.ogg'
 
@@ -102,6 +102,8 @@
 		scoped_accuracy = accuracy
 	if(scope_zoom)
 		verbs += /obj/item/gun/proc/scope
+	if(firemodes.len)
+		switch_firemodes(1) //to remove useless projectile_type's on eguns and indicator colors
 
 /obj/item/gun/Destroy()
 	// autofire timer is automatically cleaned up
@@ -548,7 +550,7 @@
 			playsound(user, shot_sound, 10, 1)
 		else
 			playsound(user, shot_sound, 50, 1)
-		if(istype(in_chamber, /obj/item/projectile/beam/lasertag))
+		if(istype(in_chamber, /obj/item/projectile/beam/tag))
 			user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 			mouthshoot = 0
 			return
@@ -617,10 +619,11 @@
 	if(!next_mode || next_mode == sel_mode)
 		return null
 
+	if(sel_mode)
+		playsound(loc, selector_sound, 50, 1) //don't play sound on init
 	sel_mode = next_mode
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)
-	playsound(loc, selector_sound, 50, 1)
 	return new_mode
 
 /obj/item/gun/proc/get_next_firemode()

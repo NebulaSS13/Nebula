@@ -1,43 +1,52 @@
 /obj/item/gun/energy/laser
-	name = "laser rifle"
-	desc = "A laser rifle, designed to kill with concentrated laser blasts."
-	icon = 'icons/obj/guns/laser_rifle.dmi'
+	name = "laser carbine"
+	desc = "A laser carbine, designed to kill with concentrated laser blasts."
+	icon = 'icons/obj/guns/laser_carbine.dmi'
 	icon_state = ICON_STATE_WORLD
-	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	force = 10
-	one_hand_penalty = 2
 
 	accepts_cell_type = /obj/item/cell
 	power_supply = /obj/item/cell/high
-	charge_cost = 200
+	charge_cost = 100
 	projectile_type = /obj/item/projectile/beam
-	origin_tech = "{'combat':2,'magnets':2,'materials':2,'powerstorage':2}"
+
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/fiberglass   = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass        = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass   = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass        = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
 	)
 
-/obj/item/gun/energy/laser/mounted
-	self_recharge = 1
-	use_external_power = 1
-	one_hand_penalty = 0 //just in case
-	has_safety = FALSE
+/obj/item/gun/energy/laser/empty
+	starts_loaded = FALSE
 
 /obj/item/gun/energy/laser/secure
 	req_access = list(list(access_brig, access_bridge))
+	authorized_modes = list(AUTHORIZED)
 
 /obj/item/gun/energy/laser/secure/on_update_icon()
 	. = ..()
-	add_overlay(mutable_appearance(icon, "[icon_state]_stripe", COLOR_BLUE_GRAY))
+	add_overlay(mutable_appearance(icon, "[icon_state]_stripe", COLOR_WHITE))
+
+/obj/item/gun/energy/laser/secure/empty
+	starts_loaded = FALSE
+
+/obj/item/gun/energy/laser/mounted
+	name = "mounted laser carbine"
+	self_recharge      = TRUE
+	use_external_power = TRUE
+	has_safety = FALSE
 
 //Practice
 
 /obj/item/gun/energy/laser/practice
-	name = "practice laser carbine"
+	name = "practice laser rifle"
 	desc = "A practice laser weapon which fires less concentrated energy bolts designed for target shooting."
+
+	power_supply = /obj/item/cell
+	charge_cost = 10
 	projectile_type = /obj/item/projectile/beam/practice
 
 /obj/item/gun/energy/laser/practice/on_update_icon()
@@ -53,7 +62,7 @@
 	to_chat(user, SPAN_WARNING("You disable the safeties on [src] and crank the output to the lethal levels."))
 	desc += " Its safeties are disabled and output is set to dangerous levels."
 	projectile_type = /obj/item/projectile/beam
-	charge_cost = 20
+	charge_cost = 100
 	max_shots = rand(3,6) //will melt down after those
 	return 1
 
@@ -66,154 +75,140 @@
 			desc += " The optical pathway is melted and useless."
 			projectile_type = null
 
+/obj/item/gun/energy/laser/practice/empty
+	starts_loaded = FALSE
 
 //Laser cannon
 
-/obj/item/gun/energy/lasercannon
+/obj/item/gun/energy/laser/cannon
 	name = "laser cannon"
 	desc = "With the laser cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
-	icon_state = "lasercannon"
 	icon = 'icons/obj/guns/laser_cannon.dmi'
-	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'magnets':4,'materials':3,'powerstorage':3}"
-	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
-	one_hand_penalty = 6 //large and heavy
-	w_class = ITEM_SIZE_HUGE
-	accepts_cell_type = /obj/item/cell/fuel
-	power_supply = /obj/item/cell/fuel/high
-	charge_cost = 500
+
+	accepts_cell_type = /obj/item/cell/fuel //Too powerful to just "recharge and go pew again"
+	power_supply = /obj/item/cell/fuel
+	charge_cost = 150
 	projectile_type = /obj/item/projectile/beam/heavy
-	max_shots = 6
-	accuracy = 2
-	fire_delay = 20
-	material = /decl/material/solid/metal/steel
+	fire_delay = 10
+
 	matter = list(
-		/decl/material/solid/fiberglass       = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/silver     = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/uranium    = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
+		/decl/material/solid/fiberglass    = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass         = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/silver  = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT
 	)
 
-/obj/item/gun/energy/lasercannon/empty
-	power_supply = null
+/obj/item/gun/energy/laser/cannon/empty
+	starts_loaded = FALSE
 
-/obj/item/gun/energy/lasercannon/mounted
+/obj/item/gun/energy/laser/cannon/mounted
 	name = "mounted laser cannon"
-	self_recharge = 1
-	use_external_power = 1
-	recharge_time = 10
-	accuracy = 0 //mounted laser cannons don't need any help, thanks
-	one_hand_penalty = 0
+	power_supply = /obj/item/cell/hyper
+	self_recharge      = TRUE
+	use_external_power = TRUE
 	has_safety = FALSE
 
 //X-ray
 
-/obj/item/gun/energy/xray
+/obj/item/gun/energy/laser/xray
 	name = "x-ray laser carbine"
-	desc = "A high-power laser gun capable of emitting concentrated x-ray blasts, that are able to penetrate laser-resistant armor much more readily than standard photonic beams."
+	desc = "A compact for its capabalities high-power weapon capable of emitting concentrated x-ray beams, that are able to penetrate laser-resistant armor."
 	icon = 'icons/obj/guns/xray.dmi'
-	icon_state = ICON_STATE_WORLD
-	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
-	origin_tech = "{'combat':5,'magnets':5,'materials':5,'powerstorage':5}"
-	projectile_type = /obj/item/projectile/beam/xray
-	one_hand_penalty = 2
-	w_class = ITEM_SIZE_LARGE
+
 	accepts_cell_type = /obj/item/cell/fuel
-	power_supply = /obj/item/cell/fuel/nuclear/high
-	charge_cost = 900
-	combustion = 0
-	material = /decl/material/solid/metal/steel
+	power_supply = /obj/item/cell/fuel/nuclear
+	charge_cost = 350
+	projectile_type = /obj/item/projectile/beam/xray
+
 	matter = list(
-		/decl/material/solid/fiberglass       = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/silver     = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/metal/gold       = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_PRIMARY
+		/decl/material/solid/fiberglass     = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass          = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/silver   = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/platinum = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/gas/hydrogen         = MATTER_AMOUNT_REINFORCEMENT
 	)
 
-/obj/item/gun/energy/xray/empty
-	power_supply = null
+/obj/item/gun/energy/laser/xray/empty
+	starts_loaded = FALSE
 
-/obj/item/gun/energy/xray/sniper
-	name = "marksman x-ray rifle"
-	desc = "A designated marksman rifle capable of shooting powerful armor-piercing x-ray blasts, this is a weapon to kill from a distance."
+//X-RAY, sniper
+
+/obj/item/gun/energy/laser/xray/sniper
+	name = "x-ray sniper rifle"
+	desc = "A powerful rifle capable of shooting armor-piercing x-ray blasts, commonly used to take down heavy machinery."
 	icon = 'icons/obj/guns/xray_sniper.dmi'
-	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'magnets':4,'materials':3,'powerstorage':3}"
-	projectile_type = /obj/item/projectile/beam/xray/heavy
-	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
-	slot_flags = SLOT_BACK
-	charge_cost = 40
-	accepts_cell_type = /obj/item/cell/fuel
-	power_supply = /obj/item/cell/fuel/fusion
-	charge_cost = 1000
-	fire_delay = 35
-	force = 10
 	w_class = ITEM_SIZE_HUGE
-	accuracy = -2 //shooting at the hip
-	scoped_accuracy = 9
-	scope_zoom = 2
-	material = /decl/material/solid/metal/steel
+	slot_flags = SLOT_BACK
+
+	power_supply = /obj/item/cell/fuel/fusion
+	charge_cost = 550
+	projectile_type = /obj/item/projectile/beam/xray/heavy
+
 	matter = list(
-		/decl/material/solid/fiberglass       = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass       = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass            = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/silver     = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold       = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/platinum   = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/gas/hydrogen           = MATTER_AMOUNT_REINFORCEMENT
 	)
 
-/obj/item/gun/energy/xray/sniper/empty
-	power_supply = null
 
-//Antique lasgun
+/obj/item/gun/energy/laser/xray/sniper/empty
+	starts_loaded = FALSE
 
-/obj/item/gun/energy/captain
+//Antique
+
+/obj/item/gun/energy/laser/captain
 	name = "antique laser gun"
-	icon = 'icons/obj/guns/caplaser.dmi'
-	icon_state = ICON_STATE_WORLD
 	desc = "A rare weapon, looks handcrafted. It's certainly aged well and you're pretty sure it costs a small fortune."
-	force = 5
-	slot_flags = SLOT_LOWER_BODY //too unusually shaped to fit in a holster
-	w_class = ITEM_SIZE_NORMAL
-	projectile_type = /obj/item/projectile/beam
-	origin_tech = null
-	max_shots = 5 //to compensate a bit for self-recharging
-	one_hand_penalty = 1 //a little bulky
-	self_recharge = 1
-	material = null //no recycling antique shit
-	matter = list()
+	icon = 'icons/obj/guns/caplaser.dmi'
 
-/obj/item/gun/energy/captain/price()
+	accepts_cell_type = null
+	power_supply = null
+	projectile_type = /obj/item/projectile/beam
+	self_recharge = TRUE
+	max_shots = 5 //to compensate a bit for self-recharging
+
+	matter = list(
+		/decl/material/solid/fiberglass       = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass            = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/silver     = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/gold       = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/uranium    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT
+	)
+
+/obj/item/gun/energy/laser/captain/price()
 	. = ..() * 50 //now its actually pricy, antique, handcrafted, basically a treasure
 
-//Lasertag
+//Larsertag
 
-/obj/item/gun/energy/lasertag
-	name = "laser tag gun"
-	icon = 'icons/obj/guns/laser_rifle.dmi'
-	icon_state = ICON_STATE_WORLD
+/obj/item/gun/energy/laser/tag
+	name = "lasertag carbine"
 	desc = "Standard issue weapon of the Imperial Guard."
-	origin_tech = "{'combat':1,'magnets':1}"
-	self_recharge = 1
-	material = /decl/material/solid/metal/steel
-	projectile_type = /obj/item/projectile/beam/lasertag/blue
-	var/required_vest
-	var/stripe_color = COLOR_WHITE
 
-/obj/item/gun/energy/lasertag/on_update_icon()
+	accepts_cell_type = null
+	power_supply = null
+	projectile_type = /obj/item/projectile/beam/tag
+	self_recharge = TRUE
+	max_shots = 10
+
+	var/required_vest = /obj/item/clothing/suit/redtag
+	var/stripe_color = COLOR_RED_LIGHT
+
+/obj/item/gun/energy/laser/tag/on_update_icon()
 	. = ..()
 	 add_overlay(mutable_appearance(icon, "[icon_state]_stripe", stripe_color))
 
-/obj/item/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
+/obj/item/gun/energy/laser/tag/special_check(var/mob/living/carbon/human/M)
 	if(ishuman(M) && !istype(M.get_equipped_item(slot_wear_suit_str), required_vest))
 		to_chat(M, SPAN_WARNING("You need to be wearing your laser tag vest!"))
 		return FALSE
 	return ..()
 
-/obj/item/gun/energy/lasertag/blue
-	stripe_color = COLOR_SKY_BLUE
-	projectile_type = /obj/item/projectile/beam/lasertag/blue
+/obj/item/gun/energy/laser/tag/blue
+	projectile_type = /obj/item/projectile/beam/tag/blue
 	required_vest = /obj/item/clothing/suit/bluetag
-
-/obj/item/gun/energy/lasertag/red
-	stripe_color = COLOR_RED_LIGHT
-	projectile_type = /obj/item/projectile/beam/lasertag/red
-	required_vest = /obj/item/clothing/suit/redtag
+	stripe_color = COLOR_SKY_BLUE

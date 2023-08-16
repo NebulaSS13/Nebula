@@ -152,7 +152,6 @@
 		/obj/item/clothing/mask/smokable,
 		/obj/item/screwdriver,
 		/obj/item/multitool,
-		/obj/item/magnetic_ammo,
 		/obj/item/ammo_magazine,
 		/obj/item/chems/glass/beaker/vial,
 		/obj/item/paper,
