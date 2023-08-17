@@ -37,7 +37,7 @@
 	. = list()
 	if(max_depth > 0)
 		for(var/mob/living/M in stuff)
-			if (!istype(M, /mob/living/silicon/robot/drone))
+			if (!isdrone(M))
 				. += M
 		for(var/obj/O in stuff)
 			. += check_mob(O.contents, max_depth - 1)

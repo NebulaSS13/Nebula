@@ -63,7 +63,7 @@
 		return FALSE
 	if(istype(thing.loc, /mob/living/exosuit))
 		return FALSE
-	if(!istype(thing.loc, /mob/living/silicon/robot))
+	if(!isrobot(thing.loc))
 		return FALSE
 	var/mob/living/silicon/robot/R = thing.loc
 	return (thing in R.module.equipment)

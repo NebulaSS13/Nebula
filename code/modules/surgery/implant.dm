@@ -90,7 +90,7 @@
 	hidden_from_codex = TRUE
 
 /decl/surgery_step/cavity/place_item/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	if(istype(user,/mob/living/silicon/robot))
+	if(isrobot(user))
 		return FALSE
 	. = ..()
 

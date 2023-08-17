@@ -32,7 +32,7 @@
 /obj/effect/containment_field/HasProximity(atom/movable/AM)
 	. = ..()
 	if(.)
-		if(istype(AM,/mob/living/silicon) && prob(40))
+		if(issilicon(AM) && prob(40))
 			shock(AM)
 			return TRUE
 		if(iscarbon(AM) && prob(50))

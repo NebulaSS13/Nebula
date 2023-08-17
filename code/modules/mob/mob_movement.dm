@@ -65,7 +65,7 @@
 	if(iscarbon(mob))
 		var/mob/M = mob
 		M.swap_hand()
-	if(istype(mob,/mob/living/silicon/robot))
+	if(isrobot(mob))
 		var/mob/living/silicon/robot/R = mob
 		R.cycle_modules()
 	return

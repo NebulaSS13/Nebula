@@ -97,7 +97,7 @@
 	- TODO: Also sometimes handles resetting of view itself, probably should be more consistent.
 */
 /atom/proc/check_eye(user)
-	if (istype(user, /mob/living/silicon/ai)) // WHY
+	if (isAI(user)) // WHY
 		return 0
 	return -1
 

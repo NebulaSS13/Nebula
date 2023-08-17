@@ -88,8 +88,9 @@
 	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_NO_STUTTER | LANG_FLAG_NONVERBAL | LANG_FLAG_HIVEMIND
 	shorthand = "KB"
 
+#define isascentdrone(X) istype(X, /mob/living/silicon/robot/flying/ascent)
 /decl/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)
-	if(istype(other, /mob/living/silicon/robot/flying/ascent))
+	if(isascentdrone(other))
 		return TRUE
 	if(istype(other) && (locate(/obj/item/organ/internal/controller) in other.internal_organs))
 		return TRUE

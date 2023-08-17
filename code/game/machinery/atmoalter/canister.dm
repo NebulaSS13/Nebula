@@ -268,7 +268,7 @@ update_flag
 		healthcheck()
 
 /obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W, var/mob/user)
-	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/tank/jetpack))
+	if(isrobot(user) && istype(W, /obj/item/tank/jetpack))
 		var/obj/item/tank/jetpack/pack = W
 		var/datum/gas_mixture/thejetpack = pack.air_contents
 		if(!thejetpack)

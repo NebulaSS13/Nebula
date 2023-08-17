@@ -41,7 +41,7 @@
  * Checks if the target has a grab from the user
  */
 /mob/proc/has_danger_grab(mob/user)
-	if (user == src || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
+	if (user == src || isrobot(user) || istype(user, /mob/living/bot))
 		return TRUE
 
 	for (var/obj/item/grab/G in grabbed_by)

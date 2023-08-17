@@ -29,7 +29,7 @@
 		return 1
 
 	if ( ! (ishuman(user) || \
-			istype(user, /mob/living/silicon)) )
+			issilicon(user)) )
 		to_chat(user, SPAN_WARNING("You don't have the dexterity to do this!"))
 		return 1
 

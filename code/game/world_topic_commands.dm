@@ -216,7 +216,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 		info["name"] = S.name
 		info["key"] = S.key
 
-		if(istype(S, /mob/living/silicon/robot))
+		if(isrobot(S))
 			var/mob/living/silicon/robot/R = S
 			info["master"] = R.connected_ai?.name
 			info["sync"] = R.lawupdate

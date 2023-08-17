@@ -318,7 +318,7 @@
 
 		if(R.price <= 0)
 			vend(R, user)
-		else if(istype(user,/mob/living/silicon)) //If the item is not free, provide feedback if a synth is trying to buy something.
+		else if(issilicon(user)) //If the item is not free, provide feedback if a synth is trying to buy something.
 			to_chat(user, "<span class='danger'>Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled.</span>")
 		else
 			currently_vending = R

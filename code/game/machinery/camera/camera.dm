@@ -131,7 +131,7 @@
 /obj/machinery/camera/proc/newTarget(var/mob/target)
 	if (!motion_sensor)
 		return FALSE
-	if (istype(target, /mob/living/silicon/ai))
+	if (isAI(target))
 		return FALSE
 	if (detectTime == 0)
 		detectTime = world.time // start the clock
@@ -241,7 +241,7 @@
 	if (status != newstatus && (!cut_power || status == TRUE))
 		status = newstatus
 		// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
-		if(istype(user, /mob/living/silicon/ai))
+		if(isAI(user))
 			user = null
 
 		if(status)

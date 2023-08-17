@@ -591,7 +591,7 @@
 	return FALSE
 
 /mob/handle_mouse_drop(atom/over, mob/user)
-	if(over == user && user != src && !istype(user, /mob/living/silicon/ai))
+	if(over == user && user != src && !isAI(user))
 		show_stripping_window(user)
 		return TRUE
 	if(!anchored && istype(over, /obj/vehicle/train))
@@ -611,7 +611,10 @@
 	return stat == DEAD
 
 /mob/proc/is_mechanical()
-	return istype(src, /mob/living/silicon)
+	return FALSE
+
+/mob/living/silicon/is_mechanical()
+	return TRUE
 
 /mob/proc/is_ready()
 	return client && !!mind

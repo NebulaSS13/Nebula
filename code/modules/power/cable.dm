@@ -860,7 +860,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(istype(loc, /obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
 		return module.get_cell()
-	if(istype(loc, /mob/living/silicon/robot))
+	if(isrobot(loc))
 		var/mob/living/silicon/robot/R = loc
 		return R.get_cell()
 

@@ -251,7 +251,7 @@
 						if(ishuman(user))
 							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
-						if(istype(user,/mob/living/silicon/robot))
+						if(isrobot(user))
 							var/mob/living/silicon/robot/U = user
 							U.handle_regular_hud_updates()
 
@@ -309,7 +309,7 @@
 						if(ishuman(user))
 							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
-						if(istype(user,/mob/living/silicon/robot))
+						if(isrobot(user))
 							var/mob/living/silicon/robot/U = user
 							U.handle_regular_hud_updates()
 

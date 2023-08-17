@@ -81,7 +81,7 @@
 /obj/machinery/meter/examine(mob/user, distance)
 	. = ..()
 
-	if(distance > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
+	if(distance > 3 && !(isAI(user) || isghost(user)))
 		to_chat(user, "<span class='warning'>You are too far away to read it.</span>")
 
 	else if(stat & (NOPOWER|BROKEN))

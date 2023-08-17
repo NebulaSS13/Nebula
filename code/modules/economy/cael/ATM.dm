@@ -127,7 +127,7 @@
 
 /obj/machinery/atm/interact(mob/user)
 
-	if(istype(user, /mob/living/silicon))
+	if(issilicon(user))
 		to_chat(user, "[html_icon(src)] <span class='warning'>Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per system banking regulation #1005.</span>")
 		return
 
