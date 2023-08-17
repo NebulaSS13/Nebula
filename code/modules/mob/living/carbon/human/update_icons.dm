@@ -858,7 +858,7 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
-/mob/living/carbon/human/proc/update_surgery(var/update_icons=1)
+/mob/living/carbon/human/update_surgery(var/update_icons=1)
 	overlays_standing[HO_SURGERY_LAYER] = null
 	var/image/total = new
 	for(var/obj/item/organ/external/E in get_external_organs())
@@ -889,8 +889,7 @@ var/global/list/damage_icon_parts = list()
 
 	total.appearance_flags = RESET_COLOR
 	overlays_standing[HO_SURGERY_LAYER] = total
-	if(update_icons)
-		queue_icon_update()
+	..()
 
 //Ported from hud login stuff
 //
