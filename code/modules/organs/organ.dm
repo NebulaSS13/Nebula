@@ -321,9 +321,11 @@
 
 /obj/item/organ/proc/rejuvenate(var/ignore_organ_aspects)
 	SHOULD_CALL_PARENT(TRUE)
+	if(!owner)
+		PRINT_STACK_TRACE("rejuvenate() called on organ of type [type] with no owner.")
 	damage = 0
 	reset_status()
-	if(!ignore_organ_aspects)
+	if(!ignore_organ_aspects && length(owner?.personal_aspects))
 		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
 			if(aspect.applies_to_organ(organ_tag))
 				aspect.apply(owner)
