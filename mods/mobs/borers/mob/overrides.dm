@@ -38,7 +38,7 @@
 
 /mob/living/carbon/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	. = ..()
-	if(. && !QDELETED(implant) && istype(implant, /mob/living/simple_animal/borer))
+	if(. && !QDELETED(implant) && isborer(implant))
 		var/mob/living/simple_animal/borer/worm = implant
 		if(worm.controlling)
 			release_control()

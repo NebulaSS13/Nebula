@@ -17,7 +17,7 @@
 			to_chat(src, SPAN_WARNING("You cannot speak in IC (muted)."))
 			return
 
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if(isborer(src.loc))
 
 		message = sanitize(message)
 		if (!message)
@@ -38,7 +38,7 @@
 
 /mob/living/captive_brain/process_resist()
 	//Resisting control by an alien mind.
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if(isborer(src.loc))
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 

@@ -109,7 +109,7 @@
 
 	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for LANG_FLAG_INNATE languages
 		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
+			if(isanimal(speaker))
 				var/mob/living/simple_animal/S = speaker
 				if(S.speak && S.speak.len)
 					message = pick(S.speak)

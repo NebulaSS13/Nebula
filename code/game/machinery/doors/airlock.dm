@@ -798,7 +798,7 @@ About the new airlock wires panel:
 		return TRUE
 
 
-	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/simple_animal))
+	else if((stat & (BROKEN|NOPOWER)) && isanimal(user))
 		var/mob/living/simple_animal/A = user
 		var/obj/item/I = A.get_natural_weapon()
 		if(I?.force >= 10)

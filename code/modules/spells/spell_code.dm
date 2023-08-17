@@ -238,7 +238,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		return 0
 
 	if(holder == user)
-		if(istype(user, /mob/living/simple_animal))
+		if(isanimal(user))
 			var/mob/living/simple_animal/SA = user
 			if(SA.purge)
 				to_chat(SA, "<span class='warning'>The null sceptre's power interferes with your own!</span>")

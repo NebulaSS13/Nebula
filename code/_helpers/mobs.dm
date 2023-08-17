@@ -61,7 +61,7 @@
 /proc/is_robot_module(var/obj/item/thing)
 	if(!thing)
 		return FALSE
-	if(istype(thing.loc, /mob/living/exosuit))
+	if(isexosuit(thing.loc))
 		return FALSE
 	if(!isrobot(thing.loc))
 		return FALSE

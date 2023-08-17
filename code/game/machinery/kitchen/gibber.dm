@@ -105,7 +105,7 @@
 		to_chat(user, "<span class='danger'>\The [src] is locked and running, wait for it to finish.</span>")
 		return
 
-	if(!(iscarbon(victim)) && !(istype(victim, /mob/living/simple_animal)) )
+	if(!iscarbon(victim) && !isanimal(victim))
 		to_chat(user, "<span class='danger'>This is not suitable for \the [src]!</span>")
 		return
 

@@ -136,10 +136,10 @@
 		return
 
 	if(!istype(target))
-		if(istype(target, /mob/living/simple_animal/mouse))
+		if(ismouse(target))
 			new /obj/item/remains/mouse(get_turf(target))
 			qdel(target)
-		else if(istype(target, /mob/living/simple_animal/lizard))
+		else if(islizard(target))
 			new /obj/item/remains/lizard(get_turf(target))
 			qdel(target)
 		return

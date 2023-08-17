@@ -46,6 +46,10 @@
 
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
 
+#define islizard(A) istype(A, /mob/living/simple_animal/lizard)
+
+#define isconstruct(A) istype(A, /mob/living/simple_animal/construct)
+
 #define isnewplayer(A) istype(A, /mob/new_player)
 
 #define isobj(A) istype(A, /obj)
@@ -69,6 +73,8 @@
 #define isrobot(A) istype(A, /mob/living/silicon/robot)
 
 #define issilicon(A) istype(A, /mob/living/silicon)
+
+#define isexosuit(A) istype(A, /mob/living/exosuit)
 
 #define isunderwear(A) istype(A, /obj/item/underwear)
 

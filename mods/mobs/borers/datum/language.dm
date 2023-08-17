@@ -10,6 +10,7 @@
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 
+#define isborer(X) istype(X, /mob/living/simple_animal/borer)
 /decl/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
 	var/mob/living/simple_animal/borer/B
@@ -17,7 +18,7 @@
 	if(iscarbon(speaker))
 		var/mob/living/carbon/M = speaker
 		B = M.has_brain_worms()
-	else if(istype(speaker,/mob/living/simple_animal/borer))
+	else if(isborer(speaker))
 		B = speaker
 
 	if(B)

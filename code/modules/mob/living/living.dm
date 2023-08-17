@@ -968,7 +968,7 @@ default behaviour is:
 				A.do_climb_out(user, T)
 				return TRUE
 
-		if(istype(over, /mob/living/exosuit))
+		if(isexosuit(over))
 			var/mob/living/exosuit/exosuit = over
 			if(exosuit.body)
 				if(user.mob_size >= exosuit.body.min_pilot_size && user.mob_size <= exosuit.body.max_pilot_size)
