@@ -1185,3 +1185,9 @@ default behaviour is:
 		var/list/obj/item/card/id/id_cards = candidate.GetIdCards()
 		if(LAZYLEN(id_cards))
 			LAZYDISTINCTADD(., id_cards)
+
+/mob/living/proc/update_surgery(update_icons)
+	SHOULD_CALL_PARENT(TRUE)
+	if(update_icons)
+		queue_icon_update()
+
