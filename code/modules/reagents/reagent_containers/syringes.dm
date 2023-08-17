@@ -122,12 +122,12 @@
 		if(reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("There is already a blood sample in this syringe."))
 			return
-		if(istype(target, /mob/living/carbon))
+		if(iscarbon(target))
 			var/amount = REAGENTS_FREE_SPACE(reagents)
 			var/mob/living/carbon/T = target
 			if(!T.dna)
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
-				if(istype(target, /mob/living/carbon/human))
+				if(ishuman(target))
 					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 
@@ -261,7 +261,7 @@
 
 /obj/item/chems/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
 
-	if(istype(target, /mob/living/carbon/human))
+	if(ishuman(target))
 
 		var/mob/living/carbon/human/H = target
 

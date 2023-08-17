@@ -226,7 +226,7 @@ default behaviour is:
 		btemperature -= change
 		if(actual < desired)
 			btemperature = desired
-//	if(istype(src, /mob/living/carbon/human))
+//	if(ishuman(src))
 //		log_debug("[src] ~ [src.bodytemperature] ~ [temperature]")
 
 	return btemperature

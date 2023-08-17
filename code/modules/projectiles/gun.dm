@@ -491,7 +491,7 @@
 
 	//shooting while in shock
 	var/shock_dispersion = 0
-	if(istype(firer, /mob/living/carbon/human))
+	if(ishuman(firer))
 		var/mob/living/carbon/human/mob = firer
 		if(mob.shock_stage > 120)
 			shock_dispersion = rand(-4,4)

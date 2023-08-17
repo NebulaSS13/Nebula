@@ -58,12 +58,8 @@
 /proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 
-/proc/iscuffed(A)
-	if(istype(A, /mob/living/carbon))
-		var/mob/living/carbon/C = A
-		if(C.get_equipped_item(slot_handcuffed_str))
-			return 1
-	return 0
+/proc/iscuffed(var/mob/mob)
+	return ismob(mob) && !!mob.get_equipped_item(slot_handcuffed_str)
 
 /proc/hassensorlevel(A, var/level)
 	return getsensorlevel(A) >= level

@@ -192,7 +192,7 @@
 		if(!repair_power)
 			return
 
-		if(istype(loc,/mob/living/carbon/human))
+		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
 			if(H.get_equipped_item(slot_wear_suit_str) == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
@@ -210,7 +210,7 @@
 
 	else if(IS_WELDER(W))
 
-		if(istype(loc,/mob/living/carbon/human))
+		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
 			if(H.get_equipped_item(slot_wear_suit_str) == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))

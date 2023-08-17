@@ -115,7 +115,7 @@
 
 
 /obj/machinery/implantchair/proc/implant(var/mob/M)
-	if (!istype(M, /mob/living/carbon))
+	if (!iscarbon(M))
 		return
 	if(!implant_list.len)	return
 	for(var/obj/item/implant/loyalty/imp in implant_list)

@@ -48,7 +48,7 @@
 		O.show_message("[message_start] ([ghost_follow_link(speaker, O)]) [message_body]", 2)
 
 	for (var/mob/M in global.dead_mob_list_)
-		if(!isnewplayer((M) && !isbrain(M)) //No meta-evesdropping
+		if(!isnewplayer(M) && !isbrain(M)) //No meta-evesdropping
 			M.show_message("[message_start] ([ghost_follow_link(speaker, M)]) [message_body]", 2)
 
 	for (var/mob/living/S in global.living_mob_list_)

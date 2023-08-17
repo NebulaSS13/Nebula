@@ -214,7 +214,7 @@
 
 		var/tramount = abs(transfer_amount)
 
-		if(istype(AM, /mob/living/carbon))
+		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
 			var/injection_status = C.can_inject(null, BP_CHEST)
 			var/injection_delay = 3 SECONDS

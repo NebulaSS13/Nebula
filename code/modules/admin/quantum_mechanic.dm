@@ -6,6 +6,7 @@
 // Most of their superhuman qualities can be toggled off if you need a normal human for testing biological functions
 */
 
+#define isquantum(X) istype(X, /mob/living/carbon/human/quantum)
 /client/proc/spawn_quantum_mechanic()
 	set category = "Debug"
 	set name = "Spawn Quantum Mechanic"
@@ -154,7 +155,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!isquantum(user))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -173,7 +174,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!isquantum(user))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -194,7 +195,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!isquantum(user))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -211,7 +212,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!isquantum(user))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -248,7 +249,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!isquantum(user))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -264,7 +265,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!isquantum(user))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 
@@ -282,7 +283,7 @@
 	if(!user)
 		return TRUE
 
-	if(!istype(user, /mob/living/carbon/human/quantum))
+	if(!isquantum(user))
 		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
 		return TRUE
 

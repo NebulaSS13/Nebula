@@ -32,7 +32,7 @@
 		if(M.status_flags & GODMODE)
 			continue
 		if(M.stat == CONSCIOUS)
-			if(istype(M,/mob/living/carbon/human))
+			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				if(istype(H.get_equipped_item(slot_glasses_str), /obj/item/clothing/glasses/meson))
 					if(source.current_stage.stage_size != STAGE_SUPER)

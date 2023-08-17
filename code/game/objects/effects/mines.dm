@@ -20,7 +20,7 @@
 
 	if(triggered) return
 
-	if(istype(M, /mob/living/carbon/human))
+	if(ishuman(M))
 		visible_message(SPAN_DANGER("\The [M] triggered \the [src]!"))
 		triggered = 1
 		call(src,triggerproc)(M)

@@ -13,7 +13,7 @@
 	hud_state = "wiz_statue"
 
 /spell/veil_of_shadows/choose_targets()
-	if(!timer_id && istype(holder,/mob/living/carbon/human))
+	if(!timer_id && ishuman(holder))
 		return list(holder)
 	. = null
 

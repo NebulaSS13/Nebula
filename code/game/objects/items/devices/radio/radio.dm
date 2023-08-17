@@ -515,7 +515,7 @@
 
 /obj/item/radio/CouldUseTopic(var/mob/user)
 	..()
-	if(istype(user, /mob/living/carbon))
+	if(iscarbon(user))
 		playsound(src, "button", 10)
 
 /obj/item/radio/off

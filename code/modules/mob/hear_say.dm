@@ -129,7 +129,7 @@
 
 	var/speaker_name = vname ? vname : speaker.name
 
-	if(istype(speaker, /mob/living/carbon/human))
+	if(ishuman(speaker))
 		var/mob/living/carbon/human/H = speaker
 		if(H.voice && !vname)
 			speaker_name = H.voice

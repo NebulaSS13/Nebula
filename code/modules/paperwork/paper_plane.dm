@@ -44,7 +44,7 @@
 
 /obj/item/paper_plane/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
-	if(istype(hit_atom, /mob/living/carbon))
+	if(iscarbon(hit_atom))
 		var/mob/living/carbon/C = hit_atom
 		//Only hurt if received right into the eyes
 		if(TT.target_zone == BP_EYES && !(BP_EYES in C.get_covered_body_parts()))

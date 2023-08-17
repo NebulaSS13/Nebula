@@ -11,7 +11,7 @@
 	var/mode = 1
 
 /obj/item/scanner/health/is_valid_scan_target(atom/O)
-	return istype(O, /mob/living/carbon/human) || istype(O, /obj/structure/closet/body_bag)
+	return ishuman(O) || istype(O, /obj/structure/closet/body_bag)
 
 /obj/item/scanner/health/scan(atom/A, mob/user)
 	scan_data = medical_scan_action(A, user, src, mode)
@@ -28,7 +28,7 @@
 		return
 
 	var/mob/living/carbon/human/scan_subject = null
-	if (istype(target, /mob/living/carbon/human))
+	if (ishuman(target))
 		scan_subject = target
 	else if (istype(target, /obj/structure/closet/body_bag))
 		var/obj/structure/closet/body_bag/B = target
