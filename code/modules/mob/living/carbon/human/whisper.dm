@@ -11,7 +11,7 @@
 
 	message = sanitize(message, encode = 0)
 
-	if (src.stat == 2)
+	if (src.stat == DEAD)
 		return src.say_dead(message)
 
 	if (src.stat)

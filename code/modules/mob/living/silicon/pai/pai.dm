@@ -271,7 +271,7 @@ var/global/list/possible_say_verbs = list(
 		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 
 	spawn(1)
-		if(stat != 2) fold()
+		if(stat != DEAD) fold()
 	return
 
 /mob/living/silicon/pai/default_interaction(mob/user)

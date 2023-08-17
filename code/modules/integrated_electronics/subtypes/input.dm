@@ -147,7 +147,7 @@
 		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
 		set_pin_data(IC_OUTPUT, 2, H.get_pulse_as_number())
-		set_pin_data(IC_OUTPUT, 3, (H.stat == 0))
+		set_pin_data(IC_OUTPUT, 3, (H.stat == CONSCIOUS))
 
 	push_data()
 	activate_pin(2)
@@ -200,7 +200,7 @@
 
 		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
-		set_pin_data(IC_OUTPUT, 2, (H.stat == 0))
+		set_pin_data(IC_OUTPUT, 2, (H.stat == CONSCIOUS))
 		set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.getBruteLoss() / H.maxHealth))
 		set_pin_data(IC_OUTPUT, 4, damage_to_severity(100 * H.getFireLoss() / H.maxHealth))
 		set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.getToxLoss() / H.maxHealth))

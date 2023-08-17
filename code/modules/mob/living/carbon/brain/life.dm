@@ -141,7 +141,7 @@
 /mob/living/carbon/brain/handle_regular_hud_updates()
 	update_sight()
 	if (healths)
-		if (stat != 2)
+		if (stat != DEAD)
 			switch(health)
 				if(100 to INFINITY)
 					healths.icon_state = "health0"
