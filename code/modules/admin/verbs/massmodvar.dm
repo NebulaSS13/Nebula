@@ -115,7 +115,7 @@
 		if("restore to default")
 			O.vars[variable] = initial(O.vars[variable])
 			if(method)
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if ( istype(M , O.type) )
 							M.vars[variable] = O.vars[variable]
@@ -131,7 +131,7 @@
 							A.vars[variable] = O.vars[variable]
 
 			else
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if (M.type == O.type)
 							M.vars[variable] = O.vars[variable]
@@ -155,7 +155,7 @@
 			O.vars[variable] = new_value
 
 			if(method)
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if ( istype(M , O.type) )
 							M.vars[variable] = O.vars[variable]
@@ -170,7 +170,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 			else
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if (M.type == O.type)
 							M.vars[variable] = O.vars[variable]
@@ -192,7 +192,7 @@
 			O.vars[variable] = new_value
 
 			if(method)
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if ( istype(M , O.type) )
 							M.vars[variable] = O.vars[variable]
@@ -208,7 +208,7 @@
 							A.vars[variable] = O.vars[variable]
 
 			else
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if (M.type == O.type)
 							M.vars[variable] = O.vars[variable]
@@ -229,7 +229,7 @@
 			if(new_value == null) return
 			O.vars[variable] = new_value
 			if(method)
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if ( istype(M , O.type) )
 							M.vars[variable] = O.vars[variable]
@@ -244,7 +244,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 			else
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if (M.type == O.type)
 							M.vars[variable] = O.vars[variable]
@@ -265,7 +265,7 @@
 			O.vars[variable] = new_value
 
 			if(method)
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if ( istype(M , O.type) )
 							M.vars[variable] = O.vars[variable]
@@ -280,7 +280,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 			else
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if (M.type == O.type)
 							M.vars[variable] = O.vars[variable]
@@ -300,7 +300,7 @@
 			if(new_value == null) return
 			O.vars[variable] = new_value
 			if(method)
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if ( istype(M , O.type) )
 							M.vars[variable] = O.vars[variable]
@@ -316,7 +316,7 @@
 							A.vars[variable] = O.vars[variable]
 
 			else
-				if(istype(O, /mob))
+				if(ismob(O))
 					for(var/mob/M in SSmobs.mob_list)
 						if (M.type == O.type)
 							M.vars[variable] = O.vars[variable]

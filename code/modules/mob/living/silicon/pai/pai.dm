@@ -177,7 +177,7 @@ var/global/list/possible_say_verbs = list(
 	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai/))
 		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
 		return 0
-	else if(istype(card.loc,/mob))
+	else if(ismob(card.loc))
 		var/mob/holder = card.loc
 		if(ishuman(holder))
 			var/mob/living/carbon/human/H = holder

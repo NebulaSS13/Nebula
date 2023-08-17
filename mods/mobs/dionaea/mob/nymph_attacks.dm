@@ -39,7 +39,7 @@
 		collect(A)
 		return
 
-	if(istype(A, /mob))
+	if(ismob(A))
 		if(src != A && !gestalt_with(A))
 			visible_message(SPAN_NOTICE("\The [src] butts its head into \the [A]."))
 		return

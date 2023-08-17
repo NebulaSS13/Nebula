@@ -26,7 +26,7 @@
 		if(O.contents && prob(O.contents.len * (25 / O.w_class)))
 			return 0
 		new type(place)
-	else if(istype(place,/mob))
+	else if(ismob(place))
 		var/mob/M = place
 		var/atom/movable/A = new type(M.loc)
 		M.equip_to_appropriate_slot(A) //we dont have to check if its an object or not since hte proc in question already does that

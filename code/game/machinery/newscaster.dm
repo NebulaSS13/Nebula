@@ -865,7 +865,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 			src.curr_page--
 			playsound(src.loc, "pageturn", 50, 1)
 
-		if (istype(src.loc, /mob))
+		if (ismob(src.loc))
 			src.attack_self(src.loc)
 
 

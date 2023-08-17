@@ -589,7 +589,7 @@ default behaviour is:
 
 		// Update whether or not this mob needs to pass emotes to contents.
 		for(var/atom/A in M.contents)
-			if(istype(A,/mob) || istype(A,/obj/item/holder))
+			if(ismob(A) || istype(A,/obj/item/holder))
 				return
 		M.status_flags &= ~PASSEMOTES
 	else if(istype(H.loc,/obj/item/clothing/accessory/storage/holster) || istype(H.loc,/obj/item/storage/belt/holster))

@@ -234,7 +234,7 @@
 
 	//admin logs
 	if(!no_attack_log)
-		if(istype(firer, /mob))
+		if(ismob(firer))
 
 			var/attacker_message = "shot with \a [src.type]"
 			var/victim_message = "shot with \a [src.type]"

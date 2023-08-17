@@ -8,7 +8,7 @@
  * Banana Peals
  */
 /obj/item/bananapeel/Crossed(var/atom/movable/AM)
-	if (isliving(AM)))
+	if (isliving(AM))
 		var/mob/living/M = AM
 		M.slip("the [src.name]", 4)
 /*

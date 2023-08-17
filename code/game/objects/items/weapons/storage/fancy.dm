@@ -150,7 +150,7 @@
 	..()
 
 /obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(!istype(M, /mob))
+	if(!ismob(M))
 		return
 
 	if(M == user && user.get_target_zone() == BP_MOUTH && contents.len > 0 && !user.get_equipped_item(slot_wear_mask_str))

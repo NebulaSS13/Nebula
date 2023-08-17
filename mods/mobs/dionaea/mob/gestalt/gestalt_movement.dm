@@ -42,7 +42,7 @@
 	if(istype(thing, /obj))
 		var/obj/rolling_up = thing
 		return rolling_up.w_class <= get_max_item_rollup_size()
-	if(istype(thing, /mob))
+	if(ismob(thing))
 		var/mob/rolling_up = thing
 		return rolling_up.mob_size <= get_max_mob_rollup_size()
 

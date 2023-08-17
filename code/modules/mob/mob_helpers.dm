@@ -422,7 +422,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")
 	var/client/C
 	//Accept any type, sort what we want here
-	if(istype(O, /mob))
+	if(ismob(O))
 		var/mob/M = O
 		if(M.client)
 			C = M.client

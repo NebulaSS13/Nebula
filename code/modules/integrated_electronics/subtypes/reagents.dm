@@ -481,7 +481,7 @@
 	if(!source.reagents || !target.reagents)
 		return
 
-	if(!ATOM_IS_OPEN_CONTAINER(source) || istype(source, /mob))
+	if(!ATOM_IS_OPEN_CONTAINER(source) || ismob(source))
 		return
 
 	if(target.reagents.maximum_volume - target.reagents.total_volume <= 0)

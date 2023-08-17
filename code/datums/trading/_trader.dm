@@ -257,7 +257,7 @@
 /datum/trader/proc/trade(var/list/offers, var/num, var/turf/location)
 	if(offers && offers.len)
 		for(var/offer in offers)
-			if(istype(offer,/mob))
+			if(ismob(offer))
 				var/text = mob_transfer_message
 				to_chat(offer, replacetext(text, "ORIGIN", origin))
 			qdel(offer)

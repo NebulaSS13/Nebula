@@ -23,7 +23,7 @@
 		target = new recipient_type(test_loc)
 	if(!target.reagents)
 		target.create_reagents(container_volume)
-	if(istype(target, /mob))
+	if(ismob(target))
 		var/mob/victim = target
 		victim.death() // to prevent reagent processing
 

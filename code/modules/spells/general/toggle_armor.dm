@@ -17,7 +17,7 @@
 	return ..()
 
 /spell/toggle_armor/proc/drop_piece(var/obj/I)
-	if(istype(I.loc, /mob))
+	if(ismob(I.loc))
 		var/mob/M = I.loc
 		M.drop_from_inventory(I)
 

@@ -138,7 +138,7 @@ Skill books that increase your skills while you activate and hold them
 
 /obj/item/book/skill/try_to_read(mob/user)
 
-	if(istype(user, /mob/observer))
+	if(isobserver(user))
 		to_chat(user, SPAN_WARNING("Ghosts can't read! Go away!"))
 		return TRUE
 
