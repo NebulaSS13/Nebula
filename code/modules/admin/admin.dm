@@ -67,7 +67,7 @@ var/global/floorIsLava = 0
 	else if(last_ckey)
 		body += " (last occupied by ckey <b>[last_ckey]</b>)"
 
-	if(istype(M, /mob/new_player))
+	if(isnewplayer(M))
 		body += " <B>Hasn't Entered Game</B> "
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
@@ -138,7 +138,7 @@ var/global/floorIsLava = 0
 			body += extra_body
 
 	if (M.client)
-		if(!istype(M, /mob/new_player))
+		if(!isnewplayer(M))
 			body += "<br><br>"
 			body += "<b>Transformation:</b>"
 			body += "<br>"

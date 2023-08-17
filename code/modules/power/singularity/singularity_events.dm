@@ -27,7 +27,7 @@
 
 /decl/singularity_event/mesmerize/handle_event(obj/effect/singularity/source)
 	for(var/mob/living/carbon/M in oviewers(8, source))
-		if(istype(M, /mob/living/carbon/brain)) //Ignore brains
+		if(isbrain(M)) //Ignore brains
 			continue
 		if(M.status_flags & GODMODE)
 			continue

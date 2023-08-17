@@ -410,7 +410,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			global.using_map.unbolt_saferooms()
 			for(var/mob/M in global.player_list)
 				var/turf/T = get_turf(M)
-				if(T && isStationLevel(T.z) && !istype(M,/mob/new_player) && !isdeaf(M))
+				if(T && isStationLevel(T.z) && !isnewplayer(M) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
 			do_telecomms_announcement(src, alert_msg, "Supermatter Monitor")

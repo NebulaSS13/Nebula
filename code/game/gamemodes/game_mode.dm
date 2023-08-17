@@ -431,7 +431,7 @@ var/global/list/additional_antag_types = list()
 		for(var/mob/player in global.player_list)
 			if(!player.client)
 				continue
-			if(istype(player, /mob/new_player))
+			if(isnewplayer(player))
 				continue
 			if(!antag_template.name || (antag_template.name in player.client.prefs.be_special_role))
 				log_debug("[player.key] had [antag_template.name] enabled, so we are drafting them.")
