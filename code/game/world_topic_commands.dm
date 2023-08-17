@@ -104,7 +104,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 		if(legacy)
 			s["player[players.len]"] = C.key
 		players += C.key
-		if(istype(C.mob, /mob/living))
+		if(isliving(C.mob))
 			active++
 
 	s["players"] = players.len

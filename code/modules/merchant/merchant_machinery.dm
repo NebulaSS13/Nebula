@@ -12,7 +12,7 @@
 /obj/machinery/merchant_pad/proc/get_target()
 	var/turf/T = get_turf(src)
 	for(var/a in T)
-		if(a == src || (!istype(a,/obj) && !istype(a,/mob/living)) || istype(a,/obj/effect))
+		if(a == src || (!istype(a,/obj) && !isliving(a)) || istype(a,/obj/effect))
 			continue
 		return a
 
@@ -20,6 +20,6 @@
 	. = list()
 	var/turf/T = get_turf(src)
 	for(var/a in T)
-		if(a == src || (!istype(a,/obj) && !istype(a,/mob/living)) || istype(a,/obj/effect))
+		if(a == src || (!istype(a,/obj) && !isliving(a)) || istype(a,/obj/effect))
 			continue
 		. += a

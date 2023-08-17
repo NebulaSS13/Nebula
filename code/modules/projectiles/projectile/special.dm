@@ -43,7 +43,7 @@
 	var/firing_temperature = 300
 
 /obj/item/projectile/temp/on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
-	if(istype(target, /mob/living))
+	if(isliving(target))
 		var/mob/M = target
 		M.bodytemperature = firing_temperature
 	return 1

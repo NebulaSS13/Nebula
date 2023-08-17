@@ -259,7 +259,7 @@
 		splatter(origin_turf,thrown)
 		return
 
-	if(istype(target,/mob/living))
+	if(isliving(target))
 		splatted = apply_special_effect(target,thrown)
 	else if(isturf(target))
 		for(var/mob/living/M in target)
@@ -747,7 +747,7 @@
 				product.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
 
 			//Handle spawning in living, mobile products.
-			if(istype(product,/mob/living))
+			if(isliving(product))
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)
 				if(istype(product,/mob/living/simple_animal/mushroom)) // Gross.

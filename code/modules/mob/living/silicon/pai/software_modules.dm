@@ -56,7 +56,7 @@
 		var/count = 0
 
 		// Find the carrier
-		while(!istype(M, /mob/living))
+		while(!isliving(M))
 			if(!M || !M.loc || count > 6)
 				//For a runtime where M ends up in nullspace
 				to_chat(src, "You are not being carried by anyone!")

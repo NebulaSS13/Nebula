@@ -274,7 +274,7 @@
 	impact_type = /obj/effect/projectile/impact/disabler
 
 /obj/item/projectile/beam/confuseray/on_hit(var/atom/target, var/blocked = 0)
-	if(istype(target, /mob/living))
+	if(isliving(target))
 		var/mob/living/L = target
 		var/potency = rand(potency_min, potency_max)
 		ADJ_STATUS(L, STAT_CONFUSE, potency)

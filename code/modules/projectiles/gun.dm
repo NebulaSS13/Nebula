@@ -180,7 +180,7 @@
 //Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
 /obj/item/gun/proc/special_check(var/mob/user)
 
-	if(!istype(user, /mob/living))
+	if(!isliving(user)))
 		return 0
 	if(!user.check_dexterity(DEXTERITY_WEAPONS))
 		return 0

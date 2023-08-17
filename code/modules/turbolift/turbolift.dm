@@ -133,7 +133,7 @@
 	if(!moving_upwards)
 		for(var/turf/T in destination)
 			for(var/atom/movable/AM in T)
-				if(istype(AM, /mob/living))
+				if(isliving(AM))
 					var/mob/living/M = AM
 					M.gib()
 				else if(AM.simulated)

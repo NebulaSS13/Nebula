@@ -243,7 +243,7 @@
 
 /obj/item/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
 	//Case 1: Default, you are hitting something that isn't a mob. Just do whatever, this isn't dangerous or op.
-	if (!istype(A, /mob/living))
+	if (!isliving(A))
 		return ..()
 
 	if (user.a_intent == I_HURT)

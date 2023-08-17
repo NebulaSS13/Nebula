@@ -1,5 +1,5 @@
 /proc/issmall(A)
-	if(A && istype(A, /mob/living))
+	if(isliving(A))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_SIZE_SMALL
 	return 0
@@ -41,7 +41,7 @@
  * Checks if the target has a grab from the user
  */
 /mob/proc/has_danger_grab(mob/user)
-	if (user == src || isrobot(user) || istype(user, /mob/living/bot))
+	if (user == src || isrobot(user) || isbot(user))
 		return TRUE
 
 	for (var/obj/item/grab/G in grabbed_by)

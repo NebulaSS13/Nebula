@@ -152,7 +152,7 @@ else if(##equipment_var) {\
 	set category = "Object"
 	set src in usr
 
-	if(!istype(src.loc,/mob/living)) return
+	if(!isliving(src.loc)) return
 
 	if(!helmet)
 		to_chat(usr, "There is no helmet installed.")
@@ -187,7 +187,7 @@ else if(##equipment_var) {\
 	set category = "Object"
 	set src in usr
 
-	if(!istype(src.loc,/mob/living)) return
+	if(!isliving(src.loc)) return
 
 	if(!tank)
 		to_chat(usr, "There is no tank inserted.")
@@ -210,7 +210,7 @@ else if(##equipment_var) {\
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W, mob/user)
 
-	if(!istype(user,/mob/living)) return
+	if(!isliving(user)) return
 
 	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/hand_labeler))
 		return ..()

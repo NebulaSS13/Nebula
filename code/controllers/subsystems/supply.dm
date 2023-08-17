@@ -63,7 +63,7 @@ SUBSYSTEM_DEF(supply)
 
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 /datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/A)
-	if(istype(A,/mob/living))
+	if(isliving(A))
 		return 1
 	if(istype(A,/obj/item/disk/nuclear))
 		return 1

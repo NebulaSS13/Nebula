@@ -41,7 +41,7 @@
 	update_text()
 
 /obj/screen/intent/deity/proc/update_text()
-	if(!istype(usr, /mob/living/deity))
+	if(!isdeity(usr))
 		return
 	var/mob/living/deity/D = usr
 	for(var/i in D.control_types)

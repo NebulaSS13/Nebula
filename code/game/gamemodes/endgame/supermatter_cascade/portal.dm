@@ -31,7 +31,7 @@
 /obj/effect/wormhole_exit/proc/transit_to_exit(const/atom/A)
 	if(!A.simulated)
 		return FALSE
-	if (istype(A, /mob/living))
+	if (isliving(A))
 
 		var/mob/living/L = A
 		if(!length(global.endgame_safespawns))

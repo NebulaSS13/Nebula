@@ -78,7 +78,7 @@ default behaviour is:
 			return
 
 		now_pushing = 1
-		if (istype(AM, /mob/living))
+		if (isliving(AM))
 			var/mob/living/tmob = AM
 
 			for(var/mob/living/M in range(tmob, 1))
@@ -140,7 +140,7 @@ default behaviour is:
 						return
 				AM.glide_size = glide_size
 				step(AM, t)
-				if (istype(AM, /mob/living))
+				if (isliving(AM))
 					var/mob/living/tmob = AM
 					if(istype(tmob.buckled, /obj/structure/bed))
 						if(!tmob.buckled.anchored)
