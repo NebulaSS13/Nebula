@@ -54,10 +54,12 @@ SUBSYSTEM_DEF(minimap)
 	// Generate the "small" map
 	var/icon/small_map = icon(HOLOMAP_ICON, "blank")
 	//Make it green.
-	small_map.Blend(map_base, ICON_OVERLAY)
+	small_map.Blend(map_base, ICON_OVERLAY, HOLOMAP_PIXEL_OFFSET_X(zlevel), HOLOMAP_PIXEL_OFFSET_Y(zlevel))
 	small_map.Blend(COLOR_HOLOMAP_HOLOFIER, ICON_MULTIPLY)
-	small_map.Blend(combinedareas, ICON_OVERLAY)
+	small_map.Blend(combinedareas, ICON_OVERLAY, HOLOMAP_PIXEL_OFFSET_X(zlevel), HOLOMAP_PIXEL_OFFSET_Y(zlevel))
 	small_map.Scale(WORLD_ICON_SIZE, WORLD_ICON_SIZE)
+	var/const/border_size = 6 // the width of the border (non-map) section of the icon
+	small_map.Shift(NORTHEAST, border_size)
 
 	// And rotate it in every direction of course!
 	var/icon/actual_small_map = icon(small_map)
@@ -72,8 +74,8 @@ SUBSYSTEM_DEF(minimap)
 // Generates the "base" holomap for one z-level, showing only the physical structure of walls and paths.
 /datum/controller/subsystem/minimap/proc/generateBaseHolomap(zlevel = 1)
 	// Save these values now to avoid a bazillion array lookups
-	var/offset_x = HOLOMAP_PIXEL_OFFSET_X
-	var/offset_y = HOLOMAP_PIXEL_OFFSET_Y
+	var/offset_x = HOLOMAP_PIXEL_OFFSET_X(zlevel)
+	var/offset_y = HOLOMAP_PIXEL_OFFSET_Y(zlevel)
 
 	// Sanity checks - Better to generate a helpful error message now than have DrawBox() runtime
 	var/icon/canvas = icon(HOLOMAP_ICON, "blank")
@@ -97,8 +99,8 @@ SUBSYSTEM_DEF(minimap)
 /datum/controller/subsystem/minimap/proc/generateHolomapAreaOverlays(zlevel)
 	var/list/icon/areas = list()
 
-	var/offset_x = HOLOMAP_PIXEL_OFFSET_X
-	var/offset_y = HOLOMAP_PIXEL_OFFSET_Y
+	var/offset_x = HOLOMAP_PIXEL_OFFSET_X(zlevel)
+	var/offset_y = HOLOMAP_PIXEL_OFFSET_Y(zlevel)
 
 	for(var/x = 1 to world.maxx)
 		for(var/y = 1 to world.maxy)
