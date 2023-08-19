@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(supply)
 	var/list/requestlist = list()
 	var/list/donelist = list()
 	var/list/master_supply_list = list()
-	
+
 	//shuttle movement
 	var/movetime = 1200
 	var/datum/shuttle/autodock/ferry/supply/shuttle
@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(supply)
 		"manifest" = "From exported manifests",
 		"crate" = "From exported crates",
 		"data" =  "From uploaded survey data",
-		"total" = "Total" 
+		"total" = "Total"
 	)
 
 /datum/controller/subsystem/supply/Initialize()
@@ -91,24 +91,21 @@ SUBSYSTEM_DEF(supply)
 				add_points_from_source(CR.get_single_monetary_worth() * crate_return_rebate * 0.1, "crate")
 				var/find_slip = 1
 
-				for(var/atom in CR)
+				for(var/atom/atom as anything in CR)
 					// Sell manifests
-					var/atom/A = atom
-					if(find_slip && istype(A,/obj/item/paper/manifest))
-						var/obj/item/paper/manifest/slip = A
+					if(find_slip && istype(atom, /obj/item/paper/manifest))
+						var/obj/item/paper/manifest/slip = atom
 						if(!slip.is_copy && length(slip.stamped))
 							add_points_from_source(slip.order_total * slip_return_rebate, "manifest")
 							find_slip = 0
 						continue
 
 					// Sell materials
-					if(is_type_in_list(A.type, saleable_materials))
-						add_points_from_source(A.get_combined_monetary_worth() * goods_sale_modifier * 0.1, "goods")
-
+					if(is_type_in_list(atom, saleable_materials))
+						add_points_from_source(atom.get_combined_monetary_worth() * goods_sale_modifier * 0.1, "goods")
 					// Must sell ore detector disks in crates
-					if(istype(A, /obj/item/disk/survey))
-						var/obj/item/disk/survey/D = A
-						add_points_from_source(D.get_combined_monetary_worth() * 0.005, "data")
+					else if(istype(atom, /obj/item/disk/survey))
+						add_points_from_source(atom.get_combined_monetary_worth() * 0.005, "data")
 
 			qdel(AM)
 
