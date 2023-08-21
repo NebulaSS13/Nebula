@@ -95,8 +95,9 @@ SUBSYSTEM_DEF(minimap)
 			var/turf/tile = locate(x, y, zlevel)
 			if(tile && tile.loc)
 				var/area/areaToPaint = tile.loc
-				if(areaToPaint.holomap_color)
-					if(!areas[areaToPaint])
-						areas[areaToPaint] = icon(HOLOMAP_ICON, "blank")
-					areas[areaToPaint].DrawBox(HOLOMAP_AREACOLOR_BASE, x + offset_x, y + offset_y) //We draw white because we want a generic version to use later. However if there is no colour we ignore it
+				if((areaToPaint.area_flags & AREA_FLAG_HIDE_FROM_HOLOMAP) || !areaToPaint.holomap_color)
+					continue
+				if(!areas[areaToPaint])
+					areas[areaToPaint] = icon(HOLOMAP_ICON, "blank")
+				areas[areaToPaint].DrawBox(HOLOMAP_AREACOLOR_BASE, x + offset_x, y + offset_y) //We draw white because we want a generic version to use later. However if there is no colour we ignore it
 	return areas
