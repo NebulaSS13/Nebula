@@ -456,3 +456,10 @@
 
 /mob/living/silicon/get_speech_bubble_state_modifier()
 	return "synth"
+
+/mob/living/silicon/GetIdCards()
+	. = ..()
+	if(stat || (ckey && !client))
+		return // Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
+	if(istype(idcard))
+		LAZYDISTINCTADD(., idcard)
