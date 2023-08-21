@@ -46,9 +46,7 @@
 		if(reinf_material || additional_reinf_material || felted)
 			tool_interaction_flags &= ~TOOL_INTERACTION_DECONSTRUCT
 
-		for(var/obj/structure/table/T in loc)
-			if(T != src)
-				return INITIALIZE_HINT_QDEL
+		DELETE_IF_DUPLICATE_OF(/obj/structure/table)
 		. = INITIALIZE_HINT_LATELOAD
 
 // We do this because need to make sure adjacent tables init their material before we try and merge.
@@ -92,10 +90,9 @@
 	additional_reinf_material = null
 	. = ..()
 	if(istype(oldloc))
-		for(var/turf/turf as anything in RANGE_TURFS(oldloc, 1))
-			for(var/obj/structure/table/table in turf)
-				table.update_connections(FALSE)
-				table.update_icon()
+		for(var/obj/structure/table/table in range(oldloc, 1))
+			table.update_connections(FALSE)
+			table.update_icon()
 
 /obj/structure/table/can_dismantle(mob/user)
 	. = ..()
