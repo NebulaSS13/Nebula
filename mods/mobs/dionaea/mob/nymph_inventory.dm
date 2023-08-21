@@ -11,10 +11,8 @@
 	return TRUE
 
 /mob/living/carbon/alien/diona/proc/can_collect(var/obj/item/collecting)
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	return (!holding_item && \
 		istype(collecting) && \
-		collecting != hattable?.hat && \
 		collecting.loc != src && \
 		!collecting.anchored && \
 		collecting.simulated && \

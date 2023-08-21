@@ -193,9 +193,6 @@
 				qdel(grab)
 				. = TRUE
 			return
-		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-		if(hattable?.drop_hat(src))
-			return TRUE
 	. = drop_from_inventory(get_active_hand(), Target)
 
 /*

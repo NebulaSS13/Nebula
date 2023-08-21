@@ -108,8 +108,6 @@
 		base_animal_type = type
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
-	if(islist(hat_offsets))
-		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
 	if(scannable_result)
 		set_extension(src, /datum/extension/scannable, scannable_result)
 	setup_languages()
@@ -160,11 +158,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			if(glowing_eyes)
 				z_flags |= ZMM_MANGLE_PLANES
 			add_overlay(I)
-
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	var/image/I = hattable?.get_hat_overlay(src)
-	if(I)
-		add_overlay(I)
 
 /mob/living/simple_animal/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"

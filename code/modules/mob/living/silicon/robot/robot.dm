@@ -723,11 +723,6 @@
 	if(module_active && istype(module_active, /obj/item/borg/combat/shield))
 		add_overlay("[icon_state]-shield")
 
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	var/image/hat = hattable?.get_hat_overlay(src)
-	if(hat)
-		add_overlay(hat)
-
 /mob/living/silicon/robot/proc/installed_modules()
 	if(weapon_lock)
 		to_chat(src, "<span class='warning'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")

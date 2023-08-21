@@ -16,8 +16,9 @@
 	icon_state = "hat"
 
 /obj/screen/diona_hat/Click()
-	var/datum/extension/hattable/hattable = get_extension(usr, /datum/extension/hattable)
-	hattable?.drop_hat(usr)
+	var/obj/item/thing = usr.get_equipped_item(slot_head_str)
+	if(thing)
+		usr.drop_from_inventory(thing)
 
 /obj/screen/diona_held
 	name = "held item"
