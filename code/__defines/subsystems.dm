@@ -64,4 +64,7 @@
 #define RUNLEVEL_SETUP 2
 #define RUNLEVEL_GAME 4
 #define RUNLEVEL_POSTGAME 8
+/// default runlevels for most subsystems
 #define RUNLEVELS_DEFAULT (RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME)
+/// all valid runlevels - subsystems with this will run all the time after their MC init stage.
+#define RUNLEVELS_ALL (RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME)
