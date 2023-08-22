@@ -35,6 +35,9 @@
 		. = QDEL_HINT_LETMELIVE
 
 /obj/item/book/attack_self(var/mob/user)
+	return try_to_read(user) || ..()
+
+/obj/item/book/proc/try_to_read(var/mob/user)
 	if(carved)
 		if(store)
 			to_chat(user, "<span class='notice'>\A [store] falls out of [title]!</span>")

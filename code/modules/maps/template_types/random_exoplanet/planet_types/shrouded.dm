@@ -116,7 +116,7 @@
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(var/value, var/turf/T)
 	..()
 	if(prob(2))
-		new/obj/structure/leech_spawner(T)
+		new /obj/structure/leech_spawner/exoplanet(T)
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas
