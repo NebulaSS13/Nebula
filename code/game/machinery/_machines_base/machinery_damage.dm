@@ -30,8 +30,11 @@
 
 	// And lastly hit the circuitboard
 	victim = get_component_of_type(/obj/item/stock_parts/circuitboard)
-	if(victim)
-		victim.take_damage(amount, damtype)
+	if(victim?.can_take_damage() && victim.is_functional())
+		amount -= victim.take_damage(amount, damtype)
+
+	if(amount)
+		dismantle()
 
 /obj/machinery/proc/get_damageable_component(var/damage_type)
 	var/list/victims = shuffle(component_parts)

@@ -114,7 +114,7 @@
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(var/value, var/turf/T)
 	..()
 	if(!T.density && prob(0.045)) // about 1 in 10 screens or so
-		new/obj/structure/leech_spawner(T)
+		new /obj/structure/leech_spawner/exoplanet(T)
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas
