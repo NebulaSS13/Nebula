@@ -21,6 +21,12 @@
 	if (!possible_transfer_amounts)
 		verbs -= /obj/structure/reagent_dispensers/verb/set_amount_dispensed
 
+/obj/structure/reagent_dispensers/on_reagent_change()
+	if(reagents.total_volume > 0)
+		tool_interaction_flags = 0
+	else
+		tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
+
 /obj/structure/reagent_dispensers/initialize_reagents(populate = TRUE)
 	if(!reagents)
 		create_reagents(volume)
