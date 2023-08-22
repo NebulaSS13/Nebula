@@ -150,7 +150,7 @@ var/global/list/empty_playable_ai_cores = list()
 						if(!B)
 							to_chat(user, SPAN_WARNING("Sticking an empty [P] into the frame would sort of defeat the purpose."))
 							return
-						if(B.stat == 2)
+						if(B.stat == DEAD)
 							to_chat(user, SPAN_WARNING("Sticking a dead [P] into the frame would sort of defeat the purpose."))
 							return
 						if(jobban_isbanned(B, "AI"))

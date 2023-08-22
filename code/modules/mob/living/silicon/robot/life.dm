@@ -76,7 +76,7 @@
 	if(src.resting)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
 
-	if(health < config.health_threshold_dead && src.stat != 2) //die only once
+	if(health < config.health_threshold_dead && src.stat != DEAD) //die only once
 		death()
 
 	if (src.stat != DEAD) //Alive.
@@ -135,7 +135,7 @@
 		ui_drop_grab.alpha = 0
 
 	if (src.healths)
-		if (src.stat != 2)
+		if (src.stat != DEAD)
 			if(istype(src,/mob/living/silicon/robot/drone))
 				switch(health)
 					if(35 to INFINITY)

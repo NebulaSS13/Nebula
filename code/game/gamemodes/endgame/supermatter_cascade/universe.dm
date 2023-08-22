@@ -116,7 +116,7 @@ var/global/universe_has_ended = 0
 	for(var/datum/mind/M in global.player_list)
 		if(!istype(M.current,/mob/living))
 			continue
-		if(M.current.stat!=2)
+		if(M.current.stat != DEAD)
 			SET_STATUS_MAX(M.current, STAT_WEAK, 10)
 			M.current.flash_eyes()
 
