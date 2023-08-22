@@ -24,6 +24,8 @@
 	if(isAI(M)) return
 	if(!M || !M.key)
 		return
+	if(QDELETED(src))
+		return
 	if(istype(tool) && (tool.item_flags & ITEM_FLAG_NO_PRINT))
 		return
 
