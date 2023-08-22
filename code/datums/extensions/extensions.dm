@@ -42,6 +42,8 @@
 
 //Variadic - Additional positional arguments can be given. Named arguments might not work so well
 /proc/set_extension(var/datum/source, var/datum/extension/extension_type)
+	if(QDELETED(source))
+		CRASH("Invalid extension source datum: source was qdeleted, was [log_info_line(source)]")
 	var/datum/extension/extension_base_type = initial(extension_type.base_type)
 	if(!ispath(extension_base_type, /datum/extension))
 		CRASH("Invalid base type: Expected /datum/extension, was [log_info_line(extension_base_type)]")
