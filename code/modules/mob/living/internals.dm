@@ -19,14 +19,7 @@
 		return
 
 	// Check for airtight mask/helmet.
-	var/found_mask = FALSE
-	for(var/slot in global.airtight_slots)
-		var/obj/item/gear = get_equipped_item(slot)
-		if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
-			found_mask = TRUE
-			break
-
-	if(!found_mask)
+	if(!check_for_airtight_internals(FALSE))
 		to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
 		return
 

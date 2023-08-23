@@ -13,7 +13,7 @@
 
 	for(var/slot in global.airtight_slots)
 		var/obj/item/gear = get_equipped_item(slot)
-		if(gear && (gear.flags_inv & (BLOCK_ALL_HAIR)))
+		if(gear?.flags_inv & BLOCK_ALL_HAIR)
 			user.set_mob_overlay(HO_EARS_LAYER, null, redraw_mob)
 			return
 

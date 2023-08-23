@@ -104,14 +104,7 @@
 			if(!(old_internals in contents))
 				set_internals(null)
 			else
-				var/found_mask = FALSE
-				for(var/slot in global.airtight_slots)
-					var/obj/item/gear = get_equipped_item(slot)
-					if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
-						found_mask = TRUE
-						break
-				if(!found_mask)
-					set_internals(null)
+				check_for_airtight_internals()
 	var/obj/item/tank/new_internals = get_internals()
 	if(internals && old_internals != new_internals)
 		internals.icon_state = "internal[!!new_internals]"

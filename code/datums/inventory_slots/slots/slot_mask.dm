@@ -17,15 +17,22 @@
 		user.update_equipment_overlay(slot_r_ear_str, FALSE)
 	..()
 
+/mob/proc/check_for_airtight_internals(var/update_internals = TRUE)
+	for(var/slot in global.airtight_slots)
+		var/obj/item/gear = get_equipped_item(slot)
+		if(gear?.item_flags & ITEM_FLAG_AIRTIGHT)
+			return TRUE
+	if(update_internals)
+		set_internals(null)
+	return FALSE
+
 /datum/inventory_slot/mask/equipped(mob/living/user, obj/item/prop, redraw_mob, delete_old_item)
 	. = ..()
-	if(!_holding || !(_holding.item_flags & ITEM_FLAG_AIRTIGHT))
-		user.set_internals(null)
+	user.check_for_airtight_internals()
 
 /datum/inventory_slot/mask/unequipped(mob/living/user, obj/item/prop, redraw_mob)
 	. = ..()
-	if(!_holding || !(_holding.item_flags & ITEM_FLAG_AIRTIGHT))
-		user.set_internals(null)
+	user.check_for_airtight_internals()
 
 /datum/inventory_slot/mask/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEMASK))

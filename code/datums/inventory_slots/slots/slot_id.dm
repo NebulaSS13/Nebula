@@ -10,8 +10,8 @@
 	var/obj/item/clothing/under/under = user.get_equipped_item(slot_w_uniform_str)
 	if(istype(under) && !under.displays_id && !under.rolled_down)
 		user.set_mob_overlay(HO_ID_LAYER, null, redraw_mob)
-		return
-	..()
+	else
+		..()
 	BITSET(user.hud_updateflag, ID_HUD)
 	BITSET(user.hud_updateflag, WANTED_HUD)
 
