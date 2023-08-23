@@ -51,62 +51,6 @@
 	return
 
 /*
-Teleporter beacon, and its subtypes
-*/
-/mob/living/simple_animal/hostile/hivebot/tele // _why is this a mob_
-	name = "beacon"
-	desc = "Some odd beacon thing."
-	icon = 'icons/obj/structures/hivebot_props.dmi'
-	icon_state = "def_radar-off"
-	mob_default_max_health = 200
-	status_flags = 0
-	anchored = TRUE
-	stop_automated_movement = 1
-
-	var/bot_type = /mob/living/simple_animal/hostile/hivebot
-	var/bot_amt = 10
-	var/spawn_delay = 100
-	var/spawn_time = 0
-
-/mob/living/simple_animal/hostile/hivebot/tele/Initialize()
-	. = ..()
-	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-	smoke.set_up(5, 0, src.loc)
-	smoke.start()
-	visible_message("<span class='danger'>\The [src] warps in!</span>")
-	playsound(src.loc, 'sound/effects/EMPulse.ogg', 25, 1)
-
-/mob/living/simple_animal/hostile/hivebot/tele/proc/warpbots()
-	while(bot_amt > 0 && bot_type)
-		bot_amt--
-		var/mob/M = new bot_type(get_turf(src))
-		M.faction = faction
-	playsound(src.loc, 'sound/effects/teleport.ogg', 50, 1)
-	qdel(src)
-	return
-
-/mob/living/simple_animal/hostile/hivebot/tele/FindTarget()
-	if(..() && !spawn_time)
-		spawn_time = world.time + spawn_delay
-		visible_message("<span class='danger'>\The [src] turns on!</span>")
-		icon_state = "def_radar"
-	return null
-
-/mob/living/simple_animal/hostile/hivebot/tele/Life()
-	. = ..()
-	if(. && spawn_time && spawn_time <= world.time)
-		warpbots()
-
-/mob/living/simple_animal/hostile/hivebot/tele/strong
-	bot_type = /mob/living/simple_animal/hostile/hivebot/strong
-
-/mob/living/simple_animal/hostile/hivebot/tele/range
-	bot_type = /mob/living/simple_animal/hostile/hivebot/range
-
-/mob/living/simple_animal/hostile/hivebot/tele/rapid
-	bot_type = /mob/living/simple_animal/hostile/hivebot/rapid
-
-/*
 Special projectiles
 */
 /obj/item/projectile/bullet/gyro/megabot
