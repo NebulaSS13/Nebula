@@ -22,4 +22,4 @@
 	// Adds a collar overlay above the helmet layer if the suit has one
 	// Suit needs an identically named sprite in icons/mob/collar.dmi
 	var/obj/item/clothing/suit/suit = _holding
-	user.set_mob_overlay(HO_COLLAR_LAYER, (istype(suit) ? suit.get_collar() : null), redraw_mob)
+	user.set_current_mob_overlay(HO_COLLAR_LAYER, (istype(suit) ? suit.get_collar() : null), redraw_mob)

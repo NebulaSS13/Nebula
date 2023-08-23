@@ -60,13 +60,13 @@
 		return
 	if(alt_mob_overlay_layer)
 		if(_holding)
-			user.set_mob_overlay((_holding.use_alt_layer ? alt_mob_overlay_layer : mob_overlay_layer), _holding.get_mob_overlay(user, slot_id), FALSE)
-			user.set_mob_overlay((_holding.use_alt_layer ? mob_overlay_layer : alt_mob_overlay_layer), null, redraw_mob)
+			user.set_current_mob_overlay((_holding.use_alt_layer ? alt_mob_overlay_layer : mob_overlay_layer), _holding.get_mob_overlay(user, slot_id), FALSE)
+			user.set_current_mob_overlay((_holding.use_alt_layer ? mob_overlay_layer : alt_mob_overlay_layer), null, redraw_mob)
 		else
-			user.set_mob_overlay(mob_overlay_layer, null, FALSE)
-			user.set_mob_overlay(alt_mob_overlay_layer, null, redraw_mob)
+			user.set_current_mob_overlay(mob_overlay_layer, null, FALSE)
+			user.set_current_mob_overlay(alt_mob_overlay_layer, null, redraw_mob)
 	else
-		user.set_mob_overlay(mob_overlay_layer, _holding?.get_mob_overlay(user, slot_id), redraw_mob)
+		user.set_current_mob_overlay(mob_overlay_layer, _holding?.get_mob_overlay(user, slot_id), redraw_mob)
 
 /datum/inventory_slot/proc/set_slot(var/obj/item/prop)
 	_holding = prop

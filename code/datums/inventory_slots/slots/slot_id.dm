@@ -9,7 +9,7 @@
 /datum/inventory_slot/id/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	var/obj/item/clothing/under/under = user.get_equipped_item(slot_w_uniform_str)
 	if(istype(under) && !under.displays_id && !under.rolled_down)
-		user.set_mob_overlay(HO_ID_LAYER, null, redraw_mob)
+		user.set_current_mob_overlay(HO_ID_LAYER, null, redraw_mob)
 	else
 		..()
 	BITSET(user.hud_updateflag, ID_HUD)

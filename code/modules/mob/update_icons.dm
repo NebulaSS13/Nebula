@@ -25,26 +25,26 @@
 			if(standing)
 				standing.appearance_flags |= RESET_ALPHA
 				LAZYADD(hand_overlays, standing)
-	set_mob_overlay(HO_INHAND_LAYER, hand_overlays, redraw_mob)
+	set_current_mob_overlay(HO_INHAND_LAYER, hand_overlays, redraw_mob)
 
-/mob/proc/get_mob_overlay(var/overlay_layer)
+/mob/proc/get_current_mob_overlay(var/overlay_layer)
 	return
 
-/mob/proc/get_all_mob_overlays()
+/mob/proc/get_all_current_mob_overlays()
 	return
 
-/mob/proc/set_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
+/mob/proc/set_current_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(redraw_mob)
 		queue_icon_update()
 
-/mob/proc/get_mob_underlay(var/underlay_layer)
+/mob/proc/get_current_mob_underlay(var/underlay_layer)
 	return
 
-/mob/proc/get_all_mob_underlays()
+/mob/proc/get_all_current_mob_underlays()
 	return
 
-/mob/proc/set_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)
+/mob/proc/set_current_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(redraw_mob)
 		queue_icon_update()

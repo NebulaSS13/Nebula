@@ -29,7 +29,7 @@ var/global/list/light_overlay_cache = list()
 /*
 
 UPDATED August 2023: The comments below are from a point where human equipment overlay code was entirely
-defined in procs in this file; please refer to get/set_mob_underlay/overlay and update_equipment_overlay.
+defined in procs in this file; please refer to get/set_current_mob_underlay/overlay and update_equipment_overlay.
 
 Calling this  a system is perhaps a bit trumped up. It is essentially update_clothing dismantled into its
 core parts. The key difference is that when we generate overlays we do not generate either lying or standing
@@ -104,24 +104,24 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/list/mob_underlays[TOTAL_UNDER_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
 
-/mob/living/carbon/human/get_all_mob_overlays()
+/mob/living/carbon/human/get_all_current_mob_overlays()
 	return mob_overlays
 
-/mob/living/carbon/human/set_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
+/mob/living/carbon/human/set_current_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
 	mob_overlays[overlay_layer] = overlay
 	..()
 
-/mob/living/carbon/human/get_mob_overlay(var/overlay_layer)
+/mob/living/carbon/human/get_current_mob_overlay(var/overlay_layer)
 	return mob_overlays[overlay_layer]
 
-/mob/living/carbon/human/get_all_mob_underlays()
+/mob/living/carbon/human/get_all_current_mob_underlays()
 	return mob_underlays
 
-/mob/living/carbon/human/set_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)
+/mob/living/carbon/human/set_current_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)
 	mob_underlays[underlay_layer] = underlay
 	..()
 
-/mob/living/carbon/human/get_mob_overlay(var/underlay_layer)
+/mob/living/carbon/human/get_current_mob_underlay(var/underlay_layer)
 	return mob_underlays[underlay_layer]
 
 /mob/living/carbon/human/refresh_visible_overlays()
@@ -155,12 +155,12 @@ Please contact me on #coderbus IRC. ~Carn x
 	if(is_cloaked())
 		icon = 'icons/mob/human.dmi'
 		icon_state = "blank"
-		visible_overlays = get_mob_overlay(HO_INHAND_LAYER)
+		visible_overlays = get_current_mob_overlay(HO_INHAND_LAYER)
 	else
 		icon = stand_icon
 		icon_state = null
-		visible_overlays = 	get_all_mob_overlays()
-		visible_underlays = get_all_mob_underlays()
+		visible_overlays = 	get_all_current_mob_overlays()
+		visible_underlays = get_all_current_mob_underlays()
 
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	var/matrix/M = matrix()
@@ -278,20 +278,17 @@ var/global/list/damage_icon_parts = list()
 		standing_image.overlays += DI
 
 	update_bandages(update_icons)
-	set_mob_overlay(HO_DAMAGE_LAYER, standing_image, update_icons)
+	set_current_mob_overlay(HO_DAMAGE_LAYER, standing_image, update_icons)
 
 /mob/living/carbon/human/proc/update_bandages(var/update_icons=1)
+	var/list/bandage_overlays
 	var/bandage_icon = get_bodytype().get_bandages_icon(src)
 	if(bandage_icon)
-		var/image/standing_image = get_mob_overlay(HO_DAMAGE_LAYER)
-		if(standing_image)
-			for(var/obj/item/organ/external/O in get_external_organs())
-				var/bandage_level = O.bandage_level()
-				if(bandage_level)
-					standing_image.overlays += image(bandage_icon, "[O.icon_state][bandage_level]")
-			set_mob_overlay(HO_DAMAGE_LAYER, standing_image, update_icons)
-			return
-	set_mob_overlay(HO_DAMAGE_LAYER, null, update_icons)
+		for(var/obj/item/organ/external/O in get_external_organs())
+			var/bandage_level = O.bandage_level()
+			if(bandage_level)
+				LAZYADD(bandage_overlays, image(bandage_icon, "[O.icon_state][bandage_level]"))
+	set_current_mob_overlay(HO_DAMAGE_LAYER, bandage_overlays, update_icons)
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/update_body(var/update_icons=1)
@@ -410,15 +407,15 @@ var/global/list/damage_icon_parts = list()
 			I.color = UW.color
 		I.appearance_flags |= RESET_COLOR
 		undies += I
-	set_mob_overlay(HO_UNDERWEAR_LAYER, undies, update_icons)
+	set_current_mob_overlay(HO_UNDERWEAR_LAYER, undies, update_icons)
 
 /mob/living/carbon/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	set_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_hair_icon() : null), update_icons)
+	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_hair_icon() : null), update_icons)
 
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
 	// todo: make this use bodytype
-	set_mob_overlay(HO_SKIN_LAYER, species.update_skin(src), update_icons)
+	set_current_mob_overlay(HO_SKIN_LAYER, species.update_skin(src), update_icons)
 
 /mob/living/carbon/human/update_mutations(var/update_icons=1)
 
@@ -437,7 +434,7 @@ var/global/list/damage_icon_parts = list()
 			if(underlay)
 				standing.underlays += underlay
 				add_image = 1
-	set_mob_overlay(HO_MUTATIONS_LAYER, (add_image ? standing : null), update_icons)
+	set_current_mob_overlay(HO_MUTATIONS_LAYER, (add_image ? standing : null), update_icons)
 
 /* --------------------------------------- */
 //vvvvvv UPDATE_INV PROCS vvvvvv
@@ -448,30 +445,30 @@ var/global/list/damage_icon_parts = list()
 
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!istype(tail_organ))
-		set_mob_overlay(HO_TAIL_LAYER, null, FALSE)
-		set_mob_underlay(HU_TAIL_LAYER, null, update_icons)
+		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
+		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 		return
 
 	var/tail_state = tail_organ.get_tail(tail_organ)
 	if(!tail_state)
-		set_mob_overlay(HO_TAIL_LAYER, null, FALSE)
-		set_mob_underlay(HU_TAIL_LAYER, null, update_icons)
+		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
+		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 		return
 
 	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
 	if(suit && (suit.flags_inv & HIDETAIL))
-		set_mob_overlay(HO_TAIL_LAYER, null, FALSE)
-		set_mob_underlay(HU_TAIL_LAYER, null, update_icons)
+		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
+		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 
 	var/icon/tail_s = get_tail_icon(tail_organ)
 	var/tail_image = image(tail_s, icon_state = "[tail_state]_s")
 	animate_tail_reset(0)
 	if(dir == NORTH)
-		set_mob_underlay(HU_TAIL_LAYER, null, FALSE)
-		set_mob_overlay(HO_TAIL_LAYER, tail_image, update_icons)
+		set_current_mob_underlay(HU_TAIL_LAYER, null, FALSE)
+		set_current_mob_overlay(HO_TAIL_LAYER, tail_image, update_icons)
 	else
-		set_mob_overlay(HO_TAIL_LAYER, null, FALSE)
-		set_mob_underlay(HU_TAIL_LAYER, tail_image, update_icons)
+		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
+		set_current_mob_underlay(HU_TAIL_LAYER, tail_image, update_icons)
 
 /mob/living/carbon/human/proc/get_tail_icon(var/obj/item/organ/external/tail/tail_organ)
 	if(!istype(tail_organ))
@@ -514,7 +511,7 @@ var/global/list/damage_icon_parts = list()
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
 /mob/living/carbon/human/proc/get_current_tail_image()
-	return get_mob_overlay(HO_TAIL_LAYER) || get_mob_underlay(HU_TAIL_LAYER)
+	return get_current_mob_overlay(HO_TAIL_LAYER) || get_current_mob_underlay(HU_TAIL_LAYER)
 
 /mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
@@ -579,9 +576,9 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_fire(var/update_icons=1)
 	if(on_fire)
 		var/image/standing = overlay_image(get_bodytype().get_ignited_icon(src) || 'icons/mob/OnFire.dmi', "Standing", RESET_COLOR)
-		set_mob_overlay(HO_FIRE_LAYER, standing, update_icons)
+		set_current_mob_overlay(HO_FIRE_LAYER, standing, update_icons)
 	else
-		set_mob_overlay(HO_FIRE_LAYER, null, update_icons)
+		set_current_mob_overlay(HO_FIRE_LAYER, null, update_icons)
 
 /mob/living/carbon/human/update_surgery(var/update_icons=1)
 	var/image/total = null
@@ -613,7 +610,7 @@ var/global/list/damage_icon_parts = list()
 		if(check_state_in_icon(overlay_state, surgery_icon))
 			LAZYADD(overlays_to_add, image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER))
 		total.overlays |= overlays_to_add
-	set_mob_overlay(HO_SURGERY_LAYER, total, update_icons)
+	set_current_mob_overlay(HO_SURGERY_LAYER, total, update_icons)
 
 //Ported from hud login stuff
 //

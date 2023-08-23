@@ -14,7 +14,7 @@
 	for(var/slot in global.airtight_slots)
 		var/obj/item/gear = get_equipped_item(slot)
 		if(gear?.flags_inv & BLOCK_ALL_HAIR)
-			user.set_mob_overlay(HO_EARS_LAYER, null, redraw_mob)
+			user.set_current_mob_overlay(HO_EARS_LAYER, null, redraw_mob)
 			return
 
 	var/seen_an_ear = FALSE
@@ -32,9 +32,9 @@
 			both.overlays += ear.get_mob_overlay(user, slot)
 
 	if(both)
-		user.set_mob_overlay(HO_EARS_LAYER, both, redraw_mob)
+		user.set_current_mob_overlay(HO_EARS_LAYER, both, redraw_mob)
 	else
-		user.set_mob_overlay(HO_EARS_LAYER, null, redraw_mob)
+		user.set_current_mob_overlay(HO_EARS_LAYER, null, redraw_mob)
 
 /datum/inventory_slot/ear/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEEARS))
