@@ -1,52 +1,37 @@
-//Most of these are defined at this level to reduce on checks elsewhere in the code.
-//Having them here also makes for a nice reference list of the various overlay-updating procs available
+/mob/proc/update_equipment_overlay(var/slot, var/redraw_mob = TRUE)
+	var/datum/inventory_slot/inv_slot = slot && get_inventory_slot_datum(slot)
+	if(inv_slot)
+		inv_slot.update_mob_equipment_overlay(src, null, redraw_mob)
 
-/mob/proc/update_inv_handcuffed()
-	return
+/mob/proc/update_inhand_overlays(var/redraw_mob = TRUE)
+	var/list/hand_overlays = null
+	for(var/hand_slot in get_held_item_slots())
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		var/obj/item/held = inv_slot?.get_equipped_item()
+		if(istype(held))
+			// This should be moved out of icon code
+			if(get_equipped_item(slot_handcuffed_str))
+				drop_from_inventory(held)
+				continue
+			var/image/standing = held.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot)
+			if(standing)
+				standing.appearance_flags |= RESET_ALPHA
+				LAZYADD(hand_overlays, standing)
+	if(LAZYLEN(hand_overlays))
+		set_mob_overlay(HO_INHAND_LAYER, hand_overlays, redraw_mob)
+	else
+		set_mob_overlay(HO_INHAND_LAYER, null, redraw_mob)
 
-/mob/proc/update_inv_back()
-	return
+/mob/proc/set_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(redraw_mob)
+		queue_icon_update()
 
-/mob/proc/update_inv_hands()
-	return
-
-/mob/proc/update_inv_wear_mask()
-	return
-
-/mob/proc/update_inv_wear_suit()
-	return
-
-/mob/proc/update_inv_w_uniform()
-	return
-
-/mob/proc/update_inv_belt()
-	return
-
-/mob/proc/update_inv_head()
-	return
-
-/mob/proc/update_inv_gloves()
-	return
+/mob/living/carbon/human/set_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
+	overlays_standing[overlay_layer] = overlay
+	..()
 
 /mob/proc/update_mutations()
-	return
-
-/mob/proc/update_inv_wear_id()
-	return
-
-/mob/proc/update_inv_shoes()
-	return
-
-/mob/proc/update_inv_glasses()
-	return
-
-/mob/proc/update_inv_s_store()
-	return
-
-/mob/proc/update_inv_pockets()
-	return
-
-/mob/proc/update_inv_ears()
 	return
 
 /mob/proc/update_targeted()

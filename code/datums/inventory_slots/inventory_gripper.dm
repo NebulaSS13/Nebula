@@ -10,9 +10,8 @@
 /datum/inventory_slot/gripper/GetCloneArgs()
 	return list(slot_id, ui_loc, overlay_slot, ui_label)
 
-/datum/inventory_slot/gripper/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	. = ..()
-	user.update_inv_hands(redraw_mob)
+/datum/inventory_slot/gripper/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	user.update_inhand_overlays(redraw_mob)
 
 /datum/inventory_slot/gripper/equipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE, var/delete_old_item = TRUE)
 	. = ..()

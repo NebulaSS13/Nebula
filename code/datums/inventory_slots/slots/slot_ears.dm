@@ -9,8 +9,32 @@
 	requires_organ_tag = BP_HEAD
 	requires_slot_flags = SLOT_EARS
 
-/datum/inventory_slot/ear/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_ears(redraw_mob)
+/datum/inventory_slot/ear/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+
+	for(var/slot in global.airtight_slots)
+		var/obj/item/gear = get_equipped_item(slot)
+		if(gear && (gear.flags_inv & (BLOCK_ALL_HAIR)))
+			user.set_mob_overlay(HO_EARS_LAYER, null, redraw_mob)
+			return
+
+	var/seen_an_ear = FALSE
+	var/image/both
+	for(var/slot in global.ear_slots)
+		var/obj/item/ear = get_equipped_item(slot)
+		if(ear)
+			// We don't draw over the top of an ear slot unless we're the first ear
+			// slot in the list, // to avoid doubling up or overwriting other ear slots.
+			if(slot != slot_id && !seen_an_ear)
+				return
+			seen_an_ear = TRUE
+			if(!both)
+				both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")
+			both.overlays += ear.get_mob_overlay(user, slot)
+
+	if(both)
+		user.set_mob_overlay(HO_EARS_LAYER, both, redraw_mob)
+	else
+		user.set_mob_overlay(HO_EARS_LAYER, null, redraw_mob)
 
 /datum/inventory_slot/ear/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEEARS))

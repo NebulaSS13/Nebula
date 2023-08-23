@@ -126,8 +126,8 @@
 		add_overlay("[icon_state]-loaded")
 	if(ismob(loc))
 		var/mob/living/M = loc
-		M.update_inv_wear_mask(0)
-		M.update_inv_hands()
+		M.update_equipment_overlay(slot_wear_mask_str, redraw_mob = FALSE)
+		M.update_inhand_overlays()
 
 /obj/item/clothing/mask/smokable/ecig/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/chems/ecig_cartridge))

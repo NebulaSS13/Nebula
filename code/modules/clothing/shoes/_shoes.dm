@@ -157,10 +157,8 @@
 			attached_cuffs = null
 	return
 
-/obj/item/clothing/shoes/update_clothing_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_shoes()
+/obj/item/clothing/shoes/get_associated_equipment_slots()
+	return slot_shoes_str
 
 /obj/item/clothing/shoes/set_material(var/new_material)
 	..()

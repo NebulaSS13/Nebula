@@ -311,16 +311,16 @@
 					switch(msg_type)
 						if("boots")
 							to_chat(wearer, SPAN_HARDSUIT("\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"]."))
-							wearer.update_inv_shoes()
+							wearer.update_equipment_overlay(slot_shoes_str)
 						if("gloves")
 							to_chat(wearer, SPAN_HARDSUIT("\The [piece] [!seal_target ? "tighten around your fingers and wrists" : "become loose around your fingers"]."))
-							wearer.update_inv_gloves()
+							wearer.update_equipment_overlay(slot_gloves_str)
 						if("chest")
 							to_chat(wearer, SPAN_HARDSUIT("\The [piece] [!seal_target ? "cinches tight again your chest" : "releases your chest"]."))
-							wearer.update_inv_wear_suit()
+							wearer.update_equipment_overlay(slot_wear_suit_str)
 						if("helmet")
 							to_chat(wearer, SPAN_HARDSUIT("\The [piece] hisses [!seal_target ? "closed" : "open"]."))
-							wearer.update_inv_head()
+							wearer.update_equipment_overlay(slot_head_str)
 							if(helmet)
 								helmet.update_light(wearer)
 					//sealed pieces become airtight, protecting against diseases
@@ -575,14 +575,17 @@
 				chest.add_overlay(image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]", "dir" = SOUTH))
 
 	if(wearer)
-		wearer.update_inv_shoes()
-		wearer.update_inv_gloves()
-		wearer.update_inv_head()
-		wearer.update_inv_wear_mask()
-		wearer.update_inv_wear_suit()
-		wearer.update_inv_w_uniform()
-		wearer.update_inv_back()
-	return
+		var/static/list/update_rig_slots = list(
+			slot_shoes_str,
+			slot_gloves_str,
+			slot_head_str,
+			slot_wear_mask_str,
+			slot_wear_suit_str,
+			slot_w_uniform_str,
+			slot_back_str
+		)
+		for(var/slot in update_rig_slots)
+			wearer.update_equipment_overlay(slot)
 
 /obj/item/rig/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && slot == slot_back_str && !offline && equipment_overlay_icon && LAZYLEN(installed_modules))

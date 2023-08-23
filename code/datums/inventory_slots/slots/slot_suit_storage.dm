@@ -4,9 +4,7 @@
 	ui_loc = ui_sstore1
 	slot_id = slot_s_store_str
 	requires_organ_tag = BP_CHEST
-
-/datum/inventory_slot/suit_storage/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_s_store(redraw_mob)
+	mob_overlay_layer = HO_SUIT_STORE_LAYER
 
 /datum/inventory_slot/suit_storage/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..()

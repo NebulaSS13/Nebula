@@ -185,7 +185,7 @@
 	//so our overlays update.
 	if (ismob(src.loc))
 		var/mob/M = src.loc
-		M.update_inv_back()
+		M.update_equipment_overlay(slot_back_str)
 
 //********************
 //**Chameleon Gloves**
@@ -305,7 +305,8 @@
 		disguise(clothing_choices[picked], usr)
 		if (ismob(src.loc))
 			var/mob/M = src.loc
-			M.update_inv_ears()
+			M.update_equipment_overlay(slot_l_ear_str, FALSE)
+			M.update_equipment_overlay(slot_r_ear_str)
 
 //***********************
 //**Chameleon Accessory**
@@ -417,4 +418,4 @@
 	//so our overlays update.
 	if (ismob(src.loc))
 		var/mob/M = src.loc
-		M.update_inv_hands()
+		M.update_inhand_overlays()

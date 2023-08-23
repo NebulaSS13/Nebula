@@ -341,7 +341,7 @@
 		else
 			usr.select_held_item_slot(name)
 	else if(usr.attack_ui(slot_id))
-		usr.update_inv_hands(0)
+		usr.update_inhand_overlays(FALSE)
 
 	return TRUE
 

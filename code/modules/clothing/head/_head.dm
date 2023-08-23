@@ -92,7 +92,5 @@
 		overlay.overlays += light_overlay
 	. = ..()
 
-/obj/item/clothing/head/update_clothing_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_head()
+/obj/item/clothing/head/get_associated_equipment_slots()
+	return slot_head_str

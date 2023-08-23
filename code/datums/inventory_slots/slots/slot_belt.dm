@@ -5,9 +5,8 @@
 	ui_loc = ui_belt
 	requires_organ_tag = BP_CHEST
 	requires_slot_flags = SLOT_LOWER_BODY
-
-/datum/inventory_slot/belt/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_belt(redraw_mob)
+	mob_overlay_layer = HO_BELT_LAYER
+	alt_mob_overlay_layer = HO_BELT_LAYER_ALT
 
 /datum/inventory_slot/belt/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..()
