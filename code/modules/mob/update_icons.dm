@@ -1,3 +1,11 @@
+/mob/living/proc/refresh_visible_overlays()
+	SHOULD_CALL_PARENT(TRUE)
+	if(HasMovementHandler(/datum/movement_handler/mob/transformation) || QDELETED(src))
+		return FALSE
+	for(var/slot in get_inventory_slots())
+		update_equipment_overlay(slot, FALSE)
+	return TRUE
+
 /mob/proc/update_equipment_overlay(var/slot, var/redraw_mob = TRUE)
 	var/datum/inventory_slot/inv_slot = slot && get_inventory_slot_datum(slot)
 	if(inv_slot)
@@ -17,19 +25,29 @@
 			if(standing)
 				standing.appearance_flags |= RESET_ALPHA
 				LAZYADD(hand_overlays, standing)
-	if(LAZYLEN(hand_overlays))
-		set_mob_overlay(HO_INHAND_LAYER, hand_overlays, redraw_mob)
-	else
-		set_mob_overlay(HO_INHAND_LAYER, null, redraw_mob)
+	set_mob_overlay(HO_INHAND_LAYER, hand_overlays, redraw_mob)
+
+/mob/proc/get_mob_overlay(var/overlay_layer)
+	return
+
+/mob/proc/get_all_mob_overlays()
+	return
 
 /mob/proc/set_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(redraw_mob)
 		queue_icon_update()
 
-/mob/living/carbon/human/set_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
-	overlays_standing[overlay_layer] = overlay
-	..()
+/mob/proc/get_mob_underlay(var/underlay_layer)
+	return
+
+/mob/proc/get_all_mob_underlays()
+	return
+
+/mob/proc/set_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(redraw_mob)
+		queue_icon_update()
 
 /mob/proc/update_mutations()
 	return
