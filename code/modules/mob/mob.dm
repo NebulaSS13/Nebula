@@ -1353,3 +1353,7 @@
 
 /mob/proc/get_blood_type()
 	return
+
+// Gets the ID card of a mob, but will not check types in the exceptions list
+/mob/GetIdCard(exceptions = null)
+	return LAZYACCESS(GetIdCards(exceptions), 1)

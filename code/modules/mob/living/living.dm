@@ -1173,3 +1173,15 @@ default behaviour is:
 	var/decl/species/my_species = get_species()
 	return my_species?.get_footstep(src, footstep_type)
 
+/mob/living/GetIdCards(exceptions = null)
+	. = ..()
+	var/list/candidates = get_held_items()
+	var/id = get_equipped_item(slot_wear_id_str)
+	if(id)
+		LAZYDISTINCTADD(candidates, id)
+	for(var/atom/movable/candidate in candidates)
+		if(!candidate || is_type_in_list(candidate, exceptions))
+			continue
+		var/list/obj/item/card/id/id_cards = candidate.GetIdCards()
+		if(LAZYLEN(id_cards))
+			LAZYDISTINCTADD(., id_cards)
