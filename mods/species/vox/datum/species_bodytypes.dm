@@ -75,6 +75,11 @@
 	)
 	default_h_style = /decl/sprite_accessory/hair/vox/short/servitor
 
+/decl/bodytype/vox/servitor/alchemist
+	name = "alchemist voxform"
+	icon_base = 'mods/species/vox/icons/body/servitor/body_alchemist.dmi'
+	eye_icon = 'mods/species/vox/icons/body/servitor/eyes_alchemist.dmi'
+
 /decl/bodytype/vox/servitor/Initialize()
 	if(!equip_adjust)
 		equip_adjust = list()
