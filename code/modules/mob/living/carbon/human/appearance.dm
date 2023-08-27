@@ -142,10 +142,10 @@
 	return valid_species
 
 /mob/living/carbon/human/proc/get_valid_hairstyle_types(var/check_gender = TRUE)
-	return species.get_hair_style_types(get_bodytype().associated_gender, check_gender)
+	return species.get_hair_style_types(get_bodytype(), check_gender)
 
 /mob/living/carbon/human/proc/get_valid_facial_hairstyle_types(var/check_gender = TRUE)
-	return species.get_facial_hair_style_types(get_bodytype().associated_gender, check_gender)
+	return species.get_facial_hair_style_types(get_bodytype(), check_gender)
 
 /mob/living/carbon/human/proc/force_update_limbs()
 	for(var/obj/item/organ/external/O in get_external_organs())

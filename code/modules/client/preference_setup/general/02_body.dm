@@ -262,9 +262,9 @@
 
 		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
 		mob_species = get_species_by_key(pref.species)
-		var/decl/sprite_accessory/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in mob_species.get_hair_styles(B?.associated_gender)
+		var/decl/sprite_accessory/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in mob_species.get_hair_styles(B)
 		mob_species = get_species_by_key(pref.species)
-		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles(B?.associated_gender)))
+		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles(B)))
 			pref.h_style = new_h_style.type
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -312,9 +312,9 @@
 
 		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
 		mob_species = get_species_by_key(pref.species)
-		var/decl/sprite_accessory/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, GET_DECL(pref.f_style)) as null|anything in mob_species.get_facial_hair_styles(B?.associated_gender)
+		var/decl/sprite_accessory/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, GET_DECL(pref.f_style)) as null|anything in mob_species.get_facial_hair_styles(B)
 		mob_species = get_species_by_key(pref.species)
-		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(B?.associated_gender)))
+		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(B)))
 			pref.f_style = new_f_style.type
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -360,11 +360,11 @@
 /datum/category_item/player_setup_item/proc/ResetHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/decl/bodytype/B = mob_species?.get_bodytype_by_name(pref.bodytype)
-	var/list/valid_hairstyles = mob_species?.get_hair_style_types(B?.associated_gender)
+	var/list/valid_hairstyles = mob_species?.get_hair_style_types(B)
 	pref.h_style = length(valid_hairstyles) ? pick(valid_hairstyles) : initial(pref.h_style)
 
 /datum/category_item/player_setup_item/proc/ResetFacialHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/decl/bodytype/B = mob_species?.get_bodytype_by_name(pref.bodytype)
-	var/list/valid_facialhairstyles = mob_species?.get_facial_hair_styles(B?.associated_gender)
+	var/list/valid_facialhairstyles = mob_species?.get_facial_hair_styles(B)
 	pref.f_style = length(valid_facialhairstyles) ? pick(valid_facialhairstyles) : initial(pref.f_style)

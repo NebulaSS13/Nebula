@@ -1,4 +1,15 @@
-//The mob should have a gender you want before running this proc. Will run fine without H
+/datum/preferences/proc/random_hair_style()
+	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
+	var/decl/bodytype/mob_bodytype = mob_species?.get_bodytype_by_name(bodytype) || mob_species?.default_bodytype || GET_DECL(global.using_map.default_bodytype)
+	var/list/valid_styles = mob_species?.get_hair_style_types(mob_bodytype)
+	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/hair/bald
+
+/datum/preferences/proc/random_facial_hair_style()
+	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
+	var/decl/bodytype/mob_bodytype = mob_species?.get_bodytype_by_name(bodytype) || mob_species?.default_bodytype || GET_DECL(global.using_map.default_bodytype)
+	var/list/valid_styles = mob_species?.get_facial_hair_style_types(mob_bodytype)
+	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/facial_hair/shaved
+
 /datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
 
 	var/decl/species/current_species = get_species_by_key(species || global.using_map.default_species)
@@ -6,8 +17,8 @@
 	var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 	gender = pronouns.name
 
-	h_style = random_hair_style(gender, species)
-	f_style = random_facial_hair_style(gender, species)
+	h_style = random_hair_style()
+	f_style = random_facial_hair_style()
 	if(bodytype)
 		if(current_bodytype.appearance_flags & HAS_A_SKIN_TONE)
 			skin_tone = current_bodytype.get_random_skin_tone() || skin_tone
