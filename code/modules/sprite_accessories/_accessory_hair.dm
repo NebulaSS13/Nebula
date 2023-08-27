@@ -17,8 +17,10 @@
 	gender = null
 	species_allowed = null
 	subspecies_allowed = null
-	bodytypes_allowed = null
-	bodytypes_denied = null
+	bodytype_categories_allowed = null
+	bodytype_categories_denied = null
+	body_flags_allowed = null
+	body_flags_denied = null
 	uid = "acc_hair_bald"
 
 /decl/sprite_accessory/hair/short

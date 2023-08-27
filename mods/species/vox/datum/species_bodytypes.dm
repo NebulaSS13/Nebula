@@ -75,6 +75,10 @@
 		/decl/sprite_accessory/marking/vox/claws/servitor =  "#a0a654"
 	)
 	default_h_style = /decl/sprite_accessory/hair/vox/short/servitor
+	override_limb_types = list(
+		BP_GROIN = /obj/item/organ/external/groin/vox,
+		BP_TAIL = /obj/item/organ/external/tail/vox/servitor
+	)
 
 /decl/bodytype/vox/servitor/alchemist
 	name = "alchemist voxform"

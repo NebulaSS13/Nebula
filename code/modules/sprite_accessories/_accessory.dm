@@ -25,13 +25,16 @@
 	var/gender = null                              // Restricted to specific genders. null matches any
 	var/list/species_allowed = list(SPECIES_HUMAN) // Restrict some styles to specific root species names
 	var/list/subspecies_allowed                    // Restrict some styles to specific species names, irrespective of root species name
-	var/bodytypes_allowed = null                   // Restrict some styles to specific bodytypes
-	var/bodytypes_denied =  null                   // Restrict some styles to specific bodytypes
+	var/body_flags_allowed = null                  // Restrict some styles to specific bodytype flags
+	var/body_flags_denied =  null                  // Restrict some styles to specific bodytype flags
+	var/list/bodytype_categories_allowed = null    // Restricts some styles to specific bodytype categories
+	var/list/bodytype_categories_denied = null     // Restricts some styles to specific bodytype categories
+
 	var/do_colouration = 1                         // Whether or not the accessory can be affected by colouration
 	var/blend = ICON_ADD
 	var/flags = 0
 
-/decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/bodytype_flags, var/check_gender)
+/decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype, var/check_gender)
 	if(!isnull(check_gender) && gender && check_gender != gender)
 		return FALSE
 	if(species)
@@ -42,10 +45,15 @@
 			species_is_permitted = (species.name in subspecies_allowed)
 		if(!species_is_permitted)
 			return FALSE
-	if(!isnull(bodytypes_allowed) && !(bodytypes_allowed & bodytype_flags))
-		return FALSE
-	if(!isnull(bodytypes_denied) && (bodytypes_denied & bodytype_flags))
-		return FALSE
+	if(bodytype)
+		if(!isnull(bodytype_categories_allowed) && !(bodytype.bodytype_category in bodytype_categories_allowed))
+			return FALSE
+		if(!isnull(bodytype_categories_denied) && (bodytype.bodytype_category in bodytype_categories_denied))
+			return FALSE
+		if(!isnull(body_flags_allowed) && !(body_flags_allowed & bodytype.bodytype_flag))
+			return FALSE
+		if(!isnull(body_flags_denied) && (body_flags_denied & bodytype.bodytype_flag))
+			return FALSE
 	return TRUE
 
 /decl/sprite_accessory/validate()

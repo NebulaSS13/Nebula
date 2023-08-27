@@ -35,27 +35,29 @@
 	// Get h_style type.
 	var/list/all_sprite_accessories
 	var/load_h_style = R.read("hair_style_name")
-	pref.h_style = decls_repository.get_decl_by_id(load_h_style, validate_decl_type = FALSE)
+	var/decl/h_style_decl = decls_repository.get_decl_by_id(load_h_style, validate_decl_type = FALSE)
 	// Grandfather in name-based sprite accessories.
-	if(isnull(pref.h_style) && load_h_style)
+	if(!istype(h_style_decl) && load_h_style)
 		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
 		for(var/accessory in all_sprite_accessories)
 			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
 			if(sprite.name == load_h_style)
 				pref.h_style = accessory
 				break
+	pref.h_style = istype(h_style_decl) ? h_style_decl.type : /decl/sprite_accessory/hair/bald
 
 	// Get f_style type.
 	var/load_f_style = R.read("facial_style_name")
-	pref.f_style = decls_repository.get_decl_by_id(load_f_style, validate_decl_type = FALSE)
+	var/decl/f_style_decl = decls_repository.get_decl_by_id(load_f_style, validate_decl_type = FALSE)
 	// Grandfather in name-based accessories.
-	if(isnull(pref.f_style) && load_f_style)
+	if(!istype(f_style_decl) && load_f_style)
 		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
 		for(var/accessory in all_sprite_accessories)
 			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
 			if(sprite.name == load_f_style)
 				pref.f_style = accessory
 				break
+	pref.f_style = istype(f_style_decl) ? f_style_decl.type : /decl/sprite_accessory/facial_hair/shaved
 
 	// Get markings type.
 	var/list/load_markings = R.read("body_markings")
@@ -333,7 +335,7 @@
 				continue
 			var/decl/sprite_accessory/accessory = all_markings[M]
 			mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype)
-			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype.bodytype_flag, pref.gender))
+			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype, pref.gender))
 				usable_markings += accessory
 
 		var/decl/sprite_accessory/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
