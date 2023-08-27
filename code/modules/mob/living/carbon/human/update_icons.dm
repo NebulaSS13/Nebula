@@ -411,15 +411,6 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	if(head_organ)
-		if(h_style)
-			var/decl/sprite_accessory/hair/hairstyle = GET_DECL(h_style)
-			if(!hairstyle.accessory_is_available(src, head_organ.species, head_organ.bodytype, gender))
-				h_style = head_organ.bodytype.default_h_style
-		if(f_style)
-			var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(f_style)
-			if(!facialhairstyle.accessory_is_available(src, head_organ.species, head_organ.bodytype, gender))
-				f_style = head_organ.bodytype.default_f_style
 
 	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_hair_icon() : null), update_icons)
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
