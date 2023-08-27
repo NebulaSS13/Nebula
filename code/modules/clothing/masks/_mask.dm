@@ -30,8 +30,8 @@
 		verbs += .verb/adjust_mask
 
 /obj/item/clothing/mask/get_associated_equipment_slots()
-	return slot_wear_mask_str
-
+	. = ..()
+	LAZYDISTINCTADD(., slot_wear_mask_str)
 
 /obj/item/clothing/mask/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && hanging && slot == slot_wear_mask_str && check_state_in_icon("[overlay.icon_state]-down", overlay.icon))

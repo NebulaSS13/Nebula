@@ -10,4 +10,5 @@
 	slot_flags = SLOT_EARS
 
 /obj/item/clothing/ears/get_associated_equipment_slots()
-	return global.ear_slots
+	. = ..()
+	LAZYDISTINCTADD(., global.ear_slots)

@@ -84,8 +84,9 @@
 		update_clothing_icon()
 
 /obj/item/clothing/under/get_associated_equipment_slots()
+	. = ..()
 	var/static/list/under_slots = list(slot_w_uniform_str, slot_wear_id_str)
-	return under_slots
+	LAZYDISTINCTADD(., under_slots)
 
 /obj/item/clothing/under/examine(mob/user)
 	. = ..()

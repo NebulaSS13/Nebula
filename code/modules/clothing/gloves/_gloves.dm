@@ -15,7 +15,8 @@
 	var/obj/item/clothing/ring/covering_ring
 
 /obj/item/clothing/gloves/get_associated_equipment_slots()
-	return slot_gloves_str
+	. = ..()
+	LAZYDISTINCTADD(., slot_gloves_str)
 
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return

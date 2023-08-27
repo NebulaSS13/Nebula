@@ -15,7 +15,8 @@
 	var/overlay_flags
 
 /obj/item/storage/belt/get_associated_equipment_slots()
-	return slot_belt_str
+	. = ..()
+	LAZYDISTINCTADD(., slot_belt_str)
 
 /obj/item/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"

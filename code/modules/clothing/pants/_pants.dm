@@ -29,5 +29,6 @@
 	)
 
 /obj/item/clothing/pants/get_associated_equipment_slots()
+	. = ..()
 	var/static/list/pants_slots = list(slot_w_uniform_str, slot_wear_id_str)
-	return pants_slots
+	LAZYDISTINCTADD(., pants_slots)

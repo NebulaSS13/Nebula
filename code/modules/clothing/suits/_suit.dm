@@ -13,7 +13,8 @@
 	var/fire_resist = T0C+100
 
 /obj/item/clothing/suit/get_associated_equipment_slots()
-	return slot_wear_suit_str
+	. = ..()
+	LAZYDISTINCTADD(., slot_wear_suit_str)
 
 /obj/item/clothing/suit/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
 	return TRUE

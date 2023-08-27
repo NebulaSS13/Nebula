@@ -808,22 +808,21 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 // Used to call appropriate slot updates in update_clothing_icon()
 /obj/item/proc/get_associated_equipment_slots()
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	if(item_flags & ITEM_FLAG_IS_BELT)
+		LAZYADD(., slot_belt_str)
 
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/proc/update_clothing_icon()
-	var/equip_slots = get_associated_equipment_slots()
-	if(!equip_slots)
-		return FALSE
 	var/mob/wearer = loc
 	if(!istype(wearer))
 		return FALSE
-	if(islist(equip_slots))
-		for(var/slot in equip_slots)
-			wearer.update_equipment_overlay(slot, FALSE)
-		wearer.update_icon()
-	else
-		wearer.update_equipment_overlay(equip_slots)
+	var/equip_slots = get_associated_equipment_slots()
+	if(!islist(equip_slots))
+		return FALSE
+	for(var/slot in equip_slots)
+		wearer.update_equipment_overlay(slot, FALSE)
+	wearer.update_icon()
 	return TRUE
 
 /obj/item/proc/reconsider_client_screen_presence(var/client/client, var/slot)

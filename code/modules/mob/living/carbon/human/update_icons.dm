@@ -581,6 +581,7 @@ var/global/list/damage_icon_parts = list()
 		set_current_mob_overlay(HO_FIRE_LAYER, null, update_icons)
 
 /mob/living/carbon/human/update_surgery(var/update_icons=1)
+	SHOULD_CALL_PARENT(FALSE)
 	var/image/total = null
 	for(var/obj/item/organ/external/E in get_external_organs())
 		if(BP_IS_PROSTHETIC(E))
