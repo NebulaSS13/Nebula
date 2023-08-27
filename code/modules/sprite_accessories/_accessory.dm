@@ -18,6 +18,7 @@
 
 /decl/sprite_accessory
 	abstract_type = /decl/sprite_accessory
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name                                       // The preview name of the accessory
 	var/icon                                       // the icon file the accessory is located in
 	var/icon_state                                 // the icon_state of the accessory

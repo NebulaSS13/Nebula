@@ -22,6 +22,7 @@
 	sort_order = 2
 
 /datum/category_item/player_setup_item/physical/body/load_character(datum/pref_record_reader/R)
+
 	pref.hair_colour =            R.read("hair_colour")
 	pref.facial_hair_colour =     R.read("facial_hair_colour")
 	pref.skin_colour =            R.read("skin_colour")
@@ -31,35 +32,47 @@
 	pref.appearance_descriptors = R.read("appearance_descriptors")
 	pref.bgstate =                R.read("bgstate")
 
-	pref.h_style =                R.read("hair_style_name")
-	pref.f_style =                R.read("facial_style_name")
-	pref.body_markings =          R.read("body_markings")
-
 	// Get h_style type.
-	var/list/all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
-	for(var/accessory in all_sprite_accessories)
-		var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-		if(sprite.name == pref.h_style)
-			pref.h_style = accessory
-			break
-
-	// Get f_style type.
-	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
-	for(var/accessory in all_sprite_accessories)
-		var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-		if(sprite.name == pref.f_style)
-			pref.f_style = accessory
-			break
-
-	// Get markings type.
-	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
-	for(var/marking in pref.body_markings)
+	var/list/all_sprite_accessories
+	var/load_h_style = R.read("hair_style_name")
+	pref.h_style = decls_repository.get_decl_by_id(load_h_style)
+	// Grandfather in name-based sprite accessories.
+	if(isnull(pref.h_style) && load_h_style)
+		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
 		for(var/accessory in all_sprite_accessories)
 			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-			if(sprite.name == marking)
-				pref.body_markings[accessory] = pref.body_markings[marking]
-				pref.body_markings -= marking
+			if(sprite.name == load_h_style)
+				pref.h_style = accessory
 				break
+
+	// Get f_style type.
+	var/load_f_style = R.read("facial_style_name")
+	pref.f_style = decls_repository.get_decl_by_id(load_f_style)
+	// Grandfather in name-based accessories.
+	if(isnull(pref.f_style) && load_f_style)
+		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
+		for(var/accessory in all_sprite_accessories)
+			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
+			if(sprite.name == load_f_style)
+				pref.f_style = accessory
+				break
+
+	// Get markings type.
+	var/list/load_markings = R.read("body_markings")
+	pref.body_markings = list()
+	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
+	if(length(load_markings))
+		for(var/marking in load_markings)
+			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id(marking)
+			// Grandfather in name-based accessories.
+			if(isnull(loaded_marking))
+				for(var/accessory in all_sprite_accessories)
+					var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
+					if(sprite.name == marking)
+						loaded_marking = pref.body_markings[marking]
+						break
+			if(loaded_marking)
+				pref.body_markings[loaded_marking.type] = load_markings[marking]
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
 	W.write("skin_tone",              pref.skin_tone)
@@ -73,13 +86,13 @@
 
 	// Get names of sprite accessories to serialize.
 	var/decl/sprite_accessory/sprite = GET_DECL(pref.h_style)
-	W.write("hair_style_name", sprite.name)
+	W.write("hair_style_name", sprite.uid)
 	sprite = GET_DECL(pref.f_style)
-	W.write("facial_style_name", sprite.name)
+	W.write("facial_style_name", sprite.uid)
 	var/list/body_marking_names = list()
 	for(var/marking in pref.body_markings)
 		sprite = GET_DECL(marking)
-		body_marking_names[sprite.name] = pref.body_markings[marking]
+		body_marking_names[sprite.uid] = pref.body_markings[marking]
 	W.write("body_markings", body_marking_names)
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()

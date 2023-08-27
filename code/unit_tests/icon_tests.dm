@@ -19,7 +19,7 @@
 		for(var/sprite_accessory_type in subtypesof(sprite_accessory_main_type))
 			var/failed = FALSE
 			var/decl/sprite_accessory/sat = sprite_accessory_type
-			var/sat_name = initial(sat.name)
+			var/sat_name = "[initial(sat.name)] ([initial(sat.uid)])"
 			if(sat_name)
 				group_by(sprite_accessories_by_name, sat_name, sat)
 			else
