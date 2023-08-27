@@ -3,6 +3,7 @@
 	icon = 'mods/species/vox/icons/body/soldier/hair.dmi'
 	icon_state = "vox_longquills"
 	species_allowed = list(SPECIES_VOX)
+	bodytypes_allowed = list(BODYTYPE_VOX)
 
 /decl/sprite_accessory/hair/vox/short
 	name = "Short Vox Quills"
@@ -16,11 +17,25 @@
 	name = "Vox Stubble"
 	icon_state = "vox_stubble"
 
+/decl/sprite_accessory/hair/vox/servitor
+	icon = 'mods/species/vox/icons/body/servitor/hair.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/hair/vox/short/servitor
+	icon = 'mods/species/vox/icons/body/servitor/hair.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/hair/vox/mohawk/servitor
+	icon = 'mods/species/vox/icons/body/servitor/hair.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/hair/vox/stubble/servitor
+	icon = 'mods/species/vox/icons/body/servitor/hair.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+
 /decl/sprite_accessory/marking/vox
 	name = "Vox Neck Markings"
 	icon_state = "neck_markings"
 	body_parts = list(BP_HEAD)
 	species_allowed = list(SPECIES_VOX)
+	bodytypes_allowed = list(BODYTYPE_VOX)
 	icon = 'mods/species/vox/icons/body/soldier/markings.dmi'
 	blend = ICON_MULTIPLY
 
@@ -50,3 +65,25 @@
 /decl/sprite_accessory/marking/vox/crest
 	name = "Vox Crest Colouration"
 	icon_state = "crest"
+
+/decl/sprite_accessory/marking/vox/servitor
+	icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/marking/vox/claws/servitor
+	icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/marking/vox/beak/servitor
+	icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/marking/vox/scutes/servitor
+	icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/marking/vox/arm_markings/servitor
+	icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/marking/vox/arm_markings/right/servitor
+	icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)
+/decl/sprite_accessory/marking/vox/crest/servitor
+	icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
+	bodytypes_allowed = list(BODYTYPE_HUMANOID)

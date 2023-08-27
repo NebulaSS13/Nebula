@@ -87,9 +87,15 @@
 
 	available_pronouns = list(
 		/decl/pronouns/neuter,
-		/decl/pronouns/neuter/person
+		/decl/pronouns/neuter/person,
+		/decl/pronouns,
+		/decl/pronouns/male,
+		/decl/pronouns/female
 	)
-	available_bodytypes = list(/decl/bodytype/vox)
+	available_bodytypes = list(
+		/decl/bodytype/vox,
+		/decl/bodytype/vox/servitor
+	)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height =       0.75,

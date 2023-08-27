@@ -1,5 +1,5 @@
 /decl/bodytype/vox
-	name =              "voxform"
+	name =              "soldier voxform"
 	bodytype_category = BODYTYPE_VOX
 	icon_base =         'mods/species/vox/icons/body/soldier/body.dmi'
 	icon_deformed =     'mods/species/vox/icons/body/deformed_body.dmi'
@@ -44,7 +44,6 @@
 		/decl/sprite_accessory/marking/vox/claws =  "#a0a654"
 	)
 
-
 /decl/bodytype/vox/Initialize()
 	if(!equip_adjust)
 		equip_adjust = list(
@@ -58,9 +57,33 @@
 			slot_undershirt_str = list("[NORTH]" = list("x" =  0, "y" = -1), "[EAST]" = list("x" = 0, "y" = -1), "[SOUTH]" = list("x" =  0, "y" = -1),  "[WEST]" = list("x" =  0, "y" = -1)),
 			slot_back_str =       list("[NORTH]" = list("x" =  0, "y" =  0), "[EAST]" = list("x" = 3, "y" =  0), "[SOUTH]" = list("x" =  0, "y" =  0),  "[WEST]" = list("x" = -3, "y" =  0))
 		)
-	. = ..()
+	return ..()
+
+/decl/bodytype/vox/servitor
+	name = "servitor voxform"
+	bodytype_category = BODYTYPE_HUMANOID
+	icon_base =      'mods/species/vox/icons/body/servitor/body.dmi'
+	icon_deformed =  'mods/species/vox/icons/body/deformed_body.dmi'
+	husk_icon =      'mods/species/vox/icons/body/husk.dmi'
+	blood_overlays = 'mods/species/vox/icons/body/blood_overlays.dmi'
+	eye_icon =       'mods/species/vox/icons/body/servitor/eyes.dmi'
+	base_markings = list(
+		/decl/sprite_accessory/marking/vox/beak/servitor =   "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/scutes/servitor = "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/crest/servitor =  "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/claws/servitor =  "#a0a654"
+	)
+	default_h_style = /decl/sprite_accessory/hair/vox/short/servitor
+
+/decl/bodytype/vox/servitor/Initialize()
+	if(!equip_adjust)
+		equip_adjust = list()
+	return ..()
 
 /obj/item/organ/external/tail/vox
 	tail =       "voxtail"
 	tail_icon =  'mods/species/vox/icons/body/soldier/tail.dmi'
 	tail_blend = ICON_MULTIPLY
+
+/obj/item/organ/external/tail/vox/servitor
+	tail_icon =  'mods/species/vox/icons/body/servitor/tail.dmi'
