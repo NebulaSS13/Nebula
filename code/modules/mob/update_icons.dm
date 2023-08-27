@@ -16,15 +16,10 @@
 	for(var/hand_slot in get_held_item_slots())
 		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
 		var/obj/item/held = inv_slot?.get_equipped_item()
-		if(istype(held))
-			// This should be moved out of icon code
-			if(get_equipped_item(slot_handcuffed_str))
-				drop_from_inventory(held)
-				continue
-			var/image/standing = held.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot)
-			if(standing)
-				standing.appearance_flags |= RESET_ALPHA
-				LAZYADD(hand_overlays, standing)
+		var/image/standing = held?.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot)
+		if(standing)
+			standing.appearance_flags |= (RESET_ALPHA|RESET_COLOR)
+			LAZYADD(hand_overlays, standing)
 	set_current_mob_overlay(HO_INHAND_LAYER, hand_overlays, redraw_mob)
 
 /mob/proc/get_current_mob_overlay(var/overlay_layer)

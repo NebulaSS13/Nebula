@@ -365,14 +365,15 @@ var/global/list/dexterity_levels = list(
 #define HO_TAIL_LAYER       16 //bs12 specific. this hack is probably gonna come back to haunt me
 #define HO_HAIR_LAYER       17 //TODO: make part of head layer?
 #define HO_GOGGLES_LAYER    18
-#define HO_EARS_LAYER       19
-#define HO_FACEMASK_LAYER   20
-#define HO_HEAD_LAYER       21
-#define HO_COLLAR_LAYER     22
-#define HO_HANDCUFF_LAYER   23
-#define HO_INHAND_LAYER     24
-#define HO_FIRE_LAYER       25 //If you're on fire
-#define TOTAL_OVER_LAYERS   25
+#define HO_L_EAR_LAYER      19
+#define HO_R_EAR_LAYER      20
+#define HO_FACEMASK_LAYER   21
+#define HO_HEAD_LAYER       22
+#define HO_COLLAR_LAYER     23
+#define HO_HANDCUFF_LAYER   24
+#define HO_INHAND_LAYER     25
+#define HO_FIRE_LAYER       26 //If you're on fire
+#define TOTAL_OVER_LAYERS   26
 //////////////////////////////////
 
 // Underlay defines; vestigal implementation currently.
