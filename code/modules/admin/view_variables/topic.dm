@@ -366,7 +366,7 @@
 			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/carbon/human"))
 			return
 
-		var/new_bodytype = input("Please choose a new species.","Species",null) as null|anything in H.species.available_bodytypes
+		var/new_bodytype = input("Please choose a new bodytype.","Bodytype",null) as null|anything in H.species.available_bodytypes
 
 		if(!new_bodytype)
 			return
