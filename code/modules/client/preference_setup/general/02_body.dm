@@ -35,7 +35,7 @@
 	// Get h_style type.
 	var/list/all_sprite_accessories
 	var/load_h_style = R.read("hair_style_name")
-	pref.h_style = decls_repository.get_decl_by_id(load_h_style)
+	pref.h_style = decls_repository.get_decl_by_id(load_h_style, validate_decl_type = FALSE)
 	// Grandfather in name-based sprite accessories.
 	if(isnull(pref.h_style) && load_h_style)
 		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
@@ -47,7 +47,7 @@
 
 	// Get f_style type.
 	var/load_f_style = R.read("facial_style_name")
-	pref.f_style = decls_repository.get_decl_by_id(load_f_style)
+	pref.f_style = decls_repository.get_decl_by_id(load_f_style, validate_decl_type = FALSE)
 	// Grandfather in name-based accessories.
 	if(isnull(pref.f_style) && load_f_style)
 		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
@@ -63,7 +63,7 @@
 	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
 	if(length(load_markings))
 		for(var/marking in load_markings)
-			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id(marking)
+			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id(marking, validate_decl_type = FALSE)
 			// Grandfather in name-based accessories.
 			if(isnull(loaded_marking))
 				for(var/accessory in all_sprite_accessories)

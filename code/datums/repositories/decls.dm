@@ -43,8 +43,13 @@ var/global/repository/decls/decls_repository = new
 /repository/decls/proc/get_decl_path_by_id(decl_id)
 	. = fetched_decl_ids[decl_id]
 
-/repository/decls/proc/get_decl(var/decl/decl_type)
-	ASSERT(ispath(decl_type, /decl))
+/repository/decls/proc/get_decl(var/decl/decl_type, var/validate_decl_type = TRUE)
+
+	if(!ispath(decl_type, /decl))
+		if(validate_decl_type)
+			CRASH("Invalid decl_type supplied to get_decl(): [decl_type || "NULL"]")
+		return null
+
 	if(TYPE_IS_ABSTRACT(decl_type) && !(initial(decl_type.decl_flags) & DECL_FLAG_ALLOW_ABSTRACT_INIT))
 		return // We do not instantiate abstract decls.
 	. = fetched_decls[decl_type]
