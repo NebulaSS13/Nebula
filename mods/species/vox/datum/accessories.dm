@@ -42,6 +42,26 @@
 	bodytype_categories_allowed = list(BODYTYPE_HUMANOID)
 	uid = "acc_hair_vox_stubble_servitor"
 
+/decl/sprite_accessory/hair/vox/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/hair.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_hair_vox_longquills_clockvox"
+
+/decl/sprite_accessory/hair/vox/short/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/hair.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_hair_vox_shortquills_clockvox"
+
+/decl/sprite_accessory/hair/vox/mohawk/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/hair.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_hair_vox_mohawk_clockvox"
+
+/decl/sprite_accessory/hair/vox/stubble/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/hair.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_hair_vox_stubble_clockvox"
+
 /decl/sprite_accessory/marking/vox
 	name = "Vox Neck Markings"
 	icon_state = "neck_markings"
@@ -120,3 +140,38 @@
 	icon = 'mods/species/vox/icons/body/servitor/markings.dmi'
 	bodytype_categories_allowed = list(BODYTYPE_HUMANOID)
 	uid = "acc_markings_vox_crest_servitor"
+
+/decl/sprite_accessory/marking/vox/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/markings.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_markings_vox_neck_clockvox"
+
+/decl/sprite_accessory/marking/vox/claws/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/markings.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_markings_vox_claws_clockvox"
+
+/decl/sprite_accessory/marking/vox/beak/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/markings.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_markings_vox_beak_clockvox"
+
+/decl/sprite_accessory/marking/vox/scutes/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/markings.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_markings_vox_scutes_clockvox"
+
+/decl/sprite_accessory/marking/vox/arm_markings/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/markings.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_markings_vox_leftarm_clockvox"
+
+/decl/sprite_accessory/marking/vox/arm_markings/right/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/markings.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_markings_vox_rightarm_clockvox"
+
+/decl/sprite_accessory/marking/vox/crest/stanchion
+	icon = 'mods/species/vox/icons/body/stanchion/markings.dmi'
+	bodytype_categories_allowed = list(BODYTYPE_VOX_LARGE)
+	uid = "acc_markings_vox_crest_clockvox"

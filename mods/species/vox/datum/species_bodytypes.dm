@@ -80,6 +80,27 @@
 		BP_TAIL = /obj/item/organ/external/tail/vox/servitor
 	)
 
+/decl/bodytype/vox/stanchion
+	name = "stanchion voxform"
+	blood_overlays  = 'mods/species/vox/icons/body/stanchion/blood_overlays.dmi'
+	damage_overlays = 'mods/species/vox/icons/body/stanchion/damage_overlays.dmi'
+	icon_base       = 'mods/species/vox/icons/body/stanchion/body.dmi'
+	eye_icon        = 'mods/species/vox/icons/body/stanchion/eyes.dmi'
+	icon_template   = 'mods/species/vox/icons/body/stanchion/template.dmi'
+	base_markings = list(
+		/decl/sprite_accessory/marking/vox/beak/stanchion =   "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/scutes/stanchion = "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/crest/stanchion =  "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/claws/stanchion =  "#a0a654"
+	)
+	default_h_style = /decl/sprite_accessory/hair/vox/short/stanchion
+	override_limb_types = list(
+		BP_GROIN = /obj/item/organ/external/groin/vox,
+		BP_TAIL = /obj/item/organ/external/tail/vox/stanchion
+	)
+	bodytype_category = BODYTYPE_VOX_LARGE
+
+
 /decl/bodytype/vox/servitor/alchemist
 	name = "alchemist voxform"
 	icon_base = 'mods/species/vox/icons/body/servitor/body_alchemist.dmi'
@@ -97,3 +118,6 @@
 
 /obj/item/organ/external/tail/vox/servitor
 	tail_icon =  'mods/species/vox/icons/body/servitor/tail.dmi'
+
+/obj/item/organ/external/tail/vox/stanchion
+	tail_icon =  'mods/species/vox/icons/body/stanchion/tail.dmi'

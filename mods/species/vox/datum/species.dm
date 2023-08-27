@@ -92,10 +92,11 @@
 		/decl/pronouns/male,
 		/decl/pronouns/female
 	)
+	// Add when clothing is available: /decl/bodytype/vox/stanchion
 	available_bodytypes = list(
 		/decl/bodytype/vox,
 		/decl/bodytype/vox/servitor,
-		/decl/bodytype/vox/servitor/alchemist
+		/decl/bodytype/vox/servitor/alchemist,
 	)
 
 	appearance_descriptors = list(

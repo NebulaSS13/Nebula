@@ -1,7 +1,8 @@
-#define SPECIES_VOX   "Vox"
-#define BODYTYPE_VOX  "reptoavian body"
-#define BP_HINDTONGUE "hindtongue"
-#define BODY_FLAG_VOX BITFLAG(8)
+#define SPECIES_VOX        "Vox"
+#define BODYTYPE_VOX       "reptoavian body"
+#define BODYTYPE_VOX_LARGE "large reptoavian body"
+#define BP_HINDTONGUE      "hindtongue"
+#define BODY_FLAG_VOX      BITFLAG(8)
 
 /decl/modpack/vox
 	name = "Vox Content"
