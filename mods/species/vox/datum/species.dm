@@ -94,7 +94,8 @@
 	)
 	available_bodytypes = list(
 		/decl/bodytype/vox,
-		/decl/bodytype/vox/servitor
+		/decl/bodytype/vox/servitor,
+		/decl/bodytype/vox/servitor/alchemist
 	)
 
 	appearance_descriptors = list(

@@ -73,6 +73,7 @@
 	return ..() + {"
 		<option value='?_src_=vars;refreshoverlays=\ref[src]'>Refresh Visible Overlays</option>
 		<option value='?_src_=vars;setspecies=\ref[src]'>Set Species</option>
+		<option value='?_src_=vars;setbodytype=\ref[src]'>Set Bodytype</option>
 		<option value='?_src_=vars;addailment=\ref[src]'>Add Ailment</option>
 		<option value='?_src_=vars;remailment=\ref[src]'>Remove Ailment</option>
 		<option value='?_src_=vars;dressup=\ref[src]'>Dressup</option>

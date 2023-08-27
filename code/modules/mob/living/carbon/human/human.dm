@@ -574,6 +574,8 @@
 		force_update_limbs()
 		update_hair(update_icons = FALSE)
 		update_eyes()
+		return TRUE
+	return FALSE
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.
