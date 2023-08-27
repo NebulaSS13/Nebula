@@ -46,3 +46,8 @@
 	if(!isnull(bodytypes_denied) && (bodytypes_denied & bodytype_flags))
 		return FALSE
 	return TRUE
+
+/decl/sprite_accessory/validate()
+	. = ..()
+	if(!check_state_in_icon(icon_state, icon))
+		. += "missing icon state \"[icon_state]\" in [icon]"
