@@ -86,7 +86,7 @@
 /decl/sprite_accessory/hair/avian/alt/upright
 	name = "Avian Upright Alt"
 	icon_state = "avian_upright_alt"
-	uid = "acc_hair_avian_upright"
+	uid = "acc_hair_avian_upright_alt"
 
 /decl/sprite_accessory/hair/avian/alt/mane_beardless
 	name = "Avian Large Ears"
@@ -145,7 +145,7 @@
 	blend = ICON_ADD
 	uid = "acc_marking_avian_beak_alt"
 
-/decl/sprite_accessory/marking/avian/resomi/additive
+/decl/sprite_accessory/marking/avian/resomi
 	name = "Raptor Ears, Additive (Head)"
 	icon_state = "ears-add"
 	blend = ICON_ADD

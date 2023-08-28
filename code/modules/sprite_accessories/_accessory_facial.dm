@@ -11,6 +11,9 @@
 	icon = 'icons/mob/human_races/species/human/facial.dmi'
 	gender = MALE
 
+/decl/sprite_accessory/facial_hair/get_validatable_icon_state()
+	return "[icon_state]_s"
+
 /decl/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
 	icon_state = "bald"

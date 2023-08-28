@@ -10,6 +10,9 @@
 	abstract_type = /decl/sprite_accessory/hair
 	icon = 'icons/mob/human_races/species/human/hair.dmi'
 
+/decl/sprite_accessory/hair/get_validatable_icon_state()
+	return "[icon_state]_s"
+
 /decl/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = "bald"
