@@ -1,18 +1,16 @@
 /datum/preferences/proc/random_hair_style()
-	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
-	var/decl/bodytype/mob_bodytype = mob_species?.get_bodytype_by_name(bodytype) || mob_species?.default_bodytype || GET_DECL(global.using_map.default_bodytype)
-	var/list/valid_styles = mob_species?.get_hair_style_types(mob_bodytype)
+	var/decl/species/mob_species = get_species_decl()
+	var/list/valid_styles = mob_species?.get_hair_style_types(get_bodytype_decl())
 	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/hair/bald
 
 /datum/preferences/proc/random_facial_hair_style()
-	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
-	var/decl/bodytype/mob_bodytype = mob_species?.get_bodytype_by_name(bodytype) || mob_species?.default_bodytype || GET_DECL(global.using_map.default_bodytype)
-	var/list/valid_styles = mob_species?.get_facial_hair_style_types(mob_bodytype)
+	var/decl/species/mob_species = get_species_decl()
+	var/list/valid_styles = mob_species?.get_facial_hair_style_types(get_bodytype_decl())
 	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/facial_hair/shaved
 
 /datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
 
-	var/decl/species/current_species = get_species_by_key(species || global.using_map.default_species)
+	var/decl/species/current_species = get_species_decl()
 	var/decl/bodytype/current_bodytype = current_species.get_bodytype_by_name(bodytype) || current_species.default_bodytype
 	var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 	gender = pronouns.name

@@ -374,7 +374,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	new_character.lastarea = get_area(spawn_turf)
 
 	if(global.random_players)
-		var/decl/species/current_species = get_species_by_key(client.prefs.species || global.using_map.default_species)
+		var/decl/species/current_species = client.prefs.get_species_decl()
 		var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 		client.prefs.gender = pronouns.name
 		client.prefs.real_name = client.prefs.get_random_name()
