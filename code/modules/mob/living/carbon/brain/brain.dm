@@ -5,7 +5,6 @@
 	var/timeofhostdeath = 0
 	var/emp_damage = 0//Handles a type of MMI damage
 	var/alert = null
-	use_me = 0 //Can't use the me verb, it's a freaking immobile brain
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "brain1"
 	mob_sort_value = 7
@@ -25,8 +24,7 @@
 	return (issilicon(speaker) && istype(container, /obj/item/mmi)) || ishuman(speaker) || ..()
 
 /mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
-	if(istype(loc, /obj/item/mmi))
-		use_me = 1
+	return
 
 /mob/living/carbon/brain/isSynthetic()
 	return istype(loc, /obj/item/mmi/digital) || istype(loc, /obj/item/organ/internal/posibrain)
