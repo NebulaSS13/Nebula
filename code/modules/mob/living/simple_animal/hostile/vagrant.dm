@@ -17,14 +17,14 @@
 	max_gas = null
 	minbodytemp = 0
 	gene_damage = -1
+	pass_flags = PASS_FLAG_TABLE
+	bleed_colour = "#aad9de"
+	nutrition = 100
 
 	var/cloaked = 0
 	var/mob/living/carbon/human/gripping = null
 	var/blood_per_tick = 3
 	var/health_per_tick = 0.8
-	pass_flags = PASS_FLAG_TABLE
-
-	bleed_colour = "#aad9de"
 
 /mob/living/simple_animal/hostile/vagrant/Process_Spacemove()
 	return 1
@@ -39,7 +39,7 @@
 
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
 	. = ..()
-	if(. && !gibbed)
+	if(stat == DEAD && !QDELETED(src) && !gibbed)
 		gib()
 
 /mob/living/simple_animal/hostile/vagrant/Life()
@@ -66,11 +66,11 @@
 	if(stance == HOSTILE_STANCE_IDLE && !cloaked)
 		cloaked = 1
 		update_icon()
-	if(current_health >= get_max_health())
+
+	if(get_nutrition() > get_max_nutrition())
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		gib()
-		return
 
 /mob/living/simple_animal/hostile/vagrant/on_update_icon()
 	..()

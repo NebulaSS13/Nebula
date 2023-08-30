@@ -210,8 +210,9 @@ default behaviour is:
 	current_health = clamp(max_health-get_total_life_damage(), -(max_health), max_health)
 	if(stat != DEAD && should_be_dead())
 		death()
-		set_status(STAT_BLIND, 1)
-		set_status(STAT_SILENCE, 0)
+		if(!QDELETED(src)) // death() may delete or remove us
+			set_status(STAT_BLIND, 1)
+			set_status(STAT_SILENCE, 0)
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage
