@@ -84,7 +84,12 @@ var/global/list/possible_say_verbs = list(
 
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	status_flags |= NO_ANTAG
-	card = loc
+	if(!card && istype(loc, /obj/item/paicard))
+		card = loc
+	if(istype(card))
+		if(!card.radio)
+			card.radio = new /obj/item/radio(card)
+		silicon_radio = card.radio
 
 	//As a human made device, we'll understand sol common without the need of the translator
 	add_language(/decl/language/human/common, 1)
@@ -93,10 +98,7 @@ var/global/list/possible_say_verbs = list(
 
 	. = ..()
 
-	if(card)
-		if(!card.radio)
-			card.radio = new /obj/item/radio(card)
-		silicon_radio = card.radio
+	software = default_pai_software.Copy()
 
 /mob/living/silicon/pai/Destroy()
 	card = null
