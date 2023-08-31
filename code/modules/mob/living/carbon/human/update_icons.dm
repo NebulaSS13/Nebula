@@ -580,39 +580,6 @@ var/global/list/damage_icon_parts = list()
 	else
 		set_current_mob_overlay(HO_FIRE_LAYER, null, update_icons)
 
-/mob/living/carbon/human/update_surgery(var/update_icons=1)
-	SHOULD_CALL_PARENT(FALSE)
-	var/image/total = null
-	for(var/obj/item/organ/external/E in get_external_organs())
-		if(BP_IS_PROSTHETIC(E))
-			continue
-		var/how_open = round(E.how_open())
-		if(how_open <= 0)
-			continue
-		var/surgery_icon = E.species.get_surgery_overlay_icon(src)
-		if(!surgery_icon)
-			continue
-		if(!total)
-			total = new
-			total.appearance_flags = RESET_COLOR
-		var/base_state = "[E.icon_state][how_open]"
-		var/overlay_state = "[base_state]-flesh"
-		var/list/overlays_to_add
-		if(check_state_in_icon(overlay_state, surgery_icon))
-			var/image/flesh = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
-			flesh.color = E.species.get_flesh_colour(src)
-			LAZYADD(overlays_to_add, flesh)
-		overlay_state = "[base_state]-blood"
-		if(check_state_in_icon(overlay_state, surgery_icon))
-			var/image/blood = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
-			blood.color = E.species.get_blood_color(src)
-			LAZYADD(overlays_to_add, blood)
-		overlay_state = "[base_state]-bones"
-		if(check_state_in_icon(overlay_state, surgery_icon))
-			LAZYADD(overlays_to_add, image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER))
-		total.overlays |= overlays_to_add
-	set_current_mob_overlay(HO_SURGERY_LAYER, total, update_icons)
-
 //Ported from hud login stuff
 //
 /mob/living/carbon/hud_reset(full_reset = FALSE)
