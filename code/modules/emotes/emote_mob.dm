@@ -11,7 +11,7 @@
 	return ..() && !(HAS_STATUS(src, STAT_SILENCE) && emote_type == AUDIBLE_MESSAGE)
 
 /mob/living/carbon/brain/check_mob_can_emote(var/emote_type)
-	return ..() && istype(loc, /obj/item/mmi)
+	return ..() && (istype(container, /obj/item/mmi) || istype(loc, /obj/item/organ/internal/posibrain))
 
 /mob/proc/emote(var/act, var/m_type, var/message)
 	set waitfor = FALSE

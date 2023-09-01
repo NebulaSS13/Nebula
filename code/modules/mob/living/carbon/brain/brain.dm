@@ -21,13 +21,13 @@
 	. = ..()
 
 /mob/living/carbon/brain/say_understands(mob/speaker, decl/language/speaking)
-	return (issilicon(speaker) && istype(container, /obj/item/mmi)) || ishuman(speaker) || ..()
+	return (issilicon(speaker) && (istype(container, /obj/item/mmi) || istype(loc, /obj/item/organ/internal/posibrain))) || ishuman(speaker) || ..()
 
 /mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
 	return
 
 /mob/living/carbon/brain/isSynthetic()
-	return istype(loc, /obj/item/mmi/digital) || istype(loc, /obj/item/organ/internal/posibrain)
+	return istype(container, /obj/item/mmi/digital) || istype(loc, /obj/item/organ/internal/posibrain)
 
 /mob/living/carbon/brain/binarycheck()
 	return isSynthetic()
