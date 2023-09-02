@@ -91,6 +91,8 @@
 	. = ..()
 	if(istype(oldloc))
 		for(var/obj/structure/table/table in range(oldloc, 1))
+			if(QDELETED(table))
+				continue
 			table.update_connections(FALSE)
 			table.update_icon()
 
