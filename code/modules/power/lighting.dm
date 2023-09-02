@@ -95,7 +95,7 @@
 		if (WEST)
 			light_offset_x = WORLD_ICON_SIZE * -0.5
 
-	if(populate_parts)
+	if(populate_parts && ispath(light_type))
 		lightbulb = new light_type(src)
 		if(prob(lightbulb.broken_chance))
 			broken(1)
@@ -144,6 +144,7 @@
 		add_overlay(I)
 
 	if(on)
+		compile_overlays() // force a compile so that we update prior to the light being set
 
 		update_use_power(POWER_USE_ACTIVE)
 
@@ -578,7 +579,7 @@
 	I.color = null
 	add_overlay(I)
 
-/obj/item/light/Initialize(mapload, obj/machinery/light/fixture = null)
+/obj/item/light/Initialize(mapload)
 	. = ..()
 	update_icon()
 
