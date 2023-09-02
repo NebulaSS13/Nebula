@@ -11,6 +11,8 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = TABLE_LAYER
 	throwpass = TRUE
+	// Note that mob_offset also determines whether you can walk from one table to another without climbing.
+	// TODO: add 1px step-up?
 	mob_offset = 12
 	handle_generic_blending = TRUE
 	maxhealth = 10
@@ -29,6 +31,9 @@
 	// Convert if/when you can easily get stacks of these.
 	var/felted = 0
 	var/list/connections
+
+	/// Whether items can be placed on this table via clicking.
+	var/can_place_items = TRUE
 
 /obj/structure/table/clear_connections()
 	connections = null
@@ -200,7 +205,7 @@
 	. = ..()
 
 	// Finally we can put the object onto the table.
-	if(!. && !isrobot(user) && W.loc == user && user.try_unequip(W, src.loc))
+	if(!. && can_place_items && !isrobot(user) && W.loc == user && user.try_unequip(W, src.loc))
 		auto_align(W, click_params)
 		return TRUE
 
@@ -353,6 +358,8 @@
 		return FALSE
 	if(istype(additional_reinf_material) && (!istype(other.additional_reinf_material) || additional_reinf_material.type != other.additional_reinf_material.type))
 		return FALSE
+	if(mob_offset != other.mob_offset)
+		return FALSE
 	return TRUE
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
@@ -419,7 +426,7 @@
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 	var/obj/structure/table/T = (locate() in get_turf(mover))
-	return (T && !T.is_flipped)
+	return T && !T.is_flipped && (mob_offset <= T.mob_offset)
 
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
 /obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
