@@ -512,7 +512,7 @@
 			to_chat(user, "Need more welding fuel!")
 			return
 
-	else if(istype(W, /obj/item/stack/cable_coil) && (wiresexposed || istype(src,/mob/living/silicon/robot/drone)))
+	else if(istype(W, /obj/item/stack/cable_coil) && (wiresexposed || isdrone(src)))
 		if (!getFireLoss())
 			to_chat(user, "Nothing to fix here!")
 			return
@@ -679,7 +679,7 @@
 	. = ..()
 
 /mob/living/silicon/robot/default_interaction(mob/user)
-	if(user.a_intent != I_GRAB && opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
+	if(user.a_intent != I_GRAB && opened && !wiresexposed && (!issilicon(user)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
 			cell.update_icon()
@@ -867,7 +867,7 @@
 					else if(istype(A, /obj/item))
 						var/obj/item/cleaned_item = A
 						cleaned_item.clean_blood()
-					else if(istype(A, /mob/living/carbon/human))
+					else if(ishuman(A))
 						var/mob/living/carbon/human/cleaned_human = A
 						if(cleaned_human.lying)
 							var/obj/item/head = cleaned_human.get_equipped_item(slot_head_str)

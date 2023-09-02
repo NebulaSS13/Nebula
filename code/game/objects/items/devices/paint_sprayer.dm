@@ -125,7 +125,7 @@
 	else if (istype(A, /obj/machinery/door/airlock))
 		. = paint_airlock(A, user)
 
-	else if (istype(A, /mob/living/exosuit))
+	else if (isexosuit(A))
 		to_chat(user, SPAN_WARNING("You can't paint an active exosuit. Dismantle it first."))
 		. = FALSE
 

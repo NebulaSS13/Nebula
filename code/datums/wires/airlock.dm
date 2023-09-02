@@ -41,7 +41,7 @@ var/global/const/AIRLOCK_WIRE_SPEAKER = 4096
 
 /datum/wires/airlock/CanUse(var/mob/living/L)
 	var/obj/machinery/door/airlock/A = holder
-	if(!istype(L, /mob/living/silicon))
+	if(!issilicon(L))
 		if(A.isElectrified())
 			if(A.shock(L, 100))
 				return 0

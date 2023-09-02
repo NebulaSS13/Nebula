@@ -323,7 +323,7 @@ var/global/list/areas = list()
 var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
-	if(!istype(A,/mob/living))
+	if(!isliving(A))
 		return
 	var/mob/living/L = A
 	if(!L.lastarea)
@@ -388,7 +388,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 	if(mob.Check_Shoegrip())
 		return
 
-	if(istype(mob,/mob/living/carbon/human/))
+	if(ishuman(mob))
 		var/mob/living/carbon/human/H = mob
 		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_ADEPT)))
 			if(!MOVING_DELIBERATELY(H))

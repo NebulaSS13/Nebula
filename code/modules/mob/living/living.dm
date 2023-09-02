@@ -78,7 +78,7 @@ default behaviour is:
 			return
 
 		now_pushing = 1
-		if (istype(AM, /mob/living))
+		if (isliving(AM))
 			var/mob/living/tmob = AM
 
 			for(var/mob/living/M in range(tmob, 1))
@@ -140,7 +140,7 @@ default behaviour is:
 						return
 				AM.glide_size = glide_size
 				step(AM, t)
-				if (istype(AM, /mob/living))
+				if (isliving(AM))
 					var/mob/living/tmob = AM
 					if(istype(tmob.buckled, /obj/structure/bed))
 						if(!tmob.buckled.anchored)
@@ -226,7 +226,7 @@ default behaviour is:
 		btemperature -= change
 		if(actual < desired)
 			btemperature = desired
-//	if(istype(src, /mob/living/carbon/human))
+//	if(ishuman(src))
 //		log_debug("[src] ~ [src.bodytemperature] ~ [temperature]")
 
 	return btemperature
@@ -589,7 +589,7 @@ default behaviour is:
 
 		// Update whether or not this mob needs to pass emotes to contents.
 		for(var/atom/A in M.contents)
-			if(istype(A,/mob) || istype(A,/obj/item/holder))
+			if(ismob(A) || istype(A,/obj/item/holder))
 				return
 		M.status_flags &= ~PASSEMOTES
 	else if(istype(H.loc,/obj/item/clothing/accessory/storage/holster) || istype(H.loc,/obj/item/storage/belt/holster))
@@ -968,7 +968,7 @@ default behaviour is:
 				A.do_climb_out(user, T)
 				return TRUE
 
-		if(istype(over, /mob/living/exosuit))
+		if(isexosuit(over))
 			var/mob/living/exosuit/exosuit = over
 			if(exosuit.body)
 				if(user.mob_size >= exosuit.body.min_pilot_size && user.mob_size <= exosuit.body.max_pilot_size)

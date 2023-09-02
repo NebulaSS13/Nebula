@@ -175,7 +175,7 @@
 		to_chat(usr, "<span class='danger'>Access denied.</span>")
 		return 0
 
-	if(!holder.check_power_cost(usr, charge, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) ) )
+	if(!holder.check_power_cost(usr, charge, 0, src, (issilicon(usr) ? 1 : 0) ) )
 		return 0
 
 	return 1

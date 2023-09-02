@@ -8,7 +8,7 @@
 	var/grant_cores = 3
 
 /obj/item/slime_steroid/attack(mob/living/slime/M, mob/user)
-	if(!istype(M, /mob/living/slime))
+	if(!isslime(M))
 		return ..()
 	if(M.is_adult)
 		to_chat(user, SPAN_WARNING("Only baby slimes can use \the [src]!"))

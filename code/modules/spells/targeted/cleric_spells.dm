@@ -235,7 +235,7 @@
 	to_chat(holder,"<span class='notice'>\The [src] refreshes as it seems it could not bring back the souls of those you healed.</span>")
 
 /spell/targeted/revoke/proc/revoke_spells()
-	if(!istype(holder, /mob/living))
+	if(!isliving(holder))
 		return
 	var/mob/living/M = holder
 	if(M.mind)

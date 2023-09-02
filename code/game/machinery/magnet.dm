@@ -169,7 +169,7 @@ var/global/list/magnetic_modules = list()
 					step_towards(M, center)
 
 			for(var/mob/living/silicon/S in orange(magnetic_field, center))
-				if(istype(S, /mob/living/silicon/ai)) continue
+				if(isAI(S)) continue
 				step_towards(S, center)
 
 		use_power_oneoff(electricity_level * 5)

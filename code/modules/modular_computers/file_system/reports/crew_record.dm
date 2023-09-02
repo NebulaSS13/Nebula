@@ -141,12 +141,12 @@ var/global/arrest_security_status =  "Arrest"
 	set_status(global.default_physical_status)
 	var/silicon_type = "Synthetic Lifeform"
 	var/robojob = GetAssignment(S)
-	if(istype(S, /mob/living/silicon/robot))
+	if(isrobot(S))
 		var/mob/living/silicon/robot/R = S
 		silicon_type = R.braintype
 		if(R.module)
 			robojob = "[R.module.display_name] [silicon_type]"
-	if(istype(S, /mob/living/silicon/ai))
+	if(isAI(S))
 		silicon_type = "AI"
 		robojob = "Artificial Intelligence"
 	set_job(S ? robojob : "Unset")

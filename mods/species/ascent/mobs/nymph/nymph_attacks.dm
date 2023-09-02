@@ -6,7 +6,7 @@
 			collect(A)
 			return
 
-	if(istype(A, /mob))
+	if(ismob(A))
 		visible_message(SPAN_NOTICE("\The [src] butts its head into \the [A]."))
 		return
 

@@ -161,10 +161,10 @@
 
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M)
-	if( istype(M, /mob/living/carbon/alien ))
+	if(isalien(M))
 		var/obj/effect/decal/cleanable/blood/xeno/this = new /obj/effect/decal/cleanable/blood/xeno(src)
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
-	else if( istype(M, /mob/living/silicon/robot ))
+	else if(isrobot(M))
 		new /obj/effect/decal/cleanable/blood/oil(src)
 
 /turf/simulated/attackby(var/obj/item/thing, var/mob/user)

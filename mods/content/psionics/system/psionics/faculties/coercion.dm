@@ -242,7 +242,7 @@
 		if(coercion_rank >= PSI_RANK_GRANDMASTER)
 			ADJ_STATUS(target, STAT_PARA, -1)
 		target.set_status(STAT_DROWSY, 0)
-		if(istype(target, /mob/living/carbon))
+		if(iscarbon(target))
 			var/mob/living/carbon/M = target
 			M.adjust_hallucination(-30)
 		return TRUE

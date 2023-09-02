@@ -7,7 +7,7 @@
 	origin_type = pick(EFFECT_ELECTRO, EFFECT_PARTICLE)
 
 /datum/artifact_effect/robohurt/DoEffectTouch(var/mob/user)
-	if(istype(user, /mob/living/silicon/robot))
+	if(isrobot(user))
 		var/mob/living/silicon/robot/R = user
 		to_chat(R, "<span class='danger'>Your systems report severe damage has been inflicted!</span>")
 		R.take_overall_damage(rand(10,50), rand(10,50))

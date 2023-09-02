@@ -164,7 +164,7 @@
 /obj/vehicle/train/cargo/engine/RunOver(var/mob/living/carbon/human/H)
 	..()
 
-	if(is_train_head() && istype(load, /mob/living/carbon/human))
+	if(is_train_head() && ishuman(load))
 		var/mob/living/carbon/human/D = load
 		to_chat(D, "<span class='danger'>You ran over [H]!</span>")
 		visible_message("<span class='danger'>\The [src] ran over [H]!</span>")
@@ -196,7 +196,7 @@
 	if(distance > 1)
 		return
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!ishuman(usr))
 		return
 
 	to_chat(user, "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition.")
@@ -207,7 +207,7 @@
 	set category = "Object"
 	set src in view(0)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!ishuman(usr))
 		return
 
 	if(on)
@@ -228,7 +228,7 @@
 	set category = "Object"
 	set src in view(0)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!ishuman(usr))
 		return
 
 	if(!on)
@@ -244,7 +244,7 @@
 	set category = "Object"
 	set src in view(0)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!ishuman(usr))
 		return
 
 	if(!key || (load && load != usr))
@@ -264,7 +264,7 @@
 /obj/vehicle/train/cargo/trolley/load(var/atom/movable/C)
 	if(ismob(C) && !passenger_allowed)
 		return 0
-	if(!istype(C,/obj/machinery) && !istype(C,/obj/structure/closet) && !istype(C,/obj/structure/largecrate) && !istype(C,/obj/structure/reagent_dispensers) && !istype(C,/obj/structure/ore_box) && !istype(C, /mob/living/carbon/human))
+	if(!istype(C,/obj/machinery) && !istype(C,/obj/structure/closet) && !istype(C,/obj/structure/largecrate) && !istype(C,/obj/structure/reagent_dispensers) && !istype(C,/obj/structure/ore_box) && !ishuman(C))
 		return 0
 
 	//if there are any items you don't want to be able to interact with, add them to this check
@@ -278,7 +278,7 @@
 		return 1
 
 /obj/vehicle/train/cargo/engine/load(var/atom/movable/C)
-	if(!istype(C, /mob/living/carbon/human))
+	if(!ishuman(C))
 		return 0
 
 	return ..()

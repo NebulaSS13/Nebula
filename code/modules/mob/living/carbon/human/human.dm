@@ -248,10 +248,10 @@
 
 					spawn()
 						BITSET(hud_updateflag, WANTED_HUD)
-						if(istype(user,/mob/living/carbon/human))
+						if(ishuman(user))
 							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
-						if(istype(user,/mob/living/silicon/robot))
+						if(isrobot(user))
 							var/mob/living/silicon/robot/U = user
 							U.handle_regular_hud_updates()
 
@@ -306,10 +306,10 @@
 					modified = 1
 
 					spawn()
-						if(istype(user,/mob/living/carbon/human))
+						if(ishuman(user))
 							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
-						if(istype(user,/mob/living/silicon/robot))
+						if(isrobot(user))
 							var/mob/living/silicon/robot/U = user
 							U.handle_regular_hud_updates()
 

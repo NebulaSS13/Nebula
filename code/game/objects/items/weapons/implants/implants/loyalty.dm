@@ -17,7 +17,7 @@
 	<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
 
 /obj/item/implant/loyalty/implanted(mob/M)
-	if(!istype(M, /mob/living/carbon/human))
+	if(!ishuman(M))
 		return FALSE
 	var/mob/living/carbon/human/H = M
 	var/decl/special_role/antag_data = H.mind && ispath(H.mind.assigned_special_role, /decl/special_role) && GET_DECL(H.mind.assigned_special_role)

@@ -61,7 +61,7 @@
 		return null
 
 	var/turf/location = loc
-	if(istype(location, /mob))
+	if(ismob(location))
 		var/mob/M = location
 		if(M.get_active_hand() == src)
 			location = M.loc

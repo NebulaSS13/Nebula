@@ -61,9 +61,9 @@
 /proc/is_robot_module(var/obj/item/thing)
 	if(!thing)
 		return FALSE
-	if(istype(thing.loc, /mob/living/exosuit))
+	if(isexosuit(thing.loc))
 		return FALSE
-	if(!istype(thing.loc, /mob/living/silicon/robot))
+	if(!isrobot(thing.loc))
 		return FALSE
 	var/mob/living/silicon/robot/R = thing.loc
 	return (thing in R.module.equipment)
@@ -242,7 +242,7 @@
 			if((M.stat != DEAD) || (!M.client))
 				continue
 			//They need a brain!
-			if(istype(M, /mob/living/carbon/human))
+			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				if(H.should_have_organ(BP_BRAIN) && !H.has_brain())
 					continue

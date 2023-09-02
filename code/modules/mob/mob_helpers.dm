@@ -1,5 +1,5 @@
 /proc/issmall(A)
-	if(A && istype(A, /mob/living))
+	if(isliving(A))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_SIZE_SMALL
 	return 0
@@ -41,7 +41,7 @@
  * Checks if the target has a grab from the user
  */
 /mob/proc/has_danger_grab(mob/user)
-	if (user == src || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
+	if (user == src || isrobot(user) || isbot(user))
 		return TRUE
 
 	for (var/obj/item/grab/G in grabbed_by)
@@ -58,12 +58,8 @@
 /proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 
-/proc/iscuffed(A)
-	if(istype(A, /mob/living/carbon))
-		var/mob/living/carbon/C = A
-		if(C.get_equipped_item(slot_handcuffed_str))
-			return 1
-	return 0
+/proc/iscuffed(var/mob/mob)
+	return ismob(mob) && !!mob.get_equipped_item(slot_handcuffed_str)
 
 /proc/hassensorlevel(A, var/level)
 	return getsensorlevel(A) >= level
@@ -426,7 +422,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")
 	var/client/C
 	//Accept any type, sort what we want here
-	if(istype(O, /mob))
+	if(ismob(O))
 		var/mob/M = O
 		if(M.client)
 			C = M.client

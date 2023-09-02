@@ -168,7 +168,7 @@
 	. = ..()
 
 /obj/item/gun/projectile/automatic/machine/special_check(mob/user)
-	if(!istype(user, /mob/living))
+	if(!isliving(user))
 		return FALSE
 	if(!user.check_dexterity(DEXTERITY_WEAPONS))
 		return FALSE

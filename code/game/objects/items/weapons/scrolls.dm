@@ -31,9 +31,9 @@
 /obj/item/teleportation_scroll/Topic(href, href_list)
 	if(..())
 		return 1
-	var/mob/living/carbon/human/H = usr
-	if (!( istype(H, /mob/living/carbon/human)))
+	if (!ishuman(usr))
 		return 1
+	var/mob/living/carbon/human/H = usr
 	if ((usr == src.loc || (in_range(src, usr) && isturf(src.loc))))
 		usr.set_machine(src)
 		if (href_list["spell_teleport"])

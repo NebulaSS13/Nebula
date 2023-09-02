@@ -28,7 +28,7 @@
 
 /obj/item/projectile/blood_shard/on_hit(var/atom/movable/target, var/blocked = 0)
 	if(..())
-		if(istype(target, /mob/living/carbon/human))
+		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			H.vessel.remove_any(30)
 			H.visible_message("<span class='danger'>Tiny red shards burst from \the [H]'s skin!</span>")

@@ -55,7 +55,7 @@
 		var/decl/special_role/borer/borers = GET_DECL(/decl/special_role/borer)
 		borers.add_antagonist_mind(host.mind, 1, borers.faction_name, borers.faction_welcome)
 
-	if(istype(host, /mob/living/carbon/human))
+	if(ishuman(host))
 		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		if(!I) // No brain organ, so the borer moves in and replaces it permanently.
 			replace_brain()

@@ -81,7 +81,7 @@
 		add_overlay(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
 /obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
-	if(!istype(M, /mob))
+	if(!ismob(M))
 		return
 
 	if(lit)

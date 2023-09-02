@@ -295,7 +295,7 @@ Helpers
 				SScustomitems.equip_custom_items(player)
 	if(captainless)
 		for(var/mob/M in global.player_list)
-			if(!istype(M,/mob/new_player))
+			if(!isnewplayer(M))
 				to_chat(M, "Captainship not forced on anyone.")
 
 /datum/controller/subsystem/ticker/proc/attempt_late_antag_spawn(var/list/antag_choices)
@@ -401,7 +401,7 @@ Helpers
 
 	for (var/mob/living/silicon/robot/robo in SSmobs.mob_list)
 
-		if(istype(robo,/mob/living/silicon/robot/drone))
+		if(isdrone(robo))
 			dronecount++
 			continue
 

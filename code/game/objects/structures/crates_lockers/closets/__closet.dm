@@ -323,7 +323,7 @@ var/global/list/closets = list()
 		return TRUE
 
 /obj/structure/closet/attack_ai(mob/living/silicon/ai/user)
-	if(istype(user, /mob/living/silicon/robot)) // Robots can open/close it, but not the AI.
+	if(isrobot(user)) // Robots can open/close it, but not the AI.
 		return attack_hand_with_interaction_checks(user)
 	return ..()
 

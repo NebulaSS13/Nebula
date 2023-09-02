@@ -24,7 +24,7 @@
 	return
 
 /obj/structure/deity/trap/proc/trigger(var/atom/entered, var/atom/movable/enterer)
-	if(triggered > world.time || !istype(enterer, /mob/living))
+	if(triggered > world.time || !isliving(enterer))
 		return
 
 	triggered = world.time + 30 SECONDS

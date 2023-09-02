@@ -268,7 +268,7 @@
 			var/obj/item/storage/bag = loc
 			bag.remove_from_storage(src)
 			dropInto(get_turf(bag))
-		else if(istype(loc, /mob))
+		else if(ismob(loc))
 			var/mob/M = loc
 			if(!M.try_unequip(src, get_turf(src)))
 				return ..()

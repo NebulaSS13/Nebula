@@ -17,7 +17,7 @@
 			to_chat(src, SPAN_WARNING("You cannot speak in IC (muted)."))
 			return
 
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if(isborer(src.loc))
 
 		message = sanitize(message)
 		if (!message)
@@ -31,14 +31,14 @@
 		to_chat(B.host, "The captive mind of [src] whispers, \"[message]\"")
 
 		for (var/mob/M in global.player_list)
-			if (istype(M, /mob/new_player))
+			if (isnewplayer(M))
 				continue
 			else if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH)
 				to_chat(M, "The captive mind of [src] whispers, \"[message]\"")
 
 /mob/living/captive_brain/process_resist()
 	//Resisting control by an alien mind.
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if(isborer(src.loc))
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 

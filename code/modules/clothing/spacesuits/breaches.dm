@@ -192,7 +192,7 @@
 		if(!repair_power)
 			return
 
-		if(istype(loc,/mob/living/carbon/human))
+		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
 			if(H.get_equipped_item(slot_wear_suit_str) == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
@@ -210,7 +210,7 @@
 
 	else if(IS_WELDER(W))
 
-		if(istype(loc,/mob/living/carbon/human))
+		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
 			if(H.get_equipped_item(slot_wear_suit_str) == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
@@ -249,7 +249,7 @@
 				to_chat(user, SPAN_WARNING("There's not enough [D.plural_name] in your [src] to seal \the [target_breach.descriptor] on \the [src]! You need at least [amount_needed] [D.plural_name]."))
 				return
 
-			if(do_after(user, H.get_equipped_item(slot_wear_suit_str) == src? 60 : 30, istype(loc,/mob/living)? loc : null)) //Sealing a breach on your own suit is awkward and time consuming
+			if(do_after(user, H.get_equipped_item(slot_wear_suit_str) == src? 60 : 30, isliving(loc)? loc : null)) //Sealing a breach on your own suit is awkward and time consuming
 				D.use(amount_needed)
 				playsound(src, 'sound/effects/tape.ogg',25)
 				user.visible_message(

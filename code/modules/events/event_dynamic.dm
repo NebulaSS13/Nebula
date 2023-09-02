@@ -96,7 +96,7 @@ var/global/list/event_last_fired = list()
 
 		.["Any"]++
 
-		if(istype(M, /mob/living/silicon/robot))
+		if(isrobot(M))
 			var/mob/living/silicon/robot/R = M
 			if(R.module?.associated_department)
 				var/decl/department/dept = GET_DECL(R.module.associated_department)

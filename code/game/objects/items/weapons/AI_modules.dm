@@ -39,7 +39,7 @@ AI MODULES
 	if(comp.current.stat == DEAD)
 		to_chat(user, "Upload failed. No signal is being detected from the intelligence.")
 		return
-	if(istype(comp.current, /mob/living/silicon/ai))
+	if(isAI(comp.current))
 		var/mob/living/silicon/ai/ai = comp.current
 		if(ai.control_disabled)
 			to_chat(user, "Upload failed. No signal is being detected from the intelligence.")

@@ -486,7 +486,7 @@ var/global/list/all_apcs = list()
 
 /obj/machinery/power/apc/physical_attack_hand(mob/user)
 	//Human mob special interaction goes here.
-	if(istype(user,/mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 
 		if(H.species.can_shred(H))
@@ -532,7 +532,7 @@ var/global/list/all_apcs = list()
 		"totalCharging" = round(lastused_charging),
 		"coverLocked" = coverlocked,
 		"failTime" = failure_timer * 2,
-		"siliconUser" = istype(user, /mob/living/silicon),
+		"siliconUser" = issilicon(user),
 		"remote_control" = remote_control,
 		"powerChannels" = list(
 			list(
@@ -623,7 +623,7 @@ var/global/list/all_apcs = list()
 	if(user.lying)
 		to_chat(user, "<span class='warning'>You must stand to use [src]!</span>")
 		return STATUS_CLOSE
-	if(istype(user, /mob/living/silicon))
+	if(issilicon(user))
 		var/permit = 0 // Malfunction variable. If AI hacks APC it can control it even without AI control wire.
 		var/mob/living/silicon/ai/AI = user
 		var/mob/living/silicon/robot/robot = user
@@ -699,7 +699,7 @@ var/global/list/all_apcs = list()
 		return TOPIC_REFRESH
 
 	if(href_list["overload"])
-		if(istype(user, /mob/living/silicon))
+		if(issilicon(user))
 			overload_lighting()
 		return TOPIC_REFRESH
 

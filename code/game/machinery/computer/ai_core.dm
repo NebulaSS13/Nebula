@@ -215,7 +215,7 @@ var/global/list/deactivated_ai_cores = list()
 
 /obj/structure/aicore/deactivated/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/aicard/card, var/mob/user)
 
-	if(!istype(transfer) || locate(/mob/living/silicon/ai) in src)
+	if(!isAI(transfer) || locate(/mob/living/silicon/ai) in src)
 		return
 
 	transfer.aiRestorePowerRoutine = 0

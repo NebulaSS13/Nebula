@@ -6,7 +6,7 @@
 
 /datum/artifact_effect/cellcharge/DoEffectTouch(var/mob/user)
 	if(user)
-		if(istype(user, /mob/living/silicon/robot))
+		if(isrobot(user))
 			var/mob/living/silicon/robot/R = user
 			var/obj/item/cell/C = R.get_cell()
 			if(C)

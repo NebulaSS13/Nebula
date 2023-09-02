@@ -15,7 +15,7 @@
 	)
 
 /obj/item/magic_rock/attack_self(mob/user)
-	if(!istype(user,/mob/living/carbon/human))
+	if(!ishuman(user))
 		to_chat(user, "\The [src] can do nothing for such a simple being.")
 		return
 	var/mob/living/carbon/human/H = user
@@ -80,7 +80,7 @@
 	eyeobj.release(src)
 
 /mob/observer/eye/freelook/wizard_eye/Destroy()
-	if(istype(eyeobj.owner, /mob/living))
+	if(isliving(eyeobj.owner))
 		var/mob/living/L = eyeobj.owner
 		L.release_eye()
 	qdel(eyeobj)

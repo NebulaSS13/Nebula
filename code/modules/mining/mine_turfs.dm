@@ -136,7 +136,7 @@
 //#TODO: This should probably be generalised?
 /turf/simulated/floor/asteroid/Entered(atom/movable/M)
 	..()
-	if(istype(M,/mob/living/silicon/robot))
+	if(isrobot(M))
 		var/mob/living/silicon/robot/R = M
 		if(R.module)
 			if(istype(R.module_state_1,/obj/item/storage/ore))

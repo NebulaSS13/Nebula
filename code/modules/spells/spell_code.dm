@@ -176,7 +176,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 	for(var/atom/target in targets)
 		if(overlay)
 			var/location
-			if(istype(target,/mob/living))
+			if(isliving(target))
 				location = target.loc
 			else if(isturf(target))
 				location = target
@@ -193,7 +193,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		playsound(get_turf(holder),cast_sound,50,1)
 	for(var/atom/target in targets)
 		var/location = get_turf(target)
-		if(istype(target,/mob/living) && message)
+		if(isliving(target) && message)
 			to_chat(target, text("[message]"))
 		if(sparks_spread)
 			spark_at(location, amount = sparks_amt)
@@ -238,7 +238,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		return 0
 
 	if(holder == user)
-		if(istype(user, /mob/living/simple_animal))
+		if(isanimal(user))
 			var/mob/living/simple_animal/SA = user
 			if(SA.purge)
 				to_chat(SA, "<span class='warning'>The null sceptre's power interferes with your own!</span>")

@@ -22,7 +22,7 @@
 	if(!..())
 		return
 
-	if(istype(traitor.current, /mob/living/silicon))
+	if(issilicon(traitor.current))
 		var/datum/objective/assassinate/kill_objective = new
 		kill_objective.owner = traitor
 		kill_objective.find_target()
@@ -70,9 +70,9 @@
 /decl/special_role/traitor/equip(var/mob/living/carbon/human/player)
 
 	. = ..()
-	if(istype(player, /mob/living/silicon)) // this needs to be here because ..() returns false if the mob isn't human
+	if(issilicon(player)) // this needs to be here because ..() returns false if the mob isn't human
 		add_law_zero(player)
-		if(istype(player, /mob/living/silicon/robot))
+		if(isrobot(player))
 			var/mob/living/silicon/robot/R = player
 			R.SetLockdown(0)
 			R.emagged = 1 // Provides a traitor robot with its module's emag item

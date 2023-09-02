@@ -115,7 +115,7 @@
 		else
 			TB.names.Add(name)
 			TB.namecounts[name] = 1
-		if(istype(M, /mob/living/carbon/human))
+		if(ishuman(M))
 			TB.humans[name] = M
 		else
 			TB.others[name] = M

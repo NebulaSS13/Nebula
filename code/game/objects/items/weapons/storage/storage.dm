@@ -174,7 +174,7 @@
 /obj/item/storage/proc/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
 	if(!istype(W))
 		return 0
-	if(istype(W.loc, /mob))
+	if(ismob(W.loc))
 		var/mob/M = W.loc
 		if(!M.try_unequip(W))
 			return
@@ -381,7 +381,7 @@
 		update_icon()
 
 /obj/item/storage/emp_act(severity)
-	if(!istype(src.loc, /mob/living))
+	if(!isliving(src.loc))
 		for(var/obj/O in contents)
 			O.emp_act(severity)
 	..()

@@ -68,7 +68,7 @@
 #undef TRADER_HAIL_START
 
 /datum/trader/ship/vox/hail(var/mob/user)
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.species)
 			switch(H.species.name)

@@ -28,12 +28,12 @@
 		to_chat(user, SPAN_WARNING("\The [src] cannot be applied to [M]!"))
 		return 1
 
-	if ( ! (istype(user, /mob/living/carbon/human) || \
-			istype(user, /mob/living/silicon)) )
+	if ( ! (ishuman(user) || \
+			issilicon(user)) )
 		to_chat(user, SPAN_WARNING("You don't have the dexterity to do this!"))
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.get_target_zone())
 
@@ -81,7 +81,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.get_target_zone()) //nullchecked by ..()
 
@@ -138,7 +138,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.get_target_zone()) //nullchecked by ..()
 
@@ -173,7 +173,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.get_target_zone()) //nullchecked by ..()
 		if(affecting.is_bandaged() && affecting.is_disinfected())
@@ -229,7 +229,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.get_target_zone()) //nullchecked by ..()
 
@@ -270,7 +270,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, user.get_target_zone()) //nullchecked by ..()
 		var/limb = affecting.name

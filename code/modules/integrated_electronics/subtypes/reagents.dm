@@ -214,7 +214,7 @@
 
 		var/tramount = abs(transfer_amount)
 
-		if(istype(AM, /mob/living/carbon))
+		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
 			var/injection_status = C.can_inject(null, BP_CHEST)
 			var/injection_delay = 3 SECONDS
@@ -481,7 +481,7 @@
 	if(!source.reagents || !target.reagents)
 		return
 
-	if(!ATOM_IS_OPEN_CONTAINER(source) || istype(source, /mob))
+	if(!ATOM_IS_OPEN_CONTAINER(source) || ismob(source))
 		return
 
 	if(target.reagents.maximum_volume - target.reagents.total_volume <= 0)

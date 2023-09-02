@@ -382,7 +382,7 @@
 	return FALSE
 
 /mob/proc/can_be_buckled(var/mob/user)
-	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)
+	. = user.Adjacent(src) && !ispAI(user)
 
 /// If this proc returns false, reconsider_client_screen_presence will set the item's screen_loc to null.
 /mob/proc/item_should_have_screen_presence(obj/item/item, slot)

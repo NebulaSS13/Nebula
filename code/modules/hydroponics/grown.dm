@@ -133,7 +133,7 @@
 			if(M.buckled)
 				return
 
-			if(istype(M,/mob/living/carbon/human))
+			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
 				if(shoes && shoes.item_flags & ITEM_FLAG_NOSLIP)

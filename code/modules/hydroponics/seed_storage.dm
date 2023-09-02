@@ -342,7 +342,7 @@
 
 /obj/machinery/seed_storage/proc/add(var/obj/item/seeds/O, bypass_removal = 0)
 	if(!bypass_removal)
-		if (istype(O.loc, /mob))
+		if (ismob(O.loc))
 			var/mob/user = O.loc
 			if(!user.try_unequip(O, src))
 				return
