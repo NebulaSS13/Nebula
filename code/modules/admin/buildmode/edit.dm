@@ -62,7 +62,8 @@
 		return
 	ClearValue()
 	value_to_set = new_value
-	events_repository.register(/decl/observ/destroyed, value_to_set, src, /datum/build_mode/edit/proc/ClearValue)
+	if(istype(value_to_set, /datum))
+		events_repository.register(/decl/observ/destroyed, value_to_set, src, /datum/build_mode/edit/proc/ClearValue)
 
 /datum/build_mode/edit/proc/ClearValue(var/feedback)
 	if(!istype(value_to_set, /datum))
