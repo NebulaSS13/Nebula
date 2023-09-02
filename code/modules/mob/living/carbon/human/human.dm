@@ -489,7 +489,7 @@
 	for(var/obj/item/organ/external/grabber in get_hands_organs())
 		bloodied |= grabber.add_blood(M, amount, blood_data)
 	if(bloodied)
-		update_inv_gloves()	//handles bloody hands overlays and updating
+		update_equipment_overlay(slot_gloves_str)	//handles bloody hands overlays and updating
 		verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
@@ -506,8 +506,8 @@
 		//TODO check that organ is not covered
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
 			organ.clean()
-	update_inv_gloves(1)
-	update_inv_shoes(1)
+	update_equipment_overlay(slot_gloves_str, FALSE)
+	update_equipment_overlay(slot_shoes_str)
 	return TRUE
 
 /mob/living/carbon/human/get_visible_implants(var/class = 0)

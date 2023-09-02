@@ -161,7 +161,7 @@
 		if(has_safety && M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
 			add_overlay(image('icons/obj/guns/gui.dmi',"safety[safety()]"))
 		if(src in M.get_held_items())
-			M.update_inv_hands()
+			M.update_inhand_overlays()
 	if(safety_icon)
 		add_overlay(get_safety_indicator())
 

@@ -1,52 +1,50 @@
-//Most of these are defined at this level to reduce on checks elsewhere in the code.
-//Having them here also makes for a nice reference list of the various overlay-updating procs available
+/mob/living/proc/refresh_visible_overlays()
+	SHOULD_CALL_PARENT(TRUE)
+	if(HasMovementHandler(/datum/movement_handler/mob/transformation) || QDELETED(src))
+		return FALSE
+	for(var/slot in get_inventory_slots())
+		update_equipment_overlay(slot, FALSE)
+	return TRUE
 
-/mob/proc/update_inv_handcuffed()
+/mob/proc/update_equipment_overlay(var/slot, var/redraw_mob = TRUE)
+	var/datum/inventory_slot/inv_slot = slot && get_inventory_slot_datum(slot)
+	if(inv_slot)
+		inv_slot.update_mob_equipment_overlay(src, null, redraw_mob)
+
+/mob/proc/update_inhand_overlays(var/redraw_mob = TRUE)
+	var/list/hand_overlays = null
+	for(var/hand_slot in get_held_item_slots())
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		var/obj/item/held = inv_slot?.get_equipped_item()
+		var/image/standing = held?.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot)
+		if(standing)
+			standing.appearance_flags |= (RESET_ALPHA|RESET_COLOR)
+			LAZYADD(hand_overlays, standing)
+	set_current_mob_overlay(HO_INHAND_LAYER, hand_overlays, redraw_mob)
+
+/mob/proc/get_current_mob_overlay(var/overlay_layer)
 	return
 
-/mob/proc/update_inv_back()
+/mob/proc/get_all_current_mob_overlays()
 	return
 
-/mob/proc/update_inv_hands()
+/mob/proc/set_current_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(redraw_mob)
+		queue_icon_update()
+
+/mob/proc/get_current_mob_underlay(var/underlay_layer)
 	return
 
-/mob/proc/update_inv_wear_mask()
+/mob/proc/get_all_current_mob_underlays()
 	return
 
-/mob/proc/update_inv_wear_suit()
-	return
-
-/mob/proc/update_inv_w_uniform()
-	return
-
-/mob/proc/update_inv_belt()
-	return
-
-/mob/proc/update_inv_head()
-	return
-
-/mob/proc/update_inv_gloves()
-	return
+/mob/proc/set_current_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(redraw_mob)
+		queue_icon_update()
 
 /mob/proc/update_mutations()
-	return
-
-/mob/proc/update_inv_wear_id()
-	return
-
-/mob/proc/update_inv_shoes()
-	return
-
-/mob/proc/update_inv_glasses()
-	return
-
-/mob/proc/update_inv_s_store()
-	return
-
-/mob/proc/update_inv_pockets()
-	return
-
-/mob/proc/update_inv_ears()
 	return
 
 /mob/proc/update_targeted()

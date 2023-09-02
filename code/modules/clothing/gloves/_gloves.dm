@@ -14,10 +14,9 @@
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 	var/obj/item/clothing/ring/covering_ring
 
-/obj/item/clothing/gloves/update_clothing_icon()
-	if(ismob(loc))
-		var/mob/M = loc
-		M.update_inv_gloves()
+/obj/item/clothing/gloves/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_gloves_str)
 
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return

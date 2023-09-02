@@ -102,9 +102,9 @@
 	tint = TINT_NONE
 
 /obj/item/clothing/glasses/update_clothing_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_glasses()
+	. = ..()
+	if(.)
+		var/mob/M = loc
 		M.update_action_buttons()
 
 /obj/item/clothing/glasses/proc/toggle()

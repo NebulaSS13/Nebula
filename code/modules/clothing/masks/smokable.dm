@@ -104,8 +104,8 @@
 
 	if(ismob(loc))
 		var/mob/living/M = loc
-		M.update_inv_wear_mask(0)
-		M.update_inv_hands()
+		M.update_equipment_overlay(slot_wear_mask_str, FALSE)
+		M.update_inhand_overlays()
 
 /obj/item/clothing/mask/smokable/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && lit && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
@@ -467,8 +467,8 @@
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/attackby(var/obj/item/W, var/mob/user)
 	..()
-	user.update_inv_wear_mask(0)
-	user.update_inv_hands()
+	user.update_equipment_overlay(slot_wear_mask_str, FALSE)
+	user.update_inhand_overlays()
 
 //Bizarre
 /obj/item/clothing/mask/smokable/cigarette/rolled/sausage
@@ -523,8 +523,8 @@
 		START_PROCESSING(SSobj, src)
 		if(ismob(loc))
 			var/mob/living/M = loc
-			M.update_inv_wear_mask(0)
-			M.update_inv_hands()
+			M.update_equipment_overlay(slot_wear_mask_str, FALSE)
+			M.update_inhand_overlays()
 		set_scent_by_reagents(src)
 		update_icon()
 
@@ -585,8 +585,8 @@
 	else if(istype(W, /obj/item/assembly/igniter))
 		light(SPAN_NOTICE("[user] fiddles with [W], and manages to light their [name] with the power of science."))
 
-	user.update_inv_wear_mask(0)
-	user.update_inv_hands()
+	user.update_equipment_overlay(slot_wear_mask_str, FALSE)
+	user.update_inhand_overlays()
 
 /obj/item/clothing/mask/smokable/pipe/cobpipe
 	name = "corn cob pipe"

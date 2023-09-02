@@ -19,6 +19,9 @@
 	var/requires_slot_flags
 	var/requires_organ_tag
 
+	var/mob_overlay_layer
+	var/alt_mob_overlay_layer
+
 /datum/inventory_slot/Destroy(force)
 	_holding = null
 	return ..()
@@ -39,7 +42,7 @@
 	prop.equipped(user, slot_id)
 
 	// Redraw overlays if needed.
-	update_overlay(user, prop, redraw_mob)
+	update_mob_equipment_overlay(user, prop, redraw_mob)
 	return TRUE
 
 /datum/inventory_slot/proc/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
@@ -49,11 +52,21 @@
 		var/obj/item/thing = user.get_equipped_item(slot)
 		if(thing)
 			user.drop_from_inventory(thing)
-	update_overlay(user, prop, redraw_mob)
+	update_mob_equipment_overlay(user, prop, redraw_mob)
 	return TRUE
 
-/datum/inventory_slot/proc/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	return
+/datum/inventory_slot/proc/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	if(!mob_overlay_layer || !slot_id)
+		return
+	if(alt_mob_overlay_layer)
+		if(_holding)
+			user.set_current_mob_overlay((_holding.use_alt_layer ? alt_mob_overlay_layer : mob_overlay_layer), _holding.get_mob_overlay(user, slot_id), FALSE)
+			user.set_current_mob_overlay((_holding.use_alt_layer ? mob_overlay_layer : alt_mob_overlay_layer), null, redraw_mob)
+		else
+			user.set_current_mob_overlay(mob_overlay_layer, null, FALSE)
+			user.set_current_mob_overlay(alt_mob_overlay_layer, null, redraw_mob)
+	else
+		user.set_current_mob_overlay(mob_overlay_layer, _holding?.get_mob_overlay(user, slot_id), redraw_mob)
 
 /datum/inventory_slot/proc/set_slot(var/obj/item/prop)
 	_holding = prop

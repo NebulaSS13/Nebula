@@ -10,9 +10,13 @@
 	item_flags = ITEM_FLAG_IS_BELT
 	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
-	var/overlay_flags
 	attack_verb = list("whipped", "lashed", "disciplined")
 	material = /decl/material/solid/leather/synth
+	var/overlay_flags
+
+/obj/item/storage/belt/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_belt_str)
 
 /obj/item/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
@@ -34,11 +38,6 @@
 		if(LAZYLEN(cur_overlays))
 			add_overlay(cur_overlays)
 	update_clothing_icon()
-
-/obj/item/storage/belt/update_clothing_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_belt()
 
 /obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()

@@ -12,8 +12,22 @@
 	covering_flags = SLOT_HANDS
 	requires_slot_flags = SLOT_HANDS
 
-/datum/inventory_slot/gloves/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_gloves(redraw_mob)
+/datum/inventory_slot/gloves/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	var/obj/item/suit = user.get_equipped_item(slot_wear_suit_str)
+	if(_holding && !(suit && suit.flags_inv & HIDEGLOVES))
+		user.set_current_mob_overlay(HO_GLOVES_LAYER, _holding.get_mob_overlay(user, slot_gloves_str), redraw_mob)
+		return
+	var/mob_blood_overlay = user.get_bodytype().get_blood_overlays(src)
+	if(mob_blood_overlay)
+		var/blood_color
+		for(var/obj/item/organ/external/grabber in user.get_hands_organs())
+			if(grabber.coating)
+				blood_color = grabber.coating.get_color()
+				break
+		if(blood_color)
+			user.set_current_mob_overlay(HO_GLOVES_LAYER, overlay_image(mob_blood_overlay, "bloodyhands", blood_color, RESET_COLOR), redraw_mob)
+			return
+	user.set_current_mob_overlay(HO_GLOVES_LAYER, null, redraw_mob)
 
 /datum/inventory_slot/gloves/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEGLOVES))

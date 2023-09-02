@@ -132,7 +132,7 @@
 		bloodDNA = list()
 	bloodcolor = source.coating.get_color()
 	source.remove_coating(1)
-	update_inv_shoes(1)
+	update_equipment_overlay(slot_shoes_str)
 
 	if(species.get_move_trail(src))
 		T.AddTracks(species.get_move_trail(src),bloodDNA, dir, 0, bloodcolor) // Coming

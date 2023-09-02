@@ -280,7 +280,7 @@
 
 	//#TODO: wish we could invalidate the human icons to trigger a single update when the organ state changes multiple times in a row
 	if(update_icon)
-		update_inv_hands(FALSE)
+		update_inhand_overlays(FALSE)
 		update_body(FALSE)
 		update_bandages(FALSE)
 		UpdateDamageIcon(FALSE)

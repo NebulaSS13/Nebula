@@ -242,15 +242,15 @@ meteor_act
 				var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
 				if(mask)
 					mask.add_blood(src)
-					update_inv_wear_mask(0)
+					update_equipment_overlay(slot_wear_mask_str, FALSE)
 				var/obj/item/head = get_equipped_item(slot_head_str)
 				if(head)
 					head.add_blood(src)
-					update_inv_head(0)
+					update_equipment_overlay(slot_head_str, FALSE)
 				var/obj/item/glasses = get_equipped_item(slot_glasses_str)
 				if(glasses && prob(33))
 					glasses.add_blood(src)
-					update_inv_glasses(0)
+					update_equipment_overlay(slot_glasses_str, FALSE)
 			if(BP_CHEST)
 				bloody_body(src)
 
@@ -382,17 +382,18 @@ meteor_act
 		gloves.add_blood(source, amount)
 	else
 		add_blood(source, amount)
-	update_inv_gloves()		//updates on-mob overlays for bloody hands and/or bloody gloves
+	//updates on-mob overlays for bloody hands and/or bloody gloves
+	update_equipment_overlay(slot_gloves_str)
 
 /mob/living/carbon/human/proc/bloody_body(var/mob/living/source)
 	var/obj/item/gear = get_equipped_item(slot_wear_suit_str)
 	if(gear)
 		gear.add_blood(source)
-		update_inv_wear_suit(0)
+		update_equipment_overlay(slot_wear_suit_str, redraw_mob = FALSE)
 	gear = get_equipped_item(slot_w_uniform_str)
 	if(gear)
 		gear.add_blood(source)
-		update_inv_w_uniform(0)
+		update_equipment_overlay(slot_w_uniform_str, redraw_mob = FALSE)
 
 /mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
 

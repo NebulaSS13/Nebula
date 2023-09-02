@@ -8,8 +8,8 @@
 	requires_organ_tag = BP_CHEST
 	requires_slot_flags = SLOT_POCKET
 
-/datum/inventory_slot/pocket/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_pockets(redraw_mob)
+/datum/inventory_slot/pocket/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	return
 
 /datum/inventory_slot/pocket/prop_can_fit_in_slot(var/obj/item/prop)
 	return ..() || prop.w_class <= ITEM_SIZE_SMALL

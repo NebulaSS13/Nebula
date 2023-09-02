@@ -83,11 +83,10 @@
 		to_chat(usr, SPAN_NOTICE("You roll [rolled_sleeves ? "up" : "down"] the sleeves of \the [src]."))
 		update_clothing_icon()
 
-/obj/item/clothing/under/update_clothing_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_w_uniform(0)
-		M.update_inv_wear_id()
+/obj/item/clothing/under/get_associated_equipment_slots()
+	. = ..()
+	var/static/list/under_slots = list(slot_w_uniform_str, slot_wear_id_str)
+	LAZYDISTINCTADD(., under_slots)
 
 /obj/item/clothing/under/examine(mob/user)
 	. = ..()

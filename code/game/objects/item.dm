@@ -183,7 +183,7 @@
 /obj/item/proc/update_held_icon()
 	if(ismob(src.loc))
 		var/mob/M = src.loc
-		M.update_inv_hands()
+		M.update_inhand_overlays()
 
 /obj/item/proc/is_held_twohanded(mob/living/M)
 	if(!M)
@@ -806,9 +806,24 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	update_icon()
 	update_clothing_icon()
 
+// Used to call appropriate slot updates in update_clothing_icon()
+/obj/item/proc/get_associated_equipment_slots()
+	SHOULD_CALL_PARENT(TRUE)
+	if(item_flags & ITEM_FLAG_IS_BELT)
+		LAZYADD(., slot_belt_str)
+
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/proc/update_clothing_icon()
-	return
+	var/mob/wearer = loc
+	if(!istype(wearer))
+		return FALSE
+	var/equip_slots = get_associated_equipment_slots()
+	if(!islist(equip_slots))
+		return FALSE
+	for(var/slot in equip_slots)
+		wearer.update_equipment_overlay(slot, FALSE)
+	wearer.update_icon()
+	return TRUE
 
 /obj/item/proc/reconsider_client_screen_presence(var/client/client, var/slot)
 	if(!ismob(loc) || !client) // Storage handles screen loc updating/setting itself so should be fine

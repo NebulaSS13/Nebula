@@ -111,7 +111,7 @@ var/global/list/image/splatter_cache=list()
 		var/obj/structure/bed/chair/wheelchair/W = perp.buckled
 		W.bloodiness = 4
 
-	perp.update_inv_shoes(1)
+	perp.update_equipment_overlay(slot_shoes_str)
 	amount--
 
 /obj/effect/decal/cleanable/blood/proc/dry()
