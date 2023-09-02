@@ -1,4 +1,0 @@
-author: AliceDTRH
-delete-after: true
-changes:
-  - bugfix: Fixed the job whitelist not reading keys properly
