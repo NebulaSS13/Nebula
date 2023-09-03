@@ -96,7 +96,7 @@
 
 	if(istype(treatment, /obj/item/stack))
 		var/obj/item/stack/stack = treatment
-		stack.use(1)
+		stack.use(treated_by_item_cost)
 	qdel(src)
 
 /datum/ailment/proc/treated_by_medication(var/reagent_type, var/dosage)
