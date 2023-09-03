@@ -1,0 +1,4 @@
+author: LenSkozzy
+delete-after: true
+changes:
+  - bugfix: fixed folding@home
