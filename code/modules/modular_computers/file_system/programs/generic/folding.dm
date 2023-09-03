@@ -52,17 +52,17 @@
 		started_on = 0
 		current_interval = 0
 
-/datum/computer_file/program/folding/process_tick()
+/datum/computer_file/program/folding/process_tick() //Every 50-100 seconds, gives you a 1/3 chance of the program crashing
 	. = ..()
 	if(!started_on)
 		return
 
-	if(world.timeofday > next_event)
+	if(world.timeofday < next_event) //Checks if it's time for the next crash chance
 		return
 	var/mob/living/holder = computer.holder.get_recursive_loc_of_type(/mob/living/carbon/human)
 	if(!crashed)
 		if(holder)
-			switch(rand(1,3))
+			switch(rand(1,3)) //Gives 1/3 chance of crashing
 				if(1)
 					to_chat(holder, SPAN_WARNING("The [computer] starts to get very warm."))
 				if(2)
@@ -76,7 +76,7 @@
 			crashed = TRUE
 			crashed_at = world.timeofday
 
-	next_event = (rand(MINIMUM_FOLDING_EVENT_INTERVAL, MAXIMUM_FOLDING_EVENT_INTERVAL) SECONDS) + world.timeofday
+	next_event = (rand(MINIMUM_FOLDING_EVENT_INTERVAL, MAXIMUM_FOLDING_EVENT_INTERVAL) SECONDS) + world.timeofday //Sets the next crash chance 50-100 seconds from now
 
 /datum/computer_file/program/folding/on_shutdown()
 	started_on = 0
