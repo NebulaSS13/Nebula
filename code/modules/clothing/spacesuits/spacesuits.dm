@@ -61,7 +61,7 @@
 	if(camera)
 		camera.set_status(!camera.status)
 		if(camera.status)
-			camera.c_tag = FindNameFromID(usr)
+			camera.c_tag = usr.get_id_name()
 			to_chat(usr, "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>")
 		else
 			to_chat(usr, "<span class='notice'>Camera deactivated.</span>")

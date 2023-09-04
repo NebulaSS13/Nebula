@@ -146,59 +146,11 @@
 		var/obj/vehicle/V = AM
 		V.RunOver(src)
 
-// Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
-/mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
-	var/obj/item/card/id/id = GetIdCard()
-	if(istype(id))
-		return id.rank ? id.rank : if_no_job
-	else
-		return if_no_id
-
-//gets assignment from ID or ID inside PDA or PDA itself
-//Useful when player do something with computers
-/mob/living/carbon/human/proc/get_assignment(var/if_no_id = "No id", var/if_no_job = "No job")
-	var/obj/item/card/id/id = GetIdCard()
-	if(istype(id))
-		return id.assignment ? id.assignment : if_no_job
-	else
-		return if_no_id
-
-//gets name from ID or ID inside PDA or PDA itself
-//Useful when player do something with computers
-/mob/living/carbon/human/proc/get_authentification_name(var/if_no_id = "Unknown")
-	var/obj/item/card/id/id = GetIdCard()
-	if(istype(id))
-		return id.registered_name
-	else
-		return if_no_id
-
-//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
-/mob/living/carbon/human/proc/get_visible_name()
-	var/face_name = get_face_name()
-	var/id_name = get_id_name("")
-	if((face_name == "Unknown") && id_name && (id_name != face_name))
-		return "[face_name] (as [id_name])"
-	return face_name
-
-//Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
-//Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
-/mob/living/carbon/human/proc/get_face_name()
-	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_HEAD)
-	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
-	var/obj/item/head = get_equipped_item(slot_head_str)
-	if(!H || (H.status & ORGAN_DISFIGURED) || !real_name || is_husked() || (mask && (mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
-		if(istype(mask) && mask.visible_name)
-			return mask.visible_name
-		return get_rig()?.visible_name || "Unknown"
-	return real_name
-
-//gets name from ID or PDA itself, ID inside PDA doesn't matter
-//Useful when player is being seen by other mobs
-/mob/living/carbon/human/proc/get_id_name(var/if_no_id = "Unknown")
-	. = if_no_id
-	var/obj/item/card/id/I = GetIdCard(exceptions = list(/obj/item/holder))
-	if(istype(I))
-		return I.registered_name
+// TODO: remove when is_husked is moved to a parent type (or if husking is removed)
+/mob/living/carbon/human/identity_is_visible()
+	if(is_husked())
+		return FALSE
+	return ..()
 
 /mob/living/carbon/human/OnSelfTopic(href_list)
 	if (href_list["lookitem"])

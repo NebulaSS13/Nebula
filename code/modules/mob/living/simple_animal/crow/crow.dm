@@ -41,7 +41,7 @@
 	messenger_bag = new(src)
 	update_icon()
 
-/mob/living/simple_animal/crow/GetIdCards()
+/mob/living/simple_animal/crow/GetIdCards(exceptions = null)
 	. = ..()
 	if (istype(access_card))
 		LAZYDISTINCTADD(., access_card)
