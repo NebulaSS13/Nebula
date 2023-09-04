@@ -15,10 +15,10 @@
 //set disable_warning to disable the 'you are unable to equip that' warning.
 //unset redraw_mob to prevent the mob from being redrawn at the end.
 //set force to replace items in the slot and ignore blocking overwear
-/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1, force = FALSE, delete_old_item = TRUE)
+/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1, force = FALSE, delete_old_item = TRUE, ignore_equipped = FALSE)
 	if(!istype(W) || !slot)
 		return FALSE
-	. = (canUnEquip(W) && can_equip_anything_to_slot(slot) && has_organ_for_slot(slot) && W.mob_can_equip(src, slot, disable_warning, force, ignore_equipped = TRUE))
+	. = (canUnEquip(W) && can_equip_anything_to_slot(slot) && has_organ_for_slot(slot) && W.mob_can_equip(src, slot, disable_warning, force, ignore_equipped = ignore_equipped))
 	if(.)
 		equip_to_slot(W, slot, redraw_mob, delete_old_item = delete_old_item) //This proc should not ever fail.
 	else if(del_on_fail)

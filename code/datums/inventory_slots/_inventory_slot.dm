@@ -28,12 +28,8 @@
 
 /datum/inventory_slot/proc/equipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE, var/delete_old_item = TRUE)
 
-	// Clear up any preexisting item.
+	// Save any preexisting item to clean up later.
 	var/atom/movable/held = get_equipped_item()
-	if(held)
-		user.drop_from_inventory(held)
-		if(delete_old_item && !QDELETED(held))
-			qdel(held)
 
 	// Set slot vars.
 	set_slot(prop)
@@ -41,16 +37,31 @@
 	prop.hud_layerise()
 	prop.equipped(user, slot_id)
 
+	// Clean up the preexisting item.
+	if(held)
+		// Force the unequip call because it's technically no longer equipped anymore.
+		unequipped(user, held, redraw_mob)
+		user.drop_from_inventory(held)
+		if(delete_old_item && !QDELETED(held))
+			qdel(held)
+
 	// Redraw overlays if needed.
 	update_mob_equipment_overlay(user, prop, redraw_mob)
 	return TRUE
 
 /datum/inventory_slot/proc/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	clear_slot()
+	// Only empty the slot if it's actually our equipped item.
+	// Sometimes this runs on the old item after a new item is equipped in-place (like via the loadout)
+	// so we need to check this.
+	if(prop == get_equipped_item())
+		clear_slot()
 	for(var/slot in drop_slots_on_unequip)
-		var/obj/item/thing = user.get_equipped_item(slot)
-		if(thing)
+		var/datum/inventory_slot/slot_to_drop = user.get_inventory_slot_datum(slot)
+		if(!slot_to_drop)
+			continue
+		var/obj/item/thing = slot_to_drop.get_equipped_item()
+		if(thing && !slot_to_drop.can_equip_to_slot(user, thing, TRUE))
 			user.drop_from_inventory(thing)
 	update_mob_equipment_overlay(user, prop, redraw_mob)
 	return TRUE
