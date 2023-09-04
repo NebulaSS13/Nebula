@@ -77,14 +77,6 @@ var/global/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
 	equip_base(H, equip_adjustments)
 
-	rank = id_pda_assignment || rank
-	assignment = id_pda_assignment || assignment || rank
-	var/obj/item/card/id/W = equip_id(H, rank, assignment, equip_adjustments)
-	if(W)
-		rank = W.rank
-		assignment = W.assignment
-	equip_pda(H, rank, assignment, equip_adjustments)
-
 	for(var/path in backpack_contents)
 		var/number = backpack_contents[path]
 		for(var/i=0,i<number,i++)
@@ -92,9 +84,7 @@ var/global/list/outfits_decls_by_type_
 
 	if(!(OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP & equip_adjustments))
 		post_equip(H)
-	H.update_icon()
-	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
-		H.set_id_info(W)
+
 	return 1
 
 /decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H, var/equip_adjustments)
@@ -191,9 +181,12 @@ var/global/list/outfits_decls_by_type_
 		W.rank = rank
 	if(assignment)
 		W.assignment = assignment
+	H.update_icon()
 	H.set_id_info(W)
+	equip_pda(H, rank, assignment, equip_adjustments)
 	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W
+
 
 /decl/hierarchy/outfit/proc/equip_pda(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
 	if(!pda_slot || !pda_type)
