@@ -53,6 +53,8 @@ SUBSYSTEM_DEF(mapping)
 	var/list/planetoid_data_by_id
 	///List of all z-levels in the world where the index corresponds to a z-level, and the key at that index is the planetoid_data datum for the associated planet
 	var/list/planetoid_data_by_z = list()
+	///A list of queued markers to initialize during SSmapping init.
+	var/list/obj/abstract/landmark/map_load_mark/queued_markers = list()
 
 /datum/controller/subsystem/mapping/PreInit()
 	reindex_lists()
@@ -114,6 +116,10 @@ SUBSYSTEM_DEF(mapping)
 		world.maxx = new_maxx
 	if (new_maxy > world.maxy)
 		world.maxy = new_maxy
+
+	for(var/obj/abstract/landmark/map_load_mark/mark in queued_markers)
+		mark.load_subtemplate()
+	queued_markers.Cut()
 
 	. = ..()
 

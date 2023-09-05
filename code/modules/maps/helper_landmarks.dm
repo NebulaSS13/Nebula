@@ -1,15 +1,20 @@
 //Load a random map template from the list. Maploader handles it to avoid order of init madness
 /obj/abstract/landmark/map_load_mark
 	name = "map loader landmark"
+	var/centered = TRUE
 	var/list/map_template_names	//list of template names to pick from
 
-/obj/abstract/landmark/map_load_mark/Initialize(var/mapload)
-	. = ..()
-	if(!mapload)
-		return INITIALIZE_HINT_LATELOAD
-
-/obj/abstract/landmark/map_load_mark/LateInitialize()
-	load_subtemplate()
+/obj/abstract/landmark/map_load_mark/New(loc)
+	..()
+	if(Master.map_loading) // If we're created while a map is being loaded
+		return // Let after_load() handle us
+	if(!SSmapping.initialized) // If we're being created prior to SSmapping
+		SSmapping.queued_markers += src // Then run after SSmapping
+	else
+		// How did we get here?
+		// These should only be loaded from compiled maps or map templates.
+		PRINT_STACK_TRACE("map_load_mark created outside of maploading")
+		load_subtemplate()
 
 /obj/abstract/landmark/map_load_mark/proc/get_subtemplate()
 	. = LAZYLEN(map_template_names) && pick(map_template_names)
@@ -29,7 +34,7 @@
 		if(istext(template))
 			template = SSmapping.get_template(template)
 		if(istype(template))
-			template.load(spawn_loc, TRUE)
+			template.load(spawn_loc, centered = centered)
 
 //Throw things in the area around randomly
 /obj/abstract/landmark/carnage_mark
