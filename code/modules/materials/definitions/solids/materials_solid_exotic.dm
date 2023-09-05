@@ -62,6 +62,7 @@
 	gas_flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT
 	gas_symbol_html = "Ph"
 	gas_symbol = "Ph"
+	boiling_point = -90 CELSIUS
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.6
 	sparse_material_weight = 10
