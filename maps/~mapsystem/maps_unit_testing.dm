@@ -37,3 +37,6 @@
 	)
 
 	var/list/area_purity_test_exempt_areas = list()
+
+	/// A list of lists, of the format ((x, y, z, dir),).
+	var/list/disconnected_wires_test_exempt_turfs = list()

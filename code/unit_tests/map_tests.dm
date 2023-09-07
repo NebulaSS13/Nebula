@@ -595,6 +595,8 @@
 /datum/unit_test/station_wires_shall_be_connected/start_test()
 	var/failures = 0
 
+	exceptions = global.using_map.disconnected_wires_test_exempt_turfs
+
 	var/exceptions_by_turf = list()
 	for(var/exception in exceptions)
 		var/turf/T = locate(exception[1], exception[2], exception[3])
