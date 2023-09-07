@@ -19,8 +19,8 @@
 
 // If the height is more than 1, we mark all contained levels as connected.
 // This is in New because it is an auxiliary effect specifically needed pre-init.
-/obj/abstract/map_data/New(turf/loc, _height)
-	..()
+INITIALIZE_IMMEDIATE(/obj/abstract/map_data)
+/obj/abstract/map_data/Initialize(mapload, _height)
 	if(!istype(loc)) // Using loc.z is safer when using the maploader and New.
 		return
 	if(_height)
@@ -32,6 +32,7 @@
 
 	if (length(SSzcopy.zlev_maximums))
 		SSzcopy.calculate_zstack_limits()
+	return ..()
 
 /obj/abstract/map_data/Destroy(forced)
 	if(forced)
