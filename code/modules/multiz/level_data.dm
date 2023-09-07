@@ -144,6 +144,8 @@
 	///This is set to prevent spamming the log when a turf has tried to grab our strata before we've been initialized
 	var/tmp/_has_warned_uninitialized_strata = FALSE
 
+	VAR_PROTECTED/UT_turf_exceptions_by_door_type // An associate list of door types/list of allowed turfs
+
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level
