@@ -1,7 +1,5 @@
-/datum/unit_test/station_wires_shall_be_connected
-	exceptions = list(list(48, 54, 3, EAST))
-
 /datum/map/tradeship
+	disconnected_wires_test_exempt_turfs = list(list(48, 54, 3, EAST))
 	// Unit test exemptions
 	apc_test_exempt_areas = list(
 		/area/turbolift =                               NO_SCRUBBER|NO_VENT|NO_APC,
