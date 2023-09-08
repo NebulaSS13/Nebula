@@ -107,3 +107,13 @@
 				break
 		if(.)
 			update_inv_hands()
+
+/mob/living/proc/get_jetpack()
+	var/obj/item/tank/jetpack/thrust = get_equipped_item(slot_back_str)
+	if(istype(thrust))
+		return thrust
+	if(istype(thrust, /obj/item/rig))
+		var/obj/item/rig/rig = thrust
+		for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
+			return module.jets
+	return null
