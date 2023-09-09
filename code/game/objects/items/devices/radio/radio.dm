@@ -445,11 +445,12 @@
 
 	for(var/mob/listener in send_message_to)
 		var/per_listener_send_name = send_name
+		var/per_listener_loc_name
 		// if we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's
 		if(send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != send_message_to[listener])
 			// then append the overmap object name to it, so they know where we're from
-			per_listener_send_name = "[per_listener_send_name] ([send_overmap_object.name])"
-		listener.hear_radio(message, verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name)
+			per_listener_loc_name = send_overmap_object.name
+		listener.hear_radio(message, verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name, per_listener_loc_name)
 
 /obj/item/radio/proc/can_receive_message(var/check_network_membership)
 	. = on
