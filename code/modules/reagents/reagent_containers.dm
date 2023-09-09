@@ -102,7 +102,7 @@
 		return ..()
 
 /obj/item/chems/proc/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target) // This goes into afterattack
-	if(!istype(target))
+	if(!istype(target) || target.atom_flags & ATOM_FLAG_OPEN_CONTAINER)
 		return 0
 
 	if(!target.reagents || !target.reagents.total_volume)
