@@ -143,8 +143,14 @@
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = clamp(num,1,trading_items.len)
-	if(trading_items[num])
-		return "<b>[atom_info_repository.get_name_for(trading_items[num])]</b>"
+	var/item_type = trading_items[num]
+	if(!item_type)
+		return
+	. = atom_info_repository.get_name_for(item_type)
+	if(ispath(item_type, /obj/item/stack))
+		var/obj/item/stack/stack = item_type
+		. = "[initial(stack.amount)]x [.]"
+	. = "<b>[.]</b>"
 
 /datum/trader/proc/skill_curve(skill)
 	switch(skill)
@@ -282,7 +288,8 @@
 	. = get_response("what_want", "Hm, I want")
 	var/list/want_english = list()
 	for(var/wtype in wanted_items)
-		want_english += atom_info_repository.get_name_for(wtype)
+		var/item_name = atom_info_repository.get_name_for(wtype)
+		want_english += item_name
 	. += " [english_list(want_english)]"
 
 /datum/trader/proc/sell_items(var/list/offers, skill = SKILL_MAX)
