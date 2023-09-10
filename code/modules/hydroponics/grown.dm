@@ -228,16 +228,24 @@ var/global/list/_wood_materials = list(
 			to_chat(user, SPAN_WARNING("You need to dry \the [src] first!"))
 			return TRUE
 
-		if(user.try_unequip(W))
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
-			R.chem_volume = reagents.total_volume
-			R.brand = "[src] handrolled in \the [W]."
-			reagents.trans_to_holder(R.reagents, R.chem_volume)
-			to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [W]."))
-			user.put_in_active_hand(R)
-			qdel(W)
-			qdel(src)
+		if(!user.try_unequip(W))
 			return TRUE
+
+		var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
+		R.chem_volume = max(R.reagents?.maximum_volume, reagents?.total_volume)
+		if(R.reagents)
+			R.reagents.maximum_volume = R.chem_volume
+			R.reagents.update_total()
+		else
+			R.create_reagents(R.chem_volume)
+
+		R.brand = "[src] handrolled in \the [W]."
+		reagents.trans_to_holder(R.reagents, R.chem_volume)
+		to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [W]."))
+		user.put_in_active_hand(R)
+		qdel(W)
+		qdel(src)
+		return TRUE
 
 	. = ..()
 
