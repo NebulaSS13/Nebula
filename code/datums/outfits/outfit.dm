@@ -169,7 +169,7 @@ var/global/list/outfits_decls_by_type_
 	if(H.client?.prefs?.give_passport)
 		global.using_map.create_passport(H)
 
-/decl/hierarchy/outfit/proc/equip_id(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
+/decl/hierarchy/outfit/proc/equip_id(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments, var/datum/job/job)
 	if(!id_slot || !id_type)
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
@@ -181,12 +181,16 @@ var/global/list/outfits_decls_by_type_
 		W.rank = rank
 	if(assignment)
 		W.assignment = assignment
+	if(job)
+		LAZYDISTINCTADD(W.access, job.get_access())
+		if(!W.detail_color)
+			W.detail_color = job.selection_color
+			W.update_icon()
 	H.update_icon()
 	H.set_id_info(W)
 	equip_pda(H, rank, assignment, equip_adjustments)
 	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W
-
 
 /decl/hierarchy/outfit/proc/equip_pda(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
 	if(!pda_slot || !pda_type)
