@@ -18,13 +18,14 @@
 #define KM_OVERMAP_RATE		100
 #define SHIP_MOVE_RESOLUTION 0.001
 #define MOVING(speed, min_speed) (abs(speed) >= min_speed)
-#define SANITIZE_SPEED(speed) (SIGN(speed) * clamp(abs(speed), 0, max_speed))
+// You can approach, but never reach, max_speed.
+#define SANITIZE_SPEED(speed) (SIGN(speed) * clamp(NONUNIT_FLOOR(abs(speed), SHIP_MOVE_RESOLUTION), 0, max_speed - SHIP_MOVE_RESOLUTION))
 #define CHANGE_SPEED_BY(speed_var, v_diff, min_speed) \
 	v_diff = SANITIZE_SPEED(v_diff);\
 	if(!MOVING(speed_var + v_diff, min_speed)) \
 		{speed_var = 0};\
 	else \
-		{speed_var = round(SANITIZE_SPEED((speed_var + v_diff) / (1 + speed_var * v_diff / (max_speed ** 2))), SHIP_MOVE_RESOLUTION)}
+		{speed_var = SANITIZE_SPEED((speed_var + v_diff) / (1 + speed_var * v_diff / (max_speed ** 2)))}
 // Uses Lorentzian dynamics to avoid going too fast.
 #define SENSOR_COEFFICENT 1000
 
