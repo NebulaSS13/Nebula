@@ -5,7 +5,7 @@
 	var/list/possible_materials = list(/decl/material/solid/metal/steel, /decl/material/solid/metal/plasteel, /decl/material/solid/metal/titanium, /decl/material/solid/glass)
 
 /decl/archaeological_find/material/spawn_item(atom/loc)
-	return SSmaterials.create_object(pick(possible_materials), loc, rand(5,45))
+	return SSmaterials.create_object(pick(possible_materials), loc, rand(5,45))?[1]
 
 /decl/archaeological_find/material/exotic
 	item_type = "rare material lump"
@@ -14,7 +14,7 @@
 //Machinery parts
 /decl/archaeological_find/parts
 	item_type = "machinery part"
-	modification_flags = XENOFIND_APPLY_PREFIX 
+	modification_flags = XENOFIND_APPLY_PREFIX
 	responsive_reagent = /decl/material/solid/potassium
 	possible_types = list()
 
