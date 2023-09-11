@@ -37,9 +37,6 @@
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	src.adding = list()
-	src.other = list()
-
 	held = new
 	held.icon =  ui_style
 	held.color = ui_color
@@ -59,9 +56,6 @@
 	mymob.healths.icon_state = "health0"
 	mymob.healths.SetName("health")
 	mymob.healths.screen_loc = DIONA_SCREEN_LOC_HEALTH
+	adding += mymob.healths
 
-	BuildInventoryUI()
-
-	mymob.client.screen = list(mymob.healths)
-	mymob.client.screen += src.adding + src.other
-
+	..()

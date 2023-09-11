@@ -1,29 +1,21 @@
 /datum/hud/pai/FinalizeInstantiation()
-	adding = list()
 	var/obj/screen/using
-
 	using = new /obj/screen/pai/software()
 	using.SetName("Software Interface")
 	adding += using
-
 	using = new /obj/screen/pai/subsystems()
 	using.SetName("Subsystems")
 	adding += using
-
 	using = new /obj/screen/pai/shell()
 	using.SetName("Toggle Chassis")
 	adding += using
-
 	using = new /obj/screen/pai/rest()
 	using.SetName("Rest")
 	adding += using
-
 	using = new /obj/screen/pai/light()
 	using.SetName("Toggle Light")
 	adding += using
-
-	mymob.client.screen = list()
-	mymob.client.screen += adding
+	..()
 	hide_inventory()
 
 /obj/screen/pai

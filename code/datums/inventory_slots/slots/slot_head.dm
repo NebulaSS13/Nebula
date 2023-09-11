@@ -11,7 +11,7 @@
 	quick_equip_priority = 9
 
 /datum/inventory_slot/head/simple
-	requires_organ_tag = FALSE
+	requires_organ_tag = null
 	can_be_hidden = FALSE
 
 /datum/inventory_slot/head/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
