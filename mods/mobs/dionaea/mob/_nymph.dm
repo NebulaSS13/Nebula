@@ -58,6 +58,7 @@
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	add_language(/decl/language/diona)
 	add_language(/decl/language/human/common, 0)
+	add_inventory_slot(new /datum/inventory_slot/head/simple)
 
 	if(prob(flower_chance))
 		flower_color = get_random_colour(1)
@@ -72,3 +73,22 @@
 
 /mob/living/carbon/alien/diona/get_dexterity(var/silent = FALSE)
 	return DEXTERITY_NONE
+
+/mob/living/carbon/alien/diona/get_bodytype()
+	return GET_DECL(/decl/bodytype/diona)
+
+/decl/bodytype/diona
+	name = "nymph"
+	bodytype_flag = 0
+	bodytype_category = "diona nymph body"
+
+/decl/bodytype/diona/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
+			"[NORTH]" = list(0, -8),
+			"[SOUTH]" = list(0, -8),
+			"[EAST]" =  list(0, -8),
+			"[WEST]" =  list(0, -8)
+		)
+	)
+	. = ..()

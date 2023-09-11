@@ -164,6 +164,8 @@ var/global/obj/screen/robot_inventory
 	R.gun_move_icon = new /obj/screen/gun/move(null)
 	R.radio_use_icon = new /obj/screen/gun/radio(null)
 
+	BuildInventoryUI()
+
 	R.client.screen = list()
 	R.client.screen += list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
 	R.client.screen += adding + other

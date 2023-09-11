@@ -93,5 +93,7 @@
 	mymob.healths.SetName("health")
 	mymob.healths.screen_loc = ANYMPH_SCREEN_LOC_HEALTH
 
+	BuildInventoryUI()
+
 	mymob.client.screen = list(mymob.healths)
 	mymob.client.screen += src.adding + src.other

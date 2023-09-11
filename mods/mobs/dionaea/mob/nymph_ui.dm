@@ -10,16 +10,6 @@
 		intent = I_DISARM
 		icon_state = "intent_help"
 
-/obj/screen/diona_hat
-	name = "equipped hat"
-	screen_loc = DIONA_SCREEN_LOC_HAT
-	icon_state = "hat"
-
-/obj/screen/diona_hat/Click()
-	var/obj/item/thing = usr.get_equipped_item(slot_head_str)
-	if(thing)
-		usr.drop_from_inventory(thing)
-
 /obj/screen/diona_held
 	name = "held item"
 	screen_loc =  DIONA_SCREEN_LOC_HELD
@@ -30,7 +20,6 @@
 	if(istype(chirp) && chirp.holding_item) chirp.try_unequip(chirp.holding_item)
 
 /datum/hud/diona_nymph
-	var/obj/screen/diona_hat/hat
 	var/obj/screen/diona_held/held
 
 /datum/hud/diona_nymph/get_ui_style()
@@ -50,12 +39,6 @@
 
 	src.adding = list()
 	src.other = list()
-
-	hat = new
-	hat.icon =  ui_style
-	hat.color = ui_color
-	hat.alpha = ui_alpha
-	adding += hat
 
 	held = new
 	held.icon =  ui_style
@@ -77,5 +60,8 @@
 	mymob.healths.SetName("health")
 	mymob.healths.screen_loc = DIONA_SCREEN_LOC_HEALTH
 
+	BuildInventoryUI()
+
 	mymob.client.screen = list(mymob.healths)
 	mymob.client.screen += src.adding + src.other
+

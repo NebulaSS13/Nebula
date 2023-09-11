@@ -18,19 +18,22 @@
 	pass_flags = PASS_FLAG_TABLE
 	skin_material = /decl/material/solid/skin/fur/orange
 	base_animal_type = /mob/living/simple_animal/cat
-
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
 	var/mob/flee_target
 
-/mob/living/simple_animal/cat/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
+/mob/living/simple_animal/cat/get_bodytype()
+	return /decl/bodytype/animal/cat
+
+/decl/bodytype/animal/cat/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
 			"[NORTH]" = list( 1,  -9),
 			"[SOUTH]" = list( 1, -12),
 			"[EAST]" =  list( 7, -10),
 			"[WEST]" =  list(-7, -10)
 		)
+	)
 	. = ..()
 
 /mob/living/simple_animal/cat/do_delayed_life_action()
@@ -241,14 +244,21 @@
 	bone_amount = 3
 	skin_amount = 3
 
-/mob/living/simple_animal/cat/kitten/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
+/mob/living/simple_animal/cat/kitten/get_bodytype()
+	return /decl/bodytype/animal/kitten
+
+/decl/bodytype/animal/kitten/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
 			"[NORTH]" = list( 1, -14),
 			"[SOUTH]" = list( 1, -14),
 			"[EAST]" =  list( 5, -14),
 			"[WEST]" =  list(-5, -14)
 		)
+	)
+	. = ..()
+
+/mob/living/simple_animal/cat/kitten/Initialize()
 	. = ..()
 	gender = pick(MALE, FEMALE)
 

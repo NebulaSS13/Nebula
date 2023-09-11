@@ -24,10 +24,8 @@
 /mob/living/get_held_item_slots()
 	return _held_item_slots
 
-// Temporary proc, replace when the main inventory rewrite goes in.
-/mob/living/get_all_valid_equipment_slots()
-	for(var/slot in get_held_item_slots())
-		LAZYDISTINCTADD(., slot)
+/mob/living/get_all_available_equipment_slots()
+	. = ..()
 	var/decl/species/my_species = get_species()
 	for(var/slot in my_species?.hud?.equip_slots)
 		LAZYDISTINCTADD(., slot)
