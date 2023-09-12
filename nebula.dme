@@ -1428,6 +1428,7 @@
 #include "code\js\byjax.dm"
 #include "code\js\menus.dm"
 #include "code\modules\abstract\_abstract.dm"
+#include "code\modules\abstract\abstract_airlock_marker.dm"
 #include "code\modules\abstract\abstract_exterior_marker.dm"
 #include "code\modules\acting\acting_items.dm"
 #include "code\modules\admin\admin.dm"
