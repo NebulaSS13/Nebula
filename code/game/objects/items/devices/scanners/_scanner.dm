@@ -2,8 +2,7 @@
 	name = "handheld scanner"
 	desc = "A hand-held scanner of some sort. You shouldn't be seeing it."
 	icon = 'icons/obj/items/device/scanner/atmos_scanner.dmi'
-	icon_state = "atmos"
-	item_state = "analyzer"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY

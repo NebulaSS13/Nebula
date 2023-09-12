@@ -1,8 +1,8 @@
 /obj/item/integrated_electronics/analyzer
 	name = "circuit analyzer"
 	desc = "This tool can scan an assembly and generate code necessary to recreate it in a circuit printer."
-	icon = 'icons/obj/assemblies/electronic_tools.dmi'
-	icon_state = "analyzer"
+	icon = 'icons/obj/assemblies/circuit_analyzer.dmi'
+	icon_state = ICON_STATE_WORLD
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,

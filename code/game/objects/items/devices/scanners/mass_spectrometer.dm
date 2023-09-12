@@ -2,9 +2,6 @@
 	name = "mass spectrometer"
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample or analyzes unusual chemicals."
 	icon = 'icons/obj/items/device/scanner/spectrometer.dmi'
-	icon_state = "spectrometer"
-	item_state = "analyzer"
-
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	origin_tech = "{'magnets':2,'biotech':2}"
 	window_width = 550
@@ -86,6 +83,6 @@
 
 /obj/item/scanner/spectrometer/adv
 	name = "advanced mass spectrometer"
-	icon_state = "adv_spectrometer"
+	icon = 'icons/obj/items/device/scanner/advanced_spectrometer.dmi'
 	details = 1
 	origin_tech = "{'magnets':4,'biotech':2}"

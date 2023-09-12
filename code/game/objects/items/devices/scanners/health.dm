@@ -2,8 +2,6 @@
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	icon = 'icons/obj/items/device/scanner/health_scanner.dmi'
-	icon_state = "health"
-	item_state = "analyzer"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	material = /decl/material/solid/metal/aluminium
 	origin_tech = "{'magnets':1,'biotech':1}"
