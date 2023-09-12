@@ -1521,10 +1521,7 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1305;
 	id_tag = "ZHPcells_access_airlock";
-	tag_airpump = null;
-	tag_chamber_sensor = null;
 	tag_exterior_door = "ZHPcells_access_airlock_outer";
-	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPcells_access_airlock_inner"
 	},
 /turf/floor/tiled,
@@ -1843,10 +1840,7 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "ZHPsec_access_airlock";
-	tag_airpump = null;
-	tag_chamber_sensor = null;
 	tag_exterior_door = "ZHPsec__access_airlock_outer";
-	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPsec__access_airlock_inner"
 	},
 /turf/floor/tiled,
@@ -2485,8 +2479,6 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "ZHPvirology_access_airlock";
 	pixel_y = 25;
-	tag_airpump = null;
-	tag_chamber_sensor = null;
 	tag_exterior_door = "ZHPvirology_access_airlock_outer";
 	tag_exterior_sensor = "ZHPvirology_access_airlock_sensor";
 	tag_interior_door = "ZHPvirology_access_airlock_inner"
@@ -3309,9 +3301,7 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "ZHPCells_airlock";
 	tag_airpump = "ZHPCells_pump";
-	tag_chamber_sensor = null;
 	tag_exterior_door = "ZHPCells_outer";
-	tag_exterior_sensor = null;
 	tag_interior_door = "ZHPCells_inner"
 	},
 /obj/machinery/button/blast_door{
@@ -3427,7 +3417,9 @@
 /turf/floor/plating,
 /area/lar_maria/cells)
 "iQ" = (
-/obj/effect/shuttle_landmark/automatic,
+/obj/effect/shuttle_landmark/lar_maria_docking{
+	dir = 1
+	},
 /turf/space,
 /area/space)
 "jb" = (
@@ -21952,15 +21944,15 @@ gU
 iN
 iO
 iP
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
 iQ
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
