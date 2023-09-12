@@ -234,6 +234,16 @@
 /obj/machinery/atmospherics/omni/proc/sort_ports()
 	return
 
+/obj/machinery/atmospherics/omni/shuttle_rotate(angle)
+	. = ..()
+	if(.)
+		for(var/datum/omni_port/port in ports)
+			port.direction = turn(port.direction, angle)
+			port.disconnect()
+			port.update = TRUE
+		initialize_directions = get_initialize_directions()
+		atmos_init()
+		return TRUE
 
 // Housekeeping and pipe network stuff below
 

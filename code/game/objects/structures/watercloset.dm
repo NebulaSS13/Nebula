@@ -350,6 +350,7 @@ var/global/list/hygiene_props = list()
 	icon_state = "sink"
 	desc = "A sink used for washing one's hands and face."
 	anchored = TRUE
+	directional_offset = @'{"NORTH":{"y":22},"SOUTH":{"y":28},"EAST":{"x":16},"WEST":{"x":-16}}'
 	var/busy = 0 	//Something's being washed at the moment
 
 /obj/structure/hygiene/sink/receive_mouse_drop(atom/dropping, mob/user, params)

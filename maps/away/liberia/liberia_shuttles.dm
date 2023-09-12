@@ -19,6 +19,7 @@
 	name = "Mule Dock"
 	landmark_tag = "nav_mule_start"
 	docking_controller = "mule_port_dock"
+	flags = SLANDMARK_FLAG_REORIENT
 
 /datum/shuttle/autodock/overmap/mule
 	name = "Mule"

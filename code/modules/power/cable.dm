@@ -133,6 +133,17 @@ By design, d1 is the smallest direction and d2 is the highest
 	icon_state = "[d1]-[d2]"
 	alpha = invisibility ? 127 : 255
 
+/obj/structure/cable/shuttle_rotate(angle)
+	// DON'T CALL PARENT, we never change our actual dir
+	if(d1 == 0)
+		d2 = turn(d2, angle)
+	else
+		var/nd1 = min(turn(d1, angle), turn(d2, angle))
+		var/nd2 = max(turn(d1, angle), turn(d2, angle))
+		d1 = nd1
+		d2 = nd2
+	update_icon()
+
 // returns the powernet this cable belongs to
 /obj/structure/cable/proc/get_powernet()			//TODO: remove this as it is obsolete
 	return powernet

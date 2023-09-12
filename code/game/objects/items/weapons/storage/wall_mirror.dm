@@ -13,6 +13,9 @@
 	var/shattered = FALSE
 	var/list/ui_users
 
+/obj/structure/mirror/shuttle_rotate(angle)
+	. = ..(-angle) // for some reason directions are switched for mirrors?
+
 /obj/structure/mirror/WillContain()
 	return list(
 			/obj/item/grooming/comb/colorable/random,
