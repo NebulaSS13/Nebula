@@ -108,6 +108,8 @@
 
 	if(landing_eye.check_landing()) // Make sure the landmark is in a valid location.
 		var/obj/effect/shuttle_landmark/temporary/lz = new(lz_turf, landing_eye.check_secure_landing())
+		lz.flags |= SLANDMARK_FLAG_REORIENT
+		lz.dir = landing_eye?.shuttle_dir || shuttle.current_location.dir
 		if(lz.is_valid(shuttle))	// Make sure the shuttle fits.
 			to_chat(user, SPAN_NOTICE("Landing zone set!"))
 			shuttle.set_destination(lz)

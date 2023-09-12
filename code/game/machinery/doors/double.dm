@@ -20,6 +20,31 @@
 	opacity = TRUE
 	width = 2
 
+// TODO: Find a better way to do this.
+/obj/machinery/door/airlock/double/shuttle_rotate(angle)
+	. = ..()
+	if(.)
+		var/turf/obstacle
+		switch(dir)
+			if(WEST)
+				obstacle = get_step(get_step(src, SOUTH), SOUTH) // two turfs south
+				if(!obstacle.density)
+					y--
+					return
+				obstacle = get_step(src, NORTH)
+				if(!obstacle.density)
+					y++
+					return
+			if(SOUTH)
+				obstacle = get_step(get_step(src, EAST), EAST) // two turfs east
+				if(!obstacle.density)
+					x++
+					return
+				obstacle = get_step(src, WEST)
+				if(!obstacle.density)
+					x--
+					return
+
 /obj/machinery/door/airlock/double/update_connections(var/propagate = 0)
 	var/dirs = 0
 

@@ -168,12 +168,13 @@
 		return FALSE
 	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
+	var/angle_offset = current_location.get_angle_offset(destination)
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
-		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
+		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents, angle = angle_offset)
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
-	shuttle_moved(destination, translation)
+	shuttle_moved(destination, translation, angle_offset)
 	RAISE_EVENT_REPEAT(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
@@ -191,12 +192,13 @@
 	testing("Force moving [src] to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
 
+	var/angle_offset = current_location.get_angle_offset(destination)
 	for(var/area/A in shuttle_area)
 		testing("Moving [A]")
-		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
+		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents, angle = angle_offset)
 	var/obj/effect/shuttle_landmark/old_location = current_location
 	RAISE_EVENT(/decl/observ/shuttle_pre_move, src, old_location, destination)
-	shuttle_moved(destination, translation)
+	shuttle_moved(destination, translation, angle_offset)
 	RAISE_EVENT_REPEAT(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
@@ -206,7 +208,7 @@
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. shuttle_moved() must absolutely not, under any circumstances, fail to move the shuttle.
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump(), long_jump() or attempt_move()
-/datum/shuttle/proc/shuttle_moved(var/obj/effect/shuttle_landmark/destination, var/list/turf_translation)
+/datum/shuttle/proc/shuttle_moved(obj/effect/shuttle_landmark/destination, list/turf_translation, angle = 0)
 
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
@@ -248,7 +250,7 @@
 		var/datum/shuttle_log/s_log = SSshuttle.shuttle_logs[src]
 		s_log.handle_move(current_location, destination)
 
-	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf, TRUE)
+	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf, TRUE, angle = angle)
 	current_location = destination
 
 	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
@@ -256,7 +258,7 @@
 		for(var/area/A in shuttle_area)
 			for(var/turf/TD in A.contents)
 				var/turf/TA = GetAbove(TD)
-				if(istype(TA, get_base_turf_by_area(TA)) || (istype(TA) && TA.is_open()))
+				if(TA && (istype(TA, get_base_turf_by_area(TA)) || TA.is_open()))
 					if(get_area(TA) in shuttle_area)
 						continue
 					TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
