@@ -28,6 +28,8 @@
 	var/manual_diagnosis_string  /* ex: "$USER_HIS$ $ORGAN$ has something wrong with it" */ // Shown when grab-diagnosed by a doctor. Leave null to be undiagnosable.
 	var/scanner_diagnosis_string /* ex: "Significant swelling" */                           // Shown on the handheld and body scanners. Leave null to be undiagnosable.
 
+	var/hidden_from_codex = FALSE
+
 /datum/ailment/New(var/obj/item/organ/_organ)
 	..()
 	if(_organ)
