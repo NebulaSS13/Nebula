@@ -1,9 +1,7 @@
 /obj/item/chems/borghypo
 	name = "cyborg hypospray"
 	desc = "An advanced chemical synthesizer and injection system, designed for heavy-duty medical equipment."
-	icon = 'icons/obj/syringe.dmi'
-	item_state = "hypo"
-	icon_state = "borghypo"
+	icon = 'icons/obj/hypospray_borg.dmi'
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
