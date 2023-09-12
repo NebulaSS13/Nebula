@@ -507,7 +507,7 @@
 /area/magshield/smes_storage)
 "bA" = (
 /obj/structure/closet,
-/obj/item/toy/therapy_purple,
+/obj/random/plush/therapy,
 /obj/random/hat,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)

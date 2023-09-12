@@ -2315,7 +2315,7 @@
 /obj/item/chems/syringe/antibiotic,
 /obj/item/scanner/health,
 /obj/item/defibrillator/compact/loaded,
-/obj/item/toy/therapy_blue,
+/obj/random/plush/therapy,
 /obj/item/glass_extra/straw,
 /obj/item/tank/oxygen/yellow,
 /obj/structure/closet/emcloset,

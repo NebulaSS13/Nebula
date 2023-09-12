@@ -153,7 +153,7 @@
 		/obj/item/taperecorder,
 		/obj/item/magnetic_tape/random = 3,
 		/obj/item/camera,
-		/obj/item/toy/therapy_blue,
+		/obj/random/plush/therapy,
 		/obj/item/storage/belt/general
 	)
 
