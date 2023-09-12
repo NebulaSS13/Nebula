@@ -20,8 +20,7 @@
 	name = "bike horn"
 	desc = "A horn off of a bicycle."
 	icon = 'icons/obj/items/horn.dmi'
-	icon_state = "bike_horn"
-	item_state = "bike_horn"
+	icon_state = ICON_STATE_WORLD
 	throwforce = 3
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
@@ -47,8 +46,7 @@
 /obj/item/bikehorn/airhorn
 	name = "air horn"
 	desc = "A can of compressed air hooked up to an obnoxiously loud horn. SPRING BREAK!"
-	icon_state = "air_horn"
-	item_state = "air_horn"
+	icon = 'icons/obj/items/air_horn.dmi'
 	audio_files = list("sound/items/air_horn_1.ogg", "sound/items/air_horn_2.ogg")
 	material = /decl/material/solid/metal/aluminium
 	obj_flags = OBJ_FLAG_HOLLOW
