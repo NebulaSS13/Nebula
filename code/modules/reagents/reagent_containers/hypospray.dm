@@ -2,7 +2,7 @@
 /// HYPOSPRAY
 ////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/chems/hypospray
+/obj/item/chems/hypospray // abstract shared type, do not use directly
 	name = "hypospray"
 	desc = "A sterile, air-needle autoinjector for rapid administration of drugs to patients."
 	icon = 'icons/obj/hypospray.dmi'

@@ -89,7 +89,7 @@
 /obj/item/chems/water_balloon/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
-	if(reagents?.total_volume < =0)
+	if(reagents?.total_volume <= 0)
 		icon_state = "[icon_state]_empty"
 
 /obj/item/chems/water_balloon/afterattack(obj/target, mob/user, proximity)

@@ -84,14 +84,14 @@
 	if(mode == SYRINGE_BROKEN)
 		icon_state = "[icon_state]_broken"
 		return
-	var/rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
-	if (reagents.total_volume == 0)
-		rounded_vol = 0
+	var/rounded_vol = 0
+	if (reagents?.total_volume > 0)
+		rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
 	if(ismob(loc))
 		add_overlay((mode == SYRINGE_DRAW)? "[icon_state]_draw" : "[icon_state]_inject")
 	icon_state = "[icon_state]_[rounded_vol]"
-	if(reagents.total_volume)
-		filling = image(icon, "[icon_state]_underlay")
+	if(reagents?.total_volume)
+		var/image/filling = image(icon, "[icon_state]_underlay")
 		filling.color = reagents.get_color()
 		filling.appearance_flags |= RESET_COLOR
 		underlays += filling

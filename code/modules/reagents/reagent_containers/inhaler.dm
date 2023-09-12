@@ -37,7 +37,7 @@
 	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		add_overlay("[icon_state]_loaded")
-	if(reagents.total_volume > 0)
+	if(reagents?.total_volume > 0)
 		add_overlay("[icon_state]_reagents")
 
 /obj/item/chems/inhaler/attack(var/mob/living/carbon/human/target, var/mob/user, var/proximity)

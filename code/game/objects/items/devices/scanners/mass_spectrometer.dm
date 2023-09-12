@@ -19,9 +19,9 @@
 
 /obj/item/scanner/spectrometer/on_update_icon()
 	. = ..()
-	icon_state = initial(icon_state)
-	if(reagents.total_volume)
-		icon_state += "_s"
+	icon_state = get_world_inventory_state()
+	if(reagents?.total_volume)
+		icon_state += "_loaded"
 
 /obj/item/scanner/spectrometer/is_valid_scan_target(atom/O)
 	if(!O.reagents || !O.reagents.total_volume)
