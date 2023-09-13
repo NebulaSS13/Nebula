@@ -20,7 +20,7 @@
 	if(printer_ready())
 		last_print = world.time
 		var/turf/T = get_turf(src)
-		new paper_type(T,text_to_print, paper_title, md)
+		new paper_type(T, null, text_to_print, paper_title, md)
 		stored_paper--
 		playsound(T, "sound/machines/dotprinter.ogg", 30)
 		T.visible_message("<span class='notice'>\The [src] prints out a paper.</span>")
