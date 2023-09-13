@@ -127,7 +127,7 @@
 		var/datum/extension/assembly/modular_computer/assembly
 		if(fabricate)
 			fabricated_tablet = new(src)
-			assembly = get_extension(fabricated_laptop, /datum/extension/assembly)
+			assembly = get_extension(fabricated_tablet, /datum/extension/assembly)
 			assembly.add_replace_component(null, PART_CPU, new/obj/item/stock_parts/computer/processor_unit/small(fabricated_tablet))
 		total_price = 199
 		switch(dev_battery)
@@ -249,7 +249,6 @@
 		if(ui)
 			ui.close()
 		return 0
-
 	var/list/data[0]
 	data["state"] = state
 	if(state == 1)
@@ -263,7 +262,8 @@
 		data["hw_cpu"] = dev_cpu
 		data["hw_aislot"] = dev_aislot
 	if(state == 1 || state == 2)
-		data["totalprice"] = total_price
+		var/decl/currency/cur = GET_DECL(global.using_map.default_currency)
+		data["totalprice"] = cur.format_value(total_price)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
