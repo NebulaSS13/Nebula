@@ -124,13 +124,13 @@
 
 //Little helper macro, since hydrates are all basically the same
 // DISPLAY_NAME is needed because of compounds with white spaces in their names
-#define DECLARE_HYDRATE_DNAME_PATH(PATH, NAME, DISPLAY_NAME)                \
-/decl/material/solid/ice/hydrate/##NAME/uid = "solid_hydrate_##NAME";       \
-/decl/material/solid/ice/hydrate/##NAME/Initialize(){                       \
-	name = "[##DISPLAY_NAME] hydrate";                                      \
-	heating_products = list(PATH = 0.2, /decl/material/liquid/water = 0.8); \
-	. = ..();                                                               \
-}                                                                           \
+#define DECLARE_HYDRATE_DNAME_PATH(PATH, NAME, DISPLAY_NAME)               \
+/decl/material/solid/ice/hydrate/##NAME/uid = "solid_hydrate_" + #NAME;    \
+/decl/material/solid/ice/hydrate/##NAME/name = #DISPLAY_NAME + " hydrate"; \
+/decl/material/solid/ice/hydrate/##NAME/heating_products = list(           \
+	PATH = 0.2,                                                            \
+	/decl/material/liquid/water = 0.8                                      \
+);                                                                         \
 /decl/material/solid/ice/hydrate/##NAME
 
 #define DECLARE_HYDRATE_DNAME(NAME, DISPLAY_NAME) DECLARE_HYDRATE_DNAME_PATH(/decl/material/gas/##NAME, NAME, DISPLAY_NAME)
