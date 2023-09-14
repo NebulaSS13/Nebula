@@ -25,10 +25,7 @@
 			user.drop_from_inventory(held_item, src)
 			update_icon(0)
 			return TRUE
-	else if(IS_SCREWDRIVER(held_item))
-		playsound(loc, 'sound/items/Screwdriver.ogg', 75, TRUE)
-		user.visible_message("<b>[user]</b> removes [src]'s lampshade.", \
-			SPAN_NOTICE("You remove [src]'s lampshade."), "You hear a noise.")
+	else if(held_item.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 1 SECOND, "unscrewing", "unscrewing"))
 		lampshade.dropInto(loc)
 		lampshade = null
 		update_icon(0)
