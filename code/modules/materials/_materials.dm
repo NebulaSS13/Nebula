@@ -129,8 +129,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/boiling_point = 3000
 	/// kJ/kg, enthalpy of vaporization
 	var/latent_heat = 7000
-	/// kg/mol,
+	/// kg/mol
 	var/molar_mass = 0.06
+	/// g/ml
+	var/liquid_density = 0.997
+	/// g/ml
+	var/solid_density = 0.9168
 	/// Brute damage to a wall is divided by this value if the wall is reinforced by this material.
 	var/brute_armor = 2
 	/// Same as above, but for Burn damage type. If blank brute_armor's value is used.
@@ -440,6 +444,17 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			!isnull(melting_point) && temperature >= melting_point)
 		return MAT_PHASE_LIQUID
 	return MAT_PHASE_SOLID
+
+// Returns the number of mols of material for the amount of solid or liquid units passed.
+/decl/material/proc/get_mols_from_units(units, phase)
+	var/ml = units*10 // Rough estimation.
+	switch(phase)
+		if(MAT_PHASE_LIQUID)
+			var/kg = (liquid_density*ml)/1000
+			return kg/molar_mass
+		if(MAT_PHASE_SOLID)
+			var/kg = (solid_density*ml)/1000
+			return kg/molar_mass
 
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
