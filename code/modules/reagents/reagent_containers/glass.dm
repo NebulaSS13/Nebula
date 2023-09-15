@@ -37,7 +37,8 @@
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
-		/obj/machinery/radiocarbon_spectrometer
+		/obj/machinery/radiocarbon_spectrometer,
+		/obj/machinery/material_processing/extractor
 	)
 
 /obj/item/chems/glass/examine(mob/user, distance)

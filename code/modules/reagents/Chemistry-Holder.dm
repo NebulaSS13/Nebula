@@ -460,7 +460,7 @@ var/global/obj/temp_reagents_holder = new
 	if (!target || !target.reagents || !target.simulated)
 		return
 
-	amount = min(amount, REAGENT_VOLUME(src, type))
+	amount = max(0, min(amount, REAGENT_VOLUME(src, type), REAGENTS_FREE_SPACE(target.reagents) / multiplier))
 
 	if(!amount)
 		return
@@ -475,7 +475,7 @@ var/global/obj/temp_reagents_holder = new
 	if (!target)
 		return
 
-	amount = min(amount, REAGENT_VOLUME(src, type))
+	amount = max(0, min(amount, REAGENT_VOLUME(src, type), REAGENTS_FREE_SPACE(target) / multiplier))
 
 	if(!amount)
 		return

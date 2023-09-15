@@ -86,8 +86,8 @@
 	use_name = null
 	codex_name = null
 	heating_products = list(
-		/decl/material/gas/ammonia  = 0.4,
-		/decl/material/liquid/water = 0.2,
+		/decl/material/gas/ammonia  = 0.05,
+		/decl/material/liquid/water = 0.55,
 		/decl/material/liquid/ethanol = 0.4
 	)
 	uid = "solid_ice_ediroite"
@@ -101,10 +101,10 @@
 	codex_name = null
 	uid = "solid_ice_hydrogen"
 	heating_products = list(
-		/decl/material/gas/hydrogen = 0.2,
-		/decl/material/liquid/water = 0.65,
-		/decl/material/gas/hydrogen/deuterium = 0.1,
-		/decl/material/gas/hydrogen/tritium = 0.05
+		/decl/material/gas/hydrogen = 0.05,
+		/decl/material/liquid/water = 0.92,
+		/decl/material/gas/hydrogen/deuterium = 0.02,
+		/decl/material/gas/hydrogen/tritium = 0.01
 	)
 	value = 0.3
 	sparse_material_weight = 20
@@ -128,8 +128,8 @@
 /decl/material/solid/ice/hydrate/##NAME/uid = "solid_hydrate_" + #NAME;    \
 /decl/material/solid/ice/hydrate/##NAME/name = #DISPLAY_NAME + " hydrate"; \
 /decl/material/solid/ice/hydrate/##NAME/heating_products = list(           \
-	PATH = 0.2,                                                            \
-	/decl/material/liquid/water = 0.8                                      \
+	PATH = 0.1,                                                            \
+	/decl/material/liquid/water = 0.9                                      \
 );                                                                         \
 /decl/material/solid/ice/hydrate/##NAME
 
