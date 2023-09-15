@@ -8,13 +8,8 @@
 		return 1
 	return 0
 
-/mob/living/silicon/robot/Process_Spacemove()
-	if(module)
-		for(var/obj/item/tank/jetpack/J in module.equipment)
-			if(J && J.allow_thrust(0.01))
-				return 1
-	. = ..()
-
+/mob/living/silicon/robot/get_jetpack()
+	return locate(/obj/item/tank/jetpack) in module?.equipment
 
 /mob/living/silicon/robot/Move()
 	. = ..()
