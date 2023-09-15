@@ -941,7 +941,7 @@ FIRE ALARM
 	var/d2
 
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
+	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon) || istype(user, /mob/observer))
 		A = A.loc
 
 		if (A.fire)

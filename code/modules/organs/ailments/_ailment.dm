@@ -39,7 +39,7 @@
 /datum/ailment/proc/can_apply_to(var/obj/item/organ/_organ)
 	if(specific_organ_subtype && !istype(_organ, specific_organ_subtype))
 		return FALSE
-	if(affects_robotics != !!(BP_IS_PROSTHETIC(organ)))
+	if(affects_robotics != !!(BP_IS_PROSTHETIC(_organ)))
 		return FALSE
 	if(length(applies_to_organ) && !(_organ?.organ_tag in applies_to_organ))
 		return FALSE
@@ -96,7 +96,7 @@
 
 	if(istype(treatment, /obj/item/stack))
 		var/obj/item/stack/stack = treatment
-		stack.use(1)
+		stack.use(treated_by_item_cost)
 	qdel(src)
 
 /datum/ailment/proc/treated_by_medication(var/reagent_type, var/dosage)

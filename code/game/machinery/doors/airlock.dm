@@ -292,9 +292,9 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/on_update_icon(state=0, override=0)
 
 	if(set_dir_on_update)
-		if(connections & (NORTH|SOUTH))
+		if(connections & (NORTH|SOUTH) == (NORTH|SOUTH))
 			set_dir(EAST)
-		else
+		else if (connections & (EAST|WEST) == (EAST|WEST))
 			set_dir(SOUTH)
 
 	switch(state)
