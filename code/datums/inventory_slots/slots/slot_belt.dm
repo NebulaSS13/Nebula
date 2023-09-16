@@ -18,7 +18,7 @@
 			return TRUE
 		// Otherwise, if they have a uniform slot, they need a uniform to wear a belt.
 		var/datum/inventory_slot/check_slot = user.get_inventory_slot_datum(slot_w_uniform_str)
-		if(check_slot?.get_equipped_item())
+		if(!check_slot || check_slot.get_equipped_item())
 			return TRUE
 		if(!disable_warning)
 			to_chat(user, SPAN_WARNING("You need to be wearing something on your body before you can wear \the [prop]."))
