@@ -158,60 +158,70 @@
 	name = "yellow"
 	uid = "solid_cotton_yellow"
 	use_name = "yellow cloth"
+	adjective_name = "yellow"
 	color = "#ffbf00"
 
 /decl/material/solid/cloth/teal
 	name = "teal"
 	uid = "solid_cotton_teal"
 	use_name = "teal cloth"
+	adjective_name = "teal"
 	color = "#00e1ff"
 
 /decl/material/solid/cloth/black
 	name = "black"
 	uid = "solid_cotton_black"
 	use_name = "black cloth"
+	adjective_name = "black"
 	color = "#505050"
 
 /decl/material/solid/cloth/green
 	name = "green"
 	uid = "solid_cotton_green"
 	use_name = "green cloth"
+	adjective_name = "green"
 	color = "#b7f27d"
 
 /decl/material/solid/cloth/purple
 	name = "purple"
 	uid = "solid_cotton_purple"
 	use_name = "purple cloth"
+	adjective_name = "purple"
 	color = "#9933ff"
 
 /decl/material/solid/cloth/blue
 	name = "blue"
 	uid = "solid_cotton_blue"
 	use_name = "blue cloth"
+	adjective_name = "blue"
 	color = "#46698c"
 
 /decl/material/solid/cloth/beige
 	name = "beige"
 	uid = "solid_cotton_beige"
 	use_name = "beige cloth"
+	adjective_name = "beige"
 	color = "#ceb689"
 
 /decl/material/solid/cloth/lime
 	name = "lime"
 	uid = "solid_cotton_lime"
 	use_name = "lime cloth"
+	adjective_name = "lime"
 	color = "#62e36c"
 
 /decl/material/solid/cloth/red
 	name = "red"
 	uid = "solid_cotton_red"
 	use_name = "red cloth"
+	adjective_name = "red"
 	color = "#9d2300"
 
 /decl/material/solid/carpet
 	name = "red"
 	uid = "solid_carpet"
 	use_name = "red upholstery"
+	adjective_name = "red"
 	color = "#9d2300"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+232

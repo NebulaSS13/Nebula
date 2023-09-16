@@ -86,25 +86,14 @@
 	return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
-
 	if (required_language)
 		H.add_language(required_language)
 		H.set_default_language(required_language)
-
 	H.add_language(/decl/language/human/common)
 	H.set_default_language(/decl/language/human/common)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
-	if(outfit) . = outfit.equip(H, title, alt_title)
-
-	if(!QDELETED(H))
-		var/obj/item/card/id/id = H.GetIdCard()
-		if(id)
-			id.rank = title
-			id.assignment = id.rank
-			id.access |= get_access()
-			if(!id.detail_color)
-				id.detail_color = selection_color
-			id.update_icon()
+	if(outfit)
+		return outfit.equip(H, title, alt_title)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
@@ -179,8 +168,7 @@
 /datum/job/proc/get_access()
 	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
 		return minimal_access?.Copy()
-	else
-		return access?.Copy()
+	return access?.Copy()
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/C)

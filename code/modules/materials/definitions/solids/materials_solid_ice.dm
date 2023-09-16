@@ -19,16 +19,11 @@
 	uid = "solid_ice"
 
 /decl/material/solid/ice/Initialize()
-	if(!liquid_name)
-		liquid_name = "liquid [name]" // avoiding the 'molten ice' issue
-	if(!gas_name)
-		gas_name = name
-	if(!solid_name)
-		solid_name = "[name] ice"
-	if(!use_name)
-		use_name = solid_name
-	if(!ore_name)
-		ore_name = solid_name
+	liquid_name ||= "liquid [name]" // avoiding the 'molten ice' issue
+	gas_name    ||= name
+	solid_name  ||= "[name] ice"
+	use_name    ||= solid_name
+	ore_name    ||= solid_name
 	. = ..()
 
 /decl/material/solid/ice/aspium

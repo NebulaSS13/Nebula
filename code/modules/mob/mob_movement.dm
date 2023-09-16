@@ -156,6 +156,12 @@
 			return backup
 		return -1
 
+/mob/living/Process_Spacemove(allow_movement)
+	var/obj/item/tank/jetpack/thrust = get_jetpack()
+	if(thrust?.on && (allow_movement || thrust.stabilization_on) && thrust.allow_thrust(0.01, src))
+		return TRUE
+	return ..()
+
 /mob/proc/space_do_move(var/allow_move, var/direction)
 	if(ismovable(allow_move))//push off things in space
 		handle_space_pushoff(allow_move, direction)

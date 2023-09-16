@@ -194,7 +194,11 @@ var/global/list/telecomms_hubs = list()
 
 	for(var/mob/listener in listeners)
 		var/per_listener_send_name = listeners[listener] ? overmap_send_name : send_name
-		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name)
+		var/per_listener_loc_name
+		if(send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listeners[listener])
+			// then append the overmap object name to it, so they know where we're from
+			per_listener_loc_name = send_overmap_object.name
+		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name, per_listener_loc_name)
 
 	if(!chain_transmit)
 		return

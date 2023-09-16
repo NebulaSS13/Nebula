@@ -309,16 +309,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	. = ..()
 	if(!name)
 		CRASH("Unnamed material /decl tried to initialize.")
-	if(!use_name)
-		use_name = name
-	if(!liquid_name)
-		liquid_name = name
-	if(!solid_name)
-		solid_name = name
-	if(!gas_name)
-		gas_name = name
-	if(!adjective_name)
-		adjective_name = name
+	// Default use_name to name if unset.
+	use_name       ||= name
+	// Default everything else to use_name, so that if it's overridden, we use that instead of base name.
+	liquid_name    ||= use_name
+	solid_name     ||= use_name
+	gas_name       ||= use_name
+	adjective_name ||= use_name
 	if(!shard_icon)
 		shard_icon = shard_type
 	if(!burn_armor)
