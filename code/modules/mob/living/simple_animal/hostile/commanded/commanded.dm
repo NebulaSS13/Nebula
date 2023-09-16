@@ -16,7 +16,7 @@
 		command_buffer.Add(lowertext(html_decode(message)))
 	return 0
 
-/mob/living/simple_animal/hostile/commanded/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/living/simple_animal/hostile/commanded/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname, var/vsource)
 	if((weakref(speaker) in friends) || speaker == master)
 		command_buffer.Add(speaker)
 		command_buffer.Add(lowertext(html_decode(message)))

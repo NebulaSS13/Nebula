@@ -3,7 +3,9 @@
 	desc = "You're not sure what this is. You should probably ahelp it."
 	icon = 'icons/clothing/mask/smokables/cigarette.dmi'
 	body_parts_covered = 0
+	bodytype_equip_flags = null
 	z_flags = ZMM_MANGLE_PLANES
+
 	var/lit = 0
 	var/waterproof = FALSE
 	var/type_butt = null

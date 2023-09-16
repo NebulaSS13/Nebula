@@ -1390,6 +1390,7 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/techfloor
 	name = "techfloor edges"
 	icon_state = "techfloor_edges"
+	layer = DECAL_LAYER - 0.005 // so other decals can show up over it
 
 /obj/effect/floor_decal/techfloor/corner
 	name = "techfloor corner"

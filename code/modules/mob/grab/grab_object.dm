@@ -72,7 +72,7 @@
 		else
 			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [G.self]!"))
 
-	if(affecting_mob && affecting_mob.a_intent != I_HELP)
+	if(affecting_mob && assailant?.a_intent == I_HURT)
 		upgrade(TRUE)
 
 /obj/item/grab/examine(mob/user)

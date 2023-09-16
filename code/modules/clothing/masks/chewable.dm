@@ -3,6 +3,7 @@
 	desc = "You're not sure what this is. You should probably ahelp it."
 	icon = 'icons/clothing/mask/chewables/lollipop.dmi'
 	body_parts_covered = 0
+	bodytype_equip_flags = null
 
 	var/type_butt = null
 	var/chem_volume = 0

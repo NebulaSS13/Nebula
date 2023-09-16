@@ -492,7 +492,7 @@ SUBSYSTEM_DEF(jobs)
 		spawn_in_storage = equip_custom_loadout(H, job)
 		job.setup_account(H)
 		var/decl/hierarchy/outfit/outfit = job.get_outfit(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
-		outfit.equip_id(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
+		outfit.equip_id(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank, job)
 	else
 		to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 

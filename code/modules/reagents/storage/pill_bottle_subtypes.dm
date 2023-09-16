@@ -63,7 +63,7 @@
 	return list(/obj/item/chems/pill/painkillers = 14)
 
 /obj/item/storage/pill_bottle/strong_painkillers
-	name = "pill bottle (strong painkillers)"
+	labeled_name = "strong painkillers"
 	desc = "Contains pills used to relieve pain. Do not mix with alcohol consumption."
 	wrapper_color = COLOR_PURPLE_GRAY
 

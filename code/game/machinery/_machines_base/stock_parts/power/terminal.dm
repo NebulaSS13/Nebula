@@ -180,7 +180,7 @@
 	expected_part_type = /obj/item/stock_parts/power/terminal
 
 /decl/stock_part_preset/terminal_setup/apply(obj/machinery/machine, var/obj/item/stock_parts/power/terminal/part)
-	if(isturf(machine.loc))
+	if(isturf(machine.loc) && machine.anchored)
 		part.make_terminal(machine)
 
 //Offset terminals towards the owner's facing direction

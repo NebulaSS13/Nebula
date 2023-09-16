@@ -1,6 +1,7 @@
 /turf/unsimulated/beach
 	name = "Beach"
 	icon = 'icons/misc/beach.dmi'
+	turf_flags = TURF_FLAG_BACKGROUND
 
 /turf/unsimulated/beach/sand
 	name = "Sand"
@@ -14,7 +15,7 @@
 /turf/unsimulated/beach/water
 	name = "Water"
 	icon_state = "water"
-	turf_flags = TURF_IS_WET | TURF_IS_HOLOMAP_PATH
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_WET | TURF_IS_HOLOMAP_PATH
 
 /turf/unsimulated/beach/water/Initialize(var/ml)
 	. = ..()

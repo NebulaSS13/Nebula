@@ -69,15 +69,6 @@
 	. = ..()
 	. += species.strength
 
-/mob/living/carbon/human/Process_Spacemove(var/allow_movement)
-	var/obj/item/tank/jetpack/thrust = get_jetpack()
-
-	if(thrust && thrust.on && (allow_movement || thrust.stabilization_on) && thrust.allow_thrust(0.01, src))
-		return 1
-
-	. = ..()
-
-
 /mob/living/carbon/human/space_do_move(var/allow_move, var/direction)
 	if(allow_move == 1)
 		var/obj/item/tank/jetpack/thrust = get_jetpack()
@@ -92,16 +83,6 @@
 			return 0
 
 	. = ..()
-
-/mob/living/carbon/human/proc/get_jetpack()
-	var/obj/item/back = get_equipped_item(slot_back_str)
-	if(back)
-		if(istype(back,/obj/item/tank/jetpack))
-			return back
-		if(istype(back,/obj/item/rig))
-			var/obj/item/rig/rig = back
-			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
-				return module.jets
 
 /mob/living/carbon/human/slip_chance(var/prob_slip = 5)
 	if(!..())
