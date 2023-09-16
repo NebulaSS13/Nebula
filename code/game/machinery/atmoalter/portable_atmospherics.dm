@@ -5,7 +5,6 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 	var/datum/gas_mixture/air_contents = new
-	var/obj/machinery/atmospherics/portables_connector/connected_port
 	var/obj/item/tank/holding
 	var/volume = 0
 	var/destroyed = 0
@@ -22,6 +21,10 @@
 	..()
 	air_contents.volume = volume
 	air_contents.temperature = T20C
+
+
+	set_extension(src, /datum/extension/atmospherics_connection, TRUE, air_contents)
+
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/portable_atmospherics/Destroy()
@@ -32,12 +35,13 @@
 /obj/machinery/portable_atmospherics/LateInitialize()
 	var/obj/machinery/atmospherics/portables_connector/port = locate() in loc
 	if(port)
-		connect(port)
-		update_icon()
+		var/datum/extension/atmospherics_connection/connection = get_extension(src, /datum/extension/atmospherics_connection)
+		if(connection)
+			connection.connect(port)
+			update_icon()
 
 /obj/machinery/portable_atmospherics/Process()
-	if(!connected_port) //only react when pipe_network will ont it do it for you
-		//Allow for reactions
+	if(get_port()) // Only react when pipe_network will not do it for you
 		air_contents.react()
 	else
 		update_icon()
@@ -53,52 +57,24 @@
 /obj/machinery/portable_atmospherics/on_update_icon()
 	return null
 
+/obj/machinery/portable_atmospherics/proc/get_port()
+	var/datum/extension/atmospherics_connection/connection = get_extension(src, /datum/extension/atmospherics_connection)
+
+	return connection?.connected_port
+
 /obj/machinery/portable_atmospherics/proc/connect(obj/machinery/atmospherics/portables_connector/new_port)
-	//Make sure not already connected to something else
-	if(connected_port || !new_port || new_port.connected_device)
-		return 0
+	var/datum/extension/atmospherics_connection/connection = get_extension(src, /datum/extension/atmospherics_connection)
 
-	//Make sure are close enough for a valid connection
-	if(new_port.loc != loc)
-		return 0
-
-	//Perform the connection
-	connected_port = new_port
-	connected_port.connected_device = src
-	connected_port.on = 1 //Activate port updates
-
-	anchored = TRUE //Prevent movement
-
-	//Actually enforce the air sharing
-	var/datum/pipe_network/network = connected_port.return_network(src)
-	if(network && !network.gases.Find(air_contents))
-		network.gases += air_contents
-		network.update = 1
-
-	return 1
+	return connection?.connect(new_port)
 
 /obj/machinery/portable_atmospherics/proc/disconnect()
-	if(!connected_port)
-		return 0
+	var/datum/extension/atmospherics_connection/connection = get_extension(src, /datum/extension/atmospherics_connection)
 
-	var/datum/pipe_network/network = connected_port.return_network(src)
-	if(network)
-		network.gases -= air_contents
-
-	anchored = FALSE
-
-	connected_port.connected_device = null
-	connected_port = null
-
-	return 1
+	return connection?.disconnect()
 
 /obj/machinery/portable_atmospherics/proc/update_connected_network()
-	if(!connected_port)
-		return
-
-	var/datum/pipe_network/network = connected_port.return_network(src)
-	if (network)
-		network.update = 1
+	var/datum/extension/atmospherics_connection/connection = get_extension(src, /datum/extension/atmospherics_connection)
+	connection?.update_connected_network()
 
 /obj/machinery/portable_atmospherics/attackby(var/obj/item/W, var/mob/user)
 	if ((istype(W, /obj/item/tank) && !( src.destroyed )))
@@ -111,8 +87,7 @@
 		return
 
 	else if(IS_WRENCH(W) && !panel_open)
-		if(connected_port)
-			disconnect()
+		if(disconnect())
 			to_chat(user, "<span class='notice'>You disconnect \the [src] from the port.</span>")
 			update_icon()
 			return

@@ -581,7 +581,7 @@
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
 
-		if(closed_system && (connected_port || holding))
+		if(closed_system && (get_port() || holding))
 			environment = air_contents
 
 		if(!environment)

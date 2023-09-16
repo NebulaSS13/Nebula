@@ -76,7 +76,7 @@
 	var/turf/T = loc
 	var/datum/gas_mixture/environment
 	// If we're closed, take from our internal sources.
-	if(closed_system && (connected_port || holding))
+	if(closed_system && (get_port() || holding))
 		environment = air_contents
 	// If atmos input is not there, grab from turf.
 	if(!environment && istype(T)) environment = T.return_air()
@@ -89,7 +89,7 @@
 		plant_health -= seed.handle_environment(T,environment)
 
 	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
-	if (closed_system && connected_port)
+	if (closed_system && get_port())
 		update_connected_network()
 
 	// Toxin levels beyond the plant's tolerance cause damage, but
