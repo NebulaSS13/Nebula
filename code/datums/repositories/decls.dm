@@ -36,14 +36,16 @@ var/global/repository/decls/decls_repository = new
 		if(decl_uid && (!TYPE_IS_ABSTRACT(decl) || (initial(decl.decl_flags) & DECL_FLAG_ALLOW_ABSTRACT_INIT)))
 			fetched_decl_ids[decl_uid] = decl
 
-/repository/decls/proc/get_decl_by_id(var/decl_id)
+/repository/decls/proc/get_decl_by_id(var/decl_id, var/validate_decl_type = TRUE)
 	RETURN_TYPE(/decl)
-	. = get_decl(fetched_decl_ids[decl_id])
+	. = get_decl(fetched_decl_ids[decl_id], validate_decl_type)
 
 /repository/decls/proc/get_decl_path_by_id(decl_id)
 	. = fetched_decl_ids[decl_id]
 
 /repository/decls/proc/get_decl(var/decl/decl_type, var/validate_decl_type = TRUE)
+
+	RETURN_TYPE(/decl)
 
 	if(!ispath(decl_type, /decl))
 		if(validate_decl_type)

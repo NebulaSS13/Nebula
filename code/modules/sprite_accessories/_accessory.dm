@@ -61,6 +61,11 @@
 
 /decl/sprite_accessory/validate()
 	. = ..()
-	var/actual_icon_state = get_validatable_icon_state()
-	if(actual_icon_state && !check_state_in_icon(actual_icon_state, icon))
-		. += "missing icon state \"[actual_icon_state]\" in [icon]"
+	if(!icon)
+		. += "missing icon"
+	else
+		var/actual_icon_state = get_validatable_icon_state()
+		if(!actual_icon_state)
+			. += "missing icon_state"
+		else if(!check_state_in_icon(actual_icon_state, icon))
+			. += "missing icon state \"[actual_icon_state]\" in [icon]"
