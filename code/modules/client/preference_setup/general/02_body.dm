@@ -335,7 +335,7 @@
 				continue
 			var/decl/sprite_accessory/accessory = all_markings[M]
 			mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype)
-			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype, pref.gender))
+			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype))
 				usable_markings += accessory
 
 		var/decl/sprite_accessory/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
@@ -361,12 +361,10 @@
 
 /datum/category_item/player_setup_item/proc/ResetHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	var/decl/bodytype/B = mob_species?.get_bodytype_by_name(pref.bodytype)
-	var/list/valid_hairstyles = mob_species?.get_hair_style_types(B)
+	var/list/valid_hairstyles = mob_species?.get_hair_style_types(pref.get_bodytype_decl())
 	pref.h_style = length(valid_hairstyles) ? pick(valid_hairstyles) : initial(pref.h_style)
 
 /datum/category_item/player_setup_item/proc/ResetFacialHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	var/decl/bodytype/B = mob_species?.get_bodytype_by_name(pref.bodytype)
-	var/list/valid_facialhairstyles = mob_species?.get_facial_hair_styles(B)
+	var/list/valid_facialhairstyles = mob_species?.get_facial_hair_styles(pref.get_bodytype_decl())
 	pref.f_style = length(valid_facialhairstyles) ? pick(valid_facialhairstyles) : initial(pref.f_style)

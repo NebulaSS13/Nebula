@@ -93,7 +93,6 @@
 	icon = 'mods/species/bayliens/unathi/icons/facial_hair.dmi'
 	icon_state = "facial_chinhorns"
 	species_allowed = list(SPECIES_LIZARD)
-	gender = NEUTER
 	blend = ICON_MULTIPLY
 	uid = "acc_fhair_una_chinhorns"
 

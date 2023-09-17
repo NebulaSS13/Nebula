@@ -575,10 +575,10 @@
 
 		// Check and clear hair.
 		var/decl/sprite_accessory/hair/hairstyle = GET_DECL(h_style)
-		if(!hairstyle?.accessory_is_available(src, species, new_bodytype, gender))
+		if(!hairstyle?.accessory_is_available(src, species, new_bodytype))
 			change_hair(new_bodytype.default_h_style, FALSE)
 		var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(f_style)
-		if(!facialhairstyle?.accessory_is_available(src, species, new_bodytype, gender))
+		if(!facialhairstyle?.accessory_is_available(src, species, new_bodytype))
 			change_facial_hair(new_bodytype.default_f_style, FALSE)
 		// TODO: check markings.
 

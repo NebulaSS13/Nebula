@@ -22,7 +22,7 @@
 	var/name                                       // The preview name of the accessory
 	var/icon                                       // the icon file the accessory is located in
 	var/icon_state                                 // the icon_state of the accessory
-	var/gender = null                              // Restricted to specific genders. null matches any
+	var/required_gender = null                     // Restricted to specific genders. null matches any
 	var/list/species_allowed = list(SPECIES_HUMAN) // Restrict some styles to specific root species names
 	var/list/subspecies_allowed                    // Restrict some styles to specific species names, irrespective of root species name
 	var/body_flags_allowed = null                  // Restrict some styles to specific bodytype flags
@@ -34,8 +34,8 @@
 	var/blend = ICON_ADD
 	var/flags = 0
 
-/decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype, var/check_gender)
-	if(!isnull(check_gender) && gender && check_gender != gender)
+/decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype)
+	if(!isnull(required_gender) && bodytype.associated_gender != required_gender)
 		return FALSE
 	if(species)
 		var/species_is_permitted = TRUE

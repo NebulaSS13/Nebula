@@ -132,7 +132,6 @@
 	icon_state = "facial_sideburns"
 	species_allowed = list(SPECIES_TAJARA)
 	icon = 'mods/species/bayliens/tajaran/icons/facial.dmi'
-	gender = null
 	blend = ICON_MULTIPLY
 	uid = "acc_fhair_taj_sideburns"
 
