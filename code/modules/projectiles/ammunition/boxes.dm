@@ -1,4 +1,6 @@
 /obj/item/ammo_magazine/speedloader
+	name = "speed loader"
+	desc = "A speed loader for revolvers."
 	icon = 'icons/obj/ammo/speedloader.dmi'
 	icon_state = ICON_STATE_WORLD
 	caliber = CALIBER_PISTOL_MAGNUM
