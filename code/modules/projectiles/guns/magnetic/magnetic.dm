@@ -65,26 +65,23 @@
 
 /obj/item/gun/magnetic/on_update_icon()
 	. = ..()
-	var/list/overlays_to_add = list()
 	if(removable_components)
 		if(cell)
-			overlays_to_add += image(icon, "[icon_state]_cell")
+			add_overlay("[icon_state]_cell")
 		if(capacitor)
-			overlays_to_add += image(icon, "[icon_state]_capacitor")
+			add_overlay(icon, "[icon_state]_capacitor")
 	if(!cell || !capacitor)
-		overlays_to_add += image(icon, "[icon_state]_red")
+		add_overlay(icon, "[icon_state]_red")
 	else if(capacitor.charge < power_cost)
-		overlays_to_add += image(icon, "[icon_state]_amber")
+		add_overlay(icon, "[icon_state]_amber")
 	else
-		overlays_to_add += image(icon, "[icon_state]_green")
+		add_overlay(icon, "[icon_state]_green")
 	if(loaded)
-		overlays_to_add += image(icon, "[icon_state]_loaded")
+		add_overlay(icon, "[icon_state]_loaded")
 		var/obj/item/magnetic_ammo/mag = loaded
 		if(istype(mag))
 			if(mag.remaining)
-				overlays_to_add += image(icon, "[icon_state]_ammo")
-
-	overlays += overlays_to_add
+				add_overlay(icon, "[icon_state]_ammo")
 
 /obj/item/gun/magnetic/proc/show_ammo(var/mob/user)
 	if(loaded)
