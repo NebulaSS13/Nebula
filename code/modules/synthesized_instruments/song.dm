@@ -10,7 +10,7 @@
 	var/datum/instrument/instrument_data
 
 	var/linear_decay = 1
-	var/sustain_timer = 1
+	var/sustain_timer = 15 // Setting this too low causes the guitar to sound inaudible.
 	var/soft_coeff = 2.0
 	var/transposition = 0
 
@@ -117,11 +117,11 @@
 	autorepeat = 0 ;\
 	playing = 0 ;\
 	current_line = 0 ;\
-	player.event_manager.deactivate() ;\
+	player?.event_manager?.deactivate();\
 	return
 
 /datum/synthesized_song/proc/play_lines(mob/user, list/allowed_suff, list/note_off_delta, list/lines)
-	if (!lines.len)
+	if (!lines.len || QDELETED(player))
 		STOP_PLAY_LINES
 	var/list/cur_accidentals = list("n", "n", "n", "n", "n", "n", "n")
 	var/list/cur_octaves = list(3, 3, 3, 3, 3, 3, 3)
