@@ -241,8 +241,11 @@
 	if(!splatter)
 		splatter = new decal_type(T)
 
-	var/obj/effect/decal/cleanable/blood/drip/drop = splatter
-	if(istype(drop) && drips && drips.len && !large)
+	if(QDELETED(splatter))
+		return
+
+	if(istype(splatter, /obj/effect/decal/cleanable/blood/drip) && drips && drips.len && !large)
+		var/obj/effect/decal/cleanable/blood/drip/drop = splatter
 		drop.overlays |= drips
 		drop.drips |= drips
 
