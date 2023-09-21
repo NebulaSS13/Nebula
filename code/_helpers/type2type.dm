@@ -254,4 +254,4 @@
 			error("File not found ([filename])")
 	catch(var/exception/E)
 		if(error_on_invalid_return)
-			error("Exception when loading file as string: [E]")
+			error("Exception when loading file as string: [EXCEPTION_TEXT(E)]")

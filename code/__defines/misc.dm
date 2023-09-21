@@ -311,3 +311,5 @@
 // Set on many base types.
 #define DEFAULT_APPEARANCE_FLAGS (PIXEL_SCALE)
 
+///Formats exceptions into a readable string with all the details.
+#define EXCEPTION_TEXT(E) "'[E.name]' ('[E.type]'): '[E.file]':[E.line]:\n'[E.desc]'"
