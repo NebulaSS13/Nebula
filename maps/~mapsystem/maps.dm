@@ -126,7 +126,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/station_departments = list()//Gets filled automatically depending on jobs allowed
 
 	var/default_species = SPECIES_HUMAN
-	var/default_bodytype = BODYTYPE_HUMANOID
 
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(/decl/cultural_info/location/other),

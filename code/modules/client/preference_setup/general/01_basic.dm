@@ -136,6 +136,12 @@
 			pref.bodytype = new_body.name
 			if(new_body.associated_gender) // Set to default for male/female to avoid confusing people
 				pref.gender = new_body.associated_gender
+			var/decl/sprite_accessory/hair/hairstyle = GET_DECL(pref.h_style)
+			if(!hairstyle?.accessory_is_available(null, S, new_body))
+				pref.h_style = new_body.default_h_style
+			var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(pref.f_style)
+			if(!facialhairstyle?.accessory_is_available(null, S, new_body))
+				pref.f_style = new_body.default_f_style
 			new_body.handle_post_bodytype_pref_set(pref)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 

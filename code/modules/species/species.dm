@@ -670,54 +670,54 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] face is horribly mangled!\n")
 
-/decl/species/proc/get_hair_style_types(var/gender = NEUTER, var/check_gender = TRUE)
-	if(!check_gender)
-		gender = NEUTER
+/decl/species/proc/get_hair_style_types(var/decl/bodytype/bodytype)
+	if(!bodytype)
+		bodytype = default_bodytype
 	var/list/hair_styles_by_species = LAZYACCESS(hair_styles, type)
 	if(!hair_styles_by_species)
 		hair_styles_by_species = list()
 		LAZYSET(hair_styles, type, hair_styles_by_species)
-	var/list/hair_style_by_gender = hair_styles_by_species[gender]
-	if(!hair_style_by_gender)
-		hair_style_by_gender = list()
-		LAZYSET(hair_styles_by_species, gender, hair_style_by_gender)
+	var/list/hair_style_by_bodytype = hair_styles_by_species[bodytype]
+	if(!hair_style_by_bodytype)
+		hair_style_by_bodytype = list()
+		LAZYSET(hair_styles_by_species, bodytype, hair_style_by_bodytype)
 		var/list/all_hairstyles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
 		for(var/hairstyle in all_hairstyles)
 			var/decl/sprite_accessory/S = all_hairstyles[hairstyle]
-			if(!S.accessory_is_available(null, src, null, (check_gender && gender)))
+			if(!S.accessory_is_available(null, src, bodytype))
 				continue
-			ADD_SORTED(hair_style_by_gender, hairstyle, /proc/cmp_text_asc)
-			hair_style_by_gender[hairstyle] = S
-	return hair_style_by_gender
+			ADD_SORTED(hair_style_by_bodytype, hairstyle, /proc/cmp_text_asc)
+			hair_style_by_bodytype[hairstyle] = S
+	return hair_style_by_bodytype
 
-/decl/species/proc/get_hair_styles(var/gender = NEUTER, var/check_gender = TRUE)
+/decl/species/proc/get_hair_styles(var/decl/bodytype/bodytype)
 	. = list()
-	for(var/hair in get_hair_style_types(gender, check_gender))
+	for(var/hair in get_hair_style_types(bodytype))
 		. += GET_DECL(hair)
 
-/decl/species/proc/get_facial_hair_style_types(var/gender, var/check_gender = TRUE)
-	if(!check_gender)
-		gender = NEUTER
+/decl/species/proc/get_facial_hair_style_types(var/decl/bodytype/bodytype)
+	if(!bodytype)
+		bodytype = default_bodytype
 	var/list/facial_hair_styles_by_species = LAZYACCESS(facial_hair_styles, type)
 	if(!facial_hair_styles_by_species)
 		facial_hair_styles_by_species = list()
 		LAZYSET(facial_hair_styles, type, facial_hair_styles_by_species)
-	var/list/facial_hair_style_by_gender = facial_hair_styles_by_species[gender]
-	if(!facial_hair_style_by_gender)
-		facial_hair_style_by_gender = list()
-		LAZYSET(facial_hair_styles_by_species, gender, facial_hair_style_by_gender)
+	var/list/facial_hair_style_by_bodytype = facial_hair_styles_by_species[bodytype]
+	if(!facial_hair_style_by_bodytype)
+		facial_hair_style_by_bodytype = list()
+		LAZYSET(facial_hair_styles_by_species, bodytype, facial_hair_style_by_bodytype)
 		var/list/all_facial_styles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
 		for(var/facialhairstyle in all_facial_styles)
 			var/decl/sprite_accessory/S = all_facial_styles[facialhairstyle]
-			if(!S.accessory_is_available(null, src, null, (check_gender && gender)))
+			if(!S.accessory_is_available(null, src, bodytype))
 				continue
-			ADD_SORTED(facial_hair_style_by_gender, facialhairstyle, /proc/cmp_text_asc)
-			facial_hair_style_by_gender[facialhairstyle] = S
-	return facial_hair_style_by_gender
+			ADD_SORTED(facial_hair_style_by_bodytype, facialhairstyle, /proc/cmp_text_asc)
+			facial_hair_style_by_bodytype[facialhairstyle] = S
+	return facial_hair_style_by_bodytype
 
-/decl/species/proc/get_facial_hair_styles(var/gender, var/check_gender = TRUE)
+/decl/species/proc/get_facial_hair_styles(var/decl/bodytype/bodytype)
 	. = list()
-	for(var/hair in get_facial_hair_style_types(gender, check_gender))
+	for(var/hair in get_facial_hair_style_types(bodytype))
 		. += GET_DECL(hair)
 
 /decl/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.

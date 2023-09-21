@@ -7,16 +7,6 @@
 		if(M)
 			LAZYDISTINCTADD(., M)
 
-/proc/random_hair_style(gender, species)
-	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
-	var/list/valid_styles = mob_species?.get_hair_style_types(gender)
-	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/hair/bald
-
-/proc/random_facial_hair_style(gender, var/species)
-	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
-	var/list/valid_styles = mob_species?.get_facial_hair_style_types(gender)
-	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/facial_hair/shaved
-
 /proc/random_name(gender, species)
 	if(species)
 		var/decl/species/current_species = get_species_by_key(species)

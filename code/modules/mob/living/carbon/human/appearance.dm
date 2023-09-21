@@ -46,18 +46,18 @@
 	var/decl/pronouns/pronouns = pick(species.available_pronouns)
 	set_gender(pronouns.name, TRUE)
 
-/mob/living/carbon/human/proc/change_hair(var/hair_style)
+/mob/living/carbon/human/proc/change_hair(var/hair_style, var/update_icons = TRUE)
 	if(!hair_style || h_style == hair_style || !ispath(hair_style, /decl/sprite_accessory/hair))
 		return
 	h_style = hair_style
-	update_hair()
+	update_hair(update_icons)
 	return 1
 
-/mob/living/carbon/human/proc/change_facial_hair(var/facial_hair_style)
+/mob/living/carbon/human/proc/change_facial_hair(var/facial_hair_style, var/update_icons = TRUE)
 	if(!facial_hair_style || f_style == facial_hair_style || !ispath(facial_hair_style, /decl/sprite_accessory/facial_hair))
 		return
 	f_style = facial_hair_style
-	update_hair()
+	update_hair(update_icons)
 	return 1
 
 /mob/living/carbon/human/proc/reset_hair()
@@ -141,11 +141,11 @@
 
 	return valid_species
 
-/mob/living/carbon/human/proc/get_valid_hairstyle_types(var/check_gender = TRUE)
-	return species.get_hair_style_types(get_bodytype().associated_gender, check_gender)
+/mob/living/carbon/human/proc/get_valid_hairstyle_types()
+	return species.get_hair_style_types(get_bodytype())
 
-/mob/living/carbon/human/proc/get_valid_facial_hairstyle_types(var/check_gender = TRUE)
-	return species.get_facial_hair_style_types(get_bodytype().associated_gender, check_gender)
+/mob/living/carbon/human/proc/get_valid_facial_hairstyle_types()
+	return species.get_facial_hair_style_types(get_bodytype())
 
 /mob/living/carbon/human/proc/force_update_limbs()
 	for(var/obj/item/organ/external/O in get_external_organs())

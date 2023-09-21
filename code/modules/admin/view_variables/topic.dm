@@ -341,19 +341,47 @@
 
 		var/mob/living/carbon/human/H = locate(href_list["setspecies"])
 		if(!istype(H))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/carbon/human"))
 			return
 
 		var/new_species = input("Please choose a new species.","Species",null) as null|anything in get_all_species()
 
 		if(!H)
-			to_chat(usr, "Mob doesn't exist anymore")
+			to_chat(usr, SPAN_WARNING("Mob doesn't exist anymore"))
+			return
+
+		if(!new_species)
 			return
 
 		if(H.change_species(new_species))
-			to_chat(usr, "Set species of [H] to [H.species].")
+			to_chat(usr, SPAN_NOTICE("Set species of [H] to [H.species]."))
 		else
-			to_chat(usr, "Failed! Something went wrong.")
+			to_chat(usr, SPAN_WARNING("Failed! Something went wrong."))
+
+	else if(href_list["setbodytype"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/living/carbon/human/H = locate(href_list["setbodytype"])
+		if(!istype(H))
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/carbon/human"))
+			return
+
+		var/new_bodytype = input("Please choose a new bodytype.","Bodytype",null) as null|anything in H.species.available_bodytypes
+
+		if(!new_bodytype)
+			return
+
+		if(!H)
+			to_chat(usr, SPAN_WARNING("Mob doesn't exist anymore"))
+			return
+
+		if(!(new_bodytype in H.species.available_bodytypes))
+			to_chat(usr, SPAN_WARNING("Bodytype is no longer available to the mob species."))
+
+		if(H.set_bodytype(new_bodytype))
+			to_chat(usr, SPAN_NOTICE("Set bodytype of [H] to [H.get_bodytype()]."))
+		else
+			to_chat(usr, SPAN_WARNING("Failed! Something went wrong."))
 
 	else if(href_list["addlanguage"])
 		if(!check_rights(R_SPAWN))	return

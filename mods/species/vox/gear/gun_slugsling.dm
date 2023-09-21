@@ -24,7 +24,7 @@
 	if(. && isliving(AM))
 		if(ishuman(AM))
 			var/mob/living/carbon/human/H = AM
-			if(H.get_bodytype_category() == BODYTYPE_VOX)
+			if(H.get_bodytype().bodytype_flag & BODY_FLAG_VOX)
 				return FALSE
 		var/mob/living/L = AM
 		if(L.faction == SPECIES_VOX)

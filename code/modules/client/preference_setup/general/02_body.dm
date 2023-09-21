@@ -22,6 +22,7 @@
 	sort_order = 2
 
 /datum/category_item/player_setup_item/physical/body/load_character(datum/pref_record_reader/R)
+
 	pref.hair_colour =            R.read("hair_colour")
 	pref.facial_hair_colour =     R.read("facial_hair_colour")
 	pref.skin_colour =            R.read("skin_colour")
@@ -31,35 +32,49 @@
 	pref.appearance_descriptors = R.read("appearance_descriptors")
 	pref.bgstate =                R.read("bgstate")
 
-	pref.h_style =                R.read("hair_style_name")
-	pref.f_style =                R.read("facial_style_name")
-	pref.body_markings =          R.read("body_markings")
-
 	// Get h_style type.
-	var/list/all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
-	for(var/accessory in all_sprite_accessories)
-		var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-		if(sprite.name == pref.h_style)
-			pref.h_style = accessory
-			break
-
-	// Get f_style type.
-	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
-	for(var/accessory in all_sprite_accessories)
-		var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-		if(sprite.name == pref.f_style)
-			pref.f_style = accessory
-			break
-
-	// Get markings type.
-	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
-	for(var/marking in pref.body_markings)
+	var/list/all_sprite_accessories
+	var/load_h_style = R.read("hair_style_name")
+	var/decl/h_style_decl = decls_repository.get_decl_by_id(load_h_style, validate_decl_type = FALSE)
+	// Grandfather in name-based sprite accessories.
+	if(!istype(h_style_decl) && load_h_style)
+		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
 		for(var/accessory in all_sprite_accessories)
 			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-			if(sprite.name == marking)
-				pref.body_markings[accessory] = pref.body_markings[marking]
-				pref.body_markings -= marking
+			if(sprite.name == load_h_style)
+				pref.h_style = accessory
 				break
+	pref.h_style = istype(h_style_decl) ? h_style_decl.type : /decl/sprite_accessory/hair/bald
+
+	// Get f_style type.
+	var/load_f_style = R.read("facial_style_name")
+	var/decl/f_style_decl = decls_repository.get_decl_by_id(load_f_style, validate_decl_type = FALSE)
+	// Grandfather in name-based accessories.
+	if(!istype(f_style_decl) && load_f_style)
+		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
+		for(var/accessory in all_sprite_accessories)
+			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
+			if(sprite.name == load_f_style)
+				pref.f_style = accessory
+				break
+	pref.f_style = istype(f_style_decl) ? f_style_decl.type : /decl/sprite_accessory/facial_hair/shaved
+
+	// Get markings type.
+	var/list/load_markings = R.read("body_markings")
+	pref.body_markings = list()
+	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
+	if(length(load_markings))
+		for(var/marking in load_markings)
+			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id(marking, validate_decl_type = FALSE)
+			// Grandfather in name-based accessories.
+			if(isnull(loaded_marking))
+				for(var/accessory in all_sprite_accessories)
+					var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
+					if(sprite.name == marking)
+						loaded_marking = pref.body_markings[marking]
+						break
+			if(loaded_marking)
+				pref.body_markings[loaded_marking.type] = load_markings[marking]
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
 	W.write("skin_tone",              pref.skin_tone)
@@ -73,13 +88,13 @@
 
 	// Get names of sprite accessories to serialize.
 	var/decl/sprite_accessory/sprite = GET_DECL(pref.h_style)
-	W.write("hair_style_name", sprite.name)
+	W.write("hair_style_name", sprite.uid)
 	sprite = GET_DECL(pref.f_style)
-	W.write("facial_style_name", sprite.name)
+	W.write("facial_style_name", sprite.uid)
 	var/list/body_marking_names = list()
 	for(var/marking in pref.body_markings)
 		sprite = GET_DECL(marking)
-		body_marking_names[sprite.name] = pref.body_markings[marking]
+		body_marking_names[sprite.uid] = pref.body_markings[marking]
 	W.write("body_markings", body_marking_names)
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()
@@ -249,9 +264,9 @@
 
 		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
 		mob_species = get_species_by_key(pref.species)
-		var/decl/sprite_accessory/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in mob_species.get_hair_styles(B?.associated_gender)
+		var/decl/sprite_accessory/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in mob_species.get_hair_styles(B)
 		mob_species = get_species_by_key(pref.species)
-		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles(B?.associated_gender)))
+		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles(B)))
 			pref.h_style = new_h_style.type
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -299,9 +314,9 @@
 
 		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
 		mob_species = get_species_by_key(pref.species)
-		var/decl/sprite_accessory/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, GET_DECL(pref.f_style)) as null|anything in mob_species.get_facial_hair_styles(B?.associated_gender)
+		var/decl/sprite_accessory/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, GET_DECL(pref.f_style)) as null|anything in mob_species.get_facial_hair_styles(B)
 		mob_species = get_species_by_key(pref.species)
-		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(B?.associated_gender)))
+		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(B)))
 			pref.f_style = new_f_style.type
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -320,7 +335,7 @@
 				continue
 			var/decl/sprite_accessory/accessory = all_markings[M]
 			mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype)
-			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype.bodytype_flag, pref.gender))
+			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype))
 				usable_markings += accessory
 
 		var/decl/sprite_accessory/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
@@ -346,12 +361,10 @@
 
 /datum/category_item/player_setup_item/proc/ResetHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	var/decl/bodytype/B = mob_species?.get_bodytype_by_name(pref.bodytype)
-	var/list/valid_hairstyles = mob_species?.get_hair_style_types(B?.associated_gender)
+	var/list/valid_hairstyles = mob_species?.get_hair_style_types(pref.get_bodytype_decl())
 	pref.h_style = length(valid_hairstyles) ? pick(valid_hairstyles) : initial(pref.h_style)
 
 /datum/category_item/player_setup_item/proc/ResetFacialHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	var/decl/bodytype/B = mob_species?.get_bodytype_by_name(pref.bodytype)
-	var/list/valid_facialhairstyles = mob_species?.get_facial_hair_styles(B?.associated_gender)
+	var/list/valid_facialhairstyles = mob_species?.get_facial_hair_styles(pref.get_bodytype_decl())
 	pref.f_style = length(valid_facialhairstyles) ? pick(valid_facialhairstyles) : initial(pref.f_style)

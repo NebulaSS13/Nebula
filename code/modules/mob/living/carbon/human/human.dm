@@ -572,8 +572,19 @@
 		new_bodytype.create_missing_organs(src, TRUE) // actually rebuild the body
 		apply_bodytype_appearance()
 		force_update_limbs()
-		update_hair(update_icons = FALSE)
+
+		// Check and clear hair.
+		var/decl/sprite_accessory/hair/hairstyle = GET_DECL(h_style)
+		if(!hairstyle?.accessory_is_available(src, species, new_bodytype))
+			change_hair(new_bodytype.default_h_style, FALSE)
+		var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(f_style)
+		if(!facialhairstyle?.accessory_is_available(src, species, new_bodytype))
+			change_facial_hair(new_bodytype.default_f_style, FALSE)
+		// TODO: check markings.
+
 		update_eyes()
+		return TRUE
+	return FALSE
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
 //It focuses on setting up species-related data, without force applying them uppon organs and the mob's appearance.

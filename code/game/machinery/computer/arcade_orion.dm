@@ -4,7 +4,7 @@
 //////////////////////////
 
 //Orion Trail Events
-#define ORION_TRAIL_RAIDERS				"Vox Raiders"
+#define ORION_TRAIL_RAIDERS				"Space Pirates"
 #define ORION_TRAIL_FLUX				"Interstellar Flux"
 #define ORION_TRAIL_ILLNESS				"Illness"
 #define ORION_TRAIL_BREAKDOWN			"Breakdown"
@@ -318,7 +318,7 @@
 			else
 				event_info = "You couldn't fight them off!<br>"
 				if(prob(10*settlers.len))
-					remove_settler(null, "was kidnapped by the Vox!")
+					remove_settler(null, "was kidnapped by the pirates!")
 				change_resource(null,-1)
 				change_resource(null,-0.5)
 		if(ORION_TRAIL_DERELICT)
