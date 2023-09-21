@@ -16,6 +16,7 @@ var/global/list/surgery_tool_exception_cache = list()
 
 /* SURGERY STEPS */
 /decl/surgery_step
+	abstract_type = /decl/surgery_step
 	var/name
 	var/description
 	var/list/allowed_tools               // type path referencing tools that can be used for this step, and how well are they suited for it
@@ -32,7 +33,9 @@ var/global/list/surgery_tool_exception_cache = list()
 	var/hidden_from_codex                // Is this surgery a secret?
 	var/list/additional_codex_lines
 	var/expected_mob_type = /mob/living/carbon/human
-	abstract_type = /decl/surgery_step
+
+/decl/surgery_step/proc/is_self_surgery_permitted(var/mob/target, var/bodypart)
+	return TRUE
 
 /decl/surgery_step/validate()
 	. = ..()
@@ -225,8 +228,7 @@ var/global/list/surgery_tool_exception_cache = list()
 	var/list/all_surgeries = decls_repository.get_decls_of_subtype(/decl/surgery_step)
 	for(var/decl in all_surgeries)
 		var/decl/surgery_step/S = all_surgeries[decl]
-		if(S.name && S.tool_quality(src) && S.can_use(user, M, zone, src))
-
+		if(S.tool_quality(src) && S.can_use(user, M, zone, src) && (M != user || S.is_self_surgery_permitted(M, zone)))
 			var/image/radial_button = image(icon = icon, icon_state = icon_state)
 			radial_button.name = S.name
 			LAZYSET(possible_surgeries, S, radial_button)
@@ -305,11 +307,8 @@ var/global/list/surgery_tool_exception_cache = list()
 		. = OPERATE_DENY
 	if(. != OPERATE_DENY && M == user)
 		var/hitzone = check_zone(user.get_target_zone(), M)
-		var/list/badzones = list(BP_HEAD)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(M, M.get_active_held_item_slot())
-		if(E)
-			badzones |= E.organ_tag
-			badzones |= E.parent_organ
-		if(hitzone in badzones)
+		if(E && (E.organ_tag == hitzone || E.parent_organ == hitzone))
+			to_chat(user, SPAN_WARNING("You can't operate on the same arm you're using to hold the surgical tool!"))
 			return OPERATE_DENY
 		. = min(., OPERATE_OKAY) // it's awkward no matter what

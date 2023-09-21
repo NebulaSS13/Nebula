@@ -101,6 +101,25 @@
 
 	return list(R + value,R,R,0, G,G + value,G,0, B,B,B + value,0, 0,0,0,1, 0,0,0,0)
 
+#define LUMR 0.2126
+#define LUMG 0.7152
+#define LUMB 0.0722
+/proc/legacy_color_saturation(value)
+	if(value == 0)
+		return
+	value = clamp(value, -100, 100)
+	if(value > 0)
+		value *= 3
+	var/x = 1 + value / 100
+	var/inv = 1 - x
+	var/R = LUMR * inv
+	var/G = LUMG * inv
+	var/B = LUMB * inv
+	return list(R + x,R,R, G,G + x,G, B,B,B + x)
+#undef LUMR
+#undef LUMG
+#undef LUMB
+
 /// Changes distance colors have from rgb(127,127,127) grey
 /// * 1 is identity. 0 makes everything grey >1 blows out colors and greys
 /proc/color_matrix_contrast(value)

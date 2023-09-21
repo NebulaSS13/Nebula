@@ -30,7 +30,7 @@
 
 /obj/item/gun/energy/laser/practice/on_update_icon()
 	. = ..()
-	overlays += mutable_appearance(icon, "[icon_state]_stripe", COLOR_ORANGE)
+	add_overlay(mutable_appearance(icon, "[icon_state]_stripe", COLOR_ORANGE))
 
 /obj/item/gun/energy/laser/practice/proc/hacked()
 	return projectile_type != /obj/item/projectile/beam/practice
