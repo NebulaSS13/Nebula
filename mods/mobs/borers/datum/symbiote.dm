@@ -71,7 +71,7 @@ var/global/list/symbiote_starting_points = list()
 				host = null
 				available_hosts = current_hosts
 	catch(var/exception/e)
-		log_debug("Exception during symbiote join: [e]")
+		log_debug("Exception during symbiote join: [EXCEPTION_TEXT(e)]")
 
 	if(host)
 		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(host, BP_HEAD)

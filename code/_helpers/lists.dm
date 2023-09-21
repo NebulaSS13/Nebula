@@ -797,7 +797,7 @@ var/global/list/json_cache = list()
 			else if(decoded)
 				return decoded
 		catch(var/exception/e)
-			log_error("Exception during JSON decoding ([json_to_decode]): [e]")
+			log_error("Exception during JSON decoding ([json_to_decode]): [EXCEPTION_TEXT(e)]")
 	return list()
 
 /proc/load_text_from_directory(var/directory, var/expected_extension = ".txt", var/recursive = TRUE)
@@ -855,7 +855,7 @@ var/global/list/json_cache = list()
 				loaded_files[checkfile] = safe_file2text(checkfile)
 				item_count++
 			catch(var/exception/e)
-				PRINT_STACK_TRACE("Exception loading [checkfile]: [e] on [e.file]:[e.line]")
+				PRINT_STACK_TRACE("Exception loading [checkfile]: [EXCEPTION_TEXT(e)]")
 
 	// Return a manifest for further processing.
 	return list(

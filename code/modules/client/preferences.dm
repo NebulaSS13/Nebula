@@ -119,7 +119,7 @@ var/global/list/time_prefs_fixed = list()
 		else
 			SScharacter_setup.queue_load_character(src)
 	catch(var/exception/E)
-		load_failed = "{[stage]} [E]"
+		load_failed = "{[stage]} [EXCEPTION_TEXT(E)]"
 		throw E
 
 // separated out to avoid stalling SScharacter_setup's Initialize
@@ -127,7 +127,7 @@ var/global/list/time_prefs_fixed = list()
 	try
 		load_character()
 	catch(var/exception/E)
-		load_failed = "{lateload_character} [E]"
+		load_failed = "{lateload_character} [EXCEPTION_TEXT(E)]"
 		throw E
 
 /datum/preferences/proc/migrate_legacy_preferences()
