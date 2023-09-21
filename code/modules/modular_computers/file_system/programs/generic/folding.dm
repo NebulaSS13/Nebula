@@ -52,7 +52,8 @@
 		var/datum/money_account/account = get_account(I.associated_account_number)
 		var/earned = (current_interval / 10) * (SCIENCE_MONEY_PER_SECOND * computer.get_processing_power()) //Divide by 10 to convert from ticks to seconds
 		account.deposit(earned, "Completed FOLDING@SPACE project.")
-		to_chat(usr, SPAN_NOTICE("Transferred [earned] to your account."))
+		var/decl/currency/currency = GET_DECL(global.using_map.default_currency)
+		to_chat(usr, SPAN_NOTICE("Transferred [currency.format_value(earned)] to your account."))
 		started_on = 0
 		current_interval = 0
 
