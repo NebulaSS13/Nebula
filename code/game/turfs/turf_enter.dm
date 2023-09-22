@@ -5,7 +5,7 @@
 	if(!istype(mover) || !(mover.movable_flags & MOVABLE_FLAG_PROXMOVE))
 		return
 	for(var/atom/movable/neighbor in range(1))
-		if(objects > ENTER_PROXIMITY_LOOP_SANITY) 
+		if(objects > ENTER_PROXIMITY_LOOP_SANITY)
 			break // Don't let ore piles kill the server as well as the client.
 		if(neighbor.movable_flags & MOVABLE_FLAG_PROXMOVE)
 			objects++
@@ -48,7 +48,3 @@
 				if((mat.gas_flags & XGM_GAS_CONTAMINANT) && env.gas[g] > mat.gas_overlay_limit + 1)
 					I.contaminate()
 					break
-
-	// Handle zmimic
-	if(!A.bound_overlay && !(A.z_flags & ZMM_IGNORE) && TURF_IS_MIMICKING(above))
-		above.update_mimic()
