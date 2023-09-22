@@ -55,7 +55,7 @@
 /obj/item/gun/projectile/revolver/capgun/on_update_icon()
 	. = ..()
 	if(cap)
-		overlays += image(icon, "[icon_state]-toy")
+		add_overlay("[icon_state]-toy")
 
 /obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
 	if(!istype(W) || !cap)

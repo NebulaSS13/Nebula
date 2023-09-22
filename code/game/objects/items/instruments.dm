@@ -1,6 +1,6 @@
 /obj/item/guitar
 	name = "guitar"
-	desc = "An antique musical instrument made of wood, originating from Earth.	It has six metal strings of different girth and tension. When moved, they vibrate and the waves resonate in the guitar's open body, producing sounds. Obtained notes can be altered by pressing the strings to the neck, affecting the vibration's frequency."
+	desc = "An antique musical instrument made of wood, originating from Earth. It has six metal strings of different girth and tension. When moved, they vibrate and the waves resonate in the guitar's open body, producing sounds. Obtained notes can be altered by pressing the strings to the neck, affecting the vibration's frequency."
 	icon = 'icons/obj/items/guitar.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/wood
