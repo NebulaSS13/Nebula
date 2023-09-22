@@ -1189,10 +1189,10 @@
 			if(damage && P.damtype == BRUTE)
 				var/hit_dir = get_dir(P.starting, src)
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
-				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
-				var/scale = min(1, round(P.damage / 50, 0.2))
-				B.set_scale(scale)
-
+				if(!QDELETED(B))
+					B.icon_state = pick("dir_splatter_1","dir_splatter_2")
+					var/scale = min(1, round(P.damage / 50, 0.2))
+					B.set_scale(scale)
 				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.get_blood_color(src))
 
 /mob/living/carbon/human/has_dexterity(var/dex_level)

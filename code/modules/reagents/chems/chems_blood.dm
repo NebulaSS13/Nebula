@@ -59,7 +59,7 @@
 		blood_splatter(T, src, 1)
 	else if(isalien(W))
 		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, holder.my_atom, 1)
-		if(B)
+		if(!QDELETED(B))
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
