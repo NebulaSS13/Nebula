@@ -103,4 +103,4 @@
 	)
 
 /datum/client_color/oversaturated/New()
-	client_color = color_matrix_saturation(1.4)
+	client_color = legacy_color_saturation(40)

@@ -43,10 +43,10 @@
 /obj/item/gun/energy/particle/on_update_icon()
 	. = ..()
 	var/datum/firemode/current_mode = firemodes[sel_mode]
-	overlays = list(
-		image(icon, "[get_world_inventory_state()]-[istype(current_mode) ? current_mode.name : "lethal"]"),
-		image(icon, "[get_world_inventory_state()]-charge-[istype(power_supply) ? FLOOR(power_supply.percent()/20) : 0]")
-	)
+	set_overlays(list(
+		"[get_world_inventory_state()]-[istype(current_mode) ? current_mode.name : "lethal"]",
+		"[get_world_inventory_state()]-charge-[istype(power_supply) ? FLOOR(power_supply.percent()/20) : 0]"
+	))
 
 /obj/item/gun/magnetic/railgun/flechette/ascent
 	name = "mantid flechette rifle"

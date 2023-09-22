@@ -42,12 +42,9 @@
 	var/active = 0
 	var/kill_loop = 0
 
-
 /datum/musical_event_manager/proc/push_event(datum/sound_player/source, datum/sound_token/token, time, volume)
 	if (istype(source) && istype(token) && volume >= 0 && volume <= 100)
 		src.events += new /datum/musical_event(source, token, time, volume)
-
-
 
 /datum/musical_event_manager/proc/handle_events()
 	var/list/datum/musical_event/left_events = list()
@@ -73,8 +70,6 @@
 
 	addtimer(CALLBACK(src, .proc/handle_events), 0)
 
-
-
 /datum/musical_event_manager/proc/deactivate()
 	if (src.kill_loop) return 0
 	if (src.active) src.kill_loop = 1
@@ -85,6 +80,9 @@
 	src.suspended = 0
 	return 1
 
-
 /datum/musical_event_manager/proc/is_overloaded()
 	return src.events.len > global.musical_config.max_events
+
+/datum/musical_event_manager/Destroy()
+	deactivate()
+	return ..()

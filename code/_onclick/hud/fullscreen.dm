@@ -128,7 +128,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	screen_loc = ui_entire_screen
 	icon_state = "druggy"
-	alpha = 127
+	alpha = 180
 	blend_mode = BLEND_MULTIPLY
 
 /obj/screen/fullscreen/noise

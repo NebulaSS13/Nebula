@@ -134,14 +134,13 @@ var/global/list/registered_cyborg_weapons = list()
 
 /obj/item/gun/energy/proc/update_charge_meter()
 	if(use_single_icon)
-		overlays += mutable_appearance(icon, "[get_world_inventory_state()][get_charge_ratio()]", indicator_color)
+		add_overlay(mutable_appearance(icon, "[get_world_inventory_state()][get_charge_ratio()]", indicator_color))
 		return
 	if(power_supply)
 		if(modifystate)
 			icon_state = "[modifystate][get_charge_ratio()]"
 		else
 			icon_state = "[initial(icon_state)][get_charge_ratio()]"
-
 
 //For removable cells.
 /obj/item/gun/energy/attack_hand(mob/user)

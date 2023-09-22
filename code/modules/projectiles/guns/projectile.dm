@@ -266,7 +266,7 @@
 /obj/item/gun/projectile/on_update_icon()
 	..()
 	if(ammo_indicator)
-		overlays += get_ammo_indicator()
+		add_overlay(get_ammo_indicator())
 
 /obj/item/gun/projectile/proc/get_ammo_indicator()
 	var/base_state = get_world_inventory_state()

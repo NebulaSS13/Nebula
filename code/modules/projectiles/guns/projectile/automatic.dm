@@ -35,7 +35,7 @@
 /obj/item/gun/projectile/automatic/smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		overlays += image(icon, "[get_world_inventory_state()]mag-[round(ammo_magazine.stored_ammo.len,5)]")
+		add_overlay("[get_world_inventory_state()]mag-[round(length(ammo_magazine.stored_ammo),5)]")
 
 /obj/item/gun/projectile/automatic/assault_rifle
 	name = "assault rifle"
