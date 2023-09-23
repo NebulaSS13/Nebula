@@ -192,7 +192,7 @@
 	if (istype(AM, /obj))
 		var/obj/O = AM
 		if (O.throwforce >= src.toughness)
-			visible_message("<span class='warning'><B>[src] was hit by [O].</B></span>")
+			visible_message(SPAN_WARNING("[src] was hit by [O]!"))
 		take_damage(O.throwforce)
 
 /obj/machinery/camera/physical_attack_hand(mob/living/carbon/human/user)
@@ -200,7 +200,7 @@
 		return
 	if(user.species.can_shred(user))
 		user.do_attack_animation(src)
-		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
+		visible_message(SPAN_WARNING("\The [user] slashes at [src]!"))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		add_hiddenprint(user)
 		take_damage(25)
