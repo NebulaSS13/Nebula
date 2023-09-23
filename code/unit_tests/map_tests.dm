@@ -686,6 +686,8 @@
 			continue
 		if(is_type_in_list(sort, exempt_junctions))
 			continue
+		if(sort.sort_type in global.using_map.disconnected_disposals_tags)
+			continue
 		var/obj/machinery/disposal/bin = get_bin_from_junction(sort)
 		if(!bin)
 			log_bad("Junction with tag [sort.sort_type] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
