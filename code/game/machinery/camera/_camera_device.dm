@@ -12,7 +12,7 @@
 	var/xray_enabled = FALSE
 	has_commands = TRUE
 
-/datum/extension/network_device/camera/New(datum/holder, n_id, n_key, c_type, autojoin, list/preset_channels, camera_name, camnet_enabled = TRUE, req_connection = TRUE)
+/datum/extension/network_device/camera/New(datum/holder, n_id, n_key, r_type, autojoin, list/preset_channels, camera_name, camnet_enabled = TRUE, req_connection = TRUE)
 	if(length(preset_channels))
 		channels = preset_channels.Copy()
 	. = ..()
@@ -22,6 +22,7 @@
 	display_name = camera_name
 
 /datum/extension/network_device/camera/post_construction()
+	. = ..()
 	if(cameranet_enabled)
 		cameranet.add_source(holder)
 
