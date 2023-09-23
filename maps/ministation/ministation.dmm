@@ -13927,9 +13927,7 @@
 	pixel_x = 27;
 	pixel_y = 5
 	},
-/obj/abstract/landmark/start{
-	name = "AI"
-	},
+/obj/abstract/landmark/start/ai,
 /obj/machinery/network/requests_console{
 	department = "AI";
 	pixel_x = 32;

@@ -7059,7 +7059,7 @@
 /area/exodus/maintenance/auxsolarstarboard)
 "aoK" = (
 /obj/machinery/faxmachine{
-	anchored = 0;
+	anchored = 0
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/newscaster{
@@ -28776,9 +28776,6 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_one)
 "bjc" = (
-/obj/abstract/landmark/start{
-	name = "AI"
-	},
 /obj/machinery/newscaster{
 	pixel_x = 32;
 	pixel_y = 32
@@ -28809,7 +28806,7 @@
 /obj/item/radio/intercom{
 	pixel_y = 22
 	},
-/obj/structure/aicore/deactivated,
+/obj/abstract/landmark/start/ai,
 /turf/simulated/floor/bluegrid,
 /area/exodus/turret_protected/ai)
 "bjd" = (
@@ -32793,10 +32790,10 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/window/borosilicate_reinforced{
-	dir = 4;
+	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced{
-	dir = 1;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/mixing)
@@ -33587,10 +33584,10 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/window/borosilicate_reinforced{
-	dir = 8;
+	dir = 8
 	},
 /obj/structure/window/borosilicate_reinforced{
-	dir = 1;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/mixing)
@@ -36718,7 +36715,7 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/window/borosilicate_reinforced{
-	dir = 1;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/mixing)
@@ -36946,7 +36943,7 @@
 	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced{
-	dir = 4;
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/mixing)
@@ -36954,7 +36951,7 @@
 /obj/machinery/portable_atmospherics/canister,
 /obj/effect/floor_decal/corner/purple/three_quarters,
 /obj/structure/window/borosilicate_reinforced{
-	dir = 8;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/mixing)
@@ -63356,8 +63353,8 @@
 /area/ship/exodus_pod_mining)
 "doN" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Exodus Operations Deck";
-},
+	name = "Exodus Operations Deck"
+	},
 /turf/space,
 /area/space)
 "drB" = (
@@ -64950,9 +64947,6 @@
 /obj/structure/table,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/robotics)
-"wTf" = (
-/turf/simulated/floor/airless,
-/area/exodus/turret_protected/ai)
 "wTp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -93985,7 +93979,7 @@ auR
 avS
 avU
 fPF
-wTf
+eEn
 beb
 bgW
 aoi
