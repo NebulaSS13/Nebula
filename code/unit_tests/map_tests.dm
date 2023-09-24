@@ -719,6 +719,9 @@
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 	speed = 100
 
+/obj/structure/disposalholder/unit_test/merge()
+	return FALSE
+
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)
 	. = ..()
