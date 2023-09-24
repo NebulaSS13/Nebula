@@ -39,12 +39,14 @@
 		"<span class='notice'>You have reattached the [affected.tendon_name] in [target]'s [affected.name] with \the [tool].</span>")
 	affected.status &= ~ORGAN_TENDON_CUT
 	affected.update_damages()
+	..()
 
 /decl/surgery_step/fix_tendon/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>" , \
 	"<span class='warning'>Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>")
 	affected.take_external_damage(5, used_weapon = tool)
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	 IB fix surgery step
@@ -83,12 +85,14 @@
 		"<span class='notice'>You have patched the [affected.artery_name] in [target]'s [affected.name] with \the [tool].</span>")
 	affected.status &= ~ORGAN_ARTERY_CUT
 	affected.update_damages()
+	..()
 
 /decl/surgery_step/fix_vein/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>" , \
 	"<span class='warning'>Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>")
 	affected.take_external_damage(5, used_weapon = tool)
+	..()
 
 
 //////////////////////////////////////////////////////////////////
@@ -137,10 +141,12 @@
 		rig.reset()
 	user.visible_message("<span class='notice'>[user] has cut through the support systems of [target]'s [rig] with \the [tool].</span>", \
 		"<span class='notice'>You have cut through the support systems of [target]'s [rig] with \the [tool].</span>")
+	..()
 
 /decl/surgery_step/hardsuit/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='danger'>[user]'s [tool] can't quite seem to get through the metal...</span>", \
 	"<span class='danger'>Your [tool] can't quite seem to get through the metal. It's weakening, though - try again.</span>")
+	..()
 
 
 //////////////////////////////////////////////////////////////////
@@ -185,17 +191,11 @@
 
 /decl/surgery_step/sterilize/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-
-	if (!istype(tool, /obj/item/chems))
-		return
-
 	var/obj/item/chems/container = tool
-
 	var/amount = container.amount_per_transfer_from_this
 	var/temp_holder = new/obj()
 	var/datum/reagents/temp_reagents = new(amount, temp_holder)
 	container.reagents.trans_to_holder(temp_reagents, amount)
-
 	var/trans = temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_INJECT) //technically it's contact, but the reagents are being applied to internal tissue
 	if (trans > 0)
 		user.visible_message("<span class='notice'>[user] rubs [target]'s [affected.name] down with \the [tool]'s contents</span>.", \
@@ -203,20 +203,16 @@
 	affected.disinfect()
 	qdel(temp_reagents)
 	qdel(temp_holder)
+	..()
 
 /decl/surgery_step/sterilize/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-
-	if (!istype(tool, /obj/item/chems))
-		return
-
 	var/obj/item/chems/container = tool
-
 	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_INJECT)
-
 	user.visible_message("<span class='warning'>[user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>" , \
 	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
 	affected.disinfect()
+	..()
 
 /decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/chems/container)
 
