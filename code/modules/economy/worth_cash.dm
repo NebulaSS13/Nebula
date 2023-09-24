@@ -152,6 +152,7 @@
 
 /obj/item/cash/c200
 	absolute_worth = 200
+	w_class = ITEM_SIZE_SMALL // so that the money freezer doesn't overflow bc this is a pile instead of single bill
 
 /obj/item/cash/c500
 	absolute_worth = 500
