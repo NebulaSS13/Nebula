@@ -338,16 +338,17 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 			return FALSE
 	return ..()
 
-/obj/structure/tape_barricade/Crossed(O)
+/obj/structure/tape_barricade/Crossed(atom/movable/AM)
 	. = ..()
-	if(!is_lifted && ismob(O))
-		var/mob/M = O
-		add_fingerprint(M)
-		shake_animation(2)
-		if (!allowed(M))	//only select few learn art of not crumpling the tape
-			to_chat(M, SPAN_NOTICE("You are not supposed to go past \the [src]..."))
-			if(M.a_intent != I_HELP)
-				crumple()
+	if(is_lifted || !isliving(AM))
+		return
+	var/mob/living/M = AM
+	add_fingerprint(M)
+	shake_animation(2)
+	if (!allowed(M))	//only select few learn art of not crumpling the tape
+		to_chat(M, SPAN_NOTICE("You are not supposed to go past \the [src]..."))
+		if(M.a_intent != I_HELP)
+			crumple()
 
 /obj/structure/tape_barricade/proc/crumple()
 	if(!is_crumpled)

@@ -126,41 +126,44 @@
 	new t(src.loc)
 	qdel(src)
 
-/obj/effect/gateway/active/Crossed(var/atom/A)
-	if(!istype(A, /mob/living))
+/obj/effect/gateway/active/Crossed(atom/movable/AM)
+	if(!isliving(AM))
 		return
 
-	var/mob/living/M = A
+	var/mob/living/M = AM
+	if(M.stat == DEAD)
+		return
 
-	if(M.stat != DEAD)
-		if(M.HasMovementHandler(/datum/movement_handler/mob/transformation))
-			return
+	if(M.HasMovementHandler(/datum/movement_handler/mob/transformation))
+		return
 
-		M.handle_pre_transformation()
+	M.handle_pre_transformation()
 
-		if(iscultist(M)) return
-		if(!ishuman(M) && !isrobot(M)) return
+	if(iscultist(M))
+		return
+	if(!ishuman(M) && !isrobot(M))
+		return
 
-		M.AddMovementHandler(/datum/movement_handler/mob/transformation)
-		M.icon = null
-		M.overlays.len = 0
-		M.set_invisibility(101)
+	M.AddMovementHandler(/datum/movement_handler/mob/transformation)
+	M.icon = null
+	M.overlays.len = 0
+	M.set_invisibility(101)
 
-		if(istype(M, /mob/living/silicon/robot))
-			var/mob/living/silicon/robot/Robot = M
-			if(Robot.mmi)
-				qdel(Robot.mmi)
-		else
-			for(var/obj/item/W in M)
-				M.drop_from_inventory(W)
-				if(istype(W, /obj/item/implant))
-					qdel(W)
+	if(isrobot(M))
+		var/mob/living/silicon/robot/Robot = M
+		if(Robot.mmi)
+			qdel(Robot.mmi)
+	else
+		for(var/obj/item/W in M)
+			M.drop_from_inventory(W)
+			if(istype(W, /obj/item/implant))
+				qdel(W)
 
-		var/mob/living/new_mob = new /mob/living/simple_animal/corgi(A.loc)
-		new_mob.a_intent = I_HURT
-		if(M.mind)
-			M.mind.transfer_to(new_mob)
-		else
-			new_mob.key = M.key
+	var/mob/living/new_mob = new /mob/living/simple_animal/corgi(AM.loc)
+	new_mob.a_intent = I_HURT
+	if(M.mind)
+		M.mind.transfer_to(new_mob)
+	else
+		new_mob.key = M.key
 
-		to_chat(new_mob, "<B>Your form morphs into that of a corgi.</B>")//Because we don't have cluwnes
+	to_chat(new_mob, "<B>Your form morphs into that of a corgi.</B>")//Because we don't have cluwnes

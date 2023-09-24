@@ -74,17 +74,16 @@
 	. = toggle_arming(user) || ..()
 
 /obj/item/assembly/mousetrap/Crossed(atom/movable/AM)
-	if(armed)
-		if(ishuman(AM))
-			var/mob/living/carbon/H = AM
-			if(!MOVING_DELIBERATELY(H))
-				triggered(H)
-				H.visible_message("<span class='warning'>[H] accidentally steps on [src].</span>", \
-								  "<span class='warning'>You accidentally step on [src]</span>")
-		if(ismouse(AM))
-			triggered(AM)
 	..()
-
+	if(!armed || !isliving(AM))
+		return
+	var/mob/living/M = AM
+	if(MOVING_DELIBERATELY(M))
+		return
+	M.visible_message(
+		SPAN_DANGER("\The [M] steps on \the [src]!"),
+		SPAN_DANGER("You step on \the [src]!"))
+	triggered(M)
 
 /obj/item/assembly/mousetrap/on_found(mob/finder)
 	if(armed)

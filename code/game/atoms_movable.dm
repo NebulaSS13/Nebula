@@ -539,3 +539,6 @@
 /atom/movable/singularity_pull(S, current_size)
 	if(simulated && !anchored)
 		step_towards(src, S)
+
+/atom/movable/proc/crossed_mob(var/mob/living/victim)
+	return

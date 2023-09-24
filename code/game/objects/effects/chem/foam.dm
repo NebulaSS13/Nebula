@@ -71,12 +71,11 @@
 		spawn(5)
 			qdel(src)
 
-/obj/effect/effect/foam/Crossed(var/atom/movable/AM)
-	if(metal)
+/obj/effect/effect/foam/Crossed(atom/movable/AM)
+	if(metal || !isliving(AM))
 		return
-	if(istype(AM, /mob/living))
-		var/mob/living/M = AM
-		M.slip("the foam", 6)
+	var/mob/living/M = AM
+	M.slip("the foam", 6)
 
 /datum/effect/effect/system/foam_spread
 	var/amount = 5				// the size of the foam spread.

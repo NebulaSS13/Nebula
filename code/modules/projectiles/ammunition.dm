@@ -43,22 +43,21 @@
 
 	update_icon()
 
-/obj/item/ammo_casing/Crossed(atom/AM)
+/obj/item/ammo_casing/Crossed(atom/movable/AM)
 	..()
+	if(!isliving(AM))
+		return
 
-	if(isliving(AM))
-		var/mob/living/L = AM
+	var/mob/living/L = AM
+	if(L.buckled || MOVING_DELIBERATELY(L) || prob(90))
+		return
 
-		if(L.buckled)
-			return
-
-		if(!MOVING_DELIBERATELY(L) && prob(10))
-			playsound(src, pick(drop_sound), 50, 1)
-			var/turf/turf_current = get_turf(src)
-			var/turf/turf_destiinaton = get_step(turf_current, AM.dir)
-			if(turf_destiinaton.Adjacent(turf_current))
-				throw_at(turf_destiinaton, 2, 2, spin = FALSE)
-				animate(src, pixel_x = rand(-16, 16), pixel_y = rand(-16, 16), transform = turn(matrix(), rand(120, 300)), time = rand(3, 8))
+	playsound(src, pick(drop_sound), 50, 1)
+	var/turf/turf_current = get_turf(src)
+	var/turf/turf_destiinaton = get_step(turf_current, AM.dir)
+	if(turf_destiinaton.Adjacent(turf_current))
+		throw_at(turf_destiinaton, 2, 2, spin = FALSE)
+		animate(src, pixel_x = rand(-16, 16), pixel_y = rand(-16, 16), transform = turn(matrix(), rand(120, 300)), time = rand(3, 8))
 
 /obj/item/ammo_casing/proc/leave_residue()
 	var/obj/item/gun/G = get_recursive_loc_of_type(/obj/item/gun)

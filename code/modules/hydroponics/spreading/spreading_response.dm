@@ -20,9 +20,10 @@
 	manual_unbuckle(user)
 	return TRUE
 
-/obj/effect/vine/Crossed(atom/movable/O)
-	if(isliving(O))
-		trodden_on(O)
+/obj/effect/vine/Crossed(atom/movable/AM)
+	if(!isliving(AM))
+		return
+	trodden_on(AM)
 
 /obj/effect/vine/proc/trodden_on(var/mob/living/victim)
 	wake_neighbors()

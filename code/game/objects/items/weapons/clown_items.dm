@@ -7,10 +7,12 @@
 /*
  * Banana Peals
  */
-/obj/item/bananapeel/Crossed(var/atom/movable/AM)
-	if (istype(AM, /mob/living))
-		var/mob/living/M = AM
-		M.slip("the [src.name]", 4)
+/obj/item/bananapeel/Crossed(atom/movable/AM)
+	if(!isliving(AM))
+		return
+	var/mob/living/M = AM
+	M.slip("the [src.name]", 4)
+
 /*
  * Bike Horns
  */
@@ -26,7 +28,7 @@
 	throw_range = 15
 	attack_verb = list("HONKED")
 	material = /decl/material/solid/metal/steel
-	matter = list( 
+	matter = list(
 		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
 	)
 	obj_flags = OBJ_FLAG_HOLLOW
