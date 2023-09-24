@@ -19,6 +19,7 @@
 /decl/surgery_step/bone/glue
 	name = "Begin bone repair"
 	description = "This procedure is used to begin setting a bone in place by treating the damage with bone gel."
+	end_step_sound = 'sound/effects/ointment.ogg'
 	allowed_tools = list(
 		TOOL_BONE_GEL = 100,
 		TOOL_SCREWDRIVER = 75
@@ -46,12 +47,13 @@
 	if(affected.stage == 0)
 		affected.stage = 1
 	affected.status &= ~ORGAN_BRITTLE
+	..()
 
 /decl/surgery_step/bone/glue/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>" , \
 	"<span class='warning'>Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>")
-
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	bone setting surgery step
@@ -69,6 +71,7 @@
 	delicate = 1
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 	required_stage = 1
+	end_step_sound = "fracture"
 
 /decl/surgery_step/bone/set_bone/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
@@ -93,6 +96,7 @@
 			user.visible_message("<span class='notice'>\The [user] sets [bone] in place with \the [tool].</span>", \
 				"<span class='notice'>You set [bone] in place with \the [tool].</span>")
 		affected.stage = 2
+		..() // The pseudo-fail condition below plays a fracture sound anyway.
 	else
 		user.visible_message("<span class='notice'>\The [user] sets [bone]</span> <span class='warning'>in the WRONG place with \the [tool].</span>", \
 			"<span class='notice'>You set [bone]</span> <span class='warning'>in the WRONG place with \the [tool].</span>")
@@ -104,6 +108,7 @@
 		"<span class='warning'>Your hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!</span>")
 	affected.fracture()
 	affected.take_external_damage(5, used_weapon = tool)
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	post setting bone-gelling surgery step
@@ -111,6 +116,7 @@
 /decl/surgery_step/bone/finish
 	name = "Finish bone repair"
 	description = "This procedure seals a damaged bone with bone gel after setting the bone in place."
+	end_step_sound = 'sound/effects/ointment.ogg'
 	allowed_tools = list(
 		TOOL_BONE_GEL = 100,
 		TOOL_SCREWDRIVER = 75
@@ -137,8 +143,10 @@
 	affected.status &= ~ORGAN_BROKEN
 	affected.stage = 0
 	affected.update_wounds()
+	..()
 
 /decl/surgery_step/bone/finish/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>" , \
 	"<span class='warning'>Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>")
+	..()

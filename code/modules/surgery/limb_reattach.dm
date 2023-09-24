@@ -81,6 +81,7 @@
 	var/obj/item/organ/external/E = tool
 	user.visible_message("[user] starts attaching [E.name] to [target]'s [E.amputation_point].", \
 	"You start attaching [E.name] to [target]'s [E.amputation_point].")
+	..()
 
 /decl/surgery_step/limb/attach/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(!user.try_unequip(tool))
@@ -95,12 +96,14 @@
 
 	if(BP_IS_PROSTHETIC(E) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
 		E.add_random_ailment()
+	..()
 
 /decl/surgery_step/limb/attach/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = tool
 	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
 	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
 	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	 limb connecting surgery step
@@ -134,6 +137,7 @@
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("[user] starts connecting tendons and muscles in [target]'s [E.amputation_point] with [tool].", \
 	"You start connecting tendons and muscle in [target]'s [E.amputation_point].")
+	..()
 
 /decl/surgery_step/limb/connect/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
@@ -143,9 +147,11 @@
 
 	//This time we call add_organ but we want it to install in a non detached state
 	target.add_organ(E, P, FALSE, TRUE, FALSE)
+	..()
 
 /decl/surgery_step/limb/connect/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
 	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
 	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
+	..()
