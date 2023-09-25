@@ -39,9 +39,9 @@
 	will_patrol = 1
 
 /mob/living/bot/secbot/Initialize()
-	. = ..()
 	stun_baton = new /obj/item/baton/infinite(src)
 	handcuffs = new(src)
+	. = ..()
 
 /mob/living/bot/secbot/Destroy()
 	qdel(stun_baton)
