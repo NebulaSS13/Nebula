@@ -104,14 +104,18 @@ var/global/list/laser_wavelengths
 	if(charging)
 		return ..()
 
-	if(IS_SCREWDRIVER(W) && length(capacitors))
-		var/obj/item/stock_parts/capacitor/capacitor = capacitors[1]
-		capacitor.charge = 0
-		user.put_in_hands(capacitor)
-		LAZYREMOVE(capacitors, capacitor)
-		playsound(loc, 'sound/items/Screwdriver2.ogg', 25)
-		update_icon()
-		return TRUE
+	if(IS_SCREWDRIVER(W))
+		// Unload the cell before the caps.
+		if(get_cell())
+			return ..()
+		if(length(capacitors))
+			var/obj/item/stock_parts/capacitor/capacitor = capacitors[1]
+			capacitor.charge = 0
+			user.put_in_hands(capacitor)
+			LAZYREMOVE(capacitors, capacitor)
+			playsound(loc, 'sound/items/Screwdriver2.ogg', 25)
+			update_icon()
+			return TRUE
 
 	if(istype(W, /obj/item/stock_parts/capacitor))
 		if(length(capacitors) >= max_capacitors)

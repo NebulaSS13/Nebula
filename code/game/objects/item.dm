@@ -249,9 +249,9 @@
 			if(cell_loaded.can_modify)
 				if(cell_loaded.requires_tool)
 					var/decl/tool_archetype/needed_tool = GET_DECL(cell_loaded.requires_tool)
-					desc_comp += SPAN_NOTICE("\The [src] requires \a [needed_tool.name] to remove.<BR>")
+					desc_comp += SPAN_NOTICE("\The [src] power supply requires \a [needed_tool.name] to remove.<BR>")
 				else
-					desc_comp += SPAN_NOTICE("Hold \the [src] in an off-hand and click it with an empty hand to unload the cell.")
+					desc_comp += SPAN_NOTICE("Hold \the [src] in an off-hand and click it with an empty hand to remove the power supply.<BR>")
 			else
 				desc_comp += SPAN_NOTICE("\The [src] power supply cannot be removed.<BR>")
 		else
