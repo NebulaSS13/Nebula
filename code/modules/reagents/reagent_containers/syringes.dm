@@ -25,6 +25,7 @@
 	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
 	var/time = 30
+	var/can_stab = TRUE
 
 /obj/item/chems/syringe/Initialize(var/mapload)
 	. = ..()
@@ -73,8 +74,9 @@
 
 	if(!target.reagents)
 		return
-
-	if((user.a_intent == I_HURT) && ismob(target))
+	if(!can_stab)
+		to_chat(user, SPAN_NOTICE("This syringe is too big to stab someone with it."))
+	else if((user.a_intent == I_HURT) && ismob(target))
 		syringestab(target, user)
 		return
 
@@ -182,7 +184,7 @@
 
 /obj/item/chems/syringe/proc/injectReagents(var/atom/target, var/mob/user)
 
-	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC) && (can_stab == TRUE))
 		syringestab(target, user)
 		return
 
@@ -315,13 +317,10 @@
 	visible_name = "a giant syringe"
 	time = 300
 	mode = SYRINGE_INJECT
+	can_stab = FALSE
 
 /obj/item/chems/syringe/ld50_syringe/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/heartstopper, reagents.maximum_volume)
-
-/obj/item/chems/syringe/ld50_syringe/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
-	to_chat(user, SPAN_NOTICE("This syringe is too big to stab someone with it."))
-	return // No instant injecting
 
 /obj/item/chems/syringe/ld50_syringe/drawReagents(var/target, var/mob/user)
 	if(ismob(target)) // No drawing 60 units of blood at once
