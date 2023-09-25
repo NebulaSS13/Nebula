@@ -16,8 +16,7 @@
 	var/obj/item/chems/glass/output_container
 	var/dispense_amount = 50
 
-	// Since reactions and heating products may overfill the reagent tank, the reagent tank is set with infinite volume.
-	// However, processing is disabled if the volume goes over the maximum.
+	// Since reactions and heating products may overfill the reagent tank, the reagent tank has 1.25x this volume.
 	var/static/max_liquid = 3000
 
 /obj/machinery/material_processing/extractor/Initialize()
@@ -26,10 +25,26 @@
 		gas_contents = new(800)
 	set_extension(src, /datum/extension/atmospherics_connection, FALSE, gas_contents)
 
-	create_reagents(INFINITY)
+	create_reagents(round(1.25*max_liquid))
 	queue_temperature_atoms(src)
 
 	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/material_processing/extractor/Destroy()
+	QDEL_NULL(output_container)
+	. = ..()
+
+/obj/machinery/material_processing/extractor/physically_destroyed(skip_qdel)
+	var/obj/container = remove_container()
+	if(container)
+		container.dropInto(get_turf(src))
+	. = ..()
+
+/obj/machinery/material_processing/extractor/dismantle()
+	var/obj/container = remove_container()
+	if(container)
+		container.dropInto(get_turf(src))
+	. = ..()
 
 /obj/machinery/material_processing/extractor/LateInitialize()
 	. = ..()
@@ -50,8 +65,8 @@
 	else
 		to_chat(user, SPAN_NOTICE("It may be connected to an atmospherics connector port with a wrench."))
 
-	if(atom_flags & ATOM_FLAG_OPEN_CONTAINER)
-		to_chat(user, SPAN_NOTICE("Its open for refilling."))
+	if(output_container)
+		to_chat(user, SPAN_NOTICE("It has \a [output_container] inserted."))
 
 /obj/machinery/material_processing/extractor/Process()
 	if(!use_power || (stat & (BROKEN|NOPOWER)))
@@ -150,7 +165,7 @@
 					to_chat(user, SPAN_NOTICE("You connect \the [src] to the port."))
 					return
 				else
-					to_chat(user, SPAN_NOTICE("\The [src] failed to connect to the port."))
+					to_chat(user, SPAN_WARNING("\The [src] failed to connect to the port."))
 					return
 
 	if(istype(I, /obj/item/chems/glass))
@@ -158,13 +173,20 @@
 			if(!user.try_unequip(I, src))
 				return
 			output_container = I
-			events_repository.register(/decl/observ/destroyed, output_container, src, /obj/machinery/material_processing/extractor/proc/unset_container)
+			events_repository.register(/decl/observ/destroyed, output_container, src, /obj/machinery/material_processing/extractor/proc/remove_container)
 			user.visible_message(SPAN_NOTICE("\The [user] places \a [I] in \the [src]."), SPAN_NOTICE("You place \a [I] in \the [src]."))
 			return
 
 		to_chat(user, SPAN_WARNING("\The [src] already has an output container!"))
 		return
 	. = ..()
+
+/obj/machinery/material_processing/extractor/proc/remove_container()
+	if(!output_container)
+		return
+	. = output_container
+	events_repository.unregister(/decl/observ/destroyed, output_container, src, /obj/machinery/material_processing/extractor/proc/remove_container)
+	output_container = null
 
 /obj/machinery/material_processing/extractor/OnTopic(var/mob/user, var/list/href_list)
 	. = ..()
@@ -199,16 +221,13 @@
 		return TOPIC_REFRESH
 
 	if(href_list["eject"])
-		if(!output_container)
+		var/obj/container = remove_container()
+		if(!container)
 			return TOPIC_HANDLED
-
 		if(CanPhysicallyInteract(user))
-			user.put_in_hands(output_container)
+			user.put_in_hands(container)
 		else
-			output_container.dropInto(get_turf(src))
-
-		events_repository.unregister(/decl/observ/destroyed, output_container, src, /obj/machinery/material_processing/extractor/proc/unset_container)
-		output_container = null
+			container.dropInto(get_turf(src))
 		return TOPIC_REFRESH
 
 /obj/machinery/material_processing/extractor/get_ui_data(mob/user)
@@ -272,9 +291,6 @@
 	. = ..()
 	if(.)
 		queue_temperature_atoms(src)
-
-/obj/machinery/material_processing/extractor/proc/unset_container()
-	output_container = null
 
 #undef MAX_INTAKE_ORE_PER_TICK
 #undef GAS_EXTRACTOR_OPERATING_TEMP
