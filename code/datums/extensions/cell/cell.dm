@@ -30,6 +30,7 @@
 /datum/extension/loaded_cell/proc/try_load(var/mob/user, var/obj/item/cell/cell)
 
 	// Check inputs.
+	var/obj/item/holder_item = holder
 	if(!istype(cell) || !istype(user) || QDELETED(cell) || QDELETED(user) || user.incapacitated())
 		return FALSE
 
@@ -68,12 +69,14 @@
 		loaded_cell_ref = weakref(cell)
 		if(load_sound)
 			playsound(user.loc, pick(load_sound), 25, 1)
+		holder_item.update_icon()
 		return TRUE
 	return FALSE
 
 /datum/extension/loaded_cell/proc/try_unload(var/mob/user, var/obj/item/tool)
 
 	// Check inputs.
+	var/obj/item/holder_item = holder
 	if(!istype(user) || QDELETED(user) || user.incapacitated())
 		return FALSE
 
@@ -87,12 +90,17 @@
 	var/obj/item/cell/existing_cell = loaded_cell_ref?.resolve()
 	if(!istype(existing_cell) || QDELETED(existing_cell) || existing_cell.loc != holder)
 		to_chat(user, SPAN_WARNING("\The [holder] has no cell loaded."))
-		loaded_cell_ref = null
+		if(loaded_cell_ref)
+			loaded_cell_ref = null
+			holder_item.update_icon()
 		return TRUE // technically a valid interaction.
 
 	// Apply tool checks.
 	if(requires_tool)
-		if(!istype(tool) || QDELETED(tool) || !IS_TOOL(tool, requires_tool))
+		// No tool provided means we're probably using an empty hand - don't print a warning if it's a tool based removal.
+		if(!istype(tool) || QDELETED(tool))
+			return FALSE
+		if(!IS_TOOL(tool, requires_tool))
 			var/decl/tool_archetype/tool_arch = GET_DECL(requires_tool)
 			to_chat(user, SPAN_WARNING("\The [holder] requires \a [tool_arch.name] to remove the cell."))
 			return TRUE // technically a valid interaction.
@@ -111,13 +119,16 @@
 	existing_cell = loaded_cell_ref?.resolve()
 	if(!istype(existing_cell) || QDELETED(existing_cell) || existing_cell.loc != holder)
 		to_chat(user, SPAN_WARNING("\The [holder] has no cell loaded."))
-		loaded_cell_ref = null
+		if(loaded_cell_ref)
+			loaded_cell_ref = null
+			holder_item.update_icon()
 		return TRUE // technically a valid interaction.
 
 	// Unload the cell.
 	user.visible_message(SPAN_NOTICE("\The [user] removes \the [existing_cell] from \the [holder]."))
 	existing_cell.dropInto(get_turf(holder))
 	user.put_in_active_hand(existing_cell)
+	holder_item.update_icon()
 	if(unload_sound)
 		playsound(user.loc, pick(unload_sound), 25, 1)
 	return TRUE

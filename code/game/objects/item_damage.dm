@@ -28,6 +28,15 @@
 		return TRUE
 	. = (!throwing) ? ..() : FALSE
 
+// We only do this for the extension as other stuff that overrides get_cell() handles EMP in an override.
+/obj/item/emp_act(var/severity)
+	if(has_extension(src, /datum/extension/loaded_cell))
+		var/obj/item/cell/cell = get_cell()
+		if(cell)
+			cell.emp_act(severity)
+			update_icon()
+	return ..()
+
 /obj/item/explosion_act(severity)
 	if(QDELETED(src))
 		return

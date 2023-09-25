@@ -494,10 +494,7 @@
 	var/list/current_channels = get_available_channels()
 	for(var/channel in current_channels)
 		LAZYSET(channels, channel, FALSE)
-	var/obj/item/cell/cell = get_cell()
-	if(cell)
-		cell.emp_act(severity)
-	..()
+	return ..()
 
 /obj/item/radio/CouldUseTopic(var/mob/user)
 	..()

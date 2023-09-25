@@ -32,10 +32,6 @@ var/global/list/registered_cyborg_weapons = list()
 	if(.)
 		update_icon()
 
-/obj/item/gun/energy/emp_act(severity)
-	..()
-	update_icon()
-
 /obj/item/gun/energy/Initialize(var/ml, var/material_key)
 	setup_power_supply()
 	. = ..()
