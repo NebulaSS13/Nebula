@@ -86,13 +86,12 @@
 	if(!c_tag)
 		var/area/A = get_area(src)
 		if(isturf(loc) && A)
-			for(var/obj/machinery/camera/C in A)
-				if(C == src) continue
-				if(C.number)
-					number = max(number, C.number+1)
-			c_tag = "[A.proper_name][number == 1 ? "" : " #[number]"]"
-		if(!c_tag)	// Add a default c_tag in case the camera has been placed in an invalid location or inside another object.
-			c_tag = "Security Camera - [random_id(/obj/machinery/camera, 100,999)]"
+			var/suffix = uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, "c_tag [A.proper_name]", 1) // unlike sequential_id, starts at 1 instead of 100
+			if(suffix == 1)
+				suffix = null
+			c_tag = "[A.proper_name][suffix ? " [suffix]" : null]"
+		// Add a default c_tag in case the camera has been placed in an invalid location or inside another object.
+		c_tag ||= "Security Camera - [random_id(/obj/machinery/camera, 100,999)]"
 
 		invalidateCameraCache()
 	set_extension(src, /datum/extension/network_device/camera, null, null, null, TRUE, preset_channels, c_tag, cameranet_enabled, requires_connection)

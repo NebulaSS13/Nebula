@@ -419,7 +419,7 @@
 			pass = FALSE
 
 	if(pass)
-		pass("Have cameras have the c_tag set.")
+		pass("All cameras have the c_tag set.")
 	else
 		fail("One or more cameras do not have the c_tag set.")
 
