@@ -301,7 +301,7 @@
 		splatter.basecolor = blood_data["blood_color"]
 
 	splatter.update_icon()
-	splatter.fluorescent  = 0
+	splatter.fluorescent = FALSE
 	splatter.set_invisibility(INVISIBILITY_NONE)
 	return splatter
 

@@ -317,3 +317,7 @@
 
 #define LEVEL_BELOW_PLATING 1
 #define LEVEL_ABOVE_PLATING 2
+
+// Defines for fluorescence (/atom/var/fluorescent)
+#define FLUORESCENT_GLOWS   1	// Glows when under flourescent light
+#define FLUORESCENT_GLOWING 2	// Currently glowing due to flourescent light
