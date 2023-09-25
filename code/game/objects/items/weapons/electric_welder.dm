@@ -8,17 +8,19 @@
 	force = 7
 	throwforce = 7
 	lit_colour = COLOR_CYAN_BLUE
-	var/obj/item/cell/cell = /obj/item/cell/high
 	var/fuel_cost_multiplier = 10
 
 /obj/item/weldingtool/electric/Initialize()
-	if(ispath(cell))
-		cell = new cell(src)
+	setup_power_supply()
 	. = ..()
+
+/obj/item/weldingtool/electric/proc/setup_power_supply(var/loaded_cell_type)
+	set_extension(src, /datum/extension/loaded_cell, /obj/item/cell, loaded_cell_type || /obj/item/cell/high)
 
 /obj/item/weldingtool/electric/examine(mob/user, distance)
 	. = ..()
-	if (!cell)
+	var/obj/item/cell/cell = get_cell()
+	if(!cell)
 		to_chat(user, "There is no [welding_resource] source attached.")
 	else
 		to_chat(user, (distance == 0 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
@@ -31,9 +33,8 @@
 	. = ..()
 
 /obj/item/weldingtool/electric/get_cell()
-	if(cell)
-		. = cell
-	else if(istype(loc, /obj/item/rig_module))
+	. = ..()
+	if(!. && istype(loc, /obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
 		if(istype(module.holder))
 			. = module.holder.get_cell()
@@ -45,27 +46,7 @@
 /obj/item/weldingtool/electric/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/chems/welder_tank))
 		return
-	if(IS_SCREWDRIVER(W))
-		if(cell)
-			cell.dropInto(get_turf(src))
-			user.put_in_hands(cell)
-			to_chat(user, SPAN_NOTICE("You pop \the [cell] out of \the [src]."))
-			welding = FALSE
-			cell = null
-			update_icon()
-		else
-			to_chat(user, SPAN_WARNING("\The [src] has no cell installed."))
-		return
-	else if(istype(W, /obj/item/cell))
-		if(cell)
-			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.try_unequip(W))
-			cell = W
-			cell.forceMove(src)
-			to_chat(user, SPAN_NOTICE("You slot \the [cell] into \the [src]."))
-			update_icon()
-		return
-	. = ..()
+	return ..()
 
 /obj/item/weldingtool/electric/use_fuel(var/amount)
 	var/obj/item/cell/cell = get_cell()
@@ -75,5 +56,5 @@
 
 /obj/item/weldingtool/electric/on_update_icon()
 	. = ..()
-	if(cell)
+	if(get_cell())
 		add_overlay("[icon_state]-cell")
