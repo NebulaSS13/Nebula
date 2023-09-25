@@ -31,7 +31,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 // Geyser Object
 //////////////////////////////////////////////////////////////////////
 
-///A prop that periodically emit steam spouts and can have a geothermal generator placed on top to generate power.
+/// A prop that periodically emit steam spouts and can have a geothermal generator placed on top to generate power.
 /obj/effect/geyser
 	name       = "geothermal vent"
 	desc       = "A vent leading to an underground geothermally heated reservoir, which periodically spews superheated liquid."
@@ -39,8 +39,8 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	icon_state = "geyser"
 	anchored   = TRUE
 	layer      = TURF_LAYER + 0.01
-	level      = 1 //Goes under floor/plating
-	///The particle emitter that will generate the steam column effect for this geyser
+	level      = LEVEL_BELOW_PLATING // Goes under floor/plating
+	/// The particle emitter that will generate the steam column effect for this geyser
 	var/particles/geyser_steam/steamfx
 
 /obj/effect/geyser/Initialize(ml)

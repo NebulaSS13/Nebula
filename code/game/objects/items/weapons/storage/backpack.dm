@@ -338,7 +338,7 @@
 /obj/item/storage/backpack/satchel/flat
 	name = "smuggler's satchel"
 	desc = "A very slim satchel that can easily fit into tight spaces."
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	w_class = ITEM_SIZE_NORMAL //Can fit in backpacks itself.
 	storage_slots = 5
 	max_w_class = ITEM_SIZE_NORMAL

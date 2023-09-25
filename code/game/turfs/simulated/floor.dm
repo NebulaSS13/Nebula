@@ -34,7 +34,7 @@
 	return flooring?.get_movement_delay(travel_dir, mover) || ..()
 
 /turf/simulated/floor/protects_atom(var/atom/A)
-	return (A.level <= 1 && !is_plating()) || ..()
+	return (A.level <= LEVEL_BELOW_PLATING && !is_plating()) || ..()
 
 /turf/simulated/floor/Initialize(var/ml, var/floortype)
 	. = ..(ml)

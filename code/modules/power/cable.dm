@@ -31,7 +31,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	color =    COLOR_MAROON
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	level = 1
+	level = LEVEL_BELOW_PLATING
 
 	var/d1
 	var/d2
@@ -73,7 +73,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 	. = ..(ml)
 	var/turf/T = src.loc			// hide if turf is not intact
-	if(level==1 && T)
+	if(level == LEVEL_BELOW_PLATING && T)
 		hide(!T.is_plating())
 	global.cable_list += src //add it to the global cable list
 

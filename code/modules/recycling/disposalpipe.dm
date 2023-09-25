@@ -7,7 +7,7 @@
 	anchored = TRUE
 	density = FALSE
 	maxhealth = 10
-	level = 1			// underfloor only
+	level = LEVEL_BELOW_PLATING
 	dir = 0				// dir will contain dominant direction for junction pipes
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
 	layer = ABOVE_TILE_LAYER

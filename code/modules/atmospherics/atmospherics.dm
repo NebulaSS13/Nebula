@@ -79,7 +79,7 @@ Pipelines + Other Objects -> Pipe network
 			return nodes_to_networks[node]
 
 /obj/machinery/atmospherics/hide(var/do_hide)
-	if(do_hide && level == 1)
+	if(do_hide && level == LEVEL_BELOW_PLATING)
 		layer = PIPE_LAYER
 	else
 		reset_plane_and_layer()
@@ -87,7 +87,7 @@ Pipelines + Other Objects -> Pipe network
 /obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type, var/default_state = "exposed")
 	var/state = default_state
 	if(node)
-		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(!T.is_plating() && node.level == LEVEL_BELOW_PLATING && istype(node, /obj/machinery/atmospherics/pipe))
 			state = "down"
 		else
 			state = "intact"
@@ -107,7 +107,7 @@ Pipelines + Other Objects -> Pipe network
 	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		var/node_dir = get_dir(src, node)
 		disconnected_directions &= ~node_dir
-		if(hide_hidden_pipes && !T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+		if(hide_hidden_pipes && !T.is_plating() && node.level == LEVEL_BELOW_PLATING && istype(node, /obj/machinery/atmospherics/pipe))
 			continue
 		else
 			add_underlay(T, node, node_dir, node.icon_connect_type)
@@ -237,7 +237,7 @@ Pipelines + Other Objects -> Pipe network
 /obj/machinery/proc/set_initial_level()
 	var/turf/T = get_turf(src)
 	if(T)
-		level = (!T.is_plating() ? 2 : 1)
+		level = (T.is_plating() ? LEVEL_BELOW_PLATING : LEVEL_ABOVE_PLATING)
 
 /obj/machinery/atmospherics/proc/deconstruction_pressure_check()
 	return TRUE

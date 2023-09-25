@@ -17,7 +17,7 @@
 
 	var/volume_rate = 50	//flow rate limit
 
-	level = 1
+	level = LEVEL_BELOW_PLATING
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 

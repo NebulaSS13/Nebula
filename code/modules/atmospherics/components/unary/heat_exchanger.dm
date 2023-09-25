@@ -86,6 +86,6 @@
 /obj/machinery/atmospherics/unary/heat_exchanger/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)
 		var/turf/T = get_turf(src)
-		if (level==1 && isturf(T) && !T.is_plating())
+		if (level == LEVEL_BELOW_PLATING && isturf(T) && !T.is_plating())
 			return SPAN_WARNING("You must remove the plating first.")
 	return ..()

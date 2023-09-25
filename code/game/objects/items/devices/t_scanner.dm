@@ -141,7 +141,7 @@
 			continue
 
 		for(var/obj/O in T.contents)
-			if(O.level != 1)
+			if(O.level != LEVEL_BELOW_PLATING)
 				continue
 			if(!O.invisibility)
 				continue //if it's already visible don't need an overlay for it

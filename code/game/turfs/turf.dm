@@ -1,6 +1,6 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	abstract_type = /turf
 	is_spawnable_type = TRUE
 	layer = TURF_LAYER
