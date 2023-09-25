@@ -28,7 +28,8 @@
 	var/turf/Tsec = get_turf(src)
 
 	var/obj/item/gun/energy/taser/G = new /obj/item/gun/energy/taser(Tsec)
-	G.power_supply.charge = 0
+	var/obj/item/cell/power_supply = G.get_cell()
+	power_supply?.charge = 0
 	if(prob(50))
 		new /obj/item/robot_parts/l_leg(Tsec)
 	if(prob(50))

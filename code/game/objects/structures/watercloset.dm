@@ -409,8 +409,9 @@ var/global/list/hygiene_props = list()
 
 	else if (istype(O, /obj/item/baton))
 		var/obj/item/baton/B = O
-		if(B.bcell)
-			if(B.bcell.charge > 0 && B.status == 1)
+		var/obj/item/cell/cell = B.get_cell()
+		if(cell)
+			if(cell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
 				if(isliving(user))
 					var/mob/living/M = user

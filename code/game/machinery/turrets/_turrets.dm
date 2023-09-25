@@ -125,13 +125,11 @@
 /obj/machinery/turret/Process()
 	if(istype(installed_gun, /obj/item/gun/energy))
 		var/obj/item/gun/energy/energy_gun = installed_gun
-		if(energy_gun.power_supply)
-			var/obj/item/cell/power_cell = energy_gun.power_supply
-			if(!power_cell.fully_charged())
-				power_cell.give(active_power_usage*CELLRATE)
-				update_use_power(POWER_USE_ACTIVE)
-				return
-
+		var/obj/item/cell/power_supply = energy_gun.get_cell()
+		if(power_supply && !power_supply.fully_charged())
+			power_supply.give(active_power_usage*CELLRATE)
+			update_use_power(POWER_USE_ACTIVE)
+			return
 	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/turret/attackby(obj/item/I, mob/user)

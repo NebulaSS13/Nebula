@@ -36,6 +36,9 @@
 	self_recharge = TRUE
 
 /obj/item/gun/energy/get_hardpoint_maptext()
+	var/obj/item/cell/power_supply = get_cell()
+	if(!power_supply)
+		return 0
 	return "[round(power_supply.charge / charge_cost)]/[max_shots]"
 
 /obj/item/gun/energy/get_hardpoint_status_value()
