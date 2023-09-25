@@ -189,7 +189,7 @@
 	icon_state = "redpod0"
 	base_icon_state = "redpod0"
 	occupied_icon_state = "redpod1"
-	var/launched = 0
+	var/launched = FALSE
 	var/datum/gas_mixture/airtank
 
 /obj/machinery/cryopod/lifepod/Initialize()
@@ -203,7 +203,7 @@
 	return airtank
 
 /obj/machinery/cryopod/lifepod/proc/launch()
-	launched = 1
+	launched = TRUE
 	for(var/d in global.cardinal)
 		var/turf/T = get_step(src,d)
 		var/obj/machinery/door/blast/B = locate() in T
@@ -212,13 +212,17 @@
 			break
 
 	var/newz
-	if(prob(10))
+	if(prob(90))
 		var/list/possible_locations
 		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 		if(istype(O))
 			for(var/obj/effect/overmap/visitable/OO in range(O,2))
 				if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/planetoid))
-					LAZYDISTINCTADD(possible_locations, text2num(level))
+					// Don't try to escape to the place we just launched from
+					if(OO == O)
+						continue
+					var/datum/level_data/data = OO.get_topmost_level_data()
+					LAZYDISTINCTADD(possible_locations, text2num(data.level_z))
 		if(length(possible_locations))
 			newz = pick(possible_locations)
 	if(!newz)
