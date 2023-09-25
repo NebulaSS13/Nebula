@@ -93,8 +93,10 @@
 				--needed_items[itype]
 				if(needed_items[itype] <= 0)
 					needed_items -= itype
+					break
 			else
 				needed_items -= itype
+				break
 			// break
 		if(!length(container_contents))
 			break
