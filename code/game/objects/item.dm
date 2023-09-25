@@ -244,16 +244,21 @@
 		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
 		var/obj/item/cell/current_cell = get_cell()
 		if(current_cell)
-			desc_comp += SPAN_NOTICE("\The [src] has \a [current_cell] installed.<BR>")
-			desc_comp += SPAN_NOTICE("\The [src] is [round(current_cell.percent())]% charged.<BR>")
-			if(cell_loaded.can_modify)
-				if(cell_loaded.requires_tool)
-					var/decl/tool_archetype/needed_tool = GET_DECL(cell_loaded.requires_tool)
-					desc_comp += SPAN_NOTICE("\The [src] power supply requires \a [needed_tool.name] to remove.<BR>")
-				else
-					desc_comp += SPAN_NOTICE("Hold \the [src] in an off-hand and click it with an empty hand to remove the power supply.<BR>")
+			// Some items use the extension but may return something else to get_cell().
+			// In these cases, don't print the removal info etc.
+			if(current_cell != cell_loaded.loaded_cell_ref?.resolve())
+				desc_comp += SPAN_NOTICE("\The [src] is using an external [current_cell.name] as a power supply.<BR>")
 			else
-				desc_comp += SPAN_NOTICE("\The [src] power supply cannot be removed.<BR>")
+				desc_comp += SPAN_NOTICE("\The [src] has \a [current_cell] installed.<BR>")
+				desc_comp += SPAN_NOTICE("\The [src] is [round(current_cell.percent())]% charged.<BR>")
+				if(cell_loaded.can_modify)
+					if(cell_loaded.requires_tool)
+						var/decl/tool_archetype/needed_tool = GET_DECL(cell_loaded.requires_tool)
+						desc_comp += SPAN_NOTICE("\The [src] power supply requires \a [needed_tool.name] to remove.<BR>")
+					else
+						desc_comp += SPAN_NOTICE("Hold \the [src] in an off-hand and click it with an empty hand to remove the power supply.<BR>")
+				else
+					desc_comp += SPAN_NOTICE("\The [src] power supply cannot be removed.<BR>")
 		else
 			var/obj/item/cell = cell_loaded.expected_cell_type
 			desc_comp += SPAN_WARNING("\The [src] has no power source installed.<BR>")

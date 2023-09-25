@@ -79,7 +79,6 @@
 	slowdown_held = 1
 	slowdown_worn = 1
 	removable_components = FALSE
-	cell = /obj/item/cell/hyper
 	capacitor = /obj/item/stock_parts/capacitor/adv
 	load_type = /obj/item/magnetic_ammo/skrell
 	loaded = /obj/item/magnetic_ammo/skrell
