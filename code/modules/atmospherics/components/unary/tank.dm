@@ -9,7 +9,7 @@
 	var/start_pressure = 25 ATM
 	var/filling // list of gas ratios to use.
 
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	dir = SOUTH
 	initialize_directions = 2
 	density = TRUE
@@ -37,7 +37,9 @@
 		update_icon()
 
 /obj/machinery/atmospherics/unary/tank/set_initial_level()
-	level = 1 // Always on top, apparently.
+	// This effectively does nothing, it's ignored due to hide() being overwritten
+	// and probably needs to be reworked.
+	level = LEVEL_BELOW_PLATING
 
 /obj/machinery/atmospherics/unary/tank/on_update_icon()
 	build_device_underlays(FALSE)
@@ -92,7 +94,7 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	w_class = ITEM_SIZE_STRUCTURE
 	density = TRUE
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	dir = SOUTH
 	constructed_path = /obj/machinery/atmospherics/unary/tank
 	pipe_class = PIPE_CLASS_UNARY

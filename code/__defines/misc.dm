@@ -313,3 +313,6 @@
 
 ///Formats exceptions into a readable string with all the details.
 #define EXCEPTION_TEXT(E) "'[E.name]' ('[E.type]'): '[E.file]':[E.line]:\n'[E.desc]'"
+
+#define LEVEL_BELOW_PLATING 1
+#define LEVEL_ABOVE_PLATING 2

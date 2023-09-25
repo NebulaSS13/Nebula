@@ -1,6 +1,6 @@
 /atom
-	/// (1 | 2) Determines if this atom is below `1` or above `2` plating. TODO: Use defines.
-	var/level = 2
+	/// (DEFINE) Determines where this atom sits in terms of turf plating. See misc.dm
+	var/level = LEVEL_ABOVE_PLATING
 	/// (BITFLAG) See flags.dm
 	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 	/// (FLOAT) The world.time that this atom last bumped another. Used mostly by mobs.

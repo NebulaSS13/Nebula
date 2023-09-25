@@ -18,7 +18,7 @@
 	power_rating = 30000			// 30000 W ~ 40 HP
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL //connects to regular, supply pipes, and fuel pipes
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	identifier = "AVP"
 
 	var/hibernate = 0 //Do we even process?
@@ -338,7 +338,7 @@
 		var/turf/T = src.loc
 		var/hidden_pipe_check = FALSE
 		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
-			if(node.level)
+			if(node.level == LEVEL_BELOW_PLATING)
 				hidden_pipe_check = TRUE
 				break
 		if (hidden_pipe_check && isturf(T) && !T.is_plating())

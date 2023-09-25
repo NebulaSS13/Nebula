@@ -8,7 +8,7 @@
 	active_power_usage = 2000
 	anchored = TRUE
 	density = FALSE
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0

@@ -165,7 +165,7 @@ FLOOR SAFES
 	name = "floor safe"
 	icon_state = "floorsafe"
 	density = FALSE
-	level = 1	//underfloor
+	level = LEVEL_BELOW_PLATING
 	layer = BELOW_OBJ_LAYER
 
 /obj/structure/safe/floor/Initialize()

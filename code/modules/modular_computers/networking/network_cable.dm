@@ -5,7 +5,7 @@
 	icon_state = "dot"
 	layer = WIRE_LAYER
 	anchored = TRUE
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	var/datum/node/physical/network_node
 
 /obj/structure/network_cable/Initialize(ml, _mat, _reinf_mat)
