@@ -455,7 +455,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(MAT_PHASE_SOLID)
 			var/kg = (solid_density*ml)/1000
 			return kg/molar_mass
-
+		else
+			log_warning("Invalid phase '[phase]' passed to get_mols_from_units!")
+			return units
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
