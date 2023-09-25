@@ -17,12 +17,6 @@ var/global/const/WIRE_TRANSMIT = 4
 		return 1
 	return 0
 
-/datum/wires/radio/GetInteractWindow(mob/user)
-	var/obj/item/radio/R = holder
-	. += ..()
-	if(R.cell)
-		. += "<BR><A href='?src=\ref[R];remove_cell=1'>Remove cell</A><BR>"
-
 /datum/wires/radio/UpdatePulsed(var/index)
 	var/obj/item/radio/R = holder
 	switch(index)
