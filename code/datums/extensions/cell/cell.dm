@@ -8,6 +8,7 @@
 	var/expected_cell_type = /obj/item/cell/device
 	var/load_delay = 1 SECOND
 	var/unload_delay
+	var/can_modify = TRUE
 
 /datum/extension/loaded_cell/New(datum/holder, _expected_cell_type, _create_cell_type, _override_cell_capacity)
 	..(holder)
@@ -31,6 +32,10 @@
 	// Check inputs.
 	if(!istype(cell) || !istype(user) || QDELETED(cell) || QDELETED(user) || user.incapacitated())
 		return FALSE
+
+	if(!can_modify)
+		to_chat(user, SPAN_WARNING("\The [holder] power supply cannot be replaced."))
+		return TRUE
 
 	// Check type.
 	if(!istype(cell, expected_cell_type))
@@ -71,6 +76,13 @@
 	// Check inputs.
 	if(!istype(user) || QDELETED(user) || user.incapacitated())
 		return FALSE
+
+	if(!can_modify)
+		if(tool)
+			to_chat(user, SPAN_WARNING("\The [holder]'s power supply cannot be removed."))
+			return TRUE // Tool interactions should get a warning, inhand interactions should just default to regular attack_hand.
+		return FALSE
+
 	// Check existing cell.
 	var/obj/item/cell/existing_cell = loaded_cell_ref?.resolve()
 	if(!istype(existing_cell) || QDELETED(existing_cell) || existing_cell.loc != holder)
