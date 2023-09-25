@@ -10,23 +10,20 @@
 	material = /decl/material/solid/organic/plastic
 
 	var/brightness_on = 1
-	var/obj/item/cell/cigcell
 	var/cartridge_type = /obj/item/chems/ecig_cartridge/med_nicotine
 	var/obj/item/chems/ecig_cartridge/ec_cartridge
-	var/cell_type = /obj/item/cell/device/standard
 	var/power_usage = 450 //value for simple ecig, enough for about 1 cartridge, in JOULES!
 	var/ecig_colors = list(null, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_PURPLE_GRAY)
 	var/idle = 0
 	var/idle_treshold = 30
 
 /obj/item/clothing/mask/smokable/ecig/Initialize()
-	if(ispath(cell_type))
-		cigcell = new cell_type
+	setup_power_supply()
 	ec_cartridge = new cartridge_type(src)
 	. = ..()
 
-/obj/item/clothing/mask/smokable/ecig/get_cell()
-	return cigcell
+/obj/item/clothing/mask/smokable/ecig/proc/setup_power_supply(var/loaded_cell_type)
+	set_extension(src, /datum/extension/loaded_cell, /obj/item/cell/device, loaded_cell_type || /obj/item/cell/device/standard)
 
 /obj/item/clothing/mask/smokable/ecig/simple
 	name = "cheap electronic cigarette"
@@ -43,7 +40,9 @@
 /obj/item/clothing/mask/smokable/ecig/util
 	name = "electronic cigarette"
 	desc = "A popular utilitarian model electronic cigarette, the ONI-55. Comes in a variety of colors."
-	cell_type = /obj/item/cell/device/high //enough for four cartridges
+
+/obj/item/clothing/mask/smokable/ecig/util/setup_power_supply(var/loaded_cell_type)
+	return ..(/obj/item/cell/device/high) //enough for four cartridges
 
 /obj/item/clothing/mask/smokable/ecig/util/Initialize()
 	. = ..()
@@ -55,25 +54,19 @@
 		to_chat(user,SPAN_NOTICE("There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining."))
 	else
 		to_chat(user,SPAN_NOTICE("There's no cartridge connected."))
-	if(cigcell)
-		to_chat(user,SPAN_NOTICE("The power meter shows that there's about [round(cigcell.percent(), 25)]% power remaining."))
-	else
-		to_chat(user,SPAN_NOTICE("There's no cartridge connected."))
 
 /obj/item/clothing/mask/smokable/ecig/deluxe
 	name = "deluxe electronic cigarette"
 	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
 	icon = 'icons/clothing/mask/smokables/cigarette_electronic_deluxe.dmi'
-	cell_type = /obj/item/cell/device/high //enough for four catridges
+
+/obj/item/clothing/mask/smokable/ecig/deluxe/setup_power_supply(var/loaded_cell_type)
+	return ..(/obj/item/cell/device/high) //enough for four cartridges
 
 /obj/item/clothing/mask/smokable/ecig/deluxe/examine(mob/user)
 	. = ..()
 	if(ec_cartridge)
 		to_chat(user,SPAN_NOTICE("There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining."))
-	else
-		to_chat(user,SPAN_NOTICE("There's no cartridge connected."))
-	if(cigcell)
-		to_chat(user,SPAN_NOTICE("The power meter shows that there's about [round(cigcell.percent(), 1)]% power remaining."))
 	else
 		to_chat(user,SPAN_NOTICE("There's no cartridge connected."))
 
@@ -83,7 +76,7 @@
 	update_icon()
 
 /obj/item/clothing/mask/smokable/ecig/Process()
-	if(!cigcell)
+	if(!get_cell())
 		Deactivate()
 		return
 	if(!ec_cartridge)
@@ -110,7 +103,8 @@
 		if (src == C.get_equipped_item(slot_wear_mask_str) && C.check_has_mouth()) //transfer, but only when not disabled
 			idle = 0
 			//here we'll reduce battery by usage, and check powerlevel - you only use batery while smoking
-			if(!cigcell.checked_use(power_usage * CELLRATE)) //if this passes, there's not enough power in the battery
+			var/obj/item/cell/cell = get_cell()
+			if(!cell?.checked_use(power_usage * CELLRATE)) //if this passes, there's not enough power in the battery
 				Deactivate()
 				to_chat(C,SPAN_NOTICE("\The [src]'s power meter flashes a low battery warning and shuts down."))
 				return
@@ -137,39 +131,23 @@
 			ec_cartridge = I
 			update_icon()
 			to_chat(user, SPAN_NOTICE("You insert \the [I] into \the [src]."))
-
-	if(IS_SCREWDRIVER(I))
-		if(cigcell) //if contains powercell
-			cigcell.update_icon()
-			cigcell.dropInto(loc)
-			cigcell = null
-			to_chat(user, SPAN_NOTICE("You remove \the [cigcell] from \the [src]."))
-		else //does not contains cell
-			to_chat(user, SPAN_NOTICE("There's no battery in \the [src]."))
-
-	if(istype(I, /obj/item/cell/device))
-		if(!cigcell && user.try_unequip(I))
-			I.forceMove(src)
-			cigcell = I
-			to_chat(user, SPAN_NOTICE("You install \the [cigcell] into \the [src]."))
-			update_icon()
-		else
-			to_chat(user, SPAN_NOTICE("\The [src] already has a battery installed."))
-
+		return TRUE
+	return ..()
 
 /obj/item/clothing/mask/smokable/ecig/attack_self(mob/user)
 	if(lit)
 		Deactivate()
 		to_chat(user, SPAN_NOTICE("You turn off \the [src]."))
 	else
-		if(cigcell)
+		var/obj/item/cell/cell = get_cell()
+		if(cell)
 			if (!ec_cartridge)
 				to_chat(user, SPAN_NOTICE("You can't use \the [src] with no cartridge installed!"))
 				return
 			else if(!ec_cartridge.reagents.total_volume)
 				to_chat(user, SPAN_NOTICE("You can't use \the [src] with no liquid left!"))
 				return
-			else if(!cigcell.check_charge(power_usage * CELLRATE))
+			else if(!cell.check_charge(power_usage * CELLRATE))
 				to_chat(user, SPAN_NOTICE("\The [src]'s power meter flashes a low battery warning and refuses to operate."))
 				return
 			lit = TRUE
