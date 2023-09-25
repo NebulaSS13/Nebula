@@ -239,7 +239,8 @@ var/global/list/turret_icons
 /obj/machinery/porta_turret/physically_destroyed(skip_qdel)
 	if(installation)
 		var/obj/item/gun/energy/Gun = new installation(loc)
-		Gun.power_supply.charge = gun_charge
+		var/obj/item/cell/power_supply = Gun.get_cell()
+		power_supply?.charge = gun_charge
 		Gun.update_icon()
 	if(prob(50))
 		SSmaterials.create_object(/decl/material/solid/metal/steel, loc, rand(1,4))
@@ -703,7 +704,8 @@ var/global/list/turret_icons
 					to_chat(user, "<span class='notice'>\the [I] is stuck to your hand, you cannot put it in \the [src]</span>")
 					return
 				installation = I.type //installation becomes I.type
-				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
+				var/obj/item/cell/power_supply = E.get_cell()
+				gun_charge = power_supply?.charge || 0 //the gun's charge is stored in gun_charge
 				to_chat(user, "<span class='notice'>You add [I] to the turret.</span>")
 				target_type = /obj/machinery/porta_turret
 
@@ -809,7 +811,8 @@ var/global/list/turret_icons
 			return TRUE
 		build_step = 3
 		var/obj/item/gun/energy/Gun = new installation(loc)
-		Gun.power_supply.charge = gun_charge
+		var/obj/item/cell/power_supply = Gun.get_cell()
+		power_supply?.charge = gun_charge
 		Gun.update_icon()
 		installation = null
 		gun_charge = 0

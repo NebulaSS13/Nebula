@@ -136,9 +136,9 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/cell/device/variable/Initialize(mapload, charge_amount)
+/obj/item/cell/device/variable/Initialize(ml, material_key, charge_amount)
 	maxcharge = charge_amount
-	return ..(mapload)
+	return ..(ml, material_key)
 
 /obj/item/cell/device/standard
 	name = "standard device power cell"
@@ -152,6 +152,40 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'powerstorage':2}"
+
+/obj/item/cell/device/infinite
+	name = "experimental device power cell"
+	desc = "This special experimental power cell has both very large capacity, and ability to recharge itself with zero-point energy."
+	icon_state = "icell"
+	origin_tech =  null
+	maxcharge = 3000
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
+	)
+
+/obj/item/cell/device/infinite/percent()
+	return 100
+
+/obj/item/cell/device/infinite/fully_charged()
+	return TRUE
+
+/obj/item/cell/device/infinite/check_charge(var/amount)
+	return (maxcharge >= amount)
+
+/obj/item/cell/device/infinite/use(var/amount)
+	return min(maxcharge, amount)
+
+/obj/item/cell/device/infinite/checked_use(var/amount)
+	return check_charge(amount)
+
+/obj/item/cell/device/infinite/give()
+	return 0
+
+/obj/item/cell/device/infinite/get_electrocute_damage()
+	charge = maxcharge
+	return ..()
 
 /obj/item/cell/crap
 	name = "old power cell"

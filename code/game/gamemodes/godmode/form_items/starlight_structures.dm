@@ -215,8 +215,9 @@
 	. = 0
 	if(istype(I, /obj/item/gun/energy))
 		var/obj/item/gun/energy/energy = I
-		if(energy.power_supply)
-			energy.power_supply.give(energy.charge_cost * energy.max_shots)
+		var/obj/item/cell/power_supply = energy.get_cell()
+		if(power_supply)
+			power_supply.give(energy.charge_cost * energy.max_shots)
 			. = 1
 	else if(istype(I ,/obj/item/knife/ritual/shadow))
 		var/obj/item/knife/ritual/shadow/shad = I

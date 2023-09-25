@@ -14,11 +14,13 @@
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	one_hand_penalty = 2
 	projectile_type = /obj/item/projectile/temp
-	power_supply = /obj/item/cell/high
 	combustion = 0
 	indicator_color = COLOR_GREEN
 	var/firing_temperature = T20C
 	var/current_temperature = T20C
+
+/obj/item/gun/energy/temperature/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type)
+	return ..(loaded_cell_type = /obj/item/cell/high, accepted_cell_type = /obj/item/cell)
 
 /obj/item/gun/energy/temperature/Initialize()
 	. = ..()

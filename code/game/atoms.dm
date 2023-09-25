@@ -739,7 +739,12 @@
 /// Get any power cell associated with this atom.
 /atom/proc/get_cell()
 	RETURN_TYPE(/obj/item/cell)
-	return
+	if(has_extension(src, /datum/extension/loaded_cell))
+		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+		var/obj/item/cell/cell = cell_loaded?.loaded_cell_ref?.resolve()
+		if(istype(cell) && !QDELETED(cell) && cell.loc == src)
+			return cell
+	return null
 
 /**
 	Get any radio associated with this atom.

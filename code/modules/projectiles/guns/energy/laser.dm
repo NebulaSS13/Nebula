@@ -98,9 +98,9 @@
 	one_hand_penalty = 0
 	has_safety = FALSE
 
-
 /obj/item/gun/energy/laser/reloadable
 	name = "reloadable laser carbine"
 	desc = "A G40E carbine, designed to kill with concentrated energy blasts. Uses removable energy cells."
-	power_supply = null
-	accepts_cell_type = /obj/item/cell/gun
+
+/obj/item/gun/energy/laser/reloadable/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type)
+	return ..(loaded_cell_type = /obj/item/cell/gun, accepted_cell_type = /obj/item/cell/gun)

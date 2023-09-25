@@ -206,12 +206,13 @@
 
 /obj/item/examine(mob/user, distance)
 	var/desc_comp = "" //For "description composite"
-	desc_comp += "It is a [w_class_description()] item."
+	desc_comp += "It is a [w_class_description()] item.<BR>"
 
 	var/desc_damage = get_examined_damage_string(health / max_health)
 	if(length(desc_damage))
-		desc_comp += "<BR/>[desc_damage]"
+		desc_comp += "[desc_damage]<BR>"
 
+	var/added_header = FALSE
 	if(user?.get_preference_value(/datum/client_preference/inquisitive_examine) == PREF_ON)
 
 		var/list/available_recipes = list()
@@ -224,32 +225,61 @@
 					available_recipes[initial_stage] = "\a [initial(prop.name)]"
 
 		if(length(available_recipes))
-			desc_comp += "<BR>*--------* <BR>"
+
+			if(!added_header)
+				added_header = TRUE
+				desc_comp += "*--------*<BR>"
+
 			for(var/decl/crafting_stage/initial_stage in available_recipes)
 				desc_comp += SPAN_NOTICE("With [available_recipes[initial_stage]], you could start making \a [initial_stage.descriptor] out of this.")
 				desc_comp += "<BR>"
-			desc_comp += "*--------*"
+			desc_comp += "*--------*<BR>"
+
+	if(distance <= 1 && has_extension(src, /datum/extension/loaded_cell))
+
+		if(!added_header)
+			added_header = TRUE
+			desc_comp += "*--------*<BR>"
+
+		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+		var/obj/item/cell/current_cell = get_cell()
+		if(current_cell)
+			desc_comp += SPAN_NOTICE("\The [src] has \a [current_cell] inserted.<BR>")
+			desc_comp += SPAN_NOTICE("\The [src] is [round(current_cell.percent())]% charged.<BR>")
+			if(cell_loaded.requires_tool)
+				var/decl/tool_archetype/needed_tool = GET_DECL(cell_loaded.requires_tool)
+				desc_comp += SPAN_NOTICE("\The [src] requires \a [needed_tool.name] to remove.<BR>")
+		else
+			var/obj/item/cell = cell_loaded.expected_cell_type
+			desc_comp += SPAN_WARNING("\The [src] has no power source inserted.<BR>")
+			desc_comp += SPAN_NOTICE("\The [src] is compatible with \a [initial(cell.name)].<BR>")
+		desc_comp += "*--------*<BR>"
 
 	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
-		desc_comp += "<BR>*--------* <BR>"
+
+		if(!added_header)
+			added_header = TRUE
+			desc_comp += "*--------*<BR>"
 
 		if(origin_tech)
-			desc_comp += SPAN_NOTICE("Testing potentials:<BR>")
+			desc_comp += SPAN_NOTICE("Testing potentials:")
+			desc_comp += "<BR>"
 			var/list/techlvls = cached_json_decode(origin_tech)
 			for(var/T in techlvls)
 				var/decl/research_field/field = SSfabrication.get_research_field_by_id(T)
-				desc_comp += "Tech: Level [techlvls[T]] [field.name] <BR>"
+				desc_comp += "Tech: Level [techlvls[T]] [field.name].<BR>"
 		else
 			desc_comp += "No tech origins detected.<BR>"
 
 		if(LAZYLEN(matter))
-			desc_comp += SPAN_NOTICE("Extractable materials:<BR>")
+			desc_comp += SPAN_NOTICE("Extractable materials:")
+			desc_comp += "<BR>"
 			for(var/mat in matter)
 				var/decl/material/M = GET_DECL(mat)
 				desc_comp += "[capitalize(M.solid_name)]<BR>"
 		else
 			desc_comp += SPAN_DANGER("No extractable materials detected.<BR>")
-		desc_comp += "*--------*"
+		desc_comp += "*--------*<BR>"
 
 	return ..(user, distance, "", desc_comp)
 
@@ -344,6 +374,11 @@
 	if(!QDELETED(throwing))
 		throwing.finalize(hit=TRUE)
 
+	if(has_extension(src, /datum/extension/loaded_cell) && (src in user.get_inactive_held_items()))
+		var/datum/extension/loaded_cell/cell_handler = get_extension(src, /datum/extension/loaded_cell)
+		if(cell_handler.try_unload(user))
+			return TRUE
+
 	if (loc == user)
 		if(!user.try_unequip(src))
 			return TRUE
@@ -389,6 +424,16 @@
 					S.gather_all(src.loc, user)
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
+		return TRUE
+
+	if(has_extension(src, /datum/extension/loaded_cell))
+		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+		if(cell_loaded.requires_tool && IS_TOOL(W, cell_loaded.requires_tool))
+			return cell_loaded.try_unload(user, W)
+		else if(istype(W, /obj/item/cell))
+			return cell_loaded.try_load(user, W)
+
+	return FALSE
 
 /obj/item/proc/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
 	return

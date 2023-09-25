@@ -39,11 +39,8 @@
 	will_patrol = 1
 
 /mob/living/bot/secbot/Initialize()
-	stun_baton = new(src)
-	stun_baton.bcell = new /obj/item/cell/infinite(stun_baton)
-	stun_baton.set_status(1, null)
 	. = ..()
-
+	stun_baton = new /obj/item/baton/infinite(src)
 	handcuffs = new(src)
 
 /mob/living/bot/secbot/Destroy()
