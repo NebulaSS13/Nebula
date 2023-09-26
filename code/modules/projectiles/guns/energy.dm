@@ -23,9 +23,9 @@ var/global/list/registered_cyborg_weapons = list()
 	// Which projectile type to create when firing.
 	var/projectile_type = /obj/item/projectile/beam/practice
 
-/obj/item/gun/energy/proc/setup_power_supply(var/loaded_cell_type, var/accepted_cell_type, var/power_supply_extension_type)
+/obj/item/gun/energy/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 	accepted_cell_type = accepted_cell_type || loaded_cell_type || /obj/item/cell/device/variable
-	set_extension(src, (power_supply_extension_type || /datum/extension/loaded_cell/unremovable), accepted_cell_type, (loaded_cell_type || accepted_cell_type), max_shots*charge_cost)
+	return ..((loaded_cell_type || accepted_cell_type), accepted_cell_type, (power_supply_extension_type || /datum/extension/loaded_cell/unremovable), max_shots*charge_cost)
 
 /obj/item/gun/energy/switch_firemodes()
 	. = ..()

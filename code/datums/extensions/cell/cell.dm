@@ -1,7 +1,7 @@
 /datum/extension/loaded_cell
 	expected_type = /obj/item
 	base_type = /datum/extension/loaded_cell
-	var/weakref/loaded_cell_ref
+	VAR_PRIVATE/weakref/loaded_cell_ref
 	var/load_sound = 'sound/weapons/guns/interaction/energy_magin.ogg'
 	var/unload_sound = 'sound/weapons/guns/interaction/smg_magout.ogg'
 	var/requires_tool
@@ -26,6 +26,11 @@
 	if(istype(existing_cell) && !QDELETED(existing_cell) && existing_cell.loc == holder)
 		qdel(existing_cell)
 	return ..()
+
+/datum/extension/loaded_cell/proc/get_cell()
+	var/obj/item/cell/cell = loaded_cell_ref?.resolve()
+	if(istype(cell) && !QDELETED(cell) && cell.loc == holder)
+		return cell
 
 /datum/extension/loaded_cell/proc/has_tool_unload_interaction(var/obj/item/tool)
 	return requires_tool && IS_TOOL(tool, requires_tool)

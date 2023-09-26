@@ -6,7 +6,8 @@
 	is_spawnable_type = FALSE
 	var/shut_up = 1
 
-/obj/item/radio/borg/setup_power_supply()
+/obj/item/radio/borg/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/radio/borg/can_receive_message(var/check_network_membership)

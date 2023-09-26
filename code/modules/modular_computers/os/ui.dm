@@ -132,7 +132,8 @@
 	var/ui_update_needed = 0
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
-		var/batery_percent = battery_module.battery.percent()
+		var/obj/item/cell/battery = battery_module.get_cell()
+		var/batery_percent = battery?.percent()
 		if(last_battery_percent != batery_percent) //Let's update UI on percent change
 			ui_update_needed = 1
 			last_battery_percent = batery_percent
@@ -173,8 +174,9 @@
 /datum/extension/interactive/os/proc/get_header_data(file_browser = FALSE)
 	var/list/data = list()
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
-	if(battery_module)
-		switch(battery_module.battery.percent())
+	var/obj/item/cell/battery = battery_module?.get_cell()
+	if(battery)
+		switch(battery.percent())
 			if(80 to 200) // 100 should be maximal but just in case..
 				data["PC_batteryicon"] = "batt_100.gif"
 			if(60 to 80)
@@ -187,7 +189,7 @@
 				data["PC_batteryicon"] = "batt_20.gif"
 			else
 				data["PC_batteryicon"] = "batt_5.gif"
-		data["PC_batterypercent"] = "[round(battery_module.battery.percent())] %"
+		data["PC_batterypercent"] = "[round(battery.percent())] %"
 		data["PC_showbatteryicon"] = 1
 	else
 		data["PC_batteryicon"] = "batt_5.gif"

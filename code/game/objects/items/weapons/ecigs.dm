@@ -22,8 +22,8 @@
 	ec_cartridge = new cartridge_type(src)
 	. = ..()
 
-/obj/item/clothing/mask/smokable/ecig/proc/setup_power_supply(var/loaded_cell_type)
-	set_extension(src, /datum/extension/loaded_cell, /obj/item/cell/device, loaded_cell_type || /obj/item/cell/device/standard)
+/obj/item/clothing/mask/smokable/ecig/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(loaded_cell_type || /obj/item/cell/device/standard, accepted_cell_type || /obj/item/cell/device, power_supply_extension_type)
 
 /obj/item/clothing/mask/smokable/ecig/simple
 	name = "cheap electronic cigarette"
@@ -41,8 +41,8 @@
 	name = "electronic cigarette"
 	desc = "A popular utilitarian model electronic cigarette, the ONI-55. Comes in a variety of colors."
 
-/obj/item/clothing/mask/smokable/ecig/util/setup_power_supply(var/loaded_cell_type)
-	return ..(/obj/item/cell/device/high) //enough for four cartridges
+/obj/item/clothing/mask/smokable/ecig/util/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(loaded_cell_type = /obj/item/cell/device/high) //enough for four cartridges
 
 /obj/item/clothing/mask/smokable/ecig/util/Initialize()
 	. = ..()
@@ -60,8 +60,8 @@
 	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
 	icon = 'icons/clothing/mask/smokables/cigarette_electronic_deluxe.dmi'
 
-/obj/item/clothing/mask/smokable/ecig/deluxe/setup_power_supply(var/loaded_cell_type)
-	return ..(/obj/item/cell/device/high) //enough for four cartridges
+/obj/item/clothing/mask/smokable/ecig/deluxe/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(loaded_cell_type = /obj/item/cell/device/high) //enough for four cartridges
 
 /obj/item/clothing/mask/smokable/ecig/deluxe/examine(mob/user)
 	. = ..()

@@ -19,8 +19,8 @@
 	var/firing_temperature = T20C
 	var/current_temperature = T20C
 
-/obj/item/gun/energy/temperature/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type)
-	return ..(loaded_cell_type = /obj/item/cell/high, accepted_cell_type = /obj/item/cell)
+/obj/item/gun/energy/temperature/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/high, /obj/item/cell, power_supply_extension_type, charge_value)
 
 /obj/item/gun/energy/temperature/Initialize()
 	. = ..()

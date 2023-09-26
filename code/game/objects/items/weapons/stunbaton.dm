@@ -29,8 +29,8 @@
 	. = ..(ml)
 	setup_power_supply(loaded_cell_type)
 
-/obj/item/baton/proc/setup_power_supply(var/loaded_cell_type)
-	set_extension(src, /datum/extension/loaded_cell/secured, /obj/item/cell/device, loaded_cell_type)
+/obj/item/baton/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	. = ..(loaded_cell_type, /obj/item/cell/device, /datum/extension/loaded_cell/secured)
 	update_icon()
 
 /obj/item/baton/loaded/Initialize(var/ml, var/material_key, var/loaded_cell_type)
@@ -175,7 +175,8 @@
 /obj/item/baton/robot/attackby(obj/item/W, mob/user)
 	return
 
-/obj/item/baton/robot/setup_power_supply(var/loaded_cell_type)
+/obj/item/baton/robot/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/baton/robot/get_cell()

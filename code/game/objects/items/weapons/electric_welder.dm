@@ -14,8 +14,8 @@
 	setup_power_supply()
 	. = ..()
 
-/obj/item/weldingtool/electric/proc/setup_power_supply(var/loaded_cell_type)
-	set_extension(src, /datum/extension/loaded_cell, /obj/item/cell, loaded_cell_type || /obj/item/cell/high)
+/obj/item/weldingtool/electric/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(loaded_cell_type || /obj/item/cell/high, /obj/item/cell, /datum/extension/loaded_cell)
 
 /obj/item/weldingtool/electric/examine(mob/user, distance)
 	. = ..()

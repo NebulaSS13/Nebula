@@ -7,9 +7,30 @@
 	critical = 1
 	origin_tech = "{'powerstorage':1,'engineering':1}"
 	material = /decl/material/solid/metal/steel
-
 	var/battery_rating = 75
-	var/obj/item/cell/battery = /obj/item/cell
+
+/obj/item/stock_parts/computer/battery_module/Initialize()
+	. = ..()
+	setup_power_supply()
+	charge_to_full()
+
+/obj/item/stock_parts/computer/battery_module/diagnostics()
+	. = ..()
+	var/obj/item/cell/battery = get_cell()
+	if(battery)
+		. += "Internal battery charge: [battery.charge]/[battery.maxcharge] CU"
+
+/obj/item/stock_parts/computer/battery_module/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	. = ..(loaded_cell_type || /obj/item/cell, /obj/item/cell, /datum/extension/loaded_cell/unremovable)
+	var/obj/item/cell/battery = get_cell()
+	if(battery)
+		battery.maxcharge = battery_rating
+		battery.charge = 0
+
+/obj/item/stock_parts/computer/battery_module/proc/charge_to_full()
+	var/obj/item/cell/battery = get_cell()
+	if(battery)
+		battery.charge = battery.maxcharge
 
 /obj/item/stock_parts/computer/battery_module/advanced
 	name = "advanced battery"
@@ -62,26 +83,6 @@
 	icon_state = "battery_lambda"
 	hardware_size = 1
 	battery_rating = 3000
-	battery = /obj/item/cell/infinite
 
-/obj/item/stock_parts/computer/battery_module/diagnostics()
-	. = ..()
-	. += "Internal battery charge: [battery.charge]/[battery.maxcharge] CU"
-
-/obj/item/stock_parts/computer/battery_module/Initialize()
-	. = ..()
-	battery = new battery(src)
-	battery.maxcharge = battery_rating
-	battery.charge = 0
-	charge_to_full()
-
-/obj/item/stock_parts/computer/battery_module/Destroy()
-	QDEL_NULL(battery)
-	return ..()
-
-/obj/item/stock_parts/computer/battery_module/proc/charge_to_full()
-	if(battery)
-		battery.charge = battery.maxcharge
-
-/obj/item/stock_parts/computer/battery_module/get_cell()
-	return battery
+/obj/item/stock_parts/computer/battery_module/lambda/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/infinite, accepted_cell_type, power_supply_extension_type)

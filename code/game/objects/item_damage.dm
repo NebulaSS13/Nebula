@@ -30,10 +30,10 @@
 
 // We only do this for the extension as other stuff that overrides get_cell() handles EMP in an override.
 /obj/item/emp_act(var/severity)
-	var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
 	// we do not use get_cell() here as some devices may return a non-extension cell
-	var/obj/item/cell/cell = cell_loaded?.loaded_cell_ref?.resolve()
-	if(istype(cell) && !QDELETED(cell) && cell.loc == src)
+	var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+	var/obj/item/cell/cell = cell_loaded?.get_cell()
+	if(cell)
 		cell.emp_act(severity)
 		update_icon()
 	return ..()

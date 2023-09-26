@@ -25,7 +25,8 @@ var/global/list/announcers = list()
 	decrypt_all_messages = TRUE
 	is_spawnable_type = FALSE
 
-/obj/item/radio/announcer/setup_power_supply()
+/obj/item/radio/announcer/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/radio/announcer/Destroy()

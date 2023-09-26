@@ -22,14 +22,14 @@
 	var/power_cost = 950                                       // Cost per fire, should consume almost an entire basic cell.
 	var/power_per_tick                                         // Capacitor charge per process(). Updated based on capacitor rating.
 
-/obj/item/gun/magnetic/proc/setup_power_supply(var/loaded_cell_type)
-	set_extension(src, (removable_components ? /datum/extension/loaded_cell : /datum/extension/loaded_cell/unremovable), /obj/item/cell, loaded_cell_type)
+/obj/item/gun/magnetic/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(loaded_cell_type, /obj/item/cell, (removable_components ? /datum/extension/loaded_cell : /datum/extension/loaded_cell/unremovable), charge_value)
 
 /obj/item/gun/magnetic/preloaded
 	capacitor = /obj/item/stock_parts/capacitor/adv
 
-/obj/item/gun/magnetic/preloaded/setup_power_supply(var/loaded_cell_type)
-	return ..(loaded_cell_type = /obj/item/cell/high)
+/obj/item/gun/magnetic/preloaded/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/high, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/magnetic/Initialize()
 	START_PROCESSING(SSobj, src)
