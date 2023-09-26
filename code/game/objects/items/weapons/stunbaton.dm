@@ -149,12 +149,6 @@
 
 	return 1
 
-/obj/item/baton/emp_act(severity)
-	var/obj/item/cell/cell = get_cell()
-	if(cell)
-		cell.emp_act(severity)	//let's not duplicate code everywhere if we don't have to please.
-	..()
-
 // Stunbaton module for Security synthetics
 /obj/item/baton/robot
 	hitcost = 20

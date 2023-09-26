@@ -27,6 +27,9 @@
 		qdel(existing_cell)
 	return ..()
 
+/datum/extension/loaded_cell/proc/has_tool_unload_interaction(var/obj/item/tool)
+	return requires_tool && IS_TOOL(tool, requires_tool)
+
 /datum/extension/loaded_cell/proc/try_load(var/mob/user, var/obj/item/cell/cell)
 
 	// Check inputs.
@@ -132,3 +135,24 @@
 	if(unload_sound)
 		playsound(user.loc, pick(unload_sound), 25, 1)
 	return TRUE
+
+/datum/extension/loaded_cell/proc/get_examine_text(var/obj/item/cell/current_cell)
+	. = list()
+	if(current_cell)
+		. += SPAN_NOTICE("\The [src] has \a [current_cell] installed.")
+		. += SPAN_NOTICE("\The [src] is [round(current_cell.percent())]% charged.")
+		if(can_modify)
+			if(requires_tool)
+				var/decl/tool_archetype/needed_tool = GET_DECL(requires_tool)
+				. += SPAN_NOTICE("\The [src] power supply requires \a [needed_tool.name] to remove.")
+			else
+				. += SPAN_NOTICE("Hold \the [src] in an off-hand and click it with an empty hand to remove the power supply.")
+		else
+			. += SPAN_NOTICE("\The [src] power supply cannot be removed.")
+	else
+		var/obj/item/cell = expected_cell_type
+		. += SPAN_WARNING("\The [src] has no power source installed.")
+		if(can_modify)
+			. += SPAN_NOTICE("\The [src] is compatible with \a [initial(cell.name)].")
+		else
+			. += SPAN_NOTICE("\The [src] power supply cannot be replaced.")

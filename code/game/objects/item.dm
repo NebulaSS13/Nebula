@@ -243,30 +243,13 @@
 
 		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
 		var/obj/item/cell/current_cell = get_cell()
-		if(current_cell)
-			// Some items use the extension but may return something else to get_cell().
-			// In these cases, don't print the removal info etc.
-			if(current_cell != cell_loaded.loaded_cell_ref?.resolve())
-				desc_comp += SPAN_NOTICE("\The [src] is using an external [current_cell.name] as a power supply.<BR>")
-			else
-				desc_comp += SPAN_NOTICE("\The [src] has \a [current_cell] installed.<BR>")
-				desc_comp += SPAN_NOTICE("\The [src] is [round(current_cell.percent())]% charged.<BR>")
-				if(cell_loaded.can_modify)
-					if(cell_loaded.requires_tool)
-						var/decl/tool_archetype/needed_tool = GET_DECL(cell_loaded.requires_tool)
-						desc_comp += SPAN_NOTICE("\The [src] power supply requires \a [needed_tool.name] to remove.<BR>")
-					else
-						desc_comp += SPAN_NOTICE("Hold \the [src] in an off-hand and click it with an empty hand to remove the power supply.<BR>")
-				else
-					desc_comp += SPAN_NOTICE("\The [src] power supply cannot be removed.<BR>")
+		// Some items use the extension but may return something else to get_cell().
+		// In these cases, don't print the removal info etc.
+		if(current_cell && current_cell != cell_loaded.loaded_cell_ref?.resolve())
+			desc_comp += SPAN_NOTICE("\The [src] is using an external [current_cell.name] as a power supply.")
 		else
-			var/obj/item/cell = cell_loaded.expected_cell_type
-			desc_comp += SPAN_WARNING("\The [src] has no power source installed.<BR>")
-			if(cell_loaded.can_modify)
-				desc_comp += SPAN_NOTICE("\The [src] is compatible with \a [initial(cell.name)].<BR>")
-			else
-				desc_comp += SPAN_NOTICE("\The [src] power supply cannot be replaced.<BR>")
-		desc_comp += "*--------*<BR>"
+			desc_comp += jointext(cell_loaded.get_examine_text(current_cell), "<BR>")
+		desc_comp += "<BR>*--------*<BR>"
 
 	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
 
@@ -441,7 +424,7 @@
 
 	if(has_extension(src, /datum/extension/loaded_cell))
 		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
-		if(cell_loaded.requires_tool && IS_TOOL(W, cell_loaded.requires_tool))
+		if(cell_loaded.has_tool_unload_interaction(W))
 			return cell_loaded.try_unload(user, W)
 		else if(istype(W, /obj/item/cell))
 			return cell_loaded.try_load(user, W)
