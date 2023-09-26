@@ -93,9 +93,11 @@
 				--needed_items[itype]
 				if(needed_items[itype] <= 0)
 					needed_items -= itype
+					break
 			else
 				needed_items -= itype
-			break
+				break
+			// break
 		if(!length(container_contents))
 			break
 	return !length(needed_items)
@@ -128,10 +130,15 @@
 	//Find items we need
 	if (LAZYLEN(items))
 		for (var/i in items)
-			var/obj/item/I = locate(i) in container_contents
-			if (I && I.reagents)
-				I.reagents.trans_to_holder(buffer,I.reagents.total_volume)
-				qdel(I)
+			var/cnt = 1
+			if (isnum(items[i]))
+				cnt = items[i]
+			for (cnt, cnt > 0, cnt--)
+				var/obj/item/I = locate(i) in container_contents
+				if (I && I.reagents)
+					container_contents -= I
+					I.reagents.trans_to_holder(buffer,I.reagents.total_volume)
+					qdel(I)
 
 	//Find fruits
 	if (LAZYLEN(fruit))
