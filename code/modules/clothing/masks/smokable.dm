@@ -34,7 +34,7 @@
 
 /obj/item/clothing/mask/smokable/Initialize()
 	. = ..()
-	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
+	atom_flags |= ATOM_FLAG_NO_CHEM_CHANGE // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
 /obj/item/clothing/mask/smokable/Destroy()
@@ -139,7 +139,7 @@
 			e.start()
 			qdel(src)
 			return
-		atom_flags &= ~ATOM_FLAG_NO_REACT // allowing reagents to react after being lit
+		atom_flags &= ~ATOM_FLAG_NO_CHEM_CHANGE // allowing reagents to react after being lit
 		HANDLE_REACTIONS(reagents)
 		update_icon()
 		if(flavor_text)

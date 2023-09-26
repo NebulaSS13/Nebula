@@ -96,7 +96,7 @@
 	center_of_mass = @"{'x':16,'y':8}"
 	volume = 60
 	amount_per_transfer_from_this = 10
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_CHEM_CHANGE
 	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_NONE

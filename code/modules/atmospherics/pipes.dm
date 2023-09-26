@@ -14,7 +14,7 @@
 	build_icon_state = "simple"
 	build_icon = 'icons/obj/pipe-item.dmi'
 	pipe_class = PIPE_CLASS_BINARY
-	atom_flags = ATOM_FLAG_CAN_BE_PAINTED | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED | ATOM_FLAG_NO_CHEM_CHANGE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 	frame_type = /obj/item/pipe
