@@ -74,10 +74,12 @@
 
 	if(!target.reagents)
 		return
-	if(!can_stab)
-		to_chat(user, SPAN_NOTICE("This syringe is too big to stab someone with it."))
-	else if((user.a_intent == I_HURT) && ismob(target))
-		syringestab(target, user)
+
+	if((user.a_intent == I_HURT) && ismob(target))
+		if(can_stab)
+			syringestab(target, user)
+		else
+			to_chat(user, SPAN_WARNING("This syringe is too big to stab someone with it."))
 		return
 
 	handleTarget(target, user)
