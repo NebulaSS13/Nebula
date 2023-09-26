@@ -48,7 +48,8 @@
 	return TRUE
 
 /decl/recipe/proc/check_fruit(var/obj/container)
-	SHOULD_BE_PURE(TRUE)
+	// SHOULD_BE_PURE(TRUE) // We cannot set SHOULD_BE_PURE here as
+	// get_contained_external_atoms() retrieves an extension, which is impure.
 	if(!length(fruit))
 		return TRUE
 	var/container_contents = container?.get_contained_external_atoms()
@@ -77,7 +78,8 @@
 	return TRUE
 
 /decl/recipe/proc/check_items(var/obj/container)
-	SHOULD_BE_PURE(TRUE)
+	// SHOULD_BE_PURE(TRUE) // We cannot set SHOULD_BE_PURE here as
+	// get_contained_external_atoms() retrieves an extension, which is impure.
 	if(!length(items))
 		return TRUE
 	var/list/container_contents = container?.get_contained_external_atoms()

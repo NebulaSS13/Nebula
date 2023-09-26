@@ -242,10 +242,11 @@
 			desc_comp += "*--------*<BR>"
 
 		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+		var/obj/item/cell/loaded_cell  = cell_loaded?.get_cell()
 		var/obj/item/cell/current_cell = get_cell()
 		// Some items use the extension but may return something else to get_cell().
 		// In these cases, don't print the removal info etc.
-		if(current_cell && current_cell != cell_loaded.loaded_cell_ref?.resolve())
+		if(current_cell && current_cell != loaded_cell)
 			desc_comp += SPAN_NOTICE("\The [src] is using an external [current_cell.name] as a power supply.")
 		else
 			desc_comp += jointext(cell_loaded.get_examine_text(current_cell), "<BR>")
@@ -921,5 +922,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen)) || ..()
 
+/obj/item/proc/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
+	if(loaded_cell_type && accepted_cell_type)
+		set_extension(src, (power_supply_extension_type || /datum/extension/loaded_cell), accepted_cell_type, loaded_cell_type, charge_value)
+
 /obj/item/proc/handle_loadout_equip_replacement(obj/item/old_item)
 	return
+

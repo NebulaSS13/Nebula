@@ -19,8 +19,8 @@
 	var/slowdown_held = 3
 	var/slowdown_worn = 2
 
-/obj/item/gun/magnetic/railgun/setup_power_supply(loaded_cell_type)
-	return ..(loaded_cell_type = /obj/item/cell/hyper)
+/obj/item/gun/magnetic/railgun/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/hyper, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/magnetic/railgun/Initialize()
 	LAZYSET(slowdown_per_slot, BP_L_HAND,        slowdown_held)

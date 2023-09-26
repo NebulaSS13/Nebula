@@ -336,6 +336,11 @@
 	for(var/atom/movable/AM in contents)
 		if(!QDELETED(AM) && AM.simulated)
 			LAZYADD(., AM)
+	if(has_extension(src, /datum/extension/loaded_cell))
+		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+		var/cell = cell_loaded?.get_cell()
+		if(cell)
+			LAZYREMOVE(., cell)
 
 /// Dump the contents of this atom onto its loc
 /atom/proc/dump_contents()
@@ -739,12 +744,8 @@
 /// Get any power cell associated with this atom.
 /atom/proc/get_cell()
 	RETURN_TYPE(/obj/item/cell)
-	if(has_extension(src, /datum/extension/loaded_cell))
-		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
-		var/obj/item/cell/cell = cell_loaded?.loaded_cell_ref?.resolve()
-		if(istype(cell) && !QDELETED(cell) && cell.loc == src)
-			return cell
-	return null
+	var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
+	return cell_loaded?.get_cell()
 
 /**
 	Get any radio associated with this atom.

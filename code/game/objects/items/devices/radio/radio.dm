@@ -64,8 +64,8 @@
 	var/analog_secured = list() // list of accesses used for encrypted analog, mainly for mercs/raiders
 	var/datum/radio_frequency/analog_radio_connection
 
-/obj/item/radio/proc/setup_power_supply()
-	set_extension(src, /datum/extension/loaded_cell, /obj/item/cell/device, /obj/item/cell/device)
+/obj/item/radio/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/device, /obj/item/cell/device, /datum/extension/loaded_cell)
 
 /obj/item/radio/get_radio(var/message_mode)
 	return src

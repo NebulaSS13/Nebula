@@ -108,8 +108,8 @@
 		list(mode_name="light", projectile_type=/obj/item/projectile/beam/pulse/skrell, charge_cost=40, burst=3, burst_delay=2)
 		)
 
-/obj/item/gun/energy/pulse_rifle/skrell/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type)
-	. = ..(loaded_cell_type = /obj/item/cell/high, accepted_cell_type = /obj/item/cell)
+/obj/item/gun/energy/pulse_rifle/skrell/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/high, /obj/item/cell, power_supply_extension_type, charge_value)
 
 /obj/item/projectile/beam/pulse/skrell
 	icon_state = "pu_laser"

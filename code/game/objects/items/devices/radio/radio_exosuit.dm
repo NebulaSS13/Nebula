@@ -2,7 +2,8 @@
 /obj/item/radio/exosuit
 	name = "exosuit radio"
 
-/obj/item/radio/exosuit/setup_power_supply()
+/obj/item/radio/exosuit/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/radio/exosuit/get_cell()

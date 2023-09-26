@@ -69,7 +69,7 @@ var/global/list/laser_wavelengths
 	var/decl/laser_wavelength/charging
 	var/decl/laser_wavelength/selected_wavelength
 
-/obj/item/gun/energy/capacitor/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type)
+/obj/item/gun/energy/capacitor/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 	return ..((loaded_cell_type || /obj/item/cell/high), (accepted_cell_type || /obj/item/cell), (power_supply_extension_type || /datum/extension/loaded_cell/secured))
 
 /obj/item/gun/energy/capacitor/examine(mob/user, distance)
@@ -263,8 +263,8 @@ var/global/list/laser_wavelengths
 	fire_delay = 20
 	w_class = ITEM_SIZE_HUGE
 
-/obj/item/gun/energy/capacitor/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type)
-	return ..(loaded_cell_type = /obj/item/cell/super)
+/obj/item/gun/energy/capacitor/rifle/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(loaded_cell_type || /obj/item/cell/super, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion
 	name = "linear fusion rifle"
@@ -274,8 +274,8 @@ var/global/list/laser_wavelengths
 	projectile_type = /obj/item/projectile/beam/variable/split
 	wiring_color = COLOR_GOLD
 
-/obj/item/gun/energy/capacitor/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type)
-	return ..(loaded_cell_type = /obj/item/cell/infinite, power_supply_extension_type = /datum/extension/loaded_cell/unremovable)
+/obj/item/gun/energy/capacitor/rifle/linear_fusion/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/infinite, accepted_cell_type, /datum/extension/loaded_cell/unremovable, charge_value)
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion/attackby(obj/item/W, mob/user)
 	if(IS_SCREWDRIVER(W))

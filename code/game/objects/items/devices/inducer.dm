@@ -20,8 +20,8 @@
 	setup_power_supply()
 	update_icon()
 
-/obj/item/inducer/proc/setup_power_supply(var/loaded_cell_type)
-	set_extension(src, /datum/extension/loaded_cell/panel, /obj/item/cell, /obj/item/cell)
+/obj/item/inducer/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell, /obj/item/cell, /datum/extension/loaded_cell/panel)
 
 /obj/item/inducer/proc/induce(obj/item/cell/target)
 	var/obj/item/cell/MyC = get_cell()
@@ -122,7 +122,8 @@
 	item_state = "inducer-engi"
 	failsafe = 0.2
 
-/obj/item/inducer/borg/setup_power_supply(var/loaded_cell_type)
+/obj/item/inducer/borg/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/inducer/borg/on_update_icon()

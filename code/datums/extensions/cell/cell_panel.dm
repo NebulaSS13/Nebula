@@ -1,5 +1,5 @@
 /datum/extension/loaded_cell/panel
-    var/panel_open = FALSE
+	var/panel_open = FALSE
 
 // We hook the try_unload() proc to do our panel opening and closing.
 /datum/extension/loaded_cell/panel/has_tool_unload_interaction(var/obj/item/tool)
