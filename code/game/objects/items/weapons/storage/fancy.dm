@@ -129,7 +129,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/cardboard
 	key_type = /obj/item/clothing/mask/smokable/cigarette
-	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE
+	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE
 
 /obj/item/storage/fancy/cigarettes/WillContain()
 	return list(/obj/item/clothing/mask/smokable/cigarette = 6)
@@ -306,7 +306,7 @@
 	storage_slots = 7
 	material = /decl/material/solid/wood/mahogany
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
-	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_NO_TEMP_CHANGE
+	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_NO_TEMP_CHANGE
 
 /obj/item/storage/fancy/cigar/Initialize(ml, material_key)
 	. = ..()

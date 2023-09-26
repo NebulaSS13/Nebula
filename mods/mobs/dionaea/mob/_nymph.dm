@@ -34,7 +34,7 @@
 
 	holder_type = /obj/item/holder/diona
 	possession_candidate = 1
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_CHEM_CHANGE
 	hud_type = /datum/hud/diona_nymph
 
 	ai = /datum/ai/nymph

@@ -7,7 +7,7 @@
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "extractor"
 	use_ui_template = "material_processing_extractor.tmpl"
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_NO_REACT | ATOM_FLAG_NO_DISSOLVE
 
 	var/static/list/eating_whitelist = list(/obj/item/stack/material)
 
