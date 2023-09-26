@@ -346,6 +346,7 @@
 #include "code\datums\extensions\assembly\assembly_interaction.dm"
 #include "code\datums\extensions\assembly\assembly_power.dm"
 #include "code\datums\extensions\cell\cell.dm"
+#include "code\datums\extensions\cell\cell_panel.dm"
 #include "code\datums\extensions\cell\cell_secured.dm"
 #include "code\datums\extensions\cell\cell_unremovable.dm"
 #include "code\datums\extensions\eye\_eye.dm"
