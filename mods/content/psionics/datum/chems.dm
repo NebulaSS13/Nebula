@@ -13,7 +13,7 @@
 	required_reagents = list(/decl/material/liquid/blood = 15, /decl/material/liquid/crystal_agent = 1)
 	result_amount = 1
 
-/decl/chemical_reaction/synthesis/nullglass/get_reaction_flags(var/datum/reagents/holder)
+/decl/chemical_reaction/synthesis/nullglass/get_alternate_reaction_indicator(var/datum/reagents/holder)
 	var/list/blood_data = REAGENT_DATA(holder, /decl/material/liquid/blood)
 	var/weakref/donor_ref = LAZYACCESS(blood_data, "donor")
 	var/mob/living/donor = donor_ref?.resolve()
@@ -21,7 +21,7 @@
 	. = (istype(donor) && (donor.psi || (donor.mind && wizards.is_antagonist(donor.mind))))
 
 /decl/chemical_reaction/synthesis/nullglass/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	var/location = get_turf(holder.get_reaction_loc())
+	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(reaction_flags)
 		for(var/i = 1, i <= created_volume, i++)
 			new /obj/item/soulstone(location)

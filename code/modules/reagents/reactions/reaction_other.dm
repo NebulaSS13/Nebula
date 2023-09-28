@@ -6,12 +6,12 @@
 	var/strength = 3
 
 /decl/chemical_reaction/soap_key/can_happen(var/datum/reagents/holder)
-	if(istype(holder.get_reaction_loc(), /obj/item/soap))
+	if(istype(holder.get_reaction_loc(chemical_reaction_flags), /obj/item/soap))
 		return ..()
 	return 0
 
 /decl/chemical_reaction/soap_key/on_reaction(var/datum/reagents/holder)
-	var/obj/item/soap/S = holder.get_reaction_loc()
+	var/obj/item/soap/S = holder.get_reaction_loc(chemical_reaction_flags)
 	if(istype(S) && S.key_data)
 		var/obj/item/key/soap/key = new(get_turf(S), S.key_data)
 		key.uses = strength

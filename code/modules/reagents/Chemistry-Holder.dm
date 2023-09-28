@@ -39,7 +39,9 @@ var/global/obj/temp_reagents_holder = new
 	clone.cached_color    = cached_color
 	return clone
 
-/datum/reagents/proc/get_reaction_loc()
+/datum/reagents/proc/get_reaction_loc(chemical_reaction_flags)
+	if((chemical_reaction_flags & CHEM_REACTION_FLAG_OVERFLOW_CONTAINER) && ATOM_IS_OPEN_CONTAINER(my_atom))
+		return get_turf(my_atom)
 	return my_atom
 
 /datum/reagents/proc/get_primary_reagent_name(var/codex = FALSE) // Returns the name of the reagent with the biggest volume.

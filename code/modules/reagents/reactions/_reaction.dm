@@ -15,6 +15,8 @@
 	var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
 	var/lore_text
 	var/mechanics_text
+	/// Flags used when reaction processing.
+	var/chemical_reaction_flags = 0
 
 /decl/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
@@ -29,7 +31,7 @@
 	if(holder.has_any_reagent(inhibitors))
 		return 0
 
-	var/atom/location = holder.get_reaction_loc()
+	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
 	var/temperature = location?.temperature || T20C
 	if(temperature < minimum_temperature || temperature > maximum_temperature)
 		return 0
@@ -37,7 +39,7 @@
 	return 1
 
 /decl/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	var/atom/location = holder.get_reaction_loc()
+	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
 	if(thermal_product && location && ATOM_SHOULD_TEMPERATURE_ENQUEUE(location))
 		ADJUST_ATOM_TEMPERATURE(location, thermal_product)
 
@@ -47,7 +49,7 @@
 	for(var/reagent in required_reagents)
 		. += reagent
 
-/decl/chemical_reaction/proc/get_reaction_flags(var/datum/reagents/holder)
+/decl/chemical_reaction/proc/get_alternate_reaction_indicator(var/datum/reagents/holder)
 	return 0
 
 /decl/chemical_reaction/proc/process(var/datum/reagents/holder, var/limit)
@@ -59,7 +61,7 @@
 		if(reaction_volume > A)
 			reaction_volume = A
 
-	var/reaction_flags = get_reaction_flags(holder)
+	var/alt_reaction_indicator = get_alternate_reaction_indicator(holder)
 
 	for(var/reactant in required_reagents)
 		holder.remove_reagent(reactant, reaction_volume * required_reagents[reactant], safety = 1)
@@ -69,11 +71,11 @@
 	if(result)
 		holder.add_reagent(result, amt_produced, data, safety = 1)
 
-	on_reaction(holder, amt_produced, reaction_flags)
+	on_reaction(holder, amt_produced, alt_reaction_indicator)
 
 //called after processing reactions, if they occurred
 /decl/chemical_reaction/proc/post_reaction(var/datum/reagents/holder)
-	var/atom/container = holder.get_reaction_loc()
+	var/atom/container = holder.get_reaction_loc(chemical_reaction_flags)
 	if(mix_message && container && !ismob(container))
 		var/turf/T = get_turf(container)
 		if(istype(T))
