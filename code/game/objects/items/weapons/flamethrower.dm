@@ -181,7 +181,7 @@
 		return
 
 	if(!tank)
-		to_chat(user, SPAN_WARNING("Attach a phoron tank first!"))
+		to_chat(user, SPAN_WARNING("Attach a fuel tank first!"))
 		return
 
 	var/list/options = list(
@@ -294,13 +294,11 @@
 
 /obj/item/flamethrower/proc/ignite_turf(turf/target)
 	var/datum/gas_mixture/air_transfer = tank.air_contents.remove_ratio(0.02 * (throw_amount / 100))
-
-	target.add_fluid(/decl/material/liquid/fuel, air_transfer.get_by_flag(XGM_GAS_FUEL))
-
+	target.add_fluid(/decl/material/liquid/fuel, air_transfer.get_by_flag(XGM_GAS_FUEL) * REAGENT_UNITS_PER_GAS_MOLE * 2)
 	air_transfer.remove_by_flag(XGM_GAS_FUEL, 0)
 	target.assume_air(air_transfer)
-	target.hotspot_expose((tank.air_contents.temperature * 2) + 400, 500)
-
+	target.create_fire(tank.air_contents.temperature * 2 + 400)
+	target.hotspot_expose(1000, 100)
 	for(var/mob/living/M in target)
 		M.IgniteMob(1)
 
