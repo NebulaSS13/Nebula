@@ -15,7 +15,7 @@
 	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
 	if(location)
 		var/datum/effect/effect/system/reagents_explosion/e = new()
-		e.set_up(round(created_volume/10, 1), location, 0, 0)
+		e.set_up(round(created_volume/3, 1), location, 0, 0)
 		if(isliving(location))
 			e.amount *= 0.5
 			var/mob/living/L = location
