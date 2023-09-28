@@ -3,7 +3,7 @@
 	. = ..()
 	if(stat == DEAD)
 		return
-	
+
 	// Generate some crystals over time.
 	if(nutrition >= 300 && crystal_reserve < ANYMPH_MAX_CRYSTALS)
 		crystal_reserve = min(ANYMPH_MAX_CRYSTALS, crystal_reserve + 15)
@@ -42,6 +42,12 @@
 				if(150 to 250)					nymph_hud.drink.icon_state = "hydration3"
 				else							nymph_hud.drink.icon_state = "hydration4"
 
+/mob/living/carbon/alien/ascent_nymph/Stat()
+	. = ..()
+	if(client && statpanel("Status"))
+		stat("Nutrition", "[get_nutrition()]/[ANYMPH_NUTRITION_MOLT]")
+		stat("Crystal reserve", "[crystal_reserve]/[ANYMPH_CRYSTAL_MOLT]")
+
 /mob/living/carbon/alien/ascent_nymph/proc/can_molt()
 	if(crystal_reserve < ANYMPH_CRYSTAL_MOLT)
 		to_chat(src, SPAN_WARNING("You don't have enough crystalline matter stored up to molt right now."))
@@ -61,7 +67,7 @@
 	molt = min(molt + 1, 5)
 	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
 	nymph.visible_message("\icon[nymph] [nymph] begins to shimmy and shake out of its old skin.")
-	if(molt == 5)		
+	if(molt == 5)
 		if(do_after(nymph, 10 SECONDS, nymph, FALSE))
 			var/mob/living/carbon/human/H = new(get_turf(usr), SPECIES_MANTID_ALATE)
 			H.dna.lineage = nymph.dna.lineage
@@ -74,7 +80,7 @@
 		else
 			nymph.visible_message("\icon[nymph] [nymph] abruptly stops molting.")
 		return
-			
+
 	if(do_after(nymph, 5 SECONDS, nymph, FALSE))
 		var/matrix/M = matrix()
 		M.Scale(1 + (molt / 10))
@@ -83,7 +89,7 @@
 		last_molt = world.time
 		nutrition = max(0, nutrition - ANYMPH_NUTRITION_MOLT)
 		crystal_reserve = max(0, crystal_reserve - ANYMPH_CRYSTAL_MOLT)
-		new/obj/item/ascent_molt(get_turf(src))
+		new /obj/item/ascent_molt(get_turf(src))
 
 	else
 		nymph.visible_message("\icon[nymph] [nymph] abruptly stops molting.")
