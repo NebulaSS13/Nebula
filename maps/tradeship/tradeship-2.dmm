@@ -4749,7 +4749,7 @@
 	dir = 1
 	},
 /turf/space,
-/area/space)
+/area/ship/trade/shuttle/outgoing/general)
 "oi" = (
 /obj/machinery/vending/snack{
 	dir = 4
@@ -6994,7 +6994,7 @@
 	dir = 1
 	},
 /turf/space,
-/area/space)
+/area/ship/trade/shuttle/outgoing/general)
 "Nc" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -7175,16 +7175,6 @@
 /obj/machinery/power/terminal,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
-"OD" = (
-/obj/structure/catwalk,
-/obj/structure/railing/mapped{
-	dir = 1
-	},
-/obj/structure/railing/mapped{
-	dir = 4
-	},
-/turf/space,
-/area/space)
 "OP" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -7525,16 +7515,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/shuttle/outgoing/general)
-"Sk" = (
-/obj/structure/catwalk,
-/obj/structure/railing/mapped{
-	dir = 1
-	},
-/obj/structure/railing/mapped{
-	dir = 8
-	},
-/turf/space,
-/area/space)
 "Sr" = (
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/hallway)
@@ -9834,7 +9814,7 @@ aa
 aa
 aa
 aa
-Sk
+WM
 gN
 qv
 Sj
@@ -10572,7 +10552,7 @@ aa
 aa
 aa
 aa
-OD
+Bi
 Tb
 CV
 Wb

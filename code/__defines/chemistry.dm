@@ -68,3 +68,5 @@
 
 #define DEFAULT_GAS_ACCELERANT /decl/material/gas/hydrogen
 #define DEFAULT_GAS_OXIDIZER   /decl/material/gas/oxygen
+
+#define CHEM_REACTION_FLAG_OVERFLOW_CONTAINER BITFLAG(0)
