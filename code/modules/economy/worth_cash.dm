@@ -192,6 +192,11 @@
 		currency = global.using_map.default_currency
 		update_name_desc()
 	set_extension(src, lock_type)
+
+	if(grade && grade != "peasant")
+		var/image/I = image(icon, "[icon_state]-[grade]")
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I, TRUE)
 	update_icon()
 
 /obj/item/charge_stick/proc/update_name_desc()
@@ -207,6 +212,7 @@
 	loaded_worth += amt
 	if(loaded_worth < 0)
 		loaded_worth = 0
+	update_icon()
 
 /obj/item/charge_stick/examine(mob/user, distance)
 	. = ..(user)
@@ -272,11 +278,6 @@
 /obj/item/charge_stick/on_update_icon()
 	. = ..()
 
-	if(grade && grade != "peasant")
-		var/image/I = image(icon, "[icon_state]-[grade]")
-		I.appearance_flags |= RESET_COLOR
-		overlays += I
-
 	if(get_world_inventory_state() == ICON_STATE_WORLD)
 		return
 
@@ -285,17 +286,17 @@
 		return
 
 	if(loaded_worth > 999999)
-		overlays += image(icon, "9__")
-		overlays += image(icon, "_9_")
-		overlays += image(icon, "__9")
+		add_overlay("9__")
+		add_overlay("_9_")
+		add_overlay("__9")
 		return
 
 	var/h_thou = loaded_worth / 100000
 	var/t_thou = (loaded_worth - (FLOOR(h_thou) * 100000)) / 10000
 	var/thou = (loaded_worth - (FLOOR(h_thou) * 100000) - (FLOOR(t_thou) * 10000)) / 1000
-	overlays += image(icon, "[FLOOR(h_thou)]__")
-	overlays += image(icon, "_[FLOOR(t_thou)]_")
-	overlays += image(icon, "__[FLOOR(thou)]")
+	add_overlay("[FLOOR(h_thou)]__")
+	add_overlay("_[FLOOR(t_thou)]_")
+	add_overlay("__[FLOOR(thou)]")
 
 /obj/item/charge_stick/copper
 	grade = "copper"
