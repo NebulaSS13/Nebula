@@ -58,6 +58,7 @@
 		var/datum/computer_file/held_file = file_ref.resolve()
 		if(!held_file)
 			held_files -= file_ref
+			continue
 
 		if(istype(held_file, /datum/computer_file/directory))
 			var/datum/computer_file/directory/dir = held_file
