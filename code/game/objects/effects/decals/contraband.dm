@@ -100,6 +100,8 @@
 			poster_type = give_poster_type
 		else
 			poster_type = pick(decls_repository.get_decl_paths_of_subtype(/decl/poster))
+	if(placement_dir && dir != placement_dir)
+		set_dir(placement_dir)
 	set_poster(poster_type)
 
 /obj/structure/sign/poster/proc/set_poster(var/poster_type)
