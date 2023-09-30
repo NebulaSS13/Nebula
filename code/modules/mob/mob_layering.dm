@@ -90,7 +90,13 @@
 			if(istext(pixel_shift))
 				pixel_shift = cached_json_decode(pixel_shift)
 			if(islist(pixel_shift))
-				var/list/directional_offset = LAZYACCESS(pixel_shift, "[dir]")
+				var/list/directional_offset = LAZYACCESS(pixel_shift, num2text(dir))
+				// Unset diagonals should be substituted with the appropriate NSEW value.
+				if(!directional_offset)
+					if(dir & EAST)
+						directional_offset = LAZYACCESS(pixel_shift, num2text(EAST))
+					else if(dir & WEST)
+						directional_offset = LAZYACCESS(pixel_shift, num2text(WEST))
 				if(islist(directional_offset))
 					pixel_shift = directional_offset
 				new_pixel_x += pixel_shift["x"] || 0
