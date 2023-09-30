@@ -285,18 +285,36 @@
 	if(lock.locked)
 		return
 
-	if(loaded_worth > 999999)
-		add_overlay("9__")
-		add_overlay("_9_")
-		add_overlay("__9")
-		return
+	var/decl/currency/cur = GET_DECL(currency)
+	var/digits = loaded_worth / cur.absolute_value  // In currency
+	var/digit0 = "__[digits % 10]"
+	var/digit1
+	var/digit2
 
-	var/h_thou = loaded_worth / 100000
-	var/t_thou = (loaded_worth - (FLOOR(h_thou) * 100000)) / 10000
-	var/thou = (loaded_worth - (FLOOR(h_thou) * 100000) - (FLOOR(t_thou) * 10000)) / 1000
-	add_overlay("[FLOOR(h_thou)]__")
-	add_overlay("_[FLOOR(t_thou)]_")
-	add_overlay("__[FLOOR(thou)]")
+	if (digits >= 1000)
+		digits = FLOOR(digits / 100)  // <digits/10> *1k
+		digit0 = "__k"
+		if (digits >= 1000)
+			digits = FLOOR(digits / 100) // <digits/100> *1M
+			digit0 = "__M"
+			if (digits < 100)
+				digit2 = ".__"
+			else
+				digits = FLOOR(digits/10) // <digits/10> * 1M
+				if (digits > 1000)
+					digit2 = "+__"
+					digit1 = "_+_"
+
+	if (!digit2)
+		digit2 = "[(digits / 100) % 10]__"
+	if (!digit1)
+		digit1 = "_[(digits / 10) % 10]_"
+
+
+	add_overlay(digit0)
+	add_overlay(digit1)
+	add_overlay(digit2)
+
 
 /obj/item/charge_stick/copper
 	grade = "copper"
