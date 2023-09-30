@@ -42,7 +42,7 @@
 		for(var/accessory in all_sprite_accessories)
 			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
 			if(sprite.name == load_h_style)
-				pref.h_style = accessory
+				h_style_decl = sprite
 				break
 	pref.h_style = istype(h_style_decl) ? h_style_decl.type : /decl/sprite_accessory/hair/bald
 
@@ -55,7 +55,7 @@
 		for(var/accessory in all_sprite_accessories)
 			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
 			if(sprite.name == load_f_style)
-				pref.f_style = accessory
+				f_style_decl = sprite
 				break
 	pref.f_style = istype(f_style_decl) ? f_style_decl.type : /decl/sprite_accessory/facial_hair/shaved
 
