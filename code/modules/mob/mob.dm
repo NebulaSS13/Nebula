@@ -1317,3 +1317,9 @@
 
 /mob/proc/get_target_zone()
 	return zone_sel?.selecting
+
+/mob/get_overhead_text_x_offset()
+	return offset_overhead_text_x
+
+/mob/get_overhead_text_y_offset()
+	return offset_overhead_text_y

@@ -177,3 +177,7 @@
 
 	/// Used for darksight, required on all mobs to ensure lighting renders properly.
 	var/obj/screen/lighting_plane_master/lighting_master
+
+	// Offset the overhead text if necessary.
+	var/offset_overhead_text_x = 0
+	var/offset_overhead_text_y = 0
