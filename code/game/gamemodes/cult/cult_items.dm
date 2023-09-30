@@ -42,9 +42,8 @@
 /obj/item/clothing/head/culthood
 	name = "cult hood"
 	desc = "A hood worn by the followers of Nar-Sie."
-
 	icon = 'icons/clothing/head/cult.dmi'
-	flags_inv = HIDEFACE
+	flags_inv = HIDEFACE | BLOCK_HEAD_HAIR
 	body_parts_covered = SLOT_HEAD
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
