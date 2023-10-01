@@ -275,6 +275,50 @@
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	return lock.locked
 
+/**
+	Given a number, returns a representation fit for a 3-digit display.
+
+	Assumes that besides the digits themselves, display provides
+	decimal point on the highest digit, plus (for overflow) and minus signs.
+	Returns lists indexed by (power of ten)+1, that is, with [1] showing ones,
+	[2] tens, [3] hundreds.
+	Valid values are `-99` to `99<M>`, with `++<M>` and `---` for over and underflow,
+	where <M> is the maximal provided decimal postfix (k, M, B, T, etc).
+*/
+/proc/number_to_3digits(value, var/list/postfixes = list("k", "M"))
+	var/list/digits[3]
+	var/lim = 1000
+	if (value < 0)  // negatives
+		digits[3] = "-"
+		value *= -1
+		lim = 100
+	else
+		for(var/s in postfixes)
+			if (value < lim)
+				break
+			value /= 1000
+			digits[1] = s
+			lim = 100
+	if (value >= lim) // over/underflow
+		if (!digits[3])
+			digits[3] = "+"
+		if (!digits[1])
+			digits[1] = digits[3]
+		digits[2] = digits[3]
+	else
+		if ((lim == 100) && !digits[3]) // suffix on
+			if (value < 1) // .
+				digits[3] = "."
+				value *= 100 // .X => 0X0
+			else // just suffix
+				value *= 10  // XX => XX0
+		if (!digits[1])
+			digits[1] = value % 10
+		digits[2] = (value / 10) % 10
+		if (!digits[3])
+			digits[3] = (value / 100) % 10
+	return digits
+
 /obj/item/charge_stick/on_update_icon()
 	. = ..()
 
@@ -286,34 +330,11 @@
 		return
 
 	var/decl/currency/cur = GET_DECL(currency)
-	var/digits = loaded_worth / cur.absolute_value  // In currency
-	var/digit0 = "__[digits % 10]"
-	var/digit1
-	var/digit2
-
-	if (digits >= 1000)
-		digits = FLOOR(digits / 100)  // <digits/10> *1k
-		digit0 = "__k"
-		if (digits >= 1000)
-			digits = FLOOR(digits / 100) // <digits/100> *1M
-			digit0 = "__M"
-			if (digits < 100)
-				digit2 = ".__"
-			else
-				digits = FLOOR(digits/10) // <digits/10> * 1M
-				if (digits > 1000)
-					digit2 = "+__"
-					digit1 = "_+_"
-
-	if (!digit2)
-		digit2 = "[(digits / 100) % 10]__"
-	if (!digit1)
-		digit1 = "_[(digits / 10) % 10]_"
-
-
-	add_overlay(digit0)
-	add_overlay(digit1)
-	add_overlay(digit2)
+	var/displayed_worth = loaded_worth / cur.absolute_value // Denominated in stick currency
+	var/list/digits = number_to_3digits(displayed_worth)
+	add_overlay("__[digits[1]]")
+	add_overlay("_[digits[2]]_")
+	add_overlay("[digits[3]]__")
 
 
 /obj/item/charge_stick/copper
