@@ -7,14 +7,14 @@ var/global/list/ckey_punished_for_spam = list() // this round; to avoid redundan
 	var/ckey = C && C.ckey
 	if(!ckey)
 		return FALSE
-	if (config.do_not_prevent_spam)
+	if(get_config_value(/decl/config/toggle/do_not_prevent_spam))
 		return TRUE
 	var/time = world.time
-	if(global.ckey_to_act_time[ckey] + config.act_interval < time)
+	if(global.ckey_to_act_time[ckey] + (get_config_value(/decl/config/num/act_interval) SECONDS) < time)
 		global.ckey_to_act_time[ckey] = time
 		global.ckey_to_actions[ckey] = 1
 		return TRUE
-	if(global.ckey_to_actions[ckey] <= config.max_acts_per_interval)
+	if(global.ckey_to_actions[ckey] <= get_config_value(/decl/config/num/max_acts_per_interval))
 		global.ckey_to_actions[ckey]++
 		return TRUE
 

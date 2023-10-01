@@ -151,4 +151,4 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	return ..()
 
 /proc/can_select_ooc_color(var/mob/user)
-	return config.allow_admin_ooccolor && check_rights(R_ADMIN, 0, user)
+	return get_config_value(/decl/config/toggle/admin_ooccolor) && check_rights(R_ADMIN, 0, user)

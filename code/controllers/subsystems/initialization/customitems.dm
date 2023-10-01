@@ -91,8 +91,9 @@ SUBSYSTEM_DEF(customitems)
 	character_name =       lowertext(character_name)
 	for(var/icon_id in ids_to_icons)
 		var/icon_loc = ids_to_icons[icon_id]
-		if(config.custom_icon_icon_location)
-			icon_loc = "[config.custom_icon_icon_location]/[icon_loc]"
+		var/config_icon_loc = get_config_value(/decl/config/text/custom_icon_icon_location)
+		if(config_icon_loc)
+			icon_loc = "[config_icon_loc]/[icon_loc]"
 		ids_to_icons[icon_id] = file(icon_loc)
 
 /datum/custom_icon/proc/validate()
@@ -134,8 +135,9 @@ SUBSYSTEM_DEF(customitems)
 	item_path =            item_path && text2path(item_path)
 	apply_to_target_type = apply_to_target_type && text2path(apply_to_target_type)
 	if(item_icon)
-		if(config.custom_item_icon_location)
-			item_icon = "[config.custom_item_icon_location]/[item_path]"
+		var/config_item_loc = get_config_value(/decl/config/text/custom_item_icon_location)
+		if(config_item_loc)
+			item_icon = "[config_item_loc]/[item_path]"
 		if(fexists(item_icon))
 			item_icon = file(item_icon)
 

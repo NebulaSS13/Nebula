@@ -117,7 +117,7 @@ SUBSYSTEM_DEF(mapping)
 
 	// Initialize z-level objects.
 #ifdef UNIT_TEST
-	config.roundstart_level_generation = FALSE //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
+	set_config_value(/decl/config/toggle/roundstart_level_generation, FALSE) //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
 #endif
 
 	. = ..()

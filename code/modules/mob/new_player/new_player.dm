@@ -108,7 +108,8 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			to_chat(src, SPAN_WARNING("Please wait for server initialization to complete..."))
 			return
 
-		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
+		var/respawn_delay = get_config_value(/decl/config/num/respawn_delay)
+		if(!respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
 			var/mob/observer/ghost/observer = new()
 
@@ -138,7 +139,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 				client.prefs.real_name = client.prefs.get_random_name()
 			observer.real_name = client.prefs.real_name
 			observer.SetName(observer.real_name)
-			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
+			if(!client.holder && !get_config_value(/decl/config/toggle/antag_hud_allowed))           // For new ghosts we remove the verb from even showing up if it's not allowed.
 				observer.verbs -= /mob/observer/ghost/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
 			observer.key = key
 			qdel(src)
@@ -183,7 +184,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 		return 0
 
-	if(!config.enter_allowed)
+	if(!get_config_value(/decl/config/toggle/on/enter_allowed))
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		return 0
 

@@ -156,7 +156,7 @@
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
 
-	if(config.allow_ic_printing || debug)
+	if(get_config_value(/decl/config/toggle/on/allow_ic_printing) || debug)
 		HTML += "Assembly cloning: [can_clone ? (fast_clone ? "Instant" : "Available") : "Unavailable"].<br>"
 
 	HTML += "Circuits available: [upgraded || debug ? "Advanced":"Regular"]."
@@ -164,7 +164,7 @@
 		HTML += "<br>Crossed out circuits mean that the printer is not sufficiently upgraded to create that circuit."
 
 	HTML += "<hr>"
-	if((can_clone && config.allow_ic_printing) || debug)
+	if((can_clone && get_config_value(/decl/config/toggle/on/allow_ic_printing)) || debug)
 		HTML += "Here you can load script for your assembly.<br>"
 		if(!cloning)
 			HTML += " <A href='?src=\ref[src];print=load'>{Load Program}</a> "
@@ -237,7 +237,7 @@
 		playsound(src, 'sound/items/jaws_pry.ogg', 50, TRUE)
 
 	if(href_list["print"])
-		if(!config.allow_ic_printing && !debug)
+		if(!get_config_value(/decl/config/toggle/on/allow_ic_printing) && !debug)
 			to_chat(usr, "<span class='warning'>Your facility has disabled printing of custom circuitry due to recent allegations of copyright infringement.</span>")
 			return
 		if(!can_clone) // Copying and printing ICs is cloning

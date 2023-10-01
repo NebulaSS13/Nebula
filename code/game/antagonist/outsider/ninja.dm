@@ -18,7 +18,7 @@
 	rig_type = /obj/item/rig/light/ninja
 
 /decl/special_role/ninja/attempt_random_spawn()
-	if(config.ninjas_allowed)
+	if(get_config_value(/decl/config/toggle/ninjas_allowed))
 		..()
 
 /decl/special_role/ninja/create_objectives(var/datum/mind/ninja)

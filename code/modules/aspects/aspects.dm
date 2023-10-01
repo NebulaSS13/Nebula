@@ -103,7 +103,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 			incompatible_aspect_taken = TRUE
 			break
 
-	if(istype(caller) && (ticked || caller.get_aspect_total() + aspect_cost <= config.max_character_aspects) && !incompatible_aspect_taken)
+	if(istype(caller) && (ticked || caller.get_aspect_total() + aspect_cost <= get_config_value(/decl/config/num/max_character_aspects)) && !incompatible_aspect_taken)
 		result += "<a href='?src=\ref[caller];toggle_aspect=\ref[src]'>[ticked ? "<font color='#E67300'>[name]</font>" : "[name]"] ([aspect_cost])</a>"
 	else
 		result += ticked ? "<font color='#E67300'>[name]</font>" : "[name]"
@@ -130,7 +130,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 	for(var/decl/aspect/A as anything in personal_aspects)
 		aspect_cost += A.aspect_cost
 
-	var/dat = list("<b>[aspect_cost]/[config.max_character_aspects] points spent.</b>")
+	var/dat = list("<b>[aspect_cost]/[get_config_value(/decl/config/num/max_character_aspects)] points spent.</b>")
 	for(var/aspect_category in global.aspect_categories)
 		var/datum/aspect_category/AC = global.aspect_categories[aspect_category]
 		if(!istype(AC))

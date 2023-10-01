@@ -49,9 +49,9 @@
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner)
 		owner.update_health() //droplimb will call update_health() again if it does end up being called
-		if((limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && config.limbs_can_break)
+		if((limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && get_config_value(/decl/config/toggle/on/health_limbs_can_break))
 			var/total_damage = brute_dam + burn_dam + brute + burn + spillover
-			var/threshold = max_damage * config.organ_health_multiplier
+			var/threshold = max_damage * get_config_value(/decl/config/num/health_organ_health_multiplier)
 			if(total_damage > threshold)
 				if(attempt_dismemberment(pure_brute, burn, sharp, edge, used_weapon, spillover, total_damage > threshold*6, override_droplimb = override_droplimb))
 					return
@@ -109,7 +109,7 @@
 
 	//If there are still hurties to dispense
 	if (spillover)
-		owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
+		owner.shock_stage += spillover * get_config_value(/decl/config/num/health_organ_damage_spillover_multiplier)
 
 	// sync the organ's damage with its wounds
 	update_damages()

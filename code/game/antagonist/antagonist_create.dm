@@ -75,7 +75,7 @@
 		to_chat(player.current, "<span class='antagdesc'>[get_leader_welcome_text(player.current)]</span>")
 	else
 		to_chat(player.current, "<span class='antagdesc'>[get_welcome_text(player.current)]</span>")
-	if (config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
+	if (get_config_value(/decl/config/enum/objectives_disabled) == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
 		to_chat(player.current, get_antag_text(player.current))
 
 	if((flags & ANTAG_HAS_NUKE) && !spawned_nuke)

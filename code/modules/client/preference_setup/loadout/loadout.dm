@@ -38,7 +38,7 @@ var/global/list/gear_datums = list()
 			return
 
 /decl/loadout_option/proc/can_afford(var/mob/user, var/datum/preferences/pref)
-	if(cost > 0 && (pref.total_loadout_cost + cost) > config.max_gear_cost)
+	if(cost > 0 && (pref.total_loadout_cost + cost) > get_config_value(/decl/config/num/max_gear_cost))
 		return FALSE
 	var/decl/loadout_category/LC = GET_DECL(category)
 	if(!LC || pref.total_loadout_selections[category] >= LC.max_selections)
@@ -77,14 +77,15 @@ var/global/list/gear_datums = list()
 
 /datum/category_item/player_setup_item/loadout/sanitize_character()
 
-	pref.gear_slot = sanitize_integer(pref.gear_slot, 1, config.loadout_slots, initial(pref.gear_slot))
+	var/loadout_slots = get_config_value(/decl/config/num/loadout_slots)
+	pref.gear_slot = sanitize_integer(pref.gear_slot, 1, loadout_slots, initial(pref.gear_slot))
 	if(!islist(pref.gear_list))
 		pref.gear_list = list()
 
-	if(pref.gear_list.len < config.loadout_slots)
-		pref.gear_list.len = config.loadout_slots
+	if(pref.gear_list.len < loadout_slots)
+		pref.gear_list.len = loadout_slots
 
-	for(var/index = 1 to config.loadout_slots)
+	for(var/index = 1 to loadout_slots)
 
 		pref.total_loadout_cost = 0
 		pref.total_loadout_selections = list()
@@ -118,14 +119,15 @@ var/global/list/gear_datums = list()
 
 	recalculate_loadout_cost()
 	var/fcolor = COLOR_CYAN_BLUE
-	if(pref.total_loadout_cost < config.max_gear_cost)
+	var/max_gear_cost = get_config_value(/decl/config/num/max_gear_cost)
+	if(pref.total_loadout_cost < max_gear_cost)
 		fcolor = COLOR_FONT_ORANGE
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
 	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a>"
 
-	if(config.max_gear_cost < INFINITY)
-		. += "<b><font color = '[fcolor]'>[pref.total_loadout_cost]/[config.max_gear_cost]</font> loadout points spent.</b>"
+	if(max_gear_cost < INFINITY)
+		. += "<b><font color = '[fcolor]'>[pref.total_loadout_cost]/[max_gear_cost]</font> loadout points spent.</b>"
 
 	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
 	. += "<a href='?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show all" : "Hide unavailable"]</a></center></td></tr>"
@@ -296,14 +298,14 @@ var/global/list/gear_datums = list()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["next_slot"])
 		pref.gear_slot = pref.gear_slot+1
-		if(pref.gear_slot > config.loadout_slots)
+		if(pref.gear_slot > get_config_value(/decl/config/num/loadout_slots))
 			pref.gear_slot = 1
 		recalculate_loadout_cost()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["prev_slot"])
 		pref.gear_slot = pref.gear_slot-1
 		if(pref.gear_slot < 1)
-			pref.gear_slot = config.loadout_slots
+			pref.gear_slot = get_config_value(/decl/config/num/loadout_slots)
 		recalculate_loadout_cost()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["select_category"])
@@ -350,7 +352,7 @@ var/global/list/gear_datums = list()
 
 /decl/loadout_option/Initialize()
 
-	if(config.allow_loadout_customization)
+	if(get_config_value(/decl/config/toggle/allow_loadout_customization))
 		loadout_flags |= GEAR_HAS_CUSTOM_SELECTION
 
 	. = ..()

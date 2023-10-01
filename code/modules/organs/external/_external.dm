@@ -648,7 +648,7 @@ This function completely restores a damaged organ to perfect condition.
 		switch(type)
 			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
 			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
-		var/fluid_loss = (damage/(owner.get_max_health() - config.health_threshold_dead)) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
+		var/fluid_loss = (damage/(owner.get_max_health() - get_config_value(/decl/config/num/health_health_threshold_dead))) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
@@ -873,12 +873,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		// we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
 		heal_amt = heal_amt * wound_update_accuracy
 		// configurable regen speed woo, no-regen hardcore or instaheal hugbox, choose your destiny
-		heal_amt = heal_amt * config.organ_regeneration_multiplier
+		heal_amt = heal_amt * get_config_value(/decl/config/num/health_organ_regeneration_multiplier)
 		// Apply a modifier based on how stressed we currently are.
 		if(owner)
 			var/stress_modifier = owner.get_stress_modifier()
 			if(stress_modifier)
-				heal_amt *= 1-(config.stress_healing_recovery_constant * stress_modifier)
+				heal_amt *= 1-(get_config_value(/decl/config/num/health_stress_healing_recovery_constant) * stress_modifier)
 		// amount of healing is spread over all the wounds
 		heal_amt = heal_amt / (LAZYLEN(wounds) + 1)
 		// making it look prettier on scanners
@@ -1217,7 +1217,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			I.exposed()
 
 /obj/item/organ/external/proc/fracture()
-	if(!config.bones_can_break)
+	if(!get_config_value(/decl/config/toggle/on/health_bones_can_break))
 		return
 	if(BP_IS_PROSTHETIC(src))
 		return	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
@@ -1252,7 +1252,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/mend_fracture()
 	if(BP_IS_PROSTHETIC(src))
 		return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
-	if(brute_dam > min_broken_damage * config.organ_health_multiplier)
+	if(brute_dam > min_broken_damage * get_config_value(/decl/config/num/health_organ_health_multiplier))
 		return 0	//will just immediately fracture again
 
 	status &= ~ORGAN_BROKEN

@@ -1,12 +1,12 @@
 /decl/special_role/proc/create_global_objectives(var/override=0)
-	if(config.objectives_disabled != CONFIG_OBJECTIVE_ALL && !override)
+	if(get_config_value(/decl/config/enum/objectives_disabled) != CONFIG_OBJECTIVE_ALL && !override)
 		return 0
 	if(global_objectives && global_objectives.len)
 		return 0
 	return 1
 
 /decl/special_role/proc/create_objectives(var/datum/mind/player, var/override=0)
-	if(config.objectives_disabled != CONFIG_OBJECTIVE_ALL && !override)
+	if(get_config_value(/decl/config/enum/objectives_disabled) != CONFIG_OBJECTIVE_ALL && !override)
 		return 0
 	if(create_global_objectives(override) || global_objectives.len)
 		player.objectives |= global_objectives

@@ -68,7 +68,7 @@
 		set_light(0)
 
 /mob/living/silicon/robot/should_be_dead()
-	return current_health < config.health_threshold_dead
+	return current_health < get_config_value(/decl/config/num/health_health_threshold_dead)
 
 /mob/living/silicon/robot/handle_regular_status_updates()
 	update_health()
@@ -165,7 +165,7 @@
 					if(0 to 50)
 						src.healths.icon_state = "health4"
 					else
-						if(current_health > config.health_threshold_dead)
+						if(current_health > get_config_value(/decl/config/num/health_health_threshold_dead))
 							src.healths.icon_state = "health5"
 						else
 							src.healths.icon_state = "health6"

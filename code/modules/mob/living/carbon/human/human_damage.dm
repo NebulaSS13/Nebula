@@ -5,7 +5,7 @@
 /mob/living/carbon/human/update_health()
 	..()
 	//TODO: fix husking
-	if(stat == DEAD && (get_max_health() - getFireLoss()) < config.health_threshold_dead)
+	if(stat == DEAD && (get_max_health() - getFireLoss()) < get_config_value(/decl/config/num/health_health_threshold_dead))
 		make_husked()
 
 /mob/living/carbon/human/adjustBrainLoss(var/amount, var/do_update_health = TRUE)

@@ -217,7 +217,7 @@
 		else
 			mod *= 0.8
 
-	return config.minimum_sprint_cost + (config.skill_sprint_cost_range * mod)
+	return get_config_value(/decl/config/num/movement_min_sprint_cost) + get_config_value(/decl/config/num/movement_skill_sprint_cost_range) * mod
 
 // Misc. helpers
 /mob/proc/MayEnterTurf(var/turf/T)

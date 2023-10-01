@@ -330,7 +330,8 @@ var/global/list/admin_verbs_mod = list(
 	/client/proc/aooc,
 	/datum/admins/proc/sendFax,
 	/datum/admins/proc/paralyze_mob,
-	/datum/admins/proc/view_persistent_data
+	/datum/admins/proc/view_persistent_data,
+	/datum/admins/proc/dump_configuration
 )
 
 /client/proc/add_admin_verbs()
@@ -343,7 +344,7 @@ var/global/list/admin_verbs_mod = list(
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_server
 		if(holder.rights & R_DEBUG)
 			verbs += admin_verbs_debug
-			if(config.debugparanoid && !(holder.rights & R_ADMIN))
+			if(get_config_value(/decl/config/toggle/paranoid) && !(holder.rights & R_ADMIN))
 				verbs.Remove(admin_verbs_paranoid_debug)			//Right now it's just callproc but we can easily add others later on.
 		if(holder.rights & R_POSSESS)		verbs += admin_verbs_possess
 		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions
@@ -465,7 +466,7 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Display Job bans"
 	set category = "Admin"
 	if(holder)
-		if(config.ban_legacy_system)
+		if(get_config_value(/decl/config/toggle/on/ban_legacy_system))
 			holder.Jobbans()
 		else
 			holder.DB_ban_panel()
@@ -476,7 +477,7 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Unban Panel"
 	set category = "Admin"
 	if(holder)
-		if(config.ban_legacy_system)
+		if(get_config_value(/decl/config/toggle/on/ban_legacy_system))
 			holder.unbanpanel()
 		else
 			holder.DB_ban_panel()
@@ -577,7 +578,7 @@ var/global/list/admin_verbs_mod = list(
 			explosion(epicenter, 3, 5, 7, 5)
 
 		if("Custom Bomb")
-			if(config.use_iterative_explosions)
+			if(get_config_value(/decl/config/toggle/use_iterative_explosions))
 				var/power = input(src, "Input power num.", "Power?") as num
 				explosion_iter(get_turf(mob), power, (UP|DOWN))
 			else
@@ -642,13 +643,10 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Toggle href logging"
 	set category = "Server"
 	if(!holder)	return
-	if(config)
-		if(config.log_hrefs)
-			config.log_hrefs = 0
-			to_chat(src, "<b>Stopped logging hrefs</b>")
-		else
-			config.log_hrefs = 1
-			to_chat(src, "<b>Started logging hrefs</b>")
+	if(toggle_config_value(/decl/config/toggle/log_hrefs))
+		to_chat(src, "<b>Started logging hrefs</b>")
+	else
+		to_chat(src, "<b>Stopped logging hrefs</b>")
 
 /client/proc/check_ai_laws()
 	set name = "Check AI Laws"
@@ -858,30 +856,25 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/toggleghostwriters()
 	set name = "Toggle ghost writers"
 	set category = "Server"
-	if(!holder)	return
-	if(config)
-		if(config.cult_ghostwriter)
-			config.cult_ghostwriter = 0
-			to_chat(src, "<b>Disallowed ghost writers.</b>")
-			message_admins("Admin [key_name_admin(usr)] has disabled ghost writers.", 1)
-		else
-			config.cult_ghostwriter = 1
-			to_chat(src, "<b>Enabled ghost writers.</b>")
-			message_admins("Admin [key_name_admin(usr)] has enabled ghost writers.", 1)
+	if(!holder)
+		return
+	if(toggle_config_value(/decl/config/toggle/on/cult_ghostwriter))
+		to_chat(src, "<b>Enabled ghost writers.</b>")
+		message_admins("Admin [key_name_admin(usr)] has enabled ghost writers.", 1)
+	else
+		to_chat(src, "<b>Disallowed ghost writers.</b>")
+		message_admins("Admin [key_name_admin(usr)] has disabled ghost writers.", 1)
 
 /client/proc/toggledrones()
 	set name = "Toggle maintenance drones"
 	set category = "Server"
 	if(!holder)	return
-	if(config)
-		if(config.allow_drone_spawn)
-			config.allow_drone_spawn = 0
-			to_chat(src, "<b>Disallowed maint drones.</b>")
-			message_admins("Admin [key_name_admin(usr)] has disabled maint drones.", 1)
-		else
-			config.allow_drone_spawn = 1
-			to_chat(src, "<b>Enabled maint drones.</b>")
-			message_admins("Admin [key_name_admin(usr)] has enabled maint drones.", 1)
+	if(toggle_config_value(/decl/config/toggle/on/allow_drone_spawn))
+		to_chat(src, "<b>Enabled maint drones.</b>")
+		message_admins("Admin [key_name_admin(usr)] has enabled maint drones.", 1)
+	else
+		to_chat(src, "<b>Disallowed maint drones.</b>")
+		message_admins("Admin [key_name_admin(usr)] has disabled maint drones.", 1)
 
 /client/proc/man_up(mob/T as mob in SSmobs.mob_list)
 	set category = "Fun"

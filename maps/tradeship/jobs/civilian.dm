@@ -16,7 +16,7 @@
 	event_categories = list(ASSIGNMENT_GARDENER, ASSIGNMENT_JANITOR)
 
 /datum/job/tradeship_deckhand/get_access()
-	if(config.assistant_maint)
+	if(get_config_value(/decl/config/toggle/assistant_maint))
 		return list(access_maint_tunnels)
 	else
 		return list()

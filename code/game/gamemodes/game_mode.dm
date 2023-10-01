@@ -473,7 +473,7 @@ var/global/list/additional_antag_types = list()
 
 /decl/game_mode/proc/create_antagonists()
 
-	if(!config.traitor_scaling)
+	if(!get_config_value(/decl/config/toggle/traitor_scaling))
 		antag_scaling_coeff = 0
 
 	if(length(associated_antags))
@@ -572,7 +572,7 @@ var/global/list/additional_antag_types = list()
 
 	if(!player || !player.current) return
 
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
+	if(get_config_value(/decl/config/enum/objectives_disabled) == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
 		return
 
 	var/obj_count = 1
