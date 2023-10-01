@@ -1,4 +1,0 @@
-author: John
-delete-after: true
-changes:
-  - tweak: Lifepods avoid location they are escaping from.
