@@ -55,8 +55,8 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 
 	volume *= pressure_factor
 
-	if(!turf_source.blocks_air && (T.zone || turf_source.zone) && T.zone != turf_source.zone)
-		volume -= 30
+	if(!turf_source.blocks_air && T.zone != turf_source.zone)
+		volume = round(volume * 0.7) // quick and dirty volume reduction from ZAS flood fill
 	return volume
 
 /mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)

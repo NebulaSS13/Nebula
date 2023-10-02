@@ -213,9 +213,9 @@
 			adjust_friendship(user, rand(2,3))
 		return TRUE
 
-	if(feeding_on)
-		var/prey = feeding_on
-		if(feeding_on == user)
+	var/prey = feeding_on?.resolve()
+	if(prey)
+		if(prey == user)
 			if(prob(60))
 				visible_message(SPAN_DANGER("\The [user] fails to escape \the [src]!"))
 			else
@@ -223,12 +223,12 @@
 				set_feeding_on()
 		else
 			if(prob(30))
-				visible_message(SPAN_DANGER("\The [user] attempts to wrestle \the [src] off \the [feeding_on]!"))
+				visible_message(SPAN_DANGER("\The [user] attempts to wrestle \the [src] off \the [prey]!"))
 			else
-				visible_message(SPAN_DANGER("\The [user] manages to wrestle \the [src] off \the [feeding_on]!"))
+				visible_message(SPAN_DANGER("\The [user] manages to wrestle \the [src] off \the [prey]!"))
 				set_feeding_on()
 
-		if(prey != feeding_on)
+		if(prey != feeding_on?.resolve())
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			SET_STATUS_MAX(src, STAT_CONFUSE, 2)
 			step_away(src, user)
@@ -335,6 +335,7 @@
 
 /mob/living/slime/xenobio_scan_results()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
+	. = list()
 	. += "Slime scan result for \the [src]:"
 	. += "[slime_data.name] [is_adult ? "adult" : "baby"] slime"
 	. += "Nutrition:\t[nutrition]/[get_max_nutrition()]"
@@ -360,7 +361,7 @@
 
 		var/list/mutationTexts = list("[slime_data.name] ([100 - mutation_chance]%)")
 		for(var/i in mutationChances)
-			mutationTexts += "[i] ([mutationChances[i]]%)"
+			mutationTexts += "[GET_DECL(i)] ([mutationChances[i]]%)"
 
 		. += "Possible colours on splitting:\t[english_list(mutationTexts)]"
 

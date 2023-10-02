@@ -855,3 +855,9 @@
 
 /atom/proc/on_defilement()
 	return
+
+/atom/proc/get_overhead_text_x_offset()
+	return 0
+
+/atom/proc/get_overhead_text_y_offset()
+	return 0

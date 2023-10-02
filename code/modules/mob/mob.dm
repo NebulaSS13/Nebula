@@ -1360,3 +1360,10 @@
 // Gets the ID card of a mob, but will not check types in the exceptions list
 /mob/GetIdCard(exceptions = null)
 	return LAZYACCESS(GetIdCards(exceptions), 1)
+
+/mob/get_overhead_text_x_offset()
+	return offset_overhead_text_x
+
+/mob/get_overhead_text_y_offset()
+	return offset_overhead_text_y
+

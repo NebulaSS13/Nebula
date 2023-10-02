@@ -119,7 +119,7 @@
 
 	// Handle life and death.
 	// When the plant dies, weeds thrive and pests die off.
-	check_plant_health(0)
+	check_plant_health(FALSE)
 
 	// If enough time (in cycles, not ticks) has passed since the plant was harvested, we're ready to harvest again.
 	if((age > seed.get_trait(TRAIT_MATURATION)) && \

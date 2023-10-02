@@ -24,16 +24,6 @@
 	var/tmp/cur_page  = 1           // current page
 	var/tmp/max_pages = 100         //Maximum number of papers that can be in the bundle
 	var/list/pages                  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
-	var/static/list/cached_overlays //Cached images used by all paper bundles for generating the overlays and underlays
-
-/**Creates frequently used images globally, so we can re-use them. */
-/obj/item/paper_bundle/proc/cache_overlays()
-	if(LAZYLEN(cached_overlays))
-		return
-	LAZYSET(cached_overlays, "clip",   image('icons/obj/bureaucracy.dmi', "clip"))
-	LAZYSET(cached_overlays, "paper",  image('icons/obj/bureaucracy.dmi', "paper"))
-	LAZYSET(cached_overlays, "photo",  image('icons/obj/bureaucracy.dmi', "photo"))
-	LAZYSET(cached_overlays, "refill", image('icons/obj/bureaucracy.dmi', "paper_refill_label"))
 
 /obj/item/paper_bundle/Destroy()
 	LAZYCLEARLIST(pages) //Get rid of refs
@@ -306,14 +296,13 @@
 
 /obj/item/paper_bundle/on_update_icon()
 	. = ..()
-	if(!LAZYLEN(cached_overlays))
-		cache_overlays()
-	underlays.Cut()
 
+	underlays.Cut()
 	var/obj/item/paper/P = pages[1]
 	icon       = P.icon
 	icon_state = P.icon_state
 	copy_overlays(P.overlays)
+
 
 	var/paper_count = 0
 	var/photo_count = 0
@@ -321,7 +310,7 @@
 	for(var/obj/O in pages)
 		if(istype(O, /obj/item/paper) && (paper_count < MAX_PAPER_UNDERLAYS))
 			//We can't even see them, so don't bother create appearences form each paper's icon, and use a generic one
-			var/mutable_appearance/img = new(cached_overlays["paper"])
+			var/mutable_appearance/img = mutable_appearance('icons/obj/bureaucracy.dmi', "paper")
 			img.color       = O.color
 			img.pixel_x     -= min(paper_count, 2)
 			img.pixel_y     -= min(paper_count, 2)
@@ -336,7 +325,7 @@
 			if(photo_count < 1)
 				add_overlay(Ph.tiny)
 			else
-				add_overlay(cached_overlays["photo"]) //We can't even see them, so don't bother create new unique appearences
+				add_overlay("photo") //We can't even see them, so don't bother create new unique appearences
 			photo_count++
 
 		//Break if we have nothing else to do
@@ -353,7 +342,7 @@
 	else if(photo_count > 0)
 		desc += "\nThere is a photo attached to it."
 
-	add_overlay(cached_overlays["clip"])
+	add_overlay("clip")
 
 /**
  * Merge another bundle or paper into us.
@@ -518,7 +507,7 @@
 
 /obj/item/paper_bundle/refill/on_update_icon()
 	. = ..()
-	add_overlay(cached_overlays["refill"])
+	add_overlay("refill")
 
 ///////////////////////////////////////////////////////////////////////////
 // Interaction Rename
