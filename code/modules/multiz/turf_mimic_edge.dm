@@ -68,6 +68,9 @@
 		if(drop_turf)
 			O.forceMove(drop_turf)
 
+/turf/simulated/mimic_edge/resolve_to_actual_turf()
+	return get_mimic_turf()
+
 //Properly install itself, and allow overriding how the target turf is picked
 /turf/simulated/mimic_edge/proc/setup_mimic()
 	return
@@ -140,6 +143,9 @@
 		var/turf/drop_turf = get_mimic_turf()
 		if(drop_turf)
 			O.forceMove(drop_turf)
+
+/turf/unsimulated/mimic_edge/resolve_to_actual_turf()
+	return get_mimic_turf()
 
 //Properly install itself, and allow overriding how the target turf is picked
 /turf/unsimulated/mimic_edge/proc/setup_mimic()

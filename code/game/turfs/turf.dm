@@ -541,3 +541,6 @@
 
 /turf/proc/is_defiled()
 	return (locate(/obj/effect/narsie_footstep) in src)
+
+/turf/proc/resolve_to_actual_turf()
+	return src
