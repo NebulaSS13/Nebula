@@ -28,8 +28,8 @@
 	add_filter("glow",1, list(type="drop_shadow", x = 0, y = 0, offset = 0, size = 4))
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
-	..()
-	initialize_directions_he = initialize_directions	// all directions are HE
+	. = ..()
+	initialize_directions_he = get_initialize_directions()	// all directions are HE
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	atmos_initalized = TRUE

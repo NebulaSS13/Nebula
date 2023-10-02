@@ -4,6 +4,9 @@
 	icon_state = "transmitter"
 	var/range = 60  // Limits transmit range
 	var/latency = 2 // Delay between event and transmission; doesn't apply to transmit on tick
+	#ifdef UNIT_TEST
+	latency = 0 // this can slow down testing and cause random inconsistent failures
+	#endif
 	var/buffer
 
 /obj/item/stock_parts/radio/transmitter/proc/queue_transmit(list/data)
@@ -11,7 +14,10 @@
 		return
 	if(!buffer)
 		buffer = data
-		addtimer(CALLBACK(src, .proc/transmit), latency)
+		if(latency)
+			addtimer(CALLBACK(src, .proc/transmit), latency)
+		else
+			transmit()
 	else
 		buffer |= data
 

@@ -206,9 +206,15 @@
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 
-/obj/structure/bed/chair/holochair/attackby(obj/item/W, mob/user)
-	if(IS_WRENCH(W))
-		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
+/obj/structure/bed/holobed
+	tool_interaction_flags = 0
+	holographic = TRUE
+	material = /decl/material/solid/metal/aluminium/holographic
+
+/obj/structure/bed/chair/holochair
+	tool_interaction_flags = 0
+	holographic = TRUE
+	material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/item/holo
 	damtype = PAIN
