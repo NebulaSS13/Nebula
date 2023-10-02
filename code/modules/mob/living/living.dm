@@ -1218,3 +1218,12 @@ default behaviour is:
 			LAZYADD(overlays_to_add, image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER))
 		total.overlays |= overlays_to_add
 	set_current_mob_overlay(HO_SURGERY_LAYER, total, update_icons)
+
+/mob/living/get_overhead_text_x_offset()
+	var/decl/bodytype/bodytype = get_bodytype()
+	return ..() + bodytype?.antaghud_offset_x
+
+/mob/living/get_overhead_text_y_offset()
+	var/decl/bodytype/bodytype = get_bodytype()
+	return ..() + bodytype?.antaghud_offset_y
+

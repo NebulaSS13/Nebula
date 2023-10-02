@@ -7,6 +7,9 @@
 	var/list/supported_programs
 	var/list/restricted_programs
 
+/obj/item/stock_parts/circuitboard/holodeckcontrol/get_buildable_types()
+	return typesof(/obj/machinery/computer/HolodeckControl)
+
 /obj/item/stock_parts/circuitboard/holodeckcontrol/construct(var/obj/machinery/computer/HolodeckControl/HC)
 	if (..(HC))
 		HC.supported_programs	= supported_programs.Copy()

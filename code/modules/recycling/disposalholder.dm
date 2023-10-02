@@ -9,7 +9,7 @@
 	var/datum/gas_mixture/gas = null	// gas used to flush, will appear at exit point
 	var/active = 0	// true if the holder is moving, otherwise inactive
 	dir = 0
-	var/count = 2048	//*** can travel 2048 steps before going inactive (in case of loops)
+	var/count = 4096 //*** can travel 4096 steps before going inactive (in case of loops)
 	var/destinationTag = "" // changes if contains a delivery container
 	var/tomail = 0 //changes if contains wrapped package
 	var/hasmob = 0 //If it contains a mob

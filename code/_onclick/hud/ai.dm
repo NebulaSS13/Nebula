@@ -15,4 +15,4 @@
 			ai_hud.input_args
 		)
 	if(mymob?.client)
-		mymob.client.screen = list(adding)
+		mymob.client.screen += adding

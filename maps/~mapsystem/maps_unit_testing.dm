@@ -38,5 +38,9 @@
 
 	var/list/area_purity_test_exempt_areas = list()
 
+	/// A list of disposals tags (sort_type var) that aren't expected to have outputs.
+	var/list/disconnected_disposals_tags = list()
+
 	/// A list of lists, of the format ((x, y, z, dir),).
 	var/list/disconnected_wires_test_exempt_turfs = list()
+

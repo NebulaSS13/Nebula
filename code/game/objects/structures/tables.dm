@@ -674,23 +674,23 @@
 
 /obj/structure/table/holotable
 	icon_state = "holo_preview"
+	holographic = TRUE
 	color = COLOR_OFF_WHITE
 	material = /decl/material/solid/metal/aluminium/holographic
 	reinf_material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/structure/table/holo_plastictable
 	icon_state = "holo_preview"
+	holographic = TRUE
 	color = COLOR_OFF_WHITE
 	material = /decl/material/solid/plastic/holographic
 	reinf_material = /decl/material/solid/plastic/holographic
 
 /obj/structure/table/holo_woodentable
+	holographic = TRUE
 	icon_state = "holo_preview"
-
-/obj/structure/table/holo_woodentable/Initialize()
 	material = /decl/material/solid/wood/holographic
 	reinf_material = /decl/material/solid/wood/holographic
-	. = ..()
 
 //wood wood wood
 /obj/structure/table/woodentable
