@@ -144,7 +144,7 @@
 	// If we're standing in the rain, use the turf weather.
 	. = istype(actual_loc) && actual_loc.weather
 	if(!.) // If we're under or inside shelter, use the z-level rain (for ambience)
-		. = SSweather.get_weather_for_level(my_turf.z)
+		. = SSweather.weather_by_z[my_turf.z]
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
 
