@@ -101,7 +101,7 @@ SUBSYSTEM_DEF(mapping)
 
 	// Initialize z-level objects.
 #ifdef UNIT_TEST
-	config.roundstart_level_generation = FALSE
+	config.roundstart_level_generation = FALSE //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
 #endif
 
 	// Resize the world to the max template size to fix a BYOND bug with world resizing breaking events.
