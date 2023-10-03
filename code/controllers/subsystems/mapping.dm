@@ -69,10 +69,6 @@ SUBSYSTEM_DEF(mapping)
 	for(var/datum/map_template/MT as anything in get_all_template_instances())
 		register_map_template(MT)
 
-	// Generate turbolifts.
-	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
-		turbolift.build_turbolift()
-
 	// Populate overmap.
 	if(length(global.using_map.overmap_ids))
 		for(var/overmap_id in global.using_map.overmap_ids)
@@ -98,6 +94,10 @@ SUBSYSTEM_DEF(mapping)
 			level = new /datum/level_data/space(z)
 			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
 		level.setup_level_data()
+
+	// Generate turbolifts last, since away sites may have elevators to generate too.
+	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
+		turbolift.build_turbolift()
 
 	// Initialize z-level objects.
 #ifdef UNIT_TEST
