@@ -81,7 +81,7 @@
 						if(I.loc == player.current)
 							qdel(I)
 
-/decl/special_role/proc/update_current_antag_max(datum/game_mode/mode)
+/decl/special_role/proc/update_current_antag_max(decl/game_mode/mode)
 	cur_max = hard_cap
 	if(type in mode.associated_antags)
 		cur_max = hard_cap_round

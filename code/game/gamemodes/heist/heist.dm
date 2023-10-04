@@ -2,9 +2,9 @@
 HEIST ROUNDTYPE
 */
 
-/datum/game_mode/heist
+/decl/game_mode/heist
 	name = "Heist"
-	config_tag = "heist"
+	uid = "heist"
 	required_players = 12
 	required_enemies = 3
 	round_description = "An unidentified drive signature has slipped into close sensor range and is approaching!"
