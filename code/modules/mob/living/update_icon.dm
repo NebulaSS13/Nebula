@@ -16,7 +16,6 @@
 			A.appearance = aura
 			add_overlay(A)
 	try_refresh_visible_overlays()
-	apply_visible_overlays()
 
 /mob/living/get_all_current_mob_overlays()
 	return mob_overlays

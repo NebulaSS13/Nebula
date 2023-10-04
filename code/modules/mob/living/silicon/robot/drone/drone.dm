@@ -384,7 +384,7 @@
 	bodytype_category = "drone body"
 
 /decl/bodytype/drone/Initialize()
-	if(!equip_adjust)
+	if(!length(equip_adjust))
 		equip_adjust = list(
 			slot_head_str = list(
 				"[NORTH]" = list(0, -13),

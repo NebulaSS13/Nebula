@@ -4,6 +4,7 @@
 	if(HasMovementHandler(/datum/movement_handler/mob/transformation) || QDELETED(src))
 		return FALSE
 	refresh_visible_overlays()
+	apply_visible_overlays()
 	return TRUE
 
 /mob/living/proc/refresh_visible_overlays()

@@ -372,7 +372,7 @@ var/global/list/damage_icon_parts = list()
 		var/image/I
 		var/decl/bodytype/root_bodytype = get_bodytype()
 		if(UW.slot_offset_str && LAZYACCESS(root_bodytype.equip_adjust, UW.slot_offset_str))
-			I = root_bodytype.get_offset_overlay_image(FALSE, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
+			I = root_bodytype.get_offset_overlay_image(UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
 		else
 			I = image(icon = UW.icon, icon_state = UW.icon_state)
 			I.color = UW.color

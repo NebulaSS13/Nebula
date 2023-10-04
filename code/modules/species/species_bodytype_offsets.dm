@@ -21,9 +21,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	var/list/equip_adjust = list()
 	var/list/equip_overlays = list()
 
-/decl/bodytype/proc/get_offset_overlay_image(var/spritesheet, var/mob_icon, var/mob_state, var/color, var/slot)
+/decl/bodytype/proc/get_offset_overlay_image(var/mob_icon, var/mob_state, var/color, var/slot)
 	// If we don't actually need to offset this, don't bother with any of the generation/caching.
-	if(!spritesheet && length(equip_adjust) && equip_adjust[slot] && length(equip_adjust[slot]))
+	if(length(equip_adjust) && equip_adjust[slot] && length(equip_adjust[slot]))
 
 		// Check the cache for previously made icons.
 		var/image_key = "[mob_icon]-[mob_state]-[color]-[slot]"
@@ -38,7 +38,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				var/use_dir = text2num(shift_facing)
 				var/icon/equip = new(mob_icon, icon_state = mob_state, dir = use_dir)
 				var/icon/canvas = new(icon_template)
-				canvas.Blend(equip, ICON_OVERLAY, facing_list["x"]+1, facing_list["y"]+1)
+				canvas.Blend(equip, ICON_OVERLAY, facing_list[1]+1, facing_list[2]+1)
 				final_I.Insert(canvas, dir = use_dir)
 			equip_overlays[image_key] = overlay_image(final_I, color = color, flags = RESET_COLOR)
 		var/image/I = new() // We return a copy of the cached image, in case downstream procs mutate it.

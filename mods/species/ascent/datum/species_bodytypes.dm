@@ -64,10 +64,10 @@
 /decl/bodytype/crystalline/mantid/gyne/Initialize()
 	equip_adjust = list(
 		BP_L_HAND = list(
-			"[NORTH]" = list("x" = -4, "y" = 12),
-			"[EAST]" = list("x" =  -4, "y" = 12),
-			"[SOUTH]" = list("x" = -4, "y" = 12),
-			"[WEST]" = list("x" =  -4, "y" = 12)
+			"[NORTH]" = list(-4, 12),
+			"[EAST]"  = list(-4, 12),
+			"[SOUTH]" = list(-4, 12),
+			"[WEST]"  = list(-4, 12)
 		)
 	)
 	. = ..()
