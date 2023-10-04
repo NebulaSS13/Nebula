@@ -27,7 +27,7 @@
 	bone_amount =   0
 
 /mob/living/simple_animal/crab/get_bodytype()
-	return /decl/bodytype/animal/crab
+	return GET_DECL(/decl/bodytype/animal/crab)
 
 /decl/bodytype/animal/crab/Initialize()
 	equip_adjust = list(

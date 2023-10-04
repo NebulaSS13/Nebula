@@ -131,7 +131,7 @@
 	bone_amount = 3
 
 /mob/living/simple_animal/corgi/puppy/get_bodytype()
-	return /decl/bodytype/animal/puppy
+	return GET_DECL(/decl/bodytype/animal/puppy)
 
 /decl/bodytype/animal/puppy/Initialize()
 	equip_adjust = list(

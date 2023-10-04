@@ -23,7 +23,7 @@
 	var/mob/flee_target
 
 /mob/living/simple_animal/cat/get_bodytype()
-	return /decl/bodytype/animal/cat
+	return GET_DECL(/decl/bodytype/animal/cat)
 
 /decl/bodytype/animal/cat/Initialize()
 	equip_adjust = list(
@@ -245,7 +245,7 @@
 	skin_amount = 3
 
 /mob/living/simple_animal/cat/kitten/get_bodytype()
-	return /decl/bodytype/animal/kitten
+	return GET_DECL(/decl/bodytype/animal/kitten)
 
 /decl/bodytype/animal/kitten/Initialize()
 	equip_adjust = list(
