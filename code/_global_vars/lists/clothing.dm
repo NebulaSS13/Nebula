@@ -77,18 +77,6 @@ var/global/list/persistent_inventory_slots = list(
 	slot_r_store_str
 )
 
-var/global/list/hidden_inventory_slots = list(
-	slot_head_str,
-	slot_shoes_str,
-	slot_l_ear_str,
-	slot_r_ear_str,
-	slot_gloves_str,
-	slot_glasses_str,
-	slot_w_uniform_str,
-	slot_wear_suit_str,
-	slot_wear_mask_str
-)
-
 var/global/list/abstract_inventory_slots = list(
 	slot_in_backpack_str,
 	slot_tie_str,
