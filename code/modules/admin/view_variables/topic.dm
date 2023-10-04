@@ -564,7 +564,7 @@
 		if(!istype(H))
 			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
 			return
-		H.refresh_visible_overlays()
+		H.try_refresh_visible_overlays()
 
 	else if(href_list["adjustDamage"] && href_list["mobToDamage"])
 		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return

@@ -31,7 +31,7 @@
 	return TRUE
 
 /atom/proc/check_mousedrop_adjacency(var/atom/over, var/mob/user)
-	. = (Adjacent(user) && over.Adjacent(user))
+	. = (Adjacent(user) && ((over in user?.client?.screen) || over.Adjacent(user)))
 
 // Receive a mouse drop.
 // Returns false if the atom is valid for dropping further up the chain, true if the drop has been handled.

@@ -719,20 +719,6 @@ default behaviour is:
 	update_icon()
 	return 1
 
-/mob/living/update_icon()
-	..()
-	compile_overlays()
-
-/mob/living/on_update_icon()
-	SHOULD_CALL_PARENT(TRUE)
-	..()
-	cut_overlays()
-	if(auras)
-		for(var/obj/aura/aura as anything in auras)
-			var/image/A = new()
-			A.appearance = aura
-			add_overlay(A)
-
 /mob/living/Destroy()
 	if(stressors) // Do not QDEL_NULL, keys are managed instances.
 		stressors = null

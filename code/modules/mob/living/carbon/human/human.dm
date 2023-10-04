@@ -1148,7 +1148,7 @@
 	apply_species_inventory_restrictions()
 	species.handle_post_spawn(src)
 
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 
 //Sets the mob's real name and update all the proper fields
 /mob/living/carbon/human/proc/set_real_name(var/newname)
@@ -1209,7 +1209,7 @@
 
 //Runs last after setup and after the parent init has been executed.
 /mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
-	refresh_visible_overlays() //Do this exactly once per setup
+	try_refresh_visible_overlays() //Do this exactly once per setup
 
 /mob/living/carbon/human/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
 	var/safety = eyecheck()

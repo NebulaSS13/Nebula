@@ -864,3 +864,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(current_size > STAGE_ONE)
 		step_towards(src,S)
 	else ..()
+
+/obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
+	. = (loc == user && istype(over, /obj/screen)) || ..()

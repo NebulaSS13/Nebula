@@ -32,7 +32,7 @@
 		add_language(antag.required_language)
 		set_default_language(antag.required_language)
 	reset_hair()
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	return 1
 
 /mob/living/carbon/human/set_gender(var/new_gender, var/update_body = FALSE)

@@ -157,7 +157,7 @@
 	visible_message(
 		SPAN_NOTICE("\The [src] attaches \the [E] to [G.his] body!"),
 		SPAN_NOTICE("You attach \the [E] to your body!"))
-	refresh_visible_overlays() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
+	try_refresh_visible_overlays() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
 	return TRUE
 
 /mob/living/carbon/human/proc/detach_limb_verb()
