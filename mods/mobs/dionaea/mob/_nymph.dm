@@ -72,7 +72,7 @@
 		to_chat(user, SPAN_NOTICE("It is holding [html_icon(holding_item)] \a [holding_item]."))
 
 /mob/living/carbon/alien/diona/get_dexterity(var/silent = FALSE)
-	return DEXTERITY_NONE
+	return DEXTERITY_EQUIP_ITEM
 
 /mob/living/carbon/alien/diona/get_bodytype()
 	return GET_DECL(/decl/bodytype/diona)

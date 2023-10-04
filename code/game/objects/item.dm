@@ -253,8 +253,6 @@
 
 	return ..(user, distance, "", desc_comp)
 
-// This is going to need a solid go-over to properly integrate all the movement procs into each
-// other and make sure everything is updating nicely. Snowflaking it for now. ~Jan 2020
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen/inventory)) || ..()
 
