@@ -127,7 +127,6 @@
 #include "code\_helpers\gauss.dm"
 #include "code\_helpers\global_lists.dm"
 #include "code\_helpers\icons.dm"
-#include "code\_helpers\images.dm"
 #include "code\_helpers\lists.dm"
 #include "code\_helpers\logging.dm"
 #include "code\_helpers\maths.dm"
