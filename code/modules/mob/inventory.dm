@@ -388,7 +388,12 @@
 
 /// If this proc returns false, reconsider_client_screen_presence will set the item's screen_loc to null.
 /mob/proc/item_should_have_screen_presence(obj/item/item, slot)
-	return hud_used && slot && (hud_used.inventory_shown || !(slot in global.hidden_inventory_slots))
+	if(!slot || !hud_used)
+		return FALSE
+	if(hud_used.inventory_shown)
+		return TRUE
+	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+	return !(inv_slot?.can_be_hidden)
 
 /mob/proc/get_held_item_slots()
 	return
