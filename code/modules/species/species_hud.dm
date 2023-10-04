@@ -45,10 +45,10 @@
 		equip_slots |= slot_id
 
 		// Build reference lists for inventory updates
-		if(slot_id in global.persistent_inventory_slots)
-			persistent_slots |= slot_id
-		else if(slot_id in global.hidden_inventory_slots)
+		if(inv_slot.can_be_hidden)
 			hidden_slots |= slot_id
+		else
+			persistent_slots |= slot_id
 
 	if(has_hands)
 		equip_slots |= slot_handcuffed_str

@@ -9,6 +9,7 @@
 	requires_slot_flags = SLOT_FACE
 	can_be_hidden = TRUE
 	mob_overlay_layer = HO_FACEMASK_LAYER
+	quick_equip_priority = 10
 
 /datum/inventory_slot/mask/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	if(prop?.flags_inv & BLOCK_ALL_HAIR)

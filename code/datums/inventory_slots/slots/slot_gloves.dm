@@ -11,6 +11,7 @@
 	)
 	covering_flags = SLOT_HANDS
 	requires_slot_flags = SLOT_HANDS
+	quick_equip_priority = 8
 
 /datum/inventory_slot/gloves/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	var/obj/item/suit = user.get_equipped_item(slot_wear_suit_str)

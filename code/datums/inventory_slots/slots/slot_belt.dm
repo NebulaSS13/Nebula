@@ -7,6 +7,7 @@
 	requires_slot_flags = SLOT_LOWER_BODY
 	mob_overlay_layer = HO_BELT_LAYER
 	alt_mob_overlay_layer = HO_BELT_LAYER_ALT
+	quick_equip_priority = 4
 
 /datum/inventory_slot/belt/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..()
