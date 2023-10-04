@@ -68,15 +68,6 @@ var/global/list/carried_slots = list(
 	slot_s_store_str
 )
 
-var/global/list/persistent_inventory_slots = list(
-	slot_s_store_str,
-	slot_wear_id_str,
-	slot_belt_str,
-	slot_back_str,
-	slot_l_store_str,
-	slot_r_store_str
-)
-
 var/global/list/abstract_inventory_slots = list(
 	slot_in_backpack_str,
 	slot_tie_str,
