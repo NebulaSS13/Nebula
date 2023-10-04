@@ -65,20 +65,21 @@
 	if(world.timeofday < next_event) //Checks if it's time for the next crash chance.
 		return
 	var/mob/living/holder = computer.holder.get_recursive_loc_of_type(/mob/living/carbon/human)
+	var/host = computer.get_physical_host()
 	if(program_status > PROGRAM_STATUS_CRASHED)
 		if(PROGRAM_STATUS_RUNNING_SCALDING >= program_status)
 			switch(rand(PROGRAM_STATUS_RUNNING,program_status))
 				if(PROGRAM_STATUS_RUNNING) //Guaranteed 1 tick without crashing.
-					to_chat(holder, SPAN_WARNING("The [computer] starts to get very warm."))
+					to_chat(holder, SPAN_WARNING("\The [host] starts to get very warm."))
 					if (program_status == PROGRAM_STATUS_RUNNING)
 						program_status = PROGRAM_STATUS_RUNNING_WARM
 				if(PROGRAM_STATUS_RUNNING_WARM) //50% chance on subsequent ticks to make the program able to crash.
-					to_chat(holder, SPAN_WARNING("The [computer] gets scaldingly hot, burning you!"))
+					to_chat(holder, SPAN_WARNING("\The [host] gets scaldingly hot, burning you!"))
 					holder?.take_overall_damage(0, 0.45) //It checks holder? so that it doesn't cause a runtime error if no one is holding it.
 					if (program_status == PROGRAM_STATUS_RUNNING_WARM)
 						program_status = PROGRAM_STATUS_RUNNING_SCALDING
 				if(PROGRAM_STATUS_RUNNING_SCALDING) //1/3 chance on all following ticks for the program to crash.
-					to_chat(holder, SPAN_WARNING("The [computer] pings an error chime."))
+					to_chat(holder, SPAN_WARNING("\The [host] pings an error chime."))
 					program_status = PROGRAM_STATUS_CRASHED
 					crashed_at = world.timeofday
 		else
