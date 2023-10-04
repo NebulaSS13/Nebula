@@ -291,12 +291,10 @@
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	SHOULD_CALL_PARENT(TRUE)
-	for(var/slot in list(slot_back_str, slot_wear_mask_str))
+	var/held_item_slots = get_held_item_slots()
+	for(var/slot in get_inventory_slots())
 		var/obj/item/thing = get_equipped_item(slot)
-		if(istype(thing))
-			LAZYADD(., thing)
-	if(include_carried)
-		for(var/obj/item/thing in get_held_items())
+		if(istype(thing) && (include_carried || (slot in held_item_slots)))
 			LAZYADD(., thing)
 
 /mob/proc/delete_inventory(var/include_carried = FALSE)
@@ -310,49 +308,7 @@
 	var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
 	if(inv_slot)
 		return !!inv_slot.check_has_required_organ(src)
-
-// Legacy code after this point.
-	switch(slot)
-		if(slot_back_str)
-			return has_organ(BP_CHEST)
-		if(slot_wear_mask_str)
-			return has_organ(BP_HEAD)
-		if(slot_handcuffed_str)
-			return has_organ(BP_L_HAND) && has_organ(BP_R_HAND)
-		if(slot_belt_str)
-			return has_organ(BP_CHEST)
-		if(slot_wear_id_str)
-			// the only relevant check for this is the uniform check
-			return TRUE
-		if(slot_l_ear_str)
-			return has_organ(BP_HEAD)
-		if(slot_r_ear_str)
-			return has_organ(BP_HEAD)
-		if(slot_glasses_str)
-			return has_organ(BP_HEAD)
-		if(slot_gloves_str)
-			return has_organ(BP_L_HAND) || has_organ(BP_R_HAND)
-		if(slot_head_str)
-			return has_organ(BP_HEAD)
-		if(slot_shoes_str)
-			return has_organ(BP_L_FOOT) || has_organ(BP_R_FOOT)
-		if(slot_wear_suit_str)
-			return has_organ(BP_CHEST)
-		if(slot_w_uniform_str)
-			return has_organ(BP_CHEST)
-		if(slot_l_store_str)
-			return has_organ(BP_CHEST)
-		if(slot_r_store_str)
-			return has_organ(BP_CHEST)
-		if(slot_s_store_str)
-			return has_organ(BP_CHEST)
-		if(slot_in_backpack_str)
-			return TRUE
-		if(slot_tie_str)
-			return TRUE
-		else
-			return has_organ(slot)
-// End legacy code.
+	return has_organ(slot)
 
 // Returns all currently covered body parts
 /mob/proc/get_covered_body_parts()
