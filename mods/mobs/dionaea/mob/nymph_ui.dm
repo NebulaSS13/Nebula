@@ -1,5 +1,5 @@
 /obj/screen/intent/diona_nymph
-	icon_state = "intent_devour"
+	icon_state = "intent_harm"
 	screen_loc = DIONA_SCREEN_LOC_INTENT
 
 /obj/screen/intent/diona_nymph/on_update_icon()

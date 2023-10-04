@@ -1,5 +1,5 @@
 /obj/screen/intent/ascent_nymph
-	icon_state = "intent_devour"
+	icon_state = "intent_harm"
 	screen_loc = ANYMPH_SCREEN_LOC_INTENT
 
 /obj/screen/intent/ascent_nymph/on_update_icon()

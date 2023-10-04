@@ -835,12 +835,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return TRUE
 
 /obj/item/proc/reconsider_client_screen_presence(var/client/client, var/slot)
-	if(!ismob(loc) || !client) // Storage handles screen loc updating/setting itself so should be fine
-		screen_loc = null
-	else if(client)
+	if(!client)
+		return
+	if(client.mob?.item_should_have_screen_presence(src, slot))
 		client.screen |= src
-		if(!client.mob?.item_should_have_screen_presence(src, slot))
-			screen_loc = null
+	else
+		client.screen -= src
 
 /obj/item/proc/gives_weather_protection()
 	return FALSE

@@ -100,6 +100,7 @@
 			continue
 
 		// We're not showing anything, hide it.
+		gear.reconsider_client_screen_presence(mymob?.client, slot)
 		if(!show_hud)
 			inv_slot.hide_slot()
 		else

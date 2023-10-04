@@ -13,6 +13,7 @@
 /datum/inventory_slot/head/simple
 	requires_organ_tag = null
 	can_be_hidden = FALSE
+	ui_loc = "LEFT+1:16,BOTTOM:5"
 
 /datum/inventory_slot/head/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	if(prop?.flags_inv & (HIDEMASK|BLOCK_ALL_HAIR))
