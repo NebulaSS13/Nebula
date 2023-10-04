@@ -7,6 +7,7 @@
 	skip_on_strip_display = TRUE
 	requires_organ_tag = BP_CHEST
 	requires_slot_flags = SLOT_POCKET
+	quick_equip_priority = 2
 
 /datum/inventory_slot/pocket/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	user.update_inv_pockets(redraw_mob)
@@ -32,3 +33,4 @@
 	slot_name = "Right Pocket"
 	ui_loc = ui_storage2
 	slot_id = slot_r_store_str
+	quick_equip_priority = 1

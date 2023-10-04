@@ -18,6 +18,7 @@
 	var/skip_on_strip_display = FALSE
 	var/requires_slot_flags
 	var/requires_organ_tag
+	var/quick_equip_priority = 0 // Higher priority means it will be checked first.
 
 /datum/inventory_slot/Destroy(force)
 	_holding = null

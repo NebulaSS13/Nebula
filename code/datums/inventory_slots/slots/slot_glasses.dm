@@ -8,6 +8,7 @@
 	can_be_hidden = TRUE
 	requires_organ_tag = BP_HEAD
 	requires_slot_flags = SLOT_EYES
+	quick_equip_priority = 5
 
 /datum/inventory_slot/glasses/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	user.update_inv_glasses(redraw_mob)
