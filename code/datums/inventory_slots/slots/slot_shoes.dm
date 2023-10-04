@@ -9,6 +9,7 @@
 		BP_R_FOOT
 	)
 	requires_slot_flags = SLOT_FEET
+	quick_equip_priority = 3
 
 /datum/inventory_slot/shoes/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	user.update_inv_shoes(redraw_mob)

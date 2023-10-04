@@ -11,6 +11,7 @@
 	)
 	covering_flags = SLOT_HANDS
 	requires_slot_flags = SLOT_HANDS
+	quick_equip_priority = 8
 
 /datum/inventory_slot/gloves/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	user.update_inv_gloves(redraw_mob)

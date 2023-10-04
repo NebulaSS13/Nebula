@@ -7,6 +7,7 @@
 	requires_organ_tag = BP_HEAD
 	covering_flags = SLOT_HEAD
 	requires_slot_flags = SLOT_HEAD
+	quick_equip_priority = 9
 
 /datum/inventory_slot/head/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	if(prop.flags_inv & (HIDEMASK|BLOCK_ALL_HAIR))

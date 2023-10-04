@@ -5,6 +5,7 @@
 	ui_loc = ui_belt
 	requires_organ_tag = BP_CHEST
 	requires_slot_flags = SLOT_LOWER_BODY
+	quick_equip_priority = 4
 
 /datum/inventory_slot/belt/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	user.update_inv_belt(redraw_mob)

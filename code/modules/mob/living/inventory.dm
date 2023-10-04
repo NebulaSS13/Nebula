@@ -2,10 +2,21 @@
 	var/_held_item_slot_selected
 	var/list/_held_item_slots
 	var/list/_inventory_slots
+	var/list/_inventory_slot_priority
 	var/pending_hand_rebuild
 
 /mob/living/get_inventory_slots()
 	return _inventory_slots
+
+/mob/living/get_inventory_slot_priorities()
+	if(!_inventory_slot_priority)
+		_inventory_slot_priority = list()
+		var/list/all_slots = list()
+		for(var/slot in get_inventory_slots())
+			all_slots += get_inventory_slot_datum(slot)
+		for(var/datum/inventory_slot/inv_slot as anything in sortTim(all_slots, /proc/cmp_inventory_slot_desc))
+			_inventory_slot_priority += inv_slot.slot_id
+	return _inventory_slot_priority
 
 /mob/living/get_inventory_slot_datum(var/slot)
 	return LAZYACCESS(_inventory_slots, slot)
@@ -115,6 +126,7 @@
 /mob/living/set_inventory_slots(var/list/new_slots)
 
 	var/list/old_slots = _inventory_slots
+	_inventory_slot_priority = null
 	_inventory_slots = null
 
 	// Keep held item slots.
@@ -134,9 +146,11 @@
 		LAZYSET(_inventory_slots, new_slot.slot_id, new_slot)
 
 /mob/living/add_inventory_slot(var/datum/inventory_slot/inv_slot)
+	_inventory_slot_priority = null
 	LAZYSET(_inventory_slots, inv_slot.slot_id, inv_slot)
 
 /mob/living/remove_inventory_slot(var/slot)
+	_inventory_slot_priority = null
 	var/datum/inventory_slot/inv_slot = istype(slot, /datum/inventory_slot) ? slot : LAZYACCESS(_inventory_slots, slot)
 	if(inv_slot)
 		var/held = inv_slot.get_equipped_item()

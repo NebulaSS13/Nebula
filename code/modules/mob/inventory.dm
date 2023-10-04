@@ -78,7 +78,7 @@
 /mob/proc/equip_to_appropriate_slot(obj/item/W, var/skip_store = 0)
 	if(!istype(W))
 		return FALSE
-	for(var/slot in global.slot_equipment_priority)
+	for(var/slot in get_inventory_slot_priorities())
 		if(skip_store)
 			if(slot == slot_s_store_str || slot == slot_l_store_str || slot == slot_r_store_str)
 				continue
@@ -364,6 +364,9 @@
 	return
 
 /mob/proc/get_inventory_slots()
+	return
+
+/mob/proc/get_inventory_slot_priorities()
 	return
 
 /mob/proc/set_inventory_slots(var/list/new_slots)

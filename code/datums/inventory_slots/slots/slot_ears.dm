@@ -8,6 +8,7 @@
 	can_be_hidden = TRUE
 	requires_organ_tag = BP_HEAD
 	requires_slot_flags = SLOT_EARS
+	quick_equip_priority = 7
 
 /datum/inventory_slot/ear/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	user.update_inv_ears(redraw_mob)
@@ -33,3 +34,4 @@
 	slot_name = "Right Ear"
 	slot_id = slot_r_ear_str
 	ui_loc = ui_r_ear
+	quick_equip_priority = 6
