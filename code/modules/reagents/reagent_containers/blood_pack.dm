@@ -96,20 +96,20 @@
 /obj/item/chems/ivbag/blood/nanoblood/get_initial_blood_data()
 	return null
 
-/obj/item/chems/ivbag/blood/APlus
+/obj/item/chems/ivbag/blood/aplus
 	label_text = "A+"
 
-/obj/item/chems/ivbag/blood/AMinus
+/obj/item/chems/ivbag/blood/aminus
 	label_text = "A-"
 
-/obj/item/chems/ivbag/blood/BPlus
+/obj/item/chems/ivbag/blood/bplus
 	label_text = "B+"
 
-/obj/item/chems/ivbag/blood/BMinus
+/obj/item/chems/ivbag/blood/bminus
 	label_text = "B-"
 
-/obj/item/chems/ivbag/blood/OPlus
+/obj/item/chems/ivbag/blood/oplus
 	label_text = "O+"
 
-/obj/item/chems/ivbag/blood/OMinus
+/obj/item/chems/ivbag/blood/ominus
 	label_text = "O-"

@@ -7415,12 +7415,12 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "tb" = (
-/obj/item/chems/ivbag/blood/AMinus,
-/obj/item/chems/ivbag/blood/APlus,
-/obj/item/chems/ivbag/blood/BMinus,
-/obj/item/chems/ivbag/blood/BPlus,
-/obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/ivbag/blood/OPlus,
+/obj/item/chems/ivbag/blood/aminus,
+/obj/item/chems/ivbag/blood/aplus,
+/obj/item/chems/ivbag/blood/bminus,
+/obj/item/chems/ivbag/blood/bplus,
+/obj/item/chems/ivbag/blood/ominus,
+/obj/item/chems/ivbag/blood/oplus,
 /obj/structure/closet/crate/freezer,
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
