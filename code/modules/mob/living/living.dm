@@ -1056,11 +1056,12 @@ default behaviour is:
 
 /mob/living/handle_fall_effect(var/turf/landing)
 	..()
-	apply_fall_damage(landing)
-	if(client)
-		var/area/A = get_area(landing)
-		if(A)
-			A.alert_on_fall(src)
+	if(istype(landing) && !landing.is_open())
+		apply_fall_damage(landing)
+		if(client)
+			var/area/A = get_area(landing)
+			if(A)
+				A.alert_on_fall(src)
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
 	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
