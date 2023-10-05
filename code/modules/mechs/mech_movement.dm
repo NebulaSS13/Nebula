@@ -20,7 +20,7 @@
 				pilot.up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
 
 /mob/living/exosuit/can_ztravel()
-	if(Process_Spacemove(1)) //Handle here 
+	if(Process_Spacemove(1)) //Handle here
 		return TRUE
 
 //Inertia drift making us face direction makes exosuit flight a bit difficult, plus newtonian flight model yo
@@ -37,7 +37,7 @@
 //For swimming
 // /mob/living/exosuit/can_float()
 // 	return FALSE //Nope
-	
+
 /datum/movement_handler/mob/delay/exosuit
 	expected_host_type = /mob/living/exosuit
 
@@ -184,8 +184,7 @@
 /mob/living/exosuit/fall_damage()
 	return 175 //Exosuits are big and heavy
 
-/mob/living/exosuit/handle_fall_effect(var/turf/landing)
+/mob/living/exosuit/apply_fall_damage(var/turf/landing)
 	// Return here if for any reason you shouldn´t take damage
-	..()
 	if(legs)
 		legs.handle_vehicle_fall()
