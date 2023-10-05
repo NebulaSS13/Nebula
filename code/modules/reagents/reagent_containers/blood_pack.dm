@@ -2,7 +2,7 @@
 	name = "blood packs box"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
-	
+
 /obj/item/storage/box/bloodpacks/WillContain()
 	return list(/obj/item/chems/ivbag = 7)
 
@@ -73,21 +73,34 @@
 	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_INJECT)
 	update_icon()
 
-/obj/item/chems/ivbag/nanoblood/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nanoblood, reagents.maximum_volume)
-
 /obj/item/chems/ivbag/blood
 	name = "blood pack"
 	var/blood_type = null
+	var/blood_fill_type = /decl/material/liquid/blood
 
 /obj/item/chems/ivbag/blood/Initialize()
 	. = ..()
 	if(blood_type)
 		name = "blood pack ([blood_type])"
 
+/obj/item/chems/ivbag/blood/proc/get_initial_blood_data()
+	return list(
+		"donor" = null,
+		"blood_DNA" = null,
+		"blood_type" = blood_type,
+		"trace_chem" = null
+	)
+
 /obj/item/chems/ivbag/blood/populate_reagents()
-	if(blood_type)
-		reagents.add_reagent(/decl/material/liquid/blood, reagents.maximum_volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
+	if(blood_type && blood_fill_type)
+		reagents.add_reagent(blood_fill_type, reagents.maximum_volume, get_initial_blood_data())
+
+/obj/item/chems/ivbag/blood/nanoblood
+	blood_type = "synthetic"
+	blood_fill_type = /decl/material/liquid/nanoblood
+
+/obj/item/chems/ivbag/blood/nanoblood/get_initial_blood_data()
+	return null
 
 /obj/item/chems/ivbag/blood/APlus
 	blood_type = "A+"
