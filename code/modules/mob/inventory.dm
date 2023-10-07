@@ -294,7 +294,9 @@
 	var/held_item_slots = get_held_item_slots()
 	for(var/slot in get_inventory_slots())
 		var/obj/item/thing = get_equipped_item(slot)
-		if(istype(thing) && (include_carried || (slot in held_item_slots)))
+		if(istype(thing))
+			if(!include_carried && (slot in held_item_slots))
+				continue
 			LAZYADD(., thing)
 
 /mob/proc/delete_inventory(var/include_carried = FALSE)
@@ -328,8 +330,7 @@
 // Returns all items which covers any given body part
 /mob/proc/get_covering_equipped_items(var/body_parts)
 	. = list()
-	for(var/entry in get_equipped_items())
-		var/obj/item/I = entry
+	for(var/obj/item/I as anything in get_equipped_items())
 		if(I.body_parts_covered & body_parts)
 			. += I
 
