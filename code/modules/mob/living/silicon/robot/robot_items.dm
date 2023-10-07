@@ -80,9 +80,9 @@
 /obj/item/party_light
 	name = "party light"
 	desc = "An array of LEDs in tons of colors."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "partylight-off"
-	item_state = "partylight-off"
+	icon = 'icons/obj/lighting/partylight.dmi'
+	icon_state = "partylight"
+	item_state = "partylight"
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
@@ -99,13 +99,14 @@
 	else
 		activate_strobe()
 
+// TODO: make this a flashlight descendant.
 /obj/item/party_light/on_update_icon()
 	. = ..()
 	if (activated)
 		icon_state = "partylight-on"
 		set_light(7, 1)
 	else
-		icon_state = "partylight_off"
+		icon_state = "partylight"
 		set_light(0)
 
 /obj/item/party_light/proc/activate_strobe()
