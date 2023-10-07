@@ -855,10 +855,6 @@
 	if(stomach)
 		victim.forceMove(stomach)
 
-/mob/living/carbon/human/should_have_organ(var/organ_check)
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	return root_bodytype?.has_organ[organ_check]
-
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
 
