@@ -401,7 +401,7 @@
 /turf/proc/update_weather(var/obj/abstract/weather_system/new_weather, var/force_update_below = FALSE)
 
 	if(isnull(new_weather))
-		new_weather = SSweather.get_weather_for_level(z)
+		new_weather = SSweather.weather_by_z[z]
 
 	// We have a weather system and we are exposed to it; update our vis contents.
 	if(istype(new_weather) && is_outside())
