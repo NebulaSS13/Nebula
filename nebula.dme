@@ -1058,6 +1058,7 @@
 #include "code\game\objects\items\flashlights\lamp.dm"
 #include "code\game\objects\items\flashlights\lavalamp.dm"
 #include "code\game\objects\items\flashlights\misc.dm"
+#include "code\game\objects\items\flashlights\party.dm"
 #include "code\game\objects\items\flashlights\penlight.dm"
 #include "code\game\objects\items\flashlights\slime.dm"
 #include "code\game\objects\items\robot\robot_frame.dm"

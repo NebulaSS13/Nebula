@@ -26,14 +26,14 @@
 	. = ..()
 	set_flashlight()
 	update_icon()
+	update_held_icon()
 
 /obj/item/flashlight/proc/get_emissive_overlay_color()
-	return light_color
+	return COLOR_WHITE // Icons are usually coloured already.
+
 
 /obj/item/flashlight/on_update_icon()
 	. = ..()
-	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
-		return // Prevent update_icon shennanigans with objects that won't have on/off variant sprites
 	icon_state = get_world_inventory_state()
 	if(on)
 		icon_state = "[icon_state]-on"
@@ -44,35 +44,28 @@
 			I.pixel_x = offset_on_overlay_x
 			I.pixel_y = offset_on_overlay_y
 			add_overlay(I)
-	update_held_icon()
 
 /obj/item/flashlight/attack_self(mob/user)
-	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
-		to_chat(user, "You cannot toggle the [name].")
-		return 0
+	if(user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
+		if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
+			to_chat(user, SPAN_WARNING("You cannot toggle \the [src]."))
+			return TRUE
+		if ((flashlight_flags & FLASHLIGHT_SINGLE_USE) && on)
+			to_chat(user, SPAN_WARNING("\The [src] is already on."))
+			return TRUE
+		on = !on
+		if(on && activation_sound)
+			playsound(get_turf(src), activation_sound, 75, 1)
+		set_flashlight(set_direction = FALSE)
+		update_icon()
+		user.update_action_buttons()
+		return TRUE
+	return ..()
 
-	if(!isturf(user.loc))
-		to_chat(user, "You cannot turn the [name] on while in this [user.loc].")//To prevent some lighting anomalities.
-		return 0
-
-	if (flashlight_flags & FLASHLIGHT_SINGLE_USE && on)
-		to_chat(user, "The [name] is already lit.")
-		return 0
-
-	on = !on
-	if(on && activation_sound)
-		playsound(get_turf(src), activation_sound, 75, 1)
-	set_flashlight()
-	update_icon()
-	user.update_action_buttons()
-	return 1
-
-/obj/item/flashlight/proc/set_flashlight()
-	if(light_wedge)
-		set_dir(pick(NORTH, SOUTH, EAST, WEST))
-		if(spawn_dir)
-			set_dir(spawn_dir)
-	if (on)
+/obj/item/flashlight/proc/set_flashlight(var/set_direction = TRUE)
+	if(light_wedge && set_direction)
+		set_dir(spawn_dir || pick(global.cardinal))
+	if(on)
 		set_light(flashlight_range, flashlight_power, light_color)
 	else
 		set_light(0)
@@ -91,8 +84,7 @@
 /obj/item/flashlight/throw_at()
 	. = ..()
 	if(light_wedge)
-		var/new_dir = pick(NORTH, SOUTH, EAST, WEST)
-		set_dir(new_dir)
+		set_dir(pick(global.cardinal))
 		update_light()
 
 /obj/item/flashlight/attack(mob/living/M, mob/living/user)

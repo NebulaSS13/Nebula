@@ -10,6 +10,9 @@
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
+/obj/item/flashlight/lamp/lava/get_emissive_overlay_color()
+	return light_color
+
 /obj/item/flashlight/lamp/lava/on_update_icon()
 	. = ..()
 	if(!on) // This is handled for lit lamps in the parent call.
