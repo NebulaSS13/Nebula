@@ -1661,8 +1661,8 @@
 /area/map_template/colony/atmospherics)
 "dQ" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/chems/ivbag/nanoblood,
-/obj/item/chems/ivbag/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dR" = (

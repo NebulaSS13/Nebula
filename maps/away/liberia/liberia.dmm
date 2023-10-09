@@ -3078,10 +3078,10 @@
 	pixel_x = 24;
 	pixel_y = 4
 	},
-/obj/item/chems/ivbag/blood/OPlus,
-/obj/item/chems/ivbag/blood/OPlus,
-/obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/oplus,
+/obj/item/chems/ivbag/blood/oplus,
+/obj/item/chems/ivbag/blood/ominus,
+/obj/item/chems/ivbag/blood/ominus,
 /obj/item/chems/food/candy/donor,
 /obj/item/chems/food/candy/donor,
 /obj/item/chems/food/candy/donor,

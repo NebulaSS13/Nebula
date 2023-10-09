@@ -41,18 +41,18 @@
 	random_weighting = 4
 
 /obj/item/chems/ivbag/blood/skrell_yplus
-	blood_type = "Y+"
+	label_text = "Y+"
 /obj/item/chems/ivbag/blood/skrell_yminus
-	blood_type = "Y-"
+	label_text = "Y-"
 /obj/item/chems/ivbag/blood/skrell_zplus
-	blood_type = "Z+"
+	label_text = "Z+"
 /obj/item/chems/ivbag/blood/skrell_zminus
-	blood_type = "Z-"
+	label_text = "Z-"
 /obj/item/chems/ivbag/blood/skrell_yzplus
-	blood_type = "YZ+"
+	label_text = "YZ+"
 /obj/item/chems/ivbag/blood/skrell_yzminus
-	blood_type = "YZ-"
+	label_text = "YZ-"
 /obj/item/chems/ivbag/blood/skrell_noplus
-	blood_type = "No+"
+	label_text = "No+"
 /obj/item/chems/ivbag/blood/skrell_nominus
-	blood_type = "No-"
+	label_text = "No-"

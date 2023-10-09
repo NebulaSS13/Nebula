@@ -65,7 +65,7 @@
 
 /decl/hierarchy/supply_pack/medical/blood
 	name = "Refills - Synthetic Blood"
-	contains = list(/obj/item/chems/ivbag/nanoblood = 4)
+	contains = list(/obj/item/chems/ivbag/blood/nanoblood = 4)
 	containername = "synthetic blood crate"
 
 /decl/hierarchy/supply_pack/medical/bodybag
