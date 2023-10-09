@@ -639,11 +639,10 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		user.visible_message(SPAN_WARNING("\The [user] touches \the [src] with \a [W] as silence fills the room..."),\
 			SPAN_DANGER("You touch \the [W] to \the [src] when everything suddenly goes quiet."),\
 			SPAN_WARNING("Everything suddenly goes silent."))
-
 		to_chat(user, SPAN_NOTICE("\The [W] flashes into dust as you flinch away from \the [src]."))
 		user.drop_from_inventory(W)
 		Consume(user, W, TRUE)
-	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
+	user.take_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/machinery/power/supermatter/Bumped(atom/AM)
 	if(!Consume(null, AM))

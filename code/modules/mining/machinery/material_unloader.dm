@@ -13,7 +13,7 @@
 
 	if(!output_turf || !input_turf)
 		return
-	
+
 	if(length(output_turf.contents) >= MAX_UNLOAD_TURF_CONTENTS)
 		return
 
@@ -35,7 +35,7 @@
 	if(emagged)
 		for(var/mob/living/M in input_turf)
 			visible_message(SPAN_DANGER("\The [M] is yanked violently through \the [src]!"))
-			M.take_overall_damage(rand(10, 20), 0)
+			M.take_damage(rand(10, 20), BRUTE)
 			M.dropInto(output_turf)
 			break
 

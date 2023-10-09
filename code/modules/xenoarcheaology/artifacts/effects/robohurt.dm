@@ -10,7 +10,8 @@
 	if(isrobot(user))
 		var/mob/living/silicon/robot/R = user
 		to_chat(R, "<span class='danger'>Your systems report severe damage has been inflicted!</span>")
-		R.take_overall_damage(rand(10,50), rand(10,50))
+		R.take_damage(rand(10,50), BRUTE)
+		R.take_damage(rand(10,50), BURN)
 		return 1
 
 /datum/artifact_effect/robohurt/DoEffectAura()
@@ -20,7 +21,8 @@
 			if(world.time - last_message > 200)
 				to_chat(M, "<span class='danger'>SYSTEM ALERT: Harmful energy field detected!</span>")
 				last_message = world.time
-			M.take_overall_damage(1,1)
+			M.take_damage(1, BRUTE)
+			M.take_damage(1, BURN)
 		return 1
 
 /datum/artifact_effect/robohurt/DoEffectPulse()
@@ -30,5 +32,6 @@
 			if(world.time - last_message > 200)
 				to_chat(M, "<span class='danger'>SYSTEM ALERT: Structural damage inflicted by energy pulse!</span>")
 				last_message = world.time
-			M.take_overall_damage(10,10)
+			M.take_damage(10, BRUTE)
+			M.take_damage(10, BURN)
 		return 1

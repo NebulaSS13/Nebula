@@ -62,7 +62,7 @@
 
 	if(damage >= 10)
 		visible_message("<span class='danger'>\The [user] [attack_verb] into \the [src]!</span>")
-		take_damage(damage)
+		take_damage(damage, BRUTE)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
@@ -222,7 +222,7 @@
 
 	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(damage, 100), Proj.damage_type)
+		take_damage(min(damage, 100), Proj.damage_type, Proj.damage_flags)
 
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	..()
@@ -233,7 +233,7 @@
 	else
 		tforce = AM:throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	playsound(src.loc, hitsound, 100, 1)
-	take_damage(tforce)
+	take_damage(tforce, BRUTE)
 
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/physical_attack_hand(user)
@@ -333,7 +333,7 @@
 		return TRUE
 	return FALSE
 
-/obj/machinery/door/take_damage(var/damage, damtype=BRUTE)
+/obj/machinery/door/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	if(!health)
 		..(damage, damtype)
 		update_icon()

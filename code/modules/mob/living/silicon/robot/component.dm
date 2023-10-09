@@ -52,7 +52,7 @@
 	installed = 1
 	install()
 
-/datum/robot_component/proc/take_damage(brute, electronics, sharp, edge)
+/datum/robot_component/proc/take_component_damage(brute, electronics, sharp, edge)
 	if(installed != 1) return
 
 	brute_damage += brute
@@ -60,7 +60,7 @@
 
 	if(brute_damage + electronics_damage >= max_damage) destroy()
 
-/datum/robot_component/proc/heal_damage(brute, electronics)
+/datum/robot_component/proc/heal_component_damage(brute, electronics)
 	if(installed != 1)
 		// If it's not installed, can't repair it.
 		return 0

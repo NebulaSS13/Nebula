@@ -6,16 +6,14 @@
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
 	return (BP_IS_PROSTHETIC(src) || brute_dam + burn_dam + additional_damage < max_damage * 4)
 
-/obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
-	take_external_damage(amount)
-
-/obj/item/organ/external/proc/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
+/obj/item/organ/external/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 
 	if(!owner)
 		return
 
-	brute = round(brute * get_brute_mod(damage_flags), 0.1)
-	burn = round(burn * get_burn_mod(damage_flags), 0.1)
+	// TODO: rework organs to use damage handlers.
+	var/brute = (damage_type == BRUTE) ? round(damage * get_brute_mod(damage_flags), 0.1) : 0
+	var/burn  = (damage_type == BURN)  ? round(damage * get_burn_mod(damage_flags),  0.1) : 0
 
 	if((brute <= 0) && (burn <= 0))
 		return 0
@@ -76,21 +74,21 @@
 	var/can_cut = !block_cut && !BP_IS_PROSTHETIC(src) && (sharp || prob(brute))
 
 	if(brute)
-		var/to_create = BRUISE
+		var/to_create = WOUND_BRUISE
 		if(can_cut)
-			to_create = CUT
+			to_create = WOUND_CUT
 			//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
 			if(sharp && !edge)
-				to_create = PIERCE
+				to_create = WOUND_PIERCE
 		created_wound = createwound(to_create, brute)
 
 	if(burn)
 		if(laser)
-			createwound(LASER, burn)
+			createwound(WOUND_LASER, burn)
 			if(prob(40))
 				owner.IgniteMob()
 		else
-			createwound(BURN, burn)
+			createwound(WOUND_BURN, burn)
 
 	//Initial pain spike
 	add_pain(0.6*burn + 0.4*brute)
@@ -153,7 +151,7 @@
 	var/list/victims = list()
 	var/organ_hit_chance = 0
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.damage < I.max_damage)
+		if(I.organ_damage < I.max_damage)
 			victims[I] = I.relative_size
 			organ_hit_chance += I.relative_size
 
@@ -170,31 +168,35 @@
 	if(prob(organ_hit_chance))
 		var/obj/item/organ/internal/victim = pickweight(victims)
 		damage_amt -= max(damage_amt*victim.damage_reduction, 0)
-		victim.take_internal_damage(damage_amt)
+		victim.take_damage(damage_amt, burn ? BURN : BRUTE)
 		return TRUE
 
-/obj/item/organ/external/heal_damage(brute, burn, internal = 0, robo_repair = 0)
-	if(BP_IS_PROSTHETIC(src) && !robo_repair)
+/obj/item/organ/external/heal_damage(var/damage, var/damage_type = BRUTE, var/def_zone = null, var/damage_flags = 0, skip_update_health = FALSE)
+	if(BP_IS_PROSTHETIC(src)) // && !robo_repair)
 		return
+
+	// TODO: rework organs to use damage handlers.
+	var/brute = (damage_type == BRUTE) ? damage : 0
+	var/burn  = (damage_type == BURN)  ? damage : 0
 
 	//Heal damage on the individual wounds
 	for(var/datum/wound/W in wounds)
-		if(brute == 0 && burn == 0)
-			break
+		if(damage_type == BRUTE)
+			if(brute == 0)
+				break
+			if(W.wound_type != WOUND_BURN)
+				brute = W.heal_wound_damage(brute)
 
-		// heal brute damage
-		if(W.damage_type == BURN)
-			burn = W.heal_damage(burn)
-		else
-			brute = W.heal_damage(brute)
-
-	if(internal)
-		status &= ~ORGAN_BROKEN
+		if(damage_type == BURN)
+			if(burn == 0)
+				break
+			if(W.wound_type == WOUND_BURN)
+				burn = W.heal_wound_damage(burn)
 
 	//Sync the organ's damage with its wounds
 	update_damages()
-	owner.update_health()
-
+	if(owner && !skip_update_health)
+		owner.update_health()
 	return update_damstate()
 
 // Brute/burn
@@ -260,7 +262,7 @@
 		lasting_pain += 5
 	var/tox_dam = 0
 	for(var/obj/item/organ/internal/I in internal_organs)
-		tox_dam += I.getToxLoss()
+		tox_dam += I.get_toxins_damage()
 	return pain + lasting_pain + 0.7 * brute_dam + 0.8 * burn_dam + 0.3 * tox_dam + 0.5 * get_genetic_damage()
 
 /obj/item/organ/external/proc/remove_pain(var/amount)
@@ -331,7 +333,7 @@
 	if(A)
 		B = A.brute_mult
 	if(!BP_IS_PROSTHETIC(src))
-		B *= species.get_brute_mod(owner)
+		B *= species.get_damage_modifier(owner, BRUTE)
 	var/blunt = !(damage_flags & DAM_EDGE|DAM_SHARP)
 	if(blunt && BP_IS_BRITTLE(src))
 		B *= 1.5
@@ -345,7 +347,7 @@
 	if(A)
 		B = A.burn_mult
 	if(!BP_IS_PROSTHETIC(src))
-		B *= species.get_burn_mod(owner)
+		B *= species.get_damage_modifier(owner, BURN)
 	if(BP_IS_CRYSTAL(src))
 		B *= 0.1
 	return B

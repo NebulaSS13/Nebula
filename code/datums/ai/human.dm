@@ -43,6 +43,6 @@
 
 		for(var/obj/item/organ/I in H.get_internal_organs())
 			if((I.status & ORGAN_DEAD) || BP_IS_PROSTHETIC(I)) continue
-			if(I.damage > 2) if(prob(2))
+			if(I.organ_damage > 2) if(prob(2))
 				var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(H, I.parent_organ)
 				H.custom_emote("clutches [G.his] [parent.name]!")

@@ -5,7 +5,7 @@
 /datum/breach
 	var/class = 0                           // Size. Lower is smaller. Uses floating point values!
 	var/descriptor                          // 'gaping hole' etc.
-	var/damtype = BURN                      // Punctured or melted
+	var/damtype = BURN // Punctured or melted
 	var/patched = FALSE
 	var/obj/item/clothing/suit/space/holder // Suit containing the list of breaches holding this instance.
 	var/static/list/breach_brute_descriptors = list(

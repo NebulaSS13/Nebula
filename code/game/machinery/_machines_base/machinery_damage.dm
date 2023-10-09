@@ -1,39 +1,36 @@
-/obj/machinery/proc/take_damage(amount, damtype = BRUTE, silent = FALSE)
+/obj/machinery/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	//Let's not bother initializing all the components for nothing
-	if(amount <= 0)
+	if(damage <= 0)
 		return
-	if(damtype != BRUTE && damtype != BURN && damtype != ELECTROCUTE)
+	var/decl/damage_handler/damage_type_data = GET_DECL(damtype)
+	if(!damage_type_data.applies_to_machinery)
 		return
 	if(!silent)
-		var/hitsound = 'sound/weapons/smash.ogg'
-		if(damtype == ELECTROCUTE)
-			hitsound = "sparks"
-		else if(damtype == BURN)
-			hitsound = 'sound/items/Welder.ogg'
-		playsound(src, hitsound, 10, 1)
+		if(damage_type_data?.machinery_hit_sound)
+			playsound(src, damage_type_data.machinery_hit_sound, 10, 1)
 
 	// Shielding components (armor/fuses) take first hit
 	var/list/shielding = get_all_components_of_type(/obj/item/stock_parts/shielding)
 	for(var/obj/item/stock_parts/shielding/soak in shielding)
 		if(soak.is_functional() && (damtype in soak.protection_types))
-			amount -= soak.take_damage(amount, damtype)
-	if(amount <= 0)
+			damage -= soak.take_damage(damage, damtype)
+	if(damage <= 0)
 		return
 
 	// If some damage got past, next it's generic (non-circuitboard) components
 	var/obj/item/stock_parts/victim = get_damageable_component(damtype)
-	while(amount > 0 && victim)
-		amount -= victim.take_damage(amount, damtype)
+	while(damage > 0 && victim)
+		damage -= victim.take_damage(damage, damtype)
 		victim = get_damageable_component(damtype)
-	if(amount <= 0)
+	if(damage <= 0)
 		return
 
 	// And lastly hit the circuitboard
 	victim = get_component_of_type(/obj/item/stock_parts/circuitboard)
 	if(victim?.can_take_damage() && victim.is_functional())
-		amount -= victim.take_damage(amount, damtype)
+		damage -= victim.take_damage(damage, damtype)
 
-	if(amount && (damtype == BRUTE || damtype == BURN))
+	if(damage && (damtype == BRUTE || damtype == BURN))
 		dismantle()
 
 /obj/machinery/proc/get_damageable_component(var/damage_type)
@@ -76,11 +73,11 @@
 		if((severity == 1 || (severity == 2 && prob(25))))
 			physically_destroyed()
 		else
-			take_damage(100/severity, BRUTE, TRUE)
+			take_damage(100/severity, BRUTE, silent = TRUE)
 
 /obj/machinery/bullet_act(obj/item/projectile/P, def_zone)
 	. = ..()
-	take_damage(P.damage, P.damage_type)
+	take_damage(P.damage, P.damage_type, damage_flags = P.damage_flags)
 
 /obj/machinery/bash(obj/item/W, mob/user)
 	if(!istype(W) || W.force <= 5 || (W.item_flags & ITEM_FLAG_NO_BLUDGEON))

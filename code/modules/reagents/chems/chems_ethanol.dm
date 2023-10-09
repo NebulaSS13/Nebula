@@ -40,7 +40,7 @@
 
 /decl/material/liquid/ethanol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	M.adjustToxLoss(removed * 2 * alcohol_toxicity)
+	M.take_damage(removed * 2 * alcohol_toxicity, TOX)
 	M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 
 /decl/material/liquid/ethanol/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -454,15 +454,15 @@
 
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose > 30)
-		M.adjustToxLoss(2 * removed)
+		M.take_damage(2 * removed, TOX)
 	if(dose > 60 && ishuman(M) && prob(5))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
 		if(heart)
 			if(dose < 120)
-				heart.take_internal_damage(10 * removed, 0)
+				heart.take_damage(10 * removed, TOX)
 			else
-				heart.take_internal_damage(100, 0)
+				heart.take_damage(100, TOX)
 
 /decl/material/liquid/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now
 	name = "aged whiskey"

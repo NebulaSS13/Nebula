@@ -143,11 +143,9 @@ Contains helper procs for airflow, called by /connection_group.
 		bloody_body(src)
 	var/b_loss = min(airflow_speed, (airborne_acceleration*2)) * vsc.airflow_damage
 
-	apply_damage(b_loss/3, BRUTE, BP_HEAD, used_weapon = "Airflow")
-
-	apply_damage(b_loss/3, BRUTE, BP_CHEST, used_weapon =  "Airflow")
-
-	apply_damage(b_loss/3, BRUTE, BP_GROIN, used_weapon =  "Airflow")
+	take_damage(b_loss/3, BRUTE, BP_HEAD, used_weapon = "Airflow")
+	take_damage(b_loss/3, BRUTE, BP_CHEST, used_weapon =  "Airflow")
+	take_damage(b_loss/3, BRUTE, BP_GROIN, used_weapon =  "Airflow")
 
 	if(airflow_speed > 10)
 		SET_STATUS_MAX(src, STAT_PARA, round(airflow_speed * vsc.airflow_stun))

@@ -118,8 +118,8 @@
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/deadcap)
 	outfit.equip_outfit(corpse)
 	var/corpse_health = corpse.get_max_health()
-	corpse.adjustOxyLoss(corpse_health)
-	corpse.setBrainLoss(corpse_health)
+	corpse.take_damage(corpse_health, OXY)
+	corpse.set_brain_damage(corpse_health)
 	corpse.death(FALSE, deathmessage = "no message", show_dead_message = FALSE)
 	var/obj/structure/bed/chair/C = locate() in T
 	if(C)

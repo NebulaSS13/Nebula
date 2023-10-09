@@ -1,5 +1,8 @@
-/datum/controller/subsystem/materials/get_armor_key(damage_type, damage_flags)
-	. = (damage_type == PSIONIC) ? PSIONIC : ..()
+/decl/damage_handler/psionic
+	name = "psionic"
+
+/decl/damage_handler/psionic/get_armor_key()
+	return DAM_PSIONIC
 
 /datum/extension/armor/psionic
 	expected_type = /datum/psi_complexus

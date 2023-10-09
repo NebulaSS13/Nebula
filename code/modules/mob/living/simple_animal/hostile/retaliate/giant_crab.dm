@@ -93,7 +93,7 @@
 			release_grab()
 			return
 		visible_message(SPAN_DANGER("\The [src] [pick(grab_desc)] \the [victim] in its pincer!"))
-		victim.apply_damage(grab_damage, BRUTE, BP_CHEST, DAM_EDGE, used_weapon = "crab's pincer")
+		victim.take_damage(grab_damage, BRUTE, BP_CHEST, DAM_EDGE, used_weapon = "crab's pincer")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/release_grab()
 	if(victim)

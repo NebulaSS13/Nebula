@@ -104,7 +104,7 @@
 /obj/effect/shield/proc/diffuse(var/duration)
 	// The shield is trying to counter diffusers. Cause lasting stress on the shield.
 	if(gen.check_flag(MODEFLAG_BYPASS) && !disabled_for)
-		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
+		take_damage(duration * rand(8, 12), ELECTROCUTE)
 		return
 
 	diffused_for = max(duration, 0)
@@ -130,34 +130,30 @@
 		// The closer we are to impact site, the longer it takes for shield to come back up.
 		S.fail(-(-range + get_dist(src, S)) * 2)
 
-/obj/effect/shield/proc/take_damage(var/damage, var/damtype, var/hitby)
+/obj/effect/shield/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	if(!gen)
 		qdel(src)
 		return
-
 	if(!damage)
 		return
-
 	damage = round(damage)
-
 	new /obj/effect/temporary(get_turf(src), 2 SECONDS,'icons/obj/machines/shielding.dmi',"shield_impact")
 	impact_effect(round(abs(damage * 2)))
-
 	var/list/field_segments = gen.field_segments
-	switch(gen.take_shield_damage(damage, damtype))
+	switch(gen.take_damage(damage, damage_type))
 		if(SHIELD_ABSORBED)
 			return
 		if(SHIELD_BREACHED_MINOR)
-			fail_adjacent_segments(rand(1, 3), hitby)
+			fail_adjacent_segments(rand(1, 3), used_weapon)
 			return
 		if(SHIELD_BREACHED_MAJOR)
-			fail_adjacent_segments(rand(2, 5), hitby)
+			fail_adjacent_segments(rand(2, 5), used_weapon)
 			return
 		if(SHIELD_BREACHED_CRITICAL)
-			fail_adjacent_segments(rand(4, 8), hitby)
+			fail_adjacent_segments(rand(4, 8), used_weapon)
 			return
 		if(SHIELD_BREACHED_FAILURE)
-			fail_adjacent_segments(rand(8, 16), hitby)
+			fail_adjacent_segments(rand(8, 16), used_weapon)
 			for(var/obj/effect/shield/S in field_segments)
 				S.fail(1)
 			return
@@ -181,30 +177,25 @@
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
 /obj/effect/shield/emp_act(var/severity)
 	if(!disabled_for)
-		take_damage(rand(30,60) / severity, SHIELD_DAMTYPE_EM)
+		take_damage(rand(30,60) / severity, ELECTROCUTE)
 
 
 // Explosions
 /obj/effect/shield/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(FALSE)
 	if(!disabled_for)
-		take_damage(rand(10,15) / severity, SHIELD_DAMTYPE_PHYSICAL)
+		take_damage(rand(10,15) / severity, BRUTE)
 
 
 // Fire
 /obj/effect/shield/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	SHOULD_CALL_PARENT(FALSE)
 	if(!disabled_for)
-		take_damage(rand(5,10), SHIELD_DAMTYPE_HEAT)
+		take_damage(rand(5,10), BURN)
 
 // Projectiles
 /obj/effect/shield/bullet_act(var/obj/item/projectile/proj)
-	if(proj.damage_type == BURN)
-		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_HEAT)
-	else if (proj.damage_type == BRUTE)
-		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_PHYSICAL)
-	else
-		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_EM)
+	take_damage(proj.get_structure_damage(), proj.damage_type, damage_flags = proj.damage_flags)
 
 // Attacks with hand tools. Blocked by Hyperkinetic flag.
 /obj/effect/shield/attackby(var/obj/item/I, var/mob/user)
@@ -213,12 +204,7 @@
 
 	if(gen.check_flag(MODEFLAG_HYPERKINETIC))
 		user.visible_message("<span class='danger'>\The [user] [pick(I.attack_verb)] \the [src] with \the [I]!</span>")
-		if(I.damtype == BURN)
-			take_damage(I.force, SHIELD_DAMTYPE_HEAT)
-		else if (I.damtype == BRUTE)
-			take_damage(I.force, SHIELD_DAMTYPE_PHYSICAL)
-		else
-			take_damage(I.force, SHIELD_DAMTYPE_EM)
+		take_damage(I.force, I.damtype)
 		if(gen.check_flag(MODEFLAG_OVERCHARGE) && (I.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			overcharge_shock(user)
 	else
@@ -236,10 +222,10 @@
 
 
 /obj/effect/shield/proc/overcharge_shock(var/mob/living/M)
-	M.adjustFireLoss(rand(20, 40))
+	M.take_damage(rand(20, 40), BURN)
 	SET_STATUS_MAX(M, STAT_WEAK, 5)
 	to_chat(M, "<span class='danger'>As you come into contact with \the [src] a surge of energy paralyses you!</span>")
-	take_damage(10, SHIELD_DAMTYPE_EM)
+	take_damage(10, ELECTROCUTE)
 
 // Called when a flag is toggled. Can be used to add on-toggle behavior, such as visual changes.
 /obj/effect/shield/proc/flags_updated()
@@ -301,7 +287,7 @@
 /obj/effect/meteor/shield_impact(var/obj/effect/shield/S)
 	if(!S.gen.check_flag(MODEFLAG_HYPERKINETIC))
 		return
-	S.take_damage(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, src)
+	S.take_damage(get_shield_damage(), BRUTE)
 	visible_message("<span class='danger'>\The [src] breaks into dust!</span>")
 	make_debris()
 	qdel(src)

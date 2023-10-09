@@ -42,12 +42,11 @@
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/handle_living_non_stasis_processes()
 	. = ..()
-	if(!.)
-		return FALSE
-	regen_time++
-	if(regen_time == 2 && current_health < get_max_health()) //slow regen
-		regen_time = 0
-		heal_overall_damage(1)
+	if(.)
+		regen_time++
+		if(regen_time == 2 && current_health < get_max_health()) //slow regen
+			regen_time = 0
+			heal_damage(1, BRUTE)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/death(gibbed, deathmessage, show_dead_message)
 	..(null, "dissipates into thin air", "You have been destroyed.")
@@ -74,9 +73,9 @@
 		stance = COMMANDED_HEAL
 		return 0
 	src.visible_message("\The [src] glows green for a moment, healing \the [target_mob]'s wounds.")
-	adjustBruteLoss(3)
-	target_mob.adjustBruteLoss(-5, do_update_health = FALSE)
-	target_mob.adjustFireLoss(-5)
+	current_health -= 3
+	target_mob.heal_damage(5, BRUTE)
+	target_mob.heal_damage(5, BURN)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/misc_command(var/mob/speaker,var/text)
 	if(stance != COMMANDED_HEAL || stance != COMMANDED_HEALING) //dont want attack to bleed into heal.

@@ -15,9 +15,20 @@
 	max_health = 30
 
 	var/regen_rate = 5
-	var/brute_resist = 4.3
-	var/fire_resist = 0.8
-	var/laser_resist = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
+
+	// TODO: make blobs use either damage handlers or an armour extension (or both?).
+	var/list/blob_damage_resistance = list(
+		ARMOR_BULLET = 4.3,
+		ARMOR_BOMB   = 4.3,
+		ARMOR_MELEE  = 4.3,
+		ARMOR_LASER  = 2,
+		ARMOR_ENERGY = 0.8
+	)
+	var/static/list/blob_damage_immunity = list(
+		ARMOR_RAD,
+		ARMOR_BIO
+	)
+
 	var/expandType = /obj/effect/blob
 	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
 	var/damage_min = 15
@@ -42,7 +53,7 @@
 
 /obj/effect/blob/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(FALSE)
-	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_resist)
+	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)), BRUTE)
 
 /obj/effect/blob/on_update_icon()
 	if(health > max_health / 2)
@@ -56,7 +67,19 @@
 		return
 	attempt_attack(global.alldirs)
 
-/obj/effect/blob/proc/take_damage(var/damage)
+/obj/effect/blob/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
+
+	var/decl/damage_handler/damage_type_data = GET_DECL(damage_type)
+	var/armor_key = damage_type_data?.get_armor_key(damage_flags)
+	if(armor_key in blob_damage_immunity)
+		return FALSE
+
+	if(armor_key in blob_damage_resistance)
+		damage = round(damage / blob_damage_resistance[armor_key])
+
+	if(damage <= 0)
+		return FALSE
+
 	health -= damage
 	if(health < 0)
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -73,7 +96,7 @@
 		return
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/SW = T
-		SW.take_damage(80)
+		SW.take_damage(80, BRUTE)
 		return
 	var/obj/structure/girder/G = locate() in T
 	if(G)
@@ -107,7 +130,7 @@
 		return
 	var/obj/machinery/camera/CA = locate() in T
 	if(CA)
-		CA.take_damage(30)
+		CA.take_damage(30, BRUTE)
 		return
 
 	// Above things, we destroy completely and thus can use locate. Mobs are different.
@@ -137,10 +160,9 @@
 /obj/effect/blob/proc/attack_living(var/mob/L)
 	if(!L)
 		return
-	var/blob_damage = pick(BRUTE, BURN)
 	L.visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [L]!"), SPAN_DANGER("A tendril flies out from \the [src] and smashes into you!"))
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-	L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
+	L.take_damage(rand(damage_min, damage_max), pick(BRUTE, BURN), used_weapon = "blob tendril")
 
 /obj/effect/blob/proc/attempt_attack(var/list/dirs)
 	var/attackDir = pick(dirs)
@@ -149,17 +171,6 @@
 		if(victim.stat == DEAD)
 			continue
 		attack_living(victim)
-
-/obj/effect/blob/bullet_act(var/obj/item/projectile/Proj)
-	if(!Proj)
-		return
-
-	switch(Proj.damage_type)
-		if(BRUTE)
-			take_damage(Proj.damage / brute_resist)
-		if(BURN)
-			take_damage((Proj.damage / laser_resist) / fire_resist)
-	return 0
 
 /obj/effect/blob/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -179,17 +190,9 @@
 				to_chat(user, SPAN_WARNING("\The [src] has already been pruned."))
 				return
 
-	var/damage = 0
-	switch(W.damtype)
-		if(BURN)
-			damage = (W.force / fire_resist)
-			if(IS_WELDER(W))
-				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-		if(BRUTE)
-			damage = (W.force / brute_resist)
-
-	take_damage(damage)
-	return
+	take_damage(W.force, W.damtype)
+	if(IS_WELDER(W) && W.damtype == BURN)
+		playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 
 /obj/effect/blob/core
 	name = "master nucleus"
@@ -219,28 +222,36 @@ regen() will cover update_icon() for this proc
 /obj/effect/blob/core/proc/process_core_health()
 	switch(get_health_percent())
 		if(75 to INFINITY)
-			brute_resist = 3.5
-			fire_resist = 2
+			blob_damage_resistance[ARMOR_BULLET] = 3.5
+			blob_damage_resistance[ARMOR_MELEE]  = 3.5
+			blob_damage_resistance[ARMOR_BOMB]   = 3.5
+			blob_damage_resistance[ARMOR_ENERGY] = 2
 			attack_freq = 5
 			regen_rate = 2
 			times_to_pulse = 4
 			if(reported_low_damage)
 				report_shield_status("high")
 		if(50 to 74)
-			brute_resist = 2.5
-			fire_resist = 1.5
+			blob_damage_resistance[ARMOR_BULLET] = 2.5
+			blob_damage_resistance[ARMOR_MELEE]  = 2.5
+			blob_damage_resistance[ARMOR_BOMB]   = 2.5
+			blob_damage_resistance[ARMOR_ENERGY] = 1.5
 			attack_freq = 4
 			regen_rate = 3
 			times_to_pulse = 3
 		if(34 to 49)
-			brute_resist = 1
-			fire_resist = 0.8
+			blob_damage_resistance[ARMOR_BULLET] = 1
+			blob_damage_resistance[ARMOR_MELEE]  = 1
+			blob_damage_resistance[ARMOR_BOMB]   = 1
+			blob_damage_resistance[ARMOR_ENERGY] = 0.8
 			attack_freq = 3
 			regen_rate = 4
 			times_to_pulse = 2
 		if(-INFINITY to 33)
-			brute_resist = 0.5
-			fire_resist = 0.3
+			blob_damage_resistance[ARMOR_BULLET] = 0.5
+			blob_damage_resistance[ARMOR_MELEE]  = 0.5
+			blob_damage_resistance[ARMOR_BOMB]   = 0.5
+			blob_damage_resistance[ARMOR_ENERGY] = 0.3
 			regen_rate = 5
 			times_to_pulse = 1
 			if(!reported_low_damage)

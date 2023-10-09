@@ -50,7 +50,7 @@
 	occupant.apply_effect(6, STUN, blocked)
 	occupant.apply_effect(6, WEAKEN, blocked)
 	occupant.apply_effect(6, STUTTER, blocked)
-	occupant.apply_damage(10, BRUTE, def_zone)
+	occupant.take_damage(10, BRUTE, def_zone)
 	playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
 	if(isliving(A))
 		var/mob/living/victim = A
@@ -59,7 +59,7 @@
 		victim.apply_effect(6, STUN, blocked)
 		victim.apply_effect(6, WEAKEN, blocked)
 		victim.apply_effect(6, STUTTER, blocked)
-		victim.apply_damage(10, BRUTE, def_zone)
+		victim.take_damage(10, BRUTE, def_zone)
 	occupant.visible_message(SPAN_DANGER("\The [occupant] crashed into \the [A]!"))
 
 /obj/structure/bed/chair/wheelchair/proc/create_track()

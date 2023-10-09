@@ -43,7 +43,7 @@
 	else
 		_brainmob = null
 
-/obj/item/organ/internal/brain/getToxLoss()
+/obj/item/organ/internal/brain/get_toxins_damage()
 	return 0
 
 /obj/item/organ/internal/brain/set_species(species_name)
@@ -100,7 +100,7 @@
 	alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 
 /obj/item/organ/internal/brain/organ_can_heal()
-	return (damage && GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN)) || ..()
+	return (organ_damage && GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN)) || ..()
 
 /obj/item/organ/internal/brain/get_organ_heal_amount()
 	return 1
@@ -108,7 +108,7 @@
 /obj/item/organ/internal/brain/Process()
 	if(owner)
 
-		if(damage < (max_damage / 4))
+		if(organ_damage < (max_damage / 4))
 			should_announce_brain_damage = TRUE
 
 		handle_disabilities()
@@ -136,12 +136,12 @@
 							to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
 						damprob = stability_effect ? 30 : 60
 						if(!past_damage_threshold(2) && prob(damprob))
-							take_internal_damage(1)
+							take_damage(1, OXY)
 					if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
 						damprob = stability_effect ? 40 : 80
 						if(!past_damage_threshold(4) && prob(damprob))
-							take_internal_damage(1)
+							take_damage(1, OXY)
 						if(!HAS_STATUS(owner, STAT_PARA) && prob(10))
 							SET_STATUS_MAX(owner, STAT_PARA, rand(1,3))
 							to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
@@ -149,7 +149,7 @@
 						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
 						damprob = stability_effect ? 60 : 100
 						if(!past_damage_threshold(6) && prob(damprob))
-							take_internal_damage(1)
+							take_damage(1, OXY)
 						if(!HAS_STATUS(owner, STAT_PARA) && prob(15))
 							SET_STATUS_MAX(owner, STAT_PARA, rand(3,5))
 							to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
@@ -157,12 +157,12 @@
 						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
 						damprob = stability_effect ? 80 : 100
 						if(prob(damprob))
-							take_internal_damage(1)
+							take_damage(1, OXY)
 						if(prob(damprob))
-							take_internal_damage(1)
+							take_damage(1, OXY)
 	..()
 
-/obj/item/organ/internal/brain/take_internal_damage(var/damage, var/silent)
+/obj/item/organ/internal/brain/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	..()
 	if(damage >= 10) //This probably won't be triggered by oxyloss or mercury. Probably.
 		var/damage_secondary = damage * 0.20
@@ -199,7 +199,7 @@
 /obj/item/organ/internal/brain/handle_damage_effects()
 	..()
 
-	if(damage >= round(max_damage / 2) && should_announce_brain_damage)
+	if(organ_damage >= round(max_damage / 2) && should_announce_brain_damage)
 		handle_severe_damage()
 
 	if(!BP_IS_PROSTHETIC(src) && prob(1))
@@ -208,10 +208,10 @@
 		to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")
 		owner.set_status(STAT_BLURRY, 10)
 	var/held = owner.get_active_hand()
-	if(damage >= 0.5*max_damage && prob(1) && held)
+	if(organ_damage >= 0.5*max_damage && prob(1) && held)
 		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
 		owner.try_unequip(held)
-	if(damage >= 0.6*max_damage)
+	if(organ_damage >= 0.6*max_damage)
 		SET_STATUS_MAX(owner, STAT_SLUR, 2)
 	if(is_broken())
 		if(!owner.lying)
@@ -222,8 +222,8 @@
 	var/blood_volume = owner.get_blood_oxygenation()
 	if(blood_volume < BLOOD_VOLUME_SURVIVE)
 		to_chat(user, SPAN_DANGER("Parts of \the [src] didn't survive the procedure due to lack of air supply!"))
-		set_max_damage(FLOOR(max_damage - 0.25*damage))
-	heal_damage(damage)
+		set_max_damage(FLOOR(max_damage - 0.25*organ_damage))
+	heal_damage(organ_damage, TOX)
 
 /obj/item/organ/internal/brain/get_scarring_level()
 	. = (species.total_health - max_damage)/species.total_health

@@ -186,7 +186,7 @@
 
 	if(owner && burn_damage)
 		owner.custom_pain("Something inside your [src] burns a [severity < 2 ? "bit" : "lot"]!", power * 15) //robotic organs won't feel it anyway
-		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
+		take_damage(burn_damage, BURN, used_weapon = "Hot metal")
 		check_pain_disarm()
 
 	if(owner && (limb_flags & ORGAN_FLAG_CAN_STAND))
@@ -430,8 +430,7 @@
 		owner.verbs -= /mob/living/carbon/human/proc/undislocate
 
 /obj/item/organ/external/update_organ_health()
-	damage = min(max_damage, (brute_dam + burn_dam))
-	return
+	organ_damage = min(max_damage, (brute_dam + burn_dam))
 
 //If "in_place" is TRUE will make organs skip their install/uninstall effects and  the sub-limbs and internal organs
 /obj/item/organ/external/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
@@ -568,9 +567,7 @@
 		to_chat(user, SPAN_WARNING("You must stand still to do that."))
 		return 0
 
-	switch(damage_type)
-		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
-		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
+	heal_damage(repair_amount, damage_type) // todo robo repair
 	owner.try_refresh_visible_overlays()
 	if(user == src.owner)
 		var/decl/pronouns/G = user.get_pronouns()
@@ -626,19 +623,19 @@ This function completely restores a damaged organ to perfect condition.
 		I.remove_rejuv()
 	..()
 
-/obj/item/organ/external/proc/createwound(var/type = CUT, var/damage, var/surgical)
+/obj/item/organ/external/proc/createwound(var/type = WOUND_CUT, var/damage, var/surgical)
 
 	if(!owner || damage <= 0)
 		return
 
 	if(BP_IS_CRYSTAL(src) && (damage >= 15 || prob(1)))
-		type = SHATTER
+		type = WOUND_SHATTER
 		playsound(loc, 'sound/effects/hit_on_shattered_glass.ogg', 40, 1) // Crash!
 
 	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Brute damage can possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
-	if(!surgical && (type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30)
+	if(!surgical && (type in list(WOUND_CUT, WOUND_PIERCE, WOUND_BRUISE)) && damage > 15 && local_damage > 30)
 
 		var/internal_damage
 		if(prob(damage) && sever_artery())
@@ -649,17 +646,17 @@ This function completely restores a damaged organ to perfect condition.
 			owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)
 
 	//Burn damage can cause fluid loss due to blistering and cook-off
-	if((type in list(BURN, LASER)) && (damage > 5 || damage + burn_dam >= 15) && !BP_IS_PROSTHETIC(src))
+	if((type in list(WOUND_BURN, WOUND_LASER)) && (damage > 5 || damage + burn_dam >= 15) && !BP_IS_PROSTHETIC(src))
 		var/fluid_loss_severity
 		switch(type)
-			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
-			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
+			if(WOUND_BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
+			if(WOUND_LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
 		var/fluid_loss = (damage/(owner.get_max_health() - get_config_value(/decl/config/num/health_health_threshold_dead))) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
 	if(!surgical && LAZYLEN(wounds) && prob(max(50+(number_wounds-1)*10,90)))
-		if((type == CUT || type == BRUISE) && damage >= 5)
+		if((type == WOUND_CUT || type == WOUND_BRUISE) && damage >= 5)
 			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
 			var/list/compatible_wounds = list()
 			for (var/datum/wound/W in wounds)
@@ -725,7 +722,7 @@ This function completely restores a damaged organ to perfect condition.
 		return TRUE
 
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.getToxLoss())
+		if(I.get_toxins_damage())
 			return TRUE
 
 	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
@@ -847,7 +844,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			owner.update_body(1)
 
 		germ_level++
-		owner.adjustToxLoss(1)
+		owner.take_damage(1, TOX)
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /obj/item/organ/external/proc/update_wounds()
@@ -890,10 +887,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 		// making it look prettier on scanners
 		heal_amt = round(heal_amt,0.1)
 		var/dam_type = BRUTE
-		if(W.damage_type == BURN)
+		if(W.wound_type == WOUND_BURN)
 			dam_type = BURN
 		if(owner?.can_autoheal(dam_type))
-			W.heal_damage(heal_amt)
+			W.heal_wound_damage(heal_amt)
 
 	// sync the organ's damage with its wounds
 	update_damages()
@@ -923,7 +920,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			qdel(W)
 			continue
 
-		if(W.damage_type == BURN)
+		if(W.wound_type == WOUND_BURN)
 			burn_dam += W.damage
 		else
 			brute_dam += W.damage
@@ -935,7 +932,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		clamped |= W.clamped
 		number_wounds += W.amount
 
-	damage = brute_dam + burn_dam
+	organ_damage = brute_dam + burn_dam
 	update_damage_ratios()
 
 /obj/item/organ/external/proc/update_damage_ratios()
@@ -1328,11 +1325,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	if(!supplied_wound)
 		for(var/datum/wound/wound in wounds)
-			if((wound.damage_type == CUT || wound.damage_type == PIERCE) && wound.damage >= W.w_class * 5)
+			if((wound.wound_type == WOUND_CUT || wound.wound_type == WOUND_PIERCE) && wound.damage >= W.w_class * 5)
 				supplied_wound = wound
 				break
 	if(!supplied_wound)
-		supplied_wound = createwound(PIERCE, W.w_class * 5)
+		supplied_wound = createwound(WOUND_PIERCE, W.w_class * 5)
 
 	if(!supplied_wound || (W in supplied_wound.embedded_objects)) // Just in case.
 		return
@@ -1499,7 +1496,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(LAZYLEN(internal_organs) && prob(brute_dam + force))
 		owner.custom_pain("A piece of bone in your [encased ? encased : name] moves painfully!", 50, affecting = src)
 		var/obj/item/organ/internal/I = pick(internal_organs)
-		I.take_internal_damage(rand(3,5))
+		I.take_damage(rand(3,5), BRUTE)
 
 /obj/item/organ/external/proc/jointlock(mob/attacker)
 	if(!can_feel_pain())
@@ -1510,7 +1507,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		to_chat(owner, "<span class='danger'>You feel extreme pain!</span>")
 
 		var/max_halloss = round(owner.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
-		add_pain(clamp(0, max_halloss - owner.getHalLoss(), 30))
+		add_pain(clamp(0, max_halloss - owner.get_damage(PAIN), 30))
 
 //Adds autopsy data for used_weapon.
 /obj/item/organ/external/proc/add_autopsy_data(var/used_weapon, var/damage)
@@ -1541,7 +1538,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	else if(status & ORGAN_BROKEN)
 		. += max_delay * 3/8
 	else if(BP_IS_PROSTHETIC(src))
-		. += max_delay * CLAMP01(damage/max_damage)
+		. += max_delay * CLAMP01(organ_damage/max_damage)
 
 /obj/item/organ/external/proc/is_robotic()
 	return bodytype.is_robotic
@@ -1556,7 +1553,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/die() //External organs dying on a dime causes some real issues in combat
 	if(!BP_IS_PROSTHETIC(src) && !BP_IS_CRYSTAL(src))
-		var/decay_rate = damage/(max_damage*2)
+		var/decay_rate = organ_damage/(max_damage*2)
 		germ_level += round(rand(decay_rate,decay_rate*1.5)) //So instead, we're going to say the damage is so severe its functions are slowly failing due to the extensive damage
 	else //TODO: more advanced system for synths
 		if(istype(src,/obj/item/organ/external/chest) || istype(src,/obj/item/organ/external/groin))

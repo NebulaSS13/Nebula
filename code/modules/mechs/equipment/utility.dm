@@ -463,7 +463,7 @@
 	mech_cell.use(active_power_use * CELLRATE) //supercall made sure we have one
 
 	var/delay = 3 SECONDS //most things
-	switch (drill_head.material.brute_armor)
+	switch (drill_head.material.wall_armor[BRUTE])
 		if (15 to INFINITY) delay = 0.5 SECONDS //voxalloy on a good roll
 		if (10 to 15) delay = 1 SECOND //titanium, diamond
 		if (5 to 10) delay = 2 SECONDS //plasteel, steel

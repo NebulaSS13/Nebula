@@ -29,7 +29,7 @@
 	return color != last_colour
 
 /obj/item/mech_component/emp_act(var/severity)
-	take_burn_damage(rand((10 - (severity*3)),15-(severity*4)))
+	take_damage(rand((10 - (severity*3)),15-(severity*4)), BURN)
 	for(var/obj/item/thing in contents)
 		thing.emp_act(severity)
 
@@ -69,33 +69,22 @@
 /obj/item/mech_component/proc/ready_to_install()
 	return 1
 
-/obj/item/mech_component/proc/repair_brute_damage(var/amt)
-	take_brute_damage(-amt)
-
-/obj/item/mech_component/proc/repair_burn_damage(var/amt)
-	take_burn_damage(-amt)
-
-/obj/item/mech_component/proc/take_brute_damage(var/amt)
-	brute_damage = max(0, brute_damage + amt)
+/obj/item/mech_component/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
+	if(damage_type == BRUTE)
+		brute_damage = max(0, brute_damage + damage)
+	else if(damage_type == BURN)
+		burn_damage = max(0, burn_damage + damage)
+	else
+		return FALSE
 	update_component_health()
-	if(total_damage == max_damage)
-		take_component_damage(amt,0)
-
-/obj/item/mech_component/proc/take_burn_damage(var/amt)
-	burn_damage = max(0, burn_damage + amt)
-	update_component_health()
-	if(total_damage == max_damage)
-		take_component_damage(0,amt)
-
-/obj/item/mech_component/proc/take_component_damage(var/brute, var/burn)
+	if(total_damage < max_damage)
+		return TRUE
 	var/list/damageable_components = list()
 	for(var/obj/item/robot_parts/robot_component/RC in contents)
 		damageable_components += RC
 	if(!damageable_components.len) return
 	var/obj/item/robot_parts/robot_component/RC = pick(damageable_components)
-	if(RC.take_damage(brute, BRUTE) || RC.take_damage(burn, BURN))
-		qdel(RC)
-		update_components()
+	RC.take_damage(damage, damage_type, def_zone, damage_flags, used_weapon, armor_pen, silent, override_droplimb, skip_update_health)
 
 /obj/item/mech_component/attackby(var/obj/item/thing, var/mob/user)
 	if(IS_SCREWDRIVER(thing))
@@ -149,7 +138,7 @@
 		)
 		var/repair_value = 10 * max(user.get_skill_value(SKILL_CONSTRUCTION), user.get_skill_value(SKILL_DEVICES))
 		if(user.do_skilled(10, SKILL_DEVICES , src, 0.6) && brute_damage)
-			repair_brute_damage(repair_value)
+			heal_damage(repair_value, BRUTE)
 			to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]."))
 			playsound(user.loc, 'sound/items/Welder.ogg', 25, 1)
 
@@ -171,7 +160,7 @@
 		if(QDELETED(CC) || QDELETED(src) || !CC.use(needed_amount))
 			return
 
-		repair_burn_damage(25)
+		heal_damage(25, BURN)
 		to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]'s wiring."))
 		playsound(user.loc, 'sound/items/Deconstruct.ogg', 25, 1)
 	return

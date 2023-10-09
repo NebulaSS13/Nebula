@@ -44,7 +44,7 @@
 		if(L.increaseBodyTemp(temp_incr))
 			continue
 
-		L.adjustFireLoss(fire_loss)
+		L.take_damage(fire_loss, BURN)
 
 
 /datum/event/solar_storm/end()

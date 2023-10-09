@@ -16,8 +16,10 @@
 	boiling_point = null
 	ignition_point = null
 	weight = MAT_VALUE_VERY_LIGHT
-	brute_armor = 1
-	burn_armor = 2
+	wall_armor = list(
+		BRUTE = 1,
+		BURN  = 2
+	)
 	table_icon_base = "solid"
 	destruction_desc = "shatters"
 	hitsound = 'sound/effects/Glasshit.ogg'
@@ -42,8 +44,10 @@
 	hardness = MAT_VALUE_HARD
 	weight = MAT_VALUE_LIGHT
 	integrity = 70
-	brute_armor = 2
-	burn_armor = 5
+	wall_armor = list(
+		BRUTE = 2,
+		BURN  = 5
+	)
 	melting_point = 4274
 	color = GLASS_COLOR_SILICATE
 	stack_origin_tech = @'{"materials":4}'

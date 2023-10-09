@@ -17,7 +17,7 @@
 		if(E && istype(E) && !E.is_broken())
 			ADJ_STATUS(M, STAT_BLURRY, -5)
 			ADJ_STATUS(M, STAT_BLIND, -5)
-			E.damage = max(E.damage - 5 * removed, 0)
+			E.organ_damage = max(E.organ_damage - 5 * removed, 0)
 
 /decl/material/liquid/antirads
 	name = "antirads"
@@ -33,7 +33,7 @@
 	uid = "chem_antirads"
 
 /decl/material/liquid/antirads/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.radiation = max(M.radiation - 30 * removed, 0)
+	M.heal_damage(30 * removed, IRRADIATE)
 
 /decl/material/liquid/brute_meds
 	name = "styptic powder"
@@ -64,7 +64,7 @@
 /decl/material/liquid/brute_meds/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
-	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.getBruteLoss())))
+	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.get_damage(BRUTE))))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /decl/material/liquid/burn_meds
@@ -83,7 +83,7 @@
 /decl/material/liquid/burn_meds/affect_blood(mob/living/M, removed, var/datum/reagents/holder)
 	..()
 	M.add_stressor(/datum/stressor/used_chems, 5 MINUTES)
-	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.getFireLoss())))
+	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.get_damage(BURN))))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 #undef ADJUSTED_REGEN_VAL
 
@@ -262,7 +262,7 @@
 				E.limb_flags |= ORGAN_FLAG_DEFORMED
 
 /decl/material/liquid/retrovirals/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.adjustCloneLoss(-20 * removed)
+	M.heal_damage(20 * removed, CLONE)
 	if(LAZYACCESS(M.chem_doses, type) > 10)
 		ADJ_STATUS(M, STAT_DIZZY, 5)
 		ADJ_STATUS(M, STAT_JITTER, 5)
@@ -304,7 +304,7 @@
 			var/mob/living/carbon/human/H = M
 			if(H.resuscitate())
 				var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(H, BP_HEART)
-				heart.take_internal_damage(heart.max_damage * 0.15)
+				heart.take_damage(heart.max_damage * 0.15, TOX)
 
 /decl/material/liquid/stabilizer
 	name = "stabilizer"
@@ -404,7 +404,7 @@
 /decl/material/liquid/clotting_agent/affect_overdose(var/mob/living/M)
 	var/obj/item/organ/internal/heart = GET_INTERNAL_ORGAN(M, BP_HEART)
 	if(heart && prob(25))
-		heart.take_general_damage(rand(1,3))
+		heart.take_damage(rand(1,3), TOX)
 	return ..()
 
 #define DETOXIFIER_EFFECTIVENESS 6 // 6u of opiates removed per 1u of detoxifier; 5u is enough to remove 30u, i.e. an overdose

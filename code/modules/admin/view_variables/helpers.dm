@@ -15,19 +15,20 @@
 		"}
 
 /mob/living/get_view_variables_header()
-	return {"
-		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
-		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
-		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
-		<br>
-		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BRUTE]'>[getBruteLoss()]</a>
-		FIRE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BURN]'>[getFireLoss()]</a>
-		TOXIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[TOX]'>[getToxLoss()]</a>
-		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[OXY]'>[getOxyLoss()]</a>
-		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[CLONE]'>[getCloneLoss()]</a>
-		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BP_BRAIN]'>[getBrainLoss()]</a>
-		</font>
-		"}
+	. = list(
+		"<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>",
+		"<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>",
+		"<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>"
+	)
+
+	var/list/damage_strings = list()
+	for(var/damage_type in _damage_values)
+		var/decl/damage_handler/damage_type_data = resolve_damage_handler(damage_type)
+		if(!damage_type_data?.allow_modification_in_vv)
+			continue
+		damage_strings += "[uppertext(damage_type_data.name)]:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=\ref[damage_type_data]'>[get_damage(damage_type)]</a>"
+	. = "[jointext(., "<br>")]<br>[jointext(damage_strings, " ")]</font>"
+
 
 // Same for these as for get_view_variables_header() above
 /datum/proc/get_view_variables_options()

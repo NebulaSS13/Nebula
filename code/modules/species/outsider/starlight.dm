@@ -137,11 +137,13 @@
 	hunger_factor = 0
 	breath_type = null
 
-	burn_mod = 10
-	brute_mod = 0
-	oxy_mod = 0
-	toxins_mod = 0
-	radiation_mod = 0
+	damage_modifiers = list(
+		BURN        = 10,
+		BRUTE       = 0,
+		TOX       = 0,
+		IRRADIATE   = 0,
+		OXY = 0
+	)
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 
 /decl/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)

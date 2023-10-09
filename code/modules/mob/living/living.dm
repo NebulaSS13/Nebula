@@ -1,6 +1,7 @@
 /mob/living/Initialize()
 
 	current_health = get_max_health()
+	setup_damage_types()
 	original_fingerprint_seed = sequential_id(/mob)
 	fingerprint               = md5(num2text(original_fingerprint_seed))
 	original_genetic_seed     = sequential_id(/mob)
@@ -129,7 +130,7 @@ default behaviour is:
 					SET_STATUS_MAX(src, STAT_WEAK, 2)
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
-					src.apply_damage(5, BRUTE)
+					take_damage(5, BRUTE)
 				return
 			if (!now_pushing)
 				now_pushing = 1
@@ -188,7 +189,7 @@ default behaviour is:
 	set hidden = 1
 	var/current_max_health = get_max_health()
 	if (current_health < (current_max_health/2)) // Health below half of maxhealth.
-		adjustBrainLoss(current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
+		adjust_brain_damage(current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
 		to_chat(src, SPAN_NOTICE("You have given up life and succumbed to death."))
 
 /mob/living/proc/update_body(var/update_icons=1)
@@ -199,7 +200,9 @@ default behaviour is:
 	return current_health <= 0
 
 /mob/living/proc/get_total_life_damage()
-	return (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
+	. = 0
+	for(var/damage_type in get_lethal_damage_types())
+		. += get_damage(damage_type)
 
 /mob/living/proc/update_health()
 	SHOULD_CALL_PARENT(TRUE)
@@ -229,7 +232,6 @@ default behaviour is:
 	var/difference = abs(actual-desired)	//get difference
 	var/increments = difference/10 //find how many increments apart they are
 	var/change = increments*incrementboost	// Get the amount to change by (x per increment)
-
 	// Too cold
 	if(actual < desired)
 		btemperature += change
@@ -240,78 +242,7 @@ default behaviour is:
 		btemperature -= change
 		if(actual < desired)
 			btemperature = desired
-//	if(ishuman(src))
-//		log_debug("[src] ~ [src.bodytemperature] ~ [temperature]")
-
 	return btemperature
-
-/mob/living/proc/setBruteLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
-
-/mob/living/proc/getBruteLoss()
-	return get_max_health() - current_health
-
-/mob/living/proc/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(do_update_health)
-		update_health()
-
-/mob/living/proc/getOxyLoss()
-	return 0
-
-/mob/living/proc/adjustOxyLoss(var/damage, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(do_update_health)
-		update_health()
-
-/mob/living/proc/setOxyLoss(var/amount)
-	return
-
-/mob/living/proc/getToxLoss()
-	return 0
-
-/mob/living/proc/adjustToxLoss(var/amount, var/do_update_health = TRUE)
-	adjustBruteLoss(amount * 0.5, do_update_health)
-
-/mob/living/proc/setToxLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
-
-/mob/living/proc/getFireLoss()
-	return
-
-/mob/living/proc/adjustFireLoss(var/amount, var/do_update_health = TRUE)
-	adjustBruteLoss(amount * 0.5, do_update_health)
-
-/mob/living/proc/setFireLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
-
-/mob/living/proc/getHalLoss()
-	return 0
-
-/mob/living/proc/adjustHalLoss(var/amount, var/do_update_health = TRUE)
-	adjustBruteLoss(amount * 0.5, do_update_health)
-
-/mob/living/proc/setHalLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
-
-/mob/living/proc/adjustBrainLoss(var/amount, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(do_update_health)
-		update_health()
-
-/mob/living/proc/setBrainLoss(var/amount)
-	return
-
-/mob/living/proc/getCloneLoss()
-	return 0
-
-/mob/living/proc/setCloneLoss(var/amount)
-	return
-
-/mob/living/proc/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(do_update_health)
-		update_health()
 
 /mob/living/proc/get_health_ratio() // ratio might be the wrong word
 	return current_health/get_max_health()
@@ -370,33 +301,8 @@ default behaviour is:
 	var/obj/item/organ/external/def_zone = ran_zone(t, target = src)
 	return def_zone
 
-
-// heal ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
-	adjustBruteLoss(-brute, do_update_health = FALSE)
-	adjustFireLoss(-burn, do_update_health = update_health)
-
-// damage ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
-	if(status_flags & GODMODE)
-		return
-	adjustBruteLoss(brute, do_update_health = FALSE)
-	adjustFireLoss(burn)
-
-// heal MANY external organs, in random order
-/mob/living/proc/heal_overall_damage(var/brute, var/burn)
-	adjustBruteLoss(-brute, do_update_health = FALSE)
-	adjustFireLoss(-burn)
-
-// damage MANY external organs, in random order
-/mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
-	if(status_flags & GODMODE)	return 0	//godmode
-	adjustBruteLoss(brute, do_update_health = FALSE)
-	adjustFireLoss(burn)
-
 /mob/living/proc/restore_all_organs()
 	return
-
 
 /mob/living/carbon/revive()
 	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
@@ -421,24 +327,24 @@ default behaviour is:
 		reagent_list.clear_reagents()
 
 	// shut down various types of badness
-	setToxLoss(0)
-	setOxyLoss(0)
-	setCloneLoss(0)
-	setBrainLoss(0)
+	clear_damage(TOX)
+	clear_damage(OXY)
+	clear_damage(CLONE)
+	clear_damage(IRRADIATE)
+
+	set_brain_damage(0)
 	set_status(STAT_PARA, 0)
 	set_status(STAT_STUN, 0)
 	set_status(STAT_WEAK, 0)
 
 	// shut down ongoing problems
-	radiation = 0
 	bodytemperature = get_species()?.body_temperature || initial(bodytemperature)
 	sdisabilities = 0
 	disabilities = 0
 
 	// fix all status conditions including blind/deaf
 	clear_status_effects()
-
-	heal_overall_damage(getBruteLoss(), getFireLoss())
+	clear_all_damage()
 
 	// fix all of our organs
 	restore_all_organs()
@@ -464,9 +370,9 @@ default behaviour is:
 
 /mob/living/proc/basic_revival(var/repair_brain = TRUE)
 
-	if(repair_brain && getBrainLoss() > 50)
+	if(repair_brain && get_brain_damage() > 50)
 		repair_brain = FALSE
-		setBrainLoss(50)
+		set_brain_damage(50)
 
 	if(stat == DEAD)
 		switch_from_dead_to_living_mob_list()
@@ -487,8 +393,8 @@ default behaviour is:
 		repair_brain = FALSE
 		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
 		if(brain)
-			if(brain.damage > (brain.max_damage/2))
-				brain.damage = (brain.max_damage/2)
+			if(brain.organ_damage > (brain.max_damage/2))
+				brain.organ_damage = (brain.max_damage/2)
 			if(brain.status & ORGAN_DEAD)
 				brain.status &= ~ORGAN_DEAD
 				START_PROCESSING(SSobj, brain)
@@ -849,7 +755,7 @@ default behaviour is:
 		visible_message(SPAN_DANGER("\The [src] starts having a seizure!"))
 		SET_STATUS_MAX(src, STAT_PARA, rand(8,16))
 		set_status(STAT_JITTER, rand(150,200))
-		adjustHalLoss(rand(50,60))
+		take_damage(rand(50,60), PAIN)
 
 /mob/living/proc/get_digestion_product()
 	return null
@@ -937,11 +843,11 @@ default behaviour is:
 	..()
 	if(!has_gravity())
 		return
-	if(isturf(loc) && pull_damage() && prob(getBruteLoss() / 6))
+	if(isturf(loc) && pull_damage() && prob(get_damage(BRUTE) / 6))
 		if (!should_have_organ(BP_HEART))
 			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
-			adjustBruteLoss(1)
+			take_damage(1, BRUTE)
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
 
 /mob/living/CanUseTopicPhysical(mob/user)
@@ -1103,11 +1009,7 @@ default behaviour is:
 				A.alert_on_fall(src)
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
-	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))) * get_fall_height())
-
-/mob/living/proc/get_toxin_resistance()
-	var/decl/species/species = get_species()
-	return isnull(species) ? 1 : species.toxins_mod
+	take_damage(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))) * get_fall_height(), BRUTE)
 
 /mob/living/proc/get_metabolizing_reagent_holders(var/include_contact = FALSE)
 	for(var/datum/reagents/adding in list(reagents, get_ingested_reagents(), get_inhaled_reagents()))

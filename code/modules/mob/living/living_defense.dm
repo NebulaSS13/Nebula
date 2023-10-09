@@ -5,6 +5,7 @@
 		var/datum/extension/armor/armor_datum = armor
 		. = armor_datum.apply_damage_modifications(arglist(.))
 
+// TODO check that this handles decls instead of armour keys for damage_type
 /mob/living/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
 	var/list/armors = get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = 0
@@ -33,7 +34,7 @@
 	var/flags = P.damage_flags()
 	var/damaged
 	if(!P.nodamage)
-		damaged = apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
+		damaged = take_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
 		bullet_impact_visuals(P, def_zone, damaged)
 	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
 		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration, P.damage)
@@ -92,7 +93,7 @@
 		apply_effect(stun_amount, EYE_BLUR)
 
 	if (agony_amount)
-		apply_damage(agony_amount, PAIN, def_zone, used_weapon)
+		take_damage(agony_amount, PAIN, def_zone, used_weapon)
 		apply_effect(agony_amount/10, STUTTER)
 		apply_effect(agony_amount/10, EYE_BLUR)
 
@@ -124,7 +125,7 @@
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	if(effective_force)
-		return apply_damage(effective_force, I.damtype, hit_zone, I.damage_flags(), used_weapon=I, armor_pen=I.armor_penetration)
+		return take_damage(effective_force, I.damtype, hit_zone, I.damage_flags(), used_weapon=I, armor_pen=I.armor_penetration)
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
@@ -155,7 +156,7 @@
 			return
 
 		src.visible_message("<span class='warning'>\The [src] has been hit by \the [O]</span>.")
-		apply_damage(throw_damage, dtype, null, O.damage_flags(), O)
+		take_damage(throw_damage, dtype, null, O.damage_flags(), O)
 
 		if(TT.thrower)
 			var/client/assailant = TT.thrower.client
@@ -207,7 +208,7 @@
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
 	visible_message("<span class='danger'>[src] slams into \the [T]!</span>")
 	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such
-	apply_damage(speed*5, BRUTE)
+	take_damage(speed*5, BRUTE)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)
@@ -233,7 +234,7 @@
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
 	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
-	adjustBruteLoss(damage)
+	take_damage(damage, BRUTE)
 	user.do_attack_animation(src)
 	return 1
 
@@ -341,4 +342,4 @@
 				screamed = TRUE
 				emote("scream")
 			affecting.status |= ORGAN_DISFIGURED
-		take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)
+		take_damage(severity, BURN, override_droplimb = DISMEMBER_METHOD_ACID)

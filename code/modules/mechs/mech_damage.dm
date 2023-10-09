@@ -1,3 +1,15 @@
+/mob/living/exosuit/proc/resolve_def_zone_to_component(var/def_zone)
+	switch(def_zone)
+		if(BP_HEAD)
+			return head
+		if(BP_CHEST, BP_GROIN)
+			return body
+		if(BP_L_ARM, BP_L_HAND, BP_R_ARM, BP_R_HAND)
+			return arms
+		if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
+			return legs
+	return pick(list(arms, legs, body, head))
+
 /mob/living/exosuit/explosion_act(severity)
 	. = ..(4) //We want to avoid the automatic handling of damage to contents
 	var/b_loss = 0
@@ -13,18 +25,52 @@
 			b_loss = 45
 
 	// spread damage overall
-	apply_damage(b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
-	apply_damage(f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	take_damage(b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	take_damage(f_loss, BURN,  null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+
+/mob/living/exosuit/get_dispersed_damage_zones()
+	for(var/obj/item/part in list(arms, legs, body, head))
+		if(part == arms)
+			LAZYSET(., BP_L_ARM, part.w_class)
+		else if(part == legs)
+			LAZYSET(., BP_L_LEG, part.w_class)
+		else if(part == head)
+			LAZYSET(., BP_HEAD, part.w_class)
+		else if(part == body)
+			LAZYSET(., BP_CHEST, part.w_class)
+
+/mob/living/exosuit/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
+	/*
+	if(!def_zone)
+		if(damage_flags & DAM_DISPERSED)
+			var/old_damage = damage
+			var/tally
+			silent = FALSE
+				tally += part.w_class
+			for(var/obj/item/part in list(arms, legs, body, head))
+				damage = old_damage * part.w_class/tally
+				def_zone = BP_CHEST
+
+				. = .() || .
+			return
+		def_zone = ran_zone(def_zone)
+	*/
+	// If the hatch is open, pilots are not protected by radiation.
+	if(damage > 0 && damage_type == IRRADIATE && LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
+		var/mob/living/pilot = pick(pilots)
+		return pilot.take_damage(damage, damage_type, def_zone, damage_flags, used_weapon, armor_pen, silent, override_droplimb)
+	. = ..()
+	if(. && damage_type != IRRADIATE && prob(25+(damage*2)))
+		sparks.set_up(3,0,src)
+		sparks.start()
 
 /mob/living/exosuit/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	if(!effect || (blocked >= 100))
 		return 0
 	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
-		if(effect > 0 && effecttype == IRRADIATE)
-			effect = max((1-(get_armors_by_zone(null, IRRADIATE)/100))*effect/(blocked+1),0)
 		var/mob/living/pilot = pick(pilots)
 		return pilot.apply_effect(effect, effecttype, blocked)
-	if(!(effecttype in list(PAIN, STUTTER, EYE_BLUR, DROWSY, STUN, WEAKEN)))
+	if(!(effecttype in list(STUTTER, EYE_BLUR, DROWSY, STUN, WEAKEN)))
 		. = ..()
 
 /mob/living/exosuit/resolve_item_attack(var/obj/item/I, var/mob/living/user, var/def_zone)
@@ -83,20 +129,6 @@
 /mob/living/exosuit/get_max_health()
 	return (body ? body.mech_health : 0)
 
-/mob/living/exosuit/get_total_life_damage()
-	return (getFireLoss()+getBruteLoss())
-
-/mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)), var/do_update_health = TRUE)
-	if(MC)
-		MC.take_burn_damage(amount)
-		if(do_update_health)
-			update_health() // TODO: unify these procs somehow instead of having weird brute-wrapping behavior as the default.
-
-/mob/living/exosuit/adjustBruteLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)), var/do_update_health = TRUE)
-	if(MC)
-		MC.take_brute_damage(amount)
-	..()
-
 /mob/living/exosuit/proc/zoneToComponent(var/zone)
 	switch(zone)
 		if(BP_EYES , BP_HEAD)
@@ -108,55 +140,6 @@
 		else
 			return body
 
-/mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
-	if(!damage)
-		return 0
-
-	if(!def_zone)
-		if(damage_flags & DAM_DISPERSED)
-			var/old_damage = damage
-			var/tally
-			silent = FALSE
-			for(var/obj/item/part in list(arms, legs, body, head))
-				tally += part.w_class
-			for(var/obj/item/part in list(arms, legs, body, head))
-				damage = old_damage * part.w_class/tally
-				def_zone = BP_CHEST
-				if(part == arms)
-					def_zone = BP_L_ARM
-				else if(part == legs)
-					def_zone = BP_L_LEG
-				else if(part == head)
-					def_zone = BP_HEAD
-
-				. = .() || .
-			return
-
-		def_zone = ran_zone(def_zone)
-
-	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, TRUE)
-	damage = after_armor[1]
-	damagetype = after_armor[2]
-
-	if(!damage)
-		return 0
-
-	var/target = zoneToComponent(def_zone)
-	//Only 3 types of damage concern mechs and vehicles
-	switch(damagetype)
-		if(BRUTE)
-			adjustBruteLoss(damage, target)
-		if(BURN)
-			adjustFireLoss(damage, target)
-		if(IRRADIATE)
-			for(var/mob/living/pilot in pilots)
-				pilot.apply_damage(damage, IRRADIATE, def_zone, damage_flags, used_weapon)
-
-	if((damagetype == BRUTE || damagetype == BURN) && prob(25+(damage*2)))
-		sparks.set_up(3,0,src)
-		sparks.start()
-	return 1
-
 /mob/living/exosuit/rad_act(var/severity)
 	return FALSE // Pilots already query rads, modify this for radiation alerts and such
 
@@ -166,20 +149,6 @@
 		return .
 	var/list/after_armor = modify_damage_by_armor(null, ., IRRADIATE, DAM_DISPERSED, src, 0, TRUE)
 	return after_armor[1]
-
-/mob/living/exosuit/getFireLoss()
-	var/total = 0
-	for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
-		if(MC)
-			total += MC.burn_damage
-	return total
-
-/mob/living/exosuit/getBruteLoss()
-	var/total = 0
-	for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
-		if(MC)
-			total += MC.brute_damage
-	return total
 
 /mob/living/exosuit/emp_act(var/severity)
 

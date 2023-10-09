@@ -81,9 +81,9 @@
 				var/vision_organ = H.get_bodytype()?.vision_organ
 				if(vision_organ)
 					var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, vision_organ)
-					if(E && E.is_bruised() && prob(E.damage + 50))
+					if(E && E.is_bruised() && prob(E.organ_damage + 50))
 						H.flash_eyes()
-						E.damage += rand(1, 5)
+						E.organ_damage += rand(1, 5)
 
 		if(!O.is_blind())
 			do_flash(O, flash_time)

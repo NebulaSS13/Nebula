@@ -932,7 +932,7 @@
 				if (1) status = "<font color='orange'><b>Unconscious</b></font>"
 				if (2) status = "<font color='red'><b>Dead</b></font>"
 			health_description = "Status = [status]"
-			health_description += "<BR>Oxy: [L.getOxyLoss()] - Tox: [L.getToxLoss()] - Fire: [L.getFireLoss()] - Brute: [L.getBruteLoss()] - Clone: [L.getCloneLoss()] - Brain: [L.getBrainLoss()]"
+			health_description += "<BR>Oxy: [L.get_damage(OXY)] - Tox: [L.get_damage(TOX)] - Fire: [L.get_damage(BURN)] - Brute: [L.get_damage(BRUTE)] - Clone: [L.get_damage(CLONE)] - Brain: [L.get_brain_damage()]"
 		else
 			health_description = "This mob type has no health to speak of."
 
@@ -1001,7 +1001,7 @@
 		if(M.current_health == 1)
 			M.gib()
 		else
-			M.adjustBruteLoss(min(99, M.current_health - 1))
+			M.take_damage(min(99, (M.current_health-1)), BRUTE)
 			SET_STATUS_MAX(M, STAT_STUN, 20)
 			SET_STATUS_MAX(M, STAT_WEAK, 20)
 			M.set_status(STAT_STUTTER, 20)

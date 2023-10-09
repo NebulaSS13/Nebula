@@ -569,37 +569,21 @@
 	else if(href_list["adjustDamage"] && href_list["mobToDamage"])
 		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
 
-		var/mob/living/L = locate(href_list["mobToDamage"])
-		if(!istype(L)) return
+		var/mob/living/target = locate(href_list["mobToDamage"])
+		if(!istype(target)) return
 
-		var/Text = href_list["adjustDamage"]
-
-		var/amount =  input("Deal how much damage to mob? (Negative values here heal)","Adjust [Text]loss",0) as num
-
-		if(!L)
-			to_chat(usr, "Mob doesn't exist anymore")
+		var/decl/damage_handler/damage_type_data = locate(href_list["adjustDamage"])
+		if(!istype(damage_type_data))
 			return
 
-		switch(Text)
-			if(BRUTE)
-				L.adjustBruteLoss(amount)
-			if(BURN)
-				L.adjustFireLoss(amount)
-			if(TOX)
-				L.adjustToxLoss(amount)
-			if(OXY)
-				L.adjustOxyLoss(amount)
-			if(BP_BRAIN)
-				L.adjustBrainLoss(amount)
-			if(CLONE)
-				L.adjustCloneLoss(amount)
-			else
-				to_chat(usr, "You caused an error. DEBUG: Text:[Text] Mob:[L]")
-				return
-
+		var/amount =  input("Deal how much damage to mob? (Negative values here heal)","Adjust [capitalize(damage_type_data.name)] Damage",0) as num
+		if(!target)
+			to_chat(usr, "Mob doesn't exist anymore")
+			return
 		if(amount != 0)
-			log_admin("[key_name(usr)] dealt [amount] amount of [Text] damage to [L]")
-			message_admins("<span class='notice'>[key_name(usr)] dealt [amount] amount of [Text] damage to [L]</span>")
+			target.take_damage(amount, damage_type_data.type)
+			log_admin("[key_name(usr)] dealt [amount] amount of [damage_type_data.name] damage to [target]")
+			message_admins("<span class='notice'>[key_name(usr)] dealt [amount] amount of [damage_type_data.name] damage to [target]</span>")
 			href_list["datumrefresh"] = href_list["mobToDamage"]
 
 	else if(href_list["call_proc"])

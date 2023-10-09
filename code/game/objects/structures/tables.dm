@@ -584,7 +584,7 @@
 			if(istype(target))
 				A.throw_at(target, 1, 1)
 
-	take_damage(rand(5, 10))
+	take_damage(rand(5, 10), BRUTE)
 	update_connections(TRUE)
 	update_icon()
 

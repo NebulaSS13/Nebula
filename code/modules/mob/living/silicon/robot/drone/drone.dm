@@ -35,6 +35,9 @@
 
 	var/module_type = /obj/item/robot_module/drone
 
+/mob/living/silicon/robot/drone/is_drone()
+	return TRUE
+
 /mob/living/silicon/robot/drone/Initialize()
 	. = ..()
 	add_inventory_slot(new /datum/inventory_slot/head/simple)

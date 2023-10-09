@@ -136,10 +136,7 @@
 		update_icon()
 
 /obj/structure/wall_frame/bullet_act(var/obj/item/projectile/Proj)
-	var/proj_damage = Proj.get_structure_damage()
-	var/damage = min(proj_damage, 100)
-	take_damage(damage)
-	return
+	take_damage(min(Proj.get_structure_damage(), 100), Proj.damage_type, damage_flags = Proj.damage_flags)
 
 /obj/structure/wall_frame/hitby(AM, var/datum/thrownthing/TT)
 	..()
@@ -152,7 +149,7 @@
 		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	if (tforce < 15)
 		return
-	take_damage(tforce)
+	take_damage(tforce, BRUTE)
 
 /obj/structure/wall_frame/get_color()
 	return paint_color

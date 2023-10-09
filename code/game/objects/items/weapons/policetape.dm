@@ -353,7 +353,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 /obj/structure/tape_barricade/proc/crumple()
 	if(!is_crumpled)
 		playsound(src, 'sound/effects/rip1.ogg', 60, TRUE)
-		take_damage(5)
+		take_damage(5, BRUTE)
 		is_crumpled = TRUE
 		update_icon()
 

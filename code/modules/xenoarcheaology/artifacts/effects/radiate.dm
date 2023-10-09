@@ -9,7 +9,7 @@
 
 /datum/artifact_effect/radiate/DoEffectTouch(var/mob/living/user)
 	if(istype(user))
-		user.apply_radiation(radiation_strength * 2)
+		user.take_damage(radiation_strength * 2, IRRADIATE)
 		return 1
 
 /datum/artifact_effect/radiate/DoEffectAura()

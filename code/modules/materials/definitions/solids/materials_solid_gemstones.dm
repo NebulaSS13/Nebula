@@ -18,6 +18,11 @@
 	name = "diamond"
 	uid = "solid_diamond"
 	lore_text = "An extremely hard allotrope of carbon. Valued for its use in industrial tools."
+	// Diamond walls are immune to fire, therefore it makes sense for them to be almost undamageable by burn damage type.
+	wall_armor = list(
+		BRUTE = 10,
+		BURN  = 50
+	)
 	melting_point = 4300
 	boiling_point = null
 	ignition_point = null

@@ -28,9 +28,9 @@
 		if(pulse)
 			handle_heartbeat()
 			if(pulse == PULSE_2FAST && prob(1))
-				take_internal_damage(0.5)
+				take_damage(0.5, TOX)
 			if(pulse == PULSE_THREADY && prob(5))
-				take_internal_damage(0.5)
+				take_damage(0.5, TOX)
 		handle_blood()
 	..()
 
@@ -47,7 +47,7 @@
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(prob(damage_chance))
-			take_internal_damage(0.5)
+			take_damage(0.5, TOX)
 
 	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > 30)
@@ -70,7 +70,7 @@
 		return
 	else //and if it's beating, let's see if it should
 		var/should_stop = prob(80) && owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
-		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.get_max_health() * 0.75)) //brain failing to work heart properly
+		should_stop = should_stop || prob(max(0, owner.get_brain_damage() - owner.get_max_health() * 0.75)) //brain failing to work heart properly
 		should_stop = should_stop || (prob(5) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop) // The heart has stopped due to going into traumatic or cardiovascular shock.
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
@@ -130,7 +130,7 @@
 
 				for(var/datum/wound/W in temp.wounds)
 
-					if(!open_wound && (W.damage_type == CUT || W.damage_type == PIERCE) && W.damage && !W.is_treated())
+					if(!open_wound && (W.wound_type == WOUND_CUT || W.wound_type == WOUND_PIERCE) && W.damage && !W.is_treated())
 						open_wound = TRUE
 
 					if(W.bleeding())

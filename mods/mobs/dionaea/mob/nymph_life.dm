@@ -12,31 +12,32 @@
 
 	var/light_amount = checking.get_lumcount() * 5
 
-	if(radiation <= 20)
+	var/rads = get_damage(IRRADIATE)
+	if(rads <= 20)
 		if(last_glow)
 			set_light(0)
 			last_glow = 0
 	else
-		var/mult = clamp(radiation/200, 0.5, 1)
+		var/mult = clamp(rads/200, 0.5, 1)
 		if(last_glow != mult)
 			set_light((5 * mult), mult, "#55ff55")
 			last_glow = mult
 
-	set_nutrition(clamp(nutrition + FLOOR(radiation/100) + light_amount, 0, 500))
+	set_nutrition(clamp(nutrition + FLOOR(rads/100) + light_amount, 0, 500))
 
-	if(radiation >= 50 || light_amount > 2) //if there's enough light, heal
+	if(rads >= 50 || light_amount > 2) //if there's enough light, heal
 		var/update_health = FALSE
-		if(getBruteLoss())
+		if(get_damage(BRUTE))
 			update_health = TRUE
-			adjustBruteLoss(-1, do_update_health = FALSE)
-		if(getFireLoss())
+			heal_damage(1, BRUTE, skip_update_health = TRUE)
+		if(get_damage(BURN))
 			update_health = TRUE
-			adjustFireLoss(-1, do_update_health = FALSE)
-		if(getToxLoss())
+			heal_damage(1, BURN, skip_update_health = TRUE)
+		if(get_damage(TOX))
 			update_health = TRUE
-			adjustToxLoss(-1, do_update_health = FALSE)
-		if(getOxyLoss())
+			heal_damage(1, TOX, skip_update_health = TRUE)
+		if(get_damage(OXY))
 			update_health = TRUE
-			adjustOxyLoss(-1, do_update_health = FALSE)
+			heal_damage(1, OXY, skip_update_health = TRUE)
 		if(update_health)
 			update_health()

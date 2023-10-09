@@ -158,7 +158,7 @@
 	// Apply additional unarmed effects.
 	attack.apply_effects(H, src, rand_damage, hit_zone)
 	// Finally, apply damage to target
-	apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
+	take_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
 	return TRUE
 
 /mob/living/carbon/human/attack_hand(mob/user)

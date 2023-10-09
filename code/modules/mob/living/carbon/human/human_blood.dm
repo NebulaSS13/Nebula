@@ -210,7 +210,7 @@
 		blood_volume *= 1.25
 
 	var/min_efficiency = recent_pump ? 0.5 : 0.3
-	blood_volume *= max(min_efficiency, (1-(heart.damage / heart.max_damage)))
+	blood_volume *= max(min_efficiency, (1-(heart.organ_damage / heart.max_damage)))
 
 	if(!heart.open && has_chemical_effect(CE_BLOCKAGE, 1))
 		blood_volume *= max(0, 1-GET_CHEMICAL_EFFECT(src, CE_BLOCKAGE))
@@ -233,7 +233,7 @@
 	else
 		blood_volume = 100
 
-	var/blood_volume_mod = max(0, 1 - getOxyLossPercent()/(species.total_health/2))
+	var/blood_volume_mod = max(0, 1 - get_suffocation_percent()/(species.total_health/2))
 	var/oxygenated_mult = 0
 	switch(GET_CHEMICAL_EFFECT(src, CE_OXYGENATED))
 		if(1)

@@ -47,7 +47,7 @@
 	. = ..()
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .
-		if(prob(H.getBruteLoss()/2))
+		if(prob(H.get_damage(BRUTE)/2))
 			attach(H)
 
 /mob/living/simple_animal/hostile/slug/handle_regular_status_updates()

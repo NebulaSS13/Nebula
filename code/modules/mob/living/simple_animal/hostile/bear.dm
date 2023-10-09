@@ -119,9 +119,9 @@
 		var/mob/living/carbon/human/H = target_mob
 		var/dam_zone = pick(BP_CHEST, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG)
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, ran_zone(dam_zone, target = H))
-		H.apply_damage(damage, BRUTE, affecting, DAM_SHARP|DAM_EDGE) //TODO damage_flags var on simple_animals, maybe?
+		H.take_damage(damage, BRUTE, affecting, DAM_SHARP|DAM_EDGE) //TODO damage_flags var on simple_animals, maybe?
 		return H
 	else if(isliving(target_mob))
 		var/mob/living/L = target_mob
-		L.adjustBruteLoss(damage)
+		L.take_damage(damage, BRUTE)
 		return L

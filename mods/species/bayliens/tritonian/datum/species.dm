@@ -8,8 +8,10 @@
 		/decl/bodytype/human/tritonian/masculine
 	)
 
-	oxy_mod    = 0.5
-	toxins_mod = 1.5
+	damage_modifiers = list(
+		OXY = 0.5,
+		TOX       = 1.5
+	)
 
 	body_temperature =    302
 	water_soothe_amount = 5

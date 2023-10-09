@@ -56,7 +56,7 @@
 
 /turf/simulated/wall/proc/fail_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash against \the [src]!</span>")
-	take_damage(rand(25,75))
+	take_damage(rand(25,75), BRUTE)
 
 /turf/simulated/wall/proc/success_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
@@ -130,16 +130,16 @@
 
 	var/turf/T = user.loc	//get user's location for delay checks
 
-	if(damage && istype(W, /obj/item/weldingtool))
+	if(wall_damage && istype(W, /obj/item/weldingtool))
 
 		var/obj/item/weldingtool/WT = W
 
 		if(WT.weld(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
+			if(do_after(user, max(5, wall_damage / 5), src) && WT && WT.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
-				take_damage(-damage)
+				heal_damage(max(5, wall_damage))
 		return TRUE
 
 	// Basic dismantling.
@@ -343,10 +343,7 @@
 			return
 
 	user.do_attack_animation(src)
-	var/material_divisor = max(material.brute_armor, reinf_material?.brute_armor)
-	if(W.damtype == BURN)
-		material_divisor = max(material.burn_armor, reinf_material?.burn_armor)
-	var/effective_force = round(W.force / material_divisor)
+	var/effective_force = round(W.force / max(1, max(material.wall_armor[W.damtype], reinf_material?.wall_armor[W.damtype])))
 	if(effective_force < 2)
 		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it had no effect!"))
 		playsound(src, hitsound, 25, 1)
@@ -363,5 +360,5 @@
 
 	playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
 	visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W]!"))
-	take_damage(effective_force)
+	take_damage(effective_force, W.damtype)
 	return TRUE

@@ -117,7 +117,7 @@
 	if(O.force && user.a_intent == I_HURT)
 		attack_animation(user)
 		visible_message(SPAN_DANGER("\The [src] has been [pick(O.attack_verb)] with \the [O] by \the [user]!"))
-		take_damage(O.force)
+		take_damage(O.force, O.damtype)
 		. = TRUE
 
 	else if(IS_WRENCH(O))
@@ -149,7 +149,7 @@
 		return FALSE
 	if(damage >= 10)
 		visible_message(SPAN_DANGER("\The [user] [attack_verb] into [src]!"))
-		take_damage(damage)
+		take_damage(damage, BRUTE)
 	else
 		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
 	return TRUE

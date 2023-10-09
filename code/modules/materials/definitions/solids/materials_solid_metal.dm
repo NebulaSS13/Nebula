@@ -105,7 +105,10 @@
 	melting_point = 1184
 	boiling_point = 2574
 	color = "#ccbc63"
-	brute_armor = 3
+	wall_armor = list(
+		BRUTE = 3,
+		BURN  = 3
+	)
 	hardness = MAT_VALUE_RIGID + 10
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
@@ -119,7 +122,10 @@
 	uid = "solid_black_bronze"
 	lore_text = "An alloy of copper and silver. Used in ancient ceremonial gear."
 	color = "#3f352a"
-	brute_armor = 4
+	wall_armor = list(
+		BRUTE = 4,
+		BURN  = 4
+	)
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_MATTE
 	icon_base = 'icons/turf/walls/solid.dmi'
@@ -195,7 +201,10 @@
 	wall_support_value = MAT_VALUE_VERY_HEAVY // Ideal construction material.
 	hardness = MAT_VALUE_HARD
 	integrity = 150
-	brute_armor = 5
+	wall_armor = list(
+		BRUTE = 5,
+		BURN  = 5
+	)
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
@@ -246,7 +255,10 @@
 	boiling_point = null
 	wall_support_value = MAT_VALUE_HEAVY
 	integrity = 175
-	burn_armor = 10
+	wall_armor = list(
+		BRUTE = 2,
+		BURN  = 10
+	)
 	color = "#a5a5a5"
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
@@ -301,8 +313,10 @@
 	use_reinf_state = null
 	color = "#a8a9b2"
 	explosion_resistance = 25
-	brute_armor = 8
-	burn_armor = 10
+	wall_armor = list(
+		BRUTE = 8,
+		BURN  = 10
+	)
 	hardness = MAT_VALUE_VERY_HARD
 	stack_origin_tech = @'{"materials":2}'
 	hitsound = 'sound/weapons/smash.ogg'
@@ -325,8 +339,10 @@
 	name = "titanium"
 	uid = "solid_titanium"
 	lore_text = "A light, strong, corrosion-resistant metal. Perfect for cladding high-velocity ballistic supply pods."
-	brute_armor = 10
-	burn_armor = 8
+	wall_armor = list(
+		BRUTE = 10,
+		BURN  = 8
+	)
 	integrity = 200
 	melting_point = 1944
 	boiling_point = 3474
@@ -365,8 +381,10 @@
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
 	color = "#9bc6f2"
-	brute_armor = 4
-	burn_armor = 20
+	wall_armor = list(
+		BRUTE = 4,
+		BURN  = 20
+	)
 	stack_origin_tech = @'{"materials":3}'
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
@@ -464,7 +482,10 @@
 	lore_text = "A heavy metal with near perfect reflectiveness. Used in stainless alloys."
 	color = "#dadada"
 	integrity = 200
-	burn_armor = 15 // Strong against laser weaponry, but not as good as OCP.
+	wall_armor = list(
+		BRUTE = 2,
+		BURN  = 15
+	)
 	melting_point = 2180
 	boiling_point = 2944
 	icon_base = 'icons/turf/walls/solid.dmi'

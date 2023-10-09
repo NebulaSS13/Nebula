@@ -100,7 +100,7 @@
 	var/slime_temp_adj = 10
 
 /decl/material/liquid/capsaicin/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.adjustToxLoss(0.5 * removed)
+	M.take_damage(0.5 * removed, TOX)
 
 /decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
@@ -118,7 +118,7 @@
 		if(prob(5) || dose == metabolism) //dose == metabolism is a very hacky way of forcing the message the first time this procs
 			to_chat(M, discomfort_message)
 	else
-		M.apply_effect(agony_amount, PAIN, 0)
+		M.take_damage(agony_amount, PAIN)
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
@@ -204,7 +204,7 @@
 	if(LAZYACCESS(M.chem_doses, type) == metabolism)
 		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	else
-		M.apply_effect(6, PAIN, 0)
+		M.take_damage(6, PAIN)
 		if(prob(5))
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
@@ -246,7 +246,7 @@
 				randmutg(M)
 			domutcheck(M, null)
 			M.UpdateAppearance()
-	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
+	M.take_damage(10 * removed, IRRADIATE, armor_pen = 100)
 
 /decl/material/liquid/lactate
 	name = "lactate"
@@ -373,12 +373,14 @@
 /decl/material/liquid/nanitefluid/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
-		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
+		var/heal_amt = 30 * removed
+		M.heal_damage(heal_amt, BRUTE) //TODO readd affect_robot checks
+		M.heal_damage(heal_amt, BURN) //TODO readd affect_robot checks
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.get_internal_organs())
 				if(BP_IS_PROSTHETIC(I))
-					I.heal_damage(20*removed)
+					I.heal_damage(20*removed, TOX)
 
 /decl/material/liquid/antiseptic
 	name = "antiseptic"
@@ -415,7 +417,8 @@
 				if((E.brute_dam + E.burn_dam) > 0)
 					if(prob(35))
 						to_chat(M, SPAN_NOTICE("You feel a crawling sensation as fresh crystal grows over your [E.name]."))
-					E.heal_damage(rand(5,8), rand(5,8))
+					E.heal_damage(rand(5,8), BRUTE)
+					E.heal_damage(rand(5,8), BURN)
 					break
 				if(BP_IS_BRITTLE(E))
 					E.status &= ~ORGAN_BRITTLE
@@ -429,7 +432,7 @@
 						new /obj/item/shard(get_turf(E), result_mat)
 					E.dismember(0, DISMEMBER_METHOD_BLUNT)
 				else
-					E.take_external_damage(rand(20,30), 0)
+					E.take_damage(rand(20,30), BRUTE)
 					BP_SET_CRYSTAL(E)
 					E.status |= ORGAN_BRITTLE
 				break
@@ -437,14 +440,14 @@
 		var/list/internal_organs = H.get_internal_organs()
 		var/list/shuffled_organs = LAZYLEN(internal_organs) ? shuffle(internal_organs.Copy()) : null
 		for(var/obj/item/organ/internal/I in shuffled_organs)
-			if(BP_IS_PROSTHETIC(I) || !BP_IS_CRYSTAL(I) || I.damage <= 0 || I.organ_tag == BP_BRAIN)
+			if(BP_IS_PROSTHETIC(I) || !BP_IS_CRYSTAL(I) || I.organ_damage <= 0 || I.organ_tag == BP_BRAIN)
 				continue
 			if(prob(35))
 				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
-			I.heal_damage(rand(1,3))
+			I.heal_damage(rand(1,3), BRUTE)
 			break
 	else
 		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
-		M.adjustBruteLoss(rand(3,6))
+		M.take_damage(rand(3,6), BRUTE)
 		if(prob(10))
 			new /obj/item/shard(get_turf(M), result_mat)

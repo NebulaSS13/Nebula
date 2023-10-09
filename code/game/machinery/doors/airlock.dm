@@ -135,7 +135,7 @@ About the new airlock wires panel:
 			var/mob/living/carbon/C = user
 			if(istype(C) && C.hallucination_power > 25)
 				to_chat(user, SPAN_DANGER("You feel a powerful shock course through your body!"))
-				user.adjustHalLoss(10)
+				user.take_damage(10, PAIN)
 				SET_STATUS_MAX(user, STAT_STUN, 10)
 				return
 	..(user)
@@ -768,7 +768,7 @@ About the new airlock wires panel:
 		else if(!repairing)
 			// Add some minor damage as evidence of forcing.
 			if(health >= max_health)
-				take_damage(1)
+				take_damage(1, BRUTE)
 			if(arePowerSystemsOn())
 				to_chat(user, SPAN_WARNING("The airlock's motors resist your efforts to force it."))
 			else if(locked)
@@ -940,7 +940,7 @@ About the new airlock wires panel:
 	for(var/turf/turf in locs)
 		for(var/atom/movable/AM in turf)
 			if(AM.airlock_crush(door_crush_damage))
-				take_damage(door_crush_damage)
+				take_damage(door_crush_damage, BRUTE)
 				use_power_oneoff(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
 
 	use_power_oneoff(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
@@ -1075,9 +1075,9 @@ About the new airlock wires panel:
 	return
 
 // Braces can act as an extra layer of armor - they will take damage first.
-/obj/machinery/door/airlock/take_damage(var/amount, damtype=BRUTE)
+/obj/machinery/door/airlock/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	if(brace)
-		brace.take_damage(amount)
+		brace.take_damage(damage, damtype)
 	else
 		..()
 	update_icon()

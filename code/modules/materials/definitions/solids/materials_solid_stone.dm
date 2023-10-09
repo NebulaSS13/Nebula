@@ -6,7 +6,10 @@
 	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_HARD - 5
 	reflectiveness = MAT_VALUE_MATTE
-	brute_armor = 3
+	wall_armor = list(
+		BRUTE = 3,
+		BURN  = 3
+	)
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	wall_blend_icons = list(
@@ -42,7 +45,10 @@
 	exoplanet_rarity_gas   = MAT_RARITY_MUNDANE
 	hardness               = MAT_VALUE_HARD + 5
 	melting_point          = T0C + 1260
-	brute_armor            = 15
+	wall_armor = list(
+		BRUTE = 15,
+		BURN  = 15
+	)
 	explosion_resistance   = 15
 	integrity              = 500 //granite is very strong
 	dissolves_into         = list(

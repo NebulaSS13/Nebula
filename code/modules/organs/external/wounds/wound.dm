@@ -16,12 +16,13 @@
 	var/created = 0
 	var/amount = 1             // number of wounds of this type
 	var/germ_level = 0         // amount of germs in the wound
-	var/obj/item/organ/external/parent_organ	// the organ the wound is on, if on an organ
+	// the organ the wound is on, if on an organ
+	var/obj/item/organ/external/parent_organ
 
 	/*  These are defined by the wound type and should not be changed */
 	var/list/stages            // stages such as "cut", "deep cut", etc.
 	var/max_bleeding_stage = 0 // maximum stage at which bleeding should still happen. Beyond this stage bleeding is prevented.
-	var/damage_type = CUT      // one of CUT, PIERCE, BRUISE, BURN
+	var/wound_type = WOUND_CUT // one of WOUND_CUT, WOUND_PIERCE, WOUND_BRUISE, WOUND_BURN, WOUND_SHATTER
 	var/autoheal_cutoff = 15   // the maximum amount of damage that this wound can have and still autoheal
 
 	// helper lists
@@ -81,26 +82,38 @@
 
 // checks whether the wound has been appropriately treated
 /datum/wound/proc/is_treated()
-	if(!LAZYLEN(embedded_objects))
-		switch(damage_type)
-			if(BRUISE, CUT, PIERCE)
-				return bandaged
-			if(BURN)
-				return salved
+	if(LAZYLEN(embedded_objects))
+		return FALSE
+	switch(wound_type)
+		if(WOUND_BRUISE, WOUND_CUT, WOUND_PIERCE)
+			return !!bandaged
+		if(WOUND_BURN)
+			return !!salved
+	return FALSE
 
-	// Checks whether other other can be merged into src.
+// Checks whether other other can be merged into src.
 /datum/wound/proc/can_merge_wounds(var/datum/wound/other)
-	if (other.type != src.type) return 0
-	if (other.current_stage != src.current_stage) return 0
-	if (other.damage_type != src.damage_type) return 0
-	if (!(other.can_autoheal()) != !(src.can_autoheal())) return 0
-	if (other.is_surgical() != src.is_surgical()) return 0
-	if (!(other.bandaged) != !(src.bandaged)) return 0
-	if (!(other.clamped) != !(src.clamped)) return 0
-	if (!(other.salved) != !(src.salved)) return 0
-	if (!(other.disinfected) != !(src.disinfected)) return 0
-	if (other.parent_organ != parent_organ) return 0
-	return 1
+	if (other.type != type)
+		return FALSE
+	if (other.current_stage != current_stage)
+		return FALSE
+	if (other.wound_type != wound_type)
+		return FALSE
+	if (!!other.can_autoheal() != !!can_autoheal())
+		return FALSE
+	if (other.is_surgical() != is_surgical())
+		return FALSE
+	if (!!other.bandaged != !!bandaged)
+		return FALSE
+	if (!!other.clamped != !!clamped)
+		return FALSE
+	if (!other.salved != !!salved)
+		return FALSE
+	if (!!other.disinfected != !!disinfected)
+		return FALSE
+	if (other.parent_organ != parent_organ)
+		return FALSE
+	return TRUE
 
 /datum/wound/proc/merge_wound(var/datum/wound/other)
 	if(LAZYLEN(other.embedded_objects))
@@ -116,43 +129,43 @@
 // untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if wound is bigger
 /datum/wound/proc/infection_check()
 	if (damage < 10)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
-		return 0
+		return FALSE
 	if (is_treated() && damage < 25)	//anything less than a flesh wound (or equivalent) isn't infectable if treated properly
-		return 0
+		return FALSE
 	if (disinfected)
 		germ_level = 0	//reset this, just in case
-		return 0
+		return FALSE
 
-	if (damage_type == BRUISE && !bleeding()) //bruises only infectable if bleeding
-		return 0
+	if (wound_type == WOUND_BRUISE && !bleeding()) //bruises only infectable if bleeding
+		return FALSE
 
 	var/dam_coef = round(damage/10)
-	switch (damage_type)
-		if (BRUISE)
+	switch (wound_type)
+		if (WOUND_BRUISE)
 			return prob(dam_coef*5)
-		if (BURN)
+		if (WOUND_BURN)
 			return prob(dam_coef*25)
-		if (CUT)
+		if (WOUND_CUT)
 			return prob(dam_coef*10)
 
-	return 0
+	return FALSE
 
 /datum/wound/proc/bandage()
-	bandaged = 1
+	bandaged = TRUE
 
 /datum/wound/proc/salve()
-	salved = 1
+	salved = TRUE
 
 /datum/wound/proc/disinfect()
-	disinfected = 1
+	disinfected = TRUE
 
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
-/datum/wound/proc/heal_damage(amount)
+/datum/wound/proc/heal_wound_damage(amount)
 	if(LAZYLEN(embedded_objects))
 		return amount // heal nothing
 	if(parent_organ)
-		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
+		if(wound_type == WOUND_BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount	//We don't want to heal wounds on irreparable organs.
 		else if(!(parent_organ.brute_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount
@@ -183,7 +196,7 @@
 // returns whether this wound can absorb the given amount of damage.
 // this will prevent large amounts of damage being trapped in less severe wound types
 /datum/wound/proc/can_worsen(damage_type, damage)
-	if (src.damage_type != damage_type)
+	if (src.wound_type != damage_type)
 		return 0	//incompatible damage types
 
 	if (src.amount > 1)

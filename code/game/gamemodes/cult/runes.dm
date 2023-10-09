@@ -125,19 +125,19 @@
 		spamcheck = 0
 		if(!iscultist(target) && target.loc == get_turf(src)) // They hesitated, resisted, or can't join, and they are still on the rune - burn them
 			if(target.stat == CONSCIOUS)
-				target.take_overall_damage(0, 10)
-				switch(target.getFireLoss())
+				target.take_damage(10, BURN)
+				switch(target.get_damage(BURN))
 					if(0 to 25)
 						to_chat(target, "<span class='danger'>Your blood boils as you force yourself to resist the corruption invading every corner of your mind.</span>")
 					if(25 to 45)
 						to_chat(target, "<span class='danger'>Your blood boils and your body burns as the corruption further forces itself into your body and mind.</span>")
-						target.take_overall_damage(0, 3)
+						target.take_damage(3, BURN)
 					if(45 to 75)
 						to_chat(target, "<span class='danger'>You begin to hallucinate images of a dark and incomprehensible being and your entire body feels like its engulfed in flame as your mental defenses crumble.</span>")
-						target.take_overall_damage(0, 5)
+						target.take_damage(5, BURN)
 					if(75 to 100)
 						to_chat(target, "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>")
-						target.take_overall_damage(0, 10)
+						target.take_damage(10, BURN)
 
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"] && usr.loc == loc && !iscultist(usr))
@@ -179,18 +179,18 @@
 			showOptions(user)
 			var/warning = 0
 			while(user.loc == src)
-				user.take_organ_damage(0, 2)
-				if(user.getFireLoss() > 50)
+				user.take_damage(2, BURN)
+				if(user.get_damage(BURN) > 50)
 					to_chat(user, "<span class='danger'>Your body can't handle the heat anymore!</span>")
 					leaveRune(user)
 					return
 				if(warning == 0)
 					to_chat(user, "<span class='warning'>You feel the immerse heat of the realm of Nar-Sie...</span>")
 					++warning
-				if(warning == 1 && user.getFireLoss() > 15)
+				if(warning == 1 && user.get_damage(BURN) > 15)
 					to_chat(user, "<span class='warning'>Your burns are getting worse. You should return to your realm soon...</span>")
 					++warning
-				if(warning == 2 && user.getFireLoss() > 35)
+				if(warning == 2 && user.get_damage(BURN) > 35)
 					to_chat(user, "<span class='warning'>The heat! It burns!</span>")
 					++warning
 				sleep(10)
@@ -307,18 +307,16 @@
 		qdel(src)
 	else if(I.force)
 		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
-		take_damage(I.force)
+		take_damage(I.force, I.damtype)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
-	take_damage(Proj.damage)
+	take_damage(Proj.damage, Proj.damage_type, damage_flags = Proj.damage_flags)
 	..()
 
-/obj/effect/cultwall/proc/take_damage(var/amount)
-	health -= amount
+/obj/effect/cultwall/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
+	health -= damage
 	if(health <= 0)
 		visible_message("<span class='warning'>\The [src] dissipates.</span>")
 		qdel(src)
@@ -352,7 +350,7 @@
 		else if(user.loc != get_turf(src) && soul)
 			soul.reenter_corpse()
 		else
-			user.take_organ_damage(0, 1)
+			user.take_damage(1, BURN)
 		sleep(20)
 	fizzle(user)
 
@@ -464,12 +462,15 @@
 		//T.turf_animation('icons/effects/effects.dmi', "rune_sac")
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
+		// This is to speed up the process and also damage mobs that
+		// don't take damage from being on fire, e.g. borgs
 		var/dam_amt = 2 + length(casters)
-		victim.take_organ_damage(dam_amt, dam_amt) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		victim.take_damage(dam_amt, BRUTE, skip_update_health = TRUE)
+		victim.take_damage(dam_amt, BURN)
 		if(ishuman(victim))
 			var/mob/living/carbon/human/H = victim
 			if(H.is_asystole())
-				H.adjustBrainLoss(2 + casters.len)
+				H.adjust_brain_damage(2 + casters.len)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
@@ -544,9 +545,9 @@
 		statuses += "you regain lost blood"
 		if(!charges)
 			return statuses
-	if(user.getBruteLoss() || user.getFireLoss())
-		var/healbrute = user.getBruteLoss()
-		var/healburn = user.getFireLoss()
+	var/healbrute = user.get_damage(BRUTE)
+	var/healburn = user.get_damage(BURN)
+	if(healbrute || healburn)
 		if(healbrute < healburn)
 			healbrute = min(healbrute, charges / 2)
 			charges -= healbrute
@@ -557,13 +558,14 @@
 			charges -= healburn
 			healbrute = min(healbrute, charges)
 			charges -= healbrute
-		user.heal_organ_damage(healbrute, healburn, 1)
+		user.heal_damage(healbrute, BRUTE) // todo readd robo heal check
+		user.heal_damage(healburn, BURN) // todo readd robo heal check
 		statuses += "your wounds mend"
 		if(!charges)
 			return statuses
-	if(user.getToxLoss())
-		use = min(user.getToxLoss(), charges)
-		user.adjustToxLoss(-use)
+	if(user.get_damage(TOX))
+		use = min(user.get_damage(TOX), charges)
+		user.heal_damage(use, TOX)
 		charges -= use
 		statuses += "your body stings less"
 		if(!charges)
@@ -580,15 +582,15 @@
 		return statuses
 	var/list/obj/item/organ/damaged = list()
 	for(var/obj/item/organ/I in user.internal_organs)
-		if(I.damage)
+		if(I.organ_damage)
 			damaged += I
 	if(damaged.len)
 		statuses += "you feel pain inside for a moment that passes quickly"
 		while(charges && damaged.len)
 			var/obj/item/organ/fix = pick(damaged)
-			fix.damage = max(0, fix.damage - min(charges, 1))
+			fix.organ_damage = max(0, fix.organ_damage - min(charges, 1))
 			charges = max(charges - 1, 0)
-			if(fix.damage == 0)
+			if(fix.organ_damage == 0)
 				damaged -= fix
 	return statuses
 
@@ -744,7 +746,8 @@
 			var/obj/item/nullrod/N = locate() in M
 			if(N)
 				continue
-			M.take_overall_damage(5, 5)
+			M.take_damage(5, BRUTE, skip_update_health = TRUE)
+			M.take_damage(5, BURN)
 			if(!(M in previous))
 				if(M.should_have_organ(BP_HEART))
 					to_chat(M, "<span class='danger'>Your blood boils!</span>")

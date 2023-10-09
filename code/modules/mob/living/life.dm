@@ -98,7 +98,7 @@
 /mob/living/proc/handle_mutations_and_radiation()
 	SHOULD_CALL_PARENT(TRUE)
 
-	radiation = clamp(radiation,0,500)
+	var/radiation = clamp(get_damage(IRRADIATE), 0, 500)
 	var/decl/bodytype/my_bodytype = get_bodytype()
 	if(my_bodytype?.appearance_flags & RADIATION_GLOWS)
 		if(radiation)
@@ -110,16 +110,16 @@
 		return
 
 	var/damage = 0
-	radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+	heal_damage(1 * RADIATION_SPEED_COEFFICIENT, IRRADIATE)
 	if(prob(25))
 		damage = 2
 
 	if (radiation > 50)
 		damage = 2
-		radiation -= 2 * RADIATION_SPEED_COEFFICIENT
+		heal_damage(2 * RADIATION_SPEED_COEFFICIENT, IRRADIATE)
 		if(!isSynthetic())
 			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
-				radiation -= 5 * RADIATION_SPEED_COEFFICIENT
+				heal_damage(5 * RADIATION_SPEED_COEFFICIENT, IRRADIATE)
 				to_chat(src, "<span class='warning'>You feel weak.</span>")
 				SET_STATUS_MAX(src, STAT_WEAK, 3)
 				if(!lying)
@@ -129,23 +129,21 @@
 
 	if (radiation > 75)
 		damage = 3
-		radiation -= 3 * RADIATION_SPEED_COEFFICIENT
+		heal_damage(3 * RADIATION_SPEED_COEFFICIENT, IRRADIATE)
 		if(!isSynthetic())
 			if(prob(5))
-				take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
+				take_damage(5 * RADIATION_SPEED_COEFFICIENT, BURN, used_weapon = "Radiation Burns")
 			if(prob(1))
 				to_chat(src, "<span class='warning'>You feel strange!</span>")
-				adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
+				take_damage(5 * RADIATION_SPEED_COEFFICIENT, CLONE)
 				emote("gasp")
 	if(radiation > 150)
 		damage = 8
-		radiation -= 4 * RADIATION_SPEED_COEFFICIENT
+		heal_damage(4 * RADIATION_SPEED_COEFFICIENT, IRRADIATE)
 
-	var/decl/species/my_species = get_species()
-	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
-		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
+		take_damage(damage * RADIATION_SPEED_COEFFICIENT, TOX)
 		var/list/limbs = get_external_organs()
 		if(!isSynthetic() && LAZYLEN(limbs))
 			var/obj/item/organ/external/O = pick(limbs)
@@ -205,7 +203,8 @@
 	var/burn_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BURN)
 	var/brute_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BRUTE)
 	if(burn_regen || brute_regen)
-		heal_organ_damage(brute_regen, burn_regen, FALSE) // apply_chemical_effects() calls update_health() if it returns true; don't do it unnecessarily.
+		heal_damage(brute_regen, BRUTE)
+		heal_damage(burn_regen,  BURN)
 		return TRUE
 	return FALSE
 
@@ -446,5 +445,5 @@
 				if(!my_species?.check_no_slip(src) && prob(current_size*5))
 					to_chat(src, SPAN_DANGER("A strong gravitational force slams you to the ground!"))
 					SET_STATUS_MAX(src, STAT_WEAK, current_size)
-		apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
+		take_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
 	return ..()

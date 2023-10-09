@@ -98,7 +98,7 @@
 /obj/structure/door/explosion_act(severity)
 	. = ..()
 	if(!QDELETED(src))
-		take_damage(100 - (severity * 30))
+		take_damage(100 - (severity * 30), BRUTE)
 
 /obj/structure/door/can_repair(var/mob/user)
 	. = ..()

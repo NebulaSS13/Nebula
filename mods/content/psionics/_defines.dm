@@ -16,7 +16,7 @@
 #define PSI_RANK_GRANDMASTER   4
 #define PSI_RANK_PARAMOUNT     5
 
-#define PSIONIC "psi"
+#define DAM_PSIONIC "psi"
 
 #define MAT_NULLGLASS  /decl/material/nullglass
 #define COLOR_NULLGLASS        "#ff6088"

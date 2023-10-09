@@ -127,8 +127,10 @@
 		. |= DAM_EDGE
 	if(is_sharp(src))
 		. |= DAM_SHARP
-		if(damtype == BURN)
-			. |= DAM_LASER
+	if(damtype)
+		var/decl/damage_handler/damage_type_data = GET_DECL(damtype)
+		if(damage_type_data.item_damage_flags)
+			. |= damage_type_data.item_damage_flags
 
 /obj/attackby(obj/item/O, mob/user)
 	if(obj_flags & OBJ_FLAG_ANCHORABLE)

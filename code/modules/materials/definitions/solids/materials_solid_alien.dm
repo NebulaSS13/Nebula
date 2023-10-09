@@ -18,8 +18,10 @@
 	wall_flags = PAINT_PAINTABLE
 	color = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
-	brute_armor = rand(10,20)
-	burn_armor = rand(10,20)
+	wall_armor = list(
+		BRUTE = rand(10,20),
+		BURN  = rand(10,20)
+	)
 	hardness = rand(15,100)
 	reflectiveness = rand(15,100)
 	integrity = rand(200,400)

@@ -379,23 +379,25 @@
 
 
 // Takes specific amount of damage
-/obj/machinery/shield_generator/proc/take_shield_damage(var/damage, var/shield_damtype)
+/obj/machinery/shield_generator/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	var/energy_to_use = damage * ENERGY_PER_HP
 	if(check_flag(MODEFLAG_MODULATE))
 		mitigation_em -= MITIGATION_HIT_LOSS
 		mitigation_heat -= MITIGATION_HIT_LOSS
 		mitigation_physical -= MITIGATION_HIT_LOSS
 
-		switch(shield_damtype)
-			if(SHIELD_DAMTYPE_PHYSICAL)
+		switch(damage_type)
+			if(BRUTE)
 				mitigation_physical += MITIGATION_HIT_LOSS + MITIGATION_HIT_GAIN
 				energy_to_use *= 1 - (mitigation_physical / 100)
-			if(SHIELD_DAMTYPE_EM)
+			if(ELECTROCUTE)
 				mitigation_em += MITIGATION_HIT_LOSS + MITIGATION_HIT_GAIN
 				energy_to_use *= 1 - (mitigation_em / 100)
-			if(SHIELD_DAMTYPE_HEAT)
+			if(BURN)
 				mitigation_heat += MITIGATION_HIT_LOSS + MITIGATION_HIT_GAIN
 				energy_to_use *= 1 - (mitigation_heat / 100)
+			else
+				return SHIELD_ABSORBED
 
 		mitigation_em = clamp(0, mitigation_em, mitigation_max)
 		mitigation_heat = clamp(0, mitigation_heat, mitigation_max)

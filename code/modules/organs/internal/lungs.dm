@@ -170,7 +170,7 @@
 
 	var/safe_pressure_min = min_breath_pressure // Minimum safe partial pressure of breathable gas in kPa
 	// Lung damage increases the minimum safe pressure.
-	safe_pressure_min *= 1 + rand(1,4) * damage/max_damage
+	safe_pressure_min *= 1 + rand(1,4) * organ_damage/max_damage
 
 	var/breatheffect = GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS)
 	if(!forced && breatheffect && !GET_CHEMICAL_EFFECT(owner, CE_STABLE)) //opiates are bad mmkay
@@ -238,7 +238,7 @@
 	var/failed_breath = failed_inhale || failed_exhale
 	if(!failed_breath)
 		last_successful_breath = world.time
-		owner.adjustOxyLoss(-5 * inhale_efficiency)
+		owner.heal_damage(5 * inhale_efficiency, OXY)
 		if(!BP_IS_PROSTHETIC(src) && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
 			if(breathing || owner.shock_stage >= 10)
 				sound_to(owner, sound(species.breathing_sound,0,0,0,5))
@@ -263,8 +263,8 @@
 		else
 			owner.emote(pick("shiver","twitch"))
 
-	if(damage || GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS) || world.time > last_successful_breath + 2 MINUTES)
-		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
+	if(organ_damage || GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS) || world.time > last_successful_breath + 2 MINUTES)
+		owner.take_damage(HUMAN_MAX_OXYLOSS*breath_fail_ratio, OXY)
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 2)
 	last_int_pressure = 0
@@ -286,9 +286,9 @@
 				damage = COLD_GAS_DAMAGE_LEVEL_1
 
 			if(prob(20))
-				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				owner.take_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
 			else
-				src.damage += damage
+				organ_damage += damage
 			owner.fire_alert = 1
 		else if(breath.temperature >= heat_1)
 			if(prob(20))
@@ -302,9 +302,9 @@
 				damage = HEAT_GAS_DAMAGE_LEVEL_3
 
 			if(prob(20))
-				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+				owner.take_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
 			else
-				src.damage += damage
+				organ_damage += damage
 			owner.fire_alert = 2
 
 		//breathing in hot/cold air also heats/cools you a bit
@@ -346,7 +346,7 @@
 		. += "[pick("wheezing", "gurgling")] sounds"
 
 	var/list/breathtype = list()
-	if(owner.getOxyLossPercent() > 50)
+	if(owner.get_suffocation_percent() > 50)
 		breathtype += pick("straining","labored")
 	if(owner.shock_stage > 50)
 		breathtype += pick("shallow and rapid")

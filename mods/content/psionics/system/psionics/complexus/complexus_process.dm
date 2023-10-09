@@ -192,8 +192,8 @@
 					if(I.organ_tag == BP_BRAIN)
 						continue
 
-					if(I.damage > 0 && spend_power(heal_rate))
-						I.damage = max(I.damage - heal_rate, 0)
+					if(I.organ_damage > 0 && spend_power(heal_rate))
+						I.organ_damage = max(I.organ_damage - heal_rate, 0)
 						if(prob(25))
 							to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [I.name]."))
 						return
@@ -226,23 +226,22 @@
 
 	// Heal radiation, cloneloss and poisoning.
 	if(heal_poison)
-
-		if(owner.radiation && spend_power(heal_rate))
+		if(owner.get_damage(IRRADIATE) && spend_power(heal_rate))
 			if(prob(25))
 				to_chat(owner, SPAN_NOTICE("Your autoredactive faculty repairs some of the radiation damage to your body."))
-			owner.radiation = max(0, owner.radiation - heal_rate)
+			owner.heal_damage(heal_rate, IRRADIATE)
 			return
 
-		if(owner.getCloneLoss() && spend_power(heal_rate))
+		if(owner.get_damage(CLONE) && spend_power(heal_rate))
 			if(prob(25))
 				to_chat(owner, SPAN_NOTICE("Your autoredactive faculty stitches together some of your mangled DNA."))
-			owner.adjustCloneLoss(-heal_rate)
+			owner.heal_damage(heal_rate, CLONE)
 			return
 
 	// Heal everything left.
-	if(heal_general && prob(mend_prob) && (owner.getBruteLoss() || owner.getFireLoss() || owner.getOxyLoss()) && spend_power(heal_rate))
-		owner.adjustBruteLoss(-(heal_rate), do_update_health = FALSE)
-		owner.adjustFireLoss(-(heal_rate), do_update_health = FALSE)
-		owner.adjustOxyLoss(-(heal_rate))
+	if(heal_general && prob(mend_prob) && (owner.get_damage(BRUTE) || owner.get_damage(BURN) || owner.get_damage(OXY)) && spend_power(heal_rate))
+		owner.heal_damage(heal_rate, BRUTE, skip_update_health = TRUE)
+		owner.heal_damage(heal_rate, BURN, skip_update_health = TRUE)
+		owner.heal_damage(heal_rate, OXY)
 		if(prob(25))
 			to_chat(owner, SPAN_NOTICE("Your skin crawls as your autoredactive faculty heals your body."))

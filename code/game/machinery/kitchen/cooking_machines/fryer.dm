@@ -37,10 +37,10 @@
 			to_chat(user, "<span class='warning'>They are missing that body part!</span>")
 		else
 			visible_message("<span class='danger'>\The [user] shoves \the [victim][E ? "'s [E.name]" : ""] into \the [src]!</span>")
-			H.apply_damage(rand(20,30), BURN, target_zone)
+			H.take_damage(rand(20,30), BURN, target_zone)
 
 	else
-		victim.apply_damage(rand(30,40), BURN)
+		victim.take_damage(rand(30,40), BURN)
 
 	if(victim)
 		admin_attack_log(user, victim, "Has [cook_type] their victim in \a [src]", "Has been [cook_type] in \a [src] by the attacker.", "[cook_type], in \a [src], ")

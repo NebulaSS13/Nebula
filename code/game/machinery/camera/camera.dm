@@ -179,7 +179,7 @@
 			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.get_structure_damage())
+	take_damage(P.get_structure_damage(), P.damage_type, damage_flags = P.damage_flags)
 
 /obj/machinery/camera/explosion_act(severity)
 	..()
@@ -192,7 +192,7 @@
 		var/obj/O = AM
 		if (O.throwforce >= src.toughness)
 			visible_message(SPAN_WARNING("[src] was hit by [O]!"))
-		take_damage(O.throwforce)
+		take_damage(O.throwforce, BRUTE)
 
 /obj/machinery/camera/physical_attack_hand(mob/living/carbon/human/user)
 	if(!istype(user))

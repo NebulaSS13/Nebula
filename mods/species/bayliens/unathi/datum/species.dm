@@ -32,7 +32,9 @@
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
 	breath_pressure = 18
-	brute_mod = 0.8
+	damage_modifiers = list(
+		BRUTE = 0.8
+	)
 	blood_volume = 800
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 2

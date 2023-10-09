@@ -107,7 +107,7 @@
 		nearby_mobs.Add(M)
 
 		var/obj/item/organ/external/target = pick(M.get_external_organs())
-		M.apply_damage(rand(5, 10), BRUTE, target.organ_tag)
+		M.take_damage(rand(5, 10), BRUTE, target.organ_tag)
 		to_chat(M, "<span class='warning'>The skin on your [parse_zone(target.organ_tag)] feels like it's ripping apart, and a stream of blood flies out.</span>")
 		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)
 		B.target_turf = pick(range(1, src))

@@ -161,6 +161,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	/// Point at which the fluid will proc turf interaction logic. Workaround for mops being ruined forever by 1u of anything else being added.
 	var/turf_touch_threshold = FLUID_QDEL_POINT
 
+	/// Damage to a wall is divided by this value if the wall is reinforced by this material.
+	var/list/wall_armor = list(
+		BRUTE = 2,
+		BURN  = 2
+	)
+
 	// Damage values.
 	var/hardness = MAT_VALUE_HARD            // Used for edge damage in weapons.
 	var/reflectiveness = MAT_VALUE_DULL
@@ -350,8 +356,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(!shard_icon)
 		shard_icon = shard_type
-	if(!burn_armor)
-		burn_armor = brute_armor
 	if(!gas_symbol)
 		gas_symbol = "[name]_[sequential_id(abstract_type)]"
 	if(!gas_symbol_html)
@@ -698,30 +702,30 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return
 
 	if(radioactivity)
-		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
+		M.take_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
 	if(toxicity)
 		M.add_chemical_effect(CE_TOXIN, toxicity)
 		var/dam = (toxicity * removed)
 		if(toxicity_targets_organ && ishuman(M))
-			var/organ_damage = dam * M.get_toxin_resistance()
+			var/organ_damage = dam * M.get_damage_modifier(TOX)
 			if(organ_damage > 0)
 				var/mob/living/carbon/human/H = M
 				var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, toxicity_targets_organ)
 				if(I)
-					var/can_damage = I.max_damage - I.damage
+					var/can_damage = I.max_damage - I.organ_damage
 					if(can_damage > 0)
 						if(organ_damage > can_damage)
-							I.take_internal_damage(can_damage, silent=TRUE)
+							I.take_damage(can_damage, silent=TRUE)
 							dam -= can_damage
 						else
-							I.take_internal_damage(organ_damage, silent=TRUE)
+							I.take_damage(organ_damage, TOX, silent=TRUE)
 							dam = 0
 		if(dam > 0)
-			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
+			M.take_damage(toxicity_targets_organ ? (dam * 0.75) : dam, TOX)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG)
-		M.take_organ_damage(0, removed * solvent_power, override_droplimb = DISMEMBER_METHOD_ACID)
+		M.take_damage(0, removed * solvent_power, BURN, override_droplimb = DISMEMBER_METHOD_ACID)
 
 	if(narcosis)
 		if(prob(10))
@@ -746,7 +750,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return
 
 	if(radioactivity)
-		M.apply_damage((radioactivity / 2) * removed, IRRADIATE)
+		M.take_damage((radioactivity / 2) * removed, IRRADIATE)
 
 	if(dirtiness <= DIRTINESS_STERILE)
 		if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
@@ -787,7 +791,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
-	M.adjustToxLoss(REM)
+	M.take_damage(REM, TOX)
 
 /decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
 	if(newdata)

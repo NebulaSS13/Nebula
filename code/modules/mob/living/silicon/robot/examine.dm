@@ -4,13 +4,13 @@
 
 	var/msg = ""
 	msg += "<span class='warning'>"
-	if (src.getBruteLoss())
-		if (src.getBruteLoss() < 75)
+	if (get_damage(BRUTE))
+		if (get_damage(BRUTE) < 75)
 			msg += "It looks slightly dented.\n"
 		else
 			msg += "<B>It looks severely dented!</B>\n"
-	if (src.getFireLoss())
-		if (src.getFireLoss() < 75)
+	if (get_damage(BURN))
+		if (get_damage(BURN) < 75)
 			msg += "It looks slightly charred.\n"
 		else
 			msg += "<B>It looks severely burnt and heat-warped!</B>\n"

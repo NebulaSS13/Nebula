@@ -30,7 +30,7 @@
 	var/obj/item/organ/external/affected = ..()
 	if(affected)
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I.damage > 0)
+			if(I.organ_damage > 0)
 				if(I.status & ORGAN_DEAD)
 					to_chat(user, SPAN_WARNING("\The [I] is [I.can_recover() ? "decaying" : "necrotic"] and cannot be treated with \the [tool] alone."))
 					continue
@@ -47,7 +47,7 @@
 	user.visible_message("[user] starts treating damage within \the [target]'s [affected.name] with [tool_name].", \
 	"You start treating damage within \the [target]'s [affected.name] with [tool_name]." )
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_PROSTHETIC(I) && !(I.status & ORGAN_DEAD) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
+		if(I && I.organ_damage > 0 && !BP_IS_PROSTHETIC(I) && !(I.status & ORGAN_DEAD) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			user.visible_message("[user] starts treating damage to [target]'s [I] with [tool_name].", \
 			"You start treating damage to [target]'s [I] with [tool_name]." )
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
@@ -61,7 +61,7 @@
 		tool_name = "the bandaid"
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_PROSTHETIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
+		if(I && I.organ_damage > 0 && !BP_IS_PROSTHETIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			if(I.status & ORGAN_DEAD)
 				to_chat(user, SPAN_NOTICE("You were unable to treat \the [I] due to its necrotic state."))
 			else
@@ -78,14 +78,14 @@
 	"<span class='warning'>Your hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!</span>")
 	var/dam_amt = 2
 	if(istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
-		target.adjustToxLoss(5)
+		target.take_damage(5, TOX)
 	else
 		dam_amt = 5
-		target.adjustToxLoss(10)
-		affected.take_external_damage(dam_amt, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+		target.take_damage(10, TOX)
+		affected.take_damage(dam_amt, BRUTE, damage_flags = (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_PROSTHETIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
-			I.take_internal_damage(dam_amt)
+		if(I && I.organ_damage > 0 && !BP_IS_PROSTHETIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
+			I.take_damage(dam_amt, BRUTE)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -135,7 +135,7 @@
 	if(affected)
 		user.visible_message("<span class='warning'>[user]'s hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>", \
 		"<span class='warning'>Your hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>")
-		affected.take_external_damage(rand(30,50), 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+		affected.take_damage(rand(30,50), BRUTE, damage_flags = (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -202,7 +202,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, damaging [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(20, used_weapon = tool)
+	affected.take_damage(20, BRUTE, used_weapon = tool)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -244,7 +244,7 @@
 			CRASH("Target ([target]) of surgery [type] has no bodytype!")
 		else
 			var/decl/pronouns/G = O.get_pronouns()
-			if(O.damage > (O.max_damage * 0.75))
+			if(O.organ_damage > (O.max_damage * 0.75))
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
@@ -282,7 +282,7 @@
 	"<span class='warning'>Your hand slips, damaging \the [tool]!</span>")
 	var/obj/item/organ/internal/I = tool
 	if(istype(I))
-		I.take_internal_damage(rand(3,5))
+		I.take_damage(rand(3,5), BRUTE)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -374,5 +374,5 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(20, used_weapon = tool)
+	affected.take_damage(20, BRUTE, used_weapon = tool)
 	..()

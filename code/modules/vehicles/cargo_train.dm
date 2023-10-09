@@ -155,7 +155,7 @@
 	for(var/i = 1 to rand(1,5))
 		var/obj/item/organ/external/E = pick(victim.get_external_organs())
 		if(E)
-			victim.apply_damage(rand(5,10), BRUTE, E.organ_tag)
+			victim.take_damage(rand(5,10), BRUTE, E.organ_tag)
 
 /obj/vehicle/train/cargo/trolley/crossed_mob(var/mob/living/victim)
 	..()

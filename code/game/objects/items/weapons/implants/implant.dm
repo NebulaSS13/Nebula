@@ -100,10 +100,10 @@
 	if(malfunction == MALFUNCTION_PERMANENT) return
 	to_chat(imp_in, SPAN_DANGER("You feel something melting inside [part ? "your [part.name]" : "you"]!"))
 	if (part)
-		part.take_external_damage(burn = 15, used_weapon = "Electronics meltdown")
+		part.take_damage(15, BURN, used_weapon = "Electronics meltdown")
 	else
 		var/mob/living/M = imp_in
-		M.apply_damage(15,BURN)
+		M.take_damage(15, BURN)
 	name = "melted implant"
 	desc = "Charred circuit in melted plastic case. Wonder what that used to be..."
 	icon_state = "implant_melted"

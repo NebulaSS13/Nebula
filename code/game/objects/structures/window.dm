@@ -82,7 +82,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = shatter()
 
-/obj/structure/window/take_damage(damage = 0)
+/obj/structure/window/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	. = ..()
 	playsound(loc, "glasscrack", 100, 1)
 
@@ -98,10 +98,8 @@
 	qdel(src)
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
-	var/proj_damage = Proj.get_structure_damage()
-	if(!proj_damage) return
 	..()
-	take_damage(proj_damage)
+	take_damage(Proj.get_structure_damage(), Proj.damage_type, damage_flags = Proj.damage_flags)
 
 /obj/structure/window/explosion_act(severity)
 	..()
@@ -141,7 +139,7 @@
 	if(health - tforce <= 7 && !reinf_material)
 		set_anchored(FALSE)
 		step(src, get_dir(AM, src))
-	take_damage(tforce)
+	take_damage(tforce, BRUTE)
 
 /obj/structure/window/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)
@@ -285,20 +283,20 @@
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
 		if(prob(50))
 			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 2)
-		affecting_mob.apply_damage(10, BRUTE, def_zone, used_weapon = src)
+		affecting_mob.take_damage(10, BRUTE, def_zone, used_weapon = src)
 		hit(25)
 		qdel(G)
 	else
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
 		SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
-		affecting_mob.apply_damage(20, BRUTE, def_zone, used_weapon = src)
+		affecting_mob.take_damage(20, BRUTE, def_zone, used_weapon = src)
 		hit(50)
 		qdel(G)
 	return TRUE
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
 	if(reinf_material) damage *= 0.5
-	take_damage(damage)
+	take_damage(damage, BRUTE)
 
 /obj/structure/window/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -591,7 +589,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-/obj/structure/window/reinforced/crescent/take_damage()
+/obj/structure/window/reinforced/crescent/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	return
 
 /obj/structure/window/reinforced/crescent/shatter()

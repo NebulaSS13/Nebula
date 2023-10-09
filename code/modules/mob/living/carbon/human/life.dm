@@ -144,9 +144,9 @@
 		cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
-	if(getFireLoss())
+	if(get_damage(BURN))
 		if((MUTATION_COLD_RESISTANCE in mutations) || (prob(1)))
-			heal_organ_damage(0,1)
+			heal_damage(1, BURN)
 
 	// DNA2 - Gene processing.
 	var/list/all_genes = decls_repository.get_decls_of_subtype(/decl/gene)
@@ -224,7 +224,7 @@
 			burn_dam = HEAT_DAMAGE_LEVEL_2
 		else
 			burn_dam = HEAT_DAMAGE_LEVEL_3
-		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
+		take_damage(burn_dam, BURN, used_weapon = "High Body Temperature")
 		fire_alert = max(fire_alert, 2)
 
 	else if(bodytemperature <= get_mob_temperature_threshold(COLD_LEVEL_1))
@@ -241,7 +241,7 @@
 			burn_dam = COLD_DAMAGE_LEVEL_3
 		set_stasis(get_cryogenic_factor(bodytemperature), STASIS_COLD)
 		if(!has_chemical_effect(CE_CRYO, 1))
-			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
+			take_damage(burn_dam, BURN, used_weapon = "Low Body Temperature")
 			fire_alert = max(fire_alert, 1)
 
 	// Account for massive pressure differences.  Done by Polymorph
@@ -250,7 +250,7 @@
 
 	if(adjusted_pressure >= species.hazard_high_pressure)
 		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
-		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
+		take_damage(pressure_damage, BRUTE, used_weapon = "High Pressure")
 		pressure_alert = 2
 	else if(adjusted_pressure >= species.warning_high_pressure)
 		pressure_alert = 1
@@ -263,10 +263,10 @@
 		for(var/obj/item/organ/external/O in parts)
 			if(QDELETED(O) || !(O.owner == src))
 				continue
-			if(O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
-				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
-		if(getOxyLossPercent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
-			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
+			if(O.organ_damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
+				O.take_damage(LOW_PRESSURE_DAMAGE, BRUTE, used_weapon = "Low Pressure")
+		if(get_suffocation_percent() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
+			take_damage(4, OXY)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 		pressure_alert = -2
 
 	return
@@ -369,7 +369,7 @@
 		for(var/obj/item/I in src)
 			if(I.contaminated)
 				total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
-		adjustToxLoss(total_contamination)
+		take_damage(total_contamination, TOX)
 
 	. = ..()
 	if(!.)
@@ -384,7 +384,7 @@
 	if(HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP))
 		set_stat(UNCONSCIOUS)
 		animate_tail_reset()
-		adjustHalLoss(-3)
+		heal_damage(3, PAIN)
 		if(prob(2) && is_asystole() && isSynthetic())
 			visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
 	else
@@ -402,13 +402,13 @@
 			ADJ_STATUS(src, STAT_DIZZY, -15)
 		if(HAS_STATUS(src, STAT_JITTER))
 			ADJ_STATUS(src, STAT_JITTER, -15)
-		adjustHalLoss(-3)
+		heal_damage(3, PAIN)
 	else
 		if(HAS_STATUS(src, STAT_DIZZY))
 			ADJ_STATUS(src, STAT_DIZZY, -3)
 		if(HAS_STATUS(src, STAT_JITTER))
 			ADJ_STATUS(src, STAT_JITTER, -3)
-		adjustHalLoss(-1)
+		heal_damage(1, PAIN)
 
 	if(HAS_STATUS(src, STAT_DROWSY))
 		SET_STATUS_MAX(src, STAT_BLURRY, 2)
@@ -450,9 +450,9 @@
 		else
 			clear_fullscreen("crit")
 			//Oxygen damage overlay
-			if(getOxyLoss())
+			if(get_damage(OXY))
 				var/severity = 0
-				switch(getOxyLossPercent())
+				switch(get_suffocation_percent())
 					if(10 to 20)		severity = 1
 					if(20 to 25)		severity = 2
 					if(25 to 30)		severity = 3
@@ -465,7 +465,7 @@
 				clear_fullscreen("oxy")
 
 		//Fire and Brute damage overlay (BSSR)
-		var/hurtdamage = src.getBruteLoss() + src.getFireLoss() + damageoverlaytemp
+		var/hurtdamage = get_damage(BRUTE) + get_damage(BURN) + damageoverlaytemp
 		damageoverlaytemp = 0 // We do this so we can detect if someone hits us or not.
 		if(hurtdamage)
 			var/severity = 0
@@ -608,11 +608,11 @@
 	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
 		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(src, tag)
 		if(I)
-			vomit_score += I.damage
+			vomit_score += I.organ_damage
 		else if (should_have_organ(tag))
 			vomit_score += 45
-	if(has_chemical_effect(CE_TOXIN, 1) || radiation)
-		vomit_score += 0.5 * getToxLoss()
+	if(has_chemical_effect(CE_TOXIN, 1) || get_damage(IRRADIATE))
+		vomit_score += 0.5 * get_damage(TOX)
 	if(has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
 		vomit_score += 10 * GET_CHEMICAL_EFFECT(src, CE_ALCOHOL_TOXIC)
 	if(has_chemical_effect(CE_ALCOHOL, 1))
@@ -850,7 +850,7 @@
 
 	for(var/obj/item/organ/external/E in get_external_organs())
 		if(!(E.body_part & protected_limbs) && prob(20))
-			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = "fire")
+			E.take_damage(round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), BURN, used_weapon = "fire")
 
 /mob/living/carbon/human/rejuvenate()
 	reset_blood()

@@ -168,8 +168,8 @@
 		attacker.visible_message(SPAN_DANGER("\The [attacker] thrusts [attacker_gender.his] head into \the [target]'s skull!"))
 
 	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE, damage = 10)
-	target.apply_damage(damage, BRUTE, BP_HEAD, damage_flags)
-	attacker.apply_damage(10, BRUTE, BP_HEAD)
+	target.take_damage(damage, BRUTE, BP_HEAD, damage_flags)
+	attacker.take_damage(10, BRUTE, BP_HEAD)
 
 	if(armor < 0.5 && target.headcheck(BP_HEAD) && prob(damage))
 		target.apply_effect(20, PARALYZE)
@@ -251,7 +251,7 @@
 	var/total_damage = 0
 	for(var/i in 1 to 3)
 		var/damage = min(W.force*1.5, 20)*damage_mod
-		affecting.apply_damage(damage, W.damtype, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
+		affecting.take_damage(damage, W.damtype, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
 		total_damage += damage
 
 	if(total_damage)

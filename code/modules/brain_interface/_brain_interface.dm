@@ -84,7 +84,7 @@
 			to_chat(user, SPAN_WARNING("You don't need to put a robotic brain into an interface."))
 			return TRUE
 
-		if(inserting_brain.damage >= inserting_brain.max_damage)
+		if(inserting_brain.organ_damage >= inserting_brain.max_damage)
 			to_chat(user, SPAN_WARNING("That brain is well and truly dead."))
 			return TRUE
 

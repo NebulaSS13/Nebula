@@ -106,13 +106,13 @@
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)
-			src.take_organ_damage(0, 16, bypass_armour = TRUE)
+			take_damage(16, BURN)
 			if(prob(50))
 				SET_STATUS_MAX(src, STAT_STUN, rand(5,10))
 			else
 				ADJ_STATUS(src, STAT_CONFUSE, rand(2,40))
 		if(2)
-			src.take_organ_damage(0, 7, bypass_armour = TRUE)
+			take_damage(7, BURN)
 			ADJ_STATUS(src, STAT_CONFUSE, rand(2,30))
 	flash_eyes(affect_silicon = 1)
 	to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
@@ -128,7 +128,7 @@
 		spark_at(loc, amount=5, cardinal_only = TRUE)
 
 		shock_damage *= 0.75	//take reduced damage
-		take_overall_damage(0, shock_damage)
+		take_damage(shock_damage, BURN)
 		visible_message("<span class='warning'>\The [src] was shocked by \the [source]!</span>", \
 			"<span class='danger'>Energy pulse detected, system damaged!</span>", \
 			"<span class='warning'>You hear an electrical crack</span>")
@@ -143,9 +143,9 @@
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
 			if(BRUTE)
-				adjustBruteLoss(Proj.damage)
+				take_damage(Proj.damage, BRUTE)
 			if(BURN)
-				adjustFireLoss(Proj.damage)
+				take_damage(Proj.damage, BURN)
 	Proj.on_hit(src,100) //wow this is a terrible hack
 	return 100
 
@@ -285,8 +285,8 @@
 			burn = 60
 		if(3)
 			brute = 30
-	apply_damage(brute, BRUTE, damage_flags = DAM_EXPLODE)
-	apply_damage(burn, BURN, damage_flags = DAM_EXPLODE)
+	take_damage(brute, BRUTE, damage_flags = DAM_EXPLODE)
+	take_damage(burn,  BURN,  damage_flags = DAM_EXPLODE)
 
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
 	if(!(alarm.alarm_z() in SSmapping.get_connected_levels(get_z(src))))
@@ -460,7 +460,3 @@
 	// This seems to be specifically to stop ghosted maintenance drones being used as free all-access cards.
 	if(istype(idcard) && !stat && !(ckey && !client) && !is_type_in_list(idcard, exceptions))
 		LAZYDISTINCTADD(., idcard)
-
-/mob/living/silicon/get_total_life_damage()
-	return (getBruteLoss() + getFireLoss())
-

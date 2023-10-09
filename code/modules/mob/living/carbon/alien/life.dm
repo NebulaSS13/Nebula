@@ -1,12 +1,14 @@
 /mob/living/carbon/alien/handle_mutations_and_radiation()
 	..()
-	if(radiation)
-		var/rads = radiation/25
-		radiation -= rads
+	var/rads = get_damage(IRRADIATE)
+	if(rads)
+		rads /= 25
 		adjust_nutrition(rads)
-		heal_overall_damage(rads,rads)
-		adjustOxyLoss(-(rads), do_update_health = FALSE)
-		adjustToxLoss(-(rads))
+		heal_damage(rads, IRRADIATE)
+		heal_damage(rads, BRUTE)
+		heal_damage(rads, BURN)
+		heal_damage(rads, OXY, skip_update_health = TRUE)
+		heal_damage(rads, TOX)
 
 /mob/living/carbon/alien/handle_regular_status_updates()
 
@@ -18,22 +20,22 @@
 	else if(HAS_STATUS(src, STAT_PARA))
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_stat(UNCONSCIOUS)
-		if(getHalLoss() > 0)
-			adjustHalLoss(-3)
+		if(get_damage(PAIN) > 0)
+			heal_damage(3, PAIN)
 	if(HAS_STATUS(src, STAT_ASLEEP))
-		adjustHalLoss(-3)
+		heal_damage(3, PAIN)
 		if (mind)
 			if(mind.active && client != null)
 				ADJ_STATUS(src, STAT_ASLEEP, -1)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_stat(UNCONSCIOUS)
 	else if(resting)
-		if(getHalLoss() > 0)
-			adjustHalLoss(-3)
+		if(get_damage(PAIN) > 0)
+			heal_damage(3, PAIN)
 	else
 		set_stat(CONSCIOUS)
-		if(getHalLoss() > 0)
-			adjustHalLoss(-1)
+		if(get_damage(PAIN) > 0)
+			heal_damage(3, PAIN)
 
 	// Eyes and blindness.
 	if(!check_has_eyes())
@@ -88,7 +90,7 @@
 	// Both alien subtypes survive in vaccum and suffer in high temperatures,
 	// so I'll just define this once, for both (see radiation comment above)
 	if(environment && environment.temperature > (T0C+66))
-		adjustFireLoss((environment.temperature - (T0C+66))/5) // Might be too high, check in testing.
+		take_damage((environment.temperature - (T0C+66))/5, BURN) // Might be too high, check in testing.
 		if (fire) fire.icon_state = "fire2"
 		if(prob(20))
 			to_chat(src, "<span class='danger'>You feel a searing heat!</span>")

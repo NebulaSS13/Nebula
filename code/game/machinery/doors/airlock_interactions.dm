@@ -42,14 +42,14 @@
 
 /obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
 	. = ..()
-	take_damage(crush_damage)
+	take_damage(crush_damage, BRUTE)
 
 /obj/effect/energy_field/airlock_crush(var/crush_damage)
 	Stress(crush_damage)
 
 /obj/structure/closet/airlock_crush(var/crush_damage)
 	..()
-	take_damage(crush_damage)
+	take_damage(crush_damage, BRUTE)
 	for(var/atom/movable/AM in src)
 		AM.airlock_crush()
 
@@ -57,7 +57,7 @@
 	. = ..()
 
 	for(var/i in 1 to round(crush_damage/AIRLOCK_CRUSH_INCREMENT, 1))
-		apply_damage(AIRLOCK_CRUSH_INCREMENT, BRUTE)
+		take_damage(AIRLOCK_CRUSH_INCREMENT, BRUTE)
 
 	set_status(STAT_STUN, round(crush_damage / 8, 1))
 	set_status(STAT_WEAK, round(crush_damage / 8, 1))

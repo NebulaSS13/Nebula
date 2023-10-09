@@ -123,7 +123,7 @@ var/global/list/hygiene_props = list()
 			SPAN_DANGER("\The [user] slams the toilet seat onto \the [swirlie]'s head!"),
 			SPAN_NOTICE("You slam the toilet seat onto \the [swirlie]'s head!"),
 			"You hear reverberating porcelain.")
-		swirlie.adjustBruteLoss(8)
+		swirlie.take_damage(8, BRUTE)
 		return TRUE
 
 	if(cistern && !open)
@@ -176,13 +176,13 @@ var/global/list/hygiene_props = list()
 				swirlie = GM
 				if(do_after(user, 30, src))
 					user.visible_message(SPAN_DANGER("\The [user] gives [GM.name] a swirlie!"))
-					GM.adjustOxyLoss(5)
+					GM.take_damage(5, OXY)
 				swirlie = null
 			else
 				user.visible_message(
 				SPAN_DANGER("\The [user] slams \the [GM] into the [src]!"),
 				SPAN_NOTICE("You slam \the [GM] into the [src]!"))
-				GM.adjustBruteLoss(8)
+				GM.take_damage(8, BRUTE)
 				playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 		return
 
@@ -220,7 +220,7 @@ var/global/list/hygiene_props = list()
 				to_chat(user, SPAN_WARNING("\The [GM] needs to be on \the [src]."))
 				return
 			user.visible_message(SPAN_DANGER("\The [user] slams \the [GM] into the [src]!"))
-			GM.adjustBruteLoss(8)
+			GM.take_damage(8, BRUTE)
 	. = ..()
 
 /obj/structure/hygiene/shower

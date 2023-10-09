@@ -78,9 +78,9 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	//Burn skin if exposed.
 	if(vsc.contaminant_control.SKIN_BURNS)
 		if(!contaminant_head_protected() || !contaminant_suit_protected())
+			take_damage(0.75, BURN)
 			if(prob(20))
 				to_chat(src, "<span class='danger'>Your skin burns!</span>")
-			take_overall_damage(0, 0.75)
 
 	//Burn eyes if exposed.
 	if(vsc.contaminant_control.EYE_BURNS)
@@ -105,9 +105,9 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 	var/obj/item/organ/internal/eyes/E = get_organ(BP_EYES, /obj/item/organ/internal/eyes)
 	if(E && !E.bodytype.eye_contaminant_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
-		E.damage += 2.5
+		E.organ_damage += 2.5
 		SET_STATUS_MAX(src, STAT_BLURRY, 50)
-		if (prob(max(0,E.damage - 15) + 1) && !GET_STATUS(src, STAT_BLIND))
+		if (prob(max(0,E.organ_damage - 15) + 1) && !GET_STATUS(src, STAT_BLIND))
 			to_chat(src, "<span class='danger'>You are blinded!</span>")
 			SET_STATUS_MAX(src, STAT_BLIND, 20)
 

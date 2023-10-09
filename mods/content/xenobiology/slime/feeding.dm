@@ -31,7 +31,7 @@
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [src] is dead."))
 		return FEED_RESULT_DEAD
-	if(M.getCloneLoss() >= M.get_max_health() * 1.5)
+	if(M.get_damage(CLONE) >= M.get_max_health() * 1.5)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("\The [M] is too degraded to feed upon."))
 		return FEED_RESULT_DEAD
@@ -102,9 +102,9 @@
 			gain_nutrition(drained)
 			var/heal_amt = FLOOR(drained*0.5)
 			if(heal_amt > 0)
-				adjustOxyLoss(-heal_amt, do_update_health = FALSE)
-				adjustBruteLoss(-heal_amt, do_update_health = FALSE)
-				adjustCloneLoss(-heal_amt)
+				heal_damage(heal_amt, OXY, skip_update_health = TRUE)
+				heal_damage(heal_amt, BRUTE, skip_update_health = TRUE)
+				heal_damage(heal_amt, CLONE)
 
 	if(ate_victim && feed_mob)
 		if(feed_mob.last_handled_by_mob)

@@ -32,7 +32,7 @@
 	if(!material || !material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
-		L.apply_damage(round(material.radioactivity/20),IRRADIATE, damage_flags = DAM_DISPERSED)
+		L.take_damage(round(material.radioactivity/20), IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/structure/railing/Initialize()
 	. = ..()
@@ -195,7 +195,7 @@
 					var/blocked = H.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 					if (prob(30 * (1 - blocked)))
 						SET_STATUS_MAX(H, STAT_WEAK, 5)
-					H.apply_damage(8, BRUTE, BP_HEAD)
+					H.take_damage(8, BRUTE, BP_HEAD)
 				else
 					if (get_turf(H) == get_turf(src))
 						H.forceMove(get_step(src, src.dir))
@@ -257,10 +257,10 @@
 			update_icon()
 		return
 
-	if(W.force && (W.damtype == BURN || W.damtype == BRUTE))
+	if(W.force && (W.damtype == BRUTE || W.damtype == BURN))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
-		take_damage(W.force)
+		take_damage(W.force, W.damtype)
 		return
 	. = ..()
 
@@ -279,9 +279,8 @@
 
 /obj/structure/railing/do_climb(var/mob/living/user)
 	. = ..()
-	if(.)
-		if(!anchored || material.is_brittle())
-			take_damage(max_health) // Fatboy
+	if(. && (!anchored || material.is_brittle()))
+		take_damage(max_health, BRUTE)
 
 	user.jump_layer_shift()
 	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, jump_layer_shift_end)), 2)

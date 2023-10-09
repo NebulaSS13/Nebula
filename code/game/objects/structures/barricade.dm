@@ -73,7 +73,7 @@
 			parts_type = null
 			physically_destroyed()
 		else if(severity == 2)
-			take_damage(25)
+			take_damage(25, BRUTE)
 
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 	if(air_group || (height==0))
@@ -97,5 +97,5 @@
 		spike_damage_holder = (spike_damage / 4)
 	if(isanimal(victim)) //simple animals have simple health, reduce our spike_damage
 		spike_damage_holder = (spike_damage / 4)
-	victim.apply_damage(spike_damage_holder, BRUTE, target_zone, damage_flags = DAM_SHARP, used_weapon = src)
+	victim.take_damage(spike_damage_holder, BRUTE, target_zone, damage_flags = DAM_SHARP, used_weapon = src)
 	visible_message(SPAN_DANGER("\The [victim] is [pick(poke_description)] by \the [src]!"))

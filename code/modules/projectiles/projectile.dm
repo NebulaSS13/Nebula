@@ -33,7 +33,7 @@
 	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
+	var/damage_type = BRUTE
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/damage_flags = DAM_BULLET
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
@@ -115,7 +115,7 @@
 	L.apply_effects(0, weaken, paralyze, stutter, eyeblur, drowsy, 0, blocked)
 	L.stun_effect_act(stun, agony, def_zone, src)
 	//radiation protection is handled separately from other armour types.
-	L.apply_damage(irradiate, IRRADIATE, damage_flags = DAM_DISPERSED)
+	L.take_damage(irradiate, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 	return 1
 
@@ -330,7 +330,7 @@
 
 /obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)
 	//Check if we even broke skin in first place
-	if(!wound || !(wound.damage_type == CUT || wound.damage_type == PIERCE))
+	if(!wound || !(wound.wound_type == WOUND_CUT || wound.wound_type == WOUND_PIERCE))
 		return
 	//Check if we can do nasty stuff inside
 	if(!can_embed() || (organ.species.species_flags & SPECIES_FLAG_NO_EMBED))

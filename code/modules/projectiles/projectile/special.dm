@@ -84,7 +84,7 @@
 		var/mob/living/carbon/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			if(prob(15))
-				H.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
+				H.take_damage((rand(30,80)), IRRADIATE, damage_flags = DAM_DISPERSED)
 				SET_STATUS_MAX(H, STAT_WEAK, 5)
 				var/decl/pronouns/G = M.get_pronouns()
 				visible_message(
@@ -98,7 +98,7 @@
 					randmutg(M)
 					domutcheck(M,null)
 			else
-				M.adjustFireLoss(rand(5,15))
+				M.take_damage(rand(5,15), BURN)
 				M.show_message("<span class='danger'>The radiation beam singes you!</span>")
 	else if(iscarbon(target))
 		M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")

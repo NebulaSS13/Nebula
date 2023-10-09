@@ -66,9 +66,6 @@
 		set_status(STAT_STUN, 0)
 		set_status(STAT_PARA, 0)
 
-/mob/living/bot/get_total_life_damage()
-	return getFireLoss() + getBruteLoss()
-
 /mob/living/bot/death()
 	if(stat == DEAD)
 		return
@@ -97,7 +94,7 @@
 	else if(IS_WELDER(O))
 		if(current_health < get_max_health())
 			if(open)
-				heal_overall_damage(10)
+				heal_damage(10, BRUTE)
 				user.visible_message("<span class='notice'>\The [user] repairs \the [src].</span>","<span class='notice'>You repair \the [src].</span>")
 			else
 				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")

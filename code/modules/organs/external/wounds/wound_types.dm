@@ -5,7 +5,7 @@
 //because in it's stages list, "deep cut" = 15.
 /proc/get_wound_type(var/type, var/damage)
 	switch(type)
-		if(CUT)
+		if(WOUND_CUT)
 			switch(damage)
 				if(70 to INFINITY)
 					return /datum/wound/cut/massive
@@ -19,7 +19,7 @@
 					return /datum/wound/cut/deep
 				if(0 to 15)
 					return /datum/wound/cut/small
-		if(PIERCE)
+		if(WOUND_PIERCE)
 			switch(damage)
 				if(60 to INFINITY)
 					return /datum/wound/puncture/massive
@@ -31,9 +31,9 @@
 					return /datum/wound/puncture/flesh
 				if(0 to 15)
 					return /datum/wound/puncture/small
-		if(BRUISE)
+		if(WOUND_BRUISE)
 			return /datum/wound/bruise
-		if(BURN, LASER)
+		if(WOUND_BURN, WOUND_LASER)
 			switch(damage)
 				if(50 to INFINITY)
 					return /datum/wound/burn/carbonised
@@ -45,7 +45,7 @@
 					return /datum/wound/burn/large
 				if(0 to 15)
 					return /datum/wound/burn/moderate
-		if(SHATTER)
+		if(WOUND_SHATTER)
 			switch(damage)
 				if(50 to INFINITY)
 					return /datum/wound/shatter/smashed
@@ -66,7 +66,7 @@
 /** CUTS **/
 /datum/wound/cut
 	bleed_threshold = 5
-	damage_type = CUT
+	wound_type = WOUND_CUT
 
 /datum/wound/cut/bandage()
 	..()
@@ -81,7 +81,7 @@
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
 	if(damage > min_damage)
-		heal_damage(damage-min_damage)
+		heal_wound_damage(damage-min_damage)
 	autoheal_cutoff = initial(autoheal_cutoff)
 
 /datum/wound/cut/small
@@ -152,7 +152,7 @@
 /** PUNCTURES **/
 /datum/wound/puncture
 	bleed_threshold = 10
-	damage_type = PIERCE
+	wound_type = WOUND_PIERCE
 
 /datum/wound/puncture/can_worsen(damage_type, damage)
 	return 0 //puncture wounds cannot be enlargened
@@ -218,11 +218,11 @@
 	bleed_threshold = 20
 	max_bleeding_stage = 3 //only large bruise and above can bleed.
 	autoheal_cutoff = 30
-	damage_type = BRUISE
+	wound_type = WOUND_BRUISE
 
 /** BURNS **/
 /datum/wound/burn
-	damage_type = BURN
+	wound_type = WOUND_BURN
 	max_bleeding_stage = 0
 
 /datum/wound/burn/bleeding()
@@ -278,7 +278,7 @@
 
 	switch(losstype)
 		if(DISMEMBER_METHOD_EDGE, DISMEMBER_METHOD_BLUNT)
-			damage_type = CUT
+			wound_type = WOUND_CUT
 			if(BP_IS_PROSTHETIC(lost_limb))
 				max_bleeding_stage = -1
 				bleed_threshold = INFINITY
@@ -299,7 +299,7 @@
 					"scarred stump" = 0
 				)
 		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
-			damage_type = BURN
+			wound_type = WOUND_BURN
 			stages = list(
 				"mangled charred stump" = damage_amt*1.3,
 				"charred stump" = damage_amt,
@@ -315,7 +315,7 @@
 /** CRYSTALLINE WOUNDS **/
 /datum/wound/shatter
 	bleed_threshold = INFINITY
-	damage_type = SHATTER
+	wound_type = WOUND_SHATTER
 	max_bleeding_stage = -1
 
 /datum/wound/shatter/close()

@@ -63,7 +63,7 @@
 // RefreshParts has been called, likely meaning other componenets were added/removed.
 /obj/item/stock_parts/proc/on_refresh(var/obj/machinery/machine)
 
-/obj/item/stock_parts/take_damage(damage, damage_type, damage_flags, inflicter, armor_pen)
+/obj/item/stock_parts/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	if(damage_type in ignore_damage_types)
 		return
 	. = ..()
@@ -79,12 +79,8 @@
 
 /obj/item/stock_parts/proc/on_fail(var/obj/machinery/machine, var/damtype)
 	machine.on_component_failure(src)
-	var/cause = "shatters"
-	switch(damtype)
-		if(BURN)
-			cause = "sizzles"
-		if(ELECTROCUTE)
-			cause = "sparks"
+	var/decl/damage_handler/damage_type_data = GET_DECL(damtype)
+	var/cause = damage_type_data?.damage_verb || "shatters"
 	visible_message(SPAN_WARNING("Something [cause] inside \the [machine]."), range = 2)
 	SetName("broken [name]")
 

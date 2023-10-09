@@ -406,7 +406,7 @@
 					M.set_hallucination(50, 50)
 				else
 					to_chat(usr, "<span class='danger'>Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there...</span>")
-					M.take_organ_damage(10)
+					M.take_damage(10, BRUTE)
 			else
 				to_chat(usr, "<span class='warning'>The sounds of battle fill your ears...</span>")
 		if(ORION_TRAIL_ILLNESS)
@@ -419,13 +419,13 @@
 		if(ORION_TRAIL_CARP)
 			to_chat(usr, "<span class='danger'> Something bit you!</span>")
 			var/mob/living/M = usr
-			M.adjustBruteLoss(10)
+			M.take_damage(10, BRUTE)
 		if(ORION_TRAIL_FLUX)
 			if(iscarbon(usr) && prob(75))
 				var/mob/living/carbon/M = usr
 				SET_STATUS_MAX(M, STAT_WEAK, 3)
 				src.visible_message("A sudden gust of powerful wind slams \the [M] into the floor!", "You hear a large fwooshing sound, followed by a bang.")
-				M.take_organ_damage(10)
+				M.take_damage(10, BRUTE)
 			else
 				to_chat(usr, "<span class='warning'>A violent gale blows past you, and you barely manage to stay standing!</span>")
 		if(ORION_TRAIL_MALFUNCTION)
@@ -449,8 +449,8 @@
 			for(var/i=0;i<10;i++)
 				sleep(10)
 				SET_STATUS_MAX(M, STAT_STUN, 5)
-				M.adjustBruteLoss(10, do_update_health = FALSE)
-				M.adjustFireLoss(10)
+				M.take_damage(10, BRUTE, skip_update_health = TRUE)
+				M.take_damage(10, BURN)
 			usr.gib() //So that people can't cheese it and inject a lot of kelo/bicard before losing
 
 

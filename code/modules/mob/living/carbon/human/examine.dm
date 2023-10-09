@@ -144,7 +144,7 @@
 					wound_flavor_text[E.name] += "[use_His] [E.name] is irrecoverably damaged!<br>"
 				else
 					wound_flavor_text[E.name] += "[use_His] [E.name] is grey and necrotic!<br>"
-			else if(E.damage >= E.max_damage && E.germ_level >= INFECTION_LEVEL_TWO)
+			else if(E.organ_damage >= E.max_damage && E.germ_level >= INFECTION_LEVEL_TWO)
 				wound_flavor_text[E.name] += "[use_His] [E.name] is likely beyond saving, and has begun to decay!<br>"
 
 		for(var/datum/wound/wound in E.wounds)

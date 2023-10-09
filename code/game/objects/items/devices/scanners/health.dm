@@ -147,7 +147,7 @@
 	dat += "Body temperature: [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
 
 	// Radiation.
-	switch(H.radiation)
+	switch(H.get_damage(IRRADIATE))
 		if(-INFINITY to 0)
 			dat += "No radiation detected."
 		if(1 to 30)
@@ -171,13 +171,13 @@
 
 	// Other general warnings.
 	if(skill_level >= SKILL_BASIC)
-		if(H.getOxyLossPercent() > 50)
+		if(H.get_suffocation_percent() > 50)
 			dat += "<span class='scan_blue'>[b]Severe oxygen deprivation detected.[endb]</span>"
-		if(H.getToxLoss() > 50)
+		if(H.get_damage(TOX) > 50)
 			dat += "<span class='scan_green'>[b]Major systemic organ failure detected.[endb]</span>"
-	if(H.getFireLoss() > 50)
+	if(H.get_damage(BURN) > 50)
 		dat += "<span class='scan_orange'>[b]Severe burn damage detected.[endb]</span>"
-	if(H.getBruteLoss() > 50)
+	if(H.get_damage(BRUTE) > 50)
 		dat += "<span class='scan_red'>[b]Severe anatomical damage detected.[endb]</span>"
 
 	if(skill_level >= SKILL_BASIC)
