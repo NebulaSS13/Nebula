@@ -1,6 +1,6 @@
 /datum/trader/ship/unique
 	abstract_type = /datum/trader/ship/unique
-	trade_flags = TRADER_WANTED_ONLY|TRADER_GOODS
+	trade_flags = TRADER_WANTED_ONLY | TRADER_GOODS | TRADER_BRIBABLE
 	want_multiplier = 5
 	typical_duration = 40
 
@@ -98,7 +98,6 @@
 		"Beyond the Veil",
 		"Deadverse"
 	)
-	name_language = TRADER_DEFAULT_NAME
 
 	possible_wanted_items = list(
 		/mob/living/simple_animal/construct              = TRADER_SUBTYPES_ONLY,

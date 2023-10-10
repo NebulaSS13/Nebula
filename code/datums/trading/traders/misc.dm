@@ -2,7 +2,7 @@
 	name = "Pet Shop Owner"
 	name_language = /decl/language/human/common
 	origin = "Pet Shop"
-	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
+	trade_flags = TRADER_GOODS | TRADER_MONEY | TRADER_WANTED_ONLY | TRADER_BRIBABLE
 	possible_origins = list(
 		"Paws-Out",
 		"Pets-R-Smart",
@@ -122,7 +122,6 @@
 
 /datum/trader/ship/replica_shop
 	name = "Replica Store Owner"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Replica Store"
 	possible_origins = list(
 		"Ye-Old Armory",

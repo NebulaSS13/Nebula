@@ -1,6 +1,5 @@
 /datum/trader/pizzaria
 	name = "Pizza Shop Employee"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Pizzeria"
 	possible_origins = list(
 		"Papa Joseph's",
@@ -42,7 +41,6 @@
 
 /datum/trader/ship/chinese
 	name = "Chinese Restaurant"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Captain Panda Bistro"
 	possible_origins = list(
 		"888 Shanghai Kitchen",
@@ -50,7 +48,6 @@
 		"The House of the Venerable and Inscrutable Colonel",
 		"Lucky Dragon"
 	)
-	trade_flags = TRADER_MONEY
 	possible_wanted_items = list()
 	possible_trading_items = list(
 		/obj/item/chems/food/meatkabob    	            = TRADER_THIS_TYPE,
@@ -101,7 +98,6 @@
 
 /datum/trader/grocery
 	name = "Grocer"
-	name_language = TRADER_DEFAULT_NAME
 	possible_origins = list(
 		"HyTee",
 		"Kreugars",
@@ -145,7 +141,6 @@
 
 /datum/trader/bakery
 	name = "Pastry Chef"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Bakery"
 	possible_origins = list(
 		"Cakes By Design",

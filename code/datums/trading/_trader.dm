@@ -1,33 +1,39 @@
 /datum/trader
 	abstract_type = /datum/trader
-	var/name = "unsuspicious trader"                            //The name of the trader in question
-	var/origin = "some place"                                   //The place that they are trading from
-	var/list/possible_origins                                   //Possible names of the trader origin
-	var/disposition = 0                                         //The current disposition of them to us.
-	var/trade_flags = TRADER_MONEY                              //Flags
-	var/name_language                                           //If this is set to a language name this will generate a name from the language
-	var/icon/portrait                                           //The icon that shows up in the menu TODO: IMPLEMENT OR REMOVE
-	var/trader_currency
-	var/datum/trade_hub/hub
+	var/name = "unsuspicious trader"         // The name of the trader in question
+	var/origin = "some place"                // The place that they are trading from
+	var/list/possible_origins                // Possible names of the trader origin
+	var/disposition = 0                      // The current disposition of them to us.
+	var/trade_flags = TRADER_MONEY           // Various flags for allowing or denying offers/interactions.
+	var/name_language                        // Language decl to use for trader name. If null, will use the generic name generator.
+	var/icon/portrait                        // The icon that shows up in the menu TODO: IMPLEMENT OR REMOVE
+	var/trader_currency                      // Currency decl to use. If blank, defaults to map.
+	var/datum/trade_hub/hub                  // Current associated trade hub, if any.
 
-	var/list/wanted_items = list()                              //What items they enjoy trading for. Structure is (type = known/unknown)
-	var/list/possible_wanted_items                              //List of all possible wanted items. Structure is (type = mode)
-	var/list/possible_trading_items                             //List of all possible trading items. Structure is (type = mode)
-	var/list/trading_items = list()                             //What items they are currently trading away.
-	var/list/blacklisted_trade_items = list(/mob/living/carbon/human)
-	                                                            //Things they will automatically refuse
+	var/list/wanted_items = list()           // What items they enjoy trading for. Structure is (type = known/unknown)
+	var/list/possible_wanted_items           // List of all possible wanted items. Structure is (type = mode)
+	var/list/possible_trading_items          // List of all possible trading items. Structure is (type = mode)
+	var/list/trading_items = list()          // What items they are currently trading away.
 
-	var/list/speech = list()                                    //The list of all their replies and messages. Structure is (id = talk). Check __trading_defines.dm for specific tokens.
+    // The list of all their replies and messages.
+    // Structure is (id = talk). Check __trading_defines.dm for specific tokens.
+	var/list/speech = list()
 
-	var/want_multiplier = 2                                     //How much wanted items are multiplied by when traded for
-	var/margin = 1.2											//Multiplier to price when selling to player
-	var/price_rng = 10                                          //Percentage max variance in sell prices.
-	var/insult_drop = 5                                         //How far disposition drops on insult
-	var/compliment_increase = 5                                 //How far compliments increase disposition
-	var/refuse_comms = 0                                        //Whether they refuse further communication
+	var/want_multiplier = 2                  // How much wanted items are multiplied by when traded for
+	var/margin = 1.2                         // Multiplier to price when selling to player
+	var/price_rng = 10                       // Percentage max variance in sell prices.
+	var/insult_drop = 5                      // How far disposition drops on insult
+	var/compliment_increase = 5              // How far compliments increase disposition
+	var/refuse_comms = 0                     // Whether they refuse further communication
 
-	var/mob_transfer_message = "You are transported to " + TRADER_TOKEN_ORIGIN + "." //What message gets sent to mobs that get sold.
+    // What message gets sent to mobs that get sold.
+	var/mob_transfer_message = "You are transported to " + TRADER_TOKEN_ORIGIN + "."
 
+    // Things they will automatically refuse
+	var/list/blacklisted_trade_items = list(
+        /mob/living/carbon/human
+    )
+    // Globally unacceptable types; may be deprecated with the abstract_type system. TODO: add abstract checks.
 	var/static/list/blacklisted_types = list(
 		/obj,
 		/obj/structure,
@@ -56,13 +62,13 @@
 	..()
 	if(!ispath(trader_currency, /decl/currency))
 		trader_currency = global.using_map.default_currency
-	if(name_language)
-		if(name_language == TRADER_DEFAULT_NAME)
-			name = capitalize(pick(global.first_names_female + global.first_names_male)) + " " + capitalize(pick(global.last_names))
-		else
-			var/decl/language/L = GET_DECL(name_language)
-			if(istype(L))
-				name = L.get_random_name(pick(MALE,FEMALE))
+	if(ispath(name_language, /decl/language))
+		var/decl/language/L = GET_DECL(name_language)
+		if(istype(L))
+			name = L.get_random_name(pick(MALE,FEMALE))
+	if(!name)
+		name = capitalize(pick(global.first_names_female + global.first_names_male)) + " " + capitalize(pick(global.last_names))
+
 	if(length(possible_origins))
 		origin = pick(possible_origins)
 
@@ -197,7 +203,7 @@
 		else
 			if(!(trade_flags & TRADER_GOODS))
 				return TRADER_NO_GOODS
-			else if((trade_flags & TRADER_WANTED_ONLY|TRADER_WANTED_ALL) && !is_wanted)
+			else if((trade_flags & (TRADER_WANTED_ONLY|TRADER_WANTED_ALL)) && !is_wanted)
 				return TRADER_FOUND_UNWANTED
 
 		offer_worth += get_buy_price(offer, is_wanted - 1, skill)

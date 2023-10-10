@@ -3,7 +3,7 @@
 	origin = "UNREGISTERED VESSEL"
 	name_language = /decl/language/vox
 	compliment_increase = 0
-	trade_flags = TRADER_GOODS
+	trade_flags = TRADER_GOODS | TRADER_BRIBABLE
 	var/hailed_vox = FALSE //Whether we have been hailed by a vox. negatives mean pariah, positives mean regular.
 	blacklisted_trade_items = null
 
