@@ -24,7 +24,7 @@
 		TRADER_INSULT_GOOD       = "Well, well, well. Guess we learned who was the troll here.",
 		TRADER_INSULT_BAD        = "I've already written a nasty Spacebook post in my mind about you.",
 		TRADER_BRIBE_REFUSAL     = "Nah. I need to get moving as soon as uhh... possible.",
-		TRADER_BRIBE_ACCEPT      = "You know what, I wasn't doing anything for TIME minutes anyways.",
+		TRADER_BRIBE_ACCEPT      = "You know what, I wasn't doing anything for " + TRADER_TOKEN_TIME + " minutes anyways.",
 	)
 
 	possible_wanted_items = list(

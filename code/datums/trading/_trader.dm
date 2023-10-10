@@ -15,8 +15,8 @@
 	var/list/possible_trading_items          // List of all possible trading items. Structure is (type = mode)
 	var/list/trading_items = list()          // What items they are currently trading away.
 
-    // The list of all their replies and messages.
-    // Structure is (id = talk). Check __trading_defines.dm for specific tokens.
+	// The list of all their replies and messages.
+	// Structure is (id = talk). Check __trading_defines.dm for specific tokens.
 	var/list/speech = list()
 
 	var/want_multiplier = 2                  // How much wanted items are multiplied by when traded for
@@ -26,14 +26,14 @@
 	var/compliment_increase = 5              // How far compliments increase disposition
 	var/refuse_comms = 0                     // Whether they refuse further communication
 
-    // What message gets sent to mobs that get sold.
+	// What message gets sent to mobs that get sold.
 	var/mob_transfer_message = "You are transported to " + TRADER_TOKEN_ORIGIN + "."
 
-    // Things they will automatically refuse
+	// Things they will automatically refuse
 	var/list/blacklisted_trade_items = list(
-        /mob/living/carbon/human
-    )
-    // Globally unacceptable types; may be deprecated with the abstract_type system. TODO: add abstract checks.
+		/mob/living/carbon/human
+	)
+	// Globally unacceptable types; may be deprecated with the abstract_type system. TODO: add abstract checks.
 	var/static/list/blacklisted_types = list(
 		/obj,
 		/obj/structure,
@@ -304,8 +304,18 @@
 	for(var/offer in offers)
 		qdel(offer)
 
+
+/datum/trader/proc/is_bribable()
+	SHOULD_CALL_PARENT(TRUE)
+	return (trade_flags & TRADER_BRIBABLE)
+
+/datum/trader/proc/is_bribed(var/staylength)
+	return get_response(TRADER_BRIBE_REFUSAL, "How about.... no?")
+
 /datum/trader/proc/bribe_to_stay_longer(var/amt)
-	return get_response(TRADER_BRIBE_REFUSAL, "How about... no?")
+	if(is_bribable())
+		return is_bribed(round(amt/100))
+	return get_response(TRADER_BRIBE_REFUSAL, "How about.... no?")
 
 /datum/trader/Destroy(force)
 	if(hub)
