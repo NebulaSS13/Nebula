@@ -6,6 +6,7 @@
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
+	abstract_type = /obj/item/chems
 
 	var/base_name
 	var/base_desc

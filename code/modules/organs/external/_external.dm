@@ -9,6 +9,7 @@
 	organ_tag = "limb"
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | LONG_GLIDE
 	scale_max_damage_to_species_health = TRUE
+	abstract_type = /obj/item/organ/external
 
 	var/slowdown = 0
 	var/tmp/icon_cache_key

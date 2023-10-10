@@ -7,6 +7,7 @@
 	desc = "Nutritious! Probably."
 	slot_flags = SLOT_HOLSTER
 	material = /decl/material/solid/plantmatter
+	is_spawnable_type = FALSE // Use the Spawn-Fruit verb instead.
 
 	var/plantname = "apple" // Setting as a default in case this is spawned manually.
 	var/datum/seed/seed

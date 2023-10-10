@@ -8,6 +8,7 @@
 	nutriment_amt = 10
 	bitesize = 3
 	filling_color = "#336b42"
+	abstract_type = /obj/item/chems/food/old
 
 /obj/item/chems/food/old/populate_reagents()
 	. = ..()
