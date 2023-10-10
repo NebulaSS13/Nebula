@@ -55,7 +55,8 @@
 		TRADER_COMPLIMENT_ACCEPT = "Yes... I suppose you're right.",
 		TRADER_INSULT_GOOD       = "I... probably deserve that.",
 		TRADER_INSULT_BAD        = "Maybe you should c-come here and say that. You'd be worth s-something then.",
-		TRADER_BRIBE_ACCEPT      = "Okay. Fine. But... h-hurry. I can only stay another " + TRADER_TOKEN_TIME + "m-minutes."
+		TRADER_BRIBE_ACCEPT      = "Okay. Fine. But... h-hurry. I can only stay another " + TRADER_TOKEN_TIME + "m-minutes.",
+		TRADER_BRIBE_REFUSAL     = "No! N-no, they're getting closer- I have to, I h-have to go soon."
 	)
 	mob_transfer_message = "<span class='danger'>You are transported to " + TRADER_TOKEN_ORIGIN + ", and with a sickening thud, you fall unconscious, never to wake again.</span>"
 
@@ -79,13 +80,16 @@
 		TRADER_TRADE_COMPLETE    = "Blub likes to trade!",
 		TRADER_NO_MONEY          = "Boo try to give Blub paper. Blub does not want paper.",
 		TRADER_NOT_ENOUGH        = "Blub hungry for bore than that.",
+		TRADER_NO_BLACKLISTED    = "Blub not want that! No!",
 		TRADER_FOUND_UNWANTED    = "Blub only wants bocks. Give bocks.",
 		TRADER_HOW_MUCH          = "Blub wants bocks. Boo give bocks. Blub gives stuff blub found.",
 		TRADER_WHAT_WANT         = "Blub wants bocks. Big bocks, small bocks. Shiny bocks!",
 		TRADER_COMPLIMENT_DENY   = "Blub is just " + TRADER_TOKEN_MERCHANT + ". What do boo mean?",
 		TRADER_COMPLIMENT_ACCEPT = "Boo are a bood berson!",
 		TRADER_INSULT_GOOD       = "Blub do not understand. Blub thought we were briends.",
-		TRADER_INSULT_BAD        = "Blub feels bad now."
+		TRADER_INSULT_BAD        = "Blub feels bad now.",
+		TRADER_BRIBE_ACCEPT      = "Blub will stay for " + TRADER_TOKEN_TIME + " binutes bonger.",
+		TRADER_BRIBE_REFUSAL     = "Blub must go. Blub's beople beed blem."
 	)
 
 //probably could stick soem Howl references in here but like, eh. Haven't seen it in years.
@@ -134,7 +138,10 @@
 		TRADER_COMPLIMENT_DENY   = "Like I haven't heard that one before!",
 		TRADER_COMPLIMENT_ACCEPT = "Haha! Aren't you nice.",
 		TRADER_INSULT_GOOD       = "Naughty naughty.",
-		TRADER_INSULT_BAD        = "Now where do you get off talking to me like that?"
+		TRADER_INSULT_BAD        = "Now where do you get off talking to me like that?",
+		TRADER_BRIBE_ACCEPT      = "Well, if you're not pulling the knob on my staff, I can stay for another " + TRADER_TOKEN_TIME + " minutes.",
+		TRADER_BRIBE_REFUSAL     = "A wizard does not depart early or late, but precisely when they intend to. No.",
+		TRADER_NO_BLACKLISTED    = "I cannot accept such a thing. No trade."
 	)
 
 /datum/trader/ship/unique/wizard/New()

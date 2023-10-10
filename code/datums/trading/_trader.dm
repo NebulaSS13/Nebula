@@ -287,12 +287,12 @@
 	return (trade_flags & TRADER_BRIBABLE)
 
 /datum/trader/proc/is_bribed(var/staylength)
-	return get_response(TRADER_BRIBE_REFUSAL, "How about.... no?")
+	return get_response(TRADER_BRIBE_REFUSAL, "How about... no?")
 
 /datum/trader/proc/bribe_to_stay_longer(var/amt)
 	if(is_bribable())
 		return is_bribed(round(amt/100))
-	return get_response(TRADER_BRIBE_REFUSAL, "How about.... no?")
+	return get_response(TRADER_BRIBE_REFUSAL, "How about... no?")
 
 /datum/trader/Destroy(force)
 	if(hub)

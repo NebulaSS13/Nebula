@@ -4,7 +4,6 @@
 	name_language = /decl/language/vox
 	compliment_increase = 0
 	trade_flags = TRADER_GOODS | TRADER_BRIBABLE
-	var/hailed_vox = FALSE //Whether we have been hailed by a vox. negatives mean pariah, positives mean regular.
 	blacklisted_trade_items = null
 
 	speech = list(
@@ -19,8 +18,11 @@
 		TRADER_COMPLIMENT_ACCEPT = "Kikikikiki! Trade is better than talk, yes?",
 		TRADER_INSULT_GOOD       = "Bah! Why does it have to deal with you?",
 		TRADER_INSULT_BAD        = "All you meat is the same! Fuck the off!",
+		TRADER_BRIBE_ACCEPT      = "Skhhhhhk... fine. " + TRADER_TOKEN_TIME + " minutes, no more!",
+		TRADER_BRIBE_REFUSAL     = "No! It is getting impatient with this meat!"
 	)
 
+	var/hailed_vox = FALSE //Whether we have been hailed by a vox. negatives mean pariah, positives mean regular.
 	var/list/visited_vox_speech = list(
 		TRADER_HAIL_GENERIC      = "SKREEEEE! You friend of the Shoal? You trade with, yes?",
 		TRADER_HAIL_SILICON      = "YOU KNOW THE SHOAL? Yes is good, yes yes, " + TRADER_TOKEN_MOB + ". Trade GOOD!",
@@ -33,7 +35,9 @@
 		TRADER_COMPLIMENT_DENY   = "You know better than that!",
 		TRADER_COMPLIMENT_ACCEPT = "You butter it up? Should know better than that.",
 		TRADER_INSULT_GOOD       = "Where this come from? Is trade no good?",
-		TRADER_INSULT_BAD        = "If you say all this at home, you be dead!"
+		TRADER_INSULT_BAD        = "If you say all this at home, you be dead!",
+		TRADER_BRIBE_ACCEPT      = "It can stay for " + TRADER_TOKEN_TIME + " minutes, for most beloved kin as you.",
+		TRADER_BRIBE_REFUSAL     = "Krrkkrhkkhh! You ask too much! It must be moving on."
 	)
 	possible_wanted_items = list(
 		/obj/item/                      = TRADER_SUBTYPES_ONLY,

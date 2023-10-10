@@ -28,7 +28,9 @@
 		// This will default to generic if unset, doesn't matter.
 		TRADER_HAIL_SILICON,
 		// This token can be used to respond 'I don't want anything' which is valid.
-		TRADER_WHAT_WANT
+		TRADER_WHAT_WANT,
+		// This token has bespoke validity checking and can't go into any of the above lists.
+		TRADER_NO_BLACKLISTED
 	)
 
 /datum/unit_test/trader_subtypes_shall_have_all_needed_speech_values/start_test()
@@ -55,6 +57,8 @@
 		if(trader.name_language && !ispath(trader.name_language, /decl/language))
 			LAZYDISTINCTADD(failures[trader_type], "- non-/decl/language-subtype non-null name_language value")
 
+		var/list/check_tokens = list()
+
 		// Bespoke blacklist check because life is pain.
 		var/has_token     = (TRADER_NO_BLACKLISTED in trader.speech)
 		var/has_blacklist = length(trader.blacklisted_trade_items)
@@ -63,7 +67,6 @@
 		else if(!has_token && has_blacklist)
 			LAZYDISTINCTADD(failures[trader_type], "- '[TRADER_NO_BLACKLISTED]' response is unset but blacklisted_trade_items is populated")
 
-		var/list/check_tokens = list()
 		for(var/token in trader.speech)
 
 			// Simple validity checks.
