@@ -106,7 +106,7 @@
 			else if(owner.stat == UNCONSCIOUS)
 				stamina = min(max_stamina, stamina + rand(3,5))
 
-		if(!owner.nervous_system_failure() && owner.stat == CONSCIOUS && stamina && !suppressed && get_rank(PSI_REDACTION) >= PSI_RANK_OPERANT)
+		if(!owner.nervous_system_failure() && owner.stat != DEAD && stamina && !suppressed && get_rank(PSI_REDACTION) >= PSI_RANK_OPERANT)
 			attempt_regeneration()
 
 	var/next_aura_size = max(0.1,((stamina/max_stamina)*min(3,rating))/5)
@@ -158,6 +158,10 @@
 		heal_rate = 1
 	else
 		return
+
+	if(owner.stat != CONSCIOUS)
+		mend_prob = round(mend_prob * 0.65)
+		heal_rate = round(heal_rate * 0.65)
 
 	if(!heal_rate || stamina < heal_rate)
 		return // Don't backblast from trying to heal ourselves thanks.
