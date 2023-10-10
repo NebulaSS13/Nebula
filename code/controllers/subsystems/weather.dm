@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(weather)
 /datum/controller/subsystem/weather/proc/register_weather_system(var/obj/abstract/weather_system/WS)
 	if(weather_by_z[WS.z])
 		CRASH("Trying to register another weather system on the same z-level([WS.z]) as an existing one!")
-	LAZYDISTINCTADD(weather_systems, WS)
+	weather_systems |= WS
 
 	//Mark all affected z-levels
 	var/list/affected = SSmapping.get_connected_levels(WS.z)
@@ -62,10 +62,4 @@ SUBSYSTEM_DEF(weather)
 	for(var/Z = 1 to length(weather_by_z))
 		if(weather_by_z[Z] == WS)
 			weather_by_z[Z] = null
-	LAZYREMOVE(weather_systems, WS)
-
-///Returns the weather obj for a given z-level if it exists
-/datum/controller/subsystem/weather/proc/get_weather_for_level(var/z_level)
-	if(z_level > length(weather_by_z))
-		return null
-	return weather_by_z[z_level]
+	weather_systems -= WS

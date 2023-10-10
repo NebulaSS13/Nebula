@@ -144,19 +144,21 @@
 			AM.reset_offsets()
 			AM.reset_plane_and_layer()
 
-/obj/structure/Crossed(O)
+/obj/structure/Crossed(atom/movable/AM)
 	. = ..()
-	if(ismob(O))
-		var/mob/M = O
-		M.reset_offsets()
-		M.reset_plane_and_layer()
+	if(!ismob(AM))
+		return
+	var/mob/M = AM
+	M.reset_offsets()
+	M.reset_plane_and_layer()
 
-/obj/structure/Uncrossed(O)
+/obj/structure/Uncrossed(atom/movable/AM)
 	. = ..()
-	if(ismob(O))
-		var/mob/M = O
-		M.reset_offsets()
-		M.reset_plane_and_layer()
+	if(!ismob(AM))
+		return
+	var/mob/M = AM
+	M.reset_offsets()
+	M.reset_plane_and_layer()
 
 /obj/structure/Move()
 	var/turf/T = get_turf(src)

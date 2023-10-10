@@ -455,5 +455,9 @@
 	if(simulated && !anchored)
 		step_towards(src, S)
 
+/atom/movable/proc/crossed_mob(var/mob/living/victim)
+	return
+
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
+

@@ -184,8 +184,7 @@
 /mob/living/exosuit/fall_damage()
 	return 175 //Exosuits are big and heavy
 
-/mob/living/exosuit/handle_fall_effect(var/turf/landing)
+/mob/living/exosuit/apply_fall_damage(var/turf/landing)
 	// Return here if for any reason you shouldn´t take damage
-	..()
 	if(legs)
 		legs.handle_vehicle_fall()

@@ -2169,7 +2169,7 @@
 "hz" = (
 /obj/item/chems/ivbag,
 /obj/item/chems/ivbag,
-/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/ominus,
 /obj/structure/closet/medical_wall{
 	name = "Blood Closet"
 	},

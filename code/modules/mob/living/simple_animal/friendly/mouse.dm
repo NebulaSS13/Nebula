@@ -92,13 +92,12 @@
 	if(stat == DEAD && splatted)
 		icon_state = "world-splat"
 
-/mob/living/simple_animal/mouse/Crossed(AM)
-	if( ishuman(AM) )
-		if(!stat)
-			var/mob/M = AM
-			to_chat(M, "<span class='warning'>[html_icon(src)] Squeek!</span>")
-			sound_to(M, 'sound/effects/mousesqueek.ogg')
+/mob/living/simple_animal/mouse/Crossed(atom/movable/AM)
 	..()
+	if(!ishuman(AM) || stat)
+		return
+	to_chat(AM, SPAN_WARNING("[html_icon(src)] Squeek!"))
+	sound_to(AM, 'sound/effects/mousesqueek.ogg')
 
 /*
  * Mouse types

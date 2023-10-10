@@ -94,40 +94,36 @@
 
 /obj/item/shard/Crossed(atom/movable/AM)
 	..()
-	if(isliving(AM))
-		var/mob/M = AM
+	if(!isliving(AM))
+		return
 
-		if(M.buckled) //wheelchairs, office chairs, rollerbeds
-			return
+	var/mob/living/M = AM
+	if(M.buckled) //wheelchairs, office chairs, rollerbeds
+		return
 
-		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+	playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
 
-			if(H.species.siemens_coefficient<0.5 || (H.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))) //Thick skin.
-				return
+	var/decl/species/walker_species = M.get_species()
+	if(walker_species && (walker_species.siemens_coefficient<0.5 || (walker_species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))) //Thick skin.
+		return
 
-			var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
-			var/obj/item/suit = H.get_equipped_item(slot_wear_suit_str)
-			if(shoes || (suit && (suit.body_parts_covered & SLOT_FEET)))
-				return
+	var/obj/item/shoes = M.get_equipped_item(slot_shoes_str)
+	var/obj/item/suit = M.get_equipped_item(slot_wear_suit_str)
+	if(shoes || (suit && (suit.body_parts_covered & SLOT_FEET)))
+		return
 
-			to_chat(M, SPAN_DANGER("You step on \the [src]!"))
-
-			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
-			while(check.len)
-				var/picked = pick(check)
-				var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, picked)
-				if(affecting)
-					if(BP_IS_PROSTHETIC(affecting))
-						return
-					affecting.take_external_damage(5, 0)
-					H.updatehealth()
-					if(affecting.can_feel_pain())
-						SET_STATUS_MAX(H, STAT_WEAK, 3)
-					return
-				check -= picked
-			return
+	var/list/check = list(BP_L_FOOT, BP_R_FOOT)
+	while(check.len)
+		var/picked = pick_n_take(check)
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(M, picked)
+		if(!affecting || BP_IS_PROSTHETIC(affecting))
+			continue
+		to_chat(M, SPAN_DANGER("You step on \the [src]!"))
+		affecting.take_external_damage(5, 0)
+		M.updatehealth()
+		if(affecting.can_feel_pain())
+			SET_STATUS_MAX(M, STAT_WEAK, 3)
+		return
 
 //Prevent the shard from being allowed to shatter
 /obj/item/shard/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)

@@ -298,3 +298,8 @@
 	fire_act(air, temperature)
 	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
 	. =  (health <= 0) ? ..() : FALSE
+
+// called when something steps onto a mob
+// this handles mulebots and vehicles
+/mob/living/Crossed(var/atom/movable/AM)
+	AM.crossed_mob(src)
