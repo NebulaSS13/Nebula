@@ -90,8 +90,7 @@ var/global/list/ship_inertial_dampers = list()
 		if(!warned && damping_strength < 0.3*initial(damping_strength) && target_strength < damping_strength && lastwarning - world.timeofday >= WARNING_DELAY)
 			warned = TRUE
 			lastwarning = world.timeofday
-			var/obj/item/radio/announcer = get_global_announcer()
-			announcer.autosay("WARNING: Inertial dampening level dangerously low! All crew must be secured before firing thrusters!", "inertial damper Monitor")
+			do_telecomms_announcement(src, "WARNING: Inertial dampening level dangerously low! All crew must be secured before firing thrusters!", "Inertial Damper Monitor")
 	else
 		delta = initial(delta) * 5 // rate of dampening strength decay is higher if we have no power
 		target_strength = 0
@@ -108,7 +107,7 @@ var/global/list/ship_inertial_dampers = list()
 /obj/machinery/inertial_damper/Destroy()
 	QDEL_NULL(controller)
 	update_nearby_tiles(locs)
-	..()
+	return ..()
 
 /obj/machinery/inertial_damper/proc/toggle()
 	active = !active
@@ -181,7 +180,7 @@ var/global/list/ship_inertial_dampers = list()
 			return TOPIC_NOACTION
 
 		warned = FALSE
-		target_strength = Clamp(new_strength, 0, max_strength)
+		target_strength = clamp(new_strength, 0, max_strength)
 		return TOPIC_REFRESH
 
 	return TOPIC_NOACTION

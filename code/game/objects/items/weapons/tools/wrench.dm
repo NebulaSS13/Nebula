@@ -10,7 +10,7 @@
 	material = /decl/material/solid/metal/steel
 	center_of_mass = @"{'x':17,'y':16}"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/bardrop1.ogg'
 	var/handle_color
 	var/static/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
@@ -23,4 +23,4 @@
 	. = ..()
 	if(!handle_color)
 		handle_color = pick(valid_colours)
-	overlays += mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color)
+	add_overlay(mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color))

@@ -30,7 +30,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	pestlevel = 0
 	weedlevel = 0
 	mutation_level = 0
-	health = 100
+	plant_health = 100
 	sampled = 0
 	. = ..()
 
@@ -52,10 +52,11 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	base_type = /obj/machinery/recharge_station
 
 MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
-/obj/item/chems/chem_disp_cartridge/ascent/crystal
-	spawn_reagent = /decl/material/liquid/crystal_agent
-/obj/item/chems/chem_disp_cartridge/ascent/bromide
-	spawn_reagent = /decl/material/liquid/bromide
+/obj/item/chems/chem_disp_cartridge/ascent/crystal/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/crystal_agent, reagents.maximum_volume)
+
+/obj/item/chems/chem_disp_cartridge/ascent/bromide/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/bromide, reagents.maximum_volume)
 
 /obj/machinery/sleeper/ascent
 	name = "mantid sleeper"
@@ -159,20 +160,20 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 	var/image/field_image
 
 /obj/machinery/power/ascent_reactor/attack_hand(mob/user)
-	. = ..()
-
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(!(H.species.name in ALL_ASCENT_SPECIES))
 			to_chat(H, SPAN_WARNING("You have no idea how to use \the [src]."))
-			return
+			return TRUE
 	else if(!istype(user, /mob/living/silicon/robot/flying/ascent))
 		to_chat(user, SPAN_WARNING("You have no idea how to interface with \the [src]."))
-		return
-
+		return TRUE
 	user.visible_message(SPAN_NOTICE("\The [user] switches \the [src] [on ? "off" : "on"]."))
 	on = !on
 	update_icon()
+	return TRUE
 
 /obj/machinery/power/ascent_reactor/on_update_icon()
 	. = ..()

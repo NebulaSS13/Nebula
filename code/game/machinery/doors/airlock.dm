@@ -30,14 +30,12 @@ var/global/list/airlock_overlays = list()
 	var/backup_power_lost_until = -1	//World time when backup power is restored.
 	var/next_beep_at = 0				//World time when we may next beep due to doors being blocked by mobs
 	var/shockedby = list()              //Some sort of admin logging var
-	var/spawnPowerRestoreRunning = 0
 	var/welded = null
 	var/locked = FALSE
 	var/lock_cut_state = BOLTS_FINE
 	var/lights = 1 // Lights show by default
 	var/aiDisabledIdScanner = 0
 	var/aiHacking = 0
-	var/lockdownbyai = 0
 	autoclose = 1
 	var/mineral = null
 	var/justzap = 0
@@ -92,9 +90,6 @@ var/global/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/proc/get_window_material()
 	return GET_DECL(window_material)
-
-/obj/machinery/door/airlock/get_codex_value()
-	return "airlock"
 
 /obj/machinery/door/airlock/Process()
 	if(main_power_lost_until > 0 && world.time >= main_power_lost_until)
@@ -458,6 +453,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/attack_robot(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/door/airlock/attack_ai(mob/living/silicon/ai/user)
 	ui_interact(user)
@@ -633,9 +629,9 @@ About the new airlock wires panel:
 	var/cut_verb
 	var/cut_sound
 
-	if(isWelder(item))
+	if(IS_WELDER(item))
 		var/obj/item/weldingtool/WT = item
-		if(!WT.remove_fuel(0,user))
+		if(!WT.weld(0,user))
 			return FALSE
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
@@ -721,7 +717,7 @@ About the new airlock wires panel:
 		if(!length(A.req_access) && (alert("\the [A]'s 'Access Not Set' light is flashing. Install it anyway?", "Access not set", "Yes", "No") == "No"))
 			return TRUE
 
-		if(do_after(user, 50, src) && density && A && user.unEquip(A, src))
+		if(do_after(user, 50, src) && density && A && user.try_unequip(A, src))
 			to_chat(user, SPAN_NOTICE("You successfully install \the [A]."))
 			brace = A
 			brace.airlock = src
@@ -742,9 +738,9 @@ About the new airlock wires panel:
 			. = ..()
 		return
 
-	if(!repairing && isWelder(C) && !operating && density)
+	if(!repairing && IS_WELDER(C) && !operating && density)
 		var/obj/item/weldingtool/W = C
-		if(!W.remove_fuel(0,user))
+		if(!W.weld(0,user))
 			to_chat(user, SPAN_NOTICE("Your [W.name] doesn't have enough fuel."))
 			return TRUE
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
@@ -760,10 +756,10 @@ About the new airlock wires panel:
 			to_chat(user, SPAN_NOTICE("You must remain still to complete this task."))
 			return TRUE
 
-	else if(isWirecutter(C) || isMultitool(C) || istype(C, /obj/item/assembly/signaler))
+	else if(IS_WIRECUTTER(C) || IS_MULTITOOL(C) || istype(C, /obj/item/assembly/signaler))
 		return wires.Interact(user)
 
-	else if(isCrowbar(C))
+	else if(IS_CROWBAR(C))
 		if(density && !can_open(TRUE) && component_attackby(C, user))
 			return TRUE
 		else if(!repairing)
@@ -805,7 +801,7 @@ About the new airlock wires panel:
 	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/simple_animal))
 		var/mob/living/simple_animal/A = user
 		var/obj/item/I = A.get_natural_weapon()
-		if(I.force >= 10)
+		if(I?.force >= 10)
 			if(density)
 				visible_message(SPAN_DANGER("\The [A] forces \the [src] open!"))
 				open(1)
@@ -992,7 +988,7 @@ About the new airlock wires panel:
 	. = ..()
 	//wires
 	var/turf/T = get_turf(loc)
-	if(T && (T.z in global.using_map.admin_levels))
+	if(T && isAdminLevel(T.z))
 		secured_wires = TRUE
 	if (secured_wires)
 		wires = new/datum/wires/airlock/secure(src)

@@ -150,7 +150,7 @@
 
 	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
-	if(isScrewdriver(W) || isCrowbar(W) || isWrench(W))
+	if(IS_SCREWDRIVER(W) || IS_CROWBAR(W) || IS_WRENCH(W))
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
@@ -206,13 +206,20 @@
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 
-/obj/structure/bed/chair/holochair/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
-		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
+/obj/structure/bed/holobed
+	tool_interaction_flags = 0
+	holographic = TRUE
+	material = /decl/material/solid/metal/aluminium/holographic
+
+/obj/structure/bed/chair/holochair
+	tool_interaction_flags = 0
+	holographic = TRUE
+	material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/item/holo
 	damtype = PAIN
 	no_attack_log = 1
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/holo/esword
 	name = "holosword"

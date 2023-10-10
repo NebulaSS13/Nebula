@@ -36,7 +36,7 @@
 		to_chat(user, "It has a blank space for a signature.")
 
 /obj/item/card/union/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing, /obj/item/pen))
+	if(IS_PEN(thing))
 		if(signed_by)
 			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
 		else
@@ -54,18 +54,14 @@
 	var/detail_color = COLOR_ASSEMBLY_ORANGE
 	var/function = "storage"
 	var/data = "null"
-	var/special = null
-	var/list/files = list(  )
 
 /obj/item/card/data/Initialize()
-	.=..()
+	. = ..()
 	update_icon()
 
 /obj/item/card/data/on_update_icon()
-	overlays.Cut()
-	var/image/detail_overlay = image('icons/obj/card.dmi', src,"[icon_state]-color")
-	detail_overlay.color = detail_color
-	overlays += detail_overlay
+	. = ..()
+	add_overlay(overlay_image(icon, "[icon_state]-color", detail_color))
 
 /obj/item/card/data/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/integrated_electronics/detailer))
@@ -81,6 +77,9 @@
 /obj/item/card/data/disk
 	desc = "A plastic magstripe card for simple and speedy data storage and transfer. This one inexplicibly looks like a floppy disk."
 	icon_state = "data_3"
+
+/obj/item/card/data/get_assembly_detail_color()
+	return detail_color
 
 /*
  * ID CARDS
@@ -166,14 +165,13 @@ var/global/const/NO_EMAG_ACT = -50
 	var/blood_type = "\[UNSET\]"
 	var/dna_hash = "\[UNSET\]"
 	var/fingerprint_hash = "\[UNSET\]"
-	var/sex = "\[UNSET\]"
+	var/card_gender = "\[UNSET\]"
 	var/icon/front
 	var/icon/side
 
 	//alt titles are handled a bit weirdly in order to unobtrusively integrate into existing ID system
 	var/assignment = null	//can be alt title or the actual job
 	var/rank = null			//actual job
-	var/dorm = 0			// determines if this ID has claimed a dorm already
 
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
@@ -194,7 +192,7 @@ var/global/const/NO_EMAG_ACT = -50
 	. = ..()
 
 /obj/item/card/id/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(detail_color)
 		add_overlay(overlay_image(icon, "[icon_state]-colors", detail_color, RESET_COLOR))
 	for(var/detail in extra_details)
@@ -256,9 +254,9 @@ var/global/const/NO_EMAG_ACT = -50
 
 	var/decl/pronouns/G = get_pronouns()
 	if(G)
-		id_card.sex = capitalize(G.formal_term)
+		id_card.card_gender = capitalize(G.bureaucratic_term )
 	else
-		id_card.sex = "Unset"
+		id_card.card_gender = "Unset"
 	id_card.set_id_photo(src)
 
 	if(dna)
@@ -277,7 +275,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")
 	dat += text("Name: []</A><BR>", "[formal_name_prefix][registered_name][formal_name_suffix]")
-	dat += text("Sex: []</A><BR>\n", sex)
+	dat += text("Gender: []</A><BR>\n", card_gender)
 	dat += text("Age: []</A><BR>\n", age)
 
 	if(global.using_map.flags & MAP_HAS_BRANCH)
@@ -306,6 +304,9 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/GetIdCard()
 	return src
+
+/obj/item/card/id/GetIdCards()
+	return list(src)
 
 /obj/item/card/id/verb/read()
 	set name = "Read ID Card"
@@ -378,7 +379,7 @@ var/global/const/NO_EMAG_ACT = -50
 	desc = "An ID straight from the Syndicate."
 	registered_name = "Syndicate"
 	assignment = "Syndicate Overlord"
-	access = list(access_syndicate, access_external_airlocks)
+	access = list(access_hacked, access_external_airlocks)
 	color = COLOR_RED_GRAY
 	detail_color = COLOR_GRAY40
 
@@ -393,6 +394,9 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/captains_spare/Initialize()
 	. = ..()
 	access = get_all_station_access()
+
+/obj/item/card/id/captains_spare/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
 
 /obj/item/card/id/synthetic
 	name = "\improper Synthetic ID"
@@ -465,128 +469,3 @@ var/global/const/NO_EMAG_ACT = -50
 	desc = "A golden card which shows power and might."
 	color = "#d4c780"
 	extra_details = list("goldstripe")
-
-/*
- * NETWORK-ENABLED ID CARDS
- */
-
-/obj/item/card/id/network
-	var/network_id												// The network_id that this card is paired to.
-	var/weakref/current_account
-	color = COLOR_GRAY80
-	detail_color = COLOR_SKY_BLUE
-
-/obj/item/card/id/network/Initialize()
-	set_extension(src, /datum/extension/network_device/lazy)
-	return ..()
-
-/obj/item/card/id/network/GetAccess(var/ignore_account)
-	. = ..()
-	var/datum/computer_file/data/account/access_account = resolve_account()
-	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-	var/datum/computer_network/network = D.get_network()
-	if(network && access_account && access_account.login != ignore_account)
-		var/location = "[network.network_id]"
-		if(access_account)
-			. += "[access_account.login]@[location]" // User access uses '@'
-			for(var/group in access_account.groups)
-				. += "[group].[location]"	// Group access uses '.'
-			for(var/group in access_account.parent_groups) // Membership in a child group grants access to anything with an access requirement set to the parent group.
-				. += "[group].[location]"
-
-/obj/item/card/id/network/proc/resolve_account()
-	if(!current_account)
-		return
-	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-	var/datum/computer_network/network = D.get_network()
-
-	var/login = associated_network_account["login"]
-	var/password = associated_network_account["password"]
-
-	var/error
-	var/datum/computer_file/data/account/check_account = current_account.resolve()
-	if(!network) // No network or connectivity.
-		error = "No network found"
-	else if(!istype(check_account))
-		error = "The specified account could not be found"
-	else if(check_account.login != login || check_account.password != password) // The most likely case - login or password were changed.
-		error = "Incorrect username or password"
-	// Check if the account can be located on the network in case it was moved.
-	else if(!(check_account in network.get_accounts()))
-		error = "The specified account could not be found"
-
-	if(error)
-		current_account = null
-		visible_message(SPAN_WARNING("\The [src] flashes an error: \'[error]!\'"), null, null,1)
-	else
-		return check_account
-
-/obj/item/card/id/network/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
-	var/data[0]
-	var/login  = associated_network_account["login"]
-	var/password = associated_network_account["password"]
-
-	data["login"] = login ? login : "Enter Login"
-	data["password"] = password ? stars(password, 0) : "Enter Password"
-	ui = SSnano.try_update_ui(user, src, ui_key, ui, data)
-	if (!ui)
-		ui = new(user, src, ui_key, "network_id.tmpl", "Network ID Settings", 540, 326)
-		ui.set_initial_data(data)
-		ui.open()
-
-/obj/item/card/id/network/Topic(href, href_list, datum/topic_state/state)
-	. = ..()
-	if(.)
-		return
-	var/login  = associated_network_account["login"]
-	var/password = associated_network_account["password"]
-	if(href_list["change_login"])
-		var/new_login = sanitize(input(usr, "Enter your account login:", "Account login", login) as text|null)
-		if(new_login == login || !CanInteract(usr, DefaultTopicState()))
-			return TOPIC_NOACTION
-		associated_network_account["login"] = new_login
-
-		current_account = null
-		password = null
-		return TOPIC_REFRESH
-
-	if(href_list["change_password"])
-		var/new_password = sanitize(input(usr, "Enter your account password:", "Account password") as text|null)
-		if(new_password == password || !CanInteract(usr, DefaultTopicState()))
-			return TOPIC_NOACTION
-		associated_network_account["password"] = new_password
-
-		current_account = null
-		return TOPIC_REFRESH
-	
-	if(href_list["login_account"])
-		if(login_account())
-			to_chat(usr, SPAN_NOTICE("Account successfully logged in."))
-		else
-			to_chat(usr, SPAN_WARNING("Could not login to account. Check password or network connectivity."))
-		return TOPIC_REFRESH
-
-	if(href_list["settings"])
-		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-		D.ui_interact(usr)
-		return TOPIC_HANDLED
-
-/obj/item/card/id/network/proc/login_account()
-	. = FALSE
-	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-	var/datum/computer_network/network = D.get_network()
-	if(!network)
-		return
-	var/login  = associated_network_account["login"]
-	var/password = associated_network_account["password"]
-	for(var/datum/computer_file/data/account/check_account in network.get_accounts())
-		if(check_account.login == login && check_account.password == password)
-			current_account = weakref(check_account)
-			return TRUE
-
-/obj/item/card/id/network/verb/adjust_settings()
-	set name = "Adjust Settings"
-	set category = "Object"
-	set src in usr
-
-	ui_interact(usr)

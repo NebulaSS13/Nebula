@@ -27,9 +27,7 @@
 		if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
 			var/obj/item/handcuffs/wizard/cuffs = new()
-			cuffs.forceMove(H)
-			H.handcuffed = cuffs
-			H.update_inv_handcuffed()
+			H.equip_to_slot(cuffs, slot_handcuffed_str)
 			H.visible_message("Beams of light form around \the [H]'s hands!")
 		apply_spell_damage(M)
 

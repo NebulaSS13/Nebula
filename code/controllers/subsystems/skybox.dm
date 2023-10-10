@@ -9,7 +9,7 @@ SUBSYSTEM_DEF(skybox)
 	var/background_icon = "dyable"
 	var/use_stars = TRUE
 	var/use_overmap_details = TRUE
-	var/star_path = 'icons/skybox/skybox.dmi'
+	var/stars_icon = 'icons/skybox/skybox.dmi'
 	var/star_state = "stars"
 
 	var/static/list/skybox_cache = list()
@@ -50,7 +50,7 @@ SUBSYSTEM_DEF(skybox)
 		im.plane = DUST_PLANE
 		im.alpha = 128
 		im.blend_mode = BLEND_ADD
-		
+
 		MA.overlays = list(im)
 
 		dust_cache["[i]"] = MA
@@ -64,19 +64,19 @@ SUBSYSTEM_DEF(skybox)
 		im.blend_mode = BLEND_ADD
 
 		MA.overlays = list(im)
-	
+
 		speedspace_cache["NS_[i]"] = MA
-	
+
 		// EAST/WEST
 		MA = new(normal_space)
 		im = image('icons/turf/space_dust_transit.dmi', "speedspace_ew_[i]")
 		im.plane = DUST_PLANE
 		im.blend_mode = BLEND_ADD
-		
+
 		MA.overlays = list(im)
-		
+
 		speedspace_cache["EW_[i]"] = MA
-	
+
 		//Over-the-edge images
 	for (var/dir in global.alldirs)
 		var/mutable_appearance/MA = new(normal_space)
@@ -102,13 +102,13 @@ SUBSYSTEM_DEF(skybox)
 		mapedge_cache["[dir]"] = MA
 
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
-	if(!skybox_cache["[z]"])
-		skybox_cache["[z]"] = generate_skybox(z)
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+	if(!skybox_cache[num2text(z)])
+		skybox_cache[num2text(z)] = generate_skybox(z)
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 		if(istype(O))
 			for(var/zlevel in O.map_z)
-				skybox_cache["[zlevel]"] = skybox_cache["[z]"]
-	return skybox_cache["[z]"]
+				skybox_cache["[zlevel]"] = skybox_cache[num2text(z)]
+	return skybox_cache[num2text(z)]
 
 /datum/controller/subsystem/skybox/proc/generate_skybox(z)
 	var/image/res = image(skybox_icon)
@@ -117,13 +117,13 @@ SUBSYSTEM_DEF(skybox)
 	var/image/base = overlay_image(skybox_icon, background_icon, background_color, PIXEL_SCALE)
 
 	if(use_stars)
-		var/image/stars = overlay_image(skybox_icon, star_state, flags = PIXEL_SCALE | RESET_COLOR)
+		var/image/stars = overlay_image(stars_icon, star_state, flags = PIXEL_SCALE | RESET_COLOR)
 		base.overlays += stars
 
 	res.overlays += base
 
 	if(use_overmap_details)
-		var/obj/effect/overmap/visitable/O = global.overmap_sectors["[z]"]
+		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 		if(istype(O))
 			var/image/overmap = image(skybox_icon)
 			overmap.overlays += O.generate_skybox()
@@ -141,7 +141,7 @@ SUBSYSTEM_DEF(skybox)
 
 /datum/controller/subsystem/skybox/proc/rebuild_skyboxes(var/list/zlevels)
 	for(var/z in zlevels)
-		skybox_cache["[z]"] = generate_skybox(z)
+		skybox_cache[num2text(z)] = generate_skybox(z)
 
 	for(var/client/C)
 		C.update_skybox(1)

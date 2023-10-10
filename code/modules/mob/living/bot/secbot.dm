@@ -25,7 +25,6 @@
 	var/check_arrest = 1 // If true, arrests people who are set to arrest.
 	var/declare_arrests = 0 // If true, announces arrests over sechuds.
 
-	var/is_ranged = 0
 	var/awaiting_surrender = 0
 
 	var/obj/item/baton/stun_baton
@@ -128,7 +127,7 @@
 	var/mob/shooter = P.firer
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
-	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
+	if(!target && health < curhealth && istype(shooter) && (shooter in view(world.view, src)))
 		react_to_attack(shooter)
 
 /mob/living/bot/secbot/proc/begin_arrest(mob/target, var/threat)
@@ -190,7 +189,7 @@
 		UnarmedAttack(target)
 
 /mob/living/bot/secbot/proc/cuff_target(var/mob/living/carbon/C)
-	if(istype(C) && !C.handcuffed)
+	if(istype(C) && !C.get_equipped_item(slot_handcuffed_str))
 		handcuffs.place_handcuffs(C, src)
 	resetTarget() //we're done, failed or not. Don't want to get stuck if C is not
 

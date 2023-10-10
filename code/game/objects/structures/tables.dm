@@ -23,8 +23,6 @@
 	var/is_flipped = FALSE
 	var/decl/material/additional_reinf_material
 
-	// For racks.
-	var/can_reinforce = TRUE
 	var/top_surface_noun = "tabletop"
 
 	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/material of those.
@@ -48,9 +46,7 @@
 		if(reinf_material || additional_reinf_material || felted)
 			tool_interaction_flags &= ~TOOL_INTERACTION_DECONSTRUCT
 
-		for(var/obj/structure/table/T in loc)
-			if(T != src)
-				return INITIALIZE_HINT_QDEL
+		DELETE_IF_DUPLICATE_OF(/obj/structure/table)
 		. = INITIALIZE_HINT_LATELOAD
 
 // We do this because need to make sure adjacent tables init their material before we try and merge.
@@ -67,13 +63,13 @@
 
 	// Destroy some stuff before passing off to dismantle(), which will return it in sheet form instead.
 	if(reinf_material && !prob(20))
-		reinf_material.place_shard(loc)
+		reinf_material.place_shards(loc)
 		reinf_material = null
 	if(material && !prob(20))
-		material.place_shard(loc)
+		material.place_shards(loc)
 		material = null
 	if(additional_reinf_material && !prob(20))
-		additional_reinf_material.place_shard(loc)
+		additional_reinf_material.place_shards(loc)
 		additional_reinf_material = null
 	if(felted && prob(50))
 		felted = FALSE
@@ -94,10 +90,11 @@
 	additional_reinf_material = null
 	. = ..()
 	if(istype(oldloc))
-		for(var/turf/turf AS_ANYTHING in RANGE_TURFS(oldloc, 1))
-			for(var/obj/structure/table/table in turf)
-				table.update_connections(FALSE)
-				table.update_icon()
+		for(var/obj/structure/table/table in range(oldloc, 1))
+			if(QDELETED(table))
+				continue
+			table.update_connections(FALSE)
+			table.update_icon()
 
 /obj/structure/table/can_dismantle(mob/user)
 	. = ..()
@@ -108,7 +105,7 @@
 		else if(reinf_material)
 			needs_removed = top_surface_noun
 		else if(additional_reinf_material)
-			needs_removed = "reinforcements" 
+			needs_removed = "reinforcements"
 		if(needs_removed)
 			to_chat(user, SPAN_WARNING("Remove \the [needs_removed] with a screwdriver first."))
 			return FALSE
@@ -202,7 +199,7 @@
 	. = ..()
 
 	// Finally we can put the object onto the table.
-	if(!. && !isrobot(user) && W.loc == user && user.unEquip(W, src.loc))
+	if(!. && !isrobot(user) && W.loc == user && user.try_unequip(W, src.loc))
 		auto_align(W, click_params)
 		return TRUE
 
@@ -315,8 +312,8 @@
 
 		var/obj/structure/table/left_neighbor  = locate(/obj/structure/table) in get_step(loc, turn(dir, -90))
 		var/obj/structure/table/right_neighbor = locate(/obj/structure/table) in get_step(loc, turn(dir, 90))
-		var/left_neighbor_blend = istype(left_neighbor)   && blend_with(left_neighbor)  && left_neighbor.is_flipped == is_flipped  && left_neighbor.dir == dir 
-		var/right_neighbor_blend = istype(right_neighbor) && blend_with(right_neighbor) && right_neighbor.is_flipped == is_flipped && right_neighbor.dir == dir 
+		var/left_neighbor_blend = istype(left_neighbor)   && blend_with(left_neighbor)  && left_neighbor.is_flipped == is_flipped  && left_neighbor.dir == dir
+		var/right_neighbor_blend = istype(right_neighbor) && blend_with(right_neighbor) && right_neighbor.is_flipped == is_flipped && right_neighbor.dir == dir
 
 		var/flip_type = 0
 		var/flip_mod = ""
@@ -462,7 +459,7 @@
 
 /obj/structure/table/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()
-	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.unEquip(dropping))
+	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.try_unequip(dropping))
 		var/obj/item/I = dropping
 		I.dropInto(get_turf(src))
 		return TRUE
@@ -476,7 +473,7 @@
 
 	if(!can_flip())
 		return FALSE
-	
+
 	// Is the table directly in the direction of flipping part of us?
 	var/obj/structure/table/T = locate() in get_step(src.loc, direction)
 	if(istype(T) && blend_with(T) && is_flipped == T.is_flipped)
@@ -670,23 +667,23 @@
 
 /obj/structure/table/holotable
 	icon_state = "holo_preview"
+	holographic = TRUE
 	color = COLOR_OFF_WHITE
 	material = /decl/material/solid/metal/aluminium/holographic
 	reinf_material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/structure/table/holo_plastictable
 	icon_state = "holo_preview"
+	holographic = TRUE
 	color = COLOR_OFF_WHITE
 	material = /decl/material/solid/plastic/holographic
 	reinf_material = /decl/material/solid/plastic/holographic
 
 /obj/structure/table/holo_woodentable
+	holographic = TRUE
 	icon_state = "holo_preview"
-
-/obj/structure/table/holo_woodentable/Initialize()	
 	material = /decl/material/solid/wood/holographic
 	reinf_material = /decl/material/solid/wood/holographic
-	. = ..()
 
 //wood wood wood
 /obj/structure/table/woodentable

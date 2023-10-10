@@ -19,7 +19,6 @@
 	var/name = "Unknown Laws"
 	var/law_header = "Prime Directives"
 	var/selectable = 0
-	var/shackles = 0
 	var/datum/ai_law/zero/zeroth_law = null
 	var/datum/ai_law/zero/zeroth_law_borg = null
 	var/list/datum/ai_law/inherent_laws = list()
@@ -266,7 +265,7 @@
 /datum/ai_laws/proc/set_state_law(var/datum/ai_law/law, var/state)
 	law.set_state_law(src, state)
 
-/datum/ai_law/proc/set_state_law(var/datum/ai_law/law, var/state)
+/datum/ai_law/proc/set_state_law(var/datum/ai_laws/laws, var/state)
 
 /datum/ai_law/zero/set_state_law(var/datum/ai_laws/laws, var/state)
 	if(src == laws.zeroth_law)

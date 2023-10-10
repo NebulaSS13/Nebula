@@ -22,7 +22,7 @@
 	permeability_coefficient = 0.01
 
 /obj/item/clothing/mask/breath/emergency
-	desc = "A close-fitting  mask that is used by the wallmounted emergency oxygen pump."
+	desc = "A close-fitting mask that is used by the wallmounted emergency oxygen pump."
 	name = "emergency mask"
 	permeability_coefficient = 0.50
 

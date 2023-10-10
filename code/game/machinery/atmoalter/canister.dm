@@ -18,7 +18,7 @@
 
 	var/canister_color = "yellow"
 	var/can_label = 1
-	start_pressure = 45 * ONE_ATMOSPHERE
+	start_pressure = 45 ATM
 	var/temperature_resistance = 1000 + T0C
 	volume = 1000
 	interact_offline = 1 // Allows this to be used when not in powered area.
@@ -56,7 +56,7 @@
 
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled
 	name = "\improper Canister: \[O2 (Cryo)\]"
-	start_pressure = 20 * ONE_ATMOSPHERE
+	start_pressure = 20 ATM
 
 /obj/machinery/portable_atmospherics/canister/hydrogen
 	name = "\improper Canister: \[Hydrogen\]"
@@ -77,7 +77,7 @@
 	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/air/airlock
-	start_pressure = 3 * ONE_ATMOSPHERE
+	start_pressure = 3 ATM
 
 /obj/machinery/portable_atmospherics/canister/empty
 	start_pressure = 0
@@ -125,7 +125,7 @@
 		update_flag |= 4
 	else if(tank_pressure < ONE_ATMOSPHERE)
 		update_flag |= 8
-	else if(tank_pressure < 15*ONE_ATMOSPHERE)
+	else if(tank_pressure < (15 ATM))
 		update_flag |= 16
 	else
 		update_flag |= 32
@@ -301,8 +301,8 @@ update_flag
 	data["portConnected"] = connected_port ? 1 : 0
 	data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
 	data["releasePressure"] = round(release_pressure ? release_pressure : 0)
-	data["minReleasePressure"] = round(ONE_ATMOSPHERE/10)
-	data["maxReleasePressure"] = round(10*ONE_ATMOSPHERE)
+	data["minReleasePressure"] = round(0.1 ATM)
+	data["maxReleasePressure"] = round(10 ATM)
 	data["valveOpen"] = valve_open ? 1 : 0
 
 	data["hasHoldingTank"] = holding ? 1 : 0
@@ -339,9 +339,9 @@ update_flag
 	else if (href_list["pressure_adj"])
 		var/diff = text2num(href_list["pressure_adj"])
 		if(diff > 0)
-			release_pressure = min(10*ONE_ATMOSPHERE, release_pressure+diff)
+			release_pressure = min(10 ATM, release_pressure+diff)
 		else
-			release_pressure = max(ONE_ATMOSPHERE/10, release_pressure+diff)
+			release_pressure = max(0.1 ATM, release_pressure+diff)
 		. = TOPIC_REFRESH
 
 	else if (href_list["relabel"])

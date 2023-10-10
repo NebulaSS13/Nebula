@@ -8,9 +8,10 @@ var/global/file_uid = 0
 	var/filename = "NewFile" 								// Placeholder. No spacebars
 	var/filetype = "XXX" 									// File full names are [filename].[filetype] so like NewFile.XXX in this case
 	var/size = 1											// File size in GQ. Integers only!
-	var/obj/item/stock_parts/computer/hard_drive/holder 	// Holder that contains this file.
+	var/weakref/holder										// Holder that contains this file. Refers to a obj/item/stock_parts/computer/hard_drive.
 	var/unsendable = 0										// Whether the file may be sent to someone via file transfer or other means.
 	var/undeletable = 0										// Whether the file may be deleted. Setting to 1 prevents deletion/renaming/etc.
+	var/unrenamable = 0										// Whether the file may be renamed. Setting to 1 prevents renaming.
 	var/uid													// UID of this file
 	var/list/metadata										// Any metadata the file uses.
 	var/papertype = /obj/item/paper
@@ -28,29 +29,36 @@ var/global/file_uid = 0
 		metadata = md.Copy()
 
 /datum/computer_file/Destroy()
+	var/obj/item/stock_parts/computer/hard_drive/hard_drive = holder?.resolve()
+	if(hard_drive)
+		hard_drive.remove_file(src, forced = TRUE)
 	. = ..()
-	if(!holder)
-		return
 
-	holder.remove_file(src)
-
-// Returns independent copy of this file.
-/datum/computer_file/proc/clone(var/rename = 0)
-	var/datum/computer_file/temp = new type
-	temp.unsendable = unsendable
-	temp.undeletable = undeletable
-	temp.size = size
+/datum/computer_file/PopulateClone(datum/computer_file/clone)
+	clone = ..()
+	clone.unsendable  = unsendable
+	clone.undeletable = undeletable
+	clone.size        = size
 	if(metadata)
-		temp.metadata = metadata.Copy()
-	if(rename)
-		temp.filename = filename + copy_string
-	else
-		temp.filename = filename
-	temp.filetype = filetype
-	temp.read_access = read_access
-	temp.write_access = write_access
-	temp.mod_access = mod_access
-	return temp
+		clone.metadata = listDeepClone(metadata, TRUE)
+	clone.filetype     = filetype
+	clone.read_access  = deepCopyList(read_access)
+	clone.write_access = deepCopyList(write_access)
+	clone.mod_access   = deepCopyList(mod_access)
+	return clone
+
+/**
+ * Returns independent copy of this file.
+ * rename: Whether the clone shold be auto-renamed.
+ */
+/datum/computer_file/Clone(var/rename = FALSE)
+	var/datum/computer_file/clone = ..(null) //Don't propagate our rename param
+	if(clone)
+		if(rename)
+			clone.filename = filename + copy_string
+		else
+			clone.filename = filename
+	return clone
 
 /datum/computer_file/proc/get_file_perms(var/list/accesses, var/mob/user)
 	. = 0
@@ -62,7 +70,7 @@ var/global/file_uid = 0
 		. |= OS_WRITE_ACCESS
 	if(!LAZYLEN(mod_access) || has_access(mod_access, accesses))
 		. |= OS_MOD_ACCESS
-	
+
 /datum/computer_file/proc/get_perms_readable()
 	var/list/msg = list()
 	msg += "Permissions for file [filename]:"
@@ -92,7 +100,7 @@ var/global/file_uid = 0
 		return FALSE
 
 	if(perm == (OS_READ_ACCESS || OS_WRITE_ACCESS))
-		var/list/modded_list = (perm == OS_READ_ACCESS ? read_access : write_access) 
+		var/list/modded_list = (perm == OS_READ_ACCESS ? read_access : write_access)
 		if(change == "+")
 			if(!LAZYLEN(modded_list))
 				modded_list = list()
@@ -109,7 +117,7 @@ var/global/file_uid = 0
 			return TRUE
 		else
 			return FALSE // Something unexpected was passed into the change argument.
-			
+
 	else if(perm == OS_MOD_ACCESS)
 		var/list/test_list // You can't modify access such that you can't access the file any longer, so we test changes first.
 		if(change == "+")
@@ -139,3 +147,17 @@ var/global/file_uid = 0
 			return TRUE
 		else
 			return FALSE
+
+/datum/computer_file/proc/get_directory()
+	var/obj/item/stock_parts/computer/hard_drive/hard_drive = holder?.resolve()
+	if(hard_drive)
+		return hard_drive.stored_files[src]
+
+/datum/computer_file/proc/get_file_path()
+	var/datum/computer_file/parent = get_directory()
+	var/list/dir_names = list()
+	while(istype(parent))
+		dir_names.Insert(1, parent.filename)
+		parent = parent.get_directory()
+
+	return jointext(dir_names, "/")

@@ -6,6 +6,7 @@
 	icon_state = ICON_STATE_WORLD
 	center_of_mass = null
 	randpixel = 0
+	material = /decl/material/solid/plastic
 
 	var/screen_icon
 	var/list/decals
@@ -19,5 +20,4 @@
 	var/interact_sound_volume = 40
 	var/list/default_hardware = list()
 	var/list/default_programs = list()
-	var/initial_hardware_flag = 0
 	var/computer_type = /datum/extension/assembly/modular_computer

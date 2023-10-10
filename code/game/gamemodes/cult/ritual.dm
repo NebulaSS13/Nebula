@@ -48,7 +48,7 @@
 	if(locate(/obj/effect/rune) in T)
 		to_chat(src, "<span class='warning'>There's already a rune here.</span>") // Don't cross the runes
 		return
-	if(T.icon_state == "cult" || T.icon_state == "cult-narsie")
+	if(T.is_defiled())
 		cult_ground = 1
 	var/self
 	var/timer

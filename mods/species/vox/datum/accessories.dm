@@ -1,14 +1,6 @@
-/decl/sprite_accessory/hair/bald/Initialize()
-	. = ..()
-	LAZYDISTINCTADD(species_allowed, SPECIES_VOX)
-	
-/decl/sprite_accessory/facial_hair/shaved/Initialize()
-	. = ..()
-	LAZYDISTINCTADD(species_allowed, SPECIES_VOX)
-
 /decl/sprite_accessory/hair/vox
 	name = "Long Vox Quills"
-	icon = 'mods/species/vox/icons/body/hair.dmi'
+	icon = 'mods/species/vox/icons/body/soldier/hair.dmi'
 	icon_state = "vox_longquills"
 	species_allowed = list(SPECIES_VOX)
 
@@ -29,8 +21,22 @@
 	icon_state = "neck_markings"
 	body_parts = list(BP_HEAD)
 	species_allowed = list(SPECIES_VOX)
-	icon = 'mods/species/vox/icons/markings.dmi'
+	icon = 'mods/species/vox/icons/body/soldier/markings.dmi'
 	blend = ICON_MULTIPLY
+
+/decl/sprite_accessory/marking/vox/claws
+	name = "Vox Claws"
+	icon_state = "claws"
+	body_parts = list(BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_CHEST)
+
+/decl/sprite_accessory/marking/vox/beak
+	name = "Vox Beak"
+	icon_state = "beak"
+
+/decl/sprite_accessory/marking/vox/scutes
+	name = "Vox Scutes"
+	icon_state = "scutes"
+	body_parts = list(BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 
 /decl/sprite_accessory/marking/vox/arm_markings
 	name = "Vox Arm Markings (Left)"

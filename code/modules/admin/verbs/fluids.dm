@@ -13,11 +13,11 @@
 	var/reagent_amount = input("How deep?", "Spawn Fluid", 1000) as num|null
 	if(!reagent_amount)
 		return
-	var/reagent_type = input("What kind of reagent?", "Spawn Fluid", /decl/material/liquid/water) as null|anything in subtypesof(/decl/material)
+	var/reagent_type = input("What kind of reagent?", "Spawn Fluid", /decl/material/liquid/water) as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/material)
 	if(!reagent_type || !user || !check_rights(R_SPAWN))
 		return
 	var/turf/flooding = get_turf(user)
-	for(var/turf/T AS_ANYTHING in RANGE_TURFS(flooding, spawn_range))
+	for(var/turf/T as anything in RANGE_TURFS(flooding, spawn_range))
 		T.add_fluid(reagent_type, reagent_amount)
 
 /datum/admins/proc/jump_to_fluid_source()

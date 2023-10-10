@@ -3,7 +3,6 @@
 	name = "accounts uplink terminal"
 	desc = "Access transaction logs, account data and all kinds of other financial records."
 	var/needed_access = list(list(access_hop, access_captain))
-	var/receipt_num
 	var/machine_id = ""
 	var/obj/item/card/id/held_card
 	var/datum/money_account/detailed_account_view
@@ -31,17 +30,12 @@
 	machine_id = "[station_name()] Acc. DB #[num_financial_terminals++]"
 
 /obj/machinery/computer/account_database/attackby(obj/O, mob/user)
-	if(!istype(O, /obj/item/card/id))
-		return ..()
-
-	if(!held_card)
-		if(!user.unEquip(O, src))
-			return
-		held_card = O
-
-		SSnano.update_uis(src)
-
-	attack_hand(user)
+	if(istype(O, /obj/item/card/id) && !held_card)
+		if(user.try_unequip(O, src))
+			held_card = O
+			SSnano.update_uis(src)
+		return TRUE
+	return ..()
 
 /obj/machinery/computer/account_database/interface_interact(mob/user)
 	ui_interact(user)
@@ -119,7 +113,7 @@
 				var/account_name = href_list["holder_name"]
 				var/starting_funds = max(text2num(href_list["starting_funds"]), 0)
 
-				starting_funds = Clamp(starting_funds, 0, station_account.money)	// Not authorized to put the station in debt.
+				starting_funds = clamp(starting_funds, 0, station_account.money)	// Not authorized to put the station in debt.
 				starting_funds = min(starting_funds, fund_cap)						// Not authorized to give more than the fund cap.
 
 				var/datum/money_account/new_account = create_account("[account_name]'s Personal Account", account_name, starting_funds, ACCOUNT_TYPE_PERSONAL, src)
@@ -141,13 +135,14 @@
 					if(ishuman(usr) && !usr.get_active_hand())
 						usr.put_in_hands(held_card)
 					held_card = null
-
+					SSnano.update_uis(src)
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/card/id))
-						if(!usr.unEquip(I, src))
+						if(!usr.try_unequip(I, src))
 							return
 						held_card = I
+						SSnano.update_uis(src)
 
 			if("view_account_detail")
 				var/index = text2num(href_list["account_index"])

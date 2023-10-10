@@ -5,7 +5,12 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_TINY
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_TRACE, 
+		/decl/material/solid/silicon         = MATTER_AMOUNT_TRACE, 
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/use_message = "Halt! Security!"
 	var/spamcheck = 0
 	var/insults

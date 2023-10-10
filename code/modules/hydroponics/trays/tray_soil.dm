@@ -38,7 +38,7 @@
 	seed = newseed
 	dead = 0
 	age = start_mature ? seed.get_trait(TRAIT_MATURATION) : 1
-	health = seed.get_trait(TRAIT_ENDURANCE)
+	plant_health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
 	if(isnull(default_pixel_y))
 		default_pixel_y = rand(-12,12)
@@ -47,14 +47,14 @@
 	reset_offsets(0)
 	if(seed)
 		name = seed.display_name
-	check_health()
-	connected_zlevels = GetConnectedZlevels(z)
+	check_plant_health()
+	connected_zlevels = SSmapping.get_connected_levels(z)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
 	if(!seed)
 		qdel_self()
 		return
-	if(z in global.using_map.station_levels) //plants on station always tick
+	if(isStationLevel(z)) //plants on station always tick
 		return ..()
 	if(living_observers_present(connected_zlevels))
 		return ..()

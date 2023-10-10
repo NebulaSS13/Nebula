@@ -26,18 +26,20 @@ var/global/list/floor_decals = list()
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		layer = T.is_plating() ? DECAL_PLATING_LAYER : DECAL_LAYER
-		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[plane]-[layer]-[detail_overlay]-[detail_color]"
+		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[plane]-[layer]-[detail_overlay]-[detail_color]-[pixel_x]-[pixel_y]"
 		if(!floor_decals[cache_key])
 			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
 			I.layer = layer
 			I.appearance_flags = appearance_flags
 			I.color = src.color
 			I.alpha = src.alpha
+			I.pixel_x = src.pixel_x
+			I.pixel_y = src.pixel_y
 			if(detail_overlay)
 				I.overlays |= overlay_image(icon, "[detail_overlay]", color = detail_color, flags=RESET_COLOR)
 			floor_decals[cache_key] = I
 		LAZYDISTINCTADD(T.decals, floor_decals[cache_key])
-		T.add_overlay(floor_decals[cache_key])
+		T.queue_icon_update()
 	qdel(src)
 
 /obj/effect/floor_decal/reset
@@ -1314,6 +1316,9 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/steeldecal/steel_decals4
 	icon_state = "steel_decals4"
 
+/obj/effect/floor_decal/steeldecal/steel_decals5
+	icon_state = "steel_decals5"
+
 /obj/effect/floor_decal/steeldecal/steel_decals6
 	icon_state = "steel_decals6"
 
@@ -1381,3 +1386,16 @@ var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal/stoneborder/corner
 	icon_state = "stoneborder_c"
+
+/obj/effect/floor_decal/rust
+	name = "rust"
+	icon_state = "rust"
+
+/obj/effect/floor_decal/rust/part_rusted1
+	icon_state = "part_rusted1"
+
+/obj/effect/floor_decal/rust/steel_decals_rusted1
+	icon_state = "steel_decals_rusted1"
+
+/obj/effect/floor_decal/rust/steel_decals_rusted2
+	icon_state = "steel_decals_rusted2"

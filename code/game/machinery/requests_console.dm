@@ -21,6 +21,7 @@ var/global/req_console_information = list()
 	desc = "A console intended to send requests to different departments."
 	anchored = TRUE
 	density = FALSE
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department
@@ -34,7 +35,6 @@ var/global/req_console_information = list()
 	var/announcementConsole = 0
 		// 0 = This console cannot be used to send department announcements
 		// 1 = This console can send department announcementsf
-	var/open = 0 // 1 if open
 	var/announceAuth = 0 //Will be set to 1 when you authenticate yourself for announcements
 	var/msgVerified = "" //Will contain the name of the person who varified it
 	var/msgStamped = "" //If a message is stamped, this will contain the stamp name
@@ -47,6 +47,7 @@ var/global/req_console_information = list()
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	frame_type = /obj/item/frame/stock_offset/request_console
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 
 /obj/machinery/network/requests_console/on_update_icon()
 	if(stat & NOPOWER)
@@ -85,9 +86,6 @@ var/global/req_console_information = list()
 		department = _department
 		announcement.title = "[_department] announcement"
 		SetName("[_department] Requests Console")
-
-/obj/machinery/network/requests_console/Destroy()
-	. = ..()
 
 /obj/machinery/network/requests_console/interface_interact(mob/user)
 	ui_interact(user)
@@ -228,7 +226,7 @@ var/global/req_console_information = list()
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/stamp/T = O
-			msgStamped = text("<font color='blue'><b>Stamped with the [T.name]</b></font>")
+			msgStamped = "<font color='blue'><b>Stamped with the [T.name]</b></font>"
 			SSnano.update_uis(src)
 	return ..()
 

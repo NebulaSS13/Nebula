@@ -14,9 +14,7 @@
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	material = /decl/material/solid/glass
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
-	unbreakable = 1 //It's already broken.
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
 
@@ -28,7 +26,7 @@
 	. = ..()
 	if(. && !has_handle)
 		var/mob/living/carbon/human/H = user
-		if(istype(H) && !H.gloves && !(H.species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
+		if(istype(H) && !H.get_equipped_item(slot_gloves_str) && !(H.species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
 			var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 			if(istype(hand) && !BP_IS_PROSTHETIC(hand))
 				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
@@ -54,6 +52,7 @@
 		qdel(src)
 
 /obj/item/shard/on_update_icon()
+	. = ..()
 	if(material)
 		color = material.color
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
@@ -63,9 +62,9 @@
 		alpha = 255
 
 /obj/item/shard/attackby(obj/item/W, mob/user)
-	if(isWelder(W) && material.shard_can_repair)
+	if(IS_WELDER(W) && material.shard_can_repair)
 		var/obj/item/weldingtool/WT = W
-		if(WT.remove_fuel(0, user))
+		if(WT.weld(0, user))
 			material.create_object(get_turf(src))
 			qdel(src)
 			return
@@ -89,48 +88,57 @@
 	return ..()
 
 /obj/item/shard/on_update_icon()
-	overlays.Cut()
 	. = ..()
 	if(has_handle)
-		var/image/I = image(icon, "handle")
-		I.appearance_flags |= RESET_COLOR
-		I.color = has_handle
-		overlays += I
+		add_overlay(overlay_image(icon, "handle", has_handle, RESET_COLOR))
 
 /obj/item/shard/Crossed(atom/movable/AM)
 	..()
-	if(isliving(AM))
-		var/mob/M = AM
+	if(!isliving(AM))
+		return
 
-		if(M.buckled) //wheelchairs, office chairs, rollerbeds
-			return
+	var/mob/living/M = AM
+	if(M.buckled) //wheelchairs, office chairs, rollerbeds
+		return
 
-		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+	playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
 
-			if(H.species.siemens_coefficient<0.5 || (H.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))) //Thick skin.
-				return
+	var/decl/species/walker_species = M.get_species()
+	if(walker_species && (walker_species.siemens_coefficient<0.5 || (walker_species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))) //Thick skin.
+		return
 
-			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & SLOT_FEET) ) )
-				return
+	var/obj/item/shoes = M.get_equipped_item(slot_shoes_str)
+	var/obj/item/suit = M.get_equipped_item(slot_wear_suit_str)
+	if(shoes || (suit && (suit.body_parts_covered & SLOT_FEET)))
+		return
 
-			to_chat(M, "<span class='danger'>You step on \the [src]!</span>")
+	var/list/check = list(BP_L_FOOT, BP_R_FOOT)
+	while(check.len)
+		var/picked = pick_n_take(check)
+		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(M, picked)
+		if(!affecting || BP_IS_PROSTHETIC(affecting))
+			continue
+		to_chat(M, SPAN_DANGER("You step on \the [src]!"))
+		affecting.take_external_damage(5, 0)
+		M.updatehealth()
+		if(affecting.can_feel_pain())
+			SET_STATUS_MAX(M, STAT_WEAK, 3)
+		return
 
-			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
-			while(check.len)
-				var/picked = pick(check)
-				var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, picked)
-				if(affecting)
-					if(BP_IS_PROSTHETIC(affecting))
-						return
-					affecting.take_external_damage(5, 0)
-					H.updatehealth()
-					if(affecting.can_feel_pain())
-						SET_STATUS_MAX(H, STAT_WEAK, 3)
-					return
-				check -= picked
-			return
+//Prevent the shard from being allowed to shatter
+/obj/item/shard/check_health(var/lastdamage = null, var/lastdamtype = null, var/lastdamflags = 0, var/consumed = FALSE)
+	if(health > 0 || !can_take_damage())
+		return //If invincible, or if we're not dead yet, skip
+	if(lastdamtype == BURN)
+		melt()
+		return
+	physically_destroyed()
+
+/obj/item/shard/shatter(consumed)
+	physically_destroyed()
+
+/obj/item/shard/can_take_wear_damage()
+	return FALSE
 
 // Preset types - left here for the code that uses them
 /obj/item/shard/borosilicate

@@ -1,10 +1,11 @@
 /turf/simulated/floor/attack_hand(mob/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
-		if(hand && try_graffiti(H, hand))
-			return TRUE
-	. = ..()
+	if(!ishuman(user))
+		return ..()
+	var/mob/living/carbon/human/H = user
+	var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
+	if(hand && try_graffiti(H, hand))
+		return TRUE
+	return ..()
 
 /turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
 
@@ -16,14 +17,14 @@
 		T.try_build_turf(user, src)
 		return TRUE
 
-	if(isCoil(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
+	if(IS_COIL(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
 		return ..(C, user)
 
-	if(!(isScrewdriver(C) && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)) && try_graffiti(user, C))
+	if(!(IS_SCREWDRIVER(C) && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)) && try_graffiti(user, C))
 		return TRUE
 
 	if(flooring)
-		if(isCrowbar(C) && user.a_intent != I_HURT)
+		if(IS_CROWBAR(C) && user.a_intent != I_HURT)
 			if(broken || burnt)
 				if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src, 0.15))
 					return TRUE
@@ -49,7 +50,7 @@
 				return
 			playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
 			return TRUE
-		else if(isScrewdriver(C) && (flooring.flags & TURF_REMOVE_SCREWDRIVER))
+		else if(IS_SCREWDRIVER(C) && (flooring.flags & TURF_REMOVE_SCREWDRIVER))
 			if(broken || burnt)
 				return
 			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
@@ -60,7 +61,7 @@
 			make_plating(1)
 			playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
 			return TRUE
-		else if(isWrench(C) && (flooring.flags & TURF_REMOVE_WRENCH))
+		else if(IS_WRENCH(C) && (flooring.flags & TURF_REMOVE_WRENCH))
 			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
 				return TRUE
 			if(!flooring)
@@ -69,12 +70,16 @@
 			make_plating(1)
 			playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
 			return TRUE
-		else if(istype(C, /obj/item/shovel) && (flooring.flags & TURF_REMOVE_SHOVEL))
+		else if(IS_SHOVEL(C) && (flooring.flags & TURF_REMOVE_SHOVEL))
+			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
+				return TRUE
+			if(!flooring)
+				return
 			to_chat(user, "<span class='notice'>You shovel off the [flooring.descriptor].</span>")
 			make_plating(1)
 			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 			return TRUE
-		else if(isCoil(C))
+		else if(IS_COIL(C))
 			to_chat(user, "<span class='warning'>You must remove the [flooring.descriptor] first.</span>")
 			return TRUE
 	else
@@ -119,7 +124,7 @@
 				playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 			return TRUE
 		// Repairs and Deconstruction.
-		else if(isCrowbar(C))
+		else if(IS_CROWBAR(C))
 			if(broken || burnt)
 				playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
 				visible_message("<span class='notice'>[user] has begun prying off the damaged plating.</span>")
@@ -136,11 +141,11 @@
 					if(T)
 						T.visible_message("<span class='danger'>The ceiling above has been pried off!</span>")
 			return
-		else if(isWelder(C))
+		else if(IS_WELDER(C))
 			var/obj/item/weldingtool/welder = C
 			if(welder.isOn() && (is_plating()))
 				if(broken || burnt)
-					if(welder.remove_fuel(0, user))
+					if(welder.weld(0, user))
 						to_chat(user, "<span class='notice'>You fix some dents on the broken plating.</span>")
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						icon_state = "plating"
@@ -148,7 +153,7 @@
 						broken = null
 						return TRUE
 				else
-					if(welder.remove_fuel(0, user))
+					if(welder.weld(0, user))
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
 						. = TRUE
@@ -172,11 +177,14 @@
 
 /turf/simulated/floor/proc/welder_melt()
 	if(!(is_plating()) || broken || burnt)
-		return 0
-	burnt = 1
+		return FALSE
+	// if burnt/broken is nonzero plating just chooses a random icon
+	// so it doesn't really matter what we set this to as long as it's truthy
+	// let's keep it a string for consistency with the other uses of it
+	burnt = "1"
 	remove_decals()
 	update_icon()
-	return 1
+	return TRUE
 
 /turf/simulated/floor/why_cannot_build_cable(var/mob/user, var/cable_error)
 	switch(cable_error)

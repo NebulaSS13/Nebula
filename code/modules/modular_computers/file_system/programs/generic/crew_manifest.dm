@@ -6,6 +6,8 @@
 	program_key_state = "generic_key"
 	size = 4
 	available_on_network = 1
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_RECORDS
 	nanomodule_path = /datum/nano_module/program/crew_manifest
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE

@@ -128,14 +128,14 @@
 		playsound(loc, A.fire_sound, 25, 1)
 		A.damage = round(power_per_shot/EMITTER_DAMAGE_POWER_TRANSFER)
 		A.launch( get_step(loc, dir) )
-		
+
 		if(!powered)
 			powered = TRUE
 			update_icon()
 
 /obj/machinery/emitter/attackby(obj/item/W, mob/user)
 
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		if(active)
 			to_chat(user, "Turn off [src] first.")
 			return
@@ -158,7 +158,7 @@
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return
 
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		if(active)
 			to_chat(user, "Turn off [src] first.")
@@ -167,7 +167,7 @@
 			if(0)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
 			if(1)
-				if (WT.remove_fuel(0,user))
+				if (WT.weld(0,user))
 					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to weld [src] to the floor.", \
 						"You start to weld [src] to the floor.", \
@@ -179,7 +179,7 @@
 				else
 					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			if(2)
-				if (WT.remove_fuel(0,user))
+				if (WT.weld(0,user))
 					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
 						"You start to cut [src] free from the floor.", \

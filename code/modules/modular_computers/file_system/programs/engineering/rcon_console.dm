@@ -8,7 +8,8 @@
 	extended_desc = "This program allows remote control of power distribution systems. This program can not be run on tablet computers."
 	read_access = list(access_engine)
 	network_destination = "RCON remote control system"
-	requires_network_feature = NETWORK_SYSTEMCONTROL
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 19
 	category = PROG_ENG
@@ -137,9 +138,9 @@
 	if(!network)
 		return FALSE
 
-	if(!ARE_Z_CONNECTED(network.get_router_z(), get_z(M)))
+	if(!LEVELS_ARE_Z_CONNECTED(network.get_router_z(), get_z(M)))
 		return FALSE
-	
+
 	if(istype(M, /obj/machinery/power/smes))
 		var/obj/machinery/power/smes/buildable/SMES = M
 		return SMES.RCon_tag && SMES.RCon_tag != "NO_TAG" && SMES.RCon

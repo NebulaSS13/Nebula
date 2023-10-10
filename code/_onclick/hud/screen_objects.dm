@@ -51,7 +51,7 @@
 
 /obj/screen/default_attack_selector
 	name = "default attack selector"
-	icon_state = "attack_selector"
+	icon_state = "attack_none"
 	screen_loc = ui_attack_selector
 	var/mob/living/carbon/human/owner
 
@@ -61,13 +61,11 @@
 
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"])
-		var/decl/natural_attack/attack = owner.get_unarmed_attack()
-		to_chat(owner, SPAN_NOTICE("Your current default attack is <b>[attack?.name || "unset"]</b>."))
-		if(attack)
-			var/summary = attack.summarize()
+		to_chat(owner, SPAN_NOTICE("Your current default attack is <b>[owner.default_attack?.name || "unset"]</b>."))
+		if(owner.default_attack)
+			var/summary = owner.default_attack.summarize()
 			if(summary)
 				to_chat(owner, SPAN_NOTICE(summary))
-
 		return
 
 	owner.set_default_unarmed_attack(src)
@@ -88,11 +86,8 @@
 		update_icon()
 
 /obj/screen/default_attack_selector/on_update_icon()
-	var/decl/natural_attack/attack = owner?.get_unarmed_attack()
-	if(!attack)
-		maptext = "<center>[STYLE_SMALLFONTS_OUTLINE("NONE", 5, COLOR_WHITE, COLOR_BLACK)]</center>"
-	else
-		maptext = "<center>[STYLE_SMALLFONTS_OUTLINE("[uppertext(attack.name)]", 5, COLOR_WHITE, COLOR_BLACK)]</center>"
+	var/decl/natural_attack/attack = owner?.default_attack
+	icon_state = attack?.selector_icon_state || "attack_none"
 
 /obj/screen/item_action
 	var/obj/item/owner
@@ -130,13 +125,13 @@
 			usr.ClickOn(master)
 	return 1
 
-/obj/screen/zone_sel
+/obj/screen/zone_selector
 	name = "damage zone"
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
 	var/selecting = BP_CHEST
 
-/obj/screen/zone_sel/Click(location, control,params)
+/obj/screen/zone_selector/Click(location, control,params)
 	var/list/PL = params2list(params)
 	var/icon_x = text2num(PL["icon-x"])
 	var/icon_y = text2num(PL["icon-y"])
@@ -198,16 +193,19 @@
 	set_selected_zone(new_selecting)
 	return 1
 
-/obj/screen/zone_sel/proc/set_selected_zone(bodypart)
+/obj/screen/zone_selector/Initialize(mapload)
+	. = ..()
+	update_icon()
+
+/obj/screen/zone_selector/proc/set_selected_zone(bodypart)
 	var/old_selecting = selecting
 	selecting = bodypart
 	if(old_selecting != selecting)
 		update_icon()
 		return TRUE
 
-/obj/screen/zone_sel/on_update_icon()
-	overlays.Cut()
-	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
+/obj/screen/zone_selector/on_update_icon()
+	set_overlays(image('icons/mob/zone_sel.dmi', "[selecting]"))
 
 /obj/screen/intent
 	name = "intent"
@@ -236,6 +234,7 @@
 
 /obj/screen/Click(location, control, params)
 	if(!usr)	return 1
+
 	switch(name)
 		if("toggle")
 			if(usr.hud_used.inventory_shown)
@@ -264,7 +263,9 @@
 				L.lookup()
 
 		if("internal")
-			usr.ui_toggle_internals()
+			if(isliving(usr))
+				var/mob/living/M = usr
+				M.ui_toggle_internals()
 
 		if("act_intent")
 			usr.a_intent_change("right")
@@ -329,28 +330,20 @@
 /obj/screen/inventory/Click()
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
-	if(!usr.canClick())
-		return 1
-	if(usr.incapacitated())
-		return 1
+	if(!usr.canClick() || usr.incapacitated())
+		return TRUE
 
-	if(iscarbon(usr))
-		var/mob/living/carbon/C = usr
-		if(name in C.held_item_slots)
-			if(name == C.get_active_held_item_slot())
-				C.attack_empty_hand()
-			else
-				C.select_held_item_slot(name)
-			return TRUE
+	if(name == "swap" || name == "hand")
+		usr.swap_hand()
+	else if(name in usr.get_held_item_slots())
+		if(name == usr.get_active_held_item_slot())
+			usr.attack_empty_hand()
+		else
+			usr.select_held_item_slot(name)
+	else if(usr.attack_ui(slot_id))
+		usr.update_inv_hands(0)
 
-	switch(name)
-		if("swap")
-			usr.swap_hand()
-		if("hand")
-			usr.swap_hand()
-		else if(usr.attack_ui(slot_id))
-			usr.update_inv_hands(0)
-	return 1
+	return TRUE
 
 // Character setup stuff
 /obj/screen/setup_preview
@@ -372,3 +365,15 @@
 	if(pref)
 		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
 		pref.update_preview_icon()
+
+/obj/screen/lighting_plane_master
+	screen_loc = "CENTER"
+	appearance_flags = PLANE_MASTER
+	mouse_opacity = 0
+	plane = LIGHTING_PLANE
+	blend_mode = BLEND_MULTIPLY
+	alpha = 255
+
+/obj/screen/lighting_plane_master/proc/set_alpha(var/newalpha)
+	if(alpha != newalpha)
+		animate(src, alpha = newalpha, time = SSmobs.wait)

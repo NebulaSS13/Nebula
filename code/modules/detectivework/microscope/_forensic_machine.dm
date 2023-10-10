@@ -58,7 +58,7 @@
 				set_sample(B.stored_item)
 				B.empty()
 				return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, SPAN_NOTICE("You insert \the [W] into  \the [src]."))
 		set_sample(W)
@@ -89,14 +89,13 @@
 			. += F.get_formatted_data()
 		else
 			. += "No [F.name] detected."
-	
+
 	. = jointext(., "<br>")
 
 /obj/machinery/forensic/proc/print_report()
-	var/obj/item/paper/report = new(get_turf(src), get_report(), "[src] report #[++report_num]: [sample.name]")
+	var/obj/item/paper/report = new(get_turf(src), null, get_report(), "[src] report #[++report_num]: [sample.name]")
 	playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
-	report.stamped = list(/obj/item/stamp)
-	report.update_icon()	
+	report.apply_custom_stamp(overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-brig", flags = RESET_COLOR), "by \the [src]")
 
 /obj/machinery/forensic/proc/remove_sample(var/mob/living/remover)
 	if(!istype(remover) || remover.incapacitated() || !Adjacent(remover))
@@ -108,11 +107,20 @@
 	remover.put_in_hands(sample)
 	clear_sample()
 
-/obj/machinery/forensic/AltClick()
-	remove_sample(usr)
-
 /obj/machinery/forensic/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(user == over)
 		remove_sample(usr)
 		return TRUE
 	. = ..()
+
+/obj/machinery/forensic/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/forensics_remove_sample)
+
+/decl/interaction_handler/forensics_remove_sample
+	name = "Remove Sample"
+	expected_target_type = /obj/machinery/forensic
+
+/decl/interaction_handler/forensics_remove_sample/invoked(var/atom/target, var/mob/user)
+	var/obj/machinery/forensic/F = target
+	F.remove_sample(usr)

@@ -5,7 +5,6 @@
 	icon_state = "posibrain"
 	organ_tag = BP_POSIBRAIN
 	parent_organ = BP_CHEST
-	vital = 0
 	force = 1.0
 	w_class = ITEM_SIZE_NORMAL
 	throwforce = 1
@@ -22,17 +21,12 @@
 	)
 	relative_size = 60
 	req_access = list(access_robotics)
-	status = ORGAN_PROSTHETIC //triggers robotization on init
+	organ_properties = ORGAN_PROP_PROSTHETIC //triggers robotization on init
 	scale_max_damage_to_species_health = FALSE
 
-	var/mob/living/silicon/sil_brainmob/brainmob = null
+	var/mob/living/carbon/brain/brainmob = null
 	var/searching = 0
-	var/askDelay = 10 * 60 * 1
-	var/list/shackled_verbs = list(
-		/obj/item/organ/internal/posibrain/proc/show_laws_brain,
-		/obj/item/organ/internal/posibrain/proc/brain_checklaws
-		)
-	var/shackle = 0
+	var/askDelay = 60 SECONDS
 
 /obj/item/organ/internal/posibrain/Initialize()
 	. = ..()
@@ -48,6 +42,7 @@
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
 		brainmob.add_language(/decl/language/human/common)
+		brainmob.add_language(/decl/language/binary)
 
 /obj/item/organ/internal/posibrain/Destroy()
 	QDEL_NULL(brainmob)
@@ -55,7 +50,6 @@
 
 /obj/item/organ/internal/posibrain/setup_as_prosthetic()
 	. = ..()
-	unshackle()
 	update_icon()
 
 /obj/item/organ/internal/posibrain/attack_self(mob/user)
@@ -66,9 +60,9 @@
 		src.searching = 1
 		var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/positronic_brain)
 		G.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
-		spawn(600) reset_search()
+		addtimer(CALLBACK(src, .proc/reset_search), askDelay)
 
-/obj/item/organ/internal/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
+/obj/item/organ/internal/posibrain/proc/reset_search() //We give the players time to decide, then reset the timer.
 	if(!brainmob?.key)
 		searching = FALSE
 		icon_state = "posibrain"
@@ -89,8 +83,6 @@
 	. = ..()
 
 	var/msg = "<span class='info'>*---------*</span>\nThis is [html_icon(src)] \a <EM>[src]</EM>!\n[desc]\n"
-
-	if(shackle)	msg += "<span class='warning'>It is clamped in a set of metal straps with a complex digital lock.</span>\n"
 
 	msg += "<span class='warning'>"
 
@@ -124,28 +116,12 @@
 	src.brainmob.SetName("[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[random_id(type,100,999)]")
 	src.brainmob.real_name = src.brainmob.name
 
-/obj/item/organ/internal/posibrain/proc/shackle(var/given_lawset)
-	if(given_lawset)
-		brainmob.laws = given_lawset
-	shackle = 1
-	verbs |= shackled_verbs
-	update_icon()
-	return 1
-
-/obj/item/organ/internal/posibrain/proc/unshackle()
-	shackle = 0
-	verbs -= shackled_verbs
-	update_icon()
-
 /obj/item/organ/internal/posibrain/on_update_icon()
+	. = ..()
 	if(src.brainmob && src.brainmob.key)
 		icon_state = "posibrain-occupied"
 	else
 		icon_state = "posibrain"
-
-	overlays.Cut()
-	if(shackle)
-		overlays |= image('icons/obj/assemblies.dmi', "posibrain-shackles")
 
 /obj/item/organ/internal/posibrain/proc/transfer_identity(var/mob/living/carbon/H)
 	if(H && H.mind)
@@ -154,7 +130,6 @@
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
-		brainmob.show_laws(brainmob)
 
 	update_icon()
 
@@ -187,26 +162,6 @@
 		SetName("\the [owner.real_name]'s [initial(name)]")
 	return ..()
 
-/*
-	This is for law stuff directly. This is how a human mob will be able to communicate with the posi_brainmob in the
-	posibrain organ for laws when the posibrain organ is shackled.
-*/
-/obj/item/organ/internal/posibrain/proc/show_laws_brain()
-	set category = "Shackle"
-	set name = "Show Laws"
-	set src in usr
-
-	brainmob.show_laws(owner)
-
-/obj/item/organ/internal/posibrain/proc/brain_checklaws()
-	set category = "Shackle"
-	set name = "State Laws"
-	set src in usr
-
-
-	brainmob.open_subsystem(/datum/nano_module/law_manager, usr)
-
-
 /obj/item/organ/internal/cell
 	name = "microbattery"
 	desc = "A small, powerful cell for use in fully prosthetic bodies."
@@ -214,8 +169,7 @@
 	dead_icon = "cell_bork"
 	organ_tag = BP_CELL
 	parent_organ = BP_CHEST
-	vital = 1
-	status = ORGAN_PROSTHETIC //triggers robotization on init
+	organ_properties = ORGAN_PROP_PROSTHETIC //triggers robotization on init
 	var/open
 	var/obj/item/cell/cell = /obj/item/cell/hyper
 	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
@@ -272,7 +226,7 @@
 		cell.emp_act(severity)
 
 /obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(open)
 			open = 0
 			to_chat(user, "<span class='notice'>You screw the battery panel in place.</span>")
@@ -280,7 +234,7 @@
 			open = 1
 			to_chat(user, "<span class='notice'>You unscrew the battery panel.</span>")
 
-	if(isCrowbar(W))
+	if(IS_CROWBAR(W))
 		if(open)
 			if(cell)
 				user.put_in_hands(cell)
@@ -291,7 +245,7 @@
 		if(open)
 			if(cell)
 				to_chat(user, "<span class ='warning'>There is a power cell already installed.</span>")
-			else if(user.unEquip(W, src))
+			else if(user.try_unequip(W, src))
 				cell = W
 				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
 
@@ -312,8 +266,7 @@
 	icon_state = "mmi-empty"
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
-	vital = TRUE
-	status = ORGAN_PROSTHETIC //triggers robotization on init
+	organ_properties = ORGAN_PROP_PROSTHETIC //triggers robotization on init
 	scale_max_damage_to_species_health = FALSE
 	var/obj/item/mmi/stored_mmi
 	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete

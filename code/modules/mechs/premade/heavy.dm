@@ -2,20 +2,27 @@
 	name = "Heavy exosuit"
 	desc = "A heavily armored combat exosuit."
 
+/obj/item/mech_component/manipulators/heavy/painted
+	color = COLOR_TITANIUM
+
+/obj/item/mech_component/propulsion/heavy/painted
+	color = COLOR_TITANIUM
+
+/obj/item/mech_component/sensors/heavy/painted
+	color = COLOR_TITANIUM
+
+/obj/item/mech_component/chassis/heavy/painted
+	color = COLOR_TITANIUM
+
 /mob/living/exosuit/premade/heavy/Initialize()
 	if(!arms)
-		arms = new /obj/item/mech_component/manipulators/heavy(src)
-		arms.color = COLOR_TITANIUM
+		arms = new /obj/item/mech_component/manipulators/heavy/painted(src)
 	if(!legs)
-		legs = new /obj/item/mech_component/propulsion/heavy(src)
-		legs.color = COLOR_TITANIUM
+		legs = new /obj/item/mech_component/propulsion/heavy/painted(src)
 	if(!head)
-		head = new /obj/item/mech_component/sensors/heavy(src)
-		head.color = COLOR_TITANIUM
+		head = new /obj/item/mech_component/sensors/heavy/painted(src)
 	if(!body)
-		body = new /obj/item/mech_component/chassis/heavy(src)
-		body.color = COLOR_TITANIUM
-
+		body = new /obj/item/mech_component/chassis/heavy/painted(src)
 	. = ..()
 
 /mob/living/exosuit/premade/heavy/spawn_mech_equipment()
@@ -85,7 +92,7 @@
 	)
 
 	. = ..()
-		
+
 /obj/item/mech_component/chassis/heavy/prebuild()
 	. = ..()
 	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
@@ -105,3 +112,15 @@
 	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_RIGHT_HAND)
 	install_system(new /obj/item/mech_equipment/shields(src), HARDPOINT_BACK)
+
+/obj/structure/mech_wreckage/heavy
+	name = "heavy exosuit wreckage"
+	loot_pool = list(
+		/obj/item/mech_equipment/mounted_system/taser =       80,
+		/obj/item/mech_equipment/mounted_system/taser/laser = 80,
+		/obj/item/mech_equipment/shields =                    80,
+		/obj/item/mech_component/manipulators/heavy/painted = 40,
+		/obj/item/mech_component/propulsion/heavy/painted =   40,
+		/obj/item/mech_component/sensors/heavy/painted =      40,
+		/obj/item/mech_component/chassis/heavy/painted =      40
+	)

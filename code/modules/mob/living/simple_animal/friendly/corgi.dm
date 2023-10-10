@@ -16,6 +16,7 @@
 	possession_candidate = 1
 	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
+	base_animal_type = /mob/living/simple_animal/corgi
 
 	meat_type = /obj/item/chems/food/meat/corgi
 	meat_amount = 3
@@ -40,6 +41,7 @@
 	desc = "The by-product of corgi farming."
 	icon = 'icons/obj/items/sheet_hide.dmi'
 	icon_state = "sheet-corgi"
+	material = /decl/material/solid/skin/fur/orange
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
@@ -87,7 +89,7 @@
 					else
 						set_dir(SOUTH)
 
-					if(isturf(movement_target.loc) )
+					if(isturf(movement_target.loc) && Adjacent(movement_target))
 						UnarmedAttack(movement_target)
 					else if(ishuman(movement_target.loc) && prob(20))
 						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
@@ -101,7 +103,7 @@
 					return
 
 /obj/item/chems/food/meat/corgi
-	name = "Corgi meat"
+	name = "corgi meat"
 	desc = "Tastes like... well you know..."
 
 /mob/living/simple_animal/corgi/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
@@ -134,7 +136,7 @@
 			"[EAST]" =  list( 5, -14),
 			"[WEST]" =  list(-5, -14)
 		)
-	..()
+	. = ..()
 	gender = pick(MALE, FEMALE)
 
 //pupplies cannot wear anything.

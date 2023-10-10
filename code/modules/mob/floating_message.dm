@@ -47,11 +47,11 @@ var/global/list/floating_chat_colors = list()
 
 	// create 2 messages, one that appears if you know the language, and one that appears when you don't know the language
 	var/image/understood = generate_floating_text(src, capitalize(message), style, fontsize, duration, show_to)
-	var/image/gibberish = language ? generate_floating_text(src, language.scramble(message), style, fontsize, duration, show_to) : understood
+	var/image/gibberish = language ? generate_floating_text(src, language.scramble(src, message), style, fontsize, duration, show_to) : understood
 
 	for(var/client/C in show_to)
 		if(!C.mob.is_deaf() && C.get_preference_value(/datum/client_preference/floating_messages) == PREF_SHOW)
-			if(C.mob.say_understands(null, language))
+			if(C.mob.say_understands(src, language))
 				C.images += understood
 			else
 				C.images += gibberish
@@ -64,7 +64,8 @@ var/global/list/floating_chat_colors = list()
 	I.maptext_width = CHAT_MESSAGE_WIDTH
 	I.maptext_height = CHAT_MESSAGE_HEIGHT
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
-	I.pixel_w = -round(I.maptext_width/2) + 16
+	I.pixel_w = -round(I.maptext_width/2) + 16 + holder.get_overhead_text_x_offset()
+	I.pixel_z = holder.get_overhead_text_y_offset()
 
 	style = "font-family: 'Small Fonts'; -dm-text-outline: 1px black; font-size: [size]px; line-height: 1.1; [style]"
 	I.maptext = "<center><span style=\"[style]\">[message]</span></center>"

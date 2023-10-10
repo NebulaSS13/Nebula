@@ -6,7 +6,8 @@
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/glass
 	material_force_multiplier = 0.1
-	item_flags = ITEM_FLAG_NO_BLUDGEON | ITEM_FLAG_HOLLOW
+	item_flags = ITEM_FLAG_NO_BLUDGEON
+	obj_flags = OBJ_FLAG_HOLLOW
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 	var/list/accept_mobs = list(
@@ -76,15 +77,15 @@
 			contains = 1
 		if(contains != 1)
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		var/obj/item/cash/S = W
 		user.visible_message("<span class='notice'>[user] puts \the [S] into \the [src].</span>")
 		update_icon()
 
 /obj/item/glass_jar/on_update_icon() // Also updates name and desc
+	. = ..()
 	underlays.Cut()
-	overlays.Cut()
 	switch(contains)
 		if(0)
 			SetName(initial(name))

@@ -18,16 +18,12 @@
 	..()
 	ADJUST_TAG_VAR(initial_id_tag, map_hash)
 
-/obj/machinery/computer/fusion/get_codex_value()
-	return name
-	
-
 /obj/machinery/computer/fusion/proc/get_local_network()
 	var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 	return fusion.get_local_network()
 
 /obj/machinery/computer/fusion/attackby(var/obj/item/thing, var/mob/user)
-	if(isMultitool(thing))
+	if(IS_MULTITOOL(thing))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return

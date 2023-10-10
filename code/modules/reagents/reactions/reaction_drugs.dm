@@ -5,9 +5,23 @@
 	result_amount = 3
 
 /decl/chemical_reaction/painkillers
-	name = "Painkillers"
+	name = "Mild Painkillers"
 	result = /decl/material/liquid/painkillers
-	required_reagents = list(/decl/material/liquid/stabilizer = 1, /decl/material/liquid/ethanol = 1, /decl/material/liquid/acetone = 1)
+	required_reagents = list(
+		/decl/material/liquid/painkillers/strong = 1,
+		/decl/material/liquid/water = 1,
+		/decl/material/liquid/nutriment/sugar = 1
+	)
+	result_amount = 3
+
+/decl/chemical_reaction/strong_painkillers
+	name = "Strong Painkillers"
+	result = /decl/material/liquid/painkillers/strong
+	required_reagents = list(
+		/decl/material/liquid/stabilizer = 1,
+		/decl/material/liquid/ethanol = 1,
+		/decl/material/liquid/acetone = 1
+	)
 	result_amount = 3
 
 /decl/chemical_reaction/antiseptic
@@ -257,7 +271,18 @@
 	)
 
 /decl/chemical_reaction/immunobooster
+	name = "Immunobooster"
 	result = /decl/material/liquid/immunobooster
 	required_reagents = list(/decl/material/liquid/presyncopics = 1, /decl/material/liquid/antitoxins = 1)
 	minimum_temperature = 40 CELSIUS
+	result_amount = 2
+
+/decl/chemical_reaction/clotting_agent
+	name = "Clotting Agent"
+	result = /decl/material/liquid/clotting_agent
+	required_reagents = list(
+		/decl/material/liquid/brute_meds = 1,
+		/decl/material/solid/metal/iron = 2,
+		/decl/material/liquid/carpotoxin = 1
+	)
 	result_amount = 2

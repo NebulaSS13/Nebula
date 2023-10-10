@@ -7,7 +7,7 @@
 	anchored = 1.0
 	layer = CATWALK_LAYER
 	footstep_type = /decl/footsteps/catwalk
-	obj_flags = OBJ_FLAG_NOFALL
+	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
 	handle_generic_blending = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material = /decl/material/solid/metal/steel
@@ -40,6 +40,9 @@
 	..()
 	update_connections(1)
 	update_icon()
+
+/obj/structure/catwalk/can_climb_from_below(var/mob/climber)
+	return TRUE
 
 /obj/structure/catwalk/Destroy()
 	var/turf/oldloc = loc
@@ -93,8 +96,7 @@
 		return TRUE
 
 /obj/structure/catwalk/attack_robot(var/mob/user)
-	if(Adjacent(user))
-		attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
 	. = ..()
@@ -184,10 +186,13 @@
 	return 0
 
 /obj/effect/catwalk_plated/attack_hand()
+	SHOULD_CALL_PARENT(FALSE)
 	activate()
+	return TRUE
 
 /obj/effect/catwalk_plated/attack_ghost()
 	activate()
+	return TRUE
 
 /obj/effect/catwalk_plated/proc/activate()
 	if(activated) return

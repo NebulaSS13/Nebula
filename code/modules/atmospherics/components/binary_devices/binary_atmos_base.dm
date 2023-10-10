@@ -25,7 +25,7 @@
 /obj/machinery/atmospherics/binary/deconstruction_pressure_check()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 		return FALSE
 	return TRUE
 
@@ -35,13 +35,13 @@
 	if(anchored)
 		set_dir(dir) // making sure
 		atmos_init()
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			node.atmos_init()
 		build_network()
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			node.build_network()
 	else
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			node.disconnect(src)
 		for(var/node in nodes_to_networks)
 			QDEL_NULL(nodes_to_networks[node])

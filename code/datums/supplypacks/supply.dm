@@ -4,7 +4,7 @@
 
 /decl/hierarchy/supply_pack/supply/toner
 	name = "Refills - Toner cartridges"
-	contains = list(/obj/item/toner = 3)
+	contains = list(/obj/item/chems/toner_cartridge = 3)
 	containername = "toner cartridges"
 
 /decl/hierarchy/supply_pack/supply/cardboard_sheets

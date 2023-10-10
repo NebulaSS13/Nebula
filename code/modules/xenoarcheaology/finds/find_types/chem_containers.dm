@@ -24,6 +24,7 @@
 //endless reagents!
 
 /obj/item/chems/glass/replenishing
+	material = /decl/material/solid/stone/ceramic
 	var/spawning_id
 
 /obj/item/chems/glass/replenishing/Initialize()

@@ -11,7 +11,7 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/sliceable/meatbread/Initialize()
+/obj/item/chems/food/sliceable/meatbread/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 20)
 
@@ -41,7 +41,7 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/sliceable/xenomeatbread/Initialize()
+/obj/item/chems/food/sliceable/xenomeatbread/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 20)
 
@@ -71,7 +71,7 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/sliceable/bananabread/Initialize()
+/obj/item/chems/food/sliceable/bananabread/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream, 20)
 
@@ -153,7 +153,7 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/sliceable/creamcheesebread/Initialize()
+/obj/item/chems/food/sliceable/creamcheesebread/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
 

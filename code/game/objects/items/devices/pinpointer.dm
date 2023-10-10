@@ -15,6 +15,9 @@
 	target = null
 	. = ..()
 
+/obj/item/pinpointer/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/pinpointer/attack_self(mob/user)
 	toggle(user)
 
@@ -73,7 +76,7 @@
 		beeping--
 
 /obj/item/pinpointer/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(!active)
 		return
 	if(!target || !target.resolve())
@@ -90,7 +93,7 @@
 		add_overlay("[icon_state]-here")
 		return
 
-	if(!(there.z in GetConnectedZlevels(here.z)))
+	if(!(there.z in SSmapping.get_connected_levels(here.z)))
 		add_overlay("[icon_state]-invalid")
 		return
 	if(here.z > there.z)
@@ -121,7 +124,7 @@
 
 /obj/item/pinpointer/radio/acquire_target()
 	var/turf/T = get_turf(src)
-	var/zlevels = GetConnectedZlevels(T.z)
+	var/zlevels = SSmapping.get_connected_levels(T.z)
 	var/cur_dist = world.maxx+world.maxy
 	for(var/obj/item/radio/beacon/R in global.radio_beacons)
 		if(!R.functioning)

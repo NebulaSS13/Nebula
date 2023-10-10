@@ -88,7 +88,6 @@ var/global/datum/error_viewer/error_cache/error_cache
 /datum/error_viewer/error_cache
 	var/list/errors = list()
 	var/list/error_sources = list()
-	var/list/errors_silenced = list()
 
 /datum/error_viewer/error_cache/show_to(user, datum/error_viewer/back_to, linear)
 	var/html = build_header()

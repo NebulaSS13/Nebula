@@ -9,8 +9,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/wood
 	attack_verb = list("poked", "jabbed")
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/stick/attack_self(mob/user)
 	user.visible_message("<span class='warning'>\The [user] snaps [src].</span>", "<span class='warning'>You snap [src].</span>")

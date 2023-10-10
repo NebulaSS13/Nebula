@@ -1,110 +1,90 @@
+///////////////////////////////////////////////
+// Folder
+///////////////////////////////////////////////
 /obj/item/folder
-	name = "folder"
-	desc = "A folder."
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "folder"
-	w_class = ITEM_SIZE_SMALL
-	drop_sound = 'sound/foley/paperpickup1.ogg'
+	name         = "folder"
+	desc         = "A folder."
+	icon         = 'icons/obj/items/folders.dmi'
+	icon_state   = "folder"
+	w_class      = ITEM_SIZE_SMALL
+	throwforce   = 0
+	drop_sound   = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
+	material     = /decl/material/solid/cardboard
+	item_flags   = ITEM_FLAG_CAN_TAPE
 
 /obj/item/folder/blue
-	desc = "A blue folder."
+	desc       = "A blue folder."
 	icon_state = "folder_blue"
 
 /obj/item/folder/red
-	desc = "A red folder."
+	desc       = "A red folder."
 	icon_state = "folder_red"
 
 /obj/item/folder/yellow
-	desc = "A yellow folder."
+	desc       = "A yellow folder."
 	icon_state = "folder_yellow"
 
 /obj/item/folder/cyan
-	desc = "A cyan folder."
+	desc       = "A cyan folder."
 	icon_state = "folder_cyan"
 
-/obj/item/folder/on_update_icon()
-	overlays.Cut()
-	if(contents.len)
-		overlays += "folder_paper"
-	return
+/obj/item/folder/on_update_icon(var/paper_overlay = TRUE)
+	. = ..()
+	if(paper_overlay && length(contents))
+		add_overlay("folder_paper")
 
 /obj/item/folder/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
-		to_chat(user, "<span class='notice'>You put the [W] into \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("You put the [W] into \the [src]."))
+		updateUsrDialog()
 		update_icon()
-	else if(istype(W, /obj/item/pen))
+		return TRUE
+
+	else if(IS_PEN(W))
+		updateUsrDialog()
 		var/n_name = sanitize_safe(input(usr, "What would you like to label the folder?", "Folder Labelling", null)  as text, MAX_NAME_LEN)
-		if((loc == usr && usr.stat == 0))
-			SetName("folder[(n_name ? text("- '[n_name]'") : null)]")
+		if(!CanPhysicallyInteractWith(user, src))
+			to_chat(user, SPAN_WARNING("You must stay close to \the [src]."))
+			return
+		SetName("folder[(n_name ? text("- '[n_name]'") : null)]")
+		return TRUE
 	return
 
 /obj/item/folder/attack_self(mob/user)
+	return interact(user)
+
+/obj/item/folder/interact(mob/user)
 	var/dat = "<title>[name]</title>"
-	for(var/obj/item/paper/P in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
-	for(var/obj/item/photo/Ph in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
-	for(var/obj/item/paper_bundle/Pb in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Pb]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Pb]'>Rename</A> - <A href='?src=\ref[src];browse=\ref[Pb]'>[Pb.name]</A><BR>"
-	show_browser(user, dat, "window=folder")
-	onclose(user, "folder")
-	add_fingerprint(usr)
-	return
+	for(var/obj/item/I in src)
+		dat += "<A href='?src=\ref[src];remove=\ref[I]'>Remove</A> <A href='?src=\ref[src];rename=\ref[I]'>Rename</A> - <A href='?src=\ref[src];examine=\ref[I]'>[I.name]</A><BR>"
 
-/obj/item/folder/Topic(href, href_list)
-	..()
-	if((usr.stat || usr.restrained()))
-		return
+	user.set_machine(src)
+	show_browser(user, dat, "window=[initial(name)]")
+	onclose(user, initial(name))
+	return TRUE
 
-	if(src.loc == usr)
+/obj/item/folder/DefaultTopicState()
+	return global.physical_topic_state
 
-		if(href_list["remove"])
-			var/obj/item/P = locate(href_list["remove"])
-			if(P && (P.loc == src) && istype(P))
-				usr.put_in_hands(P)
+/obj/item/folder/OnTopic(mob/user, href_list, datum/topic_state/state)
+	if(href_list["remove"])
+		var/obj/item/P = locate(href_list["remove"])
+		user.put_in_hands(P)
+		. = TOPIC_REFRESH
+	else
+		. = handle_paper_stack_shared_topics(user, href_list)
 
-		else if(href_list["read"])			
-			var/obj/item/paper/P = locate(href_list["read"])
-			if(P && (P.loc == src) && istype(P))
-				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
-					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.show_info(usr))][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
-				else
-					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.show_info(usr)][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
-		else if(href_list["look"])
-			var/obj/item/photo/P = locate(href_list["look"])
-			if(P && (P.loc == src) && istype(P))
-				P.show(usr)
-		else if(href_list["browse"])
-			var/obj/item/paper_bundle/P = locate(href_list["browse"])
-			if(P && (P.loc == src) && istype(P))
-				P.attack_self(usr)
-				onclose(usr, "[P.name]")
-		else if(href_list["rename"])
-			var/obj/item/O = locate(href_list["rename"])
-
-			if(O && (O.loc == src))
-				if(istype(O, /obj/item/paper))
-					var/obj/item/paper/to_rename = O
-					to_rename.rename()
-
-				else if(istype(O, /obj/item/photo))
-					var/obj/item/photo/to_rename = O
-					to_rename.rename()
-
-				else if(istype(O, /obj/item/paper_bundle))
-					var/obj/item/paper_bundle/to_rename = O
-					to_rename.rename()
-
-		//Update everything
-		attack_self(usr)
+	//Update everything
+	if(. & TOPIC_REFRESH)
+		updateUsrDialog()
 		update_icon()
-	return
 
+///////////////////////////////////////////////
+//	Envelope
+///////////////////////////////////////////////
 /obj/item/folder/envelope
 	name = "envelope"
 	desc = "A thick envelope. You can't see what's inside."
@@ -112,6 +92,7 @@
 	var/sealed = 1
 
 /obj/item/folder/envelope/on_update_icon()
+	. = ..(paper_overlay = FALSE)
 	if(sealed)
 		icon_state = "envelope_sealed"
 	else

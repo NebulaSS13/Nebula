@@ -69,7 +69,7 @@
 	return 1
 
 /datum/unit_test/air_alarm_connectivity/subsystems_to_await()
-	return list(SStimer)
+	return list(SStimer, SSalarm, SSmachines)
 
 /datum/unit_test/air_alarm_connectivity/check_result()
 	var/failed = FALSE
@@ -78,19 +78,61 @@
 			continue
 		if(!isPlayerLevel(A.z))
 			continue
-		var/obj/machinery/alarm/alarm = locate() in A // Only test areas with functional alarms
-		if(!alarm)
-			continue
-		if(alarm.stat & (NOPOWER | BROKEN))
+		// Only test areas with functional alarms
+		var/obj/machinery/alarm/found_alarm
+		for (var/obj/machinery/alarm/alarm in A)
+			if(alarm.inoperable()) // must have at least one functional alarm
+				continue
+			found_alarm = alarm
+
+		if(!found_alarm)
 			continue
 
-		for(var/tag in A.air_vent_names) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
+		//Make a list of devices that are being controlled by their air alarms
+		var/list/vents_in_area = list()
+		var/list/scrubbers_in_area = list()
+		for(var/obj/machinery/atmospherics/unary/vent_pump/V in A.contents)
+			if(V.controlled)
+				vents_in_area[V.id_tag] = V
+		for(var/obj/machinery/atmospherics/unary/vent_scrubber/V in A.contents)
+			if(V.controlled)
+				scrubbers_in_area[V.id_tag] = V
+
+		for(var/tag in vents_in_area) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
 			if(!A.air_vent_info[tag])
-				log_bad("Vent [A.air_vent_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
+				var/obj/machinery/atmospherics/unary/vent_pump/V = vents_in_area[tag]
+				var/logtext = "Vent [A.air_vent_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update [log_info_line(found_alarm)] in area [A]."
+				if(V.inoperable())
+					logtext = "[logtext] The vent was not functional."
+				var/alarm_dist = get_dist(found_alarm, V)
+				if(alarm_dist > 60)
+					logtext += " The vent may be out of transmission range (max 60, was [alarm_dist])."
+				var/V_freq
+				for(var/obj/item/stock_parts/radio/radio_component in V.component_parts)
+					V_freq ||= radio_component.frequency
+				if(isnull(V_freq))
+					logtext += " The vent had no frequency set."
+				else if(V_freq != found_alarm.frequency)
+					logtext += " Frequencies did not match (alarm: [found_alarm.frequency], vent: [V_freq])."
+				log_bad(logtext)
 				failed = TRUE
-		for(var/tag in A.air_scrub_names)
+		for(var/tag in scrubbers_in_area)
 			if(!A.air_scrub_info[tag])
-				log_bad("Scrubber [A.air_scrub_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
+				var/obj/machinery/atmospherics/unary/vent_scrubber/V = scrubbers_in_area[tag]
+				var/logtext = "Scrubber [A.air_scrub_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update [log_info_line(found_alarm)] in area [A]."
+				if(V.inoperable())
+					logtext = "[logtext] The scrubber was not functional."
+				var/alarm_dist = get_dist(found_alarm, V)
+				if(alarm_dist > 60)
+					logtext += " The scrubber may be out of transmission range (max 60, was [alarm_dist])."
+				var/V_freq
+				for(var/obj/item/stock_parts/radio/radio_component in V.component_parts)
+					V_freq ||= radio_component.frequency
+				if(isnull(V_freq))
+					logtext += " The scrubber had no frequency set."
+				else if(V_freq != found_alarm.frequency)
+					logtext += " Frequencies did not match (alarm: [found_alarm.frequency], scrubber: [V_freq])."
+				log_bad(logtext)
 				failed = TRUE
 
 	if(failed)
@@ -240,7 +282,7 @@
 /datum/unit_test/map_image_map_test/start_test()
 	var/failed = FALSE
 
-	for(var/z in global.using_map.map_levels)
+	for(var/z in SSmapping.map_levels)
 		var/file_name = map_image_file_name(z)
 		var/file_path = MAP_IMAGE_PATH + file_name
 		if(!fexists(file_path))
@@ -261,7 +303,7 @@
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/list/failed = list()
-	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
 		if(!length(spawnpoint.turfs))
 			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type
@@ -377,7 +419,7 @@
 			pass = FALSE
 
 	if(pass)
-		pass("Have cameras have the c_tag set.")
+		pass("All cameras have the c_tag set.")
 	else
 		fail("One or more cameras do not have the c_tag set.")
 
@@ -520,20 +562,20 @@
 
 //=======================================================================================
 
-/datum/unit_test/station_pipes_shall_not_leak
-	name = "MAP: Station pipes shall not leak"
+/datum/unit_test/pipes_shall_not_leak
+	name = "MAP: Pipes shall not leak unless allowed"
 
-/datum/unit_test/station_pipes_shall_not_leak/start_test()
+/datum/unit_test/pipes_shall_not_leak/start_test()
 	var/failures = 0
 	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
-		if(P.leaking && isStationLevel(P.z))
+		if(P.leaking && !(locate(/obj/abstract/landmark/allowed_leak) in get_turf(P)))
 			failures++
 			log_bad("Following pipe is leaking: [log_info_line(P)]")
 
 	if(failures)
-		fail("[failures] station pipe\s leak.")
+		fail("[failures] pipe\s leaking without allowed leak landmark!")
 	else
-		pass("No station pipes are leaking")
+		pass("No pipes are leaking.")
 	return 1
 
 //=======================================================================================
@@ -668,6 +710,8 @@
 			continue
 		if(is_type_in_list(sort, exempt_junctions))
 			continue
+		if(sort.sort_type in global.using_map.disconnected_disposals_tags)
+			continue
 		var/obj/machinery/disposal/bin = get_bin_from_junction(sort)
 		if(!bin)
 			log_bad("Junction with tag [sort.sort_type] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
@@ -695,8 +739,12 @@
 	packages_awaiting_delivery[package] = start_tag
 
 /obj/structure/disposalholder/unit_test
+	is_spawnable_type = FALSE // NO
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 	speed = 100
+
+/obj/structure/disposalholder/unit_test/merge()
+	return FALSE
 
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)
@@ -804,6 +852,9 @@
 /datum/unit_test/doors_shall_be_on_appropriate_turfs
 	name = "MAP: Doors shall be on appropriate turfs"
 
+/obj/abstract/map_data/proc/get_door_turf_exceptions(var/obj/machinery/door/D)
+	return LAZYACCESS(UT_turf_exceptions_by_door_type, D.type)
+
 /datum/unit_test/doors_shall_be_on_appropriate_turfs/start_test()
 	var/bad_doors = 0
 	for(var/obj/machinery/door/D in SSmachines.machinery)
@@ -813,10 +864,8 @@
 			bad_doors++
 			log_bad("Invalid door turf: [log_info_line(D.loc)]")
 		else
-			var/list/turf_exceptions
 			var/obj/abstract/map_data/MD = get_map_data(D.loc.z)
-			if(UNLINT(MD?.UT_turf_exceptions_by_door_type))
-				turf_exceptions = UNLINT(MD.UT_turf_exceptions_by_door_type[D.type])
+			var/list/turf_exceptions = MD?.get_door_turf_exceptions(D)
 
 			var/is_bad_door = FALSE
 			for(var/turf/T in D.locs)

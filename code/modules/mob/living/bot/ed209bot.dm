@@ -9,7 +9,6 @@
 	health = 100
 	maxHealth = 100
 
-	is_ranged = 1
 	preparing_arrest_sounds = new()
 
 	a_intent = I_HURT

@@ -54,7 +54,7 @@
 	if(os)
 		os.print_paper(text)
 	else
-		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running a GOOSEv2 compatible system?")
+		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running a compatible system?")
 
 /datum/proc/initial_data()
 	return list()

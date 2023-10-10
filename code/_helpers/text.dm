@@ -206,6 +206,49 @@
 			if(32)			//space
 				dat += "_"
 	return jointext(dat, null)
+
+//Used to strip text of everything but letters and numbers, and select special symbols.
+//Requires that the filename has an alphanumeric character.
+/proc/sanitize_for_file(text)
+	if(!text) return ""
+	var/list/dat = list()
+	var/has_alphanumeric = FALSE
+	var/last_was_fullstop = FALSE
+	for(var/i=1, i<=length(text), i++)
+		var/ascii_char = text2ascii(text,i)
+		switch(ascii_char)
+			if(65 to 90)	//A-Z
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(97 to 122)	//a-z
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(48 to 57)	//0-9
+				dat += ascii2text(ascii_char)
+				has_alphanumeric = TRUE
+				last_was_fullstop = FALSE
+			if(32)			//space
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = FALSE
+			if(33, 36, 40, 41, 42, 45, 95) //!, $, (, ), *, -, _
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = FALSE
+			if(46)			//.
+				if(last_was_fullstop) // No repeats of . to avoid confusion with ..
+					continue
+				dat += ascii2text(ascii_char)
+				last_was_fullstop = TRUE
+
+	if(!has_alphanumeric)
+		return ""
+
+	if(dat[length(dat)] == ".")	//kill trailing .
+		dat.Cut(length(dat))
+	return jointext(dat, null)
+
+
 // UNICODE: Convert to regex?
 
 //Returns null if there is any bad text in the string
@@ -642,5 +685,158 @@ var/global/list/fullstop_alternatives = list(".", "!", "?")
 #define APPEND_FULLSTOP_IF_NEEDED(TXT) ((copytext_char(TXT, -1, 0) in global.fullstop_alternatives) ? TXT : "[TXT].")
 
 /proc/make_rainbow(var/msg)
+	var/static/list/rainbow_classes = list(
+		"font_red",
+		"font_orange",
+		"font_yellow",
+		"font_green",
+		"font_blue",
+		"font_violet",
+		"font_purple"
+	)
 	for(var/i = 1 to length(msg))
-		. += "<font color='[get_random_colour(1)]'>[copytext(msg, i, i+1)]</font>"
+		. += "<span class='[pick(rainbow_classes)]'>[copytext(msg, i, i+1)]</span>"
+
+// Returns direction-string, rounded to multiples of 22.5, from the first parameter to the second
+// N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW
+/proc/get_compass_direction_string(var/turf/A, var/turf/B)
+	var/degree = Get_Angle(A, B)
+	switch(round(degree, 22.5) % 360) // % appears to round down floats, hence below values all being integers
+		if(0)
+			return "North"
+		if(22)
+			return "North-Northeast"
+		if(45)
+			return "Northeast"
+		if(67)
+			return "East-Northeast"
+		if(90)
+			return "East"
+		if(112)
+			return "East-Southeast"
+		if(135)
+			return "Southeast"
+		if(157)
+			return "South-Southeast"
+		if(180)
+			return "South"
+		if(202)
+			return "South-Southwest"
+		if(225)
+			return "Southwest"
+		if(247)
+			return "West-Southwest"
+		if(270)
+			return "West"
+		if(292)
+			return "West-Northwest"
+		if(315)
+			return "Northwest"
+		if(337)
+			return "North-Northwest"
+
+///Returns true if the text starts with the given sequence of characters.
+/proc/text_starts_with(var/text, var/start)
+	return copytext(text, 1, length(start) + 1) == start
+
+///Returns true if the text ends with the given sequence of characters.
+/proc/text_ends_with(var/text, var/end)
+	var/tlen = length(text)
+	return copytext(text, ((tlen - length(end)) + 1), tlen + 1) == end
+
+///Returns true if the text ends with ANY of the given sequences of characters.
+/proc/text_ends_with_any_of(var/text, var/list/endings)
+	for(var/ending in endings)
+		if(text_ends_with(text, ending))
+			return ending
+	return
+
+///Siblants that should end with es
+var/global/list/plural_siblants = list("ss", "x", "sh", "ch")
+///Vocalized y sounds that needs to end in -ies when made plural
+var/global/list/plural_vocalized_y = list("quy", "by", "dy", "fy", "gy", "hy", "jy", "ky", "ly", "my", "ny", "py", "ry", "sy", "ty", "vy", "xy", "zy")
+///Plurals endings in -ves
+var/global/list/plural_endings_in_ves = list("fe", "af")
+///Plurals endings in -sses or -zzes
+var/global/list/plural_endings_with_doubled_letter = list("as", "ez")
+///Words that have a different plural form, and their plural form
+var/global/list/apophonic_plurals = list(
+	"foot"     = "feet",
+	"goose"    = "geese",
+	"louse"    = "lice",
+	"man"      = "men",
+	"woman"    = "women",
+	"mouse"    = "mice",
+	"tooth"    = "teeth",
+	"ox"       = "oxen",
+	//#TODO: Add more of those
+)
+///Used to tell how to make it a plural word and etc.
+var/global/list/english_loanwords = list(
+	"fungus",
+	"cactus",
+	//#TODO: Add more of those
+)
+///Words that stay the same in plural
+var/global/list/plural_words_unchanged = list(
+	"series",
+	"means",
+	"species"
+	//#TODO: Add more of those
+)
+
+///Properly changes the given word (or the last word of the string) into a plural word. Applies a bunch of exceptions from the english language.
+/proc/text_make_plural(var/word)
+	if(!length(word))
+		return
+	var/initial_word = word
+	//If someone passed us several words, just keep the last one.
+	var/list/splited = splittext_char(word, " ", 1, length(word)+1, FALSE)
+	//log_debug("splitted '[initial_word]' to [log_info_line(splited)].")
+	if(length(splited) > 1)
+		word = splited[splited.len]
+	else
+		splited = null
+
+	//Words that don't change when pluralized
+	if(global.plural_words_unchanged[word])
+		return initial_word
+
+	//Apophonic plurals
+	if(global.apophonic_plurals[word])
+		word = global.apophonic_plurals[word]
+
+	//Siblants + plurals of nouns in -o preceded by a consonant. Loanwords ending in o just ends with an s
+	else if(text_ends_with_any_of(word, global.plural_siblants) || (text_ends_with(word, "o") && !(word in global.english_loanwords)))
+		word = "[word]es"
+
+	//Plurals of nouns in -y
+	else if(text_ends_with_any_of(word, global.plural_vocalized_y))
+		word = "[copytext(word, 1, length(word))]ies"
+
+	// -f and -fe endings
+	else if(text_ends_with_any_of(word, global.plural_endings_in_ves))
+		word = "[copytext(word, 1, length(word) - 1)]ves" //EX: calf -> calves, leaf -> leaves, knife -> knives
+
+	//some ‘-s’ and ‘-z’ endings
+	else if(text_ends_with_any_of(word, global.plural_endings_with_doubled_letter))
+		word = "[word][copytext(word, length(word), length(word) + 1)]es" //Ex: gas -> gas'ses', fez -> fez'zes'
+
+	//Plurals of nouns in -us
+	else if(text_ends_with(word, "us"))
+		if(!(word in global.english_loanwords))
+			word = "[word]es"
+		else
+			word = "[copytext(word, 1, length(word) - 1)]i" //EX: Cactus -> Cacti, Fungus -> Fungi
+
+	//Finally just go with the basic rules
+	else
+		if(text_ends_with(word, "s"))
+			word = "[word]es"
+		else
+			word = "[word]s"
+
+	//Put the sentence back together, if applicable
+	if(splited)
+		word = "[jointext(splited, " ", 1, length(splited))] [word]"
+	return word

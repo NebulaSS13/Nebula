@@ -502,7 +502,7 @@
 "AC" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
 /obj/structure/table,
-/obj/structure/bedsheetbin,
+/obj/structure/bedsheetbin/mapped,
 /turf/simulated/floor/tiled,
 /area/nexus/civilian/hygiene)
 "AF" = (
@@ -890,7 +890,7 @@
 "NM" = (
 /obj/structure/catwalk,
 /obj/machinery/computer/cryopod{
-	pixel_y = -32
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/nexus/civilian/hygiene)
@@ -907,7 +907,9 @@
 /turf/simulated/floor/carpet/blue3,
 /area/nexus/civilian/bar)
 "Oa" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data_spawner/main_level{
+	name = "Nexus Upper Deck";
+},
 /turf/space,
 /area/space)
 "Ok" = (

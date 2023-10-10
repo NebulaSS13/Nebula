@@ -126,7 +126,7 @@
 		to_chat(user, "<span class='danger'>Another grenade of that type will not fit into the module.</span>")
 		return 0
 
-	to_chat(user, "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>")
+	to_chat(user, SPAN_BLUE("<b>You slot \the [input_device] into the suit module.</b>"))
 	qdel(input_device)
 	accepted_item.charges++
 	return 1
@@ -314,7 +314,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
-	
+
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
 
 	if(!check() || !gun)
@@ -362,7 +362,7 @@
 	return ..()
 
 /obj/item/rig_module/mounted/energy_blade/activate()
-	var/mob/living/M = holder.wearer
+	var/mob/living/M = holder?.wearer
 
 	if(!M.get_empty_hand_slot())
 		to_chat(M, SPAN_WARNING("Your hands are full."))
@@ -377,15 +377,8 @@
 		return 0
 
 /obj/item/rig_module/mounted/energy_blade/deactivate()
-
 	..()
-
-	var/mob/living/M = holder.wearer
-
-	if(!M)
-		return
-
-	for(var/obj/item/energy_blade/ninja/blade in M.contents)
+	for(var/obj/item/energy_blade/ninja/blade in (holder?.wearer))
 		qdel(blade)
 
 /obj/item/rig_module/fabricator
@@ -424,7 +417,7 @@
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.forceMove(H)
-			to_chat(H, "<font color='blue'><b>You quickly fabricate \a [new_weapon].</b></font>")
+			to_chat(H, SPAN_BLUE("<b>You quickly fabricate \a [new_weapon].</b>"))
 			H.put_in_hands(new_weapon)
 
 	return 1

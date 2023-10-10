@@ -117,20 +117,22 @@
 /decl/surgery_step/hardsuit/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(!istype(target))
 		return FALSE
-	if(isWelder(tool))
+	if(IS_WELDER(tool))
 		var/obj/item/weldingtool/welder = tool
-		if(!welder.isOn() || !welder.remove_fuel(1,user))
+		if(!welder.isOn() || !welder.weld(1,user))
 			return FALSE
-	return (target_zone == BP_CHEST) && istype(target.back, /obj/item/rig) && !(target.back.canremove)
+	var/obj/item/rig/rig = target.get_equipped_item(slot_back_str)
+	return (target_zone == BP_CHEST) && istype(rig) && !(rig.canremove)
 
 /decl/surgery_step/hardsuit/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts cutting through the support systems of [target]'s [target.back] with \the [tool]." , \
-	"You start cutting through the support systems of [target]'s [target.back] with \the [tool].")
+	var/obj/item/rig = target.get_equipped_item(slot_back_str)
+	user.visible_message("[user] starts cutting through the support systems of [target]'s [rig] with \the [tool]." , \
+	"You start cutting through the support systems of [target]'s [rig] with \the [tool].")
 	..()
 
 /decl/surgery_step/hardsuit/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 
-	var/obj/item/rig/rig = target.back
+	var/obj/item/rig/rig = target.get_equipped_item(slot_back_str)
 	if(!istype(rig))
 		return
 	rig.reset()

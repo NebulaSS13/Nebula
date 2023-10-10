@@ -43,4 +43,5 @@
 	desc = "An unbranded pack of scented candles, in a variety of scents."
 	max_storage_space = 5
 
-	startswith = list(/obj/item/flame/candle/scented = 5)
+/obj/item/storage/candle_box/scented/WillContain()
+	return list(/obj/item/flame/candle/scented = 5)

@@ -31,7 +31,7 @@
 /mob/living/silicon/robot/flying/proc/start_flying()
 	pass_flags |= PASS_FLAG_TABLE
 	default_pixel_y = 0
-	make_floating(10)
+	start_floating()
 
 /mob/living/silicon/robot/flying/proc/stop_flying()
 	pass_flags &= ~PASS_FLAG_TABLE

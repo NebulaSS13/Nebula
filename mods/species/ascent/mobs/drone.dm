@@ -19,7 +19,7 @@
 		/obj/item/mop/advanced,
 		/obj/item/plunger/unbreakable,
 		/obj/item/weldingtool/electric/mantid,
-		/obj/item/extinguisher,
+		/obj/item/chems/spray/extinguisher,
 		/obj/item/t_scanner,
 		/obj/item/scanner/gas,
 		/obj/item/scanner/health,

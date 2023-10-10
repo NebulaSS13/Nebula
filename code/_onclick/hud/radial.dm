@@ -249,7 +249,7 @@ var/global/list/radial_menus = list()
 			MA.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 			MA.maptext_x = -round(MA.maptext_width/2) + 16
 			MA.maptext_x = -round(MA.maptext_height/2) + 16
-			MA.maptext = "<center><span style=\"font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px\">[E.name]</span></center>"
+			MA.maptext = STYLE_SMALLFONTS_OUTLINE("<center>[E.name]</center>", 7, COLOR_WHITE, COLOR_BLACK)
 
 	return MA
 

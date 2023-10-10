@@ -18,10 +18,13 @@
 /turf
 	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
-/obj/Initialize()
+/obj/Initialize(mapload)
 	. = ..()
-	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
+	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 	create_matter()
+	//Only apply directional offsets if the mappers haven't set any offsets already
+	if(!pixel_x && !pixel_y && !pixel_w && !pixel_z)
+		update_directional_offset()
 
 /obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
 	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
@@ -33,25 +36,21 @@
 
 /mob/Initialize()
 	. = ..()
-	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - FLOOR(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
+	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - FLOOR(mob_size/4), MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 
 /atom/proc/ProcessAtomTemperature()
 	SHOULD_NOT_SLEEP(TRUE)
 
 	// Get our location temperature if possible.
 	// Nullspace is room temperature, clearly.
-	var/adjust_temp
-	if(loc)
-		if(!istype(loc, /turf/simulated))
-			adjust_temp = loc.temperature
-		else
-			var/turf/simulated/T = loc
-			if(T.zone && T.zone.air)
-				adjust_temp = T.zone.air.temperature
-			else
-				adjust_temp = T20C
-	else
-		adjust_temp = T20C
+	var/adjust_temp = T20C
+	if(isturf(loc))
+		var/turf/T = loc
+		var/datum/gas_mixture/environment = T.return_air()
+		if(environment)
+			adjust_temp = environment.temperature
+	else if(loc)
+		adjust_temp = loc.temperature
 
 	var/diff_temp = adjust_temp - temperature
 	if(abs(diff_temp) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)

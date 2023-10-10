@@ -10,7 +10,6 @@
 	var/volume = 0
 	var/destroyed = 0
 	var/start_pressure = ONE_ATMOSPHERE
-	var/maximum_pressure = 90 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/get_single_monetary_worth()
 	. = ..()
@@ -105,13 +104,13 @@
 	if ((istype(W, /obj/item/tank) && !( src.destroyed )))
 		if (src.holding)
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		src.holding = W
 		update_icon()
 		return
 
-	else if(isWrench(W) && !panel_open)
+	else if(IS_WRENCH(W) && !panel_open)
 		if(connected_port)
 			disconnect()
 			to_chat(user, "<span class='notice'>You disconnect \the [src] from the port.</span>")

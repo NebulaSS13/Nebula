@@ -2,7 +2,7 @@
 	log_and_message_admins("attempted to launch a disperser beam.")
 	if(!link_parts())
 		return FALSE //no disperser, no service
-	if(!front.powered() || !middle.powered() || !back.powered())
+	if((front.stat | middle.stat | back.stat) & NOPOWER)
 		return FALSE //no power, no boom boom
 	var/chargetype = get_charge_type()
 	if(chargetype <= 0)
@@ -30,7 +30,7 @@
 				else
 					A.explosion_act(1)
 
-	var/list/relevant_z = GetConnectedZlevels(start.z)
+	var/list/relevant_z = SSmapping.get_connected_levels(start.z)
 	for(var/mob/M in global.player_list)
 		var/turf/T = get_turf(M)
 		if(!T || !(T.z in relevant_z))

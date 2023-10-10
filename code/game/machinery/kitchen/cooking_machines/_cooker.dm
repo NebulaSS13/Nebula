@@ -102,7 +102,7 @@
 			M.apply_damage(rand(30,40), BURN, BP_CHEST)
 
 	// Not sure why a food item that passed the previous checks would fail to drop, but safety first.
-	if(!user.unEquip(I))
+	if(!user.try_unequip(I))
 		return
 
 	// We can actually start cooking now.

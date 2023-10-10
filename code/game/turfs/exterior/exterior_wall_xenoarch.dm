@@ -38,7 +38,7 @@
 	if(prob_clean)
 		F.spawn_find_item(src)
 	else
-		pass_geodata_to(new /obj/item/ore/strangerock(src, F.find_type))
+		pass_geodata_to(new /obj/item/strangerock(src, F.find_type))
 	finds.Remove(F)
 
 /turf/exterior/wall/proc/handle_xenoarch_tool_interaction(var/obj/item/pickaxe/xeno/P, var/mob/user)
@@ -107,9 +107,10 @@
 
 	//drop some rocks
 	next_rock += P.excavation_amount
-	while(next_rock > 50)
-		next_rock -= 50
-		pass_geodata_to(new /obj/item/ore(src, material?.type))
+	var/amount_rocks = round(next_rock / 50)
+	next_rock = next_rock % 50
+	if(amount_rocks > 0)
+		pass_geodata_to(new /obj/item/stack/material/ore(src, amount_rocks, material?.type))
 
 /turf/exterior/wall/proc/destroy_artifacts(var/obj/item/W, var/newDepth)
 	if(!length(finds))

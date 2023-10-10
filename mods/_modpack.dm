@@ -5,7 +5,7 @@
 	var/desc
 	/// A string with authors of this modpack.
 	var/author
-
+	var/secrets_directory
 	var/list/dreams //! A list of strings to be added to the random dream proc.
 
 	var/list/credits_other           //! A list of strings that are used by the end of round credits roll.
@@ -23,6 +23,15 @@
 /decl/modpack/proc/pre_initialize()
 	if(!name)
 		return "Modpack name is unset."
+	if(secrets_directory)
+		secrets_directory = trim(lowertext(secrets_directory))
+		if(!length(secrets_directory))
+			return "Modpack secrets_directory is zero length after trim."
+		if(copytext(secrets_directory, -1) != "/")
+			secrets_directory = "[secrets_directory]/"
+		if(!fexists(secrets_directory))
+			return "Modpack secrets_directory does not exist."
+		SSsecrets.load_directories |= secrets_directory
 
 /decl/modpack/proc/initialize()
 	return

@@ -2,9 +2,24 @@
 // Turf-only flags.
 #define TURF_FLAG_NOJAUNT             BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
 #define TURF_FLAG_NORUINS             BITFLAG(1) // Used by the ruin generator to skip placing loaded ruins on this turf.
+#define TURF_FLAG_BACKGROUND          BITFLAG(2) // Used by shuttle movement to determine if it should be ignored by turf translation.
+#define TURF_IS_HOLOMAP_OBSTACLE      BITFLAG(3)
+#define TURF_IS_HOLOMAP_PATH          BITFLAG(4)
+#define TURF_IS_HOLOMAP_ROCK          BITFLAG(5)
 
-#define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
+///Width or height of a transition edge area along the map's borders where transition edge turfs are placed to connect levels together.
+#define TRANSITIONEDGE 7
+///Extra spacing needed between any random ruins and the transition edge of a level.
 #define RUIN_MAP_EDGE_PAD 15
+
+///Enum value for a level edge that's to be untouched
+#define LEVEL_EDGE_NONE 0
+///Enum value for a level edge that's to be looped with the opposite edge
+#define LEVEL_EDGE_LOOP 1
+///Enum value for a level edge that's to be filled with a wall filler turfs
+#define LEVEL_EDGE_WALL 2
+///Enum value for a level edge that's to be connected with another z-level
+#define LEVEL_EDGE_CON  3
 
 // Invisibility constants.
 #define INVISIBILITY_LIGHTING    20
@@ -85,6 +100,7 @@
 #define AREA_FLAG_PRISON               BITFLAG(9)  // Area is a prison for the purposes of brigging objectives.
 #define AREA_FLAG_HOLY                 BITFLAG(10) // Area is holy for the purposes of marking turfs as cult-resistant.
 #define AREA_FLAG_SECURITY             BITFLAG(11) // Area is security for the purposes of newscaster init.
+#define AREA_FLAG_HIDE_FROM_HOLOMAP    BITFLAG(12) // if we shouldn't be drawn on station holomaps
 
 //Map template flags
 #define TEMPLATE_FLAG_ALLOW_DUPLICATES BITFLAG(0)  // Lets multiple copies of the template to be spawned
@@ -206,9 +222,10 @@
 #define ANIM_LYING_TIME 2
 
 //Planet habitability class
-#define HABITABILITY_IDEAL  1
-#define HABITABILITY_OKAY  2
-#define HABITABILITY_BAD  3
+#define HABITABILITY_IDEAL  1 //For planets with optimal conditions.
+#define HABITABILITY_OKAY   2 //For planets with survivable conditions.
+#define HABITABILITY_BAD    3 //For planets with very hazardous environment.
+#define HABITABILITY_DEAD   4 //For dead worlds(barren rocks with no atmosphere and etc..).
 
 #ifndef WINDOWS_HTTP_POST_DLL_LOCATION
 #define WINDOWS_HTTP_POST_DLL_LOCATION "lib/byhttp.dll"
@@ -237,9 +254,6 @@
 #define SOULSTONE_EMPTY 0
 #define SOULSTONE_ESSENCE 1
 
-#define INCREMENT_WORLD_Z_SIZE world.maxz++; global.connected_z_cache.Cut(); if (SSzcopy.zlev_maximums.len) { SSzcopy.calculate_zstack_limits() }
-#define ARE_Z_CONNECTED(ZA, ZB) (ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz && ((ZA == ZB) || ((global.connected_z_cache.len >= ZA && global.connected_z_cache[ZA]) ? global.connected_z_cache[ZA][ZB] : AreConnectedZLevels(ZA, ZB))))
-
 //Request Console Department Types
 #define RC_ASSIST 1		//Request Assistance
 #define RC_SUPPLY 2		//Request Supplies
@@ -255,12 +269,6 @@
 
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
 
-#if DM_BUILD < 1540
-#define AS_ANYTHING as()
-#else
-#define AS_ANYTHING as anything
-#endif
-
 //NOTE: INTENT_HOTKEY_* defines are not actual intents!
 //they are here to support hotkeys
 #define INTENT_HOTKEY_LEFT  "left"
@@ -270,6 +278,7 @@
 #define OUTSIDE_AREA null
 #define OUTSIDE_NO   FALSE
 #define OUTSIDE_YES  TRUE
+#define OUTSIDE_UNCERTAIN null
 
 // Weather exposure values for being rained on or hailed on.
 #define WEATHER_IGNORE   -1
@@ -284,3 +293,10 @@
 
 // arbitrary low pressure bound for wind weather effects
 #define MIN_WIND_PRESSURE 10
+
+#define TYPE_IS_ABSTRACT(D) (initial(D.abstract_type) == D)
+#define TYPE_IS_SPAWNABLE(D) (!TYPE_IS_ABSTRACT(D) && initial(D.is_spawnable_type))
+#define INSTANCE_IS_ABSTRACT(D) (D.abstract_type == D.type)
+
+//Damage stuff
+#define ITEM_HEALTH_NO_DAMAGE -1

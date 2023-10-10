@@ -24,9 +24,9 @@
 
 //Helper procs.
 /datum/report_field/people/proc/get_used_network()
-	var/obj/item/stock_parts/computer/hard_drive/holder = owner.holder
-	if(holder)
-		var/datum/extension/interactive/os/os = get_extension(holder.loc, /datum/extension/interactive/os)
+	var/obj/item/stock_parts/computer/hard_drive/hard_drive = owner.holder?.resolve()
+	if(!isnull(hard_drive) && isloc(hard_drive.loc))
+		var/datum/extension/interactive/os/os = get_extension(hard_drive.loc, /datum/extension/interactive/os)
 		return os?.get_network()
 
 /datum/report_field/people/proc/perform_send(subject, body, attach_report)
@@ -42,7 +42,7 @@
 	message.stored_data = body
 	message.source = server.login
 	message.attachment = attach_report
-	server.send_mail(recipient, message, net)
+	net.send_email(server, recipient, message)
 
 /datum/report_field/people/proc/format_output(name, rank, milrank)
 	. = list()
@@ -111,7 +111,7 @@
 		if(in_as_list(entry, new_value))
 			continue //ignore repeats
 		new_value += list(entry)
-	value = new_value	
+	value = new_value
 
 /datum/report_field/people/list_from_manifest/ask_value(mob/user)
 	var/alert = alert(user, "Would you like to add or remove a name?", "Form Input", "Add", "Remove")

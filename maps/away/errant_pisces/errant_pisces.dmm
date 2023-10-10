@@ -800,12 +800,14 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cw" = (
 /obj/machinery/atmospherics/omni/mixer{
 	dir = 1
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cx" = (
@@ -903,6 +905,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cN" = (
@@ -1085,7 +1088,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "di" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "dj" = (
@@ -1473,9 +1476,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/tracker{
-	id = "HarpoonSolarStarboard"
-	},
+/obj/machinery/power/tracker,
 /turf/simulated/floor/airless,
 /area/space)
 "ed" = (
@@ -1738,9 +1739,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "eF" = (
-/obj/machinery/power/tracker{
-	id = "HarpoonSolarPort"
-	},
+/obj/machinery/power/tracker,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -2066,6 +2065,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
 "fp" = (
@@ -2084,6 +2086,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
 "fq" = (
@@ -2093,6 +2098,9 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2171,6 +2179,9 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2580,7 +2591,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/hallway)
 "gA" = (
@@ -2676,7 +2689,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gP" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gQ" = (
@@ -2772,6 +2785,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "hg" = (
@@ -2783,17 +2799,19 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
-/area/errant_pisces/rooms)
-"hh" = (
-/obj/structure/cable/green{
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
-/area/errant_pisces/hallway)
+/area/errant_pisces/rooms)
+"hh" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/errant_pisces/bridge)
 "hi" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -2817,6 +2835,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "hk" = (
@@ -2825,6 +2846,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -2876,6 +2900,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "hu" = (
@@ -3698,7 +3723,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "jX" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "jY" = (
@@ -4196,7 +4221,7 @@
 /area/errant_pisces/science_wing)
 "lx" = (
 /obj/structure/table,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "ly" = (
@@ -4505,7 +4530,7 @@
 /area/errant_pisces/science_wing)
 "mp" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
 "mq" = (
@@ -4781,6 +4806,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "nb" = (
@@ -4791,6 +4817,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/freezer,
 /obj/effect/decal/cleanable/blood,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "nc" = (
@@ -5202,6 +5229,12 @@
 /obj/structure/cable/green{
 	icon_state = "2-4"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/aux_power)
 "nN" = (
@@ -5210,6 +5243,12 @@
 	},
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/aux_power)
 "nO" = (
@@ -5219,8 +5258,12 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "nP" = (
@@ -5568,6 +5611,9 @@
 	},
 /obj/structure/cable/green,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/green{
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "oM" = (
@@ -5696,6 +5742,9 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "ph" = (
@@ -5793,6 +5842,9 @@
 	pixel_x = -25;
 	rcon_setting = 3
 	},
+/obj/structure/cable/green{
+	icon_state = "1-6"
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "py" = (
@@ -5851,6 +5903,9 @@
 	},
 /obj/structure/table/steel,
 /obj/random/snack,
+/obj/structure/cable/green{
+	icon_state = "6-9"
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pK" = (
@@ -5984,6 +6039,9 @@
 "qa" = (
 /obj/machinery/computer/ship/sensors{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	icon_state = "2-9"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
@@ -6122,6 +6180,7 @@
 /area/errant_pisces/fishing_wing)
 "qx" = (
 /obj/machinery/shipsensors,
+/obj/structure/cable/green,
 /turf/simulated/floor/reinforced/airless,
 /area/errant_pisces/bridge)
 "qy" = (
@@ -6316,7 +6375,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qY" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qZ" = (
@@ -6344,7 +6403,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled/white,
@@ -6354,7 +6413,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /turf/simulated/floor/tiled/white,
@@ -6364,7 +6423,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/machinery/power/apc{
@@ -6376,6 +6435,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
+"QS" = (
+/obj/machinery/atmospherics/pipe/simple/visible/blue,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/plating,
+/area/errant_pisces/atmos)
 "Ti" = (
 /obj/machinery/computer/modular{
 	dir = 4
@@ -25243,7 +25307,7 @@ aY
 bh
 bA
 bV
-bV
+QS
 cw
 cM
 cZ
@@ -26271,7 +26335,7 @@ gd
 gk
 gy
 fZ
-hh
+gd
 fZ
 fZ
 fZ
@@ -26675,7 +26739,7 @@ gd
 gm
 gA
 fZ
-hh
+gd
 fZ
 fZ
 hM
@@ -28924,7 +28988,7 @@ oS
 oS
 pK
 qa
-po
+hh
 qx
 pp
 qH

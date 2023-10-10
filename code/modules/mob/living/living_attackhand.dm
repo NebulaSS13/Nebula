@@ -1,6 +1,5 @@
 /mob/living/attack_hand(mob/user)
-	SHOULD_CALL_PARENT(TRUE)
-	. = ..() || (user && default_interaction(user))
+	return ..() || (user && default_interaction(user))
 
 /mob/living/proc/default_interaction(var/mob/user)
 
@@ -41,7 +40,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	return (scoop_check(user) && get_scooped(user, user)) || try_make_grab(user)
 
-// This proc is where movable atoms handle being grabbed, but we handle it additionally in 
+// This proc is where movable atoms handle being grabbed, but we handle it additionally in
 // default_grab_interaction, so we override it here to return FALSE and avoid double-grabbing.
 /mob/living/handle_grab_interaction(var/mob/user)
 	return FALSE

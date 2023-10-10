@@ -4,12 +4,12 @@
 
 	icon = 'icons/clothing/head/champion.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_AP,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_AP,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
@@ -20,12 +20,12 @@
 	siemens_coefficient = 0.5
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_AP,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_AP,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 
 /obj/item/clothing/under/bluetunic
@@ -35,7 +35,7 @@
 	siemens_coefficient = 0.8
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	armor = list(
-		melee = ARMOR_MELEE_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_MINOR
 	)
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
@@ -45,11 +45,11 @@
 	material = /decl/material/solid/leather
 	force = 5
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
 	)
 	artificail_shine = 0
 
@@ -58,10 +58,9 @@
 	desc = "<i>For at his belt hung Excalibur, the finest sword that there was, which sliced through iron as through wood.</i>"
 	icon = 'icons/obj/items/weapon/swords/excalibur.dmi'
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cleaved", "sundered")
-	applies_material_colour = FALSE
-	applies_material_name = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 
-/obj/item/sword/excalibur/pickup(var/mob/living/user)
+/obj/item/sword/excalibur/on_picked_up(var/mob/living/user)
 	if(user.mind)
 		var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 		if(!wizards.is_antagonist(user.mind) || user.mind.assigned_special_role != "Spellbound Servant")

@@ -5,7 +5,7 @@ var/global/list/all_conveyor_switches = list()
 //note that corner pieces transfer stuff clockwise when running forward, and anti-clockwise backwards.
 
 /obj/machinery/conveyor
-	icon = 'icons/obj/recycling.dmi'
+	icon = 'icons/obj/machines/conveyor_mapped.dmi'
 	icon_state = "conveyor0"
 	name = "conveyor belt"
 	desc = "A conveyor belt."
@@ -24,6 +24,7 @@ var/global/list/all_conveyor_switches = list()
 	// create a conveyor
 /obj/machinery/conveyor/Initialize(mapload, newdir, on = 0)
 	. = ..(mapload)
+	icon = 'icons/obj/recycling.dmi'
 	global.all_conveyors += src
 	if(newdir)
 		set_dir(newdir)
@@ -86,7 +87,7 @@ var/global/list/all_conveyor_switches = list()
 		var/obj/item/grab/G = I
 		step(G.affecting, get_dir(G.affecting.loc, src))
 		return
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		if(!(stat & BROKEN))
 			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
 			C.id_tag = id_tag
@@ -94,7 +95,7 @@ var/global/list/all_conveyor_switches = list()
 		to_chat(user, "<span class='notice'>You remove the conveyor belt.</span>")
 		qdel(src)
 		return
-	user.unEquip(I, get_turf(src))
+	user.try_unequip(I, get_turf(src))
 
 // make the conveyor broken
 // also propagate inoperability to any connected conveyor with the same id_tag
@@ -142,7 +143,7 @@ var/global/list/all_conveyor_switches = list()
 	if(!id_tag)
 		id_tag = newid
 	update_icon()
-	. = INITIALIZE_HINT_LATELOAD 
+	. = INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/conveyor_switch/LateInitialize()
 	. = ..()
@@ -154,7 +155,7 @@ var/global/list/all_conveyor_switches = list()
 /obj/machinery/conveyor_switch/Destroy()
 	global.all_conveyor_switches -= src
 	. = ..()
-	
+
 // update the icon depending on the position
 
 /obj/machinery/conveyor_switch/on_update_icon()
@@ -206,7 +207,7 @@ var/global/list/all_conveyor_switches = list()
 		position = 0
 
 /obj/machinery/conveyor_switch/attackby(obj/item/I, mob/user, params)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		var/obj/item/conveyor_switch_construct/C = new/obj/item/conveyor_switch_construct(src.loc)
 		C.id_tag = id_tag
 		transfer_fingerprints_to(C)

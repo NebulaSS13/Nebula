@@ -1,7 +1,6 @@
 /decl/special_role/changeling
 	name = "Changeling"
 	name_plural = "Changelings"
-	feedback_tag = "changeling_objective"
 	blacklisted_jobs = list(/datum/job/submap)
 	welcome_text = "Use say \"%LANGUAGE_PREFIX%g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them."
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE

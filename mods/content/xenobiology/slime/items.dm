@@ -10,6 +10,7 @@
 	throw_range = 6
 	origin_tech = "{'biotech':4}"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	material = /decl/material/liquid/slimejelly
 	var/slime_type = /decl/slime_colour/grey
 	var/Uses = 1 // uses before it goes inert
 	var/enhanced = 0 //has it been enhanced before?
@@ -38,9 +39,15 @@
 	if(!ispath(slime_type, /decl/slime_colour))
 		PRINT_STACK_TRACE("Slime extract initialized with non-decl slime colour: [slime_type || "NULL"].")
 	SSstatistics.extracted_slime_cores_amount++
-	create_reagents(100)
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 30)
+	initialize_reagents()
 	update_icon()
+
+/obj/item/slime_extract/initialize_reagents(populate)
+	create_reagents(100)
+	. = ..()
+
+/obj/item/slime_extract/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/slimejelly, 30)
 
 /obj/item/slime_extract/on_reagent_change()
 	. = ..()
@@ -49,6 +56,7 @@
 		slime_data.handle_reaction(reagents)
 
 /obj/item/slime_extract/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	icon = slime_data.extract_icon
@@ -69,8 +77,8 @@
 /obj/effect/golemrune/Process()
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
-		if(!O.client)	continue
-		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
+		if(!O.client || (O.mind && O.mind.current && O.mind.current.stat != DEAD))
+			continue
 		ghost = O
 		break
 	if(ghost)
@@ -79,6 +87,7 @@
 		icon_state = "golem"
 
 /obj/effect/golemrune/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
 		if(!O.client)
@@ -89,7 +98,7 @@
 		break
 	if(!ghost)
 		to_chat(user, SPAN_WARNING("The rune fizzles uselessly."))
-		return
+		return TRUE
 	visible_message(SPAN_WARNING("A craggy humanoid figure coalesces into being!"))
 
 	var/mob/living/carbon/human/G = new(src.loc)
@@ -107,7 +116,7 @@
 	to_chat(G, FONT_LARGE(SPAN_BOLD("You are a golem. Serve [user] and assist them at any cost.")))
 	to_chat(G, SPAN_ITALIC("You move slowly and are vulnerable to trauma, but are resistant to heat and cold."))
 	qdel(src)
-
+	return TRUE
 
 /obj/effect/golemrune/proc/announce_to_ghosts()
 	for(var/mob/observer/ghost/G in global.player_list)

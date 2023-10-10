@@ -183,10 +183,10 @@ var/global/list/magnetic_modules = list()
 	global.magnetic_modules -= src
 	return ..()
 
-/obj/machinery/magnetic_controller
-	name = "Magnetic Control Console"
+/obj/machinery/magnetic_controller // TODO: IMPLEMENT OR REMOVE
+	name = "magnetic control console"
 	icon = 'icons/obj/airlock_machines.dmi' // uses an airlock machine icon, THINK GREEN HELP THE ENVIRONMENT - RECYCLING!
-	icon_state = "airlock_control_standby"
+	icon_state = "airlock_control_off"
 	density = 1
 	anchored = 1.0
 	idle_power_usage = 45
@@ -235,7 +235,7 @@ var/global/list/magnetic_modules = list()
 	if(stat & (BROKEN|NOPOWER))
 		return
 	user.set_machine(src)
-	var/dat = "<B>Magnetic Control Console</B><BR><BR>"
+	var/dat = "<B>[title]</B><BR><BR>"
 	if(!autolink)
 		dat += {"
 		Frequency: <a href='?src=\ref[src];operation=setfreq'>[frequency]</a><br>
@@ -270,7 +270,6 @@ var/global/list/magnetic_modules = list()
 
 		// Prepare signal beforehand, because this is a radio operation
 		var/datum/signal/signal = new
-		signal.transmission_method = 1 // radio transmission
 		signal.source = src
 		signal.frequency = frequency
 		signal.data["code"] = code
@@ -336,7 +335,6 @@ var/global/list/magnetic_modules = list()
 
 		// Prepare the radio signal
 		var/datum/signal/signal = new
-		signal.transmission_method = 1 // radio transmission
 		signal.source = src
 		signal.frequency = frequency
 		signal.data["code"] = code

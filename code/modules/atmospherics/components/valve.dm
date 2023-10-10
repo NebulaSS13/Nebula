@@ -46,7 +46,7 @@
 
 /obj/machinery/atmospherics/valve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(open) // connect everything
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			if(nodes_to_networks[node] != new_network)
 				QDEL_NULL(nodes_to_networks[node])
 				nodes_to_networks[node] = new_network
@@ -57,7 +57,7 @@
 		..() // connect along each dir separately; this is base behavior
 
 /obj/machinery/atmospherics/valve/proc/open()
-	if(open) 
+	if(open)
 		return 0
 
 	open = TRUE
@@ -115,7 +115,7 @@
 /obj/machinery/atmospherics/valve/deconstruction_pressure_check()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 		return FALSE
 	return TRUE
 

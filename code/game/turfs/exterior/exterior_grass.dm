@@ -11,14 +11,18 @@
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
 	icon_has_corners = TRUE
 	color = "#799c4b"
+	base_color = "#799c4b"
 	footstep_type = /decl/footsteps/grass
 
-/turf/exterior/wildgrass/Initialize()
+/turf/exterior/wildgrass/Initialize(mapload, no_update_icon)
 	. = ..()
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
-	if(istype(E) && E.grass_color)
-		color = E.grass_color
+	//It's possible we're created on a level that's not a planet!
+	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[z]
+	var/grass_color = P?.get_grass_color()
+	if(grass_color)
+		color = grass_color
 
+	//#TODO: Check if this is still relevant/wanted since we got map gen to handle this?
 	var/datum/extension/buried_resources/resources = get_or_create_extension(src, /datum/extension/buried_resources)
 	if(prob(70))
 		LAZYSET(resources.resources, /decl/material/solid/graphite, rand(3,5))

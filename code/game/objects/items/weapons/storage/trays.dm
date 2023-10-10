@@ -16,13 +16,11 @@
 	use_to_pickup = 1
 	allow_quick_gather = 1
 	use_sound = null
-
+	material = /decl/material/solid/cardboard
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	
 	var/cooldown = 0	//Cooldown for banging the tray with a rolling pin. based on world.time. very silly
 	var/no_drop = FALSE
-
-	material = /decl/material/solid/cardboard
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
 
 /obj/item/storage/tray/resolve_attackby(var/atom/A, mob/user)
 	if(istype(A, /obj/item/storage)) //Disallow putting in bags without raising w_class. Don't know why though, it was part of the old trays
@@ -88,8 +86,8 @@
 	var/mouse_x = text2num(click_data["icon-x"])-1 // Ranging from 0 to 31
 	var/mouse_y = text2num(click_data["icon-y"])-1
 
-	var/cell_x = Clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
-	var/cell_y = Clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
+	var/cell_x = clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
+	var/cell_y = clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
 
 	var/list/center = cached_json_decode(W.center_of_mass)
 
@@ -122,7 +120,7 @@
 	scatter_contents(FALSE, get_turf(hit_atom))
 
 /obj/item/storage/tray/on_update_icon()
-	..()
+	. = ..()
 	clear_vis_contents(src)
 	for(var/obj/item/I in contents)
 		I.vis_flags |= VIS_INHERIT_PLANE | VIS_INHERIT_LAYER

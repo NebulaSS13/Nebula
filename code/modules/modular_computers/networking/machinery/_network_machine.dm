@@ -17,8 +17,18 @@
 	var/heat_threshold = 90 CELSIUS	// At what temperature the machine will lock up.
 	var/overheated = FALSE
 
+	var/tmp/tag_network_tag //The name of this device on the network set by mapper
+
+/obj/machinery/network/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_network_id, map_hash)
+	ADJUST_TAG_VAR(initial_network_key, map_hash)
+	ADJUST_TAG_VAR(tag_network_tag, map_hash)
+
 /obj/machinery/network/Initialize()
-	set_extension(src, network_device_type, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
+	var/datum/extension/network_device/ND = get_or_create_extension(src, network_device_type, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
+	if(length(tag_network_tag))
+		ND.set_network_tag(tag_network_tag)
 	. = ..()
 
 /obj/machinery/network/populate_parts(full_populate)

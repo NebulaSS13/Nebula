@@ -2,6 +2,9 @@
 	name = "mobile ladder"
 	desc = "A lightweight deployable ladder, which you can use to move up or down. Or alternatively, you can bash some faces in."
 	icon = 'icons/obj/mobile_ladder.dmi'
+	
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY)
 	icon_state = ICON_STATE_WORLD
 	throw_range = 3
 	force = 10
@@ -88,9 +91,6 @@
 	set src in oview(1)
 	fold(usr)
 
-/obj/structure/ladder/mobile/AltClick(mob/user)
-	fold(user)
-
 /obj/structure/ladder/mobile/proc/fold(mob/user)
 	if(user)
 		if(!CanPhysicallyInteract(user) || !ishuman(user))
@@ -122,3 +122,15 @@
 	else if(target_up && istype(target_up, /obj/structure/ladder/mobile))
 		QDEL_NULL(target_up)
 		qdel(src)
+
+/obj/structure/ladder/mobile/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/ladder_fold)
+
+/decl/interaction_handler/ladder_fold
+	name = "Fold Ladder"
+	expected_target_type = /obj/structure/ladder/mobile
+
+/decl/interaction_handler/ladder_fold/invoked(var/atom/target, var/mob/user)
+	var/obj/structure/ladder/mobile/L
+	L.fold(user)

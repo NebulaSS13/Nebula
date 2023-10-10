@@ -20,10 +20,10 @@
 	update_icon()
 
 /obj/item/robot_parts/robot_suit/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	for(var/part in required_parts)
 		if(parts[part])
-			overlays += "[part]+o"
+			add_overlay("[part]+o")
 
 /obj/item/robot_parts/robot_suit/proc/check_completion()
 	for(var/part in required_parts)
@@ -35,7 +35,7 @@
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W, mob/user)
 
 	// Uninstall a robotic part.
-	if(isCrowbar(W))
+	if(IS_CROWBAR(W))
 		if(!parts.len)
 			to_chat(user, SPAN_WARNING("\The [src] has no parts to remove."))
 			return
@@ -56,7 +56,7 @@
 		if(parts[part.bp_tag])
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [W] installed."))
 			return
-		if(part.can_install(user) && user.unEquip(W, src))
+		if(part.can_install(user) && user.try_unequip(W, src))
 			parts[part.bp_tag] = part
 			update_icon()
 
@@ -104,7 +104,7 @@
 			to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
 			return
 
-		if(!user.unEquip(W))
+		if(!user.try_unequip(W))
 			return
 
 		SSstatistics.add_field("cyborg_frames_built",1)
@@ -137,7 +137,7 @@
 		O.Namepick()
 		qdel(src)
 
-	else if(istype(W, /obj/item/pen))
+	else if(IS_PEN(W))
 		var/t = sanitize_safe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if(t && (in_range(src, user) || loc == user))
 			created_name = t

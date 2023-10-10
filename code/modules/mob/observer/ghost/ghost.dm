@@ -11,13 +11,12 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	anchored = 1	//  don't get pushed around
 	universal_speak = TRUE
 	mob_sort_value = 9
+	is_spawnable_type = FALSE
 
 	mob_flags = MOB_FLAG_HOLY_BAD
 	movement_handlers = list(/datum/movement_handler/mob/multiz_connected, /datum/movement_handler/mob/incorporeal)
 
-	var/next_visibility_toggle = 0
 	var/can_reenter_corpse
-	var/bootime = 0
 	var/started_as_observer //This variable is set to 1 when you enter the game as an observer.
 							//If you died in the game and are a ghost - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
@@ -57,8 +56,9 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 	else
 		spawn(10) // wait for the observer mob to receive the client's key
-			mind = new /datum/mind(key)
-			mind.current = src
+			if(!QDELETED(src))
+				mind = new /datum/mind(key)
+				mind.current = src
 	if(!T)
 		var/list/spawn_locs = global.latejoin_locations | global.latejoin_cryo_locations | global.latejoin_gateway_locations
 		if(length(spawn_locs))
@@ -382,7 +382,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	var/turf/T = get_turf(src)
-	if(!T || (T.z in global.using_map.admin_levels))
+	if(!T || isAdminLevel(T.z))
 		to_chat(src, "<span class='warning'>You may not spawn as a mouse on this Z-level.</span>")
 		return
 

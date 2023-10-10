@@ -15,14 +15,14 @@
 	desc = "Tall synthleather boots with an artificial shine."
 	icon = 'icons/clothing/feet/boots.dmi'
 	material = /decl/material/solid/leather/synth
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	force = 3
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
 	gas_transfer_coefficient = 0.90
@@ -48,10 +48,10 @@
 	material = /decl/material/solid/leather/synth
 	color = "#d88d4b"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
 	gas_transfer_coefficient = 0.90

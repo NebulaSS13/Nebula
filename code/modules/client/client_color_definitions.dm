@@ -4,8 +4,8 @@
 /datum/client_color/deuteranopia
 	priority = 100
 	client_color = list(
-		0.47,0.38,0.15, 
-		0.54,0.31,0.15, 
+		0.47,0.38,0.15,
+		0.54,0.31,0.15,
 		0,0.3,0.7
 	)
 	wire_colour_substitutions = list(
@@ -13,15 +13,15 @@
 		"darkred" = "black",
 		"purple" =  "blue",
 		"orange" =  "yellow",
-		"brown" =   "yellow", 
+		"brown" =   "yellow",
 		"green" =   "yellow"
 	)
 
 /datum/client_color/protanopia
 	priority = 100
 	client_color = list(
-		0.51,0.4,0.12, 
-		0.49,0.41,0.12, 
+		0.51,0.4,0.12,
+		0.49,0.41,0.12,
 		0,0.2,0.76
 	)
 	wire_colour_substitutions = list(
@@ -29,22 +29,22 @@
 		"darkred" = "black",
 		"purple" =  "blue",
 		"orange" =  "yellow",
-		"brown" =   "yellow", 
+		"brown" =   "yellow",
 		"green" =   "yellow"
 	)
 
 /datum/client_color/tritanopia
 	priority = 100
 	client_color = list(
-		0.95,0.07,0, 
-		0,0.44,0.52, 
+		0.95,0.07,0,
+		0,0.44,0.52,
 		0.05,0.49,0.48
 	)
 	wire_colour_substitutions = list(
-		"blue" =    "green", 
+		"blue" =    "green",
 		"orange" =  "pink",
-		"brown" =   "pink", 
-		"gold" =    "pink", 
+		"brown" =   "pink",
+		"gold" =    "pink",
 		"yellow" =  "pink",
 		"cyan" =    "green",
 		"navy" =    "green",
@@ -54,18 +54,18 @@
 /datum/client_color/achromatopsia
 	priority = 100
 	client_color = list(
-		0.33,0.33,0.33, 
-		0.33,0.33,0.33, 
+		0.33,0.33,0.33,
+		0.33,0.33,0.33,
 		0.33,0.33,0.33
 	)
 	wire_colour_substitutions = list(
-		"red" =     "gray", 
-		"blue" =    "black", 
-		"green" =   "gray", 
-		"darkred" = "black", 
+		"red" =     "gray",
+		"blue" =    "black",
+		"green" =   "gray",
+		"darkred" = "black",
 		"orange" =  "gray",
-		"brown" =   "gray", 
-		"gold" =    "gray", 
+		"brown" =   "gray",
+		"gold" =    "gray",
 		"cyan" =    "gray",
 		"navy" =    "gray",
 		"purple" =  "black",
@@ -87,13 +87,13 @@
 	priority = INFINITY //This effect sort of exists on its own you /have/ to be seeing RED
 	override = TRUE //Because multiplying this will inevitably fail
 	wire_colour_substitutions = list(
-		"red" =     "red", 
-		"blue" =    "red", 
-		"green" =   "red", 
-		"darkred" = "red", 
+		"red" =     "red",
+		"blue" =    "red",
+		"green" =   "red",
+		"darkred" = "red",
 		"orange" =  "red",
-		"brown" =   "red", 
-		"gold" =    "red", 
+		"brown" =   "red",
+		"gold" =    "red",
 		"cyan" =    "red",
 		"navy" =    "red",
 		"purple" =  "red",
@@ -103,4 +103,4 @@
 	)
 
 /datum/client_color/oversaturated/New()
-	client_color = color_saturation(40)
+	client_color = legacy_color_saturation(40)

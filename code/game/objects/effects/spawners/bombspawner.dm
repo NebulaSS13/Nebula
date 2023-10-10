@@ -105,12 +105,6 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 
-//	var/assembly_type = /obj/item/assembly/signaler
-
-	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
-	var/accelerant_amount = 0
-	var/oxidizer_amount = 0
-
 /obj/effect/spawner/onetankbomb/Initialize()
 	..()
 	new /obj/item/tank/onetankbomb(get_turf(loc))

@@ -5,7 +5,6 @@
 	light_color = "#77fff8"
 
 	var/obj/machinery/ftl_shunt/core/linked_core
-	var/cost = 0
 	var/plotting_jump = FALSE
 	var/jump_plot_timer
 	var/jump_plotted = FALSE
@@ -25,7 +24,7 @@
 /obj/machinery/computer/ship/ftl/proc/recalc_cost()
 	if(!linked_core)
 		return INFINITY
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(z)]
 	if(!istype(sector))
 		return INFINITY
 	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, sector.z))
@@ -36,7 +35,7 @@
 	if(!linked_core)
 		return INFINITY
 
-	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(z)]
 	if(!istype(sector))
 		return INFINITY
 
@@ -67,13 +66,12 @@
 	var/jump_dist = get_dist(linked, locate(x, y, overmap.assigned_z))
 	var/plot_delay_mult
 	var/delay
-	switch(jump_dist)
-		if(1 to linked_core.safe_jump_distance)
-			plot_delay_mult = 1
-		if(linked_core.safe_jump_distance to linked_core.moderate_jump_distance)
-			plot_delay_mult = 1.5
-		if(linked_core.moderate_jump_distance to INFINITY)
-			plot_delay_mult = 2
+	if(jump_dist < linked_core.safe_jump_distance)
+		plot_delay_mult = 1
+	else if(jump_dist < linked_core.moderate_jump_distance)
+		plot_delay_mult = 1.5
+	else
+		plot_delay_mult = 2
 
 	delay = clamp(((jump_dist * BASE_PLOT_TIME_PER_TILE) * plot_delay_mult),1, INFINITY)
 	jump_plot_timer = addtimer(CALLBACK(src, .proc/finish_plot, x, y), delay, TIMER_STOPPABLE)
@@ -116,7 +114,6 @@
 		if(!linked_core)
 			to_chat(user, SPAN_WARNING("Unable to establish connection to superluminal shunt."))
 			return
-	recalc_cost()
 
 	data["ftlstatus"] = linked_core.get_status()
 	data["shunt_x"] = linked_core.shunt_x
@@ -169,12 +166,12 @@
 		if(href_list["set_shunt_x"])
 			input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", to_plot_x) as num|null
 			input_x += fumble
-			input_x = Clamp(input_x, 1, overmap.map_size_x - 1)
+			input_x = clamp(input_x, 1, overmap.map_size_x - 1)
 
 		if(href_list["set_shunt_y"])
 			input_y = input(user, "Enter Destination Y Coordinates", "FTL Computer", to_plot_y) as num|null
 			input_y += fumble
-			input_y = Clamp(input_y, 1, overmap.map_size_y - 1)
+			input_y = clamp(input_y, 1, overmap.map_size_y - 1)
 
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION
@@ -193,7 +190,7 @@
 			if(linked_core.get_status() != FTL_STATUS_GOOD)
 				to_chat(user, SPAN_WARNING("Superluminal shunt inoperable. Please try again later."))
 				return TOPIC_REFRESH
-			
+
 			var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
 			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, overmap.assigned_z), get_turf(linked))
 			if(is_jump_unsafe()) //We are above the safe jump distance, give them a warning.

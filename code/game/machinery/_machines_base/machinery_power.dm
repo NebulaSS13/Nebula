@@ -107,12 +107,15 @@ This is /obj/machinery level code to properly manage power usage from the area.
 /obj/machinery/proc/update_power_on_move(atom/movable/mover, atom/old_loc, atom/new_loc)
 	area_changed(get_area(old_loc), get_area(new_loc))
 
+// An event that should be accurately triggered whenever our area changes. Returns TRUE if area changed and we have completed init, FALSE otherwise.
 /obj/machinery/proc/area_changed(area/old_area, area/new_area)
+	SHOULD_CALL_PARENT(TRUE)
 	if(!power_init_complete)
-		return // this is possible if called externally
+		return FALSE // this is possible if called externally
 
 	if(old_area == new_area)
-		return
+		return FALSE
+	. = TRUE
 	var/power = get_power_usage()
 	if(old_area)
 		old_area.power_use_change(power, 0, power_channel)

@@ -43,9 +43,33 @@
 
 /datum/fabricator_recipe/engineering/button_frame
 	path = /obj/item/frame/button
+/datum/fabricator_recipe/engineering/button_kit
+	path = /obj/item/frame/button/kit
 
-/datum/fabricator_recipe/engineering/airlock_sensor
-	path = /obj/item/frame/button/airlock_sensor
+/datum/fabricator_recipe/engineering/button_frame_door
+	path = /obj/item/frame/button/alternate
+/datum/fabricator_recipe/engineering/button_kit_door
+	path = /obj/item/frame/button/alternate/kit
+
+/datum/fabricator_recipe/engineering/button_frame_blast
+	path = /obj/item/frame/button/blastdoor
+/datum/fabricator_recipe/engineering/button_kit_blast
+	path = /obj/item/frame/button/blastdoor/kit
+
+/datum/fabricator_recipe/engineering/airlock_button_frame
+	path = /obj/item/frame/button/airlock_controller_config/access
+/datum/fabricator_recipe/engineering/airlock_button_kit
+	path = /obj/item/frame/button/airlock_controller_config/access/kit
+
+/datum/fabricator_recipe/engineering/airlock_sensor_frame
+	path = /obj/item/frame/button/airlock_controller_config/airlock_sensor
+/datum/fabricator_recipe/engineering/airlock_sensor_kit
+	path = /obj/item/frame/button/airlock_controller_config/airlock_sensor/kit
+
+/datum/fabricator_recipe/engineering/airlock_controller_frame
+	path = /obj/item/frame/button/airlock_controller
+/datum/fabricator_recipe/engineering/airlock_controller_kit
+	path = /obj/item/frame/button/airlock_controller/kit
 
 /datum/fabricator_recipe/engineering/airlock_controller
 	path = /obj/item/stock_parts/circuitboard/airlock_controller
@@ -119,3 +143,15 @@
 
 /datum/fabricator_recipe/engineering/wall_relay
 	path = /obj/item/frame/wall_relay
+
+/datum/fabricator_recipe/engineering/oxygen_tank
+	path = /obj/item/tank/oxygen/empty
+
+/datum/fabricator_recipe/engineering/hydrogen_tank
+	path = /obj/item/tank/hydrogen/empty
+
+/datum/fabricator_recipe/engineering/stirling_piston
+	path = /obj/item/tank/stirling/empty
+
+/datum/fabricator_recipe/engineering/welderpack
+	path = /obj/item/chems/weldpack/empty

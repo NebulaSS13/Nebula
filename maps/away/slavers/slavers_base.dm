@@ -17,11 +17,10 @@
 
 /datum/map_template/ruin/away_site/slavers
 	name = "Slavers' Base"
-	id = "awaysite_slavers"
 	description = "Asteroid with slavers base inside."
 	suffixes = list("slavers/slavers_base.dmm")
 	cost = 1
-	generate_mining_by_z = 1
+	level_data_type = /datum/level_data/mining_level
 	area_usage_test_exempted_root_areas = list(/area/slavers_base)
 	apc_test_exempt_areas = list(
 		/area/slavers_base/hangar = NO_SCRUBBER
@@ -171,8 +170,8 @@
 	icon = 'maps/away/slavers/icons/uniform.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR
+		ARMOR_MELEE  = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER  = ARMOR_LASER_MINOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)

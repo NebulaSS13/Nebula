@@ -28,11 +28,11 @@
 		if(stored_card)
 			to_chat(user, "\The [src] is already occupied.")
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		do_insert_ai(user, W)
 		return TRUE
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		to_chat(user, "You manually remove \the [stored_card] from \the [src].")
 		do_eject_ai(user)
 

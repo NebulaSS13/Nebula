@@ -20,7 +20,7 @@
 /proc/random_name(gender, species)
 	if(species)
 		var/decl/species/current_species = get_species_by_key(species)
-		if(current_species) 
+		if(current_species)
 			var/decl/cultural_info/current_culture = GET_DECL(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)
 				return current_culture.get_random_name(null, gender)
@@ -116,14 +116,14 @@
 			. = 0
 			break
 
-		if(target_zone && user.zone_sel.selecting != target_zone)
+		if(target_zone && user.get_target_zone() != target_zone)
 			. = 0
 			break
 
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, check_holding = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
+/proc/do_after(mob/user, delay, atom/target = null, check_holding = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, same_direction = 0, can_move = 0, max_distance, check_in_view = 0)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
@@ -159,7 +159,11 @@
 			drifting = 0
 			original_loc = user.loc
 
-		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (!drifting && user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
+		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (!drifting && user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir) || (!isnull(max_distance) && get_dist(user, target) > max_distance))
+			. = 0
+			break
+
+		if(check_in_view && !(target in view(max_distance, user)))
 			. = 0
 			break
 

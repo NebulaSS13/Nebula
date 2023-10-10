@@ -2,8 +2,8 @@
 	id = PSI_REDACTION
 	name = "Redaction"
 	associated_intent = I_HELP
-	armour_types = list("bio", "rad")
-	
+	armour_types = list(ARMOR_BIO, ARMOR_RAD)
+
 /decl/psionic_power/redaction
 	faculty = PSI_REDACTION
 	admin_log = FALSE
@@ -30,7 +30,7 @@
 	use_description = "Grab a patient, target the chest, then switch to help intent and use the grab on them to perform a check for wounds and damage."
 
 /decl/psionic_power/redaction/skinsight/invoke(var/mob/living/user, var/mob/living/target)
-	if(user.zone_sel.selecting != BP_CHEST)
+	if(user.get_target_zone() != BP_CHEST)
 		return FALSE
 	. = ..()
 	if(.)
@@ -51,7 +51,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, user.zone_sel.selecting)
+		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, user.get_target_zone())
 
 		if(!E)
 			to_chat(user, SPAN_WARNING("They are missing that limb."))
@@ -67,7 +67,7 @@
 		var/redaction_rank = user.psi.get_rank(PSI_REDACTION)
 		var/pk_rank = user.psi.get_rank(PSI_PSYCHOKINESIS)
 		if(pk_rank >= PSI_RANK_LATENT && redaction_rank >= PSI_RANK_MASTER)
-			var/removal_size = Clamp(5-pk_rank, 0, 5)
+			var/removal_size = clamp(5-pk_rank, 0, 5)
 			var/valid_objects = list()
 			for(var/thing in E.implants)
 				var/obj/imp = thing
@@ -159,7 +159,7 @@
 	admin_log = FALSE
 
 /decl/psionic_power/revive/invoke(var/mob/living/user, var/mob/living/target)
-	if(!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_HEAD)
+	if(!isliving(target) || !istype(target) || user.get_target_zone() != BP_HEAD)
 		return FALSE
 	. = ..()
 	if(.)

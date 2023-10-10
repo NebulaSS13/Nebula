@@ -24,6 +24,8 @@
 
 #define CELSIUS + T0C
 
+#define ATM *ONE_ATMOSPHERE
+
 #define ATMOS_PRECISION 0.0001
 #define QUANTIZE(variable) (round(variable, ATMOS_PRECISION))
 

@@ -18,9 +18,6 @@
 	if(!location)
 		location = get_area(src)
 
-/obj/machinery/network/pager/attackby(obj/item/W, mob/user)
-	return attack_hand(user)
-
 /obj/machinery/network/pager/interface_interact(mob/living/user)
 	if(!CanInteract(user, global.default_topic_state))
 		return FALSE
@@ -30,7 +27,7 @@
 	return TRUE
 
 /obj/machinery/network/pager/proc/activate(mob/living/user)
-	if(!powered())
+	if(stat & NOPOWER)
 		return
 	var/obj/machinery/network/message_server/MS = get_message_server(z)
 	if(!MS)
@@ -49,7 +46,7 @@
 /obj/machinery/network/pager/Topic(href, href_list)
 	if(..())
 		return 1
-	if(!powered())
+	if(stat & NOPOWER)
 		return
 	if(!acknowledged && href_list["ack"])
 		playsound(src, 'sound/machines/ping.ogg', 60)

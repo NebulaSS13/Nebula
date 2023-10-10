@@ -20,10 +20,10 @@
 /datum/random_map/noise/set_map_size()
 	// Make sure the grid is a square with limits that are
 	// (n^2)+1, otherwise diamond-square won't work.
-	if(!IsPowerOfTwo((limit_x-1)))
-		limit_x = RoundUpToPowerOfTwo(limit_x) + 1
-	if(!IsPowerOfTwo((limit_y-1)))
-		limit_y = RoundUpToPowerOfTwo(limit_y) + 1
+	if(!IS_POWER_OF_TWO((limit_x-1)))
+		limit_x = ROUND_UP_TO_POWER_OF_TWO(limit_x) + 1
+	if(!IS_POWER_OF_TWO((limit_y-1)))
+		limit_y = ROUND_UP_TO_POWER_OF_TWO(limit_y) + 1
 	// Sides must be identical lengths.
 	if(limit_x > limit_y)
 		limit_y = limit_x
@@ -168,7 +168,7 @@
 					map[current_cell]-=cell_smooth_amt
 				map[current_cell] = max(0,min(cell_range,map[current_cell]))
 		map = next_map
-	
+
 	if(smooth_single_tiles)
 		var/list/buddies = list()
 		for(var/x in 1 to limit_x - 1)

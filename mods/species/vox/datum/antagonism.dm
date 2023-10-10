@@ -1,9 +1,10 @@
 /decl/special_role/raider/Initialize()
 	. = ..()
 	LAZYSET(outfits_per_species, SPECIES_VOX, /decl/hierarchy/outfit/vox_raider)
-	
+
 /decl/hierarchy/outfit/vox_raider
 	name = "Job - Vox Raider"
+	l_ear =      /obj/item/radio/headset/raider
 	shoes =      /obj/item/clothing/shoes/magboots/vox
 	gloves =     /obj/item/clothing/gloves/vox
 	mask =       /obj/item/clothing/mask/gas/swat/vox
@@ -12,7 +13,9 @@
 	glasses =    /obj/item/clothing/glasses/thermal
 	holster =    /obj/item/clothing/accessory/storage/holster/armpit
 	suit_store = /obj/item/flashlight
+	l_ear =      /obj/item/radio/headset/raider
 	hands =      list(/obj/item/gun/launcher/alien/spikethrower)
+	id_type =    /obj/item/card/id/syndicate
 
 /decl/hierarchy/outfit/vox_raider/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	uniform = pick(/obj/item/clothing/under/vox/vox_robes, /obj/item/clothing/under/vox/vox_casual)
@@ -22,13 +25,13 @@
 	H.set_internals(locate(/obj/item/tank) in H.contents)
 
 // The following mirror is ~special~.
-/obj/item/storage/mirror/raider
+/obj/structure/mirror/raider
 	name = "cracked mirror"
 	desc = "Something seems strange about this old, dirty mirror. Your reflection doesn't look like you remember it."
 	icon_state = "mirror_broke"
-	shattered = 1
+	shattered = TRUE
 
-/obj/item/storage/mirror/raider/use_mirror(mob/living/carbon/human/user)
+/obj/structure/mirror/raider/use_mirror(mob/living/carbon/human/user)
 	if(!istype(get_area(src),/area/map_template/syndicate_mothership))
 		return ..()
 
@@ -48,7 +51,7 @@
 	qdel(user)
 	addtimer(CALLBACK(src, .proc/do_post_voxifying, vox), 1)
 
-/obj/item/storage/mirror/raider/proc/do_post_voxifying(var/mob/living/carbon/human/vox)
+/obj/structure/mirror/raider/proc/do_post_voxifying(var/mob/living/carbon/human/vox)
 	var/newname = sanitize_safe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if(!newname || newname == "")
 		var/decl/cultural_info/voxculture = GET_DECL(/decl/cultural_info/culture/vox/raider)

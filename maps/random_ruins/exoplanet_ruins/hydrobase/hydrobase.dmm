@@ -1809,9 +1809,7 @@
 /turf/simulated/floor/fixed/alium/airless,
 /area/template_noop)
 "eL" = (
-/obj/machinery/power/tracker{
-	id = "hydrosolar"
-	},
+/obj/machinery/power/tracker,
 /obj/structure/cable{
 	dir = 4
 	},
@@ -2066,7 +2064,7 @@
 /obj/random/coin,
 /obj/structure/closet/crate/secure/weapon{
 	desc = "A heavy-duty crate with a suite of firearms safety instructions plastered on the side. The ID scanner is unlike anything you've seen before.";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_HACKED")
 	},
 /obj/random/projectile,
 /obj/item/knife/combat,
@@ -2100,12 +2098,12 @@
 	},
 /obj/item/grenade/chem_grenade/antiweed,
 /obj/item/grenade/chem_grenade/incendiary,
-/obj/item/weedkiller/D24,
+/obj/item/plantspray/weedkiller/D24,
 /obj/item/shard/borosilicate,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/processing)
 "fu" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)

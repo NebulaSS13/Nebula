@@ -26,10 +26,10 @@
 			var/virgin = 1	//has the text been modified yet?
 			var/temp = winget(client, "input", "text")
 			if(findtextEx(temp, "Say \"", 1, 7) && length(temp) > 5)	//case sensitive means
-				var/main_key = get_prefix_key(/decl/prefix/radio_main_channel)
+				var/main_key = get_common_radio_prefix()
 				temp = replacetext(temp, main_key, "")	//general radio
 
-				var/channel_key = get_prefix_key(/decl/prefix/radio_channel_selection)
+				var/channel_key = get_department_radio_prefix()
 				if(findtext(trim_left(temp), channel_key, 6, 7))	//dept radio
 					temp = copytext(trim_left(temp), 8)
 					virgin = 0
@@ -54,33 +54,22 @@
 					say(temp)
 				winset(client, "input", "text=[null]")
 
-/mob/living/carbon/human/say_understands(var/mob/other,var/decl/language/speaking = null)
-	if(species.can_understand(other))
-		return TRUE
-	if(!speaking)
-		if(istype(other, /mob/living/silicon))
-			return TRUE
-		if(istype(other, /mob/announcer))
-			return TRUE
-		if(istype(other, /mob/living/carbon/brain))
-			return TRUE
-	return ..()
+/mob/living/carbon/human/say_understands(mob/speaker, decl/language/speaking)
+	return (!speaking && (issilicon(speaker) || istype(speaker, /mob/announcer) || isbrain(speaker))) || ..()
 
 /mob/living/carbon/human/GetVoice()
 
 	var/voice_sub
-	if(istype(back,/obj/item/rig))
-		var/obj/item/rig/rig = back
-		// todo: fix this shit
-		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
-			voice_sub = rig.speech.voice_holder.voice
+	var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+	if(istype(rig) && rig.speech?.voice_holder?.active && rig.speech.voice_holder.voice)
+		voice_sub = rig.speech.voice_holder.voice
 
 	if(!voice_sub)
 
-		var/list/check_gear = list(wear_mask, head)
+		var/list/check_gear = list(get_equipped_item(slot_wear_mask_str), get_equipped_item(slot_head_str))
 		if(wearing_rig)
 			var/datum/extension/armor/rig/armor_datum = get_extension(wearing_rig, /datum/extension/armor)
-			if(istype(armor_datum) && armor_datum.sealed && wearing_rig.helmet == head)
+			if(istype(armor_datum) && armor_datum.sealed && wearing_rig.helmet == get_equipped_item(slot_head_str))
 				check_gear |= wearing_rig
 
 		for(var/obj/item/gear in check_gear)
@@ -101,7 +90,7 @@
 	var/ending = copytext(message, length(message))
 
 	if(speaking)
-		verb = speaking.get_spoken_verb(ending)
+		verb = speaking.get_spoken_verb(src, ending)
 	else
 		if(ending == "!")
 			verb=pick("exclaims","shouts","yells")
@@ -114,73 +103,21 @@
 	if(HAS_STATUS(src, STAT_SILENCE) || (sdisabilities & MUTED))
 		to_chat(src, SPAN_WARNING("You are unable to speak!"))
 		message_data[1] = ""
-		. = 1
+		return TRUE
 
-	else if(istype(wear_mask, /obj/item/clothing/mask))
-		var/obj/item/clothing/mask/M = wear_mask
-		if(M.voicechange)
-			message_data[1] = pick(M.say_messages)
-			message_data[2] = pick(M.say_verbs)
-			. = 1
+	var/obj/item/clothing/mask/M = get_equipped_item(slot_wear_mask_str)
+	if(istype(M) && M.voicechange)
+		message_data[1] = pick(M.say_messages)
+		message_data[2] = pick(M.say_verbs)
+		return TRUE
 
-	else
-		. = ..(message_data)
+	return ..(message_data)
 
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	switch(message_mode)
-		if("intercom")
-			if(!src.restrained())
-				for(var/obj/item/radio/I in view(1))
-					if(I.intercom_handling)
-						I.talk_into(src, message, null, verb, speaking)
-						I.add_fingerprint(src)
-						used_radios += I
-		if("headset")
-			if(l_ear && istype(l_ear,/obj/item/radio))
-				var/obj/item/radio/R = l_ear
-				R.talk_into(src,message,null,verb,speaking)
-				used_radios += l_ear
-			else if(r_ear && istype(r_ear,/obj/item/radio))
-				var/obj/item/radio/R = r_ear
-				R.talk_into(src,message,null,verb,speaking)
-				used_radios += r_ear
-		if("right ear")
-			var/obj/item/radio/R
-			var/has_radio = 0
-			if(r_ear && istype(r_ear,/obj/item/radio))
-				R = r_ear
-				has_radio = 1
-			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, BP_R_HAND)
-			if(istype(inv_slot?.holding, /obj/item/radio))
-				R = inv_slot.holding
-				has_radio = 1
-			if(has_radio)
-				R.talk_into(src,message,null,verb,speaking)
-				used_radios += R
-		if("left ear")
-			var/obj/item/radio/R
-			var/has_radio = 0
-			if(l_ear && istype(l_ear,/obj/item/radio))
-				R = l_ear
-				has_radio = 1
-			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, BP_L_HAND)
-			if(istype(inv_slot?.holding, /obj/item/radio))
-				R = inv_slot.holding
-				has_radio = 1
-			if(has_radio)
-				R.talk_into(src,message,null,verb,speaking)
-				used_radios += R
-		if("whisper") //It's going to get sanitized again immediately, so decode.
-			whisper_say(html_decode(message), speaking, alt_name)
-			return 1
-		else
-			if(message_mode)
-				if(l_ear && istype(l_ear,/obj/item/radio))
-					l_ear.talk_into(src,message, message_mode, verb, speaking)
-					used_radios += l_ear
-				else if(r_ear && istype(r_ear,/obj/item/radio))
-					r_ear.talk_into(src,message, message_mode, verb, speaking)
-					used_radios += r_ear
+	if(message_mode == MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
+		whisper_say(html_decode(message), speaking, alt_name)
+		return TRUE
+	return ..()
 
 /mob/living/carbon/human/handle_speech_sound()
 	if(species.speech_sounds && prob(species.speech_chance))

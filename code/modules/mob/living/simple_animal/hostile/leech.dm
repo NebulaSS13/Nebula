@@ -16,6 +16,10 @@
 	var/suck_potency = 8
 	var/belly = 100
 
+/mob/living/simple_animal/hostile/leech/exoplanet/Initialize()
+	adapt_to_current_level()
+	. = ..()
+
 /mob/living/simple_animal/hostile/leech/Life()
 	. = ..()
 	if(!.)
@@ -36,7 +40,7 @@
 		H.remove_blood_simple(suck_potency)
 		if(health < maxHealth)
 			health += suck_potency / 1.5
-		belly += Clamp(suck_potency, 0, 100)
+		belly += clamp(suck_potency, 0, 100)
 
 /obj/structure/leech_spawner
 	name = "reeds"
@@ -44,7 +48,11 @@
 	icon = 'icons/obj/structures/reeds.dmi'
 	icon_state = "reeds"
 	anchored = TRUE
+	var/leech_type = /mob/living/simple_animal/hostile/leech
 	var/datum/proximity_trigger/proxy_listener
+
+/obj/structure/leech_spawner/exoplanet
+	leech_type = /mob/living/simple_animal/hostile/leech/exoplanet
 
 /obj/structure/leech_spawner/Initialize()
 	..()
@@ -63,7 +71,7 @@
 	if(!proxy_listener || !istype(victim) || !(victim in view(5, src)))
 		return
 	for(var/i in 1 to 12)
-		new /mob/living/simple_animal/hostile/leech(get_turf(src))
+		new leech_type(get_turf(src))
 	visible_message(SPAN_MFAUNA("A swarm of leeches burst out from \the [src]!"))
 	icon_state = "reeds_empty"
 	desc = "Some alien reeds."

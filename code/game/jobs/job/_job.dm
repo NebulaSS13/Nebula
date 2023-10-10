@@ -1,5 +1,5 @@
 /datum/job
-	var/title                                 // The name of the job	
+	var/title                                 // The name of the job
 	var/list/software_on_spawn = list()       // Defines the software files that spawn on tablets and labtops
 	var/list/department_types = list()        // What departments the job is in.
 	var/autoset_department = TRUE             // If department list is empty, use map default.
@@ -9,7 +9,7 @@
 	var/current_positions = 0                 // How many players have this job
 	var/availablity_chance = 100              // Percentage chance job is available each round
 	var/guestbanned = FALSE                   // If set to 1 this job will be unavalible to guests
-	var/must_fill = FALSE                     // If set to 1 this job will be have priority over other job preferences. Do not reccommend on jobs with more that one position.
+	var/must_fill = FALSE                     // If set to 1 this job will be have priority over other job preferences. Do not recommend on jobs with more than one position.
 	var/not_random_selectable = FALSE         // If set to 1 this job will not be selected when a player asks for a random job.
 	var/description                           // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
 	var/list/event_categories                 // A set of tags used to check jobs for suitability for things like random event selection.
@@ -34,7 +34,7 @@
 	var/announced = TRUE                      // If their arrival is announced on radio
 	var/latejoin_at_spawnpoints               // If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 	var/forced_spawnpoint                     // If set to a spawnpoint name, will use that spawn point for joining as this job.
-	var/hud_icon						      // icon used for Sec HUD overlay
+	var/hud_icon                              // icon used for Sec HUD overlay
 
 	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
 	var/list/minimal_access = list()          // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
@@ -44,19 +44,21 @@
 	var/min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT
 	)
-	var/max_skill = list()				  //Maximum skills allowed for the job.
-	var/skill_points = 16				  //The number of unassigned skill points the job comes with (on top of the minimum skills).
-	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
+	var/max_skill = list()                    //Maximum skills allowed for the job.
+	var/skill_points = 16                     //The number of unassigned skill points the job comes with (on top of the minimum skills).
+	var/no_skill_buffs = FALSE                //Whether skills can be buffed by age/species modifiers.
 	var/available_by_default = TRUE
 
 	var/list/possible_goals
 	var/min_goals = 1
 	var/max_goals = 3
 
-	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
+	var/defer_roundstart_spawn = FALSE        // If true, the job will be put off until all other jobs have been populated.
 	var/list/species_branch_rank_cache_ = list()
 
 	var/required_language
+
+	var/no_warn_unsafe                        // If true, we don't prompt the user to confirm on spawning if the environment is unsafe.
 
 /datum/job/New()
 
@@ -84,25 +86,14 @@
 	return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
-
 	if (required_language)
 		H.add_language(required_language)
 		H.set_default_language(required_language)
-
 	H.add_language(/decl/language/human/common)
 	H.set_default_language(/decl/language/human/common)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
-	if(outfit) . = outfit.equip(H, title, alt_title)
-
-	if(!QDELETED(H))
-		var/obj/item/card/id/id = H.GetIdCard()
-		if(id)
-			id.rank = title
-			id.assignment = id.rank
-			id.access |= get_access()
-			if(!id.detail_color)
-				id.detail_color = selection_color
-			id.update_icon()
+	if(outfit)
+		return outfit.equip(H, title, alt_title)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
@@ -177,8 +168,7 @@
 /datum/job/proc/get_access()
 	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
 		return minimal_access?.Copy()
-	else
-		return access?.Copy()
+	return access?.Copy()
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/C)
@@ -449,7 +439,7 @@
 		spawnpos = null
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
-		for(var/decl/spawnpoint/candidate AS_ANYTHING in global.using_map.allowed_spawns)
+		for(var/decl/spawnpoint/candidate as anything in global.using_map.allowed_spawns)
 			if(candidate?.check_job_spawning(src))
 				spawnpos = candidate
 				break

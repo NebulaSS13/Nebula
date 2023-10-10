@@ -27,17 +27,13 @@ var/global/list/responsive_carriers = list(
 
 	if(prob(engraving_chance))
 		descriptors += generate_engravings(I)
-	
+
 	var/extra_desc = get_additional_description()
 	if(extra_desc)
 		descriptors += extra_desc
 	if(!length(descriptors))
 		descriptors += "This item is completely [pick("alien","bizarre")]."
 
-	var/new_name = generate_name()
-	if(modification_flags & XENOFIND_APPLY_PREFIX)
-		new_name = "[pick(name_prefixes)] [new_name]"
-	I.SetName(new_name)
 	if(modification_flags & XENOFIND_REPLACE_ICON)
 		I.icon = new_icon()
 		I.has_inventory_icon = check_state_in_icon(ICON_STATE_INV, I.icon)
@@ -45,12 +41,13 @@ var/global/list/responsive_carriers = list(
 	I.desc = jointext(descriptors, "\n")
 	I.forceMove(location)
 	I.set_material(/decl/material/solid/metal/aliumium)
+	var/new_name = generate_name()
 	if(modification_flags & XENOFIND_APPLY_PREFIX)
 		new_name = "[pick(name_prefixes)] [new_name]"
 	I.SetName(new_name)
 	if(prob(5))
 		I.talking_atom = new(I)
-	
+
 	return I
 
 /decl/archaeological_find/proc/spawn_item(atom/loc)
@@ -73,10 +70,10 @@ var/global/list/responsive_carriers = list(
 	return
 
 /decl/archaeological_find/proc/generate_engravings(obj/item/I)
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[get_z(I)]"]
+	var/datum/planetoid_data/P = SSmapping.planetoid_data_by_z[get_z(I)]
 	. = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] "
-	if(istype(E))
-		. += E.get_engravings()
+	if(istype(P) && P.engraving_generator)
+		. += P.engraving_generator.generate_engraving_text()
 	else
 		. += "[pick("an alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")] \
 		[pick("surrounded by","being held aloft by","being struck by","being examined by","communicating with")] \
@@ -89,7 +86,7 @@ var/global/list/responsive_carriers = list(
 	var/material_descriptor
 	if(prob(40))
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
-	var/result = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of an alien alloy, all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality"
+	var/result = "\A [material_descriptor ? "[material_descriptor] [item_type]" : item_type] made of an alien alloy, all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality"
 	var/list/descriptors = list()
 	if(prob(30))
 		descriptors.Add("is encrusted with [pick("","synthetic ","multi-faceted ","uncut ","sparkling ") + pick("rubies","emeralds","diamonds","opals","lapiz lazuli")]")

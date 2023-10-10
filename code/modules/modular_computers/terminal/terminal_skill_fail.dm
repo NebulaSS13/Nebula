@@ -51,5 +51,5 @@ var/global/list/terminal_fails
 		message.title = "IMPORTANT NETWORK ALERT!"
 		message.stored_data = fulldata
 		message.source = server.login
-		server.send_mail(email.login, message, network)
+		network.send_email(server, email.login, message)
 	return ..()

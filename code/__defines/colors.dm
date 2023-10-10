@@ -93,30 +93,49 @@
 #define COLOR_ASTEROID_ROCK    "#735555"
 #define COLOR_DIAMOND          "#d8d4ea"
 
-#define	PIPE_COLOR_GREY        "#808080"
-#define	PIPE_COLOR_RED         "#ff0000"
-#define	PIPE_COLOR_BLUE        "#0000ff"
-#define	PIPE_COLOR_CYAN        "#00ffff"
-#define	PIPE_COLOR_GREEN       "#00ff00"
-#define	PIPE_COLOR_YELLOW      "#ffcc00"
-#define	PIPE_COLOR_BLACK       "#444444"
-#define	PIPE_COLOR_ORANGE      "#b95a00"
+#define PIPE_COLOR_GREY        "#808080"
+#define PIPE_COLOR_RED         "#ff0000"
+#define PIPE_COLOR_BLUE        "#0000ff"
+#define PIPE_COLOR_CYAN        "#00ffff"
+#define PIPE_COLOR_GREEN       "#00ff00"
+#define PIPE_COLOR_YELLOW      "#ffcc00"
+#define PIPE_COLOR_BLACK       "#444444"
+#define PIPE_COLOR_ORANGE      "#b95a00"
 #define PIPE_COLOR_WHITE       "#ffffff"
+#define PIPE_COLOR_PURPLE      "#880088"
 
-#define	COMMS_COLOR_DEFAULT    "#ff00ff"
-#define	COMMS_COLOR_ENTERTAIN  "#666666"
-#define	COMMS_COLOR_AI         "#ff00ff"
+#define COMMS_COLOR_DEFAULT    "#ff00ff"
+#define COMMS_COLOR_ENTERTAIN  "#666666"
+#define COMMS_COLOR_AI         "#ff00ff"
 #define	COMMS_COLOR_COMMON     "#408010"
-#define	COMMS_COLOR_SERVICE    "#709b00"
-#define	COMMS_COLOR_SUPPLY     "#7f6539"
-#define	COMMS_COLOR_SCIENCE    "#993399"
-#define	COMMS_COLOR_MEDICAL    "#009190"
-#define	COMMS_COLOR_EXPLORER   "#929820"
-#define	COMMS_COLOR_ENGINEER   "#a66300"
-#define	COMMS_COLOR_SECURITY   "#930000"
-#define	COMMS_COLOR_COMMAND    "#204090"
-#define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
-#define	COMMS_COLOR_SYNDICATE  "#6d3f40"
+#define COMMS_COLOR_SERVICE    "#709b00"
+#define COMMS_COLOR_SUPPLY     "#7f6539"
+#define COMMS_COLOR_SCIENCE    "#993399"
+#define COMMS_COLOR_MEDICAL    "#009190"
+#define COMMS_COLOR_EXPLORER   "#929820"
+#define COMMS_COLOR_ENGINEER   "#a66300"
+#define COMMS_COLOR_SECURITY   "#930000"
+#define COMMS_COLOR_COMMAND    "#204090"
+#define COMMS_COLOR_CENTCOMM   "#5c5c7c"
+#define COMMS_COLOR_SYNDICATE  "#6d3f40"
+#define COMMS_COLOR_ANALOG     "#64706b" // special case, not in telecomms_colours
+
+var/global/list/telecomms_colours = list(
+	"Default Pink" = COMMS_COLOR_DEFAULT,
+	"Entertainment Grey" = COMMS_COLOR_ENTERTAIN,
+	"A.I. Pink" = COMMS_COLOR_AI,
+	"Common Green" = COMMS_COLOR_COMMON,
+	"Service Lime" = COMMS_COLOR_SERVICE,
+	"Supply Drab" = COMMS_COLOR_SUPPLY,
+	"Scientific Purple" = COMMS_COLOR_SCIENCE,
+	"Medical Blue" = COMMS_COLOR_MEDICAL,
+	"Explorer Yellow" = COMMS_COLOR_EXPLORER,
+	"Engineering Orange" = COMMS_COLOR_ENGINEER,
+	"Security Red" = COMMS_COLOR_SECURITY,
+	"Command Blue" = COMMS_COLOR_COMMAND,
+	"Steel Blue" = COMMS_COLOR_CENTCOMM,
+	"Syndicate Red" = COMMS_COLOR_SYNDICATE
+)
 
 #define WOOD_COLOR_GENERIC     "#d5a66e"
 #define WOOD_COLOR_RICH        "#792f27"
@@ -198,12 +217,14 @@
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))
 
 // Codex category colours.
-#define CODEX_COLOR_LORE      "#abdb9b"
-#define CODEX_COLOR_MECHANICS "#9ebcd8"
-#define CODEX_COLOR_ANTAG     "#e5a2a2"
-
 #define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
 
 // Colors for input/hotkey panel.
 #define COLOR_INPUT_DISABLED "#f0f0f0"
 #define COLOR_INPUT_ENABLED "#d3b5b5"
+
+#define COLOR_DARKMODE_BACKGROUND "#202020"
+#define COLOR_DARKMODE_DARKBACKGROUND "#171717"
+#define COLOR_DARKMODE_TEXT "#a4bad6"
+
+#define COLORED_SQUARE(COLOR) "<span style='font-face: fixedsys; font-size: 14px; background-color: [COLOR]; color: [COLOR]'>___</span>"

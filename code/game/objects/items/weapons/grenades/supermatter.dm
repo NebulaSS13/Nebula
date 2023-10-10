@@ -18,9 +18,9 @@
 	playsound(src, 'sound/weapons/wave.ogg', 100)
 
 /obj/item/grenade/supermatter/on_update_icon()
-	..()
+	. = ..()
 	if(implode_at)
-		add_overlay(image(icon = 'icons/obj/machines/power/fusion.dmi', icon_state = "emfield_s1"))
+		add_overlay(image('icons/obj/machines/power/fusion.dmi', "emfield_s1"))
 
 /obj/item/grenade/supermatter/Process()
 	if(!isturf(loc))

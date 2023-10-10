@@ -8,8 +8,8 @@
 	extended_desc = "This program allows remote control and monitoring of shutoff valves."
 	read_access = list(access_atmospherics)
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	network_destination = "atmospheric control system"
-	requires_network_feature = NETWORK_SYSTEMCONTROL
 	category = PROG_ENG
 	size = 10
 
@@ -19,7 +19,7 @@
 /datum/nano_module/program/shutoff_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/list/data = host.initial_data()
 	var/list/z_valves = list()
-	var/list/zs = GetConnectedZlevels(get_z(nano_host()))
+	var/list/zs = SSmapping.get_connected_levels(get_z(nano_host()))
 
 	for(var/obj/machinery/atmospherics/valve/shutoff/S in shutoff_valves)
 		if(S.z in zs)

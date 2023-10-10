@@ -18,7 +18,6 @@ var/global/list/ventcrawl_machinery = list(
 	)
 
 /mob/living/var/list/icon/pipes_shown = list()
-/mob/living/var/last_played_vent
 /mob/living/var/is_ventcrawling = 0
 /mob/var/next_play_vent = 0
 
@@ -35,7 +34,7 @@ var/global/list/ventcrawl_machinery = list(
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(is_type_in_list(carried_item, can_enter_vent_with))
-		return !get_inventory_slot(carried_item)
+		return !get_equipped_slot_for_item(carried_item)
 
 /mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	return (carried_item in get_internal_organs()) || ..()
@@ -46,11 +45,11 @@ var/global/list/ventcrawl_machinery = list(
 		return TRUE
 	if(carried_item in get_external_organs())
 		return TRUE
-	if(carried_item in worn_underwear)
+	var/slot = get_equipped_slot_for_item(carried_item)
+	var/static/allowed_inventory_slots = list(slot_w_uniform_str, slot_gloves_str, slot_glasses_str, slot_wear_mask_str, slot_l_ear_str, slot_r_ear_str, slot_belt_str, slot_l_store_str, slot_r_store_str)
+	if(slot in allowed_inventory_slots)
 		return TRUE
-	if(carried_item in list(w_uniform, gloves, glasses, wear_mask, l_ear, r_ear, belt, l_store, r_store))
-		return TRUE
-	if(carried_item in get_held_items())
+	else if (slot || (carried_item in get_held_items()) || (carried_item in worn_underwear))
 		return carried_item.w_class <= ITEM_SIZE_NORMAL
 	return ..()
 

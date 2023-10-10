@@ -1,3 +1,6 @@
+/decl/chemical_reaction/recipe
+	abstract_type = /decl/chemical_reaction/recipe
+
 /decl/chemical_reaction/recipe/moonshine
 	name = "Moonshine"
 	result = /decl/material/liquid/ethanol/moonshine
@@ -107,7 +110,7 @@
 	result_amount = 2
 
 /decl/chemical_reaction/recipe/rum
-	name = "Rum"
+	name = "Dark Rum"
 	result = /decl/material/liquid/ethanol/rum
 	required_reagents = list(/decl/material/liquid/nutriment/sugar = 1, /decl/material/liquid/water = 1)
 	catalysts = list(/decl/material/liquid/enzyme = 5)

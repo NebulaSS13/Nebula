@@ -4,9 +4,10 @@
 	var/list/power_components = list() // this is an optimization, as power code is expensive.
 
 /obj/item/stock_parts/power
-	part_flags = PART_FLAG_QDEL | PART_FLAG_NODAMAGE // For integrated components, which are built from uncreated_component_parts. Use subtypes with this off for buildable ones.
+	part_flags = PART_FLAG_QDEL // For integrated components, which are built from uncreated_component_parts. Use subtypes with this off for buildable ones.
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "teslalink"
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/priority = 0            // Higher priority is used first
 	var/cached_channel
 

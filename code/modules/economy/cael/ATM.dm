@@ -10,6 +10,9 @@
 	icon_state = "atm"
 	anchored = 1
 	idle_power_usage = 10
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+
 	var/datum/money_account/authenticated_account
 	var/number_incorrect_tries = 0
 	var/previous_account_number = 0
@@ -18,7 +21,6 @@
 	var/ticks_left_timeout = 0
 	var/machine_id = ""
 	var/obj/item/card/id/held_card
-	var/editing_security_level = 0
 	var/view_screen = NO_SCREEN
 	var/account_security_level = 0
 	var/charge_stick_type = /obj/item/charge_stick
@@ -85,12 +87,12 @@
 
 		var/obj/item/card/id/idcard = I
 		if(!held_card)
-			if(!user.unEquip(idcard, src))
+			if(!user.try_unequip(idcard, src))
 				return
 			held_card = idcard
 			if(authenticated_account && held_card.associated_account_number != authenticated_account.account_number)
 				authenticated_account = null
-			attack_hand(user)
+			attack_hand_with_interaction_checks(user)
 
 	else if(authenticated_account)
 		if(istype(I,/obj/item/cash))
@@ -101,7 +103,7 @@
 				playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 50, 1)
 
 				to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
-				src.attack_hand(user)
+				attack_hand_with_interaction_checks(user)
 				qdel(I)
 
 		if(istype(I,/obj/item/charge_stick))
@@ -114,7 +116,7 @@
 					playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 50, 1)
 
 					to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
-					src.attack_hand(user)
+					attack_hand_with_interaction_checks(user)
 					qdel(I)
 	else
 		..()
@@ -365,23 +367,18 @@
 						to_chat(usr, "[html_icon(src)]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("balance_statement")
 				if(authenticated_account)
-					var/obj/item/paper/R = new(src.loc)
-					R.SetName("Account balance: [authenticated_account.owner_name]")
-					R.info = "<b>Automated Teller Account Statement</b><br><br>"
-					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
-					R.info += "<i>Account number:</i> [authenticated_account.account_number]<br>"
-					R.info += "<i>Balance:</i> [authenticated_account.format_value_by_currency(authenticated_account.money)]<br>"
-					R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
-					R.info += "<i>Service terminal ID:</i> [machine_id]<br>"
+					var/txt
+					txt = "<b>Automated Teller Account Statement</b><br><br>"
+					txt += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
+					txt += "<i>Account number:</i> [authenticated_account.account_number]<br>"
+					txt += "<i>Balance:</i> [authenticated_account.format_value_by_currency(authenticated_account.money)]<br>"
+					txt += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
+					txt += "<i>Service terminal ID:</i> [machine_id]<br>"
 
-					//stamp the paper
-					var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-					stampoverlay.icon_state = "paper_stamp-boss"
-					if(!R.stamped)
-						R.stamped = new
-					R.stamped += /obj/item/stamp
-					R.overlays += stampoverlay
-					R.stamps += "<HR><i>This paper has been stamped by the Automatic Teller Machine.</i>"
+					var/obj/item/paper/R = new(src.loc, null, txt, "Account balance: [authenticated_account.owner_name]")
+					R.apply_custom_stamp(
+						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR),
+						"by the [machine_id]")
 
 				if(prob(50))
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
@@ -389,41 +386,36 @@
 					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 			if ("print_transaction")
 				if(authenticated_account)
-					var/obj/item/paper/R = new(src.loc)
-					R.SetName("Transaction logs: [authenticated_account.owner_name]")
-					R.info = "<b>Transaction logs</b><br>"
-					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
-					R.info += "<i>Account number:</i> [authenticated_account.account_number]<br>"
-					R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
-					R.info += "<i>Service terminal ID:</i> [machine_id]<br>"
-					R.info += "<table border=1 style='width:100%'>"
-					R.info += "<tr>"
-					R.info += "<td><b>Date</b></td>"
-					R.info += "<td><b>Time</b></td>"
-					R.info += "<td><b>Target</b></td>"
-					R.info += "<td><b>Purpose</b></td>"
-					R.info += "<td><b>Value</b></td>"
-					R.info += "<td><b>Source terminal ID</b></td>"
-					R.info += "</tr>"
-					for(var/datum/transaction/T in authenticated_account.transaction_log)
-						R.info += "<tr>"
-						R.info += "<td>[T.date]</td>"
-						R.info += "<td>[T.time]</td>"
-						R.info += "<td>[T.get_target_name()]</td>"
-						R.info += "<td>[T.purpose]</td>"
-						R.info += "<td>[authenticated_account.format_value_by_currency(T.amount)]</td>"
-						R.info += "<td>[T.get_source_name()]</td>"
-						R.info += "</tr>"
-					R.info += "</table>"
+					var/txt
 
-					//stamp the paper
-					var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-					stampoverlay.icon_state = "paper_stamp-boss"
-					if(!R.stamped)
-						R.stamped = new
-					R.stamped += /obj/item/stamp
-					R.overlays += stampoverlay
-					R.stamps += "<HR><i>This paper has been stamped by the Automatic Teller Machine.</i>"
+					txt = "<b>Transaction logs</b><br>"
+					txt += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
+					txt += "<i>Account number:</i> [authenticated_account.account_number]<br>"
+					txt += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
+					txt += "<i>Service terminal ID:</i> [machine_id]<br>"
+					txt += "<table border=1 style='width:100%'>"
+					txt += "<tr>"
+					txt += "<td><b>Date</b></td>"
+					txt += "<td><b>Time</b></td>"
+					txt += "<td><b>Target</b></td>"
+					txt += "<td><b>Purpose</b></td>"
+					txt += "<td><b>Value</b></td>"
+					txt += "<td><b>Source terminal ID</b></td>"
+					txt += "</tr>"
+					for(var/datum/transaction/T in authenticated_account.transaction_log)
+						txt += "<tr>"
+						txt += "<td>[T.date]</td>"
+						txt += "<td>[T.time]</td>"
+						txt += "<td>[T.get_target_name()]</td>"
+						txt += "<td>[T.purpose]</td>"
+						txt += "<td>[authenticated_account.format_value_by_currency(T.amount)]</td>"
+						txt += "<td>[T.get_source_name()]</td>"
+						txt += "</tr>"
+					txt += "</table>"
+					var/obj/item/paper/R = new(src.loc, null, txt, "Transaction logs: [authenticated_account.owner_name]")
+					R.apply_custom_stamp(
+						overlay_image('icons/obj/bureaucracy.dmi', "paper_stamp-boss", flags = RESET_COLOR),
+						"by the [machine_id]")
 
 				if(prob(50))
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
@@ -438,7 +430,7 @@
 					else
 						var/obj/item/I = usr.get_active_hand()
 						if (istype(I, /obj/item/card/id))
-							if(!usr.unEquip(I, src))
+							if(!usr.try_unequip(I, src))
 								return
 							held_card = I
 				else

@@ -73,3 +73,15 @@
 
 /datum/fabricator_recipe/protolathe/stock/smes_coil_super_io
 	path = /obj/item/stock_parts/smes_coil/super_io
+
+/datum/fabricator_recipe/protolathe/stock/card_reader
+	path = /obj/item/stock_parts/item_holder/card_reader
+
+/datum/fabricator_recipe/protolathe/stock/disk_reader
+	path = /obj/item/stock_parts/item_holder/disk_reader
+
+/datum/fabricator_recipe/protolathe/stock/printer
+	path = /obj/item/stock_parts/printer
+
+/datum/fabricator_recipe/protolathe/stock/ammo_box
+	path = /obj/item/stock_parts/ammo_box

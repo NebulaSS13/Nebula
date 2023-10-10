@@ -7,7 +7,7 @@
 			to_chat(src, SPAN_WARNING("Your hands are full!"))
 			return FALSE
 	else if(get_active_hand())
-		to_chat(src, SPAN_WARNING("Your hand is full!"))
+		to_chat(src, SPAN_WARNING("Your [parse_zone(get_active_hand())] is full!"))
 		return FALSE
 	if(LAZYLEN(grabbed_by))
 		to_chat(src, SPAN_WARNING("You cannot start grappling while already being grappled!"))
@@ -41,7 +41,7 @@
 
 	face_atom(target)
 	var/obj/item/grab/grab
-	if(ispath(grab_tag, /decl/grab) && can_grab(target, zone_sel?.selecting, defer_hand = defer_hand) && target.can_be_grabbed(src, zone_sel?.selecting, defer_hand))
+	if(ispath(grab_tag, /decl/grab) && can_grab(target, get_target_zone(), defer_hand = defer_hand) && target.can_be_grabbed(src, get_target_zone(), defer_hand))
 		grab = new /obj/item/grab(src, target, grab_tag, defer_hand)
 
 	if(QDELETED(grab))

@@ -1,6 +1,5 @@
 /datum/map_template/ruin/exoplanet/hut
 	name = "hut"
-	id = "hut"
 	description = "A small and simple little research hut."
 	suffixes = list("hut/hut.dmm")
 	cost = 0.5

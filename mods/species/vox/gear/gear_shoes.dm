@@ -15,7 +15,8 @@
 		if(!ishuman(user))
 			return
 		var/mob/living/carbon/human/H = user
-		if(H.shoes != src)
+		var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
+		if(shoes != src)
 			to_chat(user, "You will have to put on the [src] before you can do that.")
 			return
 		item_flags |= ITEM_FLAG_NOSLIP

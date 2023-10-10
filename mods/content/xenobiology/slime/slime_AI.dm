@@ -62,7 +62,7 @@
 	. = ..()
 
 	if(attacked > 0)
-		attacked = Clamp(attacked--, 0, 50)
+		attacked = clamp(attacked--, 0, 50)
 
 	if(!slime || !body || HAS_STATUS(slime, STAT_CONFUSE))
 		return

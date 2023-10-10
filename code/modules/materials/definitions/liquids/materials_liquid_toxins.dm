@@ -72,7 +72,7 @@
 	metabolism = REM * 0.25
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
-/decl/material/liquid/venom/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/venom/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
 		SET_STATUS_MAX(M, STAT_CONFUSE, 3)
 	..()
@@ -88,7 +88,7 @@
 	toxicity_targets_organ = BP_HEART
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
-/decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	ADJ_STATUS(M, STAT_ASLEEP, 1)
 
@@ -105,11 +105,11 @@
 	taste_mult = 1.2
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
-/decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	ADJ_STATUS(M, STAT_CONFUSE, 1.5)
 
-/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/M)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -139,7 +139,7 @@
 	taste_mult = 1.2
 	exoplanet_rarity = MAT_RARITY_EXOTIC
 
-/decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.status_flags |= FAKEDEATH
 	M.adjustOxyLoss(3 * removed)
@@ -149,8 +149,8 @@
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
-/decl/material/liquid/zombiepowder/on_leaving_metabolism(atom/parent, metabolism_class)
-	var/mob/M = parent
+/decl/material/liquid/zombiepowder/on_leaving_metabolism(datum/reagents/metabolism/holder)
+	var/mob/M = holder?.my_atom
 	if(istype(M))
 		M.status_flags &= ~FAKEDEATH
 	. = ..()
@@ -209,7 +209,7 @@
 	taste_mult = 1.2
 	metabolism = REM * 0.25
 
-/decl/material/liquid/hair_remover/affect_touch(var/mob/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/hair_remover/affect_touch(var/mob/M, var/removed, var/datum/reagents/holder)
 	M.lose_hair()
 	holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 
@@ -227,10 +227,10 @@
 	exoplanet_rarity = MAT_RARITY_EXOTIC
 	var/amount_to_zombify = 5
 
-/decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	affect_blood(M, alien, removed * 0.5, holder)
+/decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
+	affect_blood(M, removed * 0.5, holder)
 
-/decl/material/liquid/zombie/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombie/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M

@@ -18,7 +18,7 @@
 
 /obj/item/pinpointer/nukeop/acquire_target()
 	if(locate_shuttle)
-		var/obj/machinery/computer/shuttle_control/multi/syndicate/home = locate()
+		var/obj/machinery/computer/shuttle_control/multi/mercenary/home = locate()
 		return weakref(home)
 	else
 		return ..()

@@ -40,7 +40,7 @@
 	damtype = BURN
 	force = 10
 
-/mob/living/simple_animal/shade/cultify()
+/mob/living/simple_animal/shade/on_defilement()
 	return
 
 /mob/living/simple_animal/shade/Life()

@@ -2,7 +2,7 @@
 /proc/shared_open_turf_attackhand(var/turf/target, var/mob/user)
 	for(var/atom/movable/M in target.below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attack_hand(user)
+			return M.attack_hand_with_interaction_checks(user)
 
 /proc/shared_open_turf_attackby(var/turf/target, obj/item/thing, mob/user)
 
@@ -27,7 +27,7 @@
 		return TRUE
 
 	//To lay cable.
-	if(isCoil(thing) && target.try_build_cable(thing, user))
+	if(IS_COIL(thing) && target.try_build_cable(thing, user))
 		return TRUE
 
 	for(var/atom/movable/M in target.below)
@@ -68,6 +68,7 @@
 	density = 0
 	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
 	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS
+	turf_flags = TURF_FLAG_BACKGROUND
 
 /turf/simulated/open/flooded
 	name = "open water"
@@ -106,6 +107,7 @@
 	return shared_open_turf_attackby(src, C, user)
 
 /turf/simulated/open/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return shared_open_turf_attackhand(src, user)
 
 //Most things use is_plating to test if there is a cover tile on top (like regular floors)
@@ -154,6 +156,7 @@
 	return shared_open_turf_attackby(src, C, user)
 
 /turf/exterior/open/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return shared_open_turf_attackhand(src, user)
 
 /turf/exterior/open/cannot_build_cable()

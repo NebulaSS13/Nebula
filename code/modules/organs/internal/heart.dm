@@ -35,7 +35,7 @@
 	..()
 
 /obj/item/organ/internal/heart/proc/handle_pulse()
-	if(BP_IS_PROSTHETIC(src))
+	if(BP_IS_PROSTHETIC(src) || !owner || owner.vital_organ_missing_time)
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
 
@@ -62,7 +62,7 @@
 		pulse_mod++
 
 	if(owner.status_flags & FAKEDEATH || GET_CHEMICAL_EFFECT(owner, CE_NOPULSE))
-		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
+		pulse = clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
 		return
 
 	//If heart is stopped, it isn't going to restart itself randomly.
@@ -78,7 +78,7 @@
 			return
 
 	// Pulse normally shouldn't go above PULSE_2FAST
-	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
+	pulse = clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
 
 	// If fibrillation, then it can be PULSE_THREADY
 	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
@@ -186,10 +186,7 @@
 			owner.drip(blood_max)
 
 /obj/item/organ/internal/heart/proc/is_working()
-	if(!is_usable())
-		return FALSE
-
-	return pulse > PULSE_NONE || BP_IS_PROSTHETIC(src) || (owner.status_flags & FAKEDEATH)
+	return is_usable() && (pulse > PULSE_NONE || BP_IS_PROSTHETIC(src) || (owner.status_flags & FAKEDEATH))
 
 /obj/item/organ/internal/heart/listen()
 	if(BP_IS_PROSTHETIC(src) && is_working())

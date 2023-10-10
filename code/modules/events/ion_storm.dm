@@ -8,7 +8,7 @@
 
 /datum/event/ionstorm/get_skybox_image()
 	if(!cloud_hueshift)
-		cloud_hueshift = color_rotation(rand(-3,3)*15)
+		cloud_hueshift = color_matrix_rotate_hue(rand(-3,3)*15)
 	var/image/res = overlay_image('icons/skybox/ionbox.dmi', "ions", cloud_hueshift, RESET_COLOR)
 	res.blend_mode = BLEND_ADD
 	return res
@@ -143,16 +143,14 @@
 		return pick(players)
 	return default_if_none
 
-/datum/event/ionstorm/proc/get_random_species_name(var/default_if_none = "Humans")
-	var/list/species = list()
-	for(var/S in typesof(/decl/species))
-		var/decl/species/specimen = S
-		if(initial(specimen.spawn_flags) & SPECIES_CAN_JOIN)
-			species += initial(specimen.name_plural)
-
-	if(species.len)
-		return pick(species.len)
-	return default_if_none
+/datum/event/ionstorm/proc/get_random_species_name(var/default_if_none)
+	if(!default_if_none)
+		default_if_none = global.using_map.default_species
+	. = length(global.all_species) ? pick(global.all_species) : default_if_none
+	if(.)
+		var/decl/species/species = all_species[.]
+		if(species)
+			. = species.name_plural
 
 /datum/event/ionstorm/proc/get_random_language(var/mob/living/silicon/S)
 	var/list/languages = S.speech_synthesizer_langs.Copy()

@@ -51,7 +51,7 @@
 			pref.f_style = accessory
 			break
 
-	// Get markings type. 
+	// Get markings type.
 	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
 	for(var/marking in pref.body_markings)
 		for(var/accessory in all_sprite_accessories)
@@ -134,6 +134,7 @@
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
+	. += "<a href='?src=\ref[src];random=1'>Randomize Appearance</A><br>"
 
 	if(has_flag(mob_species, HAS_A_SKIN_TONE))
 		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_species.max_skin_tone()]</a><br>"
@@ -166,7 +167,7 @@
 	. += "<td><a href='?src=\ref[src];hair_style=1'>[GET_DECL(pref.h_style)]</a></td>"
 	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<font face='fixedsys' size='3' color='[pref.hair_colour]'><table style='display:inline;' bgcolor='[pref.hair_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];hair_color=1'>Change</a>"
+		. += "[COLORED_SQUARE(pref.hair_colour)] <a href='?src=\ref[src];hair_color=1'>Change</a>"
 	. += "</td>"
 	. += "<tr>"
 	. += "</tr>"
@@ -174,18 +175,18 @@
 	. += "<td><a href='?src=\ref[src];facial_style=1'>[GET_DECL(pref.f_style)]</a></td>"
 	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<font face='fixedsys' size='3' color='[pref.facial_hair_colour]'><table  style='display:inline;' bgcolor='[pref.facial_hair_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];facial_color=1'>Change</a>"
+		. += "[COLORED_SQUARE(pref.facial_hair_colour)] <a href='?src=\ref[src];facial_color=1'>Change</a>"
 	. += "</td>"
 	. += "</tr>"
 	if(has_flag(mob_species, HAS_EYE_COLOR))
 		. += "<tr>"
 		. += "<td><b>Eyes</b></td>"
-		. += "<td><font face='fixedsys' size='3' color='[pref.eye_colour]'><table  style='display:inline;' bgcolor='[pref.eye_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "<td>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
 		. += "</tr>"
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
 		. += "<tr>"
 		. += "<td><b>Body</b></td>"
-		. += "<td><font face='fixedsys' size='3' color='[pref.skin_colour]'><table style='display:inline;' bgcolor='[pref.skin_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "<td>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
 		. += "</tr>"
 	. += "</table>"
 
@@ -195,7 +196,7 @@
 		var/decl/sprite_accessory/mark = GET_DECL(M)
 		. += "<tr>"
 		. += "<td>[mark.name]</td><td><a href='?src=\ref[src];marking_remove=\ref[mark]'>Remove</a></td>"
-		. += "<td><font face='fixedsys' size='3' color='[pref.body_markings[M]]'><table style='display:inline;' bgcolor='[pref.body_markings[M]]'><tr><td>__</td></tr></table></font><a href='?src=\ref[src];marking_color=\ref[mark]'>Change</a></td>"
+		. += "<td>[COLORED_SQUARE(pref.body_markings[M])] <a href='?src=\ref[src];marking_color=\ref[mark]'>Change</a></td>"
 		. += "</tr>"
 	. += "<tr><td colspan = 3><a href='?src=\ref[src];marking_style=1'>Add marking</a></td></tr>"
 	. += "</table>"
@@ -304,11 +305,14 @@
 			disallowed_markings |= mark_style.disallows
 
 		var/list/usable_markings = list()
-		for(var/M in (subtypesof(/decl/sprite_accessory/marking) - pref.body_markings))
-			var/decl/sprite_accessory/S = GET_DECL(M)
-			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_root_species_name() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
+		var/list/all_markings = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
+		for(var/M in all_markings)
+			if(M in pref.body_markings)
 				continue
-			usable_markings += S
+			var/decl/sprite_accessory/accessory = all_markings[M]
+			var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype)
+			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype.bodytype_flag, pref.gender))
+				usable_markings += accessory
 
 		var/decl/sprite_accessory/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
 		if(new_marking && CanUseTopic(user))
@@ -322,7 +326,7 @@
 
 	else if(href_list["marking_color"])
 		var/decl/sprite_accessory/M = locate(href_list["marking_color"])
-		var/mark_color = input(user, "Choose the [M] color: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.body_markings[M]) as color|null
+		var/mark_color = input(user, "Choose the [M] color: ", CHARACTER_PREFERENCE_INPUT_TITLE, pref.body_markings[M.type]) as color|null
 		if(mark_color && CanUseTopic(user))
 			pref.body_markings[M.type] = "[mark_color]"
 			return TOPIC_REFRESH_UPDATE_PREVIEW

@@ -9,11 +9,7 @@
 	board_type = "wall"
 	origin_tech = "{'programming':1,'engineering':1}"
 	req_components = list()
-	additional_spawn_components = list(
-		/obj/item/stock_parts/console_screen = 1,
-		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/power/apc/buildable = 1
-	)
+	additional_spawn_components = null
 
 /obj/item/stock_parts/circuitboard/air_alarm
 	name = "circuitboard (air alarm)"
@@ -23,11 +19,7 @@
 	board_type = "wall"
 	origin_tech = "{'programming':1,'engineering':1}"
 	req_components = list()
-	additional_spawn_components = list(
-		/obj/item/stock_parts/console_screen = 1,
-		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/power/apc/buildable = 1
-	)
+	additional_spawn_components = null
 
 /obj/item/stock_parts/circuitboard/apc
 	name = "circuitboard (area power controller)"
@@ -78,16 +70,17 @@
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/power/apc/buildable = 1,
 	)
 	buildtype_select = TRUE
 
 /obj/item/stock_parts/circuitboard/airlock_controller/get_buildable_types()
+	var/static/list/AirlockControllerSubtypes = subtypesof(/obj/machinery/embedded_controller/radio) | subtypesof(/obj/machinery/embedded_controller/radio/airlock)
 	. = list()
-	for(var/path in typesof(/obj/machinery/embedded_controller/radio))
+	for(var/path in AirlockControllerSubtypes)
 		var/obj/machinery/embedded_controller/radio/controller = path
 		var/base_type = initial(controller.base_type) || path
 		. |= base_type
+	. |= /obj/machinery/dummy_airlock_controller //Let us build the dummy controller
 
 /obj/item/stock_parts/circuitboard/camera
 	name = "circuitboard (camera)"

@@ -3,6 +3,7 @@
 
 /decl/loadout_option/clothing
 	category = /decl/loadout_category/clothing
+	abstract_type = /decl/loadout_option/clothing
 	slot = slot_tie_str
 
 /decl/loadout_option/clothing/flannel

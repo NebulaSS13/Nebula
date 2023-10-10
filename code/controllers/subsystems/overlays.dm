@@ -179,7 +179,7 @@ SUBSYSTEM_DEF(overlays)
 	if(NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE
 
-/atom/proc/set_overlays(list/overlays_list, priority = FALSE)	// Sets overlays to a list, equivalent to cut_overlays() + add_overlays().
+/atom/proc/set_overlays(list/overlays_list, priority = FALSE)	// Sets overlays to a list, equivalent to cut_overlays() + add_overlay().
 	if (!overlays_list)
 		return
 

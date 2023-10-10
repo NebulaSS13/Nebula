@@ -43,7 +43,7 @@ Class Variables:
 		 BROKEN:1 -- Machine is broken
 		 NOPOWER:2 -- No power is being supplied to machine.
 		 MAINT:8 -- machine is currently under going maintenance.
-		 EMPED:16 -- temporary broken by EMP pulse
+		 EMPED:16 -- temporary broken by EMP
 
 Class Procs:
    New()					 'game/machinery/machine.dm'
@@ -85,6 +85,7 @@ Class Procs:
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY
 	)
+	abstract_type = /obj/machinery
 
 	var/stat = 0
 	var/waterproof = TRUE
@@ -324,12 +325,19 @@ Class Procs:
 /obj/machinery/proc/state(var/msg)
 	audible_message(SPAN_NOTICE("[html_icon(src)] [msg]"), null, 2)
 
-/obj/machinery/proc/ping(text=null)
+/obj/machinery/proc/ping(var/text)
 	if (!text)
 		text = "\The [src] pings."
 
 	state(text, "blue")
-	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+	playsound(src.loc, 'sound/machines/ping.ogg', 50, FALSE)
+
+/obj/machinery/proc/buzz(var/text)
+	if (!text)
+		text = "\The [src] buzzes."
+
+	state(SPAN_WARNING(text), "red")
+	playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, FALSE)
 
 /obj/machinery/proc/shock(mob/user, prb)
 	if(inoperable())
@@ -401,7 +409,7 @@ Class Procs:
 		var/line = "<span class='notice'>	[C.name]</span>"
 		if(!C.health)
 			line = "<span class='warning'>	[C.name] (destroyed)</span>"
-		else if(C.health < 0.75 * C.max_health)
+		else if(C.get_percent_health() < 75)
 			line = "<span class='notice'>	[C.name] (damaged)</span>"
 		to_chat(user, line)
 	for(var/path in uncreated_component_parts)
@@ -416,7 +424,7 @@ Class Procs:
 		to_chat(user, "It is missing a screen, making it hard to interact with.")
 	else if(stat & NOINPUT)
 		to_chat(user, "It is missing any input device.")
-	
+
 	if((stat & NOPOWER))
 		if(interact_offline)
 			to_chat(user, "It is not receiving <a href ='?src=\ref[src];power_text=1'>power</a>.")
@@ -436,7 +444,7 @@ Class Procs:
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids.total_volume > FLUID_DEEP))
+	if(!QDELETED(src) && !(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids?.total_volume > FLUID_DEEP))
 		explosion_act(3)
 
 /obj/machinery/Move()
@@ -484,3 +492,12 @@ Class Procs:
 
 /obj/machinery/get_matter_amount_modifier()
 	. = ..() * HOLLOW_OBJECT_MATTER_MULTIPLIER // machine matter is largely just the frame, and the components contribute most of the matter/value.
+
+///Handles updating stock parts and internal id tag when changing it to something else
+/obj/machinery/proc/set_id_tag(var/new_id_tag)
+	id_tag = new_id_tag
+	//#TODO: Add handling for components, when we're sure it will work for any kind of machinery. Some machines do not use the same id_tag on receiver and transmitters for example.
+
+// Make sure that mapped subtypes get the right codex entry.
+/obj/machinery/get_codex_value()
+	return base_type || ..()

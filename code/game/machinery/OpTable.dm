@@ -1,5 +1,5 @@
 /obj/machinery/optable
-	name = "Operating Table"
+	name = "operating table"
 	desc = "Used for advanced medical procedures."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "table2-idle"
@@ -14,7 +14,6 @@
 
 	var/suppressing = FALSE
 	var/mob/living/victim
-	var/strapped = 0.0
 	var/obj/machinery/computer/operating/computer = null
 
 /obj/machinery/optable/Initialize()
@@ -44,11 +43,6 @@
 		updateUsrDialog()
 
 /obj/machinery/optable/physical_attack_hand(var/mob/user)
-	if(MUTATION_HULK in user.mutations)
-		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
-		src.set_density(0)
-		qdel(src)
-		return TRUE
 
 	if(!victim)
 		to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")
@@ -76,7 +70,7 @@
 /obj/machinery/optable/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()
 	if(!.)
-		if(istype(dropping, /obj/item) && user.get_active_hand() == dropping && user.unEquip(dropping, loc))
+		if(istype(dropping, /obj/item) && user.get_active_hand() == dropping && user.try_unequip(dropping, loc))
 			return FALSE
 		if(isliving(dropping) && check_table(dropping))
 			take_victim(dropping, user)

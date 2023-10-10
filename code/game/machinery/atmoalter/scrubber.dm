@@ -16,7 +16,7 @@
 	power_losses = 150
 
 	var/minrate = 0
-	var/maxrate = 10 * ONE_ATMOSPHERE
+	var/maxrate = 10 ATM
 
 	var/list/scrubbing_gas
 
@@ -24,7 +24,7 @@
 	. = ..()
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
-		for(var/g in subtypesof(/decl/material/gas))
+		for(var/g in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
 			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
 				scrubbing_gas += g
 
@@ -128,7 +128,7 @@
 		. = TOPIC_REFRESH
 	if (href_list["volume_adj"])
 		var/diff = text2num(href_list["volume_adj"])
-		volume_rate = Clamp(volume_rate+diff, minrate, maxrate)
+		volume_rate = clamp(volume_rate+diff, minrate, maxrate)
 		. = TOPIC_REFRESH
 
 	if(.)
@@ -172,21 +172,17 @@
 	name = "[name] (ID [id])"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(mob/user)
-	if((. = ..()))
-		return
-	to_chat(user, "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>")
-	return TRUE
+	. = ..() // Buckling, climbers, grab interactions, component attack_hand; unlikely to return true.
+	if(!.)
+		to_chat(user, SPAN_WARNING("You can't directly interact with this machine. Use the scrubber control console."))
+		return TRUE
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
-	overlays.Cut()
-
-	if((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER|BROKEN)))
-		icon_state = "scrubber:1"
-	else
-		icon_state = "scrubber:0"
+	cut_overlays()
+	icon_state = "scrubber:[!!((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER|BROKEN)))]"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I, var/mob/user)
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, "<span class='warning'>Turn \the [src] off first!</span>")
 			return
@@ -208,7 +204,7 @@
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I, var/mob/user)
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		to_chat(user, "<span class='warning'>The bolts are too tight for you to unscrew!</span>")
 		return
 

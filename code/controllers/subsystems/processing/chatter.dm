@@ -1,5 +1,5 @@
 PROCESSING_SUBSYSTEM_DEF(radiochatter)
-	name = "RadioChatter"
+	name = "Radio Chatter"
 	priority = SS_PRIORITY_DEFAULT
 	init_order = SS_INIT_MISC_LATE
 	wait = 1 SECOND

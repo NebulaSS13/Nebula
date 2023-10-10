@@ -5,7 +5,7 @@
 	return ..()
 
 /obj/item/gun/equipped(var/mob/living/user, var/slot)
-	if(istype(user) && !(slot in user.held_item_slots))
+	if(istype(user) && !(slot in user.get_held_item_slots()))
 		user.stop_aiming(src)
 	return ..()
 

@@ -14,17 +14,22 @@
 	. = ..()
 	create_storage()
 
+/obj/item/clothing/accessory/storage/Destroy()
+	QDEL_NULL(hold)
+	return ..()
+
 /obj/item/clothing/accessory/storage/proc/create_storage()
 	hold = new/obj/item/storage/internal/pockets(src, slots, max_w_class)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit) && hold)	//if we are part of a suit
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE) || !hold)
+		return ..()
+	if(istype(loc, /obj/item/clothing))
 		hold.open(user)
-		return
-
-	if(hold && hold.handle_attack_hand(user))	//otherwise interact as a regular storage item
-		..(user)
+		return TRUE
+	if(hold.handle_attack_hand(user))	//otherwise interact as a regular storage item
+		return ..(user)
+	return TRUE
 
 /obj/item/clothing/accessory/storage/handle_mouse_drop(atom/over, mob/user)
 	if(!istype(loc, /obj/item/clothing) && hold?.handle_storage_internal_mouse_drop(user, over))
@@ -110,11 +115,12 @@
 	update_icon()
 
 /obj/item/clothing/accessory/storage/knifeharness/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	var/contents_count = min(length(contents), 2)
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
 		icon_state = "[icon_state]-[contents_count]"
-	
+
 /obj/item/clothing/accessory/storage/knifeharness/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)
 		var/contents_count = min(length(contents), 2)
@@ -140,6 +146,7 @@
 		/obj/item/chems/syringe,
 		/obj/item/chems/hypospray,
 		/obj/item/chems/hypospray/autoinjector,
+		/obj/item/chems/inhaler,
 		/obj/item/syringe_cartridge,
 		/obj/item/plastique,
 		/obj/item/clothing/mask/smokable,

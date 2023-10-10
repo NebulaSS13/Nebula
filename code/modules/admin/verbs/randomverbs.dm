@@ -234,13 +234,13 @@
 	if(!usr || !usr.client)
 		return
 	if(!usr.client.holder)
-		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: You don't have permission to do this.</font>")
+		to_chat(usr, SPAN_WARNING("Error: cmd_admin_mute: You don't have permission to do this."))
 		return
 	if(!M.client)
-		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: This mob doesn't have a client tied to it.</font>")
+		to_chat(usr, SPAN_WARNING("Error: cmd_admin_mute: This mob doesn't have a client tied to it."))
 		return
 	if(M.client.holder)
-		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>")
+		to_chat(usr, SPAN_WARNING("Error: cmd_admin_mute: You cannot mute an admin/mod."))
 		return
 
 	var/muteunmute
@@ -437,7 +437,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			break
 
 	if(!G_found)//If a ghost was not found.
-		to_chat(usr, "<font color='red'>There is no active key like that in the game or the person is not currently a ghost.</font>")
+		to_chat(usr, SPAN_WARNING("There is no active key like that in the game or the person is not currently a ghost."))
 		return
 
 	var/mob/living/carbon/human/new_character = new(pick(global.latejoin_locations))//The mob being spawned.
@@ -448,7 +448,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if(record_found)//If they have a record we can determine a few things.
 		new_character.real_name = record_found.get_name()
-		new_character.set_gender(record_found.get_sex())
+		new_character.set_gender(record_found.get_gender())
 		new_character.set_age(record_found.get_age())
 		new_character.b_type = record_found.get_bloodtype()
 	else

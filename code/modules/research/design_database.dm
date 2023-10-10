@@ -14,6 +14,9 @@ var/global/list/default_initial_tech_levels
 	icon_state = "blackbox"
 	density = TRUE
 	anchored = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/initial_network_id
 	var/initial_network_key
@@ -38,7 +41,7 @@ var/global/list/default_initial_tech_levels
 		var/list/tech_data = list()
 		for(var/tech in disk.stored_tech)
 			var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-			tech_data += list(list("field" = field.name, "level" = "[disk.stored_tech[tech]].0 GQ"))
+			tech_data += list(list("field" = field.name, "desc" = field.desc, "level" = "[disk.stored_tech[tech]].0 GQ"))
 		data["disk_tech"] = tech_data
 	else
 		data["disk_name"] = "no disk loaded"
@@ -46,7 +49,7 @@ var/global/list/default_initial_tech_levels
 	var/list/show_tech_levels = list()
 	for(var/tech in tech_levels)
 		var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-		show_tech_levels += list(list("field" = field.name, "level" = "[tech_levels[tech]].0 GQ"))
+		show_tech_levels += list(list("field" = field.name, "desc" = field.desc, "level" = "[tech_levels[tech]].0 GQ"))
 	data["tech_levels"] = show_tech_levels
 
 	data["network_push"] = (sync_policy & SYNC_PUSH_NETWORK) ? "on" : "off"
@@ -87,7 +90,7 @@ var/global/list/default_initial_tech_levels
 		tech_levels = get_default_initial_tech_levels()
 	..()
 	design_databases += src
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 	update_icon()
 	. = INITIALIZE_HINT_LATELOAD
 
@@ -109,7 +112,7 @@ var/global/list/default_initial_tech_levels
 
 /obj/machinery/design_database/Process()
 	..()
-	if((stat & BROKEN) || (stat & NOPOWER) || !use_power || !powered())
+	if((stat & BROKEN) || (stat & NOPOWER) || !use_power)
 		return
 
 	// Read or write from a loaded disk.
@@ -153,7 +156,7 @@ var/global/list/default_initial_tech_levels
 		if(disk)
 			to_chat(user, SPAN_WARNING("\The [src] already has a disk inserted."))
 			return
-		if(user.unEquip(I, src))
+		if(user.try_unequip(I, src))
 			visible_message("\The [user] slots \the [I] into \the [src].")
 			visible_message(SPAN_NOTICE("\The [src]'s I/O light begins to blink."))
 			disk = I
@@ -175,7 +178,19 @@ var/global/list/default_initial_tech_levels
 		return TRUE
 	return FALSE
 
-/obj/machinery/design_database/AltClick(mob/user)
-	if(disk)
-		eject_disk(user)
+/obj/machinery/design_database/get_alt_interactions(var/mob/user)
 	. = ..()
+	LAZYADD(., /decl/interaction_handler/remove_disk/designs)
+
+/decl/interaction_handler/remove_disk/designs
+	expected_target_type = /obj/machinery/design_database
+
+/decl/interaction_handler/remove_disk/designs/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/machinery/design_database/D = target
+		. = !!D.disk
+
+/decl/interaction_handler/remove_disk/designs/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/design_database/D = target
+	D.eject_disk(user)

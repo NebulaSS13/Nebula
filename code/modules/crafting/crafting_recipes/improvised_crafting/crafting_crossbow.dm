@@ -4,6 +4,7 @@
 	icon_state = "crossbowframe0"
 	item_state = "crossbow-solid"
 	icon = 'icons/obj/crafting_icons.dmi'
+	material = /decl/material/solid/metal/steel
 
 /decl/crafting_stage/material/crossbow_rods
 	descriptor = "crossbow"

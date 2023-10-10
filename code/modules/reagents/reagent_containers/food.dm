@@ -20,6 +20,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	w_class = ITEM_SIZE_SMALL
 
+	var/cooked_food = FALSE // Indicates the food should give a positive stress effect on eating. This is set to true if the food is created by a recipe.
 	var/bitesize = 1
 	var/bitecount = 0
 	var/slice_path
@@ -38,14 +39,21 @@
 /obj/item/chems/food/standard_pour_into(mob/user, atom/target)
 	return FALSE
 
+/obj/item/chems/food/update_container_name()
+	return FALSE
+
+/obj/item/chems/food/update_container_desc()
+	return FALSE
+
 /obj/item/chems/food/Initialize()
 	.=..()
-	if(nutriment_amt)
-		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
 	amount_per_transfer_from_this = bitesize
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/chems/food/proc/On_Consume(var/mob/M)
+	if(isliving(M) && cooked_food)
+		var/mob/living/eater = M
+		eater.add_stressor(/datum/stressor/ate_cooked_food, 15 MINUTES)
 	if(!reagents.total_volume)
 		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
 		M.drop_item()
@@ -164,7 +172,7 @@
 		if (hide_item)
 			if (W.w_class >= src.w_class || is_robot_module(W) || istype(W,/obj/item/chems/condiment))
 				return
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 
 			to_chat(user, "<span class='warning'>You slip \the [W] inside \the [src].</span>")
@@ -209,7 +217,7 @@
 
 	var/obj/item/chems/food/result = new create_type()
 	//If the snack was in your hands, the result will be too
-	if (src in user.held_item_slots)
+	if (src in user.get_held_item_slots())
 		user.drop_from_inventory(src)
 		user.put_in_hands(result)
 	else
@@ -265,8 +273,17 @@
 	update_icon()
 
 /obj/item/chems/food/on_update_icon()
-	cut_overlays()
+	. = ..()
+	//Since other things that don't have filling override this, slap it into its own proc to avoid the overhead of scanning through the icon file
+	apply_filling_overlay() //#TODO: Maybe generalise food item icons.
+
+/obj/item/chems/food/proc/apply_filling_overlay()
 	if(check_state_in_icon("[icon_state]_filling", icon))
-		var/image/I = image(icon, "[icon_state]_filling")
-		I.color = filling_color
-		add_overlay(I)
+		add_overlay(overlay_image(icon, "[icon_state]_filling", filling_color))
+
+//Since we automatically create some reagents types for the nutriments, make sure we call this proc when overriding it
+/obj/item/chems/food/populate_reagents()
+	. = ..()
+	SHOULD_CALL_PARENT(TRUE)
+	if(nutriment_amt)
+		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)

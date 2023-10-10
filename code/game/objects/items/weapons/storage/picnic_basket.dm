@@ -8,23 +8,20 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	attack_verb = list("picnics")
+	material = /decl/material/solid/plastic
+	var/tmp/filled = FALSE
 
-	var/filled = FALSE
-
-/obj/item/storage/picnic_basket/Initialize()
-	. = ..()
-	if(filled)
-		var/list/lunches = lunchables_lunches()
-		var/lunch = lunches[pick(lunches)]
-		new lunch(src)
-
-		var/list/snacks = lunchables_snacks()
-		var/snack = snacks[pick(snacks)]
-		new snack(src)
-
-		var/list/drinks = lunchables_drinks()
-		var/drink = drinks[pick(drinks)]
-		new drink(src)
+/obj/item/storage/picnic_basket/WillContain()
+	if(!filled)
+		return
+	var/list/lunches = lunchables_lunches()
+	var/list/snacks  = lunchables_snacks()
+	var/list/drinks  = lunchables_drinks()
+	return list(
+		lunches[pick(lunches)],
+		snacks[pick(snacks)],
+		drinks[pick(drinks)],
+	)
 
 /obj/item/storage/picnic_basket/filled
 	filled = TRUE

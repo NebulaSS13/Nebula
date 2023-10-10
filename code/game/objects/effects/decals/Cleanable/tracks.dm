@@ -21,7 +21,6 @@ var/global/list/image/fluidtrack_cache=list()
 	var/basecolor=COLOR_BLOOD_HUMAN
 	var/wet=0
 	var/fresh=1
-	var/crusty=0
 	var/image/overlay
 
 /datum/fluidtrack/New(_direction,_color,_wet)

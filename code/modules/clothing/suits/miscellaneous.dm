@@ -130,7 +130,9 @@
 	if(slot == slot_wear_suit_str)
 		if(iscarbon(user))
 			var/mob/living/carbon/C = user
-			C.drop_from_inventory(C.handcuffed)
+			var/obj/item/cuffs = C.get_equipped_item(slot_handcuffed_str)
+			if(cuffs)
+				C.try_unequip(cuffs)
 		user.drop_held_items()
 
 /obj/item/clothing/suit/ianshirt
@@ -143,11 +145,10 @@
 /obj/item/clothing/suit/leathercoat
 	name = "longcoat"
 	icon = 'icons/clothing/suit/leathercoat.dmi'
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	material_armor_multiplier = 0.8
 	material = /decl/material/solid/leather
-	var/shine 
+	var/shine
 	var/artificial_shine
 
 /obj/item/clothing/suit/leathercoat/set_material(var/new_material)
@@ -304,7 +305,7 @@
 	name = "Santa's hat"
 	desc = "Ho ho ho. Merrry X-mas!"
 	icon = 'icons/clothing/head/santa.dmi'
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCK_ALL_HAIR //Has a fake beard
 
 /obj/item/clothing/suit/santa
 	name = "Santa's suit"

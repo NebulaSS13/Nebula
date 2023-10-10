@@ -11,6 +11,8 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	icon = 'icons/obj/drink_glasses/square.dmi'
 	icon_state = null
 	base_icon = "square" // Base icon name
+	/// The icon state prefix used for overlay/addon sprites. If unset, defaults to base_icon.
+	var/overlay_base_icon = null
 	filling_states = @"[20,40,60,80,100]"
 	volume = 30
 	material = /decl/material/solid/glass
@@ -29,9 +31,9 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME | PRESENTATION_FLAG_DESC
 	temperature_coefficient = 4
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 
 	var/custom_name
 	var/custom_desc
@@ -95,77 +97,103 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	. = ..()
 	if(!icon_state)
 		icon_state = base_icon
+	if(!overlay_base_icon)
+		overlay_base_icon = base_icon
 
 /obj/item/chems/drinks/glass2/get_base_name()
 	. = base_name
 
+/obj/item/chems/drinks/glass2/get_base_desc()
+	. = custom_desc || ..()
+
 /obj/item/chems/drinks/glass2/on_reagent_change()
 	temperature_coefficient = 4 / max(1, reagents.total_volume)
 	..()
-	var/decl/material/R = reagents.get_primary_reagent_decl()
-	desc = R?.glass_desc || custom_desc || initial(desc)
 
 /obj/item/chems/drinks/glass2/proc/can_add_extra(obj/item/glass_extra/GE)
-	if(!("[base_icon]_[GE.glass_addition]left" in icon_states(icon)))
+	if(!("[overlay_base_icon]_[GE.glass_addition]left" in icon_states(icon)))
 		return 0
-	if(!("[base_icon]_[GE.glass_addition]right" in icon_states(icon)))
+	if(!("[overlay_base_icon]_[GE.glass_addition]right" in icon_states(icon)))
 		return 0
 
 	return 1
 
+/obj/item/chems/drinks/glass2/examine(mob/user, distance)
+	. = ..()
+	if(!istype(user) || distance > 1)
+		return
+	var/list/extra_text
+	for(var/extra in extras)
+		if(istype(extra, /obj/item/glass_extra))
+			var/obj/item/glass_extra/GE = extra
+			LAZYADD(extra_text, GE.glass_desc)
+		else if(istype(extra, /obj/item/chems/food/fruit_slice))
+			LAZYADD(extra_text, "There is \a [extra] on the rim.")
+	if(length(extra_text))
+		to_chat(user, SPAN_NOTICE(jointext(extra_text," ")))
+
+
 /obj/item/chems/drinks/glass2/proc/get_filling_overlay(amount, overlay)
 	var/image/I = new()
-	if(!filling_icons_cache["[base_icon][amount][overlay]"])
-		var/icon/base = new/icon(icon, "[base_icon][amount]")
+	if(!filling_icons_cache["[overlay_base_icon][amount][overlay]"])
+		var/icon/base = new/icon(icon, "[overlay_base_icon][amount]")
 		if(overlay)
 			var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', overlay)
 			base.Blend(extra, ICON_MULTIPLY)
-		filling_icons_cache["[base_icon][amount][overlay]"] = image(base)
-	I.appearance = filling_icons_cache["[base_icon][amount][overlay]"]
+		filling_icons_cache["[overlay_base_icon][amount][overlay]"] = image(base)
+	I.appearance = filling_icons_cache["[overlay_base_icon][amount][overlay]"]
 	return I
 
 /obj/item/chems/drinks/glass2/on_update_icon()
+	. = ..()
 	underlays.Cut()
-	overlays.Cut()
+	icon_state = base_icon
 
 	if (LAZYLEN(reagents?.reagent_volumes) > 0)
 		var/decl/material/R = reagents.get_primary_reagent_decl()
+		if(R.cocktail_ingredient)
+			for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(R.type))
+				if(cocktail.matches(src) && cocktail.has_sprite(src) && cocktail.can_use_sprite(src))
+					icon_state = null // hide the main sprite
+					add_overlay(image(cocktail.glass_icon, cocktail.glass_icon_state))
+					return // don't do the rest--todo semiprocedural cocktail sprites with fizz/ice/vapor
+
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
 
 		var/amnt = get_filling_state()
 
 		if(has_ice())
-			over_liquid |= image(icon, src, "[base_icon][amnt]_ice")
+			over_liquid |= image(icon, src, "[overlay_base_icon][amnt]_ice")
 
 		if(has_fizz())
 			over_liquid |= get_filling_overlay(amnt, "fizz")
 
 		if(has_vapor())
-			over_liquid |= image(icon, src, "[base_icon]_vapor")
+			over_liquid |= image(icon, src, "[overlay_base_icon]_vapor")
 
 		for(var/S in R.glass_special)
-			if("[base_icon]_[S]" in icon_states(icon))
-				under_liquid |= image(icon, src, "[base_icon]_[S]")
-			else if("[base_icon][amnt]_[S]" in icon_states(icon))
-				over_liquid |= image(icon, src, "[base_icon][amnt]_[S]")
+			if("[overlay_base_icon]_[S]" in icon_states(icon))
+				under_liquid |= image(icon, src, "[overlay_base_icon]_[S]")
+			else if("[overlay_base_icon][amnt]_[S]" in icon_states(icon))
+				over_liquid |= image(icon, src, "[overlay_base_icon][amnt]_[S]")
 
 		underlays += under_liquid
 
 		var/image/filling = get_filling_overlay(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
 		if(filling_overlayed)
-			overlays += filling
+			add_overlay(filling)
 		else
 			underlays += filling
 
-		overlays += over_liquid
+		add_overlay(over_liquid)
 
 	var/side = "left"
 	for(var/item in extras)
 		if(istype(item, /obj/item/glass_extra))
 			var/obj/item/glass_extra/GE = item
-			var/image/I = image(icon, src, "[base_icon]_[GE.glass_addition][side]")
+			var/image/I = image(icon, src, "[overlay_base_icon]_[GE.glass_addition][side]")
 			I.color = GE.color
 			underlays += I
 		else if(rim_pos && istype(item, /obj/item/chems/food/fruit_slice))
@@ -203,3 +231,10 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	. = ..()
 	if(old_temp != temperature)
 		update_icon()
+
+/obj/item/chems/drinks/glass2/physically_destroyed(var/skip_qdel)
+	reagents.splash(loc, reagents.total_volume)
+	if(istype(material))
+		playsound(src, "shatter", 30, 1)
+		material.place_shards(get_turf(src), w_class)
+	return ..()

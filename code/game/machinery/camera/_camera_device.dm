@@ -10,8 +10,9 @@
 	var/view_range = 7
 
 	var/xray_enabled = FALSE
+	has_commands = TRUE
 
-/datum/extension/network_device/camera/New(datum/holder, n_id, n_key, c_type, autojoin, list/preset_channels, camera_name, camnet_enabled = TRUE, req_connection = TRUE)
+/datum/extension/network_device/camera/New(datum/holder, n_id, n_key, r_type, autojoin, list/preset_channels, camera_name, camnet_enabled = TRUE, req_connection = TRUE)
 	if(length(preset_channels))
 		channels = preset_channels.Copy()
 	. = ..()
@@ -21,6 +22,7 @@
 	display_name = camera_name
 
 /datum/extension/network_device/camera/post_construction()
+	. = ..()
 	if(cameranet_enabled)
 		cameranet.add_source(holder)
 
@@ -100,7 +102,7 @@
 		added_channels = list(added_channels)
 	added_channels -= channels
 	channels += added_channels
-	var/datum/computer_network/net = get_network()	
+	var/datum/computer_network/net = get_network()
 	if(net)
 		net.add_camera_to_channels(src, added_channels)
 	camera_repository.add_camera_to_channels(src, added_channels)
@@ -110,7 +112,7 @@
 		removed_channels = list(removed_channels)
 	removed_channels &= channels
 	channels -= removed_channels
-	var/datum/computer_network/net = get_network()	
+	var/datum/computer_network/net = get_network()
 	if(net)
 		net.remove_camera_from_channels(src, removed_channels)
 	camera_repository.remove_camera_from_channels(src, removed_channels)

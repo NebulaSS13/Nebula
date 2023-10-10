@@ -427,7 +427,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/first)
 "tA" = (
-/obj/turbolift_map_holder/example,
+/obj/abstract/turbolift_spawner/example,
 /turf/simulated/floor,
 /area/turbolift/example/first)
 "uD" = (
@@ -500,7 +500,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/example/first)
 "xq" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data_spawner/main_level{
+	name = "Example First Deck";
+},
 /turf/space,
 /area/space)
 "xR" = (
@@ -868,7 +870,7 @@
 /turf/simulated/floor,
 /area/turbolift/example/first)
 "Ss" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/effect/floor_decal/corner/orange/half{
 	dir = 1
 	},

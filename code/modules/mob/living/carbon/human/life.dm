@@ -36,8 +36,6 @@
 	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
-	var/temperature_alert = 0
-	var/heartbeat = 0
 	var/stamina = 100
 
 /mob/living/carbon/human/Life()
@@ -95,7 +93,7 @@
 	if(stat == DEAD)
 		stamina = 0
 	else
-		stamina = Clamp(stamina + amt, 0, 100)
+		stamina = clamp(stamina + amt, 0, 100)
 		if(stamina <= 0)
 			to_chat(src, SPAN_WARNING("You are exhausted!"))
 			if(MOVING_QUICKLY(src))
@@ -105,7 +103,7 @@
 
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
-		var/mod = (lying + (nutrition / initial(nutrition))) / 2
+		var/mod = (lying + (nutrition / get_max_nutrition())) / 2
 		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
@@ -147,7 +145,7 @@
 		if(zone_exposure >= 1)
 			return 1
 		pressure_adjustment_coefficient = max(pressure_adjustment_coefficient, zone_exposure)
-	pressure_adjustment_coefficient = Clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
+	pressure_adjustment_coefficient = clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
 
 	return pressure_adjustment_coefficient
 
@@ -204,8 +202,7 @@
 	if(stat != DEAD)
 		if ((disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
 			drop_held_items()
-			spawn(0)
-				emote("cough")
+			cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(getFireLoss())
@@ -213,14 +210,13 @@
 			heal_organ_damage(0,1)
 
 	// DNA2 - Gene processing.
-	// The HULK stuff that was here is now in the hulk gene.
 	for(var/datum/dna/gene/gene in dna_genes)
 		if(!gene.block)
 			continue
 		if(gene.is_active(src))
 			gene.OnMobLife(src)
 
-	radiation = Clamp(radiation,0,500)
+	radiation = clamp(radiation,0,500)
 
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
@@ -275,25 +271,32 @@
 	/** breathing **/
 
 /mob/living/carbon/human/handle_chemical_smoke(var/datum/gas_mixture/environment)
-	if(wear_mask && (wear_mask.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
-	if(glasses && (glasses.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
-	if(head && (head.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/gear = get_equipped_item(slot)
+		if(istype(gear) && (gear.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
+			return
 	..()
 
 /mob/living/carbon/human/get_breath_from_internal(volume_needed=STD_BREATH_VOLUME)
 	if(internal)
 
 		var/obj/item/tank/rig_supply
-		if(istype(back,/obj/item/rig))
-			var/obj/item/rig/rig = back
-			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
-				rig_supply = rig.air_supply
+		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+		if(istype(rig) && !rig.offline && (rig.air_supply && internal == rig.air_supply))
+			rig_supply = rig.air_supply
 
-		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
-			set_internals(null)
+		if(!rig_supply)
+			if(!contents.Find(internal))
+				set_internals(null)
+			else
+				var/found_mask = FALSE
+				for(var/slot in global.airtight_slots)
+					var/obj/item/gear = get_equipped_item(slot)
+					if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
+						found_mask = TRUE
+						break
+				if(!found_mask)
+					set_internals(null)
 
 		if(internal)
 			return internal.remove_air_volume(volume_needed)
@@ -364,7 +367,7 @@
 				temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
 
 		//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
-		bodytemperature += between(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
+		bodytemperature += clamp(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(bodytemperature >= getSpeciesOrSynthTemp(HEAT_LEVEL_1))
@@ -462,8 +465,9 @@
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
-		if(C)
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
 			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
 			if(C.accessories.len)
@@ -475,8 +479,9 @@
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
-		if(C)
+	for(var/slot in global.standard_clothing_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C))
 			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
 			if(C.accessories.len)
@@ -530,14 +535,6 @@
 		update_eyes()
 		return TRUE
 
-// Check if we should die.
-/mob/living/carbon/human/proc/handle_death_check()
-	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(src, BP_BRAIN)
-		if(!brain || (brain.status & ORGAN_DEAD))
-			return TRUE
-	return species.handle_death_check(src)
-
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
 		return 0
@@ -550,12 +547,6 @@
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		updatehealth()	//TODO
-
-		if(handle_death_check())
-			death()
-			blinded = 1
-			set_status(STAT_SILENCE, 0)
-			return 1
 
 		if(hallucination_power)
 			handle_hallucinations()
@@ -610,6 +601,7 @@
 					SET_STATUS_MAX(src, STAT_ASLEEP, 5)
 
 		// If you're dirty, your gloves will become dirty, too.
+		var/obj/item/gloves = get_equipped_item(slot_gloves_str)
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
 
@@ -620,18 +612,19 @@
 					total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
 			adjustToxLoss(total_contamination)
 
-		// nutrition decrease
-		if(nutrition > 0)
-			adjust_nutrition(-species.hunger_factor)
-		if(hydration > 0)
-			adjust_hydration(-species.thirst_factor)
-
 		if(stasis_value > 1 && GET_STATUS(src, STAT_DROWSY) < stasis_value * 4)
 			ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
 
 	return 1
+
+/mob/living/carbon/human/handle_nutrition_and_hydration()
+	if(nutrition > 0)
+		adjust_nutrition(-species.hunger_factor)
+	if(hydration > 0)
+		adjust_hydration(-species.thirst_factor)
+	..()
 
 /mob/living/carbon/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
@@ -749,7 +742,7 @@
 		if(isSynthetic())
 			var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
 			if(C)
-				var/chargeNum = Clamp(CEILING(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+				var/chargeNum = clamp(CEILING(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
 			else
 				cells.icon_state = "charge-empty"
@@ -836,7 +829,7 @@
 			playsound_local(T,pick(global.scarySounds),50, 1, -1)
 
 	var/area/A = get_area(src)
-	if(client && world.time >= client.played + 600)
+	if(client && world.time >= client.played + 60 SECONDS)
 		A.play_ambience(src)
 	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
 		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
@@ -845,16 +838,22 @@
 	if(mind && mind.changeling)
 		mind.changeling.regenerate()
 
+#define BASE_SHOCK_RECOVERY 1
 /mob/living/carbon/human/proc/handle_shock()
 	if(!can_feel_pain() || (status_flags & GODMODE))
 		shock_stage = 0
 		return
 
+	var/stress_modifier = get_stress_modifier()
+	if(stress_modifier)
+		stress_modifier *= config.stress_shock_recovery_constant
+
 	if(is_asystole())
-		shock_stage = max(shock_stage + 1, 61)
+		shock_stage = max(shock_stage + (BASE_SHOCK_RECOVERY + stress_modifier), 61)
+
 	var/traumatic_shock = get_shock()
 	if(traumatic_shock >= max(30, 0.8*shock_stage))
-		shock_stage += 1
+		shock_stage += (1 + stress_modifier)
 	else if (!is_asystole())
 		shock_stage = min(shock_stage, 160)
 		var/recovery = 1
@@ -862,53 +861,64 @@
 			recovery++
 		if(traumatic_shock < 0.25 * shock_stage)
 			recovery++
-		shock_stage = max(shock_stage - recovery, 0)
+		shock_stage = max(shock_stage - (recovery * (1-stress_modifier)), 0)
 		return
-	if(stat) return 0
 
-	if(shock_stage == 10)
+	if(stat != CONSCIOUS)
+		return
+
+	// If we haven't adjusted by at least one full unit, don't run the message logic below.
+	var/next_rounded_shock_stage = round(shock_stage)
+	if(next_rounded_shock_stage == rounded_shock_stage)
+		return
+
+	rounded_shock_stage = next_rounded_shock_stage
+	if(rounded_shock_stage <= 0)
+		return
+
+	if(rounded_shock_stage == 10)
 		// Please be very careful when calling custom_pain() from within code that relies on pain/trauma values. There's the
 		// possibility of a feedback loop from custom_pain() being called with a positive power, incrementing pain on a limb,
 		// which triggers this proc, which calls custom_pain(), etc. Make sure you call it with nohalloss = TRUE in these cases!
 		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 10, nohalloss = TRUE)
 
-	if(shock_stage >= 30)
-		if(shock_stage == 30)
+	if(rounded_shock_stage >= 30)
+		if(rounded_shock_stage == 30)
 			var/decl/pronouns/G = get_pronouns()
 			visible_message("<b>\The [src]</b> is having trouble keeping [G.his] eyes open.")
 		if(prob(30))
 			SET_STATUS_MAX(src, STAT_BLURRY, 2)
 			SET_STATUS_MAX(src, STAT_STUTTER, 5)
 
-	if (shock_stage >= 60)
-		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
+	if (rounded_shock_stage >= 60)
+		if(rounded_shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
-			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", rounded_shock_stage, nohalloss = TRUE)
 			SET_STATUS_MAX(src, STAT_WEAK, 3)
 
-	if(shock_stage >= 80)
+	if(rounded_shock_stage >= 80)
 		if (prob(5))
-			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", rounded_shock_stage, nohalloss = TRUE)
 			SET_STATUS_MAX(src, STAT_WEAK, 5)
 
-	if(shock_stage >= 120)
+	if(rounded_shock_stage >= 120)
 		if(!HAS_STATUS(src, STAT_PARA) && prob(2))
-			custom_pain("[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!", shock_stage, nohalloss = TRUE)
+			custom_pain("[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!", rounded_shock_stage, nohalloss = TRUE)
 			SET_STATUS_MAX(src, STAT_PARA, 5)
 
-	if(shock_stage == 150)
+	if(rounded_shock_stage == 150)
 		visible_message("<b>[src]</b> can no longer stand, collapsing!")
 
-	if(shock_stage >= 150)
+	if(rounded_shock_stage >= 150)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
+
+#undef BASE_SHOCK_RECOVERY
 
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
 	we only set those statuses and icons upon changes.  Then those HUD items will simply add those pre-made images.
 	This proc below is only called when those HUD elements need to change as determined by the mobs hud_updateflag.
 */
-
-
 /mob/living/carbon/human/proc/handle_hud_list()
 	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]
@@ -947,8 +957,10 @@
 	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		holder.icon_state = "hudunknown"
-		if(wear_id)
-			var/obj/item/card/id/I = wear_id.GetIdCard()
+
+		var/obj/item/id = get_equipped_item(slot_wear_id_str)
+		if(id)
+			var/obj/item/card/id/I = id.GetIdCard()
 			if(I)
 				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
 				if(J)
@@ -960,8 +972,9 @@
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name
-		if(wear_id)
-			var/obj/item/card/id/I = wear_id.GetIdCard()
+		var/obj/item/id = get_equipped_item(slot_wear_id_str)
+		if(id)
+			var/obj/item/card/id/I = id.GetIdCard()
 			if(I)
 				perpname = I.registered_name
 

@@ -55,9 +55,6 @@ var/global/list/closets = list()
 	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
 		store_contents()
 
-/obj/structure/closet/proc/WillContain()
-	return null
-
 /obj/structure/closet/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && !opened)
@@ -241,70 +238,79 @@ var/global/list/closets = list()
 	if(user.a_intent == I_HURT && W.force)
 		return ..()
 
-	if(!opened && (istype(W, /obj/item/stack/material) || isWrench(W)) )
+	if(!opened && (istype(W, /obj/item/stack/material) || IS_WRENCH(W)) )
 		return ..()
 
-	if(src.opened)
+	if(opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W
 			src.receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
-			return 0
-		if(isWelder(W))
+			return TRUE
+		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
-			if(WT.remove_fuel(0,user))
+			if(WT.weld(0,user))
 				slice_into_parts(WT, user)
-				return
+				return TRUE
 		if(istype(W, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = W
-			if(!cutter.slice(user))
-				return
-			slice_into_parts(W, user)
-			return
+			if(cutter.slice(user))
+				slice_into_parts(W, user)
+			return TRUE
+
 		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
 			var/obj/item/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
 			for(var/obj/item/I in LB.contents)
 				LB.remove_from_storage(I, T, 1)
 			LB.finish_bulk_removal()
-			user.visible_message("<span class='notice'>[user] empties \the [LB] into \the [src].</span>", \
-								 "<span class='notice'>You empty \the [LB] into \the [src].</span>", \
-								 "<span class='notice'>You hear rustling of clothes.</span>")
-			return
+			user.visible_message(
+				SPAN_NOTICE("\The [user] empties \the [LB] into \the [src]."),
+				SPAN_NOTICE("You empty \the [LB] into \the [src]."),
+				SPAN_NOTICE("You hear rustling of clothes.")
+			)
+			return TRUE
 
-		if(user.unEquip(W, loc))
+		if(user.try_unequip(W, loc))
 			W.pixel_x = 0
 			W.pixel_y = 0
 			W.pixel_z = 0
 			W.pixel_w = 0
-		return
-	else if(istype(W, /obj/item/energy_blade))
+			return TRUE
+		return FALSE
+
+	if(istype(W, /obj/item/energy_blade))
 		var/obj/item/energy_blade/blade = W
 		if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			spark_at(src.loc, amount=5)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			open()
-	else if(istype(W, /obj/item/stack/package_wrap))
-		return
-	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
+		return TRUE
+
+	if(istype(W, /obj/item/stack/package_wrap))
+		return FALSE //Return false to get afterattack to be called
+
+	if(IS_WELDER(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(0,user))
-			if(!WT.isOn())
-				return
-			else
-				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-				return
+		if(!WT.weld(0,user))
+			if(WT.isOn())
+				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
+			return
 		src.welded = !src.welded
 		src.update_icon()
-		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
+		user.visible_message(SPAN_WARNING("\The [src] has been [welded?"welded shut":"unwelded"] by \the [user]."), blind_message = "You hear welding.", range = 3)
+		return TRUE
 	else if(setup & CLOSET_HAS_LOCK)
 		src.togglelock(user, W)
-	else
-		src.attack_hand(user)
+		return TRUE
+
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
-	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", \
-						 "<span class='notice'>You have cut \the [src] apart with \the [W].</span>", \
-						 "You hear welding.")
+	user.visible_message(
+		SPAN_NOTICE("\The [src] has been cut apart by [user] with \the [W]."),
+		SPAN_NOTICE("You have cut \the [src] apart with \the [W]."),
+		"You hear welding."
+	)
 	physically_destroyed()
 
 /obj/structure/closet/receive_mouse_drop(atom/dropping, mob/user)
@@ -317,8 +323,9 @@ var/global/list/closets = list()
 		return TRUE
 
 /obj/structure/closet/attack_ai(mob/living/silicon/ai/user)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
-		attack_hand(user)
+	if(istype(user, /mob/living/silicon/robot)) // Robots can open/close it, but not the AI.
+		return attack_hand_with_interaction_checks(user)
+	return ..()
 
 /obj/structure/closet/relaymove(mob/user)
 	if(user.stat || !isturf(src.loc))
@@ -328,8 +335,11 @@ var/global/list/closets = list()
 		to_chat(user, "<span class='notice'>It won't budge!</span>")
 
 /obj/structure/closet/attack_hand(mob/user)
-	src.add_fingerprint(user)
-	src.toggle(user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	add_fingerprint(user)
+	toggle(user)
+	return TRUE
 
 /obj/structure/closet/attack_ghost(mob/ghost)
 	if(ghost.client && ghost.client.inquisitive_ghost)
@@ -413,9 +423,10 @@ var/global/list/closets = list()
 		make_broken()
 
 	//Do this to prevent contents from being opened into nullspace
-	if(istype(loc, /obj/structure/bigDelivery))
-		var/obj/structure/bigDelivery/BD = loc
-		BD.unwrap()
+	//#TODO: There's probably a better way to do this?
+	if(istype(loc, /obj/item/parcel))
+		var/obj/item/parcel/P = loc
+		P.unwrap()
 	open()
 
 /obj/structure/closet/onDropInto(var/atom/movable/AM)
@@ -464,12 +475,6 @@ var/global/list/closets = list()
 /obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/card/id/id_card)
 	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
 
-/obj/structure/closet/AltClick(var/mob/user)
-	if(!src.opened)
-		togglelock(user)
-	else
-		return ..()
-
 /obj/structure/closet/CtrlAltClick(var/mob/user)
 	verb_toggleopen()
 
@@ -512,3 +517,21 @@ var/global/list/closets = list()
 
 /obj/structure/closet/CanUseTopicPhysical(mob/user)
 	return CanUseTopic(user, global.physical_no_access_topic_state)
+
+/obj/structure/closet/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/closet_lock_toggle)
+
+/decl/interaction_handler/closet_lock_toggle
+	name = "Toggle Lock"
+	expected_target_type = /obj/structure/closet
+
+/decl/interaction_handler/closet_lock_toggle/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/structure/closet/C = target
+		. = !C.opened && (C.setup & CLOSET_HAS_LOCK)
+
+/decl/interaction_handler/closet_lock_toggle/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/structure/closet/C = target
+	C.togglelock(user)

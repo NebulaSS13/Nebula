@@ -29,6 +29,7 @@
 	desc = "A fossilised, pre-Stygian alien crustacean."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "shell"
+	material = /decl/material/solid/stone/sandstone //Should probably be limestone, but whatever
 
 /obj/item/fossil/plant
 	name = "fossilised plant"
@@ -56,10 +57,10 @@
 		if(!user.canUnEquip(W))
 			return
 		var/mob/M = get_recursive_loc_of_type(/mob)
-		if(M && !M.unEquip(src))
+		if(M && !M.try_unequip(src))
 			return
 		var/obj/o = new /obj/structure/skeleton(get_turf(src))
-		user.unEquip(W, o)
+		user.try_unequip(W, o)
 		forceMove(o)
 
 /obj/structure/skeleton
@@ -85,14 +86,14 @@
 /obj/structure/skeleton/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/fossil/animal))
 		if(bone_count < required_bones)
-			if(user.unEquip(W, src))
+			if(user.try_unequip(W, src))
 				bone_count++
 				if(bone_count == required_bones)
 					icon_state = "skel"
 					set_density(1)
 		else
 			to_chat(user, SPAN_NOTICE("\The [src] is already complete."))
-	else if(istype(W,/obj/item/pen))
+	else if(IS_PEN(W))
 		plaque_contents = sanitize(input("What would you like to write on the plaque:","Skeleton plaque",""))
 		user.visible_message("[user] writes something on the base of [src].","You relabel the plaque on the base of [src].")
 	else

@@ -39,7 +39,6 @@
 
 	var/welded = 0 // Added for aliens -- TLE
 
-	var/controlled = TRUE  //if we should register with an air alarm on spawn
 	build_icon_state = "uvent"
 	var/sound_id
 	var/datum/sound_token/sound_token
@@ -141,12 +140,23 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	QDEL_NULL(sound_token)
-	var/area/A = get_area(src)
-	if(A)
-		events_repository.unregister(/decl/observ/name_set, A, src, .proc/change_area_name)
-		A.air_vent_info -= id_tag
-		A.air_vent_names -= id_tag
 	. = ..()
+
+/obj/machinery/atmospherics/unary/vent_pump/reset_area(area/old_area, area/new_area)
+	if(!controlled)
+		return
+	if(old_area == new_area)
+		return
+	if(old_area)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		old_area.air_vent_info -= id_tag
+		old_area.air_vent_names -= id_tag
+	if(new_area && new_area == get_area(src))
+		events_repository.register(/decl/observ/name_set, new_area, src, .proc/change_area_name)
+		if(!new_area.air_vent_names[id_tag])
+			var/new_name = "[new_area.proper_name] Vent Pump #[new_area.air_vent_names.len+1]"
+			new_area.air_vent_names[id_tag] = new_name
+			SetName(new_name)
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "large air vent"
@@ -271,7 +281,7 @@
 	toggle_input_toggle()
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
-	if(isWelder(W))
+	if(IS_WELDER(W))
 
 		var/obj/item/weldingtool/WT = W
 
@@ -279,7 +289,7 @@
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
 			return 1
 
-		if(!WT.remove_fuel(0,user))
+		if(!WT.weld(0,user))
 			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			return 1
 
@@ -304,7 +314,7 @@
 			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
 			"You hear welding.")
 		return 1
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/browser/written_digital/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
@@ -327,7 +337,7 @@
 			return SPAN_WARNING("You cannot unwrench \the [src], turn it off first.")
 		var/turf/T = src.loc
 		var/hidden_pipe_check = FALSE
-		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			if(node.level)
 				hidden_pipe_check = TRUE
 				break
@@ -335,7 +345,7 @@
 			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
-		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 			return SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure.")
 	return ..()
 
@@ -424,7 +434,7 @@
 /decl/public_access/public_variable/pressure_bound/external/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.external_pressure_bound_default
-	new_value = Clamp(new_value, 0, MAX_PUMP_PRESSURE)
+	new_value = clamp(new_value, 0, MAX_PUMP_PRESSURE)
 	. = ..()
 	if(.)
 		machine.external_pressure_bound = new_value
@@ -565,7 +575,7 @@
 	if(!sound_id)
 		sound_id = "[sequential_id("vent_z[z]")]"
 	if(can_pump())
-		sound_token = play_looping_sound(src, sound_id, 'sound/machines/vent_hum.ogg', 3, range = 7, falloff = 4)
+		sound_token = play_looping_sound(src, sound_id, 'sound/machines/vent_hum.ogg', 10, range = 7, falloff = 4)
 	else
 		QDEL_NULL(sound_token)
 

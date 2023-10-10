@@ -25,7 +25,7 @@
 		if(!silent)
 			to_chat(src, SPAN_NOTICE("You are feeling far too docile to perform this action."))
 		return FALSE
-	if(check_last_special && world.time < last_special)
+	if(check_last_special && is_on_special_ability_cooldown())
 		if(!silent)
 			to_chat(src, SPAN_NOTICE("You cannot perform this action so soon after the last."))
 		return FALSE
@@ -58,7 +58,7 @@
 		src.mind.assigned_special_role = "Borer Husk"
 		src.mind.transfer_to(host)
 
-	H.ChangeToHusk()
+	H.make_husked()
 
 	var/obj/item/organ/internal/borer/B = new(H)
 	if(islist(chemical_types))

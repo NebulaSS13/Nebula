@@ -127,7 +127,7 @@
 /decl/memory_options
 	var/memory_type = /datum/memory
 
-/decl/memory_options/proc/Validate(var/datum/mind/target)
+/decl/memory_options/proc/validate_mind(var/datum/mind/target)
 	if(!target.current)
 		return "Mind is detached from mob."
 
@@ -138,7 +138,7 @@
 	log_and_message_admins(message)
 
 /decl/memory_options/proc/Create(var/datum/mind/target, var/memory)
-	var/error = Validate(target)
+	var/error = validate_mind(target)
 	if(error)
 		return error
 
@@ -156,7 +156,7 @@
 /decl/memory_options/default/MemoryTags(var/datum/mind/target)
 	return target.MemoryTags()
 
-/decl/memory_options/default/Validate(var/datum/mind/target)
+/decl/memory_options/default/validate_mind(var/datum/mind/target)
 	if((. = ..()))
 		return
 

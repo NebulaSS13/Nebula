@@ -1,3 +1,18 @@
+
+/*
+	Uncomment this to enable ZAS debugging tools. While ghosted, you will see a visualization of the atmos status of turfs.
+	Green turfs are zones that are existing happily.
+	Yellow-orange turfs are a zone that has recently been merged into another zone.
+	Red turfs are turfs are an invalidated zone. Invalid zones are zones that were destroyed.
+	White/overlay-less turfs are turfs that are the origin point of a zone. This is completely useless information.
+	Purple outlines indicate the turf was marked for an update by SSair, and is in its processing list.
+	In addition, all ZAS-related datums and turfs will have a "verbose" var. Set this to 1 using View Variables to get robust to_chat()s about activity.
+	Finally, this is a friendly reminder that using Debug Verbs gives access to the Zone Info and Test ZAS Connection verbs when you right click a turf.
+
+	Addendum:
+		There are additional debug overlays that use ZAS_ZONE_BLOCKER and ZAS_DIRECTIONAL_BLOCKER.
+		They take priority over standard overlays, displaying directional airflow, and are generally not needed so they are commented out by default.
+*/
 //#define ZASDBG
 #define MULTIZAS
 
@@ -22,7 +37,8 @@
 #define SOUTHDOWN (SOUTH|DOWN)
 #define WESTDOWN (WEST|DOWN)
 
-#define TURF_HAS_VALID_ZONE(T) (istype(T, /turf/simulated) && T:zone && !T:zone:invalid)
+#define TURF_HAS_VALID_ZONE(T) (isturf(T) && T:zone && !T:zone:invalid)
+#define SHOULD_PARTICIPATE_IN_ZONES(T) (isturf(T) && T:zone_membership_candidate && (!T:external_atmosphere_participation || !T:is_outside()))
 
 #ifdef MULTIZAS
 

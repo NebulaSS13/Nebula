@@ -60,7 +60,12 @@ var/global/list/lunchables_drink_reagents_ = list(
 											/decl/material/liquid/drink/dry_ramen,
 											/decl/material/liquid/drink/hell_ramen,
 											/decl/material/liquid/drink/hot_ramen,
-											/decl/material/liquid/drink/mutagencola
+											/decl/material/liquid/drink/mutagencola,
+											/decl/material/liquid/drink/syrup,
+											/decl/material/liquid/drink/syrup/mint,
+											/decl/material/liquid/drink/syrup/chocolate,
+											/decl/material/liquid/drink/syrup/caramel,
+											/decl/material/liquid/drink/syrup/vanilla
 										)
 
 // This default list is a bit different, it contains items we don't want

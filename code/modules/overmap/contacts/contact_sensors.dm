@@ -48,7 +48,8 @@
 	if(sensors?.use_power)
 		sensor_range = round(sensors.range,1)
 	var/datum/overmap_contact/self_record = contact_datums[linked]
-	self_record.update_marker_icon(sensor_range)
+	self_record.update_marker_icon()
+	self_record.ping_radar(sensor_range)
 	self_record.show()
 
 	// Update our 'sensor range' (ie. overmap lighting)
@@ -68,7 +69,7 @@
 	// Find all sectors with a tracker on their z-level. Only works on ships when they are in space.
 	for(var/obj/item/ship_tracker/tracker in trackers)
 		if(tracker.enabled)
-			var/obj/effect/overmap/visitable/tracked_effect = global.overmap_sectors["[get_z(tracker)]"]
+			var/obj/effect/overmap/visitable/tracked_effect = global.overmap_sectors[num2text(get_z(tracker))]
 			if(tracked_effect && istype(tracked_effect) && tracked_effect != linked && tracked_effect.requires_contact)
 				objects_in_current_view[tracked_effect] = TRUE
 				objects_in_view[tracked_effect] = 100

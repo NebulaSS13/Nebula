@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////////////////////
 
 /decl/surgery_step/bone
-	surgery_step_category = /decl/surgery_step/bone
+	abstract_type = /decl/surgery_step/bone
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NEEDS_ENCASEMENT
 	var/required_stage = 0
 

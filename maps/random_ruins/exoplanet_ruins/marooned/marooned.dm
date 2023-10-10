@@ -1,39 +1,38 @@
-/datum/map_template/ruin/exoplanet/marooned 
-	name = "Marooned" 
-	id = "awaysite_marooned" 
-	description = "crashed dropship with marooned Magnitka officer" 
-	suffixes = list("marooned/marooned.dmm") 
-	cost = 1 
+/datum/map_template/ruin/exoplanet/marooned
+	name = "Marooned"
+	description = "crashed dropship with marooned Magnitka officer"
+	suffixes = list("marooned/marooned.dmm")
+	cost = 1
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
 	apc_test_exempt_areas = list(
 		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
-/obj/item/clothing/under/magintka_uniform 
-	name = "officer uniform" 
-	desc = "A dark uniform coat worn by Magnitka fleet officers." 
+/obj/item/clothing/under/magintka_uniform
+	name = "officer uniform"
+	desc = "A dark uniform coat worn by Magnitka fleet officers."
 	icon = 'maps/random_ruins/exoplanet_ruins/marooned/icons/uniform_magnitka.dmi'
- 
-/obj/item/clothing/accessory/medal/silver/marooned_medal 
-	name = "silver medal" 
-	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\"" 
-	icon = 'maps/random_ruins/exoplanet_ruins/marooned/icons/medal_magnitka.dmi' 
- 
-/obj/abstract/landmark/corpse/marooned_officer 
-	name = "Horazy Warda" 
-	corpse_outfits = list(/decl/hierarchy/outfit/marooned_officer) 
-	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME 
- 
-/decl/hierarchy/outfit/marooned_officer 
-	name = "Dead Magnitka's fleet officer" 
-	uniform = /obj/item/clothing/under/magintka_uniform 
-	suit = /obj/item/clothing/suit/storage/hooded/wintercoat 
-	shoes = /obj/item/clothing/shoes/jackboots/jungleboots 
-	gloves = /obj/item/clothing/gloves/thick 
-	head = /obj/item/clothing/head/beret 
-	l_pocket = /obj/item/knife/folding/combat/switchblade 
- 
+
+/obj/item/clothing/accessory/medal/silver/marooned_medal
+	name = "silver medal"
+	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\""
+	icon = 'maps/random_ruins/exoplanet_ruins/marooned/icons/medal_magnitka.dmi'
+
+/obj/abstract/landmark/corpse/marooned_officer
+	name = "Horazy Warda"
+	corpse_outfits = list(/decl/hierarchy/outfit/marooned_officer)
+	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME
+
+/decl/hierarchy/outfit/marooned_officer
+	name = "Dead Magnitka's fleet officer"
+	uniform = /obj/item/clothing/under/magintka_uniform
+	suit = /obj/item/clothing/suit/storage/toggle/wintercoat
+	shoes = /obj/item/clothing/shoes/jackboots/jungleboots
+	gloves = /obj/item/clothing/gloves/thick
+	head = /obj/item/clothing/head/beret
+	l_pocket = /obj/item/knife/folding/combat/switchblade
+
 /area/map_template/marooned
 	name = "\improper Crashed Dropship"
 	icon_state = "A"

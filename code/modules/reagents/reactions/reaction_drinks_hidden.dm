@@ -1,6 +1,7 @@
 /decl/chemical_reaction/recipe/rehydrate
 	result_amount = 3
 	hidden_from_codex = TRUE
+	abstract_type = /decl/chemical_reaction/recipe/rehydrate
 
 /decl/chemical_reaction/recipe/rehydrate/grapejuice
 	name = "Grape Juice"

@@ -5,10 +5,15 @@
 	var/mob/registered_user = null
 	color = COLOR_GRAY40
 	detail_color = COLOR_NT_RED
+	var/static/list/base_access = list(
+		access_maint_tunnels,
+		access_hacked,
+		access_external_airlocks
+	)
 
 /obj/item/card/id/syndicate/Initialize()
 	. = ..()
-	access = syndicate_access.Copy()
+	access = base_access.Copy()
 
 /obj/item/card/id/syndicate/station_access/Initialize()
 	. = ..() // Same as the normal Syndicate id, only already has all station access
@@ -59,7 +64,7 @@
 	entries[++entries.len] = list("name" = "Fingerprint Hash",	"value" = fingerprint_hash)
 	entries[++entries.len] = list("name" = "Name", 				"value" = registered_name)
 	entries[++entries.len] = list("name" = "Photo", 			"value" = "Update")
-	entries[++entries.len] = list("name" = "Sex", 				"value" = sex)
+	entries[++entries.len] = list("name" = "Gender", 				"value" = card_gender)
 	entries[++entries.len] = list("name" = "Factory Reset",		"value" = "Use With Care")
 	data["electronic_warfare"] = electronic_warfare
 	data["entries"] = entries
@@ -181,18 +186,18 @@
 				set_id_photo(user)
 				to_chat(user, "<span class='notice'>Photo changed.</span>")
 				. = 1
-			if("Sex")
-				var/new_sex = sanitize(input(user,"What sex would you like to put on this card?","Agent Card Sex", sex) as null|text)
-				if(!isnull(new_sex) && CanUseTopic(user, state))
-					src.sex = new_sex
-					to_chat(user, "<span class='notice'>Sex changed to '[new_sex]'.</span>")
+			if("Gender")
+				var/new_gender = sanitize(input(user,"What gender would you like to put on this card?","Agent Card Gender", card_gender) as null|text)
+				if(!isnull(new_gender) && CanUseTopic(user, state))
+					src.card_gender = new_gender
+					to_chat(user, "<span class='notice'>Gender changed to '[new_gender]'.</span>")
 					. = 1
 			if("Factory Reset")
 				if(alert("This will factory reset the card, including access and owner. Continue?", "Factory Reset", "No", "Yes") == "Yes" && CanUseTopic(user, state))
 					age = initial(age)
 					formal_name_prefix = initial(formal_name_prefix)
 					formal_name_suffix = initial(formal_name_suffix)
-					access = syndicate_access.Copy()
+					access = base_access.Copy()
 					assignment = initial(assignment)
 					blood_type = initial(blood_type)
 					dna_hash = initial(dna_hash)
@@ -205,7 +210,7 @@
 					SetName(initial(name))
 					registered_name = initial(registered_name)
 					unset_registered_user()
-					sex = initial(sex)
+					card_gender = initial(card_gender)
 					military_branch = initial(military_branch)
 					military_rank = initial(military_rank)
 					to_chat(user, "<span class='notice'>All information has been deleted from \the [src].</span>")
@@ -257,7 +262,6 @@ var/global/list/id_card_states
 	var/item_state
 	var/color
 	var/detail_color
-	var/details
 	var/extra_details
 
 /datum/card_state/dd_SortValue()

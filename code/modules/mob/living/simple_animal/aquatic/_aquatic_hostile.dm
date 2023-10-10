@@ -6,6 +6,7 @@
 	speed = 4
 	mob_size = MOB_SIZE_MEDIUM
 	emote_see = list("gnashes")
+	base_animal_type = /mob/living/simple_animal/aquatic // used for language, ignore actual type
 
 	// They only really care if there's water around them or not.
 	max_gas = list()
@@ -23,7 +24,7 @@
 	. = ..()
 	if(stat != DEAD && HAS_STATUS(src, STAT_PARA))
 		icon_state += "-dying"
-	
+
 /mob/living/simple_animal/hostile/aquatic/handle_atmos(var/atmos_suitable = 1)
 	. = ..(atmos_suitable = submerged())
 

@@ -20,15 +20,15 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	icon_state = ICON_STATE_WORLD
-
 	pickup_sound = 'sound/foley/scrape1.ogg'
 	drop_sound = 'sound/foley/tooldrop1.ogg'
+	abstract_type = /obj/item/twohanded
 
 	var/wielded = 0
 	var/force_wielded = 0
 	var/force_unwielded
-	var/wieldsound = null
-	var/unwieldsound = null
+	var/wieldsound = 'sound/foley/scrape1.ogg'
+	var/unwieldsound = 'sound/foley/tooldrop1.ogg'
 	var/base_name
 	var/unwielded_material_force_multiplier = 0.25
 	var/wielded_parry_bonus = 15
@@ -39,10 +39,14 @@
 /obj/item/twohanded/update_twohanding()
 	var/mob/living/M = loc
 	if(istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
-		wielded = 1
+		wielded = TRUE
+		if(wieldsound)
+			playsound(src, wieldsound, 50)
 		force = force_wielded
 	else
-		wielded = 0
+		wielded = FALSE
+		if(unwieldsound)
+			playsound(src, unwieldsound, 50)
 		force = force_unwielded
 	update_icon()
 	..()
@@ -82,8 +86,7 @@
 	edge = 1
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = FALSE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 
 /obj/item/twohanded/fireaxe/Initialize()
 	. = ..()
@@ -115,8 +118,7 @@
 	sharp = 1
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	material = /decl/material/solid/glass
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	does_spin = FALSE
 	var/shaft_material = /decl/material/solid/metal/steel
 	var/cable_color = COLOR_RED
@@ -128,12 +130,12 @@
 	..()
 
 /obj/item/twohanded/spear/on_update_icon()
-	overlays.Cut()
-	if(applies_material_colour && material)
-		color = material.color
-		alpha = 100 + material.opacity * 255
-	overlays += get_shaft_overlay("shaft")
-	overlays += mutable_appearance(icon, "cable", cable_color)
+	. = ..()
+	add_overlay(list(
+			get_shaft_overlay("shaft"),
+			mutable_appearance(icon, "cable", cable_color)
+		))
+
 
 /obj/item/twohanded/spear/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)
@@ -173,8 +175,7 @@
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 	material = /decl/material/solid/wood/maple
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	max_force = 40	//for wielded
 	material_force_multiplier = 0.4           // 24 when wielded with weight 60 (steel)
 	unwielded_material_force_multiplier = 0.25 // 15 when unwielded based on above.
@@ -205,8 +206,7 @@
 	unwielded_material_force_multiplier = 0.3
 	attack_verb = list("bludgeoned", "slammed", "smashed", "wrenched")
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = FALSE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_NO_CONTAINER
 
 /obj/item/twohanded/pipewrench/Initialize()

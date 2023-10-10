@@ -7,6 +7,7 @@
 	icon = 'icons/obj/items/comb.dmi'
 	icon_state = "comb"
 	item_state = "comb"
+	material = /decl/material/solid/plastic
 
 /obj/item/haircomb/random/Initialize()
 	. = ..()
@@ -25,6 +26,7 @@
 	slot_flags = null
 	icon_state = "brush"
 	item_state = "brush"
+	material = /decl/material/solid/plastic
 
 /obj/item/haircomb/brush/attack_self(mob/user)
 	if(ishuman(user) && !user.incapacitated())

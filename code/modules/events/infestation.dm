@@ -38,7 +38,12 @@
 	vermin = rand(0,2)
 	switch(vermin)
 		if(VERM_MICE)
-			spawn_types = list(/mob/living/simple_animal/mouse) // The base mouse type selects a random color for us
+			spawn_types = list(
+				/mob/living/simple_animal/mouse/brown,
+				/mob/living/simple_animal/mouse/gray,
+				/mob/living/simple_animal/mouse/white,
+				/mob/living/simple_animal/mouse/rat
+			)
 			max_number = 12
 			vermstring = "mice"
 		if(VERM_LIZARDS)

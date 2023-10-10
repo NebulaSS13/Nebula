@@ -1,11 +1,12 @@
 /obj/item/bone
 	icon = 'icons/obj/items/bone.dmi'
-	var/bone_amt = 1
+	material = /decl/material/solid/bone
 
 /obj/item/bone/skull
 	name = "skull"
 	desc = "Looks like someone lost their head."
-	bone_amt = 3
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "remains" //#TODO: Get an actual icon
 
 /obj/item/bone/skull/deer
 	name = "deer skull"

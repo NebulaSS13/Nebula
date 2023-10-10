@@ -95,7 +95,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/command)
 "aq" = (
-/obj/effect/submap_landmark/joinable_submap/colony,
+/obj/abstract/submap_landmark/joinable_submap/colony,
 /turf/template_noop,
 /area/template_noop)
 "ar" = (
@@ -132,7 +132,7 @@
 /turf/simulated/wall/r_wall,
 /area/map_template/colony/surgery)
 "ax" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/command)
 "ay" = (
@@ -164,8 +164,8 @@
 /obj/item/clothing/pants/baggy,
 /obj/item/clothing/pants/casual/youngfolksjeans,
 /obj/item/clothing/suit/storage/toggle/bomber,
-/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/miner,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie,
@@ -394,19 +394,19 @@
 /turf/exterior/concrete,
 /area/template_noop)
 "bf" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 8
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/command)
 "bg" = (
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn,
+/obj/abstract/submap_landmark/spawnpoint/colonist_spawn,
 /obj/structure/bed/padded,
 /obj/item/bedsheet/hop,
 /obj/machinery/light/small{
@@ -441,15 +441,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "bk" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/command)
 "bl" = (
@@ -1377,8 +1375,8 @@
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
 /obj/item/clothing/pants/casual/youngfolksjeans,
-/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/miner,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
@@ -1519,14 +1517,14 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony/atmospherics)
 "dA" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "dB" = (
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn,
+/obj/abstract/submap_landmark/spawnpoint/colonist_spawn,
 /obj/structure/bed/padded,
 /obj/item/bedsheet/hos,
 /turf/simulated/floor/carpet,
@@ -1663,8 +1661,8 @@
 /area/map_template/colony/atmospherics)
 "dQ" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/chems/ivbag/nanoblood,
-/obj/item/chems/ivbag/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dR" = (
@@ -2292,7 +2290,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/dorms)
 "eX" = (
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn,
+/obj/abstract/submap_landmark/spawnpoint/colonist_spawn,
 /obj/structure/bed/padded,
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
@@ -2311,8 +2309,8 @@
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
 /obj/item/clothing/pants/casual/youngfolksjeans,
-/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/miner,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
@@ -2362,8 +2360,8 @@
 "fd" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/toolbox/syndicate,
-/obj/item/ducttape,
-/obj/item/ducttape,
+/obj/item/stack/tape_roll/duct_tape,
+/obj/item/stack/tape_roll/duct_tape,
 /obj/item/crowbar/brace_jack,
 /obj/item/clothing/head/hardhat/white,
 /obj/item/grenade/chem_grenade/metalfoam,
@@ -2405,6 +2403,7 @@
 /area/map_template/colony/atmospherics)
 "fi" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black,
+/obj/abstract/landmark/allowed_leak,
 /turf/exterior/concrete,
 /area/template_noop)
 "fj" = (
@@ -2758,8 +2757,8 @@
 /obj/item/clothing/pants/casual/camo,
 /obj/item/clothing/pants/casual/track,
 /obj/item/clothing/pants/casual/youngfolksjeans,
-/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/toggle/wintercoat/miner,
+/obj/item/clothing/suit/storage/toggle/wintercoat,
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
@@ -3018,7 +3017,7 @@
 /obj/item/chems/drinks/shaker,
 /obj/item/chems/drinks/pitcher,
 /obj/item/chems/glass/beaker/bowl,
-/obj/item/chems/condiment/salt,
+/obj/item/chems/condiment/large/salt,
 /obj/item/chems/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
@@ -3662,6 +3661,7 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/exterior/concrete,
 /area/template_noop)
 "hr" = (
@@ -4944,7 +4944,7 @@
 	dir = 1;
 	pixel_y = 16
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -5687,7 +5687,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
-/obj/structure/sign/warning/secure_area/armory{
+/obj/structure/sign/warning/armory{
 	dir = 4;
 	pixel_x = -32
 	},
@@ -7853,6 +7853,19 @@
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/hydroponics)
+"CM" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 10
+	},
+/obj/effect/floor_decal/techfloor/hole/right{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/colony/command)
 "Dj" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/light{
@@ -9137,7 +9150,7 @@ os
 (28,1,1) = {"
 ad
 aD
-aV
+CM
 bk
 bC
 ac

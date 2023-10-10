@@ -23,9 +23,9 @@
 	nutriment_amt = 4
 	bitesize = 3
 
-/obj/item/chems/food/pie/Initialize()
+/obj/item/chems/food/bananapie/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream,5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream, 5)
 
 /obj/item/chems/food/pie/throw_impact(atom/hit_atom)
 	..()
@@ -43,7 +43,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 
-/obj/item/chems/food/berryclafoutis/Initialize()
+/obj/item/chems/food/berryclafoutis/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/berry, 5)
 
@@ -69,7 +69,7 @@
 	nutriment_amt = 8
 	bitesize = 4
 
-/obj/item/chems/food/rofflewaffles/Initialize()
+/obj/item/chems/food/rofflewaffles/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 8)
 
@@ -113,7 +113,7 @@
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
 
-/obj/item/chems/food/soylentgreen/Initialize()
+/obj/item/chems/food/soylentgreen/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
@@ -137,7 +137,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
 
-/obj/item/chems/food/meatpie/Initialize()
+/obj/item/chems/food/meatpie/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
@@ -162,9 +162,9 @@
 	nutriment_amt = 5
 	bitesize = 3
 
-/obj/item/chems/food/amanita_pie/Initialize()
+/obj/item/chems/food/amanita_pie/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/amatoxin, 3)
+	reagents.add_reagent(/decl/material/liquid/amatoxin,      3)
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 1)
 
 /obj/item/chems/food/plump_pie
@@ -177,9 +177,9 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/plump_pie/Initialize()
+/obj/item/chems/food/plump_pie/populate_reagents()
 	. = ..()
-	if(prob(10))
+	if(prob(10)) //#TODO: have this depend on cook's skill within the recipe handling instead maybe?
 		name = "exceptional plump pie"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
 		reagents.add_reagent(/decl/material/liquid/regenerator, 5)
@@ -193,7 +193,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
 
-/obj/item/chems/food/xemeatpie/Initialize()
+/obj/item/chems/food/xemeatpie/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 

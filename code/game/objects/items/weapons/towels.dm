@@ -9,6 +9,7 @@
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
+	material = /decl/material/solid/cloth
 
 /obj/item/towel/attack_self(mob/user)
 	if(user.a_intent == I_GRAB)
@@ -24,10 +25,12 @@
 /obj/item/towel/black
 	name = "black towel"
 	color = "#222222"
+	material = /decl/material/solid/cloth/black
 
 /obj/item/towel/brown
 	name = "black towel"
 	color = "#854636"
+	material = /decl/material/solid/cloth/beige
 
 /obj/item/towel/fleece // loot from the king of goats. it's a golden towel
 	name = "golden fleece"
@@ -35,6 +38,7 @@
 	color = "#ffd700"
 	force = 1
 	attack_verb = list("smote")
+	material = /decl/material/solid/metal/gold
 
 /obj/item/towel/verb/lay_out()
 	set name = "Lay Out Towel"
@@ -52,7 +56,7 @@
 		pixel_y = 0
 		pixel_z = 0
 
-/obj/item/towel/pickup(mob/user)
+/obj/item/towel/on_picked_up(mob/user)
 	..()
 	if(icon != initial(icon))
 		icon = initial(icon)

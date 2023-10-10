@@ -21,10 +21,8 @@
 	. = ..()
 
 /obj/item/implanter/on_update_icon()
-	if (imp)
-		icon_state = "implanter1"
-	else
-		icon_state = "implanter0"
+	. = ..()
+	icon_state = "implanter[imp == TRUE]"
 
 /obj/item/implanter/verb/remove_implant()
 	set category = "Object"
@@ -62,7 +60,7 @@
 	return 0
 
 /obj/item/implanter/attackby(obj/item/I, mob/user)
-	if(!imp && istype(I, /obj/item/implant) && user.unEquip(I,src))
+	if(!imp && istype(I, /obj/item/implant) && user.try_unequip(I,src))
 		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
 		imp = I
 		update_icon()
@@ -78,7 +76,7 @@
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		user.do_attack_animation(M)
 
-		var/target_zone = user.zone_sel.selecting
+		var/target_zone = user.get_target_zone()
 		if(src.imp.can_implant(M, user, target_zone))
 			var/imp_name = imp.name
 

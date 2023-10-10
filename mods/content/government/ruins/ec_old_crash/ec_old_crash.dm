@@ -1,6 +1,5 @@
 /datum/map_template/ruin/exoplanet/ec_old_crash
 	name = "Expeditionary Ship"
-	id = "ec_old_wreck"
 	description = "An abandoned ancient STL exploration ship."
 	prefix = "mods/content/government/ruins/"
 	suffixes = list("ec_old_crash/ec_old_crash.dmm")
@@ -41,7 +40,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/low
 	use_power = 1
 	icon_state = "map_vent_out"
-	external_pressure_bound = 0.25 * ONE_ATMOSPHERE
+	external_pressure_bound = 0.25 ATM
 
 /turf/simulated/floor/tiled/lowpressure
 	initial_gas = list(/decl/material/gas/carbon_dioxide = MOLES_O2STANDARD)
@@ -59,6 +58,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "docs_part"
 	item_state = "paper"
+	material = /decl/material/solid/cardboard //#TODO: Replace with paper
 
 /obj/item/ecletters/Initialize()
 	. = ..()
@@ -93,4 +93,4 @@
 
 /obj/machinery/alarm/low/Initialize()
 	. = ..()
-	TLV["pressure"] = list(ONE_ATMOSPHERE*0.10,ONE_ATMOSPHERE*0.20,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20)
+	TLV["pressure"] = list(0.10 ATM, 0.20 ATM, 1.10 ATM, 1.20 ATM)

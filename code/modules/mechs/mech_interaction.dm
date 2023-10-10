@@ -9,12 +9,12 @@
 		return TRUE
 	. = ..()
 
-/mob/living/exosuit/RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+/mob/living/exosuit/RelayMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	if(user && (user in pilots) && user.loc == src)
 		return OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
 	return ..()
 
-/mob/living/exosuit/OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+/mob/living/exosuit/OnMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	if(!user || incapacitated() || user.incapacitated())
 		return FALSE
 
@@ -24,6 +24,36 @@
 	//This is handled at active module level really, it is the one who has to know if it's supposed to act
 	if(selected_system)
 		return selected_system.MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
+
+/mob/living/exosuit/RelayMouseDown(atom/object, location, control, params, mob/user)
+	if(user && (user in pilots) && user.loc == src)
+		return OnMouseDown(object, location, control, params, user)
+	return ..()
+
+/mob/living/exosuit/OnMouseDown(atom/object, location, control, params, mob/user)
+	if(!user || incapacitated() || user.incapacitated())
+		return FALSE
+
+	if(!(user in pilots) && user != src)
+		return FALSE
+
+	if(selected_system)
+		return selected_system.MouseDownInteraction(object, location, control, params, user)
+
+/mob/living/exosuit/RelayMouseUp(atom/object, location, control, params, mob/user)
+	if(user && (user in pilots) && user.loc == src)
+		return OnMouseUp(object, location, control, params, user)
+	return ..()
+
+/mob/living/exosuit/OnMouseUp(atom/object, location, control, params, mob/user)
+	if(!user || incapacitated() || user.incapacitated())
+		return FALSE
+
+	if(!(user in pilots) && user != src)
+		return FALSE
+
+	if(selected_system)
+		return selected_system.MouseUpInteraction(object, location, control, params, user)
 
 /datum/click_handler/default/mech/OnClick(var/atom/A, var/params)
 	var/mob/living/exosuit/E = user.loc
@@ -105,7 +135,7 @@
 	if(user != src)
 		a_intent = user.a_intent
 		if(user.zone_sel)
-			zone_sel.set_selected_zone(user.zone_sel.selecting)
+			zone_sel.set_selected_zone(user.get_target_zone())
 		else
 			zone_sel.set_selected_zone(BP_CHEST)
 	// You may attack the target with your exosuit FIST if you're malfunctioning.
@@ -339,7 +369,7 @@
 
 	else
 		if(user.a_intent != I_HURT)
-			if(isMultitool(thing))
+			if(IS_MULTITOOL(thing))
 				if(hardpoints_locked)
 					to_chat(user, SPAN_WARNING("Hardpoint system access is disabled."))
 					return
@@ -355,7 +385,7 @@
 					return
 				to_chat(user, SPAN_WARNING("\The [src] has no hardpoint systems to remove."))
 				return
-			else if(isWrench(thing))
+			else if(IS_WRENCH(thing))
 				if(!maintenance_protocols)
 					to_chat(user, SPAN_WARNING("The securing bolts are not visible while maintenance protocols are disabled."))
 					return
@@ -367,7 +397,7 @@
 				visible_message(SPAN_NOTICE("\The [user] loosens and removes the securing bolts, dismantling \the [src]."))
 				dismantle()
 				return
-			else if(isWelder(thing))
+			else if(IS_WELDER(thing))
 				if(!getBruteLoss())
 					return
 				var/list/damaged_parts = list()
@@ -378,7 +408,7 @@
 				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.brute_damage)
 					to_fix.repair_brute_generic(thing, user)
 				return
-			else if(isCoil(thing))
+			else if(IS_COIL(thing))
 				if(!getFireLoss())
 					return
 				var/list/damaged_parts = list()
@@ -389,7 +419,7 @@
 				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.burn_damage)
 					to_fix.repair_burn_generic(thing, user)
 				return
-			else if(isScrewdriver(thing))
+			else if(IS_SCREWDRIVER(thing))
 				if(!maintenance_protocols)
 					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
 					return
@@ -408,7 +438,7 @@
 				hud_power_control.queue_icon_update()
 				body.cell = null
 				return
-			else if(isCrowbar(thing))
+			else if(IS_CROWBAR(thing))
 				if(!hatch_locked)
 					to_chat(user, SPAN_NOTICE("The cockpit isn't locked. There is no need for this."))
 					return
@@ -435,7 +465,7 @@
 					to_chat(user, SPAN_WARNING("There is already a cell in there!"))
 					return
 
-				if(user.unEquip(thing))
+				if(user.try_unequip(thing))
 					thing.forceMove(body)
 					body.cell = thing
 					to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))
@@ -490,7 +520,7 @@
 	SetName(new_name)
 	to_chat(user, SPAN_NOTICE("You have redesignated this exosuit as \the [name]."))
 
-/mob/living/exosuit/get_inventory_slot(obj/item/I)
+/mob/living/exosuit/get_equipped_slot_for_item(obj/item/I)
 	for(var/h in hardpoints)
 		if(hardpoints[h] == I)
 			return h

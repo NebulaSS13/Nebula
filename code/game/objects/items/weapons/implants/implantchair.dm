@@ -10,12 +10,10 @@
 	anchored = 1
 
 	var/ready = 1
-	var/malfunction = 0
 	var/list/obj/item/implant/loyalty/implant_list = list()
 	var/max_implants = 5
 	var/injection_cooldown = 600
 	var/replenish_cooldown = 6000
-	var/replenishing = 0
 	var/mob/living/carbon/occupant = null
 	var/injecting = 0
 

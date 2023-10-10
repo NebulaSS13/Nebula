@@ -8,6 +8,7 @@
 		material = GET_DECL(get_default_material())
 	if(material)
 		explosion_resistance = material.explosion_resistance
+		hitsound = material.hitsound
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
 		explosion_resistance = reinf_material.explosion_resistance
 	update_strings()
@@ -19,7 +20,7 @@
 			W.wall_connections = null
 			W.other_connections = null
 			iterate_turfs += W
-		for(var/turf/simulated/wall/W AS_ANYTHING in iterate_turfs)
+		for(var/turf/simulated/wall/W as anything in iterate_turfs)
 			W.update_icon()
 	else
 		wall_connections = null
@@ -123,28 +124,18 @@
 		other_connections = dirs_to_corner_states(other_dirs)
 
 	var/material_icon_base = get_wall_icon()
-	var/image/I
 	var/base_color = material.color
 	if(!density)
-		I = image(material_icon_base, "fwall_open")
-		I.color = base_color
-		add_overlay(I)
-		return
-
-	for(var/i = 1 to 4)
-		I = image(material_icon_base, "[wall_connections[i]]", dir = BITFLAG(i-1))
-		I.color = base_color
-		add_overlay(I)
-		if(paint_color)
-			I = image(icon, "paint[wall_connections[i]]", dir = BITFLAG(i-1))
-			I.color = paint_color
-			add_overlay(I)
-		if(stripe_color)
-			I = image(icon, "stripe[wall_connections[i]]", dir = BITFLAG(i-1))
-			I.color = stripe_color
-			add_overlay(I)
+		icon = material_icon_base
+		icon_state = "fwall_open"
+		color = base_color
+	else
+		icon = get_combined_wall_icon(wall_connections, other_connections, material_icon_base, base_color, paint_color, stripe_color, (material.wall_flags & WALL_HAS_EDGES) && (stripe_color || base_color))
+		icon_state = ""
+		color = null
 
 	if(apply_reinf_overlay())
+		var/image/I
 		var/reinf_color = paint_color ? paint_color : reinf_material.color
 		if(construction_stage != null && construction_stage < 6)
 			I = image('icons/turf/walls/_construction_overlays.dmi', "[construction_stage]")
@@ -154,18 +145,8 @@
 			if(reinf_material.use_reinf_state)
 				I = image(reinf_material.icon_reinf, reinf_material.use_reinf_state)
 				I.color = reinf_color
-				add_overlay(I)
 			else
-				// Directional icon
-				for(var/i = 1 to 4)
-					I = image(reinf_material.icon_reinf, "[wall_connections[i]]", dir = BITFLAG(i-1))
-					I.color = reinf_color
-					add_overlay(I)
-
-	if(material.wall_flags & WALL_HAS_EDGES)
-		for(var/i = 1 to 4)
-			I = image(material_icon_base, "other[other_connections[i]]", dir = BITFLAG(i-1))
-			I.color = stripe_color ? stripe_color : base_color
+				I = image(_get_wall_subicon(reinf_material.icon_reinf, wall_connections, reinf_color))
 			add_overlay(I)
 
 	var/image/texture = material.get_wall_texture()
@@ -176,7 +157,7 @@
 		var/integrity = material.integrity
 		if(reinf_material)
 			integrity += reinf_material.integrity
-		add_overlay(SSmaterials.wall_damage_overlays[Clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
+		add_overlay(SSmaterials.wall_damage_overlays[clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
 	if(material && istype(W.material))

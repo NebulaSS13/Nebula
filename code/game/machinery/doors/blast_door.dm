@@ -10,7 +10,7 @@
 /obj/machinery/door/blast
 	name = "blast door"
 	desc = "That looks like it doesn't open easily."
-	icon = 'icons/obj/doors/rapid_pdoor.dmi'
+	icon = 'icons/obj/doors/blast_doors/door.dmi'
 	icon_state = null
 	can_open_manually = FALSE
 
@@ -26,6 +26,7 @@
 	var/open_sound = 'sound/machines/blastdoor_open.ogg'
 	var/close_sound = 'sound/machines/blastdoor_close.ogg'
 
+	open_layer = ABOVE_DOOR_LAYER
 	closed_layer = ABOVE_WINDOW_LAYER
 	dir = NORTH
 	explosion_resistance = 25
@@ -154,7 +155,7 @@
 /obj/machinery/door/blast/attackby(obj/item/C, mob/user)
 	add_fingerprint(user, 0, C)
 	if(!panel_open) //Do this here so the door won't change state while prying out the circuit
-		if(isCrowbar(C) || (istype(C, /obj/item/twohanded/fireaxe) && C:wielded == 1))
+		if(IS_CROWBAR(C) || (istype(C, /obj/item/twohanded/fireaxe) && C:wielded == 1))
 			if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
 				to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
 				if(do_after(user, 2 SECONDS, src))
@@ -264,9 +265,16 @@
 		/decl/stock_part_preset/radio/receiver/blast_door_button = 1
 	)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/power/apc,
 		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
 		/obj/item/stock_parts/radio/receiver/buildable
+	)
+	base_type = /obj/machinery/button/blast_door/buildable
+	frame_type = /obj/item/frame/button/blastdoor
+
+/obj/machinery/button/blast_door/buildable
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc
 	)
 
 /obj/machinery/button/blast_door/Initialize(mapload)
@@ -301,19 +309,28 @@
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.
 /obj/machinery/door/blast/regular
+	icon = 'icons/obj/doors/blast_doors/door.dmi'
+	icon_state = "closed"
+	icon_state_open = "open"
+	icon_state_opening = "opening"
+	icon_state_closed = "closed"
+	icon_state_closing = "closing"
 
-	icon_state = "pdoor1"
-	icon_state_open = "pdoor0"
-	icon_state_opening = "pdoorc0"
-	icon_state_closed = "pdoor1"
-	icon_state_closing = "pdoorc1"
-
-	icon_state_open_broken = "blast_open_broken"
-	icon_state_closed_broken = "blast_closed_broken"
+	icon_state_open_broken = "open_broken"
+	icon_state_closed_broken = "closed_broken"
 
 	min_force = 30
 	maxhealth = 1000
 	block_air_zones = 1
+
+	var/icon_lower_door_open = "open_bottom"
+	var/icon_lower_door_open_broken = "open_bottom_broken"
+
+/obj/machinery/door/blast/regular/on_update_icon()
+	underlays.Cut()
+	. = ..()
+	if(!density)
+		underlays += image(icon, null, is_broken()? icon_lower_door_open_broken : icon_lower_door_open, BELOW_DOOR_LAYER, dir)
 
 /obj/machinery/door/blast/regular/escape_pod
 	name = "Escape Pod release Door"
@@ -324,6 +341,7 @@
 	. = ..()
 
 /obj/machinery/door/blast/regular/open
+	icon_state = "open"
 	begins_closed = FALSE
 
 // SUBTYPE: Shutters
@@ -331,15 +349,15 @@
 /obj/machinery/door/blast/shutters
 	name = "shutters"
 	desc = "A set of mechanized shutters made of a pretty sturdy material."
+	icon = 'icons/obj/doors/shutters/door.dmi'
+	icon_state = "closed"
+	icon_state_open = "open"
+	icon_state_opening = "opening"
+	icon_state_closed = "closed"
+	icon_state_closing = "closing"
 
-	icon_state = "shutter1"
-	icon_state_open = "shutter0"
-	icon_state_opening = "shutterc0"
-	icon_state_closed = "shutter1"
-	icon_state_closing = "shutterc1"
-
-	icon_state_open_broken = "shutter_open_broken"
-	icon_state_closed_broken = "shutter_closed_broken"
+	icon_state_open_broken = "open_broken"
+	icon_state_closed_broken = "closed_broken"
 
 	open_sound = 'sound/machines/shutters_open.ogg'
 	close_sound = 'sound/machines/shutters_close.ogg'
@@ -351,4 +369,4 @@
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE
-	icon_state = "shutter0"
+	icon_state = "open"

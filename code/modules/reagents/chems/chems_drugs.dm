@@ -1,7 +1,7 @@
 
 /decl/material/liquid/amphetamines
 	name = "amphetamines"
-	lore_text = "A powerful, long-lasting stimulant." 
+	lore_text = "A powerful, long-lasting stimulant."
 	taste_description = "acid"
 	color = "#ff3300"
 	metabolism = REM * 0.15
@@ -9,7 +9,7 @@
 	value = 2
 	uid = "chem_amphetamines"
 
-/decl/material/liquid/amphetamines/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/amphetamines/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(5))
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
@@ -24,7 +24,7 @@
 	value = 2
 	uid = "chem_narcotics"
 
-/decl/material/liquid/narcotics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/narcotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	ADJ_STATUS(M, STAT_JITTER, -5)
 	if(prob(80))
 		M.adjustBrainLoss(5.25 * removed)
@@ -44,7 +44,7 @@
 	value = 2
 	uid = "chem_nicotine"
 
-/decl/material/liquid/nicotine/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nicotine/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
@@ -55,7 +55,7 @@
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
 
-/decl/material/liquid/nicotine/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/nicotine/affect_overdose(var/mob/living/M)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
@@ -69,7 +69,7 @@
 	value = 2
 	uid = "chem_sedatives"
 
-/decl/material/liquid/sedatives/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/sedatives/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	ADJ_STATUS(M, STAT_JITTER, -50)
 	var/threshold = 1
 	var/dose = LAZYACCESS(M.chem_doses, type)
@@ -103,7 +103,7 @@
 	euphoriant = 15
 	uid = "chem_psychoactives"
 
-/decl/material/liquid/psychoactives/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/psychoactives/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	SET_STATUS_MAX(M, STAT_DRUGGY, 15)
 	M.add_chemical_effect(CE_PULSE, -1)
@@ -118,7 +118,7 @@
 	value = 2
 	uid = "chem_hallucinogenics"
 
-/decl/material/liquid/hallucinogenics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/hallucinogenics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_MIND, -2)
 	M.set_hallucination(50, 50)
 
@@ -134,7 +134,7 @@
 	fruit_descriptor = "hallucinogenic"
 	uid = "chem_psychotropics"
 
-/decl/material/liquid/psychotropics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/psychotropics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/threshold = 1
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose < 1 * threshold)
@@ -200,7 +200,7 @@
 		"THE LIGHT THE DARK A STAR IN CHAINS"
 	)
 
-/decl/material/liquid/glowsap/gleam/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/gleam/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
 	M.add_client_color(/datum/client_color/noir/thirdeye)
 	M.add_chemical_effect(CE_THIRDEYE, 1)
@@ -215,13 +215,13 @@
 	if(prob(5))
 		to_chat(M, SPAN_WARNING("<font size = [rand(1,3)]>[pick(dose_messages)]</font>"))
 
-/decl/material/liquid/glowsap/gleam/on_leaving_metabolism(var/atom/parent, var/metabolism_class)
+/decl/material/liquid/glowsap/gleam/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	. = ..()
-	var/mob/M = parent
+	var/mob/M = holder?.my_atom
 	if(istype(M))
 		M.remove_client_color(/datum/client_color/noir/thirdeye)
 
-/decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/M)
 	M.adjustBrainLoss(rand(1, 5))
 	if(ishuman(M) && prob(10))
 		var/mob/living/carbon/human/H = M

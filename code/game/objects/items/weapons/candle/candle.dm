@@ -13,7 +13,6 @@
 	var/icon_set = "candle"
 	var/candle_range = CANDLE_LUM
 	var/candle_power
-	var/candle_falloff = 2
 
 /obj/item/flame/candle/Initialize()
 	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
@@ -22,6 +21,8 @@
 	. = ..()
 
 /obj/item/flame/candle/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
+	//#FIXME: Candles handle their lit overlays weirdly
 	switch(wax)
 		if(1500 to INFINITY)
 			icon_state = "[icon_set]1"
@@ -32,9 +33,9 @@
 
 	if(lit != last_lit)
 		last_lit = lit
-		overlays.Cut()
+		cut_overlays()
 		if(lit)
-			overlays += overlay_image(icon, "[icon_state]_lit", flags = RESET_COLOR)
+			add_overlay(overlay_image(icon, "[icon_state]_lit", flags = RESET_COLOR))
 
 /obj/item/flame/candle/attackby(obj/item/W, mob/user)
 	..()
@@ -85,5 +86,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 7
 	slot_flags = SLOT_LOWER_BODY
-
-	startswith = list(/obj/item/flame/candle = 7)
+	material = /decl/material/solid/cardboard
+	
+/obj/item/storage/candle_box/WillContain()
+	return list(/obj/item/flame/candle = 7)

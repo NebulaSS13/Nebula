@@ -24,11 +24,13 @@
 	else
 		icon_state = get_world_inventory_state()
 
-/obj/item/gun/projectile/bolt_action/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/projectile/bolt_action/handle_post_fire(atom/movable/firer, atom/target, var/pointblank=0, var/reflex=0)
 	..()
-	if(user && user.skill_check(SKILL_WEAPONS, SKILL_PROF))
-		to_chat(user, "<span class='notice'>You work the bolt open with a reflexive motion, ejecting [chambered]!</span>")
-		unload_shell()
+	if(ismob(firer))
+		var/mob/user = firer
+		if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
+			to_chat(user, "<span class='notice'>You work the bolt open with a reflexive motion, ejecting [chambered]!</span>")
+			unload_shell()
 
 /obj/item/gun/projectile/bolt_action/proc/unload_shell()
 	if(chambered)

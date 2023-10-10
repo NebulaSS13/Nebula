@@ -28,7 +28,8 @@ var/global/const/PREF_NON_ANTAG = "Non-Antag Only"
 var/global/const/PREF_NEVER = "Never"
 var/global/const/PREF_ALWAYS = "Always"
 var/global/const/PREF_MYSELF = "Only Against Self"
-
+var/global/const/PREF_DARKMODE = "Darkmode"
+var/global/const/PREF_LIGHTMODE = "Lightmode"
 var/global/list/_client_preferences
 var/global/list/_client_preferences_by_key
 var/global/list/_client_preferences_by_type
@@ -164,8 +165,8 @@ var/global/list/_client_preferences_by_type
 	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_typing_indicator/changed(var/mob/preference_mob, var/new_value)
-	if(new_value == PREF_HIDE)
-		preference_mob.remove_typing_indicator()
+	if(preference_mob)
+		SStyping.update_preference(preference_mob.client, (new_value == PREF_SHOW))
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"
@@ -262,7 +263,7 @@ var/global/list/_client_preferences_by_type
 /datum/client_preference/show_status_markers/changed(mob/preference_mob, new_value)
 	. = ..()
 	if(preference_mob.client)
-		for(var/datum/status_marker_holder/marker AS_ANYTHING in global.status_marker_holders)
+		for(var/datum/status_marker_holder/marker as anything in global.status_marker_holders)
 			var/marker_image = (preference_mob.status_markers == marker) ? marker.mob_image_personal : marker.mob_image
 			if(new_value == PREF_HIDE)
 				preference_mob.client.images -= marker_image
@@ -350,6 +351,25 @@ var/global/list/_client_preferences_by_type
 	if(!given_client)
 		return FALSE
 	return given_client.get_byond_membership()
+
+/*********************
+* Darkmode/Lightmode *
+*********************/
+
+/datum/client_preference/chat_color_mode
+	description ="Chat/interface style"
+	key = "CHAT_MODE"
+	default_value = PREF_DARKMODE
+	options = list(PREF_DARKMODE, PREF_LIGHTMODE)
+
+/datum/client_preference/chat_color_mode/changed(var/mob/preference_mob, var/new_value)
+	if(!preference_mob.client)
+		return
+	if(new_value == PREF_DARKMODE)
+		preference_mob.client.activate_darkmode()
+	else
+		preference_mob.client.deactivate_darkmode()
+
 /******************************
 * Help intent attack blocking *
 ******************************/

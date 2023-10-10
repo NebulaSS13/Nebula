@@ -39,8 +39,8 @@
 	r_pocket = /obj/item/radio
 	l_pocket = /obj/item/crowbar
 
-/obj/effect/submap_landmark/spawnpoint/unishi_crew
+/obj/abstract/submap_landmark/spawnpoint/unishi_crew
 	name = "Unishi Crew"
 
-/obj/effect/submap_landmark/spawnpoint/unishi_researcher
+/obj/abstract/submap_landmark/spawnpoint/unishi_researcher
 	name = "Unishi Researcher"

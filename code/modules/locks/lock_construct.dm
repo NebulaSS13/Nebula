@@ -4,6 +4,7 @@
 	icon = 'icons/obj/items/doorlock.dmi'
 	icon_state = "lock_construct"
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/metal/steel
 	var/lock_data
 
 /obj/item/lock_construct/Initialize()

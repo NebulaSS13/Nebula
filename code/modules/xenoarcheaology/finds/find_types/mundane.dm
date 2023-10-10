@@ -56,7 +56,7 @@
 /decl/archaeological_find/tank/spawn_item(atom/loc)
 	var/obj/item/tank/new_item = ..()
 	new_item.air_contents.gas.Cut()
-	new_item.air_contents.adjust_gas(pick(subtypesof(/decl/material/gas)),15)
+	new_item.air_contents.adjust_gas(pick(decls_repository.get_decl_paths_of_subtype(/decl/material/gas)),15)
 	return new_item
 
 /decl/archaeological_find/tank/generate_name()

@@ -14,7 +14,8 @@
 	icon_state = "uglyminearmed"
 
 /obj/effect/mine/Crossed(atom/movable/AM)
-	Bumped(AM)
+	if(!isobserver(AM))
+		Bumped(AM)
 
 /obj/effect/mine/Bumped(mob/M)
 

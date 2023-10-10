@@ -6,6 +6,7 @@
 	desc = "You probably shouldn't be holding this."
 	icon = 'icons/obj/contraband.dmi'
 	force = 0
+	material = /decl/material/solid/cardboard //#TODO: Change to paper or something
 
 /obj/item/contraband/poster
 	name = "rolled-up poster"
@@ -17,10 +18,10 @@
 	if(given_poster_type && !ispath(given_poster_type, /decl/poster))
 		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
+	var/list/posters = decls_repository.get_decl_paths_of_subtype(/decl/poster)
 	poster_type = given_poster_type || poster_type
 	if(!poster_type)
-		poster_type = pick(subtypesof(/decl/poster))
-	var/list/posters = subtypesof(/decl/poster)
+		poster_type = pick(posters)
 	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
 	return ..(ml, material_key)
@@ -81,7 +82,8 @@
 	name = "poster"
 	desc = "A large piece of space-resistant printed paper."
 	icon = 'icons/obj/contraband.dmi'
-	anchored = 1
+	anchored = TRUE
+	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':-32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 	var/poster_type
 	var/ruined = 0
 
@@ -97,21 +99,10 @@
 		if(give_poster_type)
 			poster_type = give_poster_type
 		else
-			poster_type = pick(subtypesof(/decl/poster))
+			poster_type = pick(decls_repository.get_decl_paths_of_subtype(/decl/poster))
+	if(placement_dir && dir != placement_dir)
+		set_dir(placement_dir)
 	set_poster(poster_type)
-
-	pixel_x = 0
-	pixel_y = 0
-	switch (placement_dir)
-		if (NORTH)
-			default_pixel_y = 32
-		if (SOUTH)
-			default_pixel_y = -32
-		if (EAST)
-			default_pixel_x = 32
-		if (WEST)
-			default_pixel_x = -32
-	reset_offsets(0)
 
 /obj/structure/sign/poster/proc/set_poster(var/poster_type)
 	var/decl/poster/design = GET_DECL(poster_type)
@@ -120,7 +111,7 @@
 	icon_state = design.icon_state
 
 /obj/structure/sign/poster/attackby(obj/item/W, mob/user)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		if(ruined)
 			to_chat(user, "<span class='notice'>You remove the remnants of the poster.</span>")
@@ -132,22 +123,20 @@
 
 
 /obj/structure/sign/poster/attack_hand(mob/user)
-
-	if(ruined)
-		return
-
-	if(alert("Do I want to rip the poster from the wall?","You think...","Yes","No") == "Yes")
-
-		if(ruined || !user.Adjacent(src))
-			return
-
-		visible_message("<span class='warning'>\The [user] rips \the [src] in a single, decisive motion!</span>" )
-		playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
-		ruined = 1
-		icon_state = "poster_ripped"
-		SetName("ripped poster")
-		desc = "You can't make out anything from the poster's original print. It's ruined."
-		add_fingerprint(user)
+	if(ruined || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	if(!alert("Do I want to rip the poster from the wall?","You think...","Yes","No") == "Yes")
+		return TRUE
+	if(ruined || !CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_GRIP))
+		return TRUE
+	visible_message("<span class='warning'>\The [user] rips \the [src] in a single, decisive motion!</span>" )
+	playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
+	ruined = TRUE
+	icon_state = "poster_ripped"
+	SetName("ripped poster")
+	desc = "You can't make out anything from the poster's original print. It's ruined."
+	add_fingerprint(user)
+	return TRUE
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
 	new /obj/item/contraband/poster(newloc, null, poster_type)

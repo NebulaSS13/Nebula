@@ -15,6 +15,7 @@
 	var/enabled = 0
 
 /obj/item/shield_diffuser/on_update_icon()
+	. = ..()
 	if(enabled)
 		icon_state = "hdiffuser_on"
 	else

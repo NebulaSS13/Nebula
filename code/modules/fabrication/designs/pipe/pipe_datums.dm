@@ -191,7 +191,7 @@
 	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/fuel/manifold4w
-	name = "four-way fuel pipe manifold fitting"
+	name = "four-way supply pipe manifold fitting"
 	desc = "a four-way fuel pipe manifold segment"
 	build_icon_state = "manifold4w"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel
@@ -252,7 +252,7 @@
 /datum/fabricator_recipe/pipe/he/exchanger
 	name = "heat exchanger"
 	desc = "a heat exchanger"
-	connect_types = CONNECT_TYPE_REGULAR
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "heunary"
 	constructed_path = /obj/machinery/atmospherics/unary/heat_exchanger
 	pipe_class = PIPE_CLASS_UNARY

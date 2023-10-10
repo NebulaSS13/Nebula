@@ -2,8 +2,7 @@
 /obj/item/clothing/suit/armor/crafted
 	name = "improvised armour"
 	desc = "An improvised set of armour."
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	icon = 'icons/clothing/suit/armor/improvised.dmi'
 	material = /decl/material/solid/metal/steel
 	armor_degradation_speed = 1

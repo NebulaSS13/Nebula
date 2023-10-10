@@ -22,4 +22,5 @@
 	icon_state = "incensebox"
 	max_storage_space = 9
 
-	startswith = list(/obj/item/flame/candle/scented/incense = 9)
+/obj/item/storage/candle_box/incense/WillContain()
+	return list(/obj/item/flame/candle/scented/incense = 9)

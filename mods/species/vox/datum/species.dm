@@ -11,8 +11,6 @@
 		"withered" =        65
 	)
 
-#define IS_VOX "vox"
-
 /decl/blood_type/vox
 	name = "vox ichor"
 	antigen_category = "vox"
@@ -26,6 +24,11 @@
 	name_plural = SPECIES_VOX
 	base_prosthetics_model = /decl/prosthetics_manufacturer/vox/crap
 
+	vital_organs = list(
+		BP_STACK,
+		BP_BRAIN
+	)
+
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
 	)
@@ -37,19 +40,36 @@
 		/decl/natural_attack/punch,
 		/decl/natural_attack/bite/strong
 	)
+
+	default_h_style = /decl/sprite_accessory/hair/vox/short
+
+	base_hair_color = "#160900"
+	base_eye_color = "#d60093"
+	base_color = "#526d29"
+	base_markings = list(
+		/decl/sprite_accessory/marking/vox/beak =   "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/crest =  "#bc7d3e",
+		/decl/sprite_accessory/marking/vox/claws =  "#a0a654"
+	)
+
 	rarity_value = 4
-	description = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
-	scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient arkships \
-	alive. They are four to five feet tall, reptillian, beaked, tailed and quilled; human crews often \
-	refer to them as 'shitbirds' for their violent and offensive nature, as well as their horrible \
-	smell. \
-	<br/><br/> \
-	Most humans will never meet a Vox raider, instead learning of this insular species through \
-	dealing with their traders and merchants; those that do rarely enjoy the experience."
-	codex_description = "The Vox are a hostile, deeply untrustworthy species from the edges of human space. They prey \
-	on isolated stations, ships or settlements without any apparent logic or reason, and tend to refuse communications \
-	or negotiations except when their backs are to the wall or they are in dire need of resources. They are four to five \
-	feet tall, reptillian, beaked, tailed and quilled."
+
+	description = {"The Vox are the broken remnants of a once-proud race, now reduced to little more
+	than scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient
+	arkships alive. They are four to five feet tall, reptillian, beaked, tailed and quilled; human
+	crews often refer to them as 'shitbirds' for their violent and offensive nature, as well as their
+	horrible smell.
+	<br/><br/>
+	Most humans will never meet a Vox raider, instead learning of this insular species through dealing
+	with their traders and merchants; those that do rarely enjoy the experience."}
+
+	codex_description = {"The Vox are a hostile, deeply untrustworthy species from the edges of human
+	space. They prey on isolated stations, ships or settlements without any apparent logic or reason,
+	and tend to refuse communications or negotiations except when their backs are to the wall or they
+	are in dire need of resources. They are four to five feet tall, reptillian, beaked, tailed and
+	quilled."}
+
 	hidden_from_codex = FALSE
 
 	taste_sensitivity = TASTE_DULL
@@ -65,6 +85,8 @@
 
 	age_descriptor = /datum/appearance_descriptor/age/vox
 
+	preview_outfit = /decl/hierarchy/outfit/vox_raider
+
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
 
@@ -74,17 +96,17 @@
 
 	species_flags = SPECIES_FLAG_NO_SCAN
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
+	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR
 
 	blood_types = list(/decl/blood_type/vox)
 	flesh_color = "#808d11"
 
-	reagent_tag = IS_VOX
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5
 
 	override_limb_types = list(
-		BP_GROIN = /obj/item/organ/external/groin/vox
+		BP_GROIN = /obj/item/organ/external/groin/vox,
+		BP_TAIL = /obj/item/organ/external/tail/vox
 	)
 
 	has_organ = list(
@@ -97,18 +119,19 @@
 		BP_EYES =       /obj/item/organ/internal/eyes/vox,
 		BP_STACK =      /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
-		)
+	)
 
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/vox)
-
-	available_pronouns = list(/decl/pronouns/neuter)
+	available_pronouns = list(
+		/decl/pronouns/neuter,
+		/decl/pronouns/neuter/person
+	)
 	available_bodytypes = list(/decl/bodytype/vox)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height =       0.75,
 		/datum/appearance_descriptor/build =        1.25,
 		/datum/appearance_descriptor/vox_markings = 1
-		)
+	)
 
 	available_cultural_info = list(
 		TAG_CULTURE =   list(
@@ -148,8 +171,9 @@
 
 /decl/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask_str)
-	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
-		H.equip_to_slot_or_del(new /obj/item/storage/box/vox(H.back), slot_in_backpack_str)
+	var/obj/item/storage/backpack/backpack = H.get_equipped_item(slot_back_str)
+	if(istype(backpack))
+		H.equip_to_slot_or_del(new /obj/item/storage/box/vox(backpack), slot_in_backpack_str)
 		var/obj/item/tank/nitrogen/tank = new(H)
 		H.equip_to_slot_or_del(tank, BP_R_HAND)
 		if(tank)
@@ -157,11 +181,11 @@
 	else
 		H.equip_to_slot_or_del(new /obj/item/tank/nitrogen(H), slot_back_str)
 		H.equip_to_slot_or_del(new /obj/item/storage/box/vox(H), BP_R_HAND)
-		H.set_internals(H.back)
+		H.set_internals(backpack)
 
 /decl/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
 	var/decl/pronouns/G = H.get_pronouns()
-	return SPAN_DANGER("[G.His] beak-segments are cracked and chipped! [G.He] [G.is] not even recognizable.\n")
+	return SPAN_DANGER("[G.His] beak-segments are cracked and chipped beyond recognition!\n")
 
 /decl/species/vox/skills_from_age(age)
 	. = 8

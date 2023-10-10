@@ -36,7 +36,7 @@
 /datum/breach/proc/update_descriptor()
 
 	//Sanity...
-	class = between(1, round(class), 5)
+	class = clamp(1, round(class), 5)
 	//Apply the correct descriptor.
 	if(damtype == BURN)
 		descriptor = breach_burn_descriptors[class]
@@ -194,7 +194,7 @@
 
 		if(istype(loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
-			if(H.wear_suit == src)
+			if(H.get_equipped_item(slot_wear_suit_str) == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
 				return
 
@@ -208,11 +208,11 @@
 			repair_breaches(BURN, use_amt * repair_power, user)
 		return
 
-	else if(isWelder(W))
+	else if(IS_WELDER(W))
 
 		if(istype(loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
-			if(H.wear_suit == src)
+			if(H.get_equipped_item(slot_wear_suit_str) == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
 				return
 
@@ -221,14 +221,14 @@
 			return
 
 		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(5))
+		if(!WT.weld(5))
 			to_chat(user, SPAN_WARNING("You need more welding fuel to repair this suit."))
 			return
 
 		repair_breaches(BRUTE, 3, user)
 		return
 
-	else if(istype(W, /obj/item/ducttape))
+	else if(istype(W, /obj/item/stack/tape_roll/duct_tape))
 		var/datum/breach/target_breach		//Target the largest unpatched breach.
 		for(var/datum/breach/B in breaches)
 			if(B.patched)
@@ -239,13 +239,22 @@
 		if(!target_breach)
 			to_chat(user, "There are no open breaches to seal with \the [W].")
 		else
-			playsound(src, 'sound/effects/tape.ogg',25)
 			var/mob/living/carbon/human/H = user
-			if(!istype(H)) return
-			if(do_after(user, H.wear_suit == src? 60 : 30, istype(loc,/mob/living)? loc : null)) //Sealing a breach on your own suit is awkward and time consuming
+			if(!istype(H))
+				return
+
+			var/obj/item/stack/tape_roll/duct_tape/D = W
+			var/amount_needed = CEILING(target_breach.class * 2)
+			if(!D.can_use(amount_needed))
+				to_chat(user, SPAN_WARNING("There's not enough [D.plural_name] in your [src] to seal \the [target_breach.descriptor] on \the [src]! You need at least [amount_needed] [D.plural_name]."))
+				return
+
+			if(do_after(user, H.get_equipped_item(slot_wear_suit_str) == src? 60 : 30, istype(loc,/mob/living)? loc : null)) //Sealing a breach on your own suit is awkward and time consuming
+				D.use(amount_needed)
+				playsound(src, 'sound/effects/tape.ogg',25)
 				user.visible_message(
-					SPAN_NOTICE("\The [user] uses \the [W] to seal \the [target_breach.descriptor] on \the [src]."),
-					SPAN_NOTICE("You use \the [W] to seal \the [target_breach.descriptor] on \the [src].")
+					SPAN_NOTICE("\The [user] uses some [D.plural_name] to seal \the [target_breach.descriptor] on \the [src]."),
+					SPAN_NOTICE("You use [amount_needed] [D.plural_name] of \the [W] to seal \the [target_breach.descriptor] on \the [src].")
 				)
 				target_breach.patched = TRUE
 				target_breach.update_descriptor()

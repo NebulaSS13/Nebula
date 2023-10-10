@@ -65,7 +65,7 @@ var/global/default_mobloc = null
 	if(isnull(mobloc))
 		if(!default_mobloc)
 			for(var/turf/simulated/floor/tiled/T in world)
-				if(!T.zone || !T.zone.air)
+				if(!T.zone?.air)
 					continue
 				var/pressure = T.zone.air.return_pressure()
 				if(90 < pressure && pressure < 120) // Find a turf between 90 and 120
@@ -129,11 +129,9 @@ var/global/default_mobloc = null
 /datum/unit_test/mob_damage
 	name = "MOB: Template for mob damage"
 	template = /datum/unit_test/mob_damage
-	var/mob/living/carbon/human/testmob = null
 	var/damagetype = BRUTE
 	var/mob_type = /mob/living/carbon/human
 	var/expected_vulnerability = STANDARD
-	var/check_health = 0
 	var/damage_location = BP_CHEST
 
 /datum/unit_test/mob_damage/start_test()
@@ -142,7 +140,7 @@ var/global/default_mobloc = null
 							// Which makes checks impossible.
 
 	if(isnull(test))
-		fail("Check Runtimed in Mob creation")
+		fail("Runtimed in mob creation")
 
 	if(test["result"] == FAILURE)
 		fail(test["msg"])
@@ -203,7 +201,7 @@ var/global/default_mobloc = null
 
 	switch(expected_vulnerability)
 		if(STANDARD)
-			expected_msg = "to take standard damage"
+			expected_msg = "To take standard damage"
 		if(ARMORED)
 			expected_msg = "To take less damage"
 		if(EXTRA_VULNERABLE)

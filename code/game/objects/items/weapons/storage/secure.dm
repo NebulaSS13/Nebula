@@ -15,6 +15,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
+	material = /decl/material/solid/metal/steel
 	var/lock_type = /datum/extension/lockable/storage
 	var/icon_locking = "secureb"
 	var/icon_opened = "secure0"
@@ -40,13 +41,6 @@
 		return TRUE
 	. = ..()
 
-/obj/item/storage/secure/AltClick(mob/user)
-	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	if(lock.locked)
-		src.add_fingerprint(user)
-		return
-	..()
-
 /obj/item/storage/secure/attack_self(var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	lock.ui_interact(user)
@@ -64,17 +58,20 @@
 
 /obj/item/storage/secure/on_update_icon()
 	. = ..()
-
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(!istype(lock))
 		return
-
-	overlays.Cut()
 	if(lock.emagged)
-		overlays += image(icon, icon_locking)
+		add_overlay(icon_locking)
 	else if(lock.open)
-		overlays += image(icon, icon_opened)
+		add_overlay(icon_opened)
 
+/obj/item/storage/secure/open(mob/user)
+	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	if(lock.locked)
+		add_fingerprint(user)
+		return
+	. = ..()
 
 // -----------------------------
 //        Secure Briefcase
@@ -92,20 +89,20 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_sound = 'sound/effects/storage/briefcase.ogg'
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user as mob)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if (loc == user && lock.locked)
 		to_chat(user, SPAN_WARNING("[src] is locked and cannot be opened!"))
-	else if (loc == user && !lock.locked)
-		src.open(user)
-	else
-		..()
-		for(var/mob/M in range(1))
-			if (M.s_active == src)
-				src.close(M)
-	src.add_fingerprint(user)
-	return
+		return TRUE
+	if (loc == user && !lock.locked)
+		open(user)
+		add_fingerprint(user)
+		return TRUE
+	return ..()
 
 // -----------------------------
 //        Secure Safe
@@ -126,10 +123,8 @@
 	icon_locking = "safeb"
 	icon_opened = "safe0"
 
-/obj/item/storage/secure/safe/Initialize()
-	. = ..()
-	new /obj/item/paper(src)
-	new /obj/item/pen(src)
-
-/obj/item/storage/secure/safe/attack_hand(mob/user)
-	return attack_self(user)
+/obj/item/storage/secure/safe/WillContain()
+	return list(
+		/obj/item/pen,
+		/obj/item/paper
+	)

@@ -79,7 +79,7 @@
 			if(!found)
 				return FALSE
 	else
-		return FALSE	
+		return FALSE
 
 	if(user)
 		var/delay = 30 * user.skill_delay_mult(SKILL_DEVICES)
@@ -91,7 +91,7 @@
 			if(!do_after(user, delay, src) || user.get_active_hand() != system)
 				return FALSE
 
-			if(user.unEquip(system))
+			if(user.try_unequip(system))
 				to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
 				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			else return FALSE
@@ -103,9 +103,10 @@
 	ME.installed(src)
 
 	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
-	H.holding = system
+	if(H)
+		H.holding = system
+		system.screen_loc = H.screen_loc
 
-	system.screen_loc = H.screen_loc
 	system.hud_layerise()
 
 	hud_elements |= system

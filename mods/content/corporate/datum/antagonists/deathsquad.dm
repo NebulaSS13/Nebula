@@ -4,8 +4,14 @@
 	welcome_text = "You work in the service of corporate Asset Protection, answering directly to the Board of Directors."
 	landmark_id = "Commando"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER | ANTAG_RANDOM_EXCEPTED
-	default_access = list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
+	default_access = list(
+		access_cent_general,
+		access_cent_specops,
+		access_cent_living,
+		access_cent_storage
+	)
 	antaghud_indicator = "huddeathsquad"
+	default_access = list(access_cent_specops)
 
 	hard_cap = 4
 	hard_cap_round = 8
@@ -23,7 +29,9 @@
 
 /decl/hierarchy/outfit/commando
 	name =     "Special Role - Deathsquad Commando"
+	l_ear =    /obj/item/radio/headset/ert
 	uniform =  /obj/item/clothing/under/color/green
+	l_ear =    /obj/item/radio/headset/hacked
 	l_pocket = /obj/item/plastique
 	shoes =    /obj/item/clothing/shoes/jackboots/swat
 	glasses =  /obj/item/clothing/glasses/thermal
@@ -48,13 +56,6 @@
 	. = ..()
 	if(.)
 		player.implant_loyalty(player)
-		create_radio(DTH_FREQ, player)
-
-/decl/special_role/deathsquad/create_id(mob/living/carbon/human/player, equip)
-	var/obj/item/card/id/id = ..()
-	if(player && id)
-		id.access |= get_all_station_access()
-		id.icon_state = "centcom"
 
 /decl/special_role/deathsquad/update_antag_mob(var/datum/mind/player)
 

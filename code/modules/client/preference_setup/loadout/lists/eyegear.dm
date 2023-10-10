@@ -1,8 +1,9 @@
 /decl/loadout_category/eyes
 	name = "Eyewear"
-	
+
 /decl/loadout_option/eyes
 	category = /decl/loadout_category/eyes
+	abstract_type = /decl/loadout_option/eyes
 	slot = slot_glasses_str
 
 /decl/loadout_option/eyes/eyepatch

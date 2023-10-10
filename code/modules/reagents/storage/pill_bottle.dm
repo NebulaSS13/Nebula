@@ -9,6 +9,7 @@
 	item_state = "contsolid"
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
+	obj_flags = OBJ_FLAG_HOLLOW
 	max_storage_space = 21
 	can_hold = list(
 		/obj/item/chems/pill,
@@ -22,7 +23,8 @@
 
 	var/pop_sound = 'sound/effects/peelz.ogg'
 	var/wrapper_color
-	var/label
+	/// If a string, a label with this value will be added.
+	var/labeled_name = null
 
 /obj/item/storage/pill_bottle/remove_from_storage(obj/item/W, atom/new_location, NoUpdate)
 	. = ..()
@@ -31,7 +33,7 @@
 
 /obj/item/storage/pill_bottle/proc/pop_pill(var/mob/user)
 
-	var/target_mouth = (user.zone_sel?.selecting == BP_MOUTH)
+	var/target_mouth = (user.get_target_zone() == BP_MOUTH)
 	if(target_mouth)
 		if(!user.can_eat())
 			to_chat(user, SPAN_WARNING("You can't eat anything!"))
@@ -68,11 +70,10 @@
 /obj/item/storage/pill_bottle/Initialize()
 	. = ..()
 	update_icon()
+	if(istext(labeled_name))
+		attach_label(null, null, labeled_name)
 
 /obj/item/storage/pill_bottle/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(wrapper_color)
-		var/image/I = image(icon, "pillbottle_wrap")
-		I.color = wrapper_color
-		I.appearance_flags |= RESET_COLOR
-		add_overlay(I)
+		add_overlay(overlay_image(icon, "pillbottle_wrap", wrapper_color, RESET_COLOR))

@@ -10,6 +10,10 @@
 	icon = 'icons/obj/hoists.dmi'
 	icon_state = "hoist_case"
 
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+
+
 /obj/item/hoist_kit/attack_self(mob/user)
 	if (!do_after(usr, (2 SECONDS), src))
 		return
@@ -34,18 +38,13 @@
 	var/obj/structure/hoist/source_hoist
 
 /obj/effect/hoist_hook/attack_hand(mob/user)
-	if (user.incapacitated())
-		to_chat(user, SPAN_WARNING("You can't do that while incapacitated."))
-		return
-
-	if (!user.check_dexterity(DEXTERITY_GRIP))
-		return
-
-	if(source_hoist && source_hoist.hoistee)
-		source_hoist.check_consistency()
-		source_hoist.hoistee.forceMove(get_turf(src))
-		user.visible_message(SPAN_NOTICE("[user] detaches \the [source_hoist.hoistee] from the hoist clamp."), SPAN_NOTICE("You detach \the [source_hoist.hoistee] from the hoist clamp."), SPAN_NOTICE("You hear something unclamp."))
-		source_hoist.release_hoistee()
+	if(user.incapacitated() || !user.check_dexterity(DEXTERITY_GRIP) || !source_hoist?.hoistee)
+		return ..()
+	source_hoist.check_consistency()
+	source_hoist.hoistee.forceMove(get_turf(src))
+	user.visible_message(SPAN_NOTICE("[user] detaches \the [source_hoist.hoistee] from the hoist clamp."), SPAN_NOTICE("You detach \the [source_hoist.hoistee] from the hoist clamp."), SPAN_NOTICE("You hear something unclamp."))
+	source_hoist.release_hoistee()
+	return TRUE
 
 /obj/effect/hoist_hook/receive_mouse_drop(atom/dropping, mob/user)
 	// skip the parent buckle logic, handle climbing directly
@@ -183,25 +182,23 @@
 		source_hoist.break_hoist()
 
 /obj/structure/hoist/attack_hand(mob/user)
-	if (!ishuman(user))
-		return
+	if (!ishuman(user) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 
 	if (user.incapacitated())
 		to_chat(user, SPAN_WARNING("You can't do that while incapacitated."))
-		return
-
-	if (!user.check_dexterity(DEXTERITY_GRIP))
-		return
+		return TRUE
 
 	if(broken)
 		to_chat(user, SPAN_WARNING("The hoist is broken!"))
-		return
+		return TRUE
+
 	var/can = can_move_dir(movedir)
 	var/movtext = movedir == UP ? "raise" : "lower"
 	if (!can) // If you can't...
 		movedir = movedir == UP ? DOWN : UP // switch directions!
 		to_chat(user, SPAN_NOTICE("You switch the direction of the pulley."))
-		return
+		return TRUE
 
 	if (!hoistee)
 		user.visible_message(
@@ -209,7 +206,7 @@
 			SPAN_NOTICE("You begin to [movtext] the clamp."),
 			SPAN_NOTICE("You hear the sound of a crank."))
 		move_dir(movedir, 0)
-		return
+		return TRUE
 
 	check_consistency()
 
@@ -227,6 +224,7 @@
 		SPAN_NOTICE("You hear the sound of a crank."))
 	if (do_after(user, (1 SECONDS) * size / 4, src))
 		move_dir(movedir, 1)
+	return TRUE
 
 /obj/structure/hoist/proc/collapse_kit(mob/user)
 	var/obj/item/hoist_kit/kit = new (get_turf(src))

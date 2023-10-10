@@ -7,6 +7,7 @@
 	program_icon_state = "security"
 	program_menu_icon = "locked"
 	requires_network = 1
+	requires_network_feature = NET_FEATURE_SECURITY
 	available_on_network = 1
 	read_access = list(access_armory)
 	nanomodule_path = /datum/nano_module/program/forceauthorization/

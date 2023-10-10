@@ -10,7 +10,7 @@
 	var/obj/machinery/atmospherics/unary/heat_exchanger/partner = null
 	var/update_cycle
 
-	connect_types = CONNECT_TYPE_REGULAR
+	connect_types = CONNECT_TYPE_REGULAR | CONNECT_TYPE_FUEL
 	build_icon_state = "heunary"
 
 	frame_type = /obj/item/pipe
@@ -79,7 +79,7 @@
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+	if ((int_air.return_pressure()-env_air.return_pressure()) > (2 ATM))
 		return FALSE
 	return TRUE
 

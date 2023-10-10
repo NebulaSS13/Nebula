@@ -18,10 +18,6 @@
 	one_hand_penalty = 2
 	bulk = 3
 
-/obj/item/gun/projectile/revolver/AltClick()
-	if(CanPhysicallyInteract(usr))
-		spin_cylinder()
-
 /obj/item/gun/projectile/revolver/verb/spin_cylinder()
 	set name = "Spin cylinder"
 	set desc = "Fun when you're bored out of your skull."
@@ -45,6 +41,9 @@
 	chamber_offset = 0
 	return ..()
 
+/obj/item/gun/projectile/revolver/stun
+	ammo_type = /obj/item/ammo_casing/pistol/magnum/stun
+
 /obj/item/gun/projectile/revolver/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
@@ -56,7 +55,7 @@
 /obj/item/gun/projectile/revolver/capgun/on_update_icon()
 	. = ..()
 	if(cap)
-		overlays += image(icon, "[icon_state]-toy")
+		add_overlay("[icon_state]-toy")
 
 /obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
 	if(!istype(W) || !cap)
@@ -67,3 +66,15 @@
 	cap = FALSE
 	update_icon()
 	return 1
+
+/obj/item/gun/projectile/revolver/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/revolver_spin_cylinder)
+
+/decl/interaction_handler/revolver_spin_cylinder
+	name = "Spin Cylinder"
+	expected_target_type = /obj/item/gun/projectile/revolver
+
+/decl/interaction_handler/revolver_spin_cylinder/invoked(var/atom/target, var/mob/user)
+	var/obj/item/gun/projectile/revolver/R = target
+	R.spin_cylinder()

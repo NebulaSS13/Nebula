@@ -154,7 +154,7 @@
 	qdel(src)
 
 /obj/machinery/media/jukebox/attackby(obj/item/W, mob/user)
-	if(isWrench(W) && !panel_open)
+	if(IS_WRENCH(W) && !panel_open)
 		add_fingerprint(user)
 		wrench_floor_bolts(user, 0)
 		power_change()
@@ -187,6 +187,6 @@
 	update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)
-	volume = Clamp(new_volume, 0, 50)
+	volume = clamp(new_volume, 0, 50)
 	if(sound_token)
 		sound_token.SetVolume(volume)

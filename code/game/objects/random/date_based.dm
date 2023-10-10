@@ -108,4 +108,5 @@ var/global/list/days_of_month
 	name = "Christmas Tree"
 
 /obj/random/date_based/christmas/tree/spawn_choices()
-	return list(/obj/structure/flora/tree/pine/xmas)
+	var/static/list/spawnable_choices = list(/obj/structure/flora/tree/pine/xmas)
+	return spawnable_choices

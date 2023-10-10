@@ -21,11 +21,12 @@
 		. = ..(W, user)
 
 /obj/item/clothing/accessory/storage/holster/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(H.unholster(user))
-		return
-	else
-		. = ..(user)
+		return TRUE
+	return ..()
 
 /obj/item/clothing/accessory/storage/holster/examine(mob/user)
 	. = ..(user)

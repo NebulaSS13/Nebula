@@ -5,7 +5,7 @@
 // partial power is used with burn() in order to only do partial burns.
 /obj/effect/overmap/visitable/ship/get_delta_v(var/real_burn = FALSE, var/partial_power = 1)
 	var/total_exhaust_velocity = 0
-	partial_power = Clamp(partial_power, 0, 1)
+	partial_power = clamp(partial_power, 0, 1)
 	for(var/datum/extension/ship_engine/E in engines)
 		total_exhaust_velocity += real_burn ? E.burn(partial_power) : E.get_exhaust_velocity()
 	var/vessel_mass = get_vessel_mass()
@@ -37,7 +37,7 @@
 /obj/effect/overmap/visitable/ship/proc/recalculate_vessel_mass()
 	var/list/zones = list()
 	for(var/area/A in get_areas())
-		for(var/turf/simulated/T in A)
+		for(var/turf/T in A)
 			if(T.is_open())
 				continue
 
@@ -51,7 +51,9 @@
 				if(W.girder_material)
 					. += W.girder_material.weight * 5
 
-			zones |= T.zone
+			if(T.zone)
+				zones |= T.zone
+
 			for(var/atom/movable/C in T)
 				if(!C.simulated)
 					continue

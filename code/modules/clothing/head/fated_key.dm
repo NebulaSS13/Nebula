@@ -1,10 +1,10 @@
 /obj/item/clothing/head/fated
 	name = "strange key"
 	desc = "A glowing key, uncomfortably hot to the touch."
-
 	icon = 'icons/clothing/head/fated_key.dmi'
 	body_parts_covered = 0
-	armor = list(melee = 55, bullet = 55, laser = 55, energy = 55, bomb = 55, bio = 100, rad = 100)
+	armor = list(ARMOR_MELEE = 55, ARMOR_BULLET = 55, ARMOR_LASER = 55, ARMOR_ENERGY = 55, ARMOR_BOMB = 55, ARMOR_BIO = 100, ARMOR_RAD = 100)
+	flags_inv = 0
 
 /obj/item/clothing/head/fated/equipped(mob/living/user, slot)
 	. = ..()
@@ -44,7 +44,7 @@
 		to_chat(user, SPAN_WARNING("You are in no fit state to perform division."))
 		return
 
-	if(world.time < user.last_special)
+	if(user.is_on_special_ability_cooldown())
 		to_chat(user, SPAN_WARNING("You have not yet regained enough focus to perform division."))
 		return
 
@@ -65,8 +65,8 @@
 		user.visible_message(SPAN_DANGER("\The [user] swings [G.his] [blade.name] in a blazing arc!"))
 		playsound(user.loc, 'sound/effects/sanctionedaction_cut.ogg', 100, 1)
 		var/obj/item/projectile/sanctionedaction/cut = new(user.loc)
-		cut.launch(get_edge_target_turf(get_turf(user.loc), user.dir), user.zone_sel.selecting)
-		user.last_special = world.time + 10 SECONDS
+		cut.launch(get_edge_target_turf(get_turf(user.loc), user.dir), user.get_target_zone())
+		user.set_special_ability_cooldown(10 SECONDS)
 
 /obj/item/projectile/sanctionedaction
 	name = "rending slash"

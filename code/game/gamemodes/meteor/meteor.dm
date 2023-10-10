@@ -36,7 +36,7 @@
 	)
 
 /datum/game_mode/meteor/proc/set_meteor_severity(value)
-	meteor_severity = Clamp(value, 0, maximal_severity)
+	meteor_severity = clamp(value, 0, maximal_severity)
 
 /datum/game_mode/meteor/proc/set_meteor_wave_delay(value)
 	meteor_wave_delay = max(10 SECONDS, value)
@@ -86,7 +86,7 @@
 		next_wave = round_duration_in_ticks + meteor_wave_delay
 		// Starts as barely noticeable dust impact, ends as barrage of most severe meteor types the code has to offer. Have fun.
 		spawn()
-			spawn_meteors(meteor_severity, get_meteor_types(), pick(global.cardinal), pick(global.using_map.station_levels))
+			spawn_meteors(meteor_severity, get_meteor_types(), pick(global.cardinal), pick(SSmapping.station_levels))
 		var/escalated = FALSE
 		if(prob(escalation_probability) && (meteor_severity < maximal_severity))
 			meteor_severity++

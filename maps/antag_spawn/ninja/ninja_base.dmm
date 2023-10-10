@@ -78,8 +78,8 @@
 /area/map_template/ninja_dojo/dojo)
 "an" = (
 /obj/structure/table/glass,
-/obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/ominus,
+/obj/item/chems/ivbag/blood/ominus,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
@@ -88,13 +88,6 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "ao" = (
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/map_template/ninja_dojo/dojo)
-"ap" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -124,22 +117,6 @@
 	},
 /obj/structure/window/reinforced/crescent{
 	dir = 4
-	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/map_template/ninja_dojo/dojo)
-"au" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5
-	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
-/area/map_template/ninja_dojo/dojo)
-"av" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9
 	},
 /turf/unsimulated/floor{
 	icon_state = "white"
@@ -225,7 +202,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/ninja{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -419,7 +396,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bb" = (
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/ninja{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -522,7 +499,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bm" = (
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/ninja{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -545,7 +522,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bp" = (
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/ninja{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -581,7 +558,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bt" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/unsimulated/floor{
 	icon_state = "snow"
 	},
@@ -823,7 +800,7 @@
 "bW" = (
 /obj/structure/table/woodentable,
 /obj/item/toy/figure/wizard,
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/ninja{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -866,7 +843,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cb" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner,
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/ninja{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -955,7 +932,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -32
 	},
 /turf/unsimulated/floor{
@@ -1132,7 +1109,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/item/plastique,
 /obj/item/plastique,
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/ninja{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -1240,7 +1217,7 @@
 	id_tag = "ninja_shuttle";
 	pixel_x = -8;
 	pixel_y = 25;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_NINJA")
 	},
 /obj/machinery/light{
 	dir = 8;
@@ -1290,7 +1267,7 @@
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_NINJA")
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1351,7 +1328,7 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/item/radio/intercom/syndicate{
+/obj/item/radio/intercom/ninja{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -1922,7 +1899,7 @@ ad
 ad
 aj
 ao
-au
+ao
 ao
 aK
 aT
@@ -1964,8 +1941,8 @@ ad
 ad
 ad
 aj
-ap
-av
+ao
+ao
 ao
 aL
 aG

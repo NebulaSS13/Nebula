@@ -13,6 +13,8 @@
 	ui_header = "smmon_0.gif"
 	read_access = list(access_engine)
 	network_destination = "supermatter monitoring system"
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	size = 5
 	category = PROG_ENG
 	var/last_status = 0
@@ -50,7 +52,7 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return FALSE
-	return ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
+	return LEVELS_ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
 
 // Refreshes list of active supermatter crystals
 /datum/nano_module/program/supermatter_monitor/proc/refresh()

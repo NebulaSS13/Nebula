@@ -12,7 +12,6 @@
 	mouse_opacity = 0
 	animate_movement = 0
 	var/amount = 3
-	var/expand = 1
 	var/metal = 0
 
 /obj/effect/effect/foam/Initialize(mapload, var/ismetal = 0)
@@ -72,12 +71,11 @@
 		spawn(5)
 			qdel(src)
 
-/obj/effect/effect/foam/Crossed(var/atom/movable/AM)
-	if(metal)
+/obj/effect/effect/foam/Crossed(atom/movable/AM)
+	if(metal || !isliving(AM))
 		return
-	if(istype(AM, /mob/living))
-		var/mob/living/M = AM
-		M.slip("the foam", 6)
+	var/mob/living/M = AM
+	M.slip("the foam", 6)
 
 /datum/effect/effect/system/foam_spread
 	var/amount = 5				// the size of the foam spread.
@@ -158,12 +156,13 @@
 		qdel(src)
 
 /obj/structure/foamedmetal/attack_hand(var/mob/user)
-	if ((MUTATION_HULK in user.mutations) || (prob(75 - metal * 25)))
+	SHOULD_CALL_PARENT(FALSE)
+	if (prob(75 - metal * 25))
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the metal foam wall.</span>")
 		qdel(src)
 	else
 		to_chat(user, "<span class='notice'>You hit the metal foam but bounce off it.</span>")
-	return
+	return TRUE
 
 /obj/structure/foamedmetal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/grab))

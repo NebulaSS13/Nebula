@@ -36,7 +36,7 @@
 	create_reagents(reagent_limit)
 
 /obj/machinery/chem_master/proc/get_remaining_volume()
-	return Clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
+	return clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
 
 /obj/machinery/chem_master/attackby(var/obj/item/B, var/mob/user)
 
@@ -45,7 +45,7 @@
 		if(beaker)
 			to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
 			return
-		if(!user.unEquip(B, src))
+		if(!user.try_unequip(B, src))
 			return
 		beaker = B
 		to_chat(user, SPAN_NOTICE("You add the beaker to the machine!"))
@@ -62,13 +62,13 @@
 		if(loaded_pill_bottle)
 			to_chat(user, SPAN_WARNING("A pill bottle is already loaded into the machine."))
 			return
-		if(!user.unEquip(B, src))
+		if(!user.try_unequip(B, src))
 			return
 		loaded_pill_bottle = B
 		to_chat(user, SPAN_NOTICE("You add the pill bottle into the dispenser slot!"))
 		updateUsrDialog()
 		return TRUE
-	
+
 	return ..()
 
 /obj/machinery/chem_master/Topic(href, href_list, state)
@@ -99,7 +99,7 @@
 				var/decl/material/their_reagent = locate(href_list["add"])
 				if(their_reagent)
 					var/mult = 1
-					var/amount = Clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
+					var/amount = clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
 					if(sloppy)
 						var/contaminants = fetch_contaminants(user, R, their_reagent)
 						for(var/decl/material/reagent in contaminants)
@@ -115,14 +115,14 @@
 			if(their_reagent)
 				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
 				if(useramount)
-					useramount = Clamp(useramount, 0, 200)
+					useramount = clamp(useramount, 0, 200)
 					src.Topic(href, list("amount" = "[useramount]", "add" = href_list["addcustom"]), state)
 
 		else if (href_list["remove"])
 			if(href_list["amount"])
 				var/decl/material/my_reagents = locate(href_list["remove"])
 				if(my_reagents)
-					var/amount = Clamp((text2num(href_list["amount"])), 0, 200)
+					var/amount = clamp((text2num(href_list["amount"])), 0, 200)
 					var/contaminants = fetch_contaminants(user, reagents, my_reagents)
 					if(mode)
 						reagents.trans_type_to(beaker, my_reagents.type, amount)
@@ -138,7 +138,7 @@
 			if(my_reagents)
 				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
 				if(useramount)
-					useramount = Clamp(useramount, 0, 200)
+					useramount = clamp(useramount, 0, 200)
 					src.Topic(href, list("amount" = "[useramount]", "remove" = href_list["removecustom"]), state)
 
 		else if (href_list["toggle"])
@@ -164,7 +164,7 @@
 				count = input("Select the number of pills to make.", "Max [max_pill_count]", pillamount) as num
 				if(!CanInteract(user, state))
 					return
-				count = Clamp(count, 1, max_pill_count)
+				count = clamp(count, 1, max_pill_count)
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
@@ -220,7 +220,7 @@
 		return
 	. = list()
 	. += "<TITLE>[name]</TITLE>"
-	. += "[heading]:<BR><BR>Name:<BR>[reagent.name]"
+	. += "[heading]:<BR><BR>Name:<BR>[reagent.use_name]"
 	. += "<BR><BR>Description:<BR>"
 	if(detailed_blood && istype(reagent, /decl/material/liquid/blood))
 		var/blood_data = REAGENT_DATA(beaker?.reagents, /decl/material/liquid/blood)
@@ -236,7 +236,7 @@
 	if(!name)
 		name = reagents.get_primary_reagent_name()
 	P.label_text = name
-	P.update_name_label()
+	P.update_container_name()
 	P.lid_color = bottle_lid_color
 	P.label_color = bottle_label_color
 	reagents.trans_to_obj(P,60)
@@ -280,7 +280,7 @@
 			dat += "Add to buffer:<BR>"
 			for(var/rtype in R.reagent_volumes)
 				var/decl/material/G = GET_DECL(rtype)
-				dat += "[G.name], [REAGENT_VOLUME(R, rtype)] Units - "
+				dat += "[G.use_name], [REAGENT_VOLUME(R, rtype)] Units - "
 				dat += "<A href='?src=\ref[src];analyze=\ref[G]'>(Analyze)</A> "
 				dat += "<A href='?src=\ref[src];add=\ref[G];amount=1'>(1)</A> "
 				dat += "<A href='?src=\ref[src];add=\ref[G];amount=5'>(5)</A> "
@@ -292,7 +292,7 @@
 		if(reagents.total_volume)
 			for(var/rtype in reagents.reagent_volumes)
 				var/decl/material/N = GET_DECL(rtype)
-				dat += "[N.name], [REAGENT_VOLUME(reagents, rtype)] Units - "
+				dat += "[N.use_name], [REAGENT_VOLUME(reagents, rtype)] Units - "
 				dat += "<A href='?src=\ref[src];analyze=\ref[N]'>(Analyze)</A> "
 				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=1'>(1)</A> "
 				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=5'>(5)</A> "

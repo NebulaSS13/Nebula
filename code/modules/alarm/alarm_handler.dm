@@ -53,8 +53,8 @@
 /datum/alarm_handler/proc/alarms(var/z_level)
 	if(z_level)
 		. = list()
-		for(var/z in GetConnectedZlevels(z_level))
-			. += alarms_by_z["[z]"] || list()
+		for(var/z in SSmapping.get_connected_levels(z_level))
+			. += alarms_by_z[num2text(z)] || list()
 	else
 		return alarms
 

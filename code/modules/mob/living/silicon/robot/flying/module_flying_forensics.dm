@@ -19,7 +19,7 @@
 		/obj/item/gripper/clerical,
 		/obj/item/flash,
 		/obj/item/borg/sight/hud/sec,
-		/obj/item/taperoll/police,
+		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/scalpel/laser,
 		/obj/item/scanner/autopsy,
 		/obj/item/chems/spray/luminol,

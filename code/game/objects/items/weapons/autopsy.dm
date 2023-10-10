@@ -26,7 +26,7 @@
 		var/mob/living/carbon/human/M = A
 		set_target(M, user)
 		timeofdeath = M.timeofdeath
-		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(M, user.zone_sel.selecting)
+		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(M, user.get_target_zone())
 		if(!S)
 			visible_message(SPAN_WARNING("[src] states, 'The targeted bodypart is missing.'"))
 			return
@@ -42,23 +42,23 @@
 	else if(istype(A, /obj/item/organ/external))
 		set_target(A, user)
 		add_data(A)
-	
-	scan_title = "Autopsy Report ([target_name])" 
+
+	scan_title = "Autopsy Report ([target_name])"
 	scan_data = get_formatted_data()
 	playsound(src, 'sound/effects/fastbeep.ogg', 10)
 
 /obj/item/scanner/autopsy/proc/add_data(var/obj/item/organ/external/O)
-	if(!O.autopsy_data.len) return
+	if(!length(O.autopsy_data))
+		return
 
 	for(var/V in O.autopsy_data)
 		var/datum/autopsy_data/W = O.autopsy_data[V]
-		if(!weapon_data[V])
-			weapon_data[V] = list("data" = W.copy(), "organs" = list(O.name))
-		else
+		if(weapon_data[V])
 			var/datum/autopsy_data/data = weapon_data[V]["data"]
 			data.merge_with(W)
-			var/list/organs = weapon_data[V]["organs"]
-			organs |= O.name
+			weapon_data[V]["organs"] |= O.name
+		else
+			weapon_data[V] = list("data" = W.copy(), "organs" = list(O.name))
 
 /obj/item/scanner/autopsy/proc/get_formatted_data()
 	var/list/scan_data = list("Subject: [target_name]")

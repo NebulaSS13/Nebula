@@ -14,7 +14,7 @@
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
 	active_engines = 1
-	var/obj/item/key/cargo_train/key	
+	var/obj/item/key/cargo_train/key
 
 /obj/item/key/cargo_train
 	name = "key"
@@ -67,7 +67,7 @@
 	return ..()
 
 /obj/vehicle/train/cargo/trolley/attackby(obj/item/W, mob/user)
-	if(open && isWirecutter(W))
+	if(open && IS_WIRECUTTER(W))
 		passenger_allowed = !passenger_allowed
 		user.visible_message("<span class='notice'>[user] [passenger_allowed ? "cuts" : "mends"] a cable in [src].</span>","<span class='notice'>You [passenger_allowed ? "cut" : "mend"] the load limiter cable.</span>")
 	else
@@ -76,7 +76,7 @@
 /obj/vehicle/train/cargo/engine/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/key/cargo_train))
 		if(!key)
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			key = W
 			verbs += /obj/vehicle/train/cargo/engine/verb/remove_key
@@ -149,29 +149,27 @@
 	else
 		verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
 
-/obj/vehicle/train/cargo/RunOver(var/mob/living/carbon/human/H)
-	var/list/parts = list(BP_HEAD, BP_CHEST, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM)
+/obj/vehicle/train/cargo/crossed_mob(var/mob/living/victim)
+	victim.apply_effects(5, 5)
+	for(var/i = 1 to rand(1,5))
+		var/obj/item/organ/external/E = pick(victim.get_external_organs())
+		if(E)
+			victim.apply_damage(rand(5,10), BRUTE, E.organ_tag)
 
-	H.apply_effects(5, 5)
-	for(var/i = 0, i < rand(1,5), i++)
-		var/def_zone = pick(parts)
-		H.apply_damage(rand(5,10), BRUTE, def_zone)
-
-/obj/vehicle/train/cargo/trolley/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/trolley/crossed_mob(var/mob/living/victim)
 	..()
-	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
+	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey])</font>")
 
-/obj/vehicle/train/cargo/engine/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/engine/crossed_mob(var/mob/living/victim)
 	..()
-
 	if(is_train_head() && istype(load, /mob/living/carbon/human))
 		var/mob/living/carbon/human/D = load
-		to_chat(D, "<span class='danger'>You ran over [H]!</span>")
-		visible_message("<span class='danger'>\The [src] ran over [H]!</span>")
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey]), driven by [D.name] ([D.ckey])</font>")
-		msg_admin_attack("[D.name] ([D.ckey]) ran over [H.name] ([H.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+		to_chat(D, "<span class='danger'>You ran over \the [victim]!</span>")
+		visible_message("<span class='danger'>\The [src] ran over \the [victim]!</span>")
+		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey]), driven by [D.name] ([D.ckey])</font>")
+		msg_admin_attack("[D.name] ([D.ckey]) ran over [victim.name] ([victim.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 	else
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
+		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey])</font>")
 
 
 //-------------------------------------------

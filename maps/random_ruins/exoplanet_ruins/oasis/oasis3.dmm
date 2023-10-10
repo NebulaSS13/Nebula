@@ -3,11 +3,11 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/obj/structure/flora/ausbushes/grassybush,
+/obj/structure/flora/bush/grassybush,
 /turf/template_noop,
 /area/template_noop)
 "c" = (
-/obj/structure/flora/ausbushes/stalkybush,
+/obj/structure/flora/bush/stalkybush,
 /turf/template_noop,
 /area/template_noop)
 "d" = (
@@ -15,11 +15,11 @@
 /turf/template_noop,
 /area/template_noop)
 "e" = (
-/obj/structure/flora/ausbushes/palebush,
+/obj/structure/flora/bush/palebush,
 /turf/template_noop,
 /area/template_noop)
 "f" = (
-/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/bush/ppflowers,
 /turf/template_noop,
 /area/template_noop)
 

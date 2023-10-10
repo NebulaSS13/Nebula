@@ -29,7 +29,9 @@
 	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attack_hand()
+	SHOULD_CALL_PARENT(FALSE)
 	qdel(src)
+	return TRUE
 
 /obj/effect/dead_plant/attackby()
 	..()
@@ -54,7 +56,6 @@
 	var/possible_children = 20
 	var/spread_chance = 30
 	var/spread_distance = 4
-	var/evolve_chance = 2
 	var/mature_time		//minimum maturation time
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
@@ -218,21 +219,6 @@
 		adjust_health(-damage)
 		playsound(get_turf(src), W.hitsound, 100, 1)
 
-/obj/effect/vine/AltClick(var/mob/user)
-	if(!CanPhysicallyInteract(user) || user.incapacitated())
-		return ..()
-	var/obj/item/W = user.get_active_hand()
-	if(istype(W) && W.edge && W.w_class >= ITEM_SIZE_NORMAL)
-		visible_message(SPAN_NOTICE("[user] starts chopping down \the [src]."))
-		playsound(, W.hitsound, 100, 1)
-		var/chop_time = (health/W.force) * 0.5 SECONDS
-		if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
-			chop_time *= 0.5
-		if(do_after(user, chop_time, src, TRUE))
-			visible_message(SPAN_NOTICE("[user] chops down \the [src]."))
-			playsound(get_turf(src), W.hitsound, 100, 1)
-			die_off()
-
 //handles being overrun by vines - note that attacker_parent may be null in some cases
 /obj/effect/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/vine/attacker_parent)
 	var/aggression = 0
@@ -269,7 +255,7 @@
 		physically_destroyed()
 
 /obj/effect/vine/proc/adjust_health(value)
-	health = Clamp(health + value, 0, max_health)
+	health = clamp(health + value, 0, max_health)
 	if(health <= 0)
 		die_off()
 
@@ -278,3 +264,27 @@
 
 /obj/effect/vine/is_burnable()
 	return seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
+
+/obj/effect/vine/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/vine_chop)
+
+/decl/interaction_handler/vine_chop
+	name = "Chop Down"
+	expected_target_type = /obj/effect/vine
+
+/decl/interaction_handler/vine_chop/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/effect/vine/V = target
+	var/obj/item/W = user.get_active_hand()
+	if(!istype(W) || !W.edge || W.w_class < ITEM_SIZE_NORMAL)
+		to_chat(user, SPAN_WARNING("You need a larger or sharper object for this task!"))
+		return
+	user.visible_message(SPAN_NOTICE("\The [user] starts chopping down \the [V]."))
+	playsound(get_turf(V), W.hitsound, 100, 1)
+	var/chop_time = (V.health/W.force) * 0.5 SECONDS
+	if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
+		chop_time *= 0.5
+	if(do_after(user, chop_time, V, TRUE))
+		user.visible_message(SPAN_NOTICE("[user] chops down \the [V]."))
+		playsound(get_turf(V), W.hitsound, 100, 1)
+		V.die_off()

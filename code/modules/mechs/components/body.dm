@@ -4,6 +4,7 @@
 	storage_slots = 4
 	use_sound = 'sound/effects/storage/toolbox.ogg'
 	anchored = 1
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/mech_component/chassis/Adjacent(var/atom/neighbor, var/recurse = 1) //For interaction purposes we consider body to be adjacent to whatever holder mob is adjacent
 	var/mob/living/exosuit/E = loc
@@ -167,7 +168,7 @@
 		var/obj/machinery/portable_atmospherics/canister/C = dropping
 		if(pilot_coverage < 100)
 			to_chat(user, SPAN_NOTICE("This type of chassis doesn't support internals."))
-			return TRUE	
+			return TRUE
 		if(!C.anchored && do_after(user, 5, src))
 			if(C.anchored)
 				return
@@ -187,10 +188,10 @@
 /obj/item/mech_component/chassis/return_diagnostics(mob/user)
 	..()
 	if(diagnostics)
-		to_chat(user, SPAN_NOTICE(" Diagnostics Unit Integrity: <b>[round((((diagnostics.max_dam - diagnostics.total_dam) / diagnostics.max_dam)) * 100)]%</b>"))
+		to_chat(user, SPAN_NOTICE(" Diagnostics Unit Integrity: <b>[round(get_percent_health())]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Diagnostics Unit Missing or Non-functional."))
 	if(m_armour)
-		to_chat(user, SPAN_NOTICE(" Armor Integrity: <b>[round((((m_armour.max_dam - m_armour.total_dam) / m_armour.max_dam)) * 100)]%</b>"))
+		to_chat(user, SPAN_NOTICE(" Armor Integrity: <b>[round(m_armour.get_percent_health())]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Armor Missing or Non-functional."))

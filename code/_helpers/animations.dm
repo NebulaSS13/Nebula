@@ -8,6 +8,8 @@
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_images_from_clients, I, show_to), 0.5 SECONDS)
 
 /proc/animate_speech_bubble(image/I, list/show_to, duration)
+	if(!I)
+		return
 	var/matrix/M = matrix()
 	M.Scale(0,0)
 	I.transform = M
@@ -66,3 +68,34 @@
 		animate(I, alpha = 175, transform = matrix() * 0.75, pixel_x = 0, pixel_y = 0, pixel_z = 0, time = 3)
 		animate(time = 1)
 		animate(alpha = 0, time = 3, easing = CIRCULAR_EASING|EASE_OUT)
+
+/atom/proc/shake_animation(var/intensity = 8)
+	var/init_px = pixel_x
+	var/shake_dir = pick(-1, 1)
+	animate(src, transform=turn(matrix(), intensity*shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
+	animate(transform=null, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
+
+/atom/proc/SpinAnimation(speed = 10, loops = -1, clockwise = 1, segments = 3, parallel = TRUE)
+	if(!segments)
+		return
+	var/segment = 360/segments
+	if(!clockwise)
+		segment = -segment
+	var/list/matrices = list()
+	for(var/i in 1 to segments-1)
+		var/matrix/M = matrix(transform)
+		M.Turn(segment*i)
+		matrices += M
+	var/matrix/last = matrix(transform)
+	matrices += last
+
+	speed /= segments
+
+	if(parallel)
+		animate(src, transform = matrices[1], time = speed, loops , flags = ANIMATION_PARALLEL)
+	else
+		animate(src, transform = matrices[1], time = speed, loops)
+	for(var/i in 2 to segments) //2 because 1 is covered above
+		animate(transform = matrices[i], time = speed)
+		//doesn't have an object argument because this is "Stacking" with the animate call above
+		//3 billion% intentional

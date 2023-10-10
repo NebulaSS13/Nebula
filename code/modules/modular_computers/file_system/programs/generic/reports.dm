@@ -54,7 +54,7 @@
 			prog_state = REPORTS_VIEW
 		if(REPORTS_DOWNLOAD)
 			close_report()
-			program.requires_network_feature = NETWORK_SOFTWAREDOWNLOAD
+			program.requires_network_feature = NET_FEATURE_SOFTWAREDOWNLOAD
 			prog_state = REPORTS_DOWNLOAD
 
 /datum/nano_module/program/reports/proc/close_report()
@@ -69,7 +69,7 @@
 		selected_report.rename_file()
 	if(program.computer.store_file(selected_report))
 		saved_report = selected_report
-		selected_report = saved_report.clone()
+		selected_report = saved_report.Clone()
 		to_chat(user, "The report has been saved as '[saved_report.filename].[saved_report.filetype]'.")
 	else
 		to_chat(user, "Error storing file. Please check your hard drive.")
@@ -96,7 +96,7 @@
 				return
 			can_view_only = 0
 		saved_report = chosen_report
-		selected_report = chosen_report.clone()
+		selected_report = chosen_report.Clone()
 		return 1
 
 /datum/nano_module/program/reports/Topic(href, href_list)
@@ -160,7 +160,7 @@
 		selected_report.rename_file()
 		file.stored_data = selected_report.generate_pencode(get_access(user), user, no_html = 1) //TXT files can't have html; they use pencode only.
 		file.filename = selected_report.filename
-		if(program.computer.store_file(file))
+		if(program.computer.store_file(file, "reports", create_directories = TRUE))
 			to_chat(user, "The report has been exported as '[file.filename].[file.filetype]'.")
 		else
 			to_chat(user, "Error storing file. Please check your hard drive.")
@@ -174,7 +174,7 @@
 		var/datum/computer_network/net = program.computer.get_network()
 		for(var/datum/computer_file/report/report in net.fetch_reports(get_access(user), user))
 			if(report.uid == uid)
-				selected_report = report.clone()
+				selected_report = report.Clone()
 				can_view_only = 0
 				switch_state(REPORTS_VIEW)
 				return 1

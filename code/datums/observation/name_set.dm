@@ -23,5 +23,5 @@
 		if(has_extension(src, /datum/extension/labels))
 			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
 			name = L.AppendLabelsToName(name)
-		events_repository.raise_event(/decl/observ/name_set, src, old_name, new_name)
+		RAISE_EVENT(/decl/observ/name_set, src, old_name, new_name)
 		update_above()

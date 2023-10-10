@@ -6,6 +6,7 @@
 #define CHEM_TOUCH 1
 #define CHEM_INGEST 2
 #define CHEM_INJECT 3
+#define CHEM_INHALE 4
 
 #define MINIMUM_CHEMICAL_VOLUME 0.01
 
@@ -67,3 +68,5 @@
 
 #define DEFAULT_GAS_ACCELERANT /decl/material/gas/hydrogen
 #define DEFAULT_GAS_OXIDIZER   /decl/material/gas/oxygen
+
+#define CHEM_REACTION_FLAG_OVERFLOW_CONTAINER BITFLAG(0)

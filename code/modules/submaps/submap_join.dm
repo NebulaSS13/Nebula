@@ -47,7 +47,7 @@
 		to_chat(joining, "<span class='warning'>There are no available spawn points for that job.</span>")
 
 	var/turf/spawn_turf = get_turf(pick(job.spawnpoints))
-	if(!SSjobs.check_unsafe_spawn(joining, spawn_turf))
+	if(!job.no_warn_unsafe && !SSjobs.check_unsafe_spawn(joining, spawn_turf))
 		return
 
 	// check_unsafe_spawn() has an input() call, check blockers again.
@@ -100,8 +100,9 @@
 		if(user_human && user_human.disabilities & NEARSIGHTED)
 			var/equipped = user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(user_human), slot_glasses_str)
 			if(equipped)
-				var/obj/item/clothing/glasses/G = user_human.glasses
-				G.prescription = 7
+				var/obj/item/clothing/glasses/G = user_human.get_equipped_item(slot_glasses_str)
+				if(istype(G))
+					G.prescription = 7
 
 		BITSET(character.hud_updateflag, ID_HUD)
 		BITSET(character.hud_updateflag, IMPLOYAL_HUD)

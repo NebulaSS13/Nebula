@@ -181,7 +181,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 		return "No client provided."
 
 	var/client/C
-	for(var/client/K AS_ANYTHING in global.clients)
+	for(var/client/K as anything in global.clients)
 		if(K.ckey == target)
 			C = K
 			break
@@ -317,8 +317,8 @@ var/global/list/decl/topic_command/topic_commands = list()
 	if(rank == "Unknown")
 		rank = "Staff"
 
-	var/message =	"<font color='red'>[rank] PM from <b><a href='?irc_msg=[params["sender"]]'>[params["sender"]]</a></b>: [params["msg"]]</font>"
-	var/amessage =  "<font color='blue'>[rank] PM from <a href='?irc_msg=[params["sender"]]'>[params["sender"]]</a> to <b>[key_name(C)]</b> : [params["msg"]]</font>"
+	var/message =	SPAN_RED("[rank] PM from <b><a href='?irc_msg=[params["sender"]]'>[params["sender"]]</a></b>: [params["msg"]]")
+	var/amessage =  SPAN_BLUE("[rank] PM from <a href='?irc_msg=[params["sender"]]'>[params["sender"]]</a> to <b>[key_name(C)]</b> : [params["msg"]]")
 
 	C.received_irc_pm = world.time
 	C.irc_admin = params["sender"]

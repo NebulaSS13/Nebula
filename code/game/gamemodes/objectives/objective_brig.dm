@@ -1,6 +1,3 @@
-/datum/objective/anti_revolution/brig
-	var/already_completed = 0
-
 /datum/objective/anti_revolution/brig/find_target()
 	..()
 	if(target && target.current)
@@ -8,9 +5,6 @@
 	else
 		explanation_text = "Free Objective"
 	return target
-
-/datum/objective/brig
-	var/already_completed = 0
 
 /datum/objective/brig/find_target()
 	..()

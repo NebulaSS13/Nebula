@@ -246,7 +246,7 @@
 /turf/simulated/floor/plating,
 /area/nexus/hallway/starboard/fore)
 "ck" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/engineering/storage)
 "cl" = (
@@ -891,7 +891,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/nexus/civilian)
 "iz" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/effect/floor_decal/corner/yellow/diagonal,
 /turf/simulated/floor/tiled,
 /area/nexus/engineering)
@@ -1076,7 +1076,7 @@
 /area/nexus/engineering)
 "jH" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
-/obj/structure/sign/janitor{
+/obj/structure/sign/department/janitor{
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled,
@@ -1165,6 +1165,9 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/light/small/red{
 	dir = 4
+	},
+/obj/machinery/network/router/wall_mounted{
+	pixel_y = 21
 	},
 /turf/simulated/floor/plating,
 /area/nexus/command)
@@ -1449,7 +1452,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard/aft)
 "mT" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/alarm,
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/command/port)
@@ -1765,8 +1768,7 @@
 /area/nexus/engineering/storage)
 "qt" = (
 /obj/machinery/network/mainframe{
-	initial_network_id = "nexus";
-	wired_connection = 1
+	initial_network_id = "nexus"
 	},
 /obj/structure/railing/mapped{
 	dir = 4
@@ -2556,7 +2558,9 @@
 /turf/simulated/floor/plating,
 /area/nexus/command)
 "xX" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data_spawner/main_level{
+	name = "Nexus Lower Deck"
+	},
 /turf/space,
 /area/space)
 "yf" = (
@@ -3693,7 +3697,7 @@
 /obj/effect/floor_decal/industrial/loading{
 	dir = 8
 	},
-/obj/structure/sign/warning/secure_area/armory{
+/obj/structure/sign/warning/armory{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4355,9 +4359,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/command/starboard)
 "Px" = (
-/obj/machinery/photocopier/faxmachine{
-	department = "ISC nexus"
-	},
+/obj/machinery/faxmachine,
 /obj/structure/table/reinforced,
 /obj/structure/closet/medical_wall/filled{
 	pixel_x = -32
@@ -4921,7 +4923,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard)
 "UB" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/alarm,
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/command/starboard)
@@ -5065,10 +5067,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/machinery/network/router{
-	initial_network_id = "nexus";
-	wired_connection = 1
-	},
+/obj/machinery/network/telecomms_hub,
 /turf/simulated/floor/plating,
 /area/nexus/command)
 "Wp" = (
@@ -5352,7 +5351,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/computer/cryopod{
-	pixel_y = -32
+	dir = 1
 	},
 /obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
@@ -5513,9 +5512,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/item/modular_computer/telescreen/preset/engineering{
-	pixel_y = 28
-	},
+/obj/machinery/computer/modular/telescreen/preset/engineering,
 /turf/simulated/floor/tiled,
 /area/nexus/engineering)
 "ZM" = (

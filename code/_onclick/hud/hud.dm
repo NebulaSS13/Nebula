@@ -15,6 +15,7 @@
 		hud_used = new hud_type(src)
 	else
 		hud_used = new /datum/hud(src)
+	refresh_lighting_master()
 
 /datum/hud
 	var/mob/mymob
@@ -26,6 +27,7 @@
 
 	var/obj/screen/lingchemdisplay
 	var/list/hand_hud_objects
+	var/list/swaphand_hud_objects
 	var/obj/screen/action_intent
 	var/obj/screen/move_intent
 	var/obj/screen/stamina/stamina_bar
@@ -36,18 +38,6 @@
 
 	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = FALSE
-
-	var/static/list/hidden_inventory_slots = list(
-		slot_head_str,
-		slot_shoes_str,
-		slot_l_ear_str,
-		slot_r_ear_str,
-		slot_gloves_str,
-		slot_glasses_str,
-		slot_w_uniform_str,
-		slot_wear_suit_str,
-		slot_wear_mask_str
-	)
 
 /datum/hud/New(mob/owner)
 	mymob = owner
@@ -65,6 +55,7 @@
 	hotkeybuttons = null
 	mymob = null
 	QDEL_NULL_LIST(hand_hud_objects)
+	QDEL_NULL_LIST(swaphand_hud_objects)
 
 /datum/hud/proc/update_stamina()
 	if(mymob && stamina_bar)
@@ -85,156 +76,237 @@
 	persistant_inventory_update()
 
 /datum/hud/proc/hidden_inventory_update()
-	if(!mymob) return
-	if(ishuman(mymob))
-		var/mob/living/carbon/human/H = mymob
-		for(var/gear_slot in H.species.hud.gear)
-			var/list/hud_data = H.species.hud.gear[gear_slot]
-			if(inventory_shown && hud_shown)
-				switch(hud_data["slot"])
-					if(slot_head_str)
-						if(H.head)      H.head.screen_loc =      hud_data["loc"]
-					if(slot_shoes_str)
-						if(H.shoes)     H.shoes.screen_loc =     hud_data["loc"]
-					if(slot_l_ear_str)
-						if(H.l_ear)     H.l_ear.screen_loc =     hud_data["loc"]
-					if(slot_r_ear_str)
-						if(H.r_ear)     H.r_ear.screen_loc =     hud_data["loc"]
-					if(slot_gloves_str)
-						if(H.gloves)    H.gloves.screen_loc =    hud_data["loc"]
-					if(slot_glasses_str)
-						if(H.glasses)   H.glasses.screen_loc =   hud_data["loc"]
-					if(slot_w_uniform_str)
-						if(H.w_uniform) H.w_uniform.screen_loc = hud_data["loc"]
-					if(slot_wear_suit_str)
-						if(H.wear_suit) H.wear_suit.screen_loc = hud_data["loc"]
-					if(slot_wear_mask_str)
-						if(H.wear_mask) H.wear_mask.screen_loc = hud_data["loc"]
-			else
-				switch(hud_data["slot"])
-					if(slot_head_str)
-						if(H.head)      H.head.screen_loc =      null
-					if(slot_shoes_str)
-						if(H.shoes)     H.shoes.screen_loc =     null
-					if(slot_l_ear_str)
-						if(H.l_ear)     H.l_ear.screen_loc =     null
-					if(slot_r_ear_str)
-						if(H.r_ear)     H.r_ear.screen_loc =     null
-					if(slot_gloves_str)
-						if(H.gloves)    H.gloves.screen_loc =    null
-					if(slot_glasses_str)
-						if(H.glasses)   H.glasses.screen_loc =   null
-					if(slot_w_uniform_str)
-						if(H.w_uniform) H.w_uniform.screen_loc = null
-					if(slot_wear_suit_str)
-						if(H.wear_suit) H.wear_suit.screen_loc = null
-					if(slot_wear_mask_str)
-						if(H.wear_mask) H.wear_mask.screen_loc = null
-
+	var/decl/species/species = mymob?.get_species()
+	if(species?.hud)
+		refresh_inventory_slots(species.hud.hidden_slots, (inventory_shown && hud_shown))
 
 /datum/hud/proc/persistant_inventory_update()
-	if(!mymob)
-		return
+	var/decl/species/species = mymob?.get_species()
+	if(species?.hud)
+		refresh_inventory_slots(species.hud.persistent_slots, hud_shown)
 
-	if(ishuman(mymob))
-		var/mob/living/carbon/human/H = mymob
-		for(var/gear_slot in H.species.hud.gear)
-			var/list/hud_data = H.species.hud.gear[gear_slot]
-			if(hud_shown)
-				switch(hud_data["slot"])
-					if(slot_s_store_str)
-						if(H.s_store) H.s_store.screen_loc = hud_data["loc"]
-					if(slot_wear_id_str)
-						if(H.wear_id) H.wear_id.screen_loc = hud_data["loc"]
-					if(slot_belt_str)
-						if(H.belt)    H.belt.screen_loc =    hud_data["loc"]
-					if(slot_back_str)
-						if(H.back)    H.back.screen_loc =    hud_data["loc"]
-					if(slot_l_store_str)
-						if(H.l_store) H.l_store.screen_loc = hud_data["loc"]
-					if(slot_r_store_str)
-						if(H.r_store) H.r_store.screen_loc = hud_data["loc"]
-			else
-				switch(hud_data["slot"])
-					if(slot_s_store_str)
-						if(H.s_store) H.s_store.screen_loc = null
-					if(slot_wear_id_str)
-						if(H.wear_id) H.wear_id.screen_loc = null
-					if(slot_belt_str)
-						if(H.belt)    H.belt.screen_loc =    null
-					if(slot_back_str)
-						if(H.back)    H.back.screen_loc =    null
-					if(slot_l_store_str)
-						if(H.l_store) H.l_store.screen_loc = null
-					if(slot_r_store_str)
-						if(H.r_store) H.r_store.screen_loc = null
+/datum/hud/proc/refresh_inventory_slots(var/list/checking_slots, var/show_hud)
 
+	for(var/slot in checking_slots)
+
+		var/datum/inventory_slot/inv_slot = mymob.get_inventory_slot_datum(slot)
+		if(!istype(inv_slot))
+			continue
+
+		// Check if we're even wearing anything in that slot.
+		var/obj/item/gear = inv_slot.get_equipped_item()
+		if(!istype(gear))
+			continue
+
+		// We're not showing anything, hide it.
+		if(!show_hud)
+			inv_slot.hide_slot()
+		else
+			inv_slot.show_slot()
 
 /datum/hud/proc/instantiate()
-	if(!ismob(mymob)) return 0
-	if(!mymob.client) return 0
-	var/ui_style = ui_style2icon(mymob.client.prefs.UI_style)
-	var/ui_color = mymob.client.prefs.UI_style_color
-	var/ui_alpha = mymob.client.prefs.UI_style_alpha
-	FinalizeInstantiation(ui_style, ui_color, ui_alpha)
+	if(ismob(mymob) && mymob.client)
+		FinalizeInstantiation()
+		return TRUE
+	return FALSE
 
-/datum/hud/proc/FinalizeInstantiation(var/ui_style, var/ui_color, var/ui_alpha)
+/datum/hud/proc/FinalizeInstantiation()
 	return
 
-/datum/hud/proc/rebuild_hands(list/adding, list/removing, skip_client_update = FALSE)
+/datum/hud/proc/get_ui_style()
+	return ui_style2icon(mymob?.client?.prefs?.UI_style) || 'icons/mob/screen/white.dmi'
 
-	if(isnull(removing))
-		if(!skip_client_update)
-			mymob?.client?.screen -= hand_hud_objects
-		QDEL_NULL_LIST(hand_hud_objects)
-	else
-		for(var/bp in removing)
-			for(var/obj/screen/inventory/inv_box in hand_hud_objects)
-				if(inv_box.slot_id == bp)
-					if(mymob.client)
-						mymob.client.screen -= inv_box
-					hand_hud_objects -= inv_box
-					qdel(inv_box)
+/datum/hud/proc/get_ui_color()
+	return mymob?.client?.prefs?.UI_style_color  || COLOR_WHITE
 
-	var/mob/living/target = mymob
-	if(!istype(target))
-		return
+/datum/hud/proc/get_ui_alpha()
+	return mymob?.client?.prefs?.UI_style_alpha || 255
 
-	if(isnull(adding))
-		adding = target.held_item_slots
+/datum/hud/proc/rebuild_hands()
 
-	var/ui_style = ui_style2icon(mymob.client?.prefs.UI_style)
-	var/ui_color = mymob.client?.prefs?.UI_style_color
-	var/ui_alpha = mymob.client?.prefs?.UI_style_alpha || 255
-	for(var/bp in adding)
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
+
+	// Build held item boxes for missing slots.
+	var/list/held_slots = mymob.get_held_item_slots()
+
+	// Sort our slots for display.
+	var/list/gripper_datums = list()
+	for(var/hand_tag in held_slots)
+		gripper_datums += mymob.get_inventory_slot_datum(hand_tag)
+	gripper_datums = sortTim(gripper_datums, /proc/cmp_gripper_asc)
+
+	for(var/datum/inventory_slot/inv_slot in gripper_datums)
+
+		// Re-order the held slot list so it aligns with the display order.
+		var/hand_tag = inv_slot.slot_id
+		held_slots -= hand_tag
+		held_slots += hand_tag
+
 		var/obj/screen/inventory/inv_box
 		for(var/obj/screen/inventory/existing_box in hand_hud_objects)
-			if(existing_box.slot_id == bp)
+			if(existing_box.slot_id == hand_tag)
 				inv_box = existing_box
 				break
 		if(!inv_box)
 			inv_box = new /obj/screen/inventory()
-		var/datum/inventory_slot/inv_slot = target.held_item_slots[bp]
-		inv_box.SetName(bp)
+		inv_box.SetName(hand_tag)
 		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_base"
 
 		inv_box.cut_overlays()
-		inv_box.add_overlay("hand_[bp]")
-		inv_box.add_overlay("hand_[inv_slot.ui_label]")
-		if(target.get_active_held_item_slot() == bp)
+		inv_box.add_overlay("hand_[hand_tag]")
+		if(inv_slot.ui_label)
+			inv_box.add_overlay("hand_[inv_slot.ui_label]")
+		if(mymob.get_active_held_item_slot() == hand_tag)
 			inv_box.add_overlay("hand_selected")
 		inv_box.compile_overlays()
 
-		inv_box.screen_loc = inv_slot.ui_loc
-		inv_box.slot_id = bp
+		inv_box.slot_id = hand_tag
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
 		inv_box.appearance_flags |= KEEP_TOGETHER
 
-		LAZYADD(hand_hud_objects, inv_box)
-		if(!skip_client_update)
-			mymob.client?.screen |= inv_box
+		LAZYDISTINCTADD(hand_hud_objects, inv_box)
+
+	// Clear held item boxes with no held slot.
+	for(var/obj/screen/inventory/inv_box in hand_hud_objects)
+		if(!(inv_box.slot_id in held_slots))
+			if(mymob.client)
+				mymob.client.screen -= inv_box
+			LAZYREMOVE(hand_hud_objects, inv_box)
+			qdel(inv_box)
+
+	// Rebuild offsets for the hand elements.
+	var/hand_y_offset = 5
+	var/list/elements = hand_hud_objects?.Copy()
+	while(length(elements))
+		var/copy_index = min(length(elements), 2)+1
+		var/list/sublist = elements.Copy(1, copy_index)
+		elements.Cut(1, copy_index)
+		var/obj/screen/inventory/inv_box
+		if(length(sublist) == 1)
+			inv_box = sublist[1]
+			inv_box.screen_loc = "CENTER,BOTTOM:[hand_y_offset]"
+		else
+			inv_box = sublist[1]
+			inv_box.screen_loc = "CENTER:-[world.icon_size/2],BOTTOM:[hand_y_offset]"
+			inv_box = sublist[2]
+			inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
+		hand_y_offset += world.icon_size
+		if(mymob.client)
+			mymob.client.screen |= inv_box
+
+	// Make sure all held items are on the screen and set to the correct screen loc.
+	var/datum/inventory_slot/inv_slot
+	for(var/obj/inv_elem in hand_hud_objects)
+		inv_slot = mymob.get_inventory_slot_datum(inv_elem.name)
+		if(inv_slot)
+			inv_slot.ui_loc = inv_elem.screen_loc
+			var/obj/item/held = inv_slot.get_equipped_item()
+			if(held)
+				held.screen_loc = inv_slot.ui_loc
+				if(mymob.client)
+					mymob.client.screen |= held // just to make sure it's visible post-login
+
+	var/hand_x_offset = -(world.icon_size/2)
+	for(var/i = 1 to length(swaphand_hud_objects))
+		var/obj/swap_elem = swaphand_hud_objects[i]
+		swap_elem.screen_loc = "CENTER:[hand_x_offset],BOTTOM:[hand_y_offset]"
+		if(i > 1) // first two elems share a slot
+			hand_x_offset += world.icon_size
+		if(mymob.client)
+			mymob.client.screen |= swap_elem
+
+/datum/hud/proc/BuildInventoryUI()
+
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
+
+	var/has_hidden_gear = FALSE
+
+	// Draw the various inventory equipment slots.
+	var/obj/screen/inventory/inv_box
+	var/list/held_slots =      mymob.get_held_item_slots()
+	var/list/inventory_slots = mymob.get_inventory_slots()
+	for(var/gear_slot in inventory_slots)
+
+		if(gear_slot in held_slots)
+			continue
+
+		inv_box = new /obj/screen/inventory()
+		inv_box.icon =  ui_style
+		inv_box.color = ui_color
+		inv_box.alpha = ui_alpha
+
+		var/datum/inventory_slot/inv_slot = inventory_slots[gear_slot]
+		inv_box.SetName(inv_slot.slot_name)
+		inv_box.slot_id =    inv_slot.slot_id
+		inv_box.icon_state = inv_slot.slot_state
+		inv_box.screen_loc = inv_slot.ui_loc
+
+		if(inv_slot.slot_dir)
+			inv_box.set_dir(inv_slot.slot_dir)
+
+		if(inv_slot.can_be_hidden)
+			other += inv_box
+			has_hidden_gear = TRUE
+		else
+			adding += inv_box
+
+	if(has_hidden_gear)
+		var/obj/screen/using = new /obj/screen()
+		using.SetName("toggle")
+		using.icon = ui_style
+		using.icon_state = "other"
+		using.screen_loc = ui_inventory
+		using.color = ui_color
+		using.alpha = ui_alpha
+		adding += using
+
+/datum/hud/proc/BuildHandsUI()
+
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
+
+	var/obj/screen/using
+
+	// Swap hand and quick equip screen elems.
+	using = new /obj/screen()
+	using.SetName("equip")
+	using.icon = ui_style
+	using.icon_state = "act_equip"
+	using.color = ui_color
+	using.alpha = ui_alpha
+	src.adding += using
+	LAZYADD(swaphand_hud_objects, using)
+
+	var/list/held_slots = mymob.get_held_item_slots()
+	if(length(held_slots) > 1)
+
+		using = new /obj/screen/inventory()
+		using.SetName("hand")
+		using.icon = ui_style
+		using.icon_state = "hand1"
+		using.color = ui_color
+		using.alpha = ui_alpha
+		src.adding += using
+		LAZYADD(swaphand_hud_objects, using)
+
+		using = new /obj/screen/inventory()
+		using.SetName("hand")
+		using.icon = ui_style
+		using.icon_state = "hand2"
+		using.color = ui_color
+		using.alpha = ui_alpha
+		src.adding += using
+		LAZYADD(swaphand_hud_objects, using)
+
+	// Actual hand elems.
+	rebuild_hands()
 
 /mob/verb/minimize_hud(full = FALSE as null)
 	set name = "Minimize Hud"
@@ -263,9 +335,12 @@
 		//Due to some poor coding some things need special treatment:
 		//These ones are a part of 'adding', 'other' or 'hotkeybuttons' but we want them to stay
 		if(!full)
-			src.client.screen += src.hud_used.hand_hud_objects	//we want the hands to be visible
-			src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
-			src.hud_used.action_intent.screen_loc = ui_acti_alt	//move this to the alternative position, where zone_select usually is.
+			if(LAZYLEN(hud_used.hand_hud_objects))
+				client.screen += hud_used.hand_hud_objects         // we want the hands to be visible
+			if(LAZYLEN(hud_used.swaphand_hud_objects))
+				client.screen += hud_used.swaphand_hud_objects     // we want the hands swap thingy to be visible
+			src.client.screen += src.hud_used.action_intent        // we want the intent swticher visible
+			src.hud_used.action_intent.screen_loc = ui_acti_alt    // move this to the alternative position, where zone_select usually is.
 		else
 			src.client.screen -= src.healths
 			src.client.screen -= src.internals

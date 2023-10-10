@@ -64,7 +64,7 @@
 		var/newlim = input("Input new thrust limit (0..100%)", "Thrust limit", linked.get_thrust_limit() * 100) as num
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION
-		var/thrust_limit = Clamp(newlim / 100, 0, 1)
+		var/thrust_limit = clamp(newlim / 100, 0, 1)
 		for(var/datum/extension/ship_engine/E in linked.engines)
 			E.thrust_limit = thrust_limit
 		return TOPIC_REFRESH
@@ -79,13 +79,13 @@
 			var/newlim = input("Input new thrust limit (0..100)", "Thrust limit", E.thrust_limit) as num
 			if(!CanInteract(user, state))
 				return
-			var/limit = Clamp(newlim/100, 0, 1)
+			var/limit = clamp(newlim/100, 0, 1)
 			if(istype(E))
 				E.thrust_limit = limit
 			return TOPIC_REFRESH
 		if(href_list["limit"])
 			var/datum/extension/ship_engine/E = locate(href_list["engine"])
-			var/limit = Clamp(E.thrust_limit + text2num(href_list["limit"]), 0, 1)
+			var/limit = clamp(E.thrust_limit + text2num(href_list["limit"]), 0, 1)
 			if(istype(E))
 				E.thrust_limit = limit
 			return TOPIC_REFRESH

@@ -23,7 +23,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ah" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ai" = (
@@ -44,7 +44,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "am" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -258,7 +258,6 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/machinery/telecomms/server,
 /turf/simulated/floor/bluegrid,
 /area/icarus/vessel)
 "ba" = (
@@ -307,7 +306,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bf" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bg" = (
@@ -339,7 +338,6 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bk" = (
-/obj/machinery/telecomms/server/presets/common,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/bluegrid,
 /area/icarus/vessel)
@@ -385,7 +383,9 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bs" = (
-/obj/machinery/telecomms/server,
+/obj/machinery/network/telecomms_hub{
+	initial_network_id = "daedalus"
+	},
 /turf/simulated/floor/bluegrid,
 /area/icarus/vessel)
 "bt" = (
@@ -451,7 +451,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bD" = (
-/obj/structure/filingcabinet,
+/obj/structure/filing_cabinet,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -962,12 +962,12 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "df" = (
-/obj/machinery/door/airlock,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled,
-/area/icarus/vessel)
+/area/icarus/open)
 "dg" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -1000,7 +1000,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dk" = (
-/obj/structure/sign/science_2{
+/obj/structure/sign/department/science_2{
 	pixel_x = 30
 	},
 /turf/simulated/floor/tiled,
@@ -1271,6 +1271,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -1343,6 +1344,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "el" = (
@@ -1809,10 +1811,16 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "Fo" = (
-/obj/item/ore/slag,
+/obj/item/stack/material/ore/slag,
 /obj/structure/wall_frame,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
+"MC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/tiled,
+/area/icarus/open)
 "RQ" = (
 /obj/machinery/computer/modular{
 	dir = 4
@@ -21288,7 +21296,7 @@ dw
 dU
 dw
 dw
-dw
+MC
 ac
 cR
 ac
@@ -24921,7 +24929,7 @@ bY
 bY
 dN
 dw
-dU
+df
 dR
 cR
 cR
@@ -26126,7 +26134,7 @@ ap
 cu
 cJ
 ap
-df
+bw
 ap
 ap
 ap

@@ -4,6 +4,7 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NO_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	is_spawnable_type = FALSE
 
 	var/associated_department
 	var/hide_on_manifest = 0
@@ -55,9 +56,6 @@
 	add_languages(R)
 	add_subsystems(R)
 	apply_status_flags(R)
-
-	if(R.silicon_radio)
-		R.silicon_radio.recalculateChannels()
 
 	build_equipment(R)
 	build_emag(R)
@@ -111,7 +109,7 @@
 /obj/item/robot_module/proc/finalize_emag()
 	if(istype(emag))
 		emag.canremove = FALSE
-	else
+	else if(emag)
 		log_debug("Invalid var type in [type] emag creation - [emag]")
 		emag = null
 
@@ -121,14 +119,12 @@
 	remove_subsystems(R)
 	remove_status_flags(R)
 	reset_skills(R)
-	if(R.silicon_radio)
-		R.silicon_radio.recalculateChannels()
 	R.choose_icon(list("Basic" = initial(R.icon)))
 
 /obj/item/robot_module/proc/get_sprites_for(var/mob/living/silicon/robot/R)
 	. = module_sprites
 	if(R.ckey)
-		for(var/datum/custom_icon/cicon AS_ANYTHING in SScustomitems.custom_icons_by_ckey[R.ckey])
+		for(var/datum/custom_icon/cicon as anything in SScustomitems.custom_icons_by_ckey[R.ckey])
 			if(cicon.category == display_name && lowertext(R.real_name) == cicon.character_name)
 				for(var/state in cicon.ids_to_icons)
 					.[state] = cicon.ids_to_icons[state]
@@ -237,4 +233,4 @@
 	if(os && os.has_component(PART_HDD))
 		var/obj/item/stock_parts/computer/hard_drive/disk = os.get_component(PART_HDD)
 		for(var/T in software)
-			disk.store_file(new T(disk))
+			disk.store_file(new T(disk), OS_PROGRAMS_DIR, TRUE)

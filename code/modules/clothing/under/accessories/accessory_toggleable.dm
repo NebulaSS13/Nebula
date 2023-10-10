@@ -36,6 +36,7 @@
 			H.do_toggle(usr)
 
 /obj/item/clothing/accessory/toggleable/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(open && check_state_in_icon("[icon_state]-open", icon))
 		icon_state = "[icon_state]-open"
@@ -90,7 +91,7 @@
 /obj/item/clothing/accessory/toggleable/hawaii/random/Initialize()
 	. = ..()
 	icon = pick('icons/clothing/accessories/clothing/hawaiian.dmi', 'icons/clothing/accessories/clothing/hawaiian_alt.dmi')
-	color = color_rotation(rand(-11,12)*15)
+	color = color_matrix_rotate_hue(rand(-11,12)*15)
 
 /obj/item/clothing/accessory/toggleable/zhongshan
 	name = "zhongshan suit jacket"
@@ -147,7 +148,7 @@
 		H.update_clothing_icon()
 
 /obj/item/clothing/accessory/toggleable/flannel/on_update_icon()
-	..()
+	. = ..()
 	if(rolled && check_state_in_icon("[icon_state]-rolled", icon))
 		icon_state = "[icon_state]-rolled"
 	if(tucked && check_state_in_icon("[icon_state]-tucked", icon))

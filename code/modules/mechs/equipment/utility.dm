@@ -14,18 +14,15 @@
 	return ..()
 
 /obj/item/mech_equipment/clamp/attack_hand(mob/user)
-	if(owner && LAZYISIN(owner.pilots, user))
-		if(!owner.hatch_closed && length(carrying))
-			var/obj/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying
-			if(!chosen_obj)
-				return
-			if(!do_after(user, 20, owner)) return
-			if(owner.hatch_closed || !chosen_obj) return
-			if(user.put_in_active_hand(chosen_obj))
-				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [chosen_obj] from \the [src]."))
-				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
-				carrying -= chosen_obj
-	. = ..()
+	if(!owner || !LAZYISIN(owner.pilots, user) || owner.hatch_closed || !length(carrying) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	var/obj/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying
+	if(chosen_obj && do_after(user, 20, owner) && !owner.hatch_closed && !QDELETED(chosen_obj) && (chosen_obj in carrying))
+		owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [chosen_obj] from \the [src]."))
+		playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
+		carrying -= chosen_obj
+		user.put_in_active_hand(chosen_obj)
+	return TRUE
 
 /obj/item/mech_equipment/clamp/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
@@ -229,6 +226,7 @@
 	..()
 
 /obj/item/mech_equipment/light/on_update_icon()
+	. = ..()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(l_range, l_power)
@@ -326,11 +324,12 @@
 
 
 /obj/item/drill_head
-	var/durability = 0
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon = 'icons/obj/items/tool/drill_head.dmi'
 	icon_state = "drill_head"
+	material = /decl/material/solid/metal/steel
+	var/durability = 0
 
 /obj/item/drill_head/proc/get_percent_durability()
 	return round((durability / material.integrity) * 50)
@@ -346,7 +345,6 @@
 /obj/item/drill_head/examine(mob/user, distance)
 	. = ..()
 	to_chat(user, "It [get_visible_durability()].")
-
 
 /obj/item/drill_head/steel
 	material = /decl/material/solid/metal/steel
@@ -403,7 +401,7 @@
 		to_chat(user, "It does not have a drill head installed.")
 
 /obj/item/mech_equipment/drill/proc/attach_head(obj/item/drill_head/DH, mob/user)
-	if (user && !user.unEquip(DH))
+	if (user && !user.try_unequip(DH))
 		return
 	if (drill_head)
 		visible_message(SPAN_NOTICE("\The [user] detaches \the [drill_head] mounted on \the [src]."))
@@ -428,11 +426,10 @@
 		var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in item
 		if (!ore_box)
 			continue
-		var/list/atoms_in_range = range(1, at_turf)
-		for(var/obj/item/ore/ore in atoms_in_range)
+		for(var/obj/item/stack/material/ore/ore in range(1, at_turf))
 			if (!(get_dir(owner, ore) & owner.dir))
 				continue
-			ore.Move(ore_box)
+			ore_box.insert_ore(ore)
 
 /obj/item/mech_equipment/drill/afterattack(atom/target, mob/living/user, inrange, params)
 	if (!..()) // /obj/item/mech_equipment/afterattack implements a usage guard
@@ -592,6 +589,10 @@
 	ion_trail = new /datum/effect/effect/system/trail/ion()
 	ion_trail.set_up(src)
 
+/obj/item/mech_equipment/ionjets/Destroy()
+	QDEL_NULL(ion_trail)
+	return ..()
+
 /obj/item/mech_equipment/ionjets/proc/allowSpaceMove()
 	if (!active)
 		return FALSE
@@ -736,7 +737,7 @@
 /obj/item/mech_equipment/camera/attackby(obj/item/W, mob/user)
 	. = ..()
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		var/datum/extension/network_device/camera/mech/D = get_extension(src, /datum/extension/network_device)
 		D.ui_interact(user)
 

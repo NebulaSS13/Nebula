@@ -2,9 +2,10 @@
 
 /obj/machinery/computer/message_monitor
 	name = "messaging monitor console"
-	desc = "Used to access and maintain data on messaging servers. Allows you to view request console messages."
+	desc = "Used to access and maintain data on messaging servers. Allows you to view request console messages and telecommunication logs."
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
+
 	var/hack_icon = "error"
 	var/noserver = "<span class='alert'>ALERT: No server detected.</span>"
 	var/incorrectkey = "<span class='warning'>ALERT: Incorrect decryption key!</span>"
@@ -43,7 +44,7 @@
 		return
 	if(!istype(user))
 		return
-	if(isScrewdriver(O) && emag)
+	if(IS_SCREWDRIVER(O) && emag)
 		//Stops people from just unscrewing the monitor and putting it back to get the console working again.
 		to_chat(user, "<span class='warning'>It is too hot to mess with!</span>")
 		return
@@ -51,6 +52,7 @@
 	return
 
 /obj/machinery/computer/message_monitor/emag_act(var/remaining_charges, var/mob/user)
+
 	// Will create sparks and print out the console's password. You will then have to wait a while for the console to be back online.
 	// It'll take more time if there's more characters in the password..
 	if(!emag && operable())
@@ -240,7 +242,7 @@
 	//Find a server
 	if (href_list["find"])
 		var/list/local_message_servers = list()
-		var/list/local_zs = GetConnectedZlevels(z)
+		var/list/local_zs = SSmapping.get_connected_levels(z)
 		for(var/obj/machinery/network/message_server/MS in SSmachines.machinery)
 			if((MS.z in local_zs) && !(MS.stat & (BROKEN|NOPOWER)))
 				local_message_servers += MS
@@ -319,7 +321,8 @@
 		BruteForce(user)
 
 /obj/item/paper/monitorkey
-	name = "Monitor Decryption Key"
+	name = "monitor decryption key"
+	info = "The paper is smudged and unreadable."
 
 /obj/item/paper/monitorkey/Initialize()
 	..()
@@ -328,7 +331,9 @@
 /obj/item/paper/monitorkey/LateInitialize()
 	. = ..()
 	var/turf/T = get_turf(src)
-	var/list/our_z = GetConnectedZlevels(T.z)
+	if(!T)
+		return
+	var/list/our_z = SSmapping.get_connected_levels(T.z)
 	for(var/obj/machinery/network/message_server/server in SSmachines.machinery)
 		if((server.z in our_z) && !(server.stat & (BROKEN|NOPOWER)) && !isnull(server.decryptkey))
 			info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>This key is only intended for personnel granted access to the messaging server. Keep it safe.<br>If necessary, change the password to a more secure one."

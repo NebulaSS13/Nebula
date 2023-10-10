@@ -10,7 +10,7 @@
 	external_slot = TRUE
 	material = /decl/material/solid/metal/steel
 
-	var/can_write = TRUE
+	// TODO: reimplment RFID card write access and can_write
 	var/can_broadcast = FALSE
 	var/obj/item/card/id/stored_card = null
 
@@ -40,7 +40,7 @@
 					if(check_functionality()) // Read the access, or show "RD_ERR"
 						var/datum/access/access_information = get_access_by_id(access_id)
 						var/access_type = access_information.access_type
-						if(access_type == ACCESS_TYPE_NONE || access_type == ACCESS_TYPE_SYNDICATE || access_type == ACCESS_TYPE_CENTCOM) // Don't elaborate on these access types.
+						if(access_type == ACCESS_TYPE_NONE || access_type == ACCESS_TYPE_ANTAG || access_type == ACCESS_TYPE_CENTCOM) // Don't elaborate on these access types.
 							list_of_accesses += "UNKNOWN" // "UNKNOWN"
 						else
 							list_of_accesses += uppertext(access_information.desc)
@@ -93,7 +93,7 @@
 		to_chat(user, "You try to insert [I] into [src], but its ID card slot is occupied.")
 		return FALSE
 
-	if(user && !user.unEquip(I, src))
+	if(user && !user.try_unequip(I, src))
 		return FALSE
 
 	stored_card = I
@@ -111,7 +111,6 @@
 /obj/item/stock_parts/computer/card_slot/broadcaster // read only
 	name = "RFID card broadcaster"
 	desc = "Reads and broadcasts the RFID signal of an inserted card."
-	can_write = FALSE
 	can_broadcast = TRUE
 
 	usage_flags = PROGRAM_PDA

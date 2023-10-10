@@ -7,6 +7,8 @@
 #define TOOL_CROWBAR     /decl/tool_archetype/crowbar
 #define TOOL_HATCHET     /decl/tool_archetype/hatchet
 #define TOOL_WRENCH      /decl/tool_archetype/wrench
+#define TOOL_SHOVEL      /decl/tool_archetype/shovel
+#define TOOL_PEN         /decl/tool_archetype/pen
 
 // Surgical tools.
 #define TOOL_SCALPEL       /decl/tool_archetype/scalpel
@@ -34,14 +36,18 @@
 #define TOOL_SPEED_BEST  0.5
 
 // Helper macros for interaction checks.
-#define isWrench(A)      (isatom(A) && A.get_tool_quality(TOOL_WRENCH) > 0)
-#define isWelder(A)      (isatom(A) && A.get_tool_quality(TOOL_WELDER) > 0)
-#define isCoil(A)        (isatom(A) && A.get_tool_quality(TOOL_CABLECOIL) > 0)
-#define isWirecutter(A)  (isatom(A) && A.get_tool_quality(TOOL_WIRECUTTERS) > 0)
-#define isScrewdriver(A) (isatom(A) && A.get_tool_quality(TOOL_SCREWDRIVER) > 0)
-#define isMultitool(A)   (isatom(A) && A.get_tool_quality(TOOL_MULTITOOL) > 0)
-#define isCrowbar(A)     (isatom(A) && A.get_tool_quality(TOOL_CROWBAR) > 0)
-#define isHatchet(A)     (isatom(A) && A.get_tool_quality(TOOL_HATCHET) > 0)
+#define IS_TOOL(A, T)     (isatom(A) && A.get_tool_quality(T) > 0)
+#define IS_SAW(A)         IS_TOOL(A, TOOL_SAW)
+#define IS_WRENCH(A)      IS_TOOL(A, TOOL_WRENCH)
+#define IS_WELDER(A)      IS_TOOL(A, TOOL_WELDER)
+#define IS_COIL(A)        IS_TOOL(A, TOOL_CABLECOIL)
+#define IS_WIRECUTTER(A)  IS_TOOL(A, TOOL_WIRECUTTERS)
+#define IS_SCREWDRIVER(A) IS_TOOL(A, TOOL_SCREWDRIVER)
+#define IS_MULTITOOL(A)   IS_TOOL(A, TOOL_MULTITOOL)
+#define IS_CROWBAR(A)     IS_TOOL(A, TOOL_CROWBAR)
+#define IS_HATCHET(A)     IS_TOOL(A, TOOL_HATCHET)
+#define IS_SHOVEL(A)      IS_TOOL(A, TOOL_SHOVEL)
+#define IS_PEN(A)         IS_TOOL(A, TOOL_PEN)
 
 // Structure interaction flags
 #define TOOL_INTERACTION_ANCHOR      BITFLAG(0)
@@ -56,3 +62,15 @@
 #define TOOL_CODEX_WELDER       "welder (tool)"
 #define TOOL_CODEX_CROWBAR      "crowbar (tool)"
 #define TOOL_CODEX_MULTITOOL    "multitool (tool)"
+
+// Tool properties for tool specific stuff
+#define TOOL_PROP_COLOR_NAME    "color_name"     //Property containing a color name for some tools. Namely the pen tool.
+#define TOOL_PROP_COLOR         "color"          //Property for specifying a color, for something like a pen.
+#define TOOL_PROP_USES          "uses_left"      //Property for things that have a fixed amount of uses. -1 is unlimited.
+
+//Pen specific stuff
+#define TOOL_PROP_PEN_FLAG        "pen_flag"     //Property for pens to specify additional properties about themselves
+#define TOOL_PROP_PEN_SIG         "signature"    //Property for pens specifically. Returns a stored forged signature if there's one.
+#define TOOL_PROP_PEN_SHADE_COLOR "shade_color"  //Property for pens returns the shade color if applicable
+///Property for pens returns the font the pen uses
+#define TOOL_PROP_PEN_FONT        "pen_font"

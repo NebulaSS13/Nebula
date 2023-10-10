@@ -21,11 +21,15 @@
 	. = ..()
 
 /obj/structure/stasis_cage/attack_hand(var/mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	try_release(user)
+	return TRUE
 
 /obj/structure/stasis_cage/attack_robot(var/mob/user)
-	if(Adjacent(user))
+	if(CanPhysicallyInteract(user))
 		try_release(user)
+		return TRUE
 
 /obj/structure/stasis_cage/proc/try_release(mob/user)
 	if(!contained)

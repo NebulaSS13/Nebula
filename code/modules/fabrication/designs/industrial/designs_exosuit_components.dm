@@ -84,29 +84,56 @@
 /datum/fabricator_recipe/industrial/exosuit_gear/drill
 	path = /obj/item/mech_equipment/drill
 
-/datum/fabricator_recipe/industrial/exosuit_gear/taser
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted
 	path = /obj/item/mech_equipment/mounted_system/taser
 
-/datum/fabricator_recipe/industrial/exosuit_gear/plasma
+// Add the resources from whatever is mounted on the system
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/get_resources()
+	. = ..()
+	if(!ispath(path, /obj/item/mech_equipment/mounted_system))
+		return
+	var/obj/item/mech_equipment/mounted_system/system = path
+
+	var/mounted_type = initial(system.holding_type)
+	if(!mounted_type)
+		return
+	var/list/mounted_cost = atom_info_repository.get_matter_for(mounted_type)
+	for(var/mat in mounted_cost)
+		resources[mat] += mounted_cost[mat] * FABRICATOR_EXTRA_COST_FACTOR
+
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/plasma
 	path = /obj/item/mech_equipment/mounted_system/taser/plasma
 
-/datum/fabricator_recipe/industrial/exosuit_gear/ion
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/ion
 	path = /obj/item/mech_equipment/mounted_system/taser/ion
 
-/datum/fabricator_recipe/industrial/exosuit_gear/laser
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/laser
 	path = /obj/item/mech_equipment/mounted_system/taser/laser
 
-/datum/fabricator_recipe/industrial/exosuit_gear/rcd
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/smg
+	path = /obj/item/mech_equipment/mounted_system/projectile
+
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/rifle
+	path = /obj/item/mech_equipment/mounted_system/projectile/assault_rifle
+
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/rcd
 	path = /obj/item/mech_equipment/mounted_system/rcd
 
-/datum/fabricator_recipe/industrial/exosuit_gear/floodlight
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/floodlight
 	path = /obj/item/mech_equipment/light
 
-/datum/fabricator_recipe/industrial/exosuit_gear/sleeper
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/sleeper
 	path = /obj/item/mech_equipment/sleeper
 
-/datum/fabricator_recipe/industrial/exosuit_gear/extinguisher
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/extinguisher
 	path = /obj/item/mech_equipment/mounted_system/extinguisher
 
-/datum/fabricator_recipe/industrial/exosuit_gear/mechshields
+/datum/fabricator_recipe/industrial/exosuit_gear/mounted/mechshields
 	path = /obj/item/mech_equipment/shields
+
+/datum/fabricator_recipe/industrial/exosuit_ammo
+	category = "Exosuit Ammunition"
+	path = /obj/item/ammo_magazine/mech/smg_top
+
+/datum/fabricator_recipe/industrial/exosuit_ammo
+	path = /obj/item/ammo_magazine/mech/rifle

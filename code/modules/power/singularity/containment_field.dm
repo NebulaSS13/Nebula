@@ -1,36 +1,35 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
-/obj/machinery/containment_field
-	name = "Containment Field"
+/obj/effect/containment_field
+	name = "containment field"
 	desc = "An energy field."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "Contain_F"
 	anchored = 1
 	density = 0
 	unacidable = 1
-	use_power = POWER_USE_OFF
-	uncreated_component_parts = null
 	light_range = 4
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	var/obj/machinery/field_generator/FG1 = null
 	var/obj/machinery/field_generator/FG2 = null
 	var/hasShocked = 0 //Used to add a delay between shocks. In some cases this used to crash servers by spawning hundreds of sparks every second.
 
-/obj/machinery/containment_field/Destroy()
+/obj/effect/containment_field/Destroy()
 	if(FG1 && !FG1.clean_up)
 		FG1.cleanup()
 	if(FG2 && !FG2.clean_up)
 		FG2.cleanup()
 	. = ..()
 
-/obj/machinery/containment_field/physical_attack_hand(mob/user)
+/obj/effect/containment_field/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return shock(user)
 
-/obj/machinery/containment_field/explosion_act(severity)
+/obj/effect/containment_field/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
-	return 0
+	return FALSE
 
-/obj/machinery/containment_field/HasProximity(atom/movable/AM)
+/obj/effect/containment_field/HasProximity(atom/movable/AM)
 	. = ..()
 	if(.)
 		if(istype(AM,/mob/living/silicon) && prob(40))
@@ -41,7 +40,7 @@
 			return TRUE
 		return FALSE
 
-/obj/machinery/containment_field/shock(mob/living/user)
+/obj/effect/containment_field/proc/shock(mob/living/user)
 	if(hasShocked)
 		return 0
 	if(!FG1 || !FG2)
@@ -60,7 +59,7 @@
 		hasShocked = 0
 		return TRUE
 
-/obj/machinery/containment_field/proc/set_master(var/master1,var/master2)
+/obj/effect/containment_field/proc/set_master(var/master1,var/master2)
 	if(!master1 || !master2)
 		return 0
 	FG1 = master1

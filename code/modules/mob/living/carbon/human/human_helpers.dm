@@ -52,14 +52,22 @@
 	equipment_overlays.Cut()
 
 	if (!client || client.eye == src || client.eye == src.loc) // !client is so the unit tests function
-		if(istype(src.head, /obj/item/clothing/head))
+
+		var/obj/item/clothing/head/head = get_equipped_item(slot_head_str)
+		if(istype(head))
 			add_clothing_protection(head)
-		if(istype(src.glasses, /obj/item/clothing/glasses))
+
+		var/obj/item/clothing/glasses/glasses = get_equipped_item(slot_glasses_str)
+		if(istype(glasses))
 			process_glasses(glasses)
-		if(istype(src.wear_mask, /obj/item/clothing/mask))
-			add_clothing_protection(wear_mask)
-		if(istype(back,/obj/item/rig))
-			process_rig(back)
+
+		var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+		if(istype(mask))
+			add_clothing_protection(mask)
+
+		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+		if(istype(rig))
+			process_rig(rig)
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
 	if(G)
@@ -81,6 +89,7 @@
 			G.process_hud(src)
 
 /mob/living/carbon/human/proc/process_rig(var/obj/item/rig/O)
+	var/obj/item/head = get_equipped_item(slot_head_str)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
 		process_glasses(O.visor.vision.glasses)
 
@@ -322,4 +331,18 @@
 	return (global_hud.meson in equipment_overlays)
 
 /mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
-	return I in list(l_store, r_store)
+	for(var/slot in global.pocket_slots)
+		if(get_equipped_item(slot) == I)
+			return TRUE
+	return FALSE
+
+/mob/living/carbon/human/get_accessible_pen()
+	if((. = ..()))
+		return .
+
+	//Look for other slots
+	var/static/list/PEN_CHECK_SLOTS = list(slot_l_ear_str, slot_r_ear_str, slot_l_store_str, slot_r_store_str, slot_s_store_str)
+	for(var/slot in PEN_CHECK_SLOTS)
+		var/obj/item/I = get_equipped_item(slot)
+		if(IS_PEN(I))
+			return I

@@ -25,17 +25,31 @@
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
-	status = ORGAN_PROSTHETIC
+	organ_properties = ORGAN_PROP_PROSTHETIC
+	icon = 'icons/obj/robot_component.dmi'
+	flash_mod = 1
+	darksight_range = 2
+	material = /decl/material/solid/metal/steel
+
+/obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna)
+	. = ..()
+	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
+
+/obj/item/organ/internal/eyes/robot/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+	return
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = eye_colour
-	last_eye_cache_key = "[type]-[eye_icon]-[last_cached_eye_colour]"
+	last_eye_cache_key = "[type]-[eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
 	return last_eye_cache_key
 
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
 	var/cache_key = get_eye_cache_key()
 	if(!human_icon_cache[cache_key])
 		var/icon/eyes_icon = icon(icon = eye_icon, icon_state = "")
+		if(bodytype.eye_offset)
+			eyes_icon.Shift(NORTH, bodytype.eye_offset)
 		if(apply_eye_colour)
 			eyes_icon.Blend(last_cached_eye_colour, eye_blend)
 		human_icon_cache[cache_key] = eyes_icon
@@ -102,11 +116,8 @@
 	. = ..()
 	name = "optical sensor"
 	icon = 'icons/obj/robot_component.dmi'
-
-	if(owner)
-		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
-		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
-
+	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	update_colour()
 	flash_mod = 1
 	darksight_range = 2

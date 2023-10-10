@@ -15,11 +15,9 @@ SUBSYSTEM_DEF(materials)
 
 	// Chemistry vars.
 	var/list/active_holders =                  list()
-	var/list/chemical_reactions_by_type =      list()
 	var/list/chemical_reactions_by_id =        list()
 	var/list/chemical_reactions_by_result =    list()
 	var/list/processing_holders =              list()
-	var/list/pending_reagent_change =          list()
 	var/list/cocktails_by_primary_ingredient = list()
 
 	// Overlay caches
@@ -59,6 +57,8 @@ SUBSYSTEM_DEF(materials)
 	// Various other material functions.
 	build_material_lists()       // Build core material lists.
 	build_fusion_reaction_list() // Build fusion reaction tree.
+	materials = sortTim(SSmaterials.materials, /proc/cmp_name_asc)
+	materials_by_name = sortTim(SSmaterials.materials_by_name, /proc/cmp_name_or_type_asc, TRUE)
 
 	var/alpha_inc = 256 / DAMAGE_OVERLAY_COUNT
 	for(var/i = 1; i <= DAMAGE_OVERLAY_COUNT; i++)
@@ -76,11 +76,9 @@ SUBSYSTEM_DEF(materials)
 		return
 	materials =         list()
 	materials_by_name = list()
-	for(var/mtype in subtypesof(/decl/material))
-		var/decl/material/new_mineral = mtype
-		if(!initial(new_mineral.name))
-			continue
-		new_mineral = GET_DECL(mtype)
+	var/list/material_decls = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mtype in material_decls)
+		var/decl/material/new_mineral = material_decls[mtype]
 		materials += new_mineral
 		materials_by_name[lowertext(new_mineral.name)] = new_mineral
 		if(new_mineral.sparse_material_weight)
@@ -135,35 +133,82 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/get_cocktails_by_primary_ingredient(var/primary)
 	. = cocktails_by_primary_ingredient[primary]
 
-/datum/controller/subsystem/materials/proc/get_strata(var/turf/exterior/wall/location)
+/datum/controller/subsystem/materials/proc/get_strata_type(var/turf/exterior/wall/location)
 	if(!istype(location))
 		return
-	var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[location.z]"]
-	if(istype(planet))
-		return planet.get_strata(location)
-	var/s_key = "[location.z]"
-	if(!global.default_strata_type_by_z[s_key])
-		global.default_strata_type_by_z[s_key] = pick(subtypesof(/decl/strata))
-	return global.default_strata_type_by_z[s_key]
+
+	//Turf may override level_data strata
+	if(ispath(location.strata_override))
+		return location.strata_override
+
+	//Then level_data
+	var/datum/level_data/LD = SSmapping.levels_by_z[location.z]
+	if(!LD._level_setup_completed && !LD._has_warned_uninitialized_strata)
+		LD.warn_bad_strata(location) //If we haven't warned yet dump a stack trace and warn that strata was set before init
+
+	if(ispath(LD.strata, /decl/strata))
+		return LD.strata
+	else if(istype(LD.strata, /decl/strata))
+		return LD.strata.type
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(var/mat_name)
 	if(mat_name)
 		mat_name = lowertext(mat_name)
 		return materials_by_name[mat_name]
 
-/datum/controller/subsystem/materials/proc/get_strata_material(var/turf/exterior/wall/location)
+/datum/controller/subsystem/materials/proc/get_strata_material_type(var/turf/exterior/wall/location)
 	if(!istype(location))
 		return
-	if(!location.strata)
-		location.strata = get_strata(location)
-	var/skey = "[location.strata]-[location.z]"
-	if(!global.default_material_by_strata_and_z[skey])
-		var/decl/strata/strata = GET_DECL(location.strata)
-		if(length(strata.base_materials))
-			global.default_material_by_strata_and_z[skey] = pick(strata.base_materials)
-	return global.default_material_by_strata_and_z[skey]
+
+	//Turf strata overrides level strata
+	if(ispath(location.strata_override, /decl/strata))
+		var/decl/strata/S = GET_DECL(location.strata_override)
+		if(length(S.base_materials))
+			return pick(S.base_materials)
+
+	//Try to grab the material we picked for the level from the level data
+	var/datum/level_data/LD = SSmapping.levels_by_z[location.z]
+	if(!LD._level_setup_completed && !LD._has_warned_uninitialized_strata)
+		LD.warn_bad_strata(location) //If we haven't warned yet dump a stack trace and warn that strata was set before init
+	return LD.strata_base_material.type
 
 /datum/controller/subsystem/materials/proc/create_object(var/mat_type, var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
 	var/decl/material/mat = GET_DECL(mat_type)
 	return mat?.create_object(target, amount, object_type, reinf_type)
 
+///Returns the rock color for a given exterior wall
+/datum/controller/subsystem/materials/proc/get_rock_color(var/turf/exterior/wall/location)
+	if(!istype(location))
+		return
+	//#TODO: allow specifying rock color per z-level maybe?
+
+	if(istype(location.owner))
+		return location.owner.get_rock_color()
+
+// There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
+// This could eventually be removed if we used decls for damage types.
+/datum/controller/subsystem/materials/proc/get_armor_key(damage_type, damage_flags)
+	var/key
+	switch(damage_type)
+		if(BRUTE)
+			if(damage_flags & DAM_BULLET)
+				key = ARMOR_BULLET
+			else if(damage_flags & DAM_EXPLODE)
+				key = ARMOR_BOMB
+			else
+				key = ARMOR_MELEE
+		if(BURN)
+			if(damage_flags & DAM_LASER)
+				key = ARMOR_LASER
+			else if(damage_flags & DAM_EXPLODE)
+				key = ARMOR_BOMB
+			else
+				key = ARMOR_ENERGY
+		if(TOX)
+			if(damage_flags & DAM_BIO)
+				key = ARMOR_BIO // Otherwise just not blocked by default.
+		if(IRRADIATE)
+			key = ARMOR_RAD
+		if(ELECTROCUTE)
+			key = ARMOR_ENERGY
+	return key

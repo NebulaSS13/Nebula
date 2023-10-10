@@ -2,8 +2,8 @@
 	return
 
 /atom/proc/fluid_act(var/datum/reagents/fluids)
-	fluids.touch(src)
-	if(reagents && fluids.total_volume >= FLUID_SHALLOW && ATOM_IS_OPEN_CONTAINER(src))
+	SHOULD_CALL_PARENT(TRUE)
+	if(reagents && fluids?.total_volume >= FLUID_SHALLOW && ATOM_IS_OPEN_CONTAINER(src))
 		reagents.trans_to_holder(fluids, reagents.total_volume)
 		fluids.trans_to_holder(reagents, min(fluids.total_volume, reagents.maximum_volume))
 
@@ -47,7 +47,3 @@
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		T.fluid_update(ignore_neighbors)
-
-/atom/movable/update_nearby_tiles(var/need_rebuild)
-	UNLINT(. = ..(need_rebuild))
-	fluid_update()

@@ -1,5 +1,6 @@
-/obj/item/pen/chameleon
-	var/signature = ""
+/obj/item/pen/chameleon/Initialize(ml, material_key)
+	. = ..()
+	set_tool_property(TOOL_PEN, TOOL_PROP_PEN_SIG, "Anonymous") //Always default to anonymous for this pen, since it should never uses the user's real_name
 
 /obj/item/pen/chameleon/attack_self(mob/user)
 	/*
@@ -13,13 +14,8 @@
 	if(new_signature)
 		signature = new_signature
 	*/
-	signature = sanitize(input("Enter new signature. Leave blank for 'Anonymous'", "New Signature", signature))
-
-/obj/item/pen/proc/get_signature(var/mob/user)
-	return (user && user.real_name) ? user.real_name : "Anonymous"
-
-/obj/item/pen/chameleon/get_signature(var/mob/user)
-	return signature ? signature : "Anonymous"
+	var/signature = sanitize(input("Enter new signature. Leave blank for 'Anonymous'", "New Signature", get_tool_property(TOOL_PEN, TOOL_PROP_PEN_SIG)))
+	set_tool_property(TOOL_PEN, TOOL_PROP_PEN_SIG, signature ? signature : "Anonymous") 
 
 /obj/item/pen/chameleon/verb/set_colour()
 	set name = "Change Pen Colour"
@@ -31,30 +27,22 @@
 	if(selected_type)
 		switch(selected_type)
 			if("Yellow")
-				colour = COLOR_YELLOW
-				color_description = "yellow ink"
+				set_medium_color(COLOR_YELLOW, "yellow")
 			if("Green")
-				colour = COLOR_LIME
-				color_description = "green ink"
+				set_medium_color(COLOR_LIME,   "green")
 			if("Pink")
-				colour = COLOR_PINK
-				color_description = "pink ink"
+				set_medium_color(COLOR_PINK,   "pink")
 			if("Blue")
-				colour = COLOR_BLUE
-				color_description = "blue ink"
+				set_medium_color(COLOR_BLUE,   "blue")
 			if("Orange")
-				colour = COLOR_ORANGE
-				color_description = "orange ink"
+				set_medium_color(COLOR_ORANGE, "orange")
 			if("Cyan")
-				colour = COLOR_CYAN
-				color_description = "cyan ink"
+				set_medium_color(COLOR_CYAN,   "cyan")
 			if("Red")
-				colour = COLOR_RED
-				color_description = "red ink"
+				set_medium_color(COLOR_RED,    "red")
 			if("Invisible")
-				colour = COLOR_WHITE
-				color_description = "transluscent ink"
+				set_medium_color(COLOR_WHITE,  "transluscent")
 			else
-				colour = COLOR_BLACK
-				color_description = "black ink"
-		to_chat(usr, "<span class='info'>You select the [lowertext(selected_type)] ink container.</span>")
+				set_medium_color(COLOR_BLACK,  "black")
+
+		to_chat(usr, SPAN_INFO("You select the [lowertext(selected_type)] [medium_name] container."))

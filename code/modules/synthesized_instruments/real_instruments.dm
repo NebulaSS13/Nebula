@@ -223,8 +223,9 @@
 
 
 /obj/structure/synthesized_instrument/attack_hand(mob/user)
-	src.interact(user)
-
+	SHOULD_CALL_PARENT(FALSE)
+	interact(user)
+	return TRUE
 
 /obj/structure/synthesized_instrument/interact(mob/user) // CONDITIONS ..(user) that shit in subclasses
 	src.ui_interact(user)
@@ -253,6 +254,7 @@
 /obj/item/synthesized_instrument
 	var/datum/real_instrument/real_instrument
 	icon = 'icons/obj/musician.dmi'
+	material = /decl/material/solid/plastic
 	var/list/instruments = list()
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player

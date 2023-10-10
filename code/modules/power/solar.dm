@@ -16,9 +16,7 @@ var/global/list/solars_list = list()
 	var/obscured = 0
 	var/sunfrac = 0
 	var/efficiency = 1
-	var/adir = SOUTH // actual dir
-	var/ndir = SOUTH // target dir
-	var/turn_angle = 0
+	var/adir = 0 // direction we're facing in degrees
 	var/obj/machinery/power/solar_control/control = null
 
 /obj/machinery/power/solar/improved
@@ -64,7 +62,7 @@ var/global/list/solars_list = list()
 
 /obj/machinery/power/solar/attackby(obj/item/W, mob/user)
 
-	if(isCrowbar(W))
+	if(IS_CROWBAR(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
 		if(do_after(user, 50,src))
@@ -175,7 +173,7 @@ var/global/list/solars_list = list()
 	// On planets, we take fewer steps because the light is mostly up
 	// Also, many planets barely have any spots with enough clear space around
 	if(isturf(loc))
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[loc.z]"]
+		var/obj/effect/overmap/visitable/sector/planetoid/E = global.overmap_sectors[num2text(loc.z)]
 		if(istype(E))
 			steps = 5
 
@@ -213,10 +211,6 @@ var/global/list/solars_list = list()
 	var/glass_type
 	var/glass_reinforced
 
-/obj/item/solar_assembly/attack_hand(var/mob/user)
-	if(!anchored && isturf(loc)) // You can't pick it up
-		..()
-
 // Give back the glass type we were supplied with
 /obj/item/solar_assembly/proc/give_glass()
 	if(glass_type)
@@ -227,7 +221,7 @@ var/global/list/solars_list = list()
 /obj/item/solar_assembly/attackby(var/obj/item/W, var/mob/user)
 
 	if(!anchored && isturf(loc))
-		if(isWrench(W))
+		if(IS_WRENCH(W))
 			anchored = 1
 			default_pixel_x = 0
 			default_pixel_y = 0
@@ -237,7 +231,7 @@ var/global/list/solars_list = list()
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 	else
-		if(isWrench(W))
+		if(IS_WRENCH(W))
 			anchored = 0
 			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from it's place.</span>")
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -266,7 +260,7 @@ var/global/list/solars_list = list()
 			user.visible_message("<span class='notice'>[user] inserts the electronics into the solar assembly.</span>")
 			return 1
 	else
-		if(isCrowbar(W))
+		if(IS_CROWBAR(W))
 			new /obj/item/tracker_electronics(src.loc)
 			tracker = 0
 			user.visible_message("<span class='notice'>[user] takes out the electronics from the solar assembly.</span>")
@@ -427,14 +421,14 @@ var/global/list/solars_list = list()
 
 	if(href_list["rate control"])
 		if(href_list["cdir"])
-			src.cdir = dd_range(0,359,(360+src.cdir+text2num(href_list["cdir"]))%360)
+			src.cdir = clamp((360+src.cdir+text2num(href_list["cdir"]))%360, 0, 359)
 			src.targetdir = src.cdir
 			if(track == 2) //manual update, so losing auto-tracking
 				track = 0
 			spawn(1)
 				set_panels(cdir)
 		if(href_list["tdir"])
-			src.trackrate = dd_range(-7200,7200,src.trackrate+text2num(href_list["tdir"]))
+			src.trackrate = clamp(src.trackrate+text2num(href_list["tdir"]), -7200, 7200)
 			if(src.trackrate) nexttime = world.time + 36000/abs(trackrate)
 
 	if(href_list["track"])

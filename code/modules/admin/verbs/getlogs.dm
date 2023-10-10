@@ -24,16 +24,16 @@
 	set category = null
 
 	if(!src.holder)
-		to_chat(src, "<font color='red'>Only Admins may use this command.</font>")
+		to_chat(src, SPAN_WARNING("Only Admins may use this command."))
 		return
 
 	var/client/target = input(src,"Choose somebody to grant access to the server's runtime logs (permissions expire at the end of each round):","Grant Permissions",null) as null|anything in global.clients
 	if(!istype(target,/client))
-		to_chat(src, "<font color='red'>Error: giveserverlog(): Client not found.</font>")
+		to_chat(src, SPAN_WARNING("Error: giveserverlog(): Client not found."))
 		return
 
 	target.verbs |= /client/proc/getserverlog
-	to_chat(target, "<font color='red'>You have been granted access to runtime logs. Please use them responsibly or risk being banned.</font>")
+	to_chat(target, SPAN_NOTICE("You have been granted access to runtime logs. Please use them responsibly or risk being banned."))
 	return
 
 //This proc allows download of past server logs saved within the data/logs/ folder.

@@ -28,8 +28,7 @@ SUBSYSTEM_DEF(ticker)
 	var/looking_for_antags = 0
 
 /datum/controller/subsystem/ticker/Initialize()
-	to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
-	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+	print_lobby_message()
 	return ..()
 
 /datum/controller/subsystem/ticker/fire(resumed = 0)
@@ -94,11 +93,11 @@ SUBSYSTEM_DEF(ticker)
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
-		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
+		to_world("<B>[SPAN_BLUE("Enjoy the game!")]</B>")
 		if(global.using_map.welcome_sound)
 			sound_to(world, sound(pick(global.using_map.welcome_sound)))
 		if(global.current_holiday)
-			to_world("<font color='blue'>and...</font>")
+			to_world(SPAN_BLUE("and..."))
 			to_world("<h4>[global.current_holiday.announcement]</h4>")
 			global.current_holiday.set_up_holiday()
 
@@ -431,8 +430,8 @@ Helpers
 				max_profit = D
 			if(saldo <= max_loss.get_balance())
 				max_loss = D
-		to_world("<b>[max_profit.owner_name]</b> received most <font color='green'><B>PROFIT</B></font> today, with net profit of <b>[max_profit.format_value_by_currency(max_profit.get_balance())]</b>.")
-		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most <font color='red'><B>LOSS</B></font>, with total loss of <b>[max_loss.format_value_by_currency(max_loss.get_balance())]</b>.")
+		to_world("<b>[max_profit.owner_name]</b> received most <B>[SPAN_GOOD("PROFIT")]</B> today, with net profit of <b>[max_profit.format_value_by_currency(max_profit.get_balance())]</b>.")
+		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most [SPAN_BAD("<B>LOSS</B>")], with total loss of <b>[max_loss.format_value_by_currency(max_loss.get_balance())]</b>.")
 
 	mode.declare_completion()//To declare normal completion.
 
@@ -464,3 +463,7 @@ Helpers
 		bypass_gamemode_vote = 1
 	Master.SetRunLevel(RUNLEVEL_SETUP)
 	return 1
+
+/datum/controller/subsystem/ticker/proc/print_lobby_message()
+	to_world("<B>[SPAN_BLUE("Welcome to the pre-game lobby!")]</B>")
+	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")

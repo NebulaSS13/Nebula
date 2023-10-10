@@ -497,7 +497,7 @@
 
 		else if(char == "'")
 			if(word != "")
-				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unexpected ' in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</span>")
+				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unexpected ' in query: \"[SPAN_GREY(query_text)]\" following \"[SPAN_GREY(word)]\". Please check your syntax, and try again.</span>")
 				return null
 
 			word = "'"
@@ -517,7 +517,7 @@
 					word += char
 
 			if(i > len)
-				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unmatched ' in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</span>")
+				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unmatched ' in query: \"[SPAN_GREY(query_text)]\". Please check your syntax, and try again.</span>")
 				return null
 
 			query_list += "[word]'"
@@ -525,7 +525,7 @@
 
 		else if(char == "\"")
 			if(word != "")
-				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unexpected \" in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</span>")
+				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unexpected \" in query: \"[SPAN_GREY(query_text)]\" following \"[SPAN_GREY(word)]\". Please check your syntax, and try again.</span>")
 				return null
 
 			word = "\""
@@ -545,7 +545,7 @@
 					word += char
 
 			if(i > len)
-				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unmatched \" in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</span>")
+				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unmatched \" in query: \"[SPAN_GREY(query_text)]\". Please check your syntax, and try again.</span>")
 				return null
 
 			query_list += "[word]\""

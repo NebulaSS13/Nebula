@@ -85,7 +85,7 @@
 	if(eyeobj)
 		eyeobj.possess(src)
 
-	events_repository.raise_event(/decl/observ/logged_in, src)
+	RAISE_EVENT(/decl/observ/logged_in, src)
 
 	hud_reset(TRUE)
 
@@ -102,6 +102,8 @@
 		client.screen = list()	//remove hud items just in case
 		client.set_right_click_menu_mode(shift_to_open_context_menu)
 		InitializeHud()
+	else
+		refresh_lighting_master()
 
 	refresh_client_images()
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.

@@ -24,6 +24,7 @@
 	icon_state = "tube_map"
 	desc = "A lighting fixture."
 	anchored = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_HUMAN_LAYER  					// They were appearing under mobs which is a little weird - Ostaf
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 2
@@ -31,11 +32,12 @@
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/power/apc
 	)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
-	base_type = /obj/machinery/light/buildable
+	base_type = /obj/machinery/light
 	frame_type = /obj/item/frame/light
+	directional_offset = "{'NORTH':{'y':21}, 'EAST':{'x':10}, 'WEST':{'x':-10}}"
 
 	var/on = 0					// 1 if on, 0 if off
 	var/flickering = 0
@@ -55,9 +57,6 @@
 	lightbulb.set_color(color)
 	queue_icon_update()
 
-/obj/machinery/light/buildable
-	uncreated_component_parts = null
-
 // the smaller bulb light fixture
 /obj/machinery/light/small
 	icon_state = "bulb_map"
@@ -65,11 +64,8 @@
 	desc = "A small lighting fixture."
 	light_type = /obj/item/light/bulb
 	accepts_light_type = /obj/item/light/bulb
-	base_type = /obj/machinery/light/small/buildable
+	base_type = /obj/machinery/light/small
 	frame_type = /obj/item/frame/light/small
-
-/obj/machinery/light/small/buildable
-	uncreated_component_parts = null
 
 /obj/machinery/light/small/emergency
 	light_type = /obj/item/light/bulb/red
@@ -82,11 +78,8 @@
 	desc = "A more robust socket for light tubes that demand more power."
 	light_type = /obj/item/light/tube/large
 	accepts_light_type = /obj/item/light/tube/large
-	base_type = /obj/machinery/light/spot/buildable
+	base_type = /obj/machinery/light/spot
 	frame_type = /obj/item/frame/light/spot
-
-/obj/machinery/light/spot/buildable
-	uncreated_component_parts = null
 
 // create a new lighting fixture
 /obj/machinery/light/Initialize(mapload, d=0, populate_parts = TRUE)
@@ -107,7 +100,7 @@
 		if(prob(lightbulb.broken_chance))
 			broken(1)
 
-	on = powered()
+	on = expected_to_be_on()
 	update_icon(0)
 
 /obj/machinery/light/Destroy()
@@ -116,18 +109,6 @@
 
 /obj/machinery/light/on_update_icon(var/trigger = 1)
 	atom_flags = atom_flags & ~ATOM_FLAG_CAN_BE_PAINTED
-	// Handle pixel offsets
-	default_pixel_y = 0
-	default_pixel_x = 0
-	var/turf/T = get_step(get_turf(src), src.dir)
-	if(istype(T) && T.density)
-		if(src.dir == NORTH)
-			default_pixel_y = 21
-		else if(src.dir == EAST)
-			default_pixel_x = 10
-		else if(src.dir == WEST)
-			default_pixel_x = -10
-	reset_offsets(0)
 
 	// Update icon state
 	cut_overlays()
@@ -244,7 +225,7 @@
 	L.forceMove(src)
 	lightbulb = L
 
-	on = powered()
+	on = expected_to_be_on()
 	update_icon()
 
 /obj/machinery/light/proc/remove_bulb()
@@ -272,7 +253,7 @@
 		if(!istype(W, accepts_light_type))
 			to_chat(user, "This type of light requires a [get_fitting_name()].")
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, "You insert [W].")
 		insert_bulb(W)
@@ -297,17 +278,17 @@
 	// attempt to stick weapon into light socket
 	else if(!lightbulb)
 		to_chat(user, "You stick \the [W] into the light socket!")
-		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
+		if(expected_to_be_on() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			spark_at(src, cardinal_only = TRUE)
 			if (prob(75))
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
 
 
-// returns whether this light has power
+// returns whether this light is expected to be on, disregarding internal state other than power
 // true if area has power and lightswitch is on
-/obj/machinery/light/powered()
+/obj/machinery/light/proc/expected_to_be_on()
 	var/area/A = get_area(src)
-	return A && A.lightswitch && ..(power_channel)
+	return A?.lightswitch && !(stat & NOPOWER)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -344,17 +325,13 @@
 
 	// make it burn hands if not wearing fire-insulated gloves
 	if(on)
-		var/prot = 0
-		var/mob/living/carbon/human/H = user
 
+		var/prot = FALSE
+		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			if(H.gloves)
-				var/obj/item/clothing/gloves/G = H.gloves
-				if(G.max_heat_protection_temperature)
-					if(G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
-						prot = 1
-		else
-			prot = 1
+			var/obj/item/clothing/gloves/G = H.get_equipped_item(slot_gloves_str)
+			if(istype(G) && G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
+				prot = TRUE
 
 		if(prot > 0 || (MUTATION_COLD_RESISTANCE in user.mutations))
 			to_chat(user, "You remove the [get_fitting_name()].")
@@ -420,8 +397,14 @@
 
 // called when area power state changes
 /obj/machinery/light/power_change()
-	spawn(10)
-		seton(powered())
+	. = ..()
+	if(.)
+		delay_and_set_on(expected_to_be_on(), 1 SECOND)
+
+/obj/machinery/light/proc/delay_and_set_on(var/new_state, var/delay)
+	set waitfor = FALSE
+	sleep(delay)
+	seton(new_state)
 
 // called when on fire
 
@@ -450,8 +433,9 @@
 	accepts_light_type = /obj/item/light/tube/large
 	on = TRUE
 	var/delay = 1
-	base_type = /obj/machinery/light/navigation/buildable
+	base_type = /obj/machinery/light/navigation
 	frame_type = /obj/item/frame/light/nav
+	stat_immune = NOPOWER | NOINPUT | NOSCREEN
 
 /obj/machinery/light/navigation/on_update_icon()
 	. = ..() // this will handle pixel offsets
@@ -460,13 +444,10 @@
 
 /obj/machinery/light/navigation/attackby(obj/item/W, mob/user)
 	. = ..()
-	if(!. && isMultitool(W))
+	if(!. && IS_MULTITOOL(W))
 		delay = 5 + ((delay + 1) % 5)
 		to_chat(user, SPAN_NOTICE("You adjust the delay on \the [src]."))
 		return TRUE
-
-/obj/machinery/light/navigation/buildable
-	uncreated_component_parts = null
 
 /obj/machinery/light/navigation/delay2
 	delay = 2
@@ -480,10 +461,6 @@
 /obj/machinery/light/navigation/delay5
 	delay = 5
 
-/obj/machinery/light/navigation/powered()
-	return TRUE
-
-
 // the light item
 // can be tube or bulb subtypes
 // will fit into empty /obj/machinery/light of the corresponding type
@@ -495,7 +472,7 @@
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
@@ -583,6 +560,7 @@
 
 // update the icon state and description of the light
 /obj/item/light/on_update_icon()
+	. = ..()
 	color = b_color
 	var/broken
 	switch(status)
@@ -598,7 +576,7 @@
 			broken = TRUE
 	var/image/I = image(icon, src, "[base_state]_attachment[broken ? "_broken" : ""]")
 	I.color = null
-	overlays += I
+	add_overlay(I)
 
 /obj/item/light/Initialize(mapload, obj/machinery/light/fixture = null)
 	. = ..()

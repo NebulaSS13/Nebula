@@ -1,4 +1,6 @@
 /obj/item/crafting_holder
+	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
+	max_health = 25
 	var/decl/crafting_stage/current_crafting_stage
 	var/label_name
 
@@ -28,6 +30,8 @@
 
 /obj/item/crafting_holder/Initialize(var/ml, var/decl/crafting_stage/initial_stage, var/obj/item/target, var/obj/item/tool, var/mob/user)
 	. = ..(ml)
+	if(!initial_stage)
+		return INITIALIZE_HINT_QDEL
 	name = "[target.name] assembly"
 	var/mob/M = target.loc
 	if(istype(M))
@@ -44,7 +48,7 @@
 
 /obj/item/crafting_holder/attackby(var/obj/item/W, var/mob/user)
 
-	if(istype(W, /obj/item/pen))
+	if(IS_PEN(W))
 		var/new_label = sanitize_safe(input(user, "What do you wish to label this assembly?", "Assembly Labelling", label_name), MAX_NAME_LEN)
 		if(new_label && !user.incapacitated() && W.loc == user && user.Adjacent(src) && !QDELETED(src))
 			to_chat(user, SPAN_NOTICE("You label \the [src] with '[new_label]'."))
@@ -75,6 +79,7 @@
 		update_strings()
 
 /obj/item/crafting_holder/on_update_icon()
+	. = ..()
 	icon = current_crafting_stage.item_icon
 	icon_state = current_crafting_stage.item_icon_state
 

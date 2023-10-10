@@ -29,18 +29,14 @@
 		ACCESSORY_SLOT_OVER
 		)
 
-	var/has_sensor = SUIT_HAS_SENSORS //For the crew computer 2 = unable to change mode
-	var/sensor_mode = 0
-		/*
-		1 = Report living/dead
-		2 = Report detailed damages
-		3 = Report location
-		*/
+	var/has_sensor = SUIT_HAS_SENSORS
+	var/sensor_mode = SUIT_SENSOR_OFF
 	var/displays_id = 1
 	var/rolled_down = FALSE
 	var/rolled_sleeves = FALSE
 
 /obj/item/clothing/under/Initialize()
+	sensor_mode = pick(0,1,2,3)
 	. = ..()
 	if(check_state_in_icon("[BODYTYPE_HUMANOID]-[slot_w_uniform_str]-rolled", icon))
 		verbs |= /obj/item/clothing/under/proc/roll_down_clothes
@@ -86,13 +82,6 @@
 		rolled_sleeves = !rolled_sleeves
 		to_chat(usr, SPAN_NOTICE("You roll [rolled_sleeves ? "up" : "down"] the sleeves of \the [src]."))
 		update_clothing_icon()
-
-/obj/item/clothing/under/attack_hand(var/mob/user)
-	if(accessories && accessories.len)
-		..()
-	if ((ishuman(usr) || issmall(usr)) && src.loc == user)
-		return
-	..()
 
 /obj/item/clothing/under/update_clothing_icon()
 	if(ismob(src.loc))
@@ -175,10 +164,22 @@
 	set src in usr
 	set_sensors(usr)
 
-/obj/item/clothing/under/Initialize()
-	sensor_mode = pick(0,1,2,3)
-	. = ..()
+/decl/interaction_handler/clothing_set_sensors
+	name = "Set Sensors Level"
+	expected_target_type = /obj/item/clothing/under
 
-/obj/item/clothing/under/AltClick(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		set_sensors(user)
+/decl/interaction_handler/clothing_set_sensors/invoked(var/atom/target, var/mob/user)
+	var/obj/item/clothing/under/U = target
+	U.set_sensors(user)
+
+/obj/item/clothing/under/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)
+
+// This stub is so the linter stops yelling about sleeping during Initialize()
+// due to corpse props equipping themselves, which calls equip_to_slot, which
+// calls attackby(), which sometimes sleeps due to input(). Yeah.
+// Remove this if a better fix presents itself.
+/obj/item/clothing/under/proc/try_attach_accessory(var/obj/item/accessory, var/mob/user)
+	set waitfor = FALSE
+	attackby(accessory, user)

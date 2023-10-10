@@ -11,6 +11,7 @@
 	var/static/base_icon
 
 /obj/item/cell/alien/on_update_icon()
+	. = ..()
 	if(!base_icon)
 		base_icon = pick("instrument", "unknown1", "unknown3", "unknown4")
 	icon_state = base_icon

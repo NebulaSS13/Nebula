@@ -18,7 +18,7 @@
 	user.visible_message(SPAN_NOTICE("\The [user] begins setting up \the [src]."))
 	if(!do_after(user, deploy_time, src))
 		return
-	if(!user.unEquip(src))
+	if(!user.try_unequip(src))
 		return
 	var/obj/S = new deploy_path(get_turf(user))
 	user.visible_message(SPAN_NOTICE("\The [user] deploys \the [S]."))
@@ -49,7 +49,7 @@
 	drop_type = "supermatter"
 
 /obj/structure/supply_beacon/attackby(var/obj/item/W, var/mob/user)
-	if(!activated && isWrench(W))
+	if(!activated && IS_WRENCH(W))
 		anchored = !anchored
 		user.visible_message(SPAN_NOTICE("\The [user] [anchored ? "secures" : "unsecures"] \the [src]."))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -57,15 +57,14 @@
 	return ..()
 
 /obj/structure/supply_beacon/attack_hand(var/mob/user)
-
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
 	if(expended)
 		to_chat(user, SPAN_WARNING("\The [src] has used up its charge."))
 		return TRUE
-
 	if(!anchored)
 		to_chat(user, SPAN_WARNING("You need to secure \the [src] with a wrench first!"))
 		return TRUE
-
 	if(activated)
 		deactivate(user)
 	else
@@ -100,7 +99,7 @@
 /obj/structure/supply_beacon/Destroy()
 	if(activated)
 		deactivate()
-	..()
+	return ..()
 
 /obj/structure/supply_beacon/Process()
 	if(expended || !activated)

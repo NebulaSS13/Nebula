@@ -1,0 +1,54 @@
+<div class='item'>
+	<div class="itemLabel">
+		Power:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.active ? 'On' : 'Off', 'power', { 'toggle_power' : 1 }, null)}}
+	</div>
+</div>
+<div class='item'>
+	<div class="itemLabel">
+		Power Draw:
+	</div>
+	<div class="itemContent">
+		{{:data.power_draw}}
+	</div>
+</div>
+<div class='item'>
+	<div class="itemLabel">
+		Range:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.overmap_range, null, { 'modify_range' : 1 }, null)}}
+	</div>
+</div>
+<div class='item'>
+	<div class="itemLabel">
+		Temperature:
+	</div>
+	<div class="itemContent">
+		{{:data.temperature}} / {{:data.max_temperature}} K 
+	</div>
+</div>
+<hr>
+<div class='item'>
+	<div class="itemLabel">
+		Restrict Networks:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.restrict_networks ? 'On' : 'Off', null, { 'restrict_networks' : 1 }, null)}}
+	</div>
+</div>
+{{if data.restrict_networks}}
+	<div class="itemLabel">
+		Permitted Networks
+	</div>
+	<div class="itemContent style=width: 100%;">
+		<div class="statusDisplay" style="min-height: 120px;"> 
+			{{for data.permitted}} 
+				{{:value}}<br> 
+			{{/for}} 
+		</div>
+		{{:helper.link('Add/Remove Network', '', {'toggle_permitted_network' : 1})}}
+	</div>
+{{/if}}

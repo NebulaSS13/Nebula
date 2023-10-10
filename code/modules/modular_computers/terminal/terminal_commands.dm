@@ -15,6 +15,7 @@ var/global/list/terminal_commands
 	var/skill_needed = SKILL_ADEPT        // How much skill the user needs to use this. This is not for critical failure effects at unskilled; those are handled globally.
 	var/req_access = list()               // Stores access needed, if any
 	var/needs_network					  // If this command fails if computer running terminal isn't connected to a network
+	var/needs_network_feature			  // Network feature flags which are required by this command.
 
 	var/static/regex/nid_regex			  // Regex for getting network addres out of the line
 
@@ -33,7 +34,28 @@ var/global/list/terminal_commands
 
 /datum/terminal_command/proc/get_arguments(text)
 	var/argtext = copytext(text, length(pattern) + 1)
-	return splittext(argtext, " ")
+
+	var/cur_string = ""
+	var/list/arguments = list()
+
+	var/last_was_escape = FALSE
+	for(var/i in 1 to length(argtext)) // Allow players to escape spaces by using '\'.
+		var/char = argtext[i]
+		if(char == "\\")
+			last_was_escape = TRUE
+			continue
+		last_was_escape = FALSE
+		if(char == " ")
+			if(!last_was_escape) // Space wasn't escaped.
+				if(length(cur_string))
+					arguments += cur_string
+				cur_string = ""
+				continue
+		cur_string += char
+
+	if(length(cur_string))
+		arguments += cur_string
+	return arguments
 
 // null return: continue. "" return will break and show a blank line. Return list() to break and not show anything.
 /datum/terminal_command/proc/parse(text, mob/user, datum/terminal/terminal)
@@ -45,6 +67,8 @@ var/global/list/terminal_commands
 		return "[name]: ACCESS DENIED"
 	if(needs_network && !terminal.computer.get_network_status())
 		return "NETWORK ERROR: Check connection and try again."
+	if(needs_network_feature && !terminal.computer.get_network_status(needs_network_feature))
+		return "NETWORK ERROR: Network rejected the use of this command on your current connection."
 
 	return proper_input_entered(text, user, terminal)
 
@@ -59,7 +83,7 @@ var/global/list/terminal_commands
 	var/pg = clamp(selected_page, 1, max_pages)
 
 	var/start_index = (pg - 1)*pg_length + 1
-	var/end_index = min(length(data), (pg)*pg_length)+1
+	var/end_index = min(length(data), pg*pg_length) + 1
 
 	. += data.Copy(start_index, end_index)
 	. += "[length(data)] [value_name]\s. Page [pg] / [max_pages]."
@@ -248,7 +272,7 @@ Subtypes
 
 /datum/terminal_command/cd
 	name = "cd"
-	man_entry = list("Format: cd \[target\] \[network tag\]", "Changes the current disk to the target.", "LOCAL, REMOVABLE, and NETWORK are supported.")
+	man_entry = list("Format: cd \[path\]", "Changes the current working directory.", "Both relative and absolute paths are supported.")
 	pattern = @"^cd"
 
 /datum/terminal_command/cd/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -257,94 +281,64 @@ Subtypes
 
 	var/list/cd_args = get_arguments(text)
 
-	var/target = uppertext(cd_args[1])
-	if(target == "LOCAL")
-		terminal.current_disk = terminal.disks[/datum/file_storage/disk]
-		if(!terminal.current_disk)
-			return "cd: Could not locate disk."
-		var/error = terminal.current_disk.check_errors()
-		if(error)
-			terminal.current_disk = null
-			return "cd: [error]"
-		return "cd: Changed to local disk."
-	else if(target == "REMOVABLE")
-		terminal.current_disk = terminal.disks[/datum/file_storage/disk/removable]
-		if(!terminal.current_disk)
-			return "cd: Could not locate removable disk."
-		var/error = terminal.current_disk.check_errors()
-		if(error)
-			terminal.current_disk = null
-			return "cd: [error]"
-		return "cd: Changed to removable disk"
+	var/target_directory = cd_args[1]
 
-	else if(target == "NETWORK")
-		var/datum/extension/interactive/os/origin = terminal.computer
-		if(!origin || !origin.get_network_status())
-			return "cd: Check network connectivity."
-		var/datum/computer_network/network = terminal.computer.get_network()
-		// Get the network tag input into the command, or the current network_target otherwise.
-		var/network_tag = (length(cd_args) >= 2) ? cd_args[2] : terminal.network_target
-		var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(network_tag)
-		if(!istype(M))
-			return "cd: Could not locate file server with tag [network_tag]."
-		if(!M.has_access(terminal.get_access(user)))
-			return "cd: Access denied to file server with tag [network_tag]"
-		terminal.current_disk = terminal.disks[/datum/file_storage/network]
-		if(!terminal.current_disk)
-			return "cd: Could not locate remote file server."
+	var/list/cd_targets = terminal.parse_directory(target_directory)
+	if(!islist(cd_targets))
+		return "cd: [get_terminal_error(target_directory, cd_targets)]."
 
-		var/datum/file_storage/network/N = terminal.current_disk
-		N.server = network_tag
-		var/error = terminal.current_disk.check_errors()
-		if(error)
-			terminal.current_disk = null
-			return "cd: [error]"
-		return "cd: Changed to remote file server with tag [network_tag]."
-	else
-		return "cd: Target disk not recognized. LOCAL, REMOVABLE, and NETWORK are supported."
+	terminal.current_disk = cd_targets[1]
+	terminal.current_directory = cd_targets[2]
+	return ""
 
 /datum/terminal_command/ls
 	name = "ls"
-	man_entry = list("Format: ls \[pg number\]", "Lists the files in the current disk, starting from the page number.")
+	man_entry = list("Format: ls \[pg number\]", "Lists the files in the working directory, starting from the page number.")
 	pattern = @"^ls"
 
 /datum/terminal_command/ls/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.current_disk || ispath(terminal.current_disk))
-		return "ls: No disk selected."
-
 	var/list/ls_args = get_arguments(text)
 
 	var/selected_page = (length(ls_args)) ? text2num(ls_args[1]) : 1
 	if(!isnum(selected_page))
 		return "ls: Improper syntax, use format ls \[page number\]."
 
-	var/list/files = terminal.current_disk.get_all_files()
+	if(!terminal.current_disk)
+		return print_as_page(terminal.computer.mounted_storage, "disk", selected_page, terminal.history_max_length - 1)
+	var/list/files = terminal.current_disk.get_dir_files(terminal.current_directory)
 	var/list/file_data = list()
 	for(var/datum/computer_file/F in files)
-		file_data += "[F.filename].[F.filetype] - [F.size] GQ"
+		if(istype(F, /datum/computer_file/directory))
+			file_data += "[F.filename] - DIR"
+		else
+			file_data += "[F.filename].[F.filetype] - [F.size] GQ"
 
 	return print_as_page(file_data, "file", selected_page, terminal.history_max_length - 1)
 
 /datum/terminal_command/remove
 	name = "rm"
-	man_entry = list("Format: rm \[file name\]", "Removes the file given in the current disk.")
+	man_entry = list("Format: rm \[file path\]", "Removes the file with the given path.")
 	pattern = @"^rm\b"
 
 /datum/terminal_command/remove/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.current_disk)
-		return "rm: No disk selected."
+	var/file_path = copytext(text, 4)
+	var/list/file_loc = terminal.parse_file(file_path)
+	// Errored!
+	if(!islist(file_loc))
+		return "rm: [get_terminal_error(file_path, file_loc)]."
 
-	var/file_name = copytext(text, 4)
-
-	var/deleted = terminal.current_disk.delete_file(file_name, terminal.get_access(user), user)
-	if(deleted)
-		return "rm: Removed file [file_name]."
-	else
-		return "rm: Failed to remove file [file_name]. Additional access may be required."
-
+	var/datum/file_storage/disk = file_loc[1]
+	var/datum/computer_file/file = file_loc[3]
+	var/deleted = disk.delete_file(file, terminal.get_access(user), user)
+	if(deleted == OS_FILE_SUCCESS)
+		return "rm: Removed file '[file.filename]'."
+	if(deleted == OS_FILE_NO_WRITE)
+		return "rm: You do not have permission to remove file '[file.filename]'."
+	// Other error. Most likely, the hard drive is non-functional.
+	return "rm: Failed to delete file '[file.filename]'. Hard drive may be non-functional."
 /datum/terminal_command/move
 	name = "mv"
-	man_entry = list("Format: mv \[file name\] \[destination\] \[copying (0/1) \]", "Moves a file in the current disk to another.")
+	man_entry = list("Format: mv \[file path\] \[destination\] \[copying (0/1) \]", "Moves a file to another directory.")
 	pattern = @"^mv"
 
 /datum/terminal_command/move/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -353,63 +347,32 @@ Subtypes
 
 	var/list/mv_args = get_arguments(text)
 	if(length(mv_args) < 2)
-		return "mv: Improper syntax, use mv \[file name\] \[destination\] \[copying (0/1) \]."
-	var/datum/computer_file/F = terminal.current_disk.get_file(mv_args[1])
-	if(!F)
-		return "mv: Could not find file with name [mv_args[1]]."
-	var/copying = length(mv_args > 2) ? text2num(mv_args[3]) : FALSE
-	if(copying == TRUE)
-		if(!(F.get_file_perms(terminal.get_access(user), user) & OS_READ_ACCESS))
-			return "mv: You do not have read access to this file."
-	else
-		if(!(F.get_file_perms(terminal.get_access(user), user) & OS_WRITE_ACCESS))
-			return "mv: You do not have write access to this file. Write access is required when not copying files with mv"
+		return "mv: Improper syntax, use mv \[file path\] \[destination\] \[copying (0/1) \]."
+	var/source_path = mv_args[1]
+	var/list/file_loc = terminal.parse_file(source_path)
+	if(!islist(file_loc)) // Errored!
+		return "mv: [get_terminal_error(source_path, file_loc)]."
+
+	var/datum/computer_file/F = file_loc[3]
+	var/copying = length(mv_args) > 2 ? text2num(mv_args[3]) : FALSE
 	// Find the destination.
-	var/datum/file_storage/dest
-	var/target = uppertext(mv_args[2])
-	if(target == "LOCAL")
-		dest = terminal.disks[/datum/file_storage/disk]
-		if(!dest)
-			return "mv: Could not locate disk."
-		var/error = dest.check_errors()
-		if(error)
-			return "mv: [error]"
-	else if(target == "REMOVABLE")
-		dest = terminal.disks[/datum/file_storage/disk/removable]
-		if(!dest)
-			return "mv: Could not locate removable disk."
-		var/error = dest.check_errors()
-		if(error)
-			return "mv: [error]"
-	else
-		var/datum/extension/interactive/os/origin = terminal.computer
-		if(!origin || !origin.get_network_status())
-			return "mv: Check network connectivity."
-		var/datum/computer_network/network = terminal.computer.get_network()
-		var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(target)
-		if(!istype(M))
-			return "mv: Could not locate destination with tag [target]."
-		if(!M.has_access(terminal.get_access(user)))
-			return "mv: Access denied to destination with tag [target]"
-		dest = terminal.disks[/datum/file_storage/network]
-		if(!dest)
-			return "mv: Could not locate remote file server."
+	var/target_path = mv_args[2]
 
-		var/datum/file_storage/network/N = dest
-		N.server = target
-		var/error = dest.check_errors()
-		if(error)
-			return "mv: [error]"
+	var/list/destination = terminal.parse_directory(target_path)
+	if(!islist(destination))
+		return "mv: [get_terminal_error(target_path, file_loc)]."
 
-	if(!dest)
-		return "mv: Could not locate file destination."
+	// Check file permisisons.
+	var/error = check_file_transfer(destination[2], F, copying, terminal.get_access(user), user)
+	if(error)
+		return "mv: [error]."
 
-	terminal.current_move = new(terminal.current_disk, dest, F, copying)
+	terminal.current_move = new(file_loc[1], destination[1], destination[2], F, copying)
 	return "mv: Beginning file move..."
 
 /datum/terminal_command/copy
 	name = "cp"
-	man_entry = list("Format: cp \[file name\]", "Copies a file in the current disk.")
+	man_entry = list("Format: cp \[file path\]", "Copies the file with the given path.")
 	pattern = @"^cp"
 
 /datum/terminal_command/copy/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -417,43 +380,70 @@ Subtypes
 		return "cp: No disk selected."
 
 	if(length(text) < 4)
-		return "cp: Improper syntax, use copy \[file name\]."
+		return "cp: Improper syntax, use copy \[file path\]."
 
-	var/target_name = copytext(text, 4)
-	var/datum/computer_file/F = terminal.current_disk.get_file(target_name)
-	if(!F)
-		return "cp: Could not find file with name [target_name]."
+	var/file_path = copytext(text, 4)
+	var/list/file_loc = terminal.parse_file(file_path)
+	// Errored!
+	if(!islist(file_loc))
+		var/list/dirs_and_file = splittext(file_path, "/")
+		var/dir_path = jointext(dirs_and_file, "/", 1, dirs_and_file.len)
+		var/filename = dirs_and_file[dirs_and_file.len]
+		return "cp: [get_terminal_error(filename, dir_path, file_loc)]."
 
-	var/copied_file = F.clone(TRUE)
-	if(terminal.current_disk.store_file(copied_file))
-		return "cp: Successfully copied file [F.filename]."
-	else
-		return "cp: Could not copy file!"
+	var/datum/file_storage/disk = file_loc[1]
+	var/datum/computer_file/file = file_loc[3]
+
+	var/datum/computer_file/copy = file.Clone(TRUE)
+	if(!istype(copy))
+		return
+	var/success = disk.store_file(copy, file_loc[2], FALSE, terminal.get_access(user), user)
+	if(success == OS_FILE_SUCCESS)
+		return "cp: Successfully copied file [file.filename]."
+
+	return "cp: [get_terminal_error(file_path, success)]."
 
 /datum/terminal_command/rename
 	name = "rename"
-	man_entry = list("Format: rename \[file name\] \[new name\]", "Renames a file in the current disk.")
+	man_entry = list("Format: rename \[file path\] \[new name\]", "Renames a file with the given path.")
 	pattern = @"^rename"
 
 /datum/terminal_command/rename/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.current_disk)
-		return "rename: No disk selected."
-
 	var/list/rename_args = get_arguments(text)
-
 	if(length(rename_args) < 2)
 		return "rename: Improper syntax, use rename \[file name\] \[new name\]."
-	var/datum/computer_file/F = terminal.current_disk.get_file(rename_args[1])
-	if(!F)
-		return "rename: Could not find file with name [rename_args[1]]."
+	var/file_path = rename_args[1]
+	var/list/file_loc = terminal.parse_file(file_path)
+	// Errored!
+	if(!islist(file_loc))
+		return "rename: [get_terminal_error(file_path, file_loc)]."
 
-	var/new_name = sanitize(rename_args[2])
+	var/datum/computer_file/F = file_loc[3]
+	var/new_name = sanitize_for_file(rename_args[2])
 
 	if(length(new_name))
+		if(F.unrenamable || !(F.get_file_perms(terminal.get_access(user), user) & OS_WRITE_ACCESS))
+			return "rename: You lack permission to rename [F.filename]."
 		F.filename = new_name
-		return "rename: File renamed to [new_name]."
+		return "rename: File renamed to '[new_name]'."
 	else
-		return "rename: Could not rename file."
+		return "rename: Invalid file name."
+
+/datum/terminal_command/mkdir
+	name = "mkdir"
+	man_entry = list("Format: mkdir \[dir path\]", "Creates a directory with the given path.")
+	pattern = @"^mkdir"
+
+/datum/terminal_command/mkdir/proper_input_entered(text, mob/user, datum/terminal/terminal)
+	var/list/mkdir_args = get_arguments(text)
+	if(!length(mkdir_args))
+		return "mv: Improper syntax, use mkdir \[dir path\]."
+	var/list/file_loc = terminal.parse_directory(mkdir_args[1], TRUE)
+	if(!islist(file_loc) || (length(file_loc) > 1 && file_loc[2] == null)) // Don't return the error directly since we're attempting to create a directory, not just parse one.
+		return "mkdir: Unable to create directory '[mkdir_args[1]]'."
+
+	var/datum/computer_file/directory/created_dir = file_loc[2]
+	return "mkdir: Successfully created directory '[created_dir.get_file_path()]'."
 
 /datum/terminal_command/target
 	name = "target"
@@ -500,7 +490,7 @@ Subtypes
 
 /datum/terminal_command/permmod
 	name = "permmod"
-	man_entry = list("Format: permmod \[file name\] \[access key\] \[permission mod flags\]", "Modifies or lists the permissions of the given file. Do not pass an access key to list permissions.",
+	man_entry = list("Format: permmod \[file path\] \[access key\] \[permission mod flags\]", "Modifies or lists the permissions of the given file. Do not pass an access key to list permissions.",
 	"Supported flags are as follows:",
 	"'+/-' - Add or Remove access requirement",
 	"'r/w/m' - Target read/write/modification access",
@@ -517,11 +507,14 @@ Subtypes
 
 	var/list/permmod_args = get_arguments(text)
 	if(!length(permmod_args))
-		return "permmod: Improper syntax, use permmod \[file name\] \[access key\] \[permission mod flags\]."
+		return "permmod: Improper syntax, use permmod \[file path\] \[access key\] \[permission mod flags\]."
 
-	var/datum/computer_file/F = terminal.current_disk.get_file(permmod_args[1])
-	if(!F)
-		return "permmod: Could not find file with name [permmod_args[1]]."
+	var/file_path = permmod_args[1]
+	var/list/file_loc = terminal.parse_file(file_path)
+	if(!islist(file_loc))
+		return "permmod: [get_terminal_error(file_path, file_loc)]."
+
+	var/datum/computer_file/F = file_loc[3]
 
 	if(length(permmod_args) < 3)
 		return F.get_perms_readable()
@@ -574,6 +567,7 @@ Subtypes
 	man_entry = list("Format: com \[alias\] \[value\]", "Calls a command on the current network target for modifying variables or calling methods.")
 	pattern = @"^com"
 	needs_network = TRUE
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/com/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	// If the user is unskilled, call a random method
@@ -625,6 +619,7 @@ Subtypes
 	pattern = @"^listcom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/listcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/target_tag = terminal.network_target
@@ -679,6 +674,7 @@ Subtypes
 	pattern = @"^addcom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/addcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/addcom_args = get_arguments(text)
@@ -713,6 +709,7 @@ Subtypes
 	pattern = @"^modcom"
 	needs_network = TRUE
 	skill_needed = SKILL_PROF // addcom only adds a randomly chosen command to the device - you need to be significantly more skilled to select a specific one remotely.
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/modcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/modcom_args = get_arguments(text)
@@ -774,6 +771,7 @@ Subtypes
 	pattern = @"^namecom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/namecom/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/namecom_args = get_arguments(text)
@@ -804,6 +802,7 @@ Subtypes
 	pattern = @"^rmcom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
+	needs_network_feature = NET_FEATURE_SYSTEMCONTROL
 
 /datum/terminal_command/rmcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/rmcom_args = get_arguments(text)

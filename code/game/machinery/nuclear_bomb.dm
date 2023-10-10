@@ -25,7 +25,6 @@ var/global/bomb_set
 	var/obj/item/disk/nuclear/auth = null
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open, 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
 	var/lastentered
-	var/previous_level = ""
 	wires = /datum/wires/nuclearbomb
 	var/decl/security_level/original_level
 
@@ -38,7 +37,7 @@ var/global/bomb_set
 	auth = null
 	return ..()
 
-/obj/machinery/nuclearbomb/Process(var/wait)
+/obj/machinery/nuclearbomb/Process(wait, tick)
 	if(timing)
 		timeleft = max(timeleft - (wait / 10), 0)
 		playsound(loc, 'sound/items/timer.ogg', 50)
@@ -47,7 +46,7 @@ var/global/bomb_set
 		SSnano.update_uis(src)
 
 /obj/machinery/nuclearbomb/attackby(obj/item/O, mob/user, params)
-	if(isScrewdriver(O))
+	if(IS_SCREWDRIVER(O))
 		add_fingerprint(user)
 		if(auth)
 			if(panel_open == 0)
@@ -71,21 +70,21 @@ var/global/bomb_set
 			flick("lock", src)
 		return
 
-	if(panel_open && (isMultitool(O) || isWirecutter(O)))
-		return attack_hand(user)
+	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
+		return attack_hand_with_interaction_checks(user)
 
 	if(extended)
 		if(istype(O, /obj/item/disk/nuclear))
-			if(!user.unEquip(O, src))
+			if(!user.try_unequip(O, src))
 				return
 			auth = O
 			add_fingerprint(user)
-			return attack_hand(user)
+			return attack_hand_with_interaction_checks(user)
 
 	if(anchored)
 		switch(removal_stage)
 			if(0)
-				if(isWelder(O))
+				if(IS_WELDER(O))
 					var/obj/item/weldingtool/WT = O
 					if(!WT.isOn()) return
 					if(WT.get_fuel() < 5) // uses up 5 fuel.
@@ -95,13 +94,13 @@ var/global/bomb_set
 					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
 
 					if(do_after(user,40, src))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
+						if(!src || !user || !WT.weld(5, user)) return
 						user.visible_message("\The [user] cuts through the bolt covers on \the [src].", "You cut through the bolt cover.")
 						removal_stage = 1
 				return
 
 			if(1)
-				if(isCrowbar(O))
+				if(IS_CROWBAR(O))
 					user.visible_message("[user] starts forcing open the bolt covers on [src].", "You start forcing open the anchoring bolt covers with [O]...")
 
 					if(do_after(user, 15, src))
@@ -111,7 +110,7 @@ var/global/bomb_set
 				return
 
 			if(2)
-				if(isWelder(O))
+				if(IS_WELDER(O))
 					var/obj/item/weldingtool/WT = O
 					if(!WT.isOn()) return
 					if (WT.get_fuel() < 5) // uses up 5 fuel.
@@ -121,13 +120,13 @@ var/global/bomb_set
 					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
 
 					if(do_after(user, 40, src))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
+						if(!src || !user || !WT.weld(5, user)) return
 						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].", "You cut apart the anchoring system's sealant.")
 						removal_stage = 3
 				return
 
 			if(3)
-				if(isWrench(O))
+				if(IS_WRENCH(O))
 					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].", "You begin unwrenching the anchoring bolts...")
 					if(do_after(user, 50, src))
 						if(!src || !user) return
@@ -136,7 +135,7 @@ var/global/bomb_set
 				return
 
 			if(4)
-				if(isCrowbar(O))
+				if(IS_CROWBAR(O))
 					user.visible_message("[user] begins lifting [src] off of the anchors.", "You begin lifting the device off the anchors...")
 					if(do_after(user, 80, src))
 						if(!src || !user) return
@@ -233,7 +232,7 @@ var/global/bomb_set
 		else
 			var/obj/item/I = usr.get_active_hand()
 			if(istype(I, /obj/item/disk/nuclear))
-				if(!usr.unEquip(I, src))
+				if(!usr.try_unequip(I, src))
 					return 1
 				auth = I
 	if(is_auth(usr))
@@ -265,7 +264,7 @@ var/global/bomb_set
 
 				var/time = text2num(href_list["time"])
 				timeleft += time
-				timeleft = Clamp(timeleft, minTime, maxTime)
+				timeleft = clamp(timeleft, minTime, maxTime)
 			if(href_list["timer"])
 				if(timing == -1)
 					return 1
@@ -327,7 +326,7 @@ var/global/bomb_set
 	bomb_set--
 	safety = TRUE
 	timing = 0
-	timeleft = Clamp(timeleft, 120, 600)
+	timeleft = clamp(timeleft, 120, 600)
 	update_icon()
 
 /obj/machinery/nuclearbomb/explosion_act(severity)
@@ -394,11 +393,13 @@ var/global/bomb_set
 //====the nuclear football (holds the disk and instructions)====
 /obj/item/storage/secure/briefcase/nukedisk
 	desc = "A large briefcase with a digital locking system."
-	startswith = list(
+
+/obj/item/storage/secure/briefcase/nukedisk/WillContain()
+	return list(
 		/obj/item/disk/nuclear,
 		/obj/item/pinpointer,
 		/obj/item/folder/envelope/nuke_instructions,
-		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap/
+		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap
 	)
 
 /obj/item/storage/secure/briefcase/nukedisk/examine(mob/user)
@@ -412,33 +413,30 @@ var/global/bomb_set
 /obj/item/folder/envelope/nuke_instructions/Initialize()
 	. = ..()
 	var/obj/item/paper/R = new(src)
-	R.set_content("<center><b>Warning: Classified<br>[global.using_map.station_name] Self-Destruct System - Instructions</b></center><br><br>\
-	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's \
-	on-board nuclear self-destruct system. Please read carefully.<br><br>\
-	1) (Optional) Announce the imminent activation to any surviving crew members, and begin evacuation procedures.<br>\
-	2) Notify two heads of staff, both with ID cards with access to the ship's Keycard Authentication Devices.<br>\
-	3) Proceed to the self-destruct chamber, located on Deck One by the stairwell.<br>\
-	4) Unbolt the door and enter the chamber.<br>\
-	5) Both heads of staff should stand in front of their own Keycard Authentication Devices. On the KAD interface, select \
-	Grant Nuclear Authentication Code. Both heads of staff should then swipe their ID cards simultaneously.<br>\
-	6) The KAD will now display the Authentication Code. Memorize this code.<br>\
-	7) Insert the nuclear authentication disk into the self-destruct terminal.<br>\
-	8) Enter the code into the self-destruct terminal.<br>\
-	9) Authentication procedures are now complete. Open the two cabinets containing the nuclear cylinders. They are \
-	located on the back wall of the chamber.<br>\
-	10) Place the cylinders upon the six nuclear cylinder inserters.<br>\
-	11) Activate the inserters. The cylinders will be pulled down into the self-destruct system.<br>\
-	12) Return to the terminal. Enter the desired countdown time.<br>\
-	13) When ready, disable the safety switch.<br>\
-	14) Start the countdown.<br><br>\
-	This concludes the instructions.", "vessel self-destruct instructions")
+	R.set_content({"<center><b>Warning: Classified<br>[global.using_map.station_name] Self-Destruct System - Instructions</b></center><br><br>
+	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's
+	on-board nuclear self-destruct system. Please read carefully.<br><br>
+	1) (Optional) Announce the imminent activation to any surviving crew members, and begin evacuation procedures.<br>
+	2) Notify two heads of staff, both with ID cards with access to the ship's Keycard Authentication Devices.<br>
+	3) Proceed to the self-destruct chamber, located on Deck One by the stairwell.<br>
+	4) Unbolt the door and enter the chamber.<br>
+	5) Both heads of staff should stand in front of their own Keycard Authentication Devices. On the KAD interface, select
+	Grant Nuclear Authentication Code. Both heads of staff should then swipe their ID cards simultaneously.<br>
+	6) The KAD will now display the Authentication Code. Memorize this code.<br>
+	7) Insert the nuclear authentication disk into the self-destruct terminal.<br>
+	8) Enter the code into the self-destruct terminal.<br>
+	9) Authentication procedures are now complete. Open the two cabinets containing the nuclear cylinders. They are
+	located on the back wall of the chamber.<br>
+	10) Place the cylinders upon the six nuclear cylinder inserters.<br>
+	11) Activate the inserters. The cylinders will be pulled down into the self-destruct system.<br>
+	12) Return to the terminal. Enter the desired countdown time.<br>
+	13) When ready, disable the safety switch.<br>
+	14) Start the countdown.<br><br>
+	This concludes the instructions."},
+		"vessel self-destruct instructions")
 
 	//stamp the paper
-	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-	stampoverlay.icon_state = "paper_stamp-hos"
-	R.stamped += /obj/item/stamp
-	R.overlays += stampoverlay
-	R.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
+	R.apply_custom_stamp(overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-hos", flags = RESET_COLOR), "'Top Secret'")
 
 //====vessel self-destruct system====
 /obj/machinery/nuclearbomb/station
@@ -472,7 +470,7 @@ var/global/bomb_set
 		inserters += ch
 
 /obj/machinery/nuclearbomb/station/attackby(obj/item/O, mob/user)
-	if(isWrench(O))
+	if(IS_WRENCH(O))
 		return
 
 /obj/machinery/nuclearbomb/station/Topic(href, href_list)

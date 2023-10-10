@@ -1,12 +1,11 @@
 /obj/item/cable_painter
 	name = "cable painter"
 	desc = "A device for repainting cables."
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "labeler0"
-	item_state = "flight"
+	icon = 'icons/obj/items/hand_labeler.dmi'
+	icon_state = ICON_STATE_WORLD
 	var/color_selection
-	var/list/modes
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/plastic
 
 /obj/item/cable_painter/Initialize()
 	. = ..()

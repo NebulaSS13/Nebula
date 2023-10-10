@@ -226,7 +226,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(!user_turf)
 		to_chat(user, "<span class='warning'>You cannot cast spells in null space!</span>")
 
-	if((spell_flags & Z2NOCAST) && (user_turf.z in global.using_map.admin_levels)) //Certain spells are not allowed on the centcomm zlevel
+	if((spell_flags & Z2NOCAST) && isAdminLevel(user_turf.z)) //Certain spells are not allowed on the centcomm zlevel
 		return 0
 
 	if(spell_flags & CONSTRUCT_CHECK)
@@ -251,7 +251,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 					to_chat(user, "<span class='warning'>You can't cast spells while incapacitated!</span>")
 					return 0
 
-			if(ishuman(user) && !(invocation_type in list(SpI_EMOTE, SpI_NONE)) && user.is_muzzled())
+			if(ishuman(user) && !(invocation_type in list(SpI_EMOTE, SpI_NONE)) && user.get_item_blocking_speech())
 				to_chat(user, "Mmmf mrrfff!")
 				return 0
 

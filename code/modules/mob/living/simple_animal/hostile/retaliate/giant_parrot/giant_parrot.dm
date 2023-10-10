@@ -49,26 +49,19 @@
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/AttackingTarget()
 	. = ..()
-	if(ishuman(.) && can_perform_ability(.))
+	if(ishuman(.) && can_act() && !is_on_special_ability_cooldown() && Adjacent(.))
 		var/mob/living/carbon/human/H = .
 		if(prob(70))
 			SET_STATUS_MAX(H, STAT_WEAK, rand(2,3))
-			cooldown_ability(ability_cooldown / 1.5)
+			set_special_ability_cooldown(ability_cooldown / 1.5)
 			visible_message(SPAN_MFAUNA("\The [src] flaps its wings mightily and bowls over \the [H] with a gust!"))
 
 		else if(H.get_equipped_item(slot_head_str))
 			var/obj/item/clothing/head/HAT = H.get_equipped_item(slot_head_str)
 			if(H.canUnEquip(HAT))
 				visible_message(SPAN_MFAUNA("\The [src] rips \the [H]'s [HAT] off!"))
-				cooldown_ability(ability_cooldown)
-				H.unEquip(HAT, get_turf(src))
-
-/mob/living/simple_animal/hostile/retaliate/parrot/space/can_perform_ability(mob/living/carbon/human/H)
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!Adjacent(H))
-		return FALSE
+				set_special_ability_cooldown(ability_cooldown)
+				H.try_unequip(HAT, get_turf(src))
 
 //subtypes
 /mob/living/simple_animal/hostile/retaliate/parrot/space/lesser

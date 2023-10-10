@@ -17,4 +17,4 @@
 /mob/living/add_to_dead_mob_list()
 	. = ..()
 	if(.)
-		events_repository.raise_event(/decl/observ/death, src)
+		RAISE_EVENT(/decl/observ/death, src)

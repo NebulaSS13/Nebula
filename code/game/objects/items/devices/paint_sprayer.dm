@@ -7,7 +7,7 @@
 	icon = 'icons/obj/items/device/paint_sprayer.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A slender and none-too-sophisticated device capable of applying paint on floors, walls, exosuits and certain airlocks."
-
+	material = /decl/material/solid/metal/stainlesssteel
 	var/decal =        "Quarter-turf"
 	var/paint_dir =    "Precise"
 	var/paint_color = COLOR_GRAY15
@@ -78,9 +78,8 @@
 	var/random_preset = pick(preset_colors)
 	change_color(preset_colors[random_preset])
 
-
 /obj/item/paint_sprayer/on_update_icon()
-	cut_overlays()
+	. = ..()
 	add_overlay(overlay_image(icon, "[icon_state]_color", paint_color))
 	add_overlay(color_picker ? "[icon_state]_red" : "[icon_state]_blue")
 	if(ismob(loc))
@@ -359,14 +358,6 @@
 	. = ..(user)
 	to_chat(user, "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [paint_color] paint.")
 
-
-/obj/item/paint_sprayer/AltClick()
-	if (!isturf(loc))
-		choose_preset_color()
-	else
-		. = ..()
-
-
 /obj/item/paint_sprayer/CtrlClick()
 	if (!isturf(loc))
 		toggle_mode()
@@ -449,3 +440,16 @@
 #undef PAINT_REGION_PAINT
 #undef PAINT_REGION_STRIPE
 #undef PAINT_REGION_WINDOW
+
+/obj/item/paint_sprayer/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/paint_sprayer_colour)
+
+/decl/interaction_handler/paint_sprayer_colour
+	name = "Change Color Preset"
+	expected_target_type = /obj/item/paint_sprayer
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_INVENTORY
+
+/decl/interaction_handler/paint_sprayer_colour/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/paint_sprayer/sprayer = target
+	sprayer.choose_preset_color()

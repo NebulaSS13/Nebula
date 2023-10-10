@@ -6,6 +6,7 @@
 	pickup_sound = null
 	drop_sound =   null
 	equip_sound =  null
+	is_spawnable_type = FALSE
 
 	var/atom/movable/affecting             // Atom being targeted by this grab.
 	var/mob/assailant                      // Mob that instantiated this grab.
@@ -34,15 +35,16 @@
 	affecting = target
 	if(!istype(affecting))
 		return INITIALIZE_HINT_QDEL
-	target_zone = assailant.zone_sel?.selecting
+	target_zone = assailant.get_target_zone()
 
 	var/mob/living/affecting_mob = get_affecting_mob()
 	if(affecting_mob)
 		affecting_mob.UpdateLyingBuckledAndVerbStatus()
 		if(ishuman(affecting_mob))
 			var/mob/living/carbon/human/H = affecting_mob
-			if(H.w_uniform)
-				H.w_uniform.add_fingerprint(assailant)
+			var/obj/item/uniform = H.get_equipped_item(slot_w_uniform_str)
+			if(uniform)
+				uniform.add_fingerprint(assailant)
 
 	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
 	adjust_position()
@@ -70,7 +72,7 @@
 		else
 			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [G.self]!"))
 
-	if(affecting_mob && affecting_mob.a_intent != I_HELP)
+	if(affecting_mob && assailant?.a_intent == I_HURT)
 		upgrade(TRUE)
 
 /obj/item/grab/examine(mob/user)
@@ -139,7 +141,7 @@
 	This section is for newly defined useful procs.
 */
 
-/obj/item/grab/proc/on_target_change(obj/screen/zone_sel/zone, old_sel, new_sel)
+/obj/item/grab/proc/on_target_change(obj/screen/zone_selector/zone, old_sel, new_sel)
 	if(src != assailant.get_active_hand())
 		return // Note that because of this condition, there's no guarantee that target_zone = old_sel
 	if(target_zone == new_sel)
@@ -229,6 +231,7 @@
 		update_icon()
 
 /obj/item/grab/on_update_icon()
+	. = ..()
 	if(current_grab.icon)
 		icon = current_grab.icon
 	if(current_grab.icon_state)

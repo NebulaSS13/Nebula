@@ -1,25 +1,35 @@
 //Load a random map template from the list. Maploader handles it to avoid order of init madness
 /obj/abstract/landmark/map_load_mark
 	name = "map loader landmark"
-	var/list/templates	//list of template types to pick from
+	var/list/map_template_names	//list of template names to pick from
 
-/obj/abstract/landmark/map_load_mark/proc/get_template()
-	. = LAZYLEN(templates) && pick(templates)
-
-/obj/abstract/landmark/map_load_mark/proc/load_template()
-	var/template = get_template()
-	var/turf/spawn_loc = get_turf(src)
-	qdel(src)
-	if(ispath(template, /datum/map_template) && istype(spawn_loc))
-		var/datum/map_template/M = new template
-		M.load(spawn_loc, TRUE)
-
-INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark/non_template)
-/obj/abstract/landmark/map_load_mark/non_template
-	name = "compile-time map loader landmark"
-/obj/abstract/landmark/map_load_mark/non_template/Initialize()
+/obj/abstract/landmark/map_load_mark/Initialize(var/mapload)
 	. = ..()
-	LAZYADD(SSmapping.compile_time_map_markers, src)
+	if(!mapload)
+		return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/landmark/map_load_mark/LateInitialize()
+	load_subtemplate()
+
+/obj/abstract/landmark/map_load_mark/proc/get_subtemplate()
+	. = LAZYLEN(map_template_names) && pick(map_template_names)
+
+/obj/abstract/landmark/map_load_mark/proc/load_subtemplate()
+	// Commenting this out temporarily as DMMS breaks when asychronously
+	// loading overlapping map templates. TODO: more robust queuing behavior
+	//set waitfor = FALSE
+
+	var/datum/map_template/template = get_subtemplate()
+	var/turf/spawn_loc = get_turf(src)
+
+	if(!QDELETED(src))
+		qdel(src)
+
+	if(istype(spawn_loc))
+		if(istext(template))
+			template = SSmapping.get_template(template)
+		if(istype(template))
+			template.load(spawn_loc, TRUE)
 
 //Throw things in the area around randomly
 /obj/abstract/landmark/carnage_mark
@@ -47,16 +57,21 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark/non_template)
 /obj/abstract/landmark/clear
 	name = "clear turf"
 	icon_state = "clear"
-	delete_me = TRUE
+	//Don't set deleteme to true, since we work inside lateinitialize
 
 /obj/abstract/landmark/clear/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/abstract/landmark/clear/LateInitialize()
+	. = ..()
 	var/turf/simulated/wall/simulated_wall = get_turf(src)
 	if(istype(simulated_wall))
 		simulated_wall.dismantle_wall(TRUE, TRUE, TRUE)
 	else if(istype(simulated_wall, /turf/exterior/wall))
 		var/turf/exterior/wall/exterior_wall = simulated_wall
 		exterior_wall.dismantle_wall(TRUE)
-	. = ..()
+	qdel(src)
 
 //Applies fire act to the turf
 /obj/abstract/landmark/scorcher
@@ -96,3 +111,79 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark/non_template)
 	if(shuttle_datum)
 		events_repository.unregister(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/delete_everything)
 	. = ..()
+
+// Has a percent chance on spawn to set the specified variable on the specified type to the specified value.
+
+/obj/abstract/landmark/variable_setter
+	is_spawnable_type = FALSE
+	var/type_to_find
+	var/variable_to_set
+	var/value_to_set
+	var/probability = 100
+
+/obj/abstract/landmark/variable_setter/Initialize()
+	. = ..()
+	if(!prob(probability))
+		return // Do nothing.
+	for(var/atom/candidate_atom in get_turf(src))
+		if(!istype(candidate_atom, type_to_find))
+			continue
+		if(try_set_variable(candidate_atom))
+			break
+	return INITIALIZE_HINT_QDEL
+
+/obj/abstract/landmark/variable_setter/proc/try_set_variable(atom/atom_to_modify)
+	// We don't have that variable! Give our own runtime to be more informative than the default one.
+	if(!(variable_to_set in atom_to_modify.vars))
+		CRASH("Unable to find variable [variable_to_set] to modify on type [atom_to_modify.type].")
+	// Already modified, if we're stacked we shouldn't modify the same one twice.
+	if(atom_to_modify.vars[variable_to_set] == value_to_set)
+		return FALSE
+	atom_to_modify.vars[variable_to_set] = value_to_set
+	return TRUE
+
+/obj/abstract/landmark/variable_setter/closet_opener
+	type_to_find = /obj/structure/closet
+	variable_to_set = "opened"
+	value_to_set = TRUE
+
+// Has a percent chance on spawn to call the specified proc on the specified type with the specified arguments.
+/obj/abstract/landmark/proc_caller
+	is_spawnable_type = FALSE
+	var/type_to_find
+	var/proc_to_call
+	var/arguments_to_pass
+	var/probability = 100
+
+/obj/abstract/landmark/proc_caller/Initialize()
+	. = ..()
+	if(!prob(probability))
+		return // Do nothing.
+	// we don't use locate in case try_call_proc returns false on our first attempt
+	for(var/atom/candidate_atom in get_turf(src))
+		if(!istype(candidate_atom, type_to_find))
+			continue
+		if(try_call_proc(candidate_atom))
+			break
+	return INITIALIZE_HINT_QDEL
+
+/obj/abstract/landmark/proc_caller/proc/try_call_proc(atom/atom_to_modify)
+	// We don't have that proc! Give our own runtime to be more informative than the default one.
+	if(!hascall(atom_to_modify, proc_to_call))
+		CRASH("Unable to find proc [proc_to_call] to call on type [atom_to_modify.type].")
+	if(length(arguments_to_pass))
+		call(atom_to_modify, proc_to_call)(arglist(arguments_to_pass))
+	else
+		call(atom_to_modify, proc_to_call)()
+	return TRUE
+
+/obj/abstract/landmark/proc_caller/floor_burner
+	type_to_find = /turf/simulated/floor
+	proc_to_call = /turf/simulated/floor/proc/burn_tile
+	arguments_to_pass = null
+
+/// Used to tell pipe leak unit tests that a leak is intentional. Placed over the pipe that leaks, not the tile missing a pipe.
+/obj/abstract/landmark/allowed_leak
+#ifndef UNIT_TEST
+	delete_me = TRUE
+#endif

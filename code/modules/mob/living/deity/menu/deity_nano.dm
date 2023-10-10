@@ -1,5 +1,4 @@
 /mob/living/deity
-	var/menu_category
 	var/list/nano_data = list()
 	var/datum/phenomena/selected
 

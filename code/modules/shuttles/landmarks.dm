@@ -41,7 +41,7 @@ var/global/list/shuttle_landmarks = list()
 		var/turf/T = get_turf(src)
 		if(T)
 			base_turf = T.type
-	else
+	else if(ispath(base_area) || !base_area)
 		base_area = locate(base_area || world.area)
 
 	SetName(name + " ([x],[y])")
@@ -55,7 +55,7 @@ var/global/list/shuttle_landmarks = list()
 	if(!istype(docking_controller))
 		log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 
-	var/obj/effect/overmap/visitable/location = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/location = global.overmap_sectors[num2text(z)]
 	if(location && location.docking_codes)
 		docking_controller.docking_codes = location.docking_codes
 
@@ -66,9 +66,9 @@ var/global/list/shuttle_landmarks = list()
 		ADJUST_TAG_VAR(docking_controller, map_hash)
 
 /obj/effect/shuttle_landmark/forceMove()
-	var/obj/effect/overmap/visitable/map_origin = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/map_origin = global.overmap_sectors[num2text(z)]
 	. = ..()
-	var/obj/effect/overmap/visitable/map_destination = global.overmap_sectors["[z]"]
+	var/obj/effect/overmap/visitable/map_destination = global.overmap_sectors[num2text(z)]
 	if(map_origin != map_destination)
 		if(map_origin)
 			map_origin.remove_landmark(src, shuttle_restricted)
@@ -86,7 +86,7 @@ var/global/list/shuttle_landmarks = list()
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
 		if(check_collision(base_area, list_values(translation)))
 			return FALSE
-	var/conn = GetConnectedZlevels(z)
+	var/conn = SSmapping.get_connected_levels(z)
 	for(var/w in (z - shuttle.multiz) to z)
 		if(!(w in conn))
 			return FALSE
@@ -127,14 +127,17 @@ var/global/list/shuttle_landmarks = list()
 
 /obj/effect/shuttle_landmark/automatic/sector_set(var/obj/effect/overmap/visitable/O)
 	..()
-	SetName("[O.name] - [initial(name)] ([x],[y])")
+	SetName("[initial(name)] ([x],[y])")
 
 //Subtype that calls explosion on init to clear space for shuttles
 /obj/effect/shuttle_landmark/automatic/clearing
+	name = "clearing"
 	var/radius = 10
 
-/obj/effect/shuttle_landmark/automatic/clearing/Initialize()
+/obj/effect/shuttle_landmark/automatic/clearing/Initialize(var/ml, var/supplied_radius)
 	..()
+	if(!isnull(supplied_radius))
+		radius = supplied_radius
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()
@@ -173,6 +176,7 @@ var/global/list/shuttle_landmarks = list()
 	icon = 'icons/obj/items/device/long_range_flare.dmi'
 	icon_state = "bluflare"
 	light_color = "#3728ff"
+	material = /decl/material/solid/plastic
 	var/active
 
 /obj/item/spaceflare/attack_self(var/mob/user)
@@ -185,7 +189,7 @@ var/global/list/shuttle_landmarks = list()
 		return
 	var/turf/T = get_turf(src)
 	var/mob/M = loc
-	if(istype(M) && !M.unEquip(src, T))
+	if(istype(M) && !M.try_unequip(src, T))
 		return
 
 	active = 1
@@ -197,6 +201,7 @@ var/global/list/shuttle_landmarks = list()
 	update_icon()
 
 /obj/item/spaceflare/on_update_icon()
+	. = ..()
 	if(active)
 		icon_state = "bluflare_on"
 		set_light(6, 2, "#85d1ff")

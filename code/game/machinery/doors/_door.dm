@@ -26,7 +26,6 @@
 	var/glass = 0
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
-	var/air_properties_vary_with_direction = 0
 	var/maxhealth = 300
 	var/health
 	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
@@ -47,9 +46,6 @@
 
 	//Used for intercepting clicks on our turf. Set 0 to disable click interception
 	var/turf_hand_priority = 3
-
-	// turf animation
-	var/atom/movable/overlay/c_animation = null
 
 	atmos_canpass = CANPASS_PROC
 
@@ -277,24 +273,24 @@
 
 		return TRUE
 
-	if(repairing && isWelder(I))
+	if(repairing && IS_WELDER(I))
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return TRUE
 
 		var/obj/item/weldingtool/welder = I
-		if(welder.remove_fuel(0,user))
+		if(welder.weld(0,user))
 			to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
+				health = clamp(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
 				qdel(repairing)
 				repairing = null
 		return TRUE
 
-	if(repairing && isCrowbar(I))
+	if(repairing && IS_CROWBAR(I))
 		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.dropInto(user.loc)
@@ -329,19 +325,35 @@
 	return FALSE
 
 /obj/machinery/door/take_damage(var/damage, damtype=BRUTE)
-	var/initialhealth = src.health
-	src.health = max(0, src.health - damage)
-	if(src.health <= 0 && initialhealth > 0)
+	if(!health)
+		..(damage, damtype)
+		update_icon()
+		return
+
+	var/component_damage = get_damage_leakthrough(damage, BRUTE)
+	damage -= component_damage
+
+	//Part of damage is soaked by our own health
+	var/initialhealth = health
+	health = max(0, health - damage)
+	if(health <= 0 && initialhealth > 0)
 		visible_message(SPAN_WARNING("\The [src] breaks down!"))
-		src.set_broken(TRUE)
-	else if(src.health < src.maxhealth / 4 && initialhealth >= src.maxhealth / 4)
+		set_broken(TRUE)
+	else if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
 		visible_message(SPAN_WARNING("\The [src] looks like it's about to break!"))
-	else if(src.health < src.maxhealth / 2 && initialhealth >= src.maxhealth / 2)
+	else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
 		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
-	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
+	else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
 		visible_message(SPAN_WARNING("\The [src] shows signs of damage!"))
-	..(max(0, damage - initialhealth), damtype)
+
+	..(component_damage, damtype)
 	update_icon()
+
+//How much damage should be passed to components inside even when door health is non zero
+/obj/machinery/door/proc/get_damage_leakthrough(var/damage, damtype=BRUTE)
+	if(health > 0.75 * maxhealth && damage < 10)
+		return 0
+	. = round((1 - health/maxhealth) * damage)
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()

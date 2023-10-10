@@ -11,3 +11,5 @@
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	material = /decl/material/solid/leather/synth
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY)

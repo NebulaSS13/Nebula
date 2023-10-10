@@ -87,7 +87,7 @@
 
 // Handles all necessary power checks: Area power, inteliCard and Malf AI APU power and manual override.
 /mob/living/silicon/ai/proc/has_power(var/respect_override = 1)
-	if(psupply && psupply.powered())
+	if(psupply && !(psupply.stat & NOPOWER))
 		return 1
 	if(istype(src.loc,/obj/item))
 		return 1

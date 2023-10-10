@@ -26,6 +26,22 @@
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
 
+	// Check for the presence (or lack of) vital organs like the brain.
+	// Set a timer after this point, since we want a little bit of
+	// wiggle room before the body dies for good (brain transplants).
+	if(stat != DEAD)
+		if(species.check_vital_organ_missing(src))
+			SET_STATUS_MAX(src, STAT_PARA, 5)
+			if(vital_organ_missing_time)
+				if(world.time >= vital_organ_missing_time)
+					death()
+			else
+				vital_organ_missing_time = world.time + species.vital_organ_failure_death_delay
+		else
+			vital_organ_missing_time = null
+
+
+
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/I in internal_organs)
 		I.Process()
@@ -153,13 +169,15 @@
 		SET_STATUS_MAX(src, STAT_WEAK, 3) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-		var/holding = inv_slot?.holding
+	for(var/hand_slot in get_held_item_slots())
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		if(!inv_slot?.requires_organ_tag)
+			continue
+		var/holding = inv_slot?.get_equipped_item()
 		if(holding)
-			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
-			if((!E || !E.is_usable() || E.is_parent_dislocated()) && unEquip(holding))
-				grasp_damage_disarm(inv_slot)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.requires_organ_tag)
+			if((!E || !E.is_usable() || E.is_parent_dislocated()) && try_unequip(holding))
+				grasp_damage_disarm(E)
 
 /mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
 
@@ -183,9 +201,9 @@
 
 	var/list/drop_held_item_slots
 	if(istype(affected))
-		for(var/bp in (list(affected.organ_tag) | affected.children))
-			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, bp)
-			if(inv_slot?.holding)
+		for(var/grasp_tag in (list(affected.organ_tag) | affected.children))
+			var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(grasp_tag)
+			if(inv_slot?.get_equipped_item())
 				LAZYDISTINCTADD(drop_held_item_slots, inv_slot)
 	else if(istype(affected, /datum/inventory_slot))
 		drop_held_item_slots = list(affected)
@@ -194,7 +212,7 @@
 		return
 
 	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
-		if(!unEquip(inv_slot.holding))
+		if(!try_unequip(inv_slot.get_equipped_item()))
 			continue
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, inv_slot.slot_id)
 		if(!E)
@@ -291,7 +309,7 @@
 
 /mob/living/carbon/human/on_lost_organ(var/obj/item/organ/O)
 	if(!(. = ..()))
-		return 
+		return
 	//Move some blood over to the organ
 	if(!BP_IS_PROSTHETIC(O) && O.species && O.reagents?.total_volume < 5)
 		vessel.trans_to(O, 5 - O.reagents.total_volume, 1, 1)

@@ -9,7 +9,7 @@
 	read_access = list(access_atmospherics)
 	requires_network = 1
 	network_destination = "atmospheric control system"
-	requires_network_feature = NETWORK_SYSTEMCONTROL
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	category = PROG_ENG
 	size = 17
@@ -51,10 +51,10 @@
 			filter_strings[weakref(usr)] = string
 		alarm_data_cache -= weakref(usr)
 		return TOPIC_REFRESH
-	
+
 	if(href_list["refresh"])
 		alarm_data_cache -= weakref(usr)
-		return TOPIC_REFRESH		
+		return TOPIC_REFRESH
 
 /datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
@@ -71,7 +71,7 @@
 		var/list/alarmsDanger = list()
 
 		for(var/obj/machinery/alarm/alarm in monitored_alarms)
-			if (!Z || !AreConnectedZLevels(Z, alarm.z))
+			if (!Z || !SSmapping.are_connected_levels(Z, alarm.z))
 				continue
 			var/alarm_name = sanitize(alarm.name)
 			alarm_name = replacetext(alarm_name, " Air Alarm", "") // shorten titles
@@ -92,7 +92,7 @@
 		alarms_data["alarmsAlert"] =  sortTim(alarmsAlert,  /proc/cmp_list_name_key_asc)
 		alarms_data["alarmsDanger"] = sortTim(alarmsDanger, /proc/cmp_list_name_key_asc)
 		alarm_data_cache[weakref(user)] = alarms_data
-	
+
 	data += alarms_data
 	data["filter"] = filter || "---"
 

@@ -68,8 +68,7 @@
 	var/mob/living/carbon/human/H = loc
 	if(!istype(H))
 		return 0
-
-	return (H.back == src) || (H.s_store == src)
+	return H.get_equipped_item(slot_back_str) == src || H.get_equipped_item(slot_s_store_str) == src
 
 /obj/item/suit_cooling_unit/proc/turn_on()
 	if(!cell)
@@ -110,7 +109,7 @@
 	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
 
 /obj/item/suit_cooling_unit/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(cover_open)
 			cover_open = 0
 			to_chat(user, "You screw the panel into place.")
@@ -125,7 +124,7 @@
 			if(cell)
 				to_chat(user, "There is a [cell] already installed here.")
 			else
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				cell = W
 				to_chat(user, "You insert the [cell].")
@@ -135,7 +134,7 @@
 	return ..()
 
 /obj/item/suit_cooling_unit/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(cover_open)
 		add_overlay("[icon_state]-open")
 		if(cell)

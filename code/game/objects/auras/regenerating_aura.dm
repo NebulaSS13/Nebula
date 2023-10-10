@@ -16,7 +16,7 @@
 	var/regen_message = "<span class='warning'>Your body throbs as you feel your ORGAN regenerate.</span>"
 	var/grow_chance = 0
 	var/grow_threshold = 0
-	var/ignore_tag//organ tag to ignore
+	var/ignore_tag = BP_BRAIN //organ tag to ignore
 	var/last_nutrition_warning = 0
 	var/innate_heal = TRUE // Whether the aura is on, basically.
 
@@ -59,7 +59,7 @@
 
 		var/list/organs = H.get_internal_organs()
 		for(var/obj/item/organ/internal/regen_organ in shuffle(organs.Copy()))
-			if(BP_IS_PROSTHETIC(regen_organ) || regen_organ.organ_tag == BP_BRAIN)
+			if(BP_IS_PROSTHETIC(regen_organ) || regen_organ.organ_tag == ignore_tag)
 				continue
 			if(istype(regen_organ))
 				if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
@@ -74,7 +74,7 @@
 	if(prob(grow_chance))
 		for(var/limb_type in H.species.has_limbs)
 			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, limb_type)
-			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
+			if(E && E.organ_tag != BP_HEAD && !E.is_vital_to_owner() && !E.is_usable())	//Skips heads and vital bits...
 				if (H.nutrition > grow_threshold)
 					H.remove_organ(E) 		//...because no one wants their head to explode to make way for a new one.
 					qdel(E)
@@ -86,6 +86,7 @@
 				var/limb_path = organ_data["path"]
 				var/obj/item/organ/external/O = new limb_path(H)
 				external_regeneration_effect(O,H)
+				H.adjust_nutrition(-external_nutrition_mult)
 				organ_data["descriptor"] = O.name
 				H.update_body()
 				return

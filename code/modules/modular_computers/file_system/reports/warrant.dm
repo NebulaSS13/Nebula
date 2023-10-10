@@ -1,6 +1,9 @@
 /datum/computer_file/report/warrant
 	title = "Warrant"
 	form_name = "W-104"
+	
+	write_access = list(list(access_security), list(access_bridge))
+	read_access = list(list(access_security), list(access_bridge))
 	var/archived = FALSE
 
 /datum/computer_file/report/warrant/New()

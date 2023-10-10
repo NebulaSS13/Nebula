@@ -53,7 +53,7 @@
 		update_icon()
 
 /obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
-	if(isWrench(W) && !panel_open)
+	if(IS_WRENCH(W) && !panel_open)
 		. = TRUE
 		if(get_cell())
 			to_chat(user, "<span class='warning'>Remove the cell first!</span>")

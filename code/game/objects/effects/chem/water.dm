@@ -54,7 +54,7 @@
 
 /obj/effect/effect/water/Bump(atom/A)
 	if(reagents)
-		reagents.touch(A)
+		A.fluid_act(reagents)
 	return ..()
 
 //Used by spraybottles.

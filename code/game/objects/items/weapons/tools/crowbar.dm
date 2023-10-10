@@ -12,7 +12,7 @@
 	material = /decl/material/solid/metal/steel
 	center_of_mass = @"{'x':16,'y':20}"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/bardrop1.ogg'
 	var/static/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
 	var/handle_color
@@ -35,13 +35,13 @@
 	. += "narrow"
 
 /obj/item/crowbar/on_update_icon()
-	..()
+	. = ..()
 	if(!shape_type)
 		shape_type = rand(1,shape_variations)
 	icon_state = "[get_world_inventory_state()][shape_type]"
 	if(!handle_color)
 		handle_color = pick(valid_colours)
-	overlays += mutable_appearance(icon, "[get_world_inventory_state()]_handle[shape_type]", handle_color)
+	add_overlay(mutable_appearance(icon, "[get_world_inventory_state()]_handle[shape_type]", handle_color))
 
 /obj/item/crowbar/afterattack(atom/target, mob/user)
 	. = ..()

@@ -9,7 +9,7 @@
 	climb_speed_mult = 0.25
 	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	material = DEFAULT_FURNITURE_MATERIAL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	maxhealth = 100
@@ -92,7 +92,7 @@
 	if(health <= 0)
 		visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
 		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-		material.place_shard(get_turf(usr))
+		material.place_shards(get_turf(usr))
 		qdel(src)
 
 /obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
@@ -227,7 +227,7 @@
 			return
 
 	// Dismantle
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(do_after(user, 20, src))
@@ -249,7 +249,7 @@
 			update_icon()
 			return
 	// Repair
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/F = W
 		if(F.isOn())
 			if(health >= maxhealth)
@@ -264,7 +264,7 @@
 			return
 
 	// Install
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!density)
 			to_chat(user, "<span class='notice'>You need to wrench \the [src] from back into place first.</span>")
 			return
@@ -276,7 +276,7 @@
 			update_icon()
 		return
 
-	if(W.force && (W.damtype == "fire" || W.damtype == "brute"))
+	if(W.force && (W.damtype == BURN || W.damtype == BRUTE))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
 		take_damage(W.force)

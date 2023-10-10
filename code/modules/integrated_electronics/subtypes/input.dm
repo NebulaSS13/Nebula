@@ -271,7 +271,7 @@
 		set_pin_data(IC_OUTPUT, 13, H.nutrilevel)
 		set_pin_data(IC_OUTPUT, 14, H.harvest)
 		set_pin_data(IC_OUTPUT, 15, H.dead)
-		set_pin_data(IC_OUTPUT, 16, H.health)
+		set_pin_data(IC_OUTPUT, 16, H.plant_health)
 	push_data()
 	activate_pin(2)
 
@@ -363,7 +363,7 @@
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/turfpoint
-	name = "Tile pointer"
+	name = "tile pointer"
 	desc = "This circuit will get a tile ref with the provided absolute coordinates."
 	extended_desc = "If the machine	cannot see the target, it will not be able to calculate the correct direction.\
 	This circuit only works while inside an assembly."
@@ -380,8 +380,8 @@
 		activate_pin(3)
 		return
 	var/turf/T = get_turf(assembly)
-	var/target_x = Clamp(get_pin_data(IC_INPUT, 1), 0, world.maxx)
-	var/target_y = Clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
+	var/target_x = clamp(get_pin_data(IC_INPUT, 1), 0, world.maxx)
+	var/target_y = clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
 	var/turf/A = locate(target_x, target_y, T.z)
 	set_pin_data(IC_OUTPUT, 1, null)
 	if(!A || !(A in view(T)))
@@ -523,7 +523,7 @@
 	var/rad = get_pin_data(IC_INPUT, 2)
 
 	if(isnum(rad))
-		rad = Clamp(rad, 0, 8)
+		rad = clamp(rad, 0, 8)
 		radius = rad
 
 /obj/item/integrated_circuit/input/advanced_locator_list/do_work()
@@ -585,7 +585,7 @@
 /obj/item/integrated_circuit/input/advanced_locator/on_data_written()
 	var/rad = get_pin_data(IC_INPUT, 2)
 	if(isnum(rad))
-		rad = Clamp(rad, 0, 8)
+		rad = clamp(rad, 0, 8)
 		radius = rad
 
 /obj/item/integrated_circuit/input/advanced_locator/do_work()
@@ -652,7 +652,6 @@
 
 /obj/item/integrated_circuit/input/signaler/Destroy()
 	radio_controller.remove_object(src,frequency)
-	QDEL_NULL(radio_connection)
 	frequency = 0
 	return ..()
 
@@ -687,7 +686,6 @@
 
 /obj/item/integrated_circuit/input/signaler/proc/create_signal()
 	var/datum/signal/signal = new()
-	signal.transmission_method = 1
 	signal.source = src
 	if(isnum(code))
 		signal.encryption = code
@@ -735,7 +733,6 @@
 
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
 	var/datum/signal/signal = new()
-	signal.transmission_method = 1
 	signal.data["tag"] = code
 	signal.data["command"] = command
 	signal.encryption = 0
@@ -757,6 +754,9 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
 
+/obj/item/integrated_circuit/input/teleporter_locator/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/integrated_circuit/input/teleporter_locator/get_topic_data(mob/user)
 	var/datum/integrated_io/O = outputs[1]
 	var/obj/machinery/computer/teleporter/current_console = O.data_as_type(/obj/machinery/computer/teleporter)
@@ -766,7 +766,7 @@
 	. += "Please select a teleporter to lock in on:"
 	for(var/obj/machinery/teleport/hub/R in SSmachines.machinery)
 		var/obj/machinery/computer/teleporter/com = R.com
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable() && ARE_Z_CONNECTED(get_z(src), get_z(com)))
+		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable() && LEVELS_ARE_Z_CONNECTED(get_z(src), get_z(com)))
 			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
 	.["None (Dangerous)"] = "tport=random"
 
@@ -837,7 +837,7 @@
 	var/translated = TRUE
 	if(M && text)
 		if(speaking && !speaking.machine_understands)
-			text = speaking.scramble(text)
+			text = speaking.scramble(M, text)
 			translated = FALSE
 		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
 		set_pin_data(IC_OUTPUT, 2, text)
@@ -924,7 +924,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/pu = get_pin_data(IC_INPUT, 1)
-	if(pu && !user.unEquip(A,get_turf(src)))
+	if(pu && !user.try_unequip(A,get_turf(src)))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()

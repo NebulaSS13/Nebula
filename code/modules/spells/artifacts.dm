@@ -11,6 +11,7 @@
 	damtype = BURN
 	force = 10
 	hitsound = 'sound/magic/forcewall.ogg'
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/scrying/attack_self(mob/user)
 	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)

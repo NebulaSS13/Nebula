@@ -147,9 +147,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
-/obj/machinery/power/tracker{
-	id = "ZHSolarsWest"
-	},
+/obj/machinery/power/tracker,
 /turf/simulated/floor/reinforced,
 /area/space)
 "aC" = (
@@ -367,9 +365,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
-/obj/machinery/power/tracker{
-	id = "ZHSolarsEast"
-	},
+/obj/machinery/power/tracker,
 /turf/simulated/floor/reinforced,
 /area/space)
 "aU" = (
@@ -1112,10 +1108,12 @@
 /obj/machinery/atmospherics/omni/filter{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dr" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "ds" = (
@@ -1181,10 +1179,12 @@
 /area/lar_maria/atmos)
 "dD" = (
 /obj/machinery/atmospherics/binary/oxyregenerator,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dF" = (
@@ -1235,7 +1235,7 @@
 /area/lar_maria/library)
 "dM" = (
 /obj/structure/table,
-/obj/machinery/photocopier/faxmachine,
+/obj/machinery/faxmachine,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm{
 	dir = 8;
@@ -1494,7 +1494,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eE" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eF" = (
@@ -3080,7 +3080,7 @@
 /turf/simulated/open,
 /area/lar_maria/solar_control)
 "nb" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -3094,6 +3094,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
+"ok" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/plating,
+/area/lar_maria/atmos)
 "pb" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
@@ -3156,7 +3163,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/machinery/alarm{
@@ -3170,7 +3177,7 @@
 	dir = 4;
 	pixel_x = 11
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = 30
 	},
 /obj/random/trash,
@@ -3182,17 +3189,36 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
+"Ag" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/plating,
+/area/lar_maria/atmos)
 "DG" = (
 /obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
+"FZ" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/plating,
+/area/lar_maria/atmos)
+"YS" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 10
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/plating,
+/area/lar_maria/atmos)
 
 (1,1,1) = {"
 aa
@@ -22474,7 +22500,7 @@ pb
 ci
 cA
 cR
-cR
+ok
 dB
 tb
 bx
@@ -22675,7 +22701,7 @@ bx
 bM
 ci
 cn
-cl
+YS
 dn
 dB
 bM
@@ -22878,7 +22904,7 @@ bN
 ci
 cn
 cn
-cR
+ok
 dC
 dO
 bx
@@ -23484,7 +23510,7 @@ bQ
 ck
 bQ
 cU
-cU
+Ag
 bQ
 dR
 bG
@@ -24089,7 +24115,7 @@ bx
 qb
 cl
 cB
-cB
+FZ
 dp
 dF
 ub

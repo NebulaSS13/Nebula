@@ -15,6 +15,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	connect_types = CONNECT_TYPE_REGULAR | CONNECT_TYPE_FUEL
 
 	var/max_temperature = T20C + 680
 	var/internal_volume = 600	//L
@@ -98,7 +99,7 @@
 		else
 			set_temperature = max(set_temperature + amount, 0)
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
-		var/new_setting = between(0, text2num(href_list["setPower"]), 100)
+		var/new_setting = clamp(0, text2num(href_list["setPower"]), 100)
 		set_power_level(new_setting)
 
 	add_fingerprint(usr)
@@ -106,8 +107,8 @@
 //upgrading parts
 /obj/machinery/atmospherics/unary/heater/RefreshParts()
 	..()
-	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 1, 20)
-	var/bin_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	var/cap_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 1, 20)
+	var/bin_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
 
 	max_power_rating = initial(max_power_rating) * cap_rating / 2
 	max_temperature = max(initial(max_temperature) - T20C, 0) * ((bin_rating * 4 + cap_rating) / 5) + T20C

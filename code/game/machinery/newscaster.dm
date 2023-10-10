@@ -150,12 +150,14 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	var/datum/feed_channel/viewing_channel = null
 	light_range = 0
 	anchored = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_WINDOW_LAYER
 
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 	frame_type = /obj/item/frame/stock_offset/newscaster
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 
 /obj/machinery/newscaster/Initialize()
 	. = ..()
@@ -743,6 +745,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	w_class = ITEM_SIZE_SMALL	//Let's make it fit in trashbags!
 	attack_verb = list("bapped","thwapped","smacked")
 	force = 0
+	material = /decl/material/solid/cardboard //#TODO: replace with paper material
 
 	var/screen = 0
 	var/pages = 0
@@ -867,21 +870,26 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 
 
 /obj/item/newspaper/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/pen))
+	if(IS_PEN(W))
 		if(src.scribble_page == src.curr_page)
-			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")
+			to_chat(user, SPAN_WARNING("There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?"))
+			return TRUE
 		else
-			var/s = sanitize(input(user, "Write something", "Newspaper", ""))
-			s = user.handle_writing_literacy(user, sanitize(s))
-			if (!s)
+			var/s = input(user, "Write something", "Newspaper") as null | message
+			if(!length(s))
 				return
-			if (!in_range(src, usr) && src.loc != usr)
+			if(!CanPhysicallyInteractWith(user, src))
+				to_chat(user, SPAN_WARNING("You must stay close to \the [src]!"))
 				return
-			src.scribble_page = src.curr_page
-			src.scribble = s
-			src.attack_self(user)
-		return
-
+			if(W.do_tool_interaction(TOOL_PEN, user, src, 0, fuel_expenditure = 1) && !QDELETED(src)) //Make it instant, since handle_writing_literacy does the waiting
+				s = sanitize(s)
+				s = user.handle_writing_literacy(user, s)
+				src.scribble_page = src.curr_page
+				src.scribble = s
+				src.attack_self(user)
+				return TRUE
+			return 
+	return ..()
 
 ////////////////////////////////////helper procs
 
@@ -910,14 +918,16 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 	src.paper_remaining--
 	return
 
+/obj/machinery/newscaster/proc/reset_alert()
+	alert = 0
+	update_icon()
+
 /obj/machinery/newscaster/proc/newsAlert(var/news_call)
 	if(news_call)
 		audible_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>")
 		src.alert = 1
 		src.update_icon()
-		spawn(300)
-			src.alert = 0
-			src.update_icon()
+		addtimer(CALLBACK(src, .proc/reset_alert), alert_delay, TIMER_UNIQUE | TIMER_OVERRIDE) //stay alert for the full time if we get a new one
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 75, 1)
 	else
 		audible_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"</span>")

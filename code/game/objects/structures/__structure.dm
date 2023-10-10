@@ -2,6 +2,7 @@
 	icon = 'icons/obj/structures/barricade.dmi'
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER
+	abstract_type = /obj/structure
 
 	var/last_damage_message
 	var/health = 0
@@ -37,25 +38,18 @@
 	if(!CanFluidPass())
 		fluid_update(TRUE)
 
-/obj/structure/proc/show_examined_damage(mob/user, var/perc)
+/obj/structure/get_examined_damage_string(health_ratio)
 	if(maxhealth == -1)
 		return
-	if(perc >= 1)
-		to_chat(user, SPAN_NOTICE("It looks fully intact."))
-	else if(perc > 0.75)
-		to_chat(user, SPAN_NOTICE("It has a few cracks."))
-	else if(perc > 0.5)
-		to_chat(user, SPAN_WARNING("It looks slightly damaged."))
-	else if(perc > 0.25)
-		to_chat(user, SPAN_WARNING("It looks moderately damaged."))
-	else
-		to_chat(user, SPAN_DANGER("It looks heavily damaged."))
+	. = ..()
 
-/obj/structure/examine(mob/user, var/distance)
+/obj/structure/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 3)
 
-		show_examined_damage(user, (health/maxhealth))
+		var/damage_desc = get_examined_damage_string(health / maxhealth)
+		if(length(damage_desc))
+			to_chat(user, damage_desc)
 
 		if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
 			if(anchored)
@@ -97,9 +91,6 @@
 	set waitfor = FALSE
 	return FALSE
 
-/obj/structure/proc/is_pressurized_fluid_source()
-	return FALSE
-
 /obj/structure/proc/take_damage(var/damage)
 	if(health == -1) // This object does not take damage.
 		return
@@ -112,8 +103,8 @@
 			damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
 
 	playsound(loc, hitsound, 75, 1)
-	health = Clamp(health - damage, 0, maxhealth)
-	
+	health = clamp(health - damage, 0, maxhealth)
+
 	show_damage_message(health/maxhealth)
 
 	if(health == 0)
@@ -133,8 +124,8 @@
 		last_damage_message = 0.75
 
 /obj/structure/physically_destroyed(var/skip_qdel)
-	. = ..(TRUE)
-	dismantle()
+	if(..(TRUE))
+		return dismantle()
 
 /obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
@@ -153,19 +144,21 @@
 			AM.reset_offsets()
 			AM.reset_plane_and_layer()
 
-/obj/structure/Crossed(O)
+/obj/structure/Crossed(atom/movable/AM)
 	. = ..()
-	if(ismob(O))
-		var/mob/M = O
-		M.reset_offsets()
-		M.reset_plane_and_layer()
+	if(!ismob(AM))
+		return
+	var/mob/M = AM
+	M.reset_offsets()
+	M.reset_plane_and_layer()
 
-/obj/structure/Uncrossed(O)
+/obj/structure/Uncrossed(atom/movable/AM)
 	. = ..()
-	if(ismob(O))
-		var/mob/M = O
-		M.reset_offsets()
-		M.reset_plane_and_layer()
+	if(!ismob(AM))
+		return
+	var/mob/M = AM
+	M.reset_offsets()
+	M.reset_plane_and_layer()
 
 /obj/structure/Move()
 	var/turf/T = get_turf(src)
@@ -175,7 +168,7 @@
 		if(T)
 			T.fluid_update()
 			for(var/atom/movable/AM in T)
-				AM.reset_offsets()	
+				AM.reset_offsets()
 				AM.reset_plane_and_layer()
 
 /obj/structure/grab_attack(var/obj/item/grab/G)
@@ -263,8 +256,8 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 	// Calculation to apply new pixelshift.
 	var/mouse_x = text2num(click_data["icon-x"])-1 // Ranging from 0 to 31
 	var/mouse_y = text2num(click_data["icon-y"])-1
-	var/cell_x = Clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
-	var/cell_y = Clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
+	var/cell_x = clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
+	var/cell_y = clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
 	var/list/center = cached_json_decode(W.center_of_mass)
 	W.pixel_x = (CELLSIZE * (cell_x + 0.5)) - center["x"]
 	W.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]

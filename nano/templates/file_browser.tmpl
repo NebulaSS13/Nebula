@@ -1,0 +1,75 @@
+{{if data.error}}
+	<h2>A disk error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Back to file select', null, { "BRS_back" : 1 })}}
+{{else}}
+	{{:helper.link('Back to program', 'arrowreturnthick-1-w', { "BRS_back" : 1 })}}
+	{{if data.current_disk}}
+		<h2>Available files ({{:data.current_disk}}):</h2>
+		<table>
+			<tr><th>File name
+			<th>File type
+			<th>File size (GQ)
+			<th>Operations
+			{{if data.saving_file}}
+				<th>{{:helper.link('+', 'folder-collapsed', { "BRS_create_dir" : 1})}}
+			{{/if}}
+			<th>{{:helper.link('', 'arrowthickstop-1-n', { "BRS_up_directory" : 1}, data.up_directory ? null : null)}}
+			{{for data.files}}
+				{{if value.dir}}
+					<tr><td>{{:helper.link(value.name, 'folder-collapsed', { "BRS_change_directory" : value.name})}}
+					<td>
+					<td>
+					{{if !data.saving_file}}
+						<td>{{:helper.link('SELECT', null, { "BRS_select_file" : value.name}, value.selectable ? null : 'disabled')}}
+					{{/if}}
+				{{else}}
+					<tr><td>{{:value.name}}
+					<td>.{{:value.type}}
+					<td>{{:value.size}}GQ
+					<td>{{:helper.link('SELECT', null, { "BRS_select_file" : value.name}, value.selectable ? null : 'disabled')}}
+				{{/if}}
+			{{/for}}
+		</table>
+		<hr>
+		{{if data.saving_file}}
+			<div class="itemContent">
+				<table>
+					<tr>
+						<td>Save file as:</td>
+						<td>{{:helper.link(data.curr_file_name + '.' + data.curr_file_type, null, { "BRS_rename_file" : 1}, null)}}</td>
+						<td>{{:helper.link('Save', 'disk', { "BRS_save_file" : 1}, null)}}</td>
+					</tr>
+				</table>
+			</div>
+		{{else}}
+			<div class="itemContent">
+				<table>
+					<tr>
+						<td>Selecting file:
+						<td>
+							{{if data.curr_file_name}}
+								{{:data.curr_file_name}}.{{:data.curr_file_type}}
+							{{else}}
+								No file selected!
+							{{/if}}
+						</td>
+						<td>{{:helper.link('Open', null, { "BRS_finalize_select" : 1}, data.curr_file_name ? null : 'disabled')}}</td>
+					</tr>
+				</table>
+			</div>
+		{{/if}}
+		<h3>Selectable file types are {{:data.filetypes}}.</h3>
+	{{else}}
+		<h2>Select a disk.</h2>
+		<table>
+		<tr><th>Disk
+		<th>Description
+		{{for data.avail_disks}}
+			<tr><td>{{:helper.link(value.name, null, { "BRS_select_disk" : value.name})}}
+			<td>{{:value.desc}}
+		{{/for}}
+		</table>
+	{{/if}}
+{{/if}}

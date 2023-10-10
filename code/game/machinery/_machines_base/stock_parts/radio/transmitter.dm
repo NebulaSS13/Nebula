@@ -4,6 +4,9 @@
 	icon_state = "transmitter"
 	var/range = 60  // Limits transmit range
 	var/latency = 2 // Delay between event and transmission; doesn't apply to transmit on tick
+	#ifdef UNIT_TEST
+	latency = 0 // this can slow down testing and cause random inconsistent failures
+	#endif
 	var/buffer
 
 /obj/item/stock_parts/radio/transmitter/proc/queue_transmit(list/data)
@@ -11,7 +14,10 @@
 		return
 	if(!buffer)
 		buffer = data
-		addtimer(CALLBACK(src, .proc/transmit), latency)
+		if(latency)
+			addtimer(CALLBACK(src, .proc/transmit), latency)
+		else
+			transmit()
 	else
 		buffer |= data
 
@@ -20,7 +26,6 @@
 		return
 	var/datum/signal/signal = new()
 	signal.source = src
-	signal.transmission_method = TRANSMISSION_RADIO
 	signal.encryption = encryption
 	signal.data = buffer
 	signal.data["tag"] = id_tag
@@ -108,12 +113,14 @@
 	queue_transmit(dat)
 
 /obj/item/stock_parts/radio/transmitter/basic/buildable
+	max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	name = "basic radio transmitter"
 	desc = "A stock radio transmitter machine component. Can transmit updates regularly or on change."
 	material = /decl/material/solid/metal/steel
 
 /obj/item/stock_parts/radio/transmitter/on_event/buildable
+	max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	name = "event radio transmitter"
 	desc = "A radio transmitter machine component which transmits when activated by an event."

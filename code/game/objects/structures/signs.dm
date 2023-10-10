@@ -1,497 +1,135 @@
+/////////////////////////////////////////////////////////////////////////////////
+// Sign Item
+/////////////////////////////////////////////////////////////////////////////////
+
+///Item form of the sign structure. Stores a sign structure type, and creates that structure upon install.
+/// Takes on the appearence and properties of whatever sign structure type it contains.
+/obj/item/sign
+	name     = "sign"
+	w_class  = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/plastic
+	///The type of the sign this item will turn into upon installation
+	var/sign_type
+
+/obj/item/sign/Initialize(ml, material_key)
+	. = ..()
+	if(ispath(sign_type))
+		set_sign(sign_type)
+	update_icon()
+
+/obj/item/sign/afterattack(turf/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(proximity_flag && isturf(target) && target.is_wall())
+		try_install(target, user)
+		return TRUE
+
+/obj/item/sign/attackby(obj/item/W, mob/user)
+	if(IS_SCREWDRIVER(W) && W.CanUseTopic(user, global.inventory_topic_state) && isturf(user.loc))
+		return try_install(W, user)
+	return ..()
+
+/obj/item/sign/on_update_icon()
+	. = ..()
+	//Make us look smaller than the actual sign icon
+	transform = transform.Scale(0.8, 0.8)
+
+///Set the sign this sign item will contain from an sign structure instance.
+/obj/item/sign/proc/set_sign(var/obj/structure/sign/S)
+	sign_type = ispath(S)? S : S.type
+	desc      = ispath(S)? initial(S.desc) : S.desc
+	icon      = ispath(S)? initial(S.icon) : S.icon
+	SetName(ispath(S)? initial(S.name) : S.name)
+	var/sign_mat = ispath(S)? initial(S.material) : S.material
+	if(sign_mat)
+		set_material(sign_mat)
+
+	//Make sure we have the same matter contents as the sign
+	matter = atom_info_repository.get_matter_for(sign_type)
+	matter = matter.Copy()
+
+	//Do this last, so icon update is last
+	set_icon_state(ispath(S)? initial(S.icon_state) : S.icon_state)
+	update_held_icon()
+
+///Actually creates and places the sign structure. Override to add to sign init.
+/obj/item/sign/proc/place_sign(var/turf/T, var/direction)
+	var/obj/structure/sign/S = new sign_type(T)
+	S.set_dir(direction)
+	copy_extension(src, S, /datum/extension/labels)
+	copy_extension(src, S, /datum/extension/forensic_evidence)
+	copy_extension(src, S, /datum/extension/scent)
+	transfer_fingerprints_to(S)
+	sign_type = null
+	return S
+
+///Attempts installing the sign and ask the user for direction and etc..
+/obj/item/sign/proc/try_install(var/turf/targeted_turf, var/mob/user)
+	var/facing      = get_cardinal_dir(user, targeted_turf) || user.dir
+	var/install_dir = global.reverse_dir[facing]
+	//If we used the screwdriver on the panel, it'll be in the active hand
+	var/obj/item/screwdriver/S = user.get_active_hand()
+	if(!istype(S))
+		//Otherwise it should be in one of the offhand slots
+		for(S in user.get_inactive_held_items())
+			if(istype(S))
+				break
+	if(!istype(S))
+		to_chat(user, SPAN_WARNING("You must hold a screwdriver in your other hand to install this!"))
+	else if(S.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 3 SECONDS, "fastening", "fastening"))
+		place_sign(get_turf(user), install_dir)
+		qdel(src)
+	return FALSE
+
+/////////////////////////////////////////////////////////////////////////////////
+// Sign Structure
+/////////////////////////////////////////////////////////////////////////////////
+
+///A wall mountable sign structure
 /obj/structure/sign
-	icon = 'icons/obj/decals.dmi'
-	anchored = TRUE
-	opacity = FALSE
-	density = FALSE
-	layer = ABOVE_WINDOW_LAYER
-	w_class = ITEM_SIZE_NORMAL
+	name               = "sign"
+	icon               = 'icons/obj/decals.dmi'
+	anchored           = TRUE
+	opacity            = FALSE
+	density            = FALSE
+	layer              = ABOVE_WINDOW_LAYER
+	w_class            = ITEM_SIZE_NORMAL
+	obj_flags          = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'WEST':{'x':32}, 'EAST':{'x':-32}}"
+	abstract_type      = /obj/structure/sign
+	parts_type         = /obj/item/sign
+	parts_amount       = 1
 
-/obj/structure/sign/explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		physically_destroyed()
+/obj/structure/sign/Initialize(ml, _mat, _reinf_mat)
+	. = ..()
+	update_description()
 
-/obj/structure/sign/attackby(obj/item/W, mob/user)	//deconstruction
-	if(isScrewdriver(W) && !istype(src, /obj/structure/sign/double))
-		if(!QDELETED(src) && do_after(user, 30, src))
-			to_chat(user, "You unfasten the sign with your [W].")
-			var/obj/item/sign/S = new(src.loc)
-			S.SetName(name)
-			S.desc = desc
-			S.icon_state = icon_state
-			S.sign_state = icon_state
-			qdel(src)
-		return
-	else ..()
+///Proc for signs that must initialize their names or description at runtime.
+/obj/structure/sign/proc/update_description()
+	return
+
+/obj/structure/sign/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
+	if(QDELETED(src))
+		return TRUE
+	if(screwdriver.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 3 SECONDS, "taking down", "taking down"))
+		dismantle()
+	return TRUE
 
 /obj/structure/sign/hide()
 	return //Signs should no longer hide in walls.
 
-/obj/item/sign
-	name = "sign"
-	desc = ""
-	icon = 'icons/obj/decals.dmi'
-	w_class = ITEM_SIZE_NORMAL		//big
-	var/sign_state = ""
-
-/obj/item/sign/attackby(obj/item/W, mob/user)	//construction
-	if(isScrewdriver(W) && isturf(user.loc))
-		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
-		if(direction == "Cancel")
-			return
-		if(!QDELETED(src) && do_after(user, 30, src))
-			var/obj/structure/sign/S = new(user.loc)
-			switch(direction)
-				if("North")
-					S.default_pixel_y = 32
-				if("East")
-					S.default_pixel_x = 32
-				if("South")
-					S.default_pixel_y = -32
-				if("West")
-					S.default_pixel_x = -32
-				else
-					return
-			S.reset_offsets(0)
-			S.SetName(name)
-			S.desc = desc
-			S.icon_state = sign_state
-			to_chat(user, "You fasten \the [S] with your [W].")
-			qdel(src)
-		return
-	else ..()
-
-/obj/structure/sign/double/map
-	name = "map"
-	desc = "A framed map."
-
-/obj/structure/sign/double/map/Initialize()
-	. = ..()
-	desc = "A framed map of the [station_name()]."
-
-/obj/structure/sign/double/map/left
-	icon_state = "map-left"
-
-/obj/structure/sign/double/map/right
-	icon_state = "map-right"
-
-/obj/structure/sign/monkey_painting
-	name = "\improper Mr. Deempisi portrait"
-	desc = "Under the painting a plaque reads: 'While the meat grinder may not have spared you, fear not. Not one part of you has gone to waste... You were delicious.'"
-	icon_state = "monkey_painting"
-
-/obj/structure/sign/warning
-	name = "\improper WARNING"
-	icon_state = "securearea"
-
-/obj/structure/sign/warning/detailed
-	icon_state = "securearea2"
-
-/obj/structure/sign/warning/Initialize()
-	. = ..()
-	desc = "A warning sign which reads '[sanitize(name)]'."
-
-/obj/structure/sign/warning/airlock
-	name = "\improper EXTERNAL AIRLOCK"
-	icon_state = "doors"
-
-/obj/structure/sign/warning/biohazard
-	name = "\improper BIOHAZARD"
-	icon_state = "bio"
-
-/obj/structure/sign/warning/bomb_range
-	name = "\improper BOMB RANGE"
-	icon_state = "blast"
-
-/obj/structure/sign/warning/caution
-	name = "\improper CAUTION"
-
-/obj/structure/sign/warning/compressed_gas
-	name = "\improper COMPRESSED GAS"
-	icon_state = "hikpa"
-
-/obj/structure/sign/warning/deathsposal
-	name = "\improper DISPOSAL LEADS TO SPACE"
-	icon_state = "deathsposal"
-
-/obj/structure/sign/warning/docking_area
-	name = "\improper KEEP CLEAR: DOCKING AREA"
-
-/obj/structure/sign/warning/engineering_access
-	name = "\improper ENGINEERING ACCESS"
-
-/obj/structure/sign/warning/fall
-	name = "\improper FALL HAZARD"
-	icon_state = "falling"
-
-/obj/structure/sign/warning/fire
-	name = "\improper DANGER: FIRE"
-	icon_state = "fire"
-
-/obj/structure/sign/warning/high_voltage
-	name = "\improper HIGH VOLTAGE"
-	icon_state = "shock"
-
-/obj/structure/sign/warning/hot_exhaust
-	name = "\improper HOT EXHAUST"
-	icon_state = "fire"
-
-/obj/structure/sign/warning/internals_required
-	name = "\improper INTERNALS REQUIRED"
-
-/obj/structure/sign/warning/lethal_turrets
-	name = "\improper LETHAL TURRETS"
-	icon_state = "turrets"
-
-/obj/structure/sign/warning/lethal_turrets/Initialize()
-	. = ..()
-	desc += " Enter at own risk!"
-
-/obj/structure/sign/warning/mail_delivery
-	name = "\improper MAIL DELIVERY"
-	icon_state = "mail"
-
-/obj/structure/sign/warning/moving_parts
-	name = "\improper MOVING PARTS"
-	icon_state = "movingparts"
-
-/obj/structure/sign/warning/nosmoking_1
-	name = "\improper NO SMOKING"
-	icon_state = "nosmoking"
-
-/obj/structure/sign/warning/nosmoking_2
-	name = "\improper NO SMOKING"
-	icon_state = "nosmoking2"
-
-/obj/structure/sign/warning/nosmoking_burned
-	name = "\improper NO SMOKING"
-	icon_state = "nosmoking2_b"
-
-/obj/structure/sign/warning/nosmoking_burned/Initialize()
-	. = ..()
-	desc += " It looks charred."
-
-/obj/structure/sign/warning/smoking
-	name = "\improper SMOKING"
-	icon_state = "smoking"
-
-/obj/structure/sign/warning/smoking/Initialize()
-	. = ..()
-	desc += " Hell yeah."
-
-/obj/structure/sign/warning/pods
-	name = "\improper ESCAPE PODS"
-	icon_state = "podsnorth"
-
-/obj/structure/sign/warning/pods/south
-	name = "\improper ESCAPE PODS"
-	icon_state = "podssouth"
-
-/obj/structure/sign/warning/pods/east
-	name = "\improper ESCAPE PODS"
-	icon_state = "podseast"
-
-/obj/structure/sign/warning/pods/west
-	name = "\improper ESCAPE PODS"
-	icon_state = "podswest"
-
-/obj/structure/sign/warning/radioactive
-	name = "\improper RADIOACTIVE AREA"
-	icon_state = "radiation"
-
-/obj/structure/sign/warning/secure_area
-	name = "\improper SECURE AREA"
-
-/obj/structure/sign/warning/secure_area/armory
-	name = "\improper ARMORY"
-	icon_state = "armory"
-
-/obj/structure/sign/warning/server_room
-	name = "\improper SERVER ROOM"
-	icon_state = "server"
-
-/obj/structure/sign/warning/siphon_valve
-	name = "\improper SIPHON VALVE"
-
-/obj/structure/sign/warning/vacuum
-	name = "\improper HARD VACUUM AHEAD"
-	icon_state = "space"
-
-/obj/structure/sign/warning/vent_port
-	name = "\improper EJECTION/VENTING PORT"
-
-/obj/structure/sign/redcross
-	name = "medbay"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon_state = "redcross"
-
-/obj/structure/sign/greencross
-	name = "medbay"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon_state = "greencross"
-
-/obj/structure/sign/bluecross_1
-	name = "infirmary"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon_state = "bluecross"
-
-/obj/structure/sign/bluecross_2
-	name = "infirmary"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon_state = "bluecross2"
-
-/obj/structure/sign/goldenplaque
-	name = "The Most Robust Men Award for Robustness"
-	desc = "To be Robust is not an action or a way of life, but a mental state. Only those with the force of Will strong enough to act during a crisis, saving friend from foe, are truly Robust. Stay Robust my friends."
-	icon_state = "goldenplaque"
-
-/obj/structure/sign/goldenplaque/security
-	name = "motivational plaque"
-	desc = "A plaque engraved with a generic motivational quote and picture. ' Greater love hath no man than this, that a man lay down his life for his friends. John 15:13 "
-
-/obj/structure/sign/goldenplaque/medical
-	name = "medical certificate"
-	desc = "A picture next to a long winded description of medical certifications and degrees."
-
-/obj/structure/sign/kiddieplaque
-	name = "\improper AI developers plaque"
-	desc = "An extremely long list of names and job titles and a picture of the design team responsible for building this AI Core."
-	icon_state = "kiddieplaque"
-
-/obj/structure/sign/atmosplaque
-	name = "\improper engineering memorial plaque"
-	desc = "This plaque memorializes those engineers and technicians who made the ultimate sacrifice to save their vessel and its crew."
-	icon_state = "atmosplaque"
-
-/obj/structure/sign/double/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
-	name = "The Maltese Falcon"
-	desc = "The Maltese Falcon, Space Bar and Grill."
-
-/obj/structure/sign/double/maltesefalcon/left
-	icon_state = "maltesefalcon-left"
-
-/obj/structure/sign/double/maltesefalcon/right
-	icon_state = "maltesefalcon-right"
-
-/obj/structure/sign/warning/science
-	name = "\improper SCIENCE!"
-	icon_state = "science"
-
-/obj/structure/sign/warning/science/anomalous_materials
-	name = "\improper ANOMALOUS MATERIALS"
-
-/obj/structure/sign/warning/science/mass_spectrometry
-	name = "\improper MASS SPECTROMETRY"
-
-/obj/structure/sign/science_1
-	name = "\improper RESEARCH WING"
-	desc = "A sign labelling the research wing."
-	icon_state = "science"
-
-/obj/structure/sign/science_2
-	name = "\improper RESEARCH"
-	desc = "A sign labelling an area where research is performed."
-	icon_state = "science2"
-
-/obj/structure/sign/xenobio_1
-	name = "\improper XENOBIOLOGY"
-	desc = "A sign labelling an area as a place where xenobiological entites are researched."
-	icon_state = "xenobio"
-
-/obj/structure/sign/xenobio_2
-	name = "\improper XENOBIOLOGY"
-	desc = "A sign labelling an area as a place where xenobiological entites are researched."
-	icon_state = "xenobio2"
-
-/obj/structure/sign/xenobio_3
-	name = "\improper XENOBIOLOGY"
-	desc = "A sign labelling an area as a place where xenobiological entites are researched."
-	icon_state = "xenobio3"
-
-/obj/structure/sign/xenobio_4
-	name = "\improper XENOBIOLOGY"
-	desc = "A sign labelling an area as a place where xenobiological entites are researched."
-	icon_state = "xenobio4"
-
-/obj/structure/sign/xenoarch
-	name = "\improper XENOARCHAEOLOGY"
-	desc = "A sign labelling an area as a place where xenoarchaeological finds are researched."
-	icon_state = "xenobio4"
-
-/obj/structure/sign/chemistry
-	name = "\improper CHEMISTRY"
-	desc = "A sign labelling an area containing chemical equipment."
-	icon_state = "chemistry"
-
-/obj/structure/sign/xenoflora
-	name = "\improper XENOFLORA"
-	desc = "A sign labelling an area as a place where xenobiological plants are researched."
-	icon_state = "hydro4"
-
-/obj/structure/sign/botany
-	name = "\improper BOTANY"
-	desc = "A warning sign which reads 'BOTANY!'."
-	icon_state = "hydro3"
-
-/obj/structure/sign/hydro
-	name = "\improper HYDROPONICS"
-	desc = "A sign labelling an area as a place where plants are grown."
-	icon_state = "hydro"
-
-/obj/structure/sign/hydrostorage
-	name = "\improper HYDROPONICS STORAGE"
-	desc = "A sign labelling an area as a place where plant growing supplies are kept."
-	icon_state = "hydro3"
-
-/obj/structure/sign/directions
-	name = "direction sign"
-	desc = "A direction sign, claiming to know the way."
-	icon_state = "direction"
-
-/obj/structure/sign/directions/Initialize()
-	. = ..()
-	desc = "A direction sign, pointing out which way \the [src] is."
-
-/obj/structure/sign/directions/science
-	name = "\improper Research Division"
-	icon_state = "direction_sci"
-
-/obj/structure/sign/directions/engineering
-	name = "\improper Engineering Bay"
-	icon_state = "direction_eng"
-
-/obj/structure/sign/directions/security
-	name = "\improper Security Wing"
-	icon_state = "direction_sec"
-
-/obj/structure/sign/directions/medical
-	name = "\improper Medical Bay"
-	icon_state = "direction_med"
-
-/obj/structure/sign/directions/evac
-	name = "\improper Evacuation Wing"
-	icon_state = "direction_evac"
-
-/obj/structure/sign/directions/bridge
-	name = "\improper Bridge"
-	icon_state = "direction_bridge"
-
-/obj/structure/sign/directions/supply
-	name = "\improper Supply Office"
-	icon_state = "direction_supply"
-
-/obj/structure/sign/directions/infirmary
-	name = "\improper Infirmary"
-	icon_state = "direction_infirm"
-
-/obj/structure/sign/directions/examroom
-	name = "\improper Exam Room"
-	icon_state = "examroom"
-
-/obj/structure/sign/deck/bridge
-	name = "\improper Bridge Deck"
-	icon_state = "deck-b"
-
-/obj/structure/sign/deck/first
-	name = "\improper First Deck"
-	icon_state = "deck-1"
-
-/obj/structure/sign/deck/second
-	name = "\improper Second Deck"
-	icon_state = "deck-2"
-
-/obj/structure/sign/deck/third
-	name = "\improper Third Deck"
-	icon_state = "deck-3"
-
-/obj/structure/sign/deck/fourth
-	name = "\improper Fourth Deck"
-	icon_state = "deck-4"
-
-/obj/structure/sign/deck/fifth
-	name = "\improper Fifth Deck"
-	icon_state = "deck-5"
-
-/obj/item/sign/medipolma
-	name = "medical diploma"
-	desc = "A fancy print laminated paper that certifies that its bearer is indeed a Doctor of Medicine, graduated from a medical school in one of fringe systems. You don't recognize the name though, and half of latin words they used do not actually exist."
-	icon = 'icons/obj/decals.dmi'
-	icon_state = "goldenplaque"
-	sign_state = "goldenplaque"
-	var/claimant
-
-/obj/item/sign/medipolma/attack_self(mob/user)
-	if(!claimant)
-		to_chat(user, "<span class='notice'>You fill in your name in the blanks with a permanent marker.</span>")
-		claimant = user.real_name
-	..()
-
-/obj/item/sign/medipolma/examine(mob/user)
-	. = ..()
-	if(claimant)
-		to_chat(user,"This one belongs to Dr.[claimant], MD.")
-	else
-		to_chat(user,"The name is left blank for some reason.")
-
-/obj/structure/sign/janitor
-	name = "\improper JANITORIAL CLOSET"
-	desc = "A sign indicating a room used to store cleaning supplies."
-	icon_state = "janitor"
-
-/obj/structure/sign/engineering
-	name = "\improper ENGINEERING"
-	desc = "A sign labelling an area as the Engineering department."
-	icon_state = "engineering"
-
-/obj/structure/sign/telecomms
-	name = "\improper TELECOMMUNICATIONS"
-	desc = "A sign labelling an area as the Telecommunications room."
-	icon_state = "tcomm"
-
-/obj/structure/sign/cargo
-	name = "\improper CARGO BAY"
-	desc = "A sign labelling the area as a cargo bay."
-	icon_state = "cargo"
-
-/obj/structure/sign/bridge
-	name = "\improper BRIDGE"
-	desc = "A sign indicating the Bridge. Not the kind you cross rivers with, the other kind."
-	icon_state = "bridge"
-
-/obj/structure/sign/forensics
-	name = "\improper FORENSICS"
-	desc = "A sign labelled FORENSICS."
-	icon_state = "forensics"
-
-/obj/structure/sign/security
-	name = "\improper SECURITY"
-	desc = "A sign labelling the area as belonging to Security."
-	icon_state = "sec_scale"
-
-/obj/structure/sign/security/alt
-	icon_state = "sec_cuff"
-
-/obj/structure/sign/eva
-	name = "\improper EVA"
-	desc = "A sign indicating this is where Extra Vehicular Activity equipment is stored."
-	icon_state = "eva"
-
-/obj/structure/sign/id_office
-	name = "\improper ID OFFICE"
-	desc = "A sign to let you know that this is the ID office."
-	icon_state = "id"
-
-/obj/structure/sign/hop
-	name = "\improper HEAD OF PERSONNEL"
-	desc = "A sign labelling this area as the Head of Personnel's office."
-	icon_state = "hop"
-
-/obj/structure/sign/evac
-	name = "\improper EVACUATION"
-	desc = "A sign that lets you know that this is where you want to be when the station is full of holes and on fire."
-	icon_state = "evac"
-
-/obj/structure/sign/watercloset
-	name = "bathroom sign"
-	desc = "Need to take a piss? You've come to the right place."
-	icon_state = "watercloset"
+/obj/structure/sign/create_dismantled_products(turf/T)
+	SHOULD_CALL_PARENT(FALSE)
+	if(parts_type && !ispath(parts_type, /obj/item/stack))
+		var/obj/item/sign/S = new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
+		S.set_sign(src)
+		//Copy our stuff over
+		copy_extension(src, S, /datum/extension/labels)
+		copy_extension(src, S, /datum/extension/forensic_evidence)
+		copy_extension(src, S, /datum/extension/scent)
+		transfer_fingerprints_to(S)
+	matter = null
+	material = null
+	reinf_material = null
+
+/obj/structure/sign/double/handle_default_screwdriver_attackby(mob/user, obj/item/screwdriver)
+	return FALSE

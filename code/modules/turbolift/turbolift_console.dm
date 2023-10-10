@@ -5,22 +5,9 @@
 	anchored = 1
 	density = 0
 	layer = ABOVE_OBJ_LAYER
-
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 	var/datum/turbolift/lift
-
-/obj/structure/lift/set_dir(var/newdir)
-	. = ..()
-	default_pixel_x = 0
-	default_pixel_y = 0
-	if(dir & NORTH)
-		default_pixel_y = -32
-	else if(dir & SOUTH)
-		default_pixel_y = 32
-	else if(dir & EAST)
-		default_pixel_x = -32
-	else if(dir & WEST)
-		default_pixel_x = 32
-	reset_offsets(0)
 
 /obj/structure/lift/proc/pressed(var/mob/user)
 	if(!istype(user, /mob/living/silicon))
@@ -39,6 +26,7 @@
 	return attack_hand(user)
 
 /obj/structure/lift/attack_hand(var/mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return interact(user)
 
 /obj/structure/lift/interact(var/mob/user)
@@ -102,6 +90,8 @@
 
 /obj/structure/lift/panel/standalone
 	icon_state = "standing_panel"
+	obj_flags = 0
+	directional_offset = null
 
 /obj/structure/lift/panel/attack_ghost(var/mob/user)
 	return interact(user)

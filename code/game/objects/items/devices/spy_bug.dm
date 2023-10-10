@@ -15,9 +15,14 @@
 	throw_speed = 3
 
 	origin_tech = "{'programming':1,'engineering':1,'esoteric':3}"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
+	)
 
 	var/obj/item/radio/spy/radio
-	var/obj/machinery/camera/spy/camera
 
 /obj/item/spy_bug/Initialize()
 	. = ..()
@@ -56,10 +61,14 @@
 	icon = 'icons/obj/modular_computers/pda/pda.dmi'
 	icon_state = ICON_STATE_WORLD
 	color = COLOR_GRAY80
-
 	w_class = ITEM_SIZE_SMALL
-
 	origin_tech = "{'programming':1,'engineering':1,'esoteric':3}"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_TRACE,
+	)
 
 	var/obj/item/radio/spy/radio
 	var/obj/item/spy_bug/selected_camera
@@ -114,7 +123,7 @@
 		user.reset_view()
 		user.unset_machine()
 		return
-	
+
 	selected_camera = input("Select camera bug to view.") as null|anything in cameras
 	view_camera(user)
 

@@ -37,7 +37,7 @@
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
-	var/obj/item/clothing/uniform = H.w_uniform
+	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
 	if(uniform)
 		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
 		if(uniform.can_attach_accessory(eyegore))
@@ -45,8 +45,8 @@
 		else
 			qdel(eyegore)
 
-/obj/effect/submap_landmark/spawnpoint/captain
+/obj/abstract/submap_landmark/spawnpoint/captain
 	name = "Independant Captain"
 
-/obj/effect/submap_landmark/spawnpoint/crewman
+/obj/abstract/submap_landmark/spawnpoint/crewman
 	name = "Independant Crewman"

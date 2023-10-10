@@ -4,6 +4,7 @@
 	icon_state = "launcherbtt"
 	desc = "A remote control switch for something."
 	anchored = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_WINDOW_LAYER
 	power_channel = ENVIRON
 	idle_power_usage = 10
@@ -16,13 +17,14 @@
 	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button = 1)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable,
-		/obj/item/stock_parts/radio/transmitter/basic/buildable
+		/obj/item/stock_parts/power/apc = 1,
+		/obj/item/stock_parts/radio/transmitter/basic/buildable = 1
 	)
 	base_type = /obj/machinery/button/buildable
 	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
 	frame_type = /obj/item/frame/button
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':30}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
 
 	var/active = FALSE
 	var/operating = FALSE
@@ -30,7 +32,9 @@
 	var/cooldown = 1 SECOND
 
 /obj/machinery/button/buildable
-	uncreated_component_parts = null
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc = 1,
+	)
 
 /obj/machinery/button/Initialize()
 	. = ..()
@@ -38,7 +42,7 @@
 
 /obj/machinery/button/attackby(obj/item/W, mob/user)
 	if(!(. = component_attackby(W, user)))
-		return attack_hand(user)
+		return attack_hand_with_interaction_checks(user)
 
 /obj/machinery/button/interface_interact(user)
 	if(!CanInteract(user, DefaultTopicState()))
@@ -73,6 +77,12 @@
 		icon_state = "launcheract"
 	else
 		icon_state = "launcherbtt"
+
+//#TODO: Button might want their cases to handle being installed on tables to stay coherent with mapped button on tables?
+/obj/machinery/button/update_directional_offset(force = FALSE)
+	if(!force && (!length(directional_offset) || !is_wall_mounted())) //Check if the button is actually mapped onto a table or something
+		return
+	. = ..()
 
 /decl/public_access/public_variable/button_active
 	expected_type = /obj/machinery/button
@@ -138,6 +148,12 @@
 /obj/machinery/button/alternate
 	icon = 'icons/obj/machines/button_door.dmi'
 	icon_state = "doorctrl"
+	frame_type = /obj/item/frame/button/alternate
+
+/obj/machinery/button/alternate/buildable
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/radio/transmitter/basic = 1,
+	)
 
 /obj/machinery/button/alternate/on_update_icon()
 	if(operating)
@@ -166,6 +182,7 @@
 /obj/machinery/button/toggle/alternate
 	icon = 'icons/obj/machines/button_door.dmi'
 	icon_state = "doorctrl"
+	frame_type = /obj/item/frame/button/alternate
 
 /obj/machinery/button/toggle/alternate/on_update_icon()
 	if(active)

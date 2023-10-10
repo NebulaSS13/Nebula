@@ -1,22 +1,25 @@
-/obj/item/storage/csi_markers
+/obj/item/storage/box/csi_markers
 	name = "crime scene markers box"
 	desc = "A cardboard box for crime scene marker cards."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "cards"
 	w_class = ITEM_SIZE_TINY
-	startswith = list(
-		/obj/item/csi_marker/n1 = 1,
-		/obj/item/csi_marker/n2 = 1,
-		/obj/item/csi_marker/n3 = 1,
-		/obj/item/csi_marker/n4 = 1,
-		/obj/item/csi_marker/n5 = 1,
-		/obj/item/csi_marker/n6 = 1,
-		/obj/item/csi_marker/n7 = 1
+
+/obj/item/storage/box/csi_markers/WillContain()
+	return list(
+		/obj/item/csi_marker/n1,
+		/obj/item/csi_marker/n2,
+		/obj/item/csi_marker/n3,
+		/obj/item/csi_marker/n4,
+		/obj/item/csi_marker/n5,
+		/obj/item/csi_marker/n6,
+		/obj/item/csi_marker/n7
 	)
 
-/obj/item/storage/csi_markers/Initialize()
+/obj/item/storage/box/csi_markers/Initialize(ml, material_key)
 	. = ..()
-	make_exact_fit()
+	if(length(contents))
+		make_exact_fit()
 
 /obj/item/csi_marker
 	name = "crime scene marker"
@@ -26,6 +29,7 @@
 	w_class = ITEM_SIZE_TINY
 	randpixel = 1
 	layer = ABOVE_HUMAN_LAYER  //so you can mark bodies
+	material = /decl/material/solid/plastic
 	var/number = 1
 
 /obj/item/csi_marker/Initialize(mapload)
@@ -34,8 +38,9 @@
 	update_icon()
 
 /obj/item/csi_marker/on_update_icon()
-	icon_state = "card[Clamp(number,1,7)]"
-	
+	. = ..()
+	icon_state = "card[clamp(number,1,7)]"
+
 /obj/item/csi_marker/n1
 	number = 1
 /obj/item/csi_marker/n2

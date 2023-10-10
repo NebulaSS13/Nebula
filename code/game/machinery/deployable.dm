@@ -38,7 +38,7 @@
 				visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
 				return
 		return
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if (src.health < src.maxhealth)
 			src.health = src.maxhealth
 			src.emagged = 0
@@ -53,9 +53,9 @@
 		return
 	else
 		switch(W.damtype)
-			if("fire")
+			if(BURN)
 				src.health -= W.force * 0.75
-			if("brute")
+			if(BRUTE)
 				src.health -= W.force * 0.5
 			else
 		if (src.health <= 0)

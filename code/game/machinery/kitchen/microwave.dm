@@ -51,7 +51,7 @@
 
 /obj/machinery/microwave/attackby(var/obj/item/O, var/mob/user)
 	if(broken > 0)
-		if(broken == 2 && isScrewdriver(O)) // If it's broken and they're using a screwdriver
+		if(broken == 2 && IS_SCREWDRIVER(O)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] starts to fix part of [src]."), \
 				SPAN_NOTICE("You start to fix part of [src].") \
@@ -62,7 +62,7 @@
 					SPAN_NOTICE("You have fixed part of [src].") \
 				)
 				broken = 1 // Fix it a bit
-		else if(broken == 1 && isWrench(O)) // If it's broken and they're doing the wrench
+		else if(broken == 1 && IS_WRENCH(O)) // If it's broken and they're doing the wrench
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] starts to fix part of [src]."), \
 				SPAN_NOTICE("You start to fix part of [src].") \
@@ -111,7 +111,7 @@
 		var/obj/item/grab/G = O
 		to_chat(user, SPAN_WARNING("This is ridiculous. You can not fit \the [G.affecting] in this [src]."))
 		return 1
-	else if(isWrench(O))
+	else if(IS_WRENCH(O))
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] begins [anchored ? "securing" : "unsecuring"] [src]."), \
 			SPAN_NOTICE("You attempt to [anchored ? "secure" : "unsecure"] [src].")
@@ -138,7 +138,7 @@
 				SSnano.update_uis(src)
 			return
 		else
-			if (!user.unEquip(O, src))
+			if (!user.try_unequip(O, src))
 				return
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] has added \the [O] to \the [src]."), \

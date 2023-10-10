@@ -34,7 +34,7 @@
 			to_chat(user, "<span class='warning'>\A [charging] is already charging here.</span>")
 			return
 		// Checks to make sure he's not in space doing it, and that the area got proper power.
-		if(!powered())
+		if(stat & NOPOWER)
 			to_chat(user, "<span class='warning'>The [name] blinks red as you try to insert the item!</span>")
 			return
 		if (istype(G, /obj/item/gun/energy/))
@@ -46,13 +46,13 @@
 			to_chat(user, "This device does not have a battery installed.")
 			return
 
-		if(user.unEquip(G))
+		if(user.try_unequip(G))
 			G.forceMove(src)
 			charging = G
 			update_icon()
 		return
 
-	if(portable && isWrench(G) && !panel_open)
+	if(portable && IS_WRENCH(G) && !panel_open)
 		. = TRUE
 		if(charging)
 			to_chat(user, "<span class='warning'>Remove [charging] first!</span>")
@@ -128,6 +128,8 @@
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"
 	portable = 0
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	frame_type = /obj/item/frame/button/wall_charger
+	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':32}, 'EAST':{'x':-28}, 'WEST':{'x':28}}"

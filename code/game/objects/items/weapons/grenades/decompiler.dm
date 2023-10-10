@@ -114,7 +114,7 @@
 				LAZYADD(eaten, eating_obj)
 
 	if(length(eaten))
-		playsound(loc, 'sound/magic/magic_missile.ogg', Clamp(length(eaten) * 10, 10, 50), FALSE)
+		playsound(loc, 'sound/magic/magic_missile.ogg', clamp(length(eaten) * 10, 10, 50), FALSE)
 		QDEL_NULL_LIST(eaten)
 
 /obj/effect/decompiler/Destroy()

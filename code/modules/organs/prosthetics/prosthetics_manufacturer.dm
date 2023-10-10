@@ -3,7 +3,6 @@
 	var/name                                                      // Shown when selecting the limb.
 	var/desc = "A generic unbranded robotic prosthesis."          // Seen when examining a limb.
 	var/icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'     // Icon base to draw from.
-	var/unavailable_at_chargen                                    // If set, not available at chargen.
 	var/can_eat                                                   // Determines if heads with this model can ingest food/drink.
 	var/has_eyes = TRUE                                           // Determines if eyes should render on heads using this model.
 	var/can_feel_pain                                             // Modifies the return from human can_feel_pain().
@@ -21,6 +20,14 @@
 	var/modular_prosthetic_tier = MODULAR_BODYPART_INVALID        // Determines how the limb behaves as a prosthetic with regards to manual attachment/detachment.
 	var/limb_tech = "{'engineering':1,'materials':1,'magnets':1}" // What tech levels should limbs of this type use/need?
 
+/decl/prosthetics_manufacturer/validate()
+	. = ..()
+	if(icon && (!applies_to_part || (BP_CHEST in applies_to_part)))
+		if(check_state_in_icon("torso", icon))
+			. += "deprecated \"torso\" state present in [icon]"
+		if(!check_state_in_icon(BP_CHEST, icon))
+			. += "[BP_CHEST] state not present in [icon]"
+
 /decl/prosthetics_manufacturer/proc/check_can_install(var/target_slot, var/target_bodytype, var/target_species)
 	. = istext(target_slot)
 	if(.)
@@ -33,3 +40,6 @@
 				return FALSE
 		if(target_species && islist(species_restricted) && !(target_species in species_restricted))
 			return FALSE
+
+/decl/prosthetics_manufacturer/proc/get_base_icon(var/mob/living/carbon/human/owner)
+	return icon

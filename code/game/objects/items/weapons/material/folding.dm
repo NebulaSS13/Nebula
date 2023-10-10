@@ -5,8 +5,6 @@
 	desc = "A small folding knife."
 	icon = 'icons/obj/items/weapon/knives/folding/basic.dmi'
 	material_force_multiplier = 0.2
-	applies_material_name = FALSE
-	unbreakable = TRUE
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("prodded", "tapped")
 	edge = FALSE
@@ -14,7 +12,7 @@
 	draw_handle = TRUE
 	valid_handle_colors = list(COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_DARK_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_DARK_GREEN_GRAY)
 	material = /decl/material/solid/metal/steel
-
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/open = FALSE
 	var/closed_attack_verbs = list("prodded", "tapped") //initial doesnt work with lists, rip
 
@@ -44,13 +42,11 @@
 		..()
 
 /obj/item/knife/folding/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(open)
 		icon_state = "[get_world_inventory_state()]_open"
-	if(ismob(loc))
-		var/mob/M = loc
-		M.update_inv_hands()
-	..()
+	update_held_icon()
 
 /obj/item/knife/folding/get_mob_overlay(mob/user_mob, slot, bodypart)
 	. = open ? ..() : new /image

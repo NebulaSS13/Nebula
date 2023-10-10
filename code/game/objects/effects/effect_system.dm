@@ -97,7 +97,6 @@ steam.start() -- spawns the effect
 	name = "sparks"
 	icon_state = "sparks"
 	icon = 'icons/effects/effects.dmi'
-	var/amount = 6.0
 	anchored = 1.0
 	mouse_opacity = 0
 
@@ -172,7 +171,6 @@ steam.start() -- spawns the effect
 	opacity = 1
 	anchored = 0.0
 	mouse_opacity = 0
-	var/amount = 6.0
 	var/time_to_live = 100
 
 	//Remove this bit to use the old smoke
@@ -180,27 +178,30 @@ steam.start() -- spawns the effect
 	pixel_x = -32
 	pixel_y = -32
 
-/obj/effect/effect/smoke/Initialize()
+/obj/effect/effect/smoke/Initialize(mapload, smoke_duration)
 	. = ..()
-	QDEL_IN(src, time_to_live)
+	if(smoke_duration)
+		time_to_live = smoke_duration
+	addtimer(CALLBACK(src, .proc/end_of_life), time_to_live)
 
-/obj/effect/effect/smoke/Crossed(mob/living/carbon/M)
+/obj/effect/effect/smoke/proc/end_of_life()
+	if(!QDELETED(src))
+		qdel(src)
+
+/obj/effect/effect/smoke/Crossed(atom/movable/AM)
 	..()
-	if(istype(M))
-		affect(M)
+	if(iscarbon(AM))
+		affect(AM)
 
 /obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
 	if (!istype(M))
 		return 0
-	if (M.internal != null)
-		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
-			return 0
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.head && (H.head.item_flags & ITEM_FLAG_AIRTIGHT))
-				return 0
-		return 0
-	return 1
+	if(M.internal != null)
+		for(var/slot in global.airtight_slots)
+			var/obj/item/gear = M.get_equipped_item(slot)
+			if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
+				return FALSE
+	return TRUE
 
 /////////////////////////////////////////////
 // Illumination
@@ -236,7 +237,7 @@ steam.start() -- spawns the effect
 	M.adjustOxyLoss(1)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
-		M.emote("cough")
+		M.cough()
 		spawn ( 20 )
 			M.coughedtime = 0
 
@@ -265,7 +266,7 @@ steam.start() -- spawns the effect
 	ADJ_STATUS(M, STAT_ASLEEP, 1)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
-		M.emote("cough")
+		M.cough()
 		spawn ( 20 )
 			M.coughedtime = 0
 /////////////////////////////////////////////
@@ -285,7 +286,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/mustard/affect(var/mob/living/carbon/human/R)
 	if (!..())
 		return 0
-	if (R.wear_suit != null)
+	if (R.get_equipped_item(slot_wear_suit_str))
 		return 0
 
 	R.take_overall_damage(0, 0.75)
@@ -331,7 +332,7 @@ steam.start() -- spawns the effect
 			holder = null
 		else
 			src.location = get_turf(holder)
-	var/obj/effect/effect/smoke/smoke = new smoke_type(location)
+	var/obj/effect/effect/smoke/smoke = new smoke_type(location, rand(8.5 SECONDS, 10.5 SECONDS))
 	src.total_smoke++
 	var/direction = src.direction
 	if(!direction)
@@ -342,7 +343,6 @@ steam.start() -- spawns the effect
 			total_smoke--
 			return
 		step(smoke,direction)
-	QDEL_IN(smoke, smoke.time_to_live*0.75+rand(10,30))
 	total_smoke--
 
 /datum/effect/effect/system/smoke_spread/bad
@@ -407,6 +407,10 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/trail/proc/stop()
 	src.processing = 0
 	src.on = 0
+
+/datum/effect/effect/system/trail/Destroy()
+	stop()
+	return ..()
 
 /datum/effect/effect/system/trail/proc/effect(var/obj/effect/effect/T)
 	T.set_dir(src.holder.dir)

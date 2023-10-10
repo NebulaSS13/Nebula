@@ -1,7 +1,6 @@
 //Dummy object for holding items in vehicles.
 //Prevents items from being interacted with.
 /datum/vehicle_dummy_load
-	var/name = "dummy load"
 	var/actual_load
 
 /obj/vehicle
@@ -12,6 +11,7 @@
 	anchored = 1
 	animate_movement=1
 	light_range = 3
+	abstract_type = /obj/vehicle
 
 	can_buckle = 1
 	buckle_movable = 1
@@ -73,17 +73,17 @@
 /obj/vehicle/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/hand_labeler))
 		return
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!locked)
 			open = !open
 			update_icon()
 			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
-	else if(isCrowbar(W) && cell && open)
+	else if(IS_CROWBAR(W) && cell && open)
 		remove_cell(user)
 
 	else if(istype(W, /obj/item/cell) && !cell && open)
 		insert_cell(W, user)
-	else if(isWelder(W))
+	else if(IS_WELDER(W))
 		var/obj/item/weldingtool/T = W
 		if(T.welding)
 			if(health < maxhealth)
@@ -227,7 +227,7 @@
 		return
 	if(!istype(C))
 		return
-	if(!H.unEquip(C, src))
+	if(!H.try_unequip(C, src))
 		return
 	cell = C
 	powercheck()
@@ -241,9 +241,6 @@
 	H.put_in_hands(cell)
 	cell = null
 	powercheck()
-
-/obj/vehicle/proc/RunOver(var/mob/living/carbon/human/H)
-	return		//write specifics for different vehicles
 
 //-------------------------------------------
 // Loading/unloading procs

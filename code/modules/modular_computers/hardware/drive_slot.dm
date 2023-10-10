@@ -11,6 +11,7 @@
 	material = /decl/material/solid/metal/steel
 
 	var/obj/item/stock_parts/computer/hard_drive/portable/stored_drive = null
+	var/mount_name
 
 /obj/item/stock_parts/computer/drive_slot/diagnostics()
 	. = ..()
@@ -58,7 +59,7 @@
 		to_chat(user, "You try to insert [I] into [src], but its portable drive slot is occupied.")
 		return FALSE
 
-	if(user && !user.unEquip(I, src))
+	if(user && !user.try_unequip(I, src))
 		return FALSE
 
 	stored_drive = I
@@ -66,6 +67,29 @@
 	if(isobj(loc))
 		loc.verbs |= /obj/item/stock_parts/computer/drive_slot/proc/verb_eject_drive
 	return TRUE
+
+/obj/item/stock_parts/computer/drive_slot/do_after_install(atom/device, loud)
+	var/datum/extension/interactive/os/os = get_extension(device, /datum/extension/interactive/os)
+	if(!os)
+		return FALSE
+
+	var/datum/file_storage/new_storage = os.mount_storage(/datum/file_storage/disk/removable, "media", FALSE)
+	if(new_storage)
+		mount_name = new_storage.root_name
+		if(loud)
+			device.visible_message(SPAN_NOTICE("\The [device] pings: Mounted removable hard drive as file system with root directory '[new_storage.root_name]'."))
+		return TRUE
+	else
+		if(loud)
+			device.visible_message(SPAN_WARNING("\The [device] flashes an error: Failed to mount removable harddrive. Hard drive may be non-functional."))
+		return FALSE
+
+/obj/item/stock_parts/computer/drive_slot/do_before_uninstall(atom/device, loud)
+	var/datum/extension/interactive/os/os = get_extension(device, /datum/extension/interactive/os)
+	if(!os)
+		return FALSE
+
+	os.unmount_storage(mount_name)
 
 /obj/item/stock_parts/computer/drive_slot/attackby(obj/item/stock_parts/computer/hard_drive/portable/I, mob/user)
 	if(!istype(I))

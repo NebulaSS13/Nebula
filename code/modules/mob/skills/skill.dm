@@ -4,6 +4,7 @@ var/global/list/skills = list()
 
 	name = "None"                         // Name of the skill. This is what the player sees.
 	abstract_type = /decl/hierarchy/skill // Don't mess with this without changing how Initialize works.
+	expected_type = /decl/hierarchy/skill
 	var/sort_priority = 0                 // Used for sort order in lists/presentation.
 	var/desc = "Placeholder skill"        // Generic description of this skill.
 	var/difficulty = SKILL_AVERAGE        //Used to compute how expensive the skill is
@@ -34,7 +35,7 @@ var/global/list/skills = list()
 /decl/hierarchy/skill/Initialize()
 	. = ..()
 	GET_DECL(/decl/hierarchy/skill) // Make sure the full skill decl list is populated.
-	if(is_abstract())
+	if(INSTANCE_IS_ABSTRACT(src))
 		for(var/decl/hierarchy/skill/C in children)
 			global.skills |= C.get_descendents()
 

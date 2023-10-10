@@ -11,6 +11,8 @@
 	ore_icon_overlay = "gems"
 	default_solid_form = /obj/item/stack/material/gemstone
 	abstract_type = /decl/material/solid/gemstone
+	sound_manipulate = 'sound/foley/pebblespickup1.ogg'
+	sound_dropped = 'sound/foley/pebblesdrop1.ogg'
 
 /decl/material/solid/gemstone/diamond
 	name = "diamond"

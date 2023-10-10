@@ -5,4 +5,5 @@
 	movement_delay = 12
 	reagent_type = /decl/material/liquid/tar
 	color = "#3e3960"
+	base_color = "#3e3960"
 	dirt_color = "#3e3960"

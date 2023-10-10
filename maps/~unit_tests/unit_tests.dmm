@@ -69,6 +69,12 @@
 /obj/abstract/landmark/test/space_turf,
 /turf/space,
 /area/test_area/general)
+"X" = (
+/obj/abstract/level_data_spawner/debug,
+/turf/unsimulated/floor{
+	icon_state = "hydrofloor"
+	},
+/area/test_area/powered_dynamic_lighting)
 
 (1,1,1) = {"
 a
@@ -421,7 +427,7 @@ n
 n
 n
 b
-d
+X
 b
 f
 k

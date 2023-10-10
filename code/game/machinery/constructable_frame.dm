@@ -1,8 +1,6 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-
 //Circuit boards are in /code/game/objects/items/weapons/circuitboards/machinery/
-
-/obj/machinery/constructable_frame //Made into a seperate type to make future revisions easier.
+///Made into a seperate type to make future revisions easier.
+/obj/machinery/constructable_frame
 	name = "machine frame"
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "box_0"
@@ -11,9 +9,10 @@
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/frame/unwrenched
+	obj_flags = OBJ_FLAG_ROTATABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	var/obj/item/stock_parts/circuitboard/circuit = null
 	var/expected_machine_type
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/machinery/constructable_frame/state_transition(decl/machine_construction/new_state)
 	. = ..()

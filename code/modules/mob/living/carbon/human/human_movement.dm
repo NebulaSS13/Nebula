@@ -30,14 +30,13 @@
 			tally += E ? E.get_movement_delay(4) : 4
 	else
 		var/total_item_slowdown = -1
-		for(var/slot in global.all_inventory_slots)
-			var/obj/item/I = get_equipped_item(slot)
-			if(istype(I))
-				var/item_slowdown = 0
-				item_slowdown += I.slowdown_general
-				item_slowdown += LAZYACCESS(I.slowdown_per_slot, slot)
-				item_slowdown += I.slowdown_accessory
-				total_item_slowdown += max(item_slowdown, 0)
+		for(var/obj/item/I in get_equipped_items(include_carried = TRUE))
+			var/item_slowdown = 0
+			var/slot = get_equipped_slot_for_item(I)
+			item_slowdown += LAZYACCESS(I.slowdown_per_slot, slot)
+			item_slowdown += I.slowdown_general
+			item_slowdown += I.slowdown_accessory
+			total_item_slowdown += max(item_slowdown, 0)
 		tally += total_item_slowdown
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
@@ -55,9 +54,6 @@
 
 	if(facing_dir)
 		tally += 3 // Locking direction will slow you down.
-
-	if(MUTATION_FAT in src.mutations)
-		tally += 1.5
 
 	if (bodytemperature < species.cold_discomfort_level)
 		tally += (species.cold_discomfort_level - bodytemperature) / 10 * 1.75
@@ -91,20 +87,20 @@
 /mob/living/carbon/human/slip_chance(var/prob_slip = 5)
 	if(!..())
 		return 0
-
 	//Check hands and mod slip
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-		if(!inv_slot.holding)
+	for(var/hand_slot in get_held_item_slots())
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		var/obj/item/held = inv_slot?.get_equipped_item()
+		if(!held)
 			prob_slip -= 2
-		else if(inv_slot.holding.w_class <= ITEM_SIZE_SMALL)
+		else if(held.w_class <= ITEM_SIZE_SMALL)
 			prob_slip -= 1
-
 	return prob_slip
 
 /mob/living/carbon/human/Check_Shoegrip()
 	if(species.check_no_slip(src))
 		return 1
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
 	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
 	return 0
@@ -114,7 +110,7 @@
 	if(.) //We moved
 
 		var/stamina_cost = 0
-		for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
+		for(var/obj/item/grab/G as anything in get_active_grabs())
 			stamina_cost -= G.grab_slowdown()
 		stamina_cost = round(stamina_cost)
 		if(stamina_cost < 0)

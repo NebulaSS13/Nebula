@@ -5,6 +5,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_h"
 	density = 0
+	material = /decl/material/solid/plastic
 	var/obj/structure/target_stake/stake
 	var/hp = 1800
 	var/icon/virtualIcon
@@ -16,9 +17,9 @@
 		stake.set_target(null)
 
 /obj/item/target/attackby(var/obj/item/W, var/mob/user)
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
-		if(WT.remove_fuel(0, user))
+		if(WT.weld(0, user))
 			overlays.Cut()
 			bulletholes.Cut()
 			hp = initial(hp)
@@ -27,10 +28,9 @@
 
 /obj/item/target/attack_hand(var/mob/user)
 	// taking pinned targets off!
-	if (stake)
-		stake.attack_hand(user)
-	else
+	if(!stake || !user.check_dexterity(DEXTERITY_GRIP))
 		return ..()
+	return stake.attack_hand(user)
 
 /obj/item/target/syndicate
 	icon_state = "target_s"

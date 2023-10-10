@@ -1,1 +1,0 @@
-var/global/list/ruin_landmarks = list()

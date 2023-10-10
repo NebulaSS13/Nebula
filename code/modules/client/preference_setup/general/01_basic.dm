@@ -16,7 +16,7 @@
 	pref.be_random_name = R.read("name_is_always_random")
 
 	pref.spawnpoint = R.read("spawnpoint")
-	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
 		if(pref.spawnpoint == spawnpoint.name)
 			pref.spawnpoint = spawnpoint.type
 			break
@@ -33,9 +33,9 @@
 	W.write("spawnpoint", spawnpoint.name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
-	
+
 	var/valid_spawn = FALSE
-	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
 		if(pref.spawnpoint == spawnpoint.type)
 			valid_spawn = TRUE
 			break
@@ -79,9 +79,9 @@
 	. += "<br><b>Pronouns:</b> "
 	for(var/decl/pronouns/G in S.available_pronouns)
 		if(G.name == pref.gender)
-			. += "<span class='linkOn'>[capitalize(G.name)]</span>"
+			. += "<span class='linkOn'>[G.pronoun_string]</span>"
 		else
-			. += "<a href='?src=\ref[src];gender=\ref[G]'>[capitalize(G.name)]</a>"
+			. += "<a href='?src=\ref[src];gender=\ref[G]'>[G.pronoun_string]</a>"
 
 	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
 	. += "<br><b>Spawn point</b>: <a href='?src=\ref[src];spawnpoint=1'>[spawnpoint.name]</a>"

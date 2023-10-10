@@ -6,10 +6,10 @@
 	center_of_mass = @"{'x':16,'y':12}"
 	bitesize = 2
 
-/obj/item/chems/food/badrecipe/Initialize()
+/obj/item/chems/food/badrecipe/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/bromide, 1)
-	reagents.add_reagent(/decl/material/solid/carbon, 3)
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
+	reagents.add_reagent(/decl/material/solid/carbon,             3)
 
 /obj/item/chems/food/stuffing
 	name = "stuffing"
@@ -42,7 +42,7 @@
 	nutriment_amt = 3
 	bitesize = 2
 
-/obj/item/chems/food/loadedbakedpotato/Initialize()
+/obj/item/chems/food/loadedbakedpotato/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
@@ -57,7 +57,7 @@
 	nutriment_amt = 6
 	bitesize = 3
 
-/obj/item/chems/food/spacylibertyduff/Initialize()
+/obj/item/chems/food/spacylibertyduff/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 6)
 
@@ -72,9 +72,9 @@
 	nutriment_amt = 6
 	bitesize = 3
 
-/obj/item/chems/food/amanitajelly/Initialize()
+/obj/item/chems/food/amanitajelly/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/amatoxin, 6)
+	reagents.add_reagent(/decl/material/liquid/amatoxin,      6)
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)
 
 /obj/item/chems/food/enchiladas
@@ -88,7 +88,7 @@
 	nutriment_amt = 2
 	bitesize = 4
 
-/obj/item/chems/food/enchiladas/Initialize()
+/obj/item/chems/food/enchiladas/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 	reagents.add_reagent(/decl/material/liquid/capsaicin, 6)
@@ -102,12 +102,12 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 6
 
-/obj/item/chems/food/monkeysdelight/Initialize()
+/obj/item/chems/food/monkeysdelight/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
-	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
-	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
+	reagents.add_reagent(/decl/material/solid/blackpepper,         1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride,      1)
 
 /obj/item/chems/food/candiedapple
 	name = "candied apple"
@@ -127,7 +127,7 @@
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
 
-/obj/item/chems/food/mint/Initialize()
+/obj/item/chems/food/mint/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, 1)
 
@@ -141,7 +141,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/plumphelmetbiscuit/Initialize()
+/obj/item/chems/food/plumphelmetbiscuit/populate_reagents()
 	. = ..()
 	if(prob(10))
 		name = "exceptional plump helmet biscuit"
@@ -160,7 +160,7 @@
 	nutriment_amt = 8
 	bitesize = 3
 
-/obj/item/chems/food/appletart/Initialize()
+/obj/item/chems/food/appletart/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/solid/metal/gold, 5)
 
@@ -189,7 +189,7 @@
 	nutriment_amt = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/taco/Initialize()
+/obj/item/chems/food/taco/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
@@ -201,7 +201,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 
-/obj/item/chems/food/pelmen/Initialize()
+/obj/item/chems/food/pelmen/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 
@@ -213,6 +213,6 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 
-/obj/item/chems/food/pelmeni_boiled/Initialize()
+/obj/item/chems/food/pelmeni_boiled/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 30)

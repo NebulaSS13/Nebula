@@ -21,11 +21,11 @@ var/global/list/radio_beacons = list()
 	global.radio_beacons -= src
 	. = ..()
 
+/obj/item/radio/beacon/toggle_panel(var/mob/user)
+	return FALSE
+
 /obj/item/radio/beacon/hear_talk()
 	return
-
-/obj/item/radio/beacon/send_hear()
-	return null
 
 /obj/item/radio/beacon/emp_act(severity)
 	if(functioning && severity >= 1)
@@ -45,6 +45,7 @@ var/global/list/radio_beacons = list()
 			T.target_lost()
 
 /obj/item/radio/beacon/on_update_icon()
+	. = ..()
 	if(!functioning)
 		icon_state = "[initial(icon_state)]_dead"
 	else
@@ -65,7 +66,7 @@ var/global/list/radio_beacons = list()
 	anchored = TRUE
 	w_class = ITEM_SIZE_HUGE
 	randpixel = 0
-	
+
 	var/repair_fail_chance = 35
 
 /obj/item/radio/beacon/anchored/Initialize()
@@ -74,21 +75,30 @@ var/global/list/radio_beacons = list()
 	hide(hides_under_flooring() && !T.is_plating())
 
 /obj/item/radio/beacon/anchored/attackby(obj/item/I, mob/user)
-	..()
 	if(istype(I, /obj/item/stack/nanopaste))
+		if(functioning)
+			to_chat(user, SPAN_WARNING("\The [src] does not need any repairs."))
+			return TRUE
+		if(repair_fail_chance >= 100)
+			to_chat(user, SPAN_WARNING("\The [src] is completely irrepairable."))
+			return TRUE
+
 		var/obj/item/stack/nanopaste/S = I
-		if(b_stat)
-			if(S.use(1))
-				to_chat(user, SPAN_NOTICE("You pour some of \the [S] over \the [src]'s circuitry."))
-				if(prob(repair_fail_chance))
-					flick("[initial(icon_state)]", src)
-					visible_message(SPAN_WARNING("The [src]'s lights come back on briefly, then die out again."), range = 2)
-				else
-					visible_message(SPAN_NOTICE("\The [src]'s lights come back on."), range = 2)
-					functioning = TRUE
-					repair_fail_chance += pick(5, 10, 10, 15)
-					update_icon()
-			else
-				to_chat(user, SPAN_WARNING("There's not enough of \the [S] left to fix \the [src]."))
-		else
+		if(!panel_open)
 			to_chat(user, SPAN_WARNING("You can't work on \the [src] until its been opened up."))
+			return TRUE
+		if(!S.use(1))
+			to_chat(user, SPAN_WARNING("There's not enough of \the [S] left to fix \the [src]."))
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You pour some of \the [S] over \the [src]'s circuitry."))
+		if(prob(repair_fail_chance))
+			flick("[initial(icon_state)]", src)
+			visible_message(SPAN_WARNING("The [src]'s lights come back on briefly, then die out again."), range = 2)
+		else
+			visible_message(SPAN_NOTICE("\The [src]'s lights come back on."), range = 2)
+			functioning = TRUE
+			repair_fail_chance += pick(5, 10, 10, 15)
+			update_icon()
+		return TRUE
+
+	. = ..()

@@ -17,9 +17,6 @@ var/global/datum/musical_config/musical_config = new
 	var/max_events = 2400
 	var/song_editor_lines_per_page = 20
 
-	var/usage_info_channel_resolution = 1
-	var/usage_info_event_resolution = 8
-
 	var/env_settings_available = 1
 
 	var/list/env_default = list(7.5, 1.0, -1000, -100, 0, 1.49, 0.83, 1.0, -2602, 0.0007, 200, 0.011, 0.25, 0.0, 0.25, 0.0, -5.0, 5000, 250.0, 0.0, 100, 100, 63)

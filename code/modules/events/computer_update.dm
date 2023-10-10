@@ -12,7 +12,7 @@
 			updates_to_install = rand(500000, 1000000)
 
 	for(var/obj/C in (SSobj.processing + SSmachines.machinery))
-		if((C.z in global.using_map.station_levels))
+		if(isStationLevel(C.z))
 			var/datum/extension/interactive/os/os = get_extension(C, /datum/extension/interactive/os)
 			if(os && os.get_network_status() && os.receives_updates)
 				os.updates = updates_to_install

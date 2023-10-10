@@ -17,6 +17,10 @@ var/global/list/navbeacons = list()
 	initial_access = list(access_engine)
 
 /obj/machinery/navbeacon/Initialize()
+
+	if(istext(codes)) // Mapping helper.
+		codes = cached_json_decode(codes)
+
 	. = ..()
 
 	var/turf/T = loc
@@ -42,7 +46,7 @@ var/global/list/navbeacons = list()
 	if(!T.is_plating())
 		return		// prevent intraction when T-scanner revealed
 
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		open = !open
 
 		user.visible_message("\The [user] [open ? "opens" : "closes"] cover of \the [src].", "You [open ? "open" : "close"] cover of \the [src].")

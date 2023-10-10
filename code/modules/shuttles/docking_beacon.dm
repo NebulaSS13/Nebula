@@ -16,7 +16,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 	var/display_name					 // Display name of the docking beacon, editable on the docking control program.
 	var/list/permitted_shuttles = list() // Shuttles that are always permitted by the docking beacon.
-	
+
 	var/locked = TRUE
 	var/docking_by_codes = FALSE		 // Whether or not docking by code is permitted.
 	var/docking_codes = 0				 // Required code for docking by code.
@@ -46,7 +46,7 @@
 	permitted_shuttles.Cut()
 
 /obj/machinery/docking_beacon/attackby(obj/item/I, mob/user)
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		if(!allowed(user))
 			to_chat(user, SPAN_WARNING("The bolts on \the [src] are locked!"))
 			return
@@ -54,7 +54,7 @@
 		to_chat(user, SPAN_NOTICE("You [anchored ? "unanchor" : "anchor"] \the [src]."))
 		anchored = !anchored
 		return
-	
+
 	. = ..()
 
 /obj/machinery/docking_beacon/interface_interact(mob/user)
@@ -73,7 +73,7 @@
 	else
 		data["permitted"] = list("ACCESS DENIED")
 		data["codes"] = "*******"
-	
+
 	data["construction_mode"] = construction_mode
 	data["errors"] = errors
 	data["ship_name"] = ship_name
@@ -117,8 +117,8 @@
 		if(!CanInteract(usr,state))
 			return TOPIC_NOACTION
 		if(newwidth && newheight)
-			docking_width = Clamp(newwidth, 0, MAX_DOCKING_SIZE)
-			docking_height = Clamp(newheight, 0, MAX_DOCKING_SIZE)
+			docking_width = clamp(newwidth, 0, MAX_DOCKING_SIZE)
+			docking_height = clamp(newheight, 0, MAX_DOCKING_SIZE)
 			D?.add_log("Docking size of Docking Beacon [display_name] was changed to [newwidth], [newheight].")
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
@@ -190,7 +190,7 @@
 			return TOPIC_HANDLED
 		check_ship_validity(get_areas())
 		return TOPIC_REFRESH
-	
+
 	if(href_list["finalize"])
 		if(!construction_mode)
 			return TOPIC_HANDLED
@@ -265,11 +265,6 @@
 			if(length(area_turfs) > MAX_SHIP_TILES)
 				LAZYDISTINCTADD(errors, "The ship is too large.")
 				return FALSE // If the ship is too large, skip contiguity checks.
-			// Stops tearing up the ground with the shuttle, although the landmark should not allow a hole in a planet etc. regardless.
-			if(istype(T, /turf/space) || istype(T, /turf/exterior) || istype(T, /turf/simulated/floor/asteroid))
-				LAZYDISTINCTADD(errors, "The area [A] contains invalid turfs.")
-				. = FALSE
-				break
 
 	// Check to make sure all the ships areas are connected.
 	. = min(., check_contiguity(area_turfs))
@@ -304,13 +299,26 @@
 	// Double check to ensure the ship is valid.
 	if(!check_ship_validity(shuttle_areas))
 		return FALSE
-	
+
+
+	// Locate the base area by stepping towards the edge of the map in the direction the beacon is facing.
 	var/area/base_area
-	var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[z]"]
-	if(istype(planet))
-		base_area = ispath(planet.planetary_area) ? planet.planetary_area : planet.planetary_area.type
-	else
-		base_area = world.area
+	var/turf/area_turf = get_step(src, dir)
+
+	while(area_turf)
+		var/area/A = area_turf.loc
+		if(A && (A.area_flags & AREA_FLAG_IS_BACKGROUND))
+			base_area = A
+			break
+		area_turf = get_step(area_turf, dir)
+
+	// Otherwise, use the level or world area.
+	if(!base_area)
+		var/datum/level_data/LD = SSmapping.levels_by_z[z]
+		if(istype(LD))
+			base_area = LD.get_base_area_instance()
+		else
+			base_area = locate(world.area)
 
 	var/turf/center_turf
 	switch(dir)

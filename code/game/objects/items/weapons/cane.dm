@@ -39,7 +39,7 @@
 		..()
 
 /obj/item/cane/concealed/attackby(var/obj/item/knife/folding/W, var/mob/user)
-	if(!src.concealed_blade && istype(W) && user.unEquip(W, src))
+	if(!src.concealed_blade && istype(W) && user.try_unequip(W, src))
 		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into [src]!</span>", "You sheathe \the [W] into [src].")
 		src.concealed_blade = W
 		update_icon()
@@ -48,6 +48,7 @@
 		..()
 
 /obj/item/cane/concealed/on_update_icon()
+	. = ..()
 	if(concealed_blade)
 		SetName(initial(name))
 		icon_state = initial(icon_state)

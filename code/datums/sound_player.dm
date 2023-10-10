@@ -139,7 +139,7 @@
 	. = ..()
 
 /datum/sound_token/proc/SetVolume(var/new_volume)
-	new_volume = Clamp(new_volume, 0, 100)
+	new_volume = clamp(new_volume, 0, 100)
 	if(base_volume == new_volume)
 		return
 	base_volume = new_volume
@@ -228,6 +228,7 @@
 	events_repository.unregister(/decl/observ/moved, listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
 	events_repository.unregister(/decl/observ/destroyed, listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
+	listener_status -= listener
 
 /datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = TRUE)
 	var/turf/source_turf = get_turf(source)
@@ -252,7 +253,7 @@
 		sound.y = 1
 		// Far as I can tell from testing, sound priority just doesn't work.
 		// Sounds happily steal channels from each other no matter what.
-		sound.priority = Clamp(255 - distance, 0, 255)
+		sound.priority = clamp(255 - distance, 0, 255)
 		PrivUpdateListener(listener, update_sound)
 
 /datum/sound_token/proc/PrivUpdateListeners()

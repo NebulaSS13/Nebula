@@ -62,4 +62,4 @@
 /obj/machinery/power/debug_items/infinite_apc_powersink/show_info(var/mob/user)
 	..()
 	to_chat(user, "Dummy load is using [num2text(active_power_usage, 20)] W")
-	to_chat(user, "Powered: [powered() ? "YES" : "NO"]")
+	to_chat(user, "Powered: [!(stat & NOPOWER) ? "YES" : "NO"]")

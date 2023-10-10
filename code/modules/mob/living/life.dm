@@ -15,6 +15,9 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
 
+	if(stat != DEAD)
+		handle_nutrition_and_hydration()
+
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
@@ -38,11 +41,39 @@
 
 	return 1
 
+/mob/living/proc/handle_nutrition_and_hydration()
+	SHOULD_CALL_PARENT(TRUE)
+	var/nut =    get_nutrition()
+	var/maxnut = get_max_nutrition()
+	if(nut < (maxnut * 0.3))
+		add_stressor(/datum/stressor/hungry_very, STRESSOR_DURATION_INDEFINITE)
+	else
+		remove_stressor(/datum/stressor/hungry_very)
+		if(nut < (maxnut * 0.5))
+			add_stressor(/datum/stressor/hungry, STRESSOR_DURATION_INDEFINITE)
+		else
+			remove_stressor(/datum/stressor/hungry)
+	var/hyd =    get_hydration()
+	var/maxhyd = get_max_hydration()
+	if(hyd < (maxhyd * 0.3))
+		add_stressor(/datum/stressor/thirsty_very, STRESSOR_DURATION_INDEFINITE)
+	else
+		remove_stressor(/datum/stressor/thirsty_very)
+		if(hyd < (maxhyd * 0.5))
+			add_stressor(/datum/stressor/thirsty, STRESSOR_DURATION_INDEFINITE)
+		else
+			remove_stressor(/datum/stressor/thirsty)
+
 /mob/living/proc/handle_breathing()
 	return
 
 /mob/living/proc/handle_mutations_and_radiation()
 	return
+
+// Get valid, unique reagent holders for metabolizing. Avoids metabolizing the same holder twice in a tick.
+/mob/living/proc/get_unique_metabolizing_reagent_holders()
+	for(var/datum/reagents/metabolism/holder in list(get_contact_reagents(), get_ingested_reagents(), get_injected_reagents(), get_inhaled_reagents()))
+		LAZYDISTINCTADD(., holder)
 
 /mob/living/proc/handle_chemicals_in_body()
 	SHOULD_CALL_PARENT(TRUE)
@@ -53,18 +84,31 @@
 		return FALSE
 
 	// Metabolize any reagents currently in our body and keep a reference for chem dose checking.
-	var/datum/reagents/metabolism/touching_reagents = metabolize_touching_reagents()
-	var/datum/reagents/metabolism/bloodstr_reagents = metabolize_injected_reagents()
-	var/datum/reagents/metabolism/ingested_reagents = metabolize_ingested_reagents()
+	var/list/metabolizing_holders = get_unique_metabolizing_reagent_holders()
+	if(length(metabolizing_holders))
+		var/list/tick_dosage_tracker = list() // Used to check if we're overdosing on anything.
+		for(var/datum/reagents/metabolism/holder as anything in metabolizing_holders)
+			holder.metabolize(tick_dosage_tracker)
+		// Check for overdosing.
+		var/size_modifier = (MOB_SIZE_MEDIUM / mob_size)
+		for(var/decl/material/R as anything in tick_dosage_tracker)
+			if(tick_dosage_tracker[R] > (R.overdose * ((R.flags & IGNORE_MOB_SIZE) ? 1 : size_modifier)))
+				R.affect_overdose(src)
 
 	// Update chem dosage.
 	// TODO: refactor chem dosage above isSynthetic() and GODMODE checks.
 	if(length(chem_doses))
 		for(var/T in chem_doses)
-			if(bloodstr_reagents?.has_reagent(T) || ingested_reagents?.has_reagent(T) || touching_reagents?.has_reagent(T))
+
+			var/still_processing_reagent = FALSE
+			for(var/datum/reagents/holder as anything in metabolizing_holders)
+				if(holder.has_reagent(T))
+					still_processing_reagent = TRUE
+					break
+			if(still_processing_reagent)
 				continue
-			var/decl/material/R = T
-			var/dose = LAZYACCESS(chem_doses, T) - initial(R.metabolism)*2
+			var/decl/material/R = GET_DECL(T)
+			var/dose = LAZYACCESS(chem_doses, T) - R.metabolism*2
 			LAZYSET(chem_doses, T, dose)
 			if(LAZYACCESS(chem_doses, T) <= 0)
 				LAZYREMOVE(chem_doses, T)
@@ -81,23 +125,6 @@
 		heal_organ_damage(brute_regen, burn_regen)
 		return TRUE
 
-/mob/living/proc/metabolize_touching_reagents()
-	var/datum/reagents/metabolism/touching_reagents = get_contact_reagents()
-	if(istype(touching_reagents))
-		touching_reagents.metabolize()
-		return touching_reagents
-		
-/mob/living/proc/metabolize_injected_reagents()
-	var/datum/reagents/metabolism/injected_reagents = get_injected_reagents()
-	if(istype(injected_reagents))
-		injected_reagents.metabolize()
-		return injected_reagents
-		
-/mob/living/proc/metabolize_ingested_reagents()
-	var/datum/reagents/metabolism/ingested_reagents = get_ingested_reagents()
-	if(istype(ingested_reagents))
-		ingested_reagents.metabolize()
-		return ingested_reagents
 
 /mob/living/proc/handle_random_events()
 	return
@@ -117,7 +144,7 @@
 	// If we're standing in the rain, use the turf weather.
 	. = istype(actual_loc) && actual_loc.weather
 	if(!.) // If we're under or inside shelter, use the z-level rain (for ambience)
-		. = global.weather_by_z["[my_turf.z]"]
+		. = SSweather.weather_by_z[my_turf.z]
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
 
@@ -185,8 +212,36 @@
 
 	handle_hud_icons()
 	handle_vision()
+	handle_low_light_vision()
 
 	return 1
+
+/mob/living/proc/handle_low_light_vision()
+
+	// No client means nothing to update.
+	if(!client || !lighting_master)
+		return
+
+	// No loc or species means we should just assume no adjustment.
+	var/decl/species/species = get_species()
+	var/turf/my_turf = get_turf(src)
+	if(!isturf(my_turf) || !species)
+		lighting_master.set_alpha(255)
+		return
+
+	// TODO: handling for being inside atoms.
+	var/target_value = 255 * (1-species.base_low_light_vision)
+	var/loc_lumcount = my_turf.get_lumcount()
+	if(loc_lumcount < species.low_light_vision_threshold)
+		target_value = round(target_value * (1-species.low_light_vision_effectiveness))
+
+	if(lighting_master.alpha == target_value)
+		return
+
+	var/difference = round((target_value-lighting_master.alpha) * species.low_light_vision_adjustment_speed)
+	if(abs(difference) > 1)
+		target_value = lighting_master.alpha + difference
+	lighting_master.set_alpha(target_value)
 
 /mob/living/proc/handle_vision()
 	update_sight()
@@ -213,7 +268,7 @@
 	else if(eyeobj)
 		if(eyeobj.owner != src)
 			reset_view(null)
-	else if(z_eye) 
+	else if(z_eye)
 		return
 	else if(client && !client.adminobs)
 		reset_view(null)
@@ -253,5 +308,25 @@
 /mob/living/proc/handle_hud_icons_health()
 	return
 
-/mob/living/proc/get_any_good_language(set_default=FALSE)
-	return get_default_language()
+/mob/living/singularity_act()
+	if(!simulated)
+		return 0
+	investigate_log("has been consumed by a singularity", "singulo")
+	gib()
+	return 20
+
+/mob/living/singularity_pull(S, current_size)
+	if(simulated)
+		if(current_size >= STAGE_THREE)
+			for(var/obj/item/hand in get_held_items())
+				if(prob(current_size*5) && hand.w_class >= (11-current_size)/2 && try_unequip(hand))
+					to_chat(src, SPAN_WARNING("\The [S] pulls \the [hand] from your grip!"))
+					hand.singularity_pull(S, current_size)
+			var/obj/item/shoes = get_equipped_item(slot_shoes_str)
+			if(!lying && !(shoes?.item_flags & ITEM_FLAG_NOSLIP))
+				var/decl/species/my_species = get_species()
+				if(!my_species?.check_no_slip(src) && prob(current_size*5))
+					to_chat(src, SPAN_DANGER("A strong gravitational force slams you to the ground!"))
+					SET_STATUS_MAX(src, STAT_WEAK, current_size)
+		apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
+	return ..()

@@ -7,14 +7,9 @@
 */
 /datum/extension/turf_hand
 	base_type = /datum/extension/turf_hand
-	var/priority = 1
 	expected_type = /atom
+	var/intercept_priority = 1
 
-/datum/extension/turf_hand/New(var/holder, var/priority = 1)
+/datum/extension/turf_hand/New(var/holder, var/_priority = 1)
 	..()
-	src.priority = priority
-
-
-/datum/extension/turf_hand/proc/OnHandInterception(var/mob/user)
-	var/atom/A = holder
-	return A.attack_hand(user)
+	intercept_priority = _priority

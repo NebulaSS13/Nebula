@@ -6,12 +6,12 @@
 	desc = "A sturdy looking voidsuit helmet rated to protect against radiation."
 	icon = 'icons/clothing/spacesuit/void/engineering/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	siemens_coefficient = 0.3
@@ -23,12 +23,12 @@
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	siemens_coefficient = 0.3
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
 
@@ -46,12 +46,12 @@
 	desc = "A scuffed voidsuit helmet with a boosted communication system and reinforced armor plating."
 	icon = 'icons/clothing/spacesuit/void/mining/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 
@@ -60,12 +60,12 @@
 	desc = "A grimy, decently armored voidsuit with purple blazes and extra insulation."
 	icon = 'icons/clothing/spacesuit/void/mining/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/stack/flag,/obj/item/suit_cooling_unit,/obj/item/storage/ore,/obj/item/t_scanner,/obj/item/pickaxe, /obj/item/rcd)
@@ -79,24 +79,24 @@
 	desc = "A bulbous voidsuit helmet with minor radiation shielding and a massive visor."
 	icon = 'icons/clothing/spacesuit/void/medical/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 
 /obj/item/clothing/suit/space/void/medical
 	name = "medical voidsuit"
 	desc = "A sterile voidsuit with minor radiation shielding and a suite of self-cleaning technology. Standard issue in most orbital medical facilities."
 	icon = 'icons/clothing/spacesuit/void/medical/suit.dmi'
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/stack/medical)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical)
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 
 /obj/item/clothing/suit/space/void/medical/prepared
@@ -109,12 +109,12 @@
 	desc = "A comfortable voidsuit helmet with cranial armor and eight-channel surround sound."
 	icon = 'icons/clothing/spacesuit/void/sec/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	siemens_coefficient = 0.3
 
@@ -123,12 +123,12 @@
 	desc = "A somewhat clumsy voidsuit layered with impact and laser-resistant armor plating. Specially designed to dissipate minor electrical charges."
 	icon = 'icons/clothing/spacesuit/void/sec/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	allowed = list(/obj/item/gun,/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/baton)
 	siemens_coefficient = 0.3
@@ -143,12 +143,12 @@
 	name = "atmospherics voidsuit helmet"
 	icon = 'icons/clothing/spacesuit/void/atmos/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
@@ -158,12 +158,12 @@
 	name = "atmos voidsuit"
 	icon = 'icons/clothing/spacesuit/void/atmos/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
@@ -189,12 +189,12 @@
 	desc = "A heavy, radiation-shielded voidsuit helmet with a surprisingly comfortable interior."
 	icon = 'icons/clothing/spacesuit/void/engineering_alt/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 
 /obj/item/clothing/suit/space/void/engineering/alt
@@ -202,12 +202,12 @@
 	desc = "A bulky industrial voidsuit. It's a few generations old, but a reliable design and radiation shielding make up for the lack of climate control."
 	icon = 'icons/clothing/spacesuit/void/engineering_alt/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 
 /obj/item/clothing/suit/space/void/engineering/alt/Initialize()
@@ -224,12 +224,12 @@
 	desc = "An armored voidsuit helmet. Someone must have through they were pretty cool when they painted a mohawk on it."
 	icon = 'icons/clothing/spacesuit/void/mining_alt/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 
 /obj/item/clothing/suit/space/void/mining/alt
@@ -237,12 +237,12 @@
 	desc = "A cheap prospecting voidsuit. What it lacks in comfort it makes up for in armor plating and street cred."
 	icon = 'icons/clothing/spacesuit/void/mining_alt/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 
 /obj/item/clothing/suit/space/void/mining/alt/prepared
@@ -254,24 +254,24 @@
 	desc = "A trendy, lightly radiation-shielded voidsuit helmet trimmed in a fetching blue."
 	icon = 'icons/clothing/spacesuit/void/medical_alt/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
 
 /obj/item/clothing/suit/space/void/medical/alt
 	name = "streamlined medical voidsuit"
 	desc = "A more recent and stylish model of Vey-Med voidsuit, with a minor upgrade to radiation shielding."
 	icon = 'icons/clothing/spacesuit/void/medical_alt/suit.dmi'
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/stack/medical)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical)
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
 
 /obj/item/clothing/suit/space/void/medical/alt/Initialize()
@@ -288,24 +288,24 @@
 	desc = "A somewhat tacky voidsuit helmet, a fact mitigated by heavy armor plating."
 	icon = 'icons/clothing/spacesuit/void/sec_alt/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR)
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR)
 
 /obj/item/clothing/suit/space/void/security/alt
 	name = "riot security voidsuit"
 	desc = "A heavily armored voidsuit, designed to intimidate people who find black intimidating. Surprisingly slimming."
 	icon = 'icons/clothing/spacesuit/void/sec_alt/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR)
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR)
 	allowed = list(/obj/item/gun,/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/baton)
 
 /obj/item/clothing/suit/space/void/security/alt/prepared
@@ -318,12 +318,12 @@
 	desc = "A voidsuit helmet plated with an expensive heat and radiation resistant ceramic."
 	icon = 'icons/clothing/spacesuit/void/atmos_alt/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
 
 /obj/item/clothing/suit/space/void/atmos/alt
@@ -331,12 +331,12 @@
 	desc = "An expensive voidsuit, rated to withstand extreme heat and even minor radiation without exceeding room temperature within."
 	icon = 'icons/clothing/spacesuit/void/atmos_alt/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 	)
 
 /obj/item/clothing/suit/space/void/atmos/alt/prepared
@@ -349,13 +349,13 @@
 	desc = "A heavily modified salvage voidsuit helmet. It has been fitted with radiation-resistant plating."
 	icon = 'icons/clothing/spacesuit/void/salvage/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
 
 /obj/item/clothing/suit/space/void/engineering/salvage
@@ -363,13 +363,13 @@
 	desc = "A hand-me-down salvage voidsuit. It has obviously had a lot of repair work done to its radiation shielding."
 	icon = 'icons/clothing/spacesuit/void/salvage/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
 
@@ -383,11 +383,11 @@
 	name = "pilot voidsuit helmet"
 	icon = 'icons/clothing/spacesuit/void/pilot/helmet.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 
 /obj/item/clothing/suit/space/void/pilot
@@ -395,11 +395,11 @@
 	name = "pilot voidsuit"
 	icon = 'icons/clothing/spacesuit/void/pilot/suit.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
 

@@ -12,7 +12,7 @@
 		else if(length(grabbed_by))
 			var/draw_under = TRUE
 			var/adjust_layer = FALSE
-			for(var/obj/item/grab/G AS_ANYTHING in grabbed_by)
+			for(var/obj/item/grab/G as anything in grabbed_by)
 				if(get_dir(G.assailant, src) & SOUTH)
 					draw_under = FALSE
 				if(G.current_grab.adjust_plane)
@@ -31,7 +31,7 @@
 		if(buckled && buckled.buckle_layer_above)
 			new_plane = buckled.plane
 		else if(length(grabbed_by))
-			for(var/obj/item/grab/G AS_ANYTHING in grabbed_by)
+			for(var/obj/item/grab/G as anything in grabbed_by)
 				if(G.current_grab.adjust_plane)
 					new_plane = max(new_plane, G.assailant.plane)
 	if(last_plane != new_plane)
@@ -66,7 +66,7 @@
 	if(isturf(loc))
 		// Update offsets from grabs.
 		if(length(grabbed_by))
-			for(var/obj/item/grab/G AS_ANYTHING in grabbed_by)
+			for(var/obj/item/grab/G as anything in grabbed_by)
 				var/grab_dir = get_dir(G.assailant, src)
 				if(grab_dir && G.current_grab.shift > 0)
 					if(grab_dir & WEST)
@@ -90,7 +90,13 @@
 			if(istext(pixel_shift))
 				pixel_shift = cached_json_decode(pixel_shift)
 			if(islist(pixel_shift))
-				var/list/directional_offset = LAZYACCESS(pixel_shift, "[dir]")
+				var/list/directional_offset = LAZYACCESS(pixel_shift, num2text(dir))
+				// Unset diagonals should be substituted with the appropriate NSEW value.
+				if(!directional_offset)
+					if(dir & EAST)
+						directional_offset = LAZYACCESS(pixel_shift, num2text(EAST))
+					else if(dir & WEST)
+						directional_offset = LAZYACCESS(pixel_shift, num2text(WEST))
 				if(islist(directional_offset))
 					pixel_shift = directional_offset
 				new_pixel_x += pixel_shift["x"] || 0

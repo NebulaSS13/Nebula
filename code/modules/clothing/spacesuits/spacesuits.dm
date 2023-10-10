@@ -7,13 +7,12 @@
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	icon = 'icons/clothing/spacesuit/generic/helmet.dmi'
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
-	flags_inv = BLOCKHAIR
 	permeability_coefficient = 0
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -47,6 +46,9 @@
 		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_tint
 		update_tint()
 
+/obj/item/clothing/head/helmet/space/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	return TRUE
+
 /obj/item/clothing/head/helmet/space/proc/toggle_camera()
 	set name = "Toggle Helmet Camera"
 	set category = "Object"
@@ -72,10 +74,10 @@
 /obj/item/clothing/head/helmet/space/proc/update_tint()
 	if(tinted)
 		flash_protection = FLASH_PROTECTION_MAJOR
-		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	else
 		flash_protection = FLASH_PROTECTION_NONE
-		flags_inv = HIDEEARS|BLOCKHAIR
+		flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
 	update_icon()
 	update_clothing_icon()
 
@@ -118,8 +120,8 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/suit_cooling_unit)
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = SLOT_UPPER_BODY | SLOT_LOWER_BODY | SLOT_LEGS | SLOT_FEET | SLOT_ARMS | SLOT_HANDS

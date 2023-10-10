@@ -82,7 +82,7 @@
 		qdel(G)
 		move_into_gibber(user,G.affecting)
 	else if(istype(W, /obj/item/organ))
-		if(!user.unEquip(W))
+		if(!user.try_unequip(W))
 			return
 		qdel(W)
 		user.visible_message("<span class='danger'>\The [user] feeds \the [W] into \the [src], obliterating it.</span>")
@@ -143,7 +143,7 @@
 /obj/machinery/gibber/proc/go_out()
 	if(operating || !src.occupant)
 		return
-	for(var/obj/O in (contents - component_parts))
+	for(var/obj/O in get_contained_external_atoms())
 		O.dropInto(loc)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
@@ -211,7 +211,7 @@
 	qdel(occupant)
 
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-	for (var/obj/thing in (contents - component_parts))
+	for (var/obj/thing in get_contained_external_atoms())
 		// There's a chance that the gibber will fail to destroy some evidence.
 		if(istype(thing,/obj/item/organ) && prob(80))
 			qdel(thing)

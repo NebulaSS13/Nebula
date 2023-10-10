@@ -9,7 +9,7 @@
 	idle_power_usage = 15
 
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/gas,
@@ -18,9 +18,9 @@
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/meter = 1)
 
-	frame_type = /obj/item/machine_chassis/pipe_meter/base
+	frame_type = /obj/item/machine_chassis/pipe_meter
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
-	base_type = /obj/machinery/meter/buildable
+	base_type = /obj/machinery/meter
 
 /obj/machinery/meter/Initialize()
 	. = ..()
@@ -64,16 +64,16 @@
 		return 0
 
 	var/env_pressure = environment.return_pressure()
-	if(env_pressure <= 0.15*ONE_ATMOSPHERE)
+	if(env_pressure <= (0.15 ATM))
 		icon_state = "meter0"
-	else if(env_pressure <= 1.8*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*0.3) + 0.5)
+	else if(env_pressure <= (1.8 ATM))
+		var/val = round(env_pressure/(0.3 ATM) + 0.5)
 		icon_state = "meter1_[val]"
-	else if(env_pressure <= 30*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*5)-0.35) + 1
+	else if(env_pressure <= (30 ATM))
+		var/val = round(env_pressure/(5 ATM)-0.35) + 1
 		icon_state = "meter2_[val]"
-	else if(env_pressure <= 59*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*5) - 6) + 1
+	else if(env_pressure <= (59 ATM))
+		var/val = round(env_pressure/(5 ATM) - 6) + 1
 		icon_state = "meter3_[val]"
 	else
 		icon_state = "meter4"
@@ -103,13 +103,10 @@
 		set_target(loc)
 	. = ..()
 
-/obj/machinery/meter/buildable
-	uncreated_component_parts = null
-
 /obj/machinery/meter/starts_with_radio
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/transmitter/basic/buildable,
-		/obj/item/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/power/apc
 	)
 
 /decl/stock_part_preset/radio/basic_transmitter/meter

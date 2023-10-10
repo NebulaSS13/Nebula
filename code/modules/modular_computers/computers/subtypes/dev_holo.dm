@@ -50,14 +50,14 @@
 		preset.filename    = "temp[rand(1,100)]"
 		preset.stored_data = preset_text
 
-		D.store_file(preset)
-		var/datum/computer_file/program/wordprocessor/word = D.find_file_by_name("wordprocessor")
+		D.store_file(preset, OS_DOCUMENTS_DIR)
+		var/datum/computer_file/program/wordprocessor/word = D.find_file_by_name("wordprocessor", OS_PROGRAMS_DIR)
 		word.open_file   = preset.filename
 		word.loaded_data = preset.stored_data
 
 // Visual.
 /obj/item/modular_computer/holotablet/on_update_icon()
-	cut_overlays()
+	. = ..()
 	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly && assembly.enabled)

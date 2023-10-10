@@ -48,7 +48,7 @@
 						/obj/item/clothing/mask/gas = slot_wear_mask_str,
 						/obj/item/clothing/shoes/color/black = slot_shoes_str,
 						/obj/item/storage/toolbox/mechanical = BP_R_HAND,
-						/obj/item/extinguisher = BP_L_HAND)
+						/obj/item/chems/spray/extinguisher = BP_L_HAND)
 
 /spell/toggle_armor/caretaker
 	name = "Toggle Armor (Caretaker)"

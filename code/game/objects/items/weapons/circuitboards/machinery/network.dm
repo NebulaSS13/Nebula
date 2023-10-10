@@ -20,19 +20,18 @@
 	additional_spawn_components = list(
 		/obj/item/stock_parts/power/apc/buildable = 1,
 		/obj/item/stock_parts/console_screen = 1,
-		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/computer/card_slot = 1
+		/obj/item/stock_parts/keyboard = 1
 	)
 
 /obj/item/stock_parts/circuitboard/router
 	name = "circuitboard (router)"
 	build_path = /obj/machinery/network/router
 	board_type = "machine"
-	origin_tech = "{'wormholes':2,'programming':2}"
+	origin_tech = "{'programming':2,'magnets':3}"
 	req_components = list(
 		/obj/item/stock_parts/subspace/filter = 1,
-		/obj/item/stock_parts/subspace/crystal = 1,
-		/obj/item/stock_parts/computer/network_card = 1
+		/obj/item/stock_parts/scanning_module = 1,
+		/obj/item/stock_parts/micro_laser = 1
 	)
 	additional_spawn_components = list(
 		/obj/item/stock_parts/power/apc/buildable = 1,
@@ -49,12 +48,30 @@
 	name = "circuitboard (relay)"
 	build_path = /obj/machinery/network/relay
 	board_type = "machine"
-	origin_tech = "{'wormholes':2,'programming':2}"
+	origin_tech = "{'programming':2,'magnets':2}"
 	req_components = list(
 		/obj/item/stock_parts/subspace/filter = 1,
-		/obj/item/stock_parts/subspace/crystal = 1,
-		/obj/item/stock_parts/computer/network_card = 1
+		/obj/item/stock_parts/micro_laser = 1,
+		/obj/item/stock_parts/scanning_module = 1,
+		)
+
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1,
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1
 	)
+
+/obj/item/stock_parts/circuitboard/modem
+	name = "circuitboard (modem)"
+	build_path = /obj/machinery/network/modem
+	board_type = "machine"
+	origin_tech = "{'programming':2,'magnets':2}"
+	req_components = list(
+		/obj/item/stock_parts/subspace/filter = 1,
+		/obj/item/stock_parts/capacitor = 1,
+		/obj/item/stock_parts/scanning_module = 1
+		)
+
 	additional_spawn_components = list(
 		/obj/item/stock_parts/power/apc/buildable = 1,
 		/obj/item/stock_parts/console_screen = 1,
@@ -69,10 +86,11 @@
 /obj/item/stock_parts/circuitboard/relay/long_range
 	name = "circuitboard (long-ranged relay)"
 	build_path = /obj/machinery/network/relay/long_range
-	origin_tech = "{'wormholes':3,'programming':4}"
+	origin_tech = "{'programming':4,'magnets':5,'wormholes':5}"
 	req_components = list(
-		/obj/item/stock_parts/subspace/filter = 1,
-		/obj/item/stock_parts/subspace/crystal = 2,
 		/obj/item/stock_parts/subspace/ansible = 1,
-		/obj/item/stock_parts/computer/network_card = 1
-	)
+		/obj/item/stock_parts/subspace/amplifier = 1,
+		/obj/item/stock_parts/scanning_module = 1,
+		/obj/item/stock_parts/subspace/transmitter = 1,
+		/obj/item/stock_parts/micro_laser/high = 1
+		)

@@ -2,7 +2,9 @@
 	name = "blood packs box"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
-	startswith = list(/obj/item/chems/ivbag = 7)
+
+/obj/item/storage/box/bloodpacks/WillContain()
+	return list(/obj/item/chems/ivbag = 7)
 
 /obj/item/chems/ivbag
 	name = "\improper IV bag"
@@ -23,22 +25,18 @@
 	. = ..()
 
 /obj/item/chems/ivbag/on_reagent_change()
-	update_icon()
+	..()
 	if(reagents.total_volume > volume/2)
 		w_class = ITEM_SIZE_SMALL
 	else
 		w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/ivbag/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	var/percent = round(reagents.total_volume / volume * 100)
 	if(reagents.total_volume)
-		var/image/filling = image('icons/obj/bloodpack.dmi', "[round(percent,25)]")
-		filling.color = reagents.get_color()
-		overlays += filling
-	overlays += image('icons/obj/bloodpack.dmi', "top")
-	if(attached)
-		overlays += image('icons/obj/bloodpack.dmi', "dongle")
+		add_overlay(overlay_image(icon, "[round(percent,25)]", reagents.get_color()))
+	add_overlay(attached? "dongle" : "top")
 
 /obj/item/chems/ivbag/handle_mouse_drop(atom/over, mob/user)
 	if(ismob(loc))
@@ -75,34 +73,43 @@
 	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_INJECT)
 	update_icon()
 
-/obj/item/chems/ivbag/nanoblood/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nanoblood, volume)
-
 /obj/item/chems/ivbag/blood
 	name = "blood pack"
-	var/blood_type = null
+	var/blood_fill_type = /decl/material/liquid/blood
 
-/obj/item/chems/ivbag/blood/Initialize()
-	. = ..()
-	if(blood_type)
-		name = "blood pack ([blood_type])"
-		reagents.add_reagent(/decl/material/liquid/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
+/obj/item/chems/ivbag/blood/proc/get_initial_blood_data()
+	return list(
+		"donor" = null,
+		"blood_DNA" = null,
+		"blood_type" = label_text,
+		"trace_chem" = null
+	)
 
-/obj/item/chems/ivbag/blood/APlus
-	blood_type = "A+"
+/obj/item/chems/ivbag/blood/populate_reagents()
+	if(blood_fill_type)
+		reagents.add_reagent(blood_fill_type, reagents.maximum_volume, get_initial_blood_data())
 
-/obj/item/chems/ivbag/blood/AMinus
-	blood_type = "A-"
+/obj/item/chems/ivbag/blood/nanoblood
+	label_text = "synthetic"
+	blood_fill_type = /decl/material/liquid/nanoblood
 
-/obj/item/chems/ivbag/blood/BPlus
-	blood_type = "B+"
+/obj/item/chems/ivbag/blood/nanoblood/get_initial_blood_data()
+	return null
 
-/obj/item/chems/ivbag/blood/BMinus
-	blood_type = "B-"
+/obj/item/chems/ivbag/blood/aplus
+	label_text = "A+"
 
-/obj/item/chems/ivbag/blood/OPlus
-	blood_type = "O+"
+/obj/item/chems/ivbag/blood/aminus
+	label_text = "A-"
 
-/obj/item/chems/ivbag/blood/OMinus
-	blood_type = "O-"
+/obj/item/chems/ivbag/blood/bplus
+	label_text = "B+"
+
+/obj/item/chems/ivbag/blood/bminus
+	label_text = "B-"
+
+/obj/item/chems/ivbag/blood/oplus
+	label_text = "O+"
+
+/obj/item/chems/ivbag/blood/ominus
+	label_text = "O-"

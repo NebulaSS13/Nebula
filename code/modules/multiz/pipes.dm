@@ -13,9 +13,6 @@
 	dir = SOUTH
 	initialize_directions = SOUTH
 
-	var/minimum_temperature_difference = 300
-	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
-
 	level = 1
 
 /obj/machinery/atmospherics/pipe/zpipe/check_pressure(pressure)
@@ -129,15 +126,13 @@
 /obj/machinery/atmospherics/pipe/zpipe/up/fuel
 	name = "upwards fuel pipe"
 	color = PIPE_COLOR_ORANGE
-	maximum_pressure = 420*ONE_ATMOSPHERE
-	fatigue_pressure = 350*ONE_ATMOSPHERE
-	alert_pressure = 350*ONE_ATMOSPHERE
+	maximum_pressure = 420 ATM
+	fatigue_pressure = 350 ATM
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/zpipe/down/fuel
 	name = "downwards fuel pipe"
 	color = PIPE_COLOR_ORANGE
-	maximum_pressure = 420*ONE_ATMOSPHERE
-	fatigue_pressure = 350*ONE_ATMOSPHERE
-	alert_pressure = 350*ONE_ATMOSPHERE
+	maximum_pressure = 420 ATM
+	fatigue_pressure = 350 ATM
 	connect_types = CONNECT_TYPE_FUEL

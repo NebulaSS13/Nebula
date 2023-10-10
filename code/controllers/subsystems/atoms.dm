@@ -38,9 +38,14 @@ SUBSYSTEM_DEF(atoms)
 	var/count = created_atoms.len
 	while(created_atoms.len)
 		var/atom/A = created_atoms[created_atoms.len]
+		var/list/atom_args = created_atoms[A]
 		created_atoms.len--
-		if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
-			InitAtom(A, GetArguments(A, mapload_arg))
+		if(!QDELETED(A) && !(A.atom_flags & ATOM_FLAG_INITIALIZED))
+			if(atom_args)
+				atom_args.Insert(1, TRUE)
+				InitAtom(A, atom_args)
+			else
+				InitAtom(A, mapload_arg)
 			CHECK_TICK
 
 	// If wondering why not just store all atoms in created_atoms and use the block above: that turns out unbearably expensive.
@@ -48,8 +53,8 @@ SUBSYSTEM_DEF(atoms)
 	// We do this exactly once.
 	if(!initialized)
 		for(var/atom/A in world)
-			if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
-				InitAtom(A, GetArguments(A, mapload_arg, FALSE))
+			if(!QDELETED(A) && !(A.atom_flags & ATOM_FLAG_INITIALIZED))
+				InitAtom(A, mapload_arg)
 				++count
 				CHECK_TICK
 
@@ -87,6 +92,7 @@ SUBSYSTEM_DEF(atoms)
 				else
 					A.LateInitialize(arglist(arguments))
 			if(INITIALIZE_HINT_QDEL)
+				A.atom_flags |= ATOM_FLAG_INITIALIZED // never call EarlyDestroy if we return this hint
 				qdel(A)
 				qdeleted = TRUE
 			else
@@ -98,21 +104,6 @@ SUBSYSTEM_DEF(atoms)
 		BadInitializeCalls[the_type] |= BAD_INIT_DIDNT_INIT
 
 	return qdeleted || QDELING(A)
-
-// override and GetArguments() exists for mod-override/downstream hook functionality.
-// Useful for total-overhaul type modifications.
-/atom/proc/AdjustInitializeArguments(list/arguments)
-	// Lists are passed by reference so can simply modify the arguments list without returning it
-
-/datum/controller/subsystem/atoms/proc/GetArguments(atom/A, list/mapload_arg, created=TRUE)
-	if(!created && !adjust_init_arguments)
-		return mapload_arg // Performance optimization. Nothing to do.
-	var/list/arguments = mapload_arg.Copy()
-	if(created && created_atoms[A])
-		arguments += created_atoms[A]
-	if(adjust_init_arguments)
-		A.AdjustInitializeArguments(arguments)
-	return arguments
 
 /datum/controller/subsystem/atoms/stat_entry(msg)
 	..("Bad Initialize Calls:[BadInitializeCalls.len]")
@@ -149,8 +140,3 @@ SUBSYSTEM_DEF(atoms)
 	var/initlog = InitLog()
 	if(initlog)
 		text2file(initlog, "[global.log_directory]/initialize.log")
-
-#undef BAD_INIT_QDEL_BEFORE
-#undef BAD_INIT_DIDNT_INIT
-#undef BAD_INIT_SLEPT
-#undef BAD_INIT_NO_HINT

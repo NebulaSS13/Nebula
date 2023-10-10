@@ -87,7 +87,7 @@
 		. = owned_field.bullet_act(Proj)
 
 /obj/machinery/fusion_core/proc/set_strength(var/value)
-	value = Clamp(value, MIN_FIELD_STR, MAX_FIELD_STR)
+	value = clamp(value, MIN_FIELD_STR, MAX_FIELD_STR)
 	field_strength = value
 	change_power_consumption(5 * value, POWER_USE_ACTIVE)
 	if(owned_field)
@@ -104,12 +104,12 @@
 		to_chat(user,"<span class='warning'>Shut \the [src] off first!</span>")
 		return
 
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
 
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		if(anchored)

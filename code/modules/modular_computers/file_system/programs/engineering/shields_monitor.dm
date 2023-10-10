@@ -8,6 +8,8 @@
 	extended_desc = "This program connects to shield generators and monitors their statuses."
 	ui_header = "shield.gif"
 	network_destination = "shields monitoring system"
+	requires_network = 1
+	requires_network_feature = NET_FEATURE_SYSTEMCONTROL
 	size = 10
 	category = PROG_ENG
 
@@ -23,7 +25,7 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return FALSE
-	return ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
+	return LEVELS_ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
 
 /datum/nano_module/program/shields_monitor/proc/get_shields()
 	var/list/shields = list()

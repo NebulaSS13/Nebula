@@ -68,18 +68,12 @@
 	var/wiresexposed = 0
 	var/locked = 1
 	var/has_power = 1
-	var/spawn_module = null
 
 	var/spawn_sound = 'sound/voice/liveagain.ogg'
 	var/pitch_toggle = 1
 	var/list/req_access = list(access_robotics)
 	var/ident = 0
-	var/viewalerts = 0
 	var/modtype = "Default"
-	var/lower_mod = 0
-	var/jetpack = 0
-	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
-	var/jeton = 0
 	var/killswitch = 0
 	var/killswitch_time = 60
 	var/weapon_lock = 0
@@ -223,6 +217,8 @@
 	connected_ai = null
 	QDEL_NULL(module)
 	QDEL_NULL(wires)
+	QDEL_NULL(cell)
+	QDEL_LIST_ASSOC_VAL(components)
 	. = ..()
 
 /mob/living/silicon/robot/proc/reset_module(var/suppress_alert = null)
@@ -471,7 +467,7 @@
 		for(var/V in components)
 			var/datum/robot_component/C = components[V]
 			if(!C.installed && C.accepts_component(W))
-				if(!user.unEquip(W))
+				if(!user.try_unequip(W))
 					return
 				C.installed = 1
 				C.wrapped = W
@@ -480,8 +476,8 @@
 
 				var/obj/item/robot_parts/robot_component/WC = W
 				if(istype(WC))
-					C.brute_damage = WC.brute
-					C.electronics_damage = WC.burn
+					C.brute_damage = WC.brute_damage
+					C.electronics_damage = WC.burn_damage
 
 				to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
 				return
@@ -489,7 +485,7 @@
 		if(try_stock_parts_install(W, user))
 			return
 
-	if(isWelder(W) && user.a_intent != I_HURT)
+	if(IS_WELDER(W) && user.a_intent != I_HURT)
 		if (src == user)
 			to_chat(user, "<span class='warning'>You lack the reach to be able to repair yourself.</span>")
 			return
@@ -498,7 +494,7 @@
 			to_chat(user, "Nothing to fix here!")
 			return
 		var/obj/item/weldingtool/WT = W
-		if (WT.remove_fuel(0))
+		if (WT.weld(0))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustBruteLoss(-30)
 			updatehealth()
@@ -519,7 +515,7 @@
 			updatehealth()
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the burnt wires on \the [src]!"))
 
-	else if(isCrowbar(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
+	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
 		if(opened)
 			if(cell)
 				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
@@ -555,8 +551,8 @@
 					var/datum/robot_component/C = components[remove]
 					var/obj/item/robot_parts/robot_component/I = C.wrapped
 					if(istype(I))
-						I.brute = C.brute_damage
-						I.burn = C.electronics_damage
+						I.set_bruteloss(C.brute_damage)
+						I.set_burnloss(C.electronics_damage)
 
 					removed_item = I
 					if(C.installed == 1)
@@ -586,7 +582,7 @@
 			to_chat(user, "There is a power cell already installed.")
 		else if(W.w_class != ITEM_SIZE_NORMAL)
 			to_chat(user, "\The [W] is too [W.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
-		else if(user.unEquip(W, src))
+		else if(user.try_unequip(W, src))
 			cell = W
 			handle_selfinsert(W, user) //Just in case.
 			to_chat(user, "You insert the power cell.")
@@ -597,17 +593,17 @@
 			C.brute_damage = 0
 			C.electronics_damage = 0
 
-	else if(isWirecutter(W) || isMultitool(W))
+	else if(IS_WIRECUTTER(W) || IS_MULTITOOL(W))
 		if (wiresexposed)
 			wires.Interact(user)
 		else
 			to_chat(user, "You can't reach the wiring.")
-	else if(isScrewdriver(W) && opened && !cell)	// haxing
+	else if(IS_SCREWDRIVER(W) && opened && !cell)	// haxing
 		wiresexposed = !wiresexposed
 		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"].")
 		update_icon()
 
-	else if(isScrewdriver(W) && opened && cell)	// radio
+	else if(IS_SCREWDRIVER(W) && opened && cell)	// radio
 		if(silicon_radio)
 			silicon_radio.attackby(W,user)//Push it to the radio to let it handle everything
 		else
@@ -641,7 +637,7 @@
 			to_chat(usr, "The upgrade is locked and cannot be used yet!")
 		else
 			if(U.action(src))
-				if(!user.unEquip(U, src))
+				if(!user.try_unequip(U, src))
 					return
 				to_chat(usr, "You apply the upgrade to [src]!")
 				handle_selfinsert(W, user)
@@ -758,7 +754,7 @@
 			dat += text("[obj]: <B>Activated</B><BR>")
 		else
 			dat += text("[obj]: <A HREF=?src=\ref[src];act=\ref[obj]>Activate</A><BR>")
-	if (emagged)
+	if (emagged && module.emag)
 		if(activated(module.emag))
 			dat += text("[module.emag]: <B>Activated</B><BR>")
 		else
@@ -798,18 +794,21 @@
 			module_state_1 = O
 			O.hud_layerise()
 			O.forceMove(src)
+			O.equipped_robot()
 			if(istype(module_state_1,/obj/item/borg/sight))
 				sight_mode |= module_state_1:sight_mode
 		else if(!module_state_2)
 			module_state_2 = O
 			O.hud_layerise()
 			O.forceMove(src)
+			O.equipped_robot()
 			if(istype(module_state_2,/obj/item/borg/sight))
 				sight_mode |= module_state_2:sight_mode
 		else if(!module_state_3)
 			module_state_3 = O
 			O.hud_layerise()
 			O.forceMove(src)
+			O.equipped_robot()
 			if(istype(module_state_3,/obj/item/borg/sight))
 				sight_mode |= module_state_3:sight_mode
 		else
@@ -863,14 +862,19 @@
 					else if(istype(A, /mob/living/carbon/human))
 						var/mob/living/carbon/human/cleaned_human = A
 						if(cleaned_human.lying)
-							if(cleaned_human.head)
-								cleaned_human.head.clean_blood()
-							if(cleaned_human.wear_suit)
-								cleaned_human.wear_suit.clean_blood()
-							else if(cleaned_human.w_uniform)
-								cleaned_human.w_uniform.clean_blood()
-							if(cleaned_human.shoes)
-								cleaned_human.shoes.clean_blood()
+							var/obj/item/head = cleaned_human.get_equipped_item(slot_head_str)
+							if(head)
+								head.clean_blood()
+							var/obj/item/suit = cleaned_human.get_equipped_item(slot_wear_suit_str)
+							if(suit)
+								suit.clean_blood()
+							else
+								var/obj/item/uniform = cleaned_human.get_equipped_item(slot_w_uniform_str)
+								if(uniform)
+									uniform.clean_blood()
+							var/obj/item/shoes = cleaned_human.get_equipped_item(slot_shoes_str)
+							if(shoes)
+								shoes.clean_blood()
 							cleaned_human.clean_blood(1)
 							to_chat(cleaned_human, "<span class='warning'>[src] cleans your face!</span>")
 		return
@@ -987,8 +991,8 @@
 	if(is_component_functioning("comms"))
 		var/datum/robot_component/RC = get_component("comms")
 		use_power(RC.active_usage)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/first_arg, var/second_arg)
 	if(!connected_ai)
@@ -1105,3 +1109,22 @@
 
 /mob/living/silicon/robot/handle_pre_transformation()
 	QDEL_NULL(mmi)
+
+/mob/living/silicon/robot/do_flash_animation()
+	set waitfor = FALSE
+	var/atom/movable/overlay/animation = new(src)
+	animation.plane = plane
+	animation.layer = layer + 0.01
+	animation.icon_state = "blank"
+	animation.icon = 'icons/mob/mob.dmi'
+	flick("blspell", animation)
+	sleep(5)
+	qdel(animation)
+
+/mob/living/silicon/robot/proc/handle_radio_transmission()
+	if(!is_component_functioning("radio"))
+		return FALSE
+	var/datum/robot_component/CO = get_component("radio")
+	if(!CO || !cell_use_power(CO.active_usage))
+		return FALSE
+	return TRUE

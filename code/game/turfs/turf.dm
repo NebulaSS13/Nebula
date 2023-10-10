@@ -1,8 +1,14 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
 	level = 1
-
+	abstract_type = /turf
+	is_spawnable_type = TRUE
 	layer = TURF_LAYER
+
+	/// Will participate in ZAS, join zones, etc.
+	var/zone_membership_candidate = FALSE
+	/// Will participate in external atmosphere simulation if the turf is outside and no zone is set.
+	var/external_atmosphere_participation = TRUE
 
 	var/turf_flags
 
@@ -19,9 +25,7 @@
 	var/blocks_air = 0          // Does this turf contain air/let air through?
 
 	// General properties.
-	var/icon_old = null
 	var/pathweight = 1          // How much does it cost to pathfind over this turf?
-	var/blessed = 0             // Has the turf been blessed?
 
 	var/list/decals
 
@@ -37,11 +41,11 @@
 	var/tmp/changing_turf
 	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
 
-	// Some quick notes on the vars below: is_outside should be left set to OUTSIDE_AREA unless you 
+	// Some quick notes on the vars below: is_outside should be left set to OUTSIDE_AREA unless you
 	// EXPLICITLY NEED a turf to have a different outside state to its area (ie. you have used a
-	// roofing tile). By default, it will ask the area for the state to use, and will update on 
-	// area change. When dealing with weather, it will check the entire z-column for interruptions 
-	// that will prevent it from using its own state, so a floor above a level will generally 
+	// roofing tile). By default, it will ask the area for the state to use, and will update on
+	// area change. When dealing with weather, it will check the entire z-column for interruptions
+	// that will prevent it from using its own state, so a floor above a level will generally
 	// override both area is_outside, and turf is_outside. The only time the base value will be used
 	// by itself is if you are dealing with a non-multiz level, or the top level of a multiz chunk.
 
@@ -52,6 +56,23 @@
 	// TL;DR: just leave these vars alone.
 	var/tmp/obj/abstract/weather_system/weather
 	var/tmp/is_outside = OUTSIDE_AREA
+	var/tmp/last_outside_check = OUTSIDE_UNCERTAIN
+
+	///The cached air mixture of a turf. Never directly access, use `return_air()`.
+	//This exists to store air during zone rebuilds, as well as for unsimulated turfs.
+	//They are never deleted to not overwhelm the garbage collector.
+	var/datum/gas_mixture/air
+	///Is this turf queued in the TURFS cycle of SSair?
+	var/needs_air_update = 0
+
+	///The turf's current zone.
+	var/zone/zone
+	///All directions in which a turf that can contain air is present.
+	var/airflow_open_directions
+
+	/// Used by exterior turfs to determine the warming effect of campfires and such.
+	var/list/affecting_heat_sources
+
 
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
@@ -61,7 +82,7 @@
 		PRINT_STACK_TRACE("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	if(light_power && light_range)
+	if (light_range && light_power)
 		update_light()
 
 	if(dynamic_lighting)
@@ -69,6 +90,7 @@
 	else
 		luminosity = 1
 
+	SSambience.queued += src
 
 	if (opacity)
 		has_opaque_atom = TRUE
@@ -87,7 +109,7 @@
 	if(flooded && !density)
 		make_flooded(TRUE)
 
-	initialize_ambient_light(mapload)
+	refresh_vis_contents()
 
 	return INITIALIZE_HINT_NORMAL
 
@@ -96,20 +118,29 @@
 	if(user && weather)
 		weather.examine(user)
 
-/turf/proc/initialize_ambient_light(var/mapload)
-	return
-
-/turf/proc/update_ambient_light(var/mapload)
-	return
-
 /turf/Destroy()
+
+	if(zone)
+		if(can_safely_remove_from_zone())
+			c_copy_air()
+			zone.remove(src)
+		else
+			zone.rebuild()
+
+	if(LAZYLEN(affecting_heat_sources))
+		for(var/thing in affecting_heat_sources)
+			var/obj/structure/fire_source/heat_source = thing
+			LAZYREMOVE(heat_source.affected_exterior_turfs, src)
+		affecting_heat_sources = null
 
 	if (!changing_turf)
 		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
 	changing_turf = FALSE
 
-	remove_cleanables()
+	if (contents.len > !!lighting_overlay)
+		remove_cleanables()
+
 	REMOVE_ACTIVE_FLUID_SOURCE(src)
 
 	if (ao_queued)
@@ -130,6 +161,7 @@
 		weather = null
 
 	..()
+
 	return QDEL_HINT_IWILLGC
 
 /turf/explosion_act(severity)
@@ -137,37 +169,31 @@
 	return
 
 /turf/proc/is_solid_structure()
-	return 1
+	return !(turf_flags & TURF_FLAG_BACKGROUND) || locate(/obj/structure/lattice, src)
 
-/turf/proc/get_base_movement_delay()
+/turf/proc/get_base_movement_delay(var/travel_dir, var/mob/mover)
 	return movement_delay
 
-/turf/proc/get_movement_delay(var/travel_dir)
-	. = get_base_movement_delay()
+/turf/proc/get_terrain_movement_delay(var/travel_dir, var/mob/mover)
+	. = get_base_movement_delay(travel_dir, mover)
 	if(weather)
 		. += weather.get_movement_delay(return_air(), travel_dir)
 
 /turf/attack_hand(mob/user)
-	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-
-	if(user.restrained())
-		return 0
-
-	. = handle_hand_interception(user)
-
-/turf/proc/handle_hand_interception(var/mob/user)
-	var/datum/extension/turf_hand/THE
-	for (var/A in src)
-		var/datum/extension/turf_hand/TH = get_extension(A, /datum/extension/turf_hand)
-		if (istype(TH) && TH.priority > THE?.priority) //Only overwrite if the new one is higher. For matching values, its first come first served
-			THE = TH
-
-	if (THE)
-		return THE.OnHandInterception(user)
+	SHOULD_CALL_PARENT(FALSE)
+	var/datum/extension/turf_hand/highest_priority_intercept
+	for(var/atom/thing in contents)
+		var/datum/extension/turf_hand/intercept = get_extension(thing, /datum/extension/turf_hand)
+		if(intercept?.intercept_priority > highest_priority_intercept?.intercept_priority)
+			highest_priority_intercept = intercept
+	if(highest_priority_intercept)
+		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+		var/atom/intercepting_atom = highest_priority_intercept.holder
+		return intercepting_atom.attack_hand(user)
+	return FALSE
 
 /turf/attack_robot(var/mob/user)
-	if(Adjacent(user))
-		attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /turf/attackby(obj/item/W, mob/user)
 
@@ -237,7 +263,7 @@
 				return 0
 	return 1 //Nothing found to block so return success!
 
-/turf/proc/adjacent_fire_act(turf/simulated/floor/source, exposed_temperature, exposed_volume)
+/turf/proc/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	return
 
 /turf/proc/is_plating()
@@ -304,7 +330,7 @@
 
 // Called when turf is hit by a thrown object
 /turf/hitby(atom/movable/AM, var/datum/thrownthing/TT)
-	..()
+	SHOULD_CALL_PARENT(FALSE) // /atom/hitby() applies damage to AM if it's a living mob.
 	if(density)
 		if(isliving(AM))
 			var/mob/living/M = AM
@@ -372,13 +398,10 @@
 /turf/proc/is_floor()
 	return FALSE
 
-/turf/proc/get_footstep_sound(var/mob/caller)
-	return
-
 /turf/proc/update_weather(var/obj/abstract/weather_system/new_weather, var/force_update_below = FALSE)
 
 	if(isnull(new_weather))
-		new_weather = global.weather_by_z["[z]"]
+		new_weather = SSweather.weather_by_z[z]
 
 	// We have a weather system and we are exposed to it; update our vis contents.
 	if(istype(new_weather) && is_outside())
@@ -408,36 +431,71 @@
 	if(density)
 		return OUTSIDE_NO
 
-	// What would we like to return in an ideal world?
-	if(is_outside == OUTSIDE_AREA)
+	if(last_outside_check != OUTSIDE_UNCERTAIN)
+		return last_outside_check
+
+	// What is our local outside value?
+	// Some turfs can be roofed irrespective of the turf above them in multiz.
+	// I have the feeling this is redundat as a roofed turf below max z will
+	// have a floor above it, but ah well.
+	. = is_outside
+	if(. == OUTSIDE_AREA)
 		var/area/A = get_area(src)
 		. = A ? A.is_outside : OUTSIDE_NO
-	else
-		. = is_outside
 
-	// Notes for future self when confused: is_open() on higher
-	// turfs must match effective is_outside value if the turf
-	// should get to use the is_outside value it wants to. If it
-	// doesn't line up, we invert the outside value (roof is not 
-	// open but turf wants to be outside, invert to OUTSIDE_NO).
-
-	// Do we have a roof over our head? Should we care?
-	if(HasAbove(z))
+	// If we are in a multiz volume and not already inside, we return
+	// the outside value of the highest unenclosed turf in the stack.
+	if((. != OUTSIDE_NO) && HasAbove(z))
+		. =  OUTSIDE_YES // assume for the moment we're unroofed until we learn otherwise.
 		var/turf/top_of_stack = src
 		while(HasAbove(top_of_stack.z))
-			top_of_stack = GetAbove(top_of_stack)
-			if(top_of_stack.is_open() != . || (top_of_stack.is_outside != OUTSIDE_AREA && top_of_stack.is_outside != .))
-				return !.
+			var/turf/next_turf = GetAbove(top_of_stack)
+			if(!next_turf.is_open())
+				return OUTSIDE_NO
+			top_of_stack = next_turf
+		// If we hit the top of the stack without finding a roof, we ask the upmost turf if we're outside.
+		. = top_of_stack.is_outside()
+	last_outside_check = . // Cache this for later calls.
 
 /turf/proc/set_outside(var/new_outside, var/skip_weather_update = FALSE)
-	if(is_outside != new_outside)
-		is_outside = new_outside
-		if(!skip_weather_update)
-			update_weather()
+	if(is_outside == new_outside)
+		return FALSE
+
+	is_outside = new_outside
+	if(!skip_weather_update)
+		update_weather()
+	SSambience.queued += src
+
+	last_outside_check = OUTSIDE_UNCERTAIN
+	if(is_outside())
+		if(zone && external_atmosphere_participation)
+			if(can_safely_remove_from_zone())
+				zone.remove(src)
+			else
+				zone.rebuild()
+	else if(zone_membership_candidate)
+		SSair.mark_for_update(src)
+
+	if(!HasBelow(z))
 		return TRUE
-	return FALSE
+
+	// Invalidate the outside check cache for turfs below us.
+	var/turf/checking = src
+	while(HasBelow(checking.z))
+		checking = GetBelow(checking)
+		if(!isturf(checking))
+			break
+		checking.last_outside_check = OUTSIDE_UNCERTAIN
+		if(!checking.is_open())
+			break
+	return TRUE
 
 /turf/proc/get_air_graphic()
+	if(zone && !zone.invalid)
+		return zone.air?.graphic
+	if(external_atmosphere_participation && is_outside())
+		var/datum/level_data/level = SSmapping.levels_by_z[z]
+		return level.exterior_atmosphere.graphic
 	var/datum/gas_mixture/environment = return_air()
 	return environment?.graphic
 
@@ -467,3 +525,19 @@
 		why_cannot_build_cable(user, cable_error)
 		return FALSE
 	return C.turf_place(src, user)
+
+/turf/singularity_act(S, current_size)
+	if(!simulated || is_open())
+		return 0
+	var/base_turf_type = get_base_turf_by_area(src)
+	if(type == base_turf_type)
+		return 0
+	ChangeTurf(base_turf_type)
+	return 2
+
+/turf/on_defilement()
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
+	cult.add_cultiness(CULTINESS_PER_TURF)
+
+/turf/proc/is_defiled()
+	return (locate(/obj/effect/narsie_footstep) in src)

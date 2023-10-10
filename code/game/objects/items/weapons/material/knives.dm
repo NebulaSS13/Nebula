@@ -8,14 +8,12 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	material = /decl/material/solid/metal/steel
 	origin_tech = "{'materials':1}"
-	unbreakable = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	sharp = TRUE
 	edge = TRUE
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
-	applies_material_name = TRUE
-	applies_material_colour = TRUE
-	pickup_sound = 'sound/foley/knife1.ogg' 
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 	var/draw_handle
@@ -25,34 +23,34 @@
 /obj/item/knife/Initialize(ml, material_key)
 	. = ..()
 	if(!has_extension(src, /datum/extension/tool))
-		set_extension(src, /datum/extension/tool/variable, list( 
+		set_extension(src, /datum/extension/tool/variable, list(
 			TOOL_SCALPEL =     TOOL_QUALITY_MEDIOCRE,
 			TOOL_SAW =         TOOL_QUALITY_BAD,
-			TOOL_RETRACTOR =   TOOL_QUALITY_BAD, 
+			TOOL_RETRACTOR =   TOOL_QUALITY_BAD,
 			TOOL_SCREWDRIVER = TOOL_QUALITY_BAD
 		))
 
 /obj/item/knife/on_update_icon()
-	..()
+	. = ..()
 	if(draw_handle)
-		cut_overlays()
 		if(!handle_color && length(valid_handle_colors))
 			handle_color = pick(valid_handle_colors)
 		add_overlay(overlay_image(icon, "[get_world_inventory_state()]_handle", handle_color, flags=RESET_COLOR|RESET_ALPHA))
-	if(blood_overlay)
-		add_overlay(blood_overlay)
 
 /obj/item/knife/attack(mob/living/carbon/M, mob/living/carbon/user, target_zone)
 	if(!istype(M))
 		return ..()
 
 	if(user.a_intent != I_HELP)
-		if(user.zone_sel.selecting == BP_EYES)
+		if(user.get_target_zone() == BP_EYES)
 			if((MUTATION_CLUMSY in user.mutations) && prob(50))
 				M = user
 			return eyestab(M, user)
 
 	return ..()
+
+/obj/item/knife/can_take_wear_damage()
+	return FALSE //Prevents knives from shattering/breaking from usage
 
 //table knives
 /obj/item/knife/table
@@ -63,8 +61,8 @@
 	material_force_multiplier = 0.1
 	sharp = FALSE
 	attack_verb = list("prodded")
-	applies_material_name = FALSE
 	w_class = ITEM_SIZE_SMALL
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 
 /obj/item/knife/table/plastic
 	material = /decl/material/solid/plastic
@@ -74,7 +72,7 @@
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon = 'icons/obj/items/weapon/knives/savage.dmi'
 	material = /decl/material/solid/wood
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/knife/table/primitive/get_autopsy_descriptors()
@@ -86,7 +84,7 @@
 	name = "kitchen knife"
 	icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
 	desc = "A general purpose chef's knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
-	applies_material_name = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	draw_handle = TRUE
 
 /obj/item/knife/kitchen/cleaver
@@ -134,8 +132,7 @@
 	name = "ritual knife"
 	desc = "The unearthly energies that once powered this blade are now dormant."
 	icon = 'icons/obj/items/weapon/knives/ritual.dmi'
-	applies_material_colour = FALSE
-	applies_material_name = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 
 /obj/item/knife/ritual/get_autopsy_descriptors()
 	. = ..()

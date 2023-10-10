@@ -1,4 +1,3 @@
-
 /obj/item/gun/projectile/pistol
 	name = "pistol"
 	icon = 'icons/obj/guns/pistol.dmi'
@@ -9,6 +8,12 @@
 	accuracy_power = 7
 	safety_icon = "safety"
 	ammo_indicator = TRUE
+
+/obj/item/gun/projectile/pistol/rubber
+	magazine_type = /obj/item/ammo_magazine/pistol/rubber
+
+/obj/item/gun/projectile/pistol/emp
+	magazine_type = /obj/item/ammo_magazine/pistol/emp
 
 /obj/item/gun/projectile/pistol/update_base_icon()
 	var/base_state = get_world_inventory_state()
@@ -32,21 +37,21 @@
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 
 /obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
-	if(silenced && user.is_holding_offhand(src))
-		to_chat(user, SPAN_NOTICE("You unscrew \the [silenced] from \the [src]."))
-		user.put_in_hands(silenced)
-		silenced = initial(silenced)
-		w_class = initial(w_class)
-		update_icon()
-		return
-	..()
+	if(!silenced || !user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
+	to_chat(user, SPAN_NOTICE("You unscrew \the [silenced] from \the [src]."))
+	user.put_in_hands(silenced)
+	silenced = initial(silenced)
+	w_class = initial(w_class)
+	update_icon()
+	return TRUE
 
 /obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/silencer))
 		if(src in user.get_held_items())	//if we're not in his hands
 			to_chat(user, SPAN_WARNING("You'll need [src] in your hands to do that."))
 			return TRUE
-		if(user.unEquip(I, src))
+		if(user.try_unequip(I, src))
 			to_chat(user, SPAN_NOTICE("You screw [I] onto [src]."))
 			silenced = I	//dodgy?
 			w_class = ITEM_SIZE_NORMAL
@@ -70,3 +75,4 @@
 	icon = 'icons/obj/guns/holdout_pistol_silencer.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/metal/steel

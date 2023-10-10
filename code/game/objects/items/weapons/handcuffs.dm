@@ -4,7 +4,6 @@
 	gender = PLURAL
 	icon = 'icons/obj/items/handcuffs.dmi'
 	icon_state = ICON_STATE_WORLD
-	health = 0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	throwforce = 5
@@ -13,16 +12,28 @@
 	throw_range = 5
 	origin_tech = "{'materials':1}"
 	material = /decl/material/solid/metal/steel
+	max_health = ITEM_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
 	var/elastic
 	var/dispenser = 0
-	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
+	var/breakouttime = 2 MINUTES //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 
+/obj/item/handcuffs/Destroy()
+	var/obj/item/clothing/shoes/attached_shoes = loc
+	if(istype(attached_shoes))
+		attached_shoes.remove_cuffs()
+	. = ..()
+
+/obj/item/handcuffs/physically_destroyed(skip_qdel)
+	if(istype(loc, /obj/item/clothing/shoes))
+		loc.visible_message(SPAN_WARNING("\The [src] attached to \the [loc] snap and fall away!"), range = 1)
+	. = ..()
+
 /obj/item/handcuffs/examine(mob/user)
 	. = ..()
-	if (health)
-		var display = health / initial(health) * 100
+	if (health > 0 && max_health > 0)
+		var display = get_percent_health()
 		if (display > 66)
 			return
 		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
@@ -37,9 +48,9 @@
 		place_handcuffs(user, user)
 		return
 
-	// only carbons can be handcuffed
+	// only carbons can be cuffed
 	if(istype(C))
-		if(!C.handcuffed)
+		if(!C.get_equipped_item(slot_handcuffed_str))
 			if (C == user)
 				place_handcuffs(user, user)
 				return
@@ -65,8 +76,9 @@
 		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
 		return 0
 
-	if((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
-		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [H.gloves]!</span>")
+	var/obj/item/gloves = H.get_equipped_item(slot_gloves_str)
+	if((gloves && (gloves.item_flags & ITEM_FLAG_NOCUFFS)) && !elastic)
+		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [gloves]!</span>")
 		return 0
 
 	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
@@ -80,7 +92,7 @@
 	var/obj/item/handcuffs/cuffs = src
 	if(dispenser)
 		cuffs = new(get_turf(user))
-	else if(!user.unEquip(cuffs))
+	else if(!user.try_unequip(cuffs))
 		return 0
 
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
@@ -95,17 +107,17 @@
 	target.equip_to_slot(cuffs, slot_handcuffed_str)
 	return 1
 
-var/global/last_chew = 0
+var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world can chew their restraints every 2.6 seconds
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()
 	if (last_chew + 26 > world.time) return
 
 	var/mob/living/carbon/human/H = A
-	if (!H.handcuffed) return
+	if (!H.get_equipped_item(slot_handcuffed_str)) return
 	if (H.a_intent != I_HURT) return
-	if (H.zone_sel.selecting != BP_MOUTH) return
-	if (H.wear_mask) return
-	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket)) return
+	if (H.get_target_zone() != BP_MOUTH) return
+	if (H.get_equipped_item(slot_wear_mask_str)) return
+	if (istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/straight_jacket)) return
 
 	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
 	if (!O) return
@@ -128,7 +140,8 @@ var/global/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
-	health = 75
+	max_health = 75
+	material = /decl/material/solid/plastic
 
 /obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
@@ -165,4 +178,5 @@ var/global/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
-	health = 50
+	max_health = 50
+	material = /decl/material/solid/plastic

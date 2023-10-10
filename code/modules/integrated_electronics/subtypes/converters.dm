@@ -93,7 +93,6 @@
 	inputs = list("input" = IC_PINTYPE_STRING)
 	outputs = list("output" = IC_PINTYPE_REF)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
-	var/dec
 
 /obj/item/integrated_circuit/converter/refdecode/do_work()
 	pull_data()

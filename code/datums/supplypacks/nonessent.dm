@@ -15,7 +15,6 @@
 		/obj/item/camera,
 		/obj/item/camera_film = 2,
 		/obj/item/storage/photo_album,
-		/obj/item/stack/package_wrap/twenty_five,
 		/obj/item/chems/glass/paint/red,
 		/obj/item/chems/glass/paint/green,
 		/obj/item/chems/glass/paint/blue,
@@ -24,9 +23,10 @@
 		/obj/item/chems/glass/paint/black,
 		/obj/item/chems/glass/paint/white,
 		/obj/item/contraband/poster,
-		/obj/item/wrapping_paper = 3
+		/obj/item/stack/package_wrap/fifty      = 2,
+		/obj/item/stack/package_wrap/gift/fifty = 2
 	)
-	containername = "arts and Crafts crate"
+	containername = "arts and crafts crate"
 
 
 /decl/hierarchy/supply_pack/nonessent/card_packs

@@ -6,9 +6,14 @@
 	evidence_type = "trace"
 	evidence_path = /obj/item/forensics/sample/swab
 	possible_evidence_types = list(
-		/datum/forensics/gunshot_residue, 
+		/datum/forensics/gunshot_residue,
 		/datum/forensics/trace_dna,
 		/datum/forensics/blood_dna
+	)
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/cloth = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
 	)
 
 /obj/item/forensics/sample_kit/swabs/attack(var/mob/living/carbon/human/H, var/mob/user)
@@ -21,7 +26,7 @@
 		user.visible_message(SPAN_WARNING("\The [user] tried to take a swab sample from \the [H], but they moved away."))
 		return
 
-	if(user.zone_sel.selecting == BP_MOUTH)
+	if(user.get_target_zone() == BP_MOUTH)
 		var/cover = H.get_covering_equipped_item(SLOT_FACE)
 		if(cover)
 			to_chat(user, SPAN_WARNING("\The [H]'s [cover] is in the way."))
@@ -43,7 +48,7 @@
 		S.update_icon()
 		user.put_in_hands(S)
 	else
-		var/zone = user.zone_sel.selecting
+		var/zone = user.get_target_zone()
 		if(!H.has_organ(zone))
 			to_chat(user, SPAN_WARNING("They don't have that part!"))
 			return
@@ -74,11 +79,11 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "swab"
 	possible_evidence_types = list(
-		/datum/forensics/gunshot_residue, 
+		/datum/forensics/gunshot_residue,
 		/datum/forensics/trace_dna,
 		/datum/forensics/blood_dna
 	)
 
 /obj/item/forensics/sample/swab/on_update_icon()
-	if(length(evidence))
-		icon_state = "swab_used"
+	. = ..()
+	icon_state = "swab[length(evidence)? "_used" : ""]"

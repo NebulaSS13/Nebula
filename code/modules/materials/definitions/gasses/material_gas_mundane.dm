@@ -28,7 +28,7 @@
 	metabolism = 0.05
 	value = 0.3
 
-/decl/material/gas/helium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/helium/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_SQUEAKY, 1)
 
@@ -42,6 +42,7 @@
 	boiling_point = -78 CELSIUS
 	gas_symbol_html = "CO<sub>2</sub>"
 	gas_symbol = "CO2"
+	gas_metabolically_inert = TRUE
 
 /decl/material/gas/carbon_monoxide
 	name = "carbon monoxide"
@@ -56,7 +57,7 @@
 	taste_description = "stale air"
 	metabolism = 0.05 // As with helium.
 
-/decl/material/gas/carbon_monoxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/carbon_monoxide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(!istype(M))
 		return
 	var/warning_message
@@ -102,7 +103,7 @@
 	)
 	value = 0.25
 
-/decl/material/gas/methyl_bromide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/methyl_bromide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	. = ..()
 	if(!ishuman(M))
 		return
@@ -131,7 +132,7 @@
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 	value = 0.25
 
-/decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
 	if(dosage >= 1)
 		if(prob(5)) SET_STATUS_MAX(M, STAT_ASLEEP, 3)
@@ -254,7 +255,7 @@
 	gas_symbol = "Xe"
 	value = 0.25
 
-/decl/material/gas/xenon/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/xenon/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
 	if(dosage >= 1)
 		if(prob(5)) SET_STATUS_MAX(M, STAT_ASLEEP, 3)

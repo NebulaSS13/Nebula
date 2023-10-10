@@ -5,63 +5,76 @@
  * Paper
  * also scraps of paper
  */
-
 /obj/item/paper
-	name = "sheet of paper"
-	gender = NEUTER
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "paper"
-	item_state = "paper"
-	randpixel = 8
-	throwforce = 0
-	w_class = ITEM_SIZE_TINY
-	throw_range = 1
-	throw_speed = 1
-	layer = ABOVE_OBJ_LAYER
-	slot_flags = SLOT_HEAD
-	body_parts_covered = SLOT_HEAD
-	attack_verb = list("bapped")
-	material = /decl/material/solid/wood
-
-	drop_sound = 'sound/foley/paperpickup1.ogg'
-	pickup_sound = 'sound/foley/paperpickup2.ogg'
-
-	var/info		// What's actually written on the paper.
-	var/info_links	// A different version of the paper which includes html links at fields and EOF
-	var/stamps		// The (text for the) stamps on the paper.
-	var/fields		// Amount of user created fields
-	var/free_space = MAX_PAPER_MESSAGE_LEN
-	var/list/stamped
-	var/list/ico[0]      //Icons and
-	var/list/offset_x[0] //offsets stored for later
-	var/list/offset_y[0] //usage by the photocopier
-	var/rigged = 0
-	var/spam_flag = 0
-	var/last_modified_ckey
-	var/age = 0
+	name                   = "sheet of paper"
+	icon                   = 'icons/obj/bureaucracy.dmi'
+	icon_state             = "paper"
+	item_state             = "paper"
+	layer                  = ABOVE_OBJ_LAYER
+	slot_flags             = SLOT_HEAD
+	body_parts_covered     = SLOT_HEAD
+	randpixel              = 8
+	throwforce             = 0
+	throw_range            = 1
+	throw_speed            = 1
+	w_class                = ITEM_SIZE_TINY
+	attack_verb            = list("bapped")
+	material               = /decl/material/solid/paper
+	drop_sound             = 'sound/foley/paperpickup1.ogg'
+	pickup_sound           = 'sound/foley/paperpickup2.ogg'
+	item_flags             = ITEM_FLAG_CAN_TAPE
+	//#TODO: Fonts probably should be stored in the pens or something?
+	var/tmp/deffont        = PEN_FONT_DEFAULT
+	var/tmp/signfont       = PEN_FONT_SIGNATURE
+	var/tmp/crayonfont     = PEN_FONT_CRAYON
+	var/tmp/fancyfont      = PEN_FONT_FANCY_PEN
+	var/scan_file_type     = /datum/computer_file/data/text
+	var/persist_on_init    = TRUE
+	var/age                = 0
+	var/fields             = 0                      // Amount of user created fields
+	var/free_space         = MAX_PAPER_MESSAGE_LEN
+	var/rigged             = FALSE
+	var/tmp/is_honking     = FALSE
+	var/is_crumpled        = FALSE                  //Whether the paper is currently crumpled
+	var/info                                        // What's actually written on the paper.
+	var/info_links                                  // A different version of the paper which includes html links at fields and EOF (aka the "write" link)
+	var/stamp_text                                  // The (text for the) stamps on the paper.
 	var/list/metadata
+	var/list/applied_stamps                         //List of stamp overlays.
+	var/last_modified_ckey
 
-	var/const/deffont = "Verdana"
-	var/const/signfont = "Times New Roman"
-	var/const/crayonfont = "Comic Sans MS"
-	var/const/fancyfont = "Segoe Script"
-
-	var/scan_file_type = /datum/computer_file/data/text
-
-	var/persist_on_init = TRUE
-
-/obj/item/paper/Initialize(mapload, text, title, list/md = null)
-	. = ..(mapload)
-	set_content(text ? text : info, title)
-	metadata = md
+/obj/item/paper/Initialize(mapload, material_key, var/_text, var/_title, var/list/md = null)
+	. = ..(mapload, material_key)
+	set_content(_text ? _text : info, _title)
+	if(md)
+		LAZYDISTINCTADD(metadata, md) //Merge them
 	if(!mapload && persist_on_init)
 		SSpersistence.track_value(src, /decl/persistence_handler/paper)
 
-/obj/item/paper/create_matter()
-	matter = list(/decl/material/solid/wood = round(SHEET_MATERIAL_AMOUNT * 0.2))
+/obj/item/paper/GetCloneArgs()
+	return list(null, material?.type, info, name)
+
+/obj/item/paper/PopulateClone(obj/item/paper/clone)
+	clone = ..()
+	clone.fields             = fields
+	clone.last_modified_ckey = last_modified_ckey
+	clone.rigged             = rigged
+	clone.is_crumpled        = is_crumpled
+	clone.stamp_text         = stamp_text
+	clone.applied_stamps     = LAZYLEN(applied_stamps)? listDeepClone(applied_stamps) : null
+	clone.metadata           = LAZYLEN(metadata)?       listDeepClone(metadata, TRUE) : null
+	return clone
+
+/obj/item/paper/Clone()
+	var/obj/item/paper/clone = ..()
+	if(clone)
+		clone.updateinfolinks()
+	return clone
+
+/obj/item/paper/get_matter_amount_modifier()
+	return 0.2
 
 /obj/item/paper/proc/set_content(text,title)
-	set waitfor = FALSE
 	if(title)
 		SetName(title)
 	info = html_encode(text)
@@ -69,14 +82,25 @@
 	update_icon()
 	update_space(info)
 	updateinfolinks()
+	updateUsrDialog()
 
 /obj/item/paper/on_update_icon()
-	if(icon_state == "paper_talisman")
-		return
-	else if(info)
-		icon_state = "paper_words"
+	. = ..()
+	if(is_crumpled)
+		icon_state = "scrap"
+		return //No overlays on crumpled paper
 	else
-		icon_state = "paper"
+		icon_state = initial(icon_state)
+	update_contents_overlays()
+
+	//The appearence is the key, the type is the value
+	for(var/image/key in applied_stamps)
+		add_overlay(key)
+
+/**Applies the overlay displayed when the paper contains some text. */
+/obj/item/paper/proc/update_contents_overlays()
+	if(length(info))
+		add_overlay("paper_words")
 
 /obj/item/paper/proc/update_space(var/new_text)
 	if(new_text)
@@ -84,77 +108,65 @@
 
 /obj/item/paper/examine(mob/user, distance)
 	. = ..()
-	if(name != "sheet of paper")
+	if(name != initial(name))
 		to_chat(user, "It's titled '[name]'.")
+
 	if(distance <= 1)
-		show_content(usr)
+		interact(user, readonly = TRUE)
 	else
-		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
+		to_chat(user, SPAN_NOTICE("You have to go closer if you want to read it."))
 
-/obj/item/paper/proc/show_content(mob/user, forceshow)
-	var/show_info = user.handle_reading_literacy(user, info, FALSE, (forceshow || get_dist(src, user) <= 1))
+/obj/item/paper/interact(mob/user, var/forceshow = FALSE, var/readonly = FALSE)
+	var/show_info = user.handle_reading_literacy(user, readonly? info : info_links, FALSE, (forceshow || get_dist(src, user) <= 1))
 	if(show_info)
-		show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[show_info][stamps]</BODY></HTML>", "window=[name]")
+		user.set_machine(src)
+		show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[show_info][stamp_text]</BODY></HTML>", "window=[name]")
 		onclose(user, "[name]")
-
-/obj/item/paper/verb/rename()
-	set name = "Rename paper"
-	set category = "Object"
-	set src in usr
-
-	if((MUTATION_CLUMSY in usr.mutations) && prob(50))
-		to_chat(usr, "<span class='warning'>You cut yourself on the paper.</span>")
-		return
-	var/n_name = sanitize_safe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
-
-	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/photo/rename()
-	if(!n_name || !CanInteract(usr, global.deep_inventory_topic_state))
-		return
-	n_name = usr.handle_writing_literacy(usr, n_name)
-	if(n_name)
-		SetName(n_name)
-	add_fingerprint(usr)
+	return TRUE
 
 /obj/item/paper/attack_self(mob/user)
 	if(user.a_intent == I_HURT)
-		if(icon_state == "scrap")
-			user.show_message("<span class='warning'>\The [src] is already crumpled.</span>")
+		if(is_crumpled)
+			user.show_message(SPAN_WARNING("\The [src] is already crumpled."))
 			return
 		//crumple dat paper
-		info = stars(info,85)
+		crumple()
 		user.visible_message("\The [user] crumples \the [src] into a ball!")
-		icon_state = "scrap"
-		return
-	user.examinate(src)
+		return TRUE
+
+	interact(user, readonly = FALSE) //Allow us writing on paper since we're holding it somwhere
+
 	if(rigged && (global.current_holiday?.name == "April Fool's Day"))
-		if(spam_flag == 0)
-			spam_flag = 1
-			playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
+		if(!is_honking)
+			is_honking = TRUE
+			playsound(loc, 'sound/items/bikehorn.ogg', 50, TRUE)
 			spawn(20)
-				spam_flag = 0
+				is_honking = FALSE
+	return TRUE
 
 /obj/item/paper/attack_ai(mob/living/silicon/ai/user)
-	show_content(user)
+	interact(user, readonly = TRUE)
+	return TRUE
 
 /obj/item/paper/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(user.zone_sel.selecting == BP_EYES)
-		user.visible_message("<span class='notice'>You show the paper to [M]. </span>", \
-			"<span class='notice'> [user] holds up a paper and shows it to [M]. </span>")
+	if(user.get_target_zone() == BP_EYES)
+		user.visible_message(SPAN_NOTICE("You show the paper to [M]."), \
+			SPAN_NOTICE("[user] holds up a paper and shows it to [M]."))
 		M.examinate(src)
 
-	else if(user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
+	else if(user.get_target_zone() == BP_MOUTH) // lipstick wiping
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H == user)
-				to_chat(user, "<span class='notice'>You wipe off the lipstick with [src].</span>")
+				to_chat(user, SPAN_NOTICE("You wipe off the lipstick with [src]."))
 				H.lip_style = null
 				H.update_body()
 			else
-				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s lipstick off with \the [src].</span>", \
-								 	 "<span class='notice'>You begin to wipe off [H]'s lipstick.</span>")
+				user.visible_message(SPAN_WARNING("[user] begins to wipe [H]'s lipstick off with \the [src]."), \
+								 	 SPAN_NOTICE("You begin to wipe off [H]'s lipstick."))
 				if(do_after(user, 10, H) && do_after(H, 10, check_holding = 0))	//user needs to keep their active hand, H does not.
-					user.visible_message("<span class='notice'>[user] wipes [H]'s lipstick off with \the [src].</span>", \
-										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
+					user.visible_message(SPAN_NOTICE("[user] wipes [H]'s lipstick off with \the [src]."), \
+										 SPAN_NOTICE("You wipe off [H]'s lipstick."))
 					H.lip_style = null
 					H.update_body()
 
@@ -201,19 +213,19 @@
 		addtofield(i, "<font face=\"[deffont]\"><A href='?src=\ref[src];write=[i]'>write</A></font>", 1)
 	info_links = info_links + "<font face=\"[deffont]\"><A href='?src=\ref[src];write=end'>write</A></font>"
 
-
 /obj/item/paper/proc/clearpaper()
 	info = null
-	stamps = null
+	stamp_text = null
 	free_space = MAX_PAPER_MESSAGE_LEN
-	stamped = list()
-	overlays.Cut()
+	LAZYCLEARLIST(applied_stamps)
+	is_crumpled = FALSE
 	updateinfolinks()
 	update_icon()
 
 /obj/item/paper/proc/get_signature(var/obj/item/pen/P, mob/user)
-	if(P && istype(P, /obj/item/pen))
-		return P.get_signature(user)
+	if(P && IS_PEN(P))
+		var/decl/tool_archetype/pen/parch = GET_DECL(TOOL_PEN)
+		return parch.get_signature(user, P)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
 
 /obj/item/paper/proc/parsepencode(t, obj/item/pen/P, mob/user, iscrayon, isfancy)
@@ -236,12 +248,13 @@
 		t = replacetext(t, "\[cell\]", "")
 		t = replacetext(t, "\[logo\]", "")
 
+	var/pen_color = P? P.get_tool_property(TOOL_PEN, TOOL_PROP_COLOR) : "black"
 	if(iscrayon)
-		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
+		t = "<font face=\"[crayonfont]\" color=[pen_color]><b>[t]</b></font>"
 	else if(isfancy)
-		t = "<font face=\"[fancyfont]\" color=[P ? P.colour : "black"]><i>[t]</i></font>"
+		t = "<font face=\"[fancyfont]\" color=[pen_color]><i>[t]</i></font>"
 	else
-		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
+		t = "<font face=\"[deffont]\" color=[pen_color]>[t]</font>"
 
 	t = pencode2html(t)
 
@@ -255,7 +268,6 @@
 		fields++
 
 	return t
-
 
 /obj/item/paper/proc/burnpaper(obj/item/flame/P, mob/user)
 	var/class = "warning"
@@ -277,66 +289,54 @@
 				qdel(src)
 
 			else
-				to_chat(user, "<span class='warning'>You must hold \the [P] steady to burn \the [src].</span>")
+				to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
 
+/obj/item/paper/CouldNotUseTopic(mob/user)
+	to_chat(user, SPAN_WARNING("You can't do that!"))
 
-/obj/item/paper/Topic(href, href_list)
-	..()
-	if(!usr || (usr.stat || usr.restrained()))
-		return
+/obj/item/paper/OnTopic(mob/user, href_list, datum/topic_state/state)
 
 	if(href_list["write"])
 		var/id = href_list["write"]
-		//var/t = strip_html_simple(input(usr, "What text do you wish to add to " + (id=="end" ? "the end of the paper" : "field "+id) + "?", "[name]", null),8192) as message
-
 		if(free_space <= 0)
-			to_chat(usr, "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>")
-			return
+			to_chat(user, SPAN_INFO("There isn't enough space left on \the [src] to write anything."))
+			return TOPIC_NOACTION
 
-		var/obj/item/I = usr.get_active_hand() // Check to see if he still got that darn pen, also check what type of pen
-		var/iscrayon = 0
-		var/isfancy = 0
-		if(!istype(I, /obj/item/pen))
-			if(usr.back && istype(usr.back,/obj/item/rig))
-				var/obj/item/rig/r = usr.back
-				var/obj/item/rig_module/device/pen/m = locate(/obj/item/rig_module/device/pen) in r.installed_modules
-				if(!r.offline && m)
-					I = m.device
-				else
-					return
-			else
-				return
+		//Try to find a usable pen on the user, if not abort
+		var/obj/item/I = user.get_accessible_pen()
+		if(!IS_PEN(I))
+			to_chat(user, SPAN_WARNING("You need something to write with!"))
+			return TOPIC_NOACTION
 
-		var/obj/item/pen/P = I
-		if(!P.active)
-			P.toggle()
+		//If we got a pen that's not in our hands, make sure to move it over
+		if(user.get_active_hand() != I && user.get_empty_hand_slot() && user.put_in_hands(I))
+			to_chat(user, SPAN_NOTICE("You grab your trusty [I]!"))
+		else if(user.get_active_hand() != I)
+			to_chat(user, SPAN_WARNING("You'd use your trusty [I], but your hands are full!"))
+			return TOPIC_NOACTION
 
-		if(P.iscrayon)
-			iscrayon = TRUE
-
-		if(P.isfancy)
-			isfancy = TRUE
+		var/pen_flags = I.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG)
+		if(!(pen_flags & PEN_FLAG_ACTIVE))
+			var/decl/tool_archetype/pen/parch = GET_DECL(TOOL_PEN)
+			parch.toggle_active(usr, I)
+		var/iscrayon = pen_flags & PEN_FLAG_CRAYON
+		var/isfancy  = pen_flags & PEN_FLAG_FANCY
 
 		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0, trim = 0)
-
 		if(!t)
-			return
-
-		// if paper is not in usr, then it must be near them, or in a clipboard or folder, which must be in or near usr
-		if(src.loc != usr && !src.Adjacent(usr) && !((istype(src.loc, /obj/item/clipboard) || istype(src.loc, /obj/item/folder)) && (src.loc.loc == usr || src.loc.Adjacent(usr)) ) )
-			return
+			return TOPIC_NOACTION
 
 		var/last_fields_value = fields
-
-		t = parsepencode(t, I, usr, iscrayon, isfancy) // Encode everything from pencode to html
-
+		t = parsepencode(t, I, user, iscrayon, isfancy) // Encode everything from pencode to html
 
 		if(fields > MAX_FIELDS)
-			to_chat(usr, "<span class='warning'>Too many fields. Sorry, you can't do this.</span>")
+			to_chat(user, SPAN_WARNING("Too many fields. Sorry, you can't do this."))
 			fields = last_fields_value
-			return
+			return TOPIC_NOACTION
 
-		var/processed_text = usr.handle_writing_literacy(usr, t)
+		var/processed_text = user.handle_writing_literacy(user, t)
+		if(length(t))
+			playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 30)
 
 		if(id!="end")
 			addtofield(text2num(id), processed_text) // He wants to edit a field, let him.
@@ -344,147 +344,223 @@
 			info += processed_text // Oh, he wants to edit to the end of the file, let him.
 			updateinfolinks()
 
-		last_modified_ckey = usr.ckey
-
+		last_modified_ckey = user.ckey
 		update_space(t)
-		var/processed_info_links = usr.handle_reading_literacy(usr, info_links, TRUE)
-		if(processed_info_links)
-			show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
-			playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 10)
-			update_icon()
+		. = TOPIC_REFRESH
 
-
-/obj/item/paper/attackby(obj/item/P, mob/user)
-	..()
-	var/clown = 0
-	if(user.mind && (user.mind.assigned_role == "Clown"))
-		clown = 1
-
-	if(istype(P, /obj/item/ducttape))
-		var/obj/item/ducttape/tape = P
-		tape.stick(src, user)
+	if(. & TOPIC_REFRESH)
+		updateUsrDialog()
+		update_icon()
 		return
 
-	if(istype(P, /obj/item/paper) || istype(P, /obj/item/photo))
-		if(!can_bundle())
-			return
-		var/obj/item/paper/other = P
-		if(istype(other) && !other.can_bundle())
-			return
-		if (istype(P, /obj/item/paper/carbon))
-			var/obj/item/paper/carbon/C = P
-			if (!C.iscopy && !C.copied)
-				to_chat(user, "<span class='notice'>Take off the carbon copy first.</span>")
-				add_fingerprint(user)
-				return
-		var/obj/item/paper_bundle/B = new(src.loc)
-		if (name != "paper")
-			B.SetName(name)
-		else if (P.name != "paper" && P.name != "photo")
-			B.SetName(P.name)
+	return ..()
 
-		if(!user.unEquip(P, B) || !user.unEquip(src, B))
+/obj/item/paper/attackby(obj/item/P, mob/user)
+	if(istype(P, /obj/item/stack/tape_roll/duct_tape))
+		var/obj/item/stack/tape_roll/duct_tape/tape = P
+		return tape.stick(src, user)
+
+	else if(istype(P, /obj/item/paper) || istype(P, /obj/item/photo))
+		var/obj/item/paper_bundle/B = try_bundle_with(P, user)
+		if(!B)
 			return
 		user.put_in_hands(B)
+		to_chat(user, SPAN_NOTICE("You clip \the [P] and \the [name] together."))
+		return TRUE
 
-		to_chat(user, "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>")
-
-		B.pages.Add(src)
-		B.pages.Add(P)
-		B.update_icon()
-
-	else if(istype(P, /obj/item/pen))
-		if(icon_state == "scrap")
-			to_chat(usr, "<span class='warning'>\The [src] is too crumpled to write on.</span>")
+	else if(IS_PEN(P))
+		if(is_crumpled)
+			to_chat(user, SPAN_WARNING("\The [src] is too crumpled to write on."))
 			return
 
 		var/obj/item/pen/robopen/RP = P
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
 		else
-			var/processed_info_links = user.handle_reading_literacy(user, info_links, length(info))
-			if(processed_info_links)
-				show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]")
-		return
+			interact(user, readonly = FALSE)
+		return TRUE
 
 	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
-		if((!in_range(src, usr) && loc != user && !( istype(loc, /obj/item/clipboard) ) && loc.loc != user && user.get_active_hand() != P))
-			return
-
-		stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [P.name].</i>"
-
-		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		var/x
-		var/y
-		if(istype(P, /obj/item/stamp/captain) || istype(P, /obj/item/stamp/boss))
-			x = rand(-2, 0)
-			y = rand(-1, 2)
-		else
-			x = rand(-2, 2)
-			y = rand(-3, 2)
-		offset_x += x
-		offset_y += y
-		stampoverlay.pixel_x = x
-		stampoverlay.pixel_y = y
-
-		if(istype(P, /obj/item/stamp/clown))
-			if(!clown)
-				to_chat(user, "<span class='notice'>You are totally unable to use the stamp. HONK!</span>")
-				return
-
-		if(!ico)
-			ico = new
-		ico += "paper_[P.icon_state]"
-		stampoverlay.icon_state = "paper_[P.icon_state]"
-
-		if(!stamped)
-			stamped = new
-		stamped += P.type
-		overlays += stampoverlay
-
-		playsound(src, 'sound/effects/stamp.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>You stamp the paper with your [P.name].</span>")
+		apply_custom_stamp(
+			image('icons/obj/bureaucracy.dmi', icon_state = "paper_[P.icon_state]", pixel_x = rand(-2, 2), pixel_y = rand(-2, 2)),
+			"with \the [P]")
+		playsound(src, 'sound/effects/stamp.ogg', 50, TRUE)
+		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))
+		return TRUE
 
 	else if(istype(P, /obj/item/flame))
 		burnpaper(P, user)
+		return TRUE
 
 	else if(istype(P, /obj/item/paper_bundle))
-		if(!can_bundle())
-			return
-		var/obj/item/paper_bundle/attacking_bundle = P
-		attacking_bundle.insert_sheet_at(user, (attacking_bundle.pages.len)+1, src)
-		attacking_bundle.update_icon()
+		var/obj/item/paper_bundle/B = P
+		B.merge(src, user)
+		return TRUE
+	return ..()
 
-	add_fingerprint(user)
+/obj/item/paper/proc/try_bundle_with(var/obj/item/paper/other, var/mob/user)
+	if(!can_bundle_with(other))
+		if(user)
+			to_chat(user, SPAN_WARNING("You can't bundle those!"))
+		return
+
+	var/obj/item/paper_bundle/B = new(loc)
+	if(user)
+		if(!user.canUnEquip(src))
+			to_chat(user, SPAN_WARNING("You can't unequip \the [src]!"))
+			return
+		if(!user.canUnEquip(other))
+			to_chat(user, SPAN_WARNING("You can't unequip \the [other]!"))
+			return
+		user.try_unequip(src, B)
+		user.try_unequip(other, B)
+
+	if (name != initial(name))
+		B.SetName(name)
+	else if (other.name != initial(other.name))
+		B.SetName(other.name)
+
+	B.insert_sheet_at(user, src)
+	B.insert_sheet_at(user, other)
+	return B
 
 /obj/item/paper/proc/can_bundle()
 	return TRUE
 
-/obj/item/paper/proc/show_info(var/mob/user)
-	return info
+/obj/item/paper/proc/can_bundle_with(var/obj/item/other)
+	if(istype(other, /obj/item/paper))
+		var/obj/item/paper/P = other
+		return can_bundle() && P.can_bundle()
+	else if(istype(other, /obj/item/photo))
+		return can_bundle()
+	else if(istype(other, /obj/item/paper_bundle))
+		var/obj/item/paper_bundle/B = other
+		return can_bundle() && !B.is_full()
+	return FALSE
 
-//For supply.
+/obj/item/paper/DefaultTopicState()
+	return global.paper_topic_state
+
+/**Whether the paper can be considered blank, for purposes of refilling machines and etc. */
+/obj/item/paper/proc/is_blank()
+	return !length(info) && !length(stamp_text) && !is_crumpled && !LAZYLEN(applied_stamps)
+
+/**Stamp the paper with the  specified values.
+ * stamper_name: what is stamped. Or what comes after the sentence "This paper has been stamped "
+*/
+/obj/item/paper/proc/apply_custom_stamp(var/image/stamp, var/stamper_name)
+	LAZYADD(applied_stamps, stamp)
+	stamp_text += "[length(stamp_text)? "<BR>" : "<HR>"]<i>This paper has been stamped [length(stamper_name)? stamper_name : "by the generic stamp"].</i>"
+	update_icon()
+
+/**Merge the paper with other papers or bundles inside "location" */
+/obj/item/paper/proc/merge_with_existing(var/atom/location, var/mob/user)
+	if(!location || !can_bundle())
+		return
+	for(var/obj/item/I in location)
+		if(istype(I, /obj/item/paper))
+			return try_bundle_with(I, user)
+
+		if(istype(I, /obj/item/paper_bundle))
+			var/obj/item/paper_bundle/B = I
+			if(B.is_full())
+				continue
+			if(B.merge(src, user))
+				return B
+
+/obj/item/paper/proc/crumple()
+	info = stars(info,85)
+	is_crumpled = TRUE
+	update_icon()
+
+/obj/item/paper/verb/rename()
+	set name = "Rename paper"
+	set category = "Object"
+	set src in usr
+	if(usr.incapacitated())
+		to_chat(usr, SPAN_WARNING("You can't do that in your current state!"))
+		return
+
+	if((MUTATION_CLUMSY in usr.mutations) && prob(50))
+		to_chat(usr, SPAN_WARNING("You cut yourself on the paper."))
+		return
+	var/n_name = sanitize_safe(input(usr, "What would you like to name the paper?", "Paper Naming", name) as text, MAX_NAME_LEN)
+
+	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/photo/rename()
+	if(!n_name || !CanInteract(usr, global.deep_inventory_topic_state))
+		return
+	n_name = usr.handle_writing_literacy(usr, n_name)
+	if(n_name)
+		SetName(length(n_name) > 0? n_name : initial(name))
+	add_fingerprint(usr)
+
+/obj/item/paper/dropped(mob/user)
+	. = ..()
+	if(CanUseTopic(user, DefaultTopicState()))
+		updateUsrDialog()
+	else
+		close_browser(user, name)
+
+//
+//Topic state for paper since we can use it within clipboards and folders
+//
+var/global/datum/topic_state/default/paper_state/paper_topic_state = new
+/datum/topic_state/default/paper_state/can_use_topic(var/src_object, var/mob/user)
+	. = ..()
+	if(. == STATUS_INTERACTIVE)
+		return
+
+	//Check inside held objects
+	for(var/atom/movable/AM in user.get_held_items())
+		if(src_object in AM)
+			return user.shared_nano_interaction() //Have to check this again, since we ignore all the distance stuff that was already done
+
+///////////////////////////////////////////////////
+// Paper Templates
+///////////////////////////////////////////////////
 /obj/item/paper/manifest
-	name = "supply manifest"
-	var/order_total = 0
-	var/is_copy = 1
-/*
- * Premade paper
- */
+	name     = "supply manifest"
+	metadata = list(
+		"order_total" = 0,
+		"is_copy"     = TRUE,
+	)
+
 /obj/item/paper/court
 	name = "Judgement"
 	info = "For crimes as specified, the offender is sentenced to:<BR>\n<BR>\n"
 
+/obj/item/paper/aromatherapy_disclaimer
+	name = "aromatherapy disclaimer"
+	info = "<I>The manufacturer and the retailer make no claims of the contained products' effacy.</I> <BR><BR><B>Use at your own risk.</B>"
+
+///////////////////////////////////////////////////
+// Colored Paper
+///////////////////////////////////////////////////
+/obj/item/paper/blue
+	name = "blue sheet of paper"
+	color = "#ccffff"
+
+/obj/item/paper/green
+	name = "green sheet of paper"
+	color = "#ccffaa"
+
+/obj/item/paper/yellow
+	name = "yellow sheet of paper"
+	color = "#ffffcc"
+
+/obj/item/paper/pink
+	name = "pink sheet of paper"
+	color = "#ffccff"
+
+///////////////////////////////////////////////////
+// Crumpled Paper
+///////////////////////////////////////////////////
 /obj/item/paper/crumpled
-	name = "paper scrap"
+	name       = "paper scrap"
 	icon_state = "scrap"
 
-/obj/item/paper/crumpled/on_update_icon()
+/obj/item/paper/crumpled/update_contents_overlays()
 	return
 
 /obj/item/paper/crumpled/bloody
 	icon_state = "scrap_bloodied"
-
-/obj/item/paper/aromatherapy_disclaimer
-	name = "aromatherapy disclaimer"
-	info = "<I>The manufacturer and the retailer make no claims of the contained products' effacy.</I> <BR><BR><B>Use at your own risk.</B>"

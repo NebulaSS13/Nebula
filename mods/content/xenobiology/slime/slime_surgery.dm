@@ -11,7 +11,7 @@
 	disallowed_species = null
 	expected_mob_type = /mob/living/slime
 	hidden_from_codex = TRUE
-	surgery_step_category = /decl/surgery_step/slime
+	abstract_type = /decl/surgery_step/slime
 
 /decl/surgery_step/slime/is_valid_target(mob/living/slime/target)
 	return isslime(target)

@@ -221,20 +221,20 @@
 	return 1
 
 /datum/unit_test/species_organ_lists_update/proc/test_external_organ(var/mob/living/carbon/human/H, var/obj/item/organ/external/E)
-	if(!check_external_organ_removed(H, E))
-		fail("[H.species.name] internal organ [E] failed initial presence check.")
+	if(!check_external_organ_present(H, E))
+		fail("[H.species.name] external organ [E] failed initial presence check.")
 		return 0
 
 	var/obj/item/organ/external/parent = E.parent
 
 	H.remove_organ(E)
-	if(!check_internal_organ_removed(H, E, parent))
-		fail("[H.species.name] internal organ [E] was not removed correctly.")
+	if(!check_external_organ_removed(H, E, parent))
+		fail("[H.species.name] external organ [E] was not removed correctly.")
 		return 0
 
 	H.add_organ(E)
-	if(!check_internal_organ_present(H, E))
-		fail("[H.species.name] internal organ [E] was not replaced correctly.")
+	if(!check_external_organ_removed(H, E))
+		fail("[H.species.name] external organ [E] was not replaced correctly.")
 		return 0
 
 	return 1

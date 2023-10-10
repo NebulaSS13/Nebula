@@ -50,34 +50,30 @@
 
 
 /obj/machinery/computer/teleporter/attackby(var/obj/I, var/mob/user)
-	if(istype(I, /obj/item/card/data))
-		var/obj/item/card/data/C = I
-		if(stat & (NOPOWER|BROKEN) & (C.function != "teleporter"))
-			attack_hand(user)
 
-		var/obj/L = null
+	var/obj/item/card/data/C = I
+	if(!istype(C) || (stat & (NOPOWER|BROKEN)) || C.function != "teleporter")
+		return ..()
 
-		for(var/obj/abstract/landmark/sloc in global.landmarks_list)
-			if(sloc.name != C.data || (locate(/mob/living) in sloc.loc))
-				continue
-			L = sloc
-			break
+	var/obj/L = null
+	for(var/obj/abstract/landmark/sloc in global.landmarks_list)
+		if(sloc.name != C.data || (locate(/mob/living) in sloc.loc))
+			continue
+		L = sloc
+		break
 
-		if(!L)
-			L = locate("landmark*[C.data]") // use old stype
+	if(!L)
+		L = locate("landmark*[C.data]") // use old stype
 
-		if(istype(L, /obj/abstract/landmark) && isturf(L.loc) && user.unEquip(I))
-			to_chat(usr, "You insert the coordinates into the machine.")
-			to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times.")
-			qdel(I)
-			audible_message(SPAN_NOTICE("Locked in."))
-			src.locked = L
-			one_time_use = 1
-			add_fingerprint(usr)
-	else
-		..()
-
-	return
+	if(istype(L, /obj/abstract/landmark) && isturf(L.loc) && user.try_unequip(I))
+		to_chat(usr, "You insert the coordinates into the machine.")
+		to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times.")
+		qdel(I)
+		audible_message(SPAN_NOTICE("Locked in."))
+		src.locked = L
+		one_time_use = 1
+		add_fingerprint(usr)
+	return TRUE
 
 /obj/machinery/computer/teleporter/interface_interact(var/mob/user)
 	/* Run full check because it's a direct selection */
@@ -94,7 +90,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(!(T.z in global.using_map.player_levels))
+		if(!isPlayerLevel(T.z))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -114,7 +110,7 @@
 			var/turf/T = get_turf(M)
 			if(!T)
 				continue
-			if(!(T.z in global.using_map.player_levels))
+			if(!isPlayerLevel(T.z))
 				continue
 			var/tmpname = M.real_name
 			if(areaindex[tmpname])
@@ -176,9 +172,8 @@
 /obj/machinery/teleport
 	name = "teleport"
 	icon = 'icons/obj/machines/teleporter.dmi'
-	density = 1
-	anchored = 1.0
-	var/lockeddown = 0
+	density = TRUE
+	anchored = TRUE
 
 /obj/machinery/teleport/hub
 	name = "teleporter pad"
@@ -198,6 +193,7 @@
 	queue_icon_update()
 
 /obj/machinery/teleport/hub/on_update_icon()
+	z_flags &= ~ZMM_MANGLE_PLANES
 	cut_overlays()
 	if (com?.station?.engaged)
 		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
@@ -208,8 +204,6 @@
 		if(operable())
 			add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
 			z_flags |= ZMM_MANGLE_PLANES
-		else
-			z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	if (com?.station?.engaged)
@@ -256,11 +250,15 @@
 	cut_overlays()
 	if (engaged)
 		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
+		z_flags |= ZMM_MANGLE_PLANES
 	else if (operable())
 		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
+		z_flags |= ZMM_MANGLE_PLANES
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
-	attack_hand(user)
+	return attack_hand_with_interaction_checks(user) || ..()
 
 /obj/machinery/teleport/station/interface_interact(var/mob/user)
 	if(!CanInteract(user, DefaultTopicState()))

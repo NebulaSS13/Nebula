@@ -25,7 +25,7 @@
 	uncreated_component_parts = null
 
 /obj/machinery/air_sensor/on_update_icon()
-	if(!powered())
+	if(stat & NOPOWER)
 		icon_state = "gsensor0"
 	else
 		icon_state = "gsensor[use_power]"

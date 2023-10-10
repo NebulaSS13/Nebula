@@ -19,12 +19,13 @@
 		show_error(user, "DISK ERROR")
 		return // No HDD, No HDD files list or no stored files. Something is very broken.
 
-	var/datum/computer_file/data/autorun = get_file("autorun")
+	var/datum/computer_file/data/autorun = get_file("autorun", "local")
 
 	var/list/data = get_header_data()
 
 	var/list/programs = list()
-	for(var/datum/computer_file/program/P in hard_drive.stored_files)
+	var/datum/computer_file/directory/program_files = hard_drive.parse_directory(OS_PROGRAMS_DIR, TRUE)
+	for(var/datum/computer_file/program/P in program_files.get_held_files())
 		var/list/program = list()
 		program["name"] = P.filename
 		program["desc"] = P.filedesc
@@ -41,7 +42,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "laptop_mainscreen.tmpl", "GOOSE Main Menu ", 400, 500)
+		ui = new(user, src, ui_key, "laptop_mainscreen.tmpl", "[os_name] Main Menu ", 400, 500)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
@@ -97,7 +98,7 @@
 		return TOPIC_HANDLED
 
 	if( href_list["PC_killprogram"] )
-		var/datum/computer_file/program/P = get_file(href_list["PC_killprogram"])
+		var/datum/computer_file/program/P = get_file(href_list["PC_killprogram"], programs_dir)
 
 		if(!istype(P) || P.program_state == PROGRAM_STATE_KILLED)
 			return TOPIC_HANDLED
@@ -118,7 +119,7 @@
 	if( href_list["PC_terminal"] )
 		open_terminal(usr)
 		return TOPIC_HANDLED
-	
+
 	if( href_list["PC_login"])
 		login_prompt(usr)
 		return TOPIC_REFRESH
@@ -169,7 +170,7 @@
 			SSnano.update_uis(active_program.NM)
 
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
-/datum/extension/interactive/os/proc/get_header_data()
+/datum/extension/interactive/os/proc/get_header_data(file_browser = FALSE)
 	var/list/data = list()
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
@@ -223,6 +224,7 @@
 	data["PC_stationtime"] = stationtime2text()
 	data["PC_hasheader"] = !updating
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
+	data["PC_showshutdown"] =  !file_browser // Don't show shutdown/program closing options from file browser window
 
 	var/datum/computer_file/data/account/cur_account = get_account_nocheck()
 	data["PC_loggedin"] = cur_account?.login

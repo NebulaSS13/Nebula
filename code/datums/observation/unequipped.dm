@@ -23,12 +23,3 @@
 /decl/observ/item_unequipped
 	name = "Item Unequipped"
 	expected_type = /obj/item
-
-/**********************
-* Unequipped Handling *
-**********************/
-
-/obj/item/dropped(var/mob/user)
-	. = ..()
-	events_repository.raise_event(/decl/observ/mob_unequipped, user, src)
-	events_repository.raise_event(/decl/observ/item_unequipped, src, user)

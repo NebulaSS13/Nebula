@@ -130,7 +130,7 @@ var/global/list/empty_playable_ai_cores = list()
 					if(!wired)
 						to_chat(user, SPAN_WARNING("Wire \the [src] first."))
 						return TRUE
-					if(user.unEquip(P, src))
+					if(user.try_unequip(P, src))
 						playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 						to_chat(user, SPAN_NOTICE("You place the circuit board inside the frame."))
 						circuit = P
@@ -156,7 +156,7 @@ var/global/list/empty_playable_ai_cores = list()
 						if(jobban_isbanned(B, "AI"))
 							to_chat(user, SPAN_WARNING("This [P] does not seem to fit."))
 							return
-						if(!user.unEquip(P, src))
+						if(!user.try_unequip(P, src))
 							return
 						if(B.mind)
 							clear_antag_roles(B.mind, 1)
@@ -231,7 +231,7 @@ var/global/list/deactivated_ai_cores = list()
 	qdel(src)
 
 /obj/structure/aicore/deactivated/attackby(var/obj/item/W, var/mob/user)
-	if(isWrench(W) || isWelder(W))
+	if(IS_WRENCH(W) || IS_WELDER(W))
 		. = ..()
 	else if(istype(W, /obj/item/aicard))
 		var/obj/item/aicard/card = W
@@ -259,7 +259,7 @@ var/global/list/deactivated_ai_cores = list()
 
 	if(D in empty_playable_ai_cores)
 		empty_playable_ai_cores -= D
-		to_chat(src, "\The [id] is now <font color=\"#ff0000\">not available</font> for latejoining AIs.")
+		to_chat(src, "\The [id] is now [SPAN_BAD("not available")] for latejoining AIs.")
 	else
 		empty_playable_ai_cores += D
-		to_chat(src, "\The [id] is now <font color=\"#008000\">available</font> for latejoining AIs.")
+		to_chat(src, "\The [id] is now [SPAN_GOOD("available")] for latejoining AIs.")

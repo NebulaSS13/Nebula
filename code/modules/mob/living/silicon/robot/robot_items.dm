@@ -4,6 +4,12 @@
 	icon = 'icons/obj/items/borg_module/borg_rnd_analyser.dmi'
 	icon_state = "portable_analyzer"
 	desc = "Similar to the stationary version, this rather unwieldy device allows you to break down objects in the name of science."
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon      = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/obj/item/loaded_item
 	var/list/saved_tech_levels = list()
 
@@ -77,6 +83,13 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "partylight-off"
 	item_state = "partylight-off"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/glass        = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/silicon      = MATTER_AMOUNT_TRACE,
+	)
 	var/activated = 0
 	var/strobe_effect = null
 
@@ -87,6 +100,7 @@
 		activate_strobe()
 
 /obj/item/party_light/on_update_icon()
+	. = ..()
 	if (activated)
 		icon_state = "partylight-on"
 		set_light(7, 1)
@@ -147,6 +161,7 @@
 	desc = "A hand-held harvest tool that resembles a sickle.  It uses energy to cut plant matter very efficently."
 	icon = 'icons/obj/items/borg_module/autoharvester.dmi'
 	icon_state = "autoharvester"
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/robot_harvester/afterattack(var/atom/target, var/mob/living/user, proximity)
 	if(!target)
@@ -174,14 +189,17 @@
 // Allows service droids to rename paper items.
 
 /obj/item/pen/robopen
-	desc = "A black ink printing attachment with a paper naming mode."
-	name = "Printing Pen"
+	name = "printing pen"
 	var/mode = 1
+
+/obj/item/pen/robopen/make_pen_description()
+	desc = "\A [stroke_colour_name] [medium_name] printing attachment with a paper naming mode."
 
 /obj/item/pen/robopen/attack_self(mob/user)
 
 	var/choice = input("Would you like to change colour or mode?") as null|anything in list("Colour","Mode")
-	if(!choice) return
+	if(!choice)
+		return
 
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 
@@ -189,7 +207,8 @@
 
 		if("Colour")
 			var/newcolour = input("Which colour would you like to use?") as null|anything in list("black","blue","red","green","yellow")
-			if(newcolour) colour = newcolour
+			if(newcolour)
+				set_medium_color(newcolour, newcolour)
 
 		if("Mode")
 			if (mode == 1)
@@ -221,9 +240,10 @@
 /obj/item/form_printer
 	//name = "paperwork printer"
 	name = "paper dispenser"
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/obj/items/paper_bin.dmi'
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/form_printer/attack(mob/living/carbon/M, mob/living/carbon/user)
 	return
@@ -240,7 +260,7 @@
 	deploy_paper(get_turf(src))
 
 /obj/item/form_printer/proc/deploy_paper(var/turf/T)
-	T.visible_message("<span class='notice'>\The [src.loc] dispenses a sheet of crisp white paper.</span>")
+	T.visible_message(SPAN_NOTICE("\The [src.loc] dispenses a sheet of crisp white paper."))
 	new /obj/item/paper(T)
 
 
@@ -273,6 +293,7 @@
 	icon = 'icons/obj/items/inflatable_dispenser.dmi'
 	icon_state = "inf_deployer"
 	w_class = ITEM_SIZE_LARGE
+	material = /decl/material/solid/metal/steel
 
 	var/stored_walls = 5
 	var/stored_doors = 2
@@ -286,6 +307,7 @@
 	stored_doors = 5
 	max_walls = 10
 	max_doors = 5
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/inflatable_dispenser/examine(mob/user)
 	. = ..()
@@ -348,17 +370,17 @@
 		visible_message("\The [user] deflates \the [A] with \the [src]!")
 		return
 	if(istype(A, /obj/item/inflatable))
-		if(istype(A, /obj/item/inflatable/wall))
-			if(stored_walls >= max_walls)
-				to_chat(user, "\The [src] is full.")
-				return
-			stored_walls++
-			qdel(A)
-		else
+		if(istype(A, /obj/item/inflatable/door))
 			if(stored_doors >= max_doors)
 				to_chat(usr, "\The [src] is full!")
 				return
 			stored_doors++
+			qdel(A)
+		else
+			if(stored_walls >= max_walls)
+				to_chat(user, "\The [src] is full.")
+				return
+			stored_walls++
 			qdel(A)
 		visible_message("\The [user] picks up \the [A] with \the [src]!")
 		return
@@ -374,6 +396,7 @@
 /obj/item/robot_rack
 	name = "a generic robot rack"
 	desc = "A rack for carrying large items as a robot."
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/object_type                    //The types of object the rack holds (subtypes are allowed).
 	var/interact_type                  //Things of this type will trigger attack_hand when attacked by this.
 	var/capacity = 1                   //How many objects can be held.
@@ -409,8 +432,7 @@
 		to_chat(user, "<span class='notice'>\The [src] is full and can't store any more items.</span>")
 		return
 	if(istype(O, interact_type))
-		O.attack_hand(user)
-		return
+		return O.attack_hand(user)
 	. = ..()
 
 /obj/item/bioreactor
@@ -418,6 +440,7 @@
 	desc = "An integrated power generator that runs on most kinds of biomass."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5

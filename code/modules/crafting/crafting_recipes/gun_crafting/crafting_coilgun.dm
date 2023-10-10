@@ -4,6 +4,7 @@
 	desc = "It might be a coilgun, someday."
 	icon = 'icons/obj/crafting_icons.dmi'
 	icon_state = "coilgun_construction_1"
+	material = /decl/material/solid/metal/steel
 
 /decl/crafting_stage/material/coilgun_body
 	descriptor = "coilgun"

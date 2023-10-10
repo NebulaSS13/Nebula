@@ -49,7 +49,6 @@
 
 	var/has_been_rev = 0//Tracks if this mind has been a rev or not
 
-	var/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
 
 	var/rev_cooldown = 0
@@ -72,6 +71,12 @@
 	QDEL_NULL_LIST(objectives)
 	QDEL_NULL(changeling)
 	SSticker.minds -= src
+	if(current?.mind == src)
+		current.mind = null
+	current = null
+	if(original?.mind == src)
+		original.mind = null
+	original = null
 	. = ..()
 
 /datum/mind/proc/handle_mob_deletion(mob/living/deleted_mob)

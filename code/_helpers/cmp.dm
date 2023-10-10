@@ -64,8 +64,10 @@
 	if (!.)
 		. = B.qdels - A.qdels
 
-/proc/cmp_ruincost_priority(datum/map_template/ruin/A, datum/map_template/ruin/B)
-	return initial(A.cost) - initial(B.cost)
+/proc/cmp_unit_test_priority(datum/unit_test/A, datum/unit_test/B)
+	. = A.priority - B.priority
+	if (!.)
+		. = sorttext(B, A)
 
 /proc/cmp_timer(datum/timedevent/a, datum/timedevent/b)
 	return a.timeToRun - b.timeToRun
@@ -114,3 +116,23 @@
 
 /proc/cmp_job_desc(var/datum/job/A, var/datum/job/B)
 	return B.get_occupations_tab_sort_score() - A.get_occupations_tab_sort_score()
+
+/proc/cmp_lobby_option_asc(var/datum/lobby_option/A, var/datum/lobby_option/B)
+	return A.sort_priority - B.sort_priority
+
+/proc/cmp_files_sort(datum/computer_file/a, datum/computer_file/b)
+	. = istype(b, /datum/computer_file/directory) - istype(a, /datum/computer_file/directory) // Prioritize directories over other files.
+	if(!.)
+		return sorttext(b.filename, a.filename)
+
+/proc/cmp_submap_archetype_asc(var/decl/submap_archetype/A, var/decl/submap_archetype/B)
+	return A.sort_priority - B.sort_priority
+
+/proc/cmp_submap_asc(var/datum/submap/A, var/datum/submap/B)
+	return A.archetype.sort_priority - B.archetype.sort_priority
+
+/proc/cmp_gripper_asc(datum/inventory_slot/gripper/a, datum/inventory_slot/gripper/b)
+	return a.hand_sort_priority - b.hand_sort_priority
+
+/proc/cmp_inventory_slot_desc(datum/inventory_slot/a, datum/inventory_slot/b)
+	return b.quick_equip_priority - a.quick_equip_priority

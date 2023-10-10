@@ -8,6 +8,8 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	throwforce = 1
 	w_class = ITEM_SIZE_TINY
+	obj_flags = OBJ_FLAG_HOLLOW
+	material = /decl/material/solid/metal/brass
 
 	var/leaves_residue = 1
 	var/caliber = ""					//Which kind of guns it can be loaded into
@@ -16,7 +18,7 @@
 	var/spent_icon = "pistolcasing-spent"
 	var/bullet_color = COLOR_COPPER
 	var/marking_color
-	var/fall_sounds = list('sound/weapons/guns/casingfall1.ogg','sound/weapons/guns/casingfall2.ogg','sound/weapons/guns/casingfall3.ogg')
+	drop_sound = list('sound/weapons/guns/casingfall1.ogg','sound/weapons/guns/casingfall2.ogg','sound/weapons/guns/casingfall3.ogg')
 
 /obj/item/ammo_casing/Initialize()
 	if(ispath(projectile_type))
@@ -41,22 +43,21 @@
 
 	update_icon()
 
-/obj/item/ammo_casing/Crossed(atom/AM)
+/obj/item/ammo_casing/Crossed(atom/movable/AM)
 	..()
+	if(!isliving(AM))
+		return
 
-	if(isliving(AM))
-		var/mob/living/L = AM
+	var/mob/living/L = AM
+	if(L.buckled || MOVING_DELIBERATELY(L) || prob(90))
+		return
 
-		if(L.buckled)
-			return
-
-		if(!MOVING_DELIBERATELY(L) && prob(10))
-			playsound(src, pick(fall_sounds), 50, 1)
-			var/turf/turf_current = get_turf(src)
-			var/turf/turf_destiinaton = get_step(turf_current, AM.dir)
-			if(turf_destiinaton.Adjacent(turf_current))
-				throw_at(turf_destiinaton, 2, 2, spin = FALSE)
-				animate(src, pixel_x = rand(-16, 16), pixel_y = rand(-16, 16), transform = turn(matrix(), rand(120, 300)), time = rand(3, 8))
+	playsound(src, pick(drop_sound), 50, 1)
+	var/turf/turf_current = get_turf(src)
+	var/turf/turf_destiinaton = get_step(turf_current, AM.dir)
+	if(turf_destiinaton.Adjacent(turf_current))
+		throw_at(turf_destiinaton, 2, 2, spin = FALSE)
+		animate(src, pixel_x = rand(-16, 16), pixel_y = rand(-16, 16), transform = turn(matrix(), rand(120, 300)), time = rand(3, 8))
 
 /obj/item/ammo_casing/proc/leave_residue()
 	var/obj/item/gun/G = get_recursive_loc_of_type(/obj/item/gun)
@@ -64,14 +65,11 @@
 		put_residue_on(G)
 		var/mob/living/carbon/human/H = G.get_recursive_loc_of_type(/mob/living/carbon/human)
 		if(H)
-			for(var/bp in H.held_item_slots)
-				var/datum/inventory_slot/inv_slot = H.held_item_slots[bp]
-				if(G == inv_slot?.holding)
-					var/target = H.get_covering_equipped_item_by_zone(bp)
-					if(!target)
-						target = GET_EXTERNAL_ORGAN(H, bp)
+			var/holding_slot = H.get_held_slot_for_item(G)
+			if(holding_slot)
+				var/target = H.get_covering_equipped_item_by_zone(holding_slot) || GET_EXTERNAL_ORGAN(H, holding_slot)
+				if(target)
 					put_residue_on(target)
-					break
 	if(prob(30))
 		put_residue_on(get_turf(src))
 
@@ -81,7 +79,7 @@
 		forensics.add_from_atom(/datum/forensics/gunshot_residue, src)
 
 /obj/item/ammo_casing/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(!BB)
 			to_chat(user, "<span class='notice'>There is no bullet in the casing to inscribe anything into.</span>")
 			return
@@ -99,8 +97,8 @@
 	else ..()
 
 /obj/item/ammo_casing/on_update_icon()
+	. = ..()
 	if(use_single_icon)
-		cut_overlays()
 		if(BB)
 			var/image/I = overlay_image(icon, "[icon_state]-bullet", bullet_color, flags=RESET_COLOR)
 			I.dir = dir
@@ -177,9 +175,10 @@
 		if(stored_ammo.len >= max_ammo)
 			to_chat(user, "<span class='warning'>[src] is full!</span>")
 			return
-		if(!user.unEquip(C, src))
+		if(!user.try_unequip(C, src))
 			return
 		stored_ammo.Add(C)
+		playsound(user, 'sound/weapons/guns/interaction/bullet_insert.ogg', 50, 1)
 		update_icon()
 	else ..()
 
@@ -196,20 +195,23 @@
 
 
 /obj/item/ammo_magazine/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		if(!stored_ammo.len)
-			to_chat(user, "<span class='notice'>[src] is already empty!</span>")
-		else
-			var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
-			stored_ammo-=C
-			user.put_in_hands(C)
-			user.visible_message("\The [user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
-			update_icon()
-	else
-		..()
-		return
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	if(!stored_ammo.len)
+		to_chat(user, SPAN_NOTICE("\The [src] is already empty!"))
+		return TRUE
+	var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+	stored_ammo-=C
+	user.put_in_hands(C)
+	user.visible_message(
+		"\The [user] removes \a [C] from [src].",
+		SPAN_NOTICE("You remove \a [C] from [src].")
+	)
+	update_icon()
+	return TRUE
 
 /obj/item/ammo_magazine/on_update_icon()
+	. = ..()
 	if(multiple_sprites)
 		//find the lowest key greater than or equal to stored_ammo.len
 		var/new_state = null

@@ -9,11 +9,14 @@
 	for(var/R in thing.reagents.reagent_volumes)
 		if(!base_storage_capacity[R])
 			continue
-		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), storage_capacity[R] - stored_material[R])
+		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), FLOOR((storage_capacity[R] - stored_material[R]) * REAGENT_UNITS_PER_MATERIAL_UNIT))
 		if(taking_reagent <= 0)
 			continue
+		var/reagent_matter = round(taking_reagent / REAGENT_UNITS_PER_MATERIAL_UNIT)
+		if(reagent_matter <= 0)
+			continue
 		thing.reagents.remove_reagent(R, taking_reagent)
-		stored_material[R] += taking_reagent
+		stored_material[R] += reagent_matter
 		// If we're destroying this, take everything.
 		if(destructive)
 			. = SUBSTANCE_TAKEN_ALL
@@ -88,10 +91,10 @@
 /obj/machinery/fabricator/attackby(var/obj/item/O, var/mob/user)
 	if(component_attackby(O, user))
 		return TRUE
-	if(panel_open && (isMultitool(O) || isWirecutter(O)))
-		attack_hand(user)
+	if(panel_open && (IS_MULTITOOL(O) || IS_WIRECUTTER(O)))
+		attack_hand_with_interaction_checks(user)
 		return TRUE
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(O))
 		return ..()
 	if(stat & (NOPOWER | BROKEN))
 		return
@@ -100,7 +103,7 @@
 	if(user.a_intent != I_HURT)
 
 		// Set or update our local network.
-		if(isMultitool(O))
+		if(IS_MULTITOOL(O))
 			var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
 			fabnet.get_new_tag(user)
 			return
@@ -127,7 +130,7 @@
 		updateUsrDialog()
 		return TRUE
 	// Take everything if we have a recycler.
-	if(can_ingest(O) && !is_robot_module(O) && user.unEquip(O))
+	if(can_ingest(O) && !is_robot_module(O) && user.try_unequip(O))
 		var/result = max(take_materials(O, user), max(reagents_taken, take_reagents(O, user, TRUE)))
 		show_intake_message(user, result, atom_name)
 		if(result == SUBSTANCE_TAKEN_NONE)

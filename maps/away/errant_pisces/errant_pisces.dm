@@ -12,7 +12,6 @@
 
 /datum/map_template/ruin/away_site/errant_pisces
 	name = "Errant Pisces"
-	id = "awaysite_errant_pisces"
 	description = "Carp trawler"
 	suffixes = list("errant_pisces/errant_pisces.dmm")
 	cost = 1
@@ -66,14 +65,13 @@
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
 	center_of_mass = @"{'x':17,'y':13}"
+	bitesize = 8
 
-/obj/item/chems/food/sharkmeat/Initialize()
+/obj/item/chems/food/sharkmeat/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/psychoactives, 1)
-	reagents.add_reagent(/decl/material/gas/chlorine, 1)
-	src.bitesize = 8
-
+	reagents.add_reagent(/decl/material/liquid/psychoactives,     1)
+	reagents.add_reagent(/decl/material/gas/chlorine,             1)
 
 /obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
 	name = "industrial net"
@@ -95,17 +93,17 @@
 					continue
 				N.update_connections()
 
-/obj/structure/net/show_examined_damage(mob/user, var/perc)
+/obj/structure/net/get_examined_damage_string(health_ratio)
 	if(maxhealth == -1)
 		return
-	if(perc >= 1)
-		to_chat(user, SPAN_NOTICE("It looks fully intact."))
-	else if (perc < 0.2)
-		to_chat(perc, SPAN_DANGER("\The [src] is barely hanging on by the last few threads."))
-	else if (perc < 0.5)
-		to_chat(user, SPAN_WARNING("Large swathes of \the [src] have been cut."))
-	else if (perc < 0.9)
-		to_chat(user, SPAN_NOTICE("A few strands of \the [src] have been severed."))
+	if(health_ratio >= 1)
+		return SPAN_NOTICE("It looks fully intact.")
+	else if (health_ratio < 0.2)
+		return SPAN_DANGER("\The [src] is barely hanging on by the last few threads.")
+	else if (health_ratio < 0.5)
+		return SPAN_WARNING("Large swathes of \the [src] have been cut.")
+	else if (health_ratio < 0.9)
+		return SPAN_NOTICE("A few strands of \the [src] have been severed.")
 
 /obj/structure/net/attackby(obj/item/W, mob/user)
 	if(W.sharp || W.edge)
@@ -178,7 +176,8 @@
 	throwforce = 5
 	throw_speed = 5
 	throw_range = 10
-	matter = list("cloth" = 1875, "plasteel" = 350)
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_REINFORCEMENT)
 	max_amount = 30
 	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
@@ -192,6 +191,7 @@
 	amount = 30
 
 /obj/item/stack/net/on_update_icon()
+	. = ..()
 	if(amount == 1)
 		icon_state = "net"
 	else

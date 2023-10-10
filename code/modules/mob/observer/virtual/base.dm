@@ -6,6 +6,7 @@ var/global/list/all_virtual_listeners = list()
 	see_in_dark = SEE_IN_DARK_DEFAULT
 	see_invisible = SEE_INVISIBLE_LIVING
 	sight = SEE_SELF
+	is_spawnable_type = FALSE // needs a host
 
 	virtual_mob = null
 	z_flags = ZMM_IGNORE
@@ -13,7 +14,6 @@ var/global/list/all_virtual_listeners = list()
 	var/atom/movable/host
 	var/host_type = /atom/movable
 	var/abilities = VIRTUAL_ABILITY_HEAR|VIRTUAL_ABILITY_SEE
-	var/list/broadcast_methods
 
 	var/static/list/overlay_icons
 

@@ -24,7 +24,7 @@
 	data["draw"] = round(power_draw)
 	data["power"] = round(storedpower)
 	data["maxpower"] = round(max_stored_power)
-	data["current_draw"] = ((between(500, max_stored_power - storedpower, power_draw)) + power ? active_power_usage : 0)
+	data["current_draw"] = ((clamp(500, max_stored_power - storedpower, power_draw)) + power ? active_power_usage : 0)
 	data["online"] = active == 2 ? 1 : 0
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -108,7 +108,7 @@
 	if(C)	PN = C.powernet		// find the powernet of the connected cable
 
 	if(PN)
-		var/shieldload = between(500, max_stored_power - storedpower, power_draw)	//what we try to draw
+		var/shieldload = clamp(500, max_stored_power - storedpower, power_draw)	//what we try to draw
 		shieldload = PN.draw_power(shieldload) //what we actually get
 		storedpower += shieldload
 
@@ -200,7 +200,7 @@
 
 
 /obj/machinery/shieldwallgen/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
+	if(IS_WRENCH(W))
 		if(active)
 			to_chat(user, "Turn off the field generator first.")
 			return
@@ -267,10 +267,6 @@
 	unacidable = 1
 	light_range = 3
 	var/needs_power = 0
-	var/active = 1
-	var/delay = 5
-	var/last_active
-	var/mob/U
 	var/obj/machinery/shieldwallgen/gen_primary
 	var/obj/machinery/shieldwallgen/gen_secondary
 	var/power_usage = 800	//how much power it takes to sustain the shield

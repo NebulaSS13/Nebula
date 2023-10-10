@@ -141,6 +141,7 @@
 	var/light_range
 	var/light_power
 	var/light_color_alarm
+	var/light_color_class
 	var/light_color_status_display
 
 	var/overlay_alarm
@@ -151,10 +152,22 @@
 
 	var/datum/alarm_appearance/alarm_appearance
 
+	abstract_type = /decl/security_level
+
 /decl/security_level/Initialize()
 	. = ..()
 	if(ispath(alarm_appearance, /datum/alarm_appearance))
 		alarm_appearance = new alarm_appearance
+
+/decl/security_level/validate()
+	. = ..()
+	var/initial_appearance = initial(alarm_appearance)
+	if(!initial_appearance)
+		. += "alarm_appearance was not set"
+	else if(!ispath(initial_appearance))
+		. += "alarm_appearance was not set to a /datum/alarm_appearance subpath"
+	else if(!istype(alarm_appearance, /datum/alarm_appearance))
+		. += "alarm_appearance creation failed (check runtimes?)"
 
 // Called when we're switching from a lower security level to this one.
 /decl/security_level/proc/switching_up_to()
@@ -179,6 +192,7 @@
 	all_security_levels = list(/decl/security_level/default/code_green, /decl/security_level/default/code_blue, /decl/security_level/default/code_red, /decl/security_level/default/code_delta)
 
 /decl/security_level/default
+	abstract_type = /decl/security_level/default
 	icon = 'icons/misc/security_state.dmi'
 
 	var/static/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
@@ -196,7 +210,7 @@
 
 /decl/security_level/default/proc/notify_station()
 	for(var/obj/machinery/firealarm/FA in SSmachines.machinery)
-		if(FA.z in global.using_map.contact_levels)
+		if(isContactLevel(FA.z))
 			FA.update_icon()
 	post_status("alert")
 
@@ -207,10 +221,8 @@
 	light_power = 1
 
 	light_color_alarm = COLOR_GREEN
-	light_color_status_display = COLOR_GREEN
+	light_color_class = "font_green"
 
-	overlay_alarm = "alarm_green"
-	overlay_status_display = "status_display_green"
 
 	alarm_appearance = /datum/alarm_appearance/green
 
@@ -222,10 +234,7 @@
 	light_range = 2
 	light_power = 1
 	light_color_alarm = COLOR_BLUE
-	light_color_status_display = COLOR_BLUE
-
-	overlay_alarm = "alarm_blue"
-	overlay_status_display = "status_display_blue"
+	light_color_class = "font_blue"
 
 	alarm_appearance = /datum/alarm_appearance/blue
 
@@ -238,10 +247,7 @@
 	light_range = 4
 	light_power = 2
 	light_color_alarm = COLOR_RED
-	light_color_status_display = COLOR_RED
-
-	overlay_alarm = "alarm_red"
-	overlay_status_display = "status_display_red"
+	light_color_class = "font_red"
 
 	alarm_appearance = /datum/alarm_appearance/red
 
@@ -254,12 +260,10 @@
 	light_range = 4
 	light_power = 2
 	light_color_alarm = COLOR_RED
-	light_color_status_display = COLOR_NAVY_BLUE
+	light_color_class = "font_red"
 
 	alarm_appearance = /datum/alarm_appearance/delta
 
-	overlay_alarm = "alarm_delta"
-	overlay_status_display = "status_display_delta"
 
 	var/static/datum/announcement/priority/security/security_announcement_delta = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/effects/siren.ogg'))
 

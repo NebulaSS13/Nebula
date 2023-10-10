@@ -11,7 +11,7 @@
 	var/list/datum/report_field/fields = list()            //A list of fields the report comes with, in order that they should be displayed.
 	var/available_on_network = 0                           //Whether this report type should show up for download.
 	var/logo                                               //Can be set to a pencode logo for use with some display methods.
-	var/list/searchable_fields = list()                    //The names of fields in the report which are searchable. 
+	var/list/searchable_fields = list()                    //The names of fields in the report which are searchable.
 
 /datum/computer_file/report/New()
 	..()
@@ -98,16 +98,16 @@ The recursive option resets access to all fields in the report as well.
 	fields += field
 	return field
 
-/datum/computer_file/report/clone()
-	var/datum/computer_file/report/temp = ..()
-	temp.title = title
-	temp.form_name = form_name
-	temp.creator = creator
-	temp.file_time = file_time
+/datum/computer_file/report/PopulateClone(datum/computer_file/report/clone)
+	clone = ..()
+	clone.title     = title
+	clone.form_name = form_name
+	clone.creator   = creator
+	clone.file_time = file_time
 	for(var/i = 1, i <= length(fields), i++)
-		var/datum/report_field/new_field = temp.fields[i]
+		var/datum/report_field/new_field = clone.fields[i]
 		new_field.copy_value(fields[i])
-	return temp
+	return clone
 
 /datum/computer_file/report/proc/display_name()
 	return "Form [form_name]: [title]"
@@ -166,8 +166,8 @@ Overriden so that read access is required to have write access
 */
 /datum/computer_file/report/get_file_perms(list/accesses, mob/user)
 	var/perms = ..()
-	if(!(perms & OS_WRITE_ACCESS))
-		perms &= ~OS_READ_ACCESS
+	if(!(perms & OS_READ_ACCESS))
+		perms &= ~OS_WRITE_ACCESS
 	return perms
 
 // Manually changing the permissions of a report will change *all* contained fields to match.

@@ -7,6 +7,7 @@
 	icon = 'icons/obj/structures/wall_frame.dmi'
 	icon_state = "frame"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED | ATOM_FLAG_ADJACENT_EXCEPTION
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	anchored = 1
 	density = 1
 	throwpass = 1
@@ -47,15 +48,15 @@
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
-/obj/structure/wall_frame/show_examined_damage(mob/user, var/perc)
+/obj/structure/wall_frame/get_examined_damage_string(health_ratio)
 	if(maxhealth == -1)
 		return
-	if(perc > 0.7)
-		to_chat(user, SPAN_NOTICE("It's got a few dents and scratches."))
-	else if(perc > 0.3)
-		to_chat(user, SPAN_WARNING("A few pieces of panelling have fallen off."))
+	if(health_ratio > 0.7)
+		return SPAN_NOTICE("It's got a few dents and scratches.")
+	else if(health_ratio > 0.3)
+		return SPAN_WARNING("A few pieces of panelling have fallen off.")
 	else
-		to_chat(user, SPAN_DANGER("It's nearly falling to pieces."))
+		return SPAN_DANGER("It's nearly falling to pieces.")
 
 /obj/structure/wall_frame/attackby(var/obj/item/W, var/mob/user)
 	. = ..()

@@ -4,7 +4,6 @@ var/global/datum/getrev/revdata = new()
 	var/branch
 	var/revision
 	var/date
-	var/showinfo
 
 /datum/getrev/New()
 	var/list/head_branch = file2list(".git/HEAD", "\n")

@@ -1,4 +1,4 @@
-#define waypoint_sector(waypoint) global.overmap_sectors["[waypoint.z]"]
+#define waypoint_sector(waypoint) global.overmap_sectors[num2text(waypoint.z)]
 
 /datum/shuttle/autodock/overmap
 	warmup_time = 10
@@ -9,6 +9,7 @@
 
 	category = /datum/shuttle/autodock/overmap
 	var/skill_needed = SKILL_BASIC
+	var/landing_skill_needed = SKILL_EXPERT
 	var/operator_skill = SKILL_MIN
 
 /datum/shuttle/autodock/overmap/New(var/map_hash, var/obj/effect/shuttle_landmark/start_waypoint)
@@ -76,7 +77,7 @@
 /datum/shuttle/autodock/overmap/get_location_name()
 	if(moving_status == SHUTTLE_INTRANSIT)
 		return "In transit"
-	return "[waypoint_sector(current_location)] - [current_location]"
+	return "\the [waypoint_sector(current_location)] - [current_location]"
 
 /datum/shuttle/autodock/overmap/get_destination_name()
 	if(!next_location)

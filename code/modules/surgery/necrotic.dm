@@ -5,7 +5,7 @@
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 	blood_level = 1
 	shock_level = 30
-	surgery_step_category = /decl/surgery_step/necrotic
+	abstract_type = /decl/surgery_step/necrotic
 
 //////////////////////////////////////////////////////////////////
 //	 Necrotic tissue removal
@@ -21,10 +21,10 @@
 	. = ..()
 	if(.)
 		var/obj/item/organ/external/affected = .
-		if(affected.status & ORGAN_DEAD && affected.germ_level > INFECTION_LEVEL_ONE)
+		if(affected.status & ORGAN_DEAD)
 			return TRUE
 		for(var/obj/item/organ/O in affected.internal_organs)
-			if(O.status & ORGAN_DEAD && O.germ_level > INFECTION_LEVEL_ONE)
+			if(O.status & ORGAN_DEAD)
 				return TRUE
 		return FALSE
 
@@ -36,13 +36,13 @@
 		return FALSE
 
 	var/list/dead_organs
-	if((E.status & ORGAN_DEAD) && E.germ_level > INFECTION_LEVEL_ONE)
+	if(E.status & ORGAN_DEAD)
 		var/image/radial_button = image(icon = E.icon, icon_state = E.icon_state)
 		radial_button.name = "Debride \the [E]"
 		LAZYSET(dead_organs, E.organ_tag, radial_button)
 
 	for(var/obj/item/organ/internal/I in E.internal_organs)
-		if(I && (I.status & ORGAN_DEAD) && I.germ_level > INFECTION_LEVEL_ONE && I.parent_organ == target_zone)
+		if(I && (I.status & ORGAN_DEAD) && I.parent_organ == target_zone)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Debride \the [I]"
 			LAZYSET(dead_organs, I.organ_tag, radial_button)
@@ -56,7 +56,7 @@
 	return FALSE
 
 /decl/surgery_step/necrotic/tissue/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		var/target_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 		user.visible_message(
@@ -80,7 +80,7 @@
 			E.disinfect()
 
 /decl/surgery_step/necrotic/tissue/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		user.visible_message(
 			SPAN_DANGER("\The [user]'s hand slips, slicing into a healthy portion of \the [target]'s [affected.name] with \the [tool]!"),
@@ -151,7 +151,7 @@
 	return FALSE
 
 /decl/surgery_step/necrotic/regeneration/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/affected = target.get_organ(target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		user.visible_message(
 			"[user] starts pouring [tool]'s contents on \the [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)].",

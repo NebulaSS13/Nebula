@@ -23,6 +23,13 @@
 	var/obj/item/hidden_item = null
 	var/shine = -1 // if material should apply shine overlay. Set to -1 for it to not do that
 
+	/// A multiplier applied to footstep volume.
+	var/footstep_volume_mod = 1
+	/// A multiplier applied to footstep range.
+	var/footstep_range_mod  = 1
+	/// A modifier applied to move delay when walking on snow.
+	var/snow_slowdown_mod   = 0
+
 /obj/item/clothing/shoes/Destroy()
 	. = ..()
 	if (hidden_item)
@@ -41,9 +48,9 @@
 			to_chat(user, SPAN_ITALIC("Something is hidden inside."))
 
 /obj/item/clothing/shoes/attack_hand(var/mob/user)
-	if (remove_hidden(user))
-		return
-	..()
+	if(user.check_dexterity(DEXTERITY_GRIP, TRUE) && remove_hidden(user))
+		return TRUE
+	return ..()
 
 /obj/item/clothing/shoes/attack_self(var/mob/user)
 	remove_cuffs(user)
@@ -65,7 +72,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] already has [attached_cuffs] attached."))
 		return
 	if (do_after(user, 5 SECONDS))
-		if(!user.unEquip(cuffs, src))
+		if(!user.try_unequip(cuffs, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
 		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
@@ -110,7 +117,7 @@
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
 		return TRUE
 	if (do_after(user, 1 SECONDS))
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return TRUE
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/remove_hidden
@@ -144,14 +151,10 @@
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	if (attached_cuffs && running)
-		if (attached_cuffs.health)
-			attached_cuffs.health -= 1
-			if (attached_cuffs.health < 1)
-				visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
-				verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-				LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
-				slowdown_per_slot[slot_shoes_str] -= attached_cuffs.elastic ? 10 : 15
-				QDEL_NULL(attached_cuffs)
+		attached_cuffs.take_damage(1, armor_pen = 100)
+		if(QDELETED(attached_cuffs))
+			verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
+			attached_cuffs = null
 	return
 
 /obj/item/clothing/shoes/update_clothing_icon()
@@ -170,7 +173,7 @@
 		var/mutable_appearance/S = mutable_appearance(icon, "[icon_state]_shine")
 		S.alpha = 127 * shine / 100
 		S.blend_mode = BLEND_ADD
-		overlays += S
+		add_overlay(S)
 
 /obj/item/clothing/shoes/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && shine > 0 && slot == slot_shoes_str)

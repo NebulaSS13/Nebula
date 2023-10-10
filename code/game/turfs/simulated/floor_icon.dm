@@ -59,7 +59,7 @@ var/global/list/flooring_cache = list()
 						add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES)))
 
 	for(var/image/I in decals)
-		if(I.layer != DECAL_PLATING_LAYER)
+		if(I.layer < layer)
 			continue
 		add_overlay(I)
 
@@ -141,7 +141,7 @@ var/global/list/flooring_cache = list()
 							break
 				else if(floor_smooth == SMOOTH_BLACKLIST)
 					is_linked = TRUE //Default to true for the blacklist, then make it false if a match comes up
-					for (var/v in flooring_whitelist)
+					for (var/v in flooring_blacklist)
 						if (istype(t.flooring, v))
 							//Found a match on the list
 							is_linked = FALSE

@@ -15,11 +15,9 @@
 	atmos_canpass = CANPASS_NEVER
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
-	var/static/const/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/icon_base = "fridge_sci"
 	var/icon_contents = "chem"
 	var/list/item_records = list()
-	var/datum/stored_items/currently_vending = null	//What we're putting out of the machine.
 	var/seconds_electrified = 0;
 	var/shoot_inventory = 0
 	var/locked = 0
@@ -243,7 +241,7 @@
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O, var/mob/user)
 	if(accept_check(O))
-		if(!user.unEquip(O))
+		if(!user.try_unequip(O))
 			return
 		stock_item(O)
 		user.visible_message("<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")

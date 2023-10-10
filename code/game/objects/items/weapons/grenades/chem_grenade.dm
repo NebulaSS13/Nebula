@@ -7,12 +7,10 @@
 	det_time = null
 	unacidable = 1
 	var/stage = 0
-	var/state = 0
 	var/path = 0
 	var/obj/item/assembly_holder/detonator = null
 	var/list/beakers = new/list()
 	var/list/allowed_containers = list(/obj/item/chems/glass/beaker, /obj/item/chems/glass/bottle)
-	var/affected_area = 3
 
 /obj/item/grenade/chem_grenade/Initialize()
 	. = ..()
@@ -47,7 +45,7 @@
 			C.throw_mode_on()
 
 /obj/item/grenade/chem_grenade/on_update_icon()
-	..()
+	. = ..()
 	if(detonator)
 		add_overlay("[icon_state]-assembled")
 	if(path == 1)
@@ -62,7 +60,7 @@
 		if(!det.secured)
 			to_chat(user, "<span class='warning'>Assembly must be secured with screwdriver.</span>")
 			return
-		if(!user.unEquip(det, src))
+		if(!user.try_unequip(det, src))
 			return
 		path = 1
 		log_and_message_admins("has attached \a [W] to \the [src].")
@@ -77,7 +75,7 @@
 			det_time = 10*T.time
 		SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
 		stage = 1
-	else if(isScrewdriver(W) && path != 2)
+	else if(IS_SCREWDRIVER(W) && path != 2)
 		if(stage == 1)
 			path = 1
 			if(beakers.len)
@@ -106,7 +104,7 @@
 			return
 		else
 			if(W.reagents.total_volume)
-				if(!user.unEquip(W, src))
+				if(!user.try_unequip(W, src))
 					return
 				to_chat(user, "<span class='notice'>You add \the [W] to the assembly.</span>")
 				beakers += W
@@ -197,7 +195,6 @@
 	icon = 'icons/obj/items/grenades/grenade_large.dmi'
 	allowed_containers = list(/obj/item/chems/glass)
 	origin_tech = "{'combat':3,'materials':3}"
-	affected_area = 4
 	material = /decl/material/solid/metal/steel
 
 /obj/item/grenade/chem_grenade/metalfoam

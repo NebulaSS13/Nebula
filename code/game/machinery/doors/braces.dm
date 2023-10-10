@@ -4,7 +4,7 @@
 	desc = "A special crowbar that can be used to safely remove airlock braces from airlocks."
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/items/tool/maintenance_jack.dmi'
-	icon_state = "maintenance_jack"
+	icon_state = ICON_STATE_WORLD
 	force = 17.5 //It has a hammer head, should probably do some more damage. - Cirra
 	attack_cooldown = 2.5*DEFAULT_WEAPON_COOLDOWN
 	melee_accuracy_bonus = -25
@@ -31,10 +31,9 @@
 	. = ..()
 	to_chat(user, examine_health())
 
-
 // This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
 /obj/item/airlock_brace/proc/examine_health()
-	switch(health_percentage())
+	switch(get_percent_health())
 		if(-100 to 25)
 			return "<span class='danger'>\The [src] looks seriously damaged, and probably won't last much more.</span>"
 		if(25 to 50)
@@ -46,31 +45,28 @@
 		if(99 to INFINITY)
 			return "\The [src] is in excellent condition."
 
-
 /obj/item/airlock_brace/on_update_icon()
+	. = ..()
 	if(airlock)
 		icon_state = "brace_closed"
 	else
 		icon_state = "brace_open"
 
-
 /obj/item/airlock_brace/Initialize()
 	. = ..()
-	health = max_health
-	electronics = new (src)
+	if(!electronics)
+		electronics = new (src)
 
 /obj/item/airlock_brace/Destroy()
 	if(airlock)
 		airlock.brace = null
 		airlock = null
-	qdel(electronics)
-	electronics = null
+	QDEL_NULL(electronics)
 	return ..()
 
 // Interact with the electronics to set access requirements.
 /obj/item/airlock_brace/attack_self(mob/user)
 	electronics.attack_self(user)
-
 
 /obj/item/airlock_brace/attackby(obj/item/W, mob/user)
 	..()
@@ -99,28 +95,25 @@
 			unlock_brace(user)
 		return
 
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/C = W
-		if(health == max_health)
+		if(!is_damaged())
 			to_chat(user, "\The [src] does not require repairs.")
 			return
-		if(C.remove_fuel(0,user))
+		if(C.weld(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			health = min(health + rand(20,30), max_health)
-			if(health == max_health)
+			if(!is_damaged())
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else
 				to_chat(user, "You repair some dents on \the [src].")
 
 
-/obj/item/airlock_brace/proc/take_damage(var/amount)
-	health = between(0, health - amount, max_health)
-	if(!health)
-		if(airlock)
-			airlock.visible_message("<span class='danger'>\The [src] breaks off of \the [airlock]!</span>")
-		unlock_brace(null)
-		qdel(src)
-
+/obj/item/airlock_brace/physically_destroyed(skip_qdel)
+	if(airlock)
+		airlock.visible_message(SPAN_DANGER("\The [src] breaks off of \the [airlock]!"))
+	unlock_brace(null)
+	. = ..()
 
 /obj/item/airlock_brace/proc/unlock_brace(var/mob/user)
 	if(!airlock)
@@ -135,8 +128,3 @@
 	airlock = null
 	update_icon()
 
-
-/obj/item/airlock_brace/proc/health_percentage()
-	if(!max_health)
-		return 0
-	return (health / max_health) * 100

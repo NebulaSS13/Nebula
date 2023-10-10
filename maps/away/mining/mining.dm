@@ -25,12 +25,11 @@
 
 /datum/map_template/ruin/away_site/mining_asteroid
 	name = "Mining - Asteroid"
-	id = "awaysite_mining_asteroid"
 	description = "A medium-sized asteroid full of minerals."
 	suffixes = list("mining/mining-asteroid.dmm")
 	cost = 1
 	accessibility_weight = 10
-	generate_mining_by_z = 1
+	level_data_type = /datum/level_data/mining_level/asteroid
 	apc_test_exempt_areas = list(
 		/area/outpost/abandoned = NO_SCRUBBER,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -95,12 +94,10 @@
 
 /datum/map_template/ruin/away_site/mining_signal
 	name = "Mining - Planetoid"
-	id = "awaysite_mining_signal"
 	description = "A mineral-rich, formerly-volcanic site on a planetoid."
 	suffixes = list("mining/mining-signal.dmm")
 	cost = 1
-	generate_mining_by_z = 1
-	base_turf_for_zs = /turf/simulated/floor/asteroid
+	level_data_type = /datum/level_data/mining_level/asteroid
 	area_usage_test_exempted_root_areas = list(/area/mine, /area/outpost)
 	apc_test_exempt_areas = list(
 		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -162,13 +159,11 @@
 
 /datum/map_template/ruin/away_site/orb
 	name = "Mining - Orb"
-	id = "awaysite_mining_orb"
 	description = "A sort of circular asteroid with a bird."
 	suffixes = list("mining/mining-orb.dmm")
 	cost = 1
 	accessibility_weight = 10
-	generate_mining_by_z = 1
-	base_turf_for_zs = /turf/simulated/floor/asteroid
+	level_data_type = /datum/level_data/mining_level/asteroid
 	area_usage_test_exempted_root_areas = list(/area/mine)
 	area_usage_test_exempted_areas = list(/area/djstation)
 	apc_test_exempt_areas = list(

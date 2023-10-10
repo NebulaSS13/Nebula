@@ -175,7 +175,7 @@
 		var/blocked = 100 * occupant.get_blocked_ratio(def_zone, BRUTE, damage = 10)
 		occupant.throw_at(A, 3, propelled)
 		occupant.apply_effect(6, STUN, blocked)
-		occupant.apply_effect(6, WEAKEN, blocked)
+		occupant.apply_effect(6, WEAKEN, blocked) //#TODO: geez that might be a bit overkill
 		occupant.apply_effect(6, STUTTER, blocked)
 		occupant.apply_damage(10, BRUTE, def_zone)
 		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
@@ -184,7 +184,7 @@
 			def_zone = ran_zone()
 			blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)
 			victim.apply_effect(6, STUN, blocked)
-			victim.apply_effect(6, WEAKEN, blocked)
+			victim.apply_effect(6, WEAKEN, blocked)  //#TODO: geez that might be a bit overkill
 			victim.apply_effect(6, STUTTER, blocked)
 			victim.apply_damage(10, BRUTE, def_zone)
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
@@ -276,7 +276,7 @@
 	material = /decl/material/solid/wood
 
 /obj/structure/bed/chair/wood/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/stack) || isWirecutter(W))
+	if(istype(W,/obj/item/stack) || IS_WIRECUTTER(W))
 		return
 	..()
 

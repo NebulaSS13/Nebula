@@ -11,17 +11,16 @@
 	pry_time = 4 SECONDS
 	skull_type = /obj/item/whip/tail
 	bleed_colour = COLOR_VIOLET
-	melee_damage_flags = DAM_EDGE
 
 	health = 200
 	maxHealth = 200
 	natural_weapon = /obj/item/natural_weapon/claws/drake
 	var/obj/item/whip/tail/tailwhip
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		energy = ARMOR_ENERGY_SHIELDED, 
-		laser = ARMOR_LASER_HEAVY, 
-		bomb = ARMOR_BOMB_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_ENERGY = ARMOR_ENERGY_SHIELDED,
+		ARMOR_LASER = ARMOR_LASER_HEAVY,
+		ARMOR_BOMB = ARMOR_BOMB_SHIELDED
 	)
 	ability_cooldown = 80 SECONDS
 
@@ -31,19 +30,12 @@
 /mob/living/simple_animal/hostile/drake/lava_act(datum/gas_mixture/air, temperature, pressure)
 	return
 
-/mob/living/simple_animal/hostile/drake/can_perform_ability()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!target_mob)
-		return FALSE
-
 /mob/living/simple_animal/hostile/drake/AttackingTarget()
 	. = ..()
 	if(empowered_attack)
 		depower()
 		return
-	if(can_perform_ability())
+	if(can_act() && !is_on_special_ability_cooldown() && target_mob)
 		empower()
 
 /mob/living/simple_animal/hostile/drake/get_natural_weapon()
@@ -52,15 +44,15 @@
 			tailwhip = new(src)
 		return tailwhip
 	. = ..()
-	
+
 /mob/living/simple_animal/hostile/drake/proc/empower()
 	visible_message(SPAN_MFAUNA("\The [src] thrashes its tail about!"))
 	empowered_attack = TRUE
 	if(prob(25) && !gas_spent)
 		vent_gas()
-		cooldown_ability(ability_cooldown * 1.5)
+		set_special_ability_cooldown(ability_cooldown * 1.5)
 		return
-	cooldown_ability(ability_cooldown)
+	set_special_ability_cooldown(ability_cooldown)
 
 /mob/living/simple_animal/hostile/drake/proc/vent_gas()
 	visible_message(SPAN_MFAUNA("\The [src] raises its wings, vents a miasma of burning gas, and spreads it about with a flap!"))

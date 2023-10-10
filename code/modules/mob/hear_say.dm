@@ -21,7 +21,7 @@
 		if(pressure < SOUND_MINIMUM_PRESSURE && get_dist(speaker, src) > 1)
 			return
 
-		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
+		if (pressure < (0.4 ATM)) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
@@ -34,25 +34,15 @@
 		if (!speaker || (src.sdisabilities & BLINDED || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
 
-	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for LANG_FLAG_INNATE languages
-		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
-				var/mob/living/simple_animal/S = speaker
-				message = pick(S.speak)
+	var/understands_language = say_understands(speaker, language)
+	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for INNATE languages
+		if(!understands_language)
+			if(language)
+				message = language.scramble(speaker, message, languages)
 			else
-				if(language)
-					message = language.scramble(message, languages)
-				else
-					message = stars(message)
+				message = stars(message)
 
-	var/speaker_name = "Unknown"
-	if(speaker)
-		speaker_name = speaker.name
-
-	if(istype(speaker, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = speaker
-		speaker_name = H.GetVoice()
-
+	var/speaker_name = speaker?.GetVoice() || "Unknown"
 	if(italics)
 		message = "<i>[message]</i>"
 
@@ -74,7 +64,7 @@
 	else
 		if (language)
 			var/nverb = verb
-			if (say_understands(speaker, language))
+			if (understands_language)
 				var/skip = FALSE
 				if (isliving(src))
 					var/mob/living/L = src
@@ -101,7 +91,7 @@
 	var/time = say_timestamp()
 	to_chat(src, "[time] [message]")
 
-/mob/proc/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
+/mob/proc/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="", var/vsource)
 
 	if(!client)
 		return
@@ -127,7 +117,7 @@
 					return
 			else
 				if(language)
-					message = language.scramble(message, languages)
+					message = language.scramble(speaker, message, languages)
 				else
 					message = stars(message)
 
@@ -141,7 +131,7 @@
 
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
-		if(H.voice)
+		if(H.voice && !vname)
 			speaker_name = H.voice
 
 	if(hard_to_hear)
@@ -156,7 +146,7 @@
 		if (ishuman(speaker))
 			var/mob/living/carbon/human/H = speaker
 
-			if(H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/chameleon/voice))
+			if(istype(H.get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask/chameleon/voice))
 				changed_voice = 1
 				var/list/impersonated = new()
 				var/mob/living/carbon/human/I = impersonated[speaker_name]
@@ -170,7 +160,7 @@
 
 				// If I's display name is currently different from the voice name and using an agent ID then don't impersonate
 				// as this would allow the AI to track I and realize the mismatch.
-				if(I && !(I.name != speaker_name && I.wear_id && istype(I.wear_id,/obj/item/card/id/syndicate)))
+				if(I && !(I.name != speaker_name && istype(I.get_equipped_item(slot_wear_id_str),/obj/item/card/id/syndicate)))
 					impersonating = I
 					jobname = impersonating.get_assignment()
 				else
@@ -198,7 +188,7 @@
 			track = "<a href='byond://?src=\ref[src];trackname=[html_encode(speaker_name)];track=\ref[speaker]'>[speaker_name] ([jobname])</a>"
 
 	if(isghost(src))
-		if(speaker) //speaker is null when the arrivals annoucement plays
+		if(istype(speaker)) //speaker is null when the arrivals annoucement plays
 			if(speaker_name != speaker.real_name && !isAI(speaker)) //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
 				speaker_name = "[speaker.real_name] ([speaker_name])"
 			track = "([ghost_follow_link(speaker, src)]) [speaker_name]"
@@ -228,25 +218,27 @@
 		var/mob/living/carbon/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
 			to_chat(src, SPAN_WARNING("You feel your headset vibrate but can hear nothing from it!"))
+	else if(vsource)
+		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted, " <small>\[[vsource]\]</small>")
 	else
-		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
+		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted, null)
 
 /proc/say_timestamp()
 	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"
 
-/mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
-	to_chat(src, "[part_a][speaker_name][part_b][formatted][part_c]")
+/mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted, vsource)
+	to_chat(src, "[part_a][speaker_name][vsource][part_b][formatted][part_c]")
 
-/mob/observer/ghost/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
-	to_chat(src, "[part_a][track][part_b][formatted][part_c]")
+/mob/observer/ghost/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted, vsource)
+	to_chat(src, "[part_a][track][vsource][part_b][formatted][part_c]")
 
-/mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
+/mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted, vsource)
 	var/time = say_timestamp()
-	to_chat(src, "[time][part_a][speaker_name][part_b][formatted][part_c]")
+	to_chat(src, "[time][part_a][speaker_name][vsource][part_b][formatted][part_c]")
 
-/mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
+/mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted, vsource)
 	var/time = say_timestamp()
-	to_chat(src, "[time][part_a][track][part_b][formatted][part_c]")
+	to_chat(src, "[time][part_a][track][vsource][part_b][formatted][part_c]")
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/decl/language/language, var/mob/speaker = null)
 	if(!client)

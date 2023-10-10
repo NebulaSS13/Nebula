@@ -80,7 +80,7 @@
 		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
 			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
 
-		if(!(slot in user_mob?.held_item_slots))
+		if(!(slot in user_mob?.get_held_item_slots()))
 			if(ishuman(user_mob))
 				var/mob/living/carbon/human/user_human = user_mob
 				if(blood_DNA)
@@ -95,15 +95,17 @@
 	. = ..()
 
 /obj/item/clothing/on_update_icon()
-	..()
+	. = ..()
 	var/base_state = get_world_inventory_state()
-	cut_overlays()
 	if(markings_icon && markings_color)
 		add_overlay(mutable_appearance(icon, "[base_state][markings_icon]", markings_color))
+	var/list/new_overlays
 	for(var/obj/item/clothing/accessory/accessory in accessories)
 		var/image/I = accessory.get_attached_inventory_overlay(base_state)
 		if(I)
-			add_overlay(I)
+			LAZYADD(new_overlays, I)
+	if(LAZYLEN(new_overlays))
+		add_overlay(new_overlays)
 
 /obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
 	smell_state = smell
@@ -133,7 +135,7 @@
 
 /obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = FALSE, force = FALSE)
 	. = ..()
-	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.held_item_slots))
+	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.get_held_item_slots()))
 		var/mob/living/carbon/human/H = M
 		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.bodytype.bodytype_flag) : (bodytype_equip_flags & H.bodytype.bodytype_flag)
 		if(!. && !disable_warning)

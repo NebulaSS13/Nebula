@@ -11,7 +11,7 @@
 	shock_level = 40
 	delicate = 1
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NEEDS_ENCASEMENT
-	surgery_step_category = /decl/surgery_step/cavity
+	abstract_type = /decl/surgery_step/cavity
 
 /decl/surgery_step/cavity/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
@@ -128,7 +128,7 @@
 
 /decl/surgery_step/cavity/place_item/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
-	if(!user.unEquip(tool, affected))
+	if(!user.try_unequip(tool, affected))
 		return
 	user.visible_message("<span class='notice'>[user] puts \the [tool] inside [target]'s [affected.cavity_name] cavity.</span>", \
 	"<span class='notice'>You put \the [tool] inside [target]'s [affected.cavity_name] cavity.</span>" )

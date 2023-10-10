@@ -9,6 +9,8 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	z_flags = ZMM_MANGLE_PLANES
+	obj_flags = OBJ_FLAG_HOLLOW
+	material = /decl/material/solid/metal/steel
 	var/active
 	var/det_time = 50
 	var/fail_det_time = 5 // If you are clumsy and fail, you get this time.
@@ -25,13 +27,15 @@
 		update_icon()
 
 /obj/item/grenade/on_update_icon()
-	cut_overlays()
+	. = ..()
+	z_flags &= ~ZMM_MANGLE_PLANES
 	if(active)
 		if(check_state_in_icon("[icon_state]-active", icon))
 			if(plane == HUD_PLANE)
-				add_overlay(image(icon, "[icon_state]-active"))
+				add_overlay("[icon_state]-active")
 			else
 				add_overlay(emissive_overlay(icon, "[icon_state]-active"))
+				z_flags |= ZMM_MANGLE_PLANES
 	else if(check_state_in_icon("[icon_state]-pin", icon))
 		add_overlay("[icon_state]-pin")
 
@@ -81,23 +85,20 @@
 		T.hotspot_expose(700,125)
 
 /obj/item/grenade/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		switch(det_time)
 			if (1)
 				det_time = 10
-				to_chat(user, "<span class='notice'>You set the [name] for 1 second detonation time.</span>")
+				to_chat(user, SPAN_NOTICE("You set the \the [src] for 1 second detonation time."))
 			if (10)
 				det_time = 30
-				to_chat(user, "<span class='notice'>You set the [name] for 3 second detonation time.</span>")
+				to_chat(user, SPAN_NOTICE("You set the \the [src] for 3 second detonation time."))
 			if (30)
 				det_time = 50
-				to_chat(user, "<span class='notice'>You set the [name] for 5 second detonation time.</span>")
+				to_chat(user, SPAN_NOTICE("You set the \the [src] for 5 second detonation time."))
 			if (50)
 				det_time = 1
-				to_chat(user, "<span class='notice'>You set the [name] for instant detonation.</span>")
+				to_chat(user, SPAN_NOTICE("You set the \the [src] for instant detonation."))
 		add_fingerprint(user)
-	..()
-
-/obj/item/grenade/attack_hand()
-	walk(src, null, null)
-	..()
+		return TRUE
+	return ..()

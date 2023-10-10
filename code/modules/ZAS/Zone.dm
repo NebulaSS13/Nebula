@@ -12,14 +12,14 @@ Class Vars:
 	air - The gas mixture that any turfs in this zone will return. Values are per-tile with a group multiplier.
 
 Class Procs:
-	add(turf/simulated/T)
+	add(turf/T)
 		Adds a turf to the contents, sets its zone and merges its air.
 
-	remove(turf/simulated/T)
+	remove(turf/T)
 		Removes a turf, sets its zone to null and erases any gas graphics.
 		Invalidates the zone if it has no more tiles.
 
-	c_merge(zone/into)
+	c_merge(var/zone/into)
 		Invalidates this zone and adds all its former contents to into.
 
 	c_invalidate()
@@ -28,7 +28,7 @@ Class Procs:
 	rebuild()
 		Invalidates the zone and marks all its former tiles for updates.
 
-	add_tile_air(turf/simulated/T)
+	add_tile_air(turf/T)
 		Adds the air contained in T.air to the zone's air supply. Called when adding a turf.
 
 	tick()
@@ -59,11 +59,12 @@ Class Procs:
 	air.group_multiplier = 1
 	air.volume = CELL_VOLUME
 
-/zone/proc/add(turf/simulated/T)
+/zone/proc/add(turf/T)
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(T))
-	ASSERT(!SSair.has_valid_zone(T))
+	ASSERT(T.zone_membership_candidate)
+	ASSERT(!TURF_HAS_VALID_ZONE(T))
 #endif
 
 	var/datum/gas_mixture/turf_air = T.return_air()
@@ -73,25 +74,26 @@ Class Procs:
 	if(T.fire)
 		fire_tiles.Add(T)
 		SSair.active_fire_zones |= src
-	T.update_graphic(air.graphic)
+	T.refresh_vis_contents()
 
-/zone/proc/remove(turf/simulated/T)
+/zone/proc/remove(turf/T)
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(T))
+	ASSERT(T.zone_membership_candidate)
 	ASSERT(T.zone == src)
 	soft_assert(T in contents, "Lists are weird broseph")
 #endif
 	contents.Remove(T)
 	fire_tiles.Remove(T)
 	T.zone = null
-	T.update_graphic(graphic_remove = air.graphic)
+	T.refresh_vis_contents()
 	if(contents.len)
 		air.group_multiplier = contents.len
 	else
 		c_invalidate()
 
-/zone/proc/c_merge(zone/into)
+/zone/proc/c_merge(var/zone/into)
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(into))
@@ -99,11 +101,13 @@ Class Procs:
 	ASSERT(!into.invalid)
 #endif
 	c_invalidate()
-	for(var/turf/simulated/T in contents)
+	for(var/turf/T as anything in contents)
+		if(!T.zone_membership_candidate)
+			continue
 		into.add(T)
-		T.update_graphic(graphic_remove = air.graphic)
+		T.refresh_vis_contents()
 		#ifdef ZASDBG
-		T.dbg(merged)
+		T.dbg(zasdbgovl_merged)
 		#endif
 
 	//rebuild the old zone's edges so that they will be possessed by the new zone
@@ -117,17 +121,16 @@ Class Procs:
 	invalid = 1
 	SSair.remove_zone(src)
 	#ifdef ZASDBG
-	for(var/turf/simulated/T in contents)
-		T.dbg(invalid_zone)
+	for(var/turf/T as anything in contents)
+		T.dbg(zasdbgovl_invalid_zone)
 	#endif
 
 /zone/proc/rebuild()
 	set waitfor = 0
 	if(invalid) return //Short circuit for explosions where rebuild is called many times over.
 	c_invalidate()
-	for(var/turf/simulated/T in contents)
-		T.update_graphic(graphic_remove = air.graphic) //we need to remove the overlays so they're not doubled when the zone is rebuilt
-		//T.dbg(invalid_zone)
+	for(var/turf/T as anything in contents)
+		T.refresh_vis_contents()
 		T.needs_air_update = 0 //Reset the marker so that it will be added to the list.
 		SSair.mark_for_update(T)
 		CHECK_TICK
@@ -150,8 +153,8 @@ Class Procs:
 
 	// Update gas overlays.
 	if(air.check_tile_graphic(graphic_add, graphic_remove))
-		for(var/turf/simulated/T in contents)
-			T.update_graphic(graphic_add, graphic_remove)
+		for(var/turf/T as anything in contents)
+			T.refresh_vis_contents()
 			CHECK_TICK
 		graphic_add.len = 0
 		graphic_remove.len = 0
@@ -169,7 +172,7 @@ Class Procs:
 	// Update atom temperature.
 	if(abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
 		last_air_temperature = air.temperature
-		for(var/turf/simulated/T in contents)
+		for(var/turf/T as anything in contents)
 			for(var/check_atom in T.contents)
 				var/atom/checking = check_atom
 				if(checking.simulated)
@@ -204,8 +207,7 @@ Class Procs:
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
 	to_chat(M, "O2 per N2: [(air.gas[/decl/material/gas/nitrogen] ? air.gas[/decl/material/gas/oxygen]/air.gas[/decl/material/gas/nitrogen] : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")
-//	to_chat(M, "Unsimulated: [unsimulated_contents.len]")
-//	to_chat(M, "Edges: [edges.len]")
+	to_chat(M, "Edges: [length(edges)]")
 	if(invalid) to_chat(M, "Invalid!")
 	var/zone_edges = 0
 	var/space_edges = 0

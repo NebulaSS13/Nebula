@@ -3,6 +3,7 @@
 /mob/living/exosuit/premade
 	name = "impossible exosuit"
 	desc = "It seems to be saying 'please let me die'."
+	abstract_type = /mob/living/exosuit/premade
 	var/decal
 
 /mob/living/exosuit/premade/Initialize()

@@ -13,7 +13,7 @@
 	. = ..()
 
 /mob/living/proc/set_psi_rank(var/faculty, var/rank, var/take_larger, var/defer_update, var/temporary)
-	if(!src.zone_sel)
+	if(!get_target_zone()) // Can't target a zone, so you can't really invoke psionics.
 		to_chat(src, SPAN_NOTICE("You feel something strange brush against your mind... but your brain is not able to grasp it."))
 		return
 	if(!psi)
@@ -33,7 +33,7 @@
 
 /mob/living/carbon/human/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/obj/item/projectile/P = damage_source
-	if(istype(P) && !P.disrupts_psionics() && psi && P.starting && prob(psi.get_armour(get_armor_key(P.damage_type, P.damage_flags())) * 0.5) && psi.spend_power(round(damage/10)))
+	if(istype(P) && !P.disrupts_psionics() && psi && P.starting && prob(psi.get_armour(SSmaterials.get_armor_key(P.damage_type, P.damage_flags())) * 0.5) && psi.spend_power(round(damage/10)))
 		visible_message("<span class='danger'>\The [src] deflects [attack_text]!</span>")
 		P.redirect(P.starting.x + rand(-2,2), P.starting.y + rand(-2,2), get_turf(src), src)
 		return PROJECTILE_FORCE_MISS
@@ -42,7 +42,7 @@
 /mob/living/carbon/get_cuff_breakout_mod()
 	. = ..()
 	if(psi)
-		. = Clamp(. - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2), 0, 1)
+		. = clamp(. - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2), 0, 1)
 
 /mob/living/can_break_cuffs()
 	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)

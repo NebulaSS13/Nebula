@@ -198,9 +198,9 @@
 	limit_b_y = MINMAX(limit_b_y)
 
 #undef ARBITRARY_NUMBER
-#undef POLAR_TO_CART_X
-#undef POLAR_TO_CART_Y
 #undef MINMAX
+#undef POLAR_TO_CART_Y
+#undef POLAR_TO_CART_X
 
 /datum/light_source/proc/remove_lum(now = FALSE)
 	applied = FALSE

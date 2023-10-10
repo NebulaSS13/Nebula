@@ -9,7 +9,7 @@
 	var/decl/status_condition/cond = GET_DECL(condition)
 	if(!cond.check_can_set(src))
 		return FALSE
-	amount = Clamp(amount, 0, 1000)
+	amount = clamp(amount, 0, 1000)
 	if(amount == PENDING_STATUS(src, condition))
 		return FALSE
 	LAZYSET(pending_status_counters, condition, amount)

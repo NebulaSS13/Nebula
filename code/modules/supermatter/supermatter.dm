@@ -50,7 +50,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	'sound/machines/sm/accent/delam/4.ogg',
 	'sound/machines/sm/accent/delam/5.ogg',
 
-	
+
 )
 
 // Returns a truthy value that is also used for power generation by the supermatter core itself.
@@ -155,8 +155,6 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	var/pull_time = 300
 	var/explosion_power = 9
 
-	var/emergency_issued = 0
-
 	// Time in 1/10th of seconds since the last sent warning
 	var/lastwarning = 0
 
@@ -190,7 +188,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	var/datum/composite_sound/supermatter/soundloop
 
-	var/damage_animation = FALSE //we we doing our damage animation?
+	var/damage_animation = FALSE //are we doing our damage animation?
 
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
 		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
@@ -302,7 +300,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	if(!istype(TS))
 		return
 
-	var/list/affected_z = GetConnectedZlevels(TS.z)
+	var/list/affected_z = SSmapping.get_connected_levels(TS.z)
 
 	// Effect 1: Radiation, weakening to all mobs on Z level
 	for(var/z in affected_z)
@@ -404,19 +402,18 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else
 		alert_msg = null
 	if(alert_msg)
-		var/obj/item/radio/announcer = get_global_announcer()
-		announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
+		do_telecomms_announcement(src, alert_msg, "Supermatter Monitor", "Engineering")
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
-			announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
+			do_telecomms_announcement(src, "WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
 			global.using_map.unbolt_saferooms()
 			for(var/mob/M in global.player_list)
 				var/turf/T = get_turf(M)
-				if(T && (T.z in global.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+				if(T && isStationLevel(T.z) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
-			announcer.autosay(alert_msg, "Supermatter Monitor")
+			do_telecomms_announcement(src, alert_msg, "Supermatter Monitor")
 			public_alert = 0
 
 
@@ -431,14 +428,14 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	if(damage > explosion_point)
 		if(!exploded)
-			if(!isspaceturf(L) && (L.z in global.using_map.station_levels))
+			if(!isspaceturf(L) && isStationLevel(L.z))
 				announce_warning()
 			explode()
 	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		shift_light(5, warning_color)
 		if(damage > emergency_point)
 			shift_light(7, emergency_color)
-		if(!isspaceturf(L) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in global.using_map.station_levels))
+		if(!isspaceturf(L) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && isStationLevel(L.z))
 			announce_warning()
 	else
 		shift_light(4,base_color)
@@ -457,7 +454,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		soundloop.mid_sounds = list('sound/machines/sm/loops/delamming.ogg' = 1)
 	else
 		soundloop.mid_sounds = list('sound/machines/sm/loops/calm.ogg' = 1)
-	
+
 	// Play Delam/Neutral sounds at rate determined by power and damage.
 	if(last_accent_sound < world.time && prob(20))
 		var/aggression = min(((damage / 800) * (power / 2500)), 1.0) * 100
@@ -487,11 +484,11 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else
 		damage_archived = damage
 
-		damage = max(0, damage + between(-damage_rate_limit, (removed.temperature - critical_temperature) / 150, damage_inc_limit))
+		damage = max(0, damage + clamp(-damage_rate_limit, (removed.temperature - critical_temperature) / 150, damage_inc_limit))
 
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = Clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[/decl/material/gas/nitrogen] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
+		oxygen = clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[/decl/material/gas/nitrogen] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
 
 		//calculate power gain for oxygen reaction
 		var/temp_factor
@@ -520,7 +517,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
 
 		removed.add_thermal_energy(thermal_power)
-		removed.temperature = between(0, removed.temperature, 10000)
+		removed.temperature = clamp(0, removed.temperature, 10000)
 
 		env.merge(removed)
 
@@ -541,16 +538,10 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	if(!power)
 		animate_filter("outline", list(size = 0))
 
-	color = color_contrast(Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
+	color = color_matrix_contrast(Interpolate(1, 5, clamp( (damage - emergency_point) / (explosion_point - emergency_point), 0, 1)))
 
-	if (damage >= emergency_point)
-		if(!get_filter("rays"))
-			add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
-		animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
-		animate(time = 10 SECONDS, loop=-1)
-
-		animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
-		animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
+	if (damage >= emergency_point && !damage_animation)
+		start_damage_animation()
 	else if (damage < emergency_point)
 		remove_filter("rays")
 
@@ -558,7 +549,22 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	power -= (power/decay_factor)**3		//energy losses due to radiation
 	handle_admin_warnings()
 
-	return 1	
+	return 1
+
+/obj/machinery/power/supermatter/proc/start_damage_animation()
+	if(damage_animation)
+		return
+	if(!get_filter("rays"))
+		add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
+	animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
+	animate(time = 10 SECONDS, loop=-1)
+
+	animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
+	animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
+	addtimer(CALLBACK(src, .proc/finish_damage_animation), 12 SECONDS)
+
+/obj/machinery/power/supermatter/proc/finish_damage_animation()
+	damage_animation = FALSE
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
 	var/turf/L = loc
@@ -575,22 +581,19 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	return 0
 
 /obj/machinery/power/supermatter/attack_robot(mob/user)
-	if(Adjacent(user))
-		return attack_hand(user)
-	else
-		ui_interact(user)
-	return
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/supermatter/attack_ai(mob/living/silicon/ai/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/supermatter/attack_ghost(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/supermatter/attack_hand(mob/user)
-	if(Consume(null, user, TRUE))
-		return TRUE
-	return ..()
+	return Consume(null, user, TRUE) || ..()
 
 // This is purely informational UI that may be accessed by AIs or robots
 /obj/machinery/power/supermatter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -621,15 +624,24 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 /obj/machinery/power/supermatter/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/ducttape))
-		to_chat(user, "You repair some of the damage to \the [src] with \the [W].")
+	if(istype(W, /obj/item/stack/tape_roll/duct_tape))
+		var/obj/item/stack/tape_roll/duct_tape/T = W
+		if(!T.can_use(20))
+			to_chat(user, SPAN_WARNING("You need at least 20 [T.plural_name] to repair \the [src]."))
+			return
+		T.use(20)
+		playsound(src, 'sound/effects/tape.ogg', 100, TRUE)
+		to_chat(user, SPAN_NOTICE("You begin to repair some of the damage to \the [src] with \the [W]."))
 		damage = max(damage -10, 0)
 
-	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
-		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
-		"<span class=\"warning\">Everything suddenly goes silent.</span>")
-	user.drop_from_inventory(W)
-	Consume(user, W, TRUE)
+	if(!QDELETED(W))
+		user.visible_message(SPAN_WARNING("\The [user] touches \the [src] with \a [W] as silence fills the room..."),\
+			SPAN_DANGER("You touch \the [W] to \the [src] when everything suddenly goes quiet."),\
+			SPAN_WARNING("Everything suddenly goes silent."))
+
+		to_chat(user, SPAN_NOTICE("\The [W] flashes into dust as you flinch away from \the [src]."))
+		user.drop_from_inventory(W)
+		Consume(user, W, TRUE)
 	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/machinery/power/supermatter/Bumped(atom/AM)
@@ -659,6 +671,20 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		power *= max(1, 5 - severity)
 		log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
 
+/obj/machinery/power/supermatter/singularity_act()
+	if(!src.loc)
+		return
+
+	var/prints = ""
+	if(src.fingerprintshidden)
+		prints = ", all touchers : " + src.fingerprintshidden
+
+	SetUniversalState(/datum/universal_state/supermatter_cascade)
+	log_and_message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
+	src.forceMove(null)
+	qdel(src)
+	return 50000
+
 /obj/machinery/power/supermatter/get_artifact_scan_data()
 	return "Superdense crystalline structure - appears to have been shaped or hewn, lattice is approximately 20 times denser than should be possible."
 
@@ -682,6 +708,11 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
+
+/obj/machinery/power/supermatter/shard/singularity_act()
+	src.forceMove(null)
+	qdel(src)
+	return 5000
 
 #undef LIGHT_POWER_CALC
 #undef DETONATION_MOB_CONCUSSION

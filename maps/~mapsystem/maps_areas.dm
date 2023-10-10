@@ -11,5 +11,5 @@
 		for(var/area/A)
 			if(isspacearea(A))
 				continue
-			if(A.z && (A.z in admin_levels))
+			if(A.z && (A.z in SSmapping.admin_levels))
 				post_round_safe_areas += A.type

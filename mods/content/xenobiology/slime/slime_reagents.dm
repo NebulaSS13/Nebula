@@ -13,7 +13,7 @@
 	color = "#cf3600"
 	metabolism = REM * 0.25
 
-/decl/material/liquid/water/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/water/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(isslime(M))
 		M.adjustToxLoss(10 * removed)
@@ -32,22 +32,22 @@
 			if(istype(slime_ai))
 				slime_ai.attacked = max(slime_ai.attacked, rand(7,10)) // angery
 
-/decl/material/liquid/water/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/water/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(isslime(M))
 		M.adjustToxLoss(2 * removed)
 
-/decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(isslime(M))
 		M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
 
-/decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(isslime(M))
 		M.bodytemperature += rand(0, 15) + slime_temp_adj
 
-/decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(isslime(M))
 		M.bodytemperature += rand(15, 30)

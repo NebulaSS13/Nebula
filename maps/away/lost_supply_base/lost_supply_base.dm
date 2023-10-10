@@ -15,11 +15,10 @@
 
 /datum/map_template/ruin/away_site/lost_supply_base
 	name = "Lost Supply Base"
-	id = "awaysite_lost_supply_base"
 	description = "An abandoned supply base."
 	suffixes = list("lost_supply_base/lost_supply_base.dmm")
 	cost = 1
-	generate_mining_by_z = 1
+	level_data_type = /datum/level_data/mining_level
 	area_usage_test_exempted_root_areas = list(/area/lost_supply_base)
 	apc_test_exempt_areas = list(
 		/area/lost_supply_base/solar = NO_SCRUBBER|NO_VENT

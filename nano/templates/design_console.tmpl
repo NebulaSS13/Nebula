@@ -26,7 +26,7 @@
 			<table width = '90%'>
 			<tr><td width = '60%'>Data</td><td>Stored</td></tr>
 			{{for data.tech_levels}}
-				<tr><td width = '60%'>{{:value.field}}</td><td>{{:value.level}}</td></tr>
+				<tr><td width = '60%'><abbr title='{{:value.desc}}''>{{:value.field}}</abbr></td><td>{{:value.level}}</td></tr>
 			{{/for}}
 			</table>
 		</div>
@@ -58,7 +58,7 @@
 			<table width = '90%'>
 			<tr><td width = '60%'>Data</td><td>Stored</td></tr>
 			{{for data.tech_levels}}
-				<tr><td width = '60%'>{{:value.field}}</td><td>{{:value.level}}</td></tr>
+				<tr><td width = '60%'><abbr title='{{:value.desc}}'>{{:value.field}}</abbr></td><td>{{:value.level}}</td></tr>
 			{{/for}}
 			</table>
 		</div>
@@ -69,7 +69,7 @@
 	<div class = "item">
 		<div class="itemLabel">Connected devices</div>
 		<table width = '90%'>
-	
+
 			<tr><td colspan = 3>Analyzers</td></tr>
 			{{for data.connected_analyzers}}
 				{{if value.can_process}}

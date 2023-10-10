@@ -2,10 +2,11 @@
 
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
-#define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
-#define CLAMP01(x) 		(Clamp(x, 0, 1))
+#define CLAMP01(x) 		(clamp(x, 0, 1))
 
 #define get_turf(A) get_step(A,0)
+
+#define get_area(A) (get_step(A, 0)?.loc)
 
 #define get_x(A) (get_step(A, 0)?.x || 0)
 
@@ -129,7 +130,7 @@
 
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
 
-// Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
+/// Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
 #define ADD_SORTED(list, A, cmp_proc) if(!list.len) {list.Add(A)} else {list.Insert(FindElementIndex(A, list, cmp_proc), A)}
 
 //Currently used in SDQL2 stuff
@@ -143,25 +144,39 @@
 
 #define JOINTEXT(X) jointext(X, null)
 
-#define SPAN_ITALIC(X) "<span class='italic'>[X]</span>"
+#define SPAN_STYLE(S, X) "<span style='[S]'>[X]</span>"
 
-#define SPAN_BOLD(X) "<span class='bold'>[X]</span>"
+#define SPAN_CLASS(C, X) "<span class='[C]'>[X]</span>"
+#define SPAN_ITALIC(X)   SPAN_CLASS("italic",        X)
+#define SPAN_BOLD(X)     SPAN_CLASS("bold",          X)
+#define SPAN_NOTICE(X)   SPAN_CLASS("notice",        X)
+#define SPAN_WARNING(X)  SPAN_CLASS("warning",       X)
+#define SPAN_DANGER(X)   SPAN_CLASS("danger",        X)
+#define SPAN_OCCULT(X)   SPAN_CLASS("cult",          X)
+#define SPAN_MFAUNA(X)   SPAN_CLASS("mfauna",        X)
+#define SPAN_SUBTLE(X)   SPAN_CLASS("subtle",        X)
+#define SPAN_INFO(X)     SPAN_CLASS("info",          X)
+#define SPAN_RED(X)      SPAN_CLASS("font_red",      X)
+#define SPAN_ORANGE(X)   SPAN_CLASS("font_orange",   X)
+#define SPAN_YELLOW(X)   SPAN_CLASS("font_yellow",   X)
+#define SPAN_GREEN(X)    SPAN_CLASS("font_green",    X)
+#define SPAN_BLUE(X)     SPAN_CLASS("font_blue",     X)
+#define SPAN_VIOLET(X)   SPAN_CLASS("font_violet",   X)
+#define SPAN_PURPLE(X)   SPAN_CLASS("font_purple",   X)
+#define SPAN_GREY(X)     SPAN_CLASS("font_grey",     X)
+#define SPAN_MAROON(X)   SPAN_CLASS("font_maroon",   X)
+#define SPAN_PINK(X)     SPAN_CLASS("font_pink",     X)
+#define SPAN_PALEPINK(X) SPAN_CLASS("font_palepink", X)
+#define SPAN_SINISTER(X) SPAN_CLASS("sinister", X)
+// placeholders
+#define SPAN_GOOD(X)     SPAN_GREEN(X)
+#define SPAN_NEUTRAL(X)  SPAN_BLUE(X)
+#define SPAN_BAD(X)      SPAN_RED(X)
+#define SPAN_HARDSUIT(X) SPAN_BLUE(X)
 
-#define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"
+#define CSS_CLASS_RADIO "radio"
 
-#define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
-
-#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
-
-#define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
-
-#define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
-
-#define SPAN_MFAUNA(X) "<span class='mfauna'>[X]</span>"
-
-#define SPAN_SUBTLE(X) "<span class='subtle'>[X]</span>"
-
-#define SPAN_INFO(X) "<span class='info'>[X]</span>"
+#define STYLE_SMALLFONTS(X, S, C1) "<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>"
 
 #define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) "<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>"
 

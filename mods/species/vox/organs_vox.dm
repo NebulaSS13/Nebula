@@ -20,7 +20,7 @@
 	color = "#0033cc"
 
 /obj/item/organ/internal/eyes/vox
-	eye_icon = 'mods/species/vox/icons/body/eyes.dmi'
+	eye_icon = 'mods/species/vox/icons/body/soldier/eyes.dmi'
 	color = "#0033cc"
 
 /obj/item/organ/internal/stomach/vox
@@ -132,7 +132,7 @@
 						mat_stack.add(taking_sheets)
 						sheets -= taking_sheets
 						updated_stacks = TRUE
-						
+
 				// Create new stacks if needed.
 				if(sheets)
 					M.create_object(src, sheets)
@@ -153,11 +153,9 @@
 	parent_organ = BP_HEAD
 	icon_state = "cortical-stack"
 	organ_tag = BP_STACK
-	status = ORGAN_PROSTHETIC
-	vital = 1
+	organ_properties = ORGAN_PROP_PROSTHETIC
 	origin_tech = @"{'biotech':4,'materials':4,'magnets':2,'programming':3}"
 	relative_size = 10
-	var/invasive = 1
 
 	var/ownerckey
 	var/default_language

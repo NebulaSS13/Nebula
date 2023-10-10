@@ -14,6 +14,7 @@
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	force = 10
+	material = /decl/material/solid/wood
 
 /obj/item/classic_baton/attack(mob/M, mob/living/user)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
@@ -36,6 +37,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	force = 3
+	material = /decl/material/solid/metal/aluminium
 	var/on = 0
 
 /obj/item/telebaton/attack_self(mob/user)
@@ -61,14 +63,13 @@
 	update_held_icon()
 
 /obj/item/telebaton/on_update_icon()
+	if(length(blood_DNA))
+		generate_blood_overlay(TRUE) // Force recheck.
+	. = ..()
 	if(on)
 		icon = 'icons/obj/items/weapon/telebaton_extended.dmi'
 	else
 		icon = 'icons/obj/items/weapon/telebaton.dmi'
-	if(length(blood_DNA))
-		generate_blood_overlay(TRUE) // Force recheck.
-		overlays.Cut()
-		overlays += blood_overlay
 
 /obj/item/telebaton/attack(mob/target, mob/living/user)
 	if(on)

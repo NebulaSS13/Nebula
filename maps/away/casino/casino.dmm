@@ -1860,6 +1860,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_maintenance)
 "fq" = (
@@ -2814,6 +2817,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "ij" = (
@@ -3106,6 +3110,7 @@
 /obj/machinery/atmospherics/omni/filter{
 	dir = 8
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "iY" = (
@@ -3116,6 +3121,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "iZ" = (
@@ -3173,6 +3179,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 9
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "ji" = (
@@ -4428,7 +4435,8 @@
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_patron_bathroom)
 "mE" = (
-/obj/structure/sign/warning/pods{
+/obj/structure/sign/directions/pods{
+	dir = 1;
 	pixel_y = -30
 	},
 /turf/simulated/floor/carpet,
@@ -4550,7 +4558,8 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "mX" = (
-/obj/structure/sign/warning/pods{
+/obj/structure/sign/directions/pods{
+	dir = 1;
 	pixel_y = -30
 	},
 /turf/simulated/floor/plating,
@@ -5338,6 +5347,11 @@
 	},
 /turf/simulated/floor/airless,
 /area/casino/casino_bow)
+"TO" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/red,
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/plating,
+/area/casino/casino_crew_atmos)
 "Ub" = (
 /obj/structure/window/basic{
 	dir = 4
@@ -5353,7 +5367,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -25
 	},
 /obj/random/soap,
@@ -5380,7 +5394,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -25
 	},
 /obj/random/soap,
@@ -5415,7 +5429,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -25
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -9506,7 +9520,7 @@ gM
 gg
 ix
 iI
-iW
+TO
 iV
 jy
 jN

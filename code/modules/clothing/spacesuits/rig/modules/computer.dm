@@ -8,6 +8,12 @@
 
 /obj/item/ai_verbs
 	name = "AI verb holder"
+	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
+
+/obj/item/ai_verbs/Initialize(ml, material_key)
+	if(!istype(loc, /obj/item/rig_module/ai_container))
+		return INITIALIZE_HINT_QDEL
+	. = ..()
 
 /obj/item/ai_verbs/verb/hardsuit_interface()
 	set category = "Hardsuit"
@@ -215,7 +221,7 @@
 						return 0
 				else
 					return 0
-			else if(user.unEquip(ai, src))
+			else if(user.try_unequip(ai, src))
 				ai_card = ai
 				to_chat(ai_mob, "<span class='notice'>You have been transferred to \the [holder]'s [src.name].</span>")
 				to_chat(user, "<span class='notice'>You load \the [ai_mob] into \the [holder]'s [src.name].</span>")
@@ -443,9 +449,9 @@
 /obj/item/rig_module/power_sink/proc/drain_complete(var/mob/living/M)
 
 	if(!interfaced_with)
-		if(M) to_chat(M, "<font color='blue'><b>Total power drained:</b> [round(total_power_drained*CELLRATE)] Wh.</font>")
+		if(M) to_chat(M, SPAN_BLUE("<b>Total power drained:</b> [round(total_power_drained*CELLRATE)] Wh."))
 	else
-		if(M) to_chat(M, "<font color='blue'><b>Total power drained from [interfaced_with]:</b> [round(total_power_drained*CELLRATE)] Wh.</font>")
+		if(M) to_chat(M, SPAN_BLUE("<b>Total power drained from [interfaced_with]:</b> [round(total_power_drained*CELLRATE)] Wh."))
 		interfaced_with.drain_power(0,1,0) // Damage the victim.
 
 	drain_loc = null

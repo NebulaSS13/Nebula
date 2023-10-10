@@ -19,4 +19,4 @@
 	var/old_stat = stat
 	. = ..()
 	if(stat != old_stat)
-		events_repository.raise_event(/decl/observ/stat_set, src, old_stat, new_stat)
+		RAISE_EVENT(/decl/observ/stat_set, src, old_stat, new_stat)

@@ -47,7 +47,9 @@
 	changing_state = FALSE
 
 /obj/structure/door/attack_hand(mob/user)
-	return density ? open() : close()
+	if(user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return density ? open() : close()
+	return ..()
 
 /obj/structure/door/proc/close()
 	set waitfor = 0
@@ -90,9 +92,8 @@
 	if(distance <= 1 && lock)
 		to_chat(user, SPAN_NOTICE("It appears to have a lock."))
 
-/obj/structure/door/attack_ai(mob/living/silicon/ai/user)
-	if(Adjacent(user) && isrobot(user))
-		return attack_hand(user)
+/obj/structure/door/attack_ai(mob/living/user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/door/explosion_act(severity)
 	. = ..()
@@ -138,7 +139,7 @@
 /obj/structure/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group)
 		return !density
-	if(istype(mover, /obj/effect/beam))
+	if(istype(mover, /obj/effect/ir_beam))
 		return !opacity
 	return !density
 

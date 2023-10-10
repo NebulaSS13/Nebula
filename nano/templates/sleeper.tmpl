@@ -22,6 +22,9 @@
 				<div class="itemContent">
 				{{:helper.link(data.pump ? "Stomach pump active" : "Stomach pump inactive", null, {'pump' : !data.pump})}}
 				</div>
+				<div class="itemContent">
+				{{:helper.link(data.lavage ? "Lung lavage active" : "Lung lavage inactive", null, {'lavage' : !data.lavage})}}
+				</div>
 			{{else}}
 				There are a few buttons here, but the labels don't make any sense to you.
 			{{/if}}

@@ -51,8 +51,9 @@
 	. += "</table>"
 	. += "<b>Ghost Role Availability:</b>"
 	. += "<table>"
-	for(var/ghost_trap_key in subtypesof(/decl/ghosttrap))
-		var/decl/ghosttrap/ghost_trap = GET_DECL(ghost_trap_key)
+	var/list/all_ghost_traps = decls_repository.get_decls_of_subtype(/decl/ghosttrap)
+	for(var/ghost_trap_key in all_ghost_traps)
+		var/decl/ghosttrap/ghost_trap = all_ghost_traps[ghost_trap_key]
 		if(!ghost_trap.list_as_special_role)
 			continue
 
@@ -127,8 +128,9 @@
 				continue
 		private_valid_special_roles |= role.name
 
-	for(var/ghost_trap_key in subtypesof(/decl/ghosttrap))
-		var/decl/ghosttrap/ghost_trap = GET_DECL(ghost_trap_key)
+	var/list/all_ghost_traps = decls_repository.get_decls_of_subtype(/decl/ghosttrap)
+	for(var/ghost_trap_key in all_ghost_traps)
+		var/decl/ghosttrap/ghost_trap = all_ghost_traps[ghost_trap_key]
 		if(!ghost_trap.list_as_special_role)
 			continue
 		if(!include_bans)

@@ -1,6 +1,7 @@
 /datum/fake_client
 
 /mob/fake_mob
+	is_spawnable_type = FALSE
 	var/datum/fake_client/fake_client
 
 /mob/fake_mob/Destroy()
@@ -14,18 +15,27 @@
 
 
 /obj/unit_test_light
+	is_spawnable_type = FALSE
 	w_class = ITEM_SIZE_TINY
 
 /obj/unit_test_medium
+	is_spawnable_type = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
 /obj/unit_test_heavy
+	is_spawnable_type = FALSE
 	w_class = ITEM_SIZE_HUGE
 
 /obj/random/unit_test/spawn_choices()
-	return list(/obj/unit_test_light, /obj/unit_test_heavy, /obj/unit_test_medium)
+	var/static/list/spawnable_choices = list(
+		/obj/unit_test_light,
+		/obj/unit_test_heavy,
+		/obj/unit_test_medium
+	)
+	return spawnable_choices
 
 /obj/unit_test
+	is_spawnable_type = FALSE
 	icon = 'icons/effects/landmarks.dmi'
 	icon_state = "x2"
 
@@ -64,3 +74,11 @@
 
 /area/test_area/edge_of_map
 	name = "Edge of Map - Only map space turfs here"
+
+/obj/item/paper/secret_note/example
+	is_spawnable_type = FALSE
+	secret_key = "secret_note_example_single"
+
+/obj/item/paper/secret_note/random/example
+	is_spawnable_type = FALSE
+	secret_key = "secret_category_example_random_notes"

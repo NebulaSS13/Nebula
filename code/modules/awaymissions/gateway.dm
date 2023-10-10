@@ -77,9 +77,12 @@
 
 
 /obj/machinery/gateway/centerstation/proc/toggleon(mob/user)
-	if(!ready)			return
-	if(linked.len != 8)	return
-	if(!powered())		return
+	if(!ready)
+		return
+	if(linked.len != 8)
+		return
+	if(stat & NOPOWER)
+		return
 	if(!awaygate)
 		to_chat(user, "<span class='notice'>Error: No destination found.</span>")
 		return
@@ -103,14 +106,16 @@
 
 
 /obj/machinery/gateway/centerstation/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
 	if(!ready)
 		detect()
-		return
+		return TRUE
 	if(!active)
 		toggleon(user)
-		return
+		return TRUE
 	toggleoff()
-
+	return TRUE
 
 //okay, here's the good teleporting stuff
 /obj/machinery/gateway/centerstation/Bumped(atom/movable/M)
@@ -123,7 +128,7 @@
 		return
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 		return
 
@@ -195,13 +200,16 @@
 
 
 /obj/machinery/gateway/centeraway/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS, TRUE))
+		return ..()
 	if(!ready)
 		detect()
-		return
+		return TRUE
 	if(!active)
 		toggleon(user)
-		return
+		return TRUE
 	toggleoff()
+	return TRUE
 
 /obj/machinery/gateway/centeraway/Bumped(atom/movable/M)
 	if(!ready)	return
@@ -215,7 +223,7 @@
 	M.set_dir(SOUTH)
 
 /obj/machinery/gateway/centeraway/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		if(calibrated)
 			to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 			return

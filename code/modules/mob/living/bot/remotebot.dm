@@ -7,7 +7,6 @@
 	maxHealth = 15
 
 	var/working = 0
-	var/next_movement_time = 0
 	var/speed = 10 //lower = better
 	var/obj/item/holding = null
 	var/obj/item/bot_controller/controller = null
@@ -19,7 +18,7 @@
 		tally += (2 * holding.w_class)
 	return tally
 
-/mob/living/bot/remotebot/examine(mob/user)
+/mob/living/bot/remotebot/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(holding)
 		to_chat(user, "<span class='notice'>It is holding \the [html_icon(holding)] [holding].</span>")
@@ -99,6 +98,12 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/silicon      = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,
+	)
 	var/mob/living/bot/remotebot/bot
 
 /obj/item/bot_controller/attack_self(var/mob/user)
@@ -160,6 +165,8 @@
 	desc = "The cover says 'control your own cardboard nuclear powered robot. Comes with real plutonium!"
 	icon = 'icons/obj/items/bot_kit.dmi'
 	icon_state = "remotebot"
+	obj_flags = OBJ_FLAG_HOLLOW
+	material = /decl/material/solid/cardboard
 
 /obj/item/bot_kit/attack_self(var/mob/user)
 	to_chat(user, "You quickly dismantle the box and retrieve the controller and the remote bot itself.")

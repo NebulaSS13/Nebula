@@ -16,7 +16,7 @@
 		"The light seems to flicker.",
 		"The shadows seem to lengthen.",
 		"The walls are getting closer.",
-		"Something is wrong")
+		"Something is wrong.")
 
 	var/static/list/drastic_messages = list("You've got to get out of here!",
 		"Someone's trying to kill you!",

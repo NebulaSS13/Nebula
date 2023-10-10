@@ -5,7 +5,8 @@
 	icon_state = "sampler0"
 	item_state = "screwdriver_brown"
 	w_class = ITEM_SIZE_TINY
-
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/obj/item/sample
 
 /obj/item/core_sampler/examine(mob/user, distance)
@@ -26,6 +27,7 @@
 		to_chat(user, SPAN_WARNING("You are unable to take a geological sample of [item_to_sample]."))
 
 /obj/item/core_sampler/on_update_icon()
+	. = ..()
 	icon_state = "sampler[!!sample]"
 
 /obj/item/core_sampler/attack_self(var/mob/user)
@@ -50,6 +52,8 @@
 	randpixel = 8
 	w_class = ITEM_SIZE_TINY
 	sharp = 1
+	material = /decl/material/solid/stone/sandstone
+	material_health_multiplier = 0.25
 	
 /obj/item/rocksliver/Initialize(ml, material_key, geodata)
 	. = ..()

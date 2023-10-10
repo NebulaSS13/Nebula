@@ -27,13 +27,13 @@
 		to_chat(user, "<span class='wwarning'>If you put anything else on \the [src] it's going to collapse.</span>")
 		return
 	else if(istype(W,/obj/item/shard))
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, "<span class='warning'>You hide [W] in \the [src].</span>")
 		update()
 		return
 	else if(istype(W,/obj/item/chems/food))
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		to_chat(user, "<span class='warning'>You layer [W] over \the [src].</span>")
 		var/obj/item/chems/F = W
@@ -72,12 +72,12 @@
 
 	SetName(lowertext("[fullname] sandwich"))
 	if(length(name) > 80) SetName("[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich")
-	w_class = CEILING(Clamp((ingredients.len/2),2,4))
+	w_class = CEILING(clamp((ingredients.len/2),2,4))
 
 /obj/item/chems/food/csandwich/Destroy()
 	for(var/obj/item/O in ingredients)
 		qdel(O)
-	..()
+	return ..()
 
 /obj/item/chems/food/csandwich/examine(mob/user)
 	. = ..(user)

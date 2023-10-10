@@ -41,6 +41,7 @@
 		if(integrity >= 50)
 			. += new/datum/stack_recipe/furniture/door(src)
 			. += new/datum/stack_recipe/furniture/barricade(src)
+			. += new/datum/stack_recipe/furniture/banner_frame(src)
 			. += new/datum/stack_recipe/furniture/stool(src)
 			. += new/datum/stack_recipe/furniture/bar_stool(src)
 			. += new/datum/stack_recipe/furniture/coatrack(src)
@@ -48,6 +49,7 @@
 			. += new/datum/stack_recipe/furniture/pew(src)
 			. += new/datum/stack_recipe/furniture/pew_left(src)
 			. += new/datum/stack_recipe/furniture/closet(src)
+			. += new/datum/stack_recipe/furniture/tank_dispenser(src)
 			. += new/datum/stack_recipe/furniture/coffin(src)
 			. += new/datum/stack_recipe/furniture/chair(src) //NOTE: the wood material has it's own special chair recipe
 			. += new/datum/stack_recipe/furniture/chair/padded(src)
@@ -59,7 +61,6 @@
 			. += new/datum/stack_recipe/key(src)
 			. += new/datum/stack_recipe/rod(src)
 
-	if(hardness > MAT_VALUE_RIGID + 10)
 		. += new/datum/stack_recipe/fork(src)
 		. += new/datum/stack_recipe/knife(src)
 		. += new/datum/stack_recipe/bell(src)

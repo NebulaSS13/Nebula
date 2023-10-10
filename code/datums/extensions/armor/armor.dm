@@ -52,7 +52,7 @@
 
 // A simpler proc used as a helper for above but can also be used externally. Does not modify state.
 /datum/extension/armor/proc/get_blocked(damage_type, damage_flags, armor_pen = 0, damage = 5)
-	var/key = get_armor_key(damage_type, damage_flags)
+	var/key = SSmaterials.get_armor_key(damage_type, damage_flags)
 	if(!key)
 		return 0
 
@@ -69,32 +69,7 @@
 	return min(armor_values[key], 100)
 
 /datum/extension/armor/proc/set_value(key, newval)
-	armor_values[key] = Clamp(newval, 0, 100)
-
-// There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
-/proc/get_armor_key(damage_type, damage_flags)
-	var/key
-	switch(damage_type)
-		if(BRUTE)
-			if(damage_flags & DAM_BULLET)
-				key = "bullet"
-			else if(damage_flags & DAM_EXPLODE)
-				key = "bomb"
-			else
-				key = "melee"
-		if(BURN)
-			if(damage_flags & DAM_LASER)
-				key = "laser"
-			else if(damage_flags & DAM_EXPLODE)
-				key = "bomb"
-			else
-				key = "energy"
-		if(TOX)
-			if(damage_flags & DAM_BIO)
-				key = "bio" // Otherwise just not blocked by default.
-		if(IRRADIATE)
-			key = "rad"
-	return key
+	armor_values[key] = clamp(newval, 0, 100)
 
 /datum/extension/armor/toggle
 	var/active = TRUE

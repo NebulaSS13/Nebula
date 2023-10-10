@@ -70,27 +70,20 @@
 		if(reinf_material)
 			to_chat(user, "<span class='danger'>\The [reinf_material.solid_name] feels porous and crumbly.</span>")
 		else
-			to_chat(user, "<span class='danger'>\The [material.solid_name] crumbles under your touch!</span>")
+			to_chat(user, "<span class='danger'>\The [material.solid_name] [material.rotting_touch_message]!</span>")
 			dismantle_wall()
 			return
 
 	if(!can_open)
 		to_chat(user, "<span class='notice'>You push \the [src], but nothing happens.</span>")
 		playsound(src, hitsound, 25, 1)
-	else
+	else if (isnull(construction_stage) || !reinf_material)
 		toggle_open(user)
 
 /turf/simulated/wall/attack_hand(var/mob/user)
 	radiate()
 	add_fingerprint(user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
-	if (MUTATION_HULK in user.mutations)
-		if (rotting || !prob(material.hardness))
-			success_smash(user)
-		else
-			fail_smash(user)
-		return TRUE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/hand = GET_EXTERNAL_ORGAN(H, H.get_active_held_item_slot())
@@ -98,7 +91,7 @@
 			return TRUE
 	. = ..()
 	if(!.)
-		return try_touch(user, rotting)
+		return try_touch(user, (locate(/obj/effect/overlay/wallrot) in src))
 
 /turf/simulated/wall/attackby(var/obj/item/W, var/mob/user, click_params)
 
@@ -122,9 +115,9 @@
 			burn(W.get_heat())
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		if(isWelder(W))
+		if(IS_WELDER(W))
 			var/obj/item/weldingtool/WT = W
-			if( WT.remove_fuel(0,user) )
+			if( WT.weld(0,user) )
 				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/overlay/wallrot/WR in src)
@@ -141,7 +134,7 @@
 
 		var/obj/item/weldingtool/WT = W
 
-		if(WT.remove_fuel(0,user))
+		if(WT.weld(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
@@ -156,20 +149,20 @@
 		var/dismantle_verb
 		var/dismantle_sound
 
-		if(isWelder(W))
+		if(IS_WELDER(W))
 
 			if(material && !material.removed_by_welder)
 				to_chat(user, SPAN_WARNING("\The [src] is too delicate to be dismantled with \the [W]; try a crowbar."))
 				return TRUE
 
 			var/obj/item/weldingtool/WT = W
-			if(!WT.remove_fuel(0,user))
+			if(!WT.weld(0,user))
 				return
 			dismantle_verb = "cutting"
 			dismantle_sound = 'sound/items/Welder.ogg'
 			cut_delay *= 0.7
 
-		else if(isCrowbar(W))
+		else if(IS_CROWBAR(W))
 
 			if(material && material.removed_by_welder)
 				to_chat(user, SPAN_WARNING("\The [src] is too robust to be dismantled with \the [W]; try a welding tool."))
@@ -229,15 +222,14 @@
 					user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
-				else if(isWirecutter(W))
+				else if(IS_WIRECUTTER(W))
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
-					SSmaterials.create_object(/decl/material/solid/metal/steel, src, 1, /obj/item/stack/material/rods)
 					to_chat(user, "<span class='notice'>You cut the outer grille.</span>")
 					update_icon()
 					return TRUE
 			if(5)
-				if(isScrewdriver(W))
+				if(IS_SCREWDRIVER(W))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 					. = TRUE
@@ -247,18 +239,18 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the support lines.</span>")
 					return
-				else if( istype(W, /obj/item/stack/material/rods) )
-					var/obj/item/stack/O = W
-					if(O.use(1))
+				else if(istype(W,/obj/item/weldingtool))
+					var/obj/item/weldingtool/WT = W
+					if(WT.weld(0,user))
 						construction_stage = 6
 						update_icon()
-						to_chat(user, "<span class='notice'>You replace the outer grille.</span>")
+						to_chat(user, SPAN_NOTICE("You repair the outer grille."))
 						return TRUE
 			if(4)
 				var/cut_cover
 				if(istype(W,/obj/item/weldingtool))
 					var/obj/item/weldingtool/WT = W
-					if(WT.remove_fuel(0,user))
+					if(WT.weld(0,user))
 						cut_cover=1
 					else
 						return
@@ -279,7 +271,7 @@
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
 					return
 			if(3)
-				if(isCrowbar(W))
+				if(IS_CROWBAR(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					. = TRUE
@@ -290,7 +282,7 @@
 					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
 					return
 			if(2)
-				if(isWrench(W))
+				if(IS_WRENCH(W))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
 					. = TRUE
@@ -304,7 +296,7 @@
 				var/cut_cover
 				if(istype(W, /obj/item/weldingtool))
 					var/obj/item/weldingtool/WT = W
-					if( WT.remove_fuel(0,user) )
+					if( WT.weld(0,user) )
 						cut_cover=1
 					else
 						return
@@ -322,11 +314,10 @@
 						return
 					construction_stage = 0
 					update_icon()
-					SSmaterials.create_object(/decl/material/solid/metal/steel, src, 1, /obj/item/stack/material/rods)
-					to_chat(user, "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>")
+					to_chat(user, "<span class='notice'>You cut the support rods loose from the frame.</span>")
 					return
 			if(0)
-				if(isCrowbar(W))
+				if(IS_CROWBAR(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					. = TRUE

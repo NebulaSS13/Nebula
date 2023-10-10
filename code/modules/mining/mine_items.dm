@@ -48,7 +48,7 @@
 	var/hardware_color
 
 /obj/item/pickaxe/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(build_from_parts)
 		color = hardware_color
 		var/image/I = image(icon, "[icon_state]-handle")
@@ -150,30 +150,33 @@
 /*****************************Shovel********************************/
 
 /obj/item/shovel
-	name = "shovel"
-	desc = "A large tool for digging and moving dirt."
-	icon = 'icons/obj/items/tool/shovels/shovel.dmi'
-	icon_state = ICON_STATE_WORLD
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_LOWER_BODY
-	force = 8.0
-	throwforce = 4
-	w_class = ITEM_SIZE_HUGE
+	name        = "shovel"
+	desc        = "A large tool for digging and moving dirt."
+	icon        = 'icons/obj/items/tool/shovels/shovel.dmi'
+	icon_state  = ICON_STATE_WORLD
+	slot_flags  = SLOT_LOWER_BODY
+	force       = 8.0
+	throwforce  = 4
+	w_class     = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':1,'engineering':1}"
-	material = /decl/material/solid/metal/steel
+	material    = /decl/material/solid/metal/steel
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
-	sharp = 0
-	edge = 1
+	edge        = 1
+	var/tmp/shovel_quality = TOOL_QUALITY_DEFAULT
+
+/obj/item/shovel/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_SHOVEL = shovel_quality))
 
 /obj/item/shovel/spade
-	name = "spade"
-	desc = "A small tool for digging and moving dirt."
-	icon = 'icons/obj/items/tool/shovels/spade.dmi'
-	icon_state = "spade"
-	item_state = "spade"
-	force = 5.0
-	throwforce = 7
-	w_class = ITEM_SIZE_SMALL
+	name           = "spade"
+	desc           = "A small tool for digging and moving dirt."
+	icon           = 'icons/obj/items/tool/shovels/spade.dmi'
+	icon_state     = ICON_STATE_WORLD
+	force          = 5.0
+	throwforce     = 7
+	w_class        = ITEM_SIZE_SMALL
+	shovel_quality = TOOL_QUALITY_BAD //You're not gonna dig a trench with a garden spade..
 
 // Flags.
 /obj/item/stack/flag
@@ -186,8 +189,7 @@
 	icon = 'icons/obj/items/marking_beacon.dmi'
 	z_flags = ZMM_MANGLE_PLANES
 
-	var/upright = 0
-	var/fringe = null
+	var/upright = FALSE
 
 /obj/item/stack/flag/red
 	light_color = COLOR_RED
@@ -210,16 +212,15 @@
 
 /obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
 	if(upright)
-		attack_hand(user)
-		return
+		return attack_hand_with_interaction_checks(user)
 	return ..()
 
 /obj/item/stack/flag/attack_hand(var/mob/user)
-	if(upright)
-		knock_down()
-		user.visible_message("\The [user] knocks down \the [singular_name].")
-		return
-	return ..()
+	if(!upright)
+		return ..()
+	knock_down()
+	user.visible_message("\The [user] knocks down \the [singular_name].")
+	return TRUE
 
 /obj/item/stack/flag/attack_self(var/mob/user)
 	var/turf/T = get_turf(src)
@@ -247,22 +248,20 @@
 	update_icon()
 
 /obj/item/stack/flag/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(upright)
 		pixel_x = 0
 		pixel_y = 0
 		icon_state = "base"
-		var/image/addon = emissive_overlay(icon = icon, icon_state = "glowbit")
-		addon.color = light_color
-		overlays += addon
+		add_overlay(emissive_overlay(icon = icon, icon_state = "glowbit", color = light_color))
+		z_flags |= ZMM_MANGLE_PLANES
 		set_light(2, 0.1) // Very dim so the rest of the thingie is barely visible - if the turf is completely dark, you can't see anything on it, no matter what
 	else
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
 		icon_state = "folded"
-		var/image/addon = image(icon = icon, icon_state = "basebit")
-		addon.color = light_color
-		overlays += addon
+		add_overlay(overlay_image(icon, "basebit", light_color))
+		z_flags &= ~ZMM_MANGLE_PLANES
 		set_light(0)
 
 /obj/item/stack/flag/proc/knock_down()

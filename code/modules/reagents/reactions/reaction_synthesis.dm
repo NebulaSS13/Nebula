@@ -3,6 +3,7 @@
 	result = null
 	result_amount = 1
 	mix_message = "The solution hardens and begins to crystallize."
+	abstract_type = /decl/chemical_reaction/synthesis
 
 /decl/chemical_reaction/synthesis/fiberglass
 	name = "Fiberglass"
@@ -19,7 +20,7 @@
 
 /decl/chemical_reaction/synthesis/fiberglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
-	var/location = get_turf(holder.get_reaction_loc())
+	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		created_volume = CEILING(created_volume)
 		if(created_volume > 0)
@@ -46,7 +47,7 @@
 				return TRUE
 
 /decl/chemical_reaction/synthesis/crystalization/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
-	var/location = get_turf(holder.get_reaction_loc())
+	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		var/list/removing_reagents = list()
 		for(var/rtype in holder.reagent_volumes)
@@ -80,7 +81,7 @@
 			return TRUE
 
 /decl/chemical_reaction/synthesis/aerogel/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
-	var/location = get_turf(holder.get_reaction_loc())
+	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		var/list/removing_reagents = list()
 		for(var/rtype in holder.reagent_volumes)
@@ -100,7 +101,7 @@
 
 /decl/chemical_reaction/synthesis/plastication/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/location = get_turf(holder.get_reaction_loc())
+	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		SSmaterials.create_object(/decl/material/solid/plastic, location, created_volume)
 
@@ -115,7 +116,7 @@
 
 /decl/chemical_reaction/synthesis/resin_pack/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/turf/T = get_turf(holder.get_reaction_loc())
+	var/turf/T = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(istype(T))
 		var/create_stacks = FLOOR(created_volume)
 		if(create_stacks > 0)

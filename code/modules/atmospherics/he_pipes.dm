@@ -13,12 +13,11 @@
 	atom_flags = 0 // no painting
 	appearance_flags = KEEP_TOGETHER
 
-	minimum_temperature_difference = 20
-	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
+	var/thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
+	var/minimum_temperature_difference = 20
 
-	maximum_pressure = 360*ONE_ATMOSPHERE
-	fatigue_pressure = 300*ONE_ATMOSPHERE
-	alert_pressure = 360*ONE_ATMOSPHERE
+	maximum_pressure = 360 ATM
+	fatigue_pressure = 300 ATM
 
 	can_buckle = 1
 	buckle_lying = 1
@@ -29,12 +28,12 @@
 	add_filter("glow",1, list(type="drop_shadow", x = 0, y = 0, offset = 0, size = 4))
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
-	..()
-	initialize_directions_he = initialize_directions	// all directions are HE
+	. = ..()
+	initialize_directions_he = get_initialize_directions()	// all directions are HE
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	atmos_initalized = TRUE
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		QDEL_NULL(nodes_to_networks[node])
 	nodes_to_networks = null
 	for(var/direction in global.cardinal)
@@ -57,16 +56,17 @@
 		..()
 	else
 		var/datum/gas_mixture/pipe_air = return_air()
-		if(istype(loc, /turf/simulated/))
+		if(istype(loc, /turf/simulated) || istype(loc, /turf/exterior))
+			var/turf/pipe_turf = loc
 			var/environment_temperature = 0
-			if(loc:blocks_air)
-				environment_temperature = loc:temperature
+			if(pipe_turf.blocks_air)
+				environment_temperature = pipe_turf.temperature
 			else
-				var/datum/gas_mixture/environment = loc.return_air()
+				var/datum/gas_mixture/environment = pipe_turf.return_air()
 				environment_temperature = environment.temperature
 			if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
-				parent.temperature_interact(loc, volume, thermal_conductivity)
-		else if(istype(loc, /turf/space/))
+				parent.temperature_interact(pipe_turf, volume, thermal_conductivity)
+		else if(istype(loc, /turf/space))
 			parent.radiate_heat_to_space(surface, 1)
 
 		if(buckled_mob)
@@ -107,7 +107,7 @@
 				set_light(min(3, scale*2.5), min(3, scale*2.5), scale_color)
 		else
 			set_light(0, 0)
-			
+
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon = 'icons/atmos/junction.dmi'
 	icon_state = "11"

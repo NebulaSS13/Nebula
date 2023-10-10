@@ -7,10 +7,12 @@
 	QDEL_NULL_LIST(pinned)
 	QDEL_NULL_LIST(embedded)
 
+	QDEL_NULL(typing_indicator)
+
 	unset_machine()
 	QDEL_NULL(hud_used)
-	if(s_active)
-		s_active.close(src)
+	if(active_storage)
+		active_storage.close(src)
 	if(istype(ability_master))
 		QDEL_NULL(ability_master)
 	if(istype(skillset))
@@ -19,6 +21,7 @@
 	clear_fullscreen()
 	if(istype(ai))
 		QDEL_NULL(ai)
+	QDEL_NULL(lighting_master)
 	remove_screen_obj_references()
 	if(client)
 		for(var/atom/movable/AM in client.screen)
@@ -34,7 +37,6 @@
 
 /mob/proc/remove_screen_obj_references()
 	QDEL_NULL_SCREEN(hands)
-	QDEL_NULL_SCREEN(purged)
 	QDEL_NULL_SCREEN(internals)
 	QDEL_NULL_SCREEN(oxygen)
 	QDEL_NULL_SCREEN(toxin)
@@ -55,13 +57,13 @@
 	QDEL_NULL_SCREEN(zone_sel)
 
 /mob/Initialize()
-	. = ..()
 	if(ispath(skillset))
 		skillset = new skillset(src)
 	if(!move_intent)
 		move_intent = move_intents[1]
 	if(ispath(move_intent))
 		move_intent = GET_DECL(move_intent)
+	. = ..()
 	refresh_ai_handler()
 	START_PROCESSING(SSmobs, src)
 
@@ -213,7 +215,7 @@
 	. = 0
 	if(isturf(loc))
 		var/turf/T = loc
-		. += T.get_movement_delay(travel_dir)
+		. += T.get_terrain_movement_delay(travel_dir, src)
 	if(HAS_STATUS(src, STAT_DROWSY))
 		. += 6
 	if(lying) //Crawling, it's slower
@@ -222,7 +224,7 @@
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
 /mob/proc/encumbrance()
-	for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
+	for(var/obj/item/grab/G as anything in get_active_grabs())
 		. = max(., G.grab_slowdown())
 	. *= (0.8 ** size_strength_mod())
 	. *= (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN))
@@ -317,7 +319,70 @@
 		client.perspective = EYE_PERSPECTIVE
 		client.eye = loc
 
-/mob/proc/show_inv(mob/user)
+/mob/proc/get_descriptive_slot_name(var/slot)
+	return global.descriptive_slot_names[slot] || slot
+
+/mob/proc/show_stripping_window(mob/user)
+
+	if(user.incapacitated()  || !user.Adjacent(src) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return
+
+	user.set_machine(src)
+
+	var/dat = list()
+	dat += "<B><HR><FONT size=3>[name]</FONT></B>"
+	dat += "<HR>"
+
+	var/list/my_held_item_slots = get_held_item_slots()
+	for(var/hand_slot in my_held_item_slots)
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
+		if(!inv_slot || inv_slot.skip_on_strip_display)
+			continue
+		var/obj/item/held = inv_slot.get_equipped_item()
+		dat += "<b>[capitalize(inv_slot.slot_name)]:</b> <A href='?src=\ref[src];item=[hand_slot]'>[held?.name || "nothing"]</A>"
+
+	var/list/all_slots = get_all_valid_equipment_slots()
+	if(all_slots)
+		for(var/slot in (all_slots-global.pocket_slots))
+			if(slot in my_held_item_slots)
+				continue
+			var/obj/item/thing_in_slot = get_equipped_item(slot)
+			dat += "<B>[capitalize(get_descriptive_slot_name(slot))]:</b> <a href='?src=\ref[src];item=[slot]'>[thing_in_slot || "nothing"]</a>"
+			if(istype(thing_in_slot, /obj/item/clothing))
+				var/obj/item/clothing/C = thing_in_slot
+				if(C.accessories.len)
+					dat += "<A href='?src=\ref[src];item=[slot_tie_str];holder=\ref[C]'>Remove accessory</A>"
+
+	// Do they get an option to set internals?
+	if(istype(get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask) || istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/helmet/space))
+		for(var/slot in list(slot_back_str, slot_belt_str, slot_s_store_str))
+			var/obj/item/tank/tank = get_equipped_item(slot)
+			if(istype(tank))
+				dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
+				break
+
+	// Other incidentals.
+	var/obj/item/clothing/under/suit = get_equipped_item(slot_w_uniform_str)
+	if(istype(suit))
+		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
+		if(suit.has_sensor == SUIT_HAS_SENSORS)
+			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
+		if (suit.has_sensor && user.get_multitool())
+			dat += "<BR><A href='?src=\ref[src];item=lock_sensors'>[suit.has_sensor == SUIT_LOCKED_SENSORS ? "Unl" : "L"]ock sensors</A>"
+	if(get_equipped_item(slot_handcuffed_str))
+		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed_str]'>Handcuffed</A>"
+
+	var/list/strip_add = get_additional_stripping_options()
+	if(length(strip_add))
+		dat += strip_add
+
+	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
+
+	var/datum/browser/popup = new(user, "[name]", "Inventory of \the [name]", 325, 500, src)
+	popup.set_content(jointext(dat, "<br>"))
+	popup.open()
+
+/mob/proc/get_additional_stripping_options()
 	return
 
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
@@ -330,7 +395,7 @@
 
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
-		return 1
+		return TRUE
 
 	face_atom(A)
 
@@ -358,6 +423,8 @@
 		var/turf/target_turf = get_turf(A)
 		if(source_turf && source_turf.z == target_turf?.z)
 			distance = get_dist(source_turf, target_turf)
+
+	RAISE_EVENT(/decl/observ/mob_examining, src, A)
 
 	if(!A.examine(src, distance))
 		PRINT_STACK_TRACE("Improper /examine() override: [log_info_line(A)]")
@@ -482,6 +549,16 @@
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
+
+	if(href_list["refresh"])
+		show_stripping_window(user)
+		return TOPIC_HANDLED
+
+	if(href_list["item"])
+		if(!handle_strip(href_list["item"], user, locate(href_list["holder"])))
+			show_stripping_window(user)
+		return TOPIC_HANDLED
+
 	if(href_list["flavor_more"])
 		var/text = "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>"
 		show_browser(user, text, "window=[name];size=500x200")
@@ -513,7 +590,7 @@
 
 /mob/handle_mouse_drop(atom/over, mob/user)
 	if(over == user && user != src && !istype(user, /mob/living/silicon/ai))
-		show_inv(user)
+		show_stripping_window(user)
 		return TRUE
 	if(!anchored && istype(over, /obj/vehicle/train))
 		var/obj/vehicle/train/beep = over
@@ -536,6 +613,16 @@
 
 /mob/proc/is_ready()
 	return client && !!mind
+
+/mob/proc/can_touch(var/atom/touching)
+	if(!touching.Adjacent(src) || incapacitated())
+		return FALSE
+	if(restrained())
+		to_chat(src, SPAN_WARNING("You are restrained."))
+		return FALSE
+	if (buckled)
+		to_chat(src, SPAN_WARNING("You are buckled down."))
+	return TRUE
 
 /mob/proc/see(message)
 	if(!is_active())
@@ -834,7 +921,9 @@
 
 /mob/proc/set_stat(var/new_stat)
 	. = stat != new_stat
-	stat = new_stat
+	if(.)
+		stat = new_stat
+		SStyping.set_indicator_state(client, FALSE)
 
 /mob/verb/northfaceperm()
 	set hidden = 1
@@ -896,7 +985,7 @@
 	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)
 
 /client/proc/check_has_body_select()
-	return mob && mob.hud_used && istype(mob.zone_sel, /obj/screen/zone_sel)
+	return mob && mob.hud_used && istype(mob.zone_sel, /obj/screen/zone_selector)
 
 /client/verb/body_toggle_head()
 	set name = "body-toggle-head"
@@ -936,8 +1025,8 @@
 /client/proc/toggle_zone_sel(list/zones)
 	if(!check_has_body_select())
 		return
-	var/obj/screen/zone_sel/selector = mob.zone_sel
-	selector.set_selected_zone(next_in_list(mob.zone_sel.selecting,zones))
+	var/obj/screen/zone_selector/selector = mob.zone_sel
+	selector.set_selected_zone(next_in_list(mob.get_target_zone(),zones))
 
 /mob/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)
@@ -948,7 +1037,7 @@
 /mob/proc/can_drown()
 	return 0
 
-/mob/proc/get_sex()
+/mob/proc/get_gender()
 	return gender
 
 /mob/is_fluid_pushable(var/amt)
@@ -959,9 +1048,6 @@
 				to_chat(src, "<span class='danger'>You are pushed down by the flood!</span>")
 		return TRUE
 	return FALSE
-
-/mob/proc/get_footstep(var/footstep_type)
-	return
 
 /mob/proc/handle_embedded_and_stomach_objects()
 	return
@@ -1016,8 +1102,7 @@
 
 /mob/get_contained_external_atoms()
 	. = ..()
-	if(.)
-		LAZYREMOVE(., get_organs())
+	LAZYREMOVE(., get_organs())
 
 /mob/explosion_act(var/severity)
 	. = ..()
@@ -1079,7 +1164,7 @@
 		if(brolly.gives_weather_protection())
 			LAZYADD(., brolly)
 	if(!LAZYLEN(.))
-		for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
+		for(var/turf/T as anything in RANGE_TURFS(loc, 1))
 			for(var/obj/structure/flora/tree/tree in T)
 				if(tree.protects_against_weather)
 					LAZYADD(., tree)
@@ -1087,10 +1172,10 @@
 /mob/living/carbon/human/get_weather_protection()
 	. = ..()
 	if(!LAZYLEN(.))
-		var/obj/item/clothing/head/check_head = head
+		var/obj/item/clothing/head/check_head = get_equipped_item(slot_head_str)
 		if(!istype(check_head) || !check_head.protects_against_weather)
 			return
-		var/obj/item/clothing/suit/check_body = wear_suit
+		var/obj/item/clothing/suit/check_body = get_equipped_item(slot_wear_suit_str)
 		if(!istype(check_body) || !check_body.protects_against_weather)
 			return
 		LAZYADD(., check_head)
@@ -1144,7 +1229,7 @@
 		return FALSE
 
 	// Not in a connected z-volume.
-	if(!(N.z in GetConnectedZlevels(T.z)))
+	if(!(N.z in SSmapping.get_connected_levels(T.z)))
 		return FALSE
 
 	// Are they below us?
@@ -1158,3 +1243,83 @@
 		return A.is_open() && neighbor.Adjacent(A)
 
 	return FALSE
+
+/mob/proc/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+	return FALSE
+
+/mob/proc/do_flash_animation()
+	return
+
+/mob/proc/unset_machine()
+	src.machine = null
+
+/mob/proc/set_machine(var/obj/O)
+	if(src.machine)
+		unset_machine()
+	src.machine = O
+	if(istype(O))
+		O.in_use = 1
+
+// Mob procs relating to the typing indicator subsystem.
+/mob/Logout()
+	if (typing_indicator)
+		vis_contents -= typing_indicator
+	is_typing = FALSE
+	..()
+
+/mob/proc/get_speech_bubble_state_modifier()
+	return
+
+/mob/verb/say_wrapper()
+	set name = ".Say"
+	set hidden = TRUE
+	SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","say (text)") as text|null
+	SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		say_verb(message)
+
+/mob/verb/me_wrapper()
+	set name = ".Me"
+	set hidden = TRUE
+	SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","me (text)") as text|null
+	SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		me_verb(message)
+
+/mob/verb/whisper_wrapper()
+	set name = ".Whisper"
+	set hidden = TRUE
+	if(config.show_typing_indicator_for_whispers)
+		SStyping.set_indicator_state(client, TRUE)
+	var/message = input("","me (text)") as text|null
+	if(config.show_typing_indicator_for_whispers)
+		SStyping.set_indicator_state(client, FALSE)
+	if (message)
+		whisper(message)
+
+// Darksight procs.
+/mob/proc/refresh_lighting_master()
+	if(!lighting_master)
+		lighting_master = new
+	if(client)
+		client.screen |= lighting_master
+
+/mob/proc/set_internals(obj/item/tank/source, source_string)
+	return
+
+/mob/proc/get_internals()
+	return
+
+/mob/proc/toggle_internals(var/mob/living/user)
+	return
+
+/mob/proc/get_target_zone()
+	return zone_sel?.selecting
+
+/mob/get_overhead_text_x_offset()
+	return offset_overhead_text_x
+
+/mob/get_overhead_text_y_offset()
+	return offset_overhead_text_y

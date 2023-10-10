@@ -12,19 +12,17 @@ var/global/list/areas = list()
 	mouse_opacity = 0
 
 	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
+	var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
 
 	var/fire
 	var/party
 	var/eject
 
 	var/lightswitch =         TRUE
-	var/debug =               FALSE
 	var/requires_power =      TRUE
 	var/always_unpowered =    FALSE //this gets overriden to 1 for space in area/New()
 
-	var/atmos =               1
 	var/atmosalm =            0
-	var/poweralm =            1
 	var/power_equip =         1 // Status
 	var/power_light =         1
 	var/power_environ =       1
@@ -36,10 +34,8 @@ var/global/list/areas = list()
 	var/oneoff_environ =      0
 	var/has_gravity =         TRUE
 	var/air_doors_activated = FALSE
-	var/show_starlight =      FALSE
 
 	var/obj/machinery/power/apc/apc
-	var/no_air
 	var/list/all_doors		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/list/forced_ambience
@@ -62,6 +58,8 @@ var/global/list/areas = list()
 
 	var/tmp/is_outside = OUTSIDE_NO
 
+	var/tmp/saved_map_hash // Used for cleanup when loaded via map templates.
+
 /area/New()
 	icon_state = ""
 	uid = ++global_uid
@@ -80,14 +78,23 @@ var/global/list/areas = list()
 
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "white"
+	color = null
 	blend_mode = BLEND_MULTIPLY
 
-/area/Del()
-	global.areas -= src
-	. = ..()
+// qdel(area) should not be attempted on an area with turfs in contents. ChangeArea every turf in it first.
 
 /area/Destroy()
 	global.areas -= src
+	var/failure = FALSE
+	for(var/atom/A in contents)
+		if(isturf(A))
+			failure = TRUE
+			contents.Remove(A) // note: A.loc == null after this
+		else
+			qdel(A)
+	if(failure)
+		PRINT_STACK_TRACE("Area [log_info_line(src)] was qdeleted with turfs in contents.")
+	area_repository.clear_cache()
 	..()
 	return QDEL_HINT_HARDDEL
 
@@ -112,8 +119,19 @@ var/global/list/areas = list()
 	for(var/obj/machinery/M in T)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
 
+	T.update_registrations_on_adjacent_area_change()
+	for(var/direction in global.cardinal)
+		var/turf/adjacent_turf = get_step(T, direction)
+		if(adjacent_turf)
+			T.update_registrations_on_adjacent_area_change()
+
+	T.last_outside_check = OUTSIDE_UNCERTAIN
 	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
 		T.update_weather()
+
+/turf/proc/update_registrations_on_adjacent_area_change()
+	for(var/obj/machinery/door/firedoor/door in src)
+		door.update_area_registrations()
 
 /area/proc/alert_on_fall(var/mob/living/carbon/human/H)
 	return
@@ -294,7 +312,8 @@ var/global/list/areas = list()
 		for(var/obj/machinery/light_switch/L in src)
 			L.sync_state()
 		update_icon()
-		power_change()
+	for(var/obj/machinery/light/M in src)
+		M.delay_and_set_on(M.expected_to_be_on(), 1 SECOND)
 
 /area/proc/set_emergency_lighting(var/enable)
 	for(var/obj/machinery/light/M in src)
@@ -304,24 +323,20 @@ var/global/list/areas = list()
 var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
-	if(!istype(A,/mob/living))	return
-
+	if(!istype(A,/mob/living))
+		return
 	var/mob/living/L = A
-
 	if(!L.lastarea)
 		L.lastarea = get_area(L.loc)
-	var/area/newarea = get_area(L.loc)
 	var/area/oldarea = L.lastarea
-	if(oldarea.has_gravity != newarea.has_gravity)
-		if(newarea.has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
+	if(!oldarea || oldarea.has_gravity != has_gravity)
+		if(has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
 			thunk(L)
 		L.update_floating()
-
 	if(L.ckey)
 		play_ambience(L)
 		do_area_blurb(L)
-
-	L.lastarea = newarea
+	L.lastarea = src
 
 
 /area/Exited(A)
@@ -349,7 +364,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 	if(LAZYLEN(forced_ambience) && !(L in forced_ambiance_list))
 		forced_ambiance_list += L
 		L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = sound_channels.lobby_channel))
-	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
+	if(LAZYLEN(ambience) && prob(5) && (world.time >= L.client.played + 3 MINUTES))
 		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = sound_channels.ambience_channel))
 		L.client.played = world.time
 

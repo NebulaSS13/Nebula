@@ -1,7 +1,7 @@
-#define ANYMPH_SCREEN_LOC_HELD   "EAST-8:16,SOUTH:5"
-#define ANYMPH_SCREEN_LOC_HAT    "EAST-7:16,SOUTH:5"
-#define ANYMPH_SCREEN_LOC_MOLT   "EAST-6:16,SOUTH:5"
-#define ANYMPH_SCREEN_LOC_INTENT "EAST-2,SOUTH:5"
+#define ANYMPH_SCREEN_LOC_HELD   "RIGHT-8:16,BOTTOM:5"
+#define ANYMPH_SCREEN_LOC_HAT    "RIGHT-7:16,BOTTOM:5"
+#define ANYMPH_SCREEN_LOC_MOLT   "RIGHT-6:16,BOTTOM:5"
+#define ANYMPH_SCREEN_LOC_INTENT "RIGHT-2,BOTTOM:5"
 #define ANYMPH_SCREEN_LOC_HEALTH ui_alien_health
 
 #define ANYMPH_MAX_CRYSTALS      20000
@@ -10,7 +10,7 @@
 #define ANYMPH_TIME_MOLT         300   // How long to wait between molts.
 
 /mob/living/carbon/alien/ascent_nymph
-	name = SPECIES_MANTID_NYMPH
+	name = "mantid nymph"
 	desc = "It's a little alien skittery critter. Hiss."
 	icon = 'mods/species/ascent/icons/species/nymph.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -20,7 +20,7 @@
 	available_maneuvers = list(/decl/maneuver/leap)
 
 	only_species_language = 1
-	voice_name = SPECIES_MANTID_NYMPH
+	voice_name = "mantid nymph"
 	speak_emote = list("hisses", "chitters")
 	universal_understand = FALSE
 	universal_speak = FALSE
@@ -53,7 +53,7 @@
 	. = ..(mapload)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 
-/mob/living/carbon/alien/ascent_nymph/examine(mob/user)
+/mob/living/carbon/alien/ascent_nymph/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(holding_item)
 		to_chat(user, SPAN_NOTICE("It is holding \icon[holding_item] \a [holding_item]."))
@@ -63,7 +63,7 @@
 
 /mob/living/carbon/alien/ascent_nymph/death(gibbed)
 	if(holding_item)
-		unEquip(holding_item)
+		try_unequip(holding_item)
 
 	return ..(gibbed,death_msg)
 

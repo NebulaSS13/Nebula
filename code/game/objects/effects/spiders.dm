@@ -14,25 +14,24 @@
 		qdel(src)
 
 /obj/effect/spider/attack_hand(mob/user)
-
+	SHOULD_CALL_PARENT(FALSE)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	if(prob(50))
 		visible_message(SPAN_WARNING("\The [user] tries to squash \the [src], but misses!"))
 		disturbed()
-		return
-
+		return TRUE
 	var/showed_msg = FALSE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/decl/natural_attack/attack = H.get_unarmed_attack(src)
 		if(istype(attack))
-			attack.show_attack(H, src, H.zone_sel.selecting, 1)
+			attack.show_attack(H, src, H.get_target_zone(), 1)
 			showed_msg = TRUE
 	if(!showed_msg)
 		visible_message(SPAN_DANGER("\The [user] squashes \the [src] flat!"))
-
 	die()
+	return TRUE
 
 /obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -47,10 +46,10 @@
 	if(W.edge)
 		damage += 5
 
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 
-		if(WT.remove_fuel(0, user))
+		if(WT.weld(0, user))
 			damage = 15
 			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 
@@ -196,8 +195,11 @@
 	if(health > 0)
 		disturbed()
 
-/obj/effect/spider/spiderling/Crossed(var/mob/living/L)
-	if(dormant && istype(L) && L.mob_size > MOB_SIZE_TINY)
+/obj/effect/spider/spiderling/Crossed(atom/movable/AM)
+	if(!dormant || !isliving(AM))
+		return
+	var/mob/living/M = AM
+	if(M.mob_size > MOB_SIZE_TINY)
 		disturbed()
 
 /obj/effect/spider/spiderling/disturbed()
@@ -285,8 +287,8 @@
 					var/min_y = pixel_y <= -shift_range ? 0 : -2
 					var/max_y = pixel_y >=  shift_range ? 0 :  2
 
-					pixel_x = Clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
-					pixel_y = Clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
+					pixel_x = clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
+					pixel_y = clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
 		else if(prob(5))
 			//vent crawl!
 			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))

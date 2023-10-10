@@ -37,12 +37,12 @@
 	glass_desc = "A well-known alcohol with a variety of applications."
 	value = 1.2
 
-/decl/material/liquid/ethanol/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjustToxLoss(removed * 2 * alcohol_toxicity)
 	M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 
-/decl/material/liquid/ethanol/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -129,7 +129,7 @@
 	codex_name = "premium beer"
 	taste_description = "beer"
 
-/decl/material/liquid/ethanol/beer/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/beer/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
@@ -187,7 +187,7 @@
 	glass_desc = "Guaranteed to perk you up."
 	overdose = 45
 
-/decl/material/liquid/ethanol/coffee/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/coffee/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -199,7 +199,7 @@
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
-/decl/material/liquid/ethanol/coffee/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/coffee/affect_overdose(var/mob/living/M)
 	ADJ_STATUS(M, STAT_JITTER, 5)
 
 /decl/material/liquid/ethanol/melonliquor
@@ -264,7 +264,7 @@
 	glass_name = "Thirteen Loko"
 	glass_desc = "This is a glass of Thirteen Loko, it appears to be of the highest quality. The drink, not the glass."
 
-/decl/material/liquid/ethanol/thirteenloko/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/thirteenloko/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -421,7 +421,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_poisonwine"
 
-/decl/material/liquid/ethanol/pwine/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/pwine/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -439,7 +439,7 @@
 			else
 				heart.take_internal_damage(100, 0)
 
-/decl/material/liquid/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
+/decl/material/liquid/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now
 	name = "aged whiskey"
 	lore_text = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
 	color = "#523600"

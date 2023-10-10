@@ -73,10 +73,10 @@ SUBSYSTEM_DEF(fluids)
 		flooded_a_neighbor = FALSE
 		UPDATE_FLUID_BLOCKED_DIRS(current_turf)
 		for(spread_dir in global.cardinal)
-			if(current_turf.fluid_blocked_dirs & spread_dir) 
+			if(current_turf.fluid_blocked_dirs & spread_dir)
 				continue
 			neighbor = get_step(current_turf, spread_dir)
-			if(!istype(neighbor) || neighbor.flooded) 
+			if(!istype(neighbor) || neighbor.flooded)
 				continue
 			UPDATE_FLUID_BLOCKED_DIRS(neighbor)
 			if((neighbor.fluid_blocked_dirs & global.reverse_dir[spread_dir]) || !neighbor.CanFluidPass(spread_dir) || checked_targets[neighbor])
@@ -115,16 +115,20 @@ SUBSYSTEM_DEF(fluids)
 		current_depth = reagent_holder?.total_volume || 0
 
 		// How is this happening
-		if(current_depth == -1.#IND || current_depth == 1.#IND)
+		if(QDELETED(reagent_holder) || current_depth == -1.#IND || current_depth == 1.#IND)
 			qdel(current_fluid)
 			continue
 
 		// Evaporation: todo, move liquid into current_turf.zone air contents if applicable.
-		if(current_depth <= FLUID_MINIMUM_TRANSFER && prob(15))
+		if(current_depth <= FLUID_PUDDLE && prob(60))
 			current_turf.remove_fluids(min(current_depth, 1), defer_update = TRUE)
+			current_depth = current_turf.get_fluid_depth()
 		if(current_depth <= FLUID_QDEL_POINT)
 			qdel(current_fluid)
 			continue
+
+		// Wash our turf.
+		current_turf.fluid_act(reagent_holder)
 
 		if(isspaceturf(current_turf) || istype(current_turf, /turf/exterior))
 			removing = round(current_depth * 0.5)
@@ -132,6 +136,7 @@ SUBSYSTEM_DEF(fluids)
 				current_turf.remove_fluids(removing, defer_update = TRUE)
 			else
 				reagent_holder.clear_reagents()
+			current_depth = current_turf.get_fluid_depth()
 			if(current_depth <= FLUID_QDEL_POINT)
 				qdel(current_fluid)
 				continue
@@ -146,6 +151,7 @@ SUBSYSTEM_DEF(fluids)
 						other_fluid = new(below)
 					if(!QDELETED(other_fluid) && other_fluid.reagents.total_volume < FLUID_MAX_DEPTH)
 						current_turf.transfer_fluids_to(below, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid.reagents.total_volume), defer_update = TRUE)
+						current_depth = current_turf.get_fluid_depth()
 
 		if(current_depth <= FLUID_PUDDLE)
 			continue
@@ -192,7 +198,7 @@ SUBSYSTEM_DEF(fluids)
 			current_fluid.last_flow_dir = 0
 
 		if (MC_TICK_CHECK)
-			break 
+			break
 
 	if(!holders_copied_yet)
 		holders_copied_yet = TRUE
@@ -203,6 +209,8 @@ SUBSYSTEM_DEF(fluids)
 		processing_holders.len--
 		if(!QDELETED(reagent_holder))
 			reagent_holder.handle_update()
+		else
+			holders_to_update -= reagent_holder
 		if(MC_TICK_CHECK)
 			return
 
@@ -219,7 +227,7 @@ SUBSYSTEM_DEF(fluids)
 		current_turf = current_fluid.loc
 		var/pushed_something = FALSE
 		if(reagent_holder.total_volume > FLUID_SHALLOW && current_fluid.last_flow_strength >= 10)
-			for(var/atom/movable/AM AS_ANYTHING in current_turf.get_contained_external_atoms())
+			for(var/atom/movable/AM as anything in current_turf.get_contained_external_atoms())
 				if(AM.is_fluid_pushable(current_fluid.last_flow_strength))
 					AM.pushed(current_fluid.last_flow_dir)
 					pushed_something = TRUE

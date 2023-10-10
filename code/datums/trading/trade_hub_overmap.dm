@@ -15,7 +15,7 @@ var/global/list/trading_hub_names = list()
 	update_hub_datum(hub_datum)
 	. = ..()
 
-/obj/effect/overmap/trade_hub/proc/update_hub_datum(var/datum/trade_hub/overmap/hub)	
+/obj/effect/overmap/trade_hub/proc/update_hub_datum(var/datum/trade_hub/overmap/hub)
 	hub.owner = src
 
 /obj/effect/overmap/trade_hub/Destroy()
@@ -66,7 +66,7 @@ var/global/list/trading_hub_names = list()
 
 /datum/trade_hub/overmap/is_accessible_from(var/turf/check)
 	if(istype(check))
-		var/obj/effect/overmap/customer = global.overmap_sectors["[check.z]"]
+		var/obj/effect/overmap/customer = global.overmap_sectors[num2text(check.z)]
 		return customer && owner && get_turf(customer) == get_turf(owner)
 
 /datum/trade_hub/overmap/proc/update_hub(var/obj/effect/overmap/trade_hub/hub)

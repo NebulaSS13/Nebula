@@ -19,7 +19,7 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/multitool,
 		/obj/item/flash,
-		/obj/item/taperoll/engineering,
+		/obj/item/stack/tape_roll/barricade_tape/engineering,
 		/obj/item/crowbar/brace_jack,
 		/obj/item/storage/belt/utility/full
 	)
@@ -47,9 +47,9 @@
 	return list(
 		/obj/item/clothing/head/welding = 3,
 		/obj/item/weldingtool/largetank = 3,
-		/obj/item/weldpack = 3,
+		/obj/item/chems/weldpack = 3,
 		/obj/item/clothing/glasses/welding = 3,
-		/obj/item/welder_tank = 6
+		/obj/item/chems/welder_tank = 6
 	)
 
 /obj/structure/closet/secure_closet/engineering_personal
@@ -67,7 +67,7 @@
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/glasses/meson,
-		/obj/item/taperoll/engineering,
+		/obj/item/stack/tape_roll/barricade_tape/engineering,
 		/obj/item/storage/belt/utility/full
 	)
 
@@ -83,10 +83,10 @@
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/eng, 50),
 		/obj/item/clothing/suit/fire,
 		/obj/item/flashlight,
-		/obj/item/extinguisher,
+		/obj/item/chems/spray/extinguisher,
 		/obj/item/radio/headset/headset_eng,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
-		/obj/item/taperoll/atmos,
+		/obj/item/stack/tape_roll/barricade_tape/atmos,
 		/obj/item/storage/belt/utility/atmostech
 	)

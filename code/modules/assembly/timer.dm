@@ -62,15 +62,14 @@
 
 
 /obj/item/assembly/timer/on_update_icon()
-	overlays.Cut()
-	attached_overlays = list()
+	. = ..()
+	LAZYCLEARLIST(attached_overlays)
 	if(timing)
-		overlays += "timer_timing"
-		attached_overlays += "timer_timing"
+		var/image/img = overlay_image(icon, "timer_timing")
+		add_overlay(img)
+		LAZYADD(attached_overlays, img)
 	if(holder)
 		holder.update_icon()
-	return
-
 
 /obj/item/assembly/timer/interact(mob/user)//TODO: Have this use the wires
 	if(!secured)

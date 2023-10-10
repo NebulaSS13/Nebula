@@ -9,6 +9,8 @@ var/global/arrest_security_status =  "Arrest"
 /datum/computer_file/report/crew_record
 	filetype = "CDB"
 	size = 2
+	write_access = list(list(access_bridge))
+
 	var/icon/photo_front = null
 	var/icon/photo_side = null
 
@@ -54,9 +56,9 @@ var/global/arrest_security_status =  "Arrest"
 	var/gender_term = "Unset"
 	if(H)
 		var/decl/pronouns/G = H.get_pronouns(ignore_coverings = TRUE)
-		if(G && G.formal_term)
-			gender_term = G.formal_term
-	set_sex(gender_term)
+		if(G && G.bureaucratic_term )
+			gender_term = G.bureaucratic_term
+	set_gender(gender_term)
 	set_age(H?.get_age() || 30)
 	set_status(global.default_physical_status)
 	set_species_name(H ? H.get_species_name() : global.using_map.default_species)
@@ -80,9 +82,7 @@ var/global/arrest_security_status =  "Arrest"
 				if(BP_IS_PROSTHETIC(E))
 					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
 			for(var/obj/item/organ/internal/I in H.get_internal_organs())
-				if(BP_IS_ASSISTED(I))
-					organ_data += I.get_mechanical_assisted_descriptor()
-				else if (BP_IS_PROSTHETIC(I))
+				if (BP_IS_PROSTHETIC(I))
 					organ_data += "[I.name] prosthetic"
 			set_implants(jointext(organ_data, "\[*\]"))
 
@@ -139,7 +139,7 @@ var/global/arrest_security_status =  "Arrest"
 	// Generic record
 	set_name(S ? S.real_name : "Unset")
 	set_formal_name(S ? S.real_name : "Unset")
-	set_sex("Unset")
+	set_gender("Unset")
 	set_status(global.default_physical_status)
 	var/silicon_type = "Synthetic Lifeform"
 	var/robojob = GetAssignment(S)
@@ -167,7 +167,7 @@ var/global/arrest_security_status =  "Arrest"
 	CR.load_from_mob(H)
 	var/datum/computer_network/network = get_local_network_at(get_turf(H))
 	if(network)
-		network.store_file(CR, MF_ROLE_CREW_RECORDS)
+		network.store_file(CR, OS_RECORDS_DIR, TRUE, mainframe_role = MF_ROLE_CREW_RECORDS)
 	return CR
 
 // Gets crew records filtered by set of positions
@@ -233,7 +233,7 @@ KEY.set_access(ACCESS, ACCESS_EDIT || ACCESS || access_bridge)}
 FIELD_SHORT("Name", name, null, access_change_ids, TRUE, TRUE)
 FIELD_SHORT("Formal Name", formal_name, null, access_change_ids, FALSE, TRUE)
 FIELD_SHORT("Job", job, null, access_change_ids, FALSE, TRUE)
-FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids, TRUE)
+FIELD_LIST("Gender", gender, record_genders(), null, access_change_ids, TRUE)
 FIELD_NUM("Age", age, null, access_change_ids, TRUE)
 FIELD_LIST_EDIT("Status", status, global.physical_statuses, null, access_medical, TRUE)
 
@@ -262,7 +262,7 @@ FIELD_SHORT("Faction", faction, access_bridge, access_bridge, FALSE, TRUE)
 FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge, TRUE)
 
 // ANTAG RECORDS
-FIELD_LONG("Exploitable Information", antag_record, access_syndicate, access_syndicate, FALSE)
+FIELD_LONG("Exploitable Information", antag_record, access_hacked, access_hacked, FALSE)
 
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()
@@ -276,14 +276,14 @@ FIELD_LONG("Exploitable Information", antag_record, access_syndicate, access_syn
 		var/datum/mil_rank/RA = branch.ranks[rank]
 		. |= RA.name
 
-/datum/report_field/options/crew_record/sex/proc/record_genders()
+/datum/report_field/options/crew_record/gender/proc/record_genders()
 	. = list()
 	. |= "Unset"
 	var/list/all_genders = decls_repository.get_decls_of_type(/decl/pronouns)
 	for(var/thing in all_genders)
 		var/decl/pronouns/G = all_genders[thing]
-		if(G.formal_term)
-			. |= G.formal_term
+		if(G.bureaucratic_term )
+			. |= G.bureaucratic_term
 
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()

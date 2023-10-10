@@ -11,6 +11,7 @@
 	desc = "Smells nice."
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
+	flags_inv = 0
 
 /obj/item/clothing/head/hairflower/blue
 	icon = 'icons/clothing/head/hairflower/pink.dmi'
@@ -27,18 +28,17 @@
 	name = "powdered wig"
 	desc = "A powdered wig."
 	icon = 'icons/clothing/head/powderd_wig.dmi'
+
 /obj/item/clothing/head/that
 	name = "top-hat"
 	desc = "It's an amish looking hat."
 	icon = 'icons/clothing/head/tophat.dmi'
 	siemens_coefficient = 0.9
-	body_parts_covered = 0
 
 /obj/item/clothing/head/redcoat
 	name = "redcoat's hat"
 	icon = 'icons/clothing/head/redcoat.dmi'
 	desc = "<i>'I guess it's a redhead.'</i>"
-	body_parts_covered = 0
 
 /obj/item/clothing/head/plaguedoctorhat
 	name = "plague doctor's hat"
@@ -46,13 +46,12 @@
 	icon = 'icons/clothing/head/plague.dmi'
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
-	body_parts_covered = 0
 
 /obj/item/clothing/head/hasturhood
 	name = "hastur's hood"
 	desc = "It's unspeakably stylish."
 	icon = 'icons/clothing/head/hastur.dmi'
-	flags_inv = BLOCKHEADHAIR
+	flags_inv = BLOCK_HEAD_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/nursehat
@@ -60,7 +59,6 @@
 	desc = "It allows quick identification of trained medical personnel."
 	icon = 'icons/clothing/head/nurse.dmi'
 	siemens_coefficient = 0.9
-	body_parts_covered = 0
 
 /obj/item/clothing/head/cardborg
 	name = "cardborg helmet"
@@ -78,6 +76,7 @@
 	desc = "Wearing these makes you looks useless, and only good for your sex appeal."
 	icon = 'icons/clothing/head/bunny.dmi'
 	body_parts_covered = 0
+	flags_inv = 0
 
 /obj/item/clothing/head/flatcap
 	name = "flat cap"
@@ -89,19 +88,16 @@
 	name = "pirate hat"
 	desc = "Yarr."
 	icon = 'icons/clothing/head/pirate.dmi'
-	body_parts_covered = 0
 
 /obj/item/clothing/head/hgpiratecap
 	name = "pirate hat"
 	desc = "Yarr."
 	icon = 'icons/clothing/head/pirate_cap.dmi'
-	body_parts_covered = 0
 
 /obj/item/clothing/head/bandana
 	name = "pirate bandana"
 	desc = "Yarr."
 	icon = 'icons/clothing/head/bandana/pirate.dmi'
-	body_parts_covered = 0
 
 /obj/item/clothing/head/bandana/green
 	name = "green bandana"
@@ -150,14 +146,13 @@
 	name = "witch costume wig"
 	desc = "Eeeee~heheheheheheh!"
 	icon = 'icons/clothing/head/wizard/marisa.dmi'
-	flags_inv = BLOCKHAIR
 	siemens_coefficient = 2.0
 
 /obj/item/clothing/head/chicken
 	name = "chicken suit head"
 	desc = "Bkaw!"
 	icon = 'icons/clothing/head/chicken.dmi'
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCK_ALL_HAIR
 	siemens_coefficient = 0.7
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
@@ -165,7 +160,6 @@
 	name = "bear pelt hat"
 	desc = "Fuzzy."
 	icon = 'icons/clothing/head/bearpelt.dmi'
-	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/xenos
@@ -173,66 +167,56 @@
 	desc = "A helmet made out of chitinous alien hide."
 	icon = 'icons/clothing/head/xeno.dmi'
 	w_class = ITEM_SIZE_NORMAL
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	siemens_coefficient = 2.0
-	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS
 
 /obj/item/clothing/head/philosopher_wig
 	name = "natural philosopher's wig"
 	desc = "A stylish monstrosity unearthed from Earth's Renaissance period. With this most distinguish'd wig, you'll be ready for your next soiree!"
 	icon = 'icons/clothing/head/huge_wig.dmi'
-	flags_inv = BLOCKHAIR
-	body_parts_covered = 0
 
 /obj/item/clothing/head/hijab
 	name = "hijab"
 	desc = "A veil which is wrapped to cover the head and chest."
 	icon = 'icons/clothing/head/hijab.dmi'
-	body_parts_covered = 0
-	flags_inv = BLOCKHAIR
+	body_parts_covered = SLOT_HEAD|SLOT_EARS
 
 /obj/item/clothing/head/kippa
 	name = "kippa"
 	desc = "A small, brimless cap."
 	icon = 'icons/clothing/head/kippa.dmi'
-	body_parts_covered = 0
 
 /obj/item/clothing/head/turban
 	name = "turban"
 	desc = "A sturdy cloth, worn around the head."
 	icon = 'icons/clothing/head/turban.dmi'
-	body_parts_covered = 0
-	flags_inv = BLOCKHEADHAIR //Shows beards!
 
 /obj/item/clothing/head/cowboy_hat
 	name = "cowboy hat"
 	desc = "A wide-brimmed hat, in the prevalent style of America's frontier period. By law, you are required to wear this hat while watching True Grit."
 	icon = 'icons/clothing/head/cowboy.dmi'
-	body_parts_covered = 0
 	protects_against_weather = TRUE
 
 /obj/item/clothing/head/taqiyah
 	name = "taqiyah"
 	desc = "A short, rounded skullcap usually worn for religious purposes."
 	icon = 'icons/clothing/head/taqiyah.dmi'
-	body_parts_covered = 0
 
 /obj/item/clothing/head/rastacap
 	name = "rastacap"
 	desc = "A round, crocheted cap, often worn to tuck hair away or for religious purposes."
 	icon = 'icons/clothing/head/rasta.dmi'
-	body_parts_covered = 0
-	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/tank
 	name = "padded cap"
 	desc = "A padded skullcup for those prone to bumping their heads against hard surfaces."
 	icon = 'icons/clothing/head/tank.dmi'
-	flags_inv = BLOCKHEADHAIR
+	flags_inv = BLOCK_HEAD_HAIR
 	color = "#5f5f5f"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bomb = ARMOR_BOMB_PADDED
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 
 /obj/item/clothing/head/tank/olive
@@ -245,13 +229,12 @@
 	name = "beanie"
 	desc = "A head-hugging brimless winter cap. This one is tight."
 	icon = 'icons/clothing/head/beanie.dmi'
-	body_parts_covered = 0
 
 /obj/item/clothing/head/helmet/facecover
 	name = "face cover"
 	desc = "A helmet made of plastic. It's completely opaque. This will stop the stare."
 	icon = 'icons/clothing/head/facecover.dmi'
 	tint = TINT_BLIND
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	flash_protection = FLASH_PROTECTION_MAJOR

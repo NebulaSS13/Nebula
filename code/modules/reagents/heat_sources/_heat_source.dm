@@ -50,7 +50,7 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power) * Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
+	heating_power = initial(heating_power) * clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 
 	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	if(comp)
@@ -83,7 +83,7 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/attackby(var/obj/item/thing, var/mob/user)
-	if(isWrench(thing))
+	if(IS_WRENCH(thing))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 		else
@@ -97,7 +97,7 @@
 			if(istype(thing, checktype))
 				if(container)
 					to_chat(user, SPAN_WARNING("\The [src] is already holding \the [container]."))
-				else if(user.unEquip(thing))
+				else if(user.try_unequip(thing))
 					thing.forceMove(src)
 					container = thing
 					visible_message(SPAN_NOTICE("\The [user] places \the [container] on \the [src]."))
@@ -105,7 +105,7 @@
 				return TRUE
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept \the [thing]."))
 		return FALSE
-	
+
 	. = ..()
 
 /obj/machinery/reagent_temperature/on_update_icon()
@@ -119,7 +119,7 @@
 		if(temperature > MINIMUM_GLOW_TEMPERATURE) // 50C
 			if(!glow_icon)
 				glow_icon = image(icon, "[icon_state]-glow")
-			glow_icon.alpha = Clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
+			glow_icon.alpha = clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
 			set_light(1, l_color = COLOR_RED)
 		else
@@ -184,7 +184,7 @@
 /obj/machinery/reagent_temperature/OnTopic(var/mob/user, var/href_list)
 
 	if(href_list["adjust_temperature"])
-		target_temperature = Clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
+		target_temperature = clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
 		. = TOPIC_REFRESH
 
 	if(href_list["toggle_power"])

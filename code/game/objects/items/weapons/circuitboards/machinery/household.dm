@@ -186,3 +186,11 @@
 
 /obj/item/stock_parts/circuitboard/jukebox/get_buildable_types()
 	return typesof(/obj/machinery/media/jukebox)
+
+/obj/item/stock_parts/circuitboard/paper_shredder
+	name = "circuitboard (paper shredder)"
+	build_path = /obj/machinery/papershredder
+	board_type = "machine"
+	origin_tech = "{'engineering':1}"
+	req_components = list(/obj/item/stock_parts/manipulator = 1)
+	additional_spawn_components = null

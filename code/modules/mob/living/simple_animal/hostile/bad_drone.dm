@@ -30,9 +30,10 @@
 			var/mob/living/carbon/human/H = A
 			if(H.isSynthetic())
 				return FALSE
-			if(istype(H.head, /obj/item/holder/drone))
+			var/obj/item/head = H.get_equipped_item(slot_head_str)
+			if(istype(head, /obj/item/holder/drone))
 				return FALSE
-			if(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg))
+			if(istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cardborg) && istype(head, /obj/item/clothing/head/cardborg))
 				return FALSE
 
 /mob/living/simple_animal/hostile/rogue_drone/death(gibbed, deathmessage, show_dead_message)

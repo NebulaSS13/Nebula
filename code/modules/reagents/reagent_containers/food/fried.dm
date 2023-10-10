@@ -47,6 +47,6 @@
 	nutriment_amt = 4
 	bitesize = 2
 
-/obj/item/chems/food/cheesyfries/Initialize()
+/obj/item/chems/food/cheesyfries/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)

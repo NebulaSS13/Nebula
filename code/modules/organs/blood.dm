@@ -98,8 +98,9 @@
 						var/blinding = FALSE
 						if(ran_zone() == BP_HEAD)
 							blinding = TRUE
-							for(var/obj/item/I in list(H.head, H.glasses, H.wear_mask))
-								if(I && (I.body_parts_covered & SLOT_EYES))
+							for(var/slot in global.standard_headgear_slots)
+								var/obj/item/I = H.get_equipped_item(slot)
+								if(istype(I) && (I.body_parts_covered & SLOT_EYES))
 									blinding = FALSE
 									break
 						if(blinding)
@@ -191,6 +192,11 @@
 
 /mob/living/carbon/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
+
+	var/stress_modifier = get_stress_modifier()
+	if(stress_modifier)
+		amount *= 1-(config.stress_blood_recovery_constant * stress_modifier)
+
 	var/blood_volume_raw = vessel.total_volume
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
@@ -235,8 +241,11 @@
 	if(!splatter)
 		splatter = new decal_type(T)
 
-	var/obj/effect/decal/cleanable/blood/drip/drop = splatter
-	if(istype(drop) && drips && drips.len && !large)
+	if(QDELETED(splatter))
+		return
+
+	if(istype(splatter, /obj/effect/decal/cleanable/blood/drip) && drips && drips.len && !large)
+		var/obj/effect/decal/cleanable/blood/drip/drop = splatter
 		drop.overlays |= drips
 		drop.drips |= drips
 

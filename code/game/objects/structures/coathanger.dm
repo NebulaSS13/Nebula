@@ -36,17 +36,17 @@
 				break
 
 /obj/structure/coatrack/attack_hand(mob/user)
-	if(length(contents))
-		var/obj/item/removing = contents[contents.len]
-		user.visible_message( \
-			SPAN_NOTICE("\The [user] takes \the [removing] off \the [src]."), \
-			SPAN_NOTICE("You take \the [removing] off the \the [src].") \
-		)
-		removing.dropInto(loc)
-		user.put_in_active_hand(removing)
-		update_icon()
-		return TRUE
-	. = ..()
+	if(!length(contents) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	var/obj/item/removing = contents[contents.len]
+	user.visible_message( \
+		SPAN_NOTICE("\The [user] takes \the [removing] off \the [src]."),
+		SPAN_NOTICE("You take \the [removing] off the \the [src].")
+	)
+	removing.dropInto(loc)
+	user.put_in_active_hand(removing)
+	update_icon()
+	return TRUE
 
 /obj/structure/coatrack/examine(mob/user, distance)
 	. = ..()
@@ -71,7 +71,7 @@
 	if(length(contents) >= max_items)
 		to_chat(user, SPAN_NOTICE("There is no room on \the [src] to hang \the [W]."))
 		return TRUE
-	if(user.unEquip(W, src))
+	if(user.try_unequip(W, src))
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] hangs \the [W] on \the [src]."), \
 			SPAN_NOTICE("You hang \the [W] on the \the [src].") \

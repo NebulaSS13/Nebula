@@ -761,6 +761,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cf" = (
@@ -941,6 +942,7 @@
 /area/lost_supply_base)
 "cG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cH" = (
@@ -1002,6 +1004,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cT" = (
@@ -1026,12 +1029,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cZ" = (
@@ -1041,6 +1046,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/wall,
 /area/lost_supply_base)
 "da" = (
@@ -1849,6 +1855,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/airless{
 	icon_state = "steel_burned1"
 	},
@@ -1897,6 +1904,7 @@
 	pixel_x = 5;
 	pixel_y = -3
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base)
 "fT" = (
@@ -2008,6 +2016,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/abstract/landmark/allowed_leak,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base)
 "gh" = (
@@ -2101,7 +2110,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -32
 	},
 /obj/machinery/light/small,
@@ -2109,6 +2118,14 @@
 	icon_state = "steel_broken0"
 	},
 /area/lost_supply_base/supply)
+"nL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/abstract/landmark/allowed_leak,
+/turf/simulated/floor/airless,
+/area/lost_supply_base)
 "Jd" = (
 /obj/machinery/computer/modular{
 	dir = 1
@@ -8474,7 +8491,7 @@ bg
 bB
 bN
 bU
-bU
+nL
 cr
 aG
 cS

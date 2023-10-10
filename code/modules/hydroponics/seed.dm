@@ -1,3 +1,6 @@
+/datum/codex_entry/scannable/flora
+	category = /decl/codex_category/flora
+
 /datum/plantgene
 	var/genetype    // Label used when applying trait.
 	var/list/values // Values to copy into the target seed datum.
@@ -27,6 +30,7 @@
 	var/req_CO2_moles    = 1.0// Moles of CO2 required for photosynthesis.
 	var/hydrotray_only
 	var/base_seed_value = 5 // Used when generating price.
+	var/scannable_result
 
 	// Cached images for overlays
 	var/image/dead_overlay
@@ -174,9 +178,9 @@
 	if(chems && chems.len && target.reagents && LAZYLEN(external_organs))
 
 		var/obj/item/organ/external/affecting = pick(external_organs)
-
-		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
-			if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
+		for(var/slot in global.standard_clothing_slots)
+			var/obj/item/clothing/C = target.get_equipped_item(slot)
+			if(istype(C) && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				affecting = null
 
 		if(!(target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))	affecting = null
@@ -817,3 +821,40 @@
 		res.overlays += I
 
 	return res
+
+/datum/seed/PopulateClone(datum/seed/clone)
+	clone = ..()
+	//!! - Cloning means having an independent working copy, so leave its unique uid - !!
+	clone.roundstart       = FALSE
+	clone.name             = "[seed_name][(roundstart ? " strain #[clone.uid]" : "")]"
+	clone.seed_name        = clone.name
+	clone.display_name     = "[display_name][(roundstart ? " strain #[clone.uid]" : "")]"
+	clone.seed_noun        = seed_noun
+
+	//Seed traits
+	clone.traits           = traits.Copy()
+	clone.mutants          = mutants?.Copy()
+	clone.chems            = chems?.Copy()
+	clone.consume_gasses   = consume_gasses?.Copy()
+	clone.exude_gasses     = exude_gasses?.Copy()
+
+	//Appearence
+	clone.growth_stages    = growth_stages
+	clone.force_layer      = force_layer
+	clone.splat_type       = splat_type
+
+	//things that probably should be traits
+	clone.mysterious       = mysterious
+	clone.req_CO2_moles    = req_CO2_moles
+	clone.hydrotray_only   = hydrotray_only
+	clone.can_self_harvest = can_self_harvest
+
+	//misc data
+	clone.kitchen_tag      = kitchen_tag
+	clone.trash_type       = trash_type
+	clone.product_type     = product_type
+	clone.base_seed_value  = base_seed_value
+	clone.scannable_result = scannable_result
+
+	clone.update_growth_stages()
+	return clone

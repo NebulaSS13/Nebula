@@ -28,7 +28,7 @@ field_generator power level display
 	var/power = 30000  // Current amount of power
 	var/state = 0
 	var/warming_up = 0
-	var/list/obj/machinery/containment_field/fields
+	var/list/obj/effect/containment_field/fields
 	var/list/obj/machinery/field_generator/connected_gens
 	var/clean_up = 0
 
@@ -48,7 +48,7 @@ field_generator power level display
 	// Scale % power to % num_power_levels and truncate value
 	var/level = round(num_power_levels * power / field_generator_max_power)
 	// Clamp between 0 and num_power_levels for out of range power values
-	level = between(0, level, num_power_levels)
+	level = clamp(0, level, num_power_levels)
 	if(level)
 		overlays += "+p[level]"
 
@@ -100,7 +100,7 @@ field_generator power level display
 	if(active)
 		to_chat(user, "The [src] needs to be off.")
 		return
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		switch(state)
 			if(0)
 				state = 1
@@ -119,14 +119,14 @@ field_generator power level display
 			if(2)
 				to_chat(user, "<span class='warning'> The [src.name] needs to be unwelded from the floor.</span>")
 				return
-	else if(isWelder(W))
+	else if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 		switch(state)
 			if(0)
 				to_chat(user, "<span class='warning'>The [src.name] needs to be wrenched to the floor.</span>")
 				return
 			if(1)
-				if (WT.remove_fuel(0,user))
+				if (WT.weld(0,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to weld the [src.name] to the floor.", \
 						"You start to weld the [src] to the floor.", \
@@ -138,7 +138,7 @@ field_generator power level display
 				else
 					return
 			if(2)
-				if (WT.remove_fuel(0,user))
+				if (WT.weld(0,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut the [src.name] free from the floor.", \
 						"You start to cut the [src] free from the floor.", \
@@ -201,15 +201,14 @@ field_generator power level display
 	for(var/obj/machinery/field_generator/FG in connected_gens)
 		if (!isnull(FG))
 			power_draw += gen_power_draw
-	for (var/obj/machinery/containment_field/F in fields)
+	for (var/obj/effect/containment_field/F in fields)
 		if (!isnull(F))
 			power_draw += field_power_draw
 	power_draw /= 2	//because this will be mirrored for both generators
 	if(draw_power(round(power_draw)) >= power_draw)
 		return 1
 	else
-		for(var/mob/M in viewers(src))
-			M.show_message("<span class='warning'>\The [src] shuts down!</span>")
+		visible_message(SPAN_WARNING("\The [src] shuts down!"))
 		turn_off()
 		investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
 		src.power = 0
@@ -265,7 +264,7 @@ field_generator power level display
 			if(ismob(A))
 				continue
 			if(!istype(A,/obj/machinery/field_generator))
-				if((istype(A,/obj/machinery/door)||istype(A,/obj/machinery/the_singularitygen))&&(A.density))
+				if((istype(A,/obj/machinery/door)||istype(A,/obj/machinery/singularity_generator))&&(A.density))
 					return 0
 		steps += 1
 		G = locate(/obj/machinery/field_generator) in T
@@ -280,8 +279,8 @@ field_generator power level display
 	for(var/dist = 0, dist < steps, dist += 1) // creates each field tile
 		var/field_dir = get_dir(T,get_step(G.loc, NSEW))
 		T = get_step(T, NSEW)
-		if(!locate(/obj/machinery/containment_field) in T)
-			var/obj/machinery/containment_field/CF = new/obj/machinery/containment_field()
+		if(!locate(/obj/effect/containment_field) in T)
+			var/obj/effect/containment_field/CF = new/obj/effect/containment_field()
 			CF.set_master(src,G)
 			fields += CF
 			G.fields += CF
@@ -309,7 +308,7 @@ field_generator power level display
 
 /obj/machinery/field_generator/proc/cleanup()
 	clean_up = 1
-	for (var/obj/machinery/containment_field/F in fields)
+	for (var/obj/effect/containment_field/F in fields)
 		if (QDELETED(F))
 			continue
 		qdel(F)
@@ -330,7 +329,7 @@ field_generator power level display
 	//I want to avoid using global variables.
 	spawn(1)
 		var/temp = 1 //stops spam
-		for(var/obj/singularity/O in SSmachines.machinery)
+		for(var/obj/effect/singularity/O in SSmachines.machinery)
 			if(O.last_warning && temp)
 				if((world.time - O.last_warning) > 50) //to stop message-spam
 					temp = 0

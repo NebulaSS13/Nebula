@@ -1,4 +1,4 @@
-/mob/living/silicon/pai/examine(mob/user, distance)
+/mob/living/silicon/pai/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..(user, distance, infix = ", personal AI")
 
 	var/msg = ""

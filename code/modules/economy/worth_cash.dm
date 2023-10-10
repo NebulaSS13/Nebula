@@ -11,6 +11,7 @@
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/cardboard //#TODO: Replace with paper
 	var/currency
 	var/absolute_worth = 0
 	var/can_flip = TRUE // Cooldown tracker for single-coin flips.
@@ -24,7 +25,7 @@
 		update_from_worth()
 
 /obj/item/cash/get_base_value()
-	. = holographic ? 0 : absolute_worth 
+	. = holographic ? 0 : absolute_worth
 
 /obj/item/cash/proc/set_currency(var/new_currency)
 	currency = new_currency
@@ -47,7 +48,7 @@
 		if(cash.currency != currency)
 			to_chat(user, SPAN_WARNING("You can't mix two different currencies, it would be uncivilized."))
 			return
-		if(user.unEquip(W))
+		if(user.try_unequip(W))
 			adjust_worth(cash.absolute_worth)
 			var/decl/currency/cur = GET_DECL(currency)
 			to_chat(user, SPAN_NOTICE("You add [cash.get_worth()] [cur.name] to the pile."))
@@ -59,9 +60,9 @@
 		L.absorb_cash(src, user)
 
 /obj/item/cash/on_update_icon()
+	. = ..()
 	icon_state = ""
 	var/draw_worth = get_worth()
-	cut_overlays()
 	var/decl/currency/cur = GET_DECL(currency)
 	var/i = 0
 	for(var/datum/denomination/denomination in cur.denominations)
@@ -122,7 +123,7 @@
 		return TRUE
 
 	var/amount = input(usr, "How many [cur.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
-	amount = round(Clamp(amount, 0, FLOOR(get_worth() - 1)))
+	amount = round(clamp(amount, 0, FLOOR(get_worth() - 1)))
 
 	if(!amount || QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
@@ -151,6 +152,7 @@
 
 /obj/item/cash/c200
 	absolute_worth = 200
+	w_class = ITEM_SIZE_SMALL // so that the money freezer doesn't overflow bc this is a pile instead of single bill
 
 /obj/item/cash/c500
 	absolute_worth = 500
@@ -173,7 +175,8 @@
 	icon_state = ICON_STATE_WORLD
 	desc = "A digital stick that holds an amount of money."
 	w_class = ITEM_SIZE_TINY
-
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE, /decl/material/solid/silicon = MATTER_AMOUNT_TRACE)
 	var/max_worth = 5000
 	var/loaded_worth = 0
 	var/creator			// Who originally created this card. Mostly for book-keeping purposes. In game these cards are 'anonymous'.
@@ -189,6 +192,11 @@
 		currency = global.using_map.default_currency
 		update_name_desc()
 	set_extension(src, lock_type)
+
+	if(grade && grade != "peasant")
+		var/image/I = image(icon, "[icon_state]-[grade]")
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I, TRUE)
 	update_icon()
 
 /obj/item/charge_stick/proc/update_name_desc()
@@ -204,6 +212,7 @@
 	loaded_worth += amt
 	if(loaded_worth < 0)
 		loaded_worth = 0
+	update_icon()
 
 /obj/item/charge_stick/examine(mob/user, distance)
 	. = ..(user)
@@ -247,7 +256,7 @@
 		var/decl/currency/cur = GET_DECL(currency)
 		to_chat(user, SPAN_NOTICE("[html_icon(src)] [src] chirps, \"Completed transfer of [amount] [cur.name].\""))
 		return TRUE
-	
+
 	if(lock.attackby(W, user))
 		return TRUE
 	return ..()
@@ -260,39 +269,73 @@
 
 /obj/item/charge_stick/attack_self(var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	lock.ui_interact(user)		
+	lock.ui_interact(user)
 
 /obj/item/charge_stick/proc/is_locked()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	return lock.locked
 
+/**
+	Given a number, returns a representation fit for a 3-digit display.
+
+	Assumes that besides the digits themselves, display provides
+	decimal point on the highest digit, plus (for overflow) and minus signs.
+	Returns lists indexed by (power of ten)+1, that is, with [1] showing ones,
+	[2] tens, [3] hundreds.
+	Valid values are `-99` to `99<M>`, with `++<M>` and `---` for over and underflow,
+	where <M> is the maximal provided decimal postfix (k, M, B, T, etc).
+*/
+/proc/number_to_3digits(value, var/list/postfixes = list("k", "M"))
+	var/list/digits[3]
+	var/lim = 1000
+	if (value < 0)  // negatives
+		digits[3] = "-"
+		value *= -1
+		lim = 100
+	else
+		for(var/s in postfixes)
+			if (value < lim)
+				break
+			value /= 1000
+			digits[1] = s
+			lim = 100
+	if (value >= lim) // over/underflow
+		if (!digits[3])
+			digits[3] = "+"
+		if (!digits[1])
+			digits[1] = digits[3]
+		digits[2] = digits[3]
+	else
+		if ((lim == 100) && !digits[3]) // suffix on
+			if (value < 1) // .
+				digits[3] = "."
+				value *= 100 // .X => 0X0
+			else // just suffix
+				value *= 10  // XX => XX0
+		if (!digits[1])
+			digits[1] = value % 10
+		digits[2] = (value / 10) % 10
+		if (!digits[3])
+			digits[3] = (value / 100) % 10
+	return digits
+
 /obj/item/charge_stick/on_update_icon()
 	. = ..()
 
-	if(grade && grade != "peasant")
-		var/image/I = image(icon, "[icon_state]-[grade]")
-		I.appearance_flags |= RESET_COLOR
-		overlays += I
-
 	if(get_world_inventory_state() == ICON_STATE_WORLD)
-		return 
+		return
 
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
 		return
 
-	if(loaded_worth > 999999)
-		overlays += image(icon, "9__")
-		overlays += image(icon, "_9_")
-		overlays += image(icon, "__9")
-		return
+	var/decl/currency/cur = GET_DECL(currency)
+	var/displayed_worth = loaded_worth / cur.absolute_value // Denominated in stick currency
+	var/list/digits = number_to_3digits(displayed_worth)
+	add_overlay("__[digits[1]]")
+	add_overlay("_[digits[2]]_")
+	add_overlay("[digits[3]]__")
 
-	var/h_thou = loaded_worth / 100000
-	var/t_thou = (loaded_worth - (FLOOR(h_thou) * 100000)) / 10000
-	var/thou = (loaded_worth - (FLOOR(h_thou) * 100000) - (FLOOR(t_thou) * 10000)) / 1000
-	overlays += image(icon, "[FLOOR(h_thou)]__")
-	overlays += image(icon, "_[FLOOR(t_thou)]_")
-	overlays += image(icon, "__[FLOOR(thou)]")
 
 /obj/item/charge_stick/copper
 	grade = "copper"
@@ -316,6 +359,6 @@
 
 /atom/movable/proc/GetChargeStick()
 	return null
-	
+
 /obj/item/charge_stick/GetChargeStick()
 	return src

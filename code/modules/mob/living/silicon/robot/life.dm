@@ -179,10 +179,11 @@
 						src.healths.icon_state = "health3"
 					if(0 to 50)
 						src.healths.icon_state = "health4"
-					if(config.health_threshold_dead to 0)
-						src.healths.icon_state = "health5"
 					else
-						src.healths.icon_state = "health6"
+						if(health > config.health_threshold_dead)
+							src.healths.icon_state = "health5"
+						else
+							src.healths.icon_state = "health6"
 		else
 			src.healths.icon_state = "health7"
 
@@ -199,7 +200,7 @@
 
 	if (src.cells)
 		if (src.cell)
-			var/chargeNum = Clamp(CEILING(cell.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+			var/chargeNum = clamp(CEILING(cell.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 			src.cells.icon_state = "charge[chargeNum]"
 		else
 			src.cells.icon_state = "charge-empty"

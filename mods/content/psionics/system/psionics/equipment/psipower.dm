@@ -9,6 +9,9 @@
 	drop_sound =   null
 	equip_sound =  null
 
+	is_spawnable_type = FALSE
+	abstract_type = /obj/item/psychic_power
+
 	var/maintain_cost = 3
 	var/mob/living/owner
 

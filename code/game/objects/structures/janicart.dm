@@ -7,8 +7,6 @@
 	density = 1
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
 	movable_flags = MOVABLE_FLAG_WHEELED
-	//copypaste sorry
-	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 	var/obj/item/storage/bag/trash/mybag	= null
 	var/obj/item/mop/mymop = null
 	var/obj/item/chems/spray/myspray = null
@@ -28,7 +26,7 @@
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/storage/bag/trash) && !mybag)
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		mybag = I
 		update_icon()
@@ -45,7 +43,7 @@
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 				return
 		if(!mymop)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			mymop = I
 			update_icon()
@@ -53,7 +51,7 @@
 			to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
 	else if(istype(I, /obj/item/chems/spray) && !myspray)
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		myspray = I
 		update_icon()
@@ -61,7 +59,7 @@
 		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
 	else if(istype(I, /obj/item/lightreplacer) && !myreplacer)
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		myreplacer = I
 		update_icon()
@@ -70,7 +68,7 @@
 
 	else if(istype(I, /obj/item/caution))
 		if(signs < 4)
-			if(!user.unEquip(I, src))
+			if(!user.try_unequip(I, src))
 				return
 			signs++
 			update_icon()
@@ -87,8 +85,10 @@
 
 
 /obj/structure/janitorialcart/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	ui_interact(user)
-	return
+	return TRUE
 
 /obj/structure/janitorialcart/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -185,8 +185,6 @@
 		/datum/movement_handler/move_relay_self/janicart
 	)
 
-	//copypaste sorry
-	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 	var/obj/item/storage/bag/trash/mybag = null
 	var/callme = "pimpin' ride"	//how do people refer to it?
 
@@ -224,7 +222,7 @@
 		return TRUE
 
 	if(istype(I, /obj/item/storage/bag/trash))
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, SPAN_NOTICE("You hook \the [I] onto the [callme]."))
 		mybag = I
@@ -233,17 +231,17 @@
 	. = ..()
 
 /obj/structure/bed/chair/janicart/attack_hand(mob/user)
-	if(mybag)
-		user.put_in_hands(mybag)
-		mybag = null
-	else
-		..()
+	if(!mybag || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	user.put_in_hands(mybag)
+	mybag = null
+	return TRUE
 
 /obj/structure/bed/chair/janicart/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	if(isspaceturf(loc))
 		return
 	. = MOVEMENT_HANDLED
-	DoMove(mob.AdjustMovementDirection(direction), mob)
+	DoMove(mob.AdjustMovementDirection(direction, mover), mob)
 
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))
@@ -264,3 +262,5 @@
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "keys"
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_TRACE)

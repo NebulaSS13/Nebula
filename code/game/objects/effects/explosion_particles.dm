@@ -13,7 +13,6 @@
 /datum/effect/system/expl_particles
 	var/number = 10
 	var/turf/location
-	var/total_particles = 0
 
 /datum/effect/system/expl_particles/proc/set_up(n = 10, loca)
 	number = n

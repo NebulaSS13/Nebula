@@ -1,6 +1,9 @@
 /datum/proc/get_client()
 	return null
 
+/datum/mind/get_client()
+	return current?.client
+
 /client/get_client()
 	return src
 

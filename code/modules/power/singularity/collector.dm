@@ -31,10 +31,10 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/rad_collector/Initialize()
 	. = ..()
-	rad_collectors += src
+	global.rad_collectors += src
 
 /obj/machinery/rad_collector/Destroy()
-	rad_collectors -= src
+	global.rad_collectors -= src
 	. = ..()
 
 /obj/machinery/rad_collector/Process()
@@ -97,16 +97,16 @@ var/global/list/rad_collectors = list()
 		if(src.loaded_tank)
 			to_chat(user, "<span class='warning'>There's already a tank loaded.</span>")
 			return 1
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		src.loaded_tank = W
 		update_icon()
 		return 1
-	else if(isCrowbar(W))
+	else if(IS_CROWBAR(W))
 		if(loaded_tank && !src.locked)
 			eject()
 			return 1
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if(loaded_tank)
 			to_chat(user, "<span class='notice'>Remove the tank first.</span>")
 			return 1

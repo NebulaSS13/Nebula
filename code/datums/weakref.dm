@@ -39,3 +39,6 @@
 
 /weakref/get_log_info_line()
 	return "[ref_name] ([ref_type]) ([ref]) (WEAKREF)"
+
+/weakref/CanClone()
+	return FALSE //Pass weakref as references since they're unique per atom instance

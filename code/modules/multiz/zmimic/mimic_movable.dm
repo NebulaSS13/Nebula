@@ -54,6 +54,7 @@
 	simulated = FALSE
 	anchored = TRUE
 	mouse_opacity = FALSE
+	abstract_type = /atom/movable/openspace // unsure if this is valid, check with Lohi
 
 /atom/movable/openspace/can_fall()
 	return FALSE
@@ -63,15 +64,6 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-/atom/movable/openspace/singularity_act()
-	return
-
-/atom/movable/openspace/singularity_pull()
-	return
-
-/atom/movable/openspace/singuloCanEat()
-	return
-
 // -- MULTIPLIER / SHADOWER --
 
 // Holder object used for dimming openspaces & copying lighting of below turf.
@@ -79,7 +71,7 @@
 	name = "openspace multiplier"
 	desc = "You shouldn't see this."
 	icon = 'icons/effects/lighting_overlay.dmi'
-	icon_state = "dark"
+	icon_state = "blank"
 	plane = OPENTURF_MAX_PLANE
 	layer = MIMICED_LIGHTING_LAYER
 	blend_mode = BLEND_MULTIPLY
@@ -98,6 +90,7 @@
 	appearance = LO
 	layer = MIMICED_LIGHTING_LAYER
 	plane = OPENTURF_MAX_PLANE
+	blend_mode = BLEND_MULTIPLY
 	invisibility = 0
 
 	if (icon_state == LIGHTING_BASE_ICON_STATE)
@@ -138,6 +131,7 @@
 	var/mimiced_type
 	var/original_z
 	var/override_depth
+	var/have_performed_fixup = FALSE
 
 /atom/movable/openspace/mimic/New()
 	atom_flags |= ATOM_FLAG_INITIALIZED
@@ -160,7 +154,9 @@
 	to_chat(user, SPAN_NOTICE("\The [src] is too far away."))
 
 /atom/movable/openspace/mimic/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+	return TRUE
 
 /atom/movable/openspace/mimic/examine(...)
 	SHOULD_CALL_PARENT(FALSE)
@@ -192,7 +188,8 @@
 	loc.attackby(W, user)
 
 /atom/movable/openspace/turf_proxy/attack_hand(mob/user as mob)
-	loc.attack_hand(user)
+	SHOULD_CALL_PARENT(FALSE)
+	return loc.attack_hand(user)
 
 /atom/movable/openspace/turf_proxy/attack_generic(mob/user as mob)
 	loc.attack_generic(user)
@@ -219,7 +216,9 @@
 	loc.attackby(W, user)
 
 /atom/movable/openspace/turf_mimic/attack_hand(mob/user as mob)
+	SHOULD_CALL_PARENT(FALSE)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+	return TRUE
 
 /atom/movable/openspace/turf_mimic/attack_generic(mob/user as mob)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))

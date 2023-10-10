@@ -18,21 +18,17 @@ var/global/list/cached_icons = list()
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	var/pigment
 
-/obj/item/chems/glass/paint/Initialize()
-	. = ..()
+/obj/item/chems/glass/paint/populate_reagents()
+	var/amt = reagents.maximum_volume
 	if(pigment)
-		var/amt = round(reagents.maximum_volume/2)
+		amt = round(amt/2)
 		reagents.add_reagent(pigment, amt)
-		reagents.add_reagent(/decl/material/liquid/paint, amt)
-	else
-		reagents.add_reagent(/decl/material/liquid/paint, reagents.maximum_volume)
+	reagents.add_reagent(/decl/material/liquid/paint, amt)
 
 /obj/item/chems/glass/paint/on_update_icon()
-	overlays.Cut()
+	. = ..()
 	if(reagents.total_volume)
-		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "paintbucket")
-		filling.color = reagents.get_color()
-		overlays += filling
+		add_overlay(overlay_image('icons/obj/reagentfillings.dmi', "paintbucket", reagents.get_color()))
 
 /obj/item/chems/glass/paint/red
 	name = "red paint bucket"
@@ -66,5 +62,5 @@ var/global/list/cached_icons = list()
 	name = "odd paint bucket"
 
 /obj/item/chems/glass/paint/random/Initialize()
-	pigment = pick(subtypesof(/decl/material/liquid/pigment))
+	pigment = pick(decls_repository.get_decl_paths_of_subtype(/decl/material/liquid/pigment))
 	. = ..()

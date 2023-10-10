@@ -34,7 +34,7 @@
 			var/obj/item/mech_equipment/M = hardpoints[hardpoint]
 			if(istype(M) && M.active && M.passive_power_use)
 				M.deactivate()
-		
+
 	updatehealth()
 	if(health <= 0 && stat != DEAD)
 		death()
@@ -97,23 +97,8 @@
 		hatch_locked = 0 // So they can get out.
 		for(var/pilot in pilots)
 			eject(pilot, silent=1)
-
-	// Salvage moves into the wreck unless we're exploding violently.
-	var/obj/wreck = new wreckage_path(get_turf(src), src, gibbed)
-	wreck.name = "wreckage of \the [name]"
-	if(!gibbed)
-		if(arms.loc != src)
-			arms = null
-		if(legs.loc != src)
-			legs = null
-		if(head.loc != src)
-			head = null
-		if(body.loc != src)
-			body = null
-
-	// Handle the rest of things.
+	new wreckage_path(get_turf(src), src, gibbed)
 	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
-	if(!gibbed) qdel(src)
 
 /mob/living/exosuit/gib(anim="gibbed-m",do_gibs)
 	death(1)

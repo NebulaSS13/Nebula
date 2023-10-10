@@ -9,8 +9,6 @@ SUBSYSTEM_DEF(supply)
 	var/points = 50
 	var/points_per_process = 1
 	var/point_sources = list()
-	var/pointstotalsum = 0
-	var/pointstotal = 0
 
 	var/price_markup =        1.15
 	var/crate_return_rebate = 0.9
@@ -95,8 +93,8 @@ SUBSYSTEM_DEF(supply)
 					// Sell manifests
 					if(find_slip && istype(atom, /obj/item/paper/manifest))
 						var/obj/item/paper/manifest/slip = atom
-						if(!slip.is_copy && length(slip.stamped))
-							add_points_from_source(slip.order_total * slip_return_rebate, "manifest")
+						if(!LAZYACCESS(slip.metadata, "is_copy") && LAZYLEN(slip.applied_stamps))
+							add_points_from_source(LAZYACCESS(slip.metadata, "order_total") * slip_return_rebate, "manifest")
 							find_slip = 0
 						continue
 
@@ -157,9 +155,9 @@ SUBSYSTEM_DEF(supply)
 			info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 			info +="CONTENTS:<br><ul>"
 
-			slip = new /obj/item/paper/manifest(A, JOINTEXT(info))
-			slip.order_total = SP.cost
-			slip.is_copy = 0
+			slip = new /obj/item/paper/manifest(A, null, JOINTEXT(info))
+			LAZYSET(slip.metadata, "order_total", SP.cost)
+			LAZYSET(slip.metadata, "is_copy",     FALSE)
 
 		//spawn the stuff, finish generating the manifest while you're at it
 		if(SP.access)

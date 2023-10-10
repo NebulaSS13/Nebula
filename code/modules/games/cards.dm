@@ -21,6 +21,7 @@ var/global/list/card_decks = list()
 /obj/item/deck
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/items/playing_cards.dmi'
+	material = /decl/material/solid/cardboard
 	var/list/cards = list()
 
 /obj/item/deck/Initialize()
@@ -62,6 +63,7 @@ var/global/list/card_decks = list()
 	name = "card box"
 	desc = "A small leather case to show how classy you are compared to everyone else."
 	icon_state = "card_holder"
+	material = /decl/material/solid/leather
 
 /obj/item/deck/cards
 	name = "deck of cards"
@@ -135,13 +137,10 @@ var/global/list/card_decks = list()
 			cards += P
 
 /obj/item/deck/attack_hand(mob/user)
-	if(!istype(user))
-		return
-	if (user.a_intent == I_GRAB)
+	if(user.a_intent == I_GRAB || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
-	else
-		draw_card(user)
-		return TRUE
+	draw_card(user)
+	return TRUE
 
 /obj/item/deck/examine(mob/user)
 	. = ..()
@@ -234,7 +233,7 @@ var/global/list/card_decks = list()
 
 	H.throw_at(get_step(target, ismob(target) ? target.dir : target), 10, 1,user)
 
-/obj/item/hand/attackby(obj/O, mob/user)
+/obj/item/hand/attackby(obj/item/O, mob/user)
 
 	if(istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
@@ -246,7 +245,7 @@ var/global/list/card_decks = list()
 		H.name = "hand of [(H.cards.len)] card\s"
 		return TRUE
 
-	if(length(cards) == 1 && istype(O, /obj/item/pen))
+	if(length(cards) == 1 && IS_PEN(O))
 		var/datum/playingcard/P = cards[1]
 		if(lowertext(P.name) != "blank card")
 			to_chat(user, SPAN_WARNING("You cannot write on that card."))
@@ -274,10 +273,10 @@ var/global/list/card_decks = list()
 /obj/item/pack
 	name = "card pack"
 	desc = "For those with disposible income."
-
 	icon_state = "card_pack"
 	icon = 'icons/obj/items/playing_cards.dmi'
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/cardboard
 	var/list/cards = list()
 
 
@@ -298,7 +297,7 @@ var/global/list/card_decks = list()
 	icon = 'icons/obj/items/playing_cards.dmi'
 	icon_state = "empty"
 	w_class = ITEM_SIZE_TINY
-
+	material = /decl/material/solid/cardboard
 	var/concealed = 0
 	var/list/datum/playingcard/cards = list()
 
@@ -308,33 +307,34 @@ var/global/list/card_decks = list()
 	user.visible_message("\The [user] [concealed ? "conceals" : "reveals"] their hand.")
 
 /obj/item/hand/attack_hand(mob/user)
-	if(src.loc == user)
-		// build the list of cards in the hand
-		var/list/to_discard = list()
-		for(var/datum/playingcard/P in cards)
-			to_discard[P.name] = P
-		var/discarding = null
-		//don't prompt if only 1 card
-		if(to_discard.len == 1)
-			discarding = to_discard[1]
-		else
-			discarding = input(user, "Which card do you wish to take?") as null|anything in to_discard
-		if(!discarding || !to_discard[discarding] || !CanPhysicallyInteract(user)) return
+	if(loc != user && !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 
-		var/datum/playingcard/card = to_discard[discarding]
-		var/obj/item/hand/new_hand = new(src.loc)
-		new_hand.cards += card
-		cards -= card
-		new_hand.concealed = 0
-		new_hand.update_icon()
-		src.update_icon()
-
-		if(!cards.len)
-			qdel(src)
-
-		user.put_in_hands(new_hand)
+	// build the list of cards in the hand
+	var/list/to_discard = list()
+	for(var/datum/playingcard/P in cards)
+		to_discard[P.name] = P
+	var/discarding = null
+	//don't prompt if only 1 card
+	if(to_discard.len == 1)
+		discarding = to_discard[1]
 	else
-		. = ..()
+		discarding = input(user, "Which card do you wish to take?") as null|anything in to_discard
+	if(!discarding || !to_discard[discarding] || !CanPhysicallyInteract(user))
+		return TRUE
+
+	var/datum/playingcard/card = to_discard[discarding]
+	var/obj/item/hand/new_hand = new(src.loc)
+	new_hand.cards += card
+	cards -= card
+	new_hand.concealed = 0
+	new_hand.update_icon()
+	src.update_icon()
+
+	if(!cards.len)
+		qdel(src)
+	user.put_in_hands(new_hand)
+	return TRUE
 
 /obj/item/hand/examine(mob/user)
 	. = ..()
@@ -344,6 +344,7 @@ var/global/list/card_decks = list()
 			to_chat(user, "\The [APPEND_FULLSTOP_IF_NEEDED(P.name)]")
 
 /obj/item/hand/on_update_icon(var/direction = 0)
+	. = ..()
 	if(!cards.len)
 		qdel(src)
 		return
@@ -407,12 +408,13 @@ var/global/list/card_decks = list()
 	else
 		update_icon()
 
-/obj/item/hand/pickup(mob/user)
+/obj/item/hand/on_picked_up(mob/user)
 	src.update_icon()
 
 /*** A special thing that steals a card from a deck, probably lost in maint somewhere. ***/
 /obj/item/hand/missing_card
 	name = "missing playing card"
+	is_spawnable_type = FALSE //Can't spawn this for tests because it kills itself
 
 /obj/item/hand/missing_card/Initialize()
 	. = ..()

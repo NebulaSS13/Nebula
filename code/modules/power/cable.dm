@@ -30,7 +30,9 @@ By design, d1 is the smallest direction and d2 is the highest
 	layer =    EXPOSED_WIRE_LAYER
 	color =    COLOR_MAROON
 	anchored = TRUE
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	level = 1
+
 	var/d1
 	var/d2
 	var/datum/powernet/powernet
@@ -140,17 +142,17 @@ By design, d1 is the smallest direction and d2 is the highest
 //
 
 /obj/structure/cable/attackby(obj/item/W, mob/user)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		cut_wire(W, user)
 
-	else if(isCoil(W))
+	else if(IS_COIL(W))
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.get_amount() < 1)
 			to_chat(user, "You don't have enough cable to lay down.")
 			return
 		coil.cable_join(src, user)
 
-	else if(isMultitool(W))
+	else if(IS_MULTITOOL(W))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
 			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
@@ -494,13 +496,6 @@ By design, d1 is the smallest direction and d2 is the highest
 	stack_merge_type = /obj/item/stack/cable_coil
 	matter_multiplier = 0.15
 
-/obj/item/stack/cable_coil/Initialize()
-	. = ..()
-	set_extension(src, /datum/extension/tool/variable, list(
-		TOOL_CABLECOIL = TOOL_QUALITY_DEFAULT,
-		TOOL_SUTURES =   TOOL_QUALITY_MEDIOCRE
-	))
-
 /obj/item/stack/cable_coil/single
 	amount = 1
 
@@ -511,9 +506,15 @@ By design, d1 is the smallest direction and d2 is the highest
 	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
+	max_health = ITEM_HEALTH_NO_DAMAGE
+	is_spawnable_type = FALSE
 
 /obj/item/stack/cable_coil/Initialize(mapload, c_length = MAXCOIL, var/param_color = null)
 	. = ..(mapload, c_length)
+	set_extension(src, /datum/extension/tool/variable, list(
+		TOOL_CABLECOIL = TOOL_QUALITY_DEFAULT,
+		TOOL_SUTURES =   TOOL_QUALITY_MEDIOCRE
+	))
 	src.amount = c_length
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
 		color = param_color
@@ -528,7 +529,7 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/item/stack/cable_coil/attack(var/atom/A, var/mob/living/user, var/def_zone)
 	if(ishuman(A) && user.a_intent == I_HELP)
 		var/mob/living/carbon/human/H = A
-		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user.zone_sel.selecting)
+		var/obj/item/organ/external/S = GET_EXTERNAL_ORGAN(H, user.get_target_zone())
 
 		if (!S) return
 		if(!BP_IS_PROSTHETIC(S) || user.a_intent != I_HELP)
@@ -546,7 +547,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	return ..()
 
 /obj/item/stack/cable_coil/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if (!color)
 		var/list/possible_cable_colours = get_global_cable_colors()
 		color = possible_cable_colours[pick(possible_cable_colours)]
@@ -587,7 +588,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 
 	if(get_amount() == 1)
-		to_chat(user, "A [singular_name] of cable.")
+		to_chat(user, "\A [singular_name] of cable.")
 	else if(get_amount() == 2)
 		to_chat(user, "Two [plural_name] of cable.")
 	else
@@ -620,16 +621,16 @@ By design, d1 is the smallest direction and d2 is the highest
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !
 //   - Cable coil : merge cables
-/obj/item/stack/cable_coil/proc/can_merge(var/obj/item/stack/cable_coil/C)
-	return color == C.color
+/obj/item/stack/cable_coil/can_merge_stacks(var/obj/item/stack/other)
+	return !other || (istype(other) && other.color == color)
 
-/obj/item/stack/cable_coil/cyborg/can_merge()
-	return 1
+/obj/item/stack/cable_coil/cyborg/can_merge_stacks(var/obj/item/stack/other)
+	return TRUE
 
 /obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/S)
 	if(!istype(S))
 		return 0
-	if(!(can_merge(S) || S.can_merge(src)))
+	if(!(can_merge_stacks(S) || S.can_merge_stacks(src)))
 		return 0
 
 	return ..()
@@ -839,7 +840,10 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/item/stack/cable_coil/white
 	color = COLOR_SILVER
 
-/obj/item/stack/cable_coil/random/Initialize()
+/obj/item/stack/cable_coil/lime
+	color = COLOR_LIME
+
+/obj/item/stack/cable_coil/random/Initialize(mapload, c_length, param_color)
 	var/list/possible_cable_colours = get_global_cable_colors()
 	color = possible_cable_colours[pick(possible_cable_colours)]
 	. = ..()

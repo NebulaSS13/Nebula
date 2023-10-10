@@ -10,6 +10,7 @@ Now poorly imported for Nebula!
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/matchmaking/_matchmaking.dme"
 	#include "../../mods/species/ascent/_ascent.dme"
+	#include "../../mods/species/serpentid/_serpentid.dme"
 
 	#define USING_MAP_DATUM /datum/map/ministation
 
@@ -20,7 +21,6 @@ Now poorly imported for Nebula!
 	#include "ministation_antagonists.dm"
 	#include "ministation_areas.dm"
 	#include "ministation_departments.dm"
-	#include "ministation_telecomms.dm"
 	#include "ministation_jobs.dm"
 	#include "ministation_shuttles.dm"
 	#include "ministation_objects.dm"

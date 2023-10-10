@@ -203,7 +203,7 @@
 /turf/simulated/wall/ocp_wall,
 /area/unishi/engineroom)
 "aH" = (
-/obj/structure/dispenser,
+/obj/structure/tank_rack,
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aI" = (

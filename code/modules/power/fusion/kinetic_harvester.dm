@@ -33,7 +33,7 @@
 	return TRUE
 
 /obj/machinery/kinetic_harvester/attackby(var/obj/item/thing, var/mob/user)
-	if(isMultitool(thing))
+	if(IS_MULTITOOL(thing))
 		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
 		if(lanm.get_new_tag(user))
 			find_core()

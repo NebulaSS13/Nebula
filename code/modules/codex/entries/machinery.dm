@@ -6,7 +6,7 @@
 
 /datum/codex_entry/computer
 	associated_paths = list(/obj/machinery/computer, /obj/machinery/constructable_frame/computerframe)
-	mechanics_text = "(This entry refers to the older single-purpose computers, not <span codexlink='modular computer'>modular computers</span>.)<BR><BR> \
+	mechanics_text = "(This entry refers to the older single-purpose computers, not <span codexlink='modular console (machine)'>modular computers</span>.)<BR><BR> \
 	Computers are used primarily for controlling other machines and systems, or for providing information about said systems. They require power to function and run off the Equipment power channel on an APC. and sometimes requries ID access. \
 	<BR><BR><b>Constructing a computer:</b><BR> \
 	1.) Use 5 steel sheets to construct a computer frame at your location. You may then move it by dragging, or rotate it with alt+click, if desired. <BR> \
@@ -24,11 +24,12 @@
 	4.) Use a wrench on to take the frame apart.<BR> \
 	5.) Use a welder to cut the frame into sheets."
 	disambiguator = "machine"
+	include_subtypes = TRUE
 
 /datum/codex_entry/computer/modular
 	associated_paths = list(/obj/machinery/computer/modular)
 	lore_text = "Modular computers allow for customized hardware and downloadable software, enabling users to create their own workplace experience."
-	mechanics_text = "(This entry is for Modular Computers. Modular Computers are not the same as regular <span codexlink='computer'>computers</span>.)<BR><BR> \
+	mechanics_text = "(This entry is for modular computers. Modular computers are not the same as regular computers.)<BR><BR> \
 	Modular computers can have a variety of functions depending on the installed hardware and software. They also come available as tablets, laptops, wallscreens and PDA.<BR>\
 	* The computer can be shutdown via the interface to save power, and can also be forced to shutdown by right clicking the computer itself(or using the verb Force-Shutdown).<BR> \
 	* Hardware can be disabled/enabled from the Computer Configuration Tool, software can be downloaded using the Software Download Tool(if a network card is installed), and programs/files can be removed from the computer using the File Manager.<BR> \
@@ -44,7 +45,7 @@
 	disambiguator = "machine"
 
 /datum/codex_entry/conveyor_switch
-	associated_paths = list(/obj/machinery/conveyor_switch,/obj/machinery/conveyor_switch/oneway,/obj/item/conveyor_switch_construct,/obj/item/conveyor_switch_construct/oneway)
+	associated_paths = list(/obj/machinery/conveyor_switch, /obj/machinery/conveyor_switch/oneway, /obj/item/conveyor_switch_construct, /obj/item/conveyor_switch_construct/oneway)
 	mechanics_text = "This device can connect to a number of conveyor belts and control their movement. A two-way switch will allow you to make the conveyors run in forward and reverse mode, the one-way switch will only allow one direction. Can be removed with a crowbar."
 	disambiguator = "machine"
 
@@ -59,7 +60,7 @@
 	disambiguator = "machine"
 
 /datum/codex_entry/disposal
-	associated_paths = list(/obj/machinery/disposal)
+	associated_paths = list(/obj/machinery/disposal/buildable)
 	mechanics_text = "A high-tech garbage bin. Inserting an item causes the disposal unit (after a delay) to pneumatically launch the item through a series of pipes leading to either a garbage processing room, or space, depending on the ship/station. Larger objects can be inserted via click+drag. <BR> You can remove a disposal unit by turning it off, using a screwdriver, then a welding tool, and removing the floor tile underneath it."
 	antag_text = "People can be inserted into the disposal unit. If they're capable of moving however, it's easy for them to get out. Be careful though, putting things in disposal units doesn't always mean they're gone forever. <BR>If you turn it off, it can be used to hide in. Just be careful no one turns it back on while you're still in there!"
 	disambiguator = "machine"
@@ -116,5 +117,18 @@
 	associated_paths = list(/obj/machinery/vending)
 	associated_strings = list("vending machine", "vendor")
 	mechanics_text = "A machine that dispenses items from a category of items at the user's selection.<BR>Vending machines sometimes require payment via an ID card, cash or charge card. Some dispense items for free, and such vending machines are usually access restricted. Items that have been dispensed can sometimes be returned simply by inserting it back into the vending machine by hand. Vending machines can also be restocked with an appropriate Vendor Restock, usually ordered via supply management, and then click+dragged onto the vending machine.<BR><BR>Vending machines can be <span codexlink='hacking'>hacked</span>.<BR><b>Vending machine hacking</b><BR>* The orange light shows if the vending machine is electrified.<BR>* The red light indicates whether or not the vending machine is firing out its contents randomly. Sometimes this can happen as a random event.<BR>* The green light indicates whether or not the vending machine is dispensing it's hidden inventory. Nearly every vending machine has a list of secret goods that are usually considered to be contraband.<BR>* The purple or yellow light shows whether or not the ID scanner for the vending machine is working. When this function is disabled, anyone can access the vending machine, even if it normally has restricted access."
-	antag_text = "Accessing the secret inventory of a vending machine can sometimes be very useful, especially for department focused machines."
+	antag_text = "Accessing the secret inventory of a vending machine can sometimes be very useful, especially for department-focused machines."
+	disambiguator = "machine"
+	include_subtypes = TRUE
+
+/datum/codex_entry/internet_uplink
+	associated_paths = list(/obj/machinery/internet_uplink, /obj/machinery/computer/internet_uplink)
+	lore_text = "A complex internet uplink, capable of communicating near instantaneously with other uplinks through wormhole technology. It can also communicate with PLEXUS repeaters within a local range using hyperintense radio waves."
+	mechanics_text = "Allows for PLEXUS receivers in a set range on the overmap to function, permitting internetwork functions in the sector. The PLEXUS uplink can restrict access to certain networks. The uplink requires massive amounts of power and atmospheric cooling, scaling with the desired range. <BR>Maximum range can be inreased by installing SMES coils. <BR>Can be controlled via the PLEXUS uplink computer."
+	disambiguator = "machine"
+
+/datum/codex_entry/internet_repeater
+	associated_paths = list(/obj/machinery/internet_repeater)
+	lore_text = "A signal repeater, capable of transmitting and decoding hyperintense radio waves to and from PLEXUS uplinks."
+	mechanics_text = "Allows for network devices in its sector to connect to and communicate with distant networks over PLEXUS.<BR>Networks requires a modem to utilize PLEXUS connections."
 	disambiguator = "machine"

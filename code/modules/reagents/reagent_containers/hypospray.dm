@@ -15,6 +15,12 @@
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_LOWER_BODY
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
+	)
 
 	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
 	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
@@ -29,12 +35,12 @@
 
 /obj/item/chems/hypospray/attack(mob/living/M, mob/user)
 	if(!reagents.total_volume)
-		to_chat(user, "<span class='warning'>[src] is empty.</span>")
+		to_chat(user, SPAN_WARNING("[src] is empty."))
 		return
 	if (!istype(M))
 		return
 
-	var/allow = M.can_inject(user, check_zone(user.zone_sel.selecting, M))
+	var/allow = M.can_inject(user, check_zone(user.get_target_zone(), M))
 	if(!allow)
 		return
 
@@ -57,19 +63,22 @@
 	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER // Prevents autoinjectors to be refilled.
 
-	to_chat(user, "<span class='notice'>You inject [M] with [src].</span>")
-	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
+	to_chat(user, SPAN_NOTICE("You inject [M] with [src]."))
+	to_chat(M, SPAN_NOTICE("You feel a tiny prick!"))
 	playsound(src, 'sound/effects/hypospray.ogg',25)
-	user.visible_message("<span class='warning'>[user] injects [M] with [src].</span>")
+	user.visible_message(SPAN_WARNING("[user] injects [M] with [src]."))
 
 	if(M.reagents)
 		var/contained = REAGENT_LIST(src)
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_INJECT)
 		admin_inject_log(user, M, src, contained, trans)
-		to_chat(user, "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>")
+		to_chat(user, SPAN_NOTICE("[trans] unit\s injected. [reagents.total_volume] unit\s remaining in \the [src]."))
 
 	return
 
+////////////////////////////////////////////////////////////////////////////////
+/// VIAL HYPOSPRAY
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/vial
 	name = "hypospray"
 	item_state = "autoinjector"
@@ -80,69 +89,83 @@
 	time = 0 // hyposprays are instant for conscious people
 	single_use = FALSE
 	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
-	)
 	var/obj/item/chems/glass/beaker/vial/loaded_vial
 
 /obj/item/chems/hypospray/vial/Initialize()
 	. = ..()
-	loaded_vial = new /obj/item/chems/glass/beaker/vial(src)
-	volume = loaded_vial.volume
-	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
+	create_contents()
 
-/obj/item/chems/hypospray/vial/proc/remove_vial(mob/user, swap_mode)
+/obj/item/chems/hypospray/vial/proc/create_contents()
+	insert_vial(new /obj/item/chems/glass/beaker/vial(src))
+
+/obj/item/chems/hypospray/vial/proc/insert_vial(var/obj/item/chems/glass/beaker/vial/V, var/mob/user)
+	if(user && !user.try_unequip(V, src))
+		return
+
+	var/usermessage = ""
+	if(loaded_vial)
+		remove_vial(user, "swap", FALSE)
+		usermessage = "You load \the [V] into \the [src] as you remove the old one."
+	else
+		usermessage = "You load \the [V] into \the [src]."
+
+	if(ATOM_IS_OPEN_CONTAINER(V))
+		V.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
+		V.update_icon()
+
+	loaded_vial = V
+	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
+	loaded_vial.reagents.trans_to_holder(reagents, volume)
+
+	if(user)
+		user.visible_message(SPAN_NOTICE("[user] has loaded [V] into \the [src]."), SPAN_NOTICE("[usermessage]"))
+
+	update_icon()
+	playsound(loc, 'sound/weapons/empty.ogg', 50, TRUE)
+	return TRUE
+
+/obj/item/chems/hypospray/vial/proc/remove_vial(var/mob/user, var/swap_mode, var/should_update_icon = TRUE)
 	if(!loaded_vial)
 		return
 	reagents.trans_to_holder(loaded_vial.reagents,volume)
 	reagents.maximum_volume = 0
 	loaded_vial.update_icon()
-	user.put_in_hands(loaded_vial)
+	if(user)
+		user.put_in_hands(loaded_vial)
 	loaded_vial = null
-	if (swap_mode != "swap") // if swapping vials, we will print a different message in another proc
-		to_chat(user, "You remove the vial from the [src].")
+	if(user)
+		if (swap_mode != "swap") // if swapping vials, we will print a different message in another proc
+			to_chat(user, "You remove the vial from the [src].")
+	playsound(loc, 'sound/weapons/flipblade.ogg', 50, TRUE)
+	if(should_update_icon)
+		update_icon()
+	return TRUE
 
 /obj/item/chems/hypospray/vial/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		if(!loaded_vial)
-			to_chat(user, "<span class='notice'>There is no vial loaded in the [src].</span>")
-			return
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	if(!loaded_vial)
+		to_chat(user, SPAN_NOTICE("There is no vial loaded in \the [src]."))
+	else
 		remove_vial(user)
-		update_icon()
-		playsound(loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		return
-	return ..()
+	return TRUE
 
 /obj/item/chems/hypospray/vial/attackby(obj/item/W, mob/user)
-	var/usermessage = ""
 	if(istype(W, /obj/item/chems/glass/beaker/vial))
 		if(!do_after(user,10) || !(W in user))
-			return 0
-		if(!user.unEquip(W, src))
 			return
-		if(loaded_vial)
-			remove_vial(user, "swap")
-			usermessage = "You load \the [W] into \the [src] as you remove the old one."
-		else
-			usermessage = "You load \the [W] into \the [src]."
-		if(ATOM_IS_OPEN_CONTAINER(W))
-			W.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
-			W.update_icon()
-		loaded_vial = W
-		reagents.maximum_volume = loaded_vial.reagents.maximum_volume
-		loaded_vial.reagents.trans_to_holder(reagents,volume)
-		user.visible_message("<span class='notice'>[user] has loaded [W] into \the [src].</span>","<span class='notice'>[usermessage]</span>")
-		update_icon()
-		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
-		return
-	..()
+		insert_vial(W, user)
+		return TRUE
+	. = ..()
 
 /obj/item/chems/hypospray/vial/afterattack(obj/target, mob/user, proximity) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
 	if(!proximity)
 		return
 	standard_pour_into(user, target)
 
+////////////////////////////////////////////////////////////////////////////////
+/// AUTOINJECTOR
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector
 	name = "autoinjector"
 	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
@@ -153,57 +176,92 @@
 	origin_tech = "{'materials':2,'biotech':2}"
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	var/list/starts_with = list(/decl/material/liquid/adrenaline = 5)
-	var/band_color = COLOR_CYAN
+	detail_state = "_band"
+	detail_color = COLOR_CYAN
+
+
+/obj/item/chems/hypospray/autoinjector/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/adrenaline, reagents.maximum_volume)
 
 /obj/item/chems/hypospray/autoinjector/Initialize()
 	. = ..()
-	for(var/T in starts_with)
-		reagents.add_reagent(T, starts_with[T])
 	update_icon()
 
 /obj/item/chems/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/hypospray/autoinjector/on_update_icon()
-	overlays.Cut()
-	if(reagents.total_volume > 0)
-		icon_state = "[initial(icon_state)]1"
-	else
-		icon_state = "[initial(icon_state)]0"
-	overlays+= overlay_image(icon,"injector_band",band_color,RESET_COLOR)
+	. = ..()
+	icon_state = "[initial(icon_state)][(reagents?.total_volume) > 0]"
 
 /obj/item/chems/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
 	if(reagents?.total_volume)
-		to_chat(user, "<span class='notice'>It is currently loaded.</span>")
+		to_chat(user, SPAN_NOTICE("It is currently loaded."))
 	else
-		to_chat(user, "<span class='notice'>It is spent.</span>")
+		to_chat(user, SPAN_NOTICE("It is spent."))
 
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Detox
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
-	band_color = COLOR_GREEN
-	starts_with = list(/decl/material/liquid/antitoxins = 5)
+	detail_color = COLOR_GREEN
 
+/obj/item/chems/hypospray/autoinjector/detox/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Pain
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
-	band_color = COLOR_PURPLE
-	starts_with = list(/decl/material/liquid/painkillers = 5)
+	detail_color = COLOR_PURPLE
 
+/obj/item/chems/hypospray/autoinjector/pain/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/painkillers, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Antirad
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
-	band_color = COLOR_AMBER
-	starts_with = list(/decl/material/liquid/antirads = 5)
+	detail_color = COLOR_AMBER
 
+/obj/item/chems/hypospray/autoinjector/antirad/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/antirads, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Hallucinogenics
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/hallucinogenics
 	name = "autoinjector"
-	band_color = COLOR_DARK_GRAY
-	starts_with = list(/decl/material/liquid/hallucinogenics = 5)
+	detail_color = COLOR_DARK_GRAY
 
+/obj/item/chems/hypospray/autoinjector/hallucinogenics/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/hallucinogenics, reagents.maximum_volume)
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Clotting agent
+////////////////////////////////////////////////////////////////////////////////
+
+/obj/item/chems/hypospray/autoinjector/clotting
+	name = "autoinjector (clotting agent)"
+	desc = "A refined version of the standard autoinjector, allowing greater capacity. This variant excels at treating bleeding wounds and internal bleeding."
+
+/obj/item/chems/hypospray/autoinjector/clotting/populate_reagents()
+	. = ..()
+	var/amt = round(reagents.maximum_volume*0.5)
+	reagents.add_reagent(/decl/material/liquid/stabilizer, amt)
+	reagents.add_reagent(/decl/material/liquid/clotting_agent, (reagents.maximum_volume - amt))
+
+////////////////////////////////////////////////////////////////////////////////
+// Autoinjector - Empty
+////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/autoinjector/empty
 	name = "autoinjector"
-	band_color = COLOR_WHITE
-	starts_with = list()
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+	detail_color = COLOR_WHITE
+
+/obj/item/chems/hypospray/autoinjector/empty/populate_reagents()
+	return

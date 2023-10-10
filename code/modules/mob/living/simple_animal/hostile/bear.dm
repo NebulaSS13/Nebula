@@ -17,6 +17,7 @@
 	natural_weapon = /obj/item/natural_weapon/claws/strong
 	can_escape = TRUE
 	faction = "russian"
+	base_animal_type = /mob/living/simple_animal/hostile/bear
 
 	//Space bears aren't affected by atmos.
 	min_gas = null
@@ -97,7 +98,7 @@
 		stance = HOSTILE_STANCE_ALERT
 		stance_step = 6
 		target_mob = user
-	. = ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/bear/FindTarget()
 	. = ..()

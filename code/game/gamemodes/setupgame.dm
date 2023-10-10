@@ -31,15 +31,14 @@
 	//testing("Assigning DNA blocks:")
 
 	// Standard muts, imported from older code above.
-	global.BLINDBLOCK         = getAssignedBlock("BLINDED",         numsToAssign)
-	global.DEAFBLOCK          = getAssignedBlock("DEAFENED",          numsToAssign)
-	global.HULKBLOCK          = getAssignedBlock("HULK",          numsToAssign, DNA_HARD_BOUNDS)
-	global.TELEBLOCK          = getAssignedBlock("TELE",          numsToAssign, DNA_HARD_BOUNDS)
-	global.FIREBLOCK          = getAssignedBlock("FIRE",          numsToAssign, DNA_HARDER_BOUNDS)
-	global.XRAYBLOCK          = getAssignedBlock("XRAY",          numsToAssign, DNA_HARDER_BOUNDS)
-	global.CLUMSYBLOCK        = getAssignedBlock("CLUMSY",        numsToAssign)
-	global.FAKEBLOCK          = getAssignedBlock("FAKE",          numsToAssign)
-	global.REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
+	global.BLINDBLOCK         = getAssignedBlock("BLINDED",    numsToAssign)
+	global.DEAFBLOCK          = getAssignedBlock("DEAFENED",   numsToAssign)
+	global.TELEBLOCK          = getAssignedBlock("TELE",       numsToAssign, DNA_HARD_BOUNDS)
+	global.FIREBLOCK          = getAssignedBlock("FIRE",       numsToAssign, DNA_HARDER_BOUNDS)
+	global.XRAYBLOCK          = getAssignedBlock("XRAY",       numsToAssign, DNA_HARDER_BOUNDS)
+	global.CLUMSYBLOCK        = getAssignedBlock("CLUMSY",     numsToAssign)
+	global.FAKEBLOCK          = getAssignedBlock("FAKE",       numsToAssign)
+	global.REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK", numsToAssign, DNA_HARDER_BOUNDS)
 
 	//
 	// Static Blocks

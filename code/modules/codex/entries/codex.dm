@@ -9,22 +9,21 @@
 /datum/codex_entry/codex/New()
 	mechanics_text = "The Codex is both an IC and OOC resource. ICly, it is as described; a space encyclopedia. You can use <b>Search-Codex <i>topic</i></b> to look something up, or you can click the links provided when examining some objects. \
 	<br><br> \
-	Any of the lore you find in the Codex, designated by <b><font color = '[CODEX_COLOR_LORE]'>green</font></b> text, can be freely referenced in-character. \
+	Any of the lore you find in the Codex, designated by <span class='codexLore'>green</span> text, can be freely referenced in-character. \
 	<br><br> \
-	OOC information on various mechanics and interactions is marked by <b><font color = '[CODEX_COLOR_MECHANICS]'>blue</font></b> text. \
+	OOC information on various mechanics and interactions is marked by <span class='codexMechanics'>blue</span> text. \
 	<br><br> \
-	Information for antagonists will not be shown unless you are an antagonist, and is marked by <b><font color = '[CODEX_COLOR_ANTAG]'>red</font></b> text."
+	Information for antagonists will not be shown unless you are an antagonist, and is marked by <span class='codexAntag'>red</span> text."
 	..()
 
 /datum/codex_entry/nexus
 	name = "Nexus"
-	associated_strings = list("nexus")
-	mechanics_text = "The place to start with <span codexlink='codex'>The Codex</span><br>" 
+	mechanics_text = "The place to start with <span codexlink='the codex'>The Codex</span><br>"
 
-/datum/codex_entry/nexus/get_text(var/mob/presenting_to)
-	var/list/dat = list(get_header(presenting_to))
-	dat += "[mechanics_text]"
-	dat += "<h3>Categories</h3>"
+/datum/codex_entry/nexus/get_codex_body(mob/presenting_to, include_header, include_footer)
+	. = get_codex_header(presenting_to)
+	. += "[mechanics_text]"
+	. += "<h3>Categories</h3>"
 	var/list/category_strings
 	var/list/categories = decls_repository.get_decls_of_subtype(/decl/codex_category)
 	for(var/ctype in categories)
@@ -35,8 +34,8 @@
 		var/datum/codex_entry/entry = SScodex.get_codex_entry(key)
 		if(entry)
 			LAZYADD(category_strings, "<li><span codexlink='[key]'>[initial(C.name)]</span> - [initial(C.desc)]")
-	dat += jointext(category_strings, " ")
-	return "<font color = '[CODEX_COLOR_MECHANICS]'>[jointext(dat, null)]</font>"
+	. += jointext(category_strings, " ")
+	return "<span class = 'codexMechanics'>[jointext(., null)]</span>"
 
 /client/proc/codex_topic(href, href_list)
 	if(href_list["codex_search"]) //nano throwing errors

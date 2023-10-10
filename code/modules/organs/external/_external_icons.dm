@@ -4,19 +4,21 @@ var/global/list/limb_icon_cache = list()
 	return ..(SOUTH)
 
 /obj/item/organ/external/proc/compile_icon()
-	overlays.Cut()
+	//#FIXME: We REALLY shouldn't be messing with overlays outside on_update_icon. And on_update_icon doesn't call this.
+	cut_overlays()
 	 // This is a kludge, only one icon has more than one generation of children though.
 	for(var/obj/item/organ/external/organ in contents)
 		if(organ.children && organ.children.len)
 			for(var/obj/item/organ/external/child in organ.children)
-				overlays += child.mob_icon
-		overlays += organ.mob_icon
+				add_overlay(child.mob_icon)
+		add_overlay(organ.mob_icon)
 
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
 	skin_tone = null
 	skin_colour = null
 	hair_colour = human.hair_colour
 	bodytype = human.bodytype
+	reset_status() // since we may have changed bodytype
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
 		if(!(franchise && franchise.skintone))
@@ -51,17 +53,18 @@ var/global/list/limb_icon_cache = list()
 	update_icon(1)
 	if(last_owner)
 		SetName("[last_owner.real_name]'s head")
-		addtimer(CALLBACK(last_owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
+		addtimer(CALLBACK(last_owner, /mob/proc/update_hair), 1, TIMER_UNIQUE)
 	. = ..()
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
-			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-			mark_s.Blend(markings[M], mark_style.blend)
-			overlays |= mark_s //So when it's not on your body, it has icons
+			var/mark_color = markings[M]
+			var/icon/mark_s = mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
+			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-			icon_cache_key += "[M][markings[M]]"
+			icon_cache_key += "[M][mark_color]"
 
 /obj/item/organ/external/proc/update_limb_icon_file()
 	if (BP_IS_PROSTHETIC(src))
@@ -69,17 +72,17 @@ var/global/list/limb_icon_cache = list()
 			icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
 		else
 			var/decl/prosthetics_manufacturer/R = GET_DECL(model)
-			icon = R.icon
+			icon = R.get_base_icon(owner)
 	else if(status & ORGAN_MUTATED)
 		icon = bodytype.get_base_icon(owner, get_deform = TRUE)
-	else if(owner && (MUTATION_SKELETON in owner.mutations))
+	else if(owner && (limb_flags & ORGAN_FLAG_SKELETAL))
 		icon = bodytype.get_skeletal_icon(owner)
 	else
 		icon = bodytype.get_base_icon(owner)
 
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
-
-	icon_state = "[icon_name]"
+	. = ..()
+	icon_state = organ_tag
 	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"][render_alpha]"
 	if(model)
 		icon_cache_key += "_model_[model]"
@@ -91,11 +94,12 @@ var/global/list/limb_icon_cache = list()
 	for(var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
-			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-			mark_s.Blend(markings[M], mark_style.blend)
-			overlays |= mark_s //So when it's not on your body, it has icons
+			var/mark_color = markings[M]
+			var/icon/mark_s = mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
+			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-			icon_cache_key += "[M][markings[M]]"
+			icon_cache_key += "[M][mark_color]"
 
 	if(render_alpha < 255)
 		mob_icon += rgb(,,,render_alpha)
@@ -167,7 +171,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	return applying
 
 /obj/item/organ/external/proc/bandage_level()
-	if(damage_state_text() == "00") 
+	if(damage_state_text() == "00")
 		return 0
 	if(!is_bandaged())
 		return 0

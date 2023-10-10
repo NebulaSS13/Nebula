@@ -55,14 +55,14 @@
 	clicksound = "button"
 	clickvol = 30
 	layer = ABOVE_WINDOW_LAYER
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 	base_type = /obj/machinery/alarm
 	frame_type = /obj/item/frame/air_alarm
-	stat_immune = 0
-	uncreated_component_parts = null
+	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	wires = /datum/wires/alarm
-
+	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':-21}, 'WEST':{'x':21}}"
 
 	var/alarm_id = null
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
@@ -70,7 +70,6 @@
 	var/alarm_frequency = 1437
 	var/remote_control = 0
 	var/rcon_setting = 2
-	var/rcon_time = 0
 	var/rcon_remote_override_access = list(access_ce)
 	var/locked = 1
 	var/aidisabled = 0
@@ -80,6 +79,7 @@
 	var/screen = AALARM_SCREEN_MAIN
 	var/area_uid
 	var/area/alarm_area
+	var/custom_alarm_name
 
 	var/target_temperature = T0C+20
 	var/regulating_temperature = 0
@@ -113,10 +113,12 @@
 /obj/machinery/alarm/warm/Initialize()
 	. = ..()
 	TLV["temperature"] = list(T0C-26, T0C, T0C+75, T0C+85) // K
-	TLV["pressure"] = list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.50) /* kpa */
+	TLV["pressure"] = list(0.80 ATM, 0.90 ATM, 1.30 ATM, 1.50 ATM) /* kpa */
 
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
+/obj/machinery/alarm/nobreach/airlock
+	frequency = EXTERNAL_AIR_FREQ
 
 /obj/machinery/alarm/monitor
 	report_danger_level = 0
@@ -129,18 +131,20 @@
 	. = ..()
 
 /obj/machinery/alarm/Destroy()
-	events_repository.unregister(/decl/observ/name_set, get_area(src), src, .proc/change_area_name)
-	unregister_radio(src, frequency)
+	reset_area(alarm_area, null)
+	unregister_radio_to_controller(src, frequency)
 	return ..()
 
 /obj/machinery/alarm/Initialize(mapload, var/dir)
 	. = ..()
+	if (name != BASE_ALARM_NAME)
+		custom_alarm_name = TRUE // this will prevent us from messing with alarms with names set on map
 
-	alarm_area = get_area(src)
+	set_frequency(frequency)
+	reset_area(null, get_area(src))
 	if(!alarm_area)
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
 	area_uid = alarm_area.uid
-	update_name(FALSE)
 
 	// breathable air according to human/Life()
 	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
@@ -148,29 +152,15 @@
 	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
 	TLV[gas_mat.gas_name] = list(-1, -1, 5, 10) // Partial pressure, kpa
 	TLV["other"] =			list(-1, -1, 0.2, 0.5) // Partial pressure, kpa
-	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
+	TLV["pressure"] =		list(0.80 ATM, 0.90 ATM, 1.10 ATM, 1.20 ATM) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
 	var/decl/environment_data/env_info = GET_DECL(environment_type)
-	for(var/g in subtypesof(/decl/material/gas))
+	for(var/g in decls_repository.get_decl_paths_of_subtype(/decl/material/gas))
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 
-	events_repository.register(/decl/observ/name_set, alarm_area, src, .proc/change_area_name)
-	set_frequency(frequency)
-	for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
-		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 	queue_icon_update()
-
-/obj/machinery/alarm/area_changed(area/old_area, area/new_area)
-	. = ..()
-	alarm_area = get_area(src)
-	update_name(TRUE)
-
-/obj/machinery/alarm/proc/update_name(var/reset = TRUE)
-	name = initial(name)
-	if(name == BASE_ALARM_NAME && alarm_area && alarm_area != global.space_area)
-		SetName("[alarm_area.proper_name] [BASE_ALARM_NAME]")
 
 /obj/machinery/alarm/modify_mapped_vars(map_hash)
 	..()
@@ -191,7 +181,7 @@
 	var/datum/gas_mixture/environment = location.return_air()
 
 	//Handle temperature adjustment here.
-	if(environment.return_pressure() > ONE_ATMOSPHERE*0.05)
+	if(environment.return_pressure() > (0.05 ATM))
 		handle_heating_cooling(environment)
 
 	var/old_level = danger_level
@@ -206,7 +196,7 @@
 			mode = AALARM_MODE_OFF
 			apply_mode()
 
-	if (mode==AALARM_MODE_CYCLE && environment.return_pressure()<ONE_ATMOSPHERE*0.05)
+	if (mode==AALARM_MODE_CYCLE && environment.return_pressure() < (0.05 ATM))
 		mode=AALARM_MODE_FILL
 		apply_mode()
 
@@ -322,21 +312,6 @@
 	return 0
 
 /obj/machinery/alarm/on_update_icon()
-	// Set pixel offsets
-	default_pixel_x = 0
-	default_pixel_y = 0
-	var/turf/T = get_step(get_turf(src), turn(dir, 180))
-	if(istype(T) && T.density)
-		if(dir == NORTH)
-			default_pixel_y = -21
-		else if(dir == SOUTH)
-			default_pixel_y = 21
-		else if(dir == WEST)
-			default_pixel_x = 21
-		else if(dir == EAST)
-			default_pixel_x = -21
-	reset_offsets(0)
-
 	// Broken or deconstructed states
 	if(!istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
 		icon_state = "alarmx"
@@ -409,7 +384,6 @@
 		return 0
 
 	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
 	signal.source = src
 
 	signal.data = command
@@ -472,7 +446,6 @@
 
 	var/datum/signal/alert_signal = new
 	alert_signal.source = src
-	alert_signal.transmission_method = 1
 	alert_signal.data["zone"] = alarm_area.proper_name
 	alert_signal.data["type"] = "Atmospheric"
 
@@ -714,7 +687,7 @@
 				if("set_threshold")
 					var/static/list/thresholds = list("lower bound", "low warning", "high warning", "upper bound")
 					var/env = href_list["env"]
-					var/threshold = Clamp(text2num(href_list["var"]), 1, 4)
+					var/threshold = clamp(text2num(href_list["var"]), 1, 4)
 					var/list/selected = TLV[env]
 					if(!threshold || !selected || !selected[threshold])
 						return TOPIC_NOACTION
@@ -725,8 +698,8 @@
 						selected[threshold] = -1
 					else if (env=="temperature" && newval>5000)
 						selected[threshold] = 5000
-					else if (env=="pressure" && newval>50*ONE_ATMOSPHERE)
-						selected[threshold] = 50*ONE_ATMOSPHERE
+					else if (env=="pressure" && newval > (50 ATM))
+						selected[threshold] = 50 ATM
 					else if (env!="temperature" && env!="pressure" && newval>200)
 						selected[threshold] = 200
 					else
@@ -806,9 +779,31 @@
 	return ..()
 
 /obj/machinery/alarm/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
-	if(A != get_area(src))
+	if(A != alarm_area)
 		return
-	SetName(replacetext(name,old_area_name,new_area_name))
+	if (!custom_alarm_name)
+		SetName("[A.proper_name] [BASE_ALARM_NAME]")
+
+/obj/machinery/alarm/area_changed(area/old_area, area/new_area)
+	. = ..()
+	if(.)
+		reset_area(old_area, new_area)
+
+/obj/machinery/alarm/proc/reset_area(area/old_area, area/new_area)
+	if(old_area == new_area)
+		return
+	if(old_area && old_area == alarm_area)
+		alarm_area = null
+		area_uid = null
+		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+	if(new_area)
+		ASSERT(isnull(alarm_area))
+		alarm_area = new_area
+		area_uid = new_area.uid
+		change_area_name(alarm_area, null, alarm_area.name)
+		events_repository.register(/decl/observ/name_set, alarm_area, src, .proc/change_area_name)
+		for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
+			send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 
 /*
 FIRE ALARM
@@ -823,20 +818,19 @@ FIRE ALARM
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 	base_type = /obj/machinery/firealarm
 	frame_type = /obj/item/frame/fire_alarm
-	stat_immune = 0
-	uncreated_component_parts = null
+	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
+	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
 
 	var/detecting =    TRUE
 	var/working =      TRUE
 	var/time =         1 SECOND
 	var/timing =       FALSE
-	var/lockdownbyai = FALSE
 	var/last_process = 0
-	var/seclevel
 	var/static/list/overlays_cache
 
 	var/sound_id
@@ -844,7 +838,7 @@ FIRE ALARM
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
-	if(loc.z in global.using_map.contact_levels)
+	if(isContactLevel(loc.z))
 		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
@@ -865,22 +859,6 @@ FIRE ALARM
 
 /obj/machinery/firealarm/on_update_icon()
 	overlays.Cut()
-
-	default_pixel_x = 0
-	default_pixel_y = 0
-	var/walldir = (dir & (NORTH|SOUTH)) ? global.reverse_dir[dir] : dir
-	var/turf/T = get_step(get_turf(src), walldir)
-	if(istype(T) && T.density)
-		if(dir == SOUTH)
-			default_pixel_y = 21
-		else if(dir == NORTH)
-			default_pixel_y = -21
-		else if(dir == EAST)
-			default_pixel_x = 21
-		else if(dir == WEST)
-			default_pixel_x = -21
-	reset_offsets(0)
-
 	icon_state = "casing"
 	if(construct_state && !istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
 		overlays += get_cached_overlay(construct_state.type)
@@ -897,7 +875,7 @@ FIRE ALARM
 		if(!detecting)
 			overlays += get_cached_overlay("fire1")
 			set_light(2, 0.25, COLOR_RED)
-		else if(z in global.using_map.contact_levels)
+		else if(isContactLevel(z))
 			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
@@ -1052,15 +1030,15 @@ FIRE ALARM
 /obj/machinery/partyalarm
 	name = "\improper PARTY BUTTON"
 	desc = "Cuban Pete is in the house!"
-	icon = 'icons/obj/monitors.dmi'
-	icon_state = "fire0"
+	icon = 'icons/obj/firealarm.dmi'
+	icon_state = "casing"
 	anchored = TRUE
 	idle_power_usage = 2
 	active_power_usage = 6
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
+	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
 	var/time =         1 SECOND
 	var/timing =       FALSE
-	var/lockdownbyai = FALSE
-	var/detecting =    TRUE
 	var/working =      TRUE
 
 /obj/machinery/partyalarm/interface_interact(mob/user)

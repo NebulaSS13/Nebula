@@ -1,9 +1,10 @@
 INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 /obj/abstract/weather_system/Initialize(var/ml, var/target_z, var/initial_weather)
-
-	SSweather.weather_systems += src
+	SSweather.register_weather_system(src)
 
 	. = ..()
+
+	invisibility = 0
 
 	// Bookkeeping/rightclick guards.
 	verbs.Cut()
@@ -16,22 +17,22 @@ INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 	weather_system.set_state(initial_weather || /decl/state/weather/calm)
 
 	// Track our affected z-levels.
-	affecting_zs = GetConnectedZlevels(target_z)
+	affecting_zs = SSmapping.get_connected_levels(target_z)
 
 	// If we're post-init, init immediately.
 	if(SSweather.initialized)
 		addtimer(CALLBACK(src, .proc/init_weather), 0)
 
-// Start the weather effects from the highest point; they will propagate downwards during update. 
+// Start the weather effects from the highest point; they will propagate downwards during update.
 /obj/abstract/weather_system/proc/init_weather()
 	// Track all z-levels.
-	var/highest_z = affecting_zs[1]
-	for(var/tz in affecting_zs)
-		if(tz > highest_z)
-			highest_z = tz
-		global.weather_by_z["[tz]"] = src
-
-	// Update turf weather.
-	for(var/turf/T AS_ANYTHING in block(locate(1, 1, highest_z), locate(world.maxx, world.maxy, highest_z)))
-		T.update_weather(src)
-		CHECK_TICK
+	for(var/highest_z in affecting_zs)
+		var/turfcount = 0
+		if(HasAbove(highest_z))
+			continue
+		// Update turf weather.
+		for(var/turf/T as anything in block(locate(1, 1, highest_z), locate(world.maxx, world.maxy, highest_z)))
+			T.update_weather(src)
+			turfcount++
+			CHECK_TICK
+		log_debug("Initialized weather for [turfcount] turf\s from z[highest_z].")

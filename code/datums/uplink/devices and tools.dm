@@ -13,9 +13,9 @@
 
 /datum/uplink_item/item/tools/ductape
 	name = "Duct Tape"
-	desc = "A roll of duct tape. changes \"HELP\" into sexy \"mmm\"."
+	desc = "A roll of duct tape. Will silence anyone, just like a particularly bad duck pun."
 	item_cost = 2
-	path = /obj/item/ducttape
+	path = /obj/item/stack/tape_roll/duct_tape
 
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
@@ -48,7 +48,7 @@
 	name = "Encrypted Radio Channel Key"
 	desc = "This headset encryption key will allow you to speak on a hidden, encrypted radio channel. Use a screwdriver on your headset to exchange keys."
 	item_cost = 1
-	path = /obj/item/encryptionkey/syndicate
+	path = /obj/item/encryptionkey/hacked
 
 /datum/uplink_item/item/tools/shield_diffuser
 	name = "Handheld Shield Diffuser"

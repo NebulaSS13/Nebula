@@ -87,8 +87,8 @@
 	if(probinj(_prob,(flags&MUTCHK_FORCED)))
 		return 1
 
-/datum/dna/gene/basic/cold_resist/OnDrawUnderlays(var/mob/M,var/g,var/fat)
-	return "fire[fat]_s"
+/datum/dna/gene/basic/cold_resist/OnDrawUnderlays(var/mob/M,var/g)
+	return "fire_s"
 
 /datum/dna/gene/basic/noprints
 	name="No Prints"
@@ -107,59 +107,6 @@
 /datum/dna/gene/basic/noshock/New()
 	..()
 	block=global.SHOCKIMMUNITYBLOCK
-
-/datum/dna/gene/basic/midget
-	name="Midget"
-	activation_messages=list("Your skin feels rubbery.")
-	mutation=mSmallsize
-
-/datum/dna/gene/basic/midget/New()
-	..()
-	block=global.SMALLSIZEBLOCK
-
-/datum/dna/gene/basic/midget/can_activate(var/mob/M,var/flags)
-	// Can't be big and small.
-	if(MUTATION_HULK in M.mutations)
-		return 0
-	return ..(M,flags)
-
-/datum/dna/gene/basic/midget/activate(var/mob/M, var/connected, var/flags)
-	..(M,connected,flags)
-	M.pass_flags |= 1
-
-/datum/dna/gene/basic/midget/deactivate(var/mob/M, var/connected, var/flags)
-	..(M,connected,flags)
-	M.pass_flags &= ~PASS_FLAG_TABLE
-
-/datum/dna/gene/basic/hulk
-	name="Hulk"
-	activation_messages=list("Your muscles hurt.")
-	mutation=MUTATION_HULK
-
-/datum/dna/gene/basic/hulk/New()
-	..()
-	block=global.HULKBLOCK
-
-/datum/dna/gene/basic/hulk/can_activate(var/mob/M,var/flags)
-	// Can't be big and small.
-	if(mSmallsize in M.mutations)
-		return 0
-	return ..(M,flags)
-
-/datum/dna/gene/basic/hulk/OnDrawUnderlays(var/mob/M,var/g,var/fat)
-	if(fat)
-		return "hulk_[fat]_s"
-	else
-		return "hulk_[g]_s"
-
-/datum/dna/gene/basic/hulk/OnMobLife(var/mob/living/carbon/human/M)
-	if(!istype(M)) return
-	if(M.health <= 25)
-		M.mutations.Remove(MUTATION_HULK)
-		M.update_mutations()		//update our mutation overlays
-		to_chat(M, "<span class='warning'>You suddenly feel very weak.</span>")
-		SET_STATUS_MAX(M, STAT_WEAK, 3)
-		M.emote("collapse")
 
 /datum/dna/gene/basic/xray
 	name="X-Ray Vision"

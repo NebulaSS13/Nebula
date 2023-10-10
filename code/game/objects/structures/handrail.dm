@@ -8,9 +8,10 @@
 	can_buckle = TRUE
 	buckle_sound = 'sound/effects/buckle.ogg'
 	buckle_allow_rotation = TRUE
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/handrail/attack_hand(mob/user)
-	if(can_buckle && !buckled_mob && istype(user))
-		user_buckle_mob(user, user)
-		return
-	. = ..()
+	if(!can_buckle || buckled_mob || !istype(user) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	user_buckle_mob(user, user)
+	return TRUE

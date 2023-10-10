@@ -17,7 +17,7 @@
 		return
 	// Fruits and vegetables.
 	if(istype(O, /obj/item/chems/food/grown) || istype(O, /obj/item/grown))
-		if(!user.unEquip(O))
+		if(!user.try_unequip(O))
 			return
 
 		var/datum/seed/new_seed_type
@@ -32,7 +32,7 @@
 			to_chat(user, "<span class='notice'>You extract some seeds from [O].</span>")
 			var/produce = rand(1,4)
 			for(var/i = 0;i<=produce;i++)
-				var/obj/item/seeds/seeds = new(get_turf(src))
+				var/obj/item/seeds/seeds = new /obj/item/seeds/modified(get_turf(src))
 				seeds.seed_type = new_seed_type.name
 				seeds.update_seed()
 		else

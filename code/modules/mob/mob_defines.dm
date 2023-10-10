@@ -2,6 +2,8 @@
 	density = 1
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
+	abstract_type = /mob
+	is_spawnable_type = TRUE
 
 	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 	animate_movement = 2
@@ -40,7 +42,6 @@
 	var/obj/screen/cells = null
 
 	var/obj/screen/hands = null
-	var/obj/screen/purged = null
 	var/obj/screen/internals = null
 	var/obj/screen/oxygen = null
 	var/obj/screen/toxin = null
@@ -66,7 +67,7 @@
 	I'll make some notes on where certain variable defines should probably go.
 	Changing this around would probably require a good look-over the pre-existing code.
 	*/
-	var/obj/screen/zone_sel/zone_sel = null
+	var/obj/screen/zone_selector/zone_sel = null
 
 	/// Cursor icon used when holding shift over things.
 	var/examine_cursor_icon = 'icons/effects/mouse_pointers/examine_pointer.dmi'
@@ -111,10 +112,8 @@
 	var/decl/move_intent/default_walk_intent
 	var/decl/move_intent/default_run_intent
 
+	var/obj/item/storage/active_storage
 	var/obj/buckled = null//Living
-	var/obj/item/back = null//Human/Monkey
-	var/obj/item/storage/s_active = null//Carbon
-	var/obj/item/clothing/mask/wear_mask = null//Carbon
 	var/in_throw_mode = 0
 
 	var/can_pull_size = ITEM_SIZE_STRUCTURE // Maximum w_class the mob can pull.
@@ -171,3 +170,14 @@
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
 
 	var/holder_type
+	/// If this mob is or was piloted by a player with typing indicators enabled, an instance of one.
+	var/atom/movable/typing_indicator/typing_indicator
+	/// Whether this mob is currently typing, if piloted by a player.
+	var/is_typing
+
+	/// Used for darksight, required on all mobs to ensure lighting renders properly.
+	var/obj/screen/lighting_plane_master/lighting_master
+
+	// Offset the overhead text if necessary.
+	var/offset_overhead_text_x = 0
+	var/offset_overhead_text_y = 0

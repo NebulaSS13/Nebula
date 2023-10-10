@@ -5,7 +5,7 @@
 	icon_state = "grille"
 	density = 1
 	anchored = 1
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
 	rad_resistance_modifier = 0.1
@@ -89,9 +89,15 @@
 
 /obj/structure/grille/attack_hand(mob/user)
 
+	if(user.a_intent != I_HURT)
+		return ..()
+
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	user.do_attack_animation(src)
+
+	if(shock(user, 70))
+		return TRUE
 
 	var/damage_dealt = 1
 	var/attack_message = "kicks"
@@ -100,16 +106,8 @@
 		if(H.species.can_shred(H))
 			attack_message = "mangles"
 			damage_dealt = 5
-
-	if(shock(user, 70))
-		return
-
-	if(MUTATION_HULK in user.mutations)
-		damage_dealt += 5
-	else
-		damage_dealt += 1
-
 	attack_generic(user,damage_dealt,attack_message)
+	return TRUE
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -136,11 +134,11 @@
 		if(BRUTE)
 			//bullets
 			if(Proj.original == src || prob(20))
-				Proj.damage *= between(0, Proj.damage/60, 0.5)
+				Proj.damage *= clamp(0, Proj.damage/60, 0.5)
 				if(prob(max((damage-10)/25, 0))*100)
 					passthrough = 1
 			else
-				Proj.damage *= between(0, Proj.damage/60, 1)
+				Proj.damage *= clamp(0, Proj.damage/60, 1)
 				passthrough = 1
 		if(BURN)
 			//beams and other projectiles are either blocked completely by grilles or stop half the damage.
@@ -150,7 +148,7 @@
 
 	if(passthrough)
 		. = PROJECTILE_CONTINUE
-		damage = between(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
+		damage = clamp(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
 
 	take_damage(damage*0.2)
 
@@ -167,11 +165,11 @@
 		update_icon()
 
 /obj/structure/grille/attackby(obj/item/W, mob/user)
-	if(isWirecutter(W))
+	if(IS_WIRECUTTER(W))
 		if(!material.conductive || !shock(user, 100))
 			cut_grille()
 
-	else if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
+	else if((IS_SCREWDRIVER(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			anchored = !anchored
@@ -204,9 +202,9 @@
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)
-			if("fire")
+			if(BURN)
 				take_damage(W.force)
-			if("brute")
+			if(BRUTE)
 				take_damage(W.force * 0.1)
 	..()
 

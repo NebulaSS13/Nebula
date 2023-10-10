@@ -48,20 +48,20 @@
 
 	var/turf/attack_location
 	var/intent = "(INTENT: N/A)"
-	var/zone_sel = "(ZONE_SEL: N/A)"
+	var/target_zone = "(ZONE_SEL: N/A)"
 	if(attacker)
 		intent = "(INTENT: [uppertext(attacker.a_intent)])"
-		if (attacker.zone_sel?.selecting)
-			zone_sel = "(ZONE_SEL: [uppertext(attacker.zone_sel.selecting)])"
+		if (attacker.get_target_zone())
+			target_zone = "(ZONE_SEL: [uppertext(attacker.get_target_zone())])"
 		if(victim)
-			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[key_name(victim)] - [attacker_message] [intent] [zone_sel]</font>")
+			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[key_name(victim)] - [attacker_message] [intent] [target_zone]</font>")
 		else
-			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[attacker_message] [intent] [zone_sel]</font>")
+			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[attacker_message] [intent] [target_zone]</font>")
 		attacker.last_attacked_ = mob_repository.get_lite_mob(victim)
 		attack_location = get_turf(attacker)
 	if(victim)
 		if(attacker)
-			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[key_name(attacker)] - [victim_message] [intent] [zone_sel]</font>")
+			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[key_name(attacker)] - [victim_message] [intent] [target_zone]</font>")
 		else
 			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[victim_message]</font>")
 		victim.last_attacker_ = mob_repository.get_lite_mob(attacker)
@@ -75,9 +75,9 @@
 
 	var/full_admin_message
 	if(attacker && victim)
-		full_admin_message = "[key_name(attacker)] [admin_message] [key_name(victim)] [intent] [zone_sel]"
+		full_admin_message = "[key_name(attacker)] [admin_message] [key_name(victim)] [intent] [target_zone]"
 	else if(attacker)
-		full_admin_message = "[key_name(attacker)] [admin_message] [intent] [zone_sel]"
+		full_admin_message = "[key_name(attacker)] [admin_message] [intent] [target_zone]"
 	else
 		full_admin_message = "[key_name(victim)] [admin_message]"
 	full_admin_message = append_admin_tools(full_admin_message, attacker||victim, attack_location)

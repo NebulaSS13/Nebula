@@ -6,7 +6,7 @@
 	volume_multiplier = 0.5
 	body_parts_covered = SLOT_HEAD|SLOT_EARS
 	gender = PLURAL
-
+	flags_inv = 0
 	var/headphones_on = 0
 	var/sound_channel
 	var/current_track
@@ -17,6 +17,7 @@
 	sound_channel = global.sound_channels.RequestChannel(type)
 
 /obj/item/clothing/head/headphones/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(headphones_on)
 		icon_state = "[icon_state]-on"
@@ -70,7 +71,7 @@
 	var/static/list/allowed_slots = list(slot_l_ear_str, slot_r_ear_str, slot_head_str)
 	if(!user || !user.client)
 		return
-	if(!(user.get_inventory_slot(src) in allowed_slots))
+	if(!(user.get_equipped_slot_for_item(src) in allowed_slots))
 		return
 	if(current_track)
 		var/decl/music_track/track = GET_DECL(global.music_tracks[current_track])
@@ -106,7 +107,7 @@
 		return TOPIC_REFRESH
 	if(href_list["vol"])
 		var/adj = text2num(href_list["vol"])
-		music_volume = Clamp(music_volume + adj, 0, 100)
+		music_volume = clamp(music_volume + adj, 0, 100)
 		if(headphones_on)
 			play_music(user)
 		interact(user)

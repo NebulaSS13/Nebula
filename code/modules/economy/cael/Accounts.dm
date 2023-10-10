@@ -69,27 +69,19 @@
 		next_account_number += rand(1,25)
 
 		//create a sealed package containing the account details
-		var/obj/item/smallDelivery/P = new /obj/item/smallDelivery(source_db.loc)
-		var/obj/item/paper/R = new /obj/item/paper(P)
-		P.wrapped = R
-		R.SetName("Account information: [M.account_name]")
-		R.info = "<b>Account details (confidential)</b><br><hr><br>"
-		R.info += "<i>Account holder:</i> [M.owner_name]<br>"
-		R.info += "<i>Account number:</i> [M.account_number]<br>"
-		R.info += "<i>Account pin:</i> [M.remote_access_pin]<br>"
-		R.info += "<i>Starting balance:</i> [M.format_value_by_currency(M.money)]<br>"
-		R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
-		R.info += "<i>Creation terminal ID:</i> [source_db.machine_id]<br>"
-		R.info += "<i>Authorised officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
-
-		//stamp the paper
-		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		stampoverlay.icon_state = "paper_stamp-boss"
-		if(!R.stamped)
-			R.stamped = new
-		R.stamped += /obj/item/stamp
-		R.overlays += stampoverlay
-		R.stamps += "<HR><i>This paper has been stamped by the Accounts Database.</i>"
+		var/txt
+		txt += "<b>Account details (confidential)</b><br><hr><br>"
+		txt += "<i>Account holder:</i> [M.owner_name]<br>"
+		txt += "<i>Account number:</i> [M.account_number]<br>"
+		txt += "<i>Account pin:</i> [M.remote_access_pin]<br>"
+		txt += "<i>Starting balance:</i> [M.format_value_by_currency(M.money)]<br>"
+		txt += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
+		txt += "<i>Creation terminal ID:</i> [source_db.machine_id]<br>"
+		txt += "<i>Authorised officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
+		
+		var/obj/item/paper/R = new /obj/item/paper(null, null, txt, "Account information: [M.account_name]")
+		R.apply_custom_stamp(overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR), "by the Accounts Database")
+		new /obj/item/parcel(source_db.loc, null, R)
 
 	//add the account
 	T.perform()

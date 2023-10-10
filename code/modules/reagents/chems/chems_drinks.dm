@@ -2,7 +2,6 @@
 	name = "drink"
 	lore_text = "Uh, some kind of drink."
 	color = "#e78108"
-	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 	value = 0.4
 	abstract_type = /decl/material/liquid/drink
 
@@ -13,10 +12,10 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 
-/decl/material/liquid/drink/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
 
-/decl/material/liquid/drink/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
@@ -38,7 +37,7 @@
 	uid = "chem_drink_juice"
 	fruit_descriptor = "sweet"
 
-/decl/material/liquid/drink/juice/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
@@ -58,6 +57,7 @@
 
 /decl/material/liquid/drink/juice/berry
 	name = "berry juice"
+	codex_name = "blended berry juice"
 	lore_text = "A delicious blend of several different kinds of berries."
 	taste_description = "berries"
 	color = "#990066"
@@ -76,7 +76,7 @@
 	glass_name = "carrot juice"
 	glass_desc = "It is just like a carrot but without crunching."
 
-/decl/material/liquid/drink/juice/carrot/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/carrot/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.reagents.add_reagent(/decl/material/liquid/eyedrops, removed * 0.2)
 
@@ -114,7 +114,7 @@
 	glass_name = "lime juice"
 	glass_desc = "A glass of sweet-sour lime juice"
 
-/decl/material/liquid/drink/juice/lime/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/lime/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -133,7 +133,7 @@
 	glass_name = "orange juice"
 	glass_desc = "Vitamins! Yay!"
 
-/decl/material/liquid/drink/juice/orange/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/orange/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -141,7 +141,7 @@
 
 	M.adjustOxyLoss(-2 * removed)
 
-/decl/material/liquid/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
+/decl/material/liquid/poisonberryjuice
 	name = "poison berry juice"
 	lore_text = "A tasty juice blended from various kinds of very deadly and toxic berries."
 	taste_description = "berries"
@@ -195,7 +195,7 @@
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
-/decl/material/liquid/drink/juice/tomato/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/juice/tomato/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -247,7 +247,8 @@
 
 /decl/material/liquid/drink/milk
 	name = "milk"
-	lore_text = "An opaque white liquid produced by tiplods."
+	codex_name = "whole milk"
+	lore_text = "An opaque white liquid produced by mammals."
 	taste_description = "milk"
 	color = "#dfdfdf"
 	uid = "chem_drink_milk"
@@ -257,6 +258,7 @@
 
 /decl/material/liquid/drink/milk/chocolate
 	name = "chocolate milk"
+	codex_name = null
 	lore_text = "A mixture of perfectly healthy milk and delicious chocolate."
 	taste_description = "chocolate milk"
 	color = "#74533b"
@@ -266,7 +268,7 @@
 	glass_name = "chocolate milk"
 	glass_desc = "Deliciously fattening!"
 
-/decl/material/liquid/drink/milk/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/milk/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 10 * removed)
@@ -278,7 +280,8 @@
 
 /decl/material/liquid/drink/milk/cream
 	name = "cream"
-	lore_text = "The fatty, still liquid part of milk."
+	codex_name = "milk cream"
+	lore_text = "The fatty, still-liquid part of milk."
 	taste_description = "creamy milk"
 	color = "#dfd7af"
 	uid = "chem_drink_cream"
@@ -288,6 +291,7 @@
 
 /decl/material/liquid/drink/milk/soymilk
 	name = "soy milk"
+	codex_name = null
 	lore_text = "An opaque white liquid made from soybeans."
 	taste_description = "soy milk"
 	color = "#dfdfc7"
@@ -298,6 +302,7 @@
 
 /decl/material/liquid/drink/coffee
 	name = "coffee"
+	codex_name = "brewed coffee"
 	lore_text = "Coffee is a brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant."
 	taste_description = "bitterness"
 	taste_mult = 1.3
@@ -328,7 +333,7 @@
 		if(!inserted)
 			flavour_modifiers += syrup
 
-/decl/material/liquid/drink/coffee/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/coffee/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	if(adj_temp > 0)
 		holder.remove_reagent(/decl/material/liquid/frostoil, 10 * removed)
@@ -342,11 +347,11 @@
 	if(volume > 45)
 		M.add_chemical_effect(CE_PULSE, 1)
 
-/decl/material/liquid/drink/coffee/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/coffee/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/decl/material/liquid/drink/coffee/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/drink/coffee/affect_overdose(var/mob/living/M)
 	ADJ_STATUS(M, STAT_JITTER, 5)
 	M.add_chemical_effect(CE_PULSE, 1)
 
@@ -494,7 +499,7 @@
 	glass_desc = "The unstable energy of a radioactive isotope in beverage form."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/material/liquid/drink/mutagencola/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/mutagencola/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -520,6 +525,7 @@
 
 /decl/material/liquid/drink/cola
 	name = "cola"
+	codex_name = "classic cola" // urgh need a less bad name for codex overlap checks
 	lore_text = "A refreshing beverage."
 	taste_description = "cola"
 	color = "#100800"
@@ -614,7 +620,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_drink_hellramen"
 
-/decl/material/liquid/drink/hell_ramen/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/hell_ramen/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -633,9 +639,9 @@
 		. = "mint [.]"
 	. = ..(prop, .)
 
-/decl/material/liquid/drink/tea/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/tea/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	
+
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
@@ -797,9 +803,9 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_drink_energydrink"
 
-/decl/material/liquid/drink/beastenergy/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/drink/beastenergy/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	
+
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 

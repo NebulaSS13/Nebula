@@ -5,6 +5,7 @@
 	icon_state = "butterfly2"
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
+	material = /decl/material/solid/metal/steel
 
 /obj/item/butterflyhandle
 	name = "concealed knife grip"
@@ -13,6 +14,7 @@
 	icon_state = "butterfly1"
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
+	material = /decl/material/solid/metal/steel
 
 /decl/crafting_stage/balisong_blade
 	descriptor = "balisong"

@@ -22,6 +22,7 @@
 	return TRUE
 
 /obj/item/clothing/accessory/locket/on_update_icon()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(open && check_state_in_icon("[icon_state]-open", icon))
 		icon_state = "[icon_state]-open"
@@ -33,7 +34,7 @@
 	if(istype(O,/obj/item/paper) || istype(O, /obj/item/photo))
 		if(held)
 			to_chat(usr, SPAN_WARNING("\The [src] already has something inside it."))
-		else if(user.unEquip(O, src))
+		else if(user.try_unequip(O, src))
 			to_chat(usr, SPAN_NOTICE("You slip \the [O] into \the [src]."))
 			held = O
 		return TRUE

@@ -5,8 +5,10 @@
 	type_butt = /obj/item/trash/cigbutt
 	chem_volume = 50
 	brand = "handrolled"
-	filling = list()
 	var/filter = 0
+
+/obj/item/clothing/mask/smokable/cigarette/rolled/populate_reagents()
+	return
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/examine(mob/user)
 	. = ..()
@@ -62,7 +64,7 @@
 		if(lit)
 			to_chat(user, "<span class='warning'>[src] is lit already!</span>")
 			return
-		if(user.unEquip(I))
+		if(user.try_unequip(I))
 			to_chat(user, "<span class='notice'>You stick [I] into \the [src]</span>")
 			filter = 1
 			SetName("filtered [name]")

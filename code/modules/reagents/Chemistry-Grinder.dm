@@ -52,12 +52,12 @@
 		istype(O,/obj/item/chems/drinks/glass2) || \
 		istype(O,/obj/item/chems/drinks/shaker))
 
-		if (beaker)
+		if(beaker)
 			return TRUE
 		else
-			if(!user.unEquip(O, src))
+			if(!user.try_unequip(O, src))
 				return FALSE
-			beaker =  O
+			beaker = O
 			update_icon()
 			SSnano.update_uis(src)
 			return FALSE
@@ -109,7 +109,7 @@
 		to_chat(user, SPAN_NOTICE("\The [O] is not suitable for grinding."))
 		return TRUE
 
-	if(!user.unEquip(O, src))
+	if(!user.try_unequip(O, src))
 		return FALSE
 	holdingitems += O
 	SSnano.update_uis(src)

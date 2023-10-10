@@ -4,22 +4,23 @@
 	icon = 'icons/obj/items/implant/implantpad.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/metal/steel
 	var/obj/item/implant/imp
 
 /obj/item/implantpad/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(imp)
 		add_overlay("[icon_state]-imp")
 
 /obj/item/implantpad/attack_hand(mob/user)
-	if(imp && !(src in user.get_held_items()))
-		user.put_in_active_hand(imp)
-		imp.add_fingerprint(user)
-		add_fingerprint(user)
-		imp = null
-		update_icon()
-	else
+	if(!imp || (src in user.get_held_items()) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
 		return ..()
+	user.put_in_active_hand(imp)
+	imp.add_fingerprint(user)
+	add_fingerprint(user)
+	imp = null
+	update_icon()
+	return TRUE
 
 /obj/item/implantpad/attackby(obj/item/I, mob/user)
 	..()
@@ -45,7 +46,7 @@
 			C.imp = imp
 			imp = null
 		C.update_icon()
-	else if(istype(I, /obj/item/implant) && user.unEquip(I, src))
+	else if(istype(I, /obj/item/implant) && user.try_unequip(I, src))
 		imp = I
 	update_icon()
 

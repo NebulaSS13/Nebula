@@ -5,7 +5,7 @@
 #define BG_EMPTY 4
 
 /obj/machinery/biogenerator
-	name = "Biogenerator"
+	name = "biogenerator"
 	desc = ""
 	icon = 'icons/obj/biogenerator.dmi'
 	icon_state = "biogen-stand"
@@ -20,7 +20,6 @@
 	var/obj/item/chems/glass/beaker = null
 	var/points = 0
 	var/state = BG_READY
-	var/denied = 0
 	var/build_eff = 1
 	var/eat_eff = 1
 	var/ingredients = 0 //How many processable ingredients are stored inside.
@@ -47,7 +46,7 @@
 			/obj/item/clothing/suit/leathercoat = 500,
 			/obj/item/clothing/suit/storage/toggle/brown_jacket = 500,
 			/obj/item/clothing/suit/storage/toggle/bomber = 500,
-			/obj/item/clothing/suit/storage/hooded/wintercoat = 500,
+			/obj/item/clothing/suit/storage/toggle/wintercoat = 500,
 			/obj/item/stack/material/bolt/mapped/cloth/ten = 300,
 			/obj/item/stack/material/bolt/mapped/cloth = 30,
 			/obj/item/stack/material/skin/mapped/leather/ten = 300,
@@ -88,7 +87,7 @@
 		if(beaker)
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
 			return TRUE
-		else if(user.unEquip(O, src))
+		else if(user.try_unequip(O, src))
 			beaker = O
 			state = BG_READY
 			updateUsrDialog()
@@ -115,7 +114,7 @@
 
 	else if(!istype(O, /obj/item/chems/food/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
-	else if(user.unEquip(O, src))
+	else if(user.try_unequip(O, src))
 		ingredients++
 		to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
 	update_icon()
@@ -234,5 +233,5 @@
 
 /obj/machinery/biogenerator/RefreshParts()
 	..()
-	build_eff = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 1, 10)
-	eat_eff = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 10)
+	build_eff = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 1, 10)
+	eat_eff = clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 10)

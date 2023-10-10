@@ -82,7 +82,7 @@
 	// Brain activity.
 	var/brain_result = "normal"
 	if(H.should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = H.get_organ(BP_BRAIN, /obj/item/organ/internal/brain)
+		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = "<span class='scan_danger'>none, patient is braindead</span>"
 		else if(H.stat != DEAD)
@@ -250,7 +250,7 @@
 			var/decl/material/R = GET_DECL(A)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
-				reagentdata[A] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, A), 1)]u [R.name]</span>"
+				reagentdata[A] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, A), 1)]u [R.use_name]</span>"
 			else
 				unknown++
 		if(reagentdata.len)
@@ -289,12 +289,26 @@
 			var/decl/material/R = GET_DECL(rtype)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
-				. += "<span class='scan_notice'>[R.name] found in subject's stomach.</span>"
+				. += "<span class='scan_notice'>[capitalize(R.use_name)] found in subject's stomach.</span>"
 			else
 				++unknown
 		if(unknown)
 			print_reagent_default_message = FALSE
 			. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
+
+	var/datum/reagents/inhaled = H.get_inhaled_reagents()
+	if(inhaled && inhaled.total_volume)
+		var/unknown = 0
+		for(var/rtype in inhaled.reagent_volumes)
+			var/decl/material/R = GET_DECL(rtype)
+			if(R.scannable)
+				print_reagent_default_message = FALSE
+				. += "<span class='scan_notice'>[capitalize(R.use_name)] found in subject's lungs.</span>"
+			else
+				++unknown
+		if(unknown)
+			print_reagent_default_message = FALSE
+			. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's lungs.</span>"
 
 	if(length(H.chem_doses))
 		var/list/chemtraces = list()

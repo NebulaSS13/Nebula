@@ -1,0 +1,55 @@
+<script>
+	var _copy_amount = document.getElementById('copy_amount');
+	function set_amt_copies(val){
+		_copy_amount.value = Math.min(Math.max(Number(_copy_amount.min), Number(val)), Number(_copy_amount.max));
+	}
+</script>
+
+{{function make_copy_form(copies_left, copies_max, src) { }}
+	<div class="item">
+		<form name='frm_copy' id='frm_copy' method='get'>
+			<input type="hidden" name="src" id="src" value={{:src}} />
+			<div class="itemLabel"><label for="copy_amount">Amount of copies</label></div>
+			<div class="itemValue">
+				<button type="button" class="button" id="amt_copies_minus" onclick='set_amt_copies(Number(_copy_amount.value)-1);'>-</button>
+				<input type="number" class="numBox" style="width:3em;" name="copy_amount" id="copy_amount" value="1" min="1" max={{:((copies_left > 0) && (copies_left < copies_max))? copies_left : copies_max}} {{:copies_left == 0? 'disabled' : ''}} />
+				<button type="button" class="button" id="amt_copies_plus" onclick='set_amt_copies(Number(_copy_amount.value) + 1);'>+</button>
+				<button type="submit" class="button">Copy</button>
+			</div>
+		</form>
+	</div>
+{{ } }}
+
+{{function make_sillicon_ui() { }}
+	{{:helper.link('Print photo from database', null, {'aipic' : 1})}}
+	<BR><BR>
+{{ } }}
+
+{{function make_photocopy_ui() { }}
+	<div class="item">
+		<div class="itemLabel">Document</div>
+		<div class="itemContent">{{:helper.link(data.loaded_item_name? data.loaded_item_name : '----', data.loaded_item_name? 'eject' : null, {'eject': 1}, data.loaded_item_name? null : 'disabled' )}}</div>
+	</div>
+	<div class="item">
+		{{if !data.is_printing}}
+			{{make_copy_form(data.copies_left, data.copies_max, data.src);}}
+		{{else}}
+			<div class="itemLabel">Printing Page</div>
+			<div class="itemContent">{{:data.left_printing}} out of {{:data.total_printing}} page(s)</div>
+		{{/if}}
+	</div>
+{{ } }}
+
+{{if !data.is_operational}}
+	<em>SYSTEM ERROR</em>
+{{else}}
+	<!-- Copier machine header with toner and paper level -->
+	{{#def.stock_parts_printer_shared}}
+	<HR/>
+	<h3>Photocopy</h3>
+	{{if !data.is_sillicon_mode}}
+		{{make_photocopy_ui();}}
+	{{else}}
+		{{make_sillicon_ui();}}
+	{{/if}}
+{{/if}}

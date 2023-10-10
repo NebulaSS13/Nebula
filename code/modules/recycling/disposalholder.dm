@@ -9,7 +9,7 @@
 	var/datum/gas_mixture/gas = null	// gas used to flush, will appear at exit point
 	var/active = 0	// true if the holder is moving, otherwise inactive
 	dir = 0
-	var/count = 2048	//*** can travel 2048 steps before going inactive (in case of loops)
+	var/count = 4096 //*** can travel 4096 steps before going inactive (in case of loops)
 	var/destinationTag = "" // changes if contains a delivery container
 	var/tomail = 0 //changes if contains wrapped package
 	var/hasmob = 0 //If it contains a mob
@@ -20,7 +20,7 @@
 	// initialize a holder from the contents of a disposal unit
 /obj/structure/disposalholder/proc/init(var/obj/machinery/disposal/D, var/datum/gas_mixture/flush_gas)
 	gas = flush_gas// transfer gas resv. into holder object -- let's be explicit about the data this proc consumes, please.
-	var/stuff = D.contents - D.component_parts
+	var/stuff = D.get_contained_external_atoms()
 	//Check for any living mobs trigger hasmob.
 	//hasmob effects whether the package goes to cargo or its tagged destination.
 	hasmob = length(check_mob(stuff))
@@ -29,16 +29,9 @@
 	// note AM since can contain mobs or objs
 	for(var/atom/movable/AM in stuff)
 		AM.forceMove(src)
-		if(istype(AM, /obj/structure/bigDelivery) && !hasmob)
-			var/obj/structure/bigDelivery/T = AM
-			src.destinationTag = T.sortTag
-		if(istype(AM, /obj/item/smallDelivery) && !hasmob)
-			var/obj/item/smallDelivery/T = AM
-			src.destinationTag = T.sortTag
-		//Drones can mail themselves through maint.
-		if(is_drone(AM))
-			var/mob/living/silicon/robot/drone/drone = AM
-			src.destinationTag = drone.mail_destination
+		var/datum/extension/sorting_tag/ST = get_extension(AM, /datum/extension/sorting_tag)
+		if(ST)
+			destinationTag = ST.destination
 
 /obj/structure/disposalholder/proc/check_mob(list/stuff, max_depth = 1)
 	. = list()
@@ -133,16 +126,15 @@
 
 	var/mob/living/U = user
 
-	if (U.stat || U.last_special <= world.time)
+	if (U.stat || U.is_on_special_ability_cooldown())
 		return
 
-	U.last_special = world.time+100
+	U.set_special_ability_cooldown(10 SECONDS)
 
-	if (src.loc)
-		for (var/mob/M in hearers(src.loc.loc))
-			to_chat(M, "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>")
-
-	playsound(src.loc, 'sound/effects/clang.ogg', 50, 0, 0)
+	var/turf/our_turf = get_turf(src)
+	if (our_turf)
+		our_turf.audible_message("You hear a clanging noise.")
+		playsound(our_turf, 'sound/effects/clang.ogg', 50, 0, 0)
 
 // called to vent all gas in holder to a location
 /obj/structure/disposalholder/proc/vent_gas(var/atom/location)

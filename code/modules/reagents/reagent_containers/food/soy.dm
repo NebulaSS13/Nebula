@@ -8,7 +8,7 @@
 	nutriment_desc = list("tofu" = 3, "softness" = 3)
 	bitesize = 3
 
-/obj/item/chems/food/tofu/Initialize()
+/obj/item/chems/food/tofu/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/plant_protein, 6)
 

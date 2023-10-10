@@ -44,9 +44,6 @@ var/global/DB_PORT = 3306 // This is the port your MySQL server is running on (3
 	var/user // This variable contains the username data.
 	var/password // This variable contains the password data.
 	var/default_cursor // This contains the default database cursor data.
-		//
-	var/server = ""
-	var/port = 3306
 
 /DBConnection/New(dbi_handler,username,password_handler,cursor_handler)
 	src.dbi = dbi_handler

@@ -1,6 +1,3 @@
-/datum/objective/harm
-	var/already_completed = 0
-
 /datum/objective/harm/find_target()
 	..()
 	if(target && target.current)

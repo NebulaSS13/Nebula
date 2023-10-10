@@ -82,7 +82,7 @@
 	if(ratio_specific_heat == 0 || ratio_specific_heat == 1)
 		// rare case of avoiding a divide by zero error.
 		ratio_specific_heat += 0.01
-	return Clamp(ratio_specific_heat, MINIMUM_RATIO_SPECIFIC_HEAT, MAXIMUM_RATIO_SPECIFIC_HEAT)
+	return clamp(ratio_specific_heat, MINIMUM_RATIO_SPECIFIC_HEAT, MAXIMUM_RATIO_SPECIFIC_HEAT)
 
 /datum/extension/ship_engine/gas/get_specific_wet_mass()
 	var/datum/gas_mixture/propellant = get_propellant()

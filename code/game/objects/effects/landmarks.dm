@@ -154,17 +154,3 @@
 /obj/abstract/landmark/costume/savagehuntress/make_costumes()
 	new /obj/item/clothing/mask/spirit(src.loc)
 	new /obj/item/clothing/under/savage_hunter/female(src.loc)
-
-/obj/abstract/landmark/ruin
-	var/datum/map_template/ruin/ruin_template
-
-/obj/abstract/landmark/ruin/Initialize(mapload, my_ruin_template)
-	name = "ruin_[sequential_id(/obj/abstract/landmark/ruin)]"
-	. = ..()
-	ruin_template = my_ruin_template
-	global.ruin_landmarks |= src
-
-/obj/abstract/landmark/ruin/Destroy()
-	global.ruin_landmarks -= src
-	ruin_template = null
-	. = ..()

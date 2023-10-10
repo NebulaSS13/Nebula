@@ -4,8 +4,8 @@
 	icon_state = "construction"
 	anchored = 0
 	density = 1
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/state = 0
-	var/base_icon_state = ""
 	var/base_name = "Airlock"
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/electronics = null
 	var/airlock_type = /obj/machinery/door/airlock //the type path of the airlock once completed
@@ -125,16 +125,19 @@
 
 /obj/structure/door_assembly/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/pen))
+	if(IS_PEN(W))
 		var/t = sanitize_safe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
-		if(!t)	return
-		if(!in_range(src, usr) && src.loc != usr)	return
+		if(!length(t))
+			return
+		if(!CanPhysicallyInteractWith(user, src))
+			to_chat(user, SPAN_WARNING("You must stay close to \the [src]!"))
+			return
 		created_name = t
-		return
+		return TRUE
 
-	if(isWelder(W) && (glass == 1 || !anchored))
+	if(IS_WELDER(W) && (glass == 1 || !anchored))
 		var/obj/item/weldingtool/WT = W
-		if (WT.remove_fuel(0, user))
+		if (WT.weld(0, user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 			if(glass == 1)
 				var/decl/material/glass_material_datum = GET_DECL(glass_material)
@@ -161,7 +164,7 @@
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
 			return TRUE
 
-	if(isWrench(W) && state == 0)
+	if(IS_WRENCH(W) && state == 0)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		if(anchored)
 			user.visible_message("[user] begins unsecuring the airlock assembly from the floor.", "You begin unsecuring the airlock assembly from the floor.")
@@ -175,7 +178,7 @@
 			update_icon()
 
 
-	else if(isCoil(W) && state == 0 && anchored)
+	else if(IS_COIL(W) && state == 0 && anchored)
 		var/obj/item/stack/cable_coil/C = W
 		if (C.get_amount() < 1)
 			to_chat(user, "<span class='warning'>You need one length of coil to wire the airlock assembly.</span>")
@@ -187,7 +190,7 @@
 				to_chat(user, "<span class='notice'>You wire the airlock.</span>")
 				update_icon()
 
-	else if(isWirecutter(W) && state == 1 )
+	else if(IS_WIRECUTTER(W) && state == 1 )
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
 
@@ -207,7 +210,7 @@
 
 		if(do_after(user, 40,src))
 			if(!src) return
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			to_chat(user, "<span class='notice'>You installed the airlock electronics!</span>")
 			src.state = 2
@@ -215,7 +218,7 @@
 			src.electronics = W
 			update_icon()
 
-	else if(isCrowbar(W) && state == 2 )
+	else if(IS_CROWBAR(W) && state == 2 )
 		//This should never happen, but just in case I guess
 		if (!electronics)
 			to_chat(user, "<span class='notice'>There was nothing to remove.</span>")
@@ -249,7 +252,7 @@
 					update_icon()
 			return TRUE
 
-	else if(isScrewdriver(W) && state == 2 )
+	else if(IS_SCREWDRIVER(W) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now finishing the airlock.</span>")
 

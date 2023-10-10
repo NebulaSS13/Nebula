@@ -10,6 +10,8 @@
 	throw_range = 4
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/glass
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/nullrod/attack(mob/M, mob/living/user) //Paste from old-code to decult with a null rod.
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
@@ -68,6 +70,7 @@
 	icon_state = "energynet"
 	throwforce = 0
 	force = 0
+	max_health = 100
 	var/net_type = /obj/effect/energy_net
 
 /obj/item/energy_net/safari
@@ -138,9 +141,6 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/energy_net/Destroy()
-	if(istype(captured, /mob/living/carbon))
-		if(captured.handcuffed == src)
-			captured.handcuffed = null
 	if(captured)
 		unbuckle_mob()
 	STOP_PROCESSING(SSobj, src)
@@ -172,10 +172,6 @@
 	if(M.buckled)
 		M.buckled.unbuckle_mob()
 	buckle_mob(M)
-	if(istype(M, /mob/living/carbon))
-		var/mob/living/carbon/C = M
-		if(!C.handcuffed)
-			C.handcuffed = src
 	return 1
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
@@ -208,24 +204,20 @@
 		healthcheck()
 
 /obj/effect/energy_net/attack_hand(var/mob/user)
-
-	var/mob/living/carbon/human/H = user
-	if(istype(H))
-		if(H.species.can_shred(H))
+	if(user.a_intent != I_HURT)
+		return ..()
+	var/decl/species/my_species = user.get_species()
+	if(my_species)
+		if(my_species.can_shred(user))
 			playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
 			health -= rand(10, 20)
 		else
 			health -= rand(1,3)
-
-	else if (MUTATION_HULK in user.mutations)
-		health = 0
 	else
 		health -= rand(5,8)
-
-	to_chat(H,"<span class='danger'>You claw at the energy net.</span>")
-
+	to_chat(user, SPAN_DANGER("You claw at the energy net."))
 	healthcheck()
-	return
+	return TRUE
 
 /obj/effect/energy_net/attackby(obj/item/W, mob/user)
 	health -= W.force

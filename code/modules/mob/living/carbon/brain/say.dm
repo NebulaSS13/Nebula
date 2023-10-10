@@ -14,7 +14,7 @@
 		var/verb = "says"
 		var/ending = copytext(message, length(message))
 		if (speaking)
-			verb = speaking.get_spoken_verb(ending)
+			verb = speaking.get_spoken_verb(src, ending)
 		else
 			if(ending=="!")
 				verb=pick("exclaims","shouts","yells")

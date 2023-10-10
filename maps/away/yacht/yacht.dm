@@ -20,7 +20,6 @@
 
 /datum/map_template/ruin/away_site/yacht
 	name = "Yacht"
-	id = "awaysite_yach"
 	description = "Tiny movable ship with spiders."
 	suffixes = list("yacht/yacht.dmm")
 	cost = 0.5

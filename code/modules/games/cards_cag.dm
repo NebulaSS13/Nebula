@@ -5,6 +5,7 @@ var/global/list/cag_card_text_lists = list()
 // https://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
 
 /obj/item/deck/cag
+	abstract_type = /obj/item/deck/cag
 	var/load_text_from_file
 
 /obj/item/deck/cag/Initialize()

@@ -91,8 +91,7 @@
 		return FALSE
 
 /datum/ailment/coughing/on_ailment_event()
-	if(organ.owner.usable_emotes["cough"])
-		organ.owner.emote("cough")
+	organ.owner.cough()
 	organ.owner.setClickCooldown(3)
 
 /datum/ailment/sore_joint

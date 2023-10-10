@@ -177,5 +177,4 @@
 	return TRUE
 
 /atom/proc/attack_robot(mob/user)
-	attack_ai(user)
-	return
+	return attack_ai(user)

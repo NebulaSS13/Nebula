@@ -7,7 +7,6 @@
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/steel
 
-	var/list/part = null // Order of args is important for installing robolimbs.
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 	var/model_info
 	var/bp_tag = null // What part is this?
@@ -42,7 +41,6 @@
 	name = "left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
-	part = list(BP_L_ARM, BP_L_HAND)
 	model_info = 1
 	bp_tag = BP_L_ARM
 	material = /decl/material/solid/metal/steel
@@ -51,7 +49,6 @@
 	name = "right arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
-	part = list(BP_R_ARM, BP_R_HAND)
 	model_info = 1
 	bp_tag = BP_R_ARM
 	material = /decl/material/solid/metal/steel
@@ -60,7 +57,6 @@
 	name = "left leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_leg"
-	part = list(BP_L_LEG, BP_L_FOOT)
 	model_info = 1
 	bp_tag = BP_L_LEG
 	material = /decl/material/solid/metal/steel
@@ -69,7 +65,6 @@
 	name = "right leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_leg"
-	part = list(BP_R_LEG, BP_R_FOOT)
 	model_info = 1
 	bp_tag = BP_R_LEG
 	material = /decl/material/solid/metal/steel
@@ -78,7 +73,6 @@
 	name = "head"
 	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
 	icon_state = "head"
-	part = list(BP_HEAD)
 	model_info = 1
 	bp_tag = BP_HEAD
 	material = /decl/material/solid/metal/steel
@@ -96,7 +90,6 @@
 	name = "torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
 	icon_state = "chest"
-	part = list(BP_GROIN,BP_CHEST)
 	model_info = 1
 	bp_tag = BP_CHEST
 	material = /decl/material/solid/metal/steel
@@ -120,11 +113,11 @@
 			to_chat(user, "<span class='warning'>You have already inserted a cell!</span>")
 			return
 		else
-			if(!user.unEquip(W, src))
+			if(!user.try_unequip(W, src))
 				return
 			src.cell = W
 			to_chat(user, "<span class='notice'>You insert the cell!</span>")
-	if(isCoil(W))
+	if(IS_COIL(W))
 		if(src.wires)
 			to_chat(user, "<span class='warning'>You have already inserted wire!</span>")
 			return
@@ -152,12 +145,12 @@
 		to_chat(user, "<span class='notice'>You have already inserted the eyes!</span>")
 		return
 	else if(src.flash1)
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		src.flash2 = W
 		to_chat(user, "<span class='notice'>You insert the flash into the eye socket!</span>")
 	else
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		src.flash1 = W
 		to_chat(user, "<span class='notice'>You insert the flash into the eye socket!</span>")

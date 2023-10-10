@@ -1,6 +1,5 @@
 /datum/map_template/ruin/exoplanet/spider_nest
 	name = "spider nest"
-	id = "spider_nest"
 	description = "A small buidling with a spider infestation."
 	suffixes = list("spider_nest/spider_nest.dmm")
 	cost = 1

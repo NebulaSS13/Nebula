@@ -4,15 +4,18 @@
 var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species
+	abstract_type = /decl/species
 
 	// Descriptors and strings.
 	var/name
 	var/name_plural                           // Pluralized name (since "[name]s" is not always valid)
 	var/description
 	var/codex_description
+	var/roleplay_summary
 	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
+	var/secret_codex_info
 
 	var/holder_icon
 	var/list/available_bodytypes = list()
@@ -33,6 +36,16 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
 
+	// Darksight handling
+	/// Fractional multiplier (0 to 1) for the base alpha of the darkness overlay. A value of 1 means darkness is completely invisible.
+	var/base_low_light_vision = 0
+	/// The lumcount (turf luminosity) threshold under which adaptive low light vision will begin processing.
+	var/low_light_vision_threshold = 0.3
+	/// Fractional multiplier for the overall effectiveness of low light vision for this species. Caps the final alpha value of the darkness plane.
+	var/low_light_vision_effectiveness = 0
+	/// The rate at which low light vision adjusts towards the final value, as a fractional multiplier of the difference between the current and target alphas. ie. set to 0.15 for a 15% shift towards the target value each tick.
+	var/low_light_vision_adjustment_speed = 0.15
+
 	// Used for initializing prefs/preview
 	var/base_color =      COLOR_BLACK
 	var/base_eye_color =  COLOR_BLACK
@@ -46,8 +59,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	var/default_h_style = /decl/sprite_accessory/hair/bald
 	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
-
-	var/icon_cache_uid                        // Used for mob icon cache string.
 
 	var/mob_size = MOB_SIZE_MEDIUM
 	var/strength = STR_MEDIUM
@@ -100,6 +111,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/gibbed_anim =   "gibbed-h"
 	var/dusted_anim =   "dust-h"
 
+	/// A modifier applied to move delay when walking on snow.
+	var/snow_slowdown_mod = 0
+
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
 	var/knockout_message = "collapses, having been knocked unconscious."
@@ -109,9 +123,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/sniff_message_3p = "sniffs the air."
 	var/sniff_message_1p = "You sniff the air."
 
-	var/spawns_with_stack = 0
+
 	// Environment tolerance/life processes vars.
-	var/reagent_tag                                             // Used for metabolizing reagents.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
 	var/breath_type = /decl/material/gas/oxygen                                  // Non-oxygen gas breathed, if any.
 	var/poison_types = list(/decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
@@ -169,7 +182,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	)
 
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
-	var/greater_form              // Greater form, if any, ie. human for monkeys.
 	var/holder_type
 	var/gluttonous = 0            // Can eat some mobs. Values can be GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING, GLUT_ITEM_TINY, GLUT_ITEM_NORMAL, GLUT_ITEM_ANYTHING, GLUT_PROJECTILE_VOMIT
 	var/stomach_capacity = 5      // How much stuff they can stick in their stomach
@@ -185,20 +197,20 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		BP_APPENDIX = /obj/item/organ/internal/appendix,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
+
 	var/vision_organ              // If set, this organ is required for vision.
 	var/breathing_organ           // If set, this organ is required for breathing.
 
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
 
-	//List of organ tags, with the amount and type required for living by this species
-	//#REMOVEME: The vital organ stuff was apparently mostly dropped, so its a bit pointless to improve it...
-	var/list/vital_organs
+	// Losing an organ from the list below will give a grace period (also below) then kill the mob.
+	var/list/vital_organs = list(BP_BRAIN)
+	var/vital_organ_failure_death_delay = 25 SECONDS
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
 	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid
-	// body, currently serpentids and mantids.
+	// with the zone. Used for species with body layouts that do not map directly to a standard humanoid body.
 	var/list/limb_mapping
 
 	var/list/has_limbs = list(
@@ -220,6 +232,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/pronouns/default_pronouns
 	var/list/available_pronouns = list(
 		/decl/pronouns,
+		/decl/pronouns/neuter/person,
 		/decl/pronouns/female,
 		/decl/pronouns/male
 	)
@@ -279,6 +292,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/preview_icon_width = 64
 	var/preview_icon_height = 64
 	var/preview_icon_path
+	var/preview_outfit = /decl/hierarchy/outfit/job/generic/assistant
 
 /decl/species/proc/build_codex_strings()
 
@@ -349,6 +363,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/Initialize()
 
 	. = ..()
+
+	if(config.grant_default_darksight)
+		darksight_range = max(darksight_range, config.default_darksight_range)
+		low_light_vision_effectiveness = max(low_light_vision_effectiveness, config.default_darksight_effectiveness)
 
 	// Populate blood type table.
 	for(var/blood_type in blood_types)
@@ -438,9 +456,104 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	build_codex_strings()
 
+/decl/species/validate()
+	. = ..()
+
+	for(var/decl/bodytype/bodytype in available_bodytypes)
+		var/bodytype_base_icon = bodytype.get_base_icon()
+		var/deformed_base_icon = bodytype.get_base_icon(get_deform = TRUE)
+		for(var/organ_tag in has_limbs)
+			if(organ_tag == BP_TAIL) // Tails are handled specially due to overlays and animations, will not be present in the base bodytype icon(s).
+				continue
+			if(bodytype_base_icon && !check_state_in_icon(organ_tag, bodytype_base_icon))
+				. += "missing state \"[organ_tag]\" from base icon [bodytype_base_icon] on bodytype [bodytype.type]"
+			if(deformed_base_icon && bodytype_base_icon != deformed_base_icon && !check_state_in_icon(organ_tag, deformed_base_icon))
+				. += "missing state \"[organ_tag]\" from deformed icon [deformed_base_icon] on bodytype [bodytype.type]"
+
+	for(var/organ_tag in vital_organs)
+		if(!(organ_tag in has_organ) && !(organ_tag in has_limbs))
+			. += "vital organ \"[organ_tag]\" not present in organ/limb lists"
+
+	for(var/trait_type in traits)
+		var/trait_level = traits[trait_type]
+		var/decl/trait/T = GET_DECL(trait_type)
+		if(!T.validate_level(trait_level))
+			. += "invalid levels for species trait [trait_type]"
+
+	if(base_low_light_vision > 1)
+		. += "base low light vision is greater than 1 (over 100%)"
+	else if(base_low_light_vision < 0)
+		. += "base low light vision is less than 0 (below 0%)"
+
+	if(low_light_vision_threshold > 1)
+		. += "low light vision threshold is greater than 1 (over 100%)"
+	else if(low_light_vision_threshold < 0)
+		. += "low light vision threshold is less than 0 (below 0%)"
+
+	if(low_light_vision_effectiveness > 1)
+		. += "low light vision effectiveness is greater than 1 (over 100%)"
+	else if(low_light_vision_effectiveness < 0)
+		. += "low light vision effectiveness is less than 0 (below 0%)"
+
+	if(low_light_vision_adjustment_speed > 1)
+		. += "low light vision adjustment speed is greater than 1 (over 100%)"
+	else if(low_light_vision_adjustment_speed < 0)
+		. += "low light vision adjustment speed is less than 0 (below 0%)"
+
+	if((appearance_flags & HAS_SKIN_COLOR) && isnull(base_color))
+		. += "uses skin color but missing base_color"
+	if((appearance_flags & HAS_HAIR_COLOR) && isnull(base_hair_color))
+		. += "uses hair color but missing base_hair_color"
+	if((appearance_flags & HAS_EYE_COLOR) && isnull(base_eye_color))
+		. += "uses eye color but missing base_eye_color"
+	if(isnull(default_h_style))
+		. += "null default_h_style (use a bald/hairless hairstyle if 'no hair' is intended)"
+	if(isnull(default_f_style))
+		. += "null default_f_style (use a shaved/hairless facial hair style if 'no facial hair' is intended)"
+	if(!length(blood_types))
+		. += "missing at least one blood type"
+	if(default_bodytype && !(default_bodytype in available_bodytypes))
+		. += "default bodytype is not in available bodytypes list"
+	if(!length(available_bodytypes))
+		. += "missing at least one bodytype"
+	// TODO: Maybe make age descriptors optional, in case someone wants a 'timeless entity' species?
+	if(isnull(age_descriptor))
+		. += "age descriptor was unset"
+	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
+		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
+
+	if(cold_level_3)
+		if(cold_level_2)
+			if(cold_level_3 > cold_level_2)
+				. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_2 ([cold_level_2])"
+			if(cold_level_1)
+				if(cold_level_3 > cold_level_1)
+					. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_1 ([cold_level_1])"
+	if(cold_level_2 && cold_level_1)
+		if(cold_level_2 > cold_level_1)
+			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
+
+	if(heat_level_3 != INFINITY)
+		if(heat_level_2 != INFINITY)
+			if(heat_level_3 < heat_level_2)
+				. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_2 ([heat_level_2])"
+			if(heat_level_1 != INFINITY)
+				if(heat_level_3 < heat_level_1)
+					. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_1 ([heat_level_1])"
+	if((heat_level_2 != INFINITY) && (heat_level_1 != INFINITY))
+		if(heat_level_2 < heat_level_1)
+			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
+
+	if(min(heat_level_1, heat_level_2, heat_level_3) <= max(cold_level_1, cold_level_2, cold_level_3))
+		. += "heat and cold damage level thresholds overlap"
+
+	if(taste_sensitivity < 0)
+		. += "taste_sensitivity ([taste_sensitivity]) was negative"
+
 /decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H, var/box_type = /obj/item/storage/box/survival)
-	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
-		H.equip_to_slot_or_del(new box_type(H.back), slot_in_backpack_str)
+	var/obj/item/storage/backpack/backpack = H.get_equipped_item(slot_back_str)
+	if(istype(backpack))
+		H.equip_to_slot_or_del(new box_type(backpack), slot_in_backpack_str)
 	else
 		H.put_in_hands_or_del(new box_type(H))
 
@@ -457,7 +570,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 //Checks if an existing limbs is the species default
 /decl/species/proc/is_default_limb(var/obj/item/organ/external/E)
-	// We don't have ^^ (logical XOR), so !x != !y will suffice.
+	// Crystalline/synthetic species should only count crystalline/synthetic limbs as default.
+	// DO NOT change to (species_flags & SPECIES_FLAG_X) && !BP_IS_X(E)
 	if(!(species_flags & SPECIES_FLAG_CRYSTALLINE) != !BP_IS_CRYSTAL(E))
 		return FALSE
 	if(!(species_flags & SPECIES_FLAG_SYNTHETIC) != !BP_IS_PROSTHETIC(E))
@@ -468,25 +582,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			if(ispath(E.type, organ_data["path"]))
 				return TRUE
 	return FALSE
-
-/decl/species/proc/is_missing_vital_organ(var/mob/living/carbon/human/H)
-	for(var/tag in vital_organs)
-		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(H, tag)
-		var/list/organ_data = vital_organs[tag]
-		//#TODO: whenever we implement having several organs of the same type change this to check for the minimum amount!
-		if(!I || !ispath(I.type, organ_data["path"]))
-			return TRUE
-	return FALSE
-
-/decl/species/proc/is_vital_organ(var/mob/living/carbon/human/H, var/obj/item/organ/O)
-	if(!LAZYLEN(vital_organs))
-		return FALSE
-	//An organ organ is considered vital if there's less than the required amount of said organ type in the mob after we remove it
-	var/list/organ_data = vital_organs[O.organ_tag]
-	if(!organ_data || !ispath(O.type, organ_data["path"]))
-		return FALSE
-	//#TODO: whenever we implement having several organs of the same type change this to check for the minimum amount!
-	return TRUE
 
 //fully_replace: If true, all existing organs will be discarded. Useful when doing mob transformations, and not caring about the existing organs
 /decl/species/proc/create_missing_organs(var/mob/living/carbon/human/H, var/fully_replace = FALSE)
@@ -518,7 +613,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			var/list/parent_organ_data = has_limbs[E.parent_organ]
 			parent_organ_data["has_children"]++
 		H.add_organ(E, null, FALSE, FALSE)
-		post_organ_rejuvenate(E, H)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
@@ -530,7 +624,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
 		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE)
-		post_organ_rejuvenate(O, H)
 
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
@@ -596,9 +689,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 // Builds the HUD using species-specific icons and usable slots.
 /decl/species/proc/build_hud(var/mob/living/carbon/human/H)
-	return
-
-/decl/species/proc/can_understand(var/mob/other)
 	return
 
 /decl/species/proc/can_overcome_gravity(var/mob/living/carbon/human/H)
@@ -695,17 +785,17 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 				light = round(light * turf_brightness)
 				if(H.equipment_light_protection)
 					light -= H.equipment_light_protection
-	return Clamp(max(prescriptions, light), 0, 7)
+	return clamp(max(prescriptions, light), 0, 7)
 
-/decl/species/proc/set_default_hair(var/mob/living/carbon/human/H)
-	if(H.h_style != H.species.default_h_style)
-		H.h_style = H.species.default_h_style
+/decl/species/proc/set_default_hair(mob/living/carbon/human/organism, override_existing = TRUE, defer_update_hair = FALSE)
+	if(!organism.h_style || (override_existing && (organism.h_style != default_h_style)))
+		organism.h_style = default_h_style
 		. = TRUE
-	if(H.f_style != H.species.default_f_style)
-		H.f_style = H.species.default_f_style
+	if(!organism.h_style || (override_existing && (organism.f_style != default_f_style)))
+		organism.f_style = default_f_style
 		. = TRUE
-	if(.)
-		H.update_hair()
+	if(. && !defer_update_hair)
+		organism.update_hair()
 
 /decl/species/proc/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
 	return FALSE
@@ -723,18 +813,17 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/blood_type/blood = get_blood_decl(H)
 	return istype(blood) ? blood.splatter_colour : COLOR_BLOOD_HUMAN
 
-/decl/species/proc/handle_death_check(var/mob/living/carbon/human/H)
-	return FALSE
-
 // Impliments different trails for species depending on if they're wearing shoes.
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)
 	if(H.lying)
 		return /obj/effect/decal/cleanable/blood/tracks/body
-	if(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & SLOT_FEET)))
-		var/obj/item/clothing/shoes = (H.wear_suit && (H.wear_suit.body_parts_covered & SLOT_FEET)) ? H.wear_suit : H.shoes // suits take priority over shoes
+	var/obj/item/clothing/suit = H.get_equipped_item(slot_wear_suit_str)
+	if(istype(suit) && (suit.body_parts_covered & SLOT_FEET))
+		return suit.move_trail
+	var/obj/item/clothing/shoes = H.get_equipped_item(slot_shoes_str)
+	if(istype(shoes))
 		return shoes.move_trail
-	else
-		return move_trail
+	return move_trail
 
 /decl/species/proc/handle_trail(var/mob/living/carbon/human/H, var/turf/simulated/T)
 	return
@@ -745,9 +834,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
 	attacker.do_attack_animation(target)
 
-	if(target.w_uniform)
-		target.w_uniform.add_fingerprint(attacker)
-	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, ran_zone(attacker.zone_sel.selecting, target = target))
+	var/obj/item/uniform = target.get_equipped_item(slot_w_uniform_str)
+	if(uniform)
+		uniform.add_fingerprint(attacker)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(target, ran_zone(attacker.get_target_zone(), target = target))
 
 	var/list/holding = list(target.get_active_hand() = 60)
 	for(var/thing in target.get_inactive_held_items())
@@ -783,7 +873,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 		//Actually disarm them
 		for(var/obj/item/I in holding)
-			if(I && target.unEquip(I))
+			if(I && target.try_unequip(I))
 				target.visible_message("<span class='danger'>[attacker] has disarmed [target]!</span>")
 				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
@@ -818,11 +908,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/list/all_hairstyles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
 		for(var/hairstyle in all_hairstyles)
 			var/decl/sprite_accessory/S = all_hairstyles[hairstyle]
-			if(check_gender && S.gender && gender != S.gender)
-				continue
-			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
-				continue
-			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
+			if(!S.accessory_is_available(null, src, null, (check_gender && gender)))
 				continue
 			ADD_SORTED(hair_style_by_gender, hairstyle, /proc/cmp_text_asc)
 			hair_style_by_gender[hairstyle] = S
@@ -847,11 +933,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/list/all_facial_styles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
 		for(var/facialhairstyle in all_facial_styles)
 			var/decl/sprite_accessory/S = all_facial_styles[facialhairstyle]
-			if(check_gender && S.gender && gender != S.gender)
-				continue
-			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
-				continue
-			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
+			if(!S.accessory_is_available(null, src, null, (check_gender && gender)))
 				continue
 			ADD_SORTED(facial_hair_style_by_gender, facialhairstyle, /proc/cmp_text_asc)
 			facial_hair_style_by_gender[facialhairstyle] = S
@@ -869,9 +951,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(31 to 45)	. = 4
 		else			. = 8
 
-/decl/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	if(org && (org.species ? (org.species.species_flags & SPECIES_FLAG_CRYSTALLINE) : (species_flags & SPECIES_FLAG_CRYSTALLINE)))
-		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
+// This should only ever be called via the species set on the organ; calling it across species will cause weirdness.
+/decl/species/proc/apply_species_organ_modifications(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+	SHOULD_CALL_PARENT(TRUE)
+	if(species_flags & SPECIES_FLAG_CRYSTALLINE)
+		org.status |= ORGAN_BRITTLE
+		org.organ_properties |= ORGAN_PROP_CRYSTAL
 
 /decl/species/proc/check_no_slip(var/mob/living/carbon/human/H)
 	if(can_overcome_gravity(H))
@@ -947,13 +1032,21 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_preview_icon()
 	if(!preview_icon)
 
+		// TODO: generate an icon based on all available bodytypes.
+
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(name)]")
 		if(mannequin)
 
 			mannequin.change_species(name)
 			customize_preview_mannequin(mannequin)
 
-			preview_icon = getFlatIcon(mannequin)
+			preview_icon = icon(mannequin.bodytype.icon_template)
+			var/mob_width = preview_icon.Width()
+			preview_icon.Scale((mob_width * 2)+16, preview_icon.Height()+16)
+
+			preview_icon.Blend(getFlatIcon(mannequin, defdir = SOUTH, always_use_defdir = TRUE), ICON_OVERLAY, 8, 8)
+			preview_icon.Blend(getFlatIcon(mannequin, defdir = WEST,  always_use_defdir = TRUE), ICON_OVERLAY, mob_width+8, 8)
+
 			preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2)
 			preview_icon_width = preview_icon.Width()
 			preview_icon_height = preview_icon.Height()
@@ -966,3 +1059,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
+
+/decl/species/proc/check_vital_organ_missing(var/mob/living/carbon/H)
+	if(length(vital_organs))
+		for(var/organ_tag in vital_organs)
+			var/obj/item/organ/O = H.get_organ(organ_tag, /obj/item/organ)
+			if(!O || (O.status & ORGAN_DEAD))
+				return TRUE
+	return FALSE

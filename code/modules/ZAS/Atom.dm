@@ -31,8 +31,8 @@
 /atom/movable/proc/update_nearby_tiles(need_rebuild)
 	for(var/turf/simulated/turf in locs)
 		SSair.mark_for_update(turf)
-
-	return 1
+	fluid_update()
+	return TRUE
 
 //Basically another way of calling CanPass(null, other, 0, 0) and CanPass(null, other, 1.5, 1).
 //Returns:

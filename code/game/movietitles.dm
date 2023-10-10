@@ -164,7 +164,8 @@ var/global/list/end_titles
 		if(!C.holder)
 			continue
 		if(C.holder.rights & (R_DEBUG|R_ADMIN))
-			var/decl/cultural_info/cult = GET_DECL(pick(subtypesof(/decl/cultural_info/culture)))
+			var/list/all_cultures = decls_repository.get_decls_of_subtype(/decl/cultural_info/culture)
+			var/decl/cultural_info/cult = all_cultures[pick(all_cultures)]
 			staff += "[uppertext(pick(staffjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
 		else if(C.holder.rights & R_MOD)
 			goodboys += "[C.key]"

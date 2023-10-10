@@ -123,21 +123,6 @@
 	result_type = /obj/item/frame/fire_alarm
 	difficulty = 2
 
-/datum/stack_recipe/computer/telescreen
-	title = "modular telescreen frame"
-	result_type = /obj/item/modular_computer/telescreen
-	difficulty = 2
-
-/datum/stack_recipe/computer/laptop
-	title = "modular laptop frame"
-	result_type = /obj/item/modular_computer/laptop
-	difficulty = 2
-
-/datum/stack_recipe/computer/tablet
-	title = "modular tablet frame"
-	result_type = /obj/item/modular_computer/tablet
-	difficulty = 2
-
 /datum/stack_recipe/hazard_cone
 	title = "hazard cone"
 	result_type = /obj/item/caution/cone
@@ -283,6 +268,10 @@
 	title = "cloak"
 	result_type = /obj/item/clothing/accessory/cloak/hide
 
+/datum/stack_recipe/banner
+	title = "banner"
+	result_type = /obj/item/banner
+
 /datum/stack_recipe/shoes
 	title = "shoes"
 	result_type = /obj/item/clothing/shoes/craftable
@@ -302,3 +291,21 @@
 /datum/stack_recipe/gauntlets
 	title = "gauntlets"
 	result_type = /obj/item/clothing/gloves/thick/craftable
+
+/datum/stack_recipe/paper_sheets
+	title          = "sheet of paper"
+	result_type    = /obj/item/paper
+	res_amount     = 4
+	max_res_amount = 30
+
+/datum/stack_recipe/paper_sheets/spawn_result(user, location, amount)
+	var/obj/item/paper/P = ..()
+	if(amount > 1)
+		var/obj/item/paper_bundle/B = new(location)
+		B.merge(P)
+		for(var/i = 1 to (amount - 1))
+			if(B.get_amount_papers() >= B.max_pages)
+				B = new(location)
+			B.merge(new /obj/item/paper(location))
+		return B
+	return P

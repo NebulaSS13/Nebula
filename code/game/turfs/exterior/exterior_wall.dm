@@ -1,7 +1,6 @@
 #define MAT_DROP_CHANCE 30
 
-var/global/list/default_strata_type_by_z = list()
-var/global/list/default_material_by_strata_and_z = list()
+///List of all the /turf/exterior/wall that exists in the world on all z-levels
 var/global/list/natural_walls = list()
 
 /turf/exterior/wall
@@ -12,13 +11,16 @@ var/global/list/natural_walls = list()
 	opacity =    TRUE
 	density =    TRUE
 	blocks_air = TRUE
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
 
-	var/strata
+	///Overrides the level's strata for this turf.
+	var/strata_override
 	var/paint_color
 	var/image/ore_overlay
 	var/decl/material/material
 	var/decl/material/reinf_material
 	var/floor_type = /turf/exterior/barren
+	var/static/list/exterior_wall_shine_cache = list()
 
 /turf/exterior/wall/examine(mob/user, distance, infix, suffix)
 	. = ..()
@@ -34,7 +36,7 @@ var/global/list/natural_walls = list()
 	color = null
 
 	// Init materials.
-	material = SSmaterials.get_strata_material(src)
+	material = SSmaterials.get_strata_material_type(src)
 
 	global.natural_walls += src
 
@@ -57,6 +59,12 @@ var/global/list/natural_walls = list()
 		var/turf/T = GetAbove(src)
 		if(!istype(T, floor_type) && T.is_open())
 			T.ChangeTurf(floor_type, keep_air = TRUE)
+	//Set the rock color
+	if(!paint_color)
+		var/rcolor = SSmaterials.get_rock_color(src)
+		if(rcolor)
+			paint_color = rcolor
+			queue_icon_update()
 
 /turf/exterior/wall/explosion_act(severity)
 	if(severity == 1 || (severity == 2 && prob(40)))
@@ -178,23 +186,18 @@ var/global/list/natural_walls = list()
 	var/material_icon_base = material.icon_base_natural || 'icons/turf/walls/natural.dmi'
 	var/base_color = paint_color ? paint_color : material.color
 
-	var/max_shine
-	var/shine
+	var/shine = 0
 	if(material?.reflectiveness > 0)
-		max_shine = 0.6 * ReadHSV(RGBtoHSV(material.color))[3] // patened formula based on color's Value (in HSV)
-		shine = Clamp((material.reflectiveness * 0.01) * 255, 10, max_shine)
+		var/shine_cache_key = "[material.reflectiveness]-[material.color]"
+		shine = exterior_wall_shine_cache[shine_cache_key]
+		if(isnull(shine))
+			// patented formula based on color's value (in HSV)
+			shine = clamp((material.reflectiveness * 0.01) * 255, 10, (0.6 * ReadHSV(RGBtoHSV(material.color))[3]))
+			exterior_wall_shine_cache[shine_cache_key] = shine
 
-	var/image/I
-	for(var/i = 1 to 4)
-		var/apply_state = "[wall_connections[i]]"
-		I = image(material_icon_base, apply_state, dir = BITFLAG(i-1))
-		I.color = base_color
-		add_overlay(I)
-		if(shine)
-			I = image(material_icon_base, "shine[wall_connections[i]]", dir = BITFLAG(i-1))
-			I.appearance_flags |= RESET_ALPHA
-			I.alpha = shine
-			add_overlay(I)
+	icon = get_combined_wall_icon(wall_connections, null, material_icon_base, base_color, shine_value = shine)
+	icon_state = ""
+	color = null
 
 	if(ore_overlay)
 		add_overlay(ore_overlay)
@@ -205,10 +208,9 @@ var/global/list/natural_walls = list()
 
 /turf/exterior/wall/proc/dismantle_wall(no_product = FALSE)
 	if(reinf_material?.ore_result_amount && !no_product)
-		for(var/i = 1 to reinf_material.ore_result_amount)
-			pass_geodata_to(new /obj/item/ore(src, reinf_material.type))
+		pass_geodata_to(new /obj/item/stack/material/ore(src, reinf_material.ore_result_amount, reinf_material.type))
 	if(prob(MAT_DROP_CHANCE) && !no_product)
-		pass_geodata_to(new /obj/item/ore(src, material.type))
+		pass_geodata_to(new /obj/item/stack/material/ore(src, 1, material.type))
 	destroy_artifacts(null, INFINITY)
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	. = ChangeTurf(floor_type || get_base_turf_by_area(src))

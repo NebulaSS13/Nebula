@@ -9,6 +9,7 @@
 /decl/natural_attack/claws
 	attack_verb = list("scratched", "clawed", "slashed")
 	attack_noun = list("claws")
+	selector_icon_state = "attack_claws"
 	eye_attack_text = "claws"
 	eye_attack_text_victim = "sharp claws"
 	attack_sound = 'sound/weapons/slice.ogg'
@@ -20,7 +21,7 @@
 	var/blocked_by_gloves = TRUE
 
 /decl/natural_attack/claws/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	return (!user.gloves || !blocked_by_gloves)
+	return (!user.get_equipped_item(slot_gloves_str) || !blocked_by_gloves)
 
 /decl/natural_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = istype(target) && zone && GET_EXTERNAL_ORGAN(target, zone)
@@ -28,7 +29,7 @@
 		return ..()
 
 	var/decl/pronouns/user_gender = user.get_pronouns()
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 	if(target == user)
 		user.visible_message(SPAN_DANGER("\The [user] [pick(attack_verb)] [user_gender.self] in the [affecting.name]!"))
 		return 0
@@ -39,7 +40,7 @@
 		if(BP_HEAD, BP_MOUTH, BP_EYES)
 			// ----- HEAD ----- //
 			switch(attack_damage)
-				if(1 to 2) 
+				if(1 to 2)
 					attack_string = "scratches \the [target] across [target_gender.his] cheek"
 				if(3 to 4)
 					attack_string = pick(
@@ -54,7 +55,7 @@
 		else
 			// ----- BODY ----- //
 			switch(attack_damage)
-				if(1 to 2)	
+				if(1 to 2)
 					attack_string = "[pick("scratched", "grazed")] [target]'s [affecting.name]"
 				if(3 to 4)
 					attack_string = pick(
@@ -82,10 +83,11 @@
 	name = "strong bite"
 
 /decl/natural_attack/slime_glomp
+	name = "glomp"
+	selector_icon_state = "attack_glomp"
 	attack_verb = list("glomped")
 	attack_noun = list("body")
 	damage = 2
-	name = "glomp"
 	usable_with_limbs = list(BP_CHEST, BP_GROIN)
 
 /decl/natural_attack/slime_glomp/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
@@ -108,23 +110,24 @@
 	playsound(user.loc, attack_sound, 25, 1, -1)
 
 /decl/natural_attack/tail
+	name = "tail swipe"
+	selector_icon_state = "attack_tail"
 	attack_verb = list ("bludgeoned", "lashed", "smacked", "whapped")
 	attack_noun = list ("tail")
-	name = "tail swipe"
 	usable_with_limbs = list(BP_GROIN)
 	var/static/list/can_hit_zones = list(
-		BP_L_LEG, 
-		BP_R_LEG, 
-		BP_L_FOOT, 
-		BP_R_FOOT, 
+		BP_L_LEG,
+		BP_R_LEG,
+		BP_L_FOOT,
+		BP_R_FOOT,
 		BP_GROIN
 	)
 
 /decl/natural_attack/tail/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone) //ensures that you can't tail someone in the skull
 	if(!(zone in can_hit_zones))
 		return FALSE
-	for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-		if(GET_EXTERNAL_ORGAN(user, bp))
+	for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+		if(GET_EXTERNAL_ORGAN(user, foot_tag))
 			return TRUE
 	return FALSE
 
@@ -134,7 +137,7 @@
 	if(!affecting)
 		return ..()
 
-	attack_damage = Clamp(attack_damage, 1, 6)
+	attack_damage = clamp(attack_damage, 1, 6)
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 

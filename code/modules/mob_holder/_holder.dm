@@ -10,6 +10,7 @@
 	origin_tech = "{'biotech':1}"
 	use_single_icon = TRUE
 	item_state = null
+	is_spawnable_type = FALSE
 	var/last_holder
 
 /obj/item/holder/Initialize()
@@ -98,20 +99,14 @@
 		return loc.loc
 	return ..()
 
-/obj/item/holder/GetIdCard()
+/obj/item/holder/GetIdCards()
+	. = ..()
 	for(var/mob/M in contents)
-		var/obj/item/I = M.GetIdCard()
-		if(I)
-			return I
-	return null
-
-/obj/item/holder/GetAccess()
-	var/obj/item/I = GetIdCard()
-	return I ? I.GetAccess() : ..()
+		LAZYDISTINCTADD(., M.GetIdCards())
 
 /obj/item/holder/attack_self()
 	for(var/mob/M in contents)
-		M.show_inv(usr)
+		M.show_stripping_window(usr)
 
 /obj/item/holder/attack(mob/target, mob/user)
 	// Devour on click on self with holder

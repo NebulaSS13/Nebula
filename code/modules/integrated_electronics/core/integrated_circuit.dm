@@ -5,6 +5,7 @@
 	icon_state = "template"
 	w_class = ITEM_SIZE_TINY
 	matter = list()				// To be filled later
+	max_health = 25 //#TODO: Use material for health
 	var/obj/item/electronic_assembly/assembly // Reference to the assembly holding this circuit, if any.
 	var/extended_desc
 	var/list/inputs
@@ -70,7 +71,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	else
 		return CanUseTopic(user)
 
-/obj/item/integrated_circuit/Initialize()
+/obj/item/integrated_circuit/Initialize(ml, material_key)
 	displayed_name = name
 	setup_io(inputs, /datum/integrated_io, inputs_default, IC_INPUT)
 	inputs_default = null
@@ -78,7 +79,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
 	if(!matter[/decl/material/solid/metal/steel])
-		matter[/decl/material/solid/metal/steel] = w_class * SScircuit.cost_multiplier // Default cost.
+		matter[/decl/material/solid/metal/steel] = w_class * SScircuit.cost_multiplier // Default cost. //#TODO: Maybe move that stuff to the new material system that does essentially the same thing?
 	. = ..()
 
 /obj/item/integrated_circuit/proc/on_data_written() //Override this for special behaviour when new data gets pushed to the circuit.
@@ -285,7 +286,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 	else if(href_list["remove"] && assembly)
 		var/obj/item/held_item_obj = held_item
-		if(isScrewdriver(held_item_obj))
+		if(IS_SCREWDRIVER(held_item_obj))
 			disconnect_all()
 			dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)

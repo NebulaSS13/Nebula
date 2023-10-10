@@ -18,9 +18,9 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/sliceable/pizza/margherita/Initialize()
+/obj/item/chems/food/sliceable/pizza/margherita/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 6)
 
 /obj/item/chems/food/slice/margherita
@@ -47,9 +47,9 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/sliceable/pizza/meatpizza/Initialize()
+/obj/item/chems/food/sliceable/pizza/meatpizza/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 34)
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  34)
 	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, 6)
 
 /obj/item/chems/food/slice/meatpizza
@@ -76,9 +76,9 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/sliceable/pizza/mushroompizza/Initialize()
+/obj/item/chems/food/sliceable/pizza/mushroompizza/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
 
 /obj/item/chems/food/slice/mushroompizza
 	name = "mushroompizza slice"
@@ -104,11 +104,11 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/sliceable/pizza/vegetablepizza/Initialize()
+/obj/item/chems/food/sliceable/pizza/vegetablepizza/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup, 6)
-	reagents.add_reagent(/decl/material/liquid/eyedrops, 12)
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup,  6)
+	reagents.add_reagent(/decl/material/liquid/eyedrops,           12)
 
 /obj/item/chems/food/slice/vegetablepizza
 	name = "vegetable pizza slice"
@@ -127,16 +127,20 @@
 	desc = "A box suited for pizzas."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "pizzabox1"
-
+	material = /decl/material/solid/cardboard
 	var/open = 0 // Is the box open?
 	var/ismessy = 0 // Fancy mess on the lid
 	var/obj/item/chems/food/sliceable/pizza/pizza // content pizza
 	var/list/boxes = list()// If the boxes are stacked, they come here
 	var/boxtag = ""
 
-/obj/item/pizzabox/on_update_icon()
+/obj/item/pizzabox/Initialize(ml, material_key)
+	. = ..()
+	if(ispath(pizza))
+		pizza = new pizza(src)
 
-	overlays.Cut()
+/obj/item/pizzabox/on_update_icon()
+	. = ..()
 
 	// Set appropriate description
 	if( open && pizza )
@@ -162,10 +166,9 @@
 			icon_state = "pizzabox_open"
 
 		if( pizza )
-			var/image/pizzaimg = image("food.dmi", icon_state = pizza.icon_state)
+			var/mutable_appearance/pizzaimg = new(pizza)
 			pizzaimg.pixel_y = -3
-			overlays += pizzaimg
-
+			add_overlay(pizzaimg)
 		return
 	else
 		// Stupid code because byondcode sucks
@@ -179,36 +182,30 @@
 				doimgtag = 1
 
 		if( doimgtag )
-			var/image/tagimg = image("food.dmi", icon_state = "pizzabox_tag")
-			tagimg.pixel_y = boxes.len * 3
-			overlays += tagimg
+			add_overlay(image("food.dmi", "pizzabox_tag", pixel_y = (boxes.len * 3)))
 
 	icon_state = "pizzabox[boxes.len+1]"
 
 /obj/item/pizzabox/attack_hand(mob/user)
 
-	if( open && pizza )
-		user.put_in_hands( pizza )
+	if(open && pizza)
+		if(user.check_dexterity(DEXTERITY_GRIP))
+			user.put_in_hands(pizza)
+			to_chat(user, SPAN_NOTICE("You take \the [src.pizza] out of \the [src]."))
+			pizza = null
+			update_icon()
+		return TRUE
 
-		to_chat(user, "<span class='warning'>You take \the [src.pizza] out of \the [src].</span>")
-		src.pizza = null
-		update_icon()
-		return
-
-	if( boxes.len > 0 )
-		if(!user.is_holding_offhand(src))
-			..()
-			return
-
+	if(length(boxes) && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_GRIP))
 		var/obj/item/pizzabox/box = boxes[boxes.len]
 		boxes -= box
-
-		user.put_in_hands( box )
-		to_chat(user, "<span class='warning'>You remove the topmost [src] from your hand.</span>")
+		user.put_in_hands(box)
+		to_chat(user, SPAN_WARNING("You remove the topmost [src] from your hand."))
 		box.update_icon()
 		update_icon()
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/item/pizzabox/attack_self(mob/user)
 
@@ -234,8 +231,8 @@
 				boxestoadd += i
 
 			if( (boxes.len+1) + boxestoadd.len <= 5 )
-				if(!user.unEquip(box, src))
-					return
+				if(!user.try_unequip(box, src))
+					return TRUE
 				box.boxes = list()// clear the box boxes so we don't have boxes inside boxes. - Xzibit
 				src.boxes.Add( boxestoadd )
 
@@ -248,13 +245,13 @@
 		else
 			to_chat(user, "<span class='warning'>Close \the [box] first!</span>")
 
-		return
+		return TRUE
 
 	if( istype(I, /obj/item/chems/food/sliceable/pizza/) )
 
 		if( src.open )
-			if(!user.unEquip(I, src))
-				return
+			if(!user.try_unequip(I, src))
+				return TRUE
 			src.pizza = I
 
 			update_icon()
@@ -262,12 +259,12 @@
 			to_chat(user, "<span class='warning'>You put \the [I] in \the [src]!</span>")
 		else
 			to_chat(user, "<span class='warning'>You try to push \the [I] through the lid but it doesn't work!</span>")
-		return
+		return TRUE
 
-	if( istype(I, /obj/item/pen/) )
+	if(IS_PEN(I))
 
 		if( src.open )
-			return
+			return TRUE
 
 		var/t = sanitize(input("Enter what you want to add to the tag:", "Write", null, null) as text, 30)
 
@@ -278,25 +275,21 @@
 		boxtotagto.boxtag = copytext("[boxtotagto.boxtag][t]", 1, 30)
 
 		update_icon()
-		return
-	..()
+		return TRUE
+	return ..()
 
-/obj/item/pizzabox/margherita/Initialize()
-	. = ..()
-	pizza = new /obj/item/chems/food/sliceable/pizza/margherita(src)
+/obj/item/pizzabox/margherita
+	pizza = /obj/item/chems/food/sliceable/pizza/margherita
 	boxtag = "Margherita Deluxe"
 
-/obj/item/pizzabox/vegetable/Initialize()
-	. = ..()
-	pizza = new /obj/item/chems/food/sliceable/pizza/vegetablepizza(src)
+/obj/item/pizzabox/vegetable
+	pizza = /obj/item/chems/food/sliceable/pizza/vegetablepizza
 	boxtag = "Gourmet Vegatable"
 
-/obj/item/pizzabox/mushroom/Initialize()
-	. = ..()
-	pizza = new /obj/item/chems/food/sliceable/pizza/mushroompizza(src)
+/obj/item/pizzabox/mushroom
+	pizza = /obj/item/chems/food/sliceable/pizza/mushroompizza
 	boxtag = "Mushroom Special"
 
-/obj/item/pizzabox/meat/Initialize()
-	. = ..()
-	pizza = new /obj/item/chems/food/sliceable/pizza/meatpizza(src)
+/obj/item/pizzabox/meat
+	pizza = /obj/item/chems/food/sliceable/pizza/meatpizza
 	boxtag = "Meatlover's Supreme"

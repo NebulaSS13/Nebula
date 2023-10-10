@@ -13,10 +13,11 @@
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 	min_player_age = 14
+	default_access = list(access_mercenary)
 
 	faction = "mercenary"
 
-	base_to_load = /datum/map_template/ruin/antag_spawn/mercenary
+	base_to_load = "Mercenary Base"
 	default_outfit = /decl/hierarchy/outfit/mercenary
 
 /decl/special_role/mercenary/create_global_objectives()

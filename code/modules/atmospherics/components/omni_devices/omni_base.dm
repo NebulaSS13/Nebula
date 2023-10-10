@@ -50,29 +50,37 @@
 		switch(d)
 			if(NORTH)
 				new_port.mode = tag_north
-				if(new_port.mode == ATM_FILTER)
-					new_port.filtering = decls_repository.get_decl_by_id(tag_filter_gas_north)
+				if(new_port.mode == ATM_FILTER && tag_filter_gas_north)
+					if(!istext(tag_filter_gas_north))
+						CRASH("The tag_filter_gas_north var of [src] ([x],[y],[z]) was not set to a material uid string! Got : '[tag_filter_gas_north]'.")
+					new_port.filtering = decls_repository.get_decl_path_by_id(tag_filter_gas_north)
 				if(tag_north >= 3 && tag_north < 8)
 					new_port.filtering = handle_legacy_gas_filtering(tag_north)
 					new_port.mode = ATM_FILTER
 			if(SOUTH)
 				new_port.mode = tag_south
-				if(new_port.mode == ATM_FILTER)
-					new_port.filtering = decls_repository.get_decl_by_id(tag_filter_gas_south)
+				if(new_port.mode == ATM_FILTER && tag_filter_gas_south)
+					if(!istext(tag_filter_gas_south))
+						CRASH("The tag_filter_gas_south var of [src] ([x],[y],[z]) was not set to a material uid string! Got : '[tag_filter_gas_south]'.")
+					new_port.filtering = decls_repository.get_decl_path_by_id(tag_filter_gas_south)
 				if(tag_south >= 3 && tag_south < 8)
 					new_port.filtering = handle_legacy_gas_filtering(tag_south)
 					new_port.mode = ATM_FILTER
 			if(EAST)
 				new_port.mode = tag_east
-				if(new_port.mode == ATM_FILTER)
-					new_port.filtering = decls_repository.get_decl_by_id(tag_filter_gas_east)
+				if(new_port.mode == ATM_FILTER && tag_filter_gas_east)
+					if(!istext(tag_filter_gas_east))
+						CRASH("The tag_filter_gas_east var of [src] ([x],[y],[z]) was not set to a material uid string! Got : '[tag_filter_gas_east]'.")
+					new_port.filtering = decls_repository.get_decl_path_by_id(tag_filter_gas_east)
 				if(tag_east >= 3 && tag_east < 8)
 					new_port.filtering = handle_legacy_gas_filtering(tag_east)
 					new_port.mode = ATM_FILTER
 			if(WEST)
 				new_port.mode = tag_west
-				if(new_port.mode == ATM_FILTER)
-					new_port.filtering = decls_repository.get_decl_by_id(tag_filter_gas_west)
+				if(new_port.mode == ATM_FILTER && tag_filter_gas_west)
+					if(!istext(tag_filter_gas_west))
+						CRASH("The tag_filter_gas_west var of [src] ([x],[y],[z]) was not set to a material uid string! Got : '[tag_filter_gas_west]'.")
+					new_port.filtering = decls_repository.get_decl_path_by_id(tag_filter_gas_west)
 				if(tag_west >= 3 && tag_west < 8)
 					new_port.filtering = handle_legacy_gas_filtering(tag_west)
 					new_port.mode = ATM_FILTER
@@ -132,7 +140,7 @@
 	for(var/datum/omni_port/P in ports)
 		int_pressure += P.air.return_pressure()
 	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_pressure - env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+	if ((int_pressure - env_air.return_pressure()) > (2 ATM))
 		return FALSE
 	return TRUE
 
@@ -236,7 +244,7 @@
 		if((reference in P.nodes) && (new_network != P.network))
 			qdel(P.network)
 			P.network = new_network
-			for(var/obj/machinery/atmospherics/node AS_ANYTHING in P.nodes)
+			for(var/obj/machinery/atmospherics/node as anything in P.nodes)
 				if(node != reference)
 					node.network_expand(new_network, src)
 
@@ -254,7 +262,7 @@
 		QDEL_NULL(P.network)
 		if(P.mode == 0)
 			continue
-		
+
 		for(var/obj/machinery/atmospherics/target in get_step(src, P.direction))
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))

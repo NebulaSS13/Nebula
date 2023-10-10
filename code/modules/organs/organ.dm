@@ -7,6 +7,7 @@
 	material = /decl/material/solid/meat
 	origin_tech = "{'materials':1,'biotech':1}"
 	throwforce = 2
+	abstract_type = /obj/item/organ
 
 	// Strings.
 	var/organ_tag = "organ"                // Unique identifier.
@@ -14,7 +15,8 @@
 
 	// Status tracking.
 	var/status = 0                         // Various status flags (such as robotic)
-	var/vital                              // Lose a vital limb, die immediately.
+	var/organ_properties = 0               // A flag for telling what capabilities this organ has. ORGAN_PROP_PROSTHETIC, ORGAN_PROP_CRYSTAL, etc..
+	var/vital_to_owner                     // Cache var for vitality to current owner.
 
 	// Reference data.
 	var/mob/living/carbon/human/owner      // Current mob owning the organ.
@@ -87,7 +89,7 @@
 			given_dna.check_integrity() //Defaults everything
 
 	set_dna(given_dna)
-	setup_reagents()
+	initialize_reagents()
 	return TRUE
 
 //Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
@@ -106,10 +108,14 @@
 	return TRUE
 
 //Called on initialization to add the neccessary reagents
-/obj/item/organ/proc/setup_reagents()
+
+/obj/item/organ/initialize_reagents(populate = TRUE)
 	if(reagents)
 		return
 	create_reagents(5 * (w_class-1)**2)
+	. = ..()
+
+/obj/item/organ/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
@@ -122,6 +128,7 @@
 	set_species(dna.species)
 
 /obj/item/organ/proc/set_species(var/specie_name)
+	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
 	if(istext(specie_name))
 		species = get_species_by_key(specie_name)
 	else
@@ -149,20 +156,21 @@
 		absolute_max_damage = max(1, FLOOR(min_broken_damage * 2))
 	max_damage = absolute_max_damage // resets scarring, but ah well
 
+	reset_status()
+
 /obj/item/organ/proc/die()
 	damage = max_damage
 	status |= ORGAN_DEAD
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL_LIST(ailments)
 	death_time = REALTIMEOFDAY
-	if(owner?.species?.is_vital_organ(owner, src))
-		owner.death()
 	update_icon()
 
 /obj/item/organ/Process()
 
 	if(loc != owner) //#FIXME: looks like someone was trying to hide a bug :P That probably could break organs placed inside a wrapper though
 		owner = null
+		vital_to_owner = null
 
 	//dead already, no need for more processing
 	if(status & ORGAN_DEAD)
@@ -204,7 +212,7 @@
 
 /obj/item/organ/proc/handle_ailment(var/datum/ailment/ailment)
 	if(ailment.treated_by_reagent_type)
-		for(var/datum/reagents/source in list(owner.get_injected_reagents(), owner.reagents, owner.get_ingested_reagents()))
+		for(var/datum/reagents/source as anything in owner.get_metabolizing_reagent_holders())
 			for(var/reagent_type in source.reagent_volumes)
 				if(ailment.treated_by_medication(reagent_type, source.reagent_volumes[reagent_type]))
 					ailment.was_treated_by_medication(source, reagent_type)
@@ -239,13 +247,13 @@
 		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
 		if(antibiotics < 5 && prob(round(germ_level/6 * owner.immunity_weakness() * 0.01)))
 			if(germ_immunity > 0)
-				germ_level += Clamp(round(1/germ_immunity), 1, 10) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
+				germ_level += clamp(round(1/germ_immunity), 1, 10) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
 			else // Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
 				germ_level += 10
 
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + owner.species.body_temperature
-		owner.bodytemperature += between(0, (fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, fever_temperature - owner.bodytemperature)
+		owner.bodytemperature += clamp(0, (fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, fever_temperature - owner.bodytemperature)
 
 	if (germ_level >= INFECTION_LEVEL_TWO)
 		var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
@@ -289,14 +297,18 @@
 	qdel(src)
 
 /obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
+	SHOULD_CALL_PARENT(TRUE)
 	damage = 0
-	status = initial(status)
-	if(ignore_prosthetic_prefs && ishuman(owner) && owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
+	reset_status()
+	if(!ignore_prosthetic_prefs && owner?.client?.prefs && owner.client.prefs.real_name == owner.real_name)
 		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
 			if(aspect.applies_to_organ(organ_tag))
 				aspect.apply(owner)
-	if(species)
-		species.post_organ_rejuvenate(src, owner)
+
+/obj/item/organ/proc/reset_status()
+	status = initial(status)
+	if(species) // qdel clears species ref
+		species.apply_species_organ_modifications(src)
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
@@ -321,22 +333,20 @@
 	CRASH("Not Implemented")
 
 /obj/item/organ/proc/heal_damage(amount)
-	if (can_recover())
-		damage = between(0, damage - round(amount, 0.1), max_damage)
+	if(can_recover())
+		damage = clamp(0, damage - round(amount, 0.1), max_damage)
 
 /obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	status = ORGAN_PROSTHETIC
+	vital_to_owner = null
+	BP_SET_PROSTHETIC(src)
 	QDEL_NULL(dna)
 	reagents?.clear_reagents()
 	material = GET_DECL(apply_material)
 	matter = null
 	create_matter()
 
-/obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
-	status = ORGAN_ASSISTED
-
 /obj/item/organ/attack(var/mob/target, var/mob/user)
-	if(status & ORGAN_PROSTHETIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
 
 	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
@@ -346,7 +356,7 @@
 	if(QDELETED(src))
 		return
 
-	if(!user.unEquip(src))
+	if(!user.try_unequip(src))
 		return
 
 	var/obj/item/chems/food/organ/O = new(get_turf(src))
@@ -372,8 +382,6 @@
 	. = list()
 	if(BP_IS_CRYSTAL(src))
 		. += tag ? "<span class='average'>Crystalline</span>" : "Crystalline"
-	else if(BP_IS_ASSISTED(src))
-		. += tag ? "<span class='average'>Assisted</span>" : "Assisted"
 	else if(BP_IS_PROSTHETIC(src))
 		. += tag ? "<span class='average'>Mechanical</span>" : "Mechanical"
 	if(status & ORGAN_CUT_AWAY)
@@ -438,6 +446,8 @@ var/global/list/ailment_reference_cache = list()
 
 /obj/item/organ/proc/get_possible_ailments()
 	. = list()
+	if(owner.status_flags & GODMODE)
+		return .
 	for(var/ailment_type in subtypesof(/datum/ailment))
 		var/datum/ailment/ailment = ailment_type
 		if(initial(ailment.category) == ailment_type)
@@ -502,6 +512,7 @@ var/global/list/ailment_reference_cache = list()
 	set_detached(detached)
 
 	owner = target
+	vital_to_owner = null
 	action_button_name = initial(action_button_name)
 	if(owner)
 		forceMove(owner)
@@ -533,15 +544,18 @@ var/global/list/ailment_reference_cache = list()
 		set_detached(TRUE)
 	else
 		owner = null
+		vital_to_owner = null
 	return src
 
 //Events handling for checks and effects that should happen when removing the organ through interactions. Called by the owner mob.
 /obj/item/organ/proc/on_remove_effects(var/mob/living/last_owner)
 	START_PROCESSING(SSobj, src)
+	vital_to_owner = null
 
 //Events handling for checks and effects that should happen when installing the organ through interactions. Called by the owner mob.
 /obj/item/organ/proc/on_add_effects()
 	STOP_PROCESSING(SSobj, src)
+	vital_to_owner = null
 
 //Since some types of organs completely ignore being detached, moved it to an overridable organ proc for external prosthetics
 /obj/item/organ/proc/set_detached(var/is_detached)
@@ -557,3 +571,11 @@ var/global/list/ailment_reference_cache = list()
 // If an organ is inside a holder, the holder should be handling damage in their explosion_act() proc.
 /obj/item/organ/explosion_act(severity)
 	return !owner && ..()
+
+/obj/item/organ/proc/is_vital_to_owner()
+	if(isnull(vital_to_owner))
+		if(!owner?.species)
+			vital_to_owner = null
+			return FALSE
+		vital_to_owner = (organ_tag in owner.species.vital_organs)
+	return vital_to_owner

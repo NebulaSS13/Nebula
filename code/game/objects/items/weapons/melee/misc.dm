@@ -11,6 +11,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':4}"
 	attack_verb = list("flicked", "whipped", "lashed")
+	material = /decl/material/solid/leather
 
 /obj/item/whip/abyssal
 	name = "abyssal whip"
@@ -34,6 +35,7 @@
 	force = 19
 	edge = TRUE
 	origin_tech = "{'combat':6,'materials':5}"
+	material = /decl/material/solid/leather/lizard
 
 /obj/item/whip/chainofcommand
 	name = "chain of command"
@@ -41,6 +43,7 @@
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
 	icon_state = "chain"
 	item_state = "whip"
+	material = /decl/material/solid/metal/steel
 
 /obj/item/sword/replica/officersword
 	name = "fleet officer's sword"
@@ -48,7 +51,7 @@
 	icon = 'icons/obj/items/weapon/parade_sword.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NAME
 
 /obj/item/sword/replica/officersword/army
 	name = "army NCO's sword"

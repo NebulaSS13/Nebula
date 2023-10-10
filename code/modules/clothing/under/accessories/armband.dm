@@ -12,6 +12,11 @@
 	desc = "An armband, worn by the crew to display which department they're assigned to. This one is brown."
 	icon = 'icons/clothing/accessories/armbands/armband_cargo.dmi'
 
+/obj/item/clothing/accessory/armband/science
+	name = "science armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is purple."
+	icon = 'icons/clothing/accessories/armbands/armband_science.dmi'
+
 /obj/item/clothing/accessory/armband/engine
 	name = "engineering armband"
 	desc = "An armband, worn by the crew to display which department they're assigned to. This one is orange with a reflective strip!"

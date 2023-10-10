@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(radiation)
 	if (!resumed)
 		current_sources = sources.Copy()
 		current_res_cache = resistance_cache.Copy()
-		listeners = global.living_mob_list_.Copy()		
+		listeners = global.living_mob_list_.Copy()
 
 	while(current_sources.len)
 		var/datum/radiation_source/S = current_sources[current_sources.len]
@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(radiation)
 			S.update_rad_power(S.rad_power - config.radiation_decay_rate)
 		if (MC_TICK_CHECK)
 			return
-	
+
 	while(current_res_cache.len)
 		var/turf/T = current_res_cache[current_res_cache.len]
 		current_res_cache.len--
@@ -106,7 +106,7 @@ SUBSYSTEM_DEF(radiation)
 	var/datum/radiation_source/existing = sources_assoc[S.source_turf]
 	if(existing)
 		qdel(existing)
-	sources += S
+	sources |= S
 	sources_assoc[S.source_turf] = S
 
 // Creates a temporary radiation source that will decay
@@ -134,5 +134,5 @@ SUBSYSTEM_DEF(radiation)
 /datum/controller/subsystem/radiation/proc/z_radiate(var/atom/source, power, var/respect_maint = FALSE)
 	if(!(power && source))
 		return
-	var/turf/epicentre = locate(round(world.maxx / 2), round(world.maxy / 2), source.z)
+	var/turf/epicentre = WORLD_CENTER_TURF(source.z)
 	flat_radiate(epicentre, power, world.maxx, respect_maint)

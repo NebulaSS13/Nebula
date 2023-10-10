@@ -3,6 +3,8 @@
 	desc = "A status indicator for a combustion chamber, based on temperature."
 	icon = 'icons/obj/machines/door_timer.dmi'
 	icon_state = "doortimer-p"
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/frequency = 1441
 	var/alert_temperature = 10000
 	var/alert = 1
@@ -11,8 +13,11 @@
 /obj/machinery/status_light/Initialize()
 	. = ..()
 	update_icon()
-	radio_connection = register_radio(src, frequency, frequency, RADIO_ATMOSIA)
+	radio_connection = register_radio_to_controller(src, frequency, frequency, RADIO_ATMOSIA)
 
+/obj/machinery/status_light/Destroy()
+	radio_controller.remove_object(src,frequency)
+	return ..()
 
 /obj/machinery/status_light/on_update_icon()
 	if(stat & (NOPOWER|BROKEN))

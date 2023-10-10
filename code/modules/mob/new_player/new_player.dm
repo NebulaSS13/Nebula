@@ -2,6 +2,7 @@
 	universal_speak = TRUE
 	mob_sort_value = 10
 	invisibility = 101
+	simulated = FALSE
 
 	density = 0
 	stat = DEAD
@@ -34,29 +35,26 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/proc/show_lobby_menu(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
 		return // Not ready yet.
-	var/output = list()
-	output += "<div align='center'>"
-	output += "<i>[global.using_map.get_map_info()]</i>"
-	output +="<hr>"
-	output += "<a href='byond://?src=\ref[src];lobby_setup=1'>Setup Character</A> "
 
-	if(GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];lobby_crew=1'>View the Crew Manifest</A> "
+	var/output = list("<div align='center'>")
 
-	output += "<a href='byond://?src=\ref[src];lobby_observe=1'>Observe</A> "
-
-	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1'><b>[client.prefs.real_name]</b></a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
-	if(GAME_STATE <= RUNLEVEL_LOBBY)
-		if(ready)
-			output += "<a class='linkOn' href='byond://?src=\ref[src];lobby_ready=1'>Un-Ready</a>"
-		else
-			output += "<a href='byond://?src=\ref[src];lobby_ready=1'>Ready Up</a>"
-	else
-		output += "<a href='byond://?src=\ref[src];lobby_join=1'>Join Game!</A>"
-
+	var/decl/lobby_handler/lobby_handler = GET_DECL(global.using_map.lobby_handler)
+	var/lobby_header = lobby_handler.get_lobby_header(src)
+	if(lobby_header)
+		output += lobby_header
+	for(var/datum/lobby_option/option in lobby_handler.lobby_options)
+		if(!option.visible(src))
+			continue
+		var/option_string = option.get_lobby_menu_string(src)
+		if(option_string)
+			output += option_string
+	var/lobby_footer = lobby_handler.get_lobby_footer(src)
+	if(lobby_footer)
+		output += lobby_footer
 	output += "</div>"
 
-	panel = new(src, "Welcome","Welcome to [global.using_map.full_name]", 560, 280, src)
+	if(!panel)
+		panel = new(src, "Welcome","Welcome to [global.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(JOINTEXT(output))
 	panel.open()
@@ -104,9 +102,9 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	if(href_list["lobby_ready"])
 		if(GAME_STATE <= RUNLEVEL_LOBBY)
 			ready = !ready
+		show_lobby_menu()
 
 	if(href_list["refresh"])
-		panel.close()
 		show_lobby_menu()
 
 	if(href_list["lobby_observe"])
@@ -176,8 +174,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
-	else if(!href_list["late_join"])
-		show_lobby_menu()
 
 	if(href_list["invalid_jobs"])
 		show_invalid_jobs = !show_invalid_jobs
@@ -211,7 +207,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		var/obj/S = job.get_roundstart_spawnpoint()
 		spawn_turf = get_turf(S)
 
-	if(!SSjobs.check_unsafe_spawn(src, spawn_turf))
+	if(!job.no_warn_unsafe && !SSjobs.check_unsafe_spawn(src, spawn_turf))
 		return
 
 	// Just in case someone stole our position while we were waiting for input from alert() proc
@@ -247,14 +243,12 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 	qdel(src)
 
-
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 	if (GAME_STATE == RUNLEVEL_GAME)
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
-		var/obj/item/radio/announcer = get_global_announcer()
-		announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
+		do_telecomms_announcement(character, "A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
@@ -276,49 +270,52 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	dat += "Choose from the following open/valid positions:<br>"
 	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Hide":"Show"] unavailable jobs</a><br>"
 	dat += "<table>"
-	dat += "<tr><td colspan = 3><b>[global.using_map.station_name]:</b></td></tr>"
-
-	// MAIN MAP JOBS
 	var/list/job_summaries = list()
 	var/list/hidden_reasons = list()
-	for(var/datum/job/job in SSjobs.primary_job_datums)
+	if(length(SSjobs.primary_job_datums))
+		dat += "<tr><td colspan = 3><b>[global.using_map.station_name]:</b></td></tr>"
 
-		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
-		if(summary)
+		// MAIN MAP JOBS
+		for(var/datum/job/job in SSjobs.primary_job_datums)
 
-			var/decl/department/dept = job.primary_department && SSjobs.get_department_by_type(job.primary_department)
-			var/summary_key = (dept || "No Department")
-			var/list/existing_summaries = job_summaries[summary_key]
-			if(!existing_summaries)
-				existing_summaries = list()
-				job_summaries[summary_key] = existing_summaries
-			if(job.head_position)
-				existing_summaries.Insert(1, summary)
+			var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
+			if(summary)
+
+				var/decl/department/dept = job.primary_department && SSjobs.get_department_by_type(job.primary_department)
+				var/summary_key = (dept || "No Department")
+				var/list/existing_summaries = job_summaries[summary_key]
+				if(!existing_summaries)
+					existing_summaries = list()
+					job_summaries[summary_key] = existing_summaries
+				if(job.head_position)
+					existing_summaries.Insert(1, summary)
+				else
+					existing_summaries.Add(summary)
 			else
-				existing_summaries.Add(summary)
-		else
-			for(var/raisin in job.get_unavailable_reasons(client))
-				hidden_reasons[raisin] = TRUE
+				for(var/raisin in job.get_unavailable_reasons(client))
+					hidden_reasons[raisin] = TRUE
 
-	var/added_job = FALSE
-	if(length(job_summaries))
-		job_summaries = sortTim(job_summaries, /proc/cmp_departments_dsc, FALSE)
-		for(var/job_category in job_summaries)
-			if(length(job_summaries[job_category]))
-				var/decl/department/job_dept = job_category
-				// TODO: use bgcolor='[job_dept.display_color]' when less pastel/bright colours are chosen.
-				dat += "<tr><td bgcolor='#333333' colspan = 3><b><font color = '#ffffff'><center>[istype(job_dept) ? job_dept.name : job_dept]</center></font></b></td></tr>"
-				dat += job_summaries[job_category]
-				added_job = TRUE
+		var/added_job = FALSE
+		if(length(job_summaries))
+			job_summaries = sortTim(job_summaries, /proc/cmp_departments_dsc, FALSE)
+			for(var/job_category in job_summaries)
+				if(length(job_summaries[job_category]))
+					var/decl/department/job_dept = job_category
+					// TODO: use bgcolor='[job_dept.display_color]' when less pastel/bright colours are chosen.
+					dat += "<tr><td bgcolor='#333333' colspan = 3><b><font color = '#ffffff'><center>[istype(job_dept) ? job_dept.name : job_dept]</center></font></b></td></tr>"
+					dat += job_summaries[job_category]
+					added_job = TRUE
 
-	if(!added_job)
-		dat += "<tr><td colspan = 3>No available positions.</td></tr>"
+		if(!added_job)
+			dat += "<tr><td colspan = 3>No available positions.</td></tr>"
 	// END MAIN MAP JOBS
 
 	// SUBMAP JOBS
-	for(var/thing in SSmapping.submaps)
-		var/datum/submap/submap = thing
-		if(submap && submap.available())
+	var/list/ordered_submaps = null
+	if(length(SSmapping.submaps))
+		ordered_submaps = sortTim(SSmapping.submaps.Copy(), /proc/cmp_submap_asc)
+	for(var/datum/submap/submap as anything in ordered_submaps)
+		if(submap?.available())
 			dat += "<tr><td colspan = 3><b>[submap.name] ([submap.archetype.descriptor]):</b></td></tr>"
 			job_summaries = list()
 			for(var/otherthing in submap.jobs)
@@ -333,7 +330,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			if(LAZYLEN(job_summaries))
 				dat += job_summaries
 			else
-				dat += "No available positions."
+				dat += "<tr><td colspan = 3>No available positions.</td></tr>"
 	// END SUBMAP JOBS
 
 	dat += "</table></center>"
@@ -370,10 +367,6 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			spawning = 0 //abort
 			return null
 		new_character = new(spawn_turf, chosen_species.name)
-		if(chosen_species.has_organ[BP_POSIBRAIN] && client && client.prefs.is_shackled)
-			var/obj/item/organ/internal/posibrain/B = new_character.get_organ(BP_POSIBRAIN, /obj/item/organ/internal/posibrain)
-			if(B)
-				B.shackle(client.prefs.get_lawset())
 
 	if(!new_character)
 		new_character = new(spawn_turf)
@@ -425,6 +418,8 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/proc/close_spawn_windows()
 	close_browser(src, "window=latechoices") //closes late choices window
 	close_browser(src, "window=preferences_window") //closes preferences window
+	if(client?.prefs)
+		client.prefs.close_load_dialog(src)
 	panel.close()
 
 /mob/new_player/proc/check_species_allowed(var/decl/species/S, var/show_alert=1)
@@ -452,7 +447,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	return
 
-/mob/new_player/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/new_player/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname, var/vsource)
 	return
 
 /mob/new_player/show_message(msg, type, alt, alt_type)

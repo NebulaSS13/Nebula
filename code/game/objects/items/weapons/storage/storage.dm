@@ -9,6 +9,8 @@
 	name = "storage"
 	icon = 'icons/obj/items/storage/box.dmi'
 	w_class = ITEM_SIZE_NORMAL
+	abstract_type = /obj/item/storage
+
 	var/list/can_hold = new/list() //List of objects which this item can store (if set, it can't store anything else)
 	var/list/cant_hold = new/list() //List of objects which this item can't store (in effect only if can_hold isn't set)
 
@@ -22,9 +24,6 @@
 	var/collection_mode = TRUE //FALSE = pick one at a time, TRUE = pick all on tile
 	var/use_sound = "rustle" //sound played when used. null for no sound.
 
-	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
-	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
-	var/list/startswith
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
 	var/opened = null
 	var/open_sound = null
@@ -45,25 +44,10 @@
 		if(istype(over, /obj/screen/inventory) && loc == user)
 			var/obj/screen/inventory/inv = over
 			add_fingerprint(usr)
-			if(user.unEquip(src))
+			if(user.try_unequip(src))
 				user.equip_to_slot_if_possible(src, inv.slot_id)
 				return TRUE
 	. = ..()
-
-/obj/item/storage/AltClick(mob/user)
-	if(!canremove)
-		return
-
-	if(!Adjacent(user))
-		return
-
-	if(!(ishuman(user) || isrobot(user) || issmall(user)))
-		return
-	
-	if(user.incapacitated(INCAPACITATION_DISRUPTED))
-		return
-	
-	open(user)
 
 /obj/item/storage/proc/return_inv()
 
@@ -73,10 +57,6 @@
 
 	for(var/obj/item/storage/S in src)
 		L += S.return_inv()
-	for(var/obj/item/gift/G in src)
-		L += G.gift
-		if (istype(G.gift, /obj/item/storage))
-			L += G.gift:return_inv()
 	return L
 
 /obj/item/storage/proc/show_to(mob/user)
@@ -150,7 +130,10 @@
 			return 0
 
 	//If attempting to lable the storage item, silently fail to allow it
-	if(istype(W, /obj/item/hand_labeler) && user && user.a_intent != I_HELP)
+	if(istype(W, /obj/item/hand_labeler) && user?.a_intent != I_HELP)
+		return FALSE
+	//Prevent package wrapper from being inserted by default
+	if(istype(W, /obj/item/stack/package_wrap) && user?.a_intent != I_HELP)
 		return FALSE
 
 	// Don't allow insertion of unsafed compressed matter implants
@@ -193,7 +176,7 @@
 		return 0
 	if(istype(W.loc, /mob))
 		var/mob/M = W.loc
-		if(!M.unEquip(W))
+		if(!M.try_unequip(W))
 			return
 	W.forceMove(src)
 	W.on_enter_storage(src)
@@ -204,7 +187,7 @@
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					to_chat(usr, "<span class='notice'>You put \the [W] into [src].</span>")
-				else if (M in range(1, src)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
+				else if (get_dist(src, M) <= 1) //If someone is standing close enough, they can tell what it is...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>", VISIBLE_MESSAGE)
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>", VISIBLE_MESSAGE)
@@ -281,24 +264,21 @@
 	return handle_item_insertion(W)
 
 /obj/item/storage/attack_hand(mob/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
-			H.put_in_hands(src)
-			H.l_store = null
-			return
-		if(H.r_store == src && !H.get_active_hand())
-			H.put_in_hands(src)
-			H.r_store = null
-			return
-
-	if (src.loc == user)
-		src.open(user)
-	else
-		..()
-		storage_ui.on_hand_attack(user)
-	src.add_fingerprint(user)
-	return
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	for(var/slot in global.pocket_slots)
+		var/obj/item/pocket = user.get_equipped_item(slot)
+		if(pocket == src && !user.get_active_hand()) //Prevents opening if it's in a pocket.
+			if(user.try_unequip(src))
+				user.put_in_hands(src)
+			return TRUE
+	if(loc == user)
+		open(user)
+		add_fingerprint(user)
+		return TRUE
+	. = ..()
+	storage_ui.on_hand_attack(user)
+	add_fingerprint(user)
 
 /obj/item/storage/attack_ghost(mob/user)
 	var/mob/observer/ghost/G = user
@@ -377,7 +357,7 @@
 
 	return FALSE
 
-/obj/item/storage/Initialize()
+/obj/item/storage/Initialize(ml, material_key)
 	. = ..()
 	if(allow_quick_empty)
 		verbs += /obj/item/storage/verb/quick_empty
@@ -395,18 +375,9 @@
 	storage_ui = new storage_ui(src)
 	prepare_ui()
 
-	if(startswith)
-		for(var/item_path in startswith)
-			var/list/data = startswith[item_path]
-			if(islist(data))
-				var/qty = data[1]
-				var/list/argsl = data.Copy()
-				argsl[1] = src
-				for(var/i in 1 to qty)
-					new item_path(arglist(argsl))
-			else
-				for(var/i in 1 to (isnull(data)? 1 : data))
-					new item_path(src)
+	var/list/will_contain = WillContain()
+	if(length(will_contain))
+		create_objects_in_loc(src, will_contain)
 		update_icon()
 
 /obj/item/storage/emp_act(severity)
@@ -423,6 +394,8 @@
 			return 1
 
 /obj/item/storage/proc/make_exact_fit()
+	if(length(contents) <= 0)
+		log_warning("[type] is calling make_exact_fit() while completely empty! This is likely a mistake.")
 	storage_slots = contents.len
 
 	can_hold.Cut()
@@ -472,3 +445,22 @@
 /obj/item/proc/get_storage_cost()
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
 	return BASE_STORAGE_COST(w_class)
+
+/obj/item/storage/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/storage_open)
+
+/decl/interaction_handler/storage_open
+	name = "Open Storage"
+	expected_target_type = /obj/item/storage
+	incapacitation_flags = INCAPACITATION_DISRUPTED
+
+/decl/interaction_handler/storage_open/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..() && (ishuman(user) || isrobot(user) || issmall(user))
+	if(.)
+		var/obj/item/storage/S = target
+		. = S.canremove
+
+/decl/interaction_handler/storage_open/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/storage/S = target
+	S.open(user)

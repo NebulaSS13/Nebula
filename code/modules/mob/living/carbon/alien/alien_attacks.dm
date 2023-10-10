@@ -14,13 +14,6 @@
 	if(!.)
 		var/damage = rand(1, 9)
 		if (prob(90))
-			if (MUTATION_HULK in user.mutations)
-				damage += 5
-				spawn(0)
-					SET_STATUS_MAX(src, STAT_PARA, 1)
-					step_away(src, user, 15)
-					sleep(3)
-					step_away(src, user, 15)
 			playsound(loc, "punch", 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"), 1)
 			if (damage > 4.9)

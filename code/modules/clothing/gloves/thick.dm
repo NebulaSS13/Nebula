@@ -13,12 +13,12 @@
 	icon_state = ICON_STATE_WORLD
 	force = 5
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_MINOR)
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_MINOR)
 	material = /decl/material/solid/leather
 
 /obj/item/clothing/gloves/thick/swat
@@ -36,14 +36,11 @@
 
 /obj/item/clothing/gloves/thick/botany
 	desc = "These work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/clothing/gloves/thick/botany/on_update_icon()
 	. = ..()
-	var/image/I = image(icon, "[icon_state]-botany_fingertips")
-	I.appearance_flags |= RESET_COLOR
-	overlays = list(I)
+	add_overlay(overlay_image(icon, "[icon_state]-botany_fingertips", flags = RESET_COLOR))
 
 /obj/item/clothing/gloves/thick/botany/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && slot == slot_gloves_str)
@@ -63,8 +60,7 @@
 	icon = 'icons/clothing/hands/gauntlets.dmi'
 	material = /decl/material/solid/metal/steel
 	material_armor_multiplier = 1
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/clothing/gloves/thick/craftable/set_material(var/new_material)
 	..()

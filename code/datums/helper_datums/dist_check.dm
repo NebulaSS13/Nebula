@@ -18,7 +18,7 @@
 /decl/dist_check/connected_z_level/within_dist(var/atom/a, var/atom/b)
 	var/turf/turf_a = get_turf(a)
 	var/turf/turf_b = get_turf(b)
-	return turf_a && turf_b && ARE_Z_CONNECTED(turf_a.z, turf_b.z)
+	return turf_a && turf_b && LEVELS_ARE_Z_CONNECTED(turf_a.z, turf_b.z)
 
 /decl/dist_check/omni/within_dist()
 	return TRUE

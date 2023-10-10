@@ -13,6 +13,8 @@
 	var/tag_air_alarm
 	var/list/dummy_terminals = list() // Internal use only; set id_tag on the dummy terminal to be added.
 	var/cycle_to_external_air = 0
+	var/tag_pump_out_external
+	var/tag_pump_out_internal
 
 /obj/machinery/embedded_controller/radio/airlock/modify_mapped_vars(map_hash)
 	..()
@@ -23,12 +25,13 @@
 	ADJUST_TAG_VAR(tag_exterior_sensor, map_hash)
 	ADJUST_TAG_VAR(tag_interior_sensor, map_hash)
 	ADJUST_TAG_VAR(tag_air_alarm, map_hash)
+	ADJUST_TAG_VAR(tag_pump_out_external, map_hash)
+	ADJUST_TAG_VAR(tag_pump_out_internal, map_hash)
 
 /obj/machinery/embedded_controller/radio/airlock/Destroy()
-	for(var/thing in dummy_terminals)
-		var/obj/machinery/dummy_airlock_controller/dummy = thing
-		dummy.master_controller = null
-	dummy_terminals.Cut()
+	for(var/obj/machinery/dummy_airlock_controller/terminal in dummy_terminals)
+		terminal.on_master_destroyed()
+	LAZYCLEARLIST(dummy_terminals)
 	return ..()
 
 /obj/machinery/embedded_controller/radio/airlock/CanUseTopic(var/mob/user)
@@ -37,9 +40,24 @@
 	else
 		return ..()
 
+/**Adds a dummy remote controller to our list of dummy controllers. */
+/obj/machinery/embedded_controller/radio/airlock/proc/add_remote_terminal(var/obj/machinery/dummy_airlock_controller/C)
+	LAZYADD(dummy_terminals, C)
+
+/**Removes a dummy remote controller from our list of dummy controllers. */
+/obj/machinery/embedded_controller/radio/airlock/proc/remove_remote_terminal(var/obj/machinery/dummy_airlock_controller/C)
+	LAZYREMOVE(dummy_terminals, C)
+
+/obj/machinery/embedded_controller/radio/airlock/on_update_icon()
+	. = ..()
+	//Make sure we keep our terminals updated
+	for(var/obj/machinery/dummy_airlock_controller/terminal in dummy_terminals)
+		terminal.update_icon()
+
 //Advanced airlock controller for when you want a more versatile airlock controller - useful for turning simple access control rooms into airlocks
 /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller
 	name = "Advanced Airlock Controller"
+	base_type = /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller
 
 /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]
@@ -55,7 +73,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "advanced_airlock_console.tmpl", name, 470, 290, state = state)
+		ui = new(user, src, ui_key, "advanced_airlock_console.tmpl", name, 470, 360, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -64,6 +82,7 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller
 	name = "Airlock Controller"
 	tag_secure = 1
+	base_type = /obj/machinery/embedded_controller/radio/airlock/airlock_controller
 
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]
@@ -77,16 +96,16 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "simple_airlock_console.tmpl", name, 470, 290, state = state)
+		ui = new(user, src, ui_key, "simple_airlock_console.tmpl", name, 470, 360, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
 //Access controller for door control - used in virology and the like
 /obj/machinery/embedded_controller/radio/airlock/access_controller
-	icon = 'icons/obj/airlock_machines.dmi'
 	name = "Access Controller"
 	tag_secure = 1
+	base_type = /obj/machinery/embedded_controller/radio/airlock/access_controller
 
 /obj/machinery/embedded_controller/radio/airlock/access_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]

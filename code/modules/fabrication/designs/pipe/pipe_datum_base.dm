@@ -1,5 +1,4 @@
 /datum/fabricator_recipe/pipe
-	var/pipe_type                       									//What sort of pipe this is. Used by disposals currently.
 	var/connect_types = CONNECT_TYPE_REGULAR								//what sort of connection this has
 	var/pipe_color = PIPE_COLOR_GREY										//what color the pipe should be by default
 	var/build_icon_state = "simple"											//Which icon state to use when creating a new pipe item.

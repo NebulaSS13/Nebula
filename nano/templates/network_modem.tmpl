@@ -1,0 +1,31 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	<div class="item">
+		{{:helper.link('Refresh', null, { "refresh" : 1 })}}
+	</div>
+{{else}}
+	<div class="itemLabel">
+		Network TAG:
+	</div>
+	<div class="itemContent">
+		{{:data.network_tag}}
+	</div>
+	<div class="item">
+		{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}
+	</div>
+	<h2>PLEXUS Features:</h2>
+	{{for data.features}}
+		<div class="item">
+			<div class="itemLabelWide">
+				{{:value.name}}
+			</div>
+			<div class="itemContentNarrow">
+				{{:helper.link(value.enabled ? "Enabled" : "Disabled", null, { "toggle_feature" : value.name })}}
+			</div>
+		</div>
+	{{/for}}
+	<br>
+	<i>EXONET Firmware v110.04.4h Copyright EXONETWORKS INC</i>
+{{/if}} 

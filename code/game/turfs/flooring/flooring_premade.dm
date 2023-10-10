@@ -162,15 +162,18 @@
 	icon_state = "cult"
 	initial_flooring = /decl/flooring/reinforced/cult
 
-/turf/simulated/floor/cult/cultify()
+/turf/simulated/floor/cult/on_defilement()
 	return
+
+/turf/simulated/floor/cult/is_defiled()
+	return TRUE
 
 //Tiled floor + sub-types
 
 /turf/simulated/floor/tiled
-	name = "steel floor"
+	name = "floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
-	icon_state = "steel"
+	icon_state = "tiled"
 	initial_flooring = /decl/flooring/tiling
 
 /turf/simulated/floor/tiled/dark
@@ -219,7 +222,7 @@
 
 /turf/simulated/floor/tiled/monofloor
 	name = "floor"
-	icon_state = "monofloor"
+	icon_state = "steel_monofloor"
 	initial_flooring = /decl/flooring/tiling/new_tile/monofloor
 
 /turf/simulated/floor/tiled/techfloor
@@ -260,7 +263,7 @@
 
 /turf/simulated/floor/tiled/stone
 	name = "stone slab floor"
-	icon_state = "stone_full"
+	icon_state = "stone"
 	initial_flooring = /decl/flooring/tiling/stone
 
 /turf/simulated/floor/tiled/techfloor/grid
@@ -342,12 +345,12 @@
 	name = "coastline"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "sandwater"
-	turf_flags = TURF_IS_WET
+	turf_flags = TURF_IS_WET | TURF_IS_HOLOMAP_PATH
 
 /turf/simulated/floor/beach/water
 	name = "water"
 	icon_state = "water"
-	turf_flags = TURF_IS_WET
+	turf_flags = TURF_IS_WET | TURF_IS_HOLOMAP_PATH
 
 /turf/simulated/floor/beach/water/is_flooded(lying_mob, absolute)
 	. = absolute ? ..() : lying_mob
@@ -383,3 +386,9 @@
 	icon = 'icons/turf/flooring/pool.dmi'
 	icon_state = "pool"
 	initial_flooring = /decl/flooring/pool
+
+/turf/simulated/floor/pool/deep
+	name = "deep pool floor"
+	icon = 'icons/turf/flooring/pool.dmi'
+	icon_state = "pool"
+	initial_flooring = /decl/flooring/pool/deep

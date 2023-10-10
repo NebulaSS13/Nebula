@@ -1,4 +1,4 @@
-/client/proc/spawn_chemdisp_cartridge(size in list("small", "medium", "large"), reagent in subtypesof(/decl/material))
+/client/proc/spawn_chemdisp_cartridge(size in list("small", "medium", "large"), reagent in decls_repository.get_decl_paths_of_subtype(/decl/material))
 	set name = "Spawn Chemical Dispenser Cartridge"
 	set category = "Admin"
 

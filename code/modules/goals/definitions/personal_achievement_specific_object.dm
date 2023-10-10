@@ -45,7 +45,7 @@
 	completion_message = "Ahh, that hit the spot!"
 
 /datum/goal/achievement/specific_object/drink/New()
-	possible_objects = subtypesof(/decl/material/liquid/drink)
+	possible_objects = decls_repository.get_decl_paths_of_subtype(/decl/material/liquid/drink)
 	..()
 
 /datum/goal/achievement/specific_object/drink/update_strings()

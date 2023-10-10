@@ -33,14 +33,14 @@
 		origin_tech = null
 
 /obj/item/implantcase/on_update_icon()
+	. = ..()
 	if (imp)
 		icon_state = "implantcase-[imp.implant_color]"
 	else
 		icon_state = "implantcase-0"
-	return
 
 /obj/item/implantcase/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/pen))
+	if (IS_PEN(I))
 		var/t = input(user, "What would you like the label to be?", src.name, null)
 		if (user.get_active_hand() != I)
 			return
@@ -69,7 +69,7 @@
 		update_description()
 		update_icon()
 		M.update_icon()
-	else if (istype(I, /obj/item/implant) && user.unEquip(I, src))
+	else if (istype(I, /obj/item/implant) && user.try_unequip(I, src))
 		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
 		imp = I
 		update_description()

@@ -6,7 +6,6 @@ Buildable meters
 /obj/item/pipe
 	name = "pipe"
 	desc = "A pipe."
-	var/pipename
 	var/connect_types = CONNECT_TYPE_REGULAR
 	force = 7
 	icon = 'icons/obj/pipe-item.dmi'
@@ -17,6 +16,7 @@ Buildable meters
 	level = 2
 	obj_flags = OBJ_FLAG_ROTATABLE
 	dir = SOUTH
+	material = /decl/material/solid/metal/steel
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden
 	var/pipe_class = PIPE_CLASS_BINARY
 	var/rotate_class = PIPE_ROTATE_STANDARD
@@ -45,7 +45,7 @@ Buildable meters
 /obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)
 	if(!proximity) return
 	if(istype(target))
-		user.unEquip(src, target)
+		user.try_unequip(src, target)
 	else
 		return ..()
 
@@ -72,7 +72,7 @@ Buildable meters
 	return rotate(user)
 
 /obj/item/pipe/attackby(var/obj/item/W, var/mob/user)
-	if(!isWrench(W))
+	if(!IS_WRENCH(W))
 		return ..()
 	if (!isturf(loc))
 		return 1
@@ -110,6 +110,7 @@ Buildable meters
 	qdel(src)	// remove the pipe item
 
 /obj/item/machine_chassis
+	material = /decl/material/solid/metal/steel
 	var/build_type
 
 /obj/item/machine_chassis/Initialize()
@@ -122,7 +123,7 @@ Buildable meters
 		to_chat(user, "Use a wrench to secure \the [src] here.")
 
 /obj/item/machine_chassis/attackby(var/obj/item/W, var/mob/user)
-	if(!isWrench(W))
+	if(!IS_WRENCH(W))
 		return ..()
 	var/obj/machinery/machine = new build_type(get_turf(src), dir, TRUE)
 	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
@@ -153,9 +154,6 @@ Buildable meters
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_LARGE
 	build_type = /obj/machinery/meter
-
-/obj/item/machine_chassis/pipe_meter/base
-	build_type = /obj/machinery/meter/buildable
 
 /obj/item/machine_chassis/igniter
 	name = "igniter"

@@ -193,7 +193,7 @@
 /turf/simulated/floor/tiled/white,
 /area/example/second)
 "oi" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_rack/oxygen,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/example/second)
@@ -328,7 +328,9 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/second)
 "ug" = (
-/obj/abstract/level_data/main_level,
+/obj/abstract/level_data_spawner/main_level{
+	name = "Example Second Deck";
+},
 /turf/space,
 /area/space)
 "uk" = (
@@ -653,9 +655,9 @@
 /area/turbolift/example/second)
 "Xm" = (
 /obj/structure/iv_drip,
-/obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/ominus,
+/obj/item/chems/ivbag/blood/ominus,
+/obj/item/chems/ivbag/blood/ominus,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/example/second)

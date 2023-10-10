@@ -3,6 +3,7 @@
 	var/lit_heat = 1000
 	var/waterproof = FALSE
 	var/lit = 0
+	material = /decl/material/solid/wood
 
 /obj/item/flame/afterattack(var/obj/O, var/mob/user, proximity)
 	..()
@@ -11,12 +12,15 @@
 
 /obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
 	lit = 0
-	damtype = "brute"
+	damtype = BRUTE
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/flame/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!waterproof && lit)
+	if(!QDELETED(src) && fluids?.total_volume && !waterproof && lit)
+		var/turf/location = get_turf(src)
+		if(location)
+			location.hotspot_expose(700, 5) // Potentially set fire to fuel etc.
 		extinguish(no_message = TRUE)
 
 /obj/item/flame/get_heat()
@@ -71,7 +75,7 @@
 	update_icon()
 
 /obj/item/flame/match/on_update_icon()
-	..()
+	. = ..()
 	if(burnt)
 		icon_state = "[get_world_inventory_state()]_burnt"
 	else if(lit)

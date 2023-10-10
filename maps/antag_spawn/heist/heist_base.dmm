@@ -136,7 +136,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "ax" = (
-/obj/item/radio/intercom/raider{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -227,7 +227,7 @@
 "aK" = (
 /obj/structure/bed,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/sign/monkey_painting{
+/obj/structure/sign/painting/monkey_painting{
 	pixel_x = -28;
 	pixel_y = 4
 	},
@@ -335,7 +335,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aV" = (
-/obj/item/radio/intercom/raider{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -446,8 +446,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bg" = (
-/obj/structure/sign/warning/nosmoking_1{
-	desc = "A warning sign which reads 'NO SMOKING'. Someone has scratched a variety of crude words in gutter across the entire sign.";
+/obj/structure/sign/warning/nosmoking_1/heist{
 	pixel_y = 32
 	},
 /obj/item/storage/fancy/cigarettes/dromedaryco,
@@ -491,7 +490,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	dir = 4;
 	pixel_x = -28
 	},
@@ -549,7 +548,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "br" = (
-/obj/item/radio/intercom/raider{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -639,7 +638,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bD" = (
-/obj/item/radio/intercom/raider{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -855,8 +854,8 @@
 /area/map_template/syndicate_mothership/raider_base)
 "cd" = (
 /obj/machinery/vending/cigarette{
-	markup = 0;
 	name = "hacked cigarette machine";
+	markup = 0;
 	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/unsimulated/floor{
@@ -898,7 +897,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "cj" = (
 /mob/living/simple_animal/hostile/retaliate/parrot{
-	ears = list();
 	name = "\proper Meatbag";
 	speak = list("Yaaar!","Squaaak!","Fight me Matey!","BAWWWWK Vox trying to eat me!")
 	},
@@ -913,7 +911,7 @@
 /area/space)
 "cl" = (
 /obj/random/junk,
-/obj/item/radio/intercom/raider{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -922,7 +920,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "cm" = (
-/obj/item/radio/intercom/raider{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -1013,7 +1011,7 @@
 "cy" = (
 /obj/machinery/button/access/shuttle/exterior{
 	id_tag = "raider_west_control";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_RAIDER")
 	},
 /obj/effect/paint/black,
 /turf/simulated/wall/raidershuttle,
@@ -1160,7 +1158,7 @@
 	id_tag = "skipjack_shuttle";
 	pixel_x = -25;
 	pixel_y = 8;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_RAIDER")
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -1224,7 +1222,7 @@
 /obj/machinery/button/access/shuttle/interior{
 	id_tag = "raider_west_control";
 	pixel_x = -22;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_RAIDER")
 	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
@@ -1336,7 +1334,7 @@
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_RAIDER")
 	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
@@ -1459,7 +1457,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dD" = (
-/obj/machinery/suit_cycler/syndicate{
+/obj/machinery/suit_cycler/nonstandard/raider{
 	locked = 0
 	},
 /turf/simulated/floor/shuttle/red,
@@ -1822,12 +1820,55 @@
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "eI" = (
-/obj/machinery/telecomms/allinone{
-	intercept = 1
-	},
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
+	},
+/area/map_template/syndicate_mothership/raider_base)
+"jf" = (
+/obj/machinery/network/acl{
+	initial_network_id = "piratenet";
+	req_access = list("ACCESS_RAIDER")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership/raider_base)
+"pE" = (
+/obj/machinery/network/mainframe{
+	initial_network_id = "piratenet";
+	req_access = list("ACCESS_RAIDER")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership/raider_base)
+"FL" = (
+/obj/machinery/network/relay/long_range{
+	initial_network_id = "piratenet";
+	req_access = list("ACCESS_RAIDER")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/skipjack_station/start)
+"PS" = (
+/obj/machinery/network/telecomms_hub/raider,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership/raider_base)
+"SM" = (
+/obj/machinery/network/router{
+	initial_network_id = "piratenet";
+	req_access = list("ACCESS_RAIDER")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership/raider_base)
+"VB" = (
+/obj/machinery/computer/message_monitor,
+/turf/unsimulated/floor{
+	icon_state = "dark"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 
@@ -3863,10 +3904,10 @@ aa
 ab
 ab
 ab
-ab
-ab
-ab
-ad
+ae
+ae
+ae
+ae
 an
 an
 ae
@@ -3935,10 +3976,10 @@ aa
 ab
 ab
 ab
-ad
-ad
-ad
-ad
+ae
+jf
+VB
+ae
 aj
 an
 aD
@@ -4007,9 +4048,9 @@ aa
 ab
 ab
 ab
-ab
-af
-aj
+ae
+pE
+an
 an
 an
 an
@@ -4079,10 +4120,10 @@ aa
 aa
 ab
 ab
-ab
-ab
-ab
-aj
+ae
+SM
+PS
+ae
 an
 an
 ae
@@ -4898,7 +4939,7 @@ cR
 dh
 dm
 dm
-dF
+FL
 cR
 cR
 cR
@@ -4970,7 +5011,7 @@ cR
 di
 dr
 dx
-dm
+dF
 dP
 ed
 cw

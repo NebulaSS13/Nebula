@@ -32,7 +32,7 @@ var/global/list/carp_count = list() // a list of Z levels (string), associated w
 		announcement = "A massive migration of unknown biological entities has been detected in the vicinity of the [location_name()]. Exercise external operations with caution."
 	else
 		announcement = "A large migration of unknown biological entities has been detected in the vicinity of the [location_name()]. Caution is advised."
-	
+
 	command_announcement.Announce(announcement, "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/carp_migration/tick()
@@ -66,7 +66,7 @@ var/global/list/carp_count = list() // a list of Z levels (string), associated w
 				I += 3
 			events_repository.register(/decl/observ/death, M,src,/datum/event/carp_migration/proc/reduce_carp_count)
 			events_repository.register(/decl/observ/destroyed, M,src,/datum/event/carp_migration/proc/reduce_carp_count)
-			LAZYADD(global.carp_count["[Z]"], M)
+			LAZYADD(global.carp_count[num2text(Z)], M)
 			spawned_carp ++
 			M.throw_at(get_random_edge_turf(global.reverse_dir[direction],TRANSITIONEDGE + 2, Z), 250, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
 		I++
@@ -93,7 +93,7 @@ var/global/list/carp_count = list() // a list of Z levels (string), associated w
 
 /datum/event/carp_migration/proc/reduce_carp_count(var/mob/M)
 	for(var/Z in affecting_z)
-		var/list/L = global.carp_count["[Z]"]
+		var/list/L = global.carp_count[num2text(Z)]
 		if(M in L)
 			LAZYREMOVE(L,M)
 			break

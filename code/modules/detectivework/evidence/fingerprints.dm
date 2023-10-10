@@ -19,8 +19,8 @@
 			return
 	..()
 
-/datum/forensics/fingerprints/copy()
-	var/datum/forensics/fingerprints/F = new()
+/datum/forensics/fingerprints/PopulateClone(datum/clone)
+	var/datum/forensics/fingerprints/F = ..()
 	for(var/datum/fingerprint/print in data)
 		F.add_data(print.copy())
 	return F
@@ -36,7 +36,7 @@
 
 /datum/forensics/fingerprints/spot_message(mob/detective, atom/location)
 	to_chat(detective, SPAN_NOTICE("You notice a partial print on \the [location]."))
-	
+
 // Single (possibly partial) fingerprint
 /datum/fingerprint
 	var/full_print
@@ -71,14 +71,14 @@
 	if(!M.skill_check(SKILL_FORENSICS, SKILL_BASIC))
 		extra_crispy = 10
 
-	completeness = Clamp(rand(10, 70) + extra_crispy, 0, 100)
+	completeness = clamp(rand(10, 70) + extra_crispy, 0, 100)
 
 /datum/fingerprint/proc/merge(datum/fingerprint/other)
 	if(full_print != other.full_print)
 		return
 	if(completeness >= 100)
 		return TRUE
-	completeness = Clamp(max(completeness, other.completeness) + 0.2 * min(completeness, other.completeness), 0, 100)
+	completeness = clamp(max(completeness, other.completeness) + 0.2 * min(completeness, other.completeness), 0, 100)
 	return TRUE
 
 // Mob fingerprint getters

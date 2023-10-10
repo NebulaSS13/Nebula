@@ -91,6 +91,10 @@
 	agony = 30
 	embed = 0
 
+/obj/item/projectile/bullet/pistol/rubber/strong
+	damage = 8
+	agony = 38
+
 /obj/item/projectile/bullet/pistol/rubber/holdout
 	agony = 20
 

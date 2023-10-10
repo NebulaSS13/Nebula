@@ -28,10 +28,11 @@
 /obj/item/clothing/gloves/mob_can_equip(mob/M, slot, disable_warning = 0, force = 0)
 	var/obj/item/clothing/ring/check_ring
 	var/mob/living/carbon/human/H = M
-	if(slot == slot_gloves_str && istype(H) && H.gloves)
-		check_ring = H.gloves
-		if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !H.unEquip(check_ring, src))
-			to_chat(M, SPAN_WARNING("You are unable to wear \the [src] as \the [H.gloves] are in the way."))
+	var/obj/item/gloves = M.get_equipped_item(slot_gloves_str)
+	if(slot == slot_gloves_str && istype(H) && gloves)
+		check_ring = gloves
+		if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !H.try_unequip(check_ring, src))
+			to_chat(M, SPAN_WARNING("You are unable to wear \the [src] as \the [gloves] are in the way."))
 			return FALSE
 	. = ..()
 	if(check_ring)
@@ -49,9 +50,10 @@
 	. = ..()
 	if(covering_ring)
 		var/mob/living/carbon/human/H = loc
-		if(istype(H) && H.gloves != src)
+		if(istype(H) && H.get_equipped_item(slot_gloves_str) != src)
 			H.equip_to_slot_if_possible(covering_ring, slot_gloves_str, disable_warning = TRUE)
-		if(!istype(H) || (H.gloves != src && H.gloves != covering_ring))
+		var/obj/item/gloves = H.get_equipped_item(slot_gloves_str)
+		if(!istype(H) || (gloves != src && gloves != covering_ring))
 			covering_ring.dropInto(get_turf(src))
 			covering_ring = null
 
@@ -61,6 +63,6 @@
 	if(covering_ring)
 		if(istype(H))
 			H.equip_to_slot_if_possible(covering_ring, slot_gloves_str, disable_warning = TRUE)
-		if(!istype(H) || H.gloves != covering_ring)
+		if(!istype(H) || H.get_equipped_item(slot_gloves_str) != covering_ring)
 			covering_ring.dropInto(loc)
 		covering_ring = null

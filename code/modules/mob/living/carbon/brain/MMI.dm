@@ -44,7 +44,7 @@
 		else if(!B.brainmob || !B.can_use_mmi)
 			to_chat(user, "<span class='notice'>This brain is completely useless to you.</span>")
 			return
-		if(!user.unEquip(O, src))
+		if(!user.try_unequip(O, src))
 			return
 		user.visible_message("<span class='notice'>\The [user] sticks \a [O] into \the [src].</span>")
 
@@ -115,6 +115,9 @@
 	update_icon()
 	locked = 1
 
+/obj/item/mmi/preserve_in_cryopod(obj/machinery/cryopod/pod)
+	return brainmob && brainmob.client && brainmob.key
+
 /obj/item/mmi/relaymove(var/mob/user, var/direction)
 	if(user.incapacitated(INCAPACITATION_KNOCKOUT))
 		return
@@ -182,4 +185,5 @@
 	..()
 
 /obj/item/mmi/on_update_icon()
+	. = ..()
 	icon_state = brainmob ? "mmi_full" : "mmi_empty"

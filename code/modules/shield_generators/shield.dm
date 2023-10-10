@@ -316,7 +316,7 @@
 
 // Small visual effect, makes the shield tiles brighten up by becoming more opaque for a moment, and spreads to nearby shields.
 /obj/effect/shield/proc/impact_effect(var/i, var/list/affected_shields = list())
-	i = between(1, i, 10)
+	i = clamp(1, i, 10)
 	alpha = 255
 	animate(src, alpha = initial(alpha), time = 1 SECOND)
 	affected_shields |= src
@@ -334,4 +334,4 @@
 
 /obj/effect/shield/attack_hand(var/mob/user)
 	impact_effect(3) // Harmless, but still produces the 'impact' effect.
-	..()
+	return ..()

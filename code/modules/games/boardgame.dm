@@ -3,6 +3,7 @@
 	desc = "A standard 16\" checkerboard. Well used." //Goddamn imperial system.
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "board"
+	material = /decl/material/solid/wood
 
 	var/num = 0
 	var/board_icons = list()
@@ -19,8 +20,8 @@
 /obj/item/board/attack_hand(mob/M)
 	if(M.machine == src)
 		return ..()
-	else
-		M.examinate(src)
+	M.examinate(src)
+	return TRUE
 
 /obj/item/board/attackby(obj/item/I, mob/user)
 	if(!addPiece(I,user))
@@ -38,7 +39,7 @@
 		return 0
 	if(!user.Adjacent(src))
 		return 0
-	if(!user.unEquip(I, src))
+	if(!user.try_unequip(I, src))
 		return 0
 	num++
 

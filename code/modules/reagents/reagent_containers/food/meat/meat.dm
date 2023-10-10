@@ -8,7 +8,7 @@
 	center_of_mass = @"{'x':17,'y':20}"
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/rawcutlet/Initialize()
+/obj/item/chems/food/rawcutlet/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 
@@ -21,7 +21,7 @@
 	center_of_mass = @"{'x':17,'y':20}"
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/cutlet/Initialize()
+/obj/item/chems/food/cutlet/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
@@ -34,7 +34,7 @@
 	center_of_mass = @"{'x':16,'y':15}"
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/rawmeatball/Initialize()
+/obj/item/chems/food/rawmeatball/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
@@ -47,7 +47,7 @@
 	bitesize = 2
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/meatball/Initialize()
+/obj/item/chems/food/meatball/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
@@ -63,7 +63,7 @@
 	bitesize = 3
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/plainsteak/Initialize()
+/obj/item/chems/food/plainsteak/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
@@ -77,11 +77,11 @@
 	bitesize = 3
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/meatsteak/Initialize()
+/obj/item/chems/food/meatsteak/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
-	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride,     1)
+	reagents.add_reagent(/decl/material/solid/blackpepper,        1)
 
 /obj/item/chems/food/meatsteak/synthetic
 	name = "meaty steak"
@@ -99,9 +99,9 @@
 	bitesize = 3
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/loadedsteak/Initialize()
+/obj/item/chems/food/loadedsteak/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,     2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/garlicsauce, 2)
 
 /obj/item/chems/food/tomatomeat
@@ -123,10 +123,10 @@
 	bitesize = 3
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/bearmeat/Initialize()
+/obj/item/chems/food/bearmeat/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 12)
-	reagents.add_reagent(/decl/material/liquid/amphetamines, 5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein,     12)
+	reagents.add_reagent(/decl/material/liquid/amphetamines,           5)
 
 /obj/item/chems/food/spider
 	name = "giant spider leg"
@@ -137,7 +137,7 @@
 	bitesize = 3
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/spider/Initialize()
+/obj/item/chems/food/spider/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 9)
 
@@ -156,10 +156,10 @@
 	bitesize = 6
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/xenomeat/Initialize()
+/obj/item/chems/food/xenomeat/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
-	reagents.add_reagent(/decl/material/liquid/acid/polyacid,6)
+	reagents.add_reagent(/decl/material/liquid/acid/polyacid,     6)
 
 /obj/item/chems/food/sausage
 	name = "sausage"
@@ -171,7 +171,7 @@
 	bitesize = 2
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/sausage/Initialize()
+/obj/item/chems/food/sausage/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
@@ -184,7 +184,7 @@
 	bitesize = 2
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/fatsausage/Initialize()
+/obj/item/chems/food/fatsausage/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
@@ -197,10 +197,10 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 3
 
-/obj/item/chems/food/organ/Initialize()
+/obj/item/chems/food/organ/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, rand(3,5))
-	reagents.add_reagent(/decl/material/liquid/bromide, rand(1,3))
+	reagents.add_reagent(/decl/material/liquid/bromide,           rand(1,3)) //lolwat?
 
 /obj/item/chems/food/meatkabob
 	name = "meat-kabob"
@@ -211,6 +211,6 @@
 	center_of_mass = @"{'x':17,'y':15}"
 	bitesize = 2
 
-/obj/item/chems/food/meatkabob/Initialize()
+/obj/item/chems/food/meatkabob/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)

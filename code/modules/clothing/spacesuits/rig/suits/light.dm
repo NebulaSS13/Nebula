@@ -6,11 +6,11 @@
 	icon = 'icons/clothing/rigs/rig_light.dmi'
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/cell)
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.4
 	emp_protection = 10
@@ -45,7 +45,7 @@
 	suit_type = "cyber"
 	desc = "An advanced powered armour suit with many cyberwarfare enhancements. Comes with built-in insulated gloves for safely tampering with electronics."
 	icon = 'icons/clothing/rigs/rig_hacker.dmi'
-	req_access = list(access_syndicate)
+	req_access = list(access_hacked)
 	airtight = 0
 	seal_delay = 5 //not being vaccum-proof has an upside I guess
 
@@ -87,12 +87,12 @@
 	suit_type = "ominous"
 	icon = 'icons/clothing/rigs/rig_ninja.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED
 		)
 	siemens_coefficient = 0.2 //heavy hardsuit level shock protection
 	emp_protection = 40 //change this to 30 if too high.
@@ -105,7 +105,7 @@
 	gloves = /obj/item/clothing/gloves/rig/light/ninja
 	cell =   /obj/item/cell/hyper
 
-	req_access = list(access_syndicate)
+	req_access = list(access_ninja)
 
 	initial_modules = list(
 		/obj/item/rig_module/teleporter,
@@ -170,7 +170,7 @@
 	name = "stealth suit control module"
 	suit_type = "stealth"
 	desc = "A highly advanced and expensive suit designed for covert operations."
-	req_access = list(access_syndicate)
+	req_access = list(access_hacked)
 	initial_modules = list(
 		/obj/item/rig_module/stealth_field,
 		/obj/item/rig_module/vision

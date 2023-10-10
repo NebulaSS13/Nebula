@@ -10,6 +10,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 32 //The sum of the w_classes of all the items in this storage item.
 	req_access = list(access_armory)
+	material = /decl/material/solid/metal/stainlesssteel
 	var/locked = 1
 	var/broken = 0
 	var/icon_locked = "lockbox+l"
@@ -76,18 +77,16 @@
 	name = "lockbox of loyalty implants"
 	req_access = list(access_security)
 
-/obj/item/storage/lockbox/loyalty/Initialize()
-	. = ..()
-	new /obj/item/implantcase/loyalty(src)
-	new /obj/item/implantcase/loyalty(src)
-	new /obj/item/implantcase/loyalty(src)
-	new /obj/item/implanter/loyalty(src)
+/obj/item/storage/lockbox/loyalty/WillContain()
+	return list(
+		/obj/item/implantcase/loyalty = 3,
+		/obj/item/implanter/loyalty
+	)
 
 /obj/item/storage/lockbox/clusterbang
 	name = "lockbox of clusterbangs"
 	desc = "You have a bad feeling about opening this."
 	req_access = list(access_security)
 
-/obj/item/storage/lockbox/clusterbang/Initialize()
-	. = ..()
-	new /obj/item/grenade/flashbang/clusterbang(src)
+/obj/item/storage/lockbox/clusterbang/WillContain()
+	return list(/obj/item/grenade/flashbang/clusterbang)

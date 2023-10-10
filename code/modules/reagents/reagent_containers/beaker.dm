@@ -6,31 +6,30 @@
 	icon_state = ICON_STATE_WORLD
 	center_of_mass = @"{'x':15,'y':10}"
 	material = /decl/material/solid/glass
-	applies_material_name = TRUE
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	material_force_multiplier = 0.25
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	var/lid_color = COLOR_BEASTY_BROWN
 
-/obj/item/chems/glass/beaker/Initialize()
+/obj/item/chems/glass/beaker/examine(mob/user, distance)
 	. = ..()
-	desc += " It can hold up to [volume] units."
+	to_chat(user, " It can hold up to [volume] units.")
 
-/obj/item/chems/glass/beaker/pickup(mob/user)
-	..()
+/obj/item/chems/glass/beaker/on_picked_up(mob/user)
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/beaker/dropped(mob/user)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/beaker/attack_hand()
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/chems/glass/beaker/on_update_icon()
-	..()
+	. = ..()
 	cut_overlays()
 
 	if(reagents?.total_volume)
@@ -64,8 +63,7 @@
 	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		reagents.splash(hit_atom, rand(reagents.total_volume*0.25,reagents.total_volume), min_spill = 60, max_spill = 100)
-	health -= rand(4,8)
-	check_health()
+	take_damage(rand(4,8))
 
 /obj/item/chems/glass/beaker/large
 	name = "large beaker"
@@ -99,10 +97,9 @@
 	volume = 60
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/metal/steel
-	applies_material_name = FALSE
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	origin_tech = "{'materials':2}"
 	lid_color = COLOR_PALE_BLUE_GRAY
 
@@ -115,8 +112,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
 	material_force_multiplier = 2.5
-	applies_material_colour = FALSE
-	applies_material_name = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
@@ -138,7 +134,7 @@
 
 /obj/item/chems/glass/beaker/vial/throw_impact(atom/hit_atom)
 	. = ..()
-	if(material.is_brittle())
+	if(material?.is_brittle())
 		shatter()
 
 /obj/item/chems/glass/beaker/insulated
@@ -149,12 +145,10 @@
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
-	show_reagent_name = TRUE
-	applies_material_colour = FALSE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	temperature_coefficient = 1
 	material = /decl/material/solid/metal/steel
-	applies_material_name = FALSE
-	applies_material_colour = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	lid_color = COLOR_GRAY40
 
 /obj/item/chems/glass/beaker/insulated/large
@@ -164,7 +158,5 @@
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	volume = 120
 
-/obj/item/chems/glass/beaker/sulphuric/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/acid, 60)
-	update_icon()
+/obj/item/chems/glass/beaker/sulphuric/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/acid, reagents.maximum_volume)

@@ -17,12 +17,37 @@
 /turf/unsimulated/map/edge
 	opacity = TRUE
 
+///Turf to hide the outside of the overmap
+/turf/unsimulated/dark_filler
+	name = "out of sight"
+	icon = 'icons/turf/space.dmi'
+	icon_state = "black"
+	permit_ao = FALSE
+	dynamic_lighting = FALSE
+	opacity = TRUE
+	density = TRUE
+
+///Turf with its map coordinate written on. Handy for debugging.
+/turf/unsimulated/debug_grid
+	name             = "grid"
+	icon             = 'icons/turf/space.dmi'
+	icon_state       = "black"
+	permit_ao        = FALSE
+	dynamic_lighting = FALSE
+
+/turf/unsimulated/debug_grid/Initialize(var/ml)
+	. = ..(ml)
+	name           = "[initial(name)]-[x],[y]"
+	maptext        = STYLE_SMALLFONTS("[x],[y]", 6, "green")
+	maptext_width  = 32
+	maptext_height = 16
+
 /turf/unsimulated/map/Initialize(var/ml)
 	. = ..(ml)
 	name = "[x]-[y]"
 	var/list/numbers = list()
 
-	var/datum/overmap/overmap = global.overmaps_by_z["[z]"]
+	var/datum/overmap/overmap = global.overmaps_by_z[num2text(z)]
 	if(x == 1 || x == overmap.map_size_x)
 		numbers += list("[round(y/10)]","[round(y%10)]")
 		if(y == 1 || y == overmap.map_size_y)

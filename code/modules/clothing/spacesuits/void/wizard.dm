@@ -5,13 +5,13 @@
 	icon = 'icons/clothing/spacesuit/void/wizard/helmet.dmi'
 	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.7
 	wizard_garb = 1
@@ -23,13 +23,13 @@
 	w_class = ITEM_SIZE_LARGE //normally voidsuits are bulky but this one is magic I suppose
 	unacidable = 1
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.7
 	wizard_garb = 1
@@ -55,12 +55,12 @@
 	permeability_coefficient = 0.02
 	unacidable = 1
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.7

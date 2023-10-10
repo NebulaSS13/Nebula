@@ -25,6 +25,6 @@
 		MA.layer = FLOAT_LAYER
 		MA.plane = FLOAT_PLANE
 		// Revisit this on 514, alpha filters are behaving strangely on 513
-		//MA.filters = filter(type="alpha", render_source="slime_\ref[src]", flags=MASK_INVERSE) 
+		//MA.add_filter("slime_mask", 1, list("alpha", render_source="slime_\ref[src]", flags=MASK_INVERSE))
 		LAZYADD(new_underlays, MA)
 	underlays = new_underlays

@@ -67,7 +67,9 @@
 /obj/item/storage/box/secret_project_disks
 	name = "box of classified data disks"
 	desc = "A box full of disks. Marked with a red 'Top Secret' label. Looks rather ominous."
-	startswith = list(/obj/item/disk/secret_project = 5)
 
-/obj/item/storage/box/secret_project_disks/science
-	startswith = list(/obj/item/disk/secret_project/science = 5)
+/obj/item/storage/box/secret_project_disks/WillContain()
+	return list(/obj/item/disk/secret_project = 5)
+
+/obj/item/storage/box/secret_project_disks/science/WillContain()
+	return list(/obj/item/disk/secret_project/science = 5)

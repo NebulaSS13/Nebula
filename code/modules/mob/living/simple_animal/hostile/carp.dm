@@ -11,7 +11,6 @@
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite
 	pry_time = 10 SECONDS
-	melee_damage_flags = DAM_SHARP
 	pry_desc = "biting"
 
 	//Space carp aren't affected by atmos.

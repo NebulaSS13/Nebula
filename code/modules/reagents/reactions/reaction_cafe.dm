@@ -1,5 +1,6 @@
 /decl/chemical_reaction/recipe/cafe
 	hidden_from_codex = FALSE
+	abstract_type = /decl/chemical_reaction/recipe/cafe
 
 /decl/chemical_reaction/recipe/cafe/coffee
 	name = "Brewed Coffee"

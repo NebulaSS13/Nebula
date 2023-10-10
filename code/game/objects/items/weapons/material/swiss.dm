@@ -16,8 +16,7 @@
 	valid_handle_colors = null
 	max_force = 5
 	material = /decl/material/solid/metal/steel
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 	var/active_tool = SWISSKNF_CLOSED
 	var/can_use_tools = FALSE
@@ -108,7 +107,7 @@
 /obj/item/knife/folding/swiss/on_update_icon()
 	..()
 	if(active_tool != null)
-		overlays += overlay_image(icon, active_tool)
+		add_overlay(overlay_image(icon, active_tool, flags = RESET_COLOR))
 
 /obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart)
 	. = (active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE) ? ..() : new /image

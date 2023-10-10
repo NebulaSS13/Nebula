@@ -13,6 +13,12 @@
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = "{'biotech':4,'powerstorage':2}"
 	action_button_name = "Remove/Replace Paddles"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon      = MATTER_AMOUNT_TRACE,
+	)
 
 	var/obj/item/shockpaddles/linked/paddles
 	var/obj/item/cell/bcell = null
@@ -36,7 +42,7 @@
 	bcell = /obj/item/cell/apc
 
 /obj/item/defibrillator/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(paddles) //in case paddles got destroyed somehow.
 		if(paddles.loc == src)
 			add_overlay("[icon_state]-paddles")
@@ -62,16 +68,16 @@
 	toggle_paddles()
 
 /obj/item/defibrillator/attack_hand(mob/user)
-	if(loc == user)
-		toggle_paddles()
-	else
-		..()
+	if(loc != user || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	toggle_paddles()
+	return TRUE
 
 // what is this proc doing?
 /obj/item/defibrillator/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(ismob(loc))
 		var/mob/M = loc
-		if(M.unEquip(src))
+		if(M.try_unequip(src))
 			add_fingerprint(usr)
 			M.put_in_hands(src)
 			return TRUE
@@ -84,14 +90,14 @@
 		if(bcell)
 			to_chat(user, "<span class='notice'>\the [src] already has a cell.</span>")
 		else
-			if(!user.unEquip(W))
+			if(!user.try_unequip(W))
 				return
 			W.forceMove(src)
 			bcell = W
 			to_chat(user, "<span class='notice'>You install a cell in \the [src].</span>")
 			update_icon()
 
-	else if(isScrewdriver(W))
+	else if(IS_SCREWDRIVER(W))
 		if(bcell)
 			bcell.update_icon()
 			bcell.dropInto(loc)
@@ -196,6 +202,9 @@
 	force = 2
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_SECONDARY, /decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 	var/safety = 1 //if you can zap people with the paddles on harm mode
 	var/combat = 0 //If it can be used to revive people wearing thick clothing (e.g. spacesuits)
@@ -231,7 +240,7 @@
 	..()
 
 /obj/item/shockpaddles/on_update_icon()
-	cut_overlay()
+	. = ..()
 	if(cooldown)
 		add_overlay("[icon_state]-cooldown")
 
@@ -263,8 +272,9 @@
 
 /obj/item/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
 	if(!combat)
-		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
-			if((cloth.body_parts_covered & SLOT_UPPER_BODY) && (cloth.item_flags & ITEM_FLAG_THICKMATERIAL))
+		for(var/slot in list(slot_wear_suit_str, slot_w_uniform_str))
+			var/obj/item/clothing/cloth = H.get_equipped_item(slot)
+			if(istype(cloth) && (cloth.body_parts_covered & SLOT_UPPER_BODY) && (cloth.item_flags & ITEM_FLAG_THICKMATERIAL))
 				return FALSE
 	return TRUE
 
@@ -453,7 +463,7 @@
 	var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 	if(!brain) return //no brain
 
-	var/brain_damage = Clamp((deadtime - DEFIB_TIME_LOSS)/(DEFIB_TIME_LIMIT - DEFIB_TIME_LOSS)*brain.max_damage, H.getBrainLoss(), brain.max_damage)
+	var/brain_damage = clamp((deadtime - DEFIB_TIME_LOSS)/(DEFIB_TIME_LIMIT - DEFIB_TIME_LOSS)*brain.max_damage, H.getBrainLoss(), brain.max_damage)
 	H.setBrainLoss(brain_damage)
 
 /obj/item/shockpaddles/proc/make_announcement(var/message, var/msg_class)

@@ -32,7 +32,7 @@
 	if(.)
 		.["species"] = .["species"] || global.using_map.default_species
 
-/decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
+/decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	var/list/data = REAGENT_DATA(reagents, type)
 	if(LAZYACCESS(newdata, "trace_chem"))
 		var/list/other_chems = LAZYACCESS(newdata, "trace_chem")
@@ -59,10 +59,10 @@
 		blood_splatter(T, src, 1)
 	else if(isalien(W))
 		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, holder.my_atom, 1)
-		if(B)
+		if(!QDELETED(B))
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
-/decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 	if(LAZYACCESS(M.chem_doses, type) > 5)
@@ -70,13 +70,13 @@
 	if(LAZYACCESS(M.chem_doses, type) > 15)
 		M.adjustToxLoss(removed)
 
-/decl/material/liquid/blood/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/blood/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return
 
-/decl/material/liquid/blood/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/blood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/volume = REAGENT_VOLUME(holder, type)
 		var/mob/living/carbon/H = M

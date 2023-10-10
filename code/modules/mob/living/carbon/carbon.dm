@@ -36,10 +36,6 @@
 		return
 
 	if(stat != DEAD)
-
-		if((MUTATION_FAT in src.mutations) && (move_intent.flags & MOVE_INTENT_EXERTIVE) && src.bodytemperature <= 360)
-			bodytemperature += 2
-
 		var/nut_removed = DEFAULT_HUNGER_FACTOR/10
 		var/hyd_removed = DEFAULT_THIRST_FACTOR/10
 		if (move_intent.flags & MOVE_INTENT_EXERTIVE)
@@ -53,26 +49,24 @@
 		germ_level++
 
 /mob/living/carbon/relaymove(var/mob/living/user, direction)
-	if((user in contents) && istype(user))
-		if(user.last_special <= world.time)
-			user.last_special = world.time + 50
-			src.visible_message("<span class='danger'>You hear something rumbling inside [src]'s stomach...</span>")
-			var/obj/item/I = user.get_active_hand()
-			if(I && I.force)
-				var/d = rand(round(I.force / 4), I.force)
-				if(istype(src, /mob/living/carbon/human))
-					var/mob/living/carbon/human/H = src
-					var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(H, BP_CHEST)
-					if (istype(organ))
-						organ.take_external_damage(d, 0)
-					H.updatehealth()
-				else
-					src.take_organ_damage(d)
-				user.visible_message("<span class='danger'>[user] attacks [src]'s stomach wall with the [I.name]!</span>")
-				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
-
-				if(prob(src.getBruteLoss() - 50))
-					gib()
+	if(!istype(user) || !(user in contents) || user.is_on_special_ability_cooldown())
+		return
+	user.set_special_ability_cooldown(5 SECONDS)
+	visible_message(SPAN_DANGER("You hear something rumbling inside [src]'s stomach..."))
+	var/obj/item/I = user.get_active_hand()
+	if(!I?.force)
+		return
+	var/d = rand(round(I.force / 4), I.force)
+	visible_message(SPAN_DANGER("\The [user] attacks [src]'s stomach wall with \the [I]!"))
+	playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
+	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, BP_CHEST)
+	if(istype(organ))
+		organ.take_external_damage(d, 0)
+		updatehealth()
+	else
+		take_organ_damage(d)
+	if(prob(getBruteLoss() - 50))
+		gib()
 
 /mob/living/carbon/gib(anim="gibbed-m",do_gibs)
 	for(var/mob/M in contents)
@@ -165,13 +159,12 @@
 				t_him = "him"
 			else if (src.gender == FEMALE)
 				t_him = "her"
-			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
-				var/mob/living/carbon/human/H = src
-				H.w_uniform.add_fingerprint(M)
 
-			var/show_ssd
-			var/mob/living/carbon/human/H = src
-			if(istype(H)) show_ssd = H.species.show_ssd
+			var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
+			if(uniform)
+				uniform.add_fingerprint(M)
+
+			var/show_ssd = get_species_name()
 			if(show_ssd && ssd_check())
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
@@ -235,7 +228,7 @@
 		var/obj/item/I = item
 		itemsize = I.w_class
 
-	if(!unEquip(item))
+	if(!try_unequip(item, play_dropsound = FALSE))
 		return
 	if(!item || !isturf(item.loc))
 		return
@@ -274,25 +267,14 @@
 	bodytemperature += temp_inc
 
 /mob/living/carbon/can_use_hands()
-	if(handcuffed)
+	if(get_equipped_item(slot_handcuffed_str))
 		return 0
 	if(buckled && ! istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
 		return 0
 	return 1
 
 /mob/living/carbon/restrained()
-	if (handcuffed)
-		return 1
-	return
-
-/mob/living/carbon/u_equip(obj/item/W)
-	. = ..()
-	if(!. && W == handcuffed)
-		handcuffed = null
-		update_inv_handcuffed()
-		if(buckled && buckled.buckle_require_restraints)
-			buckled.unbuckle_mob()
-		return TRUE
+	return get_equipped_item(slot_handcuffed_str)
 
 /mob/living/carbon/verb/mob_sleep()
 	set name = "Sleep"
@@ -312,44 +294,6 @@
 		playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
 		. = TRUE
-
-/mob/living/carbon/get_default_language()
-	. = ..()
-	if(. && !can_speak(.))
-		. = null
-
-/mob/living/carbon/get_any_good_language(set_default=FALSE)
-	. = ..()
-	if(!.)
-		for (var/decl/language/L in languages)
-			if(can_speak(L))
-				. = L
-				if (set_default)
-					set_default_language(.)
-				break
-
-/mob/living/carbon/show_inv(mob/user)
-	user.set_machine(src)
-	var/dat = {"
-	<B><HR><FONT size=3>[name]</FONT></B>
-	<BR><HR>
-	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>"}
-
-	for(var/bp in held_item_slots)
-		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, bp)
-		if(E)
-			var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-			dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
-
-	dat += {"<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
-	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
-	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
-	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
-	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
-	<BR>"}
-	show_browser(user, dat, text("window=mob[];size=325x500", name))
-	onclose(user, "mob[name]")
-	return
 
 /**
  *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour
@@ -394,42 +338,40 @@
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
 
+/mob/living/carbon/get_max_nutrition()
+	return 400
+
+/mob/living/carbon/get_max_hydration()
+	return 400
+
 /mob/living/carbon/proc/set_nutrition(var/amt)
-	nutrition = Clamp(amt, 0, initial(nutrition))
+	nutrition = clamp(amt, 0, get_max_nutrition())
+
+/mob/living/carbon/get_nutrition(var/amt)
+	return nutrition
 
 /mob/living/carbon/adjust_nutrition(var/amt)
 	set_nutrition(nutrition + amt)
 
+/mob/living/carbon/get_hydration(var/amt)
+	return hydration
+
 /mob/living/carbon/proc/set_hydration(var/amt)
-	hydration = Clamp(amt, 0, initial(hydration))
+	hydration = clamp(amt, 0, get_max_hydration())
 
 /mob/living/carbon/adjust_hydration(var/amt)
 	set_hydration(hydration + amt)
-
-/mob/living/carbon/proc/set_internals(obj/item/tank/source, source_string)
-	var/old_internal = internal
-
-	internal = source
-
-	if(!old_internal && internal)
-		if(!source_string)
-			source_string = source.name
-		to_chat(src, "<span class='notice'>You are now running on internals from \the [source_string].</span>")
-		playsound(src, 'sound/effects/internals.ogg', 50, 0)
-	if(old_internal && !internal)
-		to_chat(src, "<span class='warning'>You are no longer running on internals.</span>")
-	if(internals)
-		internals.icon_state = "internal[!!internal]"
 
 /mob/living/carbon/has_dexterity(var/dex_level)
 	. = ..() && (species.get_manual_dexterity() >= dex_level)
 
 /mob/living/carbon/fluid_act(var/datum/reagents/fluids)
+	..()
+	if(QDELETED(src) || !fluids?.total_volume || !touching)
+		return
 	var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching.total_volume)
 	if(saturation > 0)
 		fluids.trans_to_holder(touching, saturation)
-	if(fluids.total_volume)
-		..()
 
 /mob/living/carbon/get_species()
 	return species
@@ -446,73 +388,25 @@
 /mob/living/carbon/get_admin_job_string()
 	return "Carbon-based"
 
-/mob/living/carbon/proc/get_possible_internals_sources()
-	. = list("back" = list(back, "on"))
+/mob/living/carbon/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
 
-/mob/living/carbon/proc/breathing_hole_covered()
-	. = (wear_mask && (wear_mask?.item_flags & ITEM_FLAG_AIRTIGHT))
+	var/safety = eyecheck()
+	if(safety >= FLASH_PROTECTION_MODERATE || flash_strength <= 0) // May be modified by human proc.
+		return FALSE
 
-/mob/living/carbon/ui_toggle_internals()
+	flash_eyes(FLASH_PROTECTION_MODERATE - safety)
+	SET_STATUS_MAX(src, STAT_STUN, (flash_strength / 2))
+	SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)
+	SET_STATUS_MAX(src, STAT_CONFUSE, (flash_strength + 2))
+	if(flash_strength > 3)
+		drop_held_items()
+	if(flash_strength > 5)
+		SET_STATUS_MAX(src, STAT_WEAK, 2)
 
-	if(incapacitated())
-		return
+/mob/living/carbon/verb/showoff()
+	set name = "Show Held Item"
+	set category = "Object"
 
-	if(internal)
-		set_internals(null)
-		return
-
-	if(!breathing_hole_covered())
-		to_chat(src, SPAN_WARNING("You are not wearing a suitable mask or helmet."))
-		return
-
-	set_internals_to_best_available_tank()
-
-	if(!internal)
-		to_chat(src, SPAN_WARNING("You don't have a tank that is usable as internals."))
-
-
-/mob/living/carbon/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
-
-	if(!ispath(breathes_gas))
-		return
-
-	var/list/possible_sources = get_possible_internals_sources()
-	for(var/slot in held_item_slots)
-		var/obj/item/tank/checking = get_equipped_item(slot)
-		if(istype(checking))
-			possible_sources[slot] = list(checking, "in")
-
-	var/selected_slot
-	var/selected_from
-	var/obj/item/tank/selected_obj
-	var/decl/material/breathing_gas = GET_DECL(breathes_gas)
-	for(var/slot_name in possible_sources)
-		var/list/checking_data = possible_sources[slot_name]
-		if(length(checking_data) < 2)
-			continue
-		var/obj/item/tank/checking = checking_data[1]
-		if(!istype(checking) || !checking.air_contents?.gas)
-			continue
-
-		var/valid_tank = (checking.manipulated_by && checking.manipulated_by != real_name && findtext(checking.desc, breathing_gas.name))
-		if(!valid_tank)
-			if(!checking.air_contents.gas[breathes_gas])
-				continue
-			var/is_poison = FALSE
-			for(var/poison in poison_gas)
-				if(checking.air_contents.gas[poison])
-					is_poison = TRUE
-					break
-			if(!is_poison)
-				valid_tank = TRUE
-
-		if(valid_tank && (!selected_obj || selected_obj.air_contents.gas[breathes_gas] <  checking.air_contents.gas[breathes_gas]))
-			selected_obj =  checking
-			selected_slot = slot_name
-			selected_from = checking_data[2]
-
-	if(selected_obj)
-		if(selected_slot && selected_from)
-			set_internals(selected_obj, "\the [selected_obj] [selected_from] your [selected_slot]")
-		else
-			set_internals(selected_obj, "\the [selected_obj]")
+	var/obj/item/I = get_active_hand()
+	if(I && I.simulated)
+		I.showoff(src)

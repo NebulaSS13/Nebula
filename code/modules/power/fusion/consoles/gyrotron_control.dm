@@ -25,7 +25,7 @@
 			if(!new_val)
 				to_chat(user, SPAN_WARNING("That's not a valid number."))
 				return TOPIC_NOACTION
-			G.mega_energy = Clamp(new_val, 1, 50)
+			G.mega_energy = clamp(new_val, 1, 50)
 			G.change_power_consumption(G.mega_energy * 1500, POWER_USE_ACTIVE)
 			return TOPIC_REFRESH
 
@@ -36,7 +36,7 @@
 			if(!new_val)
 				to_chat(user, SPAN_WARNING("That's not a valid number."))
 				return TOPIC_NOACTION
-			G.rate = Clamp(new_val, 2, 10)
+			G.rate = clamp(new_val, 2, 10)
 			return TOPIC_REFRESH
 
 		if(href_list["toggle"])
@@ -54,7 +54,7 @@
 			var/list/gyrotron = list()
 			var/obj/machinery/emitter/gyrotron/G = lan_gyrotrons[i]
 			gyrotron["id"] =        "#[i]"
-			gyrotron["ref"] =       "\ref[G]" 
+			gyrotron["ref"] =       "\ref[G]"
 			gyrotron["active"] =    G.active
 			gyrotron["firedelay"] = G.rate
 			gyrotron["energy"] = G.mega_energy

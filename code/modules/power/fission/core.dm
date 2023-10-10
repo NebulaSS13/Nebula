@@ -33,7 +33,7 @@
 	var/last_message            // Time of the last damage warning message.
 	var/damage = 0
 	var/melted_down = FALSE
-	
+
 	// Diagnostics
 	var/last_neutron_flux_increase = 0
 	var/last_neutron_flux_decrease = 0
@@ -144,7 +144,7 @@
 
 							for(var/byproduct_type in mat.absorption_products)
 								fr.matter[byproduct_type] += removed * mat.absorption_products[byproduct_type]
-						
+
 						var/d_neutron_flux = mat.neutron_absorption*removed
 						neutron_flux -= d_neutron_flux
 						last_neutron_flux_decrease += d_neutron_flux
@@ -160,7 +160,7 @@
 
 	// Neutron energy must pass a threshold for there to be danger of radiation.
 	if(neutron_energy >= MIN_RADIATION_ENERGY)
-		var/radiation_power = Clamp(old_neutron_energy/1000 * old_neutron_flux/1000, 0, 40)
+		var/radiation_power = clamp(old_neutron_energy/1000 * old_neutron_flux/1000, 0, 40)
 		SSradiation.radiate(src, round(radiation_power))
 
 	// Control rods reduces neutron flux by 1/5th at full depth.
@@ -191,7 +191,7 @@
 	SSradiation.radiate(src, total_radioactivity)
 
 	// Determine how powerful the explosion produced by the reactor will be. A larger explosion can be achieved by heating the reactor up very quickly.
-	var/temperature = Clamp(air_contents.temperature, 1000, 7500)
+	var/temperature = clamp(air_contents.temperature, 1000, 7500)
 	explosion(get_turf(src), temperature/1500, temperature/750, temperature/500, temperature/500)
 	qdel(src)
 
@@ -199,7 +199,7 @@
 	return neutron_flux >= ACTIVE_THRESHOLD
 
 /obj/machinery/atmospherics/unary/fission_core/attackby(var/obj/item/W, var/mob/user)
-	if(isMultitool(W))
+	if(IS_MULTITOOL(W))
 		var/datum/extension/local_network_member/fission = get_extension(src, /datum/extension/local_network_member)
 		fission.get_new_tag(user)
 		return
@@ -208,12 +208,12 @@
 	if(check_active())
 		to_chat(user, SPAN_WARNING("You cannot do that while \the [src] is active!"))
 		return
-	
+
 	if(istype(W, /obj/item/fuel_assembly))
 		if(length(fuel_rods) >= MAX_RODS)
 			to_chat(user, SPAN_WARNING("\The [src] is full!"))
 			return
-		if(!user.unEquip(W, src))
+		if(!user.try_unequip(W, src))
 			return
 		fuel_rods[W] = FALSE // Rod is not exposed to begin with.
 		visible_message(SPAN_NOTICE("\The [user] inserts \a [W] into \the [src]."), SPAN_NOTICE("You insert \a [W] into \the [src]."))
@@ -225,14 +225,14 @@
 		visible_message("\The [src] flashes an 'Insufficient Power' error.")
 		return
 	use_power_oneoff(5 KILOWATTS)
-	
+
 	neutron_flux = JUMPED_FLUX
 	neutron_energy = JUMPED_ENERGY
 
 /obj/machinery/atmospherics/unary/fission_core/proc/adjust_control_rods(var/new_depth)
 	if(stat & (BROKEN|NOPOWER))
 		return
-	new_depth = Clamp(new_depth, 0, 1)
+	new_depth = clamp(new_depth, 0, 1)
 	control_rod_depth = new_depth
 
 /obj/machinery/atmospherics/unary/fission_core/proc/toggle_rod_exposure(var/rod)
@@ -243,7 +243,7 @@
 	var/obj/item/fuel_assembly/fr = fuel_rods[rod]
 	if(fuel_rods[fr] && check_active())
 		return FALSE
-	
+
 	fuel_rods[fr] = !fuel_rods[fr]
 	return TRUE
 

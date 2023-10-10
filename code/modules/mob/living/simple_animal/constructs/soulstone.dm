@@ -6,19 +6,17 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
 	origin_tech = "{'wormholes':4,'materials':4}"
-
+	material = /decl/material/solid/gemstone/crystal
 	var/full = SOULSTONE_EMPTY
 	var/is_evil = 1
 	var/mob/living/simple_animal/shade = null
-	var/smashing = 0
-	var/soulstatus = null
 
 /obj/item/soulstone/Initialize(var/mapload)
 	shade = new /mob/living/simple_animal/shade(src)
 	. = ..(mapload)
 
 /obj/item/soulstone/on_update_icon()
-	cut_overlays()
+	. = ..()
 	if(full == SOULSTONE_ESSENCE)
 		add_overlay("[icon_state]-glow")
 	else if(full == SOULSTONE_CRACKED)

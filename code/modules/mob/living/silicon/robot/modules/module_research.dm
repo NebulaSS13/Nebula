@@ -24,7 +24,7 @@
 		/obj/item/crowbar,
 		/obj/item/scalpel/laser/advanced,
 		/obj/item/circular_saw,
-		/obj/item/extinguisher/mini,
+		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/chems/syringe,
 		/obj/item/gripper/chemistry,
 		/obj/item/stack/nanopaste

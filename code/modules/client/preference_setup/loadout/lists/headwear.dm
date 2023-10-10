@@ -1,9 +1,10 @@
 /decl/loadout_category/head
 	name = "Headwear"
-	
+
 /decl/loadout_option/head
 	slot = slot_head_str
 	category = /decl/loadout_category/head
+	abstract_type = /decl/loadout_option/head
 
 /decl/loadout_option/head/beret
 	name = "beret, colour select"
@@ -69,7 +70,7 @@
 		"yellow pin" = /obj/item/clothing/head/hairflower/yellow
 	)
 
-/decl/loadout_option/hardhat
+/decl/loadout_option/head/hardhat
 	name = "hardhat selection"
 	path = /obj/item/clothing/head/hardhat
 	cost = 2
@@ -146,6 +147,6 @@
 	name = "headphones"
 	path = /obj/item/clothing/head/headphones
 
-/decl/loadout_option/balaclava
+/decl/loadout_option/head/balaclava
 	name = "balaclava"
 	path = /obj/item/clothing/mask/balaclava

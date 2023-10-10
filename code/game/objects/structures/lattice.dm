@@ -9,7 +9,7 @@
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
 	material = /decl/material/solid/metal/steel
-	obj_flags = OBJ_FLAG_NOFALL
+	obj_flags = OBJ_FLAG_NOFALL | OBJ_FLAG_MOVES_UNSUPPORTED
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 /obj/structure/lattice/Initialize()
@@ -26,6 +26,9 @@
 /obj/structure/lattice/LateInitialize()
 	. = ..()
 	update_neighbors()
+
+/obj/structure/lattice/can_climb_from_below(var/mob/climber)
+	return TRUE
 
 /obj/structure/lattice/update_material_desc()
 	if(material)
@@ -62,9 +65,9 @@
 		var/turf/T = get_turf(src)
 		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
-	if(isWelder(C))
+	if(IS_WELDER(C))
 		var/obj/item/weldingtool/WT = C
-		if(WT.remove_fuel(0, user))
+		if(WT.weld(0, user))
 			deconstruct(user)
 		return
 	if(istype(C, /obj/item/gun/energy/plasmacutter))
@@ -99,7 +102,7 @@
 		if(locate(/obj/structure/lattice, T) || locate(/obj/structure/catwalk, T))
 			dir_sum += direction
 		else
-			var/turf/O = get_step(src, direction) 
+			var/turf/O = get_step(src, direction)
 			if(!istype(O) || !O.is_open())
 				dir_sum += direction
 	icon_state = "lattice[dir_sum]"

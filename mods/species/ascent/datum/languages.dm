@@ -13,8 +13,7 @@
 	machine_understands = FALSE
 	var/list/correct_mouthbits = list(
 		SPECIES_MANTID_ALATE,
-		SPECIES_MANTID_GYNE,
-		SPECIES_SERPENTID
+		SPECIES_MANTID_GYNE
 	)
 
 /decl/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
@@ -57,7 +56,7 @@
 	shorthand = "KNV"
 
 #define MANTID_SCRAMBLE_CACHE_LEN 20
-/decl/language/mantid/nonvocal/scramble(var/input)
+/decl/language/mantid/nonvocal/scramble(mob/living/speaker, input, list/known_languages)
 	if(input in scramble_cache)
 		var/n = scramble_cache[input]
 		scramble_cache -= input

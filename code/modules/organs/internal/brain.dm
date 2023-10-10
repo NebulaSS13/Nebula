@@ -3,7 +3,6 @@
 	desc = "A piece of juicy meat found in a person's head."
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
-	vital = 1
 	icon_state = "brain2"
 	force = 1.0
 	w_class = ITEM_SIZE_SMALL
@@ -15,31 +14,13 @@
 	relative_size = 85
 	damage_reduction = 0
 	scale_max_damage_to_species_health = FALSE
-
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
-	var/const/damage_threshold_count = 10
-	var/damage_threshold_value
-	var/healed_threshold = 1
+	var/should_announce_brain_damage = TRUE
 	var/oxygen_reserve = 6
-
-/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	replace_self_with(/obj/item/organ/internal/posibrain)
-
-/obj/item/organ/internal/brain/mechassist()
-	replace_self_with(/obj/item/organ/internal/mmi_holder)
 
 /obj/item/organ/internal/brain/getToxLoss()
 	return 0
-
-/obj/item/organ/internal/brain/proc/replace_self_with(replace_path)
-	var/mob/living/carbon/human/tmp_owner = owner
-	owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE)
-	qdel(src)
-	if(tmp_owner)
-		var/obj/item/organ/org = new replace_path(tmp_owner, null, dna)
-		tmp_owner.add_organ(org, GET_EXTERNAL_ORGAN(tmp_owner, org.parent_organ), TRUE, TRUE)
-		tmp_owner = null
 
 /obj/item/organ/internal/brain/set_species(species_name)
 	. = ..()
@@ -47,10 +28,6 @@
 		set_max_damage(species.total_health)
 	else
 		set_max_damage(200)
-
-/obj/item/organ/internal/brain/set_max_damage(var/ndamage)
-	..()
-	damage_threshold_value = round(max_damage / damage_threshold_count)
 
 /obj/item/organ/internal/brain/Destroy()
 	QDEL_NULL(brainmob)
@@ -108,15 +85,9 @@
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD
 
-/obj/item/organ/internal/brain/proc/get_current_damage_threshold()
-	return round(damage / damage_threshold_value)
-
-/obj/item/organ/internal/brain/proc/past_damage_threshold(var/threshold)
-	return (get_current_damage_threshold() > threshold)
-
-/obj/item/organ/internal/brain/proc/handle_severe_brain_damage()
+/obj/item/organ/internal/brain/proc/handle_severe_damage()
 	set waitfor = FALSE
-	healed_threshold = 0
+	should_announce_brain_damage = FALSE
 	to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
 	sleep(5 SECONDS)
 	if(!owner)
@@ -128,16 +99,19 @@
 	to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
 	alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 
+/obj/item/organ/internal/brain/organ_can_heal()
+	return (damage && GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN)) || ..()
+
+/obj/item/organ/internal/brain/get_organ_heal_amount()
+	return 1
+
 /obj/item/organ/internal/brain/Process()
 	if(owner)
-		if(damage > max_damage / 2 && healed_threshold)
-			handle_severe_brain_damage()
 
 		if(damage < (max_damage / 4))
-			healed_threshold = 1
+			should_announce_brain_damage = TRUE
 
 		handle_disabilities()
-		handle_damage_effects()
 
 		// Brain damage from low oxygenation or lack of blood.
 		if(owner.should_have_organ(BP_HEART))
@@ -151,48 +125,44 @@
 				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
 			if(!oxygen_reserve) //(hardcrit)
 				SET_STATUS_MAX(owner, STAT_PARA, 3)
-			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN) || (!past_damage_threshold(3) && GET_CHEMICAL_EFFECT(owner, CE_STABLE)))
-			var/damprob
-			//Effects of bloodloss
-			var/stability_effect = GET_CHEMICAL_EFFECT(owner, CE_STABLE)
-			switch(blood_volume)
 
-				if(BLOOD_VOLUME_SAFE to INFINITY)
-					if(can_heal)
-						damage = max(damage-1, 0)
-				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-					if(prob(1))
-						to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
-					damprob = stability_effect ? 30 : 60
-					if(!past_damage_threshold(2) && prob(damprob))
-						take_internal_damage(1)
-				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
-					damprob = stability_effect ? 40 : 80
-					if(!past_damage_threshold(4) && prob(damprob))
-						take_internal_damage(1)
-					if(!HAS_STATUS(owner, STAT_PARA) && prob(10))
-						SET_STATUS_MAX(owner, STAT_PARA, rand(1,3))
-						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
-				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
-					damprob = stability_effect ? 60 : 100
-					if(!past_damage_threshold(6) && prob(damprob))
-						take_internal_damage(1)
-					if(!HAS_STATUS(owner, STAT_PARA) && prob(15))
-						SET_STATUS_MAX(owner, STAT_PARA, rand(3,5))
-						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
-				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
-					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
-					damprob = stability_effect ? 80 : 100
-					if(prob(damprob))
-						take_internal_damage(1)
-					if(prob(damprob))
-						take_internal_damage(1)
+			//Effects of bloodloss
+			if(blood_volume < BLOOD_VOLUME_SAFE)
+				var/damprob
+				var/stability_effect = GET_CHEMICAL_EFFECT(owner, CE_STABLE)
+				switch(blood_volume)
+					if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+						if(prob(1))
+							to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
+						damprob = stability_effect ? 30 : 60
+						if(!past_damage_threshold(2) && prob(damprob))
+							take_internal_damage(1)
+					if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
+						damprob = stability_effect ? 40 : 80
+						if(!past_damage_threshold(4) && prob(damprob))
+							take_internal_damage(1)
+						if(!HAS_STATUS(owner, STAT_PARA) && prob(10))
+							SET_STATUS_MAX(owner, STAT_PARA, rand(1,3))
+							to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
+					if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
+						damprob = stability_effect ? 60 : 100
+						if(!past_damage_threshold(6) && prob(damprob))
+							take_internal_damage(1)
+						if(!HAS_STATUS(owner, STAT_PARA) && prob(15))
+							SET_STATUS_MAX(owner, STAT_PARA, rand(3,5))
+							to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
+					if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
+						SET_STATUS_MAX(owner, STAT_BLURRY, 6)
+						damprob = stability_effect ? 80 : 100
+						if(prob(damprob))
+							take_internal_damage(1)
+						if(prob(damprob))
+							take_internal_damage(1)
 	..()
 
 /obj/item/organ/internal/brain/take_internal_damage(var/damage, var/silent)
-	set waitfor = 0
 	..()
 	if(damage >= 10) //This probably won't be triggered by oxyloss or mercury. Probably.
 		var/damage_secondary = damage * 0.20
@@ -225,10 +195,14 @@
 	else if((owner.disabilities & NERVOUS) && prob(10))
 		SET_STATUS_MAX(owner, STAT_STUTTER, 10)
 
-/obj/item/organ/internal/brain/proc/handle_damage_effects()
-	if(owner.stat)
-		return
-	if(damage > 0 && prob(1))
+
+/obj/item/organ/internal/brain/handle_damage_effects()
+	..()
+
+	if(damage >= round(max_damage / 2) && should_announce_brain_damage)
+		handle_severe_damage()
+
+	if(!BP_IS_PROSTHETIC(src) && prob(1))
 		owner.custom_pain("Your head feels numb and painful.",10)
 	if(is_bruised() && prob(1) && !HAS_STATUS(owner, STAT_BLURRY))
 		to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")
@@ -236,7 +210,7 @@
 	var/held = owner.get_active_hand()
 	if(damage >= 0.5*max_damage && prob(1) && held)
 		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
-		owner.unEquip(held)
+		owner.try_unequip(held)
 	if(damage >= 0.6*max_damage)
 		SET_STATUS_MAX(owner, STAT_SLUR, 2)
 	if(is_broken())

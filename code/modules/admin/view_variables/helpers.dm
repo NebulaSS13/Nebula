@@ -20,12 +20,12 @@
 		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
 		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
 		<br>
-		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brute'>[getBruteLoss()]</a>
-		FIRE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=fire'>[getFireLoss()]</a>
-		TOXIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=toxin'>[getToxLoss()]</a>
-		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=oxygen'>[getOxyLoss()]</a>
-		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=clone'>[getCloneLoss()]</a>
-		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brain'>[getBrainLoss()]</a>
+		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BRUTE]'>[getBruteLoss()]</a>
+		FIRE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BURN]'>[getFireLoss()]</a>
+		TOXIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[TOX]'>[getToxLoss()]</a>
+		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[OXY]'>[getOxyLoss()]</a>
+		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[CLONE]'>[getCloneLoss()]</a>
+		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=[BP_BRAIN]'>[getBrainLoss()]</a>
 		</font>
 		"}
 
@@ -40,9 +40,6 @@
 		<option value='?_src_=vars;give_spell=\ref[src]'>Give Spell</option>
 		<option value='?_src_=vars;godmode=\ref[src]'>Toggle Godmode</option>
 		<option value='?_src_=vars;build_mode=\ref[src]'>Toggle Build Mode</option>
-
-		<option value='?_src_=vars;ninja=\ref[src]'>Make Space Ninja</option>
-		<option value='?_src_=vars;make_skeleton=\ref[src]'>Make 2spooky</option>
 
 		<option value='?_src_=vars;direct_control=\ref[src]'>Assume Direct Control</option>
 		<option value='?_src_=vars;drop_everything=\ref[src]'>Drop Everything</option>
@@ -67,6 +64,8 @@
 	return ..() + {"
 		<option value='?_src_=vars;addaura=\ref[src]'>Add Aura</option>
 		<option value='?_src_=vars;removeaura=\ref[src]'>Remove Aura</option>
+		<option value='?_src_=vars;addstressor=\ref[src]'>Add Stressor</option>
+		<option value='?_src_=vars;removestressor=\ref[src]'>Remove Stressor</option>
 		"}
 
 /mob/living/carbon/human/get_view_variables_options()
@@ -88,6 +87,11 @@
 		<option value='?_src_=vars;delall=\ref[src]'>Delete all of type</option>
 		<option value='?_src_=vars;explode=\ref[src]'>Trigger explosion</option>
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
+		"}
+
+/obj/item/get_view_variables_options()
+	return ..() + {"
+		<option value='?_src_=vars;setmaterial=\ref[src]'>Set material</option>
 		"}
 
 /turf/get_view_variables_options()
@@ -141,7 +145,7 @@
 
 // The following vars cannot be edited by anyone
 /datum/proc/VV_static()
-	return list("parent_type")
+	return list("parent_type", "gc_destroyed", "is_processing")
 
 /atom/VV_static()
 	return ..() + list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "step_x", "step_y", "step_size")

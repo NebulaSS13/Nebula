@@ -29,7 +29,7 @@
 	SStrade.trade_hubs -= src
 	QDEL_NULL_LIST(traders)
 	. = ..()
-	
+
 /datum/trade_hub/proc/get_possible_initial_trader_types()
 	return subtypesof(/datum/trader) - typesof(/datum/trader/ship)
 
@@ -52,7 +52,7 @@
 /datum/trade_hub/proc/add_trader(var/trader_type)
 	traders += new trader_type(src)
 
-/datum/trade_hub/Process(var/resumed)
+/datum/trade_hub/Process(wait, tick)
 	for(var/datum/trader/trader in traders)
 		trader.tick()
 

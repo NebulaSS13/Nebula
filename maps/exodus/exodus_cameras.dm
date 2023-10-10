@@ -8,37 +8,37 @@ var/global/const/CAMERA_CHANNEL_ENGINEERING_OUTPOST = "Engineering Outpost"
 // Networks
 /obj/machinery/camera/network/command
 	preset_channels = list(CAMERA_CHANNEL_COMMAND)
-	initial_access = list(access_heads)
+	req_access = list(access_heads)
 
 /obj/machinery/camera/network/crescent
 	preset_channels = list(CAMERA_CHANNEL_CRESCENT)
 
 /obj/machinery/camera/network/engine
 	preset_channels = list(CAMERA_CHANNEL_ENGINE)
-	initial_access = list(access_engine)
+	req_access = list(access_engine)
 
 /obj/machinery/camera/network/engineering_outpost
 	preset_channels = list(CAMERA_CHANNEL_ENGINEERING_OUTPOST)
-	initial_access = list(access_engine)
+	req_access = list(access_engine)
 
 // Motion
 /obj/machinery/camera/motion/engineering_outpost
 	preset_channels = list(CAMERA_CHANNEL_ENGINEERING_OUTPOST)
-	initial_access = list(access_engine)
+	req_access = list(access_engine)
 
 // All Upgrades
 /obj/machinery/camera/all/command
 	preset_channels = list(CAMERA_CHANNEL_COMMAND)
-	initial_access = list(access_heads)
+	req_access = list(access_heads)
 
 // Compile stubs.
 /obj/machinery/camera/motion/command
 	preset_channels = list(CAMERA_CHANNEL_COMMAND)
-	initial_access = list(access_heads)
+	req_access = list(access_heads)
 
 /obj/machinery/camera/network/maintenance
 	preset_channels = list(CAMERA_CAMERA_CHANNEL_ENGINEERING)
-	initial_access = list(access_engine)
+	req_access = list(access_engine)
 
 /obj/machinery/camera/xray/security
 	preset_channels = list(CAMERA_CHANNEL_SECURITY)

@@ -6,7 +6,7 @@
 	desc = "A large vessel containing pressurized gas."
 
 	var/volume = 10000 //in liters, 1 meters by 1 meters by 2 meters ~tweaked it a little to simulate a pressure tank without needing to recode them yet
-	var/start_pressure = 25*ONE_ATMOSPHERE
+	var/start_pressure = 25 ATM
 	var/filling // list of gas ratios to use.
 
 	level = 1
@@ -27,7 +27,7 @@
 	. = ..()
 	air_contents.volume = volume
 	air_contents.temperature = T20C
-	
+
 	if(filling)
 		var/list/gases = list()
 		for(var/gas in filling)
@@ -49,7 +49,7 @@
 	return air_contents
 
 /obj/machinery/atmospherics/unary/tank/deconstruction_pressure_check()
-	if (air_contents.return_pressure() > 2*ONE_ATMOSPHERE)
+	if (air_contents.return_pressure() > (2 ATM))
 		return FALSE
 	return TRUE
 
@@ -89,7 +89,7 @@
 	name =  "Pressure Tank"
 	desc = "A large vessel containing pressurized gas."
 	color =  PIPE_COLOR_WHITE
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL	
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	w_class = ITEM_SIZE_STRUCTURE
 	density = 1
 	level = 1

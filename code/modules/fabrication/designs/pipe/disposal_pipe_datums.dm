@@ -1,5 +1,4 @@
 /datum/fabricator_recipe/pipe/disposal_dispenser
-	pipe_type = null
 	pipe_color = null
 	connect_types = null
 	colorable = FALSE

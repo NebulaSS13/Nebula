@@ -26,7 +26,7 @@
 
 /atom/Entered(var/atom/movable/am, var/atom/old_loc)
 	. = ..()
-	events_repository.raise_event(/decl/observ/moved, am, old_loc, am.loc)
+	RAISE_EVENT(/decl/observ/moved, am, old_loc, am.loc)
 
 /atom/movable/Entered(var/atom/movable/am, atom/old_loc)
 	. = ..()

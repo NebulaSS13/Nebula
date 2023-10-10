@@ -81,7 +81,6 @@
 
 	//for simple animals with abilities, mostly megafauna
 	var/ability_cooldown
-	var/time_last_used_ability
 
 	//for simple animals that reflect damage when attacked in melee
 	var/return_damage_min
@@ -91,13 +90,24 @@
 	var/glowing_eyes = FALSE
 	var/mob_icon_state_flags = 0
 
+	var/scannable_result // Codex page generated when this mob is scanned.
+	var/base_animal_type // set automatically in Initialize(), used for language checking.
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	check_mob_icon_states()
+	if(isnull(base_animal_type))
+		base_animal_type = type
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
 	if(islist(hat_offsets))
 		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
+	if(scannable_result)
+		set_extension(src, /datum/extension/scannable, scannable_result)
+	setup_languages()
+
+/mob/living/simple_animal/proc/setup_languages()
+	add_language(/decl/language/animal)
 
 /mob/living/simple_animal/proc/check_mob_icon_states()
 	mob_icon_state_flags = 0
@@ -153,7 +163,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(!living_observers_present(GetConnectedZlevels(z)))
+	if(z && !living_observers_present(SSmapping.get_connected_levels(z)))
 		return
 	//Health
 	if(stat == DEAD)
@@ -350,48 +360,44 @@
 			var/obj/item/stack/medical/MED = O
 			if(!MED.animal_heal)
 				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
-				return
-			if(health < maxHealth)
-				if(MED.can_use(1))
-					adjustBruteLoss(-MED.animal_heal)
-					visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
-					MED.use(1)
+			else if(health < maxHealth && MED.can_use(1))
+				adjustBruteLoss(-MED.animal_heal)
+				visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
+				MED.use(1)
 		else
 			var/decl/pronouns/G = get_pronouns()
 			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [G.him] back to life."))
-		return
+		return TRUE
 
-	if(istype(O, /obj/item/flash))
-		if(stat != DEAD)
-			O.attack(src, user, user.zone_sel.selecting)
-			return
+	if(istype(O, /obj/item/flash) && stat != DEAD)
+		return O.attack(src, user, user.get_target_zone())
 
 	if(meat_type && (stat == DEAD) && meat_amount)
 		if(istype(O, /obj/item/knife/kitchen/cleaver))
 			var/victim_turf = get_turf(src)
 			if(!locate(/obj/structure/table, victim_turf))
 				to_chat(user, SPAN_WARNING("You need to place \the [src] on a table to butcher it."))
-				return
+				return TRUE
 			var/time_to_butcher = (mob_size)
 			to_chat(user, SPAN_WARNING("You begin harvesting \the [src]."))
 			if(do_after(user, time_to_butcher, src, same_direction = TRUE))
 				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
 					to_chat(user, SPAN_DANGER("You botch harvesting \the [src], and ruin some of the meat in the process."))
 					subtract_meat(user)
-					return
 				else
 					harvest(user, user.get_skill_value(SKILL_COOKING))
-					return
 			else
 				to_chat(user, SPAN_DANGER("Your hand slips with your movement, and some of the meat is ruined."))
 				subtract_meat(user)
-				return
+			return TRUE
 
 	else
 		if(!O.force || (O.item_flags & ITEM_FLAG_NO_BLUDGEON))
 			visible_message(SPAN_NOTICE("\The [user] gently taps [src] with \the [O]."))
-		else
-			O.attack(src, user, user.zone_sel?.selecting || ran_zone())
+			return TRUE
+		return O.attack(src, user, user.get_target_zone() || ran_zone())
+
+	return ..()
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
@@ -515,11 +521,12 @@
 			if(P.damtype == BRUTE)
 				var/hit_dir = get_dir(P.starting, src)
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
-				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
-				B.basecolor = bleed_colour
-				var/scale = min(1, round(mob_size / MOB_SIZE_MEDIUM, 0.1))
-				B.set_scale(scale)
-				B.update_icon()
+				if(!QDELETED(B))
+					B.icon_state = pick("dir_splatter_1","dir_splatter_2")
+					B.basecolor = bleed_colour
+					var/scale = min(1, round(mob_size / MOB_SIZE_MEDIUM, 0.1))
+					B.set_scale(scale)
+					B.update_icon()
 
 /mob/living/simple_animal/handle_fire()
 	return
@@ -586,7 +593,7 @@
 
 /mob/living/simple_animal/setCloneLoss(amount)
 	if(gene_damage >= 0)
-		gene_damage = Clamp(amount, 0, maxHealth)
+		gene_damage = clamp(amount, 0, maxHealth)
 		if(gene_damage >= maxHealth)
 			death()
 
@@ -595,3 +602,55 @@
 
 /mob/living/simple_animal/get_telecomms_race_info()
 	return list("Domestic Animal", FALSE)
+
+/mob/living/simple_animal/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
+	var/safety = eyecheck()
+	if(safety < FLASH_PROTECTION_MAJOR)
+		SET_STATUS_MAX(src, STAT_WEAK, 2)
+		if(safety < FLASH_PROTECTION_MODERATE)
+			SET_STATUS_MAX(src, STAT_STUN, (flash_strength - 2))
+			SET_STATUS_MAX(src, STAT_BLURRY, flash_strength)
+			SET_STATUS_MAX(src, STAT_CONFUSE, flash_strength)
+			flash_eyes(2)
+		return TRUE
+	return FALSE
+
+/mob/living/simple_animal/get_speech_bubble_state_modifier()
+	return ..() || "rough"
+
+/mob/living/simple_animal/proc/can_act()
+	if(QDELETED(src) || stat || incapacitated())
+		return FALSE
+	return TRUE
+
+/// Adapts our temperature and atmos thresholds to our current z-level.
+/mob/living/simple_animal/proc/adapt_to_current_level()
+	var/turf/T = get_turf(src)
+	if(!T)
+		return
+
+	var/datum/level_data/level_data = SSmapping.levels_by_z[T.z]
+	if(!level_data)
+		return
+
+	bodytemperature = level_data.exterior_atmos_temp
+	minbodytemp     = bodytemperature - 20
+	maxbodytemp     = bodytemperature + 20
+
+	// Adapt atmosphere if necessary.
+	if(!min_gas && !max_gas)
+		return
+
+	if(min_gas)
+		min_gas.Cut()
+	if(max_gas)
+		max_gas.Cut()
+	if(!level_data.exterior_atmosphere)
+		return
+
+	for(var/gas in level_data.exterior_atmosphere.gas)
+		var/gas_amt = level_data.exterior_atmosphere[gas]
+		if(min_gas)
+			min_gas[gas] = round(gas_amt * 0.5)
+		if(max_gas)
+			min_gas[gas] = round(gas_amt * 1.5)

@@ -184,7 +184,7 @@
 
 	. = ..()
 
-/mob/living/exosuit/examine(mob/user)
+/mob/living/exosuit/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(LAZYLEN(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))
 		to_chat(user, "It is being piloted by [english_list(pilots, nothing_text = "nobody")].")
@@ -201,17 +201,17 @@
 	for(var/obj/item/mech_component/thing in list(arms, legs, head, body))
 		if(!thing)
 			continue
-
 		var/damage_string = thing.get_damage_string()
 		to_chat(user, "Its [thing.name] [thing.gender == PLURAL ? "are" : "is"] [damage_string].")
-
 	to_chat(user, "It menaces with reinforcements of [material].")
 
 /mob/living/exosuit/return_air()
 	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc.return_air()
 
-/mob/living/exosuit/GetIdCard()
-	return access_card
+/mob/living/exosuit/GetIdCards()
+	. = ..()
+	if(istype(access_card))
+		LAZYDISTINCTADD(., access_card)
 
 /mob/living/exosuit/set_dir()
 	. = ..()

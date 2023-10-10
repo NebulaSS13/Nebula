@@ -7,7 +7,6 @@
 	anchored = TRUE
 	unacidable = TRUE // Can't destroy energy portals.
 	var/obj/item/target = null
-	var/creator = null
 	var/dangerous = FALSE
 	var/failchance = 0
 
@@ -18,6 +17,7 @@
 	teleport(AM)
 
 /obj/effect/portal/attack_hand(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	teleport(user)
 	return TRUE
 

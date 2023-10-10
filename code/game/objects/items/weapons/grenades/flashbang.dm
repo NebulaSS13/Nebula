@@ -33,16 +33,12 @@
 	//Checking for protections
 	var/eye_safety = 0
 	var/ear_safety = 0
-	if(iscarbon(M))
+	if(istype(M))
 		eye_safety = M.eyecheck()
-		if(ishuman(M))
-			if(M.get_sound_volume_multiplier() < 0.2)
-				ear_safety += 2
-			if(MUTATION_HULK in M.mutations)
-				ear_safety += 1
-			var/mob/living/carbon/human/H = M
-			if(istype(H.head, /obj/item/clothing/head/helmet))
-				ear_safety += 1
+		if(M.get_sound_volume_multiplier() < 0.2)
+			ear_safety += 2
+		if(istype(M.get_equipped_item(slot_head_str), /obj/item/clothing/head/helmet))
+			ear_safety += 1
 
 	//Flashing everyone
 	M.flash_eyes(FLASH_PROTECTION_MODERATE)
@@ -90,6 +86,7 @@
 
 /obj/item/grenade/flashbang/instant
 	invisibility = INVISIBILITY_MAXIMUM
+	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
 
 /obj/item/grenade/flashbang/instant/Initialize()
 	. = ..()

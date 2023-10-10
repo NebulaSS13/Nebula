@@ -22,13 +22,13 @@
 		try_supermatter_consume(null, A, src)
 
 /turf/unsimulated/wall/cascade/Destroy()
-	STOP_PROCESSING(SSturf, src)	
+	STOP_PROCESSING(SSturf, src)
 	. = ..()
 
-/turf/unsimulated/wall/cascade/Process(wait, times_fired)
+/turf/unsimulated/wall/cascade/Process(wait, tick)
 	// Only check infrequently.
 	var/how_often = max(round(5 SECONDS/wait), 1)
-	if(times_fired % how_often)
+	if(tick % how_often)
 		return
 
 	// No more available directions? Stop processing.
@@ -50,9 +50,8 @@
 			T.ChangeTurf(type)
 
 /turf/unsimulated/wall/cascade/attack_robot(mob/user)
-	if(Adjacent(user))
-		return attack_hand(user)
-	else
+	. = attack_hand_with_interaction_checks(user)
+	if(!.)
 		user.examinate(src)
 
 // /vg/: Don't let ghosts fuck with this.

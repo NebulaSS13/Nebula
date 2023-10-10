@@ -2,19 +2,27 @@
 	name = "light exosuit"
 	desc = "A light and agile exosuit."
 
+/obj/item/mech_component/manipulators/light/painted
+	color = COLOR_OFF_WHITE
+
+/obj/item/mech_component/propulsion/light/painted
+	color = COLOR_OFF_WHITE
+
+/obj/item/mech_component/sensors/light/painted
+	color = COLOR_OFF_WHITE
+
+/obj/item/mech_component/chassis/light/painted
+	color = COLOR_OFF_WHITE
+
 /mob/living/exosuit/premade/light/Initialize()
 	if(!arms)
-		arms = new /obj/item/mech_component/manipulators/light(src)
-		arms.color = COLOR_OFF_WHITE
+		arms = new /obj/item/mech_component/manipulators/light/painted(src)
 	if(!legs)
-		legs = new /obj/item/mech_component/propulsion/light(src)
-		legs.color = COLOR_OFF_WHITE
+		legs = new /obj/item/mech_component/propulsion/light/painted(src)
 	if(!head)
-		head = new /obj/item/mech_component/sensors/light(src)
-		head.color = COLOR_OFF_WHITE
+		head = new /obj/item/mech_component/sensors/light/painted(src)
 	if(!body)
-		body = new /obj/item/mech_component/chassis/light(src)
-		body.color = COLOR_OFF_WHITE
+		body = new /obj/item/mech_component/chassis/light/painted(src)
 
 	. = ..()
 

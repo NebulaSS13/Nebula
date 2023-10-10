@@ -28,6 +28,7 @@
 	icon = 'icons/obj/augment_tools.dmi'
 
 /obj/item/wirecutters/finger/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/screwdriver/finger
@@ -37,6 +38,7 @@
 	icon = 'icons/obj/augment_tools.dmi'
 
 /obj/item/screwdriver/finger/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/crowbar/finger
@@ -46,6 +48,7 @@
 	icon = 'icons/obj/augment_tools.dmi'
 
 /obj/item/crowbar/finger/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/wrench/finger
@@ -55,6 +58,7 @@
 	icon = 'icons/obj/augment_tools.dmi'
 
 /obj/item/wrench/finger/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/multitool/finger

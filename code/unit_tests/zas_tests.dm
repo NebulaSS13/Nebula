@@ -46,16 +46,17 @@
 
 	var/list/GM_checked = list()
 
-	for(var/turf/simulated/T in A)
+	for(var/turf/T in A)
 
-		if(!istype(T) || isnull(T.zone) || istype(T, /turf/simulated/floor/airless))
+		if(T.initial_gas == null)
 			continue
-		if(T.zone.air in GM_checked)
-			continue
-
-		var/t_msg = "Turf: [T] |  Location: [T.x] // [T.y] // [T.z]"
 
 		var/datum/gas_mixture/GM = T.return_air()
+		if(!GM || (GM in GM_checked))
+			continue
+		GM_checked += GM
+
+		var/t_msg = "Turf: [T] |  Location: [T.x] // [T.y] // [T.z]"
 		var/pressure = GM.return_pressure()
 		var/temp = GM.temperature
 
@@ -65,7 +66,6 @@
 				if(pressure > 10)
 					test_result["msg"] = "Pressure out of bounds: [pressure] | [t_msg]"
 					return test_result
-
 
 			if(UT_NORMAL, UT_NORMAL_COLD)
 				if(abs(pressure - ONE_ATMOSPHERE) > 10)
@@ -84,13 +84,11 @@
 						test_result["msg"] = "Temperature out of bounds: [temp] | [t_msg]"
 						return test_result
 
-		GM_checked.Add(GM)
-
 	if(GM_checked.len)
 		test_result["result"] = SUCCESS
-		test_result["msg"] = "Checked [GM_checked.len] zones"
+		test_result["msg"] = "Checked [GM_checked.len] gasmixes."
 	else
-		test_result["msg"] = "No zones checked."
+		test_result["msg"] = "No gasmixes checked."
 
 	return test_result
 

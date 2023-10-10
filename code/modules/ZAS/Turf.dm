@@ -1,21 +1,37 @@
-/turf/simulated/var/zone/zone
-/turf/simulated/var/open_directions
-
-/turf/var/needs_air_update = 0
-/turf/var/datum/gas_mixture/air
-
-/turf/simulated/proc/update_graphic(list/graphic_add = null, list/graphic_remove = null)
-	if(graphic_add && graphic_add.len)
-		add_vis_contents(src, graphic_add)
-	if(graphic_remove && graphic_remove.len)
-		remove_vis_contents(src, graphic_remove)
+////Turf Vars////
+#ifdef ZASDBG
+///Set to TRUE during debugging to get descriptive to_chats of the object. Works for all atmos-related datums.
+/turf/var/tmp/verbose = FALSE
+#endif
 
 /turf/proc/update_air_properties()
-	var/block = c_airblock(src)
-	if(block & AIR_BLOCKED)
-		//dbg(blocked)
+
+	if(zone?.invalid) //this turf's zone is in the process of being rebuilt
+		c_copy_air() //not very efficient :(
+		zone = null //Easier than iterating through the list at the zone.
+
+	var/s_block = c_airblock(src)
+	if(s_block & AIR_BLOCKED)
+		#ifdef ZASDBG
+		if(verbose)
+			zas_log("Self-blocked.")
+		dbg(zasdbgovl_blocked)
+		#endif
+		if(zone)
+			var/zone/z = zone
+
+			if(can_safely_remove_from_zone()) //Helps normal airlocks avoid rebuilding zones all the time
+				c_copy_air() //we aren't rebuilding, but hold onto the old air so it can be readded
+				z.remove(src)
+			else
+				z.rebuild()
+
 		return 1
 
+	var/previously_open = airflow_open_directions
+	airflow_open_directions = 0
+
+	var/list/postponed
 	#ifdef MULTIZAS
 	for(var/d = 1, d < 64, d *= 2)
 	#else
@@ -24,25 +40,120 @@
 
 		var/turf/unsim = get_step(src, d)
 
-		if(!unsim)
+		if(!unsim) //edge of map
 			continue
 
-		block = unsim.c_airblock(src)
-
+		var/block = unsim.c_airblock(src)
 		if(block & AIR_BLOCKED)
-			//unsim.dbg(air_blocked, turn(180,d))
+
+			#ifdef ZASDBG
+			if(verbose)
+				zas_log("[dir2text(d)] is blocked.")
+			//dbg(ZAS_DIRECTIONAL_BLOCKER(d))
+			#endif
+
 			continue
 
 		var/r_block = c_airblock(unsim)
-
 		if(r_block & AIR_BLOCKED)
+
+			#ifdef ZASDBG
+			if(verbose)
+				zas_log("[dir2text(d)] is blocked.")
+			//target.dbg(ZAS_DIRECTIONAL_BLOCKER(turn(d, 180)))
+			#endif
+
+			//Check that our zone hasn't been cut off recently.
+			//This happens when windows move or are constructed. We need to rebuild.
+			if((previously_open & d) && unsim.zone_membership_candidate)
+				if(zone && unsim.zone == zone)
+					zone.rebuild()
+					return
+
 			continue
 
-		if(istype(unsim, /turf/simulated))
+		airflow_open_directions |= d
 
-			var/turf/simulated/sim = unsim
-			if(TURF_HAS_VALID_ZONE(sim))
-				SSair.connect(sim, src)
+		if(unsim.zone_membership_candidate)
+
+			unsim.airflow_open_directions |= global.reverse_dir[d]
+
+			if(TURF_HAS_VALID_ZONE(unsim))
+
+				//Might have assigned a zone, since this happens for each direction.
+				if(!zone)
+
+					//We do not merge if
+					//    they are blocking us and we are not blocking them, or if
+					//    we are blocking them and not blocking ourselves - this prevents tiny zones from forming on doorways.
+					if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || ((r_block & ZONE_BLOCKED) && !(s_block & ZONE_BLOCKED)))
+						#ifdef ZASDBG
+						if(verbose)
+							zas_log("[dir2text(d)] is zone blocked.")
+						//dbg(ZAS_ZONE_BLOCKER(d))
+						#endif
+
+						//Postpone this tile rather than exit, since a connection can still be made.
+						if(!postponed) postponed = list()
+						postponed.Add(unsim)
+
+					else
+
+						unsim.zone.add(src)
+
+						#ifdef ZASDBG
+						dbg(zasdbgovl_assigned)
+						if(verbose)
+							zas_log("Added to [zone]")
+						#endif
+
+				else if(unsim.zone != zone)
+
+					#ifdef ZASDBG
+					if(verbose)
+						zas_log("Connecting to [unsim.zone]")
+					#endif
+
+					SSair.connect(src, unsim)
+
+
+			#ifdef ZASDBG
+				else if(verbose)
+					zas_log("[dir2text(d)] has same zone.")
+
+			else if(verbose)
+				zas_log("[dir2text(d)] has an invalid or rebuilding zone.")
+			#endif
+
+		else
+
+			//Postponing connections to tiles until a zone is assured.
+			if(!postponed) postponed = list()
+			postponed.Add(unsim)
+
+	if(!TURF_HAS_VALID_ZONE(src)) //Still no zone, make a new one.
+		var/zone/newzone = new/zone()
+		newzone.add(src)
+
+	#ifdef ZASDBG
+		dbg(zasdbgovl_created)
+		if(verbose)
+			zas_log("New zone created for src.")
+
+	ASSERT(zone)
+	#endif
+
+	//At this point, a zone should have happened. If it hasn't, don't add more checks, fix the bug.
+
+	for(var/turf/T in postponed)
+		SSair.connect(src, T)
+
+
+
+
+
+
+
 
 /*
 	Simple heuristic for determining if removing the turf from it's zone will not partition the zone (A very bad thing).
@@ -50,11 +161,15 @@
 	This implementation may produce false negatives but it (hopefully) will not produce any false postiives.
 */
 
-/turf/simulated/proc/can_safely_remove_from_zone()
+/turf/proc/can_safely_remove_from_zone()
 	if(!zone) return 1
 
 	var/check_dirs = get_zone_neighbours(src)
 	var/unconnected_dirs = check_dirs
+
+	//src is only connected to the zone by a single direction, this is a safe removal.
+	if (!(check_dirs & (check_dirs - 1))) //Equivalent to: if(IsInteger(log(2, .)))
+		return TRUE
 
 	#ifdef MULTIZAS
 	var/to_check = global.cornerdirsz
@@ -75,7 +190,7 @@
 	return !unconnected_dirs
 
 //helper for can_safely_remove_from_zone()
-/turf/simulated/proc/get_zone_neighbours(turf/simulated/T)
+/turf/proc/get_zone_neighbours(turf/T)
 	. = 0
 	if(istype(T) && T.zone)
 		#ifdef MULTIZAS
@@ -84,199 +199,59 @@
 		var/to_check = global.cardinal
 		#endif
 		for(var/dir in to_check)
-			var/turf/simulated/other = get_step(T, dir)
-			if(istype(other) && other.zone == T.zone && !(other.c_airblock(T) & AIR_BLOCKED) && get_dist(src, other) <= 1)
+			var/turf/other = get_step(T, dir)
+			if(isturf(other) && other.zone_membership_candidate && other.zone == T.zone && !(other.c_airblock(T) & AIR_BLOCKED) && get_dist(src, other) <= 1)
 				. |= dir
-
-/turf/simulated/update_air_properties()
-
-	if(zone && zone.invalid) //this turf's zone is in the process of being rebuilt
-		c_copy_air() //not very efficient :(
-		zone = null //Easier than iterating through the list at the zone.
-
-	var/s_block = c_airblock(src)
-	if(s_block & AIR_BLOCKED)
-		#ifdef ZASDBG
-		if(verbose) log_debug("Self-blocked.")
-		//dbg(blocked)
-		#endif
-		if(zone)
-			var/zone/z = zone
-
-			if(can_safely_remove_from_zone()) //Helps normal airlocks avoid rebuilding zones all the time
-				c_copy_air() //we aren't rebuilding, but hold onto the old air so it can be readded
-				z.remove(src)
-			else
-				z.rebuild()
-
-		return 1
-
-	var/previously_open = open_directions
-	open_directions = 0
-
-	var/list/postponed
-	#ifdef MULTIZAS
-	for(var/d = 1, d < 64, d *= 2)
-	#else
-	for(var/d = 1, d < 16, d *= 2)
-	#endif
-
-		var/turf/unsim = get_step(src, d)
-
-		if(!unsim) //edge of map
-			continue
-
-		var/block = unsim.c_airblock(src)
-		if(block & AIR_BLOCKED)
-
-			#ifdef ZASDBG
-			if(verbose) log_debug("[d] is blocked.")
-			//unsim.dbg(air_blocked, turn(180,d))
-			#endif
-
-			continue
-
-		var/r_block = c_airblock(unsim)
-		if(r_block & AIR_BLOCKED)
-
-			#ifdef ZASDBG
-			if(verbose) log_debug("[d] is blocked.")
-			//dbg(air_blocked, d)
-			#endif
-
-			//Check that our zone hasn't been cut off recently.
-			//This happens when windows move or are constructed. We need to rebuild.
-			if((previously_open & d) && istype(unsim, /turf/simulated))
-				var/turf/simulated/sim = unsim
-				if(zone && sim.zone == zone)
-					zone.rebuild()
-					return
-
-			continue
-
-		open_directions |= d
-
-		if(istype(unsim, /turf/simulated))
-
-			var/turf/simulated/sim = unsim
-			sim.open_directions |= global.reverse_dir[d]
-
-			if(TURF_HAS_VALID_ZONE(sim))
-
-				//Might have assigned a zone, since this happens for each direction.
-				if(!zone)
-
-					//We do not merge if
-					//    they are blocking us and we are not blocking them, or if
-					//    we are blocking them and not blocking ourselves - this prevents tiny zones from forming on doorways.
-					if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || ((r_block & ZONE_BLOCKED) && !(s_block & ZONE_BLOCKED)))
-						#ifdef ZASDBG
-						if(verbose) log_debug("[d] is zone blocked.")
-
-						//dbg(zone_blocked, d)
-						#endif
-
-						//Postpone this tile rather than exit, since a connection can still be made.
-						if(!postponed) postponed = list()
-						postponed.Add(sim)
-
-					else
-
-						sim.zone.add(src)
-
-						#ifdef ZASDBG
-						dbg(assigned)
-						if(verbose) log_debug("Added to [zone]")
-						#endif
-
-				else if(sim.zone != zone)
-
-					#ifdef ZASDBG
-					if(verbose) log_debug("Connecting to [sim.zone]")
-					#endif
-
-					SSair.connect(src, sim)
-
-
-			#ifdef ZASDBG
-				else if(verbose) log_debug("[d] has same zone.")
-
-			else if(verbose) log_debug("[d] has invalid zone.")
-			#endif
-
-		else
-
-			//Postponing connections to tiles until a zone is assured.
-			if(!postponed) postponed = list()
-			postponed.Add(unsim)
-
-	if(!TURF_HAS_VALID_ZONE(src)) //Still no zone, make a new one.
-		var/zone/newzone = new/zone()
-		newzone.add(src)
-
-	#ifdef ZASDBG
-		dbg(created)
-
-	ASSERT(zone)
-	#endif
-
-	//At this point, a zone should have happened. If it hasn't, don't add more checks, fix the bug.
-
-	for(var/turf/T in postponed)
-		SSair.connect(src, T)
 
 /turf/proc/post_update_air_properties()
 	if(connections) connections.update_all()
 
 /turf/assume_air(datum/gas_mixture/giver) //use this for machines to adjust air
-	return 0
-
-/turf/proc/assume_gas(gasid, moles, temp = 0)
-	return 0
+	var/datum/gas_mixture/my_air = return_air()
+	if(my_air)
+		my_air.merge(giver)
+		return TRUE
+	return FALSE
 
 /turf/return_air()
-	//Create gas mixture to hold data for passing
-	var/datum/gas_mixture/GM = new
 
-	if(initial_gas)
-		GM.gas = initial_gas.Copy()
-	GM.temperature = temperature
-	GM.update_values()
+	// ZAS participation
+	if(zone && !zone.invalid)
+		SSair.mark_zone_update(zone)
+		return zone.air
 
-	return GM
+	// Exterior turf global atmosphere
+	if((!air && isnull(initial_gas)) || (external_atmosphere_participation && is_outside()))
+		var/datum/level_data/level = SSmapping.levels_by_z[z]
+		var/datum/gas_mixture/gas = level.get_exterior_atmosphere()
+		var/initial_temperature = weather ? weather.adjust_temperature(gas.temperature) : gas.temperature
+		if(length(affecting_heat_sources))
+			for(var/obj/structure/fire_source/heat_source as anything in affecting_heat_sources)
+				gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
+				if(abs(gas.temperature - initial_temperature) >= 100)
+					break
+		return gas
+
+	// Base behavior
+	. = air
+	if(!.)
+		. = make_air()
+		if(zone)
+			c_copy_air()
 
 /turf/remove_air(amount as num)
 	var/datum/gas_mixture/GM = return_air()
 	return GM.remove(amount)
 
-/turf/simulated/assume_air(datum/gas_mixture/giver)
+/turf/proc/assume_gas(gasid, moles, temp = null)
 	var/datum/gas_mixture/my_air = return_air()
-	my_air.merge(giver)
-
-/turf/simulated/assume_gas(gasid, moles, temp = null)
-	var/datum/gas_mixture/my_air = return_air()
-
-	if(isnull(temp))
-		my_air.adjust_gas(gasid, moles)
-	else
-		my_air.adjust_gas_temp(gasid, moles, temp)
-
-	return 1
-
-/turf/simulated/return_air()
-	if(zone)
-		if(!zone.invalid)
-			SSair.mark_zone_update(zone)
-			return zone.air
+	if(my_air)
+		if(isnull(temp))
+			my_air.adjust_gas(gasid, moles)
 		else
-			if(!air)
-				make_air()
-			c_copy_air()
-			return air
-	else
-		if(!air)
-			make_air()
-		return air
+			my_air.adjust_gas_temp(gasid, moles, temp)
+		return TRUE
+	return FALSE
 
 /turf/proc/make_air()
 	air = new/datum/gas_mixture
@@ -284,8 +259,10 @@
 	if(initial_gas)
 		air.gas = initial_gas.Copy()
 	air.update_values()
+	return air
 
-/turf/simulated/proc/c_copy_air()
-	if(!air) air = new/datum/gas_mixture
+/turf/proc/c_copy_air()
+	if(!air)
+		air = new/datum/gas_mixture
 	air.copy_from(zone.air)
 	air.group_multiplier = 1

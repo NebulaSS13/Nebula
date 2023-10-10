@@ -40,7 +40,6 @@
 	var/max_patrol_dist = 250
 	var/RequiresAccessToToggle = 0 // If 1, will check access to be turned on/off
 
-	var/target_patience = 5
 	var/frustration = 0
 	var/max_frustration = 0
 
@@ -96,7 +95,7 @@
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
-	else if(isScrewdriver(O))
+	else if(IS_SCREWDRIVER(O))
 		if(!locked)
 			open = !open
 			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
@@ -104,7 +103,7 @@
 		else
 			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
-	else if(isWelder(O))
+	else if(IS_WELDER(O))
 		if(health < maxHealth)
 			if(open)
 				health = min(maxHealth, health + 10)

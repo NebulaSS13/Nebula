@@ -15,8 +15,8 @@
 		set_terminal()
 
 /obj/item/stock_parts/computer/lan_port/Destroy()
-	. = ..()
 	QDEL_NULL(terminal)
+	return ..()
 
 /obj/item/stock_parts/computer/lan_port/on_uninstall(obj/machinery/machine, temporary)
 	. = ..()
@@ -76,14 +76,14 @@
 		if(!C.can_use(5))
 			to_chat(user, SPAN_WARNING("You need five lengths of network cable for \the [parent]."))
 			return TRUE
-	
+
 		user.visible_message(SPAN_NOTICE("\The [user] adds cables to the \the [parent]."), "You start adding cables to \the [parent] frame...")
 		if(do_after(user, 20, parent))
 			if(!terminal && (loc == parent) && parent.components_are_accessible(type) && !check_terminal_block(T) && C.use(5))
 				user.visible_message(SPAN_NOTICE("\The [user] has added cables to the \the [parent]!"), "You add cables to the \the [parent].")
 				set_terminal()
 		return TRUE
-	if(isWirecutter(I) && terminal)
+	if(IS_WIRECUTTER(I) && terminal)
 		var/turf/T = get_turf(parent)
 		if(istype(T) && !T.is_plating())
 			to_chat(user, SPAN_WARNING("You must remove the floor plating beneath \the [parent] first."))
@@ -95,4 +95,3 @@
 				to_chat(user, SPAN_NOTICE("You cut the cables and dismantle the network terminal."))
 				qdel(terminal)
 		return TRUE
-		

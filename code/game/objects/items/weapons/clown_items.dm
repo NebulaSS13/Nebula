@@ -7,10 +7,12 @@
 /*
  * Banana Peals
  */
-/obj/item/bananapeel/Crossed(var/atom/movable/AM)
-	if (istype(AM, /mob/living))
-		var/mob/living/M = AM
-		M.slip("the [src.name]", 4)
+/obj/item/bananapeel/Crossed(atom/movable/AM)
+	if(!isliving(AM))
+		return
+	var/mob/living/M = AM
+	M.slip("the [src.name]", 4)
+
 /*
  * Bike Horns
  */
@@ -25,6 +27,11 @@
 	throw_speed = 3
 	throw_range = 15
 	attack_verb = list("HONKED")
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+	)
+	obj_flags = OBJ_FLAG_HOLLOW
 	var/spam_flag = 0
 	var/audio_files = list("sound/items/bikehorn.ogg")
 
@@ -43,3 +50,5 @@
 	icon_state = "air_horn"
 	item_state = "air_horn"
 	audio_files = list("sound/items/air_horn_1.ogg", "sound/items/air_horn_2.ogg")
+	material = /decl/material/solid/metal/aluminium
+	obj_flags = OBJ_FLAG_HOLLOW

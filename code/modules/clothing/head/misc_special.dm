@@ -22,7 +22,7 @@
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT
 	)
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 	)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
@@ -64,7 +64,7 @@
 		usr.update_action_buttons()
 
 /obj/item/clothing/head/welding/on_update_icon()
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(up && check_state_in_icon("[icon_state]_up", icon))
 		icon_state = "[icon_state]_up"
@@ -108,8 +108,8 @@
 	desc = "Perfect for winter in Siberia, da?"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/ushanka.dmi'
-	flags_inv = HIDEEARS|BLOCKHEADHAIR
-	cold_protection = SLOT_HEAD
+	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
+	cold_protection = SLOT_HEAD | SLOT_EARS
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	var/up = FALSE
 
@@ -120,7 +120,7 @@
 	update_icon()
 
 /obj/item/clothing/head/ushanka/on_update_icon()
-	..()
+	. = ..()
 	icon_state = get_world_inventory_state()
 	if(up && check_state_in_icon("[icon_state]_up", icon))
 		icon_state = "[icon_state]_up"
@@ -139,7 +139,7 @@
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/pumpkin.dmi'
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 2
 	light_overlay = "helmet_light"
@@ -155,6 +155,8 @@
 	icon = 'icons/clothing/head/cat.dmi'
 	body_parts_covered = 0
 	siemens_coefficient = 1.5
+	flags_inv = 0
+	armor = null
 
 /obj/item/clothing/head/richard
 	name = "chicken mask"
@@ -162,4 +164,74 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/richard.dmi'
 	body_parts_covered = SLOT_HEAD|SLOT_FACE
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCK_ALL_HAIR
+
+// Return of the cake hat.
+/obj/item/clothing/head/cakehat
+	name = "cake-hat"
+	desc = "It's tasty looking!"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/cakehat.dmi'
+	body_parts_covered = SLOT_HEAD
+	item_flags = null
+	var/is_on_fire = FALSE
+
+/obj/item/clothing/head/cakehat/equipped(mob/user, slot)
+	. = ..()
+	update_icon()
+
+/obj/item/clothing/head/cakehat/dropped(mob/user)
+	. = ..()
+	update_icon()
+
+/obj/item/clothing/head/cakehat/on_update_icon(mob/user)
+	. = ..()
+	z_flags &= ~ZMM_MANGLE_PLANES
+	if(is_on_fire && check_state_in_icon("[icon_state]-flame", icon))
+		if(plane == HUD_PLANE)
+			add_overlay("[icon_state]-flame")
+		else
+			add_overlay(emissive_overlay(icon, "[icon_state]-flame"))
+			z_flags |= ZMM_MANGLE_PLANES
+
+// Overidable so species with limited headspace in the sprite bounding area can offset it (scavs)
+/obj/item/clothing/head/cakehat/proc/get_mob_flame_overlay(var/image/overlay, var/bodytype)
+	if(overlay && check_state_in_icon("[overlay.icon_state]-flame", overlay.icon))
+		return emissive_overlay(overlay.icon, "[overlay.icon_state]-flame")
+
+/obj/item/clothing/head/cakehat/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
+	if(overlay && is_on_fire)
+		var/image/I = get_mob_flame_overlay(overlay, bodytype)
+		if(I)
+			overlay.overlays += I
+	return ..()
+
+/obj/item/clothing/head/cakehat/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/item/clothing/head/cakehat/Process()
+	if(!is_on_fire)
+		STOP_PROCESSING(SSobj, src)
+		return
+	var/turf/location = loc
+	if(ismob(loc))
+		var/mob/M = loc
+		if(M.get_equipped_item(slot_head_str) == src || (src in M.get_held_items()))
+			location = M.loc
+	if(istype(location))
+		location.hotspot_expose(700, 1)
+
+/obj/item/clothing/head/cakehat/attack_self(mob/user)
+	. = ..()
+	if(!.)
+		is_on_fire = !is_on_fire
+		update_icon()
+		if(is_on_fire)
+			damtype = BURN
+			START_PROCESSING(SSobj, src)
+		else
+			force = null
+			damtype = BRUTE
+			STOP_PROCESSING(SSobj, src)
+		return TRUE

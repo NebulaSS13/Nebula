@@ -26,6 +26,7 @@
 #include "clothing\under\uniforms.dm"
 #include "datum\ai_icons.dm"
 #include "datum\ai_laws.dm"
+#include "datum\loadout.dm"
 #include "datum\robolimbs.dm"
 #include "datum\antagonists\commando.dm"
 #include "datum\antagonists\deathsquad.dm"
@@ -36,7 +37,9 @@
 #include "items\cups.dm"
 #include "items\documents.dm"
 #include "items\medals.dm"
+#include "items\stamps.dm"
 #include "items\wristcomp.dm"
 #include "machines\machines.dm"
+#include "structures\lockers.dm"
 // END_INCLUDE
 #endif

@@ -6,17 +6,19 @@
 	var/map_size_x = 20
 	var/map_size_y = 20
 
-	var/map_turf_type = /turf/space
-	var/map_area_type = /area/overmap
+	var/overmap_edge_type = /turf/unsimulated/map/edge
+	var/overmap_turf_type = /turf/unsimulated/map
+	var/overmap_area_type = /area/overmap
+	var/empty_level_type =  /datum/level_data/space
+
 	var/list/valid_event_types
-	var/empty_z_level_turf
+
+	/// list used to cache empty zlevels to avoid needless z-stack bloat
+	var/list/cached_temporary_sectors = list()
 
 /datum/overmap/New(var/_name)
 
 	name = _name
-
-	if(!map_turf_type)
-		map_turf_type = world.turf
 
 	if(!name)
 		PRINT_STACK_TRACE("Unnamed overmap datum instantiated: [type]")
@@ -26,6 +28,7 @@
 	global.overmaps_by_name[name] = src
 
 	generate_overmap()
+	testing("Overmap build for [name] complete.")
 
 	if(!assigned_z)
 		PRINT_STACK_TRACE("Overmap datum generated null assigned z_level.")
@@ -41,30 +44,30 @@
 
 	..()
 
-/datum/overmap/proc/generate_overmap()
-	testing("Building overmap [name]...")
-	INCREMENT_WORLD_Z_SIZE
-	assigned_z = world.maxz
-	testing("Putting [name] on [assigned_z].")
-
-	var/area/overmap/A = new map_area_type
+/datum/overmap/proc/populate_overmap()
+	var/area/overmap/A = locate(overmap_area_type) || new overmap_area_type //level_data should have initialized the area
 	for(var/square in block(locate(1, 1, assigned_z), locate(map_size_x, map_size_y, assigned_z)))
 		var/turf/T = square
 		if(T.x == map_size_x || T.y == map_size_y)
-			T = T.ChangeTurf(/turf/unsimulated/map/edge)
+			T = T.ChangeTurf(overmap_edge_type)
 		else
-			T = T.ChangeTurf(/turf/unsimulated/map)
+			T = T.ChangeTurf(overmap_turf_type)
 		ChangeArea(T, A)
 
-	global.using_map.sealed_levels |= assigned_z
-	testing("Overmap build for [name] complete.")
+/datum/overmap/proc/generate_overmap()
+	testing("Building overmap [name]...")
+	SSmapping.increment_world_z_size(/datum/level_data/overmap)
+	assigned_z = world.maxz
+	testing("Putting [name] on [assigned_z].")
+	populate_overmap()
+	SSmapping.sealed_levels |= assigned_z
 	. = TRUE
 
 /datum/overmap/proc/travel(var/turf/space/T, var/atom/movable/A)
 	if (!T || !A)
 		return
 
-	var/obj/effect/overmap/visitable/M = global.overmap_sectors["[T.z]"]
+	var/obj/effect/overmap/visitable/M = global.overmap_sectors[num2text(T.z)]
 	if (!M)
 		return
 
@@ -119,25 +122,33 @@
 			source.forceMove(null)
 			if(!QDELETED(source))
 				testing("Caching [M] for future use")
-				if(!(map_turf_type in global.cached_temporary_sectors))
-					global.cached_temporary_sectors[map_turf_type] = list()
-				global.cached_temporary_sectors[map_turf_type] |= source
+				if(!length(cached_temporary_sectors[empty_level_type]))
+					cached_temporary_sectors[empty_level_type] = list()
+				cached_temporary_sectors[empty_level_type] |= source
 
 /datum/overmap/proc/create_temporary_sector(x,y)
 
+	// There's already a sector at this x/y
 	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x, y, assigned_z)
 	if(istype(res) && !QDELETED(res))
 		return res
 
-	if(length(global.cached_temporary_sectors[map_turf_type]))
-		res = pick(global.cached_temporary_sectors[map_turf_type])
-
-		global.cached_temporary_sectors[map_turf_type] -= res
-		if(!length(global.cached_temporary_sectors[map_turf_type]))
-			global.cached_temporary_sectors -= map_turf_type
-
+	// We might have a sector cached we can give them.
+	if(length(cached_temporary_sectors[empty_level_type]))
+		res = pick_n_take(cached_temporary_sectors[empty_level_type])
+		if(!length(cached_temporary_sectors[empty_level_type]))
+			cached_temporary_sectors -= empty_level_type
 		if(istype(res) && !QDELETED(res))
 			res.forceMove(locate(x, y, assigned_z))
 			return res
 
-	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, get_empty_zlevel(map_turf_type))
+	// Create a new one.
+	var/datum/level_data/level = SSmapping.increment_world_z_size(empty_level_type)
+	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, level.level_z)
+
+/datum/overmap/proc/discard_temporary_sector(var/obj/effect/overmap/visitable/sector/temporary/sector)
+	if(!length(cached_temporary_sectors[empty_level_type]))
+		return
+	cached_temporary_sectors[empty_level_type] -= sector
+	if(!length(cached_temporary_sectors[empty_level_type]))
+		cached_temporary_sectors -= empty_level_type

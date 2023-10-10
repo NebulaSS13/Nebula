@@ -40,7 +40,7 @@
 				return
 	parts += P
 	if(user)
-		user.unEquip(P, holder)
+		user.try_unequip(P, holder)
 		to_chat(user, "You install \the [P] into \the [assembly_name].")
 	return TRUE
 

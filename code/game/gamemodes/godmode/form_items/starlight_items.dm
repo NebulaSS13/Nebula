@@ -47,31 +47,31 @@
 	desc = "Now, you can be the knight in shining armor you've always wanted to be. With complementary sun insignia."
 	icon = 'icons/clothing/suit/deity/star_champion.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_AP,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_AP,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 
 /obj/item/clothing/head/helmet/sunhelm
 	name = "knight's helm"
 	desc = "It's a shiny metal helmet. It looks ripped straight out of the Dark Ages, actually."
 	icon = 'icons/clothing/head/star_champion.dmi'
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCK_ALL_HAIR
 
 /obj/item/clothing/suit/armor/sunrobe
 	name = "oracle's robe"
 	desc = "The robes of a priest. One that praises the sun, apparently. Well, it certainly reflects light well."
 	icon = 'icons/clothing/suit/deity/star_oracle.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
 
 /obj/item/clothing/suit/armor/sunrobe/Initialize()
@@ -89,7 +89,7 @@
 	name = "traitor's hood"
 	desc = "No light can pierce this hood. It's unsettling."
 	icon = 'icons/clothing/head/star_traitor.dmi'
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCK_ALL_HAIR
 
 /obj/item/knife/ritual/shadow
 	name = "black death"
@@ -127,8 +127,7 @@
 	name = "blazing blade"
 	icon = 'icons/obj/items/weapon/swords/flaming.dmi'
 	damtype = BURN
-	applies_material_colour = FALSE
-	applies_material_name = FALSE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	var/last_near_structure = 0
 	var/mob/living/deity/linked
 

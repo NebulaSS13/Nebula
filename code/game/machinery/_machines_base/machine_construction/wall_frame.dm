@@ -37,7 +37,7 @@
 	return down_interaction(I, user, machine)
 
 /decl/machine_construction/wall_frame/panel_closed/proc/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(open_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = TRUE
@@ -71,7 +71,7 @@
 	if((. = ..()))
 		return
 
-	if(isWirecutter(I))
+	if(IS_WIRECUTTER(I))
 		TRANSFER_STATE(diconnected_state)
 		playsound(get_turf(machine), 'sound/items/Wirecutter.ogg', 50, 1)
 		user.visible_message(SPAN_WARNING("\The [user] has cut the wires inside \the [machine]!"), "You have cut the wires inside \the [machine].")
@@ -86,14 +86,14 @@
 	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(user, I)
 
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		return machine.part_removal(user)
 
 	if(istype(I))
 		return machine.part_insertion(user, I)
 
 /decl/machine_construction/wall_frame/panel_open/proc/up_interaction(obj/item/I, mob/user, obj/machinery/machine)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(active_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = FALSE
@@ -113,7 +113,7 @@
 /decl/machine_construction/wall_frame/no_wires
 
 /decl/machine_construction/wall_frame/no_wires/state_is_valid(obj/machinery/machine)
-	return machine.panel_open && machine.get_component_of_type(/obj/item/stock_parts/circuitboard)
+	return machine.panel_open && machine.get_component_of_type(/obj/item/stock_parts/circuitboard) && (machine.reason_broken == MACHINE_BROKEN_CONSTRUCT)
 
 /decl/machine_construction/wall_frame/no_wires/validate_state(obj/machinery/machine)
 	. = ..()
@@ -127,7 +127,7 @@
 	if((. = ..()))
 		return
 
-	if(isCoil(I))
+	if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/A = I
 		if (A.can_use(5))
 			TRANSFER_STATE(open_state)
@@ -146,14 +146,14 @@
 	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(user, I)
 
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		return machine.part_removal(user)
 
 	if(istype(I))
 		return machine.part_insertion(user, I)
 
 /decl/machine_construction/wall_frame/no_wires/proc/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		TRANSFER_STATE(bottom_state)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		to_chat(user, "You pry out the circuit!")
@@ -194,14 +194,15 @@
 			return TRUE
 		if(!user.canUnEquip(board))
 			return TRUE
+		machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT)
 		TRANSFER_STATE(diconnected_state)
-		user.unEquip(board, machine)
+		user.try_unequip(board, machine)
 		machine.install_component(board)
 		user.visible_message(SPAN_NOTICE("\The [user] inserts \the [board] into \the [machine]!"), SPAN_NOTICE("You insert \the [board] into \the [machine]!"))
 		machine.queue_icon_update()
 		return
 
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 		playsound(get_turf(machine), 'sound/items/Ratchet.ogg', 50, 1)
 		machine.visible_message(SPAN_NOTICE("\The [user] deconstructs \the [machine]."))

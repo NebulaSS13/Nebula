@@ -35,7 +35,7 @@
 	. = istype(thing, completion_trigger_type)
 
 /decl/crafting_stage/proc/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
-	. = !consume_completion_trigger || (user.unEquip(thing) && thing.forceMove(target))
+	. = !consume_completion_trigger || (user.try_unequip(thing) && thing.forceMove(target))
 	if(. && stack_consume_amount > 0)
 		var/obj/item/stack/stack = thing
 		if(!istype(stack) || stack.amount < stack_consume_amount)
@@ -71,7 +71,7 @@
 
 /decl/crafting_stage/welding/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
 	var/obj/item/weldingtool/T = thing
-	. = istype(T) && T.remove_fuel(0, user) && T.isOn()
+	. = istype(T) && T.weld(0, user) && T.isOn()
 
 /decl/crafting_stage/welding
 	consume_completion_trigger = FALSE
@@ -88,11 +88,16 @@
 	playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
 /decl/crafting_stage/screwdriver/progress_to(obj/item/thing, mob/user)
-	. = ..() && isScrewdriver(thing)
+	. = ..() && IS_SCREWDRIVER(thing)
 
 /decl/crafting_stage/tape
+	stack_consume_amount = 4
 	consume_completion_trigger = FALSE
-	completion_trigger_type = /obj/item/ducttape
+	completion_trigger_type = /obj/item/stack/tape_roll/duct_tape
+
+/decl/crafting_stage/tape/on_progress(var/mob/user)
+	..()
+	playsound(user.loc, 'sound/effects/tape.ogg', 100, 1)
 
 /decl/crafting_stage/pipe
 	completion_trigger_type = /obj/item/pipe

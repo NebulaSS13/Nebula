@@ -362,17 +362,16 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## Respawn delay in minutes before one may respawn as a crew member.
 #RESPAWN_DELAY 30
 
-## Strength of ambient star light. Set to 0 or less to turn off. A value of 1 is unlikely to have a noticeable effect in most lighting systems.
-STARLIGHT 0
+## Percentile strength of exterior ambient light (such as starlight). 0.5 is 50% lit.
+EXTERIOR_AMBIENT_LIGHT 0
+
 
 ## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
 # LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK, ALL LAWS OVERRIDDEN#*?&110010
 
 
-## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
-# GENERATE_ASTEROID
-
-
+## Enable/Disable random level generation. Will behave strangely if turned off with a map that expects it on.
+#ROUNDSTART_LEVEL_GENERATION 1
 
 ## Uncomment to enable organ decay outside of a body or storage item.
 #ORGANS_CAN_DECAY
@@ -457,3 +456,9 @@ RADIATION_LOWER_LIMIT 0.15
 ## Whether or not to make localhost immune to throttling.
 ## Localhost will still be throttled internally; it just won't be affected by it.
 #NO_THROTTLE_LOCALHOST
+
+## Uncomment this to enable expanded alt interactions with objects.
+#EXPANDED_ALT_INTERACTIONS
+
+## Uncomment this to show a typing indicator for people writing whispers.
+#SHOW_TYPING_INDICATOR_FOR_WHISPERS

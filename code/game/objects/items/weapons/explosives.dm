@@ -8,6 +8,11 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'esoteric':2}"
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/silicon = MATTER_AMOUNT_TRACE,
+		/decl/material/liquid/anfo = MATTER_AMOUNT_REINFORCEMENT, //#TODO: Slap RDX in here
+	)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
 	var/atom/target = null
@@ -25,10 +30,10 @@
 	return ..()
 
 /obj/item/plastique/attackby(var/obj/item/I, var/mob/user)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		open_panel = !open_panel
 		to_chat(user, "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>")
-	else if(isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/assembly/signaler ))
+	else if(IS_WIRECUTTER(I) || IS_MULTITOOL(I) || istype(I, /obj/item/assembly/signaler ))
 		wires.Interact(user)
 	else
 		..()
@@ -36,7 +41,7 @@
 /obj/item/plastique/attack_self(mob/user)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
 	if(user.get_active_hand() == src)
-		newtime = Clamp(newtime, 10, 60000)
+		newtime = clamp(newtime, 10, 60000)
 		timer = newtime
 		to_chat(user, "Timer set for [timer] seconds.")
 
@@ -49,7 +54,7 @@
 	user.do_attack_animation(target)
 
 	if(do_after(user, 50, target) && in_range(user, target))
-		if(!user.unEquip(src))
+		if(!user.try_unequip(src))
 			return
 		src.target = target
 		forceMove(null)

@@ -11,7 +11,7 @@
 	if(!welder.isOn())
 		to_chat(user, SPAN_WARNING("\The [welder] needs to be turned on to begin this task."))
 		return TOOL_USE_FAILURE
-	if(!welder.remove_fuel(expend_fuel, user))
+	if(!welder.weld(expend_fuel, user))
 		to_chat(user, SPAN_WARNING("You need more fuel to begin this task."))
 		return TOOL_USE_FAILURE
 	return TOOL_USE_SUCCESS
@@ -23,7 +23,7 @@
 	if(!welder.isOn())
 		to_chat(user, SPAN_WARNING("\The [welder] needs to be turned on to finish this task."))
 		return TOOL_USE_FAILURE
-	if(!welder.remove_fuel(expend_fuel, user))
+	if(!welder.weld(expend_fuel, user))
 		to_chat(user, SPAN_WARNING("You need more fuel to finish this task."))
 		return TOOL_USE_FAILURE
 	return TOOL_USE_SUCCESS

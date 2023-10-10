@@ -29,13 +29,13 @@
 	newly_built_state = /decl/machine_construction/wall_frame/no_circuit/hackable
 
 /decl/machine_construction/wall_frame/panel_closed/hackable/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(/decl/machine_construction/wall_frame/panel_closed/hackable/hacking)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You release some of the logic wiring on \the [machine]. The cover panel remains closed."))
 		machine.queue_icon_update()
 		return
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		TRANSFER_STATE(open_state)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		machine.panel_open = TRUE
@@ -49,13 +49,13 @@
 	. += "Use a parts replacer to view installed parts."
 
 /decl/machine_construction/wall_frame/panel_closed/hackable/hacking/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(active_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You tuck the exposed wiring back into \the [machine] and screw the hatch back into place."))
 		machine.queue_icon_update()
 		return
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		to_chat(user, SPAN_NOTICE("The exposed wires block you from prying open the main hatch. Tuck them back in first."))
 		return TRUE
 
@@ -65,7 +65,7 @@
 	. += "Use a parts replacer to view installed parts."
 
 /decl/machine_construction/wall_frame/panel_open/hackable/up_interaction(obj/item/I, mob/user, obj/machinery/machine)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		TRANSFER_STATE(active_state)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		machine.panel_open = FALSE

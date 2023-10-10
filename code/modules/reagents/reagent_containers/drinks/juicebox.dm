@@ -27,6 +27,7 @@
 	update_icon()
 
 /obj/item/chems/drinks/juicebox/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	var/mutable_appearance/new_appearance = new(src)
 	new_appearance.appearance_flags = RESET_COLOR
 	new_appearance.color = primary_color
@@ -66,28 +67,34 @@
 	name = "apple juicebox"
 	desc = "A small cardboard juicebox with a cartoon apple on it."
 
+/obj/item/chems/drinks/juicebox/apple/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/juice/apple, reagents.maximum_volume)
+
 /obj/item/chems/drinks/juicebox/apple/Initialize()
 	. = ..()
 	set_colors("#ff0000", "#ffff00", "#ff0000", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/apple, 25)
 
 /obj/item/chems/drinks/juicebox/orange
 	name = "orange juicebox"
 	desc = "A small cardboard juicebox with a cartoon orange on it."
 
+/obj/item/chems/drinks/juicebox/orange/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/juice/orange, reagents.maximum_volume)
+
 /obj/item/chems/drinks/juicebox/orange/Initialize()
 	. = ..()
 	set_colors("#ffff00", "#ff0000", "#ffff00", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/orange, 25)
 
 /obj/item/chems/drinks/juicebox/grape
 	name = "grape juicebox"
 	desc = "A small cardboard juicebox with some cartoon grapes on it."
 
+/obj/item/chems/drinks/juicebox/grape/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/drink/juice/grape, reagents.maximum_volume)
+
 /obj/item/chems/drinks/juicebox/grape/Initialize()
 	. = ..()
 	set_colors("#ff00ff", "#00ff00", style="stripe")
-	reagents.add_reagent(/decl/material/liquid/drink/juice/grape, 25)
 
 /obj/item/chems/drinks/juicebox/random/Initialize()
 	. = ..()
@@ -101,14 +108,13 @@
 	desc = "Juice in a box; who knows what flavor!"
 
 /obj/item/chems/drinks/juicebox/sensible_random/proc/juice_it()
-	var/drinktypes = subtypesof(/decl/material/liquid/drink/juice)
+	var/list/drinktypes = decls_repository.get_decl_paths_of_subtype(/decl/material/liquid/drink/juice)
 	var/decl/material/J = pick(drinktypes)
 	reagents.add_reagent(J, 20)
 	reagents.add_reagent(pick(drinktypes - J), 5)
 	return reagents.reagent_volumes
 
-/obj/item/chems/drinks/juicebox/sensible_random/Initialize()
-	. = ..()
+/obj/item/chems/drinks/juicebox/sensible_random/populate_reagents()
 	var/list/chosen_reagents = juice_it()
 	var/decl/material/J = GET_DECL(chosen_reagents[1])
 	var/decl/material/K = GET_DECL(chosen_reagents[2])

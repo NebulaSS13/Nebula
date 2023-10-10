@@ -1,15 +1,3 @@
-/obj/item/frame_holder
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
-	)
-
-/obj/item/frame_holder/Initialize(mapload, var/newloc)
-	..()
-	new /obj/structure/heavy_vehicle_frame(newloc)
-	return  INITIALIZE_HINT_QDEL
-
 /obj/structure/heavy_vehicle_frame
 	name = "exosuit frame"
 	desc = "The frame for an exosuit, apparently."
@@ -86,7 +74,7 @@
 /obj/structure/heavy_vehicle_frame/attackby(var/obj/item/thing, var/mob/user)
 
 	// Removing components.
-	if(isCrowbar(thing))
+	if(IS_CROWBAR(thing))
 		if(is_reinforced == FRAME_REINFORCED)
 			if(!do_after(user, 5 * user.skill_delay_mult(SKILL_DEVICES)) || !material)
 				return
@@ -116,7 +104,7 @@
 		return
 
 	// Final construction step.
-	else if(isScrewdriver(thing))
+	else if(IS_SCREWDRIVER(thing))
 
 		// Check for basic components.
 		if(!(arms && legs && head && body))
@@ -162,7 +150,7 @@
 		return
 
 	// Installing wiring.
-	else if(isCoil(thing))
+	else if(IS_COIL(thing))
 
 		if(is_wired)
 			to_chat(user, SPAN_WARNING("\The [src] has already been wired."))
@@ -186,7 +174,7 @@
 		playsound(user.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		is_wired = FRAME_WIRED
 	// Securing wiring.
-	else if(isWirecutter(thing))
+	else if(IS_WIRECUTTER(thing))
 		if(!is_wired)
 			to_chat(user, "There is no wiring in \the [src] to neaten.")
 			return
@@ -223,7 +211,7 @@
 		else
 			return ..()
 	// Securing metal.
-	else if(isWrench(thing))
+	else if(IS_WRENCH(thing))
 		if(!is_reinforced)
 			to_chat(user, SPAN_WARNING("There is no metal to secure inside \the [src]."))
 			return
@@ -241,7 +229,7 @@
 		playsound(user.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		is_reinforced = (is_reinforced == FRAME_REINFORCED_SECURE) ? FRAME_REINFORCED : FRAME_REINFORCED_SECURE
 	// Welding metal.
-	else if(isWelder(thing))
+	else if(IS_WELDER(thing))
 		var/obj/item/weldingtool/WT = thing
 		if(!is_reinforced)
 			to_chat(user, SPAN_WARNING("There is no metal to secure inside \the [src]."))
@@ -252,7 +240,7 @@
 		if(!WT.isOn())
 			to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
 			return
-		if(WT.remove_fuel(1, user))
+		if(WT.weld(1, user))
 
 			var/last_reinforced_state = is_reinforced
 			visible_message("\The [user] begins welding the metal reinforcement inside \the [src].")
@@ -315,7 +303,7 @@
 		visible_message(SPAN_NOTICE("\The [user] begins installing \the [thing] into \the [src]."))
 		if(!user.canUnEquip(thing) || !do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || user.get_active_hand() != thing)
 			return
-		if(!user.unEquip(thing))
+		if(!user.try_unequip(thing))
 			return
 	thing.forceMove(src)
 	visible_message(SPAN_NOTICE("\The [user] installs \the [thing] into \the [src]."))

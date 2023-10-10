@@ -38,6 +38,8 @@
 	wall_support_value = MAT_VALUE_NORMAL
 	fuel_value = 0.8
 	default_solid_form = /obj/item/stack/material/plank
+	sound_manipulate = 'sound/foley/woodpickup1.ogg'
+	sound_dropped = 'sound/foley/wooddrop1.ogg'
 
 /decl/material/solid/wood/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -59,6 +61,7 @@
 	. += new/datum/stack_recipe/beehive_assembly(src)
 	. += new/datum/stack_recipe/beehive_frame(src)
 	. += new/datum/stack_recipe/furniture/bookcase(src)
+	. += new/datum/stack_recipe/furniture/book_cart(src)
 	. += new/datum/stack_recipe/zipgunframe(src)
 	. += new/datum/stack_recipe/coilgun(src)
 	. += new/datum/stack_recipe/stick(src)

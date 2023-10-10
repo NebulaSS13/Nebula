@@ -4,7 +4,7 @@
 
 	if(!istype(player))
 		return FALSE
-	
+
 	if (required_language)
 		player.add_language(required_language)
 		player.set_default_language(required_language)
@@ -21,19 +21,21 @@
 		var/decl/hierarchy/outfit/outfit = GET_DECL(default_outfit)
 		outfit.equip(player)
 
-	create_id(player)
+	if(default_access)
+		var/obj/item/card/id/id = player.get_equipped_item(slot_wear_id_str)
+		if(id)
+			LAZYDISTINCTADD(id.access, default_access)
+
 	if(rig_type)
 		equip_rig(rig_type, player)
 
 	return TRUE
 
 /decl/special_role/proc/unequip(var/mob/living/carbon/human/player)
-	if(!istype(player))
-		return 0
-	return 1
+	return istype(player)
 
 /decl/special_role/proc/equip_rig(var/rig_type, var/mob/living/carbon/human/player)
-	set waitfor = 0
+	set waitfor = FALSE
 	if(istype(player) && ispath(rig_type))
 		var/obj/item/rig/rig = new rig_type(player)
 		rig.seal_delay = 0
@@ -45,4 +47,4 @@
 			rig.seal_delay = initial(rig.seal_delay)
 			if(rig.air_supply)
 				player.set_internals(rig.air_supply)
-		return rig 
+		return rig

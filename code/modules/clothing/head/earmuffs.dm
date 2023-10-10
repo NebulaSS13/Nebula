@@ -6,3 +6,4 @@
 	volume_multiplier = 0.1
 	body_parts_covered = SLOT_HEAD|SLOT_EARS
 	gender = PLURAL
+	flags_inv = 0

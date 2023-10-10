@@ -20,6 +20,7 @@
 #define SS_PRIORITY_SPACEDRIFT     40  // Drifting things.
 #define SS_PRIORITY_INPUT          20  // Input things.
 #define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
+#define SS_PRIORITY_AMBIENCE       20  // Queued ambient lighting updates.
 #define SS_PRIORITY_ALARM          20  // Alarm processing.
 #define SS_PRIORITY_EVENT          20  // Event processing and queue handling.
 #define SS_PRIORITY_SHUTTLE        20  // Shuttle movement.
@@ -38,6 +39,7 @@
 
 // SS_BACKGROUND
 #define SS_PRIORITY_OBJECTS       100  // processing_objects processing.
+#define SS_PRIORITY_OVERMAP       95   // Moving objects on the overmap.
 #define SS_PRIORITY_PROCESSING    95   // Generic datum processor. Replaces objects processor.
 #define SS_PRIORITY_PLANTS        90   // Plant processing, slow ticks.
 #define SS_PRIORITY_VINES         50   // Spreading vine effects.
@@ -52,6 +54,7 @@
 #define SS_PRIORITY_COMPUTER_NETS 25   // Handles computer network devices hookups
 #define SS_PRIORITY_GARBAGE       20   // Garbage collection.
 #define SS_PRIORITY_WEATHER       10   // Weather processing.
+#define SS_PRIORITY_DAYCYCLE      10   // Day cycle processing on planetoids
 #define SS_PRIORITY_BLOB          0    // Blob processing.
 
 // Subsystem fire priority, from lowest to highest priority

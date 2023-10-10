@@ -7,8 +7,7 @@
 	thrown_material_force_multiplier = 0.1
 	randpixel = 5
 	material = /decl/material/solid/metal/bronze
-	applies_material_colour = TRUE
-	applies_material_name = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/max_butts = 10
 
 /obj/item/ashtray/examine(mob/user)
@@ -21,16 +20,13 @@
 		to_chat(user, "It has [contents.len] cig butts in it.")
 
 /obj/item/ashtray/on_update_icon()
-	..()
-	overlays.Cut()
+	. = ..()
 	if (contents.len == max_butts)
-		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
+		add_overlay("ashtray_full")
 	else if (contents.len >= max_butts/2)
-		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
+		add_overlay("ashtray_half")
 
 /obj/item/ashtray/attackby(obj/item/W, mob/user)
-	if (health <= 0)
-		return
 	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/flame/match))
 		if (contents.len >= max_butts)
 			to_chat(user, "\The [src] is full.")
@@ -46,28 +42,19 @@
 		else
 			visible_message(SPAN_NOTICE("\The [user] places \the [W] in \the [src]."))
 
-		if(user.unEquip(W, src))
+		if(user.try_unequip(W, src))
 			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()
-	else
-		..()
-		health = max(0,health - W.force)
-		if (health < 1)
-			shatter()
+	return ..()
 
 /obj/item/ashtray/throw_impact(atom/hit_atom)
-	..()
-	if(health > 0)
-		health = max(0,health - 3)
-		if(contents.len)
-			visible_message(SPAN_DANGER("\The [src] slams into [hit_atom], spilling its contents!"))
-			for(var/obj/O in contents)
-				O.dropInto(loc)
-			remove_extension(src, /datum/extension/scent)
-		if(health < 1)
-			shatter()
-		else
-			update_icon()
+	. = ..()
+	if(length(contents))
+		visible_message(SPAN_DANGER("\The [src] slams into [hit_atom], spilling its contents!"))
+		dump_contents()
+		remove_extension(src, /datum/extension/scent)
+		update_icon()
+	take_damage(3, BRUTE, 0, hit_atom)
 
 /obj/item/ashtray/plastic
 	material = /decl/material/solid/plastic

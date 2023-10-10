@@ -6,6 +6,7 @@
 	damtype = BRUTE
 	canremove = FALSE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE //for intent of shocking checks, they're right inside the animal
+	is_spawnable_type = FALSE
 	var/show_in_message   // whether should we show up in attack message, e.g. 'urist has been bit with teeth by carp' vs 'urist has been bit by carp'
 
 /obj/item/natural_weapon/attack_message_name()

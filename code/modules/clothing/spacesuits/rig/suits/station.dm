@@ -38,13 +38,13 @@
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
 	icon = 'icons/clothing/rigs/rig.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	online_slowdown = 3
 	offline_slowdown = 10
@@ -89,13 +89,13 @@
 	desc = "A light rig for repairs and maintenance to the outside of habitats and vessels."
 	icon = 'icons/clothing/rigs/rig_eva.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_MINOR,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_MINOR,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 	online_slowdown = 0
 	offline_vision_restriction = TINT_HEAVY
@@ -135,13 +135,13 @@
 	desc = "An advanced hardsuit that protects against hazardous, low pressure environments. Shines with a high polish. Appears compatible with the physiology of most species."
 	icon = 'icons/clothing/rigs/rig_engineering.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_SMALL,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 	online_slowdown = 0
 	offline_vision_restriction = TINT_HEAVY
@@ -190,13 +190,13 @@
 	desc = "An Anomalous Material Interaction hardsuit, a cutting-edge design, protects the wearer against the strangest energies the universe can throw at it."
 	icon = 'icons/clothing/rigs/rig_science.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_STRONG,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_STRONG,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 	online_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY
@@ -206,7 +206,7 @@
 	boots =  /obj/item/clothing/shoes/magboots/rig/hazmat
 	gloves = /obj/item/clothing/gloves/rig/hazmat
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/scanner/health,/obj/item/measuring_tape,/obj/item/ano_scanner,/obj/item/depth_scanner,/obj/item/core_sampler,/obj/item/gps,/obj/item/pinpointer/radio,/obj/item/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/measuring_tape,/obj/item/ano_scanner,/obj/item/depth_scanner,/obj/item/core_sampler,/obj/item/gps,/obj/item/pinpointer/radio,/obj/item/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
 
 	anomaly_shielding = 1
 	req_access = list(access_tox)
@@ -236,13 +236,13 @@
 	desc = "A durable suit designed for medical rescue in high risk areas."
 	icon = 'icons/clothing/rigs/rig_medical.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 	online_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY
@@ -252,7 +252,7 @@
 	boots =  /obj/item/clothing/shoes/magboots/rig/medical
 	gloves = /obj/item/clothing/gloves/rig/medical
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
 
 	req_access = list(access_medical_equip)
 
@@ -282,13 +282,13 @@
 	desc = "A security hardsuit designed for prolonged EVA in dangerous environments."
 	icon = 'icons/clothing/rigs/rig_hazard.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	online_slowdown = 1
 	offline_slowdown = 3
@@ -328,8 +328,8 @@
 	desc = "A very lightweight suit designed to allow use inside mechs and starfighters. It feels like you're wearing nothing at all."
 	icon = 'icons/clothing/rigs/rig_null.dmi'
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_MINOR
 		)
 	online_slowdown = 0
 	offline_slowdown = 1

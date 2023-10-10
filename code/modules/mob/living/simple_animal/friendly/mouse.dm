@@ -25,6 +25,7 @@
 	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
+	base_animal_type = /mob/living/simple_animal/mouse
 
 	meat_amount =   1
 	bone_amount =   1
@@ -33,6 +34,9 @@
 
 	var/body_color //brown, gray and white, leave blank for random
 	var/splatted = FALSE
+
+/mob/living/simple_animal/mouse/has_dexterity(dex_level)
+	return FALSE // Mice are troll bait, give them no power.
 
 /mob/living/simple_animal/mouse/Life()
 	. = ..()
@@ -60,6 +64,10 @@
 	if(name == initial(name))
 		name = "[name] ([sequential_id(/mob/living/simple_animal/mouse)])"
 	real_name = name
+	set_mouse_icon()
+	. = ..()
+
+/mob/living/simple_animal/mouse/proc/set_mouse_icon()
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
 	switch(body_color)
@@ -71,9 +79,7 @@
 			icon = 'icons/mob/simple_animal/mouse_white.dmi'
 		if("brown")
 			icon = 'icons/mob/simple_animal/mouse_brown.dmi'
-
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
-	. = ..()
 
 /mob/living/simple_animal/mouse/proc/splat()
 	adjustBruteLoss(maxHealth)  // Enough damage to kill
@@ -85,18 +91,16 @@
 	if(stat == DEAD && splatted)
 		icon_state = "world-splat"
 
-/mob/living/simple_animal/mouse/Crossed(AM)
-	if( ishuman(AM) )
-		if(!stat)
-			var/mob/M = AM
-			to_chat(M, "<span class='warning'>[html_icon(src)] Squeek!</span>")
-			sound_to(M, 'sound/effects/mousesqueek.ogg')
+/mob/living/simple_animal/mouse/Crossed(atom/movable/AM)
 	..()
+	if(!ishuman(AM) || stat)
+		return
+	to_chat(AM, SPAN_WARNING("[html_icon(src)] Squeek!"))
+	sound_to(AM, 'sound/effects/mousesqueek.ogg')
 
 /*
  * Mouse types
  */
-
 /mob/living/simple_animal/mouse/white
 	body_color = "white"
 	icon = 'icons/mob/simple_animal/mouse_white.dmi'
@@ -119,3 +123,16 @@
 	// Change my name back, don't want to be named Tom (666)
 	SetName(initial(name))
 	real_name = name
+
+// rats, they're the rats (from Polaris)
+/mob/living/simple_animal/mouse/rat
+	name = "rat"
+	desc = "A large rodent, often seen hiding in maintenance areas and making a nuisance of itself."
+	body_color = "rat"
+	icon = 'icons/mob/simple_animal/rat.dmi'
+	skin_material = /decl/material/solid/skin/fur/gray
+	maxHealth = 20
+	health = 20
+
+/mob/living/simple_animal/mouse/rat/set_mouse_icon()
+	return

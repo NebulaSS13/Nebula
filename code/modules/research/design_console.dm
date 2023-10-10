@@ -11,7 +11,7 @@
 
 /obj/machinery/computer/design_console/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, RECEIVER_STRONG_WIRELESS)
 
 /obj/machinery/computer/design_console/modify_mapped_vars(map_hash)
 	..()
@@ -26,7 +26,7 @@
 		if(disk)
 			to_chat(user, SPAN_WARNING("\The [src] already has a disk inserted."))
 			return
-		if(user.unEquip(I, src))
+		if(user.try_unequip(I, src))
 			visible_message("\The [user] slots \the [I] into \the [src].")
 			disk = I
 			return
@@ -43,11 +43,6 @@
 		disk = null
 		return TRUE
 	return FALSE
-
-/obj/machinery/computer/design_console/AltClick(mob/user)
-	if(disk)
-		eject_disk()
-	. = ..()
 
 /obj/machinery/computer/design_console/interface_interact(mob/user)
 	ui_interact(user)
@@ -72,7 +67,7 @@
 		var/list/show_tech_levels = list()
 		for(var/tech in viewing_database.tech_levels)
 			var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-			show_tech_levels += list(list("field" = field.name, "level" = "[viewing_database.tech_levels[tech]].0 GQ"))
+			show_tech_levels += list(list("field" = field.name, "desc" = field.desc, "level" = "[viewing_database.tech_levels[tech]].0 GQ"))
 		data["tech_levels"] = show_tech_levels
 
 	else if(showing_designs)
@@ -90,7 +85,7 @@
 		var/list/show_tech_levels = list()
 		for(var/tech in local_cache)
 			var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
-			show_tech_levels += list(list("field" = field.name, "level" = "[local_cache[tech]].0 GQ"))
+			show_tech_levels += list(list("field" = field.name, "level" = "[local_cache[tech]].0 GQ", "desc" = field.desc))
 		data["tech_levels"] = show_tech_levels
 
 		var/list/found_databases = list()
@@ -224,3 +219,20 @@
 	var/list/techs = get_network_tech_levels()
 	for(var/obj/machinery/fabricator/fab in network.get_devices_by_type(/obj/machinery/fabricator))
 		fab.refresh_design_cache(techs)
+
+/obj/machinery/computer/design_console/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/remove_disk/console)
+
+/decl/interaction_handler/remove_disk/console
+	expected_target_type = /obj/machinery/computer/design_console
+
+/decl/interaction_handler/remove_disk/console/is_possible(atom/target, mob/user, obj/item/prop)
+	. = ..()
+	if(.)
+		var/obj/machinery/computer/design_console/D = target
+		. = !!D.disk
+
+/decl/interaction_handler/remove_disk/console/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/machinery/computer/design_console/D = target
+	D.eject_disk(user)

@@ -39,7 +39,7 @@
 		return
 
 	var/mob/living/carbon/human/H = loc
-	if(istype(H) && H.head == src)
+	if(istype(H) && H.get_equipped_item(slot_head_str) == src)
 		integrate()
 		return
 
@@ -77,7 +77,7 @@
 		return
 
 	var/mob/living/carbon/human/H = loc
-	if(!istype(H) || H.head != src)
+	if(!istype(H) || H.get_equipped_item(slot_head_str) != src)
 		canremove = TRUE
 		return
 
@@ -111,7 +111,7 @@
 		if(istype(H) && H.psi)
 			H.psi.reset()
 		H = loc
-		if(!istype(H) || H.head != src)
+		if(!istype(H) || H.get_equipped_item(slot_head_str) != src)
 			canremove = TRUE
 
 /obj/item/clothing/head/helmet/space/psi_amp/proc/integrate()
@@ -132,7 +132,7 @@
 		return
 
 	var/mob/living/carbon/human/H = loc
-	if(!istype(H) || H.head != src)
+	if(!istype(H) || H.get_equipped_item(slot_head_str) != src)
 		to_chat(usr, SPAN_WARNING("\The [src] must be worn on your head in order to be activated."))
 		return
 

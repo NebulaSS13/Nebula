@@ -74,7 +74,7 @@
 			to_chat(user, "<span class='notice'>[buckled_mob] is already on the ironing table!</span>")
 			return
 
-		if(user.unEquip(I, src))
+		if(user.try_unequip(I, src))
 			cloth = I
 			events_repository.register(/decl/observ/destroyed, I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 			update_icon()
@@ -85,7 +85,7 @@
 		// anti-wrinkle "massage"
 		if(buckled_mob && ishuman(buckled_mob))
 			var/mob/living/carbon/human/H = buckled_mob
-			var/zone = user.zone_sel.selecting
+			var/zone = user.get_target_zone()
 			var/parsed = parse_zone(zone)
 
 			visible_message("<span class='danger'>[user] begins ironing [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You begin ironing [buckled_mob]'s [parsed]!</span>")
@@ -99,7 +99,7 @@
 			return
 
 		if(!cloth)
-			if(!holding && !R.enabled && user.unEquip(I, src))
+			if(!holding && !R.enabled && user.try_unequip(I, src))
 				holding = R
 				events_repository.register(/decl/observ/destroyed, I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 				update_icon()
@@ -118,13 +118,15 @@
 	..()
 
 /obj/structure/bed/roller/ironingboard/attack_hand(var/mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE) || buckled_mob)
+		return ..()	//Takes care of unbuckling.
 	if(density) // check if it's deployed
 		if(holding && user.put_in_hands(holding))
 			remove_item(holding)
-			return
+			return TRUE
 		if(cloth && user.put_in_hands(cloth))
 			remove_item(cloth)
-			return
+			return TRUE
 		if(!buckled_mob)
 			to_chat(user, "You fold the ironing table down.")
 			set_density(0)
@@ -132,7 +134,7 @@
 		to_chat(user, "You deploy the ironing table.")
 		set_density(1)
 	update_icon()
-	. = ..()	//Takes care of unbuckling.
+	return TRUE
 
 /obj/structure/bed/roller/ironingboard/collapse()
 	var/turf/T = get_turf(src)

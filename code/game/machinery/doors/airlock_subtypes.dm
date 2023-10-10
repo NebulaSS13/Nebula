@@ -157,7 +157,7 @@
 
 /obj/machinery/door/airlock/external/escapepod/attackby(obj/item/C, mob/user)
 	if(panel_open && !arePowerSystemsOn())
-		if(isWrench(C))
+		if(IS_WRENCH(C))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"), SPAN_WARNING("You start frantically pumping the bolt override mechanism!"))
 			if(do_after(user, 160) && locked)
@@ -217,6 +217,8 @@
 	frame_type = /obj/structure/door_assembly/door_assembly_highsecurity
 	paintable = 0
 
+/obj/machinery/door/airlock/highsecurity/get_damage_leakthrough(var/damage, damtype=BRUTE)
+	return 0
 /obj/machinery/door/airlock/highsecurity/bolted
 	locked = TRUE
 
@@ -256,5 +258,7 @@
 	frame_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
 	paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
 
+/obj/machinery/door/airlock/vault/get_damage_leakthrough(var/damage, damtype=BRUTE)
+	return 0
 /obj/machinery/door/airlock/vault/bolted
 	locked = TRUE

@@ -35,15 +35,13 @@
 		return
 	. = ..()
 	if(.)
-		if(istype(P, /obj/item/stock_parts/computer/scanner))
-			var/obj/item/stock_parts/computer/scanner/scanner = P
-			scanner.do_after_install(user, holder)
+		P.do_after_install(holder, !!user)
 		return TRUE
 
 /datum/extension/assembly/modular_computer/uninstall_component(var/mob/living/user, var/obj/item/stock_parts/P)
-	if(istype(P, /obj/item/stock_parts/computer/scanner))
-		var/obj/item/stock_parts/computer/scanner/scanner = P
-		scanner.do_before_uninstall()
+	if(istype(P, /obj/item/stock_parts/computer))
+		var/obj/item/stock_parts/computer/C = P
+		C.do_before_uninstall(holder, !!user)
 	return ..()
 
 /datum/extension/assembly/modular_computer/critical_shutdown()

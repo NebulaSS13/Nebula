@@ -1,9 +1,10 @@
 /decl/loadout_category/suit
 	name = "Suits"
-	
+
 /decl/loadout_option/suit
 	slot = slot_wear_suit_str
 	category = /decl/loadout_category/suit
+	abstract_type = /decl/loadout_option/suit
 
 /decl/loadout_option/suit/poncho
 	name = "poncho selection"
@@ -31,7 +32,7 @@
 
 /decl/loadout_option/suit/hoodie
 	name = "hoodie, colour select"
-	path = /obj/item/clothing/suit/storage/hooded/hoodie
+	path = /obj/item/clothing/suit/storage/toggle/hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/suit/coat
@@ -54,7 +55,7 @@
 
 /decl/loadout_option/suit/wintercoat
 	name = "winter coat"
-	path = /obj/item/clothing/suit/storage/hooded/wintercoat
+	path = /obj/item/clothing/suit/storage/toggle/wintercoat
 
 /decl/loadout_option/suit/track
 	name = "track jacket selection"

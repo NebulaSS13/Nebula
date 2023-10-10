@@ -61,24 +61,20 @@
 /proc/iscuffed(A)
 	if(istype(A, /mob/living/carbon))
 		var/mob/living/carbon/C = A
-		if(C.handcuffed)
+		if(C.get_equipped_item(slot_handcuffed_str))
 			return 1
 	return 0
 
 /proc/hassensorlevel(A, var/level)
-	var/mob/living/carbon/human/H = A
-	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
-		return U.sensor_mode >= level
-	return 0
+	return getsensorlevel(A) >= level
 
 /proc/getsensorlevel(A)
-	var/mob/living/carbon/human/H = A
-	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
-		return U.sensor_mode
+	var/mob/M = A
+	if(istype(M))
+		var/obj/item/clothing/under/U = M.get_equipped_item(slot_w_uniform_str)
+		if(istype(U))
+			return U.sensor_mode
 	return SUIT_SENSOR_OFF
-
 
 /proc/is_admin(var/mob/user)
 	return check_rights(R_ADMIN, 0, user) != 0
@@ -352,7 +348,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	for(var/obj/item/thing in get_held_items())
 		if(thing.simulated)
 			return TRUE
-	if(full_body && (back || wear_mask))
+	if(full_body && (get_equipped_item(slot_back_str) || get_equipped_item(slot_wear_mask_str)))
 		return TRUE
 
 //converts intent-strings into numbers and back
@@ -423,7 +419,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /proc/broadcast_hud_message(var/message, var/broadcast_source, var/list/targets, var/icon)
 	var/turf/sourceturf = get_turf(broadcast_source)
 	for(var/mob/M in targets)
-		if(!sourceturf || (get_z(M) in GetConnectedZlevels(sourceturf.z)))
+		if(!sourceturf || (get_z(M) in SSmapping.get_connected_levels(sourceturf.z)))
 			M.show_message("<span class='info'>[html_icon(icon)] [message]</span>", 1)
 
 /proc/mobs_in_area(var/area/A)
@@ -498,19 +494,19 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	return 1
 
 #define SAFE_PERP -50
-/mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
+/mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
 	if(stat == DEAD)
 		return SAFE_PERP
 
 	return 0
 
-/mob/living/carbon/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
-	if(handcuffed)
+/mob/living/carbon/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
+	if(get_equipped_item(slot_handcuffed_str))
 		return SAFE_PERP
 
 	return ..()
 
-/mob/living/carbon/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
+/mob/living/carbon/human/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)
 		return SAFE_PERP
@@ -531,6 +527,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			if(istype(thing, /obj/item/gun) || istype(thing, /obj/item/energy_blade) || istype(thing, /obj/item/baton))
 				threatcount += 4
 
+		var/obj/item/belt = get_equipped_item(slot_belt_str)
 		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/energy_blade) || istype(belt, /obj/item/baton))
 			threatcount += 2
 
@@ -542,7 +539,14 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if(id)
 			perpname = id.registered_name
 
-		var/datum/computer_file/report/crew_record/CR = get_crewmember_record(perpname)
+		var/datum/computer_file/report/crew_record/CR
+		if(check_network)
+			var/datum/extension/network_device/obj_device = get_extension(access_obj, /datum/extension/network_device)
+			var/datum/computer_network/obj_network = obj_device?.get_network(NET_FEATURE_SECURITY)
+			CR = obj_network?.get_crew_record_by_name(perpname)
+		else
+			CR = get_crewmember_record(perpname)
+
 		if(check_records && !CR && !isMonkey())
 			threatcount += 4
 
@@ -551,7 +555,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 	return threatcount
 
-/mob/living/simple_animal/hostile/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
+/mob/living/simple_animal/hostile/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest, var/check_network)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)
 		return SAFE_PERP
@@ -707,3 +711,27 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		var/datum/client_color/col = thing
 		for(var/col_name in col.wire_colour_substitutions)
 			.[col_name] = col.wire_colour_substitutions[col_name]
+
+/**
+ * Tries to find a readily accessible pen in the user's held items, and in some of its inventory slots.
+ * Shouldn't search recursively.
+ */
+/mob/proc/get_accessible_pen()
+	//We might save a few loop iterations by just looking in the active hand first
+	var/obj/item/I = get_active_hand()
+	if(IS_PEN(I))
+		return I
+
+	//Look if we're holding a pen elsewhere
+	for(I in get_held_items())
+		if(IS_PEN(I))
+			return I
+
+	//Try looking if we got a rig module with integrated pen
+	var/obj/item/rig/R = get_equipped_item(slot_back_str)
+	if(istype(R))
+		var/obj/item/rig_module/device/pen/P = locate(/obj/item/rig_module/device/pen) in R.installed_modules
+		if(!R.offline && P)
+			return P.device
+
+	//Base mob only has slot_back and slot_wear_mask, so not much else to check

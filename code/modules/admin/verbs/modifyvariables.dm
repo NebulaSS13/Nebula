@@ -224,13 +224,6 @@
 		if("list")
 			mod_list(variable, O, original_name, objectvar)
 
-		if("restore to default")
-			new_var = initial(variable)
-			if(assoc)
-				L[assoc_key] = new_var
-			else
-				L[L.Find(variable)] = new_var
-
 		if("edit referenced object")
 			modify_variables(variable)
 

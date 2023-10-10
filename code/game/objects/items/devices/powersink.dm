@@ -16,12 +16,9 @@
 
 	origin_tech = "{'powerstorage':3,'esoteric':5}"
 	var/drain_rate = 1500000		// amount of power to drain per tick
-	var/apc_drain_rate = 5000 		// Max. amount drained from single APC. In Watts.
-	var/dissipation_rate = 20000	// Passive dissipation of drained power. In Watts.
 	var/power_drained = 0 			// Amount of power drained.
 	var/max_power = 5e9				// Detonation point.
 	var/mode = 0					// 0 = off, 1=clamped (off), 2=operating
-	var/datum/powernet/PN			// Our powernet
 
 	var/const/DISCONNECTED = 0
 	var/const/CLAMPED_OFF = 1
@@ -30,8 +27,8 @@
 	var/obj/structure/cable/attached		// the attached cable
 
 /obj/item/powersink/on_update_icon()
+	. = ..()
 	z_flags &= ~ZMM_MANGLE_PLANES
-	cut_overlays()
 	if(mode == OPERATING)
 		if(plane == HUD_PLANE)
 			add_overlay("[icon_state]-on")
@@ -72,7 +69,7 @@
 	. = ..()
 
 /obj/item/powersink/attackby(var/obj/item/I, var/mob/user)
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		if(mode == DISCONNECTED)
 			var/turf/T = loc
 			if(isturf(T) && !!T.is_plating())
@@ -100,28 +97,28 @@
 	return
 
 /obj/item/powersink/attack_hand(var/mob/user)
-	. = ..()
-	if(.)
-		return
-	switch(mode)
-		if(DISCONNECTED)
-			..()
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	if(mode == CLAMPED_OFF)
+		user.visible_message(
+			"[user] activates \the [src]!",
+			SPAN_NOTICE("You activate \the [src]."),
+			SPAN_ITALIC("You hear a click.")
+		)
+		message_admins("Power sink activated by [key_name_admin(user)] at (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+		log_game("Power sink activated by [key_name(user)] at [get_area_name(src)]")
+		set_mode(OPERATING)
+		return TRUE
 
-		if(CLAMPED_OFF)
-			user.visible_message( \
-				"[user] activates \the [src]!", \
-				"<span class='notice'>You activate \the [src].</span>",
-				"<span class='italics'>You hear a click.</span>")
-			message_admins("Power sink activated by [key_name_admin(user)] at (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
-			log_game("Power sink activated by [key_name(user)] at [get_area_name(src)]")
-			set_mode(OPERATING)
+	if(mode == OPERATING)
+		user.visible_message( \
+			"[user] deactivates \the [src]!", \
+			"<span class='notice'>You deactivate \the [src].</span>",
+			"<span class='italics'>You hear a click.</span>")
+		set_mode(CLAMPED_OFF)
+		return TRUE
 
-		if(OPERATING)
-			user.visible_message( \
-				"[user] deactivates \the [src]!", \
-				"<span class='notice'>You deactivate \the [src].</span>",
-				"<span class='italics'>You hear a click.</span>")
-			set_mode(CLAMPED_OFF)
+	return ..()
 
 /obj/item/powersink/pwr_drain()
 	if(!attached)

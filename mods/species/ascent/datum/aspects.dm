@@ -1,17 +1,14 @@
 /decl/aspect/build_references()
 	. = ..()
-	LAZYDISTINCTADD(blocked_species, list(
-		SPECIES_SERPENTID,
-		SPECIES_MANTID_ALATE,
-		SPECIES_MANTID_GYNE,
-		SPECIES_MANTID_NYMPH
-	))
+	LAZYINITLIST(blocked_species)
+	blocked_species |= SPECIES_MANTID_ALATE
+	blocked_species |= SPECIES_MANTID_GYNE
+	blocked_species |= SPECIES_MANTID_NYMPH
 
 /decl/aspect/ascent/build_references()
 	. = ..()
 	blocked_species = null
 	permitted_species = list(
-		SPECIES_SERPENTID,
 		SPECIES_MANTID_ALATE,
 		SPECIES_MANTID_GYNE,
 		SPECIES_MANTID_NYMPH

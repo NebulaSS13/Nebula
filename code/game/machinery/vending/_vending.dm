@@ -126,9 +126,6 @@
 	product_records = null
 	return ..()
 
-/obj/machinery/vending/get_codex_value()
-	return "vendomat"
-
 /obj/machinery/vending/explosion_act(severity)
 	..()
 	if(!QDELETED(src))
@@ -172,17 +169,17 @@
 			return TRUE // don't smack that machine with your $2
 
 	if (istype(W, /obj/item/cash))
-		attack_hand(user)
+		attack_hand_with_interaction_checks(user)
 		return TRUE
-	if(isMultitool(W) || isWirecutter(W))
+	if(IS_MULTITOOL(W) || IS_WIRECUTTER(W))
 		if(panel_open)
-			attack_hand(user)
+			attack_hand_with_interaction_checks(user)
 			return TRUE
 	if((user.a_intent == I_HELP) && attempt_to_stock(W, user))
 		return TRUE
 	if((. = component_attackby(W, user)))
 		return
-	if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(W))
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && IS_WRENCH(W))
 		wrench_floor_bolts(user)
 		power_change()
 		return
@@ -395,7 +392,7 @@
  * calling. W is the item being inserted, R is the associated vending_product entry.
  */
 /obj/machinery/vending/proc/stock(obj/item/W, var/datum/stored_items/vending_products/R, var/mob/user)
-	if(!user.unEquip(W))
+	if(!user.try_unequip(W))
 		return
 
 	if(R.add_product(W))

@@ -51,7 +51,7 @@
 	if(!ishuman(I.loc))
 		return FALSE
 	var/mob/living/carbon/human/H = I.loc
-	if(H.get_inventory_slot(I) != slot_wear_suit_str)
+	if(H.get_equipped_slot_for_item(I) != slot_wear_suit_str)
 		return FALSE
 	if(expected_helmet && !istype(H.get_equipped_item(slot_head_str), expected_helmet))
 		return FALSE

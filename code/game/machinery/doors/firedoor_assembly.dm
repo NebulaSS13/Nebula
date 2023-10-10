@@ -16,7 +16,7 @@
 		if(!anchored)
 			to_chat(user, SPAN_WARNING("You must secure \the [src] first!"))
 		else
-			if(!user.unEquip(C, src))
+			if(!user.try_unequip(C, src))
 				return
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			visible_message(SPAN_NOTICE("\The [user] inserts a circuit into \the [src]."))

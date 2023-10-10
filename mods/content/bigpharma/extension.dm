@@ -5,7 +5,6 @@
 
 	var/original_reagent
 	var/skill_threshold = SKILL_BASIC
-	var/container_name = "container"
 	var/container_description
 
 /datum/extension/obfuscated_medication/proc/update_appearance()
@@ -15,12 +14,10 @@
 	return donor?.reagents?.get_primary_reagent_name(codex = TRUE)
 
 /datum/extension/obfuscated_medication/bottle
-	container_name = "bottle"
 	container_description = "A small glass bottle of medication."
 	expected_type = /obj/item/chems/glass/bottle
 
 /datum/extension/obfuscated_medication/pill
-	container_name = "pill"
 	container_description = "A small gel capsule of medication."
 	expected_type = /obj/item/chems/pill
 
@@ -29,12 +26,10 @@
 	pill.icon_state = get_medication_icon_state_from_reagent_name(original_reagent, "pill", 1, 5)
 
 /datum/extension/obfuscated_medication/syringe
-	container_name = "syringe"
 	container_description = "A pre-loaded syringe of medication."
 	expected_type = /obj/item/chems/syringe
 
 /datum/extension/obfuscated_medication/pill_bottle
-	container_name = "pill bottle"
 	container_description = "A small plastic bottle of pills."
 	expected_type = /obj/item/storage/pill_bottle
 
@@ -48,7 +43,6 @@
 	bottle.wrapper_color = get_medication_colour_from_reagent_name(original_reagent)
 
 /datum/extension/obfuscated_medication/foil_pack
-	container_name = "foil pack"
 	container_description = "A small foil blister pack of pills."
 	expected_type = /obj/item/storage/pill_bottle/foil_pack
 

@@ -154,10 +154,9 @@ var/global/obj/screen/robot_inventory
 	R.up_hint.SetName("up hint")
 	R.up_hint.screen_loc = ui_up_hint
 
-	R.zone_sel = new /obj/screen/zone_sel()
+	R.zone_sel = new
 	R.zone_sel.icon = 'icons/mob/screen1_robot.dmi'
-	R.zone_sel.overlays.Cut()
-	R.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[R.zone_sel.selecting]")
+	R.zone_sel.update_icon()
 
 	//Handle the gun settings buttons
 	R.gun_setting_icon = new /obj/screen/gun/mode(null)
@@ -186,8 +185,8 @@ var/global/obj/screen/robot_inventory
 	var/mob/living/silicon/robot/R = mymob
 
 	if(R.shown_robot_modules)
-		if(R.s_active)
-			R.s_active.close(R) //Closes the inventory ui.
+		if(R.active_storage)
+			R.active_storage.close(R) //Closes the inventory ui.
 		//Modules display is shown
 		//R.client.screen += robot_inventory	//"store" icon
 

@@ -19,7 +19,8 @@
 	if(!ml)
 		if(!isnull(_age))
 			age = _age
-		SSpersistence.track_value(src, /decl/persistence_handler/filth)
+		if(persistent)
+			SSpersistence.track_value(src, /decl/persistence_handler/filth)
 
 	. = ..()
 
@@ -33,7 +34,8 @@
 		QDEL_IN(src, 5 SECONDS)
 
 /obj/effect/decal/cleanable/Destroy()
-	SSpersistence.forget_value(src, /decl/persistence_handler/filth)
+	if(persistent)
+		SSpersistence.forget_value(src, /decl/persistence_handler/filth)
 	. = ..()
 
 /obj/effect/decal/cleanable/clean_blood(var/ignore = 0)
@@ -47,5 +49,8 @@
 		set_extension(src, scent_type, cleanable_scent, scent_intensity, scent_descriptor, scent_range)
 
 /obj/effect/decal/cleanable/fluid_act(var/datum/reagents/fluid)
-	reagents?.trans_to(fluid, reagents.total_volume)
-	qdel(src)
+	SHOULD_CALL_PARENT(FALSE)
+	if(fluid?.total_volume && !QDELETED(src))
+		if(reagents?.total_volume)
+			reagents.trans_to(fluid, reagents.total_volume)
+		qdel(src)

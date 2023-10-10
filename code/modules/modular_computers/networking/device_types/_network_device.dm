@@ -6,8 +6,11 @@
 	var/key				// passkey for the network
 	var/address			// unique network address, cannot be set by user
 	var/network_tag		// human-readable network address, can be set by user. Networks enforce uniqueness, will change it if there's clash.
-	var/connection_type = NETWORK_CONNECTION_STRONG_WIRELESS  // affects signal strength
+	var/receiver_type = RECEIVER_STRONG_WIRELESS  // affects signal strength
 	var/connection_attempts = 0
+	var/internet_allowed = FALSE // Whether or not these devices can be connected over PLEXUS.
+
+	var/long_range = FALSE // Whether or not this device can connect to broadcasters across z-chunks.
 
 	var/has_commands = FALSE  // Whether or not this device can be configured to receive commands to modify and call public variables and methods.
 	var/list/command_and_call // alias -> public method to be called.
@@ -19,17 +22,19 @@
 	var/list/device_variables
 	var/list/device_methods
 
-/datum/extension/network_device/New(datum/holder, n_id, n_key, c_type, autojoin = TRUE)
+	/// Tracking var for autojoin, to resolve an ordering issue in device creation/connection.
+	VAR_PRIVATE/_autojoin
+
+/datum/extension/network_device/New(datum/holder, n_id, n_key, r_type, autojoin = TRUE)
 	..()
 	network_id = n_id
 	key = n_key
-	if(c_type)
-		connection_type = c_type
+	if(r_type)
+		receiver_type = r_type
 	address = uppertext(NETWORK_MAC)
 	var/obj/O = holder
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
-	if(autojoin)
-		SSnetworking.queue_connection(src)
+	_autojoin = autojoin
 
 	if(length(device_variables))
 		for(var/path in device_variables)
@@ -40,6 +45,12 @@
 
 	if(has_commands)
 		reload_commands()
+
+// Must be done here so that our holder's get_extension calls work.
+/datum/extension/network_device/post_construction()
+	. = ..()
+	if(_autojoin)
+		SSnetworking.try_connect(src)
 
 /datum/extension/network_device/Destroy()
 	disconnect()
@@ -59,24 +70,25 @@
 		return FALSE
 	return net.remove_device(src)
 
+// Returns list(signal type, signal strength) on success, null on failure.
 /datum/extension/network_device/proc/check_connection(specific_action)
 	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
 		// We should already be queued for reconnect if it went down, so do nothing.
 		return FALSE
-	if(!net.check_connection(src, specific_action) || net.devices_by_tag[network_tag] != src)
+	if(net.devices_by_tag[network_tag] != src)
 		// The connection has failed but the network is still up, so we try to reconnect.
-		if(connect())
-			net = SSnetworking.networks[network_id]
-		else
+		if(!connect())
 			return FALSE
-	return net.get_signal_strength(src)
+	return net.check_connection(src, specific_action)
 
 /datum/extension/network_device/proc/get_signal_wordlevel()
-	var/datum/computer_network/network = get_network()
-	if(!network)
-		return "Not Connected"
-	var/signal_strength = network.get_signal_strength(src)
+	var/list/signal_data = check_connection()
+	if(!islist(signal_data))
+		return "Not connected"
+	if(signal_data[1] == INTERNET_CONNECTION)
+		return "Connected over PLEXUS"
+	var/signal_strength = signal_data[2]
 	if(signal_strength <= 0)
 		return "Not Connected"
 	if(signal_strength < (NETWORK_BASE_BROADCAST_STRENGTH * 0.5))
@@ -84,18 +96,26 @@
 	else
 		return "High Signal"
 
+// Returns list(network_id -> connection type, ...)
 /datum/extension/network_device/proc/get_nearby_networks()
 	var/list/wired_networks = list()
 	var/list/wireless_networks = list()
+	var/list/internet_networks = list()
 	for(var/id in SSnetworking.networks)
 		var/datum/computer_network/net = SSnetworking.networks[id]
-		switch(net.check_connection(src))
+		var/list/signal_data = net.check_connection(src)
+		if(!islist(signal_data))
+			continue
+		switch(signal_data[1])
 			if(WIRED_CONNECTION)
-				wired_networks |= id
+				wired_networks[id] = WIRED_CONNECTION
 			if(WIRELESS_CONNECTION)
-				wireless_networks |= id
-	// We return it like this so that wired networks have their connections prioritized.
-	return wired_networks + wireless_networks
+				wireless_networks[id] = WIRELESS_CONNECTION
+			if(INTERNET_CONNECTION)
+				internet_networks[id] = INTERNET_CONNECTION
+
+	// We return it like this so that wired networks have their connections prioritized over wireless and internet connections.
+	return wired_networks + wireless_networks + internet_networks
 
 /datum/extension/network_device/proc/is_banned()
 	var/datum/computer_network/net = get_network()
@@ -103,8 +123,8 @@
 		return FALSE
 	return (address in net.banned_nids)
 
-/datum/extension/network_device/proc/get_network()
-	if(check_connection())
+/datum/extension/network_device/proc/get_network(specific_action)
+	if(check_connection(specific_action))
 		return SSnetworking.networks[network_id]
 
 /datum/extension/network_device/proc/add_log(text)
@@ -134,11 +154,15 @@
 	if(new_id in networks)
 		if(!SSnetworking.networks[network_id]) // old network is down, so we should unqueue from its reconnect list
 			SSnetworking.unqueue_reconnect(src, network_id)
+		var/connection_type = networks[new_id]
 		disconnect()
 		network_id = new_id
 		to_chat(user, SPAN_NOTICE("Network ID changed to '[network_id]'."))
 		if(connect())
-			to_chat(user, SPAN_NOTICE("Connected to the network '[network_id]'."))
+			if(connection_type == INTERNET_CONNECTION)
+				to_chat(user, SPAN_NOTICE("Connected to the network '[network_id]' via PLEXUS connection. Certain actions on the network may be restricted."))
+			else
+				to_chat(user, SPAN_NOTICE("Connected to the network '[network_id]'."))
 		else
 			to_chat(user, SPAN_WARNING("Unable to connect to the network '[network_id]'. Check your passkey and try again."))
 	else
@@ -190,6 +214,15 @@
 		return
 	var/obj/structure/network_cable/terminal/term = port.terminal
 	return term.get_graph()
+
+/datum/extension/network_device/proc/has_internet_connection(connecting_network)
+	// Overmap isn't used, a modem alone provides internet connection.
+	if(!length(global.using_map.overmap_ids))
+		return TRUE
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(get_z(holder))]
+	if(!istype(sector))
+		return
+	return sector.has_internet_connection(connecting_network)
 
 /datum/extension/network_device/nano_host()
 	return holder.nano_host()
@@ -249,7 +282,7 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return TRUE // If not on network, always TRUE for access, as there isn't anything to access.
-	var/obj/M = holder
+	var/obj/M = get_top_holder()
 	if(!accesses)
 		accesses  = list()
 	return M.check_access_list(accesses)
@@ -267,7 +300,7 @@
 		return src
 	if(device_methods && (public_thing.type in device_methods))
 		return src
-	if((public_thing.type in get_holder_variables()) || (public_thing in get_holder_methods()))
+	if((public_thing.type in get_holder_variables()) || (public_thing.type in get_holder_methods()))
 		return holder
 
 // Return the public methods and variables available for commands.
@@ -284,12 +317,12 @@
 	return public_variables
 
 /datum/extension/network_device/proc/get_holder_methods()
-	var/obj/machinery/M = holder
+	var/obj/machinery/M = get_top_holder()
 	if(istype(M))
 		return M.public_methods?.Copy()
 
 /datum/extension/network_device/proc/get_holder_variables()
-	var/obj/machinery/M = holder
+	var/obj/machinery/M = get_top_holder()
 	if(istype(M))
 		return M.public_variables?.Copy()
 
@@ -424,6 +457,14 @@
 		var/alias = pub.name
 		alias = replacetext(alias, " ", "_")
 		LAZYSET(command_and_write, alias, pub)
+
+/**Returns the outward facing URI for this network device.*/
+/datum/extension/network_device/proc/get_network_URI()
+	return "[network_tag].[network_id]"
+
+/**Returns the object that should be handling access and command checks.*/
+/datum/extension/network_device/proc/get_top_holder()
+	return holder
 
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy

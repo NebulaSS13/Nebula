@@ -50,7 +50,7 @@
 		/obj/item/handcuffs/cyborg,
 		/obj/item/baton/robot,
 		/obj/item/gun/energy/gun/secure/mounted,
-		/obj/item/taperoll/police,
+		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/megaphone,
 		/obj/item/holowarrant,
 		/obj/item/crowbar,

@@ -7,6 +7,7 @@ SUBSYSTEM_DEF(lighting)
 
 	var/total_lighting_overlays = 0
 	var/total_lighting_sources = 0
+	var/total_ambient_turfs = 0
 	var/list/lighting_corners = list()	// List of all lighting corners in the world.
 
 	var/list/light_queue   = list() // lighting sources  queued for update.
@@ -33,7 +34,7 @@ SUBSYSTEM_DEF(lighting)
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
 		"IUR: [total_ss_updates ? round(total_instant_updates/(total_instant_updates+total_ss_updates)*100, 0.1) : "NaN"]%\n",
 #endif
-		"\tT:{L:[total_lighting_sources] C:[lighting_corners.len] O:[total_lighting_overlays]}\n",
+		"\tT:{L:[total_lighting_sources] C:[lighting_corners.len] O:[total_lighting_overlays] A:[total_ambient_turfs]}\n",
 		"\tP:{L:[light_queue.len - (lq_idex - 1)]|C:[corner_queue.len - (cq_idex - 1)]|O:[overlay_queue.len - (oq_idex - 1)]}\n",
 		"\tL:{L:[processed_lights]|C:[processed_corners]|O:[processed_overlays]}\n"
 	)
@@ -81,6 +82,8 @@ SUBSYSTEM_DEF(lighting)
 		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) && !T.lighting_overlay)	// Can't assume that one hasn't already been created on bay/neb.
 			new /atom/movable/lighting_overlay(T)
 			. += 1
+			if (T.ambient_light)
+				T.generate_missing_corners()	// Forcibly generate corners.
 
 		CHECK_TICK
 

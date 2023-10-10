@@ -5,8 +5,8 @@
 	blocks_air = 1
 	density = 1
 	opacity = 1
+	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
-var/global/list/mining_floors = list()
 /**********************Asteroid**************************/
 // Setting icon/icon_state initially will use these values when the turf is built on/replaced.
 // This means you can put grass on the asteroid etc.
@@ -22,21 +22,23 @@ var/global/list/mining_floors = list()
 	initial_flooring = null
 	initial_gas = null
 	temperature = TCMB
+	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 
-	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
+	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug //#TODO: This should probably be generalised?
 	var/overlay_detail
 
 /turf/simulated/floor/asteroid/Initialize()
-	. = ..()
-	if (!mining_floors["[src.z]"])
-		mining_floors["[src.z]"] = list()
-	mining_floors["[src.z]"] += src
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
+	. = ..()
+	var/datum/level_data/mining_level/level = SSmapping.levels_by_z[z]
+	if(istype(level))
+		LAZYADD(level.mining_turfs, src)
 
 /turf/simulated/floor/asteroid/Destroy()
-	if (mining_floors["[src.z]"])
-		mining_floors["[src.z]"] -= src
+	var/datum/level_data/mining_level/level = SSmapping.levels_by_z[z]
+	if(istype(level))
+		LAZYREMOVE(level.mining_turfs, src)
 	return ..()
 
 /turf/simulated/floor/asteroid/explosion_act(severity)
@@ -47,6 +49,7 @@ var/global/list/mining_floors = list()
 /turf/simulated/floor/asteroid/is_plating()
 	return !density
 
+//#TODO: This should probably be generalised?
 /turf/simulated/floor/asteroid/attackby(obj/item/W, mob/user)
 	if(!W || !user)
 		return 0
@@ -82,10 +85,10 @@ var/global/list/mining_floors = list()
 		to_chat(user, "<span class='notice'>You dug a hole.</span>")
 		gets_dug()
 
-	else if(istype(W,/obj/item/storage/ore))
+	else if(istype(W,/obj/item/storage/ore)) //#FIXME: Its kinda silly to put this in a specific turf's subtype's attackby.
 		var/obj/item/storage/ore/S = W
 		if(S.collection_mode)
-			for(var/obj/item/ore/O in contents)
+			for(var/obj/item/stack/material/ore/O in contents)
 				return O.attackby(W,user)
 	else if(istype(W,/obj/item/storage/bag/fossils))
 		var/obj/item/storage/bag/fossils/S = W
@@ -96,14 +99,15 @@ var/global/list/mining_floors = list()
 	else
 		return ..(W,user)
 
+//#TODO: This should probably be generalised?
 /turf/simulated/floor/asteroid/proc/gets_dug()
 	if(dug)
 		return
-	for(var/i=0;i<(rand(3)+2);i++)
-		LAZYADD(., new/obj/item/ore/glass(src))
+	LAZYADD(., new /obj/item/stack/material/ore/glass(src, (rand(3) + 2)))
 	dug = TRUE
 	icon_state = "asteroid_dug"
 
+//#TODO: This should probably be generalised?
 /turf/simulated/floor/asteroid/proc/updateMineralOverlays(var/update_neighbors)
 
 	overlays.Cut()
@@ -129,6 +133,7 @@ var/global/list/mining_floors = list()
 				A = get_step(src, direction)
 				A.updateMineralOverlays()
 
+//#TODO: This should probably be generalised?
 /turf/simulated/floor/asteroid/Entered(atom/movable/M)
 	..()
 	if(istype(M,/mob/living/silicon/robot))

@@ -9,7 +9,7 @@
 /turf/space,
 /area/space)
 "ac" = (
-/obj/effect/submap_landmark/joinable_submap/unishi,
+/obj/abstract/submap_landmark/joinable_submap/unishi,
 /turf/space,
 /area/space)
 "ad" = (
@@ -41,7 +41,9 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ak" = (
-/obj/machinery/computer/telecomms/server,
+/obj/machinery/network/telecomms_hub{
+	initial_network_id = "eduroam"
+	},
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "al" = (
@@ -109,18 +111,18 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ax" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
+/obj/abstract/submap_landmark/spawnpoint/unishi_crew,
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ay" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
+/obj/abstract/submap_landmark/spawnpoint/unishi_crew,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "az" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
+/obj/abstract/submap_landmark/spawnpoint/unishi_crew,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
@@ -286,7 +288,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "bb" = (
-/obj/structure/bedsheetbin,
+/obj/structure/bedsheetbin/mapped,
 /obj/structure/closet/wardrobe,
 /obj/random/handgun,
 /turf/simulated/floor,
@@ -306,7 +308,7 @@
 /turf/simulated/wall,
 /area/unishi/living)
 "bg" = (
-/obj/structure/sign/warning/secure_area/armory,
+/obj/structure/sign/warning/armory,
 /turf/simulated/wall,
 /area/unishi/living)
 "bh" = (
@@ -766,7 +768,7 @@
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "cs" = (
-/obj/structure/sign/bluecross_1,
+/obj/structure/sign/department/bluecross_1,
 /turf/simulated/wall,
 /area/unishi/med)
 "ct" = (
@@ -872,9 +874,7 @@
 /area/unishi/living)
 "cD" = (
 /obj/structure/bed/chair/padded/black,
-/obj/item/modular_computer/telescreen/preset/generic{
-	pixel_y = 30
-	},
+/obj/machinery/computer/modular/telescreen/preset/generic,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cE" = (
@@ -996,7 +996,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cU" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_researcher,
+/obj/abstract/submap_landmark/spawnpoint/unishi_researcher,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cV" = (
@@ -1036,7 +1036,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "da" = (
-/obj/structure/filingcabinet/chestdrawer,
+/obj/structure/filing_cabinet/chestdrawer,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -1151,7 +1151,7 @@
 	dir = 8;
 	pixel_x = -15
 	},
-/obj/item/storage/mirror{
+/obj/structure/mirror{
 	pixel_x = -28
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -1274,11 +1274,11 @@
 /area/unishi/living)
 "dE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/caution,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dF" = (
@@ -1961,6 +1961,12 @@
 /obj/random/clothing,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
+"yC" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/unishi/living)
 "zD" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/random/cash,
@@ -1970,11 +1976,29 @@
 /obj/random/hat,
 /turf/simulated/floor/wood,
 /area/unishi/living)
+"AF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled,
+/area/unishi/living)
 "AK" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/turf/simulated/floor/tiled,
+/area/unishi/living)
+"RG" = (
+/obj/structure/closet/crate/bin,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "Um" = (
@@ -6222,9 +6246,9 @@ aO
 aO
 aO
 aO
-aO
-aO
-aO
+aP
+aP
+aP
 aO
 aO
 aO
@@ -6932,7 +6956,7 @@ bn
 ds
 bn
 dE
-bn
+AF
 dR
 dU
 dY
@@ -7549,7 +7573,7 @@ bf
 dW
 ea
 bf
-bq
+RG
 bf
 es
 be
@@ -7651,7 +7675,7 @@ aP
 aP
 aP
 aP
-aP
+yC
 aP
 aP
 aP
@@ -7854,9 +7878,9 @@ aO
 aO
 aO
 aO
-aO
-aO
-aO
+aP
+aP
+aP
 aO
 aO
 aO

@@ -20,4 +20,4 @@
 	var/old_see_in_dark = sight
 	if(old_see_in_dark != new_see_in_dark)
 		see_in_dark = new_see_in_dark
-		events_repository.raise_event(/decl/observ/see_in_dark_set, src, old_see_in_dark, new_see_in_dark)
+		RAISE_EVENT(/decl/observ/see_in_dark_set, src, old_see_in_dark, new_see_in_dark)

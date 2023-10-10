@@ -19,22 +19,22 @@
 	color = "#9eefff"
 	uid = "chem_glowsap"
 
-/decl/material/liquid/glowsap/affect_ingest(mob/living/M, alien, removed, var/datum/reagents/holder)
-	affect_blood(M, alien, removed, holder)
+/decl/material/liquid/glowsap/affect_ingest(mob/living/M, removed, var/datum/reagents/holder)
+	affect_blood(M, removed, holder)
 
-/decl/material/liquid/glowsap/affect_blood(mob/living/M, alien, removed, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/affect_blood(mob/living/M, removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_GLOWINGEYES, 1)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.update_eyes()
 
-/decl/material/liquid/glowsap/on_leaving_metabolism(atom/parent, metabolism_class)
-	if(ishuman(parent))
-		var/mob/living/carbon/human/H = parent
+/decl/material/liquid/glowsap/on_leaving_metabolism(datum/reagents/metabolism/holder)
+	if(ishuman(holder?.my_atom))
+		var/mob/living/carbon/human/H = holder.my_atom
 		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/update_eyes), 5 SECONDS)
 	. = ..()
 
-/decl/material/liquid/glowsap/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/affect_overdose(var/mob/living/M)
 	. = ..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.set_hallucination(60, 20)
@@ -67,7 +67,7 @@
 	fruit_descriptor = "numbing"
 	uid = "chem_frostoil"
 
-/decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
 		M.emote("shiver")
@@ -94,10 +94,10 @@
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
 	var/slime_temp_adj = 10
 
-/decl/material/liquid/capsaicin/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(0.5 * removed)
 
-/decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -135,29 +135,20 @@
 	heating_products = null
 	heating_point = null
 
-/decl/material/liquid/capsaicin/condensed/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/condensed/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/eyes_covered = 0
 	var/mouth_covered = 0
 	var/partial_mouth_covered = 0
 	var/stun_probability = 50
-	var/no_pain = 0
+	var/no_pain = !M.can_feel_pain()
 	var/obj/item/eye_protection = null
 	var/obj/item/face_protection = null
 	var/obj/item/partial_face_protection = null
-
 	var/effective_strength = 5
 
-	var/list/protection
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		protection = list(H.head, H.glasses, H.wear_mask)
-		if(!H.can_feel_pain())
-			no_pain = 1 //TODO: living-level can_feel_pain() proc
-	else
-		protection = list(M.wear_mask)
-
-	for(var/obj/item/I in protection)
-		if(I)
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/I = M.get_equipped_item(slot)
+		if(istype(I))
 			if(I.body_parts_covered & SLOT_EYES)
 				eyes_covered = 1
 				eye_protection = I.name
@@ -194,7 +185,7 @@
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
 			SET_STATUS_MAX(M, STAT_STUN, 3)
 
-/decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -221,15 +212,15 @@
 	color = "#13bc5e"
 	uid = "chem_mutagenics"
 
-/decl/material/liquid/mutagenics/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/mutagenics/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(33))
-		affect_blood(M, alien, removed, holder)
+		affect_blood(M, removed, holder)
 
-/decl/material/liquid/mutagenics/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/mutagenics/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(67))
-		affect_blood(M, alien, removed, holder)
+		affect_blood(M, removed, holder)
 
-/decl/material/liquid/mutagenics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/mutagenics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 
 	if(M.isSynthetic())
 		return
@@ -260,7 +251,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_lactate"
 
-/decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	M.add_chemical_effect(CE_PULSE, 1)
 	if(volume >= 10)
@@ -281,7 +272,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 	uid = "chem_nanoblood"
 
-/decl/material/liquid/nanoblood/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nanoblood/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/mob/living/carbon/human/H = M
 	if(!istype(H))
 		return
@@ -306,7 +297,7 @@
 
 	var/nicotine = REM * 0.2
 
-/decl/material/solid/tobacco/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/tobacco/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.reagents.add_reagent(/decl/material/liquid/nicotine, nicotine)
 
@@ -351,7 +342,7 @@
 	hidden_from_codex = TRUE
 	uid = "chem_tobacco_menthol"
 
-/decl/material/liquid/menthol/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/menthol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
@@ -365,7 +356,7 @@
 	flags = IGNORE_MOB_SIZE
 	uid = "chem_nanite_fluid"
 
-/decl/material/liquid/nanitefluid/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nanitefluid/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
@@ -394,7 +385,7 @@
 /decl/material/liquid/crystal_agent/proc/do_material_check(var/mob/living/carbon/M)
 	. = /decl/material/solid/gemstone/crystal
 
-/decl/material/liquid/crystal_agent/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/crystal_agent/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/result_mat = do_material_check(M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -423,7 +414,7 @@
 					E.dismember(0, DISMEMBER_METHOD_BLUNT)
 				else
 					E.take_external_damage(rand(20,30), 0)
-					E.status |= ORGAN_CRYSTAL
+					BP_SET_CRYSTAL(E)
 					E.status |= ORGAN_BRITTLE
 				break
 

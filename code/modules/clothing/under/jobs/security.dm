@@ -13,7 +13,7 @@
 	name = "warden's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_warden.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.9
 	matter = list(
@@ -31,7 +31,7 @@
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sec.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 	)
 	siemens_coefficient = 0.9
 	matter = list(
@@ -43,7 +43,7 @@
 	desc = "A dress shirt and khakis with a security patch sewn on."
 	icon = 'icons/clothing/under/uniform_dispatch.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 		)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	siemens_coefficient = 0.9
@@ -56,7 +56,7 @@
 	desc = "It's made of a slightly sturdier material, to allow for robust protection."
 	icon = 'icons/clothing/under/uniform_redshirt.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.9
 	matter = list(
@@ -68,7 +68,7 @@
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon = 'icons/clothing/under/uniform_swat.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.9
 	matter = list(
@@ -102,20 +102,20 @@
 	icon = 'icons/clothing/head/detective.dmi'
 	color = "#725443"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR
+		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
+		ARMOR_LASER = ARMOR_LASER_SMALL,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
 	siemens_coefficient = 0.9
-	flags_inv = BLOCKHEADHAIR
+	flags_inv = BLOCK_HEAD_HAIR
 	markings_icon = "band"
 	markings_color = "#b2977c"
 	material = /decl/material/solid/leather
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/head/det/attack_self(mob/user)
-	flags_inv ^= BLOCKHEADHAIR
-	to_chat(user, "<span class='notice'>[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair.</span>")
+	flags_inv ^= BLOCK_HEAD_HAIR
+	to_chat(user, "<span class='notice'>[src] will now [flags_inv & BLOCK_HEAD_HAIR ? "hide" : "show"] hair.</span>")
 	..()
 
 /obj/item/clothing/head/det/grey
@@ -136,7 +136,7 @@
 	name = "head of security's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos.dmi'
 	armor = list(
-		melee = ARMOR_MELEE_SMALL
+		ARMOR_MELEE = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.8
 	material = /decl/material/solid/leather
@@ -144,7 +144,7 @@
 	origin_tech = "{'materials':1,'engineering':1, 'combat':1}"
 
 /obj/item/clothing/head/HoS
-	name = "Head of Security Hat"
+	name = "Head of Security hat"
 	desc = "The hat of the Head of Security. For showing the officers who's in charge."
 	icon = 'icons/clothing/head/hos.dmi'
 	body_parts_covered = 0
@@ -157,11 +157,11 @@
 	icon = 'icons/clothing/suit/hos.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
+		ARMOR_LASER = ARMOR_LASER_HANDGUNS,
+		ARMOR_ENERGY = ARMOR_ENERGY_MINOR,
+		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.6

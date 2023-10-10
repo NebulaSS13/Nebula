@@ -11,11 +11,11 @@
 		else if(damtype == BURN)
 			hitsound = 'sound/items/Welder.ogg'
 		playsound(src, hitsound, 10, 1)
-		
+
 	// Shielding components (armor/fuses) take first hit
 	var/list/shielding = get_all_components_of_type(/obj/item/stock_parts/shielding)
 	for(var/obj/item/stock_parts/shielding/soak in shielding)
-		if(damtype in soak.protection_types)
+		if(soak.is_functional() && (damtype in soak.protection_types))
 			amount -= soak.take_damage(amount, damtype)
 	if(amount <= 0)
 		return
@@ -30,9 +30,12 @@
 
 	// And lastly hit the circuitboard
 	victim = get_component_of_type(/obj/item/stock_parts/circuitboard)
-	if(victim)
-		victim.take_damage(amount, damtype)
-	
+	if(victim?.can_take_damage() && victim.is_functional())
+		amount -= victim.take_damage(amount, damtype)
+
+	if(amount)
+		dismantle()
+
 /obj/machinery/proc/get_damageable_component(var/damage_type)
 	var/list/victims = shuffle(component_parts)
 	if(LAZYLEN(victims))
@@ -43,14 +46,15 @@
 			if(damage_type && (damage_type in component.ignore_damage_types))
 				continue
 			// Don't damage what can't be repaired
-			if(component.part_flags & PART_FLAG_NODAMAGE)
+			if(!component.can_take_damage())
 				continue
 			if(component.is_functional())
 				return component
 	for(var/path in uncreated_component_parts)
 		if(uncreated_component_parts[path])
 			var/obj/item/stock_parts/component = path
-			if(!(initial(component.part_flags) & PART_FLAG_NODAMAGE))
+			//Must be checked this way, since we don't have an instance to call component.can_take_damage() on.
+			if(initial(component.max_health) != ITEM_HEALTH_NO_DAMAGE)
 				return force_init_component(path)
 
 /obj/machinery/proc/on_component_failure(var/obj/item/stock_parts/component)

@@ -10,6 +10,7 @@ var/global/mob/dview/dview_mob = new
 	see_in_dark = 1e6
 	simulated = FALSE
 	virtual_mob = null
+	is_spawnable_type = FALSE
 
 /mob/dview/Destroy(force = FALSE)
 	SHOULD_CALL_PARENT(FALSE)

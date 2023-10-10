@@ -35,7 +35,7 @@
 	)
 	public_methods = list(
 		/decl/public_access/public_method/toggle_unlocked,
-		/decl/public_access/public_method/toggle_input_toggle	
+		/decl/public_access/public_method/toggle_input_toggle
 	) // Does come with suggested stock configurations, though.
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/passive_gate = 1,
@@ -157,7 +157,7 @@
 			target_pressure = max_pressure_setting
 		if ("set")
 			var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure Control",src.target_pressure) as num
-			src.target_pressure = between(0, new_pressure, max_pressure_setting)
+			src.target_pressure = clamp(0, new_pressure, max_pressure_setting)
 
 	switch(href_list["set_flow_rate"])
 		if ("min")
@@ -166,7 +166,7 @@
 			set_flow_rate = air1.volume
 		if ("set")
 			var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[air1.volume]kPa)","Flow Rate Control",src.set_flow_rate) as num
-			src.set_flow_rate = between(0, new_flow_rate, air1.volume)
+			src.set_flow_rate = clamp(0, new_flow_rate, air1.volume)
 
 	usr.set_machine(src)	//Is this even needed with NanoUI?
 	src.update_icon()
@@ -211,7 +211,7 @@
 	return machine.set_flow_rate
 
 /decl/public_access/public_variable/passive_gate_flow_rate/write_var(obj/machinery/atmospherics/binary/passive_gate/machine, new_value)
-	new_value = Clamp(new_value, 0, machine.air1?.volume)
+	new_value = clamp(new_value, 0, machine.air1?.volume)
 	. = ..()
 	if(.)
 		machine.set_flow_rate = new_value
@@ -245,7 +245,7 @@
 	return machine.target_pressure
 
 /decl/public_access/public_variable/passive_gate_target_pressure/write_var(obj/machinery/atmospherics/binary/passive_gate/machine, new_value)
-	new_value = Clamp(new_value, 0, machine.max_pressure_setting)
+	new_value = clamp(new_value, 0, machine.max_pressure_setting)
 	. = ..()
 	if(.)
 		machine.target_pressure = new_value

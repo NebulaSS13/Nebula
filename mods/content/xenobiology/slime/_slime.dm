@@ -51,7 +51,7 @@
 	return /decl/material/liquid/slimejelly
 
 /mob/living/slime/adjustToxLoss(var/amount)
-	toxloss = Clamp(toxloss + amount, 0, maxHealth)
+	toxloss = clamp(toxloss + amount, 0, maxHealth)
 
 /mob/living/slime/setToxLoss(var/amount)
 	adjustToxLoss(amount-getToxLoss())
@@ -179,10 +179,6 @@
 	if(severity == 1)
 		qdel(src)
 
-/mob/living/slime/u_equip(obj/item/W)
-	SHOULD_CALL_PARENT(FALSE)
-	return FALSE
-
 /mob/living/slime/attack_ui(slot)
 	return
 
@@ -217,9 +213,9 @@
 			adjust_friendship(user, rand(2,3))
 		return TRUE
 
-	if(feeding_on)
-		var/prey = feeding_on
-		if(feeding_on == user)
+	var/prey = feeding_on?.resolve()
+	if(prey)
+		if(prey == user)
 			if(prob(60))
 				visible_message(SPAN_DANGER("\The [user] fails to escape \the [src]!"))
 			else
@@ -227,12 +223,12 @@
 				set_feeding_on()
 		else
 			if(prob(30))
-				visible_message(SPAN_DANGER("\The [user] attempts to wrestle \the [src] off \the [feeding_on]!"))
+				visible_message(SPAN_DANGER("\The [user] attempts to wrestle \the [src] off \the [prey]!"))
 			else
-				visible_message(SPAN_DANGER("\The [user] manages to wrestle \the [src] off \the [feeding_on]!"))
+				visible_message(SPAN_DANGER("\The [user] manages to wrestle \the [src] off \the [prey]!"))
 				set_feeding_on()
 
-		if(prey != feeding_on)
+		if(prey != feeding_on?.resolve())
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			SET_STATUS_MAX(src, STAT_CONFUSE, 2)
 			step_away(src, user)
@@ -263,18 +259,12 @@
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message(SPAN_DANGER("\The [user] has attempted to punch \the [src]!"))
 				return TRUE
-			if(MUTATION_HULK in user.mutations)
-				damage += 5
-				if(feeding_on)
-					set_feeding_on()
-				if(istype(slime_ai) && slime_ai.current_target)
-					slime_ai.current_target = null
-				throw_at(get_edge_target_turf(src, get_dir(user, src)), 2, 10, user, FALSE)
 			playsound(loc, "punch", 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
 			adjustBruteLoss(damage)
 			return TRUE
-	. = ..()
+
+	return ..()
 
 /mob/living/slime/attackby(var/obj/item/W, var/mob/user)
 	if(W.force > 0)
@@ -310,8 +300,11 @@
 			powerlevel = 10
 			adjustToxLoss(-10)
 
+/mob/living/slime/get_nutrition()
+	return nutrition
+
 /mob/living/slime/adjust_nutrition(var/amt)
-	nutrition = Clamp(nutrition + amt, 0, get_max_nutrition())
+	nutrition = clamp(nutrition + amt, 0, get_max_nutrition())
 
 /mob/living/slime/proc/get_hunger_state()
 	. = 0
@@ -342,6 +335,7 @@
 
 /mob/living/slime/xenobio_scan_results()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
+	. = list()
 	. += "Slime scan result for \the [src]:"
 	. += "[slime_data.name] [is_adult ? "adult" : "baby"] slime"
 	. += "Nutrition:\t[nutrition]/[get_max_nutrition()]"
@@ -367,7 +361,7 @@
 
 		var/list/mutationTexts = list("[slime_data.name] ([100 - mutation_chance]%)")
 		for(var/i in mutationChances)
-			mutationTexts += "[i] ([mutationChances[i]]%)"
+			mutationTexts += "[GET_DECL(i)] ([mutationChances[i]]%)"
 
 		. += "Possible colours on splitting:\t[english_list(mutationTexts)]"
 

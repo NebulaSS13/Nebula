@@ -21,27 +21,27 @@
 /turf/space,
 /area/mobius_rift)
 "h" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "i" = (
-/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/bush/fullgrass,
 /turf/unsimulated/beach/sand,
 /area/mobius_rift)
 "j" = (
-/obj/structure/flora/ausbushes/genericbush,
+/obj/structure/flora/bush/genericbush,
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "k" = (
 /turf/exterior/water,
 /area/mobius_rift)
 "l" = (
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/genericbush,
+/obj/structure/flora/bush/fullgrass,
+/obj/structure/flora/bush/genericbush,
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "m" = (
-/obj/structure/flora/ausbushes/grassybush,
+/obj/structure/flora/bush/grassybush,
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "n" = (
@@ -49,11 +49,11 @@
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "o" = (
-/obj/structure/flora/ausbushes/pointybush,
+/obj/structure/flora/bush/pointybush,
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "p" = (
-/obj/structure/flora/ausbushes/sunnybush,
+/obj/structure/flora/bush/sunnybush,
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "q" = (

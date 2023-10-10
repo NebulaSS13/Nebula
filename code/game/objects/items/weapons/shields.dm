@@ -31,6 +31,7 @@
 
 /obj/item/shield
 	name = "abstract shield"
+	abstract_type = /obj/item/shield
 	var/base_block_chance = 60
 
 /obj/item/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
@@ -143,7 +144,7 @@
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
 	icon = 'icons/obj/items/shield/e_shield.dmi'
-	icon_state = "eshield" // eshield1 for expanded
+	icon_state = "eshield0" // eshield1 for expanded
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 3.0
 	throwforce = 5
@@ -152,10 +153,18 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':4,'magnets':3,'esoteric':4}"
 	attack_verb = list("shoved", "bashed")
+	material = /decl/material/solid/metal/titanium
+	matter = list(
+		/decl/material/solid/fiberglass       = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/metal/gold       = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon          = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE,
+	)
 	var/active = 0
 	var/shield_light_color = "#006aff"
 
 /obj/item/shield/energy/Initialize()
+	set_extension(src, /datum/extension/base_icon_state, copytext(initial(icon_state), 1, length(initial(icon_state))))
 	. = ..()
 	update_icon()
 
@@ -204,7 +213,9 @@
 	return
 
 /obj/item/shield/energy/on_update_icon()
-	icon_state = "[initial(icon_state)][active]"
+	. = ..()
+	var/datum/extension/base_icon_state/base_name = get_extension(src, /datum/extension/base_icon_state)
+	icon_state = "[base_name.base_icon_state][active]" 	//Replace 0 with current state
 	if(active)
 		set_light(1.5, 1.5, shield_light_color)
 	else

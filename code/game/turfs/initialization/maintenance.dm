@@ -34,8 +34,7 @@
 		new /obj/effect/decal/cleanable/blood/oil(T)
 
 	if(prob(clutter_probability))
-		var/new_junk = get_random_junk_type()
-		new new_junk(T)
+		new /obj/random/junk(T)
 
 	if(prob(vermin_probability))
 		if(prob(80))

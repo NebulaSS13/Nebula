@@ -15,7 +15,7 @@ var/global/exterior_broken_states = icon_states('icons/turf/exterior/broken.dmi'
 	desc = "A flat expanse of artificial stone-like artificial material."
 	icon = 'icons/turf/exterior/concrete.dmi'
 	diggable = FALSE
-	var/broken 
+	var/broken
 	var/burned
 
 /turf/exterior/concrete/flooded
@@ -40,9 +40,9 @@ var/global/exterior_broken_states = icon_states('icons/turf/exterior/broken.dmi'
 	name = "reinforced concrete"
 	desc = "Stone-like artificial material. It has been reinforced with an unknown compound."
 
-/turf/exterior/concrete/reinforced/on_update_icon()
+/turf/exterior/concrete/reinforced/Initialize(ml)
+	LAZYDISTINCTADD(decals, "hexacrete")
 	. = ..()
-	add_overlay("hexacrete")
 
 /turf/exterior/concrete/reinforced/damaged
 	broken = TRUE
@@ -50,3 +50,4 @@ var/global/exterior_broken_states = icon_states('icons/turf/exterior/broken.dmi'
 /turf/exterior/concrete/reinforced/road
 	name = "asphalt"
 	color = COLOR_GRAY40
+	base_color = COLOR_GRAY40

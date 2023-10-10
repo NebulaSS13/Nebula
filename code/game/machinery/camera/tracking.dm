@@ -6,7 +6,7 @@
 /mob/living/silicon/ai/var/stored_locations[0]
 
 /proc/InvalidPlayerTurf(turf/T)
-	return !(T && (T.z in global.using_map.player_levels))
+	return !(T && isPlayerLevel(T.z))
 
 /mob/living/silicon/ai/proc/get_camera_list()
 	if(src.stat == 2)
@@ -232,7 +232,7 @@
 
 	if(. == TRACKING_NO_COVERAGE)
 		var/turf/T = get_turf(src)
-		if(T && (T.z in global.using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
+		if(T && isStationLevel(T.z) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
 			return TRACKING_POSSIBLE
 
 /mob/living/proc/tracking_initiated()

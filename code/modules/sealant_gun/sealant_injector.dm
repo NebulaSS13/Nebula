@@ -1,7 +1,8 @@
-/obj/item/chems/chem_disp_cartridge/foaming_agent
-	spawn_reagent = /decl/material/liquid/foaming_agent
-/obj/item/chems/chem_disp_cartridge/polyacid
-	spawn_reagent = /decl/material/liquid/acid/polyacid
+/obj/item/chems/chem_disp_cartridge/foaming_agent/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/foaming_agent, reagents.maximum_volume)
+
+/obj/item/chems/chem_disp_cartridge/polyacid/populate_reagents()
+	reagents.add_reagent(/decl/material/liquid/acid/polyacid, reagents.maximum_volume)
 
 /obj/structure/sealant_injector
 	name = "sealant tank injector"
@@ -23,7 +24,7 @@
 	..()
 	if(loaded_tank)
 		add_overlay("tank")
-	if(length(cartridges))	
+	if(length(cartridges))
 		add_overlay("carts[length(cartridges)]")
 
 /obj/structure/sealant_injector/Initialize(ml, _mat, _reinf_mat)
@@ -35,12 +36,12 @@
 	)
 
 /obj/structure/sealant_injector/attackby(obj/item/O, mob/user)
-	
+
 	if(istype(O, /obj/item/sealant_tank))
 		if(loaded_tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a sealant tank inserted."))
 			return TRUE
-		if(user.unEquip(O, src))
+		if(user.try_unequip(O, src))
 			loaded_tank = O
 			update_icon()
 			return TRUE
@@ -49,16 +50,12 @@
 		if(length(cartridges) >= max_cartridges)
 			to_chat(user, SPAN_WARNING("\The [src] is loaded to capacity with cartridges."))
 			return TRUE
-		if(user.unEquip(O, src))
+		if(user.try_unequip(O, src))
 			LAZYSET(cartridges, O, 1)
 			update_icon()
 			return TRUE
 
 	. = ..()
-
-/obj/structure/sealant_injector/AltClick(mob/user)
-	if(Adjacent(user) && CanPhysicallyInteract(user))
-		try_inject(user)
 
 /obj/structure/sealant_injector/proc/try_inject(mob/user)
 
@@ -80,16 +77,16 @@
 		cart.reagents.trans_to_holder(loaded_tank.reagents, min(cart.reagents.total_volume, cartridges[cart] * fill_space))
 	if(injected)
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1)
-	
-/obj/structure/sealant_injector/attack_hand(mob/user)
 
+/obj/structure/sealant_injector/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	if(loaded_tank)
 		loaded_tank.dropInto(get_turf(src))
 		user.put_in_hands(loaded_tank)
 		loaded_tank = null
 		update_icon()
 		return TRUE
-
 	if(length(cartridges))
 		var/obj/cartridge = pick(cartridges)
 		cartridges -= cartridge
@@ -97,5 +94,16 @@
 		user.put_in_hands(cartridge)
 		update_icon()
 		return TRUE
+	return ..()
 
+/obj/structure/sealant_injector/get_alt_interactions(var/mob/user)
 	. = ..()
+	LAZYADD(., /decl/interaction_handler/sealant_try_inject)
+
+/decl/interaction_handler/sealant_try_inject
+	name = "Inject Sealant"
+	expected_target_type = /obj/structure/sealant_injector
+
+/decl/interaction_handler/sealant_try_inject/invoked(var/atom/target, var/mob/user)
+	var/obj/structure/sealant_injector/SI = target
+	SI.try_inject(user)

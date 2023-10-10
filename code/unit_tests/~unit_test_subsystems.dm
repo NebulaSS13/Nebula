@@ -12,6 +12,12 @@ SUBSYSTEM_DEF(unit_tests)
 	var/stage = 1
 	var/end_unit_tests
 
+	var/static/list/skipped_template_categories = list(
+		MAP_TEMPLATE_CATEGORY_AWAYSITE,
+		MAP_TEMPLATE_CATEGORY_PLANET,
+		MAP_TEMPLATE_CATEGORY_EXOPLANET,
+	)
+
 /datum/controller/subsystem/unit_tests/Initialize(timeofday)
 
 	#ifndef UNIT_TEST_COLOURED
@@ -33,15 +39,26 @@ SUBSYSTEM_DEF(unit_tests)
 	SSticker.master_mode = "extended"
 	for(var/test_datum_type in get_test_datums())
 		queue += new test_datum_type
+	sortTim(queue, /proc/cmp_unit_test_priority)
 	log_unit_test("[queue.len] unit tests loaded.")
 	. = ..()
 
+///Returns whether a template should be loaded for all unit tests or if it's tested in a specific unit test on its own.
+/datum/controller/subsystem/unit_tests/proc/is_tested_separately(var/datum/map_template/map_template)
+	for(var/cat in map_template.template_categories)
+		if(cat in skipped_template_categories)
+			return TRUE
+	return FALSE
+
 /datum/controller/subsystem/unit_tests/proc/load_map_templates()
-	for(var/map_template_name in (SSmapping.map_templates))
-		var/datum/map_template/map_template = SSmapping.map_templates[map_template_name]
+	for(var/map_template_name in SSmapping.map_templates)
+		var/datum/map_template/map_template = SSmapping.get_template(map_template_name)
 		// Away sites are supposed to be tested separately in the Away Site environment
-		if(istype(map_template, /datum/map_template/ruin/away_site))
-			report_progress("Skipping template '[map_template]' ([map_template.type]): Is an Away Site")
+		if(is_tested_separately(map_template))
+			report_progress("Skipping template '[map_template]' ([map_template.type]): Is tested separately.")
+			continue
+		if(map_template.is_runtime_generated())
+			report_progress("Skipping template '[map_template]' ([map_template.type]): Is generated at runtime.")
 			continue
 		load_template(map_template)
 		if(map_template.template_flags & TEMPLATE_FLAG_TEST_DUPLICATES)
@@ -51,11 +68,12 @@ SUBSYSTEM_DEF(unit_tests)
 /datum/controller/subsystem/unit_tests/proc/load_template(datum/map_template/map_template)
 	// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
 	if(map_template.tallness == 1)
-		INCREMENT_WORLD_Z_SIZE
-		global.using_map.sealed_levels += world.maxz // TODO: make maps handle this with /obj/abstract/level_data
-		var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
-		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
-		map_template.load(corner)
+		SSmapping.increment_world_z_size(/datum/level_data/unit_test)
+		var/turf/center = WORLD_CENTER_TURF(world.maxz)
+		if(!center)
+			CRASH("'[map_template]' (size: [map_template.width]x[map_template.height]) couldn't locate center turf at ([WORLD_CENTER_X][WORLD_CENTER_Y][world.maxz]) with world size ([WORLD_SIZE_TO_STRING])")
+		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(center)]")
+		map_template.load(center, centered = TRUE)
 	else // Multi-Z templates are loaded using different means
 		log_unit_test("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
 		map_template.load_new_z()

@@ -5,33 +5,30 @@
 	log_say("[key_name(src)] : [message]")
 
 /mob/living/silicon/robot/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	..()
 	if(message_mode)
 		if(!is_component_functioning("radio"))
-			to_chat(src, "<span class='warning'>Your radio isn't functional at this time.</span>")
-			return 0
-		if(message_mode == "general")
-			message_mode = null
-		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
+			to_chat(src, SPAN_WARNING("Your radio isn't functional at this time."))
+		else
+			used_radios += silicon_radio
+		. = TRUE
+	return ..()
 
 /mob/living/silicon/ai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	if(message_mode)
+		if(message_mode == MESSAGE_MODE_DEPARTMENT)
+			holopad_talk(message, verb, speaking)
+		else if (ai_radio.disabledAi || !has_power() || stat)
+			to_chat(src, SPAN_DANGER("System Error - Transceiver Disabled."))
+		else
+			used_radios += ai_radio
+		. = TRUE
 	..()
-	if(message_mode == "department")
-		return holopad_talk(message, verb, speaking)
-	else if(message_mode)
-		if (ai_radio.disabledAi || !has_power() || stat)
-			to_chat(src, "<span class='danger'>System Error - Transceiver Disabled.</span>")
-			return 0
-		if(message_mode == "general")
-			message_mode = null
-		return ai_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/pai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	..()
 	if(message_mode)
-		if(message_mode == "general")
-			message_mode = null
-		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
+		used_radios += silicon_radio
+		. = TRUE
+	..()
 
 /mob/living/silicon/say_quote(var/text)
 	var/ending = copytext(text, length(text))
@@ -45,16 +42,8 @@
 #define IS_ROBOT 2
 #define IS_PAI 3
 
-/mob/living/silicon/say_understands(var/other,var/decl/language/speaking = null)
-	//These only pertain to common. Languages are handled by mob/say_understands()
-	if (!speaking)
-		if (istype(other, /mob/living/carbon))
-			return 1
-		if (istype(other, /mob/living/silicon))
-			return 1
-		if (istype(other, /mob/living/carbon/brain))
-			return 1
-	return ..()
+/mob/living/silicon/say_understands(mob/speaker, decl/language/speaking)
+	return (!speaking && (iscarbon(speaker) || issilicon(speaker) || isbrain(speaker))) || ..()
 
 //For holopads only. Usable by AI.
 /mob/living/silicon/ai/proc/holopad_talk(var/message, verb, decl/language/speaking)
@@ -122,11 +111,10 @@
 
 	var/obj/machinery/hologram/holopad/T = src.holo
 	if(T && T.masters[src])
+		var/turf/our_turf = get_turf(T)
 		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"
 		to_chat(src, "<i><span class='game say'>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></span></i>")
-
-		for(var/mob/M in viewers(T.loc))
-			M.show_message(rendered, 2)
+		our_turf.audible_message(rendered)
 	else //This shouldn't occur, but better safe then sorry.
 		to_chat(src, "No holopad connected.")
 		return 0
@@ -135,3 +123,6 @@
 #undef IS_AI
 #undef IS_ROBOT
 #undef IS_PAI
+
+/mob/living/silicon/binarycheck()
+	. = TRUE

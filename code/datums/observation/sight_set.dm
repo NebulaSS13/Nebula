@@ -24,4 +24,4 @@
 		new_sight &= ~SEE_BLACKNESS
 	if(old_sight != new_sight)
 		sight = new_sight
-		events_repository.raise_event(/decl/observ/sight_set, src, old_sight, new_sight)
+		RAISE_EVENT(/decl/observ/sight_set, src, old_sight, new_sight)

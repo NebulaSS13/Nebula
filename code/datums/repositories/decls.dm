@@ -1,4 +1,4 @@
-// /decl is a subtype used for singletons that should never have more than one instance 
+// /decl is a subtype used for singletons that should never have more than one instance
 // in existence at a time. If you want to use a /decl you should use a pattern like:
 //     var/decl/somedecl/mydecl = GET_DECL(/decl/somedecl)
 
@@ -21,30 +21,35 @@
 var/global/repository/decls/decls_repository = new
 
 /repository/decls
-	var/list/fetched_decls =         list()
-	var/list/fetched_decl_ids =      list()
-	var/list/fetched_decl_types =    list()
-	var/list/fetched_decl_subtypes = list()
+	var/list/fetched_decls =                 list()
+	var/list/fetched_decl_ids =              list()
+	var/list/fetched_decl_types =            list()
+	var/list/fetched_decl_subtypes =         list()
+	var/list/fetched_decl_paths_by_type =    list()
+	var/list/fetched_decl_paths_by_subtype = list()
 
 /repository/decls/New()
 	..()
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
 		var/decl_uid = initial(decl.uid)
-		// is_abstract() would require us to retrieve (and instantiate) the decl, so we do it manually.
-		if(decl_uid && decl_type != initial(decl.abstract_type))
-			fetched_decl_ids[decl_uid] = decl_type
+		if(decl_uid && (!TYPE_IS_ABSTRACT(decl) || (initial(decl.decl_flags) & DECL_FLAG_ALLOW_ABSTRACT_INIT)))
+			fetched_decl_ids[decl_uid] = decl
 
 /repository/decls/proc/get_decl_by_id(var/decl_id)
+	RETURN_TYPE(/decl)
 	. = get_decl(fetched_decl_ids[decl_id])
 
-/repository/decls/proc/get_decl(var/decl_type)
-	ASSERT(ispath(decl_type))
+/repository/decls/proc/get_decl_path_by_id(decl_id)
+	. = fetched_decl_ids[decl_id]
+
+/repository/decls/proc/get_decl(var/decl/decl_type)
+	ASSERT(ispath(decl_type, /decl))
+	if(TYPE_IS_ABSTRACT(decl_type) && !(initial(decl_type.decl_flags) & DECL_FLAG_ALLOW_ABSTRACT_INIT))
+		return // We do not instantiate abstract decls.
 	. = fetched_decls[decl_type]
 	if(!.)
-		var/decl/decl = new decl_type()
-		if(decl.is_abstract() && decl.crash_on_abstract_init)
-			PRINT_STACK_TRACE("Banned abstract /decl type instantiated: [decl_type]")
+		var/decl/decl = new decl_type
 		fetched_decls[decl_type] = decl // This needs to be done prior to calling Initialize() to avoid circular get_decl() calls by dependencies/children.
 		// TODO: maybe implement handling for LATELOAD and QDEL init hints?
 		var/init_result = decl.Initialize()
@@ -59,12 +64,32 @@ var/global/repository/decls/decls_repository = new
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
 	for(var/decl_type in decl_types)
-		.[decl_type] = get_decl(decl_type)
+		var/decl = get_decl(decl_type)
+		if(decl)
+			.[decl_type] = decl
+
+/repository/decls/proc/get_decl_paths_of_type(var/decl_prototype)
+	. = fetched_decl_paths_by_type[decl_prototype]
+	if(!.)
+		. = list()
+		for(var/decl_path in get_decls_of_type(decl_prototype))
+			. += decl_path
+		fetched_decl_paths_by_type[decl_prototype] = .
+
+/repository/decls/proc/get_decl_paths_of_subtype(var/decl_prototype)
+	. = fetched_decl_paths_by_subtype[decl_prototype]
+	if(!.)
+		. = list()
+		for(var/decl_path in get_decls_of_subtype(decl_prototype))
+			. += decl_path
+		fetched_decl_paths_by_subtype[decl_prototype] = .
 
 /repository/decls/proc/get_decls_unassociated(var/list/decl_types)
 	. = list()
 	for(var/decl_type in decl_types)
-		. += get_decl(decl_type)
+		var/decl = get_decl(decl_type)
+		if(decl)
+			. += decl
 
 /repository/decls/proc/get_decls_of_type(var/decl_prototype)
 	. = fetched_decl_types[decl_prototype]
@@ -79,9 +104,9 @@ var/global/repository/decls/decls_repository = new
 		fetched_decl_subtypes[decl_prototype] = .
 
 /decl
+	abstract_type = /decl
 	var/uid
-	var/abstract_type = /decl
-	var/crash_on_abstract_init = FALSE
+	var/decl_flags = null // DECL_FLAG_ALLOW_ABSTRACT_INIT, DECL_FLAG_MANDATORY_UID
 	var/initialized = FALSE
 
 /decl/proc/Initialize()
@@ -92,10 +117,19 @@ var/global/repository/decls/decls_repository = new
 	initialized = TRUE
 	return INITIALIZE_HINT_NORMAL
 
+/decl/proc/validate()
+	SHOULD_CALL_PARENT(TRUE)
+	var/list/failures = list()
+	if((decl_flags & DECL_FLAG_MANDATORY_UID) && !istext(uid))
+		failures += "non-text UID '[uid || "(NULL)"]' on mandatory type"
+	else if(uid && !istext(uid))
+		failures += "non-null, non-text UID '[uid]'"
+	return failures
+
 /decl/Destroy()
 	SHOULD_CALL_PARENT(FALSE)
 	PRINT_STACK_TRACE("Prevented attempt to delete a /decl instance: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE
 
-/decl/proc/is_abstract()
-	return abstract_type == type
+/decl/CanClone()
+	return FALSE //Don't allow cloning since we're singletons

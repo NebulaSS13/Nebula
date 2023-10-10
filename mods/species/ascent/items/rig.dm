@@ -6,13 +6,13 @@
 
 	suit_type = "support exosuit"
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR,
-		bullet = 1.1 * ARMOR_BALLISTIC_RESISTANT,
-		laser = 1.1 * ARMOR_LASER_RIFLES,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
+		ARMOR_BULLET = 1.1 * ARMOR_BALLISTIC_RESISTANT,
+		ARMOR_LASER = 1.1 * ARMOR_LASER_RIFLES,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 	armor_type = /datum/extension/armor/ablative
 	armor_degradation_speed = 0.05
@@ -28,10 +28,7 @@
 	gloves =     /obj/item/clothing/gloves/rig/mantid
 
 	update_visible_name = TRUE
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_gyne.dmi',
-		BODYTYPE_SNAKE =        'mods/species/ascent/icons/rig/rig_serpentid.dmi'
-		)
+	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_gyne.dmi')
 	initial_modules = list(
 		/obj/item/rig_module/vision/thermal,
 		/obj/item/rig_module/ai_container,
@@ -143,11 +140,11 @@
 	volume = 180
 
 /obj/item/tank/mantid/methyl_bromide
-	starting_pressure = list(/decl/material/gas/methyl_bromide = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/methyl_bromide = 6 ATM)
 
 /obj/item/tank/mantid/oxygen
 	name = "mantid oxygen tank"
-	starting_pressure = list(OXYGEN = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(OXYGEN = 6 ATM)
 
 // Boilerplate due to hard typechecks in jetpack code. Todo: make it an extension.
 /obj/item/tank/jetpack/ascent
@@ -160,7 +157,7 @@
 
 /obj/item/tank/jetpack/ascent/Initialize()
 	starting_pressure = list()
-	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
+	starting_pressure[refill_gas_type] = 6 ATM
 	. = ..()
 
 /obj/item/tank/jetpack/ascent/Process()
@@ -178,13 +175,8 @@
 
 /obj/item/tank/mantid/reactor/Initialize()
 	starting_pressure = list()
-	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
+	starting_pressure[refill_gas_type] = 6 ATM
 	. = ..()
-
-/obj/item/tank/mantid/reactor/oxygen
-	name = "serpentid gas reactor"
-	refill_gas_type = /decl/material/gas/oxygen
-	distribute_pressure = 31
 
 /obj/item/tank/mantid/reactor/Process()
 	..()
@@ -201,23 +193,23 @@
 	icon = 'mods/species/ascent/icons/ascent.dmi'
 	icon_state = "injector"
 	charges = list(
-		list("bromide",             "bromide",             /decl/material/liquid/bromide, 80),
-		list("crystallizing agent", "crystallizing agent", /decl/material/liquid/crystal_agent,       80),
-		list("antibiotics",         "antibiotics",         /decl/material/liquid/antibiotics,   80),
-		list("painkillers",         "painkillers",         /decl/material/liquid/painkillers,   80)
+		list("bromide",             "bromide",             /decl/material/liquid/bromide,            80),
+		list("crystallizing agent", "crystallizing agent", /decl/material/liquid/crystal_agent,      80),
+		list("antibiotics",         "antibiotics",         /decl/material/liquid/antibiotics,        80),
+		list("painkillers",         "painkillers",         /decl/material/liquid/painkillers/strong, 80)
 	)
 
 // Rig definitions.
 /obj/item/rig/mantid/gyne
 	name = "gyne support exosuit"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_RIFLES,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
+		ARMOR_MELEE = ARMOR_MELEE_VERY_HIGH,
+		ARMOR_BULLET = ARMOR_BALLISTIC_RIFLE,
+		ARMOR_LASER = ARMOR_LASER_RIFLES,
+		ARMOR_ENERGY = ARMOR_ENERGY_RESISTANT,
+		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
+		ARMOR_BIO = ARMOR_BIO_SHIELDED,
+		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 	mantid_caste = SPECIES_MANTID_GYNE
 	initial_modules = list(
@@ -236,16 +228,6 @@
 		/obj/item/rig_module/maneuvering_jets
 	)
 
-/obj/item/rig/mantid/serpentid
-	name = "serpentid support exosuit"
-	mantid_caste = SPECIES_SERPENTID
-	air_supply = /obj/item/tank/mantid/reactor/oxygen
-	chest =      /obj/item/clothing/suit/space/rig/mantid/serpentid
-	boots =      FALSE
-
-/obj/item/clothing/suit/space/rig/mantid/serpentid
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET
-
 /obj/item/rig/mantid/mob_can_equip(var/mob/M, var/slot)
 	. = ..()
 	if(. && slot == slot_back_str)
@@ -257,16 +239,13 @@
 /obj/item/clothing/head/helmet/space/rig/mantid
 	light_color = "#00ffff"
 	desc = "More like a torpedo casing than a helmet."
-	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE | BODY_FLAG_SNAKE
+	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
 	icon = 'mods/species/ascent/icons/rig/rig_helmet.dmi'
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_helmet_gyne.dmi',
-		BODYTYPE_SNAKE = 'mods/species/ascent/icons/rig/rig_helmet_serpentid.dmi'
-	)
+	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_helmet_gyne.dmi')
 
 /obj/item/clothing/suit/space/rig/mantid
 	desc = "It's closer to a mech than a suit."
-	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE | BODY_FLAG_SNAKE
+	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
 	icon = 'mods/species/ascent/icons/rig/rig_chest.dmi'
 	allowed = list(
 		/obj/item/clustertool,
@@ -276,24 +255,16 @@
 		/obj/item/stack/medical/resin,
 		/obj/item/chems/drinks/cans/waterbottle/ascent
 	)
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_chest_gyne.dmi',
-		BODYTYPE_SNAKE = 'mods/species/ascent/icons/rig/rig_chest_serpentid.dmi'
-	)
+	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_chest_gyne.dmi')
 
 /obj/item/clothing/shoes/magboots/rig/mantid
 	icon = 'mods/species/ascent/icons/rig/rig_boots.dmi'
 	desc = "It's like a highly advanced forklift."
 	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_boots_gyne.dmi'
-	)
+	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_boots_gyne.dmi')
 
 /obj/item/clothing/gloves/rig/mantid
 	icon = 'mods/species/ascent/icons/rig/rig_gloves.dmi'
 	desc = "They look like a cross between a can opener and a Swiss army knife the size of a shoebox."
-	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE | BODY_FLAG_SNAKE
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_gloves_gyne.dmi',
-		BODYTYPE_SNAKE = 'mods/species/ascent/icons/rig/rig_gloves_serpentid.dmi'
-	)
+	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
+	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_gloves_gyne.dmi')

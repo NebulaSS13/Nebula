@@ -12,7 +12,7 @@
 	volume = 60
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	item_flags = ITEM_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_HOLLOW
 	unacidable = 1 //glass doesn't dissolve in acid
 
 	drop_sound = 'sound/foley/bottledrop1.ogg'
@@ -117,7 +117,7 @@
 	possible_transfer_amounts = @"[10,20,30,60,120,150,180]"
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	show_reagent_name = TRUE
+	presentation_flags = PRESENTATION_FLAG_NAME
 	unacidable = 0
 	material = /decl/material/solid/plastic
 	material_force_multiplier = 0.2
@@ -146,12 +146,8 @@
 		return ..()
 
 /obj/item/chems/glass/bucket/on_update_icon()
-	var/new_overlays
+	. = ..()
 	if (!ATOM_IS_OPEN_CONTAINER(src))
-		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
-		LAZYADD(new_overlays, lid)
+		add_overlay("lid_[initial(icon_state)]")
 	else if(reagents && reagents.total_volume && round((reagents.total_volume / volume) * 100) > 80)
-		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "bucket")
-		filling.color = reagents.get_color()
-		LAZYADD(new_overlays, filling)
-	overlays = new_overlays
+		add_overlay(overlay_image('icons/obj/reagentfillings.dmi', "bucket", reagents.get_color()))

@@ -17,45 +17,52 @@
 	origin_tech = "{'combat':1}"
 	attack_verb = list("robusted")
 	use_sound = 'sound/effects/storage/toolbox.ogg'
+	material = /decl/material/solid/metal/aluminium
 
 /obj/item/storage/toolbox/emergency
 	name = "emergency toolbox"
-	startswith = list(
+
+/obj/item/storage/toolbox/emergency/WillContain()
+	return list(
+		new /datum/atom_creator/weighted(list(/obj/item/flashlight, /obj/item/flashlight/flare,  /obj/item/flashlight/flare/glowstick/red)),
 		/obj/item/crowbar/red,
-		/obj/item/extinguisher/mini,
-		/obj/item/radio,
+		/obj/item/chems/spray/extinguisher/mini,
+		/obj/item/radio/shortwave,
 		/obj/item/weldingtool/mini,
-		/obj/item/welder_tank/mini
+		/obj/item/chems/welder_tank/mini
 	)
-
-/obj/item/storage/toolbox/emergency/Initialize()
-	. = ..()
-	var/item = pick(list(/obj/item/flashlight, /obj/item/flashlight/flare,  /obj/item/flashlight/flare/glowstick/red))
-	new item(src)
-
 
 /obj/item/storage/toolbox/mechanical
 	name = "mechanical toolbox"
 	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "blue"
 	item_state = "toolbox_blue"
-	startswith = list(/obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/scanner/gas, /obj/item/wirecutters)
+
+/obj/item/storage/toolbox/mechanical/WillContain()
+	return list(
+			/obj/item/screwdriver,
+			/obj/item/wrench,
+			/obj/item/weldingtool,
+			/obj/item/crowbar,
+			/obj/item/scanner/gas,
+			/obj/item/wirecutters
+		)
 
 /obj/item/storage/toolbox/electrical
 	name = "electrical toolbox"
 	desc = "Bright yellow toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "yellow"
 	item_state = "toolbox_yellow"
-	startswith = list(/obj/item/screwdriver, /obj/item/wirecutters, /obj/item/t_scanner, /obj/item/crowbar)
 
-/obj/item/storage/toolbox/electrical/Initialize()
-	. = ..()
-	new /obj/item/stack/cable_coil/random(src,30)
-	new /obj/item/stack/cable_coil/random(src,30)
-	if(prob(5))
-		new /obj/item/clothing/gloves/insulated(src)
-	else
-		new /obj/item/stack/cable_coil/random(src,30)
+/obj/item/storage/toolbox/electrical/WillContain()
+	return list(
+			new /datum/atom_creator/weighted(list(/obj/item/clothing/gloves/insulated = 5, /obj/item/stack/cable_coil/random = 95)),
+			/obj/item/stack/cable_coil/random = 2,
+			/obj/item/screwdriver,
+			/obj/item/wirecutters,
+			/obj/item/t_scanner,
+			/obj/item/crowbar
+		)
 
 /obj/item/storage/toolbox/syndicate
 	name = "black and red toolbox"
@@ -64,18 +71,39 @@
 	item_state = "toolbox_syndi"
 	origin_tech = "{'combat':1,'esoteric':1}"
 	attack_cooldown = 10
-	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/wirecutters, /obj/item/multitool)
+
+/obj/item/storage/toolbox/syndicate/WillContain()
+	return list(
+			/obj/item/clothing/gloves/insulated,
+			/obj/item/screwdriver,
+			/obj/item/wrench,
+			/obj/item/weldingtool,
+			/obj/item/crowbar,
+			/obj/item/wirecutters,
+			/obj/item/multitool
+		)
+
+/obj/item/storage/toolbox/syndicate/powertools/WillContain()
+	return list(
+			/obj/item/clothing/gloves/insulated,
+			/obj/item/power_drill,
+			/obj/item/weldingtool/electric,
+			/obj/item/hydraulic_cutter,
+			/obj/item/multitool
+		)
 
 /obj/item/storage/toolbox/repairs
 	name = "electronics toolbox"
 	desc = "A box full of boxes, with electrical machinery parts and tools needed to get them where they're needed."
 	icon_state = "yellow_striped"
 	item_state = "toolbox_yellow"
-	startswith = list(
+
+/obj/item/storage/toolbox/repairs/WillContain()
+	return list(
 		/obj/item/stack/cable_coil,
-		/obj/item/screwdriver, 
+		/obj/item/screwdriver,
 		/obj/item/wrench,
-		/obj/item/crowbar, 
+		/obj/item/crowbar,
 		/obj/item/wirecutters,
 		/obj/item/storage/box/parts_pack/manipulator,
 		/obj/item/storage/box/parts_pack/laser,

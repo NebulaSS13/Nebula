@@ -35,4 +35,5 @@
 
 //we don't want the silly text overlay!
 /obj/item/paper/pamphlet/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return

@@ -42,8 +42,12 @@
 	update_icon()
 
 /obj/item/chems/food/sushi/on_update_icon()
+	. = ..()
 	name = "[fish_type] sushi"
-	overlays = list("[fish_type]", "nori")
+	add_overlay(list("[fish_type]", "nori"))
+
+/obj/item/chems/food/sushi/apply_filling_overlay()
+	return //Bypass searching through the whole icon file for a filling icon
 
 /////////////
 // SASHIMI //
@@ -65,15 +69,14 @@
 	update_icon()
 
 /obj/item/chems/food/sashimi/on_update_icon()
+	. = ..()
 	icon_state = "sashimi_base"
 	var/list/adding = list()
 	var/slice_offset = (slices-1)*2
 	for(var/slice = 1 to slices)
-		var/image/I = image(icon = icon, icon_state = "sashimi")
-		I.pixel_x = slice_offset-((slice-1)*4)
-		I.pixel_y = I.pixel_x
-		adding += I
-	overlays = adding
+		var/offset = slice_offset-((slice-1)*4)
+		adding += image(icon = icon, icon_state = "sashimi", pixel_x = offset, pixel_y = offset)
+	add_overlay(adding)
 
 /obj/item/chems/food/sashimi/attackby(var/obj/item/I, var/mob/user)
 	if(!(locate(/obj/structure/table) in loc))
@@ -85,7 +88,7 @@
 		if(slices + other_sashimi.slices > 5)
 			to_chat(user, "<span class='warning'>Show some restraint, would you?</span>")
 			return
-		if(!user.unEquip(I))
+		if(!user.try_unequip(I))
 			return
 		slices += other_sashimi.slices
 		bitesize = slices
@@ -100,7 +103,7 @@
 		if(slices > 1)
 			to_chat(user, "<span class='warning'>Putting more than one slice of fish on your sushi is just greedy.</span>")
 		else
-			if(!user.unEquip(I))
+			if(!user.try_unequip(I))
 				return
 			new /obj/item/chems/food/sushi(get_turf(src), I, src)
 		return

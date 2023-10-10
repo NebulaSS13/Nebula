@@ -6,7 +6,6 @@
 	idle_power_usage = 10
 	var/uses = 20
 	var/disabled = 1
-	var/lethal = 0
 	var/locked = 1
 	var/cooldown_time = 0
 	var/cooldown_timeleft = 0
@@ -83,7 +82,7 @@
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
-		attack_hand(user)
+		ui_interact(user)
 
 /obj/machinery/ai_slipper/proc/slip_process()
 	while(cooldown_time - world.timeofday > 0)

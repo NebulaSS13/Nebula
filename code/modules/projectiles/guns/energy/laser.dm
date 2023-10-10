@@ -11,6 +11,10 @@
 	origin_tech = "{'combat':3,'magnets':2}"
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/midlaser
+	matter = list(
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/gun/energy/laser/mounted
 	self_recharge = 1
@@ -26,7 +30,7 @@
 
 /obj/item/gun/energy/laser/practice/on_update_icon()
 	. = ..()
-	overlays += mutable_appearance(icon, "[icon_state]_stripe", COLOR_ORANGE)
+	add_overlay(mutable_appearance(icon, "[icon_state]_stripe", COLOR_ORANGE))
 
 /obj/item/gun/energy/laser/practice/proc/hacked()
 	return projectile_type != /obj/item/projectile/beam/practice
@@ -34,19 +38,19 @@
 /obj/item/gun/energy/laser/practice/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	if(hacked())
 		return NO_EMAG_ACT
-	to_chat(user, "<span class='warning'>You disable the safeties on [src] and crank the output to the lethal levels.</span>")
+	to_chat(user, SPAN_WARNING("You disable the safeties on [src] and crank the output to the lethal levels."))
 	desc += " Its safeties are disabled and output is set to dangerous levels."
 	projectile_type = /obj/item/projectile/beam/midlaser
 	charge_cost = 20
 	max_shots = rand(3,6) //will melt down after those
 	return 1
 
-/obj/item/gun/energy/laser/practice/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/energy/laser/practice/handle_post_fire(atom/movable/firer, atom/target, var/pointblank=0, var/reflex=0)
 	..()
 	if(hacked())
 		max_shots--
 		if(!max_shots) //uh hoh gig is up
-			to_chat(user, "<span class='danger'>\The [src] sizzles in your hands, acrid smoke rising from the firing end!</span>")
+			to_chat(firer, SPAN_DANGER("\The [src] sizzles in your hands, acrid smoke rising from the firing end!"))
 			desc += " The optical pathway is melted and useless."
 			projectile_type = null
 

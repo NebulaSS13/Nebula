@@ -224,7 +224,10 @@
 	icon_state = "bone-gel"
 	force = 0
 	w_class = ITEM_SIZE_SMALL
+	item_flags = ITEM_FLAG_NO_BLUDGEON
+	obj_flags = OBJ_FLAG_HOLLOW
 	throwforce = 1
+	material = /decl/material/solid/plastic
 
 /obj/item/bonegel/Initialize()
 	. = ..()

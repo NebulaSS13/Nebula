@@ -195,8 +195,16 @@ var/global/list/engine_setup_markers = list()
 
 
 // Tries to enable the SMES on max input/output settings. With load balancing it should be fine as long as engine outputs at least ~500kW
-/obj/effect/engine_setup/smes/
+/obj/effect/engine_setup/smes
 	name = "SMES Marker"
+
+	var/target_input_level		//These are in watts, the display is in kilowatts. Add three zeros to the value you want.
+	var/target_output_level		//These are in watts, the display is in kilowatts. Add three zeros to the value you want.
+
+/obj/effect/engine_setup/smes/main
+	name = "Main SMES Marker"
+	target_input_level =  INFINITY
+	target_output_level = INFINITY
 
 /obj/effect/engine_setup/smes/activate()
 	..()
@@ -205,16 +213,14 @@ var/global/list/engine_setup_markers = list()
 		log_and_message_admins("## WARNING: Unable to locate SMES unit at [x] [y] [z]!")
 		return SETUP_WARNING
 	S.input_attempt = 1
+	S.input_level = min(target_input_level, S.input_level_max)
 	S.output_attempt = 1
-	S.input_level = S.input_level_max
-	S.output_level = S.output_level_max
+	S.output_level = min(target_output_level, S.output_level_max)
 	S.update_icon()
 	return SETUP_OK
 
-
-
 // Sets up filters. This assumes filters are set to filter out CO2 back to the core loop by default!
-/obj/effect/engine_setup/filter/
+/obj/effect/engine_setup/filter
 	name = "Omni Filter Marker"
 	var/coolant = null
 
@@ -247,6 +253,28 @@ var/global/list/engine_setup_markers = list()
 	F.update_use_power(POWER_USE_IDLE)
 	return SETUP_OK
 
+// Closes the monitoring room shutters so the first Engi to show up doesn't get microwaved
+/obj/effect/engine_setup/shutters
+	name = "Shutter Button Marker"
+	// This needs to be set to whatever the shutter button is called
+	var/target_button = "Engine Monitoring Room Blast Doors"
+
+/obj/effect/engine_setup/shutters/activate()
+	if(!target_button)
+		log_and_message_admins("## WARNING: No button type set at [x] [y] [z]!")
+		return SETUP_WARNING
+	var/obj/machinery/button/blast_door/found = null
+	var/turf/T = get_turf(src)
+	for(var/obj/machinery/button/blast_door/B in T.contents)
+		if(B.name == target_button)
+			found = B
+			break
+	if(!found)
+		log_and_message_admins("## WARNING: Unable to locate button at [x] [y] [z]!")
+		return SETUP_WARNING
+	found.activate()
+	found.update_icon()
+	return SETUP_OK
 
 #undef SETUP_OK
 #undef SETUP_WARNING

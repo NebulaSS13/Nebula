@@ -205,20 +205,18 @@
 		SET_STATUS_MAX(M, STAT_WEAK, 5)
 	..()
 
-/mob/living/bot/mulebot/proc/runOver(var/mob/living/carbon/human/H)
-	if(istype(H)) // No safety checks - WILL run over lying humans. Stop ERPing in the maint!
-		visible_message("<span class='warning'>[src] drives over [H]!</span>")
-		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-
-		var/damage = rand(5, 7)
-		H.apply_damage(2 * damage, BRUTE, BP_HEAD)
-		H.apply_damage(2 * damage, BRUTE, BP_CHEST)
-		H.apply_damage(0.5 * damage, BRUTE, BP_L_LEG)
-		H.apply_damage(0.5 * damage, BRUTE, BP_R_LEG)
-		H.apply_damage(0.5 * damage, BRUTE, BP_L_ARM)
-		H.apply_damage(0.5 * damage, BRUTE, BP_R_ARM)
-
-		blood_splatter(src, H, 1)
+/mob/living/bot/mulebot/crossed_mob(var/mob/living/victim)
+	// No safety checks - WILL run over lying humans. Stop ERPing in the maint!
+	visible_message(SPAN_WARNING("\The [src] drives over \the [victim]!"))
+	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+	var/damage = rand(5, 7)
+	victim.apply_damage(2 * damage, BRUTE, BP_HEAD)
+	victim.apply_damage(2 * damage, BRUTE, BP_CHEST)
+	victim.apply_damage(0.5 * damage, BRUTE, BP_L_LEG)
+	victim.apply_damage(0.5 * damage, BRUTE, BP_R_LEG)
+	victim.apply_damage(0.5 * damage, BRUTE, BP_L_ARM)
+	victim.apply_damage(0.5 * damage, BRUTE, BP_R_ARM)
+	blood_splatter(src, victim, 1)
 
 /mob/living/bot/mulebot/relaymove(var/mob/user, var/direction)
 	if(load == user)

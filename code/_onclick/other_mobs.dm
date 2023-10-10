@@ -16,7 +16,7 @@
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
-	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
+	var/obj/item/clothing/gloves/G = get_equipped_item(slot_gloves_str) // not typecast specifically enough in defines
 	if(istype(G) && G.Touch(A,1))
 		return
 
@@ -26,16 +26,16 @@
 	return FALSE
 
 /atom/proc/attack_hand(mob/user)
-
+	SHOULD_CALL_PARENT(TRUE)
 	if(handle_grab_interaction(user))
 		return TRUE
-
-	if(LAZYLEN(climbers) && !(user in climbers))
-		user.visible_message(
-			SPAN_DANGER("\The [user] shakes \the [src]!"),
-			SPAN_DANGER("You shake \the [src]!"))
-		object_shaken()
-		return TRUE
+	if(!LAZYLEN(climbers) || (user in climbers) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return FALSE
+	user.visible_message(
+		SPAN_DANGER("\The [user] shakes \the [src]!"),
+		SPAN_DANGER("You shake \the [src]!"))
+	object_shaken()
+	return TRUE
 
 /mob/proc/attack_empty_hand()
 	return
@@ -48,15 +48,15 @@
 	if(!. && a_intent == I_GRAB && length(available_maneuvers))
 		. = perform_maneuver(prepared_maneuver || available_maneuvers[1], A)
 
+
 /mob/living/carbon/human/RangedAttack(var/atom/A, var/params)
 	//Climbing up open spaces
-	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && bound_overlay && !is_physically_disabled()) //Climbing through openspace
+	if(isturf(loc) && bound_overlay && !is_physically_disabled() && istype(A) && A.can_climb_from_below(src))
 		return climb_up(A)
 
-	if(gloves)
-		var/obj/item/clothing/gloves/G = gloves
-		if(istype(G) && G.Touch(A,0)) // for magic gloves
-			return TRUE
+	var/obj/item/clothing/gloves/G = get_equipped_item(slot_gloves_str)
+	if(istype(G) && G.Touch(A,0)) // for magic gloves
+		return TRUE
 
 	. = ..()
 
@@ -102,8 +102,14 @@
 	if(a_intent == I_HELP)
 		A.attack_animal(src)
 	else
-		A.attackby(get_natural_weapon(), src)
+		var/attacking_with = get_natural_weapon()
+		if(attacking_with)
+			A.attackby(attacking_with, src)
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)
-	return attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
+
+// Used to check for physical interactivity in case of nonstandard attack_hand calls.
+/atom/proc/attack_hand_with_interaction_checks(var/mob/user)
+	return CanPhysicallyInteract(user) && attack_hand(user)

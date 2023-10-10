@@ -30,6 +30,8 @@ var/global/list/bodytypes_by_category = list()
 	var/antaghud_offset_x = 0                 // As above, but specifically for the antagHUD indicator.
 	var/antaghud_offset_y = 0                 // As above, but specifically for the antagHUD indicator.
 
+	var/eye_offset = 0                        // Amount to shift eyes on the Y axis to correct for non-32px height.
+
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
 	// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
@@ -65,8 +67,7 @@ var/global/list/bodytypes_by_category = list()
 	. = ..()
 	if(!icon_deformed)
 		icon_deformed = icon_base
-	if(!is_abstract())
-		LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
+	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
 
 /decl/bodytype/proc/apply_limb_colouration(var/obj/item/organ/external/E, var/icon/applying)
 	return applying
@@ -76,3 +77,16 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/proc/get_hug_zone_messages(var/zone)
 	return LAZYACCESS(hug_messages, zone)
+
+/decl/bodytype/validate()
+	. = ..()
+	if(icon_base)
+		if(check_state_in_icon("torso", icon_base))
+			. += "torso state present in icon_base"
+		if(!check_state_in_icon(BP_CHEST, icon_base))
+			. += "chest state not present in icon_base"
+	if(icon_deformed && icon_deformed != icon_base)
+		if(check_state_in_icon("torso", icon_deformed))
+			. += "torso state present in icon_deformed"
+		if(!check_state_in_icon(BP_CHEST, icon_deformed))
+			. += "chest state not present in icon_deformed"

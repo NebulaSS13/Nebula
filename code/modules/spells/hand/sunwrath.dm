@@ -1,5 +1,5 @@
 /spell/hand/duration/sunwrath
-	name = "sun god's wrath"
+	name = "Sun God's Wrath"
 	desc = "Your hands become a gateway of fire, shooting hot plasma from your fingertips."
 	spell_flags = 0
 	charge_max = 600
@@ -10,7 +10,6 @@
 	hand_duration = 100
 	spell_delay = 30
 	range = 4
-
 	hud_state = "wiz_immolate"
 
 /spell/hand/duration/sunwrath/cast_hand(var/atom/A, var/mob/user)

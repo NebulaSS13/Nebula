@@ -11,6 +11,7 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
+	material = /decl/material/solid/cloth
 
 	var/on_fire = 0
 	var/burn_time = 20 //if the rag burns for too long it turns to ashes
@@ -28,7 +29,7 @@
 	. = ..()
 
 /obj/item/chems/glass/rag/attack_self(mob/user)
-	if(on_fire && user.unEquip(src))
+	if(on_fire && user.try_unequip(src))
 		user.visible_message(SPAN_NOTICE("\The [user] stamps out [src]."), SPAN_NOTICE("You stamp out [src]."))
 		extinguish()
 	else
@@ -57,11 +58,8 @@
 		SetName("dry [initial(name)]")
 
 /obj/item/chems/glass/rag/on_update_icon()
-	if(on_fire)
-		icon_state = "raglit"
-	else
-		icon_state = "rag"
-
+	. = ..()
+	icon_state = "rag[on_fire? "lit" : ""]"
 	var/obj/item/chems/drinks/bottle/B = loc
 	if(istype(B))
 		B.update_icon()
@@ -104,7 +102,7 @@
 			admin_attack_log(user, M, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
 			M.IgniteMob()
 		else if(reagents.total_volume)
-			if(user.zone_sel.selecting == BP_MOUTH)
+			if(user.get_target_zone() == BP_MOUTH)
 				if (!M.has_danger_grab(user))
 					to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
 					return
@@ -125,8 +123,7 @@
 						SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
 						SPAN_DANGER("You smother \the [target] with \the [src]!")
 					)
-					//it's inhaled, so... maybe CHEM_INJECT doesn't make a whole lot of sense but it's the best we can do for now
-					var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
+					var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INHALE)
 					var/contained_reagents = reagents.get_reagents()
 					admin_inject_log(user, M, src, contained_reagents, trans_amt)
 					update_name()

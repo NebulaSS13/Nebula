@@ -5,7 +5,7 @@
 	desc = "A simple grasping tool specialized in construction and engineering work."
 	icon = 'icons/obj/items/borg_module/borg_gripper.dmi'
 	icon_state = "gripper"
-
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 
 	//Has a list of items that it can hold.
@@ -53,7 +53,7 @@
 		/obj/item/card/id,
 		/obj/item/book,
 		/obj/item/newspaper,
-		/obj/item/smallDelivery,
+		/obj/item/parcel,
 		/obj/item/forensics/sample
 		)
 
@@ -213,7 +213,7 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			if(I == user.s_active)
+			if(I == user.active_storage)
 				var/obj/item/storage/storage = I
 				storage.close(user) //Closes the ui.
 			if(istype(I.loc, /obj/item/storage))
@@ -271,17 +271,24 @@
 
 //TODO: Matter decompiler.
 /obj/item/matter_decompiler
-
 	name = "matter decompiler"
 	desc = "Eating trash, bits of glass, or other debris will replenish your stores."
 	icon = 'icons/obj/items/borg_module/decompiler.dmi'
 	icon_state = "decompiler"
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 	//Metal, glass, wood, plastic.
 	var/datum/matter_synth/metal = null
 	var/datum/matter_synth/glass = null
 	var/datum/matter_synth/wood = null
 	var/datum/matter_synth/plastic = null
+
+/obj/item/matter_decompiler/Destroy()
+	metal = null
+	glass = null
+	wood = null
+	plastic = null
+	return ..()
 
 /obj/item/matter_decompiler/attack(mob/living/carbon/M, mob/living/carbon/user)
 	return

@@ -166,12 +166,19 @@
 		else
 			to_chat(holder,"<B>[talker.name]</B> points at [holder.name]")
 			to_chat(holder,"<span class='game say'><span class='name'>[talker.name]</span> says something softly.</span>")
-		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
-		spawn(30) qdel(speech_bubble)
-		show_image(holder,speech_bubble)
+
+		var/speech_state = holder.check_speech_punctuation_state(message)
+		if(speech_state)
+			var/image/speech_bubble = image('icons/mob/talk.dmi', talker, speech_state)
+			addtimer(CALLBACK(src, .proc/qdel_image, speech_bubble), 3 SECONDS)
+			show_image(holder, speech_bubble)
+
 		sanity-- //don't spam them in very populated rooms.
 		if(!sanity)
 			return
+
+/datum/hallucination/talking/proc/qdel_image(var/image/speech_bubble)
+	qdel(speech_bubble)
 
 //Spiderling skitters
 /datum/hallucination/skitter/start()

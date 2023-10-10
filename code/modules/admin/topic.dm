@@ -104,14 +104,14 @@
 			var/new_ckey = ckey(input(usr,"New admin's ckey","Admin ckey", null) as text|null)
 			if(!new_ckey)	return
 			if(new_ckey in admin_datums)
-				to_chat(usr, "<font color='red'>Error: Topic 'editrights': [new_ckey] is already an admin</font>")
+				to_chat(usr, SPAN_WARNING("Error: Topic 'editrights': [new_ckey] is already an admin"))
 				return
 			adm_ckey = new_ckey
 			task = "rank"
 		else if(task != "show")
 			adm_ckey = ckey(href_list["ckey"])
 			if(!adm_ckey)
-				to_chat(usr, "<font color='red'>Error: Topic 'editrights': No valid ckey</font>")
+				to_chat(usr, SPAN_WARNING("Error: Topic 'editrights': No valid ckey"))
 				return
 
 		var/datum/admins/D = admin_datums[adm_ckey]
@@ -143,7 +143,7 @@
 					if(config.admin_legacy_system)
 						new_rank = ckeyEx(new_rank)
 					if(!new_rank)
-						to_chat(usr, "<font color='red'>Error: Topic 'editrights': Invalid rank</font>")
+						to_chat(usr, SPAN_WARNING("Error: Topic 'editrights': Invalid rank"))
 						return
 					if(config.admin_legacy_system)
 						if(admin_ranks.len)
@@ -1028,7 +1028,9 @@
 		if(!istype(H))
 			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
 			return
-		if(!istype(H.l_ear, /obj/item/radio/headset) && !istype(H.r_ear, /obj/item/radio/headset))
+		var/obj/item/l_ear = H.get_equipped_item(slot_l_ear_str)
+		var/obj/item/r_ear = H.get_equipped_item(slot_r_ear_str)
+		if(!istype(l_ear, /obj/item/radio/headset) && !istype(r_ear, /obj/item/radio/headset))
 			to_chat(usr, "The person you are trying to contact is not wearing a headset")
 			return
 
@@ -1043,10 +1045,10 @@
 		var/obj/item/fax = locate(href_list["AdminFaxView"])
 		if (istype(fax, /obj/item/paper))
 			var/obj/item/paper/P = fax
-			P.show_content(usr,1)
+			P.interact(usr, TRUE)
 		else if (istype(fax, /obj/item/photo))
 			var/obj/item/photo/H = fax
-			H.show(usr)
+			H.interact(usr)
 		else if (istype(fax, /obj/item/paper_bundle))
 			//having multiple people turning pages on a paper_bundle can cause issues
 			//open a browse window listing the contents instead
@@ -1068,26 +1070,23 @@
 
 		if (istype(bundle.pages[page], /obj/item/paper))
 			var/obj/item/paper/P = bundle.pages[page]
-			P.show_content(src.owner, 1)
+			P.interact(src.owner, TRUE)
 		else if (istype(bundle.pages[page], /obj/item/photo))
 			var/obj/item/photo/H = bundle.pages[page]
-			H.show(src.owner)
+			H.interact(src.owner)
 		return
 
 	else if(href_list["FaxReply"])
 		var/mob/sender = locate(href_list["FaxReply"])
-		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
+		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 		var/replyorigin = href_list["replyorigin"]
 
-
-		var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+		var/obj/item/paper/admin/P = new /obj/item/paper/admin
 		faxreply = P
-
 		P.admindatum = src
 		P.origin = replyorigin
-		P.destination = fax
+		P.destination_ref = weakref(fax)
 		P.sender = sender
-
 		P.adminbrowse()
 
 	else if(href_list["jumpto"])
@@ -1197,7 +1196,7 @@
 			alert("Removed:\n" + jointext(removed_paths, "\n"))
 
 		var/list/offset = splittext(href_list["offset"],",")
-		var/number = dd_range(1, 100, text2num(href_list["object_count"]))
+		var/number = clamp(text2num(href_list["object_count"]), 1, 100)
 		var/X = offset.len > 0 ? text2num(offset[1]) : 0
 		var/Y = offset.len > 1 ? text2num(offset[2]) : 0
 		var/Z = offset.len > 2 ? text2num(offset[3]) : 0
@@ -1563,12 +1562,35 @@
 
 		show_player_panel(M)
 
+	if(href_list["asf_pick_fax"])
+		var/obj/machinery/faxmachine/F = locate(href_list["destination"])
+		if(istype(F))
+			close_browser(src.owner, "faxpicker")
+			var/datum/extension/network_device/D = get_extension(F, /datum/extension/network_device)
+			if(!D)
+				log_debug("'[log_info_line(F)]' couldn't get network_device extension!")
+				return
+			var/datum/computer_network/CN = D.get_network()
+			if(CN)
+				var/obj/item/paper/admin/P = new /obj/item/paper/admin
+				faxreply      = P //Store the message instance
+				P.admindatum  = src
+				P.origin      = href_list["sender"] || (input(src.owner, "Please specify the sender's name", "Origin", global.using_map.boss_name) as text | null)
+				P.destination_ref = weakref(F)
+				P.adminbrowse()
+			else
+				log_debug("Couldn't get computer network for [log_info_line(D)], where network_id is '[D.network_id]'.")
+		else
+			log_debug("Tried to send a fax to an invalid machine!:[log_info_line(F)]\nhref:[log_info_line(href_list)]")
 
 /mob/living/proc/can_centcom_reply()
 	return 0
 
 /mob/living/carbon/human/can_centcom_reply()
-	return istype(l_ear, /obj/item/radio/headset) || istype(r_ear, /obj/item/radio/headset)
+	for(var/slot in global.ear_slots)
+		var/obj/item/radio/headset/radio = get_equipped_item(slot)
+		if(istype(radio))
+			return TRUE
 
 /mob/living/silicon/ai/can_centcom_reply()
 	return silicon_radio != null && !check_unable(2)

@@ -33,7 +33,7 @@
 
 	Q.reload_fullscreen()
 
-	for(var/language in subtypesof(/decl/language))
+	for(var/language in decls_repository.get_decl_paths_of_subtype(/decl/language))
 		Q.add_language(language)
 
 	spark_at(Q)
@@ -72,6 +72,8 @@
 	)
 
 /mob/living/carbon/human/quantum/can_inject(mob/user, target_zone)
+	if(user == src)
+		return ..()
 	to_chat(user, SPAN_DANGER("\The [src] disarms you before you can inject them."))
 	user.drop_item()
 	return FALSE
@@ -162,8 +164,10 @@
 /obj/item/radio/headset/ert/quantum
 	name = "quantum mechanic's headset"
 	desc = "A quantum mechanic's headset. The letter 'Ω' is stamped on the side."
-	translate_binary = TRUE
-	ks1type = /obj/item/encryptionkey/binary
+	encryption_keys = list(
+		/obj/item/encryptionkey/binary,
+		/obj/item/encryptionkey/ert
+	)
 
 /obj/item/radio/headset/ert/quantum/attack_hand(mob/user)
 	if(!user)
@@ -174,11 +178,6 @@
 		return TRUE
 
 	return ..()
-
-// overload this so we can force translate flags without the required keys
-/obj/item/radio/headset/ert/quantum/recalculateChannels(setDescription = FALSE)
-	. = ..(setDescription)
-	translate_binary = TRUE
 
 // Clothes
 /obj/item/clothing/under/color/quantum
@@ -277,7 +276,7 @@
 
 /obj/item/card/id/quantum/Initialize()
 	. = ..()
-	access = get_all_accesses() | get_all_centcom_access() | get_all_syndicate_access()
+	access = get_all_accesses() | get_all_centcom_access() | get_all_antagonist_access()
 
 /obj/item/card/id/quantum/attack_hand(mob/user)
 	if(!user)
@@ -298,5 +297,5 @@
 /mob/living/carbon/human/quantum/restrained()
 	return FALSE
 
-/mob/living/carbon/human/quantum/can_fall()
+/mob/living/carbon/human/quantum/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return fall_override ? FALSE : ..()

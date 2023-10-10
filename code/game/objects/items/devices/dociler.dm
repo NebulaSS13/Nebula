@@ -6,6 +6,8 @@
 	icon = 'icons/obj/items/device/animal_tagger.dmi'
 	icon_state = ICON_STATE_WORLD
 	force = 1
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/silicon = MATTER_AMOUNT_REINFORCEMENT)
 	var/loaded = 1
 	var/mode = "completely"
 

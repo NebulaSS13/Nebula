@@ -61,7 +61,7 @@
 	if(grenades.len >= max_grenades)
 		to_chat(user, "<span class='warning'>\The [src] is full.</span>")
 		return
-	if(!user.unEquip(G, src))
+	if(!user.try_unequip(G, src))
 		return
 	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
 	user.visible_message("\The [user] inserts \a [G] into \the [src].", "<span class='notice'>You insert \a [G] into \the [src].</span>")
@@ -85,10 +85,10 @@
 		..()
 
 /obj/item/gun/launcher/grenade/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload(user)
-	else
-		..()
+	if(!user.is_holding_offhand(src) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+	unload(user)
+	return TRUE
 
 /obj/item/gun/launcher/grenade/consume_next_projectile()
 	if(chambered)
@@ -96,7 +96,7 @@
 		chambered.activate(null)
 	return chambered
 
-/obj/item/gun/launcher/grenade/handle_post_fire(mob/user)
+/obj/item/gun/launcher/grenade/handle_post_fire(atom/movable/firer)
 	log_and_message_admins("fired a grenade ([chambered.name]) from a grenade launcher.")
 
 	chambered = null
@@ -146,7 +146,7 @@
 	if(chambered)
 		to_chat(user, "<span class='warning'>\The [src] is already loaded.</span>")
 		return
-	if(!user.unEquip(G, src))
+	if(!user.try_unequip(G, src))
 		return
 	chambered = G
 	user.visible_message("\The [user] load \a [G] into \the [src].", "<span class='notice'>You load \a [G] into \the [src].</span>")

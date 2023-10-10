@@ -3,7 +3,7 @@
 	desc = "An embedded augment."
 	icon = 'icons/obj/augment.dmi'
 	//By default these fit on both flesh and robotic organs and are robotic
-	status = ORGAN_PROSTHETIC
+	organ_properties = ORGAN_PROP_PROSTHETIC
 	default_action_type = /datum/action/item_action/organ/augment
 	material = /decl/material/solid/metal/steel
 	origin_tech = "{'materials':1,'magnets':2,'engineering':2,'biotech':1}"
@@ -34,7 +34,7 @@
 	return
 
 /obj/item/organ/internal/augment/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W) && allowed_organs.len > 1)
+	if(IS_SCREWDRIVER(W) && allowed_organs.len > 1)
 		//Here we can adjust location for implants that allow multiple slots
 		organ_tag = input(user, "Adjust installation parameters") as null|anything in allowed_organs
 		update_parent_organ()

@@ -78,6 +78,17 @@ a.icon img, .linkOn.icon img
 	height: 18px;
 }
 
+table, th, td
+{
+	border-collapse: collapse;
+	padding: 1px;
+}
+
+th
+{
+	background-color: #48656c;
+}
+
 ul
 {
 	padding: 4px 0 0 10px;
@@ -331,4 +342,33 @@ div.notice
 	border: 1px solid #3f595e;
 	padding: 4px;
 	margin: 3px 0;
+}
+
+.codexLore
+{
+	color: #abdb9b;
+}
+
+.codexMechanics {
+	color: #9ebcd8;
+}
+
+.codexAntag
+{
+	color: #e5a2a2;
+}
+
+.dmCodexBody
+{
+	margin-left: 15px;
+}
+
+.dmCodexBody td
+{
+	vertical-align: top;
+}
+
+.dmCodexHeader
+{
+	text-align: center;
 }

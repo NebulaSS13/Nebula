@@ -70,7 +70,7 @@
 		update_icon()
 		return
 
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		crafting = !crafting
 		if(!crafting)
 			to_chat(user, "<span class='notice'>You reassemble the RCD</span>")
@@ -111,11 +111,11 @@
 	return 1
 
 /obj/item/rcd/on_update_icon()	//For the fancy "ammo" counter
-	overlays.Cut()
+	. = ..()
 	var/ratio = 0
 	ratio = stored_matter / max_stored_matter
 	ratio = max(round(ratio, 0.10) * 100, 10)
-	overlays += "rcd-[ratio]"
+	add_overlay("rcd-[ratio]")
 
 /obj/item/rcd/proc/lowAmmo(var/mob/user)	//Kludge to make it animate when out of ammo, but I guess you can make it blow up when it's out of ammo or something
 	to_chat(user, "<span class='warning'>The \'Low Ammo\' light on the device blinks yellow.</span>")
@@ -189,6 +189,7 @@
 
 /decl/hierarchy/rcd_mode
 	abstract_type = /decl/hierarchy/rcd_mode
+	expected_type = /decl/hierarchy/rcd_mode
 	var/cost
 	var/delay
 	var/handles_type

@@ -3,7 +3,6 @@ var/global/datum/announcement/priority/command/command_announcement = new(do_log
 var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/AI/commandreport.ogg',)
 
 /datum/news_announcement
-	var/round_time // time of the round at which this should be announced, in seconds
 	var/message    // body of the message
 	var/author = "Editor"
 	var/channel_name = "News Daily"
@@ -32,7 +31,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	log = do_log
 	newscast = do_newscast
 
-/datum/announcement/proc/Announce(var/message, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = global.using_map.contact_levels)
+/datum/announcement/proc/Announce(var/message, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = SSmapping.contact_levels)
 	if(!message)
 		return
 
@@ -51,7 +50,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in global.player_list)
-		if((get_z(M) in (zlevels | global.using_map.admin_levels)) && !isnewplayer(M) && !isdeaf(M))
+		if((get_z(M) in (zlevels | SSmapping.admin_levels)) && !isnewplayer(M) && !isdeaf(M))
 			to_chat(M, msg)
 			if(message_sound)
 				sound_to(M, message_sound)
@@ -139,19 +138,17 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	var/rank = job.title
 	if(character.mind.role_alt_title)
 		rank = character.mind.role_alt_title
-
-	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
-
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency)
-	var/obj/item/radio/announcer = get_global_announcer()
-	announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
+	var/announce_channel = get_announcement_frequency(job)
+	if(announce_channel)
+		do_telecomms_announcement(character, "[character.real_name], [rank], [join_message].", "Arrivals Announcement Computer", announce_channel)
 
 /proc/get_announcement_frequency(var/datum/job/job)
 	// During red alert all jobs are announced on main frequency.
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
-		return "Common"
-	var/decl/department/dept = SSjobs.get_department_by_type(job.primary_department)
-	if(dept?.announce_channel)
-		return dept.announce_channel
-	return "Common"
+	if(!security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
+		var/decl/department/dept = SSjobs.get_department_by_type(job.primary_department)
+		if(dept?.announce_channel)
+			return dept.announce_channel
+	return global.using_map.default_announcement_frequency
+
+

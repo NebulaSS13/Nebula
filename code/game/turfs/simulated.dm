@@ -5,11 +5,10 @@
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	open_turf_type = /turf/simulated/open
+	zone_membership_candidate = TRUE
 
 	var/wet = 0
 	var/image/wet_overlay = null
-	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
-	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
 	var/timer_id
 
@@ -68,16 +67,16 @@
 /turf/simulated/Entered(atom/A, atom/OL)
 	. = ..()
 	if (istype(A))
-		A.OnSimulatedTurfEntered(src)
+		A.OnSimulatedTurfEntered(src, OL)
 
-/atom/proc/OnSimulatedTurfEntered(turf/simulated/T)
+/atom/proc/OnSimulatedTurfEntered(turf/simulated/T, old_loc)
 	set waitfor = FALSE
 	return
 
-/mob/living/OnSimulatedTurfEntered(turf/simulated/T)
+/mob/living/OnSimulatedTurfEntered(turf/simulated/T, old_loc)
 	T.update_dirt()
 
-	HandleBloodTrail(T)
+	HandleBloodTrail(T, old_loc)
 
 	if(lying || !T.wet)
 		return
@@ -104,25 +103,24 @@
 			step(src, dir)
 			sleep(1)
 
-/mob/living/proc/HandleBloodTrail(turf/simulated/T)
+/mob/living/proc/HandleBloodTrail(turf/simulated/T, old_loc)
 	return
 
-/mob/living/carbon/human/HandleBloodTrail(turf/simulated/T)
+/mob/living/carbon/human/HandleBloodTrail(turf/simulated/T, old_loc)
 	// Tracking blood
 	var/obj/item/source
-	if(shoes)
-		var/obj/item/clothing/shoes/S = shoes
-		if(istype(S))
-			S.handle_movement(src, MOVING_QUICKLY(src))
-			if(S.coating && S.coating.total_volume > 1)
-				source = S
+	var/obj/item/clothing/shoes/shoes = get_equipped_item(slot_shoes_str)
+	if(istype(shoes))
+		shoes.handle_movement(src, MOVING_QUICKLY(src))
+		if(shoes.coating && shoes.coating.total_volume > 1)
+			source = shoes
 	else
-		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, bp)
+		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/stomper = GET_EXTERNAL_ORGAN(src, foot_tag)
 			if(stomper && stomper.coating && stomper.coating.total_volume > 1)
 				source = stomper
 	if(!source)
-		species.handle_trail(src, T)
+		species.handle_trail(src, T, old_loc)
 		return
 
 	var/list/bloodDNA
@@ -138,9 +136,9 @@
 
 	if(species.get_move_trail(src))
 		T.AddTracks(species.get_move_trail(src),bloodDNA, dir, 0, bloodcolor) // Coming
-		var/turf/simulated/from = get_step(src, global.reverse_dir[dir])
-		if(istype(from))
-			from.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
+		if(istype(old_loc, /turf/simulated))
+			var/turf/simulated/old_turf = old_loc
+			old_turf.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
 
 //returns 1 if made bloody, returns 0 otherwise
 /turf/simulated/add_blood(mob/living/carbon/human/M)
@@ -168,7 +166,7 @@
 		new /obj/effect/decal/cleanable/blood/oil(src)
 
 /turf/simulated/attackby(var/obj/item/thing, var/mob/user)
-	if(isCoil(thing) && try_build_cable(thing, user))
+	if(IS_COIL(thing) && try_build_cable(thing, user))
 		return TRUE
 	return ..()
 
@@ -176,17 +174,4 @@
 	var/area/A = loc
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
-	. = ..()
-
-/turf/simulated/initialize_ambient_light(var/mapload)
-	for(var/turf/T AS_ANYTHING in RANGE_TURFS(src, 1))
-		T.update_ambient_light(mapload)
-
-/turf/simulated/Destroy()
-	if (zone)
-		if (can_safely_remove_from_zone())
-			c_copy_air()
-			zone.remove(src)
-		else
-			zone.rebuild()
 	. = ..()

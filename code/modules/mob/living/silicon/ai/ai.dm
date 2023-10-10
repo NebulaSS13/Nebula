@@ -31,7 +31,6 @@ var/global/list/ai_verbs_default = list(
 	/mob/living/silicon/proc/access_computer,
 	/mob/living/silicon/ai/proc/ai_power_override,
 	/mob/living/silicon/ai/proc/ai_shutdown,
-	/mob/living/silicon/ai/proc/ai_reset_radio_keys,
 	/mob/living/silicon/ai/proc/run_program,
 	/mob/living/silicon/ai/proc/pick_color
 )
@@ -58,7 +57,6 @@ var/global/list/ai_verbs_default = list(
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
 	maxHealth = 200
-	var/list/networks = list(CAMERA_CHANNEL_PUBLIC)
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -74,7 +72,6 @@ var/global/list/ai_verbs_default = list(
 
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
-	var/last_announcement = ""
 	var/control_disabled = 0
 	var/datum/announcement/priority/announcement
 	var/obj/machinery/ai_powersupply/psupply = null // Backwards reference to AI's powersupply object.
@@ -85,24 +82,10 @@ var/global/list/ai_verbs_default = list(
 
 	//NEWMALF VARIABLES
 	var/malfunctioning = 0						// Master var that determines if AI is malfunctioning.
-	var/datum/malf_hardware/hardware = null		// Installed piece of hardware.
-	var/datum/malf_research/research = null		// Malfunction research datum.
 	var/obj/machinery/power/apc/hack = null		// APC that is currently being hacked.
 	var/list/hacked_apcs = null					// List of all hacked APCs
-	var/hacking = 0								// Set to 1 if AI is hacking APC, cyborg, other AI, or running system override.
-	var/system_override = 0						// Set to 1 if system override is initiated, 2 if succeeded.
-	var/hack_can_fail = 1						// If 0, all abilities have zero chance of failing.
-	var/hack_fails = 0							// This increments with each failed hack, and determines the warning message text.
-	var/errored = 0								// Set to 1 if runtime error occurs. Only way of this happening i can think of is admin fucking up with varedit.
-	var/bombing_core = 0						// Set to 1 if core auto-destruct is activated
-	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
-	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
-	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
 	var/uncardable = 0							// Whether the AI can be carded when malfunctioning.
 	var/hacked_apcs_hidden = 0					// Whether the hacked APCs belonging to this AI are hidden, reduces CPU generation from APCs.
-	var/intercepts_communication = 0			// Whether the AI intercepts fax and emergency transmission communications.
-	var/last_failed_malf_message = null
-	var/last_failed_malf_title = null
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/carded
@@ -148,7 +131,7 @@ var/global/list/ai_verbs_default = list(
 
 	aiMulti = new(src)
 
-	additional_law_channels["Holopad"] = ":h"
+	additional_law_channels["Holopad"] = "h"
 
 	if (isturf(loc))
 		add_ai_verbs(src)
@@ -184,37 +167,35 @@ var/global/list/ai_verbs_default = list(
 		return
 
 	ai_radio = silicon_radio
-	ai_radio.myAi = src
 	return base_return_val
 
 /mob/living/silicon/ai/proc/on_mob_init()
-	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
-	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
-	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
-	to_chat(src, "To use something, simply click on it.")
-	to_chat(src, "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad.")
-	to_chat(src, "For department channels, use the following say commands:")
-
-	var/radio_text = ""
-	for(var/i = 1 to silicon_radio.channels.len)
-		var/channel = silicon_radio.channels[i]
-		var/key = get_radio_key_from_channel(channel)
-		radio_text += "[key] - [channel]"
-		if(i != silicon_radio.channels.len)
-			radio_text += ", "
-
-	to_chat(src, radio_text)
-	show_laws()
-	to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
-
 	//Prevents more than one active core spawning on the same tile. Technically just a sanitization for roundstart join
 	for(var/obj/structure/aicore/C in src.loc)
 		qdel(C)
-
 	job = "AI"
 	setup_icon()
 	eyeobj.possess(src)
 	CreateModularRecord(src, /datum/computer_file/report/crew_record/synth)
+	show_join_message()
+
+// Give our radio a bit of time to connect to the network and get its channels.
+/mob/living/silicon/ai/proc/show_join_message()
+	set waitfor = FALSE
+	var/timeout_mob_init = world.time + 5 SECONDS
+	while(world.time < timeout_mob_init && length(ai_radio?.get_accessible_channel_descriptions(src)) <= 1)
+		sleep(1)
+	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
+	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
+	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
+	to_chat(src, "To use something, simply click on it.")
+	var/list/channel_descriptions = ai_radio?.get_accessible_channel_descriptions(src)
+	if(length(channel_descriptions))
+		to_chat(src, "You can speak on comms channels with the following [length(channel_descriptions) == 1 ? "shortcut" : "shortcuts"]:")
+		for(var/line in channel_descriptions)
+			to_chat(src, line)
+	show_laws()
+	to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
 
 /mob/living/silicon/ai/Destroy()
 	for(var/robot in connected_robots)
@@ -239,7 +220,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		if(global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"])
 			selected_sprite = global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"]
 		else
-			for(var/datum/custom_icon/cicon AS_ANYTHING in SScustomitems.custom_icons_by_ckey[ckey])
+			for(var/datum/custom_icon/cicon as anything in SScustomitems.custom_icons_by_ckey[ckey])
 				if(cicon.category == "AI Icon" && lowertext(real_name) == cicon.character_name)
 					selected_sprite = new /datum/ai_icon("Custom Icon - [cicon.character_name]", cicon.ids_to_icons[1], cicon.ids_to_icons[2], COLOR_WHITE, cicon.ids_to_icons[cicon.ids_to_icons[1]])
 					global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"] = selected_sprite
@@ -595,7 +576,7 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 		var/obj/item/aicard/card = W
 		card.grab_ai(src, user)
 
-	else if(isWrench(W))
+	else if(IS_WRENCH(W))
 		if(anchored)
 			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
 			if(!do_after(user,40, src))
@@ -675,13 +656,6 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 
 	multitool_mode = !multitool_mode
 	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
-
-/mob/living/silicon/ai/proc/ai_reset_radio_keys()
-	set name = "Reset Radio Encryption Keys"
-	set category = "Silicon Commands"
-
-	silicon_radio.recalculateChannels()
-	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
 
 /mob/living/silicon/ai/on_update_icon()
 	..()
@@ -781,3 +755,6 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 	if(holo)
 		holo.set_dir_hologram(client.client_dir(SOUTH), src)
 	return ..()
+
+/mob/living/silicon/ai/say_understands(mob/speaker, decl/language/speaking)
+	return (!speaking && ispAI(speaker)) || ..()

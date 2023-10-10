@@ -11,8 +11,6 @@
 	var/common_stylesheet = 'html/browser/common.css'
 	var/list/stylesheets = list()
 	var/list/scripts = list()
-	var/head_elements
-	var/body_elements
 	var/head_content = ""
 	var/content = ""
 	var/title_buttons = ""
@@ -31,10 +29,10 @@
 
 	if(ntitle)
 		set_title(ntitle)
-	
+
 	if(nwidth)
 		width = nwidth
-	
+
 	if(nheight)
 		height = nheight
 
@@ -151,9 +149,9 @@
  * Otherwise, the user mob's machine var will be reset directly.
  */
 /proc/onclose(mob/user, windowid, atom/ref)
-	if(!user || !user.client) 
+	if(!user || !user.client)
 		return
-	
+
 	var/param = ref ? "\ref[ref]" : "null"
 	addtimer(CALLBACK(user, /mob/proc/post_onclose, windowid, param), 2)
 
@@ -162,9 +160,9 @@
 		winset(src, windowid, "on-close=\".windowclose [param]\"")
 
 
-/** 
+/**
  * the on-close client verb
- * 
+ *
  * called when a browser popup window is closed after registering with proc/onclose()
  * if a valid atom reference is supplied, call the atom's Topic() with "close=1"
  * otherwise, just reset the client mob's machine var.

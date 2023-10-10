@@ -73,7 +73,7 @@
 		/obj/item/clothing/suit/armor/hos,
 		/obj/item/radio/headset/heads/hos,
 		/obj/item/clothing/glasses/sunglasses/sechud,
-		/obj/item/taperoll/police,
+		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/shield/riot,
 		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/belt/holster/security,
@@ -100,7 +100,7 @@
 		/obj/item/clothing/head/warden,
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/glasses/sunglasses/sechud,
-		/obj/item/taperoll/police,
+		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/box/teargas,
 		/obj/item/storage/belt/holster/security,
@@ -128,33 +128,12 @@
 		/obj/item/grenade/chem_grenade/teargas,
 		/obj/item/baton/loaded,
 		/obj/item/clothing/glasses/sunglasses/sechud,
-		/obj/item/taperoll/police,
+		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/hailer,
 		/obj/item/clothing/accessory/storage/vest/black,
 		/obj/item/gun/energy/taser,
 		/obj/item/holowarrant,
 	)
-
-/obj/structure/closet/secure_closet/security/cargo/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-		/obj/item/clothing/accessory/armband/cargo,
-		/obj/item/encryptionkey/headset_cargo
-	))
-
-/obj/structure/closet/secure_closet/security/engine/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-			/obj/item/clothing/accessory/armband/engine,
-			/obj/item/encryptionkey/headset_eng
-		))
-
-/obj/structure/closet/secure_closet/security/science/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(/obj/item/encryptionkey/headset_sci))
-
-/obj/structure/closet/secure_closet/security/med/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-			/obj/item/clothing/accessory/armband/medgreen,
-			/obj/item/encryptionkey/headset_med
-		))
 
 /obj/structure/closet/secure_closet/detective
 	name = "detective's cabinet"
@@ -177,7 +156,7 @@
 		/obj/item/storage/box/evidence,
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/pcarrier/detective,
-		/obj/item/taperoll/police,
+		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/gun/projectile/pistol,
 		/obj/item/clothing/accessory/storage/holster/armpit,
 		/obj/item/chems/drinks/flask/detflask,

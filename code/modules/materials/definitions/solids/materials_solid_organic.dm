@@ -21,7 +21,9 @@
 	fuel_value = 0.6
 	burn_product = /decl/material/gas/carbon_monoxide // placeholder for more appropriate toxins
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
-	default_solid_form = /obj/item/stack/material/sheet
+	default_solid_form = /obj/item/stack/material/panel
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/plastic/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -70,6 +72,8 @@
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/cardstock
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/cardboard/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -79,6 +83,42 @@
 	. += new/datum/stack_recipe/cardborg_suit(src)
 	. += new/datum/stack_recipe/cardborg_helmet(src)
 	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
+
+/decl/material/solid/paper
+	name                    = "paper"
+	uid                     = "solid_paper"
+	lore_text               = "Low tech writing medium made from cellulose fibers. Also used in wrappings and packaging."
+	color                   = "#cfcece"
+	stack_origin_tech       = "{'materials':1}"
+	door_icon_base          = "wood"
+	destruction_desc        = "tears"
+	icon_base               = 'icons/turf/walls/solid.dmi'
+	icon_reinf              = 'icons/turf/walls/reinforced.dmi'
+	integrity               = 10 //Probably don't wanna go below 10, because of the health multiplier on things, that would result in a value smaller than 1.
+	use_reinf_state         = null
+	flags                   = MAT_FLAG_BRITTLE
+	reflectiveness          = MAT_VALUE_DULL
+	hardness                = MAT_VALUE_SOFT - 5
+	wall_support_value      = MAT_VALUE_EXTREMELY_LIGHT - 9
+	weight                  = MAT_VALUE_EXTREMELY_LIGHT - 9
+	construction_difficulty = MAT_VALUE_EASY_DIY
+	wall_flags              = PAINT_PAINTABLE | PAINT_STRIPABLE | WALL_HAS_EDGES
+	brute_armor             = 0.5
+	ignition_point          = T0C + 232 //"the temperature at which book-paper catches fire, and burns." close enough
+	melting_point           = T0C + 232
+	conductive              = FALSE
+	value                   = 0.25
+	default_solid_form      = /obj/item/stack/material/bolt
+	shard_type              = /obj/item/shreddedp
+	exoplanet_rarity        = MAT_RARITY_NOWHERE
+	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
+	sound_dropped           = 'sound/foley/paperpickup1.ogg'
+
+/decl/material/solid/paper/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/paper_sheets(src)
 
 /decl/material/solid/cloth //todo
 	name = "cotton"
@@ -100,65 +140,84 @@
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/bolt
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
+
+/decl/material/solid/cloth/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
 
 /decl/material/solid/cloth/yellow
 	name = "yellow"
 	uid = "solid_cotton_yellow"
 	use_name = "yellow cloth"
+	adjective_name = "yellow"
 	color = "#ffbf00"
 
 /decl/material/solid/cloth/teal
 	name = "teal"
 	uid = "solid_cotton_teal"
 	use_name = "teal cloth"
+	adjective_name = "teal"
 	color = "#00e1ff"
 
 /decl/material/solid/cloth/black
 	name = "black"
 	uid = "solid_cotton_black"
 	use_name = "black cloth"
+	adjective_name = "black"
 	color = "#505050"
 
 /decl/material/solid/cloth/green
 	name = "green"
 	uid = "solid_cotton_green"
 	use_name = "green cloth"
+	adjective_name = "green"
 	color = "#b7f27d"
 
 /decl/material/solid/cloth/purple
 	name = "purple"
 	uid = "solid_cotton_purple"
 	use_name = "purple cloth"
+	adjective_name = "purple"
 	color = "#9933ff"
 
 /decl/material/solid/cloth/blue
 	name = "blue"
 	uid = "solid_cotton_blue"
 	use_name = "blue cloth"
+	adjective_name = "blue"
 	color = "#46698c"
 
 /decl/material/solid/cloth/beige
 	name = "beige"
 	uid = "solid_cotton_beige"
 	use_name = "beige cloth"
+	adjective_name = "beige"
 	color = "#ceb689"
 
 /decl/material/solid/cloth/lime
 	name = "lime"
 	uid = "solid_cotton_lime"
 	use_name = "lime cloth"
+	adjective_name = "lime"
 	color = "#62e36c"
 
 /decl/material/solid/cloth/red
 	name = "red"
 	uid = "solid_cotton_red"
 	use_name = "red cloth"
+	adjective_name = "red"
 	color = "#9d2300"
 
 /decl/material/solid/carpet
 	name = "red"
 	uid = "solid_carpet"
 	use_name = "red upholstery"
+	adjective_name = "red"
 	color = "#9d2300"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+232
@@ -172,6 +231,8 @@
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/bolt
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/plantmatter
 	name = "plant matter"
@@ -191,6 +252,8 @@
 	wall_support_value = MAT_VALUE_LIGHT
 	value = 0.8
 	default_solid_form = /obj/item/stack/material/slab
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/meat
 	name = "meat"
@@ -210,6 +273,9 @@
 	wall_support_value = MAT_VALUE_LIGHT
 	value = 0.8
 	default_solid_form = /obj/item/stack/material/slab
+	sound_manipulate = 'sound/foley/meat1.ogg'
+	sound_dropped = 'sound/foley/meat2.ogg'
+	hitsound = 'sound/effects/squelch1.ogg'
 
 /decl/material/solid/skin
 	name = "skin"
@@ -229,6 +295,9 @@
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	value = 1.2
 	default_solid_form = /obj/item/stack/material/skin
+	sound_manipulate = 'sound/foley/meat1.ogg'
+	sound_dropped = 'sound/foley/meat2.ogg'
+	hitsound = "punch"
 	var/tans_to = /decl/material/solid/leather
 
 /decl/material/solid/skin/generate_recipes(var/reinforce_material)
@@ -236,6 +305,7 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
 	. += new/datum/stack_recipe/shoes(src)
 
 /decl/material/solid/skin/lizard
@@ -256,6 +326,8 @@
 	hardness = MAT_VALUE_RIGID
 	weight = MAT_VALUE_VERY_LIGHT
 	brute_armor = 2
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/skin/fur
 	name = "fur"
@@ -263,6 +335,8 @@
 	color = "#7a726d"
 	tans_to = /decl/material/solid/leather/fur
 	default_solid_form = /obj/item/stack/material/skin/pelt
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/skin/fur/gray
 	uid = "solid_fur_gray"
@@ -309,6 +383,8 @@
 	uid = "solid_feathers"
 	color = COLOR_SILVER
 	default_solid_form = /obj/item/stack/material/skin/feathers
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/skin/feathers/purple
 	color = COLOR_PALE_PURPLE_GRAY
@@ -350,6 +426,8 @@
 	weight = MAT_VALUE_NORMAL
 	wall_support_value = MAT_VALUE_NORMAL
 	default_solid_form = /obj/item/stack/material/bone
+	sound_manipulate = 'sound/foley/stickspickup1.ogg'
+	sound_dropped = 'sound/foley/sticksdrop1.ogg'
 
 /decl/material/solid/bone/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -389,12 +467,15 @@
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/skin
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
 /decl/material/solid/leather/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/banner(src)
 	. += new/datum/stack_recipe/shoes(src)
 	. += new/datum/stack_recipe/boots(src)
 

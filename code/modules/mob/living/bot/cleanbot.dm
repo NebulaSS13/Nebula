@@ -9,7 +9,6 @@
 	wait_if_pulled = 1
 	min_target_dist = 0
 
-	var/cleaning = 0
 	var/screwloose = 0
 	var/oddbutton = 0
 	var/blood = 1

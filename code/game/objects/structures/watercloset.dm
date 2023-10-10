@@ -115,13 +115,16 @@ var/global/list/hygiene_props = list()
 	update_icon()
 
 /obj/structure/hygiene/toilet/attack_hand(var/mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
+
 	if(swirlie)
 		usr.visible_message(
 			SPAN_DANGER("\The [user] slams the toilet seat onto \the [swirlie]'s head!"),
 			SPAN_NOTICE("You slam the toilet seat onto \the [swirlie]'s head!"),
 			"You hear reverberating porcelain.")
 		swirlie.adjustBruteLoss(8)
-		return
+		return TRUE
 
 	if(cistern && !open)
 		if(!contents.len)
@@ -134,17 +137,21 @@ var/global/list/hygiene_props = list()
 				I.dropInto(loc)
 			to_chat(user, SPAN_NOTICE("You find \a [I] in the cistern."))
 			w_items -= I.w_class
-		return
+		return TRUE
 
-	open = !open
-	update_icon()
+	if(user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		open = !open
+		update_icon()
+		return TRUE
+
+	return ..()
 
 /obj/structure/hygiene/toilet/on_update_icon()
 	..()
 	icon_state = "toilet[open][cistern]"
 
 /obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/user)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		to_chat(user, SPAN_NOTICE("You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]."))
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
 		if(do_after(user, 30, src))
@@ -186,7 +193,7 @@ var/global/list/hygiene_props = list()
 		if(w_items + I.w_class > ITEM_SIZE_HUGE)
 			to_chat(user, SPAN_WARNING("The cistern is full."))
 			return
-		if(!user.unEquip(I, src))
+		if(!user.try_unequip(I, src))
 			return
 		w_items += I.w_class
 		to_chat(user, SPAN_NOTICE("You carefully place \the [I] into the cistern."))
@@ -201,6 +208,8 @@ var/global/list/hygiene_props = list()
 	icon_state = "urinal"
 	density = 0
 	anchored = 1
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/grab))
@@ -244,8 +253,11 @@ var/global/list/hygiene_props = list()
 	QDEL_NULL(sound_token)
 	. = ..()
 
-/obj/structure/hygiene/shower/attack_hand(mob/M)
-	switch_state(!on, M)
+/obj/structure/hygiene/shower/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
+		return ..()
+	switch_state(!on, user)
+	return TRUE
 
 /obj/structure/hygiene/shower/proc/switch_state(new_state, mob/user)
 	if(new_state == on)
@@ -279,7 +291,7 @@ var/global/list/hygiene_props = list()
 		to_chat(user, SPAN_NOTICE("The water temperature seems to be [watertemp]."))
 		return
 
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
 		if(newtemp != watertemp && !QDELETED(I) && !QDELETED(user) && !QDELETED(src) && user.Adjacent(src) && I.loc == src)
 			to_chat(user, SPAN_NOTICE("You begin to adjust the temperature valve with \the [I]."))
@@ -316,10 +328,10 @@ var/global/list/hygiene_props = list()
 			reagents.splash(get_turf(src), reagents.total_volume, max_spill = 0)
 
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
-	if(!on || !istype(M)) 
+	if(!on || !istype(M))
 		return
 	var/water_temperature = temperature_settings[watertemp]
-	var/temp_adj = between(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
+	var/temp_adj = clamp(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -343,9 +355,6 @@ var/global/list/hygiene_props = list()
 	anchored = 1
 	var/busy = 0 	//Something's being washed at the moment
 
-/obj/structure/hygiene/sink/is_pressurized_fluid_source()
-	return TRUE
-
 /obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
 	. = ..()
 	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
@@ -361,26 +370,26 @@ var/global/list/hygiene_props = list()
 /obj/structure/hygiene/sink/attack_hand(var/mob/user)
 
 	if(isrobot(user) || isAI(user) || !Adjacent(user))
-		return
+		return ..()
 
 	if(busy)
 		to_chat(user, SPAN_WARNING("Someone's already washing here."))
-		return
+		return TRUE
 
 	to_chat(usr, SPAN_NOTICE("You start washing your hands."))
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
-	busy = 1
+	busy = TRUE
 	if(!do_after(user, 40, src))
-		busy = 0
+		busy = FALSE
 		return TRUE
-	busy = 0
+	busy = FALSE
 
 	user.clean_blood()
-	user.visible_message( \
-		SPAN_NOTICE("\The [user] washes their hands using \the [src]."), \
+	user.visible_message(
+		SPAN_NOTICE("\The [user] washes their hands using \the [src]."),
 		SPAN_NOTICE("You wash your hands using \the [src]."))
-
+	return TRUE
 
 /obj/structure/hygiene/sink/attackby(obj/item/O, var/mob/user)
 	if(isplunger(O) && clogged > 0)
@@ -392,11 +401,11 @@ var/global/list/hygiene_props = list()
 
 	var/obj/item/chems/RG = O
 	if (istype(RG) && ATOM_IS_OPEN_CONTAINER(RG) && RG.reagents)
-		RG.reagents.add_reagent(/decl/material/liquid/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] fills \the [RG] using \the [src]."),
 			SPAN_NOTICE("You fill \the [RG] using \the [src]."))
 		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
+		RG.reagents.add_reagent(/decl/material/liquid/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		return 1
 
 	else if (istype(O, /obj/item/baton))
@@ -441,7 +450,7 @@ var/global/list/hygiene_props = list()
 		return TRUE
 	busy = 0
 
-	if(istype(O, /obj/item/extinguisher/)) return TRUE // We're washing, not filling.
+	if(istype(O, /obj/item/chems/spray/extinguisher)) return TRUE // We're washing, not filling.
 
 	O.clean_blood()
 	user.visible_message( \
@@ -458,13 +467,9 @@ var/global/list/hygiene_props = list()
 	icon_state = "puddle"
 	clogged = -1 // how do you clog a puddle
 
-/obj/structure/hygiene/sink/puddle/is_pressurized_fluid_source()
-	return FALSE
-
 /obj/structure/hygiene/sink/puddle/attack_hand(var/mob/M)
-	icon_state = "puddle-splash"
-	..()
-	icon_state = "puddle"
+	flick("puddle-splash", src)
+	return ..()
 
 /obj/structure/hygiene/sink/puddle/attackby(obj/item/O, var/mob/user)
 	icon_state = "puddle-splash"
@@ -474,9 +479,8 @@ var/global/list/hygiene_props = list()
 //toilet paper interaction for clogging toilets and other facilities
 
 /obj/structure/hygiene/attackby(obj/item/I, mob/user)
-	if (!istype(I, /obj/item/taperoll/bog))
-		..()
-		return
+	if (!istype(I, /obj/item/stack/tape_roll/barricade_tape/toilet))
+		return ..()
 	if (clogged == -1)
 		to_chat(user, SPAN_WARNING("Try as you might, you can not clog \the [src] with \the [I]."))
 		return
@@ -486,49 +490,53 @@ var/global/list/hygiene_props = list()
 	if (!do_after(user, 3 SECONDS, src))
 		to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
 		return
-	if (clogged || QDELETED(I) || !user.unEquip(I))
+	if (clogged || QDELETED(I) || !user.try_unequip(I))
 		return
 	to_chat(user, SPAN_NOTICE("You unceremoniously jam \the [src] with \the [I]. What a rebel."))
 	clog(1)
 	qdel(I)
 
-/obj/item/taperoll/bog
-	name = "toilet paper roll"
-	icon = 'icons/obj/toiletpaper.dmi'
-	icon_state = ICON_STATE_WORLD
-	desc = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to the government's 'Abuse Of The Trees Act'."
-	tape_type = /obj/item/tape/bog
-	slot_flags = SLOT_HEAD | SLOT_OVER_BODY
-	var/sheets = 30
+////////////////////////////////////////////////////
+// Toilet Paper Roll
+////////////////////////////////////////////////////
+/decl/barricade_tape_template/toilet
+	tape_kind         = "toilet paper"
+	tape_desc         = "A length of toilet paper. Seems like custodia is marking their territory again."
+	roll_desc         = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to the government's 'Abuse Of The Trees Act'."
+	base_icon_state   = "stripetape"
+	tape_color        = COLOR_WHITE
+	detail_overlay    = "stripes"
+	detail_color      = COLOR_WHITE
 
-/obj/item/tape/bog
-	name = "toilet paper"
-	desc = "A length of toilet paper. Seems like custodia is marking their territory again."
-	icon_base = "stripetape"
-	color = COLOR_WHITE
-	detail_overlay = "stripes"
-	detail_color = COLOR_WHITE
+/obj/item/stack/tape_roll/barricade_tape/toilet
+	icon          = 'icons/obj/toiletpaper.dmi'
+	icon_state    = ICON_STATE_WORLD
+	slot_flags    = SLOT_HEAD | SLOT_OVER_BODY
+	amount        = 30
+	max_amount    = 30
+	tape_template = /decl/barricade_tape_template/toilet
 
-/obj/item/taperoll/bog/verb/tear_sheet()
+/obj/item/stack/tape_roll/barricade_tape/toilet/verb/tear_sheet()
 	set category = "Object"
-	set name = "Tear Sheet"
-	set desc = "Tear a sheet of toilet paper."
+	set name     = "Tear Sheet"
+	set desc     = "Tear a sheet of toilet paper."
 	set src in usr
+
 	if (usr.incapacitated())
 		return
-	if(sheets > 0)
+
+	if(can_use(1))
 		visible_message(SPAN_NOTICE("\The [usr] tears a sheet from \the [src]."), SPAN_NOTICE("You tear a sheet from \the [src]."))
 		var/obj/item/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
-		sheets--
-	if (sheets < 1)
-		to_chat(usr, SPAN_WARNING("\The [src] is depleted."))
-		qdel(src)
 
+////////////////////////////////////////////////////
+// Toilet Paper Sheet
+////////////////////////////////////////////////////
 /obj/item/paper/crumpled/bog
-	name = "sheet of toilet paper"
-	desc = "A single sheet of toilet paper. Two ply."
-	icon = 'icons/obj/toiletpaper.dmi'
+	name       = "sheet of toilet paper"
+	desc       = "A single sheet of toilet paper. Two ply."
+	icon       = 'icons/obj/toiletpaper.dmi'
 	icon_state = "bogroll_sheet"
 
 /obj/structure/hygiene/faucet
@@ -544,15 +552,16 @@ var/global/list/hygiene_props = list()
 	var/open = FALSE
 
 /obj/structure/hygiene/faucet/attack_hand(mob/user)
-	. = ..()
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return ..()
 	open = !open
 	if(open)
 		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
 	else
 		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
-
 	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
 	update_icon()
+	return TRUE
 
 /obj/structure/hygiene/faucet/on_update_icon()
 	..()
@@ -576,7 +585,7 @@ var/global/list/hygiene_props = list()
 
 /obj/structure/hygiene/faucet/Process()
 	..()
-	if(open) 
+	if(open)
 		water_flow()
 
 /obj/structure/hygiene/faucet/examine(mob/user)

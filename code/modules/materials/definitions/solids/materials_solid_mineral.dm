@@ -89,7 +89,7 @@
 	rich_material_weight = 1
 	dissolves_into = list(
 		/decl/material/solid/sulfur = 0.75,
-		/decl/material/solid/metal/iron = 0.25		
+		/decl/material/solid/metal/iron = 0.25
 	)
 
 /decl/material/solid/spodumene
@@ -179,7 +179,7 @@
 		/decl/material/solid/potassium = 1
 	)
 
-/decl/material/solid/potassium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/potassium/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)

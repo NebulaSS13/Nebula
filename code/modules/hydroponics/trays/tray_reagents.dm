@@ -8,6 +8,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2
 	throw_range = 10
+	material = /decl/material/solid/plastic
 	var/toxicity = 4
 	var/pest_kill_str = 0
 	var/weed_kill_str = 0
@@ -52,26 +53,28 @@
 // Weedkiller defines for hydroponics
 // *************************************
 
-/obj/item/weedkiller
+/obj/item/plantspray/weedkiller
 	name = "bottle of weedkiller"
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle16"
-	var/toxicity = 0
-	var/weed_kill_str = 0
+	toxicity = 0
+	pest_kill_str = 0
+	weed_kill_str = 0
+	material = /decl/material/solid/plastic
 
-/obj/item/weedkiller/triclopyr
+/obj/item/plantspray/weedkiller/triclopyr
 	name = "bottle of glyphosate"
 	icon_state = "bottle16"
 	toxicity = 4
 	weed_kill_str = 2
 
-/obj/item/weedkiller/lindane
+/obj/item/plantspray/weedkiller/lindane
 	name = "bottle of triclopyr"
 	icon_state = "bottle18"
 	toxicity = 6
 	weed_kill_str = 4
 
-/obj/item/weedkiller/D24
+/obj/item/plantspray/weedkiller/D24
 	name = "bottle of 2,4-D"
 	icon_state = "bottle15"
 	toxicity = 8

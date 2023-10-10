@@ -14,10 +14,14 @@
 
 	var/id_tag
 
+/obj/structure/crematorium/get_mechanics_info()
+	return "[..()]<BR>Can be labeled once with a hand labeler."
+
 /obj/structure/crematorium/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
 	connected_tray = new /obj/structure/crematorium_tray(src)
 	connected_tray.connected_crematorium = src
+	get_or_create_extension(src, /datum/extension/labels/single)
 
 /obj/structure/crematorium/Destroy()
 	if(!QDELETED(connected_tray))
@@ -60,7 +64,7 @@
 /obj/structure/crematorium/proc/close()
 	if(!open)
 		return
-	
+
 	if(!connected_tray)
 		return
 
@@ -75,37 +79,19 @@
 	update_icon()
 
 /obj/structure/crematorium/attack_hand(mob/user)
+	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+		return ..()
 	if(locked)
 		to_chat(usr, SPAN_WARNING("It's currently locked."))
-		return
-	
+		return TRUE
 	if(open)
 		close()
 	else
 		open()
-
-	return ..()
+	return TRUE
 
 /obj/structure/crematorium/attack_robot(mob/user)
-	if(Adjacent(user))
-		return attack_hand(user)
-
-/obj/structure/crematorium/attackby(P, mob/user)
-	if(istype(P, /obj/item/pen))
-		var/new_label = sanitize_safe(input(user, "What would you like the label to be?", capitalize(name), null) as text|null, MAX_NAME_LEN)
-
-		if((!Adjacent(user) || loc == user))
-			return
-		
-		if(has_extension(src, /datum/extension/labels))
-			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
-			if(!L.CanAttachLabel(user, new_label))
-				return
-		
-		attach_label(user, P, new_label)
-		return
-	else 
-		return ..()
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/crematorium/relaymove(mob/user)
 	if(user.incapacitated() || locked)
@@ -209,6 +195,7 @@
 	anchored = TRUE
 	throwpass = TRUE
 	layer = BELOW_OBJ_LAYER
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED | OBJ_FLAG_NOFALL
 
 	var/obj/structure/crematorium/connected_crematorium
 
@@ -218,13 +205,10 @@
 	return ..()
 
 /obj/structure/crematorium_tray/attack_hand(mob/user)
-	if(Adjacent(user))
-		connected_crematorium.attack_hand(user)
-	return ..()
+	return connected_crematorium.attack_hand_with_interaction_checks(user) || ..()
 
 /obj/structure/crematorium_tray/attack_robot(mob/user)
-	if(Adjacent(user))
-		attack_hand(user)
+	return attack_hand_with_interaction_checks(user)
 
 /obj/structure/crematorium_tray/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()

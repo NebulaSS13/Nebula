@@ -4,6 +4,7 @@
 /decl/loadout_option/shoes
 	slot = slot_shoes_str
 	category = /decl/loadout_category/feet
+	abstract_type = /decl/loadout_option/shoes
 
 /decl/loadout_option/shoes/athletic
 	name = "athletic shoes, colour select"

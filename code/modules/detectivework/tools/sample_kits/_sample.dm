@@ -2,6 +2,7 @@
 /obj/item/forensics/sample
 	name = "forensic sample"
 	icon = 'icons/obj/forensics.dmi'
+	max_health = 1
 	var/object
 	var/list/possible_evidence_types = list(/datum/forensics/fibers)
 	var/list/evidence
@@ -29,7 +30,7 @@
 		for(var/T in possible_evidence_types)
 			var/datum/forensics/F = forensics.evidence[T]
 			if(F)
-				LAZYADD(evidence, F.copy())
+				LAZYADD(evidence, F.Clone())
 				if(F.remove_on_transfer)
 					forensics.remove_data(T)
 
@@ -50,7 +51,7 @@
 
 /obj/item/forensics/sample/attackby(var/obj/O, var/mob/user)
 	if(O.type == src.type)
-		if(user.unEquip(O) && merge_evidence(O, user))
+		if(user.try_unequip(O) && merge_evidence(O, user))
 			qdel(O)
 		return 1
 	return ..()

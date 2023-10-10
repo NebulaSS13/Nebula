@@ -148,6 +148,8 @@ var/global/list/machine_path_to_circuit_type
 		. = part
 
 	if(istype(part))
+		if(part in component_parts)
+			CRASH("Tried to insert \a '[part]' twice in \the [src] ([x], [y], [z])!")
 		LAZYADD(component_parts, part)
 		part.on_install(src)
 		events_repository.register(/decl/observ/destroyed, part, src, .proc/component_destroyed)
@@ -221,7 +223,7 @@ var/global/list/machine_path_to_circuit_type
 
 // Use to block interactivity if panel is not open, etc.
 /obj/machinery/proc/components_are_accessible(var/path)
-	if(ispath(path, /obj/item/stock_parts/access_lock))
+	if(ispath(path, /obj/item/stock_parts/access_lock) || ispath(path, /obj/item/stock_parts/item_holder))
 		return TRUE
 	return panel_open
 
@@ -266,7 +268,7 @@ var/global/list/machine_path_to_circuit_type
 			continue
 		if((. = part.attack_hand(user)))
 			return
-	return construct_state && construct_state.attack_hand(user, src)
+	return construct_state?.attack_hand(user, src)
 
 /*
 Standard helpers for users interacting with machinery parts.
@@ -303,7 +305,7 @@ Standard helpers for users interacting with machinery parts.
 		var/obj/item/stack/stack = part
 		install_component(stack.split(number, TRUE))
 	else
-		user.unEquip(part, src)
+		user.try_unequip(part, src)
 		install_component(part)
 	user.visible_message(SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"), SPAN_NOTICE("You install \the [part] in \the [src]!"))
 	return TRUE

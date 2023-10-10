@@ -32,13 +32,7 @@
 	// Not all of them require checking, see below
 	var/list/modifiers = params2list(params)
 	if(modifiers["alt"])
-		// I'd rather call ..() but who knows what will break if we do that
-		var/datum/extension/on_click/alt = get_extension(A, /datum/extension/on_click/alt)
-		if(alt && alt.on_click(src))
-			return
-		var/target_turf = get_turf(A)
-		if(target_turf)
-			AltClickOn(target_turf)
+		AltClickOn(A)
 		return
 	if(modifiers["shift"])
 		examinate(A)
@@ -76,16 +70,3 @@
 		user.forceMove(stationgate.loc)
 	else
 		to_chat(user, "[src] has no destination.")
-
-// -------------------------------------------
-// This was supposed to be used by adminghosts
-// I think it is a *terrible* idea
-// but I'm leaving it here anyway
-// commented out, of course.
-/*
-/atom/proc/attack_admin(mob/user)
-	if(!user || !user.client || !user.client.holder)
-		return
-	attack_hand(user)
-
-*/

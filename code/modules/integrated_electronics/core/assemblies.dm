@@ -9,6 +9,10 @@
 	icon_state = "setup_small"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	matter = list()		// To be filled later
+	pass_flags = 0
+	anchored = FALSE
+	obj_flags = OBJ_FLAG_ANCHORABLE
+	max_health = 30
 	var/list/assembly_components = list()
 	var/list/ckeys_allowed_to_scan = list() // Players who built the circuit can scan it as a ghost.
 	var/max_components = IC_MAX_SIZE_BASE
@@ -16,20 +20,13 @@
 	var/opened = TRUE
 	var/obj/item/cell/battery // Internal cell which most circuits need to work.
 	var/cell_type = /obj/item/cell
-	var/can_charge = TRUE //Can it be charged in a recharger?
-	var/circuit_flags = IC_FLAG_ANCHORABLE
-	var/charge_sections = 4
-	var/charge_delay = 4
+	var/circuit_flags = 0
 	var/ext_next_use = 0
 	var/weakref/collw
 	var/allowed_circuit_action_flags = IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE //which circuit flags are allowed
 	var/creator // circuit creator if any
-	var/static/next_assembly_id = 0
 	var/interact_page = 0
 	var/components_per_page = 5
-	health = 30
-	pass_flags = 0
-	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
 	var/list/color_whitelist = list( //This is just for checking that hacked colors aren't in the save data.
 		COLOR_ASSEMBLY_BLACK,
@@ -52,12 +49,12 @@
 
 /obj/item/electronic_assembly/examine(mob/user)
 	. = ..()
-	if(IC_FLAG_ANCHORABLE & circuit_flags)
+	if(obj_flags & OBJ_FLAG_ANCHORABLE)
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
 		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
-	if(health != initial(health))
-		if(health <= initial(health)/2)
+	if(is_damaged())
+		if(get_percent_health() <= 50)
 			to_chat(user,"<span class='warning'>It looks pretty beat up.</span>")
 		else
 			to_chat(user, "<span class='warning'>Its got a few dents in it.</span>")
@@ -65,15 +62,14 @@
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
-
-/obj/item/electronic_assembly/proc/take_damage(var/amnt)
-	health = health - amnt
-	if(health <= 0)
-		visible_message("<span class='danger'>\The [src] falls to pieces!</span>")
-		qdel(src)
-	else if(health < initial(health)*0.15 && prob(5))
-		visible_message("<span class='danger'>\The [src] starts to break apart!</span>")
-
+/obj/item/electronic_assembly/check_health(lastdamage, lastdamtype, lastdamflags, consumed)
+	if(!can_take_damage())
+		return
+	if(health < 1)
+		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
+		physically_destroyed()
+	else if((get_percent_health() < 15) && prob(5))
+		visible_message(SPAN_DANGER("\The [src] starts to break apart!"))
 
 /obj/item/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))
@@ -164,6 +160,8 @@
 	if(listed_components)
 		show_browser(user, jointext(HTML,null), "window=closed-assembly-\ref[src];size=600x350;border=1;can_resize=1;can_close=1;can_minimize=1")
 
+/obj/item/electronic_assembly/get_assembly_detail_color()
+	return detail_color
 
 /obj/item/electronic_assembly/proc/open_interact(mob/user)
 	var/total_part_size = return_total_size()
@@ -287,16 +285,14 @@
 	return FALSE
 
 /obj/item/electronic_assembly/on_update_icon()
+	. = ..()
 	if(opened)
 		icon_state = initial(icon_state) + "-open"
 	else
 		icon_state = initial(icon_state)
-	overlays.Cut()
 	if(detail_color == COLOR_ASSEMBLY_BLACK) //Black colored overlay looks almost but not exactly like the base sprite, so just cut the overlay and avoid it looking kinda off.
 		return
-	var/image/detail_overlay = image('icons/obj/assemblies/electronic_setups.dmi', src,"[icon_state]-color")
-	detail_overlay.color = detail_color
-	overlays += detail_overlay
+	add_overlay(overlay_image('icons/obj/assemblies/electronic_setups.dmi', "[icon_state]-color", detail_color))
 
 /obj/item/electronic_assembly/examine(mob/user)
 	. = ..()
@@ -351,7 +347,7 @@
 		to_chat(user, "<span class='warning'>You can't seem to add the '[IC]', since the case doesn't support the circuit type.</span>")
 		return FALSE
 
-	if(!user.unEquip(IC,src))
+	if(!user.try_unequip(IC,src))
 		return FALSE
 
 	to_chat(user, "<span class='notice'>You slide [IC] inside [src].</span>")
@@ -388,7 +384,7 @@
 	add_allowed_scanner(user.ckey)
 
 	// Make sure we're not on an invalid page
-	interact_page = Clamp(interact_page, 0, CEILING(length(assembly_components)/components_per_page)-1)
+	interact_page = clamp(interact_page, 0, CEILING(length(assembly_components)/components_per_page)-1)
 
 	return TRUE
 
@@ -411,13 +407,7 @@
 
 
 /obj/item/electronic_assembly/attackby(obj/item/I, mob/user)
-	if(isWrench(I))
-		if(isturf(loc) && (IC_FLAG_ANCHORABLE & circuit_flags))
-			user.visible_message("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"].")
-			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
-			if(user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src))
-				anchored = !anchored
-	else if(istype(I, /obj/item/integrated_circuit))
+	if(istype(I, /obj/item/integrated_circuit))
 		if(!user.canUnEquip(I))
 			return FALSE
 		if(try_add_component(I, user))
@@ -426,7 +416,7 @@
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
-	else if(isMultitool(I) || istype(I, /obj/item/integrated_electronics/wirer) || istype(I, /obj/item/integrated_electronics/debugger))
+	else if(IS_MULTITOOL(I) || istype(I, /obj/item/integrated_electronics/wirer) || istype(I, /obj/item/integrated_electronics/debugger))
 		if(opened)
 			interact(user)
 			return TRUE
@@ -447,7 +437,7 @@
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
 		var/obj/item/cell/cell = I
-		if(user.unEquip(I,loc))
+		if(user.try_unequip(I,loc))
 			user.drop_from_inventory(I, loc)
 			cell.forceMove(src)
 			battery = cell
@@ -459,7 +449,7 @@
 		var/obj/item/integrated_electronics/detailer/D = I
 		detail_color = D.detail_color
 		update_icon()
-	else if(isScrewdriver(I))
+	else if(IS_SCREWDRIVER(I))
 		var/hatch_locked = FALSE
 		for(var/obj/item/integrated_circuit/manipulation/hatchlock/H in assembly_components)
 			// If there's more than one hatch lock, only one needs to be enabled for the assembly to be locked
@@ -475,18 +465,21 @@
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the maintenance hatch of [src].</span>")
 		update_icon()
-	else if(isCoil(I))
+		return TRUE
+
+	else if(IS_COIL(I))
 		var/obj/item/stack/cable_coil/C = I
-		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
+		if(is_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src].")
-			health = min(initial(health), health + 5)
-	else
-		if(user.a_intent == I_HURT) // Kill it
-			to_chat(user, "<span class='danger'>\The [user] hits \the [src] with \the [I]</span>")
-			take_damage(I.force)
-		else
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
+			health = min(max_health, health + 5)
+		return TRUE
+
+	else if(user.a_intent != I_HURT)
+		for(var/obj/item/integrated_circuit/input/S in assembly_components)
+			S.attackby_react(I,user,user.a_intent)
+		return TRUE
+
+	return ..() //Handle weapon attacks and etc
 
 /obj/item/electronic_assembly/attack_self(mob/user)
 	interact(user)
@@ -519,10 +512,10 @@
 	return src
 
 /obj/item/electronic_assembly/attack_hand(mob/user)
-	if(anchored)
-		attack_self(user)
-		return
-	..()
+	if(!anchored)
+		return ..()
+	attack_self(user)
+	return TRUE
 
 /obj/item/electronic_assembly/default //The /default electronic_assemblys are to allow the introduction of the new naming scheme without breaking old saves.
   name = "type-a electronic assembly"
@@ -567,7 +560,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 20
+	max_health = 20
 
 /obj/item/electronic_assembly/medium/default
 	name = "type-a electronic mechanism"
@@ -592,7 +585,8 @@
 	icon_state = "setup_medium_gun"
 	item_state = "circuitgun"
 	desc = "It's a case, for building medium-sized electronics with. This one resembles a gun, or some type of tool, if you're feeling optimistic. It can fire guns and throw items while the user is holding it."
-	circuit_flags = IC_FLAG_CAN_FIRE | IC_FLAG_ANCHORABLE
+	circuit_flags = IC_FLAG_CAN_FIRE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/item/electronic_assembly/medium/radio
 	name = "type-f electronic mechanism"
@@ -606,7 +600,7 @@
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
-	health = 30
+	max_health = 30
 
 /obj/item/electronic_assembly/large/default
 	name = "type-a electronic machine"
@@ -645,7 +639,8 @@
 	max_complexity = IC_COMPLEXITY_BASE * 3
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
-	health = 50
+	obj_flags = 0 //Not anchorable
+	max_health = 50
 
 /obj/item/electronic_assembly/drone/can_move()
 	return TRUE
@@ -685,7 +680,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 10
+	max_health = 10
 
 /obj/item/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)
 	if(proximity && istype(a ,/turf) && a.density)
@@ -707,8 +702,8 @@
 	max_components = IC_MAX_SIZE_BASE
 	max_complexity = IC_COMPLEXITY_BASE
 
-/obj/item/electronic_assembly/pickup()
-	transform = matrix() //Reset the matrix.
+/obj/item/electronic_assembly/on_picked_up()
+	transform = null //Reset the matrix.
 
 /obj/item/electronic_assembly/wallmount/proc/mount_assembly(turf/on_wall, mob/user) //Yeah, this is admittedly just an abridged and kitbashed version of the wallframe attach procs.
 	var/ndir = get_dir(on_wall, user)
@@ -725,7 +720,7 @@
 	user.visible_message("[user.name] attaches [src] to the wall.",
 		"<span class='notice'>You attach [src] to the wall.</span>",
 		"<span class='italics'>You hear clicking.</span>")
-	if(user.unEquip(src,T))
+	if(user.try_unequip(src,T))
 		var/matrix/M = matrix()
 		switch(ndir)
 			if(NORTH)

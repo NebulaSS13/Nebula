@@ -1,7 +1,12 @@
 /mob/living/carbon/human
 	hud_type = /datum/hud/human
 
-/datum/hud/human/FinalizeInstantiation(var/ui_style='icons/mob/screen/white.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
+/datum/hud/human/FinalizeInstantiation()
+
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
+
 	var/mob/living/carbon/human/target = mymob
 	var/datum/hud_data/hud_data = istype(target) ? target.species.hud : new()
 	if(hud_data.icon)
@@ -13,44 +18,11 @@
 
 	var/list/hud_elements = list()
 	var/obj/screen/using
-	var/obj/screen/inventory/inv_box
 
 	stamina_bar = new
 	adding += stamina_bar
 
-	// Draw the various inventory equipment slots.
-	var/has_hidden_gear
-	for(var/gear_slot in hud_data.gear)
-
-		inv_box = new /obj/screen/inventory()
-		inv_box.icon = ui_style
-		inv_box.color = ui_color
-		inv_box.alpha = ui_alpha
-
-		var/list/slot_data =  hud_data.gear[gear_slot]
-		inv_box.SetName(gear_slot)
-		inv_box.screen_loc =  slot_data["loc"]
-		inv_box.slot_id =     slot_data["slot"]
-		inv_box.icon_state =  slot_data["state"]
-
-		if(slot_data["dir"])
-			inv_box.set_dir(slot_data["dir"])
-
-		if(slot_data["toggle"])
-			src.other += inv_box
-			has_hidden_gear = 1
-		else
-			src.adding += inv_box
-
-	if(has_hidden_gear)
-		using = new /obj/screen()
-		using.SetName("toggle")
-		using.icon = ui_style
-		using.icon_state = "other"
-		using.screen_loc = ui_inventory
-		using.color = ui_color
-		using.alpha = ui_alpha
-		src.adding += using
+	BuildInventoryUI()
 
 	// Draw the attack intent dialogue.
 	if(hud_data.has_a_intent)
@@ -81,35 +53,7 @@
 		src.hotkeybuttons += using
 
 	if(hud_data.has_hands)
-
-		using = new /obj/screen()
-		using.SetName("equip")
-		using.icon = ui_style
-		using.icon_state = "act_equip"
-		using.screen_loc = ui_equip
-		using.color = ui_color
-		using.alpha = ui_alpha
-		src.adding += using
-
-		using = new /obj/screen/inventory()
-		using.SetName("hand")
-		using.icon = ui_style
-		using.icon_state = "hand1"
-		using.screen_loc = ui_swaphand1
-		using.color = ui_color
-		using.alpha = ui_alpha
-		src.adding += using
-
-		using = new /obj/screen/inventory()
-		using.SetName("hand")
-		using.icon = ui_style
-		using.icon_state = "hand2"
-		using.screen_loc = ui_swaphand2
-		using.color = ui_color
-		using.alpha = ui_alpha
-		src.adding += using
-
-		rebuild_hands(skip_client_update = TRUE)
+		BuildHandsUI()
 
 	if(hud_data.has_resist)
 		using = new /obj/screen()
@@ -220,12 +164,11 @@
 	mymob.pain = new /obj/screen/fullscreen/pain( null )
 	hud_elements |= mymob.pain
 
-	mymob.zone_sel = new /obj/screen/zone_sel( null )
+	mymob.zone_sel = new
 	mymob.zone_sel.icon = ui_style
 	mymob.zone_sel.color = ui_color
 	mymob.zone_sel.alpha = ui_alpha
-	mymob.zone_sel.overlays.Cut()
-	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
+	mymob.zone_sel.update_icon()
 	hud_elements |= mymob.zone_sel
 
 	target.attack_selector = new
@@ -261,6 +204,8 @@
 	mymob.client.screen = list()
 	if(length(hand_hud_objects))
 		mymob.client.screen += hand_hud_objects
+	if(length(swaphand_hud_objects))
+		mymob.client.screen += swaphand_hud_objects
 	if(length(hud_elements))
 		mymob.client.screen += hud_elements
 	mymob.client.screen += src.adding + src.hotkeybuttons

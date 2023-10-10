@@ -36,7 +36,6 @@ var/global/list/gamemode_cache = list()
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 	var/vote_no_dead_crew_transfer = 0	// dead people can't vote on crew transfer votes
 //	var/enable_authentication = 0		// goon authentication
-	var/del_new_on_log = 1				// del's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/objectives_disabled = 0 			//if objectives are disabled or not
@@ -125,7 +124,8 @@ var/global/list/gamemode_cache = list()
 	var/max_character_aspects = 5
 
 	var/welder_vision = 1
-	var/generate_map = 0
+	///If false, skips all level generation.
+	var/roundstart_level_generation = 1
 	var/no_click_cooldown = 0
 
 	//Used for modifying movement speed for mobs.
@@ -153,8 +153,6 @@ var/global/list/gamemode_cache = list()
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
 	var/use_age_restriction_for_jobs = 0   //Do jobs use account age restrictions?   --requires database
 	var/use_age_restriction_for_antags = 0 //Do antags use account age restrictions? --requires database
-
-	var/simultaneous_pm_warning_timeout = 100
 
 	var/use_iterative_explosions //Defines whether the server uses iterative or circular explosions.
 	var/iterative_explosives_z_threshold = 10
@@ -206,7 +204,7 @@ var/global/list/gamemode_cache = list()
 	var/dsay_allowed = 1
 	var/aooc_allowed = 1
 
-	var/starlight = 0	// Whether space turfs have ambient light or not
+	var/exterior_ambient_light = 0	// The strength of ambient light applied to outside turfs
 
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
 
@@ -256,12 +254,30 @@ var/global/list/gamemode_cache = list()
 	var/no_throttle_localhost
 
 	var/dex_malus_brainloss_threshold = 30 //The threshold of when brainloss begins to affect dexterity.
+	var/grant_default_darksight = FALSE
+	var/default_darksight_range = 2
+	var/default_darksight_effectiveness = 0.05
 
 	var/static/list/protected_vars = list(
 		"comms_password",
 		"ban_comms_password",
 		"login_export_addr"
 	)
+
+	var/expanded_alt_interactions = FALSE // Set to true to enable look, grab, drop, etc. in the alt interaction menu.
+
+	var/show_typing_indicator_for_whispers = FALSE // Do whispers show typing indicators overhead?
+
+	// Stress-related healing vars.
+	var/adjust_healing_from_stress =       FALSE
+	var/stress_shock_recovery_constant =   0.5
+	var/stress_healing_recovery_constant = 0.3
+	var/stress_blood_recovery_constant =   0.3
+
+	var/exoplanet_min_day_duration = 10 MINUTES
+	var/exoplanet_max_day_duration = 40 MINUTES
+	///If true, exoplanets won't have daycycles
+	var/disable_daycycle = FALSE
 
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
@@ -331,6 +347,9 @@ var/global/list/gamemode_cache = list()
 				if ("use_iterative_explosions")
 					use_iterative_explosions = 1
 
+				if ("expanded_alt_interactions")
+					expanded_alt_interactions = 1
+
 				if ("explosion_z_threshold")
 					iterative_explosives_z_threshold = text2num(value)
 
@@ -394,8 +413,8 @@ var/global/list/gamemode_cache = list()
 				if ("log_runtime")
 					config.log_runtime = 1
 
-				if ("generate_asteroid")
-					config.generate_map = 1
+				if ("roundstart_level_generation")
+					config.roundstart_level_generation = text2num(value)
 
 				if ("no_click_cooldown")
 					config.no_click_cooldown = 1
@@ -737,9 +756,9 @@ var/global/list/gamemode_cache = list()
 					config.event_delay_upper[EVENT_LEVEL_MODERATE] = MinutesToTicks(values[2])
 					config.event_delay_upper[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
 
-				if("starlight")
+				if("exterior_ambient_light")
 					value = text2num(value)
-					config.starlight = value >= 0 ? value : 0
+					config.exterior_ambient_light = value >= 0 ? value : 0
 
 				if("law_zero")
 					law_zero = value
@@ -814,6 +833,9 @@ var/global/list/gamemode_cache = list()
 
 				if("no_throttle_localhost")
 					config.no_throttle_localhost = TRUE
+
+				if("show_typing_indicator_for_whispers")
+					config.show_typing_indicator_for_whispers = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
@@ -897,6 +919,30 @@ var/global/list/gamemode_cache = list()
 					config.use_loyalty_implants = 1
 				if("dexterity_malus_brainloss_threshold")
 					config.dex_malus_brainloss_threshold = text2num(value)
+				if("grant_default_darksight")
+					config.grant_default_darksight = TRUE
+				if("default_darksight_range")
+					config.default_darksight_range = max(text2num(value), 0)
+				if("default_darksight_effectiveness")
+					config.default_darksight_effectiveness = clamp(text2num(value), 0, 1)
+
+				if("adjust_healing_from_stress")
+					config.adjust_healing_from_stress = TRUE
+				if("stress_shock_recovery_constant")
+					config.stress_shock_recovery_constant = text2num(value)
+				if("stress_healing_recovery_constant")
+					config.stress_healing_recovery_constant = text2num(value)
+				if("stress_blood_recovery_constant")
+					config.stress_blood_recovery_constant = text2num(value)
+
+
+
+				if("exoplanet_min_day_duration")
+					config.exoplanet_min_day_duration = text2num(value)
+				if("exoplanet_max_day_duration")
+					config.exoplanet_max_day_duration = text2num(value)
+				if("disable_daycycle")
+					config.disable_daycycle = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

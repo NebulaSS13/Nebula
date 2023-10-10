@@ -23,13 +23,8 @@
 	name = "Cultist"
 	name_plural = "Cultists"
 	blacklisted_jobs = list(/datum/job/submap)
-	feedback_tag = "cult_objective"
 	antag_indicator = "hudcultist"
 	welcome_text = "You have a tome in your possession; one that will help you start the cult. Use it well and remember - there are others."
-	victory_text = "The cult wins! It has succeeded in serving its dark masters!"
-	loss_text = "The staff managed to stop the cult!"
-	victory_feedback_tag = "win - cult win"
-	loss_feedback_tag = "loss - staff stopped the cult"
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	hard_cap = 5
 	hard_cap_round = 6

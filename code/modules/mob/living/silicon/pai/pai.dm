@@ -42,12 +42,10 @@ var/global/list/possible_say_verbs = list(
 		/obj/item/stock_parts/computer/network_card
 	)
 
-	var/network = "SS13"
 	var/obj/machinery/camera/current = null
 
 	var/ram = 100	// Used as currency to purchase different abilities
 	var/list/software = list()
-	var/userDNA		// The DNA string of our assigned user
 	var/obj/item/paicard/card	// The card we inhabit
 
 	var/is_in_card = TRUE
@@ -64,20 +62,8 @@ var/global/list/possible_say_verbs = list(
 
 // Various software-specific vars
 
-	var/temp				// General error reporting text contained here will typically be shown once and cleared
-	var/screen				// Which screen our main window displays
-	var/subscreen			// Which specific function of the main screen is being displayed
-
 	var/secHUD = 0			// Toggles whether the Security HUD is active or not
 	var/medHUD = 0			// Toggles whether the Medical  HUD is active or not
-
-	var/medical_cannotfind = 0
-	var/datum/data/record/medicalActive1		// Datacore record declarations for record software
-	var/datum/data/record/medicalActive2
-
-	var/security_cannotfind = 0
-	var/datum/data/record/securityActive1		// Could probably just combine all these into one
-	var/datum/data/record/securityActive2
 
 	var/obj/machinery/door/hackdoor		// The airlock being hacked
 	var/hackprogress = 0				// Possible values: 0 - 1000, >= 1000 means the hack is complete and will be reset upon next check
@@ -144,7 +130,7 @@ var/global/list/possible_say_verbs = list(
 		// 33% chance of no additional effect
 
 	silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
-	to_chat(src, "<font color=green><b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b></font>")
+	to_chat(src, SPAN_DANGER("<b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b>"))
 	if(prob(20))
 		visible_message( \
 			message = SPAN_DANGER("A shower of sparks spray from [src]'s inner workings!"), \
@@ -155,7 +141,7 @@ var/global/list/possible_say_verbs = list(
 		if(1)
 			master = null
 			master_dna = null
-			to_chat(src, "<font color=green>You feel unbound.</font>")
+			to_chat(src, SPAN_GOOD("You feel unbound."))
 		if(2)
 			var/command
 			if(severity  == 1)
@@ -163,9 +149,9 @@ var/global/list/possible_say_verbs = list(
 			else
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
 			pai_law0 = "[command] your master."
-			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
+			to_chat(src, SPAN_DANGER("Pr1m3 d1r3c71v3 uPd473D."))
 		if(3)
-			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
+			to_chat(src, SPAN_WARNING("You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all."))
 
 /mob/living/silicon/pai/cancel_camera()
 
@@ -184,9 +170,9 @@ var/global/list/possible_say_verbs = list(
 		return
 	if(loc != card)
 		return
-	if(world.time <= last_special)
+	if(is_on_special_ability_cooldown())
 		return
-	last_special = world.time + 100
+	set_special_ability_cooldown(10 SECONDS)
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
 	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai/))
 		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
@@ -225,9 +211,9 @@ var/global/list/possible_say_verbs = list(
 	if(loc == card)
 		return
 
-	if(world.time <= last_special)
+	if(is_on_special_ability_cooldown())
 		return
-	last_special = world.time + 100
+	set_special_ability_cooldown(10 SECONDS)
 
 	// Move us into the card and move the card to the ground.
 	resting = 0
@@ -297,7 +283,7 @@ var/global/list/possible_say_verbs = list(
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
-	return 0
+	return FALSE
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"

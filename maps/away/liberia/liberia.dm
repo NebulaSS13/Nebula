@@ -6,7 +6,6 @@
 // Map template data.
 /datum/map_template/ruin/away_site/liberia
 	name = "Liberia"
-	id = "awaysite_liberia"
 	description = "A Merchant ship."
 	suffixes = list("liberia/liberia.dmm")
 	cost = 0.5
@@ -30,7 +29,7 @@
 		/datum/shuttle/autodock/overmap/mule = list("nav_mule_start")
 	)
 
-/obj/effect/submap_landmark/joinable_submap/liberia
+/obj/abstract/submap_landmark/joinable_submap/liberia
 	name = "Liberia"
 	archetype = /decl/submap_archetype/liberia
 

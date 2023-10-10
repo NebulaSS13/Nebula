@@ -2,7 +2,9 @@ var/global/list/sparring_attack_cache = list()
 
 //Species unarmed attacks
 /decl/natural_attack
+	abstract_type = /decl/natural_attack
 	var/name
+	var/selector_icon_state
 	var/attack_verb = list("attacks")	// Empty hand hurt intent verb.
 	var/attack_noun = list("fist")
 	var/damage = 0						// Extra empty hand attack damage.
@@ -18,6 +20,16 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text_victim
 	var/list/usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 	var/is_starting_default = FALSE
+
+/decl/natural_attack/validate()
+	. = ..()
+	if(selector_icon_state)
+		for(var/check_icon_name in global.all_ui_styles)
+			var/check_icon = global.all_ui_styles[check_icon_name]
+			if(!check_state_in_icon(selector_icon_state, check_icon))
+				. += "missing state '[selector_icon_state]' from icon '[check_icon]'"
+	else
+		. += "no selector_icon_state set"
 
 /decl/natural_attack/proc/summarize()
 	var/list/usable_limbs = list()
@@ -42,8 +54,8 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/proc/padded_by_user_gear(var/mob/living/carbon/human/user)
 	if(istype(user) && length(usable_with_limbs))
-		for(var/bp in usable_with_limbs)
-			var/obj/item/gear = user.get_covering_equipped_item_by_zone(bp)
+		for(var/limb_slot in usable_with_limbs)
+			var/obj/item/gear = user.get_covering_equipped_item_by_zone(limb_slot)
 			if(istype(gear) && (gear.item_flags & ITEM_FLAG_PADDED))
 				return TRUE
 	return FALSE
@@ -89,11 +101,10 @@ var/global/list/sparring_attack_cache = list()
 					check_zone = BP_L_HAND
 				else if(check_zone == BP_R_ARM)
 					check_zone = BP_R_HAND
-				var/datum/inventory_slot/inv_slot = LAZYACCESS(target.held_item_slots, check_zone)
-				if(inv_slot?.holding)
-					// Disarm left hand
-					target.visible_message(SPAN_DANGER("\The [inv_slot.holding] was knocked right out of [target]'s grasp!"))
-					target.drop_from_inventory(inv_slot.holding)
+				var/equipped = target.get_equipped_item(check_zone)
+				if(equipped)
+					target.visible_message(SPAN_DANGER("\The [equipped] was knocked right out of [target]'s grasp!"))
+					target.drop_from_inventory(equipped)
 			if(BP_CHEST)
 				if(!target.lying)
 					var/turf/T = get_step(get_turf(target), get_dir(get_turf(user), get_turf(target)))
@@ -154,6 +165,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/bite
 	name = "bite"
+	selector_icon_state = "attack_bite"
 	attack_verb = list("bit")
 	attack_noun = list("mouth")
 	attack_sound = 'sound/weapons/bite.ogg'
@@ -170,10 +182,11 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
-	if(user.is_muzzled())
+	if(user.get_item_blocking_speech())
 		return 0
-	for(var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
-		if(C && (C.body_parts_covered & SLOT_FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
+	for(var/slot in list(slot_wear_mask_str, slot_head_str, slot_wear_suit_str))
+		var/obj/item/clothing/C = user.get_equipped_item(slot)
+		if(istype(C) && (C.body_parts_covered & SLOT_FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 			return 0 //prevent biting through a space helmet or similar
 	if (user == target && (zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH))
 		return 0 //how do you bite yourself in the head?
@@ -181,6 +194,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/punch
 	name = "punch"
+	selector_icon_state = "attack_punch"
 	attack_verb = list("punched")
 	attack_noun = list("fist")
 	eye_attack_text = "fingers"
@@ -195,7 +209,7 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	attack_damage = Clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
+	attack_damage = clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in \the [affecting]!</span>")
@@ -206,7 +220,7 @@ var/global/list/sparring_attack_cache = list()
 
 	var/decl/pronouns/user_gender =   user.get_pronouns()
 	var/decl/pronouns/target_gender = target.get_pronouns()
-	var/attack_string 
+	var/attack_string
 	if(!target.lying)
 		switch(zone)
 			if(BP_HEAD, BP_MOUTH, BP_EYES)
@@ -228,9 +242,9 @@ var/global/list/sparring_attack_cache = list()
 			else
 				// ----- BODY ----- //
 				switch(attack_damage)
-					if(1 to 2)	
+					if(1 to 2)
 						attack_string = "threw a glancing punch at [target]'s [affecting.name]"
-					if(1 to 4)	
+					if(1 to 4)
 						attack_string = "[pick(attack_verb)] [target] in \the [affecting]"
 					if(5)
 						attack_string = "smashed [user_gender.his] [pick(attack_noun)] into [target]'s [affecting.name]"
@@ -243,6 +257,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/kick
 	name = "kick"
+	selector_icon_state = "attack_kick"
 	attack_verb = list("struck")
 	attack_noun = list("foot", "knee")
 	attack_sound = "swing_hit"
@@ -256,7 +271,7 @@ var/global/list/sparring_attack_cache = list()
 	. = ..()
 
 /decl/natural_attack/kick/get_unarmed_damage(var/mob/living/carbon/human/user)
-	var/obj/item/clothing/shoes = user.shoes
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	if(!istype(shoes))
 		return damage
 	return damage + (shoes ? shoes.force : 0)
@@ -267,7 +282,7 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 	switch(attack_damage)
 		if(1 to 2)	user.visible_message("<span class='danger'>[user] threw [target] a glancing [pick(attack_noun)] to \the [affecting]!</span>") //it's not that they're kicking lightly, it's that the kick didn't quite connect
 		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \the [affecting]!</span>")
@@ -275,6 +290,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/stomp
 	name = "stomp"
+	selector_icon_state = "attack_stomp"
 	attack_verb = list("stomped on")
 	attack_noun = list("foot")
 	attack_sound = "swing_hit"
@@ -287,13 +303,13 @@ var/global/list/sparring_attack_cache = list()
 	if (!user.lying && (target.lying || (zone in list(BP_L_FOOT, BP_R_FOOT))))
 		if((user in target.grabbed_by) && target.lying)
 			return FALSE
-		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
-			if(GET_EXTERNAL_ORGAN(user, bp))
+		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))
+			if(GET_EXTERNAL_ORGAN(user, foot_tag))
 				return TRUE
 	return FALSE
 
 /decl/natural_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
-	var/obj/item/clothing/shoes = user.shoes
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
 	return damage + (shoes ? shoes.force : 0)
 
 /decl/natural_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
@@ -302,8 +318,8 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	var/obj/item/clothing/shoes = user.shoes
-	attack_damage = Clamp(attack_damage, 1, 5)
+	var/obj/item/clothing/shoes = user.get_equipped_item(slot_shoes_str)
+	attack_damage = clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"
 	var/decl/pronouns/G = user.get_pronouns()
@@ -323,6 +339,7 @@ var/global/list/sparring_attack_cache = list()
 /decl/natural_attack/light_strike
 	name = "light strike"
 	deal_halloss = 3
+	selector_icon_state = "attack_light_strike"
 	attack_noun = list("limb")
 	attack_verb = list("tapped", "lightly struck")
 	shredding = 0
@@ -333,11 +350,13 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/light_strike/punch
 	name = "light punch"
+	selector_icon_state = "attack_light_punch"
 	attack_noun = list("fist")
 	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 
 /decl/natural_attack/light_strike/kick
 	name = "light kick"
+	selector_icon_state = "attack_light_kick"
 	attack_noun = list("foot")
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 

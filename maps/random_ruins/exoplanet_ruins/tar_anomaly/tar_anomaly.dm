@@ -1,6 +1,5 @@
 /datum/map_template/ruin/exoplanet/tar_anomaly
 	name = "tar anomaly"
-	id = "tar_anomaly"
 	description = "An anomaly in the center of a ring of tar."
 	suffixes = list("tar_anomaly/tar_anomaly.dmm")
 	cost = 1

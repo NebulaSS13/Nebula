@@ -4,6 +4,7 @@
 	speed = 4
 	mob_size = MOB_SIZE_SMALL
 	emote_see = list("glubs", "blubs", "bloops")
+	base_animal_type = /mob/living/simple_animal/aquatic
 
 	// They only really care if there's water around them or not.
 	max_gas = list()

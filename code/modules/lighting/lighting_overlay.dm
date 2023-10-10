@@ -9,7 +9,7 @@
 	plane         = LIGHTING_PLANE
 	invisibility  = INVISIBILITY_LIGHTING
 	simulated     = FALSE
-	blend_mode    = BLEND_MULTIPLY
+	blend_mode    = BLEND_OVERLAY
 
 	var/needs_update = FALSE
 
@@ -24,6 +24,10 @@
 	var/turf/T         = loc // If this runtimes atleast we'll know what's creating overlays in things that aren't turfs.
 	T.lighting_overlay = src
 	T.luminosity       = 0
+
+	if (T.corners && T.corners.len)
+		for (var/datum/lighting_corner/C in T.corners)
+			C.active = TRUE
 
 	if (update_now)
 		update_overlay()
@@ -141,15 +145,6 @@
 /atom/movable/lighting_overlay/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	return
-
-/atom/movable/lighting_overlay/singularity_act()
-	return
-
-/atom/movable/lighting_overlay/singularity_pull()
-	return
-
-/atom/movable/lighting_overlay/singuloCanEat()
-	return FALSE
 
 /atom/movable/lighting_overlay/can_fall()
 	return FALSE

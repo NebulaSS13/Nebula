@@ -1,4 +1,4 @@
-/get_armor_key(damage_type, damage_flags)
+/datum/controller/subsystem/materials/get_armor_key(damage_type, damage_flags)
 	. = (damage_type == PSIONIC) ? PSIONIC : ..()
 
 /datum/extension/armor/psionic

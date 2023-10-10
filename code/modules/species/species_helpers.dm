@@ -11,6 +11,7 @@ var/global/list/stored_shock_by_ref = list()
 		to_chat(H, "<span class='notice'>You are now [H.pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
 
 /decl/species/proc/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
+	SHOULD_CALL_PARENT(TRUE)
 	var/water = REAGENT_VOLUME(fluids, /decl/material/liquid/water)
 	if(water >= 40 && H.getHalLoss())
 		H.adjustHalLoss(-(water_soothe_amount))
@@ -42,6 +43,7 @@ var/global/list/stored_shock_by_ref = list()
 		for(var/mark_type in base_markings)
 			if(!LAZYACCESS(pref.body_markings, mark_type))
 				LAZYSET(pref.body_markings, mark_type, base_markings[mark_type])
+
 	pref.skin_colour = base_color
 	pref.eye_colour = base_eye_color
 	pref.hair_colour = base_hair_color
@@ -52,8 +54,8 @@ var/global/list/stored_shock_by_ref = list()
 	if(length(base_markings))
 		for(var/mark_type in base_markings)
 			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
-			for(var/bp in mark_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bp)
+			for(var/bodypart in mark_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
 				if(O && !LAZYACCESS(O.markings, mark_type))
 					LAZYSET(O.markings, mark_type, base_markings[mark_type])
 
@@ -65,6 +67,10 @@ var/global/list/stored_shock_by_ref = list()
 	mannequin.facial_hair_colour = base_hair_color
 	set_default_hair(mannequin)
 
+	if(preview_outfit)
+		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
+		outfit.equip(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
+
 	mannequin.force_update_limbs()
 	mannequin.update_mutations(0)
 	mannequin.update_body(0)
@@ -74,7 +80,7 @@ var/global/list/stored_shock_by_ref = list()
 	mannequin.update_transform()
 
 /decl/species/proc/get_resized_organ_w_class(var/organ_w_class)
-	. = Clamp(organ_w_class + mob_size_difference(mob_size, MOB_SIZE_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
+	. = clamp(organ_w_class + mob_size_difference(mob_size, MOB_SIZE_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
 
 /decl/species/proc/resize_organ(var/obj/item/organ/organ)
 	if(!istype(organ))

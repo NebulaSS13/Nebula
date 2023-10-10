@@ -27,10 +27,10 @@
 	filedesc = "Defeat [picked_enemy_name]"
 
 // Important in order to ensure that copied versions will have the same enemy name.
-/datum/computer_file/program/game/clone()
-	var/datum/computer_file/program/game/G = ..()
-	G.picked_enemy_name = picked_enemy_name
-	return G
+/datum/computer_file/program/game/PopulateClone(datum/computer_file/program/game/clone)
+	clone = ..()
+	clone.picked_enemy_name = picked_enemy_name
+	return clone
 
 // When running the program, we also want to pass our enemy name to the nano module.
 /datum/computer_file/program/game/on_startup()

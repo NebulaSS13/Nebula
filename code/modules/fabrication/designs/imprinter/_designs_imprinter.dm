@@ -4,4 +4,5 @@
 
 /datum/fabricator_recipe/imprinter/get_resources()
 	. = ..()
-	LAZYSET(resources, /decl/material/liquid/acid, 20)
+	// 1 sheet of matter is 20u of reagents, which is converted during fabricator input
+	LAZYSET(resources, /decl/material/liquid/acid, SHEET_MATERIAL_AMOUNT)

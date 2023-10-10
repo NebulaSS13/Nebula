@@ -24,7 +24,7 @@
 /decl/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = TRUE
@@ -63,13 +63,13 @@
 /decl/machine_construction/default/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		machine.visible_message(SPAN_NOTICE("\The [user] deconstructs \the [machine]."))
 		machine.dismantle()
 		return
-	if(isScrewdriver(I))
+	if(IS_SCREWDRIVER(I))
 		TRANSFER_STATE(up_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = FALSE
@@ -80,7 +80,7 @@
 	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(user, I)
 
-	if(isWrench(I))
+	if(IS_WRENCH(I))
 		return machine.part_removal(user)
 
 	if(istype(I))

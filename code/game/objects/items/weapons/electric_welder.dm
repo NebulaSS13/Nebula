@@ -2,7 +2,6 @@
 	name = "arc welder"
 	desc = "A man-portable arc welding tool."
 	icon = 'icons/obj/items/tool/welders/welder_arc.dmi'
-	icon_state = "welder_arc"
 	welding_resource = "stored charge"
 	tank = null
 	waterproof = TRUE
@@ -40,16 +39,13 @@
 			. = module.holder.get_cell()
 
 /obj/item/weldingtool/electric/get_fuel()
-	return get_available_charge()
-
-/obj/item/weldingtool/electric/proc/get_available_charge()
 	var/obj/item/cell/cell = get_cell()
 	return cell ? cell.charge : 0
 
 /obj/item/weldingtool/electric/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/welder_tank))
+	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/chems/welder_tank))
 		return
-	if(isScrewdriver(W))
+	if(IS_SCREWDRIVER(W))
 		if(cell)
 			cell.dropInto(get_turf(src))
 			user.put_in_hands(cell)
@@ -63,7 +59,7 @@
 	else if(istype(W, /obj/item/cell))
 		if(cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.unEquip(W))
+		else if(user.try_unequip(W))
 			cell = W
 			cell.forceMove(src)
 			to_chat(user, SPAN_NOTICE("You slot \the [cell] into \the [src]."))
@@ -71,18 +67,13 @@
 		return
 	. = ..()
 
-/obj/item/weldingtool/electric/burn_fuel(var/amount)
-	spend_charge(amount * fuel_cost_multiplier)
-	var/turf/T = get_turf(src)
-	if(T) 
-		T.hotspot_expose(700, 5)
-
-/obj/item/weldingtool/electric/on_update_icon()
-	..()
-	if(cell)
-		add_overlay("[icon_state]-cell")
-
-/obj/item/weldingtool/electric/proc/spend_charge(var/amount)
+/obj/item/weldingtool/electric/use_fuel(var/amount)
 	var/obj/item/cell/cell = get_cell()
 	if(cell)
-		cell.use(amount * CELLRATE)
+		return cell.use(amount * CELLRATE) > 0
+	return FALSE
+
+/obj/item/weldingtool/electric/on_update_icon()
+	. = ..()
+	if(cell)
+		add_overlay("[icon_state]-cell")

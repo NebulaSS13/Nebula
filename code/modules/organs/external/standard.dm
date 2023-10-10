@@ -7,13 +7,11 @@
 /obj/item/organ/external/chest
 	name = "upper body"
 	organ_tag = BP_CHEST
-	icon_name = "torso"
 	max_damage = 100
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
 	cavity_max_w_class = ITEM_SIZE_NORMAL
 	body_part = SLOT_UPPER_BODY
-	vital = 1
 	amputation_point = "spine"
 	joint = "neck"
 	parent_organ = null
@@ -31,8 +29,8 @@
 	if( L && L.is_bruised())
 		. += "Lung ruptured"
 
-/obj/item/organ/external/chest/die() 
-	//Special handling for synthetics 
+/obj/item/organ/external/chest/die()
+	//Special handling for synthetics
 	if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
 		return
 	. = ..()
@@ -40,7 +38,6 @@
 /obj/item/organ/external/groin
 	name = "lower body"
 	organ_tag = BP_GROIN
-	icon_name = "groin"
 	max_damage = 100
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_LARGE
@@ -53,8 +50,8 @@
 	cavity_name = "abdominal"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
 
-/obj/item/organ/external/groin/die() 
-	//Special handling for synthetics 
+/obj/item/organ/external/groin/die()
+	//Special handling for synthetics
 	if(BP_IS_PROSTHETIC(src) || BP_IS_CRYSTAL(src))
 		return
 	. = ..()
@@ -62,7 +59,6 @@
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
 	name = "left arm"
-	icon_name = "l_arm"
 	max_damage = 50
 	min_broken_damage = 30
 	w_class = ITEM_SIZE_NORMAL
@@ -78,7 +74,6 @@
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
 	name = "right arm"
-	icon_name = "r_arm"
 	body_part = SLOT_ARM_RIGHT
 	joint = "right elbow"
 	amputation_point = "right shoulder"
@@ -86,7 +81,6 @@
 /obj/item/organ/external/leg
 	organ_tag = BP_L_LEG
 	name = "left leg"
-	icon_name = "l_leg"
 	max_damage = 50
 	min_broken_damage = 30
 	w_class = ITEM_SIZE_NORMAL
@@ -103,7 +97,6 @@
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
 	name = "right leg"
-	icon_name = "r_leg"
 	body_part = SLOT_LEG_RIGHT
 	icon_position = RIGHT
 	joint = "right knee"
@@ -112,7 +105,6 @@
 /obj/item/organ/external/foot
 	organ_tag = BP_L_FOOT
 	name = "left foot"
-	icon_name = "l_foot"
 	max_damage = 30
 	min_broken_damage = 15
 	w_class = ITEM_SIZE_SMALL
@@ -128,7 +120,6 @@
 /obj/item/organ/external/foot/right
 	organ_tag = BP_R_FOOT
 	name = "right foot"
-	icon_name = "r_foot"
 	body_part = SLOT_FOOT_RIGHT
 	icon_position = RIGHT
 	parent_organ = BP_R_LEG
@@ -138,7 +129,6 @@
 /obj/item/organ/external/hand
 	organ_tag = BP_L_HAND
 	name = "left hand"
-	icon_name = "l_hand"
 	icon_position = LEFT
 	max_damage = 30
 	min_broken_damage = 15
@@ -150,14 +140,12 @@
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
-	var/gripper_ui_label = "L"
-	var/gripper_ui_loc = ui_lhand
-	var/overlay_slot_id = BP_L_HAND
+	var/gripper_type = /datum/inventory_slot/gripper/left_hand
 
 /obj/item/organ/external/hand/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
-	if(!(. = ..()))
-		return
-	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
+	. = ..()
+	if(. && owner && gripper_type)
+		owner.add_held_item_slot(new gripper_type)
 
 /obj/item/organ/external/hand/do_uninstall(in_place, detach, ignore_children, update_icon)
 	owner?.remove_held_item_slot(organ_tag)
@@ -166,12 +154,9 @@
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND
 	name = "right hand"
-	icon_name = "r_hand"
 	icon_position = RIGHT
 	body_part = SLOT_HAND_RIGHT
 	parent_organ = BP_R_ARM
 	joint = "right wrist"
 	amputation_point = "right wrist"
-	gripper_ui_loc = ui_rhand
-	overlay_slot_id = BP_R_HAND
-	gripper_ui_label = "R"
+	gripper_type = /datum/inventory_slot/gripper/right_hand

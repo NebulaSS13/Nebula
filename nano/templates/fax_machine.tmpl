@@ -1,0 +1,105 @@
+
+{{function prepare_history(fax_history){ 
+	if(!fax_history){
+		return "<span class=\"average\">No History to Display</span>";
+	};
+	let hmtl = "";
+	let startpos = Math.max(fax_history.length - 500, 1);
+	for(let i = startpos; i < fax_history.length; ++i){
+		hmtl += fax_history[i] + "<br>";
+	};
+	return "<div class=\'block\'>" + hmtl + "</div>";
+} }}
+
+<!-- Generate the settings page -->
+{{function settings_page() { }}
+	{{:helper.link("Back", "triangle-1-w", {"change_page" : "main"} ) }}
+	<br/><hr/>
+	<!-- Data disk handling -->
+	<h3>Disk Drive</h3>
+	{{:helper.link((data.disk? data.disk_name : "-----------"), data.disk? "eject" : null, data.disk? {"eject_disk":1} : {"insert_disk":1}) }}
+
+	<h3>Usage History</h3>
+	<div class="statusDisplay">
+		{{if data.fax_history && (data.fax_history.length > 500) }}
+			<span class="warning">Full history is too big to display</span><br/>
+			...<br/>
+		{{else data.fax_history}}
+			{{prepare_history(data.fax_history); }}
+		{{else}}
+			<span class="average">No History to Display</span>
+		{{/if}}
+		
+	</div>
+{{ } }}
+
+<!-- Generate the main page -->
+{{function main_page() { }}
+	<form name="frm_send" id="frm_send" method="get" target="_self">
+		<input type="hidden" id="src" name="src" form="frm_send" value={{:data.src}} />
+		{{if data.has_disk_drive}}
+			{{:helper.link("Disk", "gear", {"change_page":"settings"}) }}
+		{{/if}}
+		<!--Printer shared header-->
+		{{#def.stock_parts_printer_shared}}
+		<hr/>
+		<!-- Actual machine ui -->
+		<h3>Fax</h3>
+
+		<table>
+			{{if data.has_card_reader}}
+				<tr>
+					<td>ID Card:</td>
+					<td>{{:helper.link((data.id_card? data.id_card_info : "-----------"), (data.id_card? "key" : null), {"id_card":1} ) }}</td>
+				</tr>
+			{{/if}}
+			<tr>
+				<td>Document:</td>
+				<td>{{:helper.link(data.scanner_item? "Eject" : "-----------", data.scanner_item? "document" : null, data.scanner_item? {"remove_item":1} : {"insert_item":1} ) }}</td>
+			</tr>
+			{{if data.has_disk_drive}}
+				<tr>
+					<td>Quick Dial:</td>
+					{{if data.disk}}
+						<td>
+							<select id="quick_dial" name="quick_dial" class="listBox" style="width:16em" form="frm_send" onchange="let tgt = document.getElementById('network_uri');if(!this.value){tgt.disabled = false;}else{tgt.disabled = true;};tgt.value = this.value;" {{:(data.quick_dial_targets && (data.quick_dial_targets.length > 0))? "": "disabled"}} >
+								<option value="">Use specified tag</option>
+								{{for data.quick_dial_targets}}
+									<option value={{:value.value}}>{{:value.key}}:{{:value.value}}</option>
+								{{/for}}
+							</select>
+						</td>
+						<td><button type="submit" id="rem_qd" name="rem_qd" value="1" class="button" form="frm_send">Remove</button></td>
+					{{else}}
+						<td><span class="mild">Insert Disk to Store Contacts</span></td>
+					{{/if}}
+				</tr>
+			{{/if}}
+			<tr>
+				<td>Destination URI:</td>
+				<td><input type="text" id="network_uri" name="network_uri" class="textBox" style="width:16em" value='{{:(data.dest_uri? data.dest_uri : "")}}' form="frm_send" ></td>
+				{{if data.has_disk_drive}}
+					<td><button type="submit" id="add_qd" name="add_qd" value="1" class="button" form="frm_send" {{:data.disk? "": "disabled"}} >Add</button></td>
+				{{/if}}
+			</tr>
+			<tr>
+				<td>
+					<button type="submit" id="send" name="send" value="1" class="button" form="frm_send" {{:data.scanner_item? "" : "disabled"}}>Send</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+{{ } }}
+
+<!--Include shared network UI stuff for network header-->
+{{#def.net_shared}}
+{{net_connection_settings(data.network_tag, data.network_id);}}
+{{if data.is_operational}}
+	{{if data.page == 'settings'}}
+		{{settings_page();}}
+	{{else data.page == 'main'}}
+		{{main_page();}}
+	{{/if}}
+{{else}}
+	<em>SYSTEM ERROR</em>
+{{/if}}

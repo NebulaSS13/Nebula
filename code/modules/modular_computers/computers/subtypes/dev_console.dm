@@ -1,11 +1,15 @@
 /obj/machinery/computer/modular
 	name = "modular console"
-	maximum_component_parts = list(/obj/item/stock_parts = 14)	//There's a lot of stuff that goes in these
-	var/list/interact_sounds = list("keyboard", "keystroke")
-	var/wired_connection = FALSE // Whether or not this console will start with a wired connection beneath it.
+	maximum_component_parts   = list(/obj/item/stock_parts = 14)	//There's a lot of stuff that goes in these
+	icon = 'icons/obj/modular_computers/modular_console.dmi'
+	icon_state = "console-off"
+	var/list/interact_sounds  = list("keyboard", "keystroke")
+	var/wired_connection      = FALSE // Whether or not this console will start with a wired connection beneath it.
+	var/tmp/max_hardware_size = 3 //Enum to tell whether computer parts are too big to fit in this machine.
+	var/tmp/os_type           = /datum/extension/interactive/os/console //The type of the OS extension to create for this machine.
 
 /obj/machinery/computer/modular/Initialize()
-	set_extension(src, /datum/extension/interactive/os/console)
+	set_extension(src, os_type)
 	. = ..()
 
 /obj/machinery/computer/modular/populate_parts(full_populate)
@@ -82,6 +86,15 @@
 	if(os)
 		os.open_terminal(user)
 
+//Check for handling wall-mounted modular computer stuff
+/obj/machinery/computer/modular/can_add_component(obj/item/stock_parts/component, mob/user)
+	var/obj/item/stock_parts/computer/C = component
+	if(istype(C))
+		if(C.hardware_size > max_hardware_size)
+			to_chat(user, "This component is too large for \the [src].")
+			return 0
+	. = ..()
+	
 /obj/machinery/computer/modular/verb/emergency_shutdown()
 	set name = "Forced Shutdown"
 	set category = "Object"

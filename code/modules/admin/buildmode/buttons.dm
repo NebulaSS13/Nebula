@@ -4,6 +4,7 @@
 	plane = HUD_PLANE
 	layer = HUD_BASE_LAYER
 	icon = 'icons/misc/buildmode.dmi'
+	is_spawnable_type = FALSE
 	var/datum/click_handler/build_mode/host
 
 /obj/effect/bmode/Initialize(mapload, _host)

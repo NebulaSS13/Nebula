@@ -149,7 +149,7 @@
 /obj/item/projectile/beam/lastertag/blue/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
-		if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
+		if(istype(M.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/redtag))
 			SET_STATUS_MAX(M, STAT_WEAK, 5)
 	return 1
 
@@ -164,7 +164,7 @@
 /obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
-		if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
+		if(istype(M.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/bluetag))
 			SET_STATUS_MAX(M, STAT_WEAK, 5)
 	return 1
 
@@ -182,7 +182,8 @@
 /obj/item/projectile/beam/lastertag/omni/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
-		if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
+		var/obj/item/suit = M.get_equipped_item(slot_wear_suit_str)
+		if((istype(suit, /obj/item/clothing/suit/bluetag))||(istype(suit, /obj/item/clothing/suit/redtag)))
 			SET_STATUS_MAX(M, STAT_WEAK, 5)
 	return 1
 

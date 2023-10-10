@@ -14,9 +14,11 @@
 	icon_state = "frame"
 	name = "status display"
 	layer = ABOVE_WINDOW_LAYER
+	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	anchored = 1
 	density = 0
 	idle_power_usage = 10
+	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer
 					// 2 = Arbitrary message(s)

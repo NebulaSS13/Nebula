@@ -4,6 +4,7 @@
 
 //global datum that will preload variables on atoms instanciation
 var/global/use_preloader = FALSE
+var/global/dmm_suite/maploader = new
 var/global/dmm_suite/preloader/_preloader = new
 
 /datum/map_load_metadata
@@ -33,7 +34,13 @@ var/global/dmm_suite/preloader/_preloader = new
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y, var/initialized_areas_by_type)
+
+// dmm_files: A list of .dmm files to load (Required).
+// z_offset: A number representing the z-level on which to start loading the map (Optional).
+// cropMap: When true, the map will be cropped to fit the existing world dimensions (Optional).
+// measureOnly: When true, no changes will be made to the world (Optional).
+// no_changeturf: When true, turf/AfterChange won't be called on loaded turfs
+/dmm_suite/proc/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y, var/initialized_areas_by_type, var/level_data_type)
 	//How I wish for RAII
 	Master.StartLoadingMap()
 	space_key = null
@@ -43,14 +50,14 @@ var/global/dmm_suite/preloader/_preloader = new
 	initialized_areas_by_type = initialized_areas_by_type || list()
 	if(!(world.area in initialized_areas_by_type))
 		initialized_areas_by_type[world.area] = locate(world.area)
-	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type)
+	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type, level_data_type)
 	#ifdef TESTING
 	if(turfsSkipped)
 		testing("Skipped loading [turfsSkipped] default turfs")
 	#endif
 	Master.StopLoadingMap()
 
-/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type)
+/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type, level_data_type = /datum/level_data/space)
 	var/tfile = dmm_file//the map file we're creating
 	if(isfile(tfile))
 		tfile = safe_file2text(tfile, FALSE)
@@ -103,20 +110,16 @@ var/global/dmm_suite/preloader/_preloader = new
 			var/ycrd = text2num(dmmRegex.group[4]) + y_offset - 1
 			var/zcrd = text2num(dmmRegex.group[5]) + z_offset - 1
 
-			var/is_connected_to_lower_levels = ARE_Z_CONNECTED(zcrd, z_offset)
-			var/is_on_an_existing_zlevel = zcrd <= world.maxz
-
-			if (is_on_an_existing_zlevel && !is_connected_to_lower_levels)
+			var/zexpansion = zcrd > world.maxz
+			if(!zexpansion && !LEVELS_ARE_Z_CONNECTED(zcrd, z_offset))
 				continue
 
-			var/zexpansion = zcrd > world.maxz
 			if(zexpansion && !measureOnly) // don't actually expand the world if we're only measuring bounds
 				if(cropMap)
 					continue
-				else
-					world.maxz = zcrd //create a new z_level if needed
-
-			bounds[MAP_MINX] = min(bounds[MAP_MINX], Clamp(xcrdStart, x_lower, x_upper))
+				while(world.maxz < zcrd) //create new z_levels if needed.
+					SSmapping.increment_world_z_size(level_data_type)
+			bounds[MAP_MINX] = min(bounds[MAP_MINX], clamp(xcrdStart, x_lower, x_upper))
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], zcrd)
 			bounds[MAP_MAXZ] = max(bounds[MAP_MAXZ], zcrd)
 
@@ -133,15 +136,15 @@ var/global/dmm_suite/preloader/_preloader = new
 			if(gridLines.len && gridLines[gridLines.len] == "")
 				gridLines.Cut(gridLines.len) // Remove only one blank line at the end.
 
-			bounds[MAP_MINY] = min(bounds[MAP_MINY], Clamp(ycrd, y_lower, y_upper))
+			bounds[MAP_MINY] = min(bounds[MAP_MINY], clamp(ycrd, y_lower, y_upper))
 			ycrd += gridLines.len - 1 // Start at the top and work down
 
 			if(!cropMap && ycrd > world.maxy)
 				if(!measureOnly)
 					world.maxy = ycrd // Expand Y here.  X is expanded in the loop below
-				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], Clamp(ycrd, y_lower, y_upper))
+				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], clamp(ycrd, y_lower, y_upper))
 			else
-				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], Clamp(min(ycrd, world.maxy), y_lower, y_upper))
+				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], clamp(min(ycrd, world.maxy), y_lower, y_upper))
 
 			var/maxx = xcrdStart
 			if(measureOnly)
@@ -185,21 +188,21 @@ var/global/dmm_suite/preloader/_preloader = new
 				if (zexpansion && SSlighting.initialized)
 					SSlighting.InitializeZlev(zcrd)
 
-			bounds[MAP_MAXX] = Clamp(max(bounds[MAP_MAXX], cropMap ? min(maxx, world.maxx) : maxx), x_lower, x_upper)
+			bounds[MAP_MAXX] = clamp(max(bounds[MAP_MAXX], cropMap ? min(maxx, world.maxx) : maxx), x_lower, x_upper)
 
 		CHECK_TICK
 
 	if(bounds[1] == 1.#INF) // Shouldn't need to check every item
 		return null
-	else
-		if(!measureOnly)
-			if(clear_contents)
-				for(var/atom/to_delete in atoms_to_delete)
-					qdel(to_delete)
-		var/datum/map_load_metadata/M = new
-		M.bounds = bounds
-		M.atoms_to_initialise = atoms_to_initialise
-		return M
+
+	if(!measureOnly)
+		if(clear_contents)
+			for(var/atom/to_delete in atoms_to_delete)
+				qdel(to_delete)
+	var/datum/map_load_metadata/M = new
+	M.bounds = bounds
+	M.atoms_to_initialise = atoms_to_initialise
+	return M
 
 /**
  * Fill a given tile with its area/turf/objects/mobs
@@ -230,6 +233,7 @@ var/global/dmm_suite/preloader/_preloader = new
 		/obj/item,
 		/obj/machinery,
 		/obj/structure,
+		/obj/abstract/landmark/exoplanet_spawn,
 	)
 
 /dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num, initialized_areas_by_type)

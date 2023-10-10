@@ -1,12 +1,12 @@
 /mob/living/carbon/human
 
-	var/h_style = /decl/sprite_accessory/hair/bald
-	var/f_style = /decl/sprite_accessory/facial_hair/shaved
+	var/h_style
+	var/f_style
 
-	var/hair_colour =        COLOR_BLACK
-	var/facial_hair_colour = COLOR_BLACK
-	var/skin_colour =        COLOR_BLACK
-	var/eye_colour =         COLOR_BLACK
+	var/hair_colour
+	var/facial_hair_colour
+	var/skin_colour
+	var/eye_colour
 
 	var/regenerate_body_icon = FALSE // If true, the next icon update will also regenerate the body.
 
@@ -16,7 +16,7 @@
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
-	var/b_type = "A+"	//Player's bloodtype
+	var/b_type	//Player's bloodtype
 
 	var/list/worn_underwear = list()
 
@@ -26,31 +26,13 @@
 
 	var/obj/screen/default_attack_selector/attack_selector
 
-	//Equipment slots
-	var/obj/item/wear_suit = null
-	var/obj/item/w_uniform = null
-	var/obj/item/shoes = null
-	var/obj/item/belt = null
-	var/obj/item/gloves = null
-	var/obj/item/glasses = null
-	var/obj/item/head = null
-	var/obj/item/l_ear = null
-	var/obj/item/r_ear = null
-	var/obj/item/wear_id = null
-	var/obj/item/r_store = null
-	var/obj/item/l_store = null
-	var/obj/item/s_store = null
-
 	var/icon/stand_icon = null
-	var/icon/lying_icon = null
 
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
 	/// organs we check until they are good.
 	var/list/bad_external_organs
-	
-	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 
 	var/mob/remoteview_target = null
 	var/hand_blood_color
@@ -82,7 +64,9 @@
 	var/decl/natural_attack/default_attack	//default unarmed attack
 
 	var/obj/machinery/machine_visual //machine that is currently applying visual effects to this mob. Only used for camera monitors currently.
+
 	var/shock_stage
+	var/rounded_shock_stage
 
 	//vars for fountain of youth examine lines
 	var/became_older
@@ -94,6 +78,8 @@
 
 	/// var for caching last getHalloss() run to avoid looping through organs over and over and over again
 	var/last_pain
+
+	var/vital_organ_missing_time
 
 	ai = /datum/ai/human
 

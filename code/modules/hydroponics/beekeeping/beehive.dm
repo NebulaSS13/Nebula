@@ -46,12 +46,12 @@
 		to_chat(user, "The lid is open.")
 
 /obj/machinery/beehive/attackby(var/obj/item/I, var/mob/user)
-	if(isCrowbar(I))
+	if(IS_CROWBAR(I))
 		closed = !closed
 		user.visible_message("<span class='notice'>\The [user] [closed ? "closes" : "opens"] \the [src].</span>", "<span class='notice'>You [closed ? "close" : "open"] \the [src].</span>")
 		update_icon()
 		return
-	else if(isWrench(I))
+	else if(IS_WRENCH(I))
 		anchored = !anchored
 		user.visible_message("<span class='notice'>\The [user] [anchored ? "wrenches" : "unwrenches"] \the [src].</span>", "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
 		return
@@ -115,7 +115,7 @@
 		if(smoked)
 			to_chat(user, "The hive is smoked.")
 		return 1
-	else if(isScrewdriver(I))
+	else if(IS_SCREWDRIVER(I))
 		if(bee_count)
 			to_chat(user, "<span class='notice'>You can't dismantle \the [src] with these bees inside.</span>")
 			return
@@ -159,7 +159,7 @@
 	var/trays = 0
 	for(var/obj/machinery/portable_atmospherics/hydroponics/H in view(7, src))
 		if(H.seed && !H.dead)
-			H.health += 0.05 * coef
+			H.plant_health += 0.05 * coef
 			++trays
 	honeycombs = min(honeycombs + 0.1 * coef * min(trays, 5), frames * 100)
 
@@ -221,8 +221,9 @@
 	name = "bee smoker"
 	desc = "A device used to calm down bees before harvesting honey."
 	icon = 'icons/obj/items/weapon/batterer.dmi'
-	icon_state = "battererburnt"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/honey_frame
 	name = "beehive frame"
@@ -230,13 +231,14 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "honeyframe"
 	w_class = ITEM_SIZE_SMALL
-
+	material = /decl/material/solid/wood
 	var/honey = 0
 
 /obj/item/honey_frame/filled
 	name = "filled beehive frame"
 	desc = "A frame for the beehive that the bees have filled with honeycombs."
 	honey = 20
+	material = /decl/material/solid/wood
 
 /obj/item/honey_frame/filled/Initialize()
 	. = ..()
@@ -247,6 +249,7 @@
 	desc = "Contains everything you need to build a beehive."
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "apiary"
+	material = /decl/material/solid/wood
 
 /obj/item/beehive_assembly/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>You start assembling \the [src]...</span>")
@@ -271,6 +274,7 @@ var/global/list/wax_recipes = list(new /datum/stack_recipe/candle)
 	desc = "Contains a queen bee and some worker bees. Everything you'll need to start a hive!"
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "beepack"
+	material = /decl/material/solid/plastic
 	var/full = 1
 
 /obj/item/bee_pack/Initialize()

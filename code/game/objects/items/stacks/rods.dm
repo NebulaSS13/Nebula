@@ -16,6 +16,7 @@
 	lock_picking_level = 3
 	matter_multiplier = 0.3
 	material = /decl/material/solid/metal/steel
+	is_spawnable_type = TRUE
 
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
 	drop_sound = 'sound/foley/tooldrop2.ogg'
@@ -37,6 +38,8 @@
 	matter = null
 	uses_charge = 1
 	charge_costs = list(500)
+	max_health = ITEM_HEALTH_NO_DAMAGE
+	is_spawnable_type = FALSE
 
 /obj/item/stack/material/rods/Initialize()
 	. = ..()
@@ -54,14 +57,14 @@
 		icon_state = base_state
 
 /obj/item/stack/material/rods/attackby(obj/item/W, mob/user)
-	if(isWelder(W))
+	if(IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
 
 		if(!can_use(2))
 			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
 
-		if(WT.remove_fuel(0,user))
+		if(WT.weld(0,user))
 			visible_message(SPAN_NOTICE("\The [src] is fused together by \the [user] with \the [WT]."), 3, SPAN_NOTICE("You hear welding."), 2)
 			for(var/obj/item/stack/material/new_item in SSmaterials.create_object((material?.type || /decl/material/solid/metal/steel), usr.loc, 1))
 				new_item.add_to_stacks(usr)
@@ -70,14 +73,21 @@
 			use(2)
 		return
 
-	if (istype(W, /obj/item/ducttape))
+	if (istype(W, /obj/item/stack/tape_roll/duct_tape))
+		var/obj/item/stack/tape_roll/duct_tape/T = W
+		if(!T.can_use(4))
+			to_chat(user, SPAN_WARNING("You need 4 [T.plural_name] to make a splint!"))
+			return
+		T.use(4)
+
 		var/obj/item/stack/medical/splint/ghetto/new_splint = new(user.loc)
 		new_splint.dropInto(loc)
 		new_splint.add_fingerprint(user)
-
-		user.visible_message("<span class='notice'>\The [user] constructs \a [new_splint] out of a [singular_name].</span>", \
-				"<span class='notice'>You use make \a [new_splint] out of a [singular_name].</span>")
+		playsound(user, 'sound/effects/tape.ogg', 50, TRUE)
+		user.visible_message(SPAN_NOTICE("\The [user] constructs \a [new_splint] out of a [singular_name]."), \
+				SPAN_NOTICE("You use make \a [new_splint] out of a [singular_name]."))
 		src.use(1)
+
 		return
 
 	..()

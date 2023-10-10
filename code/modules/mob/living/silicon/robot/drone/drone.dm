@@ -33,8 +33,6 @@
 
 	silicon_camera = /obj/item/camera/siliconcam/drone_camera
 
-	//Used for self-mailing.
-	var/mail_destination = ""
 	var/module_type = /obj/item/robot_module/drone
 	var/hat_x = 0
 	var/hat_y = -13
@@ -77,7 +75,7 @@
 
 	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
 		return
-	if(ARE_Z_CONNECTED(old_loc.z, new_loc.z))
+	if(LEVELS_ARE_Z_CONNECTED(old_loc.z, new_loc.z))
 		return
 
 	// None of the tests passed, good bye
@@ -124,8 +122,9 @@
 	hat_y = -12
 
 /mob/living/silicon/robot/drone/init()
-	additional_law_channels["Drone"] = ":d"
-	if(!module) module = new module_type(src)
+	additional_law_channels["Drone"] = "d"
+	if(!module)
+		module = new module_type(src)
 
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with a logo and the subscript: '[global.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
@@ -167,7 +166,7 @@
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
 		return TRUE
 
-	else if(isCrowbar(W) && user.a_intent != I_HURT)
+	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 

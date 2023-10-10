@@ -1,6 +1,6 @@
-#define DIONA_SCREEN_LOC_HELD   "EAST-8:16,SOUTH:5"
-#define DIONA_SCREEN_LOC_HAT    "EAST-7:16,SOUTH:5"
-#define DIONA_SCREEN_LOC_INTENT "EAST-2,SOUTH:5"
+#define DIONA_SCREEN_LOC_HELD   "RIGHT-8:16,BOTTOM:5"
+#define DIONA_SCREEN_LOC_HAT    "RIGHT-7:16,BOTTOM:5"
+#define DIONA_SCREEN_LOC_INTENT "RIGHT-2,BOTTOM:5"
 #define DIONA_SCREEN_LOC_HEALTH ui_alien_health
 
 /datum/extension/hattable/diona_nymph/wear_hat(mob/wearer, obj/item/clothing/head/new_hat)
@@ -42,8 +42,6 @@
 	z_flags = ZMM_MANGLE_PLANES
 
 	var/obj/item/holding_item
-	var/mob/living/carbon/alien/diona/next_nymph
-	var/mob/living/carbon/alien/diona/previous_nymph
 	var/tmp/flower_color
 	var/tmp/last_glow
 
@@ -80,7 +78,7 @@
 
 	. = ..(mapload)
 
-/mob/living/carbon/alien/diona/examine(mob/user)
+/mob/living/carbon/alien/diona/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..()
 	if(holding_item)
 		to_chat(user, SPAN_NOTICE("It is holding [html_icon(holding_item)] \a [holding_item]."))

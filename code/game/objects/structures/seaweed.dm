@@ -29,3 +29,9 @@
 	desc = "Damp and mossy plant life."
 	icon_state = "lichen"
 	icon = 'icons/obj/structures/plants.dmi'
+
+/obj/effect/decal/cleanable/lichen/attackby(obj/item/I, mob/user)
+	if(I.sharp && I.force > 1)
+		qdel(src)
+		return TRUE
+	. = ..()

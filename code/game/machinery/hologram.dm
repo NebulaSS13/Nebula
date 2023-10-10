@@ -95,7 +95,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 				var/area/area = get_area(src)
 				for(var/mob/living/silicon/ai/AI in global.living_mob_list_)
 					if(!AI.client)	continue
-					if (holopadType != HOLOPAD_LONG_RANGE && !AreConnectedZLevels(AI.z, src.z))
+					if (holopadType != HOLOPAD_LONG_RANGE && !SSmapping.are_connected_levels(AI.z, src.z))
 						continue
 					to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area.proper_name]</a>.</span>")
 			else
@@ -107,11 +107,11 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 			if(last_request + 200 < world.time) //don't spam other people with requests either, you jerk!
 				last_request = world.time
 				var/list/holopadlist = list()
-				var/zlevels = GetConnectedZlevels(z)
+				var/zlevels = SSmapping.get_connected_levels(z)
 				var/zlevels_long = list()
 				if(holopadType == HOLOPAD_LONG_RANGE && length(reachable_overmaps))
 					for(var/zlevel in global.overmap_sectors)
-						var/obj/effect/overmap/visitable/O = global.overmap_sectors["[zlevel]"]
+						var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(zlevel)]
 						if(!isnull(O) && (O.overmap_id in reachable_overmaps))
 							zlevels_long |= O.map_z
 				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
@@ -180,7 +180,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 		user.eyeobj.setLoc(get_turf(src))
 	else if (!allow_ai)
 		to_chat(user, SPAN_WARNING("Access denied."))
-	else if (holopadType != HOLOPAD_LONG_RANGE && !AreConnectedZLevels(user.z, src.z))
+	else if (holopadType != HOLOPAD_LONG_RANGE && !SSmapping.are_connected_levels(user.z, src.z))
 		to_chat(user, SPAN_WARNING("Out of range."))
 	else if(!masters[user])//If there is no hologram, possibly make one.
 		activate_holo(user)
@@ -216,7 +216,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			var/ai_text = text
 			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
 				if(speaking)
-					ai_text = speaking.scramble(text)
+					ai_text = speaking.scramble(M, text)
 				else
 					ai_text = stars(text)
 			if(isanimal(M) && !M.universal_speak)

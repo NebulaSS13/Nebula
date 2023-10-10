@@ -27,7 +27,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define BROKEN   BITFLAG(0)
 #define NOPOWER  BITFLAG(1)
 #define MAINT    BITFLAG(2) // Under maintenance.
-#define EMPED    BITFLAG(3) // Temporary broken by EMP pulse.
+#define EMPED    BITFLAG(3) // Temporary broken by EMP.
 #define NOSCREEN BITFLAG(4) // No UI shown via direct interaction
 #define NOINPUT  BITFLAG(5) // No input taken from direct interaction
 
@@ -51,7 +51,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 
 #define CAMERA_CHANNEL_ROBOTS "Robots"
 #define CAMERA_CHANNEL_MINE "Mining"
-#define CAMERA_CHANNEL_SECRET "Secret"	
+#define CAMERA_CHANNEL_SECRET "Secret"
 
 // Non-station channels
 #define CAMERA_CHANNEL_CRESCENT "Crescent"
@@ -103,11 +103,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define ATMOS_DEFAULT_VOLUME_MIXER  500 // L.
 #define ATMOS_DEFAULT_VOLUME_PIPE   70  // L.
 
-#define TELECOMMS_RECEPTION_NONE 0
-#define TELECOMMS_RECEPTION_SENDER 1
-#define TELECOMMS_RECEPTION_RECEIVER 2
-#define TELECOMMS_RECEPTION_BOTH 3
-
 // These are used by supermatter and supermatter monitor program, mostly for UI updating purposes. Higher should always be worse!
 #define SUPERMATTER_ERROR -1		// Unknown status, shouldn't happen but just in case.
 #define SUPERMATTER_INACTIVE 0		// No or minimal energy
@@ -150,7 +145,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define PART_FLAG_LAZY_INIT   1 // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
 #define PART_FLAG_QDEL        2 // Will delete on uninstall
 #define PART_FLAG_HAND_REMOVE 4 // Can be removed by hand
-#define PART_FLAG_NODAMAGE    8 // Cannot be damaged
 
 // Machinery process flags, for use with START_PROCESSING_MACHINE
 #define MACHINERY_PROCESS_SELF       1

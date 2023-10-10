@@ -10,7 +10,7 @@
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 	sharp = TRUE
-	applies_material_colour = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/singletooldrop2.ogg'
 
 	var/static/valid_colours = list(COLOR_RED, COLOR_CYAN_BLUE, COLOR_PURPLE, COLOR_CHESTNUT, COLOR_ASSEMBLY_YELLOW, COLOR_BOTTLE_GREEN)
@@ -23,10 +23,10 @@
 	set_extension(src, /datum/extension/tool, list(TOOL_SCREWDRIVER = TOOL_QUALITY_DEFAULT))
 
 /obj/item/screwdriver/on_update_icon()
-	..()
+	. = ..()
 	if(!handle_color)
 		handle_color = pick(valid_colours)
-	overlays += mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color)
+	add_overlay(mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color))
 
 /obj/item/screwdriver/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay)
@@ -42,7 +42,7 @@
 /obj/item/screwdriver/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M) || user.a_intent == I_HELP)
 		return ..()
-	if(user.zone_sel.selecting != BP_EYES && user.zone_sel.selecting != BP_HEAD)
+	if(user.get_target_zone() != BP_EYES && user.get_target_zone() != BP_HEAD)
 		return ..()
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
 		M = user

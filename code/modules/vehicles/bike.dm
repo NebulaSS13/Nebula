@@ -73,7 +73,7 @@
 /obj/vehicle/bike/proc/load_engine(var/obj/item/engine/E, var/mob/user)
 	if(engine)
 		return
-	if(user && !user.unEquip(E))
+	if(user && !user.try_unequip(E))
 		return
 	engine = E
 	engine.forceMove(src)
@@ -118,7 +118,7 @@
 			return
 		else if(engine && engine.attackby(W,user))
 			return 1
-		else if(isCrowbar(W) && engine)
+		else if(IS_CROWBAR(W) && engine)
 			to_chat(user, "You pop out \the [engine] from \the [src].")
 			unload_engine()
 			return 1
@@ -132,9 +132,11 @@
 		return TRUE
 
 /obj/vehicle/bike/attack_hand(var/mob/user)
-	if(user == load)
-		unload(load)
-		to_chat(user, "You unbuckle yourself from \the [src].")
+	if(user != load)
+		return ..()
+	unload(load)
+	to_chat(user, "You unbuckle yourself from \the [src].")
+	return TRUE
 
 /obj/vehicle/bike/relaymove(mob/user, direction)
 	if(user != load || !on)
@@ -204,9 +206,9 @@
 
 
 /obj/vehicle/bike/Destroy()
-	qdel(trail)
-	qdel(engine)
-	..()
+	QDEL_NULL(trail)
+	QDEL_NULL(engine)
+	return ..()
 
 
 /obj/vehicle/bike/thermal
