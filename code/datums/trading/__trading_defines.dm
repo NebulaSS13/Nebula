@@ -44,3 +44,4 @@
 #define TRADER_TOKEN_ITEM        "$ITEM$"               // The relevant item being traded or offered.
 #define TRADER_TOKEN_MERCHANT    "$MERCHANT$"           // The name of the current trader.
 #define TRADER_TOKEN_MOB         "$MOB$"                // The player currently interacting with the trader.
+#define TRADER_TOKEN_TIME        "$TIME$"               // How much longer a successful bribe has gained.
