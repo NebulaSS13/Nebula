@@ -63,7 +63,7 @@
 			var/decl/language/L = GET_DECL(name_language)
 			if(istype(L))
 				name = L.get_random_name(pick(MALE,FEMALE))
-	if(possible_origins && possible_origins.len)
+	if(length(possible_origins))
 		origin = pick(possible_origins)
 
 	for(var/i in 3 to 6)

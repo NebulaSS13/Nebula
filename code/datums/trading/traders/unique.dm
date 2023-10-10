@@ -91,7 +91,13 @@
 /datum/trader/ship/unique/wizard
 	name = "Sorcerer"
 	origin = "A moving castle"
-	possible_origins = list("An indistinct location", "Unknown location", "The Diamond Sphere", "Beyond the Veil", "Deadverse")
+	possible_origins = list(
+		"An indistinct location",
+		"Unknown location",
+		"The Diamond Sphere",
+		"Beyond the Veil",
+		"Deadverse"
+	)
 	name_language = TRADER_DEFAULT_NAME
 
 	possible_wanted_items = list(

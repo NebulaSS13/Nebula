@@ -1,7 +1,14 @@
 /datum/trader/books
 	name = "strange book merchant"
 	origin = "Uzed Buks"
-	possible_origins = list("Uzed Buks", "Ango & Mango (Still not a fruit shop stop wizh so many asking!)", "Prepipipi's Gently Used Books", "real-books.com.au", "We Sell Paper Wizh Words On", "Meeeena's Paper Recycling")
+	possible_origins = list(
+		"Uzed Buks",
+		"Ango & Mango (Still not a fruit shop stop wizh so many asking!)",
+		"Prepipipi's Gently Used Books",
+		"real-books.com.au",
+		"We Sell Paper Wizh Words On",
+		"Meeeena's Paper Recycling"
+	)
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list()
 	price_rng = 30

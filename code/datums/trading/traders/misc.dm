@@ -3,7 +3,13 @@
 	name_language = /decl/language/human/common
 	origin = "Pet Shop"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
-	possible_origins = list("Paws-Out", "Pets-R-Smart", "Tentacle Companions", "Xeno-Pets and Assorted Goods", "Barks and Drools")
+	possible_origins = list(
+		"Paws-Out",
+		"Pets-R-Smart",
+		"Tentacle Companions",
+		"Xeno-Pets and Assorted Goods",
+		"Barks and Drools"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Welcome to my xeno-pet shop! Here you will find many wonderful companions. Some a bit more... aggressive than others. But companions none the less. I also buy pets, or trade them.",
 		TRADER_HAIL_DENY         = "I no longer wish to speak to you.",
@@ -73,7 +79,14 @@
 	origin = "Prank Shop"
 	compliment_increase = 0
 	insult_drop = 0
-	possible_origins = list("Yacks and Yucks Shop", "The Shop From Which I Sell Humorous Items", "The Prank Gestalt", "The Clown's Armory", "Uncle Knuckle's Chuckle Bunker", "A Place from Which to do Humorous Business")
+	possible_origins = list(
+		"Yacks and Yucks Shop",
+		"The Shop From Which I Sell Humorous Items",
+		"The Prank Gestalt",
+		"The Clown's Armory",
+		"Uncle Knuckle's Chuckle Bunker",
+		"A Place from Which to do Humorous Business"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "We welcome you to our shop of humorous items. We invite you to partake in the divine experience of being pranked, and pranking someone else.",
 		TRADER_HAIL_DENY         = "We cannot do business with you. We are sorry.",
@@ -111,7 +124,17 @@
 	name = "Replica Store Owner"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Replica Store"
-	possible_origins = list("Ye-Old Armory", "Knights and Knaves", "The Blacksmith", "Historical Human Apparel and Items", "The Pointy End", "Fight Knight's Knightly Nightly Knight Fights", "Elminster's Fine Steel", "The Arms of King Duordan", "Queen's Edict")
+	possible_origins = list(
+		"Ye-Old Armory",
+		"Knights and Knaves",
+		"The Blacksmith",
+		"Historical Human Apparel and Items",
+		"The Pointy End",
+		"Fight Knight's Knightly Nightly Knight Fights",
+		"Elminster's Fine Steel",
+		"The Arms of King Duordan",
+		"Queen's Edict"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Greetings, traveler! You've the look of one with a keen hunger for human history. Come in, and learn! Mayhaps even... buy?",
 		TRADER_HAIL_DENY         = "I shan't palaver with a man who thumbs his nose at the annals of history. Goodbye.",

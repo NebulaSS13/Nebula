@@ -2,7 +2,14 @@
 	name = "Gun Shop Employee"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Gun Shop"
-	possible_origins = list("Rooty Tootie's Point-n-Shooties", "Bang-Bang Shop", "Wild Wild West Shop", "Keleshnikov", "Hunting Depot", "Big Game Hunters")
+	possible_origins = list(
+		"Rooty Tootie's Point-n-Shooties",
+		"Bang-Bang Shop",
+		"Wild Wild West Shop",
+		"Keleshnikov",
+		"Hunting Depot",
+		"Big Game Hunters"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Hello, hello! I hope you have your permit. Oh, who are we kidding, you're welcome anyway!",
 		TRADER_HAIL_DENY         = "Store policy dictates that you can fuck off.",
@@ -33,7 +40,13 @@
 	name = "Energy Gun Shop Employee"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "EGun Shop"
-	possible_origins = list("The Emperor's Lasgun Shop", "Future Guns", "Solar Army", "Kiefer's Dependable Electric Arms", "Olympus Kingsport")
+	possible_origins = list(
+		"The Emperor's Lasgun Shop",
+		"Future Guns",
+		"Solar Army",
+		"Kiefer's Dependable Electric Arms",
+		"Olympus Kingsport"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Welcome to the future of warfare! " + TRADER_TOKEN_ORIGIN + ", your one-stop shop for energy weaponry!",
 		TRADER_HAIL_DENY         = "I'm sorry, your communication channel has been blacklisted.",
