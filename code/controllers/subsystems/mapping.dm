@@ -69,6 +69,19 @@ SUBSYSTEM_DEF(mapping)
 	for(var/datum/map_template/MT as anything in get_all_template_instances())
 		register_map_template(MT)
 
+	// Resize the world to the max template size to fix a BYOND bug with world resizing breaking events.
+	// REMOVE WHEN THIS IS FIXED: https://www.byond.com/forum/post/2833191
+	var/new_maxx = world.maxx
+	var/new_maxy = world.maxy
+	for(var/map_template_name in map_templates)
+		var/datum/map_template/map_template = map_templates[map_template_name]
+		new_maxx = max(map_template.width, new_maxx)
+		new_maxy = max(map_template.height, new_maxy)
+	if (new_maxx > world.maxx)
+		world.maxx = new_maxx
+	if (new_maxy > world.maxy)
+		world.maxy = new_maxy
+
 	// Populate overmap.
 	if(length(global.using_map.overmap_ids))
 		for(var/overmap_id in global.using_map.overmap_ids)
@@ -103,23 +116,6 @@ SUBSYSTEM_DEF(mapping)
 #ifdef UNIT_TEST
 	config.roundstart_level_generation = FALSE //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
 #endif
-
-	// Resize the world to the max template size to fix a BYOND bug with world resizing breaking events.
-	// REMOVE WHEN THIS IS FIXED: https://www.byond.com/forum/post/2833191
-	var/new_maxx = world.maxx
-	var/new_maxy = world.maxy
-	for(var/map_template_name in map_templates)
-		var/datum/map_template/map_template = map_templates[map_template_name]
-		new_maxx = max(map_template.width, new_maxx)
-		new_maxy = max(map_template.height, new_maxy)
-	if (new_maxx > world.maxx)
-		world.maxx = new_maxx
-	if (new_maxy > world.maxy)
-		world.maxy = new_maxy
-
-	for(var/obj/abstract/landmark/map_load_mark/mark in queued_markers)
-		mark.load_subtemplate()
-	queued_markers.Cut()
 
 	. = ..()
 

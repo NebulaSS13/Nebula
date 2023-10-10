@@ -41,18 +41,18 @@
 	random_weighting = 4
 
 /obj/item/chems/ivbag/blood/feline_mplus
-	blood_type = "M+"
+	label_text = "M+"
 /obj/item/chems/ivbag/blood/feline_mminus
-	blood_type = "M-"
+	label_text = "M-"
 /obj/item/chems/ivbag/blood/feline_rplus
-	blood_type = "R+"
+	label_text = "R+"
 /obj/item/chems/ivbag/blood/feline_mminus
-	blood_type = "M-"
+	label_text = "M-"
 /obj/item/chems/ivbag/blood/feline_mrplus
-	blood_type = "MR+"
+	label_text = "MR+"
 /obj/item/chems/ivbag/blood/feline_mrminus
-	blood_type = "MR-"
+	label_text = "MR-"
 /obj/item/chems/ivbag/blood/feline_oplus
-	blood_type = "Of+"
+	label_text = "Of+"
 /obj/item/chems/ivbag/blood/feline_oplus
-	blood_type = "Of-"
+	label_text = "Of-"

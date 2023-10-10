@@ -145,7 +145,8 @@
 	var/tmp/_has_warned_uninitialized_strata = FALSE
 
 	VAR_PROTECTED/UT_turf_exceptions_by_door_type // An associate list of door types/list of allowed turfs
-
+	///Determines if edge turfs should be centered on the map dimensions.
+	var/origin_is_world_center = TRUE
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level
@@ -211,11 +212,10 @@
 	_level_setup_completed = TRUE
 
 ///Calculate the bounds of the level, the border area, and the inner accessible area.
-/// * origin_is_world_center : An arg to clarify how level bounds work, and allow some control.
 ///   Basically, by default levels are assumed to be loaded relative to the world center, so if they're smaller than the world
 ///   they get their origin offset so they're in the middle of the world. By default templates are always loaded at origin 1,1.
 ///   so that's useful to know and have control over!
-/datum/level_data/proc/setup_level_bounds(var/origin_is_world_center = TRUE)
+/datum/level_data/proc/setup_level_bounds()
 	//Get the width/height we got for the level and the edges
 	level_max_width  = level_max_width  ? level_max_width  : world.maxx
 	level_max_height = level_max_height ? level_max_height : world.maxy

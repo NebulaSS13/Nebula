@@ -41,6 +41,9 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		SSghost_images.queue_global_image_update()
 	. = ..()
 
+/mob/observer/get_movement_delay(travel_dir)
+	return 1
+
 /mob/observer/check_airflow_movable()
 	return FALSE
 

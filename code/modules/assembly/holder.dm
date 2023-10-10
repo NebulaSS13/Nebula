@@ -108,7 +108,6 @@
 	if(special_assembly)
 		special_assembly.Crossed(AM)
 
-
 /obj/item/assembly_holder/on_found(mob/finder as mob)
 	if(a_left)
 		a_left.on_found(finder)

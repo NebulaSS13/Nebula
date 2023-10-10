@@ -117,9 +117,11 @@
 		add_fingerprint(user)
 	return M
 
-/obj/effect/razorweb/Crossed(var/mob/living/L)
-	. = ..()
-	entangle(L)
+/obj/effect/razorweb/Crossed(var/atom/movable/AM)
+	..()
+	if(!isliving(AM))
+		return
+	entangle(AM)
 
 /obj/effect/razorweb/proc/entangle(var/mob/living/L, var/silent)
 

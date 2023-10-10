@@ -183,17 +183,19 @@
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	qdel(src)
 
-/obj/item/toy/snappop/Crossed(H)
-	if((ishuman(H))) //i guess carp and shit shouldn't set them off
-		var/mob/living/carbon/M = H
-		if(!MOVING_DELIBERATELY(M))
-			to_chat(M, "<span class='warning'>You step on the snap pop!</span>")
-
-			spark_at(src, amount=2)
-			new /obj/effect/decal/cleanable/ash(src.loc)
-			src.visible_message("<span class='warning'>The [src.name] explodes!</span>","<span class='warning'>You hear a snap!</span>")
-			playsound(src, 'sound/effects/snap.ogg', 50, 1)
-			qdel(src)
+/obj/item/toy/snappop/Crossed(atom/movable/AM)
+	//i guess carp and shit shouldn't set them off
+	var/mob/living/carbon/M = AM
+	if(!istype(M) || MOVING_DELIBERATELY(M))
+		return
+	to_chat(M, SPAN_WARNING("You step on the snap pop!"))
+	spark_at(src, amount=2)
+	new /obj/effect/decal/cleanable/ash(src.loc)
+	visible_message(
+		SPAN_WARNING("The [src] explodes!"),
+		SPAN_WARNING("You hear a snap!"))
+	playsound(src, 'sound/effects/snap.ogg', 50, 1)
+	qdel(src)
 
 /*
  * Bosun's whistle

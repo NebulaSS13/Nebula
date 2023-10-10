@@ -41,18 +41,18 @@
 	random_weighting = 4
 
 /obj/item/chems/ivbag/blood/reptile_splus
-	blood_type = "S+"
+	label_text = "S+"
 /obj/item/chems/ivbag/blood/reptile_sminus
-	blood_type = "S-"
+	label_text = "S-"
 /obj/item/chems/ivbag/blood/reptile_xplus
-	blood_type = "X+"
+	label_text = "X+"
 /obj/item/chems/ivbag/blood/reptile_xminus
-	blood_type = "X-"
+	label_text = "X-"
 /obj/item/chems/ivbag/blood/reptile_sxplus
-	blood_type = "SX+"
+	label_text = "SX+"
 /obj/item/chems/ivbag/blood/reptile_sxminus
-	blood_type = "SX-"
+	label_text = "SX-"
 /obj/item/chems/ivbag/blood/reptile_oplus
-	blood_type = "Or+"
+	label_text = "Or+"
 /obj/item/chems/ivbag/blood/reptile_ominus
-	blood_type = "Or-"
+	label_text = "Or-"

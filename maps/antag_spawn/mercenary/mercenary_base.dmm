@@ -486,13 +486,13 @@
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/mask/surgical,
 /obj/item/bodybag/cryobag,
-/obj/item/chems/ivbag/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
 /obj/item/storage/firstaid/adv,
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "aT" = (
 /obj/structure/iv_drip,
-/obj/item/chems/ivbag/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
@@ -2559,7 +2559,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "NX" = (
-/obj/item/chems/ivbag/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
 /turf/space,
 /area/space)
 "NZ" = (

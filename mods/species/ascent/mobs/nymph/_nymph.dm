@@ -10,7 +10,7 @@
 #define ANYMPH_TIME_MOLT         300   // How long to wait between molts.
 
 /mob/living/carbon/alien/ascent_nymph
-	name = SPECIES_MANTID_NYMPH
+	name = "mantid nymph"
 	desc = "It's a little alien skittery critter. Hiss."
 	icon = 'mods/species/ascent/icons/species/nymph.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -20,7 +20,7 @@
 	available_maneuvers = list(/decl/maneuver/leap)
 
 	only_species_language = 1
-	voice_name = SPECIES_MANTID_NYMPH
+	voice_name = "mantid nymph"
 	speak_emote = list("hisses", "chitters")
 	universal_understand = FALSE
 	universal_speak = FALSE

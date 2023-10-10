@@ -13,7 +13,7 @@
 		for(var/g in mix.gas)
 			to_chat(mob, "ZONE GASES: [g]: [mix.gas[g]]\n")
 
-/client/proc/Test_ZAS_Connection(var/turf/simulated/T)
+/client/proc/Test_ZAS_Connection(var/turf/T)
 	set category = "Debug"
 	if(!istype(T))
 		return
@@ -40,7 +40,7 @@
 			to_chat(mob, "No air passage :x")
 		return
 
-	var/turf/simulated/other_turf = get_step(T, direction_list[direction])
+	var/turf/other_turf = get_step(T, direction_list[direction])
 	if(!istype(other_turf))
 		return
 
