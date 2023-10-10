@@ -16,24 +16,8 @@
 	var/list/blacklisted_trade_items = list(/mob/living/carbon/human)
 	                                                            //Things they will automatically refuse
 
-	var/list/speech = list()                                    //The list of all their replies and messages. Structure is (id = talk)
-	/*SPEECH IDS:
-	hail_generic		When merchants hail a person
-	hail_[race]			Race specific hails
-	hail_deny			When merchant denies a hail
+	var/list/speech = list()                                    //The list of all their replies and messages. Structure is (id = talk). Check __trading_defines.dm for specific tokens.
 
-	insult_good			When the player insults a merchant while they are on good disposition
-	insult_bad			When a player insults a merchatn when they are not on good disposition
-	complement_accept	When the merchant accepts a complement
-	complement_deny		When the merchant refuses a complement
-
-	how_much			When a merchant tells the player how much something is.
-	trade_complete		When a trade is made
-	trade_refuse		When a trade is refused
-
-	what_want			What the person says when they are asked if they want something
-
-	*/
 	var/want_multiplier = 2                                     //How much wanted items are multiplied by when traded for
 	var/margin = 1.2											//Multiplier to price when selling to player
 	var/price_rng = 10                                          //Percentage max variance in sell prices.
@@ -204,7 +188,7 @@
 		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer,possible_wanted_items))
 			is_wanted = 1
 		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
-			return 0
+			return TRADER_NO_BLACKLISTED
 
 		if(istype(offer,/obj/item/cash))
 			if(!(trade_flags & TRADER_MONEY))
@@ -233,10 +217,10 @@
 		if(H.species)
 			specific = H.species.name
 	else if(issilicon(user))
-		specific = "silicon"
-	if(!speech["hail_[specific]"])
-		specific = "generic"
-	. = get_response("hail_[specific]", "Greetings, MOB!")
+		specific = TRADER_HAIL_SILICON_END
+	if(!speech["[TRADER_HAIL_START][specific]"])
+		specific = TRADER_HAIL_GENERIC_END
+	. = get_response("[TRADER_HAIL_START][specific]", "Greetings, MOB!")
 	. = replacetext(., "MOB", user.name)
 
 /datum/trader/proc/can_hail()
@@ -249,16 +233,16 @@
 	if(prob(-disposition/10))
 		refuse_comms = 1
 	if(disposition > 50)
-		return get_response("insult_good","What? I thought we were cool!")
+		return get_response(TRADER_INSULT_GOOD,"What? I thought we were cool!")
 	else
-		return get_response("insult_bad", "Right back at you asshole!")
+		return get_response(TRADER_INSULT_BAD, "Right back at you asshole!")
 
 /datum/trader/proc/compliment()
 	if(prob(-disposition))
-		return get_response("compliment_deny", "Fuck you!")
+		return get_response(TRADER_COMPLIMENT_DENY, "Fuck you!")
 	if(prob(100-disposition))
 		disposition += rand(compliment_increase, compliment_increase * 2)
-	return get_response("compliment_accept", "Thank you!")
+	return get_response(TRADER_COMPLIMENT_ACCEPT, "Thank you!")
 
 /datum/trader/proc/trade(var/list/offers, var/num, var/turf/location)
 	if(offers && offers.len)
@@ -278,14 +262,14 @@
 	return M
 
 /datum/trader/proc/how_much_do_you_want(var/num, skill = SKILL_MAX)
-	. = get_response("how_much", "Hmm.... how about VALUE CURRENCY?")
+	. = get_response(TRADER_HOW_MUCH, "Hmm.... how about VALUE CURRENCY?")
 	. = replacetext(.,"VALUE",get_item_value(num, skill))
 	. = replacetext(.,"ITEM", atom_info_repository.get_name_for(trading_items[num]))
 
 /datum/trader/proc/what_do_you_want()
 	if(!(trade_flags & TRADER_GOODS))
 		return get_response(TRADER_NO_GOODS, "I don't deal in goods.")
-	. = get_response("what_want", "Hm, I want")
+	. = get_response(TRADER_WHAT_WANT, "Hm, I want")
 	var/list/want_english = list()
 	for(var/wtype in wanted_items)
 		var/item_name = atom_info_repository.get_name_for(wtype)
@@ -314,7 +298,7 @@
 		qdel(offer)
 
 /datum/trader/proc/bribe_to_stay_longer(var/amt)
-	return get_response("bribe_refusal", "How about... no?")
+	return get_response(TRADER_BRIBE_REFUSAL, "How about... no?")
 
 /datum/trader/Destroy(force)
 	if(hub)
