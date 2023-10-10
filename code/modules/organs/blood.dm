@@ -302,7 +302,7 @@
 
 	splatter.update_icon()
 	splatter.fluorescent  = 0
-	splatter.set_invisibility(0)
+	splatter.set_invisibility(INVISIBILITY_NONE)
 	return splatter
 
 //Percentage of maximum blood volume.

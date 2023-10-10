@@ -1,15 +1,12 @@
 /mob/new_player
 	universal_speak = TRUE
 	mob_sort_value = 10
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	simulated = FALSE
-
 	density = FALSE
 	stat = DEAD
-
 	movement_handlers = list()
 	anchored = TRUE	//  don't get pushed around
-
 	virtual_mob = null // Hear no evil, speak no evil
 
 	var/ready = 0
@@ -19,7 +16,6 @@
 	var/totalPlayers = 0
 	var/totalPlayersReady = 0
 	var/show_invalid_jobs = 0
-
 	var/datum/browser/panel
 
 INITIALIZE_IMMEDIATE(/mob/new_player)

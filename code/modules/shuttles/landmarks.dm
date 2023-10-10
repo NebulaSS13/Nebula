@@ -8,7 +8,7 @@ var/global/list/shuttle_landmarks = list()
 	anchored = TRUE
 	unacidable = 1
 	simulated = 0
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 
 	var/landmark_tag
 	//ID of the controller on the dock side

@@ -147,7 +147,7 @@
 	M.AddMovementHandler(/datum/movement_handler/mob/transformation)
 	M.icon = null
 	M.overlays.len = 0
-	M.set_invisibility(101)
+	M.set_invisibility(INVISIBILITY_ABSTRACT)
 
 	if(isrobot(M))
 		var/mob/living/silicon/robot/Robot = M

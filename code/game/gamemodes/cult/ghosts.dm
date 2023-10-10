@@ -286,5 +286,5 @@
 	else
 		ghost_magic_cd = world.time + 60 SECONDS
 		to_chat(src, "<span class='info'>You are now visible.</span>")
-		set_invisibility(0)
+		set_invisibility(INVISIBILITY_NONE)
 		mouse_opacity = MOUSE_OPACITY_UNCLICKABLE // This is so they don't make people invincible to melee attacks by hovering over them

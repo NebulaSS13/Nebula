@@ -59,10 +59,10 @@
 
 /datum/hud/proc/update_stamina()
 	if(mymob && stamina_bar)
-		stamina_bar.invisibility = INVISIBILITY_MAXIMUM
+		stamina_bar.set_invisibility(INVISIBILITY_MAXIMUM)
 		var/stamina = mymob.get_stamina()
 		if(stamina < 100)
-			stamina_bar.invisibility = 0
+			stamina_bar.set_invisibility(INVISIBILITY_NONE)
 			stamina_bar.icon_state = "prog_bar_[FLOOR(stamina/5)*5][(stamina >= 5) && (stamina <= 25) ? "_fail" : null]"
 
 /datum/hud/proc/hide_inventory()

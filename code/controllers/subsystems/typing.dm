@@ -182,7 +182,7 @@ Updated 09/10/2022 to include chatbar using Spookerton's SStyping system from Po
 /atom/movable/typing_indicator/proc/show_typing_indicator()
 
 	// Make it visible after being hidden.
-	set_invisibility(0)
+	set_invisibility(INVISIBILITY_NONE)
 
 	// Update the appearance.
 	if(ismob(master))

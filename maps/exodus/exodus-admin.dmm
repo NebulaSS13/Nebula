@@ -3013,7 +3013,6 @@
 	},
 /obj/machinery/camera/network/television{
 	c_tag = "Thunderdome - Red Team";
-	invisibility = 101
 	},
 /turf/unsimulated/floor{
 	dir = 5;
@@ -3051,7 +3050,6 @@
 	},
 /obj/machinery/camera/network/television{
 	c_tag = "Green Team";
-	invisibility = 101
 	},
 /turf/unsimulated/floor{
 	dir = 5;
@@ -3067,7 +3065,6 @@
 "pQZ" = (
 /obj/machinery/camera/network/television{
 	c_tag = "Thunderdome Arena";
-	invisibility = 101
 	},
 /turf/unsimulated/floor{
 	icon_state = "bcircuit"

@@ -1,21 +1,21 @@
 /*
  * Notes on weather:
  *
- * - Weather is a single object that sits in the vis_contents of all outside turfs on 
- *   its associated z-levels and is removed or added by /turf/proc/update_weather(), 
+ * - Weather is a single object that sits in the vis_contents of all outside turfs on
+ *   its associated z-levels and is removed or added by /turf/proc/update_weather(),
  *   which is usually called from /turf/proc/set_outside().
  *
  * - Weather generally assumes any atom that cares about it will ask it directly and
  *   mobs do this in /mob/living/proc/handle_environment().
  *
- * - For this system to be scalable, it should minimize the amount of list-based 
- *   processing it does and be primarily passive, allowing mobs to ignore it or 
+ * - For this system to be scalable, it should minimize the amount of list-based
+ *   processing it does and be primarily passive, allowing mobs to ignore it or
  *   poll it on their own time.
  *
  * - The weather object is queued on SSweather and is polled every fifteen seconds at time
  *   of writing. This is handled in /obj/abstract/weather_system/proc/tick().
  *
- * - When evaluating, weather will generally get more intense or more severe rather than 
+ * - When evaluating, weather will generally get more intense or more severe rather than
  *   jumping around randomly. Each state will set a minimum duration based on min/max time.
  *
  * - If polled between weather updates there is a chance of modifying wind speed and direction
@@ -27,7 +27,7 @@
 	layer =            ABOVE_PROJECTILE_LAYER
 	icon =             'icons/effects/weather.dmi'
 	icon_state =       "blank"
-	invisibility =     0
+	invisibility =     INVISIBILITY_NONE
 	appearance_flags = (RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM)
 
 	var/water_material = /decl/material/liquid/water     // Material to use for the properties of rain.
@@ -96,7 +96,4 @@
 	icon = 'icons/effects/weather.dmi'
 	icon_state = "full"
 	alpha = 0
-
-/obj/abstract/lightning_overlay/Initialize()
-	. = ..()
-	invisibility = 0 // This is set to maximum in parent regardless of what we set, because we can't have nice things.
+	invisibility = INVISIBILITY_NONE

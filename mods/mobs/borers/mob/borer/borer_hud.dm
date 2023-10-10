@@ -33,7 +33,7 @@
 		if(istype(borer) && borer.host)
 			for(var/obj/thing in borer_hud_elements)
 				thing.alpha =        255
-				thing.invisibility = 0
+				thing.set_invisibility(INVISIBILITY_NONE)
 		if(mymob.client)
 			mymob.client.screen |= adding
 

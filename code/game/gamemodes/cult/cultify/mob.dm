@@ -6,7 +6,7 @@
 		icon = 'icons/mob/mob.dmi'
 		icon_state = "ghost-narsie"
 		cut_overlays()
-		set_invisibility(0)
+		set_invisibility(INVISIBILITY_NONE)
 		to_chat(src, SPAN_SINISTER("Even as a non-corporal being, you can feel Nar-Sie's presence altering you. You are now visible to everyone."))
 
 /mob/living/on_defilement()
@@ -20,7 +20,7 @@
 		G.icon = 'icons/mob/mob.dmi'
 		G.icon_state = "ghost-narsie"
 		G.overlays.Cut()
-		G.set_invisibility(0)
+		G.set_invisibility(INVISIBILITY_NONE)
 		to_chat(G, "<span class='sinister'>You feel relieved as what's left of your soul finally escapes its prison of flesh.</span>")
 	else
 		dust()

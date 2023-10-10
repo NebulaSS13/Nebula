@@ -82,9 +82,9 @@
 
 /obj/screen/ability_master/on_update_icon()
 	if(ability_objects.len)
-		set_invisibility(0)
+		set_invisibility(INVISIBILITY_NONE)
 	else
-		set_invisibility(101)
+		set_invisibility(INVISIBILITY_ABSTRACT)
 
 /obj/screen/ability_master/proc/add_ability(var/name_given)
 	if(!name) return

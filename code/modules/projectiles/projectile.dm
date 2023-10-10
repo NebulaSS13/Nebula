@@ -306,7 +306,7 @@
 	on_impact(A)
 
 	set_density(0)
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 
 	qdel(src)
 	return 1

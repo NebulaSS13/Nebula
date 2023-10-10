@@ -78,7 +78,7 @@
 					A.fluorescent = 2 //To prevent light crosstalk.
 					if(A.invisibility)
 						scanned[A] = A.invisibility
-						A.set_invisibility(0)
+						A.set_invisibility(INVISIBILITY_NONE)
 						stored_alpha[A] = A.alpha
 						A.alpha = use_alpha
 					if(istype(A, /obj/item))
