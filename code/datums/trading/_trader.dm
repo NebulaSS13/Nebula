@@ -1,4 +1,5 @@
 /datum/trader
+	abstract_type = /datum/trader
 	var/name = "unsuspicious trader"                            //The name of the trader in question
 	var/origin = "some place"                                   //The place that they are trading from
 	var/list/possible_origins                                   //Possible names of the trader origin

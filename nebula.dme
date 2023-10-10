@@ -3570,6 +3570,7 @@
 #include "code\unit_tests\subsystem_tests.dm"
 #include "code\unit_tests\test_obj.dm"
 #include "code\unit_tests\time_tests.dm"
+#include "code\unit_tests\traders.dm"
 #include "code\unit_tests\unique_tests.dm"
 #include "code\unit_tests\unit_test.dm"
 #include "code\unit_tests\uplink_tests.dm"
