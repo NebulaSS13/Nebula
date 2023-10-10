@@ -11,6 +11,7 @@
 	material = /decl/material/solid/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
+	abstract_type = /obj/item/chems/drinks/bottle
 
 	var/smash_duration = 5 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/obj/item/chems/glass/rag/rag = null

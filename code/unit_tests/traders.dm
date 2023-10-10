@@ -5,7 +5,6 @@
 		TRADER_HAIL_GENERIC,
 		TRADER_HAIL_DENY,
 		TRADER_NOT_ENOUGH,
-		TRADER_NO_BLACKLISTED,
 		TRADER_TRADE_COMPLETE,
 		TRADER_HOW_MUCH,
 		TRADER_COMPLIMENT_DENY,
@@ -21,13 +20,15 @@
 	)
 	// As above but only present with a flag.
 	var/list/tokens_invalid_without_flag = list(
-		TRADER_WHAT_WANT      = TRADER_GOODS,
 		TRADER_FOUND_UNWANTED = (TRADER_WANTED_ONLY|TRADER_WANTED_ALL),
 		TRADER_BRIBE_ACCEPT   = TRADER_BRIBABLE
 	)
 	// We don't care if these tokens are in the list after the above tokens are weeded out.
 	var/list/acceptable_additional_tokens = list(
-		TRADER_HAIL_SILICON
+		// This will default to generic if unset, doesn't matter.
+		TRADER_HAIL_SILICON,
+		// This token can be used to respond 'I don't want anything' which is valid.
+		TRADER_WHAT_WANT
 	)
 
 /datum/unit_test/trader_subtypes_shall_have_all_needed_speech_values/start_test()
@@ -54,6 +55,14 @@
 		if(trader.name_language && !ispath(trader.name_language, /decl/language))
 			LAZYDISTINCTADD(failures[trader_type], "- non-/decl/language-subtype non-null name_language value")
 
+		// Bespoke blacklist check because life is pain.
+		var/has_token     = (TRADER_NO_BLACKLISTED in trader.speech)
+		var/has_blacklist = length(trader.blacklisted_trade_items)
+		if(has_token && !has_blacklist)
+			LAZYDISTINCTADD(failures[trader_type], "- '[TRADER_NO_BLACKLISTED]' response is set but blacklisted_trade_items is empty")
+		else if(!has_token && has_blacklist)
+			LAZYDISTINCTADD(failures[trader_type], "- '[TRADER_NO_BLACKLISTED]' response is unset but blacklisted_trade_items is populated")
+
 		var/list/check_tokens = list()
 		for(var/token in trader.speech)
 
@@ -70,7 +79,7 @@
 		// Check for tokens that are contraindicated by trade flags.
 		for(var/token in tokens_invalid_with_flag)
 			var/has_flag  = (trader.trade_flags & tokens_invalid_with_flag[token])
-			var/has_token = (token in trader.speech)
+			has_token = (token in trader.speech)
 			if(has_token && has_flag)
 				LAZYDISTINCTADD(failures[trader_type], "- cannot have flagged token '[token]' with current trade flags")
 			else if(!has_token && !has_flag)
@@ -79,7 +88,7 @@
 		// Check for tokens that are required by trade flags.
 		for(var/token in tokens_invalid_without_flag)
 			var/has_flag  = (trader.trade_flags & tokens_invalid_without_flag[token])
-			var/has_token = (token in trader.speech)
+			has_token = (token in trader.speech)
 			if(has_token && !has_flag)
 				LAZYDISTINCTADD(failures[trader_type], "- cannot have flagged token '[token]' with current trade flags")
 			else if(!has_token && has_flag)

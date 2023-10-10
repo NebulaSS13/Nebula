@@ -54,7 +54,8 @@
 		TRADER_COMPLIMENT_DENY   = "Your lies won't ch-change what I did.",
 		TRADER_COMPLIMENT_ACCEPT = "Yes... I suppose you're right.",
 		TRADER_INSULT_GOOD       = "I... probably deserve that.",
-		TRADER_INSULT_BAD        = "Maybe you should c-come here and say that. You'd be worth s-something then."
+		TRADER_INSULT_BAD        = "Maybe you should c-come here and say that. You'd be worth s-something then.",
+		TRADER_BRIBE_ACCEPT      = "Okay. Fine. But... h-hurry. I can only stay another " + TRADER_TOKEN_TIME + "m-minutes."
 	)
 	mob_transfer_message = "<span class='danger'>You are transported to " + TRADER_TOKEN_ORIGIN + ", and with a sickening thud, you fall unconscious, never to wake again.</span>"
 

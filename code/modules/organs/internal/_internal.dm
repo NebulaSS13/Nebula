@@ -2,6 +2,7 @@
 				INTERNAL ORGANS DEFINES
 ****************************************************/
 /obj/item/organ/internal
+	abstract_type = /obj/item/organ/internal
 	scale_max_damage_to_species_health = TRUE
 
 	// Damage healing vars (moved here from brains)

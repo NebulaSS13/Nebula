@@ -33,30 +33,6 @@
 	var/list/blacklisted_trade_items = list(
 		/mob/living/carbon/human
 	)
-	// Globally unacceptable types; may be deprecated with the abstract_type system. TODO: add abstract checks.
-	var/static/list/blacklisted_types = list(
-		/obj,
-		/obj/structure,
-		/obj/machinery,
-		/obj/screen,
-		/obj/effect,
-		/obj/item,
-		/obj/item/twohanded,
-		/obj/item/organ,
-		/obj/item/organ/internal,
-		/obj/item/organ/external,
-		/obj/item/storage,
-		/obj/item/storage/internal,
-		/obj/item/chems,
-		/obj/item/chems/glass,
-		/obj/item/chems/food,
-		/obj/item/chems/food/old,
-		/obj/item/chems/food/grown,
-		/obj/item/chems/food/variable,
-		/obj/item/chems/condiment,
-		/obj/item/chems/drinks,
-		/obj/item/chems/drinks/bottle
-	)
 
 /datum/trader/New()
 	..()
@@ -98,27 +74,28 @@
 		if(new_item)
 			pool |= new_item
 
+// This is horrendous. TODO: cache all of this shit.
+// May be possible to mutate trading_pool as this is passed in from the lists defined on the datum.
 /datum/trader/proc/get_possible_item(var/list/trading_pool)
-	if(!trading_pool || !trading_pool.len)
+	if(!length(trading_pool))
 		return
 	var/list/possible = list()
-	for(var/type in trading_pool)
-		var/status = trading_pool[type]
+	for(var/trade_type in trading_pool)
+		var/status = trading_pool[trade_type]
 		if(status & TRADER_THIS_TYPE)
-			possible += type
+			possible += trade_type
 		if(status & TRADER_SUBTYPES_ONLY)
-			possible += subtypesof(type)
+			possible += subtypesof(trade_type)
 		if(status & TRADER_BLACKLIST)
-			possible -= type
+			possible -= trade_type
 		if(status & TRADER_BLACKLIST_SUB)
-			possible -= subtypesof(type)
-
+			possible -= subtypesof(trade_type)
+	for(var/trade_type in possible)
+		var/atom/check_type = trade_type
+		if(!TYPE_IS_SPAWNABLE(check_type))
+			possible -= check_type
 	if(length(possible))
-		var/picked = pick_n_take(possible)
-		while(length(possible) && (picked in blacklisted_types))
-			picked = pick_n_take(possible)
-		if(!(picked in blacklisted_types))
-			return picked
+		return pick(possible)
 
 /datum/trader/proc/get_response(var/key, var/default)
 	if(speech && speech[key])
@@ -190,11 +167,11 @@
 	for(var/item in offers)
 		var/atom/movable/offer = item
 		var/is_wanted = 0
-		if((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer,wanted_items))
+		if((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer, wanted_items))
 			is_wanted = 2
-		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer,possible_wanted_items))
+		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer, possible_wanted_items))
 			is_wanted = 1
-		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
+		if(length(blacklisted_trade_items) && is_type_in_list(offer, blacklisted_trade_items))
 			return TRADER_NO_BLACKLISTED
 
 		if(istype(offer,/obj/item/cash))

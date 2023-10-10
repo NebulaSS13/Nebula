@@ -12,6 +12,7 @@
 	plane = HUD_PLANE
 	layer = HUD_BASE_LAYER
 	appearance_flags = NO_CLIENT_COLOR
+	is_spawnable_type = FALSE
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
 
 /obj/screen/receive_mouse_drop(atom/dropping, mob/user)

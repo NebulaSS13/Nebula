@@ -19,6 +19,7 @@
 	volume = 50
 	center_of_mass = @"{'x':16,'y':16}"
 	w_class = ITEM_SIZE_SMALL
+	abstract_type = /obj/item/chems/food
 
 	var/cooked_food = FALSE // Indicates the food should give a positive stress effect on eating. This is set to true if the food is created by a recipe.
 	var/bitesize = 1

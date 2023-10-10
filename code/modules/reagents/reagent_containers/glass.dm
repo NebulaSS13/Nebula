@@ -14,7 +14,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/glass
-
+	abstract_type = /obj/item/chems/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
