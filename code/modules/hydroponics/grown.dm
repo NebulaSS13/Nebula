@@ -125,26 +125,24 @@
 		fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
 		add_overlay(fruit_leaves)
 
-/obj/item/chems/food/grown/Crossed(var/mob/living/M)
-	set waitfor = FALSE
-	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
-		if(istype(M))
+/obj/item/chems/food/grown/Crossed(atom/movable/AM)
+	if(!isliving(AM) || !seed || seed.get_trait(TRAIT_JUICY) != 2)
+		return
 
-			if(M.buckled)
-				return
+	var/mob/living/M = AM
+	if(M.buckled || MOVING_DELIBERATELY(M))
+		return
 
-			if(istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				var/obj/item/shoes = H.get_equipped_item(slot_shoes_str)
-				if(shoes && shoes.item_flags & ITEM_FLAG_NOSLIP)
-					return
+	var/obj/item/shoes = M.get_equipped_item(slot_shoes_str)
+	if(shoes && shoes.item_flags & ITEM_FLAG_NOSLIP)
+		return
 
-			to_chat(M, SPAN_DANGER("You slipped on \the [src]!"))
-			playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-			SET_STATUS_MAX(M, STAT_STUN, 8)
-			SET_STATUS_MAX(M, STAT_WEAK, 5)
-			seed.thrown_at(src,M)
-			QDEL_IN(src, 0)
+	to_chat(M, SPAN_DANGER("You slipped on \the [src]!"))
+	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	SET_STATUS_MAX(M, STAT_STUN, 8)
+	SET_STATUS_MAX(M, STAT_WEAK, 5)
+	seed.thrown_at(src,M)
+	QDEL_IN(src, 0)
 
 /obj/item/chems/food/grown/throw_impact(atom/hit_atom)
 	..()

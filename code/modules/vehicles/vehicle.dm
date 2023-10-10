@@ -242,9 +242,6 @@
 	cell = null
 	powercheck()
 
-/obj/vehicle/proc/RunOver(var/mob/living/carbon/human/H)
-	return		//write specifics for different vehicles
-
 //-------------------------------------------
 // Loading/unloading procs
 //

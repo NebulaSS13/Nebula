@@ -149,29 +149,27 @@
 	else
 		verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
 
-/obj/vehicle/train/cargo/RunOver(var/mob/living/carbon/human/H)
-	var/list/parts = list(BP_HEAD, BP_CHEST, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM)
+/obj/vehicle/train/cargo/crossed_mob(var/mob/living/victim)
+	victim.apply_effects(5, 5)
+	for(var/i = 1 to rand(1,5))
+		var/obj/item/organ/external/E = pick(victim.get_external_organs())
+		if(E)
+			victim.apply_damage(rand(5,10), BRUTE, E.organ_tag)
 
-	H.apply_effects(5, 5)
-	for(var/i = 0, i < rand(1,5), i++)
-		var/def_zone = pick(parts)
-		H.apply_damage(rand(5,10), BRUTE, def_zone)
-
-/obj/vehicle/train/cargo/trolley/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/trolley/crossed_mob(var/mob/living/victim)
 	..()
-	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
+	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey])</font>")
 
-/obj/vehicle/train/cargo/engine/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/engine/crossed_mob(var/mob/living/victim)
 	..()
-
 	if(is_train_head() && istype(load, /mob/living/carbon/human))
 		var/mob/living/carbon/human/D = load
-		to_chat(D, "<span class='danger'>You ran over [H]!</span>")
-		visible_message("<span class='danger'>\The [src] ran over [H]!</span>")
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey]), driven by [D.name] ([D.ckey])</font>")
-		msg_admin_attack("[D.name] ([D.ckey]) ran over [H.name] ([H.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+		to_chat(D, "<span class='danger'>You ran over \the [victim]!</span>")
+		visible_message("<span class='danger'>\The [src] ran over \the [victim]!</span>")
+		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey]), driven by [D.name] ([D.ckey])</font>")
+		msg_admin_attack("[D.name] ([D.ckey]) ran over [victim.name] ([victim.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 	else
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
+		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey])</font>")
 
 
 //-------------------------------------------

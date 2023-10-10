@@ -195,8 +195,11 @@
 	if(health > 0)
 		disturbed()
 
-/obj/effect/spider/spiderling/Crossed(var/mob/living/L)
-	if(dormant && istype(L) && L.mob_size > MOB_SIZE_TINY)
+/obj/effect/spider/spiderling/Crossed(atom/movable/AM)
+	if(!dormant || !isliving(AM))
+		return
+	var/mob/living/M = AM
+	if(M.mob_size > MOB_SIZE_TINY)
 		disturbed()
 
 /obj/effect/spider/spiderling/disturbed()

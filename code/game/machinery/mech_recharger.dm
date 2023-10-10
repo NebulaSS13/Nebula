@@ -18,14 +18,15 @@
 	var/repair_power_usage = 10 KILOWATTS		// Per 1 HP of health.
 	var/repair = 0
 
-/obj/machinery/mech_recharger/Crossed(var/mob/living/exosuit/M)
+/obj/machinery/mech_recharger/Crossed(atom/movable/AM)
 	. = ..()
-	if(istype(M) && charging != M)
-		start_charging(M)
+	if(istype(AM, /mob/living/exosuit) && charging != AM)
+		start_charging(AM)
 
-/obj/machinery/mech_recharger/Uncrossed(var/mob/living/exosuit/M)
+/obj/machinery/mech_recharger/Uncrossed(atom/movable/AM)
 	. = ..()
-	if(M == charging)
+	var/mob/living/exosuit/M = AM
+	if(istype(M) && M == charging)
 		stop_charging()
 
 /obj/machinery/mech_recharger/RefreshParts()
