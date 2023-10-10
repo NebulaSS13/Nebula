@@ -35,4 +35,13 @@
 #define TRADER_BRIBE_REFUSAL     "bribe_refusal"        // When the trader refuses a bribe to stay longer.
 #define TRADER_BRIBE_ACCEPT      "bribe_accept"         // When the trader accepts a bribe to stay longer.
 
-#define TRADER_DEFAULT_NAME      "Default" // Whether to just generate a name from the premade lists.
+#define TRADER_DEFAULT_NAME      "Default"              // Whether to just generate a name from the premade lists.
+
+// Tokens replaced with strings at runtime.
+#define TRADER_TOKEN_ORIGIN      "$ORIGIN$"             // The selected origin of the trader station.
+#define TRADER_TOKEN_VALUE       "$VALUE$"              // The value of the trade.
+#define TRADER_TOKEN_CURRENCY    "$CURRENCY$"           // The plural name of the currency in use
+#define TRADER_TOKEN_CUR_SINGLE  "$CURRENCY_SINGULAR$"  // The singular name of the unit of currency in use.
+#define TRADER_TOKEN_ITEM        "$ITEM$"               // The relevant item being traded or offered.
+#define TRADER_TOKEN_MERCHANT    "$MERCHANT$"           // The name of the current trader.
+#define TRADER_TOKEN_MOB         "$MOB$"                // The player currently interacting with the trader.

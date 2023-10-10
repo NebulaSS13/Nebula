@@ -8,13 +8,13 @@
 	possible_trading_items = list(/obj/item/chems/food/sliceable/pizza = TRADER_SUBTYPES_ONLY)
 
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Hello! Welcome to ORIGIN, may I take your order?",
+		TRADER_HAIL_GENERIC      = "Hello! Welcome to " + TRADER_TOKEN_ORIGIN + ", may I take your order?",
 		TRADER_HAIL_DENY         = "Beeeep... I'm sorry, your connection has been severed.",
-		TRADER_TRADE_COMPLETE    = "Thank you for choosing ORIGIN!",
+		TRADER_TRADE_COMPLETE    = "Thank you for choosing " + TRADER_TOKEN_ORIGIN + "!",
 		TRADER_NO_GOODS          = "I'm sorry but we only take cash.",
 		TRADER_NO_BLACKLISTED    = "Sir that's... highly illegal.",
 		TRADER_NOT_ENOUGH        = "Uhh... that's not enough money for pizza.",
-		TRADER_HOW_MUCH          = "That pizza will cost you VALUE CURRENCY.",
+		TRADER_HOW_MUCH          = "That pizza will cost you " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
 		TRADER_COMPLIMENT_DENY   = "That's a bit forward, don't you think?",
 		TRADER_COMPLIMENT_ACCEPT = "Thanks, sir! You're very nice!",
 		TRADER_INSULT_GOOD       = "Please stop that, sir.",
@@ -69,7 +69,7 @@
 		TRADER_NO_BLACKLISTED    = "No, that is very odd. Why would you trade that away?",
 		TRADER_NO_GOODS          = "I only accept money transfers.",
 		TRADER_NOT_ENOUGH        = "No, I am sorry, that is not possible. I need to make a living.",
-		TRADER_HOW_MUCH          = "I give you ITEM, for VALUE CURRENCY. No more, no less.",
+		TRADER_HOW_MUCH          = "I give you " + TRADER_TOKEN_ITEM + ", for " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ". No more, no less.",
 		TRADER_COMPLIMENT_DENY   = "That was an odd thing to say. You are very odd.",
 		TRADER_COMPLIMENT_ACCEPT = "Good philosophy, see good in bad, I like.",
 		TRADER_INSULT_GOOD       = "As a man said long ago, \"When anger rises, think of the consequences.\" Think on that.",
@@ -107,18 +107,18 @@
 	)
 
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Hello, welcome to ORIGIN, grocery store of the future!",
+		TRADER_HAIL_GENERIC      = "Hello, welcome to " + TRADER_TOKEN_ORIGIN + ", grocery store of the future!",
 		TRADER_HAIL_DENY         = "I'm sorry, we've blacklisted your communications due to rude behavior.",
-		TRADER_TRADE_COMPLETE    = "Thank you for shopping at ORIGIN!",
+		TRADER_TRADE_COMPLETE    = "Thank you for shopping at " + TRADER_TOKEN_ORIGIN + "!",
 		TRADER_NO_BLACKLISTED    = "I... wow, that's... no, sir. No.",
-		TRADER_NO_GOODS          = "ORIGIN only accepts cash, sir.",
+		TRADER_NO_GOODS          = TRADER_TOKEN_ORIGIN + " only accepts cash, sir.",
 		TRADER_NOT_ENOUGH        = "That is not enough money, sir.",
-		TRADER_HOW_MUCH          = "Sir, that'll cost you VALUE CURRENCY. Will that be all?",
+		TRADER_HOW_MUCH          = "Sir, that'll cost you " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ". Will that be all?",
 		TRADER_COMPLIMENT_DENY   = "Sir, this is a professional environment. Please don't make me get my manager.",
 		TRADER_COMPLIMENT_ACCEPT = "Thank you, sir!",
 		TRADER_INSULT_GOOD       = "Sir, please do not make a scene.",
 		TRADER_INSULT_BAD        = "Sir, I WILL get my manager if you don't calm down.",
-		TRADER_BRIBE_REFUSAL     = "Of course sir! ORIGIN is always here for you!",
+		TRADER_BRIBE_REFUSAL     = "Of course sir! " + TRADER_TOKEN_ORIGIN + " is always here for you!",
 	)
 
 /datum/trader/bakery
@@ -128,18 +128,18 @@
 	possible_origins = list("Cakes By Design", "Corner Bakery Local", "My Favorite Cake & Pastry Cafe", "Mama Joes Bakery", "Sprinkles and Fun", "Cakestrosity")
 
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Hello, welcome to ORIGIN! We serve baked goods, including pies, cakes, and anything sweet!",
+		TRADER_HAIL_GENERIC      = "Hello, welcome to " + TRADER_TOKEN_ORIGIN + "! We serve baked goods, including pies, cakes, and anything sweet!",
 		TRADER_HAIL_DENY         = "Our food is a privilege, not a right. Goodbye.",
 		TRADER_TRADE_COMPLETE    = "Thank you for your purchase! Come again if you're hungry for more!",
 		TRADER_NO_BLACKLISTED    = "We only accept money. Not... that.",
 		TRADER_NO_GOODS          = "Cash for cakes! That's our business!",
 		TRADER_NOT_ENOUGH        = "Our dishes are much more expensive than that, sir.",
-		TRADER_HOW_MUCH          = "That lovely dish will cost you VALUE CURRENCY.",
+		TRADER_HOW_MUCH          = "That lovely dish will cost you " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
 		TRADER_COMPLIMENT_DENY   = "Oh wow, how nice of you...",
 		TRADER_COMPLIMENT_ACCEPT = "You're almost as sweet as my pies!",
 		TRADER_INSULT_GOOD       = "My pies are NOT knockoffs!",
 		TRADER_INSULT_BAD        = "Well, aren't you a sour apple?",
-		TRADER_BRIBE_REFUSAL     = "Oh ho ho! I'd never think of taking ORIGIN on the road!",
+		TRADER_BRIBE_REFUSAL     = "Oh ho ho! I'd never think of taking " + TRADER_TOKEN_ORIGIN + " on the road!",
 	)
 	possible_trading_items = list(
 		/obj/item/chems/food/slice/birthdaycake/filled  = TRADER_THIS_TYPE,

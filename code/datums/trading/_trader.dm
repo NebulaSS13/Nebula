@@ -25,7 +25,7 @@
 	var/compliment_increase = 5                                 //How far compliments increase disposition
 	var/refuse_comms = 0                                        //Whether they refuse further communication
 
-	var/mob_transfer_message = "You are transported to ORIGIN." //What message gets sent to mobs that get sold.
+	var/mob_transfer_message = "You are transported to " + TRADER_TOKEN_ORIGIN + "." //What message gets sent to mobs that get sold.
 
 	var/static/list/blacklisted_types = list(
 		/obj,
@@ -118,12 +118,12 @@
 		. = speech[key]
 	else
 		. = default
-	. = replacetext(., "MERCHANT", name)
-	. = replacetext(., "ORIGIN", origin)
+	. = replacetext(., TRADER_TOKEN_MERCHANT, name)
+	. = replacetext(., TRADER_TOKEN_ORIGIN, origin)
 
 	var/decl/currency/cur = GET_DECL(trader_currency)
-	. = replacetext(.,"CURRENCY_SINGULAR", cur.name_singular)
-	. = replacetext(.,"CURRENCY", cur.name)
+	. = replacetext(.,TRADER_TOKEN_CUR_SINGLE, cur.name_singular)
+	. = replacetext(.,TRADER_TOKEN_CURRENCY, cur.name)
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = clamp(num,1,trading_items.len)
@@ -220,8 +220,8 @@
 		specific = TRADER_HAIL_SILICON_END
 	if(!speech["[TRADER_HAIL_START][specific]"])
 		specific = TRADER_HAIL_GENERIC_END
-	. = get_response("[TRADER_HAIL_START][specific]", "Greetings, MOB!")
-	. = replacetext(., "MOB", user.name)
+	. = get_response("[TRADER_HAIL_START][specific]", "Greetings, " + TRADER_TOKEN_MOB + "!")
+	. = replacetext(., TRADER_TOKEN_MOB, user.name)
 
 /datum/trader/proc/can_hail()
 	if(!refuse_comms && prob(-disposition))
@@ -249,7 +249,7 @@
 		for(var/offer in offers)
 			if(ismob(offer))
 				var/text = mob_transfer_message
-				to_chat(offer, replacetext(text, "ORIGIN", origin))
+				to_chat(offer, replacetext(text, TRADER_TOKEN_ORIGIN, origin))
 			qdel(offer)
 
 	var/type = trading_items[num]
@@ -262,9 +262,9 @@
 	return M
 
 /datum/trader/proc/how_much_do_you_want(var/num, skill = SKILL_MAX)
-	. = get_response(TRADER_HOW_MUCH, "Hmm.... how about VALUE CURRENCY?")
-	. = replacetext(.,"VALUE",get_item_value(num, skill))
-	. = replacetext(.,"ITEM", atom_info_repository.get_name_for(trading_items[num]))
+	. = get_response(TRADER_HOW_MUCH, "Hmm.... how about " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + "?")
+	. = replacetext(.,TRADER_TOKEN_VALUE,get_item_value(num, skill))
+	. = replacetext(.,TRADER_TOKEN_ITEM, atom_info_repository.get_name_for(trading_items[num]))
 
 /datum/trader/proc/what_do_you_want()
 	if(!(trade_flags & TRADER_GOODS))
