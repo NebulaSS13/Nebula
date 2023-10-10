@@ -13,7 +13,6 @@
 	abstract_type = /obj/item/psychic_power
 
 	var/maintain_cost = 3
-	var/backblast_on_failed_maintain = FALSE
 	var/mob/living/owner
 
 /obj/item/psychic_power/Initialize()

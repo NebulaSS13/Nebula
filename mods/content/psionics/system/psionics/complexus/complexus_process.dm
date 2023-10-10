@@ -188,6 +188,10 @@
 					if(BP_IS_PROSTHETIC(I) || BP_IS_CRYSTAL(I))
 						continue
 
+					// Autoredaction doesn't heal brain damage directly.
+					if(I.organ_tag == BP_BRAIN)
+						continue
+
 					if(I.damage > 0 && spend_power(heal_rate))
 						I.damage = max(I.damage - heal_rate, 0)
 						if(prob(25))
