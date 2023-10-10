@@ -20,7 +20,9 @@
 		TRADER_COMPLIMENT_DENY   = "If we were in the same room right now, I'd probably punch you.",
 		TRADER_COMPLIMENT_ACCEPT = "Ha! Good one!",
 		TRADER_INSULT_GOOD       = "I expected better from you. I suppose in that, I was wrong.",
-		TRADER_INSULT_BAD        = "If I had my gun I'd shoot you!"
+		TRADER_INSULT_BAD        = "If I had my gun I'd shoot you!",
+		TRADER_BRIBE_ACCEPT      = "For that much scratch, I can stay for another " + TRADER_TOKEN_TIME + " minutes.",
+		TRADER_BRIBE_REFUSAL     = "Look, I've got places to be, I can't hang around shooting the shit."
 	)
 
 	possible_trading_items = list(
@@ -56,7 +58,10 @@
 		TRADER_COMPLIMENT_DENY   = "If I was dumber I probably would have believed you.",
 		TRADER_COMPLIMENT_ACCEPT = "Yes, I am very smart.",
 		TRADER_INSULT_GOOD       = "Energy weapons are TWICE the gun kinetic guns are!",
-		TRADER_INSULT_BAD        = "That's... very mean. I won't think twice about blacklisting your channel, so stop."
+		TRADER_INSULT_BAD        = "That's... very mean. I won't think twice about blacklisting your channel, so stop.",
+		TRADER_BRIBE_ACCEPT      = "Look, I'm not supposed to, but I guess I can stay for " + TRADER_TOKEN_TIME + " minutes.",
+		TRADER_BRIBE_REFUSAL     = "Sorry, no can do. I'm on a tight schedule."
+
 	)
 
 	possible_trading_items = list(
@@ -86,7 +91,8 @@
 		TRADER_COMPLIMENT_DENY   = "Thank you for... that quality... COMPLIMENT... from me!",
 		TRADER_COMPLIMENT_ACCEPT = "Thank you for... that quality... COMPLIMENT... from me!",
 		TRADER_INSULT_GOOD       = "Thank you for... that quality... INSULT... from me!",
-		TRADER_INSULT_BAD        = "Thank you for... that quality... INSULT... from me!"
+		TRADER_INSULT_BAD        = "Thank you for... that quality... INSULT... from me!",
+		TRADER_BRIBE_REFUSAL     = "Your... BLATANT BRIBERY... is... UNNECESSARY!"
 	)
 	compliment_increase = 0
 	insult_drop = 0

@@ -38,15 +38,16 @@
 	)
 
 	speech = list(
-		TRADER_HAIL_GENERIC         = "Yes hello hello! Many fine paperstacks for sale! Please buy!",
-		TRADER_HAIL_DENY            = "Not in! I'm not here! Go away!!",
-		TRADER_INSULT_GOOD          = "Zhat hurts friend!",
-		TRADER_INSULT_BAD           = "Ohhhhhh!! Why you picking a fight?! You will lose!",
-		TRADER_COMPLIMENT_ACCEPT    = "You make my ears red you do! Hehehe!",
-		TRADER_COMPLIMENT_DENY      = "Haha! Nice try, but I am not falling for zhe smoozhy talk zhe fourzh time today!",
-		TRADER_HOW_MUCH             = "Hmmmmm, I give zhis to you for maybe... " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
-		TRADER_TRADE_COMPLETE       = "Yesssss zhank you for transactionings!",
-		TRADER_NO_BLACKLISTED       = "Aaaaaa! No want, no want! Go away!",
-		TRADER_FOUND_UNWANTED       = "Hmmm, no. Do not want.",
-		TRADER_NOT_ENOUGH           = "Not enough! More! More!"
+		TRADER_HAIL_GENERIC      = "Yes hello hello! Many fine paperstacks for sale! Please buy!",
+		TRADER_HAIL_DENY         = "Not in! I'm not here! Go away!!",
+		TRADER_NO_GOODS          = "No! No no no! Not goods! MONEY!",
+		TRADER_INSULT_GOOD       = "Zhat hurts friend!",
+		TRADER_INSULT_BAD        = "Ohhhhhh!! Why you picking a fight?! You will lose!",
+		TRADER_COMPLIMENT_ACCEPT = "You make my ears red you do! Hehehe!",
+		TRADER_COMPLIMENT_DENY   = "Haha! Nice try, but I am not falling for zhe smoozhy talk zhe fourzh time today!",
+		TRADER_HOW_MUCH          = "Hmmmmm, I give zhis to you for maybe... " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
+		TRADER_TRADE_COMPLETE    = "Yesssss zhank you for transactionings!",
+		TRADER_NO_BLACKLISTED    = "Aaaaaa! No want, no want! Go away!",
+		TRADER_NOT_ENOUGH        = "Not enough! More! More!",
+		TRADER_BRIBE_REFUSAL     = "Zhis is a station, stupid!"
 	)

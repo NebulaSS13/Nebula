@@ -329,6 +329,7 @@ Sells devices, odds and ends, and medical stuff
 		TRADER_COMPLIMENT_ACCEPT = "Thank you. I needed that.",
 		TRADER_INSULT_GOOD       = "No need to be upset, I believe we can do business.",
 		TRADER_INSULT_BAD        = "I have traded dogs with more bark than that.",
+		TRADER_BRIBE_REFUSAL     = "Uh, this is a station. I'm not going anywhere."
 	)
 
 	possible_wanted_items = list(
@@ -373,6 +374,7 @@ Sells devices, odds and ends, and medical stuff
 		TRADER_COMPLIMENT_ACCEPT = "Damn right I'm awesome, tell me more.",
 		TRADER_INSULT_GOOD       = "Damn, pal, no need to get snippy.",
 		TRADER_INSULT_BAD        = "*muffled laughter* Sorry, was that you trying to talk shit? Adorable.",
+		TRADER_BRIBE_REFUSAL     = "Man I live here, I'm not leaving anytime soon."
 	)
 
 	possible_wanted_items = list(
@@ -432,6 +434,7 @@ Sells devices, odds and ends, and medical stuff
 		TRADER_COMPLIMENT_ACCEPT = "Thank you.",
 		TRADER_INSULT_GOOD       = "Alright, we will reconsider the terms.",
 		TRADER_INSULT_BAD        = "This is not acceptable, please cease.",
+		TRADER_BRIBE_REFUSAL     = "This facility is not mobile. Payment is unnecessary."
 	)
 
 	possible_wanted_items = list(
