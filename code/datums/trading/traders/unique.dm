@@ -55,7 +55,7 @@
 		TRADER_INSULT_GOOD       = "I... probably deserve that.",
 		TRADER_INSULT_BAD        = "Maybe you should c-come here and say that. You'd be worth s-something then."
 	)
-	mob_transfer_message = "<span class='danger'>You are transported to ORIGIN, and with a sickening thud, you fall unconscious, never to wake again.</span>"
+	mob_transfer_message = "<span class='danger'>You are transported to " + TRADER_TOKEN_ORIGIN + ", and with a sickening thud, you fall unconscious, never to wake again.</span>"
 
 
 /datum/trader/ship/unique/rock
@@ -72,7 +72,7 @@
 	want_multiplier = 5000
 
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Blub am MERCHANT. Blub hunger for things. Boo bring them to blub, yes?",
+		TRADER_HAIL_GENERIC      = "Blub am " + TRADER_TOKEN_MERCHANT + ". Blub hunger for things. Boo bring them to blub, yes?",
 		TRADER_HAIL_DENY         = "Blub does not want to speak to boo.",
 		TRADER_TRADE_COMPLETE    = "Blub likes to trade!",
 		TRADER_NO_MONEY          = "Boo try to give Blub paper. Blub does not want paper.",
@@ -80,7 +80,7 @@
 		TRADER_FOUND_UNWANTED    = "Blub only wants bocks. Give bocks.",
 		TRADER_HOW_MUCH          = "Blub wants bocks. Boo give bocks. Blub gives stuff blub found.",
 		TRADER_WHAT_WANT         = "Blub wants bocks. Big bocks, small bocks. Shiny bocks!",
-		TRADER_COMPLIMENT_DENY   = "Blub is just MERCHANT. What do boo mean?",
+		TRADER_COMPLIMENT_DENY   = "Blub is just " + TRADER_TOKEN_MERCHANT + ". What do boo mean?",
 		TRADER_COMPLIMENT_ACCEPT = "Boo are a bood berson!",
 		TRADER_INSULT_GOOD       = "Blub do not understand. Blub thought we were briends.",
 		TRADER_INSULT_BAD        = "Blub feels bad now."

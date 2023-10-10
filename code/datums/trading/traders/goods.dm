@@ -5,13 +5,13 @@
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
 	possible_origins = list("Toys R Ours", "LET'S GO", "Kay-Cee Toys", "Build-a-Cat", "Magic Box", "The Positronic's Dungeon and Baseball Card Shop")
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Uhh... hello? Welcome to ORIGIN, I hope you have a, uhh.... good shopping trip.",
+		TRADER_HAIL_GENERIC      = "Uhh... hello? Welcome to " + TRADER_TOKEN_ORIGIN + ", I hope you have a, uhh.... good shopping trip.",
 		TRADER_HAIL_DENY         = "Nah, you're not allowed here. At all",
-		TRADER_TRADE_COMPLETE    = "Thanks for shopping... here... at ORIGIN.",
+		TRADER_TRADE_COMPLETE    = "Thanks for shopping... here... at " + TRADER_TOKEN_ORIGIN + ".",
 		TRADER_NO_BLACKLISTED    = "Uuuhhh.... no.",
 		TRADER_FOUND_UNWANTED    = "Nah! That's not what I'm looking for. Something rarer.",
 		TRADER_NOT_ENOUGH        = "Just 'cause they're made of cardboard doesn't mean they don't cost money...",
-		TRADER_HOW_MUCH          = "Uhh... I'm thinking like... VALUE. Right? Or something rare that complements my interest.",
+		TRADER_HOW_MUCH          = "Uhh... I'm thinking like... " + TRADER_TOKEN_VALUE + ". Right? Or something rare that complements my interest.",
 		TRADER_WHAT_WANT         = "Ummmm..... I guess I want",
 		TRADER_COMPLIMENT_DENY   = "Ha! Very funny! You should write your own television show.",
 		TRADER_COMPLIMENT_ACCEPT = "Why yes, I do work out.",
@@ -52,13 +52,13 @@
 	possible_origins = list("Best Sale", "Overstore", "Oldegg", "Circuit Citadel", "Silicon Village", "Positronic Solutions LLC", "Sunvolt Inc.")
 
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Hello, sir! Welcome to ORIGIN, I hope you find what you are looking for.",
+		TRADER_HAIL_GENERIC      = "Hello, sir! Welcome to " + TRADER_TOKEN_ORIGIN + ", I hope you find what you are looking for.",
 		TRADER_HAIL_DENY         = "Your call has been disconnected.",
-		TRADER_TRADE_COMPLETE    = "Thank you for shopping at ORIGIN, would you like to get the extended warranty as well?",
+		TRADER_TRADE_COMPLETE    = "Thank you for shopping at " + TRADER_TOKEN_ORIGIN + ", would you like to get the extended warranty as well?",
 		TRADER_NO_BLACKLISTED    = "Sir, this is a /electronics/ store.",
 		TRADER_NO_GOODS          = "As much as I'd love to buy that from you, I can't.",
 		TRADER_NOT_ENOUGH        = "Your offer isn't adequate, sir.",
-		TRADER_HOW_MUCH          = "Your total comes out to VALUE CURRENCY.",
+		TRADER_HOW_MUCH          = "Your total comes out to " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
 		TRADER_COMPLIMENT_DENY   = "Hahaha! Yeah... funny...",
 		TRADER_COMPLIMENT_ACCEPT = "That's very nice of you!",
 		TRADER_INSULT_GOOD       = "That was uncalled for, sir. Don't make me get my manager.",
@@ -95,18 +95,18 @@
 	origin = "Clothing Store"
 	possible_origins = list("Space Eagle", "Banana Democracy", "Forever 22", "Textiles Factory Warehouse Outlet", "Blocks Brothers")
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Hello, sir! Welcome to ORIGIN!",
+		TRADER_HAIL_GENERIC      = "Hello, sir! Welcome to " + TRADER_TOKEN_ORIGIN + "!",
 		TRADER_HAIL_DENY         = "We do not trade with rude customers. Consider yourself blacklisted.",
-		TRADER_TRADE_COMPLETE    = "Thank you for shopping at ORIGIN. Remember: We cannot accept returns without the original tags!",
+		TRADER_TRADE_COMPLETE    = "Thank you for shopping at " + TRADER_TOKEN_ORIGIN + ". Remember: We cannot accept returns without the original tags!",
 		TRADER_NO_BLACKLISTED    = "Hm, how about no?",
 		TRADER_NO_GOODS          = "We don't buy, sir. Only sell.",
-		TRADER_NOT_ENOUGH        = "Sorry, ORIGIN policy to not accept trades below our marked prices.",
-		TRADER_HOW_MUCH          = "Your total comes out to VALUE CURRENCY.",
+		TRADER_NOT_ENOUGH        = "Sorry, " + TRADER_TOKEN_ORIGIN + " policy to not accept trades below our marked prices.",
+		TRADER_HOW_MUCH          = "Your total comes out to " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
 		TRADER_COMPLIMENT_DENY   = "Excuse me?",
 		TRADER_COMPLIMENT_ACCEPT = "Aw, you're so nice!",
 		TRADER_INSULT_GOOD       = "Sir.",
 		TRADER_INSULT_BAD        = "Wow. I don't have to take this.",
-		TRADER_BRIBE_REFUSAL     = "ORIGIN policy clearly states we cannot stay for more than the designated time.",
+		TRADER_BRIBE_REFUSAL     = TRADER_TOKEN_ORIGIN + " policy clearly states we cannot stay for more than the designated time.",
 		TRADER_BRIBE_ACCEPT      = "Hm.... sure! We'll have a few minutes of 'engine troubles'.",
 	)
 
@@ -228,7 +228,7 @@ Sells devices, odds and ends, and medical stuff
 		TRADER_NO_BLACKLISTED    = "Hm. Well that would be illegal, so no.",
 		TRADER_NO_GOODS          = "I'm sorry, I only sell goods.",
 		TRADER_NOT_ENOUGH        = "Gotta pay more than that to get that!",
-		TRADER_HOW_MUCH          = "Well... I bought it for a lot, but I'll give it to you for VALUE.",
+		TRADER_HOW_MUCH          = "Well... I bought it for a lot, but I'll give it to you for " + TRADER_TOKEN_VALUE + ".",
 		TRADER_COMPLIMENT_DENY   = "Uh... did you say something?",
 		TRADER_COMPLIMENT_ACCEPT = "Mhm! I can agree to that!",
 		TRADER_INSULT_GOOD       = "Wow, where was that coming from?",
@@ -248,14 +248,14 @@ Sells devices, odds and ends, and medical stuff
 		/mob/living/bot   = TRADER_SUBTYPES_ONLY
 	)
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Welcome to ORIGIN! Let me walk you through our fine robotic selection!",
-		TRADER_HAIL_SILICON      = "Welcome to ORIGIN! Let- oh, you're a synth! Well, your money is good anyway. Welcome, welcome!",
-		TRADER_HAIL_DENY         = "ORIGIN no longer wants to speak to you.",
+		TRADER_HAIL_GENERIC      = "Welcome to " + TRADER_TOKEN_ORIGIN + "! Let me walk you through our fine robotic selection!",
+		TRADER_HAIL_SILICON      = "Welcome to " + TRADER_TOKEN_ORIGIN + "! Let- oh, you're a synth! Well, your money is good anyway. Welcome, welcome!",
+		TRADER_HAIL_DENY         = TRADER_TOKEN_ORIGIN + " no longer wants to speak to you.",
 		TRADER_TRADE_COMPLETE    = "I hope you enjoy your new robot!",
 		TRADER_NO_BLACKLISTED    = "I work with robots, sir. Not that.",
 		TRADER_NO_GOODS          = "You gotta buy the robots, sir. I don't do trades.",
 		TRADER_NOT_ENOUGH        = "You're coming up short on cash.",
-		TRADER_HOW_MUCH          = "My fine selection of robots will cost you VALUE!",
+		TRADER_HOW_MUCH          = "My fine selection of robots will cost you " + TRADER_TOKEN_VALUE + "!",
 		TRADER_COMPLIMENT_DENY   = "Well, I almost believed that.",
 		TRADER_COMPLIMENT_ACCEPT = "Thank you! My craftsmanship is my life.",
 		TRADER_INSULT_GOOD       = "Uncalled for.... uncalled for.",
@@ -276,7 +276,7 @@ Sells devices, odds and ends, and medical stuff
 		TRADER_NO_BLACKLISTED    = "Legally I can't do that. Morally... well, I refuse to do that.",
 		TRADER_FOUND_UNWANTED    = "I only want animals. I don't need food or shiny things. I'm looking for specific ones, at that. Ones I already have the cage and food for.",
 		TRADER_NOT_ENOUGH        = "I'd give you this for free, but I need the money to feed the specimens. So you must pay in full.",
-		TRADER_HOW_MUCH          = "This is a good choice. I believe it will cost you VALUE CURRENCY.",
+		TRADER_HOW_MUCH          = "This is a good choice. I believe it will cost you " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
 		TRADER_WHAT_WANT         = "I have the facilities, currently, to support",
 		TRADER_COMPLIMENT_DENY   = "According to customs on 34 planets I traded with, this constitutes sexual harassment.",
 		TRADER_COMPLIMENT_ACCEPT = "Thank you. I needed that.",
@@ -314,7 +314,7 @@ Sells devices, odds and ends, and medical stuff
 		TRADER_NO_BLACKLISTED    = "Whoa whoa, I don't want this shit, put it away.",
 		TRADER_FOUND_UNWANTED    = "What the hell do you expect me to do with this junk?",
 		TRADER_NOT_ENOUGH        = "Sorry, pal, full payment upfront, I don't write the rules. Well, I do, but that's beside the point.",
-		TRADER_HOW_MUCH          = "Hmm, this is one damn fine item, but I'll part with it for VALUE CURRENCY.",
+		TRADER_HOW_MUCH          = "Hmm, this is one damn fine item, but I'll part with it for " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
 		TRADER_WHAT_WANT         = "I could always use some fucking",
 		TRADER_COMPLIMENT_DENY   = "Haha, how nice of you. Why don't you go fall in an elevator shaft.",
 		TRADER_COMPLIMENT_ACCEPT = "Damn right I'm awesome, tell me more.",
@@ -368,7 +368,7 @@ Sells devices, odds and ends, and medical stuff
 		TRADER_NO_BLACKLISTED    = "Whoa whoa, I don't want this shit, put it away.",
 		TRADER_FOUND_UNWANTED    = "Sorry, we are currently not looking to purchase these items.",
 		TRADER_NOT_ENOUGH        = "Sorry, this is an insufficient sum for this purchase.",
-		TRADER_HOW_MUCH          = "For ONE entry of ITEM the price would be VALUE CURRENCY.",
+		TRADER_HOW_MUCH          = "For ONE entry of " + TRADER_TOKEN_ITEM + " the price would be " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ".",
 		TRADER_WHAT_WANT         = "We are currently looking to procure",
 		TRADER_COMPLIMENT_DENY   = "I am afraid this is beyond my competency.",
 		TRADER_COMPLIMENT_ACCEPT = "Thank you.",

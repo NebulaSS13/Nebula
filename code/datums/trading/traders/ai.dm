@@ -12,12 +12,12 @@ They sell generic supplies and ask for generic supplies.
 	name_language = /decl/language/human/common
 	trade_flags = TRADER_MONEY|TRADER_GOODS
 	speech = list(
-		TRADER_HAIL_GENERIC      = "Greetings, I am MERCHANT, Artifical Intelligence onboard ORIGIN, tasked with trading goods in return for CURRENCY and supplies.",
+		TRADER_HAIL_GENERIC      = "Greetings, I am " + TRADER_TOKEN_MERCHANT + ", Artifical Intelligence onboard " + TRADER_TOKEN_ORIGIN + ", tasked with trading goods in return for " + TRADER_TOKEN_CURRENCY + " and supplies.",
 		TRADER_HAIL_DENY         = "We are sorry, your connection has been blacklisted. Have a nice day.",
 		TRADER_TRADE_COMPLETE    = "Thank you for your patronage.",
 		TRADER_NOT_ENOUGH        = "I'm sorry, your offer is not worth what you are asking for.",
 		TRADER_NO_BLACKLISTED    = "You have offered a blacklisted item. My laws do not allow me to trade for that.",
-		TRADER_HOW_MUCH          = "ITEM will cost you roughly VALUE CURRENCY, or something of equal worth.",
+		TRADER_HOW_MUCH          = TRADER_TOKEN_ITEM + " will cost you roughly " + TRADER_TOKEN_VALUE + " " + TRADER_TOKEN_CURRENCY + ", or something of equal worth.",
 		TRADER_WHAT_WANT         = "I have logged need for",
 		TRADER_COMPLIMENT_DENY   = "I'm sorry, I am not allowed to let compliments affect the trade.",
 		TRADER_COMPLIMENT_ACCEPT = "Thank you, but that will not not change our business interactions.",

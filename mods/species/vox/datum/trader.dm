@@ -23,7 +23,7 @@
 
 	var/list/visited_vox_speech = list(
 		TRADER_HAIL_GENERIC      = "SKREEEEE! You friend of the Shoal? You trade with, yes?",
-		TRADER_HAIL_SILICON      = "YOU KNOW THE SHOAL? Yes is good, yes yes, MOB. Trade GOOD!",
+		TRADER_HAIL_SILICON      = "YOU KNOW THE SHOAL? Yes is good, yes yes, " + TRADER_TOKEN_MOB + ". Trade GOOD!",
 		TRADER_HAIL_DENY         = "Trade gone now. Goodbye.",
 		TRADER_TRADE_COMPLETE    = "Yes... this is a good trade for the Shoal!",
 		TRADER_NO_MONEY          = "You know as well as it that money is no good.",
@@ -51,13 +51,13 @@
 		/obj/item/robot_parts/robot_component = TRADER_BLACKLIST
 	)
 
-	mob_transfer_message = "<span class='danger'>You are transported to the ORIGIN. When the transportation dizziness wears off, you find you are surrounded by cackling Vox...</span>"
+	mob_transfer_message = "<span class='danger'>You are transported to " + TRADER_TOKEN_ORIGIN + ". When the transportation dizziness wears off, you find you are surrounded by cackling vox...</span>"
 
 /datum/trader/ship/vox/New()
 	speech[TRADER_HAIL_SILICON] = "Hello metal thing! You trade metal for things?"
-	speech[TRADER_HAIL_START + SPECIES_HUMAN] = "Hello hueman! Kiikikikiki! MOB trade with us, yes? Good!"
-	visited_vox_speech[TRADER_HAIL_START + SPECIES_HUMAN] = "Friend of Vox is friend of all Vox! MOB you trade now!"
-	visited_vox_speech[TRADER_HAIL_START + SPECIES_VOX] = "SKREEEE! May the Shoal make this trade good, MOB!"
+	speech[TRADER_HAIL_START + SPECIES_HUMAN] = "Hello hueman! Kiikikikiki! " + TRADER_TOKEN_MOB + " trade with us, yes? Good!"
+	visited_vox_speech[TRADER_HAIL_START + SPECIES_HUMAN] = "Friend of it is friend of all Shoal! " + TRADER_TOKEN_MOB + " you trade now!"
+	visited_vox_speech[TRADER_HAIL_START + SPECIES_VOX] = "SKREEEE! May the Shoal make this trade good, " + TRADER_TOKEN_MOB + "!"
 	..()
 
 /datum/trader/ship/vox/hail(var/mob/user)
