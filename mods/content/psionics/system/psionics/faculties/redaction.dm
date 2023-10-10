@@ -93,6 +93,10 @@
 				E.status &= ~ORGAN_BROKEN
 				E.stage = 0
 				return TRUE
+			if(E.is_dislocated() && !E.is_parent_dislocated())
+				to_chat(user, SPAN_NOTICE("You carefully guide the dislocated joint back into place and soothe the inflamed muscles."))
+				E.undislocate(skip_pain = TRUE)
+				return TRUE
 
 		for(var/datum/wound/W in E.wounds)
 			if(W.bleeding())
