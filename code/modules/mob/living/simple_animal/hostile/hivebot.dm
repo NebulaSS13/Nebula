@@ -257,11 +257,12 @@ The megabot
 		else
 			switch_mode(ATTACK_MODE_MELEE)
 		return
-	..()
+	return ..()
 
 /mob/living/simple_animal/hostile/hivebot/mega/Shoot(target, start, user, bullet)
-	..()
-	num_shots--
+	. = ..()
+	if(.)
+		num_shots--
 
 #undef ATTACK_MODE_MELEE
 #undef ATTACK_MODE_LASER

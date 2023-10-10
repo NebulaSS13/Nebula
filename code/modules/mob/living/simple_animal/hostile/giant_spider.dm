@@ -406,7 +406,7 @@ Nurse caste procs
 /*****************
 Hunter caste procs
 *****************/
-/mob/living/simple_animal/hostile/giant_spider/hunter/MoveToTarget()
+/mob/living/simple_animal/hostile/giant_spider/hunter/MoveToTarget(var/move_only = FALSE)
 	if(!can_act() || perform_maneuver(/decl/maneuver/leap/spider, target_mob))
 		return
 	..()
@@ -450,8 +450,9 @@ Spitter caste procs
 				ranged = TRUE
 
 /mob/living/simple_animal/hostile/giant_spider/spitter/Shoot()
-	..()
-	venom_charge--
+	. = ..()
+	if(.)
+		venom_charge--
 
 #undef SPINNING_WEB
 #undef LAYING_EGGS
