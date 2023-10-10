@@ -2,7 +2,16 @@
 	name = "Pizza Shop Employee"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Pizzeria"
-	possible_origins = list("Papa Joe's", "Pizza Ship", "Dominator Pizza", "Little Kaezars", "Pizza Planet", "Cheese Louise", "Little Taste o' Neo-Italy", "Pizza Gestapo")
+	possible_origins = list(
+		"Papa Joseph's",
+		"Pizza Ship",
+		"Dominator Pizza",
+		"Little Kaezars",
+		"Pizza Planet",
+		"Cheese Louise",
+		"Little Taste o' Neo-Italy",
+		"Pizza Gestapo"
+	)
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list() //They are a pizza shop, not a bargainer.
 	possible_trading_items = list(/obj/item/chems/food/sliceable/pizza = TRADER_SUBTYPES_ONLY)
@@ -35,7 +44,12 @@
 	name = "Chinese Restaurant"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Captain Panda Bistro"
-	possible_origins = list("888 Shanghai Kitchen", "Mr. Lee's Greater Hong Kong", "The House of the Venerable and Inscrutable Colonel", "Lucky Dragon")
+	possible_origins = list(
+		"888 Shanghai Kitchen",
+		"Mr. Lee's Greater Hong Kong",
+		"The House of the Venerable and Inscrutable Colonel",
+		"Lucky Dragon"
+	)
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list()
 	possible_trading_items = list(
@@ -88,7 +102,15 @@
 /datum/trader/grocery
 	name = "Grocer"
 	name_language = TRADER_DEFAULT_NAME
-	possible_origins = list("HyTee", "Kreugars", "Spaceway", "Privaxs", "FutureValue", "Phyvendyme", "Seller's Market")
+	possible_origins = list(
+		"HyTee",
+		"Kreugars",
+		"Spaceway",
+		"Privaxs",
+		"FutureValue",
+		"Phyvendyme",
+		"Seller's Market"
+	)
 	trade_flags = TRADER_MONEY
 
 	possible_trading_items = list(
@@ -125,7 +147,14 @@
 	name = "Pastry Chef"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Bakery"
-	possible_origins = list("Cakes By Design", "Corner Bakery Local", "My Favorite Cake & Pastry Cafe", "Mama Joes Bakery", "Sprinkles and Fun", "Cakestrosity")
+	possible_origins = list(
+		"Cakes By Design",
+		"Corner Bakery Local",
+		"My Favorite Cake & Pastry Cafe",
+		"Mama Joes Bakery",
+		"Sprinkles and Fun",
+		"Cakestrosity"
+	)
 
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Hello, welcome to " + TRADER_TOKEN_ORIGIN + "! We serve baked goods, including pies, cakes, and anything sweet!",

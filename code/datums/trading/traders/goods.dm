@@ -3,7 +3,14 @@
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Toy Shop"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
-	possible_origins = list("Toys R Ours", "LET'S GO", "Kay-Cee Toys", "Build-a-Cat", "Magic Box", "The Positronic's Dungeon and Baseball Card Shop")
+	possible_origins = list(
+		"Toys R Ours",
+		"LET'S GO",
+		"Kay-Cee Toys",
+		"Build-a-Cat",
+		"Magic Box",
+		"The Positronic's Dungeon and Baseball Card Shop"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Uhh... hello? Welcome to " + TRADER_TOKEN_ORIGIN + ", I hope you have a, uhh.... good shopping trip.",
 		TRADER_HAIL_DENY         = "Nah, you're not allowed here. At all",
@@ -49,7 +56,15 @@
 	name = "Electronic Shop Employee"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Electronic Shop"
-	possible_origins = list("Best Sale", "Overstore", "Oldegg", "Circuit Citadel", "Silicon Village", "Positronic Solutions LLC", "Sunvolt Inc.")
+	possible_origins = list(
+		"Best Sale",
+		"Overstore",
+		"Oldegg",
+		"Circuit Citadel",
+		"Silicon Village",
+		"Positronic Solutions LLC",
+		"Sunvolt Inc."
+	)
 
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Hello, sir! Welcome to " + TRADER_TOKEN_ORIGIN + ", I hope you find what you are looking for.",
@@ -93,7 +108,13 @@
 	name = "Clothing Store Employee"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Clothing Store"
-	possible_origins = list("Space Eagle", "Banana Democracy", "Forever 22", "Textiles Factory Warehouse Outlet", "Blocks Brothers")
+	possible_origins = list(
+		"Space Eagle",
+		"Banana Democracy",
+		"Forever 22",
+		"Textiles Factory Warehouse Outlet",
+		"Blocks Brothers"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Hello, sir! Welcome to " + TRADER_TOKEN_ORIGIN + "!",
 		TRADER_HAIL_DENY         = "We do not trade with rude customers. Consider yourself blacklisted.",
@@ -129,7 +150,13 @@
 	)
 
 /datum/trader/ship/clothingshop/shoes
-	possible_origins = list("Foot Safe", "Paysmall", "Popular Footwear", "Grimbly's Shoes", "Right Steps")
+	possible_origins = list(
+		"Foot Safe",
+		"Paysmall",
+		"Popular Footwear",
+		"Grimbly's Shoes",
+		"Right Steps"
+	)
 	possible_trading_items = list(
 		/obj/item/clothing/shoes                       = TRADER_SUBTYPES_ONLY,
 		/obj/item/clothing/shoes/chameleon             = TRADER_BLACKLIST,
@@ -143,7 +170,12 @@
 	)
 
 /datum/trader/ship/clothingshop/hatglovesaccessories
-	possible_origins = list("Baldie's Hats and Accessories", "The Right Fit", "Like a Glove", "Space Fashion")
+	possible_origins = list(
+		"Baldie's Hats and Accessories",
+		"The Right Fit",
+		"Like a Glove",
+		"Space Fashion"
+	)
 	possible_trading_items = list(
 		/obj/item/clothing/accessory                 = TRADER_ALL,
 		/obj/item/clothing/accessory/badge           = TRADER_BLACKLIST_ALL,
@@ -180,7 +212,15 @@ Sells devices, odds and ends, and medical stuff
 	name = "Drugstore Employee"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Drugstore"
-	possible_origins = list("Buy 'n Save", "Drug Carnival", "C&B", "Fentles", "Dr. Goods", "Beevees", "McGillicuddy's")
+	possible_origins = list(
+		"Buy 'n Save",
+		"Drug Carnival",
+		"C&B",
+		"Fentles",
+		"Dr. Goods",
+		"Beevees",
+		"McGillicuddy's"
+	)
 	possible_trading_items = list(
 		/obj/item/flashlight                    = TRADER_ALL,
 		/obj/item/kit/paint                     = TRADER_SUBTYPES_ONLY,
@@ -240,7 +280,12 @@ Sells devices, odds and ends, and medical stuff
 	name = "Robot Seller"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Robot Store"
-	possible_origins = list("AI for the Straight Guy", "Mechanical Buddies", "Bot Chop Shop", "Omni Consumer Projects")
+	possible_origins = list(
+		"AI for the Straight Guy",
+		"Mechanical Buddies",
+		"Bot Chop Shop",
+		"Omni Consumer Projects"
+	)
 	possible_trading_items = list(
 		/obj/item/bot_kit = TRADER_THIS_TYPE,
 		/obj/item/paicard = TRADER_THIS_TYPE,
@@ -268,7 +313,14 @@ Sells devices, odds and ends, and medical stuff
 	name = "Xenolife Collector"
 	origin = "CSV Not a Poacher"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
-	possible_origins = list("XenoHugs", "Exotic Specimen Acquisition", "Skinner Catering Reseller", "Corporate Companionship Division", "Lonely Pete's Exotic Companionship","Space Wei's Exotic Cuisine")
+	possible_origins = list(
+		"XenoHugs",
+		"Exotic Specimen Acquisition",
+		"Skinner Catering Reseller",
+		"Corporate Companionship Division",
+		"Lonely Pete's Exotic Companionship",
+		"Space Wei's Exotic Cuisine"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Welcome! We are always looking to acquire more exotic life forms.",
 		TRADER_HAIL_DENY         = "We no longer wish to speak to you. Please contact our legal representative if you wish to rectify this.",
@@ -306,7 +358,13 @@ Sells devices, odds and ends, and medical stuff
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
 	want_multiplier = 1.2
 	margin = 2
-	possible_origins = list("Dr.Krieger's Practice", "Legit Medical Supplies (No Refund)", "Mom's & Pop's Addictive Opoids", "Legitimate Pharmaceutical Firm", "Designer Drugs by Lil Xanny")
+	possible_origins = list(
+		"Dr.Krieger's Practice",
+		"Legit Medical Supplies (No Refunds)",
+		"Mom's & Pop's Addictive Opoids",
+		"Legitimate Pharmaceutical Firm",
+		"Designer Drugs by Lil Xanny"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Huh? How'd you get this number?! Oh well, if you wanna talk biz, I'm listening.",
 		TRADER_HAIL_DENY         = "This is an automated message. Feel free to fuck the right off after the buzzer. *buzz*",
@@ -360,7 +418,12 @@ Sells devices, odds and ends, and medical stuff
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
 	want_multiplier = 1.5
 	margin = 2
-	possible_origins = list("Automated Smelter AH-532", "CMV Locust", "The Galactic Foundry Company", "Crucible LLC")
+	possible_origins = list(
+		"Automated Smelter AH-532",
+		"CMV Locust",
+		"The Galactic Foundry Company",
+		"Crucible LLC"
+	)
 	speech = list(
 		TRADER_HAIL_GENERIC      = "Welcome to R'n'D Mining. Please place your order.",
 		TRADER_HAIL_DENY         = "There is no response on the line.",
