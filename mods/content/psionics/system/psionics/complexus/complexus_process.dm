@@ -196,12 +196,6 @@
 				if(BP_IS_PROSTHETIC(E))
 					continue
 
-				if(heal_internal && (E.status & ORGAN_BROKEN) && E.damage < (E.min_broken_damage * config.organ_health_multiplier)) // So we don't mend and autobreak.
-					if(spend_power(heal_rate))
-						if(E.mend_fracture())
-							to_chat(H, SPAN_NOTICE("Your autoredactive faculty coaxes together the shattered bones in your [E.name]."))
-							return
-
 				if(heal_bleeding)
 
 					if((E.status & ORGAN_ARTERY_CUT) && spend_power(heal_rate))
@@ -215,7 +209,6 @@
 						return TRUE
 
 					for(var/datum/wound/W in E.wounds)
-
 						if(W.bleeding() && spend_power(heal_rate))
 							to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from \a [W.desc] on your [E.name]."))
 							W.bleed_timer = 0
