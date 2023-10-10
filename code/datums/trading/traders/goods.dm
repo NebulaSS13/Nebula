@@ -1,8 +1,7 @@
 /datum/trader/ship/toyshop
 	name = "Toy Shop Employee"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Toy Shop"
-	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
+	trade_flags = TRADER_GOODS | TRADER_MONEY | TRADER_WANTED_ONLY | TRADER_BRIBABLE
 	possible_origins = list(
 		"Toys R Ours",
 		"LET'S GO",
@@ -54,7 +53,6 @@
 
 /datum/trader/ship/electronics
 	name = "Electronic Shop Employee"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Electronic Shop"
 	possible_origins = list(
 		"Best Sale",
@@ -106,7 +104,6 @@
 /* Clothing stores: each a different type. A hat/glove store, a shoe store, and a jumpsuit store. */
 /datum/trader/ship/clothingshop
 	name = "Clothing Store Employee"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Clothing Store"
 	possible_origins = list(
 		"Space Eagle",
@@ -210,7 +207,6 @@ Sells devices, odds and ends, and medical stuff
 */
 /datum/trader/devices
 	name = "Drugstore Employee"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Drugstore"
 	possible_origins = list(
 		"Buy 'n Save",
@@ -278,7 +274,6 @@ Sells devices, odds and ends, and medical stuff
 
 /datum/trader/ship/robots
 	name = "Robot Seller"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Robot Store"
 	possible_origins = list(
 		"AI for the Straight Guy",
@@ -312,7 +307,7 @@ Sells devices, odds and ends, and medical stuff
 /datum/trader/xeno_shop
 	name = "Xenolife Collector"
 	origin = "CSV Not a Poacher"
-	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
+	trade_flags = TRADER_GOODS | TRADER_MONEY | TRADER_WANTED_ONLY | TRADER_WANTED_ALL
 	possible_origins = list(
 		"XenoHugs",
 		"Exotic Specimen Acquisition",
@@ -355,7 +350,7 @@ Sells devices, odds and ends, and medical stuff
 /datum/trader/medical
 	name = "Medical Supplier"
 	origin = "Infirmary of CSV Iniquity"
-	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
+	trade_flags = TRADER_GOODS | TRADER_MONEY | TRADER_WANTED_ONLY
 	want_multiplier = 1.2
 	margin = 2
 	possible_origins = list(
@@ -415,7 +410,7 @@ Sells devices, odds and ends, and medical stuff
 /datum/trader/mining
 	name = "Rock'n'Drill Mining Inc"
 	origin = "Automated Smelter AH-532"
-	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
+	trade_flags = TRADER_GOODS | TRADER_MONEY | TRADER_WANTED_ONLY | TRADER_WANTED_ALL
 	want_multiplier = 1.5
 	margin = 2
 	possible_origins = list(

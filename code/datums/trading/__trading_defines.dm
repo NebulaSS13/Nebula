@@ -5,19 +5,20 @@
 #define TRADER_BLACKLIST_SUB     BITFLAG(3)
 #define TRADER_BLACKLIST_ALL     (TRADER_BLACKLIST|TRADER_BLACKLIST_SUB)
 
-#define TRADER_WANTED_ONLY       BITFLAG(0) // Do they only trade for wanted goods?
-#define TRADER_MONEY             BITFLAG(1) // Do they only accept money in return for goods.
-#define TRADER_GOODS             BITFLAG(2) // Do they accept goods in return for other goods.
-#define TRADER_WANTED_ALL        BITFLAG(3) // Like TRADER_WANTED_ONLY but they buy all possible wanted goods rather than a subset.
+#define TRADER_WANTED_ONLY       BITFLAG(0)             // Do they only trade for wanted goods?
+#define TRADER_MONEY             BITFLAG(1)             // Do they only accept money in return for goods.
+#define TRADER_GOODS             BITFLAG(2)             // Do they accept goods in return for other goods.
+#define TRADER_WANTED_ALL        BITFLAG(3)             // Like TRADER_WANTED_ONLY but they buy all possible wanted goods rather than a subset.
+#define TRADER_BRIBABLE          BITFLAG(4)             // Determines if the trader can be bribed (stations cannot as they can't leave)
 
 // Tokens for constructing the hail tags (usually generic, species name or silicon).
 // When merchants hail a person they use "trade_hail_[some token]".
 #define TRADER_HAIL_START        "trade_hail_"
 #define TRADER_HAIL_GENERIC_END  "generic"
 #define TRADER_HAIL_SILICON_END  "silicon"
-#define TRADER_HAIL_GENERIC      TRADER_HAIL_START + TRADER_HAIL_GENERIC_END
-#define TRADER_HAIL_SILICON      TRADER_HAIL_START + TRADER_HAIL_SILICON_END
-#define TRADER_HAIL_DENY         TRADER_HAIL_START + "deny" // Used When merchant denies a hail.
+#define TRADER_HAIL_GENERIC      TRADER_HAIL_START + TRADER_HAIL_GENERIC_END // Default hail response token.
+#define TRADER_HAIL_SILICON      TRADER_HAIL_START + TRADER_HAIL_SILICON_END // Used when hailed by a robot or AI.
+#define TRADER_HAIL_DENY         TRADER_HAIL_START + "deny"                  // Used When merchant denies a hail.
 
 //Possible response defines for when offering an item for something
 #define TRADER_NO_MONEY          "trade_no_money"       // Used when money is offered to a trader who does not accept money.
@@ -25,7 +26,7 @@
 #define TRADER_NOT_ENOUGH        "trade_not_enough"     // Used when there is not enough money for the trade.
 #define TRADER_NO_BLACKLISTED    "trade_blacklist"      // Used when a blacklisted item is offered by the player.
 #define TRADER_FOUND_UNWANTED    "trade_found_unwanted" // Used when an unwanted item is offered by the player.
-#define TRADER_TRADE_COMPLETE    "trade_complete   "    // When a trade is made successfully.
+#define TRADER_TRADE_COMPLETE    "trade_complete"       // When a trade is made successfully.
 #define TRADER_HOW_MUCH          "how_much"             // When a merchant tells the player how much something is.
 #define TRADER_WHAT_WANT         "what_want"            // What the person says when they are asked if they want something
 #define TRADER_COMPLIMENT_DENY   "compliment_deny"      // When the merchant refuses a compliment
@@ -34,8 +35,6 @@
 #define TRADER_INSULT_BAD        "insult_bad"           // When a player insults a merchatn when they are not on good disposition
 #define TRADER_BRIBE_REFUSAL     "bribe_refusal"        // When the trader refuses a bribe to stay longer.
 #define TRADER_BRIBE_ACCEPT      "bribe_accept"         // When the trader accepts a bribe to stay longer.
-
-#define TRADER_DEFAULT_NAME      "Default"              // Whether to just generate a name from the premade lists.
 
 // Tokens replaced with strings at runtime.
 #define TRADER_TOKEN_ORIGIN      "$ORIGIN$"             // The selected origin of the trader station.

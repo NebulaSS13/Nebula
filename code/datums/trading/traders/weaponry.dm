@@ -1,6 +1,5 @@
 /datum/trader/ship/gunshop
 	name = "Gun Shop Employee"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "Gun Shop"
 	possible_origins = list(
 		"Rooty Tootie's Point-n-Shooties",
@@ -38,7 +37,6 @@
 
 /datum/trader/ship/egunshop
 	name = "Energy Gun Shop Employee"
-	name_language = TRADER_DEFAULT_NAME
 	origin = "EGun Shop"
 	possible_origins = list(
 		"The Emperor's Lasgun Shop",
