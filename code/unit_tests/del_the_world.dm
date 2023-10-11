@@ -26,7 +26,7 @@
 		// Fluid system related; causes issues with atoms spawned on the turf.
 		/obj/abstract/fluid_mapped,
 		/obj/effect/fluid,
-		/obj/abstract/flood,
+		/obj/effect/flood,
 		// Not valid when spawned manually.
 		/obj/effect/overmap,
 		/obj/effect/shuttle_landmark,
