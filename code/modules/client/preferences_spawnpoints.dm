@@ -7,7 +7,9 @@
 			spawn_locs |= spawn_data.spawn_turfs
 	if(length(spawn_locs))
 		return pick(spawn_locs)
-	return locate(1, 1, 1)
+	// Observer spawn is guaranteed by CI to be populated.
+	var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
+	return pick(observer_spawn.spawn_turfs)
 
 /decl/spawnpoint
 	abstract_type = /decl/spawnpoint
@@ -44,6 +46,13 @@
 //Called after mob is created, moved to a turf and equipped.
 /decl/spawnpoint/proc/after_join(mob/victim)
 	return
+
+// Dummy spawnpoint for ghosts.
+/decl/spawnpoint/observer
+	name = "Observer"
+
+/obj/abstract/landmark/latejoin/observer
+	spawn_decl = /decl/spawnpoint/observer
 
 /decl/spawnpoint/arrivals
 	name = "Arrivals"

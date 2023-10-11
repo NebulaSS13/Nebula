@@ -118,7 +118,8 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 			observer.started_as_observer = 1
 			close_spawn_windows()
-			var/obj/O = locate("landmark*Observer-Start")
+			var/decl/spawnpoint/spawnpoint = GET_DECL(/decl/spawnpoint/observer)
+			var/obj/O = SAFEPICK(spawnpoint.spawn_turfs)
 			if(istype(O))
 				to_chat(src, SPAN_NOTICE("Now teleporting."))
 				observer.forceMove(O.loc)
@@ -358,7 +359,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		if(!job)
 			job = SSjobs.get_by_title(global.using_map.default_job_title)
 		var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
-		spawn_turf = length(spawnpoint.spawn_turfs) ? pick(spawnpoint.spawn_turfs) : locate(1, 1, 1)
+		spawn_turf = length(spawnpoint.spawn_turfs) ? pick(spawnpoint.spawn_turfs) : get_respawn_loc()
 
 	if(chosen_species)
 		if(!check_species_allowed(chosen_species))

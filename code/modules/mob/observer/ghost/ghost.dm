@@ -68,11 +68,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			var/decl/spawnpoint/spawn_data = all_spawns[spawn_type]
 			if(spawn_data.ghost_can_spawn && length(spawn_data.spawn_turfs))
 				spawn_locs |= spawn_data.spawn_turfs
-
-		if(length(spawn_locs))
-			T = pick(spawn_locs)
-		else
-			T = locate(1, 1, 1)
+		T = length(spawn_locs) ? pick(spawn_locs) : get_respawn_loc()
 
 	forceMove(T)
 

@@ -308,6 +308,12 @@
 			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type
 
+	// Observer spawn is special and isn't in the using_map list.
+	var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
+	if(!length(observer_spawn.spawn_turfs))
+		log_unit_test("Map has no [observer_spawn.name] spawn turfs.")
+		failed += observer_spawn.type
+
 	if(length(failed))
 		fail("Some allowed spawnpoints have no spawnpoint turfs:\n[jointext(failed, "\n")]")
 	else

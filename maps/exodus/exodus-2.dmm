@@ -63833,9 +63833,7 @@
 /area/ship/exodus_pod_mining)
 "igB" = (
 /obj/machinery/hologram/holopad,
-/obj/abstract/landmark{
-	name = "Observer-Start"
-	},
+/obj/abstract/landmark/latejoin/observer,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
 "ihN" = (

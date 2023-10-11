@@ -5468,9 +5468,7 @@
 /obj/structure/table,
 /obj/random/smokes,
 /obj/item/ashtray/glass,
-/obj/abstract/landmark{
-	name = "Observer-Start"
-	},
+/obj/abstract/landmark/latejoin/observer,
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
