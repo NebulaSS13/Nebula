@@ -1359,6 +1359,7 @@
 
 // Gets the ID card of a mob, but will not check types in the exceptions list
 /mob/GetIdCard(exceptions = null)
+	RETURN_TYPE(/obj/item/card/id)
 	return LAZYACCESS(GetIdCards(exceptions), 1)
 
 /mob/get_overhead_text_x_offset()

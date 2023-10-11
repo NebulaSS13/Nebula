@@ -940,8 +940,15 @@ default behaviour is:
 /mob/living/proc/get_ingested_reagents()
 	return reagents
 
-/mob/living/proc/should_have_organ(var/organ_check)
-	return FALSE
+/mob/living/proc/should_have_organ(organ_to_check)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	return root_bodytype?.has_organ[organ_to_check]
+
+/// Returns null if the mob's bodytype doesn't have a limb tag by default.
+/// Otherwise, returns the data of the limb instead.
+/mob/living/proc/should_have_limb(limb_to_check)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	return root_bodytype?.has_limbs[limb_to_check]
 
 /mob/living/proc/get_contact_reagents()
 	return reagents
@@ -1228,3 +1235,66 @@ default behaviour is:
 	var/decl/bodytype/bodytype = get_bodytype()
 	return ..() + bodytype?.antaghud_offset_y
 
+// Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
+/mob/living/proc/get_authentification_rank(if_no_id = "No id", if_no_job = "No job")
+	var/obj/item/card/id/id = GetIdCard()
+	if(istype(id))
+		return id.rank ? id.rank : if_no_job
+	return if_no_id
+
+//gets assignment from ID or ID inside PDA or PDA itself
+//Useful when player do something with computers
+/mob/living/proc/get_assignment(if_no_id = "No id", if_no_job = "No job")
+	var/obj/item/card/id/id = GetIdCard()
+	if(istype(id))
+		return id.assignment ? id.assignment : if_no_job
+	return if_no_id
+
+//gets name from ID or ID inside PDA or PDA itself
+//Useful when players do something with computers
+/mob/living/proc/get_authentification_name(if_no_id = "Unknown")
+	var/obj/item/card/id/id = GetIdCard()
+	if(istype(id))
+		return id.registered_name
+	return if_no_id
+
+//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
+/mob/living/proc/get_visible_name()
+	var/face_name = get_face_name()
+	var/id_name = get_id_name("")
+	if((face_name == "Unknown") && id_name && (id_name != face_name))
+		return "[face_name] (as [id_name])"
+	return face_name
+
+//Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
+//Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
+/mob/living/proc/get_face_name()
+	if(identity_is_visible())
+		return real_name
+	var/obj/item/clothing/mask = get_equipped_item(slot_wear_mask_str)
+	var/obj/item/clothing/head = get_equipped_item(slot_head_str)
+	if(istype(head) && head.visible_name)
+		return head.visible_name
+	else if(istype(mask) && mask.visible_name)
+		return mask.visible_name
+	else if(get_rig()?.visible_name)
+		return get_rig()?.visible_name
+	return "Unknown"
+
+/mob/living/proc/identity_is_visible()
+	if(!real_name)
+		return FALSE
+	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+	var/obj/item/head = get_equipped_item(slot_head_str)
+	if((mask?.flags_inv & HIDEFACE) || (head?.flags_inv & HIDEFACE))
+		return FALSE
+	if(should_have_limb(BP_HEAD))
+		var/obj/item/organ/external/skull = GET_EXTERNAL_ORGAN(src, BP_HEAD)
+		if(!skull || (skull.status & ORGAN_DISFIGURED))	//Face is unrecognizeable
+			return FALSE
+	return TRUE
+
+//gets name from ID or PDA itself, ID inside PDA doesn't matter
+//Useful when player is being seen by other mobs
+/mob/living/proc/get_id_name(if_no_id = "Unknown")
+	return GetIdCard(exceptions = list(/obj/item/holder))?.registered_name || if_no_id

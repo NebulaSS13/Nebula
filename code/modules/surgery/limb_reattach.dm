@@ -17,7 +17,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
 		return affected
-	var/list/organ_data = target.get_bodytype()?.has_limbs?["[target_zone]"]
+	var/list/organ_data = target.should_have_limb(target_zone)
 	return !isnull(organ_data)
 
 //////////////////////////////////////////////////////////////////

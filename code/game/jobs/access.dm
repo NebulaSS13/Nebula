@@ -18,6 +18,7 @@
 		. = id.GetAccess()
 
 /atom/movable/proc/GetIdCard()
+	RETURN_TYPE(/obj/item/card/id)
 	var/list/cards = GetIdCards()
 	return LAZYACCESS(cards, LAZYLEN(cards))
 
@@ -209,12 +210,6 @@ var/global/list/priv_region_access
 		"Supreme Commander",
 		"Emergency Response Team",
 		"Emergency Response Team Leader")
-
-/proc/FindNameFromID(var/mob/M, var/missing_id_name = "Unknown")
-	var/obj/item/card/id/C = M.GetIdCard()
-	if(C)
-		return C.registered_name
-	return missing_id_name
 
 /proc/get_all_job_icons() //For all existing HUD icons
 	return SSjobs.titles_to_datums + list("Prisoner")
