@@ -13,6 +13,7 @@
 
 /decl/spawnpoint
 	abstract_type = /decl/spawnpoint
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name                       // Name used in preference setup.
 	var/spawn_announcement         // Message to display on the arrivals computer. If null, no message will be sent.
 	var/ghost_can_spawn = TRUE     // Whether or not observers can randomly pick this spawnpoint to use.
@@ -50,6 +51,7 @@
 // Dummy spawnpoint for ghosts.
 /decl/spawnpoint/observer
 	name = "Observer"
+	uid = "spawn_observer"
 
 /obj/abstract/landmark/latejoin/observer
 	spawn_decl = /decl/spawnpoint/observer
@@ -58,10 +60,12 @@
 	name = "Arrivals"
 	spawn_announcement = "has arrived on the station"
 	player_can_respawn = TRUE
+	uid = "spawn_arrivals"
 
 /decl/spawnpoint/gateway
 	name = "Gateway"
 	spawn_announcement = "has completed translation from offsite gateway"
+	uid = "spawn_gateway"
 
 /obj/abstract/landmark/latejoin/gateway
 	spawn_decl = /decl/spawnpoint/gateway
@@ -70,6 +74,7 @@
 	name = "Cryogenic Storage"
 	spawn_announcement = "has completed cryogenic revival"
 	disallow_job_event_categories = list(ASSIGNMENT_ROBOT)
+	uid = "spawn_cryo"
 
 /obj/abstract/landmark/latejoin/cryo
 	spawn_decl = /decl/spawnpoint/cryo
@@ -100,6 +105,7 @@
 	spawn_announcement = "has been activated from storage"
 	restrict_job_event_categories = list(ASSIGNMENT_ROBOT)
 	ghost_can_spawn = FALSE
+	uid = "spawn_cyborg"
 
 /obj/abstract/landmark/latejoin/cyborg
 	spawn_decl = /decl/spawnpoint/cyborg

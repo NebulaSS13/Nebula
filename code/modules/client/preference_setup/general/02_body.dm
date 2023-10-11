@@ -33,47 +33,18 @@
 	pref.bgstate =                R.read("bgstate")
 
 	// Get h_style type.
-	var/list/all_sprite_accessories
-	var/load_h_style = R.read("hair_style_name")
-	var/decl/h_style_decl = decls_repository.get_decl_by_id(load_h_style, validate_decl_type = FALSE)
-	// Grandfather in name-based sprite accessories.
-	if(!istype(h_style_decl) && load_h_style)
-		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
-		for(var/accessory in all_sprite_accessories)
-			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-			if(sprite.name == load_h_style)
-				h_style_decl = sprite
-				break
+	var/decl/h_style_decl = decls_repository.get_decl_by_id_or_var(R.read("hair_style_name"), /decl/sprite_accessory/hair)
 	pref.h_style = istype(h_style_decl) ? h_style_decl.type : /decl/sprite_accessory/hair/bald
-
 	// Get f_style type.
-	var/load_f_style = R.read("facial_style_name")
-	var/decl/f_style_decl = decls_repository.get_decl_by_id(load_f_style, validate_decl_type = FALSE)
-	// Grandfather in name-based accessories.
-	if(!istype(f_style_decl) && load_f_style)
-		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
-		for(var/accessory in all_sprite_accessories)
-			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-			if(sprite.name == load_f_style)
-				f_style_decl = sprite
-				break
+	var/decl/f_style_decl = decls_repository.get_decl_by_id_or_var(R.read("facial_style_name"), /decl/sprite_accessory/facial_hair)
 	pref.f_style = istype(f_style_decl) ? f_style_decl.type : /decl/sprite_accessory/facial_hair/shaved
-
 	// Get markings type.
 	var/list/load_markings = R.read("body_markings")
 	pref.body_markings = list()
-	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
 	if(length(load_markings))
 		for(var/marking in load_markings)
-			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id(marking, validate_decl_type = FALSE)
-			// Grandfather in name-based accessories.
-			if(isnull(loaded_marking))
-				for(var/accessory in all_sprite_accessories)
-					var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-					if(sprite.name == marking)
-						loaded_marking = pref.body_markings[marking]
-						break
-			if(loaded_marking)
+			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id_or_var(marking, /decl/sprite_accessory/marking)
+			if(istype(loaded_marking))
 				pref.body_markings[loaded_marking.type] = load_markings[marking]
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)

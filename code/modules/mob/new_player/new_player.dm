@@ -119,10 +119,10 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 			observer.started_as_observer = 1
 			close_spawn_windows()
 			var/decl/spawnpoint/spawnpoint = GET_DECL(/decl/spawnpoint/observer)
-			var/obj/O = SAFEPICK(spawnpoint.spawn_turfs)
-			if(istype(O))
+			var/turf/T = SAFEPICK(spawnpoint.spawn_turfs)
+			if(istype(T))
 				to_chat(src, SPAN_NOTICE("Now teleporting."))
-				observer.forceMove(O.loc)
+				observer.forceMove(T)
 			else
 				to_chat(src, SPAN_DANGER("Could not locate an observer spawn point. Use the Teleport verb to jump to the map."))
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.

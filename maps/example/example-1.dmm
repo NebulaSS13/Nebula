@@ -91,6 +91,10 @@
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/first)
+"dK" = (
+/obj/abstract/landmark/latejoin/observer,
+/turf/simulated/wall/r_wall/prepainted,
+/area/example/first)
 "eh" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -501,8 +505,8 @@
 /area/example/first)
 "xq" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Example First Deck";
-},
+	name = "Example First Deck"
+	},
 /turf/space,
 /area/space)
 "xR" = (
@@ -2453,7 +2457,7 @@ XZ
 Wr
 Wr
 Wr
-XZ
+dK
 XZ
 XZ
 XZ
