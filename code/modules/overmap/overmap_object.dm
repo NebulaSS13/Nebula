@@ -54,7 +54,7 @@ var/global/list/overmap_unknown_ids = list()
 		return INITIALIZE_HINT_QDEL
 
 	if(requires_contact)
-		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
+		set_invisibility(INVISIBILITY_OVERMAP) // Effects that require identification have their images cast to the client via sensors.
 
 	if(scannable)
 		unknown_id = "[pick(global.phonetic_alphabet)]-[random_id(/obj/effect/overmap, 100, 999)]"

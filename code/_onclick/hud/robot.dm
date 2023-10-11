@@ -13,7 +13,7 @@ var/global/obj/screen/robot_inventory
 	if(isrobot(usr) && !usr.incapacitated())
 		var/mob/living/silicon/robot/R = usr
 		R.drop_item()
-		invisibility = INVISIBILITY_MAXIMUM
+		set_invisibility(INVISIBILITY_MAXIMUM)
 		alpha = 0
 
 /mob/living/silicon/robot

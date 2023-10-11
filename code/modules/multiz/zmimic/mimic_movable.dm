@@ -91,7 +91,7 @@
 	layer = MIMICED_LIGHTING_LAYER
 	plane = OPENTURF_MAX_PLANE
 	blend_mode = BLEND_MULTIPLY
-	invisibility = 0
+	set_invisibility(INVISIBILITY_NONE)
 
 	if (icon_state == LIGHTING_BASE_ICON_STATE)
 		// We're using a color matrix, so just darken the colors across the board.

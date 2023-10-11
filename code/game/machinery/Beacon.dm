@@ -12,7 +12,7 @@
 	. = ..()
 	var/turf/T = get_turf(src)
 	beacon = new /obj/item/radio/beacon(T)
-	beacon.invisibility = INVISIBILITY_MAXIMUM
+	beacon.set_invisibility(INVISIBILITY_MAXIMUM)
 
 	hide(!T.is_plating())
 

@@ -5,7 +5,7 @@
 	death(1)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	UpdateLyingBuckledAndVerbStatus()
 	remove_from_dead_mob_list()
 	dump_contents()
@@ -30,7 +30,7 @@
 	var/atom/movable/overlay/animation = null
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 
 	animation = new(loc)
 	animation.icon_state = "blank"

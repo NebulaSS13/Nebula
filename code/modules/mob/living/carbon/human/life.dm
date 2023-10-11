@@ -37,7 +37,7 @@
 	var/stamina = 100
 
 /mob/living/carbon/human/Life()
-	set invisibility = 0
+	set invisibility = FALSE
 	set background = BACKGROUND_ENABLED
 
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))

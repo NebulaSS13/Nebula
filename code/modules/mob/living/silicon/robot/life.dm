@@ -2,7 +2,7 @@
 
 	SHOULD_CALL_PARENT(FALSE)
 
-	set invisibility = 0
+	set invisibility = FALSE
 	set background = 1
 
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
@@ -128,10 +128,10 @@
 				process_med_hud(src,0,network = get_computer_network())
 
 	if(length(get_active_grabs()))
-		ui_drop_grab.invisibility = 0
+		ui_drop_grab.set_invisibility(INVISIBILITY_NONE)
 		ui_drop_grab.alpha = 255
 	else
-		ui_drop_grab.invisibility = INVISIBILITY_MAXIMUM
+		ui_drop_grab.set_invisibility(INVISIBILITY_ABSTRACT)
 		ui_drop_grab.alpha = 0
 
 	if (src.healths)

@@ -11,7 +11,7 @@
 	damage_flags = DAM_LASER
 	eyeblur = 4
 	hitscan = 1
-	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
+	invisibility = INVISIBILITY_ABSTRACT	//beam projectiles are invisible as they are rendered by the effect engine
 	penetration_modifier = 0.3
 	distance_falloff = 2.5
 

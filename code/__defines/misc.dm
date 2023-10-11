@@ -22,6 +22,7 @@
 #define LEVEL_EDGE_CON  3
 
 // Invisibility constants.
+#define INVISIBILITY_NONE         0
 #define INVISIBILITY_LIGHTING    20
 #define INVISIBILITY_LEVEL_ONE   35
 #define INVISIBILITY_LEVEL_TWO   45
