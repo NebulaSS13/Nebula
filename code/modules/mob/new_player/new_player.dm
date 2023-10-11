@@ -198,7 +198,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		to_chat(src, alert("That spawnpoint is unavailable. Please try another."))
 		return 0
 
-	var/turf/spawn_turf = pick(spawnpoint.turfs)
+	var/turf/spawn_turf = pick(spawnpoint.spawn_turfs)
 	if(job.latejoin_at_spawnpoints)
 		var/obj/S = job.get_roundstart_spawnpoint()
 		spawn_turf = get_turf(S)
@@ -231,9 +231,11 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		if(!(ASSIGNMENT_ROBOT in job.event_categories))
 			CreateModularRecord(character)
 			SSticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-			AnnounceArrival(character, job, spawnpoint.msg)
-		else
-			AnnounceCyborg(character, job, spawnpoint.msg)
+			if(spawnpoint.spawn_announcement)
+				AnnounceArrival(character, job, spawnpoint.spawn_announcement)
+		else if(spawnpoint.spawn_announcement)
+			AnnounceCyborg(character, job, spawnpoint.spawn_announcement)
+
 	callHook("player_latejoin", list(job, character))
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
@@ -356,7 +358,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		if(!job)
 			job = SSjobs.get_by_title(global.using_map.default_job_title)
 		var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
-		spawn_turf = pick(spawnpoint.turfs)
+		spawn_turf = length(spawnpoint.spawn_turfs) ? pick(spawnpoint.spawn_turfs) : locate(1, 1, 1)
 
 	if(chosen_species)
 		if(!check_species_allowed(chosen_species))

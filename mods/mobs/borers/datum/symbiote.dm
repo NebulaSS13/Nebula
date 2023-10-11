@@ -87,7 +87,7 @@ var/global/list/symbiote_starting_points = list()
 		if(length(global.symbiote_starting_points))
 			symbiote.forceMove(pick(global.symbiote_starting_points))
 		else
-			symbiote.forceMove(pick(global.latejoin_locations))
+			symbiote.forceMove(get_respawn_loc())
 
 	if(H.mind)
 		H.mind.transfer_to(symbiote)
@@ -118,7 +118,7 @@ var/global/list/symbiote_starting_points = list()
 			return
 
 /datum/job/symbiote/is_position_available()
-	. = ..() && length(find_valid_hosts(TRUE)) 
+	. = ..() && length(find_valid_hosts(TRUE))
 
 /obj/abstract/landmark/symbiote_start
 	name = "Symbiote Start"

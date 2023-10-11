@@ -1,11 +1,23 @@
-/decl/spawnpoint
-	var/name                     // Name used in preference setup.
-	var/msg                      // Message to display on the arrivals computer.
-	var/list/turfs               // List of turfs to spawn on.
+/proc/get_respawn_loc()
+	var/list/spawn_locs = list()
+	var/list/all_spawns = decls_repository.get_decls_of_subtype(/decl/spawnpoint)
+	for(var/spawn_type in all_spawns)
+		var/decl/spawnpoint/spawn_data = all_spawns[spawn_type]
+		if(spawn_data.player_can_respawn && length(spawn_data.spawn_turfs))
+			spawn_locs |= spawn_data.spawn_turfs
+	if(length(spawn_locs))
+		return pick(spawn_locs)
+	return locate(1, 1, 1)
 
+/decl/spawnpoint
+	abstract_type = /decl/spawnpoint
+	var/name                       // Name used in preference setup.
+	var/spawn_announcement         // Message to display on the arrivals computer. If null, no message will be sent.
+	var/ghost_can_spawn = TRUE     // Whether or not observers can randomly pick this spawnpoint to use.
+	var/player_can_respawn = FALSE // Whether or not prisoners being released from admin jail, or players being respawned, can randomly pick this turf.
+	var/list/spawn_turfs           // List of turfs to spawn on.
 	var/list/restrict_job
 	var/list/restrict_job_event_categories
-
 	var/list/disallow_job
 	var/list/disallow_job_event_categories
 
@@ -35,28 +47,23 @@
 
 /decl/spawnpoint/arrivals
 	name = "Arrivals"
-	msg = "has arrived on the station"
-
-/decl/spawnpoint/arrivals/Initialize()
-	. = ..()
-	turfs = global.latejoin_locations
+	spawn_announcement = "has arrived on the station"
+	player_can_respawn = TRUE
 
 /decl/spawnpoint/gateway
 	name = "Gateway"
-	msg = "has completed translation from offsite gateway"
+	spawn_announcement = "has completed translation from offsite gateway"
 
-/decl/spawnpoint/gateway/Initialize()
-	. = ..()
-	turfs = global.latejoin_gateway_locations
+/obj/abstract/landmark/latejoin/gateway
+	spawn_decl = /decl/spawnpoint/gateway
 
 /decl/spawnpoint/cryo
 	name = "Cryogenic Storage"
-	msg = "has completed cryogenic revival"
+	spawn_announcement = "has completed cryogenic revival"
 	disallow_job_event_categories = list(ASSIGNMENT_ROBOT)
 
-/decl/spawnpoint/cryo/Initialize()
-	. = ..()
-	turfs = global.latejoin_cryo_locations
+/obj/abstract/landmark/latejoin/cryo
+	spawn_decl = /decl/spawnpoint/cryo
 
 /decl/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
 	if(!istype(victim) || victim.buckled) // They may have spawned with a wheelchair; don't move them into a pod in that case.
@@ -81,9 +88,9 @@
 
 /decl/spawnpoint/cyborg
 	name = "Robot Storage"
-	msg = "has been activated from storage"
+	spawn_announcement = "has been activated from storage"
 	restrict_job_event_categories = list(ASSIGNMENT_ROBOT)
+	ghost_can_spawn = FALSE
 
-/decl/spawnpoint/cyborg/Initialize()
-	. = ..()
-	turfs = global.latejoin_cyborg_locations
+/obj/abstract/landmark/latejoin/cyborg
+	spawn_decl = /decl/spawnpoint/cyborg
