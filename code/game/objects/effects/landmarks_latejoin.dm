@@ -5,5 +5,5 @@
 /obj/abstract/landmark/latejoin/Initialize()
 	if(spawn_decl)
 		var/decl/spawnpoint/spawn_instance = GET_DECL(spawn_decl)
-		LAZYDISTINCTADD(spawn_instance.spawn_turfs, get_turf(src))
+		spawn_instance.add_spawn_turf(get_turf(src))
 	. = ..()

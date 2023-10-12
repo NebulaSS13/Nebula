@@ -70,10 +70,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
 	var/allowed_spawns = list(
-		/decl/spawnpoint/arrivals,
-		/decl/spawnpoint/gateway,
-		/decl/spawnpoint/cryo,
-		/decl/spawnpoint/cyborg
+		/decl/spawnpoint/arrivals
 	)
 	var/default_spawn = /decl/spawnpoint/arrivals
 

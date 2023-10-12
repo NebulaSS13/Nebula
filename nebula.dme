@@ -83,6 +83,7 @@
 #include "code\__defines\skills.dm"
 #include "code\__defines\sound.dm"
 #include "code\__defines\spaceman_dmm.dm"
+#include "code\__defines\spawn.dm"
 #include "code\__defines\species.dm"
 #include "code\__defines\status.dm"
 #include "code\__defines\stress.dm"

@@ -1,29 +1,50 @@
-/proc/get_respawn_loc()
+// This proc will return a random valid respawn location, defaulting to
+// observer spawn points if nothing else is available. Flags can be used to
+// filter the spawnpoints considered valid, see code/__defines/spawn.dm.
+/proc/get_random_spawn_turf(var/mob/spawning, var/check_flags)
 	var/list/spawn_locs = list()
 	var/list/all_spawns = decls_repository.get_decls_of_subtype(/decl/spawnpoint)
 	for(var/spawn_type in all_spawns)
 		var/decl/spawnpoint/spawn_data = all_spawns[spawn_type]
-		if(spawn_data.player_can_respawn && length(spawn_data.spawn_turfs))
-			spawn_locs |= spawn_data.spawn_turfs
-	if(length(spawn_locs))
-		return pick(spawn_locs)
-	// Observer spawn is guaranteed by CI to be populated.
-	var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
-	return pick(observer_spawn.spawn_turfs)
+		if((!check_flags || (spawn_data.spawn_flags & check_flags)))
+			var/add_spawn_turfs = spawn_data.get_spawn_turfs(spawning)
+			if(length(add_spawn_turfs))
+				spawn_locs |= add_spawn_turfs
+	. = SAFEPICK(spawn_locs)
+	if(!.)
+		// Observer spawn is guaranteed by CI to be populated.
+		var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
+		return pick(observer_spawn.get_spawn_turfs())
 
 /decl/spawnpoint
 	abstract_type = /decl/spawnpoint
 	decl_flags = DECL_FLAG_MANDATORY_UID
-	var/name                       // Name used in preference setup.
-	var/spawn_announcement         // Message to display on the arrivals computer. If null, no message will be sent.
-	var/ghost_can_spawn = TRUE     // Whether or not observers can randomly pick this spawnpoint to use.
-	var/player_can_respawn = FALSE // Whether or not prisoners being released from admin jail, or players being respawned, can randomly pick this turf.
-	var/list/spawn_turfs           // List of turfs to spawn on.
+	/// Name displayed in preference setup.
+	var/name
+	/// Message to display on the arrivals computer. If null, no message will be sent.
+	var/spawn_announcement
+	/// Determines validity for get_random_spawn_turf()
+	var/spawn_flags = (SPAWN_FLAG_GHOSTS_CAN_SPAWN | SPAWN_FLAG_JOBS_CAN_SPAWN | SPAWN_FLAG_PRISONERS_CAN_SPAWN | SPAWN_FLAG_PERSISTENCE_CAN_SPAWN)
+	/// List of turfs to spawn on. Retrieved via get_spawn_turfs().
+	var/list/_spawn_turfs
+	/// A list of job types that are allowed to use this spawnpoint.
 	var/list/restrict_job
+	/// A list of event categories that are allowed to use this spawnpoint (ex. ASSIGNMENT_JANITOR)
 	var/list/restrict_job_event_categories
+	/// A list of job types that are not allowed to use this spawnpoint.
 	var/list/disallow_job
+	/// A list of event categories that are not allowed to use this spawnpoint (ex. ASSIGNMENT_JANITOR)
 	var/list/disallow_job_event_categories
 
+// Returns the spawn list. Mob is supplied in case overrides want to check prefs.
+/decl/spawnpoint/proc/get_spawn_turfs(var/mob/spawning)
+	return _spawn_turfs
+
+// Adds to the spawn list. Uses a proc for subtype overrides.
+/decl/spawnpoint/proc/add_spawn_turf(var/turf/adding)
+	LAZYDISTINCTADD(_spawn_turfs, adding)
+
+// Validates that a job is allowed to use this spawn point.
 /decl/spawnpoint/proc/check_job_spawning(var/datum/job/job)
 
 	if(restrict_job && !(job.type in restrict_job) && !(job.title in restrict_job))
@@ -52,29 +73,22 @@
 /decl/spawnpoint/observer
 	name = "Observer"
 	uid = "spawn_observer"
-
 /obj/abstract/landmark/latejoin/observer
 	spawn_decl = /decl/spawnpoint/observer
 
+// The 'default' latejoin spawn location.
 /decl/spawnpoint/arrivals
 	name = "Arrivals"
 	spawn_announcement = "has arrived on the station"
-	player_can_respawn = TRUE
 	uid = "spawn_arrivals"
 
-/decl/spawnpoint/gateway
-	name = "Gateway"
-	spawn_announcement = "has completed translation from offsite gateway"
-	uid = "spawn_gateway"
-
-/obj/abstract/landmark/latejoin/gateway
-	spawn_decl = /decl/spawnpoint/gateway
-
+// Spawn the mob inside a cryopod at the spawn loc.
 /decl/spawnpoint/cryo
 	name = "Cryogenic Storage"
 	spawn_announcement = "has completed cryogenic revival"
 	disallow_job_event_categories = list(ASSIGNMENT_ROBOT)
 	uid = "spawn_cryo"
+	spawn_flags = (SPAWN_FLAG_GHOSTS_CAN_SPAWN | SPAWN_FLAG_JOBS_CAN_SPAWN)
 
 /obj/abstract/landmark/latejoin/cryo
 	spawn_decl = /decl/spawnpoint/cryo
@@ -100,11 +114,12 @@
 			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis aboard [global.using_map.full_name]. It might take a few seconds."))
 			return
 
+// Spawnpoint used specifically for robots.
 /decl/spawnpoint/cyborg
 	name = "Robot Storage"
 	spawn_announcement = "has been activated from storage"
 	restrict_job_event_categories = list(ASSIGNMENT_ROBOT)
-	ghost_can_spawn = FALSE
+	spawn_flags = SPAWN_FLAG_JOBS_CAN_SPAWN
 	uid = "spawn_cyborg"
 
 /obj/abstract/landmark/latejoin/cyborg

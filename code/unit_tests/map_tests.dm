@@ -302,22 +302,43 @@
 	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
+
 	var/list/failed = list()
+	var/list/check_spawn_flags = list(
+		"SPAWN_FLAG_PRISONERS_CAN_SPAWN" = SPAWN_FLAG_PRISONERS_CAN_SPAWN,
+		"SPAWN_FLAG_JOBS_CAN_JOIN"       = SPAWN_FLAG_JOBS_CAN_SPAWN,
+		"SPAWN_FLAG_PERSISTENCE_CAN_USE" = SPAWN_FLAG_PERSISTENCE_CAN_SPAWN
+	)
+
+	// Check if spawn points have any turfs at all associated.
 	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
-		if(!length(spawnpoint.spawn_turfs))
+		if(!length(spawnpoint.get_spawn_turfs()))
 			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type
+		else if(spawnpoint.spawn_flags && length(check_spawn_flags))
+			for(var/spawn_flag in check_spawn_flags)
+				if(spawnpoint.spawn_flags & check_spawn_flags[spawn_flag])
+					check_spawn_flags -= spawn_flag
 
 	// Observer spawn is special and isn't in the using_map list.
 	var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
-	if(!length(observer_spawn.spawn_turfs))
+	if(!length(observer_spawn.get_spawn_turfs()))
 		log_unit_test("Map has no [observer_spawn.name] spawn turfs.")
 		failed += observer_spawn.type
+	if(!(observer_spawn.spawn_flags & SPAWN_FLAG_GHOSTS_CAN_SPAWN))
+		log_unit_test("[observer_spawn.name] is missing SPAWN_FLAG_GHOSTS_CAN_SPAWN.")
+		failed |= observer_spawn.type
 
-	if(length(failed))
-		fail("Some allowed spawnpoints have no spawnpoint turfs:\n[jointext(failed, "\n")]")
-	else
+	// Report test outcome.
+	if(!length(failed) && !length(check_spawn_flags))
 		pass("All allowed spawnpoints have spawnpoint turfs.")
+	else
+		var/list/failstring = list()
+		if(length(failed))
+			failstring += "Some allowed spawnpoints have no spawnpoint turfs:\n[jointext(failed, "\n")]"
+		if(length(check_spawn_flags))
+			failstring += "Some required spawn flags are not set on available spawnpoints:\n[jointext(check_spawn_flags, "\n")]"
+		fail(jointext(failstring, "\n"))
 	return 1
 
 //=======================================================================================

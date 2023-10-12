@@ -61,14 +61,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 				mind = new /datum/mind(key)
 				mind.current = src
 	if(!T)
-
-		var/list/spawn_locs = list()
-		var/list/all_spawns = decls_repository.get_decls_of_subtype(/decl/spawnpoint)
-		for(var/spawn_type in all_spawns)
-			var/decl/spawnpoint/spawn_data = all_spawns[spawn_type]
-			if(spawn_data.ghost_can_spawn && length(spawn_data.spawn_turfs))
-				spawn_locs |= spawn_data.spawn_turfs
-		T = length(spawn_locs) ? pick(spawn_locs) : get_respawn_loc()
+		T = get_random_spawn_turf(SPAWN_FLAG_GHOSTS_CAN_SPAWN)
 
 	forceMove(T)
 
