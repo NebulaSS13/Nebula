@@ -6,6 +6,10 @@
 	allowed_latejoin_spawns = list()
 	default_spawn  = null
 
+// Set the observer spawn to include every flag so that CI flag checks pass.
+/decl/spawnpoint/observer
+	spawn_flags = (SPAWN_FLAG_GHOSTS_CAN_SPAWN | SPAWN_FLAG_JOBS_CAN_SPAWN | SPAWN_FLAG_PRISONERS_CAN_SPAWN | SPAWN_FLAG_PERSISTENCE_CAN_SPAWN)
+
 /datum/map/planet_testing/build_planets()
 	report_progress("Instantiating planets...")
 

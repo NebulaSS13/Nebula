@@ -26,7 +26,7 @@
 	/// Determines validity for get_random_spawn_turf()
 	var/spawn_flags = (SPAWN_FLAG_GHOSTS_CAN_SPAWN | SPAWN_FLAG_JOBS_CAN_SPAWN | SPAWN_FLAG_PRISONERS_CAN_SPAWN | SPAWN_FLAG_PERSISTENCE_CAN_SPAWN)
 	/// List of turfs to spawn on. Retrieved via get_spawn_turfs().
-	var/list/_spawn_turfs
+	VAR_PRIVATE/list/_spawn_turfs
 	/// A list of job types that are allowed to use this spawnpoint.
 	var/list/restrict_job
 	/// A list of event categories that are allowed to use this spawnpoint (ex. ASSIGNMENT_JANITOR)
@@ -73,6 +73,8 @@
 /decl/spawnpoint/observer
 	name = "Observer"
 	uid = "spawn_observer"
+	spawn_flags = SPAWN_FLAG_GHOSTS_CAN_SPAWN
+
 /obj/abstract/landmark/latejoin/observer
 	spawn_decl = /decl/spawnpoint/observer
 
