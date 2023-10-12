@@ -66,7 +66,8 @@
 /datum/level_data
 	///Name displayed to the player to refer to this level in user interfaces and etc. If null, one will be generated.
 	var/name
-
+	/// Multiplier applied to damage when falling through this level.
+	var/fall_depth = 1
 	/// The z-level that was assigned to this level_data
 	var/level_z
 	/// A unique string identifier for this particular z-level. Used to fetch a level without knowing its z-level.

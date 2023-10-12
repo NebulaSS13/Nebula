@@ -198,12 +198,24 @@
 			parachute.packed = FALSE
 			return TRUE
 
-/atom/movable/proc/handle_fall(var/turf/landing)
+/atom/movable
+	var/started_falling_from_z
+
+/atom/movable/proc/get_fall_height()
+	. = 0
+	var/turf/T = get_turf(src)
+	if(istype(T) && T.z <= started_falling_from_z)
+		for(var/fall_z in T.z to started_falling_from_z)
+			var/datum/level_data/level_data = SSmapping.levels_by_z[fall_z]
+			. += max(1, level_data?.fall_depth)
+
+/atom/movable/proc/handle_fall(var/turf/landing, var/fall_distance)
 	var/turf/previous = get_turf(loc)
 	Move(landing, get_dir(previous, landing))
+	started_falling_from_z = max(started_falling_from_z, landing.z)
 	if(protected_from_fall_damage(landing))
-		return TRUE
-	if(landing.get_fluid_depth() >= FLUID_DEEP)
+		. = TRUE
+	else if(landing.get_fluid_depth() >= FLUID_DEEP)
 		var/primary_fluid = landing.get_fluid_name()
 		if(previous.get_fluid_depth() >= FLUID_DEEP) //We're sinking further
 			visible_message(SPAN_NOTICE("\The [src] sinks deeper down into \the [primary_fluid]!"), SPAN_NOTICE("\The [primary_fluid] rushes around you as you sink!"))
@@ -211,9 +223,11 @@
 		else
 			visible_message(SPAN_NOTICE("\The [src] falls into the [primary_fluid]!"), SPAN_NOTICE("What a splash!"))
 			playsound(src,  'sound/effects/watersplash.ogg', 30, TRUE)
-		return TRUE
+		. = TRUE
 	else
-		handle_fall_effect(landing)
+		. = handle_fall_effect(landing)
+	if(.)
+		started_falling_from_z = 0
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
 	SHOULD_CALL_PARENT(TRUE)
@@ -221,13 +235,15 @@
 		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the [global.using_map.ground_noun].")
-		var/fall_damage = fall_damage()
+		var/fall_damage = fall_damage() * get_fall_height()
 		if(fall_damage > 0)
 			for(var/mob/living/M in landing.contents)
 				if(M == src)
 					continue
 				visible_message("\The [src] hits \the [M.name]!")
 				M.take_overall_damage(fall_damage)
+		return TRUE
+	return FALSE
 
 /atom/movable/proc/fall_damage()
 	return 0
@@ -244,8 +260,9 @@
 		return
 	if(species && species.handle_fall_special(src, landing))
 		return
-	var/min_damage = 7
-	var/max_damage = 14
+	var/fall_height = get_fall_height()
+	var/min_damage = 7  * fall_height
+	var/max_damage = 14 * fall_height
 	apply_damage(rand(min_damage, max_damage), BRUTE, BP_HEAD, armor_pen = 50)
 	apply_damage(rand(min_damage, max_damage), BRUTE, BP_CHEST, armor_pen = 50)
 	apply_damage(rand(min_damage, max_damage), BRUTE, BP_GROIN, armor_pen = 75)
