@@ -25,7 +25,7 @@
 	pref.real_name =      R.read("real_name")
 	pref.be_random_name = R.read("name_is_always_random")
 	var/decl/spawnpoint/loaded_spawnpoint = decls_repository.get_decl_by_id_or_var(R.read("spawnpoint"), /decl/spawnpoint)
-	if(istype(loaded_spawnpoint) && (loaded_spawnpoint in global.using_map.allowed_spawns))
+	if(istype(loaded_spawnpoint) && (loaded_spawnpoint in global.using_map.allowed_latejoin_spawns))
 		pref.spawnpoint = loaded_spawnpoint.type
 	else
 		pref.spawnpoint = global.using_map.default_spawn
@@ -41,7 +41,7 @@
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 
 	var/valid_spawn = FALSE
-	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_latejoin_spawns)
 		if(pref.spawnpoint == spawnpoint.type)
 			valid_spawn = TRUE
 			break
@@ -91,7 +91,7 @@
 
 	. += "<br><b>Spawnpoint</b>:"
 	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
-	for(var/decl/spawnpoint/allowed_spawnpoint in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/allowed_spawnpoint in global.using_map.allowed_latejoin_spawns)
 		if(spawnpoint == allowed_spawnpoint)
 			. += "<span class='linkOn'>[allowed_spawnpoint.name]</span>"
 		else
@@ -148,7 +148,7 @@
 
 	else if(href_list["spawnpoint"])
 		var/decl/spawnpoint/choice = locate(href_list["spawnpoint"])
-		if(!istype(choice) || !CanUseTopic(user) || !(choice in global.using_map.allowed_spawns))
+		if(!istype(choice) || !CanUseTopic(user) || !(choice in global.using_map.allowed_latejoin_spawns))
 			return TOPIC_NOACTION
 		pref.spawnpoint = choice.type
 		return TOPIC_REFRESH

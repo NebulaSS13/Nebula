@@ -5,7 +5,7 @@
 	path = "away_sites_testing"
 	overmap_ids = list(OVERMAP_ID_SPACE)
 
-	allowed_spawns = list()
+	allowed_latejoin_spawns = list()
 	default_spawn = null
 
 /datum/map/away_sites_testing/build_away_sites()

@@ -3,7 +3,7 @@
 	full_name      = "Planets Testing"
 	path           = "planets_testing"
 	overmap_ids    = list(OVERMAP_ID_SPACE)
-	allowed_spawns = list()
+	allowed_latejoin_spawns = list()
 	default_spawn  = null
 
 /datum/map/planet_testing/build_planets()

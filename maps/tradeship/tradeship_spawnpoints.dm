@@ -1,5 +1,5 @@
 /datum/map/tradeship
-	allowed_spawns = list(
+	allowed_latejoin_spawns = list(
 		/decl/spawnpoint/cryo,
 		/decl/spawnpoint/cryo/two,
 		/decl/spawnpoint/cyborg,

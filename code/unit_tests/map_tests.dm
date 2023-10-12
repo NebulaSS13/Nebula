@@ -299,7 +299,7 @@
 //=======================================================================================
 
 /datum/unit_test/correct_allowed_spawn_test
-	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
+	name = "MAP: All allowed_latejoin_spawns entries should have spawnpoints on map."
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
 
@@ -310,15 +310,39 @@
 		"SPAWN_FLAG_PERSISTENCE_CAN_USE" = SPAWN_FLAG_PERSISTENCE_CAN_SPAWN
 	)
 
-	// Check if spawn points have any turfs at all associated.
-	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
+	// Check that all flags are represented in compiled spawnpoints.
+	// The actual validation will happen at the end of the proc.
+	var/list/all_spawnpoints = decls_repository.get_decls_of_subtype(/decl/spawnpoint)
+	for(var/spawn_type in all_spawnpoints)
+		var/decl/spawnpoint/spawnpoint = all_spawnpoints[spawn_type]
+		// No turfs probably means it isn't mapped; if it's in the allowed list this will be picked up below.
 		if(!length(spawnpoint.get_spawn_turfs()))
-			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
-			failed += spawnpoint.type
-		else if(spawnpoint.spawn_flags && length(check_spawn_flags))
+			continue
+		if(spawnpoint.spawn_flags)
 			for(var/spawn_flag in check_spawn_flags)
 				if(spawnpoint.spawn_flags & check_spawn_flags[spawn_flag])
 					check_spawn_flags -= spawn_flag
+		if(!length(check_spawn_flags))
+			break
+
+	// Check if spawn points have any turfs at all associated.
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_latejoin_spawns)
+		if(!length(spawnpoint.get_spawn_turfs()))
+			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
+			failed += spawnpoint.type
+
+	// Validate our forced job spawnpoints since they may not be included in allowed_latejoin_spawns.
+	for(var/job_title in SSjobs.titles_to_datums)
+		var/datum/job/job = SSjobs.titles_to_datums[job_title]
+		if(!job.forced_spawnpoint)
+			continue
+		var/decl/spawnpoint/spawnpoint = GET_DECL(job.forced_spawnpoint)
+		if(!spawnpoint.check_job_spawning(job))
+			log_unit_test("Forced spawnpoint for [job_title], [spawnpoint.name], does not permit the job to spawn there.")
+			failed += spawnpoint.type
+		if(!length(spawnpoint.get_spawn_turfs()))
+			log_unit_test("Job [job_title] forces spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
+			failed += spawnpoint.type
 
 	// Observer spawn is special and isn't in the using_map list.
 	var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
