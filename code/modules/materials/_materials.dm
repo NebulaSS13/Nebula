@@ -741,33 +741,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				return
 		M.clean_blood()
 
-	if(solvent_power > MAT_SOLVENT_NONE && removed >= solvent_melt_dose && M.acid_act(min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), solvent_melt_dose, solvent_power))
+	if(solvent_power > MAT_SOLVENT_NONE && removed >= solvent_melt_dose && M.solvent_act(min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), solvent_melt_dose, solvent_power))
 		holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
-
-/mob/living/proc/acid_act(var/severity, var/amount_per_item, var/solvent_power)
-
-	for(var/slot in global.standard_headgear_slots)
-		var/obj/item/thing = get_equipped_item(slot)
-		if(!istype(thing))
-			continue
-		if(!thing.solvent_can_melt(solvent_power) || !try_unequip(thing))
-			to_chat(src, SPAN_NOTICE("Your [thing] protects you from the solvent."))
-			return TRUE
-		to_chat(src, SPAN_DANGER("Your [thing] dissolves!"))
-		qdel(thing)
-		severity -= amount_per_item
-		if(severity <= 0)
-			return TRUE
-
-	// TODO move this to a contact var or something.
-	if(solvent_power >= MAT_SOLVENT_STRONG)
-		var/screamed
-		for(var/obj/item/organ/external/affecting in get_external_organs())
-			if(!screamed && affecting.can_feel_pain())
-				screamed = TRUE
-				emote("scream")
-			affecting.status |= ORGAN_DISFIGURED
-		take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)
 
 /decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)

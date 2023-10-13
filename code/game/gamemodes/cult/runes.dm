@@ -268,7 +268,6 @@
 	color = "#ff0000"
 	anchored = TRUE
 	density = TRUE
-
 	var/obj/effect/rune/wall/rune
 	var/health
 	var/max_health = 200
