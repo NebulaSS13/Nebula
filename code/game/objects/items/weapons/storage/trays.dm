@@ -16,9 +16,8 @@
 	use_to_pickup = 1
 	allow_quick_gather = 1
 	use_sound = null
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/metal/aluminium
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	
 	var/cooldown = 0	//Cooldown for banging the tray with a rolling pin. based on world.time. very silly
 	var/no_drop = FALSE
 

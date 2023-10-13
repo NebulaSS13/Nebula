@@ -11,7 +11,7 @@
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/cardboard //#TODO: Replace with paper
+	material = /decl/material/solid/plastic
 	var/currency
 	var/absolute_worth = 0
 	var/can_flip = TRUE // Cooldown tracker for single-coin flips.
