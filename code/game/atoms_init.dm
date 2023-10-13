@@ -71,16 +71,13 @@
 
 /atom/Destroy()
 	UNQUEUE_TEMPERATURE_ATOM(src)
-
 	QDEL_NULL(reagents)
-
 	LAZYCLEARLIST(our_overlays)
 	LAZYCLEARLIST(priority_overlays)
-
 	LAZYCLEARLIST(climbers)
-
 	QDEL_NULL(light)
-
+	if(is_on_fire())
+		extinguish_fire()
 	if(opacity)
 		updateVisibility(src)
 	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance

@@ -71,12 +71,12 @@
 					else
 						to_chat(user, "<span class='deadsay'>[use_He] [use_has] a pulse!</span>")
 
-	if(fire_stacks > 0)
+	if(fire_intensity > 0)
 		msg += "[use_He] is covered in flammable liquid!\n"
-	else if(fire_stacks < 0)
+	else if(fire_intensity < 0)
 		msg += "[use_He] [use_is] soaking wet.\n"
 
-	if(on_fire)
+	if(is_on_fire())
 		msg += "<span class='warning'>[use_He] [use_is] on fire!.</span>\n"
 
 	var/ssd_msg = species.get_ssd(src)

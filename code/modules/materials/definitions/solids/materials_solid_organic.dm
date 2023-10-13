@@ -17,6 +17,7 @@
 	door_icon_base = "plastic"
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	weight = MAT_VALUE_LIGHT
+	ignition_point = T0C+500
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = @'{"materials":3}'
 	conductive = 0
@@ -91,6 +92,7 @@
 	brute_armor = 1
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
+	accelerant_value = 0.1
 	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
 	stack_origin_tech = @'{"materials":1}'
 	door_icon_base = "wood"
@@ -133,6 +135,7 @@
 	construction_difficulty = MAT_VALUE_EASY_DIY
 	wall_flags              = PAINT_PAINTABLE | PAINT_STRIPABLE | WALL_HAS_EDGES
 	brute_armor             = 0.5
+	accelerant_value              = 0.1
 	ignition_point          = T0C + 232 //"the temperature at which book-paper catches fire, and burns." close enough
 	melting_point           = T0C + 232
 	conductive              = FALSE
@@ -158,6 +161,7 @@
 	door_icon_base = "wood"
 	ignition_point = T0C+232
 	melting_point = T0C+300
+	accelerant_value = 0.25
 	flags = MAT_FLAG_PADDING
 	brute_armor = 1
 	conductive = 0

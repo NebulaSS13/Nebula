@@ -351,8 +351,8 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		L.adjust_fire_stacks(rand(2,4))
-		if(L.fire_stacks >= 3)
-			L.IgniteMob()
+		if(L.fire_intensity >= 3)
+			L.ignite_fire()
 
 /obj/item/projectile/beam/pop
 	icon_state = "bluelaser"

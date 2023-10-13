@@ -397,7 +397,6 @@ default behaviour is:
 /mob/living/proc/restore_all_organs()
 	return
 
-
 /mob/living/carbon/revive()
 	var/obj/item/cuffs = get_equipped_item(slot_handcuffed_str)
 	if (cuffs)
@@ -411,8 +410,8 @@ default behaviour is:
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
-	ExtinguishMob()
-	fire_stacks = 0
+	extinguish_fire()
+	fire_intensity = 0
 
 /mob/living/proc/rejuvenate()
 
@@ -1015,17 +1014,17 @@ default behaviour is:
 	. = ..()
 	if(.)
 
-		if(fire_stacks >= target.fire_stacks + 3)
-			target.fire_stacks += 1
-			fire_stacks -= 1
-		else if(target.fire_stacks >= fire_stacks + 3)
-			fire_stacks += 1
-			target.fire_stacks -= 1
+		if(fire_intensity >= target.fire_intensity + 3)
+			target.fire_intensity += 1
+			fire_intensity -= 1
+		else if(target.fire_intensity >= fire_intensity + 3)
+			fire_intensity += 1
+			target.fire_intensity -= 1
 
-		if(on_fire && !target.on_fire)
-			target.IgniteMob()
-		else if(!on_fire && target.on_fire)
-			IgniteMob()
+		if(is_on_fire() && !target.is_on_fire())
+			target.ignite_fire()
+		else if(!is_on_fire() && target.is_on_fire())
+			ignite_fire()
 
 /mob/living/proc/jump_layer_shift()
 	jumping = TRUE
@@ -1293,6 +1292,9 @@ default behaviour is:
 /mob/living/proc/get_id_name(if_no_id = "Unknown")
 	return GetIdCard(exceptions = list(/obj/item/holder))?.registered_name || if_no_id
 
+/mob/living/is_on_fire()
+	return mob_is_on_fire
+
 /mob/living/get_default_temperature_threshold(threshold)
 	if(isSynthetic())
 		switch(threshold)
@@ -1311,3 +1313,4 @@ default behaviour is:
 			else
 				CRASH("synthetic get_default_temperature_threshold() called with invalid threshold value.")
 	return ..()
+

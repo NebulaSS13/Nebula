@@ -38,7 +38,7 @@
 	return P.atmosphere
 
 ///Returns the /area atom for the surface of the planetoid
-/obj/effect/overmap/visitable/sector/planetoid/proc/get_surface_area()
+/obj/effect/overmap/visitable/sector/planetoid/proc/get_planet_surface_area()
 	var/datum/planetoid_data/P = get_planetoid_data()
 	return P.surface_area
 

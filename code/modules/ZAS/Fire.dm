@@ -8,31 +8,23 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 //#define FIREDBG
 
-/turf/var/obj/fire/fire = null
+/turf
+	var/obj/fire/fire = null
 
 //Some legacy definitions so fires can be started.
 /atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return null
 
-/atom/movable/proc/is_burnable()
-	return FALSE
-
-/mob/is_burnable()
-	return simulated
-
 /turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	if(fire_protection > world.time-300)
 		return 0
+
 	if(locate(/obj/fire) in src)
 		return 1
 
 	var/datum/gas_mixture/air_contents = return_air()
 	if(!air_contents || exposed_temperature < FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 		return 0
-
-	var/obj/effect/fluid/F = locate() in src
-	if(F)
-		F.vaporize_fuel(air_contents)
 
 	var/igniting = 0
 	if(air_contents.check_combustibility())

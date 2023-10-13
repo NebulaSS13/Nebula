@@ -46,7 +46,7 @@
 		return
 
 	to_chat(target, SPAN_BLUE("You feel great!"))
-	target.ExtinguishMob()
+	target.extinguish_fire()
 
 /spell/contract/punish
 	name = "Punish Contractee"
@@ -63,5 +63,5 @@
 		return
 
 	to_chat(target, "<span class='danger'>You feel punished!</span>")
-	target.fire_stacks += 15
-	target.IgniteMob()
+	target.fire_intensity += 15
+	target.ignite_fire()
