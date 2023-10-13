@@ -117,6 +117,7 @@
 /// Handle reagents being modified
 /atom/proc/on_reagent_change()
 	SHOULD_CALL_PARENT(TRUE)
+	update_flammability()
 
 /**
 	Handle an atom bumping this atom

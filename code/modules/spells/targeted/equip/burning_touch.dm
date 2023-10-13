@@ -49,8 +49,8 @@
 	if(hand)
 		hand.take_external_damage(burn = 2 * burn_power)
 	if(burn_power > 5)
-		user.fire_stacks += 15
-		user.IgniteMob()
+		user.fire_intensity += 15
+		user.ignite_fire()
 		user.visible_message("<span class='danger'>\The [user] bursts into flames!</span>")
 		user.drop_from_inventory(src)
 	else

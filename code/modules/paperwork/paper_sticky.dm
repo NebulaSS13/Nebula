@@ -19,10 +19,11 @@
 	. = ..()
 	update_top_paper()
 
-/obj/item/sticky_pad/proc/update_matter()
+/obj/item/sticky_pad/update_matter()
 	matter = list(
 		/decl/material/solid/organic/paper = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
 	)
+	..()
 
 /obj/item/sticky_pad/create_matter()
 	update_matter()

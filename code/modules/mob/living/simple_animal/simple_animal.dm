@@ -522,18 +522,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 					B.set_scale(scale)
 					B.update_icon()
 
-/mob/living/simple_animal/handle_fire()
-	return
-
-/mob/living/simple_animal/update_fire()
-	return
-/mob/living/simple_animal/IgniteMob()
-	return
-/mob/living/simple_animal/ExtinguishMob()
-	return
-
-/mob/living/simple_animal/is_burnable()
-	return heat_damage_per_tick
+/mob/living/simple_animal/is_flammable()
+	return ..() && heat_damage_per_tick
 
 /mob/living/simple_animal/proc/adjustBleedTicks(var/amount)
 	if(!can_bleed)

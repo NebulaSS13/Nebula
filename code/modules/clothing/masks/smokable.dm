@@ -178,7 +178,7 @@
 		light(text)
 
 /obj/item/clothing/mask/smokable/attack(var/mob/living/M, var/mob/living/user, def_zone)
-	if(istype(M) && M.on_fire)
+	if(istype(M) && M.is_on_fire())
 		user.do_attack_animation(M)
 		light(SPAN_NOTICE("\The [user] coldly lights the \the [src] with the burning body of \the [M]."))
 		return 1
@@ -381,7 +381,7 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		return 1
 
-	if(!lit && istype(H) && H.on_fire)
+	if(!lit && istype(H) && H.is_on_fire())
 		user.do_attack_animation(H)
 		light(H, user)
 		return 1

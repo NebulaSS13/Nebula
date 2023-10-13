@@ -95,11 +95,19 @@
 /decl/material/liquid/water/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	..()
 	if(istype(M))
-		var/needed = M.fire_stacks * 10
-		if(amount > needed)
-			M.fire_stacks = 0
-			M.ExtinguishMob()
-			holder.remove_reagent(type, needed)
-		else
-			M.adjust_fire_stacks(-(amount / 10))
-			holder.remove_reagent(type, amount)
+		var/used = M.dampen_fire(amount)
+		if(used)
+			holder.remove_reagent(type, used)
+
+/mob/living/set_fire_intensity(var/amount)
+	adjust_fire_stacks(amount-fire_intensity)
+
+/mob/living/dampen_fire(var/amount)
+	if(!fire_intensity)
+		return 0
+	var/needed = fire_intensity * mob_size
+	if(amount > needed)
+		extinguish_fire()
+		return needed
+	set_fire_intensity(fire_intensity-(amount/10))
+	return amount

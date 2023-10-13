@@ -26,6 +26,15 @@
 	if(istype(T))
 		T.unwet_floor(FALSE)
 
+/obj/effect/fluid/is_flammable()
+	return fire_intensity != FIRE_INTENSITY_WILL_NOT_BURN
+
+/obj/effect/fluid/get_fire_graphic(var/intensity)
+	var/static/obj/effect/fire/turf_large/_fire_object_fluid
+	if(!_fire_object_fluid)
+		_fire_object_fluid = new
+	return _fire_object_fluid
+
 /obj/effect/fluid/airlock_crush()
 	qdel(src)
 
@@ -40,6 +49,9 @@
 		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
 		if(primary_reagent)
 			last_slipperiness = primary_reagent.slipperiness
+	else
+		qdel(src)
+		return
 
 	ADD_ACTIVE_FLUID(src)
 	for(var/checkdir in global.cardinal)

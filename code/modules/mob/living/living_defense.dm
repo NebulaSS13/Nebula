@@ -224,62 +224,17 @@
 
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
-	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
+	src.visible_message(SPAN_DANGER("\The [user] has [attack_message] \the [src]!"))
 	adjustBruteLoss(damage)
 	user.do_attack_animation(src)
 	return 1
 
-/mob/living/proc/can_ignite()
-	return fire_stacks > 0 && !on_fire
-
-/mob/living/proc/IgniteMob()
-	if(can_ignite())
-		on_fire = TRUE
-		set_light(4, l_color = COLOR_ORANGE)
-		update_fire()
-
-/mob/living/proc/ExtinguishMob()
-	if(on_fire)
-		on_fire = FALSE
-		fire_stacks = 0
-		set_light(0)
-		update_fire()
-
-/mob/living/proc/update_fire()
-	return
-
-/mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
-	fire_stacks = clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
-
-/mob/living/proc/handle_fire()
-	if(fire_stacks < 0)
-		fire_stacks = min(0, ++fire_stacks) //If we've doused ourselves in water to avoid fire, dry off slowly
-
-	if(!on_fire)
-		return 1
-	else if(fire_stacks <= 0)
-		ExtinguishMob() //Fire's been put out.
-		return 1
-
-	fire_stacks = max(0, fire_stacks - 0.2) //I guess the fire runs out of fuel eventually
-
-	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
-	if(G.get_by_flag(XGM_GAS_OXIDIZER) < 1)
-		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
-		return 1
-
-	var/turf/location = get_turf(src)
-	location.hotspot_expose(fire_burn_temperature(), 50, 1)
-
-/mob/living/proc/increase_fire_stacks(exposed_temperature)
-	if(fire_stacks <= 4 || fire_burn_temperature() < exposed_temperature)
-		adjust_fire_stacks(2)
-
 /mob/living/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	//once our fire_burn_temperature has reached the temperature of the fire that's giving fire_stacks, stop adding them.
 	//allow fire_stacks to go up to 4 for fires cooler than 700 K, since are being immersed in flame after all.
-	increase_fire_stacks(exposed_temperature)
-	IgniteMob()
+	if(fire_intensity <= 4 || fire_burn_temperature() < exposed_temperature)
+		adjust_fire_stacks(2)
+	ignite_fire()
 	return ..()
 
 /mob/living/proc/get_cold_protection()
@@ -290,12 +245,12 @@
 
 //Finds the effective temperature that the mob is burning at.
 /mob/living/proc/fire_burn_temperature()
-	if (fire_stacks <= 0)
+	if (fire_intensity <= 0)
 		return 0
 
 	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
 	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame.
-	return max(2.25*round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2), 700)
+	return max(2.25*round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_intensity/FIRE_MAX_FIRESUIT_STACKS)**2), 700)
 
 /mob/living/proc/reagent_permeability()
 	return 1
