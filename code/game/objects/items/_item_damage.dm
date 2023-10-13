@@ -62,9 +62,6 @@
 /obj/item/proc/explosion_severity_damage_multiplier()
 	return ceil(get_max_health() / 3)
 
-/obj/item/is_burnable()
-	return simulated
-
 /obj/item/proc/get_volume_by_throwforce_and_or_w_class()
 	var/thrown_force = get_thrown_attack_force()
 	if(thrown_force && w_class)

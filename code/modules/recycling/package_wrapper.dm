@@ -40,6 +40,18 @@
 	var/tmp/currently_wrapping = FALSE
 	/// The type of wrapped item that will be produced
 	var/tmp/wrapped_result_type = /obj/item/parcel
+	/// Our tuuuuube.
+	var/obj/item/c_tube/tube = /obj/item/c_tube
+
+/obj/item/stack/package_wrap/Initialize()
+	. = ..()
+	if(ispath(tube))
+		tube = new tube(src)
+
+/obj/item/stack/package_wrap/Destroy()
+	if(istype(tube))
+		QDEL_NULL(tube)
+	return ..()
 
 /obj/item/stack/package_wrap/twenty_five
 	amount = 25
@@ -115,24 +127,13 @@
 
 /obj/item/stack/package_wrap/on_used_last()
 	var/mob/M = loc
+	var/our_tube = tube
+	tube.forceMove(get_turf(loc))
+	tube = null // to avoid Destroy() eating it
 	. = ..()
 	//Drop the cardboard tube after we're emptied out
-	var/obj/item/c_tube/tube = new(get_turf(M))
-	if(istype(M))
-		M.put_in_active_hand(tube)
-
-/obj/item/stack/package_wrap/create_matter()
-	. = ..()
-	//Cardboard for the tube, isn't in the matter_per_piece list, has to be added after that's been initialized
-	LAZYSET(matter, /decl/material/solid/organic/cardboard, MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER)
-
-/obj/item/stack/package_wrap/update_matter()
-	//Keep track of the cardboard amount to prevent it creating infinite cardboard matter each times the stack changes
-	var/cardboard_amount = LAZYACCESS(matter, /decl/material/solid/organic/cardboard)
-	matter = list()
-	for(var/mat in matter_per_piece)
-		matter[mat] = (matter_per_piece[mat] * amount)
-	matter[/decl/material/solid/organic/cardboard] = cardboard_amount
+	if(our_tube && istype(M))
+		M.put_in_active_hand(our_tube)
 
 ///Types that the wrapper cannot wrap, ever
 /obj/item/stack/package_wrap/proc/get_blacklist()
@@ -173,6 +174,7 @@
 	charge_costs      = list(1)
 	stack_merge_type  = /obj/item/stack/package_wrap
 	is_spawnable_type = FALSE
+	tube              = null
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Cardboard Tube
@@ -185,7 +187,7 @@
 	desc        = "A tube... of cardboard."
 	icon        = 'icons/obj/items/gift_wrapper.dmi'
 	icon_state  = "c_tube"
-	w_class     = ITEM_SIZE_NORMAL
+	w_class     = ITEM_SIZE_TINY
 	throw_speed = 4
 	throw_range = 5
 	material    = /decl/material/solid/organic/cardboard

@@ -204,7 +204,6 @@
 	icon = 'icons/clothing/head/cakehat.dmi'
 	body_parts_covered = SLOT_HEAD
 	item_flags = null
-	VAR_PRIVATE/_on_fire = FALSE
 
 /obj/item/clothing/head/cakehat/equipped(mob/user, slot)
 	. = ..()

@@ -277,7 +277,7 @@
 	update_matter()
 
 // Nuke and rebuild matter from our matter_per_piece list to keep all our values in line.
-/obj/item/stack/proc/update_matter()
+/obj/item/stack/update_matter()
 	if(length(matter_per_piece))
 		matter = list()
 		for(var/mat in matter_per_piece)
@@ -285,6 +285,7 @@
 	else
 		matter_per_piece = null
 		matter = null
+	..()
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))

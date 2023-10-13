@@ -18,7 +18,7 @@
 	var/datum/gas_mixture/environment = target.return_air()
 	var/pressure = environment?.return_pressure()
 	for(var/atom/movable/AM as anything in target.get_contained_external_atoms())
-		if(!AM.is_burnable() || AM.immune_to_floor_hazards())
+		if(!AM.is_flammable() || AM.immune_to_floor_hazards())
 			continue
 		. = null
 		if(isliving(AM))

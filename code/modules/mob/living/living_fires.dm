@@ -27,7 +27,7 @@
 		set_light(0)
 		update_fire()
 
-/mob/living/proc/update_fire(var/update_icons=1)
+/mob/living/proc/update_fire(var/update_icons = TRUE)
 	if(is_on_fire())
 		var/decl/bodytype/mob_bodytype = get_bodytype()
 		var/image/standing = overlay_image(mob_bodytype?.get_ignited_icon(src) || 'icons/mob/OnFire.dmi', mob_bodytype?.get_ignited_icon_state(src) || "Generic_mob_burning", RESET_COLOR)

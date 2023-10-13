@@ -12,7 +12,7 @@
 	material = /decl/material/solid/metal/steel
 	_base_attack_force = 3
 
-	var/fire_sound
+	var/fire_sound = 'sound/effects/extinguish.ogg' // how ironic...
 	/// Whether we have an igniter secured (screwdrivered) to us or not
 	var/secured = FALSE
 	var/throw_amount = 100
@@ -293,10 +293,9 @@
 	target.add_to_reagents(/decl/material/liquid/fuel, air_transfer.get_by_flag(XGM_GAS_FUEL) * REAGENT_UNITS_PER_GAS_MOLE * 2)
 	air_transfer.remove_by_flag(XGM_GAS_FUEL, 0)
 	target.assume_air(air_transfer)
-	target.create_fire(tank.air_contents.temperature * 2 + 400)
 	target.hotspot_expose(1000, 100)
-	for(var/mob/living/M in target)
-		M.ignite_fire()
+	for(var/atom/A in target)
+		A.ignite_fire()
 
 // slightly weird looking initialize cuz it has to do some stuff first
 /obj/item/flamethrower/full/Initialize()

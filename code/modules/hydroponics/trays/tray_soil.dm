@@ -151,7 +151,7 @@
 	is_spawnable_type = FALSE
 	var/list/connected_zlevels //cached for checking if we someone is obseving us so we should process
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/is_burnable()
+/obj/machinery/portable_atmospherics/hydroponics/soil/is_flammable()
 	return ..() && seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize(mapload,var/datum/seed/newseed, var/start_mature)

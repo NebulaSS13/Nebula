@@ -286,7 +286,7 @@
 
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
-	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
+	src.visible_message(SPAN_DANGER("\The [user] has [attack_message] \the [src]!"))
 	take_damage(damage)
 	user.do_attack_animation(src)
 	return 1

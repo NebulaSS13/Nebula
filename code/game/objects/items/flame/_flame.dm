@@ -213,10 +213,13 @@
 		return PROCESS_KILL
 	update_icon()
 	if(loc)
+		if(istype(loc, /obj/structure/wall_sconce))
+			loc.update_icon()
 		loc.ignite_fire()
-		var/turf/my_turf = get_turf(src)
-		if(my_turf)
-			my_turf.hotspot_expose(get_heat(), w_class)
+
+	var/turf/location = get_turf(src)
+	if(location)
+		location.hotspot_expose(get_heat(), w_class)
 
 /obj/item/flame/dropped(var/mob/user)
 	//If dropped, put ourselves out

@@ -3,6 +3,7 @@
 	see_invisible = SEE_INVISIBLE_LIVING
 	transform_animate_time = ANIM_LYING_TIME
 	abstract_type = /mob/living
+	fire_intensity = 0
 
 	//Health and life related vars
 	max_health = 100 //Maximum health that should be possible.
@@ -28,9 +29,6 @@
 
 	var/mob/living/cameraFollow = null
 	var/list/datum/action/actions = list()
-
-	VAR_PRIVATE/_on_fire = 0 //The "Are we on fire?" var
-	VAR_PRIVATE/_fire_intensity
 
 	var/ticks_since_last_successful_breath = 0 //if we failed to breathe last tick
 	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.

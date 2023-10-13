@@ -1109,6 +1109,7 @@ default behaviour is:
 			adjust_fire_intensity(1)
 			target.adjust_fire_intensity(-1)
 
+
 		if(is_on_fire() && !target.is_on_fire())
 			target.ignite_fire()
 		else if(!is_on_fire() && target.is_on_fire())

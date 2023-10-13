@@ -75,6 +75,8 @@
 				T.hotspot_expose(700, 5)
 				for(var/mob/living/M in T.contents)
 					M.ignite_fire()
+			if(!rag || QDELETED(src) || !HasBelow(T.z) || !T.is_open())
+				break
 			T = GetBelow(T)
 		rag = null
 
@@ -148,7 +150,7 @@
 	. = ..()
 	underlays.Cut()
 	if(rag)
-		var/underlay_image = image(icon='icons/obj/drinks.dmi', icon_state=rag.is_on_fire()? "[rag_underlay]_lit" : rag_underlay)
+		var/underlay_image = image(icon='icons/obj/drinks.dmi', icon_state=rag.is_on_fire() ? "[rag_underlay]_lit" : rag_underlay)
 		underlays += underlay_image
 		set_light(rag.light_range, 0.1, rag.light_color)
 	else

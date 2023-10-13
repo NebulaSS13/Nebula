@@ -88,8 +88,11 @@
 	LAZYCLEARLIST(priority_overlays)
 	LAZYCLEARLIST(climbers)
 	QDEL_NULL(light)
-	if(simulated && opacity)
-		updateVisibility(src)
+	if(simulated)
+		if(is_on_fire())
+			extinguish_fire()
+		if(opacity)
+			updateVisibility(src)
 	if(atom_codex_ref && atom_codex_ref != TRUE) // may be null, TRUE or a datum instance
 		QDEL_NULL(atom_codex_ref)
 	var/atom/oldloc = loc

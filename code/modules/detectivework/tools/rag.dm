@@ -11,8 +11,6 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material = /decl/material/solid/organic/cloth
 	material_alteration = MAT_FLAG_ALTERATION_NAME
-
-	VAR_PRIVATE/_on_fire = 0
 	VAR_PRIVATE/burn_time = 20 //if the rag burns for too long it turns to ashes
 
 /obj/item/chems/glass/rag/get_edible_material_amount(mob/eater)
@@ -71,7 +69,7 @@
 
 /obj/item/chems/glass/rag/on_update_icon()
 	. = ..()
-	icon_state = "rag[is_on_fire()? "lit" : ""]"
+	icon_state = "rag[is_on_fire() ? "lit" : ""]"
 	var/obj/item/chems/drinks/bottle/B = loc
 	if(istype(B))
 		B.update_icon()
