@@ -12,7 +12,6 @@
 	throw_range                       = 10
 	throwforce                        = 3
 	attack_cooldown                   = DEFAULT_QUICK_COOLDOWN
-	unacidable                        = TRUE //plastic
 	material                          = /decl/material/solid/plastic
 	volume                            = 250
 	amount_per_transfer_from_this     = 10
@@ -22,7 +21,9 @@
 	var/tmp/particle_move_delay       = 10                          ///lower is faster
 	var/tmp/sound_spray               = 'sound/effects/spray2.ogg'  ///Sound played when spraying
 	var/safety                        = FALSE                       ///Whether the safety is on
-	
+
+/obj/item/chems/spray/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	return FALSE // maybe reconsider this
 
 /obj/item/chems/spray/Initialize()
 	. = ..()
@@ -70,7 +71,7 @@
 
 /obj/item/chems/spray/proc/create_chempuff(var/atom/movable/target, var/particle_amount)
 	set waitfor = FALSE
-	
+
 	var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
 	D.create_reagents(amount_per_transfer_from_this)
 	if(QDELETED(src))

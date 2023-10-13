@@ -3,7 +3,7 @@
 	name = "gem-encrusted voidsuit helmet"
 	desc = "A bizarre gem-encrusted helmet that radiates magical energies."
 	icon = 'icons/clothing/spacesuit/void/wizard/helmet.dmi'
-	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
+	material = /decl/material/solid/gemstone/crystal
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
@@ -21,7 +21,7 @@
 	desc = "A bizarre gem-encrusted suit that radiates magical energies."
 	icon = 'icons/clothing/spacesuit/void/wizard/suit.dmi'
 	w_class = ITEM_SIZE_LARGE //normally voidsuits are bulky but this one is magic I suppose
-	unacidable = 1
+	material = /decl/material/solid/gemstone/crystal
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
@@ -53,7 +53,7 @@
 	gender = PLURAL
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
-	unacidable = 1
+	material = /decl/material/solid/gemstone/crystal
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,

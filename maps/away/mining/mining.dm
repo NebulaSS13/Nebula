@@ -208,7 +208,7 @@
 	icon_state = "totem"
 	density = TRUE
 	anchored = TRUE
-	unacidable = 1
+	material = /decl/material/solid/metal/aliumium
 	var/number
 
 /obj/structure/totem/Initialize()

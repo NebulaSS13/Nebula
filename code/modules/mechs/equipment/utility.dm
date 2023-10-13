@@ -445,15 +445,11 @@
 
 	if (ismob(target))
 		var/mob/tmob = target
-		if (tmob.unacidable)
-			to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
-			return
-		else
-			to_chat(tmob, FONT_HUGE(SPAN_DANGER("You're about to get drilled - dodge!")))
+		to_chat(tmob, FONT_HUGE(SPAN_DANGER("You're about to get drilled - dodge!")))
 
 	else if (isobj(target))
 		var/obj/tobj = target
-		if (tobj.unacidable)
+		if (!tobj.solvent_can_melt()) // why the hell does this use an acid check
 			to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
 			return
 

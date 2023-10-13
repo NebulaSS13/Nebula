@@ -6,9 +6,9 @@
 	w_class = ITEM_SIZE_NORMAL
 	volume = CARTRIDGE_VOLUME_LARGE
 	amount_per_transfer_from_this = 50
+	material = /decl/material/solid/stone/ceramic
 	// Large, but inaccurate. Use a chem dispenser or beaker for accuracy.
 	possible_transfer_amounts = @"[50,100]"
-	unacidable = 1
 
 /obj/item/chems/chem_disp_cartridge/initialize_reagents(populate = TRUE)
 	. = ..()

@@ -4,7 +4,6 @@
 	anchored = TRUE
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
-	unacidable = 1
 	layer = RUNE_LAYER
 
 	var/blood
@@ -269,7 +268,7 @@
 	color = "#ff0000"
 	anchored = TRUE
 	density = TRUE
-	unacidable = 1
+
 	var/obj/effect/rune/wall/rune
 	var/health
 	var/max_health = 200

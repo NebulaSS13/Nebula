@@ -5,7 +5,6 @@
 	simulated     = FALSE
 	density       = FALSE
 	anchored      = TRUE
-	unacidable    = TRUE
 	abstract_type = /obj/abstract
 	invisibility  = INVISIBILITY_ABSTRACT
 

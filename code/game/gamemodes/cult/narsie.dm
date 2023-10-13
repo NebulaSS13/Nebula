@@ -16,7 +16,6 @@ var/global/list/narsie_list = list()
 	icon = 'icons/obj/narsie.dmi'
 	icon_state = "narsie"
 	anchored = TRUE
-	unacidable = TRUE
 	pixel_x = -236
 	pixel_y = -256
 	plane = ABOVE_LIGHTING_PLANE

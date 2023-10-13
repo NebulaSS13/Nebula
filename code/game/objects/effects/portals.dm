@@ -5,7 +5,6 @@
 	icon_state = "portal"
 	density = TRUE
 	anchored = TRUE
-	unacidable = TRUE // Can't destroy energy portals.
 	var/obj/item/target = null
 	var/dangerous = FALSE
 	var/failchance = 0

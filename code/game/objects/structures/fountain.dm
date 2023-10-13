@@ -7,7 +7,6 @@
 	icon_state = "fountain"
 	density    = TRUE
 	anchored   = TRUE
-	unacidable = TRUE
 	pixel_x    = -16
 	var/used   = FALSE
 	var/increase_age_prob = (100 / 6)

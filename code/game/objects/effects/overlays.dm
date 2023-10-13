@@ -1,6 +1,5 @@
 /obj/effect/overlay
 	name = "overlay"
-	unacidable = 1
 
 /obj/effect/overlay/singularity_pull()
 	return

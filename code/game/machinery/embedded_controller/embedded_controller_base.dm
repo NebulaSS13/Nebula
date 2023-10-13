@@ -50,7 +50,6 @@
 	icon_state              = "airlock_control_off"
 	power_channel           = ENVIRON
 	density                 = FALSE
-	unacidable              = TRUE
 	obj_flags               = OBJ_FLAG_MOVES_UNSUPPORTED
 	construct_state         = /decl/machine_construction/wall_frame/panel_closed
 	frame_type              = /obj/item/frame/button/airlock_controller

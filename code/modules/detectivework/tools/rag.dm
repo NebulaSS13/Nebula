@@ -10,7 +10,6 @@
 	can_be_placed_into = null
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	unacidable = 0
 	material = /decl/material/solid/cloth
 
 	var/on_fire = 0

@@ -8,7 +8,7 @@
 	volume = 100
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
 	force = 5
-
+	material = /decl/material/solid/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
@@ -20,9 +20,7 @@
 
 /obj/item/chems/drinks/bottle/Initialize()
 	. = ..()
-	if(isGlass)
-		unacidable = TRUE
-	else
+	if(material?.type != /decl/material/solid/glass)
 		verbs -= .verb/spin_bottle
 
 /obj/item/chems/drinks/bottle/Destroy()

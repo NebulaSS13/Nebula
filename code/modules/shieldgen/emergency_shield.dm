@@ -1,12 +1,11 @@
 /obj/machinery/shield
-	name = "Emergency energy shield"
+	name = "emergency energy shield"
 	desc = "An energy shield used to contain hull breaches."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield-old"
 	density = TRUE
 	opacity = FALSE
 	anchored = TRUE
-	unacidable = 1
 	var/const/max_health = 200
 	var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
 	var/shield_generate_power = 7500	//how much power we use when regenerating

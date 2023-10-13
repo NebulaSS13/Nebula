@@ -60,7 +60,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 //mostly for convenience
 /obj/proc/get_material_type()
 	var/decl/material/mat = get_material()
-	. = mat && mat.type
+	. = mat?.type
 
 // Material definition and procs follow.
 /decl/material
@@ -561,22 +561,18 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affectedbook.dat = null
 				to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
 
-	if(solvent_power >= MAT_SOLVENT_STRONG && !O.unacidable && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
-		var/obj/effect/decal/cleanable/molten_item/I = new(O.loc)
-		I.visible_message(SPAN_DANGER("\The [O] dissolves!"))
-		I.desc = "It looks like it was \a [O] some time ago."
-		qdel(O)
+	if(solvent_power >= MAT_SOLVENT_STRONG && O.solvent_can_melt(solvent_power) && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
+		O.visible_message(SPAN_DANGER("\The [O] dissolves!"))
+		O.melt()
 		holder?.remove_reagent(type, solvent_melt_dose)
-
-	if(dirtiness <= DIRTINESS_STERILE)
-		O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
-		O.was_bloodied = null
-
-	if(dirtiness <= DIRTINESS_CLEAN)
-		O.clean_blood()
-
-	if(defoliant && istype(O, /obj/effect/vine))
+	else if(defoliant && istype(O, /obj/effect/vine))
 		qdel(O)
+	else
+		if(dirtiness <= DIRTINESS_STERILE)
+			O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
+			O.was_bloodied = null
+		if(dirtiness <= DIRTINESS_CLEAN)
+			O.clean_blood()
 
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
@@ -745,34 +741,33 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				return
 		M.clean_blood()
 
-	if(solvent_power >= MAT_SOLVENT_STRONG && removed >= solvent_melt_dose)
+	if(solvent_power > MAT_SOLVENT_NONE && removed >= solvent_melt_dose && M.acid_act(min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), solvent_melt_dose, solvent_power))
+		holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			for(var/slot in global.standard_headgear_slots)
-				var/obj/item/thing = H.get_equipped_item(slot)
-				if(!istype(thing))
-					continue
-				if(thing.unacidable || !H.try_unequip(thing))
-					to_chat(H, SPAN_NOTICE("Your [thing] protects you from the acid."))
-					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
-					return
-				to_chat(H, SPAN_DANGER("Your [thing] dissolves!"))
-				qdel(thing)
-				removed -= solvent_melt_dose
-				if(removed <= 0)
-					return
+/mob/living/proc/acid_act(var/severity, var/amount_per_item, var/solvent_power)
 
-			if(!H.unacidable)
-				var/screamed
-				for(var/obj/item/organ/external/affecting in H.get_external_organs())
-					if(!screamed && affecting.can_feel_pain())
-						screamed = TRUE
-						H.emote("scream")
-					affecting.status |= ORGAN_DISFIGURED
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/thing = get_equipped_item(slot)
+		if(!istype(thing))
+			continue
+		if(!thing.solvent_can_melt(solvent_power) || !try_unequip(thing))
+			to_chat(src, SPAN_NOTICE("Your [thing] protects you from the solvent."))
+			return TRUE
+		to_chat(src, SPAN_DANGER("Your [thing] dissolves!"))
+		qdel(thing)
+		severity -= amount_per_item
+		if(severity <= 0)
+			return TRUE
 
-		if(!M.unacidable)
-			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DISMEMBER_METHOD_ACID)
+	// TODO move this to a contact var or something.
+	if(solvent_power >= MAT_SOLVENT_STRONG)
+		var/screamed
+		for(var/obj/item/organ/external/affecting in get_external_organs())
+			if(!screamed && affecting.can_feel_pain())
+				screamed = TRUE
+				emote("scream")
+			affecting.status |= ORGAN_DISFIGURED
+		take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)
 
 /decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)

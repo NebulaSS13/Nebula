@@ -507,3 +507,6 @@ Class Procs:
 // Make sure that mapped subtypes get the right codex entry.
 /obj/machinery/get_codex_value()
 	return base_type || ..()
+
+/obj/machinery/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	return FALSE

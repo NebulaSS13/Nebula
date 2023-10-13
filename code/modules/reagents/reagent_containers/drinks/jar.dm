@@ -8,7 +8,7 @@
 	icon_state = "jar"
 	item_state = "beaker"
 	center_of_mass = @"{'x':15,'y':8}"
-	unacidable = 1
+	material = /decl/material/solid/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
