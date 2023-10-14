@@ -272,10 +272,8 @@
 			adding += inv_box
 
 	if(has_hidden_gear)
-		var/obj/screen/using = new /obj/screen()
-		using.SetName("toggle")
+		var/obj/screen/using = new /obj/screen/toggle()
 		using.icon = ui_style
-		using.icon_state = "other"
 		using.screen_loc = ui_inventory
 		using.color = ui_color
 		using.alpha = ui_alpha
@@ -294,10 +292,8 @@
 	var/obj/screen/using
 
 	// Swap hand and quick equip screen elems.
-	using = new /obj/screen()
-	using.SetName("equip")
+	using = new /obj/screen/equip()
 	using.icon = ui_style
-	using.icon_state = "act_equip"
 	using.color = ui_color
 	using.alpha = ui_alpha
 	src.adding += using

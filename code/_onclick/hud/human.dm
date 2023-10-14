@@ -28,31 +28,23 @@
 
 	if(hud_data.has_m_intent)
 		using = new /obj/screen/movement()
-		using.SetName("movement method")
 		using.icon = ui_style
 		using.icon_state = mymob.move_intent.hud_icon_state
-		using.screen_loc = ui_movi
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.adding += using
 		move_intent = using
 
 	if(hud_data.has_drop)
-		using = new /obj/screen()
-		using.SetName("drop")
+		using = new /obj/screen/drop()
 		using.icon = ui_style
-		using.icon_state = "act_drop"
-		using.screen_loc = ui_drop_throw
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
 
 	if(hud_data.has_resist)
-		using = new /obj/screen()
-		using.SetName("resist")
+		using = new /obj/screen/resist()
 		using.icon = ui_style
-		using.icon_state = "act_resist"
-		using.screen_loc = ui_pull_resist
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
@@ -65,22 +57,16 @@
 	hud_elements |= mymob.maneuver_icon
 
 	if(hud_data.has_throw)
-		mymob.throw_icon = new /obj/screen()
+		mymob.throw_icon = new /obj/screen/throw_toggle()
 		mymob.throw_icon.icon = ui_style
-		mymob.throw_icon.icon_state = "act_throw_off"
-		mymob.throw_icon.SetName("throw")
-		mymob.throw_icon.screen_loc = ui_drop_throw
 		mymob.throw_icon.color = ui_color
 		mymob.throw_icon.alpha = ui_alpha
 		src.hotkeybuttons += mymob.throw_icon
 		hud_elements |= mymob.throw_icon
 
 	if(hud_data.has_internals)
-		mymob.internals = new /obj/screen()
+		mymob.internals = new /obj/screen/internals()
 		mymob.internals.icon = ui_style
-		mymob.internals.icon_state = "internal0"
-		mymob.internals.SetName("internal")
-		mymob.internals.screen_loc = ui_internal
 		hud_elements |= mymob.internals
 
 	if(hud_data.has_warnings)
@@ -153,11 +139,8 @@
 		hud_elements |= mymob.hydration_icon
 
 	if(hud_data.has_up_hint)
-		mymob.up_hint = new /obj/screen()
+		mymob.up_hint = new /obj/screen/up_hint()
 		mymob.up_hint.icon = ui_style
-		mymob.up_hint.icon_state = "uphint0"
-		mymob.up_hint.SetName("up hint")
-		mymob.up_hint.screen_loc = ui_up_hint
 		hud_elements |= mymob.up_hint
 
 	mymob.pain = new /obj/screen/fullscreen/pain( null )
@@ -294,7 +277,3 @@
 			to_chat(usr, SPAN_NOTICE("You are breathing easy."))
 		else
 			to_chat(usr, SPAN_DANGER("You cannot breathe!"))
-
-/obj/screen/movement/Click(var/location, var/control, var/params)
-	if(istype(usr))
-		usr.set_next_usable_move_intent()

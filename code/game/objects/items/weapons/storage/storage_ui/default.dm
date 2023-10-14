@@ -51,8 +51,6 @@
 
 	closer = new /obj/screen/close(  )
 	closer.master = storage
-	closer.icon_state = "x"
-	closer.layer = HUD_BASE_LAYER
 
 /datum/storage_ui/default/Destroy()
 	close_all()

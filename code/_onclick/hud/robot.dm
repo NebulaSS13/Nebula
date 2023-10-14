@@ -29,43 +29,19 @@ var/global/obj/screen/robot_inventory
 	var/obj/screen/using
 
 	//Radio
-	using = new /obj/screen()
-	using.SetName("radio")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "radio"
-	using.screen_loc = ui_movi
+	using = new /obj/screen/robot_radio()
 	adding += using
 
 	//Module select
-
-	using = new /obj/screen()
-	using.SetName("module1")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "inv1"
-	using.screen_loc = ui_inv1
+	using = new /obj/screen/robot_module_one()
 	adding += using
 	R.inv1 = using
-
-	using = new /obj/screen()
-	using.SetName("module2")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "inv2"
-	using.screen_loc = ui_inv2
+	using = new /obj/screen/robot_module_two()
 	adding += using
 	R.inv2 = using
-
-	using = new /obj/screen()
-	using.SetName("module3")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "inv3"
-	using.screen_loc = ui_inv3
+	using = new /obj/screen/robot_module_three()
 	adding += using
 	R.inv3 = using
-
 	//End of module select
 
 	// Drop UI
@@ -73,12 +49,8 @@ var/global/obj/screen/robot_inventory
 	adding += R.ui_drop_grab
 
 	//Intent
-	using = new /obj/screen()
-	using.SetName("act_intent")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
+	using = new /obj/screen/robot_intent()
 	using.icon_state = R.a_intent
-	using.screen_loc = ui_acti
 	adding += using
 	action_intent = using
 
@@ -88,42 +60,23 @@ var/global/obj/screen/robot_inventory
 	R.cells.icon_state = "charge-empty"
 	R.cells.SetName("cell")
 	R.cells.screen_loc = ui_toxin
-
 	//Health
 	R.healths = new /obj/screen()
 	R.healths.icon = 'icons/mob/screen1_robot.dmi'
 	R.healths.icon_state = "health0"
 	R.healths.SetName("health")
 	R.healths.screen_loc = ui_borg_health
-
 	//Installed Module
-	R.hands = new /obj/screen()
-	R.hands.icon = 'icons/mob/screen1_robot.dmi'
-	R.hands.icon_state = "nomod"
-	R.hands.SetName("module")
+	R.hands = new /obj/screen/robot_module_select()
 	R.hands.screen_loc = ui_borg_module
-
 	//Module Panel
-	using = new /obj/screen()
-	using.SetName("panel")
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "panel"
-	using.screen_loc = ui_borg_panel
+	using = new /obj/screen/robot_panel()
 	adding += using
-
 	//Store
-	R.throw_icon = new /obj/screen()
-	R.throw_icon.icon = 'icons/mob/screen1_robot.dmi'
-	R.throw_icon.icon_state = "store"
-	R.throw_icon.SetName("store")
+	R.throw_icon = new /obj/screen/robot_store()
 	R.throw_icon.screen_loc = ui_borg_store
-
 	//Inventory
-	robot_inventory = new /obj/screen()
-	robot_inventory.SetName("inventory")
-	robot_inventory.icon = 'icons/mob/screen1_robot.dmi'
-	robot_inventory.icon_state = "inventory"
-	robot_inventory.screen_loc = ui_borg_inventory
+	robot_inventory = new /obj/screen/robot_inventory()
 
 	//Temp
 	R.bodytemp = new /obj/screen()
@@ -131,7 +84,6 @@ var/global/obj/screen/robot_inventory
 	R.bodytemp.icon_state = "temp0"
 	R.bodytemp.SetName("body temperature")
 	R.bodytemp.screen_loc = ui_temp
-
 
 	R.oxygen = new /obj/screen()
 	R.oxygen.icon = 'icons/mob/screen1_robot.dmi'
@@ -145,11 +97,8 @@ var/global/obj/screen/robot_inventory
 	R.fire.SetName("fire")
 	R.fire.screen_loc = ui_fire
 
-	R.up_hint = new /obj/screen()
+	R.up_hint = new /obj/screen/up_hint()
 	R.up_hint.icon = 'icons/mob/screen1_robot.dmi'
-	R.up_hint.icon_state = "uphint0"
-	R.up_hint.SetName("up hint")
-	R.up_hint.screen_loc = ui_up_hint
 
 	R.zone_sel = new
 	R.zone_sel.icon = 'icons/mob/screen1_robot.dmi'
@@ -183,8 +132,6 @@ var/global/obj/screen/robot_inventory
 	if(R.shown_robot_modules)
 		if(R.active_storage)
 			R.active_storage.close(R) //Closes the inventory ui.
-		//Modules display is shown
-		//R.client.screen += robot_inventory	//"store" icon
 
 		if(!R.module)
 			to_chat(usr, "<span class='danger'>No module selected</span>")

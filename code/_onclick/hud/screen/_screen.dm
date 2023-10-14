@@ -1,3 +1,17 @@
+/*
+	Screen objects are only used for the hud and should not appear anywhere "in-game".
+	They are used with the client/screen list and the screen_loc var.
+	For more information, see the byond documentation on the screen_loc and screen vars.
+*/
+/obj/screen
+	name             = ""
+	icon             = 'icons/mob/screen1.dmi'
+	plane            = HUD_PLANE
+	layer            = HUD_BASE_LAYER
+	appearance_flags = NO_CLIENT_COLOR
+	var/obj/master   = null  // A reference to the object in the slot. Grabs or items, generally.
+	var/globalscreen = FALSE // Global screens are not qdeled when the holding mob is destroyed.
+
 /obj/screen/proc/handle_click(mob/user, params)
 	if(!user)
 		return TRUE
@@ -82,3 +96,13 @@
 	if(ismob(usr) && usr.client && usr.canClick() && !usr.incapacitated())
 		return handle_click(usr, params)
 	return FALSE
+
+/obj/screen/receive_mouse_drop(atom/dropping, mob/user)
+	return TRUE
+
+/obj/screen/check_mousedrop_interactivity(var/mob/user)
+	return user.client && (src in user.client.screen)
+
+/obj/screen/Destroy()
+	master = null
+	return ..()
