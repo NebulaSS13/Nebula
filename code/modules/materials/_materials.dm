@@ -577,7 +577,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
-	if(fuel_value && amount && istype(M))
+	if(fuel_value > FUEL_VALUE_NONE && amount && istype(M))
 		M.fire_stacks += FLOOR((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
 #undef FLAMMABLE_LIQUID_DIVISOR
 
@@ -805,3 +805,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			total_interacted_units -= interacted_units
 		if(total_interacted_units <= 0)
 			return
+
+/decl/material/proc/add_burn_product(var/datum/gas_mixture/environment, var/amount)
+	if(!environment || amount <= 0 || !burn_product)
+		return
+	environment.adjust_gas(burn_product, amount)

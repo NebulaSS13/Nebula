@@ -43,6 +43,7 @@
 #include "code\__defines\dna.dm"
 #include "code\__defines\dview.dm"
 #include "code\__defines\feedback.dm"
+#include "code\__defines\fires.dm"
 #include "code\__defines\flags.dm"
 #include "code\__defines\fluids.dm"
 #include "code\__defines\gamemode.dm"

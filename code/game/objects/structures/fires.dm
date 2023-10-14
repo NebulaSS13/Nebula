@@ -230,7 +230,7 @@
 
 		if(istype(thing, /obj/item/stack))
 			var/obj/item/stack/stack = thing
-			if(stack.material.fuel_value > 0)
+			if(stack.material.fuel_value > FUEL_VALUE_NONE)
 				var/fuel_per_unit = 2 * stack.material.fuel_value
 				var/use_stacks = min(stack.amount, FLOOR((IDEAL_FUEL - fuel) / fuel_per_unit))
 				var/add_fuel = round(fuel_per_unit * use_stacks)
@@ -248,7 +248,7 @@
 			var/decl/material/material = GET_DECL(mat)
 			if(material.fuel_value > 0)
 				modified_fuel = TRUE
-				var/add_fuel = round(thing.matter[mat] / SHEET_MATERIAL_AMOUNT) * material.fuel_value
+				var/add_fuel = round(MOLES_PER_MATERIAL_UNIT(thing.matter[mat])) * material.fuel_value
 				if(material.burn_product)
 					if(waste[material.burn_product])
 						waste[material.burn_product] += add_fuel
@@ -275,7 +275,7 @@
 	var/do_steam = FALSE
 	for(var/rtype in RG.reagent_volumes)
 		var/decl/material/R = GET_DECL(rtype)
-		if(R.fuel_value <= 0)
+		if(R.fuel_value < 0)
 			do_steam = TRUE
 		fuel += REAGENT_VOLUME(RG, rtype) * R.fuel_value
 	RG.clear_reagents()

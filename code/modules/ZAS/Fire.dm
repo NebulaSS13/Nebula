@@ -254,8 +254,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		var/datum/gas_mixture/burned_fuel = remove_by_flag(XGM_GAS_FUEL, used_fuel)
 		for(var/g in burned_fuel.gas)
 			var/decl/material/mat = GET_DECL(g)
-			if(mat.burn_product)
-				adjust_gas(mat.burn_product, burned_fuel.gas[g])
+			mat.add_burn_product(src, burned_fuel.gas[g])
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * used_fuel) / heat_capacity()

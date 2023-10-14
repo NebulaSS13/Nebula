@@ -169,7 +169,7 @@
 		total_volume += reagents.total_volume
 		for(var/rtype in reagents.reagent_volumes)
 			var/decl/material/R = GET_DECL(rtype)
-			total_fuel = REAGENT_VOLUME(reagents, rtype) * R.fuel_value
+			total_fuel += REAGENT_VOLUME(reagents, rtype) * R.fuel_value
 	. = (total_fuel >= 2 && total_fuel >= total_volume*0.5)
 
 /obj/item/chems/glass/rag/proc/ignite()

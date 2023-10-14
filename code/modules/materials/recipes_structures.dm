@@ -46,7 +46,7 @@
 	var/obj/structure/fire_source/product = ..()
 	for(var/mat in product.matter)
 		var/decl/material/material = GET_DECL(mat)
-		if(material.fuel_value > 0)
+		if(material.fuel_value > FUEL_VALUE_NONE)
 			product.fuel += material.fuel_value * round(product.matter[mat] / SHEET_MATERIAL_AMOUNT)
 	return product
 

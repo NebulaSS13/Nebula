@@ -229,7 +229,7 @@
 	return ..()
 
 /obj/item/shreddedp/proc/burnpaper(var/obj/item/flame/lighter/P, var/mob/user)
-	if(!CanPhysicallyInteractWith(user, src) && material?.fuel_value)
+	if(!CanPhysicallyInteractWith(user, src) || material?.fuel_value <= FUEL_VALUE_NONE)
 		return
 	if(!P.lit)
 		to_chat(user, SPAN_WARNING("\The [P] is not lit."))
