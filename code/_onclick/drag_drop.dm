@@ -4,9 +4,9 @@
 	almost anything into a trash can.
 */
 
-/atom/MouseDrop(src_object, over_object, src_location, over_location, src_control, over_control, params)
+/atom/MouseDrop(over_object, src_location, over_location, src_control, over_control, params)
 	SHOULD_CALL_PARENT(TRUE)
-	if(!can_mouse_drop(src_object, usr, params = params) || !handle_mouse_drop(src_object, usr, params))
+	if(!can_mouse_drop(over_object, usr, params = params) || !handle_mouse_drop(over_object, usr, params))
 		. = ..()
 
 /atom/proc/handle_mouse_drop(atom/over, mob/user, params)
