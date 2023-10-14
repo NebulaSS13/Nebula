@@ -17,6 +17,7 @@
 	create_reagents(5)
 
 /obj/item/scanner/spectrometer/on_reagent_change()
+	..()
 	update_icon()
 
 /obj/item/scanner/spectrometer/on_update_icon()

@@ -31,10 +31,6 @@
 	. = ..()
 	update_icon()
 
-/obj/item/chems/syringe/on_reagent_change()
-	. = ..()
-	update_icon()
-
 /obj/item/chems/syringe/on_picked_up(mob/user)
 	. = ..()
 	update_icon()

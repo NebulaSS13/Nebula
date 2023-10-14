@@ -60,7 +60,7 @@
 		to_chat(user, "It's [reagents?.total_volume > 0? "filled with liquid sloshing around" : "empty"].")
 
 /obj/item/chems/water_balloon/on_reagent_change()
-	. = ..()
+	..()
 	w_class = (reagents?.total_volume > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
 	//#TODO: Maybe acids should handle eating their own containers themselves?
 	for(var/reagent in reagents?.reagent_volumes)

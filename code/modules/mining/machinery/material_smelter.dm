@@ -26,7 +26,7 @@
 
 // Outgas anything that is in gas form. Check what you put into the smeltery, nerds.
 /obj/machinery/material_processing/smeltery/on_reagent_change()
-	. = ..()
+	..()
 
 	if(!reagents)
 		return
@@ -115,7 +115,7 @@
 			if(samt > 0)
 				SSmaterials.create_object(mtype, output_turf, samt)
 				reagents.remove_reagent(mtype, ramt)
-	
+
 /obj/machinery/material_processing/smeltery/Topic(var/user, var/list/href_list)
 	. = ..()
 

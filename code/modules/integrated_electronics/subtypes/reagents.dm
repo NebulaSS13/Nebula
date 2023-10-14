@@ -48,6 +48,7 @@
 	var/notified = FALSE
 
 /obj/item/integrated_circuit/reagent/smoke/on_reagent_change()
+	..()
 	push_vol()
 
 /obj/item/integrated_circuit/reagent/smoke/do_work(ord)
@@ -107,6 +108,7 @@
 	var/busy = FALSE
 
 /obj/item/integrated_circuit/reagent/injector/on_reagent_change(changetype)
+	..()
 	push_vol()
 
 /obj/item/integrated_circuit/reagent/injector/on_data_written()
@@ -322,6 +324,7 @@
 	push_data()
 
 /obj/item/integrated_circuit/reagent/storage/on_reagent_change(changetype)
+	..()
 	push_vol()
 
 /obj/item/integrated_circuit/reagent/storage/big
@@ -595,6 +598,7 @@
 			push_data()
 
 /obj/item/integrated_circuit/reagent/temp/on_reagent_change()
+	..()
 	push_vol()
 
 /obj/item/integrated_circuit/reagent/temp/power_fail()

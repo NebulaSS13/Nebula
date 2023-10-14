@@ -116,7 +116,7 @@
 
 /// Handle reagents being modified
 /atom/proc/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(TRUE)
 
 /**
 	Handle an atom bumping this atom
