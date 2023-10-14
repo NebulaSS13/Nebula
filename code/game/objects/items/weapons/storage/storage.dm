@@ -33,7 +33,7 @@
 		QDEL_NULL(storage_ui)
 	. = ..()
 
-/obj/item/storage/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/item/storage/handle_mouse_drop(atom/over, mob/user, params)
 	if(canremove && (ishuman(user) || isrobot(user) || isanimal(user)) && !user.incapacitated(INCAPACITATION_DISRUPTED) && over == user)
 		open(user)
 		return TRUE
@@ -318,7 +318,7 @@
 		remove_from_storage(I, T, 1)
 	finish_bulk_removal()
 
-/obj/item/storage/receive_mouse_drop(atom/dropping, mob/living/user)
+/obj/item/storage/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && scoop_inside(dropping, user))
 		return TRUE

@@ -107,7 +107,7 @@
 	remover.put_in_hands(sample)
 	clear_sample()
 
-/obj/machinery/forensic/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/machinery/forensic/handle_mouse_drop(atom/over, mob/user, params)
 	if(user == over)
 		remove_sample(usr)
 		return TRUE

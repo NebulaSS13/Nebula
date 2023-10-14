@@ -120,7 +120,7 @@
 
 	..()
 
-/obj/machinery/nuclear_cylinder_storage/handle_mouse_drop(atom/over, mob/user)
+/obj/machinery/nuclear_cylinder_storage/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && open && !panel_open && length(cylinders))
 		var/cylinder = cylinders[1]
 		user.visible_message(

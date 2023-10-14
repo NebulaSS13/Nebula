@@ -124,7 +124,7 @@
 	DROP_NULL(boots)
 	return ..()
 
-/obj/machinery/suit_cycler/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/machinery/suit_cycler/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping) && try_move_inside(dropping, user))
 		return TRUE

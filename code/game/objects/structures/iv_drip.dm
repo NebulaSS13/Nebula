@@ -75,7 +75,7 @@
 
 			add_overlay(light)
 
-/obj/structure/iv_drip/handle_mouse_drop(atom/over, mob/user)
+/obj/structure/iv_drip/handle_mouse_drop(atom/over, mob/user, params)
 	if(attached)
 		drip_detach()
 		return TRUE

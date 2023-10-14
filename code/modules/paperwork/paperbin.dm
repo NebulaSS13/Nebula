@@ -21,7 +21,7 @@
 	LAZYCLEARLIST(papers) //Gets rid of any refs
 	return ..()
 
-/obj/item/paper_bin/handle_mouse_drop(atom/over, mob/user)
+/obj/item/paper_bin/handle_mouse_drop(atom/over, mob/user, params)
 	if((loc == user || in_range(src, user)) && user.get_empty_hand_slot())
 		user.put_in_hands(src)
 		return TRUE

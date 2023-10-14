@@ -13,6 +13,7 @@
 	parts_type = /obj/item/stack/material/strut
 	density = TRUE
 	anchored = TRUE
+	structure_flags = STRUCTURE_FLAG_SURFACE
 
 /obj/structure/rack/Initialize()
 	..()

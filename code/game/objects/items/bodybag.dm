@@ -75,7 +75,7 @@
 	. = new item_path(get_turf(src))
 	qdel(src)
 
-/obj/structure/closet/body_bag/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/structure/closet/body_bag/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && (in_range(src, user) || (src in user.contents)))
 		fold(user)
 		return TRUE

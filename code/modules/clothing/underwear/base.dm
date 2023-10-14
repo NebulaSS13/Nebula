@@ -10,7 +10,7 @@
 		return // Might as well check
 	DelayedEquipUnderwear(user, target)
 
-/obj/item/underwear/handle_mouse_drop(atom/over, mob/user)
+/obj/item/underwear/handle_mouse_drop(atom/over, mob/user, params)
 	SHOULD_CALL_PARENT(FALSE)
 	DelayedEquipUnderwear(user, over)
 	return TRUE

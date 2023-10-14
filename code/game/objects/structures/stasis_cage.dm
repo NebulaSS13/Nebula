@@ -74,7 +74,7 @@
 	release()
 	return ..()
 
-/mob/living/simple_animal/handle_mouse_drop(atom/over, mob/user)
+/mob/living/simple_animal/handle_mouse_drop(atom/over, mob/user, params)
 	if(istype(over, /obj/structure/stasis_cage))
 		var/obj/structure/stasis_cage/cage = over
 		if(!stat && !istype(buckled, /obj/effect/energy_net))

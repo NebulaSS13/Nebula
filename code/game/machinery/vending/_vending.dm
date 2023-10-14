@@ -188,7 +188,7 @@
 	. = ..()
 	SSnano.update_uis(src)
 
-/obj/machinery/vending/receive_mouse_drop(atom/dropping, var/mob/user)
+/obj/machinery/vending/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && dropping.loc == user && attempt_to_stock(dropping, user))
 		return TRUE

@@ -26,7 +26,7 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/recharge_station/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/machinery/recharge_station/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && isliving(dropping))
 		var/mob/living/M = dropping

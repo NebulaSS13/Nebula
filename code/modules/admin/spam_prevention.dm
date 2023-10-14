@@ -41,5 +41,5 @@ var/global/list/ckey_punished_for_spam = list() // this round; to avoid redundan
 		return
 	return ..()
 
-/client/MouseDrop()
+/client/MouseDrop(src_object, over_object, src_location, over_location, src_control, over_control, params)
 	. = user_acted(src) && ..()

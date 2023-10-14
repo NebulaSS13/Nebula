@@ -354,7 +354,7 @@ var/global/list/hygiene_props = list()
 	anchored = TRUE
 	var/busy = 0 	//Something's being washed at the moment
 
-/obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/structure/hygiene/sink/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
 		var/obj/item/thing = dropping

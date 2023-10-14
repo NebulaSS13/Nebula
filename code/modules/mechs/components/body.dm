@@ -162,7 +162,7 @@
 	else
 		return ..()
 
-/obj/item/mech_component/chassis/receive_mouse_drop(atom/dropping, mob/user)
+/obj/item/mech_component/chassis/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /obj/machinery/portable_atmospherics/canister))
 		var/obj/machinery/portable_atmospherics/canister/C = dropping
@@ -180,9 +180,9 @@
 			update_components()
 		return TRUE
 
-/obj/item/mech_component/chassis/handle_mouse_drop(atom/over, mob/user)
+/obj/item/mech_component/chassis/handle_mouse_drop(atom/over, mob/user, params)
 	if(storage_compartment)
-		return storage_compartment.handle_mouse_drop(over, user)
+		return storage_compartment.handle_mouse_drop(over, user, params)
 	. = ..()
 
 /obj/item/mech_component/chassis/return_diagnostics(mob/user)

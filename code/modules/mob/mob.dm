@@ -590,7 +590,7 @@
 			return TRUE
 	return FALSE
 
-/mob/handle_mouse_drop(atom/over, mob/user)
+/mob/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && user != src && !isAI(user))
 		show_stripping_window(user)
 		return TRUE

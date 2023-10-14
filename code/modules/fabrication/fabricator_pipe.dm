@@ -50,7 +50,7 @@
 	base_type = /obj/machinery/fabricator/pipe/disposal
 
 //Allow you to drag-drop disposal pipes into it
-/obj/machinery/fabricator/pipe/disposal/receive_mouse_drop(var/atom/dropping, mob/user)
+/obj/machinery/fabricator/pipe/disposal/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /obj/structure/disposalconstruct))
 		qdel(dropping)

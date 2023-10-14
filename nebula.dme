@@ -88,6 +88,7 @@
 #include "code\__defines\species.dm"
 #include "code\__defines\status.dm"
 #include "code\__defines\stress.dm"
+#include "code\__defines\structures.dm"
 #include "code\__defines\subsystem-priority.dm"
 #include "code\__defines\subsystems.dm"
 #include "code\__defines\targeting.dm"

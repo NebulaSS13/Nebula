@@ -4,6 +4,7 @@
 	layer = STRUCTURE_LAYER
 	abstract_type = /obj/structure
 
+	var/structure_flags
 	var/last_damage_message
 	var/health = 0
 	var/maxhealth = 50

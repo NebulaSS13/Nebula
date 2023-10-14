@@ -15,10 +15,10 @@
 	is_spawnable_type = FALSE
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
 
-/obj/screen/receive_mouse_drop(atom/dropping, mob/user)
+/obj/screen/receive_mouse_drop(atom/dropping, mob/user, params)
 	return TRUE
 
-/obj/screen/check_mousedrop_interactivity(var/mob/user)
+/obj/screen/check_mousedrop_interactivity(mob/user, params)
 	return user.client && (src in user.client.screen)
 
 /obj/screen/text

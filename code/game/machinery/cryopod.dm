@@ -425,7 +425,7 @@
 		src.add_fingerprint(target)
 
 //Like grap-put, but for mouse-drop.
-/obj/machinery/cryopod/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/machinery/cryopod/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && check_occupant_allowed(dropping))
 		if(occupant)

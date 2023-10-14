@@ -60,7 +60,7 @@
 		return
 	return ..()
 
-/obj/item/organ/internal/augment/active/cyberbrain/handle_mouse_drop(atom/over, mob/user)
+/obj/item/organ/internal/augment/active/cyberbrain/handle_mouse_drop(atom/over, mob/user, params)
 	if(!istype(over, /obj/screen))
 		attack_self(user)
 		return TRUE
