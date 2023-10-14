@@ -9,6 +9,7 @@
 	material = /decl/material/solid/plastic
 
 	var/screen_icon
+	var/dark_screen_state
 	var/list/decals
 	var/computer_emagged = FALSE
 	var/ambience_last_played
