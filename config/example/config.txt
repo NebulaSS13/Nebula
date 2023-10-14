@@ -462,3 +462,6 @@ RADIATION_LOWER_LIMIT 0.15
 
 ## Uncomment this to show a typing indicator for people writing whispers.
 #SHOW_TYPING_INDICATOR_FOR_WHISPERS
+
+## Set this to 0 to hide visible examine messages.
+VISIBLE_EXAMINE 1
