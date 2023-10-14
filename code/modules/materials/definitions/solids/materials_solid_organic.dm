@@ -18,7 +18,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	taste_description = "plastic"
-	fuel_value = 0.6
+	accelerant_value = 0.6
 	burn_product = /decl/material/gas/carbon_monoxide // placeholder for more appropriate toxins
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	default_solid_form = /obj/item/stack/material/panel
