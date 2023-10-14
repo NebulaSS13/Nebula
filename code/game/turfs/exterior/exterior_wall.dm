@@ -13,11 +13,8 @@ var/global/list/natural_walls = list()
 	blocks_air = TRUE
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_OBSTACLE
 
-	///Overrides the level's strata for this turf.
-	var/strata_override
 	var/paint_color
 	var/image/ore_overlay
-	var/decl/material/material
 	var/decl/material/reinf_material
 	var/floor_type = /turf/exterior/barren
 	var/static/list/exterior_wall_shine_cache = list()

@@ -18,7 +18,7 @@
 
 /datum/level_data/planetoid/exoplanet/volcanic
 	base_area = /area/exoplanet/volcanic
-	base_turf = /turf/exterior/volcanic
+	base_turf = /turf/exterior/rock/volcanic
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators = list(
@@ -111,7 +111,7 @@
 /datum/random_map/noise/exoplanet/volcanic
 	descriptor           = "volcanic exoplanet"
 	smoothing_iterations = 5
-	land_type            = /turf/exterior/volcanic
+	land_type            = /turf/exterior/rock/volcanic
 	water_type           = /turf/exterior/lava
 	water_level_min      = 5
 	water_level_max      = 6
@@ -143,4 +143,4 @@
 
 /area/exoplanet/volcanic
 	forced_ambience = list('sound/ambience/magma.ogg')
-	base_turf       = /turf/exterior/volcanic
+	base_turf       = /turf/exterior/rock/volcanic

@@ -16,6 +16,9 @@
 	var/icon_has_corners = FALSE
 	///If this turf is on a level that belongs to a planetoid, this is a reference to that planetoid.
 	var/datum/planetoid_data/owner
+	///Overrides the level's strata for this turf.
+	var/strata_override
+	var/decl/material/material
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
