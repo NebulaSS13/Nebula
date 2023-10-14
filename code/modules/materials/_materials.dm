@@ -810,7 +810,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(total_interacted_units <= 0)
 			return
 
-/decl/material/proc/add_burn_product(var/datum/gas_mixture/environment, var/amount)
+/decl/material/proc/add_burn_product(var/atom/location, var/amount)
+	var/datum/gas_mixture/environment = istype(location, /datum/gas_mixture) ? location : location?.return_air()
 	if(!environment || amount <= 0 || !burn_product)
 		return
 	environment.adjust_gas(burn_product, amount)

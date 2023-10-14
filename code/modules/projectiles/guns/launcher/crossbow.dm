@@ -11,7 +11,7 @@
 	sharp = 1
 	edge = 0
 	lock_picking_level = 3
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/arrow/proc/removed() //Helper for metal rods falling apart.
 	return

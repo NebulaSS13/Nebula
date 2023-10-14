@@ -18,12 +18,12 @@
 
 /obj/structure/barricade/spike/Initialize()
 	if(!reinf_material)
-		reinf_material = /decl/material/solid/wood
+		reinf_material = /decl/material/solid/organic/wood
 	. = ..()
 
 /obj/structure/barricade/Initialize()
 	if(!material)
-		material = /decl/material/solid/wood
+		material = /decl/material/solid/organic/wood
 	. = ..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL

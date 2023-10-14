@@ -3,7 +3,7 @@
 	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
 	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "folded_wall"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	w_class = ITEM_SIZE_NORMAL
 	var/deploy_path = /obj/structure/inflatable/wall
 	var/inflatable_health
@@ -44,7 +44,7 @@
 	maxhealth = 20
 	hitsound = 'sound/effects/Glasshit.ogg'
 	atmos_canpass = CANPASS_DENSITY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	var/undeploy_path = null
 	var/taped

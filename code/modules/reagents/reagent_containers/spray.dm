@@ -12,7 +12,7 @@
 	throw_range                       = 10
 	throwforce                        = 3
 	attack_cooldown                   = DEFAULT_QUICK_COOLDOWN
-	material                          = /decl/material/solid/plastic
+	material                          = /decl/material/solid/organic/plastic
 	volume                            = 250
 	amount_per_transfer_from_this     = 10
 	possible_transfer_amounts         = @"[5,10]"

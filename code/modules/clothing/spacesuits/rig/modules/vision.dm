@@ -58,7 +58,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 	var/datum/rig_vision/vision
@@ -124,7 +124,7 @@
 	interface_desc = "An integrated night vision system."
 
 	vision_modes = list(/datum/rig_vision/nvg)
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE,

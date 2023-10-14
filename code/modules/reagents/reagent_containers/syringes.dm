@@ -391,6 +391,6 @@
 	material = /decl/material/solid/glass
 	matter = list(
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'biotech':4,'materials':4}"

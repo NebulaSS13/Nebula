@@ -211,7 +211,7 @@
 	throw_speed  = 2
 	throwforce   = 0
 	w_class      = ITEM_SIZE_TINY
-	material     = /decl/material/solid/paper
+	material     = /decl/material/solid/organic/paper
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/shreddedp/get_matter_amount_modifier()

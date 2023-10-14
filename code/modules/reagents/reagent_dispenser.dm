@@ -6,7 +6,7 @@
 	icon_state                        = "watertank"
 	density                           = TRUE
 	anchored                          = FALSE
-	material                          = /decl/material/solid/plastic
+	material                          = /decl/material/solid/organic/plastic
 	matter                            = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
 	maxhealth                         = 100
 	tool_interaction_flags            = TOOL_INTERACTION_DECONSTRUCT

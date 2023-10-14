@@ -29,7 +29,7 @@
 	throw_speed = 4
 	throw_range = 20
 	force = 0
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /*
  * Balloons
@@ -51,7 +51,7 @@
 	possible_transfer_amounts     = null
 	amount_per_transfer_from_this = 10
 	volume                        = 10
-	material                      = /decl/material/solid/plastic
+	material                      = /decl/material/solid/organic/plastic
 
 /obj/item/chems/water_balloon/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
 	if(overlay && reagents?.total_volume <= 0)
@@ -151,7 +151,7 @@
 	force = 1
 	throwforce = 1
 	attack_verb = list("hit")
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	active_hitsound = 'sound/weapons/genhit.ogg'
 	active_descriptor = "extended"
@@ -164,7 +164,7 @@
 /obj/item/sword/katana/toy
 	name = "toy katana"
 	desc = "Woefully underpowered in D20."
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /*
  * Snap pops
@@ -501,7 +501,7 @@
 	name = "foam sword"
 	desc = "An arcane weapon (made of foam) wielded by the followers of the hit Saturday morning cartoon \"King Nursee and the Acolytes of Heroism\"."
 	icon = 'icons/obj/items/weapon/swords/cult.dmi'
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	edge = 0
 	sharp = 0
 
@@ -511,7 +511,7 @@
 	icon = 'icons/clothing/belt/inflatable.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/marshalling_wand //#TODO: Move under obj/item/toy ?
 	name = "marshalling wand"
@@ -523,7 +523,7 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 1
 	attack_verb = list("attacked", "whacked", "jabbed", "poked", "marshalled")
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/marshalling_wand/Initialize()
 	set_light(1.5, 1.5, "#ff0000")

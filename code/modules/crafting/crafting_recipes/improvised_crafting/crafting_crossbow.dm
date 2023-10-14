@@ -35,7 +35,7 @@
 	item_desc = "It is a half-built crossbow with a steel backbone and a cell mount installed."
 	progress_message = "You assemble and install a heavy plastic lath onto the crossbow."
 	next_stages = list(/decl/crafting_stage/wiring/crossbow_string)
-	stack_material = /decl/material/solid/plastic
+	stack_material = /decl/material/solid/organic/plastic
 
 /decl/crafting_stage/wiring/crossbow_string
 	item_icon_state = "crossbowframe5"

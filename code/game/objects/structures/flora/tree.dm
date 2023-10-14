@@ -7,7 +7,7 @@
 	density      = TRUE
 	pixel_x      = -16
 	layer        = ABOVE_HUMAN_LAYER
-	material     = /decl/material/solid/wood
+	material     = /decl/material/solid/organic/wood
 	w_class      = ITEM_SIZE_STRUCTURE
 	hitsound     = 'sound/effects/hit_wood.ogg'
 	snd_cut      = 'sound/effects/plants/tree_fall.ogg'

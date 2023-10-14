@@ -15,7 +15,7 @@
 	w_class         = ITEM_SIZE_TINY
 	item_flags      = ITEM_FLAG_CAN_TAPE
 	attack_verb     = list("stabbed", "pricked")
-	material        = /decl/material/solid/paper
+	material        = /decl/material/solid/organic/paper
 	var/obj/item/paper/my_paper //The sheet of paper this paper_plane is made of
 
 /obj/item/paper_plane/proc/set_paper(var/obj/item/paper/_paper)

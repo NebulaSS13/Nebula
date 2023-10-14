@@ -6,7 +6,7 @@
 	item_state = "radio"
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,

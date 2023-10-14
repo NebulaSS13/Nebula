@@ -15,7 +15,7 @@
 	base_parry_chance = 30
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic      = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/organic/plastic      = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon      = MATTER_AMOUNT_REINFORCEMENT,
 	)
@@ -255,4 +255,4 @@
 	hitcost = 25
 	attack_verb = list("poked")
 	slot_flags = null
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE)

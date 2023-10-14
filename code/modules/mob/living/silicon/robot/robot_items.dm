@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/borg_module/borg_rnd_analyser.dmi'
 	icon_state = "portable_analyzer"
 	desc = "Similar to the stationary version, this rather unwieldy device allows you to break down objects in the name of science."
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,

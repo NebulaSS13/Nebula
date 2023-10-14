@@ -8,9 +8,9 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = 4
-	material = /decl/material/solid/paper
+	material = /decl/material/solid/organic/paper
 	matter = list(
-		/decl/material/solid/cardboard = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/organic/cardboard = MATTER_AMOUNT_REINFORCEMENT
 	)
 	var/renamed = 0
 	var/icon_changed = 0

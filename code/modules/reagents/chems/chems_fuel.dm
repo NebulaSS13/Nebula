@@ -4,6 +4,7 @@
 	taste_description = "gross metal"
 	color = "#660000"
 	touch_met = 5
+	ignition_point = T0C+150
 	accelerant_value = FUEL_VALUE_ACCELERANT + 0.2
 	burn_product = /decl/material/gas/carbon_monoxide
 	gas_flags = XGM_GAS_FUEL

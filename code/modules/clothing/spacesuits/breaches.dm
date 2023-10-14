@@ -186,7 +186,7 @@
 		switch(W.get_material_type())
 			if(/decl/material/solid/metal/steel)
 				repair_power = 2
-			if(/decl/material/solid/plastic)
+			if(/decl/material/solid/organic/plastic)
 				repair_power = 1
 
 		if(!repair_power)

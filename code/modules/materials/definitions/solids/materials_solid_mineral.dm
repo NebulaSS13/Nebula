@@ -38,11 +38,12 @@
 	ore_icon_overlay = "lump"
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
+	ignition_point = T0C+500
+	accelerant_value = 0.8
 	burn_product = /decl/material/gas/carbon_monoxide
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
-	accelerant_value = 0.8
 	dirtiness = 15
 
 	flags = MAT_FLAG_FISSIBLE
@@ -385,6 +386,7 @@
 	value = 1.2
 	sparse_material_weight = 10
 	rich_material_weight = 5
+	ignition_point = T0C+500
 	accelerant_value = 0.9
 	dirtiness = 15
 	dissolves_into = list(
@@ -416,6 +418,7 @@
 	value = 0.9
 	sparse_material_weight = 20
 	rich_material_weight = 10
+	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.8,
@@ -445,6 +448,7 @@
 	value = 0.9
 	sparse_material_weight = 15
 	rich_material_weight = 10
+	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.1,
@@ -475,6 +479,7 @@
 	value = 1.1
 	sparse_material_weight = 10
 	rich_material_weight = 5
+	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/platinum = 0.7,
@@ -505,6 +510,7 @@
 	value = 0.8
 	sparse_material_weight = 25
 	rich_material_weight = 15
+	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/zinc = 0.7,
@@ -534,6 +540,7 @@
 	value = 0.8
 	sparse_material_weight = 20
 	rich_material_weight = 10
+	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/lead = 0.7,
@@ -563,6 +570,7 @@
 	value = 0.8
 	sparse_material_weight = 5
 	rich_material_weight = 5
+	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/gold = 0.7,
@@ -591,6 +599,7 @@
 	value = 0.9
 	sparse_material_weight = 5
 	rich_material_weight = 10
+	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/chromium = 0.6,

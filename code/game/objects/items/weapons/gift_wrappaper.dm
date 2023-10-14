@@ -14,7 +14,7 @@
 	icon_state = "gift"
 	item_state = "gift"
 	randpixel = 10
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 
 /obj/item/a_gift/Initialize()
 	. = ..()

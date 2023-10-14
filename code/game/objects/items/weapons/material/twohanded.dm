@@ -159,12 +159,12 @@
 
 /obj/item/twohanded/spear/steel
 	material = /decl/material/solid/metal/steel
-	shaft_material = /decl/material/solid/wood
+	shaft_material = /decl/material/solid/organic/wood
 	cable_color = COLOR_GREEN
 
 /obj/item/twohanded/spear/supermatter
 	material = /decl/material/solid/exotic_matter
-	shaft_material = /decl/material/solid/wood/ebony
+	shaft_material = /decl/material/solid/organic/wood/ebony
 	cable_color = COLOR_INDIGO
 
 /obj/item/twohanded/baseballbat
@@ -175,7 +175,7 @@
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	material = /decl/material/solid/wood/maple
+	material = /decl/material/solid/organic/wood/maple
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	max_force = 40	//for wielded
 	material_force_multiplier = 0.4           // 24 when wielded with weight 60 (steel)

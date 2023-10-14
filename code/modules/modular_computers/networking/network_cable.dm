@@ -163,7 +163,7 @@
 	throw_range = 5
 	material = /decl/material/solid/glass
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
 	matter_multiplier = 0.15
 	item_state = "coil"

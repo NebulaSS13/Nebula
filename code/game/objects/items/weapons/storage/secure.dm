@@ -89,7 +89,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_sound = 'sound/effects/storage/briefcase.ogg'
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user as mob)
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))

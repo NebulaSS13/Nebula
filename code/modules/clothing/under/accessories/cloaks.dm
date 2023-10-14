@@ -127,7 +127,7 @@
 	name = "cloak"
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	armor_type = /datum/extension/armor/ablative
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY

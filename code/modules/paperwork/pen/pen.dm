@@ -8,7 +8,7 @@
 	throwforce             = 0
 	throw_speed            = 7
 	throw_range            = 15
-	material               = /decl/material/solid/plastic
+	material               = /decl/material/solid/organic/plastic
 	var/pen_flag           = PEN_FLAG_ACTIVE                     //Properties/state of the pen used.
 	var/stroke_colour      = "black"                             //What colour the ink is! Can be hexadecimal colour or a colour name string.
 	var/stroke_colour_name = "black"                             //Human readable name of the stroke colour. Used in text strings, and to identify the nearest colour to the stroke colour.

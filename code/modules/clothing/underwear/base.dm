@@ -1,7 +1,7 @@
 /obj/item/underwear
 	icon = 'icons/mob/human.dmi'
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 	var/required_free_body_parts
 	var/slot_offset_str
 

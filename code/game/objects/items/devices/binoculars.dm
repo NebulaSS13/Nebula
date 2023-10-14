@@ -10,7 +10,7 @@
 	throwforce = 5
 	throw_range = 15
 	throw_speed = 3
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY)
 
 /obj/item/binoculars/attack_self(mob/user)

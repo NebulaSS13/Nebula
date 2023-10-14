@@ -20,7 +20,7 @@
 			to_chat(user, SPAN_NOTICE("You stop shoveling."))
 		return TRUE
 
-	if (!open && istype(W, /obj/item/stack/material) && W.material?.type == /decl/material/solid/wood)
+	if (!open && istype(W, /obj/item/stack/material) && W.material?.type == /decl/material/solid/organic/wood)
 		if(locate(/obj/structure/gravemarker) in src.loc)
 			to_chat(user, SPAN_WARNING("There's already a grave marker here."))
 		else
@@ -162,7 +162,7 @@
 	pixel_x     = 15
 	pixel_y     = 8
 	anchored    = TRUE
-	material    = /decl/material/solid/wood
+	material    = /decl/material/solid/organic/wood
 	w_class     = ITEM_SIZE_NORMAL
 	var/message = "Unknown."
 

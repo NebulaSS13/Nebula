@@ -21,7 +21,7 @@
 	icon_state = "fingerprint0"
 	item_state = "paper"
 	possible_evidence_types = list(/datum/forensics/fingerprints)
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/forensics/sample/print/on_update_icon()
 	. = ..()

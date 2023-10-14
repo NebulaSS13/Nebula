@@ -28,7 +28,7 @@
 	attack_verb = list("HONKED")
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 	obj_flags = OBJ_FLAG_HOLLOW
 	var/spam_flag = 0

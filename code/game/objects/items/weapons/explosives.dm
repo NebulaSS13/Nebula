@@ -8,7 +8,7 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'esoteric':2}"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/silicon = MATTER_AMOUNT_TRACE,
 		/decl/material/liquid/anfo = MATTER_AMOUNT_REINFORCEMENT, //#TODO: Slap RDX in here

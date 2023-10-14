@@ -6,9 +6,9 @@
 /mob/living
 	var/meat_type =         /obj/item/chems/food/meat
 	var/meat_amount =       3
-	var/skin_material =     /decl/material/solid/skin
+	var/skin_material =     /decl/material/solid/organic/skin
 	var/skin_amount =       3
-	var/bone_material =     /decl/material/solid/bone
+	var/bone_material =     /decl/material/solid/organic/bone
 	var/bone_amount =       3
 	var/skull_type
 	var/butchery_rotation = 90

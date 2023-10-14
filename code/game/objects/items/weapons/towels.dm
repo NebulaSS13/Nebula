@@ -9,7 +9,7 @@
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/towel/attack_self(mob/user)
 	if(user.a_intent == I_GRAB)
@@ -25,12 +25,12 @@
 /obj/item/towel/black
 	name = "black towel"
 	color = "#222222"
-	material = /decl/material/solid/cloth/black
+	material = /decl/material/solid/organic/cloth/black
 
 /obj/item/towel/brown
 	name = "black towel"
 	color = "#854636"
-	material = /decl/material/solid/cloth/beige
+	material = /decl/material/solid/organic/cloth/beige
 
 /obj/item/towel/fleece // loot from the king of goats. it's a golden towel
 	name = "golden fleece"

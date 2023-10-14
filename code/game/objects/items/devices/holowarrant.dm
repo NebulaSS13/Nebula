@@ -11,10 +11,10 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	req_access = list(list(access_heads, access_security))
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
-		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT, 
-		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
 	)
@@ -56,7 +56,7 @@
 		active = null
 		update_icon()
 		return TOPIC_REFRESH
-	
+
 	if(href_list["select"])
 		var/list/active_warrants = list()
 		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
@@ -90,7 +90,7 @@
 			var/datum/report_field/signature/auth = active.field_from_name("Authorized by")
 			if(choice == "Yes")
 				auth.ask_value(user)
-			user.visible_message(SPAN_NOTICE("You swipe \the [I] through the [src]."), 
+			user.visible_message(SPAN_NOTICE("You swipe \the [I] through the [src]."),
 								 SPAN_NOTICE("[user] swipes \the [I] through the [src]."))
 			broadcast_security_hud_message("[active.get_broadcast_summary()] has been authorized by [auth.get_value()].", src)
 		else

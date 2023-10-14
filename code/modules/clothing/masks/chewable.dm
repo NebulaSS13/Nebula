@@ -64,7 +64,7 @@
 	chem_volume = 50
 	chewtime = 300
 	brand = "tobacco"
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 
 /obj/item/trash/cigbutt/spitwad
 	name = "spit wad"

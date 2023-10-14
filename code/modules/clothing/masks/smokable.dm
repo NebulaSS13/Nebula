@@ -351,7 +351,7 @@
 	name = "wooden tip"
 	icon = 'icons/clothing/mask/smokables/cigar_butt.dmi'
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/W, var/mob/user)
 	..()

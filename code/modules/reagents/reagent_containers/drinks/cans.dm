@@ -26,7 +26,7 @@
 	desc = "Pure drinking water, imported from the Martian poles."
 	icon_state = "waterbottle"
 	center_of_mass = @"{'x':15,'y':8}"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/chems/drinks/cans/waterbottle/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)

@@ -124,7 +124,7 @@
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':1}"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/wood = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/wood = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("shoved", "bashed")
 
 /obj/item/shield/buckler/handle_shield(mob/user)

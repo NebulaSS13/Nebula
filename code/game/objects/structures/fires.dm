@@ -14,7 +14,7 @@
 	icon_state = "campfire"
 	anchored = TRUE
 	density = FALSE
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 	var/datum/effect/effect/system/steam_spread/steam // Used when being quenched.
 

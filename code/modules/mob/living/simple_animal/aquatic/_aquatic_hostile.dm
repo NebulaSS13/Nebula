@@ -13,5 +13,5 @@
 	meat_amount = 3
 	bone_amount = 5
 	skin_amount = 5
-	bone_material = /decl/material/solid/bone/fish
-	skin_material = /decl/material/solid/skin/fish
+	bone_material = /decl/material/solid/organic/bone/fish
+	skin_material = /decl/material/solid/organic/skin/fish

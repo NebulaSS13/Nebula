@@ -15,7 +15,7 @@
 
 /obj/item/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
-	padding_material = /decl/material/solid/carpet
+	padding_material = /decl/material/solid/organic/carpet
 
 /obj/item/stool/Initialize()
 	. = ..()
@@ -27,7 +27,7 @@
 	update_icon()
 
 /obj/item/stool/padded
-	padding_material = /decl/material/solid/carpet
+	padding_material = /decl/material/solid/organic/carpet
 
 /obj/item/stool/bar
 	name = "bar stool"
@@ -37,7 +37,7 @@
 
 /obj/item/stool/bar/padded
 	icon_state = "bar_stool_padded_preview"
-	padding_material = /decl/material/solid/carpet
+	padding_material = /decl/material/solid/organic/carpet
 
 /obj/item/stool/on_update_icon()
 	. = ..()
@@ -108,7 +108,7 @@
 			return
 		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
 		if(istype(W,/obj/item/stack/tile/carpet))
-			padding_type = /decl/material/solid/carpet
+			padding_type = /decl/material/solid/organic/carpet
 		else if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
 			if(M.material && (M.material.flags & MAT_FLAG_PADDING))
@@ -135,4 +135,4 @@
 
 //Generated subtypes for mapping porpoises
 /obj/item/stool/wood
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood

@@ -20,7 +20,7 @@
 
 	meat_type = /obj/item/chems/food/meat/corgi
 	meat_amount = 3
-	skin_material = /decl/material/solid/skin/fur/orange
+	skin_material = /decl/material/solid/organic/skin/fur/orange
 
 /mob/living/simple_animal/corgi/Initialize()
 	if(isnull(hat_offsets))
@@ -41,7 +41,7 @@
 	desc = "The by-product of corgi farming."
 	icon = 'icons/obj/items/sheet_hide.dmi'
 	icon_state = "sheet-corgi"
-	material = /decl/material/solid/skin/fur/orange
+	material = /decl/material/solid/organic/skin/fur/orange
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian

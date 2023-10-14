@@ -162,6 +162,6 @@
 		S.set_trait(TRAIT_HARVEST_REPEAT, 1)
 		S.set_trait(TRAIT_LARGE,          1)
 		S.set_trait(TRAIT_LEAVES_COLOUR,  color)
-		S.chems[/decl/material/solid/wood] = 1  //#TODO: Maybe look at Why the seed creates injectable wood?
+		S.chems[/decl/material/solid/organic/wood] = 1  //#TODO: Maybe look at Why the seed creates injectable wood?
 		adapt_seed(S, atmos)
 		LAZYADD(big_flora_types, S)

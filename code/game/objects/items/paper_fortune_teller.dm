@@ -4,7 +4,7 @@
 	desc = "Origami, for children."
 	icon_state = "fortune"
 	icon = 'icons/obj/items/fortune_teller.dmi'
-	material = /decl/material/solid/paper
+	material = /decl/material/solid/organic/paper
 	var/choice_counter = 0
 	var/busy = FALSE
 	var/list/fortunes = new(8)

@@ -17,7 +17,7 @@ LINEN BINS
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/bedsheet/attackby(obj/item/I, mob/user)
 	if(is_sharp(I))
@@ -88,7 +88,7 @@ LINEN BINS
 	icon_state             = "linenbin-full"
 	anchored               = TRUE
 	w_class                = ITEM_SIZE_STRUCTURE
-	material               = /decl/material/solid/plastic
+	material               = /decl/material/solid/organic/plastic
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT
 	var/stored             = 0  //Currently stored unspawned bedsheets, mainly used by mapped bins
 	var/max_stored         = 20 //Maximum amount of bedsheets that can be put in here

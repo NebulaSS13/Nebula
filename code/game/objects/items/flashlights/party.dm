@@ -3,7 +3,7 @@
 	name = "party light"
 	desc = "An array of LEDs in tons of colors."
 	icon = 'icons/obj/lighting/partylight.dmi'
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/glass        = MATTER_AMOUNT_REINFORCEMENT,

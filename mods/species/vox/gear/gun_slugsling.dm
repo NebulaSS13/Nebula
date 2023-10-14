@@ -5,7 +5,7 @@
 	throwforce = 6
 	icon = 'mods/species/vox/icons/gear/slugegg.dmi'
 	icon_state = "slugegg"
-	material = /decl/material/solid/skin/insect
+	material = /decl/material/solid/organic/skin/insect
 	var/break_on_impact = 1 //There are two modes to the eggs.
 							//One breaks the egg on hit,
 

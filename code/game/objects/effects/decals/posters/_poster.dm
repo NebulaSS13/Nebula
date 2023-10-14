@@ -8,7 +8,7 @@
 	icon_state         = "poster0"
 	anchored           = TRUE
 	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':-32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
-	material           = /decl/material/solid/paper
+	material           = /decl/material/solid/organic/paper
 	maxhealth          = 10
 	parts_type         = /obj/item/poster
 	parts_amount       = 1
@@ -128,7 +128,7 @@
 	icon       = 'icons/obj/items/posters.dmi'
 	icon_state = "rolled_poster"
 	force = 0
-	material = /decl/material/solid/paper
+	material = /decl/material/solid/organic/paper
 	///The name of the medium, excluding any reference to the design
 	var/base_name = "rolled-up poster"
 	///The description for the item/medium without any reference to the design.

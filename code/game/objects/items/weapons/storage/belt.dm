@@ -11,7 +11,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("whipped", "lashed", "disciplined")
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 	var/overlay_flags
 
 /obj/item/storage/belt/get_associated_equipment_slots()
@@ -132,7 +132,7 @@
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves
 		)
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/storage/belt/utility/full/WillContain()
 	return list(
@@ -440,8 +440,8 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = ITEM_SIZE_SMALL * 4
 	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
-	material = /decl/material/solid/cloth
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/cloth
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/belt/waistpack/big
 	name = "large waist pack"

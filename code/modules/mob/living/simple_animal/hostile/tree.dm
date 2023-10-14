@@ -27,6 +27,6 @@
 
 /mob/living/simple_animal/hostile/tree/death(gibbed, deathmessage, show_dead_message)
 	..(null,"is hacked into pieces!", show_dead_message)
-	var/decl/material/mat = GET_DECL(/decl/material/solid/wood)
+	var/decl/material/mat = GET_DECL(/decl/material/solid/organic/wood)
 	mat.place_shards(loc)
 	qdel(src)

@@ -379,7 +379,7 @@
 	icon = 'icons/obj/items/device/tape_recorder/tape_casette_white.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE

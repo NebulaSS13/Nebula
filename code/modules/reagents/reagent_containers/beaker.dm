@@ -141,7 +141,7 @@
 	desc = "A glass beaker surrounded with black insulation."
 	icon = 'icons/obj/items/chem/beakers/insulated.dmi'
 	center_of_mass = @"{'x':15,'y':8}"
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
@@ -154,7 +154,7 @@
 	name = "large insulated beaker"
 	icon = 'icons/obj/items/chem/beakers/insulated_large.dmi'
 	center_of_mass = @"{'x':16,'y':10}"
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	volume = 120
 
 /obj/item/chems/glass/beaker/sulphuric/populate_reagents()

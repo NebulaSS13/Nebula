@@ -11,7 +11,7 @@
 	icon_state = "hoist_case"
 
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 
 /obj/item/hoist_kit/attack_self(mob/user)

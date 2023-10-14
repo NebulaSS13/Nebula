@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2
 	throw_range = 10
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/toxicity = 4
 	var/pest_kill_str = 0
 	var/weed_kill_str = 0
@@ -60,7 +60,7 @@
 	toxicity = 0
 	pest_kill_str = 0
 	weed_kill_str = 0
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/plantspray/weedkiller/triclopyr
 	name = "bottle of glyphosate"

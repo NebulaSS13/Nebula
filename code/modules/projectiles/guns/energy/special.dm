@@ -168,7 +168,7 @@
 	origin_tech = "{'combat':7,'magnets':4,'esoteric':4}"
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser

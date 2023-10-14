@@ -2,7 +2,7 @@
 	name = "clothing"
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':1,'engineering':1}"
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
@@ -32,7 +32,7 @@
 	return TRUE
 
 // Sort of a placeholder for proper tailoring.
-#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/organic/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	var/rags = RAG_COUNT(src)
@@ -52,7 +52,7 @@
 				new /obj/item/chems/glass/rag(get_turf(src))
 			if(loc == user)
 				user.drop_from_inventory(src)
-			LAZYREMOVE(matter, /decl/material/solid/cloth)
+			LAZYREMOVE(matter, /decl/material/solid/organic/cloth)
 			physically_destroyed()
 		return TRUE
 	. = ..()

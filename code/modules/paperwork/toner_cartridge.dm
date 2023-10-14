@@ -11,7 +11,7 @@
 	throwforce                    = 3
 	force                         = 3
 	w_class                       = ITEM_SIZE_NORMAL
-	material                      = /decl/material/solid/plastic
+	material                      = /decl/material/solid/organic/plastic
 	volume                        = 60
 	amount_per_transfer_from_this = 30
 	possible_transfer_amounts     = @"[30,60]"

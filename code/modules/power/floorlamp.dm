@@ -72,7 +72,7 @@
 	desc = "A lampshade for a lamp."
 	icon = 'icons/obj/floorlamp.dmi'
 	icon_state = "lampshade"
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 	obj_flags = OBJ_FLAG_HOLLOW
 	w_class = ITEM_SIZE_NORMAL
 

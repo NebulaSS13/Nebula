@@ -9,9 +9,9 @@
 	throw_range = 10
 	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	matter = list(
-		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY,
 	)
 	var/mopspeed = 40
 	var/list/moppable_types = list(
@@ -87,7 +87,7 @@
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'engineering':4,'materials':4,'powerstorage':3}"
 

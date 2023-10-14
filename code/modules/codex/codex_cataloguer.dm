@@ -91,7 +91,7 @@
 	force = 0
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE,

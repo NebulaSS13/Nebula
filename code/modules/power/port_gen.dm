@@ -179,7 +179,7 @@
 /obj/machinery/port_gen/pacman/proc/process_exhaust()
 	var/decl/material/mat = sheet_material && GET_DECL(sheet_material)
 	if(mat)
-		mat.add_burn_product(loc?.return_air(), 0.05*power_output)
+		mat.add_burn_product(loc, 0.05*power_output)
 
 /obj/machinery/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet

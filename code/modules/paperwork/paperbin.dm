@@ -12,7 +12,7 @@
 	w_class             = ITEM_SIZE_NORMAL
 	throw_speed         = 3
 	throw_range         = 7
-	material            = /decl/material/solid/plastic
+	material            = /decl/material/solid/organic/plastic
 	var/amount          = 30  //How much paper is in the bin.
 	var/tmp/max_amount  = 30  //How much paper fits in the bin
 	var/list/papers	  //List of papers put in the bin for reference.

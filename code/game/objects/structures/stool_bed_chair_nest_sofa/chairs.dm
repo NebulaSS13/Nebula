@@ -65,25 +65,25 @@
 	update_icon()
 
 /obj/structure/bed/chair/padded/red
-	reinf_material = /decl/material/solid/carpet
+	reinf_material = /decl/material/solid/organic/carpet
 /obj/structure/bed/chair/padded/brown
-	reinf_material = /decl/material/solid/leather
+	reinf_material = /decl/material/solid/organic/leather
 /obj/structure/bed/chair/padded/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	reinf_material = /decl/material/solid/organic/cloth/teal
 /obj/structure/bed/chair/padded/black
-	reinf_material = /decl/material/solid/cloth/black
+	reinf_material = /decl/material/solid/organic/cloth/black
 /obj/structure/bed/chair/padded/green
-	reinf_material = /decl/material/solid/cloth/green
+	reinf_material = /decl/material/solid/organic/cloth/green
 /obj/structure/bed/chair/padded/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	reinf_material = /decl/material/solid/organic/cloth/purple
 /obj/structure/bed/chair/padded/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	reinf_material = /decl/material/solid/organic/cloth/blue
 /obj/structure/bed/chair/padded/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	reinf_material = /decl/material/solid/organic/cloth/beige
 /obj/structure/bed/chair/padded/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	reinf_material = /decl/material/solid/organic/cloth/lime
 /obj/structure/bed/chair/padded/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	reinf_material = /decl/material/solid/organic/cloth/yellow
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
@@ -93,25 +93,25 @@
 	base_icon = "comfychair"
 
 /obj/structure/bed/chair/comfy/brown
-	reinf_material = /decl/material/solid/leather
+	reinf_material = /decl/material/solid/organic/leather
 /obj/structure/bed/chair/comfy/red
-	reinf_material = /decl/material/solid/carpet
+	reinf_material = /decl/material/solid/organic/carpet
 /obj/structure/bed/chair/comfy/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	reinf_material = /decl/material/solid/organic/cloth/teal
 /obj/structure/bed/chair/comfy/black
-	reinf_material = /decl/material/solid/cloth/black
+	reinf_material = /decl/material/solid/organic/cloth/black
 /obj/structure/bed/chair/comfy/green
-	reinf_material = /decl/material/solid/cloth/green
+	reinf_material = /decl/material/solid/organic/cloth/green
 /obj/structure/bed/chair/comfy/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	reinf_material = /decl/material/solid/organic/cloth/purple
 /obj/structure/bed/chair/comfy/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	reinf_material = /decl/material/solid/organic/cloth/blue
 /obj/structure/bed/chair/comfy/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	reinf_material = /decl/material/solid/organic/cloth/beige
 /obj/structure/bed/chair/comfy/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	reinf_material = /decl/material/solid/organic/cloth/lime
 /obj/structure/bed/chair/comfy/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	reinf_material = /decl/material/solid/organic/cloth/yellow
 
 /obj/structure/bed/chair/comfy/captain
 	name = "captain chair"
@@ -120,7 +120,7 @@
 	base_icon = "capchair"
 	buckle_movable = 1
 	material = /decl/material/solid/metal/steel
-	reinf_material = /decl/material/solid/cloth/blue
+	reinf_material = /decl/material/solid/organic/cloth/blue
 	has_special_overlay = TRUE
 
 /obj/structure/bed/chair/armchair
@@ -130,25 +130,25 @@
 	base_icon = "armchair"
 
 /obj/structure/bed/chair/armchair/brown
-	reinf_material = /decl/material/solid/leather
+	reinf_material = /decl/material/solid/organic/leather
 /obj/structure/bed/chair/armchair/red
-	reinf_material = /decl/material/solid/carpet
+	reinf_material = /decl/material/solid/organic/carpet
 /obj/structure/bed/chair/armchair/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	reinf_material = /decl/material/solid/organic/cloth/teal
 /obj/structure/bed/chair/armchair/black
-	reinf_material = /decl/material/solid/cloth/black
+	reinf_material = /decl/material/solid/organic/cloth/black
 /obj/structure/bed/chair/armchair/green
-	reinf_material = /decl/material/solid/cloth/green
+	reinf_material = /decl/material/solid/organic/cloth/green
 /obj/structure/bed/chair/armchair/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	reinf_material = /decl/material/solid/organic/cloth/purple
 /obj/structure/bed/chair/armchair/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	reinf_material = /decl/material/solid/organic/cloth/blue
 /obj/structure/bed/chair/armchair/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	reinf_material = /decl/material/solid/organic/cloth/beige
 /obj/structure/bed/chair/armchair/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	reinf_material = /decl/material/solid/organic/cloth/lime
 /obj/structure/bed/chair/armchair/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	reinf_material = /decl/material/solid/organic/cloth/yellow
 
 /obj/structure/bed/chair/office
 	name = "office chair"
@@ -196,9 +196,9 @@
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light
-	reinf_material = /decl/material/solid/cloth
+	reinf_material = /decl/material/solid/organic/cloth
 /obj/structure/bed/chair/office/dark
-	reinf_material = /decl/material/solid/cloth/black
+	reinf_material = /decl/material/solid/organic/cloth/black
 
 /obj/structure/bed/chair/office/comfy
 	name = "comfy office chair"
@@ -207,25 +207,25 @@
 	base_icon = "comfyofficechair"
 
 /obj/structure/bed/chair/office/comfy/brown
-	reinf_material = /decl/material/solid/leather
+	reinf_material = /decl/material/solid/organic/leather
 /obj/structure/bed/chair/office/comfy/red
-	reinf_material = /decl/material/solid/carpet
+	reinf_material = /decl/material/solid/organic/carpet
 /obj/structure/bed/chair/office/comfy/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	reinf_material = /decl/material/solid/organic/cloth/teal
 /obj/structure/bed/chair/office/comfy/black
-	reinf_material = /decl/material/solid/cloth/black
+	reinf_material = /decl/material/solid/organic/cloth/black
 /obj/structure/bed/chair/office/comfy/green
-	reinf_material = /decl/material/solid/cloth/green
+	reinf_material = /decl/material/solid/organic/cloth/green
 /obj/structure/bed/chair/office/comfy/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	reinf_material = /decl/material/solid/organic/cloth/purple
 /obj/structure/bed/chair/office/comfy/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	reinf_material = /decl/material/solid/organic/cloth/blue
 /obj/structure/bed/chair/office/comfy/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	reinf_material = /decl/material/solid/organic/cloth/beige
 /obj/structure/bed/chair/office/comfy/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	reinf_material = /decl/material/solid/organic/cloth/lime
 /obj/structure/bed/chair/office/comfy/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	reinf_material = /decl/material/solid/organic/cloth/yellow
 
 /obj/structure/bed/chair/rounded
 	name = "rounded chair"
@@ -234,25 +234,25 @@
 	base_icon = "roundedchair"
 
 /obj/structure/bed/chair/rounded/brown
-	reinf_material = /decl/material/solid/leather
+	reinf_material = /decl/material/solid/organic/leather
 /obj/structure/bed/chair/rounded/red
-	reinf_material = /decl/material/solid/carpet
+	reinf_material = /decl/material/solid/organic/carpet
 /obj/structure/bed/chair/rounded/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	reinf_material = /decl/material/solid/organic/cloth/teal
 /obj/structure/bed/chair/rounded/black
-	reinf_material = /decl/material/solid/cloth/black
+	reinf_material = /decl/material/solid/organic/cloth/black
 /obj/structure/bed/chair/rounded/green
-	reinf_material = /decl/material/solid/cloth/green
+	reinf_material = /decl/material/solid/organic/cloth/green
 /obj/structure/bed/chair/rounded/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	reinf_material = /decl/material/solid/organic/cloth/purple
 /obj/structure/bed/chair/rounded/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	reinf_material = /decl/material/solid/organic/cloth/blue
 /obj/structure/bed/chair/rounded/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	reinf_material = /decl/material/solid/organic/cloth/beige
 /obj/structure/bed/chair/rounded/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	reinf_material = /decl/material/solid/organic/cloth/lime
 /obj/structure/bed/chair/rounded/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	reinf_material = /decl/material/solid/organic/cloth/yellow
 
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
@@ -271,11 +271,11 @@
 	..()
 
 /obj/structure/bed/chair/shuttle/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	reinf_material = /decl/material/solid/organic/cloth/blue
 /obj/structure/bed/chair/shuttle/black
-	reinf_material = /decl/material/solid/cloth/black
+	reinf_material = /decl/material/solid/organic/cloth/black
 /obj/structure/bed/chair/shuttle/white
-	reinf_material = /decl/material/solid/cloth
+	reinf_material = /decl/material/solid/organic/cloth
 
 /obj/structure/bed/chair/wood
 	name = "classic chair"
@@ -283,7 +283,7 @@
 	icon_state = "wooden_chair_preview"
 	base_icon = "wooden_chair"
 	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/structure/bed/chair/wood/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/stack) || IS_WIRECUTTER(W))
@@ -292,16 +292,16 @@
 
 /obj/structure/bed/chair/wood/mahogany
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 /obj/structure/bed/chair/wood/maple
 	color = WOOD_COLOR_PALE
-	material = /decl/material/solid/wood/maple
+	material = /decl/material/solid/organic/wood/maple
 /obj/structure/bed/chair/wood/ebony
 	color = WOOD_COLOR_BLACK
-	material = /decl/material/solid/wood/ebony
+	material = /decl/material/solid/organic/wood/ebony
 /obj/structure/bed/chair/wood/walnut
 	color = WOOD_COLOR_CHOCOLATE
-	material = /decl/material/solid/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/bed/chair/wood/wings
 	name = "winged chair"
@@ -310,16 +310,16 @@
 
 /obj/structure/bed/chair/wood/wings/mahogany
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 /obj/structure/bed/chair/wood/wings/maple
 	color = WOOD_COLOR_PALE
-	material = /decl/material/solid/wood/maple
+	material = /decl/material/solid/organic/wood/maple
 /obj/structure/bed/chair/wood/wings/ebony
 	color = WOOD_COLOR_BLACK
-	material = /decl/material/solid/wood/ebony
+	material = /decl/material/solid/organic/wood/ebony
 /obj/structure/bed/chair/wood/wings/walnut
 	color = WOOD_COLOR_CHOCOLATE
-	material = /decl/material/solid/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/bed/chair/pew
 	name = "pew"
@@ -327,13 +327,13 @@
 	icon_state = "pew"
 	base_icon = "pew"
 	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	obj_flags = 0
 /obj/structure/bed/chair/pew/left
 	icon_state = "pew_left"
 /obj/structure/bed/chair/pew/mahogany
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 /obj/structure/bed/chair/pew/left/mahogany
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany

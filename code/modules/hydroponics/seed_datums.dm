@@ -534,7 +534,7 @@
 	name = "towercap"
 	seed_name = "towercap"
 	display_name = "towercap thicket"
-	chems = list(/decl/material/solid/wood = list(10,1))
+	chems = list(/decl/material/solid/organic/wood = list(10,1))
 	mutants = null
 
 /datum/seed/mushroom/towercap/New()
@@ -1319,7 +1319,7 @@
 	name = "bamboo"
 	seed_name = "bamboo"
 	display_name = "bamboo thicket"
-	chems = list(/decl/material/solid/wood/bamboo = list(6,1))
+	chems = list(/decl/material/solid/organic/wood/bamboo = list(6,1))
 	mutants = null
 
 /datum/seed/bamboo/New()

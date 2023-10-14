@@ -103,7 +103,7 @@
 	desc = "A SalonPro Nano-Mirror(TM) brand mirror! Now a portable version."
 	icon = 'icons/obj/items/mirror.dmi'
 	icon_state = "mirror"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY

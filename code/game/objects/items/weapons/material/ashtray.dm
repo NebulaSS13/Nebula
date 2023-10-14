@@ -57,7 +57,7 @@
 	take_damage(3, BRUTE, 0, hit_atom)
 
 /obj/item/ashtray/plastic
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/ashtray/glass
 	material = /decl/material/solid/glass
