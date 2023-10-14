@@ -150,18 +150,16 @@
 				inv_box = existing_box
 				break
 		if(!inv_box)
-			inv_box = new /obj/screen/inventory()
+			inv_box = new /obj/screen/inventory(null, mymob)
 		inv_box.SetName(hand_tag)
 		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_base"
 
 		inv_box.cut_overlays()
-		inv_box.add_overlay("hand_[hand_tag]")
+		inv_box.add_overlay("hand_[hand_tag]", TRUE)
 		if(inv_slot.ui_label)
-			inv_box.add_overlay("hand_[inv_slot.ui_label]")
-		if(mymob.get_active_held_item_slot() == hand_tag)
-			inv_box.add_overlay("hand_selected")
-		inv_box.compile_overlays()
+			inv_box.add_overlay("hand_[inv_slot.ui_label]", TRUE)
+		inv_box.update_icon()
 
 		inv_box.slot_id = hand_tag
 		inv_box.color = ui_color
@@ -236,7 +234,7 @@
 		if(gear_slot in held_slots)
 			continue
 
-		inv_box = new /obj/screen/inventory()
+		inv_box = new /obj/screen/inventory(null, mymob)
 		inv_box.icon =  ui_style
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
@@ -287,7 +285,7 @@
 	var/list/held_slots = mymob.get_held_item_slots()
 	if(length(held_slots) > 1)
 
-		using = new /obj/screen/inventory()
+		using = new /obj/screen/inventory(null, mymob)
 		using.SetName("hand")
 		using.icon = ui_style
 		using.icon_state = "hand1"
@@ -296,7 +294,7 @@
 		src.adding += using
 		LAZYADD(swaphand_hud_objects, using)
 
-		using = new /obj/screen/inventory()
+		using = new /obj/screen/inventory(null, mymob)
 		using.SetName("hand")
 		using.icon = ui_style
 		using.icon_state = "hand2"
