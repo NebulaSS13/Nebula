@@ -278,6 +278,8 @@ var/global/list/gamemode_cache = list()
 	var/exoplanet_max_day_duration = 40 MINUTES
 	///If true, exoplanets won't have daycycles
 	var/disable_daycycle = FALSE
+	/// Whether or not you will show a message when examining something.
+	var/visible_examine = TRUE
 
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
@@ -836,6 +838,9 @@ var/global/list/gamemode_cache = list()
 
 				if("show_typing_indicator_for_whispers")
 					config.show_typing_indicator_for_whispers = TRUE
+
+				if("visible_examine")
+					config.visible_examine = text2num(value)
 
 				else
 					//crappy hook to get modpacks to load any extra config
