@@ -371,7 +371,7 @@ var/global/bomb_set
 	events_repository.register(/decl/observ/moved, src, src, /obj/item/disk/nuclear/proc/check_z_level)
 
 /obj/item/disk/nuclear/proc/check_z_level()
-	if(!(istype(SSticker.mode, /datum/game_mode/nuclear)))
+	if(!(istype(SSticker.mode, /decl/game_mode/nuclear)))
 		events_repository.unregister(/decl/observ/moved, src, src, /obj/item/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
 		return
 	var/turf/T = get_turf(src)

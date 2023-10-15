@@ -131,7 +131,7 @@
 	return 1
 
 // Get the raw list of potential players.
-/decl/special_role/proc/build_candidate_list(datum/game_mode/mode, ghosts_only)
+/decl/special_role/proc/build_candidate_list(decl/game_mode/mode, ghosts_only)
 	candidates = list() // Clear.
 
 	// Prune restricted status. Broke it up for readability.
@@ -155,7 +155,7 @@
 	return candidates
 
 // Builds a list of potential antags without actually setting them. Used to test mode viability.
-/decl/special_role/proc/get_potential_candidates(var/datum/game_mode/mode, var/ghosts_only)
+/decl/special_role/proc/get_potential_candidates(var/decl/game_mode/mode, var/ghosts_only)
 	var/candidates = list()
 
 	// Keeping broken up for readability

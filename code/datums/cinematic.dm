@@ -7,7 +7,7 @@ var/global/datum/cinematic/cinematic = new
 	var/obj/screen/cinematic_screen = null
 
 //Plus it provides an easy way to make cinematics for other events. Just use this as a template :)
-/datum/cinematic/proc/station_explosion_cinematic(var/station_missed=0, var/datum/game_mode/override)
+/datum/cinematic/proc/station_explosion_cinematic(var/station_missed=0, var/decl/game_mode/override)
 	set waitfor = FALSE
 
 	if(cinematic_screen)
@@ -16,7 +16,7 @@ var/global/datum/cinematic/cinematic = new
 	if(!override)
 		override = SSticker.mode
 	if(!override)
-		override = gamemode_cache["extended"]
+		override = decls_repository.get_decl_by_id("extended")
 	if(!override)
 		return
 
