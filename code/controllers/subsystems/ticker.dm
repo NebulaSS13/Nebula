@@ -227,16 +227,16 @@ Helpers
 	if((mode_to_try=="random") || (mode_to_try=="secret"))
 		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
-			mode_datum = decls_repository.get_decl_by_id(secret_force_mode)
+			mode_datum = decls_repository.get_decl_by_id(secret_force_mode, validate_decl_type = FALSE)
 		else if(!length(runnable_modes))  // Indicates major issues; will be handled on return.
 			bad_modes += mode_to_try
 			return
 		else
-			mode_datum = decls_repository.get_decl_by_id(pickweight(runnable_modes))
+			mode_datum = decls_repository.get_decl_by_id(pickweight(runnable_modes), validate_decl_type = FALSE)
 			if(length(runnable_modes) > 1) // More to pick if we fail; we won't tell anyone we failed unless we fail all possibilities, though.
 				. = CHOOSE_GAMEMODE_SILENT_REDO
 	else
-		mode_datum = decls_repository.get_decl_by_id(mode_to_try)
+		mode_datum = decls_repository.get_decl_by_id(mode_to_try, validate_decl_type = FALSE)
 	if(!istype(mode_datum))
 		bad_modes += mode_to_try
 		return
@@ -261,7 +261,7 @@ Helpers
 		to_world("<B>The current game mode is Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
-			var/decl/game_mode/M = decls_repository.get_decl_by_id(mode_tag)
+			var/decl/game_mode/M = decls_repository.get_decl_by_id(mode_tag, validate_decl_type = FALSE)
 			if(M)
 				mode_names += M.name
 		if (config.secret_hide_possibilities)

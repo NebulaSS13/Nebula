@@ -16,7 +16,7 @@ var/global/datum/cinematic/cinematic = new
 	if(!override)
 		override = SSticker.mode
 	if(!override)
-		override = decls_repository.get_decl_by_id("extended")
+		override = GET_DECL(/decl/game_mode/extended)
 	if(!override)
 		return
 
