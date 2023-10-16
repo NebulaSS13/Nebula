@@ -61,6 +61,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	density                 = TRUE
 	idle_power_usage        = 30
 	active_power_usage      = 200
+	base_type               = /obj/machinery/faxmachine
 	construct_state         = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(
 		/obj/item/stock_parts/item_holder/disk_reader = 1,
@@ -430,22 +431,15 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		return FALSE
 	use_power_oneoff(active_power_usage)
 
+	var/obj/item/card/id/ID = try_get_card()
+	ID = istype(ID)? ID : null
+
 	//Grab our network
 	var/datum/extension/network_device/sender_dev = get_extension(src, /datum/extension/network_device)
 	var/datum/computer_network/origin_network = sender_dev?.get_network()
 	if(!origin_network)
 		to_chat(user, SPAN_WARNING("No network connection!"))
 		return FALSE
-
-	if(!length(target_net_id))
-		target_net_id = origin_network.network_id //Use the current network if none specified
-
-	if((target_net_id != origin_network.network_id) && !sender_dev.has_internet_connection(origin_network))
-		to_chat(user, SPAN_WARNING("No internet connection!"))
-		return FALSE
-
-	var/obj/item/card/id/ID = try_get_card()
-	ID = istype(ID)? ID : null
 
 	//If sending to admins, don't try to get a target network or device
 	var/target_URI = uppertext("[target_net_tag].[target_net_id]")
@@ -462,8 +456,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		else if(prob(1))
 			spark_at(src, 1)
 
-		.= send_fax_to_admin(user, scanner_item, target_URI, src)
-		log_history("Outgoing", "'[scanner_item]', from '[get_area(src)]'s [src]' @ '[sender_dev.get_network_URI()]' to [target_admin_fax["name"]]' @ '[target_URI]'.")
+		. = send_fax_to_admin(user, scanner_item, target_URI, src)
+		log_history("Outgoing", "'[scanner_item]', from '[get_area(src)]'s [src]' @ '[sender_dev?.get_network_URI() || "UNKNOWN SENDER"]' to [target_admin_fax["name"]]' @ '[target_URI]'.")
 		update_ui()
 		flick("faxsend", src)
 		//#TODO: sync the animation, sound and message together when I got enough patience.
@@ -471,6 +465,13 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		ping("Message transmitted successfully!")
 		time_cooldown_end = world.timeofday + FAX_ADMIN_COOLDOWN
 		return TRUE
+
+	if(!length(target_net_id))
+		target_net_id = origin_network.network_id //Use the current network if none specified
+
+	if((target_net_id != origin_network.network_id) && !sender_dev.has_internet_connection(origin_network))
+		to_chat(user, SPAN_WARNING("No internet connection!"))
+		return FALSE
 
 	var/datum/computer_network/target_net
 	if(target_net_id != origin_network.network_id)
@@ -632,6 +633,8 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		if(user)
 			to_chat(user, SPAN_WARNING("Please select a contact to remove!"))
 		return FALSE
+
+	var/remove_uri = LAZYACCESS(quick_dial, contact_name)
 	LAZYREMOVE(quick_dial, contact_name)
 
 	//Overwrite quick dial
@@ -642,7 +645,7 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 		D.write_file(datfile, FAX_QUICK_DIAL_FILE)
 
 	if(user)
-		to_chat(user, SPAN_NOTICE("Successfully removed contact '[contact_name]' with URI '[LAZYACCESS(quick_dial, contact_name)]'!"))
+		to_chat(user, SPAN_NOTICE("Successfully removed contact '[contact_name]' with URI '[remove_uri]'!"))
 	update_ui()
 	return TRUE
 
@@ -690,3 +693,19 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 #undef FAX_HISTORY_FILE
 #undef FAX_COOLDOWN
 #undef FAX_ADMIN_COOLDOWN
+
+/obj/machinery/faxmachine/mapped/Initialize()
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/faxmachine/mapped/LateInitialize()
+	..()
+	// Pre-populate our admin targets.
+	if(!disk_reader)
+		CRASH("Missing disk reader from pre-mapped fax machine!")
+	if(!disk_reader.disk)
+		disk_reader.insert_item(new /obj/item/disk(disk_reader))
+	for(var/uri in global.using_map.map_admin_faxes)
+		var/list/contact_info = global.using_map.map_admin_faxes[uri]
+		add_quick_dial_contact(contact_info["name"], uri)
