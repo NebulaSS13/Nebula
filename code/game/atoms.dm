@@ -27,8 +27,8 @@
 	var/was_bloodied
 	/// (COLOR) The color of the blood shown on blood overlays.
 	var/blood_color
-	/// (1 | 2 | 3) If it shows up under UV light. 0 doesn't, 1 does, 2 is currently glowing due to UV light. TODO: Use defines
-	var/fluorescent
+	/// (FALSE|DEFINES) How this atom is interacting with UV light. See misc.dm
+	var/fluorescent = FALSE
 
 
 	/// (LIST) A list of all mobs that are climbing or currently on this atom
@@ -471,7 +471,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(!simulated)
 		return
-	fluorescent = 0
+	fluorescent = FALSE
 	germ_level = 0
 	blood_color = null
 	if(istype(blood_DNA, /list))

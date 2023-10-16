@@ -562,7 +562,7 @@
 
 /obj/item/reveal_blood()
 	if(was_bloodied && !fluorescent)
-		fluorescent = 1
+		fluorescent = FLUORESCENT_GLOWS
 		blood_color = COLOR_LUMINOL
 		blood_overlay.color = COLOR_LUMINOL
 		update_icon()
