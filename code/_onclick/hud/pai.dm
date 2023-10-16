@@ -3,7 +3,7 @@
 		var/obj/screen/pai/hud_elem = hud_type
 		if(TYPE_IS_ABSTRACT(hud_elem))
 			continue
-		new hud_elem(null, mymob)
+		adding += new hud_elem(null, mymob)
 
 	..()
 	hide_inventory()

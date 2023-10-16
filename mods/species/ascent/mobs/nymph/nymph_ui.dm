@@ -50,4 +50,4 @@
 
 /obj/screen/ascent_nymph_health
 	name = "health"
-	name = screen_loc = ANYMPH_SCREEN_LOC_HEALTH
+	screen_loc = ANYMPH_SCREEN_LOC_HEALTH

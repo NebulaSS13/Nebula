@@ -215,6 +215,7 @@
 #include "code\_onclick\hud\screen\screen_setup.dm"
 #include "code\_onclick\hud\screen\screen_stamina.dm"
 #include "code\_onclick\hud\screen\screen_storage.dm"
+#include "code\_onclick\hud\screen\screen_swaphands.dm"
 #include "code\_onclick\hud\screen\screen_throw.dm"
 #include "code\_onclick\hud\screen\screen_toggle.dm"
 #include "code\_onclick\hud\screen\screen_up_hint.dm"

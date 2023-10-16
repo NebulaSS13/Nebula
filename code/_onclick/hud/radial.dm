@@ -3,15 +3,17 @@
 
 var/global/list/radial_menus = list()
 
-/obj/screen/radial/Destroy()
-	parent = null
-	return ..()
 
 /obj/screen/radial
 	icon = 'icons/screen/radial.dmi'
 	layer = HUD_ABOVE_ITEM_LAYER
 	plane = HUD_PLANE
+	requires_owner = FALSE
 	var/datum/radial_menu/parent
+
+/obj/screen/radial/Destroy()
+	parent = null
+	return ..()
 
 /obj/screen/radial/slice
 	icon_state = "radial_slice"

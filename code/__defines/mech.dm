@@ -1,4 +1,3 @@
-
 #define HARDPOINT_BACK "back"
 #define HARDPOINT_LEFT_HAND "left hand"
 #define HARDPOINT_RIGHT_HAND "right hand"

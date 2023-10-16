@@ -18,7 +18,7 @@ var/global/datum/global_hud/hud
 
 // makes custom colored overlay, can also generate scanline
 /datum/global_hud/proc/setup_overlay(icon_state, color)
-	var/obj/screen/screen = new /obj/screen()
+	var/obj/screen/screen = new /obj/screen(null)
 	screen.screen_loc = ui_entire_screen
 	screen.icon = 'icons/effects/hud_full.dmi'
 	screen.icon_state = icon_state
@@ -39,7 +39,7 @@ var/global/datum/global_hud/hud
 	//Holomap screen object is invisible and work
 	//By setting it as n images location, without icon changes
 	//Make it part of global hud since it's inmutable
-	holomap = new /obj/screen()
+	holomap = new /obj/screen(null)
 	holomap.name = "holomap"
 	holomap.icon = null
 	holomap.layer = HUD_BASE_LAYER

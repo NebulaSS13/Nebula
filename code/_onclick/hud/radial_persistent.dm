@@ -23,7 +23,7 @@
 	var/datum/callback/select_proc_callback
 
 /datum/radial_menu/persistent/New()
-	close_button = new /obj/screen/radial/persistent/center
+	close_button = new /obj/screen/radial/persistent/center(null)
 	close_button.parent = src
 
 /datum/radial_menu/persistent/element_chosen(choice_id,mob/user)

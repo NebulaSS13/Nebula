@@ -5,7 +5,7 @@
 	var/toggle_flag
 
 /obj/screen/gun/handle_click(mob/user, params)
-	if(toggle_flag && isliving(user))
+	if(isliving(user))
 		var/mob/living/shooter = user
 		if(!shooter.aiming)
 			shooter.aiming = new(user)

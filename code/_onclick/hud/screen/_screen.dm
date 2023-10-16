@@ -4,11 +4,13 @@
 	For more information, see the byond documentation on the screen_loc and screen vars.
 */
 /obj/screen
-	name             = ""
-	icon             = 'icons/mob/screen1.dmi'
-	plane            = HUD_PLANE
-	layer            = HUD_BASE_LAYER
-	appearance_flags = NO_CLIENT_COLOR
+	name              = ""
+	icon              = 'icons/mob/screen1.dmi'
+	plane             = HUD_PLANE
+	layer             = HUD_BASE_LAYER
+	appearance_flags  = NO_CLIENT_COLOR
+	abstract_type     = /obj/screen
+	is_spawnable_type = FALSE
 
 	/// The mob that owns this screen object, if any.
 	var/weakref/owner_ref
@@ -20,7 +22,8 @@
 	var/user_incapacitation_flags = INCAPACITATION_DEFAULT
 
 /obj/screen/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
-	owner_ref = ismob(_owner) && weakref(_owner)
+	if(ismob(_owner))
+		owner_ref = weakref(_owner)
 	if(requires_owner && !owner_ref)
 		PRINT_STACK_TRACE("ERROR: [type]'s Initialize() was not given an owner argument.")
 		return INITIALIZE_HINT_QDEL

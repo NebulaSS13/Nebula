@@ -366,7 +366,7 @@
 
 /obj/screen/exosuit/heat/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
 	. = ..()
-	gauge_needle = new /obj/screen/exosuit/needle(_owner)
+	gauge_needle = new /obj/screen/exosuit/needle(null, _owner)
 	add_vis_contents(src, gauge_needle)
 
 /obj/screen/exosuit/heat/Destroy()
