@@ -19,7 +19,7 @@
 ///Level data for generating underground levels on exoplanets
 /datum/level_data/planetoid/exoplanet/underground
 	base_area = /area/exoplanet/underground
-	base_turf = /turf/exterior/volcanic
+	base_turf = /turf/exterior/rock
 	level_generators = list(
 		/datum/random_map/noise/exoplanet/mantle,
 		/datum/random_map/automata/cave_system/mantle,

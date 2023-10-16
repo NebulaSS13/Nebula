@@ -142,7 +142,7 @@
 	name      = "neutralia abyssal depths"
 	level_id  = "neutralia_abyssal_depths"
 	base_area = /area/exoplanet/underground/neutralia/bottom
-	base_turf = /turf/exterior/volcanic
+	base_turf = /turf/exterior/rock/volcanic
 
 /obj/abstract/level_data_spawner/neutralia/sky
 	level_data_type = /datum/level_data/planetoid/neutralia/sky
