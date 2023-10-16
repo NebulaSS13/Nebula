@@ -87,14 +87,16 @@
 		set_invisibility(INVISIBILITY_ABSTRACT)
 
 /obj/screen/ability_master/proc/add_ability(var/name_given)
-	if(!name) return
+	if(!name_given)
+		return
 	var/obj/screen/ability/new_button = new /obj/screen/ability
 	new_button.ability_master = src
 	new_button.SetName(name_given)
 	new_button.ability_icon_state = name_given
 	new_button.update_icon(1)
 	ability_objects.Add(new_button)
-	if(owner.client)
+	var/mob/living/owner = owner_ref?.resolve()
+	if(istype(owner) && !QDELETED(owner) && owner.client)
 		toggle_open(2) //forces the icons to refresh on screen
 
 /obj/screen/ability_master/proc/remove_ability(var/obj/screen/ability/ability)
@@ -149,10 +151,6 @@
 		var/spell/S = screen.spell
 		M.learned_spells |= S
 
-/mob/Initialize()
-	. = ..()
-	ability_master = new /obj/screen/ability_master(null,src)
-
 ///////////ACTUAL ABILITIES////////////
 //This is what you click to do things//
 ///////////////////////////////////////
@@ -193,21 +191,6 @@
 // This checks if the ability can be used.
 /obj/screen/ability/proc/can_activate()
 	return 1
-
-/client/verb/activate_ability(var/slot as num)
-	set name = ".activate_ability"
-//	set hidden = 1
-	if(!mob)
-		return // Paranoid.
-	if(isnull(slot) || !isnum(slot))
-		to_chat(src,"<span class='warning'>.activate_ability requires a number as input, corrisponding to the slot you wish to use.</span>")
-		return // Bad input.
-	if(!mob.ability_master)
-		return // No abilities.
-	if(slot > mob.ability_master.ability_objects.len || slot <= 0)
-		return // Out of bounds.
-	var/obj/screen/ability/A = mob.ability_master.ability_objects[slot]
-	A.activate()
 
 //////////Verb Abilities//////////
 //Buttons to trigger verbs/procs//

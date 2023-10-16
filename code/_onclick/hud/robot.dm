@@ -26,89 +26,44 @@ var/global/obj/screen/robot_inventory
 		..()
 		return
 
-	var/obj/screen/using
-
 	//Radio
-	using = new /obj/screen/robot_radio()
-	adding += using
+	adding += new /obj/screen/robot_radio(null, mymob)
 
 	//Module select
-	using = new /obj/screen/robot_module_one()
-	adding += using
-	R.inv1 = using
-	using = new /obj/screen/robot_module_two()
-	adding += using
-	R.inv2 = using
-	using = new /obj/screen/robot_module_three()
-	adding += using
-	R.inv3 = using
+	R.inv1 = new /obj/screen/robot_module_one(  null, mymob)
+	R.inv2 = new /obj/screen/robot_module_two(  null, mymob)
+	R.inv3 = new /obj/screen/robot_module_three(null, mymob)
+	adding += R.inv1
+	adding += R.inv2
+	adding += R.inv3
 	//End of module select
 
 	// Drop UI
-	R.ui_drop_grab = new
+	R.ui_drop_grab = new(null, mymob)
 	adding += R.ui_drop_grab
 
 	//Intent
-	using = new /obj/screen/robot_intent()
-	using.icon_state = R.a_intent
-	adding += using
-	action_intent = using
+	action_intent = new /obj/screen/robot_intent(null, mymob)
+	action_intent.icon_state = R.a_intent
+	adding += action_intent
 
-	//Cell
-	R.cells = new /obj/screen()
-	R.cells.icon = 'icons/mob/screen1_robot.dmi'
-	R.cells.icon_state = "charge-empty"
-	R.cells.SetName("cell")
-	R.cells.screen_loc = ui_toxin
-	//Health
-	R.healths = new /obj/screen()
-	R.healths.icon = 'icons/mob/screen1_robot.dmi'
-	R.healths.icon_state = "health0"
-	R.healths.SetName("health")
-	R.healths.screen_loc = ui_borg_health
-	//Installed Module
-	R.hands = new /obj/screen/robot_module_select()
-	R.hands.screen_loc = ui_borg_module
-	//Module Panel
-	using = new /obj/screen/robot_panel()
-	adding += using
-	//Store
-	R.throw_icon = new /obj/screen/robot_store()
-	R.throw_icon.screen_loc = ui_borg_store
-	//Inventory
-	robot_inventory = new /obj/screen/robot_inventory()
+	adding            += new /obj/screen/robot_panel(        null, mymob)
+	R.cells            = new /obj/screen/robot_charge(       null, mymob)
+	R.healths          = new /obj/screen/robot_health(       null, mymob)
+	R.hands            = new /obj/screen/robot_module_select(null, mymob)
+	R.throw_icon       = new /obj/screen/robot_store(        null, mymob)
+	robot_inventory    = new /obj/screen/robot_inventory(    null, mymob)
+	R.bodytemp         = new /obj/screen/bodytemp(           null, mymob)
+	R.oxygen           = new /obj/screen/robot_oxygen(       null, mymob)
+	R.fire             = new /obj/screen/robot_fire(         null, mymob)
+	R.up_hint          = new /obj/screen/up_hint(            null, mymob, 'icons/mob/screen1_robot.dmi')
+	R.zone_sel         = new(                                null, mymob, 'icons/mob/screen1_robot.dmi')
+	R.gun_setting_icon = new /obj/screen/gun/mode(           null, mymob)
+	R.item_use_icon    = new /obj/screen/gun/item(           null, mymob)
+	R.gun_move_icon    = new /obj/screen/gun/move(           null, mymob)
+	R.radio_use_icon   = new /obj/screen/gun/radio(          null, mymob)
 
-	//Temp
-	R.bodytemp = new /obj/screen()
-	R.bodytemp.icon = 'icons/mob/status_indicators.dmi'
-	R.bodytemp.icon_state = "temp0"
-	R.bodytemp.SetName("body temperature")
-	R.bodytemp.screen_loc = ui_temp
 
-	R.oxygen = new /obj/screen()
-	R.oxygen.icon = 'icons/mob/screen1_robot.dmi'
-	R.oxygen.icon_state = "oxy0"
-	R.oxygen.SetName("oxygen")
-	R.oxygen.screen_loc = ui_oxygen
-
-	R.fire = new /obj/screen()
-	R.fire.icon = 'icons/mob/screen1_robot.dmi'
-	R.fire.icon_state = "fire0"
-	R.fire.SetName("fire")
-	R.fire.screen_loc = ui_fire
-
-	R.up_hint = new /obj/screen/up_hint()
-	R.up_hint.icon = 'icons/mob/screen1_robot.dmi'
-
-	R.zone_sel = new
-	R.zone_sel.icon = 'icons/mob/screen1_robot.dmi'
-	R.zone_sel.update_icon()
-
-	//Handle the gun settings buttons
-	R.gun_setting_icon = new /obj/screen/gun/mode(null)
-	R.item_use_icon = new /obj/screen/gun/item(null)
-	R.gun_move_icon = new /obj/screen/gun/move(null)
-	R.radio_use_icon = new /obj/screen/gun/radio(null)
 
 	hud_elements = list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
 	..()

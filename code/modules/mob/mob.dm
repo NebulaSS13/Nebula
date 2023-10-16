@@ -65,6 +65,7 @@
 	if(ispath(move_intent))
 		move_intent = GET_DECL(move_intent)
 	. = ..()
+	ability_master = new(null, src)
 	refresh_ai_handler()
 	START_PROCESSING(SSmobs, src)
 
