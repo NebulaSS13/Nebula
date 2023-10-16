@@ -94,7 +94,7 @@
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
 	return
 
-/mob/living/simple_animal/hostile/proc/MoveToTarget()
+/mob/living/simple_animal/hostile/proc/MoveToTarget(var/move_only = FALSE)
 	if(!can_act())
 		return
 	if(HAS_STATUS(src, STAT_CONFUSE))
@@ -106,7 +106,8 @@
 	if(target_mob in ListTargets(10))
 		if(ranged)
 			if(get_dist(src, target_mob) <= ranged_range)
-				OpenFire(target_mob)
+				if(!move_only)
+					OpenFire(target_mob)
 			else
 				walk_to(src, target_mob, 1, move_to_delay)
 		else
@@ -222,53 +223,54 @@
 	. = ..()
 	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
-		MoveToTarget()
+		MoveToTarget(move_only = TRUE)
 
 /mob/living/simple_animal/hostile/default_hurt_interaction(mob/user)
 	. = ..()
 	if(. && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
-		MoveToTarget()
+		MoveToTarget(move_only = TRUE)
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
 	if(isliving(Proj.firer) && !target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
-		MoveToTarget()
+		MoveToTarget(move_only = TRUE)
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
+
+	if(!can_act())
+		return FALSE
+
 	var/target = target_mob
-	visible_message("<span class='danger'>\The [src] [fire_desc] at \the [target]!</span>", 1)
+	visible_message(SPAN_DANGER("\The [src] [fire_desc] at \the [target]!"))
 
 	if(rapid)
 		var/datum/callback/shoot_cb = CALLBACK(src, .proc/shoot_wrapper, target, loc, src)
 		addtimer(shoot_cb, 1)
 		addtimer(shoot_cb, 4)
 		addtimer(shoot_cb, 6)
-	else
-		Shoot(target, src.loc, src)
-		if(casingtype)
-			new casingtype
+	else if(Shoot(target, src.loc, src) && casingtype)
+		new casingtype(get_turf(src))
 
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
-	return
+	return TRUE
 
 /mob/living/simple_animal/hostile/proc/shoot_wrapper(target, location, user)
-	Shoot(target, location, user)
-	if (casingtype)
+	if(Shoot(target, location, user) && casingtype)
 		new casingtype(loc)
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
-	if(target == start)
-		return
-
+	if(!can_act() || target == start)
+		return FALSE
 	var/obj/item/projectile/A = new projectiletype(get_turf(user))
+	if(!A)
+		return FALSE
 	playsound(user, projectilesound, 100, 1)
-	if(!A)	return
-	var/def_zone = get_exposed_defense_zone(target)
-	A.launch(target, def_zone)
+	A.launch(target, get_exposed_defense_zone(target))
+	return TRUE
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings() //courtesy of Lohikar
 	if(!can_act())

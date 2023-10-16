@@ -619,7 +619,7 @@
 	return ..() || "rough"
 
 /mob/living/simple_animal/proc/can_act()
-	if(QDELETED(src) || stat || incapacitated())
+	if(QDELETED(src) || incapacitated())
 		return FALSE
 	return TRUE
 
