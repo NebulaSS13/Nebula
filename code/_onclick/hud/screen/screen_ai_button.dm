@@ -6,7 +6,7 @@
 	var/list/template_icon = list(null, "template")
 	var/image/template_undelay
 
-/obj/screen/ai_button/Click()
+/obj/screen/ai_button/handle_click(mob/user, params)
 	if(!isAI(usr))
 		return TRUE
 	var/mob/living/silicon/ai/A = usr
@@ -38,19 +38,17 @@
 	call(A, ai_verb)(arglist(input_arguments))
 	return TRUE
 
-/obj/screen/ai_button/Initialize(maploading, screen_loc, name, icon_state, ai_verb, list/input_procs = null, list/input_args = null)
+/obj/screen/ai_button/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, decl/ai_hud/ai_hud_data)
 	. = ..()
+
+	name        = ai_hud_data.name
+	icon_state  = ai_hud_data.icon_state
+	screen_loc  = ai_hud_data.screen_loc
+	ai_verb     = ai_hud_data.proc_path
+	input_procs = ai_hud_data.input_procs?.Copy()
+	input_args  = ai_hud_data.input_args?.Copy()
+
 	if(!LAZYLEN(template_icon))
 		template_icon = list(icon)
-
-	src.name = name
-	src.icon_state = icon_state
-	src.screen_loc = screen_loc
-	src.ai_verb = ai_verb
-	if(input_procs)
-		src.input_procs = input_procs.Copy()
-	if(input_args)
-		src.input_args = input_args.Copy()
-
 	template_undelay = image(template_icon[1], template_icon[2])
 	underlays += template_undelay

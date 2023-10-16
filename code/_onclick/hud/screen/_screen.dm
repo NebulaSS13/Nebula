@@ -9,8 +9,35 @@
 	plane            = HUD_PLANE
 	layer            = HUD_BASE_LAYER
 	appearance_flags = NO_CLIENT_COLOR
-	var/obj/master   = null  // A reference to the object in the slot. Grabs or items, generally.
-	var/globalscreen = FALSE // Global screens are not qdeled when the holding mob is destroyed.
+
+	/// The mob that owns this screen object, if any.
+	var/weakref/owner_ref
+	/// Whether or not this screen element requires an owner.
+	var/requires_owner = FALSE
+	/// Global screens are not qdeled when the holding mob is destroyed.
+	var/is_global_screen = FALSE
+	/// A set of flags to check for when the user clicks this element.
+	var/user_incapacitation_flags = INCAPACITATION_DEFAULT
+
+/obj/screen/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
+	owner_ref = ismob(_owner) && weakref(_owner)
+	if(requires_owner && !owner_ref)
+		PRINT_STACK_TRACE("ERROR: [type]'s Initialize() was not given an owner argument.")
+		return INITIALIZE_HINT_QDEL
+	if(!isnull(ui_style))
+		icon = ui_style
+	if(!isnull(ui_color))
+		color = ui_color
+	if(!isnull(ui_alpha))
+		alpha = ui_alpha
+	return ..()
+
+/obj/screen/Destroy()
+	if(owner_ref)
+		var/mob/owner = owner_ref.resolve()
+		if(istype(owner) && owner?.client?.screen)
+			owner.client.screen -= src
+	return ..()
 
 /obj/screen/proc/handle_click(mob/user, params)
 	if(!user)
@@ -93,7 +120,7 @@
 	return TRUE
 
 /obj/screen/Click(location, control, params)
-	if(ismob(usr) && usr.client && usr.canClick() && !usr.incapacitated())
+	if(ismob(usr) && usr.client && usr.canClick() && (!user_incapacitation_flags || !usr.incapacitated(user_incapacitation_flags)))
 		return handle_click(usr, params)
 	return FALSE
 
@@ -102,7 +129,3 @@
 
 /obj/screen/check_mousedrop_interactivity(var/mob/user)
 	return user.client && (src in user.client.screen)
-
-/obj/screen/Destroy()
-	master = null
-	return ..()

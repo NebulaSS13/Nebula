@@ -64,7 +64,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "egg-on"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/internal/egg_sac/insectoid/attack_self(var/mob/user)
 	. = ..()

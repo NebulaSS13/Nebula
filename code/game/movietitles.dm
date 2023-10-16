@@ -36,7 +36,7 @@ var/global/list/end_titles
 	for(var/I in global.end_titles)
 		if(!credits)
 			return
-		var/obj/screen/credit/T = new(null, I, src)
+		var/obj/screen/credit/T = new(null, null, null, null, null, I, src)
 		_credits += T
 		T.rollem()
 		sleep(CREDIT_SPAWN_SPEED)
@@ -64,7 +64,7 @@ var/global/list/end_titles
 	var/client/parent
 	var/matrix/target
 
-/obj/screen/credit/Initialize(mapload, credited, client/P)
+/obj/screen/credit/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, credited, client/P)
 	. = ..()
 	parent = P
 	maptext = {"<div style="font:'Small Fonts'">[credited]</div>"}

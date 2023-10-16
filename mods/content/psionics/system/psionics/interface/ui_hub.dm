@@ -8,20 +8,19 @@
 	var/image/on_cooldown
 	var/list/components
 
-/obj/screen/psi/hub/Initialize()
+/obj/screen/psi/hub/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
 	. = ..()
 	on_cooldown = image(icon, "cooldown")
 	components = list(
-		new /obj/screen/psi/armour(loc, owner),
-		new /obj/screen/psi/toggle_psi_menu(loc, owner, src)
-		)
+		new /obj/screen/psi/armour(null, owner),
+		new /obj/screen/psi/toggle_psi_menu(null, owner, null, null, null, src)
+	)
 	START_PROCESSING(SSprocessing, src)
 
 /obj/screen/psi/hub/on_update_icon()
-
-	if(!owner.psi)
+	var/mob/living/owner = owner_ref?.resolve()
+	if(!istype(owner) || !owner.psi)
 		return
-
 	icon_state = owner.psi.suppressed ? "psi_suppressed" : "psi_active"
 	if(world.time < owner.psi.next_power_use)
 		overlays |= on_cooldown
@@ -35,13 +34,13 @@
 
 /obj/screen/psi/hub/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
-	owner = null
 	for(var/thing in components)
 		qdel(thing)
 	components.Cut()
 	. = ..()
 
 /obj/screen/psi/hub/Process()
+	var/mob/living/owner = owner_ref?.resolve()
 	if(!istype(owner))
 		qdel(src)
 		return
@@ -50,7 +49,12 @@
 	maptext = "[round((owner.psi.stamina/owner.psi.max_stamina)*100)]%"
 	update_icon()
 
-/obj/screen/psi/hub/Click(var/location, var/control, var/params)
+/obj/screen/psi/hub/handle_click(mob/user, params)
+
+	var/mob/living/owner = owner_ref?.resolve()
+	if(!istype(owner) || !owner.psi)
+		return
+
 	var/list/click_params = params2list(params)
 	if(click_params["shift"])
 		owner.show_psi_assay(owner)

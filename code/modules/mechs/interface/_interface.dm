@@ -1,5 +1,3 @@
-#define BAR_CAP 12
-
 /mob/living/exosuit
 	var/static/list/additional_hud_elements = list(
 		/obj/screen/exosuit/toggle/power_control,

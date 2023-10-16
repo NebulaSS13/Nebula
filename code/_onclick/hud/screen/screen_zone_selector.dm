@@ -66,7 +66,7 @@
 	set_selected_zone(new_selecting)
 	return 1
 
-/obj/screen/zone_selector/Initialize(mapload)
+/obj/screen/zone_selector/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
 	. = ..()
 	update_icon()
 

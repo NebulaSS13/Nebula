@@ -8,14 +8,6 @@
 	..()
 	D.sync_to_mob(mymob)
 
-/obj/screen/intent/deity
-	var/list/desc_screens = list()
-	screen_loc = "RIGHT-5:122,BOTTOM:8"
-
-/obj/screen/intent/deity/Initialize()
-	. = ..()
-	overlays += image('icons/mob/screen_phenomena.dmi', icon_state = "hud", pixel_x = -138, pixel_y = -1)
-
 /obj/screen/intent/deity/proc/sync_to_mob(var/mob)
 	var/mob/living/deity/D = mob
 	for(var/i in 1 to D.control_types.len)
@@ -45,6 +37,6 @@
 		else
 			S.maptext = null
 
-/obj/screen/intent/deity/Click(var/location, var/control, var/params)
+/obj/screen/intent/deity/handle_click(mob/user, params)
 	..()
 	update_text()

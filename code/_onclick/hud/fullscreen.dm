@@ -144,7 +144,7 @@
 	alpha = 0
 	allstate = 1
 
-/obj/screen/fullscreen/fadeout/Initialize()
+/obj/screen/fullscreen/fadeout/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
 	. = ..()
 	animate(src, alpha = 255, time = 10)
 
