@@ -32,6 +32,7 @@
 	uid = "solid_sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	value = 1.5
+	melting_point = T0C + 600
 
 /decl/material/solid/stone/granite
 	name                   = "granite"
@@ -66,6 +67,7 @@
 	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_SHINY
+	melting_point  = T0C + 1200
 	brute_armor = 3
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	construction_difficulty = MAT_VALUE_HARD_DIY
