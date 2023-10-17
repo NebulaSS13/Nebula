@@ -163,13 +163,5 @@
 /datum/fabricator_recipe/package_wrapper
 	path = /obj/item/stack/package_wrap
 
-/datum/fabricator_recipe/package_wrapper/get_resources()
-	..()
-	var/obj/item/stack/package_wrap/wrap = path
-	if(ispath(wrap, path) && initial(wrap.tube))
-		var/list/extra_building_cost = atom_info_repository.get_matter_for(initial(wrap.tube))
-		for(var/mat in extra_building_cost)
-			resources[mat] = extra_building_cost[mat] * FABRICATOR_EXTRA_COST_FACTOR
-
 /datum/fabricator_recipe/package_wrapper/gift
 	path = /obj/item/stack/package_wrap/gift
