@@ -325,5 +325,7 @@
 
 // TODO: maybe iterate the entire matter list or do some partial damage handling
 /obj/proc/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	if(!simulated)
+		return FALSE
 	var/decl/material/mat = get_material()
 	return !mat || mat.dissolves_in <= solvent_power

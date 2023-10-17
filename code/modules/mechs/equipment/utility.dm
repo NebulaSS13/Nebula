@@ -435,22 +435,24 @@
 	if (!..()) // /obj/item/mech_equipment/afterattack implements a usage guard
 		return
 
-	if (istype(target, /obj/item/drill_head))
-		attach_head(target, user)
+	if(!target.simulated)
 		return
 
 	if (!drill_head)
-		to_chat(user, SPAN_WARNING("\The [src] doesn't have a head!"))
+		if (istype(target, /obj/item/drill_head))
+			attach_head(target, user)
+		else
+			to_chat(user, SPAN_WARNING("\The [src] doesn't have a head!"))
 		return
 
 	if (ismob(target))
-		var/mob/tmob = target
-		to_chat(tmob, FONT_HUGE(SPAN_DANGER("You're about to get drilled - dodge!")))
+		to_chat(target, FONT_HUGE(SPAN_DANGER("You're about to get drilled - dodge!")))
 
 	else if (isobj(target))
 		var/obj/tobj = target
-		if (!tobj.solvent_can_melt()) // why the hell does this use an acid check
-			to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
+		var/decl/material/mat = tobj.get_material()
+		if (mat && mat.hardness < drill_head.material?.hardness)
+			to_chat(user, SPAN_WARNING("\The [target] is too hard to be destroyed by [drill_head.material ? "a [drill_head.material.adjective_name]" : "this"] drill."))
 			return
 
 	else if (istype(target, /turf/unsimulated))
