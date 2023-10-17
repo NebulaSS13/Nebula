@@ -133,13 +133,19 @@
 	if(markings_color && markings_icon)
 		update_icon()
 
-/obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/clothing/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
 	. = ..()
-	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.get_held_item_slots()))
-		var/mob/living/carbon/human/H = M
-		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.bodytype.bodytype_flag) : (bodytype_equip_flags & H.bodytype.bodytype_flag)
-		if(!. && !disable_warning)
-			to_chat(H, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
+	if(!. || slot == slot_s_store_str || (slot in global.pocket_slots))
+		return
+	var/decl/bodytype/root_bodytype = user?.get_bodytype()
+	if(!root_bodytype || isnull(bodytype_equip_flags) || (slot in user.get_held_item_slots()))
+		return
+	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
+		. = !(bodytype_equip_flags & root_bodytype.bodytype_flag)
+	else
+		. = (bodytype_equip_flags & root_bodytype.bodytype_flag)
+	if(!. && !disable_warning)
+		to_chat(user, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
 
 /obj/item/clothing/equipped(var/mob/user)
 	if(needs_vision_update())

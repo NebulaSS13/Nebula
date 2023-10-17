@@ -457,8 +457,9 @@
 
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
 //Set disable_warning to 1 if you wish it to not give you outputs.
-/obj/item/proc/mob_can_equip(mob/M, slot, disable_warning = FALSE, force = FALSE)
-	if(!slot || !M)
+/obj/item/proc/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(!slot || !user)
 		return FALSE
 
 	// Some slots don't have an associated handler as they are shorthand for various setup functions.
@@ -466,21 +467,21 @@
 		switch(slot)
 			// Putting stuff into backpacks.
 			if(slot_in_backpack_str)
-				var/obj/item/storage/backpack/backpack = M.get_equipped_item(slot_back_str)
-				return istype(backpack) && backpack.can_be_inserted(src, M, TRUE)
+				var/obj/item/storage/backpack/backpack = user.get_equipped_item(slot_back_str)
+				return istype(backpack) && backpack.can_be_inserted(src, user, TRUE)
 			// Equipping accessories.
 			if(slot_tie_str)
 				// Find something to equip the accessory to.
 				for(var/check_slot in list(slot_w_uniform_str, slot_wear_suit_str))
-					var/obj/item/clothing/check_gear = M.get_equipped_item(check_slot)
+					var/obj/item/clothing/check_gear = user.get_equipped_item(check_slot)
 					if(istype(check_gear) && check_gear.can_attach_accessory(src))
 						return TRUE
 				if(!disable_warning)
-					to_chat(M, SPAN_WARNING("You need to be wearing something you can attach \the [src] to."))
+					to_chat(user, SPAN_WARNING("You need to be wearing something you can attach \the [src] to."))
 				return FALSE
 
-	var/datum/inventory_slot/inv_slot = M.get_inventory_slot_datum(slot)
-	if(!inv_slot || !inv_slot.is_accessible(M, src, disable_warning) || !inv_slot.can_equip_to_slot(M, src, disable_warning))
+	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)
+	if(!inv_slot || !inv_slot.is_accessible(user, src, disable_warning) || !inv_slot.can_equip_to_slot(user, src, disable_warning))
 		return FALSE
 	var/already_equipped = inv_slot.get_equipped_item()
 	if(already_equipped)
@@ -490,11 +491,11 @@
 		qdel(already_equipped)
 	return TRUE
 
-/obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)
-	if(!slot || !M || !canremove)
+/obj/item/proc/mob_can_unequip(mob/user, slot, disable_warning = FALSE)
+	if(!slot || !user || !canremove)
 		return FALSE
-	var/datum/inventory_slot/inv_slot = M.get_inventory_slot_datum(slot)
-	return inv_slot?.is_accessible(M, src, disable_warning)
+	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)
+	return inv_slot?.is_accessible(user, src, disable_warning)
 
 /obj/item/proc/can_be_dropped_by_client(mob/M)
 	return M.canUnEquip(src)

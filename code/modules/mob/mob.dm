@@ -1128,7 +1128,7 @@
 	return
 
 /mob/proc/get_bodytype()
-	return
+	RETURN_TYPE(/decl/bodytype)
 
 /// Update the mouse pointer of the attached client in this mob.
 /mob/proc/update_mouse_pointer()
