@@ -33,7 +33,7 @@
 		/datum/computer_file/program/reports
 	)
 
-/datum/job/captain/equip(var/mob/living/carbon/human/H)
+/datum/job/captain/equip_job(var/mob/living/carbon/human/H)
 	. = ..()
 	if(.)
 		H.implant_loyalty(src)

@@ -22,7 +22,7 @@
 	if(H)
 		return H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
-/datum/job/ministation/robot/equip(var/mob/living/carbon/human/H)
+/datum/job/ministation/robot/equip_job(var/mob/living/carbon/human/H)
 	return !!H
 
 /datum/job/ministation/robot/New()
@@ -51,7 +51,7 @@
 	skip_loadout_preview = TRUE
 	department_types = list(/decl/department/miscellaneous)
 
-/datum/job/ministation/computer/equip(var/mob/living/carbon/human/H)
+/datum/job/ministation/computer/equip_job(var/mob/living/carbon/human/H)
 	return !!H
 
 /datum/job/ministation/computer/is_position_available()

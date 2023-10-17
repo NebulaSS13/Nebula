@@ -23,7 +23,7 @@
 	Q.ckey = ckey
 
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/quantum)
-	outfit.equip(Q)
+	outfit.equip_outfit(Q)
 
 	//Sort out ID
 	var/obj/item/card/id/quantum/id = new (Q)
