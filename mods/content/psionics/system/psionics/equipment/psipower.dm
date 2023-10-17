@@ -54,6 +54,6 @@
 
 /obj/item/psychic_power/Process()
 	if(istype(owner))
-		owner.psi.spend_power(maintain_cost)
+		owner.psi.spend_power(maintain_cost, backblast_on_failure = FALSE)
 	if((!owner || owner.do_psionics_check(maintain_cost, owner) || loc != owner || !(src in owner.get_held_items())) && !QDELETED(src))
 		qdel(src)
