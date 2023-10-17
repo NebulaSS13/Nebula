@@ -13,7 +13,7 @@
 	hud_icon = "hudblank"
 	skill_points = 0
 	no_skill_buffs = TRUE
-	guestbanned = 1	
+	guestbanned = 1
 	not_random_selectable = 1
 	skip_loadout_preview = TRUE
 	department_types = list(/decl/department/miscellaneous)
@@ -51,7 +51,7 @@
 	skip_loadout_preview = TRUE
 	department_types = list(/decl/department/miscellaneous)
 
-/datum/job/ministation/computer/equip_job(var/mob/living/carbon/human/H)
+/datum/job/ministation/computer/equip(var/mob/living/carbon/human/H)
 	return !!H
 
 /datum/job/ministation/computer/is_position_available()
