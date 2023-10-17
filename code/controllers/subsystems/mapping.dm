@@ -59,6 +59,8 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 
+	reindex_lists()
+
 	// Load our banned map list, if we have one.
 	if(banned_dmm_location && fexists(banned_dmm_location))
 		banned_maps = cached_json_decode(safe_file2text(banned_dmm_location))
