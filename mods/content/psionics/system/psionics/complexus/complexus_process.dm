@@ -106,7 +106,7 @@
 			else if(owner.stat == UNCONSCIOUS)
 				stamina = min(max_stamina, stamina + rand(3,5))
 
-		if(!owner.nervous_system_failure() && owner.stat == CONSCIOUS && stamina && !suppressed && get_rank(PSI_REDACTION) >= PSI_RANK_OPERANT)
+		if(!owner.nervous_system_failure() && owner.stat != DEAD && stamina && !suppressed && get_rank(PSI_REDACTION) >= PSI_RANK_OPERANT)
 			attempt_regeneration()
 
 	var/next_aura_size = max(0.1,((stamina/max_stamina)*min(3,rating))/5)
@@ -159,6 +159,10 @@
 	else
 		return
 
+	if(owner.stat != CONSCIOUS)
+		mend_prob = round(mend_prob * 0.65)
+		heal_rate = round(heal_rate * 0.65)
+
 	if(!heal_rate || stamina < heal_rate)
 		return // Don't backblast from trying to heal ourselves thanks.
 
@@ -184,6 +188,10 @@
 					if(BP_IS_PROSTHETIC(I) || BP_IS_CRYSTAL(I))
 						continue
 
+					// Autoredaction doesn't heal brain damage directly.
+					if(I.organ_tag == BP_BRAIN)
+						continue
+
 					if(I.damage > 0 && spend_power(heal_rate))
 						I.damage = max(I.damage - heal_rate, 0)
 						if(prob(25))
@@ -195,12 +203,6 @@
 
 				if(BP_IS_PROSTHETIC(E))
 					continue
-
-				if(heal_internal && (E.status & ORGAN_BROKEN) && E.damage < (E.min_broken_damage * config.organ_health_multiplier)) // So we don't mend and autobreak.
-					if(spend_power(heal_rate))
-						if(E.mend_fracture())
-							to_chat(H, SPAN_NOTICE("Your autoredactive faculty coaxes together the shattered bones in your [E.name]."))
-							return
 
 				if(heal_bleeding)
 
@@ -215,7 +217,6 @@
 						return TRUE
 
 					for(var/datum/wound/W in E.wounds)
-
 						if(W.bleeding() && spend_power(heal_rate))
 							to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from \a [W.desc] on your [E.name]."))
 							W.bleed_timer = 0

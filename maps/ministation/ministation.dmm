@@ -99,7 +99,7 @@
 /area/ministation/medical)
 "ao" = (
 /obj/structure/table/reinforced,
-/obj/machinery/faxmachine,
+/obj/machinery/faxmachine/mapped,
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
 "ap" = (
@@ -1644,7 +1644,7 @@
 /area/ministation/atmospherics)
 "eB" = (
 /obj/structure/table,
-/obj/machinery/faxmachine,
+/obj/machinery/faxmachine/mapped,
 /turf/simulated/floor/tiled,
 /area/ministation/court)
 "eC" = (
@@ -9183,7 +9183,7 @@
 /area/ministation/hop)
 "xL" = (
 /obj/structure/table,
-/obj/machinery/faxmachine,
+/obj/machinery/faxmachine/mapped,
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
 "xM" = (

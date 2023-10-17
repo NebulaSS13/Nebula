@@ -1,6 +1,7 @@
 SUBSYSTEM_DEF(fluids)
 	name = "Fluids"
 	wait = 1 SECOND
+	priority = SS_PRIORITY_FLUIDS
 	flags = SS_NO_INIT
 
 	var/tmp/list/water_sources =       list()
