@@ -48,6 +48,12 @@
 
 	. = ..(mapload)
 
+/mob/observer/eye/landing/proc/turn_shuttle_cw()
+	return turn_shuttle(90)
+
+/mob/observer/eye/landing/proc/turn_shuttle_ccw()
+	return turn_shuttle(-90)
+
 /mob/observer/eye/landing/proc/turn_shuttle(angle)
 	angle = round(SIMPLIFY_DEGREES(angle), 90) // can only turn at right angles
 	var/adj = 1
