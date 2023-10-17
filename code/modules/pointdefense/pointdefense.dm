@@ -151,7 +151,7 @@
 			return FALSE
 	return TRUE
 
-/obj/machinery/pointdefense/proc/Shoot(var/weakref/target)
+/obj/machinery/pointdefense/proc/shoot_at(var/weakref/target)
 	var/obj/effect/meteor/M = target.resolve()
 	if(!istype(M))
 		return
@@ -233,7 +233,7 @@
 		if(!emagged && space_los(M))
 			var/weakref/target = weakref(M)
 			PC.targets +=target
-			Shoot(target)
+			shoot_at(target)
 			return
 
 /obj/machinery/pointdefense/RefreshParts()

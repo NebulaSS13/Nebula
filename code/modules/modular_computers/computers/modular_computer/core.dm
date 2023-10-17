@@ -102,6 +102,8 @@
 	var/image/screen_overlay = os?.get_screen_overlay()
 	if(screen_overlay)
 		add_overlay(screen_overlay)
+	else if(dark_screen_state)
+		add_overlay(dark_screen_state)
 	var/image/keyboard_overlay = os?.get_keyboard_overlay()
 	if(keyboard_overlay)
 		add_overlay(keyboard_overlay)

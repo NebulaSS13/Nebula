@@ -41,7 +41,7 @@
 /datum/psi_complexus/proc/can_use(var/incapacitation_flags)
 	return (owner.stat == CONSCIOUS && (!incapacitation_flags || !owner.incapacitated(incapacitation_flags)) && !suppressed && !stun && world.time >= next_power_use)
 
-/datum/psi_complexus/proc/spend_power(var/value = 0, var/check_incapacitated)
+/datum/psi_complexus/proc/spend_power(var/value = 0, var/check_incapacitated, var/backblast_on_failure = TRUE)
 	. = FALSE
 	if(isnull(check_incapacitated))
 		check_incapacitated = (INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
@@ -52,7 +52,8 @@
 			ui.update_icon()
 			. = TRUE
 		else
-			backblast(abs(stamina - value))
+			if(backblast_on_failure)
+				backblast(abs(stamina - value))
 			stamina = 0
 			. = FALSE
 		ui.update_icon()
