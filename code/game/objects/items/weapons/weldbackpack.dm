@@ -141,18 +141,6 @@
 		return TRUE
 	return ..()
 
-/obj/item/chems/weldpack/check_mousedrop_adjacency(atom/over, mob/user)
-	return (loc == user && istype(over, /obj/screen)) || ..()
-
-/obj/item/chems/weldpack/handle_mouse_drop(atom/over, mob/user)
-	if(loc == user && !user.incapacitated())
-		if(istype(over, /obj/screen/inventory))
-			var/obj/screen/inventory/I = over
-			if(user.try_unequip(src))
-				user.equip_to_slot_if_possible(src, I.slot_id)
-				return TRUE
-	return ..()
-
 /obj/item/chems/weldpack/on_update_icon()
 	. = ..()
 	if(is_welder_attached())

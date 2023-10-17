@@ -73,16 +73,6 @@
 	toggle_paddles()
 	return TRUE
 
-// what is this proc doing?
-/obj/item/defibrillator/handle_mouse_drop(var/atom/over, var/mob/user)
-	if(ismob(loc))
-		var/mob/M = loc
-		if(M.try_unequip(src))
-			add_fingerprint(usr)
-			M.put_in_hands(src)
-			return TRUE
-	. = ..()
-
 /obj/item/defibrillator/attackby(obj/item/W, mob/user, params)
 	if(W == paddles)
 		reattach_paddles(user)

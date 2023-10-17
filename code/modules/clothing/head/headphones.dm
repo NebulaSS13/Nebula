@@ -51,6 +51,8 @@
 	update_icon()
 
 /obj/item/clothing/head/headphones/handle_mouse_drop(atom/over, mob/user)
+	if(istype(over, /obj/screen/inventory))
+		return ..()
 	interact(user)
 	return TRUE
 

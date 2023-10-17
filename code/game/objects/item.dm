@@ -255,6 +255,9 @@
 
 // This is going to need a solid go-over to properly integrate all the movement procs into each
 // other and make sure everything is updating nicely. Snowflaking it for now. ~Jan 2020
+/obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
+	. = (loc == user && istype(over, /obj/screen/inventory)) || ..()
+
 /obj/item/handle_mouse_drop(atom/over, mob/user)
 
 	if(over == user)
@@ -262,17 +265,23 @@
 		dragged_onto(over)
 		return TRUE
 
+	// Try to drag-equip the item.
 	var/obj/screen/inventory/inv = over
 	if(user.client && istype(inv) && inv.slot_id && (over in user.client.screen))
+		// Remove the item from our bag if necessary.
 		if(istype(loc, /obj/item/storage))
 			var/obj/item/storage/bag = loc
 			bag.remove_from_storage(src)
 			dropInto(get_turf(bag))
+		// Otherwise remove it from our inventory if necessary.
 		else if(istype(loc, /mob))
 			var/mob/M = loc
 			if(!M.try_unequip(src, get_turf(src)))
 				return ..()
-		user.equip_to_slot_if_possible(src, inv.slot_id)
+		// Equip to the slot we dragged over.
+		if(isturf(loc) && mob_can_equip(user, inv.slot_id, disable_warning = TRUE))
+			add_fingerprint(user)
+			user.equip_to_slot_if_possible(src, inv.slot_id)
 		return TRUE
 
 	. = ..()

@@ -186,17 +186,10 @@
 	material = /decl/material/solid/cardboard
 
 /obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user)
-	if(istype(over, /obj/screen/inventory))
-		var/obj/screen/inventory/inv = over
-		playsound(loc, "rustle", 50, 1, -5)
-		if(user.get_equipped_item(slot_back_str) == src)
-			add_fingerprint(user)
-			if(user.try_unequip(src))
-				user.equip_to_slot_if_possible(src, inv.slot_id)
-		else if(over == user && in_range(src, user) || loc == user)
-			if(user.active_storage)
-				user.active_storage.close(user)
-			show_to(user)
+	if(over == user && in_range(src, user) || loc == user)
+		if(user.active_storage)
+			user.active_storage.close(user)
+		show_to(user)
 		return TRUE
 	. = ..()
 
