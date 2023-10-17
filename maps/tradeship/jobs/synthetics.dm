@@ -22,8 +22,8 @@
 	if(H)
 		return H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
-/datum/job/tradeship_robot/equip(var/mob/living/carbon/human/H)
-	return !!H
+/datum/job/tradeship_robot/equip_job(var/mob/living/equipping, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+	return !!equipping
 
 /datum/job/tradeship_robot/New()
 	..()

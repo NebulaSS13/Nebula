@@ -200,11 +200,12 @@
 	)
 	give_psionic_implant_on_join = FALSE
 
-/datum/job/counselor/equip(var/mob/living/carbon/human/H)
-	if(H.mind.role_alt_title == "Counselor")
-		psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT)
-	if(H.mind.role_alt_title == "Mentalist")
-		psi_faculties = list("[PSI_COERCION]" = PSI_RANK_OPERANT)
+/datum/job/counselor/equip_job(var/mob/living/equipping, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+	if(equipping.mind)
+		if(equipping.mind.role_alt_title == "Counselor")
+			psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT)
+		if(equipping.mind.role_alt_title == "Mentalist")
+			psi_faculties = list("[PSI_COERCION]" = PSI_RANK_OPERANT)
 	return ..()
 
 // Department-flavor IDs

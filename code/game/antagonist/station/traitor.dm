@@ -67,7 +67,7 @@
 					traitor.objectives += hijack_objective
 	return
 
-/decl/special_role/traitor/equip(var/mob/living/carbon/human/player)
+/decl/special_role/traitor/equip_role(var/mob/living/carbon/human/player)
 
 	. = ..()
 	if(issilicon(player)) // this needs to be here because ..() returns false if the mob isn't human

@@ -116,7 +116,7 @@
 	corpse.real_name = "Captain"
 	corpse.name = "Captain"
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/deadcap)
-	outfit.equip(corpse)
+	outfit.equip_outfit(corpse)
 	corpse.adjustOxyLoss(corpse.maxHealth)
 	corpse.setBrainLoss(corpse.maxHealth)
 	var/obj/structure/bed/chair/C = locate() in T
@@ -131,9 +131,9 @@
 	shoes = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
 
-/decl/hierarchy/outfit/deadcap/post_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/deadcap/post_equip(mob/living/equipping)
 	..()
-	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
+	var/obj/item/clothing/uniform = equipping.get_equipped_item(slot_w_uniform_str)
 	if(uniform)
 		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
 		if(uniform.can_attach_accessory(eyegore))
@@ -141,4 +141,4 @@
 		else
 			qdel(eyegore)
 	var/obj/item/cell/super/C = new()
-	H.put_in_hands(C)
+	equipping.put_in_hands(C)

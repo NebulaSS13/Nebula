@@ -14,12 +14,12 @@
 	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/cap
 	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/com
 
-/decl/hierarchy/outfit/job/captain/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/captain/post_equip(mob/living/equipping)
 	..()
-	if(H.get_age() > 49)
+	if(equipping.get_age() > 49)
 		// Since we can have something other than the default uniform at this
 		// point, check if we can actually attach the medal
-		var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
+		var/obj/item/clothing/uniform = equipping.get_equipped_item(slot_w_uniform_str)
 		if(uniform)
 			var/obj/item/clothing/accessory/medal/gold/medal = new()
 			if(uniform.can_attach_accessory(medal))

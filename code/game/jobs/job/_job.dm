@@ -85,15 +85,15 @@
 /datum/job/dd_SortValue()
 	return title
 
-/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/proc/equip_job(var/mob/living/equipping, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if (required_language)
-		H.add_language(required_language)
-		H.set_default_language(required_language)
-	H.add_language(/decl/language/human/common)
-	H.set_default_language(/decl/language/human/common)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
+		equipping.add_language(required_language)
+		equipping.set_default_language(required_language)
+	equipping.add_language(/decl/language/human/common)
+	equipping.set_default_language(/decl/language/human/common)
+	var/decl/hierarchy/outfit/outfit = get_outfit(equipping, alt_title, branch, grade)
 	if(outfit)
-		return outfit.equip(H, title, alt_title)
+		return outfit.equip_outfit(equipping, title, alt_title)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
@@ -163,7 +163,7 @@
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(!outfit)
 		return FALSE
-	. = outfit.equip(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips)
+	. = outfit.equip_outfit(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips)
 
 /datum/job/proc/get_access()
 	if(minimal_access.len && (!config || config.jobs_have_minimal_access))

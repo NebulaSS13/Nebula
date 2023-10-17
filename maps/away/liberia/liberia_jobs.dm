@@ -25,12 +25,12 @@
 		SKILL_PILOT	   = SKILL_BASIC
 	)
 
-/datum/job/submap/merchant/equip(var/mob/living/carbon/human/H)
-	to_chat(H, "Your connections helped you learn about the words that will help you identify a locals... Particularly interested buyers:")
-	to_chat(H, "<b>Code phases</b>: <span class='danger'>[syndicate_code_phrase]</span>")
-	to_chat(H, "<b>Responses to phrases</b>: <span class='danger'>[syndicate_code_response]</span>")
-	H.StoreMemory("<b>Code phase</b>: [syndicate_code_phrase]", /decl/memory_options/system)
-	H.StoreMemory("<b>Responses to phrases</b>: [syndicate_code_response]", /decl/memory_options/system)
+/datum/job/submap/merchant/equip_job(var/mob/living/equipping, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+	to_chat(equipping, "Your connections helped you learn about the words that will help you identify a locals... Particularly interested buyers:")
+	to_chat(equipping, "<b>Code phases</b>: <span class='danger'>[syndicate_code_phrase]</span>")
+	to_chat(equipping, "<b>Responses to phrases</b>: <span class='danger'>[syndicate_code_response]</span>")
+	equipping.StoreMemory("<b>Code phase</b>: [syndicate_code_phrase]", /decl/memory_options/system)
+	equipping.StoreMemory("<b>Responses to phrases</b>: [syndicate_code_response]", /decl/memory_options/system)
 	return ..()
 
 // Spawn points.

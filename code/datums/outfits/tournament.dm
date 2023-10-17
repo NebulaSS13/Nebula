@@ -53,8 +53,8 @@
 	r_pocket = /obj/item/grenade/chem_grenade/cleaner
 	backpack_contents = list(/obj/item/stack/tile/floor = 6)
 
-/decl/hierarchy/outfit/tournament_gear/janitor/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/tournament_gear/janitor/post_equip(mob/living/equipping)
 	..()
-	var/obj/item/chems/glass/bucket/bucket = locate(/obj/item/chems/glass/bucket) in H
+	var/obj/item/chems/glass/bucket/bucket = locate(/obj/item/chems/glass/bucket) in equipping
 	if(bucket)
 		bucket.reagents.add_reagent(/decl/material/liquid/water, 70)

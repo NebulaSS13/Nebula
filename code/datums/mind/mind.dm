@@ -217,11 +217,11 @@
 
 	else if(href_list["equip_antagonist"])
 		var/decl/special_role/antag = locate(href_list["equip_antagonist"])
-		if(antag) antag.equip(src.current)
+		if(antag) antag.equip_role(src.current)
 
 	else if(href_list["unequip_antagonist"])
 		var/decl/special_role/antag = locate(href_list["unequip_antagonist"])
-		if(antag) antag.unequip(src.current)
+		if(antag) antag.unequip_role(src.current)
 
 	else if(href_list["move_antag_to_spawn"])
 		var/decl/special_role/antag = locate(href_list["move_antag_to_spawn"])

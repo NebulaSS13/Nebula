@@ -85,10 +85,10 @@
 	)
 	event_categories = list(ASSIGNMENT_SECURITY)
 
-/datum/job/hos/equip(var/mob/living/carbon/human/H)
+/datum/job/hos/equip_job(var/mob/living/equipping, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..()
-	if(.)
-		H.implant_loyalty(H)
+	if(. && equipping)
+		equipping.implant_loyalty(equipping)
 
 /datum/job/warden
 	title = "Warden"

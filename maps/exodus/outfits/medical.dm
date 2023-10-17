@@ -51,9 +51,10 @@
 	name = "Job - Nurse"
 	suit = null
 
-/decl/hierarchy/outfit/job/medical/doctor/nurse/pre_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/medical/doctor/nurse/pre_equip(mob/living/equipping)
 	..()
-	if(H.gender == FEMALE)
+	var/decl/pronouns/G = equipping.get_pronouns()
+	if(G.name == FEMALE)
 		if(prob(50))
 			uniform = /obj/item/clothing/under/nursesuit
 		else

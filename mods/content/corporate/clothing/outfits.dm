@@ -46,16 +46,16 @@
 /decl/hierarchy/outfit/death_command
 	name = "Spec Ops - Death commando"
 
-/decl/hierarchy/outfit/death_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+/decl/hierarchy/outfit/death_command/equip_outfit(mob/living/equipping, rank, alt_title, equip_adjustments)
 	var/decl/special_role/deathsquad = GET_DECL(/decl/special_role/deathsquad)
-	deathsquad.equip(H)
-	return 1
+	deathsquad.equip_role(equipping)
+	return TRUE
 
 /decl/hierarchy/outfit/syndicate_command
 	name = "Spec Ops - Syndicate commando"
 
-/decl/hierarchy/outfit/syndicate_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+/decl/hierarchy/outfit/syndicate_command/equip_outfit(mob/living/equipping, rank, alt_title, equip_adjustments)
 	var/decl/special_role/commandos = GET_DECL(/decl/special_role/deathsquad/mercenary)
-	commandos.equip(H)
-	return 1
+	commandos.equip_role(equipping)
+	return TRUE
 

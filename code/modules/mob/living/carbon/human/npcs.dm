@@ -24,9 +24,9 @@
 	mask = /obj/item/clothing/mask/muzzle
 	suit = /obj/item/clothing/suit/straight_jacket
 
-/decl/hierarchy/outfit/blank_subject/post_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/blank_subject/post_equip(mob/living/equipping)
 	..()
-	var/obj/item/clothing/under/color/white/C = locate() in H
+	var/obj/item/clothing/under/color/white/C = locate() in equipping
 	if(C)
 		C.has_sensor  = SUIT_LOCKED_SENSORS
 		C.sensor_mode = SUIT_SENSOR_OFF
@@ -36,7 +36,7 @@
 	var/number = "[pick(global.greek_letters)]-[rand(1,30)]"
 	fully_replace_character_name("Subject [number]")
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/blank_subject)
-	outfit.equip(src)
+	outfit.equip_outfit(src)
 	var/obj/item/clothing/head/helmet/facecover/F = locate() in src
 	if(F)
 		F.SetName("[F.name] ([number])")

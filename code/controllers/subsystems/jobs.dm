@@ -488,7 +488,7 @@ SUBSYSTEM_DEF(jobs)
 
 		//Equip job items.
 		var/alt_title = H.mind?.role_alt_title
-		job.equip(H, alt_title, H.char_branch, H.char_rank)
+		job.equip_job(H, alt_title, H.char_branch, H.char_rank)
 		job.apply_fingerprints(H)
 		spawn_in_storage = equip_custom_loadout(H, job)
 		job.setup_account(H)

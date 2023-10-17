@@ -40,7 +40,7 @@
 		if(istype(skill_setter))
 			skill_setter.initialize_skills(player.current.skillset)
 		if(!do_not_equip)
-			equip(player.current)
+			equip_role(player.current)
 
 	if(player.current)
 		player.current.faction = faction

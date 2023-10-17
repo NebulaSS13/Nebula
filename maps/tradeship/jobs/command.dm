@@ -29,11 +29,11 @@
 	not_random_selectable = 1
 	forced_spawnpoint = /decl/spawnpoint/cryo/captain
 
-/datum/job/tradeship_captain/equip(var/mob/living/carbon/human/H)
+/datum/job/tradeship_captain/equip_job(var/mob/living/equipping, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..()
-	if(H)
-		H.verbs |= /mob/proc/tradehouse_rename_ship
-		H.verbs |= /mob/proc/tradehouse_rename_company
+	if(equipping)
+		equipping.verbs |= /mob/proc/tradehouse_rename_ship
+		equipping.verbs |= /mob/proc/tradehouse_rename_company
 
 /datum/job/tradeship_captain/get_access()
 	return get_all_station_access()

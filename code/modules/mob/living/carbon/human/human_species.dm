@@ -36,7 +36,7 @@
 		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
 	if(corpse)
 		corpse.randomize_appearance(src, new_species)
-		corpse.equip_outfit(src)
+		corpse.equip_corpse_outfit(src)
 	update_icon()
 
 /mob/living/carbon/human/dummy/mannequin/add_to_living_mob_list()

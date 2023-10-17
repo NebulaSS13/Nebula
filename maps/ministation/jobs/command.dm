@@ -28,10 +28,10 @@
 	must_fill = 1
 	not_random_selectable = 1
 
-/datum/job/ministation/captain/equip(var/mob/living/carbon/human/H)
+/datum/job/ministation/captain/equip_job(var/mob/living/equipping, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..()
-	if(H) 
-		H.verbs |= /mob/proc/freetradeunion_rename_company
+	if(equipping)
+		equipping.verbs |= /mob/proc/freetradeunion_rename_company
 
 /datum/job/ministation/captain/get_access()
 	return get_all_station_access()

@@ -33,10 +33,10 @@
 		/datum/computer_file/program/reports
 	)
 
-/datum/job/captain/equip(var/mob/living/carbon/human/H)
+/datum/job/captain/equip_job(var/mob/living/equipping, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	. = ..()
-	if(.)
-		H.implant_loyalty(src)
+	if(. && equipping)
+		equipping.implant_loyalty(equipping)
 
 /datum/job/captain/get_access()
 	return get_all_station_access()

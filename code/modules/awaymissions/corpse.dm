@@ -91,14 +91,14 @@
 		M.SetName(name)
 	M.real_name = M.name
 
-/obj/abstract/landmark/corpse/proc/equip_outfit(var/mob/living/carbon/human/M)
+/obj/abstract/landmark/corpse/proc/equip_corpse_outfit(var/mob/living/carbon/human/M)
 	var/adjustments = 0
 	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_SURVIVAL)  ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR) : adjustments
 	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_ID_PDA)    ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)        : adjustments
 	adjustments = (spawn_flags & CORPSE_SPAWNER_PLAIN_HEADSET) ? (adjustments|OUTFIT_ADJUSTMENT_PLAIN_HEADSET)      : adjustments
 
 	var/decl/hierarchy/outfit/corpse_outfit = outfit_by_type(pickweight(corpse_outfits))
-	corpse_outfit.equip(M, equip_adjustments = adjustments)
+	corpse_outfit.equip_outfit(M, equip_adjustments = adjustments)
 
 /obj/abstract/landmark/corpse/pirate
 	name = "Pirate"
