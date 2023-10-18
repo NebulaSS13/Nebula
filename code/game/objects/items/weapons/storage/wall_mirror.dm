@@ -13,6 +13,9 @@
 	directional_offset = "{'NORTH':{'y':-29}, 'SOUTH':{'y':29}, 'EAST':{'x':29}, 'WEST':{'x':-29}}"
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
+/obj/structure/mirror/shuttle_rotate(angle)
+	. = ..(-angle) // for some reason directions are switched for mirrors?
+
 /obj/structure/mirror/Initialize()
 	. = ..()
 	mirror_storage = new/obj/item/storage/internal/mirror_storage(src)

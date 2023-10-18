@@ -5,6 +5,9 @@
 	name = "Lar Maria space station"
 	desc = "Sensors detect an orbital station with low energy profile and sporadic life signs."
 	icon_state = "object"
+	initial_generic_waypoints = list(
+		"nav_lar_maria_docking"
+	)
 
 /datum/map_template/ruin/away_site/lar_maria
 	name = "Lar Maria"
@@ -13,6 +16,11 @@
 	suffixes = list("lar_maria/lar_maria-1.dmm", "lar_maria/lar_maria-2.dmm")
 	cost = 2
 	area_usage_test_exempted_root_areas = list(/area/lar_maria)
+
+/obj/effect/shuttle_landmark/lar_maria_docking
+	name = "docking port"
+	landmark_tag = "nav_lar_maria_docking"
+	flags = SLANDMARK_FLAG_REORIENT | SLANDMARK_FLAG_AUTOSET
 
 ///////////////////////////////////crew and prisoners
 /obj/abstract/landmark/corpse/lar_maria

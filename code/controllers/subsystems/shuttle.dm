@@ -161,6 +161,11 @@ SUBSYSTEM_DEF(shuttle)
 		if (ship.type == type)
 			return ship
 
+/datum/controller/subsystem/shuttle/proc/ship_by_shuttle(shuttle)
+	for(var/obj/effect/overmap/visitable/ship/landable/landable in SSshuttle.ships)
+		if(landable.shuttle == shuttle)
+			return landable
+
 /datum/controller/subsystem/shuttle/proc/docking_beacons_by_z(z_levels)
 	. = list()
 	if(!islist(z_levels))
