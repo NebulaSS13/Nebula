@@ -23,6 +23,7 @@
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
 	base_prosthetics_model = /decl/bodytype/prosthetic/vox/crap
+	secret_codex_info = "Oh no, a shitbird."
 
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek

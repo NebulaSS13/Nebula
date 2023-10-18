@@ -16,8 +16,8 @@
 	screen_loc =  ANYMPH_SCREEN_LOC_MOLT
 	icon_state = "molt-on"
 
-/obj/screen/ascent_nymph_molt/Click()
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
+/obj/screen/ascent_nymph_molt/handle_click(mob/user, params)
+	var/mob/living/carbon/alien/ascent_nymph/nymph = user
 	if(istype(nymph)) nymph.molt()
 
 /datum/hud/ascent_nymph
@@ -45,7 +45,7 @@
 	action_intent = new /obj/screen/intent/ascent_nymph(null, mymob, ui_style, ui_color, ui_alpha)
 	mymob.healths = new /obj/screen/ascent_nymph_health(null, mymob, ui_style, ui_color, ui_alpha)
 	src.other = list()
-	src.adding = list(mymob.healths, held, molt, food, drink, action_intent)
+	src.adding = list(mymob.healths, molt, food, drink, action_intent)
 	..()
 
 /obj/screen/ascent_nymph_health

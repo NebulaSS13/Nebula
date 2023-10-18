@@ -96,7 +96,7 @@
 /obj/item/clothing/glasses/eyepatch/hud/meson/Initialize()
 	. = ..()
 	var/datum/global_hud/global_hud = get_global_hud()
-	overlay = global_hud.meson
+	screen_overlay = global_hud.meson
 
 /obj/item/clothing/glasses/eyepatch/monocle
 	name = "monocle"

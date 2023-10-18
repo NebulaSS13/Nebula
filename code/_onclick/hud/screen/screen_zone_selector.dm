@@ -4,12 +4,11 @@
 	screen_loc = ui_zonesel
 	var/selecting = BP_CHEST
 
-/obj/screen/zone_selector/Click(location, control,params)
+/obj/screen/zone_selector/handle_click(mob/user, params)
 	var/list/PL = params2list(params)
 	var/icon_x = text2num(PL["icon-x"])
 	var/icon_y = text2num(PL["icon-y"])
 	var/new_selecting
-
 	switch(icon_y)
 		if(1 to 3) //Feet
 			switch(icon_x)
@@ -62,9 +61,8 @@
 					if(25 to 27)
 						if(icon_x in 15 to 17)
 							new_selecting = BP_EYES
-
 	set_selected_zone(new_selecting)
-	return 1
+	return TRUE
 
 /obj/screen/zone_selector/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
 	. = ..()

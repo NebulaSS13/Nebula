@@ -1,21 +1,5 @@
 var/global/obj/screen/robot_inventory
 
-/obj/screen/robot_drop_grab
-	name = "drop grab"
-	icon = 'icons/mob/screen1_robot.dmi'
-	icon_state = "drop_grab"
-	screen_loc = ui_borg_drop_grab
-	invisibility = INVISIBILITY_MAXIMUM
-	alpha = 0
-
-/obj/screen/robot_drop_grab/Click(location, control, params)
-	. = ..()
-	if(isrobot(usr) && !usr.incapacitated())
-		var/mob/living/silicon/robot/R = usr
-		R.drop_item()
-		set_invisibility(INVISIBILITY_MAXIMUM)
-		alpha = 0
-
 /mob/living/silicon/robot
 	hud_type = /datum/hud/robot
 
@@ -30,9 +14,9 @@ var/global/obj/screen/robot_inventory
 	adding += new /obj/screen/robot_radio(null, mymob)
 
 	//Module select
-	R.inv1 = new /obj/screen/robot_module_one(  null, mymob)
-	R.inv2 = new /obj/screen/robot_module_two(  null, mymob)
-	R.inv3 = new /obj/screen/robot_module_three(null, mymob)
+	R.inv1 = new(null, mymob)
+	R.inv2 = new(null, mymob)
+	R.inv3 = new(null, mymob)
 	adding += R.inv1
 	adding += R.inv2
 	adding += R.inv3
@@ -43,7 +27,7 @@ var/global/obj/screen/robot_inventory
 	adding += R.ui_drop_grab
 
 	//Intent
-	action_intent = new /obj/screen/robot_intent(null, mymob)
+	action_intent = new /obj/screen/intent/robot(null, mymob)
 	action_intent.icon_state = R.a_intent
 	adding += action_intent
 

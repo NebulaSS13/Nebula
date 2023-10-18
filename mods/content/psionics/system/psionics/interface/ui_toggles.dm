@@ -31,7 +31,7 @@
 	. = ..()
 	controller = _controller
 
-/obj/screen/psi/toggle_psi_menu/Click()
+/obj/screen/psi/toggle_psi_menu/handle_click(mob/user, params)
 	var/set_hidden = !hidden
 	for(var/thing in controller.components)
 		var/obj/screen/psi/psi = thing

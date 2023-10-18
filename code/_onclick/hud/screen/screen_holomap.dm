@@ -32,6 +32,7 @@
 	layer = HUD_ITEM_LAYER
 	pixel_x = HOLOMAP_LEGEND_X
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
+	requires_owner = FALSE
 	var/saved_color
 	var/datum/station_holomap/holomap = null
 	var/has_areas = FALSE

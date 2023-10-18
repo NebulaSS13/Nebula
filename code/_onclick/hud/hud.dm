@@ -27,8 +27,8 @@
 
 	var/list/hand_hud_objects
 	var/list/swaphand_hud_objects
-	var/obj/screen/action_intent
-	var/obj/screen/move_intent
+	var/obj/screen/intent/action_intent
+	var/obj/screen/movement/move_intent
 	var/obj/screen/stamina/stamina_bar
 
 	var/list/adding = list()

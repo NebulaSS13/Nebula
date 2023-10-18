@@ -19,12 +19,12 @@
 
 	// Draw the attack intent dialogue.
 	if(hud_data.has_a_intent)
-		action_intent = new /obj/screen/intent(null, mymob)
+		action_intent = new(null, mymob)
 		src.adding += action_intent
 		hud_elements |= action_intent
 
 	if(hud_data.has_m_intent)
-		move_intent = new /obj/screen/movement(null, mymob, ui_style, ui_color, ui_alpha)
+		move_intent = new(null, mymob, ui_style, ui_color, ui_alpha)
 		move_intent.icon_state = mymob.move_intent.hud_icon_state
 		src.adding += move_intent
 
@@ -42,51 +42,51 @@
 	hud_elements |= mymob.maneuver_icon
 
 	if(hud_data.has_throw)
-		mymob.throw_icon = new /obj/screen/throw_toggle(null, mymob, ui_style, ui_color, ui_alpha)
+		mymob.throw_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
 		src.hotkeybuttons += mymob.throw_icon
 		hud_elements |= mymob.throw_icon
 
 	if(hud_data.has_internals)
-		mymob.internals = new /obj/screen/internals(null, mymob, ui_style)
+		mymob.internals = new(null, mymob, ui_style)
 		hud_elements |= mymob.internals
 
 	if(hud_data.has_warnings)
-		mymob.healths = new /obj/screen/health_warning(null, mymob, ui_style)
+		mymob.healths = new(null, mymob, ui_style)
 		hud_elements |= mymob.healths
 
-		mymob.oxygen = new /obj/screen/oxygen(null, mymob)
+		mymob.oxygen = new(null, mymob)
 		hud_elements |= mymob.oxygen
 
-		mymob.toxin = new /obj/screen/toxins(null, mymob)
+		mymob.toxin = new(null, mymob)
 		hud_elements |= mymob.toxin
 
-		mymob.fire = new /obj/screen/fire_warning(null, mymob, ui_style)
+		mymob.fire = new(null, mymob, ui_style)
 		hud_elements |= mymob.fire
 
 	if(hud_data.has_pressure)
-		mymob.pressure = new /obj/screen/pressure(null, mymob)
+		mymob.pressure = new(null, mymob)
 		hud_elements |= mymob.pressure
 
 	if(hud_data.has_bodytemp)
-		mymob.bodytemp = new /obj/screen/bodytemp(null, mymob)
+		mymob.bodytemp = new(null, mymob)
 		hud_elements |= mymob.bodytemp
 
 	if(target.isSynthetic())
-		target.cells = new /obj/screen/warning_cells(null, mymob)
+		target.cells = new(null, mymob)
 		hud_elements |= target.cells
 
 	else if(hud_data.has_nutrition)
-		mymob.nutrition_icon = new /obj/screen/food(null, mymob)
+		mymob.nutrition_icon = new(null, mymob)
 		hud_elements |= mymob.nutrition_icon
 
-		mymob.hydration_icon = new /obj/screen/drink(null, mymob)
+		mymob.hydration_icon = new(null, mymob)
 		hud_elements |= mymob.hydration_icon
 
 	if(hud_data.has_up_hint)
-		mymob.up_hint = new /obj/screen/up_hint(null, mymob, ui_style)
+		mymob.up_hint = new(null, mymob, ui_style)
 		hud_elements |= mymob.up_hint
 
-	mymob.pain = new /obj/screen/fullscreen/pain(null, mymob)
+	mymob.pain = new(null, mymob)
 	hud_elements |= mymob.pain
 
 	mymob.zone_sel = new(null, mymob, ui_style, ui_color, ui_alpha)
@@ -97,12 +97,12 @@
 	hud_elements |= target.attack_selector
 
 	//Handle the gun settings buttons
-	mymob.gun_setting_icon = new /obj/screen/gun/mode(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.gun_setting_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
 	hud_elements |= mymob.gun_setting_icon
 
-	mymob.item_use_icon  = new /obj/screen/gun/item(null, mymob, ui_style, ui_color, ui_alpha)
-	mymob.gun_move_icon  = new /obj/screen/gun/move(null, mymob, ui_style, ui_color, ui_alpha)
-	mymob.radio_use_icon = new /obj/screen/gun/radio(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.item_use_icon  = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.gun_move_icon  = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.radio_use_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
 
 	..()
 

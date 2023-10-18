@@ -133,11 +133,3 @@
 	H.flavor_text = daddy.flavor_text
 	daddy.dust()
 	qdel(src)
-
-/obj/screen/fullscreen/wormhole_overlay
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "mfoam"
-	screen_loc = ui_entire_screen
-	color = "#ff9900"
-	alpha = 100
-	blend_mode = BLEND_SUBTRACT

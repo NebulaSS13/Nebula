@@ -1,3 +1,6 @@
+/obj/screen/robot_modules_background
+	icon_state = "block"
+
 /obj/screen/robot_module_one
 	name       = "module1"
 	dir        = SOUTHWEST

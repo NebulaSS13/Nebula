@@ -3,7 +3,6 @@
 	icon           = 'icons/mob/screen_spells.dmi'
 	icon_state     = "grey_spell_ready"
 	screen_loc     = ui_ability_master
-	requires_owner = TRUE
 	var/list/obj/screen/ability/ability_objects = list()
 	var/list/obj/screen/ability/spell_objects = list()
 	var/showing = FALSE // If we're 'open' or not.
@@ -158,6 +157,7 @@
 	icon = 'icons/mob/screen_spells.dmi'
 	icon_state = "grey_spell_base"
 	maptext_x = 3
+	requires_owner = FALSE
 	var/background_base_state = "grey"
 	var/ability_icon_state = null
 	var/obj/screen/ability_master/ability_master
@@ -278,7 +278,7 @@
 	if(get_ability_by_spell(spell))
 		return
 
-	var/obj/screen/ability/spell/A = new()
+	var/obj/screen/ability/spell/A = new(null)
 	A.ability_master = src
 	A.spell = spell
 	A.SetName(spell.name)

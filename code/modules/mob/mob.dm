@@ -36,7 +36,6 @@
 	return ..()
 
 /mob/proc/remove_screen_obj_references()
-	QDEL_NULL_SCREEN(hands)
 	QDEL_NULL_SCREEN(internals)
 	QDEL_NULL_SCREEN(oxygen)
 	QDEL_NULL_SCREEN(toxin)
@@ -1362,7 +1361,7 @@
 // Darksight procs.
 /mob/proc/refresh_lighting_master()
 	if(!lighting_master)
-		lighting_master = new
+		lighting_master = new(null, src)
 	if(client)
 		client.screen |= lighting_master
 

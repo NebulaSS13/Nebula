@@ -17,7 +17,8 @@
 	mouse_over_atom_ref = null
 	update_icon()
 
-/obj/screen/inventory/Click()
+// Overriding Click() here instead of using handle_click() to be thorough.
+/obj/screen/inventory/Click(location, control, parameters)
 	. = ..()
 	mouse_over_atom_ref = null
 	update_icon()

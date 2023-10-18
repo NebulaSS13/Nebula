@@ -15,18 +15,26 @@
 	/// The mob that owns this screen object, if any.
 	var/weakref/owner_ref
 	/// Whether or not this screen element requires an owner.
-	var/requires_owner = FALSE
+	var/requires_owner = TRUE
 	/// Global screens are not qdeled when the holding mob is destroyed.
 	var/is_global_screen = FALSE
 	/// A set of flags to check for when the user clicks this element.
 	var/user_incapacitation_flags = INCAPACITATION_DEFAULT
 
 /obj/screen/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
+
 	if(ismob(_owner))
 		owner_ref = weakref(_owner)
-	if(requires_owner && !owner_ref)
-		PRINT_STACK_TRACE("ERROR: [type]'s Initialize() was not given an owner argument.")
+
+	// Validate ownership.
+	if(requires_owner)
+		if(!owner_ref)
+			PRINT_STACK_TRACE("ERROR: [type]'s Initialize() was not given an owner argument.")
+			return INITIALIZE_HINT_QDEL
+	else if(owner_ref)
+		PRINT_STACK_TRACE("ERROR: [type]'s Initialize() was given an owner argument.")
 		return INITIALIZE_HINT_QDEL
+
 	if(!isnull(ui_style))
 		icon = ui_style
 	if(!isnull(ui_color))
