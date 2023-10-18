@@ -14,7 +14,7 @@
 		'sound/foley/metal1.ogg'
 	)
 	has_organ = list(
-		BP_BRAIN = /obj/item/organ/internal/mmi_holder,
+		BP_BRAIN = /obj/item/organ/internal/brain_interface,
 		BP_EYES  = /obj/item/organ/internal/eyes,
 		BP_CELL  = /obj/item/organ/internal/cell
 	)

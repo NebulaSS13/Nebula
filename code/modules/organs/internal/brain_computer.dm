@@ -3,7 +3,7 @@
 	name = "computer intelligence core"
 	desc = "The pinnacle of artifical intelligence technology, conveniently stored in a fist-sized cube."
 	icon = 'icons/obj/items/brain_interface_robotic.dmi'
-	origin_tech = "{'engineering':4,'materials':4,'wormholes':2,'programming':4}"
+	origin_tech = @'{"engineering":4,"materials":4,"wormholes":2,"programming":4}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
@@ -51,7 +51,7 @@
 		update_icon()
 		var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/machine_intelligence)
 		G.request_player(brainmob, "Someone is requesting a personality for a [name].", 1 MINUTE)
-		addtimer(CALLBACK(src, .proc/reset_search), 1 MINUTE)
+		addtimer(CALLBACK(src, PROC_REF(reset_search)), 1 MINUTE)
 		return TRUE
 	. = ..()
 

@@ -25,8 +25,6 @@
 
 /mob/living/brain/handle_regular_status_updates()
 	. = ..()
-	if(health <= 0 && stat != DEAD)
-		death()
 	if(emp_damage || stat == DEAD || !is_in_interface())
 		SET_STATUS_MAX(src, STAT_SILENCE, 2)
 
@@ -101,12 +99,12 @@
 			emp_damage += rand(0,10)
 	emp_damage = clamp(emp_damage, 0, max_emp_damage)
 
-/mob/living/brain/Life()
+/mob/living/brain/handle_regular_status_updates() // Status & health update, are we dead or alive etc.
 	. = ..()
 	if(stat == DEAD || !isSynthetic())
 		emp_damage = 0
 		return
-	if(!emp_damage)
+	if(emp_damage <= 0)
 		return
 	emp_damage -= 1
 	var/msg_threshold = clamp(CEILING(emp_damage / (max_emp_damage / length(emp_reboot_strings))), 1, length(emp_reboot_strings))

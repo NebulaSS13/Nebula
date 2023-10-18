@@ -108,8 +108,3 @@
 
 /decl/bodytype
 	var/can_be_shackled
-
-#ifdef MODPACK_UTILITY_FRAMES
-/decl/species/utility_frame
-	can_be_shackled = TRUE
-#endif
