@@ -319,7 +319,7 @@
 	if(stat == DEAD)
 		return
 
-	if(GET_STATUS(src, STAT_BLIND))
+	if(is_blind())
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else
 		clear_fullscreen("blind")
