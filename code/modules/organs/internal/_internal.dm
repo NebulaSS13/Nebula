@@ -287,38 +287,12 @@
 /obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
 	. = ..()
 	if(transfer_brainmob_with_organ && istype(owner))
-		var/mob/living/brainmob = get_brainmob(create_if_missing = TRUE)
-		if(brainmob)
-			if(status & ORGAN_CUT_AWAY)
-				transfer_key_to_brainmob(owner, update_brainmob = TRUE)
-			else
-				transfer_key_from_mob_to_mob(brainmob, owner)
+		var/mob/living/brainmob = get_brainmob(create_if_missing = FALSE)
+		if(brainmob?.key)
+			transfer_key_from_mob_to_mob(brainmob, owner)
 
 /obj/item/organ/internal/do_uninstall(in_place, detach, ignore_children, update_icon)
 	var/mob/living/victim = owner // cleared in parent proc
 	. = ..()
 	if(transfer_brainmob_with_organ && istype(victim))
-		var/mob/living/brainmob = get_brainmob(create_if_missing = TRUE)
-		if(brainmob)
-			if(status & ORGAN_CUT_AWAY)
-				transfer_key_to_brainmob(victim, update_brainmob = TRUE)
-			else
-				transfer_key_from_mob_to_mob(brainmob, victim)
-
-/obj/item/organ/internal/proc/on_holding_organ_installed(var/obj/item/organ/external/holding)
-	if(istype(holding) && transfer_brainmob_with_organ && istype(owner))
-		var/mob/living/brainmob = get_brainmob(create_if_missing = TRUE)
-		if(brainmob)
-			if(holding.status & ORGAN_CUT_AWAY)
-				transfer_key_to_brainmob(owner, update_brainmob = TRUE)
-			else
-				transfer_key_from_mob_to_mob(brainmob, owner)
-
-/obj/item/organ/internal/proc/on_holding_organ_uninstalled(var/obj/item/organ/external/holding)
-	if(istype(holding) && transfer_brainmob_with_organ && istype(owner))
-		var/mob/living/brainmob = get_brainmob(create_if_missing = TRUE)
-		if(brainmob)
-			if(holding.status & ORGAN_CUT_AWAY)
-				transfer_key_to_brainmob(owner, update_brainmob = TRUE)
-			else
-				transfer_key_from_mob_to_mob(brainmob, owner)
+		transfer_key_to_brainmob(victim, update_brainmob = TRUE)

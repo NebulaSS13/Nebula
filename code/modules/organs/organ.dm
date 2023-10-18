@@ -248,10 +248,18 @@
 		ailment.was_treated_by_chem_effect()
 
 /obj/item/organ/proc/is_preserved()
-	if(istype(loc,/obj/item/organ))
+	if(istype(loc, /obj/item/organ))
 		var/obj/item/organ/O = loc
 		return O.is_preserved()
-	return (istype(loc,/obj/item/organ/internal/brain_interface) || istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/storage/box/freezer))
+	var/static/list/preserved_types = list(
+		/obj/item/storage/box/freezer,
+		/obj/structure/closet/crate/freezer,
+		/obj/structure/closet/body_bag/cryobag
+	)
+	for(var/preserved_type in preserved_types)
+		if(istype(loc, preserved_type))
+			return TRUE
+	return FALSE
 
 /obj/item/organ/examine(mob/user)
 	. = ..(user)

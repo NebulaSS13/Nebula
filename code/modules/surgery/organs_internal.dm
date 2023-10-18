@@ -190,13 +190,13 @@
 /decl/surgery_step/internal/remove_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>\The [user] has removed \the [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>", \
 	"<span class='notice'>You have removed \the [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
-
 	// Extract the organ!
 	var/obj/item/organ/O = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(istype(O) && istype(affected))
 		//Now call remove again with detach = FALSE so we fully remove it
 		target.remove_organ(O, TRUE, FALSE)
+	..()
 
 /decl/surgery_step/internal/remove_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
@@ -316,8 +316,8 @@
 	var/list/attachable_organs
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 
-	for(var/obj/item/organ/I in affected.implants)
-		if(I && (I.status & ORGAN_CUT_AWAY))
+	for(var/obj/item/organ/I in (affected.implants|affected.internal_organs))
+		if(I.status & ORGAN_CUT_AWAY)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Attach \the [I.name]"
 			LAZYSET(attachable_organs, I, radial_button)

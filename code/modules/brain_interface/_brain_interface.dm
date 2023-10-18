@@ -22,6 +22,9 @@
 	var/locked = FALSE
 	var/obj/item/organ/internal/brain/holding_brain = /obj/item/organ/internal/brain
 
+/obj/item/organ/internal/brain_interface/is_preserved()
+	return TRUE
+
 /obj/item/organ/internal/brain_interface/empty
 	holding_brain = null
 

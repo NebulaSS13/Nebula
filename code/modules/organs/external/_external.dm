@@ -456,11 +456,8 @@
 		//
 		//If we contain any child organs add them to the owner
 		//
-		for(var/obj/item/organ/organ in implants)
-			owner.add_organ(organ, src, in_place, update_icon, detached)
-
-		for(var/obj/item/organ/external/organ in children)
-			owner.add_organ(organ, src, in_place, update_icon, detached)
+		for(var/obj/item/organ/organ in (implants|children|internal_organs))
+			owner.add_organ(organ, src, in_place, update_icon, FALSE)
 
 		//
 		//Add any existing organs in the owner that have us as parent
@@ -520,10 +517,6 @@
 
 		if(!in_place)
 			parent.update_wounds()
-
-	// Notify our children.
-	for(var/obj/item/organ/internal/I in internal_organs)
-		I.on_holding_organ_installed(src)
 
 /obj/item/organ/external/proc/drop_equipped_clothing()
 	if(!owner)
@@ -1416,10 +1409,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(parent)
 		LAZYREMOVE(parent.children, src)
 	parent = null
-
-	// Notify our children.
-	for(var/obj/item/organ/internal/I in internal_organs)
-		I.on_holding_organ_uninstalled(src)
 
 /obj/item/organ/external/on_remove_effects(mob/living/last_owner)
 	. = ..()
