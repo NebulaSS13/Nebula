@@ -4,6 +4,8 @@
 	icon = 'icons/clothing/mask/chewables/lollipop.dmi'
 	body_parts_covered = 0
 	bodytype_equip_flags = null
+	origin_tech = null
+	matter = null // no plastic/fiberglass
 
 	var/type_butt = null
 	var/chem_volume = 0
@@ -62,6 +64,7 @@
 	chem_volume = 50
 	chewtime = 300
 	brand = "tobacco"
+	material = /decl/material/solid/plantmatter
 
 /obj/item/trash/cigbutt/spitwad
 	name = "spit wad"
@@ -120,6 +123,7 @@
 	slot_flags = SLOT_EARS | SLOT_FACE
 	chem_volume = 50
 	chewtime = 300
+	material = /decl/material/liquid/nutriment/sugar
 	var/initial_payload_amount = 3
 
 /obj/item/clothing/mask/chewable/candy/populate_reagents()
