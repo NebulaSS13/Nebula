@@ -40,6 +40,7 @@
 	icon_state = ICON_STATE_WORLD
 	var/burnt = 0
 	var/smoketime = 5
+	obj_flags = OBJ_FLAG_HOLLOW // so that it's not super overpriced compared to lighters
 	w_class = ITEM_SIZE_TINY
 	origin_tech = "{'materials':1}"
 	slot_flags = SLOT_EARS
