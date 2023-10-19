@@ -35,7 +35,7 @@
 	return ..()
 
 /obj/proc/get_matter_amount_modifier()
-	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
+	. = w_class * BASE_OBJECT_MATTER_MULTPLIER
 
 /obj/assume_air(datum/gas_mixture/giver)
 	return loc?.assume_air(giver)
