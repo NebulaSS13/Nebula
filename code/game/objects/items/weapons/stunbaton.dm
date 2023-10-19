@@ -19,6 +19,7 @@
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon      = MATTER_AMOUNT_REINFORCEMENT,
 	)
+	item_flags = ITEM_FLAG_IS_WEAPON
 	var/stunforce = 0
 	var/agonyforce = 30
 	var/status = 0		//whether the thing is on or not

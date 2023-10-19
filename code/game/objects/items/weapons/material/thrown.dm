@@ -12,6 +12,10 @@
 	edge =  1
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	item_flags = ITEM_FLAG_IS_WEAPON
+
+/obj/item/star/get_max_weapon_value()
+	return throwforce
 
 /obj/item/star/throw_impact(atom/hit_atom)
 	..()

@@ -7,6 +7,7 @@
 	icon_state = "harpoon"
 	item_state = "harpoon"
 	max_force = 20
+	item_flags = ITEM_FLAG_IS_WEAPON
 	material_force_multiplier = 0.3 // 18 with hardness 60 (steel)
 	thrown_material_force_multiplier = 0.6
 	attack_verb = list("jabbed","stabbed","ripped")
@@ -50,6 +51,7 @@
 	icon = 'icons/obj/items/tool/hatchet.dmi'
 	icon_state = "hatchet"
 	max_force = 15
+	item_flags = ITEM_FLAG_IS_WEAPON
 	material_force_multiplier = 0.2 // 12 with hardness 60 (steel)
 	thrown_material_force_multiplier = 0.25 // 15 with weight 60 (steel)
 	w_class = ITEM_SIZE_SMALL

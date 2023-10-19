@@ -19,9 +19,9 @@
 			var/next_tech_val = (tech[t]**2) * 5
 			if(next_tech_val > largest_tech_val)
 				largest_tech_val = next_tech_val
-			. += largest_tech_val
+		. += largest_tech_val
 
-	if(force)
+	if(item_flags & ITEM_FLAG_IS_WEAPON && force)
 		var/weapon_value = ((get_max_weapon_value() * 15) * (1 + max(sharp, edge)))
 		if(attack_cooldown <= FAST_WEAPON_COOLDOWN)
 			weapon_value *= 1.5
