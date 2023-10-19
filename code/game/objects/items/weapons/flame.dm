@@ -13,6 +13,7 @@
 /obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
 	lit = FALSE
 	damtype = BRUTE
+	update_force()
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/flame/fluid_act(var/datum/reagents/fluids)
@@ -44,6 +45,7 @@
 	slot_flags = SLOT_EARS
 	attack_verb = list("burnt", "singed")
 	randpixel = 10
+	max_force = 1
 
 /obj/item/flame/match/Process()
 	if(isliving(loc))
@@ -71,7 +73,7 @@
 	. = ..()
 	name = "burnt match"
 	desc = "A match. This one has seen better days."
-	burnt = 1
+	burnt = TRUE
 	update_icon()
 
 /obj/item/flame/match/on_update_icon()
