@@ -438,8 +438,8 @@
 
 /obj/item/storage/box/matches/attackby(obj/item/flame/match/W, mob/user)
 	if(istype(W) && !W.lit && !W.burnt)
-		W.lit = 1
-		W.damtype = "burn"
+		W.lit = TRUE
+		W.damtype = BURN
 		W.update_icon()
 		START_PROCESSING(SSobj, W)
 		playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
