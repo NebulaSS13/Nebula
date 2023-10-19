@@ -52,7 +52,6 @@
 		/obj/item/chems/food/egg,
 		/obj/item/chems/food/boiledegg
 		)
-	material = /decl/material/solid/cardboard
 
 /obj/item/storage/fancy/egg_box/WillContain()
 	return list(/obj/item/chems/food/egg = 12)
@@ -73,7 +72,6 @@
 	w_class = ITEM_SIZE_SMALL
 	key_type = /obj/item/chems/food/cracker
 	can_hold = list(/obj/item/chems/food/cracker)
-	material = /decl/material/solid/cardboard
 
 /obj/item/storage/fancy/crackers/WillContain()
 	return list(/obj/item/chems/food/cracker = 6)
@@ -91,7 +89,6 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	key_type = /obj/item/pen/crayon
-	material = /decl/material/solid/cardboard
 
 /obj/item/storage/fancy/crayons/WillContain()
 	return list(
@@ -127,7 +124,6 @@
 	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/cardboard
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE
 

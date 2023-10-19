@@ -8,7 +8,7 @@
 	icon_state         = "poster0"
 	anchored           = TRUE
 	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':-32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
-	material           = /decl/material/solid/cardboard
+	material           = /decl/material/solid/paper
 	maxhealth          = 10
 	parts_type         = /obj/item/contraband/poster
 	parts_amount       = 1

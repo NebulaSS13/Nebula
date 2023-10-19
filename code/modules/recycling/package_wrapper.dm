@@ -37,9 +37,9 @@
 	throw_range      = 5
 	throw_speed      = 3
 	item_flags       = ITEM_FLAG_NO_BLUDGEON
-	///Check to prevent people from wrapping something multiple times at once.
+	/// Check to prevent people from wrapping something multiple times at once.
 	var/tmp/currently_wrapping = FALSE
-	///The type of wrapped item that will be produced
+	/// The type of wrapped item that will be produced
 	var/tmp/wrapped_result_type = /obj/item/parcel
 
 /obj/item/stack/package_wrap/twenty_five

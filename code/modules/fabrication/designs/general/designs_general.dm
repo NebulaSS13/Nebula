@@ -162,5 +162,6 @@
 
 /datum/fabricator_recipe/package_wrapper
 	path = /obj/item/stack/package_wrap
-/datum/fabricator_recipe/gift_wrapper
+
+/datum/fabricator_recipe/package_wrapper/gift
 	path = /obj/item/stack/package_wrap/gift

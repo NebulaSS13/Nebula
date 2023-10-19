@@ -29,7 +29,7 @@ var/global/list/artefact_feedback = list(
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
-	material = /decl/material/solid/cardboard //#TODO: Replace with paper
+	material = /decl/material/solid/paper
 	matter = list(/decl/material/solid/leather = MATTER_AMOUNT_REINFORCEMENT)
 	var/uses = 1
 	var/temp = null

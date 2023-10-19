@@ -100,7 +100,7 @@
 	desc = "This densely typed sheaf of documents is filled with legalese and jargon. You can't make heads or tails of them."
 	icon = 'icons/obj/goal_paperwork.dmi'
 	icon_state = "generic"
-	material = /decl/material/solid/cardboard //#TODO: replace with paper
+	material = /decl/material/solid/paper
 
 	var/datum/goal/department/paperwork/associated_goal
 	var/list/all_signatories

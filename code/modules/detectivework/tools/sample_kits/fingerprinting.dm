@@ -1,7 +1,7 @@
 
 /obj/item/forensics/sample_kit/powder
 	name = "fingerprint powder"
-	desc = "A jar containing alumiinum powder and a specialized brush."
+	desc = "A jar containing aluminium powder and a specialized brush."
 	icon_state = "dust"
 	evidence_type = "fingerprint"
 	evidence_path = /obj/item/forensics/sample/print
@@ -21,7 +21,7 @@
 	icon_state = "fingerprint0"
 	item_state = "paper"
 	possible_evidence_types = list(/datum/forensics/fingerprints)
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/plastic
 
 /obj/item/forensics/sample/print/on_update_icon()
 	. = ..()
@@ -33,7 +33,7 @@
 /obj/item/forensics/sample/print/merge_evidence_list(var/list/new_evidence)
 	for(var/datum/fingerprint/newprint in new_evidence)
 		for(var/datum/fingerprint/F in evidence)
-			if(F.merge(newprint))	
+			if(F.merge(newprint))
 				new_evidence -= newprint
 				break
 	..()

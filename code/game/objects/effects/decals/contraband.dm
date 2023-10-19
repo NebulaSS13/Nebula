@@ -5,4 +5,4 @@
 	desc = "You probably shouldn't be holding this."
 	icon = 'icons/obj/contraband.dmi'
 	force = 0
-	material = /decl/material/solid/cardboard //#TODO: Change to paper or something
+	material = /decl/material/solid/paper
