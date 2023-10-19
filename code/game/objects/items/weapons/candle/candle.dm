@@ -51,6 +51,8 @@
 /obj/item/flame/candle/proc/light(mob/user)
 	if(!lit)
 		lit = TRUE
+		damtype = BURN
+		update_force()
 		visible_message(SPAN_NOTICE("\The [user] lights \the [src]."), SPAN_NOTICE("You light \the [src]."))
 		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)

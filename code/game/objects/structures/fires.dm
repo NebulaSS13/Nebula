@@ -195,6 +195,8 @@
 			var/obj/item/flame/match/match = thing
 			if(!match.burnt && !match.lit)
 				match.lit = TRUE
+				match.damtype = BURN
+				match.update_force()
 				match.update_icon()
 				return TRUE
 
