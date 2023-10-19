@@ -18,6 +18,7 @@
  */
 /obj/item/twohanded
 	w_class = ITEM_SIZE_HUGE
+	item_flags = ITEM_FLAG_IS_WEAPON
 	slot_flags = SLOT_BACK
 	icon_state = ICON_STATE_WORLD
 	pickup_sound = 'sound/foley/scrape1.ogg'
