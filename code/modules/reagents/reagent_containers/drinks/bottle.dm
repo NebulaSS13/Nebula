@@ -31,7 +31,10 @@
 	rag = null
 	return ..()
 
-/obj/item/chems/drinks/bottle/on_reagent_change()
+/obj/item/chems/drinks/bottle/update_container_name()
+	return
+
+/obj/item/chems/drinks/bottle/update_container_desc()
 	return
 
 //when thrown on impact, bottles smash and spill their contents

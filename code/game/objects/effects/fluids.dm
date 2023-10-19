@@ -34,7 +34,7 @@
 	return FALSE
 
 /obj/effect/fluid/on_reagent_change()
-	. = ..()
+	..()
 
 	if(reagents?.total_volume)
 		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
