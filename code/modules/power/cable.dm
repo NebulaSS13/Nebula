@@ -509,13 +509,12 @@ By design, d1 is the smallest direction and d2 is the highest
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	is_spawnable_type = FALSE
 
-/obj/item/stack/cable_coil/Initialize(mapload, c_length = MAXCOIL, var/param_color = null)
+/obj/item/stack/cable_coil/Initialize(mapload, c_length, var/param_color = null)
 	. = ..(mapload, c_length)
 	set_extension(src, /datum/extension/tool/variable, list(
 		TOOL_CABLECOIL = TOOL_QUALITY_DEFAULT,
 		TOOL_SUTURES =   TOOL_QUALITY_MEDIOCRE
 	))
-	src.amount = c_length
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
 		color = param_color
 	update_icon()
