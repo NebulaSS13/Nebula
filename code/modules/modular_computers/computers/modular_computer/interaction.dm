@@ -67,6 +67,11 @@
 /obj/item/modular_computer/attack_hand(var/mob/user)
 	if(anchored)
 		return attack_self(user)
+	// if it's equipped and we're not holding it, open
+	// the interface instead of removing it from the slot.
+	var/equip_slot = user.get_equipped_slot_for_item(src)
+	if(equip_slot && !(equip_slot in user.get_held_item_slots()))
+		return attack_self(user)
 	return ..()
 
 // On-click handling. Turns on the computer if it's off and opens the GUI.
@@ -108,9 +113,6 @@
 	if(card_slot && card_slot.stored_card)
 		to_chat(user, "\The [card_slot.stored_card] is inserted into it.")
 	assembly.examine(user)
-
-/obj/item/modular_computer/handle_mouse_drop(atom/over, mob/user)
-	. = (!istype(over, /obj/screen) && attack_self(user)) || ..()
 
 /obj/item/modular_computer/afterattack(atom/target, mob/user, proximity)
 	. = ..()
