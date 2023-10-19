@@ -5,7 +5,6 @@
 	plane = ABOVE_LIGHTING_PLANE
 	layer = BEAM_PROJECTILE_LAYER //Muzzle flashes would be above the lighting plane anyways.
 	anchored = TRUE
-	unacidable = TRUE
 	light_color = "#00ffff"
 	light_range = 2
 	light_power = 1

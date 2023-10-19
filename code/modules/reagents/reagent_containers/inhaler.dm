@@ -7,7 +7,6 @@
 	item_state = "autoinjector"
 	icon_state = "autoinhaler"
 	center_of_mass = @"{'x':16,'y':11}"
-	unacidable = TRUE
 	amount_per_transfer_from_this = 5
 	volume = 5
 	w_class = ITEM_SIZE_SMALL

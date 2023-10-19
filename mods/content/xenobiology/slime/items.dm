@@ -67,7 +67,6 @@
 	name = "rune"
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "golem"
-	unacidable = 1
 	layer = RUNE_LAYER
 
 /obj/effect/golemrune/Initialize()

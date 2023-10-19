@@ -2,7 +2,6 @@
 	name = "manifest"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
-	unacidable = 1//Just to be sure.
 
 /obj/effect/manifest/Initialize()
 	. = ..()

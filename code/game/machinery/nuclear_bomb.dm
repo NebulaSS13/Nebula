@@ -8,8 +8,8 @@ var/global/bomb_set
 	density = TRUE
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
-	unacidable = 1
 	interact_offline = TRUE
+	wires = /datum/wires/nuclearbomb
 
 	var/deployable = 0
 	var/extended = 0
@@ -25,7 +25,6 @@ var/global/bomb_set
 	var/obj/item/disk/nuclear/auth = null
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open, 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
 	var/lastentered
-	wires = /datum/wires/nuclearbomb
 	var/decl/security_level/original_level
 
 /obj/machinery/nuclearbomb/Initialize()

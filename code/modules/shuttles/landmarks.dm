@@ -6,8 +6,7 @@ var/global/list/shuttle_landmarks = list()
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
 	anchored = TRUE
-	unacidable = 1
-	simulated = 0
+	simulated = FALSE
 	invisibility = INVISIBILITY_ABSTRACT
 
 	var/landmark_tag

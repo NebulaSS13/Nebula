@@ -6,9 +6,11 @@
 
 /obj/item/integrated_circuit/reagent
 	category_text = "Reagent"
-	unacidable = 1
 	cooldown_per_use = 10
 	var/volume = 0
+
+/obj/item/integrated_circuit/reagent/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	return FALSE
 
 /obj/item/integrated_circuit/reagent/Initialize()
 	. = ..()
@@ -515,10 +517,12 @@
 		"on transfer" = IC_PINTYPE_PULSE_OUT
 	)
 
-	unacidable = 1
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	complexity = 4
 	power_draw_per_use = 5
+
+/obj/item/integrated_circuit/input/funnel/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	return FALSE
 
 /obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/user, intent)
 	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)

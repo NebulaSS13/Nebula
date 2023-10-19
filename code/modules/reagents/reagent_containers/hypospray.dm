@@ -10,7 +10,6 @@
 	icon_state = "hypo"
 	origin_tech = "{'materials':4,'biotech':5}"
 	amount_per_transfer_from_this = 5
-	unacidable = 1
 	volume = 30
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER

@@ -85,7 +85,6 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	unacidable = 0
 	material = /decl/material/solid/metal/steel
 	material_force_multiplier = 0.2
 
