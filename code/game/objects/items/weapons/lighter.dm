@@ -6,12 +6,12 @@
 	item_state = "lighter"
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
-	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_HOLLOW
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("burnt", "singed")
 	lit_heat = 1500
 	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/tmp/max_fuel = 5
 
 /obj/item/flame/lighter/Initialize()
