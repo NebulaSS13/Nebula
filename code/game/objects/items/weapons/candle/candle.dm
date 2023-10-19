@@ -50,8 +50,8 @@
 
 /obj/item/flame/candle/proc/light(mob/user)
 	if(!lit)
-		lit = 1
-		visible_message("<span class='notice'>\The [user] lights the [name].</span>")
+		lit = TRUE
+		visible_message(SPAN_NOTICE("\The [user] lights \the [src]."), SPAN_NOTICE("You light \the [src]."))
 		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)
 
@@ -71,7 +71,7 @@
 
 /obj/item/flame/candle/attack_self(mob/user)
 	if(lit)
-		lit = 0
+		lit = FALSE
 		update_icon()
 		set_light(0)
 		remove_extension(src, /datum/extension/scent)

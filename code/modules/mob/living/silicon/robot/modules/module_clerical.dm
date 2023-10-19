@@ -57,7 +57,7 @@
 	var/obj/item/rsf/M = locate() in equipment
 	M.stored_matter = 30
 	var/obj/item/flame/lighter/zippo/L = locate() in equipment
-	L.lit = 1
+	L.lit = TRUE
 
 /obj/item/robot_module/clerical/butler/finalize_emag()
 	. = ..()

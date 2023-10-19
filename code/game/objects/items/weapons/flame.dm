@@ -2,7 +2,7 @@
 /obj/item/flame
 	var/lit_heat = 1000
 	var/waterproof = FALSE
-	var/lit = 0
+	var/lit = FALSE
 	material = /decl/material/solid/wood
 
 /obj/item/flame/afterattack(var/obj/O, var/mob/user, proximity)
@@ -11,7 +11,7 @@
 		O.HandleObjectHeating(src, user, 700)
 
 /obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
-	lit = 0
+	lit = FALSE
 	damtype = BRUTE
 	STOP_PROCESSING(SSobj, src)
 

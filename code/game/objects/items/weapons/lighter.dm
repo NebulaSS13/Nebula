@@ -32,9 +32,9 @@
 
 /obj/item/flame/lighter/proc/light(mob/user)
 	if(submerged())
-		to_chat(user, "<span class='warning'>You cannot light \the [src] underwater.</span>")
+		to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
 		return
-	lit = 1
+	lit = TRUE
 	update_icon()
 	light_effects(user)
 	set_light(2, l_color = COLOR_PALE_ORANGE)

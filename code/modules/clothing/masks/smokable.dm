@@ -6,7 +6,7 @@
 	bodytype_equip_flags = null
 	z_flags = ZMM_MANGLE_PLANES
 
-	var/lit = 0
+	var/lit = FALSE
 	var/waterproof = FALSE
 	var/type_butt = null
 	var/chem_volume = 0
@@ -131,7 +131,7 @@
 		if(submerged())
 			to_chat(usr, SPAN_WARNING("You cannot light \the [src] underwater."))
 			return
-		lit = 1
+		lit = TRUE
 		damtype = BURN
 		if(REAGENT_VOLUME(reagents, /decl/material/liquid/fuel)) // the fuel explodes
 			var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -149,7 +149,7 @@
 		START_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/smokable/proc/extinguish(var/mob/user, var/no_message)
-	lit = 0
+	lit = FALSE
 	damtype = BRUTE
 	STOP_PROCESSING(SSobj, src)
 	set_light(0)
@@ -518,7 +518,7 @@
 		if(submerged())
 			to_chat(usr, SPAN_WARNING("You cannot light \the [src] underwater."))
 			return
-		lit = 1
+		lit = TRUE
 		damtype = BURN
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
@@ -542,7 +542,7 @@
 /obj/item/clothing/mask/smokable/pipe/attack_self(var/mob/user)
 	if(lit == 1)
 		user.visible_message(SPAN_NOTICE("[user] puts out [src]."), SPAN_NOTICE("You put out [src]."))
-		lit = 0
+		lit = FALSE
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
 		remove_extension(src, /datum/extension/scent)
