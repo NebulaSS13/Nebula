@@ -16,7 +16,9 @@
 		var/largest_tech_val = 0
 		var/list/tech = cached_json_decode(origin_tech)
 		for(var/t in tech)
-			var/next_tech_val = (tech[t]**2) * 5
+			if(tech[t] <= 1)
+				continue
+			var/next_tech_val = ((tech[t] - 1)**2) * 5
 			if(next_tech_val > largest_tech_val)
 				largest_tech_val = next_tech_val
 		. += largest_tech_val
