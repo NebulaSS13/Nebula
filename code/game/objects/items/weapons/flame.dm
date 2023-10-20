@@ -24,6 +24,14 @@
 			location.hotspot_expose(700, 5) // Potentially set fire to fuel etc.
 		extinguish(no_message = TRUE)
 
+/obj/item/flame/proc/light(mob/user, no_message)
+	if(lit)
+		return
+	lit = TRUE
+	damtype = BURN
+	update_force()
+	update_icon()
+
 /obj/item/flame/get_heat()
 	. = max(..(), lit ? lit_heat : 0)
 
@@ -48,6 +56,14 @@
 	randpixel = 10
 	max_force = 1
 
+/obj/item/flame/match/light(mob/user, no_message)
+	if(burnt)
+		return
+	if(lit)
+		return
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
 /obj/item/flame/match/Process()
 	if(isliving(loc))
 		var/mob/living/M = loc
@@ -70,12 +86,13 @@
 		extinguish()
 	return ..()
 
-/obj/item/flame/match/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/match/extinguish(var/mob/user, var/no_message, var/burn = TRUE)
 	. = ..()
-	name = "burnt match"
-	desc = "A match. This one has seen better days."
-	burnt = TRUE
-	update_icon()
+	if(burn)
+		name = "burnt match"
+		desc = "A match. This one has seen better days."
+		burnt = TRUE
+		update_icon()
 
 /obj/item/flame/match/on_update_icon()
 	. = ..()
