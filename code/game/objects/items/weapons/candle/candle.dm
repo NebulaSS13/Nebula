@@ -48,12 +48,12 @@
 		var/obj/item/flame/candle/other_candle = A
 		other_candle.light()
 
-/obj/item/flame/candle/proc/light(mob/user)
+/obj/item/flame/candle/light(mob/user, no_message)
 	if(!lit)
-		lit = TRUE
-		damtype = BURN
+		..()
 		update_force()
-		user.visible_message(SPAN_NOTICE("\The [user] lights \the [src]."), SPAN_NOTICE("You light \the [src]."))
+		if(!no_message)
+			user.visible_message(SPAN_NOTICE("\The [user] lights \the [src]."), SPAN_NOTICE("You light \the [src]."))
 		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)
 
@@ -73,7 +73,7 @@
 
 /obj/item/flame/candle/attack_self(mob/user)
 	if(lit)
-		lit = FALSE
+		extinguish(user)
 		update_icon()
 		set_light(0)
 		remove_extension(src, /datum/extension/scent)
@@ -89,6 +89,6 @@
 	max_storage_space = 7
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/cardboard
-	
+
 /obj/item/storage/candle_box/WillContain()
 	return list(/obj/item/flame/candle = 7)

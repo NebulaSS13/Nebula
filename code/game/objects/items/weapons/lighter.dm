@@ -29,11 +29,13 @@
 /obj/item/flame/lighter/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 
-/obj/item/flame/lighter/proc/light(mob/user)
+/obj/item/flame/lighter/light(mob/user)
 	if(submerged())
 		to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
 		return
-	lit = TRUE
+	if(lit)
+		return
+	..()
 	update_icon()
 	light_effects(user)
 	set_light(2, l_color = COLOR_PALE_ORANGE)
