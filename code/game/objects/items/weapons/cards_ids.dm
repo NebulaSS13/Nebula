@@ -170,8 +170,8 @@ var/global/const/NO_EMAG_ACT = -50
 	var/icon/side
 
 	//alt titles are handled a bit weirdly in order to unobtrusively integrate into existing ID system
-	var/assignment = null	//can be alt title or the actual job
-	var/rank = null			//actual job
+	var/assignment //can be alt title or the actual job
+	var/position   // actual job
 
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
@@ -303,6 +303,7 @@ var/global/const/NO_EMAG_ACT = -50
 	return access.Copy()
 
 /obj/item/card/id/GetIdCard()
+	RETURN_TYPE(/obj/item/card/id)
 	return src
 
 /obj/item/card/id/GetIdCards()

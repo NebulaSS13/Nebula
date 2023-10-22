@@ -91,7 +91,7 @@
 
 	if(giver)
 		data["giver"] = !!giver
-		data["giver_name"] = giver.rank || giver.assignment
+		data["giver_name"] = giver.position || giver.assignment
 		data["giv_name"] = giv_name
 
 		var/list/giver_access = list()
