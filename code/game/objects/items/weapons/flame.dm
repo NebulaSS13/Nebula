@@ -2,7 +2,7 @@
 /obj/item/flame
 	var/lit_heat = 1000
 	var/waterproof = FALSE
-	var/lit = 0
+	var/lit = FALSE
 	material = /decl/material/solid/wood
 
 /obj/item/flame/afterattack(var/obj/O, var/mob/user, proximity)
@@ -11,8 +11,9 @@
 		O.HandleObjectHeating(src, user, 700)
 
 /obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
-	lit = 0
+	lit = FALSE
 	damtype = BRUTE
+	update_force()
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/flame/fluid_act(var/datum/reagents/fluids)
@@ -22,6 +23,14 @@
 		if(location)
 			location.hotspot_expose(700, 5) // Potentially set fire to fuel etc.
 		extinguish(no_message = TRUE)
+
+/obj/item/flame/proc/light(mob/user, no_message)
+	if(lit)
+		return
+	lit = TRUE
+	damtype = BURN
+	update_force()
+	update_icon()
 
 /obj/item/flame/get_heat()
 	. = max(..(), lit ? lit_heat : 0)
@@ -39,11 +48,21 @@
 	icon_state = ICON_STATE_WORLD
 	var/burnt = 0
 	var/smoketime = 5
+	obj_flags = OBJ_FLAG_HOLLOW // so that it's not super overpriced compared to lighters
 	w_class = ITEM_SIZE_TINY
 	origin_tech = "{'materials':1}"
 	slot_flags = SLOT_EARS
 	attack_verb = list("burnt", "singed")
 	randpixel = 10
+	max_force = 1
+
+/obj/item/flame/match/light(mob/user, no_message)
+	if(burnt)
+		return
+	if(lit)
+		return
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
 /obj/item/flame/match/Process()
 	if(isliving(loc))
@@ -67,12 +86,13 @@
 		extinguish()
 	return ..()
 
-/obj/item/flame/match/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/match/extinguish(var/mob/user, var/no_message, var/burn = TRUE)
 	. = ..()
-	name = "burnt match"
-	desc = "A match. This one has seen better days."
-	burnt = 1
-	update_icon()
+	if(burn)
+		name = "burnt match"
+		desc = "A match. This one has seen better days."
+		burnt = TRUE
+		update_icon()
 
 /obj/item/flame/match/on_update_icon()
 	. = ..()

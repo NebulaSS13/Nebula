@@ -165,6 +165,7 @@
 	matter = list(
 		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
+	matter_multiplier = 0.15
 	item_state = "coil"
 
 /obj/item/stack/net_cable_coil/single

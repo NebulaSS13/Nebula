@@ -6,6 +6,7 @@
 	item_state = "nullrod"
 	slot_flags = SLOT_LOWER_BODY
 	force = 10
+	item_flags = ITEM_FLAG_IS_WEAPON
 	throw_speed = 1
 	throw_range = 4
 	throwforce = 7

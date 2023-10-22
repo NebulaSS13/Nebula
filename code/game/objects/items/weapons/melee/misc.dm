@@ -7,6 +7,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	force = 10
+	item_flags = ITEM_FLAG_IS_WEAPON
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':4}"

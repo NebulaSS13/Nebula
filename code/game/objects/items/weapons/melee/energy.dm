@@ -6,6 +6,7 @@
 
 	icon_state = ICON_STATE_WORLD
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	item_flags = ITEM_FLAG_IS_WEAPON
 	w_class = ITEM_SIZE_SMALL
 	hitsound = 'sound/weapons/genhit.ogg'
 
@@ -43,6 +44,9 @@
 	attack_verb =                   list("hit")
 	var/list/active_attack_verb	=   list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/list/inactive_attack_verb = list("hit")
+
+/obj/item/energy_blade/get_max_weapon_value()
+	return active_force
 
 /obj/item/energy_blade/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	. = ..()

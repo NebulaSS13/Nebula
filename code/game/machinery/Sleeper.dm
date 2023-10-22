@@ -60,7 +60,7 @@
 			var/decl/material/reagent = GET_DECL(rid)
 			for(var/banned_type in banned_chem_types)
 				if(istype(reagent, banned_type))
-					to_chat(user, SPAN_WARNING("Automatic safety checking indicates the present of a prohibited substance in this canister."))
+					to_chat(user, SPAN_WARNING("Automatic safety checking indicates the presence of a prohibited substance in this canister."))
 					return FALSE
 	var/mob/M = canister.loc
 	if(istype(M) && !M.try_unequip(canister, src))
@@ -78,6 +78,16 @@
 	canister.dropInto(loc)
 	to_chat(user, SPAN_NOTICE("You remove \the [canister] from \the [src]."))
 	return TRUE
+
+/obj/machinery/sleeper/proc/eject_all_reagent_canisters()
+	for(var/obj/item/canister in loaded_canisters)
+		canister.dropInto(loc)
+	LAZYCLEARLIST(loaded_canisters)
+
+/obj/machinery/sleeper/dismantle()
+	eject_all_reagent_canisters()
+	remove_beaker()
+	return ..()
 
 /obj/machinery/sleeper/get_contained_external_atoms()
 	. = ..()
