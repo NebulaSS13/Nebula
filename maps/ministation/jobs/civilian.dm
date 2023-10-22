@@ -6,7 +6,8 @@
 	economic_power = 1
 	access = list()
 	minimal_access = list()
-	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Visitor")
+	hud_icon = "hudassistant"
+	alt_titles = list("Technical Recruit","Medical Recruit","Research Recruit","Visitor")
 	outfit_type = /decl/hierarchy/outfit/job/ministation_assistant
 	department_types = list(/decl/department/civilian)
 	event_categories = list(ASSIGNMENT_GARDENER)
@@ -24,7 +25,7 @@
 	title = "Bartender"
 	alt_titles = list("Cook","Barista")
 	supervisors = "the Lieutenant and the Captain"
-	total_positions = 1
+	total_positions = 2
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/ministation/bartender
 	department_types = list(/decl/department/service)
@@ -49,13 +50,13 @@
 		SKILL_COOKING	= SKILL_MAX,
 		SKILL_BOTANY	= SKILL_MAX
 	)
-	skill_points = 20
+	skill_points = 30
 
 /datum/job/ministation/cargo
 	title = "Cargo Technician"
 	alt_titles = list("Shaft Miner","Drill Technician","Prospector")
 	supervisors = "the Lieutenant and the Captain"
-	total_positions = 2
+	total_positions = 3
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/ministation/cargo
 	department_types = list(/decl/department/service)
@@ -68,7 +69,8 @@
 		access_mailsorting,
 		access_mining,
 		access_mining_station,
-		access_external_airlocks
+		access_external_airlocks,
+		access_eva
 	)
 	minimal_access = list(
 		access_cargo,
@@ -92,7 +94,7 @@
 		SKILL_EVA		= SKILL_MAX,
 		SKILL_FINANCE	= SKILL_MAX
 	)
-	skill_points = 20
+	skill_points = 30
 	software_on_spawn = list(
 		/datum/computer_file/program/supply,
 		/datum/computer_file/program/deck_management,
@@ -103,7 +105,7 @@
 	title = "Janitor"
 	event_categories = list(ASSIGNMENT_JANITOR)
 	department_types = list(/decl/department/service)
-	total_positions = 1
+	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the Lieutenant and the Captain"
 	economic_power = 3
@@ -132,7 +134,7 @@
 	min_skill = list(
 		SKILL_HAULING  = SKILL_BASIC
 	)
-	skill_points = 18
+	skill_points = 28
 
 /datum/job/ministation/librarian
 	title = "Librarian"
