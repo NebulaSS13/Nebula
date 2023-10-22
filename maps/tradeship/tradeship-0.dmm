@@ -28,7 +28,7 @@
 /area/ship/trade/undercomms)
 "ad" = (
 /obj/structure/door/wood{
-	name = "matriarch's quarters"
+	name = "captain's quarters"
 	},
 /obj/structure/cable{
 	icon_state = "4-8"

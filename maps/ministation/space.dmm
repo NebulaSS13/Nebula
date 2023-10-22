@@ -404,7 +404,7 @@
 "Kt" = (
 /obj/structure/window/borosilicate_reinforced,
 /obj/structure/showcase{
-	desc = "It's actually a yinglet inside the box piloting the shuttle but don't tell anyone.";
+	desc = "It's actually a possum inside the box piloting the shuttle but don't tell anyone.";
 	icon_state = "message_server_o_off";
 	name = "auto-pilot system"
 	},
@@ -433,6 +433,10 @@
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
+"Pe" = (
+/obj/abstract/level_data_spawner/admin_level,
+/turf/space,
+/area/space)
 "Qd" = (
 /obj/machinery/atmospherics/pipe/manifold{
 	dir = 8
@@ -452,10 +456,6 @@
 "UO" = (
 /obj/effect/step_trigger/teleporter/random,
 /turf/space/transit/north,
-/area/space)
-"YY" = (
-/obj/abstract/level_data_spawner/admin_level,
-/turf/space,
 /area/space)
 
 (1,1,1) = {"
@@ -715,7 +715,7 @@ aa
 aa
 aa
 aa
-aa
+Pe
 aa
 "}
 (3,1,1) = {"
@@ -844,7 +844,7 @@ aa
 aa
 aa
 aa
-YY
+aa
 aa
 aa
 "}
@@ -2006,10 +2006,10 @@ ab
 ab
 ac
 ac
-ac
 Mu
-KH
 ac
+ac
+KH
 ab
 ab
 tC
@@ -2136,10 +2136,10 @@ tC
 ab
 ab
 ab
-ae
-ab
 ab
 ae
+ae
+ab
 ab
 ab
 tC
