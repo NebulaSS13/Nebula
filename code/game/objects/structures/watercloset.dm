@@ -526,7 +526,7 @@ var/global/list/hygiene_props = list()
 		return
 
 	if(can_use(1))
-		visible_message(SPAN_NOTICE("\The [usr] tears a sheet from \the [src]."), SPAN_NOTICE("You tear a sheet from \the [src]."))
+		usr.visible_message(SPAN_NOTICE("\The [usr] tears a sheet from \the [src]."), SPAN_NOTICE("You tear a sheet from \the [src]."))
 		var/obj/item/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
 

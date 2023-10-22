@@ -438,12 +438,9 @@
 
 /obj/item/storage/box/matches/attackby(obj/item/flame/match/W, mob/user)
 	if(istype(W) && !W.lit && !W.burnt)
-		W.lit = 1
-		W.damtype = "burn"
-		W.update_icon()
-		START_PROCESSING(SSobj, W)
+		W.light()
 		playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
-		user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
+		user.visible_message(SPAN_NOTICE("[user] strikes [W] on \the [src]."), SPAN_NOTICE("You strike [W] on \the [src]."))
 	W.update_icon()
 	return
 

@@ -14,6 +14,7 @@
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	force = 10
+	item_flags = ITEM_FLAG_IS_WEAPON
 	material = /decl/material/solid/wood
 
 /obj/item/classic_baton/attack(mob/M, mob/living/user)
@@ -37,6 +38,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	force = 3
+	item_flags = ITEM_FLAG_IS_WEAPON
 	material = /decl/material/solid/metal/aluminium
 	var/on = 0
 

@@ -78,7 +78,7 @@
 		to_chat(user,SPAN_NOTICE("There's no cartridge connected."))
 
 /obj/item/clothing/mask/smokable/ecig/proc/Deactivate()
-	lit = 0
+	lit = FALSE
 	STOP_PROCESSING(SSobj, src)
 	update_icon()
 

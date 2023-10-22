@@ -13,7 +13,7 @@
 	hud_icon = "hudblank"
 	skill_points = 0
 	no_skill_buffs = TRUE
-	guestbanned = 1	
+	guestbanned = 1
 	not_random_selectable = 1
 	skip_loadout_preview = TRUE
 	department_types = list(/decl/department/miscellaneous)
@@ -29,3 +29,51 @@
 	..()
 	alt_titles = SSrobots.robot_alt_titles.Copy()
 	alt_titles -= title
+
+/datum/job/ministation/computer
+	title = "Computer"
+	event_categories = list(ASSIGNMENT_COMPUTER)
+	total_positions = 0
+	spawn_positions = 1
+	selection_color = "#3f823f"
+	supervisors = "your laws"
+	req_admin_notify = 1
+	minimal_player_age = 14
+	account_allowed = 0
+	economic_power = 0
+	outfit_type = /decl/hierarchy/outfit/job/silicon/ai
+	loadout_allowed = FALSE
+	hud_icon = "hudblank"
+	skill_points = 0
+	no_skill_buffs = TRUE
+	guestbanned = 1
+	not_random_selectable = 1
+	skip_loadout_preview = TRUE
+	department_types = list(/decl/department/miscellaneous)
+
+/datum/job/ministation/computer/equip(var/mob/living/carbon/human/H)
+	return !!H
+
+/datum/job/ministation/computer/is_position_available()
+	return (empty_playable_ai_cores.len != 0)
+
+/datum/job/ministation/computer/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+	return H
+
+/datum/job/ministation/computer/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin)
+	character = character.AIize(move=0) // AIize the character, but don't move them yet
+
+	// is_available for AI checks that there is an empty core available in this list
+	var/obj/structure/aicore/deactivated/C = empty_playable_ai_cores[1]
+	empty_playable_ai_cores -= C
+
+	character.forceMove(C.loc)
+	var/mob/living/silicon/ai/A = character
+	A.on_mob_init()
+
+	if(latejoin)
+		new_player_mob.AnnounceCyborg(character, title, "has been downloaded to the empty core in \the [get_area_name(src)]")
+	SSticker.mode.handle_latejoin(character)
+
+	qdel(C)
+	return TRUE

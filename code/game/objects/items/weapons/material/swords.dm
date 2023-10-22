@@ -5,6 +5,7 @@
 	icon = 'icons/obj/items/weapon/swords/claymore.dmi'
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_LARGE
+	item_flags = ITEM_FLAG_IS_WEAPON
 	material_force_multiplier = 0.5 // 30 when wielded with hardnes 60 (steel)
 	armor_penetration = 10
 	thrown_material_force_multiplier = 0.16 // 10 when thrown with weight 60 (steel)
@@ -16,7 +17,7 @@
 	melee_accuracy_bonus = 10
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	pickup_sound = 'sound/foley/knife1.ogg' 
+	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 	var/draw_handle = TRUE
@@ -34,7 +35,7 @@
 		attack_verb = list("attacked", "smashed", "jabbed", "smacked", "prodded", "bonked")
 		hitsound = "chop"
 	. = ..()
-	
+
 /obj/item/sword/on_update_icon()
 	. = ..()
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)

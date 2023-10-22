@@ -11,7 +11,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	sharp = TRUE
 	edge = TRUE
-	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES | ITEM_FLAG_IS_WEAPON
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'

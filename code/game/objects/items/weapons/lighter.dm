@@ -7,12 +7,11 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	obj_flags = OBJ_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("burnt", "singed")
 	lit_heat = 1500
 	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/tmp/max_fuel = 5
 
 /obj/item/flame/lighter/Initialize()
@@ -30,11 +29,13 @@
 /obj/item/flame/lighter/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 
-/obj/item/flame/lighter/proc/light(mob/user)
+/obj/item/flame/lighter/light(mob/user)
 	if(submerged())
-		to_chat(user, "<span class='warning'>You cannot light \the [src] underwater.</span>")
+		to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
 		return
-	lit = 1
+	if(lit)
+		return
+	..()
 	update_icon()
 	light_effects(user)
 	set_light(2, l_color = COLOR_PALE_ORANGE)
