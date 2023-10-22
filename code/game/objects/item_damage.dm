@@ -18,6 +18,7 @@
 		return 0 //must return a number
 
 	//Apply damage
+	damage = min(health, damage)
 	health = clamp(health - damage, 0, max_health)
 	check_health(damage, damage_type, damage_flags)
 	return damage
