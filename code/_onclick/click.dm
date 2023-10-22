@@ -184,13 +184,15 @@
 	return
 
 /mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
-
 	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(src, "You cannot attack people before the game has started.")
 		return FALSE
 
 	if(stat)
 		return FALSE
+
+	if(try_maneuver(A))
+		return TRUE
 
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
@@ -215,6 +217,9 @@
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
 	return FALSE
+
+/mob/living/RangedAttack(var/atom/A, var/params)
+	return try_maneuver(A)
 
 /*
 	Restrained ClickOn

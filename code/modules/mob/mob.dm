@@ -44,6 +44,7 @@
 	QDEL_NULL_SCREEN(bodytemp)
 	QDEL_NULL_SCREEN(healths)
 	QDEL_NULL_SCREEN(throw_icon)
+	QDEL_NULL_SCREEN(maneuver_icon)
 	QDEL_NULL_SCREEN(nutrition_icon)
 	QDEL_NULL_SCREEN(hydration_icon)
 	QDEL_NULL_SCREEN(pressure)

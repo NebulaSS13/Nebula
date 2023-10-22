@@ -23,12 +23,6 @@
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	return
 
-/mob/living/CtrlClickOn(var/atom/A)
-	. = ..()
-	if(!. && a_intent == I_GRAB && length(available_maneuvers))
-		. = perform_maneuver(prepared_maneuver || available_maneuvers[1], A)
-
-
 /mob/living/carbon/human/RangedAttack(var/atom/A, var/params)
 	//Climbing up open spaces
 	if(isturf(loc) && bound_overlay && !is_physically_disabled() && istype(A) && A.can_climb_from_below(src))
