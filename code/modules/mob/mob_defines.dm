@@ -49,6 +49,7 @@
 	var/obj/screen/bodytemp = null
 	var/obj/screen/healths = null
 	var/obj/screen/throw_icon = null
+	var/obj/screen/maneuver/maneuver_icon = null
 	var/obj/screen/nutrition_icon = null
 	var/obj/screen/hydration_icon = null
 	var/obj/screen/pressure = null

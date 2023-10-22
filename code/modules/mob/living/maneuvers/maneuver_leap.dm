@@ -2,6 +2,7 @@
 	name = "leap"
 	stamina_cost = 10
 	reflexive_modifier = 1.5
+	selection_icon_state = "leap"
 
 /decl/maneuver/leap/perform(var/mob/living/user, var/atom/target, var/strength, var/reflexively = FALSE)
 	. = ..()
@@ -29,6 +30,8 @@
 	if(.)
 		var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
 		. = (can_leap_distance > 0 && (!target || get_dist(user, target) <= can_leap_distance))
+		if(!. && !silent)
+			to_chat(user, SPAN_WARNING("You cannot leap that far!"))
 
 /decl/maneuver/leap/spider
 	stamina_cost = 0
