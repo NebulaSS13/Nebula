@@ -462,6 +462,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			cant_pass = 1
 	return cant_pass
 
+/proc/get_step_resolving_mimic(var/atom/source, var/direction)
+	var/turf/turf = get_step(get_turf(source), direction)
+	return turf?.resolve_to_actual_turf()
+
 /proc/get_step_towards2(var/atom/ref , var/atom/trg)
 	var/base_dir = get_dir(ref, get_step_towards(ref,trg))
 	var/turf/temp = get_step_towards(ref,trg)

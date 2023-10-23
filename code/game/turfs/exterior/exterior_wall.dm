@@ -91,7 +91,7 @@ var/global/list/natural_walls = list()
 	for(var/trydir in global.cardinal)
 		if(!prob(reinf_material.ore_spread_chance))
 			continue
-		var/turf/exterior/wall/target_turf = get_step(src, trydir)
+		var/turf/exterior/wall/target_turf = get_step_resolving_mimic(src, trydir)
 		if(!istype(target_turf) || !isnull(target_turf.reinf_material))
 			continue
 		target_turf.set_material(target_turf.material, reinf_material)
@@ -161,8 +161,10 @@ var/global/list/natural_walls = list()
 		if(M)
 			ore_overlay.transform = M
 	if(update_neighbors)
-		for(var/turf/exterior/T in RANGE_TURFS(src, 1))
-			T.update_icon()
+		for(var/direction in global.alldirs)
+			var/turf/exterior/target_turf = get_step_resolving_mimic(src, direction)
+			if(istype(target_turf))
+				target_turf.update_icon()
 	else
 		update_icon()
 
@@ -174,10 +176,9 @@ var/global/list/natural_walls = list()
 		return
 
 	var/list/wall_connections = list()
-	for(var/stepdir in global.alldirs)
-		var/turf/exterior/wall/T = get_step(src, stepdir)
-		if(istype(T))
-			wall_connections += get_dir(src, T)
+	for(var/direction in global.alldirs)
+		if(istype(get_step_resolving_mimic(src, direction), /turf/exterior/wall))
+			wall_connections += direction
 	wall_connections = dirs_to_corner_states(wall_connections)
 
 	var/material_icon_base = material.icon_base_natural || 'icons/turf/walls/natural.dmi'
