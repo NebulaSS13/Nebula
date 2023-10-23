@@ -1,0 +1,4 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Exterior turfs and lighting blend across z-level transitions now.
