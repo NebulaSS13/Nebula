@@ -259,7 +259,7 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/proc/mergeDiagonalsNetworks(var/direction)
 
 	//search for and merge diagonally matching cables from the first direction component (north/south)
-	var/turf/T  = get_step(src, direction&3)//go north/south
+	var/turf/T  = get_step_resolving_mimic(src, direction & (NORTH|SOUTH))
 
 	for(var/obj/structure/cable/C in T)
 
@@ -269,7 +269,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		if(src == C)
 			continue
 
-		if(C.d1 == (direction^3) || C.d2 == (direction^3)) //we've got a diagonally matching cable
+		if(C.d1 == (direction ^ (NORTH|SOUTH)) || C.d2 == (direction ^ (NORTH|SOUTH))) //we've got a diagonally matching cable
 			if(!C.powernet) //if the matching cable somehow got no powernet, make him one (should not happen for cables)
 				var/datum/powernet/newPN = new()
 				newPN.add_cable(C)
@@ -280,7 +280,7 @@ By design, d1 is the smallest direction and d2 is the highest
 				C.powernet.add_cable(src) //else, we simply connect to the matching cable powernet
 
 	//the same from the second direction component (east/west)
-	T  = get_step(src, direction&12)//go east/west
+	T  = get_step_resolving_mimic(src, direction & (EAST|WEST))
 
 	for(var/obj/structure/cable/C in T)
 
@@ -289,7 +289,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 		if(src == C)
 			continue
-		if(C.d1 == (direction^12) || C.d2 == (direction^12)) //we've got a diagonally matching cable
+		if(C.d1 == (direction ^ (EAST|WEST)) || C.d2 == (direction ^ (EAST|WEST))) //we've got a diagonally matching cable
 			if(!C.powernet) //if the matching cable somehow got no powernet, make him one (should not happen for cables)
 				var/datum/powernet/newPN = new()
 				newPN.add_cable(C)
@@ -307,7 +307,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(!(d1 == direction || d2 == direction)) //if the cable is not pointed in this direction, do nothing
 		return
 
-	var/turf/TB  = get_zstep(src, direction)
+	var/turf/TB  = get_zstep_resolving_mimic(src, direction)
 
 	for(var/obj/structure/cable/C in TB)
 
@@ -384,14 +384,14 @@ By design, d1 is the smallest direction and d2 is the highest
 		if(cable_dir == 0)
 			continue
 		var/reverse = global.reverse_dir[cable_dir]
-		T = get_zstep(src, cable_dir)
+		T = get_zstep_resolving_mimic(src, cable_dir)
 		if(T)
 			for(var/obj/structure/cable/C in T)
 				if(C.d1 == reverse || C.d2 == reverse)
 					. += C
 		if(cable_dir & (cable_dir - 1)) // Diagonal, check for /\/\/\ style cables along cardinal directions
 			for(var/pair in list(NORTH|SOUTH, EAST|WEST))
-				T = get_step(src, cable_dir & pair)
+				T = get_step_resolving_mimic(src, cable_dir & pair)
 				if(T)
 					var/req_dir = cable_dir ^ pair
 					for(var/obj/structure/cable/C in T)
@@ -435,7 +435,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/list/P_list
 	if(!T1)	return
 	if(d1)
-		T1 = get_step(T1, d1)
+		T1 = get_zstep_resolving_mimic(T1, d1)
 		P_list = power_list(T1, src, turn(d1,180),0,cable_only = 1)	// what adjacently joins on to cut cable...
 
 	P_list += power_list(loc, src, d1, 0, cable_only = 1)//... and on turf
