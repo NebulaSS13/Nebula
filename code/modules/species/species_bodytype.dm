@@ -79,10 +79,6 @@ var/global/list/bodytypes_by_category = list()
 		'sound/foley/meat2.ogg'
 	)
 
-	var/list/synthetic_bodyfall_sounds = list(
-		'sound/foley/metal1.ogg'
-	)
-
 	// Used for initializing prefs/preview
 	var/base_color =      COLOR_BLACK
 	var/base_eye_color =  COLOR_BLACK
@@ -91,7 +87,7 @@ var/global/list/bodytypes_by_category = list()
 	/// Used to initialize organ material
 	var/material =        /decl/material/solid/meat
 	/// Used to initialize organ matter
-	var/matter =          null
+	var/list/matter =     null
 	/// The reagent organs are filled with, which currently affects what mobs that eat the organ will receive.
 	/// TODO: Remove this in a later matter edibility refactor.
 	var/edible_reagent =  /decl/material/liquid/nutriment/protein
@@ -390,3 +386,38 @@ var/global/list/bodytypes_by_category = list()
 		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
 		outfit.equip_outfit(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
 	mannequin.update_transform()
+
+/decl/bodytype/proc/rebuild_internal_organs(var/obj/item/organ/external/limb, var/override_material)
+
+	if(!limb.owner)
+		return
+
+	// Work out what we want to have in this organ.
+	var/list/replacing_organs = list()
+	for(var/organ_tag in has_organ)
+		var/obj/item/organ/internal/organ_prototype = has_organ[organ_tag]
+		if(initial(organ_prototype.parent_organ) == limb.organ_tag)
+			replacing_organs[organ_tag] = organ_prototype
+
+	// No organs, just delete everything.
+	if(!length(replacing_organs))
+		for(var/obj/item/organ/internal/innard in limb.internal_organs)
+			limb.owner.remove_organ(innard, FALSE, FALSE, TRUE, TRUE, FALSE)
+			qdel(innard)
+		return
+
+	// Check what we already have that matches.
+	for(var/obj/item/organ/internal/innard in limb.internal_organs)
+		var/obj/item/organ/internal/organ_prototype = replacing_organs[innard.organ_tag]
+		if(organ_prototype && istype(innard, organ_prototype))
+			innard.set_bodytype(type, override_material || material)
+			replacing_organs -= innard.organ_tag
+		else
+			limb.owner.remove_organ(innard, FALSE, FALSE, TRUE, TRUE, FALSE)
+			qdel(innard)
+
+	// Install any necessary new organs.
+	for(var/organ_tag in replacing_organs)
+		var/organ_type = replacing_organs[organ_tag]
+		var/obj/item/organ/internal/new_innard = new organ_type(limb.owner, null, limb.owner.dna, src)
+		limb.owner.add_organ(new_innard, GET_EXTERNAL_ORGAN(limb.owner, new_innard.parent_organ), FALSE, FALSE)

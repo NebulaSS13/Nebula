@@ -31,12 +31,17 @@
 }                                                                          \
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {      \
 	path = /obj/item/organ/external/groin;                                 \
-}
-/* Readd if FBP construction is desirable
+}                                                                          \
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/chest {      \
 	path = /obj/item/organ/external/chest;                                 \
 }                                                                          \
-*/
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/head {       \
+	path = /obj/item/organ/external/head;                                  \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {      \
+	path = /obj/item/organ/external/groin;                                 \
+}
+
 /datum/fabricator_recipe/robotics/prosthetic
 	var/model
 
