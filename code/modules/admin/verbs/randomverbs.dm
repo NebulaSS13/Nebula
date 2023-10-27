@@ -492,7 +492,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		antag_data.add_antagonist(new_character.mind)
 		antag_data.place_mob(new_character)
 	else
-		SSjobs.equip_rank(new_character, new_character.mind.assigned_role, 1)
+		SSjobs.equip_job_title(new_character, new_character.mind.assigned_role, 1)
 
 	//Announces the character on all the systems, based on the record.
 	if(!issilicon(new_character))//If they are not a cyborg/AI.

@@ -28,9 +28,9 @@
 	must_fill = 1
 	not_random_selectable = 1
 
-/datum/job/ministation/captain/equip(var/mob/living/carbon/human/H)
+/datum/job/ministation/captain/equip_job(var/mob/living/carbon/human/H)
 	. = ..()
-	if(H) 
+	if(H)
 		H.verbs |= /mob/proc/freetradeunion_rename_company
 
 /datum/job/ministation/captain/get_access()

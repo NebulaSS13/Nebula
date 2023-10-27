@@ -300,7 +300,7 @@
 		return
 	if(undress)
 		H.delete_inventory(TRUE)
-	outfit.equip(H)
+	outfit.equip_outfit(H)
 	log_and_message_admins("changed the equipment of [key_name(H)] to [outfit.name].")
 
 /client/proc/startSinglo()

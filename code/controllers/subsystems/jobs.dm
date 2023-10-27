@@ -469,34 +469,32 @@ SUBSYSTEM_DEF(jobs)
 
 	return spawn_in_storage
 
-/datum/controller/subsystem/jobs/proc/equip_rank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
+/datum/controller/subsystem/jobs/proc/equip_job_title(var/mob/living/carbon/human/H, var/job_title, var/joined_late = 0)
 	if(!H)
 		return
 
-	var/datum/job/job = get_by_title(rank)
+	var/datum/job/job = get_by_title(job_title)
 	var/list/spawn_in_storage
 
 	if(job)
 		if(H.client)
 			if(global.using_map.flags & MAP_HAS_BRANCH)
-				H.char_branch = mil_branches.get_branch(H.client.prefs.branches[rank])
+				H.char_branch = mil_branches.get_branch(H.client.prefs.branches[job_title])
 			if(global.using_map.flags & MAP_HAS_RANK)
-				H.char_rank = mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
+				H.char_rank = mil_branches.get_rank(H.client.prefs.branches[job_title], H.client.prefs.ranks[job_title])
 
 		// Transfers the skill settings for the job to the mob
 		H.skillset.obtain_from_client(job, H.client)
 
 		//Equip job items.
-		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
+		job.setup_account(H)
+		job.equip_job(H, H.mind?.role_alt_title, H.char_branch, H.char_rank)
 		job.apply_fingerprints(H)
 		spawn_in_storage = equip_custom_loadout(H, job)
-		job.setup_account(H)
-		var/decl/hierarchy/outfit/outfit = job.get_outfit(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
-		outfit.equip_id(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank, job)
 	else
-		to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
+		to_chat(H, "Your job is [job_title] and the game just can't handle it! Please report this bug to an administrator.")
 
-	H.job = rank
+	H.job = job_title
 
 	if(!joined_late || job.latejoin_at_spawnpoints)
 		var/obj/S = job.get_roundstart_spawnpoint()
@@ -533,23 +531,23 @@ SUBSYSTEM_DEF(jobs)
 	var/alt_title = null
 	if(!H.mind)
 		H.mind_initialize()
-	H.mind.assigned_job = job
-	H.mind.assigned_role = rank
+	H.mind.assigned_job  = job
+	H.mind.assigned_role = job_title
 	alt_title = H.mind.role_alt_title
 
 	var/mob/other_mob = job.handle_variant_join(H, alt_title)
 	if(other_mob)
-		job.post_equip_rank(other_mob, alt_title || rank)
+		job.post_equip_job_title(other_mob, alt_title || job_title)
 		return other_mob
 
 	if(spawn_in_storage)
 		for(var/decl/loadout_option/G in spawn_in_storage)
 			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.name])
 
-	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
+	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title || job_title].</B></font>")
 
 	if(job.supervisors)
-		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
+		to_chat(H, "<b>As the [alt_title || job_title] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 
 	if(H.has_headset_in_ears())
 		to_chat(H, "<b>To speak on your department's radio channel use [H.get_department_radio_prefix()]h. For the use of other channels, examine your headset.</b>")
@@ -564,7 +562,7 @@ SUBSYSTEM_DEF(jobs)
 	BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 	BITSET(H.hud_updateflag, SPECIALROLE_HUD)
 
-	job.post_equip_rank(H, alt_title || rank)
+	job.post_equip_job_title(H, alt_title || job_title)
 
 	H.client.show_location_blurb(30)
 

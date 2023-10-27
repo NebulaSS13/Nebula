@@ -74,9 +74,9 @@ var/global/list/outfits_decls_by_type_
 		J.toggle()
 		J.toggle_valve()
 
-/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
+/decl/hierarchy/outfit/proc/equip_outfit(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	equip_base(H, equip_adjustments)
-
+	equip_id(H, assignment, equip_adjustments, job, rank)
 	for(var/path in backpack_contents)
 		var/number = backpack_contents[path]
 		for(var/i=0,i<number,i++)
@@ -169,7 +169,7 @@ var/global/list/outfits_decls_by_type_
 	if(H.client?.prefs?.give_passport)
 		global.using_map.create_passport(H)
 
-/decl/hierarchy/outfit/proc/equip_id(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments, var/datum/job/job)
+/decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	if(!id_slot || !id_type)
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
@@ -177,22 +177,23 @@ var/global/list/outfits_decls_by_type_
 	var/obj/item/card/id/W = new id_type(H)
 	if(id_desc)
 		W.desc = id_desc
-	if(rank)
-		W.rank = rank
 	if(assignment)
 		W.assignment = assignment
 	if(job)
+		W.position = job.title
 		LAZYDISTINCTADD(W.access, job.get_access())
 		if(!W.detail_color)
 			W.detail_color = job.selection_color
 			W.update_icon()
 	H.update_icon()
 	H.set_id_info(W)
-	equip_pda(H, rank, assignment, equip_adjustments)
+	if(H.mind?.initial_account)
+		W.associated_account_number = H.mind.initial_account.account_number
+	equip_pda(H, assignment, equip_adjustments)
 	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W
 
-/decl/hierarchy/outfit/proc/equip_pda(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
+/decl/hierarchy/outfit/proc/equip_pda(var/mob/living/carbon/human/H, var/assignment, var/equip_adjustments)
 	if(!pda_slot || !pda_type)
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
