@@ -33,7 +33,7 @@
 	. = ..()
 
 /decl/bodytype/alium/get_blood_color(mob/living/carbon/human/H)
-	if(istype(H) && H.isSynthetic())
+	if(istype(H) && H.get_bodytype() != src)
 		return ..()
 	return blood_color
 

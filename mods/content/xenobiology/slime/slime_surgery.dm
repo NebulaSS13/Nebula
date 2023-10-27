@@ -22,7 +22,7 @@
 /decl/surgery_step/slime/assess_surgery_candidate(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
 	return isslime(target) && target.stat == DEAD
 
-/decl/surgery_step/slime/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
+/decl/surgery_step/slime/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	return list(SKILL_SCIENCE = SKILL_ADEPT)
 
 //////////////////////////////////////////////////////////////////

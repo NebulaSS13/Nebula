@@ -655,7 +655,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		return
 	var/chance = max((100 - H.stamina), exertion_effect_chance * H.encumbrance())
 	if (chance && prob(H.skill_fail_chance(SKILL_HAULING, chance)))
-		var/synthetic = H.isSynthetic()
+		var/synthetic = H.get_bodytype()?.is_robotic
 		if (synthetic)
 			if (exertion_charge_scale)
 				var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)

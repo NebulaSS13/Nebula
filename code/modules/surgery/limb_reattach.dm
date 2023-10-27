@@ -13,18 +13,19 @@
 	delicate = 1
 	abstract_type = /decl/surgery_step/limb
 
-/decl/surgery_step/limb/get_skill_reqs(mob/living/user, mob/living/target, obj/item/organ/external/tool)
+/decl/surgery_step/limb/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	// Not supplied a limb.
-	if(!istype(tool))
+	var/obj/item/organ/external/limb = tool
+	if(!istype(limb))
 		return ..()
 	// No parent (how did we get here?)
-	var/tool_is_prosthetic = BP_IS_PROSTHETIC(tool)
-	if(!tool.parent_organ)
+	var/tool_is_prosthetic = BP_IS_PROSTHETIC(limb)
+	if(!limb.parent_organ)
 		if(tool_is_prosthetic)
 			return SURGERY_SKILLS_ROBOTIC
 		return ..()
 	// Parent is invalid.
-	var/obj/item/organ/external/parent = target && GET_EXTERNAL_ORGAN(target, tool.parent_organ)
+	var/obj/item/organ/external/parent = target && GET_EXTERNAL_ORGAN(target, limb.parent_organ)
 	if(!istype(parent))
 		return ..()
 	// If either is meat and the other is not, return mixed skills.

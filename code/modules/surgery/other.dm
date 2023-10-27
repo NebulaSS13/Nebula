@@ -115,7 +115,7 @@
 /decl/surgery_step/hardsuit/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	return TRUE
 
-/decl/surgery_step/hardsuit/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
+/decl/surgery_step/hardsuit/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	return list(SKILL_EVA = SKILL_BASIC)
 
 /decl/surgery_step/hardsuit/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -179,7 +179,7 @@
 	if(affected && !affected.is_disinfected() && check_chemicals(tool))
 		return affected
 
-/decl/surgery_step/sterilize/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
+/decl/surgery_step/sterilize/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	return list(SKILL_MEDICAL = SKILL_BASIC)
 
 /decl/surgery_step/sterilize/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)

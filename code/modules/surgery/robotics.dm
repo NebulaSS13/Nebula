@@ -12,7 +12,7 @@
 	abstract_type = /decl/surgery_step/robotics
 	end_step_sound = 'sound/items/Screwdriver.ogg'
 
-/decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
+/decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	return SURGERY_SKILLS_ROBOTIC
 
 /decl/surgery_step/robotics/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -351,11 +351,11 @@
 	max_duration = 90
 	surgery_candidate_flags = 0
 
-/decl/surgery_step/robotics/fix_organ_robotic/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
-	if(target.isSynthetic())
+/decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, check_zone(target_zone, target))
+	if(E && BP_IS_PROSTHETIC(E))
 		return SURGERY_SKILLS_ROBOTIC
-	else
-		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+	return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -509,13 +509,13 @@
 
 /decl/surgery_step/robotics/install_mmi/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/mmi/M = tool
-	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
+	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, check_zone(target_zone, target))
 	if(affected && istype(M))
 		if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
 			to_chat(user, SPAN_WARNING("That brain is not usable."))
 		else if(BP_IS_CRYSTAL(affected))
 			to_chat(user, SPAN_WARNING("The crystalline interior of \the [affected] is incompatible with \the [M]."))
-		else if(!target.isSynthetic())
+		else if(!BP_IS_PROSTHETIC(affected))
 			to_chat(user, SPAN_WARNING("You cannot install a computer brain into a meat body."))
 		else if(!target.should_have_organ(BP_BRAIN))
 			var/decl/species/species = target.get_species()
@@ -586,7 +586,7 @@
 	can_infect = 0
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NEEDS_ENCASEMENT
 
-/decl/surgery_step/remove_mmi/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
+/decl/surgery_step/remove_mmi/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	return SURGERY_SKILLS_ROBOTIC
 
 /decl/surgery_step/remove_mmi/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
