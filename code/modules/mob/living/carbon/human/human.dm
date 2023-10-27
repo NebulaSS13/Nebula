@@ -523,7 +523,7 @@
 		if(!facialhairstyle?.accessory_is_available(src, species, new_bodytype))
 			change_facial_hair(new_bodytype.default_f_style, FALSE)
 		// TODO: check markings.
-
+		update_emotes()
 		update_eyes()
 		return TRUE
 	return FALSE

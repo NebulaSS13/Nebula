@@ -13,23 +13,6 @@
 		return FALSE //M is too small to wield this
 	return TRUE
 
-/mob/living/proc/isSynthetic()
-	return FALSE
-
-/mob/living/carbon/human/isSynthetic()
-	if(isnull(full_prosthetic))
-		robolimb_count = 0
-		var/list/limbs = get_external_organs()
-		for(var/obj/item/organ/external/E in limbs)
-			if(BP_IS_PROSTHETIC(E))
-				robolimb_count++
-		full_prosthetic = robolimb_count > 0 && (robolimb_count == LAZYLEN(limbs)) //If no organs, no way to tell
-		update_emotes()
-	return full_prosthetic
-
-/mob/living/silicon/isSynthetic()
-	return 1
-
 /mob/proc/isMonkey()
 	return 0
 

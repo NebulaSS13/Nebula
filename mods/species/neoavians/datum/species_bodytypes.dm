@@ -23,6 +23,11 @@
 	default_h_style = /decl/sprite_accessory/hair/avian
 	base_markings = list(/decl/sprite_accessory/marking/avian = "#454545")
 
+	heat_discomfort_strings = list(
+		"Your feathers prickle in the heat.",
+		"You feel uncomfortably warm.",
+		)
+
 	var/tail =              "tail_avian"
 	var/tail_icon =         'mods/species/neoavians/icons/tail.dmi'
 	var/tail_blend =        ICON_MULTIPLY

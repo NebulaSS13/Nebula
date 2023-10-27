@@ -926,7 +926,7 @@ default behaviour is:
 			blood_splatter(loc, src, large = TRUE)
 		if(prob(25))
 			adjustBruteLoss(1)
-			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
+			visible_message(SPAN_DANGER("\The [src]'s [get_bodytype()?.drag_state_damage_descriptor || "wounds open more"] from being dragged!"))
 
 /mob/living/CanUseTopicPhysical(mob/user)
 	. = CanUseTopic(user, global.physical_no_access_topic_state)
@@ -1131,8 +1131,11 @@ default behaviour is:
 	M.death()
 	log_and_message_admins("\The [user] admin-killed [key_name].")
 
+/mob/living/silicon/get_speech_bubble_state_modifier()
+	return "synth"
+
 /mob/living/get_speech_bubble_state_modifier()
-	return isSynthetic() ? "synth" : ..()
+	return get_bodytype()?.speech_bubble_state || ..()
 
 /mob/living/proc/is_on_special_ability_cooldown()
 	return world.time < next_special_ability
@@ -1143,28 +1146,15 @@ default behaviour is:
 /mob/living/proc/get_seconds_until_next_special_ability_string()
 	return ticks2readable(next_special_ability - world.time)
 
+/mob/living/proc/isSynthetic()
+	return FALSE
+
 //Get species or synthetic temp if the mob is a FBP/robot. Used when a synthetic mob is exposed to a temp check.
 //Essentially, used when a synthetic mob should act diffferently than a normal type mob.
 /mob/living/get_temperature_threshold(var/threshold)
-	if(isSynthetic())
-		switch(threshold)
-			if(COLD_LEVEL_1)
-				return SYNTH_COLD_LEVEL_1
-			if(COLD_LEVEL_2)
-				return SYNTH_COLD_LEVEL_2
-			if(COLD_LEVEL_3)
-				return SYNTH_COLD_LEVEL_3
-			if(HEAT_LEVEL_1)
-				return SYNTH_HEAT_LEVEL_1
-			if(HEAT_LEVEL_2)
-				return SYNTH_HEAT_LEVEL_2
-			if(HEAT_LEVEL_3)
-				return SYNTH_HEAT_LEVEL_3
-			else
-				CRASH("synthetic get_temperature_threshold() called with invalid threshold value.")
-	var/decl/species/my_species = get_species()
-	if(my_species)
-		return my_species.get_species_temperature_threshold(threshold)
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_bodytype)
+		return my_bodytype.get_bodytype_temperature_threshold(threshold)
 	return ..()
 
 /mob/living/proc/handle_some_updates()

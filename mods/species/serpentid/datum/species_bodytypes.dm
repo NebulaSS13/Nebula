@@ -22,6 +22,12 @@
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
 
+	heat_level_1 = 410 //Default 360 - Higher is better
+	heat_level_2 = 440 //Default 400
+	heat_level_3 = 800 //Default 1000
+
+	body_temperature = null
+
 	eye_darksight_range = 8
 	eye_innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 	eye_contaminant_guard = 1

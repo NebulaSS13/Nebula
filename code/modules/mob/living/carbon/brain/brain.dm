@@ -26,8 +26,10 @@
 /mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
 	return
 
-/mob/living/carbon/brain/isSynthetic()
-	return istype(container, /obj/item/mmi/digital) || istype(loc, /obj/item/organ/internal/posibrain)
+/mob/living/carbon/brain/get_bodytype()
+	if(istype(container, /obj/item/mmi/digital) || istype(loc, /obj/item/organ/internal/posibrain))
+		return GET_DECL(/decl/bodytype/prosthetic)
+	return GET_DECL(/decl/bodytype/human) // This needs some serious work.
 
 /mob/living/carbon/brain/binarycheck()
 	return isSynthetic()

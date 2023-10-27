@@ -18,6 +18,30 @@
 	eye_darksight_range = 3
 	eye_flash_mod = 1.2
 
+	body_temperature = null // cold-blooded, implemented the same way nabbers do it
+
+	heat_discomfort_level = 320
+	heat_discomfort_strings = list(
+		"You feel soothingly warm.",
+		"You feel the heat sink into your bones.",
+		"You feel warm enough to take a nap."
+	)
+
+	cold_discomfort_level = 292
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your scales bristle against the cold."
+	)
+
+	cold_level_1 = 280 //Default 260 - Lower is better
+	cold_level_2 = 220 //Default 200
+	cold_level_3 = 130 //Default 120
+
+	heat_level_1 = 420 //Default 360 - Higher is better
+	heat_level_2 = 480 //Default 400
+	heat_level_3 = 1100 //Default 1000
+
 	override_organ_types = list(
 		BP_EYES = /obj/item/organ/internal/eyes/lizard,
 		BP_BRAIN = /obj/item/organ/internal/brain/lizard

@@ -1,15 +1,13 @@
 /mob/living/proc/has_metabolic_thermoregulation()
-	if(get_bodytype()?.is_robotic)
-		return FALSE
-	var/decl/species/my_species = get_species()
-	if(my_species?.body_temperature == null)
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_bodytype && my_bodytype.body_temperature == null)
 		return FALSE
 	return TRUE
 
 /mob/living/proc/get_bodytemperature_difference()
-	var/decl/species/my_species = get_species()
-	if(my_species)
-		return (my_species.body_temperature - bodytemperature)
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_bodytype)
+		return (my_bodytype.body_temperature - bodytemperature)
 	return 0
 
 /mob/living/proc/stabilize_body_temperature()
@@ -19,9 +17,9 @@
 		return
 
 	// We may produce heat naturally.
-	var/decl/species/my_species = get_species()
-	if(my_species?.passive_temp_gain)
-		bodytemperature += my_species.passive_temp_gain
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_bodytype?.passive_temp_gain)
+		bodytemperature += my_bodytype.passive_temp_gain
 
 	var/body_temperature_difference = get_bodytemperature_difference()
 	if (abs(body_temperature_difference) < 0.5)

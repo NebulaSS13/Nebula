@@ -219,7 +219,8 @@
 	if(relative_density > 0.02) //don't bother if we are in vacuum or near-vacuum
 		var/loc_temp = environment.temperature
 
-		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
+		var/decl/bodytype/my_bodytype = get_bodytype()
+		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_temperature_threshold(COLD_LEVEL_1) && !isnull(my_bodytype?.body_temperature))
 			pressure_alert = 0
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
@@ -611,7 +612,8 @@
 				var/heat_1 = get_temperature_threshold(HEAT_LEVEL_1)
 				var/cold_1 = get_temperature_threshold(COLD_LEVEL_1)
 				//TODO: precalculate all of this stuff when the species datum is created
-				var/base_temperature = species.body_temperature
+				var/decl/bodytype/my_bodytype = get_bodytype()
+				var/base_temperature = my_bodytype?.body_temperature
 				if(base_temperature == null) //some species don't have a set metabolic temperature
 					base_temperature = (heat_1 + cold_1)/2
 

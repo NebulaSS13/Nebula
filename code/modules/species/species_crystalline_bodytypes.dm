@@ -14,6 +14,13 @@
 		/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS,
 		/decl/trait/radiation_hardened  = TRAIT_LEVEL_EXISTS
 	)
+	drag_state_damage_descriptor = "state worsens"
+	cold_level_1 = SYNTH_COLD_LEVEL_1
+	cold_level_2 = SYNTH_COLD_LEVEL_2
+	cold_level_3 = SYNTH_COLD_LEVEL_3
+	heat_level_1 = SYNTH_HEAT_LEVEL_1
+	heat_level_2 = SYNTH_HEAT_LEVEL_2
+	heat_level_3 = SYNTH_HEAT_LEVEL_3
 	var/is_brittle
 
 /decl/bodytype/crystalline/apply_bodytype_organ_modifications(obj/item/organ/org)

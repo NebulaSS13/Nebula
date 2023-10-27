@@ -46,11 +46,6 @@
 	swap_flags = MONKEY|SIMPLE_ANIMAL
 	push_flags = MONKEY|SIMPLE_ANIMAL
 
-	heat_discomfort_strings = list(
-		"Your feathers prickle in the heat.",
-		"You feel uncomfortably warm.",
-		)
-
 	unarmed_attacks = list(
 		/decl/natural_attack/bite/sharp,
 		/decl/natural_attack/claws,

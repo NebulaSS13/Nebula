@@ -17,7 +17,24 @@
 		/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS,
 		/decl/trait/radiation_hardened  = TRAIT_LEVEL_EXISTS
 	)
+	speech_bubble_state = "synth"
 	default_pulse_value = PULSE_NONE
+	drag_state_damage_descriptor = "state worsens"
+
+	body_temperature = null
+	passive_temp_gain = 5  // stabilize at ~80 C in a 20 C environment.
+	heat_discomfort_level = 373.15
+	heat_discomfort_strings = list(
+		"You are dangerously close to overheating!"
+	)
+
+	cold_level_1 = SYNTH_COLD_LEVEL_1
+	cold_level_2 = SYNTH_COLD_LEVEL_2
+	cold_level_3 = SYNTH_COLD_LEVEL_3
+	heat_level_1 = SYNTH_HEAT_LEVEL_1
+	heat_level_2 = SYNTH_HEAT_LEVEL_2
+	heat_level_3 = SYNTH_HEAT_LEVEL_3
+
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 

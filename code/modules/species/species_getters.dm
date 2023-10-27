@@ -22,28 +22,6 @@
 /decl/species/proc/get_flesh_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_FLESH_COLOUR : flesh_color)
 
-/decl/species/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
-
-	if(!prob(5))
-		return
-
-	var/covered = 0 // Basic coverage can help.
-	var/held_items = H.get_held_items()
-	for(var/obj/item/clothing/clothes in H)
-		if(clothes in held_items)
-			continue
-		if((clothes.body_parts_covered & SLOT_UPPER_BODY) && (clothes.body_parts_covered & SLOT_LOWER_BODY))
-			covered = 1
-			break
-
-	switch(msg_type)
-		if("cold")
-			if(!covered)
-				to_chat(H, "<span class='danger'>[pick(cold_discomfort_strings)]</span>")
-		if("heat")
-			if(covered)
-				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")
-
 /decl/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
 	return vision_flags
 

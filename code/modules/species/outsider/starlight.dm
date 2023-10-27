@@ -44,6 +44,29 @@
 	husk_icon =        'icons/mob/human_races/species/starborn/husk.dmi'
 	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 
+	body_temperature = T0C + 500 //We are being of fire and light.
+
+	cold_level_1 = 260
+	cold_level_2 = 250
+	cold_level_3 = 235
+
+	heat_level_1 = 20000
+	heat_level_2 = 30000
+	heat_level_3 = 40000
+
+	cold_discomfort_level = 300
+	cold_discomfort_strings = list(
+		"You feel your fire dying out...",
+		"Your fire begins to shrink away from the cold.",
+		"You feel slow and sluggish from the cold."
+	)
+
+	heat_discomfort_level = 10000
+	heat_discomfort_strings = list(
+		"Surprisingly, you start burning!",
+		"You're... burning!?!"
+	)
+
 /decl/blood_type/starstuff
 	name = "starstuff"
 	antigen_category = "starstuff"
@@ -53,7 +76,6 @@
 
 /decl/species/starlight/handle_death(var/mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,/mob/proc/dust),0)
-
 /decl/species/starlight/starborn
 	name = "Starborn"
 	name_plural = "Starborn"
@@ -64,37 +86,15 @@
 		/decl/blood_type/starstuff
 	)
 	flesh_color = "#ffff00"
-
 	unarmed_attacks = list(/decl/natural_attack/punch/starborn)
-
-	cold_discomfort_level = 300
-	cold_discomfort_strings = list("You feel your fire dying out...",
-								"Your fire begins to shrink away from the cold.",
-								"You feel slow and sluggish from the cold."
-								)
-	cold_level_1 = 260
-	cold_level_2 = 250
-	cold_level_3 = 235
-
-	heat_discomfort_level = 10000
-	heat_discomfort_strings = list("Surprisingly, you start burning!",
-									"You're... burning!?!")
-	heat_level_1 = 20000
-	heat_level_2 = 30000
-	heat_level_3 = 40000
-
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 	siemens_coefficient = 0
 	hunger_factor = 0
 	death_message = "dissolves into pure flames!"
 	breath_type = null
-
-
 	total_health = 250
-	body_temperature = T0C + 500 //We are being of fire and light.
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
-
 	base_auras = list(
 		/obj/aura/starborn
 		)

@@ -39,7 +39,6 @@
 	hazard_high_pressure = HAZARD_HIGH_PRESSURE / 0.84615
 	water_soothe_amount = 5
 
-	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
 	spawn_flags = SPECIES_CAN_JOIN
 
@@ -56,17 +55,6 @@
 		/decl/blood_type/skrell/noplus,
 		/decl/blood_type/skrell/nominus
 	)
-
-	cold_level_1 = 280 //Default 260 - Lower is better
-	cold_level_2 = 220 //Default 200
-	cold_level_3 = 130 //Default 120
-
-	heat_level_1 = 420 //Default 360 - Higher is better
-	heat_level_2 = 480 //Default 400
-	heat_level_3 = 1100 //Default 1000
-
-	cold_discomfort_level = 292 //Higher than perhaps it should be, to avoid big speed reduction at normal room temp
-	heat_discomfort_level = 368
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 1,

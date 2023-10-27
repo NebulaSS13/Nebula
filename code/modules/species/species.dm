@@ -109,31 +109,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/blood_reagent = /decl/material/liquid/blood
 
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
-	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees
-	var/cold_level_2 = 200                                      // Cold damage level 2 below this point.
-	var/cold_level_3 = 120                                      // Cold damage level 3 below this point.
-	var/heat_level_1 = 360                                      // Heat damage level 1 above this point.
-	var/heat_level_2 = 400                                      // Heat damage level 2 above this point.
-	var/heat_level_3 = 1000                                     // Heat damage level 3 above this point.
-	var/passive_temp_gain = 0		                            // Species will gain this much temperature every second
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE             // Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE           // High pressure warning.
 	var/warning_low_pressure = WARNING_LOW_PRESSURE             // Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE               // Dangerously low pressure.
-	var/body_temperature = 310.15	                            // Species will try to stabilize at this temperature.
-	                                                            // (also affects temperature processing)
-	var/heat_discomfort_level = 315                             // Aesthetic messages about feeling warm.
-	var/cold_discomfort_level = 285                             // Aesthetic messages about feeling chilly.
-	var/list/heat_discomfort_strings = list(
-		"You feel sweat drip down your neck.",
-		"You feel uncomfortably warm.",
-		"Your skin prickles in the heat."
-		)
-	var/list/cold_discomfort_strings = list(
-		"You feel chilly.",
-		"You shiver suddenly.",
-		"Your chilly flesh stands out in goosebumps."
-		)
 
 	var/water_soothe_amount
 
@@ -371,31 +350,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		. += "age descriptor was unset"
 	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
 		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
-
-	if(cold_level_3)
-		if(cold_level_2)
-			if(cold_level_3 > cold_level_2)
-				. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_2 ([cold_level_2])"
-			if(cold_level_1)
-				if(cold_level_3 > cold_level_1)
-					. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_1 ([cold_level_1])"
-	if(cold_level_2 && cold_level_1)
-		if(cold_level_2 > cold_level_1)
-			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
-
-	if(heat_level_3 != INFINITY)
-		if(heat_level_2 != INFINITY)
-			if(heat_level_3 < heat_level_2)
-				. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_2 ([heat_level_2])"
-			if(heat_level_1 != INFINITY)
-				if(heat_level_3 < heat_level_1)
-					. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_1 ([heat_level_1])"
-	if((heat_level_2 != INFINITY) && (heat_level_1 != INFINITY))
-		if(heat_level_2 < heat_level_1)
-			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
-
-	if(min(heat_level_1, heat_level_2, heat_level_3) <= max(cold_level_1, cold_level_2, cold_level_3))
-		. += "heat and cold damage level thresholds overlap"
 
 	if(taste_sensitivity < 0)
 		. += "taste_sensitivity ([taste_sensitivity]) was negative"
@@ -786,6 +740,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	//Make sure only supported descriptors are left
 	H.appearance_descriptors = new_descriptors
 
+/decl/species/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
+	if(mannequin.species.preview_outfit)
+		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
+		outfit.equip_outfit(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
+	mannequin.update_transform()
+
 /decl/species/proc/get_preview_icon()
 	if(!preview_icon)
 
@@ -817,20 +777,3 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
-
-/decl/species/proc/get_species_temperature_threshold(var/threshold)
-	switch(threshold)
-		if(COLD_LEVEL_1)
-			return cold_level_1
-		if(COLD_LEVEL_2)
-			return cold_level_2
-		if(COLD_LEVEL_3)
-			return cold_level_3
-		if(HEAT_LEVEL_1)
-			return heat_level_1
-		if(HEAT_LEVEL_2)
-			return heat_level_2
-		if(HEAT_LEVEL_3)
-			return heat_level_3
-		else
-			CRASH("get_species_temperature_threshold() called with invalid threshold value.")

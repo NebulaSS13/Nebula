@@ -18,11 +18,38 @@ var/global/list/bodytypes_by_category = list()
 	var/damage_overlays = 'icons/mob/human_races/species/default_damage_overlays.dmi'
 	var/husk_icon =       'icons/mob/human_races/species/default_husk.dmi'
 	var/skeletal_icon =   'icons/mob/human_races/species/human/skeleton.dmi'
-	var/icon_template =   'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
+	var/icon_template =   'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 bodytypes.
 	var/ignited_icon =    'icons/mob/OnFire.dmi'
 	var/associated_gender
 	var/appearance_flags = 0 // Appearance/display related features.
 	var/gib_descriptor = "squelchy"
+
+	// Temperature damage thresholds.
+	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees
+	var/cold_level_2 = 200                                      // Cold damage level 2 below this point.
+	var/cold_level_3 = 120                                      // Cold damage level 3 below this point.
+	var/heat_level_1 = 360                                      // Heat damage level 1 above this point.
+	var/heat_level_2 = 400                                      // Heat damage level 2 above this point.
+	var/heat_level_3 = 1000                                     // Heat damage level 3 above this point.
+
+	// Mobs will gain this much body temperature every second.
+	var/passive_temp_gain = 0
+
+	// Bodytemperature and comfort values.
+	var/body_temperature = 310.15	                            // Mobs will try to stabilize at this temperature.
+	                                                            // (also affects temperature processing)
+	var/heat_discomfort_level = 315                             // Aesthetic messages about feeling warm.
+	var/cold_discomfort_level = 285                             // Aesthetic messages about feeling chilly.
+	var/list/heat_discomfort_strings = list(
+		"You feel sweat drip down your neck.",
+		"You feel uncomfortably warm.",
+		"Your skin prickles in the heat."
+	)
+	var/list/cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddenly.",
+		"Your chilly flesh stands out in goosebumps."
+	)
 
 	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
 
@@ -125,10 +152,10 @@ var/global/list/bodytypes_by_category = list()
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 	)
 	/// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	/// with the zone. Used for species with body layouts that do not map directly to a standard humanoid body.
+	/// with the zone. Used for bodytypes with body layouts that do not map directly to a standard humanoid body.
 	var/list/limb_mapping
 	/// This list is merged into has_limbs in bodytype initialization.
-	/// Used for species that only need to change one or two entries in has_limbs.
+	/// Used for bodytypes that only need to change one or two entries in has_limbs.
 	var/list/override_limb_types
 	/// Associative list of organ tags (ex. BP_HEART) to paths.
 	/// Used to initialize organs and to check if a bodytype 'should have' (this can mean 'can have' or 'needs') an organ.
@@ -146,7 +173,7 @@ var/global/list/bodytypes_by_category = list()
 	var/vision_organ              // If set, this organ is required for vision.
 	var/breathing_organ           // If set, this organ is required for breathing.
 
-	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
+	var/list/override_organ_types // Used for bodytypes that only need to change one or two entries in has_organ.
 
 	/// Losing an organ from this list will give a grace period of `vital_organ_failure_death_delay` then kill the mob.
 	var/list/vital_organs = list(BP_BRAIN)
@@ -164,7 +191,7 @@ var/global/list/bodytypes_by_category = list()
 	var/eye_base_low_light_vision = 0
 	/// The lumcount (turf luminosity) threshold under which adaptive low light vision will begin processing.
 	var/eye_low_light_vision_threshold = 0.3
-	/// Fractional multiplier for the overall effectiveness of low light vision for this species. Caps the final alpha value of the darkness plane.
+	/// Fractional multiplier for the overall effectiveness of low light vision for this bodytype. Caps the final alpha value of the darkness plane.
 	var/eye_low_light_vision_effectiveness = 0
 	/// The rate at which low light vision adjusts towards the final value, as a fractional multiplier of the difference between the current and target alphas. ie. set to 0.15 for a 15% shift towards the target value each tick.
 	var/eye_low_light_vision_adjustment_speed = 0.15
@@ -185,15 +212,20 @@ var/global/list/bodytypes_by_category = list()
 	/// Value supplied when this mob's pulse is checked, in the absence of a heart.
 	var/default_pulse_value = PULSE_NORM
 
+	/// Overrides the mob's speech bubble state.
+	var/speech_bubble_state
+	/// Overrides the default 'worsens' message for being dragged with wounds.
+	var/drag_state_damage_descriptor
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
 
 	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
-	//If the species has eyes, they are the default vision organ
+	//If the bodytype has eyes, they are the default vision organ
 	if(!vision_organ && has_organ[BP_EYES])
 		vision_organ = BP_EYES
-	//If the species has lungs, they are the default breathing organ
+	//If the bodytype has lungs, they are the default breathing organ
 	if(!breathing_organ && has_organ[BP_LUNGS])
 		breathing_organ = BP_LUNGS
 
@@ -228,11 +260,36 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/validate()
 	. = ..()
 
+	if(cold_level_3)
+		if(cold_level_2)
+			if(cold_level_3 > cold_level_2)
+				. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_2 ([cold_level_2])"
+			if(cold_level_1)
+				if(cold_level_3 > cold_level_1)
+					. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_1 ([cold_level_1])"
+	if(cold_level_2 && cold_level_1)
+		if(cold_level_2 > cold_level_1)
+			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
+
+	if(heat_level_3 != INFINITY)
+		if(heat_level_2 != INFINITY)
+			if(heat_level_3 < heat_level_2)
+				. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_2 ([heat_level_2])"
+			if(heat_level_1 != INFINITY)
+				if(heat_level_3 < heat_level_1)
+					. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_1 ([heat_level_1])"
+	if((heat_level_2 != INFINITY) && (heat_level_1 != INFINITY))
+		if(heat_level_2 < heat_level_1)
+			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
+
+	if(min(heat_level_1, heat_level_2, heat_level_3) <= max(cold_level_1, cold_level_2, cold_level_3))
+		. += "heat and cold damage level thresholds overlap"
+
 	for(var/trait_type in traits)
 		var/trait_level = traits[trait_type]
 		var/decl/trait/T = GET_DECL(trait_type)
 		if(!T.validate_level(trait_level))
-			. += "invalid levels for species trait [trait_type]"
+			. += "invalid levels for bodytype trait [trait_type]"
 
 	if(eye_base_low_light_vision > 1)
 		. += "base low light vision is greater than 1 (over 100%)"
@@ -329,7 +386,7 @@ var/global/list/bodytypes_by_category = list()
 		var/organ_type = has_organ[organ_tag]
 		var/obj/item/organ/O = new organ_type(H, null, H.dna, src)
 		if(organ_tag != O.organ_tag)
-			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
+			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the bodytype's organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
 		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE)
 
@@ -404,12 +461,6 @@ var/global/list/bodytypes_by_category = list()
 	mannequin.update_hair(0)
 	mannequin.update_icon()
 
-/decl/species/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
-	if(mannequin.species.preview_outfit)
-		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
-		outfit.equip_outfit(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
-	mannequin.update_transform()
-
 /decl/bodytype/proc/get_radiation_mod(var/mob/living/carbon/human/H)
 	return radiation_mod
 
@@ -420,3 +471,42 @@ var/global/list/bodytypes_by_category = list()
 			return "\improper [examined_name] [species.get_root_species_name(showing)]"
 		return "\improper [examined_name]"
 	return "\improper [species?.name || "Unknown"]"
+
+/decl/bodytype/proc/get_bodytype_temperature_threshold(var/threshold)
+	switch(threshold)
+		if(COLD_LEVEL_1)
+			return cold_level_1
+		if(COLD_LEVEL_2)
+			return cold_level_2
+		if(COLD_LEVEL_3)
+			return cold_level_3
+		if(HEAT_LEVEL_1)
+			return heat_level_1
+		if(HEAT_LEVEL_2)
+			return heat_level_2
+		if(HEAT_LEVEL_3)
+			return heat_level_3
+		else
+			CRASH("get_bodytype_temperature_threshold() called with invalid threshold value.")
+
+/decl/bodytype/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
+
+	if(!prob(5))
+		return
+
+	var/covered = 0 // Basic coverage can help.
+	var/held_items = H.get_held_items()
+	for(var/obj/item/clothing/clothes in H)
+		if(clothes in held_items)
+			continue
+		if((clothes.body_parts_covered & SLOT_UPPER_BODY) && (clothes.body_parts_covered & SLOT_LOWER_BODY))
+			covered = 1
+			break
+
+	switch(msg_type)
+		if("cold")
+			if(!covered)
+				to_chat(H, "<span class='danger'>[pick(cold_discomfort_strings)]</span>")
+		if("heat")
+			if(covered)
+				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")

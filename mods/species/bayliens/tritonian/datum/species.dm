@@ -11,7 +11,6 @@
 	oxy_mod    = 0.5
 	toxins_mod = 1.5
 
-	body_temperature =    302
 	water_soothe_amount = 5
 
 	unarmed_attacks = list(
