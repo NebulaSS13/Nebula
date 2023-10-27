@@ -2015,7 +2015,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/closet/coffin,
 /obj/random/drinkbottle,
-/obj/item/contraband/poster,
+/obj/item/poster,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "it" = (

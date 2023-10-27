@@ -2323,7 +2323,7 @@
 	icon_state = "1-2"
 	},
 /obj/item/stock_parts/circuitboard/broken,
-/obj/item/contraband/poster,
+/obj/item/poster,
 /obj/item/radio/shortwave,
 /obj/machinery/light/small{
 	dir = 4

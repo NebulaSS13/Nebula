@@ -14,7 +14,7 @@
 		/obj/item/storage/pill_bottle/zoom =               2,
 		/obj/item/chems/glass/beaker/vial/random/toxin =   1,
 		/obj/item/chems/glass/beaker/sulphuric =           1,
-		/obj/item/contraband/poster =                      5,
+		/obj/item/poster =                                 5,
 		/obj/item/butterflyblade =                         3,
 		/obj/item/butterflyhandle =                        3,
 		/obj/item/baton/cattleprod =                       1,
