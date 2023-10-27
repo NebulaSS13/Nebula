@@ -128,7 +128,7 @@
 		damage = 8
 		radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
-	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
+	damage = FLOOR(damage * (my_bodytype ? my_bodytype.get_radiation_mod(src) : 1))
 	if(damage)
 		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)

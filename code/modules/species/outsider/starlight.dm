@@ -115,6 +115,7 @@
 	eye_icon =         'icons/mob/human_races/species/blueforged/eyes.dmi'
 	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
+	radiation_mod = 0
 
 /decl/blood_type/spacestuff
 	name = "spacestuff"
@@ -140,7 +141,6 @@
 	brute_mod = 0
 	oxy_mod = 0
 	toxins_mod = 0
-	radiation_mod = 0
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 
 /decl/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)

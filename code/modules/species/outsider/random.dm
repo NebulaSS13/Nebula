@@ -14,6 +14,7 @@
 		body_flags |= BODY_FLAG_NO_PAIN
 	base_color  = RANDOM_RGB
 	MULT_BY_RANDOM_COEF(eye_flash_mod, 0.5, 1.5)
+	MULT_BY_RANDOM_COEF(radiation_mod, 0, 2)
 	eye_darksight_range = rand(1,8)
 	. = ..()
 
@@ -54,7 +55,6 @@
 	MULT_BY_RANDOM_COEF(burn_mod, 0.8, 1.2)
 	MULT_BY_RANDOM_COEF(oxy_mod, 0.5, 1.5)
 	MULT_BY_RANDOM_COEF(toxins_mod, 0, 2)
-	MULT_BY_RANDOM_COEF(radiation_mod, 0, 2)
 
 	if(brute_mod < 1 && prob(40))
 		species_flags |= SPECIES_FLAG_NO_MINOR_CUT

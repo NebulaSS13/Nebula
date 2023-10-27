@@ -22,6 +22,9 @@ var/global/list/bodytypes_by_category = list()
 	var/associated_gender
 	var/appearance_flags = 0 // Appearance/display related features.
 
+	/// Damage mods
+	var/radiation_mod = 1 // Not as biologically fragile as meatboys.
+
 	/// What tech levels should limbs of this type use/need?
 	var/limb_tech = "{'biotech':2}"
 	var/icon_cache_uid
@@ -390,3 +393,6 @@ var/global/list/bodytypes_by_category = list()
 		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
 		outfit.equip_outfit(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
 	mannequin.update_transform()
+
+/decl/bodytype/proc/get_radiation_mod(var/mob/living/carbon/human/H)
+	return radiation_mod

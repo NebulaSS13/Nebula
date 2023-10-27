@@ -129,7 +129,7 @@
 		mymob.bodytemp.screen_loc = ui_temp
 		hud_elements |= mymob.bodytemp
 
-	if(target.isSynthetic())
+	if(GET_INTERNAL_ORGAN(target, BP_CELL))
 		target.cells = new /obj/screen()
 		target.cells.icon = 'icons/mob/screen1_robot.dmi'
 		target.cells.icon_state = "charge-empty"

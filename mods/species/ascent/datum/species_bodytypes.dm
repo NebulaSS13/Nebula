@@ -1,7 +1,7 @@
 /decl/bodytype/crystalline/mantid
 	abstract_type = /decl/bodytype/crystalline/mantid
 	eye_flash_mod =     2 // Highly photosensitive.
-
+	radiation_mod = 0.5
 	appearance_flags =  0
 	is_brittle = FALSE
 	has_limbs = list(

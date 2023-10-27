@@ -69,7 +69,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/brute_mod =      1                    // Physical damage multiplier.
 	var/burn_mod =       1                    // Burn damage multiplier.
 	var/toxins_mod =     1                    // Toxloss modifier
-	var/radiation_mod =  1                    // Radiation modifier
 
 	var/oxy_mod =        1                    // Oxyloss modifier
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
