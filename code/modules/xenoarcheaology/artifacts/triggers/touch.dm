@@ -32,10 +32,7 @@
 		return TRUE
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		if(H.isSynthetic())
-			return TRUE
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, bodypart)
 		if(E && BP_IS_PROSTHETIC(E))
 			return TRUE
 		return FALSE
-		

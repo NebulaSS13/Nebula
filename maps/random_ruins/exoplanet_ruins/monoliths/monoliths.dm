@@ -48,7 +48,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	visible_message("\The [user] touches \the [src].")
 
-	if(!iscarbon(user))
+	if(!ishuman(user))
 		to_chat(user, SPAN_NOTICE("\The [src] is still."))
 		return TRUE
 
@@ -57,8 +57,8 @@
 		to_chat(user, SPAN_NOTICE("\The [src] is still."))
 		return TRUE
 
-	var/mob/living/carbon/C = user
-	if(C.isSynthetic())
+	var/obj/item/organ/external/hand = GET_EXTERNAL_ORGAN(user, user.get_active_held_item_slot())
+	if(istype(hand) && BP_IS_PROSTHETIC(hand))
 		to_chat(user, SPAN_NOTICE("\The [src] is still."))
 		return TRUE
 
@@ -72,7 +72,8 @@
 	to_chat(user, SPAN_DANGER("An overwhelming stream of information invades your mind!"))
 	to_chat(user, SPAN_DANGER("<font size=2>[uppertext(E.engraving_generator.generate_violent_vision_text())]</font>"))
 	SET_STATUS_MAX(user, STAT_PARA, 2)
-	C.set_hallucination(20, 100)
+	var/mob/living/user_living = user
+	user_living.set_hallucination(20, 100)
 	return TRUE
 
 /turf/simulated/floor/fixed/alium/ruin

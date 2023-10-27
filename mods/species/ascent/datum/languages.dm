@@ -72,12 +72,10 @@
 #undef MANTID_SCRAMBLE_CACHE_LEN
 
 /decl/language/mantid/nonvocal/can_speak_special(var/mob/living/speaker)
-	if(istype(speaker) && speaker.isSynthetic())
+	if(issilicon(speaker))
 		return TRUE
-	else if(ishuman(speaker))
-		var/mob/living/carbon/human/H = speaker
-		return (H.species.name == SPECIES_MANTID_ALATE || H.species.name == SPECIES_MANTID_GYNE)
-	return FALSE
+	var/species_name = speaker.get_species_name()
+	return species_name == SPECIES_MANTID_ALATE || species_name == SPECIES_MANTID_GYNE
 
 /decl/language/mantid/worldnet
 	key = "\["

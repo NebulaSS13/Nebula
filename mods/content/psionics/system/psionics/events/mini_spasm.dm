@@ -30,12 +30,10 @@
 		var/obj/item/radio/source = victims[victim]
 		do_spasm(victim, source)
 
-/mob/proc/isSynthetic()
-
 /datum/event/minispasm/proc/do_spasm(var/mob/living/victim, var/obj/item/radio/source)
 	set waitfor = 0
 
-	if(iscarbon(victim) && !victim.isSynthetic())
+	if(iscarbon(victim) && !victim.HasTrait(/decl/trait/psionically_inert))
 		var/list/disabilities = list(NEARSIGHTED, EPILEPSY, TOURETTES, NERVOUS)
 		for(var/disability in disabilities)
 			if(victim.disabilities & disability)

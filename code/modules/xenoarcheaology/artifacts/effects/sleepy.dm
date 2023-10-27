@@ -34,7 +34,8 @@
 /datum/artifact_effect/sleepy/proc/sleepify(mob/living/carbon/human/H, speed, limit, message_prob)
 	var/weakness = GetAnomalySusceptibility(H)
 	if(prob(weakness * 100))
-		if(H.isSynthetic())
+		var/obj/item/organ/internal/brain/brain = H.should_have_organ(BP_BRAIN) && GET_INTERNAL_ORGAN(H, BP_BRAIN)
+		if(istype(brain) && BP_IS_PROSTHETIC(brain))
 			if(prob(message_prob))
 				to_chat(H, SPAN_WARNING("SYSTEM ALERT: CPU cycles slowing down."))
 			return

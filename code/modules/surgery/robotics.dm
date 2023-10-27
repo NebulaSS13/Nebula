@@ -353,7 +353,7 @@
 
 /decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, check_zone(target_zone, target))
-	if(E && BP_IS_PROSTHETIC(E))
+	if(affected && BP_IS_PROSTHETIC(affected))
 		return SURGERY_SKILLS_ROBOTIC
 	return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 

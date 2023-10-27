@@ -29,3 +29,7 @@
 	character = ..()
 	if(istype(character) && character.psi && !is_preview_copy)
 		character.psi.update()
+
+/decl/trait/psionically_inert
+	name = "Psionically Inert"
+	description = "This creature is unable to manifest psionics."
