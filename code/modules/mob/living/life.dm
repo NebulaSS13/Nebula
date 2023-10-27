@@ -166,7 +166,7 @@
 				R.affect_overdose(src)
 
 	// Update chem dosage.
-	// TODO: refactor chem dosage above isSynthetic() and GODMODE checks.
+	// TODO: refactor chem dosage above GODMODE checks.
 	if(length(chem_doses))
 		for(var/T in chem_doses)
 

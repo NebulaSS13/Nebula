@@ -182,6 +182,9 @@ var/global/list/bodytypes_by_category = list()
 	/// Type used for butchery products.
 	var/meat_type = /obj/item/chems/food/meat
 
+	/// Value supplied when this mob's pulse is checked, in the absence of a heart.
+	var/default_pulse_value = PULSE_NORM
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base

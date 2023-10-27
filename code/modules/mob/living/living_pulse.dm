@@ -1,8 +1,8 @@
 /mob/living/proc/get_pulse()
-	if(stat == DEAD || isSynthetic())
+	if(stat == DEAD)
 		return PULSE_NONE
 	if(!should_have_organ(BP_HEART))
-		return PULSE_NORM
+		return get_bodytype().default_pulse_value || PULSE_NORM
 	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	if(heart)
 		return heart.pulse

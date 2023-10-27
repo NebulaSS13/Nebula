@@ -17,6 +17,7 @@
 		/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS,
 		/decl/trait/radiation_hardened  = TRAIT_LEVEL_EXISTS
 	)
+	default_pulse_value = PULSE_NONE
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 

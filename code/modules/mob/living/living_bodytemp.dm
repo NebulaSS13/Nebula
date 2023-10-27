@@ -1,5 +1,5 @@
 /mob/living/proc/has_metabolic_thermoregulation()
-	if(isSynthetic())
+	if(get_bodytype()?.is_robotic)
 		return FALSE
 	var/decl/species/my_species = get_species()
 	if(my_species?.body_temperature == null)
