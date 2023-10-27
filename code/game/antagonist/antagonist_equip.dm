@@ -19,7 +19,7 @@
 
 	if(default_outfit)
 		var/decl/hierarchy/outfit/outfit = GET_DECL(default_outfit)
-		outfit.equip(player)
+		outfit.equip_outfit(player)
 
 	if(default_access)
 		var/obj/item/card/id/id = player.get_equipped_item(slot_wear_id_str)

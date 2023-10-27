@@ -19,9 +19,8 @@
 	skip_loadout_preview = TRUE
 	department_types = list(/decl/department/miscellaneous)
 
-/datum/job/computer/equip(var/mob/living/carbon/human/H)
-	if(!H)	return 0
-	return 1
+/datum/job/computer/equip_job(var/mob/living/carbon/human/H)
+	return !!H
 
 /datum/job/computer/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
@@ -71,7 +70,7 @@
 	if(H)
 		return H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
-/datum/job/robot/equip(var/mob/living/carbon/human/H)
+/datum/job/robot/equip_job(var/mob/living/carbon/human/H)
 	return !!H
 
 /datum/job/robot/New()

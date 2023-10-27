@@ -13,6 +13,30 @@
 	delicate = 1
 	abstract_type = /decl/surgery_step/limb
 
+/decl/surgery_step/limb/get_skill_reqs(mob/living/user, mob/living/target, obj/item/organ/external/tool)
+	// Not supplied a limb.
+	if(!istype(tool))
+		return ..()
+	// No parent (how did we get here?)
+	var/tool_is_prosthetic = BP_IS_PROSTHETIC(tool)
+	if(!tool.parent_organ)
+		if(tool_is_prosthetic)
+			return SURGERY_SKILLS_ROBOTIC
+		return ..()
+	// Parent is invalid.
+	var/obj/item/organ/external/parent = target && GET_EXTERNAL_ORGAN(target, tool.parent_organ)
+	if(!istype(parent))
+		return ..()
+	// If either is meat and the other is not, return mixed skills.
+	var/parent_is_prosthetic = BP_IS_PROSTHETIC(parent)
+	if(parent_is_prosthetic != tool_is_prosthetic)
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+	// If they are robotic, return robot skills.
+	if(parent_is_prosthetic)
+		return SURGERY_SKILLS_ROBOTIC
+	// Otherwise return base skills.
+	return ..()
+
 /decl/surgery_step/limb/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(affected)
@@ -63,14 +87,6 @@
 
 	. = TRUE
 
-/decl/surgery_step/limb/attach/get_skill_reqs(mob/living/user, mob/living/target, obj/item/organ/external/tool)
-	if(istype(tool) && BP_IS_PROSTHETIC(tool))
-		if(target.isSynthetic())
-			return SURGERY_SKILLS_ROBOTIC
-		else
-			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
-	return ..()
-
 /decl/surgery_step/limb/attach/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/E = tool
@@ -120,13 +136,7 @@
 	max_duration = 120
 
 /decl/surgery_step/limb/connect/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
-	var/obj/item/organ/external/E = target && GET_EXTERNAL_ORGAN(target, target_zone)
-	if(istype(E) && BP_IS_PROSTHETIC(E))
-		if(target.isSynthetic())
-			return SURGERY_SKILLS_ROBOTIC
-		else
-			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
-	return ..()
+	return ..(tool = (target && GET_EXTERNAL_ORGAN(target, target_zone)))
 
 /decl/surgery_step/limb/connect/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(..())

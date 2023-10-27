@@ -48,7 +48,7 @@
 			START_PROCESSING(SSobj, src)
 		update_icon()
 		return TRUE
-	. = ..()
+	return ..()
 
 /obj/item/chems/ivbag/Process()
 	if(!ismob(loc))

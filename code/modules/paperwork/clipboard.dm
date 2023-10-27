@@ -27,15 +27,6 @@
 	stored_pen = null
 	return ..()
 
-/obj/item/clipboard/handle_mouse_drop(atom/over, mob/user)
-	if(ishuman(user) && istype(over, /obj/screen/inventory))
-		var/obj/screen/inventory/inv = over
-		add_fingerprint(user)
-		if(user.try_unequip(src))
-			user.equip_to_slot_if_possible(src, inv.slot_id)
-			return TRUE
-	. = ..()
-
 /obj/item/clipboard/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(stored_pen)

@@ -108,8 +108,7 @@ var/global/list/surgery_tool_exception_cache = list()
 /decl/surgery_step/proc/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	if(delicate)
 		return SURGERY_SKILLS_DELICATE
-	else
-		return SURGERY_SKILLS_GENERIC
+	return SURGERY_SKILLS_GENERIC
 
 // checks whether this step can be applied with the given user and target
 /decl/surgery_step/proc/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)

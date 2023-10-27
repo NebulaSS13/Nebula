@@ -221,13 +221,13 @@ var/global/list/priv_region_access
 		var/job_icons = get_all_job_icons()
 		if(I.assignment	in job_icons) //Check if the job has a hud icon
 			return I.assignment
-		if(I.rank in job_icons)
-			return I.rank
+		if(I.position in job_icons)
+			return I.position
 
 		var/centcom = get_all_centcom_jobs()
 		if(I.assignment	in centcom)
 			return "Centcom"
-		if(I.rank in centcom)
+		if(I.position in centcom)
 			return "Centcom"
 	else
 		return
