@@ -14,7 +14,7 @@
 	return TRUE
 
 /mob/living/proc/isSynthetic()
-	return 0
+	return FALSE
 
 /mob/living/carbon/human/isSynthetic()
 	if(isnull(full_prosthetic))

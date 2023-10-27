@@ -59,7 +59,7 @@
 	if(!istype(M) || !istype(M.dna))
 		return
 	var/obj/item/organ/external/organ = organ_used && GET_EXTERNAL_ORGAN(M, organ_used)
-	if(istype(organ) && (BP_IS_PROSTHETIC(ORGAN) || !organ.dna))
+	if(istype(organ) && (BP_IS_PROSTHETIC(organ) || !organ.dna))
 		return
 	var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
 	forensics.add_from_atom(/datum/forensics/trace_dna, M)

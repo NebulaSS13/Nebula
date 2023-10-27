@@ -102,7 +102,7 @@
 	if(!.)
 		return .
 	var/obj/item/organ/internal/lungs/lung = user.get_organ(BP_LUNGS)
-	. = lung?.active_breathing && !user.isSynthetic()
+	. = istype(lung) && lung.active_breathing && !BP_IS_PROSTHETIC(lung)
 
 /decl/emote/audible/cough/do_emote(var/mob/living/carbon/user, var/extra_params)
 	if(!istype(user))

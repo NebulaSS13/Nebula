@@ -18,7 +18,8 @@
 
 /datum/event/ionstorm/announce()
 	for(var/mob/living/carbon/S in SSmobs.mob_list)
-		if (!S.isSynthetic())
+		var/obj/item/organ/internal/brain/brain = S.should_have_organ(BP_BRAIN) && GET_INTERNAL_ORGAN(S, BP_BRAIN)
+		if(brain && !BP_IS_PROSTHETIC(brain))
 			continue
 		if(!(S.z in affecting_z))
 			continue

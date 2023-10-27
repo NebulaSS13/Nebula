@@ -358,7 +358,7 @@
 	key = "vomit"
 
 /decl/emote/visible/vomit/check_user(var/mob/living/carbon/human/user)
-	. = ..() && user.check_has_mouth() && !user.isSynthetic()
+	. = ..() && user.check_has_mouth() && user.should_have_organ(BP_STOMACH)
 
 /decl/emote/visible/vomit/do_emote(var/atom/user, var/extra_params)
 	var/mob/living/carbon/human/H = user
