@@ -1138,7 +1138,6 @@
 
 /mob/proc/get_bodytype()
 	RETURN_TYPE(/decl/bodytype)
-	return
 
 /mob/proc/has_body_flag(flag, default = FALSE)
 	var/decl/bodytype/root_bodytype = get_bodytype()

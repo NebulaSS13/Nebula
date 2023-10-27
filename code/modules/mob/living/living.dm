@@ -1238,9 +1238,7 @@ default behaviour is:
 // Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
 /mob/living/proc/get_authentification_rank(if_no_id = "No id", if_no_job = "No job")
 	var/obj/item/card/id/id = GetIdCard()
-	if(istype(id))
-		return id.rank ? id.rank : if_no_job
-	return if_no_id
+	return istype(id) ? (id.position || if_no_job) : if_no_id
 
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers

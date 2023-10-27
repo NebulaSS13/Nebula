@@ -87,7 +87,7 @@
 /obj/item/mech_equipment/proc/MouseUpInteraction()
 	return 0
 
-/obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
+/obj/item/mech_equipment/mob_can_unequip(mob/user, slot, disable_warning = FALSE)
 	. = ..()
 	if(. && owner)
 		//Installed equipment shall not be unequiped.

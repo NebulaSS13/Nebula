@@ -12,12 +12,3 @@
 	pda_type = /obj/item/modular_computer/pda
 
 	flags = OUTFIT_HAS_BACKPACK
-
-/decl/hierarchy/outfit/job/equip_id(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments, var/datum/job/job)
-	var/obj/item/card/id/C = ..()
-	if(!C)
-		return
-	if(H.mind)
-		if(H.mind.initial_account)
-			C.associated_account_number = H.mind.initial_account.account_number
-	return C

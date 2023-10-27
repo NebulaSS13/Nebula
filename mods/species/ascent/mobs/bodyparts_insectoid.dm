@@ -24,9 +24,10 @@
 
 /obj/item/organ/external/hand/insectoid/upper
 	name = "left raptorial"
-	joint = "left upper wrist"
-	amputation_point = "left upper wrist"
+	joint = "upper left wrist"
+	amputation_point = "upper left shoulder"
 	organ_tag = BP_L_HAND_UPPER
+	parent_organ = BP_CHEST
 	gripper_type = /datum/inventory_slot/gripper/upper_left_hand
 
 /obj/item/organ/external/hand/insectoid/upper/get_manual_dexterity()
@@ -41,9 +42,10 @@
 
 /obj/item/organ/external/hand/right/insectoid/upper
 	name = "right raptorial"
-	joint = "right upper wrist"
-	amputation_point = "right upper wrist"
+	joint = "upper right wrist"
+	amputation_point = "upper right shoulder"
 	organ_tag = BP_R_HAND_UPPER
+	parent_organ = BP_CHEST
 	gripper_type = /datum/inventory_slot/gripper/upper_right_hand
 
 /obj/item/organ/external/hand/right/insectoid/upper/get_manual_dexterity()

@@ -32,8 +32,10 @@
 	return TRUE
 
 /obj/item/clothing/accessory/storage/handle_mouse_drop(atom/over, mob/user)
+	if(istype(over, /obj/screen/inventory))
+		return ..()
 	if(!istype(loc, /obj/item/clothing) && hold?.handle_storage_internal_mouse_drop(user, over))
-		. = ..(over)
+		return ..()
 	return TRUE
 
 /obj/item/clothing/accessory/storage/attackby(obj/item/W, mob/user)

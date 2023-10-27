@@ -228,13 +228,14 @@
 		/obj/item/rig_module/maneuvering_jets
 	)
 
-/obj/item/rig/mantid/mob_can_equip(var/mob/M, var/slot, ignore_equipped = FALSE)
+/obj/item/rig/mantid/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && slot == slot_back_str)
-		var/mob/living/carbon/human/H = M
-		if(!istype(H) || H.species.get_root_species_name(H) != mantid_caste)
-			to_chat(H, "<span class='danger'>Your species cannot wear \the [src].</span>")
-			. = 0
+	if(!. || slot != slot_back_str || !mantid_caste)
+		return
+	var/decl/species/my_species = user?.get_species()
+	if(my_species?.get_root_species_name(user) != mantid_caste)
+		to_chat(user, SPAN_WARNING("Your species cannot wear \the [src]."))
+		return FALSE
 
 /obj/item/clothing/head/helmet/space/rig/mantid
 	light_color = "#00ffff"

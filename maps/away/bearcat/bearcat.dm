@@ -116,7 +116,7 @@
 	corpse.real_name = "Captain"
 	corpse.name = "Captain"
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/deadcap)
-	outfit.equip(corpse)
+	outfit.equip_outfit(corpse)
 	corpse.adjustOxyLoss(corpse.maxHealth)
 	corpse.setBrainLoss(corpse.maxHealth)
 	var/obj/structure/bed/chair/C = locate() in T
