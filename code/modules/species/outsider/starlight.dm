@@ -63,6 +63,9 @@
 		"Surprisingly, you start burning!",
 		"You're... burning!?!"
 	)
+	blood_types = list(
+		/decl/blood_type/starstuff
+	)
 
 /decl/blood_type/starstuff
 	name = "starstuff"
@@ -78,10 +81,6 @@
 	name_plural = "Starborn"
 	description = "Beings of fire and light, split off from a sun deity of unbelievable power."
 	available_bodytypes = list(/decl/bodytype/starlight/starborn)
-
-	blood_types = list(
-		/decl/blood_type/starstuff
-	)
 	unarmed_attacks = list(/decl/natural_attack/punch/starborn)
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -92,7 +91,7 @@
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 	base_auras = list(
 		/obj/aura/starborn
-		)
+	)
 
 /decl/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
 	..()

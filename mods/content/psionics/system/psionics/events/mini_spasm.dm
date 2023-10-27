@@ -30,6 +30,8 @@
 		var/obj/item/radio/source = victims[victim]
 		do_spasm(victim, source)
 
+/mob/proc/isSynthetic()
+
 /datum/event/minispasm/proc/do_spasm(var/mob/living/victim, var/obj/item/radio/source)
 	set waitfor = 0
 

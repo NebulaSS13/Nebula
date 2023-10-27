@@ -27,16 +27,6 @@
 
 	spawn_flags = SPECIES_CAN_JOIN
 
-	blood_types = list(
-		/decl/blood_type/feline/mplus,
-		/decl/blood_type/feline/mminus,
-		/decl/blood_type/feline/rplus,
-		/decl/blood_type/feline/rminus,
-		/decl/blood_type/feline/mrplus,
-		/decl/blood_type/feline/mrminus,
-		/decl/blood_type/feline/oplus,
-		/decl/blood_type/feline/ominus
-	)
 	organs_icon = 'mods/species/bayliens/tajaran/icons/organs.dmi'
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
 	gluttonous = GLUT_TINY

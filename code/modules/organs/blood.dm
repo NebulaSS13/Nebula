@@ -49,7 +49,7 @@
 		"donor"       = weakref(src),
 		"species"     = get_species_name(),
 		"blood_DNA"   = get_unique_enzymes(),
-		"blood_color" = species.get_blood_color(src),
+		"blood_color" = get_blood_color(),
 		"blood_type"  = get_blood_type(),
 		"trace_chem"  = null
 	))
@@ -220,10 +220,10 @@
 	var/decl/species/my_species = get_species()
 	if(my_species)
 		data["has_oxy"]     = my_species.blood_oxy
-		data["blood_color"] = my_species.get_blood_color(src)
-	else if(get_bodytype()?.is_robotic)
-		data["has_oxy"]     = FALSE
-		data["blood_color"] = SYNTH_BLOOD_COLOR
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_bodytype)
+		data["has_oxy"]     = my_bodytype.is_robotic
+		data["blood_color"] = get_blood_color()
 	else
 		data["has_oxy"]     = TRUE
 		data["blood_color"] = COLOR_BLOOD_HUMAN

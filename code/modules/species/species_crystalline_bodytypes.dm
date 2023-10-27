@@ -21,6 +21,7 @@
 	heat_level_1 = SYNTH_HEAT_LEVEL_1
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
+	blood_types = list(/decl/blood_type/coolant)
 	var/is_brittle
 
 /decl/bodytype/crystalline/apply_bodytype_organ_modifications(obj/item/organ/org)

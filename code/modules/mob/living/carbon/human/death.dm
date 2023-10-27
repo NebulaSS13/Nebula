@@ -17,7 +17,7 @@
 	var/last_loc = loc
 	..(species.gibbed_anim, do_gibs = FALSE)
 	if(last_loc)
-		gibs(last_loc, dna, _fleshcolor = (get_bodytype()?.get_flesh_colour(src) || "#ffc896"), _bloodcolor = species.get_blood_color(src))
+		gibs(last_loc, dna, _fleshcolor = (get_bodytype()?.get_flesh_colour(src) || "#ffc896"), _bloodcolor = get_blood_color())
 
 /mob/living/carbon/human/dust()
 	if(species)

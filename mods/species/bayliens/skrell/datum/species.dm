@@ -41,17 +41,6 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	organs_icon = 'mods/species/bayliens/skrell/icons/body/organs.dmi'
 
-	blood_types = list(
-		/decl/blood_type/skrell/yplus,
-		/decl/blood_type/skrell/yminus,
-		/decl/blood_type/skrell/zplus,
-		/decl/blood_type/skrell/zminus,
-		/decl/blood_type/skrell/yzplus,
-		/decl/blood_type/skrell/yzminus,
-		/decl/blood_type/skrell/noplus,
-		/decl/blood_type/skrell/nominus
-	)
-
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 1,
 		/datum/appearance_descriptor/build = 0.8,

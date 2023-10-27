@@ -46,17 +46,6 @@
 	organs_icon = 'mods/species/bayliens/unathi/icons/organs.dmi'
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/doctor
-
-	blood_types = list(
-		/decl/blood_type/reptile/splus,
-		/decl/blood_type/reptile/sminus,
-		/decl/blood_type/reptile/xplus,
-		/decl/blood_type/reptile/xminus,
-		/decl/blood_type/reptile/sxplus,
-		/decl/blood_type/reptile/sxminus,
-		/decl/blood_type/reptile/oplus,
-		/decl/blood_type/reptile/ominus,
-	)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
 	breathing_sound = 'mods/species/bayliens/unathi/sound/lizard_breathing.ogg'

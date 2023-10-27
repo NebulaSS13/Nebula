@@ -17,6 +17,16 @@
 	default_h_style = /decl/sprite_accessory/hair/taj/lynx
 	flesh_color = "#ae7d32"
 
+	blood_types = list(
+		/decl/blood_type/feline/mplus,
+		/decl/blood_type/feline/mminus,
+		/decl/blood_type/feline/rplus,
+		/decl/blood_type/feline/rminus,
+		/decl/blood_type/feline/mrplus,
+		/decl/blood_type/feline/mrminus,
+		/decl/blood_type/feline/oplus,
+		/decl/blood_type/feline/ominus
+	)
 	heat_discomfort_level = 294
 	cold_discomfort_level = 230
 

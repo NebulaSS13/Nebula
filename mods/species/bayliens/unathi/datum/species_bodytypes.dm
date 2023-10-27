@@ -19,7 +19,16 @@
 	eye_flash_mod = 1.2
 	flesh_color = "#34af10"
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
-
+	blood_types = list(
+		/decl/blood_type/reptile/splus,
+		/decl/blood_type/reptile/sminus,
+		/decl/blood_type/reptile/xplus,
+		/decl/blood_type/reptile/xminus,
+		/decl/blood_type/reptile/sxplus,
+		/decl/blood_type/reptile/sxminus,
+		/decl/blood_type/reptile/oplus,
+		/decl/blood_type/reptile/ominus,
+	)
 	heat_discomfort_level = 320
 	heat_discomfort_strings = list(
 		"You feel soothingly warm.",

@@ -61,22 +61,14 @@
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
-
 	age_descriptor = /datum/appearance_descriptor/age/vox
-
 	preview_outfit = /decl/hierarchy/outfit/vox_raider
-
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
-
 	breath_type = /decl/material/gas/nitrogen
 	poison_types = list(/decl/material/gas/oxygen = TRUE)
 	siemens_coefficient = 0.2
-
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-
-	blood_types = list(/decl/blood_type/vox)
-
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5
 

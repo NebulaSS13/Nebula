@@ -35,11 +35,7 @@
 	new frontiers and new planets to exploit. They were largely not expecting to have entire expeditions lost \
 	amid reports of highly advanced, astonishingly violent mantid-cephlapodean sentients with particle cannons."
 	organs_icon =       'mods/species/ascent/icons/species/body/organs.dmi'
-
 	move_trail =              /obj/effect/decal/cleanable/blood/tracks/snake
-
-	blood_types = list(/decl/blood_type/hemolymph/mantid)
-
 	speech_chance = 100
 	speech_sounds = list(
 		'mods/species/ascent/sounds/ascent1.ogg',

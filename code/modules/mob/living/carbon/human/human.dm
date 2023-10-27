@@ -1042,7 +1042,7 @@
 					B.icon_state = pick("dir_splatter_1","dir_splatter_2")
 					var/scale = min(1, round(P.damage / 50, 0.2))
 					B.set_scale(scale)
-				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.get_blood_color(src))
+				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, get_blood_color())
 
 /mob/living/carbon/human/get_dexterity(var/silent = FALSE)
 
@@ -1180,8 +1180,9 @@
 	if(!eye_colour)
 		eye_colour = root_bodytype.base_eye_color
 	root_bodytype.set_default_hair(src, override_existing = TRUE, defer_update_hair = TRUE)
-	if(!blood_type && length(species?.blood_types))
-		blood_type = pickweight(species.blood_types)
+
+	if(!blood_type && length(root_bodytype?.blood_types))
+		blood_type = pickweight(root_bodytype.blood_types)
 
 	if(new_dna)
 		set_real_name(new_dna.real_name)

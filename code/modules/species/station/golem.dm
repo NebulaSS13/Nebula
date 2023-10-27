@@ -28,7 +28,6 @@
 	breath_type = null
 	poison_types = null
 
-	blood_types = list(/decl/blood_type/coolant)
 
 	available_pronouns = list(/decl/pronouns/neuter)
 

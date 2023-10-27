@@ -43,6 +43,7 @@
 	)
 	show_ssd =    "quiescent"
 	flesh_color = "#009999"
+	blood_types = list(/decl/blood_type/hemolymph/mantid)
 
 /decl/bodytype/crystalline/mantid/alate
 	name =              "alate"

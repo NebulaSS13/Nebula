@@ -459,7 +459,7 @@
 			M.dna = new /datum/dna()
 			M.dna.real_name = M.real_name
 		M.check_dna()
-		blood_color = M.species.get_blood_color(M)
+		blood_color = M.get_blood_color()
 	return TRUE
 
 /**

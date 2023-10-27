@@ -21,17 +21,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/bodytype/default_bodytype
 	var/base_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 
-	var/list/blood_types = list(
-		/decl/blood_type/aplus,
-		/decl/blood_type/aminus,
-		/decl/blood_type/bplus,
-		/decl/blood_type/bminus,
-		/decl/blood_type/abplus,
-		/decl/blood_type/abminus,
-		/decl/blood_type/oplus,
-		/decl/blood_type/ominus
-	)
-
 	var/blood_oxy = 1
 
 	var/static/list/hair_styles
@@ -266,12 +255,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	. = ..()
 
-	// Populate blood type table.
-	for(var/blood_type in blood_types)
-		var/decl/blood_type/blood_decl = GET_DECL(blood_type)
-		blood_types -= blood_type
-		blood_types[blood_decl.name] = blood_decl.random_weighting
-
 	for(var/bodytype in available_bodytypes)
 		available_bodytypes -= bodytype
 		available_bodytypes += GET_DECL(bodytype)
@@ -334,9 +317,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/validate()
 	. = ..()
-
-	if(!length(blood_types))
-		. += "missing at least one blood type"
 	if(default_bodytype && !(default_bodytype in available_bodytypes))
 		. += "default bodytype is not in available bodytypes list"
 	if(!length(available_bodytypes))
@@ -346,7 +326,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		. += "age descriptor was unset"
 	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
 		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
-
 	if(taste_sensitivity < 0)
 		. += "taste_sensitivity ([taste_sensitivity]) was negative"
 
@@ -524,19 +503,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
 	return FALSE
-
-/decl/species/proc/get_blood_decl(var/mob/living/carbon/human/H)
-	if(istype(H) && H.isSynthetic())
-		return GET_DECL(/decl/blood_type/coolant)
-	return get_blood_type_by_name(blood_types[1])
-
-/decl/species/proc/get_blood_name(var/mob/living/carbon/human/H)
-	var/decl/blood_type/blood = get_blood_decl(H)
-	return istype(blood) ? blood.splatter_name : "blood"
-
-/decl/species/proc/get_blood_color(var/mob/living/carbon/human/H)
-	var/decl/blood_type/blood = get_blood_decl(H)
-	return istype(blood) ? blood.splatter_colour : COLOR_BLOOD_HUMAN
 
 // Impliments different trails for species depending on if they're wearing shoes.
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)

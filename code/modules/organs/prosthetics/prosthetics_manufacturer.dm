@@ -17,6 +17,7 @@
 		/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS,
 		/decl/trait/radiation_hardened  = TRAIT_LEVEL_EXISTS
 	)
+	blood_types = list(/decl/blood_type/coolant)
 	speech_bubble_state = "synth"
 	default_pulse_value = PULSE_NONE
 	drag_state_damage_descriptor = "state worsens"

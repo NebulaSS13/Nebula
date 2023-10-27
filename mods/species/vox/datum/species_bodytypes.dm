@@ -19,6 +19,7 @@
 	cold_level_3 = -1
 	default_h_style = /decl/sprite_accessory/hair/vox/short
 	flesh_color = "#808d11"
+	blood_types = list(/decl/blood_type/vox)
 
 	vital_organs = list(
 		BP_STACK,

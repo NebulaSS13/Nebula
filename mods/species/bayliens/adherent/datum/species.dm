@@ -24,8 +24,6 @@
 	bone_material = null
 	skin_material = null
 
-	blood_types = list(/decl/blood_type/coolant)
-
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
 		/decl/bodytype/crystalline/adherent,

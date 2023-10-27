@@ -6,8 +6,11 @@
 	limb_blend =        ICON_MULTIPLY
 	appearance_flags =  HAS_SKIN_COLOR
 	body_flags =        BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	var/blood_color
 
 /decl/bodytype/alium/Initialize()
+	//Coloring
+	blood_color = RANDOM_RGB
 	if(prob(10))
 		movement_slowdown += pick(-1,1)
 	if(prob(5))
@@ -28,6 +31,11 @@
 	body_temperature += temp_comfort_shift
 	flesh_color = RANDOM_RGB
 	. = ..()
+
+/decl/bodytype/alium/get_blood_color(mob/living/carbon/human/H)
+	if(istype(H) && H.isSynthetic())
+		return ..()
+	return blood_color
 
 /decl/species/alium
 	name = SPECIES_ALIEN
@@ -52,12 +60,8 @@
 		/decl/emote/exertion/biological/breath,
 		/decl/emote/exertion/biological/pant
 	)
-	var/blood_color
 
 /decl/species/alium/Initialize()
-
-	//Coloring
-	blood_color = RANDOM_RGB
 
 	//Combat stats
 	MULT_BY_RANDOM_COEF(total_health, 0.8, 1.2)
@@ -98,11 +102,6 @@
 		species_flags |= SPECIES_FLAG_NO_TANGLE
 
 	. = ..()
-
-/decl/species/alium/get_blood_color(mob/living/carbon/human/H)
-	if(istype(H) && H.isSynthetic())
-		return ..()
-	return blood_color
 
 /obj/structure/aliumizer
 	name = "alien monolith"

@@ -15,11 +15,7 @@
 	name = SPECIES_SERPENTID
 	name_plural = "Serpentids"
 	spawn_flags = SPECIES_IS_RESTRICTED
-
 	preview_outfit = null
-
-	blood_types = list(/decl/blood_type/hemolymph)
-
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
 	age_descriptor = /datum/appearance_descriptor/age/serpentid

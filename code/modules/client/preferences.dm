@@ -87,7 +87,7 @@ var/global/list/time_prefs_fixed = list()
 	real_name = get_random_name()
 
 	var/decl/species/species = get_species_by_key(global.using_map.default_species)
-	blood_type = pickweight(species.blood_types)
+	blood_type = pickweight(species.default_bodytype.blood_types)
 
 	if(client)
 		if(IsGuestKey(client.key))

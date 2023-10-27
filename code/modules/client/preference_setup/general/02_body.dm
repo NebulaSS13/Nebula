@@ -110,10 +110,9 @@
 		pref.species = global.using_map.default_species
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
-	if(!pref.blood_type || !(pref.blood_type in mob_species.blood_types))
-		pref.blood_type = pickweight(mob_species.blood_types)
-
 	var/decl/bodytype/mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+	if(!pref.blood_type || !(pref.blood_type in mob_bodytype?.blood_types))
+		pref.blood_type = pickweight(mob_bodytype.blood_types)
 	var/low_skin_tone = mob_bodytype ? (35 - mob_bodytype.max_skin_tone()) : -185
 	sanitize_integer(pref.skin_tone, low_skin_tone, 34, initial(pref.skin_tone))
 
@@ -243,10 +242,10 @@
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["blood_type"])
-		var/new_b_type = input(user, "Choose your character's blood type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in mob_species.blood_types
+		var/new_b_type = input(user, "Choose your character's blood type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in mob_bodytype.blood_types
 		if(new_b_type && CanUseTopic(user))
 			mob_species = get_species_by_key(pref.species)
-			if(new_b_type in mob_species.blood_types)
+			if(new_b_type in mob_bodytype.blood_types)
 				pref.blood_type = new_b_type
 				return TOPIC_REFRESH
 

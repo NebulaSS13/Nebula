@@ -12,6 +12,17 @@
 	flesh_color = "#8cd7a3"
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
+	blood_types = list(
+		/decl/blood_type/skrell/yplus,
+		/decl/blood_type/skrell/yminus,
+		/decl/blood_type/skrell/zplus,
+		/decl/blood_type/skrell/zminus,
+		/decl/blood_type/skrell/yzplus,
+		/decl/blood_type/skrell/yzminus,
+		/decl/blood_type/skrell/noplus,
+		/decl/blood_type/skrell/nominus
+	)
+
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
 	cold_level_3 = 130 //Default 120

@@ -219,10 +219,27 @@ var/global/list/bodytypes_by_category = list()
 	var/show_ssd = "fast asleep"
 	var/flesh_color = "#ffc896" // Pink.
 
+	/// A list of blood decl types available to this bodytype.
+	var/list/blood_types = list(
+		/decl/blood_type/aplus,
+		/decl/blood_type/aminus,
+		/decl/blood_type/bplus,
+		/decl/blood_type/bminus,
+		/decl/blood_type/abplus,
+		/decl/blood_type/abminus,
+		/decl/blood_type/oplus,
+		/decl/blood_type/ominus
+	)
 
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
+
+	// Populate blood type table.
+	for(var/blood_type in blood_types)
+		var/decl/blood_type/blood_decl = GET_DECL(blood_type)
+		blood_types -= blood_type
+		blood_types[blood_decl.name] = blood_decl.random_weighting
 
 	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
 	//If the bodytype has eyes, they are the default vision organ
@@ -263,6 +280,9 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/validate()
 	. = ..()
 
+	if(!length(blood_types))
+		. += "missing at least one blood type"
+
 	if(cold_level_3)
 		if(cold_level_2)
 			if(cold_level_3 > cold_level_2)
@@ -273,7 +293,6 @@ var/global/list/bodytypes_by_category = list()
 	if(cold_level_2 && cold_level_1)
 		if(cold_level_2 > cold_level_1)
 			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
-
 	if(heat_level_3 != INFINITY)
 		if(heat_level_2 != INFINITY)
 			if(heat_level_3 < heat_level_2)
@@ -525,3 +544,14 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/proc/get_flesh_colour(var/mob/living/carbon/human/H)
 	return flesh_color
+
+/decl/bodytype/proc/get_blood_decl(var/mob/living/carbon/human/H)
+	return get_blood_type_by_name(blood_types[1])
+
+/decl/bodytype/proc/get_blood_name(var/mob/living/carbon/human/H)
+	var/decl/blood_type/blood = get_blood_decl(H)
+	return istype(blood) ? blood.splatter_name : "blood"
+
+/decl/bodytype/proc/get_blood_color(var/mob/living/carbon/human/H)
+	var/decl/blood_type/blood = get_blood_decl(H)
+	return istype(blood) ? blood.splatter_colour : COLOR_BLOOD_HUMAN

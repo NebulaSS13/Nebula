@@ -32,6 +32,7 @@
 	eye_innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 	eye_contaminant_guard = 1
 	eye_icon = 'mods/species/serpentid/icons/eyes.dmi'
+	blood_types = list(/decl/blood_type/hemolymph)
 
 	has_limbs = list(
 		BP_CHEST =        list("path" = /obj/item/organ/external/chest/insectoid/serpentid),
