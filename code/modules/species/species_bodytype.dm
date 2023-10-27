@@ -24,6 +24,8 @@ var/global/list/bodytypes_by_category = list()
 	var/appearance_flags = 0 // Appearance/display related features.
 	var/gib_descriptor = "squelchy"
 
+	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
+
 	/// Damage mods
 	var/radiation_mod = 1 // Not as biologically fragile as meatboys.
 
@@ -222,6 +224,12 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/validate()
 	. = ..()
+
+	for(var/trait_type in traits)
+		var/trait_level = traits[trait_type]
+		var/decl/trait/T = GET_DECL(trait_type)
+		if(!T.validate_level(trait_level))
+			. += "invalid levels for species trait [trait_type]"
 
 	if(eye_base_low_light_vision > 1)
 		. += "base low light vision is greater than 1 (over 100%)"

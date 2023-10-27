@@ -220,8 +220,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/list/exertion_emotes_biological
 	var/list/exertion_emotes_synthetic
 
-	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
-
 	// Preview icon gen/tracking vars.
 	var/icon/preview_icon
 	var/preview_icon_width = 64
@@ -361,12 +359,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/validate()
 	. = ..()
-
-	for(var/trait_type in traits)
-		var/trait_level = traits[trait_type]
-		var/decl/trait/T = GET_DECL(trait_type)
-		if(!T.validate_level(trait_level))
-			. += "invalid levels for species trait [trait_type]"
 
 	if(!length(blood_types))
 		. += "missing at least one blood type"
