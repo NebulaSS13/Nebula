@@ -13,7 +13,10 @@
 	eye_darksight_range = 2
 	radiation_mod = 0.5
 	meat_type = /obj/item/stack/material/rods
-	traits = list(/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS)
+	traits = list(
+		/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS,
+		/decl/trait/radiation_hardened  = TRAIT_LEVEL_EXISTS
+	)
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 

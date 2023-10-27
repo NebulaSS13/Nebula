@@ -101,10 +101,11 @@
 	if(prob(25))
 		damage = 2
 
+	var/radiation_hardened = HasTrait(/decl/trait/radiation_hardened)
 	if (radiation > 50)
 		damage = 2
 		radiation -= 2 * RADIATION_SPEED_COEFFICIENT
-		if(!isSynthetic())
+		if(!radiation_hardened)
 			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 				radiation -= 5 * RADIATION_SPEED_COEFFICIENT
 				to_chat(src, "<span class='warning'>You feel weak.</span>")
@@ -117,7 +118,7 @@
 	if (radiation > 75)
 		damage = 3
 		radiation -= 3 * RADIATION_SPEED_COEFFICIENT
-		if(!isSynthetic())
+		if(!radiation_hardened)
 			if(prob(5))
 				take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
 			if(prob(1))
@@ -134,7 +135,7 @@
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 		updatehealth()
 		var/list/limbs = get_external_organs()
-		if(!isSynthetic() && LAZYLEN(limbs))
+		if(!radiation_hardened && LAZYLEN(limbs))
 			var/obj/item/organ/external/O = pick(limbs)
 			if(istype(O))
 				O.add_autopsy_data("Radiation Poisoning", damage)

@@ -50,6 +50,8 @@
 	global.silicon_mob_list += src
 	. = ..()
 
+	SetTrait(/decl/trait/radiation_hardened, TRAIT_LEVEL_EXISTS)
+
 	if(silicon_radio)
 		silicon_radio = new silicon_radio(src)
 	if(silicon_camera)
@@ -64,6 +66,13 @@
 	default_language = /decl/language/human/common
 	init_id()
 	init_subsystems()
+
+	if(!laws)
+		laws = global.using_map.default_law_type
+	if(ispath(laws))
+		laws = new laws()
+	laws_sanity_check()
+
 
 /mob/living/silicon/Destroy()
 	global.silicon_mob_list -= src
