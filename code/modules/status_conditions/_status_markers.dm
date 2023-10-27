@@ -43,7 +43,7 @@
 
 	mob_image = new /image
 	mob_image.loc = owner
-	mob_image.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM|KEEP_TOGETHER)
+	mob_image.appearance_flags |= (RESET_ALPHA|RESET_COLOR|RESET_TRANSFORM|KEEP_APART)
 	mob_image.plane = DEFAULT_PLANE
 	mob_image.layer = POINTER_LAYER
 
@@ -53,7 +53,7 @@
 
 	mob_image_personal = new /image
 	mob_image_personal.loc = owner
-	mob_image_personal.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM|KEEP_TOGETHER)
+	mob_image_personal.appearance_flags |= (RESET_ALPHA|RESET_COLOR|RESET_TRANSFORM|KEEP_APART)
 	mob_image_personal.plane = DEFAULT_PLANE
 	mob_image_personal.layer = POINTER_LAYER
 
