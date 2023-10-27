@@ -33,20 +33,10 @@
 		QDEL_NULL(storage_ui)
 	. = ..()
 
-/obj/item/storage/check_mousedrop_adjacency(var/atom/over, var/mob/user)
-	. = (loc == user && istype(over, /obj/screen)) || ..()
-
 /obj/item/storage/handle_mouse_drop(var/atom/over, var/mob/user)
-	if(canremove && (ishuman(user) || isrobot(user) || isanimal(user)) && !user.incapacitated(INCAPACITATION_DISRUPTED))
-		if(over == user)
-			open(user)
-			return TRUE
-		if(istype(over, /obj/screen/inventory) && loc == user)
-			var/obj/screen/inventory/inv = over
-			add_fingerprint(usr)
-			if(user.try_unequip(src))
-				user.equip_to_slot_if_possible(src, inv.slot_id)
-				return TRUE
+	if(canremove && (ishuman(user) || isrobot(user) || isanimal(user)) && !user.incapacitated(INCAPACITATION_DISRUPTED) && over == user)
+		open(user)
+		return TRUE
 	. = ..()
 
 /obj/item/storage/proc/return_inv()

@@ -11,6 +11,7 @@
 	DelayedEquipUnderwear(user, target)
 
 /obj/item/underwear/handle_mouse_drop(atom/over, mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	DelayedEquipUnderwear(user, over)
 	return TRUE
 

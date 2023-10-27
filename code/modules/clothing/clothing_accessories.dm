@@ -46,18 +46,6 @@
 		. = A.attack_hand(user) || .
 	return TRUE
 
-/obj/item/clothing/check_mousedrop_adjacency(var/atom/over, var/mob/user)
-	. = (loc == user && istype(over, /obj/screen)) || ..()
-
-/obj/item/clothing/handle_mouse_drop(atom/over, mob/user)
-	if(ishuman(user) && loc == user && istype(over, /obj/screen/inventory))
-		var/obj/screen/inventory/inv = over
-		add_fingerprint(user)
-		if(user.try_unequip(src))
-			user.equip_to_slot_if_possible(src, inv.slot_id)
-		return TRUE
-	. = ..()
-
 /obj/item/clothing/proc/update_accessory_slowdown()
 	slowdown_accessory = 0
 	for(var/obj/item/clothing/accessory/A in accessories)
