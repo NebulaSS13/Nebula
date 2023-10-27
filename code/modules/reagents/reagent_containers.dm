@@ -41,7 +41,7 @@
 /obj/item/chems/on_update_icon()
 	. = ..()
 	if(detail_state)
-		add_overlay(overlay_image(icon, "[icon_state][detail_state]", detail_color || COLOR_WHITE, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[initial(icon_state)][detail_state]", detail_color || COLOR_WHITE, RESET_COLOR))
 
 /obj/item/chems/proc/update_container_name()
 	var/newname = get_base_name()
