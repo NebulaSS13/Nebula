@@ -16,9 +16,12 @@
 /mob/living/carbon/human
 	butchery_rotation = 180
 
+/mob/living/proc/get_meat_type()
+	return get_bodytype()?.meat_type || meat_type
+
 // Harvest an animal's delicious byproducts
 /mob/living/proc/harvest_meat()
-	var/effective_meat_type = isSynthetic() ? /obj/item/stack/material/rods : meat_type
+	var/effective_meat_type = get_meat_type()
 	if(!effective_meat_type || !meat_amount)
 		return
 	blood_splatter(get_turf(src), src, large = TRUE)

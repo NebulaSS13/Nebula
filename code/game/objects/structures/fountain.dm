@@ -31,7 +31,7 @@
 		return ..()
 
 	var/datum/appearance_descriptor/age/age = my_species && LAZYACCESS(my_species.appearance_descriptors, "age")
-	if(H.isSynthetic() || !my_species || !age)
+	if(H.get_bodytype()?.is_robotic || !my_species || !age)
 		to_chat(H, SPAN_WARNING("A feeling of foreboding stills your hand. The fountain is not for your kind."))
 		return
 

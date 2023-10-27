@@ -12,6 +12,7 @@
 	eye_flash_mod = 1
 	eye_darksight_range = 2
 	radiation_mod = 0.5
+	meat_type = /obj/item/stack/material/rods
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 

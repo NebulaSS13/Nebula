@@ -50,7 +50,7 @@
 	if(!scan_subject)
 		return
 
-	if (scan_subject.isSynthetic())
+	if(!ishuman(scan_subject) || scan_subject.get_bodytype().is_robotic)
 		to_chat(user, "<span class='warning'>\The [scanner] is designed for organic humanoid patients only.</span>")
 		return
 

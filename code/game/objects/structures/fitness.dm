@@ -15,7 +15,7 @@
 		return ..()
 
 	var/mob/living/carbon/human/H = user
-	var/synth = H.isSynthetic()
+	var/synth = H.get_bodytype().is_robotic
 	if(!synth && H.nutrition < 20)
 		to_chat(H, SPAN_WARNING("You [synth ? "need more energy" : "are too tired"] to use the punching bag. Go [synth ? "recharge" : "eat something"]."))
 		return TRUE
@@ -52,7 +52,7 @@
 	if(!ishuman(user))
 		return ..()
 	var/mob/living/carbon/human/H = user
-	var/synth = H.isSynthetic()
+	var/synth = H.get_bodytype().is_robotic
 	if(H.loc != src.loc)
 		to_chat(H, SPAN_WARNING("You must be on the weight machine to use it."))
 		return TRUE

@@ -44,7 +44,7 @@
 			var/mob/living/carbon/human/C = loc
 			if (src == C.get_equipped_item(slot_wear_mask_str) && C.check_has_mouth())
 				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2)
-			add_trace_DNA(C)
+			add_trace_DNA(C, BP_HEAD)
 		else
 			STOP_PROCESSING(SSobj, src)
 

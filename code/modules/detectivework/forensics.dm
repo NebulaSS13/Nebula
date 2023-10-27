@@ -55,14 +55,14 @@
 		var/datum/forensics/F = forensics.evidence[T]
 		other_forensics.add_data(T, F.data)
 
-/obj/item/proc/add_trace_DNA(mob/living/carbon/M)
-	if(!istype(M))
+/obj/item/proc/add_trace_DNA(mob/living/carbon/M, organ_used)
+	if(!istype(M) || !istype(M.dna))
 		return
-	if(M.isSynthetic())
+	var/obj/item/organ/external/organ = organ_used && GET_EXTERNAL_ORGAN(M, organ_used)
+	if(istype(organ) && (BP_IS_PROSTHETIC(ORGAN) || !organ.dna))
 		return
-	if(istype(M.dna))
-		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
-		forensics.add_from_atom(/datum/forensics/trace_dna, M)
+	var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
+	forensics.add_from_atom(/datum/forensics/trace_dna, M)
 
 // On examination get hints of evidence
 /obj/item/examine(mob/user, distance)

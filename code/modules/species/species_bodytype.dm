@@ -177,6 +177,9 @@ var/global/list/bodytypes_by_category = list()
 	/// Stun from blindness modifier.
 	var/eye_flash_mod = 1
 
+	/// Type used for butchery products.
+	var/meat_type = /obj/item/chems/food/meat
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base

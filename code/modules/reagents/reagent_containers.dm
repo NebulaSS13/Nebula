@@ -182,7 +182,7 @@
 			self_feed_message(user)
 			reagents.trans_to_mob(user, issmall(user) ? CEILING(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
 			feed_sound(user)
-			add_trace_DNA(user)
+			add_trace_DNA(user, BP_HEAD)
 			return 1
 
 
@@ -203,7 +203,7 @@
 
 			reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
 			feed_sound(user)
-			add_trace_DNA(target)
+			add_trace_DNA(target, BP_HEAD)
 			return 1
 
 	return 0

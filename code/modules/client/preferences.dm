@@ -454,7 +454,7 @@ var/global/list/time_prefs_fixed = list()
 	character.flavor_texts["legs"] = flavor_texts["legs"]
 	character.flavor_texts["feet"] = flavor_texts["feet"]
 
-	if(!character.isSynthetic())
+	if(!character.get_bodytype().is_robotic)
 		character.set_nutrition(rand(140,360))
 		character.set_hydration(rand(140,360))
 

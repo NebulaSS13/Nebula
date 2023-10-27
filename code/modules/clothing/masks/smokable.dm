@@ -60,7 +60,7 @@
 			smoke_loc = C.loc
 			if ((src == C.get_equipped_item(slot_wear_mask_str) || manual) && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
 				reagents.trans_to_mob(C, smoke_amount * amount, CHEM_INHALE, 0.2)
-				add_trace_DNA(C)
+				add_trace_DNA(C, BP_HEAD)
 		else // else just remove some of the reagents
 			reagents.remove_any(smoke_amount * amount)
 
@@ -375,7 +375,7 @@
 			SPAN_NOTICE("\The [user] takes a [puff_str] on [G.his] [name]."), \
 			SPAN_NOTICE("You take a [puff_str] on your [name]."))
 		smoke(12, TRUE)
-		add_trace_DNA(H)
+		add_trace_DNA(H, BP_HEAD)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		return 1
 
