@@ -46,10 +46,6 @@
 
 /decl/material/liquid/nutriment/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	adjust_nutrition(M, removed)
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
 	M.heal_organ_damage(0.5 * removed, 0) //what
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 

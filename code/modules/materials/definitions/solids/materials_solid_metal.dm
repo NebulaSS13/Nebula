@@ -401,11 +401,9 @@
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metal"
+	is_metabolized = TRUE
 
 /decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
 	M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /decl/material/solid/metal/tin

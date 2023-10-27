@@ -26,6 +26,7 @@
 	)
 	heating_point = 318
 	heating_message = "coagulates and clumps together."
+	is_metabolized = TRUE
 
 /decl/material/liquid/blood/initialize_data(var/newdata)
 	. = ..() || list()
@@ -63,8 +64,6 @@
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
 	if(LAZYACCESS(M.chem_doses, type) > 5)
 		M.adjustToxLoss(removed)
 	if(LAZYACCESS(M.chem_doses, type) > 15)

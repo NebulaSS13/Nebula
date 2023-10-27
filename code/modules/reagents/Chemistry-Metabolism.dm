@@ -23,7 +23,11 @@
 /datum/reagents/metabolism/proc/metabolize(var/list/dosage_tracker)
 	if(!parent || total_volume < MINIMUM_CHEMICAL_VOLUME || !length(reagent_volumes))
 		return
+	var/update_reagents = FALSE
 	for(var/rtype in reagent_volumes)
 		var/decl/material/current = GET_DECL(rtype)
-		current.on_mob_life(parent, metabolism_class, src, dosage_tracker)
-	update_total()
+		if(!current.is_metabolized || !parent.HasTrait(/decl/trait/metabolically_inert))
+			current.on_mob_life(parent, metabolism_class, src, dosage_tracker)
+			update_reagents = TRUE
+	if(update_reagents)
+		update_total()

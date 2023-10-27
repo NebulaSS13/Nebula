@@ -93,6 +93,7 @@
 		/decl/material/liquid/capsaicin/condensed = 0.5,
 		/decl/material/liquid/water = 0.5
 	)
+	is_metabolized = TRUE
 
 	var/agony_dose = 5
 	var/agony_amount = 2
@@ -104,10 +105,6 @@
 
 /decl/material/liquid/capsaicin/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
@@ -140,6 +137,7 @@
 	heating_products = null
 	heating_point = null
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	is_metabolized = TRUE
 
 /decl/material/liquid/capsaicin/condensed/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	var/eyes_covered = 0
@@ -193,10 +191,6 @@
 
 /decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())

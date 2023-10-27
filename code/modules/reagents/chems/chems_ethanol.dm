@@ -24,6 +24,10 @@
 	)
 	bypass_cooling_products_for_root_type = /decl/material/liquid/ethanol
 	affect_blood_on_ingest = FALSE // prevents automatic toxins/inebriation as though injected
+	is_metabolized = TRUE
+	glass_name = "ethanol"
+	glass_desc = "A well-known alcohol with a variety of applications."
+	value = 1.2
 
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
@@ -33,10 +37,6 @@
 	var/targ_temp = 310
 	var/halluci = 0
 
-	glass_name = "ethanol"
-	glass_desc = "A well-known alcohol with a variety of applications."
-	value = 1.2
-
 /decl/material/liquid/ethanol/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjustToxLoss(removed * 2 * alcohol_toxicity)
@@ -44,13 +44,8 @@
 
 /decl/material/liquid/ethanol/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
-
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/strength_mod = (M.GetTraitLevel(/decl/trait/malus/ethanol) * 2.5) || 1
 
@@ -134,8 +129,6 @@
 
 /decl/material/liquid/ethanol/beer/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
 	ADJ_STATUS(M, STAT_JITTER, -3)
 
 /decl/material/liquid/ethanol/bluecuracao
@@ -196,10 +189,6 @@
 
 /decl/material/liquid/ethanol/coffee/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
 	ADJ_STATUS(M, STAT_DIZZY, -5)
 	ADJ_STATUS(M, STAT_DROWSY, -3)
 	ADJ_STATUS(M, STAT_ASLEEP, -2)
@@ -278,10 +267,6 @@
 
 /decl/material/liquid/ethanol/thirteenloko/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
 	ADJ_STATUS(M, STAT_DROWSY, -7)
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
@@ -447,10 +432,6 @@
 
 /decl/material/liquid/ethanol/pwine/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-
-	if(M.HasTrait(/decl/trait/metabolically_inert))
-		return
-
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose > 30)
 		M.adjustToxLoss(2 * removed)
