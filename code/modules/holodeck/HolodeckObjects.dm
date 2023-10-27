@@ -276,19 +276,10 @@
 	return
 
 //BASKETBALL OBJECTS
-
-/obj/item/beach_ball/holoball
-	icon = 'icons/obj/basketball.dmi'
-	icon_state = "basketball"
-	name = "basketball"
-	item_state = "basketball"
-	desc = "Here's your chance, do your dance at the Space Jam."
-	w_class = ITEM_SIZE_LARGE //Stops people from hiding it in their pockets
-
 /obj/structure/holohoop
 	name = "basketball hoop"
 	desc = "Boom, Shakalaka!"
-	icon = 'icons/obj/basketball.dmi'
+	icon = 'icons/obj/structures/basketball.dmi'
 	icon_state = "hoop"
 	anchored = TRUE
 	density = TRUE
@@ -309,19 +300,10 @@
 		return ..(mover, target, height, air_group)
 
 //VOLEYBALL OBJECTS
-
-/obj/item/beach_ball/holovolleyball
-	icon = 'icons/obj/basketball.dmi'
-	icon_state = "volleyball"
-	name = "voleyball"
-	item_state = "volleyball"
-	desc = "You can be my wingman anytime."
-	w_class = ITEM_SIZE_LARGE //Stops people from hiding it in their pockets
-
 /obj/structure/holonet
 	name = "net"
 	desc = "Bullshit, you can be mine!"
-	icon = 'icons/obj/basketball.dmi'
+	icon = 'icons/obj/structures/volleyball.dmi'
 	icon_state = "volleynet_mid"
 	density = TRUE
 	anchored = TRUE

@@ -10,8 +10,7 @@
 	base_name = "syringe"
 	desc = "A syringe."
 	icon = 'icons/obj/syringe.dmi'
-	item_state = "rg0"
-	icon_state = "rg"
+	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/glass
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[1,2,5]"
@@ -21,7 +20,6 @@
 	sharp = 1
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	var/mode = SYRINGE_DRAW
-	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
 	var/time = 30
 	var/can_stab = TRUE
@@ -82,25 +80,20 @@
 /obj/item/chems/syringe/on_update_icon()
 	. = ..()
 	underlays.Cut()
-
+	icon_state = get_world_inventory_state()
 	if(mode == SYRINGE_BROKEN)
-		icon_state = "broken"
+		icon_state = "[icon_state]_broken"
 		return
-
-	var/rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
-	if (reagents.total_volume == 0)
-		rounded_vol = 0
+	var/rounded_vol = 0
+	if (reagents?.total_volume > 0)
+		rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
 	if(ismob(loc))
-		add_overlay((mode == SYRINGE_DRAW)? "draw" : "inject")
-	icon_state = "[initial(icon_state)][rounded_vol]"
-	item_state = "syringe_[rounded_vol]"
-
-	if(reagents.total_volume)
-		filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
-
-		filling.icon_state = "syringe[rounded_vol]"
-
+		add_overlay((mode == SYRINGE_DRAW)? "[icon_state]_draw" : "[icon_state]_inject")
+	icon_state = "[icon_state]_[rounded_vol]"
+	if(reagents?.total_volume)
+		var/image/filling = image(icon, "[icon_state]_underlay")
 		filling.color = reagents.get_color()
+		filling.appearance_flags |= RESET_COLOR
 		underlays += filling
 
 /obj/item/chems/syringe/proc/handleTarget(var/atom/target, var/mob/user)
@@ -381,7 +374,7 @@
 	desc = "An advanced syringe that can hold 60 units of chemicals."
 	amount_per_transfer_from_this = 20
 	volume = 60
-	icon_state = "bs"
+	icon = 'icons/obj/syringe_advanced.dmi'
 	material = /decl/material/solid/glass
 	matter = list(
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
@@ -394,7 +387,7 @@
 	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_CHEM_CHANGE
-	icon_state = "cs"
+	icon = 'icons/obj/syringe_cryo.dmi'
 	material = /decl/material/solid/glass
 	matter = list(
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,

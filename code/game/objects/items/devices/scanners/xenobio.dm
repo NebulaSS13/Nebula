@@ -2,8 +2,7 @@
 	name = "xenolife scanner"
 	desc = "Multipurpose organic life scanner. With spectral breath analyzer you can find out what snacks Ian had! Or what gasses alien life breathes."
 	icon = 'icons/obj/items/device/scanner/xenobio_scanner.dmi'
-	icon_state = "xenobio"
-	item_state = "analyzer"
+	icon_state = ICON_STATE_WORLD
 	scan_sound = 'sound/effects/scanbeep.ogg'
 	printout_color = "#f3e6ff"
 	origin_tech = "{'magnets':1,'biotech':1}"

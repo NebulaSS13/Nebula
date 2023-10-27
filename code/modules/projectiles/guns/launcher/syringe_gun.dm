@@ -17,8 +17,14 @@
 	. = ..()
 	underlays.Cut()
 	if(syringe)
-		underlays += image(syringe.icon, src, syringe.icon_state)
-		underlays += syringe.filling
+		var/mutable_appearance/MA = syringe.appearance
+		MA.pixel_x = 0
+		MA.pixel_y = 0
+		MA.pixel_w = 0
+		MA.pixel_z = 0
+		MA.layer = FLOAT_LAYER
+		MA.plane = FLOAT_PLANE
+		underlays += MA
 
 /obj/item/syringe_cartridge/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/chems/syringe) && user.try_unequip(I, src))

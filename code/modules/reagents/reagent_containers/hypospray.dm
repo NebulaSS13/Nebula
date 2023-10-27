@@ -2,12 +2,12 @@
 /// HYPOSPRAY
 ////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/chems/hypospray //obsolete, use hypospray/vial for the actual hypospray item
+/obj/item/chems/hypospray // abstract shared type, do not use directly
 	name = "hypospray"
 	desc = "A sterile, air-needle autoinjector for rapid administration of drugs to patients."
-	icon = 'icons/obj/syringe.dmi'
-	item_state = "hypo"
-	icon_state = "hypo"
+	icon = 'icons/obj/hypospray.dmi'
+	icon_state = ICON_STATE_WORLD
+	abstract_type = /obj/item/chems/hypospray
 	origin_tech = "{'materials':4,'biotech':5}"
 	amount_per_transfer_from_this = 5
 	volume = 30
@@ -31,6 +31,10 @@
 	// PROF   0.39
 	var/time = (1 SECONDS) / 1.9
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
+
+/obj/item/chems/hypospray/on_update_icon()
+	icon_state = get_world_inventory_state()
+	. = ..()
 
 /obj/item/chems/hypospray/attack(mob/living/M, mob/user)
 	if(!reagents.total_volume)
@@ -80,7 +84,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/hypospray/vial
 	name = "hypospray"
-	item_state = "autoinjector"
 	desc = "A sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
 	possible_transfer_amounts = @"[1,2,5,10,15,20,30]"
 	amount_per_transfer_from_this = 5
@@ -168,8 +171,7 @@
 /obj/item/chems/hypospray/autoinjector
 	name = "autoinjector"
 	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
-	icon_state = "injector"
-	item_state = "autoinjector"
+	icon = 'icons/obj/autoinjector.dmi'
 	amount_per_transfer_from_this = 5
 	volume = 5
 	origin_tech = "{'materials':2,'biotech':2}"
@@ -192,7 +194,8 @@
 
 /obj/item/chems/hypospray/autoinjector/on_update_icon()
 	. = ..()
-	icon_state = "[initial(icon_state)][(reagents?.total_volume) > 0]"
+	if(reagents?.total_volume <= 0)
+		icon_state = "[icon_state]_used"
 
 /obj/item/chems/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)

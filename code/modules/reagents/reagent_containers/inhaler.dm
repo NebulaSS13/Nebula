@@ -3,9 +3,8 @@
 /obj/item/chems/inhaler
 	name = "autoinhaler"
 	desc = "A rapid and safe way to administer small amounts of drugs into the lungs by untrained or trained personnel."
-	icon = 'icons/obj/syringe.dmi'
-	item_state = "autoinjector"
-	icon_state = "autoinhaler"
+	icon = 'icons/obj/inhaler.dmi'
+	icon_state = ICON_STATE_WORLD
 	center_of_mass = @"{'x':16,'y':11}"
 	amount_per_transfer_from_this = 5
 	volume = 5
@@ -34,10 +33,11 @@
 	update_icon()
 
 /obj/item/chems/inhaler/on_update_icon()
+	icon_state = get_world_inventory_state()
 	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		add_overlay("[icon_state]_loaded")
-	if(reagents.total_volume > 0)
+	if(reagents?.total_volume > 0)
 		add_overlay("[icon_state]_reagents")
 
 /obj/item/chems/inhaler/attack(var/mob/living/carbon/human/target, var/mob/user, var/proximity)

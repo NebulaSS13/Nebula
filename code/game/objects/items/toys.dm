@@ -37,9 +37,8 @@
 /obj/item/chems/water_balloon
 	name                          = "water balloon"
 	desc                          = "A translucent balloon."
-	icon                          = 'icons/obj/toy/toy.dmi'
-	icon_state                    = "waterballoon-e"
-	item_state                    = "balloon-empty"
+	icon                          = 'icons/obj/water_balloon.dmi'
+	icon_state                    = ICON_STATE_WORLD
 	w_class                       = ITEM_SIZE_TINY
 	item_flags                    = ITEM_FLAG_NO_BLUDGEON
 	obj_flags                     = OBJ_FLAG_HOLLOW
@@ -53,6 +52,11 @@
 	amount_per_transfer_from_this = 10
 	volume                        = 10
 	material                      = /decl/material/solid/plastic
+
+/obj/item/chems/water_balloon/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
+	if(overlay && reagents?.total_volume <= 0)
+		overlay.icon_state = "[overlay.icon_state]_empty"
+	. = ..()
 
 /obj/item/chems/water_balloon/examine(mob/user, distance, infix, suffix)
 	. = ..()
@@ -77,19 +81,16 @@
 
 /obj/item/chems/water_balloon/physically_destroyed(skip_qdel)
 	if(reagents?.total_volume > 0)
-		new/obj/effect/temporary(src, 5, icon, "burst")
+		new /obj/effect/temporary(src, 5, icon, "[get_world_inventory_state()]_burst")
 		reagents.splash_turf(get_turf(src), reagents.total_volume)
 		playsound(src, 'sound/effects/balloon-pop.ogg', 75, TRUE, 3)
 	. = ..()
 
 /obj/item/chems/water_balloon/on_update_icon()
 	. = ..()
-	if(reagents?.total_volume > 0)
-		icon_state = "waterballoon"
-		item_state = "balloon"
-	else
-		icon_state = "waterballoon-e"
-		item_state = "balloon-empty"
+	icon_state = get_world_inventory_state()
+	if(reagents?.total_volume <= 0)
+		icon_state = "[icon_state]_empty"
 
 /obj/item/chems/water_balloon/afterattack(obj/target, mob/user, proximity)
 	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity)

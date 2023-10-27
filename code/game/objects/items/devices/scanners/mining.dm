@@ -12,7 +12,6 @@
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
 	icon = 'icons/obj/items/device/scanner/ore_scanner.dmi'
-	icon_state = "ore"
 	origin_tech = "{'magnets':1,'engineering':1}"
 	use_delay = 50
 	printout_color = "#fff7f0"
