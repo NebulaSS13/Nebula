@@ -1296,3 +1296,6 @@ default behaviour is:
 //Useful when player is being seen by other mobs
 /mob/living/proc/get_id_name(if_no_id = "Unknown")
 	return GetIdCard(exceptions = list(/obj/item/holder))?.registered_name || if_no_id
+
+/mob/living/proc/get_gib_descriptor()
+	return get_bodytype()?.gib_descriptor || "squelchy"

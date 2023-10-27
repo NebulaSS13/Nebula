@@ -1,5 +1,7 @@
 /decl/bodytype/prosthetic
 	abstract_type = /decl/bodytype/prosthetic
+	examined_name = "synthetic"
+	gib_descriptor = "metallic"
 	icon_base = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
 	desc = "A generic unbranded robotic prosthesis."
 	limb_tech = "{'engineering':1,'materials':1,'magnets':1}"

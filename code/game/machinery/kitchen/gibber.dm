@@ -161,7 +161,7 @@
 		return
 
 	use_power_oneoff(1000)
-	visible_message("<span class='danger'>You hear a loud [occupant.isSynthetic() ? "metallic" : "squelchy"] grinding sound.</span>")
+	visible_message("<span class='danger'>You hear a loud [occupant.get_gib_descriptor()] grinding sound.</span>")
 	src.operating = 1
 	update_icon()
 

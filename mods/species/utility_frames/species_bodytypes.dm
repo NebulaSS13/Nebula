@@ -1,5 +1,6 @@
 /decl/bodytype/prosthetic/utility_frame
 	name =              "utility frame"
+	examined_name =     null
 	desc =              "This limb is extremely cheap and simplistic, with a raw steel frame and plastic casing."
 	icon_base =         'mods/species/utility_frames/icons/body.dmi'
 	eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'

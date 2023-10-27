@@ -1,12 +1,8 @@
 /mob/living/carbon/human/show_examined_short_description(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
+	var/decl/bodytype/my_bodytype = get_bodytype()
 	var/msg = list("<span class='info'>*---------*\n[user == src ? "You are" : "This is"] <EM>[name]</EM>")
 	if(!(hideflags & HIDEJUMPSUIT) || !(hideflags & HIDEFACE))
-		var/species_name = "\improper "
-		if(isSynthetic() && species.cyborg_noun)
-			species_name += "[species.cyborg_noun] [species.get_root_species_name(src)]"
-		else
-			species_name += "[species.name]"
-		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species_name]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user))) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
+		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [my_bodytype.get_examined_name(src)]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user))) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
 	var/extra_species_text = species.get_additional_examine_text(src)
 	if(extra_species_text)
 		msg += "<br>[extra_species_text]"

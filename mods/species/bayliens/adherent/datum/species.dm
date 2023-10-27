@@ -37,7 +37,6 @@
 		/decl/bodytype/crystalline/adherent/quartz,
 		/decl/bodytype/crystalline/adherent/jet
 	)
-	cyborg_noun =             null
 
 	siemens_coefficient =     0
 	rarity_value =            6

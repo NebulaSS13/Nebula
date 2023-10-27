@@ -3,7 +3,19 @@
 	crew_data["true_pulse"] = -1
 	crew_data["pulse"] = "N/A"
 	crew_data["pulse_span"] = "neutral"
-	if(!H.isSynthetic() && H.should_have_organ(BP_HEART))
+
+	if(H.should_have_organ(BP_CELL))
+		var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
+		if(cell)
+			crew_data["charge"] = cell.percent()
+			if(cell.percent() <= 10)
+				crew_data["charge_span"] = "bad"
+			else
+				crew_data["charge_span"] = "good"
+		else
+			crew_data["charge"] = "No cell"
+			crew_data["charge_span"] = "bad"
+	else if(H.should_have_organ(BP_HEART))
 		var/obj/item/organ/internal/heart/O = H.get_organ(BP_HEART, /obj/item/organ/internal/heart)
 		if (!O || !BP_IS_PROSTHETIC(O)) // Don't make medical freak out over prosthetic hearts
 			crew_data["true_pulse"] = H.get_pulse()
@@ -23,23 +35,12 @@
 					crew_data["pulse_span"] = "bad"
 	crew_data["charge"] = "N/A"
 	crew_data["charge_span"] = "N/A"
-	if(H.isSynthetic())
-		var/obj/item/organ/internal/cell/cell = H.get_organ(BP_CELL, /obj/item/organ/internal/cell)
-		if(cell)
-			crew_data["charge"] = cell.percent()
-			if(cell.percent() <= 10)
-				crew_data["charge_span"] = "bad"
-			else
-				crew_data["charge_span"] = "good"
-		else
-			crew_data["charge"] = "No cell"
-			crew_data["charge_span"] = "bad"
 
 	crew_data["pressure"] = "N/A"
 	crew_data["true_oxygenation"] = -1
 	crew_data["oxygenation"] = ""
 	crew_data["oxygenation_span"] = ""
-	if(!H.isSynthetic() && H.should_have_organ(BP_HEART))
+	if(!H.should_have_organ(BP_CELL) && H.should_have_organ(BP_HEART))
 		crew_data["pressure"] = H.get_blood_pressure()
 		crew_data["true_oxygenation"] = H.get_blood_oxygenation()
 		switch (crew_data["true_oxygenation"])

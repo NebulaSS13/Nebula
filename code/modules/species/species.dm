@@ -13,7 +13,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/codex_description
 	var/roleplay_summary
 	var/ooc_codex_information
-	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
 	var/secret_codex_info
 

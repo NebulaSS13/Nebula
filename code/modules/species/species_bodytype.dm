@@ -2,6 +2,7 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype
 	var/name = "default"
+	var/examined_name // If set, will override species name in examine ("that's Dave, a foo bar").
 	/// Seen when examining a prosthetic limb, if non-null.
 	var/desc
 	var/icon_base
@@ -21,6 +22,7 @@ var/global/list/bodytypes_by_category = list()
 	var/ignited_icon =    'icons/mob/OnFire.dmi'
 	var/associated_gender
 	var/appearance_flags = 0 // Appearance/display related features.
+	var/gib_descriptor = "squelchy"
 
 	/// Damage mods
 	var/radiation_mod = 1 // Not as biologically fragile as meatboys.
@@ -396,3 +398,11 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/proc/get_radiation_mod(var/mob/living/carbon/human/H)
 	return radiation_mod
+
+/decl/bodytype/proc/get_examined_name(var/mob/living/showing)
+	var/decl/species/species = showing.get_species()
+	if(examined_name)
+		if(species)
+			return "\improper [examined_name] [species.get_root_species_name(showing)]"
+		return "\improper [examined_name]"
+	return "\improper [species?.name || "Unknown"]"

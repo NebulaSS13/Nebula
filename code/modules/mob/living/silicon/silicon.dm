@@ -463,3 +463,6 @@
 		return // Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
 	if(istype(idcard))
 		LAZYDISTINCTADD(., idcard)
+
+/mob/living/silicon/get_gib_descriptor()
+	return "metallic"

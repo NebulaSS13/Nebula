@@ -90,12 +90,9 @@
 
 	if(M.stat != DEAD && M.handle_flashed(src, rand(str_min,str_max)))
 		admin_attack_log(user, M, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
-		if(!M.isSynthetic())
-			user.visible_message(SPAN_DANGER("[user] blinds [M] with \the [src]!"))
-		else
-			user.visible_message(SPAN_DANGER("[user] overloads [M]'s sensors with \the [src]!"))
+		user.visible_message(SPAN_DANGER("\The [user] blinds \the [M] with \the [src]!"))
 	else
-		user.visible_message(SPAN_WARNING("[user] fails to blind [M] with \the [src]!"))
+		user.visible_message(SPAN_WARNING("\The [user] fails to blind \the [M] with \the [src]!"))
 	return TRUE
 
 /obj/item/flash/attack_self(mob/user, flag = 0, emp = 0)
