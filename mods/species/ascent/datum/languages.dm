@@ -20,12 +20,14 @@
 	var/mob/living/S = speaker
 	if(!istype(S))
 		return FALSE
-	if(S.isSynthetic())
+	if(issilicon(speaker))
 		return TRUE
-	if(ishuman(speaker))
-		var/mob/living/carbon/human/H = speaker
-		if(H.species.name in correct_mouthbits)
-			return TRUE
+	var/obj/item/organ/external/head/head = GET_EXTERNAL_ORGAN(speaker, BP_HEAD)
+	if(istype(head) && BP_IS_PROSTHETIC(head))
+		return TRUE
+	var/my_species_name = speaker.get_species_name()
+	if(my_species_name && (my_species_name in correct_mouthbits))
+		return TRUE
 	return FALSE
 
 /decl/language/mantid/muddle(var/message)

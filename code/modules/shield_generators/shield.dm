@@ -276,7 +276,7 @@
 
 // Human mobs
 /mob/living/carbon/human/can_pass_shield(var/obj/machinery/shield_generator/gen)
-	if(isSynthetic())
+	if(get_bodytype()?.is_robotic)
 		return !gen.check_flag(MODEFLAG_ANORGANIC)
 	return !gen.check_flag(MODEFLAG_HUMANOIDS)
 

@@ -213,6 +213,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_mutagenics"
+	is_metabolized = TRUE
 
 /decl/material/liquid/mutagenics/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(33))
@@ -223,9 +224,6 @@
 		affect_blood(M, removed, holder)
 
 /decl/material/liquid/mutagenics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-
-	if(M.isSynthetic())
-		return
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H) && (H.get_bodytype()?.body_flags & BODY_FLAG_NO_DNA))

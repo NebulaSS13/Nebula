@@ -37,11 +37,7 @@
 		/decl/blood_type/feline/oplus,
 		/decl/blood_type/feline/ominus
 	)
-
-	flesh_color = "#ae7d32"
-
 	organs_icon = 'mods/species/bayliens/tajaran/icons/organs.dmi'
-
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
 	gluttonous = GLUT_TINY
 

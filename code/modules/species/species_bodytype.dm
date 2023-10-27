@@ -113,10 +113,6 @@ var/global/list/bodytypes_by_category = list()
 		'sound/foley/meat2.ogg'
 	)
 
-	var/list/synthetic_bodyfall_sounds = list(
-		'sound/foley/metal1.ogg'
-	)
-
 	// Used for initializing prefs/preview
 	var/base_color =      COLOR_BLACK
 	var/base_eye_color =  COLOR_BLACK
@@ -216,6 +212,13 @@ var/global/list/bodytypes_by_category = list()
 	var/speech_bubble_state
 	/// Overrides the default 'worsens' message for being dragged with wounds.
 	var/drag_state_damage_descriptor
+
+	// Various strings/values moved over here from /decl/species.
+	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
+	var/knockout_message = "collapses, having been knocked unconscious."
+	var/show_ssd = "fast asleep"
+	var/flesh_color = "#ffc896" // Pink.
+
 
 /decl/bodytype/Initialize()
 	. = ..()
@@ -510,3 +513,15 @@ var/global/list/bodytypes_by_category = list()
 		if("heat")
 			if(covered)
 				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")
+
+/decl/bodytype/proc/get_knockout_message(var/mob/living/carbon/human/H)
+	return knockout_message
+
+/decl/bodytype/proc/get_death_message(var/mob/living/carbon/human/H)
+	return death_message
+
+/decl/bodytype/proc/get_ssd(var/mob/living/carbon/human/H)
+	return show_ssd
+
+/decl/bodytype/proc/get_flesh_colour(var/mob/living/carbon/human/H)
+	return flesh_color

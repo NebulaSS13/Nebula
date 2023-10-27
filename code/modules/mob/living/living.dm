@@ -406,7 +406,7 @@ default behaviour is:
 
 	// shut down ongoing problems
 	radiation = 0
-	bodytemperature = get_species()?.body_temperature || initial(bodytemperature)
+	bodytemperature = get_bodytype()?.body_temperature || initial(bodytemperature)
 	sdisabilities = 0
 	disabilities = 0
 
@@ -1146,9 +1146,6 @@ default behaviour is:
 /mob/living/proc/get_seconds_until_next_special_ability_string()
 	return ticks2readable(next_special_ability - world.time)
 
-/mob/living/proc/isSynthetic()
-	return FALSE
-
 //Get species or synthetic temp if the mob is a FBP/robot. Used when a synthetic mob is exposed to a temp check.
 //Essentially, used when a synthetic mob should act diffferently than a normal type mob.
 /mob/living/get_temperature_threshold(var/threshold)
@@ -1204,7 +1201,7 @@ default behaviour is:
 		var/list/overlays_to_add
 		if(check_state_in_icon(overlay_state, surgery_icon))
 			var/image/flesh = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
-			flesh.color = E.species.get_flesh_colour(src)
+			flesh.color = E.bodytype.get_flesh_colour(src)
 			LAZYADD(overlays_to_add, flesh)
 		overlay_state = "[base_state]-blood"
 		if(check_state_in_icon(overlay_state, surgery_icon))

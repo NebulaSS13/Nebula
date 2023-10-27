@@ -286,7 +286,7 @@
 	return !cloaking_sources // If cloaking_sources wasn't initially null but is now, we've uncloaked
 
 /mob/living/carbon/human/set_sdisability(sdisability)
-	if(isSynthetic())
+	if(get_bodytype()?.is_robotic)
 		return // Can't cure disabilites, so don't give them.
 	..()
 

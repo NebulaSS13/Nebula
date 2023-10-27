@@ -197,7 +197,7 @@ meteor_act
 				if(prob(effective_force))
 					apply_effect(20, PARALYZE, blocked)
 					if(lying)
-						visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
+						visible_message("<span class='danger'>[src] [get_bodytype()?.knockout_message || "collapses, having been knocked unconscious."]</span>")
 			else
 				//Easier to score a stun but lasts less time
 				if(prob(effective_force + 5))

@@ -410,7 +410,7 @@
 			animate_tail_reset()
 			adjustHalLoss(-3)
 
-			if(prob(2) && is_asystole() && isSynthetic())
+			if(prob(2) && is_asystole() && should_have_organ(BP_CELL))
 				visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
 		//CONSCIOUS
 		else
@@ -579,7 +579,7 @@
 				if(150 to 250)					hydration_icon.icon_state = "hydration3"
 				else							hydration_icon.icon_state = "hydration4"
 
-		if(isSynthetic())
+		if(should_have_organ(BP_CELL))
 			var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
 			if(C)
 				var/chargeNum = clamp(CEILING(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.

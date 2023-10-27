@@ -374,7 +374,7 @@
 
 	set waitfor = 0
 
-	if(!check_has_mouth() || isSynthetic() || !timevomit || !level || stat == DEAD || lastpuke)
+	if(!check_has_mouth() || should_have_organ(BP_STOMACH) || !timevomit || !level || stat == DEAD || lastpuke)
 		return
 
 	if(deliberate)

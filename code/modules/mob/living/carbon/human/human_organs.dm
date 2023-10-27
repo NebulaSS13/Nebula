@@ -250,7 +250,7 @@
 	return FALSE
 
 /mob/living/carbon/human/is_asystole()
-	if(isSynthetic())
+	if(should_have_organ(BP_CELL))
 		var/obj/item/organ/internal/cell/C = get_organ(BP_CELL, /obj/item/organ/internal/cell)
 		if(!C || !C.is_usable() || !C.percent())
 			return TRUE

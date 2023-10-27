@@ -15,6 +15,7 @@
 	base_color = "#ae7d32"
 	base_eye_color = "#00aa00"
 	default_h_style = /decl/sprite_accessory/hair/taj/lynx
+	flesh_color = "#ae7d32"
 
 	heat_discomfort_level = 294
 	cold_discomfort_level = 230

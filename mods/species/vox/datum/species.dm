@@ -76,7 +76,6 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 
 	blood_types = list(/decl/blood_type/vox)
-	flesh_color = "#808d11"
 
 	maneuvers = list(/decl/maneuver/leap/grab)
 	standing_jump_range = 5

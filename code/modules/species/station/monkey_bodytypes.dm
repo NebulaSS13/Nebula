@@ -10,6 +10,8 @@
 		BP_TAIL = /obj/item/organ/external/tail/monkey
 	)
 	mob_size = MOB_SIZE_SMALL
+	show_ssd = null
+	death_message = "lets out a faint chimper as it collapses and stops moving..."
 
 /decl/bodytype/monkey/Initialize()
 	equip_adjust = list(

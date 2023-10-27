@@ -38,11 +38,7 @@
 	warning_high_pressure = WARNING_HIGH_PRESSURE / 0.8125
 	hazard_high_pressure = HAZARD_HIGH_PRESSURE / 0.84615
 	water_soothe_amount = 5
-
-
 	spawn_flags = SPECIES_CAN_JOIN
-
-	flesh_color = "#8cd7a3"
 	organs_icon = 'mods/species/bayliens/skrell/icons/body/organs.dmi'
 
 	blood_types = list(

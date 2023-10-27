@@ -11,6 +11,11 @@
 	uniform_state_modifier = "f"
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
+/decl/bodytype/human/get_ssd(var/mob/living/carbon/human/H)
+	if(H.stat == CONSCIOUS)
+		return "staring blankly, not reacting to your presence"
+	return ..()
+
 /decl/bodytype/human/masculine
 	name =                "masculine"
 	icon_base =           'icons/mob/human_races/species/human/body_male.dmi'

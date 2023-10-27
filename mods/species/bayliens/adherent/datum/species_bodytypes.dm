@@ -15,6 +15,7 @@
 	is_robotic =                FALSE
 	mob_size =                  MOB_SIZE_LARGE
 	arterial_bleed_multiplier = 0
+	flesh_color =               "#90edeb"
 	apply_encased =             list(
 		BP_CHEST = "ceramic hull",
 		BP_GROIN = "ceramic hull",

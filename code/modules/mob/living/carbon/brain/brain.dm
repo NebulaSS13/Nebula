@@ -32,7 +32,7 @@
 	return GET_DECL(/decl/bodytype/human) // This needs some serious work.
 
 /mob/living/carbon/brain/binarycheck()
-	return isSynthetic()
+	return istype(container, /obj/item/mmi/digital) || istype(loc, /obj/item/organ/internal/posibrain)
 
 /mob/living/carbon/brain/check_has_mouth()
 	return 0

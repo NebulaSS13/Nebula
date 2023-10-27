@@ -20,15 +20,13 @@
 	cold_level_1 += temp_comfort_shift
 	cold_level_2 += temp_comfort_shift
 	cold_level_3 += temp_comfort_shift
-
 	heat_level_1 += temp_comfort_shift
 	heat_level_2 += temp_comfort_shift
 	heat_level_3 += temp_comfort_shift
-
 	heat_discomfort_level += temp_comfort_shift
 	cold_discomfort_level += temp_comfort_shift
-
 	body_temperature += temp_comfort_shift
+	flesh_color = RANDOM_RGB
 	. = ..()
 
 /decl/species/alium
@@ -60,7 +58,6 @@
 
 	//Coloring
 	blood_color = RANDOM_RGB
-	flesh_color = RANDOM_RGB
 
 	//Combat stats
 	MULT_BY_RANDOM_COEF(total_health, 0.8, 1.2)

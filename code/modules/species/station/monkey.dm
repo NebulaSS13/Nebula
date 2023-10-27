@@ -9,11 +9,9 @@
 	available_bodytypes = list(/decl/bodytype/monkey)
 	holder_icon = 'icons/mob/human_races/species/monkey/holder.dmi'
 
-	show_ssd = null
 
 	gibbed_anim = "gibbed-m"
 	dusted_anim = "dust-m"
-	death_message = "lets out a faint chimper as it collapses and stops moving..."
 
 	unarmed_attacks = list(/decl/natural_attack/bite, /decl/natural_attack/claws, /decl/natural_attack/punch)
 	inherent_verbs = list(/mob/living/proc/ventcrawl)

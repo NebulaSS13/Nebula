@@ -173,7 +173,7 @@
 
 	if(armor < 0.5 && target.headcheck(BP_HEAD) && prob(damage))
 		target.apply_effect(20, PARALYZE)
-		target.visible_message(SPAN_DANGER("\The [target] [target.species.get_knockout_message(target)]"))
+		target.visible_message(SPAN_DANGER("\The [target] [target.get_bodytype()?.get_knockout_message(target) || "collapses, having been knocked unconscious."]"))
 
 	playsound(attacker.loc, "swing_hit", 25, 1, -1)
 

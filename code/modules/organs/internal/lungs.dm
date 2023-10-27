@@ -359,7 +359,7 @@
 
 /mob/living/carbon/proc/cough(var/deliberate = FALSE)
 	var/obj/item/organ/internal/lungs/lung = get_organ(BP_LUNGS)
-	if(!lung || !lung.active_breathing || isSynthetic() || stat == DEAD || (deliberate && lastcough + 3 SECONDS > world.time))
+	if(!lung || !lung.active_breathing || BP_IS_PROSTHETIC(lung) || stat == DEAD || (deliberate && lastcough + 3 SECONDS > world.time))
 		return
 
 	if(lung.breath_fail_ratio > 0.9 && world.time > lung.last_successful_breath + 2 MINUTES)

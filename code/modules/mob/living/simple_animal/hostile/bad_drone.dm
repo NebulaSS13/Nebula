@@ -28,7 +28,7 @@
 			return FALSE
 		if(ishuman(A))
 			var/mob/living/carbon/human/H = A
-			if(H.isSynthetic())
+			if(H.get_bodytype()?.is_robotic)
 				return FALSE
 			var/obj/item/head = H.get_equipped_item(slot_head_str)
 			if(istype(head, /obj/item/holder/drone))

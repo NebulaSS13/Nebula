@@ -43,24 +43,21 @@
 	icon_deformed =    'icons/mob/human_races/species/starborn/body.dmi'
 	husk_icon =        'icons/mob/human_races/species/starborn/husk.dmi'
 	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
-
+	flesh_color = "#ffff00"
+	death_message = "dissolves into pure flames!"
 	body_temperature = T0C + 500 //We are being of fire and light.
-
 	cold_level_1 = 260
 	cold_level_2 = 250
 	cold_level_3 = 235
-
 	heat_level_1 = 20000
 	heat_level_2 = 30000
 	heat_level_3 = 40000
-
 	cold_discomfort_level = 300
 	cold_discomfort_strings = list(
 		"You feel your fire dying out...",
 		"Your fire begins to shrink away from the cold.",
 		"You feel slow and sluggish from the cold."
 	)
-
 	heat_discomfort_level = 10000
 	heat_discomfort_strings = list(
 		"Surprisingly, you start burning!",
@@ -85,13 +82,11 @@
 	blood_types = list(
 		/decl/blood_type/starstuff
 	)
-	flesh_color = "#ffff00"
 	unarmed_attacks = list(/decl/natural_attack/punch/starborn)
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 	siemens_coefficient = 0
 	hunger_factor = 0
-	death_message = "dissolves into pure flames!"
 	breath_type = null
 	total_health = 250
 	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
@@ -116,6 +111,7 @@
 	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 	radiation_mod = 0
+	flesh_color = "#2222ff"
 
 /decl/blood_type/spacestuff
 	name = "spacestuff"
@@ -129,14 +125,10 @@
 	name_plural = "Blueforged"
 	description = "Living chunks of spacetime, carved out of the original dimension and given life by a being of unbelievable power."
 	available_bodytypes = list(/decl/bodytype/starlight/blueforged)
-
-	flesh_color = "#2222ff"
-
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 	hunger_factor = 0
 	breath_type = null
-
 	burn_mod = 10
 	brute_mod = 0
 	oxy_mod = 0

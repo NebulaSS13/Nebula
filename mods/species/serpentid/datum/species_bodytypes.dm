@@ -49,6 +49,8 @@
 		BP_R_FOOT =       list("path" = /obj/item/organ/external/foot/right/insectoid/serpentid)
 		)
 
+	flesh_color = "#525252"
+
 	limb_mapping = list(
 		BP_L_HAND = list(BP_L_HAND, BP_L_HAND_UPPER),
 		BP_R_HAND = list(BP_R_HAND, BP_R_HAND_UPPER)

@@ -32,7 +32,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		/decl/blood_type/ominus
 	)
 
-	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
 
 	var/static/list/hair_styles
@@ -41,7 +40,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/organs_icon		//species specific internal organs icons
 
 	var/strength = STR_MEDIUM
-	var/show_ssd = "fast asleep"
 	var/short_sighted                         // Permanent weldervision.
 	var/light_sensitive                       // Ditto, but requires sunglasses to fix
 	var/blood_volume = SPECIES_BLOOD_DEFAULT  // Initial blood volume.
@@ -92,8 +90,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/snow_slowdown_mod = 0
 
 	var/death_sound
-	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
-	var/knockout_message = "collapses, having been knocked unconscious."
 	var/halloss_message = "slumps over, too weak to continue fighting..."
 	var/halloss_message_self = "The pain is too severe for you to keep going..."
 
@@ -406,7 +402,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	return
 
 /decl/species/proc/handle_sleeping(var/mob/living/carbon/human/H)
-	if(prob(2) && !H.failed_last_breath && !H.isSynthetic())
+	if(prob(2) && !H.failed_last_breath && !H.get_bodytype()?.is_robotic)
 		if(!HAS_STATUS(H, STAT_PARA))
 			H.emote("snore")
 		else

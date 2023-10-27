@@ -322,7 +322,7 @@
 		if(isnull(H) || QDELETED(H))
 			continue
 
-		if(H.isSynthetic())
+		if(H.get_bodytype()?.is_robotic)
 			continue //We don't affect synthetics.
 
 		switch(shunt_sev)

@@ -29,7 +29,6 @@
 	speech_chance = 2
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
-	flesh_color = "#525252"
 	blood_oxy = 0
 
 	available_bodytypes = list(

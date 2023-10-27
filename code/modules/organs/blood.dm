@@ -221,7 +221,7 @@
 	if(my_species)
 		data["has_oxy"]     = my_species.blood_oxy
 		data["blood_color"] = my_species.get_blood_color(src)
-	else if(isSynthetic())
+	else if(get_bodytype()?.is_robotic)
 		data["has_oxy"]     = FALSE
 		data["blood_color"] = SYNTH_BLOOD_COLOR
 	else

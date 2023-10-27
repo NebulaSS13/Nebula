@@ -25,7 +25,6 @@
 	strength =              STR_HIGH
 	warning_low_pressure =  50
 	hazard_low_pressure =  -1
-	flesh_color =           COLOR_GUNMETAL
 
 	blood_volume = 0
 

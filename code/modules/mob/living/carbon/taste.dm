@@ -23,7 +23,8 @@ calculate text size per text.
 		return
 
 	var/minimum_percent
-	if(taster.isSynthetic())
+	var/obj/item/organ/external/head/head = GET_EXTERNAL_ORGAN(taster, BP_HEAD)
+	if(head && BP_IS_PROSTHETIC(head))
 		minimum_percent = TASTE_DULL
 	else
 		var/decl/species/my_species = istype(taster) && taster?.get_species()

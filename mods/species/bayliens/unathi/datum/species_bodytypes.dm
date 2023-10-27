@@ -17,7 +17,7 @@
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	eye_darksight_range = 3
 	eye_flash_mod = 1.2
-
+	flesh_color = "#34af10"
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
 	heat_discomfort_level = 320

@@ -10,18 +10,6 @@
 /decl/species/proc/get_station_variant()
 	return name
 
-/decl/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
-
-/decl/species/proc/get_death_message(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? "gives one shrill beep before falling lifeless." : death_message)
-
-/decl/species/proc/get_ssd(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
-
-/decl/species/proc/get_flesh_colour(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? SYNTH_FLESH_COLOUR : flesh_color)
-
 /decl/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
 	return vision_flags
 

@@ -17,7 +17,7 @@
 	var/last_loc = loc
 	..(species.gibbed_anim, do_gibs = FALSE)
 	if(last_loc)
-		gibs(last_loc, dna, _fleshcolor = species.get_flesh_colour(src), _bloodcolor = species.get_blood_color(src))
+		gibs(last_loc, dna, _fleshcolor = (get_bodytype()?.get_flesh_colour(src) || "#ffc896"), _bloodcolor = species.get_blood_color(src))
 
 /mob/living/carbon/human/dust()
 	if(species)
@@ -44,7 +44,7 @@
 		SSticker.mode.check_win()
 
 	if(config.show_human_death_message)
-		deathmessage = species.get_death_message(src) || "seizes up and falls limp..."
+		deathmessage = get_bodytype()?.get_death_message(src) || "seizes up and falls limp..."
 	else
 		deathmessage = "no message"
 	. = ..(gibbed, deathmessage, show_dead_message)

@@ -9,7 +9,7 @@
 	eye_flash_mod = 1.2
 	eye_icon = 'mods/species/bayliens/skrell/icons/body/eyes.dmi'
 	apply_eye_colour = FALSE
-
+	flesh_color = "#8cd7a3"
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
 	cold_level_1 = 280 //Default 260 - Lower is better

@@ -211,7 +211,7 @@
 	var/cost = get_power_drain()
 	if(world.time - owner.l_move_time < 15)
 		cost *= 2
-	if(!checked_use(cost) && owner.isSynthetic())
+	if(!checked_use(cost) && owner.should_have_organ(BP_CELL))
 		if(!owner.lying && !owner.buckled)
 			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
 		SET_STATUS_MAX(owner, STAT_PARA, 3)

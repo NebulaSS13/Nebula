@@ -2,7 +2,7 @@
 	var/decl/bodytype/my_bodytype = get_bodytype()
 	var/msg = list("<span class='info'>*---------*\n[user == src ? "You are" : "This is"] <EM>[name]</EM>")
 	if(!(hideflags & HIDEJUMPSUIT) || !(hideflags & HIDEFACE))
-		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [my_bodytype.get_examined_name(src)]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user))) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
+		msg += ", <b><font color='[my_bodytype.get_flesh_colour(src)]'>\a [my_bodytype.get_examined_name(src)]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value(user))) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
 	var/extra_species_text = species.get_additional_examine_text(src)
 	if(extra_species_text)
 		msg += "<br>[extra_species_text]"
@@ -75,7 +75,8 @@
 	if(on_fire)
 		msg += "<span class='warning'>[use_He] [use_is] on fire!.</span>\n"
 
-	var/ssd_msg = species.get_ssd(src)
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	var/ssd_msg = my_bodytype?.get_ssd(src) || "fast asleep"
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
 		if(!key)
 			msg += "<span class='deadsay'>[use_He] [use_is] [ssd_msg]. It doesn't look like [use_he] [use_is] waking up anytime soon.</span>\n"
@@ -125,7 +126,7 @@
 					hidden_bleeders[hidden] = list()
 				hidden_bleeders[hidden] += E.name
 		else
-			if(!isSynthetic() && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent)))
+			if(!get_bodytype()?.is_robotic && BP_IS_PROSTHETIC(E) && (E.parent && !BP_IS_PROSTHETIC(E.parent)))
 				wound_flavor_text[E.name] = "[use_He] [use_has] a [E.name].\n"
 			var/wounddesc = E.get_wounds_desc()
 			if(wounddesc != "nothing")

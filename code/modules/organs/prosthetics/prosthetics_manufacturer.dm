@@ -35,6 +35,17 @@
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
+	flesh_color =           COLOR_GUNMETAL
+
+	bodyfall_sounds = list(
+		'sound/foley/metal1.ogg'
+	)
+
+	knockout_message = "encounters a hardware fault and suddenly reboots!"
+	death_message = "gives one shrill beep before falling lifeless."
+	show_ssd = "flashing a 'system offline' glyph on their monitor"
+	flesh_color = SYNTH_FLESH_COLOUR
+
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 

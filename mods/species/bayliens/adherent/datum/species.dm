@@ -53,7 +53,6 @@
 	species_flags = SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =   SPECIES_CAN_JOIN
 
-	flesh_color = "#90edeb"
 	hud_type = /datum/hud_data/adherent
 
 	available_cultural_info = list(

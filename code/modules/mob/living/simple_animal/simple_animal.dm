@@ -645,7 +645,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	return !(QDELETED(src) || incapacitated() || (is_aquatic && !submerged()))
 
 /mob/living/simple_animal/experiences_hunger_and_thirst()
-	// return !supernatural && !isSynthetic()
+	// return !supernatural
 	return FALSE // They need a reliable way to recover nutrition/hydration before this is made general.
 
 /mob/living/simple_animal/get_nutrition()

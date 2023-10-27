@@ -18,7 +18,8 @@
 
 /mob/living/proc/get_cryogenic_factor(var/bodytemperature)
 
-	if(isSynthetic())
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_bodytype && isnull(my_bodytype.body_temperature))
 		return 0
 
 	var/cold_1 = get_temperature_threshold(COLD_LEVEL_1)

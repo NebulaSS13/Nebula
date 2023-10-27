@@ -147,7 +147,7 @@
 	return FALSE
 
 /mob/living/carbon/human/getToxLoss()
-	if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
+	if((species.species_flags & SPECIES_FLAG_NO_POISON) || get_bodytype()?.is_robotic)
 		return 0
 	var/amount = 0
 	for(var/obj/item/organ/internal/I in get_internal_organs())
@@ -155,13 +155,13 @@
 	return amount
 
 /mob/living/carbon/human/setToxLoss(var/amount)
-	if(!(species.species_flags & SPECIES_FLAG_NO_POISON) && !isSynthetic())
+	if(!(species.species_flags & SPECIES_FLAG_NO_POISON) && !get_bodytype()?.is_robotic)
 		adjustToxLoss(getToxLoss()-amount)
 
 // TODO: better internal organ damage procs.
 /mob/living/carbon/human/adjustToxLoss(var/amount)
 
-	if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
+	if((species.species_flags & SPECIES_FLAG_NO_POISON) || get_bodytype()?.is_robotic)
 		return
 
 	var/heal = amount < 0

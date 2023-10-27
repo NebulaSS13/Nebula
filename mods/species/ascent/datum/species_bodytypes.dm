@@ -41,6 +41,8 @@
 		"You hear a faint crackle of ice as you shift your freezing body.",
 		"Your movements become sluggish under the weight of the chilly conditions."
 	)
+	show_ssd =    "quiescent"
+	flesh_color = "#009999"
 
 /decl/bodytype/crystalline/mantid/alate
 	name =              "alate"

@@ -5,6 +5,8 @@
 	icon_deformed =    'icons/mob/human_races/species/shadow/body.dmi'
 	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
 	eye_darksight_range = 8
+	flesh_color = "#aaaaaa"
+	death_message = "dissolves into ash..."
 
 /decl/blood_type/shadowstuff
 	name = "shadowstuff"
@@ -30,15 +32,13 @@
 	blood_types = list(
 		/decl/blood_type/shadowstuff
 	)
-	flesh_color = "#aaaaaa"
 
 	remains_type = /obj/effect/decal/cleanable/ash
-	death_message = "dissolves into ash..."
 
 	species_flags = SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED
 
 /decl/species/starlight/shadow/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.is_in_stasis() || H.stat == DEAD || H.isSynthetic())
+	if(H.is_in_stasis() || H.stat == DEAD || H.get_bodytype()?.is_robotic)
 		return
 	var/light_amount = 0
 	if(isturf(H.loc))

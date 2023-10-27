@@ -43,8 +43,6 @@
 	their native tongue is a heavy hissing laungage."
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
-
-	flesh_color = "#34af10"
 	organs_icon = 'mods/species/bayliens/unathi/icons/organs.dmi'
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/doctor

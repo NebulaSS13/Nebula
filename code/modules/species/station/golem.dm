@@ -4,6 +4,8 @@
 	icon_base =         'icons/mob/human_races/species/golem/body.dmi'
 	husk_icon =         'icons/mob/human_races/species/golem/husk.dmi'
 	body_flags =        BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	flesh_color =       "#137e8f"
+	death_message =     "becomes completely motionless..."
 	has_organ = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/golem
 	)
@@ -28,9 +30,6 @@
 
 	blood_types = list(/decl/blood_type/coolant)
 
-	flesh_color = "#137e8f"
-
-	death_message = "becomes completely motionless..."
 	available_pronouns = list(/decl/pronouns/neuter)
 
 	force_cultural_info = list(
