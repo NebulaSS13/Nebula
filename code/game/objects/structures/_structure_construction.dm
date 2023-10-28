@@ -117,7 +117,6 @@
 	if(O.force && user.a_intent == I_HURT)
 		attack_animation(user)
 		visible_message(SPAN_DANGER("\The [src] has been [pick(O.attack_verb)] with \the [O] by \the [user]!"))
-		playsound(loc, hitsound, 100, 1)
 		take_damage(O.force)
 		. = TRUE
 
