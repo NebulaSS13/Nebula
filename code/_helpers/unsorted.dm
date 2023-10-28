@@ -275,10 +275,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Ensure the frequency is within bounds of what it should be sending/recieving at
 /proc/sanitize_frequency(var/f, var/low = PUBLIC_LOW_FREQ, var/high = PUBLIC_HIGH_FREQ)
-	f = round(f)
-	f = max(low, f)
-	f = min(high, f)
-	return f
+	return clamp(round(f), low, high)
 
 //Turns 1479 into 147.9
 /proc/format_frequency(var/f)
