@@ -321,8 +321,6 @@
 		return
 
 	if(!client) return
-	if(client.view != world.view)
-		return
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0
 		if(src.hud_used.adding)
