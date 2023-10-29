@@ -147,6 +147,13 @@
 	else
 		icon_state = base_state
 
+/obj/item/stack/material/get_string_for_amount(amount)
+	. = "[reinf_material ? "reinforced " : null][material.use_name]"
+	if(amount == 1)
+		. += " [singular_name]"
+		return indefinite_article ? "[indefinite_article] [.]" : ADD_ARTICLE(.)
+	return "[amount] [.] [plural_name]"
+
 /obj/item/stack/material/ingot
 	name = "ingots"
 	singular_name = "ingot"
