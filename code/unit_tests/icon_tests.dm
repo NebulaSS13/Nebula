@@ -2,25 +2,6 @@
 	name = "ICON STATE template"
 	template = /datum/unit_test/icon_test
 
-/datum/unit_test/icon_test/posters_shall_have_icon_states
-	name = "ICON STATE - Posters Shall Have Icon States"
-
-/datum/unit_test/icon_test/posters_shall_have_icon_states/start_test()
-	var/contraband_icons = icon_states('icons/obj/contraband.dmi')
-	var/list/invalid_posters = list()
-
-	var/list/all_posters = decls_repository.get_decls_of_subtype(/decl/poster_design)
-	for(var/poster_design in all_posters)
-		var/decl/poster_design/P = all_posters[poster_design]
-		if(!(P.icon_state in contraband_icons))
-			invalid_posters += poster_design
-
-	if(invalid_posters.len)
-		fail("/decl/poster_design with missing icon states: [english_list(invalid_posters)]")
-	else
-		pass("All /decl/poster_design subtypes have valid icon states.")
-	return 1
-
 /datum/unit_test/icon_test/item_modifiers_shall_have_icon_states
 	name = "ICON STATE - Item Modifiers Shall Have Icon Sates"
 	var/list/icon_states_by_type
@@ -51,13 +32,27 @@
 
 /datum/unit_test/icon_test/signs_shall_have_existing_icon_states
 	name = "ICON STATE - Signs shall have existing icon states"
+	var/list/skip_types = list(
+		// Posters use a decl to set their icon and handle their own validation.
+		/obj/structure/sign/poster
+	)
 
 /datum/unit_test/icon_test/signs_shall_have_existing_icon_states/start_test()
 	var/list/failures = list()
 	for(var/sign_type in typesof(/obj/structure/sign))
+
 		var/obj/structure/sign/sign = sign_type
 		if(TYPE_IS_ABSTRACT(sign))
 			continue
+
+		var/skip = FALSE
+		for(var/skip_type in skip_types)
+			if(ispath(sign_type, skip_type))
+				skip = TRUE
+				break
+		if(skip)
+			continue
+
 		var/check_state = initial(sign.icon_state)
 		if(!check_state)
 			failures += "[sign] - null icon_state"

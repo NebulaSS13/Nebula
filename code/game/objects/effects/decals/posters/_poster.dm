@@ -4,13 +4,13 @@
 
 ///A wall mounted poster
 /obj/structure/sign/poster
-	icon               = 'icons/obj/contraband.dmi'
+	icon               = 'icons/obj/items/posters.dmi'
 	icon_state         = "poster0"
 	anchored           = TRUE
 	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':-32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
 	material           = /decl/material/solid/paper
 	maxhealth          = 10
-	parts_type         = /obj/item/contraband/poster
+	parts_type         = /obj/item/poster
 	parts_amount       = 1
 
 	///Whether the poster is too damaged to take off from the wall or not.
@@ -89,6 +89,7 @@
 	else
 		desc = "[base_desc] [poster_design.desc]"
 		SetName("[base_name] - [poster_design.name]")
+		icon = poster_design.icon
 		set_icon_state(poster_design.icon_state)
 	update_icon()
 
@@ -121,10 +122,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 ///A rolled up version of the wall-mounted poster structure
-/obj/item/contraband/poster
+/obj/item/poster
 	name       = "rolled-up poster"
 	desc       = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface."
+	icon       = 'icons/obj/items/posters.dmi'
 	icon_state = "rolled_poster"
+	force = 0
+	material = /decl/material/solid/paper
 	///The name of the medium, excluding any reference to the design
 	var/base_name = "rolled-up poster"
 	///The description for the item/medium without any reference to the design.
@@ -132,12 +136,12 @@
 	///Type path to the /decl for the design on this poster. At runtime is changed for a reference to the decl
 	var/decl/poster_design/poster_design
 
-/obj/item/contraband/poster/Initialize(ml, material_key, var/given_poster_type = null)
+/obj/item/poster/Initialize(ml, material_key, var/given_poster_type = null)
 	//Init design
 	set_design(given_poster_type || poster_design || pick(decls_repository.get_decl_paths_of_subtype(/decl/poster_design)))
 	return ..(ml, material_key)
 
-/obj/item/contraband/poster/proc/set_design(var/decl/poster_design/_design_path)
+/obj/item/poster/proc/set_design(var/decl/poster_design/_design_path)
 	if(_design_path == poster_design)
 		return TRUE
 	if(ispath(_design_path, /decl))
@@ -150,7 +154,7 @@
 	SetName("[base_name] - [poster_design.name] - [poster_design.serial_number]")
 
 //Places the poster on a wall
-/obj/item/contraband/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
+/obj/item/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
 	if (!adjacent)
 		return
 
@@ -185,7 +189,7 @@
 		// We cannot rely on user being on the appropriate turf when placement fails
 		P.dismantle()
 
-/obj/item/contraband/poster/proc/ArePostersOnWall(var/turf/W, var/placed_poster)
+/obj/item/poster/proc/ArePostersOnWall(var/turf/W, var/placed_poster)
 	//just check if there is a poster on or adjacent to the wall
 	if (locate(/obj/structure/sign/poster) in W)
 		return TRUE
