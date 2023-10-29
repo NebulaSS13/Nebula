@@ -78,6 +78,9 @@ LINEN BINS
 /obj/item/bedsheet/brown
 	icon = 'icons/obj/bedsheets/bedsheet_brown.dmi'
 
+/obj/item/bedsheet/ian
+	icon = 'icons/obj/bedsheets/bedsheet_ian.dmi'
+
 //////////////////////////////////////////
 // Bedsheet bin
 //////////////////////////////////////////
