@@ -440,8 +440,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_chat(usr, SPAN_WARNING("There is no active key like that in the game or the person is not currently a ghost."))
 		return
 
-	var/mob/living/carbon/human/new_character = new(pick(global.latejoin_locations))//The mob being spawned.
-
+	var/mob/living/carbon/human/new_character = new(get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN)) //The mob being spawned.
 	var/datum/computer_file/report/crew_record/record_found			//Referenced to later to either randomize or not randomize the character.
 	if(G_found.mind && !G_found.mind.active)
 		record_found = get_crewmember_record(G_found.real_name)

@@ -988,7 +988,7 @@ var/global/floorIsLava = 0
 	set name = "Unprison"
 	if (isAdminLevel(M.z))
 		if (config.allow_admin_jump)
-			M.forceMove(pick(global.latejoin_locations))
+			M.forceMove(get_random_spawn_turf(SPAWN_FLAG_PRISONERS_CAN_SPAWN))
 			message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]", 1)
 			log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
 		else

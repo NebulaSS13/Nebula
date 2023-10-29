@@ -11,7 +11,7 @@
 		/decl/music_track/absconditus
 	)
 
-	allowed_spawns = list(
+	allowed_latejoin_spawns = list(
 		/decl/spawnpoint/arrivals
 	)
 

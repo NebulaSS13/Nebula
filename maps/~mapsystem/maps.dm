@@ -69,11 +69,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-	var/allowed_spawns = list(
-		/decl/spawnpoint/arrivals,
-		/decl/spawnpoint/gateway,
-		/decl/spawnpoint/cryo,
-		/decl/spawnpoint/cyborg
+	var/allowed_latejoin_spawns = list(
+		/decl/spawnpoint/arrivals
 	)
 	var/default_spawn = /decl/spawnpoint/arrivals
 
@@ -185,12 +182,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/datum/job/J = default_job_type
 		default_job_title = initial(J.title)
 
-	if(default_spawn && !(default_spawn in allowed_spawns))
+	if(default_spawn && !(default_spawn in allowed_latejoin_spawns))
 		PRINT_STACK_TRACE("Map datum [type] has default spawn point [default_spawn] not in the allowed spawn list.")
 
-	for(var/spawn_type in allowed_spawns)
-		allowed_spawns -= spawn_type
-		allowed_spawns += GET_DECL(spawn_type)
+	for(var/spawn_type in allowed_latejoin_spawns)
+		allowed_latejoin_spawns -= spawn_type
+		allowed_latejoin_spawns += GET_DECL(spawn_type)
 
 	if(!SSmapping.map_levels)
 		SSmapping.map_levels = SSmapping.station_levels.Copy()

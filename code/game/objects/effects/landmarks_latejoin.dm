@@ -1,23 +1,9 @@
-var/global/list/latejoin_locations =         list()
-var/global/list/latejoin_cryo_locations =    list()
-var/global/list/latejoin_cyborg_locations =  list()
-var/global/list/latejoin_gateway_locations = list()
-
 /obj/abstract/landmark/latejoin
 	delete_me = TRUE
+	var/spawn_decl = /decl/spawnpoint/arrivals
 
 /obj/abstract/landmark/latejoin/Initialize()
-	add_loc()
+	if(spawn_decl)
+		var/decl/spawnpoint/spawn_instance = GET_DECL(spawn_decl)
+		spawn_instance.add_spawn_turf(get_turf(src))
 	. = ..()
-
-/obj/abstract/landmark/latejoin/proc/add_loc()
-	global.latejoin_locations |= get_turf(src)
-
-/obj/abstract/landmark/latejoin/gateway/add_loc()
-	global.latejoin_gateway_locations |= get_turf(src)
-
-/obj/abstract/landmark/latejoin/cryo/add_loc()
-	global.latejoin_cryo_locations |= get_turf(src)
-
-/obj/abstract/landmark/latejoin/cyborg/add_loc()
-	global.latejoin_cyborg_locations |= get_turf(src)

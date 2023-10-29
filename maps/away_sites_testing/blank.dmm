@@ -8,6 +8,10 @@
 "c" = (
 /turf/simulated/floor/tiled,
 /area/space)
+"d" = (
+/obj/abstract/landmark/latejoin/observer,
+/turf/space,
+/area/space)
 "e" = (
 /obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled,
@@ -60,7 +64,7 @@ a
 a
 a
 a
-a
+d
 a
 a
 a

@@ -61,11 +61,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 				mind = new /datum/mind(key)
 				mind.current = src
 	if(!T)
-		var/list/spawn_locs = global.latejoin_locations | global.latejoin_cryo_locations | global.latejoin_gateway_locations
-		if(length(spawn_locs))
-			T = pick(spawn_locs)
-		else
-			T = locate(1, 1, 1)
+		T = get_random_spawn_turf(SPAWN_FLAG_GHOSTS_CAN_SPAWN)
+
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts

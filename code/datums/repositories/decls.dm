@@ -40,6 +40,22 @@ var/global/repository/decls/decls_repository = new
 	RETURN_TYPE(/decl)
 	. = get_decl(fetched_decl_ids[decl_id], validate_decl_type)
 
+// This proc and get_decl_by_id_or_var() are being added solely to grandfather in decls saved to player saves under name
+// rather than UID. They should be considered deprecated for this purpose - uid and get_decl_by_id() should be used instead.
+/repository/decls/proc/get_decl_by_var(var/decl_value, var/decl_prototype, var/check_var = "name")
+	var/list/all_decls = get_decls_of_type(decl_prototype)
+	var/decl/prototype = all_decls[all_decls[1]] // Can't just grab the prototype as it may be abstract
+	if(!(check_var in prototype.vars))
+		CRASH("Attempted to retrieve a decl by a var that does not exist on the decl type ('[check_var]')")
+	for(var/decl_type in all_decls)
+		var/decl/decl = all_decls[decl_type]
+		if(decl.vars[check_var] == decl_value)
+			return decl
+
+/repository/decls/proc/get_decl_by_id_or_var(var/decl_id, var/decl_prototype, var/check_var = "name")
+	RETURN_TYPE(/decl)
+	return get_decl_by_id(decl_id, validate_decl_type = FALSE) || get_decl_by_var(decl_id, decl_prototype, check_var)
+
 /repository/decls/proc/get_decl_path_by_id(decl_id)
 	. = fetched_decl_ids[decl_id]
 

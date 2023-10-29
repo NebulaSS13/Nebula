@@ -87,7 +87,7 @@ var/global/list/symbiote_starting_points = list()
 		if(length(global.symbiote_starting_points))
 			symbiote.forceMove(pick(global.symbiote_starting_points))
 		else
-			symbiote.forceMove(pick(global.latejoin_locations))
+			symbiote.forceMove(get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN))
 
 	if(H.mind)
 		H.mind.transfer_to(symbiote)
