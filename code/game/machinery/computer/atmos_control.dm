@@ -15,8 +15,9 @@
 	var/datum/nano_module/atmos_control/atmos_control
 	base_type = /obj/machinery/computer/atmoscontrol
 
+// TODO: replace this with a modular computer at some point
 /obj/machinery/computer/atmoscontrol/laptop
-	name = "Atmospherics Laptop"
+	name = "atmospherics laptop"
 	desc = "A cheap laptop."
 	icon_state = "laptop"
 	icon_keyboard = "laptop_key"
