@@ -177,7 +177,7 @@
 	..()
 
 /obj/machinery/port_gen/pacman/proc/process_exhaust()
-	var/decl/material/mat = sheet_material && GET_DECL(sheet_material)
+	var/decl/material/mat = GET_DECL(sheet_material)
 	if(mat)
 		mat.add_burn_product(loc, 0.05*power_output)
 

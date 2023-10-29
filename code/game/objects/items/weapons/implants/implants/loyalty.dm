@@ -19,14 +19,16 @@
 /obj/item/implant/loyalty/implanted(mob/M)
 	if(!ishuman(M))
 		return FALSE
-	var/mob/living/carbon/human/H = M
-	var/decl/special_role/antag_data = H.mind && ispath(H.mind.assigned_special_role, /decl/special_role) && GET_DECL(H.mind.assigned_special_role)
-	if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
-		H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of [global.using_map.company_name] try to invade your mind!")
+	var/decl/special_role/antag_data = GET_DECL(M.mind?.assigned_special_role)
+	if(istype(antag_data) && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
+		M.visible_message(
+			"\The [M] seems to resist the implant!",
+			"You feel the corporate tendrils of [global.using_map.company_name] try to invade your mind!"
+		)
 		return FALSE
 	else
-		clear_antag_roles(H.mind, 1)
-		to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [global.using_map.company_name].</span>")
+		clear_antag_roles(M.mind, 1)
+		to_chat(M, SPAN_NOTICE("You feel a surge of loyalty towards [global.using_map.company_name]."))
 	return TRUE
 
 /obj/item/implanter/loyalty
