@@ -244,21 +244,26 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/turf/T
 	var/Ti
 
-	if (t1)
+	if (t1 && (t1.below || HasBelow(t1.z)) && (t1.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t1))
 		T = t1
 		Ti = t1i
-	else if (t2)
+	else if (t2 && (t2.below || HasBelow(t2.z)) && (t2.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t2))
 		T = t2
 		Ti = t2i
-	else if (t3)
+	else if (t3 && (t3.below || HasBelow(t3.z)) && (t3.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t3))
 		T = t3
 		Ti = t3i
-	else if (t4)
+	else if (t4 && (t4.below || HasBelow(t4.z)) && (t4.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t4))
 		T = t4
 		Ti = t4i
+	// No MZ candidates below, just update.
+	else if (needs_update || skip_update)
+		return
 	else
-		// This should be impossible to reach -- how do we exist without at least one master turf?
-		CRASH("Corner has no masters!")
+		// Always queue for this, not important enough to hit the synchronous path.
+		needs_update = TRUE
+		SSlighting.corner_queue += src
+		return
 
 	var/datum/lighting_corner/below = src
 
