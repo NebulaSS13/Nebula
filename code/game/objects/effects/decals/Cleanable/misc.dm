@@ -92,6 +92,7 @@
 	name = "tomato smudge"
 	desc = "It's red."
 	icon = 'icons/effects/tomatodecal.dmi'
+	icon_state = "tomato_floor1"
 	random_icon_states = list("tomato_floor1", "tomato_floor2", "tomato_floor3")
 	persistent = TRUE
 	generic_filth = TRUE
@@ -100,6 +101,7 @@
 	name = "smashed egg"
 	desc = "Seems like this one won't hatch."
 	icon = 'icons/effects/tomatodecal.dmi'
+	icon_state = "smashed_egg1"
 	random_icon_states = list("smashed_egg1", "smashed_egg2", "smashed_egg3")
 	persistent = TRUE
 	generic_filth = TRUE
@@ -108,6 +110,7 @@
 	name = "smashed pie"
 	desc = "It's pie cream from a cream pie."
 	icon = 'icons/effects/tomatodecal.dmi'
+	icon_state = "smashed_pie"
 	random_icon_states = list("smashed_pie")
 	persistent = TRUE
 	generic_filth = TRUE
