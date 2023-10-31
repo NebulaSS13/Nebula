@@ -83,7 +83,7 @@
 		map[TRANSLATE_COORD(x+isize,y)]   \
 		)/2)
 
-	map[get_map_cell(x,y+hsize)] = round((  \
+	map[TRANSLATE_COORD(x,y+hsize)] = round((  \
 		map[TRANSLATE_COORD(x,y+isize)] + \
 		map[TRANSLATE_COORD(x,y)]              \
 		)/2)
@@ -154,31 +154,55 @@
 		map = next_map
 
 	if(smooth_single_tiles)
-		var/lonely
 		for(var/x in 1 to limit_x - 1)
 			for(var/y in 1 to limit_y - 1)
-				var/mapcell = get_map_cell(x,y)
-				var/list/neighbors = get_neighbors(x, y, TRUE)
-				lonely = TRUE
-				for(var/cell in neighbors)
-					if(get_appropriate_path(map[cell]) == get_appropriate_path(map[mapcell]))
-						lonely = FALSE
-						break
-				if(lonely)
-					map[mapcell] = map[pick(neighbors)]
+				var/mapcell = TRANSLATE_COORD(x,y)
+				if(has_neighbor_with_path(x, y, get_appropriate_path(map[mapcell]), TRUE))
+					continue
+				map[mapcell] = map[pick(get_neighbors(x, y, TRUE))]
 
+#define CHECK_NEIGHBOR_FOR_PATH(X, Y) \
+	TRANSLATE_AND_VERIFY_COORD(X,Y);\
+	if(tmp_cell && (get_appropriate_path(map[tmp_cell]) == path)) {\
+		return TRUE;\
+	}
+
+/// Checks if the cell at x,y has a neighbor with the given path.
+/// Faster than looping over get_neighbors for the same purpose because it doesn't use list ops.
+/datum/random_map/noise/proc/has_neighbor_with_path(x, y, path, include_diagonals)
+	var/tmp_cell
+	CHECK_NEIGHBOR_FOR_PATH(x-1,y)
+	CHECK_NEIGHBOR_FOR_PATH(x+1,y)
+	CHECK_NEIGHBOR_FOR_PATH(x,y+1)
+	CHECK_NEIGHBOR_FOR_PATH(x,y-1)
+	if(include_diagonals)
+		CHECK_NEIGHBOR_FOR_PATH(x+1,y+1)
+		CHECK_NEIGHBOR_FOR_PATH(x+1,y-1)
+		CHECK_NEIGHBOR_FOR_PATH(x-1,y-1)
+		CHECK_NEIGHBOR_FOR_PATH(x-1,y+1)
+	return FALSE
+
+#undef CHECK_NEIGHBOR_FOR_PATH
+
+#define VERIFY_AND_ADD_CELL(X, Y) \
+	TRANSLATE_AND_VERIFY_COORD(X,Y);\
+	if(tmp_cell) {\
+		. += tmp_cell;\
+	}
+
+/// Gets the neighbors of the cell at x, y, optionally including diagonals.
+/// (x,y) and its neighbors can safely be invalid/not validated before calling.
 /datum/random_map/noise/proc/get_neighbors(x, y, include_diagonals)
 	. = list()
-	if(!include_diagonals)
-		var/static/list/ortho_offsets = list(list(-1, 0), list(1, 0), list(0, 1), list(0,-1))
-		for(var/list/offset in ortho_offsets)
-			var/tmp_cell = get_map_cell(x+offset[1],y+offset[2])
-			if(tmp_cell)
-				. += tmp_cell
-	else
-		for(var/dx in -1 to 1)
-			for(var/dy in -1 to 1)
-				var/tmp_cell = get_map_cell(x+dx,y+dy)
-				if(tmp_cell)
-					. += tmp_cell
-		. -= get_map_cell(x,y)
+	var/tmp_cell
+	VERIFY_AND_ADD_CELL(x-1,y)
+	VERIFY_AND_ADD_CELL(x+1,y)
+	VERIFY_AND_ADD_CELL(x,y+1)
+	VERIFY_AND_ADD_CELL(x,y-1)
+	if(include_diagonals)
+		VERIFY_AND_ADD_CELL(x+1,y+1)
+		VERIFY_AND_ADD_CELL(x+1,y-1)
+		VERIFY_AND_ADD_CELL(x-1,y-1)
+		VERIFY_AND_ADD_CELL(x-1,y+1)
+
+#undef VERIFY_AND_ADD_CELL

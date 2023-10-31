@@ -47,7 +47,7 @@
 	// Draw walls/floors/doors.
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
-			var/current_cell = get_map_cell(x,y)
+			var/current_cell = TRANSLATE_COORD(x,y)
 			if(!current_cell)
 				continue
 
@@ -73,7 +73,7 @@
 					map[current_cell] = SD_FLOOR_TILE
 
 	// Draw the drop contents.
-	var/current_cell = get_map_cell(x_midpoint,y_midpoint)
+	var/current_cell = TRANSLATE_COORD(x_midpoint,y_midpoint)
 	if(current_cell)
 		map[current_cell] = SD_SUPPLY_TILE
 	return 1

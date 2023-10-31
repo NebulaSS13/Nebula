@@ -119,23 +119,7 @@
 	flora_prob           = 3
 	grass_prob           = 0
 	large_flora_prob     = 0
-
-//Squashing most of 1 tile lava puddles
-/datum/random_map/noise/exoplanet/volcanic/cleanup()
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
-			var/current_cell = get_map_cell(x,y)
-			if(noise2value(map[current_cell]) < water_level)
-				continue
-			var/frendos
-			for(var/dx in list(-1,0,1))
-				for(var/dy in list(-1,0,1))
-					var/tmp_cell = get_map_cell(x+dx,y+dy)
-					if(tmp_cell && tmp_cell != current_cell && noise2value(map[tmp_cell]) >= water_level)
-						frendos = 1
-						break
-			if(!frendos)
-				map[current_cell] = 1
+	smooth_single_tiles  = TRUE
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas

@@ -154,11 +154,11 @@
 	logging("Winding Dungeon Generation Start")
 	//first generate the border
 	for(var/xx = 1, xx <= limit_x, xx++)
-		map[get_map_cell(xx,1)] = BORDER_CHAR
-		map[get_map_cell(xx,limit_y)] = BORDER_CHAR
+		map[TRANSLATE_COORD(xx,1)] = BORDER_CHAR
+		map[TRANSLATE_COORD(xx,limit_y)] = BORDER_CHAR
 	for(var/yy = 1, yy < limit_y, yy++)
-		map[get_map_cell(1,yy)] = BORDER_CHAR
-		map[get_map_cell(limit_x,yy)] = BORDER_CHAR
+		map[TRANSLATE_COORD(1,yy)] = BORDER_CHAR
+		map[TRANSLATE_COORD(limit_x,yy)] = BORDER_CHAR
 
 	var/num_of_features = limit_x * limit_y * features_multiplier
 	logging("Number of features: [num_of_features]")
@@ -197,7 +197,7 @@
 				logging("open_positions empty. Using randomly chosen coords ([newx],[newy])")
 
 			//We want to make sure we aren't RIGHT next to another corridor or something.
-			if(map[get_map_cell(newx,newy+1)] == ARTIFACT_CHAR || map[get_map_cell(newx-1,newy)] == ARTIFACT_CHAR || map[get_map_cell(newx,newy-1)] == ARTIFACT_CHAR || map[get_map_cell(newx+1,newy)] == ARTIFACT_CHAR)
+			if(LAZYACCESS(map, TRANSLATE_COORD(newx,newy+1)) == ARTIFACT_CHAR || LAZYACCESS(map, TRANSLATE_COORD(newx-1,newy)) == ARTIFACT_CHAR || LAZYACCESS(map, TRANSLATE_COORD(newx,newy-1)) == ARTIFACT_CHAR || LAZYACCESS(map, TRANSLATE_COORD(newx+1,newy)) == ARTIFACT_CHAR)
 				logging("Coords ([newx],[newy]) are too close to an ARTIFACT_CHAR position.")
 				continue
 
@@ -207,9 +207,9 @@
 			height = rand(room_size_min,room_size_max)
 			isRoom = rand(100) <= chance_of_room
 
-			if(map[get_map_cell(newx, newy)] == ARTIFACT_TURF_CHAR || map[get_map_cell(newx, newy)] == CORRIDOR_TURF_CHAR)
+			if(LAZYACCESS(map, TRANSLATE_COORD(newx, newy)) == ARTIFACT_TURF_CHAR || LAZYACCESS(map, TRANSLATE_COORD(newx, newy)) == CORRIDOR_TURF_CHAR)
 				//we are basically checking to see where we're going. Up, right, down or left and finding the bottom left corner.
-				if(map[get_map_cell(newx,newy+1)] == FLOOR_CHAR || map[get_map_cell(newx,newy+1)] == CORRIDOR_TURF_CHAR) //0 - down
+				if(LAZYACCESS(map, TRANSLATE_COORD(newx,newy+1)) == FLOOR_CHAR || LAZYACCESS(map, TRANSLATE_COORD(newx,newy+1)) == CORRIDOR_TURF_CHAR) //0 - down
 					logging("This feature is DOWN")
 					if(isRoom) //gotta do some math for this one, since the origin is centered.
 						xmod = -width/2
@@ -219,7 +219,7 @@
 					ymod = -height //a lot of this will seem nonsense but I swear its not
 					doorx = 0
 					doory = -1
-				else if(map[get_map_cell(newx-1,newy)] == FLOOR_CHAR || map[get_map_cell(newx-1,newy)] == CORRIDOR_TURF_CHAR) //1 - right
+				else if(LAZYACCESS(map, TRANSLATE_COORD(newx-1,newy)) == FLOOR_CHAR || LAZYACCESS(map, TRANSLATE_COORD(newx-1,newy)) == CORRIDOR_TURF_CHAR) //1 - right
 					logging("This feature is RIGHT")
 					if(isRoom)
 						ymod = -height/2
@@ -229,7 +229,7 @@
 					xmod = 1
 					doorx = 1
 					doory = 0
-				else if(map[get_map_cell(newx,newy-1)] == FLOOR_CHAR || map[get_map_cell(newx,newy-1)] == CORRIDOR_TURF_CHAR) //2 - up
+				else if(LAZYACCESS(map, TRANSLATE_COORD(newx,newy-1)) == FLOOR_CHAR || LAZYACCESS(map, TRANSLATE_COORD(newx,newy-1)) == CORRIDOR_TURF_CHAR) //2 - up
 					logging("This feature is UP")
 					if(isRoom)
 						xmod = -width/2
@@ -239,7 +239,7 @@
 					ymod = 1
 					doorx = 0
 					doory = 1
-				else if(map[get_map_cell(newx+1,newy)] == FLOOR_CHAR || map[get_map_cell(newx+1,newy)] == CORRIDOR_TURF_CHAR) // 3 - left
+				else if(LAZYACCESS(map, TRANSLATE_COORD(newx+1,newy)) == FLOOR_CHAR || LAZYACCESS(map, TRANSLATE_COORD(newx+1,newy)) == CORRIDOR_TURF_CHAR) // 3 - left
 					logging("This feature is LEFT")
 					if(isRoom)
 						ymod = -height/2
@@ -263,16 +263,17 @@
 			currentFeatures++
 			if(isRoom)
 				logging("Room created at: [newx+xmod], [newy+ymod].")
-				map[get_map_cell(newx,newy)] = FLOOR_CHAR
-				map[get_map_cell(newx+doorx,newy+doory)] = ARTIFACT_CHAR
+				map[TRANSLATE_COORD(newx,newy)] = FLOOR_CHAR
+				map[TRANSLATE_COORD(newx+doorx,newy+doory)] = ARTIFACT_CHAR
 				if(rand(0,100) >= chance_of_room_empty)
 					var/room_result = create_room_features(round(newx+xmod),round(newy+ymod),width,height)
 					logging("Attempted room feature creation: [room_result ? "Success" : "Failure"]")
 			else
 				logging("Creating corridor.")
-				var/door = get_map_cell(newx,newy)
-				if(map[door] == ARTIFACT_TURF_CHAR)
-					map[door] = ARTIFACT_CHAR
+				var/tmp_cell
+				TRANSLATE_AND_VERIFY_COORD(newx,newy)
+				if(map[tmp_cell] == ARTIFACT_TURF_CHAR)
+					map[tmp_cell] = ARTIFACT_CHAR
 	logging("Map completed. Loops: [sanity], [currentFeatures] out of [num_of_features] created.")
 	open_positions.Cut()
 
@@ -287,17 +288,17 @@
 					if(xtemp < 0 || xtemp > limit_x)
 						logging("We are beyond our x limits")
 						return 0
-					if(map[get_map_cell(xtemp,ytemp)] != WALL_CHAR)
+					if(map[TRANSLATE_COORD(xtemp,ytemp)] != WALL_CHAR)
 						logging("[xtemp],[ytemp] is not equal to WALL_CHAR")
 						return 0
 				else
 					if(wall_char && (ytemp == truey || ytemp == truey + height - 1 || xtemp == truex || xtemp == truex + width - 1))
-						map[get_map_cell(xtemp,ytemp)] = wall_char
+						map[TRANSLATE_COORD(xtemp,ytemp)] = wall_char
 						if(!("[xtemp]:[ytemp]" in open_positions))
 							open_positions += "[xtemp]:[ytemp]"
 							logging("Adding \"[xtemp]:[ytemp]\" to open_positions (length: [open_positions.len])")
 					else
-						map[get_map_cell(xtemp,ytemp)] = char
+						map[TRANSLATE_COORD(xtemp,ytemp)] = char
 	return 1
 
 /datum/random_map/winding_dungeon/proc/create_room_features(var/rox,var/roy,var/width,var/height)
