@@ -7,9 +7,11 @@
 	var/list/except_types = list(
 		/turf/unsimulated/mimic_edge,
 		/turf/exterior/mimic_edge,
+		/turf/simulated/mimic_edge,
 		/turf/exterior/open,
 		/turf/simulated/open
 	)
+
 /datum/unit_test/icon_test/turfs_shall_have_icon_states/start_test()
 	var/list/failures = list()
 	for(var/turf_type in subtypesof(/turf))

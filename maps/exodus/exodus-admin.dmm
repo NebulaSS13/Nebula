@@ -340,7 +340,7 @@
 	},
 /obj/structure/showcase{
 	desc = "A self-contained autopilot that controls supply drones.";
-	icon_state = "comm_server";
+	icon_state = "showcase_5";
 	name = "Supply Drone Virtual Intelligence"
 	},
 /turf/simulated/floor/plating,
@@ -1313,7 +1313,7 @@
 "aLF" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "CentComPort";
-	name = "Security Doors";
+	name = "Security Doors"
 	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
@@ -3009,7 +3009,7 @@
 	name = "tdome2"
 	},
 /obj/machinery/camera/network/television{
-	c_tag = "Thunderdome - Red Team";
+	c_tag = "Thunderdome - Red Team"
 	},
 /turf/unsimulated/floor{
 	dir = 5;
@@ -3046,7 +3046,7 @@
 	name = "tdome1"
 	},
 /obj/machinery/camera/network/television{
-	c_tag = "Green Team";
+	c_tag = "Green Team"
 	},
 /turf/unsimulated/floor{
 	dir = 5;
@@ -3061,7 +3061,7 @@
 /area/tdome)
 "pQZ" = (
 /obj/machinery/camera/network/television{
-	c_tag = "Thunderdome Arena";
+	c_tag = "Thunderdome Arena"
 	},
 /turf/unsimulated/floor{
 	icon_state = "bcircuit"
@@ -3143,8 +3143,8 @@
 /area/tdome/tdomeadmin)
 "sKA" = (
 /obj/abstract/level_data_spawner/admin_level{
-	name = "Centcomm";
-},
+	name = "Centcomm"
+	},
 /turf/space,
 /area/space)
 "sMD" = (
@@ -3272,7 +3272,6 @@
 "wOU" = (
 /obj/machinery/button/blast_door{
 	dir = 1;
-	icon_state = "computer";
 	id_tag = "thunderdomeaxe";
 	name = "Thunderdome Axe Supply"
 	},
