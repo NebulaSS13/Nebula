@@ -6,6 +6,7 @@
 	)
 	open_turf_type = /turf/simulated/open
 	zone_membership_candidate = TRUE
+	abstract_type = /turf/simulated
 
 	var/wet = 0
 	var/image/wet_overlay = null

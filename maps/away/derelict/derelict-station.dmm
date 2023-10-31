@@ -1829,7 +1829,6 @@
 /area/constructionsite/maintenance)
 "gf" = (
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "door_closed";
 	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -1861,7 +1860,6 @@
 /area/constructionsite/ai)
 "gn" = (
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "door_closed";
 	name = "AI Upload"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -2043,7 +2041,6 @@
 /area/constructionsite/hallway/aft)
 "gZ" = (
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "door_closed";
 	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,

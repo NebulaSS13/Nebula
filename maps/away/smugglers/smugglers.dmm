@@ -20,9 +20,7 @@
 /turf/simulated/wall/r_wall,
 /area/smugglers/base)
 "ag" = (
-/obj/machinery/door/airlock/external{
-	icon_state = "door_closed"
-	},
+/obj/machinery/door/airlock/external,
 /turf/simulated/floor,
 /area/smugglers/base)
 "ah" = (
@@ -80,7 +78,6 @@
 /area/space)
 "aq" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	name = "Internal Airlock"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,

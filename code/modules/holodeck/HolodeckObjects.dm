@@ -98,6 +98,7 @@
 	icon = 'icons/misc/beach.dmi'
 	base_icon = 'icons/misc/beach.dmi'
 	initial_flooring = null
+	abstract_type = /turf/simulated/floor/holofloor/beach
 
 /turf/simulated/floor/holofloor/beach/sand
 	name = "sand"

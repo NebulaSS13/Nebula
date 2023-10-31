@@ -2,6 +2,7 @@
 	name = "Beach"
 	icon = 'icons/misc/beach.dmi'
 	turf_flags = TURF_FLAG_BACKGROUND
+	abstract_type = /turf/unsimulated/beach
 
 /turf/unsimulated/beach/sand
 	name = "Sand"

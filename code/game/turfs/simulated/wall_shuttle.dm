@@ -3,6 +3,7 @@
 	icon = 'icons/turf/shuttle.dmi'
 	thermal_conductivity = 0.05
 	heat_capacity = 0
+	abstract_type = /turf/simulated/shuttle
 
 /turf/simulated/shuttle/wall
 	name = "wall"
