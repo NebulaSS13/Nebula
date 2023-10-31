@@ -1232,12 +1232,9 @@
 	id_tag = "ninja_shuttle_outer";
 	name = "Ship External Access"
 	},
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "ninjadoor";
 	name = "Blast Door";
-	opacity = FALSE
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"

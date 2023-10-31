@@ -2449,24 +2449,18 @@
 /turf/simulated/wall/titanium,
 /area/map_template/rescue_base/start)
 "eV" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "eW" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "rescuedock";
 	name = "Blast Shutters";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2697,13 +2691,10 @@
 	},
 /area/map_template/rescue_base/base)
 "fC" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Cockpit Blast Shutters";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -2759,13 +2750,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fJ" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "rescueeva";
 	name = "Blast Shutters";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/blue,
@@ -3166,13 +3154,10 @@
 /area/map_template/rescue_base/base)
 "gU" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "rescuebridge";
 	name = "Blast Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,
@@ -3219,13 +3204,10 @@
 /area/map_template/rescue_base/start)
 "hb" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "rescueinfirm";
 	name = "Blast Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/blue,
 /turf/simulated/floor/plating,

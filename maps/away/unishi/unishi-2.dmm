@@ -897,7 +897,6 @@
 /obj/effect/wingrille_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/structure/cable/yellow{
@@ -992,7 +991,6 @@
 /obj/effect/wingrille_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor,
@@ -1121,7 +1119,6 @@
 "dk" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/door/airlock/glass/research{
@@ -1183,7 +1180,6 @@
 "ds" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/effect/wingrille_spawn/reinforced,
@@ -2070,12 +2066,9 @@
 /turf/simulated/wall/r_wall,
 /area/unishi/smresearch)
 "fM" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	opacity = FALSE
 	},
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2218,13 +2211,10 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gf" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	opacity = FALSE
 	},
 /turf/simulated/floor,
 /area/unishi/smresearch)
@@ -2349,13 +2339,10 @@
 /turf/space,
 /area/space)
 "gx" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	opacity = FALSE
 	},
 /obj/item/remains,
 /turf/simulated/floor,
@@ -2743,13 +2730,10 @@
 /turf/simulated/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "hp" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Biohazard";
 	name = "Biohazard Shutter";
-	opacity = FALSE
 	},
 /obj/item/remains,
 /obj/random/shoes,

@@ -214,7 +214,6 @@
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
@@ -341,7 +340,6 @@
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
@@ -355,7 +353,6 @@
 /area/magshield/engine)
 "bb" = (
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
@@ -466,7 +463,6 @@
 "bu" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
@@ -475,7 +471,6 @@
 "bv" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
@@ -674,13 +669,10 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cc" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -736,13 +728,10 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "ck" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/yellow{

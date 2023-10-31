@@ -1289,7 +1289,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
@@ -1411,7 +1410,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
@@ -1503,7 +1501,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/button/access/exterior{
@@ -1717,7 +1714,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/button/access/exterior{
@@ -2046,7 +2042,6 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
@@ -2232,7 +2227,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
@@ -4884,7 +4878,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
@@ -5443,7 +5436,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
@@ -5789,7 +5781,6 @@
 "pp" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -6335,7 +6326,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,

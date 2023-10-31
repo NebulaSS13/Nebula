@@ -177,9 +177,7 @@
 "ay" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = FALSE
 	},
 /obj/machinery/door/window/northleft{
 	dir = 8;
@@ -207,9 +205,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = FALSE
 	},
 /turf/simulated/floor,
 /area/liberia/engineeringreactor)
@@ -643,13 +639,10 @@
 /area/liberia/hallway)
 "bo" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -835,13 +828,10 @@
 /area/liberia/mule)
 "bC" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -1270,13 +1260,10 @@
 /area/liberia/mule)
 "cp" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1578,13 +1565,10 @@
 	},
 /obj/structure/table/steel,
 /obj/effect/paint/silver,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = FALSE
 	},
 /obj/structure/cable/blue{
 	icon_state = "4-8"
@@ -8094,13 +8078,10 @@
 /area/liberia/dockinghall)
 "QE" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
