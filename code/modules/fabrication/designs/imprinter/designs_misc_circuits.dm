@@ -484,3 +484,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/geothermal_generator
 	path = /obj/item/stock_parts/circuitboard/geothermal
+
+/datum/fabricator_recipe/imprinter/circuit/tag_scrubber_control
+	path = /obj/item/stock_parts/circuitboard/tag_scrubber_control

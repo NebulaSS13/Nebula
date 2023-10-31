@@ -1,5 +1,5 @@
 /obj/machinery/computer/area_atmos
-	name = "Area Air Control"
+	name = "area air control"
 	desc = "A computer used to control the stationary scrubbers and pumps in the area."
 	icon_keyboard = "atmos_key"
 	icon_screen = "area_atmos"
@@ -20,7 +20,7 @@
 /obj/machinery/computer/area_atmos/interface_interact(user)
 	interact(user)
 	return TRUE
-	
+
 /obj/machinery/computer/area_atmos/interact(mob/user)
 	var/dat = {"
 	<html>
@@ -173,3 +173,27 @@
 		status = "ERROR: No scrubber found!"
 
 	src.updateUsrDialog()
+
+/obj/machinery/computer/area_atmos/tag
+	name = "heavy scrubber control"
+	zone = "This computer is operating industrial scrubbers nearby."
+	var/last_scan
+
+/obj/machinery/computer/area_atmos/tag/scanscrubbers()
+	if(last_scan && ((world.time - last_scan) < 20 SECONDS))
+		return FALSE
+	else
+		last_scan = world.time
+
+	connectedscrubbers.Cut()
+
+	for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in SSmachines.machinery)
+		if(scrubber.id_tag == id_tag)
+			connectedscrubbers += scrubber
+
+	updateUsrDialog()
+
+/obj/machinery/computer/area_atmos/tag/validscrubber(obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber)
+	if(scrubber.id_tag == id_tag)
+		return TRUE
+	return FALSE

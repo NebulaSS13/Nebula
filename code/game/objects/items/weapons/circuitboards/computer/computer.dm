@@ -97,6 +97,11 @@
 	build_path = /obj/machinery/computer/area_atmos
 	origin_tech = "{'programming':2}"
 
+/obj/item/stock_parts/circuitboard/tag_scrubber_control
+	name = "circuitboard (wireless scrubber control console)"
+	build_path = /obj/machinery/computer/area_atmos/tag
+	origin_tech = "{'programming':2}"
+
 /obj/item/stock_parts/circuitboard/account_database
 	name = "circuitboard (accounts uplink terminal)"
 	build_path = /obj/machinery/computer/account_database
