@@ -2,6 +2,29 @@
 	name = "ICON STATE template"
 	template = /datum/unit_test/icon_test
 
+/datum/unit_test/icon_test/turfs_shall_have_icon_states
+	name = "ICON STATE - Turf Subtypes Shall Have Icon States"
+
+/datum/unit_test/icon_test/turfs_shall_have_icon_states/start_test()
+	var/list/failures = list()
+	for(var/turf_type in subtypesof(/turf))
+		var/turf/turf_prototype = turf_type
+		if(TYPE_IS_ABSTRACT(turf_prototype))
+			continue
+		var/test_icon_state = initial(turf_prototype.icon_state)
+		var/test_icon = initial(turf_prototype.icon)
+		if(!test_icon_state)
+			failures += "[turf_prototype] - null icon state"
+		if(!test_icon)
+			failures += "[turf_prototype] - null icon"
+		if(test_icon_state && test_icon && !check_state_in_icon(test_icon_state, test_icon))
+			failures += "[turf_prototype] - state [test_icon_state] not in icon [test_icon]"
+	if(length(failures))
+		fail("Turf subtypes had missing icons or icon states:\n[jointext(failures, "\n")].")
+	else
+		pass("All turf subtypes had valid icon states.")
+	return 1
+
 /datum/unit_test/icon_test/item_modifiers_shall_have_icon_states
 	name = "ICON STATE - Item Modifiers Shall Have Icon Sates"
 	var/list/icon_states_by_type
@@ -67,6 +90,29 @@
 		fail("Signs with missing icon states:\n\t-[jointext(failures, "\n\t-")]")
 	else
 		pass("All signs have valid icon states.")
+	return 1
+
+/datum/unit_test/icon_test/random_spawners_shall_have_existing_icon_states
+	name = "ICON STATE - Random spawners shall have existing icon states"
+
+/datum/unit_test/icon_test/random_spawners_shall_have_existing_icon_states/start_test()
+	var/list/failures = list()
+	for(var/test_type in subtypesof(/obj/random))
+		var/obj/random/prototype = test_type
+		if(TYPE_IS_ABSTRACT(prototype))
+			continue
+		var/test_icon = initial(prototype.icon)
+		if(!test_icon)
+			failures += "[test_type] - no icon"
+		var/test_icon_state = initial(prototype.icon_state)
+		if(!test_icon_state)
+			failures += "[test_type] - no icon_state"
+		if(test_icon_state && test_icon && !check_state_in_icon(test_icon_state, test_icon))
+			failures += "[test_type] - icon_state [test_icon_state] not present in [test_icon]"
+	if(length(failures))
+		fail("Some random spawners have an invalid icon state:\n[jointext(failures, "\n")]")
+	else
+		pass("All random spawners had a valid icon state.")
 	return 1
 
 /datum/unit_test/icon_test/floor_decals_shall_have_existing_icon_states
