@@ -43,8 +43,8 @@
 /area/space)
 "QP" = (
 /obj/abstract/level_data_spawner/admin_level{
-	name = "Exodus Transit Level";
-},
+	name = "Exodus Transit Level"
+	},
 /turf/space,
 /area/space)
 

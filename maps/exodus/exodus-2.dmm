@@ -678,7 +678,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Prison Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Security Maintenance"
@@ -2793,7 +2793,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Prison Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/machinery/door/airlock/maintenance{
 	name = "Security Maintenance"
@@ -3230,7 +3230,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "Secure Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/security/brig)
@@ -3268,7 +3268,7 @@
 "ahg" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Prison Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance{
@@ -3301,7 +3301,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "lawyer_blast";
-	name = "Privacy Shutters";
+	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/security/brig)
@@ -3624,12 +3624,10 @@
 	dir = 1
 	},
 /obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
+	dir = 4
 	},
 /obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
+	dir = 8
 	},
 /obj/structure/grille,
 /obj/structure/cable/green{
@@ -3887,12 +3885,10 @@
 /area/exodus/security/brig/interrogation)
 "aiF" = (
 /obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
+	dir = 4
 	},
 /obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
+	dir = 8
 	},
 /obj/structure/grille,
 /obj/structure/cable/green{
@@ -4085,12 +4081,10 @@
 "aja" = (
 /obj/structure/window/reinforced/tinted,
 /obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
+	dir = 4
 	},
 /obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
+	dir = 8
 	},
 /obj/structure/grille,
 /obj/structure/cable/green,
@@ -4111,7 +4105,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "lawyer_blast";
-	name = "Privacy Shutters";
+	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/lawoffice)
@@ -4185,7 +4179,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "Secure Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -4283,7 +4277,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "Secure Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-8"
@@ -4295,7 +4289,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "brigobs";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -4315,7 +4309,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "brigobs";
-	name = "brigobs";
+	name = "brigobs"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-8"
@@ -4340,7 +4334,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "brigobs";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -4443,7 +4437,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-2"
@@ -5448,7 +5442,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -5893,7 +5887,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -5919,7 +5913,7 @@
 "amy" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Prison Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/machinery/door/airlock/atmos{
 	name = "Atmospherics Maintenance"
@@ -6063,7 +6057,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/structure/cable/green,
 /obj/structure/disposalpipe/segment{
@@ -6226,7 +6220,7 @@
 /obj/structure/cable/green,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Secure Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/security/prison)
@@ -6266,7 +6260,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "lawyer_blast";
-	name = "Privacy Shutters";
+	name = "Privacy Shutters"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -6288,7 +6282,7 @@
 "ani" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Secure Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -6397,7 +6391,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
@@ -6456,7 +6450,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Prison Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
@@ -6996,7 +6990,7 @@
 /area/exodus/maintenance/auxsolarstarboard)
 "aoK" = (
 /obj/machinery/faxmachine/mapped{
-	anchored = FALSE;
+	anchored = FALSE
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/newscaster{
@@ -7950,7 +7944,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "lawyer_blast";
-	name = "Privacy Shutters";
+	name = "Privacy Shutters"
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
@@ -8508,7 +8502,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-8"
@@ -8536,7 +8530,7 @@
 "arO" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Prison Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/security{
@@ -8551,7 +8545,7 @@
 "arP" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Prison Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/security{
@@ -8670,7 +8664,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -9149,7 +9143,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "visit_blast";
-	name = "Privacy Shutters";
+	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/security/prison/dorm)
@@ -9198,12 +9192,12 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "Secure Gate";
-	name = "Security Blast Door";
+	name = "Security Blast Door"
 	},
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "visit_blast";
-	name = "Privacy Shutters";
+	name = "Privacy Shutters"
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -9608,7 +9602,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -10036,7 +10030,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -10546,7 +10540,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Secure Gate";
-	name = "Secure Gate";
+	name = "Secure Gate"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/brigdoor/eastleft{
@@ -14353,7 +14347,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "heads_meeting";
-	name = "Meeting Room Window Shutters";
+	name = "Meeting Room Window Shutters"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-2"
@@ -14423,7 +14417,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "heads_meeting";
-	name = "Meeting Room Window Shutters";
+	name = "Meeting Room Window Shutters"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-2"
@@ -14461,7 +14455,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "heads_meeting";
-	name = "Meeting Room Window Shutters";
+	name = "Meeting Room Window Shutters"
 	},
 /obj/structure/cable/green,
 /obj/machinery/door/firedoor,
@@ -14634,7 +14628,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/machinery/door/airlock/research{
 	name = "Mech Bay"
@@ -14869,7 +14863,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/machinery/door/blast/shutters{
 	dir = 2;
@@ -15183,7 +15177,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/robotics)
@@ -15219,7 +15213,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/robotics)
@@ -15244,7 +15238,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/lab)
@@ -15272,7 +15266,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/lab)
@@ -15528,7 +15522,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 8;
 	id_tag = "chemwindow";
-	name = "Chemistry Window Shutters";
+	name = "Chemistry Window Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/hallway/primary/central_two)
@@ -15875,7 +15869,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "chapel";
-	name = "Privacy Shutters";
+	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/office)
@@ -17626,7 +17620,7 @@
 /obj/machinery/door/blast/shutters{
 	dir = 2;
 	id_tag = "chapel";
-	name = "Privacy Shutters";
+	name = "Privacy Shutters"
 	},
 /obj/machinery/door/window/westleft{
 	name = "Coffin Storage"
@@ -19031,7 +19025,6 @@
 /obj/structure/table/woodentable,
 /obj/item/chems/food/chips,
 /obj/random/single{
-	icon_state = "cola";
 	name = "randomly spawned cola";
 	spawn_object = /obj/item/chems/drinks/cans/cola
 	},
@@ -19858,7 +19851,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -20043,7 +20036,6 @@
 	pixel_y = 2
 	},
 /obj/random/single{
-	icon_state = "lighter-g";
 	name = "randomly spawned lighter";
 	spawn_object = /obj/item/flame/lighter
 	},
@@ -20087,7 +20079,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 8;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -20541,7 +20533,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "acute1";
-	name = "EMT Storage Privacy Shutters";
+	name = "EMT Storage Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/sleeper)
@@ -20597,12 +20589,10 @@
 	},
 /obj/structure/window/reinforced/tinted,
 /obj/structure/window/reinforced/tinted{
-	dir = 4;
-	icon_state = "twindow"
+	dir = 4
 	},
 /obj/structure/window/reinforced/tinted{
-	dir = 8;
-	icon_state = "twindow"
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/exodus/chapel/main)
@@ -20799,7 +20789,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "cmooffice";
-	name = "CMO Office Privacy Shutters";
+	name = "CMO Office Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay3)
@@ -20814,7 +20804,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "cmooffice";
-	name = "CMO Office Privacy Shutters";
+	name = "CMO Office Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay)
@@ -20823,7 +20813,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "cmooffice";
-	name = "CMO Office Privacy Shutters";
+	name = "CMO Office Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay2)
@@ -20902,7 +20892,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 8;
 	id_tag = "cmooffice";
-	name = "CMO Office Privacy Shutters";
+	name = "CMO Office Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay)
@@ -20951,7 +20941,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "cmooffice";
-	name = "CMO Office Privacy Shutters";
+	name = "CMO Office Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay2)
@@ -20960,7 +20950,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 0;
 	id_tag = "staffroom";
-	name = "Staff Room Privacy Shutters";
+	name = "Staff Room Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/cryo)
@@ -21045,7 +21035,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 8;
 	id_tag = "staffroom";
-	name = "Staff Room Privacy Shutters";
+	name = "Staff Room Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay2)
@@ -21305,7 +21295,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced{
@@ -21321,7 +21311,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -21581,7 +21571,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "cmooffice";
-	name = "CMO Office Privacy Shutters";
+	name = "CMO Office Privacy Shutters"
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
@@ -21591,7 +21581,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "cmooffice";
-	name = "CMO Office Privacy Shutters";
+	name = "CMO Office Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay4)
@@ -21711,7 +21701,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "misclab";
-	name = "misclab";
+	name = "misclab"
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -21721,7 +21711,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "misclab";
-	name = "misclab";
+	name = "misclab"
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -21771,7 +21761,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "scanhideside";
-	name = "Diagnostics Room Privacy Shutters";
+	name = "Diagnostics Room Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay4)
@@ -22925,7 +22915,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
@@ -22935,7 +22925,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
@@ -22972,7 +22962,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
@@ -23161,7 +23151,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -23174,7 +23164,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/machinery/door/airlock/research{
 	name = "Toxins Launch Room Access"
@@ -23269,7 +23259,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/machinery/door/airlock/research{
 	name = "Toxins Launch Room"
@@ -23434,7 +23424,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "chemcounter";
-	name = "Pharmacy Counter Shutters";
+	name = "Pharmacy Counter Shutters"
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/westright{
@@ -23714,7 +23704,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology/xenoflora_storage)
@@ -24071,7 +24061,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology/xenoflora)
@@ -24288,7 +24278,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "surgeryobs";
-	name = "Operating Theatre Privacy Shutters";
+	name = "Operating Theatre Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/surgeryobs)
@@ -25345,7 +25335,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research/xenobiology)
@@ -25404,7 +25394,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "surgeryobs";
-	name = "Operating Theatre Privacy Shutters";
+	name = "Operating Theatre Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/surgery)
@@ -25518,7 +25508,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 8;
 	id_tag = "surgeryobs2";
-	name = "Operating Theatre Privacy Shutters";
+	name = "Operating Theatre Privacy Shutters"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/surgery2)
@@ -27156,7 +27146,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio3";
-	name = "Containment Blast Doors";
+	name = "Containment Blast Doors"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -29590,7 +29580,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "medbayquar";
-	name = "Medbay Emergency Quarantine Shutters";
+	name = "Medbay Emergency Quarantine Shutters"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -29616,7 +29606,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "medbayquar";
-	name = "Medbay Emergency Quarantine Shutters";
+	name = "Medbay Emergency Quarantine Shutters"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -30219,7 +30209,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio3";
-	name = "Containment Blast Doors";
+	name = "Containment Blast Doors"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -30678,7 +30668,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio2";
-	name = "Containment Blast Doors";
+	name = "Containment Blast Doors"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -32015,7 +32005,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio2";
-	name = "Containment Blast Doors";
+	name = "Containment Blast Doors"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -32678,7 +32668,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio1";
-	name = "Containment Blast Doors";
+	name = "Containment Blast Doors"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -32987,7 +32977,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio1";
-	name = "xenobio1";
+	name = "xenobio1"
 	},
 /obj/structure/cable/green{
 	icon_state = "0-4"
@@ -34631,7 +34621,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "medbayrecquar";
-	name = "Medbay Emergency Quarantine Shutters";
+	name = "Medbay Emergency Quarantine Shutters"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -34645,7 +34635,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "medbayrecquar";
-	name = "Medbay Emergency Quarantine Shutters";
+	name = "Medbay Emergency Quarantine Shutters"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -34712,7 +34702,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "medbayrecquar";
-	name = "Medbay Emergency Quarantine Shutters";
+	name = "Medbay Emergency Quarantine Shutters"
 	},
 /obj/structure/cable/green{
 	icon_state = "2-8"
@@ -34724,7 +34714,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "medbayrecquar";
-	name = "Medbay Emergency Quarantine Shutters";
+	name = "Medbay Emergency Quarantine Shutters"
 	},
 /obj/structure/cable/green{
 	icon_state = "4-8"
@@ -34836,7 +34826,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -34959,7 +34949,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio4";
-	name = "xenobio4";
+	name = "xenobio4"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
@@ -34968,7 +34958,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio4";
-	name = "xenobio4";
+	name = "xenobio4"
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
@@ -34993,7 +34983,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio5";
-	name = "xenobio5";
+	name = "xenobio5"
 	},
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green,
@@ -35004,7 +34994,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio5";
-	name = "xenobio5";
+	name = "xenobio5"
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
@@ -35091,7 +35081,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio6";
-	name = "xenobio6";
+	name = "xenobio6"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
@@ -35122,7 +35112,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio6";
-	name = "xenobio6";
+	name = "xenobio6"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
@@ -35190,7 +35180,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
@@ -37335,7 +37325,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "EngineBlast";
-	name = "EngineBlast";
+	name = "EngineBlast"
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -37473,7 +37463,7 @@
 "bBb" = (
 /obj/machinery/door/blast/regular/open{
 	id_tag = "EngineBlast";
-	name = "Engine Monitoring Room Blast Doors";
+	name = "Engine Monitoring Room Blast Doors"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -38023,7 +38013,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "researchlockdown";
-	name = "researchlockdown";
+	name = "researchlockdown"
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -5;
@@ -39287,7 +39277,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 8;
 	id_tag = "medbayquar";
-	name = "Medbay Emergency Quarantine Shutters";
+	name = "Medbay Emergency Quarantine Shutters"
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading{
@@ -40664,7 +40654,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology/xenoflora)
@@ -41050,7 +41040,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -41113,7 +41103,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "acute1";
-	name = "EMT Storage Privacy Shutters";
+	name = "EMT Storage Privacy Shutters"
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
@@ -41125,7 +41115,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "acute1";
-	name = "EMT Storage Privacy Shutters";
+	name = "EMT Storage Privacy Shutters"
 	},
 /obj/machinery/light_switch{
 	pixel_x = 22
@@ -43982,7 +43972,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "acutesep";
-	name = "Acute Separation Shutters";
+	name = "Acute Separation Shutters"
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/corner/paleblue{
@@ -45497,7 +45487,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "acute2";
-	name = "Acute Privacy Shutters";
+	name = "Acute Privacy Shutters"
 	},
 /obj/effect/floor_decal/corner/pink{
 	dir = 9
@@ -46672,7 +46662,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "scanhide";
-	name = "Diagnostics Room Separation Shutters";
+	name = "Diagnostics Room Separation Shutters"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/medical/sleeper)
@@ -46687,7 +46677,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "scanhide";
-	name = "Diagnostics Room Separation Shutters";
+	name = "Diagnostics Room Separation Shutters"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -46702,7 +46692,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 2;
 	id_tag = "scanhide";
-	name = "Diagnostics Room Separation Shutters";
+	name = "Diagnostics Room Separation Shutters"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -46928,7 +46918,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "misclab";
-	name = "misclab";
+	name = "misclab"
 	},
 /obj/machinery/door/window/southright{
 	name = "Test Chamber"
@@ -46960,7 +46950,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "misclab";
-	name = "misclab";
+	name = "misclab"
 	},
 /obj/machinery/door/window/southleft{
 	name = "Test Chamber"
@@ -47976,7 +47966,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "scanhideside";
-	name = "Diagnostics Room Privacy Shutters";
+	name = "Diagnostics Room Privacy Shutters"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -48572,7 +48562,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "scanhideside";
-	name = "Diagnostics Room Privacy Shutters";
+	name = "Diagnostics Room Privacy Shutters"
 	},
 /obj/structure/cable/green{
 	icon_state = "4-8"
@@ -49529,7 +49519,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "scanhideside";
-	name = "Diagnostics Room Privacy Shutters";
+	name = "Diagnostics Room Privacy Shutters"
 	},
 /obj/effect/floor_decal/corner/pink{
 	dir = 9
@@ -50805,7 +50795,6 @@
 /area/exodus/medical/patient_wing)
 "cbW" = (
 /obj/structure/closet/crate{
-	icon_state = "crateopen";
 	name = "Grenade Crate";
 	opened = 1
 	},
@@ -50994,7 +50983,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
@@ -51012,7 +51001,7 @@
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
 	id_tag = "hop_office_desk";
-	name = "HoP Office Privacy Shutters";
+	name = "HoP Office Privacy Shutters"
 	},
 /obj/structure/cable/green{
 	icon_state = "4-8"
@@ -53768,7 +53757,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
@@ -56977,7 +56966,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "virologyquar";
-	name = "virologyquar";
+	name = "virologyquar"
 	},
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -56991,7 +56980,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "virologyquar";
-	name = "virologyquar";
+	name = "virologyquar"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -57018,7 +57007,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
@@ -57035,7 +57024,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio3";
-	name = "xenobio3";
+	name = "xenobio3"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/window/westright{
@@ -57323,7 +57312,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "Biohazard";
-	name = "Biohazard";
+	name = "Biohazard"
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -57650,7 +57639,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "EngineRadiatorViewport";
-	name = "EngineRadiatorViewport";
+	name = "EngineRadiatorViewport"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
@@ -58308,7 +58297,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "EngineRadiatorViewport";
-	name = "EngineRadiatorViewport";
+	name = "EngineRadiatorViewport"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
@@ -58642,7 +58631,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "EngineRadiatorViewport";
-	name = "EngineRadiatorViewport";
+	name = "EngineRadiatorViewport"
 	},
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
@@ -58651,7 +58640,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "EngineRadiatorViewport";
-	name = "EngineRadiatorViewport";
+	name = "EngineRadiatorViewport"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /turf/simulated/floor/plating,
@@ -58694,7 +58683,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio2";
-	name = "xenobio2";
+	name = "xenobio2"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/window/westright{
@@ -59915,7 +59904,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "xenobio1";
-	name = "xenobio1";
+	name = "xenobio1"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/window/westright{
@@ -60561,7 +60550,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio4";
-	name = "xenobio4";
+	name = "xenobio4"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/reinforced,
@@ -60760,7 +60749,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio5";
-	name = "xenobio5";
+	name = "xenobio5"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/reinforced,
@@ -61406,7 +61395,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "xenobio6";
-	name = "xenobio6";
+	name = "xenobio6"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/reinforced,
