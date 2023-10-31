@@ -451,7 +451,7 @@
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
 	icon = 'icons/clothing/mask/smokables/cigarette_butt.dmi'
-	icon_state = "butt"
+	icon_state = ICON_STATE_WORLD
 	randpixel = 10
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
@@ -465,7 +465,7 @@
 /obj/item/trash/cigbutt/cigarbutt
 	name = "cigar butt"
 	desc = "A manky old cigar butt."
-	icon = 'icons/clothing/mask/smokables/cigar.dmi'
+	icon = 'icons/clothing/mask/smokables/cigar_butt.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/attackby(var/obj/item/W, var/mob/user)
 	..()

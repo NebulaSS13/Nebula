@@ -2477,7 +2477,6 @@
 "eY" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescuebridge";
 	name = "Window Shutters Control";
 	pixel_y = -4
@@ -2574,7 +2573,6 @@
 /area/map_template/rescue_base/start)
 "fl" = (
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescuedock";
 	name = "Window Shutters Control";
 	pixel_x = 24;
@@ -2866,7 +2864,6 @@
 /obj/item/tank/jetpack/carbondioxide,
 /obj/item/tank/jetpack/carbondioxide,
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescueeva";
 	name = "Window Shutters Control";
 	pixel_x = 24;
@@ -3138,7 +3135,6 @@
 	},
 /obj/structure/iv_drip,
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescueinfirm";
 	name = "Window Shutters Control";
 	pixel_x = 24;
