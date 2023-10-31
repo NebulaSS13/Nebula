@@ -2,7 +2,7 @@
 	name = "screwdriver"
 	desc = "Your archetypal flathead screwdriver, with a nice, heavy polymer handle."
 	icon = 'icons/obj/items/tool/screwdriver.dmi'
-	icon_state = "screwdriver_preview"
+	icon_state = "preview"
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel

@@ -434,7 +434,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 
 //mapper type
 /obj/structure/tape_barricade/police
-	icon_state    = "tape_h_0"
+	icon_state    = "tape_door_0"
 	color         = COLOR_RED
 	tape_template = /decl/barricade_tape_template/police
 
@@ -453,7 +453,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 
 //mapper type
 /obj/structure/tape_barricade/engineering
-	icon_state    = "tape_h_0"
+	icon_state    = "stripetape_door_0"
 	color         = COLOR_ORANGE
 	tape_template = /decl/barricade_tape_template/engineering
 
