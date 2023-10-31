@@ -15,9 +15,9 @@
 	can_open_manually = FALSE
 
 	// Icon states for different shutter types. Simply change this instead of rewriting the update_icon proc.
-	var/icon_state_open = null
+	icon_state_open = null
+	icon_state_closed = null
 	var/icon_state_opening = null
-	var/icon_state_closed = null
 	var/icon_state_closing = null
 
 	var/icon_state_open_broken = null
@@ -36,7 +36,6 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
-	var/begins_closed = TRUE
 	var/decl/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
@@ -55,15 +54,8 @@
 	base_type = /obj/machinery/door/blast
 
 /obj/machinery/door/blast/Initialize()
-	. = ..()
-
-	if(!begins_closed)
-		icon_state = icon_state_open
-		set_density(0)
-		set_opacity(0)
-		layer = open_layer
-
 	implicit_material = GET_DECL(/decl/material/solid/metal/plasteel)
+	. = ..()
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
