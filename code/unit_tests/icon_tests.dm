@@ -16,6 +16,13 @@
 		var/turf/turf_prototype = turf_type
 		if(TYPE_IS_ABSTRACT(turf_prototype))
 			continue
+		var/excepted = FALSE
+		for(var/exception_path in except_types)
+			if(ispath(turf_type, exception_path))
+				excepted = TRUE
+				break
+		if(excepted)
+			continue
 		var/test_icon_state = initial(turf_prototype.icon_state)
 		var/test_icon = initial(turf_prototype.icon)
 		if(isnull(test_icon_state))

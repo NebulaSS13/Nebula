@@ -19,8 +19,13 @@
 	stripe_color = COLOR_DEEP_SKY_BLUE
 
 /obj/machinery/door/airlock/medical/open
-	begins_closed = FALSE
 	icon_state = "open"
+
+/obj/machinery/door/airlock/medical/open/Initialize()
+	set_density(FALSE)
+	set_opacity(FALSE)
+	layer = open_layer
+	return ..()
 
 /obj/machinery/door/airlock/virology
 	door_color = COLOR_WHITE

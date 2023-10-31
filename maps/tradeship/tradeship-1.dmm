@@ -2608,7 +2608,6 @@
 	backwards = 8;
 	dir = 9;
 	forwards = 2;
-	icon_state = "conveyor1";
 	id_tag = "con";
 	movedir = 6
 	},
