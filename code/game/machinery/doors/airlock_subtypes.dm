@@ -20,12 +20,7 @@
 
 /obj/machinery/door/airlock/medical/open
 	icon_state = "open"
-
-/obj/machinery/door/airlock/medical/open/Initialize()
-	set_density(FALSE)
-	set_opacity(FALSE)
-	layer = open_layer
-	return ..()
+	begins_closed = FALSE
 
 /obj/machinery/door/airlock/virology
 	door_color = COLOR_WHITE
@@ -153,6 +148,10 @@
 		/decl/stock_part_preset/radio/receiver/airlock/external_air = 1,
 		/decl/stock_part_preset/radio/event_transmitter/airlock/external_air = 1
 	)
+
+/obj/machinery/door/airlock/external/open
+	icon_state = "open"
+	begins_closed = FALSE
 
 /obj/machinery/door/airlock/external/get_auto_access()
 	. = ..()

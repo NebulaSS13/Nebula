@@ -50,6 +50,9 @@
 	atmos_canpass = CANPASS_PROC
 
 	var/set_dir_on_update = TRUE
+	var/begins_closed     = TRUE
+	var/icon_state_open   = "door0"
+	var/icon_state_closed = "door1"
 
 /obj/machinery/door/proc/can_operate(var/mob/user)
 	. = istype(user) && !user.restrained() && (!issmall(user) || ishuman(user) || issilicon(user) || isbot(user))
@@ -69,6 +72,13 @@
 	if(!populate_parts)
 		inherit_from_assembly(assembly)
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+
+	if(!begins_closed)
+		icon_state = icon_state_open
+		set_density(FALSE)
+		set_opacity(FALSE)
+		layer = open_layer
+
 	..()
 	. = INITIALIZE_HINT_LATELOAD
 
@@ -379,9 +389,9 @@
 
 /obj/machinery/door/on_update_icon()
 	if(density)
-		icon_state = "door1"
+		icon_state = icon_state_closed
 	else
-		icon_state = "door0"
+		icon_state = icon_state_open
 
 	SSradiation.resistance_cache.Remove(get_turf(src))
 
@@ -412,7 +422,7 @@
 	operating = 1
 
 	do_animate("opening")
-	icon_state = "door0"
+	icon_state = icon_state_open
 	set_opacity(FALSE)
 
 	sleep(0.5 SECONDS)
