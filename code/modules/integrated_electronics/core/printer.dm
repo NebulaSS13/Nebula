@@ -218,14 +218,8 @@
 		if(!build_type || !ispath(build_type))
 			return TRUE
 
-		var/list/cost
-		if(ispath(build_type, /obj/item/electronic_assembly))
-			var/obj/item/electronic_assembly/E = SScircuit.cached_assemblies[build_type]
-			cost = E.matter
-		else if(ispath(build_type, /obj/item/integrated_circuit))
-			var/obj/item/integrated_circuit/IC = SScircuit.cached_components[build_type]
-			cost = IC.matter
-		else if(!(build_type in SScircuit.circuit_fabricator_recipe_list["Tools"]))
+		var/list/cost = atom_info_repository.get_matter_for(build_type)
+		if(!ispath(build_type, /obj/item/electronic_assembly) && !ispath(build_type, /obj/item/integrated_circuit) && !(build_type in SScircuit.circuit_fabricator_recipe_list["Tools"]))
 			return
 
 		if(!debug && !subtract_material_costs(cost, usr))
