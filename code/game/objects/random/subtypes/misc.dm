@@ -238,7 +238,7 @@
 /obj/random/smokes
 	name = "random smokeable"
 	desc = "This is a random smokeable item."
-	icon = 'icons/obj/cigarettes.dmi'
+	icon = 'icons/obj/items/storage/cigpack/acme.dmi'
 	icon_state = "Bpacket"
 
 /obj/random/smokes/spawn_choices()
@@ -318,7 +318,7 @@
 	name = "random loot"
 	desc = "This is some random loot."
 	icon = 'icons/obj/items/gift_wrapped.dmi'
-	icon_state = "gift3"
+	icon_state = "gift_3"
 
 /obj/random/loot/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -370,7 +370,7 @@
 	name = "random vending machine"
 	desc = "This is a randomly selected vending machine."
 	icon = 'icons/obj/vending.dmi'
-	icon_state = ""
+	icon_state = "coffee-hellfire"
 
 /obj/random/vendor/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -384,7 +384,7 @@
 	name = "random lipstick"
 	desc = "This is a tube of lipstick."
 	icon = 'icons/obj/items/lipstick.dmi'
-	icon_state = "lipstick_closed"
+	icon_state = "lipstick_0"
 
 /obj/random/lipstick/spawn_choices()
 	var/static/list/spawnable_choices = list(
