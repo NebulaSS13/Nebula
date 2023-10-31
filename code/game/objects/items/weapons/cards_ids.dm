@@ -386,6 +386,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/captains_spare
 	name = "captain's spare ID"
 	desc = "The spare ID of the High Lord himself."
+	icon_state = ICON_STATE_WORLD
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"
