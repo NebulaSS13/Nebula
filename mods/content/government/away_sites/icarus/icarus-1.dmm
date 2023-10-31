@@ -1973,7 +1973,6 @@
 "gu" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/door/firedoor,

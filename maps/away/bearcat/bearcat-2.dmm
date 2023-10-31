@@ -4,25 +4,19 @@
 /area/space)
 "ab" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/command/bridge)
 "ac" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -30,13 +24,10 @@
 "ad" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/command/bridge)
@@ -207,13 +198,10 @@
 /area/ship/scrap/command/captain)
 "aD" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -324,12 +312,9 @@
 /area/ship/scrap/command/captain)
 "aN" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -418,12 +403,9 @@
 /area/ship/scrap/command/captain)
 "aW" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -503,13 +485,10 @@
 /area/ship/scrap/command/captain)
 "bd" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -532,13 +511,10 @@
 /area/space)
 "bh" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -586,12 +562,9 @@
 /area/ship/scrap/dock)
 "bm" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/usedup,
 /area/space)
@@ -731,12 +704,9 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bx" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/button/access/interior{
 	id_tag = "bearcat_dock_port";
@@ -834,12 +804,9 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bF" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/button/access/interior{
 	id_tag = "bearcat_starboard_dock";
@@ -908,12 +875,9 @@
 /area/ship/scrap/dock)
 "bK" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -925,12 +889,9 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/portable_atmospherics/canister/empty/air,
 /obj/structure/window/reinforced{
@@ -991,12 +952,9 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/portable_atmospherics/canister/empty/air,
 /obj/structure/window/reinforced{
@@ -1007,12 +965,9 @@
 "bS" = (
 /obj/structure/lattice,
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/usedup,
 /area/space)
@@ -1028,12 +983,9 @@
 /area/ship/scrap/dock)
 "bV" = (
 /obj/structure/lattice,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/usedup,
@@ -1051,12 +1003,9 @@
 /turf/space,
 /area/space)
 "bZ" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/usedup,
@@ -1065,23 +1014,17 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/hallway/port)
 "cc" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/dock)
 "ce" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/usedup,
@@ -1165,13 +1108,10 @@
 /area/ship/scrap/crew/toilets)
 "cs" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -1239,13 +1179,10 @@
 /area/ship/scrap/crew/cryo)
 "cC" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/usedup,
@@ -1377,12 +1314,9 @@
 /area/ship/scrap/crew/cryo)
 "cQ" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -1572,12 +1506,9 @@
 /area/ship/scrap/crew/cryo)
 "dh" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -1928,12 +1859,9 @@
 /area/ship/scrap/maintenance/engine/port)
 "dS" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -2081,12 +2009,9 @@
 /area/ship/scrap/crew/medbay)
 "ei" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
@@ -2331,12 +2256,9 @@
 /area/ship/scrap/crew/medbay)
 "ez" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
@@ -2930,12 +2852,9 @@
 /turf/simulated/wall,
 /area/ship/scrap/maintenance/engine/starboard)
 "fE" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/port)
@@ -2948,12 +2867,9 @@
 /area/space)
 "fH" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -3072,12 +2988,9 @@
 /area/ship/scrap/unused)
 "fT" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -3338,12 +3251,9 @@
 /area/space)
 "gy" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
@@ -4300,12 +4210,9 @@
 /area/ship/scrap/maintenance/power)
 "ic" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/usedup,
@@ -4366,11 +4273,8 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/engine/aft)
 "ik" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "engwindow";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4594,9 +4498,7 @@
 /obj/machinery/door/window/northleft,
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "radaway";
-	opacity = FALSE
 	},
 /obj/structure/sign/warning/radioactive{
 	pixel_x = -32
@@ -4749,9 +4651,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "radaway";
-	opacity = FALSE
 	},
 /obj/machinery/meter/turf,
 /turf/simulated/floor/usedup,
@@ -5078,12 +4978,9 @@
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jY" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/structure/sign/warning/hot_exhaust{
 	pixel_y = 32
@@ -5091,12 +4988,9 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jZ" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
@@ -5164,12 +5058,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/hallway/port)
 "oR" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/starboard)

@@ -2830,7 +2830,6 @@
 /obj/structure/table/reinforced,
 /obj/random/coin,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "SC BD"
 	},
 /turf/simulated/floor/tiled/airless,

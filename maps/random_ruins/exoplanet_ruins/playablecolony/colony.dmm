@@ -6331,7 +6331,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
@@ -6386,7 +6385,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -6498,7 +6496,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
@@ -7230,7 +7227,6 @@
 	dir = 8
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,

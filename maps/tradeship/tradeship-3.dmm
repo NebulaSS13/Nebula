@@ -5,13 +5,10 @@
 "ab" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
@@ -149,13 +146,10 @@
 /area/ship/trade/maintenance/solars)
 "au" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -304,13 +298,10 @@
 "aN" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/comms)
@@ -643,13 +634,10 @@
 "jv" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
@@ -699,12 +687,9 @@
 /area/ship/trade/bridge_unused)
 "ng" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -925,13 +910,10 @@
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/comms)
 "Db" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/airless,
 /area/ship/trade/bridge_unused)
@@ -1099,12 +1081,9 @@
 "PJ" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/command/bridge_upper)
@@ -1112,13 +1091,10 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/command/bridge_upper)
 "QK" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/airless,
 /area/ship/trade/comms)
@@ -1157,12 +1133,9 @@
 /area/ship/trade/comms)
 "SQ" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -1176,13 +1149,10 @@
 "Tx" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/comms)
@@ -1214,13 +1184,10 @@
 /area/ship/trade/maintenance/solars)
 "Vp" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-	opacity = FALSE
-	},
+3	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
