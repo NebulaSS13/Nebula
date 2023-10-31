@@ -137,6 +137,7 @@
 				total += map[TRANSLATE_COORD(x+1, y)] // x + blur_radius
 				next_map[TRANSLATE_COORD(x, y)] = round(total / 3) // should technically be 2*blur_radius+1
 		// now do the same in the x axis
+		map = next_map.Copy()
 		for(var/x = 1 to limit_x)
 			// see comments above
 			var/cellone = map[TRANSLATE_COORD(x, 1)]
