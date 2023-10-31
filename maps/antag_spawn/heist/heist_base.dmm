@@ -1002,7 +1002,6 @@
 /area/map_template/skipjack_station/start)
 "cx" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "raider_northwest_lock"
 	},
 /obj/machinery/shield_diffuser,
@@ -1176,7 +1175,6 @@
 /area/map_template/skipjack_station/start)
 "cS" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "raider_southwest_lock"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,

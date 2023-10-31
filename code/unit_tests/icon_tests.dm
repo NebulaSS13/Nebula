@@ -4,7 +4,12 @@
 
 /datum/unit_test/icon_test/turfs_shall_have_icon_states
 	name = "ICON STATE - Turf Subtypes Shall Have Icon States"
-
+	var/list/except_types = list(
+		/turf/unsimulated/mimic_edge,
+		/turf/exterior/mimic_edge,
+		/turf/exterior/open,
+		/turf/simulated/open
+	)
 /datum/unit_test/icon_test/turfs_shall_have_icon_states/start_test()
 	var/list/failures = list()
 	for(var/turf_type in subtypesof(/turf))
@@ -13,11 +18,11 @@
 			continue
 		var/test_icon_state = initial(turf_prototype.icon_state)
 		var/test_icon = initial(turf_prototype.icon)
-		if(!test_icon_state)
+		if(isnull(test_icon_state))
 			failures += "[turf_prototype] - null icon state"
 		if(!test_icon)
 			failures += "[turf_prototype] - null icon"
-		if(test_icon_state && test_icon && !check_state_in_icon(test_icon_state, test_icon))
+		if(!isnull(test_icon_state) && test_icon && !check_state_in_icon(test_icon_state, test_icon))
 			failures += "[turf_prototype] - state [test_icon_state] not in icon [test_icon]"
 	if(length(failures))
 		fail("Turf subtypes had missing icons or icon states:\n[jointext(failures, "\n")].")

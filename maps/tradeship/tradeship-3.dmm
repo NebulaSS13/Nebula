@@ -1187,7 +1187,7 @@
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
 	name = "External Blast Doors";
-3	},
+	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)

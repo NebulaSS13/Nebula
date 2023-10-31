@@ -186,7 +186,6 @@
 /area/casino/casino_maintenance)
 "aD" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "casino_dock_outer";
 	name = "Docking Port Airlock"
 	},
@@ -278,7 +277,6 @@
 "aU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "casino_dock_inner";
 	name = "Docking Port Airlock"
 	},
