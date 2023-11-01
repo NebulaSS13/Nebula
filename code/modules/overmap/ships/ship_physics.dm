@@ -37,8 +37,14 @@
 /obj/effect/overmap/visitable/ship/proc/recalculate_vessel_mass()
 	var/list/zones = list()
 	for(var/area/A in get_areas())
+
+		// Do not include space please
+		if(istype(A, world.area))
+			continue
+
 		for(var/turf/T in A)
-			if(T.is_open())
+
+			if(!T.simulated || T.is_open())
 				continue
 
 			. += DEFAULT_TURF_MASS

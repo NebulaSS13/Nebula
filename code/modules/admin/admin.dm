@@ -1144,7 +1144,7 @@ var/global/floorIsLava = 0
 	for(var/path in subtypesof(/atom))
 		var/atom/path_cast = path
 		if(TYPE_IS_SPAWNABLE(path_cast) && findtext(lowertext("[path]"), object))
-			matches += path
+			matches += "[path]" // We need to use a string because input() checks invisibility on types for Reasons:tm:.
 
 	if(matches.len==0)
 		return
@@ -1157,6 +1157,7 @@ var/global/floorIsLava = 0
 		if(!chosen)
 			return
 
+	chosen = text2path(chosen)
 	if(ispath(chosen,/turf))
 		var/turf/T = get_turf(usr.loc)
 		T.ChangeTurf(chosen)
