@@ -13,6 +13,19 @@
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	accessory_slot = ACCESSORY_SLOT_DECOR
 
+/obj/item/clothing/pants/kneepads
+	name = "kneepads"
+	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
+	icon = 'icons/clothing/accessories/armor/kneepads.dmi'
+	body_parts_covered = SLOT_LEGS
+	accessory_slot = ACCESSORY_SLOT_DECOR
+
+/obj/item/clothing/pants/legbrace
+	name = "legbrace"
+	desc = "A lightweight polymer frame meant to brace and hold someone's legs upright comfortably, protecting their bones from high levels of gravity."
+	icon = 'icons/clothing/accessories/legbrace.dmi'
+	body_parts_covered = SLOT_LEGS
+	accessory_slot = ACCESSORY_SLOT_DECOR
 
 /obj/item/clothing/pants/mustard
 	name = "mustard pants"
@@ -31,3 +44,4 @@
 	icon = 'icons/clothing/pants/mankini.dmi'
 	siemens_coefficient = 1
 	body_parts_covered = 0
+

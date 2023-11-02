@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/ministation/cargo
 	l_ear = /obj/item/radio/headset/headset_cargo
 	name = "Ministation - Job - Cargo technician"
-	uniform = /obj/item/clothing/jumpsuit/cargotech
+	pants = /obj/item/clothing/jumpsuit/cargotech
 	id_type = /obj/item/card/id/ministation/cargo
 	pda_type = /obj/item/modular_computer/pda/cargo
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/ore = 1)
@@ -14,7 +14,8 @@
 /decl/hierarchy/outfit/job/ministation/bartender
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Bartender"
-	uniform = /obj/item/clothing/pants/formal/black/outfit
+	pants = /obj/item/clothing/pants/formal/black
+	uniform = /obj/item/clothing/shirt/button
 	id_type = /obj/item/card/id/ministation/bartender
 	pda_type = /obj/item/modular_computer/pda
 	head = /obj/item/clothing/head/chefhat
@@ -22,14 +23,15 @@
 /decl/hierarchy/outfit/job/ministation/janitor
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Janitor"
-	uniform = /obj/item/clothing/jumpsuit/janitor
+	pants = /obj/item/clothing/jumpsuit/janitor
 	id_type = /obj/item/card/id/ministation/janitor
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/ministation/librarian
 	l_ear = /obj/item/radio/headset/headset_service
 	name = "Ministation - Job - Librarian"
-	uniform = /obj/item/clothing/pants/slacks/red/outfit
+	pants = /obj/item/clothing/pants/slacks/red
+	uniform = /obj/item/clothing/shirt/button/charcoal_jacket_navy_tie
 	id_type = /obj/item/card/id/ministation/librarian
 	pda_type = /obj/item/modular_computer/pda
 

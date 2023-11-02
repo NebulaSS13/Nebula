@@ -11,19 +11,20 @@
 
 /decl/hierarchy/outfit/tournament_gear/red
 	name = "Tournament - Red"
-	uniform = /obj/item/clothing/jumpsuit/red
+	pants = /obj/item/clothing/jumpsuit/red
 
 /decl/hierarchy/outfit/tournament_gear/green
 	name = "Tournament gear - Green"
-	uniform = /obj/item/clothing/jumpsuit/green
+	pants = /obj/item/clothing/jumpsuit/green
 
 /decl/hierarchy/outfit/tournament_gear/gangster
-	name = "Tournament gear - Gangster"
-	head = /obj/item/clothing/head/det
-	uniform = /obj/item/clothing/pants/slacks/outfit/detective
-	suit_store = /obj/item/clothing/suit/det_trench
-	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
-	hands = list(
+	name     = "Tournament gear - Gangster"
+	head     = /obj/item/clothing/head/det
+	pants    = /obj/item/clothing/pants/slacks
+	uniform  = /obj/item/clothing/shirt/button/blue_clip_tie
+	suit     = /obj/item/clothing/suit/det_trench
+	glasses  = /obj/item/clothing/glasses/thermal/plain/monocle
+	hands    = list(
 		/obj/item/knife/combat,
 		/obj/item/gun/projectile/revolver
 	)
@@ -32,7 +33,8 @@
 /decl/hierarchy/outfit/tournament_gear/chef
 	name = "Tournament gear - Chef"
 	head = /obj/item/clothing/head/chefhat
-	uniform = /obj/item/clothing/pants/slacks/outfit_chef
+	pants = /obj/item/clothing/pants/slacks/white
+	uniform = /obj/item/clothing/shirt/button
 	suit = /obj/item/clothing/suit/chef
 	hands = list(
 		/obj/item/knife/combat,
@@ -43,7 +45,7 @@
 
 /decl/hierarchy/outfit/tournament_gear/janitor
 	name = "Tournament gear - Janitor"
-	uniform = /obj/item/clothing/jumpsuit/janitor
+	pants = /obj/item/clothing/jumpsuit/janitor
 	back = /obj/item/backpack
 	hands = list(
 		/obj/item/mop,

@@ -353,28 +353,29 @@ var/global/list/dexterity_levels = list(
 #define HO_DAMAGE_LAYER     3
 #define HO_SURGERY_LAYER    4 //bs12 specific.
 #define HO_UNDERWEAR_LAYER  5
-#define HO_UNIFORM_LAYER    6
-#define HO_ID_LAYER         7
-#define HO_SHOES_LAYER      8
-#define HO_GLOVES_LAYER     9
-#define HO_BELT_LAYER       10
-#define HO_SUIT_LAYER       11
-#define HO_GLASSES_LAYER    12
-#define HO_BELT_LAYER_ALT   13
-#define HO_SUIT_STORE_LAYER 14
-#define HO_BACK_LAYER       15
-#define HO_TAIL_LAYER       16 //bs12 specific. this hack is probably gonna come back to haunt me
-#define HO_HAIR_LAYER       17 //TODO: make part of head layer?
-#define HO_GOGGLES_LAYER    18
-#define HO_L_EAR_LAYER      19
-#define HO_R_EAR_LAYER      20
-#define HO_FACEMASK_LAYER   21
-#define HO_HEAD_LAYER       22
-#define HO_COLLAR_LAYER     23
-#define HO_HANDCUFF_LAYER   24
-#define HO_INHAND_LAYER     25
-#define HO_FIRE_LAYER       26 //If you're on fire
-#define TOTAL_OVER_LAYERS   26
+#define HO_LOWER_BODY_LAYER 6
+#define HO_UPPER_BODY_LAYER 7
+#define HO_ID_LAYER         8
+#define HO_SHOES_LAYER      9
+#define HO_GLOVES_LAYER     10
+#define HO_BELT_LAYER       11
+#define HO_SUIT_LAYER       12
+#define HO_GLASSES_LAYER    13
+#define HO_BELT_LAYER_ALT   14
+#define HO_SUIT_STORE_LAYER 15
+#define HO_BACK_LAYER       16
+#define HO_TAIL_LAYER       17 //bs12 specific. this hack is probably gonna come back to haunt me
+#define HO_HAIR_LAYER       18 //TODO: make part of head layer?
+#define HO_GOGGLES_LAYER    19
+#define HO_L_EAR_LAYER      20
+#define HO_R_EAR_LAYER      21
+#define HO_FACEMASK_LAYER   22
+#define HO_HEAD_LAYER       23
+#define HO_COLLAR_LAYER     24
+#define HO_HANDCUFF_LAYER   25
+#define HO_INHAND_LAYER     26
+#define HO_FIRE_LAYER       27 //If you're on fire
+#define TOTAL_OVER_LAYERS   27
 //////////////////////////////////
 
 // Underlay defines; vestigal implementation currently.

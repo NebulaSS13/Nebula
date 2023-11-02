@@ -9,7 +9,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack_contents = list(/obj/item/handcuffs = 1)
 	name = "Ministation - Job - Security Officer"
-	uniform = /obj/item/clothing/jumpsuit/security
+	pants = /obj/item/clothing/jumpsuit/security
 	l_pocket = /obj/item/flash
 	r_pocket = /obj/item/handcuffs
 	id_type = /obj/item/card/id/ministation/security
@@ -22,7 +22,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack_contents = list(/obj/item/handcuffs = 1)
 	name = "Ministation - Job - Head of Security"
-	uniform = /obj/item/clothing/jumpsuit/security
+	pants = /obj/item/clothing/jumpsuit/security
 	l_pocket = /obj/item/flash
 	r_pocket = /obj/item/handcuffs
 	id_type = /obj/item/card/id/ministation/security
@@ -45,19 +45,20 @@
 	. = ..()
 
 /decl/hierarchy/outfit/job/ministation/detective
-	name = "Ministation - Job - Detective"
-	head = /obj/item/clothing/head/det
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
-	l_ear = /obj/item/radio/headset/headset_sec
-	uniform = /obj/item/clothing/pants/slacks/outfit/detective
-	suit = /obj/item/clothing/suit/det_trench
-	l_pocket = /obj/item/flame/fuelled/lighter/zippo
-	shoes = /obj/item/clothing/shoes/dress
-	hands = list(/obj/item/briefcase/crimekit)
-	id_type = /obj/item/card/id/ministation/security
-	pda_type = /obj/item/modular_computer/pda/forensics
+	name              = "Ministation - Job - Detective"
+	head              = /obj/item/clothing/head/det
+	glasses           = /obj/item/clothing/glasses/sunglasses/sechud
+	l_ear             = /obj/item/radio/headset/headset_sec
+	pants             = /obj/item/clothing/pants/slacks
+	uniform           = /obj/item/clothing/shirt/button/blue_clip_tie
+	suit              = /obj/item/clothing/suit/det_trench
+	l_pocket          = /obj/item/flame/fuelled/lighter/zippo
+	shoes             = /obj/item/clothing/shoes/dress
+	hands             = list(/obj/item/briefcase/crimekit)
+	id_type           = /obj/item/card/id/ministation/security
+	pda_type          = /obj/item/modular_computer/pda/forensics
 	backpack_contents = list(/obj/item/box/evidence = 1)
-	gloves = /obj/item/clothing/gloves/thick
+	gloves            = /obj/item/clothing/gloves/thick
 
 /decl/hierarchy/outfit/job/ministation/detective/Initialize()
 	. = ..()

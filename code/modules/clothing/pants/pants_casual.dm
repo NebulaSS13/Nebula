@@ -18,11 +18,6 @@
 	desc = "Only for those who can pull it off."
 	icon = 'icons/clothing/pants/pants_jeans_black.dmi'
 
-/obj/item/clothing/pants/casual/blackjeans/outfit
-	starting_accessories = list(
-		/obj/item/clothing/shirt/tee/black
-	)
-
 /obj/item/clothing/pants/casual/greyjeans
 	name = "grey jeans"
 	desc = "Only for those who can pull it off."
@@ -58,21 +53,6 @@
 	name = "camo pants"
 	desc = "A pair of woodland camouflage pants. Probably not the best choice for space."
 	icon = 'icons/clothing/pants/pants_camo.dmi'
-
-/obj/item/clothing/pants/casual/camo/outfit
-	starting_accessories = list(
-		/obj/item/clothing/shirt/syndicate
-	)
-
-/obj/item/clothing/pants/casual/camo/outfit_combat
-	starting_accessories = list(
-		/obj/item/clothing/shirt/syndicate/combat
-	)
-
-/obj/item/clothing/pants/casual/camo/outfit_tacticool
-	starting_accessories = list(
-		/obj/item/clothing/shirt/syndicate/tacticool
-	)
 
 /obj/item/clothing/pants/baggy
 	name = "baggy pants"

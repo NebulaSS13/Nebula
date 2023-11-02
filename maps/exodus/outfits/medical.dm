@@ -12,7 +12,7 @@
 /decl/hierarchy/outfit/job/medical/cmo
 	name = "Job - Chief Medical Officer"
 	l_ear = /obj/item/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/jumpsuit/chief_medical_officer
+	pants = /obj/item/clothing/jumpsuit/chief_medical_officer
 	suit = /obj/item/clothing/suit/toggle/labcoat/cmo
 	shoes = /obj/item/clothing/shoes/color/brown
 	hands = list(/obj/item/firstaid/adv)
@@ -22,7 +22,7 @@
 
 /decl/hierarchy/outfit/job/medical/doctor
 	name = "Job - Medical Doctor"
-	uniform = /obj/item/clothing/jumpsuit/medical
+	pants = /obj/item/clothing/jumpsuit/medical
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	hands = list(/obj/item/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
@@ -33,13 +33,14 @@
 	suit = /obj/item/clothing/suit/jacket/first_responder
 
 /decl/hierarchy/outfit/job/medical/doctor/surgeon
-	name = "Job - Surgeon"
-	uniform = /obj/item/clothing/pants/scrubs/blue/outfit
-	head = /obj/item/clothing/head/surgery/blue
+	name    = "Job - Surgeon"
+	pants   = /obj/item/clothing/pants/scrubs/blue
+	uniform = /obj/item/clothing/shirt/scrubs/blue
+	head    = /obj/item/clothing/head/surgery/blue
 
 /decl/hierarchy/outfit/job/medical/doctor/virologist
 	name = "Job - Virologist"
-	uniform = /obj/item/clothing/jumpsuit/virologist
+	pants = /obj/item/clothing/jumpsuit/virologist
 	suit = /obj/item/clothing/suit/toggle/labcoat/virologist
 	mask = /obj/item/clothing/mask/surgical
 
@@ -48,13 +49,14 @@
 	BACKPACK_OVERRIDE_VIROLOGY
 
 /decl/hierarchy/outfit/job/medical/doctor/nurse
-	name = "Job - Nurse"
-	suit = null
-	uniform = /obj/item/clothing/pants/scrubs/purple/outfit
-	head = null
+	name    = "Job - Nurse"
+	suit    = null
+	pants   = /obj/item/clothing/pants/scrubs/purple
+	uniform = /obj/item/clothing/shirt/scrubs/purple
+	head    = null
 /decl/hierarchy/outfit/job/medical/chemist
 	name = "Job - Chemist"
-	uniform = /obj/item/clothing/jumpsuit/chemist
+	pants = /obj/item/clothing/jumpsuit/chemist
 	suit = /obj/item/clothing/suit/toggle/labcoat/chemist
 	id_type = /obj/item/card/id/medical
 	pda_type = /obj/item/modular_computer/pda/medical
@@ -65,7 +67,7 @@
 
 /decl/hierarchy/outfit/job/medical/psychiatrist
 	name = "Job - Psychiatrist"
-	uniform = /obj/item/clothing/jumpsuit/psych
+	pants = /obj/item/clothing/jumpsuit/psych
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/dress
 	id_type = /obj/item/card/id/medical

@@ -3,7 +3,7 @@
 	shoes = /obj/item/clothing/shoes/color/black
 	head = /obj/item/clothing/head/helmet/space
 	suit = /obj/item/clothing/suit/space
-	uniform = /obj/item/clothing/jumpsuit/grey
+	pants = /obj/item/clothing/jumpsuit/grey
 	back = /obj/item/tank/jetpack/oxygen
 	mask = /obj/item/clothing/mask/breath
 	outfit_flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT

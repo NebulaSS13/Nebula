@@ -13,8 +13,3 @@
 
 /obj/item/clothing/shirt/flannel/red
 	paint_color = "#bd2b20"
-
-/obj/item/clothing/shirt/flannel/red/outfit
-	starting_accessories = list(
-
-	)

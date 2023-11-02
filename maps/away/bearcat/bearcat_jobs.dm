@@ -29,21 +29,12 @@
 	id_type = /obj/item/card/id/bearcat
 
 /decl/hierarchy/outfit/job/bearcat/captain
-	name = "Bearcat - Job - FTU Captain"
-	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
-	shoes = /obj/item/clothing/shoes/color/black
+	name     = "Bearcat - Job - FTU Captain"
+	pants    = /obj/item/clothing/pants/baggy/casual/classicjeans
+	uniform  = /obj/item/clothing/shirt/hawaii/random
+	shoes    = /obj/item/clothing/shoes/color/black
 	pda_type = /obj/item/modular_computer/pda/heads/captain
-	id_type = /obj/item/card/id/bearcat_captain
-
-/decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
-	..()
-	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
-	if(uniform)
-		var/obj/item/clothing/shirt/hawaii/random/eyegore = new()
-		if(uniform.can_attach_accessory(eyegore))
-			uniform.attach_accessory(null, eyegore)
-		else
-			qdel(eyegore)
+	id_type  = /obj/item/card/id/bearcat_captain
 
 /obj/abstract/submap_landmark/spawnpoint/captain
 	name = "Independant Captain"

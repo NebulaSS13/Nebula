@@ -24,22 +24,24 @@ var/global/list/outfits_decls_by_type_
 	abstract_type = /decl/hierarchy/outfit
 	expected_type = /decl/hierarchy/outfit
 
-	var/uniform = null
-	var/suit = null
-	var/back = null
-	var/belt = null
-	var/gloves = null
-	var/shoes = null
-	var/head = null
-	var/mask = null
-	var/l_ear = null
-	var/r_ear = null
-	var/glasses = null
-	var/id = null
-	var/l_pocket = null
-	var/r_pocket = null
-	var/suit_store = null
-	var/holster = null
+	var/pants
+	var/uniform
+	var/suit
+	var/back
+	var/belt
+	var/gloves
+	var/shoes
+	var/head
+	var/mask
+	var/l_ear
+	var/r_ear
+	var/glasses
+	var/id
+	var/l_pocket
+	var/r_pocket
+	var/suit_store
+	var/holster
+
 	var/list/hands
 	var/list/backpack_contents = list() // In the list(path=count,otherpath=count) format
 
@@ -62,22 +64,23 @@ var/global/list/outfits_decls_by_type_
 		outfits_decls_by_type_[type] = src
 		dd_insertObjectList(outfits_decls_, src)
 
-// This proc is structured slightly strangely because I will be adding pants to it.
 /decl/hierarchy/outfit/validate()
 	. = ..()
-	if(uniform && (outfit_flags & OUTFIT_HAS_VITALS_SENSOR))
-		if(!ispath(uniform, /obj/item/clothing))
-			. += "outfit is flagged for sensors, but uniform cannot take accessories"
-		var/succeeded = FALSE
-		var/obj/item/sensor = new /obj/item/clothing/sensor/vitals
-		if(uniform)
-			var/obj/item/clothing/wear_uniform = new uniform // sadly we need to read a list
-			if(wear_uniform.can_attach_accessory(sensor))
-				succeeded = TRUE
-			qdel(wear_uniform)
-		if(!succeeded)
-			. += "outfit is flagged for sensors, but uniform does not accept sensors"
-		qdel(sensor)
+	if(!(outfit_flags & OUTFIT_HAS_VITALS_SENSOR))
+		return
+
+	var/succeeded = FALSE
+	var/obj/item/sensor = new /obj/item/clothing/sensor/vitals
+	for(var/clothes in list(uniform, pants))
+		var/obj/item/clothing/wear_uniform = new clothes // sadly we need to read a list
+		if(wear_uniform.can_attach_accessory(sensor))
+			succeeded = TRUE
+		qdel(wear_uniform)
+		if(succeeded)
+			break
+	if(!succeeded)
+		. += "outfit is flagged for sensors, but uniform/pants do not accept sensors"
+	qdel(sensor)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
 	if(outfit_flags & OUTFIT_RESET_EQUIPMENT)
@@ -121,16 +124,20 @@ var/global/list/outfits_decls_by_type_
 	//Start with uniform,suit,backpack for additional slots
 	if(uniform)
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform_str)
+
 		if(!H.get_equipped_item(slot_w_uniform_str))
 			H.species.equip_default_fallback_uniform(H)
 
-		var/obj/item/equip_uniform = H.get_equipped_item(slot_w_uniform_str)
-		if(holster && equip_uniform)
-			var/obj/item/clothing/equip_holster = new holster
-			equip_uniform.attackby(equip_holster, H)
-			if(equip_holster.loc != equip_uniform && !QDELETED(equip_holster))
-				qdel(equip_holster)
+		if(holster)
+			var/obj/item/equip_uniform = H.get_equipped_item(slot_w_uniform_str)
+			if(equip_uniform)
+				var/obj/item/clothing/equip_holster = new holster
+				equip_uniform.attackby(equip_holster, H)
+				if(equip_holster.loc != equip_uniform && !QDELETED(equip_holster))
+					qdel(equip_holster)
 
+	if(pants)
+		H.equip_to_slot_or_del(new pants(H),slot_lower_body_str)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit_str)
 	if(back)

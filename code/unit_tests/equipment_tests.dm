@@ -115,18 +115,19 @@
 	..()
 	/// Ordering is important here, dependencies like ID should be after uniform, etc.
 	slot_to_valid_type = list(
-		"[slot_w_uniform_str]" = /obj/item/clothing/costume/clown,
-		"[slot_back_str]"      = /obj/item/backpack/clown,
-		"[slot_wear_id_str]"   = /obj/item/card/id,
-		"[slot_glasses_str]"   = /obj/item/clothing/glasses/meson,
-		"[slot_wear_mask_str]" = /obj/item/clothing/mask/gas/sexyclown,
-		"[slot_head_str]"      = /obj/item/clothing/head/hairflower,
-		"[slot_shoes_str]"     = /obj/item/clothing/shoes/magboots,
-		"[slot_gloves_str]"    = /obj/item/clothing/gloves/rainbow,
-		"[slot_l_ear_str]"     = /obj/item/clothing/head/hairflower,
-		"[slot_r_ear_str]"     = /obj/item/clothing/head/hairflower,
-		"[slot_belt_str]"      = /obj/item/ore, // note: this should be an item without ITEM_FLAG_IS_BELT
-		"[slot_wear_suit_str]" = /obj/item/clothing/suit/chickensuit
+		"[slot_w_uniform_str]"  = /obj/item/clothing/shirt/button/tan,
+		"[slot_lower_body_str]" = /obj/item/clothing/pants/slacks/purple,
+		"[slot_back_str]"       = /obj/item/backpack/clown,
+		"[slot_wear_id_str]"    = /obj/item/card/id,
+		"[slot_glasses_str]"    = /obj/item/clothing/glasses/meson,
+		"[slot_wear_mask_str]"  = /obj/item/clothing/mask/gas/sexyclown,
+		"[slot_head_str]"       = /obj/item/clothing/head/hairflower,
+		"[slot_shoes_str]"      = /obj/item/clothing/shoes/magboots,
+		"[slot_gloves_str]"     = /obj/item/clothing/gloves/rainbow,
+		"[slot_l_ear_str]"      = /obj/item/clothing/head/hairflower,
+		"[slot_r_ear_str]"      = /obj/item/clothing/head/hairflower,
+		"[slot_belt_str]"       = /obj/item/ore, // note: this should be an item without ITEM_FLAG_IS_BELT
+		"[slot_wear_suit_str]"  = /obj/item/clothing/suit/chickensuit
 	)
 
 /datum/unit_test/equipment_slot_test/proc/check_slot_equip_successful(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)

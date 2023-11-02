@@ -11,12 +11,12 @@
 	suit = /obj/item/clothing/suit/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/science
-	uniform = /obj/item/clothing/jumpsuit/white
+	pants = /obj/item/clothing/jumpsuit/white
 
 /decl/hierarchy/outfit/job/generic/engineer
 	name = "Job - Default Engineer"
 	head = /obj/item/clothing/head/hardhat
-	uniform = /obj/item/clothing/jumpsuit/engineer
+	pants = /obj/item/clothing/jumpsuit/engineer
 	r_pocket = /obj/item/t_scanner
 	belt = /obj/item/belt/utility/full
 	l_ear = /obj/item/radio/headset/headset_eng
@@ -31,7 +31,7 @@
 
 /decl/hierarchy/outfit/job/generic/doctor
 	name = "Job - Default Doctor"
-	uniform = /obj/item/clothing/jumpsuit/medical
+	pants = /obj/item/clothing/jumpsuit/medical
 	suit = /obj/item/clothing/suit/toggle/labcoat
 	hands = list(/obj/item/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
@@ -47,7 +47,8 @@
 /decl/hierarchy/outfit/job/generic/chef
 	name = "Job - Default Chef"
 	l_ear = /obj/item/radio/headset/headset_service
-	uniform = /obj/item/clothing/pants/slacks/outfit_chef
+	pants = /obj/item/clothing/pants/slacks/white
+	uniform = /obj/item/clothing/shirt/button
 	suit = /obj/item/clothing/suit/chef
 	head = /obj/item/clothing/head/chefhat
 	pda_type = /obj/item/modular_computer/pda

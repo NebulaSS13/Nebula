@@ -205,7 +205,7 @@
 /datum/hud_data/serpentid
 	inventory_slots = list(
 		/datum/inventory_slot/handcuffs,
-		/datum/inventory_slot/uniform,
+		/datum/inventory_slot/upper_body,
 		/datum/inventory_slot/suit/serpentid,
 		/datum/inventory_slot/ear/serpentid,
 		/datum/inventory_slot/gloves,

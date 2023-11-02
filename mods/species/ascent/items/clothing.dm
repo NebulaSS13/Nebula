@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/ascent
 	name         = "Ascent - Gyne"
 	mask         = /obj/item/clothing/mask/gas/ascent
-	uniform      = /obj/item/clothing/jumpsuit/ascent
+	pants        = /obj/item/clothing/jumpsuit/ascent
 	id_type      = /obj/item/card/id/ascent
 	shoes        = /obj/item/clothing/shoes/magboots/ascent
 	l_ear        = null

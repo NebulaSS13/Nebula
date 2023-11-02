@@ -1,6 +1,7 @@
 /decl/hierarchy/outfit/job/tradeship/doc
 	name = "Tradeship - Job - Head Doctor"
-	uniform = /obj/item/clothing/pants/slacks/black/outfit/detective
+	pants = /obj/item/clothing/pants/slacks/black
+	uniform = /obj/item/clothing/shirt/button/tan/long_red_tie
 	shoes = /obj/item/clothing/shoes/dress
 	pda_type = /obj/item/modular_computer/pda/medical
 	id_type = /obj/item/card/id/tradeship/medical

@@ -36,9 +36,6 @@
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_MINOR
 	)
-	starting_accessories = list(
-		/obj/item/clothing/shirt/tunic/blue/champion
-	)
 
 /obj/item/clothing/shoes/jackboots/medievalboots
 	name = "leather boots"

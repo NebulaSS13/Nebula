@@ -11,7 +11,8 @@ var/global/list/adjectives =         file2list("config/names/adjectives.txt")
 
 var/global/list/descriptive_slot_names = list(
 	slot_back_str        = "Back",
-	slot_w_uniform_str   = "Uniform",
+	slot_w_uniform_str   = "Upper Body",
+	slot_lower_body_str  = "Lower Body",
 	slot_head_str        = "Head",
 	slot_wear_suit_str   = "Suit",
 	slot_l_ear_str       = "Left Ear",

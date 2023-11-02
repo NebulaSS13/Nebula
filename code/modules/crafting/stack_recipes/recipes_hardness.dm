@@ -10,7 +10,7 @@
 	result_type       = /obj/item/clothing/gloves/armguards/craftable
 
 /decl/stack_recipe/hardness/improvised_armour/legguards
-	result_type       = /obj/item/clothing/shoes/legguards/craftable
+	result_type       = /obj/item/clothing/pants/legguards/craftable
 
 /decl/stack_recipe/hardness/improvised_armour/gauntlets
 	result_type       = /obj/item/clothing/gloves/thick/craftable

@@ -1,6 +1,7 @@
 /decl/hierarchy/outfit/spec_op_officer
 	name = "Spec Ops - Officer"
-	uniform = /obj/item/clothing/pants/casual/camo/outfit_combat
+	pants = /obj/item/clothing/pants/casual/camo
+	uniform = /obj/item/clothing/shirt/syndicate/combat
 	suit = /obj/item/clothing/suit/armor/officer
 	l_ear = /obj/item/radio/headset/ert
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
@@ -26,7 +27,8 @@
 
 /decl/hierarchy/outfit/ert
 	name = "Spec Ops - Emergency response team"
-	uniform = /obj/item/clothing/pants/casual/camo/outfit_combat
+	pants = /obj/item/clothing/pants/casual/camo
+	uniform = /obj/item/clothing/shirt/syndicate/combat
 	shoes = /obj/item/clothing/shoes/jackboots/swat
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_ear = /obj/item/radio/headset/ert
@@ -40,7 +42,8 @@
 
 /decl/hierarchy/outfit/mercenary
 	name = "Spec Ops - Mercenary"
-	uniform = /obj/item/clothing/pants/casual/camo/outfit
+	pants = /obj/item/clothing/pants/casual/camo
+	uniform = /obj/item/clothing/shirt/syndicate
 	shoes = /obj/item/clothing/shoes/jackboots/swat/combat
 	l_ear = /obj/item/radio/headset/mercenary
 	belt = /obj/item/belt/holster/security

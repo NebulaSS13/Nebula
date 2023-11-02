@@ -1,7 +1,8 @@
 /decl/hierarchy/outfit/job/ministation/doctor/head
 	name = "Ministation - Job - Head Doctor"
 	l_ear = /obj/item/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/pants/slacks/black/outfit/detective
+	pants = /obj/item/clothing/pants/slacks/black
+	uniform = /obj/item/clothing/shirt/button/tan/long_red_tie
 	shoes = /obj/item/clothing/shoes/dress
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store_str
@@ -15,7 +16,7 @@
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store_str
 	name = "Ministation - Job - Junior Doctor"
-	uniform = /obj/item/clothing/jumpsuit/medical
+	pants = /obj/item/clothing/jumpsuit/medical
 	hands = list(/obj/item/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
 	id_type = /obj/item/card/id/ministation/doctor

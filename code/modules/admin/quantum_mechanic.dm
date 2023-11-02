@@ -48,7 +48,7 @@
 /decl/hierarchy/outfit/quantum
 	name = "Quantum Mechanic"
 	glasses =  /obj/item/clothing/glasses/sunglasses/quantum
-	uniform =  /obj/item/clothing/jumpsuit/quantum
+	pants = /obj/item/clothing/jumpsuit/quantum
 	shoes =    /obj/item/clothing/shoes/color/black/quantum
 	l_ear =    /obj/item/radio/headset/ert/quantum
 	back =     /obj/item/backpack/holding/quantum

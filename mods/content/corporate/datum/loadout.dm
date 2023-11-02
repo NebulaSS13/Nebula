@@ -32,11 +32,11 @@
 	path = /obj/item/clothing/shirt/tunic/corp
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/uniform/corporate_jumpsuit
+/decl/loadout_option/pants/corporate_jumpsuit
 	name = "corporate jumpsuit selection"
 	path = /obj/item/clothing/jumpsuit
 
-/decl/loadout_option/uniform/corporate_jumpsuit/get_gear_tweak_options()
+/decl/loadout_option/pants/corporate_jumpsuit/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(

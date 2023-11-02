@@ -17,7 +17,8 @@
 	name =    "Special Role - Mercenary Commando"
 	l_ear =   /obj/item/radio/headset/mercenary/commando
 	id_type = /obj/item/card/id/centcom/ERT
-	uniform = /obj/item/clothing/pants/casual/camo/outfit
+	pants = /obj/item/clothing/pants/casual/camo
+	uniform = /obj/item/clothing/shirt/syndicate
 	shoes =   /obj/item/clothing/shoes/jackboots/swat
 	glasses = /obj/item/clothing/glasses/thermal
 	mask =    /obj/item/clothing/mask/gas/syndicate

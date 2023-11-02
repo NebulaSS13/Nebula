@@ -23,12 +23,12 @@
 /obj/item/clothing/suit/armor/riot/prepared
 	starting_accessories = list(
 		/obj/item/clothing/gloves/armguards/riot,
-		/obj/item/clothing/shoes/legguards/riot
+		/obj/item/clothing/pants/legguards/riot
 	)
 
 // Parts
 
-/obj/item/clothing/shoes/legguards/riot
+/obj/item/clothing/pants/legguards/riot
 	name = "riot leg guards"
 	desc = "A pair of armored leg pads with heavy padding to protect against melee attacks. Looks like they might impair movement."
 	icon = 'icons/clothing/accessories/armor/legguards_riot.dmi'

@@ -14,7 +14,7 @@
 	siemens_coefficient = 0
 	starting_accessories = list(
 		/obj/item/clothing/gloves/armguards/ablative,
-		/obj/item/clothing/shoes/legguards/ablative
+		/obj/item/clothing/pants/legguards/ablative
 	)
 
 /obj/item/clothing/suit/armor/laserproof/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
@@ -51,7 +51,7 @@
 	color = null
 	siemens_coefficient = 0
 
-/obj/item/clothing/shoes/legguards/ablative
+/obj/item/clothing/pants/legguards/ablative
 	name = "ablative leg guards"
 	desc = "A pair of armored leg pads with advanced shielding to protect against energy weapons. Looks like they might impair movement."
 	icon = 'icons/clothing/accessories/armor/legguards_ablative.dmi'

@@ -3,7 +3,7 @@
 	starting_accessories = list(
 		/obj/item/clothing/armor_attachment/plate/merc,
 		/obj/item/clothing/gloves/armguards/merc,
-		/obj/item/clothing/shoes/legguards/merc,
+		/obj/item/clothing/pants/legguards/merc,
 		/obj/item/clothing/webbing/pouches/large
 	)
 
@@ -37,7 +37,7 @@
 	material = /decl/material/solid/metal/steel
 	origin_tech = @'{"materials":2,"engineering":1,"combat":2}'
 
-/obj/item/clothing/shoes/legguards/merc
+/obj/item/clothing/pants/legguards/merc
 	name = "heavy leg guards"
 	desc = "A pair of heavily armored leg pads in red-trimmed black. Attaches to a plate carrier."
 	icon = 'icons/clothing/accessories/armor/legguards_merc.dmi'

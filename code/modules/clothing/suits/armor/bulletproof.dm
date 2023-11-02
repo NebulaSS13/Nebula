@@ -24,7 +24,7 @@
 /obj/item/clothing/suit/armor/bulletproof/prepared
 	starting_accessories = list(
 		/obj/item/clothing/gloves/armguards/ballistic,
-		/obj/item/clothing/shoes/legguards/ballistic
+		/obj/item/clothing/pants/legguards/ballistic
 	)
 
 /obj/item/clothing/gloves/armguards/ballistic
@@ -47,7 +47,7 @@
 		)
 	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'
 
-/obj/item/clothing/shoes/legguards/ballistic
+/obj/item/clothing/pants/legguards/ballistic
 	name = "ballistic leg guards"
 	desc = "A pair of armored leg pads with heavy plates to protect against ballistic projectiles. Looks like they might impair movement."
 	icon = 'icons/clothing/accessories/armor/legguards_ballistic.dmi'

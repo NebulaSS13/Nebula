@@ -34,13 +34,3 @@
 /obj/item/clothing/pants/scrubs/heliodor
 	name = "heliodor scrub pants"
 	color = "#aad539"
-
-/obj/item/clothing/pants/scrubs/blue/outfit
-	starting_accessories = list(
-		/obj/item/clothing/shirt/scrubs/blue
-	)
-
-/obj/item/clothing/pants/scrubs/purple/outfit
-	starting_accessories = list(
-		/obj/item/clothing/shirt/scrubs/purple
-	)

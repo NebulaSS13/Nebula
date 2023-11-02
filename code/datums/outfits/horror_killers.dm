@@ -37,18 +37,19 @@
 			carried_item.add_blood(victim) //Oh yes, there will be blood.. just not blood from the killer because that's odd
 
 /decl/hierarchy/outfit/reaper
-	name = "Reaper"
-	uniform =  /obj/item/clothing/pants/slacks/outfit
-	shoes =    /obj/item/clothing/shoes/color/black
-	gloves =   /obj/item/clothing/gloves/thick
-	l_ear =    /obj/item/radio/headset
-	glasses =  /obj/item/clothing/glasses/sunglasses
+	name     = "Reaper"
+	pants    = /obj/item/clothing/pants/slacks
+	uniform  = /obj/item/clothing/shirt/button
+	suit     = /obj/item/clothing/suit/jacket/waistcoat/black
+	shoes    = /obj/item/clothing/shoes/color/black
+	gloves   = /obj/item/clothing/gloves/thick
+	l_ear    = /obj/item/radio/headset
+	glasses  = /obj/item/clothing/glasses/sunglasses
 	l_pocket = /obj/item/energy_blade/sword
-
-	id_slot = slot_wear_id_str
-	id_type = /obj/item/card/id/syndicate/station_access
-	pda_slot = slot_belt_str
+	id_type  = /obj/item/card/id/syndicate/station_access
 	pda_type = /obj/item/modular_computer/pda/heads
+	id_slot  = slot_wear_id_str
+	pda_slot = slot_belt_str
 
 /decl/hierarchy/outfit/reaper/post_equip(var/mob/living/carbon/human/H)
 	..()

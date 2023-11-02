@@ -1,8 +1,8 @@
 /decl/hierarchy/outfit/job
 	name = "Standard Gear"
 	abstract_type = /decl/hierarchy/outfit/job
-
-	uniform = /obj/item/clothing/jumpsuit/grey
+	uniform  = /obj/item/clothing/shirt/button // todo: singlet
+	pants = /obj/item/clothing/jumpsuit/grey
 	l_ear = /obj/item/radio/headset
 	shoes = /obj/item/clothing/shoes/color/black
 

@@ -22,7 +22,7 @@
 
 /decl/hierarchy/outfit/blank_subject
 	name = "Test Subject"
-	uniform = /obj/item/clothing/jumpsuit/white/blank
+	pants = /obj/item/clothing/jumpsuit/white/blank
 	shoes = /obj/item/clothing/shoes/color/white
 	head = /obj/item/clothing/head/helmet/facecover
 	mask = /obj/item/clothing/mask/muzzle

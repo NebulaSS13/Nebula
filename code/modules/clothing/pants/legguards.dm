@@ -1,5 +1,5 @@
 //Leg guards
-/obj/item/clothing/shoes/legguards
+/obj/item/clothing/pants/legguards
 	name = "leg guards"
 	desc = "A pair of armored leg pads in black. Attaches to a plate carrier."
 	icon = 'icons/clothing/accessories/armor/legguards.dmi'
@@ -22,7 +22,7 @@
 	accessory_slot = ACCESSORY_SLOT_ARMOR_L
 	slot_flags = SLOT_FEET
 
-/obj/item/clothing/shoes/legguards/craftable
+/obj/item/clothing/pants/legguards/craftable
 	material_armor_multiplier = 1
 	matter = null
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
