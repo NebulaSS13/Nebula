@@ -127,20 +127,13 @@
 	qdel(src)
 
 /decl/hierarchy/outfit/deadcap
-	name = "Derelict Captain"
-	pants = /obj/item/clothing/pants/baggy/casual/classicjeans
-	suit = /obj/item/clothing/suit/storage/toggle/wintercoat
-	shoes = /obj/item/clothing/shoes/color/black
+	name     = "Derelict Captain"
+	pants    = /obj/item/clothing/pants/baggy/casual/classicjeans
+	uniform  = /obj/item/clothing/accessory/toggleable/hawaii/random
+	suit     = /obj/item/clothing/suit/storage/toggle/wintercoat
+	shoes    = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
 
 /decl/hierarchy/outfit/deadcap/post_equip(mob/living/carbon/human/H)
 	..()
-	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
-	if(uniform)
-		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
-		if(uniform.can_attach_accessory(eyegore))
-			uniform.attach_accessory(null, eyegore)
-		else
-			qdel(eyegore)
-	var/obj/item/cell/super/C = new()
-	H.put_in_hands(C)
+	H.put_in_hands(new /obj/item/cell/super(get_turf(H)))

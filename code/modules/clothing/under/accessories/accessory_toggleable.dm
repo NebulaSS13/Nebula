@@ -84,6 +84,7 @@
 	name = "flower-pattern shirt"
 	desc = "You probably need some welder googles to look at this."
 	icon = 'icons/clothing/accessories/clothing/hawaiian.dmi'
+	slot_flags = SLOT_TIE | SLOT_UPPER_BODY
 
 /obj/item/clothing/accessory/toggleable/hawaii/red
 	icon = 'icons/clothing/accessories/clothing/hawaiian_alt.dmi'

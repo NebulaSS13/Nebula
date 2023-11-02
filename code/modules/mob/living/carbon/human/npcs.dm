@@ -11,9 +11,9 @@
 	if(prob(50))
 		equip_to_appropriate_slot(new /obj/item/clothing/under/waiter/monke(src))
 	else
-		var/obj/item/clothing/C = new /obj/item/clothing/pants/casual/mustangjeans/monke(src)
 		C.attach_accessory(null, new /obj/item/clothing/accessory/toggleable/hawaii/random(src))
-		equip_to_appropriate_slot(C)
+		equip_to_appropriate_slot(new /obj/item/clothing/pants/casual/mustangjeans/monke(src))
+		equip_to_appropriate_slot(new /obj/item/clothing/accessory/toggleable/hawaii/random(src))
 		if(prob(10))
 			equip_to_appropriate_slot(new /obj/item/clothing/head/collectable/petehat(src))
 
