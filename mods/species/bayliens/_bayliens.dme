@@ -38,6 +38,7 @@
 #include "skrell\gear\fabrication_designs.dm"
 #include "tajaran\_tajaran.dm"
 #include "tajaran\datum\accessory.dm"
+#include "tajaran\datum\clothing.dm"
 #include "tajaran\datum\culture.dm"
 #include "tajaran\datum\emotes.dm"
 #include "tajaran\datum\blood.dm"
