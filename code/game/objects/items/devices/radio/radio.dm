@@ -65,7 +65,7 @@
 	var/datum/radio_frequency/analog_radio_connection
 
 /obj/item/radio/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
-	return ..(/obj/item/cell/device, /obj/item/cell/device, /datum/extension/loaded_cell)
+	return ..(/obj/item/cell/device, /obj/item/cell/device, /datum/extension/loaded_cell, charge_value)
 
 /obj/item/radio/get_radio(var/message_mode)
 	return src

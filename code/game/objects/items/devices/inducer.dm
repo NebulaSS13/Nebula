@@ -21,7 +21,7 @@
 	update_icon()
 
 /obj/item/inducer/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
-	return ..(/obj/item/cell, /obj/item/cell, /datum/extension/loaded_cell/panel)
+	return ..(/obj/item/cell, /obj/item/cell, /datum/extension/loaded_cell/panel, charge_value)
 
 /obj/item/inducer/proc/induce(obj/item/cell/target)
 	var/obj/item/cell/MyC = get_cell()
