@@ -87,6 +87,7 @@ SUBSYSTEM_DEF(mapping)
 			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
 		level.setup_level_data()
 
+	old_maxz = world.maxz
 	// Build away sites.
 	global.using_map.build_away_sites()
 	global.using_map.build_planets()
