@@ -83,10 +83,10 @@
 	path = /obj/item/clothing/under/abaya
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/uniform/skirt
-	name = "skirt selection"
-	path = /obj/item/clothing/under/skirt
-	loadout_flags = GEAR_HAS_TYPE_SELECTION
+/decl/loadout_option/uniform/blouse
+	name = "blouse, colour select"
+	path = /obj/item/clothing/under/blouse
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/skirt_c
 	name = "short skirt, colour select"
@@ -98,30 +98,36 @@
 	path = /obj/item/clothing/under/skirt_c/dress
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/uniform/casual_pants
+/decl/loadout_option/uniform/pants
 	name = "casual pants selection"
 	path = /obj/item/clothing/pants/casual
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
+	slot = slot_lower_body_str
 
-/decl/loadout_option/uniform/formal_pants
+/decl/loadout_option/uniform/pants/formal
 	name = "formal pants selection"
 	path = /obj/item/clothing/pants/formal
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/uniform/formal_pants/baggycustom
+/decl/loadout_option/uniform/pants/formal/baggycustom
 	name = "baggy suit pants, colour select"
 	path = /obj/item/clothing/pants/baggy
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/uniform/shorts
+/decl/loadout_option/uniform/pants/shorts
 	name = "shorts selection"
 	path = /obj/item/clothing/pants/shorts
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/uniform/shorts/custom
+/decl/loadout_option/uniform/pants/shorts/custom
 	name = "athletic shorts, colour select"
 	path = /obj/item/clothing/pants/shorts/athletic
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
+
+/decl/loadout_option/uniform/pants/skirt
+	name = "skirt selection"
+	path = /obj/item/clothing/pants/skirt
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/turtleneck
 	name = "sweater, colour select"

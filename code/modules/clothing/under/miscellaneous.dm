@@ -127,7 +127,7 @@
 /obj/item/clothing/under/blackskirt
 	name = "black skirt"
 	desc = "A black skirt, very fancy!"
-	icon = 'icons/clothing/under/skirts/skirt_black.dmi'
+	icon = 'icons/clothing/under/skirt_black.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/under/schoolgirl
@@ -229,21 +229,6 @@
 	desc = "Superior class for the nosy H.R. Director."
 	icon = 'icons/clothing/under/dresses/dress_hr.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
-
-/obj/item/clothing/under/dress/plaid_blue
-	name = "blue plaid skirt"
-	desc = "A preppy blue skirt with a white blouse."
-	icon = 'icons/clothing/under/dresses/dress_plaid_blue.dmi'
-
-/obj/item/clothing/under/dress/plaid_red
-	name = "red plaid skirt"
-	desc = "A preppy red skirt with a white blouse."
-	icon = 'icons/clothing/under/dresses/dress_plaid_red.dmi'
-
-/obj/item/clothing/under/dress/plaid_purple
-	name = "blue purple skirt"
-	desc = "A preppy purple skirt with a white blouse."
-	icon = 'icons/clothing/under/dresses/dress_plaid_purple.dmi'
 
 //wedding stuff
 /obj/item/clothing/under/wedding

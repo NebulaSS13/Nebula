@@ -30,7 +30,7 @@
 
 /decl/hierarchy/outfit/job/bearcat/captain
 	name = "Bearcat - Job - FTU Captain"
-	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
+	pants = /obj/item/clothing/pants/baggy/casual/classicjeans
 	shoes = /obj/item/clothing/shoes/color/black
 	pda_type = /obj/item/modular_computer/pda/heads/captain
 	id_type = /obj/item/card/id/bearcat_captain

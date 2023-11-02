@@ -119,6 +119,9 @@ var/global/list/outfits_decls_by_type_
 	set waitfor = FALSE
 	pre_equip(H)
 
+	if(pants)
+		H.equip_to_slot_or_del(new pants(H), slot_lower_body_str)
+
 	//Start with uniform,suit,backpack for additional slots
 	if(uniform)
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform_str)

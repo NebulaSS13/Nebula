@@ -94,15 +94,16 @@
 //Pop-up inventory
 #define ui_shoes "LEFT+1:8,BOTTOM:5"
 
-#define ui_iclothing "LEFT:6,BOTTOM+1:7"
 #define ui_lclothing "LEFT:6,BOTTOM+1:7"
-#define ui_oclothing "LEFT+1:8,BOTTOM+1:7"
-#define ui_gloves "LEFT+2:10,BOTTOM+1:7"
+#define ui_iclothing "LEFT:6,BOTTOM+2:7"
+#define ui_glasses   "LEFT:6,BOTTOM+3:9"
 
-#define ui_glasses "LEFT:6,BOTTOM+2:9"
-#define ui_mask "LEFT+1:8,BOTTOM+2:9"
-#define ui_l_ear "LEFT+2:10,BOTTOM+2:9"
-#define ui_r_ear "LEFT+2:10,BOTTOM+3:11"
+#define ui_oclothing "LEFT+1:8,BOTTOM+1:7"
+#define ui_mask      "LEFT+1:8,BOTTOM+2:9"
+
+#define ui_gloves    "LEFT+2:10,BOTTOM+1:7"
+#define ui_l_ear     "LEFT+2:10,BOTTOM+2:9"
+#define ui_r_ear     "LEFT+2:10,BOTTOM+3:11"
 
 #define ui_head "LEFT+1:8,BOTTOM+3:11"
 
