@@ -27,7 +27,7 @@
 		to_chat(src, SPAN_WARNING("You are unable to equip that."))
 
 /mob/proc/can_equip_anything_to_slot(var/slot)
-	return (slot in get_all_valid_equipment_slots())
+	return (slot in get_all_available_equipment_slots())
 
 //This is an UNSAFE proc. It merely handles the actual job of equipping. All the checks on whether you can or can't eqip need to be done before! Use mob_can_equip() for that task.
 //In most cases you will want to use equip_to_slot_if_possible()
@@ -193,9 +193,6 @@
 				qdel(grab)
 				. = TRUE
 			return
-		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-		if(hattable?.drop_hat(src))
-			return TRUE
 	. = drop_from_inventory(get_active_hand(), Target)
 
 /*
@@ -377,7 +374,7 @@
 /mob/proc/remove_inventory_slot(var/slot)
 	return
 
-/mob/proc/get_all_valid_equipment_slots()
+/mob/proc/get_all_available_equipment_slots()
 	for(var/slot in get_held_item_slots())
 		LAZYDISTINCTADD(., slot)
 	for(var/slot in get_inventory_slots())

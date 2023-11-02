@@ -21,13 +21,10 @@ var/global/obj/screen/robot_inventory
 
 /datum/hud/robot/FinalizeInstantiation()
 
-	if(!isrobot(mymob))
-		return
-
 	var/mob/living/silicon/robot/R = mymob
-
-	adding = list()
-	other = list()
+	if(!istype(R))
+		..()
+		return
 
 	var/obj/screen/using
 
@@ -164,9 +161,8 @@ var/global/obj/screen/robot_inventory
 	R.gun_move_icon = new /obj/screen/gun/move(null)
 	R.radio_use_icon = new /obj/screen/gun/radio(null)
 
-	R.client.screen = list()
-	R.client.screen += list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
-	R.client.screen += adding + other
+	hud_elements = list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
+	..()
 
 /datum/hud/proc/toggle_show_robot_modules()
 	if(!isrobot(mymob))

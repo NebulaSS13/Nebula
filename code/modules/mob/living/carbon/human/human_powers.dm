@@ -41,7 +41,7 @@
 			return
 		if(selected_type && h_style != selected_type)
 			h_style = selected_type
-			refresh_visible_overlays()
+			try_refresh_visible_overlays()
 			visible_message(SPAN_NOTICE("\The [src] pauses a moment to style their hair."))
 		else
 			to_chat(src, SPAN_NOTICE("You're already using that style."))

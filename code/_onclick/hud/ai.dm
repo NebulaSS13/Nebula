@@ -2,7 +2,6 @@
 	hud_type = /datum/hud/ai
 
 /datum/hud/ai/FinalizeInstantiation()
-	adding = list()
 	var/list/ai_hud_data = decls_repository.get_decls_of_subtype(/decl/ai_hud)
 	for(var/elem_type in ai_hud_data)
 		var/decl/ai_hud/ai_hud = ai_hud_data[elem_type]
@@ -14,5 +13,4 @@
 			ai_hud.input_procs,
 			ai_hud.input_args
 		)
-	if(mymob?.client)
-		mymob.client.screen += adding
+	..()

@@ -393,7 +393,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 	// Do the initial caching of the player's body icons.
 	new_character.force_update_limbs()
-	new_character.refresh_visible_overlays()
+	new_character.try_refresh_visible_overlays()
 
 	new_character.key = key		//Manually transfer the key to log them in
 	return new_character

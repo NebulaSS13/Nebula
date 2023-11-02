@@ -83,7 +83,7 @@ There are several things that need to be remembered:
 		update_inhand_overlays(FALSE)
 		update_icon()
 
->	If you need to update all overlays you can use refresh_visible_overlays(). it works exactly like update_clothing used to.
+>	If you need to update all overlays you can use try_refresh_visible_overlays(). it works exactly like update_clothing used to.
 
 >	I reimplimented an old unused variable which was in the code called (coincidentally) var/update_icon
 	It can be used as another method of triggering update_icon(). It's basically a flag that when set to non-zero
@@ -100,34 +100,9 @@ Please contact me on #coderbus IRC. ~Carn x
 */
 
 /mob/living/carbon/human
-	var/list/mob_overlays[TOTAL_OVER_LAYERS]
-	var/list/mob_underlays[TOTAL_UNDER_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
 
-/mob/living/carbon/human/get_all_current_mob_overlays()
-	return mob_overlays
-
-/mob/living/carbon/human/set_current_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
-	mob_overlays[overlay_layer] = overlay
-	..()
-
-/mob/living/carbon/human/get_current_mob_overlay(var/overlay_layer)
-	return mob_overlays[overlay_layer]
-
-/mob/living/carbon/human/get_all_current_mob_underlays()
-	return mob_underlays
-
-/mob/living/carbon/human/set_current_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)
-	mob_underlays[underlay_layer] = underlay
-	..()
-
-/mob/living/carbon/human/get_current_mob_underlay(var/underlay_layer)
-	return mob_underlays[underlay_layer]
-
 /mob/living/carbon/human/refresh_visible_overlays()
-	. = ..()
-	if(!.)
-		return
 	update_mutations(FALSE)
 	update_body(FALSE)
 	update_skin(FALSE)
@@ -138,18 +113,14 @@ Please contact me on #coderbus IRC. ~Carn x
 	update_surgery(FALSE)
 	update_bandages(FALSE)
 	UpdateDamageIcon(FALSE)
-	update_icon()
-	return TRUE
+	return ..()
 
 /mob/living/carbon/human/on_update_icon()
-
-	..()
-
 	if(regenerate_body_icon)
 		regenerate_body_icon = FALSE
-		update_body(FALSE)
-		refresh_visible_overlays()
+	..()
 
+/mob/living/carbon/human/apply_visible_overlays()
 	var/list/visible_overlays
 	var/list/visible_underlays
 	if(is_cloaked())
@@ -401,7 +372,7 @@ var/global/list/damage_icon_parts = list()
 		var/image/I
 		var/decl/bodytype/root_bodytype = get_bodytype()
 		if(UW.slot_offset_str && LAZYACCESS(root_bodytype.equip_adjust, UW.slot_offset_str))
-			I = root_bodytype.get_offset_overlay_image(FALSE, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
+			I = root_bodytype.get_offset_overlay_image(UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
 		else
 			I = image(icon = UW.icon, icon_state = UW.icon_state)
 			I.color = UW.color

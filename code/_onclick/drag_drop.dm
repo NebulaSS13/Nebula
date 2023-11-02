@@ -10,11 +10,11 @@
 		. = ..()
 
 /atom/proc/handle_mouse_drop(var/atom/over, var/mob/user)
-	. = over.receive_mouse_drop(src, user)
+	. = over?.receive_mouse_drop(src, user)
 
 // Can the user drop something onto this atom?
 /atom/proc/user_can_mousedrop_onto(var/mob/user, var/atom/being_dropped, var/incapacitation_flags)
-	return !user.incapacitated(incapacitation_flags) && check_mousedrop_interactivity(user) && user.check_dexterity(DEXTERITY_HOLD_ITEM)
+	return !user.incapacitated(incapacitation_flags) && check_mousedrop_interactivity(user) && user.check_dexterity(DEXTERITY_EQUIP_ITEM)
 
 /atom/proc/check_mousedrop_interactivity(var/mob/user)
 	return CanPhysicallyInteract(user)
@@ -31,7 +31,7 @@
 	return TRUE
 
 /atom/proc/check_mousedrop_adjacency(var/atom/over, var/mob/user)
-	. = (Adjacent(user) && over.Adjacent(user))
+	. = (Adjacent(user) && ((over in user?.client?.screen) || over.Adjacent(user)))
 
 // Receive a mouse drop.
 // Returns false if the atom is valid for dropping further up the chain, true if the drop has been handled.

@@ -68,7 +68,7 @@ var/global/list/icon_state_cache = list()
 		var/decl/bodytype/root_bodytype = user_mob.get_bodytype()
 		if(istype(root_bodytype))
 			var/use_slot = (bodypart in root_bodytype.equip_adjust) ? bodypart : slot
-			return root_bodytype.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
+			return root_bodytype.get_offset_overlay_image(mob_icon, mob_state, color, use_slot)
 		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 	var/bodytype = user_mob?.get_bodytype_category() || BODYTYPE_HUMANOID
@@ -110,20 +110,17 @@ var/global/list/icon_state_cache = list()
 // This is necessary to ensure that all the overlays are generated and tracked prior to being passed to
 // the bodytype offset proc, which can scrub icon/icon_state information as part of the offset process.
 /obj/item/proc/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	if(ishuman(user_mob))
-		var/mob/living/carbon/human/H = user_mob
-		var/decl/bodytype/root_bodytype = H.get_bodytype()
-		if(root_bodytype.bodytype_category != bodytype)
-			var/list/overlays_to_offset = overlay.overlays
-			overlay = root_bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, (bodypart || slot))
-			for(var/thing in overlays_to_offset)
-				var/image/I = thing // Technically an appearance but don't think we can cast to those
-				var/image/adjusted_overlay = root_bodytype.get_offset_overlay_image(FALSE, I.icon, I.icon_state, I.color, (bodypart || slot))
-				adjusted_overlay.appearance_flags = I.appearance_flags
-				adjusted_overlay.plane =            I.plane
-				adjusted_overlay.layer =            I.layer
-				overlay.overlays += adjusted_overlay
-
+	var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
+	if(root_bodytype && root_bodytype.bodytype_category != bodytype)
+		var/list/overlays_to_offset = overlay.overlays
+		overlay = root_bodytype.get_offset_overlay_image(overlay.icon, overlay.icon_state, color, (bodypart || slot))
+		for(var/thing in overlays_to_offset)
+			var/image/I = thing // Technically an appearance but don't think we can cast to those
+			var/image/adjusted_overlay = root_bodytype.get_offset_overlay_image(I.icon, I.icon_state, I.color, (bodypart || slot))
+			adjusted_overlay.appearance_flags = I.appearance_flags
+			adjusted_overlay.plane =            I.plane
+			adjusted_overlay.layer =            I.layer
+			overlay.overlays += adjusted_overlay
 	. = overlay
 
 //Special proc belts use to compose their icon

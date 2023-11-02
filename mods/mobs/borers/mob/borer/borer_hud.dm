@@ -15,7 +15,7 @@
 
 /datum/hud/borer/FinalizeInstantiation()
 	hud_intent_selector =  new
-	adding = list(hud_intent_selector)
+	adding += hud_intent_selector
 	hud_inject_chemicals = new
 	hud_leave_host =       new
 	borer_hud_elements = list(
@@ -34,8 +34,7 @@
 			for(var/obj/thing in borer_hud_elements)
 				thing.alpha =        255
 				thing.set_invisibility(INVISIBILITY_NONE)
-		if(mymob.client)
-			mymob.client.screen |= adding
+	..()
 
 /mob/living/simple_animal/borer
 	hud_type = /datum/hud/borer

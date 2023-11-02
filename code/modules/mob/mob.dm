@@ -341,7 +341,7 @@
 		var/obj/item/held = inv_slot.get_equipped_item()
 		dat += "<b>[capitalize(inv_slot.slot_name)]:</b> <A href='?src=\ref[src];item=[hand_slot]'>[held?.name || "nothing"]</A>"
 
-	var/list/all_slots = get_all_valid_equipment_slots()
+	var/list/all_slots = get_all_available_equipment_slots()
 	if(all_slots)
 		for(var/slot in (all_slots-global.pocket_slots))
 			if(slot in my_held_item_slots)

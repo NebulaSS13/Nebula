@@ -47,8 +47,6 @@
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
 	var/fire_alert = 0
 
-	var/list/hat_offsets
-
 	//Atmos effect - Yes, you can make creatures that require arbitrary gasses to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/list/min_gas = list(/decl/material/gas/oxygen = 5)
 	var/list/max_gas = list(
@@ -98,6 +96,8 @@
 	. = ..()
 
 	// Aquatic creatures only care about water, not atmos.
+	add_inventory_slot(new /datum/inventory_slot/head/simple)
+
 	if(is_aquatic)
 		max_gas = list()
 		min_gas = list()
@@ -108,8 +108,6 @@
 		base_animal_type = type
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
-	if(islist(hat_offsets))
-		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
 	if(scannable_result)
 		set_extension(src, /datum/extension/scannable, scannable_result)
 	setup_languages()
@@ -160,11 +158,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			if(glowing_eyes)
 				z_flags |= ZMM_MANGLE_PLANES
 			add_overlay(I)
-
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	var/image/I = hattable?.get_hat_overlay(src)
-	if(I)
-		add_overlay(I)
 
 /mob/living/simple_animal/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
@@ -687,3 +680,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		if(max_gas)
 			min_gas[gas] = round(gas_amt * 1.5)
 
+// Simple filler bodytype so animals get offsets for their inventory slots.
+/decl/bodytype/animal
+	abstract_type = /decl/bodytype/animal
+	name = "animal"
+	bodytype_flag = 0
+	bodytype_category = "animal body"

@@ -1,5 +1,5 @@
 /obj/screen/intent/ascent_nymph
-	icon_state = "intent_devour"
+	icon_state = "intent_harm"
 	screen_loc = ANYMPH_SCREEN_LOC_INTENT
 
 /obj/screen/intent/ascent_nymph/on_update_icon()
@@ -50,9 +50,6 @@
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	src.adding = list()
-	src.other = list()
-
 	held = new
 	held.icon =  ui_style
 	held.color = ui_color
@@ -92,6 +89,5 @@
 	mymob.healths.alpha = ui_alpha
 	mymob.healths.SetName("health")
 	mymob.healths.screen_loc = ANYMPH_SCREEN_LOC_HEALTH
-
-	mymob.client.screen = list(mymob.healths)
-	mymob.client.screen += src.adding + src.other
+	adding += mymob.healths
+	..()

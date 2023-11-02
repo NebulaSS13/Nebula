@@ -26,30 +26,24 @@
 	mob_swap_flags = SIMPLE_ANIMAL
 	mob_push_flags = SIMPLE_ANIMAL
 	mob_always_swap = 1
-
 	mob_size = MOB_SIZE_SMALL
 
 	laws = /datum/ai_laws/drone
-
 	silicon_camera = /obj/item/camera/siliconcam/drone_camera
-
-	var/module_type = /obj/item/robot_module/drone
-	var/hat_x = 0
-	var/hat_y = -13
-
 	holder_type = /obj/item/holder/drone
 	os_type = null
 	starting_stock_parts = null
 
+	var/module_type = /obj/item/robot_module/drone
+
 /mob/living/silicon/robot/drone/Initialize()
 	. = ..()
-
+	add_inventory_slot(new /datum/inventory_slot/head/simple)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	verbs += /mob/living/proc/hide
 	remove_language(/decl/language/binary)
 	add_language(/decl/language/binary, 0)
 	add_language(/decl/language/binary/drone, 1)
-	set_extension(src, /datum/extension/hattable, list(hat_x, hat_y))
 
 	default_language = /decl/language/binary/drone
 	// NO BRAIN.
@@ -118,8 +112,20 @@
 	can_pull_mobs = MOB_PULL_SAME
 	integrated_light_power = 0.8
 	integrated_light_range = 5
-	hat_x = 1
-	hat_y = -12
+
+/mob/living/silicon/robot/drone/costruction/get_bodytype()
+	return GET_DECL(/decl/bodytype/drone/construction)
+
+/decl/bodytype/drone/construction/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
+			"[NORTH]" = list(1, -12),
+			"[SOUTH]" = list(1, -12),
+			"[EAST]" =  list(1, -12),
+			"[WEST]" =  list(1, -12)
+		)
+	)
+	. = ..()
 
 /mob/living/silicon/robot/drone/init()
 	additional_law_channels["Drone"] = "d"
@@ -368,3 +374,23 @@
 	if(!controlling_ai)
 		return ..()
 	controlling_ai.open_subsystem(/datum/nano_module/law_manager)
+
+/mob/living/silicon/robot/drone/get_bodytype()
+	return GET_DECL(/decl/bodytype/drone)
+
+/decl/bodytype/drone
+	name = "drone"
+	bodytype_flag = 0
+	bodytype_category = "drone body"
+
+/decl/bodytype/drone/Initialize()
+	if(!length(equip_adjust))
+		equip_adjust = list(
+			slot_head_str = list(
+				"[NORTH]" = list(0, -13),
+				"[SOUTH]" = list(0, -13),
+				"[EAST]" =  list(0, -13),
+				"[WEST]" =  list(0, -13)
+			)
+		)
+	. = ..()

@@ -49,15 +49,15 @@
 			mob.hotkey_drop()
 
 /mob/proc/hotkey_drop()
-	. = has_extension(src, /datum/extension/hattable)
+	return FALSE
 
 /mob/living/hotkey_drop()
-	if(length(get_active_grabs()) || ..())
-		drop_item()
-
-/mob/living/carbon/hotkey_drop()
-	var/obj/item/hand = get_active_hand()
-	if(hand?.can_be_dropped_by_client(src) || ..())
+	if(length(get_active_grabs()))
+		. = TRUE
+	else
+		var/obj/item/hand = get_active_hand()
+		. = hand?.can_be_dropped_by_client(src)
+	if(.)
 		drop_item()
 
 /client/verb/swap_hand()

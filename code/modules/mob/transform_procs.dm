@@ -3,7 +3,7 @@
 		return
 	for(var/obj/item/W in get_contained_external_atoms())
 		drop_from_inventory(W)
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	set_status(STAT_STUN, 1)
 	icon = null
@@ -109,7 +109,7 @@
 	QDEL_NULL_LIST(worn_underwear)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
@@ -146,7 +146,7 @@
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
@@ -175,7 +175,7 @@
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)

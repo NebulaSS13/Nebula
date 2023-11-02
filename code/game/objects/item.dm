@@ -253,8 +253,6 @@
 
 	return ..(user, distance, "", desc_comp)
 
-// This is going to need a solid go-over to properly integrate all the movement procs into each
-// other and make sure everything is updating nicely. Snowflaking it for now. ~Jan 2020
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen/inventory)) || ..()
 
@@ -835,12 +833,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return TRUE
 
 /obj/item/proc/reconsider_client_screen_presence(var/client/client, var/slot)
-	if(!ismob(loc) || !client) // Storage handles screen loc updating/setting itself so should be fine
-		screen_loc = null
-	else if(client)
+	if(!client)
+		return
+	if(client.mob?.item_should_have_screen_presence(src, slot))
 		client.screen |= src
-		if(!client.mob?.item_should_have_screen_presence(src, slot))
-			screen_loc = null
+	else
+		client.screen -= src
 
 /obj/item/proc/gives_weather_protection()
 	return FALSE
@@ -866,3 +864,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(current_size > STAGE_ONE)
 		step_towards(src,S)
 	else ..()
+
+/obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
+	. = (loc == user && istype(over, /obj/screen)) || ..()

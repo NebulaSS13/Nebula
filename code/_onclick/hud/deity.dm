@@ -2,18 +2,11 @@
 	hud_type = /datum/hud/deity
 
 /datum/hud/deity/FinalizeInstantiation()
-	src.adding = list()
-	src.other = list()
-
 	var/obj/screen/intent/deity/D = new()
-
-	src.adding += D
+	adding += D
 	action_intent = D
-
-	mymob.client.screen = list()
-	mymob.client.screen += src.adding
+	..()
 	D.sync_to_mob(mymob)
-
 
 /obj/screen/intent/deity
 	var/list/desc_screens = list()

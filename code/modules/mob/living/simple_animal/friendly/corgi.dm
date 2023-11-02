@@ -22,14 +22,18 @@
 	meat_amount = 3
 	skin_material = /decl/material/solid/organic/skin/fur/orange
 
-/mob/living/simple_animal/corgi/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
+/mob/living/simple_animal/corgi/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/corgi)
+
+/decl/bodytype/animal/corgi/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
 			"[NORTH]" = list( 1, -8),
 			"[SOUTH]" = list( 1, -8),
 			"[EAST]" =  list( 7, -8),
 			"[WEST]" =  list(-7, -8)
 		)
+	)
 	. = ..()
 
 /mob/living/simple_animal/corgi/harvest_skin()
@@ -126,14 +130,21 @@
 	skin_amount = 3
 	bone_amount = 3
 
-/mob/living/simple_animal/corgi/puppy/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
+/mob/living/simple_animal/corgi/puppy/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/puppy)
+
+/decl/bodytype/animal/puppy/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
 			"[NORTH]" = list( 0, -12),
 			"[SOUTH]" = list( 0, -12),
 			"[EAST]" =  list( 5, -14),
 			"[WEST]" =  list(-5, -14)
 		)
+	)
+	. = ..()
+
+/mob/living/simple_animal/corgi/puppy/Initialize()
 	. = ..()
 	gender = pick(MALE, FEMALE)
 

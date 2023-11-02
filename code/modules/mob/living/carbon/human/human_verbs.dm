@@ -65,7 +65,7 @@
 			gender = FEMALE
 		else
 			gender = NEUTER
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	check_dna()
 
 	var/decl/pronouns/G = get_pronouns()

@@ -1335,7 +1335,7 @@ var/global/floorIsLava = 0
 		return
 
 	if(istype(H))
-		H.refresh_visible_overlays()
+		H.try_refresh_visible_overlays()
 
 /proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1, var/datum/ticket/ticket = null)
 	if(!whom)

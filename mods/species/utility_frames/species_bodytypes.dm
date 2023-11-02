@@ -30,16 +30,16 @@
 /decl/bodytype/prosthetic/utility_frame/Initialize()
 	equip_adjust = list(
 		"[slot_l_ear_str]" =  list(
-			"[NORTH]" = list("x" =  2, "y" = 0),
-			"[EAST]"  = list("x" =  0, "y" = 0),
-			"[SOUTH]" = list("x" = -2, "y" = 0),
-			"[WEST]"  = list("x" =  0, "y" = 0)
+			"[NORTH]" = list( 2, 0),
+			"[EAST]"  = list( 0, 0),
+			"[SOUTH]" = list(-2, 0),
+			"[WEST]"  = list( 0, 0)
 		),
 		"[slot_r_ear_str]" =  list(
-			"[NORTH]" = list("x" = -2, "y" = 0),
-			"[EAST]"  = list("x" =  0, "y" = 0),
-			"[SOUTH]" = list("x" =  2, "y" = 0),
-			"[WEST]"  = list("x" =  0, "y" = 0)
+			"[NORTH]" = list(-2, 0),
+			"[EAST]"  = list( 0, 0),
+			"[SOUTH]" = list( 2, 0),
+			"[WEST]"  = list( 0, 0)
 		)
 	)
 	. = ..()
