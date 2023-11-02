@@ -42,6 +42,7 @@
 //icon_back, icon_l_hand, etc would be much better names for these...
 #define slot_back_str        "slot_back"
 #define slot_w_uniform_str   "slot_w_uniform"
+#define slot_lower_body_str  "slot_lower_body"
 #define slot_head_str        "slot_head"
 #define slot_wear_suit_str   "slot_suit"
 #define slot_l_ear_str       "slot_l_ear"
@@ -238,6 +239,7 @@ var/global/list/all_inventory_slots = list(
 	BP_R_HAND_UPPER,
 	BP_MOUTH,
 	slot_w_uniform_str,
+	slot_lower_body_str,
 	slot_head_str,
 	slot_wear_suit_str,
 	slot_s_store_str,

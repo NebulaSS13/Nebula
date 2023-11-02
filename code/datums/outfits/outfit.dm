@@ -24,6 +24,7 @@ var/global/list/outfits_decls_by_type_
 	abstract_type = /decl/hierarchy/outfit
 	expected_type = /decl/hierarchy/outfit
 
+	var/pants = null
 	var/uniform = null
 	var/suit = null
 	var/back = null

@@ -454,6 +454,7 @@
 #include "code\datums\inventory_slots\slots\slot_gloves.dm"
 #include "code\datums\inventory_slots\slots\slot_head.dm"
 #include "code\datums\inventory_slots\slots\slot_id.dm"
+#include "code\datums\inventory_slots\slots\slot_lower_body.dm"
 #include "code\datums\inventory_slots\slots\slot_mask.dm"
 #include "code\datums\inventory_slots\slots\slot_pockets.dm"
 #include "code\datums\inventory_slots\slots\slot_shoes.dm"

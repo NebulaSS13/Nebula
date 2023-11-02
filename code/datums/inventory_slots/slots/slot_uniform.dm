@@ -1,5 +1,5 @@
 /datum/inventory_slot/uniform
-	slot_name = "Uniform"
+	slot_name = "Upper Body"
 	slot_state = "center"
 	ui_loc = ui_iclothing
 	slot_id = slot_w_uniform_str
@@ -8,8 +8,7 @@
 	drop_slots_on_unequip = list(
 		slot_r_store_str,
 		slot_l_store_str,
-		slot_wear_id_str,
-		slot_belt_str
+		slot_wear_id_str
 	)
 	requires_organ_tag = BP_CHEST
 	requires_slot_flags = SLOT_UPPER_BODY

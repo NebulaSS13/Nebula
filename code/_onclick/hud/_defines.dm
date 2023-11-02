@@ -95,6 +95,7 @@
 #define ui_shoes "LEFT+1:8,BOTTOM:5"
 
 #define ui_iclothing "LEFT:6,BOTTOM+1:7"
+#define ui_lclothing "LEFT:6,BOTTOM+1:7"
 #define ui_oclothing "LEFT+1:8,BOTTOM+1:7"
 #define ui_gloves "LEFT+2:10,BOTTOM+1:7"
 

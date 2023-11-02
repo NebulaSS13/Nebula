@@ -66,6 +66,8 @@
 		var/slot
 		if(istype(W, /obj/item/clothing/under))
 			slot = slot_w_uniform_str
+		else if(istype(W, /obj/item/clothing/pants))
+			slot = slot_lower_body_str
 		else if(istype(W, /obj/item/clothing/suit))
 			slot = slot_wear_suit_str
 		else if(istype(W, /obj/item/clothing/head))
