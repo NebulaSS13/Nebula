@@ -76,7 +76,8 @@
 /decl/loadout_option/clothing/sweater
 	name = "turtleneck sweater, colour select"
 	path = /obj/item/clothing/accessory/sweater
-	loadout_flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_TYPE_SELECTION
+	slot = slot_w_uniform_str
 
 /decl/loadout_option/clothing/tangzhuang
 	name = "tangzhuang jacket, colour select"

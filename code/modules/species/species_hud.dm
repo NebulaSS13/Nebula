@@ -17,7 +17,7 @@
 
 	var/list/inventory_slots = list(
 		/datum/inventory_slot/handcuffs,
-		/datum/inventory_slot/uniform,
+		/datum/inventory_slot/upper_body,
 		/datum/inventory_slot/lower_body,
 		/datum/inventory_slot/suit,
 		/datum/inventory_slot/mask,
@@ -57,7 +57,7 @@
 /datum/hud_data/monkey
 	inventory_slots = list(
 		/datum/inventory_slot/handcuffs,
-		/datum/inventory_slot/uniform,
+		/datum/inventory_slot/upper_body,
 		/datum/inventory_slot/lower_body,
 		/datum/inventory_slot/pocket,
 		/datum/inventory_slot/pocket/right,

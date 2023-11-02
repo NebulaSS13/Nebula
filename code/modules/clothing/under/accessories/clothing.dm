@@ -62,6 +62,12 @@
 	name = "turtleneck sweater"
 	desc = "A stylish sweater to keep you warm on those cold days."
 	icon = 'icons/clothing/accessories/clothing/sweater.dmi'
+	slot_flags = SLOT_TIE | SLOT_UPPER_BODY
+
+/obj/item/clothing/accessory/sweater/blue
+	desc = "A turqouise sweater to keep you warm in the cold medical bay."
+	name = "turqouise turtleneck sweater"
+	icon = 'icons/clothing/accessories/clothing/sweater_blue.dmi'
 
 /obj/item/clothing/accessory/ubac
 	name = "black ubac"

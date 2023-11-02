@@ -9,7 +9,7 @@
 		/obj/item/clothing/under/serviceoveralls,
 		/obj/item/clothing/under/captain_fly,
 		/obj/item/clothing/under/det,
-		/obj/item/clothing/under/color/brown,
+		/obj/item/clothing/under/jumpsuit/brown,
 		)
 	var/list/raider_shoes = list(
 		/obj/item/clothing/shoes/jackboots,

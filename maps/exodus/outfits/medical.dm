@@ -12,7 +12,7 @@
 /decl/hierarchy/outfit/job/medical/cmo
 	name = "Job - Chief Medical Officer"
 	l_ear = /obj/item/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/under/chief_medical_officer
+	uniform = /obj/item/clothing/under/jumpsuit/chief_medical_officer
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	shoes = /obj/item/clothing/shoes/color/brown
 	hands = list(/obj/item/storage/firstaid/adv)
@@ -22,7 +22,7 @@
 
 /decl/hierarchy/outfit/job/medical/doctor
 	name = "Job - Medical Doctor"
-	uniform = /obj/item/clothing/under/medical
+	uniform = /obj/item/clothing/under/jumpsuit/medical
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	hands = list(/obj/item/storage/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
@@ -34,12 +34,12 @@
 
 /decl/hierarchy/outfit/job/medical/doctor/surgeon
 	name = "Job - Surgeon"
-	uniform = /obj/item/clothing/under/medical/scrubs/blue
+	uniform = /obj/item/clothing/under/jumpsuit/medical/scrubs/blue
 	head = /obj/item/clothing/head/surgery/blue
 
 /decl/hierarchy/outfit/job/medical/doctor/virologist
 	name = "Job - Virologist"
-	uniform = /obj/item/clothing/under/virologist
+	uniform = /obj/item/clothing/under/jumpsuit/virologist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
 	mask = /obj/item/clothing/mask/surgical
 
@@ -60,12 +60,12 @@
 			uniform = /obj/item/clothing/under/nurse
 		head = /obj/item/clothing/head/nursehat
 	else
-		uniform = /obj/item/clothing/under/medical/scrubs/purple
+		uniform = /obj/item/clothing/under/jumpsuit/medical/scrubs/purple
 		head = null
 
 /decl/hierarchy/outfit/job/medical/chemist
 	name = "Job - Chemist"
-	uniform = /obj/item/clothing/under/chemist
+	uniform = /obj/item/clothing/under/jumpsuit/chemist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
 	id_type = /obj/item/card/id/medical
 	pda_type = /obj/item/modular_computer/pda/medical
@@ -76,7 +76,7 @@
 
 /decl/hierarchy/outfit/job/medical/psychiatrist
 	name = "Job - Psychiatrist"
-	uniform = /obj/item/clothing/under/psych
+	uniform = /obj/item/clothing/under/jumpsuit/psych
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/dress
 	id_type = /obj/item/card/id/medical

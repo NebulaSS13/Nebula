@@ -28,7 +28,7 @@
 	desc = "It's a very smart uniform with a special pocket for tips."
 	icon = 'icons/clothing/under/uniform_waiter.dmi'
 
-/obj/item/clothing/under/mailman
+/obj/item/clothing/under/jumpsuit/mailman
 	name = "mailman's jumpsuit"
 	desc = "<i>'Special delivery!'</i>"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_mailman.dmi'
@@ -63,21 +63,21 @@
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
 	displays_id = 0
 
-/obj/item/clothing/under/owl
+/obj/item/clothing/under/jumpsuit/owl
 	name = "owl uniform"
 	desc = "A jumpsuit with owl wings. Photorealistic owl feathers! Twooooo!"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_owl.dmi'
 
-/obj/item/clothing/under/johnny
+/obj/item/clothing/under/jumpsuit/johnny
 	name = "brown jumpsuit"
 	desc = "A label on the inside of the collar reads, 'johnny~~~'."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_johnny.dmi'
 
-/obj/item/clothing/under/color/rainbow
+/obj/item/clothing/under/jumpsuit/rainbow
 	name = "rainbow"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_rainbow.dmi'
 
-/obj/item/clothing/under/psysuit
+/obj/item/clothing/under/jumpsuit/psysuit
 	name = "dark undersuit"
 	desc = "A thick, layered grey undersuit lined with power cables. Feels a little like wearing an electrical storm."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psionic.dmi'
@@ -277,12 +277,12 @@
 	icon = 'icons/clothing/under/dresses/dress_sundress_white.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
-/obj/item/clothing/under/blackjumpskirt
+/obj/item/clothing/under/jumpsuit/blackjumpskirt
 	name = "black jumpskirt"
 	desc = "A black jumpskirt, with a pink undershirt."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt.dmi'
 
-/obj/item/clothing/under/shortjumpskirt
+/obj/item/clothing/under/jumpsuit/shortjumpskirt
 	name = "short jumpskirt"
 	desc = "A slimming, short jumpskirt."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt_short.dmi'
@@ -382,11 +382,6 @@
 	desc = "A rugged flannel shirt and denim overalls. A popular style among frontier colonists."
 	icon = 'icons/clothing/under/frontier.dmi'
 
-/obj/item/clothing/under/psych/turtleneck/sweater
-	name = "sweater"
-	desc = "A warm looking sweater and a pair of dark blue slacks."
-	icon = 'icons/clothing/under/uniform_turtleneck.dmi'
-
 /obj/item/clothing/under/savage_hunter
 	name = "savage hunter's hides"
 	desc = "Makeshift hides bound together with the sinew, packwax, and leather of some alien creature."
@@ -405,7 +400,7 @@
 	icon = 'icons/clothing/under/wetsuit.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
-/obj/item/clothing/under/hazard
+/obj/item/clothing/under/jumpsuit/hazard
 	name = "hazard jumpsuit"
 	desc = "A high visibility jumpsuit made from heat and radiation resistant materials."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hazard.dmi'
@@ -416,7 +411,7 @@
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/under/sterile
+/obj/item/clothing/under/jumpsuit/sterile
 	name = "sterile jumpsuit"
 	desc = "A sterile white jumpsuit with medical markings. Protects against all manner of biohazards."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sterile.dmi'

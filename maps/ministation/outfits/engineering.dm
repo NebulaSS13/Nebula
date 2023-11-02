@@ -6,7 +6,7 @@
 	pda_slot = slot_l_store_str
 	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 	head = /obj/item/clothing/head/hardhat
-	uniform = /obj/item/clothing/under/engineer
+	uniform = /obj/item/clothing/under/jumpsuit/engineer
 	r_pocket = /obj/item/t_scanner
 	id_type = /obj/item/card/id/ministation/engineering
 	pda_type = /obj/item/modular_computer/pda/engineering

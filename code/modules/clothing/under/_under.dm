@@ -36,13 +36,14 @@
 
 /obj/item/clothing/under/Initialize()
 	. = ..()
-	if(check_state_in_icon("[BODYTYPE_HUMANOID]-[slot_w_uniform_str]-rolled", icon))
-		verbs |= /obj/item/clothing/under/proc/roll_down_clothes
-	if(check_state_in_icon("[BODYTYPE_HUMANOID]-[slot_w_uniform_str]-sleeves", icon))
-		verbs |= /obj/item/clothing/under/proc/roll_up_sleeves
+	for(var/check_slot in get_associated_equipment_slots())
+		if(check_state_in_icon("[BODYTYPE_HUMANOID]-[check_slot]-rolled", icon))
+			verbs |= /obj/item/clothing/under/proc/roll_down_clothes
+		if(check_state_in_icon("[BODYTYPE_HUMANOID]-[check_slot]-sleeves", icon))
+			verbs |= /obj/item/clothing/under/proc/roll_up_sleeves
 
 /obj/item/clothing/under/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
-	if(overlay && slot == slot_w_uniform_str)
+	if(overlay && (slot == slot_w_uniform_str || slot == slot_lower_body_str))
 		if(rolled_down && check_state_in_icon("[overlay.icon_state]-rolled", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-rolled"
 		else

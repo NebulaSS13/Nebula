@@ -49,7 +49,7 @@
 	name = "Apprentice"
 	desc = "Summon your trusty apprentice, equipped with their very own spellbook."
 	equipment = list(/obj/item/clothing/head/wizard = slot_head_str,
-					/obj/item/clothing/under/color/lightpurple = slot_w_uniform_str,
+					/obj/item/clothing/under/jumpsuit/lightpurple = slot_w_uniform_str,
 					/obj/item/clothing/shoes/sandal = slot_shoes_str,
 					/obj/item/staff = BP_R_HAND,
 					/obj/item/spellbook/apprentice = BP_L_HAND,

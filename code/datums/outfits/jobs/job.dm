@@ -3,7 +3,7 @@
 	abstract_type = /decl/hierarchy/outfit/job
 
 	pants = /obj/item/clothing/pants
-	uniform = /obj/item/clothing/under/color/grey
+	uniform = /obj/item/clothing/under/jumpsuit/grey
 	l_ear = /obj/item/radio/headset
 	shoes = /obj/item/clothing/shoes/color/black
 

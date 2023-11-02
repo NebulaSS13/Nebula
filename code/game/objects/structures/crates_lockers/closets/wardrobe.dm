@@ -9,7 +9,7 @@
 
 /obj/structure/closet/wardrobe/red/WillContain()
 	return list(
-		/obj/item/clothing/under/security  = 3,
+		/obj/item/clothing/under/jumpsuit/security  = 3,
 		/obj/item/clothing/under/security2 = 3,
 		/obj/item/clothing/shoes/jackboots = 3,
 		/obj/item/clothing/head/soft/sec   = 3,
@@ -22,7 +22,7 @@
 
 /obj/structure/closet/wardrobe/pink/WillContain()
 	return list(
-		/obj/item/clothing/under/color/pink  = 3,
+		/obj/item/clothing/under/jumpsuit/pink  = 3,
 		/obj/item/clothing/shoes/color/brown = 3,
 	)
 
@@ -32,7 +32,7 @@
 
 /obj/structure/closet/wardrobe/black/WillContain()
 	return list(
-		/obj/item/clothing/under/color/black = 3,
+		/obj/item/clothing/under/jumpsuit/black = 3,
 		/obj/item/clothing/shoes/color/black = 3,
 		/obj/item/clothing/head/that         = 3,
 		/obj/item/clothing/head/soft/black   = 3,
@@ -46,7 +46,7 @@
 /obj/structure/closet/wardrobe/chaplain_black/WillContain()
 	return list(
 		/obj/item/storage/candle_box = 2,
-		/obj/item/clothing/under/chaplain,
+		/obj/item/clothing/under/jumpsuit/chaplain,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/suit/nun,
 		/obj/item/clothing/head/nun_hood,
@@ -64,7 +64,7 @@
 
 /obj/structure/closet/wardrobe/green/WillContain()
 	return list(
-		/obj/item/clothing/under/color/green = 3,
+		/obj/item/clothing/under/jumpsuit/green = 3,
 		/obj/item/clothing/shoes/color/black = 3,
 	)
 
@@ -85,7 +85,7 @@
 
 /obj/structure/closet/wardrobe/orange/WillContain()
 	return list(
-		/obj/item/clothing/under/color/orange = 3,
+		/obj/item/clothing/under/jumpsuit/orange = 3,
 		/obj/item/clothing/shoes/color/orange = 3,
 		/obj/item/radio/headset = 3,
 	)
@@ -96,7 +96,7 @@
 
 /obj/structure/closet/wardrobe/yellow/WillContain()
 	return list(
-		/obj/item/clothing/under/color/yellow = 3,
+		/obj/item/clothing/under/jumpsuit/yellow = 3,
 		/obj/item/clothing/shoes/color/orange = 3,
 	)
 
@@ -106,7 +106,7 @@
 
 /obj/structure/closet/wardrobe/atmospherics_yellow/WillContain()
 	return list(
-		/obj/item/clothing/under/atmospheric_technician = 3,
+		/obj/item/clothing/under/jumpsuit/atmospheric_technician = 3,
 		/obj/item/clothing/shoes/workboots = 3,
 		/obj/item/clothing/head/hardhat/red = 3,
 	)
@@ -117,7 +117,7 @@
 
 /obj/structure/closet/wardrobe/engineering_yellow/WillContain()
 	return list(
-		/obj/item/clothing/under/engineer  = 3,
+		/obj/item/clothing/under/jumpsuit/engineer  = 3,
 		/obj/item/clothing/shoes/workboots = 3,
 		/obj/item/clothing/head/hardhat    = 3,
 	)
@@ -128,7 +128,7 @@
 
 /obj/structure/closet/wardrobe/white/WillContain()
 	return list(
-		/obj/item/clothing/under/color/white = 3,
+		/obj/item/clothing/under/jumpsuit/white = 3,
 		/obj/item/clothing/shoes/color/white = 3,
 	)
 
@@ -150,7 +150,7 @@
 
 /obj/structure/closet/wardrobe/science_white/WillContain()
 	return list(
-		/obj/item/clothing/under/color/white = 3,
+		/obj/item/clothing/under/jumpsuit/white = 3,
 		/obj/item/clothing/suit/storage/toggle/labcoat = 3,
 		/obj/item/clothing/shoes/color/white = 3,
 	)
@@ -161,7 +161,7 @@
 
 /obj/structure/closet/wardrobe/robotics_black/WillContain()
 	return list(
-		/obj/item/clothing/under/roboticist = 2,
+		/obj/item/clothing/under/jumpsuit/roboticist = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat = 2,
 		/obj/item/clothing/shoes/color/black = 2,
 		/obj/item/clothing/gloves/thick = 2,
@@ -173,7 +173,7 @@
 
 /obj/structure/closet/wardrobe/chemistry_white/WillContain()
 	return list(
-		/obj/item/clothing/under/chemist = 2,
+		/obj/item/clothing/under/jumpsuit/chemist = 2,
 		/obj/item/clothing/shoes/color/white = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat/chemist = 2,
 	)
@@ -184,7 +184,7 @@
 
 /obj/structure/closet/wardrobe/genetics_white/WillContain()
 	return list(
-		/obj/item/clothing/under/geneticist  = 2,
+		/obj/item/clothing/under/jumpsuit/geneticist  = 2,
 		/obj/item/clothing/shoes/color/white = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat/genetics = 2,
 	)
@@ -195,7 +195,7 @@
 
 /obj/structure/closet/wardrobe/virology_white/WillContain()
 	return list(
-		/obj/item/clothing/under/virologist = 2,
+		/obj/item/clothing/under/jumpsuit/virologist = 2,
 		/obj/item/clothing/shoes/color/white = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist = 2,
 		/obj/item/clothing/mask/surgical = 2,
@@ -207,15 +207,15 @@
 
 /obj/structure/closet/wardrobe/medic_white/WillContain()
 	return list(
-		/obj/item/clothing/under/medical = 2,
+		/obj/item/clothing/under/jumpsuit/medical = 2,
 		/obj/item/clothing/shoes/color/white = 3,
 		/obj/item/clothing/suit/storage/toggle/labcoat = 2,
 		/obj/item/clothing/mask/surgical = 2,
-		/obj/item/clothing/under/medical/scrubs/blue,
-		/obj/item/clothing/under/medical/scrubs/green,
-		/obj/item/clothing/under/medical/scrubs/purple,
-		/obj/item/clothing/under/medical/scrubs/black,
-		/obj/item/clothing/under/medical/scrubs/navyblue,
+		/obj/item/clothing/under/jumpsuit/medical/scrubs/blue,
+		/obj/item/clothing/under/jumpsuit/medical/scrubs/green,
+		/obj/item/clothing/under/jumpsuit/medical/scrubs/purple,
+		/obj/item/clothing/under/jumpsuit/medical/scrubs/black,
+		/obj/item/clothing/under/jumpsuit/medical/scrubs/navyblue,
 		/obj/item/clothing/head/surgery/navyblue,
 		/obj/item/clothing/head/surgery/purple,
 		/obj/item/clothing/head/surgery/blue,
@@ -229,7 +229,7 @@
 
 /obj/structure/closet/wardrobe/grey/WillContain()
 	return list(
-		/obj/item/clothing/under/color/grey  = 3,
+		/obj/item/clothing/under/jumpsuit/grey  = 3,
 		/obj/item/clothing/shoes/color/black = 3,
 		/obj/item/clothing/head/soft/grey    = 3,
 	)
@@ -240,11 +240,11 @@
 
 /obj/structure/closet/wardrobe/mixed/WillContain()
 	return list(
-		/obj/item/clothing/under/color/blue,
-		/obj/item/clothing/under/color/yellow,
-		/obj/item/clothing/under/color/green,
-		/obj/item/clothing/under/color/orange,
-		/obj/item/clothing/under/color/pink,
+		/obj/item/clothing/under/jumpsuit/blue,
+		/obj/item/clothing/under/jumpsuit/yellow,
+		/obj/item/clothing/under/jumpsuit/green,
+		/obj/item/clothing/under/jumpsuit/orange,
+		/obj/item/clothing/under/jumpsuit/pink,
 		/obj/item/clothing/under/blouse,
 		/obj/item/clothing/pants/skirt/plaid_red,
 		/obj/item/clothing/under/blouse,

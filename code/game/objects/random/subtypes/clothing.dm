@@ -156,12 +156,12 @@
 	var/static/list/spawnable_choices = list(
 		/obj/item/clothing/under/syndicate/tacticool = 2,
 		/obj/item/clothing/under/syndicate/combat =    1,
-		/obj/item/clothing/under/hazard =              4,
-		/obj/item/clothing/under/sterile =             4,
+		/obj/item/clothing/under/jumpsuit/hazard =              4,
+		/obj/item/clothing/under/jumpsuit/sterile =             4,
 		/obj/item/clothing/pants/casual/camo =         2,
 		/obj/item/clothing/under/frontier =            2,
 		/obj/item/clothing/under/harness =             2,
-		/obj/item/clothing/under/medical/paramedic =   2,
+		/obj/item/clothing/under/jumpsuit/medical/paramedic =   2,
 		/obj/item/clothing/under/overalls =            2,
 		/obj/item/clothing/head/earmuffs =             2,
 		/obj/item/clothing/under/tactical =            1
