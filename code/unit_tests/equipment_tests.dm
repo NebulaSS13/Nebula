@@ -98,26 +98,30 @@
 
 /datum/unit_test/equipment_slot_test
 	name = "EQUIPMENT: Equipment should equip and unequip to slots in the expected manner"
+	/// A list of slot strings to types that can be equipped to that slot.
 	var/list/slot_to_valid_type
+	/// A single type that cannot be equipped to any slot.
 	var/slot_invalid_type = /obj/item/toy/balloon
+	/// A list of created atoms used for cleaning up after the test.
 	var/list/created_atoms = list()
 
 /datum/unit_test/equipment_slot_test/New()
 	..()
 	/// Ordering is important here, dependencies like ID should be after uniform, etc.
 	slot_to_valid_type = list(
-		"[slot_w_uniform_str]" = /obj/item/clothing/under/lawyer/purpsuit,
-		"[slot_back_str]"      = /obj/item/storage/backpack/clown,
-		"[slot_wear_id_str]"   = /obj/item/card/id,
-		"[slot_glasses_str]"   = /obj/item/clothing/glasses/meson,
-		"[slot_wear_mask_str]" = /obj/item/clothing/mask/gas/sexyclown,
-		"[slot_head_str]"      = /obj/item/clothing/head/hairflower,
-		"[slot_shoes_str]"     = /obj/item/clothing/shoes/magboots,
-		"[slot_gloves_str]"    = /obj/item/clothing/gloves/rainbow,
-		"[slot_l_ear_str]"     = /obj/item/clothing/head/hairflower,
-		"[slot_r_ear_str]"     = /obj/item/clothing/head/hairflower,
-		"[slot_belt_str]"      = /obj/item/storage/ore, // note: this should be an item without ITEM_FLAG_IS_BELT
-		"[slot_wear_suit_str]" = /obj/item/clothing/suit/chickensuit
+		"[slot_w_uniform_str]"  = /obj/item/clothing/accessory/toggleable/hawaii,
+		"[slot_lower_body_str]" = /obj/item/clothing/pants/formal/black,
+		"[slot_back_str]"       = /obj/item/storage/backpack/clown,
+		"[slot_wear_id_str]"    = /obj/item/card/id,
+		"[slot_glasses_str]"    = /obj/item/clothing/glasses/meson,
+		"[slot_wear_mask_str]"  = /obj/item/clothing/mask/gas/sexyclown,
+		"[slot_head_str]"       = /obj/item/clothing/head/hairflower,
+		"[slot_shoes_str]"      = /obj/item/clothing/shoes/magboots,
+		"[slot_gloves_str]"     = /obj/item/clothing/gloves/rainbow,
+		"[slot_l_ear_str]"      = /obj/item/clothing/head/hairflower,
+		"[slot_r_ear_str]"      = /obj/item/clothing/head/hairflower,
+		"[slot_belt_str]"       = /obj/item/storage/ore, // note: this should be an item without ITEM_FLAG_IS_BELT
+		"[slot_wear_suit_str]"  = /obj/item/clothing/suit/chickensuit
 	)
 
 /datum/unit_test/equipment_slot_test/proc/check_slot_equip_successful(mob/living/carbon/human/subject, obj/item/item, which_slot, list/failure_list)
@@ -171,15 +175,17 @@
 	var/belt_type =    slot_to_valid_type[slot_belt_str]
 	var/id_type =      slot_to_valid_type[slot_wear_id_str]
 	var/uniform_type = slot_to_valid_type[slot_w_uniform_str]
-	check_slot_equip_failure(subject,    new belt_type,              slot_belt_str,      failures)
-	check_slot_equip_failure(subject,    new id_type,                slot_wear_id_str,   failures)
-	check_slot_equip_failure(subject,    new /obj/item/screwdriver,  slot_l_store_str,   failures)
-	check_slot_equip_failure(subject,    new /obj/item/coin,         slot_r_store_str,   failures)
-	check_slot_equip_successful(subject, new uniform_type,           slot_w_uniform_str, failures)
-	check_slot_equip_successful(subject, new belt_type,              slot_belt_str,      failures)
-	check_slot_equip_successful(subject, new id_type,                slot_wear_id_str,   failures)
-	check_slot_equip_successful(subject, new /obj/item/screwdriver,  slot_l_store_str,   failures)
-	check_slot_equip_successful(subject, new /obj/item/coin,         slot_r_store_str,   failures)
+	var/pants_type   = slot_to_valid_type[slot_lower_body_str]
+	check_slot_equip_failure(subject,    new belt_type,              slot_belt_str,       failures)
+	check_slot_equip_failure(subject,    new id_type,                slot_wear_id_str,    failures)
+	check_slot_equip_failure(subject,    new /obj/item/screwdriver,  slot_l_store_str,    failures)
+	check_slot_equip_failure(subject,    new /obj/item/coin,         slot_r_store_str,    failures)
+	check_slot_equip_successful(subject, new uniform_type,           slot_w_uniform_str,  failures)
+	check_slot_equip_successful(subject, new pants_type,             slot_lower_body_str, failures)
+	check_slot_equip_successful(subject, new belt_type,              slot_belt_str,       failures)
+	check_slot_equip_successful(subject, new id_type,                slot_wear_id_str,    failures)
+	check_slot_equip_successful(subject, new /obj/item/screwdriver,  slot_l_store_str,    failures)
+	check_slot_equip_successful(subject, new /obj/item/coin,         slot_r_store_str,    failures)
 
 	// Check suit storage depending on suit.
 	var/obj/item/clothing/suit/suit = new /obj/item/clothing/suit/space/void/mining

@@ -38,5 +38,6 @@ var/global/list/abstract_inventory_slots = list(
 )
 
 var/global/list/vitals_sensor_equip_slots = list(
-	slot_w_uniform_str
+	slot_w_uniform_str,
+	slot_lower_body_str
 )
