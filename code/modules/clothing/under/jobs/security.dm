@@ -84,7 +84,7 @@
 	icon = 'icons/clothing/under/uniform_detective_1.dmi'
 	siemens_coefficient = 0.9
 	starting_accessories = list(/obj/item/clothing/accessory/blue_clip)
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/under/det/grey
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
@@ -110,7 +110,7 @@
 	flags_inv = BLOCK_HEAD_HAIR
 	markings_icon = "band"
 	markings_color = "#b2977c"
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/head/det/attack_self(mob/user)
@@ -139,7 +139,7 @@
 		ARMOR_MELEE = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.8
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 	origin_tech = "{'materials':1,'engineering':1, 'combat':1}"
 
@@ -149,7 +149,7 @@
 	icon = 'icons/clothing/head/hos.dmi'
 	body_parts_covered = 0
 	siemens_coefficient = 0.8
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/clothing/suit/armor/hos
 	name = "armored coat"
@@ -165,7 +165,7 @@
 		)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.6
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT
@@ -187,7 +187,7 @@
 	icon = 'icons/clothing/suit/jensen.dmi'
 	flags_inv = 0
 	siemens_coefficient = 0.6
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT

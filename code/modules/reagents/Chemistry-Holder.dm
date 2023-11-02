@@ -53,7 +53,7 @@ var/global/obj/temp_reagents_holder = new
 			. = reagent.name
 
 /datum/reagents/proc/get_primary_reagent_decl()
-	. = primary_reagent && GET_DECL(primary_reagent)
+	. = GET_DECL(primary_reagent)
 
 /datum/reagents/proc/update_total() // Updates volume.
 	total_volume = 0

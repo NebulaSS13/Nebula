@@ -6,9 +6,9 @@
 	volume = 30
 	amount_per_transfer_from_this = 5
 	atom_flags = 0
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 	color = "#ff0000"
 	var/primary_color = "#ff0000"

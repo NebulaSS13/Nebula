@@ -36,7 +36,7 @@
 	material = /decl/material/solid/metal/titanium
 	matter = list(
 		/decl/material/solid/fiberglass           = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/plastic              = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic              = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/copper         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon              = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_TRACE,

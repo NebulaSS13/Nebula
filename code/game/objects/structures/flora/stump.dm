@@ -20,7 +20,7 @@
 	icon       = 'icons/obj/flora/tree_stumps.dmi'
 	w_class    = ITEM_SIZE_HUGE
 	pixel_x    = -16 //All trees are offset 16 pixels
-	material   = /decl/material/solid/wood
+	material   = /decl/material/solid/organic/wood
 
 //dead trees
 /obj/structure/flora/stump/tree/dead

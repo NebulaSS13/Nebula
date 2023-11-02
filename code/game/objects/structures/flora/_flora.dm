@@ -6,7 +6,7 @@
 	anchored               = TRUE
 	density                = FALSE                                  //Plants usually have no collisions
 	w_class                = ITEM_SIZE_NORMAL                       //Size determines material yield
-	material               = /decl/material/solid/plantmatter       //Generic plantstuff
+	material               = /decl/material/solid/organic/plantmatter       //Generic plantstuff
 	tool_interaction_flags = 0
 	hitsound               = 'sound/effects/hit_bush.ogg'
 	var/tmp/snd_cut        = 'sound/effects/plants/brush_leaves.ogg' //Sound to play when cutting the plant down

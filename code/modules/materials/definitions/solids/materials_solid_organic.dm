@@ -1,4 +1,10 @@
-/decl/material/solid/plastic
+/decl/material/solid/organic
+	abstract_type = /decl/material/solid/organic
+	ignition_point = T0C+500 // Based on loose ignition temperature of plastic
+	accelerant_value = 0.1
+	burn_product = /decl/material/gas/carbon_monoxide
+
+/decl/material/solid/organic/plastic
 	name = "plastic"
 	uid = "solid_plastic"
 	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
@@ -18,14 +24,13 @@
 	reflectiveness = MAT_VALUE_SHINY
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	taste_description = "plastic"
-	fuel_value = 0.6
-	burn_product = /decl/material/gas/carbon_monoxide // placeholder for more appropriate toxins
+	accelerant_value = 0.6
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	default_solid_form = /obj/item/stack/material/panel
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/plastic/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/plastic/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -37,7 +42,7 @@
 	. += new/datum/stack_recipe/hazard_cone(src)
 	. += new/datum/stack_recipe/furniture/flaps(src)
 
-/decl/material/solid/plastic/holographic
+/decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
 	uid = "solid_holographic_plastic"
 	shard_type = SHARD_NONE
@@ -45,10 +50,10 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
-/decl/material/solid/plastic/holographic/get_recipes(reinf_mat)
+/decl/material/solid/organic/plastic/holographic/get_recipes(reinf_mat)
 	return list()
 
-/decl/material/solid/cardboard
+/decl/material/solid/organic/cardboard
 	name = "cardboard"
 	uid = "solid_cardboard"
 	lore_text = "What with the difficulties presented by growing plants in orbit, a stock of cardboard in space is probably more valuable than gold."
@@ -77,7 +82,7 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/cardboard/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/cardboard/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -86,7 +91,7 @@
 	. += new/datum/stack_recipe/cardborg_helmet(src)
 	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
 
-/decl/material/solid/paper
+/decl/material/solid/organic/paper
 	name                    = "paper"
 	uid                     = "solid_paper"
 	lore_text               = "Low tech writing medium made from cellulose fibers. Also used in wrappings and packaging."
@@ -117,13 +122,13 @@
 	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/paper/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/paper/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/paper_sheets(src)
 
-/decl/material/solid/cloth //todo
+/decl/material/solid/organic/cloth //todo
 	name = "cotton"
 	uid = "solid_cotton"
 	use_name = "cotton"
@@ -147,77 +152,77 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/cloth/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/cloth/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/cloak(src)
 	. += new/datum/stack_recipe/banner(src)
 
-/decl/material/solid/cloth/yellow
+/decl/material/solid/organic/cloth/yellow
 	name = "yellow"
 	uid = "solid_cotton_yellow"
 	use_name = "yellow cloth"
 	adjective_name = "yellow"
 	color = "#ffbf00"
 
-/decl/material/solid/cloth/teal
+/decl/material/solid/organic/cloth/teal
 	name = "teal"
 	uid = "solid_cotton_teal"
 	use_name = "teal cloth"
 	adjective_name = "teal"
 	color = "#00e1ff"
 
-/decl/material/solid/cloth/black
+/decl/material/solid/organic/cloth/black
 	name = "black"
 	uid = "solid_cotton_black"
 	use_name = "black cloth"
 	adjective_name = "black"
 	color = "#505050"
 
-/decl/material/solid/cloth/green
+/decl/material/solid/organic/cloth/green
 	name = "green"
 	uid = "solid_cotton_green"
 	use_name = "green cloth"
 	adjective_name = "green"
 	color = "#b7f27d"
 
-/decl/material/solid/cloth/purple
+/decl/material/solid/organic/cloth/purple
 	name = "purple"
 	uid = "solid_cotton_purple"
 	use_name = "purple cloth"
 	adjective_name = "purple"
 	color = "#9933ff"
 
-/decl/material/solid/cloth/blue
+/decl/material/solid/organic/cloth/blue
 	name = "blue"
 	uid = "solid_cotton_blue"
 	use_name = "blue cloth"
 	adjective_name = "blue"
 	color = "#46698c"
 
-/decl/material/solid/cloth/beige
+/decl/material/solid/organic/cloth/beige
 	name = "beige"
 	uid = "solid_cotton_beige"
 	use_name = "beige cloth"
 	adjective_name = "beige"
 	color = "#ceb689"
 
-/decl/material/solid/cloth/lime
+/decl/material/solid/organic/cloth/lime
 	name = "lime"
 	uid = "solid_cotton_lime"
 	use_name = "lime cloth"
 	adjective_name = "lime"
 	color = "#62e36c"
 
-/decl/material/solid/cloth/red
+/decl/material/solid/organic/cloth/red
 	name = "red"
 	uid = "solid_cotton_red"
 	use_name = "red cloth"
 	adjective_name = "red"
 	color = "#9d2300"
 
-/decl/material/solid/carpet
+/decl/material/solid/organic/carpet
 	name = "red"
 	uid = "solid_carpet"
 	use_name = "red upholstery"
@@ -239,7 +244,7 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/plantmatter
+/decl/material/solid/organic/plantmatter
 	name = "plant matter"
 	uid = "solid_plantmatter"
 	color = COLOR_GREEN_GRAY
@@ -260,7 +265,7 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/meat
+/decl/material/solid/organic/meat
 	name = "meat"
 	uid = "solid_meat"
 	color = COLOR_DARK_RED
@@ -282,7 +287,7 @@
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = 'sound/effects/squelch1.ogg'
 
-/decl/material/solid/skin
+/decl/material/solid/organic/skin
 	name = "skin"
 	uid = "solid_skin"
 	color = "#9e8c72"
@@ -304,9 +309,9 @@
 	sound_dropped = 'sound/foley/meat2.ogg'
 	hitsound = "punch"
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-	var/tans_to = /decl/material/solid/leather
+	var/tans_to = /decl/material/solid/organic/leather
 
-/decl/material/solid/skin/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/skin/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -314,21 +319,21 @@
 	. += new/datum/stack_recipe/banner(src)
 	. += new/datum/stack_recipe/shoes(src)
 
-/decl/material/solid/skin/lizard
+/decl/material/solid/organic/skin/lizard
 	name = "lizardskin"
 	uid = "solid_lizardskin"
 	color = "#626952"
-	tans_to = /decl/material/solid/leather/lizard
+	tans_to = /decl/material/solid/organic/leather/lizard
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
-/decl/material/solid/skin/insect
+/decl/material/solid/organic/skin/insect
 	name = "chitin"
 	uid = "solid_chitin"
 	color = "#7a776d"
-	tans_to = /decl/material/solid/leather/chitin
+	tans_to = /decl/material/solid/organic/leather/chitin
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
 	weight = MAT_VALUE_VERY_LIGHT
@@ -336,56 +341,56 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/skin/fur
+/decl/material/solid/organic/skin/fur
 	name = "fur"
 	uid = "solid_fur"
 	color = "#7a726d"
-	tans_to = /decl/material/solid/leather/fur
+	tans_to = /decl/material/solid/organic/leather/fur
 	default_solid_form = /obj/item/stack/material/skin/pelt
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/skin/fur/gray
+/decl/material/solid/organic/skin/fur/gray
 	uid = "solid_fur_gray"
 
-/decl/material/solid/skin/fur/white
+/decl/material/solid/organic/skin/fur/white
 	uid = "solid_fur_white"
 
-/decl/material/solid/skin/fur/orange
+/decl/material/solid/organic/skin/fur/orange
 	color = COLOR_ORANGE
 	uid = "solid_fur_orange"
 
-/decl/material/solid/skin/fur/black
+/decl/material/solid/organic/skin/fur/black
 	color = COLOR_GRAY20
 	uid = "solid_fur_black"
 
-/decl/material/solid/skin/fur/heavy
+/decl/material/solid/organic/skin/fur/heavy
 	color = COLOR_GUNMETAL
 	uid = "solid_fur_heavy"
 
-/decl/material/solid/skin/goat
+/decl/material/solid/organic/skin/goat
 	color = COLOR_SILVER
 	uid = "solid_skin_goat"
 
-/decl/material/solid/skin/cow
+/decl/material/solid/organic/skin/cow
 	color = COLOR_GRAY40
 	uid = "solid_skin_cow"
 
-/decl/material/solid/skin/shark
+/decl/material/solid/organic/skin/shark
 	name = "sharkskin"
 	color = COLOR_PURPLE_GRAY
 	uid = "solid_skin_shark"
 
-/decl/material/solid/skin/fish
+/decl/material/solid/organic/skin/fish
 	color = COLOR_BOTTLE_GREEN
 	name = "fishskin"
 	uid = "solid_skin_fish"
 
-/decl/material/solid/skin/fish/purple
+/decl/material/solid/organic/skin/fish/purple
 	color = COLOR_PALE_PURPLE_GRAY
 	uid = "solid_skin_carp"
 
-/decl/material/solid/skin/feathers
+/decl/material/solid/organic/skin/feathers
 	name = "feathers"
 	uid = "solid_feathers"
 	color = COLOR_SILVER
@@ -393,31 +398,31 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/skin/feathers/purple
+/decl/material/solid/organic/skin/feathers/purple
 	color = COLOR_PALE_PURPLE_GRAY
 	uid = "solid_feathers_purple"
 
-/decl/material/solid/skin/feathers/blue
+/decl/material/solid/organic/skin/feathers/blue
 	color = COLOR_SKY_BLUE
 	uid = "solid_feathers_blue"
 
-/decl/material/solid/skin/feathers/green
+/decl/material/solid/organic/skin/feathers/green
 	color = COLOR_BOTTLE_GREEN
 	uid = "solid_feathers_green"
 
-/decl/material/solid/skin/feathers/brown
+/decl/material/solid/organic/skin/feathers/brown
 	color = COLOR_BEASTY_BROWN
 	uid = "solid_feathers_brown"
 
-/decl/material/solid/skin/feathers/red
+/decl/material/solid/organic/skin/feathers/red
 	color = COLOR_RED
 	uid = "solid_feathers_red"
 
-/decl/material/solid/skin/feathers/black
+/decl/material/solid/organic/skin/feathers/black
 	color = COLOR_GRAY15
 	uid = "solid_feathers_black"
 
-/decl/material/solid/bone
+/decl/material/solid/organic/bone
 	name = "bone"
 	uid = "solid_bone"
 	color = "#f0edc7"
@@ -436,13 +441,13 @@
 	sound_manipulate = 'sound/foley/stickspickup1.ogg'
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
 
-/decl/material/solid/bone/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/bone/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(!reinforce_material && wall_support_value >= 10)
 		. += new/datum/stack_recipe/furniture/girder(src)
 		. += new/datum/stack_recipe/furniture/ladder(src)
 
-/decl/material/solid/bone/fish
+/decl/material/solid/organic/bone/fish
 	name = "fishbone"
 	uid = "solid_fishbone"
 	hardness = MAT_VALUE_FLEXIBLE
@@ -450,7 +455,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
-/decl/material/solid/bone/cartilage
+/decl/material/solid/organic/bone/cartilage
 	name = "cartilage"
 	uid = "solid_cartilage"
 	hardness = 0
@@ -458,7 +463,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
-/decl/material/solid/leather
+/decl/material/solid/organic/leather
 	name = "leather"
 	uid = "solid_leather"
 	color = "#5c4831"
@@ -480,7 +485,7 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/leather/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/leather/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
@@ -489,14 +494,14 @@
 	. += new/datum/stack_recipe/shoes(src)
 	. += new/datum/stack_recipe/boots(src)
 
-/decl/material/solid/leather/synth
+/decl/material/solid/organic/leather/synth
 	name = "synthleather"
 	uid = "solid_synthleather"
 	color = "#1f1f20"
 	ignition_point = T0C+150
 	melting_point = T0C+100
 
-/decl/material/solid/leather/lizard
+/decl/material/solid/organic/leather/lizard
 	name = "scaled hide"
 	uid = "solid_scaled_hide"
 	color = "#434b31"
@@ -505,11 +510,11 @@
 	weight = MAT_VALUE_LIGHT
 	reflectiveness = MAT_VALUE_SHINY
 
-/decl/material/solid/leather/fur
+/decl/material/solid/organic/leather/fur
 	name = "tanned pelt"
 	uid = "solid_tanned_pelt"
 
-/decl/material/solid/leather/chitin
+/decl/material/solid/organic/leather/chitin
 	name = "treated chitin"
 	uid = "solid_treated_chitin"
 	integrity = 100

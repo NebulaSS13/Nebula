@@ -6,7 +6,7 @@
 	icon_state = "rawcutlet"
 	bitesize = 1
 	center_of_mass = @"{'x':17,'y':20}"
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/rawcutlet/populate_reagents()
 	. = ..()
@@ -19,7 +19,7 @@
 	icon_state = "cutlet"
 	bitesize = 2
 	center_of_mass = @"{'x':17,'y':20}"
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/cutlet/populate_reagents()
 	. = ..()
@@ -32,7 +32,7 @@
 	icon_state = "rawmeatball"
 	bitesize = 2
 	center_of_mass = @"{'x':16,'y':15}"
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/rawmeatball/populate_reagents()
 	. = ..()
@@ -45,7 +45,7 @@
 	filling_color = "#db0000"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/meatball/populate_reagents()
 	. = ..()
@@ -61,7 +61,7 @@
 	filling_color = "#7a3d11"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/plainsteak/populate_reagents()
 	. = ..()
@@ -75,7 +75,7 @@
 	filling_color = "#7a3d11"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/meatsteak/populate_reagents()
 	. = ..()
@@ -97,7 +97,7 @@
 	nutriment_desc = list("onion" = 2, "mushroom" = 2)
 	nutriment_amt = 4
 	bitesize = 3
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/loadedsteak/populate_reagents()
 	. = ..()
@@ -121,7 +121,7 @@
 	filling_color = "#db0000"
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/bearmeat/populate_reagents()
 	. = ..()
@@ -135,7 +135,7 @@
 	filling_color = "#d5f5dc"
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/spider/populate_reagents()
 	. = ..()
@@ -154,7 +154,7 @@
 	filling_color = "#43de18"
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 6
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/xenomeat/populate_reagents()
 	. = ..()
@@ -169,7 +169,7 @@
 	filling_color = "#db0000"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/sausage/populate_reagents()
 	. = ..()
@@ -182,7 +182,7 @@
 	filling_color = "#db0000"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/fatsausage/populate_reagents()
 	. = ..()

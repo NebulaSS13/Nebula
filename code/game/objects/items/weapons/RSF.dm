@@ -15,7 +15,7 @@ RSF
 	var/stored_matter = 30
 	var/mode = 1
 	w_class = ITEM_SIZE_NORMAL
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass        = MATTER_AMOUNT_REINFORCEMENT,

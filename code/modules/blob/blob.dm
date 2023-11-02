@@ -347,7 +347,7 @@ regen() will cover update_icon() for this proc
 	item_state = "blob_tendril"
 	w_class = ITEM_SIZE_LARGE
 	attack_verb = list("smacked", "smashed", "whipped")
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 	var/is_tendril = TRUE
 	var/types_of_tendril = list("solid", "fire")
 

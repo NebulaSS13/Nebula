@@ -10,7 +10,7 @@
 	can_be_placed_into = null
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 	var/on_fire = 0
 	var/burn_time = 20 //if the rag burns for too long it turns to ashes
@@ -169,7 +169,7 @@
 		total_volume += reagents.total_volume
 		for(var/rtype in reagents.reagent_volumes)
 			var/decl/material/R = GET_DECL(rtype)
-			total_fuel = REAGENT_VOLUME(reagents, rtype) * R.fuel_value
+			total_fuel += REAGENT_VOLUME(reagents, rtype) * R.accelerant_value
 	. = (total_fuel >= 2 && total_fuel >= total_volume*0.5)
 
 /obj/item/chems/glass/rag/proc/ignite()

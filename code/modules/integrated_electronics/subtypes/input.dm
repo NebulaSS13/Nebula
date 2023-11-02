@@ -1038,7 +1038,7 @@
 		/decl/material/solid/metal/plasteel,
 		/decl/material/solid/metal/titanium,
 		/decl/material/solid/glass,
-		/decl/material/solid/plastic
+		/decl/material/solid/organic/plastic
 	)
 
 /obj/item/integrated_circuit/input/matscan/do_work()

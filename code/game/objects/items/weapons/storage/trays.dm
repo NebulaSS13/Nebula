@@ -16,7 +16,7 @@
 	use_to_pickup = 1
 	allow_quick_gather = 1
 	use_sound = null
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/cooldown = 0	//Cooldown for banging the tray with a rolling pin. based on world.time. very silly
 	var/no_drop = FALSE
@@ -152,7 +152,7 @@ TRAY TYPES GO HERE
 /obj/item/storage/tray/wood
 	name = "tray" //material names are automatic kay?
 	desc = "A wooden tray to serve food on."
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/storage/tray/metal
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

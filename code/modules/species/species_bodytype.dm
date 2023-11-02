@@ -89,7 +89,7 @@ var/global/list/bodytypes_by_category = list()
 	var/base_hair_color = COLOR_BLACK
 
 	/// Used to initialize organ material
-	var/material =        /decl/material/solid/meat
+	var/material =        /decl/material/solid/organic/meat
 	/// Used to initialize organ matter
 	var/matter =          null
 	/// The reagent organs are filled with, which currently affects what mobs that eat the organ will receive.

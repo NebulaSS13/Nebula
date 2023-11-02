@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	var/color_selection
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/cable_painter/Initialize()
 	. = ..()

@@ -18,7 +18,7 @@
 	w_class          = ITEM_SIZE_TINY
 	throwforce       = 0
 	throw_range      = 10
-	material         = /decl/material/solid/plastic
+	material         = /decl/material/solid/organic/plastic
 	var/tmp/max_uses = 10
 	var/uses_left    = 10
 
@@ -64,7 +64,7 @@
 	randpixel   = 10
 	w_class     = ITEM_SIZE_TINY
 	item_flags  = ITEM_FLAG_CAN_TAPE
-	material    = /decl/material/solid/plastic
+	material    = /decl/material/solid/organic/plastic
 	var/id              //Unique id used to name the photo resource to upload to the client, and for synthetic photo synchronization
 	var/icon/img	    //The actual real photo image
 	var/image/tiny      //A thumbnail of the image that's displayed on the actual world icon of the photo
@@ -183,7 +183,7 @@
 	w_class       = ITEM_SIZE_NORMAL //same as book
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
 	can_hold = list(/obj/item/photo)
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user)
 	if(over == user && in_range(src, user) || loc == user)
@@ -207,7 +207,7 @@
 	obj_flags            = OBJ_FLAG_CONDUCTIBLE
 	slot_flags           = SLOT_LOWER_BODY
 	material             = /decl/material/solid/metal/aluminium
-	matter               = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter               = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/turned_on        = TRUE
 	var/field_of_view    = 3       //3 tiles
 	var/obj/item/camera_film/film  //Currently loaded film

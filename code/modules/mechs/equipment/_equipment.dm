@@ -6,7 +6,7 @@
 	icon_state = ""
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
 	)
 	force = 10

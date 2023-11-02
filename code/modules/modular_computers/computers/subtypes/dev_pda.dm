@@ -7,7 +7,7 @@
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic =     MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic =     MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass =       MATTER_AMOUNT_TRACE
 	)
 	w_class = ITEM_SIZE_SMALL

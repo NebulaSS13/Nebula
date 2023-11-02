@@ -476,7 +476,7 @@
 	icon = 'icons/obj/toy/toy.dmi'
 	icon_state = "ship"
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel   = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/copper  = MATTER_AMOUNT_REINFORCEMENT,

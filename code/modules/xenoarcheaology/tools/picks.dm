@@ -29,7 +29,7 @@
 	drill_sound = 'sound/weapons/thudswoosh.ogg'
 	drill_verb = "brushing"
 	sharp = 0
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/pickaxe/xeno/one_pick
@@ -99,7 +99,7 @@
 	max_storage_space = 18
 	max_w_class = ITEM_SIZE_NORMAL
 	use_to_pickup = 1
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 
 /obj/item/storage/excavation/WillContain()
 	return list(

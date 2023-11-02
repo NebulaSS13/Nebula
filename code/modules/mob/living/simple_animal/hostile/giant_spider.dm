@@ -39,7 +39,7 @@
 	meat_amount = 3
 	bone_material = null
 	bone_amount =   0
-	skin_material = /decl/material/solid/skin/insect
+	skin_material = /decl/material/solid/organic/skin/insect
 	skin_amount =   5
 
 	glowing_eyes = TRUE

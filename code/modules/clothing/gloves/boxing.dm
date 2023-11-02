@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	color = COLOR_RED_GRAY
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_PADDED
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/clothing/gloves/boxing/green
 	color = COLOR_GREEN_GRAY

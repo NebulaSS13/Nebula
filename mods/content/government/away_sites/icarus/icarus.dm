@@ -74,7 +74,7 @@
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "dead_personnel"
 	w_class = ITEM_SIZE_LARGE//pile of bones
-	material = /decl/material/solid/bone
+	material = /decl/material/solid/organic/bone
 
 /obj/item/disk/icarus
 	name = "black box backup disk"

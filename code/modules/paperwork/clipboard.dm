@@ -10,7 +10,7 @@
 	throw_range             = 10
 	slot_flags              = SLOT_LOWER_BODY
 	material_alteration     = MAT_FLAG_ALTERATION_COLOR
-	material                = /decl/material/solid/wood
+	material                = /decl/material/solid/organic/wood
 	drop_sound              = 'sound/foley/tooldrop5.ogg'
 	pickup_sound            = 'sound/foley/paperpickup2.ogg'
 
@@ -195,7 +195,7 @@
 		close_browser(user, initial(name))
 
 /obj/item/clipboard/ebony
-	material = /decl/material/solid/wood/ebony
+	material = /decl/material/solid/organic/wood/ebony
 
 /obj/item/clipboard/steel
 	material = /decl/material/solid/metal/steel
@@ -207,4 +207,4 @@
 	material = /decl/material/solid/glass
 
 /obj/item/clipboard/plastic
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic

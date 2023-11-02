@@ -141,7 +141,7 @@ var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world ca
 	cuff_type = "cable restraints"
 	elastic = 1
 	max_health = 75
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
@@ -179,4 +179,4 @@ var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world ca
 	breakouttime = 200
 	cuff_type = "duct tape"
 	max_health = 50
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic

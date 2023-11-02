@@ -42,7 +42,7 @@
 /obj/item/clothing/shoes/jackboots/medievalboots
 	name = "leather boots"
 	desc = "Old-fashioned leather boots. Probably not something you want to get kicked with."
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	force = 5
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,

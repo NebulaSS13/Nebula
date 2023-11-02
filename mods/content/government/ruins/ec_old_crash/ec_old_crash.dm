@@ -58,7 +58,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "docs_part"
 	item_state = "paper"
-	material = /decl/material/solid/paper
+	material = /decl/material/solid/organic/paper
 
 /obj/item/ecletters/Initialize()
 	. = ..()

@@ -329,3 +329,13 @@
 		return FALSE
 	var/decl/material/mat = get_material()
 	return !mat || mat.dissolves_in <= solvent_power
+
+/obj/melt()
+	if(length(matter))
+		var/datum/gas_mixture/environment = loc?.return_air()
+		for(var/mat in matter)
+			var/decl/material/M = GET_DECL(mat)
+			M.add_burn_product(environment, MOLES_PER_MATERIAL_UNIT(matter[mat]))
+		matter = null
+	new /obj/effect/decal/cleanable/molten_item(src)
+	qdel(src)

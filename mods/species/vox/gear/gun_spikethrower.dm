@@ -59,4 +59,4 @@
 	icon_state = "quill"
 	item_state = "quill"
 	throwforce = 5
-	material = /decl/material/solid/leather/chitin
+	material = /decl/material/solid/organic/leather/chitin

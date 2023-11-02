@@ -35,8 +35,8 @@
 /obj/structure/table/bench/wooden
 	icon_state = "solid_preview"
 	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/wood
-	reinf_material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
+	reinf_material = /decl/material/solid/organic/wood
 
 /obj/structure/table/bench/padded
 	icon_state = "padded_preview"

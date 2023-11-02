@@ -8,10 +8,10 @@
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A set of identifying documents."
-	material = /decl/material/solid/paper
+	material = /decl/material/solid/organic/paper
 	matter = list(
-		/decl/material/solid/leather = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/cardboard = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/organic/leather   = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/cardboard = MATTER_AMOUNT_REINFORCEMENT
 	)
 	var/info
 

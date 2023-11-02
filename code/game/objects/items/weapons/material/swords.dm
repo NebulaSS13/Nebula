@@ -51,11 +51,11 @@
 	. = ..()
 
 /obj/item/sword/wood
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	draw_handle = FALSE
 
 /obj/item/sword/replica
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/sword/katana
 	name = "katana"
@@ -65,16 +65,16 @@
 
 /obj/item/sword/katana/set_material(new_material)
 	. = ..()
-	if((material_alteration & MAT_FLAG_ALTERATION_NAME) && istype(material, /decl/material/solid/wood))
+	if((material_alteration & MAT_FLAG_ALTERATION_NAME) && istype(material, /decl/material/solid/organic/wood))
 		SetName("[material.solid_name] bokutou")
 		desc = "Finest wooden fibers folded exactly one thousand times by master robots."
 
 /obj/item/sword/katana/bamboo
-	material = /decl/material/solid/wood/bamboo
+	material = /decl/material/solid/organic/wood/bamboo
 	draw_handle = FALSE
 
 /obj/item/sword/katana/wood
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	draw_handle = FALSE
 
 /obj/item/sword/katana/vibro

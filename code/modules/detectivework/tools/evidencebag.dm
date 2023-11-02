@@ -7,7 +7,7 @@
 	icon_state = "evidenceobj"
 	item_state = ""
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 	var/obj/item/stored_item = null
 

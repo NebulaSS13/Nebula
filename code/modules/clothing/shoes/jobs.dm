@@ -14,7 +14,7 @@
 	name = "jackboots"
 	desc = "Tall synthleather boots with an artificial shine."
 	icon = 'icons/clothing/feet/boots.dmi'
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	force = 3
 	armor = list(
@@ -45,7 +45,7 @@
 	name = "workboots"
 	desc = "A pair of steel-toed work boots designed for use in industrial settings. Safety first."
 	icon = 'icons/clothing/feet/boots.dmi'
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 	color = "#d88d4b"
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,

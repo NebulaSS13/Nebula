@@ -69,7 +69,7 @@
 	icon = 'icons/obj/molluscs.dmi'
 	icon_state = "mollusc_shell"
 	desc = "The cracked shell of an unfortunate mollusc."
-	material = /decl/material/solid/bone
+	material = /decl/material/solid/organic/bone
 
 /obj/item/trash/mollusc_shell/clam
 	name = "clamshell"
@@ -87,7 +87,7 @@
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/liquid/nutriment/slime_meat
 	matter = list(
-		/decl/material/solid/bone/fish = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/organic/bone/fish = MATTER_AMOUNT_SECONDARY,
 	)
 	var/meat_type = /obj/item/chems/food/fish/mollusc
 	var/shell_type = /obj/item/trash/mollusc_shell

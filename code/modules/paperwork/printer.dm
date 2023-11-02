@@ -10,7 +10,7 @@
 	icon_state = "printer"
 	randpixel  = 5
 	w_class    = ITEM_SIZE_SMALL
-	material   = /decl/material/solid/plastic
+	material   = /decl/material/solid/organic/plastic
 	matter     = list(
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/fiberglass   = MATTER_AMOUNT_REINFORCEMENT,

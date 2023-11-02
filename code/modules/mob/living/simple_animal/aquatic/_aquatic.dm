@@ -11,8 +11,8 @@
 	meat_amount = 1
 	bone_amount = 1
 	skin_amount = 2
-	bone_material = /decl/material/solid/bone/fish
-	skin_material = /decl/material/solid/skin/fish
+	bone_material = /decl/material/solid/organic/bone/fish
+	skin_material = /decl/material/solid/organic/skin/fish
 
 /mob/living/simple_animal/aquatic/Initialize()
 	. = ..()

@@ -7,7 +7,7 @@
 	attack_verb = list("attacked", "poked", "battered")
 	body_parts_covered = 0
 	chem_volume = 0 //ecig has no storage on its own but has reagent container created by parent obj
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	var/brightness_on = 1
 	var/obj/item/cell/cigcell

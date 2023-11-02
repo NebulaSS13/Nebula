@@ -3,7 +3,7 @@
 	desc = "written in the blood of some unfortunate fellow."
 	icon = 'icons/mob/screen_spells.dmi'
 	icon_state = "master_open"
-	material = /decl/material/solid/paper
+	material = /decl/material/solid/organic/paper
 	var/contract_master = null
 	var/list/contract_spells = list(/spell/contract/reward,/spell/contract/punish,/spell/contract/return_master)
 

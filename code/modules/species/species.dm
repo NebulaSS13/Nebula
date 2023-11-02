@@ -82,9 +82,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	// Death vars.
 	var/meat_type =     /obj/item/chems/food/meat/human
 	var/meat_amount =   3
-	var/skin_material = /decl/material/solid/skin
+	var/skin_material = /decl/material/solid/organic/skin
 	var/skin_amount =   3
-	var/bone_material = /decl/material/solid/bone
+	var/bone_material = /decl/material/solid/organic/bone
 	var/bone_amount =   3
 	var/remains_type =  /obj/item/remains/xeno
 	var/gibbed_anim =   "gibbed-h"

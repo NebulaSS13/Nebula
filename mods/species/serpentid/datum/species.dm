@@ -23,7 +23,7 @@
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
 	age_descriptor = /datum/appearance_descriptor/age/serpentid
-	skin_material = /decl/material/solid/skin/insect
+	skin_material = /decl/material/solid/organic/skin/insect
 	bone_material = null
 	speech_sounds = list('sound/voice/bug.ogg')
 	speech_chance = 2

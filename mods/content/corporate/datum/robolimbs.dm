@@ -5,7 +5,7 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 
 /decl/bodytype/prosthetic/bishop/rook
@@ -39,7 +39,7 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 
 /decl/bodytype/prosthetic/xion/econo
@@ -49,7 +49,7 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 
 /decl/bodytype/prosthetic/wardtakahashi
@@ -60,7 +60,7 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 
 /decl/bodytype/prosthetic/morpheus
@@ -88,7 +88,7 @@
 	// todo: add synthflesh material?
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 
 /decl/bodytype/prosthetic/veymed/masculine
@@ -116,7 +116,7 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 
 /decl/bodytype/prosthetic/nanotrasen
@@ -124,7 +124,7 @@
 	desc = "This limb is made from a cheap polymer."
 	icon_base = 'mods/content/corporate/icons/cyberlimbs/nanotrasen/nanotrasen_main.dmi'
 	bodytype_category = BODYTYPE_HUMANOID
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/shellguard, shellguard)
 DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/nanotrasen, nanotrasen)

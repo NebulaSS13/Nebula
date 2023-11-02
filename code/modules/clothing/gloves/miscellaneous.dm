@@ -10,8 +10,8 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	icon_state = ICON_STATE_WORLD
-	material = /decl/material/solid/plastic //TODO: rubber
-	matter = list(/decl/material/solid/cloth = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/plastic //TODO: rubber
+	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/gloves/insulated/cheap                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
@@ -47,8 +47,8 @@
 		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
 		ARMOR_LASER = ARMOR_LASER_MINOR
 		)
-	material = /decl/material/solid/cloth
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/cloth
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/gloves/guards
 	desc = "A pair of synthetic gloves and arm pads reinforced with armor plating."
@@ -58,8 +58,8 @@
 	w_class = ITEM_SIZE_NORMAL
 	siemens_coefficient = 0.7
 	permeability_coefficient = 0.03
-	material = /decl/material/solid/cloth
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/cloth
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
@@ -84,5 +84,5 @@
 	heat_protection = SLOT_HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	material = /decl/material/solid/cloth
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/cloth
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)

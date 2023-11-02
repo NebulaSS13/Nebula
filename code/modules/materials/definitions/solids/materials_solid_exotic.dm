@@ -59,7 +59,7 @@
 	taste_mult = 1.5
 	toxicity = 30
 	touch_met = 5
-	fuel_value = 2
+	accelerant_value = FUEL_VALUE_VOLATILE
 	vapor_products = list(
 		/decl/material/solid/exotic_matter = 1
 	)

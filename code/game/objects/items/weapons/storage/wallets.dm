@@ -43,7 +43,7 @@
 		/obj/item/clothing/accessory/armor/tag,
 		)
 	slot_flags = SLOT_ID
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 	var/obj/item/card/id/front_id = null
 	var/obj/item/charge_stick/front_stick = null
@@ -148,7 +148,7 @@
 
 /decl/interaction_handler/remove_id/wallet/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && ishuman(user)
-	
+
 /decl/interaction_handler/remove_id/wallet/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/storage/wallet/W = target
 	var/obj/item/card/id/id = W.GetIdCard()

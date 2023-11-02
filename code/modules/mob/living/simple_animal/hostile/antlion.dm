@@ -20,9 +20,9 @@
 
 	meat_type =     /obj/item/chems/food/xenomeat
 	meat_amount =   5
-	skin_material = /decl/material/solid/skin/insect
+	skin_material = /decl/material/solid/organic/skin/insect
 	skin_amount =   15
-	bone_material = /decl/material/solid/bone/cartilage
+	bone_material = /decl/material/solid/organic/bone/cartilage
 	bone_amount =   10
 
 	var/healing = FALSE
@@ -110,7 +110,7 @@
 	break_stuff_probability = 25
 
 	meat_amount =   10
-	skin_material = /decl/material/solid/skin/insect
+	skin_material = /decl/material/solid/organic/skin/insect
 	skin_amount =   25
 	bone_amount =   15
 

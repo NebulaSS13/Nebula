@@ -21,7 +21,7 @@
 	interference in their customs and values."
 
 	meat_type = /obj/item/chems/food/fish/octopus/skrell
-	bone_material = /decl/material/solid/bone/cartilage
+	bone_material = /decl/material/solid/organic/bone/cartilage
 	available_pronouns = list(
 		/decl/pronouns/skrell
 	)

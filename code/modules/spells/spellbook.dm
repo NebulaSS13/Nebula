@@ -29,8 +29,8 @@ var/global/list/artefact_feedback = list(
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
-	material = /decl/material/solid/paper
-	matter = list(/decl/material/solid/leather = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/paper
+	matter = list(/decl/material/solid/organic/leather = MATTER_AMOUNT_REINFORCEMENT)
 	var/uses = 1
 	var/temp = null
 	var/datum/spellbook/spellbook

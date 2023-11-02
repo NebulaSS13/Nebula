@@ -16,7 +16,7 @@
 	desc = "Does card things."
 	icon = 'icons/obj/card.dmi'
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	slot_flags = SLOT_EARS
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'

@@ -6,7 +6,7 @@
 	w_class = ITEM_SIZE_TINY
 	var/sides = 6
 	attack_verb = list("diced")
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/dice/Initialize()
 	. = ..()

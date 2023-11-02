@@ -3,7 +3,7 @@
 	desc = "A cheap plastic bag that contains a fresh set of clothes."
 	icon = 'icons/obj/items/storage/trashbag.dmi'
 	icon_state = "trashbag3"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	var/icon_used = "trashbag0"
 	var/opened = 0

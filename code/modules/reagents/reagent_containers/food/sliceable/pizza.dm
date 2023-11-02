@@ -127,7 +127,7 @@
 	desc = "A box suited for pizzas."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "pizzabox1"
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	var/open = 0 // Is the box open?
 	var/ismessy = 0 // Fancy mess on the lid
 	var/obj/item/chems/food/sliceable/pizza/pizza // content pizza

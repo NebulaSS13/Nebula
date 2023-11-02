@@ -592,7 +592,7 @@
 		to_chat(user, "You inject the solution into \the [src].")
 		for(var/rtype in S.reagents?.reagent_volumes)
 			var/decl/material/R = GET_DECL(rtype)
-			if(R.fuel_value)
+			if(R.accelerant_value > FUEL_VALUE_ACCELERANT)
 				rigged = TRUE
 				log_and_message_admins("injected a light with flammable reagents, rigging it to explode.", user)
 				break

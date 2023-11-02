@@ -254,7 +254,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/heating_sound = 'sound/effects/bubbles.ogg'
 	var/list/heating_products
 	var/bypass_heating_products_for_root_type
-	var/fuel_value = 0
+	var/accelerant_value = 0
 	var/burn_product
 	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged
 
@@ -341,6 +341,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 #define FALSEWALL_STATE "fwall_open"
 /decl/material/validate()
 	. = ..()
+	if(accelerant_value > FUEL_VALUE_NONE && isnull(ignition_point))
+		. += "accelerant value larger than zero but null ignition point"
+	if(!isnull(ignition_point) && accelerant_value <= FUEL_VALUE_NONE)
+		. += "accelerant value below zero but non-null ignition point"
 	if(length(dissolves_into) && isnull(dissolves_in))
 		. += "dissolves_into set but dissolves_in is undefined"
 	if(length(heating_products) && isnull(heating_point))
@@ -577,8 +581,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
-	if(fuel_value && amount && istype(M))
-		M.fire_stacks += FLOOR((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+	if(accelerant_value != FUEL_VALUE_NONE && amount && istype(M))
+		M.fire_stacks += FLOOR((amount * accelerant_value)/FLAMMABLE_LIQUID_DIVISOR)
 #undef FLAMMABLE_LIQUID_DIVISOR
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
@@ -805,3 +809,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			total_interacted_units -= interacted_units
 		if(total_interacted_units <= 0)
 			return
+
+/decl/material/proc/add_burn_product(var/atom/location, var/amount)
+	var/datum/gas_mixture/environment = istype(location, /datum/gas_mixture) ? location : location?.return_air()
+	if(!environment || amount <= 0 || !burn_product)
+		return
+	environment.adjust_gas(burn_product, amount)

@@ -505,9 +505,9 @@
 	icon_state = "orangejuice"
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':7}"
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
@@ -521,9 +521,9 @@
 	icon_state = "cream"
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':8}"
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
@@ -537,9 +537,9 @@
 	icon_state = "tomatojuice"
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':8}"
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
@@ -553,9 +553,9 @@
 	icon_state = "limejuice"
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':8}"
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY
 	)
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'

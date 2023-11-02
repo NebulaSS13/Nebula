@@ -3,7 +3,7 @@
 	desc = "It's a small bag with dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/storage/pill_bottle/dice/WillContain()
 	return list(/obj/item/dice = 7)
@@ -42,7 +42,7 @@
 	for(var/obj/item/chems/food/donut/D in contents)
 		LAZYADD(cur_overlays, overlay_image('icons/obj/food.dmi', "[i][D.overlay_state]", flags = RESET_COLOR))
 		i++
-		
+
 	if(LAZYLEN(cur_overlays))
 		add_overlay(cur_overlays)
 
@@ -61,7 +61,7 @@
 	max_storage_space = 10
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/storage/cigpaper/WillContain()
 	return list(/obj/item/paper/cig = 10)
@@ -156,7 +156,7 @@
 
 //non-tobacco
 /obj/item/storage/chewables/candy
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/storage/chewables/candy/cookies
 	name = "pack of Getmore Cookies"

@@ -45,22 +45,6 @@
 		return
 	physically_destroyed()
 
-/obj/item/melt()
-	for(var/mat in matter)
-		var/decl/material/M = GET_DECL(mat)
-		if(!M)
-			log_warning("[src] ([type]) has a bad material path in its matter var.")
-			continue
-		var/turf/T = get_turf(src)
-		//TODO: Would be great to just call a proc to do that, like "Material.place_burn_product(loc, amount_matter)" so no need to care if its a gas or something else
-		var/datum/gas_mixture/environment = T?.return_air()
-		if(M.burn_product)
-			environment.adjust_gas(M.burn_product, M.fuel_value * (matter[mat] / SHEET_MATERIAL_AMOUNT))
-
-	var/obj/effect/decal/cleanable/molten_item/I = new(loc)
-	I.desc = "It looks like it was \a [src] some time ago."
-	qdel(src)
-
 /obj/item/proc/shatter(var/consumed)
 	var/turf/T = get_turf(src)
 	T?.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))

@@ -11,9 +11,9 @@
 
 	meat_type = /obj/item/chems/food/meat
 	meat_amount = 3
-	bone_material = /decl/material/solid/bone
+	bone_material = /decl/material/solid/organic/bone
 	bone_amount = 5
-	skin_material = /decl/material/solid/skin
+	skin_material = /decl/material/solid/organic/skin
 	skin_amount = 5
 
 	icon_state = ICON_STATE_WORLD

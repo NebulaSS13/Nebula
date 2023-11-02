@@ -14,7 +14,7 @@
 /decl/species/unathi
 	name = SPECIES_LIZARD
 	name_plural = SPECIES_LIZARD
-	skin_material = /decl/material/solid/skin/lizard
+	skin_material = /decl/material/solid/organic/skin/lizard
 
 	available_bodytypes = list(
 		/decl/bodytype/lizard,

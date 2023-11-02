@@ -6,8 +6,8 @@
 	return FALSE
 
 /mob/living/proc/get_default_language()
-	var/lang = ispath(default_language, /decl/language) && GET_DECL(default_language)
-	if(can_speak(lang))
+	var/decl/language/lang = GET_DECL(default_language)
+	if(istype(lang) && can_speak(lang))
 		return lang
 
 /mob/living/proc/get_any_good_language(set_default=FALSE)

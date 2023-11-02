@@ -28,7 +28,7 @@
 	meat_amount = 10
 	bone_amount = 20
 	skin_amount = 20
-	skin_material = /decl/material/solid/skin/fur/heavy
+	skin_material = /decl/material/solid/organic/skin/fur/heavy
 
 	var/stance_step = 0
 

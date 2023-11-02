@@ -33,7 +33,7 @@
 		ARMOR_BOMB = ARMOR_BOMB_MINOR
 		)
 	slot = ACCESSORY_SLOT_ARMOR_C
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
@@ -94,7 +94,7 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
@@ -122,7 +122,7 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)

@@ -6,7 +6,7 @@
 	randpixel = 5
 	desc = "Nutritious! Probably."
 	slot_flags = SLOT_HOLSTER
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 	is_spawnable_type = FALSE // Use the Spawn-Fruit verb instead.
 
 	var/plantname = "apple" // Setting as a default in case this is spawned manually.
@@ -151,13 +151,13 @@
 		seed.thrown_at(src,hit_atom)
 
 var/global/list/_wood_materials = list(
-	/decl/material/solid/wood,
-	/decl/material/solid/wood/mahogany,
-	/decl/material/solid/wood/maple,
-	/decl/material/solid/wood/ebony,
-	/decl/material/solid/wood/walnut,
-	/decl/material/solid/wood/bamboo,
-	/decl/material/solid/wood/yew
+	/decl/material/solid/organic/wood,
+	/decl/material/solid/organic/wood/mahogany,
+	/decl/material/solid/organic/wood/maple,
+	/decl/material/solid/organic/wood/ebony,
+	/decl/material/solid/organic/wood/walnut,
+	/decl/material/solid/organic/wood/bamboo,
+	/decl/material/solid/organic/wood/yew
 )
 
 /obj/item/chems/food/grown/attackby(var/obj/item/W, var/mob/user)

@@ -13,7 +13,7 @@
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	opened = 0 //if an item has been removed from this container
 	obj_flags = OBJ_FLAG_HOLLOW
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 
 /obj/item/storage/fancy/on_update_icon()
@@ -300,7 +300,7 @@
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	storage_slots = 7
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_NO_TEMP_CHANGE
 
@@ -332,7 +332,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 12
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	key_type = /obj/item/chems/glass/beaker/vial
 
 /obj/item/storage/fancy/vials/WillContain()

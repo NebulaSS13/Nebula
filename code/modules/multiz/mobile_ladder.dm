@@ -4,7 +4,7 @@
 	icon = 'icons/obj/mobile_ladder.dmi'
 
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY)
 	icon_state = ICON_STATE_WORLD
 	throw_range = 3
 	force = 10
