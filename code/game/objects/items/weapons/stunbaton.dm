@@ -30,7 +30,7 @@
 	setup_power_supply(loaded_cell_type)
 
 /obj/item/baton/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
-	. = ..(loaded_cell_type, /obj/item/cell/device, /datum/extension/loaded_cell/secured)
+	. = ..(loaded_cell_type, /obj/item/cell/device, /datum/extension/loaded_cell/secured, charge_value)
 	update_icon()
 
 /obj/item/baton/loaded/Initialize(var/ml, var/material_key, var/loaded_cell_type)

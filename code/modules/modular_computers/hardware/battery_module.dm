@@ -21,7 +21,8 @@
 		. += "Internal battery charge: [battery.charge]/[battery.maxcharge] CU"
 
 /obj/item/stock_parts/computer/battery_module/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
-	. = ..(loaded_cell_type || /obj/item/cell, /obj/item/cell, /datum/extension/loaded_cell/unremovable)
+	loaded_cell_type = loaded_cell_type || /obj/item/cell
+	. = ..(loaded_cell_type, /obj/item/cell, /datum/extension/loaded_cell/unremovable, charge_value)
 	var/obj/item/cell/battery = get_cell()
 	if(battery)
 		battery.maxcharge = battery_rating
@@ -85,4 +86,4 @@
 	battery_rating = 3000
 
 /obj/item/stock_parts/computer/battery_module/lambda/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
-	return ..(/obj/item/cell/infinite, accepted_cell_type, power_supply_extension_type)
+	return ..(/obj/item/cell/infinite, accepted_cell_type, power_supply_extension_type, charge_value)

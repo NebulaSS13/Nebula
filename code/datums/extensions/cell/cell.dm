@@ -133,12 +133,15 @@
 		return TRUE // technically a valid interaction.
 
 	// Unload the cell.
-	user.visible_message(SPAN_NOTICE("\The [user] removes \the [existing_cell] from \the [holder]."))
+	user.visible_message(
+		SPAN_NOTICE("\The [user] removes \the [existing_cell] from \the [holder]."),
+		SPAN_NOTICE("You remove \the [existing_cell] from \the [holder].")
+	)
 	existing_cell.dropInto(get_turf(holder))
 	user.put_in_active_hand(existing_cell)
 	holder_item.update_icon()
 	if(unload_sound)
-		playsound(user.loc, pick(unload_sound), 25, 1)
+		playsound(user.loc, pick(unload_sound), 25, TRUE)
 	return TRUE
 
 /datum/extension/loaded_cell/proc/get_examine_text(var/obj/item/cell/current_cell)

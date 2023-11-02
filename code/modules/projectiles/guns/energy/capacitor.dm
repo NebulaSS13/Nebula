@@ -70,7 +70,10 @@ var/global/list/laser_wavelengths
 	var/decl/laser_wavelength/selected_wavelength
 
 /obj/item/gun/energy/capacitor/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
-	return ..((loaded_cell_type || /obj/item/cell/high), (accepted_cell_type || /obj/item/cell), (power_supply_extension_type || /datum/extension/loaded_cell/secured))
+	loaded_cell_type            = loaded_cell_type            || /obj/item/cell/high
+	accepted_cell_type          = accepted_cell_type          || /obj/item/cell
+	power_supply_extension_type = power_supply_extension_type || /datum/extension/loaded_cell/secured
+	return ..(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/energy/capacitor/examine(mob/user, distance)
 	. = ..()
@@ -264,7 +267,8 @@ var/global/list/laser_wavelengths
 	w_class = ITEM_SIZE_HUGE
 
 /obj/item/gun/energy/capacitor/rifle/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
-	return ..(loaded_cell_type || /obj/item/cell/super, accepted_cell_type, power_supply_extension_type, charge_value)
+	loaded_cell_type = loaded_cell_type || /obj/item/cell/super
+	return ..(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion
 	name = "linear fusion rifle"
