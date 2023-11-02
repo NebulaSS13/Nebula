@@ -2,7 +2,6 @@
 	name = "tactical turtleneck"
 	desc = "It's some non-descript, slightly suspicious looking, civilian clothing."
 	icon = 'icons/clothing/under/uniform_tacticool.dmi'
-	has_sensor = SUIT_NO_SENSORS
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_SMALL,
 		ARMOR_BULLET = ARMOR_BALLISTIC_MINOR,
@@ -15,7 +14,6 @@
 	name = "combat turtleneck"
 	desc = "The height of fashion and tactical utility."
 	icon = 'icons/clothing/under/uniform_combat.dmi'
-	has_sensor = SUIT_HAS_SENSORS
 
 /obj/item/clothing/under/syndicate/tacticool
 	name = "\improper Tacticool turtleneck"
@@ -23,5 +21,4 @@
 	icon = 'icons/clothing/under/uniform_tacticool.dmi'
 	armor = null
 	siemens_coefficient = 1
-	has_sensor = SUIT_HAS_SENSORS
 	matter = null

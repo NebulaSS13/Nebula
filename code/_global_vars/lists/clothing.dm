@@ -35,3 +35,7 @@ var/global/list/abstract_inventory_slots = list(
 	slot_underpants_str,
 	slot_socks_str
 )
+
+var/global/list/vitals_sensor_equip_slots = list(
+	slot_w_uniform_str
+)

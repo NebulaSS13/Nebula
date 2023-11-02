@@ -867,3 +867,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen)) || ..()
+
+/obj/item/proc/handle_loadout_equip_replacement(obj/item/old_item)
+	return

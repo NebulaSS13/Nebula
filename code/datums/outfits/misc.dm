@@ -6,7 +6,7 @@
 	uniform = /obj/item/clothing/under/color/grey
 	back = /obj/item/tank/jetpack/oxygen
 	mask = /obj/item/clothing/mask/breath
-	flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
+	outfit_flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/soviet_soldier
 	name = "Soviet soldier"
@@ -35,7 +35,7 @@
 	l_ear =  /obj/item/radio/headset
 	uniform = /obj/item/clothing/under/clown
 	l_pocket = /obj/item/bikehorn
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
+	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_RESET_EQUIPMENT | OUTFIT_HAS_VITALS_SENSOR
 
 /decl/hierarchy/outfit/clown/Initialize()
 	. = ..()

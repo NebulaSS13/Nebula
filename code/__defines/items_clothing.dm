@@ -17,6 +17,7 @@
 #define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
 #define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 #define ACCESSORY_SLOT_OVER     "Over"
+#define ACCESSORY_SLOT_SENSORS  "Suit Sensors"
 
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!
@@ -155,14 +156,10 @@
 #define THROWNOBJ_KNOCKBACK_DIVISOR 2  // Affects how much speed the mob is knocked back with.
 
 // Suit sensor levels
-#define SUIT_SENSOR_OFF      0
-#define SUIT_SENSOR_BINARY   1
-#define SUIT_SENSOR_VITAL    2
-#define SUIT_SENSOR_TRACKING 3
-
-#define SUIT_NO_SENSORS      0
-#define SUIT_HAS_SENSORS     1
-#define SUIT_LOCKED_SENSORS  2
+#define VITALS_SENSOR_OFF      0
+#define VITALS_SENSOR_BINARY   1
+#define VITALS_SENSOR_VITAL    2
+#define VITALS_SENSOR_TRACKING 3
 
 // Hair Flags
 #define VERY_SHORT           BITFLAG(0)

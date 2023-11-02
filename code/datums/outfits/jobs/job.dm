@@ -11,4 +11,4 @@
 	pda_slot = slot_belt_str
 	pda_type = /obj/item/modular_computer/pda
 
-	flags = OUTFIT_HAS_BACKPACK
+	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_HAS_VITALS_SENSOR

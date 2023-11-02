@@ -66,11 +66,12 @@
 
 /proc/getsensorlevel(A)
 	var/mob/M = A
-	if(istype(M))
-		var/obj/item/clothing/under/U = M.get_equipped_item(slot_w_uniform_str)
-		if(istype(U))
-			return U.sensor_mode
-	return SUIT_SENSOR_OFF
+	if(!istype(M))
+		return VITALS_SENSOR_OFF
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = M.get_vitals_sensor()
+	if(sensor)
+		return sensor.sensor_mode
+	return VITALS_SENSOR_OFF
 
 /proc/is_admin(var/mob/user)
 	return check_rights(R_ADMIN, 0, user) != 0

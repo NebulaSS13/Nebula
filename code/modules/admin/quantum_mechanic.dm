@@ -191,8 +191,6 @@
 	icon = 'icons/clothing/under/uniform_quantum.dmi'
 	cold_protection = SLOT_FULL_BODY
 	heat_protection = SLOT_FULL_BODY
-	sensor_mode = SUIT_SENSOR_OFF
-	has_sensor = FALSE
 	siemens_coefficient = 0
 
 /obj/item/clothing/under/color/quantum/attack_hand(mob/user)

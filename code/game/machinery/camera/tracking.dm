@@ -232,7 +232,7 @@
 
 	if(. == TRACKING_NO_COVERAGE)
 		var/turf/T = get_turf(src)
-		if(T && isStationLevel(T.z) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
+		if(T && isStationLevel(T.z) && hassensorlevel(src, VITALS_SENSOR_TRACKING))
 			return TRACKING_POSSIBLE
 
 /mob/living/proc/tracking_initiated()
