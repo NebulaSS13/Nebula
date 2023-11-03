@@ -8,6 +8,9 @@
 	mob_overlay_layer = HO_BACK_LAYER
 	quick_equip_priority = 13
 
+/datum/inventory_slot/back/simple
+	requires_organ_tag = null
+
 /datum/inventory_slot/back/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
 		if(user == owner)
