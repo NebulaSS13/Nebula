@@ -33,7 +33,7 @@
 	if(victim?.can_take_damage() && victim.is_functional())
 		amount -= victim.take_damage(amount, damtype)
 
-	if(amount)
+	if(amount && (damtype == BRUTE || damtype == BURN))
 		dismantle()
 
 /obj/machinery/proc/get_damageable_component(var/damage_type)
