@@ -132,10 +132,14 @@
 			LAZYADD(unarmed_attacks, attack_type)
 	get_icon()
 
-/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null)
-	. = ..()
+/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
+	var/decl/bodytype/old_bodytype = bodytype
+	. = ..(new_bodytype, override_material)
+	if(bodytype != old_bodytype && apply_to_internal_organs)
+		bodytype.rebuild_internal_organs(src, override_material)
 	slowdown = bodytype.movement_slowdown
-	update_icon(TRUE)
+	if(.)
+		update_icon(TRUE)
 
 /obj/item/organ/external/proc/set_bodytype_with_children(decl/bodytype/new_bodytype, override_material = null)
 	set_bodytype(new_bodytype, override_material)
@@ -427,6 +431,8 @@
 
 	//If attached to an owner mob
 	if(istype(owner))
+
+		owner.full_prosthetic = null
 
 		// Initialize fingerprints if we don't already have some (TODO: we're assuming this is our first owner, maybe check for this elsewhere?).
 		if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !fingerprint && !BP_IS_PROSTHETIC(src))
@@ -1387,6 +1393,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 					LAZYREMOVE(internal_organs, organ)
 					continue
 				organ.do_install(null, src, FALSE, update_icon, FALSE) //Forcemove the organ and properly set it up in our internal data
+
+		victim.full_prosthetic = null
 
 	//Note that we don't need to change our own hierarchy when not removing from a mob
 

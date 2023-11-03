@@ -125,13 +125,16 @@
 	blood_DNA = list(dna.unique_enzymes = dna.b_type)
 	set_species(dna.species)
 
-/obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null)
+/obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
 	if(isnull(new_bodytype))
-		CRASH("Null bodytype passed to set_bodytype!")
+		PRINT_STACK_TRACE("Null bodytype passed to set_bodytype!")
+		return FALSE
 	if(ispath(new_bodytype, /decl/bodytype))
 		new_bodytype = GET_DECL(new_bodytype)
 	if(!istype(new_bodytype))
-		CRASH("Invalid bodytype [new_bodytype]")
+		PRINT_STACK_TRACE("Invalid bodytype [new_bodytype]")
+		return FALSE
 	bodytype = new_bodytype
 	if(bodytype.modifier_string)
 		name = "[bodytype.modifier_string] [initial(name)]"
@@ -141,7 +144,7 @@
 	min_broken_damage *= bodytype.hardiness
 	bodytype.resize_organ(src)
 	set_material(override_material || bodytype.material)
-	matter = bodytype.matter
+	matter = bodytype.matter?.Copy()
 	create_matter()
 	// maybe this should be a generalized repopulate_reagents helper??
 	if(reagents)
@@ -150,6 +153,7 @@
 	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
 		QDEL_NULL(dna)
 	reset_status()
+	return TRUE
 
 /obj/item/organ/proc/set_species(specie_name)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.

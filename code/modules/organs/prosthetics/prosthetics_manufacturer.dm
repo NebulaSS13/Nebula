@@ -9,6 +9,15 @@
 	material = /decl/material/solid/metal/steel
 	eye_flash_mod = 1
 	eye_darksight_range = 2
+	associated_gender = PLURAL
+	bodyfall_sounds = list(
+		'sound/foley/metal1.ogg'
+	)
+	has_organ = list(
+		BP_BRAIN = /obj/item/organ/internal/mmi_holder,
+		BP_EYES  = /obj/item/organ/internal/eyes,
+		BP_CELL  = /obj/item/organ/internal/cell
+	)
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 

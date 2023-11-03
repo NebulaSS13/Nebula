@@ -75,9 +75,9 @@
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
-/obj/item/organ/external/head/set_bodytype(decl/bodytype/new_bodytype, override_material = null)
+/obj/item/organ/external/head/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
 	. = ..()
-	has_lips = bodytype.appearance_flags & HAS_LIPS
+	has_lips = (bodytype.appearance_flags & HAS_LIPS)
 	can_intake_reagents = !(bodytype.body_flags & BODY_FLAG_NO_EAT)
 	draw_eyes = bodytype.has_eyes
 

@@ -149,6 +149,6 @@
 				var/mob/M = buckled
 				M.unbuckle_mob()
 			var/decl/bodytype/B = get_bodytype()
-			playsound(loc, isSynthetic() ? pick(B.synthetic_bodyfall_sounds) : pick(B.bodyfall_sounds), 50, TRUE, -1)
+			playsound(loc, B.bodyfall_sounds, 50, TRUE, -1)
 		else if(!lying && !old_buckled_lying)
 			handle_stance() // Force an immediate stance update.

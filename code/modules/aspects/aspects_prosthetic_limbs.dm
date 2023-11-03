@@ -5,6 +5,8 @@
 	sort_value = 2
 	aspect_flags = ASPECTS_PHYSICAL
 	abstract_type = /decl/aspect/prosthetic_limb
+	var/fullbody_synthetic_only = FALSE
+	var/replace_children = TRUE
 	var/check_bodytype
 	var/bodypart_name
 	var/apply_to_limb = BP_L_HAND
@@ -63,6 +65,10 @@
 /decl/aspect/prosthetic_limb/is_available_to(datum/preferences/pref)
 	. = ..()
 	if(.)
+		if(fullbody_synthetic_only)
+			var/decl/bodytype/bodytype = pref.get_bodytype_decl()
+			if(!bodytype?.is_robotic)
+				return FALSE
 		if(model)
 			var/decl/bodytype/prosthetic/R = GET_DECL(model)
 			if(!istype(R))
@@ -89,15 +95,19 @@
 
 	// Robotize the selected limb.
 	if(. && apply_to_limb)
+		var/use_model = model || get_base_model(holder.get_species_name())
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(holder, apply_to_limb)
 		if(!istype(E))
 			var/list/organ_data = holder.should_have_limb(apply_to_limb)
 			var/limb_path = organ_data["path"]
 			if("path" in organ_data)
-				E = new limb_path(holder, null, model || get_base_model(holder.get_species_name()))
+				E = new limb_path(holder, null, use_model)
 		if(istype(E) && E.bodytype != model) // sometimes in the last line we save ourselves some work here
 			// this should be pre-validated by is_available_to()
-			E.set_bodytype_with_children(model || get_base_model(holder.get_species_name()))
+			if(replace_children)
+				E.set_bodytype_with_children(use_model)
+			else
+				E.set_bodytype(use_model)
 
 /decl/aspect/prosthetic_limb/left_hand
 	bodypart_name = "Left Hand"
@@ -142,3 +152,27 @@
 	aspect_cost = 2
 	apply_to_limb = BP_R_LEG
 	incompatible_with_limbs = list(BP_R_FOOT, BP_R_LEG)
+
+/decl/aspect/prosthetic_limb/head
+	bodypart_name = "Head"
+	aspect_cost = 1
+	apply_to_limb = BP_HEAD
+	incompatible_with_limbs = list(BP_HEAD)
+	fullbody_synthetic_only = TRUE
+	replace_children = FALSE
+
+/decl/aspect/prosthetic_limb/chest
+	bodypart_name = "Upper Body"
+	aspect_cost = 1
+	apply_to_limb = BP_CHEST
+	incompatible_with_limbs = list(BP_CHEST)
+	fullbody_synthetic_only = TRUE
+	replace_children = FALSE
+
+/decl/aspect/prosthetic_limb/groin
+	bodypart_name = "Lower Body"
+	aspect_cost = 1
+	apply_to_limb = BP_GROIN
+	incompatible_with_limbs = list(BP_GROIN)
+	fullbody_synthetic_only = TRUE
+	replace_children = FALSE
