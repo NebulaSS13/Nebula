@@ -11,7 +11,7 @@
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1
-	ammo_type = /obj/item/ammo_casing/shell
+	ammo_type = /obj/item/ammo_casing/rifle
 	one_hand_penalty = 2
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
 	fire_delay = 8
@@ -86,3 +86,4 @@
 	scoped_accuracy = 8 //increased accuracy over the LWAP because only one shot
 	scope_zoom = 2
 	fire_delay = 12
+	ammo_type = /obj/item/ammo_casing/shell
