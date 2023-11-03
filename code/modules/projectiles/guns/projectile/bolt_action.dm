@@ -49,6 +49,7 @@
 			unload_shell()
 		else
 			to_chat(user, "<span class='notice'>You work the bolt open.</span>")
+		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
 	else
 		to_chat(user, "<span class='notice'>You work the bolt closed.</span>")
 		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)
