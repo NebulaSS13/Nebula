@@ -115,7 +115,7 @@
 	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
 	var/sdepth = A.storage_depth(src)
 	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
-		if(W)
+		if(W && check_dexterity(DEXTERITY_WIELD_ITEM, silent = TRUE))
 			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
@@ -135,7 +135,7 @@
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
-			if(W)
+			if(W && check_dexterity(DEXTERITY_WIELD_ITEM, silent = TRUE))
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = W.resolve_attackby(A,src, params)
 				if(!resolved && A && W)
@@ -186,12 +186,24 @@
 
 	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(src, "You cannot attack people before the game has started.")
-		return 0
+		return FALSE
 
 	if(stat)
-		return 0
+		return FALSE
 
-	return 1
+	// Special glove functions:
+	// If the gloves do anything, have them return 1 to stop
+	// normal attack_hand() here.
+	var/obj/item/clothing/gloves/G = get_equipped_item(slot_gloves_str) // not typecast specifically enough in defines
+	if(istype(G) && G.Touch(A,1))
+		return TRUE
+
+	// Pick up items.
+	if(check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
+		A.attack_hand(src)
+		return TRUE
+
+	return FALSE
 
 /*
 	Ranged unarmed attack:

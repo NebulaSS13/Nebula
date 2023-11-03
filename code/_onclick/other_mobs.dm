@@ -2,26 +2,6 @@
 /atom/proc/attack_generic(mob/user)
 	return 0
 
-/*
-	Humans:
-	Adds an exception for gloves, to allow special glove types like the ninja ones.
-
-	Otherwise pretty standard.
-*/
-/mob/living/carbon/human/UnarmedAttack(var/atom/A, var/proximity)
-
-	if(!..())
-		return
-
-	// Special glove functions:
-	// If the gloves do anything, have them return 1 to stop
-	// normal attack_hand() here.
-	var/obj/item/clothing/gloves/G = get_equipped_item(slot_gloves_str) // not typecast specifically enough in defines
-	if(istype(G) && G.Touch(A,1))
-		return
-
-	A.attack_hand(src)
-
 /atom/proc/handle_grab_interaction(var/mob/user)
 	return FALSE
 
