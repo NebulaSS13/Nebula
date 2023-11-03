@@ -10,15 +10,6 @@
 		intent = I_DISARM
 		icon_state = "intent_help"
 
-/obj/screen/diona_held
-	name = "held item"
-	screen_loc =  DIONA_SCREEN_LOC_HELD
-	icon_state = "held"
-
-/obj/screen/diona_held/Click()
-	var/mob/living/carbon/alien/diona/chirp = usr
-	if(istype(chirp) && chirp.holding_item) chirp.try_unequip(chirp.holding_item)
-
 /datum/hud/diona_nymph
 	var/obj/screen/diona_held/held
 
@@ -36,12 +27,6 @@
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
-
-	held = new
-	held.icon =  ui_style
-	held.color = ui_color
-	held.alpha = ui_alpha
-	adding += held
 
 	action_intent = new /obj/screen/intent/diona_nymph()
 	action_intent.icon =  ui_style
