@@ -59,7 +59,7 @@
 
 	. = ..(mapload)
 
-/mob/living/carbon/alien/diona/get_dexterity(var/silent = FALSE)
+/mob/living/carbon/alien/diona/get_dexterity(var/silent)
 	return (DEXTERITY_EQUIP_ITEM|DEXTERITY_HOLD_ITEM)
 
 /mob/living/carbon/alien/diona/get_bodytype()

@@ -4,7 +4,7 @@
 	var/dexterity = DEXTERITY_FULL
 	// For reference, grippers do not use ui_loc, they have it set dynamically during /datum/hud/proc/rebuild_hands()
 
-/datum/inventory_slot/gripper/proc/get_dexterity()
+/datum/inventory_slot/gripper/proc/get_dexterity(var/silent)
 	return dexterity
 
 /datum/inventory_slot/gripper/GetCloneArgs()
@@ -26,7 +26,7 @@
 		return "[pronouns.He] [pronouns.is] holding [_holding.get_examine_line()] in [pronouns.his] [E?.name || lowertext(slot_name)]."
 
 /datum/inventory_slot/gripper/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
-	return ..() && user.check_dexterity(DEXTERITY_EQUIP_ITEM)
+	return ..() && user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = disable_warning)
 
 // Hand subtypes below
 /datum/inventory_slot/gripper/mouth
@@ -37,6 +37,9 @@
 	overlay_slot = BP_MOUTH
 	ui_label = "M"
 	hand_sort_priority = 3
+
+/datum/inventory_slot/gripper/mouth/simple
+	requires_organ_tag = null
 
 /datum/inventory_slot/gripper/mouth/can_equip_to_slot(mob/user, obj/item/prop, disable_warning, ignore_equipped)
 	. = ..() && prop.w_class <= user.can_pull_size

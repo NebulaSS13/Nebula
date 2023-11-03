@@ -115,6 +115,7 @@
 /datum/hud/proc/FinalizeInstantiation()
 	SHOULD_CALL_PARENT(TRUE)
 	BuildInventoryUI()
+	BuildHandsUI()
 	if(mymob.client)
 		mymob.client.screen = list()
 		if(length(hand_hud_objects))
@@ -282,6 +283,10 @@
 
 /datum/hud/proc/BuildHandsUI()
 
+	var/list/held_slots = mymob.get_held_item_slots()
+	if(length(held_slots) <= 0)
+		return
+
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
@@ -298,7 +303,6 @@
 	src.adding += using
 	LAZYADD(swaphand_hud_objects, using)
 
-	var/list/held_slots = mymob.get_held_item_slots()
 	if(length(held_slots) > 1)
 
 		using = new /obj/screen/inventory(null, mymob)

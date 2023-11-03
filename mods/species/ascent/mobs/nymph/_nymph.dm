@@ -47,7 +47,7 @@
 	add_held_item_slot(new /datum/inventory_slot/gripper/mouth/nymph/ascent)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 
-/mob/living/carbon/alien/ascent_nymph/get_dexterity(var/silent = FALSE)
+/mob/living/carbon/alien/ascent_nymph/get_dexterity(var/silent)
 	return (DEXTERITY_EQUIP_ITEM|DEXTERITY_HOLD_ITEM)
 
 /mob/living/carbon/alien/ascent_nymph/on_update_icon()

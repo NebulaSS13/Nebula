@@ -47,9 +47,6 @@
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
 
-	if(hud_data.has_hands)
-		BuildHandsUI()
-
 	if(hud_data.has_resist)
 		using = new /obj/screen()
 		using.SetName("resist")

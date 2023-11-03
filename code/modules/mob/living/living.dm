@@ -275,9 +275,6 @@ default behaviour is:
 /mob/living/proc/setHalLoss(var/amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
-/mob/living/proc/getBrainLoss()
-	return 0
-
 /mob/living/proc/adjustBrainLoss(var/amount)
 	return
 

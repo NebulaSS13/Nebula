@@ -200,8 +200,7 @@
 
 	// Pick up items.
 	if(check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
-		A.attack_hand(src)
-		return TRUE
+		return A.attack_hand(src)
 
 	return FALSE
 

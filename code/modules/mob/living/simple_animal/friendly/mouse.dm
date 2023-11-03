@@ -37,7 +37,7 @@
 	var/body_color //brown, gray and white, leave blank for random
 	var/splatted = FALSE
 
-/mob/living/simple_animal/mouse/get_dexterity(var/silent = FALSE)
+/mob/living/simple_animal/mouse/get_dexterity(var/silent)
 	return DEXTERITY_NONE // Mice are troll bait, give them no power.
 
 /datum/ai/mouse
