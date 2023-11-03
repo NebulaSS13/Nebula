@@ -86,7 +86,7 @@
 		return STATUS_INTERACTIVE
 	return ..()
 
-/mob/living/exosuit/get_dexterity(var/silent = FALSE)
+/mob/living/exosuit/get_dexterity(var/silent)
 	return DEXTERITY_FULL
 
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)

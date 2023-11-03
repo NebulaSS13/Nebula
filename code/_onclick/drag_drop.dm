@@ -14,7 +14,7 @@
 
 // Can the user drop something onto this atom?
 /atom/proc/user_can_mousedrop_onto(mob/user, atom/being_dropped, incapacitation_flags, params)
-	return !user.incapacitated(incapacitation_flags) && check_mousedrop_interactivity(user, params) && user.check_dexterity(DEXTERITY_EQUIP_ITEM)
+	return !user.incapacitated(incapacitation_flags) && check_mousedrop_interactivity(user, params) && user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = TRUE)
 
 /atom/proc/check_mousedrop_interactivity(mob/user, params)
 	return CanPhysicallyInteract(user)

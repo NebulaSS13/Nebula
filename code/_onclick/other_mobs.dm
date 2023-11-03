@@ -9,7 +9,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(handle_grab_interaction(user))
 		return TRUE
-	if(!LAZYLEN(climbers) || (user in climbers) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
+	if(!LAZYLEN(climbers) || (user in climbers) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
 		return FALSE
 	user.visible_message(
 		SPAN_DANGER("\The [user] shakes \the [src]!"),
@@ -72,6 +72,7 @@
 
 	if(!..())
 		return
+
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(isliving(A))
 		if(a_intent == I_HELP || !get_natural_weapon())

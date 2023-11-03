@@ -6,7 +6,6 @@
 	var/has_pressure = 1  // Draw the pressure indicator.
 	var/has_nutrition = 1 // Draw the nutrition indicator.
 	var/has_bodytemp = 1  // Draw the bodytemp indicator.
-	var/has_hands = 1     // Set to draw hands.
 	var/has_drop = 1      // Set to draw drop button.
 	var/has_throw = 1     // Set to draw throw button.
 	var/has_resist = 1    // Set to draw resist button.
@@ -43,19 +42,14 @@
 		var/slot_id = inv_slot.slot_id
 		inventory_slots[slot_id] = inv_slot
 		equip_slots |= slot_id
-
 		// Build reference lists for inventory updates
 		if(inv_slot.can_be_hidden)
 			hidden_slots |= slot_id
 		else
 			persistent_slots |= slot_id
-
-	if(has_hands)
-		equip_slots |= slot_handcuffed_str
-
+	equip_slots |= slot_handcuffed_str
 	if(slot_back_str in equip_slots)
 		equip_slots |= slot_in_backpack_str
-
 	if(slot_w_uniform_str in equip_slots)
 		equip_slots |= slot_tie_str
 

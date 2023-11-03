@@ -37,11 +37,11 @@
 	. = ..()
 	add_inventory_slot(new /datum/inventory_slot/back/simple)
 	add_inventory_slot(new /datum/inventory_slot/id)
-	add_held_item_slot(new /datum/inventory_slot/gripper/mouth)
+	add_held_item_slot(new /datum/inventory_slot/gripper/mouth/simple)
 	equip_to_slot_or_del(new /obj/item/storage/backpack/messenger/corvid_couriers(src), slot_back_str)
 	update_icon()
 
-/mob/living/simple_animal/crow/get_dexterity(var/silent = FALSE)
+/mob/living/simple_animal/crow/get_dexterity(var/silent)
 	return (DEXTERITY_EQUIP_ITEM|DEXTERITY_HOLD_ITEM)
 
 /mob/living/simple_animal/crow/DefaultTopicState()
