@@ -34,18 +34,11 @@
 
 	z_flags = ZMM_MANGLE_PLANES
 
-	var/obj/item/holding_item
 	var/tmp/flower_color
 	var/tmp/last_glow
 
 /mob/living/carbon/alien/diona/get_jump_distance()
 	return 3
-
-/mob/living/carbon/alien/diona/Login()
-	. = ..()
-	if(client && holding_item)
-		holding_item.screen_loc = DIONA_SCREEN_LOC_HELD
-		client.screen |= holding_item
 
 /mob/living/carbon/alien/diona/sterile
 	name = "sterile nymph"
@@ -59,20 +52,15 @@
 	add_language(/decl/language/diona)
 	add_language(/decl/language/human/common, 0)
 	add_inventory_slot(new /datum/inventory_slot/head/simple)
-
+	add_held_item_slot(new /datum/inventory_slot/gripper/mouth/nymph)
 	if(prob(flower_chance))
 		flower_color = get_random_colour(1)
 	update_icon()
 
 	. = ..(mapload)
 
-/mob/living/carbon/alien/diona/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
-	. = ..()
-	if(holding_item)
-		to_chat(user, SPAN_NOTICE("It is holding [html_icon(holding_item)] \a [holding_item]."))
-
 /mob/living/carbon/alien/diona/get_dexterity(var/silent = FALSE)
-	return DEXTERITY_EQUIP_ITEM
+	return (DEXTERITY_EQUIP_ITEM|DEXTERITY_HOLD_ITEM)
 
 /mob/living/carbon/alien/diona/get_bodytype()
 	return GET_DECL(/decl/bodytype/diona)

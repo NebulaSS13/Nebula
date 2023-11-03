@@ -31,10 +31,6 @@
 		return
 		// End superhacky stuff.
 
-	if((a_intent == I_DISARM || a_intent == I_HELP) && can_collect(A))
-		collect(A)
-		return
-
 	if(ismob(A))
 		if(src != A && !gestalt_with(A))
 			visible_message(SPAN_NOTICE("\The [src] butts its head into \the [A]."))
@@ -42,28 +38,17 @@
 
 	. = ..()
 
-/mob/living/carbon/alien/diona/RangedAttack(atom/A, var/params)
-	if((a_intent == I_HURT || a_intent == I_GRAB) && holding_item)
-		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		visible_message(SPAN_DANGER("\The [src] spits \a [holding_item] at \the [A]!"))
-		var/atom/movable/temp = holding_item
-		try_unequip(holding_item)
-		if(temp)
-			temp.throw_at(A, 10, rand(3,5), src)
-		return TRUE
-	. = ..()
-
 /mob/living/carbon/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
 
 	if(incapacitated())
 		return
 
-	if(!tray.seed && istype(holding_item, /obj/item/seeds))
-		var/atom/movable/temp = holding_item
-		try_unequip(temp)
-		if(temp)
-			tray.plant_seed(src, temp)
-		return
+	if(!tray.seed)
+		var/obj/item/seeds/seeds = get_active_hand()
+		if(istype(seeds))
+			if(try_unequip(seeds))
+				tray.plant_seed(src, seeds)
+			return
 
 	if(tray.dead)
 		if(tray.remove_dead(src, silent = TRUE))
