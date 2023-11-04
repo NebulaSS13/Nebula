@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;random_map&#x2F;noise - Space Station 13 - Nebula13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13 - Nebula13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/random_map/noise.html#proc">Proc Details</a></header>
+<main>
+<h1>noise <aside>/<a href="datum.html">datum</a>/<a href="datum/random_map/noise.html">random_map/noise</a></aside>
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fd90f1267bb6afef34a7a00701bd3a95f0f427dd/code/modules/random_map/noise/noise.dm#L4">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;random_map&#x2F;noise&#x2F;noise.dm 4"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/random_map/noise.html#proc/get_neighbors">get_neighbors</a></th><td>Gets the neighbors of the cell at x, y, optionally including diagonals.
+(x,y) and its neighbors can safely be invalid/not validated before calling.</td></tr>
+            <tr><th><a href="datum/random_map/noise.html#proc/has_neighbor_with_path">has_neighbor_with_path</a></th><td>Checks if the cell at x,y has a neighbor with the given path.
+Faster than looping over get_neighbors for the same purpose because it doesn't use list ops.</td></tr></table><h2 id="proc">Proc Details</h2><h3 id="proc/get_neighbors"><aside class="declaration">proc </aside>get_neighbors<aside>(x, y, include_diagonals) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fd90f1267bb6afef34a7a00701bd3a95f0f427dd/code/modules/random_map/noise/noise.dm#L196">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;random_map&#x2F;noise&#x2F;noise.dm 196"/></a></aside>
+        </h3>
+        <p>Gets the neighbors of the cell at x, y, optionally including diagonals.
+(x,y) and its neighbors can safely be invalid/not validated before calling.</p><h3 id="proc/has_neighbor_with_path"><aside class="declaration">proc </aside>has_neighbor_with_path<aside>(x, y, path, include_diagonals) 
+        
+    
+            <a href="https://github.com/NebulaSS13/Nebula/blob/fd90f1267bb6afef34a7a00701bd3a95f0f427dd/code/modules/random_map/noise/noise.dm#L173">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;random_map&#x2F;noise&#x2F;noise.dm 173"/></a></aside>
+        </h3>
+        <p>Checks if the cell at x,y has a neighbor with the given path.
+Faster than looping over get_neighbors for the same purpose because it doesn't use list ops.</p></main>
+<footer>
+    nebula.dme
+    <a href="https://github.com/NebulaSS13/Nebula/tree/fd90f1267bb6afef34a7a00701bd3a95f0f427dd">fd90f12</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>
