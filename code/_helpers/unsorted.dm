@@ -594,6 +594,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 					var/old_icon1 = T.icon
 					var/old_overlays = T.overlays.Copy()
 					var/old_underlays = T.underlays.Copy()
+					var/old_decals = T.decals?.Copy()
 
 					if(platingRequired)
 						if(istype(B, get_base_turf_by_area(B)))
@@ -604,6 +605,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 					X.set_dir(old_dir1)
 					X.icon_state = old_icon_state1
 					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
+					X.decals = old_decals
 					X.overlays = old_overlays
 					X.underlays = old_underlays
 
