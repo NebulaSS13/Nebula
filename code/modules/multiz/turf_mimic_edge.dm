@@ -213,6 +213,16 @@
 	QDEL_NULL(click_eater)
 	return ..()
 
+/turf/exterior/mimic_edge/Crossed(atom/movable/O)
+	. = ..()
+	if(isobserver(O))
+		var/turf/drop_turf = get_mimic_turf()
+		if(drop_turf)
+			O.forceMove(drop_turf)
+
+/turf/exterior/mimic_edge/resolve_to_actual_turf()
+	return get_mimic_turf()
+
 //Properly install itself, and allow overriding how the target turf is picked
 /turf/exterior/mimic_edge/proc/setup_mimic()
 	return

@@ -134,10 +134,10 @@
 	if(icon_has_corners)
 		for(var/direction in global.cornerdirs)
 			var/turf/exterior/turf_to_check = get_step_resolving_mimic(src, direction)
-			if(!isturf(turf_to_check) || turf_to_check.density || istype(turf_to_check, type))
+			if(!istype(turf_to_check) || turf_to_check.density || istype(turf_to_check, type))
 				continue
 
-			if(!istype(turf_to_check) || icon_edge_layer > turf_to_check.icon_edge_layer)
+			if(icon_edge_layer > turf_to_check.icon_edge_layer)
 				var/draw_state
 				var/res = (neighbors & direction)
 				if(res == 0)
