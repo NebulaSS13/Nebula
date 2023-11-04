@@ -5,6 +5,7 @@
 	icon = 'icons/obj/items/weapon/swords/claymore.dmi'
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_LARGE
+	item_flags = ITEM_FLAG_IS_WEAPON
 	material_force_multiplier = 0.5 // 30 when wielded with hardnes 60 (steel)
 	armor_penetration = 10
 	thrown_material_force_multiplier = 0.16 // 10 when thrown with weight 60 (steel)
@@ -16,7 +17,7 @@
 	melee_accuracy_bonus = 10
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	pickup_sound = 'sound/foley/knife1.ogg' 
+	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 	var/draw_handle = TRUE
@@ -34,7 +35,7 @@
 		attack_verb = list("attacked", "smashed", "jabbed", "smacked", "prodded", "bonked")
 		hitsound = "chop"
 	. = ..()
-	
+
 /obj/item/sword/on_update_icon()
 	. = ..()
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
@@ -50,11 +51,11 @@
 	. = ..()
 
 /obj/item/sword/wood
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	draw_handle = FALSE
 
 /obj/item/sword/replica
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/sword/katana
 	name = "katana"
@@ -64,16 +65,16 @@
 
 /obj/item/sword/katana/set_material(new_material)
 	. = ..()
-	if((material_alteration & MAT_FLAG_ALTERATION_NAME) && istype(material, /decl/material/solid/wood))
+	if((material_alteration & MAT_FLAG_ALTERATION_NAME) && istype(material, /decl/material/solid/organic/wood))
 		SetName("[material.solid_name] bokutou")
 		desc = "Finest wooden fibers folded exactly one thousand times by master robots."
 
 /obj/item/sword/katana/bamboo
-	material = /decl/material/solid/wood/bamboo
+	material = /decl/material/solid/organic/wood/bamboo
 	draw_handle = FALSE
 
 /obj/item/sword/katana/wood
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	draw_handle = FALSE
 
 /obj/item/sword/katana/vibro

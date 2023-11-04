@@ -54,6 +54,10 @@
 	set category = "Object"
 	set src in usr
 
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+
 	if(ispath(camera))
 		camera = new camera(src)
 		camera.set_status(0)
@@ -61,10 +65,10 @@
 	if(camera)
 		camera.set_status(!camera.status)
 		if(camera.status)
-			camera.c_tag = FindNameFromID(usr)
-			to_chat(usr, "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>")
+			camera.c_tag = user.get_id_name()
+			to_chat(user, "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>")
 		else
-			to_chat(usr, "<span class='notice'>Camera deactivated.</span>")
+			to_chat(user, "<span class='notice'>Camera deactivated.</span>")
 
 /obj/item/clothing/head/helmet/space/examine(mob/user, distance)
 	. = ..()
@@ -133,11 +137,11 @@
 	randpixel = 0
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_OVER)
 	origin_tech = "{'materials':3, 'engineering':3}"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
 	protects_against_weather = TRUE
 

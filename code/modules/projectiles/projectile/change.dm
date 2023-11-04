@@ -43,7 +43,7 @@
 		return H
 
 /obj/item/projectile/change/proc/wabbajack(var/mob/M)
-	if(istype(M, /mob/living) && M.stat != DEAD)
+	if(isliving(M) && M.stat != DEAD)
 		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 			return
 		M.handle_pre_transformation()

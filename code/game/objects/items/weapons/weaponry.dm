@@ -6,6 +6,7 @@
 	item_state = "nullrod"
 	slot_flags = SLOT_LOWER_BODY
 	force = 10
+	item_flags = ITEM_FLAG_IS_WEAPON
 	throw_speed = 1
 	throw_range = 4
 	throwforce = 7
@@ -110,10 +111,10 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
 
-	density = 1
-	opacity = 0
-	mouse_opacity = 1
-	anchored = 1
+	density = TRUE
+	opacity = FALSE
+	mouse_opacity = MOUSE_OPACITY_NORMAL
+	anchored = TRUE
 	can_buckle = 0 //no manual buckling or unbuckling
 
 	var/health = 25
@@ -127,7 +128,7 @@
 	name = "animal net"
 	desc = "An energized net meant to subdue animals."
 
-	anchored = 0
+	anchored = FALSE
 	health = 5
 	temporary = 0
 	min_free_time = 5

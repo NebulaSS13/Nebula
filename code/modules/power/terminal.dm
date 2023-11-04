@@ -7,10 +7,10 @@
 	name = "terminal"
 	icon_state = "term"
 	desc = "It's an underfloor wiring terminal for power equipment."
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	layer = EXPOSED_WIRE_TERMINAL_LAYER
 	var/obj/item/stock_parts/power/terminal/master
-	anchored = 1
+	anchored = TRUE
 
 	stat_immune = NOINPUT | NOSCREEN | NOPOWER
 	interact_offline = TRUE
@@ -20,7 +20,7 @@
 /obj/machinery/power/terminal/Initialize()
 	. = ..()
 	var/turf/T = src.loc
-	if(level == 1 && isturf(T))
+	if(level == LEVEL_BELOW_PLATING && isturf(T))
 		hide(!T.is_plating())
 
 /obj/machinery/power/terminal/Destroy()
@@ -67,7 +67,7 @@
 		return machine
 
 /obj/machinery/power/terminal/hide(var/do_hide)
-	if(do_hide && level == 1)
+	if(do_hide && level == LEVEL_BELOW_PLATING)
 		layer = WIRE_TERMINAL_LAYER
 	else
 		reset_plane_and_layer()

@@ -5,7 +5,7 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "case"
 	item_state = "case"
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 	matter = list(/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/briefcase/crimekit/WillContain()

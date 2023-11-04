@@ -1,11 +1,12 @@
 var/global/antag_add_finished // Used in antag type voting.
 var/global/list/additional_antag_types = list()
 
-/datum/game_mode
+/decl/game_mode
+	abstract_type = /decl/game_mode
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name = "invalid"
 	var/round_description = "How did you even vote this in?"
 	var/extended_round_description = "This roundtype should not be spawned, let alone votable. Someone contact a developer and tell them the game's broken again."
-	var/config_tag = null
 	var/votable = TRUE
 	var/probability = 0
 
@@ -44,19 +45,15 @@ var/global/list/additional_antag_types = list()
 		null
 	)
 
-/datum/game_mode/New()
-	..()
-	// Enforce some formatting.
-	// This will probably break something.
+/decl/game_mode/Initialize()
 	name = capitalize(lowertext(name))
-	config_tag = lowertext(config_tag)
-
 	if(round_autoantag && !length(latejoin_antags))
 		latejoin_antags = associated_antags.Copy()
 	else if(!round_autoantag && length(latejoin_antags))
 		round_autoantag = TRUE
+	. = ..()
 
-/datum/game_mode/Topic(href, href_list[])
+/decl/game_mode/Topic(href, href_list[])
 	if(..())
 		return
 	if(href_list["toggle"])
@@ -132,7 +129,7 @@ var/global/list/additional_antag_types = list()
 	if (usr.client && usr.client.holder)
 		usr.client.holder.show_game_mode(usr)
 
-/datum/game_mode/proc/announce() //to be called when round starts
+/decl/game_mode/proc/announce() //to be called when round starts
 	to_world("<B>The current game mode is [capitalize(name)]!</B>")
 	if(round_description) to_world("[round_description]")
 	if(round_autoantag) to_world("Antagonists will be added to the round automagically as needed.")
@@ -156,7 +153,7 @@ var/global/list/additional_antag_types = list()
 // startRequirements()
 // Checks to see if the game can be setup and ran with the current number of players or whatnot.
 // Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
-/datum/game_mode/proc/startRequirements()
+/decl/game_mode/proc/startRequirements()
 	var/playerC = 0
 	for(var/mob/new_player/player in global.player_list)
 		if((player.client)&&(player.ready))
@@ -189,7 +186,7 @@ var/global/list/additional_antag_types = list()
 	else
 		return 0
 
-/datum/game_mode/proc/refresh_event_modifiers()
+/decl/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
 		SSevent.report_at_round_end = 1
 		if(event_delay_mod_moderate)
@@ -199,7 +196,7 @@ var/global/list/additional_antag_types = list()
 			var/datum/event_container/EMajor = SSevent.event_containers[EVENT_LEVEL_MAJOR]
 			EMajor.delay_modifier = event_delay_mod_major
 
-/datum/game_mode/proc/pre_setup()
+/decl/game_mode/proc/pre_setup()
 	for(var/decl/special_role/antag in antag_templates)
 		antag.update_current_antag_max(src)
 		antag.build_candidate_list(src) //compile a list of all eligible candidates
@@ -240,7 +237,7 @@ var/global/list/additional_antag_types = list()
 		antag.candidates = shuffle(antag.candidates) // makes selection past initial_spawn_req fairer
 
 ///post_setup()
-/datum/game_mode/proc/post_setup()
+/decl/game_mode/proc/post_setup()
 
 	next_spawn = world.time + rand(min_autotraitor_delay, max_autotraitor_delay)
 
@@ -279,11 +276,11 @@ var/global/list/additional_antag_types = list()
 	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
-/datum/game_mode/proc/fail_setup()
+/decl/game_mode/proc/fail_setup()
 	for(var/decl/special_role/antag in antag_templates)
 		antag.reset_antag_selection()
 
-/datum/game_mode/proc/announce_ert_disabled()
+/decl/game_mode/proc/announce_ert_disabled()
 	if(!ert_disabled)
 		return
 
@@ -321,7 +318,7 @@ var/global/list/additional_antag_types = list()
 		)
 	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
 
-/datum/game_mode/proc/check_finished()
+/decl/game_mode/proc/check_finished()
 	if(SSevac.evacuation_controller?.round_over() || station_was_nuked)
 		return 1
 	if(end_on_antag_death && antag_templates && antag_templates.len)
@@ -336,10 +333,10 @@ var/global/list/additional_antag_types = list()
 			return 1
 	return 0
 
-/datum/game_mode/proc/cleanup()	//This is called when the round has ended but not the game, if any cleanup would be necessary in that case.
+/decl/game_mode/proc/cleanup()	//This is called when the round has ended but not the game, if any cleanup would be necessary in that case.
 	return
 
-/datum/game_mode/proc/declare_completion()
+/decl/game_mode/proc/declare_completion()
 	set waitfor = FALSE
 
 	sleep(2)
@@ -415,10 +412,10 @@ var/global/list/additional_antag_types = list()
 
 	return 0
 
-/datum/game_mode/proc/check_win() //universal trigger to be called at mob death, nuke explosion, etc. To be called from everywhere.
+/decl/game_mode/proc/check_win() //universal trigger to be called at mob death, nuke explosion, etc. To be called from everywhere.
 	return 0
 
-/datum/game_mode/proc/get_players_for_role(var/antag_type)
+/decl/game_mode/proc/get_players_for_role(var/antag_type)
 	var/list/players = list()
 	var/list/candidates = list()
 
@@ -431,7 +428,7 @@ var/global/list/additional_antag_types = list()
 		for(var/mob/player in global.player_list)
 			if(!player.client)
 				continue
-			if(istype(player, /mob/new_player))
+			if(isnewplayer(player))
 				continue
 			if(!antag_template.name || (antag_template.name in player.client.prefs.be_special_role))
 				log_debug("[player.key] had [antag_template.name] enabled, so we are drafting them.")
@@ -463,16 +460,16 @@ var/global/list/additional_antag_types = list()
 							//			required_enemies if the number of people with that role set to yes is less than recomended_enemies,
 							//			Less if there are not enough valid players in the game entirely to make required_enemies.
 
-/datum/game_mode/proc/num_players()
+/decl/game_mode/proc/num_players()
 	. = 0
 	for(var/mob/new_player/P in global.player_list)
 		if(P.client && P.ready)
 			. ++
 
-/datum/game_mode/proc/round_status_topic(href, href_list[])
+/decl/game_mode/proc/round_status_topic(href, href_list[])
 	return 0
 
-/datum/game_mode/proc/create_antagonists()
+/decl/game_mode/proc/create_antagonists()
 
 	if(!config.traitor_scaling)
 		antag_scaling_coeff = 0
@@ -494,7 +491,7 @@ var/global/list/additional_antag_types = list()
 	shuffle(antag_templates) //In the case of multiple antag types
 
 // Manipulates the end-game cinematic in conjunction with global.cinematic
-/datum/game_mode/proc/nuke_act(obj/screen/cinematic_screen, station_missed = 0)
+/decl/game_mode/proc/nuke_act(obj/screen/cinematic_screen, station_missed = 0)
 	if(!cinematic_icon_states)
 		return
 	if(station_missed < 2)

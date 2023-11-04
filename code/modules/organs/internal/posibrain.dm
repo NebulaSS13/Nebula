@@ -48,10 +48,6 @@
 	QDEL_NULL(brainmob)
 	return ..()
 
-/obj/item/organ/internal/posibrain/setup_as_prosthetic()
-	. = ..()
-	update_icon()
-
 /obj/item/organ/internal/posibrain/attack_self(mob/user)
 	if(brainmob && !brainmob.key && searching == 0)
 		//Start the process of searching for a new user.

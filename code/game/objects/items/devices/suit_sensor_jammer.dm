@@ -7,7 +7,7 @@
 	icon = 'icons/obj/items/device/jammer.dmi'
 	icon_state = "jammer"
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,

@@ -16,6 +16,10 @@
 /obj/abstract/level_data_spawner/player,
 /turf/space,
 /area/space)
+"X" = (
+/obj/abstract/landmark/latejoin/observer,
+/turf/space,
+/area/space)
 
 (1,1,1) = {"
 a
@@ -60,7 +64,7 @@ a
 a
 a
 a
-a
+X
 a
 a
 a

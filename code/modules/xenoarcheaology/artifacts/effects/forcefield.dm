@@ -49,8 +49,8 @@
 //Subtype with all the needed vars set, ready to block stuff
 /obj/effect/energy_field/artifact
 	strength = 1
-	density = 1
-	invisibility = 0
+	density = TRUE
+	invisibility = INVISIBILITY_NONE
 	is_spawnable_type = FALSE
 	var/datum/artifact_effect/forcefield/owner
 

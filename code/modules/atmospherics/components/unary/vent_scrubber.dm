@@ -11,7 +11,7 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER //connects to regular and scrubber pipes
 	identifier = "AScr"
 
-	level = 1
+	level = LEVEL_BELOW_PLATING
 
 	var/hibernate = 0 //Do we even process?
 	var/scrubbing = SCRUBBER_EXCHANGE
@@ -193,7 +193,7 @@
 		var/turf/T = get_turf(src)
 		var/hidden_pipe_check = FALSE
 		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
-			if(node.level)
+			if(node.level == LEVEL_BELOW_PLATING)
 				hidden_pipe_check = TRUE
 				break
 		if (hidden_pipe_check && isturf(T) && !T.is_plating())

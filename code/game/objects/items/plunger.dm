@@ -9,7 +9,7 @@
 	slot_flags = SLOT_HEAD | SLOT_FACE
 	body_parts_covered = SLOT_HEAD
 	hitsound = 'sound/effects/plunger.ogg'
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/plunger/equipped(mob/user, slot)
 	switch(slot)

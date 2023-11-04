@@ -20,9 +20,8 @@
 /obj/structure/mirror/get_contained_external_atoms()
 	. = ..()
 	if(mirror_storage)
-		if(.) // don't use lazyremove to avoid list churn
-			. -= mirror_storage // abstract object, don't yoink it out
-		LAZYADD(., mirror_storage.contents) // do add these though, we're pretending this is a storage object
+		LAZYADD(., mirror_storage.get_contained_external_atoms()) // add these, we're pretending this is a storage object
+		LAZYREMOVE(., mirror_storage) // abstract object, don't yoink it out. do this second to avoid list churn
 
 /obj/item/storage/internal/mirror_storage
 	use_sound = 'sound/effects/closet_open.ogg'
@@ -104,7 +103,7 @@
 	desc = "A SalonPro Nano-Mirror(TM) brand mirror! Now a portable version."
 	icon = 'icons/obj/items/mirror.dmi'
 	icon_state = "mirror"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY

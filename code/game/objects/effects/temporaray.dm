@@ -3,7 +3,7 @@
 	icon_state = "nothing"
 	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	simulated = FALSE
 	var/duration = 10 //in deciseconds
 

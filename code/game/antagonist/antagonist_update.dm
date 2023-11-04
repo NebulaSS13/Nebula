@@ -36,10 +36,10 @@
 		return
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
 	var/image/I = image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = ABOVE_HUMAN_LAYER)
-	if(ishuman(other.current))
-		var/mob/living/carbon/human/H = other.current
-		I.pixel_x = H.bodytype.antaghud_offset_x
-		I.pixel_y = H.bodytype.antaghud_offset_y
+	var/decl/bodytype/root_bodytype = other.current.get_bodytype()
+	if(istype(root_bodytype))
+		I.pixel_x = root_bodytype.antaghud_offset_x
+		I.pixel_y = root_bodytype.antaghud_offset_y
 	return I
 
 /decl/special_role/proc/update_all_icons()
@@ -81,7 +81,7 @@
 						if(I.loc == player.current)
 							qdel(I)
 
-/decl/special_role/proc/update_current_antag_max(datum/game_mode/mode)
+/decl/special_role/proc/update_current_antag_max(decl/game_mode/mode)
 	cur_max = hard_cap
 	if(type in mode.associated_antags)
 		cur_max = hard_cap_round

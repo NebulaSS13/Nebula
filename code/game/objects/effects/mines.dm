@@ -1,8 +1,8 @@
 /obj/effect/mine
 	name = "Mine"
 	desc = "I Better stay away from that thing."
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	layer = OBJ_LAYER
 	icon = 'icons/obj/items/weapon/landmine.dmi'
 	icon_state = "uglymine"
@@ -21,7 +21,7 @@
 
 	if(triggered) return
 
-	if(istype(M, /mob/living/carbon/human))
+	if(ishuman(M))
 		visible_message(SPAN_DANGER("\The [M] triggered \the [src]!"))
 		triggered = 1
 		call(src,triggerproc)(M)

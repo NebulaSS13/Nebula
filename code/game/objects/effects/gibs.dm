@@ -1,5 +1,5 @@
-/proc/gibs(atom/location, var/datum/dna/MobDNA, gibber_type = /obj/effect/gibspawner/generic, var/fleshcolor, var/bloodcolor)
-	new gibber_type(location,MobDNA,fleshcolor,bloodcolor)
+/proc/gibs(var/atom/location, var/gibber_type = /obj/effect/gibspawner/generic, var/_blood_type, var/_unique_enzymes, var/_fleshcolor, var/_bloodcolor)
+	new gibber_type(location, _blood_type, _unique_enzymes, _fleshcolor, _bloodcolor)
 
 /obj/effect/gibspawner
 	var/sparks = 0 //whether sparks spread on Gib()
@@ -8,14 +8,19 @@
 	var/list/gibdirections = list() //of lists
 	var/fleshcolor //Used for gibbed humans.
 	var/bloodcolor //Used for gibbed humans.
-	var/datum/dna/MobDNA
+	var/blood_type
+	var/unique_enzymes
 
-/obj/effect/gibspawner/Initialize(mapload, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
+/obj/effect/gibspawner/Initialize(mapload, var/_blood_type, var/_unique_enzymes, var/_fleshcolor, var/_bloodcolor)
 	..(mapload)
-
-	if(fleshcolor) src.fleshcolor = fleshcolor
-	if(bloodcolor) src.bloodcolor = bloodcolor
-	if(MobDNA)     src.MobDNA = MobDNA
+	if(_fleshcolor)
+		fleshcolor = _fleshcolor
+	if(_bloodcolor)
+		bloodcolor = _bloodcolor
+	if(_blood_type)
+		blood_type = _blood_type
+	if(_unique_enzymes)
+		unique_enzymes = _unique_enzymes
 	Gib(loc)
 	return INITIALIZE_HINT_QDEL
 
@@ -42,11 +47,10 @@
 
 				gib.update_icon()
 
-				gib.blood_DNA = list()
-				if(MobDNA)
-					gib.blood_DNA[MobDNA.unique_enzymes] = MobDNA.b_type
+				if(unique_enzymes && blood_type)
+					LAZYSET(gib.blood_DNA, unique_enzymes, blood_type)
 				else if(istype(src, /obj/effect/gibspawner/human)) // Probably a monkey
-					gib.blood_DNA["Non-human DNA"] = "A+"
+					LAZYSET(gib.blood_DNA, "Non-human DNA", "A+")
 				if(istype(location,/turf/))
 					var/list/directions = gibdirections[i]
 					if(directions.len)

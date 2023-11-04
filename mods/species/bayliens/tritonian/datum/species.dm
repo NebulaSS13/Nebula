@@ -5,10 +5,9 @@
 
 	available_bodytypes = list(
 		/decl/bodytype/human/tritonian,
-		/decl/bodytype/human/masculine/tritonian
+		/decl/bodytype/human/tritonian/masculine
 	)
 
-	slowdown   = 0.5
 	oxy_mod    = 0.5
 	toxins_mod = 1.5
 
@@ -16,14 +15,8 @@
 	water_soothe_amount = 5
 
 	unarmed_attacks = list(
-		/decl/natural_attack/stomp, 
-		/decl/natural_attack/kick, 
-		/decl/natural_attack/punch, 
+		/decl/natural_attack/stomp,
+		/decl/natural_attack/kick,
+		/decl/natural_attack/punch,
 		/decl/natural_attack/bite/sharp
 	)
-
-	override_organ_types = list(
-		BP_LUNGS = /obj/item/organ/internal/lungs/gills
-	)
-
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR

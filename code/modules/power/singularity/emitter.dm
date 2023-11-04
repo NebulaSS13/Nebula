@@ -5,8 +5,8 @@
 	desc = "A massive heavy industrial laser. This design is a fixed installation, capable of shooting in only one direction."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "emitter"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	initial_access = list(access_engine_equip)
 	active_power_usage = 100 KILOWATTS
 
@@ -38,7 +38,7 @@
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/emitter = 1, /decl/stock_part_preset/terminal_connect = 1)
 
 /obj/machinery/emitter/anchored
-	anchored = 1
+	anchored = TRUE
 	state = 2
 
 /obj/machinery/emitter/Destroy()
@@ -146,14 +146,14 @@
 				user.visible_message("[user.name] secures [src] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
 					"You hear a ratchet.")
-				anchored = 1
+				anchored = TRUE
 			if(1)
 				state = 0
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] unsecures [src] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
 					"You hear a ratchet.")
-				anchored = 0
+				anchored = FALSE
 			if(2)
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return

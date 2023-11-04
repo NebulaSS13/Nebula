@@ -156,7 +156,7 @@ SUBSYSTEM_DEF(materials)
 		mat_name = lowertext(mat_name)
 		return materials_by_name[mat_name]
 
-/datum/controller/subsystem/materials/proc/get_strata_material_type(var/turf/exterior/wall/location)
+/datum/controller/subsystem/materials/proc/get_strata_material_type(var/turf/exterior/location)
 	if(!istype(location))
 		return
 

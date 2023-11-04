@@ -65,8 +65,8 @@
 		if(istype(mask))
 			add_clothing_protection(mask)
 
-		var/obj/item/rig/rig = get_equipped_item(slot_back_str)
-		if(istype(rig))
+		var/obj/item/rig/rig = get_rig()
+		if(rig)
 			process_rig(rig)
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
@@ -120,45 +120,9 @@
 				PDA.SetName(replacetext(PDA.name, old_name, new_name))
 				search_pda = 0
 
-	if(wearing_rig && wearing_rig.update_visible_name)
-		wearing_rig.visible_name = real_name
-
-
-//Get species or synthetic temp if the mob is a FBP. Used when a synthetic type human mob is exposed to a temp check.
-//Essentially, used when a synthetic human mob should act diffferently than a normal type mob.
-/mob/living/carbon/human/proc/getSpeciesOrSynthTemp(var/temptype)
-	switch(temptype)
-		if(COLD_LEVEL_1)
-			return isSynthetic()? SYNTH_COLD_LEVEL_1 : species.cold_level_1
-		if(COLD_LEVEL_2)
-			return isSynthetic()? SYNTH_COLD_LEVEL_2 : species.cold_level_2
-		if(COLD_LEVEL_3)
-			return isSynthetic()? SYNTH_COLD_LEVEL_3 : species.cold_level_3
-		if(HEAT_LEVEL_1)
-			return isSynthetic()? SYNTH_HEAT_LEVEL_1 : species.heat_level_1
-		if(HEAT_LEVEL_2)
-			return isSynthetic()? SYNTH_HEAT_LEVEL_2 : species.heat_level_2
-		if(HEAT_LEVEL_3)
-			return isSynthetic()? SYNTH_HEAT_LEVEL_3 : species.heat_level_3
-
-/mob/living/carbon/human/proc/getCryogenicFactor(var/bodytemperature)
-	if(isSynthetic())
-		return 0
-	if(!species)
-		return 0
-
-	if(bodytemperature > species.cold_level_1)
-		return 0
-	else if(bodytemperature > species.cold_level_2)
-		. = 5 * (1 - (bodytemperature - species.cold_level_2) / (species.cold_level_1 - species.cold_level_2))
-		. = max(2, .)
-	else if(bodytemperature > species.cold_level_3)
-		. = 20 * (1 - (bodytemperature - species.cold_level_3) / (species.cold_level_2 - species.cold_level_3))
-		. = max(5, .)
-	else
-		. = 80 * (1 - bodytemperature / species.cold_level_3)
-		. = max(20, .)
-	return round(.)
+	var/obj/item/rig/rig = get_rig()
+	if(rig?.update_visible_name)
+		rig.visible_name = real_name
 
 /mob/living/carbon/human
 	var/next_sonar_ping = 0
@@ -219,7 +183,7 @@
 	return istype(get_equipped_item(slot_l_ear_str), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear_str), /obj/item/radio/headset)
 
 /mob/living/carbon/human/welding_eyecheck()
-	var/obj/item/organ/internal/eyes/E = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+	var/obj/item/organ/internal/eyes/E = get_organ(get_bodytype().vision_organ, /obj/item/organ/internal/eyes)
 	if(!E)
 		return
 	var/safety = eyecheck()
@@ -249,8 +213,8 @@
 			to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
 		if (E.damage >= E.min_bruised_damage)
 			to_chat(src, "<span class='danger'>You go blind!</span>")
-			set_status(STAT_BLIND, 5)
-			set_status(STAT_BLURRY, 5)
+			SET_STATUS_MAX(src, STAT_BLIND, 5)
+			SET_STATUS_MAX(src, STAT_BLURRY, 5)
 			disabilities |= NEARSIGHTED
 			spawn(100)
 				disabilities &= ~NEARSIGHTED
@@ -335,14 +299,3 @@
 		if(get_equipped_item(slot) == I)
 			return TRUE
 	return FALSE
-
-/mob/living/carbon/human/get_accessible_pen()
-	if((. = ..()))
-		return .
-
-	//Look for other slots
-	var/static/list/PEN_CHECK_SLOTS = list(slot_l_ear_str, slot_r_ear_str, slot_l_store_str, slot_r_store_str, slot_s_store_str)
-	for(var/slot in PEN_CHECK_SLOTS)
-		var/obj/item/I = get_equipped_item(slot)
-		if(IS_PEN(I))
-			return I

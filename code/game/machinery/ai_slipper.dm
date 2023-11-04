@@ -2,7 +2,7 @@
 	name = "\improper AI Liquid Dispenser"
 	icon = 'icons/obj/items/device/motion_detector.dmi'
 	icon_state = "motion0"
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 10
 	var/uses = 20
 	var/disabled = 1
@@ -26,7 +26,7 @@
 /obj/machinery/ai_slipper/attackby(obj/item/W, mob/user)
 	if(stat & (NOPOWER|BROKEN))
 		return
-	if (istype(user, /mob/living/silicon))
+	if (issilicon(user))
 		return attack_ai(user)
 	else // trying to unlock the interface
 		if(allowed(user))
@@ -52,7 +52,7 @@
 		return
 	var/t = "<TT><B>AI Liquid Dispenser</B> ([area.proper_name])<HR>"
 
-	if(src.locked && (!istype(user, /mob/living/silicon)))
+	if(src.locked && (!issilicon(user)))
 		t += "<I>(Swipe ID card to unlock control panel.)</I><BR>"
 	else
 		t += text("Dispenser [] - <A href='?src=\ref[];toggleOn=1'>[]?</a><br>\n", src.disabled?"deactivated":"activated", src, src.disabled?"Enable":"Disable")

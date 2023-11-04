@@ -20,7 +20,7 @@
 			else
 				create_duplicate(M)
 	for(var/mob/goast in global.ghost_mob_list)
-		goast.mouse_opacity = 0	//can't let you click that Dave
+		goast.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE	//can't let you click that Dave
 		goast.set_invisibility(SEE_INVISIBLE_LIVING)
 		goast.alpha = 255
 	old_accessible_z_levels = SSmapping.accessible_z_levels.Copy()
@@ -73,7 +73,7 @@
 	name = "echo"
 	desc = "It's not going to punch you, is it?"
 	var/mob/living/carbon/human/daddy
-	anchored = 1
+	anchored = TRUE
 	var/reality = 0
 	simulated = 0
 
@@ -121,10 +121,7 @@
 /obj/effect/bluegoast/proc/blueswitch()
 	var/mob/living/carbon/human/H
 	if(ishuman(daddy))
-		H = new(get_turf(src), daddy.species.name)
-		H.dna = daddy.dna.Clone()
-		H.sync_organ_dna()
-		H.UpdateAppearance()
+		H = new(get_turf(src), daddy.species.name, daddy.dna.Clone(), daddy.get_bodytype())
 		for(var/obj/item/entry in daddy.get_equipped_items(TRUE))
 			daddy.remove_from_mob(entry) //steals instead of copies so we don't end up with duplicates
 			H.equip_to_appropriate_slot(entry)
@@ -144,4 +141,3 @@
 	color = "#ff9900"
 	alpha = 100
 	blend_mode = BLEND_SUBTRACT
-	layer = FULLSCREEN_LAYER

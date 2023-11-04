@@ -1,6 +1,6 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	abstract_type = /turf
 	is_spawnable_type = TRUE
 	layer = TURF_LAYER
@@ -541,3 +541,6 @@
 
 /turf/proc/is_defiled()
 	return (locate(/obj/effect/narsie_footstep) in src)
+
+/turf/proc/resolve_to_actual_turf()
+	return src

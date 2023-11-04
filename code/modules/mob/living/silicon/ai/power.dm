@@ -195,8 +195,8 @@
 	active_power_usage = AI_POWERUSAGE_NORMAL * AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER
 	use_power = POWER_USE_ACTIVE
 	power_channel = EQUIP
+	invisibility = INVISIBILITY_ABSTRACT
 	var/mob/living/silicon/ai/powered_ai = null
-	invisibility = 100
 
 /obj/machinery/ai_powersupply/Initialize()
 	. = ..()

@@ -1,10 +1,11 @@
 /obj/item/organ/internal/eyes/insectoid/serpentid
 	name = "compound eyes"
-	innate_flash_protection = FLASH_PROTECTION_VULNERABLE
-	contaminant_guard = 1
 	action_button_name = "Toggle Eye Shields"
-	eye_icon = 'mods/species/serpentid/icons/eyes.dmi'
 	var/eyes_shielded
+	var/override_flash_protection = FLASH_PROTECTION_VULNERABLE
+
+/obj/item/organ/internal/eyes/insectoid/serpentid/get_innate_flash_protection()
+	return override_flash_protection
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/get_special_overlay()
 	var/icon/I = get_onhead_icon()
@@ -35,12 +36,12 @@
 		eyes_shielded = !eyes_shielded
 		if(eyes_shielded)
 			to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
-			innate_flash_protection = FLASH_PROTECTION_MAJOR
+			override_flash_protection = FLASH_PROTECTION_MAJOR
 			owner.overlay_fullscreen("eyeshield", /obj/screen/fullscreen/blind)
 			owner.update_icon()
 		else
 			to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
-			innate_flash_protection = FLASH_PROTECTION_VULNERABLE
+			override_flash_protection = FLASH_PROTECTION_VULNERABLE
 			addtimer(CALLBACK(src, .proc/remove_shield), 1 SECONDS)
 			owner.update_icon()
 		refresh_action_button()
@@ -121,7 +122,7 @@
 			lowblood_tally = 10
 			if(prob(10))
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
-				SET_STATUS_MAX(owner, STAT_PARA, 1)
+				SET_STATUS_MAX(owner, STAT_PARA, 2)
 				var/obj/item/organ/internal/I = pick(owner.internal_organs)
 				I.take_internal_damage(5)
 	..()
@@ -165,7 +166,8 @@
 	name = "head"
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
-	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.species.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	// todo: maybe this should use its own bodytype instead of mob root bodytype?
+	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	if(eyes)
 		return eyes.get_special_overlay()
 

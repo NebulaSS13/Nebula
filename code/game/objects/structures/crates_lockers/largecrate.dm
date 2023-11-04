@@ -3,9 +3,9 @@
 	desc = "A hefty wooden crate."
 	icon = 'icons/obj/shipping_crates.dmi'
 	icon_state = "densecrate"
-	density = 1
+	density = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/structure/largecrate/Initialize()
 	. = ..()

@@ -4,8 +4,8 @@
 	icon = 'icons/obj/structures/network_cable.dmi'
 	icon_state = "dot"
 	layer = WIRE_LAYER
-	anchored = 1
-	level = 1
+	anchored = TRUE
+	level = LEVEL_BELOW_PLATING
 	var/datum/node/physical/network_node
 
 /obj/structure/network_cable/Initialize(ml, _mat, _reinf_mat)
@@ -66,7 +66,7 @@
 			if(G)
 				LAZYADD(graphs[G], cable.network_node)
 			cable.update_icon()
-	
+
 	for(var/datum/graph/G in graphs)
 		G.Connect(network_node, graphs[G])
 	update_icon()
@@ -99,7 +99,7 @@
 		network_node.Connect(new_neighbours[1]) // Pick a random new neighbour to connect to and get a new graph.
 		for(var/datum/node/neighbour in new_neighbours.Copy(2))
 			neighbour.Connect(network_node)		// Connect the other neighbours to the network node with its (new) graph.
-	
+
 	return TRUE
 
 /obj/structure/network_cable/Move()
@@ -127,12 +127,12 @@
 	if(T.is_open())
 		var/turf/A = GetBelow(src)
 		var/obj/structure/network_cable/cable = locate() in A
-		if(cable) 
+		if(cable)
 			add_overlay("cable-down")
 	var/turf/U = GetAbove(src)
 	if(U?.is_open())
 		var/obj/structure/network_cable/cable = locate() in U
-		if(cable) 
+		if(cable)
 			add_overlay("cable-up")
 
 /obj/structure/network_cable/terminal
@@ -163,8 +163,9 @@
 	throw_range = 5
 	material = /decl/material/solid/glass
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
+	matter_multiplier = 0.15
 	item_state = "coil"
 
 /obj/item/stack/net_cable_coil/single

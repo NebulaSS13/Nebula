@@ -7,7 +7,7 @@
 	attack_verb = list("attacked", "poked", "battered")
 	body_parts_covered = 0
 	chem_volume = 0 //ecig has no storage on its own but has reagent container created by parent obj
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	var/brightness_on = 1
 	var/obj/item/cell/cigcell
@@ -78,7 +78,7 @@
 		to_chat(user,SPAN_NOTICE("There's no cartridge connected."))
 
 /obj/item/clothing/mask/smokable/ecig/proc/Deactivate()
-	lit = 0
+	lit = FALSE
 	STOP_PROCESSING(SSobj, src)
 	update_icon()
 
@@ -126,8 +126,8 @@
 		add_overlay("[icon_state]-loaded")
 	if(ismob(loc))
 		var/mob/living/M = loc
-		M.update_inv_wear_mask(0)
-		M.update_inv_hands()
+		M.update_equipment_overlay(slot_wear_mask_str, redraw_mob = FALSE)
+		M.update_inhand_overlays()
 
 /obj/item/clothing/mask/smokable/ecig/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/chems/ecig_cartridge))
@@ -181,7 +181,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] does not have a battery installed."))
 
 /obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user)//eject cartridge
-	if(!user.is_holding_offhand(src) || !ec_cartridge || !user.check_dexterity(DEXTERITY_GRIP))
+	if(!user.is_holding_offhand(src) || !ec_cartridge || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return ..()
 	lit = FALSE
 	user.put_in_hands(ec_cartridge)

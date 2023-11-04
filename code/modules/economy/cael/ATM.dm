@@ -8,7 +8,7 @@
 	desc = "For all your monetary needs!"
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "atm"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 10
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
@@ -127,7 +127,7 @@
 
 /obj/machinery/atm/interact(mob/user)
 
-	if(istype(user, /mob/living/silicon))
+	if(issilicon(user))
 		to_chat(user, "[html_icon(src)] <span class='warning'>Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per system banking regulation #1005.</span>")
 		return
 

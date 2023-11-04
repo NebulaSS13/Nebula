@@ -6,7 +6,7 @@
 	if(!message)
 		return
 
-	if (stat == 2)
+	if (stat == DEAD)
 		return say_dead(message)
 
 	if (stat)
@@ -37,7 +37,7 @@
 	to_chat(host, "Your own thoughts speak: \"[message]\"")
 
 	for (var/mob/M in global.player_list)
-		if (istype(M, /mob/new_player))
+		if (isnewplayer(M))
 			continue
 		else if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH)
 			to_chat(M, "[src.truename] whispers to [host], \"[message]\"")

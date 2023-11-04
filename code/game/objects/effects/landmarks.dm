@@ -20,8 +20,8 @@
 	name = "start"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
-	anchored = 1.0
-	invisibility = 101
+	anchored = TRUE
+	invisibility = INVISIBILITY_ABSTRACT
 
 /obj/abstract/landmark/start/Initialize()
 	tag = "start*[name]"

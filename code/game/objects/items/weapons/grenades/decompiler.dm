@@ -80,14 +80,12 @@
 	playsound(loc, 'sound/magic/lightningshock.ogg', 30, FALSE)
 
 	var/list/eaten
-	for(var/eat_turf in RANGE_TURFS(loc, eat_range))
-
-		var/turf/T = eat_turf
-		var/list/eating = T.contents?.Copy()
+	for(var/turf/eat_turf as anything in RANGE_TURFS(loc, eat_range))
+		var/list/eating = eat_turf.get_contained_external_atoms()
 
 		while(length(eating))
 			var/atom/movable/thing = pick_n_take(eating)
-			if(QDELETED(thing) || !istype(thing) || !thing.simulated || thing.anchored || prob(15))
+			if(QDELETED(thing) || (thing == src) || thing.anchored || prob(15))
 				continue
 
 			if(prob(30))
@@ -107,10 +105,16 @@
 							thing = limb
 							break
 
-			if(isitem(thing))
-				var/obj/item/eating_obj = thing
-				for(var/mat in eating_obj.matter)
-					decompiled_matter[mat] += eating_obj.matter[mat]
+			if(isobj(thing))
+				var/obj/eating_obj = thing
+				// some loose objects fall out and evade getting eaten this time
+				for(var/obj/recursive_obj in eating_obj.get_contained_external_atoms())
+					if(prob(15))
+						recursive_obj.dropInto(eating_obj.loc)
+					else
+						LAZYADD(eaten, recursive_obj)
+				// whatever's left is cubified
+				decompiled_matter = MERGE_ASSOCS_WITH_NUM_VALUES(decompiled_matter, eating_obj.get_contained_matter())
 				LAZYADD(eaten, eating_obj)
 
 	if(length(eaten))

@@ -1,10 +1,9 @@
 /obj/effect/rune
 	name = "rune"
 	desc = "A strange collection of symbols drawn in blood."
-	anchored = 1
+	anchored = TRUE
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
-	unacidable = 1
 	layer = RUNE_LAYER
 
 	var/blood
@@ -267,9 +266,8 @@
 	icon = 'icons/effects/effects.dmi'//TODO: better icon
 	icon_state = "smoke"
 	color = "#ff0000"
-	anchored = 1
-	density = 1
-	unacidable = 1
+	anchored = TRUE
+	density = TRUE
 	var/obj/effect/rune/wall/rune
 	var/health
 	var/max_health = 200
@@ -490,7 +488,7 @@
 		//TODO: other rewards?
 		/* old sac code - left there in case someone wants to salvage it
 		var/worth = 0
-		if(istype(H,/mob/living/carbon/human))
+		if(ishuman(H))
 			var/mob/living/carbon/human/lamb = H
 			if(lamb.species.rarity_value > 3)
 				worth = 1

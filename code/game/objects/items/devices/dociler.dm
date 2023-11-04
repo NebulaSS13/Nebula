@@ -6,7 +6,7 @@
 	icon = 'icons/obj/items/device/animal_tagger.dmi'
 	icon_state = ICON_STATE_WORLD
 	force = 1
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/silicon = MATTER_AMOUNT_REINFORCEMENT)
 	var/loaded = 1
 	var/mode = "completely"
@@ -24,7 +24,7 @@
 	to_chat(user, "You set \the [src] to [mode] docile mode.")
 
 /obj/item/dociler/attack(var/mob/living/L, var/mob/user)
-	if(!istype(L, /mob/living/simple_animal))
+	if(!isanimal(L))
 		to_chat(user, "<span class='warning'>\The [src] cannot not work on \the [L].</span>")
 		return
 

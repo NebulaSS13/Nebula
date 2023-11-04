@@ -171,7 +171,7 @@
 		if(gutsound)
 			sounds += gutsound
 	if(!sounds.len)
-		if(owner.pulse())
+		if(owner.get_pulse())
 			sounds += "faint pulse"
 	return sounds
 

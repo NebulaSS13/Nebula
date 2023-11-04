@@ -14,7 +14,7 @@
 /decl/species/unathi
 	name = SPECIES_LIZARD
 	name_plural = SPECIES_LIZARD
-	skin_material = /decl/material/solid/skin/lizard
+	skin_material = /decl/material/solid/organic/skin/lizard
 
 	available_bodytypes = list(
 		/decl/bodytype/lizard,
@@ -29,13 +29,10 @@
 	)
 
 	primitive_form = "Stok"
-	darksight_range = 3
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
 	breath_pressure = 18
-	slowdown = 0.5
 	brute_mod = 0.8
-	flash_mod = 1.2
 	blood_volume = 800
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 2
@@ -56,12 +53,8 @@
 	heat_level_3 = 1100 //Default 1000
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34af10"
-	base_color = "#066000"
-	default_h_style = /decl/sprite_accessory/hair/lizard/frills_long
-	base_hair_color = "#192e19"
 	organs_icon = 'mods/species/bayliens/unathi/icons/organs.dmi'
 
 	preview_outfit = /decl/hierarchy/outfit/job/generic/doctor
@@ -93,13 +86,6 @@
 		)
 
 	breathing_sound = 'mods/species/bayliens/unathi/sound/lizard_breathing.ogg'
-
-	override_organ_types = list(
-		BP_EYES = /obj/item/organ/internal/eyes/lizard,
-		BP_BRAIN = /obj/item/organ/internal/brain/lizard
-	)
-
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 1.25,

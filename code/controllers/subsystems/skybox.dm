@@ -39,7 +39,7 @@ SUBSYSTEM_DEF(skybox)
 /datum/controller/subsystem/skybox/proc/build_space_appearances()
 	//Create our 'normal' space appearance
 	normal_space = new /mutable_appearance(/turf/space)
-	normal_space.appearance_flags = TILE_BOUND|PIXEL_SCALE|KEEP_TOGETHER
+	normal_space.appearance_flags = TILE_BOUND|DEFAULT_APPEARANCE_FLAGS|KEEP_TOGETHER
 	normal_space.plane = SKYBOX_PLANE
 	normal_space.icon_state = "white"
 
@@ -112,12 +112,12 @@ SUBSYSTEM_DEF(skybox)
 
 /datum/controller/subsystem/skybox/proc/generate_skybox(z)
 	var/image/res = image(skybox_icon)
-	res.appearance_flags = PIXEL_SCALE | KEEP_TOGETHER
+	res.appearance_flags |= KEEP_TOGETHER
 
-	var/image/base = overlay_image(skybox_icon, background_icon, background_color, PIXEL_SCALE)
+	var/image/base = overlay_image(skybox_icon, background_icon, background_color, DEFAULT_APPEARANCE_FLAGS)
 
 	if(use_stars)
-		var/image/stars = overlay_image(stars_icon, star_state, flags = PIXEL_SCALE | RESET_COLOR)
+		var/image/stars = overlay_image(stars_icon, star_state, flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR)
 		base.overlays += stars
 
 	res.overlays += base
@@ -130,7 +130,7 @@ SUBSYSTEM_DEF(skybox)
 			for(var/obj/effect/overmap/visitable/other in O.loc)
 				if(other != O)
 					overmap.overlays += other.get_skybox_representation()
-			overmap.appearance_flags = PIXEL_SCALE | RESET_COLOR
+			overmap.appearance_flags |= RESET_COLOR
 			res.overlays += overmap
 
 	for(var/datum/event/E in SSevent.active_events)

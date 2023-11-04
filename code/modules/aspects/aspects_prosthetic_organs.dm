@@ -9,9 +9,16 @@
 
 /decl/aspect/prosthetic_organ/is_available_to(datum/preferences/pref)
 	. = ..()
-	if(. && pref.species)
-		var/decl/species/species = global.all_species[pref.species]
-		return istype(species) && (apply_to_organ in species.has_organ) && !(species.species_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+	if(. && pref.species && pref.bodytype)
+		var/decl/species/mob_species = pref.get_species_decl()
+		var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
+		if(!istype(mob_bodytype))
+			return FALSE
+		if(!(apply_to_organ in mob_bodytype.has_organ))
+			return FALSE
+		if(mob_species.species_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+			return FALSE
+		return TRUE
 
 /decl/aspect/prosthetic_organ/applies_to_organ(var/organ)
 	return apply_to_organ && organ == apply_to_organ
@@ -20,8 +27,8 @@
 	. = ..()
 	if(.)
 		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(holder, apply_to_organ)
-		if(istype(I))
-			I.robotize()
+		if(I)
+			I.set_bodytype(holder.species.base_prosthetics_model)
 
 /decl/aspect/prosthetic_organ/eyes
 	name = "Prosthetic Eyes"

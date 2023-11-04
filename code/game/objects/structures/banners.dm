@@ -3,7 +3,7 @@
 	desc = "A sturdy frame suitable for hanging a banner."
 	icon = 'icons/obj/structures/banner_frame.dmi'
 	icon_state = "banner_stand"
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	anchored = TRUE
 	density = FALSE
 	opacity = FALSE
@@ -35,7 +35,7 @@
 	update_icon()
 
 /obj/structure/banner_frame/attack_hand(mob/user)
-	if(banner && user.check_dexterity(DEXTERITY_GRIP))
+	if(banner && user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		user.put_in_hands(banner)
 		var/old_banner = banner
 		set_banner(null)
@@ -83,7 +83,7 @@
 	desc = "A furled-up banner."
 	icon = 'icons/obj/banner.dmi'
 	icon_state = "banner"
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 	max_health = 20
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_NORMAL

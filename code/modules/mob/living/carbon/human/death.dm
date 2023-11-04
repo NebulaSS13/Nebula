@@ -17,7 +17,7 @@
 	var/last_loc = loc
 	..(species.gibbed_anim, do_gibs = FALSE)
 	if(last_loc)
-		gibs(last_loc, dna, null, species.get_flesh_colour(src), species.get_blood_color(src))
+		gibs(last_loc, dna, _fleshcolor = species.get_flesh_colour(src), _bloodcolor = species.get_blood_color(src))
 
 /mob/living/carbon/human/dust()
 	if(species)
@@ -32,7 +32,7 @@
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
-	
+
 	//Handle species-specific deaths.
 	species.handle_death(src)
 
@@ -42,9 +42,6 @@
 
 	if(SSticker.mode)
 		SSticker.mode.check_win()
-
-	if(wearing_rig)
-		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
 
 	if(config.show_human_death_message)
 		deathmessage = species.get_death_message(src) || "seizes up and falls limp..."
@@ -75,11 +72,9 @@
 
 /mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
 	for(var/obj/item/organ/external/limb in get_external_organs())
-		var/limb_can_amputate = (limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
-		limb.limb_flags |= ORGAN_FLAG_CAN_AMPUTATE
+		if(!limb.parent_organ) // don't dismember root
+			continue
 		limb.dismember(TRUE, droplimb_type, TRUE, TRUE)
-		if(!QDELETED(limb) && !limb_can_amputate)
-			limb.limb_flags &= ~ORGAN_FLAG_CAN_AMPUTATE
 	dump_contents()
 	if(!skip_qdel && !QDELETED(src))
 		qdel(src)

@@ -37,10 +37,10 @@ var/global/list/exodus_paperwork_end_areas = list()
 		/datum/job/hos
 	)
 
-/datum/goal/department/paperwork/exodus/get_spawn_turfs()
+/datum/goal/department/paperwork/exodus/get_paper_spawn_turfs()
 	return global.exodus_paperwork_spawn_turfs
 
-/datum/goal/department/paperwork/exodus/get_end_areas()
+/datum/goal/department/paperwork/exodus/get_paper_end_areas()
 	return global.exodus_paperwork_end_areas
 
 /obj/item/paperwork/exodus

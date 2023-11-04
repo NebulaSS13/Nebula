@@ -12,46 +12,43 @@
 	max_damage = 45
 	z_flags = ZMM_MANGLE_PLANES
 
-	var/contaminant_guard = 0
 	var/eye_colour = COLOR_BLACK
-	var/innate_flash_protection = FLASH_PROTECTION_NONE
-	var/eye_icon = 'icons/mob/human_races/species/default_eyes.dmi'
-	var/apply_eye_colour = TRUE
 	var/tmp/last_cached_eye_colour
 	var/tmp/last_eye_cache_key
-	var/flash_mod
-	var/darksight_range
-	var/eye_blend = ICON_ADD
+
+/obj/item/organ/internal/eyes/proc/get_innate_flash_protection()
+	return bodytype.eye_innate_flash_protection
+
+/obj/item/organ/internal/eyes/proc/get_flash_mod()
+	return bodytype.eye_flash_mod
+
+/obj/item/organ/internal/eyes/proc/get_darksight_range()
+	return bodytype.eye_darksight_range
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
+	bodytype = /decl/bodytype/prosthetic/basic_human
 	organ_properties = ORGAN_PROP_PROSTHETIC
 	icon = 'icons/obj/robot_component.dmi'
-	flash_mod = 1
-	darksight_range = 2
-	material = /decl/material/solid/metal/steel
 
-/obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna)
+/obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	. = ..()
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/robot/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	return
-
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = eye_colour
-	last_eye_cache_key = "[type]-[eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
+	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
 	return last_eye_cache_key
 
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
 	var/cache_key = get_eye_cache_key()
 	if(!human_icon_cache[cache_key])
-		var/icon/eyes_icon = icon(icon = eye_icon, icon_state = "")
+		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = "")
 		if(bodytype.eye_offset)
 			eyes_icon.Shift(NORTH, bodytype.eye_offset)
-		if(apply_eye_colour)
-			eyes_icon.Blend(last_cached_eye_colour, eye_blend)
+		if(bodytype.apply_eye_colour)
+			eyes_icon.Blend(last_cached_eye_colour, bodytype.eye_blend)
 		human_icon_cache[cache_key] = eyes_icon
 	return human_icon_cache[cache_key]
 
@@ -82,17 +79,12 @@
 	if(!owner)
 		return
 	if(is_bruised())
-		owner.set_status(STAT_BLURRY, 20)
+		SET_STATUS_MAX(owner, STAT_BLURRY, 20)
 	if(is_broken())
-		owner.set_status(STAT_BLIND, 20)
-
-/obj/item/organ/internal/eyes/set_species(species_name)
-	. = ..()
-	flash_mod 		= species.flash_mod
-	darksight_range = species.darksight_range
+		SET_STATUS_MAX(owner, STAT_BLIND, 20)
 
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
-	return (flash_protection + innate_flash_protection)
+	return (flash_protection + get_innate_flash_protection())
 
 /obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
 	return -1
@@ -101,7 +93,7 @@
 	// Apply our eye colour to the target.
 	if(istype(target) && eye_colour)
 		target.eye_colour = eye_colour
-		target.update_eyes()
+		target.update_eyes(update_icons = update_icon)
 	if(owner && BP_IS_PROSTHETIC(src))
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
@@ -112,15 +104,21 @@
 	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
+// TODO: FIND A BETTER WAY TO DO THIS
+// MAYBE JUST REMOVE IT ENTIRELY?
+/obj/item/organ/internal/eyes/reset_status()
 	. = ..()
-	name = "optical sensor"
-	icon = 'icons/obj/robot_component.dmi'
-	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
-	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
+	if(BP_IS_PROSTHETIC(src))
+		name = "optical sensor"
+		icon = 'icons/obj/robot_component.dmi'
+		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
+	else
+		name = initial(name)
+		icon = initial(icon)
+		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	update_colour()
-	flash_mod = 1
-	darksight_range = 2
 
 /obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
 	return "retinal overlayed [name]"
@@ -142,7 +140,7 @@
 	if(new_eyes && do_after(owner, 10) && owner.change_eye_color(new_eyes))
 		update_colour()
 		// Finally, update the eye icon on the mob.
-		owner.refresh_visible_overlays()
+		owner.try_refresh_visible_overlays()
 		owner.visible_message(SPAN_NOTICE("\The [owner] changes their eye color."),SPAN_NOTICE("You change your eye color."),)
 
 /obj/item/organ/internal/eyes/proc/toggle_eye_glow()
@@ -162,4 +160,4 @@
 	var/obj/item/organ/external/head/head = owner.get_organ(BP_HEAD, /obj/item/organ/external/head)
 	if(head)
 		head.glowing_eyes = !head.glowing_eyes
-		owner.refresh_visible_overlays()
+		owner.try_refresh_visible_overlays()

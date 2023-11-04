@@ -58,8 +58,8 @@
 	)
 
 /obj/item/stock_parts/circuitboard/mining_extractor
-	name = "circuitboard (gas extractor)"
-	build_path = /obj/machinery/atmospherics/unary/material/extractor
+	name = "circuitboard (mineral extractor)"
+	build_path = /obj/machinery/material_processing/extractor
 	board_type = "machine"
 	origin_tech = "{'programming':2,'engineering':2}"
 	req_components = list(

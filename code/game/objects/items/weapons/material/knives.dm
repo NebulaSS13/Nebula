@@ -11,7 +11,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	sharp = TRUE
 	edge = TRUE
-	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES | ITEM_FLAG_IS_WEAPON
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	pickup_sound = 'sound/foley/knife1.ogg'
 	drop_sound = 'sound/foley/knifedrop3.ogg'
@@ -65,13 +65,13 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 
 /obj/item/knife/table/plastic
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/knife/table/primitive
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon = 'icons/obj/items/weapon/knives/savage.dmi'
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	material_alteration = MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_NORMAL
 

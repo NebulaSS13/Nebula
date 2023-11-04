@@ -3,7 +3,7 @@
 	desc = "written in the blood of some unfortunate fellow."
 	icon = 'icons/mob/screen_spells.dmi'
 	icon_state = "master_open"
-	material = /decl/material/solid/cardboard //#TODO: replace with paper
+	material = /decl/material/solid/organic/paper
 	var/contract_master = null
 	var/list/contract_spells = list(/spell/contract/reward,/spell/contract/punish,/spell/contract/return_master)
 
@@ -25,7 +25,7 @@
 			user.visible_message("\The [src] visibly rejects \the [user], erasing their signature from the line.")
 			return
 		user.visible_message("\The [src] disappears with a flash of light.")
-		if(contract_spells.len && istype(contract_master,/mob/living)) //if it aint text its probably a mob or another user
+		if(contract_spells.len && isliving(contract_master)) //if it aint text its probably a mob or another user
 			var/mob/living/M = contract_master
 			for(var/spell_type in contract_spells)
 				M.add_spell(new spell_type(user), "const_spell_ready")

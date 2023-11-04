@@ -1,6 +1,6 @@
 /atom
-	/// (1 | 2) Determines if this atom is below `1` or above `2` plating. TODO: Use defines.
-	var/level = 2
+	/// (DEFINE) Determines where this atom sits in terms of turf plating. See misc.dm
+	var/level = LEVEL_ABOVE_PLATING
 	/// (BITFLAG) See flags.dm
 	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 	/// (FLOAT) The world.time that this atom last bumped another. Used mostly by mobs.
@@ -27,8 +27,8 @@
 	var/was_bloodied
 	/// (COLOR) The color of the blood shown on blood overlays.
 	var/blood_color
-	/// (1 | 2 | 3) If it shows up under UV light. 0 doesn't, 1 does, 2 is currently glowing due to UV light. TODO: Use defines
-	var/fluorescent
+	/// (FALSE|DEFINES) How this atom is interacting with UV light. See misc.dm
+	var/fluorescent = FALSE
 
 
 	/// (LIST) A list of all mobs that are climbing or currently on this atom
@@ -97,7 +97,7 @@
 	- TODO: Also sometimes handles resetting of view itself, probably should be more consistent.
 */
 /atom/proc/check_eye(user)
-	if (istype(user, /mob/living/silicon/ai)) // WHY
+	if (isAI(user)) // WHY
 		return 0
 	return -1
 
@@ -116,7 +116,7 @@
 
 /// Handle reagents being modified
 /atom/proc/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(TRUE)
 
 /**
 	Handle an atom bumping this atom
@@ -471,7 +471,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(!simulated)
 		return
-	fluorescent = 0
+	fluorescent = FALSE
 	germ_level = 0
 	blood_color = null
 	if(istype(blood_DNA, /list))

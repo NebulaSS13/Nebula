@@ -15,10 +15,11 @@
 	base_parry_chance = 30
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		/decl/material/solid/plastic      = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/organic/plastic      = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon      = MATTER_AMOUNT_REINFORCEMENT,
 	)
+	item_flags = ITEM_FLAG_IS_WEAPON
 	var/stunforce = 0
 	var/agonyforce = 30
 	var/status = 0		//whether the thing is on or not
@@ -254,4 +255,4 @@
 	hitcost = 25
 	attack_verb = list("poked")
 	slot_flags = null
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE)

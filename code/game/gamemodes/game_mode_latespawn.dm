@@ -1,14 +1,15 @@
-/datum/game_mode/var/next_spawn = 0
-/datum/game_mode/var/min_autotraitor_delay = 4200  // Approx 7 minutes.
-/datum/game_mode/var/max_autotraitor_delay = 12000 // Approx 20 minutes.
+/decl/game_mode
+	var/next_spawn = 0
+	var/min_autotraitor_delay = 7 MINUTES
+	var/max_autotraitor_delay = 20 MINUTES
 
 ///process()
 ///Called by the gameticker
-/datum/game_mode/proc/process()
+/decl/game_mode/proc/process()
 	if(shall_process_autoantag())
 		process_autoantag()
 
-/datum/game_mode/proc/shall_process_autoantag()
+/decl/game_mode/proc/shall_process_autoantag()
 	if(!round_autoantag || world.time < next_spawn)
 		return FALSE
 	if(SSevac.evacuation_controller && (SSevac.evacuation_controller.is_evacuating() || SSevac.evacuation_controller.has_evacuated()))
@@ -20,16 +21,16 @@
 	return TRUE
 
 //This can be overriden in case a game mode needs to do stuff when a player latejoins
-/datum/game_mode/proc/handle_latejoin(var/mob/living/carbon/human/character)
+/decl/game_mode/proc/handle_latejoin(var/mob/living/carbon/human/character)
 	if(character.mind)
 		character.mind.generate_goals(character.mind.assigned_job, is_spawning=TRUE)
 		character.show_goals()
 	return 0
 
-/datum/game_mode/proc/handle_offsite_latejoin(var/mob/living/carbon/human/character)
+/decl/game_mode/proc/handle_offsite_latejoin(var/mob/living/carbon/human/character)
 	return 0
 
-/datum/game_mode/proc/process_autoantag()
+/decl/game_mode/proc/process_autoantag()
 	message_admins("[uppertext(name)]: Attempting autospawn.")
 
 	var/list/usable_templates = list()

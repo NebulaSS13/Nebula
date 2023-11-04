@@ -2,7 +2,7 @@ var/global/list/fishtank_cache = list()
 
 /obj/effect/glass_tank_overlay
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/obj/structure/glass_tank/aquarium
 
 /obj/effect/glass_tank_overlay/Initialize(ml, _aquarium)
@@ -20,8 +20,8 @@ var/global/list/fishtank_cache = list()
 	desc = "A clear glass box for keeping specimens in."
 	icon_state = "preview"
 	icon = 'icons/obj/structures/fishtanks.dmi'
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	mob_offset = TRUE
 	maxhealth = 50

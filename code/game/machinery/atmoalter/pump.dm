@@ -3,7 +3,7 @@
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "psiphon:0"
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 	base_type = /obj/machinery/portable_atmospherics/powered/pump
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
@@ -40,7 +40,7 @@
 	if(holding)
 		overlays += "siphon-open"
 
-	if(connected_port)
+	if(get_port())
 		overlays += "siphon-connector"
 
 /obj/machinery/portable_atmospherics/powered/pump/emp_act(severity)
@@ -112,7 +112,7 @@
 /obj/machinery/portable_atmospherics/powered/pump/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data[0]
 	var/obj/item/cell/cell = get_cell()
-	data["portConnected"] = connected_port ? 1 : 0
+	data["portConnected"] = get_port() ? 1 : 0
 	data["tankPressure"] = round(air_contents.return_pressure() > 0 ? air_contents.return_pressure() : 0)
 	data["targetpressure"] = round(target_pressure)
 	data["pump_dir"] = direction_out

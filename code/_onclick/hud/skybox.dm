@@ -1,7 +1,7 @@
 var/global/const/SKYBOX_DIMENSION = 736 // Largest measurement for icon sides, used for offsets/scaling
 /obj/skybox
 	name = "skybox"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	anchored = TRUE
 	simulated = FALSE
 	plane = SKYBOX_PLANE
@@ -49,7 +49,6 @@ var/global/const/SKYBOX_DIMENSION = 736 // Largest measurement for icon sides, u
 	if(rebuild)
 		skybox.overlays.Cut()
 		var/image/I = SSskybox.get_skybox(T.z)
-		I.appearance_flags |= PIXEL_SCALE
 		skybox.overlays += I
 		screen |= skybox
 		set_skybox_offsets(last_view_x_dim, last_view_y_dim)

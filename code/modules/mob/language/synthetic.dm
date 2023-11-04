@@ -5,7 +5,7 @@
 	speech_verb = "whistles"
 	ask_verb = "chirps"
 	exclaim_verb = "whistles loudly"
-	colour = "changeling"
+	colour = "mutant"
 	key = "6"
 	flags = LANG_FLAG_NO_STUTTER
 	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
@@ -48,13 +48,13 @@
 		O.show_message("[message_start] ([ghost_follow_link(speaker, O)]) [message_body]", 2)
 
 	for (var/mob/M in global.dead_mob_list_)
-		if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
+		if(!isnewplayer(M) && !isbrain(M)) //No meta-evesdropping
 			M.show_message("[message_start] ([ghost_follow_link(speaker, M)]) [message_body]", 2)
 
 	for (var/mob/living/S in global.living_mob_list_)
-		if(drone_only && !istype(S,/mob/living/silicon/robot/drone))
+		if(drone_only && !isdrone(S))
 			continue
-		else if(istype(S , /mob/living/silicon/ai))
+		else if(isAI(S))
 			message_start = "<i><span class='game say'>[name], <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[speaker];trackname=[html_encode(speaker.name)]'><span class='name'>[speaker.name]</span></a></span></i>"
 		else if (!S.binarycheck())
 			continue
@@ -65,7 +65,7 @@
 	listening -= src
 
 	for (var/mob/living/M in listening)
-		if(istype(M, /mob/living/silicon) || M.binarycheck())
+		if(issilicon(M) || M.binarycheck())
 			continue
 		M.show_message("<i><span class='game say'><span class='name'>synthesised voice</span> <span class='message'>beeps, \"beep beep beep\"</span></span></i>",2)
 

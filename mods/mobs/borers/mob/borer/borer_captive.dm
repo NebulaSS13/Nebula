@@ -17,13 +17,13 @@
 			to_chat(src, SPAN_WARNING("You cannot speak in IC (muted)."))
 			return
 
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if(isborer(src.loc))
 
 		message = sanitize(message)
 		if (!message)
 			return
 		log_say("[key_name(src)] : [message]")
-		if (stat == 2)
+		if (stat == DEAD)
 			return say_dead(message)
 
 		var/mob/living/simple_animal/borer/B = src.loc
@@ -31,14 +31,14 @@
 		to_chat(B.host, "The captive mind of [src] whispers, \"[message]\"")
 
 		for (var/mob/M in global.player_list)
-			if (istype(M, /mob/new_player))
+			if (isnewplayer(M))
 				continue
 			else if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH)
 				to_chat(M, "The captive mind of [src] whispers, \"[message]\"")
 
 /mob/living/captive_brain/process_resist()
 	//Resisting control by an alien mind.
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if(isborer(src.loc))
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 
@@ -51,7 +51,7 @@
 			B.host.adjustBrainLoss(rand(0.1,0.5))
 			to_chat(H, "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>")
 			to_chat(B.host, "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>")
-			B.detatch()
+			B.detach_from_host()
 			verbs -= /mob/living/carbon/proc/release_control
 			verbs -= /mob/living/carbon/proc/punish_host
 			verbs -= /mob/living/carbon/proc/spawn_larvae

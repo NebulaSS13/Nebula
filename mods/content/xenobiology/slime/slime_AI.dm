@@ -150,7 +150,7 @@
 						added_delay = 10
 		else if(slime.Adjacent(current_target))
 			var/do_attack = FALSE
-			if(istype(current_target, /mob/living/silicon))
+			if(issilicon(current_target))
 				body.a_intent_change(I_HURT)
 				do_attack = TRUE
 			else if(current_target.client && !current_target.lying && prob(60 + slime.powerlevel * 4))

@@ -3,15 +3,14 @@
 	name = "plant analyzer"
 	desc = "A hand-held botanical scanner used to analyze plants."
 	icon = 'icons/obj/items/device/scanner/plant_scanner.dmi'
-	icon_state = "hydro"
-	item_state = "analyzer"
 	scan_sound = 'sound/effects/fastbeep.ogg'
 	printout_color = "#eeffe8"
 	var/static/list/valid_targets = list(
 		/obj/item/chems/food/grown,
 		/obj/item/grown,
 		/obj/machinery/portable_atmospherics/hydroponics,
-		/obj/item/seeds
+		/obj/item/seeds,
+		/obj/structure/flora/plant
 	)
 
 /obj/item/scanner/plant/is_valid_scan_target(atom/O)
@@ -45,6 +44,10 @@
 		var/obj/machinery/portable_atmospherics/hydroponics/H = target
 		grown_seed = H.seed
 		grown_reagents = H.reagents
+
+	else if(istype(target,/obj/structure/flora/plant))
+		var/obj/structure/flora/plant/P = target
+		grown_seed = P.plant
 
 	if(!grown_seed)
 		return

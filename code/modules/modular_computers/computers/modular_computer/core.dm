@@ -4,6 +4,12 @@
 	if(assembly)
 		LAZYREMOVE(., assembly.parts)
 
+/obj/item/modular_computer/get_contained_matter()
+	. = ..()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	for(var/obj/part in assembly?.parts)
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., part.get_contained_matter())
+
 /obj/item/modular_computer/Process()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly)
@@ -96,6 +102,8 @@
 	var/image/screen_overlay = os?.get_screen_overlay()
 	if(screen_overlay)
 		add_overlay(screen_overlay)
+	else if(dark_screen_state)
+		add_overlay(dark_screen_state)
 	var/image/keyboard_overlay = os?.get_keyboard_overlay()
 	if(keyboard_overlay)
 		add_overlay(keyboard_overlay)

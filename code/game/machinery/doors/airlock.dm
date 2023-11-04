@@ -543,7 +543,7 @@ About the new airlock wires panel:
 	return ..()
 
 /obj/machinery/door/airlock/physical_attack_hand(mob/user)
-	if(!istype(usr, /mob/living/silicon))
+	if(!issilicon(usr))
 		if(src.isElectrified())
 			if(src.shock(user, 100))
 				return TRUE
@@ -724,7 +724,7 @@ About the new airlock wires panel:
 			update_icon()
 		return TRUE
 
-	if(!istype(user, /mob/living/silicon))
+	if(!issilicon(user))
 		if(src.isElectrified())
 			if(src.shock(user, 75))
 				return TRUE
@@ -798,7 +798,7 @@ About the new airlock wires panel:
 		return TRUE
 
 
-	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/simple_animal))
+	else if((stat & (BROKEN|NOPOWER)) && isanimal(user))
 		var/mob/living/simple_animal/A = user
 		var/obj/item/I = A.get_natural_weapon()
 		if(I?.force >= 10)
@@ -866,7 +866,7 @@ About the new airlock wires panel:
 	if(moved)
 		spark_at(da, amount=5, cardinal_only = TRUE)
 	else
-		da.anchored = 1
+		da.anchored = TRUE
 	da.state = 1
 	da.created_name = name
 	da.update_icon()

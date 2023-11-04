@@ -6,11 +6,11 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "fridge_sci"
 	layer = BELOW_OBJ_LAYER
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_CHEM_CHANGE
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	atmos_canpass = CANPASS_NEVER
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
@@ -71,11 +71,11 @@
 	initial_access = list(list(access_medical, access_chemistry))
 
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/chems/glass/))
+	if(istype(O,/obj/item/chems/glass))
 		return 1
-	if(istype(O,/obj/item/storage/pill_bottle/))
+	if(istype(O,/obj/item/storage/pill_bottle))
 		return 1
-	if(istype(O,/obj/item/chems/pill/))
+	if(istype(O,/obj/item/chems/pill))
 		return 1
 	return 0
 
@@ -121,7 +121,7 @@
 		var/obj/item/chems/food/S = O
 		return !!S.dried_type
 	else if(istype(O, /obj/item/stack/material))
-		return istype(O.material, /decl/material/solid/skin)
+		return istype(O.material, /decl/material/solid/organic/skin)
 	return 0
 
 /obj/machinery/smartfridge/drying_rack/Process()
@@ -163,9 +163,9 @@
 
 			else if(istype(thing, /obj/item/stack/material))
 				var/obj/item/stack/material/skin = thing
-				if(!istype(skin.material, /decl/material/solid/skin))
+				if(!istype(skin.material, /decl/material/solid/organic/skin))
 					continue
-				var/decl/material/solid/skin/skin_mat = skin.material
+				var/decl/material/solid/organic/skin/skin_mat = skin.material
 				if(!skin_mat.tans_to)
 					continue
 				for(var/atom/item_to_stock in SSmaterials.create_object(skin_mat.tans_to, get_turf(src), skin.amount))

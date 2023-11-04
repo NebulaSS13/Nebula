@@ -5,8 +5,9 @@
 // - Radios contain encryption keys that in turn contain a list of access constants used to decide
 //   whether or not the radio can send and receive traffic encrypted with those  access constants.
 // - Radios will not retrieve and cannot broadcast on receive-only channels (such as Entertainment).
-// - Network hubs or relays that share a z-chunk will share traffic on channels using the same name,
-//   frequency and encryption (ex. a merc ship with a relay will relay merc Common to ship Common).
+// - Network hubs that share a z-chunk or are connected via masers and receivers will share traffic
+//   on channels using the same frequency (ex. a merc ship with a relay will relay merc Common to ship Common).
+//   Each network hub a message "passes" through will add its encryption to the message.
 
 /datum/extension/network_device/telecomms_hub
 	expected_type = /obj/machinery/network/telecomms_hub
@@ -69,6 +70,7 @@
 	var/outage_probability = 75
 	var/overloaded_for = 0
 	var/global_radio_broadcaster = FALSE
+	var/allow_external_signals = TRUE // Whether or not the telecomms hub will route signals from other networks
 
 /obj/machinery/network/telecomms_hub/entertainment
 	channels = list(list(
@@ -136,95 +138,110 @@ var/global/list/telecomms_hubs = list()
 		var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
 		return network_device?.get_network() == check_network_membership
 
-/obj/machinery/network/telecomms_hub/proc/get_recipients(list/levels, datum/computer_network/network, frequency)
-	// TODO: cache this somehow. :( Generally make it cheaper.
+/obj/machinery/network/telecomms_hub/proc/transmit_message(mob/speaker, message, message_verb, decl/language/speaking, frequency, message_compression, list/checked_hubs, list/encryption = list(), obj/effect/overmap/send_overmap_object, chain_transmit = TRUE)
+	if(src in checked_hubs)
+		return
+	checked_hubs += src
 
-	// Find the z-chunks we can broadcast to, which is our local chunk plus any overmap sites in range,
-	// assuming we have a functioning comms maser and the overmap site has a telecomms hub and comms antenna.
-	levels |= SSmapping.get_connected_levels(z)
-	var/obj/effect/overmap/O = global.overmap_sectors["[z]"]
-	for(var/obj/machinery/shipcomms/broadcaster/our_maser in O?.comms_masers)
-		levels |= our_maser.get_available_z_levels()
+	var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
+	var/datum/computer_network/network = network_device?.get_network()
+	if(!network)
+		return
+	// TODO: cache this somehow. :( Generally make it cheaper.
+	var/datum/radio_channel/channel = get_channel_from_freq_or_key(frequency)
+	if(!channel) // We don't have a channel corresponding to this frequency, don't send any messages or chain transmit
+		return
+
+	if(!send_overmap_object)
+		var/turf/T = get_turf(src)
+		send_overmap_object = istype(T) && global.overmap_sectors["[T.z]"]
+
+	if(channel.secured)
+		encryption |= channel.secured
+
+	var/formatted_msg = "<span style='color:[channel?.color || default_color]'><small><b>\[[channel?.name || format_frequency(frequency)]\]</b></small> <span class='name'>"
+	var/send_name = istype(speaker) ? speaker.real_name : ("[speaker]" || "unknown")
+	var/overmap_send_name = "[send_name] ([send_overmap_object.name])"
+
+	var/list/listeners = list() // Dictionary of listener -> boolean (include overmap origin)
+
+	// Broadcast to all radio devices in our network.
+	for(var/weakref/W as anything in network.connected_radios)
+		var/obj/item/radio/R = W.resolve()
+		if(!istype(R) || QDELETED(R) || !R.can_receive_message(network))
+			continue
+		var/turf/speaking_from = get_turf(R)
+		if(!speaking_from)
+			continue
+		if(!R.can_decrypt(encryption))
+			continue
+		// TODO: This check seems extraneous, given how headsets find their available channels.
+		var/list/check_channels = R.get_available_channels()
+		if(!LAZYACCESS(check_channels, channel))
+			continue
+
+		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors["[speaking_from.z]"]
+		for(var/mob/listener in hearers(R.canhear_range, speaking_from))
+			// If we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's
+			// then append the overmap object name to it, so they know where we're from
+			var/send_overmap = send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listener_overmap_object
+			LAZYSET(listeners, listener, send_overmap)
+
+	// Ghostship is magic: Ghosts can hear radio chatter from anywhere
+	for(var/mob/observer/ghost/ghost_listener as anything in global.ghost_mob_list)
+		if(ghost_listener.get_preference_value(/datum/client_preference/ghost_radio) == PREF_ALL_CHATTER)
+			LAZYSET(listeners, ghost_listener, TRUE)
+
+	for(var/mob/listener in listeners)
+		var/per_listener_send_name = listeners[listener] ? overmap_send_name : send_name
+		var/per_listener_loc_name
+		if(send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listeners[listener])
+			// then append the overmap object name to it, so they know where we're from
+			per_listener_loc_name = send_overmap_object.name
+		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name, per_listener_loc_name)
+
+	if(!chain_transmit)
+		return
 
 	// Collect the hubs that are accessible from this hub's network.
 	var/list/receiving_hubs = list()
 	if(global_radio_broadcaster)
 		receiving_hubs = global.telecomms_hubs
 	else
-		var/list/checked_networks = list()
-		var/list/checking_networks =  list(network)
-		// Collect networks from the local z-stack and any comms masers
+		// Find the z-chunks we can chain the transmission to, which is our local chunk plus any overmap sites in range,
+		// assuming we have a functioning comms maser and the overmap site has a telecomms hub and comms antenna.
+		var/list/levels = SSmapping.get_connected_levels(z)
+		var/obj/effect/overmap/O = global.overmap_sectors["[z]"]
+		for(var/obj/machinery/shipcomms/broadcaster/our_maser in O?.comms_masers)
+			levels |= our_maser.get_available_z_levels()
+
+		// Add the hubs available via masers/receivers.
 		for(var/obj/machinery/network/telecomms_hub/other_hub in global.telecomms_hubs)
-			if(!(other_hub.z in levels))
+			if(!(other_hub.z in levels) || other_hub == src)
 				continue
-			var/datum/extension/network_device/other_network_device = get_extension(other_hub, /datum/extension/network_device)
-			var/datum/computer_network/other_network = other_network_device?.get_network()
-			if(other_network)
-				checking_networks |= other_network
-		while(length(checking_networks))
-			var/datum/computer_network/check_network = checking_networks[1]
-			checking_networks -= check_network
-			checked_networks[check_network] = TRUE
-			for(var/weakref/hub_ref as anything in check_network.connected_hubs)
-				var/obj/machinery/network/telecomms_hub/other_hub = hub_ref.resolve()
-				if(!istype(other_hub) || QDELETED(other_hub) || !other_hub.can_receive_message(FALSE))
-					continue
-				receiving_hubs |= other_hub
+			if(weakref(other_hub) in network.connected_hubs)
+				continue
+			receiving_hubs |= other_hub
 
-			for(var/network_id in SSnetworking.networks)
-				var/datum/computer_network/internet_connection = check_network.get_internet_connection(network_id, NET_FEATURE_COMMUNICATION)
-				if(internet_connection && !checked_networks[internet_connection])
-					checking_networks |= internet_connection
+		// Add the hubs available via PLEXUS connection.
+		for(var/other_network in SSnetworking.networks)
+			if(other_network == network.network_id)
+				continue
+			var/datum/computer_network/internet_connection = network.get_internet_connection(other_network, NET_FEATURE_COMMUNICATION)
+			if(internet_connection)
+				for(var/weakref/hub_ref in internet_connection.connected_hubs)
+					var/obj/machinery/network/telecomms_hub/other_hub = hub_ref.resolve()
+					if(istype(other_hub))
+						receiving_hubs |= other_hub
 
-	// Check if the hubs we can reach are capable of broadcasting our channel.
-	// If they are, collect their network for the actual broadcast checks.
-	var/list/receiving_networks = list()
-	var/datum/radio_channel/channel = get_channel_from_freq_or_key(frequency)
+	receiving_hubs = receiving_hubs - checked_hubs
+
 	for(var/obj/machinery/network/telecomms_hub/other_hub in receiving_hubs)
-		var/datum/radio_channel/other_channel = other_hub.get_channel_from_freq_or_key(frequency)
-		if(!other_channel || other_channel.name != channel.name)
+		var/check_network_membership = other_hub.allow_external_signals ? FALSE : network
+		if(QDELETED(other_hub) || !other_hub.can_receive_message(check_network_membership))
 			continue
-		if(islist(other_channel.secured) && islist(channel.secured))
-			for(var/access_req in other_channel.secured)
-				if(!(access_req in channel.secured))
-					continue
-			for(var/access_req in channel.secured)
-				if(!(access_req in other_channel.secured))
-					continue
-		var/datum/extension/network_device/other_network_device = get_extension(other_hub, /datum/extension/network_device)
-		var/datum/computer_network/other_network = other_network_device?.get_network()
-		if(other_network)
-			receiving_networks |= other_network
-
-	// Broadcast to all radio devices in the receiving networks.
-	for(var/datum/computer_network/use_network in receiving_networks)
-		var/datum/radio_channel/other_channel = channel
-		if (use_network != network)
-			for(var/weakref/other_hub_ref in use_network.connected_hubs)
-				var/obj/machinery/network/telecomms_hub/other_hub = other_hub_ref.resolve()
-				if(other_hub)
-					other_channel = other_hub.get_channel_from_freq_or_key("[channel.frequency]")
-		for(var/weakref/W as anything in use_network.connected_radios)
-			var/obj/item/radio/R = W.resolve()
-			if(!istype(R) || QDELETED(R) || !R.can_receive_message(use_network))
-				continue
-			var/turf/speaking_from = get_turf(R)
-			if(!speaking_from)
-				continue
-			if(!other_channel || !R.can_decrypt(other_channel.secured))
-				continue
-			var/list/check_channels = R.get_available_channels()
-			if(!LAZYACCESS(check_channels, other_channel))
-				continue
-			var/turf/T = get_turf(R)
-			var/overmap_object = istype(T) && global.overmap_sectors["[T.z]"]
-			for(var/mob/M in hearers(R.canhear_range, speaking_from))
-				LAZYSET(., M, overmap_object)
-
-	for(var/mob/observer/ghost/ghost_listener as anything in global.ghost_mob_list)
-		// Ghostship is magic: Ghosts can hear radio chatter from anywhere
-		if(ghost_listener.get_preference_value(/datum/client_preference/ghost_radio) == PREF_ALL_CHATTER)
-			LAZYSET(., ghost_listener, TRUE) // no overmap object, but tell us which the source is anyway
+		// Don't allow further chaining of the message.
+		other_hub.transmit_message(speaker, message, message_verb, speaking, frequency, message_compression, checked_hubs, encryption.Copy(), send_overmap_object, FALSE)
 
 /obj/machinery/network/telecomms_hub/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
@@ -232,6 +249,7 @@ var/global/list/telecomms_hubs = list()
 	var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
 	data["network_id"] = device.network_tag
 	data["authenticated"] = (access_keycard_auth in user.GetAccess())
+	data["allow_external"] = allow_external_signals
 	var/list/data_channels = list()
 	for(var/datum/radio_channel/channel_datum in channels)
 		var/list/channel_data = list()
@@ -306,6 +324,9 @@ var/global/list/telecomms_hubs = list()
 					new_freq = clamp(new_freq, lower_freq, upper_freq)
 
 					if(new_freq != channel_datum.frequency && new_freq && CanPhysicallyInteract(user))
+						if(channels_by_frequency && ("[new_freq]" in channels_by_frequency))
+							to_chat(user, SPAN_WARNING("A channel with this frequency already exists."))
+							return TOPIC_HANDLED
 						channel_datum.frequency = new_freq
 						rebuild_channels()
 						. = TOPIC_REFRESH
@@ -387,3 +408,7 @@ var/global/list/telecomms_hubs = list()
 				channels = channel_data
 				rebuild_channels()
 				. = TOPIC_REFRESH
+
+		if(href_list["toggle_external"])
+			allow_external_signals = !allow_external_signals
+			return TOPIC_REFRESH

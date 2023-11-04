@@ -53,7 +53,7 @@ var/global/obj/temp_reagents_holder = new
 			. = reagent.name
 
 /datum/reagents/proc/get_primary_reagent_decl()
-	. = primary_reagent && GET_DECL(primary_reagent)
+	. = GET_DECL(primary_reagent)
 
 /datum/reagents/proc/update_total() // Updates volume.
 	total_volume = 0
@@ -75,7 +75,7 @@ var/global/obj/temp_reagents_holder = new
 	var/atom/location = get_reaction_loc()
 	var/check_flags = location?.atom_flags || 0
 
-	if(check_flags & ATOM_FLAG_NO_REACT)
+	if((check_flags & ATOM_FLAG_NO_REACT) && (check_flags & ATOM_FLAG_NO_PHASE_CHANGE) && (check_flags & ATOM_FLAG_NO_DISSOLVE))
 		return 0
 
 	var/reaction_occured = FALSE
@@ -128,41 +128,42 @@ var/global/obj/temp_reagents_holder = new
 				if(replace_sound)
 					playsound(location, replace_sound, 80, 1)
 
-		else // Otherwise, collect all possible reactions.
+		else if(!(check_flags & ATOM_FLAG_NO_REACT)) // Otherwise, collect all possible reactions.
 			eligible_reactions |= SSmaterials.chemical_reactions_by_id[R.type]
 
-	var/list/active_reactions = list()
+	if(!(check_flags & ATOM_FLAG_NO_REACT))
+		var/list/active_reactions = list()
 
-	for(var/decl/chemical_reaction/C in eligible_reactions)
-		if(C.can_happen(src))
-			active_reactions[C] = 1 // The number is going to be 1/(fraction of remaining reagents we are allowed to use), computed below
-			reaction_occured = 1
+		for(var/decl/chemical_reaction/C in eligible_reactions)
+			if(C.can_happen(src))
+				active_reactions[C] = 1 // The number is going to be 1/(fraction of remaining reagents we are allowed to use), computed below
+				reaction_occured = 1
 
-	var/list/used_reagents = list()
-	// if two reactions share a reagent, each is allocated half of it, so we compute this here
-	for(var/decl/chemical_reaction/C in active_reactions)
-		var/list/adding = C.get_used_reagents()
-		for(var/R in adding)
-			LAZYADD(used_reagents[R], C)
+		var/list/used_reagents = list()
+		// if two reactions share a reagent, each is allocated half of it, so we compute this here
+		for(var/decl/chemical_reaction/C in active_reactions)
+			var/list/adding = C.get_used_reagents()
+			for(var/R in adding)
+				LAZYADD(used_reagents[R], C)
 
-	for(var/R in used_reagents)
-		var/counter = length(used_reagents[R])
-		if(counter <= 1)
-			continue // Only used by one reaction, so nothing we need to do.
-		for(var/decl/chemical_reaction/C in used_reagents[R])
-			active_reactions[C] = max(counter, active_reactions[C])
-			counter-- //so the next reaction we execute uses more of the remaining reagents
-			// Note: this is not guaranteed to maximize the size of the reactions we do (if one reaction is limited by reagent A, we may be over-allocating reagent B to it)
-			// However, we are guaranteed to fully use up the most profligate reagent if possible.
-			// Further reactions may occur on the next tick, when this runs again.
+		for(var/R in used_reagents)
+			var/counter = length(used_reagents[R])
+			if(counter <= 1)
+				continue // Only used by one reaction, so nothing we need to do.
+			for(var/decl/chemical_reaction/C in used_reagents[R])
+				active_reactions[C] = max(counter, active_reactions[C])
+				counter-- //so the next reaction we execute uses more of the remaining reagents
+				// Note: this is not guaranteed to maximize the size of the reactions we do (if one reaction is limited by reagent A, we may be over-allocating reagent B to it)
+				// However, we are guaranteed to fully use up the most profligate reagent if possible.
+				// Further reactions may occur on the next tick, when this runs again.
 
-	for(var/thing in active_reactions)
-		var/decl/chemical_reaction/C = thing
-		C.process(src, active_reactions[C])
+		for(var/thing in active_reactions)
+			var/decl/chemical_reaction/C = thing
+			C.process(src, active_reactions[C])
 
-	for(var/thing in active_reactions)
-		var/decl/chemical_reaction/C = thing
-		C.post_reaction(src)
+		for(var/thing in active_reactions)
+			var/decl/chemical_reaction/C = thing
+			C.post_reaction(src)
 
 	update_total()
 
@@ -460,7 +461,7 @@ var/global/obj/temp_reagents_holder = new
 	if (!target || !target.reagents || !target.simulated)
 		return
 
-	amount = min(amount, REAGENT_VOLUME(src, type))
+	amount = max(0, min(amount, REAGENT_VOLUME(src, type), REAGENTS_FREE_SPACE(target.reagents) / multiplier))
 
 	if(!amount)
 		return
@@ -475,7 +476,7 @@ var/global/obj/temp_reagents_holder = new
 	if (!target)
 		return
 
-	amount = min(amount, REAGENT_VOLUME(src, type))
+	amount = max(0, min(amount, REAGENT_VOLUME(src, type), REAGENTS_FREE_SPACE(target) / multiplier))
 
 	if(!amount)
 		return

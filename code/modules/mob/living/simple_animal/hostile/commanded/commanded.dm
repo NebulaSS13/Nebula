@@ -2,7 +2,8 @@
 	name = "commanded"
 	stance = COMMANDED_STOP
 	natural_weapon = /obj/item/natural_weapon
-	density = 0
+	density = FALSE
+	ai = /datum/ai/commanded
 	var/list/command_buffer = list()
 	var/list/known_commands = list("stay", "stop", "attack", "follow")
 	var/mob/master = null //undisputed master. Their commands hold ultimate sway and ultimate power.
@@ -21,27 +22,25 @@
 		command_buffer.Add(lowertext(html_decode(message)))
 	return 0
 
-/mob/living/simple_animal/hostile/commanded/Life()
-	. = ..()
-	if(!.)
-		return FALSE
-	while(command_buffer.len > 0)
-		var/mob/speaker = command_buffer[1]
-		var/text = command_buffer[2]
-		var/filtered_name = lowertext(html_decode(name))
+/datum/ai/commanded
+	expected_type = /mob/living/simple_animal/hostile/commanded
+
+/datum/ai/commanded/do_process(time_elapsed)
+	..()
+	var/mob/living/simple_animal/hostile/commanded/com = body
+	while(com.command_buffer.len > 1)
+		var/mob/speaker = com.command_buffer[1]
+		var/text = com.command_buffer[2]
+		var/filtered_name = lowertext(html_decode(com.name))
 		if(dd_hasprefix(text,filtered_name) || dd_hasprefix(text,"everyone") || dd_hasprefix(text, "everybody")) //in case somebody wants to command 8 bears at once.
 			var/substring = copytext(text,length(filtered_name)+1) //get rid of the name.
-			listen(speaker,substring)
-		command_buffer.Remove(command_buffer[1],command_buffer[2])
-	. = ..()
-	if(.)
-		switch(stance)
-			if(COMMANDED_FOLLOW)
-				follow_target()
-			if(COMMANDED_STOP)
-				commanded_stop()
-
-
+			com.listen(speaker,substring)
+		com.command_buffer.Remove(com.command_buffer[1],com.command_buffer[2])
+	switch(com.stance)
+		if(COMMANDED_FOLLOW)
+			com.follow_target()
+		if(COMMANDED_STOP)
+			com.commanded_stop()
 
 /mob/living/simple_animal/hostile/commanded/FindTarget(var/new_stance = HOSTILE_STANCE_ATTACK)
 	if(!allowed_targets.len)

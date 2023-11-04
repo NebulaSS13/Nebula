@@ -13,7 +13,7 @@
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	opened = 0 //if an item has been removed from this container
 	obj_flags = OBJ_FLAG_HOLLOW
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 
 /obj/item/storage/fancy/on_update_icon()
@@ -52,7 +52,6 @@
 		/obj/item/chems/food/egg,
 		/obj/item/chems/food/boiledegg
 		)
-	material = /decl/material/solid/cardboard
 
 /obj/item/storage/fancy/egg_box/WillContain()
 	return list(/obj/item/chems/food/egg = 12)
@@ -73,7 +72,6 @@
 	w_class = ITEM_SIZE_SMALL
 	key_type = /obj/item/chems/food/cracker
 	can_hold = list(/obj/item/chems/food/cracker)
-	material = /decl/material/solid/cardboard
 
 /obj/item/storage/fancy/crackers/WillContain()
 	return list(/obj/item/chems/food/cracker = 6)
@@ -91,7 +89,6 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	key_type = /obj/item/pen/crayon
-	material = /decl/material/solid/cardboard
 
 /obj/item/storage/fancy/crayons/WillContain()
 	return list(
@@ -127,9 +124,8 @@
 	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/cardboard
 	key_type = /obj/item/clothing/mask/smokable/cigarette
-	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE
+	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE
 
 /obj/item/storage/fancy/cigarettes/WillContain()
 	return list(/obj/item/clothing/mask/smokable/cigarette = 6)
@@ -150,7 +146,7 @@
 	..()
 
 /obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(!istype(M, /mob))
+	if(!ismob(M))
 		return
 
 	if(M == user && user.get_target_zone() == BP_MOUTH && contents.len > 0 && !user.get_equipped_item(slot_wear_mask_str))
@@ -304,9 +300,9 @@
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	storage_slots = 7
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
-	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_NO_TEMP_CHANGE
+	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_NO_TEMP_CHANGE
 
 /obj/item/storage/fancy/cigar/Initialize(ml, material_key)
 	. = ..()
@@ -336,7 +332,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 12
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	key_type = /obj/item/chems/glass/beaker/vial
 
 /obj/item/storage/fancy/vials/WillContain()

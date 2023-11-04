@@ -9,7 +9,7 @@
 	down_flags_inv = BLOCK_HEAD_HAIR
 	pull_mask = 1
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/mask/balaclava/tactical
 	name = "green balaclava"
@@ -24,7 +24,7 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE
 	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 3.0
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/mask/luchador/tecnicos
 	name = "Tecnicos Mask"

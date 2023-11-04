@@ -22,31 +22,32 @@
 
 	if(!isspaceturf(T))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
-	for(var/species_name in get_all_species())
-		var/decl/species/S = get_species_by_key(species_name)
-		var/mob/living/carbon/human/H = new(T, S.name)
-		if(H.need_breathe())
-			H.apply_effect(20, STUN, 0)
-			var/obj/item/organ/internal/lungs/L = H.get_organ(H.species.breathing_organ, /obj/item/organ/internal/lungs)
+	var/list/bodytype_pairings = get_bodytype_species_pairs()
+	for(var/decl/bodytype/bodytype in bodytype_pairings)
+		var/decl/species/species = bodytype_pairings[bodytype]
+		var/mob/living/carbon/human/test_subject = new(null, species.name, null, bodytype)
+		if(test_subject.need_breathe())
+			test_subject.apply_effect(20, STUN, 0)
+			var/obj/item/organ/internal/lungs/L = test_subject.get_organ(test_subject.get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
 			if(L)
 				L.last_successful_breath = -INFINITY
-			test_subjects[S.name] = list(H, damage_check(H, OXY))
+			test_subjects["[bodytype.type]"] = list(test_subject, damage_check(test_subject, OXY))
 	return 1
 
 /datum/unit_test/human_breath/check_result()
 	for(var/i in test_subjects)
-		var/mob/living/carbon/human/H = test_subjects[i][1]
-		if(H.life_tick < 10) 	// Finish Condition
+		var/mob/living/carbon/human/test_subject = test_subjects[i][1]
+		if(test_subject.life_tick < 10) 	// Finish Condition
 			return 0	// Return 0 to try again later.
 
 	var/failcount = 0
 	for(var/i in test_subjects)
-		var/mob/living/carbon/human/H = test_subjects[i][1]
-		var/ending_oxyloss = damage_check(H, OXY)
+		var/mob/living/carbon/human/test_subject = test_subjects[i][1]
+		var/ending_oxyloss = damage_check(test_subject, OXY)
 		var/starting_oxyloss = test_subjects[i][2]
 		if(starting_oxyloss >= ending_oxyloss)
 			failcount++
-			log_debug("[H.species.name] is not taking oxygen damage, started with [starting_oxyloss] and ended with [ending_oxyloss] at place [log_info_line(H.loc)].")
+			log_debug("[test_subject.get_bodytype().type] is not taking oxygen damage, started with [starting_oxyloss] and ended with [ending_oxyloss] at place [log_info_line(test_subject.loc)].")
 
 	if(failcount)
 		fail("[failcount] breathing species mobs didn't suffocate in space.")
@@ -106,7 +107,7 @@ var/global/default_mobloc = null
 		if(PAIN)
 			loss = M.getHalLoss()
 
-	if(!loss && istype(M, /mob/living/carbon/human))
+	if(!loss && ishuman(M))
 		var/mob/living/carbon/human/H = M            // Synthetics have robot limbs which don't report damage to getXXXLoss()
 		if(H.isSynthetic())                          // So we have to hard code this check or create a different one for them.
 			return H.species.total_health - H.health
@@ -166,7 +167,7 @@ var/global/default_mobloc = null
 	var/initial_health = H.health
 
 	if(damagetype == OXY && H.need_breathe())
-		var/obj/item/organ/internal/lungs/L = H.get_organ(H.species.breathing_organ, /obj/item/organ/internal/lungs)
+		var/obj/item/organ/internal/lungs/L = H.get_organ(H.get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
 		if(L)
 			L.last_successful_breath = -INFINITY
 

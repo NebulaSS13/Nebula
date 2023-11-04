@@ -24,12 +24,12 @@
 
 
 /obj/item/toy
-	icon = 'icons/obj/toy.dmi'
+	icon = 'icons/obj/toy/toy.dmi'
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
 	force = 0
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /*
  * Balloons
@@ -37,9 +37,8 @@
 /obj/item/chems/water_balloon
 	name                          = "water balloon"
 	desc                          = "A translucent balloon."
-	icon                          = 'icons/obj/toy.dmi'
-	icon_state                    = "waterballoon-e"
-	item_state                    = "balloon-empty"
+	icon                          = 'icons/obj/water_balloon.dmi'
+	icon_state                    = ICON_STATE_WORLD
 	w_class                       = ITEM_SIZE_TINY
 	item_flags                    = ITEM_FLAG_NO_BLUDGEON
 	obj_flags                     = OBJ_FLAG_HOLLOW
@@ -52,7 +51,12 @@
 	possible_transfer_amounts     = null
 	amount_per_transfer_from_this = 10
 	volume                        = 10
-	material                      = /decl/material/solid/plastic
+	material                      = /decl/material/solid/organic/plastic
+
+/obj/item/chems/water_balloon/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
+	if(overlay && reagents?.total_volume <= 0)
+		overlay.icon_state = "[overlay.icon_state]_empty"
+	. = ..()
 
 /obj/item/chems/water_balloon/examine(mob/user, distance, infix, suffix)
 	. = ..()
@@ -60,7 +64,7 @@
 		to_chat(user, "It's [reagents?.total_volume > 0? "filled with liquid sloshing around" : "empty"].")
 
 /obj/item/chems/water_balloon/on_reagent_change()
-	. = ..()
+	..()
 	w_class = (reagents?.total_volume > 0)? ITEM_SIZE_SMALL : ITEM_SIZE_TINY
 	//#TODO: Maybe acids should handle eating their own containers themselves?
 	for(var/reagent in reagents?.reagent_volumes)
@@ -77,19 +81,16 @@
 
 /obj/item/chems/water_balloon/physically_destroyed(skip_qdel)
 	if(reagents?.total_volume > 0)
-		new/obj/effect/temporary(src, 5, icon, "burst")
+		new /obj/effect/temporary(src, 5, icon, "[get_world_inventory_state()]_burst")
 		reagents.splash_turf(get_turf(src), reagents.total_volume)
 		playsound(src, 'sound/effects/balloon-pop.ogg', 75, TRUE, 3)
 	. = ..()
 
 /obj/item/chems/water_balloon/on_update_icon()
 	. = ..()
-	if(reagents?.total_volume > 0)
-		icon_state = "waterballoon"
-		item_state = "balloon"
-	else
-		icon_state = "waterballoon-e"
-		item_state = "balloon-empty"
+	icon_state = get_world_inventory_state()
+	if(reagents?.total_volume <= 0)
+		icon_state = "[icon_state]_empty"
 
 /obj/item/chems/water_balloon/afterattack(obj/target, mob/user, proximity)
 	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity)
@@ -150,7 +151,7 @@
 	force = 1
 	throwforce = 1
 	attack_verb = list("hit")
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	active_hitsound = 'sound/weapons/genhit.ogg'
 	active_descriptor = "extended"
@@ -163,7 +164,7 @@
 /obj/item/sword/katana/toy
 	name = "toy katana"
 	desc = "Woefully underpowered in D20."
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /*
  * Snap pops
@@ -171,7 +172,7 @@
 /obj/item/toy/snappop
 	name = "snap pop"
 	desc = "Wow!"
-	icon = 'icons/obj/toy.dmi'
+	icon = 'icons/obj/toy/toy.dmi'
 	icon_state = "snappop"
 	w_class = ITEM_SIZE_TINY
 
@@ -204,7 +205,7 @@
 /obj/item/toy/bosunwhistle
 	name = "bosun's whistle"
 	desc = "A genuine Admiral Krush Bosun's Whistle, for the aspiring ship's captain! Suitable for ages 8 and up, do not swallow."
-	icon = 'icons/obj/toy.dmi'
+	icon = 'icons/obj/toy/toy.dmi'
 	icon_state = "bosunwhistle"
 	var/cooldown = 0
 	w_class = ITEM_SIZE_TINY
@@ -220,7 +221,7 @@
  * Mech prizes
  */
 /obj/item/toy/prize
-	icon = 'icons/obj/toy.dmi'
+	icon = 'icons/obj/toy/toy.dmi'
 	icon_state = "ripleytoy"
 	var/cooldown = 0
 	w_class = ITEM_SIZE_TINY
@@ -302,7 +303,7 @@
 	name = "Completely Glitched action figure"
 	desc = "A \"Space Life\" brand... wait, what the hell is this thing? It seems to be requesting the sweet release of death."
 	icon_state = "assistant"
-	icon = 'icons/obj/toy.dmi'
+	icon = 'icons/obj/toy/toy.dmi'
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/toy/figure/cmo
@@ -495,144 +496,12 @@
 	desc = "A \"Space Life\" brand Emergency Response Team Commander action figure."
 	icon_state = "ert"
 
-/obj/item/toy/therapy_red
-	name = "red therapy doll"
-	desc = "A toy for therapeutic and recreational purposes. This one is red."
-	icon_state = "therapyred"
-	item_state = "egg4" // It's the red egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
-
-/obj/item/toy/therapy_purple
-	name = "purple therapy doll"
-	desc = "A toy for therapeutic and recreational purposes. This one is purple."
-	icon_state = "therapypurple"
-	item_state = "egg1" // It's the magenta egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
-
-/obj/item/toy/therapy_blue
-	name = "blue therapy doll"
-	desc = "A toy for therapeutic and recreational purposes. This one is blue."
-	icon_state = "therapyblue"
-	item_state = "egg2" // It's the blue egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
-
-/obj/item/toy/therapy_yellow
-	name = "yellow therapy doll"
-	desc = "A toy for therapeutic and recreational purposes. This one is yellow."
-	icon_state = "therapyyellow"
-	item_state = "egg5" // It's the yellow egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
-
-/obj/item/toy/therapy_orange
-	name = "orange therapy doll"
-	desc = "A toy for therapeutic and recreational purposes. This one is orange."
-	icon_state = "therapyorange"
-	item_state = "egg4" // It's the red one again, lacking an orange item_state and making a new one is pointless
-	w_class = ITEM_SIZE_TINY
-
-/obj/item/toy/therapy_green
-	name = "green therapy doll"
-	desc = "A toy for therapeutic and recreational purposes. This one is green."
-	icon_state = "therapygreen"
-	item_state = "egg3" // It's the green egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
-
-/*
- * Plushies
- */
-
-//Large plushies.
-/obj/structure/plushie
-	name = "generic plush"
-	desc = "A very generic plushie. It seems to not want to exist."
-	icon = 'icons/obj/toy.dmi'
-	icon_state = "ianplushie"
-	anchored = 0
-	density = 1
-	var/phrase = "I don't want to exist anymore!"
-
-/obj/structure/plushie/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
-		return ..()
-	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
-	if(user.a_intent == I_HELP)
-		user.visible_message("<span class='notice'><b>\The [user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
-	else if (user.a_intent == I_HURT)
-		user.visible_message("<span class='warning'><b>\The [user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
-	else if (user.a_intent == I_GRAB)
-		user.visible_message("<span class='warning'><b>\The [user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
-	else
-		user.visible_message("<span class='notice'><b>\The [user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
-		audible_message("<span class='game say'><span class='name'>\The [src]</span> says, <span class='message'><span class='body'>\"[phrase]\"</span></span></span>")
-	return TRUE
-
-/obj/structure/plushie/ian
-	name = "plush corgi"
-	desc = "A plushie of an adorable corgi! Don't you just want to hug it and squeeze it and call it \"Ian\"?"
-	icon_state = "ianplushie"
-	phrase = "Arf!"
-
-/obj/structure/plushie/drone
-	name = "plush drone"
-	desc = "A plushie of a happy drone! It appears to be smiling."
-	icon_state = "droneplushie"
-	phrase = "Beep boop!"
-
-/obj/structure/plushie/carp
-	name = "plush carp"
-	desc = "A plushie of an elated carp! Straight from the wilds of the frontier, now right here in your hands."
-	icon_state = "carpplushie"
-	phrase = "Glorf!"
-
-/obj/structure/plushie/beepsky
-	name = "plush Officer Sweepsky"
-	desc = "A plushie of a popular industrious cleaning robot! If it could feel emotions, it would love you."
-	icon_state = "beepskyplushie"
-	phrase = "Ping!"
-
-//Small plushies.
-/obj/item/toy/plushie
-	name = "generic small plush"
-	desc = "A very generic small plushie. It seems to not want to exist."
-	icon = 'icons/obj/toy.dmi'
-	icon_state = "nymphplushie"
-
-/obj/item/toy/plushie/attack_self(mob/user)
-	if(user.a_intent == I_HELP)
-		user.visible_message("<span class='notice'><b>\The [user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
-	else if (user.a_intent == I_HURT)
-		user.visible_message("<span class='warning'><b>\The [user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
-	else if (user.a_intent == I_GRAB)
-		user.visible_message("<span class='warning'><b>\The [user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
-	else
-		user.visible_message("<span class='notice'><b>\The [user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
-
-/obj/item/toy/plushie/mouse
-	name = "mouse plush"
-	desc = "A plushie of a mouse! What was once considered a vile rodent is now your very best friend."
-	icon_state = "mouseplushie"
-
-/obj/item/toy/plushie/kitten
-	name = "kitten plush"
-	desc = "A plushie of a cute kitten! Watch as it purrs it's way right into your heart."
-	icon_state = "kittenplushie"
-
-/obj/item/toy/plushie/lizard
-	name = "lizard plush"
-	desc = "A plushie of a scaly lizard!"
-	icon_state = "lizardplushie"
-
-/obj/item/toy/plushie/spider
-	name = "spider plush"
-	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
-	icon_state = "spiderplushie"
-
 //Toy cult sword
 /obj/item/sword/cult_toy
 	name = "foam sword"
 	desc = "An arcane weapon (made of foam) wielded by the followers of the hit Saturday morning cartoon \"King Nursee and the Acolytes of Heroism\"."
 	icon = 'icons/obj/items/weapon/swords/cult.dmi'
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	edge = 0
 	sharp = 0
 
@@ -642,19 +511,19 @@
 	icon = 'icons/clothing/belt/inflatable.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/marshalling_wand //#TODO: Move under obj/item/toy ?
 	name = "marshalling wand"
 	desc = "An illuminated, hand-held baton used by hangar personnel to visually signal shuttle pilots. The signal changes depending on your intent."
 	icon_state = "marshallingwand"
 	item_state = "marshallingwand"
-	icon = 'icons/obj/toy.dmi'
+	icon = 'icons/obj/toy/toy.dmi'
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	force = 1
 	attack_verb = list("attacked", "whacked", "jabbed", "poked", "marshalled")
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/marshalling_wand/Initialize()
 	set_light(1.5, 1.5, "#ff0000")
@@ -685,15 +554,15 @@
 /obj/item/toy/shipmodel
 	name = "table-top spaceship model"
 	desc = "This is a 1:250th scale spaceship model on a handsome wooden stand. Small lights blink on the hull and at the engine exhaust."
-	icon = 'icons/obj/toy.dmi'
+	icon = 'icons/obj/toy/toy.dmi'
 	icon_state = "shipmodel"
 
 /obj/item/toy/ringbell
 	name = "ringside bell"
 	desc = "A bell used to signal the beginning and end of various ring sports."
-	icon = 'icons/obj/toy.dmi'
+	icon = 'icons/obj/toy/toy.dmi'
 	icon_state= "ringbell"
-	anchored = 1
+	anchored = TRUE
 
 /obj/item/toy/ringbell/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))

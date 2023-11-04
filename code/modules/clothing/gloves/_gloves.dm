@@ -14,10 +14,9 @@
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 	var/obj/item/clothing/ring/covering_ring
 
-/obj/item/clothing/gloves/update_clothing_icon()
-	if(ismob(loc))
-		var/mob/M = loc
-		M.update_inv_gloves()
+/obj/item/clothing/gloves/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_gloves_str)
 
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return
@@ -25,22 +24,23 @@
 /obj/item/clothing/gloves/get_fibers()
 	return "material from a pair of [name]."
 
-/obj/item/clothing/gloves/mob_can_equip(mob/M, slot, disable_warning = 0, force = 0)
+/obj/item/clothing/gloves/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	var/obj/item/clothing/ring/check_ring
-	var/mob/living/carbon/human/H = M
-	var/obj/item/gloves = M.get_equipped_item(slot_gloves_str)
-	if(slot == slot_gloves_str && istype(H) && gloves)
-		check_ring = gloves
-		if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !H.try_unequip(check_ring, src))
-			to_chat(M, SPAN_WARNING("You are unable to wear \the [src] as \the [gloves] are in the way."))
-			return FALSE
+	var/obj/item/gloves = user?.get_equipped_item(slot_gloves_str)
+	if(slot == slot_gloves_str && gloves)
+		if(!ignore_equipped && gloves != src)
+			check_ring = gloves
+			if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !user.try_unequip(check_ring, src))
+				if(!disable_warning)
+					to_chat(user, SPAN_WARNING("You are unable to wear \the [src] as \the [gloves] are in the way."))
+				return FALSE
 	. = ..()
-	if(check_ring)
+	if(check_ring && check_ring != src)
 		if(.)
 			covering_ring = check_ring
-			to_chat(M, SPAN_NOTICE("You slip \the [src] on over \the [covering_ring]."))
+			to_chat(user, SPAN_NOTICE("You slip \the [src] on over \the [covering_ring]."))
 		else
-			M.equip_to_slot_if_possible(check_ring, slot_gloves_str, disable_warning = TRUE)
+			user.equip_to_slot_if_possible(check_ring, slot_gloves_str, disable_warning = TRUE)
 
 /obj/item/clothing/gloves/Destroy()
 	QDEL_NULL(covering_ring)

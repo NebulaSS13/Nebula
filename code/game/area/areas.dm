@@ -9,7 +9,7 @@ var/global/list/areas = list()
 	plane = DEFAULT_PLANE
 	layer = BASE_AREA_LAYER
 	luminosity =    0
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
 	var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
@@ -123,7 +123,7 @@ var/global/list/areas = list()
 	for(var/direction in global.cardinal)
 		var/turf/adjacent_turf = get_step(T, direction)
 		if(adjacent_turf)
-			T.update_registrations_on_adjacent_area_change()
+			adjacent_turf.update_registrations_on_adjacent_area_change()
 
 	T.last_outside_check = OUTSIDE_UNCERTAIN
 	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
@@ -207,7 +207,7 @@ var/global/list/areas = list()
 	if(!fire)
 		fire = 1	//used for firedoor checks
 		update_icon()
-		mouse_opacity = 0
+		mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 		if(!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/D in all_doors)
@@ -222,7 +222,7 @@ var/global/list/areas = list()
 	if (fire)
 		fire = 0	//used for firedoor checks
 		update_icon()
-		mouse_opacity = 0
+		mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 		if(!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/D in all_doors)
@@ -249,13 +249,13 @@ var/global/list/areas = list()
 	if (!( party ))
 		party = 1
 		update_icon()
-		mouse_opacity = 0
+		mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	return
 
 /area/proc/partyreset()
 	if (party)
 		party = 0
-		mouse_opacity = 0
+		mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 		update_icon()
 		for(var/obj/machinery/door/firedoor/D in src)
 			if(!D.blocked)
@@ -323,7 +323,7 @@ var/global/list/areas = list()
 var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
-	if(!istype(A,/mob/living))
+	if(!isliving(A))
 		return
 	var/mob/living/L = A
 	if(!L.lastarea)
@@ -388,7 +388,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 	if(mob.Check_Shoegrip())
 		return
 
-	if(istype(mob,/mob/living/carbon/human/))
+	if(ishuman(mob))
 		var/mob/living/carbon/human/H = mob
 		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_ADEPT)))
 			if(!MOVING_DELIBERATELY(H))

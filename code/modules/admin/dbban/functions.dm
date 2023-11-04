@@ -339,7 +339,7 @@
 	output += "<option value=''>--</option>"
 	for(var/j in SSjobs.titles_to_datums)
 		output += "<option value='[j]'>[j]</option>"
-	var/list/bantypes = list("traitor","changeling","operative","revolutionary","cultist","wizard") //For legacy bans.
+	var/list/bantypes = list("traitor","operative","revolutionary","cultist","wizard") //For legacy bans.
 	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
 	for(var/antag_type in all_antag_types) // Grab other bans.
 		var/decl/special_role/antag = all_antag_types[antag_type]

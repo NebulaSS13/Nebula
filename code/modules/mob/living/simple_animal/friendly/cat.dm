@@ -16,21 +16,24 @@
 	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
-	skin_material = /decl/material/solid/skin/fur/orange
+	skin_material = /decl/material/solid/organic/skin/fur/orange
 	base_animal_type = /mob/living/simple_animal/cat
-
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
 	var/mob/flee_target
 
-/mob/living/simple_animal/cat/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
+/mob/living/simple_animal/cat/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/cat)
+
+/decl/bodytype/animal/cat/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
 			"[NORTH]" = list( 1,  -9),
 			"[SOUTH]" = list( 1, -12),
 			"[EAST]" =  list( 7, -10),
 			"[WEST]" =  list(-7, -10)
 		)
+	)
 	. = ..()
 
 /mob/living/simple_animal/cat/do_delayed_life_action()
@@ -138,7 +141,7 @@
 	desc = "The by-product of cat farming."
 	icon = 'icons/obj/items/sheet_hide.dmi'
 	icon_state = "sheet-cat"
-	material = /decl/material/solid/leather/fur
+	material = /decl/material/solid/organic/leather/fur
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
@@ -156,7 +159,7 @@
 		var/current_dist = get_dist(src, friend)
 
 		if (movement_target != friend)
-			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (friend in oview(src)))
+			if (current_dist > follow_dist && !ismouse(movement_target) && (friend in oview(src)))
 				//stop existing movement
 				walk_to(src,0)
 				turns_since_scan = 0
@@ -226,7 +229,7 @@
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
 	icon = 'icons/mob/simple_animal/cat_black.dmi'
-	skin_material = /decl/material/solid/skin/fur/black
+	skin_material = /decl/material/solid/organic/skin/fur/black
 	holder_type = /obj/item/holder/runtime
 
 /obj/item/holder/runtime
@@ -241,14 +244,21 @@
 	bone_amount = 3
 	skin_amount = 3
 
-/mob/living/simple_animal/cat/kitten/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
+/mob/living/simple_animal/cat/kitten/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/kitten)
+
+/decl/bodytype/animal/kitten/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
 			"[NORTH]" = list( 1, -14),
 			"[SOUTH]" = list( 1, -14),
 			"[EAST]" =  list( 5, -14),
 			"[WEST]" =  list(-5, -14)
 		)
+	)
+	. = ..()
+
+/mob/living/simple_animal/cat/kitten/Initialize()
 	. = ..()
 	gender = pick(MALE, FEMALE)
 

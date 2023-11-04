@@ -150,5 +150,5 @@
 	w_class = ITEM_SIZE_TINY	//it's real small
 
 /obj/item/shard/plastic
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	w_class = ITEM_SIZE_TINY

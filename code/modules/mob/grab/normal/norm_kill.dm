@@ -4,7 +4,6 @@
 	shift = 0
 	stop_move = 1
 	reverse_facing = 1
-	can_absorb = 1
 	shield_assailant = 0
 	point_blank_mult = 2
 	damage_stage = 3
@@ -28,4 +27,4 @@
 	SET_STATUS_MAX(affecting, STAT_WEAK, 5)	//Should keep you down unless you get help.
 	if(iscarbon(affecting))
 		var/mob/living/carbon/C = affecting
-		C.losebreath = max(C.losebreath + 2, 3)
+		C.ticks_since_last_successful_breath = max(C.ticks_since_last_successful_breath + 2, 3)

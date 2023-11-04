@@ -29,7 +29,8 @@
 		/decl/material/liquid/fuel/hydrazine = 1
 	)
 	default_solid_form = /obj/item/stack/material/segment
-	exoplanet_rarity = MAT_RARITY_EXOTIC
+	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/exotic_matter
 	name = "exotic matter"
@@ -58,9 +59,10 @@
 	taste_mult = 1.5
 	toxicity = 30
 	touch_met = 5
-	fuel_value = 2
+	accelerant_value = FUEL_VALUE_VOLATILE
 	vapor_products = list(
 		/decl/material/solid/exotic_matter = 1
 	)
 	default_solid_form = /obj/item/stack/material/segment
-	exoplanet_rarity = MAT_RARITY_EXOTIC
+	exoplanet_rarity_plant = MAT_RARITY_EXOTIC
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE

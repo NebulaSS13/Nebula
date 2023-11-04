@@ -13,8 +13,8 @@
 	icon = 'icons/mob/bot/mulebot.dmi'
 	icon_state = "mulebot0"
 	layer = MOB_LAYER
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	health = 150
 	maxHealth = 150
 	mob_bump_flag = HEAVY
@@ -321,6 +321,6 @@
 	busy = 0
 
 /mob/living/bot/mulebot/get_mob()
-	if(load && istype(load, /mob/living))
+	if(load && isliving(load))
 		return list(src, load)
 	return src

@@ -4,7 +4,7 @@
 
 /obj/item/grown // Grown weapons
 	name = "grown_weapon"
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 	var/plantname
 	var/potency = 1
 
@@ -45,7 +45,7 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 
 /obj/item/corncob/attackby(obj/item/W, mob/user)
 	..()
@@ -65,5 +65,4 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
-	material = /decl/material/solid/plantmatter
-	
+	material = /decl/material/solid/organic/plantmatter

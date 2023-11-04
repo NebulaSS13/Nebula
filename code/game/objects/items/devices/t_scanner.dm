@@ -102,7 +102,7 @@
 		if(ismob(scanned))
 			if(ishuman(scanned))
 				var/mob/living/carbon/human/H = scanned
-				if(H.species.appearance_flags & HAS_SKIN_COLOR)
+				if(H.get_bodytype().appearance_flags & HAS_SKIN_COLOR)
 					I.color = H.skin_colour
 					I.icon = 'icons/mob/mob.dmi'
 					I.icon_state = "phaseout"
@@ -112,7 +112,7 @@
 			I.underlays += M.underlays
 
 		I.alpha = 128
-		I.mouse_opacity = 0
+		I.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 		. = I
 
 	// Add it to cache, cutting old entries if the list is too long
@@ -141,7 +141,7 @@
 			continue
 
 		for(var/obj/O in T.contents)
-			if(O.level != 1)
+			if(O.level != LEVEL_BELOW_PLATING)
 				continue
 			if(!O.invisibility)
 				continue //if it's already visible don't need an overlay for it

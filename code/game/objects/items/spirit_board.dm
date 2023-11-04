@@ -4,7 +4,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "spirit_board"
 	density = TRUE
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	var/next_use = 0
 	var/planchette = "A"
 	var/lastuser = null
@@ -14,7 +14,7 @@
 	to_chat(user, "The planchette is sitting at \"[planchette]\".")
 
 /obj/item/spirit_board/attack_hand(mob/user)
-	if(user.a_intent == I_GRAB || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(user.a_intent == I_GRAB || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	spirit_board_pick_letter(user)
 	return TRUE

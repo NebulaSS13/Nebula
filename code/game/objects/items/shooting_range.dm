@@ -4,8 +4,8 @@
 	desc = "A shooting target."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_h"
-	density = 0
-	material = /decl/material/solid/plastic
+	density = FALSE
+	material = /decl/material/solid/organic/plastic
 	var/obj/structure/target_stake/stake
 	var/hp = 1800
 	var/icon/virtualIcon
@@ -28,7 +28,7 @@
 
 /obj/item/target/attack_hand(var/mob/user)
 	// taking pinned targets off!
-	if(!stake || !user.check_dexterity(DEXTERITY_GRIP))
+	if(!stake || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return ..()
 	return stake.attack_hand(user)
 

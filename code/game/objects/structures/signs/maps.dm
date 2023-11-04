@@ -6,6 +6,7 @@
 	name = "map"
 	desc = "A framed map."
 	icon = 'icons/obj/signs/maps.dmi'
+	abstract_type = /obj/structure/sign/double/map
 
 /obj/structure/sign/double/map/left
 	icon_state = "map-left"

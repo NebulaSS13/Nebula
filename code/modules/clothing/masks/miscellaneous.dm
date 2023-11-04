@@ -22,7 +22,7 @@
 
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user)
-	if(user.get_equipped_item(slot_wear_mask_str) != src || user.check_dexterity(DEXTERITY_GRIP))
+	if(user.get_equipped_item(slot_wear_mask_str) != src || user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return ..()
 	to_chat(user, SPAN_WARNING("You cannot remove \the [src] without help."))
 	return TRUE
@@ -43,7 +43,7 @@
 	down_gas_transfer_coefficient = 1
 	down_body_parts_covered = null
 	pull_mask = 1
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
@@ -61,7 +61,7 @@
 	icon_state = ICON_STATE_WORLD
 	flags_inv = HIDEFACE
 	body_parts_covered = 0
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 // This doesn't 'filter' water so much as allow us to breathe from the air above it.
 /obj/item/clothing/mask/snorkel/filters_water()
@@ -138,7 +138,7 @@
 	flags_inv = HIDEFACE|BLOCK_ALL_HAIR
 	siemens_coefficient = 0.9
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/mask/rubber/barros
 	name = "Amaya Barros mask"
@@ -184,7 +184,7 @@
 	icon = 'icons/clothing/mask/spirit.dmi'
 	flags_inv = HIDEFACE
 	body_parts_covered = SLOT_FACE|SLOT_EYES
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 // Bandanas below
 /obj/item/clothing/mask/bandana
@@ -198,7 +198,7 @@
 	body_parts_covered = SLOT_FACE
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
 	. = ..()

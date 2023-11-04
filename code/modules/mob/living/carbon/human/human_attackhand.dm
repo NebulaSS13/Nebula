@@ -255,22 +255,21 @@
 				to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
 				return TRUE
 
-		if(!GET_INTERNAL_ORGAN(H, H.species.breathing_organ))
+		var/decl/bodytype/root_bodytype = H.get_bodytype()
+		if(!GET_INTERNAL_ORGAN(H, root_bodytype.breathing_organ))
 			to_chat(H, SPAN_WARNING("You need lungs for mouth-to-mouth resuscitation!"))
 			return TRUE
 
 		if(!need_breathe())
 			return TRUE
 
-		var/obj/item/organ/internal/lungs/L = get_organ(species.breathing_organ, /obj/item/organ/internal/lungs)
-		if(!L)
+		var/obj/item/organ/internal/lungs/lungs = get_organ(root_bodytype.breathing_organ, /obj/item/organ/internal/lungs)
+		if(!lungs)
 			return
 
-		var/datum/gas_mixture/breath = H.get_breath_from_environment()
-		var/fail = L.handle_breath(breath, 1)
-		if(!fail)
-			if(!L.is_bruised())
-				losebreath = 0
+		if(!lungs.handle_owner_breath(H.get_breath_from_environment(), 1))
+			if(!lungs.is_bruised())
+				ticks_since_last_successful_breath = 0
 			to_chat(src, SPAN_NOTICE("You feel a breath of fresh air enter your lungs. It feels good."))
 
 	// Again.

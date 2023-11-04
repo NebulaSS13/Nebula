@@ -161,7 +161,7 @@
 		if(has_safety && M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
 			add_overlay(image('icons/obj/guns/gui.dmi',"safety[safety()]"))
 		if(src in M.get_held_items())
-			M.update_inv_hands()
+			M.update_inhand_overlays()
 	if(safety_icon)
 		add_overlay(get_safety_indicator())
 
@@ -180,7 +180,7 @@
 //Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
 /obj/item/gun/proc/special_check(var/mob/user)
 
-	if(!istype(user, /mob/living))
+	if(!isliving(user))
 		return 0
 	if(!user.check_dexterity(DEXTERITY_WEAPONS))
 		return 0
@@ -382,9 +382,9 @@
 
 		if(ishuman(user) && user.is_cloaked()) //shooting will disable a rig cloaking device
 			var/mob/living/carbon/human/H = user
-			var/obj/item/rig/R = H.get_equipped_item(slot_back_str)
-			if(istype(R))
-				for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
+			var/obj/item/rig/rig = H.get_rig()
+			if(rig)
+				for(var/obj/item/rig_module/stealth_field/S in rig.installed_modules)
 					S.deactivate()
 
 		if(space_recoil)
@@ -491,7 +491,7 @@
 
 	//shooting while in shock
 	var/shock_dispersion = 0
-	if(istype(firer, /mob/living/carbon/human))
+	if(ishuman(firer))
 		var/mob/living/carbon/human/mob = firer
 		if(mob.shock_stage > 120)
 			shock_dispersion = rand(-4,4)

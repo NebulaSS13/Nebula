@@ -1,12 +1,12 @@
 /obj/abstract
-	name =          ""
-	icon =          'icons/effects/landmarks.dmi'
-	icon_state =    "x2"
-	simulated =     FALSE
-	density =       FALSE
-	anchored =      TRUE
-	unacidable =    TRUE
+	name          = ""
+	icon          = 'icons/effects/landmarks.dmi'
+	icon_state    = "x2"
+	simulated     = FALSE
+	density       = FALSE
+	anchored      = TRUE
 	abstract_type = /obj/abstract
+	invisibility  = INVISIBILITY_ABSTRACT
 
 /obj/abstract/Initialize()
 	. = ..()
@@ -14,8 +14,7 @@
 	//Let mappers see the damn thing by just making them invisible here
 	opacity       =  FALSE
 	alpha         =  0
-	mouse_opacity = 0
-	invisibility  =  INVISIBILITY_MAXIMUM+1
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/abstract/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)

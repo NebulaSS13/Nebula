@@ -34,7 +34,7 @@
 
 #define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
 
-#define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
+#define isdrone(A) istype(A, /mob/living/silicon/robot/drone)
 
 #define isEye(A) istype(A, /mob/observer/eye)
 
@@ -44,7 +44,13 @@
 
 #define isliving(A) istype(A, /mob/living)
 
+#define isdeity(A) istype(A, /mob/living/deity)
+
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
+
+#define islizard(A) istype(A, /mob/living/simple_animal/lizard)
+
+#define isconstruct(A) istype(A, /mob/living/simple_animal/construct)
 
 #define isnewplayer(A) istype(A, /mob/new_player)
 
@@ -69,6 +75,10 @@
 #define isrobot(A) istype(A, /mob/living/silicon/robot)
 
 #define issilicon(A) istype(A, /mob/living/silicon)
+
+#define isbot(A) istype(A, /mob/living/bot)
+
+#define isexosuit(A) istype(A, /mob/living/exosuit)
 
 #define isunderwear(A) istype(A, /obj/item/underwear)
 

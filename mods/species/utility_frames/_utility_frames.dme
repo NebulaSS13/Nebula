@@ -4,6 +4,5 @@
 #include "species.dm"
 #include "species_bodytypes.dm"
 #include "markings.dm"
-#include "limbs.dm"
 #include "aspects.dm"
 #endif

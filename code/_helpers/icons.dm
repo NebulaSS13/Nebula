@@ -227,7 +227,7 @@ world
 	Shift(EAST,1)
 
 // Multiply all alpha values by this float
-/icon/proc/ChangeOpacity(opacity = 1.0)
+/icon/proc/ChangeOpacity(opacity = TRUE)
 	MapColors(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,opacity, 0,0,0,0)
 
 // Convert to grayscale

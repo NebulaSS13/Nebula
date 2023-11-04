@@ -12,6 +12,7 @@
 	amount_per_transfer_from_this = 5
 	randpixel = 6
 	volume = 50
+	abstract_type = /obj/item/chems/drinks
 
 	var/filling_states   // List of percentages full that have icons
 	var/base_icon = null // Base icon name for fill states

@@ -1,3 +1,11 @@
+/decl/spawnpoint/gateway
+	name = "Gateway"
+	spawn_announcement = "has completed translation from offsite gateway"
+	uid = "spawn_exodus_gateway"
+
+/obj/abstract/landmark/latejoin/gateway
+	spawn_decl = /decl/spawnpoint/gateway
+
 /datum/map/exodus
 	default_job_type = /datum/job/assistant
 	default_department_type = /decl/department/civilian

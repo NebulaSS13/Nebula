@@ -10,20 +10,20 @@
 	for(var/key in resources)
 		if(!ispath(key, /decl/material/solid))
 			resources -= key
-	var/meat_amount = LAZYACCESS(resources, /decl/material/solid/meat)
+	var/meat_amount = LAZYACCESS(resources, /decl/material/solid/organic/meat)
 	if(meat_amount)
 		if(LAZYACCESS(resources, /decl/material/solid/metal/steel))
 			resources[/decl/material/solid/metal/steel] += meat_amount
 		else
 			LAZYSET(resources, /decl/material/solid/metal/steel, meat_amount)
-		LAZYREMOVE(resources, /decl/material/solid/meat)
+		LAZYREMOVE(resources, /decl/material/solid/organic/meat)
 
 /datum/fabricator_recipe/robotics/organ/build(turf/location, datum/fabricator_build_order/order)
 	. = ..()
-	var/species = order.get_data("species", global.using_map.default_species)
+	var/decl/species/species = get_species_by_key(order.get_data("species", global.using_map.default_species))
 	for(var/obj/item/organ/internal/I in .)
 		I.set_species(species)
-		I.robotize()
+		I.set_bodytype(species.base_prosthetics_model)
 		I.status |= ORGAN_CUT_AWAY
 
 /datum/fabricator_recipe/robotics/organ/heart

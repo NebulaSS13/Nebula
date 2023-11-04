@@ -212,7 +212,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aT" = (
-/obj/structure/sign/icarus/solgov{
+/obj/structure/sign/solgov{
 	pixel_x = 30
 	},
 /turf/simulated/floor/tiled,
@@ -234,7 +234,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aW" = (
-/obj/structure/sign/icarus/solgov{
+/obj/structure/sign/solgov{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled,
@@ -756,13 +756,13 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cB" = (
-/obj/structure/sign/double/icarus/solgovflag/left{
+/obj/structure/sign/double/solgovflag/left{
 	pixel_y = -32
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cC" = (
-/obj/structure/sign/double/icarus/solgovflag/right{
+/obj/structure/sign/double/solgovflag/right{
 	pixel_y = -32
 	},
 /turf/simulated/floor/tiled,

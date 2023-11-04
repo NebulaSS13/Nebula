@@ -12,7 +12,7 @@
 	var/last_flash = 0 //Don't want it getting spammed like regular flashes
 	var/strength = 10 //How weakened targets are when flashed.
 	var/base_state = "mflash"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
@@ -78,12 +78,12 @@
 				flash_time = round(H.getFlashMod() * flash_time)
 				if(flash_time <= 0)
 					return
-				var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, H.species.vision_organ)
+				var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, H.get_bodytype().vision_organ)
 				if(E && E.is_bruised() && prob(E.damage + 50))
 					H.flash_eyes()
 					E.damage += rand(1, 5)
 
-		if(!O.blinded)
+		if(!O.is_blind())
 			do_flash(O, flash_time)
 
 /obj/machinery/flasher/proc/do_flash(var/mob/living/victim, var/flash_time)
@@ -107,15 +107,15 @@
 	icon_state = "pflash1"
 	icon = 'icons/obj/machines/flash_portable.dmi'
 	strength = 8
-	anchored = 0
+	anchored = FALSE
 	base_state = "pflash"
-	density = 1
+	density = TRUE
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM)
 	. = ..()
 	if(!. || !anchored || disable || last_flash && world.time < last_flash + 150)
 		return
-	if(istype(AM, /mob/living/carbon))
+	if(iscarbon(AM))
 		var/mob/living/carbon/M = AM
 		if(!MOVING_DELIBERATELY(M))
 			flash()

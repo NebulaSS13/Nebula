@@ -38,3 +38,9 @@
 	. = ..()
 	if(H)
 		. = "[.]-[wrapped_species_by_ref["\ref[H]"]]"
+
+/decl/bodytype/shapeshifter/apply_bodytype_organ_modifications(obj/item/organ/org)
+	..()
+	var/obj/item/organ/external/E = org
+	if(istype(E) && E.owner)
+		E.sync_colour_to_human(E.owner)

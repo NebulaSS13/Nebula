@@ -14,7 +14,7 @@
 	throwforce                    = 10
 	force                         = 10
 	material                      = /decl/material/solid/metal/steel
-	matter                        = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter                        = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb                   = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 	possible_transfer_amounts     = @"[30,60,120]" //units of liquid per spray - 120 -> same as splashing them with a bucket per spray
 	possible_particle_amounts     = @"[1,2,3]"     //Amount of chempuff particles to spawn on spray
@@ -41,7 +41,7 @@
 	amount_per_transfer_from_this = 80
 	spray_particles               = 2
 	volume                        = 1000
-	material                      = /decl/material/solid/plastic
+	material                      = /decl/material/solid/organic/plastic
 	matter                        = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/fiberglass  = MATTER_AMOUNT_REINFORCEMENT

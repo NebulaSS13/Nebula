@@ -7,7 +7,7 @@ var/global/list/station_bookcases = list()
 	density = TRUE
 	opacity = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 
@@ -31,7 +31,7 @@ var/global/list/station_bookcases = list()
 	return ..()
 
 /obj/structure/bookcase/attack_hand(var/mob/user)
-	if(!length(contents) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!length(contents) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/item/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
 	if(choice && (choice in contents) && CanPhysicallyInteract(user))

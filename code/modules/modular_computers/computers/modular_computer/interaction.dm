@@ -16,7 +16,7 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(usr.incapacitated() || !istype(usr, /mob/living))
+	if(usr.incapacitated() || !isliving(usr))
 		to_chat(usr, "<span class='warning'>You can't do that.</span>")
 		return
 
@@ -38,7 +38,7 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(usr.incapacitated() || !istype(usr, /mob/living))
+	if(usr.incapacitated() || !isliving(usr))
 		to_chat(usr, "<span class='warning'>You can't do that.</span>")
 		return
 
@@ -66,6 +66,11 @@
 
 /obj/item/modular_computer/attack_hand(var/mob/user)
 	if(anchored)
+		return attack_self(user)
+	// if it's equipped and we're not holding it, open
+	// the interface instead of removing it from the slot.
+	var/equip_slot = user.get_equipped_slot_for_item(src)
+	if(equip_slot && !(equip_slot in user.get_held_item_slots()))
 		return attack_self(user)
 	return ..()
 
@@ -108,9 +113,6 @@
 	if(card_slot && card_slot.stored_card)
 		to_chat(user, "\The [card_slot.stored_card] is inserted into it.")
 	assembly.examine(user)
-
-/obj/item/modular_computer/handle_mouse_drop(atom/over, mob/user)
-	. = (!istype(over, /obj/screen) && attack_self(user)) || ..()
 
 /obj/item/modular_computer/afterattack(atom/target, mob/user, proximity)
 	. = ..()

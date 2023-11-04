@@ -5,7 +5,7 @@
 
 /datum/fabricator_recipe/textiles/armor/hos
 	path = /obj/item/clothing/suit/armor/hos
-	
+
 /datum/fabricator_recipe/textiles/armor/jensen
 	path = /obj/item/clothing/suit/armor/hos/jensen
 
@@ -17,7 +17,7 @@
 
 /datum/fabricator_recipe/textiles/armor/plate/medium
 	path = /obj/item/clothing/accessory/armor/plate/medium
-	
+
 /datum/fabricator_recipe/textiles/armor/plate/tactical
 	path = /obj/item/clothing/accessory/armor/plate/tactical
 
@@ -71,7 +71,7 @@
 /datum/fabricator_recipe/textiles/armor/helmet
 	category = "Armor - Helmets"
 	path = /obj/item/clothing/head/helmet
-	
+
 /datum/fabricator_recipe/textiles/helmet/tactical
 	path = /obj/item/clothing/head/helmet/tactical
 
@@ -99,8 +99,8 @@ var/global/list/melee_mats = list(
 	/decl/material/solid/metal/titanium = ARMOR_MELEE_VERY_HIGH,
 	/decl/material/solid/metal/steel = ARMOR_MELEE_MAJOR,
 	/decl/material/solid/metal/iron = ARMOR_MELEE_KNIVES,
-	/decl/material/solid/leather = ARMOR_MELEE_KNIVES,
-	/decl/material/solid/plastic = ARMOR_MELEE_SMALL
+	/decl/material/solid/organic/leather = ARMOR_MELEE_KNIVES,
+	/decl/material/solid/organic/plastic = ARMOR_MELEE_SMALL
 )
 
 var/global/list/bullet_mats = list(
@@ -109,6 +109,6 @@ var/global/list/bullet_mats = list(
 	/decl/material/solid/metal/titanium = ARMOR_BALLISTIC_RESISTANT,
 	/decl/material/solid/metal/steel = ARMOR_BALLISTIC_PISTOL,
 	/decl/material/solid/metal/iron = ARMOR_BALLISTIC_SMALL,
-	/decl/material/solid/leather = ARMOR_BALLISTIC_MINOR,
-	/decl/material/solid/plastic = ARMOR_BALLISTIC_MINOR
+	/decl/material/solid/organic/leather = ARMOR_BALLISTIC_MINOR,
+	/decl/material/solid/organic/plastic = ARMOR_BALLISTIC_MINOR
 )

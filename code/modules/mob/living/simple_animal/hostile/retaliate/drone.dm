@@ -55,6 +55,8 @@
 		/decl/material/solid/metal/plasteel = null
 	)
 
+/mob/living/simple_animal/hostile/retaliate/malf_drone/can_act()
+	return disabled <= 0 && ..()
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Initialize()
 	. = ..()
@@ -152,11 +154,11 @@
 	. = ..()
 	if(stat != DEAD)
 		if(health / maxHealth <= 0.3)
-			icon_state += "-shield3"
+			icon_state = "[icon_state]-shield3"
 		else if(health / maxHealth <= 0.5)
-			icon_state += "-shield1"
+			icon_state = "[icon_state]-shield1"
 		else if(health / maxHealth <= 0.7)
-			icon_state += "-shield2"
+			icon_state = "[icon_state]-shield2"
 
 //ion rifle!
 /mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)

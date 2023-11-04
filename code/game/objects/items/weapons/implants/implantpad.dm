@@ -13,7 +13,7 @@
 		add_overlay("[icon_state]-imp")
 
 /obj/item/implantpad/attack_hand(mob/user)
-	if(!imp || (src in user.get_held_items()) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!imp || (src in user.get_held_items()) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	user.put_in_active_hand(imp)
 	imp.add_fingerprint(user)

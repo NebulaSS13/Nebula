@@ -1,5 +1,5 @@
 /obj/screen/intent/diona_nymph
-	icon_state = "intent_devour"
+	icon_state = "intent_harm"
 	screen_loc = DIONA_SCREEN_LOC_INTENT
 
 /obj/screen/intent/diona_nymph/on_update_icon()
@@ -9,15 +9,6 @@
 	else
 		intent = I_DISARM
 		icon_state = "intent_help"
-
-/obj/screen/diona_hat
-	name = "equipped hat"
-	screen_loc = DIONA_SCREEN_LOC_HAT
-	icon_state = "hat"
-
-/obj/screen/diona_hat/Click()
-	var/datum/extension/hattable/hattable = get_extension(usr, /datum/extension/hattable)
-	hattable?.drop_hat(usr)
 
 /obj/screen/diona_held
 	name = "held item"
@@ -29,7 +20,6 @@
 	if(istype(chirp) && chirp.holding_item) chirp.try_unequip(chirp.holding_item)
 
 /datum/hud/diona_nymph
-	var/obj/screen/diona_hat/hat
 	var/obj/screen/diona_held/held
 
 /datum/hud/diona_nymph/get_ui_style()
@@ -46,15 +36,6 @@
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
-
-	src.adding = list()
-	src.other = list()
-
-	hat = new
-	hat.icon =  ui_style
-	hat.color = ui_color
-	hat.alpha = ui_alpha
-	adding += hat
 
 	held = new
 	held.icon =  ui_style
@@ -75,6 +56,6 @@
 	mymob.healths.icon_state = "health0"
 	mymob.healths.SetName("health")
 	mymob.healths.screen_loc = DIONA_SCREEN_LOC_HEALTH
+	adding += mymob.healths
 
-	mymob.client.screen = list(mymob.healths)
-	mymob.client.screen += src.adding + src.other
+	..()

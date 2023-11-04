@@ -83,7 +83,7 @@
 	return ..()
 
 /obj/item/organ/internal/brain/can_recover()
-	return ~status & ORGAN_DEAD
+	return !(status & ORGAN_DEAD)
 
 /obj/item/organ/internal/brain/proc/handle_severe_damage()
 	set waitfor = FALSE

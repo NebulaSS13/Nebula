@@ -7,7 +7,7 @@
 	desc = "A magnetic docking beacon that coordinates the movement of spacecraft into secure locations. It can additionally be used as a drydock for constructing shuttles."
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "injector0"
-	density = 1
+	density = TRUE
 	anchored = FALSE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

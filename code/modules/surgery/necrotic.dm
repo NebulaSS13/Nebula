@@ -16,6 +16,7 @@
 	allowed_tools = list(TOOL_SCALPEL = 90)
 	min_duration = 150
 	max_duration = 170
+	end_step_sound = 'sound/weapons/bladeslice.ogg'
 
 /decl/surgery_step/necrotic/tissue/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	. = ..()
@@ -70,7 +71,6 @@
 	user.visible_message(
 		SPAN_NOTICE("\The [user] has excised the necrotic tissue from \the [target]'s [target_organ] with \the [tool]."), \
 		SPAN_NOTICE("You have excised the necrotic tissue from \the [target]'s [target_organ] with \the [tool]."))
-	playsound(target.loc, 'sound/weapons/bladeslice.ogg', 15, 1)
 
 	var/obj/item/organ/O = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	if(O)
@@ -78,6 +78,7 @@
 		if(istype(O,/obj/item/organ/external))
 			var/obj/item/organ/external/E = O
 			E.disinfect()
+	..()
 
 /decl/surgery_step/necrotic/tissue/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
@@ -86,6 +87,7 @@
 			SPAN_DANGER("\The [user]'s hand slips, slicing into a healthy portion of \the [target]'s [affected.name] with \the [tool]!"),
 			SPAN_DANGER("Your hand slips, slicing into a healthy portion of [target]'s [affected.name] with \the [tool]!"))
 		affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	 Dead organ regeneration treatment
@@ -183,6 +185,7 @@
 		to_chat(user,SPAN_WARNING("You transferred too little for the organ to regenerate!"))
 	qdel(temp_reagents)
 	qdel(temp_holder)
+	..()
 
 /decl/surgery_step/necrotic/regeneration/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(!istype(tool) || !tool.reagents)
@@ -194,3 +197,4 @@
 		user.visible_message(
 			SPAN_DANGER("\The [user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!"),
 			SPAN_DANGER("Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!"))
+	..()

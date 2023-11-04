@@ -104,7 +104,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		look(user)
 
 /obj/machinery/computer/ship/check_eye(var/mob/user)
-	if (!get_dist(user, src) > 1 || user.blinded || !linked )
+	if (!get_dist(user, src) > 1 || user.is_blind() || !linked )
 		unlook(user)
 		return -1
 	else

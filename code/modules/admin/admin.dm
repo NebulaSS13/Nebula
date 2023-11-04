@@ -67,7 +67,7 @@ var/global/floorIsLava = 0
 	else if(last_ckey)
 		body += " (last occupied by ckey <b>[last_ckey]</b>)"
 
-	if(istype(M, /mob/new_player))
+	if(isnewplayer(M))
 		body += " <B>Hasn't Entered Game</B> "
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
@@ -138,7 +138,7 @@ var/global/floorIsLava = 0
 			body += extra_body
 
 	if (M.client)
-		if(!istype(M, /mob/new_player))
+		if(!isnewplayer(M))
 			body += "<br><br>"
 			body += "<b>Transformation:</b>"
 			body += "<br>"
@@ -988,7 +988,7 @@ var/global/floorIsLava = 0
 	set name = "Unprison"
 	if (isAdminLevel(M.z))
 		if (config.allow_admin_jump)
-			M.forceMove(pick(global.latejoin_locations))
+			M.forceMove(get_random_spawn_turf(SPAWN_FLAG_PRISONERS_CAN_SPAWN))
 			message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]", 1)
 			log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
 		else
@@ -1144,7 +1144,7 @@ var/global/floorIsLava = 0
 	for(var/path in subtypesof(/atom))
 		var/atom/path_cast = path
 		if(TYPE_IS_SPAWNABLE(path_cast) && findtext(lowertext("[path]"), object))
-			matches += path
+			matches += "[path]" // We need to use a string because input() checks invisibility on types for Reasons:tm:.
 
 	if(matches.len==0)
 		return
@@ -1157,6 +1157,7 @@ var/global/floorIsLava = 0
 		if(!chosen)
 			return
 
+	chosen = text2path(chosen)
 	if(ispath(chosen,/turf))
 		var/turf/T = get_turf(usr.loc)
 		T.ChangeTurf(chosen)
@@ -1191,7 +1192,7 @@ var/global/floorIsLava = 0
 		alert("Not before roundstart!", "Alert")
 		return
 
-	var/out = "<font size=3><b>Current mode: [SSticker.mode.name] (<a href='?src=\ref[SSticker.mode];debug_antag=self'>[SSticker.mode.config_tag]</a>)</b></font><br/>"
+	var/out = "<font size=3><b>Current mode: [SSticker.mode.name] (<a href='?src=\ref[SSticker.mode];debug_antag=self'>[SSticker.mode.uid]</a>)</b></font><br/>"
 	out += "<hr>"
 
 	if(SSticker.mode.ert_disabled)
@@ -1334,7 +1335,7 @@ var/global/floorIsLava = 0
 		return
 
 	if(istype(H))
-		H.refresh_visible_overlays()
+		H.try_refresh_visible_overlays()
 
 /proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1, var/datum/ticket/ticket = null)
 	if(!whom)
@@ -1344,7 +1345,7 @@ var/global/floorIsLava = 0
 	if(istype(whom, /client))
 		C = whom
 		M = C.mob
-	else if(istype(whom, /mob))
+	else if(ismob(whom))
 		M = whom
 		C = M.client
 	else

@@ -3,11 +3,11 @@
 		return
 	for(var/obj/item/W in get_contained_external_atoms())
 		drop_from_inventory(W)
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	set_status(STAT_STUN, 1)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in get_external_organs())
 		qdel(t)
 	var/atom/movable/overlay/animation = new /atom/movable/overlay(src)
@@ -56,7 +56,7 @@
 		drop_from_inventory(W)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	return ..()
 
 /mob/proc/AIize(move=1)
@@ -65,7 +65,7 @@
 
 
 	var/mob/living/silicon/ai/O = new (loc, global.using_map.default_law_type,,1)//No MMI but safety is in effect.
-	O.set_invisibility(0)
+	O.set_invisibility(INVISIBILITY_NONE)
 	O.aiRestorePowerRoutine = 0
 	if(mind)
 		mind.transfer_to(O)
@@ -109,17 +109,17 @@
 	QDEL_NULL_LIST(worn_underwear)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in get_external_organs())
 		qdel(t)
 
 	var/mob/living/silicon/robot/O = new supplied_robot_type( loc )
 
 	O.set_gender(gender)
-	O.set_invisibility(0)
+	O.set_invisibility(INVISIBILITY_NONE)
 
 	if(!mind)
 		mind_initialize()
@@ -146,10 +146,10 @@
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in get_external_organs())	//this really should not be necessary
 		qdel(t)
 
@@ -175,10 +175,10 @@
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 
 	for(var/t in get_external_organs())
 		qdel(t)

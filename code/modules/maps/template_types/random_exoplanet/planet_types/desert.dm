@@ -19,7 +19,8 @@
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators    = list(
-		/datum/random_map/noise/exoplanet/desert
+		/datum/random_map/noise/exoplanet/desert,
+		/datum/random_map/noise/ore/rich,
 	)
 
 ////////////////////////////////////////////////////////////////////////////
@@ -99,9 +100,6 @@
 	prefered_level_data_per_z  = list(
 		/datum/level_data/planetoid/exoplanet/desert,
 		/datum/level_data/planetoid/exoplanet/underground
-	)
-	map_generators = list(
-		/datum/random_map/noise/ore/rich,
 	)
 
 ////////////////////////////////////////////////////////////////////////////

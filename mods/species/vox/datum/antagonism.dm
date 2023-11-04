@@ -17,7 +17,7 @@
 	hands =      list(/obj/item/gun/launcher/alien/spikethrower)
 	id_type =    /obj/item/card/id/syndicate
 
-/decl/hierarchy/outfit/vox_raider/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+/decl/hierarchy/outfit/vox_raider/equip_outfit(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	uniform = pick(/obj/item/clothing/under/vox/vox_robes, /obj/item/clothing/under/vox/vox_casual)
 	glasses = pick(/obj/item/clothing/glasses/thermal, /obj/item/clothing/glasses/thermal/plain/eyepatch, /obj/item/clothing/glasses/thermal/plain/monocle)
 	holster = pick(/obj/item/clothing/accessory/storage/holster/armpit, /obj/item/clothing/accessory/storage/holster/waist, /obj/item/clothing/accessory/storage/holster/hip)
@@ -39,13 +39,13 @@
 	if(!istype(user) || !user.mind || !user.mind.assigned_special_role != raiders || user.species.name == SPECIES_VOX || !is_alien_whitelisted(user, SPECIES_VOX))
 		return ..()
 
-	var/choice = input("Do you wish to become a Vox of the Shoal? This is not reversible.") as null|anything in list("No","Yes")
+	var/choice = input("Do you wish to become a vox of the Shoal? This is not reversible.") as null|anything in list("No","Yes")
 	if(choice != "Yes")
 		return ..()
 
 	var/decl/hierarchy/outfit/outfit = GET_DECL(/decl/hierarchy/outfit/vox_raider)
 	var/mob/living/carbon/human/vox/vox = new(get_turf(src), SPECIES_VOX)
-	outfit.equip(vox)
+	outfit.equip_outfit(vox)
 	if(user.mind)
 		user.mind.transfer_to(vox)
 	qdel(user)

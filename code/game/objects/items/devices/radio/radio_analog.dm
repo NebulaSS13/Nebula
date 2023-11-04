@@ -1,6 +1,6 @@
 /// check if this radio can receive on the given analog frequency
 /// @level: list of eligible z-levels, if it contains 0 then it reaches all levels
-/obj/item/radio/proc/can_receive_analog(datum/radio_frequency/connection, level)
+/obj/item/radio/proc/can_receive_analog(datum/radio_frequency/connection, z_levels)
 	if(!analog || !istype(analog_radio_connection) || connection != analog_radio_connection)
 		return FALSE
 	if(!listening)
@@ -11,16 +11,16 @@
 		return FALSE
 	if (wires.IsIndexCut(WIRE_RECEIVE))
 		return FALSE
-	if(!(0 in level) && !(get_z(src) in level))
+	if(!(0 in z_levels) && !(get_z(src) in z_levels))
 		return FALSE
 	return TRUE
 
 /proc/broadcast_analog_radio_message(datum/radio_frequency/connection, mob/speaker,
 	obj/item/radio/radio, message, intercom_only = FALSE,
-	hard_to_hear, list/levels, verbage = "says", decl/language/speaking = null, list/secured
+	hard_to_hear, list/z_levels, verbage = "says", decl/language/speaking = null, list/secured
 	)
 
-	var/list/radios = list()
+	var/list/radios = list(radio)
 	var/list/radios_insecure = list()
 	for(var/obj/item/radio/radio_receiver in connection.devices["[RADIO_CHAT]"])
 		// Quasi-wired mode; remove if intercoms ever use actual wired connections somehow.
@@ -32,8 +32,8 @@
 			continue
 		if(!radio_receiver.can_receive_message())
 			continue
-		if(radio_receiver.can_receive_analog(connection, levels))
-			radio_receiver.received_chatter(connection.frequency, levels)
+		if(radio_receiver.can_receive_analog(connection, z_levels))
+			radio_receiver.received_chatter(connection.frequency, z_levels)
 			if(secured && !radio_receiver.can_decrypt(secured))
 				radios_insecure += radio_receiver
 				continue

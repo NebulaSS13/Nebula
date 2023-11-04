@@ -59,7 +59,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/full,
 /obj/item/beartrap{
-	anchored = 1;
+	anchored = TRUE;
 	deployed = 1;
 	icon_state = "beartrap1"
 	},
@@ -252,7 +252,7 @@
 /area/smugglers/base)
 "aJ" = (
 /obj/item/beartrap{
-	anchored = 1;
+	anchored = TRUE;
 	deployed = 1;
 	icon_state = "beartrap1"
 	},

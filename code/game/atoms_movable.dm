@@ -1,6 +1,6 @@
 /atom/movable
 	layer = OBJ_LAYER
-	appearance_flags = TILE_BOUND | PIXEL_SCALE | LONG_GLIDE
+	appearance_flags = TILE_BOUND | DEFAULT_APPEARANCE_FLAGS | LONG_GLIDE
 	glide_size = 8
 	abstract_type = /atom/movable
 
@@ -18,7 +18,7 @@
 
 	var/movable_flags
 	var/last_move = null
-	var/anchored = 0
+	var/anchored = FALSE
 	// var/elevation = 2    - not used anywhere
 	var/move_speed = 10
 	var/l_move_time = 1
@@ -278,52 +278,6 @@
 	if (SSthrowing.state == SS_PAUSED && length(SSthrowing.currentrun))
 		SSthrowing.currentrun[src] = TT
 
-//Overlays
-/atom/movable/overlay
-	anchored = TRUE
-	simulated = FALSE
-	var/atom/master = null
-	var/follow_proc = /atom/movable/proc/move_to_loc_or_null
-	var/expected_master_type = /atom
-
-/atom/movable/overlay/Initialize()
-	if(!loc)
-		PRINT_STACK_TRACE("[type] created in nullspace.")
-		return INITIALIZE_HINT_QDEL
-	master = loc
-	if(expected_master_type && !istype(master, expected_master_type))
-		return INITIALIZE_HINT_QDEL
-	SetName(master.name)
-	set_dir(master.dir)
-
-	if(follow_proc && istype(master, /atom/movable))
-		events_repository.register(/decl/observ/moved, master, src, follow_proc)
-		SetInitLoc()
-
-	events_repository.register(/decl/observ/destroyed, master, src, /datum/proc/qdel_self)
-	events_repository.register(/decl/observ/dir_set, master, src, /atom/proc/recursive_dir_set)
-
-	. = ..()
-
-/atom/movable/overlay/proc/SetInitLoc()
-	forceMove(master.loc)
-
-/atom/movable/overlay/Destroy()
-	if(istype(master, /atom/movable))
-		events_repository.unregister(/decl/observ/moved, master, src)
-	events_repository.unregister(/decl/observ/destroyed, master, src)
-	events_repository.unregister(/decl/observ/dir_set, master, src)
-	master = null
-	. = ..()
-
-/atom/movable/overlay/attackby(obj/item/I, mob/user)
-	if (master)
-		return master.attackby(I, user)
-
-/atom/movable/overlay/attack_hand(mob/user)
-	SHOULD_CALL_PARENT(FALSE)
-	return master?.attack_hand(user)
-
 /atom/movable/proc/touch_map_edge(var/overmap_id)
 	if(!simulated)
 		return
@@ -366,14 +320,6 @@
 
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
-
-/atom/movable/handle_grab_interaction(var/mob/user)
-
-	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
-	// NOTE: /mob/living overrides this to return FALSE in favour of using default_grab_interaction
-	if(isliving(user) && user.a_intent == I_GRAB && !user.lying && !anchored)
-		return try_make_grab(user)
-	return ..()
 
 /atom/movable/proc/pushed(var/pushdir)
 	set waitfor = FALSE
@@ -497,37 +443,6 @@
 /atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	return
 
-/atom/movable/proc/try_make_grab(var/mob/living/user, var/defer_hand = FALSE)
-	return istype(user) && CanPhysicallyInteract(user) && !user.lying && user.make_grab(src)
-
-/atom/movable/get_alt_interactions(var/mob/user)
-	. = ..()
-	if(config.expanded_alt_interactions)
-		LAZYADD(., list(
-			/decl/interaction_handler/look,
-			/decl/interaction_handler/grab
-		))
-
-/decl/interaction_handler/look
-	name = "Examine"
-	expected_user_type = /mob
-	interaction_flags = 0
-
-/decl/interaction_handler/look/invoked(atom/target, mob/user, obj/item/prop)
-	target.examine(user, get_dist(user, target))
-
-/decl/interaction_handler/grab
-	name = "Grab"
-	expected_target_type = /atom/movable
-	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
-
-/decl/interaction_handler/grab/is_possible(atom/movable/target, mob/user, obj/item/prop)
-	return ..() && !target.anchored
-
-/decl/interaction_handler/grab/invoked(atom/target, mob/user, obj/item/prop)
-	var/atom/movable/AM = target
-	AM.try_make_grab(user, defer_hand = TRUE)
-
 /atom/movable/singularity_act()
 	if(!simulated)
 		return 0
@@ -542,3 +457,7 @@
 
 /atom/movable/proc/crossed_mob(var/mob/living/victim)
 	return
+
+/atom/movable/proc/get_object_size()
+	return ITEM_SIZE_NORMAL
+

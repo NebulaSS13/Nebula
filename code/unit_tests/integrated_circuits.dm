@@ -52,7 +52,7 @@
 				log_bad("[prefab_type] failed to create or return its item.")
 				failed_prefabs |= prefab_type
 		catch(var/exception/e)
-			log_bad("[prefab_type] caused an exception: [e] on [e.file]:[e.line]")
+			log_bad("[prefab_type] caused an exception: [EXCEPTION_TEXT(e)]")
 			failed_prefabs |= prefab_type
 
 	if(failed_prefabs.len)

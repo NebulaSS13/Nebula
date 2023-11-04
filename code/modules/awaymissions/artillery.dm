@@ -4,8 +4,8 @@
 	name = "superluminal artillery control"
 	icon_state = "control_boxp1"
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 
 /obj/machinery/artillerycontrol/Process()
 	if(src.reload<180)
@@ -14,12 +14,12 @@
 /obj/structure/artilleryplaceholder
 	name = "artillery"
 	icon = 'icons/obj/machines/artillery.dmi'
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	desc = "The ship's old superluminal artillery cannon. Looks inoperative."
 
 /obj/structure/artilleryplaceholder/decorative
-	density = 0
+	density = FALSE
 
 /obj/machinery/artillerycontrol/interface_interact(mob/user)
 	interact(user)
@@ -39,14 +39,14 @@
 	if(..())
 		return 1
 
-	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (istype(usr, /mob/living/silicon)))
+	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (issilicon(usr)))
 		var/area/thearea = input("Area to jump bombard", "Open Fire") as null|anything in teleportlocs
 		thearea = thearea ? teleportlocs[thearea] : thearea
 		if (!thearea || CanUseTopic(usr, global.physical_topic_state) != STATUS_INTERACTIVE)
 			return
 		if (src.reload < 180)
 			return
-		if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (istype(usr, /mob/living/silicon)))
+		if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (issilicon(usr)))
 			command_announcement.Announce("Wormhole artillery fire detected. Brace for impact.")
 			log_and_message_admins("has launched an artillery strike.", 1)
 			var/list/L = list()

@@ -4,7 +4,6 @@
 	germ_level = 0
 	w_class = ITEM_SIZE_TINY
 	default_action_type = /datum/action/item_action/organ
-	material = /decl/material/solid/meat
 	origin_tech = "{'materials':1,'biotech':1}"
 	throwforce = 2
 	abstract_type = /obj/item/organ
@@ -61,16 +60,15 @@
 /obj/item/organ/proc/is_broken()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
-//Third rgument may be a dna datum; if null will be set to holder's dna.
-/obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
+//Third argument may be a dna datum; if null will be set to holder's dna.
+/obj/item/organ/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	. = ..(mapload, material_key)
-	if(. != INITIALIZE_HINT_QDEL)
-		if(!BP_IS_PROSTHETIC(src))
-			setup_as_organic(given_dna)
-		else
-			setup_as_prosthetic()
+	if(. == INITIALIZE_HINT_QDEL)
+		return .
+	setup(given_dna, new_bodytype)
+	initialize_reagents()
 
-/obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
+/obj/item/organ/proc/setup(datum/dna/given_dna, decl/bodytype/new_bodytype)
 	//Null DNA setup
 	if(!given_dna)
 		if(dna)
@@ -80,32 +78,26 @@
 				given_dna = owner.dna //Grab our owner's dna if we don't have any, and they have
 			else
 				//The owner having no DNA can be a valid reason to keep our dna null in some cases
-				log_debug("obj/item/organ/setup_as_organic(): [src] had null dna, with a owner with null dna!")
+				log_debug("obj/item/organ/setup(): [src] had null dna, with a owner with null dna!")
 				dna = null //#TODO: Not sure that's really legal
 				return
 		else
 			//If we have NO OWNER and given_dna, just make one up for consistency
 			given_dna = new/datum/dna()
 			given_dna.check_integrity() //Defaults everything
-
-	set_dna(given_dna)
-	initialize_reagents()
-	return TRUE
-
-//Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
-// NOTE: This wouldn't be necessary if prothetics were a subclass
-/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer/basic_human)
-	if(!species)
-		if(owner?.species)
-			set_species(owner.species)
-		else
-			set_species(global.using_map.default_species)
-
-	if(istype(material))
-		robotize(forced_model, apply_material = material.type)
+	// order of bodytype preference: new, current, owner, species
+	new_bodytype ||= bodytype || owner?.get_bodytype()
+	if(ispath(new_bodytype, /decl/bodytype))
+		new_bodytype = GET_DECL(new_bodytype)
+	if(!new_bodytype)
+		// this can be fine if dna with species is passed
+		log_debug("obj/item/organ/setup(): [src] had null bodytype, with an owner with null bodytype!")
+	bodytype = new_bodytype // used in later setup procs
+	if((bodytype?.body_flags & BODY_FLAG_NO_DNA) || !given_dna)
+		// set_bodytype will unset invalid dna anyway, so set_dna(null) is unnecessary
+		set_species(given_dna?.species || owner?.get_species() || global.using_map.default_species)
 	else
-		robotize(forced_model)
-	return TRUE
+		set_dna(given_dna)
 
 //Called on initialization to add the neccessary reagents
 
@@ -115,19 +107,55 @@
 	create_reagents(5 * (w_class-1)**2)
 	. = ..()
 
+// todo: make this redundant with matter shenanigans
 /obj/item/organ/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
+	var/reagent_to_add = /decl/material/liquid/nutriment/protein
+	if(bodytype)
+		reagent_to_add = bodytype.edible_reagent // can set this to null and skip the next block
+	if(reagent_to_add)
+		reagents.add_reagent(reagent_to_add, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
-	QDEL_NULL(dna)
-	dna = new_dna.Clone()
-	if(!blood_DNA)
-		blood_DNA = list()
-	blood_DNA.Cut()
-	blood_DNA[dna.unique_enzymes] = dna.b_type
+	if(istype(bodytype) && (bodytype.body_flags & BODY_FLAG_NO_DNA))
+		QDEL_NULL(dna)
+		return
+	if(new_dna != dna) // Hacky. Is this ever used? Do any organs ever have DNA set before setup_as_organic?
+		QDEL_NULL(dna)
+		dna = new_dna.Clone()
+	blood_DNA = list(dna.unique_enzymes = dna.b_type)
 	set_species(dna.species)
 
-/obj/item/organ/proc/set_species(var/specie_name)
+/obj/item/organ/proc/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(isnull(new_bodytype))
+		PRINT_STACK_TRACE("Null bodytype passed to set_bodytype!")
+		return FALSE
+	if(ispath(new_bodytype, /decl/bodytype))
+		new_bodytype = GET_DECL(new_bodytype)
+	if(!istype(new_bodytype))
+		PRINT_STACK_TRACE("Invalid bodytype [new_bodytype]")
+		return FALSE
+	bodytype = new_bodytype
+	if(bodytype.modifier_string)
+		name = "[bodytype.modifier_string] [initial(name)]"
+	desc = bodytype.desc
+	origin_tech = bodytype.limb_tech
+	max_damage *= bodytype.hardiness
+	min_broken_damage *= bodytype.hardiness
+	bodytype.resize_organ(src)
+	set_material(override_material || bodytype.material)
+	matter = bodytype.matter?.Copy()
+	create_matter()
+	// maybe this should be a generalized repopulate_reagents helper??
+	if(reagents)
+		reagents.clear_reagents()
+		populate_reagents()
+	if(bodytype.body_flags & BODY_FLAG_NO_DNA)
+		QDEL_NULL(dna)
+	reset_status()
+	return TRUE
+
+/obj/item/organ/proc/set_species(specie_name)
 	vital_to_owner = null // This generally indicates the owner mob is having species set, and this value may be invalidated.
 	if(istext(specie_name))
 		species = get_species_by_key(specie_name)
@@ -137,8 +165,7 @@
 		species = get_species_by_key(global.using_map.default_species)
 		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
 
-	bodytype = owner?.bodytype || species.default_bodytype
-	species.resize_organ(src)
+	set_bodytype(bodytype || species.default_bodytype, override_material = material?.type)
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
@@ -252,7 +279,7 @@
 				germ_level += 10
 
 	if(germ_level >= INFECTION_LEVEL_ONE)
-		var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + owner.species.body_temperature
+		var/fever_temperature = (owner.get_temperature_threshold(HEAT_LEVEL_1) - owner.species.body_temperature - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + owner.species.body_temperature
 		owner.bodytemperature += clamp(0, (fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, fever_temperature - owner.bodytemperature)
 
 	if (germ_level >= INFECTION_LEVEL_TWO)
@@ -296,19 +323,22 @@
 /obj/item/organ/proc/remove_rejuv()
 	qdel(src)
 
-/obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
+/obj/item/organ/proc/rejuvenate(var/ignore_organ_aspects)
 	SHOULD_CALL_PARENT(TRUE)
+	if(!owner)
+		PRINT_STACK_TRACE("rejuvenate() called on organ of type [type] with no owner.")
 	damage = 0
 	reset_status()
-	if(!ignore_prosthetic_prefs && owner?.client?.prefs && owner.client.prefs.real_name == owner.real_name)
+	if(!ignore_organ_aspects && length(owner?.personal_aspects))
 		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
 			if(aspect.applies_to_organ(organ_tag))
 				aspect.apply(owner)
 
 /obj/item/organ/proc/reset_status()
+	vital_to_owner = null // organ modifications might need this to be recalculated
 	status = initial(status)
-	if(species) // qdel clears species ref
-		species.apply_species_organ_modifications(src)
+	if(bodytype) // qdel clears bodytype ref
+		bodytype.apply_bodytype_organ_modifications(src)
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
@@ -336,15 +366,6 @@
 	if(can_recover())
 		damage = clamp(0, damage - round(amount, 0.1), max_damage)
 
-/obj/item/organ/proc/robotize(var/company = /decl/prosthetics_manufacturer/basic_human, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel, var/check_bodytype, var/check_species)
-	vital_to_owner = null
-	BP_SET_PROSTHETIC(src)
-	QDEL_NULL(dna)
-	reagents?.clear_reagents()
-	material = GET_DECL(apply_material)
-	matter = null
-	create_matter()
-
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
@@ -370,7 +391,7 @@
 	target.attackby(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
-	return (!BP_IS_PROSTHETIC(src) && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))
+	return !(bodytype.body_flags & BODY_FLAG_NO_PAIN)
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
@@ -499,6 +520,15 @@ var/global/list/ailment_reference_cache = list()
 		else if(ailment.scanner_diagnosis_string && scanner)
 			LAZYADD(., ailment.replace_tokens(message = ailment.scanner_diagnosis_string, user = user))
 
+/obj/item/organ/proc/get_ailment_of_type(ailment_type)
+	for(var/datum/ailment/ext_ailment in ailments)
+		if(ailment_type == ext_ailment.type)
+			return ext_ailment
+	return null
+
+/obj/item/organ/proc/has_ailment_of_type(ailment_type)
+	return !!get_ailment_of_type(ailment_type)
+
 //Handles only the installation of the organ, without triggering any callbacks.
 //if we're an internal organ, having a null "target" is legal if we have an "affected"
 //CASES:
@@ -573,9 +603,10 @@ var/global/list/ailment_reference_cache = list()
 	return !owner && ..()
 
 /obj/item/organ/proc/is_vital_to_owner()
+	var/decl/bodytype/root_bodytype = owner?.get_bodytype()
 	if(isnull(vital_to_owner))
-		if(!owner?.species)
+		if(!root_bodytype)
 			vital_to_owner = null
 			return FALSE
-		vital_to_owner = (organ_tag in owner.species.vital_organs)
+		vital_to_owner = (organ_tag in root_bodytype.vital_organs)
 	return vital_to_owner

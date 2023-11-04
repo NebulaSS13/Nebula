@@ -66,12 +66,14 @@
 		<option value='?_src_=vars;removeaura=\ref[src]'>Remove Aura</option>
 		<option value='?_src_=vars;addstressor=\ref[src]'>Add Stressor</option>
 		<option value='?_src_=vars;removestressor=\ref[src]'>Remove Stressor</option>
+		<option value='?_src_=vars;setstatuscond=\ref[src]'>Set Status Condition</option>
 		"}
 
 /mob/living/carbon/human/get_view_variables_options()
 	return ..() + {"
 		<option value='?_src_=vars;refreshoverlays=\ref[src]'>Refresh Visible Overlays</option>
 		<option value='?_src_=vars;setspecies=\ref[src]'>Set Species</option>
+		<option value='?_src_=vars;setbodytype=\ref[src]'>Set Bodytype</option>
 		<option value='?_src_=vars;addailment=\ref[src]'>Add Ailment</option>
 		<option value='?_src_=vars;remailment=\ref[src]'>Remove Ailment</option>
 		<option value='?_src_=vars;dressup=\ref[src]'>Dressup</option>

@@ -31,15 +31,15 @@
 	singular_name    = "sheet"
 	w_class          = ITEM_SIZE_NORMAL
 	max_amount       = 50
-	material         = /decl/material/solid/paper
+	material         = /decl/material/solid/organic/paper
 	force            = 1
 	throwforce       = 1
 	throw_range      = 5
 	throw_speed      = 3
 	item_flags       = ITEM_FLAG_NO_BLUDGEON
-	///Check to prevent people from wrapping something multiple times at once.
+	/// Check to prevent people from wrapping something multiple times at once.
 	var/tmp/currently_wrapping = FALSE
-	///The type of wrapped item that will be produced
+	/// The type of wrapped item that will be produced
 	var/tmp/wrapped_result_type = /obj/item/parcel
 
 /obj/item/stack/package_wrap/twenty_five
@@ -125,15 +125,15 @@
 /obj/item/stack/package_wrap/create_matter()
 	. = ..()
 	//Cardboard for the tube, isn't in the matter_per_piece list, has to be added after that's been initialized
-	LAZYSET(matter, /decl/material/solid/cardboard, MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER)
+	LAZYSET(matter, /decl/material/solid/organic/cardboard, MATTER_AMOUNT_PRIMARY * HOLLOW_OBJECT_MATTER_MULTIPLIER)
 
 /obj/item/stack/package_wrap/update_matter()
 	//Keep track of the cardboard amount to prevent it creating infinite cardboard matter each times the stack changes
-	var/cardboard_amount = LAZYACCESS(matter, /decl/material/solid/cardboard)
+	var/cardboard_amount = LAZYACCESS(matter, /decl/material/solid/organic/cardboard)
 	matter = list()
 	for(var/mat in matter_per_piece)
 		matter[mat] = (matter_per_piece[mat] * amount)
-	matter[/decl/material/solid/cardboard] = cardboard_amount
+	matter[/decl/material/solid/organic/cardboard] = cardboard_amount
 
 ///Types that the wrapper cannot wrap, ever
 /obj/item/stack/package_wrap/proc/get_blacklist()
@@ -190,5 +190,5 @@
 	throwforce  = 1
 	throw_speed = 4
 	throw_range = 5
-	material    = /decl/material/solid/cardboard
+	material    = /decl/material/solid/organic/cardboard
 	obj_flags   = OBJ_FLAG_HOLLOW

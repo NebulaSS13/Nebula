@@ -115,11 +115,8 @@
 /obj/item/organ/internal/eyes/adherent
 	name = "receptor prism"
 	icon = 'mods/species/bayliens/adherent/icons/organs.dmi'
-	eye_icon = 'mods/species/bayliens/adherent/icons/eyes.dmi'
 	icon_state = "eyes"
 	organ_properties = ORGAN_PROP_CRYSTAL
-	contaminant_guard = TRUE
-	innate_flash_protection = FLASH_PROTECTION_MAJOR
 
 /obj/item/organ/internal/eyes/adherent/Initialize()
 	. = ..()

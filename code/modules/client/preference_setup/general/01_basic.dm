@@ -5,6 +5,16 @@
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
 
+// These two should always return a decl, NEVER null.
+/datum/preferences/proc/get_species_decl()
+	RETURN_TYPE(/decl/species)
+	return get_species_by_key(species || global.using_map.default_species)
+
+/datum/preferences/proc/get_bodytype_decl()
+	RETURN_TYPE(/decl/bodytype)
+	var/decl/species/species_decl = get_species_decl()
+	return species_decl.get_bodytype_by_name(bodytype) || species_decl.default_bodytype
+
 /datum/category_item/player_setup_item/physical/basic
 	name = "Basic"
 	sort_order = 1
@@ -14,13 +24,10 @@
 	pref.bodytype =       R.read("bodytype")
 	pref.real_name =      R.read("real_name")
 	pref.be_random_name = R.read("name_is_always_random")
-
-	pref.spawnpoint = R.read("spawnpoint")
-	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
-		if(pref.spawnpoint == spawnpoint.name)
-			pref.spawnpoint = spawnpoint.type
-			break
-	if(!ispath(pref.spawnpoint, /decl/spawnpoint))
+	var/decl/spawnpoint/loaded_spawnpoint = decls_repository.get_decl_by_id_or_var(R.read("spawnpoint"), /decl/spawnpoint)
+	if(istype(loaded_spawnpoint) && (loaded_spawnpoint in global.using_map.allowed_latejoin_spawns))
+		pref.spawnpoint = loaded_spawnpoint.type
+	else
 		pref.spawnpoint = global.using_map.default_spawn
 
 /datum/category_item/player_setup_item/physical/basic/save_character(datum/pref_record_writer/W)
@@ -28,14 +35,13 @@
 	W.write("bodytype",              pref.bodytype)
 	W.write("real_name",             pref.real_name)
 	W.write("name_is_always_random", pref.be_random_name)
-
 	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
-	W.write("spawnpoint", spawnpoint.name)
+	W.write("spawnpoint", spawnpoint.uid)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 
 	var/valid_spawn = FALSE
-	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_latejoin_spawns)
 		if(pref.spawnpoint == spawnpoint.type)
 			valid_spawn = TRUE
 			break
@@ -83,8 +89,13 @@
 		else
 			. += "<a href='?src=\ref[src];gender=\ref[G]'>[G.pronoun_string]</a>"
 
+	. += "<br><b>Spawnpoint</b>:"
 	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
-	. += "<br><b>Spawn point</b>: <a href='?src=\ref[src];spawnpoint=1'>[spawnpoint.name]</a>"
+	for(var/decl/spawnpoint/allowed_spawnpoint in global.using_map.allowed_latejoin_spawns)
+		if(spawnpoint == allowed_spawnpoint)
+			. += "<span class='linkOn'>[allowed_spawnpoint.name]</span>"
+		else
+			. += "<a href='?src=\ref[src];spawnpoint=\ref[allowed_spawnpoint]'>[allowed_spawnpoint.name]</a>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -126,13 +137,18 @@
 			pref.bodytype = new_body.name
 			if(new_body.associated_gender) // Set to default for male/female to avoid confusing people
 				pref.gender = new_body.associated_gender
-			if(!(pref.f_style in S.get_facial_hair_style_types(new_body.associated_gender)))
-				ResetFacialHair()
+			var/decl/sprite_accessory/hair/hairstyle = GET_DECL(pref.h_style)
+			if(!hairstyle?.accessory_is_available(null, S, new_body))
+				pref.h_style = new_body.default_h_style
+			var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(pref.f_style)
+			if(!facialhairstyle?.accessory_is_available(null, S, new_body))
+				pref.f_style = new_body.default_f_style
+			new_body.handle_post_bodytype_pref_set(pref)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["spawnpoint"])
-		var/decl/spawnpoint/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in global.using_map.allowed_spawns
-		if(!istype(choice) || !CanUseTopic(user))
+		var/decl/spawnpoint/choice = locate(href_list["spawnpoint"])
+		if(!istype(choice) || !CanUseTopic(user) || !(choice in global.using_map.allowed_latejoin_spawns))
 			return TOPIC_NOACTION
 		pref.spawnpoint = choice.type
 		return TOPIC_REFRESH

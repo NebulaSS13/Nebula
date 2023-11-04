@@ -15,7 +15,7 @@ var/global/const/VENDING_WIRE_IDSCAN = 8
 
 /datum/wires/vending/CanUse(var/mob/living/L)
 	var/obj/machinery/vending/V = holder
-	if(!istype(L, /mob/living/silicon))
+	if(!issilicon(L))
 		if(V.seconds_electrified)
 			if(V.shock(L, 100))
 				return 0

@@ -966,16 +966,16 @@
 /area/outpost/abandoned)
 "ds" = (
 /obj/machinery/door/airlock/medical{
-	density = 0;
+	density = FALSE;
 	icon_state = "door_open";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/holosign/surgery,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "dt" = (
 /obj/structure/door_assembly{
-	anchored = 1
+	anchored = TRUE
 	},
 /turf/simulated/floor,
 /area/outpost/abandoned)
@@ -1243,7 +1243,7 @@
 /area/mine/explored)
 "el" = (
 /obj/structure/firedoor_assembly{
-	anchored = 1
+	anchored = TRUE
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -1845,7 +1845,7 @@
 /area/mine/explored)
 "gd" = (
 /obj/structure/windoor_assembly{
-	anchored = 1;
+	anchored = TRUE;
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1988,9 +1988,9 @@
 /area/outpost/abandoned)
 "gz" = (
 /obj/machinery/door/airlock/external{
-	density = 0;
+	density = FALSE;
 	icon_state = "door_open";
-	opacity = 0
+	opacity = FALSE
 	},
 /obj/machinery/door/blast/regular/open,
 /obj/machinery/door/firedoor,
@@ -2080,7 +2080,7 @@
 /obj/effect/decal/cleanable/blood/tracks/footprints,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/firedoor_assembly{
-	anchored = 1
+	anchored = TRUE
 	},
 /turf/simulated/floor/plating{
 	icon_state = "dmg2"

@@ -1,9 +1,8 @@
 /obj/item/taperecorder
 	name = "universal recorder"
 	desc = "A device that can record to cassette tapes, and play them. It automatically translates the content in playback."
-	icon = 'icons/obj/items/device/tape_recorder.dmi'
-	icon_state = "taperecorder"
-	item_state = "analyzer"
+	icon = 'icons/obj/items/device/tape_recorder/tape_recorder.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 
 	material = /decl/material/solid/metal/aluminium
@@ -26,7 +25,6 @@
 /obj/item/taperecorder/Initialize()
 	. = ..()
 	wires = new(src)
-	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(ispath(mytape))
 		mytape = new mytape(src)
 	global.listening_objects += src
@@ -42,7 +40,6 @@
 		qdel(mytape)
 		mytape = null
 	return ..()
-
 
 /obj/item/taperecorder/attackby(obj/item/I, mob/user, params)
 	if(IS_SCREWDRIVER(I))
@@ -355,39 +352,34 @@
 	sleep(300)
 	canprint = 1
 
-
 /obj/item/taperecorder/attack_self(mob/user)
 	if(maintenance)
 		wires.Interact(user)
 		return
-
 	if(recording || playing)
 		stop()
 	else
 		record()
 
-
 /obj/item/taperecorder/on_update_icon()
 	. = ..()
-	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-
+	icon_state = get_world_inventory_state()
 	if(!mytape)
-		icon_state = "[bis.base_icon_state]_empty"
+		icon_state = "[icon_state]_empty"
 	else if(recording)
-		icon_state = "[bis.base_icon_state]_recording"
+		icon_state = "[icon_state]_recording"
 	else if(playing)
-		icon_state = "[bis.base_icon_state]_playing"
+		icon_state = "[icon_state]_playing"
 	else
-		icon_state = "[bis.base_icon_state]_idle"
+		icon_state = "[icon_state]_idle"
 
 /obj/item/magnetic_tape
 	name = "tape"
 	desc = "A magnetic tape that can hold up to ten minutes of content."
-	icon = 'icons/obj/items/device/tape_casette.dmi'
-	icon_state = "tape_white"
-	item_state = "analyzer"
+	icon = 'icons/obj/items/device/tape_recorder/tape_casette_white.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE
@@ -405,9 +397,9 @@
 //#FIXME: Probably should be handled better.
 /obj/item/magnetic_tape/on_update_icon(var/draw_ribbon = TRUE)
 	. = ..()
+	icon_state = get_world_inventory_state()
 	if(draw_ribbon && ruined && max_capacity)
-		add_overlay(overlay_image(icon, "ribbonoverlay", flags = RESET_COLOR))
-
+		add_overlay(overlay_image(icon, "[icon_state]_ribbonoverlay", flags = RESET_COLOR))
 
 /obj/item/magnetic_tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	ruin()
@@ -527,14 +519,19 @@
 
 //Random colour tapes
 /obj/item/magnetic_tape/random/Initialize()
+	icon = pick(list(
+		'icons/obj/items/device/tape_recorder/tape_casette_white.dmi',
+		'icons/obj/items/device/tape_recorder/tape_casette_blue.dmi',
+		'icons/obj/items/device/tape_recorder/tape_casette_red.dmi',
+		'icons/obj/items/device/tape_recorder/tape_casette_yellow.dmi',
+		'icons/obj/items/device/tape_recorder/tape_casette_purple.dmi'
+	))
 	. = ..()
-	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
 
 /obj/item/magnetic_tape/loose
 	name = "magnetic tape"
 	desc = "Quantum-enriched self-repairing nanotape, used for magnetic storage of information."
-	icon = 'icons/obj/items/device/tape_casette.dmi'
-	icon_state = "magtape"
+	icon = 'icons/obj/items/device/tape_recorder/tape_casette_loose.dmi'
 	ruined = TRUE
 
 /obj/item/magnetic_tape/loose/fix()

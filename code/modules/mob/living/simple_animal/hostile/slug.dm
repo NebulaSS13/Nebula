@@ -1,7 +1,4 @@
-/*VOX SLUG
-Small, little HP, poisonous.
-*/
-
+// A SLUG: Small, little HP, poisonous.
 /mob/living/simple_animal/hostile/slug
 	name = "slug"
 	desc = "A vicious, viscous little creature, it has a mouth of too many teeth and a penchant for blood."
@@ -12,7 +9,7 @@ Small, little HP, poisonous.
 	maxHealth = 15
 	speed = 0
 	move_to_delay = 0
-	density = 1
+	density = TRUE
 	min_gas = null
 	mob_size = MOB_SIZE_MINISCULE
 	can_escape = TRUE
@@ -49,7 +46,7 @@ Small, little HP, poisonous.
 
 /mob/living/simple_animal/hostile/slug/AttackingTarget()
 	. = ..()
-	if(istype(., /mob/living/carbon/human))
+	if(ishuman(.))
 		var/mob/living/carbon/human/H = .
 		if(prob(H.getBruteLoss()/2))
 			attach(H)
@@ -66,7 +63,7 @@ Small, little HP, poisonous.
 
 /obj/item/holder/slug/attack(var/mob/target, var/mob/user)
 	var/mob/living/simple_animal/hostile/slug/V = contents[1]
-	if(!V.stat && istype(target, /mob/living/carbon/human))
+	if(!V.stat && ishuman(target))
 		var/mob/living/carbon/human/H = target
 		if(!do_mob(user, H, 30))
 			return

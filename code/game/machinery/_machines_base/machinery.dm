@@ -400,7 +400,7 @@ Class Procs:
 
 /obj/machinery/CouldUseTopic(var/mob/user)
 	..()
-	if(clicksound && istype(user, /mob/living/carbon))
+	if(clicksound && iscarbon(user))
 		playsound(src, clicksound, clickvol)
 
 /obj/machinery/proc/display_parts(mob/user)
@@ -486,6 +486,12 @@ Class Procs:
 	. = ..()
 	LAZYREMOVE(., component_parts)
 
+// This only includes external atoms by default, so we need to add components back.
+/obj/machinery/get_contained_matter()
+	. = ..()
+	for(var/obj/component in component_parts)
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., component.get_contained_matter())
+
 /obj/machinery/proc/get_auto_access()
 	var/area/A = get_area(src)
 	return A?.req_access?.Copy()
@@ -501,3 +507,6 @@ Class Procs:
 // Make sure that mapped subtypes get the right codex entry.
 /obj/machinery/get_codex_value()
 	return base_type || ..()
+
+/obj/machinery/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	return FALSE

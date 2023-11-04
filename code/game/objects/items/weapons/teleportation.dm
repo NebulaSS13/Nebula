@@ -82,7 +82,7 @@ Frequency:
 						continue
 					else
 						var/mob/M = W.loc
-						if (M.stat == 2)
+						if (M.stat == DEAD)
 							if (M.timeofdeath + 6000 < world.time)
 								continue
 
@@ -109,7 +109,7 @@ Frequency:
 			else
 				if (href_list["temp"])
 					src.temp = null
-		if (istype(src.loc, /mob))
+		if (ismob(src.loc))
 			attack_self(src.loc)
 		else
 			for(var/mob/M in viewers(1, src))

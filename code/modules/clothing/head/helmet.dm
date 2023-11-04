@@ -69,7 +69,7 @@
 	siemens_coefficient = 0.7
 	action_button_name = "Toggle Visor"
 	var/up = 0
-	matter = list(/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY)
+	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY)
 
 /obj/item/clothing/head/helmet/riot/attack_self(mob/user)
 	up = !up

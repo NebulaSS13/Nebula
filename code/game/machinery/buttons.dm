@@ -3,7 +3,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "launcherbtt"
 	desc = "A remote control switch for something."
-	anchored = 1
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_WINDOW_LAYER
 	power_channel = ENVIRON
@@ -47,8 +47,7 @@
 /obj/machinery/button/interface_interact(user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	if(istype(user, /mob/living/carbon))
-		playsound(src, "button", 60)
+	playsound(src, "button", 60)
 	activate(user)
 	return TRUE
 

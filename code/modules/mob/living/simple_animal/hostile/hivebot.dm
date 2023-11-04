@@ -63,7 +63,7 @@ Teleporter beacon, and its subtypes
 	health = 200
 	maxHealth = 200
 	status_flags = 0
-	anchored = 1
+	anchored = TRUE
 	stop_automated_movement = 1
 
 	var/bot_type = /mob/living/simple_animal/hostile/hivebot
@@ -257,11 +257,12 @@ The megabot
 		else
 			switch_mode(ATTACK_MODE_MELEE)
 		return
-	..()
+	return ..()
 
 /mob/living/simple_animal/hostile/hivebot/mega/Shoot(target, start, user, bullet)
-	..()
-	num_shots--
+	. = ..()
+	if(.)
+		num_shots--
 
 #undef ATTACK_MODE_MELEE
 #undef ATTACK_MODE_LASER

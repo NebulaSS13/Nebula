@@ -139,38 +139,57 @@
 				target.visible_message(SPAN_DANGER("\The [target] drops what they were holding as their [E ? E.name : "hand"] spasms!"))
 		return TRUE
 
-/decl/psionic_power/coercion/mindslave
-	name =          "Mindslave"
+/decl/psionic_power/coercion/beguile
+	name =          "Beguile"
 	cost =          28
 	cooldown =      200
 	use_grab =      TRUE
 	min_rank =      PSI_RANK_PARAMOUNT
-	use_description = "Grab a victim, target the eyes, then use the grab on them while on disarm intent, in order to convert them into a loyal mind-slave. The process takes some time, and failure is punished harshly."
+	use_description = "Grab a victim, target the eyes, then use the grab on them while on disarm intent, in order to beguile them into serving your cause."
 
-/decl/psionic_power/coercion/mindslave/invoke(var/mob/living/user, var/mob/living/target)
+/decl/psionic_power/coercion/beguile/invoke(var/mob/living/user, var/mob/living/target)
 	if(!istype(target) || user.get_target_zone() != BP_EYES)
 		return FALSE
 	. = ..()
 	if(.)
 		if(target.stat == DEAD || (target.status_flags & FAKEDEATH))
-			to_chat(user, "<span class='warning'>\The [target] is dead!</span>")
+			to_chat(user, SPAN_WARNING("\The [target] is dead!"))
 			return TRUE
 		if(!target.mind || !target.key)
-			to_chat(user, "<span class='warning'>\The [target] is mindless!</span>")
+			to_chat(user, SPAN_WARNING("\The [target] is mindless!"))
 			return TRUE
-		var/decl/special_role/thrall/thralls = GET_DECL(/decl/special_role/thrall)
-		if(thralls.is_antagonist(target.mind))
-			to_chat(user, "<span class='warning'>\The [target] is already in thrall to someone!</span>")
+		var/decl/special_role/beguiled/beguiled = GET_DECL(/decl/special_role/beguiled)
+		if(beguiled.is_antagonist(target.mind))
+			to_chat(user, SPAN_WARNING("\The [target] is already under a glamour!"))
 			return TRUE
-		user.visible_message("<span class='danger'><i>\The [user] seizes the head of \the [target] in both hands...</i></span>")
-		to_chat(user, "<span class='warning'>You plunge your mentality into that of \the [target]...</span>")
-		to_chat(target, "<span class='danger'>Your mind is invaded by the presence of \the [user]! They are trying to make you a slave!</span>")
-		if(!do_after(user, target.stat == CONSCIOUS ? 80 : 40, target, 0, 1))
-			user.psi.backblast(rand(10,25))
+
+		user.visible_message("<b>\The [user] seizes the head of \the [target] in both hands...</b>")
+		to_chat(user,   SPAN_NOTICE("You insinuate your mentality into that of \the [target]..."))
+		to_chat(target, SPAN_DANGER("Your mind is being beguiled by the presence of \the [user]! They are trying to pull you under their glamour!"))
+
+		var/accepted_glamour = alert(target, "Will you become \the [user]'s beguiled servant? Refusal will have harsh consequences.", "Beguilement", "No", "Yes")
+
+		// Redo all our validity checks post-blocking call.
+		if(QDELETED(user) || QDELETED(target) || !user.Adjacent(target) || user.incapacitated())
 			return TRUE
-		to_chat(user, "<span class='danger'>You sear through \the [target]'s neurons, reshaping as you see fit and leaving them subservient to your will!</span>")
-		to_chat(target, "<span class='danger'>Your defenses have eroded away and \the [user] has made you their mindslave.</span>")
-		thralls.add_antagonist(target.mind, new_controller = user)
+		if(target.stat == DEAD || (target.status_flags & FAKEDEATH))
+			return TRUE
+		if(!target.mind || !target.key)
+			return TRUE
+		if(!target.mind || beguiled.is_antagonist(target.mind))
+			return TRUE
+
+		if(accepted_glamour == "Yes")
+			to_chat(user,   SPAN_DANGER("You layer a glamour across the \the [target]'s senses, beguiling them to unwittingly follow your commands."))
+			to_chat(target, SPAN_DANGER("You have been ensnared by \the [user]'s glamour!"))
+			beguiled.add_antagonist(target.mind, new_controller = user)
+		else
+			to_chat(user,   SPAN_WARNING("\The [target] resists your glamour, writhing in your grip. You hurriedly release them before too much damage is done, but the psyche is left tattered. They should have no memory of this encounter, at least."))
+			to_chat(target, SPAN_DANGER("You resist \the [user], struggling free of their influence at the cost of your own mind!"))
+			to_chat(target, SPAN_DANGER("You fall into darkness, losing all memory of the encounter..."))
+			target.adjustBrainLoss(rand(25,40))
+			SET_STATUS_MAX(target, STAT_PARA, 10 SECONDS)
+
 		return TRUE
 
 /decl/psionic_power/coercion/assay
@@ -223,7 +242,7 @@
 		if(coercion_rank >= PSI_RANK_GRANDMASTER)
 			ADJ_STATUS(target, STAT_PARA, -1)
 		target.set_status(STAT_DROWSY, 0)
-		if(istype(target, /mob/living/carbon))
+		if(iscarbon(target))
 			var/mob/living/carbon/M = target
 			M.adjust_hallucination(-30)
 		return TRUE

@@ -16,7 +16,7 @@
 	name            = "hand labeler"
 	icon            = 'icons/obj/items/hand_labeler.dmi'
 	icon_state      = ICON_STATE_WORLD
-	material        = /decl/material/solid/plastic
+	material        = /decl/material/solid/organic/plastic
 	w_class         = ITEM_SIZE_SMALL
 	item_flags      = ITEM_FLAG_NO_BLUDGEON
 	matter          = list(
@@ -156,8 +156,8 @@
 			to_chat(user, SPAN_WARNING("\The [P] is not blank. You can't use that for refilling \the [src]."))
 			return
 
-		var/incoming_amt = LAZYACCESS(P.matter, /decl/material/solid/paper)
-		var/current_amt = LAZYACCESS(matter, /decl/material/solid/paper)
+		var/incoming_amt = LAZYACCESS(P.matter, /decl/material/solid/organic/paper)
+		var/current_amt = LAZYACCESS(matter, /decl/material/solid/organic/paper)
 		var/label_added = incoming_amt / LABEL_MATERIAL_COST
 
 		if(incoming_amt < LABEL_MATERIAL_COST)
@@ -236,7 +236,7 @@
 	. = ..()
 	//Dump label paper left
 	if(labels_left > 0)
-		var/decl/material/M = GET_DECL(/decl/material/solid/paper)
+		var/decl/material/M = GET_DECL(/decl/material/solid/organic/paper)
 		var/turf/T          = get_turf(src)
 		var/total_sheets    = round((labels_left * LABEL_MATERIAL_COST) / SHEET_MATERIAL_AMOUNT)
 		var/leftovers       = round((labels_left * LABEL_MATERIAL_COST) % SHEET_MATERIAL_AMOUNT)

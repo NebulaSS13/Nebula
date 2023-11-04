@@ -111,7 +111,7 @@
 	if((ismob(enterer) && !isliving(enterer))) // Observers and their ilk don't count even if visible
 		return
 
-	pulse(0)
+	pulse_device(0)
 	if(!holder)
 		visible_message("[html_icon(src)] *beep* *beep*")
 	cooldown = 2

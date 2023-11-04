@@ -44,9 +44,6 @@
 		/decl/emote/audible/gnarl
 		)
 
-/mob/living/carbon/brain/can_emote()
-	return (istype(container, /obj/item/mmi) && ..())
-
 /mob/living/carbon/brain
 	default_emotes = list(
 		/decl/emote/audible/alarm,

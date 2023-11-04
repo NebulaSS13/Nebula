@@ -3,8 +3,8 @@
 	desc = "A mysterious gateway built by unknown hands, it allows for faster than light travel to far-flung locations."
 	icon = 'icons/obj/machines/gateway.dmi'
 	icon_state = "off"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	var/active = 0
 
 
@@ -24,7 +24,7 @@
 
 //this is da important part wot makes things go
 /obj/machinery/gateway/centerstation
-	density = 1
+	density = TRUE
 	icon_state = "offcenter"
 
 	//warping vars
@@ -136,7 +136,7 @@
 
 
 /obj/machinery/gateway/centeraway
-	density = 1
+	density = TRUE
 	icon_state = "offcenter"
 	use_power = POWER_USE_OFF
 	var/calibrated = 1
@@ -214,7 +214,7 @@
 /obj/machinery/gateway/centeraway/Bumped(atom/movable/M)
 	if(!ready)	return
 	if(!active)	return
-	if(istype(M, /mob/living/carbon))
+	if(iscarbon(M))
 		for(var/obj/item/implant/exile/E in M)//Checking that there is an exile implant in the contents
 			if(E.imp_in == M)//Checking that it's actually implanted vs just in their pocket
 				to_chat(M, "The remote gate has detected your exile implant and is blocking your entry.")

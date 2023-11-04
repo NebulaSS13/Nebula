@@ -5,12 +5,11 @@
 	ui_loc = ui_belt
 	requires_organ_tag = BP_CHEST
 	requires_slot_flags = SLOT_LOWER_BODY
+	mob_overlay_layer = HO_BELT_LAYER
+	alt_mob_overlay_layer = HO_BELT_LAYER_ALT
 	quick_equip_priority = 4
 
-/datum/inventory_slot/belt/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_belt(redraw_mob)
-
-/datum/inventory_slot/belt/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
+/datum/inventory_slot/belt/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..()
 	if(.)
 		// Things with this flag can be worn on the belt slot without a uniform.
@@ -26,4 +25,6 @@
 
 /datum/inventory_slot/belt/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
+		if(user == owner)
+			return "You have [_holding.get_examine_line()] about your waist."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] about [pronouns.his] waist."

@@ -10,6 +10,7 @@
 	ingest_met = 0.02
 	flags = IGNORE_MOB_SIZE
 	value = 1.8
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	/// Magnitude of painkilling effect
 	var/pain_power = 35
 	/// How many units it need to process to reach max power

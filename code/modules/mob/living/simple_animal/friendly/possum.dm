@@ -14,7 +14,7 @@
 	maxHealth = 50
 	health = 50
 	response_harm = "stamps on"
-	density = 0
+	density = FALSE
 	minbodytemp = 223
 	maxbodytemp = 323
 	universal_speak = FALSE
@@ -25,25 +25,28 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
+	ai = /datum/ai/opossum
+	var/is_angry = FALSE
 
-	var/is_angry = FALSE 
-
-/mob/living/simple_animal/opossum/Life()
+/datum/ai/opossum
+	expected_type = /mob/living/simple_animal/opossum
+/datum/ai/opossum/do_process(time_elapsed)
 	. = ..()
-	if(. && !ckey && stat != DEAD && prob(1))
-		resting = (stat == UNCONSCIOUS)
-		if(!resting)
-			wander = initial(wander)
-			speak_chance = initial(speak_chance)
-			set_stat(CONSCIOUS)
-			if(prob(10))
-				is_angry = TRUE
-		else
-			wander = FALSE
-			speak_chance = 0
-			set_stat(UNCONSCIOUS)
-			is_angry = FALSE
-		update_icon()
+	if(!prob(1))
+		return
+	var/mob/living/simple_animal/opossum/poss = body
+	poss.resting = (poss.stat == UNCONSCIOUS)
+	if(poss.resting)
+		poss.wander = FALSE
+		poss.speak_chance = 0
+		poss.set_stat(UNCONSCIOUS)
+		poss.is_angry = FALSE
+	else
+		poss.wander = initial(poss.wander)
+		poss.speak_chance = initial(poss.speak_chance)
+		poss.set_stat(CONSCIOUS)
+		if(prob(10))
+			poss.is_angry = TRUE
 
 /mob/living/simple_animal/opossum/adjustBruteLoss(damage)
 	. = ..()

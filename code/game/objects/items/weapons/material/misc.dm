@@ -7,6 +7,7 @@
 	icon_state = "harpoon"
 	item_state = "harpoon"
 	max_force = 20
+	item_flags = ITEM_FLAG_IS_WEAPON
 	material_force_multiplier = 0.3 // 18 with hardness 60 (steel)
 	thrown_material_force_multiplier = 0.6
 	attack_verb = list("jabbed","stabbed","ripped")
@@ -50,6 +51,7 @@
 	icon = 'icons/obj/items/tool/hatchet.dmi'
 	icon_state = "hatchet"
 	max_force = 15
+	item_flags = ITEM_FLAG_IS_WEAPON
 	material_force_multiplier = 0.2 // 12 with hardness 60 (steel)
 	thrown_material_force_multiplier = 0.25 // 15 with weight 60 (steel)
 	w_class = ITEM_SIZE_SMALL
@@ -99,7 +101,7 @@
 	desc = "A long, machine-stamped blade with a somewhat ungainly handle. Found in military surplus stores, malls, and horror movies since before interstellar travel."
 	base_parry_chance = 40
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/hatchet/machete/deluxe
 	name = "deluxe machete"
@@ -150,7 +152,7 @@
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "bashed")
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/cross/silver
 	material = /decl/material/solid/metal/silver

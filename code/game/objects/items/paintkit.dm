@@ -1,7 +1,7 @@
 /obj/item/kit
 	icon_state = "modkit"
 	icon = 'icons/obj/items/modkit.dmi'
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/new_name = "exosuit"     // What is the variant called?
 	var/new_desc = "An exosuit." // How is the new exosuit described?
 	var/new_icon                 // What base icon will the new exosuit use?
@@ -57,7 +57,7 @@
 
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			bodytype_equip_flags = H.bodytype.bodytype_flag
+			bodytype_equip_flags = H.get_bodytype().bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE
@@ -76,7 +76,7 @@
 
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			bodytype_equip_flags = H.bodytype.bodytype_flag
+			bodytype_equip_flags = H.get_bodytype().bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE

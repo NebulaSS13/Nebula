@@ -4,5 +4,8 @@
 		unbuckle_mob()
 	if(hiding)
 		hiding = FALSE
+	var/obj/item/rig/rig = get_rig()
+	if(rig)
+		rig.notify_ai(SPAN_DANGER("Warning: user death event. Mobility control passed to integrated intelligence system."))
 	if(.)
 		stop_aiming(no_message=1)

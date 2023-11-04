@@ -42,8 +42,8 @@ var/global/list/message_servers = list()
 	name = "messaging server"
 	icon = 'icons/obj/machines/tcomms/message_server.dmi'
 	icon_state = "message_server"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 10
 	active_power_usage = 100
 

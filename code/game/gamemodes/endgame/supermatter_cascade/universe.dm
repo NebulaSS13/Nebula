@@ -114,9 +114,9 @@ var/global/universe_has_ended = 0
 
 /datum/universal_state/supermatter_cascade/proc/PlayerSet()
 	for(var/datum/mind/M in global.player_list)
-		if(!istype(M.current,/mob/living))
+		if(!isliving(M.current))
 			continue
-		if(M.current.stat!=2)
+		if(M.current.stat != DEAD)
 			SET_STATUS_MAX(M.current, STAT_WEAK, 10)
 			M.current.flash_eyes()
 

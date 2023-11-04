@@ -101,7 +101,7 @@
 		if(istext(response))
 			last_comms = T.get_response(response, "No thank you.")
 		else
-			last_comms = T.get_response("trade_complete", "Thank you!")
+			last_comms = T.get_response(TRADER_TRADE_COMPLETE, "Thank you!")
 			T.trade(null,num, get_turf(pad))
 			bank -= response
 		return
@@ -119,14 +119,14 @@
 	if(pad)
 		var/list/targets = pad.get_targets()
 		for(var/target in targets)
-			if(!computer_emagged && istype(target,/mob/living/carbon/human))
+			if(!computer_emagged && ishuman(target))
 				last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
 				return
 		var/response = T.offer_items_for_trade(targets,num, get_turf(pad), skill)
 		if(istext(response))
-			last_comms = T.get_response(response,"No, a million times no.")
+			last_comms = T.get_response(response, "No, a million times no.")
 		else
-			last_comms = T.get_response("trade_complete","Thanks for your business!")
+			last_comms = T.get_response(TRADER_TRADE_COMPLETE, "Thanks for your business!")
 
 		return
 	last_comms = "PAD NOT CONNECTED"
@@ -138,7 +138,7 @@
 		if(istext(response))
 			last_comms = T.get_response(response, "Nope. Nope nope nope.")
 		else
-			last_comms = T.get_response("trade_complete", "Glad to be of service!")
+			last_comms = T.get_response(TRADER_TRADE_COMPLETE, "Glad to be of service!")
 			bank += response
 		return
 	last_comms = "PAD NOT CONNECTED"
@@ -214,7 +214,7 @@
 	var/datum/trader/T = get_current_trader()
 	if(T)
 		if(!T.can_hail())
-			last_comms = T.get_response("hail_deny", "No, I'm not speaking with you.")
+			last_comms = T.get_response(TRADER_HAIL_DENY, "No, I'm not speaking with you.")
 			. = 1
 		else
 			if(href_list["PRG_hail"])

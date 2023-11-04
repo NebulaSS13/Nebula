@@ -15,4 +15,4 @@
 	meat_amount = 1
 	bone_amount = 1
 	skin_amount = 1
-	skin_material = /decl/material/solid/skin/lizard
+	skin_material = /decl/material/solid/organic/skin/lizard

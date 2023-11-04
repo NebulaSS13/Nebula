@@ -301,9 +301,8 @@
 	var/obj/item/paper/P = pages[1]
 	icon       = P.icon
 	icon_state = P.icon_state
+	copy_overlays(P.overlays)
 
-	for(var/overlay in P.overlays)
-		add_overlay(overlay)
 
 	var/paper_count = 0
 	var/photo_count = 0

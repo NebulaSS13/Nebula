@@ -8,7 +8,7 @@ var/global/list/whitelist = list()
 	return 1
 
 /proc/load_whitelist()
-	whitelist = file2list(WHITELISTFILE, FALSE)
+	whitelist = file2list(WHITELISTFILE)
 	if(!length(whitelist))
 		whitelist = null
 

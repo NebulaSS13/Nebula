@@ -440,8 +440,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_chat(usr, SPAN_WARNING("There is no active key like that in the game or the person is not currently a ghost."))
 		return
 
-	var/mob/living/carbon/human/new_character = new(pick(global.latejoin_locations))//The mob being spawned.
-
+	var/mob/living/carbon/human/new_character = new(get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN)) //The mob being spawned.
 	var/datum/computer_file/report/crew_record/record_found			//Referenced to later to either randomize or not randomize the character.
 	if(G_found.mind && !G_found.mind.active)
 		record_found = get_crewmember_record(G_found.real_name)
@@ -450,7 +449,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		new_character.real_name = record_found.get_name()
 		new_character.set_gender(record_found.get_gender())
 		new_character.set_age(record_found.get_age())
-		new_character.b_type = record_found.get_bloodtype()
+		new_character.blood_type = record_found.get_bloodtype()
 	else
 		new_character.set_gender(pick(MALE,FEMALE))
 		var/datum/preferences/A = new()
@@ -473,9 +472,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		new_character.mind.assigned_role = global.using_map.default_job_title//If they somehow got a null assigned role.
 
 	//DNA
-	new_character.dna.ready_dna(new_character)
-	if(record_found)//Pull up their name from database records if they did have a mind.
-		new_character.dna.unique_enzymes = record_found.get_dna()//Enzymes are based on real name but we'll use the record for conformity.
+	if(new_character.dna)
+		new_character.dna.ready_dna(new_character)
+		if(record_found)//Pull up their name from database records if they did have a mind.
+			new_character.dna.unique_enzymes = record_found.get_dna()
 	new_character.key = G_found.key
 
 	/*
@@ -487,12 +487,12 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/player_key = G_found.key
 
 	//Now for special roles and equipment.
-	var/decl/special_role/antag_data = ispath(new_character.mind.assigned_special_role, /decl/special_role) && GET_DECL(new_character.mind.assigned_special_role)
-	if(antag_data)
+	var/decl/special_role/antag_data = GET_DECL(new_character.mind.assigned_special_role)
+	if(istype(antag_data))
 		antag_data.add_antagonist(new_character.mind)
 		antag_data.place_mob(new_character)
 	else
-		SSjobs.equip_rank(new_character, new_character.mind.assigned_role, 1)
+		SSjobs.equip_job_title(new_character, new_character.mind.assigned_role, 1)
 
 	//Announces the character on all the systems, based on the record.
 	if(!issilicon(new_character))//If they are not a cyborg/AI.
@@ -516,7 +516,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!input)
 		return
 	for(var/mob/living/silicon/ai/M in SSmobs.mob_list)
-		if (M.stat == 2)
+		if (M.stat == DEAD)
 			to_chat(usr, "Upload failed. No signal is being detected from the AI.")
 		else if (M.see_in_dark == 0)
 			to_chat(usr, "Upload failed. Only a faint signal is being detected from the AI, and it is not responding to our requests. It may be low on power.")

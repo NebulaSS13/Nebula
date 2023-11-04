@@ -64,3 +64,9 @@
 		return FALSE //When deleting don't bother running effects
 	O.on_add_effects(src)
 	return TRUE
+
+/mob/living/proc/delete_organs()
+	SHOULD_CALL_PARENT(TRUE)
+	var/list/organs = get_organs()
+	QDEL_LIST(organs)
+	return

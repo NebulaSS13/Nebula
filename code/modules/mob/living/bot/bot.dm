@@ -4,7 +4,7 @@
 	maxHealth = 20
 	icon = 'icons/mob/bot/placeholder.dmi'
 	universal_speak = TRUE
-	density = 0
+	density = FALSE
 
 	meat_type = null
 	meat_amount = 0
@@ -429,3 +429,8 @@
 			//if((dir & EAST ) && (D.dir & (NORTH|SOUTH)))	return !D.check_access(ID)
 		else return !D.check_access(ID)	// it's a real, air blocking door
 	return 0
+
+/mob/living/bot/GetIdCards(exceptions = null)
+	. = ..()
+	if(istype(botcard))
+		LAZYDISTINCTADD(., botcard)

@@ -6,7 +6,7 @@
 	var/image/current_highlight             // Current dummy image holding our highlight.
 
 	var/mouseover_refresh_timer             // Holds an ID to the timer used to update the mouseover highlight.
-	var/last_mouseover_params               // Stores mouse/keyboard params as of last mouseover, to check for shift being held. 
+	var/last_mouseover_params               // Stores mouse/keyboard params as of last mouseover, to check for shift being held.
 	var/last_mouseover_highlight_time       // Stores last world.time we mouseover'd, to prevent it happening more than once per world.tick_lag.
 
 /client/New()
@@ -53,7 +53,7 @@
 	// Copy over the atom's appearance to our holder object.
 	// client.images does not respect pixel offsets for images, but vis contents does,
 	// and images have vis contents - so we throw a null image into client.images, then
-	// throw a holder object with the appearance of the mouse-overed atom into its vis contents. 
+	// throw a holder object with the appearance of the mouse-overed atom into its vis contents.
 	mouseover_highlight_dummy.appearance = AM
 	mouseover_highlight_dummy.name = ""
 	mouseover_highlight_dummy.verbs.Cut()
@@ -69,14 +69,14 @@
 	mouseover_highlight_dummy.pixel_z = 0
 
 	// Replane to be over the UI, make sure it can't block clicks, and set its outline.
-	mouseover_highlight_dummy.mouse_opacity = 0
+	mouseover_highlight_dummy.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	mouseover_highlight_dummy.layer = HUD_PLANE
 	mouseover_highlight_dummy.plane = HUD_ABOVE_ITEM_LAYER
 	mouseover_highlight_dummy.alpha = prefs?.UI_mouseover_alpha || 255
 	mouseover_highlight_dummy.appearance_flags |= (KEEP_TOGETHER|RESET_COLOR)
 	mouseover_highlight_dummy.add_filter("glow", 1, list("drop_shadow", color = (prefs?.UI_mouseover_color || COLOR_AMBER) + "F0", size = 1, offset = 1, x = 0, y = 0))
 
-	// Replanes the overlays to avoid explicit plane/layer setting (such as 
+	// Replanes the overlays to avoid explicit plane/layer setting (such as
 	// computer overlays) interfering with the ordering of the highlight.
 	if(length(mouseover_highlight_dummy.overlays))
 		var/list/replaned_overlays

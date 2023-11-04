@@ -1,5 +1,3 @@
-var/global/list/gamemode_cache = list()
-
 /datum/configuration
 	var/server_name = "Nebula 13"		// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
@@ -278,25 +276,24 @@ var/global/list/gamemode_cache = list()
 	var/exoplanet_max_day_duration = 40 MINUTES
 	///If true, exoplanets won't have daycycles
 	var/disable_daycycle = FALSE
+	/// Whether or not you will show a message when examining something.
+	var/visible_examine = TRUE
 
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
 
 /datum/configuration/New()
-	var/list/L = subtypesof(/datum/game_mode)
-	for (var/T in L)
-		// I wish I didn't have to instance the game modes in order to look up
-		// their information, but it is the only way (at least that I know of).
-		var/datum/game_mode/M = new T()
-		if (M.config_tag)
-			gamemode_cache[M.config_tag] = M // So we don't instantiate them repeatedly.
-			if(!(M.config_tag in modes))		// ensure each mode is added only once
-				log_misc("Adding game mode [M.name] ([M.config_tag]) to configuration.")
-				src.modes += M.config_tag
-				src.mode_names[M.config_tag] = M.name
-				src.probabilities[M.config_tag] = M.probability
-				if (M.votable)
-					src.votable_modes += M.config_tag
+	var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
+	for (var/mode_type in all_modes)
+		var/decl/game_mode/game_mode = all_modes[mode_type]
+		if (!game_mode.uid || !(game_mode.uid in modes))
+			continue
+		log_misc("Adding game mode [game_mode.name] ([game_mode.uid]) to configuration.")
+		src.modes += game_mode.uid
+		src.mode_names[game_mode.uid] = game_mode.name
+		src.probabilities[game_mode.uid] = game_mode.probability
+		if (game_mode.votable)
+			src.votable_modes += game_mode.uid
 	src.votable_modes += "secret"
 
 /datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
@@ -837,8 +834,13 @@ var/global/list/gamemode_cache = list()
 				if("show_typing_indicator_for_whispers")
 					config.show_typing_indicator_for_whispers = TRUE
 
+				if("visible_examine")
+					config.visible_examine = text2num(value)
+
 				else
-					log_misc("Unknown setting in configuration: '[name]'")
+					//crappy hook to get modpacks to load any extra config
+					if(!load_mod_config(name, value))
+						log_misc("Unknown setting in configuration: '[name]'")
 
 		else if(type == "game_options")
 			if(!value)
@@ -945,7 +947,9 @@ var/global/list/gamemode_cache = list()
 					config.disable_daycycle = TRUE
 
 				else
-					log_misc("Unknown setting in configuration: '[name]'")
+					//crappy hook to get modpacks to load any extra config
+					if(!load_mod_config(name, value))
+						log_misc("Unknown setting in game_options configuration: '[name]'")
 
 	fps = round(fps)
 	if(fps <= 0)
@@ -989,25 +993,35 @@ var/global/list/gamemode_cache = list()
 			if ("password")
 				sqlpass = value
 			else
-				log_misc("Unknown setting in configuration: '[name]'")
-
-/datum/configuration/proc/pick_mode(mode_name)
-	// I wish I didn't have to instance the game modes in order to look up
-	// their information, but it is the only way (at least that I know of).
-	for (var/game_mode in gamemode_cache)
-		var/datum/game_mode/M = gamemode_cache[game_mode]
-		if (M.config_tag && M.config_tag == mode_name)
-			return M
+				//crappy hook to get modpacks to load any extra config
+				if(!load_mod_dbconfig(name, value))
+					log_misc("Unknown setting in DB configuration: '[name]'")
 
 /datum/configuration/proc/get_runnable_modes()
-	var/list/runnable_modes = list()
-	for(var/game_mode in gamemode_cache)
-		var/datum/game_mode/M = gamemode_cache[game_mode]
-		if(M && !M.startRequirements() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
-			runnable_modes[M.config_tag] = config.probabilities[M.config_tag]
-	return runnable_modes
+	. = list()
+	var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
+	for(var/mode_type in all_modes)
+		var/decl/game_mode/game_mode = all_modes[mode_type]
+		if(!game_mode.startRequirements() && !isnull(config.probabilities[game_mode.uid]) && config.probabilities[game_mode.uid] > 0)
+			.[game_mode.uid] = config.probabilities[game_mode.uid]
 
 /datum/configuration/proc/load_event(filename)
 	var/event_info = safe_file2text(filename, FALSE)
 	if(event_info)
 		custom_event_msg = event_info
+
+///Hook stub for loading modpack specific configs. Just override in modpack.
+/datum/configuration/proc/load_mod_config(var/name, var/value)
+	//Force it to run parents overrides, so other modpacks don't just completely break config loading for one another
+	SHOULD_CALL_PARENT(TRUE)
+	return
+
+///Hook stub for loading modpack specific game_options. Just override in modpack.
+/datum/configuration/proc/load_mod_game_options(var/name, var/value)
+	SHOULD_CALL_PARENT(TRUE)
+	return
+
+///Hook stub for loading modpack specific dbconfig. Just override in modpack.
+/datum/configuration/proc/load_mod_dbconfig(var/name, var/value)
+	SHOULD_CALL_PARENT(TRUE)
+	return

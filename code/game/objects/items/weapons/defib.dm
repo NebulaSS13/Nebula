@@ -13,7 +13,7 @@
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = "{'biotech':4,'powerstorage':2}"
 	action_button_name = "Remove/Replace Paddles"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,
@@ -68,20 +68,10 @@
 	toggle_paddles()
 
 /obj/item/defibrillator/attack_hand(mob/user)
-	if(loc != user || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(loc != user || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	toggle_paddles()
 	return TRUE
-
-// what is this proc doing?
-/obj/item/defibrillator/handle_mouse_drop(var/atom/over, var/mob/user)
-	if(ismob(loc))
-		var/mob/M = loc
-		if(M.try_unequip(src))
-			add_fingerprint(usr)
-			M.put_in_hands(src)
-			return TRUE
-	. = ..()
 
 /obj/item/defibrillator/attackby(obj/item/W, mob/user, params)
 	if(W == paddles)
@@ -202,7 +192,7 @@
 	force = 2
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_SECONDARY, /decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
 	max_health = ITEM_HEALTH_NO_DAMAGE
 
@@ -260,7 +250,7 @@
 
 //Checks for various conditions to see if the mob is revivable
 /obj/item/shockpaddles/proc/can_defib(mob/living/carbon/human/H) //This is checked before doing the defib operation
-	if((H.species.species_flags & SPECIES_FLAG_NO_SCAN) || H.isSynthetic())
+	if(H.has_body_flag(BODY_FLAG_NO_DEFIB))
 		return "buzzes, \"Unrecogized physiology. Operation aborted.\""
 
 	if(!check_contact(H))
@@ -446,7 +436,7 @@
 	M.switch_from_dead_to_living_mob_list()
 	M.timeofdeath = 0
 	M.set_stat(UNCONSCIOUS) //Life() can bring them back to consciousness if it needs to.
-	M.refresh_visible_overlays()
+	M.try_refresh_visible_overlays()
 	M.failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	M.reload_fullscreen()
 

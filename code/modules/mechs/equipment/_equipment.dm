@@ -6,7 +6,7 @@
 	icon_state = ""
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
 	)
 	force = 10
@@ -87,7 +87,7 @@
 /obj/item/mech_equipment/proc/MouseUpInteraction()
 	return 0
 
-/obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
+/obj/item/mech_equipment/mob_can_unequip(mob/user, slot, disable_warning = FALSE)
 	. = ..()
 	if(. && owner)
 		//Installed equipment shall not be unequiped.

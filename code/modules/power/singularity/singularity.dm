@@ -6,7 +6,6 @@ var/global/list/singularities = list()
 	icon_state = "singularity_s1"
 	anchored =   TRUE
 	density =    TRUE
-	unacidable = TRUE //Don't comment this out.
 	layer = SINGULARITY_LAYER
 	light_power = 1
 	light_range = 6

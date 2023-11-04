@@ -6,8 +6,8 @@
 	if(!H.isSynthetic() && H.should_have_organ(BP_HEART))
 		var/obj/item/organ/internal/heart/O = H.get_organ(BP_HEART, /obj/item/organ/internal/heart)
 		if (!O || !BP_IS_PROSTHETIC(O)) // Don't make medical freak out over prosthetic hearts
-			crew_data["true_pulse"] = H.pulse()
-			crew_data["pulse"] = H.get_pulse(GETPULSE_TOOL)
+			crew_data["true_pulse"] = H.get_pulse()
+			crew_data["pulse"] = H.get_pulse_as_string(GETPULSE_TOOL)
 			switch(crew_data["true_pulse"])
 				if(PULSE_NONE)
 					crew_data["pulse_span"] = "bad"

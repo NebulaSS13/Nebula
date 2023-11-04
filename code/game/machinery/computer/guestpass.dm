@@ -50,7 +50,7 @@
 	icon_state = "guest"
 	icon_keyboard = null
 	icon_screen = "pass"
-	density = 0
+	density = FALSE
 
 	var/obj/item/card/id/giver
 	var/list/accesses = list()
@@ -91,7 +91,7 @@
 
 	if(giver)
 		data["giver"] = !!giver
-		data["giver_name"] = giver.rank || giver.assignment
+		data["giver_name"] = giver.position || giver.assignment
 		data["giv_name"] = giv_name
 
 		var/list/giver_access = list()

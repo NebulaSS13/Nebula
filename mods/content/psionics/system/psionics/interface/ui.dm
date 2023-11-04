@@ -16,6 +16,6 @@
 
 /obj/screen/psi/on_update_icon()
 	if(hidden)
-		invisibility = 101
+		set_invisibility(INVISIBILITY_ABSTRACT)
 	else
-		invisibility = 0
+		set_invisibility(INVISIBILITY_NONE)

@@ -1,5 +1,5 @@
 /obj/structure/deity/trap
-	density = 0
+	density = FALSE
 	health = 1
 	var/triggered = 0
 
@@ -24,7 +24,7 @@
 	return
 
 /obj/structure/deity/trap/proc/trigger(var/atom/entered, var/atom/movable/enterer)
-	if(triggered > world.time || !istype(enterer, /mob/living))
+	if(triggered > world.time || !isliving(enterer))
 		return
 
 	triggered = world.time + 30 SECONDS

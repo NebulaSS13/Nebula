@@ -13,8 +13,8 @@
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_HOLLOW
-	unacidable = 1 //glass doesn't dissolve in acid
-
+	material = /decl/material/solid/glass
+	abstract_type = /obj/item/chems/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
@@ -37,7 +37,8 @@
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
-		/obj/machinery/radiocarbon_spectrometer
+		/obj/machinery/radiocarbon_spectrometer,
+		/obj/machinery/material_processing/extractor
 	)
 
 /obj/item/chems/glass/examine(mob/user, distance)
@@ -118,8 +119,7 @@
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
-	unacidable = 0
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	material_force_multiplier = 0.2
 	slot_flags = SLOT_HEAD
 	drop_sound = 'sound/foley/donk1.ogg'
@@ -129,7 +129,7 @@
 	desc = "It's a wooden bucket. How rustic."
 	icon = 'icons/obj/items/wooden_bucket.dmi'
 	volume = 200
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user)
 	if(istype(D, /obj/item/mop))

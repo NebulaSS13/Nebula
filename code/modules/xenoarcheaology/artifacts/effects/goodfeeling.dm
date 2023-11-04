@@ -24,7 +24,7 @@
 		"You feel like the world is out to help you.")
 
 /datum/artifact_effect/goodfeeling/DoEffectTouch(var/mob/user)
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		affect_human(user, 50, 50)
 		return 1
 

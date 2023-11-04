@@ -29,9 +29,9 @@
 #define HOLOMAP_AREACOLOR_LIFTS       null
 
 // Handy defines to lookup the pixel offsets for holomap
-// Currently set to 0, left here in case of need for per map offsets
-#define HOLOMAP_PIXEL_OFFSET_X (0)
-#define HOLOMAP_PIXEL_OFFSET_Y (0)
+// world.maxx/y should always be greater than or equal to level_max_width/level_max_height
+#define HOLOMAP_PIXEL_OFFSET_X(zlevel) (round((world.maxx - SSmapping.levels_by_z[zlevel]?.level_max_width)/2))
+#define HOLOMAP_PIXEL_OFFSET_Y(zlevel) (round((world.maxy - SSmapping.levels_by_z[zlevel]?.level_max_height)/2))
 
 #define HOLOMAP_LEGEND_X 96
 #define HOLOMAP_LEGEND_Y 156

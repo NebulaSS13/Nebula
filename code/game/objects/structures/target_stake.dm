@@ -4,7 +4,7 @@
 	desc = "A thin platform with negatively-magnetized wheels."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_stake"
-	density = 1
+	density = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	var/obj/item/target/pinned_target
 
@@ -14,7 +14,7 @@
 		set_target(W)
 
 /obj/structure/target_stake/attack_hand(var/mob/user)
-	if (!pinned_target || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if (!pinned_target || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	to_chat(user, SPAN_NOTICE("You take \the [pinned_target] off the stake."))
 	user.put_in_hands(pinned_target)

@@ -8,7 +8,7 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'esoteric':2}"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/silicon = MATTER_AMOUNT_TRACE,
 		/decl/material/liquid/anfo = MATTER_AMOUNT_REINFORCEMENT, //#TODO: Slap RDX in here
@@ -83,7 +83,7 @@
 		if (istype(target, /turf/simulated/wall))
 			var/turf/simulated/wall/W = target
 			W.dismantle_wall(1)
-		else if(istype(target, /mob/living))
+		else if(isliving(target))
 			target.explosion_act(2) // c4 can't gib mobs anymore.
 		else
 			target.explosion_act(1)

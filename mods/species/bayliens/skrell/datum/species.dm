@@ -21,7 +21,7 @@
 	interference in their customs and values."
 
 	meat_type = /obj/item/chems/food/fish/octopus/skrell
-	bone_material = /decl/material/solid/bone/cartilage
+	bone_material = /decl/material/solid/organic/bone/cartilage
 	available_pronouns = list(
 		/decl/pronouns/skrell
 	)
@@ -31,7 +31,6 @@
 
 	burn_mod = 0.9
 	oxy_mod = 1.3
-	flash_mod = 1.2
 	toxins_mod = 0.8
 	siemens_coefficient = 1.3
 	warning_low_pressure = WARNING_LOW_PRESSURE * 1.4
@@ -42,15 +41,9 @@
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
-	darksight_range = 4
-
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8cd7a3"
-	base_color = "#006666"
-	base_hair_color = "#006666"
-	default_h_style = /decl/sprite_accessory/hair/skrell/short
 	organs_icon = 'mods/species/bayliens/skrell/icons/body/organs.dmi'
 
 	blood_types = list(
@@ -111,16 +104,6 @@
 		)
 	)
 
-	has_organ = list(
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_STOMACH =  /obj/item/organ/internal/stomach,
-		BP_LUNGS =    /obj/item/organ/internal/lungs/gills,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes/skrell
-	)
-
 	exertion_effect_chance = 10
 	exertion_hydration_scale = 1
 	exertion_charge_scale = 1
@@ -170,5 +153,3 @@
 	name = "amphibian eyes"
 	desc = "Large black orbs, belonging to some sort of giant frog by looks of it."
 	icon = 'mods/species/bayliens/skrell/icons/body/organs.dmi'
-	eye_icon = 'mods/species/bayliens/skrell/icons/body/eyes.dmi'
-	apply_eye_colour = FALSE

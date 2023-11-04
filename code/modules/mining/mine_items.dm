@@ -225,7 +225,7 @@
 /obj/item/stack/flag/attack_self(var/mob/user)
 	var/turf/T = get_turf(src)
 
-	if(!istype(T) || !T.is_open())
+	if(!istype(T) || T.is_open())
 		to_chat(user, "<span class='warning'>There's no solid surface to plant \the [singular_name] on.</span>")
 		return
 
@@ -244,7 +244,7 @@
 
 /obj/item/stack/flag/proc/set_up()
 	upright = 1
-	anchored = 1
+	anchored = TRUE
 	update_icon()
 
 /obj/item/stack/flag/on_update_icon()
@@ -266,5 +266,5 @@
 
 /obj/item/stack/flag/proc/knock_down()
 	upright = 0
-	anchored = 0
+	anchored = FALSE
 	update_icon()

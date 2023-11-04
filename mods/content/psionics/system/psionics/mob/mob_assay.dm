@@ -29,11 +29,11 @@
 				use_rating = "<font color = '#FF0000'><b>[effective_rating]-Alpha-Plus</b></font>"
 				rating_descriptor = "This indicates a completely deviant psi complexus, either beyond or outside anything currently recorded. Approach with care."
 			// This space intentionally left blank (for Omega-Minus psi vampires. todo)
-			var/decl/special_role/thrall/thralls = GET_DECL(/decl/special_role/thrall)
-			if(viewer != usr && thralls.is_antagonist(mind) && ishuman(viewer))
+			var/decl/special_role/beguiled/beguiled = GET_DECL(/decl/special_role/beguiled)
+			if(viewer != usr && beguiled.is_antagonist(mind) && ishuman(viewer))
 				var/mob/living/H = viewer
 				if(H.psi && H.psi.get_rank(PSI_REDACTION) >= PSI_RANK_GRANDMASTER)
-					dat += "<font color='#FF0000'><b>Their mind has been cored like an apple, and enslaved by another operant psychic.</b></font>" // <A href='?src=\ref[H.psi];clear_thralldom=\ref[psi]'>>Attempt to remove</a>"
+					dat += "<font color='#FF0000'><b>Their mind has been subverted by another operant psychic; their actions are not their own.</b></font>"
 
 		if(!use_rating)
 			switch(effective_rating)
@@ -90,7 +90,7 @@
 		machine.last_assay = dat
 		return
 
-	var/interface_type = machine ? /datum/browser/written_digital : /datum/browser 
+	var/interface_type = machine ? /datum/browser/written_digital : /datum/browser
 	var/datum/browser/popup = new interface_type(viewer, "psi_assay_\ref[src]", "Psi-Assay")
 	popup.set_content(jointext(dat,null))
 	popup.open()

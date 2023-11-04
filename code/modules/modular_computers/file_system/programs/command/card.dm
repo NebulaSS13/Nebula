@@ -115,7 +115,7 @@
 		var/obj/item/photo/photo = user.get_active_hand()
 		return photo.img
 
-	if(istype(user, /mob/living/silicon))
+	if(issilicon(user))
 		var/mob/living/silicon/tempAI = user
 		var/obj/item/photo/selection = tempAI.GetPicture()
 		if (selection)
@@ -259,7 +259,7 @@
 					if(!isnull(selected_CR) && CanUseTopic(user))
 						id_card.registered_name = selected_CR.get_name()
 						id_card.assignment = selected_CR.get_job()
-						id_card.rank = selected_CR.get_rank()
+						id_card.position = selected_CR.get_rank()
 						id_card.dna_hash = selected_CR.get_dna()
 						id_card.fingerprint_hash = selected_CR.get_fingerprint()
 						id_card.card_gender = selected_CR.get_gender()
@@ -294,7 +294,7 @@
 					remove_nt_access(id_card)
 					apply_access(id_card, access)
 					id_card.assignment = t1
-					id_card.rank = t1
+					id_card.position = t1
 
 				callHook("reassign_employee", list(id_card))
 		if("access")

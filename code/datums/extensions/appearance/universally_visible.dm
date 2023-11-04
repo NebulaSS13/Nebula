@@ -53,7 +53,7 @@ var/global/list/universally_visible_atom_extensions = list()
 
 	I = image(null)
 	I.appearance = visible_atom
-	I.mouse_opacity = 0
+	I.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	I.pixel_x = world.icon_size * (atom_turf.x - mob_turf.x) + visible_atom.pixel_x
 	I.pixel_y = world.icon_size * (atom_turf.y - mob_turf.y) + visible_atom.pixel_y
 	I.loc = get_turf(mob_turf)

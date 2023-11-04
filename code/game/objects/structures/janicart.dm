@@ -3,8 +3,8 @@
 	desc = "The ultimate in janitorial carts! Has space for water, mops, signs, trash bags, and more!"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "cart"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
 	movable_flags = MOVABLE_FLAG_WHEELED
 	var/obj/item/storage/bag/trash/mybag	= null
@@ -85,7 +85,7 @@
 
 
 /obj/structure/janitorialcart/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	ui_interact(user)
 	return TRUE
@@ -231,7 +231,7 @@
 	. = ..()
 
 /obj/structure/bed/chair/janicart/attack_hand(mob/user)
-	if(!mybag || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!mybag || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	user.put_in_hands(mybag)
 	mybag = null
@@ -263,4 +263,4 @@
 	icon_state = "keys"
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_TRACE)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE)

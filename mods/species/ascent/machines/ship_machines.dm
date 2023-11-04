@@ -167,7 +167,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 		if(!(H.species.name in ALL_ASCENT_SPECIES))
 			to_chat(H, SPAN_WARNING("You have no idea how to use \the [src]."))
 			return TRUE
-	else if(!istype(user, /mob/living/silicon/robot/flying/ascent))
+	else if(!isascentdrone(user))
 		to_chat(user, SPAN_WARNING("You have no idea how to interface with \the [src]."))
 		return TRUE
 	user.visible_message(SPAN_NOTICE("\The [user] switches \the [src] [on ? "off" : "on"]."))

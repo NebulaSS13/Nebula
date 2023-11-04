@@ -130,7 +130,7 @@
 	return ..()
 
 /obj/item/chems/weldpack/attack_hand(mob/user)
-	if(!is_welder_attached() || !user.check_dexterity(DEXTERITY_GRIP))
+	if(!is_welder_attached() || !user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return ..()
 	if(user.is_holding_offhand(src))
 		detach_gun(user)
@@ -139,18 +139,6 @@
 	if(curslot == slot_back_str || curslot == slot_s_store_str)
 		detach_gun(user)
 		return TRUE
-	return ..()
-
-/obj/item/chems/weldpack/check_mousedrop_adjacency(atom/over, mob/user)
-	return (loc == user && istype(over, /obj/screen)) || ..()
-
-/obj/item/chems/weldpack/handle_mouse_drop(atom/over, mob/user)
-	if(loc == user && !user.incapacitated())
-		if(istype(over, /obj/screen/inventory))
-			var/obj/screen/inventory/I = over
-			if(user.try_unequip(src))
-				user.equip_to_slot_if_possible(src, I.slot_id)
-				return TRUE
 	return ..()
 
 /obj/item/chems/weldpack/on_update_icon()

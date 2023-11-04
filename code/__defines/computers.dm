@@ -74,4 +74,5 @@
 #define OS_FILE_NO_WRITE   -5
 #define OS_HARDDRIVE_SPACE -6
 #define OS_NETWORK_ERROR   -7
-#define OS_BAD_NAME        -8 
+#define OS_BAD_NAME        -8
+#define OS_BAD_TYPE        -9 // File type is unsupported on this hardware.

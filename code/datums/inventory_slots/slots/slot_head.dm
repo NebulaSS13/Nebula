@@ -7,16 +7,21 @@
 	requires_organ_tag = BP_HEAD
 	covering_flags = SLOT_HEAD
 	requires_slot_flags = SLOT_HEAD
+	mob_overlay_layer = HO_HEAD_LAYER
 	quick_equip_priority = 9
 
-/datum/inventory_slot/head/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	if(prop.flags_inv & (HIDEMASK|BLOCK_ALL_HAIR))
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			H.update_hair(0)	//rebuild hair
-		user.update_inv_ears(0)
-		user.update_inv_wear_mask(0)
-	user.update_inv_head(redraw_mob)
+/datum/inventory_slot/head/simple
+	requires_organ_tag = null
+	can_be_hidden = FALSE
+	ui_loc = "LEFT+1:16,BOTTOM:5"
+
+/datum/inventory_slot/head/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	if(prop?.flags_inv & (HIDEMASK|BLOCK_ALL_HAIR))
+		user.update_hair(FALSE)
+		user.update_equipment_overlay(slot_l_ear_str, FALSE)
+		user.update_equipment_overlay(slot_r_ear_str, FALSE)
+		user.update_equipment_overlay(slot_wear_mask_str, FALSE)
+	..()
 
 /datum/inventory_slot/head/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	. = ..()
@@ -28,4 +33,6 @@
 
 /datum/inventory_slot/head/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
+		if(user == owner)
+			return "You have [_holding.get_examine_line()] on your head."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] on [pronouns.his] head."

@@ -24,11 +24,26 @@
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL
 		)
 	ability_cooldown = 2 MINUTES
+	ai = /datum/ai/giant_crab
+
 	var/mob/living/carbon/human/victim //the human we're grabbing
 	var/grab_duration = 3 //duration of disable in life ticks to simulate a grab
 	var/grab_damage = 6 //brute damage before reductions, per crab's life tick
 	var/list/grab_desc = list("thrashes", "squeezes", "crushes")
 	var/continue_grab_prob = 35 //probability that a successful grab will be extended by one life tick
+
+/datum/ai/giant_crab
+	expected_type = /mob/living/simple_animal/hostile/retaliate/giant_crab
+
+/datum/ai/giant_crab/do_process(time_elapsed)
+	. = ..()
+	var/mob/living/simple_animal/hostile/retaliate/giant_crab/crab = body
+	if((crab.health > crab.maxHealth / 1.5) && length(crab.enemies) && prob(10))
+		if(crab.victim)
+			crab.release_grab()
+		crab.enemies = list()
+		crab.LoseTarget()
+		crab.visible_message(SPAN_NOTICE("\The [crab] lowers its pincer."))
 
 /obj/item/natural_weapon/pincers/giant
 	force = 15
@@ -46,18 +61,6 @@
 	. = ..()
 	if(. && ishuman(user))
 		reflect_unarmed_damage(user, BRUTE, "armoured carapace")
-
-/mob/living/simple_animal/hostile/retaliate/giant_crab/Life()
-	. = ..()
-	if(!.)
-		return
-
-	if((health > maxHealth / 1.5) && enemies.len && prob(10))
-		if(victim)
-			release_grab()
-		enemies = list()
-		LoseTarget()
-		visible_message("<span class='notice'>\The [src] lowers its pincer.</span>")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/do_delayed_life_action()
 	..()

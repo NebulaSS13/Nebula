@@ -16,7 +16,7 @@
 	desc = "Does card things."
 	icon = 'icons/obj/card.dmi'
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	slot_flags = SLOT_EARS
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
@@ -170,8 +170,8 @@ var/global/const/NO_EMAG_ACT = -50
 	var/icon/side
 
 	//alt titles are handled a bit weirdly in order to unobtrusively integrate into existing ID system
-	var/assignment = null	//can be alt title or the actual job
-	var/rank = null			//actual job
+	var/assignment //can be alt title or the actual job
+	var/position   // actual job
 
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
@@ -259,10 +259,9 @@ var/global/const/NO_EMAG_ACT = -50
 		id_card.card_gender = "Unset"
 	id_card.set_id_photo(src)
 
-	if(dna)
-		id_card.blood_type		= dna.b_type
-		id_card.dna_hash		= dna.unique_enzymes
-		id_card.fingerprint_hash= md5(dna.uni_identity)
+	id_card.blood_type       = get_blood_type()                       || "Unset"
+	id_card.dna_hash         = get_unique_enzymes()                   || "Unset"
+	id_card.fingerprint_hash = get_full_print(ignore_blockers = TRUE) || "Unset"
 
 /mob/living/carbon/human/set_id_info(var/obj/item/card/id/id_card)
 	..()
@@ -303,6 +302,7 @@ var/global/const/NO_EMAG_ACT = -50
 	return access.Copy()
 
 /obj/item/card/id/GetIdCard()
+	RETURN_TYPE(/obj/item/card/id)
 	return src
 
 /obj/item/card/id/GetIdCards()

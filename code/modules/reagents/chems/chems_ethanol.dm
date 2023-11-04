@@ -4,7 +4,8 @@
 	taste_description = "pure alcohol"
 	color = "#404030"
 	touch_met = 5
-	fuel_value = 0.75
+	ignition_point = T0C+150
+	accelerant_value = FUEL_VALUE_ACCELERANT
 	solvent_power = MAT_SOLVENT_MODERATE
 	uid = "chem_ethanol"
 
@@ -92,7 +93,8 @@
 	taste_mult = 1.5
 	color = "#33ee00"
 	strength = 12
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 	glass_name = "absinthe"
 	glass_desc = "Wormwood, anise, oh my."
@@ -104,7 +106,8 @@
 	taste_description = "hearty barley ale"
 	color = "#4c3100"
 	strength = 50
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 	glass_name = "ale"
 	glass_desc = "A freezing container of delicious ale"
@@ -118,7 +121,8 @@
 	color = "#ffd300"
 	strength = 50
 	nutriment_factor = 1
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 	glass_name = "beer"
 	glass_desc = "A freezing container of beer"
@@ -142,7 +146,8 @@
 	taste_mult = 1.1
 	color = "#0000cd"
 	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_bluecuracao"
 
 	glass_name = "blue curacao"
@@ -155,7 +160,8 @@
 	taste_mult = 1.1
 	color = "#ab3c05"
 	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_cognac"
 
 	glass_name = "cognac"
@@ -167,7 +173,8 @@
 	taste_description = "an alcoholic christmas tree"
 	color = "#0064c6"
 	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_gin"
 
 	glass_name = "gin"
@@ -181,7 +188,8 @@
 	taste_mult = 1.1
 	color = "#4c3100"
 	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_coffee"
 	glass_name = "coffee liqueur"
 	glass_desc = "Guaranteed to perk you up."
@@ -208,7 +216,8 @@
 	taste_description = "fruity alcohol"
 	color = "#138808" // rgb: 19, 136, 8
 	strength = 50
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_melon"
 
 	glass_name = "melon liqueur"
@@ -221,7 +230,8 @@
 	taste_mult = 1.1
 	color = "#ecb633"
 	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_rum"
 
 	glass_name = "rum"
@@ -233,7 +243,8 @@
 	taste_description = "dry alcohol"
 	color = "#dddddd"
 	strength = 25
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_sake"
 
 	glass_name = "sake"
@@ -245,7 +256,8 @@
 	taste_description = "paint stripper"
 	color = "#ffff91"
 	strength = 25
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_tequila"
 
 	glass_name = "tequila"
@@ -258,7 +270,8 @@
 	color = "#102000"
 	strength = 25
 	nutriment_factor = 1
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_thirteenloko"
 
 	glass_name = "Thirteen Loko"
@@ -283,7 +296,8 @@
 	taste_mult = 1.3
 	color = "#91ff91" // rgb: 145, 255, 145
 	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_vermouth"
 
 	glass_name = "vermouth"
@@ -296,7 +310,8 @@
 	taste_description = "grain alcohol"
 	color = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_vodka"
 
 	glass_name = "vodka"
@@ -309,7 +324,8 @@
 	taste_description = "clear kvass"
 	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
 	strength = 10
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_premiumvodka"
 
 /decl/material/liquid/ethanol/whiskey
@@ -318,7 +334,8 @@
 	taste_description = "molasses"
 	color = "#4c3100"
 	strength = 25
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_whiskey"
 
 	glass_name = "whiskey"
@@ -330,7 +347,8 @@
 	taste_description = "bitter sweetness"
 	color = "#7e4043" // rgb: 126, 64, 67
 	strength = 15
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_wine"
 
 	glass_name = "red wine"
@@ -342,7 +360,8 @@
 	taste_description = "white velvet"
 	color = "#ffddaa" // rgb: 255, 221, 170 - a light cream
 	strength = 20
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_whitewine"
 
 /decl/material/liquid/ethanol/herbal
@@ -351,7 +370,8 @@
 	taste_description = "a sweet summer garden"
 	color = "#dfff00"
 	strength = 13
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_herbal"
 
 	glass_name = "herbal liquor"
@@ -364,7 +384,8 @@
 	color = "#4c3100"
 	strength = 25
 	alcohol_toxicity = 2
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_hooch"
 
 	glass_name = "Hooch"
@@ -376,7 +397,8 @@
 	taste_description = "creamy alcohol"
 	color = "#dddd9a"
 	strength = 25
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_irishcream"
 
 	glass_name = "Irish cream"
@@ -389,7 +411,8 @@
 	color = "#ffbb00"
 	strength = 30
 	nutriment_factor = 1
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_mead"
 
 	glass_name = "mead"
@@ -402,7 +425,8 @@
 	taste_mult = 2.5
 	color = "#0064c8"
 	strength = 12
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_moonshine"
 
 	glass_name = "moonshine"
@@ -418,7 +442,8 @@
 	glass_name = "???"
 	glass_desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
 	euphoriant = 50
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_poisonwine"
 
 /decl/material/liquid/ethanol/pwine/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -444,7 +469,8 @@
 	lore_text = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
 	color = "#523600"
 	strength = 25
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_agedwhiskey"
 
 	glass_name = "aged whiskey"
@@ -456,7 +482,8 @@
 	taste_description = "cool apple cider"
 	color = "#cac089"
 	strength = 50
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_applecider"
 
 	glass_name = "apple cider"
@@ -468,7 +495,8 @@
 	taste_description = "cool pear cider"
 	color = "#cac089"
 	strength = 50
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_pearcider"
 
 	glass_name = "pear cider"
@@ -480,7 +508,8 @@
 	taste_description = "a superior taste of sparkling wine"
 	color = "#e8dfc1"
 	strength = 25
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_champagne"
 
 	glass_name = "champagne"
@@ -492,7 +521,8 @@
 	taste_description = "herbs, spices, and alcohol"
 	color = "#596e3e"
 	strength = 20
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_jagermeister"
 
 	glass_name = "jagermeister"
@@ -504,7 +534,8 @@
 	taste_description = "vkusnyy kvas, ypa!"
 	color = "#362f22"
 	strength = 30
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_ethanol_kvass"
 
 	glass_name = "kvass"

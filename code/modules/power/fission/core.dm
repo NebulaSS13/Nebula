@@ -17,7 +17,7 @@
 	icon = 'icons/obj/machines/power/fission.dmi'
 	icon_state = "fission_core"
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	stat_immune = NOINPUT | NOSCREEN
 	base_type = /obj/machinery/atmospherics/unary/fission_core
 	construct_state = /decl/machine_construction/default/panel_closed
@@ -216,7 +216,7 @@
 		if(!user.try_unequip(W, src))
 			return
 		fuel_rods[W] = FALSE // Rod is not exposed to begin with.
-		visible_message(SPAN_NOTICE("\The [user] inserts \a [W] into \the [src]."), SPAN_NOTICE("You insert \a [W] into \the [src]."))
+		user.visible_message(SPAN_NOTICE("\The [user] inserts \a [W] into \the [src]."), SPAN_NOTICE("You insert \a [W] into \the [src]."))
 		return
 	. = ..()
 

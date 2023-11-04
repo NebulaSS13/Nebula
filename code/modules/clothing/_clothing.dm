@@ -2,7 +2,7 @@
 	name = "clothing"
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':1,'engineering':1}"
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
@@ -32,7 +32,7 @@
 	return TRUE
 
 // Sort of a placeholder for proper tailoring.
-#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/organic/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	var/rags = RAG_COUNT(src)
@@ -52,7 +52,7 @@
 				new /obj/item/chems/glass/rag(get_turf(src))
 			if(loc == user)
 				user.drop_from_inventory(src)
-			LAZYREMOVE(matter, /decl/material/solid/cloth)
+			LAZYREMOVE(matter, /decl/material/solid/organic/cloth)
 			physically_destroyed()
 		return TRUE
 	. = ..()
@@ -81,14 +81,12 @@
 			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
 
 		if(!(slot in user_mob?.get_held_item_slots()))
-			if(ishuman(user_mob))
-				var/mob/living/carbon/human/user_human = user_mob
-				if(blood_DNA)
-					var/mob_blood_overlay = user_human.bodytype.get_blood_overlays(user_human)
-					if(mob_blood_overlay)
-						var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
-						bloodsies.appearance_flags |= NO_CLIENT_COLOR
-						overlay.overlays += bloodsies
+			if(blood_DNA)
+				var/mob_blood_overlay = user_mob.get_bodytype()?.get_blood_overlays(user_mob)
+				if(mob_blood_overlay)
+					var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
+					bloodsies.appearance_flags |= NO_CLIENT_COLOR
+					overlay.overlays += bloodsies
 			if(markings_icon && markings_color)
 				overlay.overlays += mutable_appearance(overlay.icon, markings_icon, markings_color)
 
@@ -133,13 +131,19 @@
 	if(markings_color && markings_icon)
 		update_icon()
 
-/obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/clothing/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.get_held_item_slots()))
-		var/mob/living/carbon/human/H = M
-		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.bodytype.bodytype_flag) : (bodytype_equip_flags & H.bodytype.bodytype_flag)
-		if(!. && !disable_warning)
-			to_chat(H, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
+	if(!. || slot == slot_s_store_str || (slot in global.pocket_slots))
+		return
+	var/decl/bodytype/root_bodytype = user?.get_bodytype()
+	if(!root_bodytype || isnull(bodytype_equip_flags) || (slot in user.get_held_item_slots()))
+		return
+	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
+		. = !(bodytype_equip_flags & root_bodytype.bodytype_flag)
+	else
+		. = (bodytype_equip_flags & root_bodytype.bodytype_flag)
+	if(!. && !disable_warning)
+		to_chat(user, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
 
 /obj/item/clothing/equipped(var/mob/user)
 	if(needs_vision_update())

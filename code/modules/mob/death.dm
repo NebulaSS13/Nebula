@@ -5,7 +5,7 @@
 	death(1)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	UpdateLyingBuckledAndVerbStatus()
 	remove_from_dead_mob_list()
 	dump_contents()
@@ -16,7 +16,7 @@
 
 	flick(anim, animation)
 	if(do_gibs)
-		gibs(loc, dna)
+		gibs(loc, _blood_type = get_blood_type(), _unique_enzymes = get_unique_enzymes())
 
 	QDEL_IN(animation, 15)
 	QDEL_IN(src, 15)
@@ -30,7 +30,7 @@
 	var/atom/movable/overlay/animation = null
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 
 	animation = new(loc)
 	animation.icon_state = "blank"
@@ -69,11 +69,6 @@
 	set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 
 	drop_held_items()
-
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	if(hattable?.hat)
-		hattable.hat.dropInto(get_turf(src))
-		hattable.hat = null
 
 	SSstatistics.report_death(src)
 

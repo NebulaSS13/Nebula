@@ -23,9 +23,9 @@
 		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
 
 /obj/effect/dead_plant
-	anchored = 1
-	opacity = 0
-	density = 0
+	anchored = TRUE
+	opacity = FALSE
+	density = FALSE
 	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attack_hand()
@@ -39,11 +39,11 @@
 
 /obj/effect/vine
 	name = "vine"
-	anchored = 1
+	anchored = TRUE
 	icon = 'icons/obj/hydroponics/hydroponics_growing.dmi'
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_NORMAL
 
 	var/health = 10
 	var/max_health = 100
@@ -83,7 +83,7 @@
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD) == 2)
-		mouse_opacity = 2
+		mouse_opacity = MOUSE_OPACITY_PRIORITY
 		max_growth = VINE_GROWTH_STAGES
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		growth_type = seed.get_growth_type()
@@ -129,7 +129,7 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		if(growth_type in list(GROWTH_VINES,GROWTH_BIOMASS))
 			set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems[/decl/material/solid/wood]))
+		if(islist(seed.chems) && !isnull(seed.chems[/decl/material/solid/organic/wood]))
 			set_density(1)
 			set_opacity(1)
 

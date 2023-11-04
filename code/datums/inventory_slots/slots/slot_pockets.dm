@@ -9,13 +9,13 @@
 	requires_slot_flags = SLOT_POCKET
 	quick_equip_priority = 2
 
-/datum/inventory_slot/pocket/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_pockets(redraw_mob)
+/datum/inventory_slot/pocket/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	return
 
 /datum/inventory_slot/pocket/prop_can_fit_in_slot(var/obj/item/prop)
 	return ..() || prop.w_class <= ITEM_SIZE_SMALL
 
-/datum/inventory_slot/pocket/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
+/datum/inventory_slot/pocket/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..()
 	if(.)
 		// If they have a uniform slot, they need a uniform to have pockets.

@@ -12,7 +12,7 @@
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER
 	uncreated_component_parts = null
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
-	opacity = 0
+	opacity = FALSE
 	explosion_resistance = 5
 	pry_mod = 0.5
 	base_type = /obj/machinery/door/window
@@ -138,7 +138,7 @@
 		return
 
 /obj/machinery/door/window/physical_attack_hand(mob/user)
-	if(istype(user,/mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)

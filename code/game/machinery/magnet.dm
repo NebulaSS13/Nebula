@@ -12,9 +12,9 @@ var/global/list/magnetic_modules = list()
 	icon_state = "floor_magnet-f"
 	name = "Electromagnetic Generator"
 	desc = "A device that uses powernet to create points of magnetic energy."
-	level = 1		// underfloor
+	level = LEVEL_BELOW_PLATING
 	layer = ABOVE_WIRE_LAYER
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 50
 
 	var/freq = 1449		// radio frequency
@@ -169,7 +169,7 @@ var/global/list/magnetic_modules = list()
 					step_towards(M, center)
 
 			for(var/mob/living/silicon/S in orange(magnetic_field, center))
-				if(istype(S, /mob/living/silicon/ai)) continue
+				if(isAI(S)) continue
 				step_towards(S, center)
 
 		use_power_oneoff(electricity_level * 5)
@@ -187,8 +187,8 @@ var/global/list/magnetic_modules = list()
 	name = "magnetic control console"
 	icon = 'icons/obj/airlock_machines.dmi' // uses an airlock machine icon, THINK GREEN HELP THE ENVIRONMENT - RECYCLING!
 	icon_state = "airlock_control_off"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 45
 	var/frequency = 1449
 	var/code = 0

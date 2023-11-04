@@ -4,7 +4,10 @@
 	atom_flags = 0 //starts closed
 	material = /decl/material/solid/metal/aluminium
 
-/obj/item/chems/drinks/cans/on_reagent_change()
+/obj/item/chems/drinks/cans/update_container_name()
+	return
+
+/obj/item/chems/drinks/cans/update_container_desc()
 	return
 
 //DRINKS
@@ -23,7 +26,7 @@
 	desc = "Pure drinking water, imported from the Martian poles."
 	icon_state = "waterbottle"
 	center_of_mass = @"{'x':15,'y':8}"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/chems/drinks/cans/waterbottle/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)

@@ -36,7 +36,7 @@
 /obj/abstract/landmark/corpse/Initialize()
 	..()
 	if(!species) species = global.using_map.default_species
-	var/species_choice = islist(species) ? pickweight(species) : species 
+	var/species_choice = islist(species) ? pickweight(species) : species
 	new /mob/living/carbon/human/corpse(loc, species_choice, src)
 	return INITIALIZE_HINT_QDEL
 
@@ -57,7 +57,7 @@
 		if(species_choice in skin_colors_per_species)
 			M.change_skin_color(pick(skin_colors_per_species[species_choice]))
 		else
-			M.skin_tone = random_skin_tone(M.species)
+			M.randomize_skin_color()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
 		if(species_choice in hair_colors_per_species)
@@ -91,14 +91,14 @@
 		M.SetName(name)
 	M.real_name = M.name
 
-/obj/abstract/landmark/corpse/proc/equip_outfit(var/mob/living/carbon/human/M)
+/obj/abstract/landmark/corpse/proc/equip_corpse_outfit(var/mob/living/carbon/human/M)
 	var/adjustments = 0
 	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_SURVIVAL)  ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR) : adjustments
 	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_ID_PDA)    ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)        : adjustments
 	adjustments = (spawn_flags & CORPSE_SPAWNER_PLAIN_HEADSET) ? (adjustments|OUTFIT_ADJUSTMENT_PLAIN_HEADSET)      : adjustments
 
 	var/decl/hierarchy/outfit/corpse_outfit = outfit_by_type(pickweight(corpse_outfits))
-	corpse_outfit.equip(M, equip_adjustments = adjustments)
+	corpse_outfit.equip_outfit(M, equip_adjustments = adjustments)
 
 /obj/abstract/landmark/corpse/pirate
 	name = "Pirate"

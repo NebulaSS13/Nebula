@@ -5,8 +5,8 @@
 	desc = "A machine used for the compression of fuel rods for nuclear power production."
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "fuel_compressor1"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	layer = 4
 	construct_state = /decl/machine_construction/default/panel_closed
 	var/list/stored_material = list()

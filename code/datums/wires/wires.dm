@@ -132,11 +132,7 @@ var/global/list/wireColourNames = list("darkred" = "dark red")
 		if(CanUse(L) && href_list["action"])
 
 			var/obj/item/I = L.get_active_hand()
-
-			var/obj/item/offhand_item
-			if(ishuman(usr))
-				var/mob/living/carbon/human/H = usr
-				offhand_item = H.wearing_rig && H.wearing_rig.selected_module
+			var/obj/item/offhand_item = usr?.get_rig()?.selected_module
 
 			holder.add_hiddenprint(L)
 			if(href_list["cut"]) // Toggles the cut/mend status

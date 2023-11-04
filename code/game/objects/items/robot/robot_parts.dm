@@ -19,15 +19,15 @@
 /obj/item/robot_parts/Initialize(mapload, var/model)
 	. = ..(mapload)
 	if(model_info)
-		if(!ispath(model, /decl/prosthetics_manufacturer))
-			model = /decl/prosthetics_manufacturer/basic_human
+		if(!ispath(model, /decl/bodytype/prosthetic))
+			model = /decl/bodytype/prosthetic/basic_human
 		model_info = model
-		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
+		var/decl/bodytype/prosthetic/R = GET_DECL(model)
 		if(R)
 			SetName("[R.name] [initial(name)]")
 			desc = "[R.desc]"
-			if(icon_state in icon_states(R.icon))
-				icon = R.icon
+			if(icon_state in icon_states(R.icon_base))
+				icon = R.icon_base
 	else
 		SetDefaultName()
 
@@ -130,7 +130,7 @@
 /obj/item/robot_parts/head/attackby(obj/item/W, mob/user)
 	..()
 	if(istype(W, /obj/item/flash))
-		if(istype(user,/mob/living/silicon/robot))
+		if(isrobot(user))
 			var/current_module = user.get_active_hand()
 			if(current_module == W)
 				to_chat(user, "<span class='warning'>How do you propose to do that?</span>")

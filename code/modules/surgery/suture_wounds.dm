@@ -44,9 +44,11 @@
 					W.clamped = 1
 			break
 	affected.update_damages()
+	..()
 
 /decl/surgery_step/suture_wounds/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message(SPAN_DANGER("[user]'s hand slips, tearing [target]'s [affected.name] with \the [tool]!"), \
 		SPAN_DANGER("Your hand slips, tearing [target]'s [affected.name] with \the [tool]!"))
 	target.apply_damage(3, BRUTE, affected)
+	..()

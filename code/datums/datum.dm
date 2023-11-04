@@ -106,3 +106,10 @@
  */
 /datum/proc/PopulateClone(var/datum/clone)
 	return clone
+
+/////////////////////////////////////////////////////////////
+//Common implementations
+/////////////////////////////////////////////////////////////
+
+/image/GetCloneArgs()
+	return list(icon, loc, icon_state, layer, dir)

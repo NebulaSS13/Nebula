@@ -9,8 +9,12 @@ desc = """
 Update dmm files given update file/string.
 Replacement syntax example:
     /turf/open/floor/plasteel/warningline : /obj/effect/turf_decal {dir = @OLD ;tag = @SKIP;icon_state = @SKIP}
-    /turf/open/floor/plasteel/warningline : /obj/effect/turf_decal {@OLD} , /obj/thing {icon_state = @OLD:name; name = "meme"}
+    /turf/open/floor/plasteel/warningline : /obj/effect/turf_decal{@OLD} , /obj/thing {icon_state = @OLD:name; name = "meme"}
     /turf/open/floor/plasteel/warningline{dir=2} : /obj/thing
+Syntax for subtypes also exist, to update a path's type but maintain subtypes:
+    /obj/structure/closet/crate/@SUBTYPES : /obj/structure/new_box/@SUBTYPES {@OLD}
+To delete a type, replace it with @DELETE:
+    /turf/open/floor/plasteel/warningline{dir=2} : @DELETE
 New paths properties:
     @OLD - if used as property name copies all modified properties from original path to this one
     property = @SKIP - will not copy this property through when global @OLD is used.
@@ -20,6 +24,7 @@ New paths properties:
 Old paths properties:
     Will be used as a filter.
     property = @UNSET - will apply the rule only if the property is not mapedited
+    property = @SET - will apply the rule only if the property is mapedited
 """
 
 default_map_directory = "../../_maps"
@@ -94,6 +99,12 @@ def update_path(dmm_data, replacement_string, verbose=False):
         for new_path, new_props in new_paths:
             if new_path == "@OLD":
                 out = match.group('path')
+            elif new_path == "@DELETE":
+                if verbose:
+                    print("Deleting match : {0}".format(match.group(0)))
+                return [None]
+            elif new_path.endswith("/@SUBTYPES"):
+                out = new_path[:-len("/@SUBTYPES")] + str(match.group('subpath') or '')
             else:
                 out = new_path
             out_props = dict()
@@ -125,21 +136,26 @@ def update_path(dmm_data, replacement_string, verbose=False):
             return [element]
 
     bad_keys = {}
+    modified_keys = []
     keys = list(dmm_data.dictionary.keys())
     for definition_key in keys:
         def_value = dmm_data.dictionary[definition_key]
-        new_value = tuple(y for x in def_value for y in get_result(x))
+        new_value = tuple(y for x in def_value for y in get_result(x) if y != None)
         if new_value != def_value:
             dmm_data.overwrite_key(definition_key, new_value, bad_keys)
+            modified_keys.append(definition_key)
     dmm_data.reassign_bad_keys(bad_keys)
+    return modified_keys
 
 
 def update_map(map_filepath, updates, verbose=False):
     print("Updating: {0}".format(map_filepath))
     dmm_data = DMM.from_file(map_filepath)
+    modified_keys = []
     for update_string in updates:
-        update_path(dmm_data, update_string, verbose)
-    dmm_data.to_file(map_filepath, True)
+        modified_keys.extend(update_path(dmm_data, update_string, verbose))
+    dmm_data.remove_unused_keys(modified_keys)
+    dmm_data.to_file(map_filepath)
 
 
 def update_all_maps(map_directory, updates, verbose=False):

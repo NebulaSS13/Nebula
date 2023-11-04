@@ -30,7 +30,7 @@
 	show_ssd =               "quiescent"
 
 	base_prosthetics_model = null
-	available_bodytypes = list(/decl/bodytype/alate)
+	available_bodytypes = list(/decl/bodytype/crystalline/mantid/alate)
 
 	description = "When human surveyors finally arrived at the outer reaches of explored space, they hoped to find \
 	new frontiers and new planets to exploit. They were largely not expecting to have entire expeditions lost \
@@ -56,10 +56,8 @@
 	oxy_mod =               0.8 // Don't need as much breathable gas as humans.
 	toxins_mod =            0.8 // Not as biologically fragile as meatboys.
 	radiation_mod =         0.5 // Not as biologically fragile as meatboys.
-	flash_mod =               2 // Highly photosensitive.
 
 	age_descriptor = /datum/appearance_descriptor/age/kharmaani
-	slowdown =               -1
 	rarity_value =            3
 	gluttonous =              2
 	siemens_coefficient =     0
@@ -71,8 +69,7 @@
 
 	available_pronouns = list(/decl/pronouns/male)
 
-	appearance_flags =        0
-	species_flags =           SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_CRYSTALLINE
+	species_flags =           SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =             SPECIES_IS_RESTRICTED
 
 	heat_discomfort_strings = list(
@@ -89,34 +86,6 @@
 		/decl/natural_attack/claws/strong/gloves,
 		/decl/natural_attack/bite/sharp
 	)
-
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest/insectoid),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin/insectoid/mantid),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/insectoid),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/insectoid),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/insectoid),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
-		BP_M_HAND = list("path" = /obj/item/organ/external/hand/insectoid/midlimb),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid/mantid),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid/mantid),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid/mantid),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid/mantid)
-	)
-
-	has_organ = list(
-		BP_HEART =             /obj/item/organ/internal/heart/insectoid,
-		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
-		BP_LUNGS =             /obj/item/organ/internal/lungs/insectoid,
-		BP_LIVER =             /obj/item/organ/internal/liver/insectoid,
-		BP_KIDNEYS =           /obj/item/organ/internal/kidneys/insectoid,
-		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid,
-		BP_EYES =              /obj/item/organ/internal/eyes/insectoid,
-		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
-	)
-
-	limb_mapping = list(BP_CHEST = list(BP_CHEST, BP_M_HAND))
 
 	force_cultural_info = list(
 		TAG_CULTURE =   /decl/cultural_info/culture/ascent,
@@ -139,10 +108,6 @@
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/mantid/apply_species_organ_modifications(var/obj/item/organ/org)
-	..()
-	org.status &= ~ORGAN_BRITTLE
-
 /decl/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
 	return
 
@@ -151,11 +116,10 @@
 	name =        SPECIES_MANTID_GYNE
 	name_plural = "Kharmaan Gynes"
 
-	available_bodytypes = list(/decl/bodytype/gyne)
+	available_bodytypes = list(/decl/bodytype/crystalline/mantid/gyne)
 	available_pronouns = list(/decl/pronouns/female)
 
 	gluttonous =              3
-	slowdown =                2
 	rarity_value =           10
 
 	age_descriptor = /datum/appearance_descriptor/age/kharmaani/gyne
@@ -164,15 +128,6 @@
 	bump_flag =               HEAVY
 	push_flags =              ALLMOBS
 	swap_flags =              ALLMOBS
-
-	override_limb_types = list(
-		BP_HEAD = /obj/item/organ/external/head/insectoid/mantid,
-		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne,
-	)
-
-	override_organ_types = list(
-		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid,
-	)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height =      2,

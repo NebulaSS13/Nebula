@@ -304,7 +304,7 @@
 	skill_points = 20
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
-/datum/job/lawyer/equip(var/mob/living/carbon/human/H)
+/datum/job/lawyer/equip_job(var/mob/living/carbon/human/H)
 	. = ..()
 	if(.)
 		H.implant_loyalty(H)

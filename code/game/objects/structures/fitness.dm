@@ -1,5 +1,5 @@
 /obj/structure/fitness
-	anchored = 1
+	anchored = TRUE
 	var/being_used = 0
 
 /obj/structure/fitness/punchingbag
@@ -7,7 +7,7 @@
 	desc = "A punching bag."
 	icon_state = "punchingbag"
 	icon = 'icons/obj/structures/punching_bag.dmi'
-	density = 1
+	density = TRUE
 	var/list/hit_message = list("hit", "punch", "kick", "robust")
 
 /obj/structure/fitness/punchingbag/attack_hand(mob/user)

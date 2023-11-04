@@ -20,18 +20,17 @@
 	var/requires_organ_tag
 	var/quick_equip_priority = 0 // Higher priority means it will be checked first.
 
+	var/mob_overlay_layer
+	var/alt_mob_overlay_layer
+
 /datum/inventory_slot/Destroy(force)
 	_holding = null
 	return ..()
 
 /datum/inventory_slot/proc/equipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE, var/delete_old_item = TRUE)
 
-	// Clear up any preexisting item.
+	// Save any preexisting item to clean up later.
 	var/atom/movable/held = get_equipped_item()
-	if(held)
-		user.drop_from_inventory(held)
-		if(delete_old_item && !QDELETED(held))
-			qdel(held)
 
 	// Set slot vars.
 	set_slot(prop)
@@ -39,22 +38,47 @@
 	prop.hud_layerise()
 	prop.equipped(user, slot_id)
 
+	// Clean up the preexisting item.
+	if(held)
+		// Force the unequip call because it's technically no longer equipped anymore.
+		unequipped(user, held, redraw_mob)
+		user.drop_from_inventory(held)
+		if(delete_old_item && !QDELETED(held))
+			qdel(held)
+
 	// Redraw overlays if needed.
-	update_overlay(user, prop, redraw_mob)
+	update_mob_equipment_overlay(user, prop, redraw_mob)
 	return TRUE
 
 /datum/inventory_slot/proc/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	clear_slot()
+	// Only empty the slot if it's actually our equipped item.
+	// Sometimes this runs on the old item after a new item is equipped in-place (like via the loadout)
+	// so we need to check this.
+	if(prop == get_equipped_item())
+		clear_slot()
 	for(var/slot in drop_slots_on_unequip)
-		var/obj/item/thing = user.get_equipped_item(slot)
-		if(thing)
+		var/datum/inventory_slot/slot_to_drop = user.get_inventory_slot_datum(slot)
+		if(!slot_to_drop)
+			continue
+		var/obj/item/thing = slot_to_drop.get_equipped_item()
+		if(thing && !slot_to_drop.can_equip_to_slot(user, thing, TRUE))
 			user.drop_from_inventory(thing)
-	update_overlay(user, prop, redraw_mob)
+	update_mob_equipment_overlay(user, prop, redraw_mob)
 	return TRUE
 
-/datum/inventory_slot/proc/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	return
+/datum/inventory_slot/proc/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	if(!mob_overlay_layer || !slot_id)
+		return
+	if(alt_mob_overlay_layer)
+		if(_holding)
+			user.set_current_mob_overlay((_holding.use_alt_layer ? alt_mob_overlay_layer : mob_overlay_layer), _holding.get_mob_overlay(user, slot_id), FALSE)
+			user.set_current_mob_overlay((_holding.use_alt_layer ? mob_overlay_layer : alt_mob_overlay_layer), null, redraw_mob)
+		else
+			user.set_current_mob_overlay(mob_overlay_layer, null, FALSE)
+			user.set_current_mob_overlay(alt_mob_overlay_layer, null, redraw_mob)
+	else
+		user.set_current_mob_overlay(mob_overlay_layer, _holding?.get_mob_overlay(user, slot_id), redraw_mob)
 
 /datum/inventory_slot/proc/set_slot(var/obj/item/prop)
 	_holding = prop
@@ -134,12 +158,14 @@
 		return FALSE
 	return TRUE
 
-/datum/inventory_slot/proc/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
-	return (!_holding && prop && slot_id && prop_can_fit_in_slot(prop))
+/datum/inventory_slot/proc/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
+	return ((!_holding || (ignore_equipped || _holding == prop)) && prop && slot_id && prop_can_fit_in_slot(prop))
 
 /datum/inventory_slot/proc/prop_can_fit_in_slot(var/obj/item/prop)
 	return (isnull(requires_slot_flags) || (requires_slot_flags & prop.slot_flags))
 
 /datum/inventory_slot/proc/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
+		if(user == owner)
+			return "You are wearing [_holding.get_examine_line()]."
 		return "[pronouns.He] [pronouns.is] wearing [_holding.get_examine_line()]."

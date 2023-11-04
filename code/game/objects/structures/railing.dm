@@ -3,7 +3,7 @@
 	desc = "A simple bar railing designed to protect against careless trespass."
 	icon = 'icons/obj/structures/railing.dmi'
 	icon_state = "railing_preview"
-	density = 1
+	density = TRUE
 	throwpass = 1
 	layer = OBJ_LAYER
 	climb_speed_mult = 0.25
@@ -200,7 +200,7 @@
 	// Handle harm intent grabbing/tabling.
 	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
 		var/obj/item/grab/G = W
-		if(istype(G.affecting, /mob/living/carbon/human))
+		if(ishuman(G.affecting))
 			var/mob/living/carbon/human/H = G.get_affecting_mob()
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
@@ -242,10 +242,10 @@
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(density)
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] open.</span>", "<span class='notice'>You wrench \the [src] open.</span>")
-				density = 0
+				density = FALSE
 			else
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] closed.</span>", "<span class='notice'>You wrench \the [src] closed.</span>")
-				density = 1
+				density = TRUE
 			update_icon()
 			return
 	// Repair

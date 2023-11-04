@@ -46,7 +46,7 @@
 					if(safe_thing && (safe_thing.body_parts_covered & SLOT_EYES))
 						trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
 						user.visible_message(
-							SPAN_DANGER("\The [user] tries to squirt something into [target]'s eyes, but fails!"), 
+							SPAN_DANGER("\The [user] tries to squirt something into [target]'s eyes, but fails!"),
 							SPAN_DANGER("You squirt [trans] unit\s at \the [target]'s eyes, but fail!")
 						)
 						return
@@ -78,9 +78,11 @@
 
 		to_chat(user, SPAN_NOTICE("You fill the dropper with [trans] units of the solution."))
 
+/obj/item/chems/dropper/update_container_name()
+	return
 
-/obj/item/chems/dropper/on_reagent_change()
-	update_icon()
+/obj/item/chems/dropper/update_container_desc()
+	return
 
 /obj/item/chems/dropper/on_update_icon()
 	. = ..()

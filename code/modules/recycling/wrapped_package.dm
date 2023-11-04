@@ -11,7 +11,7 @@
 	icon              = 'icons/obj/items/storage/deliverypackage.dmi'
 	icon_state        = "parcel"
 	obj_flags         = OBJ_FLAG_HOLLOW
-	material          = /decl/material/solid/paper
+	material          = /decl/material/solid/organic/paper
 	attack_verb       = list("delivered a hit", "expedited on", "shipped at", "went postal on")
 	base_parry_chance = 40 //Boxes tend to be good at parrying
 	///A text note attached to the parcel that shows on examine

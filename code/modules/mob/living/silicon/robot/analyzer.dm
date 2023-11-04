@@ -3,10 +3,9 @@
 //
 /obj/item/robotanalyzer
 	name = "robot analyzer"
-	icon = 'icons/obj/items/device/robot_analyzer.dmi'
-	icon_state = "robotanalyzer"
-	item_state = "analyzer"
 	desc = "A hand-held scanner able to diagnose robotic injuries."
+	icon = 'icons/obj/items/device/robot_analyzer.dmi'
+	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	throwforce = 3
@@ -17,7 +16,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/robotanalyzer/attack(mob/living/M, mob/living/user)
@@ -32,9 +31,9 @@
 		return
 
 	var/scan_type
-	if(istype(M, /mob/living/silicon/robot))
+	if(isrobot(M))
 		scan_type = "robot"
-	else if(istype(M, /mob/living/carbon/human))
+	else if(ishuman(M))
 		scan_type = "prosthetics"
 	else
 		to_chat(user, "<span class='warning'>You can't analyze non-robotic things!</span>")

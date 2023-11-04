@@ -25,21 +25,21 @@
 
 	..()
 
-/datum/goal/department/paperwork/proc/get_spawn_turfs()
+/datum/goal/department/paperwork/proc/get_paper_spawn_turfs()
 	return
 
-/datum/goal/department/paperwork/proc/get_end_areas()
+/datum/goal/department/paperwork/proc/get_paper_end_areas()
 	return
 
 /datum/goal/department/paperwork/try_initialize()
 
-	var/list/start_candidates = get_spawn_turfs()
+	var/list/start_candidates = get_paper_spawn_turfs()
 	if(!length(start_candidates))
 		PRINT_STACK_TRACE("Paperwork goal [type] initialized with no spawn landmarks mapped!")
 		SSgoals.pending_goals -= src
 		return FALSE
 
-	var/list/end_candidates = get_end_areas()
+	var/list/end_candidates = get_paper_end_areas()
 	if(!length(end_candidates))
 		PRINT_STACK_TRACE("Paperwork goal [type] initialized with no end landmarks mapped!")
 		SSgoals.pending_goals -= src
@@ -100,7 +100,7 @@
 	desc = "This densely typed sheaf of documents is filled with legalese and jargon. You can't make heads or tails of them."
 	icon = 'icons/obj/goal_paperwork.dmi'
 	icon_state = "generic"
-	material = /decl/material/solid/cardboard //#TODO: replace with paper
+	material = /decl/material/solid/organic/paper
 
 	var/datum/goal/department/paperwork/associated_goal
 	var/list/all_signatories

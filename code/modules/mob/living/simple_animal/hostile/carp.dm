@@ -24,8 +24,8 @@
 	pass_flags = PASS_FLAG_TABLE
 
 	meat_type = /obj/item/chems/food/fish/poison
-	skin_material = /decl/material/solid/skin/fish/purple
-	bone_material = /decl/material/solid/bone/cartilage
+	skin_material = /decl/material/solid/organic/skin/fish/purple
+	bone_material = /decl/material/solid/organic/bone/cartilage
 	var/carp_color = COLOR_PURPLE
 
 /mob/living/simple_animal/hostile/carp/Initialize()

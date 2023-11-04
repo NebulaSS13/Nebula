@@ -1,6 +1,6 @@
 /obj/status_marker
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	simulated = FALSE
 	alpha = 0
 	plane = DEFAULT_PLANE
@@ -18,7 +18,7 @@
 
 	// Throwing these in here in the hopes of preventing the markers showing up in right click.
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	verbs.Cut()
 
 /datum/status_marker_holder
@@ -43,7 +43,7 @@
 
 	mob_image = new /image
 	mob_image.loc = owner
-	mob_image.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM|KEEP_TOGETHER)
+	mob_image.appearance_flags |= (RESET_ALPHA|RESET_COLOR|RESET_TRANSFORM|KEEP_APART)
 	mob_image.plane = DEFAULT_PLANE
 	mob_image.layer = POINTER_LAYER
 
@@ -53,7 +53,7 @@
 
 	mob_image_personal = new /image
 	mob_image_personal.loc = owner
-	mob_image_personal.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM|KEEP_TOGETHER)
+	mob_image_personal.appearance_flags |= (RESET_ALPHA|RESET_COLOR|RESET_TRANSFORM|KEEP_APART)
 	mob_image_personal.plane = DEFAULT_PLANE
 	mob_image_personal.layer = POINTER_LAYER
 

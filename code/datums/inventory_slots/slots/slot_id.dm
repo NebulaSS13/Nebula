@@ -4,12 +4,19 @@
 	ui_loc = ui_id
 	slot_id = slot_wear_id_str
 	requires_slot_flags = SLOT_ID
+	mob_overlay_layer = HO_ID_LAYER
 	quick_equip_priority = 12
 
-/datum/inventory_slot/id/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_wear_id(redraw_mob)
+/datum/inventory_slot/id/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	var/obj/item/clothing/under/under = user.get_equipped_item(slot_w_uniform_str)
+	if(istype(under) && !under.displays_id && !under.rolled_down)
+		user.set_current_mob_overlay(HO_ID_LAYER, null, redraw_mob)
+	else
+		..()
+	BITSET(user.hud_updateflag, ID_HUD)
+	BITSET(user.hud_updateflag, WANTED_HUD)
 
-/datum/inventory_slot/id/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
+/datum/inventory_slot/id/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning, var/ignore_equipped)
 	. = ..()
 	if(.)
 		// If they have a uniform slot, they need a uniform to wear an ID card.

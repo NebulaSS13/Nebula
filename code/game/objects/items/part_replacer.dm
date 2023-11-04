@@ -2,8 +2,7 @@
 	name = "rapid part exchange device"
 	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
 	icon = 'icons/obj/items/device/parts_replacer.dmi'
-	icon_state = "RPED"
-	item_state = "RPED"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE
 	can_hold = list(/obj/item/stock_parts)
 	storage_slots = 50
@@ -35,7 +34,7 @@
 /obj/item/storage/part_replacer/advanced
 	name = "advanced rapid part exchange device"
 	desc = "A version of the RPED that allows for replacement of parts and scanning from a distance, along with higher capacity for parts."
-	icon_state = "RPED_BS"
+	icon = 'icons/obj/items/device/parts_replacer_advanced.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 400
 	max_storage_space = 200

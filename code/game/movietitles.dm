@@ -56,7 +56,7 @@ var/global/list/end_titles
 
 /obj/screen/credit
 	icon_state = "blank"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	alpha = 0
 	screen_loc = "CENTER-7,BOTTOM+1"
 	plane = HUD_PLANE

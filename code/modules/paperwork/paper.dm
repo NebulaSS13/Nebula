@@ -19,7 +19,7 @@
 	throw_speed            = 1
 	w_class                = ITEM_SIZE_TINY
 	attack_verb            = list("bapped")
-	material               = /decl/material/solid/paper
+	material               = /decl/material/solid/organic/paper
 	drop_sound             = 'sound/foley/paperpickup1.ogg'
 	pickup_sound           = 'sound/foley/paperpickup2.ogg'
 	item_flags             = ITEM_FLAG_CAN_TAPE

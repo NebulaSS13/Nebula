@@ -18,6 +18,7 @@
 		return 0 //must return a number
 
 	//Apply damage
+	damage = min(health, damage)
 	health = clamp(health - damage, 0, max_health)
 	check_health(damage, damage_type, damage_flags)
 	return damage
@@ -95,18 +96,18 @@
 		var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(H, BP_EYES)
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
-			if(M.stat != 2)
+			if(M.stat != DEAD)
 				if(!BP_IS_PROSTHETIC(eyes)) //robot eyes bleeding might be a bit silly
 					to_chat(M, SPAN_DANGER("Your eyes start to bleed profusely!"))
 			if(prob(50))
-				if(M.stat != 2)
+				if(M.stat != DEAD)
 					to_chat(M, SPAN_WARNING("You drop what you're holding and clutch at your eyes!"))
 					M.drop_held_items()
 				SET_STATUS_MAX(M, STAT_BLURRY, 10)
 				SET_STATUS_MAX(M, STAT_PARA, 1)
 				SET_STATUS_MAX(M, STAT_WEAK, 4)
 			if (eyes.damage >= eyes.min_broken_damage)
-				if(M.stat != 2)
+				if(M.stat != DEAD)
 					to_chat(M, SPAN_WARNING("You go blind!"))
 
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, eyes.parent_organ)

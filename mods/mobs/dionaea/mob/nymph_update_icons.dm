@@ -6,7 +6,6 @@
 	else if(lying || stat == UNCONSCIOUS)
 		icon_state += "-sleeping"
 	else
-
 		add_overlay(emissive_overlay(icon = icon, icon_state = "[icon_state]-eyes"))
 		z_flags |= ZMM_MANGLE_PLANES
 		if(flower_color)
@@ -15,8 +14,3 @@
 			I.color = flower_color
 			flower.overlays += I
 			add_overlay(flower)
-
-		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-		var/image/I = hattable?.get_hat_overlay(src)
-		if(I)
-			add_overlay(I)

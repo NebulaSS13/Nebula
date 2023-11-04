@@ -47,7 +47,7 @@
 
 /obj/item/clothing/glasses/emp_act(severity)
 	if(electric)
-		if(istype(src.loc, /mob/living/carbon/human))
+		if(ishuman(src.loc))
 			var/mob/living/carbon/human/M = src.loc
 			if(M.get_equipped_item(slot_glasses_str) != src)
 				to_chat(M, SPAN_DANGER("\The [src] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
@@ -102,9 +102,9 @@
 	tint = TINT_NONE
 
 /obj/item/clothing/glasses/update_clothing_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_glasses()
+	. = ..()
+	if(.)
+		var/mob/M = loc
 		M.update_action_buttons()
 
 /obj/item/clothing/glasses/proc/toggle()

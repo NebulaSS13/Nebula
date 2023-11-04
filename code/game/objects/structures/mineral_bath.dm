@@ -36,13 +36,13 @@
 		return FALSE
 
 	if(occupant)
-		to_chat(user, "<span class='warning'>\The [src] is occupied.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is occupied."))
 		return FALSE
 
 	if(self_drop)
-		user.visible_message("<span class='notice'>\The [user] begins climbing into \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] begins climbing into \the [src]."))
 	else
-		user.visible_message("<span class='notice'>\The [user] begins pushing \the [patient] into \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] begins pushing \the [patient] into \the [src]."))
 
 	if(!do_after(user, 3 SECONDS, src))
 		return FALSE
@@ -51,13 +51,13 @@
 		return FALSE
 
 	if(occupant)
-		to_chat(user, "<span class='warning'>\The [src] is occupied.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is occupied."))
 		return FALSE
 
 	if(self_drop)
-		user.visible_message("<span class='notice'>\The [user] climbs into \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] climbs into \the [src]."))
 	else
-		user.visible_message("<span class='notice'>\The [user] pushes \the [patient] into \the [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] pushes \the [patient] into \the [src]."))
 
 	playsound(loc, 'sound/effects/slosh.ogg', 50, 1)
 	patient.forceMove(src)
@@ -66,7 +66,7 @@
 	return TRUE
 
 /obj/structure/mineral_bath/attack_hand(var/mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	eject_occupant()
 	return TRUE
@@ -104,51 +104,49 @@
 		STOP_PROCESSING(SSobj, src)
 		return
 
-	if(ishuman(occupant))
+	var/repaired_organ
 
-		var/mob/living/carbon/human/H = occupant
-		var/repaired_organ
-
-		// Replace limbs for crystalline species.
-		if((H.species.species_flags & SPECIES_FLAG_CRYSTALLINE) && prob(10))
-			for(var/limb_type in H.species.has_limbs)
-				var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, limb_type)
-				if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
-					H.remove_organ(E)
-					qdel(E)
-					E = null
-				if(!E)
-					var/list/organ_data = H.species.has_limbs[limb_type]
-					var/limb_path = organ_data["path"]
-					var/obj/item/organ/O = new limb_path(H)
-					organ_data["descriptor"] = O.name
-					to_chat(occupant, "<span class='notice'>You feel your [O.name] reform in the crystal bath.</span>")
-					H.update_body()
-					repaired_organ = TRUE
-					break
+	// Replace limbs for crystalline species.
+	if(occupant.has_body_flag(BODY_FLAG_CRYSTAL_REFORM) && prob(10))
+		var/decl/bodytype/root_bodytype = occupant.get_bodytype()
+		for(var/limb_type in root_bodytype.has_limbs)
+			var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(occupant, limb_type)
+			if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
+				occupant.remove_organ(E)
+				qdel(E)
+				E = null
+			if(!E)
+				var/list/organ_data = root_bodytype.has_limbs[limb_type]
+				var/limb_path = organ_data["path"]
+				E = new limb_path(occupant)
+				organ_data["descriptor"] = E.name
+				to_chat(occupant, SPAN_NOTICE("You feel your [E.name] reform in the crystal bath."))
+				occupant.update_body()
+				repaired_organ = TRUE
+				break
 
 		// Repair crystalline internal organs.
 		if(prob(10))
-			for(var/obj/item/organ/internal/I in H.get_internal_organs())
+			for(var/obj/item/organ/internal/I in occupant.get_internal_organs())
 				if(BP_IS_CRYSTAL(I) && I.damage)
 					I.heal_damage(rand(3,5))
 					if(prob(25))
-						to_chat(H, "<span class='notice'>The mineral-rich bath mends your [I.name].</span>")
+						to_chat(occupant, SPAN_NOTICE("The mineral-rich bath mends your [I.name]."))
 
 		// Repair robotic external organs.
 		if(!repaired_organ && prob(25))
-			for(var/obj/item/organ/external/E in H.get_external_organs())
+			for(var/obj/item/organ/external/E in occupant.get_external_organs())
 				if(BP_IS_PROSTHETIC(E))
 					for(var/obj/implanted_object in E.implants)
 						if(!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
 							LAZYREMOVE(E.implants, implanted_object)
-							to_chat(H, "<span class='notice'>The mineral-rich bath dissolves the [implanted_object.name].</span>")
+							to_chat(occupant, SPAN_NOTICE("The mineral-rich bath dissolves the [implanted_object.name]."))
 							qdel(implanted_object)
 					if(E.brute_dam || E.burn_dam)
 						E.heal_damage(rand(3,5), rand(3,5), robo_repair = 1)
 						if(prob(25))
-							to_chat(H, "<span class='notice'>The mineral-rich bath mends your [E.name].</span>")
+							to_chat(occupant, SPAN_NOTICE("The mineral-rich bath mends your [E.name]."))
 						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E))
 							E.status |= ORGAN_BRITTLE
-							to_chat(H, "<span class='warning'>It feels a bit brittle, though...</span>")
+							to_chat(occupant, SPAN_WARNING("It feels a bit brittle, though..."))
 						break

@@ -22,7 +22,7 @@
 	hold = new/obj/item/storage/internal/pockets(src, slots, max_w_class)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE) || !hold)
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE) || !hold)
 		return ..()
 	if(istype(loc, /obj/item/clothing))
 		hold.open(user)
@@ -32,8 +32,10 @@
 	return TRUE
 
 /obj/item/clothing/accessory/storage/handle_mouse_drop(atom/over, mob/user)
+	if(istype(over, /obj/screen/inventory))
+		return ..()
 	if(!istype(loc, /obj/item/clothing) && hold?.handle_storage_internal_mouse_drop(user, over))
-		. = ..(over)
+		return ..()
 	return TRUE
 
 /obj/item/clothing/accessory/storage/attackby(obj/item/W, mob/user)

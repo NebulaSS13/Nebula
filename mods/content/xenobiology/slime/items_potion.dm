@@ -9,8 +9,8 @@
 	var/can_tame_adults = FALSE
 
 /obj/item/slime_potion/attack(mob/living/slime/M, mob/user)
-	if(istype(M, /mob/living/slime))
-		if(M.is_adult && can_tame_adults) 
+	if(isslime(M))
+		if(M.is_adult && can_tame_adults)
 			to_chat(user, SPAN_WARNING("Only baby slimes can be tamed!"))
 			return TRUE
 		if(M.stat)

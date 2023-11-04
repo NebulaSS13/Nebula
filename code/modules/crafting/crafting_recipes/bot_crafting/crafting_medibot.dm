@@ -16,10 +16,10 @@
 	product = /mob/living/bot/medbot
 
 /decl/crafting_stage/proximity/medibot/get_product(obj/item/work)
-	. = ..()
-	if(istype(., /mob/living/bot/medbot))
-		var/mob/living/bot/medbot/bot = .
+	var/mob/living/bot/medbot/bot = ..()
+	if(istype(bot))
 		var/obj/item/storage/firstaid/kit = locate() in work
 		if(bot && kit)
 			bot.skin = kit.icon_state
 			bot.update_icon()
+	return bot

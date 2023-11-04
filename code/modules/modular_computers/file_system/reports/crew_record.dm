@@ -69,27 +69,25 @@ var/global/arrest_security_status =  "Arrest"
 	set_public_record((public_record && !jobban_isbanned(H, "Records")) ? html_decode(public_record) : "No record supplied")
 
 	// Medical record
-	set_bloodtype(H ? H.b_type : "Unset")
+	set_bloodtype(H?.get_blood_type() || "Unset")
 	var/medical_record = records[PREF_MED_RECORD]
 	set_medical_record((medical_record && !jobban_isbanned(H, "Records")) ? html_decode(medical_record) : "No record supplied")
 
 	if(H)
-		if(H.isSynthetic())
-			set_implants("Fully synthetic body")
-		else
-			var/organ_data = list("\[*\]")
-			for(var/obj/item/organ/external/E in H.get_external_organs())
-				if(BP_IS_PROSTHETIC(E))
-					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
-			for(var/obj/item/organ/internal/I in H.get_internal_organs())
-				if (BP_IS_PROSTHETIC(I))
-					organ_data += "[I.name] prosthetic"
-			set_implants(jointext(organ_data, "\[*\]"))
+		var/decl/bodytype/root_bodytype = H.get_bodytype()
+		var/organ_data = list("\[*\]")
+		for(var/obj/item/organ/external/E in H.get_external_organs())
+			if(E.bodytype != root_bodytype)
+				organ_data += "[E.bodytype] [E.name] [BP_IS_PROSTHETIC(E) ? "prosthetic" : "graft"]"
+		for(var/obj/item/organ/internal/I in H.get_internal_organs())
+			if(I.bodytype != root_bodytype)
+				organ_data += "[I.bodytype] [I.name] [BP_IS_PROSTHETIC(I) ? "prosthetic" : "graft"]"
+		set_implants(jointext(organ_data, "\[*\]"))
 
 	// Security record
 	set_criminalStatus(global.default_security_status)
-	set_dna(H ? H.dna.unique_enzymes : "")
-	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
+	set_dna(H?.get_unique_enzymes() || "")
+	set_fingerprint(H?.get_full_print(ignore_blockers = TRUE) || "")
 
 	var/security_record = records[PREF_SEC_RECORD]
 	set_security_record((security_record && !jobban_isbanned(H, "Records")) ? html_decode(security_record) : "No record supplied")
@@ -143,12 +141,12 @@ var/global/arrest_security_status =  "Arrest"
 	set_status(global.default_physical_status)
 	var/silicon_type = "Synthetic Lifeform"
 	var/robojob = GetAssignment(S)
-	if(istype(S, /mob/living/silicon/robot))
+	if(isrobot(S))
 		var/mob/living/silicon/robot/R = S
 		silicon_type = R.braintype
 		if(R.module)
 			robojob = "[R.module.display_name] [silicon_type]"
-	if(istype(S, /mob/living/silicon/ai))
+	if(isAI(S))
 		silicon_type = "AI"
 		robojob = "Artificial Intelligence"
 	set_job(S ? robojob : "Unset")

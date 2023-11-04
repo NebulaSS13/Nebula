@@ -20,7 +20,7 @@
 	if(H.mind && H.mind.learned_spells)
 		var/list/spells = list()
 		for(var/spell/spell_to_remove in H.mind.learned_spells) //remove all the spells from other people.
-			if(istype(spell_to_remove.holder,/mob))
+			if(ismob(spell_to_remove.holder))
 				var/mob/M = spell_to_remove.holder
 				spells += spell_to_remove
 				M.remove_spell(spell_to_remove)

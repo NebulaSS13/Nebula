@@ -113,7 +113,7 @@
 			return
 
 		O.mmi = W
-		O.set_invisibility(0)
+		O.set_invisibility(INVISIBILITY_NONE)
 		O.custom_name = created_name
 		O.updatename("Default")
 		B.mind.transfer_to(O)

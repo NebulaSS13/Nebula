@@ -52,7 +52,7 @@
 	occupant.apply_effect(6, STUTTER, blocked)
 	occupant.apply_damage(10, BRUTE, def_zone)
 	playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
-	if(istype(A, /mob/living))
+	if(isliving(A))
 		var/mob/living/victim = A
 		def_zone = ran_zone()
 		blocked = 100 * victim.get_blocked_ratio(def_zone, BRUTE, damage = 10)

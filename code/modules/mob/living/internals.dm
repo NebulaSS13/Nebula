@@ -19,14 +19,7 @@
 		return
 
 	// Check for airtight mask/helmet.
-	var/found_mask = FALSE
-	for(var/slot in global.airtight_slots)
-		var/obj/item/gear = get_equipped_item(slot)
-		if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
-			found_mask = TRUE
-			break
-
-	if(!found_mask)
+	if(!check_for_airtight_internals(FALSE))
 		to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
 		return
 
@@ -57,7 +50,14 @@
 			.[parse_zone(slot)] = list(checking, "in")
 
 /mob/living/proc/get_equipped_internals_sources()
-	. = list("back" = list(get_equipped_item(slot_back_str), "on"))
+	. = list(
+		"back" =         list(get_equipped_item(slot_back_str),    "on"),
+		"suit" =         list(get_equipped_item(slot_s_store_str), "on"),
+		"belt" =         list(get_equipped_item(slot_belt_str),    "on"),
+		"left pocket" =  list(get_equipped_item(slot_l_store_str), "in"),
+		"right pocket" = list(get_equipped_item(slot_r_store_str), "in"),
+		"rig"  =         list(get_rig()?.air_supply,               "in")
+	)
 
 /mob/living/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
 

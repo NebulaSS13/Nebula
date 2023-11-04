@@ -9,12 +9,31 @@
 	lip_icon =             'mods/species/bayliens/tajaran/icons/lips.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag =        BODY_FLAG_FELINE
+	movement_slowdown =    -0.5
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	base_hair_color = "#46321c"
+	base_color = "#ae7d32"
+	base_eye_color = "#00aa00"
+	default_h_style = /decl/sprite_accessory/hair/taj/lynx
+
+	eye_darksight_range = 7
+	eye_flash_mod = 2
+	eye_blend = ICON_MULTIPLY
+	eye_icon = 'mods/species/bayliens/tajaran/icons/eyes.dmi'
+	eye_low_light_vision_effectiveness = 0.15
+	eye_low_light_vision_adjustment_speed = 0.3
+
+	override_limb_types = list(
+		BP_TAIL = /obj/item/organ/external/tail/cat
+	)
+
+	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
 
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(
-		slot_glasses_str =   list("[NORTH]" = list("x" =  0, "y" = 2), "[EAST]" = list("x" = 0, "y" = 2), "[SOUTH]" = list("x" =  0, "y" = 2),  "[WEST]" = list("x" = 0, "y" = 2)),
-		slot_wear_mask_str = list("[NORTH]" = list("x" =  0, "y" = 2), "[EAST]" = list("x" = 0, "y" = 2), "[SOUTH]" = list("x" =  0, "y" = 2),  "[WEST]" = list("x" = 0, "y" = 2)),
-		slot_head_str =      list("[NORTH]" = list("x" =  0, "y" = 2), "[EAST]" = list("x" = 0, "y" = 2), "[SOUTH]" = list("x" =  0, "y" = 2),  "[WEST]" = list("x" = 0, "y" = 2))
+		slot_glasses_str =   list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2)),
+		slot_wear_mask_str = list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2)),
+		slot_head_str =      list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2))
 	)
 	. = ..()
 

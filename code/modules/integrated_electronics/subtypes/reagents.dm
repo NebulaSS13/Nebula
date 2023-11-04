@@ -6,9 +6,11 @@
 
 /obj/item/integrated_circuit/reagent
 	category_text = "Reagent"
-	unacidable = 1
 	cooldown_per_use = 10
 	var/volume = 0
+
+/obj/item/integrated_circuit/reagent/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	return FALSE
 
 /obj/item/integrated_circuit/reagent/Initialize()
 	. = ..()
@@ -48,6 +50,7 @@
 	var/notified = FALSE
 
 /obj/item/integrated_circuit/reagent/smoke/on_reagent_change()
+	..()
 	push_vol()
 
 /obj/item/integrated_circuit/reagent/smoke/do_work(ord)
@@ -107,6 +110,7 @@
 	var/busy = FALSE
 
 /obj/item/integrated_circuit/reagent/injector/on_reagent_change(changetype)
+	..()
 	push_vol()
 
 /obj/item/integrated_circuit/reagent/injector/on_data_written()
@@ -214,7 +218,7 @@
 
 		var/tramount = abs(transfer_amount)
 
-		if(istype(AM, /mob/living/carbon))
+		if(iscarbon(AM))
 			var/mob/living/carbon/C = AM
 			var/injection_status = C.can_inject(null, BP_CHEST)
 			var/injection_delay = 3 SECONDS
@@ -322,6 +326,7 @@
 	push_data()
 
 /obj/item/integrated_circuit/reagent/storage/on_reagent_change(changetype)
+	..()
 	push_vol()
 
 /obj/item/integrated_circuit/reagent/storage/big
@@ -340,7 +345,7 @@
 	icon_state = "reagent_storage_cryo"
 	extended_desc = "This is effectively an internal cryo beaker."
 
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_CHEM_CHANGE
 	complexity = 8
 	spawn_flags = IC_SPAWN_RESEARCH
 
@@ -481,7 +486,7 @@
 	if(!source.reagents || !target.reagents)
 		return
 
-	if(!ATOM_IS_OPEN_CONTAINER(source) || istype(source, /mob))
+	if(!ATOM_IS_OPEN_CONTAINER(source) || ismob(source))
 		return
 
 	if(target.reagents.maximum_volume - target.reagents.total_volume <= 0)
@@ -512,10 +517,12 @@
 		"on transfer" = IC_PINTYPE_PULSE_OUT
 	)
 
-	unacidable = 1
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	complexity = 4
 	power_draw_per_use = 5
+
+/obj/item/integrated_circuit/input/funnel/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	return FALSE
 
 /obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/user, intent)
 	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
@@ -595,6 +602,7 @@
 			push_data()
 
 /obj/item/integrated_circuit/reagent/temp/on_reagent_change()
+	..()
 	push_vol()
 
 /obj/item/integrated_circuit/reagent/temp/power_fail()

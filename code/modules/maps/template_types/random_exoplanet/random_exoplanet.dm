@@ -17,3 +17,8 @@
 		/datum/exoplanet_theme/ruined_city = 5,
 		/datum/exoplanet_theme/robotic_guardians = 10
 	)
+
+/datum/map_template/planetoid/random/exoplanet/preload()
+	. = ..()
+	if(.)
+		tallness = global.using_map.planet_depth

@@ -127,7 +127,7 @@
 	desc = "A box suited for pizzas."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "pizzabox1"
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	var/open = 0 // Is the box open?
 	var/ismessy = 0 // Fancy mess on the lid
 	var/obj/item/chems/food/sliceable/pizza/pizza // content pizza
@@ -189,14 +189,14 @@
 /obj/item/pizzabox/attack_hand(mob/user)
 
 	if(open && pizza)
-		if(user.check_dexterity(DEXTERITY_GRIP))
+		if(user.check_dexterity(DEXTERITY_HOLD_ITEM))
 			user.put_in_hands(pizza)
 			to_chat(user, SPAN_NOTICE("You take \the [src.pizza] out of \the [src]."))
 			pizza = null
 			update_icon()
 		return TRUE
 
-	if(length(boxes) && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_GRIP))
+	if(length(boxes) && user.is_holding_offhand(src) && user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		var/obj/item/pizzabox/box = boxes[boxes.len]
 		boxes -= box
 		user.put_in_hands(box)

@@ -157,7 +157,7 @@
 		return
 
 	var/mob/living/carbon/human/h_user = null
-	if (!istype(user, /mob/living/carbon/human))
+	if (!ishuman(user))
 		return
 	else
 		h_user = user
@@ -210,8 +210,8 @@
 				SET_STATUS_MAX(h_user, STAT_PARA, 6)
 			spawn(0)
 				empulse(src.loc, 8, 16)
-			charge = 0
 			apcs_overload(1, 10, 20)
+			charge = 0
 			energy_fail(10)
 			src.ping("Caution. Output regulators malfunction. Uncontrolled discharge detected.")
 
@@ -225,8 +225,8 @@
 			SET_STATUS_MAX(h_user, STAT_PARA, 8)
 			spawn(0)
 				empulse(src.loc, 32, 64)
-			charge = 0
 			apcs_overload(5, 25, 100)
+			charge = 0
 			energy_fail(30)
 			src.ping("Caution. Output regulators malfunction. Significant uncontrolled discharge detected.")
 
@@ -258,22 +258,33 @@
 		total_system_failure(failure_probability, user)
 		return TRUE
 
-// Proc: apcs_overload()
-// Parameters: 3 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights, reboot_chance - Chance of temporarily disabling the APC)
-// Description: Damages output powernet by power surge. Destroys few APCs and lights, depending on parameters.
+/**
+ * Processes the APCs overloaded by malfunctioning SMES.
+ *
+ * Damages output powernet by power surge. Destroys or damages few APCs and lights, depending on parameters and current SMES charge.
+ *
+ * - `failure_chance`: chance to actually damage the individual APC (in %). Damage scales from SMES charge, can easily destroy some.
+ * - `overload_chance`: chance of breaking the lightbulbs on individual APC network (in %).
+ * - `reboot_chance`: chance of temporarily (30..60 sec) disabling the individual APC (in %).
+ */
 /obj/machinery/power/smes/buildable/proc/apcs_overload(var/failure_chance, var/overload_chance, var/reboot_chance)
 	if (!src.powernet)
 		return
-
+	var/list/obj/machinery/power/apc/apcs = list()
 	for(var/obj/machinery/power/terminal/T in powernet.nodes)
 		var/obj/machinery/power/apc/A = T.master_machine()
 		if(istype(A))
 			if (prob(overload_chance))
 				A.overload_lighting()
 			if (prob(failure_chance))
-				A.set_broken(TRUE)
+				apcs |= A
 			if(prob(reboot_chance))
 				A.energy_fail(rand(30,60))
+
+	if (apcs.len)
+		var/overload_damage = charge/100/apcs.len
+		for (var/obj/machinery/power/apc/A in apcs)
+			A.take_damage(overload_damage, ELECTROCUTE)
 
 // Proc: update_icon()
 // Parameters: None

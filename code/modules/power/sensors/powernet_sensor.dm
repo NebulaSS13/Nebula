@@ -10,9 +10,9 @@
 /obj/machinery/power/sensor
 	name = "Powernet Sensor"
 	desc = "Small machine which transmits data about specific powernet."
-	anchored = 1
-	density = 0
-	level = 1
+	anchored = TRUE
+	density = FALSE
+	level = LEVEL_BELOW_PLATING
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
 

@@ -6,10 +6,10 @@
 	desc = "Impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
-	anchored = 1
+	anchored = TRUE
 	layer = PROJECTILE_LAYER
-	density = 0
-	invisibility = 101
+	density = FALSE
+	invisibility = INVISIBILITY_ABSTRACT
 	var/strength = 0
 	var/ticks_recovering = 10
 
@@ -35,12 +35,12 @@
 	//if we take too much damage, drop out - the generator will bring us back up if we have enough power
 	ticks_recovering = min(ticks_recovering + 2, 10)
 	if(strength < 1)
-		set_invisibility(101)
+		set_invisibility(INVISIBILITY_ABSTRACT)
 		set_density(0)
 		ticks_recovering = 10
 		strength = 0
 	else if(strength >= 1)
-		set_invisibility(0)
+		set_invisibility(INVISIBILITY_NONE)
 		set_density(1)
 
 /obj/effect/energy_field/proc/Strengthen(var/severity)
@@ -51,10 +51,10 @@
 	//if we take too much damage, drop out - the generator will bring us back up if we have enough power
 	var/old_density = density
 	if(strength >= 1)
-		set_invisibility(0)
+		set_invisibility(INVISIBILITY_NONE)
 		set_density(1)
 	else if(strength < 1)
-		set_invisibility(101)
+		set_invisibility(INVISIBILITY_ABSTRACT)
 		set_density(0)
 
 	if (density != old_density)

@@ -2,10 +2,10 @@
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "puddle"
-	anchored = 1
+	anchored = TRUE
 	simulated = 0
-	opacity = 0
-	mouse_opacity = 0
+	opacity = FALSE
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	layer = FLY_LAYER
 	alpha = 0
 	color = COLOR_LIQUID_WATER
@@ -34,7 +34,7 @@
 	return FALSE
 
 /obj/effect/fluid/on_reagent_change()
-	. = ..()
+	..()
 
 	if(reagents?.total_volume)
 		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
@@ -126,14 +126,18 @@
 	fluid_initial = 10
 
 // Permaflood overlay.
-var/global/obj/abstract/flood/flood_object = new
-/obj/abstract/flood
-	layer = DEEP_FLUID_LAYER
-	color = COLOR_LIQUID_WATER
-	icon = 'icons/effects/liquids.dmi'
-	icon_state = "ocean"
-	alpha = 140
-	invisibility = 0
+var/global/obj/effect/flood/flood_object = new
+/obj/effect/flood
+	name         = ""
+	icon         = 'icons/effects/liquids.dmi'
+	icon_state   = "ocean"
+	layer        = DEEP_FLUID_LAYER
+	color        = COLOR_LIQUID_WATER
+	alpha        = 140
+	invisibility = INVISIBILITY_NONE
+	simulated    = FALSE
+	density      = FALSE
+	anchored     = TRUE
 
 /obj/effect/fluid/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()

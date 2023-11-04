@@ -111,7 +111,7 @@
 	base_type = /obj/machinery/pointdefense
 	stock_part_presets = list(/decl/stock_part_preset/terminal_connect)
 	uncreated_component_parts = null
-	appearance_flags = PIXEL_SCALE | LONG_GLIDE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | LONG_GLIDE
 	var/active = TRUE
 	var/charge_cooldown = 1 SECOND  //time between it can fire at different targets
 	var/last_shot = 0
@@ -151,7 +151,7 @@
 			return FALSE
 	return TRUE
 
-/obj/machinery/pointdefense/proc/Shoot(var/weakref/target)
+/obj/machinery/pointdefense/proc/shoot_at(var/weakref/target)
 	var/obj/effect/meteor/M = target.resolve()
 	if(!istype(M))
 		return
@@ -233,7 +233,7 @@
 		if(!emagged && space_los(M))
 			var/weakref/target = weakref(M)
 			PC.targets +=target
-			Shoot(target)
+			shoot_at(target)
 			return
 
 /obj/machinery/pointdefense/RefreshParts()

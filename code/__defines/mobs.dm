@@ -10,7 +10,7 @@
 #define CANPUSH      BITFLAG(3)
 #define PASSEMOTES   BITFLAG(4) // Mob has a holder inside of it that need to see emotes.
 #define GODMODE      BITFLAG(5)
-#define FAKEDEATH    BITFLAG(6) // Replaces stuff like changeling.changeling_fakedeath.
+#define FAKEDEATH    BITFLAG(6)
 #define NO_ANTAG     BITFLAG(7) // Players are restricted from gaining antag roles when occupying this mob
 #define ENABLE_AI    BITFLAG(8) // Regardless of player control, the mob is using AI.
 
@@ -261,14 +261,6 @@
 #define SPECIES_ALIEN            "Humanoid"
 #define SPECIES_GOLEM            "Golem"
 
-#define BODY_FLAG_EXCLUDE        BITFLAG(0)
-#define BODY_FLAG_HUMANOID       BITFLAG(1)
-#define BODY_FLAG_MONKEY         BITFLAG(2)
-
-#define BODYTYPE_HUMANOID        "humanoid body"
-#define BODYTYPE_OTHER           "alien body"
-#define BODYTYPE_MONKEY          "small humanoid body"
-
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
 #define SURGERY_RETRACTED 2
@@ -310,13 +302,27 @@
 #define MARKING_TARGET_HAIR 1 // Draw a /decl/sprite_accessory/marking to the mob's hair, eg. ears & horns
 
 #define DEXTERITY_NONE            0
-#define DEXTERITY_SIMPLE_MACHINES 1
-#define DEXTERITY_KEYBOARDS       2
-#define DEXTERITY_TOUCHSCREENS    3
-#define DEXTERITY_GRIP            4
-#define DEXTERITY_WEAPONS         5
-#define DEXTERITY_COMPLEX_TOOLS   6
-#define DEXTERITY_FULL            7
+#define DEXTERITY_SIMPLE_MACHINES BITFLAG(0)
+#define DEXTERITY_HOLD_ITEM       BITFLAG(1)
+#define DEXTERITY_EQUIP_ITEM      BITFLAG(2)
+#define DEXTERITY_KEYBOARDS       BITFLAG(3)
+#define DEXTERITY_TOUCHSCREENS    BITFLAG(4)
+// TODO: actually get grab code to check this one.
+#define DEXTERITY_GRAPPLE         BITFLAG(5)
+#define DEXTERITY_WEAPONS         BITFLAG(6)
+#define DEXTERITY_COMPLEX_TOOLS   BITFLAG(7)
+#define DEXTERITY_BASE (DEXTERITY_SIMPLE_MACHINES|DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM)
+#define DEXTERITY_FULL (DEXTERITY_BASE|DEXTERITY_KEYBOARDS|DEXTERITY_TOUCHSCREENS|DEXTERITY_GRAPPLE|DEXTERITY_WEAPONS|DEXTERITY_COMPLEX_TOOLS)
+
+// List of dexterity flags ordered by 'complexity' for use in brainloss dex malus checking.
+var/global/list/dexterity_levels = list(
+	"[DEXTERITY_COMPLEX_TOOLS]",
+	"[DEXTERITY_WEAPONS]",
+	"[DEXTERITY_GRAPPLE]",
+	"[DEXTERITY_TOUCHSCREENS]",
+	"[DEXTERITY_KEYBOARDS]",
+	"[DEXTERITY_BASE]"
+)
 
 // used in /mob/living/carbon/human/can_inject, and by various callers of that proc
 #define CAN_INJECT 1
@@ -332,10 +338,44 @@
 #define PREF_GEN_RECORD "gen_record"
 
 // Simple animal icon state flags.
-#define MOB_ICON_HAS_LIVING_STATE BITFLAG(0)
-#define MOB_ICON_HAS_DEAD_STATE   BITFLAG(1)
-#define MOB_ICON_HAS_REST_STATE   BITFLAG(2)
-#define MOB_ICON_HAS_SLEEP_STATE  BITFLAG(3)
-#define MOB_ICON_HAS_GIB_STATE    BITFLAG(4)
-
+#define MOB_ICON_HAS_LIVING_STATE    BITFLAG(0)
+#define MOB_ICON_HAS_DEAD_STATE      BITFLAG(1)
+#define MOB_ICON_HAS_REST_STATE      BITFLAG(2)
+#define MOB_ICON_HAS_SLEEP_STATE     BITFLAG(3)
+#define MOB_ICON_HAS_GIB_STATE       BITFLAG(4)
+#define MOB_ICON_HAS_PARALYZED_STATE BITFLAG(5)
 #define NEUTER_ANIMATE "animate singular neutral"
+
+// Equipment Overlays Indices //
+#define HO_MUTATIONS_LAYER  1
+#define HO_SKIN_LAYER       2
+#define HO_DAMAGE_LAYER     3
+#define HO_SURGERY_LAYER    4 //bs12 specific.
+#define HO_UNDERWEAR_LAYER  5
+#define HO_UNIFORM_LAYER    6
+#define HO_ID_LAYER         7
+#define HO_SHOES_LAYER      8
+#define HO_GLOVES_LAYER     9
+#define HO_BELT_LAYER       10
+#define HO_SUIT_LAYER       11
+#define HO_GLASSES_LAYER    12
+#define HO_BELT_LAYER_ALT   13
+#define HO_SUIT_STORE_LAYER 14
+#define HO_BACK_LAYER       15
+#define HO_TAIL_LAYER       16 //bs12 specific. this hack is probably gonna come back to haunt me
+#define HO_HAIR_LAYER       17 //TODO: make part of head layer?
+#define HO_GOGGLES_LAYER    18
+#define HO_L_EAR_LAYER      19
+#define HO_R_EAR_LAYER      20
+#define HO_FACEMASK_LAYER   21
+#define HO_HEAD_LAYER       22
+#define HO_COLLAR_LAYER     23
+#define HO_HANDCUFF_LAYER   24
+#define HO_INHAND_LAYER     25
+#define HO_FIRE_LAYER       26 //If you're on fire
+#define TOTAL_OVER_LAYERS   26
+//////////////////////////////////
+
+// Underlay defines; vestigal implementation currently.
+#define HU_TAIL_LAYER 1
+#define TOTAL_UNDER_LAYERS 1

@@ -22,9 +22,9 @@ SUBSYSTEM_DEF(mapping)
 	 * Z-Level Handling Stuff
 	 */
 	/// Associative list of levels by strict z-level
-	var/list/levels_by_z =  list()
+	var/list/datum/level_data/levels_by_z =  list()
 	/// Associative list of levels by string ID
-	var/list/levels_by_id = list()
+	var/list/datum/level_data/levels_by_id = list()
 	/// List of z-levels containing the 'main map'
 	var/list/station_levels = list()
 	/// List of z-levels for admin functionality (Centcom, shuttle transit, etc)
@@ -53,11 +53,15 @@ SUBSYSTEM_DEF(mapping)
 	var/list/planetoid_data_by_id
 	///List of all z-levels in the world where the index corresponds to a z-level, and the key at that index is the planetoid_data datum for the associated planet
 	var/list/planetoid_data_by_z = list()
+	///A list of queued markers to initialize during SSmapping init.
+	var/list/obj/abstract/landmark/map_load_mark/queued_markers = list()
 
 /datum/controller/subsystem/mapping/PreInit()
 	reindex_lists()
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
+
+	reindex_lists()
 
 	// Load our banned map list, if we have one.
 	if(banned_dmm_location && fexists(banned_dmm_location))
@@ -66,6 +70,37 @@ SUBSYSTEM_DEF(mapping)
 	// Fetch and track all templates before doing anything that might need one.
 	for(var/datum/map_template/MT as anything in get_all_template_instances())
 		register_map_template(MT)
+
+	// Populate overmap.
+	if(length(global.using_map.overmap_ids))
+		for(var/overmap_id in global.using_map.overmap_ids)
+			var/overmap_type = global.using_map.overmap_ids[overmap_id] || /datum/overmap
+			new overmap_type(overmap_id)
+	// This needs to be non-null even if the overmap isn't created for this map.
+	overmap_event_handler = GET_DECL(/decl/overmap_event_handler)
+
+	var/old_maxz
+	for(var/z = 1 to world.maxz)
+		var/datum/level_data/level = levels_by_z[z]
+		if(!istype(level))
+			level = new /datum/level_data/space(z)
+			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
+		level.setup_level_data()
+
+	old_maxz = world.maxz
+	// Build away sites.
+	global.using_map.build_away_sites()
+	global.using_map.build_planets()
+	for(var/z = old_maxz + 1 to world.maxz)
+		var/datum/level_data/level = levels_by_z[z]
+		if(!istype(level))
+			level = new /datum/level_data/space(z)
+			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
+		level.setup_level_data()
+
+	// Generate turbolifts last, since away sites may have elevators to generate too.
+	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
+		turbolift.build_turbolift()
 
 	// Resize the world to the max template size to fix a BYOND bug with world resizing breaking events.
 	// REMOVE WHEN THIS IS FIXED: https://www.byond.com/forum/post/2833191
@@ -80,32 +115,10 @@ SUBSYSTEM_DEF(mapping)
 	if (new_maxy > world.maxy)
 		world.maxy = new_maxy
 
-	// Populate overmap.
-	if(length(global.using_map.overmap_ids))
-		for(var/overmap_id in global.using_map.overmap_ids)
-			var/overmap_type = global.using_map.overmap_ids[overmap_id] || /datum/overmap
-			new overmap_type(overmap_id)
-	// This needs to be non-null even if the overmap isn't created for this map.
-	overmap_event_handler = GET_DECL(/decl/overmap_event_handler)
-
-	// Build away sites.
-	global.using_map.build_away_sites()
-	global.using_map.build_planets()
-
 	// Initialize z-level objects.
 #ifdef UNIT_TEST
-	config.roundstart_level_generation = FALSE
+	config.roundstart_level_generation = FALSE //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
 #endif
-	for(var/z = 1 to world.maxz)
-		var/datum/level_data/level = levels_by_z[z]
-		if(!istype(level))
-			level = new /datum/level_data/space(z)
-			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
-		level.setup_level_data()
-
-	// Generate turbolifts.
-	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
-		turbolift.build_turbolift()
 
 	. = ..()
 

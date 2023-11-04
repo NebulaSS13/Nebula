@@ -82,9 +82,9 @@
 	. = ..()
 	add_overlay(overlay_image(icon, "[icon_state]_color", paint_color))
 	add_overlay(color_picker ? "[icon_state]_red" : "[icon_state]_blue")
-	if(ismob(loc))
+	if(isliving(loc))
 		var/mob/M = loc
-		M.update_inv_hands()
+		M.update_inhand_overlays()
 
 /obj/item/paint_sprayer/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && check_state_in_icon("[overlay.icon_state]_color", overlay.icon))
@@ -125,7 +125,7 @@
 	else if (istype(A, /obj/machinery/door/airlock))
 		. = paint_airlock(A, user)
 
-	else if (istype(A, /mob/living/exosuit))
+	else if (isexosuit(A))
 		to_chat(user, SPAN_WARNING("You can't paint an active exosuit. Dismantle it first."))
 		. = FALSE
 

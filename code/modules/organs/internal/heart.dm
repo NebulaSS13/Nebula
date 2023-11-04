@@ -113,7 +113,7 @@
 		return
 
 	//Dead or cryosleep people do not pump the blood.
-	if(!owner || owner.InStasis() || owner.stat == DEAD || owner.bodytemperature < 170)
+	if(!owner || owner.is_in_stasis() || owner.stat == DEAD || owner.bodytemperature < 170)
 		return
 
 	if(pulse != PULSE_NONE || BP_IS_PROSTHETIC(src))
@@ -217,7 +217,7 @@
 /obj/item/organ/internal/heart/get_mechanical_assisted_descriptor()
 	return "pacemaker-assisted [name]"
 
-/obj/item/organ/internal/heart/rejuvenate(ignore_prosthetic_prefs)
+/obj/item/organ/internal/heart/rejuvenate(ignore_organ_aspects)
 	. = ..()
 	if(!BP_IS_PROSTHETIC(src))
 		pulse = PULSE_NORM

@@ -24,12 +24,10 @@ var/global/datum/global_hud/hud
 	screen.icon_state = icon_state
 	screen.plane = FULLSCREEN_PLANE
 	screen.layer = FULLSCREEN_LAYER
-	screen.mouse_opacity = 0
+	screen.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	screen.alpha = 125
-
 	screen.blend_mode = BLEND_MULTIPLY
 	screen.color = color
-
 	return screen
 
 /datum/global_hud/New()
@@ -46,4 +44,4 @@ var/global/datum/global_hud/hud
 	holomap.icon = null
 	holomap.layer = HUD_BASE_LAYER
 	holomap.screen_loc = UI_HOLOMAP
-	holomap.mouse_opacity = 0
+	holomap.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE

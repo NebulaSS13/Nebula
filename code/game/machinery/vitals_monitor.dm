@@ -26,7 +26,7 @@
 			to_chat(user, SPAN_NOTICE("It's unpowered."))
 			return
 		to_chat(user, SPAN_NOTICE("Vitals of [victim]:"))
-		to_chat(user, SPAN_NOTICE("Pulse: [victim.get_pulse(GETPULSE_TOOL)]"))
+		to_chat(user, SPAN_NOTICE("Pulse: [victim.get_pulse_as_string(GETPULSE_TOOL)]"))
 
 		var/brain_activity = "none"
 		var/obj/item/organ/internal/brain = GET_INTERNAL_ORGAN(victim, BP_BRAIN)
@@ -61,7 +61,7 @@
 		update_use_power(POWER_USE_IDLE)
 	if(victim)
 		update_icon()
-	if(beep && victim && victim.pulse())
+	if(beep && victim && victim.get_pulse())
 		playsound(src, 'sound/machines/quiet_beep.ogg', 40)
 
 /obj/machinery/vitals_monitor/handle_mouse_drop(var/atom/over, var/mob/user)
@@ -84,7 +84,7 @@
 	if(!victim)
 		return
 
-	switch(victim.pulse())
+	switch(victim.get_pulse())
 		if(PULSE_NONE)
 			overlays += image(icon, icon_state = "pulse_flatline")
 			overlays += image(icon, icon_state = "pulse_warning")

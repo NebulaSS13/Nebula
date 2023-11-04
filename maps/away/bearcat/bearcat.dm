@@ -69,7 +69,7 @@
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
 	icon_screen = "lift"
-	density = 0
+	density = FALSE
 
 /obj/effect/shuttle_landmark/lift/top
 	name = "Top Deck"
@@ -116,7 +116,7 @@
 	corpse.real_name = "Captain"
 	corpse.name = "Captain"
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/deadcap)
-	outfit.equip(corpse)
+	outfit.equip_outfit(corpse)
 	corpse.adjustOxyLoss(corpse.maxHealth)
 	corpse.setBrainLoss(corpse.maxHealth)
 	var/obj/structure/bed/chair/C = locate() in T

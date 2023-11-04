@@ -37,7 +37,7 @@
 	burn_timer = world.time + 5 SECONDS
 	burn_power++
 	force += 2
-	if(!istype(src.loc, /mob/living/carbon/human))
+	if(!ishuman(src.loc))
 		qdel(src)
 		return
 	var/mob/living/carbon/human/user = src.loc

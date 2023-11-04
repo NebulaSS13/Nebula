@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-This repository is built and tested against BYOND version 514.1566 at time of writing. If this version number is at odds with `BYOND_MAJOR`.`BYOND_MINOR` as defined in [the test workflow](https://github.com/NebulaSS13/Nebula/blob/dev/.github/workflows/test.yml#L11) in the .github workflow folder, the workflow configuration should be considered authoritative and this document should be noted as out of date. Security vulnerabilities or exploits that apply to this version should be reported so that they can be closed.
+This repository is built and tested against BYOND version 514.1575 at time of writing. If this version number is at odds with `BYOND_MAJOR`.`BYOND_MINOR` as defined in [the test workflow](https://github.com/NebulaSS13/Nebula/blob/dev/.github/workflows/test.yml#L11) in the .github workflow folder, the workflow configuration should be considered authoritative and this document should be noted as out of date. Security vulnerabilities or exploits that apply to this version should be reported so that they can be closed.
 
 ## Reporting a Vulnerability
 

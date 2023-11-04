@@ -10,9 +10,13 @@
 	item_flags = ITEM_FLAG_IS_BELT
 	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
-	var/overlay_flags
 	attack_verb = list("whipped", "lashed", "disciplined")
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
+	var/overlay_flags
+
+/obj/item/storage/belt/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_belt_str)
 
 /obj/item/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
@@ -34,11 +38,6 @@
 		if(LAZYLEN(cur_overlays))
 			add_overlay(cur_overlays)
 	update_clothing_icon()
-
-/obj/item/storage/belt/update_clothing_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_belt()
 
 /obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
@@ -75,7 +74,7 @@
 		. = ..(W, user)
 
 /obj/item/storage/belt/holster/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(H.unholster(user))
@@ -133,7 +132,7 @@
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves
 		)
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/storage/belt/utility/full/WillContain()
 	return list(
@@ -441,8 +440,8 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = ITEM_SIZE_SMALL * 4
 	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
-	material = /decl/material/solid/cloth
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/cloth
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/belt/waistpack/big
 	name = "large waist pack"

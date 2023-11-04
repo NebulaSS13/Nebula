@@ -131,7 +131,7 @@
 	return 1
 
 // Get the raw list of potential players.
-/decl/special_role/proc/build_candidate_list(datum/game_mode/mode, ghosts_only)
+/decl/special_role/proc/build_candidate_list(decl/game_mode/mode, ghosts_only)
 	candidates = list() // Clear.
 
 	// Prune restricted status. Broke it up for readability.
@@ -155,7 +155,7 @@
 	return candidates
 
 // Builds a list of potential antags without actually setting them. Used to test mode viability.
-/decl/special_role/proc/get_potential_candidates(var/datum/game_mode/mode, var/ghosts_only)
+/decl/special_role/proc/get_potential_candidates(var/decl/game_mode/mode, var/ghosts_only)
 	var/candidates = list()
 
 	// Keeping broken up for readability
@@ -241,7 +241,7 @@
 	if(player.assigned_special_role)
 		log_debug("[player.key] was selected for [name] by lottery, but they already have a special role.")
 		return 0
-	if(!(flags & ANTAG_OVERRIDE_JOB) && (!player.current || istype(player.current, /mob/new_player)))
+	if(!(flags & ANTAG_OVERRIDE_JOB) && (!player.current || isnewplayer(player.current)))
 		log_debug("[player.key] was selected for [name] by lottery, but they have not joined the game.")
 		return 0
 	if(GAME_STATE >= RUNLEVEL_GAME && (isghostmind(player) || isnewplayer(player.current)) && !(player in SSticker.antag_pool))

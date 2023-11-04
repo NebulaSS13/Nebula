@@ -3,7 +3,7 @@
 	desc = "A folded membrane which rapidly expands into a large cubical shape on activation."
 	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "folded_wall"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	w_class = ITEM_SIZE_NORMAL
 	var/deploy_path = /obj/structure/inflatable/wall
 	var/inflatable_health
@@ -36,15 +36,15 @@
 /obj/structure/inflatable
 	name = "inflatable structure"
 	desc = "An inflated membrane. Do not puncture."
-	density = 1
-	anchored = 1
-	opacity = 0
+	density = TRUE
+	anchored = TRUE
+	opacity = FALSE
 	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "wall"
 	maxhealth = 20
 	hitsound = 'sound/effects/Glasshit.ogg'
 	atmos_canpass = CANPASS_DENSITY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	var/undeploy_path = null
 	var/taped
@@ -177,9 +177,9 @@
 
 /obj/structure/inflatable/door //Based on mineral door code
 	name = "inflatable door"
-	density = 1
-	anchored = 1
-	opacity = 0
+	density = TRUE
+	anchored = TRUE
+	opacity = FALSE
 
 	icon_state = "door_closed"
 	undeploy_path = /obj/item/inflatable/door

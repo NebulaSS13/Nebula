@@ -52,12 +52,9 @@
 	desc = "A strange rune said to be made by wizards. Or its just some shmuck playing with crayons again."
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "wizard_mark"
-
-	anchored = 1
-	unacidable = 1
+	anchored = TRUE
 	layer = TURF_LAYER
 	is_spawnable_type = FALSE // invalid without spell passed
-
 	var/spell/mark_recall/spell
 
 /obj/effect/cleanable/wizard_mark/Initialize(mapload,var/mrspell)

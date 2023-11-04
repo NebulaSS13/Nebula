@@ -31,18 +31,23 @@
 }                                                                          \
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {      \
 	path = /obj/item/organ/external/groin;                                 \
-}
-/* Readd if FBP construction is desirable
+}                                                                          \
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/chest {      \
 	path = /obj/item/organ/external/chest;                                 \
 }                                                                          \
-*/
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/head {       \
+	path = /obj/item/organ/external/head;                                  \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {      \
+	path = /obj/item/organ/external/groin;                                 \
+}
+
 /datum/fabricator_recipe/robotics/prosthetic
 	var/model
 
 /datum/fabricator_recipe/robotics/prosthetic/New()
 	if(model)
-		var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
+		var/decl/bodytype/prosthetic/model_manufacturer = GET_DECL(model)
 		category = "[model_manufacturer.name] Prosthetics"
 	else
 		category = "Unbranded Prosthetics"
@@ -54,7 +59,7 @@
 		var/obj/machinery/fabricator/robotics/robofab = fab
 		if(!istype(robofab))
 			return FALSE
-		var/decl/prosthetics_manufacturer/company = GET_DECL(model)
+		var/decl/bodytype/prosthetic/company = GET_DECL(model)
 		if(!istype(company))
 			return FALSE
 		var/decl/species/species = get_species_by_key(robofab.picked_prosthetic_species)
@@ -63,25 +68,25 @@
 		var/obj/item/organ/target_limb = path
 		if(!ispath(target_limb, /obj/item/organ))
 			return FALSE
-		return company.check_can_install(initial(target_limb.organ_tag), species.default_bodytype.bodytype_category, robofab.picked_prosthetic_species)
+		return company.check_can_install(initial(target_limb.organ_tag), species.default_bodytype.bodytype_category)
 
 /datum/fabricator_recipe/robotics/prosthetic/get_resources()
 	. = ..()
 	for(var/key in resources)
 		if(!ispath(key, /decl/material/solid))
 			resources -= key
-	var/meat_amount = LAZYACCESS(resources, /decl/material/solid/meat)
+	var/meat_amount = LAZYACCESS(resources, /decl/material/solid/organic/meat)
 	if(meat_amount)
 		if(LAZYACCESS(resources, /decl/material/solid/metal/steel))
 			resources[/decl/material/solid/metal/steel] += meat_amount
 		else
 			LAZYSET(resources, /decl/material/solid/metal/steel, meat_amount)
-		LAZYREMOVE(resources, /decl/material/solid/meat)
+		LAZYREMOVE(resources, /decl/material/solid/organic/meat)
 
 /datum/fabricator_recipe/robotics/prosthetic/get_product_name()
 	. = "prosthetic limb ([..()])"
 	if(ispath(model))
-		var/decl/prosthetics_manufacturer/brand = GET_DECL(model)
+		var/decl/bodytype/prosthetic/brand = GET_DECL(model)
 		return "[.] ([brand.name])"
 
 /datum/fabricator_recipe/robotics/prosthetic/build(var/turf/location, var/datum/fabricator_build_order/order)
@@ -91,7 +96,7 @@
 	if(species)
 		for(var/obj/item/organ/external/E in .)
 			E.set_species(species_name)
-			E.robotize(model, check_species = species_name)
+			E.set_bodytype(model)
 			E.status |= ORGAN_CUT_AWAY
 
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/basic_human, generic)
+DEFINE_ROBOLIMB_DESIGNS(/decl/bodytype/prosthetic/basic_human, generic)

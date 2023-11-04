@@ -34,30 +34,37 @@
 		holder = null
 	return ..()
 
-/obj/item/assembly/proc/activate()									//What the device does when turned on
+/// What the device does when turned on
+/obj/item/assembly/proc/activate()
 	return
 
-/obj/item/assembly/proc/pulsed(var/radio = 0)						//Called when another assembly acts on this one, var/radio will determine where it came from for wire calcs
+/// Called when another assembly acts on this one, var/radio will determine where it came from for wire calcs
+/obj/item/assembly/proc/pulsed(var/radio = 0)
 	return
 
-/obj/item/assembly/proc/pulse(var/radio = 0)						//Called when this device attempts to act on another device, var/radio determines if it was sent via radio or direct
+/// Called when this device attempts to act on another device, var/radio determines if it was sent via radio or direct
+/obj/item/assembly/proc/pulse_device(var/radio = 0)
 	return
 
-/obj/item/assembly/proc/toggle_secure()								//Code that has to happen when the assembly is un\secured goes here
+/// Code that has to happen when the assembly is un\secured goes here
+/obj/item/assembly/proc/toggle_secure()
 	return
 
-/obj/item/assembly/proc/attach_assembly(var/obj/A, var/mob/user)	//Called when an assembly is attacked by another
+/// Called when an assembly is attacked by another
+/obj/item/assembly/proc/attach_assembly(var/obj/A, var/mob/user)
 	return
 
-/obj/item/assembly/proc/process_cooldown()							//Called via spawn(10) to have it count down the cooldown var
+/// Called via spawn(10) to have it count down the cooldown var
+/obj/item/assembly/proc/process_cooldown()
 	return
 
-/obj/item/assembly/proc/holder_movement()							//Called when the holder is moved
+/// Called when the holder is moved
+/obj/item/assembly/proc/holder_movement()
 	return
 
-/obj/item/assembly/interact(mob/user)				//Called when attack_self is called
+/// Called when attack_self is called
+/obj/item/assembly/interact(mob/user)
 	return
-
 
 /obj/item/assembly/process_cooldown()
 	cooldown--
@@ -75,7 +82,7 @@
 	return 1
 
 
-/obj/item/assembly/pulse(var/radio = 0)
+/obj/item/assembly/pulse_device(var/radio = 0)
 	if(holder && (wires & WIRE_PULSE))
 		holder.process_activation(src, 1, 0)
 	if(holder && (wires & WIRE_PULSE_SPECIAL))

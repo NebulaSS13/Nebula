@@ -6,7 +6,7 @@
 	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	origin_tech = "{'biotech':4}"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
@@ -28,7 +28,7 @@
 	a hostile enviroment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	storage_types = CLOSET_STORAGE_MOBS
 	var/datum/gas_mixture/airtank
 
@@ -83,8 +83,8 @@
 /obj/structure/closet/body_bag/cryobag/Process()
 	if(stasis_power < 2)
 		return PROCESS_KILL
-	var/mob/living/carbon/human/H = locate() in src
-	if(!H)
+	var/mob/living/patient = locate() in src
+	if(!patient)
 		return PROCESS_KILL
 	degradation_time--
 	if(degradation_time < 0)
@@ -93,8 +93,8 @@
 		animate(src, color = color_matrix_saturation(get_saturation()), time = 10)
 		update_icon()
 
-	if(H.stasis_sources[STASIS_CRYOBAG] != stasis_power)
-		H.SetStasis(stasis_power, STASIS_CRYOBAG)
+	if(LAZYACCESS(patient.stasis_sources, STASIS_CRYOBAG) != stasis_power)
+		patient.set_stasis(stasis_power, STASIS_CRYOBAG)
 
 /obj/structure/closet/body_bag/cryobag/return_air() //Used to make stasis bags protect from vacuum.
 	if(airtank)
@@ -114,7 +114,7 @@
 	desc = "Pretty useless now.."
 	icon_state = "bodybag_used"
 	icon = 'icons/obj/closets/cryobag.dmi'
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,

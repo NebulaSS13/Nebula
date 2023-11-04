@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/borg_module/borg_rnd_analyser.dmi'
 	icon_state = "portable_analyzer"
 	desc = "Similar to the stationary version, this rather unwieldy device allows you to break down objects in the name of science."
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_REINFORCEMENT,
@@ -76,77 +76,6 @@
 		to_chat(user, "It has the following data saved:")
 		for(var/tech in saved_tech_levels)
 			to_chat(user, "[tech]: [saved_tech_levels[tech]]")
-
-/obj/item/party_light
-	name = "party light"
-	desc = "An array of LEDs in tons of colors."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "partylight-off"
-	item_state = "partylight-off"
-	material = /decl/material/solid/plastic
-	matter = list(
-		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/glass        = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/silicon      = MATTER_AMOUNT_TRACE,
-	)
-	var/activated = 0
-	var/strobe_effect = null
-
-/obj/item/party_light/attack_self()
-	if (activated)
-		deactivate_strobe()
-	else
-		activate_strobe()
-
-/obj/item/party_light/on_update_icon()
-	. = ..()
-	if (activated)
-		icon_state = "partylight-on"
-		set_light(7, 1)
-	else
-		icon_state = "partylight_off"
-		set_light(0)
-
-/obj/item/party_light/proc/activate_strobe()
-	activated = 1
-
-	// Create the party light effect and place it on the turf of who/whatever has it.
-	var/turf/T = get_turf(src)
-	var/obj/effect/party_light/L = new(T)
-	strobe_effect = L
-
-	// Make the light effect follow this party light object.
-	events_repository.register(/decl/observ/moved, src, L, /atom/movable/proc/move_to_turf_or_null)
-
-	update_icon()
-
-/obj/item/party_light/proc/deactivate_strobe()
-	activated = 0
-
-	// Cause the party light effect to stop following this object, and then delete it.
-	events_repository.unregister(/decl/observ/moved, src, strobe_effect, /atom/movable/proc/move_to_turf_or_null)
-	QDEL_NULL(strobe_effect)
-
-	update_icon()
-
-/obj/item/party_light/Destroy()
-	deactivate_strobe()
-	. = .. ()
-
-/obj/effect/party_light
-	name = "party light"
-	desc = "This is probably bad for your eyes."
-	icon = 'icons/effects/lens_flare.dmi'
-	icon_state = "party_strobe"
-	simulated = 0
-	anchored = 1
-	pixel_x = -30
-	pixel_y = -4
-
-/obj/effect/party_light/Initialize()
-	update_icon()
-	. = ..()
 
 //This is used to unlock other borg covers.
 /obj/item/card/robot //This is not a child of id cards, as to avoid dumb typechecks on computers.
@@ -230,7 +159,7 @@
 		return
 
 	//n_name = copytext(n_name, 1, 32)
-	if(( get_dist(user,paper) <= 1  && user.stat == 0))
+	if(( get_dist(user,paper) <= 1  && user.stat == CONSCIOUS))
 		paper.SetName("paper[(n_name ? text("- '[n_name]'") : null)]")
 		paper.last_modified_ckey = user.ckey
 	add_fingerprint(user)

@@ -1,7 +1,5 @@
 #if !defined(USING_MAP_DATUM)
 
-	#include "planets_testing_define.dm"
-
 	//Include Static Planet
 	#include "../planets/test_planet/test_planet.dm"
 

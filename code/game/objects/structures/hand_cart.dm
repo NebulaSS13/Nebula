@@ -3,8 +3,8 @@
 	desc = "A wheeled cart used to make heavy things less difficult to move through the power of lever-arm and the wheel."
 	icon = 'icons/obj/structures/handcart.dmi'
 	icon_state = "cart"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	movable_flags = MOVABLE_FLAG_WHEELED
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	material = /decl/material/solid/metal/steel
@@ -44,7 +44,7 @@
 	. = ..()
 
 /obj/structure/hand_cart/attack_hand(mob/user)
-	if(!carrying || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!carrying || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	unload_item(user)
 	return TRUE

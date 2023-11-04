@@ -54,11 +54,15 @@
 		color = override_colour || initial(color)
 		alpha = initial(alpha)
 
+///Spawns a single part_type part, returns the result. Allows overriding spawning the actual part and it's constructor args.
+/obj/structure/proc/create_dismantled_part(var/turf/T)
+	return new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
+
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	SHOULD_CALL_PARENT(TRUE)
 	if(parts_type && !ispath(parts_type, /obj/item/stack))
 		for(var/i = 1 to max(parts_amount, 1))
-			new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
+			LAZYADD(., create_dismantled_part(T))
 	else
 		for(var/mat in matter)
 			var/decl/material/M = GET_DECL(mat)
@@ -71,7 +75,7 @@
 			else
 				placing = parts_amount
 			if(placing > 0)
-				M.place_dismantled_product(T, FALSE, placing, parts_type)
+				LAZYADD(., M.place_dismantled_product(T, FALSE, placing, parts_type))
 	matter = null
 	material = null
 	reinf_material = null
