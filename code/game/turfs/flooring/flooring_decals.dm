@@ -1426,6 +1426,20 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/rust/part_rusted1
 	icon_state = "part_rusted1"
 
+/obj/effect/floor_decal/rust/part_rusted2
+	icon_state = "part_rusted2"
+
+/obj/effect/floor_decal/rust/part_rusted3
+	icon_state = "part_rusted3"
+
+/obj/effect/floor_decal/rust/mono_rusted1
+	icon_state = "mono_rusted1"
+
+/obj/effect/floor_decal/rust/mono_rusted2
+	icon_state = "mono_rusted2"
+
+/obj/effect/floor_decal/rust/mono_rusted3
+	icon_state = "mono_rusted3"
 /obj/effect/floor_decal/rust/steel_decals_rusted1
 	icon_state = "steel_decals_rusted1"
 

@@ -57,8 +57,8 @@
 
 	// First handle being in a submerged environment.
 	var/datum/gas_mixture/breath
-	var/turf/my_turf = get_turf(src)
-	if(istype(my_turf) && my_turf.is_flooded(lying))
+	if(is_flooded(lying))
+		var/turf/my_turf = get_turf(src)
 
 		//Can we get air from the turf above us?
 		var/can_breathe_air_above = FALSE

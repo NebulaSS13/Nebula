@@ -6,7 +6,7 @@
 /datum/random_map/building/generate_map()
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
-			var/current_cell = get_map_cell(x,y)
+			var/current_cell = TRANSLATE_COORD(x,y)
 			if(!current_cell)
 				continue
 			if(x == 1 || y == 1 || x == limit_x || y == limit_y)
@@ -18,7 +18,7 @@
 	var/list/possible_doors
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
-			var/current_cell = get_map_cell(x,y)
+			var/current_cell = TRANSLATE_COORD(x,y)
 			if(!current_cell)
 				continue
 			if(!(x == 1 || y == 1 || x == limit_x || y == limit_y))
@@ -39,7 +39,10 @@
 
 
 			if(place_door)
-				possible_doors |= target_map.get_map_cell(tx+x,ty+y)
+				var/tmp_cell
+				TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(tx+x, ty+y, target_map)
+				if(tmp_cell)
+					possible_doors |= tmp_cell
 
 	if(possible_doors.len)
 		// Place at least one door.

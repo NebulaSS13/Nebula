@@ -30,3 +30,11 @@
 	if (tmp_cell < 1 || tmp_cell > LEN) {\
 		tmp_cell = null;\
 	}
+
+#define TRANSLATE_COORD_OTHER_MAP(X,Y,MAP) ((((Y) - 1) * MAP.limit_x) + (X))
+#define TRANSLATE_AND_VERIFY_COORD_OTHER_MAP(X,Y,MAP) TRANSLATE_AND_VERIFY_COORD_OTHER_MAP_MLEN(X, Y, MAP, MAP.map.len)
+#define TRANSLATE_AND_VERIFY_COORD_OTHER_MAP_MLEN(X,Y,MAP,LEN) \
+	tmp_cell = TRANSLATE_COORD_OTHER_MAP(X,Y,MAP);\
+	if (tmp_cell < 1 || tmp_cell > LEN) {\
+		tmp_cell = null;\
+	}
