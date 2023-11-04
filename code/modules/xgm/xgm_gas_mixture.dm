@@ -322,9 +322,9 @@
 //Copies gas and temperature from another gas_mixture.
 /datum/gas_mixture/proc/copy_from(const/datum/gas_mixture/sample)
 	gas = sample.gas.Copy()
-	graphic = sample.graphic.Copy()
 	temperature = sample.temperature
 	update_values()
+	check_tile_graphic()
 	return 1
 
 /datum/gas_mixture/GetCloneArgs()

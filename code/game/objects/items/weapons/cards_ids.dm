@@ -196,7 +196,7 @@ var/global/const/NO_EMAG_ACT = -50
 	if(detail_color)
 		add_overlay(overlay_image(icon, "[icon_state]-colors", detail_color, RESET_COLOR))
 	for(var/detail in extra_details)
-		add_overlay(overlay_image(icon, detail, flags = RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-[detail]", flags = RESET_COLOR))
 
 /obj/item/card/id/Topic(href, href_list, datum/topic_state/state)
 	var/mob/user = usr

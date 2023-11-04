@@ -5,7 +5,7 @@
 // Used for advanced grid control (read: Substations)
 
 /obj/machinery/power/breakerbox
-	name = "Breaker Box"
+	name = "breaker box"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "bbox_off"
 	desc = "A large machine with heavy duty switching circuits used for advanced grid control."

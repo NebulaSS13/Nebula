@@ -109,8 +109,8 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(initial(health)/health < 0.5 && prob(5))
-		visible_message("<span class='warning'>\The [src] shudders and sparks</span>")
+	if(max_health/health < 0.5 && prob(5))
+		visible_message(SPAN_WARNING("\The [src] shudders and sparks."))
 		power_failure = TRUE
 	// Now spend it.
 	for(var/I in assembly_components)

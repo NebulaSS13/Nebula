@@ -148,7 +148,7 @@
 
 //Huge scrubber
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
-	name = "Huge Air Scrubber"
+	name = "huge air scrubber"
 	icon_state = "scrubber:0"
 	anchored = 1
 	volume = 50000
@@ -200,7 +200,7 @@
 
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
-	name = "Stationary Air Scrubber"
+	name = "stationary air scrubber"
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I, var/mob/user)
