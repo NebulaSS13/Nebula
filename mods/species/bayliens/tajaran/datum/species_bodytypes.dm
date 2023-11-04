@@ -24,7 +24,6 @@
 	eye_low_light_vision_adjustment_speed = 0.3
 
 	override_limb_types = list(
-		BP_EYES = /obj/item/organ/internal/eyes,
 		BP_TAIL = /obj/item/organ/external/tail/cat
 	)
 
