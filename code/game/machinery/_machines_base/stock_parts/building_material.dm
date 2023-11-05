@@ -33,23 +33,32 @@
 	new_material.forceMove(null)
 
 // amount will cap the amount given in a stack, but may return less than amount specified.
-/obj/item/stock_parts/building_material/proc/remove_material(material_type, amount)
+/obj/item/stock_parts/building_material/proc/remove_material(material_type, amount, force_destination)
 	if(ispath(material_type, /obj/item/stack))
 		for(var/obj/item/stack/stack in materials)
 			if(stack.stack_merge_type == material_type)
 				var/stack_amount = stack.get_amount()
 				if(stack_amount <= amount)
 					materials -= stack
-					stack.dropInto(loc)
+					if(force_destination)
+						stack.forceMove(force_destination)
+					else
+						stack.dropInto(loc)
 					amount -= stack_amount
 					return stack
 				var/obj/item/stack/new_stack = stack.split(amount)
-				new_stack.dropInto(loc)
+				if(force_destination)
+					new_stack.forceMove(force_destination)
+				else
+					new_stack.dropInto(loc)
 				return new_stack
 	for(var/obj/item/item in materials)
 		if(istype(item, material_type))
 			materials -= item
-			item.dropInto(loc)
+			if(force_destination)
+				item.forceMove(force_destination)
+			else
+				item.dropInto(loc)
 			return item
 
 /obj/item/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)

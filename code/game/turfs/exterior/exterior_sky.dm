@@ -2,6 +2,7 @@
 	name = "sky"
 	desc = "Hope you don't have a fear of heights..."
 	icon = 'icons/turf/exterior/sky_static.dmi'
+	icon_state = "0"
 	z_flags = 0
 
 /turf/exterior/open/sky/north

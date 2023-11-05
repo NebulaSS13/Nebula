@@ -8,7 +8,7 @@
 // This is used in NanoUI, for example.
 
 /obj/machinery/power/sensor
-	name = "Powernet Sensor"
+	name = "powernet sensor"
 	desc = "Small machine which transmits data about specific powernet."
 	anchored = TRUE
 	density = FALSE
@@ -37,7 +37,7 @@
 		if(!A)
 			return // in nullspace
 		id_tag = "[A.proper_name] #[sequential_id(A.name + "power/sensor")]"
-	name = "[id_tag] - Powernet Sensor"
+	name = "[id_tag] - powernet sensor"
 
 // Proc: check_grid_warning()
 // Parameters: None

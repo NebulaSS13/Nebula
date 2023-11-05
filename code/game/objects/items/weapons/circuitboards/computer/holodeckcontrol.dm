@@ -2,6 +2,7 @@
 	name = "circuitboard (holodeck control console)"
 	build_path = /obj/machinery/computer/HolodeckControl
 	origin_tech = "{'programming':2,'wormholes':2}"
+	buildtype_select = TRUE
 	var/last_to_emag
 	var/linkedholodeck_area
 	var/list/supported_programs

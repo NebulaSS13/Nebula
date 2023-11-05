@@ -209,8 +209,8 @@
 	material             = /decl/material/solid/metal/aluminium
 	matter               = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/turned_on        = TRUE
-	var/field_of_view    = 3       //3 tiles
-	var/obj/item/camera_film/film  //Currently loaded film
+	var/field_of_view    = 3 // squared, so 3 is a 3x3 of tiles
+	var/obj/item/camera_film/film = new //Currently loaded film
 
 /obj/item/camera/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
