@@ -21,7 +21,7 @@
 	var/treated_by_chem_effect_strength = 1 // How strong must the chemical effect be to cure this ailment?
 
 	// Fluff strings
-	var/initial_ailment_message = "Your $ORGAN$ doesn't feel quite right..."                // Shown in New()
+	var/initial_ailment_message = "Your $ORGAN$ $ORGAN_DOES$n't feel quite right..."        // Shown in New()
 	var/third_person_treatment_message = "$USER$ treats $TARGET$'s ailment with $ITEM$."    // Shown when treating other with an item.
 	var/self_treatment_message = "$USER$ treats $USER_HIS$ ailment with $ITEM$."            // Shown when treating self with an item.
 	var/medication_treatment_message = "Your ailment abates."                               // Shown when treated by a metabolized reagent or CE_X effect.
@@ -83,6 +83,9 @@
 		. = replacetext(., "$TARGET$", "\the [target]")
 	if(organ)
 		. = replacetext(., "$ORGAN$", organ.name)
+		var/decl/pronouns/organ_pronouns = get_pronouns_by_gender(organ.gender)
+		. = replacetext(., "$ORGAN_DOES$", organ_pronouns.does)
+		. = replacetext(., "$ORGAN_IS$", organ_pronouns.is)
 	. = capitalize(trim(.))
 
 /datum/ailment/proc/was_treated_by_item(var/obj/item/treatment, var/mob/user, var/mob/target)

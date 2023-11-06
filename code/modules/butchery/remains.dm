@@ -10,4 +10,5 @@
 
 /obj/item/bone/skull/deer
 	name = "deer skull"
+	icon = 'icons/obj/items/bone.dmi'
 	icon_state = "deer_skull"

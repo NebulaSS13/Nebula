@@ -74,7 +74,7 @@
 
 		airflow_open_directions |= d
 
-		if(unsim.zone_membership_candidate)
+		if(SHOULD_PARTICIPATE_IN_ZONES(unsim))
 
 			unsim.airflow_open_directions |= global.reverse_dir[d]
 
@@ -214,6 +214,7 @@
 	return FALSE
 
 /turf/return_air()
+	RETURN_TYPE(/datum/gas_mixture)
 
 	// ZAS participation
 	if(zone && !zone.invalid)

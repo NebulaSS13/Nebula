@@ -15,6 +15,10 @@
 	if(!check_rights(R_ADMIN|R_DEBUG))
 		return
 
+	if(GAME_STATE < RUNLEVEL_GAME)
+		to_chat(src, SPAN_WARNING("Please wait for the round to start..."))
+		return
+
 	var/T = get_turf(mob)
 	var/mob/living/carbon/human/quantum/Q = new (T)
 
