@@ -262,8 +262,9 @@ var/global/list/additional_antag_types = list()
 		antag.post_spawn()
 
 	// Update goals, now that antag status and jobs are both resolved.
-	for(var/thing in SSticker.minds)
-		var/datum/mind/mind = thing
+	for(var/datum/mind/mind as anything in SSticker.minds)
+		if(!mind.current || !mind.assigned_job)
+			continue
 		mind.generate_goals(mind.assigned_job, is_spawning=TRUE)
 		mind.current.show_goals()
 
