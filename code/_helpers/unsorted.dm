@@ -608,6 +608,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 					X.decals = old_decals
 					X.overlays = old_overlays
 					X.underlays = old_underlays
+					X.update_icon() // necessary to update decals properly
 
 					var/list/objs = new/list()
 					var/list/newobjs = new/list()
