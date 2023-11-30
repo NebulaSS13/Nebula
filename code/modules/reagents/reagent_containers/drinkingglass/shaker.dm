@@ -25,6 +25,18 @@
 /obj/item/chems/drinks/glass2/fitnessflask/proteinshake
 	name = "protein shake"
 
+// This exists to let the name auto-set properly.
+/decl/cocktail/proteinshake
+	name = "protein shake"
+	description = "A revolting slurry of protein and water, fortified with iron."
+	hidden_from_codex = TRUE
+	ratios = list(
+		/decl/material/liquid/nutriment = 2,
+		/decl/material/liquid/nutriment/protein = 1,
+		/decl/material/liquid/water = 3,
+		/decl/material/solid/metal/iron
+	)
+
 /obj/item/chems/drinks/glass2/fitnessflask/proteinshake/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/nutriment,         30)
 	reagents.add_reagent(/decl/material/solid/metal/iron,         10)
