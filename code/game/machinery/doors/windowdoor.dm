@@ -17,6 +17,7 @@
 	pry_mod = 0.5
 	base_type = /obj/machinery/door/window
 	frame_type = /obj/structure/windoor_assembly
+	set_dir_on_update = FALSE // these can properly face all 4 directions! don't force us into just 2!
 	var/base_state = "left"
 
 /obj/machinery/door/window/get_auto_access()
