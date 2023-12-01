@@ -48,9 +48,9 @@
 
 /obj/item/knife/folding/swiss/get_tool_quality(archetype)
 	. = (archetype == get_tool_archetype()) ? ..() : 0
-	
+
 /obj/item/knife/folding/swiss/attack_self(mob/user)
-	var/choice	
+	var/choice
 	if(user.a_intent != I_HELP && ((SWISSKNF_LBLADE in tools) || (SWISSKNF_SBLADE in tools)) && active_tool == SWISSKNF_CLOSED)
 		open = TRUE
 		if(SWISSKNF_LBLADE in tools)
@@ -63,7 +63,7 @@
 		else
 			choice = SWISSKNF_CLOSED
 			open = FALSE
-	
+
 	if(!choice || !CanPhysicallyInteract(user))
 		return
 	if(choice == SWISSKNF_CLOSED)
@@ -76,7 +76,7 @@
 			playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 		else
 			user.visible_message("<span class='notice'>\The [user] opens the [lowertext(choice)].</span>")
-			
+
 	active_tool = choice
 	update_force()
 	update_icon()
@@ -109,7 +109,7 @@
 	if(active_tool != null)
 		add_overlay(overlay_image(icon, active_tool, flags = RESET_COLOR))
 
-/obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	. = (active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE) ? ..() : new /image
 
 /obj/item/knife/folding/swiss/resolve_attackby(obj/target, mob/user)

@@ -47,7 +47,6 @@
 	gloves = /obj/item/clothing/gloves/rig/combat
 
 /obj/item/clothing/head/helmet/space/rig/combat
-	light_overlay = "helmet_light_dual_green"
 	icon = 'icons/clothing/rigs/helmets/helmet_security.dmi'
 /obj/item/clothing/suit/space/rig/combat
 	icon = 'icons/clothing/rigs/chests/chest_security.dmi'
@@ -120,7 +119,6 @@
 	gloves = /obj/item/clothing/gloves/rig/military
 
 /obj/item/clothing/head/helmet/space/rig/military
-	light_overlay = "helmet_light_dual_green"
 	icon = 'icons/clothing/rigs/helmets/helmet_military.dmi'
 /obj/item/clothing/suit/space/rig/military
 	icon = 'icons/clothing/rigs/chests/chest_military.dmi'

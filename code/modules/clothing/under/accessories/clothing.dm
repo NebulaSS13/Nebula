@@ -95,7 +95,7 @@
 	if(sleeves_rolled && check_state_in_icon("[icon_state]-sleeves", icon))
 		icon_state = "[icon_state]-sleeves"
 
-/obj/item/clothing/accessory/tangzhuang/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/accessory/tangzhuang/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && sleeves_rolled && check_state_in_icon("[overlay.icon_state]-sleeves", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-sleeves"
 	. = ..()

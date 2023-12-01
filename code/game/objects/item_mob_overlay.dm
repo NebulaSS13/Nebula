@@ -60,7 +60,7 @@ var/global/list/icon_state_cache = list()
 	..()
 	update_world_inventory_state()
 
-/obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 
 	if(!use_single_icon)
 		var/mob_state = (item_state || icon_state)
@@ -74,7 +74,7 @@ var/global/list/icon_state_cache = list()
 	var/bodytype = user_mob?.get_bodytype_category() || BODYTYPE_HUMANOID
 	var/useicon =  get_icon_for_bodytype(bodytype)
 	if(bodytype != BODYTYPE_HUMANOID && !check_state_in_icon("[bodytype]-[slot]", useicon))
-		var/fallback = get_fallback_slot(slot)
+		var/fallback = use_fallback_if_icon_missing && get_fallback_slot(slot)
 		if(fallback && fallback != slot && check_state_in_icon("[bodytype]-[fallback]", useicon))
 			slot = fallback
 		else
@@ -86,7 +86,7 @@ var/global/list/icon_state_cache = list()
 		use_state = "[bodytype]-[global.bodypart_to_slot_lookup_table[slot]]"
 
 	if(!check_state_in_icon(use_state, useicon))
-		var/fallback = get_fallback_slot(slot)
+		var/fallback = use_fallback_if_icon_missing && get_fallback_slot(slot)
 		if(!fallback)
 			return new /image
 		slot = fallback
@@ -98,7 +98,7 @@ var/global/list/icon_state_cache = list()
 	var/image/I = image(useicon, use_state)
 	I.color = color
 	I.appearance_flags = RESET_COLOR
-	. = adjust_mob_overlay(user_mob,  bodytype, I, slot, bodypart)
+	. = adjust_mob_overlay(user_mob, bodytype, I, slot, bodypart, use_fallback_if_icon_missing)
 
 /obj/item/proc/get_fallback_slot(var/slot)
 	return
@@ -109,7 +109,7 @@ var/global/list/icon_state_cache = list()
 // Ensure ..() is called only at the end of this proc, and that `overlay` is mutated rather than replaced.
 // This is necessary to ensure that all the overlays are generated and tracked prior to being passed to
 // the bodytype offset proc, which can scrub icon/icon_state information as part of the offset process.
-/obj/item/proc/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/proc/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	var/decl/bodytype/root_bodytype = user_mob?.get_bodytype()
 	if(root_bodytype && root_bodytype.bodytype_category != bodytype)
 		var/list/overlays_to_offset = overlay.overlays

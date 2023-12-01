@@ -22,7 +22,7 @@
 	if(loaded_tank)
 		add_overlay("[icon_state]-tank")
 
-/obj/item/gun/launcher/sealant/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/gun/launcher/sealant/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && loaded_tank)
 		overlay.overlays += image(overlay.icon, "[overlay.icon_state]-tank")
 	. = ..()

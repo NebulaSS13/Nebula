@@ -70,7 +70,7 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()	//so our mob-overlays
 
-/obj/item/clothing/head/welding/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/welding/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && up && check_state_in_icon("[overlay.icon_state]_up", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_up"
 	. = ..()
@@ -126,7 +126,7 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()
 
-/obj/item/clothing/head/ushanka/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/ushanka/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && up && check_state_in_icon("[overlay.icon_state]_up", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_up"
 	. = ..()
@@ -142,7 +142,6 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 2
-	light_overlay = "helmet_light"
 	w_class = ITEM_SIZE_NORMAL
 
 /*
@@ -199,7 +198,7 @@
 	if(overlay && check_state_in_icon("[overlay.icon_state]-flame", overlay.icon))
 		return emissive_overlay(overlay.icon, "[overlay.icon_state]-flame")
 
-/obj/item/clothing/head/cakehat/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
+/obj/item/clothing/head/cakehat/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && is_on_fire)
 		var/image/I = get_mob_flame_overlay(overlay, bodytype)
 		if(I)

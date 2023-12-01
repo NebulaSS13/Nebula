@@ -20,7 +20,7 @@
 		user.update_equipment_overlay(slot_shoes_str, FALSE)
 	var/obj/item/suit = user.get_equipped_item(slot_wear_suit_str)
 	if(_holding && (!suit || !(suit.flags_inv & HIDEJUMPSUIT)))
-		user.set_current_mob_overlay(HO_UNIFORM_LAYER, _holding.get_mob_overlay(user, slot_w_uniform_str), redraw_mob)
+		user.set_current_mob_overlay(HO_UNIFORM_LAYER, _holding.get_mob_overlay(user, slot_w_uniform_str, use_fallback_if_icon_missing = use_overlay_fallback_slot), redraw_mob)
 	else
 		user.set_current_mob_overlay(HO_UNIFORM_LAYER, null, redraw_mob)
 
