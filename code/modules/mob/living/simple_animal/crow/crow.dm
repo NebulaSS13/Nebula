@@ -1,7 +1,7 @@
 /obj/item/storage/backpack/messenger/corvid_couriers
 	name = "corvid messenger bag"
 	desc = "A small green-grey messenger bag with a blue Corvid Couriers logo on it."
-	icon = 'icons/obj/items/messenger_bag.dmi'
+	icon = 'icons/obj/items/storage/backpack/corvid.dmi'
 	icon_state = ICON_STATE_WORLD
 	storage_slots = 7
 	w_class = ITEM_SIZE_SMALL
@@ -64,8 +64,11 @@
 
 /mob/living/simple_animal/crow/on_update_icon()
 	..()
-	if(get_equipped_item(slot_back_str))
-		add_overlay("[icon_state]-bag")
+	var/obj/item/backpack = get_equipped_item(slot_back_str)
+	if(backpack)
+		var/overlay_state = "crow-[icon_state]-bag"
+		if(check_state_in_icon(overlay_state, backpack.icon))
+			add_overlay(image(backpack.icon, overlay_state))
 
 /mob/living/simple_animal/crow/cyber
 	name = "cybercrow"
