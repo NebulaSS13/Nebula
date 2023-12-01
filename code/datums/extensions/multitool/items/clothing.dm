@@ -14,5 +14,5 @@
 	if(!sensor)
 		to_chat(user, SPAN_WARNING("\The [uniform] doesn't have a vitals sensors attached."))
 		return
-	sensor.sensors_locked = !sensor.sensors_locked
-	user.visible_message(SPAN_NOTICE("\The [user] [sensor.sensors_locked ? "" : "un"]locks \the [user]'s suit sensor controls."), range = 2)
+	sensor.toggle_sensors_locked()
+	user.visible_message(SPAN_NOTICE("\The [user] [sensor.get_sensors_locked() ? "" : "un"]locks \the [user]'s suit sensor controls."), range = 2)

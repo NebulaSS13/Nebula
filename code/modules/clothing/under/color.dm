@@ -13,7 +13,7 @@
 /obj/item/clothing/under/color/orange/Initialize()
 	. = ..()
 	var/obj/item/clothing/accessory/vitals_sensor/sensor = new(src)
-	sensor.sensors_locked = TRUE
+	sensor.set_sensors_locked(TRUE)
 	sensor.set_sensor_mode(VITALS_SENSOR_TRACKING)
 	attach_accessory(null, sensor)
 

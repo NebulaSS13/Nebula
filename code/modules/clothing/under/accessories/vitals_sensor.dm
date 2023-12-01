@@ -14,6 +14,23 @@
 		"Tracking beacon"
 	)
 
+/obj/item/clothing/accessory/vitals_sensor/Initialize()
+	. = ..()
+	if(isnull(sensor_mode) || sensor_mode < VITALS_SENSOR_OFF || sensor_mode > VITALS_SENSOR_TRACKING)
+		set_sensor_mode(rand(VITALS_SENSOR_OFF, VITALS_SENSOR_TRACKING))
+	update_removable()
+
+/obj/item/clothing/accessory/vitals_sensor/proc/toggle_sensors_locked()
+	set_sensors_locked(!get_sensors_locked())
+
+/obj/item/clothing/accessory/vitals_sensor/proc/get_sensors_locked()
+	return sensors_locked
+
+/obj/item/clothing/accessory/vitals_sensor/proc/set_sensors_locked(new_state)
+	if(get_sensors_locked() != new_state)
+		sensors_locked = new_state
+		update_removable()
+
 /obj/item/clothing/accessory/vitals_sensor/examine(mob/user)
 	. = ..()
 	switch(sensor_mode)
@@ -26,10 +43,20 @@
 		if(VITALS_SENSOR_TRACKING)
 			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
-/obj/item/clothing/accessory/vitals_sensor/Initialize()
+/obj/item/clothing/accessory/vitals_sensor/on_attached(obj/item/clothing/S, mob/user)
 	. = ..()
-	if(isnull(sensor_mode) || sensor_mode < VITALS_SENSOR_OFF || sensor_mode > VITALS_SENSOR_TRACKING)
-		set_sensor_mode(rand(VITALS_SENSOR_OFF, VITALS_SENSOR_TRACKING))
+	update_removable()
+
+/obj/item/clothing/accessory/vitals_sensor/on_removed(mob/user)
+	. = ..()
+	update_removable()
+
+/obj/item/clothing/accessory/vitals_sensor/proc/update_removable()
+	var/obj/item/clothing/clothes = loc
+	if(istype(clothes) && (src in clothes.accessories))
+		removable = !sensors_locked
+	else
+		removable = TRUE
 
 /obj/item/clothing/accessory/vitals_sensor/proc/set_sensor_mode(var/new_sensor_mode)
 	if(sensor_mode != new_sensor_mode)

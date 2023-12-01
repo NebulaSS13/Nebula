@@ -34,7 +34,7 @@
 			var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
 			if (!istype(sensor))
 				return
-			visible_message(SPAN_DANGER("\The [user] is trying to [sensor.sensors_locked ? "un" : ""]lock \the [src]'s sensors!"))
+			visible_message(SPAN_DANGER("\The [user] is trying to [sensor.get_sensors_locked() ? "un" : ""]lock \the [src]'s sensors!"))
 			if (do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				if(QDELETED(sensor) || sensor != get_vitals_sensor())
 					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [sensor] anymore."))
@@ -43,8 +43,8 @@
 				if (!istype(user_multitool))
 					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [src]'s sensors."))
 					return
-				sensor.sensors_locked = !sensor.sensors_locked
-				visible_message(SPAN_NOTICE("\The [user] [sensor.sensors_locked ? "" : "un"]locks \the [src]'s vitals sensor controls."), range = 2)
+				sensor.toggle_sensors_locked()
+				visible_message(SPAN_NOTICE("\The [user] [sensor.get_sensors_locked() ? "" : "un"]locks \the [src]'s vitals sensor controls."), range = 2)
 			return
 		if("internals")
 			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
@@ -137,7 +137,7 @@
 	var/obj/item/clothing/accessory/vitals_sensor/sensor = get_vitals_sensor()
 	if(!istype(sensor))
 		to_chat(user, SPAN_WARNING("\The [src] is not wearing a vitals sensor."))
-	if (sensor.sensors_locked)
+	if (sensor.get_sensors_locked())
 		to_chat(user, SPAN_WARNING("\The [src]'s suit sensor controls are locked."))
 		return
 	admin_attack_log(user, src, "Toggled their suit sensors.", "Toggled their suit sensors.", "toggled the suit sensors of")
@@ -147,6 +147,4 @@
 	for(var/check_slot in global.vitals_sensor_equip_slots)
 		var/obj/item/clothing/equipped = get_equipped_item(check_slot)
 		if(istype(equipped))
-			var/sensor = locate(/obj/item/clothing/accessory/vitals_sensor) in equipped.accessories
-			if(sensor)
-				return sensor
+			return (locate(/obj/item/clothing/accessory/vitals_sensor) in equipped.accessories)

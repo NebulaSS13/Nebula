@@ -76,7 +76,7 @@ var/global/list/outfits_decls_by_type_
 				succeeded = TRUE
 			qdel(wear_uniform)
 		if(!succeeded)
-			. += "outfit is flagged for sensors, but uniform do not accept sensors"
+			. += "outfit is flagged for sensors, but uniform does not accept sensors"
 		qdel(sensor)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)

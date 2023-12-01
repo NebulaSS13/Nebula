@@ -69,7 +69,7 @@
 	update_clothing_icon()
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
-	if(!A || !(A in accessories))
+	if(!A || !(A in accessories) || !A.removable || !A.canremove)
 		return
 
 	A.on_removed(user)
@@ -94,11 +94,21 @@
 	if(!LAZYLEN(accessories))
 		return
 
+	var/list/removable_accessories = list()
+	for(var/obj/item/clothing/accessory/accessory in accessories)
+		if(accessory.canremove && accessory.removable)
+			removable_accessories += accessory
+
+	if(!length(removable_accessories))
+		to_chat(usr, SPAN_WARNING("You have no removable accessories."))
+		verbs -= /obj/item/clothing/proc/removetie_verb
+		return
+
 	var/obj/item/clothing/accessory/A
-	if(LAZYLEN(accessories) > 1)
-		A = show_radial_menu(M, M, make_item_radial_menu_choices(accessories), radius = 42, tooltips = TRUE)
+	if(LAZYLEN(removable_accessories) > 1)
+		A = show_radial_menu(M, M, make_item_radial_menu_choices(removable_accessories), radius = 42, tooltips = TRUE)
 	else
-		A = accessories[1]
+		A = removable_accessories[1]
 
 	remove_accessory(usr, A)
 

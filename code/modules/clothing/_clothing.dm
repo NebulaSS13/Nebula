@@ -267,10 +267,10 @@
 	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in old_clothes.accessories
 	if(!sensor)
 		return
+	sensor.removable = TRUE // This will be refreshed by remove_accessory/attach_accessory
 	old_clothes.remove_accessory(null, sensor)
 	attach_accessory(null, sensor)
-	if(!(sensor in accessories))
-		qdel(sensor)
+
 
 /decl/interaction_handler/clothing_set_sensors
 	name = "Set Sensors Level"
