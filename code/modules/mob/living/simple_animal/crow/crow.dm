@@ -26,6 +26,10 @@
 	universal_speak = TRUE
 	pass_flags = PASS_FLAG_TABLE
 
+
+/mob/living/simple_animal/crow/get_overlay_state_modifier()
+	return (stat == DEAD) ? "-dead" : null
+
 /decl/bodytype/animal/crow
 	name = "crow"
 	bodytype_category = "crow body"

@@ -1416,3 +1416,8 @@
 /mob/proc/getBrainLoss()
 	return 0
 
+/mob/proc/get_bodytype_category()
+	return get_bodytype()?.bodytype_category
+
+/mob/proc/get_overlay_state_modifier()
+	return
