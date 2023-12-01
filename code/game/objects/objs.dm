@@ -168,9 +168,6 @@
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)
 	return
 
-/obj/can_be_injected_by(var/atom/injector)
-	. = ATOM_IS_OPEN_CONTAINER(src) && ..()
-
 /obj/get_mass()
 	return min(2**(w_class-1), 100)
 
@@ -339,3 +336,6 @@
 		matter = null
 	new /obj/effect/decal/cleanable/molten_item(src)
 	qdel(src)
+
+/obj/can_be_injected_by(var/atom/injector)
+	return ATOM_IS_OPEN_CONTAINER(src)

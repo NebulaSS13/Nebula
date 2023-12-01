@@ -54,3 +54,6 @@ var/global/list/chem_implants = list()
 /obj/item/implantcase/chem
 	name = "glass case - 'chem'"
 	imp = /obj/item/implant/chem
+
+/obj/item/implantcase/chem/can_be_injected_by(var/atom/injector)
+	return FALSE

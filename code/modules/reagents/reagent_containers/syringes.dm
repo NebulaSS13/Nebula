@@ -182,12 +182,14 @@
 		to_chat(user, SPAN_NOTICE("The syringe is empty."))
 		mode = SYRINGE_DRAW
 		return
-	if(istype(target, /obj/item/implantcase/chem))
+
+	if(!user.Adjacent(target))
 		return
 
-	if(!ATOM_IS_OPEN_CONTAINER(target) && !ismob(target) && !istype(target, /obj/item/chems/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/cigarettes))
+	if(!ismob(target) && (!target.reagents || !target.can_be_injected_by(src)))
 		to_chat(user, SPAN_NOTICE("You cannot directly fill this object."))
 		return
+
 	if(!REAGENTS_FREE_SPACE(target.reagents))
 		to_chat(user, SPAN_NOTICE("[target] is full."))
 		return

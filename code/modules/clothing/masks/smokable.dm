@@ -201,6 +201,9 @@
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 	brand = "\improper Trans-Stellar Duty-free"
 
+/obj/item/clothing/mask/smokable/cigarette/can_be_injected_by(var/atom/injector)
+	return TRUE
+
 /obj/item/clothing/mask/smokable/cigarette/Initialize()
 	. = ..()
 	initialize_reagents()
