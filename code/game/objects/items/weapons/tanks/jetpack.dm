@@ -41,7 +41,7 @@
 	if(on)
 		add_overlay("[icon_state]-on")
 
-/obj/item/tank/jetpack/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/tank/jetpack/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && slot == slot_back_str && on)
 		overlay.icon_state = "[overlay.icon_state]-on"
 	. = ..()

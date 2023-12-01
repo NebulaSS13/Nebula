@@ -7,7 +7,6 @@
 	name = "alien helmet"
 	icon = 'mods/species/vox/icons/clothing/pressure_helmet.dmi'
 	desc = "A huge, armoured, pressurized helmet. Looks like an ancient human diving suit."
-	light_overlay = "invis_light"
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,
@@ -29,7 +28,7 @@
 	color = "#486e6e"
 	var/lights_color = "#00ffff"
 
-/obj/item/clothing/head/helmet/space/vox/carapace/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
+/obj/item/clothing/head/helmet/space/vox/carapace/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && lights_color && check_state_in_icon("[overlay.icon_state]-lights", overlay.icon))
 		var/image/I = emissive_overlay(overlay.icon, "[overlay.icon_state]-lights")
 		I.color = lights_color

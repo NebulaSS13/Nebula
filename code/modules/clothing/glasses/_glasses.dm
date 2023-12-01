@@ -32,7 +32,7 @@
 	if(ispath(hud))
 		hud = new hud(src)
 
-/obj/item/clothing/glasses/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/glasses/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-active", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-active"
 	. = ..()

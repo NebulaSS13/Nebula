@@ -110,7 +110,6 @@
 	req_access = list(access_engine_equip)
 
 /obj/item/clothing/head/helmet/space/rig/eva
-	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/engineering
 	icon = 'icons/clothing/rigs/helmets/helmet_eva.dmi'
 /obj/item/clothing/suit/space/rig/eva
@@ -212,7 +211,6 @@
 	req_access = list(access_tox)
 
 /obj/item/clothing/head/helmet/space/rig/hazmat
-	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/research
 	icon = 'icons/clothing/rigs/helmets/helmet_science.dmi'
 /obj/item/clothing/suit/space/rig/hazmat
@@ -303,7 +301,6 @@
 	anomaly_shielding = 1
 
 /obj/item/clothing/head/helmet/space/rig/hazard
-	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/security
 	icon = 'icons/clothing/rigs/helmets/helmet_hazard.dmi'
 /obj/item/clothing/suit/space/rig/hazard
@@ -354,7 +351,6 @@
 
 /obj/item/clothing/head/helmet/space/rig/zero
 	camera = null
-	light_overlay = "helm_light"
 	desc = "A bubble helmet that maximizes the field of view. A state of the art holographic display provides a stream of information"
 	icon = 'icons/clothing/rigs/helmets/helmet_null.dmi'
 

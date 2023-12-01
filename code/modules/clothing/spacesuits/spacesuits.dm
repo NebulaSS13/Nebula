@@ -23,7 +23,6 @@
 	randpixel = 0
 	flash_protection = FLASH_PROTECTION_MAJOR
 	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
 	brightness_on = 4
 	light_wedge = LIGHT_WIDE
 	on = 0
@@ -98,7 +97,7 @@
 	to_chat(usr, "You toggle [src]'s visor tint.")
 	update_tint()
 
-/obj/item/clothing/head/helmet/space/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/helmet/space/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && tint && check_state_in_icon("[overlay.icon_state]_dark", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_dark"
 	. = ..()

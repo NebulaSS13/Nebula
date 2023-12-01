@@ -25,7 +25,7 @@
 
 // Cloaks should layer over and under everything, so set the layer directly rather
 // than relying on overlay order. This also overlays over inhands but it looks ok.
-/obj/item/clothing/accessory/cloak/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype, var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/accessory/cloak/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 
 	if(slot == slot_wear_suit_str || slot == slot_tie_str || slot == slot_w_uniform_str)
 

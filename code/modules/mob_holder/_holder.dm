@@ -25,7 +25,7 @@
 		add_vis_contents(src, AM)
 
 // Grab our inhands from the mob we're wrapping, if they have any.
-/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	var/mob/M = locate() in contents
 	if(istype(M))
 		icon =  M.get_holder_icon()

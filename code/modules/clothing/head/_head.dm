@@ -8,20 +8,9 @@
 	body_parts_covered  = SLOT_HEAD
 
 	var/protects_against_weather = FALSE
-	var/image/light_overlay_image
-	var/light_overlay = "helmet_light"
 	var/light_applied
 	var/brightness_on
 	var/on = 0
-
-/obj/item/clothing/head/equipped(var/mob/user, var/slot)
-	light_overlay_image = null
-	..(user, slot)
-
-/obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	if(overlay && on && slot == slot_head_str)
-		overlay.overlays += overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
-	. = ..()
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -46,29 +35,14 @@
 
 /obj/item/clothing/head/on_update_icon(var/mob/user)
 	. = ..()
-	if(on)
-		add_light_overlay()
 	update_clothing_icon()
 
-/obj/item/clothing/head/proc/add_light_overlay()
-	if(use_single_icon)
-		var/cache_key = "[icon]-[get_world_inventory_state()]_icon"
-		if(!light_overlay_cache[cache_key])
-			light_overlay_cache[cache_key] = image(icon, "[get_world_inventory_state()]_light")
-		overlays |= light_overlay_cache[cache_key]
-		return
-
-	if(!light_overlay_cache["[light_overlay]_icon"])
-		light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
-	overlays |= light_overlay_cache["[light_overlay]_icon"]
-
-/obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))
 		var/image/light_overlay = image(overlay.icon, "[overlay.icon_state]_light")
-		if(ishuman(user_mob))
-			var/mob/living/carbon/human/H = user_mob
-			if(H.get_bodytype_category() != bodytype)
-				light_overlay = H.get_bodytype().get_offset_overlay_image(light_overlay.icon, light_overlay.icon_state, null, slot)
+		var/decl/bodytype/bodytype_decl = user_mob.get_bodytype()
+		if(bodytype_decl && bodytype_decl.bodytype_category != bodytype)
+			light_overlay = bodytype_decl.get_offset_overlay_image(light_overlay.icon, light_overlay.icon_state, null, slot)
 		overlay.overlays += light_overlay
 	. = ..()
 

@@ -37,7 +37,6 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
 	icon = 'icons/clothing/rigs/gloves/gloves_merc.dmi'
 /obj/item/clothing/head/helmet/space/rig/merc
-	light_overlay = "helmet_light_dual_green"
 	camera = /obj/machinery/camera/network/mercenary
 	icon = 'icons/clothing/rigs/helmets/helmet_merc.dmi'
 /obj/item/clothing/shoes/rig/merc
