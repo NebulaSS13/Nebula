@@ -103,7 +103,6 @@
 	name = "flannel shirt"
 	desc = "A comfy, plaid flannel shirt."
 	icon = 'icons/clothing/accessories/clothing/flannel.dmi'
-	var/rolled = FALSE
 	var/tucked = FALSE
 
 /obj/item/clothing/accessory/toggleable/flannel/on_attached(obj/item/clothing/under/S, mob/user)
@@ -111,27 +110,12 @@
 	var/obj/item/clothing/suit = loc
 	if(istype(suit))
 		suit.verbs |= /obj/item/clothing/accessory/toggleable/flannel/verb/tuck
-		suit.verbs |= /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves
 
 /obj/item/clothing/accessory/toggleable/flannel/on_removed(mob/user)
 	var/obj/item/clothing/suit = loc
 	if(istype(suit))
 		suit.verbs -= /obj/item/clothing/accessory/toggleable/flannel/verb/tuck
-		suit.verbs -= /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves
 	..()
-
-/obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves()
-	set name = "Roll Flannel Sleeves"
-	set category = "Object"
-	set src in usr
-	if(usr.incapacitated())
-		return FALSE
-	var/obj/item/clothing/accessory/toggleable/flannel/H = (istype(src, /obj/item/clothing/accessory/toggleable)) ? src : (locate() in src)
-	if(H)
-		H.rolled = !H.rolled
-		to_chat(usr, SPAN_NOTICE("You roll [H.rolled ? "up" : "down"] the sleeves of \the [H]."))
-		H.update_icon()
-		H.update_clothing_icon()
 
 /obj/item/clothing/accessory/toggleable/flannel/verb/tuck()
 	set name = "Toggle Shirt Tucking"
@@ -150,16 +134,11 @@
 
 /obj/item/clothing/accessory/toggleable/flannel/on_update_icon()
 	. = ..()
-	if(rolled && check_state_in_icon("[icon_state]-rolled", icon))
-		icon_state = "[icon_state]-rolled"
 	if(tucked && check_state_in_icon("[icon_state]-tucked", icon))
 		icon_state = "[icon_state]-tucked"
 	update_clothing_icon()
 
 /obj/item/clothing/accessory/toggleable/flannel/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
-	if(overlay)
-		if(rolled && check_state_in_icon("[overlay.icon_state]-rolled", overlay.icon))
-			overlay.icon_state = "[overlay.icon_state]-rolled"
-		if(tucked && check_state_in_icon("[overlay.icon_state]-tucked", overlay.icon))
-			overlay.icon_state = "[overlay.icon_state]-tucked"
+	if(overlay && tucked && check_state_in_icon("[overlay.icon_state]-tucked", overlay.icon))
+		overlay.icon_state = "[overlay.icon_state]-tucked"
 	. = ..()

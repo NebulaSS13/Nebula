@@ -15433,7 +15433,7 @@
 /area/exodus/maintenance/auxsolarstarboard)
 "aGz" = (
 /obj/structure/safe,
-/obj/item/clothing/under/jumpsuit/yellow,
+/obj/item/clothing/jumpsuit/yellow,
 /obj/item/key,
 /obj/item/sword/katana,
 /obj/structure/cable/green{
@@ -54073,8 +54073,8 @@
 /obj/effect/floor_decal/corner/purple{
 	dir = 9
 	},
-/obj/item/clothing/under/jumpsuit/hydroponics,
-/obj/item/clothing/under/jumpsuit/hydroponics,
+/obj/item/clothing/jumpsuit/hydroponics,
+/obj/item/clothing/jumpsuit/hydroponics,
 /obj/item/clothing/gloves/thick/botany,
 /obj/item/clothing/gloves/thick/botany,
 /turf/simulated/floor/tiled/white,
@@ -61407,13 +61407,13 @@
 	dir = 4
 	},
 /obj/structure/closet/secure_closet/personal/patient,
-/obj/item/clothing/under/jumpsuit/white,
-/obj/item/clothing/under/jumpsuit/white,
-/obj/item/clothing/under/jumpsuit/white,
-/obj/item/clothing/under/jumpsuit/white,
-/obj/item/clothing/under/jumpsuit/white,
-/obj/item/clothing/under/jumpsuit/white,
-/obj/item/clothing/under/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
+/obj/item/clothing/jumpsuit/white,
 /obj/item/clothing/shoes/color/white,
 /obj/item/clothing/shoes/color/white,
 /obj/item/clothing/shoes/color/white,

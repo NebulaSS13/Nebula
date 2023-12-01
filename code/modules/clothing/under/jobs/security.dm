@@ -8,7 +8,7 @@
 /*
  * Security
  */
-/obj/item/clothing/under/jumpsuit/warden
+/obj/item/clothing/jumpsuit/warden
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for more robust protection. It has the word \"Warden\" written on the shoulders."
 	name = "warden's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_warden.dmi'
@@ -26,7 +26,7 @@
 	icon = 'icons/clothing/head/warden.dmi'
 	body_parts_covered = 0
 
-/obj/item/clothing/under/jumpsuit/security
+/obj/item/clothing/jumpsuit/security
 	name = "security officer's jumpsuit"
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sec.dmi'
@@ -131,7 +131,7 @@
 /*
  * Head of Security
  */
-/obj/item/clothing/under/jumpsuit/head_of_security
+/obj/item/clothing/jumpsuit/head_of_security
 	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
 	name = "head of security's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos.dmi'
@@ -173,7 +173,7 @@
 	origin_tech = @'{"materials":3,"engineering":1, "combat":2}'
 
 //Jensen cosplay gear
-/obj/item/clothing/under/jumpsuit/head_of_security/jensen
+/obj/item/clothing/jumpsuit/head_of_security/jensen
 	desc = "You never asked for anything that stylish."
 	name = "head of security's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos_alt.dmi'

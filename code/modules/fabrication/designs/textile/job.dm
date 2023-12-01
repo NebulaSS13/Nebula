@@ -19,28 +19,28 @@
 // Medical (Science barely has enough for a category)
 /datum/fabricator_recipe/textiles/job/medical
 	category = "Medical & Science Clothing"
-	path = /obj/item/clothing/under/jumpsuit/medical
+	path = /obj/item/clothing/jumpsuit/medical
 
 /datum/fabricator_recipe/textiles/job/medical/research_director
-	path = /obj/item/clothing/under/jumpsuit/research_director
+	path = /obj/item/clothing/jumpsuit/research_director
 
 /datum/fabricator_recipe/textiles/job/medical/rdalt
-	path = /obj/item/clothing/under/jumpsuit/research_director/rdalt
+	path = /obj/item/clothing/jumpsuit/research_director/rdalt
 
 /datum/fabricator_recipe/textiles/job/medical/dress_rd
 	path = /obj/item/clothing/under/dress_rd
 
 /datum/fabricator_recipe/textiles/job/medical/chemist
-	path = /obj/item/clothing/under/jumpsuit/chemist
+	path = /obj/item/clothing/jumpsuit/chemist
 
 /datum/fabricator_recipe/textiles/job/medical/chief_medical_officer
-	path = /obj/item/clothing/under/jumpsuit/chief_medical_officer
+	path = /obj/item/clothing/jumpsuit/chief_medical_officer
 
 /datum/fabricator_recipe/textiles/job/medical/geneticist
-	path = /obj/item/clothing/under/jumpsuit/geneticist
+	path = /obj/item/clothing/jumpsuit/geneticist
 
 /datum/fabricator_recipe/textiles/job/medical/virologist
-	path = /obj/item/clothing/under/jumpsuit/virologist
+	path = /obj/item/clothing/jumpsuit/virologist
 
 /datum/fabricator_recipe/textiles/job/medical/nursesuit
 	path = /obj/item/clothing/under/nursesuit
@@ -49,40 +49,40 @@
 	path = /obj/item/clothing/under/nurse
 
 /datum/fabricator_recipe/textiles/job/medical/medical
-	path = /obj/item/clothing/under/jumpsuit/medical
+	path = /obj/item/clothing/jumpsuit/medical
 
 /datum/fabricator_recipe/textiles/job/medical/paramedic
-	path = /obj/item/clothing/under/jumpsuit/medical/paramedic
+	path = /obj/item/clothing/jumpsuit/medical/paramedic
 
 /datum/fabricator_recipe/textiles/job/medical/scrubs
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs
+	path = /obj/item/clothing/jumpsuit/medical/scrubs
 
 /datum/fabricator_recipe/textiles/job/medical/blue
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs/blue
+	path = /obj/item/clothing/jumpsuit/medical/scrubs/blue
 
 /datum/fabricator_recipe/textiles/job/medical/green
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs/green
+	path = /obj/item/clothing/jumpsuit/medical/scrubs/green
 
 /datum/fabricator_recipe/textiles/job/medical/purple
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs/purple
+	path = /obj/item/clothing/jumpsuit/medical/scrubs/purple
 
 /datum/fabricator_recipe/textiles/job/medical/black
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs/black
+	path = /obj/item/clothing/jumpsuit/medical/scrubs/black
 
 /datum/fabricator_recipe/textiles/job/medical/navyblue
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs/navyblue
+	path = /obj/item/clothing/jumpsuit/medical/scrubs/navyblue
 
 /datum/fabricator_recipe/textiles/job/medical/lilac
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs/lilac
+	path = /obj/item/clothing/jumpsuit/medical/scrubs/lilac
 
 /datum/fabricator_recipe/textiles/job/medical/teal
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs/teal
+	path = /obj/item/clothing/jumpsuit/medical/scrubs/teal
 
 /datum/fabricator_recipe/textiles/job/medical/heliodor
-	path = /obj/item/clothing/under/jumpsuit/medical/scrubs/heliodor
+	path = /obj/item/clothing/jumpsuit/medical/scrubs/heliodor
 
 /datum/fabricator_recipe/textiles/job/medical/psych
-	path = /obj/item/clothing/under/jumpsuit/psych
+	path = /obj/item/clothing/jumpsuit/psych
 
 /datum/fabricator_recipe/textiles/job/medical/turtleneck
 	path = /obj/item/clothing/accessory/sweater
@@ -127,7 +127,7 @@
 // Security
 /datum/fabricator_recipe/textiles/job/security
 	category = "Security Clothing"
-	path = /obj/item/clothing/under/jumpsuit/security
+	path = /obj/item/clothing/jumpsuit/security
 
 /datum/fabricator_recipe/textiles/job/security/forensics
 	path = /obj/item/clothing/suit/storage/forensics
@@ -139,7 +139,7 @@
 	path = /obj/item/clothing/suit/storage/det_trench/reinforced
 
 /datum/fabricator_recipe/textiles/job/security/warden
-	path = /obj/item/clothing/under/jumpsuit/warden
+	path = /obj/item/clothing/jumpsuit/warden
 
 /datum/fabricator_recipe/textiles/job/security/dispatch
 	path = /obj/item/clothing/under/dispatch
@@ -154,10 +154,10 @@
 	path = /obj/item/clothing/head/HoS
 
 /datum/fabricator_recipe/textiles/job/security/securityjensen
-	path = /obj/item/clothing/under/jumpsuit/head_of_security/jensen
+	path = /obj/item/clothing/jumpsuit/head_of_security/jensen
 
 /datum/fabricator_recipe/textiles/job/security/securityhos
-	path = /obj/item/clothing/under/jumpsuit/head_of_security
+	path = /obj/item/clothing/jumpsuit/head_of_security
 
 // Tacticool
 /datum/fabricator_recipe/textiles/job/security/tactical

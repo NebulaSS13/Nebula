@@ -70,7 +70,7 @@
 	return TRUE
 
 /datum/inventory_slot/proc/use_alt_layer()
-	return _holding.use_alt_layer
+	return !!(_holding?.use_alt_layer)
 
 /datum/inventory_slot/proc/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	if(!mob_overlay_layer || !slot_id)

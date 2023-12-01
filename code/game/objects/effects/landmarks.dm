@@ -43,7 +43,7 @@
 //SUBCLASSES.  Spawn a bunch of items and disappear likewise
 /obj/abstract/landmark/costume/chameleon/make_costumes()
 	new /obj/item/clothing/mask/chameleon(src.loc)
-	new /obj/item/clothing/under/jumpsuit/chameleon(src.loc)
+	new /obj/item/clothing/jumpsuit/chameleon(src.loc)
 	new /obj/item/clothing/glasses/chameleon(src.loc)
 	new /obj/item/clothing/shoes/chameleon(src.loc)
 	new /obj/item/clothing/gloves/chameleon(src.loc)
@@ -97,7 +97,7 @@
 	new /obj/item/clothing/head/plaguedoctorhat(src.loc)
 
 /obj/abstract/landmark/costume/nightowl/make_costumes()
-	new /obj/item/clothing/under/jumpsuit/owl(src.loc)
+	new /obj/item/clothing/jumpsuit/owl(src.loc)
 	new /obj/item/clothing/mask/gas/owl_mask(src.loc)
 
 /obj/abstract/landmark/costume/waiter/make_costumes()

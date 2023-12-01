@@ -20,13 +20,13 @@
 
 /decl/hierarchy/outfit/blank_subject
 	name = "Test Subject"
-	uniform = /obj/item/clothing/under/jumpsuit/white/blank
+	uniform = /obj/item/clothing/jumpsuit/white/blank
 	shoes = /obj/item/clothing/shoes/color/white
 	head = /obj/item/clothing/head/helmet/facecover
 	mask = /obj/item/clothing/mask/muzzle
 	suit = /obj/item/clothing/suit/straight_jacket
 
-/obj/item/clothing/under/jumpsuit/white/blank/Initialize()
+/obj/item/clothing/jumpsuit/white/blank/Initialize()
 	. = ..()
 	var/obj/item/clothing/accessory/vitals_sensor/sensor = new(src)
 	sensor.set_sensors_locked(TRUE)

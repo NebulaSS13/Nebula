@@ -130,8 +130,8 @@
 
 	possible_trading_items = list(
 		/obj/item/clothing/under                           = TRADER_SUBTYPES_ONLY,
-		/obj/item/clothing/under/jumpsuit/chameleon                 = TRADER_BLACKLIST,
-		/obj/item/clothing/under/jumpsuit                     = TRADER_BLACKLIST,
+		/obj/item/clothing/jumpsuit/chameleon                 = TRADER_BLACKLIST,
+		/obj/item/clothing/jumpsuit                     = TRADER_BLACKLIST,
 		/obj/item/clothing/under/dress                     = TRADER_BLACKLIST,
 		/obj/item/clothing/under/gimmick                   = TRADER_BLACKLIST_ALL,
 		/obj/item/clothing/under/lawyer                    = TRADER_BLACKLIST,

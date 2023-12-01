@@ -20,7 +20,7 @@
 	return list(
 		new /datum/atom_creator/simple(/obj/item/storage/backpack/toxins,    50),
 		new /datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag, 50),
-		/obj/item/clothing/under/jumpsuit/white,
+		/obj/item/clothing/jumpsuit/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/glasses/science,

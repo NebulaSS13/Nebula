@@ -43,7 +43,7 @@
 	return sortTim(., /proc/cmp_text_asc)
 
 //starts off as a jumpsuit
-/obj/item/clothing/under/jumpsuit/chameleon
+/obj/item/clothing/jumpsuit/chameleon
 	name = "jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
@@ -51,12 +51,12 @@
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 	var/static/list/clothing_choices
 
-/obj/item/clothing/under/jumpsuit/chameleon/Initialize()
+/obj/item/clothing/jumpsuit/chameleon/Initialize()
 	. = ..()
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
 
-/obj/item/clothing/under/jumpsuit/chameleon/verb/change(picked in clothing_choices)
+/obj/item/clothing/jumpsuit/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
 	set category = "Chameleon Items"
 	set src in usr

@@ -8,17 +8,17 @@
 
 /decl/loadout_option/uniform/jumpsuit
 	name = "jumpsuit, colour select"
-	path = /obj/item/clothing/under/jumpsuit
+	path = /obj/item/clothing/jumpsuit
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/shortjumpskirt
 	name = "short jumpskirt, colour select"
-	path = /obj/item/clothing/under/jumpsuit/shortjumpskirt
+	path = /obj/item/clothing/jumpsuit/shortjumpskirt
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/blackjumpshorts
 	name = "black jumpsuit shorts"
-	path = /obj/item/clothing/under/jumpsuit/blackjumpshorts
+	path = /obj/item/clothing/jumpsuit/blackjumpshorts
 
 /decl/loadout_option/uniform/suit
 	name = "clothes selection"
@@ -48,7 +48,7 @@
 		/obj/item/clothing/under/lawyer/bluesuit,
 		/obj/item/clothing/under/internalaffairs/plain,
 		/obj/item/clothing/under/blazer,
-		/obj/item/clothing/under/jumpsuit/blackjumpskirt,
+		/obj/item/clothing/jumpsuit/blackjumpskirt,
 		/obj/item/clothing/under/kilt,
 		/obj/item/clothing/under/dress/dress_hr,
 		/obj/item/clothing/under/det,

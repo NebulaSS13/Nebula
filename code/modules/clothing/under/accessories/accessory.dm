@@ -54,21 +54,24 @@
 
 /obj/item/clothing/accessory/proc/should_overlay()
 	. = istype(loc, /obj/item/clothing)
-	if(. && istype(loc, /obj/item/clothing/under))
-		var/obj/item/clothing/under/uniform = loc
-		if(uniform.rolled_down && hide_on_uniform_rolldown)
-			return FALSE
-		if(uniform.rolled_sleeves && hide_on_uniform_rollsleeves)
-			return FALSE
+	if(.)
+		if(istype(loc, /obj/item/clothing/jumpsuit))
+			var/obj/item/clothing/jumpsuit/jumpsuit = loc
+			if(jumpsuit.rolled_down && hide_on_uniform_rolldown)
+				return FALSE
+		else if(istype(loc, /obj/item/clothing/under))
+			var/obj/item/clothing/under/shirt = loc
+			if(shirt.rolled_sleeves && hide_on_uniform_rollsleeves)
+				return FALSE
 
 /obj/item/clothing/accessory/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
-	if(overlay && istype(loc, /obj/item/clothing/under))
+	if(overlay)
 		var/new_state = overlay.icon_state
-		var/obj/item/clothing/under/uniform = loc
-		if(uniform.rolled_down)
-			new_state = "[new_state]-rolled"
-		else if(uniform.rolled_sleeves)
-			new_state = "[new_state]-sleeves"
+		if(istype(loc, /obj/item/clothing))
+			var/obj/item/clothing/clothes = loc
+			var/state_modifier = clothes.get_accessory_overlay_state_modifier(src, slot)
+			if(state_modifier)
+				new_state = "[new_state]-[state_modifier]"
 		if(check_state_in_icon(overlay.icon, new_state))
 			overlay.icon_state = new_state
 	. = ..()

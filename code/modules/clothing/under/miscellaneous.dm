@@ -28,7 +28,7 @@
 	desc = "It's a very smart uniform with a special pocket for tips."
 	icon = 'icons/clothing/under/uniform_waiter.dmi'
 
-/obj/item/clothing/under/jumpsuit/mailman
+/obj/item/clothing/jumpsuit/mailman
 	name = "mailman's jumpsuit"
 	desc = "<i>'Special delivery!'</i>"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_mailman.dmi'
@@ -49,35 +49,35 @@
 	name = "\improper Officer's Dress Uniform"
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\"."
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	displays_id = FALSE
 
 /obj/item/clothing/under/centcom_officer
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	displays_id = FALSE
 
 /obj/item/clothing/under/centcom_captain
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
-	displays_id = 0
+	displays_id = FALSE
 
-/obj/item/clothing/under/jumpsuit/owl
+/obj/item/clothing/jumpsuit/owl
 	name = "owl uniform"
 	desc = "A jumpsuit with owl wings. Photorealistic owl feathers! Twooooo!"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_owl.dmi'
 
-/obj/item/clothing/under/jumpsuit/johnny
+/obj/item/clothing/jumpsuit/johnny
 	name = "brown jumpsuit"
 	desc = "A label on the inside of the collar reads, 'johnny~~~'."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_johnny.dmi'
 
-/obj/item/clothing/under/jumpsuit/rainbow
+/obj/item/clothing/jumpsuit/rainbow
 	name = "rainbow"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_rainbow.dmi'
 
-/obj/item/clothing/under/jumpsuit/psysuit
+/obj/item/clothing/jumpsuit/psysuit
 	name = "dark undersuit"
 	desc = "A thick, layered grey undersuit lined with power cables. Feels a little like wearing an electrical storm."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psionic.dmi'
@@ -277,12 +277,12 @@
 	icon = 'icons/clothing/under/dresses/dress_sundress_white.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
-/obj/item/clothing/under/jumpsuit/blackjumpskirt
+/obj/item/clothing/jumpsuit/blackjumpskirt
 	name = "black jumpskirt"
 	desc = "A black jumpskirt, with a pink undershirt."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt.dmi'
 
-/obj/item/clothing/under/jumpsuit/shortjumpskirt
+/obj/item/clothing/jumpsuit/shortjumpskirt
 	name = "short jumpskirt"
 	desc = "A slimming, short jumpskirt."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt_short.dmi'
@@ -400,7 +400,7 @@
 	icon = 'icons/clothing/under/wetsuit.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
-/obj/item/clothing/under/jumpsuit/hazard
+/obj/item/clothing/jumpsuit/hazard
 	name = "hazard jumpsuit"
 	desc = "A high visibility jumpsuit made from heat and radiation resistant materials."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hazard.dmi'
@@ -411,7 +411,7 @@
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/under/jumpsuit/sterile
+/obj/item/clothing/jumpsuit/sterile
 	name = "sterile jumpsuit"
 	desc = "A sterile white jumpsuit with medical markings. Protects against all manner of biohazards."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sterile.dmi'
