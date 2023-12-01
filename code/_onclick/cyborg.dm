@@ -72,7 +72,8 @@
 		return
 
 	// cyborgs are prohibited from using storage items so we can I think safely remove (A.loc in contents)
-	if(check_dexterity(DEXTERITY_WIELD_ITEM, silent = TRUE) && (A == loc || (A in loc) || (A in contents)))
+	var/can_wield_item = check_dexterity(DEXTERITY_WIELD_ITEM, silent = TRUE)
+	if(can_wield_item && (A == loc || (A in loc) || (A in contents)))
 		// No adjacency checks
 
 		var/resolved = W.resolve_attackby(A, src, params)
@@ -84,7 +85,7 @@
 		return
 
 	var/sdepth = A.storage_depth_turf()
-	if(check_dexterity(DEXTERITY_WIELD_ITEM, silent = TRUE) && (isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1)))
+	if(can_wield_item && (isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1)))
 		if(A.Adjacent(src)) // see adjacent.dm
 
 			var/resolved = W.resolve_attackby(A, src, params)
