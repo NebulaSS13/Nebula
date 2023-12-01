@@ -178,4 +178,7 @@
 		var/obj/item/rig/rig = thrust
 		for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 			return module.jets
+	thrust = get_equipped_item(slot_s_store_str)
+	if(istype(thrust))
+		return thrust
 	return null
