@@ -17,3 +17,14 @@
 /obj/item/clothing/under/familiargarb/Initialize()
 	. = ..()
 	LAZYSET(slowdown_per_slot, slot_w_uniform_str, -3)
+
+/obj/item/clothing/pants/familiargarb
+	name = "familiar's leggings"
+	desc = "Some patchwork leather leggings."
+	icon = 'icons/clothing/pants/pants_leggings_familiar.dmi'
+	armor = list(
+		ARMOR_MELEE = ARMOR_MELEE_KNIVES,
+		ARMOR_LASER = ARMOR_LASER_MINOR,
+		ARMOR_ENERGY = ARMOR_ENERGY_SMALL
+	)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID

@@ -37606,7 +37606,7 @@
 	name = "Prisoner's Locker"
 	},
 /obj/item/chems/drinks/bottle/absinthe,
-/obj/item/clothing/suit/apron/overalls,
+/obj/item/clothing/jumpsuit/overalls/blue,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/prison/dorm)
 "bBd" = (

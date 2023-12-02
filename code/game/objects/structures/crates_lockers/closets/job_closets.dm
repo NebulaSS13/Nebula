@@ -84,9 +84,9 @@
 		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
-		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/suit/storage/toggle/suit/blue,
-		/obj/item/clothing/under/lawyer/purpsuit,
+		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/suit/storage/toggle/suit/purple,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/color/black

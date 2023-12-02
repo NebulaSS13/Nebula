@@ -139,7 +139,9 @@
 /obj/structure/closet/wardrobe/pjs/WillContain()
 	return list(
 		/obj/item/clothing/under/pj = 2,
+		/obj/item/clothing/pants/pj = 2,
 		/obj/item/clothing/under/pj/blue = 2,
+		/obj/item/clothing/pants/pj/blue = 2,
 		/obj/item/clothing/shoes/color/white = 2,
 		/obj/item/clothing/shoes/slippers = 2,
 	)
@@ -294,15 +296,16 @@
 		/obj/item/clothing/under/suit_jacket/really_black,
 		/obj/item/clothing/under/suit_jacket/red,
 		/obj/item/clothing/under/scratch,
+		/obj/item/clothing/pants/scratch,
 		/obj/item/clothing/under/internalaffairs/plain,
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/under/assistantformal,
 		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
-		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/suit/storage/toggle/suit/blue,
-		/obj/item/clothing/under/lawyer/purpsuit,
+		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/suit/storage/toggle/suit/purple,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/dress,

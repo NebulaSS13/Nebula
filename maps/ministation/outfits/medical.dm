@@ -1,13 +1,13 @@
 /decl/hierarchy/outfit/job/ministation/doctor
-	l_ear = /obj/item/radio/headset/headset_med
-	shoes = /obj/item/clothing/shoes/color/white
+	name     = "Ministation - Job - Medical Doctor"
+	l_ear    = /obj/item/radio/headset/headset_med
+	shoes    = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store_str
-	name = "Ministation - Job - Junior Doctor"
-	uniform = /obj/item/clothing/jumpsuit/medical
-	hands = list(/obj/item/storage/firstaid/adv)
+	pants    = /obj/item/clothing/jumpsuit/medical
 	r_pocket = /obj/item/flashlight/pen
-	id_type = /obj/item/card/id/ministation/doctor
+	id_type  = /obj/item/card/id/ministation/doctor
+	hands    = list(/obj/item/storage/firstaid/adv)
 
 /decl/hierarchy/outfit/job/ministation/doctor/Initialize()
 	. = ..()

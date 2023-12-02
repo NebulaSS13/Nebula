@@ -2502,6 +2502,7 @@
 /obj/item/remains,
 /obj/random/shoes,
 /obj/item/clothing/under/pj/blue,
+/obj/item/clothing/pants/pj/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gN" = (

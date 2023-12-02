@@ -50,12 +50,6 @@
 	allowed = list(/obj/item/storage/box/fancy/cigarettes,/obj/item/cash)
 	flags_inv = HIDEJUMPSUIT
 
-/obj/item/clothing/suit/apron/overalls
-	name = "coveralls"
-	desc = "A set of denim overalls."
-	icon = 'icons/clothing/suit/overalls.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
-
 /obj/item/clothing/suit/syndicatefake
 	name = "red space suit replica"
 	desc = "A plastic replica of the syndicate space suit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
@@ -170,10 +164,10 @@
 	artificial_shine = 80
 
 //stripper
-/obj/item/clothing/under/mankini
+/obj/item/clothing/pants/mankini
 	name = "mankini"
 	desc = "No honest man would wear this abomination."
-	icon = 'icons/clothing/under/mankini.dmi'
+	icon = 'icons/clothing/pants/pants_mankini.dmi'
 	siemens_coefficient = 1
 	body_parts_covered = 0
 

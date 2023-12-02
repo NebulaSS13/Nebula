@@ -13,9 +13,6 @@
 /datum/fabricator_recipe/textiles/job/engineerhazardvest
 	path = /obj/item/clothing/suit/storage/hazardvest
 
-/datum/fabricator_recipe/textiles/job/overalls
-	path = /obj/item/clothing/suit/apron/overalls
-
 // Medical (Science barely has enough for a category)
 /datum/fabricator_recipe/textiles/job/medical
 	category = "Medical & Science Clothing"

@@ -3,17 +3,17 @@
 	decals = list("stripe" = COLOR_RED_LIGHT)
 
 /decl/hierarchy/outfit/job/ministation/security
-	l_ear = /obj/item/radio/headset/headset_sec
-	glasses = /obj/item/clothing/glasses/sunglasses/sechud
-	gloves = /obj/item/clothing/gloves/thick
-	shoes = /obj/item/clothing/shoes/jackboots
+	name              = "Ministation - Job - Security Officer"
+	glasses           = /obj/item/clothing/glasses/sunglasses/sechud
+	l_ear             = /obj/item/radio/headset/ministation_headset_sec
+	gloves            = /obj/item/clothing/gloves/thick
+	shoes             = /obj/item/clothing/shoes/jackboots
+	pants             = /obj/item/clothing/jumpsuit/security
+	l_pocket          = /obj/item/flash
+	r_pocket          = /obj/item/handcuffs
+	id_type           = /obj/item/card/id/ministation/security
+	pda_type          = /obj/item/modular_computer/pda/security
 	backpack_contents = list(/obj/item/handcuffs = 1)
-	name = "Ministation - Job - Security Officer"
-	uniform = /obj/item/clothing/jumpsuit/security
-	l_pocket = /obj/item/flash
-	r_pocket = /obj/item/handcuffs
-	id_type = /obj/item/card/id/ministation/security
-	pda_type = /obj/item/modular_computer/pda/security
 
 /decl/hierarchy/outfit/job/ministation/security/head
 	l_ear = /obj/item/radio/headset/heads/hos

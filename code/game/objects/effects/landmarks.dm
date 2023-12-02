@@ -108,14 +108,16 @@
 
 /obj/abstract/landmark/costume/pirate/make_costumes()
 	new /obj/item/clothing/under/pirate(src.loc)
+	new /obj/item/clothing/pants/baggy/brown(src.loc)
 	new /obj/item/clothing/suit/pirate(src.loc)
-	var/CHOICE = pick( /obj/item/clothing/head/pirate , /obj/item/clothing/mask/bandana/red)
+	var/CHOICE = pick(/obj/item/clothing/head/pirate, /obj/item/clothing/mask/bandana/red)
 	new CHOICE(src.loc)
 	new /obj/item/clothing/glasses/eyepatch(src.loc)
 
 /obj/abstract/landmark/costume/commie/make_costumes()
 	new /obj/item/clothing/under/soviet(src.loc)
 	new /obj/item/clothing/head/ushanka(src.loc)
+	new /obj/item/clothing/pants/soviet(src.loc)
 
 /obj/abstract/landmark/costume/imperium_monk/make_costumes()
 	new /obj/item/clothing/suit/imperium_monk(src.loc)
@@ -142,10 +144,12 @@
 /obj/abstract/landmark/costume/sexyclown/make_costumes()
 	new /obj/item/clothing/mask/gas/sexyclown(src.loc)
 	new /obj/item/clothing/under/sexyclown(src.loc)
+	new /obj/item/clothing/shoes/sexyclown(src.loc)
 
 /obj/abstract/landmark/costume/sexymime/make_costumes()
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
+	new /obj/item/clothing/shoes/sexymime(src.loc)
 
 /obj/abstract/landmark/costume/savagehunter/make_costumes()
 	new /obj/item/clothing/mask/spirit(src.loc)

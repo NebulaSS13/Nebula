@@ -3994,7 +3994,7 @@
 /area/errant_pisces/cryo)
 "kI" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/apron/overalls,
+/obj/item/clothing/jumpsuit/overalls/blue,
 /obj/random/drinkbottle,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
@@ -4025,7 +4025,7 @@
 /area/errant_pisces/cryo)
 "kN" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/apron/overalls,
+/obj/item/clothing/jumpsuit/overalls/blue,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
 "kO" = (
@@ -4246,7 +4246,7 @@
 /area/errant_pisces/cryo)
 "lC" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/apron/overalls,
+/obj/item/clothing/jumpsuit/overalls/blue,
 /obj/random/glasses,
 /obj/machinery/light{
 	dir = 4;

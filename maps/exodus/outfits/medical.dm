@@ -10,38 +10,38 @@
 	BACKPACK_OVERRIDE_MEDICAL
 
 /decl/hierarchy/outfit/job/medical/cmo
-	name = "Job - Chief Medical Officer"
-	l_ear = /obj/item/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/jumpsuit/chief_medical_officer
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
-	shoes = /obj/item/clothing/shoes/color/brown
-	hands = list(/obj/item/storage/firstaid/adv)
+	name     = "Job - Chief Medical Officer"
+	l_ear    = /obj/item/radio/headset/heads/cmo
+	pants    = /obj/item/clothing/jumpsuit/chief_medical_officer
+	suit     = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
+	shoes    = /obj/item/clothing/shoes/color/brown
 	r_pocket = /obj/item/flashlight/pen
-	id_type = /obj/item/card/id/medical/head
+	id_type  = /obj/item/card/id/medical/head
 	pda_type = /obj/item/modular_computer/pda/heads
+	hands    = list(/obj/item/storage/firstaid/adv)
 
 /decl/hierarchy/outfit/job/medical/doctor
-	name = "Job - Medical Doctor"
-	uniform = /obj/item/clothing/jumpsuit/medical
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	hands = list(/obj/item/storage/firstaid/adv)
+	name     = "Job - Medical Doctor"
+	pants    = /obj/item/clothing/jumpsuit/medical
+	suit     = /obj/item/clothing/suit/storage/toggle/labcoat
+	hands    = list(/obj/item/storage/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
-	id_type = /obj/item/card/id/medical
+	id_type  = /obj/item/card/id/medical
 
 /decl/hierarchy/outfit/job/medical/doctor/emergency_physician
 	name = "Job - Emergency physician"
 	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
 
 /decl/hierarchy/outfit/job/medical/doctor/surgeon
-	name = "Job - Surgeon"
-	uniform = /obj/item/clothing/jumpsuit/medical/scrubs/blue
-	head = /obj/item/clothing/head/surgery/blue
+	name  = "Job - Surgeon"
+	pants = /obj/item/clothing/jumpsuit/medical/scrubs/blue
+	head  = /obj/item/clothing/head/surgery/blue
 
 /decl/hierarchy/outfit/job/medical/doctor/virologist
-	name = "Job - Virologist"
-	uniform = /obj/item/clothing/jumpsuit/virologist
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
-	mask = /obj/item/clothing/mask/surgical
+	name  = "Job - Virologist"
+	pants = /obj/item/clothing/jumpsuit/virologist
+	suit  = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
+	mask  = /obj/item/clothing/mask/surgical
 
 /decl/hierarchy/outfit/job/medical/doctor/virologist/Initialize()
 	. = ..()
@@ -60,14 +60,14 @@
 			uniform = /obj/item/clothing/under/nurse
 		head = /obj/item/clothing/head/nursehat
 	else
-		uniform = /obj/item/clothing/jumpsuit/medical/scrubs/purple
+		pants = /obj/item/clothing/jumpsuit/medical/scrubs/purple
 		head = null
 
 /decl/hierarchy/outfit/job/medical/chemist
-	name = "Job - Chemist"
-	uniform = /obj/item/clothing/jumpsuit/chemist
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
-	id_type = /obj/item/card/id/medical
+	name     = "Job - Chemist"
+	pants    = /obj/item/clothing/jumpsuit/chemist
+	suit     = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
+	id_type  = /obj/item/card/id/medical
 	pda_type = /obj/item/modular_computer/pda/medical
 
 /decl/hierarchy/outfit/job/medical/chemist/Initialize()
@@ -75,8 +75,8 @@
 	BACKPACK_OVERRIDE_VIROLOGY
 
 /decl/hierarchy/outfit/job/medical/psychiatrist
-	name = "Job - Psychiatrist"
-	uniform = /obj/item/clothing/jumpsuit/psych
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	shoes = /obj/item/clothing/shoes/dress
+	name    = "Job - Psychiatrist"
+	pants   = /obj/item/clothing/jumpsuit/psych
+	suit    = /obj/item/clothing/suit/storage/toggle/labcoat
+	shoes   = /obj/item/clothing/shoes/dress
 	id_type = /obj/item/card/id/medical

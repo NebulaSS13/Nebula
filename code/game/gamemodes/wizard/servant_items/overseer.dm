@@ -31,10 +31,10 @@
 	min_pressure_protection = 0
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 
-/obj/item/clothing/under/grimhoodie
+/obj/item/clothing/suit/storage/toggle/hoodie/grim
 	name = "black hoodie"
 	desc = "A generic black hoodie. There's a pattern akin to splattered blood along the bottom."
-	icon = 'icons/clothing/under/grim_hoodie.dmi'
+	icon = 'icons/clothing/suit/hoodie_grim.dmi'
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 //These are the ones that it gets when they toggle it off

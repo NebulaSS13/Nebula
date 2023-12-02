@@ -1,22 +1,37 @@
 /obj/item/clothing/under/pj
-	name = "red pj's"
+	name = "red pajama top"
 	desc = "Sleepwear."
-	icon = 'icons/clothing/under/pjs_red.dmi'
+	icon = 'icons/clothing/under/shirts/shirt_pjs_red.dmi'
+
+/obj/item/clothing/pants/pj
+	name = "red pajama bottom"
+	desc = "Sleepwear."
+	icon = 'icons/clothing/pants/pants_pjs_red.dmi'
 
 /obj/item/clothing/under/pj/blue
-	name = "blue pj's"
+	name = "blue pajama top"
 	desc = "Sleepwear."
-	icon = 'icons/clothing/under/pjs_blue.dmi'
+	icon = 'icons/clothing/under/shirts/shirt_pjs_blue.dmi'
+
+/obj/item/clothing/pants/pj/blue
+	name = "blue pajama bottom"
+	desc = "Sleepwear."
+	icon = 'icons/clothing/pants/pants_pjs_blue.dmi'
 
 /obj/item/clothing/under/captain_fly
-	name = "rogue's uniform"
+	name = "rogue's shirt"
 	desc = "For the man who doesn't care because he's still free."
-	icon = 'icons/clothing/under/rogue_captain.dmi'
+	icon = 'icons/clothing/under/shirts/shirt_rogue.dmi'
 
 /obj/item/clothing/under/scratch
 	name = "white suit"
 	desc = "A white suit, suitable for an excellent host."
-	icon = 'icons/clothing/under/scratch.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_scratch.dmi'
+
+/obj/item/clothing/pants/scratch
+	name = "white pants"
+	desc = "White pants, suitable for an excellent host."
+	icon = 'icons/clothing/pants/pants_scratch.dmi'
 
 /obj/item/clothing/under/sl_suit
 	name = "crisp suit"
@@ -31,13 +46,17 @@
 /obj/item/clothing/jumpsuit/mailman
 	name = "mailman's jumpsuit"
 	desc = "<i>'Special delivery!'</i>"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_mailman.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_mailman.dmi'
 
 /obj/item/clothing/under/sexyclown
-	name = "sexy-clown suit"
+	name = "sexy clown suit"
 	desc = "It makes you look HONKable!"
 	icon = 'icons/clothing/under/sexyclown.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
+
+/obj/item/clothing/shoes/sexyclown
+	name = "green stockings"
+	desc = "A pair of translucent green stockings."
+	icon = 'icons/clothing/feet/sexyclown.dmi'
 
 /obj/item/clothing/under/vice
 	name = "vice officer's jumpsuit"
@@ -66,27 +85,27 @@
 /obj/item/clothing/jumpsuit/owl
 	name = "owl uniform"
 	desc = "A jumpsuit with owl wings. Photorealistic owl feathers! Twooooo!"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_owl.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_owl.dmi'
 
 /obj/item/clothing/jumpsuit/johnny
 	name = "brown jumpsuit"
 	desc = "A label on the inside of the collar reads, 'johnny~~~'."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_johnny.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_johnny.dmi'
 
 /obj/item/clothing/jumpsuit/rainbow
 	name = "rainbow"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_rainbow.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_rainbow.dmi'
 
 /obj/item/clothing/jumpsuit/psysuit
 	name = "dark undersuit"
 	desc = "A thick, layered grey undersuit lined with power cables. Feels a little like wearing an electrical storm."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psionic.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_psionic.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 
 /obj/item/clothing/under/gentlesuit
 	name = "gentlemans suit"
 	desc = "A silk black shirt with a white tie and a matching gray vest and slacks. Feels proper."
-	icon = 'icons/clothing/under/suits/suit_gentleman.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_gentleman.dmi'
 
 /obj/item/clothing/under/gimmick
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
@@ -94,17 +113,17 @@
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
 	desc = "A green suit and yellow necktie. Exemplifies authority."
-	icon = 'icons/clothing/under/suits/suit_green.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_green.dmi'
 
 /obj/item/clothing/under/gimmick/rank/head_of_personnel/suit
 	name = "head of personnel's suit"
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
-	icon = 'icons/clothing/under/suits/suit_teal.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_teal.dmi'
 
 /obj/item/clothing/under/suit_jacket
 	name = "black suit"
 	desc = "A black suit and red tie. Very formal."
-	icon = 'icons/clothing/under/suits/suit_black.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_lawyer_black.dmi'
 
 /obj/item/clothing/under/suit_jacket/waistcoat
 	starting_accessories = list(/obj/item/clothing/accessory/wcoat/black)
@@ -112,22 +131,22 @@
 /obj/item/clothing/under/suit_jacket/really_black
 	name = "executive suit"
 	desc = "A formal black suit and red tie, intended for the galaxy's finest."
-	icon = 'icons/clothing/under/suits/suit_executive.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_executive_tie.dmi'
 
 /obj/item/clothing/under/suit_jacket/female
 	name = "executive suit"
 	desc = "A formal trouser suit for women, intended for the galaxy's finest."
-	icon = 'icons/clothing/under/suits/suit_executive_female.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_executive.dmi'
 
 /obj/item/clothing/under/suit_jacket/red
 	name = "red suit"
 	desc = "A red suit and blue tie. Somewhat formal."
-	icon = 'icons/clothing/under/suits/suit_red.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_red.dmi'
 
 /obj/item/clothing/under/blackskirt
 	name = "black skirt"
 	desc = "A black skirt, very fancy!"
-	icon = 'icons/clothing/under/skirt_black.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_swept.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/under/schoolgirl
@@ -136,38 +155,41 @@
 	icon = 'icons/clothing/under/uniform_schoolgirl.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
-/obj/item/clothing/under/overalls
-	name = "laborer's overalls"
-	desc = "A set of durable overalls for getting the job done."
-	icon = 'icons/clothing/under/overalls.dmi'
-
 /obj/item/clothing/under/pirate
-	name = "pirate outfit"
-	desc = "Yarr."
+	name = "piratical shirt"
+	desc = "An orange and white striped shirt. Yarr."
 	icon = 'icons/clothing/under/pirate.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 
 /obj/item/clothing/under/soviet
-	name = "soviet uniform"
+	name = "soviet coat"
 	desc = "For the Motherland!"
 	icon = 'icons/clothing/under/soviet.dmi'
 
+/obj/item/clothing/pants/soviet
+	name = "soviet pants"
+	desc = "For the Motherland!"
+	icon = 'icons/clothing/pants/pants_soviet.dmi'
+
 /obj/item/clothing/under/redcoat
-	name = "redcoat uniform"
+	name = "red coat"
 	desc = "Looks old."
 	icon = 'icons/clothing/under/redcoat.dmi'
 
-/obj/item/clothing/under/kilt
+/obj/item/clothing/pants/kilt
 	name = "kilt"
-	desc = "Includes shoes and plaid."
-	icon = 'icons/clothing/under/kilt.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_FEET
+	desc = "A tartan kilt."
+	icon = 'icons/clothing/pants/pants_kilt.dmi'
 
 /obj/item/clothing/under/sexymime
 	name = "sexy mime outfit"
 	desc = "The only time when you DON'T enjoy looking at someone's rack."
 	icon = 'icons/clothing/under/sexymime.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
+
+/obj/item/clothing/shoes/sexymime
+	name = "black and white stockings"
+	desc = "A pair of black and white stockings."
+	icon = 'icons/clothing/feet/sexymime.dmi'
 
 /obj/item/clothing/under/gladiator
 	name = "gladiator uniform"
@@ -280,12 +302,12 @@
 /obj/item/clothing/jumpsuit/blackjumpskirt
 	name = "black jumpskirt"
 	desc = "A black jumpskirt, with a pink undershirt."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_skirt.dmi'
 
 /obj/item/clothing/jumpsuit/shortjumpskirt
 	name = "short jumpskirt"
 	desc = "A slimming, short jumpskirt."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_skirt_short.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_skirt_short.dmi'
 
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
@@ -305,7 +327,7 @@
 /obj/item/clothing/under/suit_jacket/charcoal
 	name = "charcoal suit"
 	desc = "A charcoal suit and red tie. Very professional."
-	icon = 'icons/clothing/under/suits/suit_pants_charcoal.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_executive_tie.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/accessory/navy,
 		/obj/item/clothing/accessory/toggleable/charcoal_jacket
@@ -314,7 +336,7 @@
 /obj/item/clothing/under/suit_jacket/navy
 	name = "navy suit"
 	desc = "A navy suit and red tie, intended for the galaxy's finest."
-	icon = 'icons/clothing/under/suits/suit_pants_navy.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_blazer.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/accessory/red,
 		/obj/item/clothing/accessory/toggleable/navy_jacket
@@ -323,25 +345,16 @@
 /obj/item/clothing/under/suit_jacket/burgundy
 	name = "burgundy suit"
 	desc = "A burgundy suit and black tie. Somewhat formal."
-	icon = 'icons/clothing/under/suits/suit_pants_burgundy.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_red.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/accessory/black,
 		/obj/item/clothing/accessory/toggleable/burgundy_jacket
 	)
 
-/obj/item/clothing/under/suit_jacket/checkered
-	name = "checkered suit"
-	desc = "That's a very nice suit you have there. Shame if something were to happen to it, eh?"
-	icon = 'icons/clothing/under/suits/suit_pants_checkered.dmi'
-	starting_accessories = list(
-		/obj/item/clothing/accessory/black,
-		/obj/item/clothing/accessory/toggleable/checkered_jacket
-	)
-
 /obj/item/clothing/under/suit_jacket/tan
 	name = "tan suit"
 	desc = "A tan suit. Smart, but casual."
-	icon = 'icons/clothing/under/suits/suit_pants_tan.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_tan.dmi'
 	starting_accessories = list(
 		/obj/item/clothing/accessory/long/yellow,
 		/obj/item/clothing/accessory/toggleable/tan_jacket
@@ -367,7 +380,7 @@
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"
-	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie."
+	desc = "A bold but yet conservative navy blazer and a tie."
 	icon = 'icons/clothing/under/blazer.dmi'
 
 /obj/item/clothing/under/harness
@@ -377,10 +390,25 @@
 	bodytype_equip_flags = null
 	body_parts_covered = 0
 
-/obj/item/clothing/under/frontier
-	name = "frontier clothes"
-	desc = "A rugged flannel shirt and denim overalls. A popular style among frontier colonists."
-	icon = 'icons/clothing/under/frontier.dmi'
+/obj/item/clothing/jumpsuit/overalls
+	name = "denim overalls"
+	desc = "A rugged set of denim overalls. A popular style among frontier colonists."
+	icon = 'icons/clothing/pants/pants_overalls.dmi'
+
+/obj/item/clothing/jumpsuit/overalls/laborer
+	name = "laborer's overalls"
+	desc = "A set of durable overalls for getting the job done."
+	icon = 'icons/clothing/pants/pants_overalls_labourer.dmi'
+
+/obj/item/clothing/jumpsuit/overalls/yellow
+	name = "yellow overalls"
+	desc = "Rugged and hard-wearing overalls."
+	icon = 'icons/clothing/pants/pants_overalls_yellow.dmi'
+
+/obj/item/clothing/jumpsuit/overalls/blue
+	name = "blue overalls"
+	desc = "Rugged and hard-wearing overalls."
+	icon = 'icons/clothing/pants/pants_overalls_blue.dmi'
 
 /obj/item/clothing/under/savage_hunter
 	name = "savage hunter's hides"
@@ -403,7 +431,7 @@
 /obj/item/clothing/jumpsuit/hazard
 	name = "hazard jumpsuit"
 	desc = "A high visibility jumpsuit made from heat and radiation resistant materials."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hazard.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_hazard.dmi'
 	siemens_coefficient = 0.8
 	armor = list(
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
@@ -414,7 +442,7 @@
 /obj/item/clothing/jumpsuit/sterile
 	name = "sterile jumpsuit"
 	desc = "A sterile white jumpsuit with medical markings. Protects against all manner of biohazards."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sterile.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_sterile.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_SMALL

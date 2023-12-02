@@ -66,9 +66,9 @@
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver1)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver1
-	name = "Dead Slaver 1"
-	uniform = /obj/item/clothing/jumpsuit/johnny
-	shoes = /obj/item/clothing/shoes/color/black
+	name    = "Dead Slaver 1"
+	pants   = /obj/item/clothing/jumpsuit/johnny
+	shoes   = /obj/item/clothing/shoes/color/black
 	glasses = /obj/item/clothing/glasses/sunglasses
 
 /obj/abstract/landmark/corpse/slavers_base/slaver2
@@ -76,8 +76,8 @@
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver2)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver2
-	name = "Dead Slaver 2"
-	uniform = /obj/item/clothing/jumpsuit/johnny
+	name  = "Dead Slaver 2"
+	pants = /obj/item/clothing/jumpsuit/johnny
 	shoes = /obj/item/clothing/shoes/color/blue
 
 /obj/abstract/landmark/corpse/slavers_base/slaver3
@@ -96,6 +96,7 @@
 /decl/hierarchy/outfit/corpse/slavers_base/slaver4
 	name = "Dead Slaver 4"
 	uniform = /obj/item/clothing/under/redcoat
+	pants = /obj/item/clothing/pants/formal/gray
 	shoes = /obj/item/clothing/shoes/color/brown
 
 /obj/abstract/landmark/corpse/slavers_base/slaver5
@@ -103,10 +104,10 @@
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver5)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver5
-	name = "Dead Slaver 5"
-	uniform = /obj/item/clothing/jumpsuit/sterile
+	name  = "Dead Slaver 5"
+	pants = /obj/item/clothing/jumpsuit/sterile
 	shoes = /obj/item/clothing/shoes/color/orange
-	mask = /obj/item/clothing/mask/surgical
+	mask  = /obj/item/clothing/mask/surgical
 
 /obj/abstract/landmark/corpse/slavers_base/slaver6
 	name = "Slaver"
@@ -114,7 +115,8 @@
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver6
 	name = "Dead Slaver 6"
-	uniform = /obj/item/clothing/under/frontier
+	uniform = /obj/item/clothing/accessory/toggleable/flannel
+	pants = /obj/item/clothing/jumpsuit/overalls
 	shoes = /obj/item/clothing/shoes/color/orange
 
 /obj/abstract/landmark/corpse/slavers_base/slave
@@ -122,8 +124,8 @@
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slave)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slave
-	name = "Dead Slave"
-	uniform = /obj/item/clothing/jumpsuit/orange
+	name  = "Dead Slave"
+	pants = /obj/item/clothing/jumpsuit/orange
 	shoes = /obj/item/clothing/shoes/jackboots/tactical
 
 /mob/living/simple_animal/hostile/abolition_extremist

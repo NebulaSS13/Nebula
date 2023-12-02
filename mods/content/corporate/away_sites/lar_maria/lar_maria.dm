@@ -64,8 +64,8 @@
 	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION//no name, no hairs etc.
 
 /decl/hierarchy/outfit/corpse/test_subject
-	name = "dead ZHP test subject"
-	uniform = /obj/item/clothing/jumpsuit/orange
+	name  = "dead ZHP test subject"
+	pants = /obj/item/clothing/jumpsuit/orange
 	shoes = /obj/item/clothing/shoes/color/orange
 
 /obj/abstract/landmark/corpse/lar_maria/zhp_guard
@@ -77,10 +77,10 @@
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-115))
 
 /decl/hierarchy/outfit/corpse/zhp_guard
-	name = "Dead ZHP guard"
-	uniform = /obj/item/clothing/jumpsuit/virologist
-	suit = /obj/item/clothing/suit/armor/pcarrier/light
-	head = /obj/item/clothing/head/soft/zhp_cap
+	name  = "Dead ZHP guard"
+	pants = /obj/item/clothing/jumpsuit/virologist
+	suit  = /obj/item/clothing/suit/armor/pcarrier/light
+	head  = /obj/item/clothing/head/soft/zhp_cap
 	shoes = /obj/item/clothing/shoes/jackboots/duty
 	l_ear = /obj/item/radio/headset
 
@@ -130,13 +130,13 @@
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_virologist)
 
 /decl/hierarchy/outfit/corpse/zhp_virologist
-	name = "Dead male ZHP virologist"
-	uniform = /obj/item/clothing/jumpsuit/virologist
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	shoes = /obj/item/clothing/shoes/color/white
-	gloves = /obj/item/clothing/gloves/latex/nitrile
-	head = /obj/item/clothing/head/surgery
-	mask = /obj/item/clothing/mask/surgical
+	name    = "Dead male ZHP virologist"
+	pants   = /obj/item/clothing/jumpsuit/virologist
+	suit    = /obj/item/clothing/suit/storage/toggle/labcoat
+	shoes   = /obj/item/clothing/shoes/color/white
+	gloves  = /obj/item/clothing/gloves/latex/nitrile
+	head    = /obj/item/clothing/head/surgery
+	mask    = /obj/item/clothing/mask/surgical
 	glasses = /obj/item/clothing/glasses/eyepatch/hud/medical
 
 /mob/living/simple_animal/hostile/lar_maria/virologist/female
@@ -152,12 +152,12 @@
 	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
 
 /decl/hierarchy/outfit/corpse/zhp_virologist_female
-	name = "Dead female ZHP virologist"
-	uniform = /obj/item/clothing/jumpsuit/virologist
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	shoes = /obj/item/clothing/shoes/color/white
+	name   = "Dead female ZHP virologist"
+	pants  = /obj/item/clothing/jumpsuit/virologist
+	suit   = /obj/item/clothing/suit/storage/toggle/labcoat
+	shoes  = /obj/item/clothing/shoes/color/white
 	gloves = /obj/item/clothing/gloves/latex/nitrile
-	mask = /obj/item/clothing/mask/surgical
+	mask   = /obj/item/clothing/mask/surgical
 
 ////////////////////////////Notes and papers
 /obj/item/paper/lar_maria/note_1

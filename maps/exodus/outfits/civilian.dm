@@ -17,12 +17,12 @@
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/service/gardener
-	name = "Job - Gardener"
-	uniform = /obj/item/clothing/jumpsuit/hydroponics
-	suit = /obj/item/clothing/suit/apron
-	gloves = /obj/item/clothing/gloves/thick/botany
+	name     = "Job - Gardener"
+	pants    = /obj/item/clothing/jumpsuit/hydroponics
+	suit     = /obj/item/clothing/suit/apron
+	gloves   = /obj/item/clothing/gloves/thick/botany
 	r_pocket = /obj/item/scanner/plant
-	id_type = /obj/item/card/id/civilian
+	id_type  = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/service/gardener/Initialize()
@@ -32,9 +32,9 @@
 	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/hyd
 
 /decl/hierarchy/outfit/job/service/janitor
-	name = "Job - Janitor"
-	uniform = /obj/item/clothing/jumpsuit/janitor
-	id_type = /obj/item/card/id/civilian
+	name     = "Job - Janitor"
+	pants    = /obj/item/clothing/jumpsuit/janitor
+	id_type  = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/librarian
@@ -59,8 +59,8 @@
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
 /decl/hierarchy/outfit/job/chaplain
-	name = "Job - Chaplain"
-	uniform = /obj/item/clothing/jumpsuit/chaplain
-	hands = list(/obj/item/storage/bible)
-	id_type = /obj/item/card/id/civilian
+	name     = "Job - Chaplain"
+	pants    = /obj/item/clothing/jumpsuit/chaplain
+	id_type  = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda/medical
+	hands    = list(/obj/item/storage/bible)

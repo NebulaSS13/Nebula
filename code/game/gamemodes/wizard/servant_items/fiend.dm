@@ -28,7 +28,7 @@
 /obj/item/clothing/under/lawyer/fiendsuit
 	name = "black suit"
 	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
-	icon = 'icons/clothing/under/suits/suit_fiend.dmi'
+	icon = 'icons/clothing/under/suit_jackets/suit_jacket_fiend.dmi'
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/shoes/dress/devilshoes

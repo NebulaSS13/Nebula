@@ -3,12 +3,12 @@
 /obj/item/clothing/jumpsuit/psyche
 	name = "psychedelic jumpsuit"
 	desc = "Groovy!"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psychadelic.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_psychadelic.dmi'
 
 /obj/item/clothing/jumpsuit/orange
 	name = "orange jumpsuit"
 	desc = "It's standardised prisoner-wear. Its suit sensor controls are permanently set to the \"Fully On\" position."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_prisoner.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_prisoner.dmi'
 
 /obj/item/clothing/under/color/orange/Initialize()
 	. = ..()
@@ -20,7 +20,7 @@
 /obj/item/clothing/jumpsuit/blackjumpshorts
 	name = "black jumpsuit shorts"
 	desc = "The latest in space fashion, in a ladies' cut with shorts."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_shorts.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_shorts.dmi'
 
 /obj/item/clothing/jumpsuit/white
 	name = "white jumpsuit"

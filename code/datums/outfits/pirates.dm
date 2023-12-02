@@ -2,6 +2,7 @@
 	abstract_type = /decl/hierarchy/outfit/pirate
 	name = "Pirate"
 	uniform = /obj/item/clothing/under/pirate
+	pants = /obj/item/clothing/pants/baggy/brown
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/eyepatch
 	hands = list(/obj/item/energy_blade/cutlass)

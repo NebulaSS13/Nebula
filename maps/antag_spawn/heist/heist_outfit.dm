@@ -11,6 +11,13 @@
 		/obj/item/clothing/under/det,
 		/obj/item/clothing/jumpsuit/brown,
 		)
+	var/list/raider_pants = list(
+		/obj/item/clothing/jumpsuit/overalls,
+		/obj/item/clothing/jumpsuit/overalls/laborer,
+		/obj/item/clothing/jumpsuit/overalls/yellow,
+		/obj/item/clothing/pants/baggy/brown,
+		/obj/item/clothing/pants/soviet
+	)
 	var/list/raider_shoes = list(
 		/obj/item/clothing/shoes/jackboots,
 		/obj/item/clothing/shoes/workboots,
@@ -126,8 +133,9 @@
 				H.put_in_hands(holster)
 
 /decl/hierarchy/outfit/raider/proc/randomize_clothing()
-	shoes =   pick(raider_shoes)
+	shoes   = pick(raider_shoes)
 	uniform = pick(raider_uniforms)
+	pants   = pick(raider_pants)
 	glasses = pick(raider_glasses)
-	head =  pick(raider_helmets)
-	suit =    pick(raider_suits)
+	head    = pick(raider_helmets)
+	suit    = pick(raider_suits)

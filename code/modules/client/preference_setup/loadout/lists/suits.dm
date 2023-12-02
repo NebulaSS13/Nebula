@@ -67,11 +67,6 @@
 	path = /obj/item/clothing/suit/apron
 	cost = 1
 
-/decl/loadout_option/suit/overalls
-	name = "apron, overalls"
-	path = /obj/item/clothing/suit/apron/overalls
-	cost = 1
-
 /decl/loadout_option/suit/trenchcoat
 	name = "trenchcoat selection"
 	path = /obj/item/clothing/suit

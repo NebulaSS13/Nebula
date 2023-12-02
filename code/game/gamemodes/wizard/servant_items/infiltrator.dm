@@ -25,9 +25,15 @@
 		)
 
 /obj/item/clothing/under/lawyer/infil
-	name = "formal outfit"
-	desc = "A white dress shirt and navy pants. Snazzy."
-	icon = 'icons/clothing/under/formal.dmi'
+	name = "dress shirt"
+	desc = "A white dress shirt."
+	icon = 'icons/clothing/under/shirts/shirt_formal.dmi'
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
+
+/obj/item/clothing/pants/infil
+	name = "dress slacks"
+	desc = "A pair of dark blue slacks."
+	icon = 'icons/clothing/pants/pants_formal.dmi'
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/shoes/dress/infilshoes

@@ -1,12 +1,12 @@
 /decl/hierarchy/outfit/job/captain
-	name = "Job - Captain"
-	head = /obj/item/clothing/head/caphat
-	glasses = /obj/item/clothing/glasses/sunglasses
-	uniform = /obj/item/clothing/jumpsuit/captain
-	l_ear = /obj/item/radio/headset/heads/captain
-	shoes = /obj/item/clothing/shoes/color/brown
-	id_type = /obj/item/card/id/gold
-	pda_type = /obj/item/modular_computer/pda/heads/captain
+	name              = "Job - Captain"
+	head              = /obj/item/clothing/head/caphat
+	glasses           = /obj/item/clothing/glasses/sunglasses
+	pants             = /obj/item/clothing/jumpsuit/captain
+	l_ear             = /obj/item/radio/headset/heads/captain
+	shoes             = /obj/item/clothing/shoes/color/brown
+	id_type           = /obj/item/card/id/gold
+	pda_type          = /obj/item/modular_computer/pda/heads/captain
 	backpack_contents = list(/obj/item/storage/box/ids = 1)
 
 /decl/hierarchy/outfit/job/captain/Initialize()
@@ -29,10 +29,10 @@
 				qdel(medal)
 
 /decl/hierarchy/outfit/job/hop
-	name = "Job - Head of Personnel"
-	uniform = /obj/item/clothing/jumpsuit/head_of_personnel
-	l_ear = /obj/item/radio/headset/heads/hop
-	shoes = /obj/item/clothing/shoes/color/brown
-	id_type = /obj/item/card/id/silver
-	pda_type = /obj/item/modular_computer/pda/heads/hop
+	name              = "Job - Head of Personnel"
+	pants             = /obj/item/clothing/jumpsuit/head_of_personnel
+	l_ear             = /obj/item/radio/headset/heads/hop
+	shoes             = /obj/item/clothing/shoes/color/brown
+	id_type           = /obj/item/card/id/silver
+	pda_type          = /obj/item/modular_computer/pda/heads/hop
 	backpack_contents = list(/obj/item/storage/box/ids = 1)

@@ -22,7 +22,9 @@
 /obj/structure/closet/gimmick/russian/WillContain()
 	return list(
 		/obj/item/clothing/head/ushanka = 5,
-		/obj/item/clothing/under/soviet = 5)
+		/obj/item/clothing/under/soviet = 5,
+		/obj/item/clothing/pants/soviet = 5
+	)
 
 /obj/structure/closet/gimmick/tacticool
 	name = "tacticool gear closet"

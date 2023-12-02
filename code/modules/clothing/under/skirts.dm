@@ -1,40 +1,40 @@
 /obj/item/clothing/pants/skirt
 	name = "red skirt"
 	desc = "A red skirt, very fancy!"
-	icon = 'icons/clothing/under/skirts/skirt_black.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_black.dmi'
 	body_parts_covered = SLOT_LOWER_BODY
 
 /obj/item/clothing/pants/skirt/plaid_blue
 	name = "blue plaid skirt"
 	desc = "A preppy blue skirt."
-	icon = 'icons/clothing/under/skirts/skirt_plaid_blue.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_plaid_blue.dmi'
 
 /obj/item/clothing/pants/skirt/plaid_red
 	name = "red plaid skirt"
 	desc = "A preppy red skirt."
-	icon = 'icons/clothing/under/skirts/skirt_plaid_red.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_plaid_red.dmi'
 
 /obj/item/clothing/pants/skirt/plaid_purple
 	name = "purple plaid skirt"
 	desc = "A preppy purple skirt."
-	icon = 'icons/clothing/under/skirts/skirt_plaid_purple.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_plaid_purple.dmi'
 
 /obj/item/clothing/pants/skirt/khaki
 	name = "khaki skirt"
 	desc = "A khaki skirt with a flare at the hem."
-	icon = 'icons/clothing/under/skirts/skirt_khaki.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_khaki.dmi'
 	body_parts_covered = SLOT_LOWER_BODY
 
 /obj/item/clothing/pants/skirt/swept
 	name = "swept skirt"
 	desc = "A skirt that is swept to one side."
-	icon = 'icons/clothing/under/skirts/skirt_swept.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_swept.dmi'
 	body_parts_covered = SLOT_LOWER_BODY
 
 /obj/item/clothing/under/skirt_c
 	name = "short skirt"
 	desc = "A short skirt, made of some semi-gloss material."
-	icon = 'icons/clothing/under/skirts/skirt_short.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_short.dmi'
 	body_parts_covered = SLOT_LOWER_BODY
 
 // dresses

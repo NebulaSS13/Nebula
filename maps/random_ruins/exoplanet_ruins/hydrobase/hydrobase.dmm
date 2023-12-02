@@ -2563,7 +2563,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/dockport)
 "gx" = (
-/obj/item/clothing/under/overalls,
+/obj/item/clothing/jumpsuit/overalls,
 /obj/item/clothing/shoes/jackboots/desertboots,
 /obj/structure/closet,
 /turf/simulated/floor/tiled/freezer,

@@ -5,7 +5,7 @@
 /obj/item/clothing/jumpsuit/research_director
 	desc = "It's a jumpsuit worn by those with the know-how to achieve the position of \"Chief Science Officer\". Its fabric provides minor protection from biological contaminants."
 	name = "chief science officer's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_rd.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_rd.dmi'
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
 	)
@@ -30,7 +30,7 @@
 /obj/item/clothing/jumpsuit/chemist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a chemist rank stripe on it."
 	name = "pharmacist's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_chemist.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_chemist.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
@@ -41,7 +41,7 @@
 /obj/item/clothing/jumpsuit/chief_medical_officer
 	desc = "It's a jumpsuit worn by those with the experience to be \"Chief Medical Officer\". It provides minor biological protection."
 	name = "chief medical officer's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_cmo.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_cmo.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
@@ -50,7 +50,7 @@
 /obj/item/clothing/jumpsuit/geneticist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a genetics rank stripe on it."
 	name = "geneticist's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_genetics.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_genetics.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
@@ -59,7 +59,7 @@
 /obj/item/clothing/jumpsuit/virologist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it."
 	name = "virologist's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_virology.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_virology.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
@@ -97,7 +97,7 @@
 /obj/item/clothing/jumpsuit/medical
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has a cross on the chest denoting that the wearer is trained medical personnel."
 	name = "medical doctor's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_medical.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_medical.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_MINOR
@@ -148,6 +148,6 @@
 /obj/item/clothing/jumpsuit/psych
 	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."
 	name = "psychiatrist's jumpsuit"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psych.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_psych.dmi'
 
 

@@ -33,23 +33,21 @@
 		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/under/suit_jacket/burgundy,
 		/obj/item/clothing/under/suit_jacket/charcoal,
-		/obj/item/clothing/under/suit_jacket/checkered,
 		/obj/item/clothing/under/suit_jacket/really_black,
 		/obj/item/clothing/under/suit_jacket/female,
 		/obj/item/clothing/under/gentlesuit,
 		/obj/item/clothing/under/suit_jacket/navy,
 		/obj/item/clothing/under/lawyer/oldman,
-		/obj/item/clothing/under/lawyer/purpsuit,
+		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/under/suit_jacket/red,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/suit_jacket/tan,
 		/obj/item/clothing/under/scratch,
-		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/pants/scratch,
+		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/under/internalaffairs/plain,
 		/obj/item/clothing/under/blazer,
-		/obj/item/clothing/jumpsuit/blackjumpskirt,
-		/obj/item/clothing/under/kilt,
 		/obj/item/clothing/under/dress/dress_hr,
 		/obj/item/clothing/under/det,
 		/obj/item/clothing/under/det/black,
@@ -98,42 +96,7 @@
 	path = /obj/item/clothing/under/skirt_c/dress
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/uniform/pants
-	name = "casual pants selection"
-	path = /obj/item/clothing/pants/casual
-	loadout_flags = GEAR_HAS_TYPE_SELECTION
-	slot = slot_lower_body_str
-
-/decl/loadout_option/uniform/pants/formal
-	name = "formal pants selection"
-	path = /obj/item/clothing/pants/formal
-	loadout_flags = GEAR_HAS_TYPE_SELECTION
-
-/decl/loadout_option/uniform/pants/formal/baggycustom
-	name = "baggy suit pants, colour select"
-	path = /obj/item/clothing/pants/baggy
-	loadout_flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/uniform/pants/shorts
-	name = "shorts selection"
-	path = /obj/item/clothing/pants/shorts
-	loadout_flags = GEAR_HAS_TYPE_SELECTION
-
-/decl/loadout_option/uniform/pants/shorts/custom
-	name = "athletic shorts, colour select"
-	path = /obj/item/clothing/pants/shorts/athletic
-	loadout_flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/uniform/pants/skirt
-	name = "skirt selection"
-	path = /obj/item/clothing/pants/skirt
-	flags = GEAR_HAS_TYPE_SELECTION
-
 /decl/loadout_option/uniform/kimono
 	name = "kimono, colour select"
 	path = /obj/item/clothing/under/kimono
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/uniform/frontier
-	name = "frontier clothes"
-	path = /obj/item/clothing/under/frontier
