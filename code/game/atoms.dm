@@ -861,3 +861,6 @@
 
 /atom/proc/get_overhead_text_y_offset()
 	return 0
+
+/atom/proc/can_be_injected_by(var/atom/injector)
+	return FALSE

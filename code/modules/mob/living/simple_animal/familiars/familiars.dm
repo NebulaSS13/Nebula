@@ -45,6 +45,8 @@
 	icon = 'icons/mob/simple_animal/spaceshark.dmi'
 	pixel_x = -16
 
+	offset_overhead_text_x = 16
+
 	speak_emote = list("gnashes")
 
 	health = 100

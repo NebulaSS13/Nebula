@@ -1367,3 +1367,5 @@
 /mob/get_overhead_text_y_offset()
 	return offset_overhead_text_y
 
+/mob/can_be_injected_by(var/atom/injector)
+	return FALSE // Handled elsewhere in syringe logic.
