@@ -170,7 +170,7 @@
 		var/speech_state = holder.check_speech_punctuation_state(message)
 		if(speech_state)
 			var/image/speech_bubble = image('icons/mob/talk.dmi', talker, speech_state)
-			addtimer(CALLBACK(src, .proc/qdel_image, speech_bubble), 3 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(qdel_image), speech_bubble), 3 SECONDS)
 			show_image(holder, speech_bubble)
 
 		sanity-- //don't spam them in very populated rooms.

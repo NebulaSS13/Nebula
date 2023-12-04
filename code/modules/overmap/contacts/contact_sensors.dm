@@ -137,7 +137,7 @@
 
 		var/time_delay = max((SENSOR_TIME_DELAY * get_dist(linked, contact)),1)
 		if(!record.pinged)
-			addtimer(CALLBACK(record, .proc/ping), time_delay)
+			addtimer(CALLBACK(record, PROC_REF(ping)), time_delay)
 
 /obj/machinery/computer/ship/sensors/attackby(var/obj/item/I, var/mob/user)
 	. = ..()
@@ -150,11 +150,11 @@
 
 	if(tracker in trackers)
 		trackers -= tracker
-		events_repository.unregister(/decl/observ/destroyed, tracker, src, .proc/remove_tracker)
+		events_repository.unregister(/decl/observ/destroyed, tracker, src, PROC_REF(remove_tracker))
 		to_chat(user, SPAN_NOTICE("You unlink the tracker in \the [P]'s buffer from \the [src]."))
 		return
 	trackers += tracker
-	events_repository.register(/decl/observ/destroyed, tracker, src, .proc/remove_tracker)
+	events_repository.register(/decl/observ/destroyed, tracker, src, PROC_REF(remove_tracker))
 	to_chat(user, SPAN_NOTICE("You link the tracker in \the [P]'s buffer to \the [src]."))
 
 /obj/machinery/computer/ship/sensors/proc/remove_tracker(var/obj/item/ship_tracker/tracker)

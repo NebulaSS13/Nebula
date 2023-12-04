@@ -17,7 +17,7 @@
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)
 		animate(pixel_z = user.default_pixel_z, time = 3, easing = SINE_EASING | EASE_OUT)
 		user.throw_at(get_turf(target), strength, 1, user, FALSE, CALLBACK(src, /decl/maneuver/leap/proc/end_leap, user, target, old_pass_flags))
-		addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 4.5)
+		addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, jump_layer_shift_end)), 4.5)
 
 /decl/maneuver/leap/proc/end_leap(var/mob/living/user, var/atom/target, var/pass_flag)
 	user.pass_flags = pass_flag

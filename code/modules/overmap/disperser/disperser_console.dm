@@ -54,9 +54,9 @@
 		middle = M
 		back = B
 		if(is_valid_setup())
-			events_repository.register(/decl/observ/destroyed, F, src, .proc/release_links)
-			events_repository.register(/decl/observ/destroyed, M, src, .proc/release_links)
-			events_repository.register(/decl/observ/destroyed, B, src, .proc/release_links)
+			events_repository.register(/decl/observ/destroyed, F, src, PROC_REF(release_links))
+			events_repository.register(/decl/observ/destroyed, M, src, PROC_REF(release_links))
+			events_repository.register(/decl/observ/destroyed, B, src, PROC_REF(release_links))
 			return TRUE
 	return FALSE
 
@@ -68,9 +68,9 @@
 	return FALSE
 
 /obj/machinery/computer/ship/disperser/proc/release_links()
-	events_repository.unregister(/decl/observ/destroyed, front, src, .proc/release_links)
-	events_repository.unregister(/decl/observ/destroyed, middle, src, .proc/release_links)
-	events_repository.unregister(/decl/observ/destroyed, back, src, .proc/release_links)
+	events_repository.unregister(/decl/observ/destroyed, front, src, PROC_REF(release_links))
+	events_repository.unregister(/decl/observ/destroyed, middle, src, PROC_REF(release_links))
+	events_repository.unregister(/decl/observ/destroyed, back, src, PROC_REF(release_links))
 	front = null
 	middle = null
 	back = null

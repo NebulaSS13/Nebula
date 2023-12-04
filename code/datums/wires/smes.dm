@@ -63,7 +63,7 @@ var/global/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to r
 		if(SMES_WIRE_RCON)
 			if(S.RCon)
 				S.RCon = 0
-				addtimer(CALLBACK(src, .proc/reset_rcon), 1 SECOND)
+				addtimer(CALLBACK(src, PROC_REF(reset_rcon)), 1 SECOND)
 		if(SMES_WIRE_INPUT)
 			S.toggle_input()
 		if(SMES_WIRE_OUTPUT)
@@ -73,4 +73,4 @@ var/global/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to r
 		if(SMES_WIRE_FAILSAFES)
 			if(S.safeties_enabled)
 				S.safeties_enabled = 0
-				addtimer(CALLBACK(src, .proc/reset_safeties), 1 SECOND)
+				addtimer(CALLBACK(src, PROC_REF(reset_safeties)), 1 SECOND)

@@ -795,13 +795,13 @@
 	if(old_area && old_area == alarm_area)
 		alarm_area = null
 		area_uid = null
-		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, PROC_REF(change_area_name))
 	if(new_area)
 		ASSERT(isnull(alarm_area))
 		alarm_area = new_area
 		area_uid = new_area.uid
 		change_area_name(alarm_area, null, alarm_area.name)
-		events_repository.register(/decl/observ/name_set, alarm_area, src, .proc/change_area_name)
+		events_repository.register(/decl/observ/name_set, alarm_area, src, PROC_REF(change_area_name))
 		for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
 			send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 

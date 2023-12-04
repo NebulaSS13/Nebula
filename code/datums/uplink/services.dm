@@ -41,7 +41,7 @@
 /datum/uplink_item/item/services/fake_update_annoncement/New()
 	..()
 	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
-	addtimer(CALLBACK(src, .proc/finalize_announce), 2)
+	addtimer(CALLBACK(src, PROC_REF(finalize_announce)), 2)
 
 /datum/uplink_item/item/services/fake_update_annoncement/proc/finalize_announce()
 	name = "[command_name()] Update Announcement"

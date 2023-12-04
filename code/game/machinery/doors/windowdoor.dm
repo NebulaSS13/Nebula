@@ -62,7 +62,7 @@
 		if(istype(bot))
 			if(density && src.check_access(bot.botcard))
 				open()
-				addtimer(CALLBACK(src, .proc/close), 50, TIMER_UNIQUE | TIMER_OVERRIDE)
+				addtimer(CALLBACK(src, PROC_REF(close)), 50, TIMER_UNIQUE | TIMER_OVERRIDE)
 		return
 	var/mob/M = AM // we've returned by here if M is not a mob
 	if (src.operating)
@@ -74,7 +74,7 @@
 			open_timer = 50
 		else //secure doors close faster
 			open_timer = 20
-		addtimer(CALLBACK(src, .proc/close), open_timer, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(CALLBACK(src, PROC_REF(close)), open_timer, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return
 
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -161,7 +161,7 @@
 	to_chat(user, SPAN_NOTICE("You short out \the [src]'s internal circuitry, locking it open!"))
 	if (density)
 		flick("[base_state]spark", src)
-		addtimer(CALLBACK(src, .proc/open), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(CALLBACK(src, PROC_REF(open)), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return TRUE
 
 /obj/machinery/door/emp_act(severity)

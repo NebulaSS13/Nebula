@@ -5,7 +5,7 @@
 
 /datum/wires/apc
 	holder_type = /obj/machinery/power/apc
-	wire_count = 4	
+	wire_count = 4
 	descriptions = list(
 		new /datum/wire_description(APC_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERT),
 		new /datum/wire_description(APC_WIRE_MAIN_POWER1, "This wire seems to be carrying a heavy current."),
@@ -48,17 +48,17 @@
 
 		if(APC_WIRE_IDSCAN)
 			A.locked = 0
-			addtimer(CALLBACK(src, .proc/reset_locked), 30 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(reset_locked)), 30 SECONDS)
 
 		if (APC_WIRE_MAIN_POWER1, APC_WIRE_MAIN_POWER2)
 			if(A.shorted == 0)
 				A.shorted = 1
-				addtimer(CALLBACK(src, .proc/reset_shorted), 2 MINUTES)
-	
+				addtimer(CALLBACK(src, PROC_REF(reset_shorted)), 2 MINUTES)
+
 		if (APC_WIRE_AI_CONTROL)
 			if (A.aidisabled == 0)
 				A.aidisabled = 1
-				addtimer(CALLBACK(src, .proc/reset_ai_disabled), 1 SECOND)
+				addtimer(CALLBACK(src, PROC_REF(reset_ai_disabled)), 1 SECOND)
 
 /datum/wires/apc/UpdateCut(var/index, var/mended)
 	var/obj/machinery/power/apc/A = holder

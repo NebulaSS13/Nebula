@@ -355,7 +355,7 @@
 			M.turf_collision(src, TT.speed)
 			if(LAZYLEN(M.pinned))
 				return
-		addtimer(CALLBACK(src, /turf/proc/bounce_off, AM, TT.init_dir), 2)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/turf, bounce_off), AM, TT.init_dir), 2)
 	else if(isobj(AM))
 		var/obj/structure/ladder/L = locate() in contents
 		if(L)

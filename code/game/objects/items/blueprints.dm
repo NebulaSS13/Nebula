@@ -105,8 +105,8 @@
 		if(isnull(shuttle_name))
 			shuttle_name = S.shuttle
 		update_linked_name(S, null, S.name)
-		events_repository.register(/decl/observ/name_set, S, src, .proc/update_linked_name)
-		events_repository.register(/decl/observ/destroyed, S, src, .proc/on_shuttle_destroy)
+		events_repository.register(/decl/observ/name_set, S, src, PROC_REF(update_linked_name))
+		events_repository.register(/decl/observ/destroyed, S, src, PROC_REF(on_shuttle_destroy))
 		valid_z_levels += S.map_z
 		area_prefix = S.name
 		return TRUE
@@ -119,8 +119,8 @@
 	desc = "Blueprints of \the [new_name]. There are several coffee stains on it."
 
 /obj/item/blueprints/shuttle/proc/on_shuttle_destroy(datum/destroyed)
-	events_repository.unregister(/decl/observ/name_set, destroyed, src, .proc/update_linked_name)
-	events_repository.unregister(/decl/observ/destroyed, destroyed, src, .proc/on_shuttle_destroy)
+	events_repository.unregister(/decl/observ/name_set, destroyed, src, PROC_REF(update_linked_name))
+	events_repository.unregister(/decl/observ/destroyed, destroyed, src, PROC_REF(on_shuttle_destroy))
 	name = initial(name)
 	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
 	valid_z_levels = list()

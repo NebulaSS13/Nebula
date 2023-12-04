@@ -149,7 +149,7 @@
 	if(stat != DEAD && !HAS_STATUS(src, STAT_WEAK))
 		user.visible_message(SPAN_NOTICE("\The [user] tips over \the [src]."))
 		SET_STATUS_MAX(src, STAT_WEAK, 30)
-		addtimer(CALLBACK(src, .proc/do_tip_response), rand(20, 50))
+		addtimer(CALLBACK(src, PROC_REF(do_tip_response)), rand(20, 50))
 		return TRUE
 	return ..()
 

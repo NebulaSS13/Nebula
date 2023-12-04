@@ -124,7 +124,7 @@
 		if(watching_mob.client)
 			animate(holomap_datum.station_map, alpha = 0, time = 5, easing = LINEAR_EASING)
 			var/mob/M = watching_mob
-			addtimer(CALLBACK(src, .proc/clear_image, M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
+			addtimer(CALLBACK(src, PROC_REF(clear_image), M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
 		events_repository.unregister(/decl/observ/moved, watching_mob, src)
 		events_repository.unregister(/decl/observ/destroyed, watching_mob, src)
 	watching_mob = null

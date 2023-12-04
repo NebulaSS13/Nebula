@@ -70,7 +70,7 @@
 /obj/machinery/door/Initialize(var/mapload, var/d, var/populate_parts = TRUE, var/obj/structure/door_assembly/assembly = null)
 	if(!populate_parts)
 		inherit_from_assembly(assembly)
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, PROC_REF(CheckPenetration))
 
 	if(!begins_closed)
 		icon_state = icon_state_open

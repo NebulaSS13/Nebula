@@ -144,14 +144,14 @@
 			if(istype(MS))
 				MS.shields = src
 				segments += MS
-				events_repository.register(/decl/observ/moved, MS, src, .proc/on_moved)
+				events_repository.register(/decl/observ/moved, MS, src, PROC_REF(on_moved))
 
 		passive_power_use = 0.8 KILOWATTS * segments.len
 
 		update_icon()
 		owner.update_icon()
-		events_repository.register(/decl/observ/moved, owner, src, .proc/on_moved)
-		events_repository.register(/decl/observ/dir_set, owner, src, .proc/on_turned)
+		events_repository.register(/decl/observ/moved, owner, src, PROC_REF(on_moved))
+		events_repository.register(/decl/observ/dir_set, owner, src, PROC_REF(on_turned))
 
 /obj/item/mech_equipment/atmos_shields/on_update_icon()
 	. = ..()
@@ -160,13 +160,13 @@
 /obj/item/mech_equipment/atmos_shields/deactivate()
 	for(var/obj/effect/mech_shield/MS in segments)
 		if(istype(MS))
-			events_repository.unregister(/decl/observ/moved, MS, src, .proc/on_moved)
+			events_repository.unregister(/decl/observ/moved, MS, src, PROC_REF(on_moved))
 	if(segments.len)
 		owner.visible_message(SPAN_WARNING("The energy shields in front of \the [owner] disappear!"))
 	QDEL_NULL_LIST(segments)
 	passive_power_use = 0
-	events_repository.unregister(/decl/observ/moved, owner, src, .proc/on_moved)
-	events_repository.unregister(/decl/observ/dir_set, owner, src, .proc/on_turned)
+	events_repository.unregister(/decl/observ/moved, owner, src, PROC_REF(on_moved))
+	events_repository.unregister(/decl/observ/dir_set, owner, src, PROC_REF(on_turned))
 	. = ..()
 	update_icon()
 	owner.update_icon()

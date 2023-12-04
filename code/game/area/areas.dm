@@ -404,7 +404,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 /area/proc/throw_unbuckled_occupants(var/maxrange, var/speed, var/direction)
 	for(var/mob/M in src)
-		addtimer(CALLBACK(src, .proc/throw_unbuckled_occupant, M, maxrange, speed, direction), 0)
+		addtimer(CALLBACK(src, PROC_REF(throw_unbuckled_occupant), M, maxrange, speed, direction), 0)
 
 /area/proc/throw_unbuckled_occupant(var/mob/M, var/maxrange, var/speed, var/direction)
 	if(iscarbon(M))

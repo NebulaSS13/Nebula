@@ -220,14 +220,14 @@ var/global/list/all_apcs = list()
 		old_area.power_environ = 0
 		power_alarm.clearAlarm(old_area, src)
 		old_area.power_change()
-		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, PROC_REF(change_area_name))
 	if(new_area)
 		ASSERT(isnull(new_area.apc))
 		ASSERT(isnull(area))
 		new_area.apc = src
 		area = new_area
 		change_area_name(new_area, null, new_area.name)
-		events_repository.register(/decl/observ/name_set, new_area, src, .proc/change_area_name)
+		events_repository.register(/decl/observ/name_set, new_area, src, PROC_REF(change_area_name))
 
 /obj/machinery/power/apc/get_req_access()
 	if(!locked)

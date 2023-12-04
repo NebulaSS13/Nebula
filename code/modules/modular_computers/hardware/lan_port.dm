@@ -29,13 +29,13 @@
 	if(!istype(parent))
 		return
 	terminal = new(get_turf(parent))
-	set_extension(src, /datum/extension/event_registration/shuttle_stationary, GET_DECL(/decl/observ/moved), parent, .proc/check_terminal_prox, get_area(src))
-	events_repository.register(/decl/observ/destroyed, terminal, src, .proc/unset_terminal)
+	set_extension(src, /datum/extension/event_registration/shuttle_stationary, GET_DECL(/decl/observ/moved), parent, PROC_REF(check_terminal_prox), get_area(src))
+	events_repository.register(/decl/observ/destroyed, terminal, src, PROC_REF(unset_terminal))
 	set_status(parent, PART_STAT_CONNECTED)
 
 /obj/item/stock_parts/computer/lan_port/proc/unset_terminal()
 	remove_extension(src, /datum/extension/event_registration/shuttle_stationary)
-	events_repository.unregister(/decl/observ/destroyed, terminal, src, .proc/unset_terminal)
+	events_repository.unregister(/decl/observ/destroyed, terminal, src, PROC_REF(unset_terminal))
 	var/obj/machinery/parent = loc
 	if(istype(parent))
 		unset_status(parent, PART_STAT_CONNECTED)

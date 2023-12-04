@@ -238,7 +238,7 @@
 	visible_message(SPAN_DANGER("\The [src] [fire_desc] at \the [target]!"))
 
 	if(rapid)
-		var/datum/callback/shoot_cb = CALLBACK(src, .proc/shoot_wrapper, target, loc, src)
+		var/datum/callback/shoot_cb = CALLBACK(src, PROC_REF(shoot_wrapper), target, loc, src)
 		addtimer(shoot_cb, 1)
 		addtimer(shoot_cb, 4)
 		addtimer(shoot_cb, 6)

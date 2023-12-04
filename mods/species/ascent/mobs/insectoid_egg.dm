@@ -102,7 +102,7 @@ var/global/default_gyne
 	hatching = TRUE
 	update_icon()
 	visible_message(SPAN_NOTICE("\icon[src] \The [src] trembles and cracks as it begins to hatch."))
-	addtimer(CALLBACK(src, .proc/finish_hatching), 2.5 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(finish_hatching)), 2.5 SECONDS)
 
 
 /obj/structure/insectoid_egg/proc/finish_hatching()

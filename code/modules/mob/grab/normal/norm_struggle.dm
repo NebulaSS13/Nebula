@@ -43,7 +43,7 @@
 	else
 		affecting.visible_message("<span class='warning'>[affecting] struggles against [assailant]!</span>")
 		G.done_struggle = FALSE
-		addtimer(CALLBACK(G, .proc/handle_resist), 1 SECOND)
+		addtimer(CALLBACK(G, PROC_REF(handle_resist)), 1 SECOND)
 		resolve_struggle(G)
 
 /decl/grab/normal/struggle/proc/resolve_struggle(var/obj/item/grab/G)

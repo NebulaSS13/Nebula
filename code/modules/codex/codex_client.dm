@@ -25,7 +25,7 @@
 		return
 
 	codex_on_cooldown = TRUE
-	addtimer(CALLBACK(src, .proc/reset_codex_cooldown), 1 SECOND)
+	addtimer(CALLBACK(src, PROC_REF(reset_codex_cooldown)), 1 SECOND)
 
 	var/list/all_entries = SScodex.retrieve_entries_for_string(searching)
 	if(mob && mob.mind && !player_is_antag(mob.mind))
@@ -71,7 +71,7 @@
 		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
 		return
 	codex_on_cooldown = TRUE
-	addtimer(CALLBACK(src, .proc/reset_codex_cooldown), 1 SECOND)
+	addtimer(CALLBACK(src, PROC_REF(reset_codex_cooldown)), 1 SECOND)
 
 	to_chat(mob, SPAN_NOTICE("The codex forwards you an index file."))
 
@@ -114,7 +114,7 @@
 		return
 
 	codex_on_cooldown = TRUE
-	addtimer(CALLBACK(src, .proc/reset_codex_cooldown), 1 SECOND)
+	addtimer(CALLBACK(src, PROC_REF(reset_codex_cooldown)), 1 SECOND)
 
 	var/datum/codex_entry/entry = SScodex.get_codex_entry("nexus")
 	SScodex.present_codex_entry(mob, entry)

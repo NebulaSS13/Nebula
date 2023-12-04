@@ -114,7 +114,7 @@
 		loaded_item = O
 		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]."))
 		flick("d_analyzer_la", src)
-		addtimer(CALLBACK(src, .proc/refresh_busy), 1 SECOND)
+		addtimer(CALLBACK(src, PROC_REF(refresh_busy)), 1 SECOND)
 		return TRUE
 
 /obj/machinery/destructive_analyzer/proc/refresh_busy()
@@ -140,7 +140,7 @@
 	else
 		loaded_item = null
 	flick("d_analyzer_process", src)
-	addtimer(CALLBACK(src, .proc/refresh_busy), 2 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(refresh_busy)), 2 SECONDS)
 
 /obj/item/research
 	name = "research debugging device"

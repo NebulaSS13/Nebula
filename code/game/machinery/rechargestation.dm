@@ -175,7 +175,7 @@
 	overlays = list(image(overlay_icon, overlay_state()))
 
 /obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
-	addtimer(CALLBACK(src, .proc/go_in, R), 1)
+	addtimer(CALLBACK(src, PROC_REF(go_in), R), 1)
 
 /obj/machinery/recharge_station/proc/go_in(var/mob/M)
 

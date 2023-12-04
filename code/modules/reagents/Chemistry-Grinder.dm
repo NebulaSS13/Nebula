@@ -192,7 +192,7 @@
 	update_icon()
 
 	// Reset the machine.
-	addtimer(CALLBACK(src, .proc/end_grind, user), 6 SECONDS, TIMER_UNIQUE)
+	addtimer(CALLBACK(src, PROC_REF(end_grind), user), 6 SECONDS, TIMER_UNIQUE)
 
 	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(skill_to_check) - SKILL_EXPERT)/(SKILL_EXPERT - SKILL_MIN))
 	// Process.

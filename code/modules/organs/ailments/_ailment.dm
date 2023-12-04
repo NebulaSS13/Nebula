@@ -56,7 +56,7 @@
 /datum/ailment/proc/begin_ailment_event()
 	if(!organ?.owner)
 		return
-	timer_id = addtimer(CALLBACK(src, .proc/do_malfunction), rand(min_time, max_time), TIMER_STOPPABLE | TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_NO_HASH_WAIT)
+	timer_id = addtimer(CALLBACK(src, PROC_REF(do_malfunction)), rand(min_time, max_time), TIMER_STOPPABLE | TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_NO_HASH_WAIT)
 
 /datum/ailment/proc/do_malfunction()
 	if(!organ?.owner)

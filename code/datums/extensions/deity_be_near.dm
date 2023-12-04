@@ -9,9 +9,9 @@
 
 /datum/extension/deity_be_near/New(var/datum/holder, var/mob/living/deity/connect)
 	..()
-	events_repository.register(/decl/observ/moved, holder,src, .proc/check_movement)
+	events_repository.register(/decl/observ/moved, holder,src, PROC_REF(check_movement))
 	connected_deity = connect
-	events_repository.register(/decl/observ/destroyed, holder, src, .proc/dead_deity)
+	events_repository.register(/decl/observ/destroyed, holder, src, PROC_REF(dead_deity))
 	var/obj/O = holder
 	O.desc += "<br><span class='cult'>This item deals damage to its wielder the [keep_away_instead ? "closer" : "farther"] it is from a deity structure</span>"
 

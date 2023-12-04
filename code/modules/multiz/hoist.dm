@@ -83,7 +83,7 @@
 	if (get_turf(AM) != get_turf(source_hook))
 		AM.forceMove(get_turf(source_hook))
 
-	events_repository.register(/decl/observ/destroyed, AM, src, .proc/release_hoistee)
+	events_repository.register(/decl/observ/destroyed, AM, src, PROC_REF(release_hoistee))
 
 /obj/effect/hoist_hook/handle_mouse_drop(atom/over, mob/user, params)
 	if(source_hoist.hoistee && isturf(over) && over.Adjacent(source_hoist.hoistee))

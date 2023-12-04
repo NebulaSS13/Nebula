@@ -171,7 +171,7 @@
 		if(installed_gun && is_valid_target(target?.resolve()))
 			var/atom/resolved_target = target.resolve()
 			if(istype(resolved_target))
-				addtimer(CALLBACK(src, .proc/fire_weapon, resolved_target), 0)
+				addtimer(CALLBACK(src, PROC_REF(fire_weapon), resolved_target), 0)
 		else
 			target = null
 	state_machine.evaluate()
@@ -379,7 +379,7 @@
 		to_chat(user, SPAN_WARNING("You short out \the [src]'s threat assessment circuits."))
 		visible_message("\The [src] hums oddly...")
 		enabled = FALSE
-		addtimer(CALLBACK(src, .proc/emagged_targeting), 6 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(emagged_targeting)), 6 SECONDS)
 		state_machine.evaluate()
 
 /obj/machinery/turret/proc/emagged_targeting()

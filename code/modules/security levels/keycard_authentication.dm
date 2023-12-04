@@ -130,10 +130,10 @@
 		if(KA == src)
 			continue
 		KA.reset()
-		addtimer(CALLBACK(src, .proc/receive_request, src, initial_card.resolve()))
+		addtimer(CALLBACK(src, PROC_REF(receive_request), src, initial_card.resolve()))
 
 	if(confirm_delay)
-		addtimer(CALLBACK(src, .proc/broadcast_check), confirm_delay)
+		addtimer(CALLBACK(src, PROC_REF(broadcast_check)), confirm_delay)
 
 /obj/machinery/keycard_auth/proc/broadcast_check()
 	if(confirmed)

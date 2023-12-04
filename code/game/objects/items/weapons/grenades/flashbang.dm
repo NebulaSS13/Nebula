@@ -126,7 +126,7 @@
 	var/stepdist = rand(1,4)//How far to step
 	var/temploc = src.loc//Saves the current location to know where to step away from
 	walk_away(src,temploc,stepdist)//I must go, my people need me
-	addtimer(CALLBACK(src, .proc/detonate), rand(15,60))
+	addtimer(CALLBACK(src, PROC_REF(detonate)), rand(15,60))
 
 /obj/item/grenade/flashbang/clusterbang/segment/detonate()
 	var/numspawned = rand(4,8)
@@ -145,4 +145,4 @@
 	var/stepdist = rand(1,3)
 	var/temploc = src.loc
 	walk_away(src,temploc,stepdist)
-	addtimer(CALLBACK(src, .proc/detonate), rand(15,60))
+	addtimer(CALLBACK(src, PROC_REF(detonate)), rand(15,60))

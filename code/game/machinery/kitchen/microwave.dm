@@ -298,7 +298,7 @@
 	update_use_power(POWER_USE_ACTIVE)
 
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
-	addtimer(CALLBACK(src, .proc/half_time_process), cook_time / 2)
+	addtimer(CALLBACK(src, PROC_REF(half_time_process)), cook_time / 2)
 	visible_message(SPAN_NOTICE("[src] turns on."), SPAN_NOTICE("You hear a microwave."))
 
 	if(cook_dirty)

@@ -172,7 +172,7 @@
 		SET_STATUS_MAX(owner, STAT_PARA, damage_secondary)
 		SET_STATUS_MAX(owner, STAT_WEAK, round(damage, 1))
 		if(prob(30))
-			addtimer(CALLBACK(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
+			addtimer(CALLBACK(src, PROC_REF(brain_damage_callback), damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
 
 /obj/item/organ/internal/brain/proc/brain_damage_callback(var/damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
 	if(!QDELETED(owner))

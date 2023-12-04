@@ -26,7 +26,7 @@
 
 /obj/item/energy_blade/sword/dropped(var/mob/user)
 	..()
-	addtimer(CALLBACK(src, .proc/check_loc), 1) // Swapping hands or passing to another person should not deactivate the sword.
+	addtimer(CALLBACK(src, PROC_REF(check_loc)), 1) // Swapping hands or passing to another person should not deactivate the sword.
 
 /obj/item/energy_blade/sword/proc/check_loc()
 	if(!ismob(loc) && active)

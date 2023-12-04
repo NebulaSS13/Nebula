@@ -120,4 +120,4 @@
 		if(H)
 			H.color = "#a03b3b"
 			animate(H, color = COLOR_WHITE, time = timeout, easing = CUBIC_EASING | EASE_IN)
-	addtimer(CALLBACK(src, .proc/reset_hardpoint_color), timeout)
+	addtimer(CALLBACK(src, PROC_REF(reset_hardpoint_color)), timeout)

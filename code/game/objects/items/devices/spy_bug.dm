@@ -102,12 +102,12 @@
 
 /obj/item/spy_monitor/proc/pair(var/obj/item/spy_bug/SB, var/mob/living/user)
 	to_chat(user, SPAN_NOTICE("\The [SB] has been paired with \the [src]."))
-	events_repository.register(/decl/observ/destroyed, SB, src, .proc/unpair)
+	events_repository.register(/decl/observ/destroyed, SB, src, PROC_REF(unpair))
 	cameras += SB
 
 /obj/item/spy_monitor/proc/unpair(var/obj/item/spy_bug/SB, var/mob/living/user)
 	to_chat(user, SPAN_NOTICE("\The [SB] has been unpaired from \the [src]."))
-	events_repository.unregister(/decl/observ/destroyed, SB, src, .proc/unpair)
+	events_repository.unregister(/decl/observ/destroyed, SB, src, PROC_REF(unpair))
 	if(selected_camera == SB)
 		selected_camera = null
 	cameras -= SB

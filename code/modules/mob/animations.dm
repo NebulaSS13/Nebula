@@ -106,7 +106,7 @@
 
 	for(var/client/C in viewing)
 		C.images += I
-	addtimer(CALLBACK(src, .proc/clear_shown_overlays, viewing, I), 5)
+	addtimer(CALLBACK(src, PROC_REF(clear_shown_overlays), viewing, I), 5)
 
 	// Scale the icon.
 	I.transform *= 0.75

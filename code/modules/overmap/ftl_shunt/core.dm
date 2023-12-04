@@ -234,7 +234,7 @@
 	update_icon()
 
 	if(check_charge())
-		jump_timer = addtimer(CALLBACK(src, .proc/execute_shunt), jump_delay, TIMER_STOPPABLE)
+		jump_timer = addtimer(CALLBACK(src, PROC_REF(execute_shunt)), jump_delay, TIMER_STOPPABLE)
 	return FTL_START_CONFIRMED
 
 /obj/machinery/ftl_shunt/core/proc/calculate_jump_requirements()
@@ -270,7 +270,7 @@
 		return
 
 	if(use_fuel(required_fuel_joules))
-		jump_timer = addtimer(CALLBACK(src, .proc/execute_shunt), jump_delay, TIMER_STOPPABLE)
+		jump_timer = addtimer(CALLBACK(src, PROC_REF(execute_shunt)), jump_delay, TIMER_STOPPABLE)
 	else
 		cancel_shunt()
 		return //If for some reason we don't have fuel now, just return.
@@ -281,7 +281,7 @@
 		var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
 		var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
 		QDEL_IN(W, 6 SECONDS)
-		addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(do_shunt), shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 		jumping = TRUE
 		update_icon()
 		for(var/mob/living/carbon/M in global.living_mob_list_)

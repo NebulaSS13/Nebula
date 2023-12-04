@@ -199,7 +199,7 @@
 			L.visible_message("<span class='danger'>\The [acting_object] is trying to inject [L]!</span>", \
 								"<span class='danger'>\The [acting_object] is trying to inject you!</span>")
 			busy = TRUE
-			addtimer(CALLBACK(src, .proc/inject_after, weakref(L)), injection_delay)
+			addtimer(CALLBACK(src, PROC_REF(inject_after), weakref(L)), injection_delay)
 			return
 		else
 			if(!ATOM_IS_OPEN_CONTAINER(AM))
@@ -229,7 +229,7 @@
 			C.visible_message("<span class='danger'>\The [acting_object] is trying to take a blood sample from [C]!</span>", \
 								"<span class='danger'>\The [acting_object] is trying to take a blood sample from you!</span>")
 			busy = TRUE
-			addtimer(CALLBACK(src, .proc/draw_after, weakref(C), tramount), injection_delay)
+			addtimer(CALLBACK(src, PROC_REF(draw_after), weakref(C), tramount), injection_delay)
 			return
 
 		else

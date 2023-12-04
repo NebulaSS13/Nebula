@@ -249,7 +249,7 @@ Guard caste procs
 		attacking_with.force = initial(attacking_with.force) + 5
 	move_to_delay--
 	break_stuff_probability = 45
-	addtimer(CALLBACK(src, .proc/calm_down), 3 MINUTES)
+	addtimer(CALLBACK(src, PROC_REF(calm_down)), 3 MINUTES)
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/calm_down()
 	berserking = FALSE
