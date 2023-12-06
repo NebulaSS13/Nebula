@@ -28,7 +28,7 @@
 	id_type = /obj/item/card/id/cargo
 	pda_type = /obj/item/modular_computer/pda/science
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/storage/ore = 1)
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 
 /decl/hierarchy/outfit/job/cargo/mining/Initialize()
 	. = ..()

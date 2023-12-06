@@ -202,6 +202,18 @@
 	if(rags)
 		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
 
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	if(sensor)
+		switch(sensor.sensor_mode)
+			if(VITALS_SENSOR_OFF)
+				to_chat(user, "Its sensors appear to be disabled.")
+			if(VITALS_SENSOR_BINARY)
+				to_chat(user, "Its binary life sensors appear to be enabled.")
+			if(VITALS_SENSOR_VITAL)
+				to_chat(user, "Its vital tracker appears to be enabled.")
+			if(VITALS_SENSOR_TRACKING)
+				to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
+
 #undef RAG_COUNT
 
 /obj/item/clothing/Topic(href, href_list, datum/topic_state/state)
@@ -233,3 +245,41 @@
 
 /obj/item/clothing/proc/check_limb_support(var/mob/living/carbon/human/user)
 	return FALSE
+
+/obj/item/clothing/verb/toggle_suit_sensors()
+	set name = "Toggle Suit Sensors"
+	set category = "Object"
+	set src in usr
+	set_sensors(usr)
+
+/obj/item/clothing/proc/set_sensors(mob/user)
+	if (isobserver(user) || user.incapacitated())
+		return
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	if(sensor)
+		sensor.user_set_sensors(user)
+
+/obj/item/clothing/handle_loadout_equip_replacement(obj/item/old_item)
+	. = ..()
+	if(!istype(old_item, /obj/item/clothing) || !(ACCESSORY_SLOT_SENSORS in valid_accessory_slots))
+		return
+	var/obj/item/clothing/old_clothes = old_item
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in old_clothes.accessories
+	if(!sensor)
+		return
+	sensor.removable = TRUE // This will be refreshed by remove_accessory/attach_accessory
+	old_clothes.remove_accessory(null, sensor)
+	attach_accessory(null, sensor)
+
+
+/decl/interaction_handler/clothing_set_sensors
+	name = "Set Sensors Level"
+	expected_target_type = /obj/item/clothing/under
+
+/decl/interaction_handler/clothing_set_sensors/invoked(var/atom/target, var/mob/user)
+	var/obj/item/clothing/under/U = target
+	U.set_sensors(user)
+
+/obj/item/clothing/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)

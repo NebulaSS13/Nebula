@@ -18,18 +18,18 @@
 
 /decl/hierarchy/outfit/blank_subject
 	name = "Test Subject"
-	uniform = /obj/item/clothing/under/color/white
+	uniform = /obj/item/clothing/under/color/white/blank
 	shoes = /obj/item/clothing/shoes/color/white
 	head = /obj/item/clothing/head/helmet/facecover
 	mask = /obj/item/clothing/mask/muzzle
 	suit = /obj/item/clothing/suit/straight_jacket
 
-/decl/hierarchy/outfit/blank_subject/post_equip(mob/living/carbon/human/H)
-	..()
-	var/obj/item/clothing/under/color/white/C = locate() in H
-	if(C)
-		C.has_sensor  = SUIT_LOCKED_SENSORS
-		C.sensor_mode = SUIT_SENSOR_OFF
+/obj/item/clothing/under/color/white/blank/Initialize()
+	. = ..()
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = new(src)
+	sensor.set_sensors_locked(TRUE)
+	sensor.set_sensor_mode(VITALS_SENSOR_OFF)
+	attach_accessory(null, sensor)
 
 /mob/living/carbon/human/blank/Initialize(mapload)
 	. = ..(mapload, SPECIES_HUMAN)

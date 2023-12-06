@@ -287,7 +287,7 @@
 	if(!outfit)
 		return
 
-	var/reset_equipment = (outfit.flags&OUTFIT_RESET_EQUIPMENT)
+	var/reset_equipment = (outfit.outfit_flags & OUTFIT_RESET_EQUIPMENT)
 	if(!reset_equipment)
 		reset_equipment = alert("Do you wish to delete all current equipment first?", "Delete Equipment?","Yes", "No") == "Yes"
 

@@ -4,7 +4,7 @@
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_slot = slot_l_store_str
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 	head = /obj/item/clothing/head/hardhat
 	uniform = /obj/item/clothing/under/engineer
 	r_pocket = /obj/item/t_scanner

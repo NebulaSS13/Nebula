@@ -1816,6 +1816,7 @@
 #include "code\modules\clothing\under\accessories\stethoscope.dm"
 #include "code\modules\clothing\under\accessories\storage.dm"
 #include "code\modules\clothing\under\accessories\ties.dm"
+#include "code\modules\clothing\under\accessories\vitals_sensor.dm"
 #include "code\modules\clothing\under\jobs\civilian.dm"
 #include "code\modules\clothing\under\jobs\engineering.dm"
 #include "code\modules\clothing\under\jobs\medsci.dm"
