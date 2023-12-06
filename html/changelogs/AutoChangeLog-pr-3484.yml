@@ -1,0 +1,4 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Suit sensors are now an accessory on your uniform that can be removed.}
+delete-after: true
