@@ -52,7 +52,7 @@
 	suffix = num2text(++amount)
 	name = "Mulebot #[suffix]"
 
-/mob/living/bot/mulebot/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/mob/living/bot/mulebot/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!.)
 		load(dropping)

@@ -119,7 +119,7 @@
 			if(power_failure || !draw_power(IC.power_draw_idle))
 				IC.power_fail()
 
-/obj/item/electronic_assembly/receive_mouse_drop(atom/dropping, mob/user)
+/obj/item/electronic_assembly/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && user == dropping)
 		interact(user)

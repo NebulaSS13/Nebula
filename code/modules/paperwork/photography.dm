@@ -185,7 +185,7 @@
 	can_hold = list(/obj/item/photo)
 	material = /decl/material/solid/organic/plastic
 
-/obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user)
+/obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && in_range(src, user) || loc == user)
 		if(user.active_storage)
 			user.active_storage.close(user)

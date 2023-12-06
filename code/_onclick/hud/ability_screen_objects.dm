@@ -33,7 +33,7 @@
 			my_mob.client.screen -= src
 		my_mob = null
 
-/obj/screen/ability_master/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/screen/ability_master/handle_mouse_drop(atom/over, mob/user, params)
 	if(showing)
 		return FALSE
 	. = ..()

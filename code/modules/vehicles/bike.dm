@@ -124,7 +124,7 @@
 			return 1
 	return ..()
 
-/obj/vehicle/bike/receive_mouse_drop(var/atom/dropping, mob/user)
+/obj/vehicle/bike/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /atom/movable))
 		if(!load(dropping))

@@ -111,7 +111,7 @@
 		icon_state = "body_scanner_2"
 
 //Like grap-put, but for mouse-drop.
-/obj/machinery/bodyscanner/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/machinery/bodyscanner/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && isliving(dropping))
 		var/mob/living/M = dropping

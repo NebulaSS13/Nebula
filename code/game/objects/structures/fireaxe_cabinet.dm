@@ -40,7 +40,7 @@
 		toggle_open(user)
 	return TRUE
 
-/obj/structure/fireaxecabinet/handle_mouse_drop(atom/over, mob/user)
+/obj/structure/fireaxecabinet/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user)
 		if(!open)
 			to_chat(user, SPAN_WARNING("\The [src] is closed."))

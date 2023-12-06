@@ -114,7 +114,7 @@
 /obj/structure/morgue_tray/attack_robot(mob/user)
 	return attack_hand_with_interaction_checks(user)
 
-/obj/structure/morgue_tray/receive_mouse_drop(atom/dropping, mob/user)
+/obj/structure/morgue_tray/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && (ismob(dropping) || istype(dropping, /obj/structure/closet/body_bag)))
 		var/atom/movable/AM = dropping

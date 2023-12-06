@@ -20,6 +20,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
+	structure_flags = STRUCTURE_FLAG_SURFACE
 
 	var/can_flip = TRUE
 	var/is_flipped = FALSE
@@ -464,7 +465,7 @@
 			return TRUE
 	return TRUE
 
-/obj/structure/table/receive_mouse_drop(atom/dropping, mob/user)
+/obj/structure/table/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.try_unequip(dropping))
 		var/obj/item/I = dropping

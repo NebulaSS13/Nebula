@@ -1,11 +1,11 @@
-/mob/living/exosuit/receive_mouse_drop(atom/dropping, mob/user)
+/mob/living/exosuit/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /obj/machinery/portable_atmospherics/canister))
-		body.receive_mouse_drop(dropping, user)
+		body.receive_mouse_drop(dropping, user, params)
 		return TRUE
 
-/mob/living/exosuit/handle_mouse_drop(atom/over, mob/user)
-	if(body?.handle_mouse_drop(over, user))
+/mob/living/exosuit/handle_mouse_drop(atom/over, mob/user, params)
+	if(body?.handle_mouse_drop(over, user, params))
 		return TRUE
 	. = ..()
 

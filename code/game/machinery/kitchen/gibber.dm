@@ -89,7 +89,7 @@
 	else
 		return ..()
 
-/obj/machinery/gibber/receive_mouse_drop(atom/dropping, mob/user)
+/obj/machinery/gibber/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && ismob(dropping))
 		move_into_gibber(user, dropping)

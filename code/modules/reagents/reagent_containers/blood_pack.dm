@@ -38,7 +38,7 @@
 		add_overlay(overlay_image(icon, "[round(percent,25)]", reagents.get_color()))
 	add_overlay(attached? "dongle" : "top")
 
-/obj/item/chems/ivbag/handle_mouse_drop(atom/over, mob/user)
+/obj/item/chems/ivbag/handle_mouse_drop(atom/over, mob/user, params)
 	if(ismob(loc))
 		if(attached)
 			visible_message(SPAN_NOTICE("\The [attached] is taken off \the [src]."))

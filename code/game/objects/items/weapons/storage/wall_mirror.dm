@@ -45,8 +45,8 @@
 	clear_ui_users(ui_users)
 	. = ..()
 
-/obj/structure/mirror/handle_mouse_drop(atom/over, mob/user)
-	if(!(. = mirror_storage?.handle_storage_internal_mouse_drop(user, over)))
+/obj/structure/mirror/handle_mouse_drop(atom/over, mob/user, params)
+	if(!(. = mirror_storage?.handle_storage_internal_mouse_drop(user, over, params)))
 		flick("mirror_open",src)
 		return
 	if((. = ..()))

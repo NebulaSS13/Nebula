@@ -44,7 +44,7 @@
 	maptext_y = 3
 	maptext_width = 72
 
-/obj/screen/exosuit/hardpoint/handle_mouse_drop(atom/over, mob/user)
+/obj/screen/exosuit/hardpoint/handle_mouse_drop(atom/over, mob/user, params)
 	if(holding)
 		holding.screen_loc = screen_loc
 		return TRUE

@@ -418,8 +418,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
 
 //This is called when a ghost is drag clicked to something.
-/mob/observer/ghost/MouseDrop(atom/over)
+/mob/observer/ghost/MouseDrop(over_object, src_location, over_location, src_control, over_control, params)
 	SHOULD_CALL_PARENT(FALSE)
+	var/atom/over = over_object
 	if(!usr || !over)
 		return
 	if(isghost(usr) && usr.client && isliving(over))

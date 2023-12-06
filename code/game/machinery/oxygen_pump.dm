@@ -41,7 +41,7 @@
 	breather = null
 	return ..()
 
-/obj/machinery/oxygen_pump/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/machinery/oxygen_pump/handle_mouse_drop(atom/over, mob/user, params)
 	if(ishuman(over) && can_apply_to_target(over, user))
 		user.visible_message(SPAN_NOTICE("\The [user] begins placing the mask onto \the [over].."))
 		if(do_mob(user, over, 25) && can_apply_to_target(over, user))

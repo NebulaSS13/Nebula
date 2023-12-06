@@ -36,7 +36,7 @@
 //items that use internal storage have the option of calling this to emulate default storage handle_mouse_drop behaviour.
 //returns 1 if the master item's parent's handle_mouse_drop() should be called, 0 otherwise. It's strange, but no other way of
 //doing it without the ability to call another proc's parent, really.
-/obj/item/storage/internal/proc/handle_storage_internal_mouse_drop(mob/user, obj/over_object)
+/obj/item/storage/internal/proc/handle_storage_internal_mouse_drop(mob/user, obj/over_object, params)
 	if (ishuman(user) || issmall(user)) //so monkeys can take off their backpacks -- Urist
 
 		if(over_object == user && Adjacent(user)) // this must come before the screen objects only block

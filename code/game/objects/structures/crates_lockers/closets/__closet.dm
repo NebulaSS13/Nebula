@@ -313,7 +313,7 @@ var/global/list/closets = list()
 	)
 	physically_destroyed()
 
-/obj/structure/closet/receive_mouse_drop(atom/dropping, mob/user)
+/obj/structure/closet/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	var/atom/movable/AM = dropping
 	if(!. && istype(AM) && opened && !istype(AM, /obj/structure/closet) && AM.simulated && !AM.anchored && (large || !ismob(AM)))

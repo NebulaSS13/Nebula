@@ -351,7 +351,7 @@
 		/obj/item/crowbar
 	)
 
-/obj/item/storage/backpack/satchel/flat/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/item/storage/backpack/satchel/flat/handle_mouse_drop(atom/over, mob/user, params)
 	var/turf/T = get_turf(src)
 	if(hides_under_flooring() && isturf(T) && !T.is_plating())
 		return TRUE

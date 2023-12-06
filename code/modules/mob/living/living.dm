@@ -948,7 +948,7 @@ default behaviour is:
 /mob/living/get_admin_job_string()
 	return "Living"
 
-/mob/living/handle_mouse_drop(atom/over, mob/user)
+/mob/living/handle_mouse_drop(atom/over, mob/user, params)
 	if(!anchored && user == src && user != over)
 
 		if(isturf(over))

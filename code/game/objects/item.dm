@@ -256,12 +256,23 @@
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen/inventory)) || ..()
 
-/obj/item/handle_mouse_drop(atom/over, mob/user)
-
+/obj/item/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user)
 		usr.face_atom(src)
 		dragged_onto(over)
 		return TRUE
+
+	// Allow dragging items onto/around tables and racks.
+	if(istype(over, /obj/structure))
+		var/obj/structure/struct = over
+		if(struct.structure_flags & STRUCTURE_FLAG_SURFACE)
+			if(user == loc && !user.try_unequip(src, get_turf(user)))
+				return TRUE
+			if(!isturf(loc))
+				return TRUE
+			var/list/click_data = params2list(params)
+			do_visual_slide(src, get_turf(src), pixel_x, pixel_y, get_turf(over), text2num(click_data["icon-x"])-1, text2num(click_data["icon-y"])-1, center_of_mass && cached_json_decode(center_of_mass))
+			return TRUE
 
 	// Try to drag-equip the item.
 	var/obj/screen/inventory/inv = over
@@ -281,6 +292,7 @@
 			add_fingerprint(user)
 			user.equip_to_slot_if_possible(src, inv.slot_id)
 		return TRUE
+
 
 	. = ..()
 

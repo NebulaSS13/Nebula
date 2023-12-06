@@ -99,3 +99,22 @@
 		animate(transform = matrices[i], time = speed)
 		//doesn't have an object argument because this is "Stacking" with the animate call above
 		//3 billion% intentional
+
+// This proc is used to move an atom to a target loc and then interpolite to give the illusion of sliding from start to end.
+/proc/do_visual_slide(var/atom/movable/sliding, var/turf/from, var/from_pixel_x, var/from_pixel_y, var/turf/target, var/target_pixel_x, var/target_pixel_y, var/center_of_mass)
+	set waitfor = FALSE
+	var/start_pixel_x = sliding.pixel_x - ((target.x-from.x) * world.icon_size)
+	var/start_pixel_y = sliding.pixel_y - ((target.y-from.y) * world.icon_size)
+	// Clear our glide so we don't do an animation when dropped into the target turf.
+	var/old_animate_movement = sliding.animate_movement
+	sliding.animate_movement = NO_STEPS
+	sleep(2 * world.tick_lag) // Due to BYOND being byond, animate_movement has to be set for at least 2 ticks before gliding will be disabled.
+	sliding.forceMove(target)
+	// Reset our glide_size now that movement has completed.
+	sliding.animate_movement = old_animate_movement
+	sliding.pixel_x = start_pixel_x
+	sliding.pixel_y = start_pixel_y
+	if(center_of_mass)
+		target_pixel_x -= center_of_mass["x"]
+		target_pixel_y -= center_of_mass["y"]
+	animate(sliding, pixel_x = target_pixel_x, pixel_y = target_pixel_y, time = 1 SECOND)

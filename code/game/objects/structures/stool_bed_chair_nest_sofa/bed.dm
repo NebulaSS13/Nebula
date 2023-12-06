@@ -25,7 +25,7 @@
 	parts_type = /obj/item/stack/material/strut
 	var/base_icon = "bed"
 
-/obj/structure/bed/user_can_mousedrop_onto(var/mob/user, var/atom/being_dropped, var/incapacitation_flags)
+/obj/structure/bed/user_can_mousedrop_onto(mob/user, atom/being_dropped, incapacitation_flags, params)
 	if(user == being_dropped)
 		return user.Adjacent(src) && !user.incapacitated(INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
 	return ..()
@@ -237,7 +237,7 @@
 	queue_icon_update()
 	STOP_PROCESSING(SSobj,src)
 
-/obj/structure/bed/roller/handle_mouse_drop(atom/over, mob/user)
+/obj/structure/bed/roller/handle_mouse_drop(atom/over, mob/user, params)
 	if(ishuman(user) || isrobot(user))
 		if(over == buckled_mob && beaker)
 			if(iv_attached)
