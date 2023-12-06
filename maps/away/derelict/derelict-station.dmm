@@ -3379,7 +3379,7 @@
 /area/AIsattele)
 "lZ" = (
 /obj/machinery/emitter{
-	anchored = TRUE;
+	anchored = 1;
 	dir = 4;
 	state = 2
 	},
@@ -3391,7 +3391,7 @@
 /area/constructionsite/engineering)
 "mb" = (
 /obj/machinery/emitter{
-	anchored = TRUE;
+	anchored = 1;
 	dir = 8;
 	state = 2
 	},

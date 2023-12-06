@@ -1018,7 +1018,7 @@
 /obj/structure/window/basic,
 /obj/structure/curtain/open/bed{
 	icon_state = "closed";
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 10
@@ -1295,7 +1295,7 @@
 /obj/structure/window/basic,
 /obj/structure/curtain/open/bed{
 	icon_state = "closed";
-	opacity = TRUE
+	opacity = 1
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/loading_bay)

@@ -300,7 +300,7 @@
 	dir = 4
 	},
 /obj/machinery/fabricator/pipe{
-	anchored = TRUE
+	anchored = 1
 	},
 /turf/simulated/floor/plating,
 /area/tanker)
