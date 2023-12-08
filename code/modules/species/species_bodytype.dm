@@ -272,7 +272,7 @@ var/global/list/bodytypes_by_category = list()
 				var/datum/dna/dummy_dna = new
 				dummy_dna.species = use_species
 				tail_organ = new tail_organ(null, null, dummy_dna, src)
-				var/tail_icon = tail_organ.get_tail_icon()
+				var/tail_icon  = tail_organ.get_tail_icon()
 				var/tail_state = tail_organ.get_tail()
 				if(tail_icon && tail_state)
 					if(!check_state_in_icon(tail_icon, tail_state))

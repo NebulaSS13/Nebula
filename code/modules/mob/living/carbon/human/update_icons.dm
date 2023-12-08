@@ -451,8 +451,8 @@ var/global/list/damage_icon_parts = list()
 	if(!istype(tail_organ))
 		return
 
-	var/tail_state      = tail_organ.get_tail()
-	var/tail_icon       = tail_organ.get_tail_icon()
+	var/tail_state = tail_organ.get_tail()
+	var/tail_icon  = tail_organ.get_tail_icon()
 	if(!tail_state || !tail_icon)
 		return // No tail data!
 
