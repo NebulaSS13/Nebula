@@ -29,7 +29,6 @@
 	var/tail_hair
 	var/tail_hair_blend
 	var/tail_states
-	var/tail_animation
 
 /decl/bodytype/avian/raptor
 	name =              "raptor"
@@ -76,11 +75,6 @@
 	if(istype(bodytype, /decl/bodytype/avian))
 		var/decl/bodytype/avian/bird_bod = bodytype
 		return bird_bod.tail
-
-/obj/item/organ/external/tail/avian/get_tail_animation()
-	if(istype(bodytype, /decl/bodytype/avian))
-		var/decl/bodytype/avian/bird_bod = bodytype
-		return bird_bod.tail_animation
 
 /obj/item/organ/external/tail/avian/get_tail_icon()
 	if(istype(bodytype, /decl/bodytype/avian))
