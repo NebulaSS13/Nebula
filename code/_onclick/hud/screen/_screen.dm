@@ -11,6 +11,7 @@
 	appearance_flags  = NO_CLIENT_COLOR
 	abstract_type     = /obj/screen
 	is_spawnable_type = FALSE
+	simulated         = FALSE
 
 	/// The mob that owns this screen object, if any.
 	var/weakref/owner_ref

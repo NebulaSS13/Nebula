@@ -48,6 +48,7 @@
 	var/obj/screen/bodytemp/bodytemp
 	var/obj/screen/health_warning/healths
 	var/obj/screen/throw_toggle/throw_icon
+	var/obj/screen/maneuver/maneuver_icon
 	var/obj/screen/food/nutrition_icon
 	var/obj/screen/drink/hydration_icon
 	var/obj/screen/pressure/pressure
@@ -57,7 +58,6 @@
 	var/obj/screen/gun/radio/radio_use_icon
 	var/obj/screen/gun/move/gun_move_icon
 	var/obj/screen/gun/mode/gun_setting_icon
-
 	var/obj/screen/ability_master/ability_master
 
 	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.

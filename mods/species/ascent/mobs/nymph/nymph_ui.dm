@@ -38,7 +38,6 @@
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
-	held          = new(                                null, mymob, ui_style, ui_color, ui_alpha)
 	molt          = new(                                null, mymob, ui_style, ui_color, ui_alpha)
 	food          = new /obj/screen/food(               null, mymob, ui_style, ui_color, ui_alpha)
 	drink         = new /obj/screen/drink(              null, mymob, ui_style, ui_color, ui_alpha)
