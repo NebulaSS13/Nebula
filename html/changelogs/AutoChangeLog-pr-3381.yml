@@ -1,5 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: 'Examining batons and energy guns should now show you the cell they have
-      loaded, or require loading.'}
-delete-after: true
