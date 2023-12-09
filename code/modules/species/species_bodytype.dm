@@ -276,7 +276,7 @@ var/global/list/bodytypes_by_category = list()
 				var/tail_state = tail_organ.get_tail()
 				if(tail_icon && tail_state)
 					if(!check_state_in_icon(tail_icon, tail_state))
-						. += "tail state [tail_state] not present in icon [tail_icon]"
+						. += "tail state [tail_state] not present in icon [tail_icon], available states are: [json_encode(icon_states(tail_icon))]"
 				else
 					if(!tail_icon)
 						. += "missing tail icon"
