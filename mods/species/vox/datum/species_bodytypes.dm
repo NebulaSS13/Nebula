@@ -93,7 +93,8 @@
 	default_h_style     = /decl/sprite_accessory/hair/vox/short/stanchion
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_TAIL = /obj/item/organ/external/tail/vox/stanchion
+		// Commenting this out so that tail validation doesn't try to find a species using this bodytype.
+		//BP_TAIL = /obj/item/organ/external/tail/vox/stanchion
 	)
 
 
