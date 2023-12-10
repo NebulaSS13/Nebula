@@ -12,7 +12,7 @@
 	hardness = MAT_VALUE_RIGID + 10
 	door_icon_base = "metal"
 	reflectiveness = MAT_VALUE_SHINY
-	melting_point = 1873
+	melting_point = T0C + 1400
 	boiling_point = null
 	ignition_point = null
 	weight = MAT_VALUE_VERY_LIGHT
@@ -42,7 +42,7 @@
 	integrity = 70
 	brute_armor = 2
 	burn_armor = 5
-	melting_point = T0C + 4000
+	melting_point = T0C + 1650
 	color = GLASS_COLOR_SILICATE
 	stack_origin_tech = "{'materials':4}"
 	construction_difficulty = MAT_VALUE_HARD_DIY
