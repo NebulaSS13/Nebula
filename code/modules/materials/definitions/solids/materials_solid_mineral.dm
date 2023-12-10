@@ -38,6 +38,8 @@
 	ore_icon_overlay = "lump"
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
+	melting_point = 4074
+	boiling_point = 4474
 	ignition_point = T0C+500
 	accelerant_value = 0.8
 	burn_product = /decl/material/gas/carbon_monoxide
@@ -67,6 +69,9 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
+	melting_point = 1744
+	boiling_point = 2504
+	ignition_point = null
 	color = "#effffe"
 	reflectiveness = MAT_VALUE_SHINY
 	sparse_material_weight = 3
