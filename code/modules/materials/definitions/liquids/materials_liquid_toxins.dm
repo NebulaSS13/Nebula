@@ -88,6 +88,8 @@
 	lore_text = "A highly toxic chemical."
 	taste_mult = 0.6
 	color = "#cf3600"
+	melting_point = 261
+	boiling_point = 299
 	toxicity = 20
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
@@ -271,6 +273,8 @@
 	uid = "liquid_mercury"
 	lore_text = "A chemical element."
 	taste_mult = 0 //mercury apparently is tasteless. IDK
+	melting_point = 234
+	boiling_point = 629
 	color = "#484848"
 	value = 0.5
 	narcosis = 5
