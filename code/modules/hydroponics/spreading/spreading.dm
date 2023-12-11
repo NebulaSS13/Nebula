@@ -45,8 +45,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
 
-	var/health = 10
-	var/max_health = 100
+	health = 10
+	max_health = 100
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0

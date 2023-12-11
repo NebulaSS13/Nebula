@@ -7,8 +7,6 @@
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
-	var/health
-	var/max_health
 	var/material_health_multiplier = 0.2
 	var/hitsound
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.

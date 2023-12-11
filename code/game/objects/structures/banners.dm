@@ -12,7 +12,7 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
-	maxhealth = 50
+	max_health = 50
 	/// Reference to any banner currently hung on the frame.
 	var/obj/item/banner/banner
 

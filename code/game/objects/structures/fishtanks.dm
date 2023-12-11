@@ -24,7 +24,7 @@ var/global/list/fishtank_cache = list()
 	density = TRUE
 	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	mob_offset = TRUE
-	maxhealth = 50
+	max_health = 50
 
 	var/deleting
 	var/fill_type

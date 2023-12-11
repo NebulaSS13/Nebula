@@ -41,7 +41,7 @@
 	opacity = FALSE
 	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "wall"
-	maxhealth = 20
+	max_health = 20
 	hitsound = 'sound/effects/Glasshit.ogg'
 	atmos_canpass = CANPASS_DENSITY
 	material = /decl/material/solid/organic/plastic
@@ -107,7 +107,7 @@
 			deflate(TRUE)
 
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
-	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && (health < maxhealth)
+	. = istype(tool, /obj/item/stack/tape_roll/duct_tape) && (health < max_health)
 
 /obj/structure/inflatable/handle_repair(mob/user, obj/item/tool)
 	var/obj/item/stack/tape_roll/duct_tape/T = tool
@@ -121,7 +121,7 @@
 	playsound(src, 'sound/effects/tape.ogg', 50, TRUE)
 	last_damage_message = null
 	to_chat(user, SPAN_NOTICE("You tape up some of the damage to \the [src]."))
-	health = clamp(health + 3, 0, maxhealth)
+	health = clamp(health + 3, 0, max_health)
 	taped = TRUE
 
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)

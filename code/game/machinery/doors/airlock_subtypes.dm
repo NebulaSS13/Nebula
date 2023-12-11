@@ -67,7 +67,7 @@
 	name = "Glass Airlock"
 	icon_state = "preview_glass"
 	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 300
+	max_health = 300
 	explosion_resistance = 5
 	opacity = FALSE
 	glass = TRUE
@@ -193,7 +193,7 @@
 	opacity = FALSE
 
 /obj/machinery/door/airlock/external/glass
-	maxhealth = 300
+	max_health = 300
 	explosion_resistance = 5
 	opacity = FALSE
 	glass = TRUE
