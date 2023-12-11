@@ -48,7 +48,7 @@
 	desc = initial(desc)
 	open = TRUE
 	for(var/atom/movable/A in src)
-		A.forceMove(src.loc)
+		A.dropInto(loc)
 	update_icon()
 
 /obj/structure/pit/proc/close(var/user)
@@ -57,14 +57,14 @@
 	open = FALSE
 
 	//If we close the pit without anything inside, just leave the soil undisturbed
-	var/turf/T = get_turf(src)
-	if(length(T.contents - src) <= 0)
+	if(isturf(loc))
+		for(var/atom/movable/A in loc)
+			if(A != src && !A.anchored && A != user && A.simulated)
+				A.forceMove(src)
+	if(!length(contents))
 		qdel(src)
-		return
-	for(var/atom/movable/A in T)
-		if(!A.anchored && A != user && A.simulated)
-			A.forceMove(src)
-	update_icon()
+	else
+		update_icon()
 
 /obj/structure/pit/return_air()
 	return open && loc?.return_air()
