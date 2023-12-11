@@ -20,3 +20,6 @@
 		O.reagents.add_reagent(reagent_type, fill_amount)
 		return TRUE
 	. = ..()
+
+/turf/exterior/water/can_be_dug()
+	return FALSE

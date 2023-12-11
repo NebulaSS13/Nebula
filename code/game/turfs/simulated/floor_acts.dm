@@ -1,5 +1,6 @@
 /turf/simulated/floor/explosion_act(severity)
-	SHOULD_CALL_PARENT(FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	..()
 	if(severity == 1)
 		ChangeTurf(get_base_turf_by_area(src))
 	else if(severity == 2)

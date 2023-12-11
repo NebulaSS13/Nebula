@@ -84,7 +84,10 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	for(var/turf/exterior/seafloor/T in RANGE_TURFS(loc, 5))
 		var/dist = get_dist(loc, T)-1
 		if(prob(100 - (dist * 20)))
-			T = T.ChangeTurf(/turf/exterior/mud)
+			if(prob(25))
+				T = T.ChangeTurf(/turf/exterior/clay)
+			else
+				T = T.ChangeTurf(/turf/exterior/mud)
 		if(prob(50 - (dist * 10)))
 			new /obj/random/seaweed(T)
 

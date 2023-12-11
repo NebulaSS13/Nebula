@@ -8,7 +8,6 @@
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 	zone_membership_candidate = TRUE
 	var/base_color
-	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 	var/possible_states = 0
 	var/icon_edge_layer = -1
@@ -19,6 +18,15 @@
 	///Overrides the level's strata for this turf.
 	var/strata_override
 	var/decl/material/material
+	/// Whether or not sand/clay has been dug up here.
+	var/dug = FALSE
+
+/turf/exterior/can_be_dug()
+	return !density && !is_open()
+
+/turf/exterior/clear_diggable_resources()
+	dug = TRUE
+	..()
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
@@ -78,25 +86,9 @@
 	for(var/obj/O in src)
 		O.hide(0)
 
-/turf/exterior/attackby(obj/item/C, mob/user)
-	//#TODO: Add some way to dig to lower levels?
-	if(diggable && IS_SHOVEL(C))
-		if(C.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS))
-			new /obj/structure/pit(src)
-			diggable = FALSE
-		else
-			to_chat(user, SPAN_NOTICE("You stop shoveling."))
-		return TRUE
-
-	if(istype(C, /obj/item/stack/tile))
-		var/obj/item/stack/tile/T = C
-		T.try_build_turf(user, src)
-		return TRUE
-
-	. = ..()
-
 /turf/exterior/explosion_act(severity)
-	SHOULD_CALL_PARENT(FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	..()
 	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
 		ChangeTurf(get_base_turf_by_area(src))
 

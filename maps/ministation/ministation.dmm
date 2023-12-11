@@ -3055,7 +3055,7 @@
 /area/ministation/cargo)
 "hT" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/ore/glass,
+/obj/item/stack/material/ore/sand,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/camera/network/mining{
 	dir = 8
@@ -3451,7 +3451,7 @@
 "iV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/closet/crate,
-/obj/item/stack/material/ore/glass,
+/obj/item/stack/material/ore/sand,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4

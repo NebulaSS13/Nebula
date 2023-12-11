@@ -119,8 +119,10 @@
 	material = /decl/material/solid/hematite
 /obj/item/stack/material/ore/coal
 	material = /decl/material/solid/graphite
-/obj/item/stack/material/ore/glass
+/obj/item/stack/material/ore/sand
 	material = /decl/material/solid/sand
+/obj/item/stack/material/ore/clay
+	material = /decl/material/solid/clay
 /obj/item/stack/material/ore/silver
 	material = /decl/material/solid/metal/silver
 /obj/item/stack/material/ore/gold
@@ -157,6 +159,8 @@
 	material = /decl/material/solid/ice/hydrate/krypton
 /obj/item/stack/material/ore/xenon
 	material = /decl/material/solid/ice/hydrate/xenon
+/obj/item/stack/material/ore/meat
+	material = /decl/material/solid/organic/meat
 
 /client/proc/spawn_ore_pile()
 	set name = "Spawn Ore Pile"

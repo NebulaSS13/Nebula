@@ -88,7 +88,7 @@
 
 /obj/item/surgicaldrill/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_DEFAULT))
+	set_extension(src, /datum/extension/tool, list(TOOL_SURGICAL_DRILL = TOOL_QUALITY_DEFAULT))
 
 /*
  * Scalpel

@@ -22,7 +22,7 @@
 	. = ..()
 	set_extension(src, /datum/extension/tool,
 		list(
-			TOOL_DRILL = TOOL_QUALITY_WORST,
+			TOOL_SURGICAL_DRILL = TOOL_QUALITY_WORST,
 			TOOL_PEN   = pen_quality),
 
 		list(
