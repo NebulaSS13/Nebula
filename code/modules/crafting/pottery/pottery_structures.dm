@@ -10,6 +10,9 @@
 	var/maximum_items = 3
 	var/firebox_open = TRUE
 
+/obj/structure/fire_source/kiln/high_temperature
+	material = /decl/material/solid/stone/pottery
+
 /obj/structure/fire_source/kiln/remove_atom(atom/movable/thing)
 	. = ..()
 	pottery -= thing

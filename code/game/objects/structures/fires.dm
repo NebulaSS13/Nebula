@@ -185,7 +185,8 @@
 			user.put_in_hands(removing)
 			if(lit == FIRE_LIT)
 				visible_message(SPAN_DANGER("\The [user] fishes \the [removing] out of \the [src]!"))
-				user.fire_act(return_air(), last_fuel_burn_temperature, 500)
+				// Uncomment this when there's a way to take stuff out of a kiln or oven without setting yourself on fire.
+				//user.fire_act(return_air(), last_fuel_burn_temperature, 500)
 			else
 				visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
 		update_icon()
