@@ -4,7 +4,7 @@
 	icon_state = "metal"
 	hitsound = 'sound/weapons/genhit.ogg'
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_COLOR
-	maxhealth = 50
+	max_health = 50
 	density =  TRUE
 	anchored = TRUE
 	opacity =  TRUE

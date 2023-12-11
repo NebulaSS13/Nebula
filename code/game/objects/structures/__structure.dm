@@ -3,11 +3,10 @@
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER
 	abstract_type = /obj/structure
+	max_health = 50
 
 	var/structure_flags
 	var/last_damage_message
-	var/health = 0
-	var/maxhealth = 50
 	var/hitsound = 'sound/weapons/smash.ogg'
 	var/parts_type
 	var/parts_amount
@@ -40,7 +39,7 @@
 		fluid_update(TRUE)
 
 /obj/structure/get_examined_damage_string(health_ratio)
-	if(maxhealth == -1)
+	if(max_health == -1)
 		return
 	. = ..()
 
@@ -48,7 +47,7 @@
 	. = ..()
 	if(distance <= 3)
 
-		var/damage_desc = get_examined_damage_string(health / maxhealth)
+		var/damage_desc = get_examined_damage_string(health / max_health)
 		if(length(damage_desc))
 			to_chat(user, damage_desc)
 
@@ -104,9 +103,9 @@
 			damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
 
 	playsound(loc, hitsound, 75, 1)
-	health = clamp(health - damage, 0, maxhealth)
+	health = clamp(health - damage, 0, max_health)
 
-	show_damage_message(health/maxhealth)
+	show_damage_message(health/max_health)
 
 	if(health == 0)
 		physically_destroyed()
@@ -223,7 +222,7 @@
 			take_damage(rand(5, 15))
 
 /obj/structure/proc/can_repair(var/mob/user)
-	if(health >= maxhealth)
+	if(health >= max_health)
 		to_chat(user, SPAN_NOTICE("\The [src] does not need repairs."))
 		return FALSE
 	return TRUE

@@ -12,7 +12,7 @@ var/global/default_gyne
 	name = "alien egg"
 	desc = "A semi-translucent alien egg."
 	health = 100
-	maxhealth = 100
+	max_health = 100
 	icon = 'mods/species/ascent/icons/egg.dmi'
 	icon_state = "egg"
 
@@ -27,7 +27,7 @@ var/global/default_gyne
 	var/hatched = FALSE					// Whether or not this egg has already hatched.
 
 	material = /decl/material/solid/gemstone/crystal
-	
+
 /obj/structure/insectoid_egg/Initialize()
 	. = ..()
 	START_PROCESSING(SSprocessing, src)
@@ -76,11 +76,11 @@ var/global/default_gyne
 
 	last_tick = world.time
 	var/turf/T = get_turf(src)
-	
+
 	// Too high of temp will damage eggs.
 	if(T.temperature > (max_temperature * 1.5))
 		health = max(0, health - 5)
-	
+
 	if(T.temperature < min_temperature || T.temperature > max_temperature)
 		return
 
@@ -103,8 +103,8 @@ var/global/default_gyne
 	update_icon()
 	visible_message(SPAN_NOTICE("\icon[src] \The [src] trembles and cracks as it begins to hatch."))
 	addtimer(CALLBACK(src, .proc/finish_hatching), 2.5 SECONDS)
-	
-	
+
+
 /obj/structure/insectoid_egg/proc/finish_hatching()
 	hatched = TRUE
 	hatching = FALSE

@@ -6,7 +6,7 @@ var/global/list/closets = list()
 	icon = 'icons/obj/closets/bases/closet.dmi'
 	icon_state = "base"
 	density = TRUE
-	maxhealth = 100
+	max_health = 100
 	material = /decl/material/solid/metal/steel
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 

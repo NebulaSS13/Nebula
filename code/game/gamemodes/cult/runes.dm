@@ -268,13 +268,11 @@
 	color = "#ff0000"
 	anchored = TRUE
 	density = TRUE
+	max_health = 200
 	var/obj/effect/rune/wall/rune
-	var/health
-	var/max_health = 200
 
 /obj/effect/cultwall/Initialize(mapload, var/bcolor)
 	. = ..()
-	health = max_health
 	if(bcolor)
 		color = bcolor
 

@@ -6,7 +6,7 @@
 	desc = "An underfloor disposal pipe."
 	anchored = TRUE
 	density = FALSE
-	maxhealth = 10
+	max_health = 10
 	level = LEVEL_BELOW_PLATING
 	dir = 0				// dir will contain dominant direction for junction pipes
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
