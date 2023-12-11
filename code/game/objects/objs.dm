@@ -18,6 +18,15 @@
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: {'NORTH':{'x':12,'y':5}, 'EAST':{'x':10,'y':50}}
 
+
+/obj/Initialize(mapload)
+	. = ..()
+	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
+	create_matter()
+	//Only apply directional offsets if the mappers haven't set any offsets already
+	if(!pixel_x && !pixel_y && !pixel_w && !pixel_z)
+		update_directional_offset()
+
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
 	if(!anchored)
