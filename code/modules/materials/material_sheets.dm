@@ -265,6 +265,7 @@
 // Extra subtype defined for the clay stack recipes to not freak out about null material.
 /obj/item/stack/material/brick/clay
 	material = /decl/material/solid/clay
+	is_spawnable_type = TRUE
 
 /obj/item/stack/material/bolt
 	name = "bolts"

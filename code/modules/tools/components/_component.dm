@@ -5,6 +5,9 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	w_class = ITEM_SIZE_SMALL
 
+/obj/item/tool_component/is_complex_mould_item()
+	return TRUE
+
 /*
  todo
 	- binding

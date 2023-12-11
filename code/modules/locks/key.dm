@@ -15,6 +15,17 @@
 	. = ..(mapload, material_key)
 	key_data = _data
 
+/obj/item/key/get_mould_product_type()
+	return /obj/item/key
+
+/obj/item/key/take_mould_metadata(list/metadata)
+	if("key_data" in metadata)
+		key_data = metadata["key_data"]
+	return ..()
+
+/obj/item/key/get_mould_metadata()
+	. = list("key_data" = get_data())
+
 /obj/item/key/temporary
 	name = "key"
 	desc = "A fragile key with limited uses."
