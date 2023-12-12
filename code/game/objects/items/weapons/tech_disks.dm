@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 /obj/item/disk
 	name                   = "data disk"
-	desc                   = "A standard 3.5 inches floppy disk for storing computer files... What's even an inch?"
+	desc                   = "A standard 3.5 inch floppy disk for storing computer files... What's even an inch?"
 	icon                   = 'icons/obj/items/device/diskette.dmi'
 	icon_state             = ICON_STATE_WORLD
 	w_class                = ITEM_SIZE_TINY
