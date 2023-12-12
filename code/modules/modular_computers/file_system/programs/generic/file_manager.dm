@@ -96,6 +96,7 @@
 		var/list/available_mainframes = network.get_file_server_tags(MF_ROLE_FILESERVER, accesses)
 		if(!length(available_mainframes))
 			to_chat(user, SPAN_WARNING("NETWORK ERROR: No available mainframes on the network."))
+			return TOPIC_HANDLED
 		var/fileserver_tag = input(user, "Choose a mainframe you would like to mount as a disk:", "Mainframe Mount") as null|anything in available_mainframes
 		if(!fileserver_tag)
 			return TOPIC_HANDLED
