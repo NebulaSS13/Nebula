@@ -69,7 +69,13 @@
 	return
 
 /datum/ailment/proc/treated_by_item(var/obj/item/treatment)
-	return treated_by_item_type && istype(treatment, treated_by_item_type)
+	if(islist(treated_by_item_type))
+		for(var/treatment_type in treated_by_item_type)
+			if(istype(treatment, treatment_type))
+				return TRUE
+	else if(ispath(treated_by_item_type))
+		return istype(treatment, treated_by_item_type)
+	return FALSE
 
 /datum/ailment/proc/replace_tokens(var/message, var/obj/item/treatment, var/mob/user, var/mob/target)
 	. = message
