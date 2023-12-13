@@ -73,33 +73,33 @@
 	if(HAS_STATUS(src, STAT_ASLEEP))
 		SET_STATUS_MAX(src, STAT_PARA, 3)
 
-	if(src.resting)
+	if(resting)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
 
-	if(health < config.health_threshold_dead && src.stat != DEAD) //die only once
+	if(health < config.health_threshold_dead && stat != DEAD) //die only once
 		death()
 
-	if (src.stat != DEAD) //Alive.
-		if (incapacitated(INCAPACITATION_DISRUPTED) || !has_power)
-			src.set_stat(UNCONSCIOUS)
+	if (stat != DEAD) //Alive.
+		// This previously used incapacitated(INCAPACITATION_DISRUPTED) but that was setting the robot to be permanently unconscious, which isn't ideal.
+		if(!has_power || incapacitated(INCAPACITATION_STUNNED) || HAS_STATUS(src, STAT_PARA))
 			SET_STATUS_MAX(src, STAT_BLIND, 2)
-		else	//Not stunned.
-			src.set_stat(CONSCIOUS)
+			set_stat(UNCONSCIOUS)
+		else
+			set_stat(CONSCIOUS)
 
 	else //Dead.
 		cameranet.update_visibility(src, FALSE)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
-		src.set_stat(DEAD)
 
-	src.set_density(!src.lying)
-	if(src.sdisabilities & BLINDED)
+	set_density(!lying)
+	if(sdisabilities & BLINDED)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	if(src.sdisabilities & DEAFENED)
 		src.set_status(STAT_DEAF, 1)
 
 	//update the state of modules and components here
-	if (src.stat != CONSCIOUS)
+	if (stat != CONSCIOUS)
 		uneq_all()
 
 	if(silicon_radio)

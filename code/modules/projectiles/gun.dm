@@ -654,12 +654,6 @@
 	if(usr == loc)
 		toggle_safety(usr)
 
-/obj/item/gun/CtrlClick(var/mob/user)
-	if(loc == user)
-		toggle_safety(user)
-		return TRUE
-	. = ..()
-
 /obj/item/gun/proc/safety()
 	return has_safety && safety_state
 
@@ -719,3 +713,15 @@
 	if(get_active_hand() != autofiring || incapacitated())
 		return FALSE
 	return TRUE
+
+/obj/item/gun/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/toggle_safety)
+
+/decl/interaction_handler/toggle_safety
+	name = "Toggle Gun Safety"
+	expected_target_type = /obj/item/gun
+
+/decl/interaction_handler/toggle_safety/invoked(atom/target, mob/user, obj/item/prop)
+	var/obj/item/gun/gun = target
+	gun.toggle_safety(user)
