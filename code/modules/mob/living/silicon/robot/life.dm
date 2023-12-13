@@ -74,45 +74,37 @@
 	if(HAS_STATUS(src, STAT_ASLEEP))
 		SET_STATUS_MAX(src, STAT_PARA, 3)
 
-	if(src.resting)
+	if(resting)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
 
-	if(health < config.health_threshold_dead && src.stat != 2) //die only once
+	if(health < config.health_threshold_dead && stat != DEAD) //die only once
 		death()
 
-	if (src.stat != DEAD) //Alive.
-		if (incapacitated(INCAPACITATION_DISRUPTED) || !has_power)
-			src.set_stat(UNCONSCIOUS)
-			if (HAS_STATUS(src, STAT_STUN))
-				ADJ_STATUS(src, STAT_STUN, -1)
-			if(HAS_STATUS(src, STAT_WEAK))
-				ADJ_STATUS(src, STAT_WEAK, -1)
-			if (HAS_STATUS(src, STAT_PARA) > 0)
-				ADJ_STATUS(src, STAT_PARA, -1)
-				src.blinded = 1
-			else
-				src.blinded = 0
-
-		else	//Not stunned.
-			src.set_stat(CONSCIOUS)
+	if (stat != DEAD) //Alive.
+		// This previously used incapacitated(INCAPACITATION_DISRUPTED) but that was setting the robot to be permanently unconscious, which isn't ideal.
+		if(!has_power || incapacitated(INCAPACITATION_STUNNED) || HAS_STATUS(src, STAT_PARA))
+			blinded = TRUE
+			set_stat(UNCONSCIOUS)
+		else
+			blinded = FALSE
+			set_stat(CONSCIOUS)
 
 	else //Dead.
 		cameranet.update_visibility(src, FALSE)
-		src.blinded = 1
-		src.set_stat(DEAD)
+		blinded = TRUE
 
 	if(HAS_STATUS(src, STAT_BLIND))
 		ADJ_STATUS(src, STAT_BLIND, -1)
-		src.blinded = 1
+		blinded = TRUE
 
-	src.set_density(!src.lying)
-	if(src.sdisabilities & BLINDED)
-		src.blinded = 1
-	if(src.sdisabilities & DEAFENED)
-		src.set_status(STAT_DEAF, 1)
+	set_density(!lying)
+	if(sdisabilities & BLINDED)
+		blinded = TRUE
+	if(sdisabilities & DEAFENED)
+		set_status(STAT_DEAF, 1)
 
 	//update the state of modules and components here
-	if (src.stat != CONSCIOUS)
+	if (stat != CONSCIOUS)
 		uneq_all()
 
 	if(silicon_radio)
@@ -122,9 +114,9 @@
 			silicon_radio.on = 1
 
 	if(isnull(components["camera"]) || is_component_functioning("camera"))
-		src.blinded = 0
+		blinded = FALSE
 	else
-		src.blinded = 1
+		blinded = TRUE
 		cameranet.update_visibility(src, FALSE)
 
 	return 1

@@ -557,7 +557,7 @@
 				src.visible_message("<B>[src]</B> [species.halloss_message]")
 			SET_STATUS_MAX(src, STAT_PARA, 10)
 
-		if(HAS_STATUS(src, STAT_PARA) ||HAS_STATUS(src, STAT_ASLEEP))
+		if(HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP))
 			blinded = 1
 			set_stat(UNCONSCIOUS)
 			animate_tail_reset()
