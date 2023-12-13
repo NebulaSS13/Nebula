@@ -63,6 +63,7 @@
 		/decl/material/solid/metal/copper          = TRUE,
 		/decl/material/solid/metal/aluminium       = TRUE,
 		/decl/material/solid/sand                  = TRUE,
+		/decl/material/solid/clay                  = TRUE,
 		/decl/material/solid/graphite              = TRUE,
 		/decl/material/solid/pitchblende           = TRUE,
 		/decl/material/solid/hematite              = TRUE,

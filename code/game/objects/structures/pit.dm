@@ -11,13 +11,14 @@
 
 /obj/structure/pit/attackby(obj/item/W, mob/user)
 	if(IS_SHOVEL(W))
-		if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS, "[open ? "filling up" : "digging open"]", "[open ? "fills up" : "digs open"]"))
+		var/dig_message = open ? "filling in" : "excavating"
+		if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS, dig_message, dig_message))
 			if(open)
 				close(user)
 			else
 				open()
 		else
-			to_chat(user, SPAN_NOTICE("You stop shoveling."))
+			to_chat(user, SPAN_NOTICE("You stop digging."))
 		return TRUE
 
 	if (!open && istype(W, /obj/item/stack/material) && W.material?.type == /decl/material/solid/organic/wood)
@@ -47,7 +48,7 @@
 	desc = initial(desc)
 	open = TRUE
 	for(var/atom/movable/A in src)
-		A.forceMove(src.loc)
+		A.dropInto(loc)
 	update_icon()
 
 /obj/structure/pit/proc/close(var/user)
@@ -56,22 +57,17 @@
 	open = FALSE
 
 	//If we close the pit without anything inside, just leave the soil undisturbed
-	var/turf/T = get_turf(src)
-	if(!length((T.contents - src)))
+	if(isturf(loc))
+		for(var/atom/movable/A in loc)
+			if(A != src && !A.anchored && A != user && A.simulated)
+				A.forceMove(src)
+	if(!length(contents))
 		qdel(src)
-		return
-
-	for(var/atom/movable/A in T)
-		if(!A.anchored && A != user && A.simulated)
-			A.forceMove(src)
-
-	update_icon()
+	else
+		update_icon()
 
 /obj/structure/pit/return_air()
-	if(open && loc)
-		return loc.return_air()
-	else
-		return null
+	return open && loc?.return_air()
 
 /obj/structure/pit/proc/digout(mob/escapee)
 	var/breakout_time = 1 //2 minutes by default

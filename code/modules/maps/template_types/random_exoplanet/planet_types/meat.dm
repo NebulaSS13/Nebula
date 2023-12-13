@@ -135,6 +135,9 @@
 	dirt_color    = "#c40031"
 	footstep_type = /decl/footsteps/mud
 
+/turf/exterior/meat/get_diggable_resources()
+	return dug ? null : list(/obj/item/stack/material/ore/meat = list(3, 2))
+
 /turf/exterior/water/stomach
 	name         = "juices"
 	desc         = "Half-digested chunks of vines are floating in the puddle of some liquid."

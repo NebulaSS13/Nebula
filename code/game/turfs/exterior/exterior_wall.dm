@@ -64,6 +64,7 @@ var/global/list/natural_walls = list()
 			queue_icon_update()
 
 /turf/exterior/wall/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if(severity == 1 || (severity == 2 && prob(40)))
 		dismantle_wall()
 

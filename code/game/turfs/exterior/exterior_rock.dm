@@ -3,6 +3,9 @@
 	icon = 'icons/turf/exterior/rock.dmi'
 	icon_edge_layer = EXT_EDGE_VOLCANIC
 
+/turf/exterior/rock/can_be_dug()
+	return FALSE
+
 /turf/exterior/rock/Initialize(mapload, no_update_icon)
 	. = ..()
 	material = SSmaterials.get_strata_material_type(src)

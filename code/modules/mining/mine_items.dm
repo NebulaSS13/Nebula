@@ -55,6 +55,15 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
+/obj/item/pickaxe/Initialize()
+	var/list/tool_qualities = get_initial_tool_qualities()
+	if(length(tool_qualities))
+		set_extension(src, /datum/extension/tool, tool_qualities)
+	. = ..()
+
+/obj/item/pickaxe/proc/get_initial_tool_qualities()
+	return list(TOOL_SHOVEL = TOOL_QUALITY_MEDIOCRE)
+
 /obj/item/pickaxe/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && build_from_parts && check_state_in_icon("[overlay.icon_state]-handle", overlay.icon))
 		var/image/handle = image(overlay.icon, "[overlay.icon_state]-handle")
@@ -77,9 +86,11 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/pickaxe/drill/Initialize(ml, material_key)
-	. = ..()
-	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_MEDIOCRE))
+/obj/item/pickaxe/drill/get_initial_tool_qualities()
+	return list(
+		TOOL_SURGICAL_DRILL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_DEFAULT
+	)
 
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
@@ -89,6 +100,11 @@
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 	drill_verb = "hammering"
 
+/obj/item/pickaxe/jackhammer/get_initial_tool_qualities()
+	return list(
+		TOOL_SURGICAL_DRILL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_DECENT
+	)
 /obj/item/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
 	icon = 'icons/obj/items/tool/drills/drill_diamond.dmi'
@@ -102,12 +118,24 @@
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 
+/obj/item/pickaxe/diamonddrill/get_initial_tool_qualities()
+	return list(
+		TOOL_SURGICAL_DRILL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD
+	)
+
 /obj/item/pickaxe/borgdrill
 	name = "cyborg mining drill"
 	icon = 'icons/obj/items/tool/drills/drill_diamond.dmi'
 	digspeed = 15
 	desc = ""
 	drill_verb = "drilling"
+
+/obj/item/pickaxe/borgdrill/get_initial_tool_qualities()
+	return list(
+		TOOL_SURGICAL_DRILL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD
+	)
 
 //****************************actual pickaxes***********************
 /obj/item/pickaxe/silver
@@ -122,6 +150,9 @@
 	build_from_parts = TRUE
 	hardware_color = COLOR_SILVER
 
+/obj/item/pickaxe/silver/get_initial_tool_qualities()
+	return list(TOOL_SHOVEL = TOOL_QUALITY_DEFAULT)
+
 /obj/item/pickaxe/gold
 	name = "golden pickaxe"
 	desc = "This makes no metallurgic sense."
@@ -133,6 +164,9 @@
 	sharp = 1
 	build_from_parts = TRUE
 	hardware_color = COLOR_GOLD
+
+/obj/item/pickaxe/gold/get_initial_tool_qualities()
+	return list(TOOL_SHOVEL = TOOL_QUALITY_DECENT)
 
 /obj/item/pickaxe/diamond
 	name = "diamond pickaxe"
@@ -146,6 +180,9 @@
 	build_from_parts = TRUE
 	hardware_color = COLOR_DIAMOND
 	material = /decl/material/solid/gemstone/diamond
+
+/obj/item/pickaxe/diamond/get_initial_tool_qualities()
+	return list(TOOL_SHOVEL = TOOL_QUALITY_GOOD)
 
 /*****************************Shovel********************************/
 
