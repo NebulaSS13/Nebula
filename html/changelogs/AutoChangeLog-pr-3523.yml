@@ -1,0 +1,5 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Drills now function as shovels.}
+  - {tweak: Clay can now be dug up from stationary drills.}
+delete-after: true
