@@ -206,7 +206,7 @@
 	var/desc_comp = "" //For "description composite"
 	desc_comp += "It is a [w_class_description()] item.<BR>"
 
-	var/desc_damage = get_examined_damage_string(health / max_health)
+	var/desc_damage = get_examined_damage_string()
 	if(length(desc_damage))
 		desc_comp += "[desc_damage]<BR>"
 

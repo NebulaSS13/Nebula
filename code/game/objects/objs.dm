@@ -298,14 +298,17 @@
 // Interactions
 ////////////////////////////////////////////////////////////////
 /**Returns a text string to describe the current damage level of the item, or null if non-applicable. */
-/obj/proc/get_examined_damage_string(var/health_ratio)
-	if(health_ratio >= 1)
+/obj/proc/get_examined_damage_string()
+	if(!can_take_damage())
+		return
+	var/health_percent = get_percent_health()
+	if(health_percent >= 100)
 		return SPAN_NOTICE("It looks fully intact.")
-	else if(health_ratio > 0.75)
+	else if(health_percent > 75)
 		return SPAN_NOTICE("It has a few cracks.")
-	else if(health_ratio > 0.5)
+	else if(health_percent > 50)
 		return SPAN_WARNING("It looks slightly damaged.")
-	else if(health_ratio > 0.25)
+	else if(health_percent > 25)
 		return SPAN_WARNING("It looks moderately damaged.")
 	else
 		return SPAN_DANGER("It looks heavily damaged.")
