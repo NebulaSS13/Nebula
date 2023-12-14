@@ -126,8 +126,3 @@
 		M.take_organ_damage(7)
 	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return
-
-/obj/item/get_examined_damage_string(health_ratio)
-	if(!can_take_damage())
-		return
-	. = ..()

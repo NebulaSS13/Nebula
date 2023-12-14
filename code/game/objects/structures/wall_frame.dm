@@ -48,12 +48,13 @@
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
-/obj/structure/wall_frame/get_examined_damage_string(health_ratio)
-	if(max_health == ITEM_HEALTH_NO_DAMAGE)
+/obj/structure/wall_frame/get_examined_damage_string()
+	if(!can_take_damage())
 		return
-	if(health_ratio > 0.7)
+	var/health_percent = get_percent_health()
+	if(health_percent > 70)
 		return SPAN_NOTICE("It's got a few dents and scratches.")
-	else if(health_ratio > 0.3)
+	else if(health_percent > 30)
 		return SPAN_WARNING("A few pieces of panelling have fallen off.")
 	else
 		return SPAN_DANGER("It's nearly falling to pieces.")

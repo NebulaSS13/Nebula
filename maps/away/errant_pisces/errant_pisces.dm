@@ -93,16 +93,17 @@
 					continue
 				N.update_connections()
 
-/obj/structure/net/get_examined_damage_string(health_ratio)
-	if(max_health == -1)
+/obj/structure/net/get_examined_damage_string()
+	if(!can_take_damage())
 		return
-	if(health_ratio >= 1)
+	var/health_percent = get_percent_health()
+	if(health_percent >= 100)
 		return SPAN_NOTICE("It looks fully intact.")
-	else if (health_ratio < 0.2)
+	else if (health_percent < 20)
 		return SPAN_DANGER("\The [src] is barely hanging on by the last few threads.")
-	else if (health_ratio < 0.5)
+	else if (health_percent < 50)
 		return SPAN_WARNING("Large swathes of \the [src] have been cut.")
-	else if (health_ratio < 0.9)
+	else
 		return SPAN_NOTICE("A few strands of \the [src] have been severed.")
 
 /obj/structure/net/attackby(obj/item/W, mob/user)
