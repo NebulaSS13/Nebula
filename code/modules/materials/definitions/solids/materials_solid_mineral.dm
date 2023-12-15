@@ -422,7 +422,6 @@
 	value = 0.9
 	sparse_material_weight = 20
 	rich_material_weight = 10
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.8,
 		/decl/material/solid/metal/tungsten = 0.2
@@ -451,7 +450,6 @@
 	value = 0.9
 	sparse_material_weight = 15
 	rich_material_weight = 10
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.1,
 		/decl/material/solid/metal/tungsten = 0.6,
@@ -481,7 +479,6 @@
 	value = 1.1
 	sparse_material_weight = 10
 	rich_material_weight = 5
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/platinum = 0.7,
 		/decl/material/solid/metal/iron = 0.1,
@@ -511,7 +508,6 @@
 	value = 0.8
 	sparse_material_weight = 25
 	rich_material_weight = 15
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/zinc = 0.7,
 		/decl/material/solid/metal/iron = 0.2,
@@ -540,7 +536,6 @@
 	value = 0.8
 	sparse_material_weight = 20
 	rich_material_weight = 10
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/lead = 0.7,
 		/decl/material/solid/metal/iron = 0.2,
@@ -569,7 +564,6 @@
 	value = 0.8
 	sparse_material_weight = 5
 	rich_material_weight = 5
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/gold = 0.7,
 		/decl/material/solid/metal/silver = 0.3
@@ -597,7 +591,6 @@
 	value = 0.9
 	sparse_material_weight = 5
 	rich_material_weight = 10
-	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/chromium = 0.6,
 		/decl/material/solid/metal/lead = 0.4
