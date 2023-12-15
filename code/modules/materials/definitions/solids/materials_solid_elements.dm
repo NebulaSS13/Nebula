@@ -4,7 +4,6 @@
 	lore_text = "Boron is a chemical element with the symbol B and atomic number 5."
 	melting_point = 2349
 	boiling_point = 4200
-	ignition_point = null
 	flags = MAT_FLAG_FUSION_FUEL | MAT_FLAG_FISSIBLE
 
 	neutron_cross_section = 10
@@ -23,7 +22,6 @@
 	lore_text = "A chemical element, used as antidepressant."
 	melting_point = 453
 	boiling_point = 1615
-	ignition_point = null
 	flags = MAT_FLAG_FUSION_FUEL
 	taste_description = "metal"
 	color = "#808080"
@@ -36,7 +34,6 @@
 	lore_text = "A chemical element, the building block of life."
 	melting_point = 3800
 	boiling_point = 4300
-	ignition_point = null
 	taste_description = "sour chalk"
 	taste_mult = 1.5
 	color = "#1c1300"
@@ -57,7 +54,6 @@
 	lore_text = "A chemical element, the backbone of biological energy carriers."
 	melting_point = 317
 	boiling_point = 550
-	ignition_point = null
 	taste_description = "vinegar"
 	color = "#832828"
 	value = 0.5
@@ -75,7 +71,6 @@
 	lore_text = "A chemical element, readily reacts with water."
 	melting_point = 1687
 	boiling_point = 3173
-	ignition_point = null
 	taste_description = "salty metal"
 	color = "#808080"
 	value = 0.5
@@ -86,7 +81,6 @@
 	lore_text = "A chemical element with a pungent smell."
 	melting_point = 388
 	boiling_point = 717
-	ignition_point = null
 	taste_description = "old eggs"
 	color = "#bf8c00"
 	value = 0.5
@@ -97,7 +91,6 @@
 	lore_text = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
 	melting_point = 336
 	boiling_point = 1032
-	ignition_point = null
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
 	color = "#a0a0a0"
 	value = 0.5
