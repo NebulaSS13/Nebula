@@ -32,7 +32,7 @@
 	return ..() && !is_reinforced()
 
 /decl/material/solid/glass/borosilicate
-	name = "borosilicate glass"
+	name = "heat-resistant glass"
 	codex_name = null
 	uid = "solid_borosilicate_glass"
 	lore_text = "An extremely heat-resistant form of glass."
@@ -42,7 +42,7 @@
 	integrity = 70
 	brute_armor = 2
 	burn_armor = 5
-	melting_point = 1924
+	melting_point = 4274
 	color = GLASS_COLOR_SILICATE
 	stack_origin_tech = "{'materials':4}"
 	construction_difficulty = MAT_VALUE_HARD_DIY
