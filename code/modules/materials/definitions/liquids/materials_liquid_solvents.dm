@@ -24,7 +24,7 @@
 	solvent_melt_dose = 8
 	solvent_max_damage = 30
 	value = 1.5
-	boiling_point = 193
+	boiling_point = 382
 	melting_point = 160
 	molar_mass = 0.036
 
