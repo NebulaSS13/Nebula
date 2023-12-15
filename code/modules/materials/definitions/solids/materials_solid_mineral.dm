@@ -40,7 +40,7 @@
 	ore_data_value = 1
 	melting_point = 4074
 	boiling_point = 4474
-	ignition_point = T0C+500
+	ignition_point = 774
 	accelerant_value = 0.8
 	burn_product = /decl/material/gas/carbon_monoxide
 	value = 0.8
@@ -71,7 +71,6 @@
 	ore_icon_overlay = "lump"
 	melting_point = 1744
 	boiling_point = 2504
-	ignition_point = null
 	color = "#effffe"
 	reflectiveness = MAT_VALUE_SHINY
 	sparse_material_weight = 3
@@ -391,7 +390,7 @@
 	value = 1.2
 	sparse_material_weight = 10
 	rich_material_weight = 5
-	ignition_point = T0C+500
+	ignition_point = 774
 	accelerant_value = 0.9
 	dirtiness = 15
 	dissolves_into = list(
@@ -423,7 +422,6 @@
 	value = 0.9
 	sparse_material_weight = 20
 	rich_material_weight = 10
-	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.8,
@@ -453,7 +451,6 @@
 	value = 0.9
 	sparse_material_weight = 15
 	rich_material_weight = 10
-	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.1,
@@ -484,7 +481,6 @@
 	value = 1.1
 	sparse_material_weight = 10
 	rich_material_weight = 5
-	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/platinum = 0.7,
@@ -515,7 +511,6 @@
 	value = 0.8
 	sparse_material_weight = 25
 	rich_material_weight = 15
-	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/zinc = 0.7,
@@ -545,7 +540,6 @@
 	value = 0.8
 	sparse_material_weight = 20
 	rich_material_weight = 10
-	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/lead = 0.7,
@@ -575,7 +569,6 @@
 	value = 0.8
 	sparse_material_weight = 5
 	rich_material_weight = 5
-	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/gold = 0.7,
@@ -604,7 +597,6 @@
 	value = 0.9
 	sparse_material_weight = 5
 	rich_material_weight = 10
-	ignition_point = T0C+1000
 	accelerant_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/chromium = 0.6,
