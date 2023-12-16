@@ -7,7 +7,7 @@
 	anchored = TRUE
 	w_class = ITEM_SIZE_STRUCTURE
 	canhear_range = 2
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_WINDOW_LAYER
 	power_usage = 0

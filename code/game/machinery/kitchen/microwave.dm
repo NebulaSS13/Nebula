@@ -7,7 +7,7 @@
 	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
@@ -75,7 +75,7 @@
 				broken = 0 // Fix it!
 				dirty = 0 // just to be sure
 				update_icon()
-				atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+				atom_flags = ATOM_FLAG_OPEN_CONTAINER
 		else
 			to_chat(user, SPAN_WARNING("It's broken!"))
 			return 1
@@ -96,7 +96,7 @@
 				dirty = 0 // It's clean!
 				broken = 0 // just to be sure
 				update_icon()
-				atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+				atom_flags = ATOM_FLAG_OPEN_CONTAINER
 		else //Otherwise bad luck!!
 			to_chat(user, SPAN_WARNING("It's dirty!"))
 			return 1

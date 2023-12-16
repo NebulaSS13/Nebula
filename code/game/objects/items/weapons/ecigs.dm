@@ -181,7 +181,7 @@
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	volume = 20
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/chems/ecig_cartridge/examine(mob/user)//to see how much left
 	. = ..()

@@ -28,7 +28,7 @@
 	density               = TRUE
 	idle_power_usage      = 30
 	active_power_usage    = 200
-	atom_flags            = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags            = ATOM_FLAG_CLIMBABLE
 	obj_flags             = OBJ_FLAG_ANCHORABLE
 	construct_state       = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(

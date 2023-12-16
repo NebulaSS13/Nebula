@@ -5,11 +5,6 @@
 	var/lit = FALSE
 	material = /decl/material/solid/organic/wood
 
-/obj/item/flame/afterattack(var/obj/O, var/mob/user, proximity)
-	..()
-	if(proximity && lit && istype(O))
-		O.HandleObjectHeating(src, user, 700)
-
 /obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
 	lit = FALSE
 	damtype = BRUTE

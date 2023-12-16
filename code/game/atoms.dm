@@ -2,7 +2,7 @@
 	/// (DEFINE) Determines where this atom sits in terms of turf plating. See misc.dm
 	var/level = LEVEL_ABOVE_PLATING
 	/// (BITFLAG) See flags.dm
-	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	var/atom_flags = 0
 	/// (FLOAT) The world.time that this atom last bumped another. Used mostly by mobs.
 	var/last_bumped = 0
 	/// (BITFLAG) See flags.dm
@@ -341,6 +341,10 @@
 		var/cell = cell_loaded?.get_cell()
 		if(cell)
 			LAZYREMOVE(., cell)
+
+// Return a list of all temperature-sensitive atoms, defaulting to above.
+/atom/proc/get_contained_temperature_sensitive_atoms()
+	return get_contained_external_atoms()
 
 /// Dump the contents of this atom onto its loc
 /atom/proc/dump_contents()

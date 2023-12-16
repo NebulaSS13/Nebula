@@ -2,7 +2,7 @@
 	name = "atmoalter"
 	use_power = POWER_USE_OFF
 	construct_state = /decl/machine_construction/default/panel_closed
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 
 	var/datum/gas_mixture/air_contents = new
 	var/obj/item/tank/holding

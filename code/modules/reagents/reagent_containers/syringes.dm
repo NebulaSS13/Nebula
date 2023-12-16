@@ -388,7 +388,7 @@
 	name = "cryostasis syringe"
 	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
 	volume = 20
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_CHEM_CHANGE
+	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
 	icon = 'icons/obj/syringe_cryo.dmi'
 	material = /decl/material/solid/glass
 	matter = list(

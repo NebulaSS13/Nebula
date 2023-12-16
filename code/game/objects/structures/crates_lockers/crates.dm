@@ -3,7 +3,7 @@
 	desc = "A rectangular steel crate."
 	icon = 'icons/obj/closets/bases/crate.dmi'
 	closet_appearance = /decl/closet_appearance/crate
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	setup = 0
 	storage_types = CLOSET_STORAGE_ITEMS
 	var/rigged = 0
