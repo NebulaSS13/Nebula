@@ -20,7 +20,7 @@
 /decl/loadout_option/suit/labcoat_corp
 	name = "labcoat, corporate colors"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corporate
 	name = "corporate uniform selection"
@@ -50,22 +50,22 @@
 /decl/loadout_option/uniform/corp_exec
 	name = "corporate colours, senior researcher"
 	path = /obj/item/clothing/under/executive
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_overalls
 	name = "corporate colours, coveralls"
 	path = /obj/item/clothing/under/work
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_flight
 	name = "corporate colours, flight suit"
 	path = /obj/item/clothing/under/pilot
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_exec_jacket
 	name = "corporate colours, liason suit"
 	path = /obj/item/clothing/under/suit_jacket/corp
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/suit/nanotrasen_poncho
 	name = "poncho, NanoTrasen"

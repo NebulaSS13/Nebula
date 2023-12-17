@@ -847,3 +847,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(current_size > STAGE_ONE)
 		step_towards(src,S)
 	else ..()
+
+// Supplied during loadout gear tweaking.
+/obj/item/proc/set_custom_name(var/new_name)
+	SetName(new_name)
+
+// Supplied during loadout gear tweaking.
+/obj/item/proc/set_custom_desc(var/new_desc)
+	desc = new_desc

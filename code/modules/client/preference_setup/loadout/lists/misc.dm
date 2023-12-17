@@ -51,12 +51,12 @@
 /decl/loadout_option/coffeecup
 	name = "coffee cup"
 	path = /obj/item/chems/drinks/glass2/coffeecup
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/towel
 	name = "towel"
 	path = /obj/item/towel
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/mirror
 	name = "handheld mirror"
@@ -65,12 +65,12 @@
 /decl/loadout_option/lipstick
 	name = "lipstick selection"
 	path = /obj/item/lipstick
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/comb
 	name = "plastic comb"
 	path = /obj/item/haircomb
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/mask
 	name = "sterile mask"
@@ -152,7 +152,7 @@
 /decl/loadout_option/wallet
 	name = "wallet, colour select"
 	path = /obj/item/storage/wallet
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/wallet_poly
 	name = "wallet, polychromic"
@@ -164,4 +164,4 @@
 	name = "multi-tool"
 	path = /obj/item/knife/folding/swiss
 	cost = 4
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION

@@ -278,6 +278,8 @@ var/global/list/gamemode_cache = list()
 	var/exoplanet_max_day_duration = 40 MINUTES
 	///If true, exoplanets won't have daycycles
 	var/disable_daycycle = FALSE
+	/// Whether or not loadout options will get free name and desc entry by default.
+	var/allow_loadout_customization = FALSE
 
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
@@ -836,6 +838,9 @@ var/global/list/gamemode_cache = list()
 
 				if("show_typing_indicator_for_whispers")
 					config.show_typing_indicator_for_whispers = TRUE
+
+				if("allow_loadout_customization")
+					config.allow_loadout_customization = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

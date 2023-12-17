@@ -40,4 +40,4 @@
 /decl/loadout_option/eyes/blindfold
 	name = "blindfold"
 	path = /obj/item/clothing/glasses/blindfold
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
