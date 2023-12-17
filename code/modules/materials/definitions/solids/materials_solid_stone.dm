@@ -18,9 +18,10 @@
 		/decl/material/solid/silicon = 1
 	)
 
-/decl/material/solid/stone/generate_recipes(var/reinforce_material)
+/decl/material/solid/stone/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	//recipes below don't support composite materials
+	if(reinforce_material || ispath(stack_type, /obj/item/stack/material/ore))
 		return
 	if(wall_support_value >= 10)
 		. += new/datum/stack_recipe/furniture/girder(src)

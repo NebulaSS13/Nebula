@@ -30,17 +30,16 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/plastic/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/plastic/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/furniture/crate/plastic(src)
-	. += new/datum/stack_recipe/bag(src)
-	. += new/datum/stack_recipe/ivbag(src)
-	. += create_recipe_list(/datum/stack_recipe/cartridge)
-	. += create_recipe_list(/datum/stack_recipe/tile/light)
-	. += new/datum/stack_recipe/hazard_cone(src)
-	. += new/datum/stack_recipe/furniture/flaps(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+		. += new/datum/stack_recipe/furniture/crate/plastic(src)
+		. += new/datum/stack_recipe/bag(src)
+		. += new/datum/stack_recipe/ivbag(src)
+		. += create_recipe_list(/datum/stack_recipe/cartridge)
+		. += create_recipe_list(/datum/stack_recipe/tile/light)
+		. += new/datum/stack_recipe/hazard_cone(src)
+		. += new/datum/stack_recipe/furniture/flaps(src)
 
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
@@ -50,7 +49,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
-/decl/material/solid/organic/plastic/holographic/get_recipes(reinf_mat)
+/decl/material/solid/organic/plastic/holographic/get_recipes(stack_type, reinf_mat)
 	return list()
 
 /decl/material/solid/organic/cardboard
@@ -82,14 +81,13 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/cardboard/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/cardboard/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
-		return
-	. += create_recipe_list(/datum/stack_recipe/box)
-	. += new/datum/stack_recipe/cardborg_suit(src)
-	. += new/datum/stack_recipe/cardborg_helmet(src)
-	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
+	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+		. += create_recipe_list(/datum/stack_recipe/box)
+		. += new/datum/stack_recipe/cardborg_suit(src)
+		. += new/datum/stack_recipe/cardborg_helmet(src)
+		. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
 
 /decl/material/solid/organic/paper
 	name                    = "paper"
@@ -122,11 +120,10 @@
 	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/paper/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/paper/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/paper_sheets(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+		. += new/datum/stack_recipe/paper_sheets(src)
 
 /decl/material/solid/organic/cloth //todo
 	name = "cotton"
@@ -152,12 +149,12 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/cloth/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/cloth/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/cloak(src)
-	. += new/datum/stack_recipe/banner(src)
+	//recipes below don't support composite materials
+	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+		. += new/datum/stack_recipe/cloak(src)
+		. += new/datum/stack_recipe/banner(src)
 
 /decl/material/solid/organic/cloth/yellow
 	name = "yellow"
@@ -311,13 +308,13 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	var/tans_to = /decl/material/solid/organic/leather
 
-/decl/material/solid/organic/skin/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/skin/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/cloak(src)
-	. += new/datum/stack_recipe/banner(src)
-	. += new/datum/stack_recipe/shoes(src)
+	//recipes below don't support composite materials
+	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+		. += new/datum/stack_recipe/cloak(src)
+		. += new/datum/stack_recipe/banner(src)
+		. += new/datum/stack_recipe/shoes(src)
 
 /decl/material/solid/organic/skin/lizard
 	name = "lizardskin"
@@ -441,9 +438,9 @@
 	sound_manipulate = 'sound/foley/stickspickup1.ogg'
 	sound_dropped = 'sound/foley/sticksdrop1.ogg'
 
-/decl/material/solid/organic/bone/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/bone/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && wall_support_value >= 10)
+	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore) && wall_support_value >= 10)
 		. += new/datum/stack_recipe/furniture/girder(src)
 		. += new/datum/stack_recipe/furniture/ladder(src)
 
@@ -485,14 +482,14 @@
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
-/decl/material/solid/organic/leather/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/leather/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
-		return
-	. += new/datum/stack_recipe/cloak(src)
-	. += new/datum/stack_recipe/banner(src)
-	. += new/datum/stack_recipe/shoes(src)
-	. += new/datum/stack_recipe/boots(src)
+	//recipes below don't support composite materials
+	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+		. += new/datum/stack_recipe/cloak(src)
+		. += new/datum/stack_recipe/banner(src)
+		. += new/datum/stack_recipe/shoes(src)
+		. += new/datum/stack_recipe/boots(src)
 
 /decl/material/solid/organic/leather/synth
 	name = "synthleather"

@@ -266,7 +266,7 @@
 	icon_state = "wax"
 
 var/global/list/wax_recipes = list(new /datum/stack_recipe/candle)
-/obj/item/stack/wax/get_recipes()
+/obj/item/stack/wax/get_recipes(stack_type, reinf_mat)
 	return global.wax_recipes
 
 /obj/item/bee_pack
