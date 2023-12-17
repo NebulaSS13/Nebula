@@ -35,7 +35,7 @@
 		H.real_name = ascent_culture.get_random_name(H, H.gender)
 		H.name = H.real_name
 
-/decl/special_role/hunter/equip(var/mob/living/carbon/human/player)
+/decl/special_role/hunter/equip_role(var/mob/living/carbon/human/player)
 	if(player?.species.get_root_species_name(player) == SPECIES_MANTID_GYNE)
 		rig_type = /obj/item/rig/mantid/gyne
 	else
