@@ -195,7 +195,7 @@
 			var/antag_type = input("Select an equipment template to use or cancel for nude.", null) as null|anything in all_antag_types
 			if(antag_type)
 				var/decl/special_role/A = all_antag_types[antag_type]
-				A.equip(spawned_mob)
+				A.equip_role(spawned_mob)
 
 	if(alert("Are you SURE you wish to deploy this drop pod? It will cause a sizable explosion and gib anyone underneath it.",,"No","Yes") == "No")
 		if(spawned_mob)
