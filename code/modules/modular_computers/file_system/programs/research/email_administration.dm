@@ -57,7 +57,7 @@
 		data["messagecount"] = all_messages.len
 	else
 		var/list/all_accounts = list()
-		for(var/datum/computer_file/data/account/account in network.get_accounts(get_access(user)))
+		for(var/datum/computer_file/data/account/account in network.get_accounts(get_user_access(user)))
 			if(!account.can_login)
 				continue
 			all_accounts.Add(list(list(
@@ -125,5 +125,5 @@
 		return TOPIC_REFRESH
 
 	if(href_list["viewaccount"])
-		current_account = network.find_account_by_login(href_list["viewaccount"], get_access(user))
+		current_account = network.find_account_by_login(href_list["viewaccount"], get_user_access(user))
 		return TOPIC_REFRESH

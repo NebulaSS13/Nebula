@@ -158,7 +158,7 @@
 		var/perpname = "wot"
 		var/criminal = "None"
 
-		var/obj/item/card/id/check_id = GetIdCard()
+		var/obj/item/card/id/check_id = get_id_card()
 		if(istype(check_id))
 			perpname = check_id.registered_name
 		else
@@ -178,7 +178,7 @@
 		var/perpname = "wot"
 		var/medical = "None"
 
-		var/obj/item/card/id/check_id = GetIdCard()
+		var/obj/item/card/id/check_id = get_id_card()
 		if(istype(check_id))
 			perpname = check_id.registered_name
 		else

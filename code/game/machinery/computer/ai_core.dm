@@ -115,7 +115,7 @@ var/global/list/empty_playable_ai_cores = list()
 		update_icon()
 	else
 		if(!authorized)
-			if(access_ai_upload in P.GetAccess())
+			if(access_ai_upload in P.get_access())
 				to_chat(user, SPAN_NOTICE("You swipe [P] at [src] and authorize it to connect into the systems of [global.using_map.full_name]."))
 				authorized = 1
 

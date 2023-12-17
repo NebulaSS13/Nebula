@@ -57,7 +57,7 @@
 /obj/item/stock_parts/access_lock/attackby(obj/item/W, mob/user)
 	var/obj/machinery/machine = loc
 	if(!emagged && istype(machine))
-		var/obj/item/card/id/I = W.GetIdCard()
+		var/obj/item/card/id/I = W.get_id_card()
 		if(I && check_access(I))
 			locked = !locked
 			visible_message(SPAN_NOTICE("\The [src] beeps and flashes green twice: it is now [locked ? "" : "un"]locked."))
@@ -106,7 +106,7 @@
 			if(!req_access)
 				locked = FALSE
 			else
-				var/obj/item/card/id/I = user.GetIdCard()				
+				var/obj/item/card/id/I = user.get_id_card()
 				if(!istype(I, /obj/item/card/id))
 					to_chat(user, SPAN_WARNING("[\src] flashes a yellow LED near the ID scanner. Did you remember to scan your ID or PDA?"))
 					return TOPIC_HANDLED

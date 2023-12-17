@@ -112,15 +112,15 @@
 	if(nanomodule_path)
 		NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
 		if(user)
-			NM.using_access = computer.get_access() // Nano modules nab access from users in their get_access() proc so don't bother adding it
-													// to the using list as well.
+			NM.using_access = computer.get_os_access() // Nano modules nab access from users in their get_access() proc so don't bother adding it
+													   // to the using list as well.
 	if(requires_network && network_destination)
 		generate_network_log("Connection opened to [network_destination].")
 	return 1
 
 /datum/computer_file/program/proc/update_access()
 	if(NM)
-		NM.using_access = computer.get_access()
+		NM.using_access = computer.get_os_access()
 
 // Use this proc to kill the program. Designed to be implemented by each program if it requires on-quit logic, such as the NTNRC client.
 /datum/computer_file/program/proc/on_shutdown(var/forced = 0)

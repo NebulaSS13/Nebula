@@ -31,7 +31,7 @@
 			. += "Registered Assignment: [stars(stored_card.assignment, read_string_stability)]\n"
 			. += "Registered Position: [stars(stored_card.position, read_string_stability)]\n"
 			. += "Access Addresses Enabled: \n"
-			var/list/access_list = stored_card.GetAccess()
+			var/list/access_list = stored_card.get_access()
 			if(!access_list) // "NONE" for empty list
 				. += "NONE"
 			else

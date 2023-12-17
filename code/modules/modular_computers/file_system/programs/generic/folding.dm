@@ -45,7 +45,7 @@
 	if(href_list["collect"] && started_on > 0 && program_status != PROGRAM_STATUS_CRASHED)
 		if(started_on + current_interval > world.timeofday)
 			return TOPIC_HANDLED // not ready to collect.
-		var/obj/item/card/id/I = usr.GetIdCard()
+		var/obj/item/card/id/I = usr.get_id_card()
 		if(!I)
 			to_chat(usr, SPAN_WARNING("Unable to locate ID card for transaction."))
 			return TOPIC_HANDLED

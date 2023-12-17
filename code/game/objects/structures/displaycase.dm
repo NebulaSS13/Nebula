@@ -91,7 +91,7 @@
 
 /obj/structure/displaycase/attackby(obj/item/W, mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	var/obj/item/card/id/id = W.GetIdCard()
+	var/obj/item/card/id/id = W.get_id_card()
 	if(istype(id))
 		if(allowed(usr))
 			locked = !locked

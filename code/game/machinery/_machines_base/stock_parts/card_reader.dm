@@ -59,11 +59,5 @@
 		on_insert_target.InvokeAsync(C, user)
 	return TRUE
 
-/obj/item/stock_parts/item_holder/card_reader/proc/get_id_card()
-	return istype(inserted_card, /obj/item/card/id) ? inserted_card : null
-
 /obj/item/stock_parts/item_holder/card_reader/proc/get_data_card()
 	return istype(inserted_card, /obj/item/card/data) ? inserted_card : null
-
-/obj/item/stock_parts/item_holder/card_reader/proc/get_emag_card()
-	return istype(inserted_card, /obj/item/card/emag) ? inserted_card : null

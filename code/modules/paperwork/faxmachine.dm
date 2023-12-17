@@ -447,10 +447,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	if(target_admin_fax)
 		var/list/fax_req_access = target_admin_fax["access"]
 		if(!emagged)
-			if(!has_access(req_access, ID?.GetAccess()))
+			if(!has_access(req_access, ID?.get_access()))
 				to_chat(user, SPAN_WARNING("You do not have the right credentials to use the send function on this device!"))
 				return FALSE
-			if(!has_access(fax_req_access, ID?.GetAccess()))
+			if(!has_access(fax_req_access, ID?.get_access()))
 				to_chat(user, SPAN_WARNING("You do not have the right credentials to send a fax to this recipient!"))
 				return FALSE
 		else if(prob(1))
@@ -496,10 +496,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 
 	//Authenticate as needed
 	if(!emagged)
-		if(!has_access(req_access, ID?.GetAccess()))
+		if(!has_access(req_access, ID?.get_access()))
 			to_chat(user, SPAN_WARNING("You do not have the right credentials to use the send function on this device!"))
 			return FALSE
-		if(!has_access(target.req_access, ID?.GetAccess()))
+		if(!has_access(target.req_access, ID?.get_access()))
 			to_chat(user, SPAN_WARNING("You do not have the right credentials to send a fax to this recipient!"))
 			return FALSE
 	else if(prob(1))

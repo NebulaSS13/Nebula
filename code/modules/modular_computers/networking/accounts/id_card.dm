@@ -8,7 +8,7 @@
 	set_extension(src, /datum/extension/network_device/id_card)
 	return ..()
 
-/obj/item/card/id/network/GetAccess(var/ignore_account)
+/obj/item/card/id/network/get_access(var/ignore_account)
 	. = ..()
 	var/datum/computer_file/data/account/access_account = resolve_account()
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
@@ -86,7 +86,7 @@
 
 		current_account = null
 		return TOPIC_REFRESH
-	
+
 	if(href_list["login_account"])
 		if(login_account())
 			to_chat(usr, SPAN_NOTICE("Account successfully logged in."))

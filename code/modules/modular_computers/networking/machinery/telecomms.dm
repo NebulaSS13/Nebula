@@ -231,7 +231,7 @@ var/global/list/telecomms_hubs = list()
 	var/list/data = list()
 	var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
 	data["network_id"] = device.network_tag
-	data["authenticated"] = (access_keycard_auth in user.GetAccess())
+	data["authenticated"] = (access_keycard_auth in user.get_access())
 	var/list/data_channels = list()
 	for(var/datum/radio_channel/channel_datum in channels)
 		var/list/channel_data = list()
@@ -288,7 +288,7 @@ var/global/list/telecomms_hubs = list()
 
 					var/lower_freq
 					var/upper_freq
-					if(access_keycard_auth in user.GetAccess())
+					if(access_keycard_auth in user.get_access())
 						lower_freq = RADIO_LOW_FREQ
 						upper_freq = RADIO_HIGH_FREQ
 					else
@@ -297,7 +297,7 @@ var/global/list/telecomms_hubs = list()
 
 					var/new_freq = input(user, "Enter a new frequency beween [lower_freq] and [upper_freq].", "Channel Configuration", channel_datum.frequency) as num
 
-					if(access_keycard_auth in user.GetAccess())
+					if(access_keycard_auth in user.get_access())
 						lower_freq = RADIO_LOW_FREQ
 						upper_freq = RADIO_HIGH_FREQ
 					else
@@ -354,7 +354,7 @@ var/global/list/telecomms_hubs = list()
 							if("Clear")
 								channel_datum.secured = null
 							if("Sync to personal access")
-								var/list/new_access = user.GetAccess()
+								var/list/new_access = user.get_access()
 								channel_datum.secured = (new_access && new_access.Copy())
 						. = TOPIC_REFRESH
 

@@ -443,7 +443,7 @@
 
 /obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user)
 	if(!authenticated_account)
-		var/obj/item/card/id/I = human_user.GetIdCard()
+		var/obj/item/card/id/I = human_user.get_id_card()
 		if(istype(I))
 			return I
 

@@ -12,7 +12,7 @@
 	var/expired = FALSE
 	var/reason = "NOT SPECIFIED"
 
-/obj/item/card/id/guest/GetAccess()
+/obj/item/card/id/guest/get_access(var/union = TRUE)
 	return temp_access
 
 /obj/item/card/id/guest/examine(mob/user)

@@ -19,8 +19,8 @@
 	spawn_flags = 0
 
 /obj/item/integrated_circuit/input/card_reader/attackby_react(obj/item/I, mob/user, intent)
-	var/obj/item/card/id/card = I.GetIdCard()
-	var/list/access = I.GetAccess()
+	var/obj/item/card/id/card = I.get_id_card()
+	var/list/access = I.get_access()
 	var/json_access = json_encode(access)
 	var/passkey = add_data_signature(json_access)
 
@@ -65,12 +65,12 @@
 	// check if the signature is valid
 	if(!check_data_signature(signature, result))
 		return FALSE
-	
+
 	if(length(result) > 1)
 		result = cached_json_decode(result)
 	else
 		result = list(result)
 	access = result
 
-/obj/item/integrated_circuit/output/access_displayer/GetAccess()
+/obj/item/integrated_circuit/output/access_displayer/get_access(var/union = TRUE)
 	return access

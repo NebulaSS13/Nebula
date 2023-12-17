@@ -15,7 +15,7 @@
 	minimal_access = list()
 	event_categories = list(ASSIGNMENT_GARDENER, ASSIGNMENT_JANITOR)
 
-/datum/job/tradeship_deckhand/get_access()
+/datum/job/tradeship_deckhand/get_job_access()
 	if(config.assistant_maint)
 		return list(access_maint_tunnels)
 	else

@@ -1,5 +1,5 @@
 // Generic interface for selecting/saving files with programs. The file manager program does not use this.
-/datum/computer_file/program	
+/datum/computer_file/program
 	var/datum/nano_module/program/file_browser/browser_module
 
 /datum/computer_file/program/on_shutdown(forced)
@@ -9,7 +9,7 @@
 /datum/computer_file/program/proc/view_file_browser(mob/user, selecting_key, selecting_filetype, req_perm, browser_desc, datum/computer_file/saving_file)
 	if(!browser_module)
 		browser_module = new (src, new /datum/topic_manager/program(src), src)
-	browser_module.using_access = computer.get_access()
+	browser_module.using_access = computer.get_os_access()
 
 	browser_module.reset_browser(selecting_key, selecting_filetype, req_perm, browser_desc, saving_file)
 	browser_module.ui_interact(user)
@@ -48,9 +48,9 @@
 		return
 
 	var/mob/user = usr
-	var/list/accesses = get_access(user)
+	var/list/accesses = get_user_access(user)
 	var/datum/extension/interactive/os/computer = program.computer
-	
+
 	if(href_list["BRS_back"])
 		if(browser_error)
 			browser_error = null
@@ -65,10 +65,10 @@
 			disk_name = selected_disk
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
-	
+
 	if(!disk_name)
 		return TOPIC_REFRESH
-	
+
 	var/datum/file_storage/current_disk = computer.mounted_storage[disk_name]
 	if(!current_disk)
 		disk_name = null
@@ -90,7 +90,7 @@
 		var/datum/computer_file/directory/parent_dir = current_directory?.get_directory()
 		dir_ref = weakref(parent_dir)
 		return TOPIC_REFRESH
-	
+
 	if(href_list["BRS_change_directory"])
 		var/datum/computer_file/directory/dir = current_disk.get_file(href_list["BRS_change_directory"], current_directory)
 		if(!istype(dir))
@@ -98,7 +98,7 @@
 		if(!(dir.get_file_perms(accesses, user) & OS_READ_ACCESS))
 			to_chat(user, SPAN_WARNING("You do not have permission to open this directory."))
 			return TOPIC_HANDLED
-		
+
 		dir_ref = weakref(dir)
 		return TOPIC_REFRESH
 
@@ -114,14 +114,14 @@
 		if(!istype(F, selecting_filetype))
 			to_chat(user, SPAN_WARNING("This file is not the proper type."))
 			return TOPIC_HANDLED
-		
+
 		if(!(F.get_file_perms(accesses, user) & req_perm))
 			to_chat(user, SPAN_WARNING("You do not have permission to open this file."))
 			return TOPIC_HANDLED
-		
+
 		selected_file = weakref(F)
 		return TOPIC_REFRESH
-	
+
 	if(href_list["BRS_rename_file"])
 		if(!saving_file)
 			return TOPIC_HANDLED
@@ -144,36 +144,36 @@
 				return TOPIC_HANDLED
 			if(success == OS_HARDDRIVE_SPACE)
 				to_chat(user, SPAN_WARNING("Insufficient harddrive space."))
-			
+
 			// Since we know the directory exists, any other error indicates something is wrong with the drive or network.
 			to_chat(user, SPAN_WARNING("I/O ERROR: Drive is non-functional or could not be accessed on the network."))
 			return TOPIC_REFRESH
-		
+
 		var/datum/computer_file/saved_file = saving_file
 		saving_file = null // We null this out so it doesn't get QDEL when the nanomodule is reset, but any other action that resets the browser does.
 		to_chat(user, SPAN_NOTICE("Created file [saved_file.filename].[saved_file.filetype]."))
 		program.on_file_select(current_disk, current_directory, saved_file, selecting_key)
 		return TOPIC_HANDLED
-	
+
 	if(href_list["BRS_finalize_select"])
 		if(saving_file || !selected_file)
 			return TOPIC_HANDLED
-		
+
 		var/datum/computer_file/F = selected_file.resolve()
 		if(!istype(F))
 			selected_file = null
 			return TOPIC_REFRESH
-		
+
 		if(!istype(F, selecting_filetype))
 			to_chat(user, SPAN_WARNING("This file is not the proper type."))
 			selected_file = null
 			return TOPIC_HANDLED
-		
+
 		if(!(F.get_file_perms(accesses, user) & req_perm))
 			to_chat(user, SPAN_WARNING("You do not have permission to open this file."))
 			selected_file = null
 			return TOPIC_HANDLED
-		
+
 		program.on_file_select(current_disk, current_directory, F, selecting_key)
 		SSnano.close_uis(src)
 		reset_browser()
@@ -194,7 +194,7 @@
 			else
 				to_chat(user, SPAN_WARNING("You lack permission to create a directory in this location."))
 				return TOPIC_HANDLED
-		
+
 		to_chat(user, SPAN_NOTICE("Created directory [created_dir.filename]"))
 		return TOPIC_HANDLED
 
@@ -204,9 +204,9 @@
 	var/datum/extension/interactive/os/computer = program.computer
 
 	var/datum/file_storage/current_disk = disk_name ? computer.mounted_storage[disk_name] : null
-	var/datum/computer_file/current_directory = dir_ref?.resolve()	
-	
-	var/list/accesses = get_access(user)
+	var/datum/computer_file/current_directory = dir_ref?.resolve()
+
+	var/list/accesses = get_user_access(user)
 	if(browser_error)
 		data["error"] = browser_error
 	else
@@ -233,7 +233,7 @@
 				files.Add(list(list(
 					"name" = F.filename,
 					"type" = F.filetype,
-					"dir" = istype(F, /datum/computer_file/directory), 
+					"dir" = istype(F, /datum/computer_file/directory),
 					"size" = F.size,
 					"selectable" = istype(F, selecting_filetype)
 				)))
@@ -242,7 +242,7 @@
 			dir_ref = null
 			disk_name = null
 			var/list/avail_disks[0]
-			
+
 			for(var/root_name in computer.mounted_storage)
 				var/datum/file_storage/avail_disk = computer.mounted_storage[root_name]
 				if(!avail_disk.hidden && avail_disk.check_access(accesses))
@@ -260,7 +260,7 @@
 		ui.set_initial_data(data)
 		ui.set_auto_update(1)
 		ui.open()
-	
+
 	return 1
 
 /datum/nano_module/program/file_browser/proc/reset_browser(new_key, new_filetype, new_req_perm, new_desc, datum/computer_file/new_saving_file)

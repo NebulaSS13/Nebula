@@ -888,7 +888,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 				src.scribble = s
 				src.attack_self(user)
 				return TRUE
-			return 
+			return
 	return ..()
 
 ////////////////////////////////////helper procs
@@ -897,7 +897,7 @@ var/global/list/allCasters = list() //Global list that will contain reference to
 /obj/machinery/newscaster/proc/scan_user(mob/living/user)
 	if(istype(user,/mob/living/carbon/human))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
-		var/obj/item/card/id/id = human_user.GetIdCard()
+		var/obj/item/card/id/id = human_user.get_id_card()
 		if(istype(id))                                      //Newscaster scans you
 			src.scanned_user = GetNameAndAssignmentFromId(id)
 		else

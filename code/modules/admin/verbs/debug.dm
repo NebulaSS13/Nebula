@@ -143,7 +143,7 @@
 		return
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/card/id/id = H.GetIdCard()
+		var/obj/item/card/id/id = H.get_id_card()
 		if(id)
 			id.icon_state = "gold"
 			id.access = get_all_accesses()

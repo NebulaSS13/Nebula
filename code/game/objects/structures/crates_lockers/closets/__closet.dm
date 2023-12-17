@@ -458,7 +458,7 @@ var/global/list/closets = list()
 	add_fingerprint(user)
 
 	if(!id_card)
-		id_card = user.GetIdCard()
+		id_card = user.get_id_card()
 
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return FALSE
@@ -473,7 +473,7 @@ var/global/list/closets = list()
 		return FALSE
 
 /obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/card/id/id_card)
-	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
+	return allowed(user) || (istype(id_card) && check_access_list(id_card.get_access()))
 
 /obj/structure/closet/CtrlAltClick(var/mob/user)
 	verb_toggleopen()

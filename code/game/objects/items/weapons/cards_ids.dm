@@ -299,14 +299,14 @@ var/global/const/NO_EMAG_ACT = -50
 	src.add_fingerprint(user)
 	return
 
-/obj/item/card/id/GetAccess()
+/obj/item/card/id/get_access(var/union = TRUE)
 	return access.Copy()
 
-/obj/item/card/id/GetIdCard()
+/obj/item/card/id/get_id_card()
 	RETURN_TYPE(/obj/item/card/id)
 	return src
 
-/obj/item/card/id/GetIdCards()
+/obj/item/card/id/get_id_cards()
 	return list(src)
 
 /obj/item/card/id/verb/read()

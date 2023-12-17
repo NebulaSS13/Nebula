@@ -37,7 +37,7 @@ var/global/list/all_warrants
 /datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 
-	var/list/accesses = get_access(user)
+	var/list/accesses = get_user_access(user)
 
 	if(active)
 		data["details"] = active.generate_nano_data(accesses, user)
@@ -56,7 +56,7 @@ var/global/list/all_warrants
 /datum/nano_module/program/digitalwarrant/Topic(href, href_list)
 	if(..())
 		return 1
-	var/list/accesses = get_access(usr)
+	var/list/accesses = get_user_access(usr)
 	var/list/avail_warrants = get_warrants(accesses, usr)
 
 	if(href_list["editwarrant"])
@@ -94,7 +94,7 @@ var/global/list/all_warrants
 		if(!active)
 			return
 		broadcast_security_hud_message("[active.get_broadcast_summary()] has been [(active in global.all_warrants) ? "edited" : "uploaded"].", nano_host())
-		
+
 		var/success = save_warrant(active, accesses, usr)
 		if(success != OS_FILE_SUCCESS)
 			to_chat(usr, SPAN_WARNING("Could not save warrant. You may lack access to the file servers."))

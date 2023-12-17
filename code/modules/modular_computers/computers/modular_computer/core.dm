@@ -128,7 +128,7 @@
 		if(user)
 			ui_interact(user)
 
-/obj/item/modular_computer/GetIdCards()
+/obj/item/modular_computer/get_id_cards()
 	. = ..()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)

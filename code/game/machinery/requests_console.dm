@@ -215,7 +215,7 @@ var/global/req_console_information = list()
 			SSnano.update_uis(src)
 		if(screen == RCS_ANNOUNCE)
 			var/obj/item/card/id/ID = O
-			if (access_RC_announce in ID.GetAccess())
+			if (access_RC_announce in ID.get_access())
 				announceAuth = 1
 				announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
 			else

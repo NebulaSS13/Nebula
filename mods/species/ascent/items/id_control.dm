@@ -6,7 +6,7 @@
 	desc = "A slender, complex chip of alien circuitry."
 	access = list(access_ascent)
 
-/obj/item/card/id/ascent/GetAccess()
+/obj/item/card/id/ascent/get_access(var/union = TRUE)
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && !(H.species.name in ALL_ASCENT_SPECIES))
 		. = list()
@@ -61,12 +61,12 @@
 		id_card = new id_card(src)
 	. = ..()
 
-/obj/item/organ/internal/controller/GetIdCards()
+/obj/item/organ/internal/controller/get_id_cards()
 	. = ..()
 	//Not using is_broken() because it should be able to function when CUT_AWAY is set
 	if(damage < min_broken_damage)
 		LAZYDISTINCTADD(., id_card)
 
-/obj/item/organ/internal/controller/GetAccess()
+/obj/item/organ/internal/controller/get_access(var/union = TRUE)
 	if(damage < min_broken_damage)
-		return id_card?.GetAccess()
+		return id_card?.get_access()

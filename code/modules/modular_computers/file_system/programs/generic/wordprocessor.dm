@@ -45,7 +45,7 @@
 	error = "I/O error: Unable to open file '[openingfile]'."
 
 /datum/computer_file/program/wordprocessor/proc/save_file(mob/user)
-	var/datum/computer_file/result = computer.save_file(open_file, file_directory, loaded_data, /datum/computer_file/data/text, null, computer.get_access(user), user)
+	var/datum/computer_file/result = computer.save_file(open_file, file_directory, loaded_data, /datum/computer_file/data/text, null, computer.get_os_access(user), user)
 	. = FALSE
 	if(istype(result))
 		to_chat(user, SPAN_NOTICE("Successfully saved file '[open_file]'."))
@@ -117,7 +117,7 @@
 			saving.stored_data = loaded_data
 			view_file_browser(usr, "saveas_file", /datum/computer_file/data/text, OS_WRITE_ACCESS, browser_desc, saving)
 			return TOPIC_HANDLED
-		
+
 		save_file(usr)
 		return TOPIC_REFRESH
 
@@ -125,8 +125,8 @@
 		var/oldtext = html_decode(loaded_data)
 		oldtext = replacetext(oldtext, "\[br\]", "\n")
 		if(open_file)
-			var/datum/computer_file/data/F = get_file(open_file, file_directory, computer.get_access(usr), usr)
-			if(istype(F) && !(F.get_file_perms(computer.get_access(usr), usr) & OS_WRITE_ACCESS))
+			var/datum/computer_file/data/F = get_file(open_file, file_directory, computer.get_os_access(usr), usr)
+			if(istype(F) && !(F.get_file_perms(computer.get_os_access(usr), usr) & OS_WRITE_ACCESS))
 				error = "I/O error: You do not have permission to edit this file."
 				return TOPIC_REFRESH
 		var/newtext = sanitize(replacetext(input(usr, "Editing file '[open_file]'. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[br\]"), MAX_TEXTFILE_LENGTH)

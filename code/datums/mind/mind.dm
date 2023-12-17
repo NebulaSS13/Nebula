@@ -490,7 +490,7 @@
 // have to call this periodically for the duration to work properly
 /datum/mind/proc/is_brigged(duration)
 	var/area/A = get_area(current)
-	if(!isturf(current.loc) || !istype(A) || !(A.area_flags & AREA_FLAG_PRISON) || current.GetIdCard())
+	if(!isturf(current.loc) || !istype(A) || !(A.area_flags & AREA_FLAG_PRISON) || current.get_id_card())
 		brigged_since = -1
 		return 0
 

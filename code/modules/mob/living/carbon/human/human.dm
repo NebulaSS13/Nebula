@@ -144,17 +144,17 @@
 
 // Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
 /mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
-	return GetIdCard()?.position || if_no_job
+	return get_id_card()?.position || if_no_job
 
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
 /mob/living/carbon/human/proc/get_assignment(var/if_no_id = "No id", var/if_no_job = "No job")
-	return GetIdCard()?.assignment || if_no_job
+	return get_id_card()?.assignment || if_no_job
 
 //gets name from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
 /mob/living/carbon/human/proc/get_authentification_name(var/if_no_id = "Unknown")
-	var/obj/item/card/id/id = GetIdCard()
+	var/obj/item/card/id/id = get_id_card()
 	if(istype(id))
 		return id.registered_name
 	else
@@ -187,7 +187,7 @@
 //Useful when player is being seen by other mobs
 /mob/living/carbon/human/proc/get_id_name(var/if_no_id = "Unknown")
 	. = if_no_id
-	var/obj/item/card/id/I = GetIdCard(exceptions = list(/obj/item/holder))
+	var/obj/item/card/id/I = get_id_card(exceptions = list(/obj/item/holder))
 	if(istype(I))
 		return I.registered_name
 
@@ -219,7 +219,7 @@
 			var/perpname = "wot"
 			var/obj/item/id = get_equipped_item(slot_wear_id_str)
 			if(id)
-				var/obj/item/card/id/I = id.GetIdCard()
+				var/obj/item/card/id/I = id.get_id_card()
 				if(I)
 					perpname = I.registered_name
 				else
@@ -255,7 +255,7 @@
 			var/perpname = "wot"
 			var/read = 0
 
-			var/obj/item/card/id/id = GetIdCard()
+			var/obj/item/card/id/id = get_id_card()
 			if(istype(id))
 				perpname = id.registered_name
 			else
@@ -280,7 +280,7 @@
 			var/perpname = "wot"
 			var/modified = 0
 
-			var/obj/item/card/id/id = GetIdCard()
+			var/obj/item/card/id/id = get_id_card()
 			if(istype(id))
 				perpname = id.registered_name
 			else
@@ -313,7 +313,7 @@
 			var/perpname = "wot"
 			var/read = 0
 
-			var/obj/item/card/id/id = GetIdCard()
+			var/obj/item/card/id/id = get_id_card()
 			if(istype(id))
 				perpname = id.registered_name
 			else

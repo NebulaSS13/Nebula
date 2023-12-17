@@ -26,7 +26,7 @@
 	data["assignments"] = show_assignments
 	data["have_id_slot"] = !!card_slot
 	data["have_printer"] = program.computer.has_component(PART_PRINTER)
-	data["authenticated"] = program.get_file_perms(get_access(user), user) & OS_WRITE_ACCESS
+	data["authenticated"] = program.get_file_perms(get_user_access(user), user) & OS_WRITE_ACCESS
 	if(!data["have_id_slot"] || !data["have_printer"])
 		mod_mode = 0 //We can't modify IDs when there is no card reader
 	if(card_slot)
@@ -127,14 +127,14 @@
 		to_chat(usr, SPAN_WARNING("No log exists for this job: [rank]"))
 		return
 
-	return jobdatum.get_access()
+	return jobdatum.get_job_access()
 
 /datum/computer_file/program/card_mod/Topic(href, href_list)
 	if(..())
 		return 1
 
 	var/mob/user = usr
-	var/obj/item/card/id/user_id_card = user.GetIdCard()
+	var/obj/item/card/id/user_id_card = user.get_id_card()
 	var/obj/item/card/id/id_card = computer.get_inserted_id()
 
 	var/datum/nano_module/program/card_mod/module = NM
@@ -150,7 +150,7 @@
 			else
 				module.show_assignments = 1
 		if("print")
-			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
+			if(!(get_file_perms(module.get_user_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer.has_component(PART_PRINTER)) //This option should never be called if there is no printer
@@ -192,7 +192,7 @@
 			else
 				card_slot.insert_id(user.get_active_hand(), user)
 		if("terminate")
-			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
+			if(!(get_file_perms(module.get_user_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer)
@@ -200,7 +200,7 @@
 				remove_nt_access(id_card)
 				callHook("terminate_employee", list(id_card))
 		if("edit")
-			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
+			if(!(get_file_perms(module.get_user_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer)
@@ -274,7 +274,7 @@
 						remove_nt_access(id_card)
 						apply_access(id_card, access)
 		if("assign")
-			if(!(get_file_perms(module.get_access(user), user) & OS_WRITE_ACCESS))
+			if(!(get_file_perms(module.get_user_access(user), user) & OS_WRITE_ACCESS))
 				to_chat(usr, SPAN_WARNING("Access denied."))
 				return
 			if(computer && id_card)
@@ -302,7 +302,7 @@
 				var/access_type = href_list["access_target"]
 				var/access_allowed = text2num(href_list["allowed"])
 				if(access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
-					for(var/access in module.get_access(user))
+					for(var/access in module.get_user_access(user))
 						var/region_type = get_access_region_by_id(access_type)
 						if(access in global.using_map.access_modify_region[region_type])
 							id_card.access -= access_type

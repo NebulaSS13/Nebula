@@ -13,7 +13,7 @@
 		if(access)
 			user_access = access.Copy()
 		else
-			var/obj/item/card/id/I = user.GetIdCard()
+			var/obj/item/card/id/I = user.get_id_card()
 			if(I)
 				user_access += I.access
 		report_file = new

@@ -87,7 +87,7 @@
 				channel = null
 			return 1
 		var/mob/living/user = usr
-		if(has_access(list(access_network), usr.GetAccess()))
+		if(has_access(list(access_network), usr.get_access()))
 			if(channel)
 				var/response = alert(user, "Really engage admin-mode? You will be disconnected from your current channel!", "NTNRC Admin mode", "Yes", "No")
 				if(response == "Yes")

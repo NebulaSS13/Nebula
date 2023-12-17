@@ -87,7 +87,7 @@
 			tiny_state = "id-"+front_id.icon_state
 		add_overlay(overlay_image(icon, tiny_state, flags = RESET_COLOR))
 
-/obj/item/storage/wallet/GetIdCards()
+/obj/item/storage/wallet/get_id_cards()
 	. = ..()
 	if(istype(front_id))
 		LAZYDISTINCTADD(., front_id)
@@ -148,10 +148,10 @@
 
 /decl/interaction_handler/remove_id/wallet/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && ishuman(user)
-	
+
 /decl/interaction_handler/remove_id/wallet/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/storage/wallet/W = target
-	var/obj/item/card/id/id = W.GetIdCard()
+	var/obj/item/card/id/id = W.get_id_card()
 	if (istype(id))
 		W.remove_from_storage(id)
 		user.put_in_hands(id)

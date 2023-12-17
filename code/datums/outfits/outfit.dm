@@ -181,7 +181,7 @@ var/global/list/outfits_decls_by_type_
 		W.assignment = assignment
 	if(job)
 		W.position = job.title
-		LAZYDISTINCTADD(W.access, job.get_access())
+		LAZYDISTINCTADD(W.access, job.get_job_access())
 		if(!W.detail_color)
 			W.detail_color = job.selection_color
 			W.update_icon()

@@ -615,7 +615,7 @@
 		if(rcon_setting == RCON_YES || (alarm_area.atmosalm && rcon_setting == RCON_AUTO))
 			. = STATUS_INTERACTIVE // Have rcon access
 
-		if(has_access(rcon_remote_override_access, user.GetAccess()))
+		if(has_access(rcon_remote_override_access, user.get_access()))
 			. = STATUS_INTERACTIVE // They have the access to set rcon anyway
 		else if(href_list && href_list["rcon"])
 			. = STATUS_UPDATE // They don't have rcon access but are trying to set it: that's a no

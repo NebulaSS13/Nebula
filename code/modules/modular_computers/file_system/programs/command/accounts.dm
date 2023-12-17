@@ -154,14 +154,14 @@
 				module.selected_parent_group = null // Just in case.
 				return TOPIC_REFRESH
 			var/list/group_dict = net_acl.get_group_dict()
-			
+
 			if(href_list["create_account"])
 				var/list/account_creation_access
 
 				// Passing null access to create_account will ignore access checks on account servers, so only assign this
 				// if the user doesn't have parent group account creation authorization.
 				if(!net_acl.check_account_creation_auth(computer.get_account()))
-					account_creation_access = NM.get_access(user)
+					account_creation_access = NM.get_user_access(user)
 				var/new_login = input(user, "Input new account login. Login will be sanitized.", "Account Creation") as text|null
 
 				var/login_check = alert(user, "Account login will be [sanitize_for_account(new_login)]. Is this acceptable?","Account Creation", "Yes", "No")
@@ -184,8 +184,8 @@
 				var/list/account_recovery_access
 
 				if(!net_acl.check_account_creation_auth(computer.get_account()))
-					account_recovery_access = NM.get_access(user)
-				
+					account_recovery_access = NM.get_user_access(user)
+
 				var/list/backups = network.get_account_backups(account_recovery_access)
 				if(!length(backups))
 					to_chat(user, SPAN_WARNING("No account backups found on account servers!"))
@@ -194,11 +194,11 @@
 				var/selected_login = input(user, "Select the account backup you would like to recover:", "Account Backups") as anything in backups
 				if(!CanInteract(user, state) || !selected_login)
 					return TOPIC_HANDLED
-				
+
 				if(network.find_account_by_login(selected_login))
 					to_chat(user, SPAN_WARNING("An account with that login already exists on the network! Cannot recover backup."))
 					return TOPIC_HANDLED
-				
+
 				var/datum/computer_file/data/account/backup = backups[selected_login]
 				backup.backup = FALSE
 				backup.filename = replacetext(backup.filename, backup.copy_string, null) // Remove the backup signifier on the file.
@@ -216,7 +216,7 @@
 					return TOPIC_REFRESH
 				// This is a parent group, or group submanagement is disabled - no matter what, direct access to the ACL is required.
 				if(is_parent_group || !net_acl.allow_submanagement)
-					if(!net_acl.has_access(module.get_access(user)))
+					if(!net_acl.has_access(module.get_user_access(user)))
 						to_chat(user, SPAN_WARNING("Access denied."))
 						return TOPIC_HANDLED
 					if(group_name in module.selected_account.groups)
@@ -228,7 +228,7 @@
 					// is a member of the parent group.
 					var/datum/computer_file/data/account/A = computer.get_account()
 					var/is_parent_member = (module.selected_parent_group in A.groups)
-					if(is_parent_member || net_acl.has_access(module.get_access(user)))
+					if(is_parent_member || net_acl.has_access(module.get_user_access(user)))
 						if(group_name in module.selected_account.groups)
 							module.selected_account.groups -= group_name
 						else
@@ -244,17 +244,17 @@
 							module.selected_account.parent_groups |= module.selected_parent_group
 							return TOPIC_REFRESH
 					module.selected_account.parent_groups -= module.selected_parent_group
-				
+
 			if(href_list["select_parent_group"])
 				if(module.selected_parent_group)
 					return TOPIC_REFRESH
 				var/parent_group = href_list["select_parent_group"]
 				if(parent_group in group_dict)
 					// In order to see child group membership, you need submanagement access or direct ACL access.
-					if(!net_acl.has_access(module.get_access(user)))
+					if(!net_acl.has_access(module.get_user_access(user)))
 						if(net_acl.allow_submanagement)
 							var/list/child_access = list("[parent_group].[network.network_id]")
-							if(!has_access(child_access, module.get_access(user)))
+							if(!has_access(child_access, module.get_user_access(user)))
 								to_chat(user, SPAN_WARNING("Access denied."))
 								return TOPIC_HANDLED
 						else

@@ -74,10 +74,10 @@
 /obj/item/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))
 
-/obj/item/electronic_assembly/GetAccess()
+/obj/item/electronic_assembly/get_access(var/union = TRUE)
 	. = list()
 	for(var/obj/item/integrated_circuit/output/O in assembly_components)
-		var/o_access = O.GetAccess()
+		var/o_access = O.get_access()
 		. |= o_access
 
 /obj/item/electronic_assembly/Bump(atom/AM)

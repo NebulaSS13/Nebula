@@ -22,7 +22,7 @@
 
 	if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 		if (istype(W, /obj/item/modular_computer))
-			W = W.GetIdCard()
+			W = W.get_id_card()
 		if (!W:access) //no access
 			to_chat(user, "The access level of [W:registered_name]\'s card is not high enough.")
 			return

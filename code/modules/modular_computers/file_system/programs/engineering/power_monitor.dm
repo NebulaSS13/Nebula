@@ -103,7 +103,7 @@
 
 /datum/nano_module/program/power_monitor/proc/is_sysadmin(var/mob/user)
 	if(program)
-		has_access(list(access_network), get_access(user))
+		has_access(list(access_network), get_user_access(user))
 	return FALSE
 
 // Allows us to process UI clicks, which are relayed in form of hrefs.

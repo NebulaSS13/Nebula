@@ -205,7 +205,7 @@
 /obj/item/uplink_service/fake_crew_announcement/enable(var/mob/user = usr)
 
 	var/datum/computer_file/report/crew_record/random_record
-	var/obj/item/card/id/I = user.GetIdCard()
+	var/obj/item/card/id/I = user.get_id_card()
 	var/datum/computer_network/net = get_local_network_at(get_turf(user))
 	if(net && length(net.get_crew_records()))
 		random_record = pick(net.get_crew_records())

@@ -13,8 +13,8 @@
 	req_access = list(list(access_heads, access_security))
 	material = /decl/material/solid/plastic
 	matter = list(
-		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT, 
-		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
 	)
@@ -56,7 +56,7 @@
 		active = null
 		update_icon()
 		return TOPIC_REFRESH
-	
+
 	if(href_list["select"])
 		var/list/active_warrants = list()
 		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
@@ -84,13 +84,13 @@
 
 /obj/item/holowarrant/attackby(obj/item/W, mob/user)
 	if(active)
-		var/obj/item/card/id/I = W.GetIdCard()
-		if(I && check_access_list(I.GetAccess()))
+		var/obj/item/card/id/I = W.get_id_card()
+		if(I && check_access_list(I.get_access()))
 			var/choice = alert(user, "Would you like to authorize this warrant?","Warrant authorization","Yes","No")
 			var/datum/report_field/signature/auth = active.field_from_name("Authorized by")
 			if(choice == "Yes")
 				auth.ask_value(user)
-			user.visible_message(SPAN_NOTICE("You swipe \the [I] through the [src]."), 
+			user.visible_message(SPAN_NOTICE("You swipe \the [I] through the [src]."),
 								 SPAN_NOTICE("[user] swipes \the [I] through the [src]."))
 			broadcast_security_hud_message("[active.get_broadcast_summary()] has been authorized by [auth.get_value()].", src)
 		else

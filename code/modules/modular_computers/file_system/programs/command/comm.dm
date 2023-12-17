@@ -109,7 +109,7 @@
 
 /datum/nano_module/program/comm/proc/is_authenticated(var/mob/user)
 	if(program)
-		return program.get_file_perms(get_access(user), user) & OS_READ_ACCESS
+		return program.get_file_perms(get_user_access(user), user) & OS_READ_ACCESS
 	return 1
 
 /datum/nano_module/program/comm/proc/get_shunt()
@@ -155,7 +155,7 @@
 			. = 1
 			if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
-					var/obj/item/card/id/id_card = user.GetIdCard()
+					var/obj/item/card/id/id_card = user.get_id_card()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"

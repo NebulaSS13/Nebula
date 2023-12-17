@@ -53,7 +53,7 @@ var/global/list/navbeacons = list()
 
 		update_icon()
 
-	else if(I.GetIdCard())
+	else if(I.get_id_card())
 		if(open)
 			if (src.allowed(user))
 				src.locked = !src.locked

@@ -5,30 +5,30 @@
 		return TRUE
 	if(!istype(M))
 		return FALSE
-	return check_access_list(M.GetAccess())
+	return check_access_list(M.get_access())
 
-/atom/movable/proc/GetAccess(var/union = FALSE)
+/atom/movable/proc/get_access(var/union = TRUE)
 	. = list()
 	if(union)
-		for(var/atom/movable/id in GetIdCards())
-			. |= id.GetAccess()
+		for(var/atom/movable/id in get_id_cards())
+			. |= id.get_access()
 		return .
-	var/atom/movable/id = GetIdCard()
+	var/atom/movable/id = get_id_card()
 	if(id)
-		. = id.GetAccess()
+		. = id.get_access()
 
-/atom/movable/proc/GetIdCard()
+/atom/movable/proc/get_id_card()
 	RETURN_TYPE(/obj/item/card/id)
-	var/list/cards = GetIdCards()
+	var/list/cards = get_id_cards()
 	return LAZYACCESS(cards, LAZYLEN(cards))
 
-/atom/movable/proc/GetIdCards()
+/atom/movable/proc/get_id_cards()
 	var/datum/extension/access_provider/our_provider = get_extension(src, /datum/extension/access_provider)
 	if(our_provider)
-		LAZYDISTINCTADD(., our_provider.GetIdCards())
+		LAZYDISTINCTADD(., our_provider.get_id_cards())
 
 /atom/movable/proc/check_access(atom/movable/A)
-	return check_access_list(A ? A.GetAccess() : list())
+	return check_access_list(A ? A.get_access() : list())
 
 /atom/movable/proc/check_access_list(list/L)
 	var/list/R = get_req_access()
@@ -214,7 +214,7 @@ var/global/list/priv_region_access
 /mob/observer/ghost
 	var/static/obj/item/card/id/all_access/ghost_all_access
 
-/mob/observer/ghost/GetIdCards()
+/mob/observer/ghost/get_id_cards()
 	. = ..()
 	if (!is_admin(src))
 		return .
@@ -223,17 +223,17 @@ var/global/list/priv_region_access
 		ghost_all_access = new()
 	LAZYDISTINCTADD(., ghost_all_access)
 
-/mob/living/bot/GetIdCards()
+/mob/living/bot/get_id_cards()
 	. = ..()
 	if(istype(botcard))
 		LAZYDISTINCTADD(., botcard)
 
 // Gets the ID card of a mob, but will not check types in the exceptions list
-/mob/living/carbon/human/GetIdCard(exceptions = null)
+/mob/living/carbon/human/get_id_card(exceptions = null)
 	RETURN_TYPE(/obj/item/card/id)
-	return LAZYACCESS(GetIdCards(exceptions), 1)
+	return LAZYACCESS(get_id_cards(exceptions), 1)
 
-/mob/living/carbon/human/GetIdCards(exceptions = null)
+/mob/living/carbon/human/get_id_cards(exceptions = null)
 	. = ..()
 	var/list/candidates = get_held_items()
 	var/id = get_equipped_item(slot_wear_id_str)
@@ -242,14 +242,11 @@ var/global/list/priv_region_access
 	for(var/atom/movable/candidate in candidates)
 		if(!candidate || is_type_in_list(candidate, exceptions))
 			continue
-		var/list/obj/item/card/id/id_cards = candidate.GetIdCards()
+		var/list/obj/item/card/id/id_cards = candidate.get_id_cards()
 		if(LAZYLEN(id_cards))
 			LAZYDISTINCTADD(., id_cards)
 
-/mob/living/carbon/human/GetAccess(var/union = TRUE)
-	. = ..(union)
-
-/mob/living/silicon/GetIdCards()
+/mob/living/silicon/get_id_cards()
 	. = ..()
 	if(stat || (ckey && !client))
 		return // Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
@@ -257,7 +254,7 @@ var/global/list/priv_region_access
 		LAZYDISTINCTADD(., idcard)
 
 /proc/FindNameFromID(var/mob/M, var/missing_id_name = "Unknown")
-	var/obj/item/card/id/C = M.GetIdCard()
+	var/obj/item/card/id/C = M.get_id_card()
 	if(C)
 		return C.registered_name
 	return missing_id_name
@@ -266,7 +263,7 @@ var/global/list/priv_region_access
 	return SSjobs.titles_to_datums + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
-	var/obj/item/card/id/I = GetIdCard()
+	var/obj/item/card/id/I = get_id_card()
 
 	if(I)
 		var/job_icons = get_all_job_icons()

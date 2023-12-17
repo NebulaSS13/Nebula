@@ -165,7 +165,7 @@
 		return FALSE
 	. = outfit.equip_outfit(H, alt_title || title, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips), job = src, rank = grade)
 
-/datum/job/proc/get_access()
+/datum/job/proc/get_job_access()
 	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
 		return minimal_access?.Copy()
 	return access?.Copy()

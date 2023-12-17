@@ -36,7 +36,7 @@
 
 		if(href_list["login"])
 
-			var/obj/item/card/id/ID = usr.GetIdCard()
+			var/obj/item/card/id/ID = usr.get_id_card()
 			if(!ID || !allowed(usr))
 				to_chat(usr, "<span class='warning'>Access denied.</span>")
 			else

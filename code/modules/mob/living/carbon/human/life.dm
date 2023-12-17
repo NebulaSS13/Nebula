@@ -960,7 +960,7 @@
 
 		var/obj/item/id = get_equipped_item(slot_wear_id_str)
 		if(id)
-			var/obj/item/card/id/I = id.GetIdCard()
+			var/obj/item/card/id/I = id.get_id_card()
 			if(I)
 				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
 				if(J)
@@ -974,7 +974,7 @@
 		var/perpname = name
 		var/obj/item/id = get_equipped_item(slot_wear_id_str)
 		if(id)
-			var/obj/item/card/id/I = id.GetIdCard()
+			var/obj/item/card/id/I = id.get_id_card()
 			if(I)
 				perpname = I.registered_name
 

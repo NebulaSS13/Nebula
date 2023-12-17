@@ -25,12 +25,12 @@
 	return -1
 
 //returns a list.
-/datum/nano_module/proc/get_access(mob/user)
+/datum/nano_module/proc/get_user_access(mob/user)
 	. = using_access.Copy()
 	if(user) // Insist on scanning ID again to make things a little less clunky.
-		var/obj/item/card/id/I = user.GetIdCard()
+		var/obj/item/card/id/I = user.get_id_card()
 		if(I)
-			. |= I.GetAccess()
+			. |= I.get_access()
 
 /datum/nano_module/proc/check_access(var/mob/user, var/access)
 	if(!access)
@@ -39,7 +39,7 @@
 		access = list(access) //listify a single access code.
 	if(has_access(access, using_access))
 		return 1 //This is faster, and often enough.
-	return has_access(access, get_access(user)) //Also checks the mob's ID.
+	return has_access(access, get_user_access(user)) //Also checks the mob's ID.
 
 /datum/nano_module/Topic(href, href_list)
 	if(topic_manager && topic_manager.Topic(href, href_list))

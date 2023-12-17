@@ -707,7 +707,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		. = SPAN_WARNING("[html_icon(src)] [gender==PLURAL?"some":"a"] <font color='[coating.get_color()]'>stained</font> [name]")
 	else
 		. = "[html_icon(src)] \a [src]"
-	var/ID = GetIdCard()
+	var/ID = get_id_card()
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
 

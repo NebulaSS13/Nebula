@@ -70,12 +70,12 @@
 
 /obj/item/airlock_brace/attackby(obj/item/W, mob/user)
 	..()
-	if (istype(W.GetIdCard(), /obj/item/card/id))
+	if (istype(W.get_id_card(), /obj/item/card/id))
 		if(!airlock)
 			attack_self(user)
 			return
 		else
-			var/obj/item/card/id/C = W.GetIdCard()
+			var/obj/item/card/id/C = W.get_id_card()
 			if(check_access(C))
 				to_chat(user, "You swipe \the [C] through \the [src].")
 				if(do_after(user, 10, airlock))

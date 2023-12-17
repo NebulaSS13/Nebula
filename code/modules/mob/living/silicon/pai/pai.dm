@@ -252,9 +252,9 @@ var/global/list/possible_say_verbs = list(
 
 //Overriding this will stop a number of headaches down the track.
 /mob/living/silicon/pai/attackby(obj/item/W, mob/user)
-	var/obj/item/card/id/card = W.GetIdCard()
+	var/obj/item/card/id/card = W.get_id_card()
 	if(card && user.a_intent == I_HELP)
-		var/list/new_access = card.GetAccess()
+		var/list/new_access = card.get_access()
 		idcard.access = new_access
 		visible_message("<span class='notice'>[user] slides [W] across [src].</span>")
 		to_chat(src, SPAN_NOTICE("Your access has been updated!"))

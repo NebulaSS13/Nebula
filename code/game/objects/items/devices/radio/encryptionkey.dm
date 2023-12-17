@@ -21,7 +21,7 @@
 /obj/item/encryptionkey/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/card/id))
 		var/obj/item/card/id/id = W
-		var/list/access = id.GetAccess()
+		var/list/access = id.get_access()
 		if(!length(access))
 			to_chat(user, SPAN_WARNING("\The [W] has no access keys to copy."))
 			return TRUE

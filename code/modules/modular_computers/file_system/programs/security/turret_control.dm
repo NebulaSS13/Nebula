@@ -20,7 +20,7 @@
 	var/list/area_turrets = list() // Dictionary of area name -> turret
 	var/datum/computer_network/network = get_network()
 	if(network)
-		var/list/turrets = network.get_devices_by_type(/obj/machinery/turret/network, get_access(user))
+		var/list/turrets = network.get_devices_by_type(/obj/machinery/turret/network, get_user_access(user))
 		for(var/obj/machinery/turret/network/net_turret in turrets)
 			var/area/A = get_area(net_turret)
 			var/area_name = A.name
@@ -54,7 +54,7 @@
 		return TOPIC_REFRESH
 	if(href_list["turret"])
 		var/datum/extension/network_device/turret_device = network.get_device_by_tag(href_list["turret"])
-		if(!turret_device || !turret_device.has_access(module.get_access(user)))
+		if(!turret_device || !turret_device.has_access(module.get_user_access(user)))
 			return TOPIC_REFRESH
 		var/obj/machinery/turret/network/net_turret = turret_device.holder
 		if(href_list["settings"])

@@ -63,7 +63,7 @@ var/global/list/terminal_commands
 		return
 	if(!user.skill_check(core_skill, skill_needed))
 		return skill_fail_message()
-	if(!check_access(terminal.get_access(user)))
+	if(!check_access(terminal.get_terminal_user_access(user)))
 		return "[name]: ACCESS DENIED"
 	if(needs_network && !terminal.computer.get_network_status())
 		return "NETWORK ERROR: Check connection and try again."
@@ -329,7 +329,7 @@ Subtypes
 
 	var/datum/file_storage/disk = file_loc[1]
 	var/datum/computer_file/file = file_loc[3]
-	var/deleted = disk.delete_file(file, terminal.get_access(user), user)
+	var/deleted = disk.delete_file(file, terminal.get_terminal_user_access(user), user)
 	if(deleted == OS_FILE_SUCCESS)
 		return "rm: Removed file '[file.filename]'."
 	if(deleted == OS_FILE_NO_WRITE)
@@ -363,7 +363,7 @@ Subtypes
 		return "mv: [get_terminal_error(target_path, file_loc)]."
 
 	// Check file permisisons.
-	var/error = check_file_transfer(destination[2], F, copying, terminal.get_access(user), user)
+	var/error = check_file_transfer(destination[2], F, copying, terminal.get_terminal_user_access(user), user)
 	if(error)
 		return "mv: [error]."
 
@@ -397,7 +397,7 @@ Subtypes
 	var/datum/computer_file/copy = file.Clone(TRUE)
 	if(!istype(copy))
 		return
-	var/success = disk.store_file(copy, file_loc[2], FALSE, terminal.get_access(user), user)
+	var/success = disk.store_file(copy, file_loc[2], FALSE, terminal.get_terminal_user_access(user), user)
 	if(success == OS_FILE_SUCCESS)
 		return "cp: Successfully copied file [file.filename]."
 
@@ -422,7 +422,7 @@ Subtypes
 	var/new_name = sanitize_for_file(rename_args[2])
 
 	if(length(new_name))
-		if(F.unrenamable || !(F.get_file_perms(terminal.get_access(user), user) & OS_WRITE_ACCESS))
+		if(F.unrenamable || !(F.get_file_perms(terminal.get_terminal_user_access(user), user) & OS_WRITE_ACCESS))
 			return "rename: You lack permission to rename [F.filename]."
 		F.filename = new_name
 		return "rename: File renamed to '[new_name]'."
@@ -555,7 +555,7 @@ Subtypes
 	else
 		return "permmod: Invalid flag syntax. Use man command to learn more about permmod flag syntax."
 
-	var/success = F.change_perms(mode, perm, access_key, terminal.get_access(user))
+	var/success = F.change_perms(mode, perm, access_key, terminal.get_terminal_user_access(user))
 	if(success)
 		return "permmod: Successfully changed permissions for [F.filename]."
 	else
@@ -610,7 +610,7 @@ Subtypes
 	else if(length(com_args) == 2)
 		called_args = com_args[2]
 
-	return D.on_command(com_args[1], called_args, terminal.get_access(user))
+	return D.on_command(com_args[1], called_args, terminal.get_terminal_user_access(user))
 
 // Lists the commands available on the target device.
 /datum/terminal_command/listcom

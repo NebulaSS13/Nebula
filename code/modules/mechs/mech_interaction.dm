@@ -294,7 +294,7 @@
 	access_card.access = saved_access?.Copy()
 	if(sync_access)
 		for(var/mob/pilot in pilots)
-			access_card.access |= pilot.GetAccess()
+			access_card.access |= pilot.get_access()
 			to_chat(pilot, SPAN_NOTICE("Security access permissions synchronized."))
 
 /mob/living/exosuit/proc/eject(var/mob/user, var/silent)

@@ -35,7 +35,7 @@
 		H.verbs |= /mob/proc/tradehouse_rename_ship
 		H.verbs |= /mob/proc/tradehouse_rename_company
 
-/datum/job/tradeship_captain/get_access()
+/datum/job/tradeship_captain/get_job_access()
 	return get_all_station_access()
 
 /mob/proc/tradehouse_rename_ship()

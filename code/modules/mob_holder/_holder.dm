@@ -99,10 +99,10 @@
 		return loc.loc
 	return ..()
 
-/obj/item/holder/GetIdCards()
+/obj/item/holder/get_id_cards()
 	. = ..()
 	for(var/mob/M in contents)
-		LAZYDISTINCTADD(., M.GetIdCards())
+		LAZYDISTINCTADD(., M.get_id_cards())
 
 /obj/item/holder/attack_self()
 	for(var/mob/M in contents)

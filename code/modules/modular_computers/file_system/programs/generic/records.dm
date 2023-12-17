@@ -51,7 +51,7 @@
 
 
 /datum/nano_module/program/records/proc/get_record_access(var/mob/user)
-	var/list/user_access = get_access(user)
+	var/list/user_access = get_user_access(user)
 
 	var/obj/PC = nano_host()
 	var/datum/extension/interactive/os/os = get_extension(PC, /datum/extension/interactive/os)
@@ -68,7 +68,7 @@
 	var/datum/report_field/F = R.field_from_ID(field_ID)
 	if(!F)
 		return
-	if(!(F.get_perms(get_access(user),user) & OS_WRITE_ACCESS))
+	if(!(F.get_perms(get_user_access(user),user) & OS_WRITE_ACCESS))
 		to_chat(user, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
 		return
 	F.ask_value(user)
@@ -86,7 +86,7 @@
 		var/ID = text2num(href_list["set_active"])
 		for(var/datum/computer_file/report/crew_record/R in get_records())
 			if(R.uid == ID)
-				if(R.get_file_perms(get_access(usr), usr) & OS_READ_ACCESS)
+				if(R.get_file_perms(get_user_access(usr), usr) & OS_READ_ACCESS)
 					active_record = R
 				else
 					to_chat(usr, SPAN_WARNING("Access Denied"))
@@ -97,7 +97,7 @@
 		if(!network)
 			to_chat(usr, SPAN_WARNING("Network error."))
 			return
-		var/list/accesses = get_access(usr)
+		var/list/accesses = get_user_access(usr)
 		if(!network.get_mainframes_by_role(MF_ROLE_CREW_RECORDS, accesses))
 			to_chat(usr, SPAN_WARNING("You may not have access to generate new crew records, or there may not be a crew record mainframe active on the network."))
 			return
@@ -124,12 +124,12 @@
 		if(!search)
 			return
 		for(var/datum/computer_file/report/crew_record/R in get_records())
-			if(!(R.get_file_perms(get_access(usr), usr) & OS_READ_ACCESS))
+			if(!(R.get_file_perms(get_user_access(usr), usr) & OS_READ_ACCESS))
 				continue
 			var/datum/report_field/field = R.field_from_name(field_name)
 			if(!field.searchable)
 				continue
-			if(!(field.get_perms(get_access(usr), usr) & OS_READ_ACCESS))
+			if(!(field.get_perms(get_user_access(usr), usr) & OS_READ_ACCESS))
 				continue
 			if(findtext(lowertext(field.get_value()), lowertext(search)))
 				active_record = R

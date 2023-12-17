@@ -59,7 +59,7 @@
 	if(D)
 		return D.get_network()
 
-/datum/extension/interactive/os/proc/get_access(var/mob/user)
+/datum/extension/interactive/os/proc/get_os_access(var/mob/user)
 	. = list()
 	var/datum/computer_file/data/account/access_account = get_account()
 	if(access_account)
@@ -72,9 +72,9 @@
 			for(var/group in access_account.parent_groups) // Membership in a child group grants access to anything with an access requirement set to the parent group.
 				. += "[group].[location]"
 	if(user)
-		var/obj/item/card/id/I = user.GetIdCard()
+		var/obj/item/card/id/I = user.get_id_card()
 		if(I)
-			. += I.GetAccess(access_account?.login) // Ignore any access that's already on the user account.
+			. += I.get_access(access_account?.login) // Ignore any access that's already on the user account.
 
 // Returns the current account, if possible. User var is passed only for updating program access from ID, if no account is found.
 /datum/extension/interactive/os/proc/get_account(var/mob/user)
@@ -129,7 +129,7 @@
 		P.update_access(user)
 
 /datum/extension/interactive/os/proc/login_prompt(var/mob/user)
-	var/obj/item/card/id/I = user.GetIdCard()
+	var/obj/item/card/id/I = user.get_id_card()
 	var/default_login = I?.associated_network_account["login"]
 	var/default_password = I?.associated_network_account["password"]
 
@@ -213,7 +213,7 @@
 	if(P in running_programs)
 		P.program_state = PROGRAM_STATE_ACTIVE
 		active_program = P
-	else if(P.can_run(get_access(user), user, TRUE))
+	else if(P.can_run(get_os_access(user), user, TRUE))
 		active_program = P
 		P.on_startup(user, src)
 	else

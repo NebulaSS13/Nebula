@@ -102,7 +102,7 @@
 /obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/card/id) || istype(O, /obj/item/modular_computer))
 
-		var/obj/item/card/id/id_card = O.GetIdCard()
+		var/obj/item/card/id/id_card = O.get_id_card()
 
 		if(!id_card)
 			return

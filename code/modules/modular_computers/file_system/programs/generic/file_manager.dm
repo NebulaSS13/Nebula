@@ -61,7 +61,7 @@
 		return
 
 	var/mob/user = usr
-	var/list/accesses = computer.get_access(user)
+	var/list/accesses = computer.get_os_access(user)
 
 	error = null
 	if(file_error)
@@ -570,7 +570,7 @@
 	if(!.)
 		return
 	var/list/data = computer.initial_data()
-	var/list/accesses = computer.get_access(user)
+	var/list/accesses = computer.get_os_access(user)
 
 	if(current_index > disks.len) // Safety check.
 		current_index = null

@@ -344,4 +344,4 @@
 		return 1
 
 /obj/machinery/computer/HolodeckControl/proc/cantogglelock(var/mob/user)
-	return has_access(lock_access, user.GetAccess())
+	return has_access(lock_access, user.get_access())

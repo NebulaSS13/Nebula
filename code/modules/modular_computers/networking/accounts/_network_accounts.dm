@@ -25,7 +25,7 @@
 				continue
 			if(E.backup)
 				result[E.login] = E
-	
+
 	return result
 
 /datum/computer_network/proc/add_account(datum/computer_file/data/account/acc, accesses)
@@ -75,7 +75,7 @@
 		mind.initial_account_login["password"] = password
 		mind.account_network = network_id
 	StoreMemory("Your [network_id] login is [login] and the password is [password].", /decl/memory_options/system)
-	var/obj/item/card/id/I = GetIdCard()
+	var/obj/item/card/id/I = get_id_card()
 	if(I)
 		I.associated_network_account = list("login" = login, "password" = password)
 
@@ -83,7 +83,7 @@
 	if(mind)
 		mind.initial_account_login["login"] = login
 	StoreMemory("Your network account login has been changed to [login].", /decl/memory_options/system)
-	var/obj/item/card/id/I = GetIdCard()
+	var/obj/item/card/id/I = get_id_card()
 	if(I && I.associated_network_account)
 		I.associated_network_account["login"] = login
 
