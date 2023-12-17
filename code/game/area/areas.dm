@@ -1,3 +1,5 @@
+/// This list of names is here to make sure we don't state our descriptive blurb to a person more than once.
+var/global/list/area_blurb_stated_to = list()
 var/global/list/areas = list()
 
 /area
@@ -41,6 +43,7 @@ var/global/list/areas = list()
 	var/list/forced_ambience
 	var/sound_env = STANDARD_STATION
 	var/description //A text-based description of what this area is for.
+	var/area_blurb_category // Used to filter description showing across subareas
 
 	var/base_turf // The base turf type of the area, which can be used to override the z-level's base turf
 	var/open_turf // The base turf of the area if it has a turf below it in multizi. Overrides turf-specific open type
@@ -54,7 +57,6 @@ var/global/list/areas = list()
 	var/list/air_scrub_names = list()
 	var/list/air_vent_info = list()
 	var/list/air_scrub_info = list()
-	var/list/blurbed_stated_to = list() //This list of names is here to make sure we don't state our descriptive blurb to a person more than once.
 
 	var/tmp/is_outside = OUTSIDE_NO
 
@@ -65,6 +67,8 @@ var/global/list/areas = list()
 	uid = ++global_uid
 	proper_name = strip_improper(name)
 	luminosity = !dynamic_lighting
+	if(isnull(area_blurb_category))
+		area_blurb_category = type
 	..()
 
 /area/Initialize()
@@ -347,12 +351,10 @@ var/global/list/mob/living/forced_ambiance_list = new
 /area/proc/do_area_blurb(var/mob/living/L)
 	if(isnull(description))
 		return
-
 	if(L?.get_preference_value(/datum/client_preference/area_info_blurb) != PREF_YES)
 		return
-
-	if(!(L.ckey in blurbed_stated_to))
-		blurbed_stated_to += L.ckey
+	if(!(L.ckey in global.area_blurb_stated_to[area_blurb_category]))
+		LAZYADD(global.area_blurb_stated_to[area_blurb_category], L.ckey)
 		to_chat(L, SPAN_NOTICE(FONT_SMALL("[description]")))
 
 /area/proc/play_ambience(var/mob/living/L)
