@@ -19,6 +19,7 @@
 
 /turf/exterior/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	melt()
+	return ..()
 
 /turf/exterior/snow/melt()
 	if(icon_state != "permafrost")

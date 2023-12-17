@@ -201,9 +201,9 @@
 
 // Fire
 /obj/effect/shield/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	SHOULD_CALL_PARENT(FALSE)
 	if(!disabled_for)
 		take_damage(rand(5,10), SHIELD_DAMTYPE_HEAT)
-
 
 // Projectiles
 /obj/effect/shield/bullet_act(var/obj/item/projectile/proj)

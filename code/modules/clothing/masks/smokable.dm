@@ -50,6 +50,7 @@
 
 /obj/item/clothing/mask/smokable/fire_act()
 	light(0)
+	return ..()
 
 /obj/item/clothing/mask/smokable/proc/smoke(amount, manual)
 	smoketime -= amount

@@ -159,6 +159,8 @@
 	if(exposed_temperature >= 900 + T0C)
 		new /obj/effect/decal/cleanable/ash(get_turf(src))
 		qdel(src)
+		return
+	return ..()
 
 //rag must have a minimum of 2 units welder fuel and at least 80% of the reagents must be welder fuel.
 //maybe generalize flammable reagents someday

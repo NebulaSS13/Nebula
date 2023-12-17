@@ -247,5 +247,6 @@
 	fire_act()
 
 /obj/item/shreddedp/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	SHOULD_CALL_PARENT(FALSE)
 	new /obj/effect/decal/cleanable/ash(get_turf(src))
 	physically_destroyed()

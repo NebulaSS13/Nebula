@@ -894,10 +894,9 @@ FIRE ALARM
 			overlays += get_cached_overlay("fire0")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(src.detecting)
-		if(exposed_temperature > T0C+200)
-			src.alarm()			// added check of detector status here
-	return
+	if(detecting && exposed_temperature > T0C+200)
+		alarm()
+	return ..()
 
 /obj/machinery/firealarm/bullet_act()
 	return src.alarm()

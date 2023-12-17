@@ -69,6 +69,8 @@
 	if(exposed_temperature > 300 + T0C)
 		health -= 5
 		healthcheck()
+	if(!QDELETED(src))
+		return ..()
 
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
