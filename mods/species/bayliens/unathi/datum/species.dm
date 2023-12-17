@@ -44,14 +44,6 @@
 	description = "A heavily reptillian species. They prefer warmer temperatures than most species and \
 	their native tongue is a heavy hissing laungage."
 
-	cold_level_1 = 280 //Default 260 - Lower is better
-	cold_level_2 = 220 //Default 200
-	cold_level_3 = 130 //Default 120
-
-	heat_level_1 = 420 //Default 360 - Higher is better
-	heat_level_2 = 480 //Default 400
-	heat_level_3 = 1100 //Default 1000
-
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
 
 	flesh_color = "#34af10"

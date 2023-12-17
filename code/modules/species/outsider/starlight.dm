@@ -43,6 +43,12 @@
 	icon_deformed =    'icons/mob/human_races/species/starborn/body.dmi'
 	husk_icon =        'icons/mob/human_races/species/starborn/husk.dmi'
 	body_flags =       BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	cold_level_1 = 260
+	cold_level_2 = 250
+	cold_level_3 = 235
+	heat_level_1 = 20000
+	heat_level_2 = 30000
+	heat_level_3 = 40000
 
 /decl/blood_type/starstuff
 	name = "starstuff"
@@ -72,16 +78,9 @@
 								"Your fire begins to shrink away from the cold.",
 								"You feel slow and sluggish from the cold."
 								)
-	cold_level_1 = 260
-	cold_level_2 = 250
-	cold_level_3 = 235
-
 	heat_discomfort_level = 10000
 	heat_discomfort_strings = list("Surprisingly, you start burning!",
 									"You're... burning!?!")
-	heat_level_1 = 20000
-	heat_level_2 = 30000
-	heat_level_3 = 40000
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0

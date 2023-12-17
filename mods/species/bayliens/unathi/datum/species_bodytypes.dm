@@ -27,6 +27,14 @@
 
 	default_h_style = /decl/sprite_accessory/hair/lizard/frills_long
 
+	cold_level_1 = 280 //Default 260 - Lower is better
+	cold_level_2 = 220 //Default 200
+	cold_level_3 = 130 //Default 120
+
+	heat_level_1 = 420 //Default 360 - Higher is better
+	heat_level_2 = 480 //Default 400
+	heat_level_3 = 1100 //Default 1000
+
 /decl/bodytype/lizard/masculine
 	name =                   "masculine"
 	icon_base =              'mods/species/bayliens/unathi/icons/body_male.dmi'

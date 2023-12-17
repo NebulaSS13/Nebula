@@ -1377,7 +1377,7 @@
 /mob/proc/get_target_zone()
 	return zone_sel?.selecting
 
-/mob/proc/get_temperature_threshold(var/threshold)
+/mob/proc/get_default_temperature_threshold(threshold)
 	switch(threshold)
 		if(COLD_LEVEL_1)
 			return 243
@@ -1392,7 +1392,22 @@
 		if(HEAT_LEVEL_3)
 			return 1000
 		else
-			CRASH("base get_temperature_threshold() called with invalid threshold value.")
+			CRASH("base get_default_temperature_threshold() called with invalid threshold value.")
+
+/mob/proc/get_mob_temperature_threshold(threshold, bodypart)
+
+	// If we have organs, return the requested organ.
+	if(bodypart)
+		var/obj/item/organ/external/organ = get_organ(bodypart)
+		if(organ?.bodytype)
+			return organ.bodytype.get_body_temperature_threshold(threshold)
+
+	// If we have a bodytype, use that.
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype)
+		return root_bodytype.get_body_temperature_threshold(threshold)
+
+	return get_default_temperature_threshold(threshold)
 
 /mob/proc/get_unique_enzymes()
 	return

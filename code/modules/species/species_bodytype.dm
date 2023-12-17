@@ -168,6 +168,14 @@ var/global/list/bodytypes_by_category = list()
 	/// Stun from blindness modifier.
 	var/eye_flash_mod = 1
 
+	// Bodytype temperature damage thresholds.
+	var/cold_level_1 = 243  // Cold damage level 1 below this point. -30 Celsium degrees
+	var/cold_level_2 = 200  // Cold damage level 2 below this point.
+	var/cold_level_3 = 120  // Cold damage level 3 below this point.
+	var/heat_level_1 = 360  // Heat damage level 1 above this point.
+	var/heat_level_2 = 400  // Heat damage level 2 above this point.
+	var/heat_level_3 = 1000 // Heat damage level 3 above this point.
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
@@ -277,6 +285,31 @@ var/global/list/bodytypes_by_category = list()
 				. += "could not find a species with this bodytype available for tail organ validation"
 		else
 			. += "invalid BP_TAIL type: got [tail_organ], expected /obj/item/organ/external/tail"
+
+	if(cold_level_3)
+		if(cold_level_2)
+			if(cold_level_3 > cold_level_2)
+				. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_2 ([cold_level_2])"
+			if(cold_level_1)
+				if(cold_level_3 > cold_level_1)
+					. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_1 ([cold_level_1])"
+	if(cold_level_2 && cold_level_1)
+		if(cold_level_2 > cold_level_1)
+			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
+
+	if(heat_level_3 != INFINITY)
+		if(heat_level_2 != INFINITY)
+			if(heat_level_3 < heat_level_2)
+				. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_2 ([heat_level_2])"
+			if(heat_level_1 != INFINITY)
+				if(heat_level_3 < heat_level_1)
+					. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_1 ([heat_level_1])"
+	if((heat_level_2 != INFINITY) && (heat_level_1 != INFINITY))
+		if(heat_level_2 < heat_level_1)
+			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
+
+	if(min(heat_level_1, heat_level_2, heat_level_3) <= max(cold_level_1, cold_level_2, cold_level_3))
+		. += "heat and cold damage level thresholds overlap"
 
 /decl/bodytype/proc/max_skin_tone()
 	if(appearance_flags & HAS_SKIN_TONE_GRAV)
@@ -450,8 +483,26 @@ var/global/list/bodytypes_by_category = list()
 		var/obj/item/organ/internal/new_innard = new organ_type(limb.owner, null, limb.owner.dna, src)
 		limb.owner.add_organ(new_innard, GET_EXTERNAL_ORGAN(limb.owner, new_innard.parent_organ), FALSE, FALSE)
 
+/decl/bodytype/proc/get_body_temperature_threshold(var/threshold)
+	switch(threshold)
+		if(COLD_LEVEL_1)
+			return cold_level_1
+		if(COLD_LEVEL_2)
+			return cold_level_2
+		if(COLD_LEVEL_3)
+			return cold_level_3
+		if(HEAT_LEVEL_1)
+			return heat_level_1
+		if(HEAT_LEVEL_2)
+			return heat_level_2
+		if(HEAT_LEVEL_3)
+			return heat_level_3
+		else
+			CRASH("get_species_temperature_threshold() called with invalid threshold value.")
+
 /decl/bodytype/proc/get_user_species_for_validation()
 	for(var/species_name in get_all_species())
 		var/decl/species/species = get_species_by_key(species_name)
 		if(src in species.available_bodytypes)
 			return species_name
+

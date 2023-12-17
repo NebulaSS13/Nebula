@@ -271,16 +271,16 @@
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
 	// Hot air hurts :(
-	var/cold_1 = species.get_species_temperature_threshold(COLD_LEVEL_1)
-	var/heat_1 = species.get_species_temperature_threshold(HEAT_LEVEL_1)
+	var/cold_1 = bodytype.get_body_temperature_threshold(COLD_LEVEL_1)
+	var/heat_1 = bodytype.get_body_temperature_threshold(HEAT_LEVEL_1)
 	if((breath.temperature < cold_1 || breath.temperature > heat_1) && !(MUTATION_COLD_RESISTANCE in owner.mutations))
 		var/damage = 0
 		if(breath.temperature <= cold_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
-			if(breath.temperature < species.get_species_temperature_threshold(COLD_LEVEL_3))
+			if(breath.temperature < bodytype.get_body_temperature_threshold(COLD_LEVEL_3))
 				damage = COLD_GAS_DAMAGE_LEVEL_3
-			else if(breath.temperature < species.get_species_temperature_threshold(COLD_LEVEL_2))
+			else if(breath.temperature < bodytype.get_body_temperature_threshold(COLD_LEVEL_2))
 				damage = COLD_GAS_DAMAGE_LEVEL_2
 			else
 				damage = COLD_GAS_DAMAGE_LEVEL_1
@@ -294,9 +294,9 @@
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
-			if(breath.temperature < species.get_species_temperature_threshold(HEAT_LEVEL_2))
+			if(breath.temperature < bodytype.get_body_temperature_threshold(HEAT_LEVEL_2))
 				damage = HEAT_GAS_DAMAGE_LEVEL_1
-			else if(breath.temperature < species.get_species_temperature_threshold(HEAT_LEVEL_3))
+			else if(breath.temperature < bodytype.get_body_temperature_threshold(HEAT_LEVEL_3))
 				damage = HEAT_GAS_DAMAGE_LEVEL_2
 			else
 				damage = HEAT_GAS_DAMAGE_LEVEL_3

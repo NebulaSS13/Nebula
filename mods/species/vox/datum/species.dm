@@ -62,10 +62,6 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 
-	cold_level_1 = 80
-	cold_level_2 = 50
-	cold_level_3 = -1
-
 	age_descriptor = /datum/appearance_descriptor/age/vox
 
 	preview_outfit = /decl/hierarchy/outfit/vox_raider

@@ -27,12 +27,6 @@
 	warning_low_pressure =  50
 	hazard_low_pressure =  -1
 	flesh_color =           COLOR_GUNMETAL
-	cold_level_1 =          SYNTH_COLD_LEVEL_1
-	cold_level_2 =          SYNTH_COLD_LEVEL_2
-	cold_level_3 =          SYNTH_COLD_LEVEL_3
-	heat_level_1 =          SYNTH_HEAT_LEVEL_1
-	heat_level_2 =          SYNTH_HEAT_LEVEL_2
-	heat_level_3 =          SYNTH_HEAT_LEVEL_3
 	body_temperature =      null
 	passive_temp_gain =     5  // stabilize at ~80 C in a 20 C environment.
 	heat_discomfort_level = 373.15

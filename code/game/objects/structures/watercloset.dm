@@ -335,9 +335,9 @@ var/global/list/hygiene_props = list()
 	M.bodytemperature += temp_adj
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(water_temperature >= H.get_temperature_threshold(HEAT_LEVEL_1))
+		if(water_temperature >= H.get_mob_temperature_threshold(HEAT_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is searing hot!"))
-		else if(water_temperature <= H.get_temperature_threshold(COLD_LEVEL_1))
+		else if(water_temperature <= H.get_mob_temperature_threshold(COLD_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is freezing cold!"))
 
 /obj/item/bikehorn/rubberducky

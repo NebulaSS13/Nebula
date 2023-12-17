@@ -1141,30 +1141,6 @@ default behaviour is:
 /mob/living/proc/get_seconds_until_next_special_ability_string()
 	return ticks2readable(next_special_ability - world.time)
 
-//Get species or synthetic temp if the mob is a FBP/robot. Used when a synthetic mob is exposed to a temp check.
-//Essentially, used when a synthetic mob should act diffferently than a normal type mob.
-/mob/living/get_temperature_threshold(var/threshold)
-	if(isSynthetic())
-		switch(threshold)
-			if(COLD_LEVEL_1)
-				return SYNTH_COLD_LEVEL_1
-			if(COLD_LEVEL_2)
-				return SYNTH_COLD_LEVEL_2
-			if(COLD_LEVEL_3)
-				return SYNTH_COLD_LEVEL_3
-			if(HEAT_LEVEL_1)
-				return SYNTH_HEAT_LEVEL_1
-			if(HEAT_LEVEL_2)
-				return SYNTH_HEAT_LEVEL_2
-			if(HEAT_LEVEL_3)
-				return SYNTH_HEAT_LEVEL_3
-			else
-				CRASH("synthetic get_temperature_threshold() called with invalid threshold value.")
-	var/decl/species/my_species = get_species()
-	if(my_species)
-		return my_species.get_species_temperature_threshold(threshold)
-	return ..()
-
 /mob/living/proc/handle_some_updates()
 	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 	return life_tick <= 5 || !timeofdeath || (timeofdeath >= 5 && (world.time-timeofdeath) <= 10 MINUTES)
@@ -1299,3 +1275,22 @@ default behaviour is:
 //Useful when player is being seen by other mobs
 /mob/living/proc/get_id_name(if_no_id = "Unknown")
 	return GetIdCard(exceptions = list(/obj/item/holder))?.registered_name || if_no_id
+
+/mob/living/get_default_temperature_threshold(threshold)
+	if(isSynthetic())
+		switch(threshold)
+			if(COLD_LEVEL_1)
+				return SYNTH_COLD_LEVEL_1
+			if(COLD_LEVEL_2)
+				return SYNTH_COLD_LEVEL_2
+			if(COLD_LEVEL_3)
+				return SYNTH_COLD_LEVEL_3
+			if(HEAT_LEVEL_1)
+				return SYNTH_HEAT_LEVEL_1
+			if(HEAT_LEVEL_2)
+				return SYNTH_HEAT_LEVEL_2
+			if(HEAT_LEVEL_3)
+				return SYNTH_HEAT_LEVEL_3
+			else
+				CRASH("synthetic get_default_temperature_threshold() called with invalid threshold value.")
+	return ..()
