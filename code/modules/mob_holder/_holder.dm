@@ -99,10 +99,12 @@
 		return loc.loc
 	return ..()
 
-/obj/item/holder/GetIdCards()
+/obj/item/holder/GetIdCards(list/exceptions)
 	. = ..()
 	for(var/mob/M in contents)
-		LAZYDISTINCTADD(., M.GetIdCards())
+		var/list/cards = M.GetIdCards(exceptions)
+		if(length(cards))
+			LAZYDISTINCTADD(., cards)
 
 /obj/item/holder/attack_self()
 	for(var/mob/M in contents)
