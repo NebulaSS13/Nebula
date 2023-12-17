@@ -77,20 +77,20 @@
 				var/decl/cultural_info/culture = man.get_cultural_value(TAG_FACTION)
 				if(culture && prob(culture.subversive_potential))
 					dudes += man
-			dudes -= player
+			dudes -= player.current
 
-		if(LAZYLEN(dudes))
+		if(length(dudes))
 			var/mob/living/carbon/human/M = pick(dudes)
-			to_chat(player, "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them.")
+			to_chat(player.current, "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them.")
 			player.StoreMemory("<b>Potential Collaborator</b>: [M.real_name]", /decl/memory_options/system)
 			to_chat(M, "<span class='warning'>The subversive potential of your faction has been noticed, and you may be contacted for assistance soon...</span>")
 
-		to_chat(player, "<u><b>Your employers provided you with the following information on how to identify possible allies:</b></u>")
-		to_chat(player, "<b>Code Phrase</b>: <span class='danger'>[syndicate_code_phrase]</span>")
-		to_chat(player, "<b>Code Response</b>: <span class='danger'>[syndicate_code_response]</span>")
+		to_chat(player.current, "<u><b>Your employers provided you with the following information on how to identify possible allies:</b></u>")
+		to_chat(player.current, "<b>Code Phrase</b>: <span class='danger'>[syndicate_code_phrase]</span>")
+		to_chat(player.current, "<b>Code Response</b>: <span class='danger'>[syndicate_code_response]</span>")
 		player.StoreMemory("<b>Code Phrase</b>: [syndicate_code_phrase]", /decl/memory_options/system)
 		player.StoreMemory("<b>Code Response</b>: [syndicate_code_response]", /decl/memory_options/system)
-		to_chat(player, "Use the code words, preferably in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe.")
+		to_chat(player.current, "Use the code words, preferably in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe.")
 
 /decl/special_role/traitor/equip_role(var/mob/living/carbon/human/player)
 
