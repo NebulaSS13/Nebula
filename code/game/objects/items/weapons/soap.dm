@@ -12,7 +12,7 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
-	material = /decl/material/liquid/cleaner
+	material = /decl/material/liquid/cleaner/soap
 	max_health = 5
 	var/key_data
 
@@ -105,13 +105,15 @@
 
 /obj/item/soap/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/key))
-		if(!key_data)
+		if(key_data)
+			to_chat(user, SPAN_WARNING("\The [src] already has a key imprint."))
+		else
 			to_chat(user, SPAN_NOTICE("You imprint \the [I] into \the [src]."))
 			var/obj/item/key/K = I
 			key_data = K.key_data
 			update_icon()
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/soap/on_update_icon()
 	. = ..()

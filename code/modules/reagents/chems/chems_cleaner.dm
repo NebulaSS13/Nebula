@@ -9,3 +9,14 @@
 	turf_touch_threshold = 0.1
 	uid = "chem_cleaner"
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
+
+/decl/material/liquid/cleaner/soap
+	name = "soap"
+	lore_text = "A soft solid compound used to clean things. Usually derived from oil or fat."
+	taste_description = "waxy blandness"
+	color = COLOR_BEIGE
+	uid = "chem_soap"
+	melting_point    = 323
+	ignition_point   = 353
+	boiling_point    = 373
+	accelerant_value = 0.3

@@ -12,13 +12,14 @@
 
 	// Technically a room-temperature solid, but saves
 	// repathing it to /solid all over the codebase.
-	melting_point  = 323
-	ignition_point = 353
-	boiling_point  = 373
+	melting_point    = 323
+	ignition_point   = 353
+	boiling_point    = 373
+	accelerant_value =   0.65
 
 	var/nutriment_factor = 10 // Per unit
 	var/hydration_factor = 0 // Per unit
-	var/injectable = 0
+	var/injectable       = FALSE
 
 /decl/material/liquid/nutriment/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
 
