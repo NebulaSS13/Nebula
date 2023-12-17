@@ -119,19 +119,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE               // Dangerously low pressure.
 	var/body_temperature = 310.15	                            // Species will try to stabilize at this temperature.
 	                                                            // (also affects temperature processing)
-	var/heat_discomfort_level = 315                             // Aesthetic messages about feeling warm.
-	var/cold_discomfort_level = 285                             // Aesthetic messages about feeling chilly.
-	var/list/heat_discomfort_strings = list(
-		"You feel sweat drip down your neck.",
-		"You feel uncomfortably warm.",
-		"Your skin prickles in the heat."
-		)
-	var/list/cold_discomfort_strings = list(
-		"You feel chilly.",
-		"You shiver suddenly.",
-		"Your chilly flesh stands out in goosebumps."
-		)
-
 	var/water_soothe_amount
 
 	// HUD data vars.

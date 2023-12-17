@@ -262,6 +262,8 @@
 	if(status & ORGAN_DEAD)
 		to_chat(user, "<span class='notice'>The decay has set into \the [src].</span>")
 
+// TODO: bodytemp rework that handles this with better respect to
+// individual organs vs. expected body temperature for other organs.
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
 	var/germ_immunity = owner.get_immunity() //reduces the amount of times we need to call this proc

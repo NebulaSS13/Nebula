@@ -35,6 +35,20 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
+	heat_discomfort_level = 320
+	heat_discomfort_strings = list(
+		"You feel soothingly warm.",
+		"You feel the heat sink into your bones.",
+		"You feel warm enough to take a nap."
+	)
+
+	cold_discomfort_level = 292
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your scales bristle against the cold."
+	)
+
 /decl/bodytype/lizard/masculine
 	name =                   "masculine"
 	icon_base =              'mods/species/bayliens/unathi/icons/body_male.dmi'

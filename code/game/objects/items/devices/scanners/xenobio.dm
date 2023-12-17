@@ -50,7 +50,9 @@
 		var/decl/material/mat = GET_DECL(species.exhale_type)
 		. += "Exhales:\t[mat.gas_name]"
 	. += "Known toxins:\t[english_list(species.poison_types)]"
-	. += "Temperature comfort zone:\t[species.cold_discomfort_level] K to [species.heat_discomfort_level] K"
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype)
+		. += "Temperature comfort zone:\t[root_bodytype.cold_discomfort_level] K to [root_bodytype.heat_discomfort_level] K"
 	. += "Pressure comfort zone:\t[species.warning_low_pressure] kPa to [species.warning_high_pressure] kPa"
 	. = jointext(., "<br>")
 

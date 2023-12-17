@@ -37,6 +37,14 @@
 	heat_level_2 = 380
 	heat_level_3 = 800
 
+	heat_discomfort_level = 294
+	cold_discomfort_level = 230
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+	)
+
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(
 		slot_glasses_str =   list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2)),

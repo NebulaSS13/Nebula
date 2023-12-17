@@ -54,15 +54,6 @@
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
-	heat_discomfort_level = 294
-	cold_discomfort_level = 230
-
-	heat_discomfort_strings = list(
-		"Your fur prickles in the heat.",
-		"You feel uncomfortably warm.",
-		"Your overheated skin itches."
-	)
-
 	available_cultural_info = list(
 		TAG_CULTURE = list(
 			/decl/cultural_info/culture/tajaran,

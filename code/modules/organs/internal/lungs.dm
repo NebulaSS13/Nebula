@@ -322,10 +322,14 @@
 //		log_debug("Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]")
 		owner.bodytemperature += temp_adj
 
-	else if(breath.temperature >= species.heat_discomfort_level)
-		species.get_environment_discomfort(owner,"heat")
-	else if(breath.temperature <= species.cold_discomfort_level)
-		species.get_environment_discomfort(owner,"cold")
+	else
+		// Get root bodytype as discomfort messages are not specifically related to the lungs.
+		var/decl/bodytype/root_bodytype = owner?.get_bodytype() || bodytype
+		if(root_bodytype)
+			if(breath.temperature >= root_bodytype.heat_discomfort_level)
+				root_bodytype.get_environment_discomfort(owner,"heat")
+			else if(breath.temperature <= root_bodytype.cold_discomfort_level)
+				root_bodytype.get_environment_discomfort(owner,"cold")
 
 /obj/item/organ/internal/lungs/listen()
 	if(owner.failed_last_breath || !active_breathing)

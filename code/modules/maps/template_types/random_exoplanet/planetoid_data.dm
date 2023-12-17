@@ -486,7 +486,7 @@
 	if(habitability_class == HABITABILITY_OKAY || habitability_class == HABITABILITY_IDEAL)
 		var/decl/species/S = global.get_species_by_key(global.using_map.default_species)
 		if(habitability_class == HABITABILITY_IDEAL)
-			. = clamp(., S.cold_discomfort_level + rand(1,5), S.heat_discomfort_level - rand(1,5)) //Clamp between comfortable levels since we're ideal
+			. = clamp(., S.default_bodytype.cold_discomfort_level + rand(1,5), S.default_bodytype.heat_discomfort_level - rand(1,5)) //Clamp between comfortable levels since we're ideal
 		else
 			. = clamp(., S.default_bodytype.cold_level_1 + 1, S.default_bodytype.heat_level_1 - 1) //clamp between values species starts taking damages at
 

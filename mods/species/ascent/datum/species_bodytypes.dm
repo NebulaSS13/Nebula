@@ -31,6 +31,17 @@
 	)
 	limb_mapping = list(BP_CHEST = list(BP_CHEST, BP_M_HAND))
 
+	heat_discomfort_strings = list(
+		"You feel brittle and overheated.",
+		"Your overheated carapace flexes uneasily.",
+		"Overheated ichor trickles from your eyes."
+	)
+	cold_discomfort_strings = list(
+		"Frost forms along your carapace.",
+		"You hear a faint crackle of ice as you shift your freezing body.",
+		"Your movements become sluggish under the weight of the chilly conditions."
+	)
+
 /decl/bodytype/crystalline/mantid/alate
 	name =              "alate"
 	bodytype_category = BODYTYPE_MANTID_SMALL

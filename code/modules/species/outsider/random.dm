@@ -22,6 +22,8 @@
 	heat_level_1 += temp_comfort_shift
 	heat_level_2 += temp_comfort_shift
 	heat_level_3 += temp_comfort_shift
+	heat_discomfort_level += temp_comfort_shift
+	cold_discomfort_level += temp_comfort_shift
 	. = ..()
 
 /decl/species/alium
@@ -81,9 +83,6 @@
 
 	//Environment
 	var/temp_comfort_shift = rand(-50,50)
-	heat_discomfort_level += temp_comfort_shift
-	cold_discomfort_level += temp_comfort_shift
-
 	body_temperature += temp_comfort_shift
 
 	var/pressure_comfort_shift = rand(-50,50)

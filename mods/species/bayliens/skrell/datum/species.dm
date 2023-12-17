@@ -56,10 +56,6 @@
 		/decl/blood_type/skrell/noplus,
 		/decl/blood_type/skrell/nominus
 	)
-
-	cold_discomfort_level = 292 //Higher than perhaps it should be, to avoid big speed reduction at normal room temp
-	heat_discomfort_level = 368
-
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 1,
 		/datum/appearance_descriptor/build = 0.8,

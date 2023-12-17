@@ -55,8 +55,9 @@
 	if(facing_dir)
 		tally += 3 // Locking direction will slow you down.
 
-	if (bodytemperature < species.cold_discomfort_level)
-		tally += (species.cold_discomfort_level - bodytemperature) / 10 * 1.75
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if (root_bodytype && bodytemperature < root_bodytype.cold_discomfort_level)
+		tally += (root_bodytype.cold_discomfort_level - bodytemperature) / 10 * 1.75
 
 	tally += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow
 

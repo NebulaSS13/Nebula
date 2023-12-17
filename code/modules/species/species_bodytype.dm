@@ -176,6 +176,22 @@ var/global/list/bodytypes_by_category = list()
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000 // Heat damage level 3 above this point.
 
+	// Temperature comfort levels and strings.
+	var/heat_discomfort_level = 315
+	var/cold_discomfort_level = 285
+	/// Aesthetic messages about feeling warm.
+	var/list/heat_discomfort_strings = list(
+		"You feel sweat drip down your neck.",
+		"You feel uncomfortably warm.",
+		"Your skin prickles in the heat."
+	)
+	/// Aesthetic messages about feeling chilly.
+	var/list/cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddenly.",
+		"Your chilly flesh stands out in goosebumps."
+	)
+
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
@@ -499,6 +515,28 @@ var/global/list/bodytypes_by_category = list()
 			return heat_level_3
 		else
 			CRASH("get_species_temperature_threshold() called with invalid threshold value.")
+
+/decl/bodytype/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
+
+	if(!prob(5))
+		return
+
+	var/covered = 0 // Basic coverage can help.
+	var/held_items = H.get_held_items()
+	for(var/obj/item/clothing/clothes in H)
+		if(clothes in held_items)
+			continue
+		if((clothes.body_parts_covered & SLOT_UPPER_BODY) && (clothes.body_parts_covered & SLOT_LOWER_BODY))
+			covered = 1
+			break
+
+	switch(msg_type)
+		if("cold")
+			if(!covered && length(cold_discomfort_strings))
+				to_chat(H, SPAN_DANGER(pick(cold_discomfort_strings)))
+		if("heat")
+			if(covered && length(heat_discomfort_strings))
+				to_chat(H, SPAN_DANGER(pick(heat_discomfort_strings)))
 
 /decl/bodytype/proc/get_user_species_for_validation()
 	for(var/species_name in get_all_species())
