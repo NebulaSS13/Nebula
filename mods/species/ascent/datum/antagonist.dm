@@ -7,7 +7,6 @@
 	and remove anything that might threaten your progeny."
 	welcome_text = "You are an alate of the Ascent, tasked with ridding this sector of whatever your matriarch directs you to, \
 	preparing it for the foundation of a new fortress-nest. Obey your gyne and bring prosperity to your nest-lineage."
-	leader_welcome_text
 	antaghud_indicator = "hudhunter"
 	antag_indicator = "hudhunter"
 	hard_cap = 10
