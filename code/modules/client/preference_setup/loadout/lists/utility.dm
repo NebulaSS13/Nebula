@@ -67,7 +67,7 @@
 /decl/loadout_option/utility/umbrella
 	name = "umbrella"
 	path = /obj/item/umbrella
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/utility/knives/get_gear_tweak_options()
 	. = ..()

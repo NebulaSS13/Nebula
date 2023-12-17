@@ -66,5 +66,5 @@
 	UW.icon_state = icon_state
 
 	for(var/datum/gear_tweak/gt in tweaks)
-		gt.tweak_item(user, UW, metadata && metadata["[gt]"] ? metadata["[gt]"] : gt.get_default())
+		gt.tweak_item(user, UW, ((metadata && metadata["[gt]"]) ? metadata["[gt]"] : gt.get_default()))
 	return UW
