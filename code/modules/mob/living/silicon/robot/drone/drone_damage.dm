@@ -20,7 +20,7 @@
 /mob/living/silicon/robot/drone/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
 	take_overall_damage(brute, burn)
 
-/mob/living/silicon/robot/drone/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
+/mob/living/silicon/robot/drone/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
 	heal_overall_damage(brute, burn)
 
 /mob/living/silicon/robot/drone/getFireLoss()

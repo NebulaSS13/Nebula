@@ -188,7 +188,7 @@ default behaviour is:
 	set hidden = 1
 	var/current_max_health = get_max_health()
 	if (current_health < (current_max_health/2)) // Health below half of maxhealth.
-		adjustBrainLoss(current_max_health * 2, do_update_health = TRUE) // Deal 2x health in BrainLoss damage, as before but variable.
+		adjustBrainLoss(current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
 		to_chat(src, SPAN_NOTICE("You have given up life and succumbed to death."))
 
 /mob/living/proc/update_body(var/update_icons=1)
@@ -249,7 +249,7 @@ default behaviour is:
 /mob/living/proc/getBruteLoss()
 	return get_max_health() - current_health
 
-/mob/living/proc/adjustBruteLoss(var/amount, var/do_update_health = FALSE)
+/mob/living/proc/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(do_update_health)
 		update_health()
@@ -257,7 +257,7 @@ default behaviour is:
 /mob/living/proc/getOxyLoss()
 	return 0
 
-/mob/living/proc/adjustOxyLoss(var/damage, var/do_update_health)
+/mob/living/proc/adjustOxyLoss(var/damage, var/do_update_health = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(do_update_health)
 		update_health()
@@ -268,7 +268,7 @@ default behaviour is:
 /mob/living/proc/getToxLoss()
 	return 0
 
-/mob/living/proc/adjustToxLoss(var/amount, var/do_update_health)
+/mob/living/proc/adjustToxLoss(var/amount, var/do_update_health = TRUE)
 	adjustBruteLoss(amount * 0.5, do_update_health)
 
 /mob/living/proc/setToxLoss(var/amount)
@@ -277,7 +277,7 @@ default behaviour is:
 /mob/living/proc/getFireLoss()
 	return
 
-/mob/living/proc/adjustFireLoss(var/amount, var/do_update_health)
+/mob/living/proc/adjustFireLoss(var/amount, var/do_update_health = TRUE)
 	adjustBruteLoss(amount * 0.5, do_update_health)
 
 /mob/living/proc/setFireLoss(var/amount)
@@ -286,13 +286,13 @@ default behaviour is:
 /mob/living/proc/getHalLoss()
 	return 0
 
-/mob/living/proc/adjustHalLoss(var/amount)
-	adjustBruteLoss(amount * 0.5)
+/mob/living/proc/adjustHalLoss(var/amount, var/do_update_health = TRUE)
+	adjustBruteLoss(amount * 0.5, do_update_health)
 
 /mob/living/proc/setHalLoss(var/amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
-/mob/living/proc/adjustBrainLoss(var/amount, var/do_update_health)
+/mob/living/proc/adjustBrainLoss(var/amount, var/do_update_health = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(do_update_health)
 		update_health()
@@ -306,8 +306,10 @@ default behaviour is:
 /mob/living/proc/setCloneLoss(var/amount)
 	return
 
-/mob/living/proc/adjustCloneLoss(var/amount)
-	return
+/mob/living/proc/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(do_update_health)
+		update_health()
 
 /mob/living/proc/get_health_ratio() // ratio might be the wrong word
 	return current_health/get_max_health()
@@ -368,27 +370,27 @@ default behaviour is:
 
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
-	adjustBruteLoss(-brute)
-	adjustFireLoss(-burn, do_update_health = TRUE)
+/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
+	adjustBruteLoss(-brute, do_update_health = FALSE)
+	adjustFireLoss(-burn, do_update_health = update_health)
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
 	if(status_flags & GODMODE)
 		return
-	adjustBruteLoss(brute)
-	adjustFireLoss(burn, do_update_health = TRUE)
+	adjustBruteLoss(brute, do_update_health = FALSE)
+	adjustFireLoss(burn)
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
-	adjustBruteLoss(-brute)
-	adjustFireLoss(-burn, do_update_health = TRUE)
+	adjustBruteLoss(-brute, do_update_health = FALSE)
+	adjustFireLoss(-burn)
 
 // damage MANY external organs, in random order
 /mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
 	if(status_flags & GODMODE)	return 0	//godmode
-	adjustBruteLoss(brute)
-	adjustFireLoss(burn, do_update_health = TRUE)
+	adjustBruteLoss(brute, do_update_health = FALSE)
+	adjustFireLoss(burn)
 
 /mob/living/proc/restore_all_organs()
 	return

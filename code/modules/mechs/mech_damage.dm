@@ -86,13 +86,13 @@
 /mob/living/exosuit/get_total_life_damage()
 	return (getFireLoss()+getBruteLoss())
 
-/mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)), var/do_update_health)
+/mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)), var/do_update_health = TRUE)
 	if(MC)
 		MC.take_burn_damage(amount)
 		if(do_update_health)
 			update_health() // TODO: unify these procs somehow instead of having weird brute-wrapping behavior as the default.
 
-/mob/living/exosuit/adjustBruteLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)), var/do_update_health)
+/mob/living/exosuit/adjustBruteLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)), var/do_update_health = TRUE)
 	if(MC)
 		MC.take_brute_damage(amount)
 	..()
@@ -145,9 +145,9 @@
 	//Only 3 types of damage concern mechs and vehicles
 	switch(damagetype)
 		if(BRUTE)
-			adjustBruteLoss(damage, target, do_update_health = TRUE)
+			adjustBruteLoss(damage, target)
 		if(BURN)
-			adjustFireLoss(damage, target, do_update_health = TRUE)
+			adjustFireLoss(damage, target)
 		if(IRRADIATE)
 			for(var/mob/living/pilot in pilots)
 				pilot.apply_damage(damage, IRRADIATE, def_zone, damage_flags, used_weapon)

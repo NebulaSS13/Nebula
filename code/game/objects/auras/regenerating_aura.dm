@@ -5,8 +5,8 @@
 	var/tox_mult = 1
 
 /obj/aura/regenerating/life_tick()
-	user.adjustBruteLoss(-brute_mult)
-	user.adjustFireLoss(-fire_mult)
+	user.adjustBruteLoss(-brute_mult, do_update_health = FALSE)
+	user.adjustFireLoss(-fire_mult, do_update_health = FALSE)
 	user.adjustToxLoss(-tox_mult)
 
 /obj/aura/regenerating/human
@@ -35,15 +35,21 @@
 		low_nut_warning()
 		return 0
 
+	var/update_health = FALSE
 	if(brute_mult && H.getBruteLoss())
-		H.adjustBruteLoss(-brute_mult * config.organ_regeneration_multiplier)
+		update_health = TRUE
+		H.adjustBruteLoss(-brute_mult * config.organ_regeneration_multiplier, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(fire_mult && H.getFireLoss())
-		H.adjustFireLoss(-fire_mult * config.organ_regeneration_multiplier)
+		update_health = TRUE
+		H.adjustFireLoss(-fire_mult * config.organ_regeneration_multiplier, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(tox_mult && H.getToxLoss())
-		H.adjustToxLoss(-tox_mult * config.organ_regeneration_multiplier)
+		update_health = TRUE
+		H.adjustToxLoss(-tox_mult * config.organ_regeneration_multiplier, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
+	if(update_health)
+		H.update_health()
 
 	if(!can_regenerate_organs())
 		return 1

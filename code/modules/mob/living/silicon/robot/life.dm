@@ -29,9 +29,9 @@
 /mob/living/silicon/robot/proc/clamp_values()
 	set_status(STAT_PARA, min(GET_STATUS(src, STAT_PARA), 30))
 	set_status(STAT_ASLEEP, 0)
-	adjustBruteLoss(0)
-	adjustToxLoss(0)
-	adjustOxyLoss(0)
+	adjustBruteLoss(0, do_update_health = FALSE)
+	adjustToxLoss(0, do_update_health = FALSE)
+	adjustOxyLoss(0, do_update_health = FALSE)
 	adjustFireLoss(0)
 
 /mob/living/silicon/robot/proc/use_power()

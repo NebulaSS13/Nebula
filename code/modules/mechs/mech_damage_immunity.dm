@@ -14,7 +14,7 @@
 /mob/living/exosuit/setOxyLoss()
 	return 0
 
-/mob/living/exosuit/adjustOxyLoss(var/damage, var/do_update_health)
+/mob/living/exosuit/adjustOxyLoss(var/damage, var/do_update_health = TRUE)
 	SHOULD_CALL_PARENT(FALSE)
 	return 0
 
@@ -24,7 +24,7 @@
 /mob/living/exosuit/setToxLoss()
 	return 0
 
-/mob/living/exosuit/adjustToxLoss(var/amount, var/do_update_health)
+/mob/living/exosuit/adjustToxLoss(var/amount, var/do_update_health = TRUE)
 	return 0
 
 /mob/living/exosuit/getBrainLoss()
@@ -33,7 +33,7 @@
 /mob/living/exosuit/setBrainLoss()
 	return 0
 
-/mob/living/exosuit/adjustBrainLoss(var/amount, var/do_update_health)
+/mob/living/exosuit/adjustBrainLoss(var/amount, var/do_update_health = TRUE)
 	SHOULD_CALL_PARENT(FALSE)
 	return 0
 
@@ -43,7 +43,8 @@
 /mob/living/exosuit/setCloneLoss()
 	return 0
 
-/mob/living/exosuit/adjustCloneLoss()
+/mob/living/exosuit/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(FALSE)
 	return 0
 
 /mob/living/exosuit/getHalLoss()
@@ -52,5 +53,6 @@
 /mob/living/exosuit/setHalLoss()
 	return 0
 
-/mob/living/exosuit/adjustHalLoss()
+/mob/living/exosuit/adjustHalLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(FALSE)
 	return 0

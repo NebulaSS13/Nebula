@@ -268,7 +268,7 @@ var/global/list/possible_say_verbs = list(
 		return
 	if(W.force)
 		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
-		adjustBruteLoss(W.force, do_update_health = TRUE)
+		adjustBruteLoss(W.force)
 	else
 		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 

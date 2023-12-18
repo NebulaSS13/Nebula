@@ -49,7 +49,7 @@
 /mob/living/slime/get_digestion_product()
 	return /decl/material/liquid/slimejelly
 
-/mob/living/slime/adjustToxLoss(var/amount, var/do_update_health)
+/mob/living/slime/adjustToxLoss(var/amount, var/do_update_health = TRUE)
 	toxloss = clamp(toxloss + amount, 0, get_max_health())
 	if(do_update_health)
 		update_health()
@@ -160,7 +160,7 @@
 
 		stat(null,"Power Level: [powerlevel]")
 
-/mob/living/slime/adjustFireLoss(amount, do_update_health)
+/mob/living/slime/adjustFireLoss(amount, do_update_health = TRUE)
 	..(-abs(amount), do_update_health) // Heals them
 
 /mob/living/slime/bullet_act(var/obj/item/projectile/Proj)

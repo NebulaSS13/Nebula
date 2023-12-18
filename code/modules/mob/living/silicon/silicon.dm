@@ -143,9 +143,9 @@
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
 			if(BRUTE)
-				adjustBruteLoss(Proj.damage, do_update_health = TRUE)
+				adjustBruteLoss(Proj.damage)
 			if(BURN)
-				adjustFireLoss(Proj.damage, do_update_health = TRUE)
+				adjustFireLoss(Proj.damage)
 	Proj.on_hit(src,100) //wow this is a terrible hack
 	return 100
 

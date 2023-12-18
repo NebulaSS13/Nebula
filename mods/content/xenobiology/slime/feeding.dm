@@ -102,8 +102,8 @@
 			gain_nutrition(drained)
 			var/heal_amt = FLOOR(drained*0.5)
 			if(heal_amt > 0)
-				adjustOxyLoss(-heal_amt)
-				adjustBruteLoss(-heal_amt)
+				adjustOxyLoss(-heal_amt, do_update_health = FALSE)
+				adjustBruteLoss(-heal_amt, do_update_health = FALSE)
 				adjustCloneLoss(-heal_amt)
 
 	if(ate_victim && feed_mob)

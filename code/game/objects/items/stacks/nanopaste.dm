@@ -17,8 +17,8 @@
 		var/mob/living/silicon/robot/R = M
 		if (R.getBruteLoss() || R.getFireLoss() )
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			R.adjustBruteLoss(-15)
-			R.adjustFireLoss(-15, do_update_health = TRUE)
+			R.adjustBruteLoss(-15, do_update_health = FALSE)
+			R.adjustFireLoss(-15)
 			use(1)
 			user.visible_message("<span class='notice'>\The [user] applied some [src] on [R]'s damaged areas.</span>",\
 				"<span class='notice'>You apply some [src] at [R]'s damaged areas.</span>")

@@ -52,7 +52,7 @@
 	if(damage >= 3)
 		respond_to_damage()
 
-/mob/living/simple_animal/opossum/adjustFireLoss(damage, do_update_health)
+/mob/living/simple_animal/opossum/adjustFireLoss(damage, do_update_health = TRUE)
 	. = ..()
 	if(damage >= 3)
 		respond_to_damage()

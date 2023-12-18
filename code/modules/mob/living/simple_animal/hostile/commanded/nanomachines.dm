@@ -65,7 +65,7 @@
 		return 0
 	src.visible_message("\The [src] glows green for a moment, healing \the [target_mob]'s wounds.")
 	adjustBruteLoss(3)
-	target_mob.adjustBruteLoss(-5)
+	target_mob.adjustBruteLoss(-5, do_update_health = FALSE)
 	target_mob.adjustFireLoss(-5)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/misc_command(var/mob/speaker,var/text)

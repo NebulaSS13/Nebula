@@ -40,8 +40,8 @@
 				if(amount > 0)
 					H.adjust_blood(amount)
 					continue
-			L.adjustBruteLoss(-5)
-			L.adjustFireLoss(-2.5)
+			L.adjustBruteLoss(-5, do_update_health = FALSE)
+			L.adjustFireLoss(-2.5, do_update_health = FALSE)
 			L.adjustToxLoss(-2.5)
 
 /obj/item/projectile/beam/blood_effect

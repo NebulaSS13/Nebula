@@ -17,11 +17,11 @@
 			if(1 to 49)
 				radiation--
 				if(prob(25))
-					adjustToxLoss(1, do_update_health = TRUE)
+					adjustToxLoss(1)
 
 			if(50 to 74)
 				radiation -= 2
-				adjustToxLoss(1, do_update_health = TRUE)
+				adjustToxLoss(1)
 				if(prob(5))
 					radiation -= 5
 					if(!container)
@@ -31,7 +31,7 @@
 
 			if(75 to 100)
 				radiation -= 3
-				adjustToxLoss(3, do_update_health = TRUE)
+				adjustToxLoss(3)
 
 /mob/living/carbon/brain/handle_environment(datum/gas_mixture/environment)
 	..()
@@ -89,11 +89,11 @@
 				if(!alert)//Sounds an alarm, but only once per 'level'
 					emote("alarm")
 					to_chat(src, "<span class='warning'>Major electrical distruption detected: System rebooting.</span>")
-					alert = 1
+					alert = TRUE
 				if(prob(75))
 					emp_damage -= 1
 			if(20)
-				alert = 0
+				alert = FALSE
 				set_status(STAT_BLIND,   0)
 				set_status(STAT_DEAF,    0)
 				set_status(STAT_SILENCE, 0)
@@ -104,11 +104,11 @@
 				if(!alert)
 					emote("alert")
 					to_chat(src, "<span class='warning'>Primary systems are now online.</span>")
-					alert = 1
+					alert = TRUE
 				if(prob(50))
 					emp_damage -= 1
 			if(10)
-				alert = 0
+				alert = FALSE
 				set_status(STAT_BLURRY, 0)
 				set_status(STAT_TINNITUS, 0)
 				emp_damage -= 1
@@ -116,11 +116,11 @@
 				if(!alert)
 					emote("notice")
 					to_chat(src, "<span class='warning'>System reboot nearly complete.</span>")
-					alert = 1
+					alert = TRUE
 				if(prob(25))
 					emp_damage -= 1
 			if(1)
-				alert = 0
+				alert = FALSE
 				to_chat(src, "<span class='warning'>All systems restored.</span>")
 				emp_damage -= 1
 	return 1

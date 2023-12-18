@@ -50,7 +50,7 @@
 	timer--
 	for(var/mob/living/M in src) //Go-go gadget stasis field
 		M.setToxLoss(intialTox)
-		M.adjustFireLoss(intialFire - M.getFireLoss())
+		M.adjustFireLoss(intialFire - M.getFireLoss(), do_update_health = FALSE)
 		M.adjustBruteLoss(intialBrute - M.getBruteLoss())
 		M.setOxyLoss(intialOxy)
 	if (timer <= 0)

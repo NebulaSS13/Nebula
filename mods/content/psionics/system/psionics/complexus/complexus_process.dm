@@ -241,8 +241,8 @@
 
 	// Heal everything left.
 	if(heal_general && prob(mend_prob) && (owner.getBruteLoss() || owner.getFireLoss() || owner.getOxyLoss()) && spend_power(heal_rate))
-		owner.adjustBruteLoss(-(heal_rate))
-		owner.adjustFireLoss(-(heal_rate))
+		owner.adjustBruteLoss(-(heal_rate), do_update_health = FALSE)
+		owner.adjustFireLoss(-(heal_rate), do_update_health = FALSE)
 		owner.adjustOxyLoss(-(heal_rate))
 		if(prob(25))
 			to_chat(owner, SPAN_NOTICE("Your skin crawls as your autoredactive faculty heals your body."))

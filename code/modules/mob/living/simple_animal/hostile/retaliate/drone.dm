@@ -102,7 +102,7 @@
 	if(prob(1))
 		src.visible_message("<span class='warning'>[html_icon(src)] [src] shudders and shakes as some of it's damaged systems come back online.</span>")
 		spark_at(src, cardinal_only = TRUE)
-		adjustBruteLoss(-(rand(10,50)))
+		adjustBruteLoss(-(rand(10,50)), do_update_health = FALSE)
 		adjustFireLoss(-(rand(10,50)))
 
 	//spark for no reason

@@ -463,18 +463,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			damage = 30
 	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
-/mob/living/simple_animal/adjustBruteLoss(damage, do_update_health)
-	..(damage, do_update_health = TRUE)
-
-/mob/living/simple_animal/adjustFireLoss(damage, do_update_health)
-	..(damage, do_update_health = TRUE)
-
-/mob/living/simple_animal/adjustToxLoss(damage, do_update_health)
-	..(damage, do_update_health = TRUE)
-
-/mob/living/simple_animal/adjustOxyLoss(damage, do_update_health)
-	..(damage, do_update_health = TRUE)
-
 /mob/living/simple_animal/proc/SA_attackable(target_mob)
 	if (isliving(target_mob))
 		var/mob/living/L = target_mob
@@ -591,8 +579,11 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/getCloneLoss()
 	. = max(0, gene_damage)
 
-/mob/living/simple_animal/adjustCloneLoss(var/amount)
+/mob/living/simple_animal/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(FALSE)
 	setCloneLoss(gene_damage + amount)
+	if(do_update_health)
+		update_health()
 
 /mob/living/simple_animal/setCloneLoss(amount)
 	if(gene_damage >= 0)

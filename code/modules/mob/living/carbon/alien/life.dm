@@ -15,7 +15,7 @@
 		radiation -= rads
 		adjust_nutrition(rads)
 		heal_overall_damage(rads,rads)
-		adjustOxyLoss(-(rads))
+		adjustOxyLoss(-(rads), do_update_health = FALSE)
 		adjustToxLoss(-(rads))
 
 /mob/living/carbon/alien/handle_regular_status_updates()
