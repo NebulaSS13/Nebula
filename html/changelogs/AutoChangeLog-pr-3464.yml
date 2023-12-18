@@ -1,5 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: 'Jump is now handled by selecting jump from the prepare button on the
-      bottom right of the UI, then clicking the target.'}
-delete-after: true
