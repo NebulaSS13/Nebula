@@ -9,6 +9,7 @@
 	for(var/recipe_type in subtypesof(base_type))
 		. += new recipe_type(src)
 
+
 /decl/material/proc/generate_recipes(stack_type, reinforce_material)
 
 	// By default we don't let anything be crafted with ore, as it's too raw.
@@ -28,7 +29,6 @@
 		. += new/datum/stack_recipe/furniture/rack(src)
 		. += new/datum/stack_recipe/butcher_hook(src)
 		. += new/datum/stack_recipe/furniture/bed(src)
-		. += new/datum/stack_recipe/furniture/machine(src)
 		return
 
 	// We assume a non-ore non-strut stack type is a general type that can use general recipes.
@@ -38,7 +38,8 @@
 		if(integrity > 75 || reinforce_material)
 			. += new/datum/stack_recipe/furniture/windoor(src, reinforce_material)
 
-	if(reinforce_material)	//recipes below don't support composite materials
+	//recipes below don't support composite materials
+	if(reinforce_material)
 		return
 
 	if(hardness >= MAT_VALUE_FLEXIBLE + 10)

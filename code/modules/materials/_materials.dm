@@ -95,7 +95,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/shard_icon                        // Related to above.
 	var/shard_can_repair = 1              // Can shards be turned into sheets with a welder?
 	var/list/recipes                      // Holder for all recipes usable with a sheet of this material.
-	var/list/strut_recipes                // Holder for all the recipes you can build with the struct stack type.
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
 
 	// Icons

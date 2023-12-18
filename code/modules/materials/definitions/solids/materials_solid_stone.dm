@@ -20,13 +20,11 @@
 
 /decl/material/solid/stone/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	//recipes below don't support composite materials
-	if(reinforce_material || ispath(stack_type, /obj/item/stack/material/ore))
-		return
-	if(wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-	. += new/datum/stack_recipe/furniture/planting_bed(src)
-	. += new/datum/stack_recipe/fountain(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		if(wall_support_value >= 10)
+			. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/planting_bed(src)
+		. += new/datum/stack_recipe/fountain(src)
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"

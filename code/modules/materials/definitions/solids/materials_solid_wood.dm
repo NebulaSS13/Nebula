@@ -43,7 +43,7 @@
 
 /decl/material/solid/organic/wood/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material || ispath(stack_type, /obj/item/stack/material/ore))
+	if(reinforce_material || ispath(stack_type))
 		return
 
 	if(wall_support_value >= 10)
@@ -78,22 +78,22 @@
 
 /decl/material/solid/organic/wood/mahogany/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/tile/mahogany(src)
 
 /decl/material/solid/organic/wood/maple/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/tile/maple(src)
 
 /decl/material/solid/organic/wood/ebony/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/tile/ebony(src)
 
 /decl/material/solid/organic/wood/walnut/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type, /obj/item/stack/material/ore))
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/tile/walnut(src)
 
 /decl/material/solid/organic/wood/holographic
