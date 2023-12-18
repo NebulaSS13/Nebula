@@ -1,7 +1,7 @@
 // Stacked resources. They use a material datum for a lot of inherited values.
 /obj/item/stack/material
 	name = "material sheet"
-	force = 5.0
+	force = 5
 	throwforce = 5
 	w_class = ITEM_SIZE_LARGE
 	throw_speed = 3
@@ -365,3 +365,12 @@
 	material = /decl/material/solid/metal/steel
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	is_spawnable_type = FALSE
+
+/obj/item/stack/material/bar
+	name = "bar"
+	singular_name = "bar"
+	plural_name = "bars"
+	icon_state = "bar"
+	plural_icon_state = "bar-mult"
+	max_icon_state = "bar-max"
+	stack_merge_type = /obj/item/stack/material/bar

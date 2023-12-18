@@ -41,6 +41,29 @@
 		. += new/datum/stack_recipe/hazard_cone(src)
 		. += new/datum/stack_recipe/furniture/flaps(src)
 
+/decl/material/solid/organic/wax
+	name = "wax"
+	taste_description = "waxy blandness"
+	lore_text = "A soft, easily melted substance produced by bees. Used to make candles."
+	accelerant_value = 0.6
+	construction_difficulty = MAT_VALUE_NORMAL_DIY
+	reflectiveness = MAT_VALUE_SHINY
+	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
+	default_solid_form = /obj/item/stack/material/bar
+	sound_manipulate = 'sound/foley/paperpickup2.ogg'
+	sound_dropped = 'sound/foley/paperpickup1.ogg'
+	color = "#fffccc"
+	door_icon_base = "plastic"
+	hardness = MAT_VALUE_FLEXIBLE - 10
+	weight = MAT_VALUE_LIGHT
+	melting_point = 363
+	ignition_point = 473
+	boiling_point = 643
+
+// Wax does not use the base recipe list.
+/decl/material/solid/organic/wax/generate_recipes()
+	. = list(new /datum/stack_recipe/candle(src))
+
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
 	uid = "solid_holographic_plastic"
