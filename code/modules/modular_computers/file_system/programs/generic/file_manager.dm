@@ -333,7 +333,7 @@
 		if(F.get_file_perms(accesses, user) & OS_WRITE_ACCESS)
 			var/newname = sanitize_for_file(input(user, "Enter new file name:", "File rename", F.filename))
 			if(F && length(newname))
-				F.filename = newname
+				current_disk.rename_file(F, newname, user)
 			return TOPIC_REFRESH
 		else
 			to_chat(user, SPAN_WARNING("You do not have permission to rename that file."))
@@ -391,7 +391,9 @@
 			to_chat(user, SPAN_WARNING("I/O ERROR: Unable to transfer file."))
 			return
 
-		var/copying = alert(usr, "Would you like to copy the file or transfer it? Transfering files requires write access.", "Copying file", "Copy", "Transfer")
+		var/copying = "Transfer"
+		if(!F.uncopyable)
+			copying = alert(usr, "Would you like to copy the file or transfer it? Transfering files requires write access.", "Copying file", "Copy", "Transfer")
 		var/list/choices = list()
 		var/list/curr_fs_list = disks[current_index]
 		for(var/list/fs_list in disks)
