@@ -31,6 +31,7 @@
 	if(existing && existing != F)
 		delete_file(F.filename)
 
+	F.holder = weakref(src)
 	LAZYSET(stored_files, F.filename, F)
 	free_blocks = clamp(round(free_blocks - F.block_size), 0, block_capacity)
 	return TRUE
@@ -53,6 +54,15 @@
 	// do not qdel; should be GC'd once it has no references anyway
 	F.holder = null
 	LAZYREMOVE(stored_files, name)
+	return TRUE
+
+/**Renames a file's handle on the disk. Does not rename the file itself. */
+/obj/item/disk/proc/rename_file(var/oldname, var/newname, var/force = FALSE)
+	var/datum/computer_file/data/F = LAZYACCESS(stored_files, oldname)
+	if(!F || (F.unrenamable && !force))
+		return FALSE
+	stored_files -= oldname
+	stored_files[newname] = F
 	return TRUE
 
 /**Like a full disk format. Erase all files, even if write protected! */
