@@ -761,7 +761,7 @@
 		ui_header = null
 
 /datum/computer_file/program/filemanager/on_file_storage_removal(datum/file_storage/removed)
-	var/list/current_disk_list = current_index != null ? disks[current_index] : null
+	var/list/current_disk_list = LAZYACCESS(disks, current_index)
 	for(var/list/disk_list in disks)
 		var/datum/file_storage/disk = disk_list[1]
 		if(disk == removed)
