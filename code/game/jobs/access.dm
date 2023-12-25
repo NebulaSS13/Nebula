@@ -17,15 +17,43 @@
 	if(id)
 		. = id.GetAccess()
 
-/atom/movable/proc/GetIdCard()
+/atom/movable/proc/GetIdCard(list/exceptions, prefer_held = TRUE)
 	RETURN_TYPE(/obj/item/card/id)
-	var/list/cards = GetIdCards()
-	return LAZYACCESS(cards, LAZYLEN(cards))
+	. = GetIdCards(exceptions)
+	return LAZYACCESS(., LAZYLEN(.))
 
-/atom/movable/proc/GetIdCards()
+// Duplicated logic, because it's short enough to not bother splitting out.
+// Quite gross logic sorry, did not want to work out a proper sorting method :(
+// The logic behind this sorting is that we should prefer ID cards as such:
+// - held cards, because they are very easily shifted dropped etc
+// - equipped cards, because they can also be removed, albeit slower
+// - any remaining cards, because at time of writing they are implanted and
+//   can't be removed easily at all.
+/mob/GetIdCard(list/exceptions, prefer_held = TRUE)
+	RETURN_TYPE(/obj/item/card/id)
+	// Get candidate cards, return similar to parent if we don't care
+	. = GetIdCards(exceptions)
+	var/card_count = length(.)
+	if(card_count <= 0)
+		return null
+	if(!prefer_held || card_count == 1)
+		return .[card_count]
+	// Move ID to the end of the list.
+	var/obj/item/id = get_equipped_item(slot_wear_id_str)
+	if(id)
+		. -= id
+		. += id
+	// Move held items to the end of the list (prefer them over equipped ID)
+	for(var/obj/item/card in get_held_items())
+		if(card in .)
+			. -= card
+			. += card
+	return .[length(.)]
+
+/atom/movable/proc/GetIdCards(list/exceptions)
 	var/datum/extension/access_provider/our_provider = get_extension(src, /datum/extension/access_provider)
 	if(our_provider)
-		LAZYDISTINCTADD(., our_provider.GetIdCards())
+		LAZYDISTINCTADD(., our_provider.GetIdCards(exceptions))
 
 /atom/movable/proc/check_access(atom/movable/A)
 	return check_access_list(A ? A.GetAccess() : list())
@@ -214,46 +242,44 @@ var/global/list/priv_region_access
 /mob/observer/ghost
 	var/static/obj/item/card/id/all_access/ghost_all_access
 
-/mob/observer/ghost/GetIdCards()
+/mob/observer/ghost/GetIdCards(list/exceptions)
 	. = ..()
-	if (!is_admin(src))
-		return .
+	if(is_admin(src))
+		if (!ghost_all_access)
+			ghost_all_access = new()
+		if(!is_type_in_list(ghost_all_access, exceptions))
+			LAZYDISTINCTADD(., ghost_all_access)
 
-	if (!ghost_all_access)
-		ghost_all_access = new()
-	LAZYDISTINCTADD(., ghost_all_access)
-
-/mob/living/bot/GetIdCards()
+/mob/living/GetIdCards(list/exceptions)
 	. = ..()
-	if(istype(botcard))
+	// Grab our equipped ID.
+	// TODO: consider just iterating the entire equipment list here?
+	// Mask/neck slot lanyards or IDs as uniform accessories someday?
+	// TODO: May need handling for a held or equipped item returning
+	// multiple ID cards, currently will take the last one added.
+	var/obj/item/id = get_equipped_item(slot_wear_id_str)
+	if(istype(id))
+		id = id.GetIdCard()
+		if(istype(id) && !is_type_in_list(id, exceptions))
+			LAZYDISTINCTADD(., id)
+	// Go over everything we're holding.
+	for(var/obj/item/thing in get_held_items())
+		thing = thing.GetIdCard()
+		if(istype(thing) && !is_type_in_list(thing, exceptions))
+			LAZYDISTINCTADD(., thing)
+
+/mob/living/bot/GetIdCards(list/exceptions)
+	. = ..()
+	if(istype(botcard) && !is_type_in_list(botcard, exceptions))
 		LAZYDISTINCTADD(., botcard)
-
-// Gets the ID card of a mob, but will not check types in the exceptions list
-/mob/living/carbon/human/GetIdCard(exceptions = null)
-	RETURN_TYPE(/obj/item/card/id)
-	return LAZYACCESS(GetIdCards(exceptions), 1)
-
-/mob/living/carbon/human/GetIdCards(exceptions = null)
-	. = ..()
-	var/list/candidates = get_held_items()
-	var/id = get_equipped_item(slot_wear_id_str)
-	if(id)
-		LAZYDISTINCTADD(candidates, id)
-	for(var/atom/movable/candidate in candidates)
-		if(!candidate || is_type_in_list(candidate, exceptions))
-			continue
-		var/list/obj/item/card/id/id_cards = candidate.GetIdCards()
-		if(LAZYLEN(id_cards))
-			LAZYDISTINCTADD(., id_cards)
 
 /mob/living/carbon/human/GetAccess(var/union = TRUE)
 	. = ..(union)
 
-/mob/living/silicon/GetIdCards()
+/mob/living/silicon/GetIdCards(list/exceptions)
 	. = ..()
-	if(stat || (ckey && !client))
-		return // Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
-	if(istype(idcard))
+	// Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
+	if(istype(idcard) && !stat && !(ckey && !client) && !is_type_in_list(idcard, exceptions))
 		LAZYDISTINCTADD(., idcard)
 
 /proc/FindNameFromID(var/mob/M, var/missing_id_name = "Unknown")
