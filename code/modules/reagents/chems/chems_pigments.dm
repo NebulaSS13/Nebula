@@ -63,6 +63,35 @@
 	color = "#aaaaaa"
 	uid = "chem_pigment_white"
 
+/decl/material/liquid/paint_stripper
+	name = "paint stripper"
+	uid = "liquid_paint_remover"
+	lore_text = "A highly toxic compound used as an effective paint stripper."
+	taste_description = "bleach and acid"
+	color = "#a0a0a0"
+	metabolism = REM * 0.2
+	value = 0.1
+	solvent_power = MAT_SOLVENT_MODERATE
+	toxicity = 10
+
+/decl/material/liquid/paint_stripper/proc/remove_paint(var/atom/painting, var/datum/reagents/holder)
+	if(istype(painting) && istype(holder))
+		var/keep_alpha = painting.alpha
+		painting.reset_color()
+		painting.set_alpha(keep_alpha)
+
+/decl/material/liquid/paint_stripper/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+	if(istype(T) && !isspaceturf(T))
+		remove_paint(T, holder)
+
+/decl/material/liquid/paint_stripper/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
+	if(istype(O))
+		remove_paint(O, holder)
+
+/decl/material/liquid/paint_stripper/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
+	if(istype(M))
+		remove_paint(M, holder)
+
 /decl/material/liquid/paint
 	name = "paint"
 	lore_text = "This paint will stick to almost any object."
@@ -76,8 +105,8 @@
 /decl/material/liquid/paint/proc/apply_paint(var/atom/painting, var/datum/reagents/holder)
 	if(istype(painting) && istype(holder))
 		var/keep_alpha = painting.alpha
-		painting.color = holder.get_color()
-		painting.alpha = keep_alpha
+		painting.set_color(holder.get_color())
+		painting.set_alpha(keep_alpha)
 
 /decl/material/liquid/paint/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(istype(T) && !isspaceturf(T))
