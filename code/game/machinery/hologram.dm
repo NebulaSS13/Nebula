@@ -30,17 +30,17 @@ Possible to do for anyone motivated enough:
 #define AREA_BASED 6
 
 var/global/const/HOLOPAD_MODE = RANGE_BASED
+var/global/list/holopads = list()
 
 /obj/machinery/hologram/holopad
 	name = "\improper holopad"
 	desc = "It's a floor-mounted device for projecting holographic images."
 	icon = 'icons/obj/machines/holopad.dmi'
 	icon_state = "holopad-B0"
-
 	layer = ABOVE_TILE_LAYER
+	idle_power_usage = 5
 
 	var/power_per_hologram = 500 //per usage per hologram
-	idle_power_usage = 5
 
 	var/list/mob/living/silicon/ai/masters = new() //List of AIs that use the holopad
 	var/last_request = 0 //to prevent request spam. ~Carn
@@ -58,10 +58,24 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	var/allow_ai = TRUE
 	var/static/list/reachable_overmaps = list(OVERMAP_ID_SPACE)
 
+	var/holopad_id
+
 /obj/machinery/hologram/holopad/Initialize()
 	. = ..()
-	var/area/A = get_area(src)
-	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[A.proper_name]'"
+
+	// Null ID means we want to use our area name.
+	global.holopads += src
+	if(isnull(holopad_id))
+		var/area/A = get_area(src)
+		holopad_id = A?.proper_name || "Unknown"
+
+	// For overmap sites, always tag the sector name so we have a unique discriminator for long range calls.
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors[num2text(z)]
+	if(sector)
+		holopad_id = "[sector.name] - [holopad_id]"
+
+	// Update our desc.
+	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[holopad_id]'"
 
 /obj/machinery/hologram/holopad/interface_interact(var/mob/living/carbon/human/user) //Carn: Hologram requests.
 	if(!CanInteract(user, DefaultTopicState()))
@@ -92,12 +106,11 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 			if(last_request + 200 < world.time) //don't spam the AI with requests you jerk!
 				last_request = world.time
 				to_chat(user, "<span class='notice'>You request an AI's presence.</span>")
-				var/area/area = get_area(src)
 				for(var/mob/living/silicon/ai/AI in global.living_mob_list_)
 					if(!AI.client)	continue
 					if (holopadType != HOLOPAD_LONG_RANGE && !SSmapping.are_connected_levels(AI.z, src.z))
 						continue
-					to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area.proper_name]</a>.</span>")
+					to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [holopad_id]</a>.</span>")
 			else
 				to_chat(user, "<span class='notice'>A request for AI presence was already sent recently.</span>")
 		if("Holocomms")
@@ -116,11 +129,10 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 							zlevels_long |= O.map_z
 				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
 					if (H.operable())
-						var/area/A = get_area(H)
 						if(H.z in zlevels)
-							holopadlist["[A.proper_name]"] = H	//Define a list and fill it with the area of every holopad in the world
+							holopadlist["[H.holopad_id]"] = H	//Define a list and fill it with the area of every holopad in the world
 						if (H.holopadType == HOLOPAD_LONG_RANGE && (H.z in zlevels_long))
-							holopadlist["[A.proper_name]"] = H
+							holopadlist["[H.holopad_id]"] = H
 				holopadlist = sortTim(holopadlist, /proc/cmp_text_asc)
 				var/temppad = input(user, "Which holopad would you like to contact?", "holopad list") as null|anything in holopadlist
 				targetpad = holopadlist["[temppad]"]
@@ -143,10 +155,8 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	targetpad.incoming_connection = 1
 	playsound(targetpad.loc, 'sound/machines/chime.ogg', 25, 5)
 	targetpad.icon_state = "[targetpad.base_icon]1"
-	var/area/our_area = get_area(src)
-	var/area/target_area = get_area(targetpad)
-	targetpad.audible_message("<b>\The [src]</b> announces, \"Incoming communications request from [our_area.proper_name].\"")
-	to_chat(user, "<span class='notice'>Trying to establish a connection to the holopad in [target_area.proper_name]... Please await confirmation from recipient.</span>")
+	targetpad.audible_message("<b>\The [src]</b> announces, \"Incoming communications request from [holopad_id].\"")
+	to_chat(user, "<span class='notice'>Trying to establish a connection to the holopad in [targetpad.holopad_id]... Please await confirmation from recipient.</span>")
 
 
 /obj/machinery/hologram/holopad/proc/take_call(mob/living/carbon/user)
@@ -155,9 +165,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	caller_id.reset_view(src)
 	if(!masters[caller_id])//If there is no hologram, possibly make one.
 		activate_holocall(caller_id)
-	var/area/source_area = get_area(sourcepad)
-	var/area/our_area = get_area(src)
-	log_admin("[key_name(caller_id)] just established a holopad connection from [source_area.proper_name] to [our_area.proper_name]")
+	log_admin("[key_name(caller_id)] just established a holopad connection from [sourcepad.holopad_id] to [holopad_id]")
 
 /obj/machinery/hologram/holopad/proc/end_call(mob/user)
 	if(!caller_id)
@@ -387,6 +395,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 //Destruction procs.
 /obj/machinery/hologram/holopad/Destroy()
+	global.holopads -= src
 	for (var/mob/living/master in masters)
 		clear_holo(master)
 	return ..()
