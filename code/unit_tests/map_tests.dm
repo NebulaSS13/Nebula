@@ -979,7 +979,8 @@
 	name = "MAP: Wall mounted objects must offset over walls"
 	var/static/list/exception_types = list(
 		/obj/machinery/light,
-		/obj/machinery/camera
+		/obj/machinery/camera,
+		/obj/structure/lift/button/standalone
 	)
 
 /datum/unit_test/wall_objs_shall_offset_onto_wall/start_test()

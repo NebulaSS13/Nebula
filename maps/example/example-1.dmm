@@ -205,10 +205,6 @@
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "lower_level_dock_hatch_internal"
 	},
-/obj/machinery/button/access/interior{
-	id_tag = "lower_level_dock";
-	pixel_x = -21
-	},
 /turf/simulated/floor,
 /area/example/first)
 "lJ" = (
@@ -402,7 +398,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "lower_level_dock_sensor_chamber";
-	pixel_x = -24
+	pixel_x = -22;
+	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	id_tag = "lower_level_dock";
@@ -544,6 +541,14 @@
 	dir = 1
 	},
 /turf/simulated/floor,
+/area/example/first)
+"Ae" = (
+/obj/machinery/button/access/interior{
+	id_tag = "lower_level_dock";
+	pixel_x = -24;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/example/first)
 "AF" = (
 /obj/effect/floor_decal/corner/orange{
@@ -693,7 +698,10 @@
 	},
 /obj/machinery/button/access/exterior{
 	id_tag = "lower_level_dock";
-	pixel_y = -21
+	pixel_y = -24;
+	dir = 8;
+	pixel_x = -12;
+	directional_offset = null
 	},
 /turf/simulated/floor,
 /area/example/first)
@@ -2501,7 +2509,7 @@ XZ
 tq
 ZV
 la
-CU
+Ae
 CU
 XZ
 mu
