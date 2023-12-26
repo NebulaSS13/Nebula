@@ -143,7 +143,10 @@
 	},
 /obj/machinery/button/access/exterior{
 	id_tag = "upper_level_dock";
-	pixel_y = -21
+	pixel_y = -24;
+	dir = 4;
+	pixel_x = 12;
+	directional_offset = null
 	},
 /turf/simulated/floor,
 /area/example/second)
@@ -231,7 +234,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "upper_level_dock_sensor_chamber";
-	pixel_x = 24
+	pixel_x = 22;
+	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	id_tag = "upper_level_dock";
@@ -310,8 +314,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/button/access/interior{
 	id_tag = "upper_level_dock";
-	pixel_x = 22;
-	pixel_y = 28
+	pixel_x = 24;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/second)
@@ -329,8 +333,8 @@
 /area/example/second)
 "ug" = (
 /obj/abstract/level_data_spawner/main_level{
-	name = "Example Second Deck";
-},
+	name = "Example Second Deck"
+	},
 /turf/space,
 /area/space)
 "uk" = (
