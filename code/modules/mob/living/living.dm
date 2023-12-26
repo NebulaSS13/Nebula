@@ -1167,18 +1167,23 @@ default behaviour is:
 	var/decl/species/my_species = get_species()
 	return my_species?.get_footstep(src, footstep_type)
 
-/mob/living/GetIdCards(exceptions = null)
+/mob/living/GetIdCards(list/exceptions)
 	. = ..()
-	var/list/candidates = get_held_items()
-	var/id = get_equipped_item(slot_wear_id_str)
-	if(id)
-		LAZYDISTINCTADD(candidates, id)
-	for(var/atom/movable/candidate in candidates)
-		if(!candidate || is_type_in_list(candidate, exceptions))
-			continue
-		var/list/obj/item/card/id/id_cards = candidate.GetIdCards()
-		if(LAZYLEN(id_cards))
-			LAZYDISTINCTADD(., id_cards)
+	// Grab our equipped ID.
+	// TODO: consider just iterating the entire equipment list here?
+	// Mask/neck slot lanyards or IDs as uniform accessories someday?
+	// TODO: May need handling for a held or equipped item returning
+	// multiple ID cards, currently will take the last one added.
+	var/obj/item/id = get_equipped_item(slot_wear_id_str)
+	if(istype(id))
+		id = id.GetIdCard()
+		if(istype(id) && !is_type_in_list(id, exceptions))
+			LAZYDISTINCTADD(., id)
+	// Go over everything we're holding.
+	for(var/obj/item/thing in get_held_items())
+		thing = thing.GetIdCard()
+		if(istype(thing) && !is_type_in_list(thing, exceptions))
+			LAZYDISTINCTADD(., thing)
 
 /mob/living/proc/update_surgery(update_icons)
 	SHOULD_CALL_PARENT(TRUE)

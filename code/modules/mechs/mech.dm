@@ -208,9 +208,9 @@
 /mob/living/exosuit/return_air()
 	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc.return_air()
 
-/mob/living/exosuit/GetIdCards(exceptions = null)
+/mob/living/exosuit/GetIdCards(list/exceptions)
 	. = ..()
-	if(istype(access_card))
+	if(istype(access_card) && !is_type_in_list(access_card, exceptions))
 		LAZYDISTINCTADD(., access_card)
 
 /mob/living/exosuit/set_dir()

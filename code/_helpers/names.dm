@@ -138,9 +138,11 @@ var/global/syndicate_name = null
 	return name
 
 
-//Traitors and traitor silicons will get these. Revs will not.
-var/global/syndicate_code_phrase//Code phrase for traitors.
-var/global/syndicate_code_response//Code response for traitors.
+// Traitors and traitor silicons will get these. Revs will not.
+/// Code phrase for traitors.
+var/global/syndicate_code_phrase
+/// Code response for traitors.
+var/global/syndicate_code_response
 
 	/*
 	Should be expanded.

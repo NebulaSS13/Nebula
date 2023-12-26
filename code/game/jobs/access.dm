@@ -17,15 +17,43 @@
 	if(id)
 		. = id.GetAccess()
 
-/atom/movable/proc/GetIdCard()
+/atom/movable/proc/GetIdCard(list/exceptions, prefer_held = TRUE)
 	RETURN_TYPE(/obj/item/card/id)
-	var/list/cards = GetIdCards()
-	return LAZYACCESS(cards, LAZYLEN(cards))
+	. = GetIdCards(exceptions)
+	return LAZYACCESS(., LAZYLEN(.))
 
-/atom/movable/proc/GetIdCards()
+// Duplicated logic, because it's short enough to not bother splitting out.
+// Quite gross logic sorry, did not want to work out a proper sorting method :(
+// The logic behind this sorting is that we should prefer ID cards as such:
+// - held cards, because they are very easily shifted dropped etc
+// - equipped cards, because they can also be removed, albeit slower
+// - any remaining cards, because at time of writing they are implanted and
+//   can't be removed easily at all.
+/mob/GetIdCard(list/exceptions, prefer_held = TRUE)
+	RETURN_TYPE(/obj/item/card/id)
+	// Get candidate cards, return similar to parent if we don't care
+	. = GetIdCards(exceptions)
+	var/card_count = length(.)
+	if(card_count <= 0)
+		return null
+	if(!prefer_held || card_count == 1)
+		return .[card_count]
+	// Move ID to the end of the list.
+	var/obj/item/id = get_equipped_item(slot_wear_id_str)
+	if(id)
+		. -= id
+		. += id
+	// Move held items to the end of the list (prefer them over equipped ID)
+	for(var/obj/item/card in get_held_items())
+		if(card in .)
+			. -= card
+			. += card
+	return .[length(.)]
+
+/atom/movable/proc/GetIdCards(list/exceptions)
 	var/datum/extension/access_provider/our_provider = get_extension(src, /datum/extension/access_provider)
 	if(our_provider)
-		LAZYDISTINCTADD(., our_provider.GetIdCards())
+		LAZYDISTINCTADD(., our_provider.GetIdCards(exceptions))
 
 /atom/movable/proc/check_access(atom/movable/A)
 	return check_access_list(A ? A.GetAccess() : list())

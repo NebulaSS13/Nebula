@@ -205,7 +205,7 @@
 		return 0
 
 	var/datum/mind/player = pending_antagonists[1]
-	if(!add_antagonist(player,0,0,0,1,1))
+	if(!add_antagonist(player, do_not_announce = TRUE, preserve_appearance = TRUE))
 		message_admins("Could not auto-spawn a [name], failed to add antagonist.")
 		return 0
 
