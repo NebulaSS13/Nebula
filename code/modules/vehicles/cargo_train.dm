@@ -6,19 +6,20 @@
 	on = 0
 	powered = 1
 	locked = 0
-
 	load_item_visible = 1
 	load_offset_x = 0
 	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 7)
-
-	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
 	active_engines = 1
+	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	var/obj/item/key/cargo_train/key
 
 /obj/item/key/cargo_train
-	name = "key"
-	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\"."
+	desc = "A small key on a yellow fob reading \"Choo Choo!\"."
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
+	)
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "train_keys"
 	w_class = ITEM_SIZE_TINY
