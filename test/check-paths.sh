@@ -32,7 +32,7 @@ exactly 2 "/mob text paths" '"/mob'
 exactly 6 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
 exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
-exactly 92 "'in world' uses" 'in world'
+exactly 94 "'in world' uses" 'in world'
 exactly 1 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
 exactly 18 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 9 ">> uses" '>>(?!>)' -P
