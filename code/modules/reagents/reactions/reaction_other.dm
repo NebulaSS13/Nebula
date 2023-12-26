@@ -75,3 +75,12 @@
 	required_reagents = list(/decl/material/liquid/plasticide = 1, /decl/material/liquid/water = 3)
 	result_amount = 5
 	mix_message = "The solution thickens and takes on a glossy sheen."
+
+//
+/decl/chemical_reaction/paint_stripper
+	name = "Paint Stripper"
+	//TODO: some way to mix chlorine and methane to make proper paint stripper.
+	required_reagents = list(/decl/material/liquid/acetone = 2, /decl/material/liquid/acid = 2)
+	result = /decl/material/liquid/paint_stripper
+	result_amount = 4
+	mix_message = "The mixture thins and clears."
