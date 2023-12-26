@@ -38,15 +38,15 @@
 	if(W.isflamesource())
 		if(on_fire)
 			to_chat(user, SPAN_WARNING("\The [src] is already blazing merrily!"))
-			return
+			return TRUE
 		ignite()
 		if(on_fire)
 			visible_message(SPAN_DANGER("\The [user] lights \the [src] with \the [W]."))
 		else
 			to_chat(user, SPAN_WARNING("You attempt to light \the [src] with \the [W], but it doesn't seem to be flammable."))
 		update_name()
-		return
-	. = ..()
+		return TRUE
+	return ..()
 
 /obj/item/chems/glass/rag/proc/update_name()
 	if(on_fire)
@@ -159,6 +159,8 @@
 	if(exposed_temperature >= 900 + T0C)
 		new /obj/effect/decal/cleanable/ash(get_turf(src))
 		qdel(src)
+		return
+	return ..()
 
 //rag must have a minimum of 2 units welder fuel and at least 80% of the reagents must be welder fuel.
 //maybe generalize flammable reagents someday

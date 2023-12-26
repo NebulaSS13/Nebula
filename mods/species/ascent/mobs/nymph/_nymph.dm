@@ -30,7 +30,7 @@
 
 	holder_type = /obj/item/holder/ascent_nymph
 	possession_candidate = 1
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_CHEM_CHANGE
+	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
 	hud_type = /datum/hud/ascent_nymph
 
 	var/crystal_reserve = 1000

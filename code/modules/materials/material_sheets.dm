@@ -278,8 +278,11 @@
 	icon_state = "puck"
 	plural_icon_state = "puck-mult"
 	max_icon_state = "puck-max"
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 	stack_merge_type = /obj/item/stack/material/aerogel
+
+// Aerogel melting point is below 0 as it is a physical container for gas; hack around that here.
+/obj/item/stack/material/aerogel/ProcessAtomTemperature()
+	return PROCESS_KILL
 
 /obj/item/stack/material/plank
 	name = "planks"

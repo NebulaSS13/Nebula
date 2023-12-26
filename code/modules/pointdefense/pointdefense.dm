@@ -8,7 +8,7 @@
 	anchored = TRUE
 	base_type =       /obj/machinery/pointdefense_control
 	construct_state = /decl/machine_construction/default/panel_closed
-	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags =  ATOM_FLAG_CLIMBABLE
 
 	var/ui_template = "pointdefense_control.tmpl"
 	var/initial_id_tag
@@ -105,7 +105,7 @@
 	desc = "A Kuiper pattern anti-meteor battery. Capable of destroying most threats in a single salvo."
 	density = TRUE
 	anchored = TRUE
-	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags =  ATOM_FLAG_CLIMBABLE
 	idle_power_usage = 0.1 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
 	base_type = /obj/machinery/pointdefense

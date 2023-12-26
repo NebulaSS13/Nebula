@@ -180,7 +180,7 @@
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
 	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(thing) && user.a_intent != I_HURT)
-		thing.HandleObjectHeating(src, user, DIRECT_HEAT)
+		thing.handle_external_heating(DIRECT_HEAT, src, user)
 		return TRUE
 
 	if(ATOM_IS_OPEN_CONTAINER(thing))

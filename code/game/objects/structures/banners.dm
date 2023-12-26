@@ -7,7 +7,7 @@
 	anchored = TRUE
 	density = FALSE
 	opacity = FALSE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)

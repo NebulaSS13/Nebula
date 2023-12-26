@@ -129,7 +129,7 @@
 	amount_dispensed          = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
 	volume                    = 7500
-	atom_flags                = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags                = ATOM_FLAG_CLIMBABLE
 	movable_flags             = MOVABLE_FLAG_WHEELED
 
 /obj/structure/reagent_dispensers/watertank/populate_reagents()

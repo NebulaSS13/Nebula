@@ -13,7 +13,7 @@ especially on common types like /atom or /atom/movable.
 
 - FLAG SETTING
 // When setting default flags on type definitions, they are combined with bitwise OR:
-// atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE
+// atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
 // Be mindful of flags set on parent types, as setting flags on a child type will override the parent flags.
 // Flags are also set at runtime with bitwise OR:
 // atom_flags |= ATOM_FLAG_CLIMBABLE
@@ -40,13 +40,12 @@ The latter will result in a linter warning and will not work correctly.
 #define ATOM_FLAG_NO_REACT                  BITFLAG(3)  // Reagents don't react inside this container.
 #define ATOM_FLAG_OPEN_CONTAINER            BITFLAG(4)  // Is an open container for chemistry purposes.
 #define ATOM_FLAG_INITIALIZED               BITFLAG(5)  // Has this atom been initialized
-#define ATOM_FLAG_NO_TEMP_CHANGE            BITFLAG(6)  // Reagents do not cool or heat to ambient temperature in this container.
-#define ATOM_FLAG_CAN_BE_PAINTED            BITFLAG(7)  // Can be painted using a paint sprayer or similar.
-#define ATOM_FLAG_SHIELD_CONTENTS           BITFLAG(8)  // Protects contents from some global effects (Solar storms)
-#define ATOM_FLAG_ADJACENT_EXCEPTION        BITFLAG(9)  // Skips adjacent checks for atoms that should always be reachable in window tiles
-#define ATOM_FLAG_NO_DISSOLVE               BITFLAG(10) // Bypasses solvent reactions in the container.
-#define ATOM_FLAG_NO_PHASE_CHANGE           BITFLAG(11) // Bypasses heating and cooling product reactions in the container.
-#define ATOM_FLAG_BLOCK_DIAGONAL_FACING     BITFLAG(12) // Atom cannot face non-cardinal directions.
+#define ATOM_FLAG_CAN_BE_PAINTED            BITFLAG(6)  // Can be painted using a paint sprayer or similar.
+#define ATOM_FLAG_SHIELD_CONTENTS           BITFLAG(7)  // Protects contents from some global effects (Solar storms)
+#define ATOM_FLAG_ADJACENT_EXCEPTION        BITFLAG(8)  // Skips adjacent checks for atoms that should always be reachable in window tiles
+#define ATOM_FLAG_NO_DISSOLVE               BITFLAG(9)  // Bypasses solvent reactions in the container.
+#define ATOM_FLAG_NO_PHASE_CHANGE           BITFLAG(10) // Bypasses heating and cooling product reactions in the container.
+#define ATOM_FLAG_BLOCK_DIAGONAL_FACING     BITFLAG(11) // Atom cannot face non-cardinal directions.
 
 #define ATOM_FLAG_NO_CHEM_CHANGE            (ATOM_FLAG_NO_REACT | ATOM_FLAG_NO_DISSOLVE | ATOM_FLAG_NO_PHASE_CHANGE)
 

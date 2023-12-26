@@ -41,7 +41,7 @@
 /obj/item/latexballon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C+100)
 		burst()
-	return
+	return ..()
 
 /obj/item/latexballon/attackby(obj/item/W, mob/user)
 	if (W.can_puncture())

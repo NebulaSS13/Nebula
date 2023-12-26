@@ -8,7 +8,7 @@
 	icon_state         = "papershredder0"
 	density            = TRUE
 	anchored           = TRUE
-	atom_flags         = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags         = ATOM_FLAG_CLIMBABLE
 	obj_flags          = OBJ_FLAG_ANCHORABLE
 	idle_power_usage   = 0
 	stat_immune        = NOSCREEN | NOINPUT
@@ -16,7 +16,7 @@
 	construct_state    = /decl/machine_construction/default/panel_closed
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc = 1,
+		/obj/item/stock_parts/power/apc = 1
 	)
 	var/list/shredder_bin                                 //List of shreded material type to matter amount
 	var/cached_total_matter  = 0                          //Total of all the matter units we put in the shredder so far
@@ -247,5 +247,6 @@
 	fire_act()
 
 /obj/item/shreddedp/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	SHOULD_CALL_PARENT(FALSE)
 	new /obj/effect/decal/cleanable/ash(get_turf(src))
 	physically_destroyed()

@@ -95,7 +95,7 @@
 	center_of_mass = @"{'x':16,'y':8}"
 	volume = 60
 	amount_per_transfer_from_this = 10
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_CHEM_CHANGE
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_CHEM_CHANGE
 	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_NONE
@@ -143,12 +143,16 @@
 	center_of_mass = @"{'x':15,'y':8}"
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
 	temperature_coefficient = 1
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 	lid_color = COLOR_GRAY40
+
+// Hack around reagent temp changes.
+/obj/item/chems/glass/beaker/insulated/ProcessAtomTemperature()
+	return PROCESS_KILL
 
 /obj/item/chems/glass/beaker/insulated/large
 	name = "large insulated beaker"

@@ -538,7 +538,7 @@ var/global/list/diversion_junctions = list()
 	anchored = TRUE
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/disposaloutlet/Initialize()
 	. = ..()

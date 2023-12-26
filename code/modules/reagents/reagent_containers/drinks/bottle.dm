@@ -98,13 +98,14 @@
 	return B
 
 /obj/item/chems/drinks/bottle/attackby(obj/item/W, mob/user)
-	if(!rag && istype(W, /obj/item/chems/glass/rag))
-		insert_rag(W, user)
-		return
-	if(rag && W.isflamesource())
+	if(!rag)
+		if(istype(W, /obj/item/chems/glass/rag))
+			insert_rag(W, user)
+			return TRUE
+	else if(W.isflamesource())
 		rag.attackby(W, user)
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/chems/drinks/bottle/attack_self(mob/user)
 	if(rag)

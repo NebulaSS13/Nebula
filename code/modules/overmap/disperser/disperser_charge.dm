@@ -2,7 +2,7 @@
 	name = "unknown disperser charge"
 	desc = "A charge to power the obstruction field disperser with. It looks impossibly round and shiny. This charge does not have a defined purpose."
 	icon_state = "slug"
-	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags =  ATOM_FLAG_CLIMBABLE
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT,

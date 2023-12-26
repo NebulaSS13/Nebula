@@ -5,7 +5,7 @@
 	icon = 'icons/obj/items/weapon/energy_blade.dmi'
 
 	icon_state = ICON_STATE_WORLD
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	item_flags = ITEM_FLAG_IS_WEAPON
 	w_class = ITEM_SIZE_SMALL
 	hitsound = 'sound/weapons/genhit.ogg'
