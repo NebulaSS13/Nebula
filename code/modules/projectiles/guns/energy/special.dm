@@ -23,6 +23,12 @@
 /obj/item/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess
 
+/obj/item/gun/energy/ionrifle/mounted
+	name = "mounted ion gun"
+	self_recharge = TRUE
+	use_external_power = TRUE
+	has_safety = FALSE
+
 /obj/item/gun/energy/decloner
 	name = "biological demolecularisor"
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."

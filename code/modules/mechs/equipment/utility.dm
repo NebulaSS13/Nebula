@@ -544,14 +544,14 @@
 	name = "mounted plasma cutter"
 	desc = "An industrial plasma cutter mounted onto the chassis of the mech. "
 	icon_state = "mech_plasma"
-	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
+	holding = /obj/item/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = "{'materials':4,'engineering':6,'exoticmatter':4,'combat':3}"
 
 /obj/item/mech_equipment/mounted_system/taser/autoplasma
 	icon_state = "mech_energy"
-	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech/auto
+	holding = /obj/item/gun/energy/plasmacutter/mounted/mech/auto
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = "{'materials':5,'engineering':6,'exoticmatter':4,'combat':4}"

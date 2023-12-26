@@ -94,7 +94,7 @@
 		return FALSE
 
 /obj/item/mech_equipment/mounted_system
-	var/holding_type
+	abstract_type = /obj/item/mech_equipment/mounted_system
 	var/obj/item/holding
 
 /obj/item/mech_equipment/mounted_system/attack_self(var/mob/user)
@@ -111,16 +111,16 @@
 
 /obj/item/mech_equipment/mounted_system/Initialize()
 	. = ..()
-	if(holding_type)
-		holding = new holding_type(src)
+	if(ispath(holding))
+		holding = new holding(src)
 		events_repository.register(/decl/observ/destroyed, holding, src, .proc/forget_holding)
-	if(holding)
-		if(!icon_state)
-			icon = holding.icon
-			icon_state = holding.icon_state
-		SetName(holding.name)
-		desc = "[holding.desc] This one is suitable for installation on an exosuit."
-
+	if(!istype(holding))
+		return
+	if(!icon_state)
+		icon = holding.icon
+		icon_state = holding.icon_state
+	SetName(holding.name)
+	desc = "[holding.desc] This one is suitable for installation on an exosuit."
 
 /obj/item/mech_equipment/mounted_system/Destroy()
 	events_repository.unregister(/decl/observ/destroyed, holding, src, .proc/forget_holding)
