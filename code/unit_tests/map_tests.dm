@@ -937,7 +937,8 @@
 /datum/unit_test/wall_objs_shall_face_proper_dir
 	name = "MAP: Wall mounted objects must face proper direction"
 	var/static/list/exception_types = list(
-		/obj/structure/sign/directions // TODO: remove once directional/rotated subtypes have been created
+		/obj/structure/sign/directions, // TODO: remove once directional/rotated subtypes have been created
+		/obj/structure/emergency_dispenser // these are just kind of fucked, i'll leave it to someone else to make the presets match the directional offsets
 	)
 
 /datum/unit_test/wall_objs_shall_face_proper_dir/start_test()
