@@ -8,7 +8,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
@@ -149,7 +149,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -162,7 +162,8 @@
 	tag_airpump = "solars_pump";
 	tag_chamber_sensor = "solars_sensor";
 	tag_exterior_door = "solars_out";
-	tag_interior_door = "solars_in"
+	tag_interior_door = "solars_in";
+	pixel_x = 22
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -301,7 +302,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/comms)
@@ -431,7 +432,8 @@
 "bc" = (
 /obj/machinery/door/firedoor,
 /obj/structure/sign/warning/fall{
-	pixel_x = 32
+	pixel_x = 34;
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -444,7 +446,8 @@
 /area/space)
 "be" = (
 /obj/machinery/light_switch{
-	pixel_x = 24
+	pixel_x = 24;
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -637,7 +640,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
@@ -689,7 +692,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -712,7 +715,8 @@
 "oq" = (
 /obj/random/trash,
 /obj/machinery/power/apc{
-	dir = 8
+	dir = 8;
+	pixel_x = -22
 	},
 /obj/structure/cable{
 	icon_state = "0-2"
@@ -787,19 +791,17 @@
 	},
 /obj/machinery/power/apc{
 	dir = 1;
-	name = "Communications APC"
+	name = "Communications APC";
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
 /obj/machinery/light_switch{
-	pixel_x = 32
+	pixel_x = 24;
+	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
-	},
 /obj/structure/window/reinforced{
 	dir = 8
 	},
@@ -821,7 +823,8 @@
 "wc" = (
 /obj/effect/floor_decal/steeldecal/steel_decals6,
 /obj/machinery/power/apc{
-	dir = 1
+	dir = 1;
+	pixel_y = 22
 	},
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -913,7 +916,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /turf/simulated/floor/airless,
 /area/ship/trade/bridge_unused)
@@ -1023,7 +1026,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/light_switch{
-	pixel_x = 32
+	pixel_x = 24;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge_upper)
@@ -1042,7 +1046,8 @@
 	dir = 8
 	},
 /obj/structure/sign/warning/fall{
-	pixel_x = -32
+	pixel_x = -34;
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
@@ -1089,7 +1094,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/command/bridge_upper)
@@ -1100,7 +1105,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /turf/simulated/floor/airless,
 /area/ship/trade/comms)
@@ -1141,7 +1146,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -1158,7 +1163,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/comms)
@@ -1190,7 +1195,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
+	name = "External Blast Doors"
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -1236,10 +1241,6 @@
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "ZD" = (
-/obj/machinery/alarm{
-	dir = 8;
-	pixel_x = 24
-	},
 /obj/structure/window/reinforced{
 	dir = 8
 	},
@@ -1247,6 +1248,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/comms)
 "ZT" = (
@@ -1264,7 +1269,8 @@
 	dir = 4
 	},
 /obj/machinery/light_switch{
-	pixel_x = 32
+	pixel_x = 24;
+	dir = 8
 	},
 /obj/structure/lattice,
 /turf/simulated/open,
