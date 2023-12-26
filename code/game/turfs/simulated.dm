@@ -175,3 +175,7 @@
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
 	. = ..()
+	if(!ml)
+		// Force neighboring space to update corners.
+		for(var/turf/space/space in RANGE_TURFS(src, 1))
+			SSambience.queued |= space

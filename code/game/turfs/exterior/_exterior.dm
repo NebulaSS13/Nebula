@@ -43,6 +43,11 @@
 
 	. = ..(mapload)	// second param is our own, don't pass to children
 
+	if(!mapload)
+		// Force neighboring space to update corners.
+		for(var/turf/space/space in RANGE_TURFS(src, 1))
+			SSambience.queued |= space
+
 	if (no_update_icon)
 		return
 
