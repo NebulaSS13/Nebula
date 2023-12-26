@@ -956,6 +956,12 @@
 /obj/structure/tape_barricade/engineering,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/bridge_unused)
+"EO" = (
+/obj/machinery/computer/message_monitor{
+	dir = 1
+	},
+/turf/simulated/floor/bluegrid,
+/area/ship/trade/comms)
 "Fe" = (
 /obj/structure/railing/mapped{
 	dir = 1
@@ -1167,9 +1173,7 @@
 	dir = 1;
 	pixel_y = -32
 	},
-/obj/machinery/computer/message_monitor{
-	dir = 4
-	},
+/obj/machinery/commsrelay,
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/comms)
 "UY" = (
@@ -4242,7 +4246,7 @@ Su
 Su
 Su
 Su
-Su
+EO
 ng
 ax
 ax

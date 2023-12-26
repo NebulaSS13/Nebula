@@ -48,7 +48,7 @@
 
 /decl/hierarchy/outfit/death_command/equip_outfit(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	var/decl/special_role/deathsquad = GET_DECL(/decl/special_role/deathsquad)
-	deathsquad.equip(H)
+	deathsquad.equip_role(H)
 	return 1
 
 /decl/hierarchy/outfit/syndicate_command
@@ -56,6 +56,5 @@
 
 /decl/hierarchy/outfit/syndicate_command/equip_outfit(mob/living/carbon/human/H, assignment, equip_adjustments, datum/job/job, datum/mil_rank/rank)
 	var/decl/special_role/commandos = GET_DECL(/decl/special_role/deathsquad/mercenary)
-	commandos.equip(H)
+	commandos.equip_role(H)
 	return 1
-

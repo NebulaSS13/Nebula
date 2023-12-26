@@ -76,18 +76,22 @@
 	return counting_english_list(input, output_icons, determiners, nothing_text, and_text, comma_text, final_comma_text)
 
 //Checks for specific types in a list
-/proc/is_type_in_list(var/atom/A, var/list/L)
-	for(var/type in L)
-		if(istype(A, type))
-			return 1
-	return 0
+/proc/is_type_in_list(datum/thing, list/type_list)
+	if(!length(type_list) || !istype(thing))
+		return FALSE
+	for(var/check_type in type_list)
+		if(istype(thing, check_type))
+			return TRUE
+	return FALSE
 
 //Checks for specific paths in a list
-/proc/is_path_in_list(var/path, var/list/L)
-	for(var/type in L)
-		if(ispath(path, type))
-			return 1
-	return 0
+/proc/is_path_in_list(var/check_path, list/type_list)
+	if(!length(type_list) || !ispath(check_path))
+		return FALSE
+	for(var/check_type in type_list)
+		if(ispath(check_path, check_type))
+			return TRUE
+	return FALSE
 
 //returns a new list with only atoms that are in typecache L
 /proc/typecache_filter_list(list/atoms, list/typecache)

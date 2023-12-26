@@ -8,7 +8,7 @@
 		/obj/item/stock_parts/power/apc/buildable = 1,
 		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/computer/hard_drive/cluster/fullhouse
+		/obj/item/stock_parts/computer/hard_drive/cluster/empty = 1
 	)
 
 /obj/item/stock_parts/circuitboard/acl

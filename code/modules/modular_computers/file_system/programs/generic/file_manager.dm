@@ -96,6 +96,7 @@
 		var/list/available_mainframes = network.get_file_server_tags(MF_ROLE_FILESERVER, accesses)
 		if(!length(available_mainframes))
 			to_chat(user, SPAN_WARNING("NETWORK ERROR: No available mainframes on the network."))
+			return TOPIC_HANDLED
 		var/fileserver_tag = input(user, "Choose a mainframe you would like to mount as a disk:", "Mainframe Mount") as null|anything in available_mainframes
 		if(!fileserver_tag)
 			return TOPIC_HANDLED
@@ -332,7 +333,7 @@
 		if(F.get_file_perms(accesses, user) & OS_WRITE_ACCESS)
 			var/newname = sanitize_for_file(input(user, "Enter new file name:", "File rename", F.filename))
 			if(F && length(newname))
-				F.filename = newname
+				current_disk.rename_file(F, newname, user)
 			return TOPIC_REFRESH
 		else
 			to_chat(user, SPAN_WARNING("You do not have permission to rename that file."))
@@ -390,7 +391,9 @@
 			to_chat(user, SPAN_WARNING("I/O ERROR: Unable to transfer file."))
 			return
 
-		var/copying = alert(usr, "Would you like to copy the file or transfer it? Transfering files requires write access.", "Copying file", "Copy", "Transfer")
+		var/copying = "Transfer"
+		if(!F.uncopyable)
+			copying = alert(usr, "Would you like to copy the file or transfer it? Transfering files requires write access.", "Copying file", "Copy", "Transfer")
 		var/list/choices = list()
 		var/list/curr_fs_list = disks[current_index]
 		for(var/list/fs_list in disks)
@@ -758,7 +761,7 @@
 		ui_header = null
 
 /datum/computer_file/program/filemanager/on_file_storage_removal(datum/file_storage/removed)
-	var/list/current_disk_list = current_index != null ? disks[current_index] : null
+	var/list/current_disk_list = LAZYACCESS(disks, current_index)
 	for(var/list/disk_list in disks)
 		var/datum/file_storage/disk = disk_list[1]
 		if(disk == removed)

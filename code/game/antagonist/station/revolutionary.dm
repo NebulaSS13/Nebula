@@ -42,7 +42,7 @@
 		rev_obj.explanation_text = "Assassinate, capture or convert [player.real_name], the [player.mind.assigned_role]."
 		global_objectives += rev_obj
 
-/decl/special_role/revolutionary/equip(var/mob/living/carbon/human/player)
+/decl/special_role/revolutionary/equip_role(var/mob/living/carbon/human/player)
 	. = ..()
 	if(.)
 		spawn_uplink(player)

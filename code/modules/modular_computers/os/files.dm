@@ -258,6 +258,10 @@
 
 /datum/file_storage/proc/delete_file(datum/computer_file/F, list/accesses, mob/user)
 
+/datum/file_storage/proc/rename_file(datum/computer_file/F, newname, mob/user)
+	F.filename = newname
+	return OS_FILE_SUCCESS
+
 /datum/file_storage/proc/create_file(filename, directory, data, file_type = /datum/computer_file/data, list/metadata, list/accesses, mob/user)
 	if(check_errors())
 		return OS_HARDDRIVE_ERROR
@@ -283,7 +287,7 @@
 	var/datum/computer_file/F = get_file(filename, directory)
 	if(!istype(F))
 		return F
-	if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS))
+	if(!(F.get_file_perms(accesses, user) & OS_READ_ACCESS) || F.uncopyable)
 		return OS_FILE_NO_READ
 
 	var/datum/computer_file/cloned_file = F.Clone(TRUE)
@@ -599,6 +603,13 @@
 		return OS_FILE_NOT_FOUND
 	var/obj/item/disk/disk = get_disk()
 	if(disk.delete_file(file.filename))
+		return OS_FILE_SUCCESS
+
+/datum/file_storage/disk/datadisk/rename_file(datum/computer_file/file, newname, mob/user)
+	if(check_errors())
+		return OS_HARDDRIVE_ERROR
+	var/obj/item/disk/disk = get_disk()
+	if(disk.rename_file(file.filename, newname))
 		return OS_FILE_SUCCESS
 
 /datum/file_storage/disk/datadisk/get_transfer_speed()

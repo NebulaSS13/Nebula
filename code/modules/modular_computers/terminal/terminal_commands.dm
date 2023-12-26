@@ -418,14 +418,17 @@ Subtypes
 	if(!islist(file_loc))
 		return "rename: [get_terminal_error(file_path, file_loc)]."
 
+	var/datum/file_storage/disk = file_loc[1]
 	var/datum/computer_file/F = file_loc[3]
 	var/new_name = sanitize_for_file(rename_args[2])
 
 	if(length(new_name))
 		if(F.unrenamable || !(F.get_file_perms(terminal.get_access(user), user) & OS_WRITE_ACCESS))
 			return "rename: You lack permission to rename [F.filename]."
-		F.filename = new_name
-		return "rename: File renamed to '[new_name]'."
+		if(disk.rename_file(F, new_name, user))
+			return "rename: File renamed to '[new_name]'."
+		else
+			return "rename: Unable to rename file."
 	else
 		return "rename: Invalid file name."
 

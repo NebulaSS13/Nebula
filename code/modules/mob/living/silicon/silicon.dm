@@ -457,9 +457,9 @@
 /mob/living/silicon/get_speech_bubble_state_modifier()
 	return "synth"
 
-/mob/living/silicon/GetIdCards()
+/mob/living/silicon/GetIdCards(list/exceptions)
 	. = ..()
-	if(stat || (ckey && !client))
-		return // Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
-	if(istype(idcard))
+	// Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
+	// This seems to be specifically to stop ghosted maintenance drones being used as free all-access cards.
+	if(istype(idcard) && !stat && !(ckey && !client) && !is_type_in_list(idcard, exceptions))
 		LAZYDISTINCTADD(., idcard)
