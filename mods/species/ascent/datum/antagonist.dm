@@ -7,7 +7,6 @@
 	and remove anything that might threaten your progeny."
 	welcome_text = "You are an alate of the Ascent, tasked with ridding this sector of whatever your matriarch directs you to, \
 	preparing it for the foundation of a new fortress-nest. Obey your gyne and bring prosperity to your nest-lineage."
-	leader_welcome_text
 	antaghud_indicator = "hudhunter"
 	antag_indicator = "hudhunter"
 	hard_cap = 10
@@ -35,7 +34,7 @@
 		H.real_name = ascent_culture.get_random_name(H, H.gender)
 		H.name = H.real_name
 
-/decl/special_role/hunter/equip(var/mob/living/carbon/human/player)
+/decl/special_role/hunter/equip_role(var/mob/living/carbon/human/player)
 	if(player?.species.get_root_species_name(player) == SPECIES_MANTID_GYNE)
 		rig_type = /obj/item/rig/mantid/gyne
 	else

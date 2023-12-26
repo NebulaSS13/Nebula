@@ -9,6 +9,7 @@ var/global/file_uid = 0
 	var/filetype = "XXX" 									// File full names are [filename].[filetype] so like NewFile.XXX in this case
 	var/size = 1											// File size in GQ. Integers only!
 	var/weakref/holder										// Holder that contains this file. Refers to a obj/item/stock_parts/computer/hard_drive.
+	var/uncopyable = FALSE									// Whether the file may be cloned or copied by a user.
 	var/unsendable = 0										// Whether the file may be sent to someone via file transfer or other means.
 	var/undeletable = 0										// Whether the file may be deleted. Setting to 1 prevents deletion/renaming/etc.
 	var/unrenamable = 0										// Whether the file may be renamed. Setting to 1 prevents renaming.
@@ -28,10 +29,17 @@ var/global/file_uid = 0
 	if(islist(md))
 		metadata = md.Copy()
 
-/datum/computer_file/Destroy()
+/datum/computer_file/proc/remove_from_holder()
+	// This just *begs* for making filesystems an extension
 	var/obj/item/stock_parts/computer/hard_drive/hard_drive = holder?.resolve()
-	if(hard_drive)
+	if(istype(hard_drive))
 		hard_drive.remove_file(src, forced = TRUE)
+	var/obj/item/disk/data_disk = hard_drive
+	if(istype(data_disk))
+		data_disk.delete_file(filename, force = TRUE)
+
+/datum/computer_file/Destroy()
+	remove_from_holder()
 	. = ..()
 
 /datum/computer_file/PopulateClone(datum/computer_file/clone)

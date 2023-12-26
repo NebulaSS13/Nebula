@@ -1,6 +1,9 @@
 /obj/machinery/computer/modular/preset
 	var/list/default_software
 	var/datum/computer_file/program/autorun_program
+	/// Mounts the mainframe with the corresponding key as its ID to the root directory named after the value.
+	/// Ex. list("RECORDS_MAINFRAME" = "records")
+	var/automount_disks
 	base_type = /obj/machinery/computer/modular
 
 /obj/machinery/computer/modular/preset/full
@@ -35,6 +38,12 @@
 			autorun.filename = "autorun"
 			autorun.stored_data = initial(autorun_program.filename)
 			HDD.store_file(autorun)
+		if(LAZYLEN(automount_disks))
+			var/datum/computer_file/data/automount = new()
+			automount.filename = "automount"
+			for(var/disk in automount_disks)
+				automount.stored_data += "[automount_disks[disk]]|[disk];"
+			HDD.store_file(automount)
 
 /obj/machinery/computer/modular/preset/engineering
 	default_software = list(

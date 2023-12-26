@@ -64,7 +64,7 @@
 	wizard.current.real_name = "[pick(global.wizard_first)] [pick(global.wizard_second)]"
 	wizard.current.SetName(wizard.current.real_name)
 
-/decl/special_role/wizard/equip(var/mob/living/carbon/human/wizard_mob)
+/decl/special_role/wizard/equip_role(var/mob/living/carbon/human/wizard_mob)
 	default_outfit = pick(decls_repository.get_decl_paths_of_subtype(/decl/hierarchy/outfit/wizard))
 	. = ..()
 

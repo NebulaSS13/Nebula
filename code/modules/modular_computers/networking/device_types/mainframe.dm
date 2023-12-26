@@ -104,20 +104,6 @@ var/global/list/all_mainframe_roles = list(
 		return 0
 	return HDD.used_capacity
 
-// Disk that spawns with everything old system had
-/obj/item/stock_parts/computer/hard_drive/cluster/fullhouse/Initialize()
-	. = ..()
-
-	for(var/F in subtypesof(/datum/computer_file/report))
-		var/datum/computer_file/report/type = F
-		if(TYPE_IS_ABSTRACT(type))
-			continue
-		if(initial(type.available_on_network))
-			store_file(new type, "reports", TRUE)
-
-	for(var/F in subtypesof(/datum/computer_file/program))
-		var/datum/computer_file/program/type = F
-		if(TYPE_IS_ABSTRACT(type))
-			continue
-		if(initial(type.available_on_network))
-			store_file(new type, OS_PROGRAMS_DIR, TRUE)
+// starts with no files, useful for things like mainframes
+/obj/item/stock_parts/computer/hard_drive/cluster/empty/install_default_programs()
+	return

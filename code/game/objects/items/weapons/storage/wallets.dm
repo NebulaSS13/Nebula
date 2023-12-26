@@ -87,9 +87,9 @@
 			tiny_state = "id-"+front_id.icon_state
 		add_overlay(overlay_image(icon, tiny_state, flags = RESET_COLOR))
 
-/obj/item/storage/wallet/GetIdCards()
+/obj/item/storage/wallet/GetIdCards(list/exceptions)
 	. = ..()
-	if(istype(front_id))
+	if(istype(front_id) && !is_type_in_list(front_id, exceptions))
 		LAZYDISTINCTADD(., front_id)
 
 /obj/item/storage/wallet/GetChargeStick()

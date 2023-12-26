@@ -595,12 +595,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	M.key = key
 	log_and_message_admins("has respawned.", M)
 
-/mob/observer/ghost/GetIdCards(exceptions = null)
+/mob/observer/ghost/GetIdCards(list/exceptions)
 	. = ..()
-	if (!is_admin(src))
-		return .
-
-	if (!ghost_all_access)
-		ghost_all_access = new()
-	LAZYDISTINCTADD(., ghost_all_access)
-
+	if(is_admin(src))
+		if (!ghost_all_access)
+			ghost_all_access = new
+		if(!is_type_in_list(ghost_all_access, exceptions))
+			LAZYDISTINCTADD(., ghost_all_access)

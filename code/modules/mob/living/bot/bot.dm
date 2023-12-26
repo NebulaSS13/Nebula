@@ -430,7 +430,7 @@
 		else return !D.check_access(ID)	// it's a real, air blocking door
 	return 0
 
-/mob/living/bot/GetIdCards(exceptions = null)
+/mob/living/bot/GetIdCards(list/exceptions)
 	. = ..()
-	if(istype(botcard))
+	if(istype(botcard) && !is_type_in_list(botcard, exceptions))
 		LAZYDISTINCTADD(., botcard)

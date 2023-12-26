@@ -211,8 +211,9 @@ var/global/list/additional_antag_types = list()
 
 		sortTim(antag_templates_by_initial_spawn_req, /proc/cmp_numeric_asc, TRUE)
 		antag_templates = list()
-		for(var/template in antag_templates_by_initial_spawn_req)
-			antag_templates += template
+		for(var/decl/special_role/antag in antag_templates_by_initial_spawn_req)
+			antag_templates |= antag
+			latejoin_antags |= antag.type
 
 		var/list/valid_templates_per_candidate = list() // number of roles each candidate can satisfy
 		for(var/candidate in all_candidates)
