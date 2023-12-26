@@ -213,19 +213,23 @@
 
 	else if(href_list["remove_antagonist"])
 		var/decl/special_role/antag = locate(href_list["remove_antagonist"])
-		if(antag) antag.remove_antagonist(src)
+		if(istype(antag))
+			antag.remove_antagonist(src)
 
 	else if(href_list["equip_antagonist"])
 		var/decl/special_role/antag = locate(href_list["equip_antagonist"])
-		if(antag) antag.equip(src.current)
+		if(istype(antag))
+			antag.equip_role(src.current)
 
 	else if(href_list["unequip_antagonist"])
 		var/decl/special_role/antag = locate(href_list["unequip_antagonist"])
-		if(antag) antag.unequip(src.current)
+		if(istype(antag))
+			antag.unequip_role(src.current)
 
 	else if(href_list["move_antag_to_spawn"])
 		var/decl/special_role/antag = locate(href_list["move_antag_to_spawn"])
-		if(antag) antag.place_mob(src.current)
+		if(istype(antag))
+			antag.place_mob(src.current)
 
 	else if (href_list["role_edit"])
 		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in SSjobs.titles_to_datums

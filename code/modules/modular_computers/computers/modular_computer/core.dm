@@ -134,11 +134,11 @@
 		if(user)
 			ui_interact(user)
 
-/obj/item/modular_computer/GetIdCards()
+/obj/item/modular_computer/GetIdCards(list/exceptions)
 	. = ..()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
-	if(card_slot && card_slot.can_broadcast && istype(card_slot.stored_card) && card_slot.check_functionality())
+	if(card_slot && card_slot.can_broadcast && istype(card_slot.stored_card) && card_slot.check_functionality() && !is_type_in_list(card_slot.stored_card, exceptions))
 		LAZYDISTINCTADD(., card_slot.stored_card)
 
 /obj/item/modular_computer/GetChargeStick()

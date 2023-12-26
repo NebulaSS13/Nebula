@@ -301,12 +301,11 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/GetAccess()
 	return access.Copy()
 
-/obj/item/card/id/GetIdCard()
-	RETURN_TYPE(/obj/item/card/id)
-	return src
 
-/obj/item/card/id/GetIdCards()
-	return list(src)
+/obj/item/card/id/GetIdCards(list/exceptions)
+	. = ..()
+	if(!is_type_in_list(src, exceptions))
+		LAZYDISTINCTADD(., src)
 
 /obj/item/card/id/verb/read()
 	set name = "Read ID Card"

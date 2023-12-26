@@ -4,11 +4,12 @@
 
 /datum/extension/ship_engine/gas/fusion/get_propellant(var/sample_only = TRUE)
 	var/obj/machinery/atmospherics/unary/engine/fusion/thruster = holder
-	if(!thruster.harvest_from || !thruster.harvest_from.owned_field)
+	if(!istype(thruster) || !thruster.harvest_from?.owned_field)
 		return // No valid propellant.
 	var/datum/gas_mixture/propellant = ..()
-	propellant.temperature += log(100, (thruster.harvest_from.owned_field.plasma_temperature * efficiency))
-	return propellant
+	if(propellant)
+		propellant.temperature += log(100, (thruster.harvest_from.owned_field.plasma_temperature * efficiency))
+		. = propellant
 
 /datum/extension/ship_engine/gas/fusion/has_fuel()
 	. = ..()
