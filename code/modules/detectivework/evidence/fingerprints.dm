@@ -62,8 +62,9 @@
 		ignore_gloves = 1
 
 	if(!ignore_gloves)
-		var/obj/item/cover = M.get_covering_equipped_item(M.get_active_held_item_slot())
-		if(cover)
+		var/datum/inventory_slot/gripper/holding_with = M.get_inventory_slot_datum(M.get_active_held_item_slot())
+		var/obj/item/cover = istype(holding_with) && M.get_covering_equipped_item(holding_with.covering_slot_flags)
+		if(istype(cover))
 			cover.add_fingerprint(M, 1)
 			return
 
