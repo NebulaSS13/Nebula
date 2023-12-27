@@ -10,6 +10,10 @@ And then copied back upstream to Neb...
 
 	#define USING_MAP_DATUM /datum/map/ministation
 
+	#ifdef UNIT_TEST
+		#include "../../code/unit_tests/offset_tests.dm"
+	#endif
+
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
