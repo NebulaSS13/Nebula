@@ -430,7 +430,7 @@
 	dir = 4
 	},
 /obj/machinery/status_display{
-	pixel_y = 30
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
@@ -446,7 +446,7 @@
 	id_tag = "mining_airlock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = -10
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
@@ -591,7 +591,8 @@
 	id_tag = "trash_sort"
 	},
 /obj/structure/sign/warning/deathsposal{
-	pixel_x = -30
+	pixel_x = -34;
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/ministation/trash)
@@ -717,7 +718,8 @@
 	tag_airpump = "sat1_vent";
 	tag_chamber_sensor = "sat1_sensor";
 	tag_exterior_door = "sat1_airlock_exterior";
-	tag_interior_door = "sat1_airlock_interior"
+	tag_interior_door = "sat1_airlock_interior";
+	pixel_x = -8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -725,7 +727,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "sat1_sensor";
-	pixel_y = 20
+	pixel_y = 20;
+	pixel_x = 8
 	},
 /turf/simulated/floor/plating,
 /area/ministation/ai_sat)
@@ -770,7 +773,7 @@
 	},
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/janitor)
@@ -876,9 +879,7 @@
 	tag_interior_door = "cargo_airlock_interior";
 	pixel_x = -20
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "eF" = (
@@ -1079,7 +1080,8 @@
 	dir = 8
 	},
 /obj/machinery/status_display/supply_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/machinery/atmospherics/portables_connector{
 	pixel_x = -3;
@@ -1106,7 +1108,7 @@
 /obj/machinery/hologram/holopad,
 /obj/item/radio/intercom/locked{
 	dir = 4;
-	pixel_x = -21
+	pixel_x = -22
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
@@ -1186,13 +1188,10 @@
 /area/ministation/cargo)
 "fG" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
+	dir = 4;
+	name = "External Blast Doors"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -1294,7 +1293,8 @@
 	frequency = 1447;
 	listening = 0;
 	name = "Station Intercom (AI Private)";
-	pixel_y = -29
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -1615,6 +1615,17 @@
 	dir = 1;
 	id_tag = "stern_engineering_vent"
 	},
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	id_tag = "stern_engineering_airlock";
+	pixel_y = -6;
+	tag_airpump = "stern_engineering_vent";
+	tag_chamber_sensor = "stern_engineering_sensor";
+	tag_exterior_door = "stern_engineering_airlock_exterior";
+	tag_interior_door = "stern_engineering_airlock_interior";
+	dir = 4;
+	pixel_x = -20;
+	name = "2. Airlock Controller"
+	},
 /turf/simulated/floor/plating,
 /area/ministation/engine)
 "gX" = (
@@ -1763,7 +1774,7 @@
 /area/ministation/ai_sat)
 "hP" = (
 /obj/structure/sign/warning/docking_area{
-	pixel_y = 30
+	pixel_y = 32
 	},
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_airlock_interior";
@@ -1879,7 +1890,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
@@ -2016,13 +2028,10 @@
 "jC" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
+	dir = 4;
+	name = "External Blast Doors"
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
 	dir = 4
@@ -2084,7 +2093,8 @@
 /area/ministation/hall/s1)
 "jU" = (
 /obj/structure/sign/warning/docking_area{
-	pixel_y = -30
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_airlock_interior";
@@ -2203,17 +2213,14 @@
 /area/ministation/engine)
 "kx" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 5
+	},
+/obj/machinery/door/blast/regular/open{
+	id_tag = "scraplock";
+	dir = 4;
+	name = "External Blast Doors"
 	},
 /turf/simulated/floor/plating,
 /area/ministation/atmospherics)
@@ -2256,7 +2263,8 @@
 	dir = 5
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -2462,8 +2470,8 @@
 	id_tag = "westatmos_airlock";
 	name = "exterior access button";
 	pixel_x = -20;
-	pixel_y = 10;
-	command = "cycle_exterior"
+	command = "cycle_exterior";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/ministation/maint/westatmos)
@@ -2478,8 +2486,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sat1_airlock";
 	name = "exterior access button";
-	pixel_x = -10;
-	pixel_y = 20;
+	pixel_y = 24;
 	command = "cycle_exterior"
 	},
 /turf/simulated/floor/plating,
@@ -2547,7 +2554,7 @@
 	},
 /obj/item/multitool,
 /obj/machinery/status_display{
-	pixel_y = 30
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
@@ -2557,7 +2564,7 @@
 	},
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/structure/displaycase,
 /obj/item/toy/shipmodel,
@@ -2644,12 +2651,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ministation/ai_sat)
-"mI" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
-/turf/simulated/floor/tiled,
-/area/ministation/cargo)
 "mN" = (
 /obj/machinery/camera/network/ministation/sat{
 	dir = 8
@@ -2671,7 +2672,7 @@
 	id_tag = "l1ne_airlock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = -10
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
@@ -2876,19 +2877,20 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/l1ne)
 "nY" = (
+/obj/machinery/airlock_sensor{
+	id_tag = "westatmos_sensor";
+	pixel_y = 4;
+	pixel_x = -20;
+	dir = 4
+	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "westatmos_airlock";
-	pixel_y = null;
+	pixel_y = -4;
 	tag_airpump = "westatmos_vent";
 	tag_chamber_sensor = "westatmos_sensor";
 	tag_exterior_door = "westatmos_airlock_exterior";
 	tag_interior_door = "westatmos_airlock_interior";
 	dir = 4;
-	pixel_x = -20
-	},
-/obj/machinery/airlock_sensor{
-	id_tag = "westatmos_sensor";
-	pixel_y = 10;
 	pixel_x = -20
 	},
 /turf/simulated/floor/plating,
@@ -3386,7 +3388,7 @@
 "rD" = (
 /obj/structure/table,
 /obj/item/radio/intercom/locked{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
@@ -3527,7 +3529,8 @@
 "sA" = (
 /obj/structure/table,
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/storage/box/lights/mixed,
@@ -3580,8 +3583,14 @@
 /turf/simulated/floor/tiled,
 /area/ministation/eva)
 "sR" = (
-/obj/machinery/status_display,
-/turf/simulated/wall/r_wall,
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/machinery/status_display{
+	pixel_y = -32;
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint,
 /area/ministation/ai_core)
 "sT" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -4319,7 +4328,8 @@
 /area/ministation/engine)
 "wS" = (
 /obj/machinery/status_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/item/plunger,
 /turf/simulated/floor/tiled,
@@ -4710,7 +4720,7 @@
 "zz" = (
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 25
+	pixel_x = 22
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/crate,
@@ -4901,7 +4911,7 @@
 /area/ministation/ai_sat)
 "As" = (
 /obj/machinery/alarm{
-	pixel_y = 23
+	pixel_y = 21
 	},
 /obj/structure/cable/cyan{
 	icon_state = "2-8"
@@ -4935,8 +4945,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "port_engineering_airlock";
 	name = "exterior access button";
-	pixel_x = -10;
-	pixel_y = 20;
+	pixel_y = 24;
 	command = "cycle_exterior"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -4986,7 +4995,8 @@
 /obj/machinery/airlock_sensor{
 	id_tag = "stern_engineering_sensor";
 	pixel_y = 10;
-	pixel_x = -20
+	pixel_x = -20;
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 6
@@ -5225,8 +5235,8 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sat2_airlock";
 	name = "exterior access button";
-	pixel_x = -10;
-	pixel_y = 20;
+	pixel_x = -32;
+	pixel_y = 24;
 	command = "cycle_exterior"
 	},
 /turf/simulated/floor/plating,
@@ -5521,8 +5531,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "starboard_engineering_airlock";
 	name = "interior access button";
-	pixel_x = -10;
-	pixel_y = 20
+	pixel_y = 24
 	},
 /turf/simulated/floor,
 /area/ministation/engine)
@@ -5669,7 +5678,7 @@
 "Ds" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/alarm{
 	dir = 8;
@@ -5761,8 +5770,7 @@
 	},
 /obj/machinery/light{
 	dir = 4;
-	icon_state = "tube1";
-	pixel_y = -6
+	icon_state = "tube1"
 	},
 /obj/machinery/light_switch{
 	pixel_y = 10;
@@ -5967,7 +5975,7 @@
 	dir = 8
 	},
 /obj/machinery/status_display{
-	pixel_y = 30
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ministation/engine)
@@ -5981,7 +5989,7 @@
 	},
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/item/clothing/gloves/insulated,
 /obj/item/storage/toolbox/mechanical{
@@ -6325,7 +6333,8 @@
 	},
 /obj/effect/floor_decal/corner/yellow/three_quarters,
 /obj/structure/sign/warning/engineering_access{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -6815,8 +6824,8 @@
 	dir = 4
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 5;
-	pixel_y = -32
+	pixel_y = -29;
+	dir = 1
 	},
 /obj/structure/cable{
 	icon_state = "1-8"
@@ -6997,7 +7006,8 @@
 	pixel_y = 1
 	},
 /obj/structure/sign/warning/airlock{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ministation/engine)
@@ -7015,6 +7025,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
+	},
+/obj/structure/sign/warning/airlock{
+	dir = 4;
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ministation/engine)
@@ -7183,8 +7197,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "port_engineering_airlock";
 	name = "interior access button";
-	pixel_x = 10;
-	pixel_y = 20
+	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
 /area/ministation/engine)
@@ -7194,7 +7207,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "port_engineering_sensor";
-	pixel_y = 20
+	pixel_y = 24;
+	pixel_x = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "port_engineering_airlock";
@@ -7202,7 +7216,8 @@
 	tag_airpump = "port_engineering_vent";
 	tag_chamber_sensor = "port_engineering_sensor";
 	tag_exterior_door = "port_engineering_airlock_exterior";
-	tag_interior_door = "port_engineering_airlock_interior"
+	tag_interior_door = "port_engineering_airlock_interior";
+	pixel_x = -8
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 10
@@ -7241,8 +7256,8 @@
 /obj/item/radio/intercom{
 	canhear_range = 3;
 	name = "Common Channel";
-	pixel_x = 27;
-	pixel_y = -3
+	pixel_x = 22;
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -7555,6 +7570,10 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
+/obj/structure/sign/warning/airlock{
+	dir = 1;
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ministation/engine)
 "HN" = (
@@ -7675,6 +7694,10 @@
 	id_tag = "starboard_engineering_vent";
 	dir = 8
 	},
+/obj/machinery/airlock_sensor{
+	id_tag = "starboard_engineering_sensor";
+	pixel_y = 24
+	},
 /turf/simulated/floor/plating,
 /area/ministation/engine)
 "Ih" = (
@@ -7703,8 +7726,8 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sat2_airlock";
 	name = "interior access button";
-	pixel_x = 10;
-	pixel_y = 20
+	pixel_x = 32;
+	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -7812,8 +7835,8 @@
 "IH" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 5;
-	pixel_y = -32
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
@@ -7951,13 +7974,13 @@
 /area/ministation/supermatter)
 "Jd" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	dir = 0;
 	id_tag = "sat3_airlock";
 	pixel_y = 24;
 	tag_airpump = "sat3_vent";
 	tag_chamber_sensor = "sat3_sensor";
 	tag_exterior_door = "sat3_airlock_exterior";
-	tag_interior_door = "sat3_airlock_interior"
+	tag_interior_door = "sat3_airlock_interior";
+	pixel_x = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -7965,7 +7988,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "sat3_sensor";
-	pixel_y = 20
+	pixel_y = 24;
+	pixel_x = -8
 	},
 /turf/simulated/floor/plating,
 /area/ministation/ai_sat)
@@ -8153,7 +8177,8 @@
 /area/ministation/ai_core)
 "JK" = (
 /obj/machinery/flasher{
-	pixel_y = -21
+	pixel_y = -21;
+	dir = 1
 	},
 /obj/machinery/ai_slipper{
 	uses = 10
@@ -8367,19 +8392,21 @@
 "Kn" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_x = -27;
-	pixel_y = 5
+	pixel_x = -22;
+	pixel_y = 6;
+	dir = 4
 	},
 /obj/item/radio/intercom{
 	listening = 0;
 	name = "Custom Channel";
-	pixel_y = 27
+	pixel_y = 20
 	},
 /obj/item/radio/intercom{
 	frequency = 1447;
 	name = "Private Channel";
-	pixel_x = 27;
-	pixel_y = 5
+	pixel_x = 22;
+	pixel_y = 6;
+	dir = 8
 	},
 /obj/machinery/newscaster{
 	pixel_x = -32;
@@ -8427,14 +8454,14 @@
 	dir = 1
 	},
 /obj/machinery/flasher{
-	pixel_y = -20
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/ministation/ai_upload)
 "Ks" = (
 /obj/structure/cable,
 /obj/machinery/power/apc{
-	areastring = null;
 	name = "_South APC";
 	pixel_y = -24
 	},
@@ -8446,7 +8473,8 @@
 	frequency = 1447;
 	listening = 0;
 	name = "Station Intercom (AI Private)";
-	pixel_y = -29
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/machinery/computer/upload/robot{
 	dir = 1
@@ -8731,10 +8759,6 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/status_display{
-	pixel_y = 30;
-	pixel_x = 31
-	},
 /turf/simulated/floor/tiled,
 /area/ministation/ai_sat)
 "Lg" = (
@@ -8745,6 +8769,9 @@
 	},
 /obj/item/storage/toolbox/mechanical,
 /obj/item/multitool,
+/obj/machinery/status_display{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/ministation/ai_sat)
 "Lh" = (
@@ -8784,7 +8811,8 @@
 "Ll" = (
 /obj/item/radio/intercom{
 	name = "Station Intercom (General)";
-	pixel_x = 28
+	pixel_x = 22;
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "2-8"
@@ -8941,7 +8969,8 @@
 	dir = 9
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 32
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/ai_sat)
@@ -9144,7 +9173,7 @@
 "Mx" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/status_display{
-	pixel_y = 30
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/space)
@@ -9444,8 +9473,8 @@
 	id_tag = "l1ne_airlock";
 	name = "exterior access button";
 	pixel_x = -20;
-	pixel_y = 10;
-	command = "cycle_exterior"
+	command = "cycle_exterior";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/ministation/maint/l1ne)
@@ -9483,11 +9512,12 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	dir = 1;
 	id_tag = "sat2_airlock";
-	pixel_y = -24;
+	pixel_y = -22;
 	tag_airpump = "sat2_vent";
 	tag_chamber_sensor = "sat2_sensor";
 	tag_exterior_door = "sat2_airlock_exterior";
-	tag_interior_door = "sat2_airlock_interior"
+	tag_interior_door = "sat2_airlock_interior";
+	pixel_x = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -9495,8 +9525,9 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "sat2_sensor";
-	pixel_y = -20;
-	pixel_x = -10
+	pixel_y = -18;
+	pixel_x = -8;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/ministation/ai_sat)
@@ -9568,8 +9599,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "starboard_engineering_airlock";
 	name = "exterior access button";
-	pixel_x = 10;
-	pixel_y = 20;
+	pixel_y = 24;
 	command = "cycle_exterior"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -9590,7 +9620,7 @@
 	pixel_x = -23
 	},
 /obj/machinery/status_display{
-	pixel_y = 30
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/supermatter)
@@ -9715,7 +9745,6 @@
 /area/ministation/engine)
 "OG" = (
 /obj/machinery/power/apc{
-	areastring = null;
 	name = "_South APC";
 	pixel_y = -24
 	},
@@ -9764,8 +9793,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sat3_airlock";
 	name = "exterior access button";
-	pixel_x = -10;
-	pixel_y = 20;
+	pixel_y = 24;
 	command = "cycle_exterior"
 	},
 /turf/simulated/floor/plating,
@@ -9790,8 +9818,8 @@
 	id_tag = "mining_airlock";
 	name = "exterior access button";
 	pixel_x = -20;
-	pixel_y = 10;
-	command = "cycle_exterior"
+	command = "cycle_exterior";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/ministation/cargo)
@@ -9864,7 +9892,7 @@
 	id_tag = "atmos_airlock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = 10
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor,
@@ -9909,10 +9937,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ministation/ai_sat)
-"Pd" = (
-/obj/machinery/ai_status_display,
-/turf/simulated/wall/r_wall,
-/area/ministation/ai_core)
 "Pe" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -9936,10 +9960,11 @@
 /turf/simulated/floor/plating,
 /area/ministation/engine)
 "Pl" = (
-/obj/structure/sign/warning/airlock{
-	pixel_x = 32
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/sign/warning/airlock{
+	pixel_x = 32;
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "Pm" = (
@@ -10359,7 +10384,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "cargo2_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/ministation/cargo)
@@ -10377,14 +10403,13 @@
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/shoes/magboots,
 /obj/machinery/status_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/eva)
 "Rm" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/mining/brace,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled,
@@ -10460,7 +10485,7 @@
 "RB" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -10488,19 +10513,20 @@
 /turf/simulated/floor/wood/walnut,
 /area/ministation/dorms)
 "RE" = (
+/obj/machinery/airlock_sensor{
+	id_tag = "l1ne_sensor";
+	pixel_y = 4;
+	pixel_x = -20;
+	dir = 4
+	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "l1ne_airlock";
-	pixel_y = null;
+	pixel_y = -4;
 	tag_airpump = "l1ne_vent";
 	tag_chamber_sensor = "l1ne_sensor";
 	tag_exterior_door = "l1ne_airlock_exterior";
 	tag_interior_door = "l1ne_airlock_interior";
 	dir = 4;
-	pixel_x = -20
-	},
-/obj/machinery/airlock_sensor{
-	id_tag = "l1ne_sensor";
-	pixel_y = 10;
 	pixel_x = -20
 	},
 /turf/simulated/floor/plating,
@@ -10911,10 +10937,6 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/airlock_sensor{
-	id_tag = "starboard_engineering_sensor";
-	pixel_y = 20
-	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "starboard_engineering_airlock";
 	pixel_y = 24;
@@ -10941,18 +10963,19 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "atmos_sensor";
-	pixel_y = 10;
-	pixel_x = -20
+	pixel_y = 4;
+	pixel_x = -20;
+	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "atmos_airlock";
-	pixel_y = null;
 	tag_airpump = "atmos_vent";
 	tag_chamber_sensor = "atmos_sensor";
 	tag_exterior_door = "atmos_airlock_exterior";
 	tag_interior_door = "atmos_airlock_interior";
 	dir = 4;
-	pixel_x = -20
+	pixel_x = -20;
+	pixel_y = -4
 	},
 /turf/simulated/floor,
 /area/ministation/maint/eastatmos)
@@ -11081,7 +11104,8 @@
 	dir = 9
 	},
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
@@ -11261,7 +11285,7 @@
 "US" = (
 /obj/machinery/firealarm{
 	dir = 8;
-	pixel_x = -24
+	pixel_x = -21
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/green,
@@ -11284,7 +11308,7 @@
 "UV" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "mining_airlock";
-	pixel_y = null;
+	pixel_y = -4;
 	tag_airpump = "mining_vent";
 	tag_chamber_sensor = "mining_sensor";
 	tag_exterior_door = "mining_airlock_exterior";
@@ -11295,7 +11319,8 @@
 /obj/machinery/airlock_sensor{
 	id_tag = "mining_sensor";
 	pixel_y = 10;
-	pixel_x = -20
+	pixel_x = -20;
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/ministation/cargo)
@@ -11412,8 +11437,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sat1_airlock";
 	name = "interior access button";
-	pixel_x = 10;
-	pixel_y = 20
+	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -11431,11 +11455,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/ministation/hall/s1)
-"VG" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/structure/sign/warning/airlock,
-/turf/simulated/floor/plating,
-/area/ministation/engine)
 "VH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
@@ -11554,7 +11573,8 @@
 	dir = 4
 	},
 /obj/machinery/status_display{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/ministation/dorms)
@@ -11565,28 +11585,36 @@
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Doors";
 	pixel_x = -6;
-	pixel_y = 7
+	pixel_y = 7;
+	dir = 1;
+	directional_offset = null
 	},
 /obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the engine control room blast doors.";
 	id_tag = "EngineBlastexterior";
 	name = "Engine Bay Blast Doors";
 	pixel_y = -3;
-	pixel_x = 5
+	pixel_x = 5;
+	dir = 1;
+	directional_offset = null
 	},
 /obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the engine control room blast doors.";
 	id_tag = "EngineBlastinterior";
 	name = "Engine Monitoring Room Blast Doors";
 	pixel_y = -3;
-	pixel_x = -6
+	pixel_x = -6;
+	dir = 1;
+	directional_offset = null
 	},
 /obj/machinery/button/toggle{
 	desc = "A remote control-switch for the engine emitter.";
 	id_tag = "EngineEmitter";
 	name = "Engine Emitter";
 	pixel_x = 6;
-	pixel_y = 7
+	pixel_y = 7;
+	dir = 1;
+	directional_offset = null
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ministation/smcontrol)
@@ -11836,7 +11864,8 @@
 /obj/machinery/turretid{
 	control_area = "\improper AI Upload Chamber";
 	name = "AI Upload turret control";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -11872,7 +11901,7 @@
 	id_tag = "westatmos_airlock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = -10
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
@@ -12119,8 +12148,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sat3_airlock";
 	name = "interior access button";
-	pixel_x = 10;
-	pixel_y = 20
+	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -12243,8 +12271,8 @@
 	id_tag = "atmos_airlock";
 	name = "exterior access button";
 	pixel_x = -20;
-	pixel_y = -10;
-	command = "cycle_exterior"
+	command = "cycle_exterior";
+	dir = 4
 	},
 /turf/simulated/floor,
 /area/ministation/maint/eastatmos)
@@ -12337,31 +12365,22 @@
 /obj/machinery/button/blast_door{
 	id_tag = "EngineVent";
 	name = "3. Reactor Ventillatory Control";
-	pixel_x = -22;
-	pixel_y = 9
-	},
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	id_tag = "stern_engineering_airlock";
-	pixel_y = -6;
-	tag_airpump = "stern_engineering_vent";
-	tag_chamber_sensor = "stern_engineering_sensor";
-	tag_exterior_door = "stern_engineering_airlock_exterior";
-	tag_interior_door = "stern_engineering_airlock_interior";
-	dir = 4;
-	pixel_x = -20;
-	name = "2. Airlock Controller"
+	pixel_x = -24;
+	pixel_y = 6;
+	dir = 4
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "smsafetydoor";
 	name = "1. Vent Safety";
-	pixel_x = -36;
-	pixel_y = 9
+	pixel_x = -24;
+	pixel_y = -6;
+	dir = 4
 	},
 /obj/machinery/button/mass_driver{
-	pixel_y = -4;
 	pixel_x = -35;
 	id_tag = "eject";
-	name = "4. SM CORE EJECT"
+	name = "4. SM CORE EJECT";
+	dir = 4
 	},
 /obj/machinery/atmospherics/valve/digital{
 	dir = 1;
@@ -39818,7 +39837,7 @@ fj
 fM
 yO
 Rm
-mI
+ZA
 SO
 dI
 Xu
@@ -41426,7 +41445,7 @@ Ic
 wK
 Dt
 Eo
-VG
+Eo
 GV
 gm
 Eo
@@ -44260,7 +44279,7 @@ Zi
 bk
 ST
 HM
-VG
+Eo
 aa
 aa
 aa
@@ -57645,8 +57664,8 @@ JJ
 Km
 JJ
 JJ
-Jx
 sR
+Jh
 Sp
 tm
 RC
@@ -58673,8 +58692,8 @@ JJ
 Km
 JJ
 JJ
-Jx
-Pd
+sR
+Jh
 KF
 BG
 RM
