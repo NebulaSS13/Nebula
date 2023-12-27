@@ -28,7 +28,7 @@
 /obj/item/mech_equipment/mounted_system/projectile
 	name = "mounted submachine gun"
 	icon_state = "mech_ballistic"
-	holding_type = /obj/item/gun/projectile/automatic/smg/mech
+	holding = /obj/item/gun/projectile/automatic/smg/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 	origin_tech = "{'programming':4,'combat':6,'engineering':5}"
@@ -49,7 +49,7 @@
 /obj/item/mech_equipment/mounted_system/projectile/assault_rifle
 	name = "mounted assault rifle"
 	icon_state = "mech_ballistic2"
-	holding_type = /obj/item/gun/projectile/automatic/assault_rifle/mech
+	holding = /obj/item/gun/projectile/automatic/assault_rifle/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 	origin_tech = "{'programming':4,'combat':8,'engineering':6}"
@@ -69,9 +69,10 @@
 /obj/item/mech_equipment/mounted_system/projectile/machine
 	name = "mounted machine gun"
 	icon_state = "mech_machine_gun"
-	holding_type = /obj/item/gun/projectile/automatic/machine/mech
+	holding = /obj/item/gun/projectile/automatic/machine/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+	origin_tech = "{'programming':4,'combat':8,'engineering':6}"
 
 /obj/item/gun/projectile/automatic/machine/mech
 	magazine_type = /obj/item/ammo_magazine/mech/rifle/drum

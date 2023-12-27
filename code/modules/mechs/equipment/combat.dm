@@ -2,7 +2,8 @@
 	name = "mounted electrolaser carbine"
 	desc = "A dual fire mode electrolaser system connected to the exosuit's targetting system."
 	icon_state = "mech_taser"
-	holding_type = /obj/item/gun/energy/taser/mounted/mech
+	origin_tech = "{'combat':1,'magnets':1,'engineering':1}"
+	holding = /obj/item/gun/energy/taser/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
@@ -10,13 +11,15 @@
 	name = "mounted ion rifle"
 	desc = "An exosuit-mounted ion rifle. Handle with care."
 	icon_state = "mech_ionrifle"
-	holding_type = /obj/item/gun/energy/ionrifle/mounted/mech
+	holding = /obj/item/gun/energy/ionrifle/mounted/mech
+	origin_tech = "{'combat':2,'powerstorage':2,'magnets':4,'engineering':2}"
 
 /obj/item/mech_equipment/mounted_system/taser/laser
 	name = "\improper CH-PS \"Immolator\" laser"
 	desc = "An exosuit-mounted laser rifle. Handle with care."
 	icon_state = "mech_lasercarbine"
-	holding_type = /obj/item/gun/energy/laser/mounted/mech
+	holding = /obj/item/gun/energy/laser/mounted/mech
+	origin_tech = "{'combat':3,'magnets':2,'engineering':2}"
 
 /obj/item/gun/energy/taser/mounted/mech
 	use_external_power = TRUE
@@ -54,6 +57,7 @@
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 	material = /decl/material/solid/metal/steel
+	origin_tech = "{'magnets':3,'powerstorage':4,'materials':2,'engineering':2}"
 	matter = list(
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
@@ -224,6 +228,8 @@
 
 //Melee! As a general rule I would recommend using regular objects and putting logic in them.
 /obj/item/mech_equipment/mounted_system/melee
+	abstract_type = /obj/item/mech_equipment/mounted_system/melee
+	origin_tech = "{'combat':1,'materials':1,'engineering':1}"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 
@@ -258,7 +264,7 @@
 	. = ..()
 	if (user.a_intent != I_HURT)
 		return
-	var/obj/item/mech_equipment/mounted_system/melee/mechete/MC = loc
+	var/obj/item/mech_equipment/mounted_system/melee/machete/MC = loc
 	if (istype(MC))
 		//SPIN BLADE ATTACK GO!
 		var/mob/living/exosuit/E = MC.owner
@@ -272,9 +278,9 @@
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
 				playsound(E, 'sound/mecha/mechturn.ogg', 40, 1)
 
-/obj/item/mech_equipment/mounted_system/melee/mechete
+/obj/item/mech_equipment/mounted_system/melee/machete
 	icon_state = "mech_blade"
-	holding_type = /obj/item/hatchet/machete/mech
+	holding = /obj/item/hatchet/machete/mech
 
 
 //Ballistic shield
@@ -282,14 +288,15 @@
 	name = "exosuit ballistic shield"
 	desc = "This formidable line of defense, sees widespread use in planetary peacekeeping operations and military formations alike."
 	icon_state = "mech_shield" //Rendering is handled by aura due to layering issues: TODO, figure out a better way to do this
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_UTILITY)
+	origin_tech = "{'materials':2,'engineering':2}"
 	var/obj/aura/mech_ballistic/aura = null
 	var/last_push = 0
 	var/chance = 60 //For attacks from the front, diminishing returns
 	var/last_max_block = 0 //Blocking during a perfect block window resets this, else there is an anti spam
 	var/max_block = 60 // Should block most things
 	var/blocking = FALSE
-	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
-	restricted_software = list(MECH_SOFTWARE_UTILITY)
 
 /obj/item/mech_equipment/ballistic_shield/installed(mob/living/exosuit/_owner)
 	. = ..()

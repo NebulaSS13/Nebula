@@ -1,13 +1,12 @@
 //Simple toggleabse module. Just put holding in hands or get it back
 /obj/item/organ/internal/augment/active/simple
 	origin_tech = null
-	var/obj/item/holding = null
-	var/holding_type = null
+	var/obj/item/holding
 
 /obj/item/organ/internal/augment/active/simple/Initialize()
 	. = ..()
-	if(holding_type)
-		holding = new holding_type(src)
+	if(ispath(holding))
+		holding = new holding(src)
 		holding.canremove = 0
 		if(!origin_tech)
 			origin_tech = holding.get_origin_tech()
@@ -18,7 +17,6 @@
 		if(holding.loc == src)
 			QDEL_NULL(holding)
 	return ..()
-
 
 /obj/item/organ/internal/augment/active/simple/proc/holding_dropped()
 
