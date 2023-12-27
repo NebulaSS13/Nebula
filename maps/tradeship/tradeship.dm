@@ -1,5 +1,9 @@
 #if !defined(USING_MAP_DATUM)
 
+	#ifdef UNIT_TEST
+		#include "../../code/unit_tests/offset_tests.dm"
+	#endif
+
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
 	#include "../../mods/content/mundane.dm"

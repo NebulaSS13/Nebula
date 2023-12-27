@@ -1,5 +1,9 @@
 #if !defined(USING_MAP_DATUM)
 
+	#ifdef UNIT_TEST
+		#include "../../code/unit_tests/offset_tests.dm"
+	#endif
+
 	#include "example_areas.dm"
 	#include "example_shuttles.dm"
 	#include "example_departments.dm"
