@@ -106,7 +106,8 @@
 "au" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "shuttle3_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
@@ -238,13 +239,15 @@
 /area/shuttle/escape_shuttle)
 "aJ" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = -30
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
 "aK" = (
 /obj/machinery/status_display{
-	pixel_y = -30
+	pixel_y = -30;
+	dir = 1
 	},
 /turf/simulated/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
@@ -257,7 +260,7 @@
 /area/shuttle/escape_shuttle)
 "aN" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = 30
+	pixel_y = 29
 	},
 /turf/simulated/floor/shuttle/yellow,
 /area/shuttle/escape_shuttle)
@@ -359,7 +362,8 @@
 "hM" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "shuttle2_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
@@ -373,7 +377,8 @@
 "qu" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "shuttle1_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;

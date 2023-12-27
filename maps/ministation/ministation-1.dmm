@@ -215,7 +215,8 @@
 /obj/machinery/network/requests_console{
 	department = "Detective's office";
 	pixel_x = 30;
-	initial_network_id = "molluscnet"
+	initial_network_id = "molluscnet";
+	dir = 4
 	},
 /turf/simulated/floor/wood,
 /area/ministation/detective)
@@ -298,12 +299,14 @@
 /obj/structure/table/reinforced,
 /obj/machinery/button/blast_door{
 	id_tag = "quarantine";
-	name = "Infirmary Quarantine Button"
+	name = "Infirmary Quarantine Button";
+	directional_offset = null
 	},
 /obj/machinery/button/alternate/door{
 	id_tag = "medleave";
 	name = "Interior medbay doors button";
-	pixel_y = 8
+	pixel_y = 8;
+	directional_offset = null
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -383,7 +386,7 @@
 	},
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/simulated/floor/carpet,
 /area/ministation/hop)
@@ -437,7 +440,6 @@
 /area/ministation/security)
 "db" = (
 /obj/machinery/power/apc{
-	areastring = null;
 	name = "_South APC";
 	pixel_y = -24
 	},
@@ -476,7 +478,8 @@
 /area/ministation/security)
 "ds" = (
 /obj/machinery/computer/cryopod{
-	pixel_y = -27
+	pixel_y = -24;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/ministation/arrival)
@@ -645,9 +648,7 @@
 /area/ministation/maint/l2centrals)
 "ey" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
@@ -700,11 +701,8 @@
 	},
 /obj/machinery/computer/modular/telescreen/preset/generic{
 	name = "south bump";
-	pixel_y = -32
-	},
-/obj/item/radio/intercom/locked/entertainment{
-	dir = 1;
-	pixel_y = -22
+	pixel_y = -20;
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
@@ -712,9 +710,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled,
 /area/ministation/hall/w2)
 "fr" = (
@@ -959,7 +955,7 @@
 /obj/item/bedsheet/mime,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -27
+	pixel_y = -30
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/security)
@@ -1052,7 +1048,8 @@
 /area/ministation/security)
 "hz" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -1082,7 +1079,8 @@
 /obj/item/taperecorder,
 /obj/item/folder/yellow,
 /obj/structure/filing_cabinet/wall{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
 /turf/simulated/floor/carpet/red,
 /area/ministation/detective)
@@ -1224,7 +1222,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1318,7 +1316,8 @@
 /obj/item/storage/fancy/cigarettes,
 /obj/item/handcuffs,
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/item/clothing/head/beret/corp/sec,
 /obj/machinery/light{
@@ -1447,12 +1446,15 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/l2centraln)
 "jA" = (
-/obj/effect/wallframe_spawn/no_grille,
-/obj/structure/sign/department/botany{
-	pixel_y = -1
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/sign/warning/airlock{
+	dir = 4;
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled,
-/area/ministation/hydro)
+/area/ministation/hall/w2)
 "jF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -1491,7 +1493,8 @@
 /obj/structure/table,
 /obj/item/book/skill/service/cooking,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cafe)
@@ -1500,7 +1503,7 @@
 /obj/item/hand_labeler,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/item/storage/pill_bottle,
 /obj/machinery/light{
@@ -1554,6 +1557,10 @@
 /obj/structure/dogbed,
 /obj/item/clothing/shoes/color/brown{
 	desc = "Old, but sensible brown shoes. These belong to Ian."
+	},
+/obj/item/radio/intercom/locked/entertainment{
+	dir = 1;
+	pixel_y = -30
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
@@ -1632,8 +1639,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "l2_central_north_airlock";
 	name = "exterior access button";
-	pixel_x = 10;
-	pixel_y = 20;
+	pixel_y = 24;
 	command = "cycle_exterior"
 	},
 /turf/simulated/floor/plating,
@@ -1692,14 +1698,15 @@
 	},
 /obj/structure/bed/chair,
 /obj/machinery/status_display{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/hall/w2)
 "lJ" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = -34;
+	pixel_y = -30;
 	dir = 1
 	},
 /turf/simulated/floor/carpet/blue2,
@@ -1930,8 +1937,7 @@
 /obj/machinery/button/access/interior{
 	id_tag = "l2_central_north_airlock";
 	name = "interior access button";
-	pixel_x = -10;
-	pixel_y = 20
+	pixel_y = 24
 	},
 /turf/simulated/floor,
 /area/ministation/maint/l2centraln)
@@ -2018,7 +2024,7 @@
 	id_tag = "l2_central_south_airlock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = 10
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/ministation/maint/l2centrals)
@@ -2108,7 +2114,7 @@
 /obj/machinery/camera/autoname,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/door/firedoor{
 	dir = 8
@@ -2238,7 +2244,6 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sqm_airlock";
 	name = "exterior access button";
-	pixel_x = 10;
 	pixel_y = 20;
 	command = "cycle_exterior"
 	},
@@ -2372,7 +2377,7 @@
 	},
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/body_scanconsole{
 	dir = 8
@@ -2434,7 +2439,7 @@
 /obj/structure/table,
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/item/bonesetter,
 /obj/item/bonegel,
@@ -2601,7 +2606,8 @@
 "qL" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "l2_central_north_sensor";
-	pixel_y = 20
+	pixel_y = 24;
+	pixel_x = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "l2_central_north_airlock";
@@ -2609,7 +2615,8 @@
 	tag_airpump = "l2_central_north_vent";
 	tag_chamber_sensor = "l2_central_north_sensor";
 	tag_exterior_door = "l2_central_north_airlock_exterior";
-	tag_interior_door = "l2_central_north_airlock_interior"
+	tag_interior_door = "l2_central_north_airlock_interior";
+	pixel_x = -8
 	},
 /turf/simulated/floor/plating,
 /area/ministation/maint/l2centraln)
@@ -2637,7 +2644,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -32
+	pixel_y = -30
 	},
 /obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/dark,
@@ -2656,7 +2663,7 @@
 "qX" = (
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/machinery/computer/modular/preset/security{
 	dir = 4
@@ -2686,7 +2693,8 @@
 	dir = 8
 	},
 /obj/machinery/status_display{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/hall/w2)
@@ -2832,7 +2840,8 @@
 /obj/machinery/airlock_sensor{
 	id_tag = "l2_central_south_sensor";
 	pixel_y = 10;
-	pixel_x = -20
+	pixel_x = -20;
+	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "l2_central_south_airlock";
@@ -2894,7 +2903,8 @@
 /area/ministation/medical)
 "rM" = (
 /obj/machinery/status_display{
-	pixel_y = -29
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
@@ -3464,7 +3474,7 @@
 "tS" = (
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/cooker/fryer,
@@ -3663,7 +3673,8 @@
 /area/ministation/hall/e2)
 "ux" = (
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
@@ -3771,7 +3782,8 @@
 	icon_state = "tube1"
 	},
 /obj/structure/sign/warning/nosmoking_1{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
@@ -3884,7 +3896,7 @@
 /area/ministation/cafe)
 "vt" = (
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/structure/flora/pottedplant/minitree,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
@@ -4004,7 +4016,7 @@
 /obj/item/pen,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -32
+	pixel_y = -30
 	},
 /obj/item/scanner/autopsy,
 /turf/simulated/floor/tiled/dark,
@@ -4220,7 +4232,7 @@
 "wL" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/freezer{
@@ -4403,7 +4415,8 @@
 "xt" = (
 /obj/structure/table,
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/machinery/chemical_dispenser/bar_alc/full{
 	dir = 8
@@ -4571,7 +4584,8 @@
 "xW" = (
 /obj/structure/table/marble,
 /obj/machinery/status_display{
-	pixel_y = -29
+	pixel_y = -29;
+	dir = 1
 	},
 /obj/machinery/door/firedoor{
 	dir = 8
@@ -4759,7 +4773,8 @@
 /area/ministation/cafe)
 "yB" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = -32
+	pixel_y = -29;
+	dir = 1
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -4801,7 +4816,8 @@
 	dir = 8
 	},
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/hydro)
@@ -5237,7 +5253,8 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 30
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/simulated/floor/lino,
 /area/ministation/cafe)
@@ -5373,7 +5390,6 @@
 /obj/machinery/button/access/interior{
 	id_tag = "sqm_airlock";
 	name = "interior access button";
-	pixel_x = -10;
 	pixel_y = 20
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -5417,11 +5433,8 @@
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/machinery/computer/modular/telescreen/preset/generic{
 	name = "south bump";
-	pixel_y = -32
-	},
-/obj/item/radio/intercom/locked/entertainment{
-	dir = 1;
-	pixel_y = -22
+	pixel_y = -20;
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cafe)
@@ -5547,7 +5560,8 @@
 "CJ" = (
 /obj/structure/bed/roller,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
@@ -5591,7 +5605,7 @@
 /area/ministation/hall/w2)
 "CV" = (
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/simulated/floor/carpet,
 /area/ministation/hall/w2)
@@ -5700,9 +5714,7 @@
 /area/ministation/hall/w2)
 "Eg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
@@ -5768,7 +5780,7 @@
 	dir = 8
 	},
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -5847,6 +5859,10 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
+/obj/item/radio/intercom/locked/entertainment{
+	dir = 1;
+	pixel_y = -30
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cafe)
 "FL" = (
@@ -6011,7 +6027,7 @@
 "HF" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/alarm{
 	dir = 4;
@@ -6028,9 +6044,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "HJ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled,
 /area/ministation/hall/w2)
 "HL" = (
@@ -6083,7 +6097,8 @@
 /area/ministation/maint/l2centrals)
 "Ie" = (
 /obj/machinery/status_display{
-	pixel_y = -29
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/ministation/arrival)
@@ -6154,7 +6169,8 @@
 /area/ministation/maint/l2centrals)
 "Iz" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
@@ -6186,7 +6202,8 @@
 /area/ministation/hop)
 "IT" = (
 /obj/machinery/newscaster{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 8
 	},
 /obj/structure/flora/pottedplant/largebush,
 /obj/machinery/camera/network/security{
@@ -6546,7 +6563,8 @@
 /obj/abstract/landmark/latejoin/cryo,
 /obj/machinery/status_display{
 	pixel_y = -1;
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cryo)
@@ -6709,7 +6727,8 @@
 "Nu" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "escape2_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -7086,7 +7105,8 @@
 "PY" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "escape1_sensor";
-	pixel_y = -20
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -7337,12 +7357,13 @@
 /turf/simulated/wall,
 /area/ministation/maint/hydromaint)
 "Sd" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/structure/sign/warning/airlock{
-	pixel_y = -1
+/obj/effect/floor_decal/corner/green/half,
+/obj/structure/sign/department/botany{
+	pixel_y = -32;
+	dir = 1
 	},
-/turf/simulated/floor/plating,
-/area/ministation/hall/w2)
+/turf/simulated/floor/tiled,
+/area/ministation/hall/e2)
 "Sg" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -7546,11 +7567,13 @@
 	tag_airpump = "sqm_vent";
 	tag_chamber_sensor = "sqm_sensor";
 	tag_exterior_door = "sqm_airlock_exterior";
-	tag_interior_door = "sqm_airlock_interior"
+	tag_interior_door = "sqm_airlock_interior";
+	pixel_x = -8
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "sqm_sensor";
-	pixel_y = 20
+	pixel_y = 24;
+	pixel_x = 8
 	},
 /turf/simulated/floor/plating,
 /area/ministation/maint/hydromaint)
@@ -7615,7 +7638,8 @@
 /area/ministation/medical)
 "UC" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/structure/closet/wardrobe/chemistry_white,
 /turf/simulated/floor/tiled/white,
@@ -7655,7 +7679,7 @@
 	pixel_y = 32
 	},
 /obj/item/radio/intercom/locked/entertainment{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /obj/machinery/light_switch{
 	dir = 8;
@@ -7712,7 +7736,8 @@
 /area/ministation/cryo)
 "Vr" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
@@ -7726,8 +7751,8 @@
 	id_tag = "l2_central_south_airlock";
 	name = "exterior access button";
 	pixel_x = -20;
-	pixel_y = -10;
-	command = "cycle_exterior"
+	command = "cycle_exterior";
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/ministation/maint/l2centrals)
@@ -7741,8 +7766,8 @@
 /area/ministation/security)
 "Vu" = (
 /obj/machinery/status_display{
-	pixel_y = -1;
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/hydro)
@@ -7774,7 +7799,7 @@
 /obj/structure/rack,
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/item/clothing/mask/horsehead,
 /obj/item/storage/wallet/random{
@@ -7799,7 +7824,8 @@
 	pixel_y = 32
 	},
 /obj/structure/sign/warning/smoking{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
 /turf/simulated/floor/carpet,
 /area/ministation/hall/w2)
@@ -7944,7 +7970,7 @@
 	},
 /obj/structure/sign/department/chemistry{
 	pixel_x = 32;
-	pixel_y = -5
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/hall/e2)
@@ -7956,7 +7982,8 @@
 	dir = 8
 	},
 /obj/structure/sign/warning/armory{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
@@ -8005,7 +8032,8 @@
 /obj/machinery/button/blast_door{
 	id_tag = "secshut";
 	name = "security shutter button";
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /obj/machinery/firealarm{
 	dir = 8;
@@ -8058,7 +8086,7 @@
 "YY" = (
 /obj/item/radio/intercom{
 	name = "Common Channel";
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/structure/table,
 /obj/item/storage/firstaid/o2{
@@ -32674,13 +32702,13 @@ kZ
 kZ
 rt
 OT
-Sd
+rt
 kZ
 cr
 kZ
 rt
 OT
-Sd
+rt
 OT
 rt
 aa
@@ -32931,13 +32959,13 @@ kZ
 lI
 mh
 Ry
-mh
+jA
 nx
 oH
 rc
 mh
 Ry
-mh
+jA
 rW
 kZ
 aa
@@ -47850,8 +47878,8 @@ ty
 Xw
 ty
 um
-jV
-jA
+Sd
+OV
 if
 qT
 wN

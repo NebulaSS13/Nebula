@@ -42,7 +42,7 @@
 /obj/machinery/photocopier,
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 20
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/court)
@@ -179,7 +179,9 @@
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "slimeblast3";
-	name = "Enclosure 3 Blastdoors Button"
+	name = "Enclosure 3 Blastdoors Button";
+	directional_offset = null;
+	dir = 8
 	},
 /obj/machinery/camera/network/research,
 /turf/simulated/floor/tiled,
@@ -269,7 +271,8 @@
 	icon_state = "2-8"
 	},
 /obj/item/radio/intercom{
-	pixel_y = -1
+	pixel_y = -1;
+	directional_offset = null
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
@@ -377,7 +380,8 @@
 	icon_state = "tube1"
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -425,12 +429,17 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/button/blast_door{
-	id_tag = "bridgeblast"
+	id_tag = "bridgeblast";
+	dir = 8;
+	pixel_y = -2;
+	directional_offset = null
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "sensor";
 	name = "Sensor Shroud";
-	pixel_y = 9
+	pixel_y = 8;
+	dir = 8;
+	directional_offset = null
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
@@ -617,7 +626,8 @@
 /area/ministation/bridge)
 "ca" = (
 /obj/machinery/newscaster{
-	pixel_y = -28
+	pixel_y = -28;
+	dir = 1
 	},
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled,
@@ -733,7 +743,8 @@
 	icon_state = "1-2"
 	},
 /obj/structure/sign/warning/high_voltage{
-	pixel_y = -24
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
@@ -1081,7 +1092,8 @@
 /area/ministation/science)
 "eF" = (
 /obj/structure/fireaxecabinet{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
@@ -1097,8 +1109,8 @@
 	id_tag = "ministation_science_dock";
 	name = "exterior access button";
 	pixel_x = -20;
-	pixel_y = -10;
-	command = "cycle_exterior"
+	command = "cycle_exterior";
+	dir = 4
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -1217,7 +1229,7 @@
 "fe" = (
 /obj/machinery/computer/operating,
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -1434,6 +1446,10 @@
 /obj/effect/floor_decal/corner/purple,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/sign/department/xenobio_3{
+	pixel_x = 32;
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "gI" = (
@@ -1779,7 +1795,8 @@
 /area/ministation/science)
 "in" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 27
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/machinery/recharger,
 /obj/structure/table,
@@ -1905,7 +1922,7 @@
 /obj/structure/bed/chair/office/light,
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 20
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -2101,7 +2118,8 @@
 	dir = 8
 	},
 /obj/structure/sign/department/eva{
-	pixel_y = -23
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -2488,7 +2506,8 @@
 	dir = 8
 	},
 /obj/structure/sign/department/xenoflora{
-	pixel_y = -32
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -2612,7 +2631,7 @@
 	dir = 4
 	},
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2722,7 +2741,8 @@
 /area/ministation/maint/l3ne)
 "nr" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = -27
+	pixel_x = -29;
+	dir = 4
 	},
 /obj/structure/table,
 /obj/item/storage/box/syringes,
@@ -3048,7 +3068,8 @@
 /area/ministation/maint/l3nw)
 "qx" = (
 /obj/machinery/keycard_auth{
-	pixel_x = -24
+	pixel_x = -24;
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
@@ -3148,7 +3169,7 @@
 	id_tag = "RD1";
 	name = "RD Shutter Button";
 	pixel_x = 24;
-	pixel_y = -6
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -3356,7 +3377,8 @@
 	dir = 6
 	},
 /obj/structure/sign/department/science_2{
-	pixel_x = 31
+	pixel_x = 32;
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
@@ -3480,7 +3502,8 @@
 /obj/machinery/airlock_sensor{
 	id_tag = "science_sensor";
 	pixel_y = 10;
-	pixel_x = -20
+	pixel_x = -20;
+	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	tag_airpump = "science_vent";
@@ -3564,9 +3587,6 @@
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
-"vA" = (
-/turf/space,
-/area/space)
 "vJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/power/apc{
@@ -3902,11 +3922,12 @@
 	id_tag = "scishut";
 	name = "Science Shutter Button";
 	pixel_x = 5;
-	pixel_y = -6
+	pixel_y = -6;
+	directional_offset = null
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/structure/table,
 /obj/item/paper_bin{
@@ -4148,6 +4169,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
+/obj/structure/sign/warning/server_room{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "BD" = (
@@ -4164,7 +4188,8 @@
 "BG" = (
 /obj/structure/table,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 32
+	pixel_x = 29;
+	dir = 8
 	},
 /obj/item/disk/nuclear,
 /obj/machinery/recharger,
@@ -4300,7 +4325,8 @@
 /area/ministation/telecomms)
 "CC" = (
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -4317,7 +4343,8 @@
 	dir = 8
 	},
 /obj/structure/sign/warning/server_room{
-	pixel_x = -32
+	pixel_x = -32;
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/ministation/hall/s3)
@@ -4447,7 +4474,7 @@
 /area/ministation/hall/n3)
 "Dc" = (
 /obj/item/radio/intercom{
-	pixel_y = 25
+	pixel_y = 20
 	},
 /turf/simulated/floor/carpet/green,
 /area/ministation/company_rep)
@@ -4469,7 +4496,8 @@
 /obj/item/radio,
 /obj/item/radio/intercom{
 	name = "Station Intercom (General)";
-	pixel_y = -35
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/item/chems/spray/extinguisher,
 /turf/simulated/floor/lino,
@@ -4948,7 +4976,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 25
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ministation/science)
@@ -5190,7 +5218,8 @@
 /area/ministation/hall/n3)
 "LP" = (
 /obj/machinery/keycard_auth{
-	pixel_y = -24
+	pixel_y = -20;
+	dir = 1
 	},
 /obj/machinery/light{
 	dir = 4;
@@ -5288,7 +5317,7 @@
 "Ms" = (
 /obj/item/radio/intercom{
 	dir = 8;
-	pixel_x = 20
+	pixel_x = 22
 	},
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/item/folder,
@@ -5347,7 +5376,7 @@
 "MP" = (
 /obj/machinery/light_switch{
 	dir = 8;
-	pixel_x = 32
+	pixel_x = 24
 	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -5454,8 +5483,8 @@
 /area/ministation/court)
 "Ny" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 5;
-	pixel_y = -32
+	pixel_y = -29;
+	dir = 1
 	},
 /turf/simulated/floor/wood/yew,
 /area/ministation/court)
@@ -5608,7 +5637,8 @@
 /area/ministation/science)
 "OC" = (
 /obj/structure/sign/warning/airlock{
-	pixel_y = -22
+	pixel_y = -32;
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -5636,7 +5666,7 @@
 	id_tag = "science_shuttle";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = -13
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/ministation/shuttle/outgoing)
@@ -5800,7 +5830,7 @@
 	tag_exterior_door = "science_shuttle_exterior";
 	tag_interior_door = "science_shuttle_interior";
 	dir = 4;
-	pixel_x = -20
+	pixel_x = -22
 	},
 /turf/simulated/floor/plating,
 /area/ministation/shuttle/outgoing)
@@ -5860,7 +5890,7 @@
 	dir = 6
 	},
 /obj/machinery/light_switch{
-	pixel_y = 27;
+	pixel_y = 25;
 	pixel_x = -23
 	},
 /turf/simulated/floor/carpet/magenta,
@@ -5937,7 +5967,7 @@
 /obj/structure/table,
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -25
+	pixel_x = -22
 	},
 /obj/machinery/light{
 	dir = 1
@@ -5945,18 +5975,6 @@
 /obj/item/storage/firstaid/stab,
 /turf/simulated/floor/tiled,
 /area/ministation/shuttle/outgoing)
-"QC" = (
-/obj/structure/closet/secure_closet{
-	closet_appearance = /decl/closet_appearance/secure_closet/rd;
-	req_access = list("ACCESS_RESEARCH");
-	name = "Science locker"
-	},
-/obj/item/storage/med_pouch/trauma,
-/obj/item/stack/tape_roll/duct_tape,
-/obj/item/twohanded/spear/diamond,
-/obj/item/shield/buckler,
-/turf/simulated/floor/tiled/white,
-/area/ministation/science)
 "QD" = (
 /obj/structure/table/woodentable,
 /obj/item/book/printable_red,
@@ -5976,12 +5994,6 @@
 	},
 /obj/abstract/landmark/latejoin/cyborg,
 /turf/simulated/floor/tiled/steel_grid,
-/area/ministation/science)
-"QP" = (
-/obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/reinforced,
-/obj/structure/sign/warning/server_room,
-/turf/simulated/floor/plating,
 /area/ministation/science)
 "QR" = (
 /obj/machinery/status_display{
@@ -6051,10 +6063,6 @@
 	},
 /obj/effect/floor_decal/corner/purple{
 	dir = 6
-	},
-/obj/structure/sign/department/xenobio_3{
-	pixel_y = 32;
-	pixel_x = 32
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
@@ -6463,7 +6471,7 @@
 /area/ministation/library)
 "Uo" = (
 /obj/item/radio/intercom{
-	pixel_y = 31
+	pixel_y = 20
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -6715,9 +6723,9 @@
 /obj/machinery/button/access/interior{
 	id_tag = "science_shuttle";
 	name = "exterior access button";
-	pixel_x = 21;
-	pixel_y = 11;
-	command = "cycle_exterior"
+	pixel_x = 20;
+	command = "cycle_exterior";
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/ministation/shuttle/outgoing)
@@ -6875,7 +6883,8 @@
 /area/ministation/court)
 "Xi" = (
 /obj/machinery/newscaster{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -6972,7 +6981,8 @@
 	id_tag = "repblast";
 	name = "Panic Lockdown";
 	pixel_y = -23;
-	pixel_x = -26
+	pixel_x = -26;
+	dir = 1
 	},
 /turf/simulated/floor/carpet/green,
 /area/ministation/company_rep)
@@ -7009,7 +7019,7 @@
 	id_tag = "ministation_science_dock";
 	name = "interior access button";
 	pixel_x = 20;
-	pixel_y = 10
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/cable{
@@ -7049,8 +7059,8 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "science_shuttle_sensor";
-	pixel_y = 10;
-	pixel_x = -20
+	pixel_x = -22;
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/ministation/shuttle/outgoing)
@@ -7124,17 +7134,19 @@
 /obj/machinery/button/blast_door{
 	id_tag = "anomvent";
 	name = "emergency vent control";
-	pixel_y = -24;
-	pixel_x = -5
+	pixel_y = -32;
+	pixel_x = -5;
+	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
 /obj/machinery/button/mass_driver{
-	pixel_y = -22;
+	pixel_y = -32;
 	pixel_x = 7;
 	id_tag = "artifactlauncher";
-	name = "LAUNCH"
+	name = "LAUNCH";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -7184,7 +7196,7 @@
 	dir = 4
 	},
 /obj/machinery/firealarm{
-	pixel_y = 25
+	pixel_y = 21
 	},
 /turf/simulated/floor/wood/yew,
 /area/ministation/court)
@@ -7257,7 +7269,7 @@
 	},
 /obj/item/radio/intercom{
 	dir = 4;
-	pixel_x = -23
+	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
@@ -37203,7 +37215,7 @@ aa
 aa
 aa
 aa
-vA
+aa
 Mo
 aT
 bs
@@ -44194,7 +44206,7 @@ gi
 ae
 hM
 ip
-QP
+io
 BC
 jx
 db
@@ -44719,7 +44731,7 @@ ae
 gI
 db
 db
-QC
+cI
 ae
 aa
 oc
