@@ -218,7 +218,7 @@
 /area/centcom)
 "ala" = (
 /obj/item/radio/intercom{
-	pixel_y = 22
+	pixel_y = 20
 	},
 /obj/structure/decoy{
 	name = "A.L.I.C.E."
@@ -794,7 +794,7 @@
 /obj/machinery/light,
 /obj/item/radio/intercom{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
@@ -1245,7 +1245,8 @@
 /area/centcom/holding)
 "aLs" = (
 /obj/structure/closet/hydrant{
-	pixel_x = 30
+	pixel_x = 30;
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -1469,7 +1470,8 @@
 "aMg" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "centcom_escape_dock_north_sensor";
-	pixel_y = -25
+	pixel_y = -25;
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/centcom/holding)
@@ -1546,7 +1548,8 @@
 /area/centcom/holding)
 "aMt" = (
 /obj/machinery/status_display{
-	pixel_x = 32
+	pixel_x = 32;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -1952,7 +1955,8 @@
 /area/centcom/holding)
 "aOZ" = (
 /obj/machinery/status_display{
-	pixel_y = -30
+	pixel_y = -30;
+	dir = 1
 	},
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/warning{
@@ -2127,7 +2131,8 @@
 /area/shuttle/escape_shuttle)
 "bpb" = (
 /obj/structure/closet/hydrant{
-	pixel_x = -30
+	pixel_x = -30;
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
