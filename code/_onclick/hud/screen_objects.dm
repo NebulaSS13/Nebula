@@ -45,11 +45,6 @@
 	mouse_over_atom_ref = null
 	update_icon()
 
-/obj/screen/inventory/Click()
-	. = ..()
-	mouse_over_atom_ref = null
-	update_icon()
-
 /obj/screen/inventory/MouseEntered(location, control, params)
 	. = ..()
 	if(!slot_id || !usr)
@@ -304,107 +299,11 @@
 /obj/screen/intent/on_update_icon()
 	icon_state = "intent_[intent]"
 
-/obj/screen/Click(location, control, params)
-	if(!usr)	return 1
-
-	switch(name)
-		if("toggle")
-			if(usr.hud_used.inventory_shown)
-				usr.client.screen -= usr.hud_used.other
-				usr.hud_used.hide_inventory()
-			else
-				usr.client.screen += usr.hud_used.other
-				usr.hud_used.show_inventory()
-
-		if("equip")
-			if(ishuman(usr))
-				var/mob/living/carbon/human/H = usr
-				H.quick_equip()
-
-		if("resist")
-			if(isliving(usr))
-				var/mob/living/L = usr
-				L.resist()
-
-		if("Reset Machine")
-			usr.unset_machine()
-
-		if("up hint")
-			if(isliving(usr))
-				var/mob/living/L = usr
-				L.lookup()
-
-		if("internal")
-			if(isliving(usr))
-				var/mob/living/M = usr
-				M.ui_toggle_internals()
-
-		if("act_intent")
-			usr.a_intent_change("right")
-
-		if("throw")
-			if(!usr.stat && isturf(usr.loc) && !usr.restrained())
-				usr.toggle_throw_mode()
-		if("drop")
-			if(usr.client)
-				usr.client.drop_item()
-
-		if("module")
-			if(isrobot(usr))
-				var/mob/living/silicon/robot/R = usr
-				R.pick_module()
-
-		if("inventory")
-			if(isrobot(usr))
-				var/mob/living/silicon/robot/R = usr
-				if(R.module)
-					R.hud_used.toggle_show_robot_modules()
-					return 1
-				else
-					to_chat(R, "You haven't selected a module yet.")
-
-		if("radio")
-			if(isrobot(usr))
-				var/mob/living/silicon/robot/R = usr
-				R.radio_menu()
-		if("panel")
-			if(isrobot(usr))
-				var/mob/living/silicon/robot/R = usr
-				R.installed_modules()
-
-		if("store")
-			if(isrobot(usr))
-				var/mob/living/silicon/robot/R = usr
-				if(R.module)
-					R.uneq_active()
-					R.hud_used.update_robot_modules_display()
-				else
-					to_chat(R, "You haven't selected a module yet.")
-
-		if("module1")
-			if(isrobot(usr))
-				var/mob/living/silicon/robot/R = usr
-				R.toggle_module(1)
-
-		if("module2")
-			if(isrobot(usr))
-				var/mob/living/silicon/robot/R = usr
-				R.toggle_module(2)
-
-		if("module3")
-			if(isrobot(usr))
-				var/mob/living/silicon/robot/R = usr
-				R.toggle_module(3)
-		else
-			return 0
-	return 1
-
 /obj/screen/inventory/Click()
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
 	if(!usr.canClick() || usr.incapacitated())
 		return TRUE
-
 	if(name == "swap" || name == "hand")
 		usr.swap_hand()
 	else if(name in usr.get_held_item_slots())
@@ -414,7 +313,8 @@
 			usr.select_held_item_slot(name)
 	else if(usr.attack_ui(slot_id))
 		usr.update_inhand_overlays(FALSE)
-
+	mouse_over_atom_ref = null
+	update_icon()
 	return TRUE
 
 // Character setup stuff
