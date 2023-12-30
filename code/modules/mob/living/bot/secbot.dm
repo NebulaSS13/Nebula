@@ -191,16 +191,18 @@
 	resetTarget() //we're done, failed or not. Don't want to get stuck if C is not
 
 /mob/living/bot/secbot/UnarmedAttack(var/mob/M, var/proximity)
-	if(!..())
+
+	. = ..()
+	if(.)
 		return
 
 	if(!istype(M))
-		return
+		return FALSE
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H) && H.lying)
 		cuff_target(H)
-		return
+		return TRUE
 
 	if(isanimal(M))
 		a_intent = I_HURT
@@ -209,6 +211,7 @@
 
 	stun_baton.attack(M, src, BP_CHEST) //robots and turrets aim for center of mass
 	flick(attack_state, src)
+	return TRUE
 
 /mob/living/bot/secbot/explode()
 	visible_message("<span class='warning'>[src] blows apart!</span>")

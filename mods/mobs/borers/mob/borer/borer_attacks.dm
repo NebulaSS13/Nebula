@@ -1,40 +1,44 @@
 /mob/living/simple_animal/borer/UnarmedAttack(atom/A, proximity)
 
+	. = ..()
+	if(.)
+		return
+
 	if(!isliving(A) || a_intent != I_GRAB)
-		return ..()
+		return FALSE
 
 	if(host || !can_use_borer_ability(requires_host_value = FALSE, check_last_special = FALSE))
-		return
+		return FALSE
 
 	var/mob/living/M = A
 	if(M.has_brain_worms())
 		to_chat(src, SPAN_WARNING("You cannot take a host who already has a passenger!"))
-		return
+		return TRUE
 
 	//TODO generalize borers to enter any mob. Until then, return early.
 	if(!ishuman(M))
 		to_chat(src, SPAN_WARNING("This creature is not sufficiently intelligent to host you."))
-		return
+		return TRUE
 	// end TODO
 
 	var/mob/living/carbon/human/H = M
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 	if(!E)
 		to_chat(src, SPAN_WARNING("\The [H] does not have a head!"))
-		return
+		return TRUE
 	if(!H.should_have_organ(BP_BRAIN))
 		to_chat(src, SPAN_WARNING("\The [H] does not seem to have a brain cavity to enter."))
-		return
+		return TRUE
 	if(H.check_head_coverage())
 		to_chat(src, SPAN_WARNING("You cannot get through that host's protective gear."))
-		return
+		return TRUE
 
 	to_chat(M, SPAN_WARNING("Something slimy begins probing at the opening of your ear canal..."))
 	to_chat(src, SPAN_NOTICE("You slither up [M] and begin probing at their ear canal..."))
 	set_ability_cooldown(5 SECONDS)
 
 	if(!do_after(src, 3 SECONDS, M))
-		return
+		return TRUE
 
 	to_chat(src, SPAN_NOTICE("You wiggle into \the [M]'s ear."))
 	if(M.stat == CONSCIOUS)
@@ -61,3 +65,4 @@
 			replace_brain()
 		else if(E) // If they're in normally, implant removal can get them out.
 			LAZYDISTINCTADD(E.implants, src)
+	return TRUE

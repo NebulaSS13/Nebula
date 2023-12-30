@@ -133,14 +133,16 @@
 			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
 
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
-	if(!..())
+
+	. = ..()
+	if(.)
 		return
 
 	if(busy)
-		return
+		return TRUE
 
 	if(get_turf(A) != loc)
-		return
+		return FALSE
 
 	if(emagged && istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
@@ -210,6 +212,7 @@
 					M.use(1)
 					addTiles(4)
 			anchored = FALSE
+	return TRUE
 
 /mob/living/bot/floorbot/explode()
 	turn_off()

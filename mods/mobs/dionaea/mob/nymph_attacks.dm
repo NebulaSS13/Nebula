@@ -1,7 +1,9 @@
 /mob/living/carbon/alien/diona/UnarmedAttack(var/atom/A)
 
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	if(incapacitated())
+		return ..()
 
+	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(istype(loc, /obj/structure/diona_gestalt))
 		var/obj/structure/diona_gestalt/gestalt = loc
 		return gestalt.handle_member_click(src, A)
@@ -28,45 +30,47 @@
 					qdel(pile)
 				S.forceMove(get_turf(G))
 				G.visible_message(SPAN_NOTICE("\A [S] falls out!"))
-		return
+		return TRUE
 		// End superhacky stuff.
 
 	if(ismob(A))
 		if(src != A && !gestalt_with(A))
 			visible_message(SPAN_NOTICE("\The [src] butts its head into \the [A]."))
-		return
-
-	. = ..()
+		return TRUE
+	return ..()
 
 /mob/living/carbon/alien/diona/proc/handle_tray_interaction(var/obj/machinery/portable_atmospherics/hydroponics/tray)
 
 	if(incapacitated())
-		return
+		return FALSE
 
 	if(!tray.seed)
 		var/obj/item/seeds/seeds = get_active_hand()
 		if(istype(seeds))
 			if(try_unequip(seeds))
 				tray.plant_seed(src, seeds)
-			return
+				return TRUE
+			return FALSE
 
 	if(tray.dead)
 		if(tray.remove_dead(src, silent = TRUE))
 			reagents.add_reagent(/decl/material/liquid/nutriment/glucose, rand(10,20))
 			visible_message(SPAN_NOTICE("<b>\The [src]</b> chews up the dead plant, clearing \the [tray] out."), SPAN_NOTICE("You devour the dead plant, clearing \the [tray]."))
-		return
+			return TRUE
+		return FALSE
 
 	if(tray.harvest)
 		if(tray.harvest(src))
 			visible_message(SPAN_NOTICE("<b>\The [src]</b> harvests from \the [tray]."), SPAN_NOTICE("You harvest the contents of \the [tray]."))
-		return
+			return TRUE
+		return FALSE
 
 	if(tray.weedlevel || tray.pestlevel)
 		reagents.add_reagent(/decl/material/liquid/nutriment/glucose, (tray.weedlevel + tray.pestlevel))
 		tray.weedlevel = 0
 		tray.pestlevel = 0
 		visible_message(SPAN_NOTICE("<b>\The [src]</b> begins rooting through \the [tray], ripping out pests and weeds, and eating them noisily."),SPAN_NOTICE("You begin rooting through \the [tray], ripping out pests and weeds, and eating them noisily."))
-		return
+		return TRUE
 
 	if(tray.nutrilevel < 10)
 		var/nutrition_cost = (10-tray.nutrilevel) * 5
@@ -76,7 +80,7 @@
 			adjust_nutrition(-((10-tray.nutrilevel) * 5))
 		else
 			to_chat(src, SPAN_NOTICE("You haven't eaten enough to refill \the [tray]'s nutrients."))
-		return
+		return TRUE
 
 	if(tray.waterlevel < 100)
 		var/nutrition_cost = FLOOR((100-tray.nutrilevel)/10) * 5
@@ -85,6 +89,7 @@
 			tray.waterlevel = 100
 		else
 			to_chat(src, SPAN_NOTICE("You haven't eaten enough to refill \the [tray]'s water."))
-		return
+		return TRUE
 
 	visible_message(SPAN_NOTICE("<b>\The [src]</b> rolls around in \the [tray] for a bit."),SPAN_NOTICE("You roll around in \the [tray] for a bit."))
+	return TRUE

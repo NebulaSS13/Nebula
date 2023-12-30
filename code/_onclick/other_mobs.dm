@@ -46,11 +46,12 @@
 
 /mob/living/carbon/alien/UnarmedAttack(var/atom/A, var/proximity)
 
-	if(!..())
-		return 0
+	. = ..()
+	if(.)
+		return
 
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	A.attack_generic(src,rand(5,6),"bites")
+	return A.attack_generic(src,rand(5,6),"bites")
 
 /*
 	New Players:
@@ -64,22 +65,25 @@
 */
 /mob/living/simple_animal/UnarmedAttack(var/atom/A, var/proximity)
 
-	if(!..())
+	. = ..()
+	if(.)
 		return
 
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(isliving(A))
 		if(a_intent == I_HELP || !get_natural_weapon())
 			custom_emote(1,"[friendly] [A]!")
-			return
-		if(ckey)
+			return TRUE
+		else if(ckey)
 			admin_attack_log(src, A, "Has attacked its victim.", "Has been attacked by its attacker.")
+			return TRUE
 	if(a_intent == I_HELP)
-		A.attack_animal(src)
+		return A.attack_animal(src)
 	else
 		var/attacking_with = get_natural_weapon()
 		if(attacking_with)
-			A.attackby(attacking_with, src)
+			return A.attackby(attacking_with, src)
+	return FALSE
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)
