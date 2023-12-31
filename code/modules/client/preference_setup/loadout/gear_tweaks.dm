@@ -13,7 +13,7 @@
 /datum/gear_tweak/proc/tweak_gear_data(var/metadata, var/datum/gear_data)
 	return
 
-/datum/gear_tweak/proc/tweak_item(var/user, var/obj/item/I, var/metadata)
+/datum/gear_tweak/proc/tweak_item(mob/user, obj/item/gear, metadata)
 	return GEAR_TWEAK_SKIPPED
 
 /datum/gear_tweak/proc/tweak_description(var/description, var/metadata)
@@ -41,10 +41,10 @@
 		return input(user, "Choose a color.", title, metadata) as null|anything in valid_colors
 	return input(user, "Choose a color.", title, metadata) as color|null
 
-/datum/gear_tweak/color/tweak_item(var/user, var/obj/item/I, var/metadata)
+/datum/gear_tweak/color/tweak_item(mob/user, obj/item/gear, metadata)
 	if(valid_colors && !(metadata in valid_colors))
 		return GEAR_TWEAK_SKIPPED
-	I.color = sanitize_hexcolor(metadata, I.color)
+	gear.color = sanitize_hexcolor(metadata, gear.color)
 	return GEAR_TWEAK_SUCCESS
 
 /*
@@ -134,7 +134,7 @@
 		else
 			return metadata
 
-/datum/gear_tweak/contents/tweak_item(var/owner, var/obj/item/I, var/list/metadata)
+/datum/gear_tweak/contents/tweak_item(mob/user, obj/item/gear, metadata)
 	if(length(metadata) != length(valid_contents))
 		return GEAR_TWEAK_SKIPPED
 	for(var/i = 1 to valid_contents.len)
@@ -148,7 +148,7 @@
 		else
 			path = 	contents[metadata[i]]
 		if(path)
-			new path(I)
+			new path(gear)
 		else
 			log_debug("Failed to tweak item: Index [i] in [json_encode(metadata)] did not result in a valid path. Valid contents: [json_encode(valid_contents)]")
 	return GEAR_TWEAK_SUCCESS
@@ -175,7 +175,7 @@
 	if(!.)
 		return metadata
 
-/datum/gear_tweak/reagents/tweak_item(var/user, var/obj/item/I, var/list/metadata)
+/datum/gear_tweak/reagents/tweak_item(mob/user, obj/item/gear, metadata)
 	if(metadata == "None")
 		return GEAR_TWEAK_SKIPPED
 	var/reagent
@@ -183,8 +183,8 @@
 		reagent = valid_reagents[pick(valid_reagents)]
 	else
 		reagent = valid_reagents[metadata]
-	if(reagent)
-		I.reagents.add_reagent(reagent, REAGENTS_FREE_SPACE(I.reagents))
+	if(reagent && gear.reagents)
+		gear.reagents.add_reagent(reagent, REAGENTS_FREE_SPACE(gear.reagents))
 	return GEAR_TWEAK_SUCCESS
 
 /*
@@ -202,11 +202,11 @@
 	src.additional_arguments = additional_arguments
 	..()
 
-/datum/gear_tweak/custom_setup/tweak_item(var/user, var/item)
+/datum/gear_tweak/custom_setup/tweak_item(mob/user, obj/item/gear, metadata)
 	var/arglist = list(user)
 	if(length(additional_arguments))
 		arglist += additional_arguments
-	call(item, custom_setup_proc)(arglist(arglist))
+	call(gear, custom_setup_proc)(arglist(arglist))
 	return GEAR_TWEAK_SUCCESS
 
 /*
@@ -358,31 +358,31 @@
 	for(var/i in 1 to TWEAKABLE_COMPUTER_PART_SLOTS)
 		. += 1
 
-/datum/gear_tweak/tablet/tweak_item(var/user, var/obj/item/modular_computer/tablet/I, var/list/metadata)
+/datum/gear_tweak/tablet/tweak_item(mob/user, obj/item/gear, metadata)
 	if(length(metadata) < TWEAKABLE_COMPUTER_PART_SLOTS)
 		return GEAR_TWEAK_SKIPPED
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(I, /datum/extension/assembly)
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(gear, /datum/extension/assembly)
 	if(ValidProcessors[metadata[1]])
 		var/t = ValidProcessors[metadata[1]]
-		assembly.add_replace_component(null, PART_CPU, new t(I))
+		assembly.add_replace_component(null, PART_CPU, new t(gear))
 	if(ValidBatteries[metadata[2]])
 		var/t = ValidBatteries[metadata[2]]
-		assembly.add_replace_component(null, PART_BATTERY, new t(I))
+		assembly.add_replace_component(null, PART_BATTERY, new t(gear))
 	if(ValidHardDrives[metadata[3]])
 		var/t = ValidHardDrives[metadata[3]]
-		assembly.add_replace_component(null, PART_HDD, new t(I))
+		assembly.add_replace_component(null, PART_HDD, new t(gear))
 	if(ValidNetworkCards[metadata[4]])
 		var/t = ValidNetworkCards[metadata[4]]
-		assembly.add_replace_component(null, PART_NETWORK, new t(I))
+		assembly.add_replace_component(null, PART_NETWORK, new t(gear))
 	if(ValidNanoPrinters[metadata[5]])
 		var/t = ValidNanoPrinters[metadata[5]]
-		assembly.add_replace_component(null, PART_PRINTER, new t(I))
+		assembly.add_replace_component(null, PART_PRINTER, new t(gear))
 	if(ValidCardSlots[metadata[6]])
 		var/t = ValidCardSlots[metadata[6]]
-		assembly.add_replace_component(null, PART_CARD, new t(I))
+		assembly.add_replace_component(null, PART_CARD, new t(gear))
 	if(ValidTeslaLinks[metadata[7]])
 		var/t = ValidTeslaLinks[metadata[7]]
-		assembly.add_replace_component(null, PART_TESLA, new t(I))
+		assembly.add_replace_component(null, PART_TESLA, new t(gear))
 	return GEAR_TWEAK_SUCCESS
 
 /*
@@ -409,9 +409,9 @@ var/global/datum/gear_tweak/custom_name/gear_tweak_free_name = new()
 		return input(user, "Choose an item name.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in valid_custom_names
 	return sanitize(input(user, "Choose the item's name. Leave it blank to use the default name.", "Item Name", metadata) as text|null, MAX_LNAME_LEN)
 
-/datum/gear_tweak/custom_name/tweak_item(obj/item/I, metadata)
+/datum/gear_tweak/custom_name/tweak_item(mob/user, obj/item/gear, metadata)
 	if(metadata)
-		I.name = metadata
+		gear.set_custom_name(metadata)
 		return GEAR_TWEAK_SUCCESS
 	return GEAR_TWEAK_SKIPPED
 
@@ -439,8 +439,8 @@ var/global/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
 		return input(user, "Choose an item description.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in valid_custom_desc
 	return sanitize(input(user, "Choose the item's description. Leave it blank to use the default description.", "Item Description", metadata) as message|null)
 
-/datum/gear_tweak/custom_desc/tweak_item(obj/item/I, metadata)
+/datum/gear_tweak/custom_desc/tweak_item(mob/user, obj/item/gear, metadata)
 	if(metadata)
-		I.desc = metadata
+		gear.set_custom_desc(metadata)
 		return GEAR_TWEAK_SUCCESS
 	return GEAR_TWEAK_SKIPPED

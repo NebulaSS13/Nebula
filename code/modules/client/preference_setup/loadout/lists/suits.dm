@@ -10,7 +10,7 @@
 	name = "poncho selection"
 	path = /obj/item/clothing/suit/poncho/colored
 	cost = 1
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/suit/suit_jacket
 	name = "standard suit jackets"
@@ -28,17 +28,17 @@
 /decl/loadout_option/suit/custom_suit_jacket
 	name = "suit jacket, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/suit
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/suit/hoodie
 	name = "hoodie, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/suit/coat
 	name = "coat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/suit/leather
 	name = "jacket selection"
@@ -60,7 +60,7 @@
 /decl/loadout_option/suit/track
 	name = "track jacket selection"
 	path = /obj/item/clothing/suit/storage/toggle/track
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/suit/blueapron
 	name = "apron, blue"
@@ -89,11 +89,11 @@
 /decl/loadout_option/suit/letterman_custom
 	name = "letterman jacket, colour select"
 	path = /obj/item/clothing/suit/letterman
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	cost = 1
 
 /decl/loadout_option/suit/cloak
 	name = "plain cloak"
 	path = /obj/item/clothing/accessory/cloak
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	cost = 3
