@@ -86,7 +86,7 @@
 	icon_state = "fishing_wing"
 
 /area/errant_pisces/bridge
-	name = "Bridge"
+	name = "Trawler Bridge"
 	icon_state = "bridge"
 
 /area/errant_pisces/prod_storage

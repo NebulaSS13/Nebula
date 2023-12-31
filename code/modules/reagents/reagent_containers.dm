@@ -25,6 +25,14 @@
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
+/obj/item/chems/set_custom_name(var/new_name)
+	base_name = new_name
+	update_container_name()
+
+/obj/item/chems/set_custom_desc(var/new_desc)
+	base_desc = new_desc
+	update_container_desc()
+
 /obj/item/chems/proc/cannot_interact(mob/user)
 	if(!CanPhysicallyInteract(user))
 		to_chat(usr, SPAN_WARNING("You're in no condition to do that!"))

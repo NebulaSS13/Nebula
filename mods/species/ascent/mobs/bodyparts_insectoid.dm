@@ -4,6 +4,7 @@
 	requires_organ_tag = BP_M_HAND
 	ui_label = "M"
 	ui_loc = "CENTER,BOTTOM+1:14"
+	covering_slot_flags = SLOT_HAND_LEFT|SLOT_HAND_RIGHT // todo: generalize?
 
 /obj/item/organ/external/hand/insectoid/midlimb
 	name = "central grasper"
@@ -21,6 +22,7 @@
 	requires_organ_tag = BP_L_HAND_UPPER
 	ui_label = "UL"
 	hand_sort_priority = 2
+	covering_slot_flags = SLOT_HAND_LEFT
 
 /obj/item/organ/external/hand/insectoid/upper
 	name = "left raptorial"
@@ -39,6 +41,7 @@
 	requires_organ_tag = BP_R_HAND_UPPER
 	ui_label = "UR"
 	hand_sort_priority = 2
+	covering_slot_flags = SLOT_HAND_RIGHT
 
 /obj/item/organ/external/hand/right/insectoid/upper
 	name = "right raptorial"

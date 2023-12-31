@@ -1,71 +1,45 @@
 /obj/item/clothing/ears/stud
-	name = "pearl stud earrings"
+	name = "stud earrings"
 	desc = "A pair of small stud earrings."
-	color = "#eae0c8"
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	material = /decl/material/solid/organic/bone/pearl
 
 /obj/item/clothing/ears/stud/glass
-	name = "glass stud earrings"
-	color = "#00e1ff"
-
+	material = /decl/material/solid/glass
 /obj/item/clothing/ears/stud/wood
-	name = "wood stud earrings"
-	color = "#824b28"
-
+	material = /decl/material/solid/organic/wood
 /obj/item/clothing/ears/stud/iron
-	name = "iron stud earrings"
-	color = "#5c5454"
-
+	material = /decl/material/solid/metal/iron
 /obj/item/clothing/ears/stud/steel
-	name = "steel stud earrings"
-	color = "#666666"
-
+	material = /decl/material/solid/metal/steel
 /obj/item/clothing/ears/stud/silver
-	name = "silver stud earrings"
-	color = "#d1e6e3"
-
+	material = /decl/material/solid/metal/silver
 /obj/item/clothing/ears/stud/gold
-	name = "gold stud earrings"
-	color = "#edd12f"
-
+	material = /decl/material/solid/metal/gold
 /obj/item/clothing/ears/stud/platinum
-	name = "platinum stud earrings"
-	color = "#9999ff"
-
+	material = /decl/material/solid/metal/platinum
 /obj/item/clothing/ears/stud/diamond
-	name = "diamond stud earrings"
-	color = "#00ffe1"
+	material = /decl/material/solid/gemstone/diamond
 
 /obj/item/clothing/ears/dangle
+	name = "dangle earrings"
 	icon = 'icons/clothing/ears/earring_dangle.dmi'
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	material = /decl/material/solid/organic/bone/pearl
 
 /obj/item/clothing/ears/dangle/glass
-	name = "glass dangle earrings"
-	color = "#00e1ff"
-
+	material = /decl/material/solid/glass
 /obj/item/clothing/ears/dangle/wood
-	name = "wood dangle earrings"
-	color = "#824b28"
-
+	material = /decl/material/solid/organic/wood
 /obj/item/clothing/ears/dangle/iron
-	name = "iron dangle earrings"
-	color = "#5c5454"
-
+	material = /decl/material/solid/metal/iron
 /obj/item/clothing/ears/dangle/steel
-	name = "steel dangle earrings"
-	color = "#666666"
-
+	material = /decl/material/solid/metal/steel
 /obj/item/clothing/ears/dangle/silver
-	name = "silver dangle earrings"
-	color = "#d1e6e3"
-
+	material = /decl/material/solid/metal/silver
 /obj/item/clothing/ears/dangle/gold
-	name = "gold dangle earrings"
-	color = "#edd12f"
-
+	material = /decl/material/solid/metal/gold
 /obj/item/clothing/ears/dangle/platinum
-	name = "platinum dangle earrings"
-	color = "#9999ff"
-
+	material = /decl/material/solid/metal/platinum
 /obj/item/clothing/ears/dangle/diamond
-	name = "diamond dangle earrings"
-	color = "#00ffe1"
+	material = /decl/material/solid/gemstone/diamond

@@ -465,3 +465,6 @@ RADIATION_LOWER_LIMIT 0.15
 
 ## Set this to 0 to hide visible examine messages.
 VISIBLE_EXAMINE 1
+
+## Uncomment this to allow loadout name/desc customization by default.
+#ALLOW_LOADOUT_CUSTOMIZATION
