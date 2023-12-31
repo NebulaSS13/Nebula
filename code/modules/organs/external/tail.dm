@@ -15,12 +15,17 @@
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 	skip_body_icon_draw = TRUE
 
-	var/tail                                  // Name of tail state in species effects icon file.
-	var/tail_animation                        // If set, the icon to obtain tail animation states from.
+	/// Name of tail state in species effects icon file. Used as a prefix for animated states.
+	var/tail
+	/// Icon file to use for tail states (including animations)
+	var/tail_icon
+	/// Blend mode for overlaying colour on the tail.
 	var/tail_blend = ICON_ADD
+	/// State modifier for hair overlays.
 	var/tail_hair
+	/// Blend mode for hair overlays.
 	var/tail_hair_blend = ICON_ADD
-	var/tail_icon = 'icons/effects/species.dmi'
+	/// How many random tail states are available for animations.
 	var/tail_states = 1
 
 /obj/item/organ/external/tail/do_uninstall(in_place, detach, ignore_children, update_icon)
@@ -37,9 +42,6 @@
 
 /obj/item/organ/external/tail/proc/get_tail()
 	return tail
-
-/obj/item/organ/external/tail/proc/get_tail_animation()
-	return tail_animation
 
 /obj/item/organ/external/tail/proc/get_tail_icon()
 	return tail_icon

@@ -1,32 +1,29 @@
 /decl/bodytype/vox
-	name =              "soldier voxform"
-	bodytype_category = BODYTYPE_VOX
-	icon_base =         'mods/species/vox/icons/body/soldier/body.dmi'
-	icon_deformed =     'mods/species/vox/icons/body/deformed_body.dmi'
-	husk_icon =         'mods/species/vox/icons/body/husk.dmi'
-	blood_overlays =    'mods/species/vox/icons/body/blood_overlays.dmi'
-	eye_icon =          'mods/species/vox/icons/body/soldier/eyes.dmi'
-	bodytype_flag =     BODY_FLAG_VOX
-	limb_blend =        ICON_MULTIPLY
-	eye_blend =         ICON_MULTIPLY
-	appearance_flags =  HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR
-	base_hair_color =   "#160900"
-	base_eye_color =    "#d60093"
-	base_color =        "#526d29"
-	body_flags =        BODY_FLAG_NO_DNA
-	default_h_style = /decl/sprite_accessory/hair/vox/short
-
-	vital_organs = list(
+	name                = "soldier voxform"
+	bodytype_category   = BODYTYPE_VOX
+	icon_base           = 'mods/species/vox/icons/body/soldier/body.dmi'
+	icon_deformed       = 'mods/species/vox/icons/body/deformed_body.dmi'
+	husk_icon           = 'mods/species/vox/icons/body/husk.dmi'
+	blood_overlays      = 'mods/species/vox/icons/body/blood_overlays.dmi'
+	eye_icon            = 'mods/species/vox/icons/body/soldier/eyes.dmi'
+	bodytype_flag       = BODY_FLAG_VOX
+	limb_blend          = ICON_MULTIPLY
+	eye_blend           = ICON_MULTIPLY
+	appearance_flags    = HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR
+	base_hair_color     = "#160900"
+	base_eye_color      = "#d60093"
+	base_color          = "#526d29"
+	body_flags          = BODY_FLAG_NO_DNA
+	default_h_style     = /decl/sprite_accessory/hair/vox/short
+	vital_organs        = list(
 		BP_STACK,
 		BP_BRAIN
 	)
-
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox,
 		BP_TAIL = /obj/item/organ/external/tail/vox
 	)
-
-	has_organ = list(
+	has_organ           = list(
 		BP_STOMACH =    /obj/item/organ/internal/stomach/vox,
 		BP_HEART =      /obj/item/organ/internal/heart/vox,
 		BP_LUNGS =      /obj/item/organ/internal/lungs/vox,
@@ -37,8 +34,7 @@
 		BP_STACK =      /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 	)
-
-	base_markings = list(
+	base_markings       = list(
 		/decl/sprite_accessory/marking/vox/beak =   "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/crest =  "#bc7d3e",
@@ -61,58 +57,59 @@
 	return ..()
 
 /decl/bodytype/vox/servitor
-	name = "servitor voxform"
-	bodytype_category = BODYTYPE_HUMANOID
-	icon_base =      'mods/species/vox/icons/body/servitor/body.dmi'
-	icon_deformed =  'mods/species/vox/icons/body/deformed_body.dmi'
-	husk_icon =      'mods/species/vox/icons/body/husk.dmi'
-	blood_overlays = 'mods/species/vox/icons/body/blood_overlays.dmi'
-	eye_icon =       'mods/species/vox/icons/body/servitor/eyes.dmi'
-	base_markings = list(
+	name                = "servitor voxform"
+	bodytype_category   = BODYTYPE_HUMANOID
+	icon_base           = 'mods/species/vox/icons/body/servitor/body.dmi'
+	icon_deformed       = 'mods/species/vox/icons/body/deformed_body.dmi'
+	husk_icon           = 'mods/species/vox/icons/body/husk.dmi'
+	blood_overlays      = 'mods/species/vox/icons/body/blood_overlays.dmi'
+	eye_icon            = 'mods/species/vox/icons/body/servitor/eyes.dmi'
+	base_markings       = list(
 		/decl/sprite_accessory/marking/vox/beak/servitor =   "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/scutes/servitor = "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/crest/servitor =  "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/claws/servitor =  "#a0a654"
 	)
-	default_h_style = /decl/sprite_accessory/hair/vox/short/servitor
+	default_h_style     = /decl/sprite_accessory/hair/vox/short/servitor
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox,
 		BP_TAIL = /obj/item/organ/external/tail/vox/servitor
 	)
 
 /decl/bodytype/vox/stanchion
-	name = "stanchion voxform"
-	blood_overlays  = 'mods/species/vox/icons/body/stanchion/blood_overlays.dmi'
-	damage_overlays = 'mods/species/vox/icons/body/stanchion/damage_overlays.dmi'
-	icon_base       = 'mods/species/vox/icons/body/stanchion/body.dmi'
-	eye_icon        = 'mods/species/vox/icons/body/stanchion/eyes.dmi'
-	icon_template   = 'mods/species/vox/icons/body/stanchion/template.dmi'
-	base_markings = list(
+	name                = "stanchion voxform"
+	bodytype_category   = BODYTYPE_VOX_LARGE
+	blood_overlays      = 'mods/species/vox/icons/body/stanchion/blood_overlays.dmi'
+	damage_overlays     = 'mods/species/vox/icons/body/stanchion/damage_overlays.dmi'
+	icon_base           = 'mods/species/vox/icons/body/stanchion/body.dmi'
+	eye_icon            = 'mods/species/vox/icons/body/stanchion/eyes.dmi'
+	icon_template       = 'mods/species/vox/icons/body/stanchion/template.dmi'
+	base_markings       = list(
 		/decl/sprite_accessory/marking/vox/beak/stanchion =   "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/scutes/stanchion = "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/crest/stanchion =  "#bc7d3e",
 		/decl/sprite_accessory/marking/vox/claws/stanchion =  "#a0a654"
 	)
-	default_h_style = /decl/sprite_accessory/hair/vox/short/stanchion
+	default_h_style     = /decl/sprite_accessory/hair/vox/short/stanchion
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox,
-		BP_TAIL = /obj/item/organ/external/tail/vox/stanchion
+		// Commenting this out so that tail validation doesn't try to find a species using this bodytype.
+		//BP_TAIL = /obj/item/organ/external/tail/vox/stanchion
 	)
-	bodytype_category = BODYTYPE_VOX_LARGE
 
 
 /decl/bodytype/vox/servitor/alchemist
-	name = "alchemist voxform"
-	icon_base = 'mods/species/vox/icons/body/servitor/body_alchemist.dmi'
-	eye_icon = 'mods/species/vox/icons/body/servitor/eyes_alchemist.dmi'
+	name       = "alchemist voxform"
+	icon_base  = 'mods/species/vox/icons/body/servitor/body_alchemist.dmi'
+	eye_icon   = 'mods/species/vox/icons/body/servitor/eyes_alchemist.dmi'
 
 /obj/item/organ/external/tail/vox
-	tail =       "voxtail"
-	tail_icon =  'mods/species/vox/icons/body/soldier/tail.dmi'
+	tail       = "voxtail"
+	tail_icon  = 'mods/species/vox/icons/body/soldier/tail.dmi'
 	tail_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/tail/vox/servitor
-	tail_icon =  'mods/species/vox/icons/body/servitor/tail.dmi'
+	tail_icon  = 'mods/species/vox/icons/body/servitor/tail.dmi'
 
 /obj/item/organ/external/tail/vox/stanchion
-	tail_icon =  'mods/species/vox/icons/body/stanchion/tail.dmi'
+	tail_icon  = 'mods/species/vox/icons/body/stanchion/tail.dmi'

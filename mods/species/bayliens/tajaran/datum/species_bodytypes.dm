@@ -38,6 +38,6 @@
 	. = ..()
 
 /obj/item/organ/external/tail/cat
-	tail_animation = 'mods/species/bayliens/tajaran/icons/tail.dmi'
-	tail = "tajtail"
+	tail_icon  = 'mods/species/bayliens/tajaran/icons/tail.dmi'
+	tail       = "tajtail"
 	tail_blend = ICON_MULTIPLY
