@@ -22,4 +22,5 @@
 	. = ..()
 
 /obj/item/organ/external/tail/monkey
-	tail = "chimptail"
+	tail      = "chimptail"
+	tail_icon = 'icons/mob/human_races/species/monkey/monkey_tail.dmi'

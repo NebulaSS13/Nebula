@@ -447,6 +447,17 @@
 		. += new/datum/stack_recipe/furniture/girder(src)
 		. += new/datum/stack_recipe/furniture/ladder(src)
 
+// Stub for earrings. TODO: put it in clams
+/decl/material/solid/organic/bone/pearl
+	name                   = "pearl"
+	uid                    = "solid_pearl"
+	color                  = "#eae0c8"
+	default_solid_form     = /obj/item/stack/material/lump
+	hardness               = MAT_VALUE_FLEXIBLE
+	weight                 = MAT_VALUE_VERY_LIGHT
+	exoplanet_rarity_gas   = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+
 /decl/material/solid/organic/bone/fish
 	name = "fishbone"
 	uid = "solid_fishbone"

@@ -337,7 +337,7 @@ var/global/list/gear_datums = list()
 	var/list/allowed_roles                // Roles that can spawn with this item.
 	var/list/allowed_branches             // Service branches that can spawn with it.
 	var/list/allowed_skills               // Skills required to spawn with this item.
-	var/flags                             // Special tweaks in new
+	var/loadout_flags                     // Special tweaks in new
 	var/custom_setup_proc                 // Special tweak in New
 	var/list/custom_setup_proc_arguments  // Special tweak in New
 	var/category = /decl/loadout_category // Type to use for categorization and organization.
@@ -349,6 +349,10 @@ var/global/list/gear_datums = list()
 	abstract_type = /decl/loadout_option
 
 /decl/loadout_option/Initialize()
+
+	if(config.allow_loadout_customization)
+		loadout_flags |= GEAR_HAS_CUSTOM_SELECTION
+
 	. = ..()
 
 	if(name && (!global.using_map.loadout_blacklist || !(type in global.using_map.loadout_blacklist)))
@@ -357,18 +361,18 @@ var/global/list/gear_datums = list()
 		ADD_SORTED(LC.gear, name, /proc/cmp_text_asc)
 		LC.gear[name] = src
 
-	if(FLAGS_EQUALS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
+	if(FLAGS_EQUALS(loadout_flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
 		CRASH("May not have both type and subtype selection tweaks")
 	if(!description)
 		var/obj/O = path
 		description = initial(O.desc)
-	if(flags & GEAR_HAS_COLOR_SELECTION)
+	if(loadout_flags & GEAR_HAS_COLOR_SELECTION)
 		gear_tweaks += gear_tweak_free_color_choice()
-	if(flags & GEAR_HAS_TYPE_SELECTION)
+	if(loadout_flags & GEAR_HAS_TYPE_SELECTION)
 		gear_tweaks += new /datum/gear_tweak/path/type(path)
-	if(flags & GEAR_HAS_SUBTYPE_SELECTION)
+	if(loadout_flags & GEAR_HAS_SUBTYPE_SELECTION)
 		gear_tweaks += new /datum/gear_tweak/path/subtype(path)
-	if(flags & GEAR_HAS_CUSTOM_SELECTION)
+	if(loadout_flags & GEAR_HAS_CUSTOM_SELECTION)
 		gear_tweaks += gear_tweak_free_name
 		gear_tweaks += gear_tweak_free_desc
 	if(custom_setup_proc)
@@ -412,7 +416,7 @@ var/global/list/gear_datums = list()
 		gt.tweak_gear_data(islist(metadata) && metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_item(user, item, islist(metadata) && metadata["[gt]"])
+		gt.tweak_item(user, item, (islist(metadata) && metadata["[gt]"]))
 	. = item
 	if(metadata && !islist(metadata))
 		PRINT_STACK_TRACE("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
@@ -458,10 +462,10 @@ var/global/list/gear_datums = list()
 	if(QDELETED(item))
 		return
 
-	if(!(flags & GEAR_NO_FINGERPRINTS))
+	if(!(loadout_flags & GEAR_NO_FINGERPRINTS))
 		item.add_fingerprint(H)
 
-	if(flags & GEAR_NO_EQUIP)
+	if(loadout_flags & GEAR_NO_EQUIP)
 		return
 
 	return item

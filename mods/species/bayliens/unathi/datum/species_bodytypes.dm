@@ -35,5 +35,5 @@
 	uniform_state_modifier = null
 
 /obj/item/organ/external/tail/lizard
-	tail_animation =         'mods/species/bayliens/unathi/icons/tail.dmi'
-	tail =                   "sogtail"
+	tail_icon = 'mods/species/bayliens/unathi/icons/tail.dmi'
+	tail      = "sogtail"

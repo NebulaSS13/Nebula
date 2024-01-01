@@ -9,7 +9,7 @@
 /decl/loadout_option/head/beret
 	name = "beret, colour select"
 	path = /obj/item/clothing/head/beret/plaincolor
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	description = "A simple, solid color beret. This one has no emblems or insignia on it."
 
 /decl/loadout_option/head/bandana
@@ -24,17 +24,17 @@
 /decl/loadout_option/head/beanie
 	name = "beanie, color select"
 	path = /obj/item/clothing/head/beanie
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/bow
 	name = "hair bow, colour select"
 	path = /obj/item/clothing/head/hairflower/bow
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/flat_cap
 	name = "flat cap, colour select"
 	path = /obj/item/clothing/head/flatcap
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/cap
 	name = "cap selection"
@@ -118,22 +118,22 @@
 /decl/loadout_option/head/hijab
 	name = "hijab, colour select"
 	path = /obj/item/clothing/head/hijab
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/kippa
 	name = "kippa, colour select"
 	path = /obj/item/clothing/head/kippa
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/turban
 	name = "turban, colour select"
 	path = /obj/item/clothing/head/turban
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/taqiyah
 	name = "taqiyah, colour select"
 	path = /obj/item/clothing/head/taqiyah
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/rastacap
 	name = "rastacap"
