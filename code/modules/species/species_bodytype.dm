@@ -252,6 +252,32 @@ var/global/list/bodytypes_by_category = list()
 	if(isnull(default_f_style))
 		. += "null default_f_style (use a shaved/hairless facial hair style if 'no facial hair' is intended)"
 
+	var/list/tail_data = has_limbs[BP_TAIL]
+	if(tail_data)
+		var/obj/item/organ/external/tail/tail_organ = LAZYACCESS(tail_data, "path")
+		if(ispath(tail_organ, /obj/item/organ/external/tail))
+			var/use_species = get_user_species_for_validation()
+			if(use_species)
+				var/datum/dna/dummy_dna = new
+				dummy_dna.species = use_species
+				tail_organ = new tail_organ(null, null, dummy_dna, src)
+				var/tail_icon  = tail_organ.get_tail_icon()
+				var/tail_state = tail_organ.get_tail()
+				if(tail_icon && tail_state)
+					if(!check_state_in_icon(tail_state, tail_icon))
+						. += "tail state [tail_state] not present in icon [tail_icon], available states are: [json_encode(icon_states(tail_icon))]"
+				else
+					if(!tail_icon)
+						. += "missing tail icon"
+					if(!tail_state)
+						. += "missing tail state"
+				qdel(tail_organ)
+				qdel(dummy_dna)
+			else
+				. += "could not find a species with this bodytype available for tail organ validation"
+		else
+			. += "invalid BP_TAIL type: got [tail_organ], expected /obj/item/organ/external/tail"
+
 /decl/bodytype/proc/max_skin_tone()
 	if(appearance_flags & HAS_SKIN_TONE_GRAV)
 		return 100
@@ -422,3 +448,9 @@ var/global/list/bodytypes_by_category = list()
 		var/organ_type = replacing_organs[organ_tag]
 		var/obj/item/organ/internal/new_innard = new organ_type(limb.owner, null, limb.owner.dna, src)
 		limb.owner.add_organ(new_innard, GET_EXTERNAL_ORGAN(limb.owner, new_innard.parent_organ), FALSE, FALSE)
+
+/decl/bodytype/proc/get_user_species_for_validation()
+	for(var/species_name in get_all_species())
+		var/decl/species/species = get_species_by_key(species_name)
+		if(src in species.available_bodytypes)
+			return species_name

@@ -9,7 +9,7 @@
 /decl/loadout_option/shoes/athletic
 	name = "athletic shoes, colour select"
 	path = /obj/item/clothing/shoes/athletic
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/shoes/boots
 	name = "boot selection"
@@ -53,12 +53,12 @@
 /decl/loadout_option/shoes/flats
 	name = "flats, colour select"
 	path = /obj/item/clothing/shoes/flats
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/shoes/high
 	name = "high tops selection"
 	path = /obj/item/clothing/shoes/color/hightops
-	flags = GEAR_HAS_TYPE_SELECTION
+	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/shoes/sandal
 	name = "wooden sandals"
@@ -67,4 +67,4 @@
 /decl/loadout_option/shoes/heels
 	name = "high heels, colour select"
 	path = /obj/item/clothing/shoes/heels
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION

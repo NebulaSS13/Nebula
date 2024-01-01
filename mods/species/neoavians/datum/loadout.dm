@@ -28,5 +28,5 @@
 /decl/loadout_option/avian/shoes
 	name  = "footwraps"
 	path  = /obj/item/clothing/shoes/avian/footwraps
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	slot  = slot_shoes_str

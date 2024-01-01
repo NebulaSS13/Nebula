@@ -2,6 +2,8 @@
 	var/hand_sort_priority = 1
 	var/can_use_held_item = TRUE
 	var/dexterity = DEXTERITY_FULL
+	var/covering_slot_flags
+
 	// For reference, grippers do not use ui_loc, they have it set dynamically during /datum/hud/proc/rebuild_hands()
 
 /datum/inventory_slot/gripper/proc/get_dexterity(var/silent)
@@ -73,6 +75,7 @@
 	requires_organ_tag = BP_L_HAND
 	overlay_slot = BP_L_HAND
 	ui_label = "L"
+	covering_slot_flags = SLOT_HAND_LEFT
 
 /datum/inventory_slot/gripper/right_hand
 	slot_name = "Right Hand"
@@ -80,3 +83,4 @@
 	requires_organ_tag = BP_R_HAND
 	overlay_slot = BP_R_HAND
 	ui_label = "R"
+	covering_slot_flags = SLOT_HAND_RIGHT

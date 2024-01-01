@@ -151,7 +151,7 @@
 	req_access = list(access_bearcat)
 
 /area/ship/scrap/command/bridge
-	name = "Bridge"
+	name = "Hauler Bridge"
 	icon_state = "bridge"
 	req_access = list(access_bearcat)
 

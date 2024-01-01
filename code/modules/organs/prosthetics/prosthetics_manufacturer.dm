@@ -21,6 +21,15 @@
 	/// Determines which bodyparts can use this limb.
 	var/list/applies_to_part
 
+/decl/bodytype/prosthetic/get_user_species_for_validation()
+	if(bodytype_category)
+		for(var/species_name in get_all_species())
+			var/decl/species/species = get_species_by_key(species_name)
+			for(var/decl/bodytype/bodytype_data in species.available_bodytypes)
+				if(bodytype_data.bodytype_category == bodytype_category)
+					return species_name
+	return ..()
+
 /decl/bodytype/prosthetic/apply_bodytype_organ_modifications(obj/item/organ/org)
 	..()
 	BP_SET_PROSTHETIC(org)

@@ -23,7 +23,7 @@ var/global/list/bodypart_to_slot_lookup_table = list(
 // you can reasonably expect the icon_state to exist beforehand, or if you can cache the
 // value somewhere (as done below with use_single_icon in /obj/item/Initialize()).
 var/global/list/icon_state_cache = list()
-/proc/check_state_in_icon(var/checkstate, var/checkicon, var/high_accuracy = FALSE)
+/proc/check_state_in_icon(var/checkstate, var/checkicon)
 	// isicon() is apparently quite expensive so short-circuit out early if we can.
 	if(!istext(checkstate) || isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon)))
 		return FALSE
