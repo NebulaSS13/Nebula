@@ -179,7 +179,7 @@
 
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
-	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(thing) && user.a_intent != I_HURT)
+	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(thing) && user.a_intent != I_HURT && lit == FIRE_LIT)
 		thing.handle_external_heating(DIRECT_HEAT, src, user)
 		return TRUE
 

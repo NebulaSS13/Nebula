@@ -17,21 +17,24 @@
 /turf
 	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
+// If this is a simulated atom, adjust our temperature.
+// This will eventually propagate to our contents via ProcessAtomTemperature()
 /atom/proc/handle_external_heating(var/adjust_temp, var/obj/item/heated_by, var/mob/user)
+
+	if(!ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
+		return FALSE
+
+	var/diff_temp = (adjust_temp - temperature)
+	if(diff_temp <= 0)
+		return FALSE
 
 	// Show a little message for people heating beakers with welding torches.
 	if(user && heated_by)
 		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
-
-	// If this is a simulated atom, adjust our temperature.
-	// This will eventually propagate to our contents via ProcessAtomTemperature()
-	if(ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
-		// Update our own heat.
-		var/diff_temp = (adjust_temp - temperature)
-		if(diff_temp >= 0)
-			var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)
-			ADJUST_ATOM_TEMPERATURE(src, min(adjust_temp, altered_temp))
-			return TRUE
+	// Update our own heat.
+	var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)
+	ADJUST_ATOM_TEMPERATURE(src, min(adjust_temp, altered_temp))
+	return TRUE
 
 /mob/Initialize()
 	. = ..()
