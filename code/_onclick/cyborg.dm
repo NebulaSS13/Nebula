@@ -171,11 +171,10 @@
 	change attack_robot() above to the proper function
 */
 /mob/living/silicon/robot/UnarmedAttack(atom/A)
-	A.attack_robot(src)
+	return A.attack_robot(src)
 
 /mob/living/silicon/robot/RangedAttack(atom/A, var/params)
-	A.attack_robot(src)
-	return TRUE
+	return A.attack_robot(src)
 
 /atom/proc/attack_robot(mob/user)
 	return attack_ai(user)

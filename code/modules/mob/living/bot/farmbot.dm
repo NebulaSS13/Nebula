@@ -143,17 +143,19 @@
 	return
 
 /mob/living/bot/farmbot/UnarmedAttack(var/atom/A, var/proximity)
-	if(!..())
+	. = ..()
+	if(.)
 		return
+
 	if(busy)
-		return
+		return TRUE
 
 	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
 		var/obj/machinery/portable_atmospherics/hydroponics/T = A
 		var/t = confirmTarget(T)
 		switch(t)
 			if(0)
-				return
+				return TRUE
 			if(FARMBOT_COLLECT)
 				action = "water" // Needs a better one
 				update_icon()
@@ -193,7 +195,7 @@
 		T.update_icon()
 	else if(istype(A, /obj/structure/hygiene/sink))
 		if(!tank || tank.reagents.total_volume >= tank.reagents.maximum_volume)
-			return
+			return TRUE
 		action = "water"
 		update_icon()
 		visible_message("<span class='notice'>[src] starts refilling its tank from \the [A].</span>")
@@ -217,13 +219,14 @@
 				do_attack_animation(A)
 				if(prob(50))
 					visible_message("<span class='danger'>[src] swings wildly at [A] with a minihoe, missing completely!</span>")
-					return
+					return TRUE
 				var/t = pick("slashed", "sliced", "cut", "clawed")
 				A.attack_generic(src, 5, t)
 			if("water")
 				flick("farmbot_water", src)
 				visible_message("<span class='danger'>[src] splashes [A] with water!</span>")
 				tank.reagents.splash(A, 100)
+	return TRUE
 
 /mob/living/bot/farmbot/explode()
 	visible_message("<span class='danger'>[src] blows apart!</span>")

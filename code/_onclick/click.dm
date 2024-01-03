@@ -179,6 +179,8 @@
 
 	proximity_flag is not currently passed to attack_hand, and is instead used
 	in human click code to allow glove touches only at melee range.
+
+	Returns TRUE if no further processing is desired, FALSE otherwise.
 */
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
@@ -186,12 +188,9 @@
 /mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
 	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(src, "You cannot attack people before the game has started.")
-		return FALSE
+		return TRUE
 
-	if(stat)
-		return FALSE
-
-	if(try_maneuver(A))
+	if(stat || try_maneuver(A))
 		return TRUE
 
 	// Special glove functions:

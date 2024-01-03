@@ -55,14 +55,16 @@
 		UnarmedAttack(target)
 
 /mob/living/bot/cleanbot/UnarmedAttack(var/obj/effect/decal/cleanable/D, var/proximity)
-	if(!..())
+
+	. = ..()
+	if(.)
 		return
 
 	if(!istype(D))
-		return
+		return TRUE
 
 	if(D.loc != loc)
-		return
+		return FALSE
 
 	busy = 1
 	visible_message("\The [src] begins to clean up \the [D].")
@@ -80,6 +82,7 @@
 	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
 	update_icon()
+	return TRUE
 
 /mob/living/bot/cleanbot/explode()
 	on = 0
