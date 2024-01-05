@@ -20,7 +20,7 @@
 	real_name = "corpse"
 
 /mob/living/carbon/human/corpse/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype, obj/abstract/landmark/corpse/corpse)
-	. = ..(mapload, species_name, dna, new_bodytype) // do not pass the corpse landmark
+	. = ..(mapload, species_name, new_dna, new_bodytype) // do not pass the corpse landmark
 	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
 	if(culture)
 		var/newname = culture.get_random_name(src, gender, species.name)
