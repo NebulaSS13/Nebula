@@ -91,6 +91,9 @@
 	var/scannable_result // Codex page generated when this mob is scanned.
 	var/base_animal_type // set automatically in Initialize(), used for language checking.
 
+	var/attack_delay = DEFAULT_ATTACK_COOLDOWN // How long in ds that a creature winds up before attacking.
+	var/sa_accuracy = 85 //base chance to hit out of 100
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
@@ -626,7 +629,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/get_hydration()
 	return get_max_hydration()
 
-
 /// Adapts our temperature and atmos thresholds to our current z-level.
 /mob/living/simple_animal/proc/adapt_to_current_level()
 	var/turf/T = get_turf(src)
@@ -665,3 +667,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	name = "animal"
 	bodytype_flag = 0
 	bodytype_category = "animal body"
+
+/mob/living/simple_animal/proc/get_melee_accuracy()
+	return clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)

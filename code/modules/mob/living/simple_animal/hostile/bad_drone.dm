@@ -14,6 +14,7 @@
 	speed = 4
 	mob_size = MOB_SIZE_TINY
 	gene_damage = -1
+	attack_delay = DEFAULT_QUICK_COOLDOWN
 	var/corpse = /obj/effect/decal/cleanable/blood/gibs/robot
 
 /mob/living/simple_animal/hostile/rogue_drone/Initialize()

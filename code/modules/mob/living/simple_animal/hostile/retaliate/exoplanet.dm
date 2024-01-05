@@ -95,7 +95,7 @@
 	desc = "A small pack animal. Although omnivorous, it will hunt meat on occasion."
 	faction = "diyaab"
 	icon = 'icons/mob/simple_animal/diyaab.dmi'
-	move_to_delay = 1
+	move_to_delay = 3
 	mob_default_max_health = 25
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws/weak
@@ -111,7 +111,7 @@
 	desc = "A piglike creature with a bright iridiscent mane that sparkles as though lit by an inner light. Don't be fooled by its beauty though."
 	faction = "shantak"
 	icon = 'icons/mob/simple_animal/shantak.dmi'
-	move_to_delay = 1
+	move_to_delay = 3
 	mob_default_max_health = 75
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws

@@ -3,15 +3,15 @@
 	desc = "It looks like a floating jellyfish. How does it do that?"
 	faction = "zeq"
 	icon = 'icons/mob/simple_animal/jelly.dmi'
-	move_to_delay = 1
+	move_to_delay = 2
 	mob_default_max_health = 75
 	speed = 1
-	natural_weapon = /obj/item/natural_weapon/tentecles
+	natural_weapon = /obj/item/natural_weapon/tentacles
 	speak_chance = 1
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
 	var/gets_random_color = TRUE
 
-/obj/item/natural_weapon/tentecles
+/obj/item/natural_weapon/tentacles
 	name = "tentacles"
 	attack_verb = list("stung","slapped")
 	force = 10

@@ -12,14 +12,13 @@
 	var/attack_same = 0
 	var/ranged = 0
 	var/rapid = 0
-	var/sa_accuracy = 85 //base chance to hit out of 100
 	var/projectiletype
 	var/projectilesound
 	var/casingtype
 	var/fire_desc = "fires" //"X fire_desc at Y!"
 	var/ranged_range = 6 //tiles of range for ranged attackers to attack
 	var/move_to_delay = 4 //delay for the automated movement.
-	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
+
 	var/list/friends = list()
 	var/break_stuff_probability = 10
 	var/destroy_surroundings = 1
@@ -94,7 +93,10 @@
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
 	return
 
-/mob/living/simple_animal/hostile/proc/MoveToTarget(var/move_only = FALSE)
+/mob/living/simple_animal/proc/MoveToTarget(var/move_only = FALSE)
+	return
+
+/mob/living/simple_animal/hostile/MoveToTarget(var/move_only = FALSE)
 	if(!can_act())
 		return
 	if(HAS_STATUS(src, STAT_CONFUSE))
@@ -149,19 +151,11 @@
 
 		return target_mob
 
-	face_atom(target_mob)
-	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
 		return
 	if(isliving(target_mob))
-		if(!prob(get_accuracy()))
-			visible_message("<span class='notice'>\The [src] misses its attack on \the [target_mob]!</span>")
-			return
-		var/mob/living/L = target_mob
-		var/attacking_with = get_natural_weapon()
-		if(attacking_with)
-			L.attackby(attacking_with, src)
-		return L
+		UnarmedAttack(target_mob)
+		return target_mob
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -174,9 +168,6 @@
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	return hearers(src, dist)-src
-
-/mob/living/simple_animal/hostile/proc/get_accuracy()
-	return clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
@@ -283,18 +274,13 @@
 
 		var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
 		if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
-			var/attacking_with = get_natural_weapon()
-			if(attacking_with)
-				S.attackby(attacking_with, src)
+			UnarmedAttack(S)
 			return
 
 		for(var/type in valid_obstacles_by_priority)
 			var/obj/obstacle = locate(type) in targ
 			if(obstacle)
-				face_atom(obstacle)
-				var/attacking_with = get_natural_weapon()
-				if(attacking_with)
-					obstacle.attackby(attacking_with, src)
+				UnarmedAttack(obstacle)
 				return
 
 		if(can_pry)

@@ -63,27 +63,37 @@
 /*
 	Animals
 */
+
 /mob/living/simple_animal/UnarmedAttack(var/atom/A, var/proximity)
 
 	. = ..()
 	if(.)
 		return
 
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(isliving(A))
-		if(a_intent == I_HELP || !get_natural_weapon())
-			custom_emote(1,"[friendly] [A]!")
-			return TRUE
-		else if(ckey)
-			admin_attack_log(src, A, "Has attacked its victim.", "Has been attacked by its attacker.")
-			return TRUE
-	if(a_intent == I_HELP)
+	setClickCooldown(attack_delay)
+	var/attacking_with = get_natural_weapon()
+	if(a_intent == I_HELP || !attacking_with)
 		return A.attack_animal(src)
-	else
-		var/attacking_with = get_natural_weapon()
-		if(attacking_with)
-			return A.attackby(attacking_with, src)
-	return FALSE
+
+	var/decl/pronouns/G = get_pronouns()
+	face_atom(A)
+	if(attack_delay)
+		walk_to(src, 0) // Cancel any baked-in movement.
+		do_windup_animation(A, attack_delay, no_reset = TRUE)
+		if(!do_after(src, attack_delay, A) || !Adjacent(A))
+			visible_message(SPAN_NOTICE("\The [src] misses [G.his] attack on \the [A]!"))
+			animate(src, pixel_x = default_pixel_x, pixel_y = default_pixel_y, time = 2) // reset wherever the attack animation got us to.
+			MoveToTarget(TRUE) // Restart hostile mob tracking.
+			return TRUE
+		MoveToTarget(TRUE) // Restart hostile mob tracking.
+
+	if(ismob(A)) // Clientless mobs are too dum to move away, so they can be missed.
+		var/mob/mob = A
+		if(!mob.ckey && !prob(get_melee_accuracy()))
+			visible_message(SPAN_NOTICE("\The [src] misses [G.his] attack on \the [A]!"))
+			return TRUE
+
+	return A.attackby(attacking_with, src)
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)
