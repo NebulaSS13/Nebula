@@ -167,7 +167,7 @@
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
 	// todo: maybe this should use its own bodytype instead of mob root bodytype?
-	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype()?.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	if(eyes)
 		return eyes.get_special_overlay()
 

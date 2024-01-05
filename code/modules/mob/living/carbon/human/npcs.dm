@@ -4,17 +4,18 @@
 
 /mob/living/carbon/human/monkey/punpun/Initialize()
 	. = ..()
-	var/obj/item/clothing/C
+	return INITIALIZE_HINT_LATELOAD
+
+/mob/living/carbon/human/monkey/punpun/LateInitialize()
+	..()
 	if(prob(50))
-		C = new /obj/item/clothing/under/waiter/monke(src)
-		equip_to_appropriate_slot(C)
+		equip_to_appropriate_slot(new /obj/item/clothing/under/waiter/monke(src))
 	else
-		C = new /obj/item/clothing/pants/casual/mustangjeans/monke(src)
-		C.attach_accessory(null, new/obj/item/clothing/accessory/toggleable/hawaii/random(src))
+		var/obj/item/clothing/C = new /obj/item/clothing/pants/casual/mustangjeans/monke(src)
+		C.attach_accessory(null, new /obj/item/clothing/accessory/toggleable/hawaii/random(src))
 		equip_to_appropriate_slot(C)
 		if(prob(10))
-			C = new/obj/item/clothing/head/collectable/petehat(src)
-			equip_to_appropriate_slot(C)
+			equip_to_appropriate_slot(new /obj/item/clothing/head/collectable/petehat(src))
 
 /decl/hierarchy/outfit/blank_subject
 	name = "Test Subject"
@@ -31,8 +32,11 @@
 		C.has_sensor  = SUIT_LOCKED_SENSORS
 		C.sensor_mode = SUIT_SENSOR_OFF
 
-/mob/living/carbon/human/blank/Initialize(mapload)
-	. = ..(mapload, SPECIES_HUMAN)
+/mob/living/carbon/human/blank/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
+	. = ..(mapload, SPECIES_HUMAN, dna, new_bodytype)
+	return INITIALIZE_HINT_LATELOAD
+
+/mob/living/carbon/human/blank/LateInitialize()
 	var/number = "[pick(global.greek_letters)]-[rand(1,30)]"
 	fully_replace_character_name("Subject [number]")
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/blank_subject)

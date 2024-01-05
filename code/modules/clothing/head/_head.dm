@@ -64,11 +64,11 @@
 
 /obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))
-		var/image/light_overlay = image(overlay.icon, "[overlay.icon_state]_light")
-		if(ishuman(user_mob))
-			var/mob/living/carbon/human/H = user_mob
-			if(H.get_bodytype_category() != bodytype)
-				light_overlay = H.get_bodytype().get_offset_overlay_image(light_overlay.icon, light_overlay.icon_state, null, slot)
+		var/light_overlay
+		if(user_mob.get_bodytype_category() != bodytype)
+			light_overlay = user_mob.get_bodytype()?.get_offset_overlay_image(overlay.icon, "[overlay.icon_state]_light", null, slot)
+		if(!light_overlay)
+			light_overlay = image(overlay.icon, "[overlay.icon_state]_light")
 		overlay.overlays += light_overlay
 	. = ..()
 

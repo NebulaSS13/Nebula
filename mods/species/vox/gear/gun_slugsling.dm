@@ -22,11 +22,9 @@
 /obj/item/slugegg/HasProximity(var/atom/movable/AM)
 	. = ..()
 	if(. && isliving(AM))
-		if(ishuman(AM))
-			var/mob/living/carbon/human/H = AM
-			if(H.get_bodytype().bodytype_flag & BODY_FLAG_VOX)
-				return FALSE
 		var/mob/living/L = AM
+		if(L.get_bodytype()?.bodytype_flag & BODY_FLAG_VOX)
+			return FALSE
 		if(L.faction == SPECIES_VOX)
 			return FALSE
 		squish()
