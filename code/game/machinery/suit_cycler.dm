@@ -94,6 +94,15 @@
 
 	overlays = new_overlays
 
+/obj/machinery/suit_cycler/proc/set_suit(new_suit)
+	suit = new_suit
+
+/obj/machinery/suit_cycler/proc/set_helmet(new_helmet)
+	helmet = new_helmet
+
+/obj/machinery/suit_cycler/proc/set_boots(new_boots)
+	boots = new_boots
+
 /obj/machinery/suit_cycler/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(!length(available_modifications) || !length(available_bodytypes))
@@ -102,11 +111,11 @@
 
 	if(populate_parts)
 		if(ispath(suit))
-			suit = new suit(src)
+			set_suit(new suit(src))
 		if(ispath(helmet))
-			helmet = new helmet(src)
+			set_helmet(new helmet(src))
 		if(ispath(boots))
-			boots = new boots(src)
+			set_boots(new boots(src))
 
 	available_modifications = list_values(decls_repository.get_decls(available_modifications))
 
@@ -119,9 +128,12 @@
 		occupant.dropInto(loc)
 		occupant.reset_view()
 		occupant = null
-	DROP_NULL(suit)
-	DROP_NULL(helmet)
-	DROP_NULL(boots)
+	if(!QDELETED(suit))
+		DROP_NULL(suit)
+	if(!QDELETED(helmet))
+		DROP_NULL(helmet)
+	if(!QDELETED(boots))
+		DROP_NULL(boots)
 	return ..()
 
 /obj/machinery/suit_cycler/receive_mouse_drop(var/atom/dropping, var/mob/user)
