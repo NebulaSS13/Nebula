@@ -39,7 +39,6 @@
 	return use(cell_amt) / CELLRATE
 
 /obj/item/cell/on_update_icon()
-	. = ..()
 	var/new_overlay_state = null
 	switch(percent())
 		if(95 to 100)
@@ -51,6 +50,7 @@
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
+		cut_overlays()
 		if(overlay_state)
 			add_overlay(overlay_state)
 

@@ -44,7 +44,7 @@
 			return TRUE
 		playsound(get_turf(machine), 'sound/items/Welder2.ogg', 50, 1)
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
-		machine.visible_message(SPAN_NOTICE("\The [user] unwelds \the [src]."))
+		machine.visible_message(SPAN_NOTICE("\The [user] unwelds \the [machine]."))
 		machine.dismantle()
 
 /decl/machine_construction/pipe/welder/mechanics_info()

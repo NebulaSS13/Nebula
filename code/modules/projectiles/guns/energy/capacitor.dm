@@ -147,7 +147,7 @@ var/global/list/laser_wavelengths
 		charging = FALSE
 	else
 		var/new_wavelength = input("Select the desired laser wavelength.", "Capacitor Laser Wavelength", selected_wavelength) as null|anything in global.laser_wavelengths
-		if(!charging && new_wavelength != selected_wavelength && (loc == user || user.Adjacent(src)) && !user.incapacitated())
+		if(!charging && new_wavelength && new_wavelength != selected_wavelength && (loc == user || user.Adjacent(src)) && !user.incapacitated())
 			selected_wavelength = new_wavelength
 			to_chat(user, SPAN_NOTICE("You dial \the [src] wavelength to [selected_wavelength.name]."))
 			update_icon()
@@ -224,6 +224,7 @@ var/global/list/laser_wavelengths
 		M.update_inv_hands()
 
 /obj/item/gun/energy/capacitor/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	. = ..()
 	if(overlay && (slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str))
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-wiring")
 		I.color = wiring_color
@@ -232,16 +233,14 @@ var/global/list/laser_wavelengths
 		if(power_supply)
 			I = image(overlay.icon, "[overlay.icon_state]-cell")
 			overlay.add_overlay(I)
-		if(slot != slot_back_str)
-			for(var/i = 1 to length(capacitors))
-				var/obj/item/stock_parts/capacitor/capacitor = capacitors[i]
-				if(capacitor.charge > 0)
-					I = emissive_overlay(overlay.icon, "[overlay.icon_state]-charging-[i]")
-					I.alpha = clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
-					I.color = selected_wavelength.color
-					I.appearance_flags |= RESET_COLOR
-					overlay.overlays += I
-	. = ..()
+		for(var/i = 1 to length(capacitors))
+			var/obj/item/stock_parts/capacitor/capacitor = capacitors[i]
+			if(capacitor.charge > 0)
+				I = emissive_overlay(overlay.icon, "[overlay.icon_state]-charging-[i]")
+				I.alpha = clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
+				I.color = selected_wavelength.color
+				I.appearance_flags |= RESET_COLOR
+				overlay.overlays += I
 
 /obj/item/gun/energy/capacitor/consume_next_projectile()
 
