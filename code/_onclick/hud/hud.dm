@@ -25,11 +25,10 @@
 	var/show_intent_icons   = FALSE
 	var/hotkey_ui_hidden    = FALSE     //This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
-	var/obj/screen/lingchemdisplay
 	var/list/hand_hud_objects
 	var/list/swaphand_hud_objects
-	var/obj/screen/action_intent
-	var/obj/screen/move_intent
+	var/obj/screen/intent/action_intent
+	var/obj/screen/movement/move_intent
 	var/obj/screen/stamina/stamina_bar
 
 	var/list/adding = list()
@@ -48,7 +47,6 @@
 /datum/hud/Destroy()
 	. = ..()
 	stamina_bar = null
-	lingchemdisplay = null
 	action_intent = null
 	move_intent = null
 	adding = null
@@ -166,10 +164,15 @@
 			if(existing_box.slot_id == hand_tag)
 				inv_box = existing_box
 				break
+
 		if(!inv_box)
-			inv_box = new /obj/screen/inventory(null, mymob)
+			inv_box = new /obj/screen/inventory(null, mymob, ui_style, ui_color, ui_alpha)
+		else
+			inv_box.icon  = ui_style
+			inv_box.color = ui_color
+			inv_box.alpha = ui_alpha
+
 		inv_box.SetName(hand_tag)
-		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_base"
 
 		inv_box.cut_overlays()
@@ -179,8 +182,6 @@
 		inv_box.update_icon()
 
 		inv_box.slot_id = hand_tag
-		inv_box.color = ui_color
-		inv_box.alpha = ui_alpha
 		inv_box.appearance_flags |= KEEP_TOGETHER
 
 		LAZYDISTINCTADD(hand_hud_objects, inv_box)
@@ -251,10 +252,7 @@
 		if(gear_slot in held_slots)
 			continue
 
-		inv_box = new /obj/screen/inventory(null, mymob)
-		inv_box.icon =  ui_style
-		inv_box.color = ui_color
-		inv_box.alpha = ui_alpha
+		inv_box = new /obj/screen/inventory(null, mymob, ui_style, ui_color, ui_alpha)
 
 		var/datum/inventory_slot/inv_slot = inventory_slots[gear_slot]
 		inv_box.SetName(inv_slot.slot_name)
@@ -272,14 +270,7 @@
 			adding += inv_box
 
 	if(has_hidden_gear)
-		var/obj/screen/using = new /obj/screen()
-		using.SetName("toggle")
-		using.icon = ui_style
-		using.icon_state = "other"
-		using.screen_loc = ui_inventory
-		using.color = ui_color
-		using.alpha = ui_alpha
-		adding += using
+		adding += new /obj/screen/toggle(null, mymob, ui_style, ui_color, ui_alpha)
 
 /datum/hud/proc/BuildHandsUI()
 
@@ -291,35 +282,17 @@
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	var/obj/screen/using
-
 	// Swap hand and quick equip screen elems.
-	using = new /obj/screen()
-	using.SetName("equip")
-	using.icon = ui_style
-	using.icon_state = "act_equip"
-	using.color = ui_color
-	using.alpha = ui_alpha
+	var/obj/screen/using = new /obj/screen/equip(null, mymob, ui_style, ui_color, ui_alpha)
 	src.adding += using
 	LAZYADD(swaphand_hud_objects, using)
 
 	if(length(held_slots) > 1)
 
-		using = new /obj/screen/inventory(null, mymob)
-		using.SetName("hand")
-		using.icon = ui_style
-		using.icon_state = "hand1"
-		using.color = ui_color
-		using.alpha = ui_alpha
+		using = new /obj/screen/inventory/swaphand(null, mymob, ui_style, ui_color, ui_alpha)
 		src.adding += using
 		LAZYADD(swaphand_hud_objects, using)
-
-		using = new /obj/screen/inventory(null, mymob)
-		using.SetName("hand")
-		using.icon = ui_style
-		using.icon_state = "hand2"
-		using.color = ui_color
-		using.alpha = ui_alpha
+		using = new /obj/screen/inventory/swaphand/right(null, mymob, ui_style, ui_color, ui_alpha)
 		src.adding += using
 		LAZYADD(swaphand_hud_objects, using)
 
@@ -443,10 +416,3 @@
 
 /mob/new_player/add_click_catcher()
 	return
-
-/obj/screen/stamina
-	name = "stamina"
-	icon = 'icons/effects/progressbar.dmi'
-	icon_state = "prog_bar_100"
-	invisibility = INVISIBILITY_MAXIMUM
-	screen_loc = ui_stamina

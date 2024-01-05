@@ -1,3 +1,56 @@
+/*
+	Screen objects are only used for the hud and should not appear anywhere "in-game".
+	They are used with the client/screen list and the screen_loc var.
+	For more information, see the byond documentation on the screen_loc and screen vars.
+*/
+/obj/screen
+	name              = ""
+	icon              = 'icons/mob/screen1.dmi'
+	plane             = HUD_PLANE
+	layer             = HUD_BASE_LAYER
+	appearance_flags  = NO_CLIENT_COLOR
+	abstract_type     = /obj/screen
+	is_spawnable_type = FALSE
+	simulated         = FALSE
+
+	/// The mob that owns this screen object, if any.
+	var/weakref/owner_ref
+	/// Whether or not this screen element requires an owner.
+	var/requires_owner = TRUE
+	/// Global screens are not qdeled when the holding mob is destroyed.
+	var/is_global_screen = FALSE
+	/// A set of flags to check for when the user clicks this element.
+	var/user_incapacitation_flags = INCAPACITATION_DEFAULT
+
+/obj/screen/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
+
+	if(ismob(_owner))
+		owner_ref = weakref(_owner)
+
+	// Validate ownership.
+	if(requires_owner)
+		if(!owner_ref)
+			PRINT_STACK_TRACE("ERROR: [type]'s Initialize() was not given an owner argument.")
+			return INITIALIZE_HINT_QDEL
+	else if(owner_ref)
+		PRINT_STACK_TRACE("ERROR: [type]'s Initialize() was given an owner argument.")
+		return INITIALIZE_HINT_QDEL
+
+	if(!isnull(ui_style))
+		icon = ui_style
+	if(!isnull(ui_color))
+		color = ui_color
+	if(!isnull(ui_alpha))
+		alpha = ui_alpha
+	return ..()
+
+/obj/screen/Destroy()
+	if(owner_ref)
+		var/mob/owner = owner_ref.resolve()
+		if(istype(owner) && owner?.client?.screen)
+			owner.client.screen -= src
+	return ..()
+
 /obj/screen/proc/handle_click(mob/user, params)
 	if(!user)
 		return TRUE
@@ -79,6 +132,12 @@
 	return TRUE
 
 /obj/screen/Click(location, control, params)
-	if(ismob(usr) && usr.client && usr.canClick() && !usr.incapacitated())
+	if(ismob(usr) && usr.client && usr.canClick() && (!user_incapacitation_flags || !usr.incapacitated(user_incapacitation_flags)))
 		return handle_click(usr, params)
 	return FALSE
+
+/obj/screen/receive_mouse_drop(atom/dropping, mob/user)
+	return TRUE
+
+/obj/screen/check_mousedrop_interactivity(var/mob/user)
+	return user.client && (src in user.client.screen)

@@ -1054,33 +1054,25 @@ default behaviour is:
 	if(hud_used.action_buttons_hidden)
 		if(!hud_used.hide_actions_toggle)
 			hud_used.hide_actions_toggle = new(hud_used)
-			hud_used.hide_actions_toggle.UpdateIcon()
+			hud_used.hide_actions_toggle.update_icon()
 		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
 		client.screen += hud_used.hide_actions_toggle
 		return
 
 	var/button_number = 0
-	for(var/datum/action/A in actions)
+	for(var/datum/action/action in actions)
 		button_number++
-		if(A.button == null)
-			var/obj/screen/action_button/N = new(hud_used)
-			N.owner = A
-			A.button = N
-
-		var/obj/screen/action_button/B = A.button
-
-		B.UpdateIcon()
-
-		B.SetName(A.UpdateName())
-		B.desc = A.UpdateDesc()
-
-		client.screen += B
-		B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
+		if(isnull(action.button))
+			action.button = new /obj/screen/action_button(null, src, null, null, null, action)
+		action.button.SetName(action.UpdateName())
+		action.button.desc = action.UpdateDesc()
+		action.button.update_icon()
+		action.button.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
+		client.screen |= action.button
 
 	if(button_number > 0)
 		if(!hud_used.hide_actions_toggle)
-			hud_used.hide_actions_toggle = new(hud_used)
-			hud_used.hide_actions_toggle.InitialiseIcon(src)
+			hud_used.hide_actions_toggle = new(hud_used, src)
 		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 		client.screen += hud_used.hide_actions_toggle
 

@@ -13,7 +13,7 @@
 /obj/item/clothing/glasses/meson/Initialize()
 	. = ..()
 	var/datum/global_hud/global_hud = get_global_hud()
-	overlay = global_hud.meson
+	screen_overlay = global_hud.meson
 
 /obj/item/clothing/glasses/meson/prescription
 	name = "prescription mesons"
@@ -37,7 +37,7 @@
 /obj/item/clothing/glasses/science/Initialize()
 	. = ..()
 	var/datum/global_hud/global_hud = get_global_hud()
-	overlay = global_hud.science
+	screen_overlay = global_hud.science
 
 /obj/item/clothing/glasses/night
 	name = "night vision goggles"
@@ -53,7 +53,7 @@
 /obj/item/clothing/glasses/night/Initialize()
 	. = ..()
 	var/datum/global_hud/global_hud = get_global_hud()
-	overlay = global_hud.nvg
+	screen_overlay = global_hud.nvg
 
 /obj/item/clothing/glasses/tacgoggles
 	name = "tactical goggles"

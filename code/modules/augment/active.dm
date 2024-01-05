@@ -30,7 +30,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = icon_state
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 
 /obj/item/organ/internal/augment/active/Destroy()

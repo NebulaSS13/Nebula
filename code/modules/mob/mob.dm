@@ -26,7 +26,7 @@
 	if(client)
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
-			if(istype(screenobj) && !screenobj.globalscreen)
+			if(istype(screenobj) && !screenobj.is_global_screen)
 				qdel(screenobj)
 		client.screen = list()
 	if(mind)
@@ -36,7 +36,6 @@
 	return ..()
 
 /mob/proc/remove_screen_obj_references()
-	QDEL_NULL_SCREEN(hands)
 	QDEL_NULL_SCREEN(internals)
 	QDEL_NULL_SCREEN(oxygen)
 	QDEL_NULL_SCREEN(toxin)
@@ -65,6 +64,7 @@
 	if(ispath(move_intent))
 		move_intent = GET_DECL(move_intent)
 	. = ..()
+	ability_master = new(null, src)
 	refresh_ai_handler()
 	START_PROCESSING(SSmobs, src)
 
@@ -1361,7 +1361,7 @@
 // Darksight procs.
 /mob/proc/refresh_lighting_master()
 	if(!lighting_master)
-		lighting_master = new
+		lighting_master = new(null, src)
 	if(client)
 		client.screen |= lighting_master
 

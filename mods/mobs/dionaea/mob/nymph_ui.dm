@@ -23,24 +23,17 @@
 	return 255
 
 /datum/hud/diona_nymph/FinalizeInstantiation()
-
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	action_intent = new /obj/screen/intent/diona_nymph()
-	action_intent.icon =  ui_style
-	action_intent.color = ui_color
-	action_intent.alpha = ui_alpha
-	adding += action_intent
-
-	mymob.healths = new /obj/screen()
-	mymob.healths.icon =  ui_style
-	mymob.healths.color = ui_color
-	mymob.healths.alpha = ui_alpha
-	mymob.healths.icon_state = "health0"
-	mymob.healths.SetName("health")
-	mymob.healths.screen_loc = DIONA_SCREEN_LOC_HEALTH
-	adding += mymob.healths
-
+	action_intent = new /obj/screen/intent/diona_nymph(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.healths = new /obj/screen/diona_health(      null, mymob, ui_style, ui_color, ui_alpha)
+	src.other = list()
+	src.adding = list(mymob.healths, action_intent)
 	..()
+
+/obj/screen/diona_health
+	icon_state = "health0"
+	name = "health"
+	screen_loc = DIONA_SCREEN_LOC_HEALTH

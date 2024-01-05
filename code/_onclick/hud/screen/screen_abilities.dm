@@ -1,54 +1,47 @@
 /obj/screen/ability_master
-	name = "Abilities"
-	icon = 'icons/mob/screen_spells.dmi'
-	icon_state = "grey_spell_ready"
+	name           = "Abilities"
+	icon           = 'icons/mob/screen_spells.dmi'
+	icon_state     = "grey_spell_ready"
+	screen_loc     = ui_ability_master
 	var/list/obj/screen/ability/ability_objects = list()
 	var/list/obj/screen/ability/spell_objects = list()
-	var/showing = 0 // If we're 'open' or not.
-
+	var/showing = FALSE // If we're 'open' or not.
 	var/const/abilities_per_row = 7
 	var/open_state = "master_open"		// What the button looks like when it's 'open', showing the other buttons.
 	var/closed_state = "master_closed"	// Button when it's 'closed', hiding everything else.
 
-	screen_loc = ui_ability_master
-
-	var/mob/my_mob = null // The mob that possesses this hud object.
-
-/obj/screen/ability_master/Initialize(mapload, owner)
+/obj/screen/ability_master/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
 	. = ..()
-	if(owner)
-		my_mob = owner
-		update_abilities(0, owner)
-	else
-		. = INITIALIZE_HINT_QDEL
-		CRASH("ERROR: ability_master's Initialize() was not given an owner argument.  This is a bug.")
+	if(. != INITIALIZE_HINT_QDEL)
+		update_abilities(0, _owner)
 
 /obj/screen/ability_master/Destroy()
-	. = ..()
-	remove_all_abilities() //Get rid of the ability objects.
+	// Get rid of the ability objects.
+	remove_all_abilities()
 	ability_objects.Cut()
-	if(my_mob)             // After that, remove ourselves from the mob seeing us, so we can qdel cleanly.
-		my_mob.ability_master = null
-		if(my_mob.client && my_mob.client.screen)
-			my_mob.client.screen -= src
-		my_mob = null
+	// After that, remove ourselves from the mob seeing us, so we can qdel cleanly.
+	var/mob/owner = owner_ref?.resolve()
+	if(istype(owner) && owner.ability_master == src)
+		owner.ability_master = null
+	return ..()
 
 /obj/screen/ability_master/handle_mouse_drop(atom/over, mob/user, params)
 	if(showing)
 		return FALSE
 	. = ..()
 
-/obj/screen/ability_master/Click()
-	if(!ability_objects.len) // If we're empty for some reason.
-		return
-
-	toggle_open()
+/obj/screen/ability_master/handle_click(mob/user, params)
+	if(length(ability_objects)) // If we're empty for some reason.
+		toggle_open()
 
 /obj/screen/ability_master/proc/toggle_open(var/forced_state = 0)
+	var/mob/owner = owner_ref?.resolve()
+	if(!istype(owner) || QDELETED(owner))
+		return
 	if(showing && (forced_state != 2)) // We are closing the ability master, hide the abilities.
-		for(var/obj/screen/ability/O in ability_objects)
-			if(my_mob && my_mob.client)
-				my_mob.client.screen -= O
+		if(owner?.client)
+			for(var/obj/screen/ability/O in ability_objects)
+				owner.client.screen -= O
 //			O.handle_icon_updates = 0
 		showing = 0
 		overlays.len = 0
@@ -62,12 +55,18 @@
 	update_icon()
 
 /obj/screen/ability_master/proc/open_ability_master()
+
+	var/client/owner_client
+	var/mob/owner = owner_ref?.resolve()
+	if(istype(owner) && !QDELETED(owner))
+		owner_client = owner.client
+
 	for(var/i = 1 to length(ability_objects))
 		var/obj/screen/ability/A = ability_objects[i]
 		var/row = round(i/abilities_per_row)
 		A.screen_loc = "RIGHT-[(i-(row*abilities_per_row))+2]:16,TOP-[row+1]:16"
-		if(my_mob && my_mob.client)
-			my_mob.client.screen += A
+		if(owner_client)
+			owner_client.screen += A
 
 /obj/screen/ability_master/proc/update_abilities(forced = 0, mob/user)
 	update_icon()
@@ -87,14 +86,16 @@
 		set_invisibility(INVISIBILITY_ABSTRACT)
 
 /obj/screen/ability_master/proc/add_ability(var/name_given)
-	if(!name) return
+	if(!name_given)
+		return
 	var/obj/screen/ability/new_button = new /obj/screen/ability
 	new_button.ability_master = src
 	new_button.SetName(name_given)
 	new_button.ability_icon_state = name_given
 	new_button.update_icon(1)
 	ability_objects.Add(new_button)
-	if(my_mob.client)
+	var/mob/living/owner = owner_ref?.resolve()
+	if(istype(owner) && !QDELETED(owner) && owner.client)
 		toggle_open(2) //forces the icons to refresh on screen
 
 /obj/screen/ability_master/proc/remove_ability(var/obj/screen/ability/ability)
@@ -149,10 +150,6 @@
 		var/spell/S = screen.spell
 		M.learned_spells |= S
 
-/mob/Initialize()
-	. = ..()
-	ability_master = new /obj/screen/ability_master(null,src)
-
 ///////////ACTUAL ABILITIES////////////
 //This is what you click to do things//
 ///////////////////////////////////////
@@ -160,6 +157,7 @@
 	icon = 'icons/mob/screen_spells.dmi'
 	icon_state = "grey_spell_base"
 	maptext_x = 3
+	requires_owner = FALSE
 	var/background_base_state = "grey"
 	var/ability_icon_state = null
 	var/obj/screen/ability_master/ability_master
@@ -167,8 +165,9 @@
 /obj/screen/ability/Destroy()
 	if(ability_master)
 		ability_master.ability_objects -= src
-		if(ability_master.my_mob && ability_master.my_mob.client)
-			ability_master.my_mob.client.screen -= src
+		var/mob/owner = ability_master.owner_ref?.resolve()
+		if(istype(owner) && owner.client)
+			owner.client.screen -= src
 	if(ability_master && !ability_master.ability_objects.len)
 		ability_master.update_icon()
 //		qdel(ability_master)
@@ -181,10 +180,7 @@
 
 	overlays += ability_icon_state
 
-/obj/screen/ability/Click()
-	if(!usr)
-		return
-
+/obj/screen/ability/handle_click(mob/user, params)
 	activate()
 
 // Makes the ability be triggered.  The subclasses of this are responsible for carrying it out in whatever way it needs to.
@@ -195,21 +191,6 @@
 // This checks if the ability can be used.
 /obj/screen/ability/proc/can_activate()
 	return 1
-
-/client/verb/activate_ability(var/slot as num)
-	set name = ".activate_ability"
-//	set hidden = 1
-	if(!mob)
-		return // Paranoid.
-	if(isnull(slot) || !isnum(slot))
-		to_chat(src,"<span class='warning'>.activate_ability requires a number as input, corrisponding to the slot you wish to use.</span>")
-		return // Bad input.
-	if(!mob.ability_master)
-		return // No abilities.
-	if(slot > mob.ability_master.ability_objects.len || slot <= 0)
-		return // Out of bounds.
-	var/obj/screen/ability/A = mob.ability_master.ability_objects[slot]
-	A.activate()
 
 //////////Verb Abilities//////////
 //Buttons to trigger verbs/procs//
@@ -240,7 +221,8 @@
 	if(arguments)
 		A.arguments_to_use = arguments
 	ability_objects.Add(A)
-	if(my_mob.client)
+	var/mob/owner = owner_ref?.resolve()
+	if(istype(owner) && owner.client)
 		toggle_open(2) //forces the icons to refresh on screen
 
 /////////Obj Abilities////////
@@ -270,7 +252,8 @@
 	A.ability_icon_state = ability_icon_given
 	A.SetName(object_given.name)
 	ability_objects.Add(A)
-	if(my_mob.client)
+	var/mob/owner = owner_ref?.resolve()
+	if(istype(owner) && !QDELETED(owner) && owner.client)
 		toggle_open(2) //forces the icons to refresh on screen
 
 // Wizard
@@ -295,7 +278,7 @@
 	if(get_ability_by_spell(spell))
 		return
 
-	var/obj/screen/ability/spell/A = new()
+	var/obj/screen/ability/spell/A = new(null)
 	A.ability_master = src
 	A.spell = spell
 	A.SetName(spell.name)
@@ -310,7 +293,8 @@
 	A.update_charge(1)
 	spell_objects.Add(A)
 	ability_objects.Add(A)
-	if(my_mob.client)
+	var/mob/owner = owner_ref?.resolve()
+	if(istype(owner) && !QDELETED(owner) && owner.client)
 		toggle_open(2) //forces the icons to refresh on screen
 
 /obj/screen/ability_master/proc/update_spells(var/forced = 0)

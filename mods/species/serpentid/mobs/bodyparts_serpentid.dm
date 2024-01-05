@@ -28,7 +28,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "serpentid-shield-[eyes_shielded ? 1 : 0]"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/attack_self(var/mob/user)
 	. = ..()
@@ -136,7 +136,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "serpentid-threat"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/external/chest/insectoid/serpentid/attack_self(var/mob/user)
 	. = ..()
@@ -182,7 +182,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "serpentid-cloak-[owner && owner.is_cloaked_by(species) ? 1 : 0]"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/external/groin/insectoid/serpentid/attack_self(var/mob/user)
 	. = ..()

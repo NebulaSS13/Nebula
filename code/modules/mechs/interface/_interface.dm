@@ -1,5 +1,3 @@
-#define BAR_CAP 12
-
 /mob/living/exosuit
 	var/static/list/additional_hud_elements = list(
 		/obj/screen/exosuit/toggle/power_control,
@@ -23,11 +21,11 @@
 		client.screen |= hud_elements
 
 /mob/living/exosuit/InitializeHud()
-	zone_sel = new
+	zone_sel = new(null, src)
 	if(!LAZYLEN(hud_elements))
 		var/i = 1
 		for(var/hardpoint in hardpoints)
-			var/obj/screen/exosuit/hardpoint/H = new(src, hardpoint)
+			var/obj/screen/exosuit/hardpoint/H = new(null, src, null, null, null, hardpoint)
 			H.screen_loc = "LEFT:6,TOP-[i]:-16"
 			hud_elements |= H
 			hardpoint_hud_elements[hardpoint] = H
@@ -38,21 +36,21 @@
 		i = 0
 		var/pos = 7
 		for(var/additional_hud in additional_hud_elements)
-			var/obj/screen/exosuit/M = new additional_hud(src)
+			var/obj/screen/exosuit/M = new additional_hud(null, src)
 			M.screen_loc = "LEFT:6,BOTTOM+[pos]:[i]"
 			hud_elements |= M
 			i -= M.height
 
-		hud_health = new /obj/screen/exosuit/health(src)
+		hud_health = new /obj/screen/exosuit/health(null, src)
 		hud_health.screen_loc = "RIGHT-1:28,CENTER-3:11"
 		hud_elements |= hud_health
 		hud_open = locate(/obj/screen/exosuit/toggle/hatch_open) in hud_elements
-		hud_power = new /obj/screen/exosuit/power(src)
+		hud_power = new /obj/screen/exosuit/power(null, src)
 		hud_power.screen_loc = "RIGHT-1:28,CENTER-4:25"
 		hud_elements |= hud_power
 		hud_power_control = locate(/obj/screen/exosuit/toggle/power_control) in hud_elements
 		hud_camera = locate(/obj/screen/exosuit/toggle/camera) in hud_elements
-		hud_heat = new /obj/screen/exosuit/heat(src)
+		hud_heat = new /obj/screen/exosuit/heat(null, src)
 		hud_heat.screen_loc = "RIGHT-1:28,CENTER-4"
 		hud_elements |= hud_heat
 

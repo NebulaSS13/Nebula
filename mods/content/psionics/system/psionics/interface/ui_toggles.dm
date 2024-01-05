@@ -8,8 +8,9 @@
 	if(invisibility == 0)
 		icon_state = owner?.psi.use_psi_armour ? "psiarmour_on" : "psiarmour_off"
 
-/obj/screen/psi/armour/Click()
-	if(!owner?.psi)
+/obj/screen/psi/armour/handle_click(mob/user, params)
+	var/mob/living/owner = owner_ref?.resolve()
+	if(!istype(owner) || !owner.psi)
 		return
 	owner.psi.use_psi_armour = !owner.psi.use_psi_armour
 	if(owner.psi.use_psi_armour)
@@ -26,11 +27,11 @@
 	icon_state = "arrow_left"
 	var/obj/screen/psi/hub/controller
 
-/obj/screen/psi/toggle_psi_menu/Initialize(mapload, var/mob/_owner, var/obj/screen/psi/hub/_controller)
-	. = ..(mapload, _owner)
+/obj/screen/psi/toggle_psi_menu/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, obj/screen/psi/hub/_controller)
+	. = ..()
 	controller = _controller
 
-/obj/screen/psi/toggle_psi_menu/Click()
+/obj/screen/psi/toggle_psi_menu/handle_click(mob/user, params)
 	var/set_hidden = !hidden
 	for(var/thing in controller.components)
 		var/obj/screen/psi/psi = thing

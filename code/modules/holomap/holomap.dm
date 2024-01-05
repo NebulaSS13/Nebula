@@ -174,99 +174,13 @@
 				if(prob(25))
 					set_broken()
 
-/obj/screen/levelselect
-	icon = 'icons/misc/mark.dmi'
-	layer = HUD_ITEM_LAYER
-	var/active = TRUE
-	var/datum/station_holomap/owner = null
-
-/obj/screen/levelselect/Initialize(mapload, datum/station_holomap/_owner)
-	. = ..()
-	owner = _owner
-
-/obj/screen/levelselect/Click()
-	return (!usr.incapacitated() && !isghost(usr))
-/obj/screen/levelselect/up
-	icon_state = "fup"
-
-/obj/screen/levelselect/up/Click()
-	if(..())
-		if(owner)
-			owner.set_level(owner.displayed_level - 1)
-
-/obj/screen/levelselect/down
-	icon_state = "fdn"
-
-/obj/screen/levelselect/down/Click()
-	if(..())
-		if(owner)
-			owner.set_level(owner.displayed_level + 1)
-
-/obj/screen/legend
-	icon = null
-	maptext_height = 128
-	maptext_width = 128
-	layer = HUD_ITEM_LAYER
-	pixel_x = HOLOMAP_LEGEND_X
-	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
-	var/saved_color
-	var/datum/station_holomap/owner = null
-	var/has_areas = FALSE
-
-/obj/screen/legend/cursor
-	icon = 'icons/misc/holomap_markers.dmi'
-	icon_state = "you"
-	maptext_x = 11
-	pixel_x = HOLOMAP_LEGEND_X - 3
-	has_areas = TRUE
-
-/obj/screen/legend/Initialize(mapload, map_color, text)
-	. = ..()
-	saved_color = map_color
-	maptext = "<a href='?src=\ref[src]' style=\"font-family: 'Small Fonts'; color: [map_color]; -dm-text-outline: 1 [COLOR_BLACK]; font-size: 6px\">[text]</a>"
-	alpha = 255
-
-/obj/screen/legend/Click(location, control, params)
-	if(!usr.incapacitated() && !isghost(usr))
-		if(istype(owner))
-			owner.legend_select(src)
-
-/obj/screen/legend/proc/Setup(z_level)
-	has_areas = FALSE
-	//Get the areas for this z level and mark if we're empty
-	overlays.Cut()
-	for(var/area/A in SSminimap.holomaps[z_level].holomap_areas)
-		if(A.holomap_color == saved_color)
-			var/image/area = image(SSminimap.holomaps[z_level].holomap_areas[A])
-			area.pixel_x = ((HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_X) - pixel_x
-			area.pixel_y = ((HOLOMAP_ICON_SIZE / 2) - WORLD_CENTER_Y) - pixel_y
-			overlays += area
-			has_areas = TRUE
-
-//What happens when we are clicked on / when another is clicked on
-/obj/screen/legend/proc/Select()
-	//Start blinking
-	animate(src, alpha = 0, time = 2, loop = -1, easing = JUMP_EASING | EASE_IN | EASE_OUT)
-	animate(alpha = 254, time = 2, loop = -1, easing = JUMP_EASING | EASE_IN | EASE_OUT)
-
-/obj/screen/legend/proc/Deselect()
-	//Stop blinking
-	animate(src, flags = ANIMATION_END_NOW)
-
-//Cursor doesnt do anything specific.
-/obj/screen/legend/cursor/Setup()
-
-/obj/screen/legend/cursor/Select()
-
-/obj/screen/legend/cursor/Deselect()
-
 // Simple datum to keep track of a running holomap. Each machine capable of displaying the holomap will have one.
 /datum/station_holomap
 	var/image/station_map
 	var/image/cursor
-	var/list/obj/screen/legend/legend
+	var/list/obj/screen/holomap_legend/legend
 	var/list/obj/screen/maptexts
-	var/list/obj/screen/levelselect/lbuttons
+	var/list/obj/screen/holomap_level_select/lbuttons
 	var/list/image/levels
 	var/list/z_levels
 	var/z = -1
@@ -293,17 +207,17 @@
 	if(!LAZYLEN(legend) || reinit)
 		QDEL_LIST_ASSOC_VAL(legend)
 		legend = list(
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_COMMAND, "■ Command"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_SECURITY, "■ Security"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_MEDICAL, "■ Medical"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_SCIENCE, "■ Research"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_EXPLORATION, "■ Exploration"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_ENGINEERING, "■ Engineering"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_CARGO, "■ Supply"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_AIRLOCK, "■ Airlock"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_ESCAPE, "■ Escape"),
-			new /obj/screen/legend(null, HOLOMAP_AREACOLOR_CREW, "■ Crew"),
-			new /obj/screen/legend/cursor(null, HOLOMAP_AREACOLOR_BASE, "You are here")
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_COMMAND, "■ Command"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_SECURITY, "■ Security"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_MEDICAL, "■ Medical"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_SCIENCE, "■ Research"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_EXPLORATION, "■ Exploration"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_ENGINEERING, "■ Engineering"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_CARGO, "■ Supply"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_AIRLOCK, "■ Airlock"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_ESCAPE, "■ Escape"),
+			new /obj/screen/holomap_legend(null, null, null, null, null, HOLOMAP_AREACOLOR_CREW, "■ Crew"),
+			new /obj/screen/holomap_legend/cursor(null, null, null, null, null, HOLOMAP_AREACOLOR_BASE, "You are here")
 		)
 	if(reinit)
 		QDEL_NULL_LIST(lbuttons)
@@ -333,8 +247,8 @@
 			if(z_count > 1)
 				if(!LAZYLEN(lbuttons))
 					//Add the buttons for switching levels
-					LAZYADD(lbuttons, new /obj/screen/levelselect/up(null, src))
-					LAZYADD(lbuttons, new /obj/screen/levelselect/down(null, src))
+					LAZYADD(lbuttons, new /obj/screen/holomap_level_select/up(null, null, null, null, null, src))
+					LAZYADD(lbuttons, new /obj/screen/holomap_level_select/down(null, null, null, null, null, src))
 				lbuttons[1].pixel_y = HOLOMAP_MARGIN - 22
 				lbuttons[2].pixel_y = HOLOMAP_MARGIN + 5
 				lbuttons[1].pixel_x = 254
@@ -389,8 +303,8 @@
 
 	//Fix legend position
 	var/pixel_y = HOLOMAP_LEGEND_Y
-	for(var/obj/screen/legend/element in legend)
-		element.owner = src
+	for(var/obj/screen/holomap_legend/element in legend)
+		element.holomap = src
 		element.pixel_y = pixel_y //Set adjusted pixel y as it will be needed for area placement
 		element.Setup(z_levels[displayed_level])
 		if(element.has_areas)
@@ -403,12 +317,12 @@
 	if(displayed_level < z_levels.len)
 		station_map.vis_contents += lbuttons[2]
 
-/datum/station_holomap/proc/legend_select(obj/screen/legend/L)
+/datum/station_holomap/proc/legend_select(obj/screen/holomap_legend/L)
 	legend_deselect()
 	L.Select()
 
 /datum/station_holomap/proc/legend_deselect()
-	for(var/obj/screen/legend/entry in legend)
+	for(var/obj/screen/holomap_legend/entry in legend)
 		entry.Deselect()
 
 /datum/station_holomap/proc/initialize_holomap_bogus()

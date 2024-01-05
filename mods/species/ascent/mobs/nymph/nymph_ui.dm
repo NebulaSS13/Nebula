@@ -16,8 +16,8 @@
 	screen_loc =  ANYMPH_SCREEN_LOC_MOLT
 	icon_state = "molt-on"
 
-/obj/screen/ascent_nymph_molt/Click()
-	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
+/obj/screen/ascent_nymph_molt/handle_click(mob/user, params)
+	var/mob/living/carbon/alien/ascent_nymph/nymph = user
 	if(istype(nymph)) nymph.molt()
 
 /datum/hud/ascent_nymph
@@ -35,43 +35,18 @@
 	return 255
 
 /datum/hud/ascent_nymph/FinalizeInstantiation()
-
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
-
-	molt = new
-	molt.icon =  ui_style
-	molt.color = ui_color
-	molt.alpha = ui_alpha
-	adding += molt
-
-	food = new
-	food.icon = 'icons/mob/status_hunger.dmi'
-	food.SetName("nutrition")
-	food.icon_state = "nutrition1"
-	food.pixel_w = 8
-	food.screen_loc = ui_nutrition_small
-	adding += food
-
-	drink = new
-	drink.icon = 'icons/mob/status_hunger.dmi'
-	drink.icon_state = "hydration1"
-	drink.SetName("hydration")
-	drink.screen_loc = ui_nutrition_small
-	adding += drink
-
-	action_intent = new /obj/screen/intent/ascent_nymph()
-	action_intent.icon =  ui_style
-	action_intent.color = ui_color
-	action_intent.alpha = ui_alpha
-	adding += action_intent
-
-	mymob.healths = new /obj/screen()
-	mymob.healths.icon =  ui_style
-	mymob.healths.color = ui_color
-	mymob.healths.alpha = ui_alpha
-	mymob.healths.SetName("health")
-	mymob.healths.screen_loc = ANYMPH_SCREEN_LOC_HEALTH
-	adding += mymob.healths
+	molt          = new(                                null, mymob, ui_style, ui_color, ui_alpha)
+	food          = new /obj/screen/food(               null, mymob, ui_style, ui_color, ui_alpha)
+	drink         = new /obj/screen/drink(              null, mymob, ui_style, ui_color, ui_alpha)
+	action_intent = new /obj/screen/intent/ascent_nymph(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.healths = new /obj/screen/ascent_nymph_health(null, mymob, ui_style, ui_color, ui_alpha)
+	src.other = list()
+	src.adding = list(mymob.healths, molt, food, drink, action_intent)
 	..()
+
+/obj/screen/ascent_nymph_health
+	name = "health"
+	screen_loc = ANYMPH_SCREEN_LOC_HEALTH

@@ -3,57 +3,6 @@
 
 var/global/list/radial_menus = list()
 
-/obj/screen/radial/Destroy()
-	parent = null
-	return ..()
-
-/obj/screen/radial
-	icon = 'icons/screen/radial.dmi'
-	layer = HUD_ABOVE_ITEM_LAYER
-	plane = HUD_PLANE
-	var/datum/radial_menu/parent
-
-/obj/screen/radial/slice
-	icon_state = "radial_slice"
-	var/choice
-	var/next_page = FALSE
-	var/tooltips = FALSE
-
-/obj/screen/radial/slice/MouseEntered(location, control, params)
-	. = ..()
-	icon_state = "radial_slice_focus"
-	if(tooltips)
-		openToolTip(usr, src, params, title = name)
-
-/obj/screen/radial/slice/MouseExited(location, control, params)
-	. = ..()
-	icon_state = "radial_slice"
-	if(tooltips)
-		closeToolTip(usr)
-
-/obj/screen/radial/slice/Click(location, control, params)
-	if(parent && usr.client == parent.current_user)
-		if(next_page)
-			parent.next_page()
-		else
-			parent.element_chosen(choice,usr)
-
-/obj/screen/radial/center
-	name = "Close Menu"
-	icon_state = "radial_center"
-
-/obj/screen/radial/center/MouseEntered(location, control, params)
-	. = ..()
-	icon_state = "radial_center_focus"
-
-/obj/screen/radial/center/MouseExited(location, control, params)
-	. = ..()
-	icon_state = "radial_center"
-
-/obj/screen/radial/center/Click(location, control, params)
-	if(usr.client == parent.current_user)
-		parent.finished = TRUE
-
 /datum/radial_menu
 	var/list/choices = list() //List of choice id's
 	var/list/choices_icons = list() //choice_id -> icon

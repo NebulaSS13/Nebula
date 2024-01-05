@@ -175,7 +175,7 @@
 
 	for(var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
-		H.owner = null
+		H.owner_ref = null
 		H.holding = null
 		qdel(H)
 	hardpoint_hud_elements.Cut()

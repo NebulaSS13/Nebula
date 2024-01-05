@@ -18,7 +18,7 @@
 	var/electric =         FALSE //if the glasses should be disrupted by EMP
 
 	var/hud_type
-	var/obj/screen/overlay
+	var/obj/screen/screen_overlay
 	var/obj/item/clothing/glasses/hud/hud // Hud glasses, if any
 	var/activation_sound =   'sound/items/goggles_charge.ogg'
 	var/deactivation_sound // set this if you want a sound on deactivation
@@ -43,7 +43,7 @@
 	. = ..()
 
 /obj/item/clothing/glasses/needs_vision_update()
-	return ..() || overlay || vision_flags || see_invisible || darkness_view
+	return ..() || screen_overlay || vision_flags || see_invisible || darkness_view
 
 /obj/item/clothing/glasses/emp_act(severity)
 	if(electric)

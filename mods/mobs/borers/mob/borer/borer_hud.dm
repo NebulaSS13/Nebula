@@ -14,10 +14,10 @@
 	. = ..()
 
 /datum/hud/borer/FinalizeInstantiation()
-	hud_intent_selector =  new
+	hud_intent_selector =  new(null, mymob)
 	adding += hud_intent_selector
-	hud_inject_chemicals = new
-	hud_leave_host =       new
+	hud_inject_chemicals = new(null, mymob)
+	hud_leave_host =       new(null, mymob)
 	borer_hud_elements = list(
 		hud_inject_chemicals,
 		hud_leave_host
@@ -25,7 +25,7 @@
 	if(isborer(mymob))
 		var/mob/living/simple_animal/borer/borer = mymob
 		if(!borer.neutered)
-			hud_toggle_control = new
+			hud_toggle_control = new(null, mymob)
 			borer_hud_elements += hud_toggle_control
 	adding += borer_hud_elements
 	if(mymob)
@@ -51,10 +51,8 @@
 	alpha = 0
 	invisibility = INVISIBILITY_MAXIMUM
 
-/obj/screen/borer/Click(location, control, params)
-	if(!isborer(usr))
-		return FALSE
-	if(usr.stat == DEAD)
+/obj/screen/borer/handle_click(mob/user, params)
+	if(!isborer(user))
 		return FALSE
 	var/mob/living/simple_animal/borer/worm = usr
 	if(!worm.host)
@@ -66,12 +64,12 @@
 	icon_state = "seize_control"
 	screen_loc = "LEFT+3,TOP-1"
 
-/obj/screen/borer/toggle_host_control/Click(location, control, params)
+/obj/screen/borer/toggle_host_control/handle_click(mob/user, params)
 	. = ..()
 	if(!.)
 		return FALSE
 
-	var/mob/living/simple_animal/borer/worm = usr
+	var/mob/living/simple_animal/borer/worm = user
 	if(!worm.can_use_borer_ability())
 		return
 
@@ -123,12 +121,12 @@
 	icon_state = "inject_chemicals"
 	screen_loc = "LEFT+2,TOP-1"
 
-/obj/screen/borer/inject_chemicals/Click(location, control, params)
+/obj/screen/borer/inject_chemicals/handle_click(mob/user, params)
 	. = ..()
 	if(!.)
 		return FALSE
 
-	var/mob/living/simple_animal/borer/worm = usr
+	var/mob/living/simple_animal/borer/worm = user
 	if(!worm.can_use_borer_ability())
 		return
 
@@ -150,12 +148,12 @@
 	icon_state = "leave_host"
 	screen_loc = "LEFT+1,TOP-1"
 
-/obj/screen/borer/leave_host/Click(location, control, params)
+/obj/screen/borer/leave_host/handle_click(mob/user, params)
 	. = ..()
 	if(!.)
 		return FALSE
 
-	var/mob/living/simple_animal/borer/worm = usr
+	var/mob/living/simple_animal/borer/worm = user
 	if(!worm.can_use_borer_ability())
 		return
 
