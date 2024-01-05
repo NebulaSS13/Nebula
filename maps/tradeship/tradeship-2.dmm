@@ -5258,6 +5258,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/shuttle/outgoing/engineering)
+"tG" = (
+/obj/abstract/ramp_sculptor/north,
+/turf/exterior/wall,
+/area/space)
 "tV" = (
 /turf/space,
 /area/ship/trade/command/fmate)
@@ -5918,6 +5922,10 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/crew/medbay/chemistry)
+"Cg" = (
+/obj/abstract/ramp_sculptor/east,
+/turf/exterior/wall,
+/area/space)
 "Co" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/cable{
@@ -7132,6 +7140,10 @@
 /obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay/chemistry)
+"OQ" = (
+/obj/abstract/ramp_sculptor/west,
+/turf/exterior/wall,
+/area/space)
 "Pa" = (
 /obj/structure/cable{
 	icon_state = "0-4"
@@ -7542,6 +7554,10 @@
 /obj/effect/paint/sun,
 /turf/simulated/wall/titanium,
 /area/ship/trade/shuttle/outgoing/engineering)
+"Tv" = (
+/obj/structure/lattice,
+/turf/exterior/wall,
+/area/space)
 "Tx" = (
 /obj/structure/shuttle/engine/propulsion/burst/right,
 /turf/simulated/floor/airless,
@@ -9850,9 +9866,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+OQ
+OQ
+OQ
 xX
 aa
 aa
@@ -9931,8 +9947,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+tG
+eh
 eh
 eh
 pn
@@ -10013,7 +10029,7 @@ aa
 aa
 aa
 aa
-aa
+tG
 eh
 ew
 ex
@@ -10095,7 +10111,7 @@ aa
 aa
 aa
 aa
-aa
+tG
 eh
 ex
 ex
@@ -10178,7 +10194,7 @@ aa
 aa
 aa
 aa
-aa
+eh
 ex
 ex
 fh
@@ -12391,9 +12407,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-cy
+eh
+eh
+Tv
 eN
 Gc
 fN
@@ -12472,7 +12488,7 @@ aa
 aa
 aa
 aa
-aa
+tG
 eh
 eh
 eN
@@ -12554,8 +12570,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+tG
+eh
 ew
 eN
 eN
@@ -12636,8 +12652,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+tG
+eh
 eh
 eh
 eN
@@ -12719,9 +12735,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+Cg
+Cg
+Cg
 aa
 we
 we
