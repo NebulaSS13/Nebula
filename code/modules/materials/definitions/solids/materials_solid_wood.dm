@@ -41,9 +41,9 @@
 	sound_manipulate = 'sound/foley/woodpickup1.ogg'
 	sound_dropped = 'sound/foley/wooddrop1.ogg'
 
-/decl/material/solid/organic/wood/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if(reinforce_material || ispath(stack_type))
 		return
 
 	if(wall_support_value >= 10)
@@ -76,29 +76,25 @@
 	. += new/datum/stack_recipe/prosthetic/right_foot(src)
 	. += new/datum/stack_recipe/campfire(src)
 
-/decl/material/solid/organic/wood/mahogany/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/mahogany/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/mahogany(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += new/datum/stack_recipe/tile/mahogany(src)
 
-/decl/material/solid/organic/wood/maple/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/maple/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/maple(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += new/datum/stack_recipe/tile/maple(src)
 
-/decl/material/solid/organic/wood/ebony/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/ebony/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/ebony(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += new/datum/stack_recipe/tile/ebony(src)
 
-/decl/material/solid/organic/wood/walnut/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/walnut/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/walnut(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += new/datum/stack_recipe/tile/walnut(src)
 
 /decl/material/solid/organic/wood/holographic
 	uid = "solid_holographic_wood"
@@ -109,7 +105,7 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
-/decl/material/solid/organic/wood/holographic/get_recipes(reinf_mat)
+/decl/material/solid/organic/wood/holographic/get_recipes(stack_type, reinf_mat)
 	return list()
 
 /decl/material/solid/organic/wood/mahogany

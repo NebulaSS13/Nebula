@@ -66,9 +66,10 @@
 //
 
 //Structures
-/decl/material/solid/metal/chromium/generate_recipes(reinforce_material)
+/decl/material/solid/metal/chromium/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	. += /datum/stack_recipe/structure/anomaly_container
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += /datum/stack_recipe/structure/anomaly_container
 
 /datum/stack_recipe/structure/anomaly_container
 	title               = "anomaly container"

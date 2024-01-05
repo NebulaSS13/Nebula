@@ -202,7 +202,7 @@
 		qdel(H)
 		spawn(50)
 			new /obj/item/honey_frame(loc)
-			new /obj/item/stack/wax(loc)
+			new /obj/item/stack/material/bar(loc, 1, /decl/material/solid/organic/wax)
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
@@ -257,17 +257,6 @@
 		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
 		new /obj/machinery/beehive(get_turf(user))
 		qdel(src)
-
-/obj/item/stack/wax
-	name = "wax"
-	singular_name = "wax piece"
-	desc = "Soft substance produced by bees. Used to make candles."
-	icon = 'icons/obj/beekeeping.dmi'
-	icon_state = "wax"
-
-var/global/list/wax_recipes = list(new /datum/stack_recipe/candle)
-/obj/item/stack/wax/get_recipes()
-	return global.wax_recipes
 
 /obj/item/bee_pack
 	name = "bee pack"

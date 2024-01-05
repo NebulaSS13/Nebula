@@ -100,7 +100,7 @@
 /obj/item/stack/get_matter_amount_modifier()
 	. = amount * matter_multiplier
 
-/obj/item/stack/proc/get_recipes()
+/obj/item/stack/proc/get_recipes(stack_type, reinf_mat)
 	return
 
 /obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)

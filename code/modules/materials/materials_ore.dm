@@ -18,11 +18,12 @@
 	material_alteration        = MAT_FLAG_ALTERATION_COLOR //Name is handled in override
 	randpixel                  = 6
 	is_spawnable_type          = TRUE
+	recipe_stack_type          = /obj/item/stack/material/ore
 
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states
 	///A list of all the existing ore icon states in the ore file
-	var/static/list/ore_icon_states =  icon_states('icons/obj/materials/ore.dmi') //list("shiny", "gems", "dust", "nugget", "lump")
+	var/static/list/ore_icon_states = icon_states('icons/obj/materials/ore.dmi')
 
 ///Returns a cached ore pile icon state
 /obj/item/stack/material/ore/proc/get_cached_ore_pile_overlay(var/state_name, var/stack_icon_index)
@@ -89,9 +90,6 @@
 	. = ..()
 	SetName("[(material.ore_name ? material.ore_name : "[material.name] chunk")][(amount > 1? " pile" : "")]")
 	desc = material.ore_desc ? material.ore_desc : "A lump of ore."
-
-/obj/item/stack/material/ore/get_recipes()
-	return //Can't use recipes with ore
 
 /obj/item/stack/material/ore/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/stack/material) && !is_same(W))

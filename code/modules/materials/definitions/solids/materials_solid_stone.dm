@@ -18,14 +18,13 @@
 		/decl/material/solid/silicon = 1
 	)
 
-/decl/material/solid/stone/generate_recipes(var/reinforce_material)
+/decl/material/solid/stone/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
-		return
-	if(wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-	. += new/datum/stack_recipe/furniture/planting_bed(src)
-	. += new/datum/stack_recipe/fountain(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		if(wall_support_value >= 10)
+			. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/planting_bed(src)
+		. += new/datum/stack_recipe/fountain(src)
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"
