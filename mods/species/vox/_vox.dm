@@ -10,10 +10,10 @@
 	credits_crew_names = list("THE VOX")
 	credits_topics = list("VOX RITUAL DUELS", "NECK MARKINGS", "ANCIENT SUPERCOMPUTERS")
 
-/mob/living/carbon/human/vox/Initialize(mapload, new_species)
+/mob/living/carbon/human/vox/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
 	h_style = /decl/sprite_accessory/hair/vox/short
 	hair_colour = COLOR_BEASTY_BROWN
-	. = ..(mapload, SPECIES_VOX)
+	. = ..(mapload, SPECIES_VOX, dna, new_bodytype)
 
 /datum/follow_holder/voxstack
 	sort_order = 14
