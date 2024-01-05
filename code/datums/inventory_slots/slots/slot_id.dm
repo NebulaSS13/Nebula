@@ -5,7 +5,7 @@
 	slot_id = slot_wear_id_str
 	requires_slot_flags = SLOT_ID
 	mob_overlay_layer = HO_ID_LAYER
-	quick_equip_priority = 12
+	quick_equip_priority = 13
 
 /datum/inventory_slot/id/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	var/obj/item/clothing/under/under = user.get_equipped_item(slot_w_uniform_str)

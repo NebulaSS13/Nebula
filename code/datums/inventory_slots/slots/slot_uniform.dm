@@ -13,7 +13,7 @@
 	)
 	requires_organ_tag = BP_CHEST
 	requires_slot_flags = SLOT_UPPER_BODY
-	quick_equip_priority = 11
+	quick_equip_priority = 12
 
 /datum/inventory_slot/uniform/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	if(prop?.flags_inv & HIDESHOES)
