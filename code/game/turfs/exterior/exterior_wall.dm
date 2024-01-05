@@ -88,6 +88,10 @@ var/global/list/natural_walls = list()
 
 	. = ..()
 
+/turf/proc/handle_ramp_dug_below(turf/exterior/wall/ramp)
+	if(simulated && !is_open())
+		ChangeTurf(get_base_turf(z))
+
 /turf/exterior/wall/proc/make_ramp(var/mob/user, var/new_slope, var/skip_icon_update = FALSE)
 
 	ramp_slope_direction = new_slope
@@ -110,15 +114,9 @@ var/global/list/natural_walls = list()
 		color            = initial(under.color)
 
 		decals = null
-
-		var/turf/T = GetAbove(src)
-		if(T && !T.is_open())
-			T.ChangeTurf(get_base_turf(T.z))
-		if(user)
-			T = GetAbove(get_turf(user))
-			if(T && !T.is_open())
-				T.ChangeTurf(get_base_turf(T.z))
-
+		var/turf/ramp_above = GetAbove(src)
+		if(ramp_above)
+			ramp_above.handle_ramp_dug_below(src)
 		update_neighboring_ramps()
 
 	else
