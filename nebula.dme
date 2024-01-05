@@ -914,6 +914,7 @@
 #include "code\game\objects\munition.dm"
 #include "code\game\objects\objs.dm"
 #include "code\game\objects\objs_damage.dm"
+#include "code\game\objects\objs_interactions.dm"
 #include "code\game\objects\topic.dm"
 #include "code\game\objects\auras\aura.dm"
 #include "code\game\objects\auras\blueforge_aura.dm"
