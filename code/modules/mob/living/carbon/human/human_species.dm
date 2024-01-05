@@ -20,7 +20,7 @@
 	real_name = "corpse"
 
 /mob/living/carbon/human/corpse/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype, obj/abstract/landmark/corpse/corpse)
-	. = ..(mapload, species_name, dna, new_bodytype)
+	. = ..(mapload, species_name, dna, new_bodytype) // do not pass the corpse landmark
 	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
 	if(culture)
 		var/newname = culture.get_random_name(src, gender, species.name)
@@ -58,7 +58,7 @@
 /mob/living/carbon/human/monkey
 	gender = PLURAL
 
-/mob/living/carbon/human/monkey/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
+/mob/living/carbon/human/monkey/Initialize()
 	if(gender == PLURAL)
 		gender = pick(MALE, FEMALE)
-	. = ..(mapload, SPECIES_MONKEY, dna, new_bodytype)
+	. = ..(species_name = SPECIES_MONKEY)

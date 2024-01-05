@@ -3,7 +3,7 @@
 	gender = MALE
 
 /mob/living/carbon/human/monkey/punpun/Initialize()
-	. = ..()
+	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/carbon/human/monkey/punpun/LateInitialize()
@@ -32,8 +32,8 @@
 		C.has_sensor  = SUIT_LOCKED_SENSORS
 		C.sensor_mode = SUIT_SENSOR_OFF
 
-/mob/living/carbon/human/blank/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
-	. = ..(mapload, SPECIES_HUMAN, dna, new_bodytype)
+/mob/living/carbon/human/blank/Initialize()
+	. = ..(species_name = SPECIES_HUMAN)
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/carbon/human/blank/LateInitialize()
