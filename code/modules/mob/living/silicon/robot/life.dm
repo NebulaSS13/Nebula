@@ -29,9 +29,9 @@
 /mob/living/silicon/robot/proc/clamp_values()
 	set_status(STAT_PARA, min(GET_STATUS(src, STAT_PARA), 30))
 	set_status(STAT_ASLEEP, 0)
-	adjustBruteLoss(0)
-	adjustToxLoss(0)
-	adjustOxyLoss(0)
+	adjustBruteLoss(0, do_update_health = FALSE)
+	adjustToxLoss(0, do_update_health = FALSE)
+	adjustOxyLoss(0, do_update_health = FALSE)
 	adjustFireLoss(0)
 
 /mob/living/silicon/robot/proc/use_power()
@@ -67,17 +67,17 @@
 		lights_on = 0
 		set_light(0)
 
+/mob/living/silicon/robot/should_be_dead()
+	return current_health < config.health_threshold_dead
+
 /mob/living/silicon/robot/handle_regular_status_updates()
-	updatehealth()
+	update_health()
 
 	if(HAS_STATUS(src, STAT_ASLEEP))
 		SET_STATUS_MAX(src, STAT_PARA, 3)
 
 	if(resting)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
-
-	if(health < config.health_threshold_dead && stat != DEAD) //die only once
-		death()
 
 	if (stat != DEAD) //Alive.
 		// This previously used incapacitated(INCAPACITATION_DISRUPTED) but that was setting the robot to be permanently unconscious, which isn't ideal.
@@ -137,7 +137,7 @@
 	if (src.healths)
 		if (src.stat != DEAD)
 			if(isdrone(src))
-				switch(health)
+				switch(current_health)
 					if(35 to INFINITY)
 						src.healths.icon_state = "health0"
 					if(25 to 34)
@@ -153,7 +153,7 @@
 					else
 						src.healths.icon_state = "health6"
 			else
-				switch(health)
+				switch(current_health)
 					if(200 to INFINITY)
 						src.healths.icon_state = "health0"
 					if(150 to 200)
@@ -165,7 +165,7 @@
 					if(0 to 50)
 						src.healths.icon_state = "health4"
 					else
-						if(health > config.health_threshold_dead)
+						if(current_health > config.health_threshold_dead)
 							src.healths.icon_state = "health5"
 						else
 							src.healths.icon_state = "health6"

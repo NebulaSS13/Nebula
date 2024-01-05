@@ -40,7 +40,7 @@
 		var/turf/T = get_turf(S)
 		var/obj/item/remains/xeno/X = new(T)
 		X.desc += "These look like they belong to \a [S.name]."
-		beast.adjust_nutrition(5 * S.maxHealth)
+		beast.adjust_nutrition(5 * S.get_max_health())
 		if(prob(5))
 			S.gib()
 		else
@@ -74,8 +74,7 @@
 	faction = "samak"
 	icon = 'icons/mob/simple_animal/samak.dmi'
 	move_to_delay = 2
-	maxHealth = 125
-	health = 125
+	mob_default_max_health = 125
 	speed = 2
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
@@ -97,8 +96,7 @@
 	faction = "diyaab"
 	icon = 'icons/mob/simple_animal/diyaab.dmi'
 	move_to_delay = 1
-	maxHealth = 25
-	health = 25
+	mob_default_max_health = 25
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws/weak
 	cold_damage_per_tick = 0
@@ -114,8 +112,7 @@
 	faction = "shantak"
 	icon = 'icons/mob/simple_animal/shantak.dmi'
 	move_to_delay = 1
-	maxHealth = 75
-	health = 75
+	mob_default_max_health = 75
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
@@ -154,8 +151,7 @@
 	faction = "crab"
 	icon = 'icons/mob/simple_animal/royalcrab.dmi'
 	move_to_delay = 3
-	maxHealth = 150
-	health = 150
+	mob_default_max_health = 150
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/pincers
 	speak_chance = 1
@@ -169,8 +165,7 @@
 	desc = "A huge grubby creature."
 	icon = 'icons/mob/simple_animal/char.dmi'
 	mob_size = MOB_SIZE_LARGE
-	health = 45
-	maxHealth = 45
+	mob_default_max_health = 45
 	natural_weapon = /obj/item/natural_weapon/charbaby
 	speed = 2
 	return_damage_min = 2

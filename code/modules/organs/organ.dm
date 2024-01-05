@@ -54,7 +54,7 @@
 /obj/item/organ/attack_self(var/mob/user)
 	return (owner && loc == owner && owner == user)
 
-/obj/item/organ/proc/update_health()
+/obj/item/organ/proc/update_organ_health()
 	return
 
 /obj/item/organ/proc/is_broken()
@@ -365,6 +365,8 @@
 /obj/item/organ/proc/heal_damage(amount)
 	if(can_recover())
 		damage = clamp(0, damage - round(amount, 0.1), max_damage)
+		if(owner)
+			owner.update_health()
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(BP_IS_PROSTHETIC(src) || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))

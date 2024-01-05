@@ -110,7 +110,7 @@ var/global/default_mobloc = null
 	if(!loss && ishuman(M))
 		var/mob/living/carbon/human/H = M            // Synthetics have robot limbs which don't report damage to getXXXLoss()
 		if(H.isSynthetic())                          // So we have to hard code this check or create a different one for them.
-			return H.species.total_health - H.health
+			return H.species.total_health - H.current_health
 	return loss
 
 // ==============================================================================================================
@@ -164,7 +164,7 @@ var/global/default_mobloc = null
 
 	// Damage the mob
 
-	var/initial_health = H.health
+	var/initial_health = H.current_health
 
 	if(damagetype == OXY && H.need_breathe())
 		var/obj/item/organ/internal/lungs/L = H.get_organ(H.get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
@@ -175,7 +175,7 @@ var/global/default_mobloc = null
 
 	var/ending_damage = damage_check(H, damagetype)
 
-	var/ending_health = H.health
+	var/ending_health = H.current_health
 	qdel(H)
 
 	// Now test this stuff.

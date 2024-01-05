@@ -9,6 +9,9 @@
 	icon_state = "brain1"
 	mob_sort_value = 7
 
+/mob/living/carbon/brain/can_emote()
+	return stat == CONSCIOUS && (istype(container, /obj/item/mmi) || istype(loc, /obj/item/organ/internal/posibrain))
+
 /mob/living/carbon/brain/Initialize()
 	create_reagents(1000)
 	. = ..()

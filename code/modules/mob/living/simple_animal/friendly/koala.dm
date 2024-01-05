@@ -3,8 +3,7 @@
 	name = "koala"
 	desc = "A little grey bear. How long is he gonna sleep today?"
 	icon = 'icons/mob/simple_animal/koala.dmi'
-	maxHealth = 45
-	health = 45
+	mob_default_max_health = 45
 	speed = 4
 	speak = list("Rrr", "Wraarh...", "Pfrrr...")
 	speak_emote = list("roar")

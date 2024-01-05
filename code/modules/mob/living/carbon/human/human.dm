@@ -6,12 +6,14 @@
 	icon_state = "body_m_s"
 	mob_sort_value = 6
 	dna = new /datum/dna()
+	mob_default_max_health = 150
 
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/step_count
 
 /mob/living/carbon/human/Initialize(mapload, species_name = null, datum/dna/new_dna = null, decl/bodytype/new_bodytype = null)
+	current_health = mob_default_max_health
 	setup_hud_overlays()
 	var/list/newargs = args.Copy(2)
 	setup(arglist(newargs))
@@ -549,7 +551,7 @@
 	holder_type = null
 	if(species.holder_type)
 		holder_type = species.holder_type
-	maxHealth = species.total_health
+	set_max_health(species.total_health, skip_health_update = TRUE) // Health update is handled later.
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
@@ -944,7 +946,7 @@
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
 /mob/living/carbon/human/nervous_system_failure()
-	return getBrainLoss() >= maxHealth * 0.75
+	return getBrainLoss() >= get_max_health() * 0.75
 
 /mob/living/carbon/human/melee_accuracy_mods()
 	. = ..()

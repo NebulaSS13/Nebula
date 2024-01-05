@@ -35,9 +35,7 @@
 			if(istype(M) && M.active && M.passive_power_use)
 				M.deactivate()
 
-	updatehealth()
-	if(health <= 0 && stat != DEAD)
-		death()
+	update_health() // TODO: move to handle_regular_status_updates(), Life PR
 
 	if(emp_damage > 0)
 		emp_damage -= min(1, emp_damage) //Reduce emp accumulation over time

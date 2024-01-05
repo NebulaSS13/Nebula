@@ -8,8 +8,7 @@
 	icon_state = ICON_STATE_WORLD
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
-	maxHealth = 150
-	health = 150
+	mob_default_max_health = 150
 	gender = NEUTER
 	update_icon = 0
 	see_in_dark = 8
@@ -50,8 +49,10 @@
 /mob/living/slime/get_digestion_product()
 	return /decl/material/liquid/slimejelly
 
-/mob/living/slime/adjustToxLoss(var/amount)
-	toxloss = clamp(toxloss + amount, 0, maxHealth)
+/mob/living/slime/adjustToxLoss(var/amount, var/do_update_health = TRUE)
+	toxloss = clamp(toxloss + amount, 0, get_max_health())
+	if(do_update_health)
+		update_health()
 
 /mob/living/slime/setToxLoss(var/amount)
 	adjustToxLoss(amount-getToxLoss())
@@ -87,7 +88,7 @@
 
 	var/tally = ..()
 
-	var/health_deficiency = (maxHealth - health)
+	var/health_deficiency = (get_max_health() - current_health)
 	if(health_deficiency >= 30) tally += (health_deficiency / 25)
 
 	if (bodytemperature < 183.222)
@@ -100,7 +101,7 @@
 		if(reagents.has_reagent(/decl/material/liquid/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
 			tally *= 5
 
-	if(health <= 0) // if damaged, the slime moves twice as slow
+	if(current_health <= 0) // if damaged, the slime moves twice as slow
 		tally *= 2
 
 	return tally + config.slime_delay
@@ -146,7 +147,7 @@
 	. = ..()
 
 	statpanel("Status")
-	stat(null, "Health: [round((health / maxHealth) * 100)]%")
+	stat(null, "Health: [get_health_percent()]%")
 	stat(null, "Intent: [a_intent]")
 
 	if (client.statpanel == "Status")
@@ -159,8 +160,8 @@
 
 		stat(null,"Power Level: [powerlevel]")
 
-/mob/living/slime/adjustFireLoss(amount)
-	..(-abs(amount)) // Heals them
+/mob/living/slime/adjustFireLoss(amount, do_update_health = TRUE)
+	..(-abs(amount), do_update_health) // Heals them
 
 /mob/living/slime/bullet_act(var/obj/item/projectile/Proj)
 	var/datum/ai/slime/slime_ai = ai
@@ -344,7 +345,7 @@
 	else if (nutrition < get_hunger_nutrition())
 		. += "<span class='warning'>Warning:\tthe slime is hungry.</span>"
 	. += "Electric charge strength:\t[powerlevel]"
-	. += "Health:\t[round((health * 100) / maxHealth)]%"
+	. += "Health:\t[get_health_percent()]%"
 
 	var/list/mutations = slime_data.descendants?.Copy()
 	if(!mutations.len)

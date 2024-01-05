@@ -303,14 +303,14 @@ var/global/list/bodytypes_by_category = list()
 	if(H.has_external_organs())
 		for(var/obj/item/organ/external/E in H.get_external_organs())
 			if(!is_default_limb(E))
-				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE, skip_health_update = TRUE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(E)
 
 	//Clear invalid internal organs
 	if(H.has_internal_organs())
 		for(var/obj/item/organ/O in H.get_internal_organs())
 			if(!is_default_organ(O))
-				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE, skip_health_update = TRUE) //Remove them first so we don't trigger removal effects by just calling delete on them
 				qdel(O)
 
 	//Create missing limbs
@@ -323,7 +323,7 @@ var/global/list/bodytypes_by_category = list()
 		if(E.parent_organ)
 			var/list/parent_organ_data = has_limbs[E.parent_organ]
 			parent_organ_data["has_children"]++
-		H.add_organ(E, GET_EXTERNAL_ORGAN(H, E.parent_organ), FALSE, FALSE)
+		H.add_organ(E, GET_EXTERNAL_ORGAN(H, E.parent_organ), FALSE, FALSE, skip_health_update = TRUE)
 
 	//Create missing internal organs
 	for(var/organ_tag in has_organ)
@@ -334,7 +334,8 @@ var/global/list/bodytypes_by_category = list()
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
-		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE)
+		H.add_organ(O, GET_EXTERNAL_ORGAN(H, O.parent_organ), FALSE, FALSE, skip_health_update = TRUE)
+	H.update_health()
 
 //Checks if an existing organ is the bodytype default
 /decl/bodytype/proc/is_default_organ(obj/item/organ/internal/O)

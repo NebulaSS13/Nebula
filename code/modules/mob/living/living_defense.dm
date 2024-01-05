@@ -222,12 +222,11 @@
 	if(!damage || !istype(user))
 		return
 
-	adjustBruteLoss(damage)
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
 	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
+	adjustBruteLoss(damage)
 	user.do_attack_animation(src)
-	spawn(1) updatehealth()
 	return 1
 
 /mob/living/proc/can_ignite()
@@ -304,7 +303,7 @@
 /mob/living/lava_act(datum/gas_mixture/air, temperature, pressure)
 	fire_act(air, temperature)
 	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
-	. =  (health <= 0) ? ..() : FALSE
+	. =  (current_health <= 0) ? ..() : FALSE
 
 // called when something steps onto a mob
 // this handles mulebots and vehicles

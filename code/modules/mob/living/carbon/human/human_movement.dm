@@ -18,7 +18,7 @@
 	tally -= GET_CHEMICAL_EFFECT(src, CE_SPEEDBOOST)
 	tally += GET_CHEMICAL_EFFECT(src, CE_SLOWDOWN)
 
-	var/health_deficiency = (maxHealth - health)
+	var/health_deficiency = (get_max_health() - current_health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
 	if(can_feel_pain())

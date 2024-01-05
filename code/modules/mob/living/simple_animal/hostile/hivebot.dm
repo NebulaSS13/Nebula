@@ -2,8 +2,7 @@
 	name = "hivebot"
 	desc = "A junky looking robot with four spiky legs."
 	icon = 'icons/mob/simple_animal/hivebot.dmi'
-	health = 55
-	maxHealth = 55
+	mob_default_max_health = 55
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
 	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	projectiletype = /obj/item/projectile/beam/smalllaser
@@ -37,8 +36,7 @@
 
 /mob/living/simple_animal/hostile/hivebot/strong
 	desc = "A junky looking robot with four spiky legs - this one has thick armour plating."
-	health = 120
-	maxHealth = 120
+	mob_default_max_health = 120
 	ranged = 1
 	can_escape = 1
 	natural_armor = list(
@@ -51,63 +49,6 @@
 	spark_at(src, cardinal_only = TRUE)
 	qdel(src)
 	return
-
-/*
-Teleporter beacon, and its subtypes
-*/
-/mob/living/simple_animal/hostile/hivebot/tele // _why is this a mob_
-	name = "beacon"
-	desc = "Some odd beacon thing."
-	icon = 'icons/obj/structures/hivebot_props.dmi'
-	icon_state = "def_radar-off"
-	health = 200
-	maxHealth = 200
-	status_flags = 0
-	anchored = TRUE
-	stop_automated_movement = 1
-
-	var/bot_type = /mob/living/simple_animal/hostile/hivebot
-	var/bot_amt = 10
-	var/spawn_delay = 100
-	var/spawn_time = 0
-
-/mob/living/simple_animal/hostile/hivebot/tele/Initialize()
-	. = ..()
-	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-	smoke.set_up(5, 0, src.loc)
-	smoke.start()
-	visible_message("<span class='danger'>\The [src] warps in!</span>")
-	playsound(src.loc, 'sound/effects/EMPulse.ogg', 25, 1)
-
-/mob/living/simple_animal/hostile/hivebot/tele/proc/warpbots()
-	while(bot_amt > 0 && bot_type)
-		bot_amt--
-		var/mob/M = new bot_type(get_turf(src))
-		M.faction = faction
-	playsound(src.loc, 'sound/effects/teleport.ogg', 50, 1)
-	qdel(src)
-	return
-
-/mob/living/simple_animal/hostile/hivebot/tele/FindTarget()
-	if(..() && !spawn_time)
-		spawn_time = world.time + spawn_delay
-		visible_message("<span class='danger'>\The [src] turns on!</span>")
-		icon_state = "def_radar"
-	return null
-
-/mob/living/simple_animal/hostile/hivebot/tele/Life()
-	. = ..()
-	if(. && spawn_time && spawn_time <= world.time)
-		warpbots()
-
-/mob/living/simple_animal/hostile/hivebot/tele/strong
-	bot_type = /mob/living/simple_animal/hostile/hivebot/strong
-
-/mob/living/simple_animal/hostile/hivebot/tele/range
-	bot_type = /mob/living/simple_animal/hostile/hivebot/range
-
-/mob/living/simple_animal/hostile/hivebot/tele/rapid
-	bot_type = /mob/living/simple_animal/hostile/hivebot/rapid
 
 /*
 Special projectiles
@@ -140,8 +81,7 @@ The megabot
 	name = "hivemind"
 	desc = "A huge quadruped robot equipped with a myriad of weaponry."
 	icon = 'icons/mob/simple_animal/megabot.dmi'
-	health = 440
-	maxHealth = 440
+	mob_default_max_health = 440
 	natural_weapon = /obj/item/natural_weapon/circular_saw
 	speed = 0
 	natural_armor = list(

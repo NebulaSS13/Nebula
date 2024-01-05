@@ -59,7 +59,7 @@
 	L.take_overall_damage(rand(5,30),0,0,0,"blunt intrument") //Actual spell does 5d10 but maaaybe too much.
 	playsound(get_turf(L), 'sound/effects/bamf.ogg', 100, 1)
 	to_chat(L, "<span class='danger'>Something hard hits you!</span>")
-	if(L.health < L.maxHealth/2) //If it reduces past 50%
+	if(L.current_health < L.get_max_health()/2) //If it reduces past 50%
 		var/obj/effect/rift/R = new(get_turf(L))
 		L.visible_message("<span class='danger'>\The [L] is quickly sucked into \a [R]!</span>")
 		L.forceMove(R)

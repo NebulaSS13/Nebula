@@ -2,8 +2,7 @@
 	name = "megaleech"
 	desc = "A green leech the size of a common snake."
 	icon = 'icons/mob/simple_animal/megaleech.dmi'
-	health = 15
-	maxHealth = 15
+	mob_default_max_health = 15
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	pass_flags = PASS_FLAG_TABLE
@@ -38,8 +37,8 @@
 		if(istype(S) && !length(S.breaches))
 			return
 		H.remove_blood_simple(suck_potency)
-		if(health < maxHealth)
-			health += suck_potency / 1.5
+		if(current_health < get_max_health())
+			heal_overall_damage(suck_potency / 1.5)
 		belly += clamp(suck_potency, 0, 100)
 
 /obj/structure/leech_spawner

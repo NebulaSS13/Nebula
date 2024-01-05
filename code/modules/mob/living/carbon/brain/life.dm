@@ -18,7 +18,6 @@
 				radiation--
 				if(prob(25))
 					adjustToxLoss(1)
-					updatehealth()
 
 			if(50 to 74)
 				radiation -= 2
@@ -29,13 +28,10 @@
 						to_chat(src, "<span class='warning'>You feel weak.</span>")
 					else
 						to_chat(src, "<span class='warning'>STATUS: DANGEROUS LEVELS OF RADIATION DETECTED.</span>")
-				updatehealth()
 
 			if(75 to 100)
 				radiation -= 3
 				adjustToxLoss(3)
-				updatehealth()
-
 
 /mob/living/carbon/brain/handle_environment(datum/gas_mixture/environment)
 	..()
@@ -54,16 +50,11 @@
 
 /mob/living/carbon/brain/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
 	if(status_flags & GODMODE) return
-
 	if(exposed_temperature > bodytemperature)
 		var/discomfort = min( abs(exposed_temperature - bodytemperature)*(exposed_intensity)/2000000, 1.0)
-		//adjustFireLoss(2.5*discomfort)
-		//adjustFireLoss(5.0*discomfort)
 		adjustFireLoss(20.0*discomfort)
-
 	else
 		var/discomfort = min( abs(exposed_temperature - bodytemperature)*(exposed_intensity)/2000000, 1.0)
-		//adjustFireLoss(2.5*discomfort)
 		adjustFireLoss(5.0*discomfort)
 
 /mob/living/carbon/brain/apply_chemical_effects()
@@ -72,77 +63,73 @@
 		ADJ_STATUS(src, STAT_DIZZY, -4)
 		return TRUE
 
+/mob/living/carbon/brain/should_be_dead()
+	return (!container && (current_health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
+
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
-	updatehealth()
+
+	update_health() // TODO: unify with parent call, Life() PR
 
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
-		set_status(STAT_SILENCE, 0)
-	else				//ALIVE. LIGHTS ARE ON
-		if( !container && (health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
-			death()
-			SET_STATUS_MAX(src, STAT_BLIND, 2)
-			set_status(STAT_SILENCE, 0)
-			return 1
+		return 1
 
-		//Handling EMP effect in the Life(), it's made VERY simply, and has some additional effects handled elsewhere
-		if(emp_damage)			//This is pretty much a damage type only used by MMIs, dished out by the emp_act
-			if(!(container && istype(container, /obj/item/mmi)))
-				emp_damage = 0
-			else
-				emp_damage = round(emp_damage,1)//Let's have some nice numbers to work with
-			switch(emp_damage)
-				if(31 to INFINITY)
-					emp_damage = 30//Let's not overdo it
-				if(21 to 30)//High level of EMP damage, unable to see, hear, or speak
-					SET_STATUS_MAX(src, STAT_BLIND, 2)
-					SET_STATUS_MAX(src, STAT_DEAF, 2)
-					SET_STATUS_MAX(src, STAT_SILENCE, 2)
-					if(!alert)//Sounds an alarm, but only once per 'level'
-						emote("alarm")
-						to_chat(src, "<span class='warning'>Major electrical distruption detected: System rebooting.</span>")
-						alert = 1
-					if(prob(75))
-						emp_damage -= 1
-				if(20)
-					alert = 0
-					set_status(STAT_BLIND,   0)
-					set_status(STAT_DEAF,    0)
-					set_status(STAT_SILENCE, 0)
+	//Handling EMP effect in the Life(), it's made VERY simply, and has some additional effects handled elsewhere
+	if(emp_damage)			//This is pretty much a damage type only used by MMIs, dished out by the emp_act
+		if(!(container && istype(container, /obj/item/mmi)))
+			emp_damage = 0
+		else
+			emp_damage = round(emp_damage,1)//Let's have some nice numbers to work with
+		switch(emp_damage)
+			if(31 to INFINITY)
+				emp_damage = 30//Let's not overdo it
+			if(21 to 30)//High level of EMP damage, unable to see, hear, or speak
+				set_status(STAT_BLIND, 1)
+				SET_STATUS_MAX(src, STAT_DEAF, 1)
+				set_status(STAT_SILENCE, 1)
+				if(!alert)//Sounds an alarm, but only once per 'level'
+					emote("alarm")
+					to_chat(src, "<span class='warning'>Major electrical distruption detected: System rebooting.</span>")
+					alert = TRUE
+				if(prob(75))
 					emp_damage -= 1
-				if(11 to 19)//Moderate level of EMP damage, resulting in nearsightedness and ear damage
-					set_status(STAT_BLURRY, 2)
-					set_status(STAT_TINNITUS, 2)
-					if(!alert)
-						emote("alert")
-						to_chat(src, "<span class='warning'>Primary systems are now online.</span>")
-						alert = 1
-					if(prob(50))
-						emp_damage -= 1
-				if(10)
-					alert = 0
-					set_status(STAT_BLURRY, 0)
-					set_status(STAT_TINNITUS, 0)
+			if(20)
+				alert = FALSE
+				set_status(STAT_BLIND,   0)
+				set_status(STAT_DEAF,    0)
+				set_status(STAT_SILENCE, 0)
+				emp_damage -= 1
+			if(11 to 19)//Moderate level of EMP damage, resulting in nearsightedness and ear damage
+				set_status(STAT_BLURRY, 1)
+				set_status(STAT_TINNITUS, 1)
+				if(!alert)
+					emote("alert")
+					to_chat(src, "<span class='warning'>Primary systems are now online.</span>")
+					alert = TRUE
+				if(prob(50))
 					emp_damage -= 1
-				if(2 to 9)//Low level of EMP damage, has few effects(handled elsewhere)
-					if(!alert)
-						emote("notice")
-						to_chat(src, "<span class='warning'>System reboot nearly complete.</span>")
-						alert = 1
-					if(prob(25))
-						emp_damage -= 1
-				if(1)
-					alert = 0
-					to_chat(src, "<span class='warning'>All systems restored.</span>")
+			if(10)
+				alert = FALSE
+				set_status(STAT_BLURRY, 0)
+				set_status(STAT_TINNITUS, 0)
+				emp_damage -= 1
+			if(2 to 9)//Low level of EMP damage, has few effects(handled elsewhere)
+				if(!alert)
+					emote("notice")
+					to_chat(src, "<span class='warning'>System reboot nearly complete.</span>")
+					alert = TRUE
+				if(prob(25))
 					emp_damage -= 1
-
+			if(1)
+				alert = FALSE
+				to_chat(src, "<span class='warning'>All systems restored.</span>")
+				emp_damage -= 1
 	return 1
 
 /mob/living/carbon/brain/handle_regular_hud_updates()
 	update_sight()
 	if (healths)
 		if (stat != DEAD)
-			switch(health)
+			switch(current_health)
 				if(100 to INFINITY)
 					healths.icon_state = "health0"
 				if(80 to 100)

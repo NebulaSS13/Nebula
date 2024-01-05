@@ -130,14 +130,14 @@
 
 	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
-		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
-		updatehealth()
+		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 		var/list/limbs = get_external_organs()
 		if(!isSynthetic() && LAZYLEN(limbs))
 			var/obj/item/organ/external/O = pick(limbs)
 			if(istype(O))
 				O.add_autopsy_data("Radiation Poisoning", damage)
+
 #undef RADIATION_SPEED_COEFFICIENT
 
 // Get valid, unique reagent holders for metabolizing. Avoids metabolizing the same holder twice in a tick.
@@ -182,9 +182,8 @@
 			LAZYSET(chem_doses, T, dose)
 			if(LAZYACCESS(chem_doses, T) <= 0)
 				LAZYREMOVE(chem_doses, T)
-
 	if(apply_chemical_effects())
-		updatehealth()
+		update_health()
 
 	return TRUE
 
@@ -192,9 +191,9 @@
 	var/burn_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BURN)
 	var/brute_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BRUTE)
 	if(burn_regen || brute_regen)
-		heal_organ_damage(brute_regen, burn_regen)
+		heal_organ_damage(brute_regen, burn_regen, FALSE) // apply_chemical_effects() calls update_health() if it returns true; don't do it unnecessarily.
 		return TRUE
-
+	return FALSE
 
 /mob/living/proc/handle_random_events()
 	return
@@ -254,7 +253,7 @@
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
 /mob/living/proc/handle_regular_status_updates()
-	updatehealth()
+	update_health()
 	if(stat != DEAD)
 		if(HAS_STATUS(src, STAT_PARA))
 			set_stat(UNCONSCIOUS)

@@ -3,8 +3,7 @@
 	name = "creature"
 	desc = "You get the feeling you should run."
 	icon = 'icons/mob/simple_animal/vagrant.dmi'
-	maxHealth = 60
-	health = 20
+	mob_default_max_health = 60
 	speed = 5
 	speak_chance = 0
 	turns_per_move = 4
@@ -18,29 +17,29 @@
 	max_gas = null
 	minbodytemp = 0
 	gene_damage = -1
+	pass_flags = PASS_FLAG_TABLE
+	bleed_colour = "#aad9de"
+	nutrition = 100
 
 	var/cloaked = 0
 	var/mob/living/carbon/human/gripping = null
 	var/blood_per_tick = 3
 	var/health_per_tick = 0.8
-	pass_flags = PASS_FLAG_TABLE
-
-	bleed_colour = "#aad9de"
 
 /mob/living/simple_animal/hostile/vagrant/Process_Spacemove()
 	return 1
 
 /mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
-	var/oldhealth = health
+	var/oldhealth = current_health
 	. = ..()
-	if(isliving(Proj.firer) && (target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
+	if(isliving(Proj.firer) && (target_mob != Proj.firer) && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
 		target_mob = Proj.firer
 		turns_per_move = 3
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
 	. = ..()
-	if(. && !gibbed)
+	if(stat == DEAD && !QDELETED(src) && !gibbed)
 		gib()
 
 /mob/living/simple_animal/hostile/vagrant/Life()
@@ -55,7 +54,7 @@
 			var/blood_volume = round(gripping.vessel.total_volume)
 			if(blood_volume > 5)
 				gripping.vessel.remove_any(blood_per_tick)
-				health = min(health + health_per_tick, maxHealth)
+				heal_overall_damage(health_per_tick)
 				if(prob(15))
 					to_chat(gripping, "<span class='danger'>You feel your fluids being drained!</span>")
 			else
@@ -67,11 +66,11 @@
 	if(stance == HOSTILE_STANCE_IDLE && !cloaked)
 		cloaked = 1
 		update_icon()
-	if(health == maxHealth)
+
+	if(get_nutrition() > get_max_nutrition())
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		gib()
-		return
 
 /mob/living/simple_animal/hostile/vagrant/on_update_icon()
 	..()
@@ -96,7 +95,7 @@
 			return
 		//This line ensures there's always a reasonable chance of grabbing, while still
 		//Factoring in health
-		if(!gripping && (cloaked || prob(health + ((maxHealth - health) * 2))))
+		if(!gripping && (cloaked || prob(current_health + ((get_max_health() - current_health) * 2))))
 			gripping = H
 			cloaked = 0
 			update_icon()

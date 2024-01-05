@@ -34,6 +34,7 @@ var/global/list/possible_say_verbs = list(
 	holder_type = /obj/item/holder
 	idcard = /obj/item/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
+	mob_default_max_health = 100
 
 	os_type =	/datum/extension/interactive/os/silicon/small
 	starting_stock_parts = list(
@@ -83,7 +84,12 @@ var/global/list/possible_say_verbs = list(
 
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	status_flags |= NO_ANTAG
-	card = loc
+	if(!card && istype(loc, /obj/item/paicard))
+		card = loc
+	if(istype(card))
+		if(!card.radio)
+			card.radio = new /obj/item/radio(card)
+		silicon_radio = card.radio
 
 	//As a human made device, we'll understand sol common without the need of the translator
 	add_language(/decl/language/human/common, 1)
@@ -92,10 +98,7 @@ var/global/list/possible_say_verbs = list(
 
 	. = ..()
 
-	if(card)
-		if(!card.radio)
-			card.radio = new /obj/item/radio(card)
-		silicon_radio = card.radio
+	software = default_pai_software.Copy()
 
 /mob/living/silicon/pai/Destroy()
 	card = null
@@ -266,7 +269,6 @@ var/global/list/possible_say_verbs = list(
 	if(W.force)
 		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
 		adjustBruteLoss(W.force)
-		updatehealth()
 	else
 		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 

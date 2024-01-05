@@ -65,7 +65,7 @@
 
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
-		if(health < maxHealth)
+		if(current_health < get_max_health())
 			adjustBruteLoss(-5)
 			user.visible_message("<span class='notice'>\The [user] mends some of \the [src]'s wounds.</span>")
 		else
@@ -75,8 +75,9 @@
 
 /mob/living/simple_animal/construct/show_other_examine_strings(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
 	. = ..(user)
-	if(health < maxHealth)
-		if(health >= maxHealth/2)
+	var/current_max_health = get_max_health()
+	if(current_health < current_max_health)
+		if(current_health >= current_max_health/2)
 			to_chat(user, SPAN_WARNING("It looks slightly dented."))
 		else
 			to_chat(user, SPAN_DANGER("It looks severely dented!"))
@@ -98,8 +99,7 @@
 	real_name = "Juggernaut"
 	desc = "A possessed suit of armour driven by the will of the restless dead"
 	icon = 'icons/mob/simple_animal/construct_behemoth.dmi'
-	maxHealth = 250
-	health = 250
+	mob_default_max_health = 250
 	speak_emote = list("rumbles")
 	response_harm = "harmlessly punches"
 	harm_intent_damage = 0
@@ -156,8 +156,7 @@
 	real_name = "Wraith"
 	desc = "A wicked bladed shell contraption piloted by a bound spirit"
 	icon = 'icons/mob/simple_animal/construct_floating.dmi'
-	maxHealth = 75
-	health = 75
+	mob_default_max_health = 75
 	natural_weapon = /obj/item/natural_weapon/wraith
 	speed = -1
 	environment_smash = 1
@@ -181,8 +180,7 @@
 	real_name = "Artificer"
 	desc = "A bulbous construct dedicated to building and maintaining The Cult of Nar-Sie's armies"
 	icon = 'icons/mob/simple_animal/construct_artificer.dmi'
-	maxHealth = 50
-	health = 50
+	mob_default_max_health = 50
 	response_harm = "viciously beaten"
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/cult_builder
@@ -208,8 +206,7 @@
 	real_name = "Behemoth"
 	desc = "The pinnacle of occult technology, Behemoths are the ultimate weapon in the Cult of Nar-Sie's arsenal."
 	icon = 'icons/mob/simple_animal/construct_behemoth.dmi'
-	maxHealth = 750
-	health = 750
+	mob_default_max_health = 750
 	speak_emote = list("rumbles")
 	response_harm = "harmlessly punches"
 	harm_intent_damage = 0
@@ -232,8 +229,7 @@
 	real_name = "Harvester"
 	desc = "The promised reward of the livings who follow Nar-Sie. Obtained by offering their bodies to the geometer of blood"
 	icon = 'icons/mob/simple_animal/construct_harvester.dmi'
-	maxHealth = 150
-	health = 150
+	mob_default_max_health = 150
 	natural_weapon = /obj/item/natural_weapon/harvester
 	speed = -1
 	environment_smash = 1
@@ -263,7 +259,7 @@
 /mob/living/simple_animal/construct/armoured/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(current_health)
 			if(250 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if(208 to 249)			healths.icon_state = "juggernaut_health1"
 			if(167 to 207)			healths.icon_state = "juggernaut_health2"
@@ -277,7 +273,7 @@
 /mob/living/simple_animal/construct/behemoth/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(current_health)
 			if(750 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if(625 to 749)			healths.icon_state = "juggernaut_health1"
 			if(500 to 624)			healths.icon_state = "juggernaut_health2"
@@ -290,7 +286,7 @@
 /mob/living/simple_animal/construct/builder/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(current_health)
 			if(50 to INFINITY)		healths.icon_state = "artificer_health0"
 			if(42 to 49)			healths.icon_state = "artificer_health1"
 			if(34 to 41)			healths.icon_state = "artificer_health2"
@@ -305,7 +301,7 @@
 /mob/living/simple_animal/construct/wraith/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(current_health)
 			if(75 to INFINITY)		healths.icon_state = "wraith_health0"
 			if(62 to 74)			healths.icon_state = "wraith_health1"
 			if(50 to 61)			healths.icon_state = "wraith_health2"
@@ -319,7 +315,7 @@
 /mob/living/simple_animal/construct/harvester/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(current_health)
 			if(150 to INFINITY)		healths.icon_state = "harvester_health0"
 			if(125 to 149)			healths.icon_state = "harvester_health1"
 			if(100 to 124)			healths.icon_state = "harvester_health2"

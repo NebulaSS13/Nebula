@@ -283,7 +283,6 @@
 			var/obj/item/organ/external/victim = pick(victims)
 			victim.dislocate()
 			to_chat(src, "<span class='warning'>You feel a sickening pop as your [victim.joint] is wrenched out of the socket.</span>")
-	updatehealth()
 
 /mob/living/carbon/human/proc/climb_up(atom/A)
 	if(!isturf(loc) || !bound_overlay || bound_overlay.destruction_timer || is_physically_disabled())	// This destruction_timer check ideally wouldn't be required, but I'm not awake enough to refactor this to not need it.

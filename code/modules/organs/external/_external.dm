@@ -420,7 +420,7 @@
 				return
 		owner.verbs -= /mob/living/carbon/human/proc/undislocate
 
-/obj/item/organ/external/update_health()
+/obj/item/organ/external/update_organ_health()
 	damage = min(max_damage, (brute_dam + burn_dam))
 	return
 
@@ -607,7 +607,7 @@ This function completely restores a damaged organ to perfect condition.
 	. = ..() // Clear damage, reapply aspects.
 
 	if(owner)
-		owner.updatehealth()
+		owner.update_health()
 
 //#TODO: Rejuvination hacks should probably be removed
 /obj/item/organ/external/remove_rejuv()
@@ -648,7 +648,7 @@ This function completely restores a damaged organ to perfect condition.
 		switch(type)
 			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
 			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
-		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
+		var/fluid_loss = (damage/(owner.get_max_health() - config.health_threshold_dead)) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
@@ -895,7 +895,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(update_surgery)
 			owner.update_surgery()
 		if (update_damstate())
-			owner.UpdateDamageIcon(1)
+			owner.update_damage_icon(TRUE)
 
 //Updates brute_damn and burn_damn from wound damages. Updates BLEEDING status.
 /obj/item/organ/external/proc/update_damages()

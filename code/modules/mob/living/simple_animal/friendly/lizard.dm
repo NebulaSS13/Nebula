@@ -3,8 +3,7 @@
 	desc = "A cute tiny lizard."
 	icon = 'icons/mob/simple_animal/lizard.dmi'
 	speak_emote = list("hisses")
-	health = 5
-	maxHealth = 5
+	mob_default_max_health = 5
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	response_harm = "stamps on"
 	mob_size = MOB_SIZE_MINISCULE

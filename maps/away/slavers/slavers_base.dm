@@ -134,17 +134,16 @@
 	turns_per_move = 5
 	speed = 4
 	stop_automated_movement_when_pulled = 0
-	maxHealth = 100
-	health = 100
+	mob_default_max_health = 100
 	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE
 	unsuitable_atmos_damage = 15
-	var/corpse = /obj/abstract/landmark/corpse/abolitionist
-	var/weapon = /obj/item/gun/energy/laser
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
 	projectiletype = /obj/item/projectile/beam
 	faction = "extremist abolitionists"
+	var/corpse = /obj/abstract/landmark/corpse/abolitionist
+	var/weapon = /obj/item/gun/energy/laser
 
 /mob/living/simple_animal/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)

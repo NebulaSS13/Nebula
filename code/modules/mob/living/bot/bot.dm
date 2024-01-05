@@ -1,7 +1,6 @@
 /mob/living/bot
 	name = "Bot"
-	health = 20
-	maxHealth = 20
+	mob_default_max_health = 20
 	icon = 'icons/mob/bot/placeholder.dmi'
 	universal_speak = TRUE
 	density = FALSE
@@ -55,8 +54,6 @@
 	access_scanner = new /obj(src)
 	access_scanner.req_access = req_access?.Copy()
 
-/mob/living/bot/Initialize()
-	. = ..()
 	if(on)
 		turn_on() // Update lights and other stuff
 	else
@@ -64,8 +61,7 @@
 
 /mob/living/bot/Life()
 	..()
-	if(health <= 0)
-		death()
+	if(stat == DEAD)
 		return
 	set_status(STAT_WEAK, 0)
 	set_status(STAT_STUN, 0)
@@ -74,14 +70,13 @@
 	if(on && !client && !busy)
 		handleAI()
 
-/mob/living/bot/updatehealth()
-	if(status_flags & GODMODE)
-		health = maxHealth
-		set_stat(CONSCIOUS)
-	else
-		health = maxHealth - getFireLoss() - getBruteLoss()
+/mob/living/bot/get_total_life_damage()
+	return getFireLoss() + getBruteLoss()
 
 /mob/living/bot/death()
+	if(stat == DEAD)
+		return
+	set_stat(DEAD)
 	explode()
 
 /mob/living/bot/attackby(var/obj/item/O, var/mob/user)
@@ -104,9 +99,9 @@
 			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
 	else if(IS_WELDER(O))
-		if(health < maxHealth)
+		if(current_health < get_max_health())
 			if(open)
-				health = min(maxHealth, health + 10)
+				heal_overall_damage(10)
 				user.visible_message("<span class='notice'>\The [user] repairs \the [src].</span>","<span class='notice'>You repair \the [src].</span>")
 			else
 				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")

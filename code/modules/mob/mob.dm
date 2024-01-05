@@ -810,7 +810,7 @@
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	LAZYREMOVE(embedded, implant)
-	adjustBruteLoss(5)
+	adjustBruteLoss(5, do_update_health = FALSE)
 	adjustFireLoss(10)
 	. = ..()
 

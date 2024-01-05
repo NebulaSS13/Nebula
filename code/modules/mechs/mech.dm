@@ -119,8 +119,6 @@
 		if(source_frame.material)
 			material = source_frame.material
 
-	updatehealth()
-
 	// Generate hardpoint list.
 	var/list/component_descriptions
 	for(var/obj/item/mech_component/comp in list(arms, legs, head, body))

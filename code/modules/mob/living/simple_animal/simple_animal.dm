@@ -1,7 +1,6 @@
 /mob/living/simple_animal
 	name = "animal"
-	health = 20
-	maxHealth = 20
+	mob_default_max_health = 20
 	universal_speak = FALSE
 	mob_sort_value = 12
 
@@ -184,7 +183,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		return
 	//Health
 	if(stat == DEAD)
-		if(health > 0)
+		if(current_health > 0)
 			switch_from_dead_to_living_mob_list()
 			set_stat(CONSCIOUS)
 			set_density(1)
@@ -192,14 +191,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		return 0
 
 	handle_atmos()
-
-	if(health <= 0)
-		death()
-		return
-
-	if(health > maxHealth)
-		health = maxHealth
-
 	handle_supernatural()
 	handle_impaired_vision()
 
@@ -327,7 +318,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
-		if(health < Proj.agony * 3)
+		if(current_health < Proj.agony * 3)
 			SET_STATUS_MAX(src, STAT_PARA, Proj.agony / 20)
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
@@ -340,7 +331,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	. = ..() || list(response_help_3p, response_help_1p)
 
 /mob/living/simple_animal/default_help_interaction(mob/user)
-	if(health > 0 && user.attempt_hug(src))
+	if(current_health > 0 && user.attempt_hug(src))
 		user.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 		return TRUE
 	. = ..()
@@ -376,7 +367,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			var/obj/item/stack/medical/MED = O
 			if(!MED.animal_heal)
 				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
-			else if(health < maxHealth && MED.can_use(1))
+			else if(current_health < get_max_health() && MED.can_use(1))
 				adjustBruteLoss(-MED.animal_heal)
 				visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
 				MED.use(1)
@@ -452,11 +443,11 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	. = ..()
 
 	if(statpanel("Status") && show_stat_health)
-		stat(null, "Health: [round((health / maxHealth) * 100)]%")
+		stat(null, "Health: [get_health_percent()]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
 	density = FALSE
-	adjustBruteLoss(maxHealth) //Make sure dey dead.
+	adjustBruteLoss(get_max_health()) //Make sure dey dead.
 	walk_to(src,0)
 	. = ..(gibbed,deathmessage,show_dead_message)
 
@@ -472,26 +463,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			damage = 30
 	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
-/mob/living/simple_animal/adjustBruteLoss(damage)
-	..()
-	updatehealth()
-
-/mob/living/simple_animal/adjustFireLoss(damage)
-	..()
-	updatehealth()
-
-/mob/living/simple_animal/adjustToxLoss(damage)
-	..()
-	updatehealth()
-
-/mob/living/simple_animal/adjustOxyLoss(damage)
-	..()
-	updatehealth()
-
 /mob/living/simple_animal/proc/SA_attackable(target_mob)
 	if (isliving(target_mob))
 		var/mob/living/L = target_mob
-		if(!L.stat && L.health >= 0)
+		if(!L.stat && L.current_health >= 0)
 			return (0)
 	return 1
 
@@ -604,13 +579,17 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/getCloneLoss()
 	. = max(0, gene_damage)
 
-/mob/living/simple_animal/adjustCloneLoss(var/amount)
+/mob/living/simple_animal/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(FALSE)
 	setCloneLoss(gene_damage + amount)
+	if(do_update_health)
+		update_health()
 
 /mob/living/simple_animal/setCloneLoss(amount)
 	if(gene_damage >= 0)
-		gene_damage = clamp(amount, 0, maxHealth)
-		if(gene_damage >= maxHealth)
+		var/current_max_health = get_max_health()
+		gene_damage = clamp(amount, 0, current_max_health)
+		if(gene_damage >= current_max_health)
 			death()
 
 /mob/living/simple_animal/get_admin_job_string()

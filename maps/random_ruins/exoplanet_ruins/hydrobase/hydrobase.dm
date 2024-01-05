@@ -84,8 +84,7 @@
 /mob/living/simple_animal/hostile/retaliate/goat/hydro
 	name = "goat"
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
-	health = 100
-	maxHealth = 100
+	mob_default_max_health = 100
 	natural_weapon = /obj/item/natural_weapon/hooves/strong
 	faction = "farmbots"
 
@@ -99,8 +98,7 @@
 	speak = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
 	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")
 	faction = "farmbots"
-	health = 225
-	maxHealth = 225
+	mob_default_max_health = 225
 	malfunctioning = 0
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/Initialize()
@@ -109,7 +107,7 @@
 		projectiletype = /obj/item/projectile/beam/drone/weak
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/emp_act(severity)
-	health -= rand(5,10) * (severity + 1)
+	adjustFireLoss(rand(5,10) * (severity + 1))
 	disabled = rand(15, 30)
 	malfunctioning = 1
 	hostile_drone = 1

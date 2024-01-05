@@ -13,8 +13,7 @@
 	break_stuff_probability = 15
 	faction = "crabs"
 	pry_time = 2 SECONDS
-	health = 350
-	maxHealth = 350
+	mob_default_max_health = 350
 	natural_weapon = /obj/item/natural_weapon/pincers/giant
 	return_damage_min = 2
 	return_damage_max = 5
@@ -38,7 +37,7 @@
 /datum/ai/giant_crab/do_process(time_elapsed)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/giant_crab/crab = body
-	if((crab.health > crab.maxHealth / 1.5) && length(crab.enemies) && prob(10))
+	if((crab.current_health > crab.get_max_health() / 1.5) && length(crab.enemies) && prob(10))
 		if(crab.victim)
 			crab.release_grab()
 		crab.enemies = list()

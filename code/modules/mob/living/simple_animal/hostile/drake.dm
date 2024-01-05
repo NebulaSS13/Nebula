@@ -11,11 +11,8 @@
 	pry_time = 4 SECONDS
 	skull_type = /obj/item/whip/tail
 	bleed_colour = COLOR_VIOLET
-
-	health = 200
-	maxHealth = 200
+	mob_default_max_health = 200
 	natural_weapon = /obj/item/natural_weapon/claws/drake
-	var/obj/item/whip/tail/tailwhip
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_ENERGY = ARMOR_ENERGY_SHIELDED,
@@ -24,6 +21,7 @@
 	)
 	ability_cooldown = 80 SECONDS
 
+	var/obj/item/whip/tail/tailwhip
 	var/empowered_attack = FALSE
 	var/gas_spent = FALSE
 

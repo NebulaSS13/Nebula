@@ -9,5 +9,4 @@ Specifically made to do radiation burns.
 	if(!isSynthetic() && !ignore_rads)
 		damage = 0.25 * damage * (species ? species.get_radiation_mod(src) : 1)
 		adjustFireLoss(damage)
-		updatehealth()
 	return TRUE

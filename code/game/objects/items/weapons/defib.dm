@@ -442,7 +442,6 @@
 
 	M.emote("gasp")
 	SET_STATUS_MAX(M, STAT_WEAK, rand(10,25))
-	M.updatehealth()
 	apply_brain_damage(M, deadtime)
 
 /obj/item/shockpaddles/proc/apply_brain_damage(mob/living/carbon/human/H, var/deadtime)

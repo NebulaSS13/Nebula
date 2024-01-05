@@ -65,7 +65,7 @@ There are several things that need to be remembered:
 
 >	There are also these special cases:
 		update_mutations()	//handles updating your appearance for certain mutations.  e.g TK head-glows
-		UpdateDamageIcon()	//handles damage overlays for brute/burn damage //(will rename this when I geta round to it)
+		update_damage_icon()	//handles damage overlays for brute/burn damage //(will rename this when I geta round to it)
 		update_body()	//Handles updating your mob's icon to reflect their gender/race/complexion etc
 		update_hair()	//Handles updating your hair overlay (used to be update_face, but mouth and
 																			...eyes were merged into update_body)
@@ -112,7 +112,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	update_fire(FALSE)
 	update_surgery(FALSE)
 	update_bandages(FALSE)
-	UpdateDamageIcon(FALSE)
+	update_damage_icon(FALSE)
 	return ..()
 
 /mob/living/carbon/human/on_update_icon()
@@ -214,7 +214,7 @@ var/global/list/damage_icon_parts = list()
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
-/mob/living/carbon/human/UpdateDamageIcon(var/update_icons=1)
+/mob/living/carbon/human/update_damage_icon(var/update_icons=1)
 
 	// first check whether something actually changed about damage appearance
 	var/damage_appearance = ""

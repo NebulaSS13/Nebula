@@ -12,17 +12,27 @@
 /mob/living/silicon/ai/getOxyLoss()
 	return oxyloss
 
-/mob/living/silicon/ai/adjustFireLoss(var/amount)
+/mob/living/silicon/ai/adjustFireLoss(var/amount, var/do_update_health = TRUE)
 	if(status_flags & GODMODE) return
-	fireloss = max(0, fireloss + min(amount, health))
+	fireloss = max(0, fireloss + min(amount, current_health))
+	if(do_update_health)
+		update_health()
 
-/mob/living/silicon/ai/adjustBruteLoss(var/amount)
-	if(status_flags & GODMODE) return
-	bruteloss = max(0, bruteloss + min(amount, health))
+/mob/living/silicon/ai/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
+	if(!(status_flags & GODMODE))
+		bruteloss = max(0, bruteloss + min(amount, current_health))
+	..()
 
-/mob/living/silicon/ai/adjustOxyLoss(var/amount)
-	if(status_flags & GODMODE) return
-	oxyloss = max(0, oxyloss + min(amount, maxHealth - oxyloss))
+/mob/living/silicon/ai/adjustOxyLoss(var/damage, var/do_update_health = TRUE)
+	if(!(status_flags & GODMODE))
+		oxyloss = max(0, oxyloss + min(damage, get_max_health() - oxyloss))
+	..()
+
+/mob/living/silicon/ai/setBruteLoss(var/amount)
+	if(status_flags & GODMODE)
+		bruteloss = 0
+		return
+	bruteloss = max(0, amount)
 
 /mob/living/silicon/ai/setFireLoss(var/amount)
 	if(status_flags & GODMODE)
@@ -36,13 +46,10 @@
 		return
 	oxyloss = max(0, amount)
 
-/mob/living/silicon/ai/updatehealth()
+/mob/living/silicon/ai/update_health()
+	..()
 	if(status_flags & GODMODE)
-		health = maxHealth
-		set_stat(CONSCIOUS)
 		setOxyLoss(0)
-	else
-		health = maxHealth - getFireLoss() - getBruteLoss() // Oxyloss is not part of health as it represents AIs backup power. AI is immune against ToxLoss as it is machine.
 
 /mob/living/silicon/ai/rejuvenate()
 	..()
@@ -50,8 +57,5 @@
 
 // Returns percentage of AI's remaining backup capacitor charge (max_health - oxyloss).
 /mob/living/silicon/ai/proc/backup_capacitor()
-	return ((getOxyLoss() - maxHealth) / maxHealth) * (-100)
-
-// Returns percentage of AI's remaining hardware integrity (max_health - (bruteloss + fireloss))
-/mob/living/silicon/ai/proc/hardware_integrity()
-	return (health / maxHealth) * 100
+	var/current_max_health = get_max_health()
+	return ((getOxyLoss() - current_max_health) / current_max_health) * (-100)

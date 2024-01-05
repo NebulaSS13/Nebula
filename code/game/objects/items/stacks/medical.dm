@@ -54,9 +54,7 @@
 			if(istype(suit))
 				to_chat(user, SPAN_WARNING("You can't apply [src] through [suit]!"))
 				return 1
-
-		H.UpdateDamageIcon()
-
+		H.update_health() // TODO: readd the actual healing logic that goes here, or check that it's applied in afterattack or something
 	else
 
 		M.heal_organ_damage((src.heal_brute/2), (src.heal_burn/2))
@@ -66,7 +64,6 @@
 		)
 		use(1)
 
-	M.updatehealth()
 /obj/item/stack/medical/bruise_pack
 	name = "roll of gauze"
 	singular_name = "gauze length"

@@ -48,7 +48,7 @@
 				burn = max(burn - spillover, 0)
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner)
-		owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
+		owner.update_health() //droplimb will call update_health() again if it does end up being called
 		if((limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && config.limbs_can_break)
 			var/total_damage = brute_dam + burn_dam + brute + burn + spillover
 			var/threshold = max_damage * config.organ_health_multiplier
@@ -113,12 +113,12 @@
 
 	// sync the organ's damage with its wounds
 	update_damages()
-	owner.updatehealth()
+	owner.update_health()
 	if(status & ORGAN_BLEEDING)
 		owner.update_bandages()
 
 	if(owner && update_damstate())
-		owner.UpdateDamageIcon()
+		owner.update_damage_icon()
 
 	if(created_wound && isobj(used_weapon))
 		var/obj/O = used_weapon
@@ -192,8 +192,8 @@
 		status &= ~ORGAN_BROKEN
 
 	//Sync the organ's damage with its wounds
-	src.update_damages()
-	owner.updatehealth()
+	update_damages()
+	owner.update_health()
 
 	return update_damstate()
 

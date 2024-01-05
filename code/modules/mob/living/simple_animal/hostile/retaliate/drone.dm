@@ -12,8 +12,7 @@
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
-	health = 300
-	maxHealth = 300
+	mob_default_max_health = 300
 	speed = 8
 	move_to_delay = 6
 	projectiletype = /obj/item/projectile/beam/drone
@@ -103,7 +102,8 @@
 	if(prob(1))
 		src.visible_message("<span class='warning'>[html_icon(src)] [src] shudders and shakes as some of it's damaged systems come back online.</span>")
 		spark_at(src, cardinal_only = TRUE)
-		health += rand(25,100)
+		adjustBruteLoss(-(rand(10,50)), do_update_health = FALSE)
+		adjustFireLoss(-(rand(10,50)))
 
 	//spark for no reason
 	if(prob(5))
@@ -112,15 +112,16 @@
 	//sometimes our targetting sensors malfunction, and we attack anyone nearby
 	Haywire()
 
-	if(health / maxHealth > 0.9)
+	var/current_health_ratio = get_health_ratio()
+	if(current_health_ratio > 0.9)
 		explode_chance = 0
-	else if(health / maxHealth > 0.7)
+	else if(current_health_ratio > 0.7)
 		explode_chance = 0
-	else if(health / maxHealth > 0.5)
+	else if(current_health_ratio > 0.5)
 		explode_chance = 0.5
-	else if(health / maxHealth > 0.3)
+	else if(current_health_ratio > 0.3)
 		explode_chance = 5
-	else if(health > 0)
+	else if(current_health > 0)
 		//if health gets too low, shut down
 		exploding = 0
 		if(!disabled)
@@ -153,30 +154,33 @@
 /mob/living/simple_animal/hostile/retaliate/malf_drone/on_update_icon()
 	. = ..()
 	if(stat != DEAD)
-		if(health / maxHealth <= 0.3)
+		var/current_max_health = get_max_health()
+		if(current_health / current_max_health <= 0.3)
 			icon_state = "[icon_state]-shield3"
-		else if(health / maxHealth <= 0.5)
+		else if(current_health / current_max_health <= 0.5)
 			icon_state = "[icon_state]-shield1"
-		else if(health / maxHealth <= 0.7)
+		else if(current_health / current_max_health <= 0.7)
 			icon_state = "[icon_state]-shield2"
 
 //ion rifle!
 /mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
-	health -= rand(3,15) * (severity + 1)
+	adjustFireLoss(rand(3,15) * (severity + 1))
 	disabled = rand(150, 600)
 	hostile_drone = 0
 	walk(src,0)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
 	..(null,"suddenly breaks apart.", "You have been destroyed.")
-	qdel(src)
+	physically_destroyed()
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
 	QDEL_NULL(ion_trail)
+	return ..()
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/physically_destroyed(skip_qdel)
 	//some random debris left behind
 	if(has_loot)
 		spark_at(src, cardinal_only = TRUE)
-
 		var/atom/movable/M
 		for(var/mat in debris)
 			for(var/chance in list(100, 75, 50, 25))
@@ -185,10 +189,8 @@
 				M = SSmaterials.create_object(mat, loc, 1, debris[mat])
 				if(istype(M))
 					step_to(M, get_turf(pick(view(7, src))))
-
 		//also drop dummy circuit boards deconstructable for research (loot)
 		var/obj/item/stock_parts/circuitboard/C
-
 		//spawn 1-4 boards of a random type
 		var/spawnees = 0
 		var/num_boards = rand(1,4)
@@ -197,57 +199,46 @@
 			var/chosen = pick(options)
 			options.Remove(options.Find(chosen))
 			spawnees |= chosen
-
 		if(spawnees & 1)
 			C = new(src.loc)
 			C.SetName("Drone CPU motherboard")
 			C.origin_tech = "{'[TECH_DATA]':[rand(3, 6)]}"
-
 		if(spawnees & 2)
 			C = new(src.loc)
 			C.SetName("Drone neural interface")
 			C.origin_tech = "{'[TECH_BIO]':[rand(3, 6)]}"
-
 		if(spawnees & 4)
 			C = new(src.loc)
 			C.SetName("Drone suspension processor")
 			C.origin_tech = "{'[TECH_MAGNET]':[rand(3, 6)]}"
-
 		if(spawnees & 8)
 			C = new(src.loc)
 			C.SetName("Drone shielding controller")
 			C.origin_tech = "{'wormholes':[rand(3, 6)]}"
-
 		if(spawnees & 16)
 			C = new(src.loc)
 			C.SetName("Drone power capacitor")
 			C.origin_tech = "{'[TECH_POWER]':[rand(3, 6)]}"
-
 		if(spawnees & 32)
 			C = new(src.loc)
 			C.SetName("Drone hull reinforcer")
 			C.origin_tech = "{'[TECH_MATERIAL]':[rand(3, 6)]}"
-
 		if(spawnees & 64)
 			C = new(src.loc)
 			C.SetName("Drone auto-repair system")
 			C.origin_tech = "{'[TECH_ENGINEERING]':[rand(3, 6)]}"
-
 		if(spawnees & 128)
 			C = new(src.loc)
 			C.SetName("Drone antigravity overcharge counter")
 			C.origin_tech = "{'[TECH_EXOTIC_MATTER]':[rand(3, 6)]}"
-
 		if(spawnees & 256)
 			C = new(src.loc)
 			C.SetName("Drone targetting circuitboard")
 			C.origin_tech = "{'[TECH_COMBAT]':[rand(3, 6)]}"
-
 		if(spawnees & 512)
 			C = new(src.loc)
 			C.SetName("Corrupted drone morality core")
 			C.origin_tech = "{'[TECH_ESOTERIC]':[rand(3, 6)]}"
-
 	return ..()
 
 /obj/item/projectile/beam/drone

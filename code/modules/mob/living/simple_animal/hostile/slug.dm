@@ -5,8 +5,7 @@
 	icon = 'icons/mob/simple_animal/slug.dmi'
 	response_harm = "stomps on"
 	destroy_surroundings = 0
-	health = 15
-	maxHealth = 15
+	mob_default_max_health = 15
 	speed = 0
 	move_to_delay = 0
 	density = TRUE

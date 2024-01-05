@@ -61,7 +61,6 @@
 	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, BP_CHEST)
 	if(istype(organ))
 		organ.take_external_damage(d, 0)
-		updatehealth()
 	else
 		take_organ_damage(d)
 	if(prob(getBruteLoss() - 50))

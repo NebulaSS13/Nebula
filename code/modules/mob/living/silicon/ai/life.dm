@@ -1,18 +1,16 @@
+/mob/living/silicon/ai/should_be_dead()
+	return get_health_percent() <= 0 || backup_capacitor() <= 0
+
 /mob/living/silicon/ai/Life()
 
 	SHOULD_CALL_PARENT(FALSE)
-
-	if (src.stat == DEAD)
-		return
 
 	if (src.stat!=CONSCIOUS)
 		src.cameraFollow = null
 		src.reset_view(null)
 
-	src.updatehealth()
-
-	if ((hardware_integrity() <= 0) || (backup_capacitor() <= 0))
-		death()
+	update_health() // TODO: move to handle_regular_status_updates() and preserve parent call chain, Life() PR
+	if(stat == DEAD)
 		return
 
 	// If our powersupply object was destroyed somehow, create new one.

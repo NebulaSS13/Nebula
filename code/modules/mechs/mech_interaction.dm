@@ -81,7 +81,7 @@
 	if(!hatch_closed)
 		return max(shared_living_nano_distance(src_object), .) //Either visible to mech(outside) or visible to user (inside)
 
-/mob/living/exosuit/exosuit/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+/mob/living/exosuit/CanUseTopic(mob/user, datum/topic_state/state, href_list)
 	if(user in pilots)
 		return STATUS_INTERACTIVE
 	return ..()

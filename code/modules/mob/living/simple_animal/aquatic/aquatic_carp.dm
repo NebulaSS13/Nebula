@@ -3,8 +3,7 @@
 	desc = "A ferocious fish. May be too hardcore."
 	icon = 'icons/mob/simple_animal/fish_carp.dmi'
 	faction = "fishes"
-	maxHealth = 20
-	health = 20
+	mob_default_max_health = 20
 	meat_type = /obj/item/chems/food/fish/carp
 
 /mob/living/simple_animal/hostile/retaliate/aquatic/carp/Initialize()

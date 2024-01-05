@@ -5,8 +5,7 @@
 	real_name = "robot"
 	icon = 'icons/mob/robots/robot.dmi'
 	icon_state = ICON_STATE_WORLD
-	maxHealth = 300
-	health = 300
+	mob_default_max_health = 300
 	mob_sort_value = 4
 
 	z_flags = ZMM_MANGLE_PLANES
@@ -497,7 +496,6 @@
 		if (WT.weld(0))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustBruteLoss(-30)
-			updatehealth()
 			add_fingerprint(user)
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the dents on \the [src]!"))
 		else
@@ -512,7 +510,6 @@
 		if (coil.use(1))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustFireLoss(-30)
-			updatehealth()
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the burnt wires on \the [src]!"))
 
 	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now

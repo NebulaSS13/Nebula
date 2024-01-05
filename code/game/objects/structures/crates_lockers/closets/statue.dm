@@ -23,7 +23,7 @@
 			L.client.eye = src
 		L.forceMove(src)
 		L.set_sdisability(MUTED)
-		health = L.health + 100 //stoning damaged mobs will result in easier to shatter statues
+		health = L.current_health + 100 //stoning damaged mobs will result in easier to shatter statues
 		intialTox = L.getToxLoss()
 		intialFire = L.getFireLoss()
 		intialBrute = L.getBruteLoss()
@@ -50,7 +50,7 @@
 	timer--
 	for(var/mob/living/M in src) //Go-go gadget stasis field
 		M.setToxLoss(intialTox)
-		M.adjustFireLoss(intialFire - M.getFireLoss())
+		M.adjustFireLoss(intialFire - M.getFireLoss(), do_update_health = FALSE)
 		M.adjustBruteLoss(intialBrute - M.getBruteLoss())
 		M.setOxyLoss(intialOxy)
 	if (timer <= 0)
@@ -65,7 +65,7 @@
 	for(var/mob/living/M in src)
 		M.dropInto(loc)
 		M.unset_sdisability(MUTED)
-		M.take_overall_damage((M.health - health - 100),0) //any new damage the statue incurred is transfered to the mob
+		M.take_overall_damage((M.current_health - health - 100),0) //any new damage the statue incurred is transfered to the mob
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE

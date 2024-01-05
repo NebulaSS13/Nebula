@@ -387,12 +387,12 @@
 
 	if(status_flags & GODMODE)	return 0
 
+	update_health() // TODO: unify with parent call, Life() PR
 	//SSD check, if a logged player is awake put them back to sleep!
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
-		updatehealth()	//TODO
 
 		if(hallucination_power)
 			handle_hallucinations()
@@ -475,10 +475,11 @@
 		return
 
 	if(stat != DEAD)
-		if(stat == UNCONSCIOUS && health < maxHealth/2)
+		var/half_health = get_max_health()/2
+		if(stat == UNCONSCIOUS && current_health < half_health)
 			//Critical damage passage overlay
 			var/severity = 0
-			switch(health - maxHealth/2)
+			switch(current_health - half_health)
 				if(-20 to -10)			severity = 1
 				if(-30 to -20)			severity = 2
 				if(-40 to -30)			severity = 3

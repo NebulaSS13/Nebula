@@ -272,7 +272,7 @@
 //Registers an organ and setup the organ hierachy properly.
 //affected  : Parent organ if applicable.
 //in_place  : If true, we're performing an in-place replacement, without triggering anything related to adding the organ in-game as part of surgery or else.
-/mob/living/carbon/human/add_organ(obj/item/organ/O, obj/item/organ/external/affected, in_place, update_icon, detached)
+/mob/living/carbon/human/add_organ(obj/item/organ/O, obj/item/organ/external/affected, in_place, update_icon, detached, skip_health_update = FALSE)
 	if(!(. = ..()))
 		return
 	if(!O.is_internal())
@@ -283,7 +283,7 @@
 		update_inhand_overlays(FALSE)
 		update_body(FALSE)
 		update_bandages(FALSE)
-		UpdateDamageIcon(FALSE)
+		update_damage_icon(FALSE)
 		hud_reset()
 		queue_icon_update() //Avoids calling icon updates 50 times when adding multiple organs
 
@@ -293,7 +293,7 @@
 //ignore_children: Skips recursively removing this organ's child organs.
 //in_place       : If true we remove only the organ (no children items or implants) and avoid triggering mob changes and parent organs changes as much as possible.
 //  Meant to be used for init and species transforms, without triggering any updates to mob state or anything related to losing a limb as part of surgery or combat.
-/mob/living/carbon/human/remove_organ(obj/item/organ/O, drop_organ, detach, ignore_children,  in_place, update_icon)
+/mob/living/carbon/human/remove_organ(obj/item/organ/O, drop_organ, detach, ignore_children,  in_place, update_icon, skip_health_update = FALSE)
 	if(!(. = ..()))
 		return
 	if(!O.is_internal())

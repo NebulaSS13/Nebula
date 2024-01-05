@@ -24,8 +24,7 @@
 	turns_per_move = 5
 	meat_type = /obj/item/chems/food/sharkmeat
 	speed = 2
-	maxHealth = 100
-	health = 100
+	mob_default_max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	break_stuff_probability = 35
 	faction = "shark"

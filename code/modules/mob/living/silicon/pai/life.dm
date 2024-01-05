@@ -2,6 +2,7 @@
 
 	SHOULD_CALL_PARENT(FALSE)
 
+	update_health()
 	if (src.stat == DEAD)
 		return
 
@@ -28,13 +29,3 @@
 			to_chat(src, SPAN_NOTICE("Communication circuit reinitialized. Speech and messaging functionality restored."))
 
 	handle_status_effects()
-
-	if(health <= 0)
-		death(null,"gives one shrill beep before falling lifeless.")
-
-/mob/living/silicon/pai/updatehealth()
-	if(status_flags & GODMODE)
-		health = 100
-		set_stat(CONSCIOUS)
-	else
-		health = 100 - getBruteLoss() - getFireLoss()

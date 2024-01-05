@@ -11,8 +11,7 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	health = 5
-	maxHealth = 5
+	mob_default_max_health = 5
 	response_harm = "stamps on"
 	density = FALSE
 	minbodytemp = 223		//Below -50 Degrees Celsius
@@ -83,7 +82,7 @@
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
 /mob/living/simple_animal/mouse/proc/splat()
-	adjustBruteLoss(maxHealth)  // Enough damage to kill
+	adjustBruteLoss(get_max_health())  // Enough damage to kill
 	splatted = TRUE
 	death()
 
@@ -132,8 +131,7 @@
 	body_color = "rat"
 	icon = 'icons/mob/simple_animal/rat.dmi'
 	skin_material = /decl/material/solid/organic/skin/fur/gray
-	maxHealth = 20
-	health = 20
+	mob_default_max_health = 20
 
 /mob/living/simple_animal/mouse/rat/set_mouse_icon()
 	return

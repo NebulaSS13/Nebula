@@ -5,8 +5,8 @@
 	abstract_type = /mob/living
 
 	//Health and life related vars
-	var/maxHealth = 100 //Maximum health that should be possible.
-	var/health = 100 	//A mob's health
+	var/mob_default_max_health = 100 //Maximum health that should be possible.
+	var/current_health = INFINITY // A mob's current health. Set by updatehealth(). Defaults to INFINITY so mobs don't die on init.
 
 	var/hud_updateflag = 0
 

@@ -449,7 +449,7 @@
 			for(var/i=0;i<10;i++)
 				sleep(10)
 				SET_STATUS_MAX(M, STAT_STUN, 5)
-				M.adjustBruteLoss(10)
+				M.adjustBruteLoss(10, do_update_health = FALSE)
 				M.adjustFireLoss(10)
 			usr.gib() //So that people can't cheese it and inject a lot of kelo/bicard before losing
 

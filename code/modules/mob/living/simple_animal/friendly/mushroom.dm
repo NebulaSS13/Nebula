@@ -5,8 +5,7 @@
 	mob_size = MOB_SIZE_SMALL
 	speak_chance = 0
 	turns_per_move = 1
-	health = 5
-	maxHealth = 5
+	mob_default_max_health = 5
 	harm_intent_damage = 5
 	pass_flags = PASS_FLAG_TABLE
 

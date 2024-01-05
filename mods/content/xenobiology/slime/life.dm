@@ -7,11 +7,6 @@
 			slime_feed()
 		ingested.metabolize()
 
-/mob/living/slime/updatehealth()
-	. = ..()
-	if(stat != DEAD && health <= 0)
-		death()
-
 /mob/living/slime/fluid_act(datum/reagents/fluids)
 	. = ..()
 	if(!QDELETED(src) && fluids?.total_volume >= FLUID_SHALLOW && stat == DEAD)
@@ -29,7 +24,6 @@
 		death()
 	else if(bodytemperature <= hurt_temperature)
 		adjustToxLoss(30)
-		updatehealth()
 
 /mob/living/slime/proc/adjust_body_temperature(current, loc_temp, boost)
 	var/delta = abs(current-loc_temp)
@@ -43,10 +37,10 @@
 	if(stat != DEAD)
 		set_stat(CONSCIOUS)
 		if(prob(30))
-			adjustOxyLoss(-1)
-			adjustToxLoss(-1)
-			adjustFireLoss(-1)
-			adjustCloneLoss(-1)
+			adjustOxyLoss(-1, do_update_health = FALSE)
+			adjustToxLoss(-1, do_update_health = FALSE)
+			adjustFireLoss(-1, do_update_health = FALSE)
+			adjustCloneLoss(-1, do_update_health = FALSE)
 			adjustBruteLoss(-1)
 
 /mob/living/slime/proc/handle_turf_contents()
