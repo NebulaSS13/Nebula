@@ -427,9 +427,10 @@
 			if(S.collection_mode) //Mode is set to collect all items
 				if(isturf(src.loc))
 					S.gather_all(src.loc, user)
+				return TRUE
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
-		return TRUE
+				return TRUE
 
 	if(has_extension(src, /datum/extension/loaded_cell))
 		var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)

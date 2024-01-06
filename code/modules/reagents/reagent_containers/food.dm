@@ -15,6 +15,8 @@
 	icon_state = null
 	randpixel = 6
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	item_flags = null
+	material = /decl/material/liquid/nutriment
 	possible_transfer_amounts = null
 	volume = 50
 	center_of_mass = @"{'x':16,'y':16}"
