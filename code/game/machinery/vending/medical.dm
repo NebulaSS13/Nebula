@@ -30,7 +30,7 @@
 		/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
 		/obj/item/chems/pill/bromide = 3,
 		/obj/item/chems/pill/stox = 4,
-		/obj/item/chems/pill/antitox = 6
+		/obj/item/chems/pill/antitoxins = 6
 	)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 

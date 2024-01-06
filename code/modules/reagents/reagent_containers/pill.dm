@@ -85,14 +85,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 //We lied - it's pills all the way down
-/obj/item/chems/pill/antitox
-	name = "antitoxins (25u)"
-	desc = "Neutralizes many common toxins."
-	icon_state = "pill1"
-
-/obj/item/chems/pill/antitox/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
-
 /obj/item/chems/pill/bromide
 	name = "bromide pill"
 	desc = "Highly toxic."
@@ -168,12 +160,13 @@
 	reagents.add_reagent(/decl/material/liquid/oxy_meds, 15)
 
 /obj/item/chems/pill/antitoxins
-	name = "antitoxins (15u)"
+	name = "antitoxins (25u)"
 	desc = "A broad-spectrum anti-toxin."
 	icon_state = "pill1"
 
 /obj/item/chems/pill/antitoxins/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 15)
+	// Antitox is easy to make and has no OD threshold so we can get away with big pills.
+	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
 
 /obj/item/chems/pill/brute_meds
 	name = "styptic (20u)"

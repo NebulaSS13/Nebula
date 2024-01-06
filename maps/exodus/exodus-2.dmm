@@ -33250,7 +33250,7 @@
 	pixel_y = -32
 	},
 /obj/item/chems/syringe/antibiotic,
-/obj/item/storage/pill_bottle/antitox,
+/obj/item/storage/pill_bottle/antitoxins,
 /obj/item/storage/pill_bottle/painkillers,
 /obj/structure/table{
 	name = "plastic table frame"
@@ -38950,7 +38950,7 @@
 /obj/structure/closet/secure_closet/medical_wall{
 	name = "Pill Cabinet"
 	},
-/obj/item/storage/pill_bottle/antitox,
+/obj/item/storage/pill_bottle/antitoxins,
 /obj/item/storage/pill_bottle/painkillers,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/chems/syringe/antibiotic,
