@@ -195,7 +195,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/example/first)
 "kw" = (
-/obj/abstract/landmark/start,
+/obj/abstract/landmark/latejoin,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},

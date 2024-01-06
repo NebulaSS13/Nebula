@@ -523,6 +523,13 @@
 /obj/item/storage/box/greenglowsticks/WillContain()
 	return list(/obj/item/flashlight/flare/glowstick = 6)
 
+/obj/item/storage/box/flares
+	name = "box of flares"
+	icon_state = "box"
+
+/obj/item/storage/box/flares/WillContain()
+	return list(/obj/item/flashlight/flare = 6)
+
 /obj/item/storage/box/freezer
 	name = "portable freezer"
 	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."

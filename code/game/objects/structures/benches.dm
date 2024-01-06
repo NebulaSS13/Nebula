@@ -48,3 +48,7 @@
 	color = COLOR_DEEP_SKY_BLUE
 	alpha = 77
 	reinf_material = /decl/material/solid/glass
+
+/obj/structure/table/bench/marble
+	color = COLOR_OFF_WHITE
+	reinf_material = /decl/material/solid/stone/marble

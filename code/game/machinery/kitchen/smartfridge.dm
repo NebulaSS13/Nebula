@@ -79,6 +79,20 @@
 		return 1
 	return 0
 
+/obj/machinery/smartfridge/produce
+	name = "produce smartfridge"
+	desc = "A refrigerated storage unit for fruits and vegetables."
+
+/obj/machinery/smartfridge/produce/accept_check(var/obj/item/O)
+	return istype(O, /obj/item/grown) || istype(O, /obj/item/chems/food/grown)
+
+/obj/machinery/smartfridge/sheets
+	name = "raw material storage"
+	desc = "A storage unit for bundles of material sheets, ingots and other shapes."
+
+/obj/machinery/smartfridge/sheets/accept_check(var/obj/item/O)
+	return istype(O, /obj/item/stack/material)
+
 /obj/machinery/smartfridge/chemistry
 	name = "\improper Smart Chemical Storage"
 	desc = "A refrigerated storage unit for medicine and chemical storage."

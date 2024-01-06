@@ -209,6 +209,12 @@
 		"biohazard" = COLOR_OFF_WHITE
 	)
 
+/decl/closet_appearance/bio/medical
+	extra_decals = list(
+		"lower_half_solid" = COLOR_PALE_BLUE_GRAY,
+		"biohazard" = COLOR_OFF_WHITE
+	)
+
 /decl/closet_appearance/secure_closet
 	can_lock = TRUE
 
@@ -469,6 +475,13 @@
 		"stripe_vertical_right_partial" = COLOR_DARK_GREEN_GRAY,
 		"stripe_vertical_mid_partial" = COLOR_DARK_GREEN_GRAY,
 		"hydro" = COLOR_DARK_GREEN_GRAY
+	)
+
+/decl/closet_appearance/secure_closet/hydroponics/xenoflora
+	extra_decals = list(
+		"stripe_vertical_right_partial" = COLOR_PURPLE,
+		"stripe_vertical_mid_partial" = COLOR_PURPLE,
+		"hydro" = COLOR_PURPLE
 	)
 
 /decl/closet_appearance/secure_closet/chaplain

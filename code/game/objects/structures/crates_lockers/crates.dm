@@ -252,6 +252,19 @@
 		/obj/item/scanner/plant = 2
 	)
 
+/obj/structure/closet/crate/hydroponics/exotic
+	name = "exotic seeds crate"
+	desc = "All you need to destroy that pesky planet."
+
+/obj/structure/closet/crate/hydroponics/exotic/WillContain()
+	return list(
+		/obj/item/seeds/random = 6,
+		/obj/item/seeds/ambrosiavulgarisseed = 2,
+		/obj/item/seeds/kudzuseed,
+		/obj/item/seeds/libertymycelium,
+		/obj/item/seeds/reishimycelium
+	)
+
 /obj/structure/closet/crate/secure/biohazard
 	name = "biohazard cart"
 	desc = "A heavy cart with extensive sealing. You shouldn't eat things you find in it."

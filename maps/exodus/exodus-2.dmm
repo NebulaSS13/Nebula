@@ -32989,13 +32989,9 @@
 /turf/simulated/floor/plating,
 /area/exodus/research/xenobiology)
 "brX" = (
-/obj/structure/closet/secure_closet/medical_wall{
-	name = "Pill Cabinet";
+/obj/structure/closet/secure_closet/medical_wall/pills{
 	pixel_y = -32
 	},
-/obj/item/chems/syringe/antibiotic,
-/obj/item/storage/pill_bottle/antitox,
-/obj/item/storage/pill_bottle/painkillers,
 /obj/structure/table{
 	name = "plastic table frame"
 	},
@@ -36696,7 +36692,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/structure/closet/secure_closet/RD,
+/obj/structure/closet/secure_closet/research_director,
 /obj/item/paper/monitorkey,
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/heads/hor)
@@ -38646,11 +38642,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/storage/primary)
 "bDv" = (
-/obj/structure/closet/secure_closet/medical_wall{
-	name = "Pill Cabinet"
-	},
-/obj/item/storage/pill_bottle/antitox,
-/obj/item/storage/pill_bottle/painkillers,
+/obj/structure/closet/secure_closet/medical_wall/pills,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/chems/syringe/stabilizer,
@@ -43357,7 +43349,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-2"
 	},
-/obj/structure/closet/secure_closet/CMO,
+/obj/structure/closet/secure_closet/cmo,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/accessory/stethoscope,
 /obj/item/storage/belt/medical,
