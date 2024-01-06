@@ -1,8 +1,19 @@
 /obj/screen/holomap_level_select
 	icon = 'icons/misc/mark.dmi'
 	layer = HUD_ITEM_LAYER
+	requires_owner = FALSE
 	var/active = TRUE
 	var/datum/station_holomap/holomap
+
+/obj/screen/holomap_text
+	icon = null
+	layer = HUD_ITEM_LAYER
+	maptext_width = 96
+	requires_owner = FALSE
+
+/obj/screen/holomap_text/Initialize()
+	. = ..()
+	appearance_flags |= RESET_COLOR
 
 /obj/screen/holomap_level_select/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, datum/station_holomap/_holomap)
 	. = ..()

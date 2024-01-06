@@ -30,6 +30,8 @@
 		// Not valid when spawned manually.
 		/obj/effect/overmap,
 		/obj/effect/shuttle_landmark,
+		// Generally not expected to be spawned outside of a mob HUD context.
+		/obj/screen
 	) + list(
 		// Exclude only this type, since it's not meant to be spawned but its subtypes are.
 		// TODO: Consider whether this warrants abstract_type?
