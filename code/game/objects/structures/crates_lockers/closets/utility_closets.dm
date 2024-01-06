@@ -65,7 +65,7 @@
 	desc = "It's a storage unit for tools."
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
-/obj/structure/closet/firecloset/chief/WillContain()
+/obj/structure/closet/toolcloset/WillContain()
 	return list(
 		new /datum/atom_creator/simple(/obj/item/clothing/suit/storage/hazardvest, 40),
 		new /datum/atom_creator/simple(/obj/item/flashlight,                70),
