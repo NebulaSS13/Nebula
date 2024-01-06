@@ -5578,7 +5578,7 @@
 /obj/item/roller,
 /obj/item/storage/firstaid/adv,
 /obj/item/storage/pill_bottle/painkillers,
-/obj/item/storage/pill_bottle/antitox,
+/obj/item/storage/pill_bottle/antitoxins,
 /obj/item/storage/pill_bottle/antibiotics,
 /obj/item/storage/pill_bottle/burn_meds,
 /obj/item/scanner/health,
@@ -6540,7 +6540,7 @@
 	},
 /obj/item/storage/pill_bottle/antibiotics,
 /obj/item/storage/pill_bottle/painkillers,
-/obj/item/storage/pill_bottle/antitox,
+/obj/item/storage/pill_bottle/antitoxins,
 /obj/item/storage/pill_bottle/burn_meds,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)
