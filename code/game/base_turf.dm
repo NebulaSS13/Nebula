@@ -11,6 +11,16 @@
 	if(HasBelow(T.z))
 		if(istype(A) && A.open_turf)
 			return A.open_turf
+
+		// Find the first non-open turf below and use its open_turf_type.
+		var/turf/below = T
+		while ((below = GetBelow(below)))
+			if(!below.is_open() || !HasBelow(below.z))
+				if(below.open_turf_type)
+					return below.open_turf_type
+				break
+
+		// Otherwise, default to the open turf type set on the turf being removed.
 		if(T.open_turf_type)
 			return T.open_turf_type
 	if(istype(A) && A.base_turf)
