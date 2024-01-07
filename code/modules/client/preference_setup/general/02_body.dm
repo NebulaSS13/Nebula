@@ -149,32 +149,38 @@
 		. += "</table>"
 
 	. += "<h3>Colouration</h3>"
-	. += "<table width = '100%'>"
+	. += "<table width = '500px'>"
 	. += "<tr>"
-	. += "<td><b>Hair</b></td>"
-	. += "<td><a href='?src=\ref[src];hair_style=1'>[GET_DECL(pref.h_style)]</a></td>"
-	. += "<td>"
+	. += "<td width = '100px'><b>Hair</b></td>"
+	. += "<td width = '100px'>"
 	if(mob_bodytype.appearance_flags & HAS_HAIR_COLOR)
 		. += "[COLORED_SQUARE(pref.hair_colour)] <a href='?src=\ref[src];hair_color=1'>Change</a>"
 	. += "</td>"
+	. += "<td width = '20px'><a href='?src=\ref[src];hair_prev=1'>&#60;</a></td>"
+	. += "<td width = '260px'><a href='?src=\ref[src];hair_style=1'>[GET_DECL(pref.h_style)]</a></td>"
+	. += "<td width = '20px'><a href='?src=\ref[src];hair_next=1'>&#62;</a></td>"
 	. += "<tr>"
 	. += "</tr>"
-	. += "<td><b>Facial</b></td>"
-	. += "<td><a href='?src=\ref[src];facial_style=1'>[GET_DECL(pref.f_style)]</a></td>"
-	. += "<td>"
+	. += "<td width = '100px'><b>Facial</b></td>"
+	. += "<td width = '100px'>"
 	if(mob_bodytype.appearance_flags & HAS_HAIR_COLOR)
 		. += "[COLORED_SQUARE(pref.facial_hair_colour)] <a href='?src=\ref[src];facial_color=1'>Change</a>"
 	. += "</td>"
+	. += "<td width = '20px'><a href='?src=\ref[src];facial_prev=1'>&#60;</a></td>"
+	. += "<td width = '260px'><a href='?src=\ref[src];facial_style=1'>[GET_DECL(pref.f_style)]</a></td>"
+	. += "<td width = '20px'><a href='?src=\ref[src];facial_next=1'>&#62;</a></td>"
 	. += "</tr>"
 	if(mob_bodytype.appearance_flags & HAS_EYE_COLOR)
 		. += "<tr>"
-		. += "<td><b>Eyes</b></td>"
-		. += "<td>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "<td width = '100px'><b>Eyes</b></td>"
+		. += "<td width = '100px'>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "<td colspan = 3 width = '300px'><td>"
 		. += "</tr>"
 	if(mob_bodytype.appearance_flags & HAS_SKIN_COLOR)
 		. += "<tr>"
-		. += "<td><b>Body</b></td>"
-		. += "<td>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "<td width = '100px'><b>Body</b></td>"
+		. += "<td width = '100px'>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "<td colspan = 3 width = '300px'><td>"
 		. += "</tr>"
 	. += "</table>"
 
@@ -233,13 +239,50 @@
 
 	else if(href_list["hair_style"])
 
-		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
-		mob_species = get_species_by_key(pref.species)
-		var/decl/sprite_accessory/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in mob_species.get_hair_styles(B)
-		mob_species = get_species_by_key(pref.species)
-		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles(B)))
+		var/decl/sprite_accessory/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in mob_species.get_hair_styles(mob_bodytype)
+		mob_species =  get_species_by_key(pref.species)
+		mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles(mob_bodytype)))
 			pref.h_style = new_h_style.type
 			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["hair_next"] || href_list["hair_prev"])
+		var/decl/sprite_accessory/current_hair = GET_DECL(pref.h_style)
+		var/list/available_hair = mob_species.get_hair_styles(mob_bodytype)
+		if(current_hair in available_hair)
+			if(href_list["hair_next"])
+				current_hair = next_in_list(current_hair, available_hair)
+			else if(href_list["hair_prev"])
+				current_hair = previous_in_list(current_hair, available_hair)
+			if(istype(current_hair) && pref.h_style != current_hair.type)
+				pref.h_style = current_hair.type
+				return TOPIC_REFRESH_UPDATE_PREVIEW
+
+		return TOPIC_NOACTION
+
+	else if(href_list["facial_style"])
+
+		var/decl/sprite_accessory/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, GET_DECL(pref.f_style)) as null|anything in mob_species.get_facial_hair_styles(mob_bodytype)
+		mob_species =  get_species_by_key(pref.species)
+		mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(mob_bodytype)))
+			pref.f_style = new_f_style.type
+			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["facial_next"] || href_list["facial_prev"])
+
+		var/decl/sprite_accessory/current_facial_hair = GET_DECL(pref.f_style)
+		var/list/available_facial_hair = mob_species.get_facial_hair_styles(mob_bodytype)
+		if(current_facial_hair in available_facial_hair)
+			if(href_list["facial_next"])
+				current_facial_hair = next_in_list(current_facial_hair, available_facial_hair)
+			else if(href_list["facial_prev"])
+				current_facial_hair = previous_in_list(current_facial_hair, available_facial_hair)
+			if(istype(current_facial_hair) && pref.f_style != current_facial_hair.type)
+				pref.f_style = current_facial_hair.type
+				return TOPIC_REFRESH_UPDATE_PREVIEW
+
+		return TOPIC_NOACTION
 
 	else if(href_list["facial_color"])
 		if(!(mob_bodytype.appearance_flags & HAS_HAIR_COLOR))
@@ -279,16 +322,6 @@
 		mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
 		if(new_skin && (mob_bodytype.appearance_flags & HAS_SKIN_COLOR) && CanUseTopic(user))
 			pref.skin_colour = new_skin
-			return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["facial_style"])
-
-		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
-		mob_species = get_species_by_key(pref.species)
-		var/decl/sprite_accessory/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, GET_DECL(pref.f_style)) as null|anything in mob_species.get_facial_hair_styles(B)
-		mob_species = get_species_by_key(pref.species)
-		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(B)))
-			pref.f_style = new_f_style.type
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	//TODO SPRITE ACCESSORY UPDATE
