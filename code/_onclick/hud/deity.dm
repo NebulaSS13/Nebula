@@ -2,10 +2,10 @@
 	hud_type = /datum/hud/deity
 
 /datum/hud/deity/FinalizeInstantiation()
-	var/obj/screen/intent/deity/D = new()
-	adding += D
-	action_intent = D
+	action_intent = new /obj/screen/intent/deity
+	adding += action_intent
 	..()
+	var/obj/screen/intent/deity/D = action_intent
 	D.sync_to_mob(mymob)
 
 /obj/screen/intent/deity
