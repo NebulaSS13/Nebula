@@ -460,15 +460,6 @@ Class Procs:
 	if(battery && (!functional_only || battery.is_functional()))
 		return battery.get_cell()
 
-/obj/machinery/building_cost()
-	. = ..()
-	var/list/component_types = types_of_component(/obj/item/stock_parts)
-	for(var/path in component_types)
-		var/obj/item/stock_parts/part = get_component_of_type(path)
-		var/list/part_costs = part.building_cost()
-		for(var/key in part_costs)
-			.[key] += part_costs[key] * component_types[path]
-
 /obj/machinery/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()
 	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
@@ -489,8 +480,12 @@ Class Procs:
 // This only includes external atoms by default, so we need to add components back.
 /obj/machinery/get_contained_matter()
 	. = ..()
-	for(var/obj/component in component_parts)
-		. = MERGE_ASSOCS_WITH_NUM_VALUES(., component.get_contained_matter())
+	var/list/component_types = types_of_component(/obj/item/stock_parts)
+	for(var/path in component_types)
+		for(var/obj/item/stock_parts/part in get_all_components_of_type(path))
+			var/list/part_costs = part.get_contained_matter()
+			for(var/key in part_costs)
+				.[key] += part_costs[key] * component_types[path]
 
 /obj/machinery/proc/get_auto_access()
 	var/area/A = get_area(src)

@@ -55,29 +55,6 @@
 	for(var/mat in building_cost)
 		resources[mat] = building_cost[mat] * FABRICATOR_EXTRA_COST_FACTOR
 
-/obj/building_cost()
-	. = ..()
-	if(!simulated || INSTANCE_IS_ABSTRACT(src))
-		return
-	if(length(matter))
-		LAZYINITLIST(.)
-		for(var/material in matter)
-			var/decl/material/M = GET_DECL(material)
-			if(istype(M))
-				.[M.type] += matter[material]
-	if(reagents && length(reagents.reagent_volumes))
-		LAZYINITLIST(.)
-		for(var/R in reagents.reagent_volumes)
-			.[R] += FLOOR(REAGENT_VOLUME(reagents, R) / REAGENT_UNITS_PER_MATERIAL_UNIT)
-	for(var/obj/thing in contents)
-		if(!thing.simulated)
-			continue
-		var/thing_matter = thing.building_cost()
-		if(length(thing_matter))
-			LAZYINITLIST(.)
-			for(var/child_mat in thing_matter)
-				.[child_mat] += thing_matter[child_mat]
-
 /datum/fabricator_recipe/proc/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = list()
 	if(ispath(path, /obj/item/stack))
