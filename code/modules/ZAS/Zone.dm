@@ -114,8 +114,7 @@ Class Procs:
 	for(var/connection_edge/E in edges)
 		if(E.contains_zone(into))
 			continue //don't need to rebuild this edge
-		for(var/turf/T in E.connecting_turfs)
-			SSair.mark_for_update(T)
+		E.update_post_merge()
 
 /zone/proc/c_invalidate()
 	invalid = 1
