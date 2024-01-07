@@ -57,9 +57,9 @@
 	if(!istype(subtracting) || !length(subtracting.matter))
 		return
 	for(var/mat in matter)
-		if(!subtracting[mat])
+		if(!subtracting.matter[mat])
 			continue
-		matter[mat] -= subtracting[mat]
+		matter[mat] -= subtracting.matter[mat]
 		if(matter[mat] <= 0)
 			matter -= mat
 	UNSETEMPTY(matter)
