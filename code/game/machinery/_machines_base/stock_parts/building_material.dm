@@ -67,9 +67,9 @@
 	materials = null
 	..()
 
-/obj/item/stock_parts/building_material/building_cost()
+/obj/item/stock_parts/building_material/get_contained_matter()
 	. = ..()
 	for(var/obj/item/thing in materials)
-		var/list/costs = thing.building_cost()
+		var/list/costs = thing.get_contained_matter()
 		for(var/key in costs)
 			.[key] += costs[key]
