@@ -22,6 +22,21 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
+// Updates open turfs above this one to use its open_turf_type
+/turf/proc/update_open_above(var/restrict_type, var/respect_area = TRUE)
+	if(!HasAbove(src.z))
+		return
+	var/turf/above = src
+	while ((above = GetAbove(above)))
+		if(!above.is_open())
+			break
+		if(!restrict_type || istype(above, restrict_type))
+			if(respect_area)
+				var/area/A = get_area(above)
+				above.ChangeTurf(A?.open_turf || open_turf_type, update_open_turfs_above = FALSE)
+			else
+				above.ChangeTurf(open_turf_type, update_open_turfs_above = FALSE)
+
 /turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
 	if (!N)
 		return
@@ -51,6 +66,7 @@
 	var/old_flooded =          flooded
 	var/old_outside =          is_outside
 	var/old_is_open =          is_open()
+	var/old_open_turf_type =   open_turf_type
 	var/old_affecting_heat_sources = affecting_heat_sources
 
 	var/old_ambience =         ambient_light
@@ -182,7 +198,7 @@
 	stripe_color = other.stripe_color
 
 	material = other.material
-	reinf_material = other.material
+	reinf_material = other.reinf_material
 	girder_material = other.girder_material
 
 	floor_type = other.floor_type

@@ -11,6 +11,8 @@
 	z_eventually_space = TRUE
 	turf_flags = TURF_FLAG_BACKGROUND
 
+	open_turf_type = /turf/space
+
 	/// If we're an edge.
 	var/edge = 0
 	/// Force this one to pretend it's an overedge turf.
@@ -80,6 +82,7 @@
 		var/turf/T = src
 		while ((T = GetAbove(T)))
 			T.z_eventually_space = FALSE
+
 	return ..()
 
 /turf/space/LateInitialize()
