@@ -4,6 +4,7 @@
 	icon_state = "pewmiddle"
 	base_icon = "pewmiddle"
 	color = WOOD_COLOR_GENERIC
+	material = /decl/material/solid/organic/wood
 
 /obj/structure/bed/sofa/pew/mahogany
 	color = WOOD_COLOR_RICH
