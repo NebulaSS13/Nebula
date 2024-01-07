@@ -132,6 +132,7 @@ var/global/list/areas = list()
 	T.last_outside_check = OUTSIDE_UNCERTAIN
 	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
 		T.update_weather()
+		T.update_external_atmos_participation()
 
 /turf/proc/update_registrations_on_adjacent_area_change()
 	for(var/obj/machinery/door/firedoor/door in src)

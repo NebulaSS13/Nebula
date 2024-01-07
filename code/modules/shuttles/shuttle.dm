@@ -313,7 +313,7 @@
 			if(force || (istype(TA, get_base_turf_by_area(TA)) || (istype(TA) && TA.is_open())))
 				if(get_area(TA) in shuttle_area)
 					continue
-				TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE, FALSE)
+				TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE, TRUE)
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()
