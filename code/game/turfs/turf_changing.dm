@@ -22,7 +22,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
 	if (!N)
 		return
 
@@ -129,7 +129,21 @@
 	W.last_outside_check = OUTSIDE_UNCERTAIN
 	if(W.is_outside != old_outside)
 		W.set_outside(old_outside, skip_weather_update = TRUE)
+
+	var/turf/below = GetBelow(src)
+	if(below)
+		below.last_outside_check = OUTSIDE_UNCERTAIN
+
+		// If the turf is at the top of the Z-stack and changed its outside status, or if it's changed its open status, let the turf below check if
+		// it should change its ZAS participation
+		if((!HasAbove(z) && (W.is_outside != old_outside)) || W.is_open() != old_is_open)
+			below.update_external_atmos_participation(!keep_air_below)
+
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
+
+	if(update_open_turfs_above)
+		update_open_above(old_open_turf_type)
+
 
 /turf/proc/transport_properties_from(turf/other)
 	if(other.zone)
