@@ -31,16 +31,3 @@
 	if(items[name])
 		var/datum/deity_item/di = items[name]
 		. = di.level
-
-
-/mob/living/deity/Destroy()
-	if(islist(items_by_category))
-		for(var/cat in items_by_category)
-			var/list/L = items_by_category[cat]
-			L.Cut()
-		items_by_category.Cut()
-	if(islist(items))
-		for(var/i in items)
-			qdel(items[i])
-		items.Cut()
-	. = ..()

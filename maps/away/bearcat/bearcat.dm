@@ -120,6 +120,7 @@
 	var/corpse_health = corpse.get_max_health()
 	corpse.adjustOxyLoss(corpse_health)
 	corpse.setBrainLoss(corpse_health)
+	corpse.death(FALSE, deathmessage = "no message", show_dead_message = FALSE)
 	var/obj/structure/bed/chair/C = locate() in T
 	if(C)
 		C.buckle_mob(corpse)

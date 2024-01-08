@@ -74,9 +74,8 @@
 		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], branch, rank)
 		update_icon = TRUE
 
-	if(!(mannequin.get_bodytype().appearance_flags & HAS_UNDERWEAR))
-		if(all_underwear)
-			all_underwear.Cut()
+	if(!(mannequin.get_bodytype()?.appearance_flags & HAS_UNDERWEAR) && length(all_underwear))
+		all_underwear.Cut()
 
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob.skip_loadout_preview))
 		// Equip custom gear loadout, replacing any job items

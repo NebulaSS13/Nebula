@@ -106,7 +106,7 @@
 	var/list/channels = new()
 	channels += MAIN_CHANNEL
 	channels += additional_law_channels
-	for(var/datum/radio_channel/channel in silicon_radio.get_available_channels())
+	for(var/datum/radio_channel/channel in silicon_radio?.get_available_channels())
 		channels |= channel.key
 	channels += "Binary"
 	return channels

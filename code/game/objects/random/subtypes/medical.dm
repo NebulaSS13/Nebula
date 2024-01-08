@@ -44,7 +44,7 @@
 		/obj/item/stack/medical/splint =                   1,
 		/obj/item/chems/hypospray/autoinjector =           3,
 		/obj/item/storage/pill_bottle/burn_meds =          2,
-		/obj/item/storage/pill_bottle/antitox =            2,
+		/obj/item/storage/pill_bottle/antitoxins =         2,
 		/obj/item/storage/med_pouch/trauma =               2,
 		/obj/item/storage/med_pouch/burn =                 2,
 		/obj/item/storage/med_pouch/toxin =                2,

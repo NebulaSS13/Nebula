@@ -40,11 +40,6 @@
 		if(power_per_regen < 0 || power < power_min)
 			adjust_power(power_per_regen)
 
-/mob/living/deity/Destroy()
-	for(var/phenom in phenomenas)
-		remove_phenomena(phenom)
-	return ..()
-
 /mob/living/deity/proc/add_phenomena(var/type)
 	if(!phenomenas)
 		phenomenas = list()

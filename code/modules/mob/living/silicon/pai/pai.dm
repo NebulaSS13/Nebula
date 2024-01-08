@@ -84,16 +84,21 @@ var/global/list/possible_say_verbs = list(
 
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	status_flags |= NO_ANTAG
-	if(!card && istype(loc, /obj/item/paicard))
-		card = loc
+	if(!card)
+		if(istype(loc, /obj/item/paicard))
+			card = loc
+		else
+			card.radio = new /obj/item/radio(card)
 	if(istype(card))
 		if(!card.radio)
 			card.radio = new /obj/item/radio(card)
 		silicon_radio = card.radio
+		card.setPersonality(src)
+	else
+		return INITIALIZE_HINT_QDEL
 
 	//As a human made device, we'll understand sol common without the need of the translator
 	add_language(/decl/language/human/common, 1)
-
 	verbs -= /mob/living/verb/ghost
 
 	. = ..()
@@ -101,7 +106,10 @@ var/global/list/possible_say_verbs = list(
 	software = default_pai_software.Copy()
 
 /mob/living/silicon/pai/Destroy()
-	card = null
+	if(card)
+		if(card.pai == src)
+			card.removePersonality()
+		card = null
 	silicon_radio = null // Because this radio actually belongs to another instance we simply null
 	. = ..()
 

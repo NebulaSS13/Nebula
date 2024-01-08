@@ -12,7 +12,7 @@
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/step_count
 
-/mob/living/carbon/human/Initialize(mapload, species_name = null, datum/dna/new_dna = null, decl/bodytype/new_bodytype = null)
+/mob/living/carbon/human/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
 	current_health = mob_default_max_health
 	setup_hud_overlays()
 	var/list/newargs = args.Copy(2)

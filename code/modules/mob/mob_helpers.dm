@@ -121,9 +121,8 @@ var/global/list/global/organ_rel_size = list(
 	. = zone || BP_CHEST
 	if(. == BP_EYES || . == BP_MOUTH)
 		. = BP_HEAD
-	if(ishuman(target) && !base_zone_only)
-		var/mob/living/carbon/human/H = target
-		. = H.get_bodytype().get_limb_from_zone(.)
+	if(!base_zone_only && target)
+		. = target.get_bodytype()?.get_limb_from_zone(.) || .
 
 // Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
 // Do not use this if someone is intentionally trying to hit a specific body part.

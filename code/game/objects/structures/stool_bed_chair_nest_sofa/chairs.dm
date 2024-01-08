@@ -25,13 +25,13 @@
 	icon_state = base_icon
 	var/image/I = image(icon, "[base_icon]_over")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+	if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
 		I.appearance_flags |= RESET_COLOR
 		I.color = material.color
 	add_overlay(I)
 	I = image(icon, "[base_icon]_armrest")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+	if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
 		I.appearance_flags |= RESET_COLOR
 		I.color = material.color
 	add_overlay(I)
@@ -51,7 +51,7 @@
 	if(has_special_overlay)
 		I = image(icon, "[base_icon]_special")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+		if(material && (material_alteration & MAT_FLAG_ALTERATION_COLOR))
 			I.appearance_flags |= RESET_COLOR
 			I.color = material.color
 		add_overlay(I)

@@ -8,5 +8,5 @@
 	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
 		bodytype_equip_flags |= BODY_FLAG_FELINE
 
-/mob/living/carbon/human/tajaran/Initialize(mapload)
-	. = ..(mapload, SPECIES_TAJARA)
+/mob/living/carbon/human/tajaran/Initialize()
+	. = ..(species_name = SPECIES_TAJARA)

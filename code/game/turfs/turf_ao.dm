@@ -88,7 +88,7 @@
 		PROCESS_AO_CORNER(AO_LIST, NEIGHBORS, 4, SOUTHWEST); \
 	} \
 	UNSETEMPTY(AO_LIST); \
-	if (AO_LIST) { \
+	if (AO_LIST && TARGET) { \
 		TARGET.add_overlay(AO_LIST, TRUE); \
 	}
 
