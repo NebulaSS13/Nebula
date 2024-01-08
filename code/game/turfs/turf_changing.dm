@@ -160,7 +160,6 @@
 	if(update_open_turfs_above)
 		update_open_above(old_open_turf_type)
 
-
 /turf/proc/transport_properties_from(turf/other)
 	if(other.zone)
 		if(!air)
