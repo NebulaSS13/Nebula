@@ -30,14 +30,6 @@
 
 	flesh_color = "#137e8f"
 
-	cold_level_1 = SYNTH_COLD_LEVEL_1
-	cold_level_2 = SYNTH_COLD_LEVEL_2
-	cold_level_3 = SYNTH_COLD_LEVEL_3
-
-	heat_level_1 = SYNTH_HEAT_LEVEL_1
-	heat_level_2 = SYNTH_HEAT_LEVEL_2
-	heat_level_3 = SYNTH_HEAT_LEVEL_3
-
 	death_message = "becomes completely motionless..."
 	available_pronouns = list(/decl/pronouns/neuter)
 

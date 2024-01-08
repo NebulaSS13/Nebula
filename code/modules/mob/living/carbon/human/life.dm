@@ -219,7 +219,7 @@
 	if(relative_density > 0.02) //don't bother if we are in vacuum or near-vacuum
 		var/loc_temp = environment.temperature
 
-		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
+		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_1) && bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_1) && species.body_temperature)
 			pressure_alert = 0
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
@@ -238,29 +238,29 @@
 		bodytemperature += clamp(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
-	if(bodytemperature >= get_temperature_threshold(HEAT_LEVEL_1))
+	if(bodytemperature >= get_mob_temperature_threshold(HEAT_LEVEL_1))
 		//Body temperature is too hot.
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 		var/burn_dam = 0
-		if(bodytemperature < get_temperature_threshold(HEAT_LEVEL_2))
+		if(bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_2))
 			burn_dam = HEAT_DAMAGE_LEVEL_1
-		else if(bodytemperature < get_temperature_threshold(HEAT_LEVEL_3))
+		else if(bodytemperature < get_mob_temperature_threshold(HEAT_LEVEL_3))
 			burn_dam = HEAT_DAMAGE_LEVEL_2
 		else
 			burn_dam = HEAT_DAMAGE_LEVEL_3
 		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
 		fire_alert = max(fire_alert, 2)
 
-	else if(bodytemperature <= get_temperature_threshold(COLD_LEVEL_1))
+	else if(bodytemperature <= get_mob_temperature_threshold(COLD_LEVEL_1))
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		var/burn_dam = 0
 
-		if(bodytemperature > get_temperature_threshold(COLD_LEVEL_2))
+		if(bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_2))
 			burn_dam = COLD_DAMAGE_LEVEL_1
-		else if(bodytemperature > get_temperature_threshold(COLD_LEVEL_3))
+		else if(bodytemperature > get_mob_temperature_threshold(COLD_LEVEL_3))
 			burn_dam = COLD_DAMAGE_LEVEL_2
 		else
 			burn_dam = COLD_DAMAGE_LEVEL_3
@@ -609,8 +609,8 @@
 					if(260 to 280)			bodytemp.icon_state = "temp-3"
 					else					bodytemp.icon_state = "temp-4"
 			else
-				var/heat_1 = get_temperature_threshold(HEAT_LEVEL_1)
-				var/cold_1 = get_temperature_threshold(COLD_LEVEL_1)
+				var/heat_1 = get_mob_temperature_threshold(HEAT_LEVEL_1)
+				var/cold_1 = get_mob_temperature_threshold(COLD_LEVEL_1)
 				//TODO: precalculate all of this stuff when the species datum is created
 				var/base_temperature = species.body_temperature
 				if(base_temperature == null) //some species don't have a set metabolic temperature
@@ -882,12 +882,12 @@
 
 
 	if(species)
-		if(burn_temperature < get_temperature_threshold(HEAT_LEVEL_2))
+		if(burn_temperature < get_mob_temperature_threshold(HEAT_LEVEL_2))
 			species_heat_mod = 0.5
-		else if(burn_temperature < get_temperature_threshold(HEAT_LEVEL_3))
+		else if(burn_temperature < get_mob_temperature_threshold(HEAT_LEVEL_3))
 			species_heat_mod = 0.75
 
-	burn_temperature -= get_temperature_threshold(HEAT_LEVEL_1)
+	burn_temperature -= get_mob_temperature_threshold(HEAT_LEVEL_1)
 
 	if(burn_temperature < 1)
 		return

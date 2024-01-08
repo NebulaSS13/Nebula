@@ -246,7 +246,7 @@
 		return
 
 	to_chat(choice, "<span class='danger'>You feel as if something cold passed through you!</span>")
-	var/temp_threshold = choice.get_temperature_threshold(COLD_LEVEL_1)
+	var/temp_threshold = choice.get_mob_temperature_threshold(COLD_LEVEL_1)
 	if(choice.bodytemperature >= temp_threshold + 1)
 		choice.bodytemperature = max(temp_threshold + 1, choice.bodytemperature - 30)
 	to_chat(src, "<span class='notice'>You pass through \the [choice], giving them a sudden chill.</span>")

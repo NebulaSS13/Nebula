@@ -1,21 +1,26 @@
 /decl/bodytype/vox
-	name                = "soldier voxform"
-	bodytype_category   = BODYTYPE_VOX
-	icon_base           = 'mods/species/vox/icons/body/soldier/body.dmi'
-	icon_deformed       = 'mods/species/vox/icons/body/deformed_body.dmi'
-	husk_icon           = 'mods/species/vox/icons/body/husk.dmi'
-	blood_overlays      = 'mods/species/vox/icons/body/blood_overlays.dmi'
-	eye_icon            = 'mods/species/vox/icons/body/soldier/eyes.dmi'
-	bodytype_flag       = BODY_FLAG_VOX
-	limb_blend          = ICON_MULTIPLY
-	eye_blend           = ICON_MULTIPLY
-	appearance_flags    = HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR
-	base_hair_color     = "#160900"
-	base_eye_color      = "#d60093"
-	base_color          = "#526d29"
-	body_flags          = BODY_FLAG_NO_DNA
-	default_h_style     = /decl/sprite_accessory/hair/vox/short
-	vital_organs        = list(
+	name =              "soldier voxform"
+	bodytype_category = BODYTYPE_VOX
+	icon_base =         'mods/species/vox/icons/body/soldier/body.dmi'
+	icon_deformed =     'mods/species/vox/icons/body/deformed_body.dmi'
+	husk_icon =         'mods/species/vox/icons/body/husk.dmi'
+	blood_overlays =    'mods/species/vox/icons/body/blood_overlays.dmi'
+	eye_icon =          'mods/species/vox/icons/body/soldier/eyes.dmi'
+	bodytype_flag =     BODY_FLAG_VOX
+	limb_blend =        ICON_MULTIPLY
+	eye_blend =         ICON_MULTIPLY
+	appearance_flags =  HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR
+	base_hair_color =   "#160900"
+	base_eye_color =    "#d60093"
+	base_color =        "#526d29"
+	body_flags =        BODY_FLAG_NO_DNA
+	default_h_style = /decl/sprite_accessory/hair/vox/short
+
+	cold_level_1 = 80
+	cold_level_2 = 50
+	cold_level_3 = -1
+
+	vital_organs = list(
 		BP_STACK,
 		BP_BRAIN
 	)

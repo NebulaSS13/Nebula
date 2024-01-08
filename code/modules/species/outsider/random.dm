@@ -15,6 +15,15 @@
 	base_color  = RANDOM_RGB
 	MULT_BY_RANDOM_COEF(eye_flash_mod, 0.5, 1.5)
 	eye_darksight_range = rand(1,8)
+	var/temp_comfort_shift = rand(-50,50)
+	cold_level_1 += temp_comfort_shift
+	cold_level_2 += temp_comfort_shift
+	cold_level_3 += temp_comfort_shift
+	heat_level_1 += temp_comfort_shift
+	heat_level_2 += temp_comfort_shift
+	heat_level_3 += temp_comfort_shift
+	heat_discomfort_level += temp_comfort_shift
+	cold_discomfort_level += temp_comfort_shift
 	. = ..()
 
 /decl/species/alium
@@ -74,17 +83,6 @@
 
 	//Environment
 	var/temp_comfort_shift = rand(-50,50)
-	cold_level_1 += temp_comfort_shift
-	cold_level_2 += temp_comfort_shift
-	cold_level_3 += temp_comfort_shift
-
-	heat_level_1 += temp_comfort_shift
-	heat_level_2 += temp_comfort_shift
-	heat_level_3 += temp_comfort_shift
-
-	heat_discomfort_level += temp_comfort_shift
-	cold_discomfort_level += temp_comfort_shift
-
 	body_temperature += temp_comfort_shift
 
 	var/pressure_comfort_shift = rand(-50,50)
@@ -107,44 +105,6 @@
 	if(istype(H) && H.isSynthetic())
 		return ..()
 	return blood_color
-
-/decl/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
-	var/temp_comfort_shift = atmosphere.temperature - body_temperature
-
-	cold_level_1 += temp_comfort_shift
-	cold_level_2 += temp_comfort_shift
-	cold_level_3 += temp_comfort_shift
-
-	heat_level_1 += temp_comfort_shift
-	heat_level_2 += temp_comfort_shift
-	heat_level_3 += temp_comfort_shift
-
-	heat_discomfort_level += temp_comfort_shift
-	cold_discomfort_level += temp_comfort_shift
-
-	body_temperature += temp_comfort_shift
-
-	var/normal_pressure = atmosphere.return_pressure()
-	hazard_high_pressure = 5 * normal_pressure
-	warning_high_pressure = 0.7 * hazard_high_pressure
-
-	hazard_low_pressure = 0.2 * normal_pressure
-	warning_low_pressure = 2.5 * hazard_low_pressure
-
-	breath_type = pick(atmosphere.gas)
-	breath_pressure = 0.8*(atmosphere.gas[breath_type]/atmosphere.total_moles)*normal_pressure
-
-	var/list/newgases = decls_repository.get_decl_paths_of_subtype(/decl/material/gas)
-	newgases = newgases.Copy()
-	newgases ^= atmosphere.gas
-	for(var/gas in newgases)
-		var/decl/material/mat = GET_DECL(gas)
-		if(mat.gas_flags & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
-			newgases -= gas
-	if(newgases.len)
-		poison_types = list(pick_n_take(newgases))
-	if(newgases.len)
-		exhale_type = pick_n_take(newgases)
 
 /obj/structure/aliumizer
 	name = "alien monolith"

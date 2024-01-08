@@ -21,9 +21,9 @@
 	if(isSynthetic())
 		return 0
 
-	var/cold_1 = get_temperature_threshold(COLD_LEVEL_1)
-	var/cold_2 = get_temperature_threshold(COLD_LEVEL_2)
-	var/cold_3 = get_temperature_threshold(COLD_LEVEL_3)
+	var/cold_1 = get_mob_temperature_threshold(COLD_LEVEL_1)
+	var/cold_2 = get_mob_temperature_threshold(COLD_LEVEL_2)
+	var/cold_3 = get_mob_temperature_threshold(COLD_LEVEL_3)
 
 	if(bodytemperature > cold_1)
 		return 0

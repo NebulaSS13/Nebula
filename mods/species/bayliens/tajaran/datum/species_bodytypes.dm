@@ -29,6 +29,22 @@
 
 	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
 
+	cold_level_1 = 200
+	cold_level_2 = 140
+	cold_level_3 = 80
+
+	heat_level_1 = 330
+	heat_level_2 = 380
+	heat_level_3 = 800
+
+	heat_discomfort_level = 294
+	cold_discomfort_level = 230
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+	)
+
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(
 		slot_glasses_str =   list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2)),
