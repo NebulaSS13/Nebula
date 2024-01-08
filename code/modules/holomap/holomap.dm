@@ -179,7 +179,7 @@
 	var/image/station_map
 	var/image/cursor
 	var/list/obj/screen/holomap_legend/legend
-	var/list/obj/screen/maptexts
+	var/list/obj/screen/holomap_text/maptexts
 	var/list/obj/screen/holomap_level_select/lbuttons
 	var/list/image/levels
 	var/list/z_levels
@@ -272,12 +272,8 @@
 				//LAZYADD(levels, map_image)
 				LAZYSET(levels, "[O.map_z[level]]", map_image)
 
-				var/obj/screen/maptext_overlay = new(null)
-				maptext_overlay.icon = null
-				maptext_overlay.layer = HUD_ITEM_LAYER
-				maptext_overlay.appearance_flags |= RESET_COLOR
+				var/obj/screen/holomap_text/maptext_overlay = new(null)
 				maptext_overlay.maptext = STYLE_SMALLFONTS_OUTLINE("<center>LEVEL [level-1]</center>", 7, COLOR_WHITE, COLOR_BLACK)
-				maptext_overlay.maptext_width = 96
 				maptext_overlay.pixel_x = (HOLOMAP_ICON_SIZE / 2) - (maptext_overlay.maptext_width / 2)
 				maptext_overlay.pixel_y = HOLOMAP_MARGIN
 
