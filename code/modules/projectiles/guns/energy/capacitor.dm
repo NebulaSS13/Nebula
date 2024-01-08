@@ -224,7 +224,6 @@ var/global/list/laser_wavelengths
 		M.update_inv_hands()
 
 /obj/item/gun/energy/capacitor/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	. = ..()
 	if(overlay && (slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str))
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-wiring")
 		I.color = wiring_color
@@ -241,6 +240,7 @@ var/global/list/laser_wavelengths
 				I.color = selected_wavelength.color
 				I.appearance_flags |= RESET_COLOR
 				overlay.overlays += I
+	. = ..()
 
 /obj/item/gun/energy/capacitor/consume_next_projectile()
 
