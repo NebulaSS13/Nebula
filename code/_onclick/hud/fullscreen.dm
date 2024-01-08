@@ -16,7 +16,7 @@
 			return null
 
 	if(!screen)
-		screen = new type()
+		screen = new type(null, src)
 
 	screen.icon_state = "[initial(screen.icon_state)][severity]"
 	screen.severity = severity
