@@ -939,7 +939,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/set_custom_desc(var/new_desc)
 	desc = new_desc
 
-
 /obj/item/proc/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
 	SHOULD_CALL_PARENT(FALSE)
 	if(loaded_cell_type && accepted_cell_type)
