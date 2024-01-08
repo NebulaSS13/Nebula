@@ -22,6 +22,34 @@
 	. = ..()
 	color = get_random_colour()
 
+/obj/item/towel/gold
+	name = "gold towel"
+	color = "#ffd700"
+
+/obj/item/towel/red
+	name = "red towel"
+	color = "#ff0000"
+
+/obj/item/towel/purple
+	name = "purple towel"
+	color = "#800080"
+
+/obj/item/towel/cyan
+	name = "cyan towel"
+	color = "#00ffff"
+
+/obj/item/towel/orange
+	name = "orange towel"
+	color = "#ff8c00"
+
+/obj/item/towel/pink
+	name = "pink towel"
+	color = "#ff6666"
+
+/obj/item/towel/light_blue
+	name = "light blue towel"
+	color = "#3fc0ea"
+
 /obj/item/towel/black
 	name = "black towel"
 	color = "#222222"

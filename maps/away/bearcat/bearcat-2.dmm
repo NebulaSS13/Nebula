@@ -1997,14 +1997,10 @@
 /area/ship/scrap/crew/medbay)
 "eg" = (
 /obj/structure/iv_drip,
-/obj/structure/closet/medical_wall{
-	name = "pill cabinet";
+/obj/structure/closet/secure_closet/medical_wall/pills{
+	req_access = null;
 	pixel_x = 26
 	},
-/obj/item/storage/pill_bottle/antibiotics,
-/obj/item/storage/pill_bottle/painkillers,
-/obj/item/storage/pill_bottle/antitox,
-/obj/item/storage/pill_bottle/burn_meds,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "ei" = (

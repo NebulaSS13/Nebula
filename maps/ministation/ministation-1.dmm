@@ -2562,7 +2562,7 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/obj/structure/closet/secure_closet/CMO,
+/obj/structure/closet/secure_closet/cmo,
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "qz" = (
