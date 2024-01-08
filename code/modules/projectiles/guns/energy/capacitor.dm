@@ -50,6 +50,7 @@ var/global/list/laser_wavelengths
 	origin_tech = "{'combat':4,'materials':4,'powerstorage':4}"
 	w_class = ITEM_SIZE_NORMAL
 	charge_cost = 100
+	charge_meter = FALSE
 	accuracy = 2
 	fire_delay = 10
 	slot_flags = SLOT_LOWER_BODY
@@ -223,7 +224,8 @@ var/global/list/laser_wavelengths
 		var/mob/M = loc
 		M.update_inv_hands()
 
-/obj/item/gun/energy/capacitor/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/gun/energy/capacitor/apply_gun_mob_overlays(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	..()
 	if(overlay && (slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str))
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-wiring")
 		I.color = wiring_color
@@ -240,7 +242,6 @@ var/global/list/laser_wavelengths
 				I.color = selected_wavelength.color
 				I.appearance_flags |= RESET_COLOR
 				overlay.overlays += I
-	. = ..()
 
 /obj/item/gun/energy/capacitor/consume_next_projectile()
 
