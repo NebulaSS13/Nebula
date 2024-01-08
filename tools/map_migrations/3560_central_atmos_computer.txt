@@ -1,0 +1,2 @@
+/obj/machinery/computer/atmoscontrol : /obj/machinery/computer/central_atmos{@OLD}
+/obj/item/stock_parts/circuitboard/atmoscontrol : /obj/item/stock_parts/circuitboard/central_atmos{@OLD}

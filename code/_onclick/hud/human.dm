@@ -34,10 +34,7 @@
 	if(hud_data.has_resist)
 		src.hotkeybuttons += new /obj/screen/resist(null, mymob, ui_style, ui_color, ui_alpha)
 
-	mymob.maneuver_icon       = new
-	mymob.maneuver_icon.icon  = ui_style
-	mymob.maneuver_icon.color = ui_color
-	mymob.maneuver_icon.alpha = ui_alpha
+	mymob.maneuver_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
 	src.hotkeybuttons += mymob.maneuver_icon
 	hud_elements |= mymob.maneuver_icon
 
