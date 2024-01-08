@@ -9,7 +9,7 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-
+	attack_delay = DEFAULT_QUICK_COOLDOWN
 	bleed_colour = SYNTH_BLOOD_COLOR
 
 	meat_type =     null

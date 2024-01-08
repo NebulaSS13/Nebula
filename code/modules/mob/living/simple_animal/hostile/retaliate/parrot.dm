@@ -319,9 +319,7 @@
 				return
 
 			//Time for the hurt to begin!
-			var/attacking_with = get_natural_weapon()
-			if(attacking_with)
-				L.attackby(attacking_with, src)
+			UnarmedAttack(L)
 			return
 
 		//Otherwise, fly towards the mob!

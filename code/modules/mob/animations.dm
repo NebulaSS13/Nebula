@@ -159,3 +159,25 @@
 		return
 	playsound(T, "sparks", 50, 1)
 	anim(src,'icons/mob/mob.dmi',,"phaseout",,dir)
+
+// Similar to attack animations, but in reverse and is longer to act as a telegraph.
+/atom/movable/proc/do_windup_animation(atom/A, windup_time, no_reset)
+
+	var/pixel_x_diff = 0
+	var/pixel_y_diff = 0
+
+	var/direction = get_dir(src, A)
+	if(direction & NORTH)
+		pixel_y_diff = -8
+	else if(direction & SOUTH)
+		pixel_y_diff = 8
+	if(direction & EAST)
+		pixel_x_diff = -8
+	else if(direction & WEST)
+		pixel_x_diff = 8
+
+	if(no_reset)
+		animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, time = windup_time)
+	else
+		animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, time = windup_time-2)
+		animate(pixel_x = default_pixel_x, pixel_y = default_pixel_y, time = 2)
