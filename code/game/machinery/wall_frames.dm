@@ -9,7 +9,7 @@
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 	var/fully_construct = FALSE // Results in a machine with all parts auto-installed and ready to go if TRUE; if FALSE, the machine will spawn without removable expected parts
 
-/obj/item/frame/building_cost()
+/obj/item/frame/get_contained_matter()
 	. = ..()
 	if(fully_construct)
 		var/list/cost = atom_info_repository.get_matter_for(build_machine_type)

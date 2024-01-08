@@ -42,15 +42,11 @@
 
 	if(istype(O,/obj/item/kit/suit))
 		var/obj/item/kit/suit/kit = O
-
 		to_chat(user, SPAN_NOTICE("You set about modifying \the [src] into \a [kit.new_name] void helmet."))
 		SetName("[kit.new_name] void helmet")
 		desc = kit.new_desc
 		icon = kit.new_icon
-
-		var/mob/living/carbon/human/H = user
-		if(istype(H))
-			bodytype_equip_flags = H.get_bodytype().bodytype_flag
+		bodytype_equip_flags = user.get_bodytype()?.bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE
@@ -61,15 +57,11 @@
 
 	if(istype(O, /obj/item/kit/suit))
 		var/obj/item/kit/suit/kit = O
-
 		to_chat(user, SPAN_NOTICE("You set about modifying \the [src] into \a [kit.new_name] voidsuit."))
 		SetName("[kit.new_name] voidsuit")
 		desc = kit.new_desc
 		icon = kit.new_icon
-
-		var/mob/living/carbon/human/H = user
-		if(istype(H))
-			bodytype_equip_flags = H.get_bodytype().bodytype_flag
+		bodytype_equip_flags = user.get_bodytype()?.bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE

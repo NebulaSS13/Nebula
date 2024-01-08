@@ -94,6 +94,40 @@
 
 	overlays = new_overlays
 
+/obj/machinery/suit_cycler/proc/loaded_item_destroyed()
+	if(suit && QDELETED(suit))
+		suit = null
+		. = TRUE
+	if(helmet && QDELETED(helmet))
+		helmet = null
+		. = TRUE
+	if(boots && QDELETED(boots))
+		boots = null
+		. = TRUE
+	if(.)
+		update_icon()
+
+/obj/machinery/suit_cycler/proc/set_suit(obj/item/new_suit)
+	if(istype(suit))
+		events_repository.unregister(/decl/observ/destroyed, suit, src)
+	suit = new_suit
+	if(istype(suit))
+		events_repository.register(/decl/observ/destroyed, suit, src, /obj/machinery/suit_cycler/proc/loaded_item_destroyed)
+
+/obj/machinery/suit_cycler/proc/set_helmet(obj/item/new_helmet)
+	if(istype(helmet))
+		events_repository.unregister(/decl/observ/destroyed, helmet, src)
+	helmet = new_helmet
+	if(istype(helmet))
+		events_repository.register(/decl/observ/destroyed, helmet, src, /obj/machinery/suit_cycler/proc/loaded_item_destroyed)
+
+/obj/machinery/suit_cycler/proc/set_boots(obj/item/new_boots)
+	if(istype(boots))
+		events_repository.unregister(/decl/observ/destroyed, boots, src)
+	boots = new_boots
+	if(istype(boots))
+		events_repository.register(/decl/observ/destroyed, boots, src, /obj/machinery/suit_cycler/proc/loaded_item_destroyed)
+
 /obj/machinery/suit_cycler/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(!length(available_modifications) || !length(available_bodytypes))
@@ -102,11 +136,11 @@
 
 	if(populate_parts)
 		if(ispath(suit))
-			suit = new suit(src)
+			set_suit(new suit(src))
 		if(ispath(helmet))
-			helmet = new helmet(src)
+			set_helmet(new helmet(src))
 		if(ispath(boots))
-			boots = new boots(src)
+			set_boots(new boots(src))
 
 	available_modifications = list_values(decls_repository.get_decls(available_modifications))
 
@@ -143,7 +177,7 @@
 
 	visible_message(SPAN_WARNING("\The [user] starts putting \the [target] into the suit cycler."))
 	if(do_after(user, 20, src))
-		if(!istype(target) || locked || suit || helmet || !target.Adjacent(user) || !user.Adjacent(src) || user.incapacitated())
+		if(!istype(target) || locked || suit || helmet || boots || !target.Adjacent(user) || !user.Adjacent(src) || user.incapacitated())
 			return FALSE
 		target.reset_view(src)
 		target.forceMove(src)
@@ -186,7 +220,7 @@
 		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
-		boots = I
+		set_boots(I)
 		update_icon()
 		updateUsrDialog()
 
@@ -202,7 +236,7 @@
 		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
-		helmet = I
+		set_helmet(I)
 		update_icon()
 		updateUsrDialog()
 		return
@@ -220,7 +254,7 @@
 		if(!user.try_unequip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
-		suit = I
+		set_suit(I)
 		update_icon()
 		updateUsrDialog()
 		return
@@ -275,7 +309,7 @@
 		dat += "<b>Suit: </b> [suit ? "\the [suit]" : "no suit stored" ]. <A href='?src=\ref[src];eject_suit=1'>Eject</a><br/>"
 		dat += "<b>Boots: </b> [boots ? "\the [boots]" : "no boots stored" ]. <A href='?src=\ref[src];eject_boots=1'>Eject</a>"
 
-		if(can_repair && suit && istype(suit))
+		if(can_repair && istype(suit))
 			dat += "[(suit.damage ? " <A href='?src=\ref[src];repair_suit=1'>Repair</a>" : "")]"
 
 		dat += "<br/><b>UV decontamination systems:</b> <font color = '[emagged ? "red'>SYSTEM ERROR" : "green'>READY"]</font><br>"
@@ -297,15 +331,15 @@
 	if(href_list["eject_suit"])
 		if(!suit) return
 		suit.dropInto(loc)
-		suit = null
+		set_suit(null)
 	else if(href_list["eject_helmet"])
 		if(!helmet) return
 		helmet.dropInto(loc)
-		helmet = null
+		set_helmet(null)
 	else if(href_list["eject_boots"])
 		if(!boots) return
 		boots.dropInto(loc)
-		boots = null
+		set_boots(null)
 	else if(href_list["select_department"])
 		var/choice = input("Please select the target department paintjob.", "Suit cycler", target_modification) as null|anything in available_modifications
 		if(choice && CanPhysicallyInteract(usr))

@@ -9,17 +9,18 @@
 	global.human_mob_list -= src
 
 /mob/living/carbon/human/dummy/selfdress/Initialize()
-	. = ..()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/mob/living/carbon/human/dummy/selfdress/LateInitialize()
 	for(var/obj/item/I in loc)
 		equip_to_appropriate_slot(I)
 
 /mob/living/carbon/human/corpse
 	real_name = "corpse"
 
-/mob/living/carbon/human/corpse/Initialize(mapload, new_species, obj/abstract/landmark/corpse/corpse)
-
-	. = ..(mapload, new_species)
-
+/mob/living/carbon/human/corpse/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype, obj/abstract/landmark/corpse/corpse)
+	. = ..(mapload, species_name, new_dna, new_bodytype) // do not pass the corpse landmark
 	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
 	if(culture)
 		var/newname = culture.get_random_name(src, gender, species.name)
@@ -28,17 +29,20 @@
 			SetName(newname)
 			if(mind)
 				mind.name = real_name
+	if(corpse)
+		corpse.randomize_appearance(src, get_species_name())
+		corpse.equip_corpse_outfit(src)
+	return INITIALIZE_HINT_LATELOAD
 
+/mob/living/carbon/human/corpse/LateInitialize()
+	..()
 	var/current_max_health = get_max_health()
 	adjustOxyLoss(current_max_health)//cease life functions
 	setBrainLoss(current_max_health)
+	death(FALSE, deathmessage = "no message", show_dead_message = FALSE)
 	var/obj/item/organ/internal/heart/corpse_heart = get_organ(BP_HEART, /obj/item/organ/internal/heart)
 	if(corpse_heart)
 		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
-	if(corpse)
-		corpse.randomize_appearance(src, new_species)
-		corpse.equip_corpse_outfit(src)
-	update_icon()
 
 /mob/living/carbon/human/dummy/mannequin/add_to_living_mob_list()
 	return FALSE
@@ -55,7 +59,7 @@
 /mob/living/carbon/human/monkey
 	gender = PLURAL
 
-/mob/living/carbon/human/monkey/Initialize(mapload)
+/mob/living/carbon/human/monkey/Initialize()
 	if(gender == PLURAL)
 		gender = pick(MALE, FEMALE)
-	. = ..(mapload, SPECIES_MONKEY)
+	. = ..(species_name = SPECIES_MONKEY)

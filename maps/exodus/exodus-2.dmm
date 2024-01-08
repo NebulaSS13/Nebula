@@ -32992,6 +32992,7 @@
 /obj/structure/closet/secure_closet/medical_wall/pills{
 	pixel_y = -32
 	},
+/obj/item/chems/syringe/antibiotic,
 /obj/structure/table{
 	name = "plastic table frame"
 	},

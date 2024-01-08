@@ -76,25 +76,6 @@
 		return !density
 	return TRUE
 
-/obj/structure/railing/examine(mob/user)
-	. = ..()
-	if(health < max_health)
-		switch(health / max_health)
-			if(0.0 to 0.5)
-				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
-			if(0.25 to 0.5)
-				to_chat(user, "<span class='warning'>It looks damaged!</span>")
-			if(0.5 to 1.0)
-				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
-
-/obj/structure/railing/take_damage(amount)
-	health -= amount
-	if(health <= 0)
-		visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
-		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-		material.place_shards(get_turf(usr))
-		qdel(src)
-
 /obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
 	neighbor_status = 0
 	var/Rturn = turn(src.dir, -90)

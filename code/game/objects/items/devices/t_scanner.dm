@@ -102,7 +102,7 @@
 		if(ismob(scanned))
 			if(ishuman(scanned))
 				var/mob/living/carbon/human/H = scanned
-				if(H.get_bodytype().appearance_flags & HAS_SKIN_COLOR)
+				if(H.get_bodytype()?.appearance_flags & HAS_SKIN_COLOR)
 					I.color = H.skin_colour
 					I.icon = 'icons/mob/mob.dmi'
 					I.icon_state = "phaseout"

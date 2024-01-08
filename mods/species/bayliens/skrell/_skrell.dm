@@ -1,5 +1,5 @@
 #define SPECIES_SKRELL "Skrell"
 #define BODYTYPE_SKRELL "skrellian body"
 
-/mob/living/carbon/human/skrell/Initialize(mapload)
-	. = ..(mapload, SPECIES_SKRELL)
+/mob/living/carbon/human/skrell/Initialize()
+	. = ..(species_name = SPECIES_SKRELL)
