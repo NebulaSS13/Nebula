@@ -137,7 +137,8 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/cell/device/variable/Initialize(ml, material_key, charge_amount)
-	maxcharge = charge_amount
+	if(!isnull(charge_amount))
+		maxcharge = charge_amount
 	return ..(ml, material_key)
 
 /obj/item/cell/device/standard
