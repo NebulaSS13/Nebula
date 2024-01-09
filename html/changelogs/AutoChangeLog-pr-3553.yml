@@ -1,5 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: 'Simple mobs will now show a windup before hitting you in melee, allowing
-      you to dodge.'}
-delete-after: true
