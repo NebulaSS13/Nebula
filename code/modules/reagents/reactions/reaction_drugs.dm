@@ -191,6 +191,12 @@
 	mix_message = "The solution becomes slick and soapy."
 	result_amount = 2
 
+/decl/chemical_reaction/contaminant_cleaner
+	name = "Akaline Detergent"
+	result = /decl/material/liquid/contaminant_cleaner
+	required_reagents = list(/decl/material/solid/sodium = 1, /decl/material/liquid/surfactant = 1)
+	result_amount = 2
+
 /decl/chemical_reaction/plantbgone
 	name = "Plant-B-Gone"
 	result = /decl/material/liquid/weedkiller

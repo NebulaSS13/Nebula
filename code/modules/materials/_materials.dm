@@ -225,6 +225,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/fruit_descriptor // String added to fruit desc if this chemical is present.
 
 	var/dirtiness = DIRTINESS_NEUTRAL // How dirty turfs are after being exposed to this material. Negative values cause a cleaning/sterilizing effect.
+	var/decontamination_dose = 0      // Amount required for a decontamination effect, if any.
 	var/solvent_power = MAT_SOLVENT_NONE
 	var/solvent_melt_dose = 0
 	var/solvent_max_damage  = 0
@@ -571,6 +572,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	else if(defoliant && istype(O, /obj/effect/vine))
 		qdel(O)
 	else
+		if(dirtiness <= DIRTINESS_DECONTAMINATE)
+			if(amount >= decontamination_dose && istype(O, /obj/item))
+				var/obj/item/I = O
+				if(I.contaminated)
+					I.decontaminate()
 		if(dirtiness <= DIRTINESS_STERILE)
 			O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
 			O.was_bloodied = null
