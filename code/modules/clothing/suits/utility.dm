@@ -137,7 +137,7 @@
 
 /obj/item/clothing/head/chem_hood
 	name = "chemical hood"
-	desc = "A hood that protects the head from chemical comtaminants."
+	desc = "A hood that protects the head from chemical contaminants."
 	icon = 'icons/clothing/head/chem_hood.dmi'
 	permeability_coefficient = 0
 	armor = list(
@@ -146,7 +146,7 @@
 		)
 	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	body_parts_covered = SLOT_HEAD|SLOT_EARS
+	body_parts_covered = SLOT_HEAD|SLOT_EARS|SLOT_FACE
 	siemens_coefficient = 0.9
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
