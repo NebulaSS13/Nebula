@@ -150,4 +150,5 @@
 	name = "ironing board"
 	desc = "A collapsed ironing board that can be carried around."
 	icon = 'icons/obj/structures/ironing.dmi'
+	icon_state = "folded"
 	structure_form_type = /obj/structure/bed/roller/ironingboard
