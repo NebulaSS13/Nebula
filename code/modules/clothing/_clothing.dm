@@ -17,7 +17,6 @@
 	var/blood_overlay_type = "uniformblood"
 	var/visible_name = "Unknown"
 	var/ironed_state = WRINKLES_DEFAULT
-	var/smell_state = SMELL_DEFAULT
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 	var/volume_multiplier = 1
 	var/markings_icon	// simple colored overlay that would be applied to the icon
@@ -105,8 +104,14 @@
 	if(LAZYLEN(new_overlays))
 		add_overlay(new_overlays)
 
-/obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
-	smell_state = smell
+// Used by washing machines to temporarily make clothes smell
+/obj/item/clothing/proc/change_smell(decl/material/odorant, time = 10 MINUTES)
+	if(!odorant || !odorant.scent)
+		remove_extension(src, /datum/extension/scent)
+		return
+
+	set_extension(src, /datum/extension/scent/custom, odorant.scent, odorant.scent_intensity, odorant.scent_descriptor, odorant.scent_range)
+	addtimer(CALLBACK(src, /obj/item/clothing/proc/change_smell), time, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 /obj/item/clothing/proc/get_fibers()
 	. = "material from \a [name]"
@@ -191,12 +196,6 @@
 			to_chat(user, "<span class='bad'>It's wrinkly.</span>")
 		if(WRINKLES_NONE)
 			to_chat(user, "<span class='notice'>It's completely wrinkle-free!</span>")
-
-	switch(smell_state)
-		if(SMELL_CLEAN)
-			to_chat(user, "<span class='notice'>It smells clean!</span>")
-		if(SMELL_STINKY)
-			to_chat(user, "<span class='bad'>It's quite stinky!</span>")
 
 	var/rags = RAG_COUNT(src)
 	if(rags)

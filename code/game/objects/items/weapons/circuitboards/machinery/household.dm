@@ -90,6 +90,17 @@
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/pipe = 1)
 
+/obj/item/stock_parts/circuitboard/autoclave
+	name = "circuitboard (autoclave)"
+	build_path = /obj/machinery/washing_machine/autoclave
+	board_type = "machine"
+	origin_tech = "{'engineering':3, 'biotech':2}"
+	req_components = list(
+		/obj/item/stock_parts/manipulator = 2,
+		/obj/item/stock_parts/micro_laser = 1,
+		/obj/item/stock_parts/matter_bin = 2,
+		/obj/item/pipe = 1)
+
 /obj/item/stock_parts/circuitboard/vending
 	name = "circuitboard (vending machine)"
 	build_path = /obj/machinery/vending/assist
