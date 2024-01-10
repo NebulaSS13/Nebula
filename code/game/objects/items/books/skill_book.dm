@@ -573,7 +573,6 @@ ENGINEERING
 	desc = "Sure, it includes highly detailed information on extremely advanced engine and power generator systems... but why is it written in marker on a tentacle porn magazine?"
 	w_class = ITEM_SIZE_NORMAL
 
-
 /*
 RESEARCH
 */

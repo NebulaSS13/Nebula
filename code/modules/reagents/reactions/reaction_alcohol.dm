@@ -1,5 +1,6 @@
 /decl/chemical_reaction/recipe
 	abstract_type = /decl/chemical_reaction/recipe
+	reaction_category = REACTION_TYPE_RECIPE
 
 /decl/chemical_reaction/recipe/moonshine
 	name = "Moonshine"

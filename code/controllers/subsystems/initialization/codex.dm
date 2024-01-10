@@ -84,7 +84,7 @@ SUBSYSTEM_DEF(codex)
 		popup.set_content(parse_links(jointext(entry.get_codex_body(presenting_to), null), presenting_to))
 		popup.open()
 
-/datum/controller/subsystem/codex/proc/get_guide(var/guide_id)
+/datum/controller/subsystem/codex/proc/get_manual_text(var/guide_id)
 	if(ispath(guide_id, /decl/codex_category))
 		var/decl/codex_category/cat = GET_DECL(guide_id)
 		. = cat?.guide_html

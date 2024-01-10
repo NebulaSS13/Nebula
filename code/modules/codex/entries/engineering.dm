@@ -46,26 +46,6 @@
 	mechanics_text = "This device disrupts shields on directly adjacent tiles (in a + shaped pattern), in a similar way the floor mounted variant does. It is, however, portable and run by an internal battery. Can be recharged with a regular recharger."
 	disambiguator = "equipment"
 
-/datum/codex_entry/hacking
-	associated_strings = list("hacking")
-	mechanics_text = "Airlocks, vending machines, and various other machinery can be hacked by opening them up and fiddling with the wires. \
-	While it might sound like a unlawful deed (and it usually is) this process is also performed by engineers, usually to fix said criminal deeds. \
-	Hacking also benefits from the <span codexlink='Electrical Engineering (skill)'>Electrical Engineering</span> skill: a low skill may cause wires to tangle, and a high enough skill will let you examine wires to see what they do. \
-	<BR>Hacking makes use of several items: \
-	<ul><li>a <span codexlink='" + TOOL_CODEX_SCREWDRIVER + "'>screwdriver</span>, for opening maintenance panels.</li> \
-	<li>a <span codexlink='" + TOOL_CODEX_MULTITOOL + "'>multitool</span>, for pulsing wires (optional for many tasks, but very useful)</li> \
-	<li><span codexlink='" + TOOL_CODEX_WIRECUTTERS + "'>wirecutters</span>, for cutting wires</li> \
-	<li>insulated gloves, to prevent electrocution (optional but highly recommended)</li> \
-	<li>a <span codexlink='" + TOOL_CODEX_CROWBAR + "'>crowbar</span>, if you're hacking a door to open it.</li></ul> \
-	<BR>The first step to most hacking procedures is to use the screwdriver to open a maintenance panel and access the wiring. \
-	After, you can click on the machine to view the wires. \
-	You then use the multitool to pulse the wires, and in response some of the displayed information may change, causing certain effects to occur or allowing for certain benefits. \
-	If you don't have a multitool, you can cut the wires. \
-	Pulsing tends to cause temporary changes or toggles something, whereas cutting a wire is usually longer lasting, but this is not always the case. \
-	Note that the corresponding wires and effects are randomized between rounds of the game. \
-	You can also attach a signaler to pulse wires remotely."
-	antag_text = "To avoid suspicion or accidents, practice quietly somewhere out of the way and learn the wires you need before doing it for real."
-
 /datum/codex_entry/solars
 	associated_paths = list(/obj/item/solar_assembly, /obj/machinery/power/solar, /obj/machinery/power/tracker, /obj/machinery/power/solar_control)
 	associated_strings = list("solar array")

@@ -1,5 +1,6 @@
 /datum/codex_entry/guide
 	abstract_type = /datum/codex_entry/guide
+	lore_text = "This guide has not been written yet, sorry!"
 
 /datum/codex_entry/guide/New()
 	..()
@@ -12,7 +13,13 @@
 	LAZYDISTINCTADD(cat.items, name)
 
 	// Generate our guide text.
-	guide_html = lore_text
+	guide_html = guide_html ? list(guide_html) : list()
+	if(lore_text)
+		guide_html += "<p>[lore_text]</p>"
+	if(mechanics_text)
+		guide_html += "<p>[mechanics_text]</p>"
+	// No antag text for the guide text.
+	guide_html = JOINTEXT(guide_html)
 
 /datum/codex_entry/guide/robotics
 	name = "Guide to Robotics"
@@ -438,25 +445,6 @@
 		If you don't have any further issues, go out and do whatever is necessary.
 	"}
 
-/datum/codex_entry/guide/medicine
-	name = "Guide to Medicine"
-	lore_text = {"
-		<h1>The Oath</h1>
-		<i>The Medical Oath sworn by recognised medical practitioners:</i><br>
-		<ol>
-			<li>Now, as a new doctor, I solemnly promise that I will, to the best of my ability, serve humanity-caring for the sick, promoting good health, and alleviating pain and suffering.</li>
-			<li>I recognise that the practice of medicine is a privilege with which comes considerable responsibility and I will not abuse my position.</li>
-			<li>I will practise medicine with integrity, humility, honesty, and compassion-working with my fellow doctors and other colleagues to meet the needs of my patients.</li>
-			<li>I shall never intentionally do or administer anything to the overall harm of my patients.</li>
-			<li>I will not permit considerations of gender, race, religion, political affiliation, sexual orientation, nationality, or social standing to influence my duty of care.</li>
-			<li>I will oppose policies in breach of human rights and will not participate in them. I will strive to change laws that are contrary to my profession's ethics and will work towards a fairer distribution of health resources.</li>
-			<li>I will assist my patients to make informed decisions that coincide with their own values and beliefs and will uphold patient confidentiality.</li>
-			<li>I will recognise the limits of my knowledge and seek to maintain and increase my understanding and skills throughout my professional life. I will acknowledge and try to remedy my own mistakes and honestly assess and respond to those of others.</li>
-			<li>I will seek to promote the advancement of medical knowledge through teaching and research.</li>
-			<li>I make this declaration solemnly, freely, and upon my honour.</li>
-		</ol><br>
-	"}
-
 /datum/codex_entry/guide/xenoarchaeology
 	name = "Guide to Xenoarchaeology"
 	lore_text = {"
@@ -610,3 +598,21 @@
 
 /datum/codex_entry/guide/hacking
 	name = "Guide to Hacking"
+	associated_strings = list("hacking")
+	mechanics_text = "Airlocks, vending machines, and various other machinery can be hacked by opening them up and fiddling with the wires. \
+	While it might sound like a unlawful deed (and it usually is) this process is also performed by engineers, usually to fix said criminal deeds. \
+	Hacking also benefits from the <span codexlink='Electrical Engineering (skill)'>Electrical Engineering</span> skill: a low skill may cause wires to tangle, and a high enough skill will let you examine wires to see what they do. \
+	<BR>Hacking makes use of several items: \
+	<ul><li>a <span codexlink='" + TOOL_CODEX_SCREWDRIVER + "'>screwdriver</span>, for opening maintenance panels.</li> \
+	<li>a <span codexlink='" + TOOL_CODEX_MULTITOOL + "'>multitool</span>, for pulsing wires (optional for many tasks, but very useful)</li> \
+	<li><span codexlink='" + TOOL_CODEX_WIRECUTTERS + "'>wirecutters</span>, for cutting wires</li> \
+	<li>insulated gloves, to prevent electrocution (optional but highly recommended)</li> \
+	<li>a <span codexlink='" + TOOL_CODEX_CROWBAR + "'>crowbar</span>, if you're hacking a door to open it.</li></ul> \
+	<BR>The first step to most hacking procedures is to use the screwdriver to open a maintenance panel and access the wiring. \
+	After, you can click on the machine to view the wires. \
+	You then use the multitool to pulse the wires, and in response some of the displayed information may change, causing certain effects to occur or allowing for certain benefits. \
+	If you don't have a multitool, you can cut the wires. \
+	Pulsing tends to cause temporary changes or toggles something, whereas cutting a wire is usually longer lasting, but this is not always the case. \
+	Note that the corresponding wires and effects are randomized between rounds of the game. \
+	You can also attach a signaler to pulse wires remotely."
+	antag_text = "To avoid suspicion or accidents, practice quietly somewhere out of the way and learn the wires you need before doing it for real."
