@@ -26,7 +26,7 @@
 	name = "Psionics"
 	associated_strings = list("psychic powers")
 	associated_paths = list(
-		/obj/item/book/manual/psionics,
+		/obj/item/book/fluff/psionics,
 		/obj/item/clothing/head/helmet/space/psi_amp,
 		/obj/item/clothing/head/helmet/space/psi_amp/lesser
 	)

@@ -4,15 +4,15 @@
 	description_antag = "A conglomerate of powerful corporations seems to be wanting to create weaponized xenobiological species. Probably as a form of WMD, by your best guess."
 	icon_state = "docs_verified"
 
-/obj/item/book/manual/nt_regs
+/obj/item/book/fluff/nt_regs
 	name = "Corporate Regulations"
 	desc = "A set of corporate guidelines for employees of a megacorporation."
 	icon_state = "booknanoregs"
 	author = "Employee Materials"
 	title = "Corporate Regulations"
-	url = "Corporate_Regulations"
+	dat = "The book is empty..."
 
-/obj/item/book/union_charter
+/obj/item/book/fluff/union_charter
 	name = "\improper Union Charter"
 	title = "Union Charter of Workplace Rights"
 	author = "Corporate Union"

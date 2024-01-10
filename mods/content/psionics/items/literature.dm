@@ -1,9 +1,8 @@
-/obj/item/book/manual/psionics
+/obj/item/book/fluff/psionics
 	name = "Psychonetics"
 	icon_state = "foundation"
 	author = "John Titor"
 	title = "Psychonetics"
-
 	dat = {"<html>
 				<head>
 				<style>
