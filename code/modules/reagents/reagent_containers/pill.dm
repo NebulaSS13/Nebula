@@ -259,14 +259,13 @@
 	name = "detergent pod"
 	desc = "Put in water to get space cleaner. Do not eat. Really."
 	icon_state = "pod21"
-	var/smell_clean_time = 10 MINUTES
 
 // Don't overwrite the custom name.
 /obj/item/chems/pill/detergent/update_container_name()
 	return
 
 /obj/item/chems/pill/detergent/populate_reagents()
-	reagents.add_reagent(/decl/material/gas/ammonia, 30)
+	reagents.add_reagent(/decl/material/liquid/contaminant_cleaner, 30)
 
 /obj/item/chems/pill/pod
 	name = "master flavorpod item"

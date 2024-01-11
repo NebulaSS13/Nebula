@@ -62,9 +62,10 @@
 #define MAT_SOLVENT_MODERATE 2
 #define MAT_SOLVENT_STRONG   3
 
-#define DIRTINESS_STERILE -2
-#define DIRTINESS_CLEAN   -1
-#define DIRTINESS_NEUTRAL  0
+#define DIRTINESS_DECONTAMINATE -3
+#define DIRTINESS_STERILE       -2
+#define DIRTINESS_CLEAN         -1
+#define DIRTINESS_NEUTRAL        0
 
 #define DEFAULT_GAS_ACCELERANT /decl/material/gas/hydrogen
 #define DEFAULT_GAS_OXIDIZER   /decl/material/gas/oxygen

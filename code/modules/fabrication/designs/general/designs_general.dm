@@ -165,3 +165,9 @@
 
 /datum/fabricator_recipe/package_wrapper/gift
 	path = /obj/item/stack/package_wrap/gift
+
+/datum/fabricator_recipe/clothes_iron
+	path = /obj/item/ironingiron
+
+/datum/fabricator_recipe/ironing_board
+	path = /obj/item/roller/ironingboard

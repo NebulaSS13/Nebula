@@ -114,13 +114,14 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 /mob/living/carbon/human/proc/contaminant_head_protected()
 	//Checks if the head is adequately sealed.
 	var/obj/item/head = get_equipped_item(slot_head_str)
-	if(head)
-		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY)
-			if(head.item_flags & ITEM_FLAG_NO_CONTAMINATION)
-				return 1
-		else if(head.body_parts_covered & SLOT_EYES)
-			return 1
-	return 0
+	if(!head)
+		return FALSE
+	// If strict protection is on, you must have a head item with ITEM_FLAG_NO_CONTAMINATION.
+	if(vsc.contaminant_control.STRICT_PROTECTION_ONLY)
+		if(!(head.item_flags & ITEM_FLAG_NO_CONTAMINATION))
+			return FALSE
+	// Regardless, the head item must cover the face and head. Eyes are checked seperately above.
+	return BIT_TEST_ALL(head.body_parts_covered, SLOT_HEAD|SLOT_FACE)
 
 /mob/living/carbon/human/proc/contaminant_suit_protected()
 	//Checks if the suit is adequately sealed.
@@ -130,11 +131,11 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 		if(!istype(protection))
 			continue
 		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY && !(protection.item_flags & ITEM_FLAG_NO_CONTAMINATION))
-			return 0
+			return FALSE
 		coverage |= protection.body_parts_covered
 
 	if(vsc.contaminant_control.STRICT_PROTECTION_ONLY)
-		return 1
+		return TRUE
 
 	return BIT_TEST_ALL(coverage, SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS)
 
