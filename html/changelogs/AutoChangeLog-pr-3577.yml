@@ -1,0 +1,4 @@
+author: NataKilar
+changes:
+  - {tweak: Eases contamination protection requirements slightly}
+delete-after: true
