@@ -2559,7 +2559,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "hD" = (
-/obj/item/book/manual/magshield_manual,
+/obj/item/book/fluff/magshield_manual,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hE" = (

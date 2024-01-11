@@ -141,40 +141,24 @@
 	icon_state = "nav_light_red"
 
 
-/obj/item/book/manual/magshield_manual
+/obj/item/book/fluff/magshield_manual
 	name = "SOP for Planetary Shield Orbital Station"
 	icon = 'magshield_sprites.dmi'
 	icon_state = "mg_guide"
 	author = "Terraforms Industrial"
 	title = "Standard operating procedures for Planetary Shield Orbital Station"
-
-	dat = {"<html>
-				<head>
-				<style>
-				h1 {font-size: 18px; margin: 15px 0px 5px;}
-				h2 {font-size: 15px; margin: 15px 0px 5px;}
-				h3 {font-size: 13px; margin: 15px 0px 5px;}
-				li {margin: 2px 0px 2px 15px;}
-				ul {margin: 5px; padding: 0px;}
-				ol {margin: 5px; padding: 0px 15px;}
-				body {font-size: 13px; font-family: Verdana;}
-				</style>
-				</head>
-				<body>
-
-				<h1>Introduction</h1>
-				Terraforms Industrial is happy to see you as our customer! Please read this guide before using and operating with your custom PSOS - Planetary Shield Orbital Statiion.
-				<h2>Best uses for PSOS</h2>
-				PSOS is intended for protecting exoplanets from high energy space radiation rays and particles. Best used for planets lacking active geomagnetic field so PSOS would compensate its absence.<br>
-				<h2> Applied technologies</h2>
-				Terraforms Industrial is delivering you your new PSOS with set of four (4) high-strength magnetic field generators. Those devices use rotating supeconducter hands to create magnetic field with strength up to 5 Tesla effectively deflecting up to 99% of space radiation spectrum.<br>
-				<br>
-				Special modified vacuum radiation sensors will help you evaluate radiation level and adjust power input of PSOS magnetic generators for best efficiency and power saving.
-				<br><br><br>
-				<i>rest of the book pages are gone</i>
-				</body>
-			</html>
-			"}
+	fluff_text = {"
+		<h1>Introduction</h1>
+		Terraforms Industrial is happy to see you as our customer! Please read this guide before using and operating with your custom PSOS - Planetary Shield Orbital Statiion.
+		<h2>Best uses for PSOS</h2>
+		PSOS is intended for protecting exoplanets from high energy space radiation rays and particles. Best used for planets lacking active geomagnetic field so PSOS would compensate its absence.<br>
+		<h2> Applied technologies</h2>
+		Terraforms Industrial is delivering you your new PSOS with set of four (4) high-strength magnetic field generators. Those devices use rotating supeconducter hands to create magnetic field with strength up to 5 Tesla effectively deflecting up to 99% of space radiation spectrum.<br>
+		<br>
+		Special modified vacuum radiation sensors will help you evaluate radiation level and adjust power input of PSOS magnetic generators for best efficiency and power saving.
+		<br><br><br>
+		<i>The rest of the pages have been torn out...</i>
+	"}
 
 /obj/item/paper/magshield/tornpage
 	name = "torn book page"
