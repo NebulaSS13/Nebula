@@ -64,8 +64,7 @@
 	if(!icon)
 		. += "missing icon"
 	else
-		var/actual_icon_state = get_validatable_icon_state()
-		if(!actual_icon_state)
+		if(!icon_state)
 			. += "missing icon_state"
-		else if(!check_state_in_icon(actual_icon_state, icon))
-			. += "missing icon state \"[actual_icon_state]\" in [icon]"
+		else if(!check_state_in_icon(icon_state, icon))
+			. += "missing icon state \"[icon_state]\" in [icon]"
