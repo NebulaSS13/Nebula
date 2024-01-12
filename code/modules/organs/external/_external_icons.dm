@@ -49,7 +49,7 @@ var/global/list/limb_icon_cache = list()
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
 			var/mark_color = markings[M]
-			var/icon/mark_s = mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			var/icon/mark_s = mark_style.get_cached_accessory_icon(src, mark_color)
 			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
@@ -76,7 +76,7 @@ var/global/list/limb_icon_cache = list()
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
 			var/mark_color = markings[M]
-			var/icon/mark_s = mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			var/icon/mark_s = mark_style.get_cached_accessory_icon(src, mark_color)
 			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons

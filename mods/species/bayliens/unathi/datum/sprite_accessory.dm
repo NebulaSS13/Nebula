@@ -3,7 +3,7 @@
 	icon = 'mods/species/bayliens/unathi/icons/hair.dmi'
 	icon_state = "horns"
 	species_allowed = list(SPECIES_LIZARD)
-	blend = ICON_MULTIPLY
+	layer_blend = ICON_MULTIPLY
 	flags = VERY_SHORT
 	uid = "acc_hair_una_horns"
 
@@ -93,7 +93,7 @@
 	icon = 'mods/species/bayliens/unathi/icons/facial.dmi'
 	icon_state = "facial_chinhorns"
 	species_allowed = list(SPECIES_LIZARD)
-	blend = ICON_MULTIPLY
+	layer_blend = ICON_MULTIPLY
 	uid = "acc_fhair_una_chinhorns"
 
 /decl/sprite_accessory/facial_hair/lizard/hornadorns
