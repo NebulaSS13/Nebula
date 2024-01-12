@@ -14,6 +14,7 @@ var/global/list/limb_icon_cache = list()
 		add_overlay(organ.mob_icon)
 
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
+	icon_cache_key = null
 	skin_tone = null
 	skin_colour = null
 	hair_colour = human.get_hair_colour()
@@ -25,6 +26,7 @@ var/global/list/limb_icon_cache = list()
 		skin_colour = human.get_skin_colour()
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
+	icon_cache_key = null
 	skin_tone = null
 	skin_colour = null
 	hair_colour = rgb(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
@@ -63,6 +65,10 @@ var/global/list/limb_icon_cache = list()
 		icon = bodytype.get_skeletal_icon(owner)
 	else
 		icon = bodytype.get_base_icon(owner)
+
+/obj/item/organ/external/proc/cached_update_icon()
+	if(!icon_cache_key)
+		update_icon()
 
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
 	. = ..()

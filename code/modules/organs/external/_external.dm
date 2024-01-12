@@ -124,6 +124,7 @@
 		LAZYREMOVE(owner.bad_external_organs, src)
 
 /obj/item/organ/external/set_species(specie_name)
+	icon_cache_key = null
 	. = ..()
 	skin_blend = bodytype.limb_blend
 	for(var/attack_type in species.unarmed_attacks)
@@ -133,6 +134,7 @@
 	get_icon()
 
 /obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
+	icon_cache_key = null
 	var/decl/bodytype/old_bodytype = bodytype
 	. = ..(new_bodytype, override_material)
 	if(bodytype != old_bodytype && apply_to_internal_organs)
@@ -140,6 +142,14 @@
 	slowdown = bodytype.movement_slowdown
 	if(.)
 		update_icon(TRUE)
+
+/obj/item/organ/external/set_dna(var/datum/dna/new_dna)
+	icon_cache_key = null
+	return ..()
+
+/obj/item/organ/external/reset_status()
+	icon_cache_key = null
+	return ..()
 
 /obj/item/organ/external/proc/set_bodytype_with_children(decl/bodytype/new_bodytype, override_material = null)
 	set_bodytype(new_bodytype, override_material)
