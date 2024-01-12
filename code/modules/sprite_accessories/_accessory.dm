@@ -90,9 +90,6 @@
 		return FALSE
 	return TRUE
 
-/decl/sprite_accessory/proc/get_validatable_icon_state()
-	return icon_state
-
 /decl/sprite_accessory/validate()
 	. = ..()
 	if(!icon)

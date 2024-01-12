@@ -123,34 +123,30 @@
 		return res
 
 	if(owner.f_style)
-		var/decl/sprite_accessory/facial_hair_style = GET_DECL(owner.f_style)
+		var/decl/sprite_accessory/facial_hair_style = resolve_accessory_to_decl(owner.f_style)
 		if(facial_hair_style?.accessory_is_available(owner, species, bodytype))
 			res.overlays += facial_hair_style.get_cached_accessory_icon(src, owner.facial_hair_colour)
 
 	if(owner.h_style)
-		var/decl/sprite_accessory/hair/hair_style = GET_DECL(owner.h_style)
-		var/obj/item/head = owner.get_equipped_item(slot_head_str)
-		if(head && (head.flags_inv & BLOCK_HEAD_HAIR))
-			if(!(hair_style.flags & VERY_SHORT))
-				hair_style = GET_DECL(/decl/sprite_accessory/hair/short)
+		var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(owner.h_style)
 		if(hair_style?.accessory_is_available(owner, species, bodytype))
 			res.overlays += hair_style.get_cached_accessory_icon(src, owner.hair_colour)
 
 	for (var/M in markings)
-		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
-		if (mark_style.draw_target == MARKING_TARGET_HAIR)
-
-			var/mark_color
-			if (!mark_style.do_colouration && owner.h_style)
-				var/decl/sprite_accessory/hair/hair_style = GET_DECL(owner.h_style)
-				if ((~hair_style.flags & HAIR_BALD) && hair_colour)
-					mark_color = hair_colour
-				else //only baseline human skin tones; others will need species vars for coloration
-					mark_color = rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone)
-			else
-				mark_color = markings[M]
-			res.overlays |= mark_style.get_cached_accessory_icon(src, mark_color)
-			icon_cache_key += "[M][mark_color]"
+		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
+		if(!mark_style || mark_style.draw_target != MARKING_TARGET_HAIR)
+			continue
+		var/mark_color
+		if (!mark_style.do_colouration && owner.h_style)
+			var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(owner.h_style)
+			if (hair_style && (~hair_style.flags & HAIR_BALD) && hair_colour)
+				mark_color = hair_colour
+			else //only baseline human skin tones; others will need species vars for coloration
+				mark_color = rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone)
+		else
+			mark_color = markings[M]
+		res.overlays |= mark_style.get_cached_accessory_icon(src, mark_color)
+		icon_cache_key += "[M][mark_color]"
 
 	return res
 
