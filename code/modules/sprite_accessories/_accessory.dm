@@ -39,8 +39,6 @@
 	var/list/bodytype_categories_allowed
 	/// Restricts some styles to specific bodytype categories
 	var/list/bodytype_categories_denied
-	/// Category type used for this accessory.
-	var/accessory_category
 	/// Slot to check equipment for when hiding this accessory.
 	var/hidden_by_gear_slot
 	/// Flag to check equipment for when hiding this accessory.
@@ -61,8 +59,8 @@
 	var/layer_blend = ICON_OVERLAY
 	/// What bodypart tags does this marking apply to?
 	var/list/body_parts
-	/// Whether or not this marking draws over or under hair.
-	var/draw_target = MARKING_TARGET_SKIN
+	/// Set to a layer integer to apply this as an overlay over the top of hair and such.
+	var/sprite_overlay_layer
 	/// A list of sprite accessory types that are disallowed by this one being included.
 	var/list/disallows_accessories
 

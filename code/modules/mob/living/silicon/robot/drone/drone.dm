@@ -147,7 +147,7 @@
 		real_name = "[initial(name)] ([random_id(type,100,999)])"
 	SetName(real_name)
 
-/mob/living/silicon/robot/drone/get_eye_overlay()
+/mob/living/silicon/robot/drone/get_eyes_overlay()
 	var/image/ret = ..()
 	if(ret)
 		if(controlling_ai)

@@ -16,23 +16,23 @@
 
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
-	var/draw_eyes = TRUE
 	var/glowing_eyes = FALSE
 	var/can_intake_reagents = TRUE
 	var/has_lips = TRUE
 	var/forehead_graffiti
 	var/graffiti_style
 
-/obj/item/organ/external/head/proc/get_eye_overlay()
-	if(glowing_eyes || owner?.has_chemical_effect(CE_GLOWINGEYES, 1))
-		var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-		if(eyes)
-			return eyes.get_special_overlay()
-
-/obj/item/organ/external/head/proc/get_eyes()
+/obj/item/organ/external/head/proc/get_organ_eyes_overlay()
+	if(!glowing_eyes && !owner?.has_chemical_effect(CE_GLOWINGEYES, 1))
+		return
 	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-	if(eyes)
-		return eyes.get_onhead_icon()
+	var/icon/eyes_icon = eyes?.get_onhead_icon()
+	if(!eyes_icon)
+		return
+	var/cache_key = "[eyes.last_eye_cache_key]-glow"
+	if(!global.eye_icon_cache[cache_key])
+		global.eye_icon_cache[cache_key] = emissive_overlay(eyes_icon, "")
+	return global.eye_icon_cache[cache_key]
 
 /obj/item/organ/external/head/examine(mob/user)
 	. = ..()
@@ -79,7 +79,6 @@
 	. = ..()
 	has_lips = (bodytype.appearance_flags & HAS_LIPS)
 	can_intake_reagents = !(bodytype.body_flags & BODY_FLAG_NO_EAT)
-	draw_eyes = bodytype.has_eyes
 
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
 	. = ..()
@@ -90,69 +89,55 @@
 		if (burn_dam > 40)
 			disfigure(BURN)
 
-/obj/item/organ/external/head/on_update_icon()
-
-	..()
-
+/obj/item/organ/external/head/proc/get_eyes_organ()
 	if(owner)
+		return owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	return locate(/obj/item/organ/internal/eyes) in contents
 
-		// Base eye icon.
-		if(draw_eyes)
-			var/icon/I = get_eyes()
-			if(I)
-				icon_cache_key += "_eyes[owner.eye_colour]"
-				mob_icon.Blend(I, ICON_OVERLAY)
-			// Floating eyes or other effects.
-			var/image/eye_glow = get_eye_overlay()
-			if(eye_glow)
-				overlays |= eye_glow
+/obj/item/organ/external/head/get_icon_cache_key_components()
+	. = ..()
+	if(bodytype.has_eyes)
+		var/obj/item/organ/internal/eyes/eyes = get_eyes_organ()
+		if(eyes)
+			. += "_eyes[eyes?.last_eye_cache_key]"
+	if(bodytype.appearance_flags & HAS_LIPS)
+		var/lip_icon = bodytype.get_lip_icon(owner)
+		if(lip_icon)
+			. += "_lips[lip_icon][owner?.lip_color || COLOR_BLACK]"
+
+/obj/item/organ/external/head/generate_mob_icon()
+	var/icon/ret = ..()
+	// Eye icon.
+	if(bodytype.has_eyes)
+		var/obj/item/organ/internal/eyes/eyes = get_eyes_organ()
+		var/icon/eyes_icon = eyes?.get_onhead_icon()
+		if(eyes_icon)
+			ret.Blend(eyes_icon, ICON_OVERLAY)
 
 		var/lip_colour = owner?.get_lip_colour()
 		if(lip_colour && (bodytype.appearance_flags & HAS_LIPS))
 			var/lip_icon = bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi'
-			icon_cache_key += "_lips[lip_icon][owner.lip_style]"
 			var/icon/lip_appearance = new/icon(lip_icon, "lipstick_s")
-			lip_appearance.Blend(owner.lip_style, ICON_MULTIPLY)
-			mob_icon.Blend(lip_appearance, ICON_OVERLAY)
+			lip_appearance.Blend(owner?.lip_color || COLOR_BLACK, ICON_MULTIPLY)
+			ret.Blend(lip_appearance, ICON_OVERLAY)
+	return ret
 
-		overlays |= get_hair_icon()
-
-	return mob_icon
-
-/obj/item/organ/external/head/proc/get_hair_icon()
-	var/image/res = image(bodytype.icon_template,"")
+/obj/item/organ/external/head/get_mob_overlays()
+	. = ..()
+	var/image/eye_glow = get_organ_eyes_overlay()
+	if(eye_glow)
+		LAZYADD(., eye_glow)
 	if(!owner)
-		return res
-
+		return
 	var/facial_hairstyle = owner.get_facial_hairstyle()
 	if(facial_hairstyle)
 		var/decl/sprite_accessory/facial_hair_style = resolve_accessory_to_decl(facial_hairstyle)
 		if(facial_hair_style?.accessory_is_available(owner, species, bodytype))
-			res.overlays += facial_hair_style.get_cached_accessory_icon(src, owner.get_facial_hair_colour())
+			LAZYADD(., image(facial_hair_style.get_cached_accessory_icon(src, owner.get_facial_hair_colour())))
 
 	var/hairstyle = owner.get_hairstyle()
 	if(hairstyle)
 		var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(hairstyle)
 		if(hair_style?.accessory_is_available(owner, species, bodytype))
-			res.overlays += hair_style.get_cached_accessory_icon(src, owner.get_hair_colour())
 
-	for (var/M in markings)
-		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
-		if(!mark_style || mark_style.draw_target != MARKING_TARGET_HAIR)
-			continue
-		var/mark_color
-		if (!mark_style.do_colouration && hairstyle)
-			var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(hairstyle)
-			if (hair_style && (~hair_style.flags & HAIR_BALD) && hair_colour)
-				mark_color = hair_colour
-			else //only baseline human skin tones; others will need species vars for coloration
-				mark_color = rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone)
-		else
-			mark_color = markings[M]
-		res.overlays |= mark_style.get_cached_accessory_icon(src, mark_color)
-		icon_cache_key += "[M][mark_color]"
-
-	return res
-
-/obj/item/organ/external/head/no_eyes
-	draw_eyes = FALSE
+			LAZYADD(., image(hair_style.get_cached_accessory_icon(src, owner.get_hair_colour())))

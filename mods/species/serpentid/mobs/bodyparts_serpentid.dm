@@ -7,16 +7,6 @@
 /obj/item/organ/internal/eyes/insectoid/serpentid/get_innate_flash_protection()
 	return override_flash_protection
 
-/obj/item/organ/internal/eyes/insectoid/serpentid/get_special_overlay()
-	var/icon/I = get_onhead_icon()
-	if(I)
-		var/image/eye_overlay = image(I)
-		if(owner && owner.is_cloaked())
-			eye_overlay.alpha = 100
-		if(eyes_shielded)
-			eye_overlay.color = "#aaaaaa"
-		return eye_overlay
-
 /obj/item/organ/internal/eyes/insectoid/serpentid/additional_flash_effects(var/intensity)
 	if(!eyes_shielded)
 		take_internal_damage(max(0, 4 * (intensity)))
@@ -165,11 +155,19 @@
 /obj/item/organ/external/head/insectoid/serpentid
 	name = "head"
 
-/obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
-	// todo: maybe this should use its own bodytype instead of mob root bodytype?
-	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype()?.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-	if(eyes)
-		return eyes.get_special_overlay()
+/obj/item/organ/external/head/insectoid/serpentid/get_organ_eyes_overlay()
+	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	var/icon/eyes_icon = eyes?.get_onhead_icon()
+	if(!eyes_icon)
+		return
+	var/image/eye_overlay = image(eyes_icon)
+	if(owner && owner.is_cloaked())
+		eye_overlay.alpha = 100
+	if(istype(eyes, /obj/item/organ/internal/eyes/insectoid/serpentid))
+		var/obj/item/organ/internal/eyes/insectoid/serpentid/snake_eyes = eyes
+		if(snake_eyes.eyes_shielded)
+			eye_overlay.color = "#aaaaaa"
+	return eye_overlay
 
 /obj/item/organ/external/groin/insectoid/serpentid
 	name = "abdomen"

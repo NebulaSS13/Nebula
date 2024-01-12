@@ -162,12 +162,6 @@ Please contact me on #coderbus IRC. ~Carn x
 				underlay.transform = M
 	underlays = visible_underlays
 
-	var/obj/item/organ/external/head/head = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	if(head)
-		var/image/I = head.get_eye_overlay()
-		if(I)
-			add_overlay(I)
-
 /mob/living/carbon/human/proc/get_icon_scale_mult()
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
 	return list(icon_scale_x, icon_scale_y)
@@ -356,7 +350,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
 
-	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_hair_icon() : null), update_icons)
+	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_mob_overlays() : null), update_icons)
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
 	// todo: make this use bodytype
 	set_current_mob_overlay(HO_SKIN_LAYER, species.update_skin(src), update_icons)

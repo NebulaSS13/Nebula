@@ -12,7 +12,7 @@
 	abstract_type = /obj/item/organ/external
 
 	var/slowdown = 0
-	var/tmp/icon_cache_key
+	var/tmp/_icon_cache_key
 	// Strings
 	var/broken_description             // fracture string if any.
 	var/damage_state = "00"            // Modifier used for generating the on-mob damage overlay for this limb.
@@ -123,17 +123,17 @@
 		LAZYREMOVE(owner.bad_external_organs, src)
 
 /obj/item/organ/external/set_species(specie_name)
-	icon_cache_key = null
+	_icon_cache_key = null
 	. = ..()
 	skin_blend = bodytype.limb_blend
 	for(var/attack_type in species.unarmed_attacks)
 		var/decl/natural_attack/attack = GET_DECL(attack_type)
 		if(istype(attack) && (organ_tag in attack.usable_with_limbs))
 			LAZYADD(unarmed_attacks, attack_type)
-	get_icon()
+	update_icon()
 
 /obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
-	icon_cache_key = null
+	_icon_cache_key = null
 	var/decl/bodytype/old_bodytype = bodytype
 	. = ..(new_bodytype, override_material)
 	if(bodytype != old_bodytype && apply_to_internal_organs)
@@ -143,11 +143,11 @@
 		update_icon(TRUE)
 
 /obj/item/organ/external/set_dna(var/datum/dna/new_dna)
-	icon_cache_key = null
+	_icon_cache_key = null
 	return ..()
 
 /obj/item/organ/external/reset_status()
-	icon_cache_key = null
+	_icon_cache_key = null
 	return ..()
 
 /obj/item/organ/external/proc/set_bodytype_with_children(decl/bodytype/new_bodytype, override_material = null)

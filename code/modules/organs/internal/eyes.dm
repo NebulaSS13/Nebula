@@ -39,6 +39,8 @@
 /obj/item/organ/internal/eyes/proc/get_onhead_icon()
 	last_cached_eye_colour = eye_colour
 	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
+	if(!bodytype.eye_icon)
+		return
 	if(!global.eye_icon_cache[last_eye_cache_key])
 		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = "")
 		if(bodytype.eye_offset)
@@ -47,14 +49,6 @@
 			eyes_icon.Blend(last_cached_eye_colour, bodytype.eye_blend)
 		global.eye_icon_cache[last_eye_cache_key] = eyes_icon
 	return global.eye_icon_cache[last_eye_cache_key]
-
-/obj/item/organ/internal/eyes/proc/get_special_overlay()
-	var/icon/I = get_onhead_icon()
-	if(I)
-		var/cache_key = "[last_eye_cache_key]-glow"
-		if(!global.eye_icon_cache[cache_key])
-			global.eye_icon_cache[cache_key] = emissive_overlay(I, "")
-		return global.eye_icon_cache[cache_key]
 
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
