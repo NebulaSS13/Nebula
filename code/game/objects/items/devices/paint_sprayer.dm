@@ -115,6 +115,9 @@
 	else if (istype(A, /turf/simulated/wall))
 		. = paint_wall(A, user)
 
+	else if (istype(A, /obj/structure/wall_frame))
+		. = paint_wall_frame(A, user)
+
 	else if (istype(A, /turf/simulated/floor))
 		. = paint_floor(A, user, params)
 
