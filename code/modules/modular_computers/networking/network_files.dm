@@ -1,8 +1,10 @@
 /datum/computer_network/proc/find_file_by_name(filename, directory, mainframe_role = MF_ROLE_FILESERVER, list/accesses)
 	for(var/datum/extension/network_device/mainframe/M in get_mainframes_by_role(mainframe_role, accesses))
 		var/datum/computer_file/F = M.get_file(filename, directory)
-		if(F)
+		if(istype(F))
 			return F
+
+	return OS_FILE_NOT_FOUND
 
 /datum/computer_network/proc/get_all_files_of_type(file_type, mainframe_role = MF_ROLE_FILESERVER, uniques_only = FALSE, list/accesses)
 	. = list()
