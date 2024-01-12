@@ -319,12 +319,14 @@
 
 	use_toner(TONER_USAGE_PHOTO, FALSE) //photos use a lot of ink!
 	use_paper(1)
+	P.update_icon()
 
 /obj/item/stock_parts/printer/proc/print_paper_bundle(var/obj/item/paper_bundle/bundle)
 	for(var/obj/item/paper/page in bundle.pages)
 		print_paper(page)
 	for(var/obj/item/photo/picture in bundle.pages)
 		print_picture(picture)
+	bundle.update_icon()
 
 /obj/item/stock_parts/printer/proc/print_paper(var/obj/item/paper/P)
 	//Apply a greyscale filter on all stamps overlays
@@ -341,6 +343,7 @@
 
 	use_toner(TONER_USAGE_PAPER, FALSE)
 	use_paper(1)
+	P.update_icon() // reapply stamp overlays
 
 /obj/item/stock_parts/printer/proc/use_toner(var/amount, var/update_parent = TRUE)
 	if(!toner?.use_toner(amount))
