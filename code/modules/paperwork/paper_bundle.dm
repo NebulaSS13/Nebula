@@ -302,8 +302,7 @@
 	icon       = P.icon
 	icon_state = P.icon_state
 
-	for(var/overlay in P.overlays)
-		add_overlay(overlay)
+	copy_overlays(P)
 
 	var/paper_count = 0
 	var/photo_count = 0
