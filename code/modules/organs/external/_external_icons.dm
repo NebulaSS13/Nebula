@@ -46,14 +46,15 @@ var/global/list/limb_icon_cache = list()
 	. = ..()
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)
-		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
-		if (mark_style.draw_target == MARKING_TARGET_SKIN)
-			var/mark_color = markings[M]
-			var/icon/mark_s = mark_style.get_cached_accessory_icon(src, mark_color)
-			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
-			add_overlay(mark_s) //So when it's not on your body, it has icons
-			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-			icon_cache_key += "[M][mark_color]"
+		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
+		if(!mark_style || mark_style.draw_target != MARKING_TARGET_SKIN)
+			continue
+		var/mark_color = markings[M]
+		var/icon/mark_s = mark_style.get_cached_accessory_icon(src, mark_color)
+		//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
+		add_overlay(mark_s) //So when it's not on your body, it has icons
+		mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
+		icon_cache_key += "[M][mark_color]"
 
 /obj/item/organ/external/proc/update_limb_icon_file()
 	if(!BP_IS_PROSTHETIC(src) && (status & ORGAN_MUTATED))
@@ -73,14 +74,15 @@ var/global/list/limb_icon_cache = list()
 
 	//Body markings, does not include head, duplicated (sadly) above.
 	for(var/M in markings)
-		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
-		if (mark_style.draw_target == MARKING_TARGET_SKIN)
-			var/mark_color = markings[M]
-			var/icon/mark_s = mark_style.get_cached_accessory_icon(src, mark_color)
-			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
-			add_overlay(mark_s) //So when it's not on your body, it has icons
-			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-			icon_cache_key += "[M][mark_color]"
+		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
+		if(!mark_style || mark_style.draw_target != MARKING_TARGET_SKIN)
+			continue
+		var/mark_color = markings[M]
+		var/icon/mark_s = mark_style.get_cached_accessory_icon(src, mark_color)
+		//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
+		add_overlay(mark_s) //So when it's not on your body, it has icons
+		mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
+		icon_cache_key += "[M][mark_color]"
 
 	if(render_alpha < 255)
 		mob_icon += rgb(,,,render_alpha)
@@ -164,3 +166,14 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 		. = 2
 	else
 		. = 3
+
+/obj/item/organ/external/proc/resolve_accessory_to_decl(var/decl/sprite_accessory/accessory_style)
+	if(ispath(accessory_style))
+		accessory_style = GET_DECL(accessory_style)
+	// Check if this style is permitted for this species, period.
+	if(!accessory_style.accessory_is_available(owner, species, bodytype))
+		return null
+	// Check if we are concealed (long hair under a hat for example).
+	if(accessory_style.is_hidden(src))
+		return accessory_style.get_hidden_substitute()
+	return accessory_style
