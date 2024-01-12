@@ -22,6 +22,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/bodytype/default_bodytype
 	var/base_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 
+	// Lists of accessory types for modpack modification of accessory restrictions.
+	// These lists are pretty broad and indiscriminate in application, don't use
+	// them for fine detail restriction/allowing if you can avoid it.
+	var/list/allow_specific_sprite_accessories
+	var/list/disallow_specific_sprite_accessories
+
 	var/list/blood_types = list(
 		/decl/blood_type/aplus,
 		/decl/blood_type/aminus,
@@ -286,6 +292,42 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	for(var/bodytype in available_bodytypes)
 		available_bodytypes -= bodytype
 		available_bodytypes += GET_DECL(bodytype)
+
+	// Update sprite accessory lists for these species.
+	for(var/accessory_type in allow_specific_sprite_accessories)
+		var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
+		// If this accessory is species restricted, add us to the list.
+		if(accessory.species_allowed)
+			accessory.species_allowed |= name
+		if(!isnull(accessory.body_flags_allowed))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_allowed |= bodytype.body_flags
+		if(!isnull(accessory.body_flags_denied))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_denied &= ~bodytype.body_flags
+		if(accessory.bodytype_categories_allowed)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed |= bodytype.bodytype_category
+		if(accessory.bodytype_categories_denied)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed -= bodytype.bodytype_category
+
+	for(var/accessory_type in disallow_specific_sprite_accessories)
+		var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
+		if(accessory.species_allowed)
+			accessory.species_allowed -= name
+		if(!isnull(accessory.body_flags_allowed))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_allowed &= ~bodytype.body_flags
+		if(!isnull(accessory.body_flags_denied))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_denied |= bodytype.body_flags
+		if(accessory.bodytype_categories_allowed)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed -= bodytype.bodytype_category
+		if(accessory.bodytype_categories_denied)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed |= bodytype.bodytype_category
 
 	if(ispath(default_bodytype))
 		default_bodytype = GET_DECL(default_bodytype)
