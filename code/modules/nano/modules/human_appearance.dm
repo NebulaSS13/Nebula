@@ -41,7 +41,7 @@
 			return owner.change_skin_tone(new_s_tone)
 
 	if(href_list["skin_color"] && can_change_skin_color())
-		var/new_skin = input(usr, "Choose your character's skin colour: ", "Skin Color", owner.skin_colour) as color|null
+		var/new_skin = input(usr, "Choose your character's skin colour: ", "Skin Color", owner.get_skin_colour()) as color|null
 		if(new_skin && can_still_topic(state) && owner.change_skin_color(new_skin))
 			update_dna()
 			return TRUE
@@ -72,7 +72,7 @@
 
 	if(href_list["eye_color"])
 		if(can_change(APPEARANCE_EYE_COLOR))
-			var/new_eyes = input("Please select eye color.", "Eye Color", owner.eye_colour) as color|null
+			var/new_eyes = input("Please select eye color.", "Eye Color", owner.get_eye_colour()) as color|null
 			if(new_eyes && can_still_topic(state) && owner.change_eye_color(new_eyes))
 				update_dna()
 				return TRUE

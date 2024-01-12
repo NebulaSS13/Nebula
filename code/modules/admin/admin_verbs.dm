@@ -776,7 +776,7 @@ var/global/list/admin_verbs_mod = list(
 
 	var/new_skin = input("Please select body color.", "Character Generation") as color
 	if(new_skin)
-		M.skin_colour = new_skin
+		M.set_skin_colour(new_skin, skip_update = TRUE)
 
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
 

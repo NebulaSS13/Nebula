@@ -280,7 +280,7 @@ var/global/list/damage_icon_parts = list()
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi',"blank")
 
-	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][skin_colour]"
+	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][get_skin_colour()]"
 	if(lip_style)
 		icon_key += "[lip_style]"
 	else

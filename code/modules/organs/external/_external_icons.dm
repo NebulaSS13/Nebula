@@ -22,7 +22,7 @@ var/global/list/limb_icon_cache = list()
 	if(!isnull(human.skin_tone) && bodytype?.appearance_flags & HAS_A_SKIN_TONE)
 		skin_tone = human.skin_tone
 	if(bodytype.appearance_flags & HAS_SKIN_COLOR)
-		skin_colour = human.skin_colour
+		skin_colour = human.get_skin_colour()
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	skin_tone = null

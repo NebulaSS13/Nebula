@@ -33,8 +33,9 @@ var/global/list/wrapped_species_by_ref = list()
 
 /decl/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(monochromatic)
-		H.set_hair_colour(H.skin_colour, skip_update = TRUE)
-		H.set_facial_hair_colour(H.skin_colour, skip_update = TRUE)
+		var/skin_colour = H.get_skin_colour()
+		H.set_hair_colour(skin_colour, skip_update = TRUE)
+		H.set_facial_hair_colour(skin_colour, skip_update = TRUE)
 	..()
 
 /decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)

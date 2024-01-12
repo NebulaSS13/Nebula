@@ -92,7 +92,7 @@
 /obj/item/organ/internal/eyes/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
 	// Apply our eye colour to the target.
 	if(istype(target) && eye_colour)
-		target.eye_colour = eye_colour
+		target.set_eye_colour(eye_colour, skip_update = TRUE)
 		target.update_eyes(update_icons = update_icon)
 	if(owner && BP_IS_PROSTHETIC(src))
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color

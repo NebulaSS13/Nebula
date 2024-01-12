@@ -445,7 +445,7 @@ var/global/list/bodytypes_by_category = list()
 	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
 		E.skin_colour = base_color
 
-	mannequin.eye_colour = base_eye_color
+	mannequin.set_eye_colour(base_eye_color, skip_update = TRUE)
 	mannequin.set_hair_colour(base_hair_color, skip_update = TRUE)
 	mannequin.set_facial_hair_colour(base_hair_color, skip_update = TRUE)
 	set_default_hair(mannequin)
