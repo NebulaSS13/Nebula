@@ -106,11 +106,13 @@
 		else if (istype(A, /turf/simulated/wall))
 			new_color = pick_color_from_wall(A, user)
 		else if (istype(A, /obj/structure/wall_frame))
-			var/obj/structure/wall_frame/WF = A
-			new_color = pick_color_from_wall_frame(WF, user)
+			new_color = pick_color_from_wall_frame(A, user)
 		else
 			new_color = A.get_color()
-		change_color(new_color, user)
+		if(!new_color)
+			to_chat(user, SPAN_NOTICE("You fail to scan a color from \the [A]."))
+		else
+			change_color(new_color, user)
 
 	else if (istype(A, /turf/simulated/wall))
 		. = paint_wall(A, user)
