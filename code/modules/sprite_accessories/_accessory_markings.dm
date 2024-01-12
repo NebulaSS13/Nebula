@@ -3,31 +3,7 @@
 	icon = 'icons/mob/human_races/species/default_markings.dmi'
 	do_colouration = 1 //Almost all of them have it, COLOR_ADD
 	abstract_type = /decl/sprite_accessory/marking
-	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
-	//like IPC optics overlay stuff.
-	var/layer_blend = ICON_OVERLAY
-	var/body_parts = list() //A list of bodyparts this covers, in organ_tag defines
-	//Reminder: BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN,BP_HEAD
-	var/draw_target = MARKING_TARGET_SKIN
-	var/list/disallows = list() //A list of other marking types to ban from adding when this marking is already added
-	var/list/icons = list()
-	var/mask_to_bodypart = TRUE
-
-/decl/sprite_accessory/marking/proc/get_cached_marking_icon(var/decl/bodytype/bodytype, var/bodypart, var/color = COLOR_WHITE)
-	LAZYINITLIST(icons[bodytype])
-	LAZYINITLIST(icons[bodytype][bodypart])
-	if(!icons[bodytype][bodypart][color])
-		var/icon/marking_icon = icon(icon, icon_state) // make a new one to avoid mutating the base
-		if(mask_to_bodypart)
-			marking_icon.Blend(get_limb_mask_for(bodytype, bodypart), ICON_MULTIPLY)
-		marking_icon.Blend(color, blend)
-		icons[bodytype][bodypart][color] = marking_icon
-	return icons[bodytype][bodypart][color]
-
-/decl/sprite_accessory/marking/validate()
-	. = ..()
-	if(!check_state_in_icon(icon_state, icon))
-		. += "missing icon state \"[icon_state]\" in [icon]"
+	mask_to_bodypart = TRUE
 
 /decl/sprite_accessory/marking/tat_hive
 	name = "Tattoo (Hive, Back)"

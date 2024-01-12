@@ -125,10 +125,7 @@
 	if(owner.f_style)
 		var/decl/sprite_accessory/facial_hair_style = GET_DECL(owner.f_style)
 		if(facial_hair_style?.accessory_is_available(owner, species, bodytype))
-			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = facial_hair_style.icon_state)
-			if(owner.facial_hair_colour && facial_hair_style.do_colouration)
-				facial_s.Blend(owner.facial_hair_colour, facial_hair_style.blend)
-			res.overlays |= facial_s
+			res.overlays += facial_hair_style.get_cached_accessory_icon(src, owner.facial_hair_colour)
 
 	if(owner.h_style)
 		var/decl/sprite_accessory/hair/hair_style = GET_DECL(owner.h_style)
@@ -137,10 +134,7 @@
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GET_DECL(/decl/sprite_accessory/hair/short)
 		if(hair_style?.accessory_is_available(owner, species, bodytype))
-			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = hair_style.icon_state)
-			if(hair_style.do_colouration && hair_colour)
-				hair_s.Blend(hair_colour, hair_style.blend)
-			res.overlays |= hair_s
+			res.overlays += hair_style.get_cached_accessory_icon(src, owner.hair_colour)
 
 	for (var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
@@ -155,7 +149,7 @@
 					mark_color = rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone)
 			else
 				mark_color = markings[M]
-			res.overlays |= mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			res.overlays |= mark_style.get_cached_accessory_icon(src, mark_color)
 			icon_cache_key += "[M][mark_color]"
 
 	return res

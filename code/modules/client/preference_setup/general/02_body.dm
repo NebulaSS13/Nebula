@@ -383,7 +383,8 @@
 	var/list/disallowed_markings = list()
 	for (var/M in existing_markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
-		disallowed_markings |= mark_style.disallows
+		if(length(mark_style.disallows_accessories))
+			disallowed_markings |= mark_style.disallows_accessories
 	var/list/all_markings = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
 	for(var/M in all_markings)
 		if(M in existing_markings)
