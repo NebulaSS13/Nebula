@@ -94,7 +94,7 @@
 	name = "circuitboard (autoclave)"
 	build_path = /obj/machinery/washing_machine/autoclave
 	board_type = "machine"
-	origin_tech = "{'engineering':3, 'biotech':2}"
+	origin_tech = @'{"engineering":3, "biotech":2}'
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/micro_laser = 1,

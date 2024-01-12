@@ -1,7 +1,7 @@
 /obj/item/mech_equipment/mounted_system/rcd
 	icon_state = "mech_rcd"
 	holding = /obj/item/rcd/mounted
-	origin_tech = "{'engineering':4,'materials':3,'powerstorage':1}"
+	origin_tech = @'{"engineering":4,"materials":3,"powerstorage":1}'
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
 	material = /decl/material/solid/metal/steel
@@ -42,7 +42,7 @@
 	holding = /obj/item/chems/spray/extinguisher/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
-	origin_tech = "{'engineering':1,'materials':1}"
+	origin_tech = @'{"engineering":1,"materials":1}'
 
 /obj/item/mech_equipment/atmos_shields
 	icon_state = "mech_atmoshield_off"
@@ -51,7 +51,7 @@
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
 	equipment_delay = 0.25 SECONDS
-	origin_tech = "{'engineering':2,'powerstorage':2,'materials':3}"
+	origin_tech = @'{"engineering":2,"powerstorage":2,"materials":3}'
 	var/list/segments
 	var/current_mode = 0  //0 barrier, 1 bubble
 	var/shield_range = 2
