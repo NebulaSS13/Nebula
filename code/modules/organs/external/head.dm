@@ -125,7 +125,7 @@
 	if(owner.f_style)
 		var/decl/sprite_accessory/facial_hair_style = GET_DECL(owner.f_style)
 		if(facial_hair_style?.accessory_is_available(owner, species, bodytype))
-			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
+			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = facial_hair_style.icon_state)
 			if(owner.facial_hair_colour && facial_hair_style.do_colouration)
 				facial_s.Blend(owner.facial_hair_colour, facial_hair_style.blend)
 			res.overlays |= facial_s
@@ -137,7 +137,7 @@
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GET_DECL(/decl/sprite_accessory/hair/short)
 		if(hair_style?.accessory_is_available(owner, species, bodytype))
-			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
+			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = hair_style.icon_state)
 			if(hair_style.do_colouration && hair_colour)
 				hair_s.Blend(hair_colour, hair_style.blend)
 			res.overlays |= hair_s

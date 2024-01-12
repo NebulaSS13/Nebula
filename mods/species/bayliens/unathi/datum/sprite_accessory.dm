@@ -90,7 +90,7 @@
 // FACIAL
 /decl/sprite_accessory/facial_hair/lizard
 	name = "Lizard Horn Chin"
-	icon = 'mods/species/bayliens/unathi/icons/facial_hair.dmi'
+	icon = 'mods/species/bayliens/unathi/icons/facial.dmi'
 	icon_state = "facial_chinhorns"
 	species_allowed = list(SPECIES_LIZARD)
 	blend = ICON_MULTIPLY
