@@ -104,6 +104,7 @@
 
 	if(update_icon)
 		mannequin.update_icon()
+		mannequin.compile_overlays()
 
 /datum/preferences/proc/update_preview_icon()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)

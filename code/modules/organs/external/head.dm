@@ -25,8 +25,8 @@
 /obj/item/organ/external/head/proc/get_organ_eyes_overlay()
 	if(!glowing_eyes && !owner?.has_chemical_effect(CE_GLOWINGEYES, 1))
 		return
-	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-	var/icon/eyes_icon = eyes?.get_onhead_icon()
+	var/obj/item/organ/internal/eyes/eyes = get_eyes_organ()
+	var/icon/eyes_icon = eyes?.get_onhead_icon() // refreshes cache key
 	if(!eyes_icon)
 		return
 	var/cache_key = "[eyes.last_eye_cache_key]-glow"
@@ -90,6 +90,7 @@
 			disfigure(BURN)
 
 /obj/item/organ/external/head/proc/get_eyes_organ()
+	RETURN_TYPE(/obj/item/organ/internal/eyes)
 	if(owner)
 		return owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	return locate(/obj/item/organ/internal/eyes) in contents
@@ -97,20 +98,17 @@
 /obj/item/organ/external/head/get_icon_cache_key_components()
 	. = ..()
 	if(bodytype.has_eyes)
-		var/obj/item/organ/internal/eyes/eyes = get_eyes_organ()
-		if(eyes)
-			. += "_eyes[eyes?.last_eye_cache_key]"
+		. += "_eyes[get_eyes_organ()?.eye_colour][bodytype.eye_icon]"
 	if(bodytype.appearance_flags & HAS_LIPS)
 		var/lip_icon = bodytype.get_lip_icon(owner)
 		if(lip_icon)
-			. += "_lips[lip_icon][owner?.lip_color || COLOR_BLACK]"
+			. += "_lips[lip_icon][owner?.lip_color || "skip"]"
 
 /obj/item/organ/external/head/generate_mob_icon()
 	var/icon/ret = ..()
 	// Eye icon.
 	if(bodytype.has_eyes)
-		var/obj/item/organ/internal/eyes/eyes = get_eyes_organ()
-		var/icon/eyes_icon = eyes?.get_onhead_icon()
+		var/icon/eyes_icon = get_eyes_organ()?.get_onhead_icon()
 		if(eyes_icon)
 			ret.Blend(eyes_icon, ICON_OVERLAY)
 

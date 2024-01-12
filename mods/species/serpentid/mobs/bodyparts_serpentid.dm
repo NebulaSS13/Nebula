@@ -156,7 +156,7 @@
 	name = "head"
 
 /obj/item/organ/external/head/insectoid/serpentid/get_organ_eyes_overlay()
-	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
+	var/obj/item/organ/internal/eyes/eyes = get_eyes_organ()
 	var/icon/eyes_icon = eyes?.get_onhead_icon()
 	if(!eyes_icon)
 		return

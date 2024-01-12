@@ -256,7 +256,7 @@ var/global/list/damage_icon_parts = list()
 				LAZYADD(bandage_overlays, image(bandage_icon, "[O.icon_state][bandage_level]"))
 	set_current_mob_overlay(HO_DAMAGE_LAYER, bandage_overlays, update_icons)
 
-/mob/living/carbon/human/proc/get_icon_key()
+/mob/living/carbon/human/proc/get_human_icon_cache_key()
 	. = list()
 	for(var/limb_tag in global.all_limb_tags)
 		. += "[limb_tag]_"
@@ -265,7 +265,7 @@ var/global/list/damage_icon_parts = list()
 			. += "skip"
 			continue
 		part.update_icon() // This wil regenerate their icon if needed, and more importantly set their cache key.
-		. += part.icon_cache_key
+		. += part._icon_cache_key
 	. += "husked_[!!is_husked()]"
 	. = JOINTEXT(.)
 
@@ -277,7 +277,7 @@ var/global/list/damage_icon_parts = list()
 		return // Something is trying to update our body pre-init (probably loading a preview image during world startup).
 
 	var/decl/bodytype/root_bodytype = get_bodytype()
-	var/icon_key = get_icon_key()
+	var/icon_key = get_human_icon_cache_key()
 
 	stand_icon = global.human_icon_cache[icon_key]
 	if(!stand_icon)

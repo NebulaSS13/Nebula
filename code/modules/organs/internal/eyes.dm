@@ -53,10 +53,19 @@
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
 		return
+	// Update our eye colour.
+	var/new_eye_colour
 	if(owner.has_chemical_effect(CE_GLOWINGEYES, 1))
-		eye_colour = "#75bdd6" // blue glow, hardcoded for now.
+		new_eye_colour = "#75bdd6" // blue glow, hardcoded for now.
 	else
-		eye_colour = owner.get_eye_colour()
+		new_eye_colour = owner.get_eye_colour()
+
+	if(new_eye_colour && eye_colour != new_eye_colour)
+		eye_colour = new_eye_colour
+		// Clear the head cache key so they can update their cached icon.
+		var/obj/item/organ/external/head/head = GET_EXTERNAL_ORGAN(owner, BP_HEAD)
+		if(istype(head))
+			head._icon_cache_key = null
 
 /obj/item/organ/internal/eyes/take_internal_damage(amount, var/silent=0)
 	var/oldbroken = is_broken()
