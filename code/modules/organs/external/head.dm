@@ -95,13 +95,13 @@
 	..()
 
 	if(owner)
+
 		// Base eye icon.
 		if(draw_eyes)
 			var/icon/I = get_eyes()
 			if(I)
-				overlays |= I
+				icon_cache_key += "_eyes[owner.eye_colour]"
 				mob_icon.Blend(I, ICON_OVERLAY)
-
 			// Floating eyes or other effects.
 			var/image/eye_glow = get_eye_overlay()
 			if(eye_glow)
@@ -109,10 +109,11 @@
 
 		var/lip_colour = owner?.get_lip_colour()
 		if(lip_colour && (bodytype.appearance_flags & HAS_LIPS))
-			var/icon/lip_icon = new/icon(bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")
-			lip_icon.Blend(lip_colour, ICON_MULTIPLY)
-			overlays |= lip_icon
-			mob_icon.Blend(lip_icon, ICON_OVERLAY)
+			var/lip_icon = bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi'
+			icon_cache_key += "_lips[lip_icon][owner.lip_style]"
+			var/icon/lip_appearance = new/icon(lip_icon, "lipstick_s")
+			lip_appearance.Blend(owner.lip_style, ICON_MULTIPLY)
+			mob_icon.Blend(lip_appearance, ICON_OVERLAY)
 
 		overlays |= get_hair_icon()
 

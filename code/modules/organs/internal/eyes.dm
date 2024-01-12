@@ -36,29 +36,25 @@
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/proc/get_eye_cache_key()
+/obj/item/organ/internal/eyes/proc/get_onhead_icon()
 	last_cached_eye_colour = eye_colour
 	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
-	return last_eye_cache_key
-
-/obj/item/organ/internal/eyes/proc/get_onhead_icon()
-	var/cache_key = get_eye_cache_key()
-	if(!human_icon_cache[cache_key])
+	if(!global.eye_icon_cache[last_eye_cache_key])
 		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = "")
 		if(bodytype.eye_offset)
 			eyes_icon.Shift(NORTH, bodytype.eye_offset)
 		if(bodytype.apply_eye_colour)
 			eyes_icon.Blend(last_cached_eye_colour, bodytype.eye_blend)
-		human_icon_cache[cache_key] = eyes_icon
-	return human_icon_cache[cache_key]
+		global.eye_icon_cache[last_eye_cache_key] = eyes_icon
+	return global.eye_icon_cache[last_eye_cache_key]
 
 /obj/item/organ/internal/eyes/proc/get_special_overlay()
 	var/icon/I = get_onhead_icon()
 	if(I)
 		var/cache_key = "[last_eye_cache_key]-glow"
-		if(!human_icon_cache[cache_key])
-			human_icon_cache[cache_key] = emissive_overlay(I, "")
-		return human_icon_cache[cache_key]
+		if(!global.eye_icon_cache[cache_key])
+			global.eye_icon_cache[cache_key] = emissive_overlay(I, "")
+		return global.eye_icon_cache[cache_key]
 
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)

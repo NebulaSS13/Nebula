@@ -13,8 +13,9 @@ var/global/list/_limb_mask_cache = list()
 	TODO: Proper documentation
 	icon_key is [bodytype.get_icon_cache_uid(src)][g][husk][skin_tone]
 */
-var/global/list/human_icon_cache = list()
-var/global/list/tail_icon_cache = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
+var/global/list/human_icon_cache    = list()
+var/global/list/eye_icon_cache      = list()
+var/global/list/tail_icon_cache     = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
 var/global/list/light_overlay_cache = list()
 
 /proc/overlay_image(icon,icon_state,color,flags)
@@ -261,64 +262,35 @@ var/global/list/damage_icon_parts = list()
 				LAZYADD(bandage_overlays, image(bandage_icon, "[O.icon_state][bandage_level]"))
 	set_current_mob_overlay(HO_DAMAGE_LAYER, bandage_overlays, update_icons)
 
+/mob/living/carbon/human/proc/get_icon_key()
+	. = list()
+	for(var/limb_tag in global.all_limb_tags)
+		. += "[limb_tag]_"
+		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, limb_tag)
+		if(isnull(part) || part.skip_body_icon_draw)
+			. += "skip"
+			continue
+		part.update_icon() // This wil regenerate their icon if needed, and more importantly set their cache key.
+		. += part.icon_cache_key
+	. += "husked_[!!is_husked()]"
+	. = JOINTEXT(.)
+
 //BASE MOB SPRITE
-/mob/living/carbon/human/update_body(var/update_icons=1)
+/mob/living/carbon/human/update_body(var/update_icons = TRUE)
 
 	var/list/limbs = get_external_organs()
 	if(!LAZYLEN(limbs))
 		return // Something is trying to update our body pre-init (probably loading a preview image during world startup).
 
-	var/husk_color_mod = rgb(96,88,80)
-	var/husk = is_husked()
-
-	//CACHING: Generate an index key from visible bodyparts.
-	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
-
-	//Create a new, blank icon for our mob to use.
-	if(stand_icon)
-		qdel(stand_icon)
 	var/decl/bodytype/root_bodytype = get_bodytype()
-	stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi',"blank")
+	var/icon_key = get_icon_key()
 
-	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][get_skin_colour()]"
-	var/lips = get_lip_colour()
-	if(lips)
-		icon_key += "lips_[lips]"
-	else
-		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = get_organ((root_bodytype.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
-
-	for(var/limb_tag in global.all_limb_tags)
-		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, limb_tag)
-		if(isnull(part) || part.skip_body_icon_draw)
-			icon_key += "0"
-			continue
-		for(var/M in part.markings)
-			icon_key += "[M][part.markings[M]]"
-		if(part)
-			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)][part.render_alpha]"
-			icon_key += "[part.skin_tone]"
-			if(part.skin_colour)
-				icon_key += "[part.skin_colour]"
-				icon_key += "[part.skin_blend]"
-			for(var/M in part.markings)
-				icon_key += "[M][part.markings[M]]"
-		if(!BP_IS_PROSTHETIC(part) && (part.status & ORGAN_DEAD))
-			icon_key += "2"
-		else
-			icon_key += "1"
-
-	icon_key = "[icon_key][husk ? 1 : 0]"
-
-	var/icon/base_icon
-	if(human_icon_cache[icon_key])
-		base_icon = human_icon_cache[icon_key]
-	else
+	stand_icon = global.human_icon_cache[icon_key]
+	if(!stand_icon)
 		//BEGIN CACHED ICON GENERATION.
-		base_icon = icon(root_bodytype.icon_template)
+		stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi', "blank")
 		for(var/obj/item/organ/external/part in limbs)
-			var/icon/temp = part.get_icon()
+			var/icon/temp = part.icon // Grabbing the icon excludes overlays.
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
@@ -329,34 +301,28 @@ var/global/list/damage_icon_parts = list()
 					temp2.Insert(new /icon(temp,dir=EAST),dir=EAST)
 				if(!(part.icon_position & RIGHT))
 					temp2.Insert(new /icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_OVERLAY)
+				stand_icon.Blend(temp2, ICON_OVERLAY)
 				if(part.icon_position & LEFT)
 					temp2.Insert(new /icon(temp,dir=EAST),dir=EAST)
 				if(part.icon_position & RIGHT)
 					temp2.Insert(new /icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_UNDERLAY)
+				stand_icon.Blend(temp2, ICON_UNDERLAY)
 			else if(part.icon_position & UNDER)
-				base_icon.Blend(temp, ICON_UNDERLAY)
+				stand_icon.Blend(temp, ICON_UNDERLAY)
 			else
-				base_icon.Blend(temp, ICON_OVERLAY)
-
-		if(husk)
-			base_icon.ColorTone(husk_color_mod)
-
+				stand_icon.Blend(temp, ICON_OVERLAY)
 		//Handle husk overlay.
-		if(husk)
+		if(is_husked())
 			var/husk_icon = root_bodytype.get_husk_icon(src)
 			if(husk_icon)
-				var/icon/mask = new(base_icon)
+				var/icon/mask = new(stand_icon)
 				var/icon/husk_over = new(husk_icon, "")
 				mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
 				husk_over.Blend(mask, ICON_ADD)
-				base_icon.Blend(husk_over, ICON_OVERLAY)
-
-		human_icon_cache[icon_key] = base_icon
-
-	//END CACHED ICON GENERATION.
-	stand_icon.Blend(base_icon,ICON_OVERLAY)
+				stand_icon.Blend(husk_over, ICON_OVERLAY)
+			else
+				stand_icon.ColorTone("#605850")
+		global.human_icon_cache[icon_key] = stand_icon
 
 	//tail
 	update_tail_showing(0)

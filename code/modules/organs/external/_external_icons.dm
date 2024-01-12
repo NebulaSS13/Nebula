@@ -66,10 +66,11 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
 	. = ..()
-	icon_state = organ_tag
-	icon_cache_key = "[icon_state]_[species.name][bodytype.name][render_alpha]"
-
 	update_limb_icon_file()
+
+	icon_state = organ_tag
+	icon_cache_key = "[icon_state]_[species.name]_[bodytype.name]_[render_alpha]_[icon]"
+
 	mob_icon = apply_colouration(new/icon(icon, icon_state))
 
 	//Body markings, does not include head, duplicated (sadly) above.
