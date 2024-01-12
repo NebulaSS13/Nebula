@@ -270,7 +270,7 @@ var/global/list/damage_icon_parts = list()
 		if(isnull(part) || part.skip_body_icon_draw)
 			. += "skip"
 			continue
-		part.cached_update_icon() // This wil regenerate their icon if needed, and more importantly set their cache key.
+		part.update_icon() // This wil regenerate their icon if needed, and more importantly set their cache key.
 		. += part.icon_cache_key
 	. += "husked_[!!is_husked()]"
 	. = JOINTEXT(.)

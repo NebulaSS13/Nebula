@@ -66,19 +66,9 @@ var/global/list/limb_icon_cache = list()
 	else
 		icon = bodytype.get_base_icon(owner)
 
-/obj/item/organ/external/proc/cached_update_icon()
-	if(!icon_cache_key)
-		update_icon()
-
-/obj/item/organ/external/on_update_icon(var/regenerate = 0)
-	. = ..()
-	update_limb_icon_file()
-
-	icon_state = organ_tag
-	icon_cache_key = "[icon_state]_[species.name]_[bodytype.name]_[render_alpha]_[icon]"
-
-	mob_icon = apply_colouration(new/icon(icon, icon_state))
-
+var/global/list/organ_icon_cache = list()
+/obj/item/organ/external/proc/generate_mob_icon()
+	var/icon/ret = apply_colouration(new/icon(icon, icon_state))
 	//Body markings, does not include head, duplicated (sadly) above.
 	for(var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
@@ -90,15 +80,24 @@ var/global/list/limb_icon_cache = list()
 		add_overlay(mark_s) //So when it's not on your body, it has icons
 		mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
 		icon_cache_key += "[M][mark_color]"
-
 	if(render_alpha < 255)
-		mob_icon += rgb(,,,render_alpha)
+		ret += rgb(,,,render_alpha)
+	global.organ_icon_cache[icon_cache_key] = mob_icon
+	return ret
 
-	icon = mob_icon
+/obj/item/organ/external/on_update_icon()
+	. = ..()
+	update_limb_icon_file()
+	if(icon_state != organ_tag)
+		icon_state = organ_tag
+	icon_cache_key = "[icon_state]_[species.name]_[bodytype.name]_[render_alpha]_[icon]"
+	var/icon/mob_icon = global.organ_icon_cache[icon_cache_key] || generate_mob_icon()
+	if(icon != mob_icon)
+		icon = mob_icon
 
 /obj/item/organ/external/proc/get_icon()
 	update_icon()
-	return mob_icon
+	return icon
 
 // Returns an image for use by the human health dolly HUD element.
 // If the limb is in pain, it will be used as a minimum damage

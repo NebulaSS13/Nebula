@@ -32,7 +32,6 @@
 	// Appearance vars.
 	var/body_part = null               // Part flag
 	var/icon_position = 0              // Used in mob overlay layering calculations.
-	var/icon/mob_icon                  // Cached icon for use in mob overlays.
 	var/skin_tone                      // Skin tone.
 	var/skin_colour                    // skin colour
 	var/skin_blend = ICON_ADD          // How the skin colour is applied.
