@@ -17,6 +17,18 @@
 			add_overlay(A)
 	try_refresh_visible_overlays()
 
+/mob/living/proc/get_skin_colour()
+	return
+
+/mob/living/proc/set_skin_colour(var/new_color)
+	return
+
+/mob/living/proc/get_eye_colour()
+	return
+
+/mob/living/proc/set_eye_colour(var/new_color)
+	return
+
 /mob/living/proc/get_hairstyle()
 	return
 
@@ -27,6 +39,18 @@
 	return
 
 /mob/living/proc/set_facial_hairstyle(var/new_hairstyle)
+	return
+
+/mob/living/proc/get_hair_colour()
+	return
+
+/mob/living/proc/set_hair_colour(var/new_color, var/skip_update = FALSE)
+	return
+
+/mob/living/proc/get_facial_hair_colour()
+	return
+
+/mob/living/proc/set_facial_hair_colour(var/new_color, var/skip_update = FALSE)
 	return
 
 /mob/living/get_all_current_mob_overlays()

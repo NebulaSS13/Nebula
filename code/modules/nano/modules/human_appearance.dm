@@ -53,7 +53,7 @@
 			return TRUE
 
 	if(href_list["hair_color"] && can_change(APPEARANCE_HAIR_COLOR))
-		var/new_hair = input("Please select hair color.", "Hair Color", owner.hair_colour) as color|null
+		var/new_hair = input("Please select hair color.", "Hair Color", owner.get_hair_colour()) as color|null
 		if(new_hair && can_still_topic(state) && owner.change_hair_color(new_hair))
 			update_dna()
 			return TRUE
@@ -65,7 +65,7 @@
 			return TRUE
 
 	if(href_list["facial_hair_color"] && can_change(APPEARANCE_FACIAL_HAIR_COLOR))
-		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", owner.facial_hair_colour) as color|null
+		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", owner.get_facial_hair_colour()) as color|null
 		if(new_facial && can_still_topic(state) && owner.change_facial_hair_color(new_facial))
 			update_dna()
 			return TRUE

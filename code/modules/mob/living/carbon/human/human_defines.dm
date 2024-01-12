@@ -1,11 +1,5 @@
 /mob/living/carbon/human
 
-	var/hair_colour
-	var/facial_hair_colour
-
-	var/skin_colour
-	var/eye_colour
-
 	var/regenerate_body_icon = FALSE // If true, the next icon update will also regenerate the body.
 
 	var/skin_tone = 0  //Skin tone

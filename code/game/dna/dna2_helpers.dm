@@ -143,13 +143,14 @@
 
 	dna.check_integrity()
 
-	fingerprint        = dna.fingerprint
-	unique_enzymes     = dna.unique_enzymes
-	hair_colour        = rgb(dna.GetUIValueRange(DNA_UI_HAIR_R,255),  dna.GetUIValueRange(DNA_UI_HAIR_G,255),  dna.GetUIValueRange(DNA_UI_HAIR_B,255))
-	facial_hair_colour = rgb(dna.GetUIValueRange(DNA_UI_BEARD_R,255), dna.GetUIValueRange(DNA_UI_BEARD_G,255), dna.GetUIValueRange(DNA_UI_BEARD_B,255))
-	skin_colour        = rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255))
-	eye_colour         = rgb(dna.GetUIValueRange(DNA_UI_EYES_R,255),  dna.GetUIValueRange(DNA_UI_EYES_G,255),  dna.GetUIValueRange(DNA_UI_EYES_B,255))
-	skin_tone          = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
+	fingerprint          = dna.fingerprint
+	unique_enzymes       = dna.unique_enzymes
+	set_skin_colour(       rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255)))
+	set_eye_colour(        rgb(dna.GetUIValueRange(DNA_UI_EYES_R,255),  dna.GetUIValueRange(DNA_UI_EYES_G,255),  dna.GetUIValueRange(DNA_UI_EYES_B,255)))
+	set_hair_colour(       rgb(dna.GetUIValueRange(DNA_UI_HAIR_R,255),  dna.GetUIValueRange(DNA_UI_HAIR_G,255),  dna.GetUIValueRange(DNA_UI_HAIR_B,255)))
+	set_facial_hair_colour(rgb(dna.GetUIValueRange(DNA_UI_BEARD_R,255), dna.GetUIValueRange(DNA_UI_BEARD_G,255), dna.GetUIValueRange(DNA_UI_BEARD_B,255)))
+	skin_tone            = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
+
 
 	// TODO: update DNA gender to not be a bool - use bodytype and pronouns
 	//Body markings

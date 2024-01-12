@@ -33,8 +33,8 @@ var/global/list/wrapped_species_by_ref = list()
 
 /decl/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(monochromatic)
-		H.hair_colour = H.skin_colour
-		H.facial_hair_colour = H.skin_colour
+		H.set_hair_colour(H.skin_colour, skip_update = TRUE)
+		H.set_facial_hair_colour(H.skin_colour, skip_update = TRUE)
 	..()
 
 /decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
@@ -115,15 +115,12 @@ var/global/list/wrapped_species_by_ref = list()
 	shapeshifter_set_colour(new_skin)
 
 /mob/living/carbon/human/proc/shapeshifter_set_colour(var/new_skin)
-
-	skin_colour = new_skin
-
+	set_skin_colour(new_skin, skip_update = TRUE)
 	var/decl/species/shapeshifter/S = species
 	if(S.monochromatic)
-		hair_colour = skin_colour
-		facial_hair_colour = skin_colour
-
+		var/skin_colour = get_skin_colour()
+		set_hair_colour(skin_colour, skip_update = TRUE)
+		set_facial_hair_colour(skin_colour, skip_update = TRUE)
 	for(var/obj/item/organ/external/E in get_external_organs())
 		E.sync_colour_to_human(src)
-
 	try_refresh_visible_overlays()

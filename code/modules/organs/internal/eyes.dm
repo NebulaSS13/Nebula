@@ -66,7 +66,7 @@
 	if(owner.has_chemical_effect(CE_GLOWINGEYES, 1))
 		eye_colour = "#75bdd6" // blue glow, hardcoded for now.
 	else
-		eye_colour = owner.eye_colour
+		eye_colour = owner.get_eye_colour()
 
 /obj/item/organ/internal/eyes/take_internal_damage(amount, var/silent=0)
 	var/oldbroken = is_broken()
@@ -136,7 +136,7 @@
 	if(owner.incapacitated())
 		return
 
-	var/new_eyes = input("Please select eye color.", "Eye Color", owner.eye_colour) as color|null
+	var/new_eyes = input("Please select eye color.", "Eye Color", owner.get_eye_colour()) as color|null
 	if(new_eyes && do_after(owner, 10) && owner.change_eye_color(new_eyes))
 		update_colour()
 		// Finally, update the eye icon on the mob.

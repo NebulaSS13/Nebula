@@ -457,6 +457,8 @@ var/global/list/damage_icon_parts = list()
 		return // No tail data!
 
 	// These values may be null and are generally optional.
+	var/hair_colour     = get_hair_colour()
+	var/skin_colour     = get_skin_colour()
 	var/tail_hair       = tail_organ.get_tail_hair()
 	var/tail_blend      = tail_organ.get_tail_blend()
 	var/tail_hair_blend = tail_organ.get_tail_hair_blend()

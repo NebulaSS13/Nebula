@@ -64,7 +64,7 @@
 			M.change_hair_color(pick(hair_colors_per_species[species_choice]))
 		else
 			M.randomize_hair_color()
-		M.change_facial_hair_color(M.hair_colour)
+		M.change_facial_hair_color(M.get_hair_colour())
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_STYLE))
 		if(species_choice in hair_styles_per_species)

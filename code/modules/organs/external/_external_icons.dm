@@ -16,7 +16,7 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
 	skin_tone = null
 	skin_colour = null
-	hair_colour = human.hair_colour
+	hair_colour = human.get_hair_colour()
 	// This used to do a bodytype set but that was *really really bad.* Things that need that should do it themselves.
 	skin_blend = bodytype.limb_blend
 	if(!isnull(human.skin_tone) && bodytype?.appearance_flags & HAS_A_SKIN_TONE)

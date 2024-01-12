@@ -12,7 +12,7 @@
 
 /mob/living/carbon/human/vox/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
 	set_hairstyle(/decl/sprite_accessory/hair/vox/short, skip_update = TRUE)
-	hair_colour = COLOR_BEASTY_BROWN
+	set_hair_colour(COLOR_BEASTY_BROWN, skip_update = TRUE)
 	species_name = SPECIES_VOX
 	. = ..()
 

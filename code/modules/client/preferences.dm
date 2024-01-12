@@ -368,15 +368,15 @@ var/global/list/time_prefs_fixed = list()
 	character.set_gender(gender)
 	character.blood_type = blood_type
 
-	character.eye_colour = eye_colour
+	character.set_eye_colour(eye_colour, skip_update = TRUE)
 
 	character.set_hairstyle(h_style, skip_update = TRUE)
-	character.hair_colour = hair_colour
+	character.set_hair_colour(hair_colour, skip_update = TRUE)
 
 	character.set_facial_hairstyle(f_style, skip_update = TRUE)
-	character.facial_hair_colour = facial_hair_colour
+	character.set_facial_hair_colour(facial_hair_colour, skip_update = TRUE)
 
-	character.skin_colour = skin_colour
+	character.set_skin_colour(skin_colour, skip_update = TRUE)
 	character.skin_tone = skin_tone
 
 	QDEL_NULL_LIST(character.worn_underwear)

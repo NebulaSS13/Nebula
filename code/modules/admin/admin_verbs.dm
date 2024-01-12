@@ -758,18 +758,21 @@ var/global/list/admin_verbs_mod = list(
 	switch(alert("Are you sure you wish to edit this mob's appearance? This can result in unintended consequences.",,"Yes","No"))
 		if("No")
 			return
+
+	var/update_hair = FALSE
 	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
 	if(new_facial)
-		M.facial_hair_colour = new_facial
+		M.set_facial_hair_colour(new_facial, skip_update = TRUE)
+		update_hair = TRUE
 
 	var/new_hair = input("Please select hair color.", "Character Generation") as color
 	if(new_hair)
-		M.hair_colour = new_hair
+		M.set_hair_colour(new_hair, skip_update = TRUE)
+		update_hair = TRUE
 
 	var/new_eyes = input("Please select eye color.", "Character Generation") as color
 	if(new_eyes)
-		M.eye_colour = new_eyes
-		M.update_eyes()
+		M.set_eye_colour(new_eyes)
 
 	var/new_skin = input("Please select body color.", "Character Generation") as color
 	if(new_skin)
@@ -782,7 +785,6 @@ var/global/list/admin_verbs_mod = list(
 		M.skin_tone =  -M.skin_tone + 35
 
 	// hair
-	var/update_hair = FALSE
 	var/new_hairstyle = input(usr, "Select a hair style", "Grooming") as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
 	if(new_hairstyle)
 		M.set_hairstyle(new_hairstyle, skip_update = TRUE)

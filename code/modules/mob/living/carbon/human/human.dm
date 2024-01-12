@@ -656,7 +656,7 @@
 /mob/living/carbon/human/proc/apply_bodytype_appearance()
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if(!root_bodytype)
-		skin_colour = COLOR_BLACK
+		set_skin_colour(COLOR_BLACK)
 	else
 		root_bodytype.apply_appearance(src)
 		default_pixel_x = initial(pixel_x) + root_bodytype.pixel_offset_x
@@ -1127,14 +1127,15 @@
 
 	set_species(species_name, new_bodytype)
 	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
-	if(!skin_colour)
-		skin_colour = root_bodytype.base_color
-	if(!hair_colour)
-		hair_colour = root_bodytype.base_hair_color
-	if(!facial_hair_colour)
-		facial_hair_colour = root_bodytype.base_hair_color
-	if(!eye_colour)
-		eye_colour = root_bodytype.base_eye_color
+	if(!get_skin_colour())
+		set_skin_colour(root_bodytype.base_color, skin_update = TRUE)
+	if(!get_hair_colour())
+		set_hair_colour(root_bodytype.base_hair_color, skip_update = TRUE)
+	if(!get_facial_hair_colour())
+		set_facial_hair_colour(root_bodytype.base_hair_color, skip_update = TRUE)
+	if(!get_eye_colour())
+		set_eye_colour(root_bodytype.base_eye_color, skip_update = TRUE)
+
 	root_bodytype.set_default_hair(src, override_existing = TRUE, defer_update_hair = TRUE)
 	if(!blood_type && length(species?.blood_types))
 		blood_type = pickweight(species.blood_types)

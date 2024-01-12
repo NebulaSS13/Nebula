@@ -104,5 +104,5 @@
 	set name = "Change Colour"
 	set desc = "Choose the colour of your skin."
 
-	var/new_skin = input(usr, "Choose your new skin colour: ", "Change Colour", skin_colour) as color|null
+	var/new_skin = input(usr, "Choose your new skin colour: ", "Change Colour", get_skin_colour()) as color|null
 	change_skin_color(new_skin)

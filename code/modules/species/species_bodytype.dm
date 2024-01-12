@@ -446,8 +446,8 @@ var/global/list/bodytypes_by_category = list()
 		E.skin_colour = base_color
 
 	mannequin.eye_colour = base_eye_color
-	mannequin.hair_colour = base_hair_color
-	mannequin.facial_hair_colour = base_hair_color
+	mannequin.set_hair_colour(base_hair_color, skip_update = TRUE)
+	mannequin.set_facial_hair_colour(base_hair_color, skip_update = TRUE)
 	set_default_hair(mannequin)
 
 	mannequin.force_update_limbs()
