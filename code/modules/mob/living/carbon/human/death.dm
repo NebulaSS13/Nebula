@@ -61,9 +61,8 @@
 	if(is_husked())
 		return
 
-	f_style = /decl/sprite_accessory/facial_hair/shaved
-	h_style = /decl/sprite_accessory/hair/bald
-	update_hair(0)
+	set_facial_hairstyle(/decl/sprite_accessory/facial_hair/shaved, skip_update = TRUE)
+	set_hairstyle(/decl/sprite_accessory/hair/bald, skip_update = FALSE)
 
 	mutations.Add(MUTATION_HUSK)
 	for(var/obj/item/organ/external/E in get_external_organs())

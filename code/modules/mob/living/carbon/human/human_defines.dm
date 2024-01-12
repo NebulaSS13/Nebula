@@ -1,10 +1,8 @@
 /mob/living/carbon/human
 
-	var/h_style
-	var/f_style
-
 	var/hair_colour
 	var/facial_hair_colour
+
 	var/skin_colour
 	var/eye_colour
 

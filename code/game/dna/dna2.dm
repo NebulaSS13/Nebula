@@ -146,11 +146,11 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 	// Hair
 	var/list/hair_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
-	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair_types.Find(character.h_style),  length(hair_types), 1)
+	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair_types.Find(character.get_hairstyle()),  length(hair_types), 1)
 
 	// Facial Hair
 	var/list/beard_types = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
-	SetUIValueRange(DNA_UI_BEARD_STYLE, beard_types.Find(character.f_style), length(beard_types), 1)
+	SetUIValueRange(DNA_UI_BEARD_STYLE, beard_types.Find(character.get_facial_hairstyle()), length(beard_types), 1)
 
 	body_markings.Cut()
 	for(var/obj/item/organ/external/E in character.get_external_organs())

@@ -515,10 +515,12 @@
 		force_update_limbs()
 
 		// Check and clear hair.
-		var/decl/sprite_accessory/hair/hairstyle = GET_DECL(h_style)
+		var/set_hairstyle = get_hairstyle()
+		var/decl/sprite_accessory/hair/hairstyle = GET_DECL(set_hairstyle)
 		if(!hairstyle?.accessory_is_available(src, species, new_bodytype))
 			change_hair(new_bodytype.default_h_style, FALSE)
-		var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(f_style)
+		set_hairstyle = get_facial_hairstyle()
+		var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(set_hairstyle)
 		if(!facialhairstyle?.accessory_is_available(src, species, new_bodytype))
 			change_facial_hair(new_bodytype.default_f_style, FALSE)
 		// TODO: check markings.

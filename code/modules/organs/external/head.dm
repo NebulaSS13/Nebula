@@ -122,14 +122,15 @@
 	if(!owner)
 		return res
 
-	if(owner.f_style)
-		var/decl/sprite_accessory/facial_hair_style = resolve_accessory_to_decl(owner.f_style)
+	var/facial_hairstyle = owner.get_facial_hairstyle()
+	if(facial_hairstyle)
+		var/decl/sprite_accessory/facial_hair_style = resolve_accessory_to_decl(facial_hairstyle)
 		if(facial_hair_style?.accessory_is_available(owner, species, bodytype))
-			res.overlays += facial_hair_style.get_cached_accessory_icon(src, owner.facial_hair_colour)
+			res.overlays += facial_hair_style.get_cached_accessory_icon(src, owner.get_facial_hair_colour())
 
-	if(owner.h_style)
-		var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(owner.h_style)
-		if(hair_style?.accessory_is_available(owner, species, bodytype))
+	var/hairstyle = owner.get_hairstyle()
+	if(hairstyle)
+		var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(hairstyle)		if(hair_style?.accessory_is_available(owner, species, bodytype))
 			res.overlays += hair_style.get_cached_accessory_icon(src, owner.hair_colour)
 
 	for (var/M in markings)
@@ -137,8 +138,9 @@
 		if(!mark_style || mark_style.draw_target != MARKING_TARGET_HAIR)
 			continue
 		var/mark_color
-		if (!mark_style.do_colouration && owner.h_style)
-			var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(owner.h_style)
+		var/hairstyle = owner?.get_hairstyle()
+		if (!mark_style.do_colouration && hairstyle)
+			var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(hairstyle)
 			if (hair_style && (~hair_style.flags & HAIR_BALD) && hair_colour)
 				mark_color = hair_colour
 			else //only baseline human skin tones; others will need species vars for coloration

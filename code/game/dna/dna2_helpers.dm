@@ -167,19 +167,23 @@
 		organ.set_dna(dna)
 
 	//Hair
+	var/update_hair = FALSE
 	var/list/hair_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
 	var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE, length(hair_subtypes))
 	if(hair > 0 && hair <= length(hair_subtypes))
-		h_style = hair_subtypes[hair]
+		set_hairstyle(hair_subtypes[hair], skip_update = TRUE)
+		update_hair = TRUE
 
 	//Facial Hair
 	var/list/beard_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
 	var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE, length(beard_subtypes))
 	if((0 < beard) && (beard <= length(beard_subtypes)))
-		f_style = beard_subtypes[beard]
+		set_facial_hairstyle(beard_subtypes[beard], skip_update = TRUE)
+		update_hair = TRUE
 
 	force_update_limbs()
-	update_hair(update_icons = FALSE)
+	if(update_hair)
+		update_hair(update_icons = FALSE)
 	update_eyes()
 	return TRUE
 

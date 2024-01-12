@@ -782,14 +782,17 @@ var/global/list/admin_verbs_mod = list(
 		M.skin_tone =  -M.skin_tone + 35
 
 	// hair
-	var/new_hstyle = input(usr, "Select a hair style", "Grooming") as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
-	if(new_hstyle)
-		M.h_style = new_hstyle
+	var/update_hair = FALSE
+	var/new_hairstyle = input(usr, "Select a hair style", "Grooming") as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
+	if(new_hairstyle)
+		M.set_hairstyle(new_hairstyle, skip_update = TRUE)
+		update_hair = TRUE
 
 	// facial hair
 	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
 	if(new_fstyle)
-		M.f_style = new_fstyle
+		M.set_facial_hairstyle(new_fstyle, skip_update = TRUE)
+		update_hair = TRUE
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neuter")
 	if (new_gender)
@@ -800,7 +803,8 @@ var/global/list/admin_verbs_mod = list(
 		else
 			M.set_gender(NEUTER)
 
-	M.update_hair()
+	if(update_hair)
+		M.update_hair()
 	M.update_body()
 	M.check_dna(M)
 

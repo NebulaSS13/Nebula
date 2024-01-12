@@ -370,17 +370,14 @@ var/global/list/time_prefs_fixed = list()
 
 	character.eye_colour = eye_colour
 
-	character.h_style = h_style
+	character.set_hairstyle(h_style, skip_update = TRUE)
 	character.hair_colour = hair_colour
 
-	character.f_style = f_style
+	character.set_facial_hairstyle(f_style, skip_update = TRUE)
 	character.facial_hair_colour = facial_hair_colour
 
 	character.skin_colour = skin_colour
 	character.skin_tone = skin_tone
-
-	character.h_style = h_style
-	character.f_style = f_style
 
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()

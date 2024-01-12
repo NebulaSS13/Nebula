@@ -39,11 +39,11 @@
 	for(var/x in all_hairs)
 		hairs += all_hairs[x]
 
-	var/decl/new_style = input("Please select hair style", "Character Generation",h_style)  as null|anything in hairs
+	var/decl/new_style = input("Please select hair style", "Character Generation",get_hairstyle())  as null|anything in hairs
 
 	// if new style selected (not cancel)
 	if(new_style)
-		h_style = new_style.type
+		set_hairstyle(new_style.type)
 
 	// facial hair
 	var/list/all_fhairs = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
@@ -52,10 +52,10 @@
 	for(var/x in all_fhairs)
 		fhairs += all_fhairs[x]
 
-	new_style = input("Please select facial style", "Character Generation",f_style)  as null|anything in fhairs
+	new_style = input("Please select facial style", "Character Generation", get_facial_hairstyle())  as null|anything in fhairs
 
 	if(new_style)
-		f_style = new_style.type
+		set_facial_hairstyle(new_style.type)
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neutral")
 	if (new_gender)

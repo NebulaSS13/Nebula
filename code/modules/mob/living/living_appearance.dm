@@ -17,6 +17,18 @@
 			add_overlay(A)
 	try_refresh_visible_overlays()
 
+/mob/living/proc/get_hairstyle()
+	return
+
+/mob/living/proc/set_hairstyle(var/new_hairstyle)
+	return
+
+/mob/living/proc/get_facial_hairstyle()
+	return
+
+/mob/living/proc/set_facial_hairstyle(var/new_hairstyle)
+	return
+
 /mob/living/get_all_current_mob_overlays()
 	return mob_overlays
 
