@@ -14,21 +14,8 @@
 /mob/living/carbon/human/get_eye_colour()
 	return _eye_colour
 
-/mob/living/carbon/human/set_eye_colour(var/new_color, var/skip_update = FALSE)
-	if(_eye_colour != new_color)
-		_eye_colour = new_color
-		if(!skip_update)
-			update_eyes()
-			update_body()
-
 /mob/living/carbon/human/get_skin_colour()
 	return _skin_colour
-
-/mob/living/carbon/human/set_skin_colour(var/new_color, var/skip_update = FALSE)
-	if(_skin_colour != new_color)
-		_skin_colour = new_color
-		if(!skip_update)
-			update_body()
 
 /mob/living/carbon/human/get_hairstyle()
 	return _h_style
@@ -36,32 +23,46 @@
 /mob/living/carbon/human/get_hair_colour()
 	return _hair_colour
 
-/mob/living/carbon/human/set_hair_colour(var/new_color, var/skip_update = FALSE)
-	if(_hair_colour != new_color)
-		_hair_colour = new_color
-		if(!skip_update)
-			update_hair()
-
-/mob/living/carbon/human/set_hairstyle(var/new_hairstyle, var/skip_update = FALSE)
-	if(_h_style != new_hairstyle)
-		_h_style = new_hairstyle
-		if(!skip_update)
-			update_hair()
-
 /mob/living/carbon/human/get_facial_hairstyle()
 	return _f_style
 
 /mob/living/carbon/human/get_facial_hair_colour()
 	return _facial_hair_colour
 
+/mob/living/carbon/human/set_eye_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_eye_colour = new_color
+		if(!skip_update)
+			update_eyes()
+			update_body()
+
+/mob/living/carbon/human/set_skin_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_skin_colour = new_color
+		if(!skip_update)
+			force_update_limbs()
+			update_body()
+
+/mob/living/carbon/human/set_hair_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_hair_colour = new_color
+		if(!skip_update)
+			update_hair()
+
+/mob/living/carbon/human/set_hairstyle(var/new_hairstyle, var/skip_update = FALSE)
+	if((. = ..()))
+		_h_style = new_hairstyle
+		if(!skip_update)
+			update_hair()
+
 /mob/living/carbon/human/set_facial_hair_colour(var/new_color, var/skip_update = FALSE)
-	if(_facial_hair_colour != new_color)
+	if((. = ..()))
 		_facial_hair_colour = new_color
 		if(!skip_update)
 			update_hair()
 
 /mob/living/carbon/human/set_facial_hairstyle(var/new_facial_hairstyle, var/skip_update = FALSE)
-	if(_f_style != new_facial_hairstyle)
+	if((. = ..()))
 		_f_style = new_facial_hairstyle
 		if(!skip_update)
 			update_hair()
@@ -109,20 +110,6 @@
 	var/decl/pronouns/pronouns = pick(species.available_pronouns)
 	set_gender(pronouns.name, TRUE)
 
-/mob/living/carbon/human/proc/change_hair(var/hair_style, var/update_icons = TRUE)
-	if(!hair_style || get_hairstyle() == hair_style || !ispath(hair_style, /decl/sprite_accessory/hair))
-		return
-	set_hairstyle(hair_style, skip_update = TRUE)
-	update_hair(update_icons)
-	return 1
-
-/mob/living/carbon/human/proc/change_facial_hair(var/facial_hair_style, var/update_icons = TRUE)
-	if(!facial_hair_style || get_facial_hairstyle() == facial_hair_style || !ispath(facial_hair_style, /decl/sprite_accessory/facial_hair))
-		return
-	set_facial_hairstyle(facial_hair_style, skip_update = TRUE)
-	update_hair(update_icons)
-	return 1
-
 /mob/living/carbon/human/proc/reset_hair()
 	var/list/valid_hairstyles = get_valid_hairstyle_types()
 	if(length(valid_hairstyles))
@@ -139,34 +126,6 @@
 		set_facial_hairstyle(get_bodytype()?.default_f_style || /decl/sprite_accessory/facial_hair/shaved, skip_update = TRUE)
 
 	update_hair()
-
-/mob/living/carbon/human/proc/change_eye_color(var/new_colour)
-	if(get_eye_colour() != new_colour)
-		set_eye_colour(new_colour)
-		return TRUE
-	return FALSE
-
-/mob/living/carbon/human/proc/change_hair_color(var/new_colour)
-	if(get_hair_colour() != new_colour)
-		set_hair_colour(new_colour)
-		force_update_limbs()
-		update_body()
-		return TRUE
-	return FALSE
-
-/mob/living/carbon/human/proc/change_facial_hair_color(var/new_colour)
-	if(get_facial_hair_colour() != new_colour)
-		set_facial_hair_colour(new_colour)
-		return TRUE
-	return FALSE
-
-/mob/living/carbon/human/proc/change_skin_color(var/new_colour)
-	if(get_skin_colour() == new_colour || !(get_bodytype().appearance_flags & HAS_SKIN_COLOR))
-		return FALSE
-	set_skin_colour(new_colour)
-	force_update_limbs()
-	update_body()
-	return TRUE
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
 	if(skin_tone == tone || !(get_bodytype().appearance_flags & HAS_A_SKIN_TONE))

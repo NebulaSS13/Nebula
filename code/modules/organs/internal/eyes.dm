@@ -33,7 +33,7 @@
 
 /obj/item/organ/internal/eyes/robot/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	. = ..()
-	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
@@ -95,13 +95,13 @@
 		target.set_eye_colour(eye_colour, skip_update = TRUE)
 		target.update_eyes(update_icons = update_icon)
 	if(owner && BP_IS_PROSTHETIC(src))
-		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	. = ..()
 
 /obj/item/organ/internal/eyes/do_uninstall(in_place, detach, ignore_children, update_icon)
 	. = ..()
-	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
+	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
 // TODO: FIND A BETTER WAY TO DO THIS
@@ -111,33 +111,33 @@
 	if(BP_IS_PROSTHETIC(src))
 		name = "optical sensor"
 		icon = 'icons/obj/robot_component.dmi'
-		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	else
 		name = initial(name)
 		icon = initial(icon)
-		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 		verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 	update_colour()
 
 /obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
 	return "retinal overlayed [name]"
 
-/obj/item/organ/internal/eyes/proc/change_eye_color()
+/obj/item/organ/internal/eyes/proc/change_eye_color_verb()
 	set name = "Change Eye Color"
 	set desc = "Changes your robotic eye color."
 	set category = "IC"
 	set src in usr
 
 	if(!owner || !BP_IS_PROSTHETIC(src))
-		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
+		verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 		return
 
 	if(owner.incapacitated())
 		return
 
 	var/new_eyes = input("Please select eye color.", "Eye Color", owner.get_eye_colour()) as color|null
-	if(new_eyes && do_after(owner, 10) && owner.change_eye_color(new_eyes))
+	if(new_eyes && do_after(owner, 10) && owner.set_eye_colour(new_eyes))
 		update_colour()
 		// Finally, update the eye icon on the mob.
 		owner.try_refresh_visible_overlays()

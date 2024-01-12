@@ -20,38 +20,38 @@
 /mob/living/proc/get_skin_colour()
 	return
 
-/mob/living/proc/set_skin_colour(var/new_color)
-	return
-
 /mob/living/proc/get_eye_colour()
-	return
-
-/mob/living/proc/set_eye_colour(var/new_color)
 	return
 
 /mob/living/proc/get_hairstyle()
 	return
 
-/mob/living/proc/set_hairstyle(var/new_hairstyle)
-	return
-
 /mob/living/proc/get_facial_hairstyle()
-	return
-
-/mob/living/proc/set_facial_hairstyle(var/new_hairstyle)
 	return
 
 /mob/living/proc/get_hair_colour()
 	return
 
-/mob/living/proc/set_hair_colour(var/new_color, var/skip_update = FALSE)
-	return
-
 /mob/living/proc/get_facial_hair_colour()
 	return
 
+/mob/living/proc/set_skin_colour(var/new_color)
+	return get_skin_colour() != new_color
+
+/mob/living/proc/set_eye_colour(var/new_color)
+	return get_eye_colour() != new_color
+
 /mob/living/proc/set_facial_hair_colour(var/new_color, var/skip_update = FALSE)
-	return
+	return get_facial_hair_colour() != new_color
+
+/mob/living/proc/set_hair_colour(var/new_color, var/skip_update = FALSE)
+	return get_hair_colour() != new_color
+
+/mob/living/proc/set_hairstyle(var/new_hairstyle)
+	return new_hairstyle && get_hairstyle() != new_hairstyle && ispath(new_hairstyle, /decl/sprite_accessory/hair)
+
+/mob/living/proc/set_facial_hairstyle(var/new_facial_hairstyle)
+	return new_facial_hairstyle && get_facial_hairstyle() != new_facial_hairstyle && ispath(new_facial_hairstyle, /decl/sprite_accessory/facial_hair)
 
 /mob/living/get_all_current_mob_overlays()
 	return mob_overlays

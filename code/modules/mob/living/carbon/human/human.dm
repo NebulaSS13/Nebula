@@ -518,13 +518,13 @@
 		var/set_hairstyle = get_hairstyle()
 		var/decl/sprite_accessory/hair/hairstyle = GET_DECL(set_hairstyle)
 		if(!hairstyle?.accessory_is_available(src, species, new_bodytype))
-			change_hair(new_bodytype.default_h_style, FALSE)
+			set_hairstyle(new_bodytype.default_h_style, skip_update = TRUE)
 		set_hairstyle = get_facial_hairstyle()
 		var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(set_hairstyle)
 		if(!facialhairstyle?.accessory_is_available(src, species, new_bodytype))
-			change_facial_hair(new_bodytype.default_f_style, FALSE)
+			set_facial_hairstyle(new_bodytype.default_f_style, skip_update = TRUE)
 		// TODO: check markings.
-
+		update_hair()
 		update_eyes()
 		return TRUE
 	return FALSE
@@ -1128,7 +1128,7 @@
 	set_species(species_name, new_bodytype)
 	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
 	if(!get_skin_colour())
-		set_skin_colour(root_bodytype.base_color, skin_update = TRUE)
+		set_skin_colour(root_bodytype.base_color, skip_update = TRUE)
 	if(!get_hair_colour())
 		set_hair_colour(root_bodytype.base_hair_color, skip_update = TRUE)
 	if(!get_facial_hair_colour())
