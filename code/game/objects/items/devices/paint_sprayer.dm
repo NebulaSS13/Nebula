@@ -112,10 +112,6 @@
 			new_color = A.get_color()
 		change_color(new_color, user)
 
-	else if (A.atom_flags & ATOM_FLAG_CAN_BE_PAINTED)
-		A.set_color(paint_color)
-		. = TRUE
-
 	else if (istype(A, /turf/simulated/wall))
 		. = paint_wall(A, user)
 
@@ -129,8 +125,12 @@
 		to_chat(user, SPAN_WARNING("You can't paint an active exosuit. Dismantle it first."))
 		. = FALSE
 
+	else if (A.atom_flags & ATOM_FLAG_CAN_BE_PAINTED)
+		A.set_color(paint_color)
+		. = TRUE
+
 	else
-		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, windows, walls, exosuits or certain airlocks."))
+		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, windows, walls, exosuits, airlocks, and certain other objects."))
 		. = FALSE
 
 	if (.)
