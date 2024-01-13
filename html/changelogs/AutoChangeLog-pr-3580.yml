@@ -1,0 +1,5 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Manuals have been rewritten to pull information from the codex instead
+      of the wiki.}
+delete-after: true
