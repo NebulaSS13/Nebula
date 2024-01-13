@@ -106,18 +106,19 @@
 		else if (istype(A, /turf/simulated/wall))
 			new_color = pick_color_from_wall(A, user)
 		else if (istype(A, /obj/structure/wall_frame))
-			var/obj/structure/wall_frame/WF = A
-			new_color = pick_color_from_wall_frame(WF, user)
+			new_color = pick_color_from_wall_frame(A, user)
 		else
 			new_color = A.get_color()
-		change_color(new_color, user)
-
-	else if (A.atom_flags & ATOM_FLAG_CAN_BE_PAINTED)
-		A.set_color(paint_color)
-		. = TRUE
+		if(!new_color)
+			to_chat(user, SPAN_NOTICE("You fail to scan a color from \the [A]."))
+		else
+			change_color(new_color, user)
 
 	else if (istype(A, /turf/simulated/wall))
 		. = paint_wall(A, user)
+
+	else if (istype(A, /obj/structure/wall_frame))
+		. = paint_wall_frame(A, user)
 
 	else if (istype(A, /turf/simulated/floor))
 		. = paint_floor(A, user, params)
@@ -129,8 +130,12 @@
 		to_chat(user, SPAN_WARNING("You can't paint an active exosuit. Dismantle it first."))
 		. = FALSE
 
+	else if (A.atom_flags & ATOM_FLAG_CAN_BE_PAINTED)
+		A.set_color(paint_color)
+		. = TRUE
+
 	else
-		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, windows, walls, exosuits or certain airlocks."))
+		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, windows, walls, exosuits, airlocks, and certain other objects."))
 		. = FALSE
 
 	if (.)
