@@ -3,12 +3,12 @@
 	status_flags = GODMODE|CANPUSH
 	virtual_mob = null
 
-/mob/living/carbon/human/dummy/mannequin/Initialize()
+/mob/living/carbon/human/dummy/mannequin/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
 	. = ..()
 	STOP_PROCESSING(SSmobs, src)
 	global.human_mob_list -= src
 
-/mob/living/carbon/human/dummy/selfdress/Initialize()
+/mob/living/carbon/human/dummy/selfdress/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
@@ -59,7 +59,8 @@
 /mob/living/carbon/human/monkey
 	gender = PLURAL
 
-/mob/living/carbon/human/monkey/Initialize()
+/mob/living/carbon/human/monkey/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
 	if(gender == PLURAL)
 		gender = pick(MALE, FEMALE)
-	. = ..(species_name = SPECIES_MONKEY)
+	species_name = SPECIES_MONKEY
+	. = ..()

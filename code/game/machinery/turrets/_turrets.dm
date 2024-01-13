@@ -447,12 +447,16 @@
 			return TOPIC_REFRESH
 
 	if(href_list["set_default"])
-		var/amount = input(user, "Input an angle between [leftmost_traverse] and [rightmost_traverse] degrees. Click cancel to disable default.", "Set Default Bearing", default_bearing) as null|num
+		var/leftmost_default = leftmost_traverse
+		var/rightmost_default = rightmost_traverse
+		if(traverse >= 360)
+			leftmost_default = 0
+			rightmost_default = 360
+		var/amount = input(user, "Input an angle between [leftmost_default] and [rightmost_default] degrees. Click cancel to disable default.", "Set Default Bearing", default_bearing) as null|num
 		if(isnum(amount))
-			default_bearing = clamp(amount, leftmost_traverse, rightmost_traverse)
+			default_bearing = clamp(amount, leftmost_default, rightmost_default)
 		else
 			default_bearing = null
-
 		return TOPIC_REFRESH
 
 	if(href_list["manual_fire"])

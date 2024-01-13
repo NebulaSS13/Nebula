@@ -27,7 +27,6 @@ var/global/list/wall_fullblend_objects = list(
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 	explosion_resistance = 10
 	color = COLOR_STEEL
-	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
 	var/damage = 0
@@ -148,7 +147,7 @@ var/global/list/wall_fullblend_objects = list(
 			plant.update_icon()
 			plant.reset_offsets(0)
 
-/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
 	clear_plants()
 	. = ..()
 
