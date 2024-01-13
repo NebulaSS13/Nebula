@@ -18,7 +18,6 @@
 	)
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
-	var/overlay_state
 
 /obj/item/cell/Initialize()
 	. = ..()
@@ -40,19 +39,16 @@
 
 /obj/item/cell/on_update_icon()
 	. = ..()
-	var/new_overlay_state = null
+	var/overlay_state = null
 	switch(percent())
 		if(95 to 100)
-			new_overlay_state = "cell-o2"
+			overlay_state = "cell-o2"
 		if(25 to 95)
-			new_overlay_state = "cell-o1"
+			overlay_state = "cell-o1"
 		if(0.05 to 25)
-			new_overlay_state = "cell-o0"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		if(overlay_state)
-			add_overlay(overlay_state)
+			overlay_state = "cell-o0"
+	if(overlay_state)
+		add_overlay(overlay_state)
 
 /obj/item/cell/proc/percent()		// return % charge of cell
 	return maxcharge && (100.0*charge/maxcharge)

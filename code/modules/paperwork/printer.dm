@@ -281,7 +281,19 @@
 			stop_printing_queue()
 			return FALSE
 		print_picture(queued_element)
-	else
+	else if(istype(queued_element, /obj/item/paper_bundle))
+		var/obj/item/paper_bundle/bundle = queued_element
+		var/photo_count = 0
+		for(var/obj/item/photo/picture in bundle.pages)
+			photo_count++
+		if(!has_enough_to_print((TONER_USAGE_PAPER * (length(bundle.pages) - photo_count)) + (TONER_USAGE_PHOTO * photo_count)))
+			var/obj/machinery/M = loc
+			if(istype(M))
+				M.state("Warning: Not enough paper or toner!")
+			stop_printing_queue()
+			return FALSE
+		print_paper_bundle(bundle)
+	else if(istype(queued_element, /obj/item/paper))
 		if(!has_enough_to_print(TONER_USAGE_PAPER))
 			var/obj/machinery/M = loc
 			if(istype(M))
@@ -289,6 +301,8 @@
 			stop_printing_queue()
 			return FALSE
 		print_paper(queued_element)
+	else
+		PRINT_STACK_TRACE("A printer printed something that wasn't a paper, paper bundle, or photo: [queued_element] ([queued_element.type])")
 
 	//#TODO: machinery should allow a component to trigger and wait for an animation sequence. So that we can drop out the paper in sync.
 	queued_element.dropInto(get_turf(loc))
@@ -305,6 +319,14 @@
 
 	use_toner(TONER_USAGE_PHOTO, FALSE) //photos use a lot of ink!
 	use_paper(1)
+	P.update_icon()
+
+/obj/item/stock_parts/printer/proc/print_paper_bundle(var/obj/item/paper_bundle/bundle)
+	for(var/obj/item/paper/page in bundle.pages)
+		print_paper(page)
+	for(var/obj/item/photo/picture in bundle.pages)
+		print_picture(picture)
+	bundle.update_icon()
 
 /obj/item/stock_parts/printer/proc/print_paper(var/obj/item/paper/P)
 	//Apply a greyscale filter on all stamps overlays
@@ -321,6 +343,7 @@
 
 	use_toner(TONER_USAGE_PAPER, FALSE)
 	use_paper(1)
+	P.update_icon() // reapply stamp overlays
 
 /obj/item/stock_parts/printer/proc/use_toner(var/amount, var/update_parent = TRUE)
 	if(!toner?.use_toner(amount))
