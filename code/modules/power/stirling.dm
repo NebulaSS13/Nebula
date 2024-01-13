@@ -39,8 +39,14 @@
 /obj/machinery/atmospherics/binary/stirling/Process()
 	..()
 
+	if(!active)
+		return
+
 	var/line1_heatcap = air1.heat_capacity()
 	var/line2_heatcap = air2.heat_capacity()
+
+	if(!(line1_heatcap + line2_heatcap))
+		return
 
 	var/delta_t = air1.temperature - air2.temperature
 

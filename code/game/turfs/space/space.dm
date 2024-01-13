@@ -11,6 +11,8 @@
 	z_eventually_space = TRUE
 	turf_flags = TURF_FLAG_BACKGROUND
 
+	open_turf_type = /turf/space
+
 	/// If we're an edge.
 	var/edge = 0
 	/// Force this one to pretend it's an overedge turf.
@@ -80,13 +82,14 @@
 		var/turf/T = src
 		while ((T = GetAbove(T)))
 			T.z_eventually_space = FALSE
+
 	return ..()
 
 /turf/space/LateInitialize()
 	if(SSmapping.base_floor_area)
 		var/area/new_area = locate(SSmapping.base_floor_area) || new SSmapping.base_floor_area
 		ChangeArea(src, new_area)
-	ChangeTurf(SSmapping.base_floor_type)
+	ChangeTurf(SSmapping.base_floor_type, keep_air_below = TRUE)
 
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
@@ -241,8 +244,8 @@
 					A.loc.Entered(A)
 	return
 
-/turf/space/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
-	return ..(N, tell_universe, TRUE, keep_air)
+/turf/space/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
+	return ..(N, tell_universe, TRUE, keep_air, keep_air_below, update_open_turfs_above)
 
 /turf/space/is_open()
 	return TRUE

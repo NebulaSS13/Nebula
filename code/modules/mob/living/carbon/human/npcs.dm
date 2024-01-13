@@ -2,7 +2,7 @@
 	real_name = "Pun Pun"
 	gender = MALE
 
-/mob/living/carbon/human/monkey/punpun/Initialize()
+/mob/living/carbon/human/monkey/punpun/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
@@ -32,8 +32,9 @@
 	sensor.set_sensor_mode(VITALS_SENSOR_OFF)
 	attach_accessory(null, sensor)
 
-/mob/living/carbon/human/blank/Initialize()
-	. = ..(species_name = SPECIES_HUMAN)
+/mob/living/carbon/human/blank/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
+	species_name = SPECIES_HUMAN
+	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/carbon/human/blank/LateInitialize()

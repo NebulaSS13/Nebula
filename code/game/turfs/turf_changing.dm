@@ -22,7 +22,22 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+// Updates open turfs above this one to use its open_turf_type
+/turf/proc/update_open_above(var/restrict_type, var/respect_area = TRUE)
+	if(!HasAbove(src.z))
+		return
+	var/turf/above = src
+	while ((above = GetAbove(above)))
+		if(!above.is_open())
+			break
+		if(!restrict_type || istype(above, restrict_type))
+			if(respect_area)
+				var/area/A = get_area(above)
+				above.ChangeTurf(A?.open_turf || open_turf_type, update_open_turfs_above = FALSE)
+			else
+				above.ChangeTurf(open_turf_type, update_open_turfs_above = FALSE)
+
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
 	if (!N)
 		return
 
@@ -51,6 +66,7 @@
 	var/old_flooded =          flooded
 	var/old_outside =          is_outside
 	var/old_is_open =          is_open()
+	var/old_open_turf_type =   open_turf_type
 	var/old_affecting_heat_sources = affecting_heat_sources
 
 	var/old_ambience =         ambient_light
@@ -129,7 +145,20 @@
 	W.last_outside_check = OUTSIDE_UNCERTAIN
 	if(W.is_outside != old_outside)
 		W.set_outside(old_outside, skip_weather_update = TRUE)
+
+	var/turf/below = GetBelow(src)
+	if(below)
+		below.last_outside_check = OUTSIDE_UNCERTAIN
+
+		// If the turf is at the top of the Z-stack and changed its outside status, or if it's changed its open status, let the turf below check if
+		// it should change its ZAS participation
+		if((!HasAbove(z) && (W.is_outside != old_outside)) || W.is_open() != old_is_open)
+			below.update_external_atmos_participation(!keep_air_below)
+
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
+
+	if(update_open_turfs_above)
+		update_open_above(old_open_turf_type)
 
 /turf/proc/transport_properties_from(turf/other)
 	if(other.zone)
@@ -168,7 +197,7 @@
 	stripe_color = other.stripe_color
 
 	material = other.material
-	reinf_material = other.material
+	reinf_material = other.reinf_material
 	girder_material = other.girder_material
 
 	floor_type = other.floor_type
