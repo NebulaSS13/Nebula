@@ -930,7 +930,7 @@
 /obj/structure/table/woodentable,
 /obj/item/board,
 /obj/item/book/manual/mass_spectrometry,
-/obj/item/book/manual/stasis,
+/obj/item/book/fluff/stasis,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cM" = (

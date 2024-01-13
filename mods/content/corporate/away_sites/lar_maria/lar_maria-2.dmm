@@ -812,7 +812,7 @@
 /area/lar_maria/library)
 "cs" = (
 /obj/structure/bookcase,
-/obj/item/book/manual/stasis,
+/obj/item/book/fluff/stasis,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cu" = (
@@ -831,8 +831,8 @@
 /area/lar_maria/library)
 "cy" = (
 /obj/structure/bookcase,
-/obj/item/book/manual/anomaly_spectroscopy,
-/obj/item/book/manual/anomaly_testing,
+/obj/item/book/fluff/anomaly_spectroscopy,
+/obj/item/book/fluff/anomaly_testing,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cz" = (

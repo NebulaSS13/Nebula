@@ -5,10 +5,10 @@
 	return list(
 		/obj/item/book/manual/excavation,
 		/obj/item/book/manual/mass_spectrometry,
-		/obj/item/book/manual/materials_chemistry_analysis,
-		/obj/item/book/manual/anomaly_testing,
-		/obj/item/book/manual/anomaly_spectroscopy,
-		/obj/item/book/manual/stasis,
+		/obj/item/book/fluff/materials_chemistry_analysis,
+		/obj/item/book/fluff/anomaly_testing,
+		/obj/item/book/fluff/anomaly_spectroscopy,
+		/obj/item/book/fluff/stasis,
 	)
 
 /obj/structure/closet/secure_closet/xenoarchaeologist
