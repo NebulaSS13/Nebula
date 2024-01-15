@@ -98,6 +98,7 @@
 	abstract_type      = /obj/structure/sign
 	parts_type         = /obj/item/sign
 	parts_amount       = 1
+	material           = /decl/material/solid/organic/plastic
 
 /obj/structure/sign/Initialize(ml, _mat, _reinf_mat)
 	. = ..()
