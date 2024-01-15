@@ -172,7 +172,7 @@
 		dormant = FALSE
 
 	if(dormant)
-		events_repository.register(/decl/observ/moved, src, src, /obj/effect/spider/proc/disturbed)
+		events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/effect/spider, disturbed))
 	else
 		START_PROCESSING(SSobj, src)
 
@@ -187,7 +187,7 @@
 
 /obj/effect/spider/spiderling/Destroy()
 	if(dormant)
-		events_repository.unregister(/decl/observ/moved, src, src, /obj/effect/spider/proc/disturbed)
+		events_repository.unregister(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/effect/spider, disturbed))
 	STOP_PROCESSING(SSobj, src)
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
@@ -208,7 +208,7 @@
 	if(!dormant)
 		return
 	dormant = FALSE
-	events_repository.unregister(/decl/observ/moved, src, src, /obj/effect/spider/proc/disturbed)
+	events_repository.unregister(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/effect/spider, disturbed))
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/spider/spiderling/Bump(atom/user)

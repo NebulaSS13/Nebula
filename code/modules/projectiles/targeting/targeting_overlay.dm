@@ -176,9 +176,9 @@
 
 	update_icon()
 	lock_time = world.time + 35
-	events_repository.register(/decl/observ/moved, owner, src, /obj/aiming_overlay/proc/update_aiming)
-	events_repository.register(/decl/observ/moved, aiming_at, src, /obj/aiming_overlay/proc/target_moved)
-	events_repository.register(/decl/observ/destroyed, aiming_at, src, /obj/aiming_overlay/proc/cancel_aiming)
+	events_repository.register(/decl/observ/moved, owner, src, TYPE_PROC_REF(/obj/aiming_overlay, update_aiming))
+	events_repository.register(/decl/observ/moved, aiming_at, src, TYPE_PROC_REF(/obj/aiming_overlay, target_moved))
+	events_repository.register(/decl/observ/destroyed, aiming_at, src, TYPE_PROC_REF(/obj/aiming_overlay, cancel_aiming))
 
 /obj/aiming_overlay/on_update_icon()
 	if(locked)

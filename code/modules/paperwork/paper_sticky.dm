@@ -97,7 +97,7 @@
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
-	events_repository.register(/decl/observ/moved, src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
+	events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/item/paper/sticky, reset_persistence_tracking))
 
 /obj/item/paper/sticky/proc/reset_persistence_tracking()
 	SSpersistence.forget_value(src, /decl/persistence_handler/paper/sticky)

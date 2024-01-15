@@ -850,7 +850,7 @@ var/global/floorIsLava = 0
 	if(confirm == "Yes")
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		SSticker.end_game_state = END_GAME_READY_TO_END
-		INVOKE_ASYNC(SSticker, /datum/controller/subsystem/ticker/proc/declare_completion)
+		INVOKE_ASYNC(SSticker, TYPE_PROC_REF(/datum/controller/subsystem/ticker, declare_completion))
 		log_and_message_admins("initiated a game ending.")
 		to_world("<span class='danger'>Game ending!</span> <span class='notice'>Initiated by [usr.key]!</span>")
 		SSstatistics.add_field("admin_verb","ER") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

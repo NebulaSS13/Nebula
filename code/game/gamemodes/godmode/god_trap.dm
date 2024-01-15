@@ -5,7 +5,7 @@
 
 /obj/structure/deity/trap/Initialize()
 	. = ..()
-	events_repository.register(/decl/observ/entered, get_turf(src),src,/obj/structure/deity/trap/proc/trigger)
+	events_repository.register(/decl/observ/entered, get_turf(src),src, TYPE_PROC_REF(/obj/structure/deity/trap, trigger))
 
 /obj/structure/deity/trap/Destroy()
 	events_repository.unregister(/decl/observ/entered, get_turf(src),src)
@@ -14,7 +14,7 @@
 /obj/structure/deity/trap/Move()
 	events_repository.unregister(/decl/observ/entered, get_turf(src),src)
 	. = ..()
-	events_repository.register(/decl/observ/entered, get_turf(src), src, /obj/structure/deity/trap/proc/trigger)
+	events_repository.register(/decl/observ/entered, get_turf(src), src, TYPE_PROC_REF(/obj/structure/deity/trap, trigger))
 
 /obj/structure/deity/trap/attackby(obj/item/W, mob/user)
 	trigger(user)

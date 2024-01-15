@@ -35,7 +35,7 @@
 	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
 		slot = BP_R_HAND
 	if(owner.equip_to_slot_if_possible(holding, slot))
-		events_repository.register(/decl/observ/item_unequipped, holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped)
+		events_repository.register(/decl/observ/item_unequipped, holding, src, TYPE_PROC_REF(/obj/item/organ/internal/augment/active/simple, holding_dropped))
 		var/decl/pronouns/G = owner.get_pronouns()
 		owner.visible_message(
 			SPAN_NOTICE("\The [owner] extends [G.his] [holding.name] from [G.his] [limb.name]."),

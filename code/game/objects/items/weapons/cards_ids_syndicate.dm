@@ -81,7 +81,7 @@
 	unset_registered_user()
 	registered_user = user
 	user.set_id_info(src)
-	events_repository.register(/decl/observ/destroyed, user, src, /obj/item/card/id/syndicate/proc/unset_registered_user)
+	events_repository.register(/decl/observ/destroyed, user, src, TYPE_PROC_REF(/obj/item/card/id/syndicate, unset_registered_user))
 	return TRUE
 
 /obj/item/card/id/syndicate/proc/unset_registered_user(var/mob/user)

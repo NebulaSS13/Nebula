@@ -57,7 +57,7 @@
 			return INITIALIZE_HINT_QDEL
 
 	if(decays)
-		addtimer(CALLBACK(src, /obj/effect/razorweb/proc/decay), 15 MINUTES)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/effect/razorweb, decay)), 15 MINUTES)
 
 	web = image(icon = icon, icon_state = "razorweb")
 	gleam = emissive_overlay(icon = icon, icon_state = "razorweb-gleam")

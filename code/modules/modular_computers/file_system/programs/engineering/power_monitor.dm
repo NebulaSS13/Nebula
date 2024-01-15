@@ -91,7 +91,7 @@
 	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
 		if(get_z(S) in connected_z_levels) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			grid_sensors += S
-			events_repository.register(/decl/observ/destroyed, S, src, /datum/nano_module/program/power_monitor/proc/remove_sensor)
+			events_repository.register(/decl/observ/destroyed, S, src, TYPE_PROC_REF(/datum/nano_module/program/power_monitor, remove_sensor))
 
 /datum/nano_module/program/power_monitor/proc/remove_sensor(var/removed_sensor, var/update_ui = TRUE)
 	if(active_sensor == removed_sensor)
@@ -99,7 +99,7 @@
 		if(update_ui)
 			SSnano.update_uis(src)
 	grid_sensors -= removed_sensor
-	events_repository.unregister(/decl/observ/destroyed, removed_sensor, src, /datum/nano_module/program/power_monitor/proc/remove_sensor)
+	events_repository.unregister(/decl/observ/destroyed, removed_sensor, src, TYPE_PROC_REF(/datum/nano_module/program/power_monitor, remove_sensor))
 
 /datum/nano_module/program/power_monitor/proc/is_sysadmin(var/mob/user)
 	if(program)

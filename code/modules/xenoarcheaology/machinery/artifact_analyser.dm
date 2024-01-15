@@ -29,7 +29,7 @@
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 	if(owned_scanner)
-		events_repository.register(/decl/observ/destroyed, owned_scanner, src, /obj/machinery/artifact_analyser/proc/clear_scanner)
+		events_repository.register(/decl/observ/destroyed, owned_scanner, src, TYPE_PROC_REF(/obj/machinery/artifact_analyser, clear_scanner))
 
 /obj/machinery/artifact_analyser/proc/clear_scanner()
 	if(owned_scanner)
@@ -39,7 +39,7 @@
 /obj/machinery/artifact_analyser/proc/set_object(var/obj/O)
 	if(O != scanned_object && O)
 		clear_object()
-		events_repository.register(/decl/observ/destroyed, O, src, /obj/machinery/artifact_analyser/proc/clear_object)
+		events_repository.register(/decl/observ/destroyed, O, src, TYPE_PROC_REF(/obj/machinery/artifact_analyser, clear_object))
 		scanned_object = O
 
 /obj/machinery/artifact_analyser/proc/clear_object()

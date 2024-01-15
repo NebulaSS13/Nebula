@@ -215,7 +215,7 @@ var/global/list/meteors_cataclysm = list(\
 /obj/effect/meteor/proc/make_debris()
 	if(meteordrop && dropamt)
 		for(var/throws = dropamt, throws > 0, throws--)
-			addtimer(CALLBACK(new meteordrop(get_turf(src)), /atom/movable/proc/throw_at, dest, 5, 10), 0)
+			addtimer(CALLBACK(new meteordrop(get_turf(src)), TYPE_PROC_REF(/atom/movable, throw_at), dest, 5, 10), 0)
 
 /obj/effect/meteor/proc/meteor_effect()
 	if(heavy)

@@ -200,7 +200,7 @@
 		state |= WASHER_STATE_BLOODY
 
 	update_use_power(POWER_USE_ACTIVE)
-	addtimer(CALLBACK(src, /obj/machinery/washing_machine/proc/wash), 20 SECONDS)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/washing_machine, wash)), 20 SECONDS)
 
 	return TRUE
 

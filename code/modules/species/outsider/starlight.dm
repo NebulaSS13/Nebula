@@ -69,7 +69,7 @@
 	splatter_colour = "#ffff00"
 
 /decl/species/starlight/handle_death(var/mob/living/carbon/human/H)
-	addtimer(CALLBACK(H,/mob/proc/dust),0)
+	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, dust)),0)
 
 /decl/species/starlight/starborn
 	name = "Starborn"

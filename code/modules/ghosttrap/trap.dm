@@ -1,4 +1,4 @@
-// This system is used to grab a ghost from observers with the required preferences 
+// This system is used to grab a ghost from observers with the required preferences
 // and lack of bans set. See posibrain.dm for an example of how they are called/used.
 /decl/ghosttrap
 	var/name
@@ -30,7 +30,7 @@
 /decl/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
 	if(request_timeout)
 		LAZYSET(request_timeouts, target, world.time + request_timeout)
-		events_repository.register(/decl/observ/destroyed, target, src, /decl/ghosttrap/proc/unregister_target)
+		events_repository.register(/decl/observ/destroyed, target, src, TYPE_PROC_REF(/decl/ghosttrap, unregister_target))
 	else
 		unregister_target(target)
 
@@ -44,7 +44,7 @@
 
 /decl/ghosttrap/proc/unregister_target(var/target)
 	LAZYREMOVE(request_timeouts, target)
-	events_repository.unregister(/decl/observ/destroyed, target, src, /decl/ghosttrap/proc/unregister_target)
+	events_repository.unregister(/decl/observ/destroyed, target, src, TYPE_PROC_REF(/decl/ghosttrap, unregister_target))
 
 // Handles a response to request_player().
 /decl/ghosttrap/Topic(href, href_list)
@@ -57,7 +57,7 @@
 			return
 		if(candidate != usr)
 			return
-		
+
 		var/timeout = LAZYACCESS(request_timeouts, target)
 		if(!isnull(timeout) && world.time > timeout)
 			to_chat(candidate, "This occupation request is no longer valid.")
@@ -131,7 +131,7 @@
 	ban_checks = list("Botany Roles")
 	pref_check = "ghost_plant"
 	ghost_trap_message = "They are occupying a living plant now."
-	
+
 /decl/ghosttrap/sentient_plant/forced(var/mob/user)
 	request_player(new /mob/living/simple_animal/mushroom(get_turf(user)), "Someone is harvesting a walking mushroom.", 15 SECONDS)
 

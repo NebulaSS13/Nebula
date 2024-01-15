@@ -100,8 +100,8 @@
 /datum/fauna_generator/proc/register_fauna(var/mob/living/A)
 	if(A in live_fauna)
 		return
-	events_repository.register(/decl/observ/destroyed, A, src, /datum/fauna_generator/proc/on_fauna_death)
-	events_repository.register(/decl/observ/death,     A, src, /datum/fauna_generator/proc/on_fauna_death)
+	events_repository.register(/decl/observ/destroyed, A, src, TYPE_PROC_REF(/datum/fauna_generator, on_fauna_death))
+	events_repository.register(/decl/observ/death,     A, src, TYPE_PROC_REF(/datum/fauna_generator, on_fauna_death))
 	LAZYADD(live_fauna, A)
 
 /datum/fauna_generator/proc/on_fauna_death(var/mob/living/A)
@@ -111,8 +111,8 @@
 /datum/fauna_generator/proc/unregister_fauna(var/mob/living/A)
 	if(!(A in live_fauna))
 		return
-	events_repository.unregister(/decl/observ/destroyed, A, src, /datum/fauna_generator/proc/on_fauna_death)
-	events_repository.unregister(/decl/observ/death,     A, src, /datum/fauna_generator/proc/on_fauna_death)
+	events_repository.unregister(/decl/observ/destroyed, A, src, TYPE_PROC_REF(/datum/fauna_generator, on_fauna_death))
+	events_repository.unregister(/decl/observ/death,     A, src, TYPE_PROC_REF(/datum/fauna_generator, on_fauna_death))
 	LAZYREMOVE(live_fauna, A)
 
 /datum/fauna_generator/proc/generate_fauna(var/datum/gas_mixture/atmosphere, var/list/breath_gases = list(), var/list/toxic_gases = list())

@@ -49,7 +49,7 @@
 	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
 	adjust_position()
 	action_used()
-	INVOKE_ASYNC(assailant, /atom/movable/proc/do_attack_animation, affecting)
+	INVOKE_ASYNC(assailant, TYPE_PROC_REF(/atom/movable, do_attack_animation), affecting)
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	update_icon()
 

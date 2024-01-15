@@ -37,7 +37,7 @@
 			if((M in view) && M.client)
 				to_chat(M, "<span class='cult'>Your attention is eerily drawn to \the [a].</span>")
 				M.client.images += arrow
-				events_repository.register(/decl/observ/logged_out, M, src, /datum/phenomena/point/proc/remove_image)
+				events_repository.register(/decl/observ/logged_out, M, src, TYPE_PROC_REF(/datum/phenomena/point, remove_image))
 				spawn(20)
 					if(M.client)
 						remove_image(M)

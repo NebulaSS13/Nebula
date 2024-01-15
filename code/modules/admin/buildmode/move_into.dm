@@ -33,14 +33,14 @@
 	ClearDestination()
 
 	destination = A
-	events_repository.register(/decl/observ/destroyed, destination, src, /datum/build_mode/move_into/proc/ClearDestination)
+	events_repository.register(/decl/observ/destroyed, destination, src, TYPE_PROC_REF(/datum/build_mode/move_into, ClearDestination))
 	to_chat(user, "<span class='notice'>Will now move targets into \the [destination].</span>")
 
 /datum/build_mode/move_into/proc/ClearDestination(var/feedback)
 	if(!destination)
 		return
 
-	events_repository.unregister(/decl/observ/destroyed, destination, src, /datum/build_mode/move_into/proc/ClearDestination)
+	events_repository.unregister(/decl/observ/destroyed, destination, src, TYPE_PROC_REF(/datum/build_mode/move_into, ClearDestination))
 	destination = null
 	if(feedback)
 		Warn("The selected destination was deleted.")

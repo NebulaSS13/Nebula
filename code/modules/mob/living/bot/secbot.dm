@@ -132,7 +132,7 @@
 		broadcast_security_hud_message("[src] is arresting a level [threat] suspect <b>[suspect_name]</b> in <b>[get_area_name(src)]</b>.", src)
 	say("Down on the floor, [suspect_name]! You have [SECBOT_WAIT_TIME] seconds to comply.")
 	playsound(src.loc, pick(preparing_arrest_sounds), 50)
-	events_repository.register(/decl/observ/moved, target, src, /mob/living/bot/secbot/proc/target_moved)
+	events_repository.register(/decl/observ/moved, target, src, TYPE_PROC_REF(/mob/living/bot/secbot, target_moved))
 
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
 	if(get_dist(get_turf(src), get_turf(target)) >= 1)

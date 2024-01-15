@@ -36,7 +36,7 @@ var/global/repository/follow/follow_repository = new()
 	followed_objects_assoc[AM] = follow_holder
 	followed_objects.Add(follow_holder)
 
-	events_repository.register(/decl/observ/destroyed, AM, src, /repository/follow/proc/remove_subject)
+	events_repository.register(/decl/observ/destroyed, AM, src, TYPE_PROC_REF(/repository/follow, remove_subject))
 
 /repository/follow/proc/remove_subject(var/atom/movable/AM)
 	cache = null
@@ -46,7 +46,7 @@ var/global/repository/follow/follow_repository = new()
 	followed_objects_assoc -= AM
 	followed_objects.Remove(follow_holder)
 
-	events_repository.unregister(/decl/observ/destroyed, AM, src, /repository/follow/proc/remove_subject)
+	events_repository.unregister(/decl/observ/destroyed, AM, src, TYPE_PROC_REF(/repository/follow, remove_subject))
 
 	qdel(follow_holder)
 

@@ -23,7 +23,7 @@ var/global/list/all_virtual_listeners = list()
 		. = INITIALIZE_HINT_QDEL
 		CRASH("Received an unexpected host type. Expected [host_type], was [log_info_line(host)].")
 	src.host = host
-	events_repository.register(/decl/observ/moved, host, src, /atom/movable/proc/move_to_turf_or_null)
+	events_repository.register(/decl/observ/moved, host, src, TYPE_PROC_REF(/atom/movable, move_to_turf_or_null))
 
 	all_virtual_listeners += src
 
@@ -31,7 +31,7 @@ var/global/list/all_virtual_listeners = list()
 	STOP_PROCESSING(SSmobs, src)
 
 /mob/observer/virtual/Destroy()
-	events_repository.unregister(/decl/observ/moved, host, src, /atom/movable/proc/move_to_turf_or_null)
+	events_repository.unregister(/decl/observ/moved, host, src, TYPE_PROC_REF(/atom/movable, move_to_turf_or_null))
 	all_virtual_listeners -= src
 	host = null
 	return ..()

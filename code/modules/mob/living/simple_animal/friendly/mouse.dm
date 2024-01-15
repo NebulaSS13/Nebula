@@ -56,7 +56,7 @@
 			mouse.set_stat(CONSCIOUS)
 			mouse.wander = 1
 		else if(prob(5))
-			INVOKE_ASYNC(mouse, /mob/living/simple_animal/proc/audible_emote, "snuffles.")
+			INVOKE_ASYNC(mouse, TYPE_PROC_REF(/mob/living/simple_animal, audible_emote), "snuffles.")
 
 /mob/living/simple_animal/mouse/Initialize()
 	verbs += /mob/living/proc/ventcrawl

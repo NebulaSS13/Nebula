@@ -71,7 +71,7 @@
 	buff.skillset = skillset
 	skillset.on_levels_change()
 	if(duration)
-		addtimer(CALLBACK(buff, /datum/skill_buff/proc/remove), duration)
+		addtimer(CALLBACK(buff, TYPE_PROC_REF(/datum/skill_buff, remove)), duration)
 	return buff
 
 //Takes a buff type or datum; typing is false here.

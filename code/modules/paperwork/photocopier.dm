@@ -60,10 +60,10 @@
 	printer = get_component_of_type(/obj/item/stock_parts/printer) //Cache the printer component
 	if(printer)
 		printer.show_queue_ctrl = FALSE //Make sure we don't let users mess with the print queue
-		printer.register_on_printed_page(  CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
-		printer.register_on_finished_queue(CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
-		printer.register_on_print_error(   CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
-		printer.register_on_status_changed(CALLBACK(src, /obj/machinery/photocopier/proc/update_ui))
+		printer.register_on_printed_page(  CALLBACK(src, TYPE_PROC_REF(/obj/machinery/photocopier, update_ui)))
+		printer.register_on_finished_queue(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/photocopier, update_ui)))
+		printer.register_on_print_error(   CALLBACK(src, TYPE_PROC_REF(/obj/machinery/photocopier, update_ui)))
+		printer.register_on_status_changed(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/photocopier, update_ui)))
 
 /obj/machinery/photocopier/on_update_icon()
 	cut_overlays()

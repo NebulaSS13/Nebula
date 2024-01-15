@@ -284,7 +284,7 @@ var/global/list/hygiene_props = list()
 /obj/effect/mist/Initialize()
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
-		addtimer(CALLBACK(src, /datum/proc/qdel_self), 25 SECONDS)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, qdel_self)), 25 SECONDS)
 
 /obj/structure/hygiene/shower/attackby(obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/scanner/gas))
