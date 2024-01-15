@@ -23,6 +23,9 @@
 /mob/living/proc/get_eye_colour()
 	return
 
+/mob/living/proc/get_lip_colour()
+	return
+
 /mob/living/proc/get_hairstyle()
 	return
 
@@ -40,6 +43,9 @@
 
 /mob/living/proc/set_eye_colour(var/new_color)
 	return get_eye_colour() != new_color
+
+/mob/living/proc/set_lip_colour(var/new_color)
+	return get_lip_colour() != new_color
 
 /mob/living/proc/set_facial_hair_colour(var/new_color, var/skip_update = FALSE)
 	return get_facial_hair_colour() != new_color

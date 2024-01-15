@@ -40,37 +40,49 @@
 	update_icon()
 
 /obj/item/lipstick/attack(atom/A, mob/user, target_zone)
-	if(!open)	return
+	if(!open || !ishuman(A))
+		return ..()
 
-	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
-		var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD, /obj/item/organ/external/head)
-
-		if(!head)
-			return
-
-		if(user.a_intent == I_HELP && target_zone == BP_HEAD)
-			head.write_on(user, src.name)
-		else if(head.has_lips)
-			if(H.lip_style)	//if they already have lipstick on
-				to_chat(user, "<span class='notice'>You need to wipe off the old lipstick first!</span>")
-				return
-			if(H == user)
-				user.visible_message("<span class='notice'>[user] does their lips with \the [src].</span>", \
-									 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
-				H.lip_style = color
-				H.update_body()
-			else
-				user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
-									 "<span class='notice'>You begin to apply \the [src].</span>")
-				if(do_after(user, 20, H) && do_after(H, 20, check_holding = 0, progress = 0, incapacitation_flags = INCAPACITATION_NONE))	//user needs to keep their active hand, H does not.
-					user.visible_message("<span class='notice'>[user] does [H]'s lips with \the [src].</span>", \
-										 "<span class='notice'>You apply \the [src].</span>")
-					H.lip_style = color
-					H.update_body()
-	else if(istype(A, /obj/item/organ/external/head))
+	if(istype(A, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, src)
+		return TRUE
+
+	var/obj/item/organ/external/head/head = user.get_organ(BP_HEAD, /obj/item/organ/external/head)
+	if(!head)
+		return ..()
+
+	if(user.a_intent == I_HELP && target_zone == BP_HEAD)
+		head.write_on(user, src.name)
+		return TRUE
+
+	if(!head.has_lips || !isliving(user))
+		return ..()
+
+	var/mob/living/user_living = user
+	if(user_living.get_lip_colour())	//if they already have lipstick on
+		to_chat(user, SPAN_WARNING("You need to wipe off the old lipstick first!"))
+		return TRUE
+
+	if(user == user)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] does their lips with \the [src]."),
+			SPAN_NOTICE("You take a moment to apply \the [src]. Perfect!")
+		)
+		user_living.set_lip_colour(color)
+		return TRUE
+
+	user.visible_message(
+		SPAN_NOTICE("\The [user] begins to do \the [user]'s lips with \the [src]."),
+		SPAN_NOTICE("You begin to apply \the [src].")
+	)
+	if(do_after(user, 2 SECONDS, user) && do_after(user, 2 SECONDS, check_holding = 0, progress = 0, incapacitation_flags = INCAPACITATION_NONE))	//user needs to keep their active hand, H does not.
+		user.visible_message(
+			SPAN_NOTICE("\The [user] does \the [user]'s lips with \the [src]."),
+			SPAN_NOTICE("You apply \the [src].")
+		)
+		user_living.set_lip_colour(color)
+	return TRUE
 
 //types
 /obj/item/lipstick/yellow

@@ -5,11 +5,15 @@
 	var/_facial_hair_colour
 	var/_eye_colour
 	var/_skin_colour
+	var/_lip_colour
 
 /mob/living/carbon/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list(), var/datum/topic_state/state = global.default_topic_state)
 	var/datum/nano_module/appearance_changer/AC = new(location, src, check_species_whitelist, species_whitelist, species_blacklist)
 	AC.flags = flags
 	AC.ui_interact(user, state = state)
+
+/mob/living/carbon/human/get_lip_colour()
+	return _lip_colour
 
 /mob/living/carbon/human/get_eye_colour()
 	return _eye_colour
@@ -28,6 +32,12 @@
 
 /mob/living/carbon/human/get_facial_hair_colour()
 	return _facial_hair_colour
+
+/mob/living/carbon/human/set_lip_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_lip_colour = new_color
+		if(!skip_update)
+			update_body()
 
 /mob/living/carbon/human/set_eye_colour(var/new_color, var/skip_update = FALSE)
 	if((. = ..()))
