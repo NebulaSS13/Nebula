@@ -137,8 +137,8 @@
 #define FLASH_PROTECTION_MODERATE 2
 #define FLASH_PROTECTION_MAJOR 3
 
-#define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
-#define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
+#define ANIMAL_SPAWN_DELAY round(get_config_value(/decl/config/num/respawn_delay) / 6)
+#define DRONE_SPAWN_DELAY  round(get_config_value(/decl/config/num/respawn_delay) / 3)
 
 // Incapacitation flags, used by the mob/proc/incapacitated() proc
 #define INCAPACITATION_NONE 0
@@ -330,7 +330,7 @@ var/global/list/dexterity_levels = list(
 #define INJECTION_PORT 2
 #define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
 
-#define ADJUSTED_GLIDE_SIZE(DELAY) (NONUNIT_CEILING((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (config.glide_size_delay))
+#define ADJUSTED_GLIDE_SIZE(DELAY) (NONUNIT_CEILING((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (get_config_value(/decl/config/num/movement_glide_size)))
 
 #define PREF_MEM_RECORD "memory"
 #define PREF_SEC_RECORD "sec_record"

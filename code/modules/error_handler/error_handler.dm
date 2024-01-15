@@ -44,17 +44,9 @@ var/global/regex/actual_error_file_line
 	//Handle cooldowns and silencing spammy errors
 	var/silencing = FALSE
 
-	// We can runtime before config is initialized because BYOND initialize objs/map before a bunch of other stuff happens.
-	// This is a bunch of workaround code for that. Hooray!
-
-	var/configured_error_cooldown = initial(config.error_cooldown)
-	var/configured_error_limit = initial(config.error_limit)
-	var/configured_error_silence_time = initial(config.error_silence_time)
-	if(config)
-		configured_error_cooldown = config.error_cooldown
-		configured_error_limit = config.error_limit
-		configured_error_silence_time = config.error_silence_time
-
+	var/configured_error_cooldown     = get_config_value(/decl/config/num/debug_error_cooldown)
+	var/configured_error_limit        = get_config_value(/decl/config/num/debug_error_limit)
+	var/configured_error_silence_time = get_config_value(/decl/config/num/debug_error_silence_time)
 
 	//Each occurence of an unique error adds to its cooldown time...
 	cooldown = max(0, cooldown - (world.time - last_seen)) + configured_error_cooldown

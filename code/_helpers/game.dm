@@ -441,7 +441,7 @@
 /proc/SecondsToTicks(var/seconds)
 	return seconds * 10
 
-/proc/round_is_spooky(var/spookiness_threshold = config.cult_ghostwriter_req_cultists)
+/proc/round_is_spooky(var/spookiness_threshold = get_config_value(/decl/config/num/cult_ghostwriter_req_cultists))
 	var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 	return (cult.current_antagonists.len > spookiness_threshold)
 

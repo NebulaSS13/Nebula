@@ -44,10 +44,11 @@ var/global/list/decl/topic_command/topic_commands = list()
 	if (!can_use(T, addr, master, key))
 		return FALSE
 	var/list/params = params2list(T)
-	if (!config.comms_password)
+	var/comms_password = get_config_value(/decl/config/text/comms_password)
+	if (!comms_password)
 		set_throttle(addr, 10 SECONDS, "Comms Not Enabled")
 		return "Not Enabled"
-	if (params["key"] != config.comms_password)
+	if (params["key"] != comms_password)
 		set_throttle(addr, 30 SECONDS, "Bad Comms Key")
 		return "Bad Key"
 	return use(params)
@@ -79,12 +80,12 @@ var/global/list/decl/topic_command/topic_commands = list()
 /decl/topic_command/status/use(var/list/params)
 	var/list/s = list()
 	s["version"] = game_version
-	s["mode"] = PUBLIC_GAME_MODE
-	s["respawn"] = config.abandon_allowed
-	s["enter"] = config.enter_allowed
-	s["vote"] = config.allow_vote_mode
-	s["ai"] = !!length(empty_playable_ai_cores)
-	s["host"] = host || null
+	s["mode"] =    PUBLIC_GAME_MODE
+	s["respawn"] = get_config_value(/decl/config/toggle/on/abandon_allowed)
+	s["enter"] =   get_config_value(/decl/config/toggle/on/enter_allowed)
+	s["vote"] =    get_config_value(/decl/config/toggle/vote_mode)
+	s["ai"] =      !!length(empty_playable_ai_cores)
+	s["host"] =    host || null
 
 	// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 	s["players"] = 0
@@ -167,10 +168,11 @@ var/global/list/decl/topic_command/topic_commands = list()
 	if (!can_use(T, addr, master, key))
 		return FALSE
 	var/list/params = params2list(T)
-	if(!config.ban_comms_password)
+	var/ban_comms_password = get_config_value(/decl/config/text/ban_comms_password)
+	if(!ban_comms_password)
 		set_throttle(addr, 10 SECONDS, "Bans Not Enabled")
 		return "Not Enabled"
-	if(params["bankey"] != config.ban_comms_password)
+	if(params["bankey"] != ban_comms_password)
 		set_throttle(addr, 30 SECONDS, "Bad Bans Key")
 		return "Bad Key"
 	return use(params)

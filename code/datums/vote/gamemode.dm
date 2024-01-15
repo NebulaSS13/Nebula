@@ -6,7 +6,7 @@
 	show_leading = TRUE
 
 /datum/vote/gamemode/can_run(mob/creator, automatic)
-	if(!automatic && (!config.allow_vote_mode || !is_admin(creator)))
+	if(!automatic && (!get_config_value(/decl/config/toggle/vote_mode) || !is_admin(creator)))
 		return FALSE // Admins and autovotes bypass the config setting.
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		return FALSE
@@ -20,7 +20,7 @@
 
 /datum/vote/gamemode/setup_vote(mob/creator, automatic)
 	..()
-	choices += config.votable_modes
+	choices += get_config_value(/decl/config/lists/mode_votable)
 	for (var/F in choices)
 		var/decl/game_mode/M = decls_repository.get_decl_by_id(F, validate_decl_type = FALSE)
 		if(!M)
@@ -50,8 +50,8 @@
 	SSticker.gamemode_vote_results = result.Copy()
 
 /datum/vote/gamemode/check_toggle()
-	return config.allow_vote_mode ? "Allowed" : "Disallowed"
+	return get_config_value(/decl/config/toggle/vote_mode) ? "Allowed" : "Disallowed"
 
 /datum/vote/gamemode/toggle(mob/user)
 	if(is_admin(user))
-		config.allow_vote_mode = !config.allow_vote_mode
+		toggle_config_value(/decl/config/toggle/vote_mode)

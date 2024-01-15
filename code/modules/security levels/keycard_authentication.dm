@@ -79,7 +79,7 @@
 			else
 				dat += "<li><A href='?src=\ref[src];triggerevent=Red alert'>Engage [security_state.high_security_level.name]</A></li>"
 
-		if(!config.ert_admin_call_only)
+		if(!get_config_value(/decl/config/toggle/ert_admin_call_only))
 			dat += "<li><A href='?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A></li>"
 
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A></li>"
@@ -192,8 +192,9 @@
 			SSstatistics.add_field("alert_keycard_auth_nukecode",1)
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
-	if(config.ert_admin_call_only) return 1
-	return SSticker.mode && SSticker.mode.ert_disabled
+	if(get_config_value(/decl/config/toggle/ert_admin_call_only))
+		return TRUE
+	return SSticker.mode?.ert_disabled
 
 /obj/machinery/keycard_auth/update_directional_offset(force = FALSE)
 	if(!force && (!length(directional_offset) || !is_wall_mounted())) //Check if the thing is actually mapped onto a table or something

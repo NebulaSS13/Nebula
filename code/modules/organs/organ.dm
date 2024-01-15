@@ -215,7 +215,7 @@
 			if(reagents.has_reagent(/decl/material/liquid/blood))
 				blood_splatter(get_turf(src), src, 1)
 			reagents.remove_any(0.1)
-		if(config.organs_decay)
+		if(get_config_value(/decl/config/toggle/health_organs_decay))
 			take_general_damage(rand(1,3))
 		germ_level += rand(2,6)
 		if(germ_level >= INFECTION_LEVEL_TWO)

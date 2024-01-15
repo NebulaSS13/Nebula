@@ -84,7 +84,7 @@ var/global/list/localhost_addresses = list(
 		ticket.close(client_repository.get_lite_client(usr.client))
 
 	//Logs all hrefs
-	if(config && config.log_hrefs && global.world_href_log)
+	if(get_config_value(/decl/config/toggle/log_hrefs) && global.world_href_log)
 		to_file(global.world_href_log, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
 
 	switch(href_list["_src_"])
@@ -130,14 +130,15 @@ var/global/list/localhost_addresses = list(
 	deactivate_darkmode(clear_chat = FALSE) // Overwritten if the pref is set later.
 
 	#if DM_VERSION >= 512
-	var/bad_version = config.minimum_byond_version && byond_version < config.minimum_byond_version
-	var/bad_build = config.minimum_byond_build && byond_build < config.minimum_byond_build
+	var/bad_version = byond_version < get_config_value(/decl/config/num/minimum_byond_version)
+	var/bad_build   = byond_build < get_config_value(/decl/config/num/minimum_byond_build)
+
 	if (bad_build || bad_version)
 		to_chat(src, "You are attempting to connect with an out-of-date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
 
-	if("[byond_version].[byond_build]" in config.forbidden_versions)
+	if("[byond_version].[byond_build]" in get_config_value(/decl/config/lists/forbidden_versions))
 		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
@@ -145,23 +146,24 @@ var/global/list/localhost_addresses = list(
 
 	#endif
 
-	var/local_connection = (config.auto_local_admin && (isnull(address) || global.localhost_addresses[address]))
+	var/local_connection = (get_config_value(/decl/config/toggle/on/auto_local_admin) && (isnull(address) || global.localhost_addresses[address]))
 	if(!local_connection)
-		if(!config.guests_allowed && IsGuestKey(key))
+		if(!get_config_value(/decl/config/toggle/guests_allowed) && IsGuestKey(key))
 			alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 			qdel(src)
 			return
-		if(config.player_limit != 0)
-			if((global.clients.len >= config.player_limit) && !(ckey in admin_datums))
-				alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
-				log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
-				qdel(src)
-				return
+		var/player_limit = get_config_value(/decl/config/num/player_limit)
+		if(player_limit != 0 && global.clients.len >= player_limit && !(ckey in admin_datums))
+			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
+			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[player_limit])")
+			qdel(src)
+			return
 
 	// Change the way they should download resources.
-	if(config.resource_urls && config.resource_urls.len)
-		src.preload_rsc = pick(config.resource_urls)
-	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
+	var/list/resource_urls = get_config_value(/decl/config/lists/resource_urls)
+	if(length(resource_urls))
+		src.preload_rsc = pick(resource_urls)
+	else src.preload_rsc = 1 // If resource_urls is not set, preload like normal.
 
 	global.clients += src
 	global.ckey_directory[ckey] = src
@@ -199,17 +201,19 @@ var/global/list/localhost_addresses = list(
 	prefs.last_id = computer_id
 	apply_fps(prefs.clientfps)
 
-	if(!isnull(config.lock_client_view_x) && !isnull(config.lock_client_view_y))
-		view = "[config.lock_client_view_x]x[config.lock_client_view_y]"
+	var/lock_x = get_config_value(/decl/config/num/clients/lock_client_view_x)
+	var/lock_y = get_config_value(/decl/config/num/clients/lock_client_view_y)
+	if(lock_x > 0 && lock_y > 0)
+		view = "[lock_x]x[lock_y]"
 
 	. = ..()	//calls mob.Login()
 
 	global.using_map.map_info(src)
 
-	if(custom_event_msg && custom_event_msg != "")
+	if(global.custom_event_msg)
 		to_chat(src, "<h1 class='alert'>Custom Event</h1>")
 		to_chat(src, "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>")
-		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
+		to_chat(src, "<span class='alert'>[global.custom_event_msg]</span>")
 		to_chat(src, "<br>")
 
 	if(holder)
@@ -344,10 +348,10 @@ var/global/list/localhost_addresses = list(
 	var/sql_admin_rank = sql_sanitize_text(admin_rank)
 
 	if ((player_age <= 0) && !(ckey in global.panic_bunker_bypass)) //first connection
-		if (config.panic_bunker && !holder && !deadmin_holder)
+		if (get_config_value(/decl/config/toggle/panic_bunker) && !holder && !deadmin_holder)
 			log_adminwarn("Failed Login: [key] - New account attempting to connect during panic bunker")
 			message_admins("<span class='adminnotice'>Failed Login: [key] - New account attempting to connect during panic bunker</span>")
-			to_chat(src, config.panic_bunker_message)
+			to_chat(src, get_config_value(/decl/config/text/panic_bunker_message))
 			qdel(src)
 			return 0
 
@@ -377,9 +381,9 @@ var/global/list/localhost_addresses = list(
 		message_staff("\[[holder.rank]\] [key_name(src)] logged out.")
 		if(!global.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
 			send2adminirc("[key_name(src)] logged out - no more staff online.")
-			if(config.delist_when_no_admins && global.visibility_pref)
-				world.update_hub_visibility()
-				send2adminirc("Toggled hub visibility. The server is now invisible ([global.visibility_pref]).")
+			if(get_config_value(/decl/config/toggle/delist_when_no_admins) && get_config_value(/decl/config/toggle/hub_visibility))
+				toggle_config_value(/decl/config/toggle/hub_visibility)
+				send2adminirc("Toggled hub visibility. The server is now invisible.")
 
 //checks if a client is afk
 //3000 frames = 5 minutes
@@ -499,9 +503,9 @@ var/global/const/MAX_VIEW = 41
 		return // Some kind of malformed winget(), do not proceed.
 
 	// Rescale as needed.
-	var/res_x =    config.lock_client_view_x || CEILING(text2num(view_components[1]) / divisor)
-	var/res_y =    config.lock_client_view_y || CEILING(text2num(view_components[2]) / divisor)
-	var/max_view = config.max_client_view_x  || MAX_VIEW
+	var/res_x =    get_config_value(/decl/config/num/clients/lock_client_view_x) || CEILING(text2num(view_components[1]) / divisor)
+	var/res_y =    get_config_value(/decl/config/num/clients/lock_client_view_y) || CEILING(text2num(view_components[2]) / divisor)
+	var/max_view = get_config_value(/decl/config/num/clients/max_client_view_x)  || MAX_VIEW
 
 	last_view_x_dim = clamp(res_x, MIN_VIEW, max_view)
 	last_view_y_dim = clamp(res_y, MIN_VIEW, max_view)

@@ -379,7 +379,7 @@
 
 /datum/planetoid_data/random/proc/generate_daycycle_data()
 	starts_at_night = (surface_light_level > 0.1)
-	day_duration    = rand(global.config.exoplanet_min_day_duration, global.config.exoplanet_max_day_duration)
+	day_duration    = rand(get_config_value(/decl/config/num/exoplanet_min_day_duration), get_config_value(/decl/config/num/exoplanet_max_day_duration)) MINUTES
 
 ///If the planet doesn't have a name defined, a name will be randomly generated for it. (Named this way because a global proc generate_planet_name already exists)
 /datum/planetoid_data/random/proc/make_planet_name()

@@ -3,14 +3,6 @@
 //NOTE: Breathing happens once per FOUR TICKS, unless the last breath fails. In which case it happens once per ONE TICK! So oxyloss healing is done once per 4 ticks while oxyloss damage is applied once per tick!
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
 
-#define HUMAN_CRIT_TIME_CUSHION (10 MINUTES) //approximate time limit to stabilize someone in crit
-#define HUMAN_CRIT_HEALTH_CUSHION (config.health_threshold_crit - config.health_threshold_dead)
-
-//The amount of damage you'll get when in critical condition. We want this to be a HUMAN_CRIT_TIME_CUSHION long deal.
-//There are HUMAN_CRIT_HEALTH_CUSHION hp to get through, so (HUMAN_CRIT_HEALTH_CUSHION/HUMAN_CRIT_TIME_CUSHION) per tick.
-//Breaths however only happen once every MOB_BREATH_DELAY life ticks. The delay between life ticks is set by the mob process.
-#define HUMAN_CRIT_MAX_OXYLOSS ( MOB_BREATH_DELAY * process_schedule_interval("mob") * (HUMAN_CRIT_HEALTH_CUSHION/HUMAN_CRIT_TIME_CUSHION) )
-
 #define HEAT_DAMAGE_LEVEL_1 2 //Amount of damage applied when your body temperature just passes the 360.15k safety point
 #define HEAT_DAMAGE_LEVEL_2 4 //Amount of damage applied when your body temperature passes the 400K point
 #define HEAT_DAMAGE_LEVEL_3 8 //Amount of damage applied when your body temperature passes the 1000K point
@@ -86,7 +78,7 @@
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
 		var/mod = (lying + (nutrition / get_max_nutrition())) / 2
-		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
+		adjust_stamina(max(get_config_value(/decl/config/num/movement_max_stamina_recovery), get_config_value(/decl/config/num/movement_min_stamina_recovery) * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
 	var/old_stat = stat
@@ -684,7 +676,7 @@
 
 	var/stress_modifier = get_stress_modifier()
 	if(stress_modifier)
-		stress_modifier *= config.stress_shock_recovery_constant
+		stress_modifier *= get_config_value(/decl/config/num/health_stress_shock_recovery_constant)
 
 	if(is_asystole())
 		shock_stage = max(shock_stage + (BASE_SHOCK_RECOVERY + stress_modifier), 61)

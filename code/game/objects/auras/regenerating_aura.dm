@@ -36,17 +36,18 @@
 		return 0
 
 	var/update_health = FALSE
+	var/organ_regen = get_config_value(/decl/config/num/health_organ_regeneration_multiplier)
 	if(brute_mult && H.getBruteLoss())
 		update_health = TRUE
-		H.adjustBruteLoss(-brute_mult * config.organ_regeneration_multiplier, do_update_health = FALSE)
+		H.adjustBruteLoss(-brute_mult * organ_regen, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(fire_mult && H.getFireLoss())
 		update_health = TRUE
-		H.adjustFireLoss(-fire_mult * config.organ_regeneration_multiplier, do_update_health = FALSE)
+		H.adjustFireLoss(-fire_mult * organ_regen, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(tox_mult && H.getToxLoss())
 		update_health = TRUE
-		H.adjustToxLoss(-tox_mult * config.organ_regeneration_multiplier, do_update_health = FALSE)
+		H.adjustToxLoss(-tox_mult * organ_regen, do_update_health = FALSE)
 		H.adjust_nutrition(-nutrition_damage_mult)
 	if(update_health)
 		H.update_health()

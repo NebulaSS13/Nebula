@@ -13,7 +13,7 @@ SUBSYSTEM_DEF(daycyle)
 
 ///Adds a set of levels that should all be updated at the same time and share the same day state
 /datum/controller/subsystem/daycyle/proc/add_linked_levels(var/list/level_ids, var/start_at_night = FALSE, var/update_interval = 5 MINUTES)
-	if(global.config.disable_daycycle)
+	if(get_config_value(/decl/config/toggle/disable_daycycle))
 		return //If disabled, we don't add anything
 	var/topmost_level_id = level_ids[1]
 	if(LAZYISIN(registered_levels, topmost_level_id))
@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(daycyle)
 	LAZYREMOVE(registered_levels, topmost_level_id)
 
 /datum/controller/subsystem/daycyle/fire(resumed = 0)
-	if(global.config.disable_daycycle)
+	if(get_config_value(/decl/config/toggle/disable_daycycle))
 		disable()
 		LAZYCLEARLIST(current_run)
 		return //If disabled, we shouldn't fire

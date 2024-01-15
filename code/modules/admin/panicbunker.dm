@@ -6,11 +6,9 @@ var/global/list/panic_bunker_bypass = list()
 
 	if(!check_rights(R_SERVER))
 		return
-
-	config.panic_bunker = !config.panic_bunker
-
-	log_and_message_admins("[key_name(usr)] has toggled the Panic Bunker, it is now [(config.panic_bunker ? "on" : "off")]")
-	if (config.panic_bunker && (!dbcon || !dbcon.IsConnected()))
+	toggle_config_value(/decl/config/toggle/panic_bunker)
+	log_and_message_admins("[key_name(usr)] has toggled the Panic Bunker, it is now [(get_config_value(/decl/config/toggle/panic_bunker) ? "on" : "off")]")
+	if (get_config_value(/decl/config/toggle/panic_bunker) && (!dbcon || !dbcon.IsConnected()))
 		message_admins("The SQL database is not connected, player age cannot be checked and the panic bunker will not function until the database connection is restored.")
 
 /datum/admins/proc/addbunkerbypass(ckeytobypass as text)

@@ -204,9 +204,9 @@ var/global/list/bodytypes_by_category = list()
 	if(!breathing_organ && has_organ[BP_LUNGS])
 		breathing_organ = BP_LUNGS
 
-	if(config.grant_default_darksight)
-		eye_darksight_range = max(eye_darksight_range, config.default_darksight_range)
-		eye_low_light_vision_effectiveness = max(eye_low_light_vision_effectiveness, config.default_darksight_effectiveness)
+	if(get_config_value(/decl/config/toggle/grant_default_darksight))
+		eye_darksight_range = max(eye_darksight_range, get_config_value(/decl/config/num/default_darksight_range))
+		eye_low_light_vision_effectiveness = max(eye_low_light_vision_effectiveness, get_config_value(/decl/config/num/default_darksight_effectiveness))
 
 	// Modify organ lists if necessary.
 	if(islist(override_organ_types))

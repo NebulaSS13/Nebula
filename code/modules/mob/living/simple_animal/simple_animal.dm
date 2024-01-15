@@ -440,7 +440,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			tally = 1
 		tally *= purge
 
-	return tally+config.animal_delay
+	return tally+get_config_value(/decl/config/num/movement_animal)
 
 /mob/living/simple_animal/Stat()
 	. = ..()

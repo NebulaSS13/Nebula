@@ -1,6 +1,6 @@
 //TODO: Flash range does nothing currently
 /proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN)
-	if(config.use_iterative_explosions)
+	if(get_config_value(/decl/config/toggle/use_iterative_explosions))
 		. = explosion_iter(epicenter, (devastation_range * 2 + heavy_impact_range + light_impact_range), z_transfer)
 	else
 		. = explosion_basic(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, z_transfer)
@@ -127,11 +127,12 @@
 		if (O.explosion_resistance)
 			power -= O.explosion_resistance
 
-	if (power >= config.iterative_explosives_z_threshold)
+	if (power >= get_config_value(/decl/config/num/iterative_explosives_z_threshold))
+		var/explo_mult = get_config_value(/decl/config/num/iterative_explosives_z_multiplier)
 		if ((z_transfer & UP) && HasAbove(epicenter.z))
-			explosion_iter(GetAbove(epicenter), power * config.iterative_explosives_z_multiplier, UP)
+			explosion_iter(GetAbove(epicenter), power * explo_mult, UP)
 		if ((z_transfer & DOWN) && HasBelow(epicenter.z))
-			explosion_iter(GetBelow(epicenter), power * config.iterative_explosives_z_multiplier, DOWN)
+			explosion_iter(GetBelow(epicenter), power * explo_mult, DOWN)
 
 	// These three lists must always be the same length.
 	var/list/turf_queue = list(epicenter, epicenter, epicenter, epicenter)

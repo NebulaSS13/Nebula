@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(typing)
 	*/
 
 /datum/controller/subsystem/typing/Initialize(start_timeofday)
-	if(config.show_typing_indicator_for_whispers)
+	if(get_config_value(/decl/config/toggle/show_typing_indicator_for_whispers))
 		match_verbs = regex("^(Me|Say|Whisper) +\"?\\w+")
 	else
 		match_verbs = regex("^(Me|Say) +\"?\\w+")

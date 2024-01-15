@@ -92,7 +92,7 @@
 	get_starting_locations()
 	if(!name_plural)
 		name_plural = name
-	if(config.protect_roles_from_antagonist)
+	if(get_config_value(/decl/config/toggle/protect_roles_from_antagonist))
 		restricted_jobs |= protected_jobs
 	if(antaghud_indicator)
 		if(!global.hud_icon_reference)
@@ -136,10 +136,11 @@
 
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.
+	var/age_restriction = get_config_value(/decl/config/num/use_age_restriction_for_antags)
 	for(var/datum/mind/player in mode.get_players_for_role(type))
 		if(ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
 			log_debug("[key_name(player)] is not eligible to become a [name]: Only ghosts may join as this role!")
-		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
+		else if(age_restriction && player.current.client.player_age < minimum_player_age)
 			log_debug("[key_name(player)] is not eligible to become a [name]: Is only [player.current.client.player_age] day\s old, has to be [minimum_player_age] day\s!")
 		else if(player.assigned_special_role)
 			log_debug("[key_name(player)] is not eligible to become a [name]: They already have a special role ([player.get_special_role_name("unknown role")])!")
@@ -159,10 +160,11 @@
 	var/candidates = list()
 
 	// Keeping broken up for readability
+	var/age_restriction = get_config_value(/decl/config/num/use_age_restriction_for_antags)
 	for(var/datum/mind/player in mode.get_players_for_role(type))
 		if(ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
 			continue
-		if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
+		if(age_restriction && player.current.client.player_age < minimum_player_age)
 			continue
 		if(player.assigned_special_role)
 			continue

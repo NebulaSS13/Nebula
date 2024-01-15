@@ -64,7 +64,12 @@
 		return TRUE
 
 /mob/living/carbon/brain/should_be_dead()
-	return (!container && (current_health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
+	if(container)
+		return FALSE
+	if(current_health >= get_config_value(/decl/config/num/health_health_threshold_dead))
+		return FALSE
+	var/revival_brain_life = get_config_value(/decl/config/num/health_revival_brain_life)
+	return revival_brain_life >= 0 && (world.time - timeofhostdeath) > revival_brain_life
 
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 

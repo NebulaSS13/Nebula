@@ -27,7 +27,7 @@
 	if(!length(message))
 		return FALSE
 
-	if(config.disable_webhook_embeds)
+	if(get_config_value(/decl/config/toggle/disable_webhook_embeds))
 		var/list/embed_content
 		for(var/list/embed in message["embeds"])
 			if(embed["title"])
