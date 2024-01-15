@@ -48,7 +48,6 @@ var/global/list/limb_icon_cache = list()
 		SetName("[last_owner.real_name]'s head")
 		addtimer(CALLBACK(last_owner, TYPE_PROC_REF(/mob, update_hair)), 1, TIMER_UNIQUE)
 	return ..()
-		icon_cache_key += "[M][mark_color]"
 
 /obj/item/organ/external/proc/update_limb_icon_file()
 	if(!BP_IS_PROSTHETIC(src) && (status & ORGAN_MUTATED))
@@ -60,12 +59,25 @@ var/global/list/limb_icon_cache = list()
 
 var/global/list/organ_icon_cache = list()
 /obj/item/organ/external/proc/generate_mob_icon()
-	var/icon/ret = apply_colouration(new/icon(icon, icon_state))
-	//Body markings, does not include head, duplicated (sadly) above.
+
+	// Generate base icon with colour and tone.
+	var/icon/ret = bodytype.apply_limb_colouration(src, new /icon(icon, icon_state))
+	if(status & ORGAN_DEAD)
+		ret.ColorTone(rgb(10,50,0))
+		ret.SetIntensity(0.7)
+	if(skin_tone)
+		if(skin_tone >= 0)
+			ret.Blend(rgb(skin_tone, skin_tone, skin_tone), ICON_ADD)
+		else
+			ret.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
+	if((bodytype.appearance_flags & HAS_SKIN_COLOR) && skin_colour)
+		ret.Blend(skin_colour, skin_blend)
+
+	//Body markings.
 	for(var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
-		if(!mark_style?.sprite_overlay_layer)
-			ret.Blend(mark_style.get_cached_marking_icon(bodytype, icon_state, markings[M]), mark_style.layer_blend)
+		if(mark_style && !mark_style.sprite_overlay_layer)
+			ret.Blend(mark_style.get_cached_accessory_icon(src, markings[M]), mark_style.layer_blend)
 	if(render_alpha < 255)
 		ret += rgb(,,,render_alpha)
 	global.organ_icon_cache[_icon_cache_key] = ret
@@ -73,12 +85,11 @@ var/global/list/organ_icon_cache = list()
 
 /obj/item/organ/external/proc/get_mob_overlays()
 	for(var/M in markings)
-		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
-		if(isnull(mark_style.sprite_overlay_layer))
-			continue
-		var/image/mark_image = image(mark_style.get_cached_marking_icon(bodytype, icon_state, markings[M]))
-		mark_image.layer = mark_style.sprite_overlay_layer
-		LAZYADD(., mark_image)
+		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
+		if(mark_style?.sprite_overlay_layer)
+			var/image/mark_image = image(mark_style.get_cached_accessory_icon(src, markings[M]))
+			mark_image.layer = mark_style.sprite_overlay_layer
+			LAZYADD(., mark_image)
 
 /obj/item/organ/external/proc/get_icon_cache_key_components()
 	. = list("[icon_state]_[species.name]_[bodytype.name]_[render_alpha]_[icon]")

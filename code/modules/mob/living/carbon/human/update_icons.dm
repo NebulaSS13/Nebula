@@ -349,8 +349,8 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
-
 	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_mob_overlays() : null), update_icons)
+
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
 	// todo: make this use bodytype
 	set_current_mob_overlay(HO_SKIN_LAYER, species.update_skin(src), update_icons)

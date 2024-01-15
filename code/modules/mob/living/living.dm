@@ -1020,7 +1020,7 @@ default behaviour is:
 	jumping = FALSE
 	reset_layer()
 
-/mob/living/proc/get_eyes_overlay()
+/mob/living/proc/get_eye_overlay()
 	return
 
 /mob/living/proc/empty_stomach()

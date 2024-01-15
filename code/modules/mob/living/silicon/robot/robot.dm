@@ -693,7 +693,7 @@
 /mob/living/silicon/robot/get_req_access()
 	return req_access
 
-/mob/living/silicon/robot/get_eyes_overlay()
+/mob/living/silicon/robot/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
 	if(check_state_in_icon(eye_icon_state, icon))
 		return emissive_overlay(icon, eye_icon_state)
@@ -704,7 +704,7 @@
 
 	icon_state = ICON_STATE_WORLD
 	if(stat == CONSCIOUS)
-		var/image/eyes = get_eyes_overlay()
+		var/image/eyes = get_eye_overlay()
 		if(eyes)
 			add_overlay(eyes)
 

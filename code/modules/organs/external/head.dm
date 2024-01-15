@@ -111,13 +111,15 @@
 		var/icon/eyes_icon = get_eyes_organ()?.get_onhead_icon()
 		if(eyes_icon)
 			ret.Blend(eyes_icon, ICON_OVERLAY)
-
-		var/lip_colour = owner?.get_lip_colour()
-		if(lip_colour && (bodytype.appearance_flags & HAS_LIPS))
-			var/lip_icon = bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi'
-			var/icon/lip_appearance = new/icon(lip_icon, "lipstick_s")
-			lip_appearance.Blend(owner?.lip_color || COLOR_BLACK, ICON_MULTIPLY)
-			ret.Blend(lip_appearance, ICON_OVERLAY)
+	// Lip icon.
+	if(owner && (bodytype.appearance_flags & HAS_LIPS))
+		var/lip_icon = bodytype.get_lip_icon(owner)
+		if(lip_icon)
+			var/lip_color = owner?.lip_color
+			if(lip_color)
+				var/icon/lip_appearance = new/icon(lip_icon, "lipstick_s")
+				lip_appearance.Blend(lip_color || COLOR_BLACK, ICON_MULTIPLY)
+				ret.Blend(lip_appearance, ICON_OVERLAY)
 	return ret
 
 /obj/item/organ/external/head/get_mob_overlays()
@@ -132,10 +134,8 @@
 		var/decl/sprite_accessory/facial_hair_style = resolve_accessory_to_decl(facial_hairstyle)
 		if(facial_hair_style?.accessory_is_available(owner, species, bodytype))
 			LAZYADD(., image(facial_hair_style.get_cached_accessory_icon(src, owner.get_facial_hair_colour())))
-
 	var/hairstyle = owner.get_hairstyle()
 	if(hairstyle)
 		var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(hairstyle)
 		if(hair_style?.accessory_is_available(owner, species, bodytype))
-
 			LAZYADD(., image(hair_style.get_cached_accessory_icon(src, owner.get_hair_colour())))

@@ -155,13 +155,13 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	z_flags &= ~ZMM_MANGLE_PLANES
 	if(stat == CONSCIOUS)
-		var/image/I = get_eyes_overlay()
+		var/image/I = get_eye_overlay()
 		if(I)
 			if(glowing_eyes)
 				z_flags |= ZMM_MANGLE_PLANES
 			add_overlay(I)
 
-/mob/living/simple_animal/get_eyes_overlay()
+/mob/living/simple_animal/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
 	if(check_state_in_icon(eye_icon_state, icon))
 		var/image/I = (glowing_eyes ? emissive_overlay(icon, eye_icon_state) : image(icon, eye_icon_state))
