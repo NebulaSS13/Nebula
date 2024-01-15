@@ -9,7 +9,7 @@
 	attack_cooldown = 2.5*DEFAULT_WEAPON_COOLDOWN
 	melee_accuracy_bonus = -25
 	material = /decl/material/solid/metal/steel
-	origin_tech = "{'engineering':3,'materials':2}"
+	origin_tech = @'{"engineering":3,"materials":2}'
 
 // BRACE - Can be installed on airlock to reinforce it and keep it closed.
 /obj/item/airlock_brace
@@ -21,7 +21,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	material_health_multiplier = 0.6
-	origin_tech = "{'engineering':3,'materials':2}"
+	origin_tech = @'{"engineering":3,"materials":2}'
 
 	var/obj/machinery/door/airlock/airlock = null
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/brace/electronics

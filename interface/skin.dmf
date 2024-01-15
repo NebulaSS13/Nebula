@@ -148,6 +148,7 @@ window "mainwindow"
 		anchor1 = 0,0
 		anchor2 = 100,100
 		saved-params = "splitter"
+		left = "mapwindow"
 		right = "rpane"
 		is-vert = true
 	elem "asset_cache_browser"
@@ -192,8 +193,6 @@ window "mapwindow"
 		font-size = 7
 		is-default = true
 		saved-params = "icon-size;zoom-mode"
-		on-show = ".winset\"mainwindow.split.left=mapwindow\""
-		on-hide = ".winset\"mainwindow.split.left=\""
 	elem "lobbybrowser"
 		type = BROWSER
 		pos = 0,0
@@ -276,11 +275,12 @@ window "rpane"
 		is-pane = true
 	elem "rpanewindow"
 		type = CHILD
-		pos = 0,0
-		size = 640x474
+		pos = 0,30
+		size = 0x0
 		anchor1 = 0,0
 		anchor2 = 100,100
 		saved-params = "splitter"
+		left = "infowindow"
 		right = "outputwindow"
 		is-vert = false
 	elem "github"
@@ -357,7 +357,6 @@ window "rpane"
 		size = 60x15
 		anchor1 = none
 		anchor2 = none
-		is-visible = false
 		saved-params = "is-checked"
 		text = "Text"
 		command = ".winset \"rpanewindow.left=;\""
@@ -370,7 +369,6 @@ window "rpane"
 		size = 60x15
 		anchor1 = none
 		anchor2 = none
-		is-visible = false
 		saved-params = "is-checked"
 		text = "Info"
 		command = ".winset \"rpanewindow.left=infowindow\""
@@ -432,6 +430,6 @@ window "infowindow"
 		is-default = true
 		saved-params = ""
 		highlight-color = #00aa00
-		on-show = ".winset\"rpane.infob.is-visible=true;rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
-		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
+		on-show = ".winset\"rpane.infob.is-checked=true\""
+		on-hide = ".winset\"rpane.infob.is-checked=false\""
 

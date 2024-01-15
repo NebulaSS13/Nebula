@@ -59,7 +59,7 @@
 
 /obj/structure/leech_spawner/LateInitialize()
 	..()
-	proxy_listener = new /datum/proximity_trigger/square(src, .proc/burst, .proc/burst, 5)
+	proxy_listener = new /datum/proximity_trigger/square(src, PROC_REF(burst), PROC_REF(burst), 5)
 	proxy_listener.register_turfs()
 
 /obj/structure/leech_spawner/Destroy()

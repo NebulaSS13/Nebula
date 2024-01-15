@@ -1265,7 +1265,7 @@
 /obj/machinery/recharger,
 /obj/structure/sign/poster{
 	pixel_x = 32;
-	dir = 4
+	dir = 8
 	},
 /obj/item/trash/tray,
 /obj/item/circular_saw,

@@ -12,7 +12,7 @@
 		canremove = FALSE
 		to_chat(user, SPAN_DANGER("<font size=3>\The [src] shatters your mind as it sears through [user.isSynthetic() ? "metal and circuitry" : "flesh and bone"], embedding itself into your skull!</font>"))
 		SET_STATUS_MAX(user, STAT_PARA, 5)
-		addtimer(CALLBACK(src, .proc/activate_role), 5 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(activate_role)), 5 SECONDS)
 	else
 		canremove = TRUE
 		name = initial(name)

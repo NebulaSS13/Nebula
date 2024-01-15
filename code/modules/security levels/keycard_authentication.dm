@@ -9,7 +9,7 @@
 	active_power_usage = 6
 	power_channel = ENVIRON
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-20}, 'SOUTH':{'y':28}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
+	directional_offset = @'{"NORTH":{"y":-20}, "SOUTH":{"y":28}, "EAST":{"x":-24}, "WEST":{"x":24}}'
 
 	var/active = 0 //This gets set to 1 on all devices except the one where the initial request was made.
 	var/event = ""
@@ -130,10 +130,10 @@
 		if(KA == src)
 			continue
 		KA.reset()
-		addtimer(CALLBACK(src, .proc/receive_request, src, initial_card.resolve()))
+		addtimer(CALLBACK(src, PROC_REF(receive_request), src, initial_card.resolve()))
 
 	if(confirm_delay)
-		addtimer(CALLBACK(src, .proc/broadcast_check), confirm_delay)
+		addtimer(CALLBACK(src, PROC_REF(broadcast_check)), confirm_delay)
 
 /obj/machinery/keycard_auth/proc/broadcast_check()
 	if(confirmed)

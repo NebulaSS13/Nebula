@@ -9,7 +9,7 @@
 /obj/item/kitchen/utensil
 	w_class = ITEM_SIZE_TINY
 	thrown_material_force_multiplier = 1
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	attack_verb = list("attacked", "stabbed", "poked")
 	sharp = 0
 	edge = 0

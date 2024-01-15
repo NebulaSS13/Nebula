@@ -43,7 +43,7 @@
 	if(cell)
 		return
 	cell = new_cell
-	events_repository.register(/decl/observ/destroyed, cell, src, .proc/remove_cell)
+	events_repository.register(/decl/observ/destroyed, cell, src, PROC_REF(remove_cell))
 	if(!machine)
 		machine = loc
 	if(istype(machine))

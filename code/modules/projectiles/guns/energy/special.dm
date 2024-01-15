@@ -3,7 +3,7 @@
 	desc = "The Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats. Not the best of its type."
 	icon = 'icons/obj/guns/ion_rifle.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':2,'magnets':4}"
+	origin_tech = @'{"combat":2,"magnets":4}'
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
@@ -34,7 +34,7 @@
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
 	icon = 'icons/obj/guns/decloner.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':5,'materials':4,'powerstorage':3}"
+	origin_tech = @'{"combat":5,"materials":4,"powerstorage":3}'
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
 	combustion = 0
@@ -49,7 +49,7 @@
 	charge_cost = 10
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
-	origin_tech = "{'materials':2,'biotech':3,'powerstorage':3}"
+	origin_tech = @'{"materials":2,"biotech":3,"powerstorage":3}'
 	self_recharge = 1
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -108,7 +108,7 @@
 	icon = 'icons/obj/guns/toxgun.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'combat':5,'exoticmatter':4}"
+	origin_tech = @'{"combat":5,"exoticmatter":4}'
 	projectile_type = /obj/item/projectile/energy/radiation
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -126,7 +126,7 @@
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
-	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
+	origin_tech = @'{"materials":4,"exoticmatter":4,"engineering":6,"combat":3}'
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
@@ -172,7 +172,7 @@
 	icon = 'icons/obj/guns/incendiary_laser.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
-	origin_tech = "{'combat':7,'magnets':4,'esoteric':4}"
+	origin_tech = @'{"combat":7,"magnets":4,"esoteric":4}'
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,

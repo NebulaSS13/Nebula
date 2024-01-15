@@ -12,7 +12,7 @@
 	user.show_message("You push a button and watch patiently as the machine begins to hum.")
 	if(active)
 		active = FALSE
-		addtimer(CALLBACK(src, .proc/dispense), 3 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(dispense)), 3 SECONDS)
 	return TRUE
 
 /obj/machinery/acting/wardrobe/proc/dispense()

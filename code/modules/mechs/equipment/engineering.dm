@@ -1,7 +1,7 @@
 /obj/item/mech_equipment/mounted_system/rcd
 	icon_state = "mech_rcd"
 	holding = /obj/item/rcd/mounted
-	origin_tech = "{'engineering':4,'materials':3,'powerstorage':1}"
+	origin_tech = @'{"engineering":4,"materials":3,"powerstorage":1}'
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
 	material = /decl/material/solid/metal/steel
@@ -42,7 +42,7 @@
 	holding = /obj/item/chems/spray/extinguisher/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
-	origin_tech = "{'engineering':1,'materials':1}"
+	origin_tech = @'{"engineering":1,"materials":1}'
 
 /obj/item/mech_equipment/atmos_shields
 	icon_state = "mech_atmoshield_off"
@@ -51,7 +51,7 @@
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
 	equipment_delay = 0.25 SECONDS
-	origin_tech = "{'engineering':2,'powerstorage':2,'materials':3}"
+	origin_tech = @'{"engineering":2,"powerstorage":2,"materials":3}'
 	var/list/segments
 	var/current_mode = 0  //0 barrier, 1 bubble
 	var/shield_range = 2
@@ -144,14 +144,14 @@
 			if(istype(MS))
 				MS.shields = src
 				segments += MS
-				events_repository.register(/decl/observ/moved, MS, src, .proc/on_moved)
+				events_repository.register(/decl/observ/moved, MS, src, PROC_REF(on_moved))
 
 		passive_power_use = 0.8 KILOWATTS * segments.len
 
 		update_icon()
 		owner.update_icon()
-		events_repository.register(/decl/observ/moved, owner, src, .proc/on_moved)
-		events_repository.register(/decl/observ/dir_set, owner, src, .proc/on_turned)
+		events_repository.register(/decl/observ/moved, owner, src, PROC_REF(on_moved))
+		events_repository.register(/decl/observ/dir_set, owner, src, PROC_REF(on_turned))
 
 /obj/item/mech_equipment/atmos_shields/on_update_icon()
 	. = ..()
@@ -160,13 +160,13 @@
 /obj/item/mech_equipment/atmos_shields/deactivate()
 	for(var/obj/effect/mech_shield/MS in segments)
 		if(istype(MS))
-			events_repository.unregister(/decl/observ/moved, MS, src, .proc/on_moved)
+			events_repository.unregister(/decl/observ/moved, MS, src, PROC_REF(on_moved))
 	if(segments.len)
 		owner.visible_message(SPAN_WARNING("The energy shields in front of \the [owner] disappear!"))
 	QDEL_NULL_LIST(segments)
 	passive_power_use = 0
-	events_repository.unregister(/decl/observ/moved, owner, src, .proc/on_moved)
-	events_repository.unregister(/decl/observ/dir_set, owner, src, .proc/on_turned)
+	events_repository.unregister(/decl/observ/moved, owner, src, PROC_REF(on_moved))
+	events_repository.unregister(/decl/observ/dir_set, owner, src, PROC_REF(on_turned))
 	. = ..()
 	update_icon()
 	owner.update_icon()

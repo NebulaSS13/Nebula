@@ -13,7 +13,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	base_type = /obj/machinery/holomap
 	layer = ABOVE_WINDOW_LAYER	// Above windows.
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 
 	var/light_power_on = 1
 	var/light_range_on = 2
@@ -124,7 +124,7 @@
 		if(watching_mob.client)
 			animate(holomap_datum.station_map, alpha = 0, time = 5, easing = LINEAR_EASING)
 			var/mob/M = watching_mob
-			addtimer(CALLBACK(src, .proc/clear_image, M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
+			addtimer(CALLBACK(src, PROC_REF(clear_image), M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
 		events_repository.unregister(/decl/observ/moved, watching_mob, src)
 		events_repository.unregister(/decl/observ/destroyed, watching_mob, src)
 	watching_mob = null

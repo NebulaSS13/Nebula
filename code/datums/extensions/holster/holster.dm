@@ -53,14 +53,14 @@
 		user.visible_message("<span class='notice'>\The [user] holsters \the [holstered].</span>", "<span class='notice'>You holster \the [holstered].</span>")
 		atom_holder.SetName("occupied [initial(atom_holder.name)]")
 		atom_holder.update_icon()
-		events_repository.register(/decl/observ/moved, holstered, src, .proc/check_holster)
-		events_repository.register(/decl/observ/destroyed, holstered, src, .proc/clear_holster)
+		events_repository.register(/decl/observ/moved, holstered, src, PROC_REF(check_holster))
+		events_repository.register(/decl/observ/destroyed, holstered, src, PROC_REF(clear_holster))
 		return 1
 	return 0
 
 /datum/extension/holster/proc/clear_holster()
-	events_repository.unregister(/decl/observ/moved, holstered, src, .proc/check_holster)
-	events_repository.unregister(/decl/observ/destroyed, holstered, src, .proc/clear_holster)
+	events_repository.unregister(/decl/observ/moved, holstered, src, PROC_REF(check_holster))
+	events_repository.unregister(/decl/observ/destroyed, holstered, src, PROC_REF(clear_holster))
 	holstered = null
 	atom_holder.SetName(initial(atom_holder.name))
 

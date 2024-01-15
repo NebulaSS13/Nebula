@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(typing)
 	var/static/regex/match_verbs
 	/// A list of clients waiting to be polled for input state.
 	var/list/client/queue = list()
-	/// A list of ckey to list, containing current state data. See .proc/get_entry for details.
+	/// A list of ckey to list, containing current state data. See PROC_REF(get_entry) for details.
 	var/list/status = list()
 	/* example of an entry:
 		(ckey = list(

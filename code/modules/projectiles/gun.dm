@@ -41,7 +41,7 @@
 	throw_speed = 4
 	throw_range = 5
 	force = 5
-	origin_tech = "{'combat':1}"
+	origin_tech = @'{"combat":1}'
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
@@ -123,7 +123,7 @@
 		autofiring_at = fire_at
 		autofiring_by = fire_by
 		if(!autofiring_timer)
-			autofiring_timer = addtimer(CALLBACK(src, .proc/handle_autofire, autoturn), burst_delay, (TIMER_STOPPABLE | TIMER_LOOP | TIMER_UNIQUE | TIMER_OVERRIDE))
+			autofiring_timer = addtimer(CALLBACK(src, PROC_REF(handle_autofire), autoturn), burst_delay, (TIMER_STOPPABLE | TIMER_LOOP | TIMER_UNIQUE | TIMER_OVERRIDE))
 	else
 		clear_autofire()
 

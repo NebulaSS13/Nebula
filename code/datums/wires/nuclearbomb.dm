@@ -53,14 +53,14 @@ var/global/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 			N.lighthack = !N.lighthack
 			N.update_icon()
 			toggle_hacked()
-			addtimer(CALLBACK(src, .proc/toggle_hacked), 10 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(toggle_hacked)), 10 SECONDS)
 
 		if(NUCLEARBOMB_WIRE_TIMING)
 			if(N.timing)
 				log_and_explode("pulsed a nuclear bomb's detonation wire, causing it to explode.")
 		if(NUCLEARBOMB_WIRE_SAFETY)
 			N.safety = !N.safety
-			addtimer(CALLBACK(src, .proc/toggle_safety), 10 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(toggle_safety)), 10 SECONDS)
 
 /datum/wires/nuclearbomb/UpdateCut(var/index, var/mended)
 	var/obj/machinery/nuclearbomb/N = holder

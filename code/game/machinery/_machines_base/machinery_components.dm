@@ -152,7 +152,7 @@ var/global/list/machine_path_to_circuit_type
 			CRASH("Tried to insert \a '[part]' twice in \the [src] ([x], [y], [z])!")
 		LAZYADD(component_parts, part)
 		part.on_install(src)
-		events_repository.register(/decl/observ/destroyed, part, src, .proc/component_destroyed)
+		events_repository.register(/decl/observ/destroyed, part, src, PROC_REF(component_destroyed))
 	else if(ispath(part))
 		LAZYINITLIST(uncreated_component_parts)
 		uncreated_component_parts[part] += 1

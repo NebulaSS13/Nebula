@@ -3,7 +3,7 @@
 	desc = "A fillet of fish."
 	icon_state = "fishfillet"
 	filling_color = "#ffdefe"
-	center_of_mass = @"{'x':17,'y':13}"
+	center_of_mass = @'{"x":17,"y":13}'
 	bitesize = 6
 	nutriment_amt = 6
 	nutriment_type = /decl/material/liquid/nutriment/protein

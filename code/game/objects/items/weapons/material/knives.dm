@@ -7,7 +7,7 @@
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	material = /decl/material/solid/metal/steel
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	sharp = TRUE
 	edge = TRUE

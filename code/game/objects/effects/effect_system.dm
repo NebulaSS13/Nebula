@@ -181,7 +181,7 @@ steam.start() -- spawns the effect
 	. = ..()
 	if(smoke_duration)
 		time_to_live = smoke_duration
-	addtimer(CALLBACK(src, .proc/end_of_life), time_to_live)
+	addtimer(CALLBACK(src, PROC_REF(end_of_life)), time_to_live)
 
 /obj/effect/effect/smoke/proc/end_of_life()
 	if(!QDELETED(src))

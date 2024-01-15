@@ -9,7 +9,7 @@
 	base_type          = /obj/machinery/dummy_airlock_controller
 	construct_state    = /decl/machine_construction/wall_frame/panel_closed
 	frame_type         = /obj/item/frame/button/airlock_controller
-	directional_offset = "{'NORTH':{'y':-22}, 'SOUTH':{'y':24}, 'EAST':{'x':-22}, 'WEST':{'x':22}}"
+	directional_offset = @'{"NORTH":{"y":-22}, "SOUTH":{"y":24}, "EAST":{"x":-22}, "WEST":{"x":22}}'
 	power_channel      = ENVIRON //Same as airlock controller
 	required_interaction_dexterity = DEXTERITY_TOUCHSCREENS
 	///Topic state used to interact remotely with the master controller's UI

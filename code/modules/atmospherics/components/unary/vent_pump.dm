@@ -83,7 +83,7 @@
 		var/area/A = get_area(src)
 		if(A && !A.air_vent_names[id_tag])
 			update_name()
-			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
+			events_repository.register(/decl/observ/name_set, A, src, PROC_REF(change_area_name))
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	update_sound()
@@ -148,11 +148,11 @@
 	if(old_area == new_area)
 		return
 	if(old_area)
-		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, PROC_REF(change_area_name))
 		old_area.air_vent_info -= id_tag
 		old_area.air_vent_names -= id_tag
 	if(new_area && new_area == get_area(src))
-		events_repository.register(/decl/observ/name_set, new_area, src, .proc/change_area_name)
+		events_repository.register(/decl/observ/name_set, new_area, src, PROC_REF(change_area_name))
 		if(!new_area.air_vent_names[id_tag])
 			var/new_name = "[new_area.proper_name] Vent Pump #[new_area.air_vent_names.len+1]"
 			new_area.air_vent_names[id_tag] = new_name

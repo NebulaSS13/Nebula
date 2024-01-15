@@ -5,7 +5,7 @@
 
 /proc/fade_out(image/I, list/show_to)
 	animate(I, alpha = 0, time = 0.5 SECONDS, easing = EASE_IN)
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_images_from_clients, I, show_to), 0.5 SECONDS)
+	addtimer(CALLBACK(GLOBAL_PROC, PROC_REF(remove_images_from_clients), I, show_to), 0.5 SECONDS)
 
 /proc/animate_speech_bubble(image/I, list/show_to, duration)
 	if(!I)
@@ -17,7 +17,7 @@
 	for(var/client/C in show_to)
 		C.images += I
 	animate(I, transform = 0, alpha = 255, time = 0.2 SECONDS, easing = EASE_IN)
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_out, I, show_to), (duration - 0.5 SECONDS))
+	addtimer(CALLBACK(GLOBAL_PROC, PROC_REF(fade_out), I, show_to), (duration - 0.5 SECONDS))
 
 /proc/animate_receive_damage(atom/A)
 	var/pixel_x_diff = rand(-2,2)
@@ -53,7 +53,7 @@
 /proc/flick_overlay(image/I, list/show_to, duration)
 	for(var/client/C in show_to)
 		C.images += I
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_images_from_clients, I, show_to), duration)
+	addtimer(CALLBACK(GLOBAL_PROC, PROC_REF(remove_images_from_clients), I, show_to), duration)
 
 /atom/movable/proc/do_attack_effect(atom/A, effect) //Simple effects for telegraphing or marking attack locations
 	if (effect)

@@ -8,7 +8,7 @@
 	icon_state = "sandwich"
 	trash = /obj/item/trash/plate
 	filling_color = "#d9be29"
-	center_of_mass = @"{'x':16,'y':4}"
+	center_of_mass = @'{"x":16,"y":4}'
 	nutriment_desc = list("bread" = 3, "cheese" = 3)
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -24,7 +24,7 @@
 	icon_state = "toastedsandwich"
 	trash = /obj/item/trash/plate
 	filling_color = "#d9be29"
-	center_of_mass = @"{'x':16,'y':4}"
+	center_of_mass = @'{"x":16,"y":4}'
 	nutriment_desc = list("toasted bread" = 3, "cheese" = 3)
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -55,7 +55,7 @@
 	desc = "Good for pretend sword fights."
 	icon_state = "baguette"
 	filling_color = "#e3d796"
-	center_of_mass = @"{'x':18,'y':12}"
+	center_of_mass = @'{"x":18,"y":12}'
 	nutriment_desc = list("long bread" = 6)
 	nutriment_amt = 6
 	bitesize = 3
@@ -72,7 +72,7 @@
 	icon_state = "jellytoast"
 	trash = /obj/item/trash/plate
 	filling_color = "#b572ab"
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	nutriment_desc = list("toasted bread" = 2)
 	nutriment_amt = 1
 	bitesize = 3
@@ -88,7 +88,7 @@
 	icon_state = "jellysandwich"
 	trash = /obj/item/trash/plate
 	filling_color = "#9e3a78"
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	nutriment_desc = list("bread" = 2)
 	nutriment_amt = 2
 	bitesize = 3
@@ -103,7 +103,7 @@
 	desc = "It is very bitter and winy."
 	icon_state = "twobread"
 	filling_color = "#dbcc9a"
-	center_of_mass = @"{'x':15,'y':12}"
+	center_of_mass = @'{"x":15,"y":12}'
 	nutriment_desc = list("sourness" = 2, "bread" = 2)
 	nutriment_amt = 2
 	bitesize = 3
@@ -114,7 +114,7 @@
 	desc = "Is such a thing even possible?"
 	icon_state = "threebread"
 	filling_color = "#dbcc9a"
-	center_of_mass = @"{'x':15,'y':12}"
+	center_of_mass = @'{"x":15,"y":12}'
 	nutriment_desc = list("sourness" = 2, "bread" = 3)
 	nutriment_amt = 3
 	bitesize = 4
@@ -126,7 +126,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flatbread"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	nutriment_desc = list("bread" = 3)
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread

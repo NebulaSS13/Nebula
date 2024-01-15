@@ -207,7 +207,7 @@
 			dt = clamp(detonation_time.data, 1, 12)*10
 		else
 			dt = 15
-		addtimer(CALLBACK(attached_grenade, /obj/item/grenade.proc/activate), dt)
+		addtimer(CALLBACK(attached_grenade, TYPE_PROC_REF(/obj/item/grenade, activate)), dt)
 		var/atom/holder = loc
 		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
 
@@ -420,9 +420,9 @@
 					set_pin_data(IC_OUTPUT, 1, TRUE)
 					pulling = to_pull
 					acting_object.visible_message("\The [acting_object] starts pulling \the [to_pull] around.")
-					events_repository.register(/decl/observ/moved, to_pull, src, .proc/check_pull) //Whenever the target moves, make sure we can still pull it!
-					events_repository.register(/decl/observ/destroyed, to_pull, src, .proc/stop_pulling) //Stop pulling if it gets destroyed
-					events_repository.register(/decl/observ/moved, acting_object, src, .proc/pull) //Make sure we actually pull it.
+					events_repository.register(/decl/observ/moved, to_pull, src, PROC_REF(check_pull)) //Whenever the target moves, make sure we can still pull it!
+					events_repository.register(/decl/observ/destroyed, to_pull, src, PROC_REF(stop_pulling)) //Stop pulling if it gets destroyed
+					events_repository.register(/decl/observ/moved, acting_object, src, PROC_REF(pull)) //Make sure we actually pull it.
 			push_data()
 		if(3)
 			if(pulling)
@@ -555,7 +555,7 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
 
-	origin_tech = "{'magnets':1,'wormholes':3}"
+	origin_tech = @'{"magnets":1,"wormholes":3}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
@@ -606,7 +606,7 @@
 	power_draw_per_use = 20
 	var/obj/item/aicard
 	activators = list("Upwards" = IC_PINTYPE_PULSE_OUT, "Downwards" = IC_PINTYPE_PULSE_OUT, "Left" = IC_PINTYPE_PULSE_OUT, "Right" = IC_PINTYPE_PULSE_OUT)
-	origin_tech = "{'programming':4}"
+	origin_tech = @'{"programming":4}'
 	spawn_flags = IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/manipulation/ai/verb/open_menu()
@@ -681,7 +681,7 @@
 	cooldown_per_use = 2 SECOND
 	power_draw_per_use = 50
 	spawn_flags = IC_SPAWN_DEFAULT
-	origin_tech = "{'engineering':2}"
+	origin_tech = @'{"engineering":2}'
 
 /obj/item/integrated_circuit/manipulation/anchoring/do_work(ord)
 	if(!isturf(assembly.loc))
@@ -724,7 +724,7 @@
 	cooldown_per_use = 2 SECOND
 	power_draw_per_use = 50
 	spawn_flags = IC_SPAWN_DEFAULT
-	origin_tech = "{'engineering':2}"
+	origin_tech = @'{"engineering":2}'
 
 	var/lock_enabled = FALSE
 

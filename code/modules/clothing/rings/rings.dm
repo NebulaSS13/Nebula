@@ -43,7 +43,7 @@
 
 /obj/item/clothing/ring/reagent
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	origin_tech = "{'materials':2,'esoteric':4}"
+	origin_tech = @'{"materials":2,"esoteric":4}'
 	var/tmp/volume = 15
 
 /obj/item/clothing/ring/reagent/Initialize(ml, material_key)
@@ -73,7 +73,7 @@
 /obj/item/clothing/ring/reagent/sleepy
 	name = "silver ring"
 	desc = "A ring made from what appears to be silver."
-	origin_tech = "{'materials':2,'esoteric':5}"
+	origin_tech = @'{"materials":2,"esoteric":5}'
 
 /obj/item/clothing/ring/reagent/sleepy/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/paralytics, 10)

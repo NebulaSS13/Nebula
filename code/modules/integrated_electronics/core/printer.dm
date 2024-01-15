@@ -302,7 +302,7 @@
 					to_chat(usr, "<span class='notice'>You begin printing a custom assembly. This will take approximately [round(cloning_time/10)] seconds. You can still print \
 					off normal parts during this time.</span>")
 					playsound(src, 'sound/items/poster_being_created.ogg', 50, TRUE)
-					addtimer(CALLBACK(src, .proc/print_program, usr), cloning_time)
+					addtimer(CALLBACK(src, PROC_REF(print_program), usr), cloning_time)
 
 			if("cancel")
 				if(!cloning || !program)
@@ -332,16 +332,16 @@
 	desc = "Install this into your integrated circuit printer to enhance it."
 	color = COLOR_GRAY20
 	label = "label_up"
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/disk/integrated_circuit/upgrade/advanced
 	name = "integrated circuit printer upgrade disk - advanced designs"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one adds new, advanced designs to the printer."
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':3,'engineering':3}"
+	origin_tech = @'{"materials":3,"engineering":3}'
 
 /obj/item/disk/integrated_circuit/upgrade/clone
 	name = "integrated circuit printer upgrade disk - instant cloner"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one allows the printer to duplicate assemblies instantaneously."
-	origin_tech = "{'materials':3,'programming':5}"
+	origin_tech = @'{"materials":3,"programming":5}'

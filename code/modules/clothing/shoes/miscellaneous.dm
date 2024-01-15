@@ -6,7 +6,7 @@
 	markings_color = WOOD_COLOR_CHOCOLATE
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP
-	origin_tech = "{'esoteric':3}"
+	origin_tech = @'{"esoteric":3}'
 	siemens_coefficient = 0.8
 	bodytype_equip_flags = null
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)

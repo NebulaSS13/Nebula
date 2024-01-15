@@ -8,7 +8,7 @@
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 6
-	origin_tech = "{'biotech':4}"
+	origin_tech = @'{"biotech":4}'
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material = /decl/material/liquid/slimejelly
 	var/slime_type = /decl/slime_colour/grey

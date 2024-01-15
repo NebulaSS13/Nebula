@@ -4,7 +4,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "dough"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("dough" = 3)
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -25,7 +25,7 @@
 	icon_state = "flat dough"
 	slice_path = /obj/item/chems/food/doughslice
 	slices_num = 3
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 
 /obj/item/chems/food/sliceable/flatdough/populate_reagents()
 	. = ..()
@@ -40,7 +40,7 @@
 	slice_path = /obj/item/chems/food/spagetti
 	slices_num = 1
 	bitesize = 2
-	center_of_mass = @"{'x':17,'y':19}"
+	center_of_mass = @'{"x":17,"y":19}'
 	nutriment_desc = list("dough" = 1)
 	nutriment_amt = 1
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -51,7 +51,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "bun"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':12}"
+	center_of_mass = @'{"x":16,"y":12}'
 	nutriment_desc = list("bun" = 4)
 	nutriment_amt = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -76,7 +76,7 @@
 	desc = "A small bread monkey fashioned from two burger buns."
 	icon_state = "bunbun"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	nutriment_desc = list("bun" = 8)
 	nutriment_amt = 8
 	nutriment_type = /decl/material/liquid/nutriment/bread

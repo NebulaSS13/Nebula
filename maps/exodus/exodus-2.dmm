@@ -3109,7 +3109,7 @@
 /area/exodus/security/main)
 "agN" = (
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/machinery/navbeacon/SecurityD,
 /obj/machinery/door/firedoor,
@@ -7004,7 +7004,7 @@
 /area/exodus/maintenance/auxsolarstarboard)
 "aoK" = (
 /obj/machinery/faxmachine/mapped{
-	anchored = FALSE
+	anchored = 0
 	},
 /obj/structure/table/reinforced,
 /obj/machinery/newscaster{
@@ -16714,7 +16714,7 @@
 "aJb" = (
 /obj/machinery/navbeacon/Bar,
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading{
@@ -16734,7 +16734,7 @@
 /area/exodus/gateway)
 "aJd" = (
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/machinery/navbeacon/Kitchen,
 /obj/machinery/door/firedoor,
@@ -17579,7 +17579,7 @@
 "aKW" = (
 /obj/machinery/navbeacon/Hydroponics,
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading,
@@ -30753,7 +30753,7 @@
 	},
 /obj/item/chems/glass/beaker/sulphuric,
 /obj/structure/reagent_dispensers/acid{
-	density = FALSE;
+	density = 0;
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -32838,7 +32838,7 @@
 	id_tag = "packageExternal"
 	},
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -38381,7 +38381,7 @@
 "bCL" = (
 /obj/machinery/navbeacon/Research,
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading{
@@ -42234,7 +42234,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/westleft{
 	name = "Server Room";
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/machinery/door/window/eastleft{
 	name = "Server Room"
@@ -44094,7 +44094,7 @@
 "bNY" = (
 /obj/machinery/navbeacon/Janitor,
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -47011,7 +47011,7 @@
 /area/exodus/maintenance/medbay)
 "bTP" = (
 /obj/machinery/shieldwallgen{
-	anchored = TRUE
+	anchored = 1
 	},
 /obj/structure/cable/green{
 	icon_state = "0-2"
@@ -48067,7 +48067,7 @@
 "bWa" = (
 /obj/machinery/navbeacon/Medbay,
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/medical/sleeper)
@@ -55386,7 +55386,7 @@
 "clg" = (
 /obj/machinery/navbeacon/Engineering,
 /obj/structure/plasticflaps{
-	opacity = TRUE
+	opacity = 1
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/loading{
@@ -56184,7 +56184,7 @@
 /area/exodus/engineering/locker_room)
 "cmM" = (
 /obj/machinery/door/blast/regular/open{
-	density = FALSE;
+	density = 0;
 	dir = 4;
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Door"
@@ -59271,7 +59271,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/generator{
-	anchored = TRUE;
+	anchored = 1;
 	dir = 4
 	},
 /obj/structure/cable/yellow,
@@ -61968,7 +61968,7 @@
 /area/exodus/engineering/engine_room)
 "cIa" = (
 /obj/machinery/emitter{
-	anchored = TRUE;
+	anchored = 1;
 	id_tag = "EngineEmitter";
 	state = 2
 	},
@@ -62134,7 +62134,7 @@
 /area/exodus/engineering/engine_room)
 "cIF" = (
 /obj/machinery/atmospherics/binary/circulator{
-	anchored = TRUE;
+	anchored = 1;
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -62150,7 +62150,7 @@
 /area/exodus/engineering/engine_room)
 "cIH" = (
 /obj/machinery/atmospherics/binary/circulator{
-	anchored = TRUE
+	anchored = 1
 	},
 /turf/simulated/floor/plating,
 /area/exodus/engineering/engine_room)
@@ -62507,7 +62507,7 @@
 /area/exodus/maintenance/engi_engine)
 "cJZ" = (
 /obj/machinery/generator{
-	anchored = TRUE;
+	anchored = 1;
 	dir = 4
 	},
 /obj/structure/cable/yellow,

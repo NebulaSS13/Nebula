@@ -23,7 +23,7 @@ var/global/list/bodytypes_by_category = list()
 	var/appearance_flags = 0 // Appearance/display related features.
 
 	/// What tech levels should limbs of this type use/need?
-	var/limb_tech = "{'biotech':2}"
+	var/limb_tech = @'{"biotech":2}'
 	var/icon_cache_uid
 	/// Determines if eyes should render on heads using this bodytype.
 	var/has_eyes = TRUE

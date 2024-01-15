@@ -192,7 +192,7 @@
 	w_class = ITEM_SIZE_LARGE
 	possible_transfer_amounts = null
 	volume = 600
-	origin_tech = "{'combat':3,'materials':3,'engineering':3}"
+	origin_tech = @'{"combat":3,"materials":3,"engineering":3}'
 	particle_move_delay = 2 //Was hardcoded to 2 before, and 8 was slower than most mob's move speed
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

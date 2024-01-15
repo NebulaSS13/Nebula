@@ -4,7 +4,7 @@
 	desc = "For when you desperately want meat and you don't care what kind. Has the same texture as old leather boots."
 	trash = /obj/item/trash/sosjerky
 	filling_color = "#631212"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	bitesize = 2
 	material = /decl/material/solid/organic/meat
 
@@ -18,7 +18,7 @@
 	desc = "Pouring water on these will not turn them back into grapes, unfortunately."
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
-	center_of_mass = @"{'x':15,'y':4}"
+	center_of_mass = @'{"x":15,"y":4}'
 	nutriment_desc = list("raisins" = 6)
 	nutriment_amt = 6
 
@@ -27,7 +27,7 @@
 	icon_state = "space_twinkie"
 	desc = "So full of preservatives, it's guaranteed to survive longer then you will."
 	filling_color = "#ffe591"
-	center_of_mass = @"{'x':15,'y':11}"
+	center_of_mass = @'{"x":15,"y":11}'
 	bitesize = 2
 
 /obj/item/chems/food/spacetwinkie/populate_reagents()
@@ -40,7 +40,7 @@
 	desc = "Bite sized cheese flavoured snacks that will leave your fingers coated in cheese dust."
 	trash = /obj/item/trash/cheesie
 	filling_color = "#ffa305"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("cheese" = 5, "chips" = 2)
 	nutriment_amt = 4
 	bitesize = 2
@@ -50,7 +50,7 @@
 	icon_state = "syndi_cakes"
 	desc = "Made using extremely unethical labour, ingredients and marketing methods."
 	filling_color = "#ff5d05"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("sweetness" = 3, "cake" = 1)
 	nutriment_amt = 4
 	trash = /obj/item/trash/syndi_cakes
@@ -68,7 +68,7 @@
 	desc = "Pistachios. There is absolutely nothing remarkable about these."
 	trash = /obj/item/trash/pistachios
 	filling_color = "#825d26"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("nuts" = 1)
 	nutriment_amt = 3
 	bitesize = 0.5
@@ -79,7 +79,7 @@
 	desc = "A favorite among birds."
 	trash = /obj/item/trash/semki
 	filling_color = "#68645d"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("sunflower seeds" = 1)
 	nutriment_amt = 6
 	bitesize = 0.5
@@ -90,7 +90,7 @@
 	desc = "Space cepholapod tentacles, carefully removed from the squid then dried into strips of delicious rubbery goodness!"
 	trash = /obj/item/trash/squid
 	filling_color = "#c0a9d7"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 1
@@ -105,7 +105,7 @@
 	desc = "Fried bread cubes. Good in salad but I guess you can just eat them as is."
 	trash = /obj/item/trash/croutons
 	filling_color = "#c6b17f"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("bread" = 1, "salt" = 1)
 	nutriment_amt = 3
 	bitesize = 1
@@ -117,7 +117,7 @@
 	desc = "Pig fat. Salted. Just as good as it sounds."
 	trash = /obj/item/trash/salo
 	filling_color = "#e0bcbc"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("fat" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 2
@@ -132,7 +132,7 @@
 	desc = "Dried salted beer snack fish."
 	trash = /obj/item/trash/driedfish
 	filling_color = "#c8a5bb"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 1
@@ -147,7 +147,7 @@
 	icon_state = "liquidfood"
 	trash = /obj/item/trash/liquidfood
 	filling_color = "#a8a8a8"
-	center_of_mass = @"{'x':16,'y':15}"
+	center_of_mass = @'{"x":16,"y":15}'
 	nutriment_desc = list("chalk" = 6)
 	nutriment_amt = 20
 	bitesize = 4
@@ -161,7 +161,7 @@
 	desc = "Fried, salted lean meat compressed into a cube. Not very appetizing."
 	icon_state = "meatcube"
 	filling_color = "#7a3d11"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
 
@@ -175,7 +175,7 @@
 	icon_state = "tastybread"
 	trash = /obj/item/trash/tastybread
 	filling_color = "#a66829"
-	center_of_mass = @"{'x':17,'y':16}"
+	center_of_mass = @'{"x":17,"y":16}'
 	nutriment_desc = list("bread" = 2, "sweetness" = 3)
 	nutriment_amt = 6
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -187,7 +187,7 @@
 	icon_state = "candy"
 	trash = /obj/item/trash/candy
 	filling_color = "#7d5f46"
-	center_of_mass = @"{'x':15,'y':15}"
+	center_of_mass = @'{"x":15,"y":15}'
 	nutriment_amt = 1
 	nutriment_desc = list("candy" = 1)
 	bitesize = 2
@@ -226,7 +226,7 @@
 	desc = "It's a handful of candy corn. Not actually candied corn."
 	icon_state = "candy_corn"
 	filling_color = "#fffcb0"
-	center_of_mass = @"{'x':14,'y':10}"
+	center_of_mass = @'{"x":14,"y":10}'
 	nutriment_amt = 4
 	nutriment_desc = list("candy corn" = 4)
 	bitesize = 2
@@ -242,7 +242,7 @@
 	icon_state = "chips"
 	trash = /obj/item/trash/chips
 	filling_color = "#e8c31e"
-	center_of_mass = @"{'x':15,'y':15}"
+	center_of_mass = @'{"x":15,"y":15}'
 	nutriment_amt = 3
 	nutriment_desc = list("salt" = 1, "chips" = 2)
 	bitesize = 1
@@ -253,7 +253,7 @@
 	desc = "COOKIE!!!"
 	icon_state = "cookie"
 	filling_color = "#dbc94f"
-	center_of_mass = @"{'x':17,'y':18}"
+	center_of_mass = @'{"x":17,"y":18}'
 	nutriment_amt = 5
 	nutriment_desc = list("sweetness" = 3, "cookie" = 2)
 	w_class = ITEM_SIZE_TINY
@@ -265,7 +265,7 @@
 	desc = "Such sweet, fattening food."
 	icon_state = "chocolatebar"
 	filling_color = "#7d5f46"
-	center_of_mass = @"{'x':15,'y':15}"
+	center_of_mass = @'{"x":15,"y":15}'
 	nutriment_amt = 2
 	nutriment_desc = list("chocolate" = 5)
 	bitesize = 2
@@ -280,7 +280,7 @@
 	desc = "Such sweet, fattening food."
 	icon_state = "chocolateegg"
 	filling_color = "#7d5f46"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_amt = 3
 	nutriment_desc = list("chocolate" = 5)
 	bitesize = 2
@@ -295,7 +295,7 @@
 	desc = "Goes great with Robust Coffee."
 	icon_state = "donut1"
 	filling_color = "#d9c386"
-	center_of_mass = @"{'x':19,'y':16}"
+	center_of_mass = @'{"x":19,"y":16}'
 	nutriment_desc = list("sweetness", "donut")
 	nutriment_amt = 3
 	bitesize = 3
@@ -342,7 +342,7 @@
 	desc = "You jelly?"
 	icon_state = "jdonut1"
 	filling_color = "#ed1169"
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_amt = 3
 	bitesize = 5
 	nutriment_type = /decl/material/liquid/nutriment/bread
@@ -359,7 +359,7 @@
 	desc = "Now with 20% less lawsuit enabling regolith!"
 	trash = /obj/item/trash/cakewrap
 	filling_color = "#ffffff"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("sweet" = 4, "vanilla" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -387,7 +387,7 @@
 	desc = "Contains over 9000% of your daily recommended intake of salt."
 	trash = /obj/item/trash/tidegobs
 	filling_color = "#2556b0"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("salt" = 4, "ocean" = 1, "seagull" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -398,7 +398,7 @@
 	desc = "A day ration of salt, styrofoam and possibly sawdust."
 	trash = /obj/item/trash/saturno
 	filling_color = "#dca319"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("salt" = 4, "peanut" = 2,  "wood?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -409,7 +409,7 @@
 	desc = "Some kind of gel, maybe?"
 	trash = /obj/item/trash/jupiter
 	filling_color = "#dc1919"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("jelly?" = 5)
 	nutriment_amt = 5
 	bitesize = 2
@@ -420,7 +420,7 @@
 	desc = "Baseless tasteless nutrient rods to get you through the day. Now even less rash inducing!"
 	trash = /obj/item/trash/pluto
 	filling_color = "#ffffff"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("chalk" = 4, "sadness" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -431,7 +431,7 @@
 	desc = "A steaming self-heated bowl of sweet eggs and taters!"
 	trash = /obj/item/trash/mars
 	filling_color = "#d2c63f"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("eggs" = 4, "potato" = 4, "mustard" = 2)
 	nutriment_amt = 8
 	bitesize = 2
@@ -442,7 +442,7 @@
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
 	trash = /obj/item/trash/venus
 	filling_color = "#d2c63f"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("heat" = 4, "burning" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -458,7 +458,7 @@
 	desc = "Pop rocks. The new formula guarantees fewer shrapnel induced oral injuries."
 	trash = /obj/item/trash/oort
 	filling_color = "#3f7dd2"
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	nutriment_desc = list("fizz" = 3, "sweet?" = 1, "shrapnel" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -537,7 +537,7 @@
 		return
 	has_been_heated = 1
 	user.visible_message("<span class='notice'>[user] crushes \the [src] package.</span>", "You crush \the [src] package and feel a comfortable heat build up.")
-	addtimer(CALLBACK(src, .proc/heat, weakref(user)), 20 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(heat), weakref(user)), 20 SECONDS)
 
 /obj/item/chems/food/donkpocket/sinpocket/heat(weakref/message_to)
 	..()
@@ -551,7 +551,7 @@
 	desc = "The food of choice for the seasoned traitor."
 	icon_state = "donkpocket"
 	filling_color = "#dedeab"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("heartiness" = 1, "dough" = 2)
 	nutriment_amt = 2
 	var/warm = 0
@@ -569,7 +569,7 @@
 		reagents.add_reagent(reagent, heated_reagents[reagent])
 	bitesize = 6
 	SetName("warm donk-pocket")
-	addtimer(CALLBACK(src, .proc/cool), 7 MINUTES)
+	addtimer(CALLBACK(src, PROC_REF(cool)), 7 MINUTES)
 
 /obj/item/chems/food/donkpocket/proc/cool()
 	if(!warm)

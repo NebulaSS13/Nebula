@@ -5,7 +5,7 @@
 	slice_path = /obj/item/chems/food/slice/carrotcake
 	slices_num = 5
 	filling_color = "#ffd675"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "carrot" = 15)
 	nutriment_amt = 25
 	bitesize = 2
@@ -22,7 +22,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#ffd675"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/carrotcake
 
 /obj/item/chems/food/slice/carrotcake/filled
@@ -35,7 +35,7 @@
 	slice_path = /obj/item/chems/food/slice/braincake
 	slices_num = 5
 	filling_color = "#e6aedb"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "slime" = 15)
 	nutriment_amt = 5
 	bitesize = 2
@@ -53,7 +53,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#e6aedb"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':12}"
+	center_of_mass = @'{"x":16,"y":12}'
 	whole_path = /obj/item/chems/food/sliceable/braincake
 
 /obj/item/chems/food/slice/braincake/filled
@@ -66,7 +66,7 @@
 	slice_path = /obj/item/chems/food/slice/cheesecake
 	slices_num = 5
 	filling_color = "#faf7af"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "cream" = 10, "cheese" = 15)
 	nutriment_amt = 10
 	bitesize = 2
@@ -82,7 +82,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#faf7af"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/cheesecake
 
 /obj/item/chems/food/slice/cheesecake/filled
@@ -95,7 +95,7 @@
 	slice_path = /obj/item/chems/food/slice/plaincake
 	slices_num = 5
 	filling_color = "#f7edd5"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "vanilla" = 15)
 	nutriment_amt = 20
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
@@ -107,7 +107,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#f7edd5"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/plaincake
 
 /obj/item/chems/food/slice/plaincake/filled
@@ -120,7 +120,7 @@
 	slice_path = /obj/item/chems/food/slice/orangecake
 	slices_num = 5
 	filling_color = "#fada8e"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "orange" = 15)
 	nutriment_amt = 20
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
@@ -132,7 +132,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#fada8e"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/orangecake
 
 /obj/item/chems/food/slice/orangecake/filled
@@ -145,7 +145,7 @@
 	slice_path = /obj/item/chems/food/slice/limecake
 	slices_num = 5
 	filling_color = "#cbfa8e"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "lime" = 15)
 	nutriment_amt = 20
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
@@ -157,7 +157,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#cbfa8e"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/limecake
 
 /obj/item/chems/food/slice/limecake/filled
@@ -170,7 +170,7 @@
 	slice_path = /obj/item/chems/food/slice/lemoncake
 	slices_num = 5
 	filling_color = "#fafa8e"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "lemon" = 15)
 	nutriment_amt = 20
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
@@ -182,7 +182,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#fafa8e"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/lemoncake
 
 /obj/item/chems/food/slice/lemoncake/filled
@@ -195,7 +195,7 @@
 	slice_path = /obj/item/chems/food/slice/chocolatecake
 	slices_num = 5
 	filling_color = "#805930"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "chocolate" = 15)
 	nutriment_amt = 20
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
@@ -207,7 +207,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#805930"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/chocolatecake
 
 /obj/item/chems/food/slice/chocolatecake/filled
@@ -220,7 +220,7 @@
 	slice_path = /obj/item/chems/food/slice/birthdaycake
 	slices_num = 5
 	filling_color = "#ffd6d6"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10)
 	nutriment_amt = 20
 	bitesize = 3
@@ -237,7 +237,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#ffd6d6"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/birthdaycake
 
 /obj/item/chems/food/slice/birthdaycake/filled
@@ -250,7 +250,7 @@
 	slice_path = /obj/item/chems/food/slice/applecake
 	slices_num = 5
 	filling_color = "#ebf5b8"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "apple" = 15)
 	nutriment_amt = 15
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
@@ -262,7 +262,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#ebf5b8"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	whole_path = /obj/item/chems/food/sliceable/applecake
 
 /obj/item/chems/food/slice/applecake/filled
@@ -275,7 +275,7 @@
 	slice_path = /obj/item/chems/food/slice/pumpkinpie
 	slices_num = 5
 	filling_color = "#f5b951"
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("pie" = 5, "cream" = 5, "pumpkin" = 5)
 	nutriment_amt = 15
 
@@ -286,7 +286,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#f5b951"
 	bitesize = 2
-	center_of_mass = @"{'x':16,'y':12}"
+	center_of_mass = @'{"x":16,"y":12}'
 	whole_path = /obj/item/chems/food/sliceable/pumpkinpie
 
 /obj/item/chems/food/slice/pumpkinpie/filled

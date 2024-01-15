@@ -13,7 +13,7 @@
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
-	stack_origin_tech = "{'materials':5}"
+	stack_origin_tech = @'{"materials":5}'
 	xarch_source_mineral = /decl/material/solid/phosphorus
 	ore_icon_overlay = "nugget"
 	value = 0.8

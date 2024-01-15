@@ -8,7 +8,7 @@
 	icon_state                          = ICON_STATE_WORLD
 	obj_flags                           = OBJ_FLAG_CONDUCTIBLE
 	slot_flags                          = SLOT_LOWER_BODY
-	center_of_mass                      = @"{'x':14,'y':15}"
+	center_of_mass                      = @'{"x":14,"y":15}'
 	force                               = 5
 	throwforce                          = 5
 	throw_speed                         = 1
@@ -16,7 +16,7 @@
 	w_class                             = ITEM_SIZE_SMALL
 	material                            = /decl/material/solid/metal/steel
 	matter                              = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech                         = "{'engineering':1}"
+	origin_tech                         = @'{"engineering":1}'
 	drop_sound                          = 'sound/foley/tooldrop1.ogg'
 	z_flags                             = ZMM_MANGLE_PLANES
 	attack_cooldown                     = DEFAULT_ATTACK_COOLDOWN

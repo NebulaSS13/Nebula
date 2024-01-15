@@ -86,7 +86,7 @@
 				if(AM && AM.simulated && !T.protects_atom(AM))
 					AM.explosion_act(dist)
 					if(!QDELETED(AM) && !AM.anchored)
-						addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, throw_dist, throw_dist), 0)
+						addtimer(CALLBACK(AM, TYPE_PROC_REF(/atom/movable, throw_at), throw_target, throw_dist, throw_dist), 0)
 
 	var/took = (REALTIMEOFDAY-start_time)/10
 	if(Debug2)
@@ -254,7 +254,7 @@
 				if (AM.simulated)
 					AM.explosion_act(severity)
 					if(!QDELETED(AM) && !AM.anchored)
-						addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, throw_dist, throw_dist), 0)
+						addtimer(CALLBACK(AM, TYPE_PROC_REF(/atom/movable, throw_at), throw_target, throw_dist, throw_dist), 0)
 				movable_tally++
 				CHECK_TICK
 		else

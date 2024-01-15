@@ -971,7 +971,7 @@
 /area/outpost/abandoned)
 "dt" = (
 /obj/structure/door_assembly{
-	anchored = TRUE
+	anchored = 1
 	},
 /turf/simulated/floor,
 /area/outpost/abandoned)
@@ -1239,7 +1239,7 @@
 /area/mine/explored)
 "el" = (
 /obj/structure/firedoor_assembly{
-	anchored = TRUE
+	anchored = 1
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -1841,7 +1841,7 @@
 /area/mine/explored)
 "gd" = (
 /obj/structure/windoor_assembly{
-	anchored = TRUE;
+	anchored = 1;
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2072,7 +2072,7 @@
 /obj/effect/decal/cleanable/blood/tracks/footprints,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/firedoor_assembly{
-	anchored = TRUE
+	anchored = 1
 	},
 /turf/simulated/floor/plating{
 	icon_state = "dmg2"

@@ -155,7 +155,7 @@
 	icon_state = "cortical-stack"
 	organ_tag = BP_STACK
 	organ_properties = ORGAN_PROP_PROSTHETIC
-	origin_tech = @"{'biotech':4,'materials':4,'magnets':2,'programming':3}"
+	origin_tech = @'{"biotech":4,"materials":4,"magnets":2,"programming":3}'
 	relative_size = 10
 
 	var/ownerckey

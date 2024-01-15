@@ -117,12 +117,12 @@
 		SSshuttle.map_hash_to_areas[map_hash] = initialized_areas_by_type
 		for(var/area/A in initialized_areas_by_type)
 			A.saved_map_hash = map_hash
-			events_repository.register(/decl/observ/destroyed, A, src, .proc/cleanup_lateloaded_area)
+			events_repository.register(/decl/observ/destroyed, A, src, PROC_REF(cleanup_lateloaded_area))
 	SSshuttle.block_queue = pre_init_state
 	SSshuttle.clear_init_queue() // We will flush the queue unless there were other blockers, in which case they will do it.
 
 /datum/map_template/proc/cleanup_lateloaded_area(area/destroyed_area)
-	events_repository.unregister(/decl/observ/destroyed, destroyed_area, src, .proc/cleanup_lateloaded_area)
+	events_repository.unregister(/decl/observ/destroyed, destroyed_area, src, PROC_REF(cleanup_lateloaded_area))
 	if(destroyed_area.saved_map_hash)
 		SSshuttle.map_hash_to_areas[destroyed_area.saved_map_hash] -= destroyed_area
 

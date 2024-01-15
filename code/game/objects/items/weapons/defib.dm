@@ -11,7 +11,7 @@
 	force = 5
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
-	origin_tech = "{'biotech':4,'powerstorage':2}"
+	origin_tech = @'{"biotech":4,"powerstorage":2}'
 	action_button_name = "Remove/Replace Paddles"
 	material = /decl/material/solid/organic/plastic
 	matter = list(
@@ -163,7 +163,7 @@
 	icon = 'icons/obj/defibrillator_compact.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
-	origin_tech = "{'biotech':5,'powerstorage':3}"
+	origin_tech = @'{"biotech":5,"powerstorage":3}'
 
 /obj/item/defibrillator/compact/loaded
 	bcell = /obj/item/cell/high

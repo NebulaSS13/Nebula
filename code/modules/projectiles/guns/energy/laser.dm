@@ -8,7 +8,7 @@
 	force = 10
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
-	origin_tech = "{'combat':3,'magnets':2}"
+	origin_tech = @'{"combat":3,"magnets":2}'
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/midlaser
 	matter = list(
@@ -74,7 +74,7 @@
 	icon_state = "lasercannon"
 	icon = 'icons/obj/guns/laser_cannon.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'materials':3,'powerstorage':3}"
+	origin_tech = @'{"combat":4,"materials":3,"powerstorage":3}'
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	one_hand_penalty = 6 //large and heavy
 	w_class = ITEM_SIZE_HUGE

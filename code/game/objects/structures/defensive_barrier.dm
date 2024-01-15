@@ -16,7 +16,7 @@
 /obj/structure/defensive_barrier/Initialize()
 	. = ..()
 	update_icon()
-	events_repository.register(/decl/observ/dir_set, src, src, .proc/update_layers)
+	events_repository.register(/decl/observ/dir_set, src, src, PROC_REF(update_layers))
 
 /obj/structure/defensive_barrier/physically_destroyed(var/skip_qdel)
 	visible_message(SPAN_DANGER("\The [src] was destroyed!"))
@@ -24,7 +24,7 @@
 	. = ..()
 
 /obj/structure/defensive_barrier/Destroy()
-	events_repository.unregister(/decl/observ/dir_set, src, src, .proc/update_layers)
+	events_repository.unregister(/decl/observ/dir_set, src, src, PROC_REF(update_layers))
 	. = ..()
 
 /obj/structure/defensive_barrier/proc/update_layers()

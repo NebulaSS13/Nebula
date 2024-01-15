@@ -31,7 +31,7 @@
 	holding = /obj/item/gun/projectile/automatic/smg/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
-	origin_tech = "{'programming':4,'combat':6,'engineering':5}"
+	origin_tech = @'{"programming":4,"combat":6,"engineering":5}'
 
 /obj/item/gun/projectile/automatic/smg/mech
 	magazine_type = /obj/item/ammo_magazine/mech/smg_top
@@ -52,7 +52,7 @@
 	holding = /obj/item/gun/projectile/automatic/assault_rifle/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
-	origin_tech = "{'programming':4,'combat':8,'engineering':6}"
+	origin_tech = @'{"programming":4,"combat":8,"engineering":6}'
 
 /obj/item/gun/projectile/automatic/assault_rifle/mech
 	magazine_type = /obj/item/ammo_magazine/mech/rifle
@@ -72,7 +72,7 @@
 	holding = /obj/item/gun/projectile/automatic/machine/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
-	origin_tech = "{'programming':4,'combat':8,'engineering':6}"
+	origin_tech = @'{"programming":4,"combat":8,"engineering":6}'
 
 /obj/item/gun/projectile/automatic/machine/mech
 	magazine_type = /obj/item/ammo_magazine/mech/rifle/drum

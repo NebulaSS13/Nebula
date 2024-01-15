@@ -63,7 +63,7 @@
 	desc = "A fillet of cosmoshark meat."
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
-	center_of_mass = @"{'x':17,'y':13}"
+	center_of_mass = @'{"x":17,"y":13}'
 	bitesize = 8
 
 /obj/item/chems/food/sharkmeat/populate_reagents()

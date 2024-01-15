@@ -10,8 +10,8 @@
 	if(form)
 		L.faction = form.faction
 	update_followers()
-	events_repository.register(/decl/observ/destroyed, L,src, .proc/dead_follower)
-	events_repository.register(/decl/observ/death, L,src, .proc/update_followers)
+	events_repository.register(/decl/observ/destroyed, L,src, PROC_REF(dead_follower))
+	events_repository.register(/decl/observ/death, L,src, PROC_REF(update_followers))
 
 /mob/living/deity/proc/dead_follower(var/mob/living/L)
 	events_repository.unregister(/decl/observ/death, L,src)

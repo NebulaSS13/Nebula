@@ -9,7 +9,7 @@
 	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 
 	projectile_type = /obj/item/projectile/beam/stun
-	origin_tech = "{'combat':3,'magnets':2}"
+	origin_tech = @'{"combat":3,"magnets":2}'
 	indicator_color = COLOR_CYAN
 
 	firemodes = list(

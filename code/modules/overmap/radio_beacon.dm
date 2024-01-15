@@ -35,7 +35,7 @@
 	icon = 'icons/obj/items/device/radio/beacon.dmi'
 	icon_state = "beacon"
 
-	origin_tech = "{'magnets':2, 'programming':2}"
+	origin_tech = @'{"magnets":2, "programming":2}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
 

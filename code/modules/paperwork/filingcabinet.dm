@@ -70,7 +70,7 @@
 	desc               = "A filing cabinet installed into a cavity in the wall to save space. Wow!"
 	icon_state         = "wallcabinet"
 	obj_flags          = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 
 /obj/structure/filing_cabinet/tall
 	icon_state = "tallcabinet"

@@ -2583,7 +2583,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/engine{
-	anchored = FALSE
+	anchored = 0
 	},
 /turf/unsimulated/beach/sand,
 /area/icarus/open)

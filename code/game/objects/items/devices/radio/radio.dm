@@ -336,7 +336,7 @@
 		if(istype(M))
 			M.trigger_aiming(TARGET_CAN_RADIO)
 
-	addtimer(CALLBACK(src, .proc/transmit, M, message, message_mode, verb, speaking), 0)
+	addtimer(CALLBACK(src, PROC_REF(transmit), M, message, message_mode, verb, speaking), 0)
 
 /obj/item/radio/proc/can_transmit_binary()
 	for(var/obj/item/encryptionkey/key in encryption_keys)

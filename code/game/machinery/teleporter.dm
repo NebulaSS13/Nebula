@@ -146,14 +146,14 @@
 
 /obj/machinery/computer/teleporter/proc/clear_target()
 	if(src.locked)
-		events_repository.unregister(/decl/observ/destroyed, locked, src, .proc/target_lost)
+		events_repository.unregister(/decl/observ/destroyed, locked, src, PROC_REF(target_lost))
 	src.locked = null
 	if(station && station.engaged)
 		station.disengage()
 
 /obj/machinery/computer/teleporter/proc/set_target(var/obj/O)
 	src.locked = O
-	events_repository.register(/decl/observ/destroyed, locked, src, .proc/target_lost)
+	events_repository.register(/decl/observ/destroyed, locked, src, PROC_REF(target_lost))
 
 /obj/machinery/computer/teleporter/Destroy()
 	clear_target()

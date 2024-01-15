@@ -6,7 +6,7 @@
 	name = "gas analyzer"
 	desc = "A hand-held environmental scanner which reports current gas levels. Has a button to cycle modes."
 	icon = 'icons/obj/items/device/scanner/atmos_scanner.dmi'
-	origin_tech = "{'magnets':1,'engineering':1}"
+	origin_tech = @'{"magnets":1,"engineering":1}'
 	window_width = 350
 	window_height = 400
 	var/mode = DEFAULT_MODE

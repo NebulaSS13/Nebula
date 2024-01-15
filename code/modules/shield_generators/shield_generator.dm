@@ -57,7 +57,7 @@
 	for(var/st in subtypesof(/datum/shield_mode/))
 		var/datum/shield_mode/SM = new st()
 		mode_list.Add(SM)
-	events_repository.register(/decl/observ/moved, src, src, .proc/update_overmap_shield_list)
+	events_repository.register(/decl/observ/moved, src, src, PROC_REF(update_overmap_shield_list))
 	. = INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/shield_generator/LateInitialize()

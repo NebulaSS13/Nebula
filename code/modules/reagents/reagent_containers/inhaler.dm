@@ -5,14 +5,14 @@
 	desc = "A rapid and safe way to administer small amounts of drugs into the lungs by untrained or trained personnel."
 	icon = 'icons/obj/inhaler.dmi'
 	icon_state = ICON_STATE_WORLD
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	amount_per_transfer_from_this = 5
 	volume = 5
 	w_class = ITEM_SIZE_SMALL
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_LOWER_BODY
-	origin_tech = "{'materials':2,'biotech':2}"
+	origin_tech = @'{"materials":2,"biotech":2}'
 	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

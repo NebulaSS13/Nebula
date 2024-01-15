@@ -83,7 +83,7 @@
 	board_type = "machine"
 	icon = 'icons/obj/modules/module_controller.dmi'
 	build_path = /obj/machinery/ion_thruster
-	origin_tech = "{'powerstorage':1,'engineering':2}"
+	origin_tech = @'{"powerstorage":1,"engineering":2}'
 	req_components = list(
 							/obj/item/stack/cable_coil = 2,
 							/obj/item/stock_parts/matter_bin = 1,

@@ -3,7 +3,7 @@
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample or analyzes unusual chemicals."
 	icon = 'icons/obj/items/device/scanner/spectrometer.dmi'
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	origin_tech = "{'magnets':2,'biotech':2}"
+	origin_tech = @'{"magnets":2,"biotech":2}'
 	window_width = 550
 	window_height = 300
 	scan_sound = 'sound/effects/scanbeep.ogg'
@@ -85,4 +85,4 @@
 	name = "advanced mass spectrometer"
 	icon = 'icons/obj/items/device/scanner/advanced_spectrometer.dmi'
 	details = 1
-	origin_tech = "{'magnets':4,'biotech':2}"
+	origin_tech = @'{"magnets":4,"biotech":2}'

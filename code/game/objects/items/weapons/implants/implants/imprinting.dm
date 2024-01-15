@@ -1,7 +1,7 @@
 /obj/item/implant/imprinting
 	name = "imprinting implant"
 	desc = "Latest word in training your peons."
-	origin_tech = "{'materials':1,'biotech':2,'programming':3}"
+	origin_tech = @'{"materials":1,"biotech":2,"programming":3}'
 	hidden = 1
 	var/list/instructions = list("Do your job.", "Respect your superiors.", "Wash you hands after using the toilet.")
 	var/brainwashing = 0
@@ -51,7 +51,7 @@
 		M.StoreMemory(msg, /decl/memory_options/system)
 	if(brainwashing)
 		log_and_message_admins("was implanted with a brainwashing implant holding following laws: [jointext(instructions, ";")].", M)
-	addtimer(CALLBACK(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
+	addtimer(CALLBACK(src,PROC_REF(activate)),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 	return TRUE
 
 /obj/item/implant/imprinting/proc/get_instructions()
@@ -83,7 +83,7 @@
 	else
 		instruction = "<span class='notice'>You remember suddenly: \"[instruction]\"</span>"
 	to_chat(imp_in, instruction)
-	addtimer(CALLBACK(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
+	addtimer(CALLBACK(src,PROC_REF(activate)),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 
 /obj/item/implant/imprinting/removed()
 	if(brainwashing && !malfunction)
@@ -103,7 +103,7 @@
 	. = ..()
 
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
-	var/mob/living/carbon/human/H = M	
+	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		var/obj/item/organ/internal/B = GET_INTERNAL_ORGAN(H, BP_BRAIN)
 		if(!B || H.isSynthetic())

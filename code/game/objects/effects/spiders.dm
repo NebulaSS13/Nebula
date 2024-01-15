@@ -233,7 +233,7 @@
 	if(prob(50))
 		src.visible_message("<span class='notice'>You hear something squeezing through the ventilation ducts.</span>",2)
 	forceMove(exit_vent)
-	addtimer(CALLBACK(src, .proc/end_vent_moving, exit_vent), travel_time)
+	addtimer(CALLBACK(src, PROC_REF(end_vent_moving), exit_vent), travel_time)
 
 /obj/effect/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
 	if(check_vent(exit_vent))
@@ -268,7 +268,7 @@
 
 				forceMove(entry_vent)
 				var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
-				addtimer(CALLBACK(src, .proc/start_vent_moving, exit_vent, travel_time), travel_time + rand(20,60))
+				addtimer(CALLBACK(src, PROC_REF(start_vent_moving), exit_vent, travel_time), travel_time + rand(20,60))
 				travelling_in_vent = TRUE
 				return
 			else

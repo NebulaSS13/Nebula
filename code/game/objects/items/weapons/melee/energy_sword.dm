@@ -2,7 +2,7 @@
 	name = "energy sword"
 	desc = "May the force be mass times acceleration."
 	icon = 'icons/obj/items/weapon/e_sword.dmi'
-	origin_tech = "{'magnets':3,'esoteric':4}"
+	origin_tech = @'{"magnets":3,"esoteric":4}'
 	active_parry_chance = 50
 
 	var/blade_color
@@ -26,7 +26,7 @@
 
 /obj/item/energy_blade/sword/dropped(var/mob/user)
 	..()
-	addtimer(CALLBACK(src, .proc/check_loc), 1) // Swapping hands or passing to another person should not deactivate the sword.
+	addtimer(CALLBACK(src, PROC_REF(check_loc)), 1) // Swapping hands or passing to another person should not deactivate the sword.
 
 /obj/item/energy_blade/sword/proc/check_loc()
 	if(!ismob(loc) && active)

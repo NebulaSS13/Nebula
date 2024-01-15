@@ -139,8 +139,8 @@
 	to_chat(L, "<span class='cult'>[whisper_from ? "The [whisper_from] speaks to you" : "You hear a whisper say"] \"[message]\"</span>")
 
 	linked.eyenet.add_source(L)
-	events_repository.register(/decl/observ/destroyed, L, src, .proc/deactivate_look)
-	addtimer(CALLBACK(src, .proc/deactivate_look, L), 30 SECONDS)
+	events_repository.register(/decl/observ/destroyed, L, src, PROC_REF(deactivate_look))
+	addtimer(CALLBACK(src, PROC_REF(deactivate_look), L), 30 SECONDS)
 
 /datum/phenomena/flickering_whisper/proc/deactivate_look(var/mob/viewer)
 	if(!linked.is_follower(viewer)) //Don't remove if they are follower
@@ -198,8 +198,8 @@
 	SET_STATUS_MAX(L, STAT_WEAK, 1)
 	new /obj/aura/starborn(L)
 	L.status_flags |= GODMODE
-	events_repository.register(/decl/observ/destroyed, L,src,.proc/fail_ritual)
-	addtimer(CALLBACK(src, .proc/succeed_ritual, L), 600 SECONDS) //6 minutes
+	events_repository.register(/decl/observ/destroyed, L,src,PROC_REF(fail_ritual))
+	addtimer(CALLBACK(src, PROC_REF(succeed_ritual), L), 600 SECONDS) //6 minutes
 	for(var/mob/living/player in global.player_list)
 		sound_to(player, 'sound/effects/cascade.ogg')
 		if(player?.mind?.assigned_job?.is_holy)

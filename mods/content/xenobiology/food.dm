@@ -65,7 +65,7 @@
 	desc = "You jelly?"
 	icon_state = "jdonut1"
 	filling_color = "#ed1169"
-	center_of_mass = @"{'x':16,'y':11}"
+	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_amt = 3
 	bitesize = 5
 	donut_state = "jdonut"

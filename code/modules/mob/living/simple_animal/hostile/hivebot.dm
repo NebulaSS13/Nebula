@@ -179,7 +179,7 @@ The megabot
 	var/datum/extension/armor/toggle/armor = get_extension(src, /datum/extension/armor)
 	if(armor)
 		armor.toggle(FALSE)
-	addtimer(CALLBACK(src, .proc/reactivate), 4 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(reactivate)), 4 SECONDS)
 
 /mob/living/simple_animal/hostile/hivebot/mega/proc/reactivate()
 	stop_automation = FALSE

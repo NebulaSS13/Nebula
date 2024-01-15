@@ -190,7 +190,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	current_pressure = clamp(current_pressure + pressure, 0, MAX_GEOTHERMAL_PRESSURE)
 	var/leftover = round(pressure - current_pressure)
 	if(leftover > 0)
-		addtimer(CALLBACK(src, .proc/propagate_pressure, leftover), 5)
+		addtimer(CALLBACK(src, PROC_REF(propagate_pressure), leftover), 5)
 	update_icon()
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
@@ -207,7 +207,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 			generate_power(last_generated)
 		remaining_pressure = round(remaining_pressure * GEOTHERMAL_PRESSURE_LOSS)
 		if(remaining_pressure)
-			addtimer(CALLBACK(src, .proc/propagate_pressure, remaining_pressure), 5)
+			addtimer(CALLBACK(src, PROC_REF(propagate_pressure), remaining_pressure), 5)
 	update_icon()
 	if(current_pressure <= 1)
 		return PROCESS_KILL

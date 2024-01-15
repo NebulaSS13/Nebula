@@ -182,7 +182,7 @@
 	user.visible_message( \
 		"<span class='[span_class]'>\The [user] holds \the [P] up to \the [src]. It looks like [G.he] [G.is] trying to burn it!</span>", \
 		"<span class='[span_class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
-	addtimer(CALLBACK(src, .proc/burn_callback, P, user, span_class), 2 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(burn_callback), P, user, span_class), 2 SECONDS)
 
 /obj/item/paper_bundle/examine(mob/user, distance)
 	. = ..()

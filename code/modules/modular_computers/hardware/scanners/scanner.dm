@@ -7,7 +7,7 @@
 	icon_state = "printer"
 	hardware_size = 1
 	critical = 0
-	origin_tech = "{'programming':2,'engineering':2}"
+	origin_tech = @'{"programming":2,"engineering":2}'
 
 	var/datum/computer_file/program/scanner/driver_type = /datum/computer_file/program/scanner		// A program type that the scanner interfaces with and attempts to install on insertion.
 	var/datum/computer_file/program/scanner/driver		 		// A driver program which has been set up to interface with the scanner.

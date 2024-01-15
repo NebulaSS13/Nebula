@@ -34,7 +34,7 @@
 	if(ticks_since_last_successful_breath>0) //Suffocating so do not take a breath
 		ticks_since_last_successful_breath--
 		if (prob(10) && !is_asystole() && active_breathe) //Gasp per 10 ticks? Sounds about right.
-			INVOKE_ASYNC(src, .proc/emote, "gasp")
+			INVOKE_ASYNC(src, PROC_REF(emote), "gasp")
 	else
 		//Okay, we can breathe, now check if we can get air
 		var/volume_needed = get_breath_volume()

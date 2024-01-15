@@ -2,7 +2,7 @@
 	abstract_type = /decl/bodytype/prosthetic
 	icon_base = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
 	desc = "A generic unbranded robotic prosthesis."
-	limb_tech = "{'engineering':1,'materials':1,'magnets':1}"
+	limb_tech = @'{"engineering":1,"materials":1,"magnets":1}'
 	modifier_string = "robotic"
 	is_robotic = TRUE
 	body_flags = BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT

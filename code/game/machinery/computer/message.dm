@@ -64,7 +64,7 @@
 			var/obj/item/paper/monitorkey/MK = new(loc)
 			// Will help make emagging the console not so easy to get away with.
 			MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
-			addtimer(CALLBACK(src, /obj/machinery/computer/message_monitor/proc/UnemagConsole), 100*length(linked_server.decryptkey))
+			addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/computer/message_monitor, UnemagConsole)), 100*length(linked_server.decryptkey))
 			message = rebootmsg
 			update_icon()
 			return 1
@@ -290,7 +290,7 @@
 			src.screen = 2
 			update_icon()
 			//Time it takes to bruteforce is dependant on the password length.
-			addtimer(CALLBACK(src, /obj/machinery/computer/message_monitor/proc/BruteForceConsole, usr, linked_server), 100*length(linked_server.decryptkey))
+			addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/computer/message_monitor, BruteForceConsole), usr, linked_server), 100*length(linked_server.decryptkey))
 
 	//Delete the request console log.
 	if (href_list["deleter"])

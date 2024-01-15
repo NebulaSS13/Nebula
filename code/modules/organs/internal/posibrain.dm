@@ -10,7 +10,7 @@
 	throwforce = 1
 	throw_speed = 3
 	throw_range = 5
-	origin_tech = "{'engineering':4,'materials':4,'wormholes':2,'programming':4}"
+	origin_tech = @'{"engineering":4,"materials":4,"wormholes":2,"programming":4}'
 	attack_verb = list("attacked", "slapped", "whacked")
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -56,7 +56,7 @@
 		src.searching = 1
 		var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/positronic_brain)
 		G.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
-		addtimer(CALLBACK(src, .proc/reset_search), askDelay)
+		addtimer(CALLBACK(src, PROC_REF(reset_search)), askDelay)
 
 /obj/item/organ/internal/posibrain/proc/reset_search() //We give the players time to decide, then reset the timer.
 	if(!brainmob?.key)

@@ -84,7 +84,7 @@
 
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
-	var/center_of_mass = @"{'x':16,'y':16}" //can be null for no exact placement behaviour
+	var/center_of_mass = @'{"x":16,"y":16}' //can be null for no exact placement behaviour
 
 /obj/item/proc/can_contaminate()
 	return !(obj_flags & ITEM_FLAG_NO_CONTAMINATION)
@@ -457,7 +457,7 @@
 	for(var/obj/item/thing in user?.get_held_items())
 		thing.update_twohanding()
 	if(play_dropsound && drop_sound && SSticker.mode)
-		addtimer(CALLBACK(src, .proc/dropped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+		addtimer(CALLBACK(src, PROC_REF(dropped_sound_callback)), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
 		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
@@ -492,7 +492,7 @@
 	add_fingerprint(user)
 
 	hud_layerise()
-	addtimer(CALLBACK(src, .proc/reconsider_client_screen_presence, user.client, slot), 0)
+	addtimer(CALLBACK(src, PROC_REF(reconsider_client_screen_presence), user.client, slot), 0)
 
 	//Update two-handing status
 	var/mob/M = loc
@@ -503,9 +503,9 @@
 	if(user)
 		if(SSticker.mode)
 			if(pickup_sound && (slot in user.get_held_item_slots()))
-				addtimer(CALLBACK(src, .proc/pickup_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+				addtimer(CALLBACK(src, PROC_REF(pickup_sound_callback)), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 			else if(equip_sound)
-				addtimer(CALLBACK(src, .proc/equipped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+				addtimer(CALLBACK(src, PROC_REF(equipped_sound_callback)), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 		if(z_flags & ZMM_MANGLE_PLANES)
 			addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
 

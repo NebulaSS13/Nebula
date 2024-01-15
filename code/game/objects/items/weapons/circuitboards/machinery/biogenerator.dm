@@ -2,7 +2,7 @@
 	name = "circuitboard (biogenerator)"
 	build_path = /obj/machinery/biogenerator
 	board_type = "machine"
-	origin_tech = "{'programming':2}"
+	origin_tech = @'{"programming":2}'
 	req_components = list(
 							/obj/item/stock_parts/matter_bin = 1,
 							/obj/item/stock_parts/manipulator = 1

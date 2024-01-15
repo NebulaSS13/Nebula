@@ -76,7 +76,7 @@ Skill books that increase your skills while you activate and hold them
 
 	. = ..()
 
-	global.events_repository.register(/decl/observ/moved, src, src, .proc/check_buff)
+	global.events_repository.register(/decl/observ/moved, src, src, PROC_REF(check_buff))
 
 	if(!custom && skill && skill_req)// custom books should already have all they need
 

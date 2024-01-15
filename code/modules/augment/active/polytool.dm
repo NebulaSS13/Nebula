@@ -4,7 +4,7 @@
 	icon_state = "multitool"
 	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
 	augment_flags = AUGMENTATION_MECHANIC
-	origin_tech = "{'materials':2,'magnets':2,'engineering':4}"
+	origin_tech = @'{"materials":2,"magnets":2,"engineering":4}'
 	var/list/items = list()
 	var/list/paths = list() //We may lose them
 

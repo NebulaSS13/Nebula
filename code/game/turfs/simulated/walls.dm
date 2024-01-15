@@ -66,7 +66,7 @@ var/global/list/wall_fullblend_objects = list(
 		girder_material = GET_DECL(girder_material)
 
 	. = INITIALIZE_HINT_LATELOAD
-	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	set_extension(src, /datum/extension/penetration/proc_call, PROC_REF(CheckPenetration))
 	START_PROCESSING(SSturf, src) //Used for radiation.
 
 /turf/simulated/wall/LateInitialize(var/ml)
