@@ -33,14 +33,14 @@
 	ClearThrowable()
 
 	to_throw = new_throwable
-	events_repository.register(/decl/observ/destroyed, to_throw, src, /datum/build_mode/throw_at/proc/ClearThrowable)
+	events_repository.register(/decl/observ/destroyed, to_throw, src, TYPE_PROC_REF(/datum/build_mode/throw_at, ClearThrowable))
 	to_chat(user, "<span class='notice'>Will now be throwing \the [to_throw].</span>")
 
 /datum/build_mode/throw_at/proc/ClearThrowable(var/feedback)
 	if(!to_throw)
 		return
 
-	events_repository.unregister(/decl/observ/destroyed, to_throw, src, /datum/build_mode/throw_at/proc/ClearThrowable)
+	events_repository.unregister(/decl/observ/destroyed, to_throw, src, TYPE_PROC_REF(/datum/build_mode/throw_at, ClearThrowable))
 	to_throw = null
 	if(feedback)
 		Warn("The selected throwing object was deleted.")

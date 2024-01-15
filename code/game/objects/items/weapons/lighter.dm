@@ -102,7 +102,7 @@
 		if(ismob(loc) && prob(10) && REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) < 1)
 			to_chat(loc, "<span class='warning'>\The [src]'s flame flickers.</span>")
 			set_light(0)
-			addtimer(CALLBACK(src, .atom/proc/set_light, 2), 4)
+			addtimer(CALLBACK(src, TYPE_PROC_REF(.atom, set_light), 2), 4)
 		reagents.remove_reagent(/decl/material/liquid/fuel, 0.05)
 	else
 		extinguish()

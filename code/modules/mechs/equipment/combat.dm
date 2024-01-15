@@ -163,7 +163,7 @@
 	. = ..()
 	add_vis_contents(target, src)
 	set_dir(target.dir)
-	events_repository.register(/decl/observ/dir_set, user, src, /obj/aura/mechshield/proc/update_dir)
+	events_repository.register(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/aura/mechshield, update_dir))
 
 /obj/aura/mechshield/proc/update_dir(var/user, var/old_dir, var/dir)
 	set_dir(dir)
@@ -176,7 +176,7 @@
 
 /obj/aura/mechshield/Destroy()
 	if(user)
-		events_repository.unregister(/decl/observ/dir_set, user, src, /obj/aura/mechshield/proc/update_dir)
+		events_repository.unregister(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/aura/mechshield, update_dir))
 		remove_vis_contents(user, src)
 	shields = null
 	. = ..()
@@ -406,14 +406,14 @@
 	. = ..()
 	add_vis_contents(target, src)
 	set_dir(target.dir)
-	global.events_repository.register(/decl/observ/dir_set, user, src, /obj/aura/mech_ballistic/proc/update_dir)
+	global.events_repository.register(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/aura/mech_ballistic, update_dir))
 
 /obj/aura/mech_ballistic/proc/update_dir(user, old_dir, dir)
 	set_dir(dir)
 
 /obj/aura/mech_ballistic/Destroy()
 	if (user)
-		global.events_repository.unregister(/decl/observ/dir_set, user, src, /obj/aura/mech_ballistic/proc/update_dir)
+		global.events_repository.unregister(/decl/observ/dir_set, user, src, TYPE_PROC_REF(/obj/aura/mech_ballistic, update_dir))
 		remove_vis_contents(user, src)
 	shield = null
 	. = ..()

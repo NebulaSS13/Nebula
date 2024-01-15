@@ -33,7 +33,7 @@
 /decl/material/liquid/glowsap/on_leaving_metabolism(datum/reagents/metabolism/holder)
 	if(ishuman(holder?.my_atom))
 		var/mob/living/carbon/human/H = holder.my_atom
-		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/update_eyes), 5 SECONDS)
+		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, update_eyes)), 5 SECONDS)
 	. = ..()
 
 /decl/material/liquid/glowsap/affect_overdose(var/mob/living/M)

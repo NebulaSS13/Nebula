@@ -173,7 +173,7 @@
 			if(!user.try_unequip(I, src))
 				return
 			output_container = I
-			events_repository.register(/decl/observ/destroyed, output_container, src, /obj/machinery/material_processing/extractor/proc/remove_container)
+			events_repository.register(/decl/observ/destroyed, output_container, src, TYPE_PROC_REF(/obj/machinery/material_processing/extractor, remove_container))
 			user.visible_message(SPAN_NOTICE("\The [user] places \a [I] in \the [src]."), SPAN_NOTICE("You place \a [I] in \the [src]."))
 			return
 
@@ -185,7 +185,7 @@
 	if(!output_container)
 		return
 	. = output_container
-	events_repository.unregister(/decl/observ/destroyed, output_container, src, /obj/machinery/material_processing/extractor/proc/remove_container)
+	events_repository.unregister(/decl/observ/destroyed, output_container, src, TYPE_PROC_REF(/obj/machinery/material_processing/extractor, remove_container))
 	output_container = null
 
 /obj/machinery/material_processing/extractor/OnTopic(var/mob/user, var/list/href_list)

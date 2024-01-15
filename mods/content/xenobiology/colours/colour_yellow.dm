@@ -17,7 +17,7 @@
 
 /decl/slime_colour/yellow/Initialize()
 	. = ..()
-	LAZYSET(reaction_procs, /decl/material/liquid/water, /decl/slime_colour/yellow/proc/try_water_reaction)
+	LAZYSET(reaction_procs, /decl/material/liquid/water, TYPE_PROC_REF(/decl/slime_colour/yellow, try_water_reaction))
 
 /decl/slime_colour/yellow/handle_blood_reaction(var/datum/reagents/holder)
 	var/location = get_turf(holder.get_reaction_loc())

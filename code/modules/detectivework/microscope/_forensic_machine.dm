@@ -27,7 +27,7 @@
 /obj/machinery/forensic/proc/set_sample(var/obj/O)
 	if(O != sample && O)
 		clear_sample()
-		events_repository.register(/decl/observ/destroyed, O, src, /obj/machinery/forensic/proc/clear_sample)
+		events_repository.register(/decl/observ/destroyed, O, src, TYPE_PROC_REF(/obj/machinery/forensic, clear_sample))
 		sample = O
 		update_icon()
 

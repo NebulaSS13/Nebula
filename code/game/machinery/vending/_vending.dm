@@ -360,7 +360,7 @@
 	use_power_oneoff(vend_power_usage)	//actuators and stuff
 	if (icon_vend) //Show the vending animation if needed
 		flick(icon_vend,src)
-	addtimer(CALLBACK(src, /obj/machinery/vending/proc/finish_vending, R), vend_delay)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/vending, finish_vending), R), vend_delay)
 
 /obj/machinery/vending/proc/do_vending_reply()
 	set waitfor = FALSE

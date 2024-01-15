@@ -137,7 +137,7 @@
 					host.adjustBrainLoss(0.1)
 
 				if(prob(host.getBrainLoss()/20))
-					INVOKE_ASYNC(host, /mob/proc/say, "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
+					INVOKE_ASYNC(host, TYPE_PROC_REF(/mob, say), "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()
@@ -209,7 +209,7 @@
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
 			thing.color = COLOR_BORER_RED
-	addtimer(CALLBACK(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/simple_animal/borer, reset_ui_callback)), amt)
 #undef COLOR_BORER_RED
 
 /mob/living/simple_animal/borer/proc/leave_host()

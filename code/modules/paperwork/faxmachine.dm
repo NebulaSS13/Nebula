@@ -116,18 +116,18 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	printer     = get_component_of_type(/obj/item/stock_parts/printer)
 
 	if(disk_reader)
-		disk_reader.register_on_insert(CALLBACK(src, /obj/machinery/faxmachine/proc/on_insert_disk))
-		disk_reader.register_on_eject( CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
+		disk_reader.register_on_insert(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_insert_disk)))
+		disk_reader.register_on_eject( CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, update_ui)))
 
 	if(card_reader)
-		card_reader.register_on_insert(CALLBACK(src, /obj/machinery/faxmachine/proc/on_insert_card))
-		card_reader.register_on_eject( CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
+		card_reader.register_on_insert(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_insert_card)))
+		card_reader.register_on_eject( CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, update_ui)))
 
 	if(printer)
-		printer.register_on_printed_page(  CALLBACK(src, /obj/machinery/faxmachine/proc/on_printed_page))
-		printer.register_on_finished_queue(CALLBACK(src, /obj/machinery/faxmachine/proc/on_queue_finished))
-		printer.register_on_print_error(   CALLBACK(src, /obj/machinery/faxmachine/proc/on_print_error))
-		printer.register_on_status_changed(CALLBACK(src, /obj/machinery/faxmachine/proc/update_ui))
+		printer.register_on_printed_page(  CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_printed_page)))
+		printer.register_on_finished_queue(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_queue_finished)))
+		printer.register_on_print_error(   CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, on_print_error)))
+		printer.register_on_status_changed(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/faxmachine, update_ui)))
 
 /obj/machinery/faxmachine/interface_interact(mob/user)
 	ui_interact(user)

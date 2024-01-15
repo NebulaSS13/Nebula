@@ -98,7 +98,7 @@
 	log_and_message_admins("has activated the service '[service_label]'", user)
 
 	if(service_duration)
-		addtimer(CALLBACK(src,/obj/item/uplink_service/proc/deactivate), service_duration)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/item/uplink_service, deactivate)), service_duration)
 	else
 		deactivate()
 

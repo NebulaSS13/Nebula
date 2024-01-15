@@ -228,7 +228,7 @@
 	if(location)
 		location.hotspot_expose(WELDING_TOOL_HOTSPOT_TEMP_ACTIVE, 5)
 	set_light(5, 0.7, COLOR_LIGHT_CYAN)
-	addtimer(CALLBACK(src, /atom/proc/update_icon), 5)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon)), 5)
 	return TRUE
 
 /**Handle the flame burning fuel while the welder is on */

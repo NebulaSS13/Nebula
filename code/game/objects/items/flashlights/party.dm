@@ -36,7 +36,7 @@
 /obj/item/flashlight/party/proc/start_strobing()
 	if(!strobe_effect)
 		strobe_effect = new(get_turf(src))
-		events_repository.register(/decl/observ/moved, src, strobe_effect, /atom/movable/proc/move_to_turf_or_null)
+		events_repository.register(/decl/observ/moved, src, strobe_effect, TYPE_PROC_REF(/atom/movable, move_to_turf_or_null))
 		update_icon()
 
 /obj/effect/party_light

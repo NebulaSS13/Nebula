@@ -125,7 +125,7 @@
 				if (prob(user.skill_fail_chance(SKILL_DEVICES, 40, SKILL_EXPERT)))
 					l_setshort = FALSE
 					user.show_message(SPAN_NOTICE("Internal memory reset. Please give it a few seconds to reinitialize."), 1)
-					addtimer(CALLBACK(src, /datum/extension/lockable/proc/reset_memory), 3 SECONDS)
+					addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/extension/lockable, reset_memory)), 3 SECONDS)
 					return TRUE
 				else
 					user.show_message(SPAN_WARNING("Unable to reset internal memory."), 1)

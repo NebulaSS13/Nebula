@@ -325,7 +325,7 @@
 	var/datum/shuttle/our_shuttle = SSshuttle.shuttles[shuttle_name]
 	our_shuttle.shuttle_area += A
 	SSshuttle.shuttle_areas += A
-	events_repository.register(/decl/observ/destroyed, A, our_shuttle, /datum/shuttle/proc/remove_shuttle_area)
+	events_repository.register(/decl/observ/destroyed, A, our_shuttle, TYPE_PROC_REF(/datum/shuttle, remove_shuttle_area))
 	return A
 
 #undef MAX_AREA_SIZE

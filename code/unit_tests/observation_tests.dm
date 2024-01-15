@@ -97,7 +97,7 @@
 	old_name = O.name
 	new_name = O.name + " (New)"
 
-	events_repository.register_global(/decl/observ/name_set, src, /datum/unit_test/observation/proc/receive_name_change)
+	events_repository.register_global(/decl/observ/name_set, src, TYPE_PROC_REF(/datum/unit_test/observation, receive_name_change))
 	O.SetName(new_name)
 
 	if(received_name_set_events.len != 1)
@@ -240,7 +240,7 @@
 
 	exosuit.occupant = holding_mob
 
-	events_repository.register(/decl/observ/moved, held_item, src, /datum/unit_test/observation/proc/receive_move)
+	events_repository.register(/decl/observ/moved, held_item, src, TYPE_PROC_REF(/datum/unit_test/observation, receive_move))
 	holding_mob.drop_from_inventory(held_item)
 
 	if(received_moves.len != 1)
@@ -320,7 +320,7 @@
 	var/turf/T = get_safe_turf()
 	var/obj/O = get_named_instance(/obj, T)
 
-	events_repository.register_global(/decl/observ/name_set, O, /atom/movable/proc/move_to_turf)
+	events_repository.register_global(/decl/observ/name_set, O, TYPE_PROC_REF(/atom/movable, move_to_turf))
 	qdel(O)
 
 	var/decl/observ/name_set/name_set_event = GET_DECL(/decl/observ/name_set)
@@ -347,7 +347,7 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
-	events_repository.register(/decl/observ/moved, event_source, listener, /atom/movable/proc/recursive_move)
+	events_repository.register(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
 	qdel(event_source)
 
 	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
@@ -375,7 +375,7 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
-	events_repository.register(/decl/observ/moved, event_source, listener, /atom/movable/proc/recursive_move)
+	events_repository.register(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
 	qdel(listener)
 
 	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)

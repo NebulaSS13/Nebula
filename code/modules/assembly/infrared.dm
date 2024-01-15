@@ -30,7 +30,7 @@
 	. = ..()
 	beams = list()
 	seen_turfs = list()
-	proximity_trigger = new(src, /obj/item/assembly/infra/proc/on_beam_entered, /obj/item/assembly/infra/proc/on_visibility_change, world.view, proximity_flags = PROXIMITY_EXCLUDE_HOLDER_TURF)
+	proximity_trigger = new(src, TYPE_PROC_REF(/obj/item/assembly/infra, on_beam_entered), TYPE_PROC_REF(/obj/item/assembly/infra, on_visibility_change), world.view, proximity_flags = PROXIMITY_EXCLUDE_HOLDER_TURF)
 
 /obj/item/assembly/infra/Destroy()
 	qdel(proximity_trigger)

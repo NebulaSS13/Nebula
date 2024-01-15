@@ -27,7 +27,7 @@
 	var/obj/effect/portal/P = new(get_turf(a), null, 0)
 	P.failchance = 0
 	portals += P
-	events_repository.register(/decl/observ/destroyed, P,src,/datum/phenomena/portals/proc/remove_portal)
+	events_repository.register(/decl/observ/destroyed, P,src, TYPE_PROC_REF(/datum/phenomena/portals, remove_portal))
 	if(portals.len > 2)
 		var/removed = portals[1]
 		remove_portal(removed)

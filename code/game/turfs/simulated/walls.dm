@@ -273,7 +273,7 @@ var/global/list/wall_fullblend_objects = list(
 	if(!QDELETED(src) && istype(material) && material.combustion_effect(src, temperature, 0.7))
 		for(var/turf/simulated/wall/W in range(3,src))
 			if(W != src)
-				addtimer(CALLBACK(W, /turf/simulated/wall/proc/burn, temperature/4), 2)
+				addtimer(CALLBACK(W, TYPE_PROC_REF(/turf/simulated/wall, burn), temperature/4), 2)
 		dismantle_wall(TRUE)
 
 /turf/simulated/wall/get_color()

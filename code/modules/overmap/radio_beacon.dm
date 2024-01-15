@@ -13,8 +13,8 @@
 	<br><br>---END OF TRANSMISSION---"
 
 /obj/effect/overmap/radio/proc/set_origin(obj/effect/overmap/origin)
-	events_repository.register(/decl/observ/moved, origin, src, /obj/effect/overmap/radio/proc/follow)
-	events_repository.register(/decl/observ/destroyed, origin, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/moved, origin, src, TYPE_PROC_REF(/obj/effect/overmap/radio, follow))
+	events_repository.register(/decl/observ/destroyed, origin, src, TYPE_PROC_REF(/datum, qdel_self))
 	forceMove(origin.loc)
 	source = origin
 	pixel_x = -(origin.bound_width - 6)
