@@ -60,19 +60,24 @@
 	set_gender(pronouns.name, TRUE)
 
 /mob/living/carbon/human/proc/reset_hair()
+	var/decl/bodytype/root_bodytype = get_bodytype()
 	var/list/valid_hairstyles = get_valid_hairstyle_types()
 	if(length(valid_hairstyles))
 		SET_HAIR_STYLE(src, pick(valid_hairstyles), TRUE)
 	else
 		//this shouldn't happen
-		SET_HAIR_STYLE(src, get_bodytype()?.default_h_style || /decl/sprite_accessory/hair/bald, TRUE)
+		var/new_hair = LAZYACCESS(root_bodytype?.default_sprite_accessories, /decl/sprite_accessory_category/hair) || /decl/sprite_accessory/hair/bald
+		if(new_hair)
+			SET_HAIR_STYLE(src, new_hair, TRUE)
 
 	var/list/valid_facial_hairstyles =  get_valid_facial_hairstyle_types()
 	if(length(valid_facial_hairstyles))
 		SET_FACIAL_HAIR_STYLE(src, pick(valid_facial_hairstyles), TRUE)
 	else
 		//this shouldn't happen
-		SET_FACIAL_HAIR_STYLE(src, get_bodytype()?.default_f_style || /decl/sprite_accessory/facial_hair/shaved, TRUE)
+		var/new_facial_hair = LAZYACCESS(root_bodytype?.default_sprite_accessories, /decl/sprite_accessory_category/facial_hair) || /decl/sprite_accessory/facial_hair/shaved
+		if(new_facial_hair)
+			SET_FACIAL_HAIR_STYLE(src, new_facial_hair, TRUE)
 
 	update_hair()
 

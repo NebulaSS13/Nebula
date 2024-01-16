@@ -92,12 +92,8 @@
 
 			pref.species = choice
 			pref.sanitize_preferences()
-			//reset hairstyle prefs
-			ResetAllHair()
-			// reset colors
 			var/decl/species/mob_species = pref.get_species_decl()
 			mob_species.handle_post_species_pref_set(pref)
-			// reset markings
 			var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
 			mob_bodytype.handle_post_bodytype_pref_set(pref)
 

@@ -82,7 +82,6 @@ var/global/list/bodytypes_by_category = list()
 	// Used for initializing prefs/preview
 	var/base_color =      COLOR_BLACK
 	var/base_eye_color =  COLOR_BLACK
-	var/base_hair_color = COLOR_BLACK
 
 	/// Used to initialize organ material
 	var/material =        /decl/material/solid/organic/meat
@@ -143,10 +142,7 @@ var/global/list/bodytypes_by_category = list()
 	var/vital_organ_failure_death_delay = 25 SECONDS
 	var/mob_size = MOB_SIZE_MEDIUM
 
-	var/default_h_style = /decl/sprite_accessory/hair/bald
-	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
-
-	var/list/base_markings
+	var/list/default_sprite_accessories
 
 	// Darksight handling
 	/// Fractional multiplier (0 to 1) for the base alpha of the darkness overlay. A value of 1 means darkness is completely invisible.
@@ -279,14 +275,23 @@ var/global/list/bodytypes_by_category = list()
 			. += "\"[BP_CHEST]\" state not present in icon_deformed"
 	if((appearance_flags & HAS_SKIN_COLOR) && isnull(base_color))
 		. += "uses skin color but missing base_color"
-	if((appearance_flags & HAS_HAIR_COLOR) && isnull(base_hair_color))
-		. += "uses hair color but missing base_hair_color"
 	if((appearance_flags & HAS_EYE_COLOR) && isnull(base_eye_color))
 		. += "uses eye color but missing base_eye_color"
-	if(isnull(default_h_style))
-		. += "null default_h_style (use a bald/hairless hairstyle if 'no hair' is intended)"
-	if(isnull(default_f_style))
-		. += "null default_f_style (use a shaved/hairless facial hair style if 'no facial hair' is intended)"
+
+	for(var/accessory_category in default_sprite_accessories)
+		var/decl/sprite_accessory_category/acc_cat = GET_DECL(accessory_category)
+		if(!istype(acc_cat))
+			. += "invalid sprite accessory category entry: [accessory_category || "null"]"
+			continue
+		for(var/accessory in default_sprite_accessories[accessory_category])
+			var/decl/sprite_accessory/acc_decl = GET_DECL(accessory)
+			if(!istype(acc_decl))
+				. += "invalid sprite accessory in category [accessory_category]: [accessory || "null"]"
+				continue
+			if(acc_decl.accessory_category != acc_cat.type)
+				. += "accessory category [acc_decl.accessory_category || "null"] does not match [acc_cat.type]"
+			if(!istype(acc_decl, acc_cat.default_accessory))
+				. += "accessory type does not align with category default accessory: [acc_cat.default_accessory || "null"]"
 
 	var/list/tail_data = has_limbs[BP_TAIL]
 	if(tail_data)
@@ -435,38 +440,26 @@ var/global/list/bodytypes_by_category = list()
 		if(initial(I.parent_organ) == organ.organ_tag)
 			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))
 
-/decl/bodytype/proc/set_default_hair(mob/living/carbon/human/organism, override_existing = TRUE, defer_update_hair = FALSE)
-	var/current_hair = GET_HAIR_STYLE(organism)
-	if(!current_hair || (override_existing && (current_hair != default_h_style)))
-		SET_HAIR_STYLE(organism, default_h_style, defer_update_hair)
-		. = TRUE
-	current_hair = GET_FACIAL_HAIR_STYLE(organism)
-	if(!current_hair || (override_existing && GET_FACIAL_HAIR_STYLE(organism) != default_f_style))
-		SET_FACIAL_HAIR_STYLE(organism, default_f_style, defer_update_hair)
-		. = TRUE
-	if(. && !defer_update_hair)
-		organism.update_hair()
-
-/decl/bodytype/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
-
-	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
+/decl/bodytype/proc/set_default_sprite_accessories(var/mob/living/setting)
+	if(!istype(setting))
+		return
+	for(var/obj/item/organ/external/E in setting.get_external_organs())
 		E.skin_colour = base_color
 		E.clear_sprite_accessories(skip_update = TRUE)
-
-	if(length(base_markings))
-		for(var/accessory in base_markings)
+	if(!length(default_sprite_accessories))
+		return
+	for(var/accessory_category in default_sprite_accessories)
+		for(var/accessory in default_sprite_accessories[accessory_category])
 			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			var/accessory_colour = base_markings[accessory]
+			var/accessory_colour = default_sprite_accessories[accessory_category][accessory]
 			for(var/bodypart in accessory_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(setting, bodypart)
 				if(O)
-					O.set_sprite_accessory(accessory, accessory_decl.abstract_type, accessory_colour, skip_update = TRUE)
+					O.set_sprite_accessory(accessory, null, accessory_colour, skip_update = TRUE)
 
+/decl/bodytype/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
+	set_default_sprite_accessories(mannequin)
 	mannequin.set_eye_colour(base_eye_color, skip_update = TRUE)
-	SET_HAIR_COLOUR(mannequin, base_hair_color, TRUE)
-	SET_FACIAL_HAIR_COLOUR(mannequin, base_hair_color, TRUE)
-	set_default_hair(mannequin)
-
 	mannequin.force_update_limbs()
 	mannequin.update_mutations(0)
 	mannequin.update_body(0)

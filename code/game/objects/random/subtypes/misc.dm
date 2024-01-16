@@ -406,6 +406,14 @@
 
 /obj/random/eyeshadow/spawn_choices()
 	var/static/list/spawnable_choices = list(
+		/obj/item/cosmetics/eyeshadow/red,
+		/obj/item/cosmetics/eyeshadow/blue,
+		/obj/item/cosmetics/eyeshadow/green,
+		/obj/item/cosmetics/eyeshadow/turquoise,
+		/obj/item/cosmetics/eyeshadow/violet,
+		/obj/item/cosmetics/eyeshadow/yellow,
+		/obj/item/cosmetics/eyeshadow/orange,
+		/obj/item/cosmetics/eyeshadow/white,
 		/obj/item/cosmetics/eyeshadow/black
 	)
 	return spawnable_choices
@@ -418,8 +426,24 @@
 
 /obj/random/makeup/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/random/lipstick,
-		/obj/random/eyeshadow
+		/obj/item/cosmetics/lipstick/red,
+		/obj/item/cosmetics/lipstick/blue,
+		/obj/item/cosmetics/lipstick/green,
+		/obj/item/cosmetics/lipstick/turquoise,
+		/obj/item/cosmetics/lipstick/violet,
+		/obj/item/cosmetics/lipstick/yellow,
+		/obj/item/cosmetics/lipstick/orange,
+		/obj/item/cosmetics/lipstick/white,
+		/obj/item/cosmetics/lipstick/black,
+		/obj/item/cosmetics/eyeshadow/red,
+		/obj/item/cosmetics/eyeshadow/blue,
+		/obj/item/cosmetics/eyeshadow/green,
+		/obj/item/cosmetics/eyeshadow/turquoise,
+		/obj/item/cosmetics/eyeshadow/violet,
+		/obj/item/cosmetics/eyeshadow/yellow,
+		/obj/item/cosmetics/eyeshadow/orange,
+		/obj/item/cosmetics/eyeshadow/white,
+		/obj/item/cosmetics/eyeshadow/black
 	)
 	return spawnable_choices
 

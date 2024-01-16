@@ -148,7 +148,7 @@
 			var/list/marklist = dna.heritable_sprite_accessories[tag]
 			if(length(marklist))
 				for(var/accessory in marklist)
-					E.set_sprite_accessory(accessory, marklist[accessory], skip_update = TRUE)
+					E.set_sprite_accessory(accessory, null, marklist[accessory], skip_update = TRUE)
 			else
 				E.clear_sprite_accessories(skip_update = TRUE)
 

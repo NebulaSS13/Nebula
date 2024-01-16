@@ -23,6 +23,14 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/base_external_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 	var/base_internal_prosthetics_model
 
+	// A list of customization categories made available in character preferences.
+	var/list/available_accessory_categories = list(
+		/decl/sprite_accessory_category/hair,
+		/decl/sprite_accessory_category/facial_hair,
+		/decl/sprite_accessory_category/cosmetics,
+		/decl/sprite_accessory_category/markings,
+	)
+
 	// Lists of accessory types for modpack modification of accessory restrictions.
 	// These lists are pretty broad and indiscriminate in application, don't use
 	// them for fine detail restriction/allowing if you can avoid it.

@@ -127,14 +127,17 @@ var/global/list/organ_icon_cache = list()
 
 /obj/item/organ/external/proc/get_sprite_accessory_value(var/accessory_type)
 	var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
-	var/list/accessories = istype(accessory) && LAZYACCESS(_sprite_accessories, accessory.abstract_type)
+	var/list/accessories = istype(accessory) && LAZYACCESS(_sprite_accessories, accessory.accessory_category)
 	if(accessories)
 		return accessories[accessory_type]
 
 /obj/item/organ/external/proc/set_sprite_accessory(var/accessory_type, var/accessory_category, var/accessory_color, var/skip_update = FALSE)
 
+	var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory_type)
 	if(!accessory_category)
-		return
+		if(!accessory_decl)
+			return
+		accessory_category = accessory_decl.accessory_category
 
 	var/list/accessories = LAZYACCESS(_sprite_accessories, accessory_category)
 	if(!accessories)
@@ -142,13 +145,13 @@ var/global/list/organ_icon_cache = list()
 		LAZYSET(_sprite_accessories, accessory_category, accessories)
 
 	if(!accessory_type)
-		var/decl/sprite_accessory/accessory_cat = GET_DECL(accessory_category)
-		accessory_type = accessory_cat?.accessory_category_default_style
+		var/decl/sprite_accessory_category/accessory_cat = GET_DECL(accessory_category)
+		accessory_type = accessory_cat?.default_accessory
 		if(!accessory_type)
 			return
+		accessory_decl = GET_DECL(accessory_type)
 
 	if(accessory_color)
-		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory_type)
 		if(!accessory_decl.accessory_is_available(owner, species, bodytype))
 			return
 		if(LAZYACCESS(accessories, accessory_type) == accessory_color)
@@ -212,12 +215,12 @@ var/global/list/organ_icon_cache = list()
 	if(!accessory_type)
 		return
 	var/decl/sprite_accessory/removing_accessory = GET_DECL(accessory_type)
-	var/list/removing = LAZYACCESS(_sprite_accessories, removing_accessory.abstract_type)
+	var/list/removing = LAZYACCESS(_sprite_accessories, removing_accessory.accessory_category)
 	if(!LAZYLEN(removing))
 		return
 	LAZYREMOVE(removing, accessory_type)
 	if(!length(removing))
-		LAZYREMOVE(_sprite_accessories, removing_accessory.abstract_type)
+		LAZYREMOVE(_sprite_accessories, removing_accessory.accessory_category)
 	if(!skip_update)
 		if(owner && removing_accessory)
 			removing_accessory.refresh_mob(owner)
@@ -312,3 +315,15 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	if(accessory_style.is_hidden(src))
 		return accessory_style.get_hidden_substitute()
 	return accessory_style
+
+/obj/item/organ/external/proc/sanitize_sprite_accessories(var/skip_update = FALSE)
+	for(var/acc_cat in _sprite_accessories)
+		for(var/accessory in _sprite_accessories[acc_cat])
+			var/decl/sprite_accessory/accessory_style = GET_DECL(accessory)
+			if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, bodytype))
+				_sprite_accessories[acc_cat] -= accessory
+				. = TRUE
+	if(.)
+		_icon_cache_key = null
+		if(!skip_update)
+			update_icon()

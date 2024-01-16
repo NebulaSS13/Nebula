@@ -46,7 +46,7 @@
 	/// Flag to check equipment for when hiding this accessory.
 	var/hidden_by_gear_flag
 	/// Various flags controlling some checks and behavior.
-	var/flags = 0
+	var/accessory_flags = 0
 	/// Flags to check when applying this accessory to the mob.
 	var/requires_appearance_flags = 0
 	/// Icon cache for various icon generation steps.
@@ -63,10 +63,10 @@
 	var/sprite_overlay_layer
 	/// A list of sprite accessory types that are disallowed by this one being included.
 	var/list/disallows_accessories
-	/// A default always-available type used as a fallback.
-	var/accessory_category_default_style
 	/// Whether or not this accessory is transferred via DNA (ie. not a scar or tattoo)
 	var/is_heritable = FALSE
+	/// What category does this accessory fall under?
+	var/accessory_category
 
 /decl/sprite_accessory/proc/refresh_mob(var/mob/living/subject)
 	return
@@ -99,6 +99,8 @@
 
 /decl/sprite_accessory/validate()
 	. = ..()
+	if(!ispath(accessory_category, /decl/sprite_accessory_category))
+		. += "invalid sprite accessory category: [accessory_category || "null"]"
 	if(!icon)
 		. += "missing icon"
 	else

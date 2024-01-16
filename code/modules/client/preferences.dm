@@ -375,19 +375,12 @@ var/global/list/time_prefs_fixed = list()
 		else if(firstspace == name_length)
 			real_name += "[pick(global.last_names)]"
 
-	// Clear accessories before hair and facial hair to avoid accidentally clearing them too.
-	for(var/obj/item/organ/external/O in character.get_external_organs())
-		O.clear_sprite_accessories(skip_update = TRUE)
-
 	character.fully_replace_character_name(real_name)
 
 	character.set_gender(gender)
 	character.blood_type = blood_type
 
 	character.set_eye_colour(eye_colour, skip_update = TRUE)
-
-	character.set_organ_sprite_accessory_by_category(h_style, /decl/sprite_accessory/hair, hair_colour, FALSE, FALSE, BP_HEAD, TRUE)
-	character.set_organ_sprite_accessory_by_category(f_style, /decl/sprite_accessory/facial_hair, facial_hair_colour, FALSE, FALSE, BP_HEAD, TRUE)
 
 	character.set_skin_colour(skin_colour, skip_update = TRUE)
 	character.skin_tone = skin_tone
@@ -409,13 +402,17 @@ var/global/list/time_prefs_fixed = list()
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
-	for(var/accessory in body_markings)
-		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-		var/accessory_colour = "[body_markings[accessory]]"
-		for(var/bodypart in accessory_decl.body_parts)
-			var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
-			if(O)
-				O.set_sprite_accessory(accessory, accessory_decl.abstract_type, accessory_colour, skip_update = TRUE)
+	for(var/obj/item/organ/external/O in character.get_external_organs())
+		O.clear_sprite_accessories(skip_update = TRUE)
+
+	for(var/accessory_category in sprite_accessories)
+		for(var/accessory in sprite_accessories[accessory_category])
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_colour = sprite_accessories[accessory_category][accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
+				if(O)
+					O.set_sprite_accessory(accessory, accessory_category, accessory_colour, skip_update = TRUE)
 
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()

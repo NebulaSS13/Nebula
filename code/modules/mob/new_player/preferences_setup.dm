@@ -15,8 +15,15 @@
 	var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 	gender = pronouns.name
 
+/*
 	h_style = random_hair_style()
 	f_style = random_facial_hair_style()
+	for(var/M in body_markings)
+		body_markings[M] = get_random_colour()
+		hair_colour = current_bodytype.get_random_hair_color()
+		facial_hair_colour = prob(75) ? hair_colour : current_bodytype.get_random_facial_hair_color()
+*/
+
 	if(bodytype)
 		if(current_bodytype.appearance_flags & HAS_A_SKIN_TONE)
 			skin_tone = current_bodytype.get_random_skin_tone() || skin_tone
@@ -24,9 +31,6 @@
 			eye_colour = current_bodytype.get_random_eye_color()
 		if(current_bodytype.appearance_flags & HAS_SKIN_COLOR)
 			skin_colour = current_bodytype.get_random_skin_color()
-		if(current_bodytype.appearance_flags & HAS_HAIR_COLOR)
-			hair_colour = current_bodytype.get_random_hair_color()
-			facial_hair_colour = prob(75) ? hair_colour : current_bodytype.get_random_facial_hair_color()
 
 	if(all_underwear)
 		all_underwear.Cut()
@@ -34,9 +38,6 @@
 		for(var/datum/category_group/underwear/WRC in global.underwear.categories)
 			var/datum/category_item/underwear/WRI = pick(WRC.items)
 			all_underwear[WRC.name] = WRI.name
-
-	for(var/M in body_markings)
-		body_markings[M] = get_random_colour()
 
 	for(var/entry in current_species.appearance_descriptors)
 		var/datum/appearance_descriptor/descriptor = current_species.appearance_descriptors[entry]

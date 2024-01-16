@@ -387,12 +387,12 @@ var/global/list/dexterity_levels = list(
 #define EATING_METHOD_DRINK 1
 
 // Helpers for setting mob appearance. They are extremely ugly, hence the helpers.
-#define SET_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)          (TARGET.set_organ_sprite_accessory_by_category((STYLE), /decl/sprite_accessory/hair, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
-#define GET_HAIR_STYLE(TARGET)                              (TARGET.get_organ_sprite_accessory_by_category(/decl/sprite_accessory/hair, BP_HEAD))
-#define SET_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category(null, /decl/sprite_accessory/hair, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
+#define SET_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)          (TARGET.set_organ_sprite_accessory_by_category((STYLE), /decl/sprite_accessory_category/hair, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
+#define GET_HAIR_STYLE(TARGET)                              (TARGET.get_organ_sprite_accessory_by_category(/decl/sprite_accessory_category/hair, BP_HEAD))
+#define SET_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category(null, /decl/sprite_accessory_category/hair, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
 #define GET_HAIR_COLOUR(TARGET)                             (TARGET.get_organ_sprite_accessory(GET_HAIR_STYLE(TARGET), BP_HEAD))
 
-#define SET_FACIAL_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)   (TARGET.set_organ_sprite_accessory_by_category((STYLE), /decl/sprite_accessory/facial_hair, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
-#define GET_FACIAL_HAIR_STYLE(TARGET)                       (TARGET.get_organ_sprite_accessory_by_category(/decl/sprite_accessory/facial_hair, BP_HEAD))
-#define SET_FACIAL_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null, /decl/sprite_accessory/facial_hair, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
+#define SET_FACIAL_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)   (TARGET.set_organ_sprite_accessory_by_category((STYLE), /decl/sprite_accessory_category/facial_hair, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
+#define GET_FACIAL_HAIR_STYLE(TARGET)                       (TARGET.get_organ_sprite_accessory_by_category(/decl/sprite_accessory_category/facial_hair, BP_HEAD))
+#define SET_FACIAL_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null, /decl/sprite_accessory_category/facial_hair, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
 #define GET_FACIAL_HAIR_COLOUR(TARGET)                      (TARGET.get_organ_sprite_accessory(GET_FACIAL_HAIR_STYLE(TARGET), BP_HEAD))

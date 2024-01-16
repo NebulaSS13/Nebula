@@ -33,9 +33,12 @@
 /decl/bodytype/proc/handle_post_bodytype_pref_set(datum/preferences/pref)
 	if(!pref)
 		return
-
 	// Markings used to be cleared outside of here, but it was always done before every call, so it was moved in here.
-	pref.body_markings = base_markings?.Copy()
+	pref.sprite_accessories = list()
+	for(var/accessory_category in default_sprite_accessories)
+		pref.sprite_accessories[accessory_category] = list()
+		for(var/accessory in default_sprite_accessories[accessory_category])
+			pref.sprite_accessories[accessory_category][accessory] = default_sprite_accessories[accessory_category][accessory]
 
 /decl/bodytype/proc/apply_appearance(var/mob/living/carbon/human/H)
 	if(base_color)

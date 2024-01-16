@@ -1,7 +1,7 @@
 #define SETUP_RANDOM_COLOR_GETTER(X, Y, Z, W)  \
 /decl/bodytype/var/list/random_##Y = W;\
 /decl/bodytype/proc/get_random_##X(){\
-	if(!(appearance_flags & Z) || !random_##Y.len){\
+	if((Z && !(appearance_flags & Z)) || !random_##Y.len){\
 		return;\
 	}\
 	var/decl/color_generator/CG = GET_DECL(pickweight(random_##Y));\
@@ -31,7 +31,7 @@ SETUP_RANDOM_COLOR_GETTER(skin_color, skin_colors, HAS_SKIN_COLOR, list(
 	/decl/color_generator/white))
 SETUP_RANDOM_COLOR_SETTER(skin_color, set_skin_colour)
 
-SETUP_RANDOM_COLOR_GETTER(hair_color, hair_colors, HAS_HAIR_COLOR, list(
+SETUP_RANDOM_COLOR_GETTER(hair_color, hair_colors, 0, list(
 	/decl/color_generator/black,
 	/decl/color_generator/blonde,
 	/decl/color_generator/chestnut,

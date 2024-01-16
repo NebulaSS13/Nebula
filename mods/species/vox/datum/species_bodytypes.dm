@@ -9,12 +9,11 @@
 	bodytype_flag     = BODY_FLAG_VOX
 	limb_blend        = ICON_MULTIPLY
 	eye_blend         = ICON_MULTIPLY
-	appearance_flags  = HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_COLOR
-	base_hair_color   = "#160900"
+	appearance_flags  = HAS_EYE_COLOR | HAS_SKIN_COLOR
 	base_eye_color    = "#d60093"
 	base_color        = "#526d29"
 	body_flags        = BODY_FLAG_NO_DNA
-	default_h_style   = /decl/sprite_accessory/hair/vox/short
+
 
 	cold_level_1 = 80
 	cold_level_2 = 50
@@ -39,11 +38,16 @@
 		BP_STACK      = /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 	)
-	base_markings = list(
-		/decl/sprite_accessory/marking/vox/beak   = "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/crest  = "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/claws  = "#a0a654"
+	default_sprite_accessories = list(
+		/decl/sprite_accessory_category/hair = list(
+			/decl/sprite_accessory/hair/vox/short = "#160900"
+		),
+		/decl/sprite_accessory_category/markings = list(
+			/decl/sprite_accessory/marking/vox/beak   = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/scutes = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/crest  = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/claws  = "#a0a654"
+		)
 	)
 
 /decl/bodytype/vox/Initialize()
@@ -69,13 +73,19 @@
 	husk_icon           = 'mods/species/vox/icons/body/husk.dmi'
 	blood_overlays      = 'mods/species/vox/icons/body/blood_overlays.dmi'
 	eye_icon            = 'mods/species/vox/icons/body/servitor/eyes.dmi'
-	base_markings       = list(
-		/decl/sprite_accessory/marking/vox/beak/servitor =   "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/scutes/servitor = "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/crest/servitor =  "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/claws/servitor =  "#a0a654"
+
+	default_sprite_accessories = list(
+		/decl/sprite_accessory_category/hair = list(
+			/decl/sprite_accessory/hair/vox/short/servitor = "#160900"
+		),
+		/decl/sprite_accessory_category/markings = list(
+			/decl/sprite_accessory/marking/vox/beak/servitor   = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/scutes/servitor = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/crest/servitor  = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/claws/servitor  = "#a0a654"
+		)
 	)
-	default_h_style     = /decl/sprite_accessory/hair/vox/short/servitor
+
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox,
 		BP_TAIL = /obj/item/organ/external/tail/vox/servitor
@@ -89,13 +99,18 @@
 	icon_base           = 'mods/species/vox/icons/body/stanchion/body.dmi'
 	eye_icon            = 'mods/species/vox/icons/body/stanchion/eyes.dmi'
 	icon_template       = 'mods/species/vox/icons/body/stanchion/template.dmi'
-	base_markings       = list(
-		/decl/sprite_accessory/marking/vox/beak/stanchion =   "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/scutes/stanchion = "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/crest/stanchion =  "#bc7d3e",
-		/decl/sprite_accessory/marking/vox/claws/stanchion =  "#a0a654"
+	default_sprite_accessories = list(
+		/decl/sprite_accessory_category/hair = list(
+			/decl/sprite_accessory/hair/vox/short/stanchion = "#160900"
+		),
+		/decl/sprite_accessory_category/markings = list(
+			/decl/sprite_accessory/marking/vox/beak/stanchion   = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/scutes/stanchion = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/crest/stanchion  = "#bc7d3e",
+			/decl/sprite_accessory/marking/vox/claws/stanchion  = "#a0a654"
+		)
 	)
-	default_h_style     = /decl/sprite_accessory/hair/vox/short/stanchion
+
 	override_limb_types = list(
 		BP_GROIN = /obj/item/organ/external/groin/vox,
 		// Commenting this out so that tail validation doesn't try to find a species using this bodytype.

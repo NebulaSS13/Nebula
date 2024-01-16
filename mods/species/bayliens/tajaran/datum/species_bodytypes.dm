@@ -10,11 +10,9 @@
 	health_hud_intensity = 1.75
 	bodytype_flag =        BODY_FLAG_FELINE
 	movement_slowdown =    -0.5
-	appearance_flags = HAS_HAIR_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
-	base_hair_color = "#46321c"
+	appearance_flags = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	base_color = "#ae7d32"
 	base_eye_color = "#00aa00"
-	default_h_style = /decl/sprite_accessory/hair/taj/lynx
 
 	eye_darksight_range = 7
 	eye_flash_mod = 2
@@ -27,7 +25,10 @@
 		BP_TAIL = /obj/item/organ/external/tail/cat
 	)
 
-	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
+	default_sprite_accessories = list(
+		/decl/sprite_accessory_category/markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32"),
+		/decl/sprite_accessory_category/hair     = list(/decl/sprite_accessory/hair/taj/lynx        = "#46321c")
+	)
 
 	cold_level_1 = 200
 	cold_level_2 = 140

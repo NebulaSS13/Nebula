@@ -35,7 +35,7 @@
 	var/hairstyle = GET_HAIR_STYLE(user_living)
 	if(hairstyle)
 		var/decl/sprite_accessory/hair/hair_style = GET_DECL(hairstyle)
-		if(hair_style.flags & VERY_SHORT)
+		if(hair_style.accessory_flags & VERY_SHORT)
 			user_living.visible_message(SPAN_NOTICE("\The [user_living] just sort of runs \the [src] over their scalp."))
 		else
 			user_living.visible_message(SPAN_NOTICE("\The [user_living] meticulously brushes their hair with \the [src]."))
