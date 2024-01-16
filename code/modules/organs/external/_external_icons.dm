@@ -183,7 +183,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	if(ispath(accessory_style))
 		accessory_style = GET_DECL(accessory_style)
 	// Check if this style is permitted for this species, period.
-	if(!accessory_style.accessory_is_available(owner, species, bodytype))
+	if(!accessory_style?.accessory_is_available(owner, species, bodytype))
 		return null
 	// Check if we are concealed (long hair under a hat for example).
 	if(accessory_style.is_hidden(src))

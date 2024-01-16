@@ -39,7 +39,6 @@
 
 /obj/item/organ/external/head/insectoid
 	name = "head"
-	has_lips = 0
 	encased = "carapace"
 
 /obj/item/organ/external/chest/insectoid

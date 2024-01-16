@@ -165,6 +165,7 @@
 		var/mob/living/carbon/human/H = M
 		if(H == user)
 			to_chat(user, SPAN_NOTICE("You wipe off the lipstick with [src]."))
+			H.set_lip_style(skip_update = TRUE)
 			H.set_lip_colour()
 			return TRUE
 		user.visible_message(
@@ -176,6 +177,7 @@
 				SPAN_NOTICE("\The [user] wipes \the [H]'s lipstick off with \the [src]."),
 				SPAN_NOTICE("You wipe off \the [H]'s lipstick.")
 			)
+		H.set_lip_style(skip_update = TRUE)
 		H.set_lip_colour()
 		return TRUE
 

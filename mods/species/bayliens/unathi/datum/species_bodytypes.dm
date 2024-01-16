@@ -14,7 +14,7 @@
 	movement_slowdown =      0.5
 	base_color = "#066000"
 	base_hair_color = "#192e19"
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	eye_darksight_range = 3
 	eye_flash_mod = 1.2
 

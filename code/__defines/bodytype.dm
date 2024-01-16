@@ -9,7 +9,6 @@
 // Bodytype appearance flags
 #define HAS_SKIN_TONE_NORMAL  BITFLAG(0)  // Skin tone selectable in chargen for baseline humans (0-220)
 #define HAS_SKIN_COLOR        BITFLAG(1)  // Skin colour selectable in chargen. (RGB)
-#define HAS_LIPS              BITFLAG(2)  // Lips are drawn onto the mob icon. (lipstick)
 #define HAS_UNDERWEAR         BITFLAG(3)  // Underwear is drawn onto the mob icon.
 #define HAS_EYE_COLOR         BITFLAG(4)  // Eye colour selectable in chargen. (RGB)
 #define HAS_HAIR_COLOR        BITFLAG(5)  // Hair colour selectable in chargen. (RGB)
