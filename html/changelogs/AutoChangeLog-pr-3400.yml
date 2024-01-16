@@ -1,7 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: 'Configuration has been rewritten to a new format. Servers with configuration
-      changes from defaults will need to run the server to generate the new config
-      file, then mirror their configuration changes in the new config system. Check
-      the PR body for details.'}
-delete-after: true
