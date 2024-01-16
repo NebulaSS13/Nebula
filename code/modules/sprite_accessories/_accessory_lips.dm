@@ -1,6 +1,6 @@
 /decl/sprite_accessory/lips
-	icon        = 'icons/mob/human_races/species/default_lips.dmi'
-	layer_blend = ICON_MULTIPLY
+	icon          = 'icons/mob/human_races/species/default_lips.dmi'
+	color_blend   = ICON_MULTIPLY
 	abstract_type = /decl/sprite_accessory/lips
 
 /decl/sprite_accessory/lips/get_accessory_icon(obj/item/organ/external/organ)

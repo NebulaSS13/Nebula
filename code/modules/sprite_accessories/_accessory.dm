@@ -45,8 +45,6 @@
 	var/hidden_by_gear_slot
 	/// Flag to check equipment for when hiding this accessory.
 	var/hidden_by_gear_flag
-	/// Whether or not the accessory can be affected by colouration
-	var/do_colouration = TRUE
 	/// Various flags controlling some checks and behavior.
 	var/flags = 0
 	/// Flags to check when applying this accessory to the mob.
@@ -132,7 +130,7 @@
 			return null
 		if(mask_to_bodypart)
 			accessory_icon.Blend(get_limb_mask_for(organ.bodytype, organ.organ_tag), ICON_MULTIPLY)
-		if(do_colouration && color)
+		if(!isnull(color) && !isnull(color_blend))
 			accessory_icon.Blend(color, color_blend)
 		cached_icons[organ.bodytype][organ.organ_tag][color] = accessory_icon
 	return accessory_icon

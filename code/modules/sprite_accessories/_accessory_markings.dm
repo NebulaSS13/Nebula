@@ -1,9 +1,9 @@
 //body markings
 /decl/sprite_accessory/marking
-	icon = 'icons/mob/human_races/species/default_markings.dmi'
-	do_colouration = 1 //Almost all of them have it, COLOR_ADD
-	abstract_type = /decl/sprite_accessory/marking
+	icon             = 'icons/mob/human_races/species/default_markings.dmi'
+	abstract_type    = /decl/sprite_accessory/marking
 	mask_to_bodypart = TRUE
+	color_blend      = ICON_MULTIPLY
 
 /decl/sprite_accessory/marking/tat_hive
 	name = "Tattoo (Hive, Back)"

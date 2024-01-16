@@ -58,7 +58,7 @@ var/global/list/limb_icon_cache = list()
 		icon = bodytype.get_base_icon(owner)
 
 var/global/list/organ_icon_cache = list()
-/obj/item/organ/external/proc/generate_mob_icon()
+/obj/item/organ/external/proc/generate_mob_icon(list/sprite_accessories)
 
 	// Generate base icon with colour and tone.
 	var/icon/ret = bodytype.apply_limb_colouration(src, new /icon(icon, icon_state))
@@ -73,33 +73,49 @@ var/global/list/organ_icon_cache = list()
 	if((bodytype.appearance_flags & HAS_SKIN_COLOR) && skin_colour)
 		ret.Blend(skin_colour, skin_blend)
 
-	//Body markings.
-	for(var/M in markings)
-		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
-		if(mark_style && !mark_style.sprite_overlay_layer)
-			ret.Blend(mark_style.get_cached_accessory_icon(src, markings[M]), mark_style.layer_blend)
+	// Body markings, hair, lips, etc.
+	for(var/accessory in sprite_accessories)
+		var/decl/sprite_accessory/marking/accessory_decl = resolve_accessory_to_decl(accessory)
+		if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
+			ret.Blend(accessory_decl.get_cached_accessory_icon(src, sprite_accessories[accessory] || COLOR_WHITE), accessory_decl.layer_blend)
 	if(render_alpha < 255)
 		ret += rgb(,,,render_alpha)
 	global.organ_icon_cache[_icon_cache_key] = ret
 	return ret
 
-/obj/item/organ/external/proc/get_mob_overlays()
-	for(var/M in markings)
-		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
-		if(mark_style?.sprite_overlay_layer)
-			var/image/mark_image = image(mark_style.get_cached_accessory_icon(src, markings[M]))
-			mark_image.layer = mark_style.sprite_overlay_layer
-			LAZYADD(., mark_image)
+/obj/item/organ/external/proc/get_sprite_accessories()
+	sprite_accessories = null
+	for(var/marking in markings)
+		set_sprite_accessory(marking, markings[marking])
+	return sprite_accessories
 
-/obj/item/organ/external/proc/get_icon_cache_key_components()
+/obj/item/organ/external/proc/get_mob_overlays(list/sprite_accessories)
+	for(var/accessory in sprite_accessories)
+		var/decl/sprite_accessory/marking/accessory_decl = resolve_accessory_to_decl(accessory)
+		if(istype(accessory_decl) && accessory_decl.sprite_overlay_layer)
+			var/image/accessory_image = image(accessory_decl.get_cached_accessory_icon(src, sprite_accessories[accessory] || COLOR_WHITE))
+			accessory_image.layer = accessory_decl.sprite_overlay_layer
+			accessory_image.blend_mode = iconMode2blendMode(accessory_decl.color_blend)
+			LAZYADD(., accessory_image)
+
+/obj/item/organ/external/proc/get_icon_cache_key_components(list/sprite_accessories)
 	. = list("[icon_state]_[species.name]_[bodytype.name]_[render_alpha]_[icon]")
-	for(var/M in markings)
-		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
-		if(!mark_style.sprite_overlay_layer)
-			. += "_[M][markings[M]]"
 	if(status & ORGAN_DEAD)
 		. += "_dead"
 	. += "_tone_[skin_tone]_color_[skin_colour]_[skin_blend]"
+	for(var/accessory in sprite_accessories)
+		var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
+		if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
+			. += "_[accessory]_[sprite_accessories[accessory]]"
+
+/obj/item/organ/external
+	var/list/sprite_accessories
+
+/obj/item/organ/external/proc/set_sprite_accessory(var/accessory_type, var/accessory_color)
+	LAZYSET(sprite_accessories, accessory_type, accessory_color)
+
+/obj/item/organ/external/proc/remove_sprite_accessory(var/accessory_type)
+	LAZYREMOVE(sprite_accessories, accessory_type)
 
 /obj/item/organ/external/on_update_icon()
 	. = ..()
@@ -108,13 +124,16 @@ var/global/list/organ_icon_cache = list()
 	update_limb_icon_file()
 	if(icon_state != organ_tag)
 		icon_state = organ_tag
-	_icon_cache_key = jointext(get_icon_cache_key_components(), null)
-	var/icon/mob_icon = global.organ_icon_cache[_icon_cache_key] || generate_mob_icon()
+
+	var/list/sprite_accessories = get_sprite_accessories()
+	_icon_cache_key = jointext(get_icon_cache_key_components(sprite_accessories), null)
+
+	var/icon/mob_icon = global.organ_icon_cache[_icon_cache_key] || generate_mob_icon(sprite_accessories)
 	if(icon != mob_icon)
 		icon = mob_icon
 
 	// We may have some overlays of our own (hair, glowing eyes, layered markings)
-	var/list/additional_overlays = get_mob_overlays()
+	var/list/additional_overlays = get_mob_overlays(sprite_accessories)
 	if(length(additional_overlays))
 		for(var/new_overlay in additional_overlays)
 			add_overlay(new_overlay)
@@ -183,7 +202,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 	if(ispath(accessory_style))
 		accessory_style = GET_DECL(accessory_style)
 	// Check if this style is permitted for this species, period.
-	if(!accessory_style?.accessory_is_available(owner, species, bodytype))
+	if(!istype(accessory_style) || !accessory_style?.accessory_is_available(owner, species, bodytype))
 		return null
 	// Check if we are concealed (long hair under a hat for example).
 	if(accessory_style.is_hidden(src))

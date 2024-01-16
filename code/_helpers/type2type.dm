@@ -90,6 +90,12 @@
 		if (BLEND_ADD)      return ICON_ADD
 		if (BLEND_SUBTRACT) return ICON_SUBTRACT
 		else                return ICON_OVERLAY
+/proc/iconMode2blendMode(icon_mode)
+	switch (icon_mode)
+		if (ICON_MULTIPLY) return BLEND_MULTIPLY
+		if (ICON_ADD)      return BLEND_ADD
+		if (ICON_SUBTRACT) return BLEND_SUBTRACT
+		else               return BLEND_OVERLAY
 
 // Converts a rights bitfield into a string
 /proc/rights2text(rights,seperator="")
