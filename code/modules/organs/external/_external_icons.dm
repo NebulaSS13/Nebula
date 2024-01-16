@@ -72,35 +72,41 @@ var/global/list/organ_icon_cache = list()
 		ret.Blend(skin_colour, skin_blend)
 
 	// Body markings, hair, lips, etc.
-	for(var/accessory in _sprite_accessories)
-		var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
-		if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
-			ret.Blend(accessory_decl.get_cached_accessory_icon(src, _sprite_accessories[accessory] || COLOR_WHITE), accessory_decl.layer_blend)
+	for(var/accessory_category in _sprite_accessories)
+		var/list/draw_accessories = _sprite_accessories[accessory_category]
+		for(var/accessory in draw_accessories)
+			var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
+			if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
+				ret.Blend(accessory_decl.get_cached_accessory_icon(src, draw_accessories[accessory] || COLOR_WHITE), accessory_decl.layer_blend)
 	if(render_alpha < 255)
 		ret += rgb(,,,render_alpha)
 	global.organ_icon_cache[_icon_cache_key] = ret
 	return ret
 
 /obj/item/organ/external/proc/get_mob_overlays()
-	for(var/accessory in _sprite_accessories)
-		var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
-		if(istype(accessory_decl) && !isnull(accessory_decl.sprite_overlay_layer))
-			var/image/accessory_image = image(accessory_decl.get_cached_accessory_icon(src, _sprite_accessories[accessory] || COLOR_WHITE))
-			if(accessory_decl.sprite_overlay_layer != FLOAT_LAYER)
-				accessory_image.layer = accessory_decl.sprite_overlay_layer
-			if(accessory_decl.layer_blend != ICON_OVERLAY)
-				accessory_image.blend_mode = iconMode2blendMode(accessory_decl.layer_blend)
-			LAZYADD(., accessory_image)
+	for(var/accessory_category in _sprite_accessories)
+		var/list/draw_accessories = _sprite_accessories[accessory_category]
+		for(var/accessory in draw_accessories)
+			var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
+			if(istype(accessory_decl) && !isnull(accessory_decl.sprite_overlay_layer))
+				var/image/accessory_image = image(accessory_decl.get_cached_accessory_icon(src, draw_accessories[accessory] || COLOR_WHITE))
+				if(accessory_decl.sprite_overlay_layer != FLOAT_LAYER)
+					accessory_image.layer = accessory_decl.sprite_overlay_layer
+				if(accessory_decl.layer_blend != ICON_OVERLAY)
+					accessory_image.blend_mode = iconMode2blendMode(accessory_decl.layer_blend)
+				LAZYADD(., accessory_image)
 
 /obj/item/organ/external/proc/get_icon_cache_key_components()
 	. = list("[icon_state]_[species.name]_[bodytype.name]_[render_alpha]_[icon]")
 	if(status & ORGAN_DEAD)
 		. += "_dead"
 	. += "_tone_[skin_tone]_color_[skin_colour]_[skin_blend]"
-	for(var/accessory in _sprite_accessories)
-		var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
-		if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
-			. += "_[accessory]_[_sprite_accessories[accessory]]"
+	for(var/accessory_category in _sprite_accessories)
+		var/list/draw_accessories = _sprite_accessories[accessory_category]
+		for(var/accessory in draw_accessories)
+			var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
+			if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
+				. += "_[accessory]_[draw_accessories[accessory]]"
 
 /obj/item/organ/external/proc/clear_sprite_accessories(var/skip_update = FALSE)
 	if(!length(_sprite_accessories))
@@ -111,22 +117,33 @@ var/global/list/organ_icon_cache = list()
 			owner.update_body()
 		update_icon()
 
-// TODO: separate into sublists based on category for faster retrieval.
+/obj/item/organ/external/proc/get_sprite_accessories_by_category(var/accessory_category)
+	return LAZYACCESS(_sprite_accessories, accessory_category)
+
 /obj/item/organ/external/proc/get_sprite_accessory_by_category(var/accessory_category)
-	for(var/accessory in _sprite_accessories)
-		if(ispath(accessory, accessory_category))
-			return accessory
+	var/list/accessories = get_sprite_accessories_by_category(accessory_category)
+	if(length(accessories))
+		return accessories[1]
 
 /obj/item/organ/external/proc/get_sprite_accessory_value(var/accessory_type)
-	return LAZYACCESS(_sprite_accessories, accessory_type)
+	var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
+	var/list/accessories = istype(accessory) && LAZYACCESS(_sprite_accessories, accessory.abstract_type)
+	if(accessories)
+		return accessories[accessory_type]
 
 /obj/item/organ/external/proc/set_sprite_accessory(var/accessory_type, var/accessory_category, var/accessory_color, var/skip_update = FALSE)
 
+	if(!accessory_category)
+		return
+
+	var/list/accessories = LAZYACCESS(_sprite_accessories, accessory_category)
+	if(!accessories)
+		accessories = list()
+		LAZYSET(_sprite_accessories, accessory_category, accessories)
+
 	if(!accessory_type)
-		var/decl/sprite_accessory/accessory_cat = accessory_category && GET_DECL(accessory_category)
-		if(!accessory_cat)
-			return
-		accessory_type = accessory_cat.accessory_category_default_style
+		var/decl/sprite_accessory/accessory_cat = GET_DECL(accessory_category)
+		accessory_type = accessory_cat?.accessory_category_default_style
 		if(!accessory_type)
 			return
 
@@ -134,13 +151,13 @@ var/global/list/organ_icon_cache = list()
 		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory_type)
 		if(!accessory_decl.accessory_is_available(owner, species, bodytype))
 			return
-		if(LAZYACCESS(_sprite_accessories, accessory_type) == accessory_color)
+		if(LAZYACCESS(accessories, accessory_type) == accessory_color)
 			return
-		LAZYSET(_sprite_accessories, accessory_type, accessory_color)
+		LAZYSET(accessories, accessory_type, accessory_color)
 	else
-		if(!(accessory_type in _sprite_accessories))
+		if(!(accessory_type in accessories))
 			return
-		LAZYREMOVE(_sprite_accessories, accessory_type)
+		remove_sprite_accessory(accessory_type, TRUE)
 
 	if(!skip_update)
 		if(owner && accessory_type)
@@ -150,10 +167,12 @@ var/global/list/organ_icon_cache = list()
 		update_icon()
 
 /obj/item/organ/external/proc/get_heritable_sprite_accessories()
-	for(var/accessory in _sprite_accessories)
-		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-		if(accessory_decl?.is_heritable)
-			LAZYADD(., accessory)
+	for(var/accessory_category in _sprite_accessories)
+		var/list/draw_accessories = _sprite_accessories[accessory_category]
+		for(var/accessory in draw_accessories)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			if(accessory_decl?.is_heritable)
+				LAZYADD(., accessory)
 
 /obj/item/organ/external/proc/set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, preserve_colour = TRUE, preserve_type = TRUE, skip_update)
 	if(!accessory_category)
@@ -168,13 +187,13 @@ var/global/list/organ_icon_cache = list()
 	if(replacing_type)
 
 		if(preserve_colour && !accessory_color)
-			accessory_color = LAZYACCESS(_sprite_accessories, replacing_type)
+			accessory_color = get_sprite_accessory_value(replacing_type)
 
 		// We may only be setting colour, in which case we don't bother with a removal.
 		if(preserve_type && !accessory_type)
 			accessory_type = replacing_type
-		else if(replacing_type in _sprite_accessories)
-			LAZYREMOVE(_sprite_accessories, replacing_type)
+		else
+			remove_sprite_accessory(replacing_type, TRUE)
 
 	// We have already done our removal above and have nothing further to set below.
 	if(!accessory_color && !accessory_type)
@@ -192,12 +211,16 @@ var/global/list/organ_icon_cache = list()
 /obj/item/organ/external/proc/remove_sprite_accessory(var/accessory_type, var/skip_update = FALSE)
 	if(!accessory_type)
 		return
-	LAZYREMOVE(_sprite_accessories, accessory_type)
+	var/decl/sprite_accessory/removing_accessory = GET_DECL(accessory_type)
+	var/list/removing = LAZYACCESS(_sprite_accessories, removing_accessory.abstract_type)
+	if(!LAZYLEN(removing))
+		return
+	LAZYREMOVE(removing, accessory_type)
+	if(!length(removing))
+		LAZYREMOVE(_sprite_accessories, removing_accessory.abstract_type)
 	if(!skip_update)
-		if(owner)
-			var/decl/sprite_accessory/refresh_accessory = GET_DECL(accessory_type)
-			if(refresh_accessory)
-				refresh_accessory.refresh_mob(owner)
+		if(owner && removing_accessory)
+			removing_accessory.refresh_mob(owner)
 		update_icon()
 
 /obj/item/organ/external/on_update_icon()

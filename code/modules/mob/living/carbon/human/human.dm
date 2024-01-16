@@ -1010,11 +1010,13 @@
 		to_chat(src, SPAN_DANGER("You feel a chill and your skin feels lighter..."))
 
 /obj/item/organ/external/proc/handle_hair_loss()
-	for(var/accessory in _sprite_accessories)
-		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-		if(accessory_decl.flags & HAIR_LOSS_VULNERABLE)
-			remove_sprite_accessory(accessory, skip_update = TRUE)
-			. = TRUE
+	for(var/accessory_category in _sprite_accessories)
+		var/list/draw_accessories = _sprite_accessories[accessory_category]
+		for(var/accessory in draw_accessories)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			if(accessory_decl.flags & HAIR_LOSS_VULNERABLE)
+				remove_sprite_accessory(accessory, skip_update = TRUE)
+				. = TRUE
 
 /mob/living/carbon/human/increaseBodyTemp(value)
 	bodytemperature += value
