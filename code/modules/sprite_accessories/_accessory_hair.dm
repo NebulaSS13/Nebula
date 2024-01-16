@@ -12,7 +12,6 @@
 	hidden_by_gear_slot  = slot_head_str
 	hidden_by_gear_flag  = BLOCK_HEAD_HAIR
 	body_parts           = list(BP_HEAD)
-	color_blend          = ICON_OVERLAY
 	sprite_overlay_layer = FLOAT_LAYER
 
 /decl/sprite_accessory/hair/get_hidden_substitute()

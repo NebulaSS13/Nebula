@@ -317,7 +317,8 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/carbon/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_mob_overlays(head_organ.get_sprite_accessories()) : null), update_icons)
+	var/list/new_accessories = head_organ?.get_mob_overlays()
+	set_current_mob_overlay(HO_HAIR_LAYER, new_accessories, update_icons)
 
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
 	// todo: make this use bodytype

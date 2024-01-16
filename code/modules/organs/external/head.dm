@@ -93,31 +93,32 @@
 		return owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
 	return locate(/obj/item/organ/internal/eyes) in contents
 
-/obj/item/organ/external/head/get_icon_cache_key_components(list/sprite_accessories)
+/obj/item/organ/external/head/get_icon_cache_key_components()
 	. = ..()
 	. += "_eyes_[bodytype.eye_icon || "none"]_[get_eyes_organ()?.eye_colour || "none"]"
 
 /obj/item/organ/external/head/get_sprite_accessories()
-	. = ..()
+	..() // nulls _sprite_accessories
 	if(owner)
 		var/accessory = owner.get_hairstyle()
 		if(accessory)
-			LAZYSET(., accessory, owner.get_hair_colour())
+			LAZYSET(_sprite_accessories, accessory, owner.get_hair_colour())
 		accessory = owner.get_facial_hairstyle()
 		if(accessory)
-			LAZYSET(., accessory, owner.get_facial_hair_colour())
+			LAZYSET(_sprite_accessories, accessory, owner.get_facial_hair_colour())
 		accessory = owner.get_lip_style()
 		if(accessory)
-			LAZYSET(., accessory, owner.get_lip_colour())
+			LAZYSET(_sprite_accessories, accessory, owner.get_lip_colour())
+	return _sprite_accessories
 
-/obj/item/organ/external/head/generate_mob_icon(list/sprite_accessories)
+/obj/item/organ/external/head/generate_mob_icon()
 	var/icon/ret = ..()
 	var/icon/eyes_icon = get_eyes_organ()?.get_onhead_icon()
 	if(eyes_icon)
 		ret.Blend(eyes_icon, ICON_OVERLAY)
 	return ret
 
-/obj/item/organ/external/head/get_mob_overlays(list/sprite_accessories)
+/obj/item/organ/external/head/get_mob_overlays()
 	. = ..()
 	var/image/eye_glow = get_organ_eyes_overlay()
 	if(eye_glow)

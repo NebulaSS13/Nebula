@@ -447,12 +447,12 @@ var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
 	if(length(base_markings))
-		for(var/mark_type in base_markings)
-			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
-			for(var/bodypart in mark_decl.body_parts)
+		for(var/accessory in base_markings)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			for(var/bodypart in accessory_decl.body_parts)
 				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
-				if(O && !LAZYACCESS(O.markings, mark_type))
-					LAZYSET(O.markings, mark_type, base_markings[mark_type])
+				if(O && !LAZYACCESS(O.markings, accessory))
+					LAZYSET(O.markings, accessory, base_markings[accessory])
 
 	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
 		E.skin_colour = base_color

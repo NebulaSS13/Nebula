@@ -39,13 +39,13 @@
 	var/decl/f_style_decl = decls_repository.get_decl_by_id_or_var(R.read("facial_style_name"), /decl/sprite_accessory/facial_hair)
 	pref.f_style = istype(f_style_decl) ? f_style_decl.type : /decl/sprite_accessory/facial_hair/shaved
 	// Get markings type.
-	var/list/load_markings = R.read("body_markings")
+	var/list/load_accessories = R.read("body_markings")
 	pref.body_markings = list()
-	if(length(load_markings))
-		for(var/marking in load_markings)
-			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id_or_var(marking, /decl/sprite_accessory/marking)
-			if(istype(loaded_marking))
-				pref.body_markings[loaded_marking.type] = load_markings[marking]
+	if(length(load_accessories))
+		for(var/accessory in load_accessories)
+			var/decl/sprite_accessory/loaded_accessory = decls_repository.get_decl_by_id_or_var(accessory, /decl/sprite_accessory/marking)
+			if(istype(loaded_accessory, /decl/sprite_accessory/marking))
+				pref.body_markings[loaded_accessory.type] = load_accessories[accessory]
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
 	W.write("skin_tone",              pref.skin_tone)
@@ -381,10 +381,10 @@
 
 /datum/category_item/player_setup_item/physical/body/proc/get_usable_markings(mob/pref_mob, decl/species/mob_species, decl/bodytype/mob_bodytype, list/existing_markings)
 	var/list/disallowed_markings = list()
-	for (var/M in existing_markings)
-		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
-		if(length(mark_style.disallows_accessories))
-			disallowed_markings |= mark_style.disallows_accessories
+	for (var/accessory in existing_markings)
+		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+		if(length(accessory_decl.disallows_accessories))
+			disallowed_markings |= accessory_decl.disallows_accessories
 	var/list/all_markings = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
 	for(var/M in all_markings)
 		if(M in existing_markings)

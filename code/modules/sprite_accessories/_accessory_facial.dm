@@ -7,12 +7,12 @@
 */
 
 /decl/sprite_accessory/facial_hair
-	abstract_type       = /decl/sprite_accessory/facial_hair
-	icon                = 'icons/mob/human_races/species/human/facial.dmi'
-	hidden_by_gear_slot = slot_head_str
-	hidden_by_gear_flag = BLOCK_HEAD_HAIR
-	body_parts          = list(BP_HEAD)
-	color_blend         = ICON_OVERLAY
+	abstract_type        = /decl/sprite_accessory/facial_hair
+	icon                 = 'icons/mob/human_races/species/human/facial.dmi'
+	hidden_by_gear_slot  = slot_head_str
+	hidden_by_gear_flag  = BLOCK_HEAD_HAIR
+	body_parts           = list(BP_HEAD)
+	sprite_overlay_layer = FLOAT_LAYER
 
 /decl/sprite_accessory/facial_hair/get_hidden_substitute()
 	return GET_DECL(/decl/sprite_accessory/facial_hair/shaved)

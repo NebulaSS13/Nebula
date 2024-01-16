@@ -1003,10 +1003,10 @@
 	if(species.handle_additional_hair_loss(src))
 		. = TRUE
 	for(var/obj/item/organ/external/E in get_external_organs())
-		for(var/mark in E.markings)
-			var/decl/sprite_accessory/marking/mark_datum = GET_DECL(mark)
-			if(mark_datum.flags & HAIR_LOSS_VULNERABLE)
-				E.markings -= mark
+		for(var/accessory in E.markings)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			if(accessory_decl.flags & HAIR_LOSS_VULNERABLE)
+				E.markings -= accessory
 				. = TRUE
 	if(.)
 		update_body()

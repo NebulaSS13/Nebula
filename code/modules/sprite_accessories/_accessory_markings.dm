@@ -3,7 +3,6 @@
 	icon             = 'icons/mob/human_races/species/default_markings.dmi'
 	abstract_type    = /decl/sprite_accessory/marking
 	mask_to_bodypart = TRUE
-	color_blend      = ICON_MULTIPLY
 
 /decl/sprite_accessory/marking/tat_hive
 	name = "Tattoo (Hive, Back)"

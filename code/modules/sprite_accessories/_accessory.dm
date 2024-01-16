@@ -1,6 +1,6 @@
 /*
 
-	Hello and welcome to sprite_accessories: For sprite accessories, such as hair,
+	Hello and welcome to sprite accessories: For sprite accessories, such as hair,
 	facial hair, and possibly tattoos and stuff somewhere along the line. This file is
 	intended to be friendly for people with little to no actual coding experience.
 	The process of adding in new hairstyles has been made pain-free and easy to do.

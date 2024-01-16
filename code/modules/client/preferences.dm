@@ -412,7 +412,7 @@ var/global/list/time_prefs_fixed = list()
 		LAZYCLEARLIST(O.markings)
 
 	for(var/M in body_markings)
-		var/decl/sprite_accessory/marking/mark_datum = GET_DECL(M)
+		var/decl/sprite_accessory/mark_datum = GET_DECL(M)
 		var/mark_color = "[body_markings[M]]"
 
 		for(var/bodypart in mark_datum.body_parts)
