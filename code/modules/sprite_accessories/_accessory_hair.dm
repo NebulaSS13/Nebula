@@ -20,6 +20,10 @@
 		return src
 	return GET_DECL(/decl/sprite_accessory/hair/short)
 
+/decl/sprite_accessory/hair/refresh_mob(var/mob/living/subject)
+	if(istype(subject))
+		subject.update_hair()
+
 /decl/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = "bald"

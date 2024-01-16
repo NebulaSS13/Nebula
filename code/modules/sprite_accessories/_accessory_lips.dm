@@ -10,6 +10,10 @@
 		return icon
 	return organ.bodytype?.get_lip_icon(src)
 
+/decl/sprite_accessory/lips/refresh_mob(var/mob/living/subject)
+	if(istype(subject))
+		subject.update_body()
+
 /decl/sprite_accessory/lips/accessory_is_available(mob/owner, decl/species/species, decl/bodytype/bodytype)
 	. = ..()
 	if(.)

@@ -18,6 +18,10 @@
 /decl/sprite_accessory/facial_hair/get_hidden_substitute()
 	return GET_DECL(/decl/sprite_accessory/facial_hair/shaved)
 
+/decl/sprite_accessory/facial_hair/refresh_mob(var/mob/living/subject)
+	if(istype(subject))
+		subject.update_hair()
+
 /decl/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
 	icon_state = "bald"

@@ -103,8 +103,12 @@ var/global/list/organ_icon_cache = list()
 			. += "_[accessory]_[_sprite_accessories[accessory]]"
 
 /obj/item/organ/external/proc/clear_sprite_accessories(var/skip_update = FALSE)
+	if(!length(_sprite_accessories))
+		return
 	LAZYCLEARLIST(_sprite_accessories)
 	if(!skip_update)
+		if(owner)
+			owner.update_body()
 		update_icon()
 
 // TODO: separate into sublists based on category for faster retrieval.
@@ -130,10 +134,19 @@ var/global/list/organ_icon_cache = list()
 		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory_type)
 		if(!accessory_decl.accessory_is_available(owner, species, bodytype))
 			return
+		if(LAZYACCESS(_sprite_accessories, accessory_type) == accessory_color)
+			return
 		LAZYSET(_sprite_accessories, accessory_type, accessory_color)
 	else
+		if(!(accessory_type in _sprite_accessories))
+			return
 		LAZYREMOVE(_sprite_accessories, accessory_type)
+
 	if(!skip_update)
+		if(owner && accessory_type)
+			var/decl/sprite_accessory/refresh_accessory = GET_DECL(accessory_type)
+			if(refresh_accessory)
+				refresh_accessory.refresh_mob(owner)
 		update_icon()
 
 // TODO: filter on the HERITABLE flag on the sprite accessories.
@@ -148,6 +161,7 @@ var/global/list/organ_icon_cache = list()
 		accessory_type = accessory_decl.type
 
 	// If there is a pre-existing sprite accessory to replace, we may want to keep the old colour value.
+	var/do_update_if_returning = FALSE
 	var/replacing_type = get_sprite_accessory_by_category(accessory_category)
 	if(replacing_type)
 
@@ -157,18 +171,31 @@ var/global/list/organ_icon_cache = list()
 		// We may only be setting colour, in which case we don't bother with a removal.
 		if(preserve_type && !accessory_type)
 			accessory_type = replacing_type
-		else
+		else if(replacing_type in _sprite_accessories)
 			LAZYREMOVE(_sprite_accessories, replacing_type)
-			if(!accessory_type && !accessory_color)
-				if(!skip_update)
-					update_icon()
-				return TRUE
 
+	// We have already done our removal above and have nothing further to set below.
+	if(!accessory_color && !accessory_type)
+		if(!skip_update)
+			if(owner)
+				var/decl/sprite_accessory/refresh_accessory = GET_DECL(replacing_type || accessory_category)
+				if(refresh_accessory)
+					refresh_accessory.refresh_mob(owner)
+			update_icon()
+		return do_update_if_returning
+
+	// We need to now set a replacement accessory type down the chain.
 	return set_sprite_accessory(accessory_type, accessory_category, accessory_color, skip_update)
 
 /obj/item/organ/external/proc/remove_sprite_accessory(var/accessory_type, var/skip_update = FALSE)
+	if(!accessory_type)
+		return
 	LAZYREMOVE(_sprite_accessories, accessory_type)
 	if(!skip_update)
+		if(owner)
+			var/decl/sprite_accessory/refresh_accessory = GET_DECL(accessory_type)
+			if(refresh_accessory)
+				refresh_accessory.refresh_mob(owner)
 		update_icon()
 
 /obj/item/organ/external/on_update_icon()

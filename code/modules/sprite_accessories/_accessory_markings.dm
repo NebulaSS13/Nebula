@@ -4,6 +4,10 @@
 	abstract_type    = /decl/sprite_accessory/marking
 	mask_to_bodypart = TRUE
 
+/decl/sprite_accessory/marking/refresh_mob(var/mob/living/subject)
+	if(istype(subject))
+		subject.update_body()
+
 /decl/sprite_accessory/marking/tat_hive
 	name = "Tattoo (Hive, Back)"
 	icon_state = "tat_hive"

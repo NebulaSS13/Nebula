@@ -161,7 +161,7 @@
 		M.examinate(src)
 		return TRUE
 
-	if(user.get_target_zone() == BP_MOUTH && M.get_organ_sprite_accessory_by_category(/decl/sprite_accessory/lips))
+	if(user.get_target_zone() == BP_MOUTH && M.get_organ_sprite_accessory_by_category(/decl/sprite_accessory/lips, BP_HEAD))
 		var/mob/living/carbon/human/H = M
 		if(H == user)
 			to_chat(user, SPAN_NOTICE("You wipe off the lipstick with [src]."))

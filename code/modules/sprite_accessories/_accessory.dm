@@ -66,6 +66,9 @@
 	/// A default always-available type used as a fallback.
 	var/accessory_category_default_style
 
+/decl/sprite_accessory/proc/refresh_mob(var/mob/living/subject)
+	return
+
 /decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype)
 	if(species)
 		var/species_is_permitted = TRUE
