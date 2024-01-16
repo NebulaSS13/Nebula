@@ -149,9 +149,10 @@
 		if(E)
 			var/list/marklist = dna.body_markings[tag]
 			if(length(marklist))
-				E.markings = marklist.Copy()
+				for(var/accessory in marklist)
+					E.set_sprite_accessory(accessory, marklist[accessory], skip_update = TRUE)
 			else
-				LAZYCLEARLIST(E.markings)
+				E.clear_sprite_accessories(skip_update = TRUE)
 
 	//Base skin and blend
 	for(var/obj/item/organ/organ in get_organs())

@@ -158,8 +158,9 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 	body_markings.Cut()
 	for(var/obj/item/organ/external/E in character.get_external_organs())
-		if(LAZYLEN(E.markings))
-			body_markings[E.organ_tag] = E.markings.Copy()
+		var/list/dna_markings = E.get_sprite_accessories_for_dna()
+		if(LAZYLEN(dna_markings))
+			body_markings[E.organ_tag] = dna_markings
 
 	b_type = character.get_blood_type()
 

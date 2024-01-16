@@ -1003,14 +1003,18 @@
 	if(species.handle_additional_hair_loss(src))
 		. = TRUE
 	for(var/obj/item/organ/external/E in get_external_organs())
-		for(var/accessory in E.markings)
-			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			if(accessory_decl.flags & HAIR_LOSS_VULNERABLE)
-				E.markings -= accessory
-				. = TRUE
+		if(E.handle_hair_loss())
+			. = TRUE
 	if(.)
 		update_body()
 		to_chat(src, SPAN_DANGER("You feel a chill and your skin feels lighter..."))
+
+/obj/item/organ/external/proc/handle_hair_loss()
+	for(var/accessory in _sprite_accessories)
+		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+		if(accessory_decl.flags & HAIR_LOSS_VULNERABLE)
+			remove_sprite_accessory(accessory, skip_update = TRUE)
+			. = TRUE
 
 /mob/living/carbon/human/increaseBodyTemp(value)
 	bodytemperature += value

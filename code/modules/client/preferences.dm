@@ -375,6 +375,10 @@ var/global/list/time_prefs_fixed = list()
 		else if(firstspace == name_length)
 			real_name += "[pick(global.last_names)]"
 
+	// Clear accessories before hair and facial hair to avoid accidentally clearing them too.
+	for(var/obj/item/organ/external/O in character.get_external_organs())
+		O.clear_sprite_accessories(skip_update = TRUE)
+
 	character.fully_replace_character_name(real_name)
 
 	character.set_gender(gender)
@@ -408,17 +412,13 @@ var/global/list/time_prefs_fixed = list()
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
-	for(var/obj/item/organ/external/O in character.get_external_organs())
-		LAZYCLEARLIST(O.markings)
-
-	for(var/M in body_markings)
-		var/decl/sprite_accessory/mark_datum = GET_DECL(M)
-		var/mark_color = "[body_markings[M]]"
-
-		for(var/bodypart in mark_datum.body_parts)
+	for(var/accessory in body_markings)
+		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+		var/accessory_colour = "[body_markings[accessory]]"
+		for(var/bodypart in accessory_decl.body_parts)
 			var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
 			if(O)
-				LAZYSET(O.markings, M, mark_color)
+				O.set_sprite_accessory(accessory, accessory_decl.abstract_type, accessory_colour, skip_update = TRUE)
 
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()

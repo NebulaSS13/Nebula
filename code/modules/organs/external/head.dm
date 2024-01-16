@@ -13,7 +13,6 @@
 	encased = "skull"
 	artery_name = "carotid artery"
 	cavity_name = "cranial"
-
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 	var/glowing_eyes = FALSE
@@ -96,20 +95,6 @@
 /obj/item/organ/external/head/get_icon_cache_key_components()
 	. = ..()
 	. += "_eyes_[bodytype.eye_icon || "none"]_[get_eyes_organ()?.eye_colour || "none"]"
-
-/obj/item/organ/external/head/get_sprite_accessories()
-	..() // nulls _sprite_accessories
-	if(owner)
-		var/accessory = owner.get_hairstyle()
-		if(accessory)
-			LAZYSET(_sprite_accessories, accessory, owner.get_hair_colour())
-		accessory = owner.get_facial_hairstyle()
-		if(accessory)
-			LAZYSET(_sprite_accessories, accessory, owner.get_facial_hair_colour())
-		accessory = owner.get_lip_style()
-		if(accessory)
-			LAZYSET(_sprite_accessories, accessory, owner.get_lip_colour())
-	return _sprite_accessories
 
 /obj/item/organ/external/head/generate_mob_icon()
 	var/icon/ret = ..()

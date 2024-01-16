@@ -83,12 +83,6 @@ var/global/list/organ_icon_cache = list()
 	global.organ_icon_cache[_icon_cache_key] = ret
 	return ret
 
-/obj/item/organ/external/proc/get_sprite_accessories()
-	_sprite_accessories = null
-	for(var/marking in markings)
-		set_sprite_accessory(marking, markings[marking])
-	return _sprite_accessories
-
 /obj/item/organ/external/proc/get_mob_overlays()
 	for(var/accessory in _sprite_accessories)
 		var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
@@ -110,14 +104,34 @@ var/global/list/organ_icon_cache = list()
 		if(istype(accessory_decl) && !accessory_decl.sprite_overlay_layer)
 			. += "_[accessory]_[_sprite_accessories[accessory]]"
 
-/obj/item/organ/external
-	var/list/_sprite_accessories
+/obj/item/organ/external/proc/clear_sprite_accessories(var/skip_update = FALSE)
+	LAZYCLEARLIST(_sprite_accessories)
+	if(!skip_update)
+		update_icon()
 
-/obj/item/organ/external/proc/set_sprite_accessory(var/accessory_type, var/accessory_color)
-	LAZYSET(_sprite_accessories, accessory_type, accessory_color)
+/obj/item/organ/external/proc/get_sprite_accessory_of_category(var/accessory_category)
+	for(var/accessory in _sprite_accessories)
+		if(istype(accessory, accessory_category))
+			return accessory
 
-/obj/item/organ/external/proc/remove_sprite_accessory(var/accessory_type)
+/obj/item/organ/external/proc/get_sprite_accessory_value(var/accessory_type)
+	return LAZYACCESS(_sprite_accessories, accessory_type)
+
+/obj/item/organ/external/proc/set_sprite_accessory(var/accessory_type, var/accessory_category, var/accessory_color, var/skip_update = FALSE)
+	if(accessory_color)
+		LAZYSET(_sprite_accessories, accessory_type, accessory_color)
+	else
+		remove_sprite_accessory(accessory_type, skip_update = TRUE)
+	if(!skip_update)
+		update_icon()
+
+/obj/item/organ/external/proc/get_sprite_accessories_for_dna()
+	return _sprite_accessories?.Copy()
+
+/obj/item/organ/external/proc/remove_sprite_accessory(var/accessory_type, var/skip_update = FALSE)
 	LAZYREMOVE(_sprite_accessories, accessory_type)
+	if(!skip_update)
+		update_icon()
 
 /obj/item/organ/external/on_update_icon()
 	. = ..()
@@ -127,9 +141,7 @@ var/global/list/organ_icon_cache = list()
 	if(icon_state != organ_tag)
 		icon_state = organ_tag
 
-	get_sprite_accessories() // updates _sprite_accessories
 	_icon_cache_key = jointext(get_icon_cache_key_components(), null)
-
 	var/icon/mob_icon = global.organ_icon_cache[_icon_cache_key] || generate_mob_icon()
 	if(icon != mob_icon)
 		icon = mob_icon

@@ -446,16 +446,19 @@ var/global/list/bodytypes_by_category = list()
 		organism.update_hair()
 
 /decl/bodytype/proc/customize_preview_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
-	if(length(base_markings))
-		for(var/accessory in base_markings)
-			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
-			for(var/bodypart in accessory_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
-				if(O && !LAZYACCESS(O.markings, accessory))
-					LAZYSET(O.markings, accessory, base_markings[accessory])
 
 	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
 		E.skin_colour = base_color
+		E.clear_sprite_accessories(skip_update = TRUE)
+
+	if(length(base_markings))
+		for(var/accessory in base_markings)
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_colour = base_markings[accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
+				if(O)
+					O.set_sprite_accessory(accessory, accessory_decl.abstract_type, accessory_colour, skip_update = TRUE)
 
 	mannequin.set_eye_colour(base_eye_color, skip_update = TRUE)
 	mannequin.set_hair_colour(base_hair_color, skip_update = TRUE)

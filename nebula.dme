@@ -2530,6 +2530,7 @@
 #include "code\modules\mob\living\carbon\human\examine.dm"
 #include "code\modules\mob\living\carbon\human\human.dm"
 #include "code\modules\mob\living\carbon\human\human_appearance.dm"
+#include "code\modules\mob\living\carbon\human\human_appearance_head.dm"
 #include "code\modules\mob\living\carbon\human\human_attackhand.dm"
 #include "code\modules\mob\living\carbon\human\human_blood.dm"
 #include "code\modules\mob\living\carbon\human\human_damage.dm"
