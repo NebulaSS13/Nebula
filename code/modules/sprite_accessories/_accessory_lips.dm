@@ -2,6 +2,7 @@
 	icon          = 'icons/mob/human_races/species/default_lips.dmi'
 	color_blend   = ICON_MULTIPLY
 	abstract_type = /decl/sprite_accessory/lips
+	accessory_category_default_style = /decl/sprite_accessory/lips/default
 
 /decl/sprite_accessory/lips/get_accessory_icon(obj/item/organ/external/organ)
 	if(!organ || QDELETED(organ))

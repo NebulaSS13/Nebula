@@ -59,24 +59,31 @@
 		else
 			M.randomize_skin_color()
 
+	var/update_hair = FALSE
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
 		if(species_choice in hair_colors_per_species)
-			M.set_hair_colour(pick(hair_colors_per_species[species_choice]))
+			SET_HAIR_COLOUR(M, pick(hair_colors_per_species[species_choice]), TRUE)
 		else
 			M.randomize_hair_color()
-		M.set_facial_hair_colour(M.get_hair_colour())
+		SET_FACIAL_HAIR_COLOUR(M, GET_HAIR_COLOUR(M), TRUE)
+		update_hair = TRUE
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_STYLE))
 		if(species_choice in hair_styles_per_species)
-			M.set_hairstyle(pick(hair_styles_per_species[species_choice]))
+			SET_HAIR_STYLE(M, pick(hair_styles_per_species[species_choice]), TRUE)
+			update_hair = TRUE
 		else
 			M.randomize_hair_style()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_FACIAL_STYLE))
 		if(species_choice in facial_styles_per_species)
-			M.set_facial_hairstyle(pick(facial_styles_per_species[species_choice]))
+			SET_FACIAL_HAIR_STYLE(M, pick(facial_styles_per_species[species_choice]), TRUE)
+			update_hair = TRUE
 		else
 			M.randomize_facial_hair_style()
+
+	if(update_hair)
+		M.update_hair()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_EYE_COLOR))
 		if(species_choice in eye_colors_per_species)

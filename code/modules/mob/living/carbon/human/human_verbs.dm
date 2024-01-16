@@ -11,13 +11,13 @@
 		src.verbs -= /mob/living/carbon/human/proc/morph
 		return
 
-	var/new_facial = input("Please select facial hair color.", "Character Generation", get_facial_hair_colour()) as color
+	var/new_facial = input("Please select facial hair color.", "Character Generation", GET_FACIAL_HAIR_COLOUR(src)) as color
 	if(new_facial)
-		set_facial_hair_colour(new_facial, skip_update = TRUE)
+		SET_FACIAL_HAIR_COLOUR(src, new_facial, TRUE)
 
-	var/new_hair = input("Please select hair color.", "Character Generation", get_hair_colour()) as color
+	var/new_hair = input("Please select hair color.", "Character Generation", GET_HAIR_COLOUR(src)) as color
 	if(new_hair)
-		set_hair_colour(new_hair, skip_update = TRUE)
+		SET_HAIR_COLOUR(src, new_hair, TRUE)
 
 	var/new_eyes = input("Please select eye color.", "Character Generation", get_eye_colour()) as color
 	if(new_eyes)
@@ -38,11 +38,11 @@
 	for(var/x in all_hairs)
 		hairs += all_hairs[x]
 
-	var/decl/new_style = input("Please select hair style", "Character Generation",get_hairstyle())  as null|anything in hairs
+	var/decl/new_style = input("Please select hair style", "Character Generation", GET_HAIR_STYLE(src))  as null|anything in hairs
 
 	// if new style selected (not cancel)
 	if(new_style)
-		set_hairstyle(new_style.type, skip_update = TRUE)
+		SET_HAIR_STYLE(src, new_style.type, TRUE)
 
 	// facial hair
 	var/list/all_fhairs = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
@@ -51,10 +51,10 @@
 	for(var/x in all_fhairs)
 		fhairs += all_fhairs[x]
 
-	new_style = input("Please select facial style", "Character Generation", get_facial_hairstyle())  as null|anything in fhairs
+	new_style = input("Please select facial style", "Character Generation", GET_FACIAL_HAIR_STYLE(src))  as null|anything in fhairs
 
 	if(new_style)
-		set_facial_hairstyle(new_style.type, skip_update = TRUE)
+		SET_FACIAL_HAIR_STYLE(src, new_style.type, TRUE)
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neutral")
 	if (new_gender)

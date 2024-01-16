@@ -19,7 +19,6 @@ var/global/list/limb_icon_cache = list()
 	_icon_cache_key = null
 	skin_tone = null
 	skin_colour = null
-	hair_colour = human.get_hair_colour()
 	// This used to do a bodytype set but that was *really really bad.* Things that need that should do it themselves.
 	skin_blend = bodytype.limb_blend
 	if(!isnull(human.skin_tone) && bodytype?.appearance_flags & HAS_A_SKIN_TONE)
@@ -31,7 +30,6 @@ var/global/list/limb_icon_cache = list()
 	_icon_cache_key = null
 	skin_tone = null
 	skin_colour = null
-	hair_colour = rgb(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (bodytype.appearance_flags & HAS_A_SKIN_TONE))
 		skin_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
 	if(bodytype.appearance_flags & HAS_SKIN_COLOR)
@@ -109,24 +107,52 @@ var/global/list/organ_icon_cache = list()
 	if(!skip_update)
 		update_icon()
 
-/obj/item/organ/external/proc/get_sprite_accessory_of_category(var/accessory_category)
+// TODO: separate into sublists based on category for faster retrieval.
+/obj/item/organ/external/proc/get_sprite_accessory_by_category(var/accessory_category)
 	for(var/accessory in _sprite_accessories)
-		if(istype(accessory, accessory_category))
+		if(ispath(accessory, accessory_category))
 			return accessory
 
 /obj/item/organ/external/proc/get_sprite_accessory_value(var/accessory_type)
 	return LAZYACCESS(_sprite_accessories, accessory_type)
 
 /obj/item/organ/external/proc/set_sprite_accessory(var/accessory_type, var/accessory_category, var/accessory_color, var/skip_update = FALSE)
+
+	if(!accessory_type)
+		var/decl/sprite_accessory/accessory_cat = accessory_category && GET_DECL(accessory_category)
+		if(!accessory_cat)
+			return
+		accessory_type = accessory_cat.accessory_category_default_style
+		if(!accessory_type)
+			return
+
 	if(accessory_color)
+		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory_type)
+		if(!accessory_decl.accessory_is_available(owner, species, bodytype))
+			return
 		LAZYSET(_sprite_accessories, accessory_type, accessory_color)
 	else
-		remove_sprite_accessory(accessory_type, skip_update = TRUE)
+		LAZYREMOVE(_sprite_accessories, accessory_type)
 	if(!skip_update)
 		update_icon()
 
-/obj/item/organ/external/proc/get_sprite_accessories_for_dna()
+// TODO: filter on the HERITABLE flag on the sprite accessories.
+/obj/item/organ/external/proc/get_heritable_sprite_accessories()
 	return _sprite_accessories?.Copy()
+
+/obj/item/organ/external/proc/set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, skip_update)
+	if(istype(accessory_type, /decl/sprite_accessory))
+		var/decl/accessory_decl = accessory_type
+		accessory_type = accessory_decl.type
+	var/replacing_type = get_sprite_accessory_by_category(accessory_category)
+	if(replacing_type)
+		if(!accessory_type)
+			accessory_type = replacing_type
+		else
+			if(!accessory_color)
+				accessory_color = LAZYACCESS(_sprite_accessories, replacing_type)
+			LAZYREMOVE(_sprite_accessories, replacing_type)
+	return set_sprite_accessory(accessory_type, accessory_category, accessory_color, skip_update)
 
 /obj/item/organ/external/proc/remove_sprite_accessory(var/accessory_type, var/skip_update = FALSE)
 	LAZYREMOVE(_sprite_accessories, accessory_type)

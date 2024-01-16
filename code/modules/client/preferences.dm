@@ -386,11 +386,8 @@ var/global/list/time_prefs_fixed = list()
 
 	character.set_eye_colour(eye_colour, skip_update = TRUE)
 
-	character.set_hairstyle(h_style, skip_update = TRUE)
-	character.set_hair_colour(hair_colour, skip_update = TRUE)
-
-	character.set_facial_hairstyle(f_style, skip_update = TRUE)
-	character.set_facial_hair_colour(facial_hair_colour, skip_update = TRUE)
+	character.set_organ_sprite_accessory_by_category(h_style, /decl/sprite_accessory/hair, hair_colour, BP_HEAD, TRUE)
+	character.set_organ_sprite_accessory_by_category(f_style, /decl/sprite_accessory/facial_hair, facial_hair_colour, BP_HEAD, TRUE)
 
 	character.set_skin_colour(skin_colour, skip_update = TRUE)
 	character.skin_tone = skin_tone

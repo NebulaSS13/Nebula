@@ -62,17 +62,17 @@
 /mob/living/carbon/human/proc/reset_hair()
 	var/list/valid_hairstyles = get_valid_hairstyle_types()
 	if(length(valid_hairstyles))
-		set_hairstyle(pick(valid_hairstyles), skip_update = TRUE)
+		SET_HAIR_STYLE(src, pick(valid_hairstyles), TRUE)
 	else
 		//this shouldn't happen
-		set_hairstyle(get_bodytype()?.default_h_style || /decl/sprite_accessory/hair/bald, skip_update = TRUE)
+		SET_HAIR_STYLE(src, get_bodytype()?.default_h_style || /decl/sprite_accessory/hair/bald, TRUE)
 
 	var/list/valid_facial_hairstyles =  get_valid_facial_hairstyle_types()
 	if(length(valid_facial_hairstyles))
-		set_facial_hairstyle(pick(valid_facial_hairstyles), skip_update = TRUE)
+		SET_FACIAL_HAIR_STYLE(src, pick(valid_facial_hairstyles), TRUE)
 	else
 		//this shouldn't happen
-		set_facial_hairstyle(get_bodytype()?.default_f_style || /decl/sprite_accessory/facial_hair/shaved, skip_update = TRUE)
+		SET_FACIAL_HAIR_STYLE(src, get_bodytype()?.default_f_style || /decl/sprite_accessory/facial_hair/shaved, TRUE)
 
 	update_hair()
 

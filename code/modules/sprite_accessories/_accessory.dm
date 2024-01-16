@@ -63,6 +63,8 @@
 	var/sprite_overlay_layer
 	/// A list of sprite accessory types that are disallowed by this one being included.
 	var/list/disallows_accessories
+	/// A default always-available type used as a fallback.
+	var/accessory_category_default_style
 
 /decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype)
 	if(species)

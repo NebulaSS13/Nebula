@@ -480,14 +480,14 @@
 		force_update_limbs()
 
 		// Check and clear hair.
-		var/set_hairstyle = get_hairstyle()
+		var/set_hairstyle = GET_HAIR_STYLE(src)
 		var/decl/sprite_accessory/hair/hairstyle = GET_DECL(set_hairstyle)
 		if(!hairstyle?.accessory_is_available(src, species, new_bodytype))
-			set_hairstyle(new_bodytype.default_h_style, skip_update = TRUE)
-		set_hairstyle = get_facial_hairstyle()
+			SET_HAIR_STYLE(src, new_bodytype.default_h_style, TRUE)
+		set_hairstyle = GET_FACIAL_HAIR_STYLE(src)
 		var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(set_hairstyle)
 		if(!facialhairstyle?.accessory_is_available(src, species, new_bodytype))
-			set_facial_hairstyle(new_bodytype.default_f_style, skip_update = TRUE)
+			SET_FACIAL_HAIR_STYLE(src, new_bodytype.default_f_style, TRUE)
 		// TODO: check markings.
 		update_hair()
 		update_eyes()
@@ -1085,10 +1085,10 @@
 	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
 	if(!get_skin_colour())
 		set_skin_colour(root_bodytype.base_color, skip_update = TRUE)
-	if(!get_hair_colour())
-		set_hair_colour(root_bodytype.base_hair_color, skip_update = TRUE)
-	if(!get_facial_hair_colour())
-		set_facial_hair_colour(root_bodytype.base_hair_color, skip_update = TRUE)
+	if(!GET_HAIR_COLOUR(src))
+		SET_HAIR_COLOUR(src, root_bodytype.base_hair_color, TRUE)
+	if(!GET_FACIAL_HAIR_COLOUR(src))
+		SET_FACIAL_HAIR_COLOUR(src, root_bodytype.base_hair_color, TRUE)
 	if(!get_eye_colour())
 		set_eye_colour(root_bodytype.base_eye_color, skip_update = TRUE)
 

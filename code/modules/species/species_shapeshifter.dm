@@ -34,8 +34,8 @@ var/global/list/wrapped_species_by_ref = list()
 /decl/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(monochromatic)
 		var/skin_colour = H.get_skin_colour()
-		H.set_hair_colour(skin_colour, skip_update = TRUE)
-		H.set_facial_hair_colour(skin_colour, skip_update = TRUE)
+		SET_HAIR_COLOUR(H, skin_colour, TRUE)
+		SET_FACIAL_HAIR_COLOUR(H, skin_colour, TRUE)
 	..()
 
 /decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
@@ -58,12 +58,12 @@ var/global/list/wrapped_species_by_ref = list()
 	var/list/hairstyles = species.get_hair_styles(root_bodytype)
 	if(length(hairstyles))
 		var/decl/sprite_accessory/new_hair = input("Select a hairstyle.", "Shapeshifter Hair") as null|anything in hairstyles
-		set_hairstyle(new_hair ? new_hair.type : /decl/sprite_accessory/hair/bald)
+		SET_HAIR_STYLE(src, (new_hair ? new_hair.type : /decl/sprite_accessory/hair/bald), FALSE)
 
 	var/list/beardstyles = species.get_facial_hair_styles(root_bodytype)
 	if(length(beardstyles))
 		var/decl/sprite_accessory/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in beardstyles
-		set_facial_hairstyle(new_hair ? new_hair.type : /decl/sprite_accessory/facial_hair/shaved)
+		SET_FACIAL_HAIR_STYLE(src, (new_hair ? new_hair.type : /decl/sprite_accessory/facial_hair/shaved), FALSE)
 
 /mob/living/carbon/human/proc/shapeshifter_select_gender()
 
@@ -120,8 +120,8 @@ var/global/list/wrapped_species_by_ref = list()
 	var/decl/species/shapeshifter/S = species
 	if(S.monochromatic)
 		var/skin_colour = get_skin_colour()
-		set_hair_colour(skin_colour, skip_update = TRUE)
-		set_facial_hair_colour(skin_colour, skip_update = TRUE)
+		SET_HAIR_COLOUR(src, skin_colour, TRUE)
+		SET_FACIAL_HAIR_COLOUR(src, skin_colour, TRUE)
 	for(var/obj/item/organ/external/E in get_external_organs())
 		E.sync_colour_to_human(src)
 	try_refresh_visible_overlays()

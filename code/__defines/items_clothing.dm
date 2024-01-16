@@ -167,6 +167,7 @@
 #define HAIR_TIEABLE         BITFLAG(1)
 #define HAIR_BALD            BITFLAG(2)
 #define HAIR_LOSS_VULNERABLE BITFLAG(3)
+#define HERITABLE            BITFLAG(4)
 
 //flags to determine if an eyepiece is a hud.
 #define HUD_SCIENCE  BITFLAG(0)

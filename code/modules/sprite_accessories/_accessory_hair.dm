@@ -7,12 +7,13 @@
 */
 
 /decl/sprite_accessory/hair
-	abstract_type        = /decl/sprite_accessory/hair
-	icon                 = 'icons/mob/human_races/species/human/hair.dmi'
-	hidden_by_gear_slot  = slot_head_str
-	hidden_by_gear_flag  = BLOCK_HEAD_HAIR
-	body_parts           = list(BP_HEAD)
-	sprite_overlay_layer = FLOAT_LAYER
+	abstract_type                    = /decl/sprite_accessory/hair
+	icon                             = 'icons/mob/human_races/species/human/hair.dmi'
+	hidden_by_gear_slot              = slot_head_str
+	hidden_by_gear_flag              = BLOCK_HEAD_HAIR
+	body_parts                       = list(BP_HEAD)
+	sprite_overlay_layer             = FLOAT_LAYER
+	accessory_category_default_style = /decl/sprite_accessory/hair/bald
 
 /decl/sprite_accessory/hair/get_hidden_substitute()
 	if(flags & VERY_SHORT)

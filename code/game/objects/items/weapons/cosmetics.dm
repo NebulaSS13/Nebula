@@ -61,7 +61,7 @@
 		return ..()
 
 	var/mob/living/user_living = user
-	if(user_living.get_lip_colour() || user_living.get_lip_style())	//if they already have lipstick on
+	if(GET_LIPS_COLOUR(user_living) || GET_LIPS_STYLE(user_living))	//if they already have lipstick on
 		to_chat(user, SPAN_WARNING("You need to wipe off the old lipstick first!"))
 		return TRUE
 
@@ -70,8 +70,8 @@
 			SPAN_NOTICE("\The [user] does their lips with \the [src]."),
 			SPAN_NOTICE("You take a moment to apply \the [src]. Perfect!")
 		)
-		user_living.set_lip_style(/decl/sprite_accessory/lips/default, skip_update = TRUE)
-		user_living.set_lip_colour(color)
+		SET_LIPS_STYLE(user_living, /decl/sprite_accessory/lips/default, TRUE)
+		SET_LIPS_COLOUR(user_living, color, FALSE)
 		return TRUE
 
 	user.visible_message(
@@ -83,8 +83,8 @@
 			SPAN_NOTICE("\The [user] does \the [user]'s lips with \the [src]."),
 			SPAN_NOTICE("You apply \the [src].")
 		)
-		user_living.set_lip_style(/decl/sprite_accessory/lips/default, skip_update = TRUE)
-		user_living.set_lip_colour(color)
+		SET_LIPS_STYLE(user_living, /decl/sprite_accessory/lips/default, TRUE)
+		SET_LIPS_COLOUR(user_living, color, FALSE)
 	return TRUE
 
 //types
