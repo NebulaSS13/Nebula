@@ -56,35 +56,43 @@
 		head.write_on(user, src.name)
 		return TRUE
 
-	var/decl/sprite_accessory/lips/lip_decl = GET_DECL(/decl/sprite_accessory/lips/default)
-	if(!lip_decl.accessory_is_available(user, head.species, head.bodytype))
+	if(!isliving(A))
 		return ..()
 
-	var/mob/living/user_living = user
-	if(GET_LIPS_COLOUR(user_living) || GET_LIPS_STYLE(user_living))	//if they already have lipstick on
-		to_chat(user, SPAN_WARNING("You need to wipe off the old lipstick first!"))
+	var/decl/sprite_accessory/lips/lip_decl = GET_DECL(/decl/sprite_accessory/lips/default)
+	if(!lip_decl.accessory_is_available(user, head.species, head.bodytype))
+		to_chat(user, SPAN_WARNING("You can't wear lipstick!"))
 		return TRUE
 
-	if(user == user)
+	var/mob/living/user_living = user
+	if(user_living == A)
+		if(user_living.get_organ_sprite_accessory_by_category(/decl/sprite_accessory/lips, BP_HEAD))	//if they already have lipstick on
+			to_chat(user, SPAN_WARNING("You need to wipe off the old lipstick first!"))
+			return TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] does their lips with \the [src]."),
 			SPAN_NOTICE("You take a moment to apply \the [src]. Perfect!")
 		)
-		SET_LIPS_STYLE(user_living, /decl/sprite_accessory/lips/default, TRUE)
-		SET_LIPS_COLOUR(user_living, color, FALSE)
+		user_living.set_organ_sprite_accessory_by_category(/decl/sprite_accessory/lips/default, /decl/sprite_accessory/lips, color, FALSE, FALSE, BP_HEAD, TRUE)
+		return TRUE
+
+	user_living = A
+	if(user_living.get_organ_sprite_accessory_by_category(/decl/sprite_accessory/lips, BP_HEAD))	//if they already have lipstick on
+		to_chat(user, SPAN_WARNING("You need to wipe off the old lipstick first!"))
 		return TRUE
 
 	user.visible_message(
-		SPAN_NOTICE("\The [user] begins to do \the [user]'s lips with \the [src]."),
-		SPAN_NOTICE("You begin to apply \the [src].")
+		SPAN_NOTICE("\The [user] begins to do \the [user_living]'s lips with \the [src]."),
+		SPAN_NOTICE("You begin to apply \the [src] to \the [user_living].")
 	)
-	if(do_after(user, 2 SECONDS, user) && do_after(user, 2 SECONDS, check_holding = 0, progress = 0, incapacitation_flags = INCAPACITATION_NONE))	//user needs to keep their active hand, H does not.
+	if(do_after(user, 2 SECONDS, user_living))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] does \the [user]'s lips with \the [src]."),
-			SPAN_NOTICE("You apply \the [src].")
+			SPAN_NOTICE("\The [user] does \the [user_living]'s lips with \the [src]."),
+			SPAN_NOTICE("You apply \the [src] to \the [user_living].")
 		)
-		SET_LIPS_STYLE(user_living, /decl/sprite_accessory/lips/default, TRUE)
-		SET_LIPS_COLOUR(user_living, color, FALSE)
+		if(user_living.get_organ_sprite_accessory_by_category(/decl/sprite_accessory/lips, BP_HEAD))
+			return TRUE
+		user_living.set_organ_sprite_accessory_by_category(/decl/sprite_accessory/lips/default, /decl/sprite_accessory/lips, color, FALSE, FALSE, BP_HEAD, TRUE)
 	return TRUE
 
 //types

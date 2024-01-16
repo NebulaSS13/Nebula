@@ -140,18 +140,30 @@ var/global/list/organ_icon_cache = list()
 /obj/item/organ/external/proc/get_heritable_sprite_accessories()
 	return _sprite_accessories?.Copy()
 
-/obj/item/organ/external/proc/set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, skip_update)
+/obj/item/organ/external/proc/set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, preserve_colour = TRUE, preserve_type = TRUE, skip_update)
+	if(!accessory_category)
+		return
 	if(istype(accessory_type, /decl/sprite_accessory))
 		var/decl/accessory_decl = accessory_type
 		accessory_type = accessory_decl.type
+
+	// If there is a pre-existing sprite accessory to replace, we may want to keep the old colour value.
 	var/replacing_type = get_sprite_accessory_by_category(accessory_category)
 	if(replacing_type)
-		if(!accessory_type)
+
+		if(preserve_colour && !accessory_color)
+			accessory_color = LAZYACCESS(_sprite_accessories, replacing_type)
+
+		// We may only be setting colour, in which case we don't bother with a removal.
+		if(preserve_type && !accessory_type)
 			accessory_type = replacing_type
 		else
-			if(!accessory_color)
-				accessory_color = LAZYACCESS(_sprite_accessories, replacing_type)
 			LAZYREMOVE(_sprite_accessories, replacing_type)
+			if(!accessory_type && !accessory_color)
+				if(!skip_update)
+					update_icon()
+				return TRUE
+
 	return set_sprite_accessory(accessory_type, accessory_category, accessory_color, skip_update)
 
 /obj/item/organ/external/proc/remove_sprite_accessory(var/accessory_type, var/skip_update = FALSE)

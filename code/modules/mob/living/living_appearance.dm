@@ -36,9 +36,9 @@
 	var/obj/item/organ/external/organ = organ_tag && GET_EXTERNAL_ORGAN(src, organ_tag)
 	return organ?.get_sprite_accessory_by_category(accessory_category)
 
-/mob/living/proc/set_organ_sprite_accessory_by_category(var/accessory_type, var/accessory_category, var/accessory_color, var/organ_tag, var/skip_update = FALSE)
+/mob/living/proc/set_organ_sprite_accessory_by_category(var/accessory_type, var/accessory_category, var/accessory_color, var/preserve_colour = TRUE, var/preserve_type = TRUE, var/organ_tag, var/skip_update = FALSE)
 	var/obj/item/organ/external/organ = organ_tag && GET_EXTERNAL_ORGAN(src, organ_tag)
-	return organ && organ.set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, skip_update)
+	return organ?.set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, preserve_colour, preserve_type, skip_update)
 
 /mob/living/proc/get_skin_colour()
 	return

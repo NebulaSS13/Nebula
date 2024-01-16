@@ -396,38 +396,3 @@ var/global/list/dexterity_levels = list(
 #define GET_FACIAL_HAIR_STYLE(TARGET)                       (TARGET.get_organ_sprite_accessory_by_category(         /decl/sprite_accessory/facial_hair,           BP_HEAD))
 #define SET_FACIAL_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null,    /decl/sprite_accessory/facial_hair, (COLOUR), BP_HEAD, SKIP_UPDATE))
 #define GET_FACIAL_HAIR_COLOUR(TARGET)                      (TARGET.get_organ_sprite_accessory_value(      GET_FACIAL_HAIR_STYLE(TARGET),                         BP_HEAD))
-
-#define SET_LIPS_STYLE(TARGET, STYLE, SKIP_UPDATE)          (TARGET.set_organ_sprite_accessory_by_category((STYLE), /decl/sprite_accessory/lips,        null,     BP_HEAD, SKIP_UPDATE))
-#define GET_LIPS_STYLE(TARGET)                              (TARGET.get_organ_sprite_accessory_by_category(         /decl/sprite_accessory/lips,                  BP_HEAD))
-#define SET_LIPS_COLOUR(TARGET, COLOUR, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category(null,    /decl/sprite_accessory/lips,        (COLOUR), BP_HEAD, SKIP_UPDATE))
-#define GET_LIPS_COLOUR(TARGET)                             (TARGET.get_organ_sprite_accessory_value(      GET_LIPS_STYLE(TARGET),                                BP_HEAD))
-
-/client/verb/debug_hair_helper_values()
-	set name = "Debug Hair Helper Values"
-	set category = "Debug"
-	set src = usr
-
-	var/mob/living/canvas = mob
-	if(!istype(canvas))
-		return
-
-	canvas << "GET_HAIR_STYLE 1: [GET_HAIR_STYLE(canvas)]"
-	canvas << "GET_HAIR_COLOUR 1: [GET_HAIR_COLOUR(canvas)]"
-	canvas << "SET_HAIR_COLOUR: [SET_HAIR_COLOUR(canvas, COLOR_CYAN, FALSE)]"
-	canvas << "SET_HAIR_STYLE: [SET_HAIR_STYLE(canvas, /decl/sprite_accessory/hair/longest, FALSE)]"
-	canvas << "GET_HAIR_STYLE 2: [GET_HAIR_STYLE(canvas)]"
-	canvas << "GET_HAIR_COLOUR 2: [GET_HAIR_COLOUR(canvas)]"
-
-	canvas << "GET_FACIAL_HAIR_STYLE 1: [GET_FACIAL_HAIR_STYLE(canvas)]"
-	canvas << "GET_FACIAL_HAIR_COLOUR 1: [GET_FACIAL_HAIR_COLOUR(canvas)]"
-	canvas << "SET_FACIAL_HAIR_STYLE: [SET_FACIAL_HAIR_STYLE(canvas, /decl/sprite_accessory/facial_hair/elvis, FALSE)]"
-	canvas << "SET_FACIAL_HAIR_COLOUR: [SET_FACIAL_HAIR_COLOUR(canvas, COLOR_RED, FALSE)]"
-	canvas << "GET_FACIAL_HAIR_STYLE 2: [GET_FACIAL_HAIR_STYLE(canvas)]"
-	canvas << "GET_FACIAL_HAIR_COLOUR 2: [GET_FACIAL_HAIR_COLOUR(canvas)]"
-
-	canvas << "GET_LIPS_STYLE 1: [GET_LIPS_STYLE(canvas)]"
-	canvas << "GET_LIPS_COLOUR 1: [GET_LIPS_COLOUR(canvas)]"
-	canvas << "SET_LIPS_STYLE: [SET_LIPS_STYLE(canvas, /decl/sprite_accessory/lips/default, FALSE)]"
-	canvas << "SET_LIPS_COLOUR: [SET_LIPS_COLOUR(canvas, COLOR_LIME, FALSE)]"
-	canvas << "GET_LIPS_STYLE 2: [GET_LIPS_STYLE(canvas)]"
-	canvas << "GET_LIPS_COLOUR 2: [GET_LIPS_COLOUR(canvas)]"

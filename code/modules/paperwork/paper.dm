@@ -161,12 +161,11 @@
 		M.examinate(src)
 		return TRUE
 
-	if(user.get_target_zone() == BP_MOUTH && GET_LIPS_COLOUR(M))
+	if(user.get_target_zone() == BP_MOUTH && M.get_organ_sprite_accessory_by_category(/decl/sprite_accessory/lips))
 		var/mob/living/carbon/human/H = M
 		if(H == user)
 			to_chat(user, SPAN_NOTICE("You wipe off the lipstick with [src]."))
-			SET_LIPS_STYLE(H, null, TRUE)
-			SET_LIPS_COLOUR(H, null, FALSE)
+			H.set_organ_sprite_accessory_by_category(null, /decl/sprite_accessory/lips, null, FALSE, FALSE, BP_HEAD, FALSE)
 			return TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] begins to wipe \the [H]'s lipstick off with \the [src]."),
@@ -177,8 +176,7 @@
 				SPAN_NOTICE("\The [user] wipes \the [H]'s lipstick off with \the [src]."),
 				SPAN_NOTICE("You wipe off \the [H]'s lipstick.")
 			)
-		SET_LIPS_STYLE(H, null, TRUE)
-		SET_LIPS_COLOUR(H, null, FALSE)
+		H.set_organ_sprite_accessory_by_category(null, /decl/sprite_accessory/lips, null, FALSE, FALSE, BP_HEAD, FALSE)
 		return TRUE
 
 	. = ..()
