@@ -1,7 +1,7 @@
 /decl/bodytype/human
 	name =                "feminine"
 	bodytype_category =   BODYTYPE_HUMANOID
-	lip_icon =            'icons/mob/human_races/species/default_lips.dmi'
+	cosmetics_icon =      'icons/mob/human_races/species/default_cosmetics.dmi'
 	icon_base =           'icons/mob/human_races/species/human/body_female.dmi'
 	icon_deformed =       'icons/mob/human_races/species/human/deformed_body_female.dmi'
 	blood_overlays =      'icons/mob/human_races/species/human/blood_overlays.dmi'

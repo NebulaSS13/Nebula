@@ -6,7 +6,7 @@ var/global/list/bodytypes_by_category = list()
 	var/desc
 	var/icon_base
 	var/icon_deformed
-	var/lip_icon
+	var/cosmetics_icon
 	var/bandages_icon
 	var/bodytype_flag = BODY_FLAG_HUMANOID
 	var/bodytype_category = BODYTYPE_OTHER

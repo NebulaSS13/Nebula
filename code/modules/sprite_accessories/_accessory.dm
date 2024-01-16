@@ -65,6 +65,8 @@
 	var/list/disallows_accessories
 	/// A default always-available type used as a fallback.
 	var/accessory_category_default_style
+	/// Whether or not this accessory is transferred via DNA (ie. not a scar or tattoo)
+	var/is_heritable = FALSE
 
 /decl/sprite_accessory/proc/refresh_mob(var/mob/living/subject)
 	return

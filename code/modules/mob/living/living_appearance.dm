@@ -28,7 +28,7 @@
 	if(accessory_type)
 		return organ.set_sprite_accessory(accessory_type, accessory_category, accessory_color, skip_update)
 
-/mob/living/proc/get_organ_sprite_accessory_value(var/accessory_type, var/organ_tag)
+/mob/living/proc/get_organ_sprite_accessory(var/accessory_type, var/organ_tag)
 	var/obj/item/organ/external/organ = organ_tag && GET_EXTERNAL_ORGAN(src, organ_tag)
 	return organ?.get_sprite_accessory_value(accessory_type)
 

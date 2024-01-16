@@ -60,7 +60,7 @@
 		/obj/item/storage/belt/champion,
 		/obj/item/pickaxe/silver,
 		/obj/item/pen/invisible,
-		/obj/random/lipstick,
+		/obj/random/makeup,
 		/obj/item/grenade/smokebomb,
 		/obj/item/corncob,
 		/obj/item/poster,

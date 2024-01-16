@@ -21,8 +21,8 @@
 /decl/bodytype/proc/get_skeletal_icon(var/mob/living/carbon/human/H)
 	return skeletal_icon
 
-/decl/bodytype/proc/get_lip_icon(var/decl/sprite_accessory/lips/lips)
-	return lip_icon
+/decl/bodytype/proc/get_cosmetics_icon(var/decl/sprite_accessory/cosmetics/cosmetics_style)
+	return cosmetics_icon
 
 /decl/bodytype/proc/get_vulnerable_location(var/mob/living/carbon/human/H)
 	return vulnerable_location

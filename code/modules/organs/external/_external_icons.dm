@@ -149,9 +149,11 @@ var/global/list/organ_icon_cache = list()
 				refresh_accessory.refresh_mob(owner)
 		update_icon()
 
-// TODO: filter on the HERITABLE flag on the sprite accessories.
 /obj/item/organ/external/proc/get_heritable_sprite_accessories()
-	return _sprite_accessories?.Copy()
+	for(var/accessory in _sprite_accessories)
+		var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+		if(accessory_decl?.is_heritable)
+			LAZYADD(., accessory)
 
 /obj/item/organ/external/proc/set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, preserve_colour = TRUE, preserve_type = TRUE, skip_update)
 	if(!accessory_category)

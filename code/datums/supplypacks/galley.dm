@@ -94,7 +94,7 @@
 			/obj/item/chems/drinks/bottle/goldschlager,
 			/obj/item/chems/drinks/bottle/agedwhiskey,
 			/obj/item/storage/box/fancy/cigarettes/dromedaryco,
-			/obj/random/lipstick,
+			/obj/random/lipstick = 2,
 			/obj/item/chems/drinks/bottle/small/ale = 2,
 			/obj/item/chems/drinks/bottle/small/beer = 4,
 			/obj/item/storage/box/glowsticks = 2)

@@ -4,7 +4,7 @@
 	husk_icon =              'mods/species/bayliens/unathi/icons/husk.dmi'
 	icon_base =              'mods/species/bayliens/unathi/icons/body_female.dmi'
 	icon_deformed =          'mods/species/bayliens/unathi/icons/deformed_body_female.dmi'
-	lip_icon =               'mods/species/bayliens/unathi/icons/lips.dmi'
+	cosmetics_icon =         'mods/species/bayliens/unathi/icons/cosmetics.dmi'
 	blood_overlays =         'icons/mob/human_races/species/human/blood_overlays.dmi'
 	bandages_icon =          'icons/mob/bandage.dmi'
 	limb_icon_intensity =    0.7

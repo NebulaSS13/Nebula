@@ -14,6 +14,7 @@
 	body_parts                       = list(BP_HEAD)
 	sprite_overlay_layer             = FLOAT_LAYER
 	accessory_category_default_style = /decl/sprite_accessory/facial_hair/shaved
+	is_heritable                     = TRUE
 
 /decl/sprite_accessory/facial_hair/get_hidden_substitute()
 	return GET_DECL(/decl/sprite_accessory/facial_hair/shaved)
