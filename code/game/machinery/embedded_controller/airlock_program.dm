@@ -9,7 +9,7 @@
 #define TARGET_INOPEN		-1
 #define TARGET_OUTOPEN		-2
 
-#define SENSOR_TOLERANCE 1
+#define SENSOR_TOLERANCE 0.5
 
 /datum/computer/file/embedded_program/airlock
 	var/tag_exterior_door
@@ -234,7 +234,7 @@
 						signalPump(tag_airpump, 1, 0, target_pressure)	//send a signal to start depressurizing
 					else
 						signalPump(tag_pump_out_internal, 1, 0, target_pressure) // if going inside, pump external air out of the airlock
-						signalPump(tag_pump_out_external, 1, 1, 1000) // make sure the air is actually going outside
+						signalPump(tag_pump_out_external, 1, 1, MAX_PUMP_PRESSURE) // make sure the air is actually going outside
 
 				else if(chamber_pressure <= target_pressure)
 					state = STATE_PRESSURIZE
