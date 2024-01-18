@@ -76,37 +76,33 @@
 	var/datum/extension/atmospherics_connection/connection = get_extension(src, /datum/extension/atmospherics_connection)
 	connection?.update_connected_network()
 
-/obj/machinery/portable_atmospherics/attackby(var/obj/item/W, var/mob/user)
-	if ((istype(W, /obj/item/tank) && !( src.destroyed )))
-		if (src.holding)
-			return
-		if(!user.try_unequip(W, src))
-			return
-		src.holding = W
+/obj/machinery/portable_atmospherics/attackby(var/obj/item/used_item, var/mob/user)
+	if ((istype(used_item, /obj/item/tank) && !destroyed))
+		if (holding)
+			return TRUE
+		if(!user.try_unequip(used_item, src))
+			return TRUE
+		holding = used_item
 		update_icon()
-		return
+		return TRUE
 
-	else if(IS_WRENCH(W) && !panel_open)
+	else if(IS_WRENCH(used_item) && !panel_open)
 		if(disconnect())
-			to_chat(user, "<span class='notice'>You disconnect \the [src] from the port.</span>")
+			to_chat(user, SPAN_NOTICE("You disconnect \the [src] from the port."))
 			update_icon()
-			return
-		else
-			var/obj/machinery/atmospherics/portables_connector/possible_port = locate(/obj/machinery/atmospherics/portables_connector/) in loc
-			if(possible_port)
-				if(connect(possible_port))
-					to_chat(user, "<span class='notice'>You connect \the [src] to the port.</span>")
-					update_icon()
-					return
-				else
-					to_chat(user, "<span class='notice'>\The [src] failed to connect to the port.</span>")
-					return
-			else
-				to_chat(user, "<span class='notice'>Nothing happens.</span>")
-				return ..()
+			return TRUE
+		var/obj/machinery/atmospherics/portables_connector/possible_port = locate(/obj/machinery/atmospherics/portables_connector) in loc
+		if(possible_port)
+			if(connect(possible_port))
+				to_chat(user, SPAN_NOTICE("You connect \the [src] to the port."))
+				update_icon()
+				return TRUE
+			to_chat(user, SPAN_NOTICE("\The [src] failed to connect to the port."))
+			return TRUE
+		return ..()
 
-	else if (istype(W, /obj/item/scanner/gas))
-		return
+	else if (istype(used_item, /obj/item/scanner/gas))
+		return FALSE // allow the scanner's afterattack to run
 
 	return ..()
 
