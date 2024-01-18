@@ -234,11 +234,10 @@
 		return gas
 
 	// Base behavior
-	. = air
-	if(!.)
-		. = make_air()
-		if(zone)
-			c_copy_air()
+	. = air || make_air()
+	if(zone)
+		c_copy_air()
+		zone = null
 
 /turf/remove_air(amount as num)
 	var/datum/gas_mixture/GM = return_air()
