@@ -84,6 +84,7 @@ Class Procs:
 	ASSERT(T.zone == src)
 	soft_assert(T in contents, "Lists are weird broseph")
 #endif
+	T.c_copy_air() // to avoid losing contents
 	contents.Remove(T)
 	fire_tiles.Remove(T)
 	T.zone = null
