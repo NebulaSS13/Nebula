@@ -45,15 +45,33 @@
 	return FALSE
 
 /obj/item/pizzabox/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
-	if(proximity_flag && user?.a_intent == I_HURT && user != loc)
-		if(pizza && prob(20))
-			pizza.ruin()
-		var/turf/our_turf = get_turf(src)
-		if(our_turf && LAZYLEN(stacked_boxes))
-			while(LAZYLEN(stacked_boxes))
-				var/obj/item/pizzabox/top_box = stacked_boxes[LAZYLEN(stacked_boxes)]
-				LAZYREMOVE(stacked_boxes, top_box)
-				top_box.throw_at(get_edge_target_turf(our_turf, pick(global.alldirs)), 1, 1) // just enough to bonk people
+	if(proximity_flag && user?.a_intent == I_HURT && user != target)
+		jostle_pizza()
+		explode_stack()
+
+/obj/item/pizzabox/proc/jostle_pizza()
+	if(pizza && !pizza.ruined && prob(20))
+		pizza.ruin()
+	if(!open && prob(30))
+		toggle_open()
+	else
+		if(open)
+			update_icon()
+		update_strings()
+
+/obj/item/pizzabox/proc/explode_stack()
+	var/turf/our_turf = get_turf(src)
+	if(!our_turf || !LAZYLEN(stacked_boxes))
+		return
+	while(LAZYLEN(stacked_boxes))
+		var/obj/item/pizzabox/top_box = stacked_boxes[LAZYLEN(stacked_boxes)]
+		LAZYREMOVE(stacked_boxes, top_box)
+		top_box.throw_at(get_edge_target_turf(our_turf, pick(global.alldirs)), 1, 1) // just enough to bonk people
+	update_strings()
+	update_icon()
+	if(ismob(loc))
+		var/mob/owner = loc
+		owner.update_inhand_overlays()
 
 // This is disgusting, but I can't work out a good way to catch
 // the end of a throw regardless of whether or not it hit something.
@@ -67,14 +85,8 @@
 		sleep(1)
 		if(QDELETED(src))
 			return
-	if(pizza && !pizza.ruined && prob(20))
-		pizza.ruin()
-	if(!open && prob(30))
-		toggle_open()
-	else
-		if(open)
-			update_icon()
-		update_strings()
+	jostle_pizza()
+	explode_stack()
 
 /obj/item/pizzabox/proc/check_stack_failure()
 
@@ -101,6 +113,8 @@
 		fell_off++
 	if(fell_off > 0)
 		our_turf.visible_message(SPAN_DANGER("[fell_off] [fell_off == 1 ? "pizza" : "pizzas"] [fell_off == 1 ? "falls" : "fall"] off the stack!"))
+		update_strings()
+		update_icon()
 		if(ismob(mover))
 			mover.update_inhand_overlays()
 	else if(prob(15) && ismob(mover))

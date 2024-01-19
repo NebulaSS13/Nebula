@@ -7,28 +7,21 @@
 	icon = 'icons/obj/food/containers/donutbox.dmi'
 	icon_state = ICON_STATE_WORLD
 	item_state = null
+	max_storage_space = ITEM_SIZE_SMALL * 6
 	can_hold = list(/obj/item/chems/food/donut)
+	use_single_icon_overlay_state = "donutbox"
+
+/obj/item/storage/box/fancy/donut/update_icon_state()
+	icon_state = get_world_inventory_state()
+
+/obj/item/storage/box/fancy/donut/offset_contents_overlay(var/overlay_index, var/image/overlay)
+	if(overlay)
+		overlay.pixel_x = overlay_index * 3
+	return overlay
 
 /obj/item/storage/box/fancy/donut/WillContain()
 	return list(/obj/item/chems/food/donut = 6)
 
-/obj/item/storage/box/fancy/donut/on_update_icon()
-	. = ..()
-	icon_state = get_world_inventory_state()
-	var/i = 0
-	for(var/obj/item/donut in contents)
-		var/donut_state = "[donut.icon_state]_donutbox"
-		if(!check_state_in_icon(donut_state, donut.icon))
-			continue
-		var/image/I = image(donut.icon, donut_state)
-		I.pixel_x = i * 3
-		if(donut.color)
-			I.color = donut.color
-		I.appearance_flags |= RESET_COLOR
-		add_overlay(I)
-		i++
-		if(i >= 6)
-			break // too many donuts, somehow
-
+// Subtypes below.
 /obj/item/storage/box/fancy/donut/empty/WillContain()
 	return null

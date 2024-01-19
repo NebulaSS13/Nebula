@@ -9,38 +9,34 @@
 	item_state = null
 	storage_slots = 12
 	max_w_class = ITEM_SIZE_SMALL
+	max_storage_space = ITEM_SIZE_SMALL * 12
 	w_class = ITEM_SIZE_NORMAL
 	key_type = /obj/item/chems/food/egg
+	use_single_icon_overlay_state = "eggbox"
 	can_hold = list(
 		/obj/item/chems/food/egg,
 		/obj/item/chems/food/boiledegg
 	)
 
-/obj/item/storage/box/fancy/egg_box/WillContain()
-	return list(/obj/item/chems/food/egg = 12)
-
-/obj/item/storage/box/fancy/egg_box/on_update_icon()
-	. = ..()
+/obj/item/storage/box/fancy/egg_box/update_icon_state()
 	icon_state = get_world_inventory_state()
 	if(opened)
 		icon_state = "[icon_state]_open"
-		var/i = 0
-		for(var/obj/item/egg in contents)
-			var/egg_state = "[egg.icon_state]_eggbox"
-			if(!check_state_in_icon(egg_state, egg.icon))
-				continue
-			var/image/I = image(egg.icon, egg_state)
-			I.pixel_x = (i % 6) * 4
-			if(i >= 6)
-				I.pixel_y = 3
-			if(egg.color)
-				I.color = egg.color
-			I.appearance_flags |= RESET_COLOR
-			add_overlay(I)
-			i++
-			if(i >= 12)
-				break // too many eggs, somehow
 
+/obj/item/storage/box/fancy/egg_box/add_contents_overlays()
+	return opened && ..()
+
+/obj/item/storage/box/fancy/egg_box/offset_contents_overlay(var/overlay_index, var/image/overlay)
+	if(overlay)
+		overlay.pixel_x = (overlay_index % 6) * 4
+		if(overlay_index >= 6)
+			overlay.pixel_y = 3
+	return overlay
+
+/obj/item/storage/box/fancy/egg_box/WillContain()
+	return list(/obj/item/chems/food/egg = 12)
+
+// Subtypes below.
 /obj/item/storage/box/fancy/egg_box/assorted/WillContain()
 	return list(
 		/obj/item/chems/food/egg         = 1,
