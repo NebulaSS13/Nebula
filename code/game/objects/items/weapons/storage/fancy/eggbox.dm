@@ -6,6 +6,7 @@
 	name = "egg box"
 	icon = 'icons/obj/food/containers/eggbox.dmi'
 	icon_state = ICON_STATE_WORLD
+	item_state = null
 	storage_slots = 12
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
@@ -29,8 +30,8 @@
 			if(!check_state_in_icon(egg_state, egg.icon))
 				continue
 			var/image/I = image(egg.icon, egg_state)
-			I.pixel_x = (i % 6) * 3
-			if(i > 6)
+			I.pixel_x = (i % 6) * 4
+			if(i >= 6)
 				I.pixel_y = 3
 			if(egg.color)
 				I.color = egg.color

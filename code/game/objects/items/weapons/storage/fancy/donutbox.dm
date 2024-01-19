@@ -6,6 +6,7 @@
 	name = "donut box"
 	icon = 'icons/obj/food/containers/donutbox.dmi'
 	icon_state = ICON_STATE_WORLD
+	item_state = null
 	can_hold = list(/obj/item/chems/food/donut)
 
 /obj/item/storage/box/fancy/donut/WillContain()
@@ -13,6 +14,7 @@
 
 /obj/item/storage/box/fancy/donut/on_update_icon()
 	. = ..()
+	icon_state = get_world_inventory_state()
 	var/i = 0
 	for(var/obj/item/donut in contents)
 		var/donut_state = "[donut.icon_state]_donutbox"
