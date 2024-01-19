@@ -14,7 +14,9 @@
 	layer = TURF_LAYER
 	mouse_over_pointer = MOUSE_HAND_POINTER
 
-/obj/screen/setup_preview/bg/handle_click(mob/user, params)
+// Uses Click() instead of handle_click() due to being accessed by new_player mobs.
+/obj/screen/setup_preview/bg/Click(location, control, params)
 	if(pref)
 		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
 		pref.update_preview_icon()
+	return ..()
