@@ -3652,7 +3652,7 @@
 "wY" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/pen/fancy,
-/obj/item/storage/fancy/crayons,
+/obj/item/storage/box/fancy/crayons,
 /obj/effect/floor_decal/stoneborder{
 	dir = 6
 	},

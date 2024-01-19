@@ -2,15 +2,15 @@
  * The 'fancy' path is for objects like candle boxes that show how many items are in the storage item on the sprite itself
  */
 
-/obj/item/storage/fancy
+/obj/item/storage/box/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	opened = 0 //if an item has been removed from this container
 	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/organic/cardboard
-	abstract_type = /obj/item/storage/fancy
+	abstract_type = /obj/item/storage/box/fancy
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 
-/obj/item/storage/fancy/on_update_icon()
+/obj/item/storage/box/fancy/on_update_icon()
 	. = ..()
 	if(key_type)
 		if(!opened)
@@ -19,7 +19,7 @@
 			var/key_count = count_by_type(contents, key_type)
 			icon_state = "[initial(icon_state)][key_count]"
 
-/obj/item/storage/fancy/examine(mob/user, distance)
+/obj/item/storage/box/fancy/examine(mob/user, distance)
 	. = ..()
 	if(distance > 1 || !key_type)
 		return

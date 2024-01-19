@@ -20,7 +20,7 @@ MRE Stuff
 	. = list(
 		main_meal,
 		/obj/item/storage/mrebag/dessert,
-		/obj/item/storage/fancy/crackers,
+		/obj/item/storage/box/fancy/crackers,
 		/obj/random/mre/spread,
 		/obj/random/mre/drink,
 		/obj/random/mre/sauce,
@@ -87,7 +87,7 @@ MRE Stuff
 	. = list(
 		main_meal,
 		/obj/item/storage/mrebag/dessert/menu9,
-		/obj/item/storage/fancy/crackers,
+		/obj/item/storage/box/fancy/crackers,
 		/obj/random/mre/spread/vegan,
 		/obj/random/mre/drink,
 		/obj/random/mre/sauce/vegan,
@@ -113,7 +113,7 @@ MRE Stuff
 	name = "crayon MRE"
 	meal_desc = "This one doesn't have a menu listing. How very odd."
 	icon_state = "crayonmre"
-	main_meal = /obj/item/storage/fancy/crayons
+	main_meal = /obj/item/storage/box/fancy/crayons
 
 /obj/item/storage/mre/menu11/WillContain()
 	return list(

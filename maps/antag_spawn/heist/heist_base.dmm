@@ -449,7 +449,7 @@
 /obj/structure/sign/warning/nosmoking_1/heist{
 	pixel_y = 32
 	},
-/obj/item/storage/fancy/cigarettes/dromedaryco,
+/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -856,7 +856,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	markup = 0;
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/box/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1304,7 +1304,7 @@
 /area/map_template/skipjack_station/start)
 "di" = (
 /obj/structure/table,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/box/fancy/cigarettes,
 /obj/item/flame/lighter/zippo/random,
 /obj/item/clothing/gloves/insulated,
 /obj/item/stack/material/sheet/mapped/steel/fifty,

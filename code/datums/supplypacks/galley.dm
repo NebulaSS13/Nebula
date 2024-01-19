@@ -6,7 +6,7 @@
 	contains = list(/obj/item/chems/condiment/flour = 6,
 					/obj/item/chems/drinks/milk = 4,
 					/obj/item/chems/drinks/soymilk = 2,
-					/obj/item/storage/fancy/egg_box = 2,
+					/obj/item/storage/box/fancy/egg_box = 2,
 					/obj/item/chems/food/tofu = 4,
 					/obj/item/chems/food/meat = 4,
 					/obj/item/chems/condiment/enzyme = 1
@@ -45,7 +45,7 @@
 
 /decl/hierarchy/supply_pack/galley/eggs
 	name = "Perishables - Eggs"
-	contains = list(/obj/item/storage/fancy/egg_box = 2)
+	contains = list(/obj/item/storage/box/fancy/egg_box = 2)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "egg crate"
 
@@ -93,7 +93,7 @@
 			/obj/item/chems/drinks/bottle/patron,
 			/obj/item/chems/drinks/bottle/goldschlager,
 			/obj/item/chems/drinks/bottle/agedwhiskey,
-			/obj/item/storage/fancy/cigarettes/dromedaryco,
+			/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 			/obj/random/lipstick,
 			/obj/item/chems/drinks/bottle/small/ale = 2,
 			/obj/item/chems/drinks/bottle/small/beer = 4,

@@ -2,17 +2,16 @@
  * Donut box!
  */
 
-/obj/item/storage/fancy/donut
+/obj/item/storage/box/fancy/donut
 	name = "donut box"
 	icon = 'icons/obj/food/containers/donutbox.dmi'
 	icon_state = ICON_STATE_WORLD
 	can_hold = list(/obj/item/chems/food/donut)
-	foldable = /obj/item/stack/material/cardstock
 
-/obj/item/storage/fancy/donut/WillContain()
+/obj/item/storage/box/fancy/donut/WillContain()
 	return list(/obj/item/chems/food/donut = 6)
 
-/obj/item/storage/fancy/donut/on_update_icon()
+/obj/item/storage/box/fancy/donut/on_update_icon()
 	. = ..()
 	var/i = 0
 	for(var/obj/item/donut in contents)
@@ -29,5 +28,5 @@
 		if(i >= 6)
 			break // too many donuts, somehow
 
-/obj/item/storage/fancy/donut/empty/WillContain()
+/obj/item/storage/box/fancy/donut/empty/WillContain()
 	return null

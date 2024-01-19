@@ -2,7 +2,7 @@
  * Crayon Box
  */
 
-/obj/item/storage/fancy/crayons
+/obj/item/storage/box/fancy/crayons
 	name = "box of crayons"
 	desc = "A box of crayons for all your rune drawing needs."
 	icon = 'icons/obj/items/crayons.dmi'
@@ -12,7 +12,7 @@
 	max_storage_space = 6
 	key_type = /obj/item/pen/crayon
 
-/obj/item/storage/fancy/crayons/WillContain()
+/obj/item/storage/box/fancy/crayons/WillContain()
 	return list(
 			/obj/item/pen/crayon/red,
 			/obj/item/pen/crayon/orange,
@@ -23,7 +23,7 @@
 		)
 
 
-/obj/item/storage/fancy/crayons/on_update_icon()
+/obj/item/storage/box/fancy/crayons/on_update_icon()
 	. = ..()
 	//#FIXME: This can't handle all crayons types and colors.
 	var/list/cur_overlays

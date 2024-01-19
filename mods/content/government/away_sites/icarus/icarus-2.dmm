@@ -134,7 +134,7 @@
 /area/icarus/vessel)
 "aE" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/fancy/cigarettes/killthroat,
+/obj/item/storage/box/fancy/cigarettes/killthroat,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aF" = (

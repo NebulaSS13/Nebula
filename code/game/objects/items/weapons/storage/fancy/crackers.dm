@@ -1,7 +1,7 @@
 /*
  * Cracker Packet
  */
-/obj/item/storage/fancy/crackers
+/obj/item/storage/box/fancy/crackers
 	name = "bag of crackers"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "crackerbag"
@@ -11,6 +11,6 @@
 	key_type = /obj/item/chems/food/cracker
 	can_hold = list(/obj/item/chems/food/cracker)
 
-/obj/item/storage/fancy/crackers/WillContain()
+/obj/item/storage/box/fancy/crackers/WillContain()
 	return list(/obj/item/chems/food/cracker = 6)
 

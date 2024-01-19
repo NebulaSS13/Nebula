@@ -29,7 +29,7 @@
 	use_sound = 'sound/effects/storage/box.ogg'
 	material = /decl/material/solid/organic/cardboard
 	obj_flags = OBJ_FLAG_HOLLOW
-	var/foldable = /obj/item/stack/material/cardstock	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
+	var/foldable = /obj/item/stack/material/cardstock
 
 /obj/item/storage/box/large
 	name = "large box"

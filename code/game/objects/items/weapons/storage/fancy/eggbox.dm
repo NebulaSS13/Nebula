@@ -2,7 +2,7 @@
  * Egg Box
  */
 
-/obj/item/storage/fancy/egg_box
+/obj/item/storage/box/fancy/egg_box
 	name = "egg box"
 	icon = 'icons/obj/food/containers/eggbox.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -15,10 +15,10 @@
 		/obj/item/chems/food/boiledegg
 	)
 
-/obj/item/storage/fancy/egg_box/WillContain()
+/obj/item/storage/box/fancy/egg_box/WillContain()
 	return list(/obj/item/chems/food/egg = 12)
 
-/obj/item/storage/fancy/egg_box/on_update_icon()
+/obj/item/storage/box/fancy/egg_box/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
 	if(opened)
@@ -40,7 +40,7 @@
 			if(i >= 12)
 				break // too many eggs, somehow
 
-/obj/item/storage/fancy/egg_box/assorted/WillContain()
+/obj/item/storage/box/fancy/egg_box/assorted/WillContain()
 	return list(
 		/obj/item/chems/food/egg         = 1,
 		/obj/item/chems/food/egg/blue    = 1,
@@ -55,5 +55,5 @@
 		/obj/item/chems/food/egg/lizard  = 1
 	)
 
-/obj/item/storage/fancy/egg_box/empty/WillContain()
+/obj/item/storage/box/fancy/egg_box/empty/WillContain()
 	return
