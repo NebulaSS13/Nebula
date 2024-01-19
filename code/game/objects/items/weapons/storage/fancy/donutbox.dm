@@ -24,7 +24,7 @@
 		I.pixel_x = i * 3
 		if(donut.color)
 			I.color = donut.color
-			I.appearance_flags |= RESET_COLOR
+		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 		i++
 		if(i >= 6)

@@ -35,7 +35,7 @@
 				I.pixel_y = 3
 			if(egg.color)
 				I.color = egg.color
-				I.appearance_flags |= RESET_COLOR
+			I.appearance_flags |= RESET_COLOR
 			add_overlay(I)
 			i++
 			if(i >= 12)
