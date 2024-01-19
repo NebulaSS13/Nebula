@@ -6,7 +6,7 @@
 	total_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/ministation/security
 	department_types = list(/decl/department/security)
-	selection_color = "#990000"
+	selection_color = COLOR_BLOOD_RED
 	economic_power = 7
 	minimal_player_age = 7
 	access = list(

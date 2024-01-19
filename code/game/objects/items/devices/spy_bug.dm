@@ -154,4 +154,5 @@
 	broadcasting = 0
 	canhear_range = 1
 	name = "spy device"
-	icon_state = "syn_cypherkey"
+	icon = 'icons/obj/items/device/radio/spybug.dmi'
+	icon_state = ICON_STATE_WORLD
