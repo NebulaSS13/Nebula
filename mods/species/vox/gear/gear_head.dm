@@ -7,7 +7,6 @@
 	name = "alien helmet"
 	icon = 'mods/species/vox/icons/clothing/pressure_helmet.dmi'
 	desc = "A huge, armoured, pressurized helmet. Looks like an ancient human diving suit."
-	light_overlay = "invis_light"
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,

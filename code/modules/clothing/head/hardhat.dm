@@ -4,7 +4,6 @@
 	icon = 'icons/clothing/head/hardhat/yellow.dmi'
 	action_button_name = "Toggle Headlamp"
 	brightness_on = 4 //luminosity when on
-	light_overlay = "hardhat_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
@@ -40,7 +39,6 @@
 	name = "\improper EMS helmet"
 	desc = "A polymer helmet worn by EMTs throughout human space to protect their head. This one comes with an attached flashlight and has 'Medic' written on its back in blue lettering."
 	icon = 'icons/clothing/head/hardhat/medic.dmi'
-	light_overlay = "EMS_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,

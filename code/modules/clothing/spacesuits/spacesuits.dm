@@ -23,7 +23,6 @@
 	randpixel = 0
 	flash_protection = FLASH_PROTECTION_MAJOR
 	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
 	brightness_on = 4
 	light_wedge = LIGHT_WIDE
 	on = 0
