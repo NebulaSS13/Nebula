@@ -57,7 +57,7 @@ var/global/list/icon_state_cache = list()
 	..()
 	update_world_inventory_state()
 
-/obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, force_skip_offset = FALSE)
 
 	var/state_modifier = user_mob?.get_overlay_state_modifier()
 	if(!use_single_icon)
@@ -98,7 +98,8 @@ var/global/list/icon_state_cache = list()
 	var/image/I = image(useicon, use_state)
 	I.color = color
 	I.appearance_flags = RESET_COLOR
-	. = adjust_mob_overlay(user_mob, bodytype, I, slot, bodypart, use_fallback_if_icon_missing)
+
+	. = force_skip_offset ? I : adjust_mob_overlay(user_mob, bodytype, I, slot, bodypart, use_fallback_if_icon_missing)
 
 /obj/item/proc/get_fallback_slot(var/slot)
 	return

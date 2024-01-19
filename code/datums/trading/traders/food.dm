@@ -37,7 +37,9 @@
 		var/obj/item/pizzabox/box = new(location)
 		M.forceMove(box)
 		box.pizza = M
-		box.boxtag = "A special order from [origin]"
+		box.box_tag = "A special order from [origin]!"
+		box.update_strings()
+		box.update_icon()
 
 /datum/trader/ship/chinese
 	name = "Chinese Restaurant"

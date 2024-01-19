@@ -145,7 +145,7 @@ MRE Stuff
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE)
 
 /obj/item/storage/mrebag/WillContain()
-	return list(/obj/item/chems/food/slice/meatpizza/filled)
+	return list(/obj/item/chems/food/slice/pizza/meat/filled)
 
 /obj/item/storage/mrebag/on_update_icon()
 	. = ..()
@@ -161,10 +161,10 @@ MRE Stuff
 	. = ..()
 
 /obj/item/storage/mrebag/menu2/WillContain()
-	return list(/obj/item/chems/food/slice/margherita/filled)
+	return list(/obj/item/chems/food/slice/pizza/margherita/filled)
 
 /obj/item/storage/mrebag/menu3/WillContain()
-	return list(/obj/item/chems/food/slice/vegetablepizza/filled)
+	return list(/obj/item/chems/food/slice/pizza/vegetable/filled)
 
 /obj/item/storage/mrebag/menu4/WillContain()
 	return list(/obj/item/chems/food/hamburger)

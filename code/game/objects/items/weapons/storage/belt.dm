@@ -39,11 +39,11 @@
 			add_overlay(cur_overlays)
 	update_clothing_icon()
 
-/obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, force_skip_offset = FALSE)
 	var/image/ret = ..()
 	if(ret && slot == slot_belt_str && length(contents))
 		for(var/obj/item/I in contents)
-			var/image/new_overlay = I.get_mob_overlay(user_mob, slot, bodypart, use_fallback_if_icon_missing)
+			var/image/new_overlay = I.get_mob_overlay(user_mob, slot, bodypart, use_fallback_if_icon_missing, TRUE)
 			if(new_overlay)
 				ret.overlays += new_overlay
 	return ret
