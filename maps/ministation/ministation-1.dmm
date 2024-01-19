@@ -4265,7 +4265,7 @@
 /area/ministation/cafe)
 "wQ" = (
 /obj/structure/table/marble,
-/obj/item/storage/box/donut,
+/obj/item/storage/fancy/donut,
 /obj/machinery/door/firedoor{
 	dir = 8
 	},

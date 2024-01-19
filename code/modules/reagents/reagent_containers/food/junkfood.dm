@@ -293,22 +293,20 @@
 /obj/item/chems/food/donut
 	name = "donut"
 	desc = "Goes great with Robust Coffee."
-	icon_state = "donut1"
+	icon = 'icons/obj/food/donuts/donut.dmi'
+	icon_state = ICON_STATE_WORLD
 	filling_color = "#d9c386"
 	center_of_mass = @'{"x":19,"y":16}'
 	nutriment_desc = list("sweetness", "donut")
 	nutriment_amt = 3
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	var/overlay_state = "box-donut1"
-	var/donut_state = "donut"
+	var/iced_icon = 'icons/obj/food/donuts/donut_iced.dmi'
 
-//FIXME: Again a really weird way of handling that
 /obj/item/chems/food/donut/populate_reagents()
 	. = ..()
-	if(prob(30))
-		icon_state = "[donut_state]2"
-		overlay_state = "box-donut2"
+	if(iced_icon && prob(30) && icon != iced_icon)
+		icon = iced_icon
 		SetName("frosted [name]")
 		reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
 
@@ -340,17 +338,18 @@
 /obj/item/chems/food/donut/jelly
 	name = "jelly donut"
 	desc = "You jelly?"
-	icon_state = "jdonut1"
+	icon = 'icons/obj/food/donuts/donut_jelly.dmi'
+	iced_icon = 'icons/obj/food/donuts/donut_jelly_iced.dmi'
 	filling_color = "#ed1169"
 	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_amt = 3
 	bitesize = 5
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	donut_state = "jdonut"
+	var/jelly_type = /decl/material/liquid/nutriment/cherryjelly
 
 /obj/item/chems/food/donut/jelly/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
+	reagents.add_reagent(jelly_type, 5)
 
 //Sol Vendor
 /obj/item/chems/food/lunacake

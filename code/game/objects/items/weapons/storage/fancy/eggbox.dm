@@ -32,8 +32,13 @@
 			I.pixel_x = (i % 6) * 3
 			if(i > 6)
 				I.pixel_y = 3
+			if(egg.color)
+				I.color = egg.color
+				I.appearance_flags |= RESET_COLOR
 			add_overlay(I)
 			i++
+			if(i >= 12)
+				break // too many eggs, somehow
 
 /obj/item/storage/fancy/egg_box/assorted/WillContain()
 	return list(

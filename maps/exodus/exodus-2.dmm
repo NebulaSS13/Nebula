@@ -2485,7 +2485,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/item/storage/box/donut,
+/obj/item/storage/fancy/donut,
 /obj/effect/floor_decal/corner/red,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/main)
@@ -25371,7 +25371,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
-/obj/item/storage/box/donut,
+/obj/item/storage/fancy/donut,
 /obj/effect/floor_decal/corner/blue/three_quarters,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/bridge)
@@ -28087,7 +28087,7 @@
 /area/exodus/turret_protected/ai)
 "bhU" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/donut,
+/obj/item/storage/fancy/donut,
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
@@ -30472,7 +30472,7 @@
 	dir = 4
 	},
 /obj/structure/table/woodentable,
-/obj/item/storage/box/donut,
+/obj/item/storage/fancy/donut,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/bridge/meeting_room)
 "bmF" = (

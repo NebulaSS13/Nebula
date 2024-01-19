@@ -277,7 +277,7 @@
 		/obj/item/storage/box =                            5,
 		/obj/item/storage/box/donkpockets =                3,
 		/obj/item/storage/box/sinpockets =                 1,
-		/obj/item/storage/box/donut =                      2,
+		/obj/item/storage/fancy/donut =                      2,
 		/obj/item/storage/box/cups =                       3,
 		/obj/item/storage/box/mousetraps =                 4,
 		/obj/item/storage/box/engineer =                   3,

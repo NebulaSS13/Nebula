@@ -5242,7 +5242,7 @@
 /area/liberia/library)
 "kc" = (
 /obj/structure/table/woodentable/walnut,
-/obj/item/storage/box/donut,
+/obj/item/storage/fancy/donut,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},

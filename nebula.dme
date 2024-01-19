@@ -1325,6 +1325,7 @@
 #include "code\game\objects\items\weapons\storage\fancy\cigarettes.dm"
 #include "code\game\objects\items\weapons\storage\fancy\crackers.dm"
 #include "code\game\objects\items\weapons\storage\fancy\crayons.dm"
+#include "code\game\objects\items\weapons\storage\fancy\donutbox.dm"
 #include "code\game\objects\items\weapons\storage\fancy\eggbox.dm"
 #include "code\game\objects\items\weapons\storage\fancy\vials.dm"
 #include "code\game\objects\items\weapons\storage\storage_ui\default.dm"

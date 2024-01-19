@@ -9,7 +9,7 @@
 
 /datum/stack_recipe/box/donut
 	title = "donut box"
-	result_type = /obj/item/storage/box/donut/empty
+	result_type = /obj/item/storage/fancy/donut/empty
 
 /datum/stack_recipe/box/egg
 	title = "egg box"
