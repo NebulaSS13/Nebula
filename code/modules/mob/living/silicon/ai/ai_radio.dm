@@ -12,7 +12,9 @@
 /obj/item/encryptionkey/heads/ai_integrated
 	name = "ai integrated encryption key"
 	desc = "Integrated encryption key."
-	icon_state = "cap_cypherkey"
+	color = COLOR_GOLD
+	fill_color = COLOR_PALE_GOLD
+	inlay_color = COLOR_ROYAL_BLUE
 	can_decrypt = list(
 		access_bridge,
 		access_security,

@@ -29,7 +29,6 @@
 	)
 
 /obj/item/encryptionkey/hacked
-	icon_state = "cypherkey"
 	can_decrypt = list(access_hacked)
 	origin_tech = @'{"esoteric":3}'
 
