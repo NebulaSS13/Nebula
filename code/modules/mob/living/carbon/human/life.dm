@@ -372,9 +372,6 @@
 	if(!.)
 		return
 
-	if(hallucination_power)
-		handle_hallucinations()
-
 	if(get_shock() >= species.total_health)
 		if(!stat)
 			to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
