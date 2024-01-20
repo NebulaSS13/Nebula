@@ -66,7 +66,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/avian, slot_shoes_str)
 
 /decl/species/neoavian/get_holder_color(var/mob/living/carbon/human/H)
-	return H.skin_colour
+	return H.get_skin_colour()
 
 /decl/hierarchy/outfit/job/generic/assistant/avian
 	name = "Job - Avian Assistant"

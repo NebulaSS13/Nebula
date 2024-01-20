@@ -424,11 +424,11 @@ var/global/list/bodytypes_by_category = list()
 			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))
 
 /decl/bodytype/proc/set_default_hair(mob/living/carbon/human/organism, override_existing = TRUE, defer_update_hair = FALSE)
-	if(!organism.h_style || (override_existing && (organism.h_style != default_h_style)))
-		organism.h_style = default_h_style
+	if(!organism.get_hairstyle() || (override_existing && (organism.get_hairstyle() != default_h_style)))
+		organism.set_hairstyle(default_h_style)
 		. = TRUE
-	if(!organism.h_style || (override_existing && (organism.f_style != default_f_style)))
-		organism.f_style = default_f_style
+	if(!organism.get_hairstyle() || (override_existing && (organism.get_facial_hairstyle() != default_f_style)))
+		organism.set_facial_hairstyle(default_f_style)
 		. = TRUE
 	if(. && !defer_update_hair)
 		organism.update_hair()
@@ -445,9 +445,9 @@ var/global/list/bodytypes_by_category = list()
 	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
 		E.skin_colour = base_color
 
-	mannequin.eye_colour = base_eye_color
-	mannequin.hair_colour = base_hair_color
-	mannequin.facial_hair_colour = base_hair_color
+	mannequin.set_eye_colour(base_eye_color, skip_update = TRUE)
+	mannequin.set_hair_colour(base_hair_color, skip_update = TRUE)
+	mannequin.set_facial_hair_colour(base_hair_color, skip_update = TRUE)
 	set_default_hair(mannequin)
 
 	mannequin.force_update_limbs()

@@ -280,9 +280,10 @@ var/global/list/damage_icon_parts = list()
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi',"blank")
 
-	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][skin_colour]"
-	if(lip_style)
-		icon_key += "[lip_style]"
+	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][get_skin_colour()]"
+	var/lips = get_lip_colour()
+	if(lips)
+		icon_key += "lips_[lips]"
 	else
 		icon_key += "nolips"
 	var/obj/item/organ/internal/eyes/eyes = get_organ((root_bodytype.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
@@ -457,6 +458,8 @@ var/global/list/damage_icon_parts = list()
 		return // No tail data!
 
 	// These values may be null and are generally optional.
+	var/hair_colour     = get_hair_colour()
+	var/skin_colour     = get_skin_colour()
 	var/tail_hair       = tail_organ.get_tail_hair()
 	var/tail_blend      = tail_organ.get_tail_blend()
 	var/tail_hair_blend = tail_organ.get_tail_hair_blend()

@@ -107,9 +107,10 @@
 			if(eye_glow)
 				overlays |= eye_glow
 
-		if(owner.lip_style && (bodytype.appearance_flags & HAS_LIPS))
+		var/lip_colour = owner?.get_lip_colour()
+		if(lip_colour && (bodytype.appearance_flags & HAS_LIPS))
 			var/icon/lip_icon = new/icon(bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")
-			lip_icon.Blend(owner.lip_style, ICON_MULTIPLY)
+			lip_icon.Blend(lip_colour, ICON_MULTIPLY)
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)
 
@@ -122,23 +123,25 @@
 	if(!owner)
 		return res
 
-	if(owner.f_style)
-		var/decl/sprite_accessory/facial_hair_style = resolve_accessory_to_decl(owner.f_style)
+	var/facial_hairstyle = owner.get_facial_hairstyle()
+	if(facial_hairstyle)
+		var/decl/sprite_accessory/facial_hair_style = resolve_accessory_to_decl(facial_hairstyle)
 		if(facial_hair_style?.accessory_is_available(owner, species, bodytype))
-			res.overlays += facial_hair_style.get_cached_accessory_icon(src, owner.facial_hair_colour)
+			res.overlays += facial_hair_style.get_cached_accessory_icon(src, owner.get_facial_hair_colour())
 
-	if(owner.h_style)
-		var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(owner.h_style)
+	var/hairstyle = owner.get_hairstyle()
+	if(hairstyle)
+		var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(hairstyle)
 		if(hair_style?.accessory_is_available(owner, species, bodytype))
-			res.overlays += hair_style.get_cached_accessory_icon(src, owner.hair_colour)
+			res.overlays += hair_style.get_cached_accessory_icon(src, owner.get_hair_colour())
 
 	for (var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = resolve_accessory_to_decl(M)
 		if(!mark_style || mark_style.draw_target != MARKING_TARGET_HAIR)
 			continue
 		var/mark_color
-		if (!mark_style.do_colouration && owner.h_style)
-			var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(owner.h_style)
+		if (!mark_style.do_colouration && hairstyle)
+			var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(hairstyle)
 			if (hair_style && (~hair_style.flags & HAIR_BALD) && hair_colour)
 				mark_color = hair_colour
 			else //only baseline human skin tones; others will need species vars for coloration

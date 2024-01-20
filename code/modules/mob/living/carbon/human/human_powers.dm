@@ -20,8 +20,9 @@
 		to_chat(src, SPAN_WARNING("You can't mess with your hair right now!"))
 		return
 
-	if(h_style)
-		var/decl/sprite_accessory/hair/hair_style = GET_DECL(h_style)
+	var/hairstyle = get_hairstyle()
+	if(hairstyle)
+		var/decl/sprite_accessory/hair/hair_style = GET_DECL(hairstyle)
 		if(!(hair_style.flags & HAIR_TIEABLE))
 			to_chat(src, SPAN_WARNING("Your hair isn't long enough to tie."))
 			return
@@ -39,8 +40,8 @@
 		if(incapacitated())
 			to_chat(src, SPAN_WARNING("You can't mess with your hair right now!"))
 			return
-		if(selected_type && h_style != selected_type)
-			h_style = selected_type
+		if(selected_type && hairstyle != selected_type)
+			set_hairstyle(selected_type)
 			try_refresh_visible_overlays()
 			visible_message(SPAN_NOTICE("\The [src] pauses a moment to style their hair."))
 		else
@@ -103,5 +104,5 @@
 	set name = "Change Colour"
 	set desc = "Choose the colour of your skin."
 
-	var/new_skin = input(usr, "Choose your new skin colour: ", "Change Colour", skin_colour) as color|null
-	change_skin_color(new_skin)
+	var/new_skin = input(usr, "Choose your new skin colour: ", "Change Colour", get_skin_colour()) as color|null
+	set_skin_colour(new_skin)

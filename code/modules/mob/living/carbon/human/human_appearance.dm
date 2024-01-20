@@ -1,7 +1,81 @@
+/mob/living/carbon/human
+	var/_h_style
+	var/_f_style
+	var/_hair_colour
+	var/_facial_hair_colour
+	var/_eye_colour
+	var/_skin_colour
+	var/_lip_colour
+
 /mob/living/carbon/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list(), var/datum/topic_state/state = global.default_topic_state)
 	var/datum/nano_module/appearance_changer/AC = new(location, src, check_species_whitelist, species_whitelist, species_blacklist)
 	AC.flags = flags
 	AC.ui_interact(user, state = state)
+
+/mob/living/carbon/human/get_lip_colour()
+	return _lip_colour
+
+/mob/living/carbon/human/get_eye_colour()
+	return _eye_colour
+
+/mob/living/carbon/human/get_skin_colour()
+	return _skin_colour
+
+/mob/living/carbon/human/get_hairstyle()
+	return _h_style
+
+/mob/living/carbon/human/get_hair_colour()
+	return _hair_colour
+
+/mob/living/carbon/human/get_facial_hairstyle()
+	return _f_style
+
+/mob/living/carbon/human/get_facial_hair_colour()
+	return _facial_hair_colour
+
+/mob/living/carbon/human/set_lip_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_lip_colour = new_color
+		if(!skip_update)
+			update_body()
+
+/mob/living/carbon/human/set_eye_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_eye_colour = new_color
+		if(!skip_update)
+			update_eyes()
+			update_body()
+
+/mob/living/carbon/human/set_skin_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_skin_colour = new_color
+		if(!skip_update)
+			force_update_limbs()
+			update_body()
+
+/mob/living/carbon/human/set_hair_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_hair_colour = new_color
+		if(!skip_update)
+			update_hair()
+
+/mob/living/carbon/human/set_hairstyle(var/new_hairstyle, var/skip_update = FALSE)
+	if((. = ..()))
+		_h_style = new_hairstyle
+		if(!skip_update)
+			update_hair()
+
+/mob/living/carbon/human/set_facial_hair_colour(var/new_color, var/skip_update = FALSE)
+	if((. = ..()))
+		_facial_hair_colour = new_color
+		if(!skip_update)
+			update_hair()
+
+/mob/living/carbon/human/set_facial_hairstyle(var/new_facial_hairstyle, var/skip_update = FALSE)
+	if((. = ..()))
+		_f_style = new_facial_hairstyle
+		if(!skip_update)
+			update_hair()
 
 /mob/living/carbon/human/proc/change_species(var/new_species, var/new_bodytype = null)
 	if(!new_species)
@@ -46,69 +120,22 @@
 	var/decl/pronouns/pronouns = pick(species.available_pronouns)
 	set_gender(pronouns.name, TRUE)
 
-/mob/living/carbon/human/proc/change_hair(var/hair_style, var/update_icons = TRUE)
-	if(!hair_style || h_style == hair_style || !ispath(hair_style, /decl/sprite_accessory/hair))
-		return
-	h_style = hair_style
-	update_hair(update_icons)
-	return 1
-
-/mob/living/carbon/human/proc/change_facial_hair(var/facial_hair_style, var/update_icons = TRUE)
-	if(!facial_hair_style || f_style == facial_hair_style || !ispath(facial_hair_style, /decl/sprite_accessory/facial_hair))
-		return
-	f_style = facial_hair_style
-	update_hair(update_icons)
-	return 1
-
 /mob/living/carbon/human/proc/reset_hair()
 	var/list/valid_hairstyles = get_valid_hairstyle_types()
-	var/list/valid_facial_hairstyles =  get_valid_facial_hairstyle_types()
-
 	if(length(valid_hairstyles))
-		h_style = pick(valid_hairstyles)
+		set_hairstyle(pick(valid_hairstyles), skip_update = TRUE)
 	else
 		//this shouldn't happen
-		h_style = get_bodytype()?.default_h_style || /decl/sprite_accessory/hair/bald
+		set_hairstyle(get_bodytype()?.default_h_style || /decl/sprite_accessory/hair/bald, skip_update = TRUE)
 
+	var/list/valid_facial_hairstyles =  get_valid_facial_hairstyle_types()
 	if(length(valid_facial_hairstyles))
-		f_style = pick(valid_facial_hairstyles)
+		set_facial_hairstyle(pick(valid_facial_hairstyles), skip_update = TRUE)
 	else
 		//this shouldn't happen
-		f_style = get_bodytype()?.default_f_style || /decl/sprite_accessory/facial_hair/shaved
+		set_facial_hairstyle(get_bodytype()?.default_f_style || /decl/sprite_accessory/facial_hair/shaved, skip_update = TRUE)
 
 	update_hair()
-
-/mob/living/carbon/human/proc/change_eye_color(var/new_colour)
-	if(eye_colour != new_colour)
-		eye_colour = new_colour
-		update_eyes()
-		update_body()
-		return TRUE
-	return FALSE
-
-/mob/living/carbon/human/proc/change_hair_color(var/new_colour)
-	if(hair_colour != new_colour)
-		hair_colour = new_colour
-		force_update_limbs()
-		update_body()
-		update_hair()
-		return TRUE
-	return FALSE
-
-/mob/living/carbon/human/proc/change_facial_hair_color(var/new_colour)
-	if(facial_hair_colour != new_colour)
-		facial_hair_colour = new_colour
-		update_hair()
-		return TRUE
-	return FALSE
-
-/mob/living/carbon/human/proc/change_skin_color(var/new_colour)
-	if(skin_colour == new_colour || !(get_bodytype().appearance_flags & HAS_SKIN_COLOR))
-		return FALSE
-	skin_colour = new_colour
-	force_update_limbs()
-	update_body()
-	return TRUE
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
 	if(skin_tone == tone || !(get_bodytype().appearance_flags & HAS_A_SKIN_TONE))

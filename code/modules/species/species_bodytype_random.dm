@@ -29,7 +29,7 @@ SETUP_RANDOM_COLOR_GETTER(skin_color, skin_colors, HAS_SKIN_COLOR, list(
 	/decl/color_generator/blue_light,
 	/decl/color_generator/green,
 	/decl/color_generator/white))
-SETUP_RANDOM_COLOR_SETTER(skin_color, change_skin_color)
+SETUP_RANDOM_COLOR_SETTER(skin_color, set_skin_colour)
 
 SETUP_RANDOM_COLOR_GETTER(hair_color, hair_colors, HAS_HAIR_COLOR, list(
 	/decl/color_generator/black,
@@ -40,7 +40,7 @@ SETUP_RANDOM_COLOR_GETTER(hair_color, hair_colors, HAS_HAIR_COLOR, list(
 	/decl/color_generator/wheat,
 	/decl/color_generator/old,
 	/decl/color_generator/punk))
-SETUP_RANDOM_COLOR_SETTER(hair_color, change_hair_color)
+SETUP_RANDOM_COLOR_SETTER(hair_color, set_hair_colour)
 
 SETUP_RANDOM_COLOR_GETTER(eye_color, eye_colors, HAS_EYE_COLOR, list(
 	/decl/color_generator/black,
@@ -51,12 +51,12 @@ SETUP_RANDOM_COLOR_GETTER(eye_color, eye_colors, HAS_EYE_COLOR, list(
 	/decl/color_generator/blue_light,
 	/decl/color_generator/green,
 	/decl/color_generator/albino_eye))
-SETUP_RANDOM_COLOR_SETTER(eye_color, change_eye_color)
+SETUP_RANDOM_COLOR_SETTER(eye_color, set_eye_colour)
 
 /decl/bodytype/proc/get_random_facial_hair_color()
 	return get_random_hair_color()
 
-SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)
+SETUP_RANDOM_COLOR_SETTER(facial_hair_color, set_facial_hair_colour)
 
 /decl/bodytype/proc/get_random_skin_tone()
 	return random_skin_tone(src)
@@ -71,10 +71,10 @@ SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)
 
 /mob/living/carbon/human/proc/randomize_hair_style()
 	var/list/L = get_valid_hairstyle_types()
-	change_hair(SAFEPICK(L))
+	set_hairstyle(SAFEPICK(L))
 
 /mob/living/carbon/human/proc/randomize_facial_hair_style()
 	var/list/L = get_valid_facial_hairstyle_types()
-	change_facial_hair(SAFEPICK(L))
+	set_facial_hairstyle(SAFEPICK(L))
 
 #undef SETUP_RANDOM_COLOR_GETTER
