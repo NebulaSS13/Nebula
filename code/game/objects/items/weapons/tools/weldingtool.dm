@@ -430,7 +430,7 @@
 		return TRUE
 	if(standard_pour_into(user, O))
 		return TRUE
-	if(standard_feed_mob(user, O))
+	if(ismob(O) && !!handle_eaten_by_mob(user, O))
 		return TRUE
 	if(user.a_intent == I_HURT)
 		if(standard_splash_mob(user, O))
@@ -461,11 +461,11 @@
 		return FALSE
 	. = ..()
 
-/obj/item/chems/welder_tank/standard_feed_mob(mob/user, mob/target)
+/obj/item/chems/welder_tank/handle_eaten_by_mob(mob/user, mob/target)
 	if(!can_refuel)
 		to_chat(user, SPAN_DANGER("\The [src] is sealed shut."))
-		return FALSE
-	. = ..()
+		return EATEN_UNABLE
+	return ..()
 
 /obj/item/chems/welder_tank/get_alt_interactions(var/mob/user)
 	. = ..()

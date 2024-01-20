@@ -4,6 +4,9 @@
 	nutrition = 300
 	var/list/prey
 
+/mob/living/simple_animal/hostile/retaliate/beast/get_satiated_nutrition()
+	return 250
+
 /mob/living/simple_animal/hostile/retaliate/beast/get_max_nutrition()
 	return 300
 

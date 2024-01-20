@@ -365,6 +365,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		return TRUE
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
+
 	if(istype(O, /obj/item/stack/medical))
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
@@ -379,33 +380,23 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [G.him] back to life."))
 		return TRUE
 
-	if(istype(O, /obj/item/flash) && stat != DEAD)
-		return O.attack(src, user, user.get_target_zone())
-
-	if(meat_type && (stat == DEAD) && meat_amount)
-		if(istype(O, /obj/item/knife/kitchen/cleaver))
-			var/victim_turf = get_turf(src)
-			if(!locate(/obj/structure/table, victim_turf))
-				to_chat(user, SPAN_WARNING("You need to place \the [src] on a table to butcher it."))
-				return TRUE
-			var/time_to_butcher = (mob_size)
-			to_chat(user, SPAN_WARNING("You begin harvesting \the [src]."))
-			if(do_after(user, time_to_butcher, src, same_direction = TRUE))
-				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
-					to_chat(user, SPAN_DANGER("You botch harvesting \the [src], and ruin some of the meat in the process."))
-					subtract_meat(user)
-				else
-					harvest(user, user.get_skill_value(SKILL_COOKING))
-			else
-				to_chat(user, SPAN_DANGER("Your hand slips with your movement, and some of the meat is ruined."))
+	if(meat_type && (stat == DEAD) && meat_amount && istype(O, /obj/item/knife/kitchen/cleaver))
+		var/victim_turf = get_turf(src)
+		if(!locate(/obj/structure/table, victim_turf))
+			to_chat(user, SPAN_WARNING("You need to place \the [src] on a table to butcher it."))
+			return TRUE
+		var/time_to_butcher = (mob_size)
+		to_chat(user, SPAN_WARNING("You begin harvesting \the [src]."))
+		if(do_after(user, time_to_butcher, src, same_direction = TRUE))
+			if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
+				to_chat(user, SPAN_DANGER("You botch harvesting \the [src], and ruin some of the meat in the process."))
 				subtract_meat(user)
-			return TRUE
-
-	else
-		if(!O.force || (O.item_flags & ITEM_FLAG_NO_BLUDGEON))
-			visible_message(SPAN_NOTICE("\The [user] gently taps [src] with \the [O]."))
-			return TRUE
-		return O.attack(src, user, user.get_target_zone() || ran_zone())
+			else
+				harvest(user, user.get_skill_value(SKILL_COOKING))
+		else
+			to_chat(user, SPAN_DANGER("Your hand slips with your movement, and some of the meat is ruined."))
+			subtract_meat(user)
+		return TRUE
 
 	return ..()
 
@@ -670,3 +661,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/get_melee_accuracy()
 	return clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
+
+/mob/living/simple_animal/check_has_mouth()
+	return TRUE

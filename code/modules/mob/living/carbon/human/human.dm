@@ -49,14 +49,6 @@
 	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	return stomach?.ingested
 
-/mob/living/carbon/human/get_fullness()
-	if(!should_have_organ(BP_STOMACH))
-		return ..()
-	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH, /obj/item/organ/internal/stomach)
-	if(stomach)
-		return nutrition + (stomach.ingested?.total_volume * 10)
-	return 0 //Always hungry, but you can't actually eat. :(
-
 /mob/living/carbon/human/get_inhaled_reagents()
 	if(!should_have_organ(BP_LUNGS))
 		return
@@ -325,12 +317,6 @@
 /mob/living/carbon/human/proc/check_dna()
 	dna.check_integrity(src)
 	return
-
-/mob/living/carbon/human/check_has_mouth()
-	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	if(!H || !istype(H) || !H.can_intake_reagents)
-		return FALSE
-	return TRUE
 
 /mob/living/carbon/human/empty_stomach()
 	SET_STATUS_MAX(src, STAT_STUN, 3)

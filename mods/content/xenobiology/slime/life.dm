@@ -127,6 +127,9 @@
 
 	..()
 
+/mob/living/slime/get_satiated_nutrition() // Can't go above it
+	. = is_adult ? 1150 : 950
+
 /mob/living/slime/get_max_nutrition() // Can't go above it
 	. = is_adult ? 1200 : 1000
 

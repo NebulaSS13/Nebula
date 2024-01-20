@@ -55,70 +55,11 @@
 	.=..()
 	amount_per_transfer_from_this = bitesize
 
-	//Placeholder for effect that trigger on eating that aren't tied to reagents.
-/obj/item/chems/food/proc/On_Consume(var/mob/M)
-	if(isliving(M) && cooked_food)
-		var/mob/living/eater = M
-		eater.add_stressor(/datum/stressor/ate_cooked_food, 15 MINUTES)
-	if(!reagents.total_volume)
-		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
-		M.drop_item()
-		M.update_personal_goal(/datum/goal/achievement/specific_object/food, type)
-		if(trash)
-			if(ispath(trash,/obj/item))
-				var/obj/item/TrashItem = new trash(get_turf(M))
-				M.put_in_hands(TrashItem)
-			else if(istype(trash,/obj/item))
-				M.put_in_hands(trash)
-		qdel(src)
-	return
-
 /obj/item/chems/food/attack_self(mob/user)
 	attack(user, user)
 
 /obj/item/chems/food/dragged_onto(var/mob/user)
 	attack(user, user)
-
-/obj/item/chems/food/self_feed_message(mob/user)
-	if(!iscarbon(user))
-		return ..()
-	var/mob/living/carbon/C = user
-	var/fullness = C.get_fullness()
-	if (fullness <= 50)
-		to_chat(C, SPAN_WARNING("You hungrily chew out a piece of [src] and gobble it!"))
-	if (fullness > 50 && fullness <= 150)
-		to_chat(C, SPAN_NOTICE("You hungrily begin to eat [src]."))
-	if (fullness > 150 && fullness <= 350)
-		to_chat(C, SPAN_NOTICE("You take a bite of [src]."))
-	if (fullness > 350 && fullness <= 550)
-		to_chat(C, SPAN_NOTICE("You unwillingly chew a bit of [src]."))
-
-/obj/item/chems/food/feed_sound(mob/user)
-	if(eat_sound)
-		playsound(user, pick(eat_sound), rand(10, 50), 1)
-
-/obj/item/chems/food/standard_feed_mob(mob/user, mob/target)
-	. = ..()
-	if(.)
-		bitecount++
-		On_Consume(target)
-
-/obj/item/chems/food/attack(mob/M, mob/user, def_zone)
-	if(!reagents || !reagents.total_volume)
-		to_chat(user, "<span class='danger'>None of [src] left!</span>")
-		qdel(src)
-		return 0
-	if(iscarbon(M))
-		//TODO: replace with standard_feed_mob() call.
-		var/mob/living/carbon/C = M
-		var/fullness = C.get_fullness()
-		if (fullness > 550)
-			var/message = C == user ? "You cannot force any more of [src] to go down your throat." : "[user] cannot force anymore of [src] down [M]'s throat."
-			to_chat(user, SPAN_WARNING(message))
-			return 0
-		if(standard_feed_mob(user, M))
-			return 1
-	return 0
 
 /obj/item/chems/food/examine(mob/user, distance)
 	. = ..()
@@ -252,19 +193,6 @@
 		for(var/atom/movable/something in contents)
 			something.dropInto(loc)
 	. = ..()
-
-/obj/item/chems/food/attack_animal(var/mob/user)
-	if(!isanimal(user) && !isalien(user))
-		return
-	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
-	bitecount++
-	if(reagents && user.reagents)
-		reagents.trans_to_mob(user, bitesize, CHEM_INGEST)
-	spawn(5)
-		if(!src && !user.client)
-			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
-			qdel(src)
-	On_Consume(user)
 
 /obj/item/chems/food/proc/update_food_appearance_from(var/obj/item/donor, var/food_color, var/copy_donor_appearance = TRUE)
 	filling_color = food_color

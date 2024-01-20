@@ -114,7 +114,6 @@
 		/obj/item/chems/drinks/cans              = TRADER_SUBTYPES_ONLY,
 		/obj/item/chems/drinks/bottle            = TRADER_SUBTYPES_ONLY,
 		/obj/item/chems/drinks/bottle/small      = TRADER_BLACKLIST,
-		/obj/item/chems/food/checker             = TRADER_BLACKLIST_ALL,
 		/obj/item/chems/food/fruit_slice         = TRADER_BLACKLIST,
 		/obj/item/chems/food/slice               = TRADER_BLACKLIST_ALL,
 		/obj/item/chems/food/grown               = TRADER_BLACKLIST_ALL,

@@ -36,5 +36,5 @@
 	return isSynthetic()
 
 /mob/living/carbon/brain/check_has_mouth()
-	return 0
+	return FALSE
 

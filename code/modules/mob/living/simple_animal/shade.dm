@@ -33,6 +33,9 @@
 	skin_material = null
 	skin_amount =   0
 
+/mob/living/simple_animal/shade/check_has_mouth()
+	return FALSE
+
 /obj/item/natural_weapon/shade
 	name = "foul touch"
 	attack_verb = list("drained")

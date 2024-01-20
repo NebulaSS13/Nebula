@@ -68,20 +68,6 @@
 		return	..()
 	return FALSE
 
-/obj/item/chems/glass/standard_feed_mob(var/mob/user, var/mob/target)
-	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
-		return 1
-	if(user.a_intent == I_HURT)
-		return 1
-	return ..()
-
-/obj/item/chems/glass/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
-	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
-		for(var/R in reagents.reagent_volumes)
-			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)
-
 /obj/item/chems/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity) //Is the container open & are they next to whatever they're clicking?
 		return FALSE //If not, do nothing.
@@ -92,7 +78,7 @@
 		return TRUE
 	if(standard_pour_into(user, target)) //Pouring into another beaker?
 		return TRUE
-	if(standard_feed_mob(user, target))
+	if(ismob(target) && !!handle_eaten_by_mob(user, target))
 		return TRUE
 	if(user.a_intent == I_HURT)
 		if(standard_splash_mob(user,target))
