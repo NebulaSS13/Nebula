@@ -190,14 +190,13 @@
 		set_scale(1.25)
 	default_pixel_y = 10
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Life()
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)
 		return FALSE
 	if(special_attacks >= 6 && current_damtype != BRUTE)
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
 		current_damtype = BRUTE
-
 	if(current_health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()
 

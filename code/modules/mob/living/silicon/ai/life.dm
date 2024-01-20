@@ -1,48 +1,35 @@
 /mob/living/silicon/ai/should_be_dead()
 	return get_health_percent() <= 0 || backup_capacitor() <= 0
 
-/mob/living/silicon/ai/Life()
-
-	SHOULD_CALL_PARENT(FALSE)
-
-	if (src.stat!=CONSCIOUS)
+/mob/living/silicon/ai/handle_regular_status_updates()
+	. = ..()
+	if(stat != CONSCIOUS)
 		src.cameraFollow = null
 		src.reset_view(null)
 
-	update_health() // TODO: move to handle_regular_status_updates() and preserve parent call chain, Life() PR
-	if(stat == DEAD)
-		return
+/mob/living/silicon/ai/update_lying()
+	lying = FALSE
 
+/mob/living/silicon/ai/handle_living_non_stasis_processes()
+	. = ..()
 	// If our powersupply object was destroyed somehow, create new one.
 	if(!psupply)
 		create_powersupply()
-
-	lying = 0			// Handle lying down
-
 	// We aren't shut down, and we lack external power. Try to fix it using the restoration routine.
 	if (!self_shutdown && !has_power(0))
 		// AI's restore power routine is not running. Start it automatically.
 		if(aiRestorePowerRoutine == AI_RESTOREPOWER_IDLE)
 			aiRestorePowerRoutine = AI_RESTOREPOWER_STARTING
 			handle_power_failure()
-
-	handle_impaired_vision()
 	update_power_usage()
 	handle_power_oxyloss()
-	update_sight()
-
 	process_queued_alarms()
-	handle_regular_hud_updates()
-
 	switch(src.sensor_mode)
 		if (SEC_HUD)
 			process_sec_hud(src,0,src.eyeobj,get_computer_network())
 		if (MED_HUD)
 			process_med_hud(src,0,src.eyeobj,get_computer_network())
-
 	process_os()
-	handle_status_effects()
-
 	if(controlling_drone && stat != CONSCIOUS)
 		controlling_drone.release_ai_control("<b>WARNING: Primary control loop failure.</b> Session terminated.")
 

@@ -43,10 +43,10 @@
 		return
 
 	//Take damage from bad environment if any
-	adjust_health(-seed.handle_environment(T,T.return_air(),null,1))
+	adjust_health(-seed.handle_plant_environment(T,T.return_air(),null,1))
 	if(health <= 0)
 		return
-	
+
 	//Vine fight!
 	for(var/obj/effect/vine/other in T)
 		if(other.seed != seed)
@@ -76,7 +76,7 @@
 			var/list/neighbors = get_neighbors()
 			if(neighbors.len)
 				spread_to(pick(neighbors))
-			
+
 		//Try to settle down
 		if(can_spawn_plant())
 			plant = new(T,seed)

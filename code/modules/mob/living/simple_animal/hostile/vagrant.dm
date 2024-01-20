@@ -42,7 +42,7 @@
 	if(stat == DEAD && !QDELETED(src) && !gibbed)
 		gib()
 
-/mob/living/simple_animal/hostile/vagrant/Life()
+/mob/living/simple_animal/hostile/vagrant/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -56,7 +56,7 @@
 				gripping.vessel.remove_any(blood_per_tick)
 				heal_overall_damage(health_per_tick)
 				if(prob(15))
-					to_chat(gripping, "<span class='danger'>You feel your fluids being drained!</span>")
+					to_chat(gripping, SPAN_DANGER("You feel your fluids being drained!"))
 			else
 				gripping = null
 

@@ -1,7 +1,16 @@
 /mob/living/exosuit/handle_disabilities()
 	return
 
-/mob/living/exosuit/Life()
+/mob/living/exosuit/update_lying()
+	lying = FALSE // Prevent carp from proning us
+
+/mob/living/exosuit/handle_regular_status_updates()
+
+	if(!body && !QDELETED(src))
+		physically_destroyed()
+		return FALSE
+
+	. = ..()
 
 	for(var/thing in pilots)
 		var/mob/pilot = thing
@@ -12,20 +21,10 @@
 				UNSETEMPTY(pilots)
 		update_pilots()
 
-	if(!body && !QDELETED(src))
-		qdel(src)
-		return
-
 	if(radio)
 		radio.on = (head && head.radio && head.radio.is_functional() && get_cell())
 
-	body.update_air(hatch_closed && use_air)
-
-	var/powered = FALSE
-	if(get_cell())
-		powered = get_cell().drain_power(0, 0, calc_power_draw()) > 0
-
-	if(!powered)
+	if(!is_suit_powered())
 		//Shut down all systems
 		if(head)
 			head.active_sensors = FALSE
@@ -35,16 +34,11 @@
 			if(istype(M) && M.active && M.passive_power_use)
 				M.deactivate()
 
-	update_health() // TODO: move to handle_regular_status_updates(), Life PR
-
 	if(emp_damage > 0)
 		emp_damage -= min(1, emp_damage) //Reduce emp accumulation over time
-	..() //Handles stuff like environment
 
-	handle_hud_icons()
-
-	lying = FALSE // Fuck off, carp.
-	handle_vision(powered)
+/mob/living/exosuit/proc/is_suit_powered()
+	return (get_cell()?.drain_power(0, 0, calc_power_draw())) > 0
 
 /mob/living/exosuit/get_cell(force)
 	RETURN_TYPE(/obj/item/cell)
@@ -71,7 +65,13 @@
 
 /mob/living/exosuit/handle_environment(var/datum/gas_mixture/environment)
 	..()
-	if(!environment) return
+
+	if(body)
+		body.update_air(hatch_closed && use_air)
+
+	if(!environment)
+		return
+
 	//Mechs and vehicles in general can be assumed to just tend to whatever ambient temperature
 	if(abs(environment.temperature - bodytemperature) > 0 )
 		bodytemperature += ((environment.temperature - bodytemperature) / 6)
@@ -123,14 +123,14 @@
 	qdel(src)
 	return
 
-/mob/living/exosuit/handle_vision(powered)
+/mob/living/exosuit/handle_vision()
 	var/was_blind = sight & BLIND
 	if(head)
+		var/powered = is_suit_powered()
 		sight = head.get_sight(powered)
 		see_invisible = head.get_invisible(powered)
 	if(body && (body.pilot_coverage < 100 || body.transparent_cabin) || !hatch_closed)
 		sight &= ~BLIND
-
 	if(sight & BLIND && !was_blind)
 		for(var/mob/pilot in pilots)
 			to_chat(pilot, SPAN_WARNING("The sensors are not operational and you cannot see a thing!"))

@@ -246,8 +246,8 @@
 /mob/living/silicon/robot/drone/death()
 	if(stat != DEAD && should_be_dead())
 		self_destruct()
-		return
-	return ..()
+		return FALSE
+	. = ..()
 
 /mob/living/silicon/robot/drone/self_destruct()
 	timeofdeath = world.time

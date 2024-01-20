@@ -173,38 +173,28 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		QDEL_NULL(natural_weapon)
 	. = ..()
 
-/mob/living/simple_animal/Life()
-	if(is_aquatic && !submerged() && stat != DEAD)
-		walk(src, 0)
-		if(!HAS_STATUS(src, STAT_PARA)) // gated to avoid redundant update_icon() calls.
-			SET_STATUS_MAX(src, STAT_PARA, 3)
-			update_icon()
+/mob/living/simple_animal/handle_regular_status_updates()
+	if(purge)
+		purge -= 1
 	. = ..()
-	if(!.)
-		return FALSE
-	if(z && !living_observers_present(SSmapping.get_connected_levels(z)))
-		return
-	//Health
-	if(stat == DEAD)
-		if(current_health > 0)
-			switch_from_dead_to_living_mob_list()
-			set_stat(CONSCIOUS)
-			set_density(1)
-			update_icon()
-		return 0
+	if(.)
+		if(can_bleed && bleed_ticks > 0)
+			handle_bleeding()
+		if(is_aquatic && !submerged())
+			walk(src, 0)
+			if(HAS_STATUS(src, STAT_PARA))
+				SET_STATUS_MAX(src, STAT_PARA, 3)
+				update_icon()
 
-	handle_atmos()
-	handle_supernatural()
-	handle_impaired_vision()
+/mob/living/simple_animal/handle_some_updates()
+	. = ..() && (!z || living_observers_present(SSmapping.get_connected_levels(z)))
 
-	if(can_bleed && bleed_ticks > 0)
-		handle_bleeding()
-
-	delayed_life_action()
-	return 1
+/mob/living/simple_animal/handle_legacy_ai()
+	. = ..()
+	handle_async_life_action()
 
 // Handles timed stuff in Life()
-/mob/living/simple_animal/proc/delayed_life_action()
+/mob/living/simple_animal/proc/handle_async_life_action()
 	set waitfor = FALSE
 	if(performing_delayed_life_action)
 		return
@@ -254,12 +244,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				if("emote_see")
 					visible_emote("[pick(emote_see)].")
 
-/mob/living/simple_animal/proc/handle_atmos(var/atmos_suitable = 1)
-	//Atmos
-	if(!loc)
-		return
-
-	var/datum/gas_mixture/environment = loc.return_air()
+/mob/living/simple_animal/handle_environment(datum/gas_mixture/environment)
+	. = ..()
+	var/atmos_suitable = TRUE
 	if(environment)
 		// don't bother checking it twice if we got a supplied FALSE val.
 		if(atmos_suitable)
@@ -294,10 +281,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
 	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
-
-/mob/living/simple_animal/proc/handle_supernatural()
-	if(purge)
-		purge -= 1
 
 /mob/living/simple_animal/gib()
 	..(((mob_icon_state_flags & MOB_ICON_HAS_GIB_STATE) ? "world-gib" : null), TRUE)

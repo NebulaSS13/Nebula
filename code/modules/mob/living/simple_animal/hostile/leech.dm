@@ -19,15 +19,13 @@
 	adapt_to_current_level()
 	. = ..()
 
-/mob/living/simple_animal/hostile/leech/Life()
+/mob/living/simple_animal/hostile/leech/handle_regular_status_updates()
 	. = ..()
-	if(!.)
-		return FALSE
-
-	if(target_mob)
-		belly -= 3
-	else
-		belly -= 1
+	if(.)
+		if(target_mob)
+			belly -= 3
+		else
+			belly -= 1
 
 /mob/living/simple_animal/hostile/leech/AttackingTarget()
 	. = ..()

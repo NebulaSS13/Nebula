@@ -59,16 +59,12 @@
 	else
 		turn_off()
 
-/mob/living/bot/Life()
-	..()
-	if(stat == DEAD)
-		return
-	set_status(STAT_WEAK, 0)
-	set_status(STAT_STUN, 0)
-	set_status(STAT_PARA, 0)
-
-	if(on && !client && !busy)
-		handleAI()
+/mob/living/bot/handle_regular_status_updates()
+	. = ..()
+	if(.)
+		set_status(STAT_WEAK, 0)
+		set_status(STAT_STUN, 0)
+		set_status(STAT_PARA, 0)
 
 /mob/living/bot/get_total_life_damage()
 	return getFireLoss() + getBruteLoss()
@@ -204,7 +200,12 @@
 /mob/living/bot/emag_act(var/remaining_charges, var/mob/user)
 	return 0
 
-/mob/living/bot/proc/handleAI()
+/mob/living/bot/handle_legacy_ai()
+	. = ..()
+	if(on && !busy)
+		handle_async_ai()
+
+/mob/living/bot/proc/handle_async_ai()
 	set waitfor = FALSE
 	if(ignore_list.len)
 		for(var/atom/A in ignore_list)

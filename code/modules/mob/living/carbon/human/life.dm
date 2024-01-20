@@ -28,36 +28,13 @@
 	var/pressure_alert = 0
 	var/stamina = 100
 
-/mob/living/carbon/human/Life()
-	set invisibility = FALSE
-	set background = BACKGROUND_ENABLED
-
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
-		return
-
-	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
-
-	..()
-
-	if(life_tick%30==15)
-		hud_updateflag = 1022
-
-	voice = GetVoice()
-
-	//No need to update all of these procs if the guy is dead.
-	if(stat != DEAD && !is_in_stasis())
-		last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
-		//Organs and blood
-		handle_organs()
-		handle_shock()
-		handle_pain()
-		handle_stamina()
-
-	if(!handle_some_updates())
-		return											//We go ahead and process them 5 times for HUD images and other stuff though.
-
-	//Update our name based on whether our face is obscured/disfigured
-	SetName(get_visible_name())
+/mob/living/carbon/human/handle_living_non_stasis_processes()
+	last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
+	//Organs and blood
+	handle_organs()
+	handle_shock()
+	handle_pain()
+	handle_stamina()
 
 /mob/living/carbon/human/get_stamina()
 	return stamina
@@ -136,7 +113,11 @@
 		return ONE_ATMOSPHERE + pressure_difference
 
 /mob/living/carbon/human/handle_impaired_vision()
-	..()
+
+	. = ..()
+	if(!.)
+		return
+
 	//Vision
 	var/obj/item/organ/vision
 	var/decl/bodytype/root_bodytype = get_bodytype()
@@ -155,10 +136,9 @@
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
-	if(stat != DEAD)
-		if ((disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
-			drop_held_items()
-			cough()
+	if(stat != DEAD && (disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
+		drop_held_items()
+		cough()
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(getFireLoss())
@@ -374,98 +354,82 @@
 		return TRUE
 
 /mob/living/carbon/human/handle_regular_status_updates()
-	if(!handle_some_updates())
-		return 0
 
-	if(status_flags & GODMODE)	return 0
+	voice = GetVoice()
+	SetName(get_visible_name())
 
-	update_health() // TODO: unify with parent call, Life() PR
-	//SSD check, if a logged player is awake put them back to sleep!
-	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
-		SET_STATUS_MAX(src, STAT_BLIND, 2)
-		set_status(STAT_SILENCE, 0)
-	else				//ALIVE. LIGHTS ARE ON
+	if(status_flags & GODMODE)
+		return FALSE
 
-		if(hallucination_power)
-			handle_hallucinations()
+	if(vsc.contaminant_control.CONTAMINATION_LOSS)
+		var/total_contamination= 0
+		for(var/obj/item/I in src)
+			if(I.contaminated)
+				total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
+		adjustToxLoss(total_contamination)
 
-		if(get_shock() >= species.total_health)
-			if(!stat)
-				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
-				src.visible_message("<B>[src]</B> [species.halloss_message]")
-			SET_STATUS_MAX(src, STAT_PARA, 10)
-
-		if(HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP))
-			SET_STATUS_MAX(src, STAT_BLIND, 2)
-			set_stat(UNCONSCIOUS)
-			animate_tail_reset()
-			adjustHalLoss(-3)
-
-			if(prob(2) && is_asystole() && isSynthetic())
-				visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
-		//CONSCIOUS
-		else
-			set_stat(CONSCIOUS)
-
-		// Check everything else.
-
-		//Periodically double-check embedded_flag
-		if(embedded_flag && !(life_tick % 10))
-			if(!embedded_needs_process())
-				embedded_flag = 0
-
-		//Resting
-		if(resting)
-			if(HAS_STATUS(src, STAT_DIZZY))
-				ADJ_STATUS(src, STAT_DIZZY, -15)
-			if(HAS_STATUS(src, STAT_JITTER))
-				ADJ_STATUS(src, STAT_JITTER, -15)
-			adjustHalLoss(-3)
-		else
-			if(HAS_STATUS(src, STAT_DIZZY))
-				ADJ_STATUS(src, STAT_DIZZY, -3)
-			if(HAS_STATUS(src, STAT_JITTER))
-				ADJ_STATUS(src, STAT_JITTER, -3)
-			adjustHalLoss(-1)
-
-		if(HAS_STATUS(src, STAT_DROWSY))
-			SET_STATUS_MAX(src, STAT_BLURRY, 2)
-			var/sleepy = GET_STATUS(src, STAT_DROWSY)
-			if(sleepy > 10)
-				var/zzzchance = min(5, 5*sleepy/30)
-				if((prob(zzzchance) || sleepy >= 60))
-					if(stat == CONSCIOUS)
-						to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
-					SET_STATUS_MAX(src, STAT_ASLEEP, 5)
-
-		// If you're dirty, your gloves will become dirty, too.
-		var/obj/item/gloves = get_equipped_item(slot_gloves_str)
-		if(gloves && germ_level > gloves.germ_level && prob(10))
-			gloves.germ_level += 1
-
-		if(vsc.contaminant_control.CONTAMINATION_LOSS)
-			var/total_contamination= 0
-			for(var/obj/item/I in src)
-				if(I.contaminated)
-					total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
-			adjustToxLoss(total_contamination)
-
-		if(stasis_value > 1 && GET_STATUS(src, STAT_DROWSY) < stasis_value * 4)
-			ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
-			if(!stat && prob(1))
-				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
-
-	return 1
-
-/mob/living/carbon/human/handle_regular_hud_updates()
-	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
-		handle_hud_list()
-
-	// now handle what we see on our screen
-
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 
+	if(hallucination_power)
+		handle_hallucinations()
+
+	if(get_shock() >= species.total_health)
+		if(!stat)
+			to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
+			src.visible_message("<B>[src]</B> [species.halloss_message]")
+		SET_STATUS_MAX(src, STAT_PARA, 10)
+
+	if(HAS_STATUS(src, STAT_PARA) || HAS_STATUS(src, STAT_ASLEEP))
+		set_stat(UNCONSCIOUS)
+		animate_tail_reset()
+		adjustHalLoss(-3)
+		if(prob(2) && is_asystole() && isSynthetic())
+			visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")].")
+	else
+		set_stat(CONSCIOUS)
+
+	// Check everything else.
+	//Periodically double-check embedded_flag
+	if(embedded_flag && !(life_tick % 10))
+		if(!embedded_needs_process())
+			embedded_flag = 0
+
+	//Resting
+	if(resting)
+		if(HAS_STATUS(src, STAT_DIZZY))
+			ADJ_STATUS(src, STAT_DIZZY, -15)
+		if(HAS_STATUS(src, STAT_JITTER))
+			ADJ_STATUS(src, STAT_JITTER, -15)
+		adjustHalLoss(-3)
+	else
+		if(HAS_STATUS(src, STAT_DIZZY))
+			ADJ_STATUS(src, STAT_DIZZY, -3)
+		if(HAS_STATUS(src, STAT_JITTER))
+			ADJ_STATUS(src, STAT_JITTER, -3)
+		adjustHalLoss(-1)
+
+	if(HAS_STATUS(src, STAT_DROWSY))
+		SET_STATUS_MAX(src, STAT_BLURRY, 2)
+		var/sleepy = GET_STATUS(src, STAT_DROWSY)
+		if(sleepy > 10)
+			var/zzzchance = min(5, 5*sleepy/30)
+			if((prob(zzzchance) || sleepy >= 60))
+				if(stat == CONSCIOUS)
+					to_chat(src, SPAN_NOTICE("You are about to fall asleep..."))
+				SET_STATUS_MAX(src, STAT_ASLEEP, 5)
+
+
+/mob/living/carbon/human/handle_regular_hud_updates()
+	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
+	if(life_tick%30==15)
+		hud_updateflag = 1022
+	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
+		handle_hud_list()
+	. = ..()
+	if(!.)
+		return
 	if(stat != DEAD)
 		var/half_health = get_max_health()/2
 		if(stat == UNCONSCIOUS && current_health < half_health)

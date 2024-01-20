@@ -59,8 +59,6 @@ var/global/list/possible_say_verbs = list(
 	var/pai_law0 = "Serve your master."
 	var/pai_laws				// String for additional operating instructions our master might give us
 
-	var/silence_time			// Timestamp when we were silenced (normally via EMP burst), set to null after silence has faded
-
 // Various software-specific vars
 
 	var/secHUD = 0			// Toggles whether the Security HUD is active or not
@@ -115,9 +113,8 @@ var/global/list/possible_say_verbs = list(
 
 // this function shows the information about being silenced as a pAI in the Status panel
 /mob/living/silicon/pai/proc/show_silenced()
-	if(silence_time)
-		var/timeleft = round((silence_time - world.timeofday)/10 ,1)
-		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+	var/timeleft = round((HAS_STATUS(src, STAT_SILENCE) * SSmobs.wait) / 10, 1)
+	stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
 
 /mob/living/silicon/pai/Stat()
 	. = ..()
@@ -140,7 +137,7 @@ var/global/list/possible_say_verbs = list(
 		// 33% chance to change prime directive (based on severity)
 		// 33% chance of no additional effect
 
-	silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
+	SET_STATUS_MAX(src, STAT_SILENCE, 2 MINUTES)
 	to_chat(src, SPAN_DANGER("<b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b>"))
 	if(prob(20))
 		visible_message( \

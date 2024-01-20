@@ -119,7 +119,7 @@
 	hitsound = 'sound/weapons/heavysmash.ogg'
 	force = 30
 
-/mob/living/simple_animal/construct/armoured/Life()
+/mob/living/simple_animal/construct/armoured/handle_regular_status_updates()
 	set_status(STAT_WEAK, 0)
 	if ((. = ..()))
 		return
@@ -248,17 +248,21 @@
 	force = 25
 
 ////////////////HUD//////////////////////
+/mob/living/simple_animal/construct/handle_regular_status_updates()
+	. = ..()
+	if(.)
+		silence_spells(purge)
 
-/mob/living/simple_animal/construct/Life()
+/mob/living/simple_animal/construct/handle_regular_hud_updates()
 	. = ..()
 	if(.)
 		if(fire)
 			fire.icon_state = "fire[!!fire_alert]"
 		silence_spells(purge)
 
-/mob/living/simple_animal/construct/armoured/Life()
+/mob/living/simple_animal/construct/armoured/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(250 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if(208 to 249)			healths.icon_state = "juggernaut_health1"
@@ -270,9 +274,9 @@
 			else					healths.icon_state = "juggernaut_health7"
 
 
-/mob/living/simple_animal/construct/behemoth/Life()
+/mob/living/simple_animal/construct/behemoth/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(750 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if(625 to 749)			healths.icon_state = "juggernaut_health1"
@@ -283,9 +287,9 @@
 			if(1 to 124)			healths.icon_state = "juggernaut_health6"
 			else					healths.icon_state = "juggernaut_health7"
 
-/mob/living/simple_animal/construct/builder/Life()
+/mob/living/simple_animal/construct/builder/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(50 to INFINITY)		healths.icon_state = "artificer_health0"
 			if(42 to 49)			healths.icon_state = "artificer_health1"
@@ -298,9 +302,9 @@
 
 
 
-/mob/living/simple_animal/construct/wraith/Life()
+/mob/living/simple_animal/construct/wraith/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(75 to INFINITY)		healths.icon_state = "wraith_health0"
 			if(62 to 74)			healths.icon_state = "wraith_health1"
@@ -312,9 +316,9 @@
 			else					healths.icon_state = "wraith_health7"
 
 
-/mob/living/simple_animal/construct/harvester/Life()
+/mob/living/simple_animal/construct/harvester/handle_regular_hud_updates()
 	. = ..()
-	if(healths)
+	if(. && healths)
 		switch(current_health)
 			if(150 to INFINITY)		healths.icon_state = "harvester_health0"
 			if(125 to 149)			healths.icon_state = "harvester_health1"

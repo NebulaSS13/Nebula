@@ -1,13 +1,3 @@
-// Alien larva are quite simple.
-/mob/living/carbon/alien/Life()
-	set invisibility = FALSE
-	set background = TRUE
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))	return
-	if(!loc)			return
-	..()
-	//Status updates, death etc.
-	update_icon()
-
 /mob/living/carbon/alien/handle_mutations_and_radiation()
 	..()
 	if(radiation)
@@ -20,44 +10,46 @@
 
 /mob/living/carbon/alien/handle_regular_status_updates()
 
-	if(status_flags & GODMODE)	return 0
+	. = ..()
 
-	update_health() // TODO: unify with parent call, Life() PR
 	if(stat == DEAD)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		set_status(STAT_SILENCE, 0)
-	else
-		if(stat == DEAD)
-			return 1
-		if(HAS_STATUS(src, STAT_PARA))
-			SET_STATUS_MAX(src, STAT_BLIND, 2)
-			set_stat(UNCONSCIOUS)
-			if(getHalLoss() > 0)
-				adjustHalLoss(-3)
-
-		if(HAS_STATUS(src, STAT_ASLEEP))
+	else if(HAS_STATUS(src, STAT_PARA))
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
+		set_stat(UNCONSCIOUS)
+		if(getHalLoss() > 0)
 			adjustHalLoss(-3)
-			SET_STATUS_MAX(src, STAT_BLIND, 2)
-			set_stat(UNCONSCIOUS)
-		else if(resting)
-			if(getHalLoss() > 0)
-				adjustHalLoss(-3)
+	if(HAS_STATUS(src, STAT_ASLEEP))
+		adjustHalLoss(-3)
+		if (mind)
+			if(mind.active && client != null)
+				ADJ_STATUS(src, STAT_ASLEEP, -1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
+		set_stat(UNCONSCIOUS)
+	else if(resting)
+		if(getHalLoss() > 0)
+			adjustHalLoss(-3)
+	else
+		set_stat(CONSCIOUS)
+		if(getHalLoss() > 0)
+			adjustHalLoss(-1)
 
-		else
-			set_stat(CONSCIOUS)
-			if(getHalLoss() > 0)
-				adjustHalLoss(-1)
-
-		// Eyes and blindness.
-		if(!check_has_eyes())
-			SET_STATUS_MAX(src, STAT_BLIND, 2)
-			SET_STATUS_MAX(src, STAT_BLURRY, 1)
-
-		update_icon()
-
-	return 1
+	// Eyes and blindness.
+	if(!check_has_eyes())
+		set_status(STAT_BLIND, 1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
+		set_status(STAT_BLURRY, 1)
+	else if(GET_STATUS(src, STAT_BLIND))
+		ADJ_STATUS(src, STAT_BLIND, -1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
+	update_icon()
+	return TRUE
 
 /mob/living/carbon/alien/handle_regular_hud_updates()
+	. = ..()
+	if(!.)
+		return
 	update_sight()
 	if (healths)
 		if(stat != DEAD)
@@ -90,7 +82,6 @@
 		if(machine)
 			if(machine.check_eye(src) < 0)
 				reset_view(null)
-	return 1
 
 /mob/living/carbon/alien/handle_environment(var/datum/gas_mixture/environment)
 	..()
