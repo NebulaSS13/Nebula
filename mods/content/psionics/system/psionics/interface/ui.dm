@@ -1,6 +1,5 @@
 /obj/screen/psi
 	icon = 'mods/content/psionics/icons/psi.dmi'
-	var/mob/living/owner
 	var/hidden = TRUE
 
 /obj/screen/psi/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)

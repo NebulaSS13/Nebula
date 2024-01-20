@@ -5,7 +5,8 @@
 
 /obj/screen/psi/armour/on_update_icon()
 	..()
-	if(invisibility == 0)
+	var/mob/living/owner = owner_ref.resolve()
+	if(istype(owner) && invisibility == 0)
 		icon_state = owner?.psi.use_psi_armour ? "psiarmour_on" : "psiarmour_off"
 
 /obj/screen/psi/armour/handle_click(mob/user, params)
