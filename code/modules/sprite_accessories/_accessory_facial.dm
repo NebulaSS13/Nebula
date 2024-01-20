@@ -19,7 +19,8 @@
 /decl/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
 	icon_state = "bald"
-	required_gender = null
+	bodytypes_allowed = null
+	bodytypes_denied = null
 	species_allowed = null
 	subspecies_allowed = null
 	bodytype_categories_allowed = null
