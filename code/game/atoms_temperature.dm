@@ -24,8 +24,8 @@
 	if(!ATOM_SHOULD_TEMPERATURE_ENQUEUE(src))
 		return FALSE
 
-	var/diff_temp = (adjust_temp - temperature)
-	if(diff_temp <= 0)
+	var/diff_temp = round(adjust_temp - temperature, 0.1)
+	if(diff_temp <= 0.1)
 		return FALSE
 
 	// Show a little message for people heating beakers with welding torches.
