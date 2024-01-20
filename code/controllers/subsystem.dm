@@ -43,6 +43,8 @@
 
 	var/static/list/failure_strikes //How many times we suspect a subsystem type has crashed the MC, 3 strikes and you're out!
 
+	var/_internal_name //! A stringified version of the variable name for this subsystem. Used by the processing subsystem to make sure is_processing is unset properly.
+
 //Do not override
 ///datum/controller/subsystem/New()
 
