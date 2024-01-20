@@ -25,13 +25,13 @@
 			forceMove(get_turf(origin))
 		prepared_maneuver.perform(src, check, get_acrobatics_multiplier(prepared_maneuver), reflexively = TRUE)
 		prepared_maneuver = null
-		maneuver_icon.icon_state = "maneuver_off"
+		maneuver_icon?.icon_state = "maneuver_off"
 
 /mob/living/proc/try_maneuver(var/atom/target)
 	if(prepared_maneuver && (isturf(target) || isturf(target.loc))) // Avoid trying to jump at your backpack contents.
 		prepared_maneuver.perform(src, get_turf(target), get_acrobatics_multiplier(prepared_maneuver))
 		prepared_maneuver = null
-		maneuver_icon.icon_state = "maneuver_off"
+		maneuver_icon?.icon_state = "maneuver_off"
 		return TRUE
 	return FALSE
 
@@ -59,11 +59,11 @@
 		if(!maneuver.can_be_used_by(src, null))
 			return
 		prepared_maneuver = maneuver
-		maneuver_icon.icon_state = "maneuver_on"
+		maneuver_icon?.icon_state = "maneuver_on"
 		to_chat(src, SPAN_NOTICE("You prepare to [prepared_maneuver.name]."))
 	else
 		prepared_maneuver = null
-		maneuver_icon.icon_state = "maneuver_off"
+		maneuver_icon?.icon_state = "maneuver_off"
 		to_chat(src, SPAN_NOTICE("You are no longer preparing to perform a maneuver."))
 
 /mob/living/proc/perform_maneuver(var/maneuver, var/atom/target)
@@ -71,7 +71,7 @@
 	if(istype(performing_maneuver))
 		. = performing_maneuver.perform(src, target, get_acrobatics_multiplier(performing_maneuver))
 		prepared_maneuver = null
-		maneuver_icon.icon_state = "maneuver_off"
+		maneuver_icon?.icon_state = "maneuver_off"
 
 /mob/living/proc/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
 	return 1
