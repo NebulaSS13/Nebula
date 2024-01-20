@@ -187,7 +187,11 @@
 		return species.can_fall(src)
 
 /atom/movable/proc/protected_from_fall_damage(var/turf/landing)
-	return !!(locate(/obj/structure/stairs) in landing)
+	if(!!(locate(/obj/structure/stairs) in landing))
+		return TRUE
+	var/turf/exterior/wall/ramp = landing
+	if(istype(ramp) && ramp.ramp_slope_direction) // walking down a ramp
+		return TRUE
 
 /mob/protected_from_fall_damage(var/turf/landing)
 	. = ..()

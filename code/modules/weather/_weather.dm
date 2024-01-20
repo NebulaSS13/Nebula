@@ -23,12 +23,13 @@
  */
 
 /obj/abstract/weather_system
-	plane =            DEFAULT_PLANE
-	layer =            ABOVE_PROJECTILE_LAYER
-	icon =             'icons/effects/weather.dmi'
-	icon_state =       "blank"
-	invisibility =     INVISIBILITY_NONE
-	appearance_flags = (RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM)
+	plane             = DEFAULT_PLANE
+	layer             = ABOVE_PROJECTILE_LAYER
+	icon              = 'icons/effects/weather.dmi'
+	icon_state        = "blank"
+	invisibility      = INVISIBILITY_NONE
+	appearance_flags  = (RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM)
+	is_spawnable_type = FALSE
 
 	var/water_material = /decl/material/liquid/water     // Material to use for the properties of rain.
 	var/ice_material =   /decl/material/solid/ice        // Material to use for the properties of snow and hail.
@@ -91,9 +92,10 @@
 
 // Dummy object for lightning flash animation.
 /obj/abstract/lightning_overlay
-	plane = EMISSIVE_PLANE
-	layer = ABOVE_LIGHTING_LAYER
-	icon = 'icons/effects/weather.dmi'
-	icon_state = "full"
-	alpha = 0
-	invisibility = INVISIBILITY_NONE
+	plane             = EMISSIVE_PLANE
+	layer             = ABOVE_LIGHTING_LAYER
+	icon              = 'icons/effects/weather.dmi'
+	icon_state        = "full"
+	alpha             = 0
+	invisibility      = INVISIBILITY_NONE
+	is_spawnable_type = FALSE

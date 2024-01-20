@@ -1,10 +1,12 @@
 /obj/abstract/submap_landmark
-	icon = 'icons/misc/mark.dmi'
-	invisibility = INVISIBILITY_MAXIMUM
-	anchored = TRUE
-	simulated = FALSE
-	density = FALSE
-	opacity = FALSE
+	icon              = 'icons/misc/mark.dmi'
+	invisibility      = INVISIBILITY_MAXIMUM
+	anchored          = TRUE
+	simulated         = FALSE
+	density           = FALSE
+	opacity           = FALSE
+	abstract_type     = /obj/abstract/submap_landmark
+	is_spawnable_type = FALSE
 
 /obj/abstract/submap_landmark/joinable_submap
 	icon_state = "x4"
