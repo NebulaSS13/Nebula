@@ -36,37 +36,36 @@
 	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color_verb
 	verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/proc/get_eye_cache_key()
+/obj/item/organ/internal/eyes/proc/get_onhead_icon()
 	last_cached_eye_colour = eye_colour
 	last_eye_cache_key = "[type]-[bodytype.eye_icon]-[last_cached_eye_colour]-[bodytype.eye_offset]"
-	return last_eye_cache_key
-
-/obj/item/organ/internal/eyes/proc/get_onhead_icon()
-	var/cache_key = get_eye_cache_key()
-	if(!human_icon_cache[cache_key])
+	if(!bodytype.eye_icon)
+		return
+	if(!global.eye_icon_cache[last_eye_cache_key])
 		var/icon/eyes_icon = icon(icon = bodytype.eye_icon, icon_state = "")
 		if(bodytype.eye_offset)
 			eyes_icon.Shift(NORTH, bodytype.eye_offset)
 		if(bodytype.apply_eye_colour)
 			eyes_icon.Blend(last_cached_eye_colour, bodytype.eye_blend)
-		human_icon_cache[cache_key] = eyes_icon
-	return human_icon_cache[cache_key]
-
-/obj/item/organ/internal/eyes/proc/get_special_overlay()
-	var/icon/I = get_onhead_icon()
-	if(I)
-		var/cache_key = "[last_eye_cache_key]-glow"
-		if(!human_icon_cache[cache_key])
-			human_icon_cache[cache_key] = emissive_overlay(I, "")
-		return human_icon_cache[cache_key]
+		global.eye_icon_cache[last_eye_cache_key] = eyes_icon
+	return global.eye_icon_cache[last_eye_cache_key]
 
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
 		return
+	// Update our eye colour.
+	var/new_eye_colour
 	if(owner.has_chemical_effect(CE_GLOWINGEYES, 1))
-		eye_colour = "#75bdd6" // blue glow, hardcoded for now.
+		new_eye_colour = "#75bdd6" // blue glow, hardcoded for now.
 	else
-		eye_colour = owner.get_eye_colour()
+		new_eye_colour = owner.get_eye_colour()
+
+	if(new_eye_colour && eye_colour != new_eye_colour)
+		eye_colour = new_eye_colour
+		// Clear the head cache key so they can update their cached icon.
+		var/obj/item/organ/external/head/head = GET_EXTERNAL_ORGAN(owner, BP_HEAD)
+		if(istype(head))
+			head._icon_cache_key = null
 
 /obj/item/organ/internal/eyes/take_internal_damage(amount, var/silent=0)
 	var/oldbroken = is_broken()

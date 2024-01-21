@@ -244,7 +244,6 @@ var/global/list/time_prefs_fixed = list()
 	var/obj/screen/setup_preview/bg/BG = LAZYACCESS(char_render_holders, "BG")
 	if(!BG)
 		BG = new
-		BG.icon = 'icons/effects/32x32.dmi'
 		BG.pref = src
 		LAZYSET(char_render_holders, "BG", BG)
 		client.screen |= BG

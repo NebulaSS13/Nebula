@@ -104,13 +104,13 @@
 
 /obj/item/clothing/head/helmet/space/on_update_icon(mob/user)
 	. = ..()
-	var/base_icon = get_world_inventory_state()
-	if(!base_icon)
-		base_icon = initial(icon_state)
-	if(tint && check_state_in_icon("[base_icon]_dark", icon))
-		icon_state = "[base_icon]_dark"
+	var/base_icon_state = get_world_inventory_state()
+	if(!base_icon_state)
+		base_icon_state = initial(icon_state)
+	if(tint && check_state_in_icon("[base_icon_state]_dark", icon))
+		icon_state = "[base_icon_state]_dark"
 	else
-		icon_state = base_icon
+		icon_state = base_icon_state
 
 /obj/item/clothing/suit/space
 	name = "space suit"

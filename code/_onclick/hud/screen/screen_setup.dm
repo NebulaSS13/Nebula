@@ -1,5 +1,6 @@
 // Character setup stuff
 /obj/screen/setup_preview
+	icon = 'icons/effects/32x32.dmi'
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 	requires_owner = FALSE

@@ -6,7 +6,7 @@
 
 	var/damage_multiplier = 1 //multiplies melee combat damage
 
-	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
+	var/lip_color = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
 	var/list/worn_underwear = list()
 
