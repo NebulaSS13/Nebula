@@ -27,9 +27,8 @@
 		to_chat(user, (distance == 0 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
 
 /obj/item/weldingtool/electric/afterattack(var/obj/O, var/mob/user, var/proximity)
-	if(proximity && istype(O, /obj/structure/reagent_dispensers/fueltank))
-		if(!welding)
-			to_chat(user, SPAN_WARNING("\The [src] runs on an internal charge and does not need to be refuelled."))
+	if(proximity && istype(O, /obj/structure/reagent_dispensers/fueltank) && !welding)
+		to_chat(user, SPAN_WARNING("\The [src] runs on an internal charge and does not need to be refuelled."))
 		return
 	. = ..()
 
