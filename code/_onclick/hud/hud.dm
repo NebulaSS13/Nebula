@@ -152,7 +152,7 @@
 		gripper_datums += mymob.get_inventory_slot_datum(hand_tag)
 	gripper_datums = sortTim(gripper_datums, /proc/cmp_gripper_asc)
 
-	for(var/datum/inventory_slot/inv_slot in gripper_datums)
+	for(var/datum/inventory_slot/gripper/inv_slot in gripper_datums)
 
 		// Re-order the held slot list so it aligns with the display order.
 		var/hand_tag = inv_slot.slot_id
@@ -176,7 +176,7 @@
 		inv_box.icon_state = "hand_base"
 
 		inv_box.cut_overlays()
-		inv_box.add_overlay("hand_[hand_tag]", TRUE)
+		inv_box.add_overlay("hand_[inv_slot.hand_overlay || hand_tag]", TRUE)
 		if(inv_slot.ui_label)
 			inv_box.add_overlay("hand_[inv_slot.ui_label]", TRUE)
 		inv_box.update_icon()
@@ -211,8 +211,8 @@
 			inv_box = sublist[2]
 			inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
 		hand_y_offset += world.icon_size
-		if(mymob.client)
-			mymob.client.screen |= inv_box
+	if(mymob.client)
+		mymob.client.screen |= hand_hud_objects
 
 	// Make sure all held items are on the screen and set to the correct screen loc.
 	var/datum/inventory_slot/inv_slot
