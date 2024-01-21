@@ -21,8 +21,8 @@
 	)
 	override_limb_types  = list(BP_TAIL = /obj/item/organ/external/tail/avian)
 	default_sprite_accessories = list(
-		/decl/sprite_accessory_category/markings = list(/decl/sprite_accessory/marking/avian = "#454545"),
-		/decl/sprite_accessory_category/hair     = list(/decl/sprite_accessory/hair/avian    = "#252525")
+		SAC_HAIR     = list(/decl/sprite_accessory/hair/avian    = "#252525"),
+		SAC_MARKINGS = list(/decl/sprite_accessory/marking/avian = "#454545")
 	)
 
 	heat_discomfort_strings = list(

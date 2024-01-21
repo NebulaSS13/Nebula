@@ -48,7 +48,7 @@
 
 	if(href_list["hair"])
 		var/decl/sprite_accessory/hair = locate(href_list["hair"])
-		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_valid_hairstyle_types()) && SET_HAIR_STYLE(owner, hair.type, FALSE))
+		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_HAIR)) && SET_HAIR_STYLE(owner, hair.type, FALSE))
 			update_dna()
 			return TRUE
 
@@ -60,7 +60,7 @@
 
 	if(href_list["facial_hair"])
 		var/decl/sprite_accessory/facial_hair = locate(href_list["facial_hair"])
-		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_valid_facial_hairstyle_types()) && SET_FACIAL_HAIR_STYLE(owner, facial_hair.type, FALSE))
+		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_FACIAL_HAIR)) && SET_FACIAL_HAIR_STYLE(owner, facial_hair.type, FALSE))
 			update_dna()
 			return TRUE
 
@@ -115,7 +115,7 @@
 
 	if(data["change_hair"])
 		var/hair_styles[0]
-		for(var/hair_style in owner.get_valid_hairstyle_types())
+		for(var/hair_style in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_HAIR))
 			var/decl/sprite_accessory/hair_decl = GET_DECL(hair_style)
 			hair_styles[++hair_styles.len] = list("hairstyle" = hair_decl.name, "ref" = "\ref[hair_decl]")
 		data["hair_styles"] = hair_styles
@@ -126,7 +126,7 @@
 	data["change_facial_hair"] = can_change(APPEARANCE_FACIAL_HAIR)
 	if(data["change_facial_hair"])
 		var/facial_hair_styles[0]
-		for(var/facial_hair_style in owner.get_valid_facial_hairstyle_types())
+		for(var/facial_hair_style in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_FACIAL_HAIR))
 			var/decl/sprite_accessory/facial_hair_decl = GET_DECL(facial_hair_style)
 			facial_hair_styles[++facial_hair_styles.len] = list("facialhairstyle" = facial_hair_decl.name, "ref" = "\ref[facial_hair_decl]")
 		data["facial_hair_styles"] = facial_hair_styles

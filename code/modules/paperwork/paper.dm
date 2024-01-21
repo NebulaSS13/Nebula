@@ -163,11 +163,11 @@
 		return TRUE
 
 	target_zone = check_zone(target_zone)
-	if(M.get_organ_sprite_accessory_by_category(/decl/sprite_accessory_category/cosmetics, target_zone))
+	if(M.get_organ_sprite_accessory_by_category(SAC_COSMETICS, target_zone))
 		var/mob/living/carbon/human/H = M
 		if(H == user)
 			to_chat(user, SPAN_NOTICE("You wipe off the makeup with [src]."))
-			H.set_organ_sprite_accessory_by_category(null, /decl/sprite_accessory_category/cosmetics, null, FALSE, FALSE, target_zone, FALSE)
+			H.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 			return TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] begins to wipe \the [H]'s makeup  off with \the [src]."),
@@ -178,7 +178,7 @@
 				SPAN_NOTICE("\The [user] wipes \the [H]'s makeup  off with \the [src]."),
 				SPAN_NOTICE("You wipe off \the [H]'s makeup .")
 			)
-		H.set_organ_sprite_accessory_by_category(null, /decl/sprite_accessory_category/cosmetics, null, FALSE, FALSE, target_zone, FALSE)
+		H.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 		return TRUE
 
 	. = ..()

@@ -1,16 +1,11 @@
 /decl/sprite_accessory/horns/lizard
 	name = "Lizard Horns"
-	icon = 'mods/species/bayliens/unathi/icons/hair.dmi'
+	icon = 'mods/species/bayliens/unathi/icons/horns.dmi'
 	icon_state = "horns"
 	species_allowed = list(SPECIES_LIZARD)
 	color_blend = ICON_MULTIPLY
 	accessory_flags = VERY_SHORT
 	uid = "acc_hair_una_horns"
-
-/decl/sprite_accessory/horns/lizard/hood
-	name = "Lizard Cobra Hood"
-	icon_state = "cobrahood"
-	uid = "acc_hair_una_cobra"
 
 /decl/sprite_accessory/horns/lizard/spines_long
 	name = "Lizard Spines Long"
@@ -21,26 +16,6 @@
 	name = "Lizard Spines Short"
 	icon_state = "spines_short"
 	uid = "acc_hair_una_shortspines"
-
-/decl/sprite_accessory/horns/lizard/frills_aqua
-	name = "Lizard Frills Aqua"
-	icon_state = "frills_aqua"
-	uid = "acc_hair_una_aqua"
-
-/decl/sprite_accessory/horns/lizard/frills_long
-	name = "Lizard Frills Long"
-	icon_state = "frills_long"
-	uid = "acc_hair_una_longfrills"
-
-/decl/sprite_accessory/horns/lizard/frills_short
-	name = "Lizard Frills Short"
-	icon_state = "frills_short"
-	uid = "acc_hair_una_shortfrills"
-
-/decl/sprite_accessory/horns/lizard/sidefrills
-	name = "Lizard Frills Side"
-	icon_state = "frills_side"
-	uid = "acc_hair_una_sidefrills"
 
 /decl/sprite_accessory/horns/lizard/bighorns
 	name = "Lizard Horns Big"
@@ -77,36 +52,61 @@
 	icon_state = "horns_double"
 	uid = "acc_hair_una_doublehorns"
 
-/decl/sprite_accessory/horns/lizard/spinedfrillslong
-	name = "Lizard Spined Long Frills"
-	icon_state = "spined_long_frills"
-	uid = "acc_hair_una_longspinedfrills"
-
-/decl/sprite_accessory/horns/lizard/spinedfrillsshort
-	name = "Lizard Spined Short Frills"
-	icon_state = "spined_short_frills"
-	uid = "acc_hair_una_shortspinedfrills"
-
-// FACIAL
-/decl/sprite_accessory/facial_hair/lizard
+/decl/sprite_accessory/horns/lizard/chin
 	name = "Lizard Horn Chin"
-	icon = 'mods/species/bayliens/unathi/icons/facial.dmi'
 	icon_state = "facial_chinhorns"
-	species_allowed = list(SPECIES_LIZARD)
-	color_blend = ICON_MULTIPLY
 	uid = "acc_fhair_una_chinhorns"
 
-/decl/sprite_accessory/facial_hair/lizard/hornadorns
+/decl/sprite_accessory/horns/lizard/hornadorns
 	name = "Lizard Horn Adorns"
 	icon_state = "facial_hornadorns"
 	uid = "acc_fhair_una_adorns"
 
-/decl/sprite_accessory/facial_hair/lizard/spinespikes
+/decl/sprite_accessory/horns/lizard/spinespikes
 	name = "Lizard Spine Spikes"
 	icon_state = "facial_spikes"
 	uid = "acc_fhair_una_spinespikes"
 
-/decl/sprite_accessory/facial_hair/lizard/dorsalfrill
+/decl/sprite_accessory/frills/lizard
+	name = "Lizard Frills Aqua"
+	icon = 'mods/species/bayliens/unathi/icons/frills.dmi'
+	icon_state = "frills_aqua"
+	species_allowed = list(SPECIES_LIZARD)
+	color_blend = ICON_MULTIPLY
+	accessory_flags = VERY_SHORT
+	uid = "acc_hair_una_aqua"
+
+/decl/sprite_accessory/frills/lizard/hood
+	name = "Lizard Cobra Hood"
+	icon_state = "cobrahood"
+	uid = "acc_hair_una_cobra"
+
+/decl/sprite_accessory/frills/lizard/frills_long
+	name = "Lizard Frills Long"
+	icon_state = "frills_long"
+	uid = "acc_hair_una_longfrills"
+
+/decl/sprite_accessory/frills/lizard/frills_short
+	name = "Lizard Frills Short"
+	icon_state = "frills_short"
+	uid = "acc_hair_una_shortfrills"
+
+/decl/sprite_accessory/frills/lizard/sidefrills
+	name = "Lizard Frills Side"
+	icon_state = "frills_side"
+	uid = "acc_hair_una_sidefrills"
+
+/decl/sprite_accessory/frills/lizard/spinedfrillslong
+	name = "Lizard Spined Long Frills"
+	icon_state = "spined_long_frills"
+	uid = "acc_hair_una_longspinedfrills"
+
+/decl/sprite_accessory/frills/lizard/spinedfrillsshort
+	name = "Lizard Spined Short Frills"
+	icon_state = "spined_short_frills"
+	uid = "acc_hair_una_shortspinedfrills"
+
+/decl/sprite_accessory/frills/lizard/dorsalfrill
 	name = "Lizard Frill Dorsal"
 	icon_state = "facial_dorsalfrill"
 	uid = "acc_fhair_una_dorsalfrill"

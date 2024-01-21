@@ -22,7 +22,7 @@
 		BP_CELL  = /obj/item/organ/internal/cell
 	)
 	default_sprite_accessories = list(
-		/decl/sprite_accessory_category/markings = list(
+		SAC_MARKINGS = list(
 			/decl/sprite_accessory/marking/frame/plating = "#8888cc",
 			/decl/sprite_accessory/marking/frame/plating/legs = "#8888cc",
 			/decl/sprite_accessory/marking/frame/plating/head = "#8888cc"

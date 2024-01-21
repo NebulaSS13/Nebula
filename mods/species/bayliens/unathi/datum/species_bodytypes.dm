@@ -18,8 +18,8 @@
 	eye_flash_mod = 1.2
 
 	default_sprite_accessories = list(
-		/decl/sprite_accessory_category/horns = list(
-			/decl/sprite_accessory/horns/lizard/frills_long = "#192e19"
+		SAC_FRILLS = list(
+			/decl/sprite_accessory/frills/lizard/frills_long = "#192e19"
 		)
 	)
 

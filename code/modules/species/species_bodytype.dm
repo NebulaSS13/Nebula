@@ -290,8 +290,8 @@ var/global/list/bodytypes_by_category = list()
 				continue
 			if(acc_decl.accessory_category != acc_cat.type)
 				. += "accessory category [acc_decl.accessory_category || "null"] does not match [acc_cat.type]"
-			if(!istype(acc_decl, acc_cat.default_accessory))
-				. += "accessory type does not align with category default accessory: [acc_cat.default_accessory || "null"]"
+			if(!istype(acc_decl, acc_cat.base_accessory_type))
+				. += "accessory type [acc_decl.type] does not align with category base accessory: [acc_cat.base_accessory_type || "null"]"
 
 	var/list/tail_data = has_limbs[BP_TAIL]
 	if(tail_data)

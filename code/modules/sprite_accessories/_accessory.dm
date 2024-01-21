@@ -67,6 +67,8 @@
 	var/is_heritable = FALSE
 	/// What category does this accessory fall under?
 	var/accessory_category
+	/// Whether or not this accessory should be drawn on the mob at all.
+	var/draw_accessory = TRUE
 
 /decl/sprite_accessory/proc/refresh_mob(var/mob/living/subject)
 	return

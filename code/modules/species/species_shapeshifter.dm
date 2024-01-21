@@ -55,12 +55,12 @@ var/global/list/wrapped_species_by_ref = list()
 
 	visible_message("<span class='notice'>\The [src]'s form contorts subtly.</span>")
 	var/decl/bodytype/root_bodytype = get_bodytype()
-	var/list/hairstyles = species.get_hair_styles(root_bodytype)
+	var/list/hairstyles = species.get_available_accessory_types(root_bodytype, SAC_HAIR)
 	if(length(hairstyles))
 		var/decl/sprite_accessory/new_hair = input("Select a hairstyle.", "Shapeshifter Hair") as null|anything in hairstyles
 		SET_HAIR_STYLE(src, (new_hair ? new_hair.type : /decl/sprite_accessory/hair/bald), FALSE)
 
-	var/list/beardstyles = species.get_facial_hair_styles(root_bodytype)
+	var/list/beardstyles = species.get_available_accessory_types(root_bodytype, SAC_FACIAL_HAIR)
 	if(length(beardstyles))
 		var/decl/sprite_accessory/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in beardstyles
 		SET_FACIAL_HAIR_STYLE(src, (new_hair ? new_hair.type : /decl/sprite_accessory/facial_hair/shaved), FALSE)

@@ -25,10 +25,10 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	// A list of customization categories made available in character preferences.
 	var/list/available_accessory_categories = list(
-		/decl/sprite_accessory_category/hair,
-		/decl/sprite_accessory_category/facial_hair,
-		/decl/sprite_accessory_category/cosmetics,
-		/decl/sprite_accessory_category/markings,
+		SAC_HAIR,
+		SAC_FACIAL_HAIR,
+		SAC_COSMETICS,
+		SAC_MARKINGS
 	)
 
 	// Lists of accessory types for modpack modification of accessory restrictions.
@@ -36,6 +36,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	// them for fine detail restriction/allowing if you can avoid it.
 	var/list/allow_specific_sprite_accessories
 	var/list/disallow_specific_sprite_accessories
+	var/list/accessory_styles
 
 	var/list/blood_types = list(
 		/decl/blood_type/aplus,
@@ -51,8 +52,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
 
-	var/static/list/hair_styles
-	var/static/list/facial_hair_styles
 
 	var/organs_icon		//species specific internal organs icons
 
@@ -681,55 +680,27 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/pronouns/G = H.get_pronouns()
 	return SPAN_DANGER("[G.His] face is horribly mangled!\n")
 
-/decl/species/proc/get_hair_style_types(var/decl/bodytype/bodytype)
+/decl/species/proc/get_available_accessories(var/decl/bodytype/bodytype, accessory_category)
+	. = list()
+	for(var/accessory in get_available_accessory_types(bodytype, accessory_category))
+		. += GET_DECL(accessory)
+
+/decl/species/proc/get_available_accessory_types(bodytype, accessory_category)
 	if(!bodytype)
 		bodytype = default_bodytype
-	var/list/hair_styles_by_species = LAZYACCESS(hair_styles, type)
-	if(!hair_styles_by_species)
-		hair_styles_by_species = list()
-		LAZYSET(hair_styles, type, hair_styles_by_species)
-	var/list/hair_style_by_bodytype = hair_styles_by_species[bodytype]
-	if(!hair_style_by_bodytype)
-		hair_style_by_bodytype = list()
-		LAZYSET(hair_styles_by_species, bodytype, hair_style_by_bodytype)
-		var/list/all_hairstyles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
-		for(var/hairstyle in all_hairstyles)
-			var/decl/sprite_accessory/S = all_hairstyles[hairstyle]
-			if(!S.accessory_is_available(null, src, bodytype))
+	var/list/available_accessories = LAZYACCESS(accessory_styles, accessory_category)
+	if(!available_accessories)
+		available_accessories = list()
+		LAZYSET(accessory_styles, accessory_category, available_accessories)
+		var/decl/sprite_accessory_category/accessory_category_decl = GET_DECL(accessory_category)
+		var/list/all_accessories = decls_repository.get_decls_of_subtype(accessory_category_decl.base_accessory_type)
+		for(var/accessory_style in all_accessories)
+			var/decl/sprite_accessory/check_accessory = all_accessories[accessory_style]
+			if(!check_accessory || !check_accessory.accessory_is_available(null, src, bodytype))
 				continue
-			ADD_SORTED(hair_style_by_bodytype, hairstyle, /proc/cmp_text_asc)
-			hair_style_by_bodytype[hairstyle] = S
-	return hair_style_by_bodytype
-
-/decl/species/proc/get_hair_styles(var/decl/bodytype/bodytype)
-	. = list()
-	for(var/hair in get_hair_style_types(bodytype))
-		. += GET_DECL(hair)
-
-/decl/species/proc/get_facial_hair_style_types(var/decl/bodytype/bodytype)
-	if(!bodytype)
-		bodytype = default_bodytype
-	var/list/facial_hair_styles_by_species = LAZYACCESS(facial_hair_styles, type)
-	if(!facial_hair_styles_by_species)
-		facial_hair_styles_by_species = list()
-		LAZYSET(facial_hair_styles, type, facial_hair_styles_by_species)
-	var/list/facial_hair_style_by_bodytype = facial_hair_styles_by_species[bodytype]
-	if(!facial_hair_style_by_bodytype)
-		facial_hair_style_by_bodytype = list()
-		LAZYSET(facial_hair_styles_by_species, bodytype, facial_hair_style_by_bodytype)
-		var/list/all_facial_styles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
-		for(var/facialhairstyle in all_facial_styles)
-			var/decl/sprite_accessory/S = all_facial_styles[facialhairstyle]
-			if(!S.accessory_is_available(null, src, bodytype))
-				continue
-			ADD_SORTED(facial_hair_style_by_bodytype, facialhairstyle, /proc/cmp_text_asc)
-			facial_hair_style_by_bodytype[facialhairstyle] = S
-	return facial_hair_style_by_bodytype
-
-/decl/species/proc/get_facial_hair_styles(var/decl/bodytype/bodytype)
-	. = list()
-	for(var/hair in get_facial_hair_style_types(bodytype))
-		. += GET_DECL(hair)
+			ADD_SORTED(available_accessories, accessory_style, /proc/cmp_text_asc)
+			available_accessories[accessory_style] = check_accessory
+	return available_accessories
 
 /decl/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)

@@ -15,7 +15,7 @@
 	base_color           = "#006666"
 
 	default_sprite_accessories = list(
-		/decl/sprite_accessory_category/hair = list(
+		SAC_HAIR = list(
 			/decl/sprite_accessory/hair/skrell/short = "#006666"
 		)
 	)

@@ -1,21 +1,23 @@
 /decl/sprite_accessory_category/cosmetics
-	name                = "Cosmetics"
-	default_accessory   = /decl/sprite_accessory/cosmetics/nothing
-	base_accessory_type = /decl/sprite_accessory/cosmetics
+	name                        = "Cosmetics"
+	default_accessory           = /decl/sprite_accessory/cosmetics/none
+	base_accessory_type         = /decl/sprite_accessory/cosmetics
+	uid                         = "acc_cat_cosmetics"
 
 /decl/sprite_accessory/cosmetics
 	icon                        = 'icons/mob/human_races/species/default_cosmetics.dmi'
 	body_parts                  = list(BP_HEAD)
 	color_blend                 = ICON_MULTIPLY
 	abstract_type               = /decl/sprite_accessory/cosmetics
-	required_gender             = null
+	bodytypes_allowed           = null
+	bodytypes_denied            = null
 	species_allowed             = null
 	subspecies_allowed          = null
 	bodytype_categories_allowed = null
 	bodytype_categories_denied  = null
 	body_flags_allowed          = null
 	body_flags_denied           = null
-	accessory_category          = /decl/sprite_accessory_category/cosmetics
+	accessory_category          = SAC_COSMETICS
 
 /decl/sprite_accessory/cosmetics/get_accessory_icon(obj/item/organ/external/organ)
 	if(!organ || QDELETED(organ))
@@ -43,10 +45,11 @@
 			. += "missing icon_state [icon_state] for bodytype [bodytype.type] in icon [bodytype.cosmetics_icon]"
 
 // Subtypes.
-/decl/sprite_accessory/cosmetics/nothing
-	name        = "Nothing"
-	icon_state  = "nothing"
-	uid         = "acc_cosmetics_nothing"
+/decl/sprite_accessory/cosmetics/none
+	name           = "No Cosmetics"
+	icon_state     = "nothing"
+	draw_accessory = FALSE
+	uid            = "acc_cosmetics_nothing"
 
 /decl/sprite_accessory/cosmetics/lipstick
 	name        = "Lipstick"

@@ -1,4 +1,4 @@
-/obj/item/cosmetics //this is the base type and its red
+/obj/item/cosmetics
 	gender = PLURAL
 	name = "abstract makeup"
 	desc = "An unbranded tube of makeup."
@@ -80,7 +80,7 @@
 			SPAN_NOTICE("\The [user] does their makeup with \the [src]."),
 			SPAN_NOTICE("You take a moment to apply \the [src]. Perfect!")
 		)
-		user_living.set_organ_sprite_accessory(cosmetic_type, /decl/sprite_accessory_category/cosmetics, makeup_color, apply_marking_to_limb)
+		user_living.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, makeup_color, apply_marking_to_limb)
 		return TRUE
 
 	user_living = A
@@ -97,9 +97,9 @@
 			SPAN_NOTICE("\The [user] does \the [user_living]'s makeup with \the [src]."),
 			SPAN_NOTICE("You apply \the [src] to \the [user_living].")
 		)
-		if(user_living.get_organ_sprite_accessory(cosmetic_type, /decl/sprite_accessory_category/cosmetics, apply_marking_to_limb))
+		if(user_living.get_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, apply_marking_to_limb))
 			return TRUE
-		user_living.set_organ_sprite_accessory(cosmetic_type, /decl/sprite_accessory_category/cosmetics, makeup_color, apply_marking_to_limb)
+		user_living.set_organ_sprite_accessory(cosmetic_type, SAC_COSMETICS, makeup_color, apply_marking_to_limb)
 	return TRUE
 
 //types
