@@ -1136,9 +1136,12 @@
 		to_chat(src, SPAN_WARNING("You scrawl down some meaningless lines."))
 	. = stars(text_content, 5)
 
-// mobs do not have mouths by default
+// mobs do not have mouths by default, unless provided by an organ
 /mob/proc/check_has_mouth()
-	return FALSE
+	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
+	if(!H || !istype(H) || !H.can_intake_reagents)
+		return FALSE
+	return TRUE
 
 /mob/proc/check_has_eyes()
 	return TRUE

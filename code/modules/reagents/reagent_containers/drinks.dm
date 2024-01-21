@@ -32,52 +32,33 @@
 	attack(user, user)
 
 /obj/item/chems/drinks/proc/open(mob/user)
-	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
-	to_chat(user, SPAN_NOTICE("You open \the [src] with an audible pop!"))
-	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	if(!ATOM_IS_OPEN_CONTAINER(src))
+		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+		to_chat(user, SPAN_NOTICE("You open \the [src] with an audible pop!"))
+		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+		return TRUE
+	return FALSE
 
-/obj/item/chems/drinks/attack(mob/M, mob/user, def_zone)
-	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
-		return ..()
-	if(standard_feed_mob(user, M))
-		return
-	return 0
+/obj/item/chems/drinks/proc/do_open_check(mob/user)
+	if(!ATOM_IS_OPEN_CONTAINER(src))
+		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
+		return FALSE
+	return TRUE
 
 /obj/item/chems/drinks/afterattack(obj/target, mob/user, proximity)
-	if(!proximity) return
-
+	if(!proximity)
+		return
 	if(standard_dispenser_refill(user, target))
 		return
 	if(standard_pour_into(user, target))
 		return
 	return ..()
 
-/obj/item/chems/drinks/standard_feed_mob(var/mob/user, var/mob/target)
-	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
-		return 1
-	return ..()
-
 /obj/item/chems/drinks/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
-	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
-		return 1
-	return ..()
+	return do_open_check(user) && ..()
 
 /obj/item/chems/drinks/standard_pour_into(var/mob/user, var/atom/target)
-	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
-		return 1
-	return ..()
-
-/obj/item/chems/drinks/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
-	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
-		for(var/R in reagents.reagent_volumes)
-			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)
-
-/obj/item/chems/drinks/feed_sound(var/mob/user)
-	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
+	return do_open_check(user) && ..()
 
 /obj/item/chems/drinks/examine(mob/user, distance)
 	. = ..()

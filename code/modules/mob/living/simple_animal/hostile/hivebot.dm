@@ -25,6 +25,9 @@
 	skin_material = null
 	skin_amount =   0
 
+/mob/living/simple_animal/hostile/hivebot/check_has_mouth()
+	return FALSE
+
 /mob/living/simple_animal/hostile/hivebot/range
 	desc = "A junky looking robot with four spiky legs. It's equipped with some kind of small-bore gun."
 	ranged = 1

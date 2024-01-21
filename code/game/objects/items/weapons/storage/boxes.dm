@@ -553,11 +553,11 @@
 	icon_state = "checkers"
 	max_storage_space = 24
 	foldable = null
-	can_hold = list(/obj/item/chems/food/checker)
+	can_hold = list(/obj/item/checker)
 /obj/item/storage/box/checkers/WillContain()
 	return list(
-			/obj/item/chems/food/checker = 12,
-			/obj/item/chems/food/checker/red = 12
+			/obj/item/checker = 12,
+			/obj/item/checker/red = 12
 		)
 
 /obj/item/storage/box/checkers/chess
@@ -566,12 +566,12 @@
 	icon_state = "chess_b"
 /obj/item/storage/box/checkers/chess/WillContain()
 	return list(
-			/obj/item/chems/food/checker/pawn   = 8,
-			/obj/item/chems/food/checker/knight = 2,
-			/obj/item/chems/food/checker/bishop = 2,
-			/obj/item/chems/food/checker/rook   = 2,
-			/obj/item/chems/food/checker/queen  = 1,
-			/obj/item/chems/food/checker/king   = 1
+			/obj/item/checker/pawn   = 8,
+			/obj/item/checker/knight = 2,
+			/obj/item/checker/bishop = 2,
+			/obj/item/checker/rook   = 2,
+			/obj/item/checker/queen  = 1,
+			/obj/item/checker/king   = 1
 		)
 
 /obj/item/storage/box/checkers/chess/red
@@ -580,12 +580,12 @@
 	icon_state = "chess_r"
 /obj/item/storage/box/checkers/chess/red/WillContain()
 	return list(
-			/obj/item/chems/food/checker/pawn/red   = 8,
-			/obj/item/chems/food/checker/knight/red = 2,
-			/obj/item/chems/food/checker/bishop/red = 2,
-			/obj/item/chems/food/checker/rook/red   = 2,
-			/obj/item/chems/food/checker/queen/red  = 1,
-			/obj/item/chems/food/checker/king/red   = 1
+			/obj/item/checker/pawn/red   = 8,
+			/obj/item/checker/knight/red = 2,
+			/obj/item/checker/bishop/red = 2,
+			/obj/item/checker/rook/red   = 2,
+			/obj/item/checker/queen/red  = 1,
+			/obj/item/checker/king/red   = 1
 		)
 
 

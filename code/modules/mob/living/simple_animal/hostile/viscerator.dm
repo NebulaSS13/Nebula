@@ -27,6 +27,9 @@
 	edge = 1
 	sharp = 1
 
+/mob/living/simple_animal/hostile/viscerator/check_has_mouth()
+	return FALSE
+
 /mob/living/simple_animal/hostile/viscerator/death(gibbed, deathmessage, show_dead_message)
 	..(null, "is smashed into pieces!", show_dead_message)
 	qdel(src)

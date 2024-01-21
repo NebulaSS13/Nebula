@@ -17,6 +17,9 @@
 	minbodytemp = 0
 	faction = "carp"
 
+/mob/living/simple_animal/hostile/tree/check_has_mouth()
+	return FALSE
+
 /mob/living/simple_animal/hostile/tree/FindTarget()
 	. = ..()
 	if(.)

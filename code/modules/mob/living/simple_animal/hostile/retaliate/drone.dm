@@ -54,6 +54,9 @@
 		/decl/material/solid/metal/plasteel = null
 	)
 
+/mob/living/simple_animal/hostile/retaliate/malf_drone/check_has_mouth()
+	return FALSE
+
 /mob/living/simple_animal/hostile/retaliate/malf_drone/can_act()
 	return disabled <= 0 && ..()
 

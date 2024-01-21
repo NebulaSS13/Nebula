@@ -377,3 +377,12 @@ var/global/list/dexterity_levels = list(
 // Underlay defines; vestigal implementation currently.
 #define HU_TAIL_LAYER 1
 #define TOTAL_UNDER_LAYERS 1
+
+// Enum for result of an attempt to eat/eat from an item.
+#define EATEN_INVALID 0
+#define EATEN_UNABLE  1
+#define EATEN_SUCCESS 2
+
+// Enum for type of consumption, largely just cosmetic currently.
+#define EATING_METHOD_EAT   0
+#define EATING_METHOD_DRINK 1

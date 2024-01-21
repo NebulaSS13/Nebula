@@ -49,13 +49,6 @@
 				on_reagent_change()
 		return
 
-/obj/item/chems/condiment/attack_self(var/mob/user)
-	return
-
-/obj/item/chems/condiment/attack(var/mob/M, var/mob/user, var/def_zone)
-	if(standard_feed_mob(user, M))
-		return
-
 /obj/item/chems/condiment/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!proximity)
 		return
@@ -78,12 +71,6 @@
 		to_chat(user, SPAN_NOTICE("You add [trans] units of the condiment to \the [target]."))
 	else
 		..()
-
-/obj/item/chems/condiment/feed_sound(var/mob/user)
-	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
-
-/obj/item/chems/condiment/self_feed_message(var/mob/user)
-	to_chat(user, SPAN_NOTICE("You swallow some of contents of \the [src]."))
 
 /obj/item/chems/condiment/proc/update_center_of_mass()
 	center_of_mass = is_special_bottle ? initial(is_special_bottle.center_of_mass) : initial(center_of_mass)

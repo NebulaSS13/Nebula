@@ -299,15 +299,8 @@
 /mob/living/carbon/proc/can_devour(atom/movable/victim)
 	return FALSE
 
-/mob/living/carbon/check_has_mouth()
-	// carbon mobs have mouths by default
-	// behavior of this proc for humans is overridden in human.dm
-	return 1
-
-/mob/living/carbon/proc/check_mouth_coverage()
-	// carbon mobs do not have blocked mouths by default
-	// overridden in human_defense.dm
-	return null
+/mob/living/carbon/get_satiated_nutrition()
+	return 350
 
 /mob/living/carbon/get_max_nutrition()
 	return 400
