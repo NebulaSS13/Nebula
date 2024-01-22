@@ -291,7 +291,7 @@ SUBSYSTEM_DEF(jobs)
 				if(age < job.minimum_character_age) // Nope.
 					continue
 				switch(age - job.ideal_character_age)
-					if(0 to -10)
+					if(-INFINITY to -10)
 						if(age < (job.minimum_character_age+10))
 							weightedCandidates[V] = 3 // Still a bit young.
 						else
@@ -611,7 +611,7 @@ SUBSYSTEM_DEF(jobs)
 		T.maptext = "<span style=\"[style]\">[copytext_char(text, 1, i)] </span>"
 		sleep(1)
 
-	addtimer(CALLBACK(GLOBAL_PROC, PROC_REF(fade_location_blurb), src, T), duration)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(fade_location_blurb), src, T), duration)
 
 /proc/fade_location_blurb(client/C, obj/T)
 	animate(T, alpha = 0, time = 5)
