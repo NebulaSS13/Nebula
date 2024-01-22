@@ -52,7 +52,6 @@
 	)
 
 /obj/item/clothing/head/helmet/space/rig/ert
-	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/ert
 	icon = 'mods/content/corporate/icons/rigs/commander/helmet.dmi'
 /obj/item/clothing/suit/space/rig/ert
