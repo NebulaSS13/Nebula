@@ -430,7 +430,7 @@
 		return TRUE
 	if(standard_pour_into(user, O))
 		return TRUE
-	if(ismob(O) && !!handle_eaten_by_mob(user, O))
+	if(handle_eaten_by_mob(user, O) != EATEN_INVALID)
 		return TRUE
 	if(user.a_intent == I_HURT)
 		if(standard_splash_mob(user, O))

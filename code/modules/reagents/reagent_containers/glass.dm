@@ -78,7 +78,7 @@
 		return TRUE
 	if(standard_pour_into(user, target)) //Pouring into another beaker?
 		return TRUE
-	if(ismob(target) && !!handle_eaten_by_mob(user, target))
+	if(handle_eaten_by_mob(user, target) != EATEN_INVALID)
 		return TRUE
 	if(user.a_intent == I_HURT)
 		if(standard_splash_mob(user,target))
