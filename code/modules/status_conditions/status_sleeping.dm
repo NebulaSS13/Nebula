@@ -9,14 +9,10 @@
 	. = ..()
 	victim.facing_dir = null
 	victim.UpdateLyingBuckledAndVerbStatus()
-	if(ishuman(victim))
-		var/mob/living/carbon/human/H = victim
-		H.handle_dreams()
-		H.species.handle_sleeping(H)
+	victim.handle_dreams()
+	victim.get_species()?.handle_sleeping(victim)
 
 /decl/status_condition/sleeping/handle_status(mob/living/victim, var/amount)
 	. = ..()
-	if(ishuman(victim))
-		var/mob/living/carbon/human/H = victim
-		H.handle_dreams()
-		H.species.handle_sleeping(H)
+	victim.handle_dreams()
+	victim.get_species()?.handle_sleeping(victim)
