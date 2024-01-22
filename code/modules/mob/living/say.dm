@@ -300,7 +300,7 @@
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
-	INVOKE_ASYNC(GLOBAL_PROC, PROC_REF(animate_speech_bubble), speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(animate_speech_bubble), speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
 	INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), message, speaking, italics, speech_bubble_recipients)
 	if(length(eavesdroppers))
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), stars(message), speaking, italics, eavesdroppers)

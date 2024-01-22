@@ -76,7 +76,7 @@ var/global/list/singularity_beacons = list()
 
 /obj/machinery/syndicate_beacon/proc/selfdestruct()
 	selfdestructing = 1
-	INVOKE_ASYNC(GLOBAL_PROC, PROC_REF(explosion), src.loc, 1, rand(1, 3), rand(3, 8), 10)
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(explosion), src.loc, 1, rand(1, 3), rand(3, 8), 10)
 
 ////////////////////////////////////////
 //Singularity beacon
