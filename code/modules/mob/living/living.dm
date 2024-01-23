@@ -745,6 +745,9 @@ default behaviour is:
 	return 1
 
 /mob/living/Destroy()
+	QDEL_NULL(aiming)
+	QDEL_NULL_LIST(_hallucinations)
+	QDEL_NULL_LIST(aimed_at_by)
 	if(stressors) // Do not QDEL_NULL, keys are managed instances.
 		stressors = null
 	if(auras)

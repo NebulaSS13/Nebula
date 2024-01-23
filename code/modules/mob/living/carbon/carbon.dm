@@ -15,7 +15,6 @@
 	QDEL_NULL(touching)
 	QDEL_NULL(bloodstr)
 	reagents = null //We assume reagents is a reference to bloodstr here
-	QDEL_NULL_LIST(hallucinations)
 	if(loc)
 		for(var/mob/M in contents)
 			M.dropInto(loc)
