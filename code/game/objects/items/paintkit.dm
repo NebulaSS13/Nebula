@@ -36,12 +36,6 @@
 	name = "voidsuit modification kit"
 	desc = "A kit for modifying a voidsuit."
 	uses = 2
-	var/new_light_overlay
-
-/obj/item/kit/suit/inherit_custom_item_data(var/datum/custom_item/citem)
-	. = ..()
-	if(citem.additional_data["light_overlay"])
-		new_light_overlay = citem.additional_data["light_overlay"]
 
 /obj/item/clothing/head/helmet/space/void/attackby(var/obj/item/O, var/mob/user)
 
@@ -51,8 +45,6 @@
 		SetName("[kit.new_name] void helmet")
 		desc = kit.new_desc
 		icon = kit.new_icon
-		if(kit.new_light_overlay)
-			light_overlay = kit.new_light_overlay
 		bodytype_equip_flags = user.get_bodytype()?.bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()

@@ -142,7 +142,6 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCK_ALL_HAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 2
-	light_overlay = "helmet_light"
 	w_class = ITEM_SIZE_NORMAL
 
 /*
