@@ -36,7 +36,6 @@
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 	anomaly_shielding = 0.2
-	light_overlay = "hardhat_light"
 
 /obj/item/clothing/suit/space/void/excavation/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/excavation
