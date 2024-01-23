@@ -4,8 +4,9 @@
 	var/centered = TRUE
 	var/list/map_template_names	//list of template names to pick from
 
-/obj/abstract/landmark/map_load_mark/New(loc)
-	..()
+INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
+/obj/abstract/landmark/map_load_mark/Initialize()
+	. = ..()
 	if(Master.map_loading) // If we're created while a map is being loaded
 		return // Let after_load() handle us
 	if(!SSmapping.initialized) // If we're being created prior to SSmapping
@@ -14,10 +15,14 @@
 		// How did we get here?
 		// These should only be loaded from compiled maps or map templates.
 		PRINT_STACK_TRACE("map_load_mark created outside of maploading")
-		load_subtemplate()
+		init_load_subtemplate()
 
 /obj/abstract/landmark/map_load_mark/proc/get_subtemplate()
 	. = LAZYLEN(map_template_names) && pick(map_template_names)
+
+/obj/abstract/landmark/map_load_mark/proc/init_load_subtemplate()
+	set waitfor = FALSE
+	load_subtemplate()
 
 /obj/abstract/landmark/map_load_mark/proc/load_subtemplate()
 	// Commenting this out temporarily as DMMS breaks when asychronously
