@@ -25,8 +25,10 @@
 	var/icon
 	/// the icon_state of the accessory
 	var/icon_state
-	/// Restricted to specific genders. null matches any
-	var/required_gender
+	/// Restricted to specific bodytypes. null matches any
+	var/list/decl/bodytype/bodytypes_allowed
+	/// Restricted from specific bodytypes. null matches none
+	var/list/decl/bodytype/bodytypes_denied
 	/// Restrict some styles to specific root species names
 	var/list/species_allowed = list(SPECIES_HUMAN)
 	/// Restrict some styles to specific species names, irrespective of root species name
@@ -65,8 +67,6 @@
 	var/list/disallows_accessories
 
 /decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype)
-	if(!isnull(required_gender) && bodytype.associated_gender != required_gender)
-		return FALSE
 	if(species)
 		var/species_is_permitted = TRUE
 		if(species_allowed)
@@ -76,6 +76,10 @@
 		if(!species_is_permitted)
 			return FALSE
 	if(bodytype)
+		if(LAZYLEN(bodytypes_allowed) && !(bodytype.type in bodytypes_allowed))
+			return FALSE
+		if(LAZYISIN(bodytypes_denied, bodytype.type))
+			return FALSE
 		if(!isnull(bodytype_categories_allowed) && !(bodytype.bodytype_category in bodytype_categories_allowed))
 			return FALSE
 		if(!isnull(bodytype_categories_denied) && (bodytype.bodytype_category in bodytype_categories_denied))

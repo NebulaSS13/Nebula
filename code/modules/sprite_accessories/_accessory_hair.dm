@@ -22,7 +22,8 @@
 	name = "Bald"
 	icon_state = "bald"
 	flags = VERY_SHORT | HAIR_BALD
-	required_gender = null
+	bodytypes_allowed = null
+	bodytypes_denied = null
 	species_allowed = null
 	subspecies_allowed = null
 	bodytype_categories_allowed = null
