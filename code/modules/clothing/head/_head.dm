@@ -36,6 +36,12 @@
 /obj/item/clothing/head/on_update_icon(var/mob/user)
 	. = ..()
 	update_clothing_icon()
+	if(on)
+		var/light_state = "[icon_state]_light"
+		if(check_state_in_icon(light_state, icon))
+			var/image/light_overlay = image(icon, light_state)
+			light_overlay.appearance_flags |= RESET_COLOR
+			add_overlay(light_overlay)
 
 /obj/item/clothing/head/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))

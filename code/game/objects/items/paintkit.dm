@@ -37,7 +37,6 @@
 	desc = "A kit for modifying a voidsuit."
 	uses = 2
 
-
 /obj/item/clothing/head/helmet/space/void/attackby(var/obj/item/O, var/mob/user)
 
 	if(istype(O,/obj/item/kit/suit))
