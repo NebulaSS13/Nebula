@@ -2,7 +2,8 @@
 	name = "delivery chute"
 	desc = "A chute for big and small packages alike!"
 	density = TRUE
-	icon_state = "intake"
+	icon = 'icons/obj/pipes/disposal_chute.dmi'
+	icon_state = "chute"
 	base_type = /obj/machinery/disposal/deliveryChute/buildable
 	frame_type = /obj/structure/disposalconstruct/machine/chute
 
@@ -47,7 +48,7 @@
 
 /obj/machinery/disposal/deliveryChute/flush()
 	flushing = 1
-	flick("intake-closing", src)
+	flick("[icon_state]-closing", src)
 	var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 												// travels through the pipes.
 	air_contents = new()		// new empty gas resv.

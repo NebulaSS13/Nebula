@@ -1,7 +1,7 @@
 // Disposal pipes
 
 /obj/structure/disposalpipe
-	icon = 'icons/obj/pipes/disposal.dmi'
+	icon = 'icons/obj/pipes/disposal_pipe.dmi'
 	name = "disposal pipe"
 	desc = "An underfloor disposal pipe."
 	anchored = TRUE
