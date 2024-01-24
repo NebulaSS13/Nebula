@@ -10,8 +10,8 @@
 	throw_range            = 15
 	material               = /decl/material/solid/organic/plastic
 	var/pen_flag           = PEN_FLAG_ACTIVE                     //Properties/state of the pen used.
-	var/stroke_colour      = "black"                             //What colour the ink is! Can be hexadecimal colour or a colour name string.
-	var/stroke_colour_name = "black"                             //Human readable name of the stroke colour. Used in text strings, and to identify the nearest colour to the stroke colour.
+	var/stroke_color      = "black"                             //What colour the ink is! Can be hexadecimal colour or a colour name string.
+	var/stroke_color_name = "black"                             //Human readable name of the stroke colour. Used in text strings, and to identify the nearest colour to the stroke colour.
 	var/medium_name        = "ink"                               //Whatever the pen uses to leave its mark. Used in text strings.
 	var/max_uses           = -1                                  //-1 for unlimited uses.
 	var/pen_quality        = TOOL_QUALITY_DEFAULT                //What will be set as tool quality for the pen
@@ -27,8 +27,8 @@
 
 		list(
 			TOOL_PEN   = list(
-				TOOL_PROP_COLOR_NAME = stroke_colour_name,
-				TOOL_PROP_COLOR      = stroke_colour,
+				TOOL_PROP_COLOR_NAME = stroke_color_name,
+				TOOL_PROP_COLOR      = stroke_color,
 				TOOL_PROP_PEN_FLAG   = pen_flag,
 				TOOL_PROP_USES       = max_uses,
 				TOOL_PROP_PEN_FONT   = pen_font)))
@@ -40,12 +40,12 @@
 		var/mob/living/M = A
 		var/obj/item/organ/external/head/head = M.get_organ(BP_HEAD, /obj/item/organ/external/head)
 		if(istype(head))
-			head.write_on(user, "[stroke_colour_name] [medium_name]")
+			head.write_on(user, "[stroke_color_name] [medium_name]")
 			return TRUE
 
 	if(istype(A, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = A
-		head.write_on(user, "[stroke_colour_name] [medium_name]")
+		head.write_on(user, "[stroke_color_name] [medium_name]")
 		return TRUE
 
 	return ..()
@@ -60,34 +60,34 @@
 	update_icon()
 
 /obj/item/pen/proc/set_medium_color(var/_color, var/_color_name)
-	stroke_colour      = _color
-	stroke_colour_name = _color_name
-	set_tool_property(TOOL_PEN, TOOL_PROP_COLOR,      stroke_colour)
-	set_tool_property(TOOL_PEN, TOOL_PROP_COLOR_NAME, stroke_colour_name)
+	stroke_color      = _color
+	stroke_color_name = _color_name
+	set_tool_property(TOOL_PEN, TOOL_PROP_COLOR,      stroke_color)
+	set_tool_property(TOOL_PEN, TOOL_PROP_COLOR_NAME, stroke_color_name)
 	make_pen_description()
 
 /obj/item/pen/proc/make_pen_description()
-	desc = "Its [ADD_ARTICLE(stroke_colour_name)] [medium_name] [istype(material)? material.name : ""] pen."
+	desc = "Its [ADD_ARTICLE(stroke_color_name)] [medium_name] [istype(material)? material.name : ""] pen."
 
 /obj/item/pen/blue
-	name               = "blue pen"
-	icon               = 'icons/obj/items/pens/pen_blue.dmi'
-	stroke_colour      = "blue"
-	stroke_colour_name = "blue"
+	name              = "blue pen"
+	icon              = 'icons/obj/items/pens/pen_blue.dmi'
+	stroke_color      = "blue"
+	stroke_color_name = "blue"
 
 /obj/item/pen/red
-	name               = "red pen"
-	icon               = 'icons/obj/items/pens/pen_red.dmi'
-	stroke_colour      = "red"
-	stroke_colour_name = "red"
+	name              = "red pen"
+	icon              = 'icons/obj/items/pens/pen_red.dmi'
+	stroke_color      = "red"
+	stroke_color_name = "red"
 
 /obj/item/pen/green
-	name               = "green pen"
-	icon               = 'icons/obj/items/pens/pen_green.dmi'
-	stroke_colour      = "green"
-	stroke_colour_name = "green"
+	name              = "green pen"
+	icon              = 'icons/obj/items/pens/pen_green.dmi'
+	stroke_color      = "green"
+	stroke_color_name = "green"
 
 /obj/item/pen/invisible
-	name               = "pen"
-	stroke_colour      = "white"
-	stroke_colour_name = "transluscent"
+	name              = "pen"
+	stroke_color      = "white"
+	stroke_color_name = "transluscent"
