@@ -6,14 +6,12 @@
 
 /obj/item/storage/lunchbox/dais
 	name = "\improper DAIS brand lunchbox"
-	icon_state = "lunchbox_dais"
-	item_state = "toolbox_blue"
+	icon = 'mods/content/corporate/icons/lunchbox_dais.dmi'
 	desc = "A little lunchbox. This one is branded with the Deimos Advanced Information Systems logo!"
 
 /obj/item/storage/lunchbox/nt
 	name = "\improper NanoTrasen brand lunchbox"
-	icon_state = "lunchbox_nanotrasen"
-	item_state = "toolbox_blue"
+	icon = 'mods/content/corporate/icons/lunchbox_nanotrasen.dmi'
 	desc = "A little lunchbox. This one is branded with the NanoTrasen logo!"
 
 /obj/item/storage/lunchbox/nt/filled

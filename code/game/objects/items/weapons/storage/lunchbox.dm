@@ -1,10 +1,9 @@
 /obj/item/storage/lunchbox
 	max_storage_space = 8 //slightly smaller than a toolbox
 	name = "rainbow lunchbox"
-	icon = 'icons/obj/items/storage/lunchbox.dmi'
-	icon_state = "lunchbox_rainbow"
-	item_state = "toolbox_pink"
 	desc = "A little lunchbox. This one is the colors of the rainbow!"
+	icon = 'icons/obj/items/storage/lunchboxes/lunchbox_rainbow.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
 	attack_verb = list("lunched")
@@ -29,8 +28,7 @@
 
 /obj/item/storage/lunchbox/heart
 	name = "heart lunchbox"
-	icon_state = "lunchbox_lovelyhearts"
-	item_state = "toolbox_pink"
+	icon = 'icons/obj/items/storage/lunchboxes/lunchbox_heart.dmi'
 	desc = "A little lunchbox. This one has cute little hearts on it!"
 
 /obj/item/storage/lunchbox/heart/filled
@@ -38,8 +36,7 @@
 
 /obj/item/storage/lunchbox/cat
 	name = "cat lunchbox"
-	icon_state = "lunchbox_sciencecatshow"
-	item_state = "toolbox_green"
+	icon = 'icons/obj/items/storage/lunchboxes/lunchbox_cat.dmi'
 	desc = "A little lunchbox. This one has a cute little science cat from a popular show on it!"
 
 /obj/item/storage/lunchbox/cat/filled
@@ -47,8 +44,7 @@
 
 /obj/item/storage/lunchbox/mars
 	name = "\improper Mariner University lunchbox"
-	icon_state = "lunchbox_marsuniversity"
-	item_state = "toolbox_red"
+	icon = 'icons/obj/items/storage/lunchboxes/lunchbox_mars.dmi'
 	desc = "A little lunchbox. This one is branded with the Mariner university logo!"
 
 /obj/item/storage/lunchbox/mars/filled
@@ -56,8 +52,7 @@
 
 /obj/item/storage/lunchbox/cti
 	name = "\improper CTI lunchbox"
-	icon_state = "lunchbox_cti"
-	item_state = "toolbox_blue"
+	icon = 'icons/obj/items/storage/lunchboxes/lunchbox_cti.dmi'
 	desc = "A little lunchbox. This one is branded with the CTI logo!"
 
 /obj/item/storage/lunchbox/cti/filled
@@ -65,8 +60,7 @@
 
 /obj/item/storage/lunchbox/syndicate
 	name = "black and red lunchbox"
-	icon_state = "lunchbox_syndie"
-	item_state = "toolbox_syndi"
+	icon = 'icons/obj/items/storage/lunchboxes/lunchbox_evil.dmi'
 	desc = "A little lunchbox. This one is a sleek black and red, made of a durable steel!"
 
 /obj/item/storage/lunchbox/syndicate/filled
