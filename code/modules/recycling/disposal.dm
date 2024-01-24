@@ -14,7 +14,7 @@ var/global/list/diversion_junctions = list()
 /obj/machinery/disposal
 	name = "disposal unit"
 	desc = "A pneumatic waste disposal unit."
-	icon = 'icons/obj/pipes/disposal.dmi'
+	icon = 'icons/obj/pipes/disposal_bin.dmi'
 	icon_state = "disposal"
 	anchored = TRUE
 	density = TRUE
@@ -310,7 +310,7 @@ var/global/list/diversion_junctions = list()
 
 	// flush handle
 	if(flush)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-handle")
+		overlays += image(icon, "[icon_state]-handle")
 
 	// only handle is shown if no power
 	if(stat & NOPOWER || mode == -1)
@@ -318,13 +318,13 @@ var/global/list/diversion_junctions = list()
 
 	// 	check for items in disposal - occupied light
 	if(contents.len > LAZYLEN(component_parts))
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
+		overlays += image(icon, "[icon_state]-full")
 
 	// charging and ready light
 	if(mode == 1)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-charge")
+		overlays += image(icon, "[icon_state]-charge")
 	else if(mode == 2)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-ready")
+		overlays += image(icon, "[icon_state]-ready")
 
 // timed process
 // charge the gas reservoir and perform flush if ready
@@ -532,7 +532,7 @@ var/global/list/diversion_junctions = list()
 /obj/structure/disposaloutlet
 	name = "disposal outlet"
 	desc = "An outlet for the pneumatic disposal system."
-	icon = 'icons/obj/pipes/disposal.dmi'
+	icon = 'icons/obj/pipes/disposal_outlet.dmi'
 	icon_state = "outlet"
 	density = TRUE
 	anchored = TRUE
@@ -565,7 +565,7 @@ var/global/list/diversion_junctions = list()
 
 /obj/structure/disposaloutlet/proc/animate_expel()
 	set waitfor = FALSE
-	flick("outlet-open", src)
+	flick("[icon_state]-open", src)
 	playsound(src, 'sound/machines/warning-buzzer.ogg', 50, 0, 0)
 	sleep(20)	//wait until correct animation frame
 	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
