@@ -190,19 +190,12 @@
 /decl/surgery_step/internal/remove_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>\The [user] has removed \the [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>", \
 	"<span class='notice'>You have removed \the [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
-
 	// Extract the organ!
 	var/obj/item/organ/O = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(istype(O) && istype(affected))
 		//Now call remove again with detach = FALSE so we fully remove it
 		target.remove_organ(O, TRUE, FALSE)
-
-	// Just in case somehow the organ we're extracting from an organic is an MMI
-	if(istype(O, /obj/item/organ/internal/mmi_holder))
-		var/obj/item/organ/internal/mmi_holder/brain = O
-		brain.transfer_and_delete()
-		log_warning("Organ removal surgery on '[target]' returned a mmi_holder '[O]' instead of a mmi!!")
 	..()
 
 /decl/surgery_step/internal/remove_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -251,9 +244,7 @@
 			CRASH("Target ([target]) of surgery [type] has no bodytype!")
 		else
 			var/decl/pronouns/G = O.get_pronouns()
-			if(O.organ_tag == BP_POSIBRAIN && !target.should_have_organ(BP_POSIBRAIN))
-				to_chat(user, SPAN_WARNING("There's no place in [target] to fit \the [O.organ_tag]."))
-			else if(O.damage > (O.max_damage * 0.75))
+			if(O.damage > (O.max_damage * 0.75))
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
@@ -325,8 +316,8 @@
 	var/list/attachable_organs
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 
-	for(var/obj/item/organ/I in affected.implants)
-		if(I && (I.status & ORGAN_CUT_AWAY))
+	for(var/obj/item/organ/I in (affected.implants|affected.internal_organs))
+		if(I.status & ORGAN_CUT_AWAY)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Attach \the [I.name]"
 			LAZYSET(attachable_organs, I, radial_button)

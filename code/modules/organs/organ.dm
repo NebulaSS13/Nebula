@@ -202,7 +202,7 @@
 	//dead already, no need for more processing
 	if(status & ORGAN_DEAD)
 		return
-	// Don't process if we're in a freezer, an MMI or a stasis bag.or a freezer or something I dunno
+	// Don't process if we're in a freezer, an interface or a stasis bag.
 	if(is_preserved())
 		return
 	//Process infections
@@ -248,11 +248,18 @@
 		ailment.was_treated_by_chem_effect()
 
 /obj/item/organ/proc/is_preserved()
-	if(istype(loc,/obj/item/organ))
+	if(istype(loc, /obj/item/organ))
 		var/obj/item/organ/O = loc
 		return O.is_preserved()
-	else
-		return (istype(loc,/obj/item/mmi) || istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/storage/box/freezer))
+	var/static/list/preserved_types = list(
+		/obj/item/storage/box/freezer,
+		/obj/structure/closet/crate/freezer,
+		/obj/structure/closet/body_bag/cryobag
+	)
+	for(var/preserved_type in preserved_types)
+		if(istype(loc, preserved_type))
+			return TRUE
+	return FALSE
 
 /obj/item/organ/examine(mob/user)
 	. = ..(user)
@@ -544,6 +551,8 @@ var/global/list/ailment_reference_cache = list()
 /obj/item/organ/proc/do_install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE, var/detached = FALSE)
 	//Make sure to force the flag accordingly
 	set_detached(detached)
+	if(QDELETED(src))
+		return
 
 	owner = target
 	vital_to_owner = null
@@ -579,7 +588,8 @@ var/global/list/ailment_reference_cache = list()
 	else
 		owner = null
 		vital_to_owner = null
-	return src
+	if(!QDELETED(src))
+		return src
 
 //Events handling for checks and effects that should happen when removing the organ through interactions. Called by the owner mob.
 /obj/item/organ/proc/on_remove_effects(var/mob/living/last_owner)

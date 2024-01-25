@@ -5,13 +5,13 @@
 	icon_state = "heart-on"
 	dead_icon = "heart-off"
 	prosthetic_icon = "heart-prosthetic"
+	damage_reduction = 0.7
+	relative_size = 5
+	max_damage = 45
 	var/pulse = PULSE_NORM
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
 	var/tmp/next_blood_squirt = 0
-	damage_reduction = 0.7
-	relative_size = 5
-	max_damage = 45
 	var/open
 	var/list/external_pump
 

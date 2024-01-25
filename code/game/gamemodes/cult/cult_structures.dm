@@ -150,8 +150,7 @@
 
 	if(isrobot(M))
 		var/mob/living/silicon/robot/Robot = M
-		if(Robot.mmi)
-			qdel(Robot.mmi)
+		QDEL_NULL(Robot.central_processor)
 	else
 		for(var/obj/item/W in M)
 			M.drop_from_inventory(W)

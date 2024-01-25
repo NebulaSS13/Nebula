@@ -314,14 +314,14 @@
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/robot/despawn_occupant()
 	var/mob/living/silicon/robot/R = occupant
-	if(!istype(R)) return ..()
-
-	qdel(R.mmi)
-	for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
-		for(var/obj/item/O in I.get_contained_external_atoms()) // the things inside the tools, if anything; mainly for janiborg trash bags
-			O.forceMove(R)
-		qdel(I)
-	qdel(R.module)
+	if(istype(R))
+		R.clear_brain()
+		if(R.module)
+			for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
+				for(var/obj/item/O in I.get_contained_external_atoms()) // the things inside the tools, if anything; mainly for janiborg trash bags
+					O.forceMove(R)
+				qdel(I)
+			qdel(R.module)
 
 	. = ..()
 

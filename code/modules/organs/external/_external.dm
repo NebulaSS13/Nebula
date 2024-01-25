@@ -456,11 +456,8 @@
 		//
 		//If we contain any child organs add them to the owner
 		//
-		for(var/obj/item/organ/organ in internal_organs)
-			owner.add_organ(organ, src, in_place, update_icon, detached)
-
-		for(var/obj/item/organ/external/organ in children)
-			owner.add_organ(organ, src, in_place, update_icon, detached)
+		for(var/obj/item/organ/organ in (implants|children|internal_organs))
+			owner.add_organ(organ, src, in_place, update_icon, FALSE)
 
 		//
 		//Add any existing organs in the owner that have us as parent
@@ -1352,6 +1349,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	W.forceMove(owner)
 
 /obj/item/organ/external/do_uninstall(in_place, detach, ignore_children, update_icon)
+
 	var/mob/living/carbon/human/victim = owner //parent proc clears owner
 	if(!(. = ..()))
 		return
@@ -1431,7 +1429,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/set_detached(is_detached)
 	if(BP_IS_PROSTHETIC(src))
 		is_detached = FALSE //External prosthetics are never detached
-	return ..(is_detached)
+	. = ..(is_detached)
 
 /obj/item/organ/external/proc/disfigure(var/type = BRUTE)
 	if(status & ORGAN_DISFIGURED)

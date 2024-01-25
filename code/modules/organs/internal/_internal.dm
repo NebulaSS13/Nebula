@@ -24,6 +24,9 @@
 	var/min_bruised_damage = 10       // Damage before considered bruised
 	var/damage_reduction = 0.5     //modifier for internal organ injury
 
+	/// Whether or not we should try to transfer a brainmob when removed or replaced in a mob.
+	var/transfer_brainmob_with_organ = FALSE
+
 /obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	if(!alive_icon)
 		alive_icon = initial(icon_state)
@@ -253,3 +256,43 @@
 		var/obj/item/organ/O = last_owner.get_organ(parent_organ)
 		if(O)
 			O.vital_to_owner = null
+
+// Stub to allow brain interfaces to return their wrapped brainmob.
+/obj/item/organ/internal/proc/get_brainmob(var/create_if_missing = FALSE)
+	return
+
+/obj/item/organ/internal/proc/transfer_key_to_brainmob(var/mob/living/M, var/update_brainmob = TRUE)
+	var/mob/living/brainmob = get_brainmob(create_if_missing = TRUE)
+	if(brainmob)
+		transfer_key_from_mob_to_mob(M, brainmob)
+		if(update_brainmob)
+			brainmob.SetName(M.real_name)
+			brainmob.real_name = M.real_name
+			brainmob.dna = M.dna?.Clone()
+			brainmob.languages = M.languages?.Copy()
+			brainmob.default_language = M.default_language
+			to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
+			callHook("debrain", list(brainmob))
+		return TRUE
+	return FALSE
+
+/obj/item/organ/internal/proc/get_synthetic_owner_name()
+	return "Cyborg"
+
+/obj/item/organ/internal/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
+	var/mob/living/brainmob = get_brainmob()
+	return brainmob?.key
+
+// This might need revisiting to stop people successfully implanting brains in groins and transferring minds.
+/obj/item/organ/internal/do_install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon, detached)
+	. = ..()
+	if(transfer_brainmob_with_organ && istype(owner))
+		var/mob/living/brainmob = get_brainmob(create_if_missing = FALSE)
+		if(brainmob?.key)
+			transfer_key_from_mob_to_mob(brainmob, owner)
+
+/obj/item/organ/internal/do_uninstall(in_place, detach, ignore_children, update_icon)
+	var/mob/living/victim = owner // cleared in parent proc
+	. = ..()
+	if(transfer_brainmob_with_organ && istype(victim))
+		transfer_key_to_brainmob(victim, update_brainmob = TRUE)

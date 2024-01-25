@@ -42,19 +42,7 @@
 		/decl/emote/audible/choke,
 		/decl/emote/audible/moan,
 		/decl/emote/audible/gnarl
-		)
-
-/mob/living/carbon/brain
-	default_emotes = list(
-		/decl/emote/audible/alarm,
-		/decl/emote/audible/alert,
-		/decl/emote/audible/notice,
-		/decl/emote/audible/whistle,
-		/decl/emote/audible/synth,
-		/decl/emote/audible/boop,
-		/decl/emote/visible/blink,
-		/decl/emote/visible/flash
-		)
+	)
 
 /mob/living/carbon/human
 	default_emotes = list(
@@ -168,4 +156,4 @@
 		/decl/emote/audible/synth/deny,
 		/decl/emote/audible/synth/security,
 		/decl/emote/audible/synth/security/halt
-		)
+	)

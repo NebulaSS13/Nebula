@@ -38,3 +38,9 @@
 /obj/item/gripper/cultivator/Initialize(ml, material_key)
 	. = ..()
 	can_hold |= /obj/item/slime_extract
+
+/mob/living/carbon/human/say_understands(var/mob/other,var/decl/language/speaking = null)
+	. = (!speaking && isslime(other)) || ..()
+
+/mob/living/brain/say_understands(var/mob/other,var/decl/language/speaking = null)
+	. = (!speaking && isslime(other)) || ..()

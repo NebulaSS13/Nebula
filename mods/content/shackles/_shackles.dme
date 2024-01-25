@@ -3,6 +3,5 @@
 // BEGIN_INCLUDE
 #include "laws_pref.dm"
 #include "mind.dm"
-#include "posibrain.dm"
 #include "shackle_lawsets.dm"
 #endif

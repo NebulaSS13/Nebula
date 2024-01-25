@@ -400,7 +400,7 @@
 	reset_blood()
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
-		for(var/mob/living/carbon/brain/brain in global.player_list) // This is really nasty, does it even work anymore?
+		for(var/mob/living/brain/brain in global.player_list) // This is really nasty, does it even work anymore?
 			if(brain.real_name == src.real_name && brain.mind)
 				brain.mind.transfer_to(src)
 				qdel(brain.loc)
