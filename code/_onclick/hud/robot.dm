@@ -1,66 +1,66 @@
-var/global/obj/screen/robot_inventory
-
 /mob/living/silicon/robot
 	hud_type = /datum/hud/robot
 
+/datum/hud/robot
+	constraint_hands_to_columns = FALSE
+	has_intent_selector = /obj/screen/intent
+
+/datum/hud/robot/get_ui_style()
+	return 'icons/mob/screen/robot.dmi'
+
+/datum/hud/robot/get_ui_color()
+	return COLOR_WHITE
+
+/datum/hud/robot/get_ui_alpha()
+	return 255
+
 /datum/hud/robot/FinalizeInstantiation()
 
-	var/mob/living/silicon/robot/R = mymob
-	if(!istype(R))
-		..()
-		return
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
 
-	//Radio
-	adding += new /obj/screen/robot_radio(null, mymob)
+	if(isrobot(mymob))
+		var/mob/living/silicon/robot/beep = mymob
+		// have their own icons, so don't supply ui_style
+		beep.module_select   = new(null, beep)
+		beep.radio_config    = new(null, beep)
+		beep.robot_inventory = new(null, beep)
+		beep.robot_storage   = new(null, beep)
+		adding += list(beep.module_select, beep.radio_config, beep.robot_storage, beep.robot_inventory)
 
-	//Module select
-	R.inv1 = new(null, mymob)
-	R.inv2 = new(null, mymob)
-	R.inv3 = new(null, mymob)
-	adding += R.inv1
-	adding += R.inv2
-	adding += R.inv3
-	//End of module select
+	mymob.cells    = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.healths  = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.bodytemp = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.oxygen   = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.fire     = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.up_hint  = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.zone_sel = new(null, mymob, ui_style, ui_color, ui_alpha)
 
-	// Drop UI
-	R.ui_drop_grab = new(null, mymob)
-	adding += R.ui_drop_grab
+	hud_elements += list(
+		mymob.cells,
+		mymob.healths,
+		mymob.bodytemp,
+		mymob.oxygen,
+		mymob.fire,
+		mymob.up_hint,
+		mymob.zone_sel
+	)
 
-	//Intent
-	action_intent = new /obj/screen/intent/robot(null, mymob)
-	action_intent.icon_state = R.a_intent
-	adding += action_intent
+	create_gun_setting_icons()
+	return ..()
 
-	adding            += new /obj/screen/robot_panel(        null, mymob)
-	R.cells            = new /obj/screen/robot_charge(       null, mymob)
-	R.healths          = new /obj/screen/robot_health(       null, mymob)
-	R.hands            = new /obj/screen/robot_module_select(null, mymob)
-	R.throw_icon       = new /obj/screen/robot_store(        null, mymob)
-	robot_inventory    = new /obj/screen/robot_inventory(    null, mymob)
-	R.bodytemp         = new /obj/screen/bodytemp(           null, mymob)
-	R.oxygen           = new /obj/screen/robot_oxygen(       null, mymob)
-	R.fire             = new /obj/screen/robot_fire(         null, mymob)
-	R.up_hint          = new /obj/screen/up_hint(            null, mymob, 'icons/mob/screen1_robot.dmi')
-	R.zone_sel         = new(                                null, mymob, 'icons/mob/screen1_robot.dmi')
-	R.gun_setting_icon = new /obj/screen/gun/mode(           null, mymob)
-	R.item_use_icon    = new /obj/screen/gun/item(           null, mymob)
-	R.gun_move_icon    = new /obj/screen/gun/move(           null, mymob)
-	R.radio_use_icon   = new /obj/screen/gun/radio(          null, mymob)
-
-
-
-	hud_elements = list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
-	..()
+/mob/living/silicon/robot/proc/remove_emag_status()
+	emagged = FALSE
+	if(module?.emag && get_active_hand() == module.emag)
+		unequip(module.emag)
 
 /datum/hud/proc/toggle_show_robot_modules()
 	if(!isrobot(mymob))
 		return
-
-	var/mob/living/silicon/robot/r = mymob
-
-	r.shown_robot_modules = !r.shown_robot_modules
+	var/mob/living/silicon/robot/R = mymob
+	R.shown_robot_modules = !R.shown_robot_modules
 	update_robot_modules_display()
-
 
 /datum/hud/proc/update_robot_modules_display()
 	if(!isrobot(mymob) || !mymob.client)
@@ -73,18 +73,18 @@ var/global/obj/screen/robot_inventory
 			R.active_storage.close(R) //Closes the inventory ui.
 
 		if(!R.module)
-			to_chat(usr, "<span class='danger'>No module selected</span>")
+			to_chat(usr, SPAN_WARNING("No module selected."))
 			return
 
-		if(!R.module.equipment)
-			to_chat(usr, "<span class='danger'>Selected module has no modules to select</span>")
+		if(!length(R.module.equipment))
+			to_chat(usr, SPAN_WARNING("Selected module has no modules to select."))
 			return
 
 		if(!R.robot_modules_background)
 			return
 
 		var/display_rows = -round(-(R.module.equipment.len) / 8)
-		R.robot_modules_background.screen_loc = "CENTER-4:16,BOTTOM+1:7 to CENTER+3:16,BOTTOM+[display_rows]:7"
+		R.robot_modules_background.screen_loc = "CENTER-4:16,BOTTOM+1:24 to CENTER+3:16,BOTTOM+[display_rows]:24"
 		R.client.screen += R.robot_modules_background
 
 		var/x = -4	//Start at CENTER-4,SOUTH+1
@@ -101,7 +101,7 @@ var/global/obj/screen/robot_inventory
 				R.module.equipment.Remove(R.module.emag)
 
 		for(var/atom/movable/A in R.module.equipment)
-			if( (A != R.module_state_1) && (A != R.module_state_2) && (A != R.module_state_3) )
+			if(!(A in R.get_held_items()))
 				//Module is not currently active
 				R.client.screen += A
 				if(x < 0)
@@ -114,13 +114,9 @@ var/global/obj/screen/robot_inventory
 				if(x == 4)
 					x = -4
 					y++
-
 	else
-		//Modules display is hidden
-		//R.client.screen -= robot_inventory	//"store" icon
 		for(var/atom/A in R.module.equipment)
-			if( (A != R.module_state_1) && (A != R.module_state_2) && (A != R.module_state_3) )
-				//Module is not currently active
+			if(!(A in R.get_held_items()))
 				R.client.screen -= A
-		R.shown_robot_modules = 0
+		R.shown_robot_modules = FALSE
 		R.client.screen -= R.robot_modules_background

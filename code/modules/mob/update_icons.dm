@@ -28,7 +28,9 @@
 	for(var/hand_slot in get_held_item_slots())
 		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
 		var/obj/item/held = inv_slot?.get_equipped_item()
-		var/image/standing = held?.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot, inv_slot.use_overlay_fallback_slot)
+		if(!inv_slot.overlay_slot || !held)
+			continue
+		var/image/standing = held.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot, inv_slot.use_overlay_fallback_slot)
 		if(standing)
 			standing.appearance_flags |= (RESET_ALPHA|RESET_COLOR)
 			LAZYADD(hand_overlays, standing)

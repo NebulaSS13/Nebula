@@ -14,12 +14,10 @@
 		C.update_power_state()
 
 	if ( cell && is_component_functioning("power cell") && src.cell.charge > 0 )
-		if(src.module_state_1)
-			cell_use_power(50) // 50W load for every enabled tool TODO: tool-specific loads
-		if(src.module_state_2)
-			cell_use_power(50)
-		if(src.module_state_3)
-			cell_use_power(50)
+		// 50W load for every enabled tool TODO: tool-specific loads
+		var/use_power = 50 * length(get_held_items())
+		if(use_power > 0)
+			cell_use_power(use_power)
 
 		if(lights_on)
 			if(intenselight)
@@ -75,7 +73,7 @@
 
 	//update the state of modules and components here
 	if (stat != CONSCIOUS)
-		uneq_all()
+		unequip_all()
 
 	if(silicon_radio)
 		if(!is_component_functioning("radio"))
@@ -102,13 +100,6 @@
 				process_sec_hud(src,0,network = get_computer_network())
 			if (MED_HUD)
 				process_med_hud(src,0,network = get_computer_network())
-
-	if(length(get_active_grabs()))
-		ui_drop_grab.set_invisibility(INVISIBILITY_NONE)
-		ui_drop_grab.alpha = 255
-	else
-		ui_drop_grab.set_invisibility(INVISIBILITY_ABSTRACT)
-		ui_drop_grab.alpha = 0
 
 	if (src.healths)
 		if (src.stat != DEAD)
@@ -206,7 +197,6 @@
 			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 
-	update_items()
 	return 1
 
 /mob/living/silicon/robot/handle_vision()
@@ -237,21 +227,6 @@
 		set_see_invisible(SEE_INVISIBLE_LIVING) // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
 							 // has a "invisible" value of 15
 
-
-/mob/living/silicon/robot/proc/update_items()
-	if (src.client)
-		src.client.screen -= src.contents
-		for(var/obj/I in src.contents)
-			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/organ/internal/brain_interface)))
-				src.client.screen += I
-	if(src.module_state_1)
-		src.module_state_1:screen_loc = ui_inv1
-	if(src.module_state_2)
-		src.module_state_2:screen_loc = ui_inv2
-	if(src.module_state_3)
-		src.module_state_3:screen_loc = ui_inv3
-	update_icon()
-
 /mob/living/silicon/robot/proc/process_killswitch()
 	if(killswitch)
 		killswitch_time --
@@ -264,7 +239,7 @@
 
 /mob/living/silicon/robot/proc/process_locks()
 	if(weapon_lock)
-		uneq_all()
+		unequip_all()
 		weaponlock_time --
 		if(weaponlock_time <= 0)
 			if(src.client)

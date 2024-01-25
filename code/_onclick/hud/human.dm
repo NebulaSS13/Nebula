@@ -1,6 +1,10 @@
 /mob/living/carbon/human
 	hud_type = /datum/hud/human
 
+
+/datum/hud/human
+	has_intent_selector = /obj/screen/intent
+
 /datum/hud/human/FinalizeInstantiation()
 
 	var/ui_style = get_ui_style()
@@ -16,12 +20,6 @@
 
 	stamina_bar = new(null, mymob)
 	adding += stamina_bar
-
-	// Draw the attack intent dialogue.
-	if(hud_data.has_a_intent)
-		action_intent = new(null, mymob)
-		src.adding += action_intent
-		hud_elements |= action_intent
 
 	if(hud_data.has_m_intent)
 		move_intent = new(null, mymob, ui_style, ui_color, ui_alpha)
@@ -51,31 +49,30 @@
 		mymob.healths = new(null, mymob, ui_style)
 		hud_elements |= mymob.healths
 
-		mymob.oxygen = new(null, mymob)
+		mymob.oxygen = new(null, mymob, ui_style)
 		hud_elements |= mymob.oxygen
 
-		mymob.toxin = new(null, mymob)
+		mymob.toxin = new(null, mymob, ui_style)
 		hud_elements |= mymob.toxin
 
 		mymob.fire = new(null, mymob, ui_style)
 		hud_elements |= mymob.fire
 
 	if(hud_data.has_pressure)
-		mymob.pressure = new(null, mymob)
+		mymob.pressure = new(null, mymob, ui_style)
 		hud_elements |= mymob.pressure
 
 	if(hud_data.has_bodytemp)
-		mymob.bodytemp = new(null, mymob)
+		mymob.bodytemp = new(null, mymob, ui_style)
 		hud_elements |= mymob.bodytemp
 
-	if(target.isSynthetic())
-		target.cells = new(null, mymob)
-		hud_elements |= target.cells
+	if(mymob.isSynthetic())
+		mymob.cells = new(null, mymob, ui_style)
+		hud_elements |= mymob.cells
 
 	else if(hud_data.has_nutrition)
 		mymob.nutrition_icon = new(null, mymob)
 		hud_elements |= mymob.nutrition_icon
-
 		mymob.hydration_icon = new(null, mymob)
 		hud_elements |= mymob.hydration_icon
 
@@ -90,17 +87,12 @@
 	mymob.zone_sel.update_icon()
 	hud_elements |= mymob.zone_sel
 
-	target.attack_selector = new(null, mymob, ui_style, ui_color, ui_alpha)
-	hud_elements |= target.attack_selector
+	if(ishuman(mymob))
+		var/mob/living/carbon/human/human_mob = mymob
+		human_mob.attack_selector = new(null, mymob, ui_style, ui_color, ui_alpha)
+		hud_elements |= human_mob.attack_selector
 
-	//Handle the gun settings buttons
-	mymob.gun_setting_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
-	hud_elements |= mymob.gun_setting_icon
-
-	mymob.item_use_icon  = new(null, mymob, ui_style, ui_color, ui_alpha)
-	mymob.gun_move_icon  = new(null, mymob, ui_style, ui_color, ui_alpha)
-	mymob.radio_use_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
-
+	create_gun_setting_icons()
 	..()
 
 /mob/living/carbon/human/verb/toggle_hotkey_verbs()

@@ -385,3 +385,7 @@
 		var/org = GET_EXTERNAL_ORGAN(src, hand_slot)
 		if(org)
 			LAZYDISTINCTADD(., org)
+
+/mob/proc/unequip_all()
+	for(var/obj/item/thing in get_equipped_items(TRUE))
+		try_unequip(thing)

@@ -19,3 +19,4 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/fossil)
 	material = /decl/material/solid/organic/leather/synth
+	autocollects_from_turf = /obj/item/fossil

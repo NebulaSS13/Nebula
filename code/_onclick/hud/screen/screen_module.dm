@@ -1,6 +1,6 @@
 /obj/screen/robot_module_select
 	name       = "module"
-	icon       = 'icons/mob/screen1_robot.dmi'
+	icon       = 'icons/mob/screen/robot_modules.dmi'
 	icon_state = "nomod"
 	screen_loc = ui_borg_module
 

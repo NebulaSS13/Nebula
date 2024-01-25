@@ -23,7 +23,7 @@
 	allow_quick_empty = TRUE
 	use_to_pickup = TRUE
 	material = /decl/material/solid/organic/leather
-
+	autocollects_from_turf = /obj/item/stack/material/ore
 
 // -----------------------------
 //          Evidence bag

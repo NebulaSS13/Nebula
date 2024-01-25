@@ -404,15 +404,6 @@
 			pixel_y = 0
 	return TRUE
 
-/obj/item/attack_ai(mob/living/silicon/ai/user)
-	if (istype(src.loc, /obj/item/robot_module))
-		//If the item is part of a cyborg module, equip it
-		if(!isrobot(user))
-			return
-		var/mob/living/silicon/robot/R = user
-		R.activate_module(src)
-		R.hud_used.update_robot_modules_display()
-
 /obj/item/attackby(obj/item/W, mob/user)
 
 	if(SSfabrication.try_craft_with(src, W, user))

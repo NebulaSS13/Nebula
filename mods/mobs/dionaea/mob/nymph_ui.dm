@@ -11,6 +11,7 @@
 		icon_state = "intent_help"
 
 /datum/hud/diona_nymph
+	has_intent_selector = /obj/screen/intent/diona_nymph
 	var/obj/screen/diona_held/held
 
 /datum/hud/diona_nymph/get_ui_style()
@@ -23,14 +24,8 @@
 	return 255
 
 /datum/hud/diona_nymph/FinalizeInstantiation()
-	var/ui_style = get_ui_style()
-	var/ui_color = get_ui_color()
-	var/ui_alpha = get_ui_alpha()
-
-	action_intent = new /obj/screen/intent/diona_nymph(null, mymob, ui_style, ui_color, ui_alpha)
-	mymob.healths = new /obj/screen/diona_health(      null, mymob, ui_style, ui_color, ui_alpha)
-	src.other = list()
-	src.adding = list(mymob.healths, action_intent)
+	mymob.healths = new /obj/screen/diona_health(null, mymob, get_ui_style(), get_ui_color(), get_ui_alpha())
+	adding += mymob.healths
 	..()
 
 /obj/screen/diona_health

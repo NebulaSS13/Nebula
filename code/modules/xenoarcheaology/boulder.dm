@@ -73,13 +73,8 @@
 
 /obj/structure/boulder/Bumped(AM)
 	. = ..()
-	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
-		var/obj/item/pickaxe/P = (locate() in H.get_inactive_held_items())
-		if(istype(P))
-			src.attackby(P, H)
-
-	else if(isrobot(AM))
-		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active,/obj/item/pickaxe))
-			attackby(R.module_active,R)
+	if(isliving(AM))
+		var/mob/living/user = AM
+		var/obj/item/pickaxe/pickaxe = (locate() in user.get_inactive_held_items())
+		if(istype(pickaxe))
+			attackby(pickaxe, user)

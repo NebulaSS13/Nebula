@@ -48,6 +48,12 @@
 	* item/afterattack(atom,user,adjacent,params) - used both ranged and adjacent
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
+/mob/proc/check_additional_click_requirements(var/atom/A, var/params)
+	return FALSE
+
+/mob/proc/handle_unarmed_click_intercept(var/atom/A, var/params)
+	return FALSE
+
 /mob/proc/ClickOn(var/atom/A, var/params)
 
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
@@ -58,28 +64,28 @@
 	var/list/modifiers = params2list(params)
 	if(modifiers["right"])
 		RightClickOn(A)
-		return 1
+		return TRUE
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
-		return 1
+		return TRUE
 	if(modifiers["ctrl"] && modifiers["alt"])
 		CtrlAltClickOn(A)
-		return 1
+		return TRUE
 	if(modifiers["middle"] && modifiers["alt"])
 		AltMiddleClickOn(A)
-		return 1
+		return TRUE
 	if(modifiers["middle"])
 		MiddleClickOn(A)
-		return 1
+		return TRUE
 	if(modifiers["shift"])
 		ShiftClickOn(A)
-		return 0
+		return FALSE
 	if(modifiers["alt"]) // alt and alt-gr (rightalt)
 		AltClickOn(A)
-		return 1
+		return TRUE
 	if(modifiers["ctrl"])
 		CtrlClickOn(A)
-		return 1
+		return TRUE
 
 	if(incapacitated(INCAPACITATION_KNOCKOUT))
 		return
@@ -94,16 +100,21 @@
 	if(restrained())
 		setClickCooldown(10)
 		RestrainedClickOn(A)
-		return 1
+		return TRUE
+
+	if(check_additional_click_requirements(A, params))
+		return TRUE
 
 	if(in_throw_mode)
 		if(isturf(A) || isturf(A.loc))
 			throw_item(A)
 			trigger_aiming(TARGET_CAN_CLICK)
-			return 1
+			return TRUE
 		throw_mode_off()
 
 	var/obj/item/W = get_active_hand()
+	if(W == null && handle_unarmed_click_intercept(A, params))
+		return TRUE
 
 	if(W == A) // Handle attack_self
 		W.attack_self(src)

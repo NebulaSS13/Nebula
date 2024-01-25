@@ -28,6 +28,9 @@
 	var/opened = null
 	var/open_sound = null
 
+	/// Set to a type to autocollect this type on move or attackby on turf.
+	var/autocollects_from_turf = null
+
 /obj/item/storage/Destroy()
 	if(istype(storage_ui))
 		QDEL_NULL(storage_ui)
@@ -38,6 +41,30 @@
 		open(user)
 		return TRUE
 	. = ..()
+
+/obj/item/storage/equipped(mob/user, slot)
+	. = ..()
+	if(isnull(autocollects_from_turf))
+		return
+	if(slot in user.get_held_item_slots())
+		events_repository.register(/decl/observ/moved, src, user, /obj/item/storage/proc/autocollect_from_loc)
+	else
+		events_repository.unregister(/decl/observ/moved, src, user)
+
+/obj/item/storage/dropped(mob/user)
+	. = ..()
+	if(autocollects_from_turf)
+		events_repository.unregister(/decl/observ/moved, src, user)
+
+/obj/item/storage/proc/autocollect_from_loc()
+	if(QDELETED(src) || !collection_mode || !autocollects_from_turf)
+		return
+	var/mob/living/user = isliving(loc) && loc
+	for(var/thing in get_turf(src))
+		if(istype(thing, autocollects_from_turf))
+			var/obj/item/thing_item = thing
+			thing_item.attackby(src, user)
+			. = TRUE
 
 /obj/item/storage/proc/return_inv()
 
@@ -64,11 +91,6 @@
 		queue_icon_update()
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 0, -5)
-	if (isrobot(user) && user.hud_used)
-		var/mob/living/silicon/robot/robot = user
-		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
-			robot.hud_used.toggle_show_robot_modules()
-
 	prepare_ui()
 	storage_ui.on_open(user)
 	storage_ui.show_to(user)
@@ -395,6 +417,15 @@
 		can_hold[I.type]++
 		max_w_class = max(I.w_class, max_w_class)
 		max_storage_space += I.get_storage_cost()
+
+/obj/item/storage/proc/autocollect_from_turf(var/mob/user, var/turf/target_turf)
+	if(isnull(autocollects_from_turf))
+		return FALSE
+	for(var/thing in target_turf)
+		if(istype(thing, autocollects_from_turf))
+			var/obj/item/thing_item = thing
+			thing_item.attackby(src, user)
+	return TRUE
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.

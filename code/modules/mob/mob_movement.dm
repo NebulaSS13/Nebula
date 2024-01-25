@@ -62,13 +62,7 @@
 
 /client/verb/swap_hand()
 	set hidden = 1
-	if(iscarbon(mob))
-		var/mob/M = mob
-		M.swap_hand()
-	if(isrobot(mob))
-		var/mob/living/silicon/robot/R = mob
-		R.cycle_modules()
-	return
+	mob?.swap_hand()
 
 /client/verb/attack_self()
 	set hidden = 1

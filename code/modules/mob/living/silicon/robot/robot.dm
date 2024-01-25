@@ -15,8 +15,11 @@
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
 
-	var/panel_icon = 'icons/mob/robots/_panels.dmi'
+	silicon_camera = /obj/item/camera/siliconcam/robot_camera
+	silicon_radio = /obj/item/radio/borg
+	light_wedge = LIGHT_WIDE
 
+	var/panel_icon = 'icons/mob/robots/_panels.dmi'
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
 	var/power_efficiency = 1
@@ -29,45 +32,18 @@
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
-
 	var/icon_selected = TRUE //If icon selection has been completed yet
-
-//Hud stuff
-
-	var/obj/screen/robot_module_one/inv1
-	var/obj/screen/robot_module_two/inv2
-	var/obj/screen/robot_module_three/inv3
-	var/obj/screen/robot_drop_grab/ui_drop_grab
-
-	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
-	var/obj/screen/robot_modules_background/robot_modules_background
-
-//3 Modules can be activated at any one time.
-	var/obj/item/robot_module/module = null
-	var/obj/item/module_active
-	var/obj/item/module_state_1
-	var/obj/item/module_state_2
-	var/obj/item/module_state_3
-
-	silicon_camera = /obj/item/camera/siliconcam/robot_camera
-	silicon_radio = /obj/item/radio/borg
-
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/cell/cell = /obj/item/cell/high
-
 	var/cell_emp_mult = 2.5
-
 	// Components are basically robot organs.
 	var/list/components = list()
-
 	var/obj/item/organ/internal/central_processor
-
 	var/opened = 0
 	var/emagged = 0
 	var/wiresexposed = 0
 	var/locked = 1
 	var/has_power = 1
-
 	var/spawn_sound = 'sound/voice/liveagain.ogg'
 	var/pitch_toggle = 1
 	var/list/req_access = list(access_robotics)
@@ -85,25 +61,34 @@
 	var/braintype = "Cyborg"
 	var/intenselight = 0	// Whether cyborg's integrated light was upgraded
 	var/vtec = FALSE
-
+	var/obj/item/robot_module/module
 	var/list/robot_verbs_default = list(
 		/mob/living/silicon/robot/proc/sensor_mode,
 		/mob/living/silicon/robot/proc/robot_checklaws
 	)
 
-	light_wedge = LIGHT_WIDE
+	// HUD stuff.
+	var/shown_robot_modules = FALSE
+	var/obj/screen/robot_module_select/module_select
+	var/obj/screen/robot_radio/radio_config
+	var/obj/screen/robot_modules_background/robot_modules_background
+	var/obj/screen/robot_storage/robot_storage
+	var/obj/screen/robot_inventory/robot_inventory
 
 /mob/living/silicon/robot/Initialize()
 	. = ..()
+
+	add_held_item_slot(new /datum/inventory_slot/gripper/robot_module/one)
+	add_held_item_slot(new /datum/inventory_slot/gripper/robot_module/two)
+	add_held_item_slot(new /datum/inventory_slot/gripper/robot_module/three)
 
 	add_language(/decl/language/binary, 1)
 	add_language(/decl/language/machine, 1)
 	add_language(/decl/language/human/common, 1)
 
 	wires = new(src)
-
-	robot_modules_background = new(null, src)
 	ident = random_id(/mob/living/silicon/robot, 1, 999)
+	robot_modules_background = new(null, src)
 
 	updatename(modtype)
 	update_icon()
@@ -210,17 +195,20 @@
 	QDEL_NULL(module)
 	QDEL_NULL(wires)
 	QDEL_NULL(cell)
+	QDEL_NULL(module_select)
+	QDEL_NULL(radio_config)
+	QDEL_NULL(robot_storage)
+	QDEL_NULL(robot_inventory)
+	QDEL_NULL(robot_modules_background)
 	QDEL_LIST_ASSOC_VAL(components)
 	. = ..()
 
 /mob/living/silicon/robot/proc/reset_module(var/suppress_alert = null)
 	// Clear hands and module icon.
-	uneq_all()
-	if(shown_robot_modules)
-		hud_used.toggle_show_robot_modules()
+	unequip_all()
 	modtype = initial(modtype)
-	if(hands)
-		hands.icon_state = initial(hands.icon_state)
+	if(module_select)
+		module_select.icon_state = initial(module_select.icon_state)
 	// If the robot had a module and this wasn't an uncertified change, let the AI know.
 	if(module)
 		if (!suppress_alert)
@@ -257,8 +245,8 @@
 
 	new module_type(src)
 
-	if(hands)
-		hands.icon_state = lowertext(modtype)
+	if(module_select)
+		module_select.icon_state = lowertext(modtype)
 	SSstatistics.add_field("cyborg_[lowertext(modtype)]",1)
 	updatename()
 	recalculate_synth_capacities()
@@ -715,48 +703,8 @@
 		else
 			add_overlay(image(panel_icon, "ov-openpanel -c"))
 
-	if(module_active && istype(module_active, /obj/item/borg/combat/shield))
+	if(istype(get_active_hand(), /obj/item/borg/combat/shield))
 		add_overlay("[icon_state]-shield")
-
-/mob/living/silicon/robot/proc/installed_modules()
-	if(weapon_lock)
-		to_chat(src, "<span class='warning'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
-		return
-
-	if(!module)
-		pick_module()
-		return
-	var/dat = "<HEAD><TITLE>Modules</TITLE></HEAD><BODY>\n"
-	dat += {"
-	<B>Activated Modules</B>
-	<BR>
-	Module 1: [module_state_1 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_1]>[module_state_1]<A>" : "No Module"]<BR>
-	Module 2: [module_state_2 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_2]>[module_state_2]<A>" : "No Module"]<BR>
-	Module 3: [module_state_3 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_3]>[module_state_3]<A>" : "No Module"]<BR>
-	<BR>
-	<B>Installed Modules</B><BR><BR>"}
-
-
-	for (var/obj in module.equipment)
-		if (!obj)
-			dat += text("<B>Resource depleted</B><BR>")
-		else if(activated(obj))
-			dat += text("[obj]: <B>Activated</B><BR>")
-		else
-			dat += text("[obj]: <A HREF=?src=\ref[src];act=\ref[obj]>Activate</A><BR>")
-	if (emagged && module.emag)
-		if(activated(module.emag))
-			dat += text("[module.emag]: <B>Activated</B><BR>")
-		else
-			dat += text("[module.emag]: <A HREF=?src=\ref[src];act=\ref[module.emag]>Activate</A><BR>")
-/*
-		if(activated(obj))
-			dat += text("[obj]: \[<B>Activated</B> | <A HREF=?src=\ref[src];deact=\ref[obj]>Deactivate</A>\]<BR>")
-		else
-			dat += text("[obj]: \[<A HREF=?src=\ref[src];act=\ref[obj]>Activate</A> | <B>Deactivated</B>\]<BR>")
-*/
-	show_browser(src, dat, "window=robotmod")
-
 
 /mob/living/silicon/robot/OnSelfTopic(href_list)
 	if (href_list["showalerts"])
@@ -767,62 +715,6 @@
 		var/obj/item/O = locate(href_list["mod"])
 		if (istype(O) && (O.loc == src))
 			O.attack_self(src)
-		return TOPIC_HANDLED
-
-	if (href_list["act"])
-		var/obj/item/O = locate(href_list["act"])
-		if (!istype(O))
-			return TOPIC_HANDLED
-
-		if(!((O in module.equipment) || (O == src.module.emag)))
-			return TOPIC_HANDLED
-
-		if(activated(O))
-			to_chat(src, "Already activated.")
-			return TOPIC_HANDLED
-		if(!module_state_1)
-			module_state_1 = O
-			O.hud_layerise()
-			O.forceMove(src)
-			O.equipped_robot()
-			if(istype(module_state_1,/obj/item/borg/sight))
-				sight_mode |= module_state_1:sight_mode
-		else if(!module_state_2)
-			module_state_2 = O
-			O.hud_layerise()
-			O.forceMove(src)
-			O.equipped_robot()
-			if(istype(module_state_2,/obj/item/borg/sight))
-				sight_mode |= module_state_2:sight_mode
-		else if(!module_state_3)
-			module_state_3 = O
-			O.hud_layerise()
-			O.forceMove(src)
-			O.equipped_robot()
-			if(istype(module_state_3,/obj/item/borg/sight))
-				sight_mode |= module_state_3:sight_mode
-		else
-			to_chat(src, "You need to disable a module first!")
-		installed_modules()
-		return TOPIC_HANDLED
-
-	if (href_list["deact"])
-		var/obj/item/O = locate(href_list["deact"])
-		if(activated(O))
-			if(module_state_1 == O)
-				module_state_1 = null
-				O.forceMove(null)
-			else if(module_state_2 == O)
-				module_state_2 = null
-				O.forceMove(null)
-			else if(module_state_3 == O)
-				module_state_3 = null
-				O.forceMove(null)
-			else
-				to_chat(src, "Module isn't activated.")
-		else
-			to_chat(src, "Module isn't activated.")
-		installed_modules()
 		return TOPIC_HANDLED
 	return ..()
 

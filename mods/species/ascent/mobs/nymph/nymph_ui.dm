@@ -21,9 +21,8 @@
 	if(istype(nymph)) nymph.molt()
 
 /datum/hud/ascent_nymph
+	has_intent_selector = /obj/screen/intent/ascent_nymph
 	var/obj/screen/ascent_nymph_molt/molt
-	var/obj/screen/food/food
-	var/obj/screen/drink/drink
 
 /datum/hud/ascent_nymph/get_ui_style()
 	return 'mods/species/ascent/icons/ui.dmi'
@@ -38,13 +37,11 @@
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
-	molt          = new(                                null, mymob, ui_style, ui_color, ui_alpha)
-	food          = new /obj/screen/food(               null, mymob, ui_style, ui_color, ui_alpha)
-	drink         = new /obj/screen/drink(              null, mymob, ui_style, ui_color, ui_alpha)
-	action_intent = new /obj/screen/intent/ascent_nymph(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.nutrition_icon = new(null, mymob)
+	mymob.hydration_icon = new(null, mymob)
 	mymob.healths = new /obj/screen/ascent_nymph_health(null, mymob, ui_style, ui_color, ui_alpha)
-	src.other = list()
-	src.adding = list(mymob.healths, molt, food, drink, action_intent)
+	molt          = new(null, mymob, ui_style, ui_color, ui_alpha)
+	adding += list(mymob.healths, molt, mymob.nutrition_icon, mymob.hydration_icon)
 	..()
 
 /obj/screen/ascent_nymph_health

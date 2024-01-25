@@ -38,9 +38,7 @@
 #define ui_inv1 "CENTER-1,BOTTOM:5"			//borgs
 #define ui_inv2 "CENTER,BOTTOM:5"			//borgs
 #define ui_inv3 "CENTER+1,BOTTOM:5"			//borgs
-#define ui_borg_store "CENTER+2,BOTTOM:5"	//borgs
-#define ui_borg_inventory "CENTER-2,BOTTOM:5"//borgs
-#define ui_borg_drop_grab "CENTER-3,BOTTOM:5"//borgs
+
 #define ui_monkey_mask "LEFT+4:14,BOTTOM:5"	//monkey
 #define ui_monkey_back "LEFT+5:14,BOTTOM:5"	//monkey
 
@@ -59,9 +57,10 @@
 #define ui_acti_alt "RIGHT-1:28,BOTTOM:5" //alternative intent switcher for when the interface is hidden
 #define ui_stamina "RIGHT-3:24,BOTTOM+1:5"
 
-#define ui_borg_pull "RIGHT-3:24,BOTTOM+1:7"
-#define ui_borg_module "RIGHT-2:26,BOTTOM+1:7"
-#define ui_borg_panel "RIGHT-1:28,BOTTOM+1:7"
+#define ui_borg_module    "RIGHT-1:28,BOTTOM+1:7"
+#define ui_borg_radio     "RIGHT-4:16,BOTTOM:5"
+#define ui_borg_inventory "RIGHT-5:16,BOTTOM:5"
+#define ui_borg_storage   "RIGHT-6:16,BOTTOM:5"
 
 //Gun buttons
 #define ui_gun1 "RIGHT-2:26,BOTTOM+2:7"

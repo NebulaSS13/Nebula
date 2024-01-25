@@ -27,6 +27,7 @@
 
 	var/list/hand_hud_objects
 	var/list/swaphand_hud_objects
+
 	var/obj/screen/intent/action_intent
 	var/obj/screen/movement/move_intent
 	var/obj/screen/stamina/stamina_bar
@@ -39,6 +40,11 @@
 	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = FALSE
 
+	/// Set to FALSE for hand icons to be centered in a single row.
+	var/constraint_hands_to_columns = TRUE
+	/// Set to a type to create this selector on init.
+	var/has_intent_selector
+
 /datum/hud/New(mob/owner)
 	mymob = owner
 	instantiate()
@@ -46,9 +52,9 @@
 
 /datum/hud/Destroy()
 	. = ..()
-	stamina_bar = null
-	action_intent = null
-	move_intent = null
+	QDEL_NULL(stamina_bar)
+	QDEL_NULL(action_intent)
+	QDEL_NULL(move_intent)
 	adding = null
 	other = null
 	hotkeybuttons = null
@@ -112,8 +118,15 @@
 
 /datum/hud/proc/FinalizeInstantiation()
 	SHOULD_CALL_PARENT(TRUE)
+
+	if(has_intent_selector)
+		action_intent = new has_intent_selector(null, mymob, get_ui_style(), get_ui_color(), get_ui_alpha())
+		action_intent.icon_state = "intent_[mymob.a_intent]"
+		hud_elements += action_intent
+
 	BuildInventoryUI()
 	BuildHandsUI()
+
 	if(mymob.client)
 		mymob.client.screen = list()
 		if(length(hand_hud_objects))
@@ -196,21 +209,33 @@
 
 	// Rebuild offsets for the hand elements.
 	var/hand_y_offset = 5
-	var/list/elements = hand_hud_objects?.Copy()
-	while(length(elements))
-		var/copy_index = min(length(elements), 2)+1
-		var/list/sublist = elements.Copy(1, copy_index)
-		elements.Cut(1, copy_index)
-		var/obj/screen/inventory/inv_box
-		if(length(sublist) == 1)
-			inv_box = sublist[1]
-			inv_box.screen_loc = "CENTER,BOTTOM:[hand_y_offset]"
-		else
-			inv_box = sublist[1]
-			inv_box.screen_loc = "CENTER:-[world.icon_size/2],BOTTOM:[hand_y_offset]"
-			inv_box = sublist[2]
-			inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
+	if(constraint_hands_to_columns)
+		var/list/elements = hand_hud_objects?.Copy()
+		while(length(elements))
+			var/obj/screen/inventory/inv_box
+			var/copy_index = min(length(elements), 2)+1
+			var/list/sublist = elements.Copy(1, copy_index)
+			elements.Cut(1, copy_index)
+			if(length(sublist) == 1)
+				inv_box = sublist[1]
+				inv_box.screen_loc = "CENTER,BOTTOM:[hand_y_offset]"
+			else
+				inv_box = sublist[1]
+				inv_box.screen_loc = "CENTER:-[world.icon_size/2],BOTTOM:[hand_y_offset]"
+				inv_box = sublist[2]
+				inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
+			hand_y_offset += world.icon_size
+	else
+		var/i = 0
+		var/initial_x = round((length(hand_hud_objects) * world.icon_size)/2)
+		for(var/obj/screen/inventory/inv_box in hand_hud_objects)
+			if(length(hand_hud_objects) % 2 != 0)
+				inv_box.screen_loc = "CENTER:[-(initial_x) + round(world.icon_size/2) + (i * world.icon_size)],BOTTOM:[hand_y_offset]"
+			else
+				inv_box.screen_loc = "CENTER:[-(initial_x) + (i * world.icon_size)],BOTTOM:[hand_y_offset]"
+			i++
 		hand_y_offset += world.icon_size
+
 	if(mymob.client)
 		mymob.client.screen |= hand_hud_objects
 
@@ -298,6 +323,19 @@
 
 	// Actual hand elems.
 	rebuild_hands()
+
+//Handle the gun settings buttons
+/datum/hud/proc/create_gun_setting_icons()
+	if(!mymob)
+		return
+	var/ui_style = get_ui_style()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
+	mymob.gun_setting_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
+	hud_elements |= mymob.gun_setting_icon
+	mymob.item_use_icon  = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.gun_move_icon  = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.radio_use_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
 
 /mob/verb/minimize_hud(full = FALSE as null)
 	set name = "Minimize Hud"

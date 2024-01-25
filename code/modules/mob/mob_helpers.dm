@@ -13,8 +13,8 @@
 		return FALSE //M is too small to wield this
 	return TRUE
 
-/mob/living/proc/isSynthetic()
-	return 0
+/mob/proc/isSynthetic()
+	return FALSE
 
 /mob/living/carbon/human/isSynthetic()
 	if(isnull(full_prosthetic))
@@ -28,10 +28,10 @@
 	return full_prosthetic
 
 /mob/living/silicon/isSynthetic()
-	return 1
+	return TRUE
 
 /mob/proc/isMonkey()
-	return 0
+	return FALSE
 
 /mob/living/carbon/human/isMonkey()
 	return istype(species, /decl/species/monkey)
@@ -381,20 +381,6 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = intent_numeric((intent_numeric(a_intent)+3) % 4)
 		if(hud_used && hud_used.action_intent)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
-
-	else if(isrobot(src))
-		switch(input)
-			if(I_HELP)
-				a_intent = I_HELP
-			if(I_HURT)
-				a_intent = I_HURT
-			if("right","left")
-				a_intent = intent_numeric(intent_numeric(a_intent) - 3)
-		if(hud_used && hud_used.action_intent)
-			if(a_intent == I_HURT)
-				hud_used.action_intent.icon_state = I_HURT
-			else
-				hud_used.action_intent.icon_state = I_HELP
 
 /mob/proc/welding_eyecheck()
 	return

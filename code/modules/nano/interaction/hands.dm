@@ -15,9 +15,3 @@ var/global/datum/topic_state/hands/hands_topic_state = new
 	if(src_object in get_held_items())
 		return STATUS_INTERACTIVE
 	return STATUS_CLOSE
-
-/mob/living/silicon/robot/hands_can_use_topic(src_object)
-	for(var/obj/item/gripper/active_gripper in list(module_state_1, module_state_2, module_state_3))
-		if(active_gripper.contains(src_object))
-			return STATUS_INTERACTIVE
-	return STATUS_CLOSE

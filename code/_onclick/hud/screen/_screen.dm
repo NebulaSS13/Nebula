@@ -92,41 +92,10 @@
 			if(isrobot(user))
 				var/mob/living/silicon/robot/R = user
 				R.pick_module()
-		if("inventory")
-			if(isrobot(user))
-				var/mob/living/silicon/robot/R = user
-				if(R.module)
-					R.hud_used.toggle_show_robot_modules()
-					return TRUE
-				to_chat(R, "You haven't selected a module yet.")
 		if("radio")
 			if(isrobot(user))
 				var/mob/living/silicon/robot/R = user
 				R.radio_menu()
-		if("panel")
-			if(isrobot(user))
-				var/mob/living/silicon/robot/R = user
-				R.installed_modules()
-		if("store")
-			if(isrobot(user))
-				var/mob/living/silicon/robot/R = user
-				if(R.module)
-					R.uneq_active()
-					R.hud_used.update_robot_modules_display()
-				else
-					to_chat(R, "You haven't selected a module yet.")
-		if("module1")
-			if(isrobot(user))
-				var/mob/living/silicon/robot/R = user
-				R.toggle_module(1)
-		if("module2")
-			if(isrobot(user))
-				var/mob/living/silicon/robot/R = user
-				R.toggle_module(2)
-		if("module3")
-			if(isrobot(user))
-				var/mob/living/silicon/robot/R = user
-				R.toggle_module(3)
 		else
 			return FALSE
 	return TRUE

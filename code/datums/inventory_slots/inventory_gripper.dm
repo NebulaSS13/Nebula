@@ -1,13 +1,12 @@
+// For reference, grippers do not use ui_loc, they have it set dynamically during /datum/hud/proc/rebuild_hands()
 /datum/inventory_slot/gripper
+	quick_equip_priority = -1 // you quick-equip stuff by holding it in a gripper, so this ought to be dead last
 	var/hand_sort_priority = 1
 	var/can_use_held_item = TRUE
 	var/dexterity = DEXTERITY_FULL
 	var/covering_slot_flags
 	/// If set, use this icon_state for the hand slot overlay; otherwise, use slot_id.
 	var/hand_overlay
-	quick_equip_priority = -1 // you quick-equip stuff by holding it in a gripper, so this ought to be dead last
-
-	// For reference, grippers do not use ui_loc, they have it set dynamically during /datum/hud/proc/rebuild_hands()
 
 /datum/inventory_slot/gripper/proc/get_dexterity(var/silent)
 	return dexterity

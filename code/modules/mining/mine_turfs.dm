@@ -52,22 +52,6 @@
 	if(dug)
 		icon_state = "asteroid_dug"
 
-//#TODO: This should probably be generalised?
-/turf/simulated/floor/asteroid/attackby(obj/item/W, mob/user)
-	if(!W || !user)
-		return FALSE
-	if(istype(W,/obj/item/storage/ore)) //#FIXME: Its kinda silly to put this in a specific turf's subtype's attackby.
-		var/obj/item/storage/ore/S = W
-		if(S.collection_mode)
-			for(var/obj/item/stack/material/ore/O in contents)
-				return O.attackby(W,user)
-	else if(istype(W,/obj/item/storage/bag/fossils))
-		var/obj/item/storage/bag/fossils/S = W
-		if(S.collection_mode)
-			for(var/obj/item/fossil/F in contents)
-				return F.attackby(W,user)
-	return ..(W,user)
-
 /turf/simulated/floor/asteroid/clear_diggable_resources()
 	dug = TRUE
 	..()
@@ -100,18 +84,3 @@
 			if(istype(get_step(src, direction), /turf/simulated/floor/asteroid))
 				A = get_step(src, direction)
 				A.updateMineralOverlays()
-
-//#TODO: This should probably be generalised?
-/turf/simulated/floor/asteroid/Entered(atom/movable/M)
-	..()
-	if(isrobot(M))
-		var/mob/living/silicon/robot/R = M
-		if(R.module)
-			if(istype(R.module_state_1,/obj/item/storage/ore))
-				attackby(R.module_state_1,R)
-			else if(istype(R.module_state_2,/obj/item/storage/ore))
-				attackby(R.module_state_2,R)
-			else if(istype(R.module_state_3,/obj/item/storage/ore))
-				attackby(R.module_state_3,R)
-			else
-				return
