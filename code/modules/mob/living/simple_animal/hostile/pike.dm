@@ -29,7 +29,3 @@
 
 /mob/living/simple_animal/hostile/carp/pike/carp_randomify()
 	return
-
-/mob/living/simple_animal/hostile/carp/pike/on_update_icon()
-	SHOULD_CALL_PARENT(FALSE)
-	return
