@@ -157,10 +157,10 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define MCS_BLOCK    2 // Failed to change, but action was performed
 
 #define FABRICATOR_EXTRA_COST_FACTOR 1.25
-#define FAB_HACKED   1
-#define FAB_DISABLED 2
-#define FAB_SHOCKED  4
-#define FAB_BUSY     8
+#define FAB_HACKED   BITFLAG(0)
+#define FAB_DISABLED BITFLAG(1)
+#define FAB_SHOCKED  BITFLAG(2)
+#define FAB_BUSY     BITFLAG(3)
 
 #define  PART_CPU  		/obj/item/stock_parts/computer/processor_unit				// CPU. Without it the computer won't run. Better CPUs can run more programs at once.
 #define  PART_NETWORK  	/obj/item/stock_parts/computer/network_card					// Network Card component of this computer. Allows connection to network
