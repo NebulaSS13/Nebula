@@ -16,7 +16,7 @@
 /obj/item/storage/box/fancy/crayons/update_icon_state()
 	icon_state = get_world_inventory_state()
 
-/obj/item/storage/box/fancy/crayons/offset_contents_overlay(var/overlay_index, var/image/overlay)
+/obj/item/storage/box/fancy/crayons/adjust_contents_overlay(var/overlay_index, var/image/overlay)
 	if(overlay)
 		overlay.pixel_x = overlay_index * 2
 	return overlay

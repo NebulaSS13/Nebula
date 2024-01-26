@@ -14,7 +14,7 @@
 /obj/item/storage/box/fancy/donut/update_icon_state()
 	icon_state = get_world_inventory_state()
 
-/obj/item/storage/box/fancy/donut/offset_contents_overlay(var/overlay_index, var/image/overlay)
+/obj/item/storage/box/fancy/donut/adjust_contents_overlay(var/overlay_index, var/image/overlay)
 	if(overlay)
 		overlay.pixel_x = overlay_index * 3
 	return overlay

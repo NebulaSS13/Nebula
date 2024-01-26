@@ -6,10 +6,10 @@
 	abstract_type = /obj/item/storage/box/fancy
 	/// A string modifier used to generate overlays for contents.
 	var/use_single_icon_overlay_state
-	/// The root type  of the key item that this "fancy" container is meant to store.
+	/// The root type of the key item that this "fancy" container is meant to store.
 	var/obj/item/key_type
 
-/obj/item/storage/box/fancy/proc/offset_contents_overlay(var/overlay_index, var/image/overlay)
+/obj/item/storage/box/fancy/proc/adjust_contents_overlay(var/overlay_index, var/image/overlay)
 	return overlay
 
 /obj/item/storage/box/fancy/proc/update_icon_state()
@@ -27,7 +27,7 @@
 		if(!check_state_in_icon(thing_state, thing.icon))
 			continue
 		. = TRUE
-		var/image/thing_overlay = offset_contents_overlay(offset_index, image(thing.icon, thing_state))
+		var/image/thing_overlay = adjust_contents_overlay(offset_index, image(thing.icon, thing_state))
 		if(thing.color)
 			thing_overlay.color = thing.color
 		thing_overlay.appearance_flags |= RESET_COLOR

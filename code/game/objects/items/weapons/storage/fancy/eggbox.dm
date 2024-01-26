@@ -26,7 +26,7 @@
 /obj/item/storage/box/fancy/egg_box/add_contents_overlays()
 	return opened && ..()
 
-/obj/item/storage/box/fancy/egg_box/offset_contents_overlay(var/overlay_index, var/image/overlay)
+/obj/item/storage/box/fancy/egg_box/adjust_contents_overlay(var/overlay_index, var/image/overlay)
 	if(overlay)
 		overlay.pixel_x = (overlay_index % 6) * 4
 		if(overlay_index >= 6)

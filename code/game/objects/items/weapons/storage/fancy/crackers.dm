@@ -13,7 +13,7 @@
 	can_hold = list(/obj/item/chems/food/cracker)
 	use_single_icon_overlay_state = "crackerbag"
 
-/obj/item/storage/box/fancy/crackers/offset_contents_overlay(var/overlay_index, var/image/overlay)
+/obj/item/storage/box/fancy/crackers/adjust_contents_overlay(var/overlay_index, var/image/overlay)
 	overlay?.pixel_x = -(overlay_index)
 	return overlay
 
