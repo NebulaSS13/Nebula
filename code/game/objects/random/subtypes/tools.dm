@@ -33,8 +33,8 @@
 /obj/random/toolbox
 	name = "random toolbox"
 	desc = "This is a random toolbox."
-	icon = 'icons/obj/items/storage/toolbox.dmi'
-	icon_state = "red"
+	icon = 'icons/obj/items/storage/toolboxes/toolbox_red.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/toolbox/spawn_choices()
 	var/static/list/spawnable_choices = list(

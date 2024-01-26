@@ -169,7 +169,9 @@
 
 /obj/item/boombox/on_update_icon()
 	. = ..()
-	icon_state = playing ? "on" : "off"
+	icon_state = get_world_inventory_state()
+	if(playing)
+		icon_state = "[icon_state]_on"
 
 /obj/item/boombox/proc/stop()
 	playing = 0
