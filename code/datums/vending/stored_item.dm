@@ -5,13 +5,16 @@
 	var/list/instances		//What items are actually stored
 	var/atom/storing_object
 
-/datum/stored_items/New(var/atom/storing_object, var/path, var/name = null, var/amount = 0)
+/datum/stored_items/New(atom/_storing_object, _path, _name, _amount = 1)
 	if(!istype(storing_object))
 		CRASH("Unexpected storing object.")
-	src.storing_object = storing_object
-	src.item_path = path
-	src.amount = amount
-	src.item_name = name || atom_info_repository.get_name_for(path)
+	if(_path)
+		item_path = _path
+	item_name = _name || atom_info_repository.get_name_for(item_path)
+	storing_object = _storing_object
+	amount = _amount
+	if(!ispath(item_path) && !storing_object)
+		PRINT_STACK_TRACE("Type-based stored_items datum has no storing_object and invalid item_path: [item_path || "NULL"]")
 	..()
 
 /datum/stored_items/Destroy()
