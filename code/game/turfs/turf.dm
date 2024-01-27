@@ -140,6 +140,8 @@
 	if (!changing_turf)
 		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
+	SSambience.queued -= src
+
 	changing_turf = FALSE
 
 	if (contents.len > !!lighting_overlay)
@@ -509,7 +511,7 @@
 	is_outside = new_outside
 	if(!skip_weather_update)
 		update_weather()
-	SSambience.queued += src
+	SSambience.queued |= src
 
 	last_outside_check = OUTSIDE_UNCERTAIN
 	update_external_atmos_participation()
