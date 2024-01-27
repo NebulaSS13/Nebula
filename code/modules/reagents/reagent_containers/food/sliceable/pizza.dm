@@ -167,7 +167,12 @@
 
 		if( pizza )
 			var/mutable_appearance/pizzaimg = new(pizza)
+			pizzaimg.pixel_x =  0
 			pizzaimg.pixel_y = -3
+			pizzaimg.pixel_w =  0
+			pizzaimg.pixel_z =  0
+			pizzaimg.plane = FLOAT_PLANE
+			pizzaimg.layer = FLOAT_LAYER
 			add_overlay(pizzaimg)
 		return
 	else
