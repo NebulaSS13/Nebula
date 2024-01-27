@@ -94,7 +94,7 @@
 ///Spawns a randomly chosen big flora from our big flora seed list.
 /datum/planet_flora/proc/spawn_random_big_flora(var/turf/T)
 	if(LAZYLEN(big_flora_types))
-		. = new /obj/structure/flora/plant(T, null, null, pick(big_flora_types))
+		. = new /obj/structure/flora/plant/large(T, null, null, pick(big_flora_types))
 
 
 ////////////////////////////////////////////////////////////////////////
