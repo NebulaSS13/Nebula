@@ -265,6 +265,7 @@
 	var/mob/living/user = null
 	if(isliving(firer))
 		user = firer
+		target_zone = user.get_target_zone()
 
 	if(istype(user))
 		add_fingerprint(user)
@@ -709,7 +710,7 @@
 		else
 			M.setClickCooldown(DEFAULT_QUICK_COOLDOWN) // Spam prevention, essentially.
 			M.visible_message(SPAN_DANGER("\The [M] pulls the trigger reflexively!"))
-			Fire(aiming_at, M, target_zone = M.get_target_zone())
+			Fire(aiming_at, M)
 			if(M.aiming)
 				M.aiming.toggle_active(FALSE, TRUE)
 
