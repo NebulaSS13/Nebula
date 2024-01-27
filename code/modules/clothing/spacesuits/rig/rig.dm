@@ -587,7 +587,7 @@
 		wearer.update_inv_back()
 	return
 
-/obj/item/rig/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/rig/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && slot == slot_back_str && !offline && equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)

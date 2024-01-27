@@ -109,7 +109,7 @@
 		M.update_inv_wear_mask(0)
 		M.update_inv_hands()
 
-/obj/item/clothing/mask/smokable/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/mask/smokable/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && lit && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
 		var/image/on_overlay = emissive_overlay(overlay.icon, "[overlay.icon_state]-on")
 		on_overlay.appearance_flags |= RESET_COLOR

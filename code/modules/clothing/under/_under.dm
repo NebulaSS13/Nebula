@@ -43,7 +43,7 @@
 	if(check_state_in_icon("[BODYTYPE_HUMANOID]-[slot_w_uniform_str]-sleeves", icon))
 		verbs |= /obj/item/clothing/under/proc/roll_up_sleeves
 
-/obj/item/clothing/under/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/under/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && slot == slot_w_uniform_str)
 		if(rolled_down && check_state_in_icon("[overlay.icon_state]-rolled", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-rolled"

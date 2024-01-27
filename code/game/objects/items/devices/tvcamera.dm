@@ -9,8 +9,8 @@
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/plastic
 	matter = list(
-		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT, 
-		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT, 
+		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/silicon         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass           = MATTER_AMOUNT_TRACE,
 	)
@@ -85,7 +85,7 @@
 	if(!href_list["close"])
 		attack_self(usr)
 
-/obj/item/camera/tvcamera/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/camera/tvcamera/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && video_enabled && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-on"
 	. = ..()

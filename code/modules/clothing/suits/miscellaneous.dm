@@ -158,7 +158,7 @@
 			shine = material.reflectiveness
 		desc = "A long, thick [material.use_name] coat."
 
-/obj/item/clothing/suit/leathercoat/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/suit/leathercoat/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && shine > 0 && slot == slot_wear_suit_str)
 		var/mutable_appearance/S = mutable_appearance(overlay.icon, "shine")
 		S.alpha = max(shine, artificial_shine)/100 * 255
