@@ -314,6 +314,7 @@
 	if(!islist(channels))
 		channels = list(channels)
 	for(var/channel in channels)
-		cameras_by_channel[channel] -= removed
-		if(!length(cameras_by_channel))
-			cameras_by_channel -= channel
+		if(cameras_by_channel[channel])
+			cameras_by_channel[channel] -= removed
+			if(!length(cameras_by_channel[channel]))
+				cameras_by_channel -= channel
