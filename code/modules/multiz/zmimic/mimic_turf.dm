@@ -15,6 +15,8 @@
 	/// If this Z-turf leads to space, uninterrupted.
 	var/tmp/z_eventually_space = FALSE
 	var/z_flags = 0
+	/// If ZM_OVERRIDE is set, use this var for appearance instead of the `appearance` BYOND-var. Anything that's valid in `appearance` is valid here.
+	var/z_appearance
 
 	// debug
 	var/tmp/z_depth

@@ -325,11 +325,17 @@ SUBSYSTEM_DEF(zcopy)
 			T.z_eventually_space = TRUE
 			t_target = SPACE_PLANE
 
+		var/appearance_target
+		if (T.below.z_flags & ZM_OVERRIDE)
+			appearance_target = T.below.z_appearance
+		else
+			appearance_target = Td
+
 		if (T.z_flags & ZM_MIMIC_OVERWRITE)
 			// This openturf doesn't care about its icon, so we can just overwrite it.
 			if (T.below.mimic_proxy)
 				QDEL_NULL(T.below.mimic_proxy)
-			T.appearance = T.below
+			T.appearance = appearance_target	// This used to be T.below rather than Td, not sure why. Legacy artifact?
 			T.name = initial(T.name)
 			T.desc = initial(T.desc)
 			T.gender = initial(T.gender)
@@ -340,7 +346,7 @@ SUBSYSTEM_DEF(zcopy)
 			if (!T.below.mimic_proxy)
 				T.below.mimic_proxy = new(T)
 			var/atom/movable/openspace/turf_proxy/TO = T.below.mimic_proxy
-			TO.appearance = Td
+			TO.appearance = appearance_target
 			TO.name = T.name
 			TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
 			TO.opacity = FALSE

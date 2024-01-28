@@ -31,6 +31,7 @@
 #define ZM_MIMIC_NO_AO    16	//! If the turf shouldn't apply regular turf AO and only do Z-mimic AO.
 #define ZM_NO_OCCLUDE     32	//! Don't occlude below atoms if we're a non-mimic z-turf.
 #define ZM_MIMIC_BASETURF 64	//! Mimic baseturf instead of the below atom. Sometimes useful for elevators.
+#define ZM_OVERRIDE      128	// If this turf is being copied, read the `z_appearance` var instead of our real appearance.
 
 // Convenience flag.
 #define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)
