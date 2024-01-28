@@ -33,8 +33,9 @@
 #define ZM_MIMIC_BASETURF 64	//! Mimic baseturf instead of the below atom. Sometimes useful for elevators.
 #define ZM_OVERRIDE      128	// If this turf is being copied, read the `z_appearance` var instead of our real appearance.
 
-// Convenience flag.
-#define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)
+// Convenience flags.
+#define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)	//! Common defaults for zturfs.
+#define ZMM_WIDE_LOAD (ZMM_LOOKAHEAD | ZMM_LOOKBESIDE)	//! Atom is big and needs to scan one extra turf in both X and Y. This only extends the range by one turf. Cheap, but not free.
 
 // For debug purposes, should contain the above defines in ascending order.
 var/global/list/mimic_defines = list(
