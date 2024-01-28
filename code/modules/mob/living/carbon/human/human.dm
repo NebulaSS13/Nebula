@@ -6,12 +6,14 @@
 	icon_state = "body_m_s"
 	mob_sort_value = 6
 	dna = new /datum/dna()
+	mob_default_max_health = 150
 
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/step_count
 
-/mob/living/carbon/human/Initialize(mapload, species_name = null, datum/dna/new_dna = null, decl/bodytype/new_bodytype = null)
+/mob/living/carbon/human/Initialize(mapload, species_name, datum/dna/new_dna, decl/bodytype/new_bodytype)
+	current_health = mob_default_max_health
 	setup_hud_overlays()
 	var/list/newargs = args.Copy(2)
 	setup(arglist(newargs))
@@ -46,14 +48,6 @@
 		return
 	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
 	return stomach?.ingested
-
-/mob/living/carbon/human/get_fullness()
-	if(!should_have_organ(BP_STOMACH))
-		return ..()
-	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH, /obj/item/organ/internal/stomach)
-	if(stomach)
-		return nutrition + (stomach.ingested?.total_volume * 10)
-	return 0 //Always hungry, but you can't actually eat. :(
 
 /mob/living/carbon/human/get_inhaled_reagents()
 	if(!should_have_organ(BP_LUNGS))
@@ -97,7 +91,7 @@
 			stat(null, "Hardsuit charge: [cell_status]")
 
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
-	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
+	if(!get_config_value(/decl/config/toggle/use_loyalty_implants) && !override) return // Nuh-uh.
 
 	var/obj/item/implant/loyalty/L = new/obj/item/implant/loyalty(M)
 	L.imp_in = M
@@ -135,70 +129,12 @@
 		var/obj/item/underwear/UW = entry
 		LAZYADD(., "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>")
 
-// called when something steps onto a human
-// this handles mulebots and vehicles
-/mob/living/carbon/human/Crossed(var/atom/movable/AM)
-	if(istype(AM, /mob/living/bot/mulebot))
-		var/mob/living/bot/mulebot/MB = AM
-		MB.runOver(src)
 
-	if(istype(AM, /obj/vehicle))
-		var/obj/vehicle/V = AM
-		V.RunOver(src)
-
-// Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
-/mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
-	var/obj/item/card/id/id = GetIdCard()
-	if(istype(id))
-		return id.rank ? id.rank : if_no_job
-	else
-		return if_no_id
-
-//gets assignment from ID or ID inside PDA or PDA itself
-//Useful when player do something with computers
-/mob/living/carbon/human/proc/get_assignment(var/if_no_id = "No id", var/if_no_job = "No job")
-	var/obj/item/card/id/id = GetIdCard()
-	if(istype(id))
-		return id.assignment ? id.assignment : if_no_job
-	else
-		return if_no_id
-
-//gets name from ID or ID inside PDA or PDA itself
-//Useful when player do something with computers
-/mob/living/carbon/human/proc/get_authentification_name(var/if_no_id = "Unknown")
-	var/obj/item/card/id/id = GetIdCard()
-	if(istype(id))
-		return id.registered_name
-	else
-		return if_no_id
-
-//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
-/mob/living/carbon/human/proc/get_visible_name()
-	var/face_name = get_face_name()
-	var/id_name = get_id_name("")
-	if((face_name == "Unknown") && id_name && (id_name != face_name))
-		return "[face_name] (as [id_name])"
-	return face_name
-
-//Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
-//Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
-/mob/living/carbon/human/proc/get_face_name()
-	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_HEAD)
-	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
-	var/obj/item/head = get_equipped_item(slot_head_str)
-	if(!H || (H.status & ORGAN_DISFIGURED) || !real_name || is_husked() || (mask && (mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
-		if(istype(mask) && mask.visible_name)
-			return mask.visible_name
-		return get_rig()?.visible_name || "Unknown"
-	return real_name
-
-//gets name from ID or PDA itself, ID inside PDA doesn't matter
-//Useful when player is being seen by other mobs
-/mob/living/carbon/human/proc/get_id_name(var/if_no_id = "Unknown")
-	. = if_no_id
-	var/obj/item/card/id/I = GetIdCard(exceptions = list(/obj/item/holder))
-	if(istype(I))
-		return I.registered_name
+// TODO: remove when is_husked is moved to a parent type (or if husking is removed)
+/mob/living/carbon/human/identity_is_visible()
+	if(is_husked())
+		return FALSE
+	return ..()
 
 /mob/living/carbon/human/OnSelfTopic(href_list)
 	if (href_list["lookitem"])
@@ -382,15 +318,6 @@
 	dna.check_integrity(src)
 	return
 
-/mob/living/carbon/human/get_bodytype_category()
-	. = get_bodytype()?.bodytype_category
-
-/mob/living/carbon/human/check_has_mouth()
-	var/obj/item/organ/external/head/H = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	if(!H || !istype(H) || !H.can_intake_reagents)
-		return FALSE
-	return TRUE
-
 /mob/living/carbon/human/empty_stomach()
 	SET_STATUS_MAX(src, STAT_STUN, 3)
 
@@ -473,7 +400,7 @@
 	reset_blood()
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
-		for(var/mob/living/carbon/brain/brain in global.player_list) // This is really nasty, does it even work anymore?
+		for(var/mob/living/brain/brain in global.player_list) // This is really nasty, does it even work anymore?
 			if(brain.real_name == src.real_name && brain.mind)
 				brain.mind.transfer_to(src)
 				qdel(brain.loc)
@@ -574,14 +501,16 @@
 		force_update_limbs()
 
 		// Check and clear hair.
-		var/decl/sprite_accessory/hair/hairstyle = GET_DECL(h_style)
+		var/set_hairstyle = get_hairstyle()
+		var/decl/sprite_accessory/hair/hairstyle = GET_DECL(set_hairstyle)
 		if(!hairstyle?.accessory_is_available(src, species, new_bodytype))
-			change_hair(new_bodytype.default_h_style, FALSE)
-		var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(f_style)
+			set_hairstyle(new_bodytype.default_h_style, skip_update = TRUE)
+		set_hairstyle = get_facial_hairstyle()
+		var/decl/sprite_accessory/hair/facialhairstyle = GET_DECL(set_hairstyle)
 		if(!facialhairstyle?.accessory_is_available(src, species, new_bodytype))
-			change_facial_hair(new_bodytype.default_f_style, FALSE)
+			set_facial_hairstyle(new_bodytype.default_f_style, skip_update = TRUE)
 		// TODO: check markings.
-
+		update_hair()
 		update_eyes()
 		return TRUE
 	return FALSE
@@ -610,7 +539,7 @@
 	holder_type = null
 	if(species.holder_type)
 		holder_type = species.holder_type
-	maxHealth = species.total_health
+	set_max_health(species.total_health, skip_health_update = TRUE) // Health update is handled later.
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
@@ -713,7 +642,7 @@
 /mob/living/carbon/human/proc/apply_bodytype_appearance()
 	var/decl/bodytype/root_bodytype = get_bodytype()
 	if(!root_bodytype)
-		skin_colour = COLOR_BLACK
+		set_skin_colour(COLOR_BLACK)
 	else
 		root_bodytype.apply_appearance(src)
 		default_pixel_x = initial(pixel_x) + root_bodytype.pixel_offset_x
@@ -903,10 +832,6 @@
 	if(stomach)
 		victim.forceMove(stomach)
 
-/mob/living/carbon/human/should_have_organ(var/organ_check)
-	var/decl/bodytype/root_bodytype = get_bodytype()
-	return root_bodytype?.has_organ[organ_check]
-
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
 
@@ -1009,7 +934,7 @@
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
 /mob/living/carbon/human/nervous_system_failure()
-	return getBrainLoss() >= maxHealth * 0.75
+	return getBrainLoss() >= get_max_health() * 0.75
 
 /mob/living/carbon/human/melee_accuracy_mods()
 	. = ..()
@@ -1100,56 +1025,11 @@
 			if(damage && P.damtype == BRUTE)
 				var/hit_dir = get_dir(P.starting, src)
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
-				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
-				var/scale = min(1, round(P.damage / 50, 0.2))
-				B.set_scale(scale)
-
+				if(!QDELETED(B))
+					B.icon_state = pick("dir_splatter_1","dir_splatter_2")
+					var/scale = min(1, round(P.damage / 50, 0.2))
+					B.set_scale(scale)
 				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.get_blood_color(src))
-
-/mob/living/carbon/human/get_dexterity(var/silent = FALSE)
-
-	// Check if we have a slot to use for this.
-	var/check_slot = get_active_held_item_slot()
-	if(!check_slot)
-		return DEXTERITY_NONE
-	var/datum/inventory_slot/gripper/gripper = get_inventory_slot_datum(check_slot)
-	if(!istype(gripper))
-		if(!silent)
-			to_chat(src, "Your [parse_zone(check_slot)] is missing!")
-		return DEXTERITY_NONE
-
-	// Work out if we have any brain damage impacting our dexterity.
-	var/dex_malus = 0
-	if(getBrainLoss() && getBrainLoss() > config.dex_malus_brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
-		dex_malus = clamp(CEILING((getBrainLoss()-config.dex_malus_brainloss_threshold)/10), 0, length(global.dexterity_levels))
-		if(dex_malus > 0)
-			dex_malus = global.dexterity_levels[dex_malus]
-
-	// If this slot does not need an organ we just go off the dexterity of the slot itself.
-	if(isnull(gripper.requires_organ_tag))
-		if(dex_malus)
-			if(!silent)
-				to_chat(src, SPAN_WARNING("Your [lowertext(gripper.slot_name)] doesn't respond properly!"))
-			return (gripper.get_dexterity() & ~dex_malus)
-		return gripper.get_dexterity()
-
-	// If this slot requires an organ, do the appropriate organ checks.
-	var/obj/item/organ/external/active_hand = GET_EXTERNAL_ORGAN(src, check_slot)
-	if(!active_hand)
-		if(!silent)
-			to_chat(src, "Your [parse_zone(check_slot)] is missing!")
-		return DEXTERITY_NONE
-	if(!active_hand.is_usable())
-		if(!silent)
-			to_chat(src, SPAN_WARNING("Your [active_hand.name] is unusable!"))
-		return DEXTERITY_NONE
-
-	// Return our organ dexterity.
-	if(dex_malus)
-		if(!silent)
-			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't respond properly!"))
-		return (active_hand.get_manual_dexterity() & ~dex_malus)
-	return active_hand.get_manual_dexterity()
 
 /mob/living/carbon/human/lose_hair()
 	if(get_bodytype().set_default_hair(src))
@@ -1210,7 +1090,7 @@
 	apply_species_inventory_restrictions()
 	species.handle_post_spawn(src)
 
-	refresh_visible_overlays()
+	try_refresh_visible_overlays()
 
 //Sets the mob's real name and update all the proper fields
 /mob/living/carbon/human/proc/set_real_name(var/newname)
@@ -1233,14 +1113,15 @@
 
 	set_species(species_name, new_bodytype)
 	var/decl/bodytype/root_bodytype = get_bodytype() // root bodytype is set in set_species
-	if(!skin_colour)
-		skin_colour = root_bodytype.base_color
-	if(!hair_colour)
-		hair_colour = root_bodytype.base_hair_color
-	if(!facial_hair_colour)
-		facial_hair_colour = root_bodytype.base_hair_color
-	if(!eye_colour)
-		eye_colour = root_bodytype.base_eye_color
+	if(!get_skin_colour())
+		set_skin_colour(root_bodytype.base_color, skip_update = TRUE)
+	if(!get_hair_colour())
+		set_hair_colour(root_bodytype.base_hair_color, skip_update = TRUE)
+	if(!get_facial_hair_colour())
+		set_facial_hair_colour(root_bodytype.base_hair_color, skip_update = TRUE)
+	if(!get_eye_colour())
+		set_eye_colour(root_bodytype.base_eye_color, skip_update = TRUE)
+
 	root_bodytype.set_default_hair(src, override_existing = TRUE, defer_update_hair = TRUE)
 	if(!blood_type && length(species?.blood_types))
 		blood_type = pickweight(species.blood_types)
@@ -1271,7 +1152,7 @@
 
 //Runs last after setup and after the parent init has been executed.
 /mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
-	refresh_visible_overlays() //Do this exactly once per setup
+	try_refresh_visible_overlays() //Do this exactly once per setup
 
 /mob/living/carbon/human/handle_flashed(var/obj/item/flash/flash, var/flash_strength)
 	var/safety = eyecheck()

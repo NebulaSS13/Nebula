@@ -3,7 +3,7 @@
 	icon_state = "floor_beaconf"
 	name = "tracking beacon"
 	desc = "A device that uses zero-point energy to create a permanent tracking beacon."
-	level = 1		// underfloor
+	level = LEVEL_BELOW_PLATING
 	anchored = TRUE
 	idle_power_usage = 0
 	var/obj/item/radio/beacon/beacon
@@ -12,7 +12,7 @@
 	. = ..()
 	var/turf/T = get_turf(src)
 	beacon = new /obj/item/radio/beacon(T)
-	beacon.invisibility = INVISIBILITY_MAXIMUM
+	beacon.set_invisibility(INVISIBILITY_MAXIMUM)
 
 	hide(!T.is_plating())
 

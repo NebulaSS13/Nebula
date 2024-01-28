@@ -21,14 +21,23 @@
 	ai = /datum/ai/crab
 
 	meat_amount =   3
-	skin_material = /decl/material/solid/skin/insect
+	skin_material = /decl/material/solid/organic/skin/insect
 	skin_amount =   10
 	bone_material = null
 	bone_amount =   0
 
-/mob/living/simple_animal/crab/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list("[SOUTH]" = list(-1, -10))
+/mob/living/simple_animal/crab/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/crab)
+
+/decl/bodytype/animal/crab/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
+			"[NORTH]" = list(-1, -10),
+			"[SOUTH]" = list(-1, -10),
+			"[EAST]" =  list(-1, -10),
+			"[WEST]" =  list(-1, -10)
+		)
+	)
 	. = ..()
 
 /datum/ai/crab

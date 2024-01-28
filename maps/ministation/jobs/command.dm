@@ -1,6 +1,6 @@
 /datum/job/ministation/captain
 	title = "Captain"
-	supervisors = "your profit margin, your conscience, and the Trademaster"
+	supervisors = "your profit margin, your conscience, and the watchful eye of the Company Rep"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/captain
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
@@ -12,12 +12,13 @@
 		SKILL_PILOT   = SKILL_MAX,
 		SKILL_WEAPONS = SKILL_MAX
 	)
-	skill_points = 30
+	skill_points = 40
 	head_position = 1
 	department_types = list(/decl/department/command)
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#1d1d4f"
+	hud_icon = "hudcaptain"
 	req_admin_notify = 1
 	access = list()
 	minimal_access = list()
@@ -28,16 +29,16 @@
 	must_fill = 1
 	not_random_selectable = 1
 
-/datum/job/ministation/captain/equip(var/mob/living/carbon/human/H)
+/datum/job/ministation/captain/equip_job(var/mob/living/carbon/human/H)
 	. = ..()
-	if(H) 
+	if(H)
 		H.verbs |= /mob/proc/freetradeunion_rename_company
 
 /datum/job/ministation/captain/get_access()
 	return get_all_station_access()
 
 /mob/proc/freetradeunion_rename_company()
-	set name = "Rename Free Trade Union"
+	set name = "Defect from Corporate Control"
 	set category = "Captain's Powers"
 	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", global.using_map.company_name), MAX_NAME_LEN)
 	if(!company)
@@ -63,6 +64,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#2f2f7f"
+	hud_icon = "hudlieutenant"
 	req_admin_notify = 1
 	minimal_player_age = 14
 	economic_power = 10
@@ -74,9 +76,11 @@
 		access_sec_doors,
 		access_brig,
 		access_forensics_lockers,
+		access_armory,
 		access_heads,
 		access_medical,
 		access_engine,
+		access_atmospherics,
 		access_change_ids,
 		access_ai_upload,
 		access_eva,
@@ -89,6 +93,10 @@
 		access_morgue,
 		access_crematorium,
 		access_kitchen,
+		access_mining,
+		access_xenobiology,
+		access_robotics,
+		access_engine_equip,
 		access_cargo,
 		access_cargo_bot,
 		access_mailsorting,
@@ -111,9 +119,11 @@
 		access_sec_doors,
 		access_brig,
 		access_forensics_lockers,
+		access_armory,
 		access_heads,
 		access_medical,
 		access_engine,
+		access_atmospherics,
 		access_change_ids,
 		access_ai_upload,
 		access_eva,
@@ -123,6 +133,10 @@
 		access_bar,
 		access_janitor,
 		access_construction,
+		access_mining,
+		access_xenobiology,
+		access_robotics,
+		access_engine_equip,
 		access_morgue,
 		access_crematorium,
 		access_kitchen,
@@ -154,5 +168,4 @@
 		SKILL_PILOT =   SKILL_MAX,
 		SKILL_FINANCE = SKILL_MAX
 	)
-	skill_points = 30
-	alt_titles = list()
+	skill_points = 40

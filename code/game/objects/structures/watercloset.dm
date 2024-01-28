@@ -208,7 +208,7 @@ var/global/list/hygiene_props = list()
 	icon_state = "urinal"
 	density = FALSE
 	anchored = TRUE
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
@@ -284,7 +284,7 @@ var/global/list/hygiene_props = list()
 /obj/effect/mist/Initialize()
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
-		addtimer(CALLBACK(src, /datum/proc/qdel_self), 25 SECONDS)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, qdel_self)), 25 SECONDS)
 
 /obj/structure/hygiene/shower/attackby(obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/scanner/gas))
@@ -335,17 +335,16 @@ var/global/list/hygiene_props = list()
 	M.bodytemperature += temp_adj
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(water_temperature >= H.get_temperature_threshold(HEAT_LEVEL_1))
+		if(water_temperature >= H.get_mob_temperature_threshold(HEAT_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is searing hot!"))
-		else if(water_temperature <= H.get_temperature_threshold(COLD_LEVEL_1))
+		else if(water_temperature <= H.get_mob_temperature_threshold(COLD_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is freezing cold!"))
 
 /obj/item/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl
-	icon = 'icons/obj/watercloset.dmi'
-	icon_state = "rubberducky"
-	item_state = "rubberducky"
+	icon = 'icons/obj/rubber_duck.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/structure/hygiene/sink
 	name = "sink"
@@ -355,7 +354,7 @@ var/global/list/hygiene_props = list()
 	anchored = TRUE
 	var/busy = 0 	//Something's being washed at the moment
 
-/obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/structure/hygiene/sink/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
 		var/obj/item/thing = dropping
@@ -410,8 +409,9 @@ var/global/list/hygiene_props = list()
 
 	else if (istype(O, /obj/item/baton))
 		var/obj/item/baton/B = O
-		if(B.bcell)
-			if(B.bcell.charge > 0 && B.status == 1)
+		var/obj/item/cell/cell = B.get_cell()
+		if(cell)
+			if(cell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
 				if(isliving(user))
 					var/mob/living/M = user
@@ -526,7 +526,7 @@ var/global/list/hygiene_props = list()
 		return
 
 	if(can_use(1))
-		visible_message(SPAN_NOTICE("\The [usr] tears a sheet from \the [src]."), SPAN_NOTICE("You tear a sheet from \the [src]."))
+		usr.visible_message(SPAN_NOTICE("\The [usr] tears a sheet from \the [src]."), SPAN_NOTICE("You tear a sheet from \the [src]."))
 		var/obj/item/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
 

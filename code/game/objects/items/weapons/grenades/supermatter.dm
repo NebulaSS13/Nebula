@@ -1,7 +1,7 @@
 /obj/item/grenade/supermatter
 	name = "supermatter grenade"
 	icon = 'icons/obj/items/grenades/banana.dmi'
-	origin_tech = "{'wormholes':5,'magnets':4,'engineering':5}"
+	origin_tech = @'{"wormholes":5,"magnets":4,"engineering":5}'
 	arm_sound = 'sound/effects/3.wav'
 	var/implode_at
 

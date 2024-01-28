@@ -49,19 +49,19 @@
 	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
 	adjust_position()
 	action_used()
-	INVOKE_ASYNC(assailant, /atom/movable/proc/do_attack_animation, affecting)
+	INVOKE_ASYNC(assailant, TYPE_PROC_REF(/atom/movable, do_attack_animation), affecting)
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	update_icon()
 
-	events_repository.register(/decl/observ/moved, affecting, src, .proc/on_affecting_move)
+	events_repository.register(/decl/observ/moved, affecting, src, PROC_REF(on_affecting_move))
 	if(assailant.zone_sel)
-		events_repository.register(/decl/observ/zone_selected, assailant.zone_sel, src, .proc/on_target_change)
+		events_repository.register(/decl/observ/zone_selected, assailant.zone_sel, src, PROC_REF(on_target_change))
 
 	var/obj/item/organ/O = get_targeted_organ()
 	var/decl/pronouns/G = assailant.get_pronouns()
 	if(affecting_mob && O) // may have grabbed a buckled mob, so may be grabbing their holder
 		SetName("[name] (\the [affecting_mob]'s [O.name])")
-		events_repository.register(/decl/observ/dismembered, affecting_mob, src, .proc/on_organ_loss)
+		events_repository.register(/decl/observ/dismembered, affecting_mob, src, PROC_REF(on_organ_loss))
 		if(affecting_mob != assailant)
 			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting_mob]'s [O.name]!"))
 		else

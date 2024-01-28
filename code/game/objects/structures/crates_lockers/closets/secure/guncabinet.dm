@@ -55,3 +55,16 @@
 				add_overlay("locked")
 			else
 				add_overlay("open")
+
+// Subtypes
+/obj/structure/closet/secure_closet/guncabinet/sidearm
+	name = "emergency weapon cabinet"
+	req_access = list(
+		access_armory,
+		access_captain
+	)
+
+/obj/structure/closet/secure_closet/guncabinet/sidearm/WillContain()
+	return list(
+		/obj/item/gun/energy/gun = 4
+	)

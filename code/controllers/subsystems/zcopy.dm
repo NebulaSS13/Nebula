@@ -563,6 +563,7 @@ SUBSYSTEM_DEF(zcopy)
 			QDEL_NULL(T.below.mimic_above_copy)
 		if (T.below.mimic_proxy)
 			QDEL_NULL(T.below.mimic_proxy)
+
 	QDEL_NULL(T.mimic_underlay)
 	for (var/atom/movable/openspace/mimic/OO in T)
 		qdel(OO)

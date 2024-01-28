@@ -21,14 +21,16 @@
 		else
 			. = "Anonymous"
 
-/decl/tool_archetype/pen/proc/decrement_uses(var/mob/user, var/obj/item/tool, var/decrement = 1)
+/decl/tool_archetype/pen/proc/decrement_uses(var/mob/user, var/obj/item/tool, var/decrement = 1, var/destroy_on_zero = TRUE)
 	. = tool.get_tool_property(TOOL_PEN, TOOL_PROP_USES)
 	if(. < 0)
 		return TRUE
 	. -= decrement
 	tool.set_tool_property(TOOL_PEN, TOOL_PROP_USES, max(0, .)) //Prevent negatives and turning the pen into an infinite uses pen
 	if(. <= 0 && (tool.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG) & PEN_FLAG_DEL_EMPTY))
-		qdel(tool)
+		. = 0
+		if(destroy_on_zero)
+			qdel(tool)
 
 /**Toggles the active/inactive state of some pens */
 /decl/tool_archetype/pen/proc/toggle_active(var/mob/user, var/obj/item/pen/tool)

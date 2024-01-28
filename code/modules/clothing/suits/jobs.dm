@@ -85,7 +85,7 @@
 		ARMOR_LASER = ARMOR_LASER_SMALL,
 		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
-	origin_tech = "{'materials':2, 'engineering':2}"
+	origin_tech = @'{"materials":2, "engineering":2}'
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 //Forensics
@@ -101,7 +101,7 @@
 		ARMOR_LASER = ARMOR_LASER_MINOR,
 		ARMOR_ENERGY = ARMOR_ENERGY_MINOR
 		)
-	origin_tech = "{'materials':2, 'engineering':2}"
+	origin_tech = @'{"materials":2, "engineering":2}'
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/suit/storage/forensics/red

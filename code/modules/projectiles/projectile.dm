@@ -6,11 +6,11 @@
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "bullet"
 	density = TRUE
-	unacidable = 1
 	anchored = TRUE //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	randpixel = 0
+	material = null
 	is_spawnable_type = FALSE
 
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
@@ -306,7 +306,7 @@
 	on_impact(A)
 
 	set_density(0)
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 
 	qdel(src)
 	return 1

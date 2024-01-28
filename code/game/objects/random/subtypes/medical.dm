@@ -44,12 +44,25 @@
 		/obj/item/stack/medical/splint =                   1,
 		/obj/item/chems/hypospray/autoinjector =           3,
 		/obj/item/storage/pill_bottle/burn_meds =          2,
-		/obj/item/storage/pill_bottle/antitox =            2,
+		/obj/item/storage/pill_bottle/antitoxins =         2,
 		/obj/item/storage/med_pouch/trauma =               2,
 		/obj/item/storage/med_pouch/burn =                 2,
 		/obj/item/storage/med_pouch/toxin =                2,
 		/obj/item/storage/med_pouch/radiation =            2,
 		/obj/item/storage/med_pouch/oxyloss =              2
+	)
+	return spawnable_choices
+
+/obj/random/medical/pillbottle
+	name = "Random Pill Bottle"
+	desc = "This is a random pill bottle."
+
+/obj/random/medical/pillbottle/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/storage/pill_bottle/antibiotics,
+		/obj/item/storage/pill_bottle/oxygen,
+		/obj/item/storage/pill_bottle/brute_meds,
+		/obj/item/storage/pill_bottle/sugariron
 	)
 	return spawnable_choices
 

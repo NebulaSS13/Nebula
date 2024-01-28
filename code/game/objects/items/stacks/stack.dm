@@ -11,12 +11,14 @@
 
 /obj/item/stack
 	gender = PLURAL
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	max_health = 32 //Stacks should take damage even if no materials
 	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
 	var/list/matter_per_piece
 	var/singular_name
 	var/plural_name
+	/// If unset, picks a/an based off of if the first letter is a vowel or not.
+	var/indefinite_article
 	var/base_state
 	var/plural_icon_state
 	var/max_icon_state
@@ -42,7 +44,7 @@
 	if(!singular_name)
 		singular_name = "sheet"
 	if(!plural_name)
-		plural_name = "[singular_name]s"
+		plural_name = text_make_plural(singular_name)
 
 /obj/item/stack/Destroy()
 	if (src && usr && usr.machine == src)
@@ -98,7 +100,7 @@
 /obj/item/stack/get_matter_amount_modifier()
 	. = amount * matter_multiplier
 
-/obj/item/stack/proc/get_recipes()
+/obj/item/stack/proc/get_recipes(stack_type, reinf_mat)
 	return
 
 /obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)
@@ -414,3 +416,9 @@
 /**Whether a stack type has the capability to be merged. */
 /obj/item/stack/proc/can_merge_stacks(var/obj/item/stack/other)
 	return !(uses_charge && !force)
+
+/// Returns the string describing an amount of the stack, i.e. "an ingot" vs "a flag"
+/obj/item/stack/proc/get_string_for_amount(amount)
+	if(amount == 1)
+		return indefinite_article ? "[indefinite_article] [singular_name]" : ADD_ARTICLE(singular_name)
+	return "[amount] [plural_name]"

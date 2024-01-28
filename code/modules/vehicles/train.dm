@@ -5,7 +5,7 @@
 	move_delay = 1
 
 	health = 100
-	maxhealth = 100
+	max_health = 100
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
 
@@ -103,14 +103,14 @@
 	to_chat(user, "<span class='notice'>You climb down from [src].</span>")
 	return 1
 
-/obj/vehicle/train/handle_mouse_drop(atom/over, mob/user)
+/obj/vehicle/train/handle_mouse_drop(atom/over, mob/user, params)
 	if(istype(over, /obj/vehicle/train))
 		var/obj/vehicle/train/beep = over
 		beep.latch(src, user)
 		return TRUE
 	. = ..()
 
-/obj/vehicle/train/receive_mouse_drop(var/atom/dropping, mob/user)
+/obj/vehicle/train/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /atom/movable))
 		if(!load(dropping))

@@ -9,13 +9,13 @@
 
 /decl/loadout_option/gloves/colored
 	name = "gloves, colored"
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 	path = /obj/item/clothing/gloves/color
 
 /decl/loadout_option/gloves/evening
 	name = "gloves, evening, colour select"
 	path = /obj/item/clothing/gloves/color/evening
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/ring
 	name = "ring"

@@ -79,7 +79,7 @@
 	it functions and re-insert it above.
 */
 /mob/living/silicon/ai/UnarmedAttack(atom/A)
-	A.attack_ai(src)
+	return A.attack_ai(src)
 
 /mob/living/silicon/ai/RangedAttack(atom/A, var/params)
 	A.attack_ai(src)

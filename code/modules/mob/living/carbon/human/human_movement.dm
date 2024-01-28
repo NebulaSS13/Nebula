@@ -18,7 +18,7 @@
 	tally -= GET_CHEMICAL_EFFECT(src, CE_SPEEDBOOST)
 	tally += GET_CHEMICAL_EFFECT(src, CE_SLOWDOWN)
 
-	var/health_deficiency = (maxHealth - health)
+	var/health_deficiency = (get_max_health() - current_health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
 	if(can_feel_pain())
@@ -55,15 +55,16 @@
 	if(facing_dir)
 		tally += 3 // Locking direction will slow you down.
 
-	if (bodytemperature < species.cold_discomfort_level)
-		tally += (species.cold_discomfort_level - bodytemperature) / 10 * 1.75
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if (root_bodytype && bodytemperature < root_bodytype.cold_discomfort_level)
+		tally += (root_bodytype.cold_discomfort_level - bodytemperature) / 10 * 1.75
 
 	tally += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow
 
 	if(mRun in mutations)
 		tally = 0
 
-	return (tally+config.human_delay)
+	return (tally+get_config_value(/decl/config/num/movement_human))
 
 /mob/living/carbon/human/size_strength_mod()
 	. = ..()
@@ -149,6 +150,6 @@
 				var/mob/M = buckled
 				M.unbuckle_mob()
 			var/decl/bodytype/B = get_bodytype()
-			playsound(loc, isSynthetic() ? pick(B.synthetic_bodyfall_sounds) : pick(B.bodyfall_sounds), 50, TRUE, -1)
+			playsound(loc, B.bodyfall_sounds, 50, TRUE, -1)
 		else if(!lying && !old_buckled_lying)
 			handle_stance() // Force an immediate stance update.

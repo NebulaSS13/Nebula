@@ -15,7 +15,7 @@
 		return ..()
 
 	//Guest Checking
-	if(!config.guests_allowed && IsGuestKey(key))
+	if(!get_config_value(/decl/config/toggle/guests_allowed) && IsGuestKey(key))
 		log_access("Failed Login: [key] - Guests not allowed")
 		message_admins("<span class='notice'>Failed Login: [key] - Guests not allowed</span>")
 		key_cache[key] = 0
@@ -27,7 +27,7 @@
 		key_cache[key] = 0
 		return
 
-	if(config.ban_legacy_system)
+	if(get_config_value(/decl/config/toggle/on/ban_legacy_system))
 
 		//Ban Checking
 		. = CheckBan(ckeytext, computer_id, address)

@@ -1,6 +1,6 @@
 /obj/machinery/suit_cycler/Initialize()
+	LAZYDISTINCTADD(available_bodytypes, BODYTYPE_AVIAN)
 	. = ..()
-	available_bodytypes += BODYTYPE_AVIAN
 
 //mining
 

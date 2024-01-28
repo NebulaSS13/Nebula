@@ -21,7 +21,11 @@
 	set category = "Server"
 
 	if(holder)
-		nanomapgen_DumpTile(1, 1, text2num(input(usr,"Enter the Z level to generate")))
+		var/zlevel = text2num(input(usr,"Enter the Z level to generate"))
+		if(!zlevel)
+			return
+		var/datum/level_data/level = SSmapping.levels_by_z[zlevel]
+		nanomapgen_DumpTile(level.level_inner_min_x, level.level_inner_min_y, zlevel, level.level_inner_max_x, level.level_inner_max_y)
 
 /client/proc/nanomapgen_DumpTile(var/startX = 1, var/startY = 1, var/currentZ = 1, var/endX = -1, var/endY = -1)
 
@@ -66,13 +70,13 @@
 			var/icon/TurfIcon = new(Turf.icon, Turf.icon_state, dir = Turf.dir)
 			TurfIcon.Scale(NANOMAP_ICON_SIZE, NANOMAP_ICON_SIZE)
 
-			Tile.Blend(TurfIcon, ICON_OVERLAY, ((WorldX - 1) * NANOMAP_ICON_SIZE), ((WorldY - 1) * NANOMAP_ICON_SIZE))
+			Tile.Blend(TurfIcon, ICON_OVERLAY, ((WorldX - startX) * NANOMAP_ICON_SIZE), ((WorldY - startY) * NANOMAP_ICON_SIZE))
 
 			count++
 
 			if (count % 8000 == 0)
 				to_world_log("NanoMapGen: <B>[count] tiles done</B>")
-				sleep(1)
+			CHECK_TICK
 
 	var/mapFilename = "new_[map_image_file_name(currentZ)]"
 

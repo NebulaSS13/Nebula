@@ -55,6 +55,10 @@ Class Procs:
 		Helper proc that allows getting the other zone of an edge given one of them.
 		Only on /connection_edge/zone, otherwise use A.
 
+	update_post_merge()
+		Called after the edge's owner is merged into another zone.
+		Marks the relevant connecting turfs for update.
+
 */
 
 
@@ -113,6 +117,10 @@ Class Procs:
 	for(var/atom/movable/M as anything in movable)
 		//If they're already being tossed, don't do it again.
 		M.handle_airflow(differential, connecting_turfs, repelled)
+
+/connection_edge/proc/update_post_merge()
+	for(var/turf/T in connecting_turfs)
+		SSair.mark_for_update(T)
 
 /connection_edge/zone/var/zone/B
 
@@ -189,6 +197,7 @@ Class Procs:
 
 /connection_edge/unsimulated/var/turf/B
 /connection_edge/unsimulated/var/datum/gas_mixture/air
+/connection_edge/unsimulated/var/list/inner_turfs = list()
 
 /connection_edge/unsimulated/New(zone/A, turf/B)
 	src.A = A
@@ -204,10 +213,12 @@ Class Procs:
 /connection_edge/unsimulated/add_connection(connection/c)
 	. = ..()
 	connecting_turfs.Add(c.B)
+	inner_turfs |= c.A
 	air.group_multiplier = coefficient
 
 /connection_edge/unsimulated/remove_connection(connection/c)
 	connecting_turfs.Remove(c.B)
+	inner_turfs.Remove(c.A)
 	air.group_multiplier = coefficient
 	. = ..()
 
@@ -241,6 +252,10 @@ Class Procs:
 	// does not specially handle the less common case of a simulated room exposed to an unsimulated pressurized turf.
 	if(!A.air.compare(air, vacuum_exception = 1))
 		SSair.mark_edge_active(src)
+
+/connection_edge/unsimulated/update_post_merge()
+	for(var/turf/T in inner_turfs)
+		SSair.mark_for_update(T)
 
 /proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 	//This implements a simplistic version of the Stefan-Boltzmann law.

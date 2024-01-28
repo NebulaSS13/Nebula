@@ -3,7 +3,7 @@
 	desc = "A large gas-powered cannon."
 	icon = 'icons/obj/guns/launcher/pneumatic.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'materials':3}"
+	origin_tech = @'{"combat":4,"materials":3}'
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_HUGE
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
@@ -133,7 +133,7 @@
 		icon_state = get_world_inventory_state()
 	update_held_icon()
 
-/obj/item/gun/launcher/pneumatic/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/gun/launcher/pneumatic/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && tank)
 		overlay.icon_state += "-tank"
 	. = ..()

@@ -9,15 +9,21 @@
 /decl/sprite_accessory/hair
 	abstract_type = /decl/sprite_accessory/hair
 	icon = 'icons/mob/human_races/species/human/hair.dmi'
+	hidden_by_gear_slot = slot_head_str
+	hidden_by_gear_flag = BLOCK_HEAD_HAIR
+	body_parts          = list(BP_HEAD)
 
-/decl/sprite_accessory/hair/get_validatable_icon_state()
-	return "[icon_state]_s"
+/decl/sprite_accessory/hair/get_hidden_substitute()
+	if(flags & VERY_SHORT)
+		return src
+	return GET_DECL(/decl/sprite_accessory/hair/short)
 
 /decl/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = "bald"
 	flags = VERY_SHORT | HAIR_BALD
-	required_gender = null
+	bodytypes_allowed = null
+	bodytypes_denied = null
 	species_allowed = null
 	subspecies_allowed = null
 	bodytype_categories_allowed = null

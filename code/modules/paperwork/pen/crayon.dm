@@ -11,7 +11,9 @@
 	pen_quality        = TOOL_QUALITY_BAD //Writing with those things is awkward
 	max_uses           = 30
 	pen_font           = PEN_FONT_CRAYON
+	material           = /decl/material/solid/organic/wax
 	var/shade_colour   = "#220000" //RGB
+	var/pigment_type   = /decl/material/liquid/pigment
 
 /obj/item/pen/crayon/make_pen_description()
 	desc = "A colourful [stroke_colour_name] [istype(material)?"[material.name] ":null][medium_name]. Please refrain from eating it or putting it in your nose."
@@ -45,54 +47,47 @@
 			target.add_fingerprint(user) // Adds their fingerprints to the floor the crayon is drawn on.
 	return
 
-/obj/item/pen/crayon/attack(mob/living/M, mob/user)
-	if(istype(M) && M == user)
-		var/decl/tool_archetype/pen/parch = GET_DECL(TOOL_PEN)
-		playsound(src, 'sound/weapons/bite.ogg', 40)
-		to_chat(M, SPAN_NOTICE("You take a bite of the crayon and swallow it."))
-		M.adjust_nutrition(1)
-		var/uses = get_tool_property(TOOL_PEN, TOOL_PROP_USES)
-		M.reagents.add_reagent(/decl/material/liquid/pigment, min(5,uses)/3)
-		if(parch.decrement_uses(user, src, 5) <= 0)
-			to_chat(M, SPAN_WARNING("You ate your crayon!"))
-		return
-	. = ..()
-
 /obj/item/pen/crayon/red
 	icon_state         = "crayonred"
 	stroke_colour      = "#da0000"
 	shade_colour       = "#810c0c"
 	stroke_colour_name = "red"
+	pigment_type       = /decl/material/liquid/pigment/red
 
 /obj/item/pen/crayon/orange
 	icon_state         = "crayonorange"
 	stroke_colour      = "#ff9300"
 	stroke_colour_name = "orange"
 	shade_colour       = "#a55403"
+	pigment_type       = /decl/material/liquid/pigment/orange
 
 /obj/item/pen/crayon/yellow
 	icon_state         = "crayonyellow"
 	stroke_colour      = "#fff200"
 	shade_colour       = "#886422"
 	stroke_colour_name = "yellow"
+	pigment_type       = /decl/material/liquid/pigment/yellow
 
 /obj/item/pen/crayon/green
 	icon_state         = "crayongreen"
 	stroke_colour      = "#a8e61d"
 	shade_colour       = "#61840f"
 	stroke_colour_name = "green"
+	pigment_type       = /decl/material/liquid/pigment/green
 
 /obj/item/pen/crayon/blue
 	icon_state         = "crayonblue"
 	stroke_colour      = "#00b7ef"
 	shade_colour       = "#0082a8"
 	stroke_colour_name = "blue"
+	pigment_type       = /decl/material/liquid/pigment/blue
 
 /obj/item/pen/crayon/purple
 	icon_state         = "crayonpurple"
 	stroke_colour      = "#da00ff"
 	shade_colour       = "#810cff"
 	stroke_colour_name = "purple"
+	pigment_type       = /decl/material/liquid/pigment/purple
 
 /obj/item/pen/crayon/mime
 	icon_state         = "crayonmime"
@@ -100,6 +95,7 @@
 	shade_colour       = "#000000"
 	stroke_colour_name = "mime"
 	max_uses           = -1 //Infinite
+	pigment_type       = null
 
 /obj/item/pen/crayon/mime/make_pen_description()
 	desc = "A very sad-looking crayon."
@@ -119,6 +115,7 @@
 	shade_colour       = "#000fff"
 	stroke_colour_name = "rainbow"
 	max_uses           = -1
+	pigment_type       = null
 
 /obj/item/pen/crayon/rainbow/make_pen_description()
 	desc = "A very colourful [istype(material)?"[material.name] ":null][medium_name]. Please refrain from eating it or putting it in your nose."

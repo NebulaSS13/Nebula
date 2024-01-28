@@ -111,7 +111,7 @@
 	rod_makeup[mat_type] = amt
 	return TOPIC_REFRESH
 
-/obj/machinery/fuel_compressor/receive_mouse_drop(var/atom/movable/dropping, var/mob/user)
+/obj/machinery/fuel_compressor/receive_mouse_drop(atom/dropping, mob/user, params)
 	if(user.incapacitated() || !user.Adjacent(src))
 		return
 	return !add_material(dropping, user)

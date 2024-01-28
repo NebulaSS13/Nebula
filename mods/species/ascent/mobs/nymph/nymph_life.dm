@@ -1,9 +1,28 @@
-/mob/living/carbon/alien/ascent_nymph/Life()
 
+/mob/living/carbon/alien/ascent_nymph/handle_regular_hud_updates()
 	. = ..()
-	if(stat == DEAD)
+	if(!.)
 		return
-	
+	var/datum/hud/ascent_nymph/nymph_hud = hud_used
+	if(!istype(nymph_hud))
+		return
+	if(nymph_hud.food)
+		switch(nutrition)
+			if(450 to INFINITY)				nymph_hud.food.icon_state = "nutrition0"
+			if(350 to 450)					nymph_hud.food.icon_state = "nutrition1"
+			if(250 to 350)					nymph_hud.food.icon_state = "nutrition2"
+			if(150 to 250)					nymph_hud.food.icon_state = "nutrition3"
+			else							nymph_hud.food.icon_state = "nutrition4"
+	if(nymph_hud.drink)
+		switch(hydration)
+			if(450 to INFINITY)				nymph_hud.drink.icon_state = "hydration0"
+			if(350 to 450)					nymph_hud.drink.icon_state = "hydration1"
+			if(250 to 350)					nymph_hud.drink.icon_state = "hydration2"
+			if(150 to 250)					nymph_hud.drink.icon_state = "hydration3"
+			else							nymph_hud.drink.icon_state = "hydration4"
+
+/mob/living/carbon/alien/ascent_nymph/handle_nutrition_and_hydration()
+	. = ..()
 	// Generate some crystals over time.
 	if(nutrition >= 300 && crystal_reserve < ANYMPH_MAX_CRYSTALS)
 		crystal_reserve = min(ANYMPH_MAX_CRYSTALS, crystal_reserve + 15)
@@ -16,31 +35,14 @@
 		adjust_nutrition(DEFAULT_HUNGER_FACTOR * -2)
 	else
 		adjust_nutrition(DEFAULT_HUNGER_FACTOR * -1)
-
 	if(hydration > 0)
 		adjust_hydration(DEFAULT_THIRST_FACTOR * -1)
 
-	update_nymph_hud()
-
-/mob/living/carbon/alien/ascent_nymph/proc/update_nymph_hud()
-	// Update the HUD.
-	var/datum/hud/ascent_nymph/nymph_hud = hud_used
-	if(istype(nymph_hud))
-		if(nymph_hud.food)
-			switch(nutrition)
-				if(450 to INFINITY)				nymph_hud.food.icon_state = "nutrition0"
-				if(350 to 450)					nymph_hud.food.icon_state = "nutrition1"
-				if(250 to 350)					nymph_hud.food.icon_state = "nutrition2"
-				if(150 to 250)					nymph_hud.food.icon_state = "nutrition3"
-				else							nymph_hud.food.icon_state = "nutrition4"
-
-		if(nymph_hud.drink)
-			switch(hydration)
-				if(450 to INFINITY)				nymph_hud.drink.icon_state = "hydration0"
-				if(350 to 450)					nymph_hud.drink.icon_state = "hydration1"
-				if(250 to 350)					nymph_hud.drink.icon_state = "hydration2"
-				if(150 to 250)					nymph_hud.drink.icon_state = "hydration3"
-				else							nymph_hud.drink.icon_state = "hydration4"
+/mob/living/carbon/alien/ascent_nymph/Stat()
+	. = ..()
+	if(client && statpanel("Status"))
+		stat("Nutrition", "[get_nutrition()]/[ANYMPH_NUTRITION_MOLT]")
+		stat("Crystal reserve", "[crystal_reserve]/[ANYMPH_CRYSTAL_MOLT]")
 
 /mob/living/carbon/alien/ascent_nymph/proc/can_molt()
 	if(crystal_reserve < ANYMPH_CRYSTAL_MOLT)
@@ -61,7 +63,7 @@
 	molt = min(molt + 1, 5)
 	var/mob/living/carbon/alien/ascent_nymph/nymph = usr
 	nymph.visible_message("\icon[nymph] [nymph] begins to shimmy and shake out of its old skin.")
-	if(molt == 5)		
+	if(molt == 5)
 		if(do_after(nymph, 10 SECONDS, nymph, FALSE))
 			var/mob/living/carbon/human/H = new(get_turf(usr), SPECIES_MANTID_ALATE)
 			H.dna.lineage = nymph.dna.lineage
@@ -74,7 +76,7 @@
 		else
 			nymph.visible_message("\icon[nymph] [nymph] abruptly stops molting.")
 		return
-			
+
 	if(do_after(nymph, 5 SECONDS, nymph, FALSE))
 		var/matrix/M = matrix()
 		M.Scale(1 + (molt / 10))
@@ -83,7 +85,7 @@
 		last_molt = world.time
 		nutrition = max(0, nutrition - ANYMPH_NUTRITION_MOLT)
 		crystal_reserve = max(0, crystal_reserve - ANYMPH_CRYSTAL_MOLT)
-		new/obj/item/ascent_molt(get_turf(src))
+		new /obj/item/ascent_molt(get_turf(src))
 
 	else
 		nymph.visible_message("\icon[nymph] [nymph] abruptly stops molting.")

@@ -91,7 +91,7 @@
 
 	if(giver)
 		data["giver"] = !!giver
-		data["giver_name"] = giver.rank || giver.assignment
+		data["giver_name"] = giver.position || giver.assignment
 		data["giv_name"] = giv_name
 
 		var/list/giver_access = list()
@@ -185,7 +185,7 @@
 			pass.reason = reason
 			pass.SetName("guest pass #[number]")
 			pass.assignment = "Guest"
-			addtimer(CALLBACK(pass, /obj/item/card/id/guest/proc/expire), duration MINUTES, TIMER_UNIQUE)
+			addtimer(CALLBACK(pass, TYPE_PROC_REF(/obj/item/card/id/guest, expire)), duration MINUTES, TIMER_UNIQUE)
 			playsound(src.loc, 'sound/machines/ping.ogg', 25, 0)
 			. = TOPIC_REFRESH
 		else if(!giver)

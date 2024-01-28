@@ -9,9 +9,7 @@
 	response_harm = "strikes"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
-
-	health = 65
-	maxHealth = 65
+	mob_default_max_health = 65
 	natural_weapon = /obj/item/natural_weapon/bite
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
@@ -20,30 +18,25 @@
 
 	meat_type =     /obj/item/chems/food/xenomeat
 	meat_amount =   5
-	skin_material = /decl/material/solid/skin/insect
+	skin_material = /decl/material/solid/organic/skin/insect
 	skin_amount =   15
-	bone_material = /decl/material/solid/bone/cartilage
+	bone_material = /decl/material/solid/organic/bone/cartilage
 	bone_amount =   10
 
 	var/healing = FALSE
 	var/heal_amount = 6
 
-/mob/living/simple_animal/hostile/antlion/Life()
+/mob/living/simple_animal/hostile/antlion/handle_regular_status_updates()
 	. = ..()
-
 	process_healing() //this needs to occur before if(!.) because of stop_automation
-
-	if(!.)
-		return
-
-	if(!is_on_special_ability_cooldown() && can_act() && target_mob)
+	if(. && !is_on_special_ability_cooldown() && can_act() && target_mob)
 		vanish()
 
 /mob/living/simple_animal/hostile/antlion/proc/vanish()
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
 	set_invisibility(INVISIBILITY_OBSERVER)
 	prep_burrow(TRUE)
-	addtimer(CALLBACK(src, .proc/diggy), 5 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(diggy)), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/antlion/proc/diggy()
 	var/list/turf_targets
@@ -62,12 +55,12 @@
 				continue
 			turf_targets += T
 	if(!LAZYLEN(turf_targets)) //oh no
-		addtimer(CALLBACK(src, .proc/emerge), 2 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(emerge)), 2 SECONDS)
 		return
 	var/turf/T = pick(turf_targets)
 	if(T && !incapacitated())
 		forceMove(T)
-	addtimer(CALLBACK(src, .proc/emerge), 2 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(emerge)), 2 SECONDS)
 
 /mob/living/simple_animal/hostile/antlion/proc/emerge()
 	var/turf/T = get_turf(src)
@@ -83,10 +76,8 @@
 		SET_STATUS_MAX(H, STAT_WEAK, 1)
 
 /mob/living/simple_animal/hostile/antlion/proc/process_healing()
-	if(!incapacitated() && healing)
-		var/old_health = health
-		if(old_health < maxHealth)
-			health = old_health + heal_amount
+	if(!incapacitated() && healing && current_health < get_max_health())
+		heal_overall_damage(rand(heal_amount), rand(heal_amount))
 
 /mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
 	stop_automated_movement = new_bool
@@ -98,8 +89,7 @@
 	desc = "A huge antlion. It looks displeased."
 	icon = 'icons/mob/simple_animal/antlion_queen.dmi'
 	mob_size = MOB_SIZE_LARGE
-	health = 275
-	maxHealth = 275
+	mob_default_max_health = 275
 	natural_weapon = /obj/item/natural_weapon/bite/megalion
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT
@@ -110,7 +100,7 @@
 	break_stuff_probability = 25
 
 	meat_amount =   10
-	skin_material = /decl/material/solid/skin/insect
+	skin_material = /decl/material/solid/organic/skin/insect
 	skin_amount =   25
 	bone_amount =   15
 

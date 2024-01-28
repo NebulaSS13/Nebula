@@ -66,18 +66,18 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 	var/has_ambience = FALSE
 
-	t1 = new_turf
-	z = new_turf.z
+	t1 = new_turf.resolve_to_actual_turf()
+	z = t1.z
 	t1i = oi
 
-	if (new_turf.ambient_light)
+	if (t1.ambient_light)
 		has_ambience = TRUE
 
 	var/vertical   = diagonal & ~(diagonal - 1) // The horizontal directions (4 and 8) are bigger than the vertical ones (1 and 2), so we can reliably say the lsb is the horizontal direction.
 	var/horizontal = diagonal & ~vertical       // Now that we know the horizontal one we can get the vertical one.
 
-	x = new_turf.x + (horizontal == EAST  ? 0.5 : -0.5)
-	y = new_turf.y + (vertical   == NORTH ? 0.5 : -0.5)
+	x = t1.x + (horizontal == EAST  ? 0.5 : -0.5)
+	y = t1.y + (vertical   == NORTH ? 0.5 : -0.5)
 
 	// My initial plan was to make this loop through a list of all the dirs (horizontal, vertical, diagonal).
 	// Issue being that the only way I could think of doing it was very messy, slow and honestly overengineered.
@@ -86,7 +86,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 
 	// Diagonal one is easy.
-	T = get_step(new_turf, diagonal)
+	T = get_step_resolving_mimic(t1, diagonal)
 	if (T) // In case we're on the map's border.
 		if (!T.corners)
 			T.corners = new(4)
@@ -98,7 +98,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 			has_ambience = TRUE
 
 	// Now the horizontal one.
-	T = get_step(new_turf, horizontal)
+	T = get_step_resolving_mimic(t1, horizontal)
 	if (T) // Ditto.
 		if (!T.corners)
 			T.corners = new(4)
@@ -110,7 +110,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 			has_ambience = TRUE
 
 	// And finally the vertical one.
-	T = get_step(new_turf, vertical)
+	T = get_step_resolving_mimic(t1, vertical)
 	if (T)
 		if (!T.corners)
 			T.corners = new(4)
@@ -244,28 +244,31 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/turf/T
 	var/Ti
 
-	if (t1)
+	if (t1 && (t1.below || HasBelow(t1.z)) && (t1.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t1))
 		T = t1
 		Ti = t1i
-	else if (t2)
+	else if (t2 && (t2.below || HasBelow(t2.z)) && (t2.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t2))
 		T = t2
 		Ti = t2i
-	else if (t3)
+	else if (t3 && (t3.below || HasBelow(t3.z)) && (t3.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t3))
 		T = t3
 		Ti = t3i
-	else if (t4)
+	else if (t4 && (t4.below || HasBelow(t4.z)) && (t4.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(t4))
 		T = t4
 		Ti = t4i
+	// No MZ candidates below, just update.
+	else if (needs_update || skip_update)
+		return
 	else
-		// This should be impossible to reach -- how do we exist without at least one master turf?
-		CRASH("Corner has no masters!")
+		// Always queue for this, not important enough to hit the synchronous path.
+		needs_update = TRUE
+		SSlighting.corner_queue += src
+		return
 
 	var/datum/lighting_corner/below = src
 
-	var/turf/lasT
-
 	// We init before Z-Mimic, cannot rely on above/below.
-	while ((lasT = T) && (T = GET_BELOW(T)) && (lasT.z_flags & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+	while ((T = GET_BELOW(T)) && ((below.t1?.z_flags | below.t2?.z_flags | below.t3?.z_flags | below.t4?.z_flags) & ZM_ALLOW_LIGHTING) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
 		T.ambient_has_indirect = TRUE
 
 		if (!T.corners || !T.corners[Ti])

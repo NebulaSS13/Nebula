@@ -379,7 +379,7 @@
 
 /datum/planetoid_data/random/proc/generate_daycycle_data()
 	starts_at_night = (surface_light_level > 0.1)
-	day_duration    = rand(global.config.exoplanet_min_day_duration, global.config.exoplanet_max_day_duration)
+	day_duration    = rand(get_config_value(/decl/config/num/exoplanet_min_day_duration), get_config_value(/decl/config/num/exoplanet_max_day_duration)) MINUTES
 
 ///If the planet doesn't have a name defined, a name will be randomly generated for it. (Named this way because a global proc generate_planet_name already exists)
 /datum/planetoid_data/random/proc/make_planet_name()
@@ -484,11 +484,11 @@
 
 	//Adjust for species habitability
 	if(habitability_class == HABITABILITY_OKAY || habitability_class == HABITABILITY_IDEAL)
-		var/decl/species/S  = global.get_species_by_key(global.using_map.default_species)
+		var/decl/species/S = global.get_species_by_key(global.using_map.default_species)
 		if(habitability_class == HABITABILITY_IDEAL)
-			. = clamp(., S.cold_discomfort_level + rand(1,5), S.heat_discomfort_level - rand(1,5)) //Clamp between comfortable levels since we're ideal
+			. = clamp(., S.default_bodytype.cold_discomfort_level + rand(1,5), S.default_bodytype.heat_discomfort_level - rand(1,5)) //Clamp between comfortable levels since we're ideal
 		else
-			. = clamp(., S.cold_level_1 + 1, S.heat_level_1 - 1) //clamp between values species starts taking damages at
+			. = clamp(., S.default_bodytype.cold_level_1 + 1, S.default_bodytype.heat_level_1 - 1) //clamp between values species starts taking damages at
 
 ///Generates a valid surface pressure for the planet's atmosphere matching it's habitability class
 /datum/planetoid_data/random/proc/generate_surface_pressure()
@@ -546,8 +546,8 @@
 
 		//Make sure temperature can't damage people on casual planets (Only when not forcing an atmosphere)
 		var/decl/species/S = global.get_species_by_key(global.using_map.default_species)
-		var/lower_temp            = max(S.cold_level_1, atmosphere_gen_temperature_min)
-		var/higher_temp           = min(S.heat_level_1, atmosphere_gen_temperature_max)
+		var/lower_temp            = max(S.default_bodytype.cold_level_1, atmosphere_gen_temperature_min)
+		var/higher_temp           = min(S.default_bodytype.heat_level_1, atmosphere_gen_temperature_max)
 		var/breathed_gas          = S.breath_type
 		var/breathed_min_pressure = S.breath_pressure
 
@@ -582,7 +582,7 @@
 				if(((current_merged_flags & XGM_GAS_OXIDIZER) && (mat.gas_flags & XGM_GAS_FUEL)) || \
 					((current_merged_flags & XGM_GAS_FUEL) && (mat.gas_flags & XGM_GAS_OXIDIZER)))
 					continue
-				
+
 				// If we have an ignition point we're basically XGM_GAS_FUEL, kind of. TODO: Combine those somehow?
 				// These don't actually burn but it's still weird to see vaporized skin gas in an oxygen-rich atmosphere,
 				// so skip them.

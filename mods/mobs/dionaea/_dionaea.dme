@@ -20,7 +20,6 @@
 #include "mob\nymph_emotes.dm"
 #include "mob\nymph_gestalting.dm"
 #include "mob\nymph_holder.dm"
-#include "mob\nymph_inventory.dm"
 #include "mob\nymph_life.dm"
 #include "mob\nymph_ui.dm"
 #include "mob\nymph_update_icons.dm"

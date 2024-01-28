@@ -1,8 +1,8 @@
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9
-	origin_tech = "{'materials':1,'engineering':1}"
-	material = /decl/material/solid/cloth
+	origin_tech = @'{"materials":1,"engineering":1}'
+	material = /decl/material/solid/organic/cloth
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
@@ -17,7 +17,6 @@
 	var/blood_overlay_type = "uniformblood"
 	var/visible_name = "Unknown"
 	var/ironed_state = WRINKLES_DEFAULT
-	var/smell_state = SMELL_DEFAULT
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 	var/volume_multiplier = 1
 	var/markings_icon	// simple colored overlay that would be applied to the icon
@@ -32,7 +31,7 @@
 	return TRUE
 
 // Sort of a placeholder for proper tailoring.
-#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/organic/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	var/rags = RAG_COUNT(src)
@@ -52,14 +51,14 @@
 				new /obj/item/chems/glass/rag(get_turf(src))
 			if(loc == user)
 				user.drop_from_inventory(src)
-			LAZYREMOVE(matter, /decl/material/solid/cloth)
+			LAZYREMOVE(matter, /decl/material/solid/organic/cloth)
 			physically_destroyed()
 		return TRUE
 	. = ..()
 // End placeholder.
 
 // Updates the vision of the mob wearing the clothing item, if any
-/obj/item/clothing/proc/update_vision()
+/obj/item/clothing/proc/update_wearer_vision()
 	if(isliving(src.loc))
 		var/mob/living/L = src.loc
 		L.handle_vision()
@@ -68,7 +67,7 @@
 /obj/item/clothing/proc/needs_vision_update()
 	return flash_protection || tint
 
-/obj/item/clothing/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 
 	if(overlay)
 
@@ -105,8 +104,14 @@
 	if(LAZYLEN(new_overlays))
 		add_overlay(new_overlays)
 
-/obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
-	smell_state = smell
+// Used by washing machines to temporarily make clothes smell
+/obj/item/clothing/proc/change_smell(decl/material/odorant, time = 10 MINUTES)
+	if(!odorant || !odorant.scent)
+		remove_extension(src, /datum/extension/scent)
+		return
+
+	set_extension(src, /datum/extension/scent/custom, odorant.scent, odorant.scent_intensity, odorant.scent_descriptor, odorant.scent_range)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/item/clothing, change_smell)), time, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 /obj/item/clothing/proc/get_fibers()
 	. = "material from \a [name]"
@@ -131,17 +136,23 @@
 	if(markings_color && markings_icon)
 		update_icon()
 
-/obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
+/obj/item/clothing/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
-	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.get_held_item_slots()))
-		var/mob/living/carbon/human/H = M
-		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.get_bodytype().bodytype_flag) : (bodytype_equip_flags & H.get_bodytype().bodytype_flag)
-		if(!. && !disable_warning)
-			to_chat(H, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
+	if(!. || slot == slot_s_store_str || (slot in global.pocket_slots))
+		return
+	var/decl/bodytype/root_bodytype = user?.get_bodytype()
+	if(!root_bodytype || isnull(bodytype_equip_flags) || (slot in user.get_held_item_slots()))
+		return
+	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
+		. = !(bodytype_equip_flags & root_bodytype.bodytype_flag)
+	else
+		. = (bodytype_equip_flags & root_bodytype.bodytype_flag)
+	if(!. && !disable_warning)
+		to_chat(user, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
 
 /obj/item/clothing/equipped(var/mob/user)
 	if(needs_vision_update())
-		update_vision()
+		update_wearer_vision()
 	return ..()
 
 /obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)
@@ -186,15 +197,21 @@
 		if(WRINKLES_NONE)
 			to_chat(user, "<span class='notice'>It's completely wrinkle-free!</span>")
 
-	switch(smell_state)
-		if(SMELL_CLEAN)
-			to_chat(user, "<span class='notice'>It smells clean!</span>")
-		if(SMELL_STINKY)
-			to_chat(user, "<span class='bad'>It's quite stinky!</span>")
-
 	var/rags = RAG_COUNT(src)
 	if(rags)
 		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
+
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	if(sensor)
+		switch(sensor.sensor_mode)
+			if(VITALS_SENSOR_OFF)
+				to_chat(user, "Its sensors appear to be disabled.")
+			if(VITALS_SENSOR_BINARY)
+				to_chat(user, "Its binary life sensors appear to be enabled.")
+			if(VITALS_SENSOR_VITAL)
+				to_chat(user, "Its vital tracker appears to be enabled.")
+			if(VITALS_SENSOR_TRACKING)
+				to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
 #undef RAG_COUNT
 
@@ -227,3 +244,41 @@
 
 /obj/item/clothing/proc/check_limb_support(var/mob/living/carbon/human/user)
 	return FALSE
+
+/obj/item/clothing/verb/toggle_suit_sensors()
+	set name = "Toggle Suit Sensors"
+	set category = "Object"
+	set src in usr
+	set_sensors(usr)
+
+/obj/item/clothing/proc/set_sensors(mob/user)
+	if (isobserver(user) || user.incapacitated())
+		return
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
+	if(sensor)
+		sensor.user_set_sensors(user)
+
+/obj/item/clothing/handle_loadout_equip_replacement(obj/item/old_item)
+	. = ..()
+	if(!istype(old_item, /obj/item/clothing) || !(ACCESSORY_SLOT_SENSORS in valid_accessory_slots))
+		return
+	var/obj/item/clothing/old_clothes = old_item
+	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in old_clothes.accessories
+	if(!sensor)
+		return
+	sensor.removable = TRUE // This will be refreshed by remove_accessory/attach_accessory
+	old_clothes.remove_accessory(null, sensor)
+	attach_accessory(null, sensor)
+
+
+/decl/interaction_handler/clothing_set_sensors
+	name = "Set Sensors Level"
+	expected_target_type = /obj/item/clothing/under
+
+/decl/interaction_handler/clothing_set_sensors/invoked(var/atom/target, var/mob/user)
+	var/obj/item/clothing/under/U = target
+	U.set_sensors(user)
+
+/obj/item/clothing/get_alt_interactions(var/mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/clothing_set_sensors)

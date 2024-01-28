@@ -6,12 +6,12 @@
 	w_class = ITEM_SIZE_HUGE
 	force = 5
 	slot_flags = SLOT_BACK
-	origin_tech = "{'combat':4,'materials':2}"
+	origin_tech = @'{"combat":4,"materials":2}'
 	caliber = CALIBER_RIFLE
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1
-	ammo_type = /obj/item/ammo_casing/shell
+	ammo_type = /obj/item/ammo_casing/rifle
 	one_hand_penalty = 2
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
 	fire_delay = 8
@@ -49,6 +49,7 @@
 			unload_shell()
 		else
 			to_chat(user, "<span class='notice'>You work the bolt open.</span>")
+		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
 	else
 		to_chat(user, "<span class='notice'>You work the bolt closed.</span>")
 		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)
@@ -77,7 +78,7 @@
 	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to be used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease."
 	icon = 'icons/obj/guns/heavysniper.dmi'
 	force = 10
-	origin_tech = "{'combat':7,'materials':2,'esoteric':8}"
+	origin_tech = @'{"combat":7,"materials":2,"esoteric":8}'
 	caliber = CALIBER_ANTI_MATERIEL
 	screen_shake = 2 //extra kickback
 	one_hand_penalty = 6
@@ -86,3 +87,4 @@
 	scoped_accuracy = 8 //increased accuracy over the LWAP because only one shot
 	scope_zoom = 2
 	fire_delay = 12
+	ammo_type = /obj/item/ammo_casing/shell

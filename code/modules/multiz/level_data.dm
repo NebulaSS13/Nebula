@@ -66,7 +66,8 @@
 /datum/level_data
 	///Name displayed to the player to refer to this level in user interfaces and etc. If null, one will be generated.
 	var/name
-
+	/// Multiplier applied to damage when falling through this level.
+	var/fall_depth = 1
 	/// The z-level that was assigned to this level_data
 	var/level_z
 	/// A unique string identifier for this particular z-level. Used to fetch a level without knowing its z-level.
@@ -145,7 +146,8 @@
 	var/tmp/_has_warned_uninitialized_strata = FALSE
 
 	VAR_PROTECTED/UT_turf_exceptions_by_door_type // An associate list of door types/list of allowed turfs
-
+	///Determines if edge turfs should be centered on the map dimensions.
+	var/origin_is_world_center = TRUE
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level
@@ -211,11 +213,10 @@
 	_level_setup_completed = TRUE
 
 ///Calculate the bounds of the level, the border area, and the inner accessible area.
-/// * origin_is_world_center : An arg to clarify how level bounds work, and allow some control.
 ///   Basically, by default levels are assumed to be loaded relative to the world center, so if they're smaller than the world
 ///   they get their origin offset so they're in the middle of the world. By default templates are always loaded at origin 1,1.
 ///   so that's useful to know and have control over!
-/datum/level_data/proc/setup_level_bounds(var/origin_is_world_center = TRUE)
+/datum/level_data/proc/setup_level_bounds()
 	//Get the width/height we got for the level and the edges
 	level_max_width  = level_max_width  ? level_max_width  : world.maxx
 	level_max_height = level_max_height ? level_max_height : world.maxy
@@ -241,7 +242,7 @@
 /datum/level_data/proc/setup_ambient()
 	if(!use_global_exterior_ambience)
 		return
-	ambient_light_level = config.exterior_ambient_light
+	ambient_light_level = get_config_value(/decl/config/num/exterior_ambient_light)
 	ambient_light_color = SSskybox.background_color
 
 ///Setup/generate atmosphere for exterior turfs on the level.
@@ -290,7 +291,7 @@
 
 ///Called when setting up the level. Apply generators and anything that modifies the turfs of the level.
 /datum/level_data/proc/generate_level()
-	if(!global.config.roundstart_level_generation)
+	if(!get_config_value(/decl/config/toggle/roundstart_level_generation))
 		return
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y
@@ -302,7 +303,7 @@
 ///Apply the parent entity's map generators. (Planets generally)
 ///This proc is to give a chance to level_data subtypes to individually chose to ignore the parent generators.
 /datum/level_data/proc/apply_map_generators(var/list/map_gen)
-	if(!global.config.roundstart_level_generation)
+	if(!get_config_value(/decl/config/toggle/roundstart_level_generation))
 		return
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y

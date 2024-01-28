@@ -8,7 +8,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/aluminium
-	origin_tech = "{'magnets':1,'engineering':1}"
+	origin_tech = @'{"magnets":1,"engineering":1}'
 	action_button_name = "Toggle T-Ray scanner"
 
 	var/scan_range = 3
@@ -102,8 +102,8 @@
 		if(ismob(scanned))
 			if(ishuman(scanned))
 				var/mob/living/carbon/human/H = scanned
-				if(H.get_bodytype().appearance_flags & HAS_SKIN_COLOR)
-					I.color = H.skin_colour
+				if(H.get_bodytype()?.appearance_flags & HAS_SKIN_COLOR)
+					I.color = H.get_skin_colour()
 					I.icon = 'icons/mob/mob.dmi'
 					I.icon_state = "phaseout"
 			var/mob/M = scanned
@@ -141,7 +141,7 @@
 			continue
 
 		for(var/obj/O in T.contents)
-			if(O.level != 1)
+			if(O.level != LEVEL_BELOW_PLATING)
 				continue
 			if(!O.invisibility)
 				continue //if it's already visible don't need an overlay for it

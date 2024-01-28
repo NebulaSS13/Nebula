@@ -25,7 +25,7 @@
 	parts_type = /obj/item/stack/material/strut
 	var/base_icon = "bed"
 
-/obj/structure/bed/user_can_mousedrop_onto(var/mob/user, var/atom/being_dropped, var/incapacitation_flags)
+/obj/structure/bed/user_can_mousedrop_onto(mob/user, atom/being_dropped, incapacitation_flags, params)
 	if(user == being_dropped)
 		return user.Adjacent(src) && !user.incapacitated(INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
 	return ..()
@@ -81,7 +81,7 @@
 				return
 			var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
 			if(istype(W,/obj/item/stack/tile/carpet))
-				padding_type = /decl/material/solid/carpet
+				padding_type = /decl/material/solid/organic/carpet
 			else if(istype(W,/obj/item/stack/material))
 				var/obj/item/stack/material/M = W
 				if(M.material && (M.material.flags & MAT_FLAG_PADDING))
@@ -128,14 +128,14 @@
 	name = "psychiatrist's couch"
 	desc = "For prime comfort during psychiatric evaluations."
 	icon_state = "psychbed"
-	material = /decl/material/solid/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/bed/psych/leather
-	reinf_material = /decl/material/solid/leather
+	reinf_material = /decl/material/solid/organic/leather
 
 /obj/structure/bed/padded
 	material = /decl/material/solid/metal/aluminium
-	reinf_material = /decl/material/solid/cloth
+	reinf_material = /decl/material/solid/organic/cloth
 
 /*
  * Roller beds
@@ -237,7 +237,7 @@
 	queue_icon_update()
 	STOP_PROCESSING(SSobj,src)
 
-/obj/structure/bed/roller/handle_mouse_drop(atom/over, mob/user)
+/obj/structure/bed/roller/handle_mouse_drop(atom/over, mob/user, params)
 	if(ishuman(user) || isrobot(user))
 		if(over == buckled_mob && beaker)
 			if(iv_attached)
@@ -268,8 +268,8 @@
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/cloth = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/organic/cloth = MATTER_AMOUNT_REINFORCEMENT,
 	)
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 

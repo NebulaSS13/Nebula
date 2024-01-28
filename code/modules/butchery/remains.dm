@@ -1,6 +1,6 @@
 /obj/item/bone
 	icon = 'icons/obj/items/bone.dmi'
-	material = /decl/material/solid/bone
+	material = /decl/material/solid/organic/bone
 
 /obj/item/bone/skull
 	name = "skull"
@@ -10,4 +10,5 @@
 
 /obj/item/bone/skull/deer
 	name = "deer skull"
+	icon = 'icons/obj/items/bone.dmi'
 	icon_state = "deer_skull"

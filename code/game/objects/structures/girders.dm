@@ -8,7 +8,7 @@
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	material_alteration =    MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
-	maxhealth = 100
+	max_health = 100
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 
@@ -196,7 +196,7 @@
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
-	maxhealth = 150
+	max_health = 150
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()
@@ -206,10 +206,10 @@
 	. = ..()
 
 /obj/structure/girder/wood
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 
 /obj/structure/grille/wood
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 
 /obj/structure/lattice/wood
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany

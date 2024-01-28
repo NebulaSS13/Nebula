@@ -2,6 +2,7 @@
 	result = null
 	abstract_type = /decl/chemical_reaction/grenade_reaction
 	result_amount = 1
+	chemical_reaction_flags = CHEM_REACTION_FLAG_OVERFLOW_CONTAINER
 
 /decl/chemical_reaction/grenade_reaction/explosion_potassium
 	name = "Explosion"
@@ -11,10 +12,10 @@
 
 /decl/chemical_reaction/grenade_reaction/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/atom/location = holder.get_reaction_loc()
+	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
 	if(location)
 		var/datum/effect/effect/system/reagents_explosion/e = new()
-		e.set_up(round (created_volume/10, 1), location, 0, 0)
+		e.set_up(round(created_volume/3, 1), location, 0, 0)
 		if(isliving(location))
 			e.amount *= 0.5
 			var/mob/living/L = location
@@ -32,7 +33,7 @@
 
 /decl/chemical_reaction/grenade_reaction/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/turf/location = get_turf(holder.get_reaction_loc())
+	var/turf/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		spark_at(location, amount=2, cardinal_only = TRUE)
 		for(var/mob/living/carbon/M in viewers(world.view, location))
@@ -58,7 +59,7 @@
 
 /decl/chemical_reaction/grenade_reaction/emp_pulse/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/turf/location = holder.get_reaction_loc()
+	var/turf/location = holder.get_reaction_loc(chemical_reaction_flags)
 	if(location)
 		// 100 created volume = 4 heavy range & 7 light range. A few tiles smaller than traitor EMP grandes.
 		// 200 created volume = 8 heavy range & 14 light range. 4 tiles larger than traitor EMP grenades.
@@ -79,7 +80,7 @@
 
 /decl/chemical_reaction/grenade_reaction/flash_fire/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/turf/location = get_turf(holder.get_reaction_loc())
+	var/turf/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(istype(location))
 		location.assume_gas(/decl/material/gas/hydrogen, created_volume, FLAMMABLE_GAS_FLASHPOINT + 10)
 		spark_at(location, amount=1, cardinal_only = TRUE)
@@ -93,7 +94,7 @@
 
 /decl/chemical_reaction/grenade_reaction/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/location = get_turf(holder.get_reaction_loc())
+	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		var/datum/effect/effect/system/smoke_spread/chem/S = new /datum/effect/effect/system/smoke_spread/chem
 		S.attach(location)
@@ -112,7 +113,7 @@
 
 /decl/chemical_reaction/grenade_reaction/foam/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/turf/location = get_turf(holder.get_reaction_loc())
+	var/turf/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		location.visible_message(SPAN_WARNING("The solution spews out foam!"), range = 5)
 		var/datum/effect/effect/system/foam_spread/s = new()
@@ -129,7 +130,7 @@
 
 /decl/chemical_reaction/grenade_reaction/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/atom/location = holder.get_reaction_loc()
+	var/atom/location = holder.get_reaction_loc(chemical_reaction_flags)
 	if(location)
 		if(istype(location, /obj/item/sealant_tank))
 			var/obj/item/sealant_tank/foam = location
@@ -151,7 +152,7 @@
 
 /decl/chemical_reaction/grenade_reaction/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/turf/location = get_turf(holder.get_reaction_loc())
+	var/turf/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(location)
 		location.visible_message(SPAN_WARNING("The solution spews out a metallic foam!"), range = 5)
 		var/datum/effect/effect/system/foam_spread/s = new()

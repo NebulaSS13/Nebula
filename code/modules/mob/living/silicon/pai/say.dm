@@ -1,5 +1,5 @@
 /mob/living/silicon/pai/say(var/msg)
-	if(silence_time)
-		to_chat(src, SPAN_WARNING("Communication circuits remain uninitialized."))
-	else
-		..(msg)
+	if(HAS_STATUS(src, STAT_SILENCE))
+		to_chat(src, SPAN_WARNING("Communication circuits are disabled."))
+		return
+	return ..(msg)

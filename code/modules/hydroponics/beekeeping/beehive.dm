@@ -202,7 +202,7 @@
 		qdel(H)
 		spawn(50)
 			new /obj/item/honey_frame(loc)
-			new /obj/item/stack/wax(loc)
+			new /obj/item/stack/material/bar(loc, 1, /decl/material/solid/organic/wax)
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
@@ -231,14 +231,14 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "honeyframe"
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	var/honey = 0
 
 /obj/item/honey_frame/filled
 	name = "filled beehive frame"
 	desc = "A frame for the beehive that the bees have filled with honeycombs."
 	honey = 20
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/honey_frame/filled/Initialize()
 	. = ..()
@@ -249,7 +249,7 @@
 	desc = "Contains everything you need to build a beehive."
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "apiary"
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/beehive_assembly/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>You start assembling \the [src]...</span>")
@@ -258,23 +258,12 @@
 		new /obj/machinery/beehive(get_turf(user))
 		qdel(src)
 
-/obj/item/stack/wax
-	name = "wax"
-	singular_name = "wax piece"
-	desc = "Soft substance produced by bees. Used to make candles."
-	icon = 'icons/obj/beekeeping.dmi'
-	icon_state = "wax"
-
-var/global/list/wax_recipes = list(new /datum/stack_recipe/candle)
-/obj/item/stack/wax/get_recipes()
-	return global.wax_recipes
-
 /obj/item/bee_pack
 	name = "bee pack"
 	desc = "Contains a queen bee and some worker bees. Everything you'll need to start a hive!"
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "beepack"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/full = 1
 
 /obj/item/bee_pack/Initialize()

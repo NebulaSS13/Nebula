@@ -27,7 +27,7 @@
 	item_state = "syringe_kit"
 	max_storage_space = DEFAULT_BOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	obj_flags = OBJ_FLAG_HOLLOW
 	var/foldable = /obj/item/stack/material/cardstock	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 
@@ -438,12 +438,9 @@
 
 /obj/item/storage/box/matches/attackby(obj/item/flame/match/W, mob/user)
 	if(istype(W) && !W.lit && !W.burnt)
-		W.lit = 1
-		W.damtype = "burn"
-		W.update_icon()
-		START_PROCESSING(SSobj, W)
+		W.light()
 		playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
-		user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
+		user.visible_message(SPAN_NOTICE("[user] strikes [W] on \the [src]."), SPAN_NOTICE("You strike [W] on \the [src]."))
 	W.update_icon()
 	return
 
@@ -526,6 +523,13 @@
 /obj/item/storage/box/greenglowsticks/WillContain()
 	return list(/obj/item/flashlight/flare/glowstick = 6)
 
+/obj/item/storage/box/flares
+	name = "box of flares"
+	icon_state = "box"
+
+/obj/item/storage/box/flares/WillContain()
+	return list(/obj/item/flashlight/flare = 6)
+
 /obj/item/storage/box/freezer
 	name = "portable freezer"
 	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
@@ -549,11 +553,11 @@
 	icon_state = "checkers"
 	max_storage_space = 24
 	foldable = null
-	can_hold = list(/obj/item/chems/food/checker)
+	can_hold = list(/obj/item/checker)
 /obj/item/storage/box/checkers/WillContain()
 	return list(
-			/obj/item/chems/food/checker = 12,
-			/obj/item/chems/food/checker/red = 12
+			/obj/item/checker = 12,
+			/obj/item/checker/red = 12
 		)
 
 /obj/item/storage/box/checkers/chess
@@ -562,12 +566,12 @@
 	icon_state = "chess_b"
 /obj/item/storage/box/checkers/chess/WillContain()
 	return list(
-			/obj/item/chems/food/checker/pawn   = 8,
-			/obj/item/chems/food/checker/knight = 2,
-			/obj/item/chems/food/checker/bishop = 2,
-			/obj/item/chems/food/checker/rook   = 2,
-			/obj/item/chems/food/checker/queen  = 1,
-			/obj/item/chems/food/checker/king   = 1
+			/obj/item/checker/pawn   = 8,
+			/obj/item/checker/knight = 2,
+			/obj/item/checker/bishop = 2,
+			/obj/item/checker/rook   = 2,
+			/obj/item/checker/queen  = 1,
+			/obj/item/checker/king   = 1
 		)
 
 /obj/item/storage/box/checkers/chess/red
@@ -576,12 +580,12 @@
 	icon_state = "chess_r"
 /obj/item/storage/box/checkers/chess/red/WillContain()
 	return list(
-			/obj/item/chems/food/checker/pawn/red   = 8,
-			/obj/item/chems/food/checker/knight/red = 2,
-			/obj/item/chems/food/checker/bishop/red = 2,
-			/obj/item/chems/food/checker/rook/red   = 2,
-			/obj/item/chems/food/checker/queen/red  = 1,
-			/obj/item/chems/food/checker/king/red   = 1
+			/obj/item/checker/pawn/red   = 8,
+			/obj/item/checker/knight/red = 2,
+			/obj/item/checker/bishop/red = 2,
+			/obj/item/checker/rook/red   = 2,
+			/obj/item/checker/queen/red  = 1,
+			/obj/item/checker/king/red   = 1
 		)
 
 

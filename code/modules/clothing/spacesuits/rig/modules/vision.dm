@@ -58,7 +58,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 	var/datum/rig_vision/vision
@@ -91,7 +91,7 @@
 	name = "hardsuit meson scanner"
 	desc = "A layered, translucent visor system for a hardsuit."
 	icon_state = "meson"
-	origin_tech = "{'magnets':2,'engineering':5}"
+	origin_tech = @'{"magnets":2,"engineering":5}'
 	usable = 0
 
 	interface_name = "meson scanner"
@@ -117,14 +117,14 @@
 	name = "hardsuit night vision interface"
 	desc = "A multi input night vision system for a hardsuit."
 	icon_state = "night"
-	origin_tech = "{'magnets':6,'engineering':6}"
+	origin_tech = @'{"magnets":6,"engineering":6}'
 	usable = 0
 
 	interface_name = "night vision interface"
 	interface_desc = "An integrated night vision system."
 
 	vision_modes = list(/datum/rig_vision/nvg)
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE,
@@ -136,7 +136,7 @@
 	name = "hardsuit security hud"
 	desc = "A simple tactical information system for a hardsuit."
 	icon_state = "securityhud"
-	origin_tech = "{'magnets':3,'biotech':2,'engineering':5}"
+	origin_tech = @'{"magnets":3,"biotech":2,"engineering":5}'
 	usable = 0
 
 	interface_name = "security HUD"
@@ -149,7 +149,7 @@
 	name = "hardsuit medical hud"
 	desc = "A simple medical status indicator for a hardsuit."
 	icon_state = "healthhud"
-	origin_tech = "{'magnets':3,'biotech':2,'engineering':5}"
+	origin_tech = @'{"magnets":3,"biotech":2,"engineering":5}'
 	usable = 0
 
 	interface_name = "medical HUD"

@@ -18,7 +18,7 @@
 	if(object_to_move)
 		events_repository.unregister(/decl/observ/destroyed, object_to_move,src)
 	object_to_move = new object_type()
-	events_repository.register(/decl/observ/destroyed, object_to_move, src, .proc/add_object)
+	events_repository.register(/decl/observ/destroyed, object_to_move, src, PROC_REF(add_object))
 
 /datum/phenomena/movable_object/activate(var/atom/a, var/mob/living/deity/user)
 	..()

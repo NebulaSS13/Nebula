@@ -55,17 +55,6 @@
 	for(var/mat in building_cost)
 		resources[mat] = building_cost[mat] * FABRICATOR_EXTRA_COST_FACTOR
 
-/obj/building_cost()
-	. = ..()
-	if(length(matter))
-		for(var/material in matter)
-			var/decl/material/M = GET_DECL(material)
-			if(istype(M))
-				.[M.type] = matter[material]
-	if(reagents && length(reagents.reagent_volumes))
-		for(var/R in reagents.reagent_volumes)
-			.[R] = FLOOR(REAGENT_VOLUME(reagents, R) / REAGENT_UNITS_PER_MATERIAL_UNIT)
-
 /datum/fabricator_recipe/proc/build(var/turf/location, var/datum/fabricator_build_order/order)
 	. = list()
 	if(ispath(path, /obj/item/stack))

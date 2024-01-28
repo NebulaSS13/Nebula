@@ -3,16 +3,16 @@
 	desc = "A sturdy frame suitable for hanging a banner."
 	icon = 'icons/obj/structures/banner_frame.dmi'
 	icon_state = "banner_stand"
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	anchored = TRUE
 	density = FALSE
 	opacity = FALSE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
-	maxhealth = 50
+	max_health = 50
 	/// Reference to any banner currently hung on the frame.
 	var/obj/item/banner/banner
 
@@ -83,7 +83,7 @@
 	desc = "A furled-up banner."
 	icon = 'icons/obj/banner.dmi'
 	icon_state = "banner"
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 	max_health = 20
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_NORMAL

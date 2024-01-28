@@ -3,7 +3,7 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
 	density = TRUE
-	var/health = 100.0
+	max_health = 100
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
 	construct_state = /decl/machine_construction/pipe/welder
@@ -177,6 +177,7 @@ update_flag
 	if(exposed_temperature > temperature_resistance)
 		health -= 5
 		healthcheck()
+	return ..()
 
 /obj/machinery/portable_atmospherics/canister/proc/healthcheck()
 	if(destroyed)

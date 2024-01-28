@@ -5,18 +5,19 @@
 	icon_state = "left"
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
+	max_health = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
 	health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
 	stat_immune = NOSCREEN | NOINPUT | NOPOWER
 	uncreated_component_parts = null
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
+	atom_flags = ATOM_FLAG_CHECKS_BORDER
 	opacity = FALSE
 	explosion_resistance = 5
 	pry_mod = 0.5
 	base_type = /obj/machinery/door/window
 	frame_type = /obj/structure/windoor_assembly
+	set_dir_on_update = FALSE // these can properly face all 4 directions! don't force us into just 2!
 	var/base_state = "left"
 
 /obj/machinery/door/window/get_auto_access()
@@ -61,7 +62,7 @@
 		if(istype(bot))
 			if(density && src.check_access(bot.botcard))
 				open()
-				addtimer(CALLBACK(src, .proc/close), 50, TIMER_UNIQUE | TIMER_OVERRIDE)
+				addtimer(CALLBACK(src, PROC_REF(close)), 50, TIMER_UNIQUE | TIMER_OVERRIDE)
 		return
 	var/mob/M = AM // we've returned by here if M is not a mob
 	if (src.operating)
@@ -73,7 +74,7 @@
 			open_timer = 50
 		else //secure doors close faster
 			open_timer = 20
-		addtimer(CALLBACK(src, .proc/close), open_timer, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(CALLBACK(src, PROC_REF(close)), open_timer, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return
 
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -160,7 +161,7 @@
 	to_chat(user, SPAN_NOTICE("You short out \the [src]'s internal circuitry, locking it open!"))
 	if (density)
 		flick("[base_state]spark", src)
-		addtimer(CALLBACK(src, .proc/open), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(CALLBACK(src, PROC_REF(open)), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return TRUE
 
 /obj/machinery/door/emp_act(severity)
@@ -212,7 +213,7 @@
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
-	maxhealth = 300
+	max_health = 300
 	health = 300.0 //Stronger doors for prison (regular window door health is 150)
 	pry_mod = 0.65
 

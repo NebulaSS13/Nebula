@@ -7,7 +7,7 @@
 
 	layer = SIDE_WINDOW_LAYER
 	anchored = TRUE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CAN_BE_PAINTED
+	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_MOVES_UNSUPPORTED
 	alpha = 180
 	material = /decl/material/solid/glass
@@ -15,7 +15,7 @@
 	atmos_canpass = CANPASS_PROC
 	handle_generic_blending = TRUE
 	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 100
+	max_health = 100
 
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2

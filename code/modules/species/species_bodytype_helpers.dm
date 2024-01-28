@@ -38,4 +38,5 @@
 	pref.body_markings = base_markings?.Copy()
 
 /decl/bodytype/proc/apply_appearance(var/mob/living/carbon/human/H)
-	H.skin_colour = base_color
+	if(base_color)
+		H.set_skin_colour(base_color)

@@ -80,19 +80,22 @@
 		if(body_armor)
 			. += body_armor
 
-/mob/living/exosuit/updatehealth()
-	maxHealth = body ? body.mech_health : 0
-	health = maxHealth-(getFireLoss()+getBruteLoss())
+/mob/living/exosuit/get_max_health()
+	return (body ? body.mech_health : 0)
 
-/mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
+/mob/living/exosuit/get_total_life_damage()
+	return (getFireLoss()+getBruteLoss())
+
+/mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)), var/do_update_health = TRUE)
 	if(MC)
 		MC.take_burn_damage(amount)
-		MC.update_health()
+		if(do_update_health)
+			update_health() // TODO: unify these procs somehow instead of having weird brute-wrapping behavior as the default.
 
-/mob/living/exosuit/adjustBruteLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
+/mob/living/exosuit/adjustBruteLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)), var/do_update_health = TRUE)
 	if(MC)
 		MC.take_brute_damage(amount)
-		MC.update_health()
+	..()
 
 /mob/living/exosuit/proc/zoneToComponent(var/zone)
 	switch(zone)
@@ -152,8 +155,6 @@
 	if((damagetype == BRUTE || damagetype == BURN) && prob(25+(damage*2)))
 		sparks.set_up(3,0,src)
 		sparks.start()
-	updatehealth()
-
 	return 1
 
 /mob/living/exosuit/rad_act(var/severity)
@@ -164,7 +165,7 @@
 	if(!hatch_closed || (body.pilot_coverage < 100)) //Open, environment is the source
 		return .
 	var/list/after_armor = modify_damage_by_armor(null, ., IRRADIATE, DAM_DISPERSED, src, 0, TRUE)
-	return after_armor[1]	
+	return after_armor[1]
 
 /mob/living/exosuit/getFireLoss()
 	var/total = 0
@@ -200,6 +201,6 @@
 			for(var/thing in pilots)
 				var/mob/pilot = thing
 				pilot.emp_act(severity)
-				
+
 /mob/living/exosuit/get_bullet_impact_effect_type(def_zone)
 	return BULLET_IMPACT_METAL

@@ -23,18 +23,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 		qdel(W)
 	return null
 
-/mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
-	. = ..()
-	for(var/slot in global.equipped_slots)
-		var/obj/item/thing = get_equipped_item(slot)
-		if(istype(thing))
-			LAZYADD(., thing)
-	if(include_carried)
-		for(var/slot in global.carried_slots)
-			var/obj/item/thing = get_equipped_item(slot)
-			if(istype(thing))
-				LAZYADD(., thing)
-
 //Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
 /mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(var/zone)
 	var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(src, zone)

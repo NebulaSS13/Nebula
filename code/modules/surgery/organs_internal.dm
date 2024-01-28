@@ -9,6 +9,7 @@
 	delicate = 1
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NEEDS_ENCASEMENT
 	abstract_type = /decl/surgery_step/internal
+	end_step_sound = 'sound/effects/squelch1.ogg'
 
 //////////////////////////////////////////////////////////////////
 //	Organ mending surgery step
@@ -69,6 +70,7 @@
 				I.surgical_fix(user)
 	user.visible_message("\The [user] finishes treating damage within \the [target]'s [affected.name] with [tool_name].", \
 	"You finish treating damage within \the [target]'s [affected.name] with [tool_name]." )
+	..()
 
 /decl/surgery_step/internal/fix_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
@@ -84,6 +86,7 @@
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
 		if(I && I.damage > 0 && !BP_IS_PROSTHETIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			I.take_internal_damage(dam_amt)
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	 Organ detachment surgery step
@@ -125,6 +128,7 @@
 	if(I && istype(I) && istype(affected))
 		//First only detach the organ, without fully removing it
 		target.remove_organ(I, FALSE, TRUE)
+	..()
 
 /decl/surgery_step/internal/detach_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
@@ -132,6 +136,7 @@
 		user.visible_message("<span class='warning'>[user]'s hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>", \
 		"<span class='warning'>Your hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>")
 		affected.take_external_damage(rand(30,50), 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	 Organ removal surgery step
@@ -185,25 +190,20 @@
 /decl/surgery_step/internal/remove_organ/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>\The [user] has removed \the [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>", \
 	"<span class='notice'>You have removed \the [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
-
 	// Extract the organ!
 	var/obj/item/organ/O = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(istype(O) && istype(affected))
 		//Now call remove again with detach = FALSE so we fully remove it
 		target.remove_organ(O, TRUE, FALSE)
-
-	// Just in case somehow the organ we're extracting from an organic is an MMI
-	if(istype(O, /obj/item/organ/internal/mmi_holder))
-		var/obj/item/organ/internal/mmi_holder/brain = O
-		brain.transfer_and_delete()
-		log_warning("Organ removal surgery on '[target]' returned a mmi_holder '[O]' instead of a mmi!!")
+	..()
 
 /decl/surgery_step/internal/remove_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, damaging [target]'s [affected.name] with \the [tool]!</span>")
 	affected.take_external_damage(20, used_weapon = tool)
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	 Organ inserting surgery step
@@ -244,10 +244,7 @@
 			CRASH("Target ([target]) of surgery [type] has no bodytype!")
 		else
 			var/decl/pronouns/G = O.get_pronouns()
-			var/decl/bodytype/root_bodytype = target.get_bodytype()
-			if(O.organ_tag == BP_POSIBRAIN && !root_bodytype.has_organ[BP_POSIBRAIN])
-				to_chat(user, SPAN_WARNING("There's no place in [target] to fit \the [O.organ_tag]."))
-			else if(O.damage > (O.max_damage * 0.75))
+			if(O.damage > (O.max_damage * 0.75))
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
@@ -273,12 +270,10 @@
 	if(istype(O) && user.try_unequip(O, target))
 		//Place the organ but don't attach it yet
 		target.add_organ(O, affected, detached = TRUE)
-
-		if(!BP_IS_PROSTHETIC(affected))
-			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
-		else
+		if(BP_IS_PROSTHETIC(affected))
 			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
-
+		else
+			..()
 		if(BP_IS_PROSTHETIC(O) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
 			O.add_random_ailment()
 
@@ -288,6 +283,7 @@
 	var/obj/item/organ/internal/I = tool
 	if(istype(I))
 		I.take_internal_damage(rand(3,5))
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	 Organ attachment surgery step
@@ -320,8 +316,8 @@
 	var/list/attachable_organs
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 
-	for(var/obj/item/organ/I in affected.implants)
-		if(I && (I.status & ORGAN_CUT_AWAY))
+	for(var/obj/item/organ/I in (affected.implants|affected.internal_organs))
+		if(I.status & ORGAN_CUT_AWAY)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Attach \the [I.name]"
 			LAZYSET(attachable_organs, I, radial_button)
@@ -372,9 +368,11 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
 		target.add_organ(I, affected, detached = FALSE)
+	..()
 
 /decl/surgery_step/internal/attach_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!</span>")
 	affected.take_external_damage(20, used_weapon = tool)
+	..()

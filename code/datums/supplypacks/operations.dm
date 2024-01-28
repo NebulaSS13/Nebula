@@ -15,11 +15,13 @@
 
 /decl/hierarchy/supply_pack/operations/contraband
 	num_contained = 5
-	contains = list(/obj/item/seeds/bloodtomatoseed,
-					/obj/item/storage/pill_bottle/zoom,
-					/obj/item/storage/pill_bottle/happy,
-					/obj/item/storage/pill_bottle/gleam,
-					/obj/item/chems/drinks/bottle/pwine)
+	contains = list(
+		/obj/item/seeds/bloodtomatoseed,
+		/obj/item/storage/pill_bottle/zoom,
+		/obj/item/storage/pill_bottle/happy,
+		/obj/item/storage/pill_bottle/gleam,
+		/obj/item/chems/drinks/bottle/pwine
+	)
 
 	name = "UNLISTED - Contraband crate"
 	containername = "unlabeled crate"

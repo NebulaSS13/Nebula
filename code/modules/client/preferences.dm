@@ -244,7 +244,6 @@ var/global/list/time_prefs_fixed = list()
 	var/obj/screen/setup_preview/bg/BG = LAZYACCESS(char_render_holders, "BG")
 	if(!BG)
 		BG = new
-		BG.icon = 'icons/effects/32x32.dmi'
 		BG.pref = src
 		LAZYSET(char_render_holders, "BG", BG)
 		client.screen |= BG
@@ -279,13 +278,13 @@ var/global/list/time_prefs_fixed = list()
 	char_render_holders = null
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
-
-	if(!user)	return
-	if(isliving(user)) return
-
+	if(!user)
+		return
+	if(isliving(user))
+		return
 	if(href_list["preference"] == "open_whitelist_forum")
-		if(config.forumurl)
-			direct_output(user, link(config.forumurl))
+		if(get_config_value(/decl/config/text/forumurl))
+			direct_output(user, link(get_config_value(/decl/config/text/forumurl)))
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
@@ -352,9 +351,10 @@ var/global/list/time_prefs_fixed = list()
 
 	if(be_random_name)
 		var/decl/cultural_info/culture = GET_DECL(cultural_info[TAG_CULTURE])
-		if(culture) real_name = culture.get_random_name(gender)
+		if(culture)
+			real_name = culture.get_random_name(gender)
 
-	if(config.humans_need_surnames)
+	if(get_config_value(/decl/config/toggle/humans_need_surnames))
 		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
 		if(!firstspace)	//we need a surname
@@ -367,19 +367,16 @@ var/global/list/time_prefs_fixed = list()
 	character.set_gender(gender)
 	character.blood_type = blood_type
 
-	character.eye_colour = eye_colour
+	character.set_eye_colour(eye_colour, skip_update = TRUE)
 
-	character.h_style = h_style
-	character.hair_colour = hair_colour
+	character.set_hairstyle(h_style, skip_update = TRUE)
+	character.set_hair_colour(hair_colour, skip_update = TRUE)
 
-	character.f_style = f_style
-	character.facial_hair_colour = facial_hair_colour
+	character.set_facial_hairstyle(f_style, skip_update = TRUE)
+	character.set_facial_hair_colour(facial_hair_colour, skip_update = TRUE)
 
-	character.skin_colour = skin_colour
+	character.set_skin_colour(skin_colour, skip_update = TRUE)
 	character.skin_tone = skin_tone
-
-	character.h_style = h_style
-	character.f_style = f_style
 
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()
@@ -466,7 +463,8 @@ var/global/list/time_prefs_fixed = list()
 	dat += "<tt><center>"
 
 	dat += "<b>Select a character slot to load</b><hr>"
-	for(var/i=1, i<= config.character_slots, i++)
+	var/character_slots = get_config_value(/decl/config/num/character_slots)
+	for(var/i = 1 to character_slots)
 		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
 		if(i==default_slot)
 			name = "<b>[name]</b>"

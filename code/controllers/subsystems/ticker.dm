@@ -8,11 +8,11 @@ SUBSYSTEM_DEF(ticker)
 
 	var/pregame_timeleft = 3 MINUTES
 	var/start_ASAP = FALSE          //the game will start as soon as possible, bypassing all pre-game nonsense
-	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(config_tag = number of votes).
+	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(uid = number of votes).
 	var/bypass_gamemode_vote = 0    //Intended for use with admin tools. Will avoid voting and ignore any results.
 
-	var/master_mode = "extended"    //The underlying game mode (so "secret" or the voted mode). Saved to default back to previous round's mode in case the vote failed. This is a config_tag.
-	var/datum/game_mode/mode        //The actual gamemode, if selected.
+	var/master_mode = "extended"    //The underlying game mode (so "secret" or the voted mode). Saved to default back to previous round's mode in case the vote failed. This is a uid.
+	var/decl/game_mode/mode        //The actual gamemode, if selected.
 	var/round_progressing = 1       //Whether the lobby clock is ticking down.
 
 	var/list/bad_modes = list()     //Holds modes we tried to start and failed to.
@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(ticker)
 		Master.SetRunLevel(RUNLEVEL_SETUP)
 		return
 
-	if(!bypass_gamemode_vote && (pregame_timeleft <= config.vote_autogamemode_timeleft SECONDS) && !gamemode_vote_results)
+	if(!bypass_gamemode_vote && (pregame_timeleft <= get_config_value(/decl/config/num/vote_autogamemode_timeleft) SECONDS) && !gamemode_vote_results)
 		if(!SSvote.active_vote)
 			SSvote.initiate_vote(/datum/vote/gamemode, automatic = 1)
 
@@ -111,8 +111,8 @@ SUBSYSTEM_DEF(ticker)
 	if(mode_finished && game_finished())
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		end_game_state = END_GAME_READY_TO_END
-		INVOKE_ASYNC(src, .proc/declare_completion)
-		if(config.allow_map_switching && config.auto_map_vote && global.all_maps.len > 1)
+		INVOKE_ASYNC(src, PROC_REF(declare_completion))
+		if(get_config_value(/decl/config/toggle/allow_map_switching) && get_config_value(/decl/config/toggle/auto_map_vote) && global.all_maps.len > 1)
 			SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
 
 	else if(mode_finished && (end_game_state <= END_GAME_NOT_OVER))
@@ -206,7 +206,7 @@ Helpers
 	. = (revotes_allowed && !bypass_gamemode_vote) ? CHOOSE_GAMEMODE_REVOTE : CHOOSE_GAMEMODE_RESTART
 
 	var/mode_to_try = master_mode //This is the config tag
-	var/datum/game_mode/mode_datum
+	var/decl/game_mode/mode_datum
 
 	//Decide on the mode to try.
 	if(!bypass_gamemode_vote && gamemode_vote_results)
@@ -222,21 +222,26 @@ Helpers
 	if(mode_to_try in bad_modes)
 		return
 
-	//Find the relevant datum, resolving secret in the process.
-	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(config_tag = weight)
+	var/list/base_runnable_modes = list()
+	var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
+	for(var/mode_type in all_modes)
+		var/decl/game_mode/game_mode = all_modes[mode_type]
+		if(game_mode.probability > 0 && !game_mode.startRequirements())
+			base_runnable_modes[game_mode.uid] = game_mode.probability
+
 	if((mode_to_try=="random") || (mode_to_try=="secret"))
 		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
-			mode_datum = config.pick_mode(secret_force_mode)
+			mode_datum = decls_repository.get_decl_by_id(secret_force_mode, validate_decl_type = FALSE)
 		else if(!length(runnable_modes))  // Indicates major issues; will be handled on return.
 			bad_modes += mode_to_try
 			return
 		else
-			mode_datum = config.pick_mode(pickweight(runnable_modes))
+			mode_datum = decls_repository.get_decl_by_id(pickweight(runnable_modes), validate_decl_type = FALSE)
 			if(length(runnable_modes) > 1) // More to pick if we fail; we won't tell anyone we failed unless we fail all possibilities, though.
 				. = CHOOSE_GAMEMODE_SILENT_REDO
 	else
-		mode_datum = config.pick_mode(mode_to_try)
+		mode_datum = decls_repository.get_decl_by_id(mode_to_try, validate_decl_type = FALSE)
 	if(!istype(mode_datum))
 		bad_modes += mode_to_try
 		return
@@ -250,7 +255,7 @@ Helpers
 	if(mode_datum.startRequirements())
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()
-		bad_modes += mode_datum.config_tag
+		bad_modes += mode_datum.uid
 		return
 
 	//Declare victory, make an announcement.
@@ -261,10 +266,10 @@ Helpers
 		to_world("<B>The current game mode is Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
-			var/datum/game_mode/M = gamemode_cache[mode_tag]
+			var/decl/game_mode/M = decls_repository.get_decl_by_id(mode_tag, validate_decl_type = FALSE)
 			if(M)
-				mode_names += M.name
-		if (config.secret_hide_possibilities)
+				mode_names |= M.name
+		if (get_config_value(/decl/config/toggle/secret_hide_possibilities))
 			message_admins("<B>Possibilities:</B> [english_list(mode_names)]")
 		else
 			to_world("<B>Possibilities:</B> [english_list(mode_names)]")
@@ -291,7 +296,7 @@ Helpers
 			if(player.mind.assigned_role == "Captain")
 				captainless=0
 			if(!player_is_antag(player.mind, only_offstation_roles = 1))
-				SSjobs.equip_rank(player, player.mind.assigned_role, 0)
+				SSjobs.equip_job_title(player, player.mind.assigned_role, 0)
 				SScustomitems.equip_custom_items(player)
 	if(captainless)
 		for(var/mob/M in global.player_list)
@@ -344,13 +349,13 @@ Helpers
 /datum/controller/subsystem/ticker/proc/game_finished()
 	if(mode.station_explosion_in_progress)
 		return 0
-	if(config.continous_rounds)
+	if(get_config_value(/decl/config/toggle/continuous_rounds))
 		return SSevac.evacuation_controller?.round_over() || mode.station_was_nuked
 	else
 		return mode.check_finished() || (SSevac.evacuation_controller && SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation) || universe_has_ended
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
-	if(config.continous_rounds)
+	if(get_config_value(/decl/config/toggle/continuous_rounds))
 		return mode.check_finished()
 	else
 		return game_finished()

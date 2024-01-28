@@ -9,6 +9,7 @@
 	requires_organ_tag = BP_HEAD
 	requires_slot_flags = SLOT_EARS
 	mob_overlay_layer = HO_L_EAR_LAYER
+	quick_equip_priority = 7
 
 /datum/inventory_slot/ear/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	for(var/slot in global.airtight_slots)
@@ -42,3 +43,4 @@
 	slot_id = slot_r_ear_str
 	ui_loc = ui_r_ear
 	mob_overlay_layer = HO_R_EAR_LAYER
+	quick_equip_priority = 6

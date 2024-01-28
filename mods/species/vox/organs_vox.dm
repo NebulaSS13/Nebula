@@ -26,53 +26,55 @@
 	name = "gizzard"
 	color = "#0033cc"
 	var/static/list/gains_nutriment_from_inedible_reagents = list(
-		/decl/material/solid/wood =           3,
-		/decl/material/liquid/cleaner =       1,
-		/decl/material/liquid/foaming_agent = 1,
-		/decl/material/liquid/surfactant =    1,
-		/decl/material/liquid/paint =         1
+		/decl/material/solid/organic/wood          = 3,
+		/decl/material/liquid/cleaner              = 1,
+		/decl/material/liquid/foaming_agent        = 1,
+		/decl/material/liquid/surfactant           = 1,
+		/decl/material/liquid/paint                = 1
 	)
 	var/static/list/can_digest_matter = list(
-		/decl/material/solid/wood =                   TRUE,
-		/decl/material/solid/wood/mahogany =          TRUE,
-		/decl/material/solid/wood/maple =             TRUE,
-		/decl/material/solid/wood/ebony =             TRUE,
-		/decl/material/solid/wood/walnut =            TRUE,
-		/decl/material/solid/leather =                TRUE,
-		/decl/material/solid/plastic =                TRUE,
-		/decl/material/solid/cardboard =              TRUE,
-		/decl/material/solid/cloth =                  TRUE,
-		/decl/material/solid/slag =                   TRUE,
-		/decl/material/solid/sodiumchloride = TRUE
+		/decl/material/solid/organic/wood          = TRUE,
+		/decl/material/solid/organic/wood/mahogany = TRUE,
+		/decl/material/solid/organic/wood/maple    = TRUE,
+		/decl/material/solid/organic/wood/ebony    = TRUE,
+		/decl/material/solid/organic/wood/walnut   = TRUE,
+		/decl/material/solid/organic/leather       = TRUE,
+		/decl/material/solid/organic/plastic       = TRUE,
+		/decl/material/solid/organic/cardboard     = TRUE,
+		/decl/material/solid/organic/paper         = TRUE,
+		/decl/material/solid/organic/cloth         = TRUE,
+		/decl/material/solid/slag                  = TRUE,
+		/decl/material/solid/sodiumchloride        = TRUE
 	)
 	var/static/list/can_process_matter = list(
-		/decl/material/solid/glass =               TRUE,
-		/decl/material/solid/gemstone/diamond =    TRUE,
-		/decl/material/solid/stone/sandstone =     TRUE,
-		/decl/material/solid/stone/marble =        TRUE,
-		/decl/material/solid/metal/steel =         TRUE,
-		/decl/material/solid/metal/gold =          TRUE,
-		/decl/material/solid/metal/silver =        TRUE,
-		/decl/material/solid/metal/uranium =       TRUE,
-		/decl/material/solid/metal/iron =          TRUE,
-		/decl/material/solid/metal/platinum =      TRUE,
-		/decl/material/solid/metal/bronze =        TRUE,
-		/decl/material/solid/metal/titanium =      TRUE,
-		/decl/material/solid/metal/osmium =        TRUE,
-		/decl/material/solid/metal/copper =        TRUE,
-		/decl/material/solid/metal/aluminium =     TRUE,
-		/decl/material/solid/sand =        TRUE,
-		/decl/material/solid/graphite =    TRUE,
-		/decl/material/solid/pitchblende = TRUE,
-		/decl/material/solid/hematite =    TRUE,
-		/decl/material/solid/quartz =      TRUE,
-		/decl/material/solid/pyrite =      TRUE,
-		/decl/material/solid/spodumene =   TRUE,
-		/decl/material/solid/cinnabar =    TRUE,
-		/decl/material/solid/phosphorite = TRUE,
-		/decl/material/solid/potash =      TRUE,
-		/decl/material/solid/bauxite =     TRUE,
-		/decl/material/solid/rutile = 	   TRUE
+		/decl/material/solid/glass                 = TRUE,
+		/decl/material/solid/gemstone/diamond      = TRUE,
+		/decl/material/solid/stone/sandstone       = TRUE,
+		/decl/material/solid/stone/marble          = TRUE,
+		/decl/material/solid/metal/steel           = TRUE,
+		/decl/material/solid/metal/gold            = TRUE,
+		/decl/material/solid/metal/silver          = TRUE,
+		/decl/material/solid/metal/uranium         = TRUE,
+		/decl/material/solid/metal/iron            = TRUE,
+		/decl/material/solid/metal/platinum        = TRUE,
+		/decl/material/solid/metal/bronze          = TRUE,
+		/decl/material/solid/metal/titanium        = TRUE,
+		/decl/material/solid/metal/osmium          = TRUE,
+		/decl/material/solid/metal/copper          = TRUE,
+		/decl/material/solid/metal/aluminium       = TRUE,
+		/decl/material/solid/sand                  = TRUE,
+		/decl/material/solid/clay                  = TRUE,
+		/decl/material/solid/graphite              = TRUE,
+		/decl/material/solid/pitchblende           = TRUE,
+		/decl/material/solid/hematite              = TRUE,
+		/decl/material/solid/quartz                = TRUE,
+		/decl/material/solid/pyrite                = TRUE,
+		/decl/material/solid/spodumene             = TRUE,
+		/decl/material/solid/cinnabar              = TRUE,
+		/decl/material/solid/phosphorite           = TRUE,
+		/decl/material/solid/potash                = TRUE,
+		/decl/material/solid/bauxite               = TRUE,
+		/decl/material/solid/rutile                = TRUE
 	)
 	var/list/stored_matter = list()
 
@@ -153,10 +155,10 @@
 	icon_state = "cortical-stack"
 	organ_tag = BP_STACK
 	organ_properties = ORGAN_PROP_PROSTHETIC
-	origin_tech = @"{'biotech':4,'materials':4,'magnets':2,'programming':3}"
+	origin_tech = @'{"biotech":4,"materials":4,"magnets":2,"programming":3}'
 	relative_size = 10
 
-	var/ownerckey
+	var/stored_ckey
 	var/default_language
 	var/list/languages = list()
 	var/datum/mind/backup
@@ -172,7 +174,7 @@
 
 	var/user_vox = isspecies(user, SPECIES_VOX)
 	if (istype(backup))
-		var/owner_viable = find_dead_player(ownerckey, TRUE)
+		var/owner_viable = find_dead_player(stored_ckey, TRUE)
 		if (user_vox)
 			to_chat(user, SPAN_NOTICE("The integrity light on [src] blinks [owner_viable ? "rapidly. It can be implanted." : "slowly. It is dormant."]"))
 		else
@@ -192,7 +194,7 @@
 		backup = owner.mind
 		default_language = owner.default_language
 		if(owner.ckey)
-			ownerckey = owner.ckey
+			stored_ckey = owner.ckey
 
 /obj/item/organ/internal/voxstack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
@@ -210,7 +212,7 @@
 	set waitfor = FALSE
 	if(C && !backup_inviable())
 		prompting = TRUE
-		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
+		var/response = alert(find_dead_player(stored_ckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
 		prompting = FALSE
 		if(src && response == "Yes" && owner == C)
 			overwrite()

@@ -9,9 +9,10 @@
 	organ_tag = "limb"
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | LONG_GLIDE
 	scale_max_damage_to_species_health = TRUE
+	abstract_type = /obj/item/organ/external
 
 	var/slowdown = 0
-	var/tmp/icon_cache_key
+	var/tmp/_icon_cache_key
 	// Strings
 	var/broken_description             // fracture string if any.
 	var/damage_state = "00"            // Modifier used for generating the on-mob damage overlay for this limb.
@@ -31,7 +32,6 @@
 	// Appearance vars.
 	var/body_part = null               // Part flag
 	var/icon_position = 0              // Used in mob overlay layering calculations.
-	var/icon/mob_icon                  // Cached icon for use in mob overlays.
 	var/skin_tone                      // Skin tone.
 	var/skin_colour                    // skin colour
 	var/skin_blend = ICON_ADD          // How the skin colour is applied.
@@ -123,18 +123,32 @@
 		LAZYREMOVE(owner.bad_external_organs, src)
 
 /obj/item/organ/external/set_species(specie_name)
+	_icon_cache_key = null
 	. = ..()
 	skin_blend = bodytype.limb_blend
 	for(var/attack_type in species.unarmed_attacks)
 		var/decl/natural_attack/attack = GET_DECL(attack_type)
 		if(istype(attack) && (organ_tag in attack.usable_with_limbs))
 			LAZYADD(unarmed_attacks, attack_type)
-	get_icon()
+	update_icon()
 
-/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null)
-	. = ..()
+/obj/item/organ/external/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
+	_icon_cache_key = null
+	var/decl/bodytype/old_bodytype = bodytype
+	. = ..(new_bodytype, override_material)
+	if(bodytype != old_bodytype && apply_to_internal_organs)
+		bodytype.rebuild_internal_organs(src, override_material)
 	slowdown = bodytype.movement_slowdown
-	update_icon(TRUE)
+	if(.)
+		update_icon(TRUE)
+
+/obj/item/organ/external/set_dna(var/datum/dna/new_dna)
+	_icon_cache_key = null
+	return ..()
+
+/obj/item/organ/external/reset_status()
+	_icon_cache_key = null
+	return ..()
 
 /obj/item/organ/external/proc/set_bodytype_with_children(decl/bodytype/new_bodytype, override_material = null)
 	set_bodytype(new_bodytype, override_material)
@@ -415,7 +429,7 @@
 				return
 		owner.verbs -= /mob/living/carbon/human/proc/undislocate
 
-/obj/item/organ/external/update_health()
+/obj/item/organ/external/update_organ_health()
 	damage = min(max_damage, (brute_dam + burn_dam))
 	return
 
@@ -426,6 +440,8 @@
 
 	//If attached to an owner mob
 	if(istype(owner))
+
+		owner.full_prosthetic = null
 
 		// Initialize fingerprints if we don't already have some (TODO: we're assuming this is our first owner, maybe check for this elsewhere?).
 		if((limb_flags & ORGAN_FLAG_FINGERPRINT) && !fingerprint && !BP_IS_PROSTHETIC(src))
@@ -440,11 +456,8 @@
 		//
 		//If we contain any child organs add them to the owner
 		//
-		for(var/obj/item/organ/organ in internal_organs)
-			owner.add_organ(organ, src, in_place, update_icon, detached)
-
-		for(var/obj/item/organ/external/organ in children)
-			owner.add_organ(organ, src, in_place, update_icon, detached)
+		for(var/obj/item/organ/organ in (implants|children|internal_organs))
+			owner.add_organ(organ, src, in_place, update_icon, FALSE)
 
 		//
 		//Add any existing organs in the owner that have us as parent
@@ -558,7 +571,7 @@
 	switch(damage_type)
 		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
 		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
-	owner.refresh_visible_overlays()
+	owner.try_refresh_visible_overlays()
 	if(user == src.owner)
 		var/decl/pronouns/G = user.get_pronouns()
 		user.visible_message(SPAN_NOTICE("\The [user] patches [damage_desc] on [G.his] [name] with \the [tool]."))
@@ -600,7 +613,7 @@ This function completely restores a damaged organ to perfect condition.
 	. = ..() // Clear damage, reapply aspects.
 
 	if(owner)
-		owner.updatehealth()
+		owner.update_health()
 
 //#TODO: Rejuvination hacks should probably be removed
 /obj/item/organ/external/remove_rejuv()
@@ -641,7 +654,7 @@ This function completely restores a damaged organ to perfect condition.
 		switch(type)
 			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
 			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
-		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
+		var/fluid_loss = (damage/(owner.get_max_health() - get_config_value(/decl/config/num/health_health_threshold_dead))) * SPECIES_BLOOD_DEFAULT * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
@@ -866,12 +879,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		// we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
 		heal_amt = heal_amt * wound_update_accuracy
 		// configurable regen speed woo, no-regen hardcore or instaheal hugbox, choose your destiny
-		heal_amt = heal_amt * config.organ_regeneration_multiplier
+		heal_amt = heal_amt * get_config_value(/decl/config/num/health_organ_regeneration_multiplier)
 		// Apply a modifier based on how stressed we currently are.
 		if(owner)
 			var/stress_modifier = owner.get_stress_modifier()
 			if(stress_modifier)
-				heal_amt *= 1-(config.stress_healing_recovery_constant * stress_modifier)
+				heal_amt *= 1-(get_config_value(/decl/config/num/health_stress_healing_recovery_constant) * stress_modifier)
 		// amount of healing is spread over all the wounds
 		heal_amt = heal_amt / (LAZYLEN(wounds) + 1)
 		// making it look prettier on scanners
@@ -888,7 +901,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(update_surgery)
 			owner.update_surgery()
 		if (update_damstate())
-			owner.UpdateDamageIcon(1)
+			owner.update_damage_icon(TRUE)
 
 //Updates brute_damn and burn_damn from wound damages. Updates BLEEDING status.
 /obj/item/organ/external/proc/update_damages()
@@ -1210,7 +1223,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			I.exposed()
 
 /obj/item/organ/external/proc/fracture()
-	if(!config.bones_can_break)
+	if(!get_config_value(/decl/config/toggle/on/health_bones_can_break))
 		return
 	if(BP_IS_PROSTHETIC(src))
 		return	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
@@ -1245,7 +1258,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/mend_fracture()
 	if(BP_IS_PROSTHETIC(src))
 		return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
-	if(brute_dam > min_broken_damage * config.organ_health_multiplier)
+	if(brute_dam > min_broken_damage * get_config_value(/decl/config/num/health_organ_health_multiplier))
 		return 0	//will just immediately fracture again
 
 	status &= ~ORGAN_BROKEN
@@ -1336,6 +1349,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	W.forceMove(owner)
 
 /obj/item/organ/external/do_uninstall(in_place, detach, ignore_children, update_icon)
+
 	var/mob/living/carbon/human/victim = owner //parent proc clears owner
 	if(!(. = ..()))
 		return
@@ -1387,6 +1401,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 					continue
 				organ.do_install(null, src, FALSE, update_icon, FALSE) //Forcemove the organ and properly set it up in our internal data
 
+		victim.full_prosthetic = null
+
 	//Note that we don't need to change our own hierarchy when not removing from a mob
 
 	// Remove parent references
@@ -1413,7 +1429,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/set_detached(is_detached)
 	if(BP_IS_PROSTHETIC(src))
 		is_detached = FALSE //External prosthetics are never detached
-	return ..(is_detached)
+	. = ..(is_detached)
 
 /obj/item/organ/external/proc/disfigure(var/type = BRUTE)
 	if(status & ORGAN_DISFIGURED)

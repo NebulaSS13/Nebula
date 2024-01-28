@@ -30,9 +30,9 @@
 	. += " <a href='?src=\ref[src];examine=1'>\[View\]</a>"
 
 /obj/item/clothing/ring/material/wood
-	material = /decl/material/solid/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
 /obj/item/clothing/ring/material/plastic
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 /obj/item/clothing/ring/material/steel
 	material = /decl/material/solid/metal/steel
 /obj/item/clothing/ring/material/silver

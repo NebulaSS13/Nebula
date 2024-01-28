@@ -195,7 +195,7 @@
 
 	var/stress_modifier = get_stress_modifier()
 	if(stress_modifier)
-		amount *= 1-(config.stress_blood_recovery_constant * stress_modifier)
+		amount *= 1-(get_config_value(/decl/config/num/health_stress_blood_recovery_constant) * stress_modifier)
 
 	var/blood_volume_raw = vessel.total_volume
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
@@ -301,8 +301,8 @@
 		splatter.basecolor = blood_data["blood_color"]
 
 	splatter.update_icon()
-	splatter.fluorescent  = 0
-	splatter.set_invisibility(0)
+	splatter.fluorescent = FALSE
+	splatter.set_invisibility(INVISIBILITY_NONE)
 	return splatter
 
 //Percentage of maximum blood volume.

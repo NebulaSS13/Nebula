@@ -22,6 +22,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/bodytype/default_bodytype
 	var/base_prosthetics_model = /decl/bodytype/prosthetic/basic_human
 
+	// Lists of accessory types for modpack modification of accessory restrictions.
+	// These lists are pretty broad and indiscriminate in application, don't use
+	// them for fine detail restriction/allowing if you can avoid it.
+	var/list/allow_specific_sprite_accessories
+	var/list/disallow_specific_sprite_accessories
+
 	var/list/blood_types = list(
 		/decl/blood_type/aplus,
 		/decl/blood_type/aminus,
@@ -82,9 +88,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	// Death vars.
 	var/meat_type =     /obj/item/chems/food/meat/human
 	var/meat_amount =   3
-	var/skin_material = /decl/material/solid/skin
+	var/skin_material = /decl/material/solid/organic/skin
 	var/skin_amount =   3
-	var/bone_material = /decl/material/solid/bone
+	var/bone_material = /decl/material/solid/organic/bone
 	var/bone_amount =   3
 	var/remains_type =  /obj/item/remains/xeno
 	var/gibbed_anim =   "gibbed-h"
@@ -111,12 +117,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/blood_reagent = /decl/material/liquid/blood
 
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
-	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees
-	var/cold_level_2 = 200                                      // Cold damage level 2 below this point.
-	var/cold_level_3 = 120                                      // Cold damage level 3 below this point.
-	var/heat_level_1 = 360                                      // Heat damage level 1 above this point.
-	var/heat_level_2 = 400                                      // Heat damage level 2 above this point.
-	var/heat_level_3 = 1000                                     // Heat damage level 3 above this point.
+
 	var/passive_temp_gain = 0		                            // Species will gain this much temperature every second
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE             // Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE           // High pressure warning.
@@ -124,19 +125,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE               // Dangerously low pressure.
 	var/body_temperature = 310.15	                            // Species will try to stabilize at this temperature.
 	                                                            // (also affects temperature processing)
-	var/heat_discomfort_level = 315                             // Aesthetic messages about feeling warm.
-	var/cold_discomfort_level = 285                             // Aesthetic messages about feeling chilly.
-	var/list/heat_discomfort_strings = list(
-		"You feel sweat drip down your neck.",
-		"You feel uncomfortably warm.",
-		"Your skin prickles in the heat."
-		)
-	var/list/cold_discomfort_strings = list(
-		"You feel chilly.",
-		"You shiver suddenly.",
-		"Your chilly flesh stands out in goosebumps."
-		)
-
 	var/water_soothe_amount
 
 	// HUD data vars.
@@ -305,6 +293,42 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		available_bodytypes -= bodytype
 		available_bodytypes += GET_DECL(bodytype)
 
+	// Update sprite accessory lists for these species.
+	for(var/accessory_type in allow_specific_sprite_accessories)
+		var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
+		// If this accessory is species restricted, add us to the list.
+		if(accessory.species_allowed)
+			accessory.species_allowed |= name
+		if(!isnull(accessory.body_flags_allowed))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_allowed |= bodytype.body_flags
+		if(!isnull(accessory.body_flags_denied))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_denied &= ~bodytype.body_flags
+		if(accessory.bodytype_categories_allowed)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed |= bodytype.bodytype_category
+		if(accessory.bodytype_categories_denied)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed -= bodytype.bodytype_category
+
+	for(var/accessory_type in disallow_specific_sprite_accessories)
+		var/decl/sprite_accessory/accessory = GET_DECL(accessory_type)
+		if(accessory.species_allowed)
+			accessory.species_allowed -= name
+		if(!isnull(accessory.body_flags_allowed))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_allowed &= ~bodytype.body_flags
+		if(!isnull(accessory.body_flags_denied))
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.body_flags_denied |= bodytype.body_flags
+		if(accessory.bodytype_categories_allowed)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed -= bodytype.bodytype_category
+		if(accessory.bodytype_categories_denied)
+			for(var/decl/bodytype/bodytype in available_bodytypes)
+				accessory.bodytype_categories_allowed |= bodytype.bodytype_category
+
 	if(ispath(default_bodytype))
 		default_bodytype = GET_DECL(default_bodytype)
 	else if(length(available_bodytypes) && !default_bodytype)
@@ -381,31 +405,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		. += "age descriptor was unset"
 	else if(!ispath(age_descriptor, /datum/appearance_descriptor/age))
 		. += "age descriptor was not a /datum/appearance_descriptor/age subtype"
-
-	if(cold_level_3)
-		if(cold_level_2)
-			if(cold_level_3 > cold_level_2)
-				. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_2 ([cold_level_2])"
-			if(cold_level_1)
-				if(cold_level_3 > cold_level_1)
-					. += "cold_level_3 ([cold_level_3]) was not lower than cold_level_1 ([cold_level_1])"
-	if(cold_level_2 && cold_level_1)
-		if(cold_level_2 > cold_level_1)
-			. += "cold_level_2 ([cold_level_2]) was not lower than cold_level_1 ([cold_level_1])"
-
-	if(heat_level_3 != INFINITY)
-		if(heat_level_2 != INFINITY)
-			if(heat_level_3 < heat_level_2)
-				. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_2 ([heat_level_2])"
-			if(heat_level_1 != INFINITY)
-				if(heat_level_3 < heat_level_1)
-					. += "heat_level_3 ([heat_level_3]) was not higher than heat_level_1 ([heat_level_1])"
-	if((heat_level_2 != INFINITY) && (heat_level_1 != INFINITY))
-		if(heat_level_2 < heat_level_1)
-			. += "heat_level_2 ([heat_level_2]) was not higher than heat_level_1 ([heat_level_1])"
-
-	if(min(heat_level_1, heat_level_2, heat_level_3) <= max(cold_level_1, cold_level_2, cold_level_3))
-		. += "heat and cold damage level thresholds overlap"
 
 	if(taste_sensitivity < 0)
 		. += "taste_sensitivity ([taste_sensitivity]) was negative"
@@ -542,7 +541,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.set_fullscreen(GET_STATUS(H, STAT_BLIND) && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
 	H.set_fullscreen(H.stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
-	if(config.welder_vision)
+	if(get_config_value(/decl/config/toggle/on/welder_vision))
 		H.set_fullscreen(H.equipment_tint_total, "welder", /obj/screen/fullscreen/impaired, H.equipment_tint_total)
 	var/how_nearsighted = get_how_nearsighted(H)
 	H.set_fullscreen(how_nearsighted, "nearsighted", /obj/screen/fullscreen/oxy, how_nearsighted)
@@ -827,20 +826,3 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
-
-/decl/species/proc/get_species_temperature_threshold(var/threshold)
-	switch(threshold)
-		if(COLD_LEVEL_1)
-			return cold_level_1
-		if(COLD_LEVEL_2)
-			return cold_level_2
-		if(COLD_LEVEL_3)
-			return cold_level_3
-		if(HEAT_LEVEL_1)
-			return heat_level_1
-		if(HEAT_LEVEL_2)
-			return heat_level_2
-		if(HEAT_LEVEL_3)
-			return heat_level_3
-		else
-			CRASH("get_species_temperature_threshold() called with invalid threshold value.")

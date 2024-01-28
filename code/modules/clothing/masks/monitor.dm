@@ -47,7 +47,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/clothing/mask/monitor/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/mask/monitor/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(!(monitor_state_index in monitor_states))
 			monitor_state_index = initial(monitor_state_index)
@@ -71,7 +71,7 @@
 	canremove = 1
 	return ..()
 
-/obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot, var/disable_warning, var/force, var/ignore_equipped)
+/obj/item/clothing/mask/monitor/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
 	if(. && (slot == slot_head_str || slot == slot_wear_mask_str))
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(user, BP_HEAD)

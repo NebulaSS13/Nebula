@@ -6,6 +6,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 	filling_color = COLOR_BROWN
+	abstract_type = /obj/item/chems/food/variable
 
 /obj/item/chems/food/variable/Initialize()
 	. = ..()

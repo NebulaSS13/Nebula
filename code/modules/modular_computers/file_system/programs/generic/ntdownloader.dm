@@ -43,6 +43,8 @@
 	if(!check_file_download(filename))
 		return 0
 	var/datum/computer_file/program/PRG = net.find_file_by_name(filename, OS_PROGRAMS_DIR, MF_ROLE_SOFTWARE)
+	if(!istype(PRG))
+		return 0
 	var/datum/file_storage/disk/destination = computer.mounted_storage["local"]
 	if(!destination)
 		return 0

@@ -60,7 +60,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 //mostly for convenience
 /obj/proc/get_material_type()
 	var/decl/material/mat = get_material()
-	. = mat && mat.type
+	. = mat?.type
 
 // Material definition and procs follow.
 /decl/material
@@ -95,7 +95,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/shard_icon                        // Related to above.
 	var/shard_can_repair = 1              // Can shards be turned into sheets with a welder?
 	var/list/recipes                      // Holder for all recipes usable with a sheet of this material.
-	var/list/strut_recipes                // Holder for all the recipes you can build with the struct stack type.
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
 
 	// Icons
@@ -110,7 +109,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/table_icon_base = "metal"
 	var/table_icon_reinforced = "reinf_metal"
 
-	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
+	var/list/stack_origin_tech = @'{"materials":1}' // Research level for stacks.
 
 	// Attributes
 	/// How rare is this material in exoplanet xenoflora?
@@ -129,8 +128,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/boiling_point = 3000
 	/// kJ/kg, enthalpy of vaporization
 	var/latent_heat = 7000
-	/// kg/mol,
+	/// kg/mol
 	var/molar_mass = 0.06
+	/// g/ml
+	var/liquid_density = 0.997
+	/// g/ml
+	var/solid_density = 0.9168
 	/// Brute damage to a wall is divided by this value if the wall is reinforced by this material.
 	var/brute_armor = 2
 	/// Same as above, but for Burn damage type. If blank brute_armor's value is used.
@@ -222,6 +225,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/fruit_descriptor // String added to fruit desc if this chemical is present.
 
 	var/dirtiness = DIRTINESS_NEUTRAL // How dirty turfs are after being exposed to this material. Negative values cause a cleaning/sterilizing effect.
+	var/decontamination_dose = 0      // Amount required for a decontamination effect, if any.
 	var/solvent_power = MAT_SOLVENT_NONE
 	var/solvent_melt_dose = 0
 	var/solvent_max_damage  = 0
@@ -250,7 +254,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/heating_sound = 'sound/effects/bubbles.ogg'
 	var/list/heating_products
 	var/bypass_heating_products_for_root_type
-	var/fuel_value = 0
+	var/accelerant_value = 0
 	var/burn_product
 	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged
 
@@ -337,6 +341,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 #define FALSEWALL_STATE "fwall_open"
 /decl/material/validate()
 	. = ..()
+	if(accelerant_value > FUEL_VALUE_NONE && isnull(ignition_point))
+		. += "accelerant value larger than zero but null ignition point"
+	if(!isnull(ignition_point) && accelerant_value <= FUEL_VALUE_NONE)
+		. += "accelerant value below zero but non-null ignition point"
 	if(length(dissolves_into) && isnull(dissolves_in))
 		. += "dissolves_into set but dissolves_in is undefined"
 	if(length(heating_products) && isnull(heating_point))
@@ -441,6 +449,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		return MAT_PHASE_LIQUID
 	return MAT_PHASE_SOLID
 
+// Returns the number of mols of material for the amount of solid or liquid units passed.
+/decl/material/proc/get_mols_from_units(units, phase)
+	var/ml = units*10 // Rough estimation.
+	switch(phase)
+		if(MAT_PHASE_LIQUID)
+			var/kg = (liquid_density*ml)/1000
+			return kg/molar_mass
+		if(MAT_PHASE_SOLID)
+			var/kg = (solid_density*ml)/1000
+			return kg/molar_mass
+		else
+			log_warning("Invalid phase '[phase]' passed to get_mols_from_units!")
+			return units
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
@@ -544,28 +565,29 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affectedbook.dat = null
 				to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
 
-	if(solvent_power >= MAT_SOLVENT_STRONG && !O.unacidable && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
-		var/obj/effect/decal/cleanable/molten_item/I = new(O.loc)
-		I.visible_message(SPAN_DANGER("\The [O] dissolves!"))
-		I.desc = "It looks like it was \a [O] some time ago."
-		qdel(O)
+	if(solvent_power >= MAT_SOLVENT_STRONG && O.solvent_can_melt(solvent_power) && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
+		O.visible_message(SPAN_DANGER("\The [O] dissolves!"))
+		O.melt()
 		holder?.remove_reagent(type, solvent_melt_dose)
-
-	if(dirtiness <= DIRTINESS_STERILE)
-		O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
-		O.was_bloodied = null
-
-	if(dirtiness <= DIRTINESS_CLEAN)
-		O.clean_blood()
-
-	if(defoliant && istype(O, /obj/effect/vine))
+	else if(defoliant && istype(O, /obj/effect/vine))
 		qdel(O)
+	else
+		if(dirtiness <= DIRTINESS_DECONTAMINATE)
+			if(amount >= decontamination_dose && istype(O, /obj/item))
+				var/obj/item/I = O
+				if(I.contaminated)
+					I.decontaminate()
+		if(dirtiness <= DIRTINESS_STERILE)
+			O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
+			O.was_bloodied = null
+		if(dirtiness <= DIRTINESS_CLEAN)
+			O.clean_blood()
 
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
-	if(fuel_value && amount && istype(M))
-		M.fire_stacks += FLOOR((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+	if(accelerant_value != FUEL_VALUE_NONE && amount && istype(M))
+		M.fire_stacks += FLOOR((amount * accelerant_value)/FLAMMABLE_LIQUID_DIVISOR)
 #undef FLAMMABLE_LIQUID_DIVISOR
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
@@ -728,34 +750,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				return
 		M.clean_blood()
 
-	if(solvent_power >= MAT_SOLVENT_STRONG && removed >= solvent_melt_dose)
-
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			for(var/slot in global.standard_headgear_slots)
-				var/obj/item/thing = H.get_equipped_item(slot)
-				if(!istype(thing))
-					continue
-				if(thing.unacidable || !H.try_unequip(thing))
-					to_chat(H, SPAN_NOTICE("Your [thing] protects you from the acid."))
-					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
-					return
-				to_chat(H, SPAN_DANGER("Your [thing] dissolves!"))
-				qdel(thing)
-				removed -= solvent_melt_dose
-				if(removed <= 0)
-					return
-
-			if(!H.unacidable)
-				var/screamed
-				for(var/obj/item/organ/external/affecting in H.get_external_organs())
-					if(!screamed && affecting.can_feel_pain())
-						screamed = TRUE
-						H.emote("scream")
-					affecting.status |= ORGAN_DISFIGURED
-
-		if(!M.unacidable)
-			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DISMEMBER_METHOD_ACID)
+	if(solvent_power > MAT_SOLVENT_NONE && removed >= solvent_melt_dose && M.solvent_act(min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), solvent_melt_dose, solvent_power))
+		holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 
 /decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
@@ -818,3 +814,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			total_interacted_units -= interacted_units
 		if(total_interacted_units <= 0)
 			return
+
+/decl/material/proc/add_burn_product(var/atom/location, var/amount)
+	var/datum/gas_mixture/environment = istype(location, /datum/gas_mixture) ? location : location?.return_air()
+	if(!environment || amount <= 0 || !burn_product)
+		return
+	environment.adjust_gas(burn_product, amount)

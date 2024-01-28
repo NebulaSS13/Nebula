@@ -4,7 +4,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 
 	. = ..()
 
-	invisibility = 0
+	set_invisibility(INVISIBILITY_NONE)
 
 	// Bookkeeping/rightclick guards.
 	verbs.Cut()
@@ -21,17 +21,18 @@ INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 
 	// If we're post-init, init immediately.
 	if(SSweather.initialized)
-		addtimer(CALLBACK(src, .proc/init_weather), 0)
+		addtimer(CALLBACK(src, PROC_REF(init_weather)), 0)
 
 // Start the weather effects from the highest point; they will propagate downwards during update.
 /obj/abstract/weather_system/proc/init_weather()
 	// Track all z-levels.
-	var/highest_z = affecting_zs[1]
-	for(var/tz in affecting_zs)
-		if(tz > highest_z)
-			highest_z = tz
-
-	// Update turf weather.
-	for(var/turf/T as anything in block(locate(1, 1, highest_z), locate(world.maxx, world.maxy, highest_z)))
-		T.update_weather(src)
-		CHECK_TICK
+	for(var/highest_z in affecting_zs)
+		var/turfcount = 0
+		if(HasAbove(highest_z))
+			continue
+		// Update turf weather.
+		for(var/turf/T as anything in block(locate(1, 1, highest_z), locate(world.maxx, world.maxy, highest_z)))
+			T.update_weather(src)
+			turfcount++
+			CHECK_TICK
+		log_debug("Initialized weather for [turfcount] turf\s from z[highest_z].")

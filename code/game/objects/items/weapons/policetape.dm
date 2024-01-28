@@ -119,7 +119,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 		return
 	var/mob/_uroller = unroller.resolve()
 	if(_uroller)
-		events_repository.unregister(/decl/observ/moved, _uroller, src, .proc/user_moved_unrolling)
+		events_repository.unregister(/decl/observ/moved, _uroller, src, PROC_REF(user_moved_unrolling))
 	unroller         = null
 	start            = null
 	slowdown_general = initial(slowdown_general)
@@ -135,8 +135,8 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	start    = get_turf(src)
 	unroller = weakref(user)
 	slowdown_general = initial(slowdown_general) + 2 //While unrolling you're slightly slower
-	events_repository.unregister(/decl/observ/moved, user, src, .proc/user_moved_unrolling)
-	events_repository.register(/decl/observ/moved, user, src, .proc/user_moved_unrolling)
+	events_repository.unregister(/decl/observ/moved, user, src, PROC_REF(user_moved_unrolling))
+	events_repository.register(/decl/observ/moved, user, src, PROC_REF(user_moved_unrolling))
 	to_chat(user, SPAN_NOTICE("You start unrolling \the [src]."))
 	//Place the first one immediately
 	place_line(user, get_turf(user), user.dir)
@@ -194,7 +194,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 	layer            = ABOVE_DOOR_LAYER
 	pass_flags       = PASS_FLAG_TABLE                //About the height of table
 	anchored         = TRUE
-	material         = /decl/material/solid/plastic
+	material         = /decl/material/solid/organic/plastic
 	var/neighbors    = 0                              //Contains all the direction flags of all the neighboring tape_barricades
 	var/nb_neighbors = 0                              //Keep track of our cached neighbors number
 	var/is_lifted    = 0                              //Whether the tape is lifted and we're allowing everyone passage.
@@ -338,16 +338,17 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 			return FALSE
 	return ..()
 
-/obj/structure/tape_barricade/Crossed(O)
+/obj/structure/tape_barricade/Crossed(atom/movable/AM)
 	. = ..()
-	if(!is_lifted && ismob(O))
-		var/mob/M = O
-		add_fingerprint(M)
-		shake_animation(2)
-		if (!allowed(M))	//only select few learn art of not crumpling the tape
-			to_chat(M, SPAN_NOTICE("You are not supposed to go past \the [src]..."))
-			if(M.a_intent != I_HELP)
-				crumple()
+	if(is_lifted || !isliving(AM))
+		return
+	var/mob/living/M = AM
+	add_fingerprint(M)
+	shake_animation(2)
+	if (!allowed(M))	//only select few learn art of not crumpling the tape
+		to_chat(M, SPAN_NOTICE("You are not supposed to go past \the [src]..."))
+		if(M.a_intent != I_HELP)
+			crumple()
 
 /obj/structure/tape_barricade/proc/crumple()
 	if(!is_crumpled)
@@ -363,7 +364,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 		layer = ABOVE_HUMAN_LAYER
 		pass_flags = PASS_FLAG_MOB
 		pixel_y += 8
-		addtimer(CALLBACK(src, .proc/on_unlift), time, TIMER_UNIQUE)
+		addtimer(CALLBACK(src, PROC_REF(on_unlift)), time, TIMER_UNIQUE)
 		playsound(src, 'sound/effects/pageturn2.ogg', 50, TRUE)
 
 /**Called by timer when the tape line falls back in place. */
@@ -433,7 +434,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 
 //mapper type
 /obj/structure/tape_barricade/police
-	icon_state    = "tape_h_0"
+	icon_state    = "tape_door_0"
 	color         = COLOR_RED
 	tape_template = /decl/barricade_tape_template/police
 
@@ -452,7 +453,7 @@ var/global/list/image/hazard_overlays //Cached hazard floor overlays for the bar
 
 //mapper type
 /obj/structure/tape_barricade/engineering
-	icon_state    = "tape_h_0"
+	icon_state    = "stripetape_door_0"
 	color         = COLOR_ORANGE
 	tape_template = /decl/barricade_tape_template/engineering
 

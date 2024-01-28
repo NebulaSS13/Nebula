@@ -45,8 +45,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
 
-	var/health = 10
-	var/max_health = 100
+	health = 10
+	max_health = 100
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
@@ -129,7 +129,7 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		if(growth_type in list(GROWTH_VINES,GROWTH_BIOMASS))
 			set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems[/decl/material/solid/wood]))
+		if(islist(seed.chems) && !isnull(seed.chems[/decl/material/solid/organic/wood]))
 			set_density(1)
 			set_opacity(1)
 

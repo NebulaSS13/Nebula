@@ -20,7 +20,7 @@
 	active_power_cost = 6 KILOWATTS		// 30 min battery life /w best (3kWh) cell
 	passive_power_cost = 0
 	module_cooldown = 10 SECONDS
-	origin_tech = "{'materials':5,'powerstorage':6,'magnets':6,'esoteric':6,'engineering':7}"
+	origin_tech = @'{"materials":5,"powerstorage":6,"magnets":6,"esoteric":6,"engineering":7}'
 	activate_string = "Enable Cloak"
 	deactivate_string = "Disable Cloak"
 
@@ -36,7 +36,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rig_module/stealth_field/activate()
@@ -153,12 +153,12 @@
 
 	fabrication_type = /obj/item/energy_net
 	use_power_cost = 20 KILOWATTS
-	origin_tech = "{'materials':5,'powerstorage':6,'magnets':5,'esoteric':4,'engineering':6}"
+	origin_tech = @'{"materials":5,"powerstorage":6,"magnets":5,"esoteric":4,"engineering":6}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rig_module/fabricator/energy_net/engage(atom/target)

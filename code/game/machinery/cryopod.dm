@@ -16,7 +16,7 @@
 	density = FALSE
 	interact_offline = 1
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-24}, 'SOUTH':{'y':32}, 'EAST':{'x':-24}, 'WEST':{'x':24}}"
+	directional_offset = @'{"NORTH":{"y":-24}, "SOUTH":{"y":32}, "EAST":{"x":-24}, "WEST":{"x":24}}'
 
 	//Used for logging people entering cryosleep and important items they are carrying.
 	var/list/frozen_crew = list()
@@ -119,12 +119,12 @@
 /obj/item/stock_parts/circuitboard/cryopodcontrol
 	name = "circuit board (Cryogenic Oversight Console)"
 	build_path = /obj/machinery/computer/cryopod
-	origin_tech = "{'programming':3}"
+	origin_tech = @'{"programming":3}'
 
 /obj/item/stock_parts/circuitboard/robotstoragecontrol
 	name = "circuit board (Robotic Storage Console)"
 	build_path = /obj/machinery/computer/cryopod/robot
-	origin_tech = "{'programming':3}"
+	origin_tech = @'{"programming":3}'
 
 //Decorative structures to go alongside cryopods.
 /obj/structure/cryofeed
@@ -189,7 +189,7 @@
 	icon_state = "redpod0"
 	base_icon_state = "redpod0"
 	occupied_icon_state = "redpod1"
-	var/launched = 0
+	var/launched = FALSE
 	var/datum/gas_mixture/airtank
 
 /obj/machinery/cryopod/lifepod/Initialize()
@@ -203,7 +203,7 @@
 	return airtank
 
 /obj/machinery/cryopod/lifepod/proc/launch()
-	launched = 1
+	launched = TRUE
 	for(var/d in global.cardinal)
 		var/turf/T = get_step(src,d)
 		var/obj/machinery/door/blast/B = locate() in T
@@ -212,13 +212,17 @@
 			break
 
 	var/newz
-	if(prob(10))
+	if(prob(90))
 		var/list/possible_locations
 		var/obj/effect/overmap/visitable/O = global.overmap_sectors[num2text(z)]
 		if(istype(O))
 			for(var/obj/effect/overmap/visitable/OO in range(O,2))
 				if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/planetoid))
-					LAZYDISTINCTADD(possible_locations, text2num(level))
+					// Don't try to escape to the place we just launched from
+					if(OO == O)
+						continue
+					var/datum/level_data/data = OO.get_topmost_level_data()
+					LAZYDISTINCTADD(possible_locations, text2num(data.level_z))
 		if(length(possible_locations))
 			newz = pick(possible_locations)
 	if(!newz)
@@ -255,7 +259,7 @@
 	if(!control_computer)
 		control_computer = locate(/obj/machinery/computer/cryopod) in get_area(src)
 		if(control_computer)
-			events_repository.register(/decl/observ/destroyed, control_computer, src, .proc/clear_control_computer)
+			events_repository.register(/decl/observ/destroyed, control_computer, src, PROC_REF(clear_control_computer))
 	return control_computer
 
 /obj/machinery/cryopod/proc/clear_control_computer()
@@ -310,14 +314,14 @@
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/robot/despawn_occupant()
 	var/mob/living/silicon/robot/R = occupant
-	if(!istype(R)) return ..()
-
-	qdel(R.mmi)
-	for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
-		for(var/obj/item/O in I.get_contained_external_atoms()) // the things inside the tools, if anything; mainly for janiborg trash bags
-			O.forceMove(R)
-		qdel(I)
-	qdel(R.module)
+	if(istype(R))
+		R.clear_brain()
+		if(R.module)
+			for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
+				for(var/obj/item/O in I.get_contained_external_atoms()) // the things inside the tools, if anything; mainly for janiborg trash bags
+					O.forceMove(R)
+				qdel(I)
+			qdel(R.module)
 
 	. = ..()
 
@@ -421,7 +425,7 @@
 		src.add_fingerprint(target)
 
 //Like grap-put, but for mouse-drop.
-/obj/machinery/cryopod/receive_mouse_drop(var/atom/dropping, var/mob/user)
+/obj/machinery/cryopod/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && check_occupant_allowed(dropping))
 		if(occupant)

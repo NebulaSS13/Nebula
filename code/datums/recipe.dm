@@ -48,7 +48,8 @@
 	return TRUE
 
 /decl/recipe/proc/check_fruit(var/obj/container)
-	SHOULD_BE_PURE(TRUE)
+	// SHOULD_BE_PURE(TRUE) // We cannot set SHOULD_BE_PURE here as
+	// get_contained_external_atoms() retrieves an extension, which is impure.
 	if(!length(fruit))
 		return TRUE
 	var/container_contents = container?.get_contained_external_atoms()
@@ -77,7 +78,8 @@
 	return TRUE
 
 /decl/recipe/proc/check_items(var/obj/container)
-	SHOULD_BE_PURE(TRUE)
+	// SHOULD_BE_PURE(TRUE) // We cannot set SHOULD_BE_PURE here as
+	// get_contained_external_atoms() retrieves an extension, which is impure.
 	if(!length(items))
 		return TRUE
 	var/list/container_contents = container?.get_contained_external_atoms()
@@ -93,9 +95,11 @@
 				--needed_items[itype]
 				if(needed_items[itype] <= 0)
 					needed_items -= itype
+					break
 			else
 				needed_items -= itype
-			break
+				break
+			// break
 		if(!length(container_contents))
 			break
 	return !length(needed_items)
@@ -128,10 +132,15 @@
 	//Find items we need
 	if (LAZYLEN(items))
 		for (var/i in items)
-			var/obj/item/I = locate(i) in container_contents
-			if (I && I.reagents)
-				I.reagents.trans_to_holder(buffer,I.reagents.total_volume)
-				qdel(I)
+			var/cnt = 1
+			if (isnum(items[i]))
+				cnt = items[i]
+			for (cnt, cnt > 0, cnt--)
+				var/obj/item/I = locate(i) in container_contents
+				if (I && I.reagents)
+					container_contents -= I
+					I.reagents.trans_to_holder(buffer,I.reagents.total_volume)
+					qdel(I)
 
 	//Find fruits
 	if (LAZYLEN(fruit))

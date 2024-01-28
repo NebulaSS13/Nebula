@@ -51,7 +51,7 @@
 
 /obj/effect/effect/smoke/chem/Crossed(atom/movable/AM)
 	..()
-	if(!istype(AM, /obj/effect/effect/smoke/chem))
+	if(AM.simulated && !istype(AM, /obj/effect/effect/smoke/chem))
 		reagents.splash(AM, splash_amount, copy = 1)
 
 /obj/effect/effect/smoke/chem/proc/initial_splash()
@@ -138,7 +138,7 @@
 	var/whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>[where]</a>"
 
 	if(show_log)
-		var/atom/location = carry?.get_reaction_loc()
+		var/atom/location = carry?.get_reaction_loc(CHEM_REACTION_FLAG_OVERFLOW_CONTAINER)
 		if(location?.fingerprintslast)
 			var/mob/M = get_mob_by_key(location.fingerprintslast)
 			var/more = ""

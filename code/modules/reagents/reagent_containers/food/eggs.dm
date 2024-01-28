@@ -8,7 +8,7 @@
 	icon_state = "egg"
 	filling_color = "#fdffd1"
 	volume = 10
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/protein/egg
 
@@ -79,7 +79,7 @@
 	desc = "A fried egg, with a touch of salt and pepper."
 	icon_state = "friedegg"
 	filling_color = "#ffdf78"
-	center_of_mass = @"{'x':16,'y':14}"
+	center_of_mass = @'{"x":16,"y":14}'
 	bitesize = 1
 
 /obj/item/chems/food/friedegg/populate_reagents()
@@ -104,7 +104,7 @@
 	icon_state = "omelette"
 	trash = /obj/item/trash/plate
 	filling_color = "#fff9a8"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 1
 
 /obj/item/chems/food/omelette/populate_reagents()
@@ -117,9 +117,9 @@
 	icon_state = "chawanmushi"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#f0f2e4"
-	center_of_mass = @"{'x':17,'y':10}"
+	center_of_mass = @'{"x":17,"y":10}'
 	bitesize = 1
-	
+
 /obj/item/chems/food/chawanmushi/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)

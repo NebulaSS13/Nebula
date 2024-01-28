@@ -3,7 +3,7 @@
 	desc = "A rack that holds coats."
 	icon = 'icons/obj/structures/coatrack.dmi'
 	icon_state = "coatrack0"
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 	material_alteration =    (MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR)
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	var/max_items = 3

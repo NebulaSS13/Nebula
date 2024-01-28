@@ -2,11 +2,9 @@
 	name = "breath analyzer"
 	desc = "A two-in-one breathalyzer and respirometer, measuring intoxication, breath contents, and respiratory health."
 	icon = 'icons/obj/items/device/scanner/breath_scanner.dmi'
-	icon_state = "breath_analyzer"
-	item_state = "analyzer"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	material = /decl/material/solid/metal/aluminium
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	printout_color = "#deebff"
 	var/mode = 1
 

@@ -6,6 +6,7 @@
 	item_state = "candle1"
 	w_class = ITEM_SIZE_TINY
 	light_color = "#e09d37"
+	material = /decl/material/solid/organic/wax
 
 	var/available_colours = list(COLOR_WHITE, COLOR_DARK_GRAY, COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_BLUE, COLOR_INDIGO, COLOR_VIOLET)
 	var/wax
@@ -48,10 +49,12 @@
 		var/obj/item/flame/candle/other_candle = A
 		other_candle.light()
 
-/obj/item/flame/candle/proc/light(mob/user)
+/obj/item/flame/candle/light(mob/user, no_message)
 	if(!lit)
-		lit = 1
-		visible_message("<span class='notice'>\The [user] lights the [name].</span>")
+		..()
+		update_force()
+		if(!no_message)
+			user.visible_message(SPAN_NOTICE("\The [user] lights \the [src]."), SPAN_NOTICE("You light \the [src]."))
 		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)
 
@@ -71,7 +74,7 @@
 
 /obj/item/flame/candle/attack_self(mob/user)
 	if(lit)
-		lit = 0
+		extinguish(user)
 		update_icon()
 		set_light(0)
 		remove_extension(src, /datum/extension/scent)
@@ -86,7 +89,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 7
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/cardboard
-	
+	material = /decl/material/solid/organic/cardboard
+
 /obj/item/storage/candle_box/WillContain()
 	return list(/obj/item/flame/candle = 7)

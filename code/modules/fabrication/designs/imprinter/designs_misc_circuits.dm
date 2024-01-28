@@ -218,9 +218,6 @@
 /datum/fabricator_recipe/imprinter/circuit/chemical_dispenser
 	path = /obj/item/stock_parts/circuitboard/chemical_dispenser
 
-/datum/fabricator_recipe/imprinter/circuit/atmos_control
-	path = /obj/item/stock_parts/circuitboard/atmoscontrol
-
 /datum/fabricator_recipe/imprinter/circuit/pipe_dispenser
 	path = /obj/item/stock_parts/circuitboard/pipedispensor
 
@@ -337,6 +334,9 @@
 
 /datum/fabricator_recipe/imprinter/circuit/washer
 	path = /obj/item/stock_parts/circuitboard/washer
+
+/datum/fabricator_recipe/imprinter/circuit/autoclave
+	path = /obj/item/stock_parts/circuitboard/autoclave
 
 /datum/fabricator_recipe/imprinter/circuit/microwave
 	path = /obj/item/stock_parts/circuitboard/microwave
@@ -484,3 +484,15 @@
 
 /datum/fabricator_recipe/imprinter/circuit/geothermal_generator
 	path = /obj/item/stock_parts/circuitboard/geothermal
+
+/datum/fabricator_recipe/imprinter/circuit/area_atmos
+	path = /obj/item/stock_parts/circuitboard/area_atmos
+
+/datum/fabricator_recipe/imprinter/circuit/area_atmos_control
+	path = /obj/item/stock_parts/circuitboard/area_atmos/area
+
+/datum/fabricator_recipe/imprinter/circuit/tag_scrubber_control
+	path = /obj/item/stock_parts/circuitboard/area_atmos/tag
+
+/datum/fabricator_recipe/imprinter/circuit/central_atmos
+	path = /obj/item/stock_parts/circuitboard/central_atmos

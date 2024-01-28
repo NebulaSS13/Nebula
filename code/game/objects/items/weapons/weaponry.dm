@@ -6,6 +6,7 @@
 	item_state = "nullrod"
 	slot_flags = SLOT_LOWER_BODY
 	force = 10
+	item_flags = ITEM_FLAG_IS_WEAPON
 	throw_speed = 1
 	throw_range = 4
 	throwforce = 7
@@ -116,7 +117,7 @@
 	anchored = TRUE
 	can_buckle = 0 //no manual buckling or unbuckling
 
-	var/health = 25
+	max_health = 25
 	var/countdown = 15
 	var/temporary = 1
 	var/mob/living/carbon/captured = null
@@ -128,7 +129,7 @@
 	desc = "An energized net meant to subdue animals."
 
 	anchored = FALSE
-	health = 5
+	max_health = 5
 	temporary = 0
 	min_free_time = 5
 	max_free_time = 10

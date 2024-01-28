@@ -6,8 +6,8 @@
 	icon = 'icons/obj/closets/bodybag.dmi'
 	icon_state = "bodybag_folded"
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/plastic
-	
+	material = /decl/material/solid/organic/plastic
+
 /obj/item/bodybag/attack_self(mob/user)
 	var/obj/structure/closet/body_bag/R = new /obj/structure/closet/body_bag(user.loc)
 	R.add_fingerprint(user)
@@ -75,7 +75,7 @@
 	. = new item_path(get_turf(src))
 	qdel(src)
 
-/obj/structure/closet/body_bag/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/structure/closet/body_bag/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && (in_range(src, user) || (src in user.contents)))
 		fold(user)
 		return TRUE

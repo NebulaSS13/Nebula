@@ -11,7 +11,7 @@
 
 /client/New()
 	// Cache our callback as we will potentially be using it (10 / ticklag) times per second,
-	mouseover_callback = CALLBACK(src, .proc/refresh_mouseover_highlight_timer)
+	mouseover_callback = CALLBACK(src, PROC_REF(refresh_mouseover_highlight_timer))
 	. = ..()
 
 // This proc iterates constantly whenever something is being mouseover'd, so that it

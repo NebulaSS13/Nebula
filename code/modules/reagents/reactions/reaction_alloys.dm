@@ -3,6 +3,7 @@
 	maximum_temperature = INFINITY
 	reaction_sound = null
 	mix_message = null
+	reaction_category = REACTION_TYPE_ALLOYING
 	abstract_type = /decl/chemical_reaction/alloy
 
 /decl/chemical_reaction/alloy/borosilicate

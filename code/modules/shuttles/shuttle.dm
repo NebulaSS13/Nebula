@@ -16,6 +16,7 @@
 	var/multiz = 0	//how many multiz levels, starts at 0
 
 	var/ceiling_type = /turf/unsimulated/floor/shuttle_ceiling
+	var/force_ceiling_on_init = TRUE // Whether or not to force ceilings turfs to be created above on initialization.
 
 	var/sound_takeoff = 'sound/effects/shuttle_takeoff.ogg'
 	var/sound_landing = 'sound/effects/shuttle_landing.ogg'
@@ -48,7 +49,7 @@
 		for(var/area_type in shuttle_area)
 			if(istype(area_type, /area)) // If the shuttle area is already an instance, it does not need to be located.
 				areas += area_type
-				events_repository.register(/decl/observ/destroyed, area_type, src, .proc/remove_shuttle_area)
+				events_repository.register(/decl/observ/destroyed, area_type, src, PROC_REF(remove_shuttle_area))
 				continue
 			var/area/A
 			if(map_hash && islist(SSshuttle.map_hash_to_areas[map_hash]))
@@ -58,7 +59,7 @@
 			if(!istype(A))
 				CRASH("Shuttle \"[name]\" couldn't locate area [area_type].")
 			areas += A
-			events_repository.register(/decl/observ/destroyed, A, src, .proc/remove_shuttle_area)
+			events_repository.register(/decl/observ/destroyed, A, src, PROC_REF(remove_shuttle_area))
 		shuttle_area = areas
 
 	if(initial_location)
@@ -80,8 +81,10 @@
 			CRASH("A supply shuttle is already defined.")
 		SSsupply.shuttle = src
 
+	create_ceiling(force_ceiling_on_init)
+
 /datum/shuttle/proc/remove_shuttle_area(area/area_to_remove)
-	events_repository.unregister(/decl/observ/destroyed, area_to_remove, src, .proc/remove_shuttle_area)
+	events_repository.unregister(/decl/observ/destroyed, area_to_remove, src, PROC_REF(remove_shuttle_area))
 	SSshuttle.shuttle_areas -= area_to_remove
 	shuttle_area -= area_to_remove
 	if(!length(shuttle_area))
@@ -252,14 +255,7 @@
 	current_location = destination
 
 	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
-	if(HasAbove(current_location.z))
-		for(var/area/A in shuttle_area)
-			for(var/turf/TD in A.contents)
-				var/turf/TA = GetAbove(TD)
-				if(istype(TA, get_base_turf_by_area(TA)) || (istype(TA) && TA.is_open()))
-					if(get_area(TA) in shuttle_area)
-						continue
-					TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
+	create_ceiling()
 
 	handle_pipes_and_power_on_move(new_turfs)
 
@@ -304,6 +300,20 @@
 		pipe.atmos_init() // this will clear pipenet/pipeline
 	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
 		pipe.build_network()
+
+/datum/shuttle/proc/create_ceiling(force)
+	if(!HasAbove(current_location.z))
+		return
+	for(var/area/A in shuttle_area)
+		for(var/turf/TD in A.contents)
+			// Background turfs don't get a ceiling.
+			if(TD.turf_flags & TURF_FLAG_BACKGROUND)
+				continue
+			var/turf/TA = GetAbove(TD)
+			if(force || (istype(TA, get_base_turf_by_area(TA)) || (istype(TA) && TA.is_open())))
+				if(get_area(TA) in shuttle_area)
+					continue
+				TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE, TRUE)
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()

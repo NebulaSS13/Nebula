@@ -23,14 +23,13 @@
 	randpixel = 0
 	flash_protection = FLASH_PROTECTION_MAJOR
 	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
 	brightness_on = 4
 	light_wedge = LIGHT_WIDE
 	on = 0
 
 	var/obj/machinery/camera/camera
 	var/tinted = null	//Set to non-null for toggleable tint helmets
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel
 
 /obj/item/clothing/head/helmet/space/Destroy()
@@ -54,6 +53,10 @@
 	set category = "Object"
 	set src in usr
 
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+
 	if(ispath(camera))
 		camera = new camera(src)
 		camera.set_status(0)
@@ -61,10 +64,10 @@
 	if(camera)
 		camera.set_status(!camera.status)
 		if(camera.status)
-			camera.c_tag = FindNameFromID(usr)
-			to_chat(usr, "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>")
+			camera.c_tag = user.get_id_name()
+			to_chat(user, "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>")
 		else
-			to_chat(usr, "<span class='notice'>Camera deactivated.</span>")
+			to_chat(user, "<span class='notice'>Camera deactivated.</span>")
 
 /obj/item/clothing/head/helmet/space/examine(mob/user, distance)
 	. = ..()
@@ -94,20 +97,20 @@
 	to_chat(usr, "You toggle [src]'s visor tint.")
 	update_tint()
 
-/obj/item/clothing/head/helmet/space/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/helmet/space/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && tint && check_state_in_icon("[overlay.icon_state]_dark", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_dark"
 	. = ..()
 
 /obj/item/clothing/head/helmet/space/on_update_icon(mob/user)
 	. = ..()
-	var/base_icon = get_world_inventory_state()
-	if(!base_icon)
-		base_icon = initial(icon_state)
-	if(tint && check_state_in_icon("[base_icon]_dark", icon))
-		icon_state = "[base_icon]_dark"
+	var/base_icon_state = get_world_inventory_state()
+	if(!base_icon_state)
+		base_icon_state = initial(icon_state)
+	if(tint && check_state_in_icon("[base_icon_state]_dark", icon))
+		icon_state = "[base_icon_state]_dark"
 	else
-		icon_state = base_icon
+		icon_state = base_icon_state
 
 /obj/item/clothing/suit/space
 	name = "space suit"
@@ -132,12 +135,12 @@
 	center_of_mass = null
 	randpixel = 0
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_OVER)
-	origin_tech = "{'materials':3, 'engineering':3}"
-	material = /decl/material/solid/plastic
+	origin_tech = @'{"materials":3, "engineering":3}'
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
 	protects_against_weather = TRUE
 

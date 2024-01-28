@@ -163,3 +163,6 @@
 #define ui_pai_shell "TOP,LEFT+2:6"
 #define ui_pai_light "TOP,LEFT+3:6"
 #define ui_pai_rest "TOP,LEFT+4:6"
+
+// storage menu
+#define ui_storage_default "LEFT+7,BOTTOM+7 to LEFT+10,BOTTOM+8"

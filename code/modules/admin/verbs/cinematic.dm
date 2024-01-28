@@ -13,11 +13,11 @@
 			if(alert("The game will be over. Are you really sure?", "Confirmation" ,"Continue", "Cancel") == "Cancel")
 				return
 			var/parameter = input(src,"station_missed = ? (0 for hit, 1 for near miss, 2 for not close)","Enter Parameter",0) as num
-			var/datum/game_mode/override
-			var/name = input(src,"Override mode = ?","Enter Parameter",null) as null|anything in gamemode_cache
-			override = gamemode_cache[name]
-			if(!istype(override))
-				override = null
-			global.cinematic.station_explosion_cinematic(parameter,override)
+			var/list/gamemodes = list()
+			var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
+			for(var/mode_type in all_modes)
+				gamemodes += all_modes[mode_type]
+			var/decl/game_mode/override = input(src,"Override mode = ?","Enter Parameter",null) as null|anything in gamemodes
+			global.cinematic.station_explosion_cinematic(parameter, override)
 
 	log_and_message_admins("launched cinematic \"[cinematic]\"", src)

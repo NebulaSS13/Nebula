@@ -14,7 +14,7 @@
 		var/obj/structure/noticeboard/board = locate() in creating
 		if(!board)
 			var/decl/material/mat = SSmaterials.get_material_by_name(tokens["noticeboard_material"])
-			board = new(creating, (mat?.type || /decl/material/solid/wood))
+			board = new(creating, (mat?.type || /decl/material/solid/organic/wood))
 			if("noticeboard_direction" in tokens)
 				board.set_dir(tokens["noticeboard_direction"])
 		if(LAZYLEN(board.notices) < board.max_notices)

@@ -10,7 +10,7 @@
 	amount           = 32
 	max_amount       = 32
 	w_class          = ITEM_SIZE_SMALL
-	material         = /decl/material/solid/plastic
+	material         = /decl/material/solid/organic/plastic
 	health           = 10
 	max_health       = 10
 
@@ -156,7 +156,7 @@
 	icon_state         = "tape"
 	w_class            = ITEM_SIZE_TINY
 	layer              = ABOVE_OBJ_LAYER
-	material           = /decl/material/solid/plastic
+	material           = /decl/material/solid/organic/plastic
 	var/obj/item/stuck = null
 	var/crumpled       = FALSE   //If crumpled we become useless trash
 

@@ -14,9 +14,9 @@
 	snd_cut      = 'sound/effects/break_ceramic.ogg'
 	material     = /decl/material/solid/stone/ceramic
 	matter       = list(
-		/decl/material/solid/clay        = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/sand        = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plantmatter = MATTER_AMOUNT_SECONDARY,     //#TODO: Maybe eventually drop the plant, or some seeds or something?
+		/decl/material/solid/clay                = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/sand                = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plantmatter = MATTER_AMOUNT_SECONDARY,     //#TODO: Maybe eventually drop the plant, or some seeds or something?
 	)
 
 /obj/structure/flora/pottedplant/get_material_health_modifier()

@@ -305,14 +305,6 @@
 		i++
 	return candidates
 
-/proc/ScreenText(obj/O, maptext="", screen_loc="CENTER-7,CENTER-7", maptext_height=480, maptext_width=480)
-	if(!isobj(O))	O = new /obj/screen/text()
-	O.maptext = maptext
-	O.maptext_height = maptext_height
-	O.maptext_width = maptext_width
-	O.screen_loc = screen_loc
-	return O
-
 /datum/projectile_data
 	var/src_x
 	var/src_y
@@ -449,7 +441,7 @@
 /proc/SecondsToTicks(var/seconds)
 	return seconds * 10
 
-/proc/round_is_spooky(var/spookiness_threshold = config.cult_ghostwriter_req_cultists)
+/proc/round_is_spooky(var/spookiness_threshold = get_config_value(/decl/config/num/cult_ghostwriter_req_cultists))
 	var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 	return (cult.current_antagonists.len > spookiness_threshold)
 

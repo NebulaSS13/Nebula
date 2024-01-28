@@ -144,7 +144,7 @@
 	name = "circuitboard (sentry turret)"
 	board_type = "machine"
 	build_path = /obj/machinery/turret/network
-	origin_tech = "{'programming':5,'combat':5,'engineering':4}"
+	origin_tech = @'{"programming":5,"combat":5,"engineering":4}'
 	req_components = list(
 							/obj/item/stock_parts/capacitor = 1,
 							/obj/item/stock_parts/scanning_module = 1,

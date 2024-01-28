@@ -3,8 +3,7 @@
 	desc = "A remote controlled robot used by lazy people to switch channels and get pizza."
 	icon = 'icons/mob/bot/fetchbot.dmi'
 	icon_state = "fetchbot1"
-	health = 15
-	maxHealth = 15
+	mob_default_max_health = 15
 
 	var/working = 0
 	var/speed = 10 //lower = better
@@ -98,7 +97,7 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/silicon      = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
@@ -166,7 +165,7 @@
 	icon = 'icons/obj/items/bot_kit.dmi'
 	icon_state = "remotebot"
 	obj_flags = OBJ_FLAG_HOLLOW
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 
 /obj/item/bot_kit/attack_self(var/mob/user)
 	to_chat(user, "You quickly dismantle the box and retrieve the controller and the remote bot itself.")

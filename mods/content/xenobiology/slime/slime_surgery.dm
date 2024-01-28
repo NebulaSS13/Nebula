@@ -41,15 +41,18 @@
 /decl/surgery_step/slime/cut_flesh/begin_step(mob/user, mob/living/slime/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts cutting through [target]'s flesh with \the [tool].", \
 	"You start cutting through [target]'s flesh with \the [tool].")
+	..()
 
 /decl/surgery_step/slime/cut_flesh/end_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] cuts through [target]'s flesh with \the [tool].</span>",	\
 	"<span class='notice'>You cut through [target]'s flesh with \the [tool], revealing its silky innards.</span>")
 	target.core_removal_stage = 1
+	..()
 
 /decl/surgery_step/slime/cut_flesh/fail_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing [target]'s flesh with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, tearing [target]'s flesh with \the [tool]!</span>")
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	slime innards cutting surgery step
@@ -67,15 +70,18 @@
 /decl/surgery_step/slime/cut_innards/begin_step(mob/user, mob/living/slime/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts cutting [target]'s silky innards apart with \the [tool].", \
 	"You start cutting [target]'s silky innards apart with \the [tool].")
+	..()
 
 /decl/surgery_step/slime/cut_innards/end_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] cuts [target]'s innards apart with \the [tool], exposing the cores.</span>",	\
 	"<span class='notice'>You cut [target]'s innards apart with \the [tool], exposing the cores.</span>")
 	target.core_removal_stage = 2
+	..()
 
 /decl/surgery_step/slime/cut_innards/fail_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing [target]'s innards with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, tearing [target]'s innards with \the [tool]!</span>")
+	..()
 
 //////////////////////////////////////////////////////////////////
 //	slime core removal surgery step
@@ -97,6 +103,7 @@
 	user.visible_message(
 		SPAN_NOTICE("\The [user] starts cutting out one of \the [target]'s cores with \the [tool]."), \
 		SPAN_NOTICE("You start cutting out one of \the [target]'s cores with \the [tool]."))
+	..()
 
 /decl/surgery_step/slime/saw_core/end_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
 	if(target.cores <= 0)
@@ -108,8 +115,10 @@
 		SPAN_NOTICE("\The [user] cuts \the [core] out of \the [target] with \the [tool]."),	\
 		SPAN_NOTICE("You cut \the [core] out of \the [target] with \the [tool]. It looks like there are [target.cores] core\s left."))
 	target.update_icon()
+	..()
 
 /decl/surgery_step/slime/saw_core/fail_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
 	user.visible_message(
 		SPAN_DANGER("\The [user]'s hand slips, failing to extract the slime core."), \
 		SPAN_DANGER("Your hand slips, causing you to miss the core!"))
+	..()

@@ -6,19 +6,20 @@
 	on = 0
 	powered = 1
 	locked = 0
-
 	load_item_visible = 1
 	load_offset_x = 0
 	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 7)
-
-	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
 	active_engines = 1
+	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	var/obj/item/key/cargo_train/key
 
 /obj/item/key/cargo_train
-	name = "key"
-	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\"."
+	desc = "A small key on a yellow fob reading \"Choo Choo!\"."
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
+	)
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "train_keys"
 	w_class = ITEM_SIZE_TINY
@@ -149,29 +150,27 @@
 	else
 		verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
 
-/obj/vehicle/train/cargo/RunOver(var/mob/living/carbon/human/H)
-	var/list/parts = list(BP_HEAD, BP_CHEST, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM)
+/obj/vehicle/train/cargo/crossed_mob(var/mob/living/victim)
+	victim.apply_effects(5, 5)
+	for(var/i = 1 to rand(1,5))
+		var/obj/item/organ/external/E = pick(victim.get_external_organs())
+		if(E)
+			victim.apply_damage(rand(5,10), BRUTE, E.organ_tag)
 
-	H.apply_effects(5, 5)
-	for(var/i = 0, i < rand(1,5), i++)
-		var/def_zone = pick(parts)
-		H.apply_damage(rand(5,10), BRUTE, def_zone)
-
-/obj/vehicle/train/cargo/trolley/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/trolley/crossed_mob(var/mob/living/victim)
 	..()
-	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
+	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey])</font>")
 
-/obj/vehicle/train/cargo/engine/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/engine/crossed_mob(var/mob/living/victim)
 	..()
-
 	if(is_train_head() && ishuman(load))
 		var/mob/living/carbon/human/D = load
-		to_chat(D, "<span class='danger'>You ran over [H]!</span>")
-		visible_message("<span class='danger'>\The [src] ran over [H]!</span>")
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey]), driven by [D.name] ([D.ckey])</font>")
-		msg_admin_attack("[D.name] ([D.ckey]) ran over [H.name] ([H.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+		to_chat(D, "<span class='danger'>You ran over \the [victim]!</span>")
+		visible_message("<span class='danger'>\The [src] ran over \the [victim]!</span>")
+		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey]), driven by [D.name] ([D.ckey])</font>")
+		msg_admin_attack("[D.name] ([D.ckey]) ran over [victim.name] ([victim.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 	else
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
+		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [victim.name] ([victim.ckey])</font>")
 
 
 //-------------------------------------------
@@ -362,10 +361,10 @@
 	if(!is_train_head() || !on)
 		move_delay = initial(move_delay)		//so that engines that have been turned off don't lag behind
 	else
-		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you cant overspeed trains
-		move_delay *= (1 / max(1, active_engines)) * 2 										//overweight penalty (scaled by the number of engines)
-		move_delay += config.run_delay 														//base reference speed
-		move_delay *= 1.1																	//makes cargo trains 10% slower than running when not overweight
+		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines) // limits base overweight so you cant overspeed trains
+		move_delay *= (1 / max(1, active_engines)) * 2                                     // overweight penalty (scaled by the number of engines)
+		move_delay += get_config_value(/decl/config/num/movement_run)      // base reference speed
+		move_delay *= 1.1                                                                  // makes cargo trains 10% slower than running when not overweight
 
 /obj/vehicle/train/cargo/trolley/update_car(var/train_length, var/active_engines)
 	src.train_length = train_length

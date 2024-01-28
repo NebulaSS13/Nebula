@@ -28,7 +28,7 @@
 /decl/loadout_option/accessory/tie_color
 	name = "colored tie"
 	path = /obj/item/clothing/accessory
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/accessory/tie_color/get_gear_tweak_options()
 	. = ..()
@@ -45,7 +45,7 @@
 /decl/loadout_option/accessory/necklace
 	name = "necklace, colour select"
 	path = /obj/item/clothing/accessory/necklace
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/accessory/bowtie
 	name = "bowtie, horrible"
@@ -54,10 +54,10 @@
 /decl/loadout_option/accessory/bowtie/color
 	name = "bowtie, colour select"
 	path = /obj/item/clothing/accessory/bowtie/color
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/accessory/bracelet
 	name = "bracelet, color select"
 	path = /obj/item/clothing/accessory/bracelet
 	cost = 1
-	flags = GEAR_HAS_COLOR_SELECTION
+	loadout_flags = GEAR_HAS_COLOR_SELECTION

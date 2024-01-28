@@ -10,7 +10,7 @@
 	throwforce   = 0
 	drop_sound   = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
-	material     = /decl/material/solid/cardboard
+	material     = /decl/material/solid/organic/cardboard
 	item_flags   = ITEM_FLAG_CAN_TAPE
 
 /obj/item/folder/blue

@@ -147,7 +147,7 @@
 	icon = 'icons/clothing/suit/leathercoat.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	material_armor_multiplier = 0.8
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	var/shine
 	var/artificial_shine
 
@@ -158,7 +158,7 @@
 			shine = material.reflectiveness
 		desc = "A long, thick [material.use_name] coat."
 
-/obj/item/clothing/suit/leathercoat/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/suit/leathercoat/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && shine > 0 && slot == slot_wear_suit_str)
 		var/mutable_appearance/S = mutable_appearance(overlay.icon, "shine")
 		S.alpha = max(shine, artificial_shine)/100 * 255
@@ -166,7 +166,7 @@
 	. = ..()
 
 /obj/item/clothing/suit/leathercoat/synth
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 	artificial_shine = 80
 
 //stripper
@@ -193,7 +193,7 @@
 	cold_protection = SLOT_UPPER_BODY|SLOT_ARMS
 	min_cold_protection_temperature = T0C - 20
 	siemens_coefficient = 0.7
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/clothing/suit/storage/leather_jacket
 	name = "black leather jacket"

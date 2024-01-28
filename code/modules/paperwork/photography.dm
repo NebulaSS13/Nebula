@@ -18,7 +18,7 @@
 	w_class          = ITEM_SIZE_TINY
 	throwforce       = 0
 	throw_range      = 10
-	material         = /decl/material/solid/plastic
+	material         = /decl/material/solid/organic/plastic
 	var/tmp/max_uses = 10
 	var/uses_left    = 10
 
@@ -64,7 +64,7 @@
 	randpixel   = 10
 	w_class     = ITEM_SIZE_TINY
 	item_flags  = ITEM_FLAG_CAN_TAPE
-	material    = /decl/material/solid/plastic
+	material    = /decl/material/solid/organic/plastic
 	var/id              //Unique id used to name the photo resource to upload to the client, and for synthetic photo synchronization
 	var/icon/img	    //The actual real photo image
 	var/image/tiny      //A thumbnail of the image that's displayed on the actual world icon of the photo
@@ -183,20 +183,13 @@
 	w_class       = ITEM_SIZE_NORMAL //same as book
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
 	can_hold = list(/obj/item/photo)
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/plastic
 
-/obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user)
-	if(istype(over, /obj/screen/inventory))
-		var/obj/screen/inventory/inv = over
-		playsound(loc, "rustle", 50, 1, -5)
-		if(user.get_equipped_item(slot_back_str) == src)
-			add_fingerprint(user)
-			if(user.try_unequip(src))
-				user.equip_to_slot_if_possible(src, inv.slot_id)
-		else if(over == user && in_range(src, user) || loc == user)
-			if(user.active_storage)
-				user.active_storage.close(user)
-			show_to(user)
+/obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user, params)
+	if(over == user && in_range(src, user) || loc == user)
+		if(user.active_storage)
+			user.active_storage.close(user)
+		show_to(user)
 		return TRUE
 	. = ..()
 
@@ -214,10 +207,14 @@
 	obj_flags            = OBJ_FLAG_CONDUCTIBLE
 	slot_flags           = SLOT_LOWER_BODY
 	material             = /decl/material/solid/metal/aluminium
-	matter               = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter               = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/turned_on        = TRUE
-	var/field_of_view    = 3       //3 tiles
-	var/obj/item/camera_film/film  //Currently loaded film
+	var/field_of_view    = 3 // squared, so 3 is a 3x3 of tiles
+	var/obj/item/camera_film/film = new //Currently loaded film
+
+/obj/item/camera/loaded/Initialize()
+	film = new(src)
+	return ..()
 
 /obj/item/camera/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
@@ -305,9 +302,9 @@
 		if(length(holding))
 			holding = "They are holding [english_list(holding)]"
 		if(!mob_detail)
-			mob_detail = "You can see [A] on the photo[(A.health / A.maxHealth) < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
+			mob_detail = "You can see [A] on the photo[A.get_health_ratio() < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
 		else
-			mob_detail += "You can also see [A] on the photo[(A.health / A.maxHealth)< 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
+			mob_detail += "You can also see [A] on the photo[A.get_health_ratio() < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
 	return mob_detail
 
 /obj/item/camera/afterattack(atom/target, mob/user, flag)

@@ -6,7 +6,7 @@
 	item_state = "screwdriver_brown"
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/obj/item/sample
 
 /obj/item/core_sampler/examine(mob/user, distance)
@@ -43,7 +43,7 @@
 	. = ..()
 	if(proximity_flag)
 		sample_item(target, user)
-	
+
 /obj/item/rocksliver
 	name = "rock sliver"
 	desc = "It looks extremely delicate."
@@ -54,7 +54,7 @@
 	sharp = 1
 	material = /decl/material/solid/stone/sandstone
 	material_health_multiplier = 0.25
-	
+
 /obj/item/rocksliver/Initialize(ml, material_key, geodata)
 	. = ..()
 	icon_state = "sliver[rand(1, 3)]"

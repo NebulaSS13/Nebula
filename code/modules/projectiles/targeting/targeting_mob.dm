@@ -27,11 +27,3 @@
 	..()
 	if(lying)
 		stop_aiming(no_message=1)
-
-/mob/living/Destroy()
-	if(aiming)
-		qdel(aiming)
-		aiming = null
-	QDEL_NULL_LIST(aimed_at_by)
-	return ..()
-

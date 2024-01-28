@@ -23,7 +23,7 @@
 		icon_state = "[icon_state]-on"
 	update_clothing_icon()
 
-/obj/item/clothing/head/headphones/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/headphones/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && headphones_on)
 		overlay.icon_state = "[overlay.icon_state]-on"
 	. = ..()
@@ -50,10 +50,6 @@
 
 	update_icon()
 
-/obj/item/clothing/head/headphones/handle_mouse_drop(atom/over, mob/user)
-	interact(user)
-	return TRUE
-
 /obj/item/clothing/head/headphones/attack_self(mob/user)
 	..()
 	interact(user)
@@ -77,6 +73,14 @@
 		var/decl/music_track/track = GET_DECL(global.music_tracks[current_track])
 		sound_to(user, sound(null, channel = sound_channel))
 		sound_to(user, sound(track.song, repeat = 1, wait = 0, volume = music_volume, channel = sound_channel))
+
+/obj/item/clothing/head/headphones/attack_hand(mob/user)
+	// if it's equipped and we're not holding it, open
+	// the interface instead of removing it from the slot.
+	var/equip_slot = user.get_equipped_slot_for_item(src)
+	if(equip_slot && !(equip_slot in user.get_held_item_slots()))
+		return attack_self(user)
+	return ..()
 
 /obj/item/clothing/head/headphones/proc/stop_music(mob/user)
 	if(!user || !user.client)

@@ -1,10 +1,22 @@
-/mob/living/proc/refresh_visible_overlays()
+// TODO: look at all uses of this and refresh_visible_overlays(), probably should be using update_icon().
+/mob/living/proc/try_refresh_visible_overlays()
 	SHOULD_CALL_PARENT(TRUE)
 	if(HasMovementHandler(/datum/movement_handler/mob/transformation) || QDELETED(src))
 		return FALSE
+	refresh_visible_overlays()
+	apply_visible_overlays()
+	return TRUE
+
+/mob/living/proc/refresh_visible_overlays()
+	SHOULD_CALL_PARENT(TRUE)
 	for(var/slot in get_inventory_slots())
 		update_equipment_overlay(slot, FALSE)
 	return TRUE
+
+/mob/living/proc/apply_visible_overlays()
+	for(var/overlay in get_all_current_mob_overlays())
+		add_overlay(overlay)
+	underlays = get_all_current_mob_underlays()
 
 /mob/proc/update_equipment_overlay(var/slot, var/redraw_mob = TRUE)
 	var/datum/inventory_slot/inv_slot = slot && get_inventory_slot_datum(slot)
@@ -16,7 +28,7 @@
 	for(var/hand_slot in get_held_item_slots())
 		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(hand_slot)
 		var/obj/item/held = inv_slot?.get_equipped_item()
-		var/image/standing = held?.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot)
+		var/image/standing = held?.get_mob_overlay(src, inv_slot.overlay_slot, hand_slot, inv_slot.use_overlay_fallback_slot)
 		if(standing)
 			standing.appearance_flags |= (RESET_ALPHA|RESET_COLOR)
 			LAZYADD(hand_overlays, standing)

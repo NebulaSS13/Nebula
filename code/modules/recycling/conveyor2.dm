@@ -235,7 +235,7 @@ var/global/list/all_conveyor_switches = list()
 	desc = "A conveyor belt assembly. Must be linked to a conveyor control switch assembly before placement."
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	var/id_tag
 
 /obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)

@@ -57,7 +57,7 @@
 			return INITIALIZE_HINT_QDEL
 
 	if(decays)
-		addtimer(CALLBACK(src, /obj/effect/razorweb/proc/decay), 15 MINUTES)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/effect/razorweb, decay)), 15 MINUTES)
 
 	web = image(icon = icon, icon_state = "razorweb")
 	gleam = emissive_overlay(icon = icon, icon_state = "razorweb-gleam")
@@ -117,9 +117,11 @@
 		add_fingerprint(user)
 	return M
 
-/obj/effect/razorweb/Crossed(var/mob/living/L)
-	. = ..()
-	entangle(L)
+/obj/effect/razorweb/Crossed(var/atom/movable/AM)
+	..()
+	if(!isliving(AM))
+		return
+	entangle(AM)
 
 /obj/effect/razorweb/proc/entangle(var/mob/living/L, var/silent)
 

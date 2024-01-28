@@ -5,8 +5,7 @@
 	speak = list("Removing organic waste.","Pest control in progress.","Seize the means of maintenance!", "You have nothing to lose but your laws!")
 	speak_emote = list("blares","buzzes","beeps")
 	speak_chance = 1
-	health = 50
-	maxHealth = 50
+	mob_default_max_health = 50
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
 	faction = "silicon"
 	min_gas = null
@@ -15,6 +14,7 @@
 	speed = 4
 	mob_size = MOB_SIZE_TINY
 	gene_damage = -1
+	attack_delay = DEFAULT_QUICK_COOLDOWN
 	var/corpse = /obj/effect/decal/cleanable/blood/gibs/robot
 
 /mob/living/simple_animal/hostile/rogue_drone/Initialize()

@@ -9,14 +9,15 @@
 		BP_R_FOOT
 	)
 	requires_slot_flags = SLOT_FEET
+	quick_equip_priority = 3
 
 /datum/inventory_slot/shoes/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	var/obj/item/suit =    user.get_equipped_item(slot_wear_suit_str)
 	var/obj/item/uniform = user.get_equipped_item(slot_w_uniform_str)
 	if(_holding && !((suit && suit.flags_inv & HIDESHOES) || (uniform && uniform.flags_inv & HIDESHOES)))
-		user.set_current_mob_overlay(HO_SHOES_LAYER, _holding.get_mob_overlay(user, slot_shoes_str), redraw_mob)
+		user.set_current_mob_overlay(HO_SHOES_LAYER, _holding.get_mob_overlay(user, slot_shoes_str, use_fallback_if_icon_missing = use_overlay_fallback_slot), redraw_mob)
 		return
-	var/mob_blood_overlay = user.get_bodytype().get_blood_overlays(src)
+	var/mob_blood_overlay = user.get_bodytype()?.get_blood_overlays(src)
 	if(mob_blood_overlay)
 		var/blood_color
 		for(var/foot_tag in list(BP_L_FOOT, BP_R_FOOT))

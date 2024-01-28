@@ -14,7 +14,7 @@
 	icon_state = "gift"
 	item_state = "gift"
 	randpixel = 10
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 
 /obj/item/a_gift/Initialize()
 	. = ..()
@@ -63,12 +63,13 @@
 		/obj/random/lipstick,
 		/obj/item/grenade/smokebomb,
 		/obj/item/corncob,
-		/obj/item/contraband/poster,
+		/obj/item/poster,
 		/obj/item/book/manual/barman_recipes,
 		/obj/item/book/manual/chef_recipes,
 		/obj/item/bikehorn,
-		/obj/item/beach_ball,
-		/obj/item/beach_ball/holoball,
+		/obj/item/ball,
+		/obj/item/ball/basketball,
+		/obj/item/ball/volleyball,
 		/obj/item/chems/water_balloon,
 		/obj/item/toy/blink,
 		/obj/item/gun/launcher/foam/crossbow,

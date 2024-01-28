@@ -1,4 +1,5 @@
 #define COAST_VALUE (cell_range + 1)
+#define TRANSLATE_COORD(X,Y) ((((Y) - 1) * limit_x) + (X))
 
 ///Place down flora/fauna spawners, grass, water, and apply selected land type.
 /datum/random_map/noise/exoplanet
@@ -137,7 +138,7 @@
 		return
 	for(var/x in 1 to limit_x - 1)
 		for(var/y in 1 to limit_y - 1)
-			var/mapcell = get_map_cell(x,y)
+			var/mapcell = TRANSLATE_COORD(x,y)
 			if(noise2value(map[mapcell]) < water_level)
 				var/neighbors = get_neighbors(x, y, TRUE)
 				for(var/cell in neighbors)
@@ -152,7 +153,7 @@
 /datum/random_map/noise/exoplanet/mantle
 	descriptor           = "planetary mantle"
 	smoothing_iterations = 3
-	land_type            = /turf/exterior/volcanic
+	land_type            = /turf/exterior/rock/volcanic
 	water_type           = /turf/exterior/lava
 	water_level_min      = 4
 	water_level_max      = 6
@@ -165,6 +166,8 @@
 //Random map generator to create rock walls underground
 /datum/random_map/automata/cave_system/mantle
 	descriptor       = "planetary mantle caves"
-	target_turf_type = /turf/exterior/volcanic //Only let it apply to non-lava turfs
+	target_turf_type = /turf/exterior/rock/volcanic //Only let it apply to non-lava turfs
 	floor_type       = null
 	wall_type        = /turf/exterior/wall
+
+#undef TRANSLATE_COORD

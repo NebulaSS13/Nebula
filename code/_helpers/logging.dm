@@ -33,11 +33,11 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 
 /proc/log_admin(text)
 	global.admin_log.Add(text)
-	if (config.log_admin)
+	if (get_config_value(/decl/config/toggle/log_admin))
 		game_log("ADMIN", text)
 
 /proc/log_debug(text)
-	if (config.log_debug)
+	if (get_config_value(/decl/config/toggle/log_debug))
 		game_log("DEBUG", text)
 	to_debug_listeners(text)
 
@@ -58,47 +58,47 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 			to_chat(C, "[prefix]: [text]")
 
 /proc/log_game(text)
-	if (config.log_game)
+	if (get_config_value(/decl/config/toggle/log_game))
 		game_log("GAME", text)
 
 /proc/log_vote(text)
-	if (config.log_vote)
+	if (get_config_value(/decl/config/toggle/log_vote))
 		game_log("VOTE", text)
 
 /proc/log_access(text)
-	if (config.log_access)
+	if (get_config_value(/decl/config/toggle/log_access))
 		game_log("ACCESS", text)
 
 /proc/log_say(text)
-	if (config.log_say)
+	if (get_config_value(/decl/config/toggle/log_say))
 		game_log("SAY", text)
 
 /proc/log_ooc(text)
-	if (config.log_ooc)
+	if (get_config_value(/decl/config/toggle/log_ooc))
 		game_log("OOC", text)
 
 /proc/log_whisper(text)
-	if (config.log_whisper)
+	if (get_config_value(/decl/config/toggle/log_whisper))
 		game_log("WHISPER", text)
 
 /proc/log_emote(text)
-	if (config.log_emote)
+	if (get_config_value(/decl/config/toggle/log_emotes))
 		game_log("EMOTE", text)
 
 /proc/log_attack(text)
-	if (config.log_attack)
+	if (get_config_value(/decl/config/toggle/log_attack))
 		game_log("ATTACK", text)
 
 /proc/log_adminsay(text)
-	if (config.log_adminchat)
+	if (get_config_value(/decl/config/toggle/log_adminchat))
 		game_log("ADMINSAY", text)
 
 /proc/log_adminwarn(text)
-	if (config.log_adminwarn)
+	if (get_config_value(/decl/config/toggle/log_adminwarn))
 		game_log("ADMINWARN", text)
 
 /proc/log_pda(text)
-	if (config.log_pda)
+	if (get_config_value(/decl/config/toggle/log_pda))
 		game_log("PDA", text)
 
 /proc/log_misc(text)
@@ -114,7 +114,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 //This replaces world.log so it displays both in DD and the file
 /proc/log_world(text)
 	to_world_log(text) //this comes before the config check because it can't possibly runtime
-	if(config.log_world_output)
+	if(get_config_value(/decl/config/toggle/log_world_output))
 		game_log("DD_OUTPUT", text)
 
 //pretty print a direction bitflag, can be useful for debugging.

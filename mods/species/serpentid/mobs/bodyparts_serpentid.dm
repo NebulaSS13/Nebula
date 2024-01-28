@@ -7,16 +7,6 @@
 /obj/item/organ/internal/eyes/insectoid/serpentid/get_innate_flash_protection()
 	return override_flash_protection
 
-/obj/item/organ/internal/eyes/insectoid/serpentid/get_special_overlay()
-	var/icon/I = get_onhead_icon()
-	if(I)
-		var/image/eye_overlay = image(I)
-		if(owner && owner.is_cloaked())
-			eye_overlay.alpha = 100
-		if(eyes_shielded)
-			eye_overlay.color = "#aaaaaa"
-		return eye_overlay
-
 /obj/item/organ/internal/eyes/insectoid/serpentid/additional_flash_effects(var/intensity)
 	if(!eyes_shielded)
 		take_internal_damage(max(0, 4 * (intensity)))
@@ -28,7 +18,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "serpentid-shield-[eyes_shielded ? 1 : 0]"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/attack_self(var/mob/user)
 	. = ..()
@@ -42,7 +32,7 @@
 		else
 			to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
 			override_flash_protection = FLASH_PROTECTION_VULNERABLE
-			addtimer(CALLBACK(src, .proc/remove_shield), 1 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(remove_shield)), 1 SECONDS)
 			owner.update_icon()
 		refresh_action_button()
 
@@ -136,7 +126,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "serpentid-threat"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/external/chest/insectoid/serpentid/attack_self(var/mob/user)
 	. = ..()
@@ -158,18 +148,26 @@
 				playsound(owner.loc, 'sound/effects/angrybug.ogg', 60, 0)
 				owner.skin_state = SKIN_THREAT
 				owner.update_skin()
-				addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/reset_skin), 10 SECONDS, TIMER_UNIQUE)
+				addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living/carbon/human, reset_skin)), 10 SECONDS, TIMER_UNIQUE)
 		else if(owner.skin_state == SKIN_THREAT)
 			owner.reset_skin()
 
 /obj/item/organ/external/head/insectoid/serpentid
 	name = "head"
 
-/obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
-	// todo: maybe this should use its own bodytype instead of mob root bodytype?
-	var/obj/item/organ/internal/eyes/eyes = owner.get_organ((owner.get_bodytype().vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-	if(eyes)
-		return eyes.get_special_overlay()
+/obj/item/organ/external/head/insectoid/serpentid/get_organ_eyes_overlay()
+	var/obj/item/organ/internal/eyes/eyes = get_eyes_organ()
+	var/icon/eyes_icon = eyes?.get_onhead_icon()
+	if(!eyes_icon)
+		return
+	var/image/eye_overlay = image(eyes_icon)
+	if(owner && owner.is_cloaked())
+		eye_overlay.alpha = 100
+	if(istype(eyes, /obj/item/organ/internal/eyes/insectoid/serpentid))
+		var/obj/item/organ/internal/eyes/insectoid/serpentid/snake_eyes = eyes
+		if(snake_eyes.eyes_shielded)
+			eye_overlay.color = "#aaaaaa"
+	return eye_overlay
 
 /obj/item/organ/external/groin/insectoid/serpentid
 	name = "abdomen"
@@ -182,7 +180,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "serpentid-cloak-[owner && owner.is_cloaked_by(species) ? 1 : 0]"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/external/groin/insectoid/serpentid/attack_self(var/mob/user)
 	. = ..()

@@ -2323,7 +2323,7 @@
 	icon_state = "1-2"
 	},
 /obj/item/stock_parts/circuitboard/broken,
-/obj/item/contraband/poster,
+/obj/item/poster,
 /obj/item/radio/shortwave,
 /obj/machinery/light/small{
 	dir = 4
@@ -2830,7 +2830,6 @@
 /obj/structure/table/reinforced,
 /obj/random/coin,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "SC BD"
 	},
 /turf/simulated/floor/tiled/airless,

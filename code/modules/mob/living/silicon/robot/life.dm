@@ -1,38 +1,11 @@
-/mob/living/silicon/robot/Life()
-
-	SHOULD_CALL_PARENT(FALSE)
-
-	set invisibility = 0
-	set background = 1
-
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
-		return
-
-	//Status updates, death etc.
-	clamp_values()
-	handle_regular_status_updates()
-	handle_actions()
-
-	if(client)
-		handle_regular_hud_updates()
-		update_items()
-	if (src.stat != DEAD) //still using power
+/mob/living/silicon/robot/handle_living_non_stasis_processes()
+	. = ..()
+	if(.)
 		use_power()
 		process_killswitch()
 		process_locks()
 		process_queued_alarms()
 		process_os()
-
-	handle_status_effects()
-	UpdateLyingBuckledAndVerbStatus()
-
-/mob/living/silicon/robot/proc/clamp_values()
-	set_status(STAT_PARA, min(GET_STATUS(src, STAT_PARA), 30))
-	set_status(STAT_ASLEEP, 0)
-	adjustBruteLoss(0)
-	adjustToxLoss(0)
-	adjustOxyLoss(0)
-	adjustFireLoss(0)
 
 /mob/living/silicon/robot/proc/use_power()
 	used_power_this_tick = 0
@@ -67,39 +40,41 @@
 		lights_on = 0
 		set_light(0)
 
-/mob/living/silicon/robot/handle_regular_status_updates()
-	updatehealth()
+/mob/living/silicon/robot/should_be_dead()
+	return current_health < get_config_value(/decl/config/num/health_health_threshold_dead)
 
+/mob/living/silicon/robot/handle_regular_status_updates()
+	SHOULD_CALL_PARENT(FALSE)
+	update_health()
+
+	set_status(STAT_PARA, min(GET_STATUS(src, STAT_PARA), 30))
 	if(HAS_STATUS(src, STAT_ASLEEP))
 		SET_STATUS_MAX(src, STAT_PARA, 3)
 
-	if(src.resting)
+	if(resting)
 		SET_STATUS_MAX(src, STAT_WEAK, 5)
 
-	if(health < config.health_threshold_dead && src.stat != DEAD) //die only once
-		death()
-
-	if (src.stat != DEAD) //Alive.
-		if (incapacitated(INCAPACITATION_DISRUPTED) || !has_power)
-			src.set_stat(UNCONSCIOUS)
+	if (stat != DEAD) //Alive.
+		// This previously used incapacitated(INCAPACITATION_DISRUPTED) but that was setting the robot to be permanently unconscious, which isn't ideal.
+		if(!has_power || incapacitated(INCAPACITATION_STUNNED) || HAS_STATUS(src, STAT_PARA))
 			SET_STATUS_MAX(src, STAT_BLIND, 2)
-		else	//Not stunned.
-			src.set_stat(CONSCIOUS)
+			set_stat(UNCONSCIOUS)
+		else
+			set_stat(CONSCIOUS)
 
 	else //Dead.
 		cameranet.update_visibility(src, FALSE)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
-		src.set_stat(DEAD)
 
-	src.set_density(!src.lying)
-	if(src.sdisabilities & BLINDED)
+	set_density(!lying)
+	if(sdisabilities & BLINDED)
 		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	if(src.sdisabilities & DEAFENED)
 		src.set_status(STAT_DEAF, 1)
 
 	//update the state of modules and components here
-	if (src.stat != CONSCIOUS)
+	if (stat != CONSCIOUS)
 		uneq_all()
 
 	if(silicon_radio)
@@ -115,8 +90,9 @@
 	return 1
 
 /mob/living/silicon/robot/handle_regular_hud_updates()
-	..()
-
+	. = ..()
+	if(!.)
+		return
 	var/obj/item/borg/sight/hud/hud = (locate(/obj/item/borg/sight/hud) in src)
 	if(hud && hud.hud)
 		hud.hud.process_hud(src)
@@ -128,16 +104,16 @@
 				process_med_hud(src,0,network = get_computer_network())
 
 	if(length(get_active_grabs()))
-		ui_drop_grab.invisibility = 0
+		ui_drop_grab.set_invisibility(INVISIBILITY_NONE)
 		ui_drop_grab.alpha = 255
 	else
-		ui_drop_grab.invisibility = INVISIBILITY_MAXIMUM
+		ui_drop_grab.set_invisibility(INVISIBILITY_ABSTRACT)
 		ui_drop_grab.alpha = 0
 
 	if (src.healths)
 		if (src.stat != DEAD)
 			if(isdrone(src))
-				switch(health)
+				switch(current_health)
 					if(35 to INFINITY)
 						src.healths.icon_state = "health0"
 					if(25 to 34)
@@ -153,7 +129,7 @@
 					else
 						src.healths.icon_state = "health6"
 			else
-				switch(health)
+				switch(current_health)
 					if(200 to INFINITY)
 						src.healths.icon_state = "health0"
 					if(150 to 200)
@@ -165,7 +141,7 @@
 					if(0 to 50)
 						src.healths.icon_state = "health4"
 					else
-						if(health > config.health_threshold_dead)
+						if(current_health > get_config_value(/decl/config/num/health_health_threshold_dead))
 							src.healths.icon_state = "health5"
 						else
 							src.healths.icon_state = "health6"
@@ -230,6 +206,7 @@
 			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 
+	update_items()
 	return 1
 
 /mob/living/silicon/robot/handle_vision()
@@ -265,7 +242,7 @@
 	if (src.client)
 		src.client.screen -= src.contents
 		for(var/obj/I in src.contents)
-			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/mmi)))
+			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/organ/internal/brain_interface)))
 				src.client.screen += I
 	if(src.module_state_1)
 		src.module_state_1:screen_loc = ui_inv1
@@ -300,6 +277,9 @@
 	if(on_fire)
 		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
 
-/mob/living/silicon/robot/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
-		IgniteMob()
+//Silicons don't gain stacks from hotspots, but hotspots can ignite them
+/mob/living/silicon/increase_fire_stacks(exposed_temperature)
+	return
+
+/mob/living/silicon/can_ignite()
+	return !on_fire

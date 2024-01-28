@@ -24,9 +24,9 @@
 		desc = initial(desc)
 
 /obj/item/clothing/suit/armor/crafted/cardboard
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 /obj/item/clothing/suit/armor/crafted/leather
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 /obj/item/clothing/suit/armor/crafted/copper
 	material = /decl/material/solid/metal/copper
 /obj/item/clothing/suit/armor/crafted/diamond

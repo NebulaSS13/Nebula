@@ -42,6 +42,7 @@
 
 /obj/item/gun/energy/particle/on_update_icon()
 	. = ..()
+	var/obj/item/cell/power_supply = get_cell()
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	set_overlays(list(
 		"[get_world_inventory_state()]-[istype(current_mode) ? current_mode.name : "lethal"]",

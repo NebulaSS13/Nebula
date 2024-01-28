@@ -3,7 +3,7 @@
 	icon = 'icons/atmos/heat.dmi'
 	icon_state = "11"
 	color = "#404040"
-	level = 2
+	level = LEVEL_ABOVE_PLATING
 	connect_types = CONNECT_TYPE_HE
 	interact_offline = TRUE //Needs to be set so that pipes don't say they lack power in their description
 	var/initialize_directions_he
@@ -28,8 +28,8 @@
 	add_filter("glow",1, list(type="drop_shadow", x = 0, y = 0, offset = 0, size = 4))
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
-	..()
-	initialize_directions_he = initialize_directions	// all directions are HE
+	. = ..()
+	initialize_directions_he = get_initialize_directions()	// all directions are HE
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	atmos_initalized = TRUE
@@ -79,7 +79,7 @@
 
 			var/mob/living/carbon/human/H = buckled_mob
 			if(istype(H) && H.species)
-				heat_limit = H.get_temperature_threshold(HEAT_LEVEL_3)
+				heat_limit = H.get_mob_temperature_threshold(HEAT_LEVEL_3)
 
 			if(pipe_air.temperature > heat_limit + 1)
 				buckled_mob.apply_damage(4 * log(pipe_air.temperature - heat_limit), BURN, BP_CHEST, used_weapon = "Excessive Heat")
@@ -111,7 +111,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon = 'icons/atmos/junction.dmi'
 	icon_state = "11"
-	level = 2
+	level = LEVEL_ABOVE_PLATING
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE|CONNECT_TYPE_FUEL
 	build_icon_state = "junction"
 	rotate_class = PIPE_ROTATE_STANDARD

@@ -8,7 +8,7 @@
 	load_item_visible = 1
 	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
 	health = 100
-	maxhealth = 100
+	max_health = 100
 
 	locked = 0
 	fire_dam_coeff = 0.6
@@ -124,7 +124,7 @@
 			return 1
 	return ..()
 
-/obj/vehicle/bike/receive_mouse_drop(var/atom/dropping, mob/user)
+/obj/vehicle/bike/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && istype(dropping, /atom/movable))
 		if(!load(dropping))

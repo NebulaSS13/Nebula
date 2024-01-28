@@ -4,7 +4,7 @@
 	icon_state = "hair_rattail"
 	species_allowed = list(SPECIES_TAJARA)
 	icon = 'mods/species/bayliens/tajaran/icons/hair.dmi'
-	blend = ICON_MULTIPLY
+	color_blend = ICON_MULTIPLY
 	uid = "acc_hair_taj_rattail"
 
 /decl/sprite_accessory/hair/taj/straight
@@ -132,7 +132,7 @@
 	icon_state = "facial_sideburns"
 	species_allowed = list(SPECIES_TAJARA)
 	icon = 'mods/species/bayliens/tajaran/icons/facial.dmi'
-	blend = ICON_MULTIPLY
+	color_blend = ICON_MULTIPLY
 	uid = "acc_fhair_taj_sideburns"
 
 /decl/sprite_accessory/facial_hair/taj/mutton
@@ -166,7 +166,7 @@
 	icon = 'mods/species/bayliens/tajaran/icons/markings.dmi'
 	species_allowed = list(SPECIES_TAJARA)
 	body_parts = list(BP_HEAD)
-	blend = ICON_MULTIPLY
+	color_blend = ICON_MULTIPLY
 	uid = "acc_marking_taj_nose"
 
 /decl/sprite_accessory/marking/tajaran/ears

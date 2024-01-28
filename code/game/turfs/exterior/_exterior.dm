@@ -8,7 +8,6 @@
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 	zone_membership_candidate = TRUE
 	var/base_color
-	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 	var/possible_states = 0
 	var/icon_edge_layer = -1
@@ -16,6 +15,18 @@
 	var/icon_has_corners = FALSE
 	///If this turf is on a level that belongs to a planetoid, this is a reference to that planetoid.
 	var/datum/planetoid_data/owner
+	///Overrides the level's strata for this turf.
+	var/strata_override
+	var/decl/material/material
+	/// Whether or not sand/clay has been dug up here.
+	var/dug = FALSE
+
+/turf/exterior/can_be_dug()
+	return !density && !is_open()
+
+/turf/exterior/clear_diggable_resources()
+	dug = TRUE
+	..()
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
@@ -50,11 +61,13 @@
 	if(mapload)
 		update_icon()
 	else
-		for (var/turf/T in RANGE_TURFS(src, 1))
-			if(TICK_CHECK) // not CHECK_TICK -- only queue if the server is overloaded
-				T.queue_icon_update()
-			else
-				T.update_icon()
+		for(var/direction in global.alldirs)
+			var/turf/target_turf = get_step_resolving_mimic(src, direction)
+			if(istype(target_turf))
+				if(TICK_CHECK) // not CHECK_TICK -- only queue if the server is overloaded
+					target_turf.queue_icon_update()
+				else
+					target_turf.update_icon()
 
 /turf/exterior/is_floor()
 	return !density && !is_open()
@@ -73,25 +86,9 @@
 	for(var/obj/O in src)
 		O.hide(0)
 
-/turf/exterior/attackby(obj/item/C, mob/user)
-	//#TODO: Add some way to dig to lower levels?
-	if(diggable && IS_SHOVEL(C))
-		if(C.do_tool_interaction(TOOL_SHOVEL, user, src, 5 SECONDS))
-			new /obj/structure/pit(src)
-			diggable = FALSE
-		else
-			to_chat(user, SPAN_NOTICE("You stop shoveling."))
-		return TRUE
-
-	if(istype(C, /obj/item/stack/tile))
-		var/obj/item/stack/tile/T = C
-		T.try_build_turf(user, src)
-		return TRUE
-
-	. = ..()
-
 /turf/exterior/explosion_act(severity)
-	SHOULD_CALL_PARENT(FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	..()
 	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
 		ChangeTurf(get_base_turf_by_area(src))
 
@@ -106,8 +103,8 @@
 
 	var/neighbors = 0
 	for(var/direction in global.cardinal)
-		var/turf/exterior/turf_to_check = get_step(src,direction)
-		if(!turf_to_check || turf_to_check.density)
+		var/turf/exterior/turf_to_check = get_step_resolving_mimic(src, direction)
+		if(!istype(turf_to_check) || turf_to_check.density)
 			continue
 		if(istype(turf_to_check, type))
 			neighbors |= direction
@@ -128,11 +125,11 @@
 
 	if(icon_has_corners)
 		for(var/direction in global.cornerdirs)
-			var/turf/exterior/turf_to_check = get_step(src,direction)
-			if(!isturf(turf_to_check) || turf_to_check.density || istype(turf_to_check, type))
+			var/turf/exterior/turf_to_check = get_step_resolving_mimic(src, direction)
+			if(!istype(turf_to_check) || turf_to_check.density || istype(turf_to_check, type))
 				continue
 
-			if(!istype(turf_to_check) || icon_edge_layer > turf_to_check.icon_edge_layer)
+			if(icon_edge_layer > turf_to_check.icon_edge_layer)
 				var/draw_state
 				var/res = (neighbors & direction)
 				if(res == 0)

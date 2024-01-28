@@ -96,17 +96,15 @@
 			break
 
 /mob/living/bot/medbot/UnarmedAttack(var/mob/living/carbon/human/H, var/proximity)
-	if(!..())
+	. = ..()
+	if(.)
 		return
 
-	if(!on)
-		return
-
-	if(!istype(H))
-		return
+	if(!on || !istype(H))
+		return FALSE
 
 	if(busy)
-		return
+		return TRUE
 
 	if(H.stat == DEAD)
 		if(vocal)
@@ -146,6 +144,7 @@
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
 	busy = 0
 	update_icon()
+	return TRUE
 
 /mob/living/bot/medbot/on_update_icon()
 	..()

@@ -2,8 +2,8 @@
 	name = "rat trap"
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
-	origin_tech = "{'combat':1}"
-	material = /decl/material/solid/wood
+	origin_tech = @'{"combat":1}'
+	material = /decl/material/solid/organic/wood
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/armed = 0
 
@@ -42,7 +42,7 @@
 					SET_STATUS_MAX(H, STAT_STUN, 3)
 		if(affecting)
 			affecting.take_external_damage(1, 0)
-			H.updatehealth()
+
 	else if(ismouse(target))
 		var/mob/living/simple_animal/mouse/M = target
 		visible_message("<span class='danger'>SPLAT!</span>")
@@ -74,17 +74,16 @@
 	. = toggle_arming(user) || ..()
 
 /obj/item/assembly/mousetrap/Crossed(atom/movable/AM)
-	if(armed)
-		if(ishuman(AM))
-			var/mob/living/carbon/H = AM
-			if(!MOVING_DELIBERATELY(H))
-				triggered(H)
-				H.visible_message("<span class='warning'>[H] accidentally steps on [src].</span>", \
-								  "<span class='warning'>You accidentally step on [src]</span>")
-		if(ismouse(AM))
-			triggered(AM)
 	..()
-
+	if(!armed || !isliving(AM))
+		return
+	var/mob/living/M = AM
+	if(MOVING_DELIBERATELY(M))
+		return
+	M.visible_message(
+		SPAN_DANGER("\The [M] steps on \the [src]!"),
+		SPAN_DANGER("You step on \the [src]!"))
+	triggered(M)
 
 /obj/item/assembly/mousetrap/on_found(mob/finder)
 	if(armed)

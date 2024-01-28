@@ -7,7 +7,7 @@
 	icon_state = ICON_STATE_WORLD
 	w_class    = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
-	material   = /decl/material/solid/plastic
+	material   = /decl/material/solid/organic/plastic
 	matter     = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)

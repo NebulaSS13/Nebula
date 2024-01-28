@@ -7,7 +7,7 @@
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 	origin_tech = null
 	pixel_y = 8
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	use_single_icon = TRUE
 	item_state = null
 	is_spawnable_type = FALSE
@@ -25,7 +25,7 @@
 		add_vis_contents(src, AM)
 
 // Grab our inhands from the mob we're wrapping, if they have any.
-/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	var/mob/M = locate() in contents
 	if(istype(M))
 		icon =  M.get_holder_icon()
@@ -99,10 +99,12 @@
 		return loc.loc
 	return ..()
 
-/obj/item/holder/GetIdCards()
+/obj/item/holder/GetIdCards(list/exceptions)
 	. = ..()
 	for(var/mob/M in contents)
-		LAZYDISTINCTADD(., M.GetIdCards())
+		var/list/cards = M.GetIdCards(exceptions)
+		if(length(cards))
+			LAZYDISTINCTADD(., cards)
 
 /obj/item/holder/attack_self()
 	for(var/mob/M in contents)

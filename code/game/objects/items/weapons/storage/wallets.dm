@@ -43,7 +43,7 @@
 		/obj/item/clothing/accessory/armor/tag,
 		)
 	slot_flags = SLOT_ID
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 	var/obj/item/card/id/front_id = null
 	var/obj/item/charge_stick/front_stick = null
@@ -87,9 +87,9 @@
 			tiny_state = "id-"+front_id.icon_state
 		add_overlay(overlay_image(icon, tiny_state, flags = RESET_COLOR))
 
-/obj/item/storage/wallet/GetIdCards()
+/obj/item/storage/wallet/GetIdCards(list/exceptions)
 	. = ..()
-	if(istype(front_id))
+	if(istype(front_id) && !is_type_in_list(front_id, exceptions))
 		LAZYDISTINCTADD(., front_id)
 
 /obj/item/storage/wallet/GetChargeStick()
@@ -148,7 +148,7 @@
 
 /decl/interaction_handler/remove_id/wallet/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && ishuman(user)
-	
+
 /decl/interaction_handler/remove_id/wallet/invoked(atom/target, mob/user, obj/item/prop)
 	var/obj/item/storage/wallet/W = target
 	var/obj/item/card/id/id = W.GetIdCard()

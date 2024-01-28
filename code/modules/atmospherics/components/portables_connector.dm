@@ -17,7 +17,7 @@
 	frame_type = /obj/item/pipe
 	construct_state = /decl/machine_construction/pipe
 
-	level = 1
+	level = LEVEL_BELOW_PLATING
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "connector"

@@ -38,7 +38,7 @@ var/global/list/gear_datums = list()
 			return
 
 /decl/loadout_option/proc/can_afford(var/mob/user, var/datum/preferences/pref)
-	if(cost > 0 && (pref.total_loadout_cost + cost) > config.max_gear_cost)
+	if(cost > 0 && (pref.total_loadout_cost + cost) > get_config_value(/decl/config/num/max_gear_cost))
 		return FALSE
 	var/decl/loadout_category/LC = GET_DECL(category)
 	if(!LC || pref.total_loadout_selections[category] >= LC.max_selections)
@@ -77,14 +77,15 @@ var/global/list/gear_datums = list()
 
 /datum/category_item/player_setup_item/loadout/sanitize_character()
 
-	pref.gear_slot = sanitize_integer(pref.gear_slot, 1, config.loadout_slots, initial(pref.gear_slot))
+	var/loadout_slots = get_config_value(/decl/config/num/loadout_slots)
+	pref.gear_slot = sanitize_integer(pref.gear_slot, 1, loadout_slots, initial(pref.gear_slot))
 	if(!islist(pref.gear_list))
 		pref.gear_list = list()
 
-	if(pref.gear_list.len < config.loadout_slots)
-		pref.gear_list.len = config.loadout_slots
+	if(pref.gear_list.len < loadout_slots)
+		pref.gear_list.len = loadout_slots
 
-	for(var/index = 1 to config.loadout_slots)
+	for(var/index = 1 to loadout_slots)
 
 		pref.total_loadout_cost = 0
 		pref.total_loadout_selections = list()
@@ -118,14 +119,15 @@ var/global/list/gear_datums = list()
 
 	recalculate_loadout_cost()
 	var/fcolor = COLOR_CYAN_BLUE
-	if(pref.total_loadout_cost < config.max_gear_cost)
+	var/max_gear_cost = get_config_value(/decl/config/num/max_gear_cost)
+	if(pref.total_loadout_cost < max_gear_cost)
 		fcolor = COLOR_FONT_ORANGE
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
 	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a>"
 
-	if(config.max_gear_cost < INFINITY)
-		. += "<b><font color = '[fcolor]'>[pref.total_loadout_cost]/[config.max_gear_cost]</font> loadout points spent.</b>"
+	if(max_gear_cost < INFINITY)
+		. += "<b><font color = '[fcolor]'>[pref.total_loadout_cost]/[max_gear_cost]</font> loadout points spent.</b>"
 
 	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
 	. += "<a href='?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show all" : "Hide unavailable"]</a></center></td></tr>"
@@ -296,14 +298,14 @@ var/global/list/gear_datums = list()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["next_slot"])
 		pref.gear_slot = pref.gear_slot+1
-		if(pref.gear_slot > config.loadout_slots)
+		if(pref.gear_slot > get_config_value(/decl/config/num/loadout_slots))
 			pref.gear_slot = 1
 		recalculate_loadout_cost()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["prev_slot"])
 		pref.gear_slot = pref.gear_slot-1
 		if(pref.gear_slot < 1)
-			pref.gear_slot = config.loadout_slots
+			pref.gear_slot = get_config_value(/decl/config/num/loadout_slots)
 		recalculate_loadout_cost()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["select_category"])
@@ -337,7 +339,7 @@ var/global/list/gear_datums = list()
 	var/list/allowed_roles                // Roles that can spawn with this item.
 	var/list/allowed_branches             // Service branches that can spawn with it.
 	var/list/allowed_skills               // Skills required to spawn with this item.
-	var/flags                             // Special tweaks in new
+	var/loadout_flags                     // Special tweaks in new
 	var/custom_setup_proc                 // Special tweak in New
 	var/list/custom_setup_proc_arguments  // Special tweak in New
 	var/category = /decl/loadout_category // Type to use for categorization and organization.
@@ -349,6 +351,10 @@ var/global/list/gear_datums = list()
 	abstract_type = /decl/loadout_option
 
 /decl/loadout_option/Initialize()
+
+	if(get_config_value(/decl/config/toggle/allow_loadout_customization))
+		loadout_flags |= GEAR_HAS_CUSTOM_SELECTION
+
 	. = ..()
 
 	if(name && (!global.using_map.loadout_blacklist || !(type in global.using_map.loadout_blacklist)))
@@ -357,18 +363,18 @@ var/global/list/gear_datums = list()
 		ADD_SORTED(LC.gear, name, /proc/cmp_text_asc)
 		LC.gear[name] = src
 
-	if(FLAGS_EQUALS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
+	if(FLAGS_EQUALS(loadout_flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
 		CRASH("May not have both type and subtype selection tweaks")
 	if(!description)
 		var/obj/O = path
 		description = initial(O.desc)
-	if(flags & GEAR_HAS_COLOR_SELECTION)
+	if(loadout_flags & GEAR_HAS_COLOR_SELECTION)
 		gear_tweaks += gear_tweak_free_color_choice()
-	if(flags & GEAR_HAS_TYPE_SELECTION)
+	if(loadout_flags & GEAR_HAS_TYPE_SELECTION)
 		gear_tweaks += new /datum/gear_tweak/path/type(path)
-	if(flags & GEAR_HAS_SUBTYPE_SELECTION)
+	if(loadout_flags & GEAR_HAS_SUBTYPE_SELECTION)
 		gear_tweaks += new /datum/gear_tweak/path/subtype(path)
-	if(flags & GEAR_HAS_CUSTOM_SELECTION)
+	if(loadout_flags & GEAR_HAS_CUSTOM_SELECTION)
 		gear_tweaks += gear_tweak_free_name
 		gear_tweaks += gear_tweak_free_desc
 	if(custom_setup_proc)
@@ -412,7 +418,7 @@ var/global/list/gear_datums = list()
 		gt.tweak_gear_data(islist(metadata) && metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_item(user, item, islist(metadata) && metadata["[gt]"])
+		gt.tweak_item(user, item, (islist(metadata) && metadata["[gt]"]))
 	. = item
 	if(metadata && !islist(metadata))
 		PRINT_STACK_TRACE("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
@@ -427,6 +433,7 @@ var/global/list/gear_datums = list()
 		. = item
 		if(!old_item)
 			return
+		item.handle_loadout_equip_replacement(old_item)
 		if(old_item.type != item.type)
 			place_in_storage_or_drop(wearer, old_item)
 		else
@@ -457,10 +464,10 @@ var/global/list/gear_datums = list()
 	if(QDELETED(item))
 		return
 
-	if(!(flags & GEAR_NO_FINGERPRINTS))
+	if(!(loadout_flags & GEAR_NO_FINGERPRINTS))
 		item.add_fingerprint(H)
 
-	if(flags & GEAR_NO_EQUIP)
+	if(loadout_flags & GEAR_NO_EQUIP)
 		return
 
 	return item

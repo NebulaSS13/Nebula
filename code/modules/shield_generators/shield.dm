@@ -7,7 +7,7 @@
 	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	density = TRUE
-	invisibility = 0
+	invisibility = INVISIBILITY_NONE
 	atmos_canpass = CANPASS_PROC
 	var/obj/machinery/shield_generator/gen = null
 	var/disabled_for = 0
@@ -94,7 +94,7 @@
 
 	if(!disabled_for && !diffused_for)
 		set_density(1)
-		set_invisibility(0)
+		set_invisibility(INVISIBILITY_NONE)
 		update_nearby_tiles()
 		update_icon(TRUE)
 		update_explosion_resistance()
@@ -201,9 +201,9 @@
 
 // Fire
 /obj/effect/shield/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	SHOULD_CALL_PARENT(FALSE)
 	if(!disabled_for)
 		take_damage(rand(5,10), SHIELD_DAMTYPE_HEAT)
-
 
 // Projectiles
 /obj/effect/shield/bullet_act(var/obj/item/projectile/proj)
@@ -322,7 +322,7 @@
 	affected_shields |= src
 	i--
 	if(i)
-		addtimer(CALLBACK(src, .proc/spread_impact_effect, i, affected_shields), 2)
+		addtimer(CALLBACK(src, PROC_REF(spread_impact_effect), i, affected_shields), 2)
 
 /obj/effect/shield/proc/spread_impact_effect(var/i, var/list/affected_shields = list())
 	for(var/direction in global.cardinal)

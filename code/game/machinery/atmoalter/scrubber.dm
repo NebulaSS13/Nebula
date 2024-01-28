@@ -6,7 +6,7 @@
 	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	movable_flags = MOVABLE_FLAG_WHEELED
 	var/volume_rate = 800
 
@@ -148,7 +148,7 @@
 
 //Huge scrubber
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
-	name = "Huge Air Scrubber"
+	name = "huge air scrubber"
 	icon_state = "scrubber:0"
 	anchored = TRUE
 	volume = 50000
@@ -200,7 +200,7 @@
 
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
-	name = "Stationary Air Scrubber"
+	name = "stationary air scrubber"
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I, var/mob/user)

@@ -5,10 +5,10 @@
 	icon_state = "barricade"
 	anchored = TRUE
 	density = TRUE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	maxhealth = 100
+	max_health = 100
 
 	var/spike_damage //how badly it smarts when you run into this like a rube
 	var/list/poke_description = list("gored", "spiked", "speared", "stuck", "stabbed")
@@ -18,12 +18,12 @@
 
 /obj/structure/barricade/spike/Initialize()
 	if(!reinf_material)
-		reinf_material = /decl/material/solid/wood
+		reinf_material = /decl/material/solid/organic/wood
 	. = ..()
 
 /obj/structure/barricade/Initialize()
 	if(!material)
-		material = /decl/material/solid/wood
+		material = /decl/material/solid/organic/wood
 	. = ..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL

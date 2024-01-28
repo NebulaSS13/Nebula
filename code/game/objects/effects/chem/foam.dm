@@ -22,7 +22,7 @@
 	spawn(3 + metal * 3)
 		Process()
 		checkReagents()
-	addtimer(CALLBACK(src, .proc/remove_foam), 12 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(remove_foam)), 12 SECONDS)
 
 /obj/effect/effect/foam/proc/remove_foam()
 	STOP_PROCESSING(SSobj, src)
@@ -67,16 +67,15 @@
 /obj/effect/effect/foam/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume) // foam disolves when heated, except metal foams
 	if(!metal && prob(max(0, exposed_temperature - 475)))
 		flick("[icon_state]-disolve", src)
-
-		spawn(5)
-			qdel(src)
-
-/obj/effect/effect/foam/Crossed(var/atom/movable/AM)
-	if(metal)
+		QDEL_IN(src, 5)
 		return
-	if(isliving(AM))
-		var/mob/living/M = AM
-		M.slip("the foam", 6)
+	return ..()
+
+/obj/effect/effect/foam/Crossed(atom/movable/AM)
+	if(metal || !isliving(AM))
+		return
+	var/mob/living/M = AM
+	M.slip("the foam", 6)
 
 /datum/effect/effect/system/foam_spread
 	var/amount = 5				// the size of the foam spread.

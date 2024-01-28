@@ -19,7 +19,7 @@
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 		)
-	origin_tech = "{'materials':3,'engineering':1,'combat':3}"
+	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'
 
 // no accessory
 /obj/item/clothing/suit/armor/bulletproof/prepared
@@ -43,7 +43,7 @@
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 		)
-	origin_tech = "{'materials':3,'engineering':1,'combat':3}"
+	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'
 
 /obj/item/clothing/accessory/legguards/ballistic
 	name = "ballistic leg guards"
@@ -64,4 +64,4 @@
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 		)
-	origin_tech = "{'materials':3,'engineering':1,'combat':3}"
+	origin_tech = @'{"materials":3,"engineering":1,"combat":3}'

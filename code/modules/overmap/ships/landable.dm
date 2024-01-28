@@ -122,7 +122,7 @@
 		visitor_dir = turn(visitor_dir, 90)
 
 	// Configure shuttle datum
-	events_repository.register(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/on_shuttle_jump)
+	events_repository.register(/decl/observ/shuttle_moved, shuttle_datum, src, PROC_REF(on_shuttle_jump))
 	on_landing(landmark, shuttle_datum.current_location) // We "land" at round start to properly place ourselves on the overmap.
 	if(landmark == shuttle_datum.current_location)
 		status = SHIP_STATUS_OVERMAP // we spawned on the overmap, so have to initialize our state properly.
@@ -161,7 +161,7 @@
 	core_landmark = master
 	SetName(_name)
 	landmark_tag = master.shuttle_name + _name
-	events_repository.register(/decl/observ/destroyed, master, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/destroyed, master, src, TYPE_PROC_REF(/datum, qdel_self))
 	. = ..()
 
 /obj/effect/shuttle_landmark/visiting_shuttle/Destroy()

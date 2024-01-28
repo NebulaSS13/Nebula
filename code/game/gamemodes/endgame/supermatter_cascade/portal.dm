@@ -6,7 +6,6 @@
 	icon = 'icons/obj/rift.dmi'
 	icon_state = "rift"
 	anchored = TRUE
-	unacidable = TRUE
 	pixel_x = -236
 	pixel_y = -256
 	plane = ABOVE_LIGHTING_PLANE

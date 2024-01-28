@@ -84,6 +84,7 @@ Class Procs:
 	ASSERT(T.zone == src)
 	soft_assert(T in contents, "Lists are weird broseph")
 #endif
+	T.c_copy_air() // to avoid losing contents
 	contents.Remove(T)
 	fire_tiles.Remove(T)
 	T.zone = null
@@ -114,8 +115,7 @@ Class Procs:
 	for(var/connection_edge/E in edges)
 		if(E.contains_zone(into))
 			continue //don't need to rebuild this edge
-		for(var/turf/T in E.connecting_turfs)
-			SSair.mark_for_update(T)
+		E.update_post_merge()
 
 /zone/proc/c_invalidate()
 	invalid = 1
@@ -173,10 +173,8 @@ Class Procs:
 	if(abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
 		last_air_temperature = air.temperature
 		for(var/turf/T as anything in contents)
-			for(var/check_atom in T.contents)
-				var/atom/checking = check_atom
-				if(checking.simulated)
-					queue_temperature_atoms(checking)
+			for(var/atom/check_atom as anything in T.contents)
+				QUEUE_TEMPERATURE_ATOM(check_atom)
 			CHECK_TICK
 
 /zone/proc/handle_condensation()

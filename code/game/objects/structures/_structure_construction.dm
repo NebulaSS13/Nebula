@@ -104,20 +104,19 @@
 
 /obj/structure/proc/handle_repair(mob/user, obj/item/tool)
 	var/obj/item/stack/stack = tool
-	var/amount_needed = CEILING((maxhealth - health)/DOOR_REPAIR_AMOUNT)
+	var/amount_needed = CEILING((max_health - health)/DOOR_REPAIR_AMOUNT)
 	var/used = min(amount_needed,stack.amount)
 	if(used)
-		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))
+		to_chat(user, SPAN_NOTICE("You fit [stack.get_string_for_amount(used)] to damaged areas of \the [src]."))
 		stack.use(used)
 		last_damage_message = null
-		health = clamp(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
+		health = clamp(health, health + used*DOOR_REPAIR_AMOUNT, max_health)
 
 /obj/structure/attackby(obj/item/O, mob/user)
 
 	if(O.force && user.a_intent == I_HURT)
 		attack_animation(user)
 		visible_message(SPAN_DANGER("\The [src] has been [pick(O.attack_verb)] with \the [O] by \the [user]!"))
-		playsound(loc, hitsound, 100, 1)
 		take_damage(O.force)
 		. = TRUE
 

@@ -10,7 +10,7 @@
 	back = /obj/item/storage/backpack
 	backpack_contents = list(/obj/item/storage/box = 1)
 	abstract_type = /decl/hierarchy/outfit/wizard
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
+	outfit_flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/wizard/blue
 	name = "Wizard - Blue"

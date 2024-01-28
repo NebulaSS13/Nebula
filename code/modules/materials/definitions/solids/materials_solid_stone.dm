@@ -18,20 +18,20 @@
 		/decl/material/solid/silicon = 1
 	)
 
-/decl/material/solid/stone/generate_recipes(var/reinforce_material)
+/decl/material/solid/stone/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
-		return
-	if(wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-	. += new/datum/stack_recipe/furniture/planting_bed(src)
-	. += new/datum/stack_recipe/fountain(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		if(wall_support_value >= 10)
+			. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/planting_bed(src)
+		. += new/datum/stack_recipe/fountain(src)
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"
 	uid = "solid_sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	value = 1.5
+	melting_point = T0C + 600
 
 /decl/material/solid/stone/granite
 	name                   = "granite"
@@ -66,6 +66,7 @@
 	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_SHINY
+	melting_point  = T0C + 1200
 	brute_armor = 3
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	construction_difficulty = MAT_VALUE_HARD_DIY

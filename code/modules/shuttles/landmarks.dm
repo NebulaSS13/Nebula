@@ -6,9 +6,8 @@ var/global/list/shuttle_landmarks = list()
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
 	anchored = TRUE
-	unacidable = 1
-	simulated = 0
-	invisibility = 101
+	simulated = FALSE
+	invisibility = INVISIBILITY_ABSTRACT
 
 	var/landmark_tag
 	//ID of the controller on the dock side
@@ -176,7 +175,7 @@ var/global/list/shuttle_landmarks = list()
 	icon = 'icons/obj/items/device/long_range_flare.dmi'
 	icon_state = "bluflare"
 	light_color = "#3728ff"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/active
 
 /obj/item/spaceflare/attack_self(var/mob/user)

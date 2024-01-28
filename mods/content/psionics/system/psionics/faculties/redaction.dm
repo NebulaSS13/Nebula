@@ -93,6 +93,10 @@
 				E.status &= ~ORGAN_BROKEN
 				E.stage = 0
 				return TRUE
+			if(E.is_dislocated() && !E.is_parent_dislocated())
+				to_chat(user, SPAN_NOTICE("You carefully guide the dislocated joint back into place and soothe the inflamed muscles."))
+				E.undislocate(skip_pain = TRUE)
+				return TRUE
 
 		for(var/datum/wound/W in E.wounds)
 			if(W.bleeding())
@@ -107,7 +111,7 @@
 
 		if(redaction_rank >= PSI_RANK_GRANDMASTER)
 			for(var/obj/item/organ/internal/I in E.internal_organs)
-				if(!BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
+				if(!BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0 && I.organ_tag != BP_BRAIN)
 					to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [I] to repair itself."))
 					var/heal_rate = redaction_rank
 					I.damage = max(0, I.damage - rand(heal_rate,heal_rate*2))

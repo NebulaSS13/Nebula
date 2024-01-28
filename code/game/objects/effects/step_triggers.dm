@@ -3,21 +3,19 @@
 /obj/effect/step_trigger
 	var/affect_ghosts = 0
 	var/stopper = 1 // stops throwers
-	invisibility = 101 // nope cant see this shit
+	invisibility = INVISIBILITY_ABSTRACT // nope cant see this shit
 	anchored = TRUE
+	icon = 'icons/misc/mark.dmi'
+	icon_state = "X"
 
 /obj/effect/step_trigger/proc/Trigger(var/atom/movable/A)
 	return 0
 
-/obj/effect/step_trigger/Crossed(H)
+/obj/effect/step_trigger/Crossed(atom/movable/AM)
 	..()
-	if(!H)
+	if(!AM || (isobserver(AM) && !(isghost(AM) && affect_ghosts)))
 		return
-	if(isobserver(H) && !(isghost(H) && affect_ghosts))
-		return
-	Trigger(H)
-
-
+	Trigger(AM)
 
 /* Tosses things in a certain direction */
 

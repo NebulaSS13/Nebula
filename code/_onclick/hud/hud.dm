@@ -25,15 +25,15 @@
 	var/show_intent_icons   = FALSE
 	var/hotkey_ui_hidden    = FALSE     //This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
-	var/obj/screen/lingchemdisplay
 	var/list/hand_hud_objects
 	var/list/swaphand_hud_objects
-	var/obj/screen/action_intent
-	var/obj/screen/move_intent
+	var/obj/screen/intent/action_intent
+	var/obj/screen/movement/move_intent
 	var/obj/screen/stamina/stamina_bar
 
-	var/list/adding
-	var/list/other
+	var/list/adding = list()
+	var/list/other = list()
+	var/list/hud_elements = list()
 	var/list/obj/screen/hotkeybuttons
 
 	var/obj/screen/action_button/hide_toggle/hide_actions_toggle
@@ -47,7 +47,6 @@
 /datum/hud/Destroy()
 	. = ..()
 	stamina_bar = null
-	lingchemdisplay = null
 	action_intent = null
 	move_intent = null
 	adding = null
@@ -59,10 +58,10 @@
 
 /datum/hud/proc/update_stamina()
 	if(mymob && stamina_bar)
-		stamina_bar.invisibility = INVISIBILITY_MAXIMUM
+		stamina_bar.set_invisibility(INVISIBILITY_MAXIMUM)
 		var/stamina = mymob.get_stamina()
 		if(stamina < 100)
-			stamina_bar.invisibility = 0
+			stamina_bar.set_invisibility(INVISIBILITY_NONE)
 			stamina_bar.icon_state = "prog_bar_[FLOOR(stamina/5)*5][(stamina >= 5) && (stamina <= 25) ? "_fail" : null]"
 
 /datum/hud/proc/hide_inventory()
@@ -99,6 +98,7 @@
 			continue
 
 		// We're not showing anything, hide it.
+		gear.reconsider_client_screen_presence(mymob?.client, slot)
 		if(!show_hud)
 			inv_slot.hide_slot()
 		else
@@ -111,7 +111,22 @@
 	return FALSE
 
 /datum/hud/proc/FinalizeInstantiation()
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	BuildInventoryUI()
+	BuildHandsUI()
+	if(mymob.client)
+		mymob.client.screen = list()
+		if(length(hand_hud_objects))
+			mymob.client.screen |= hand_hud_objects
+		if(length(swaphand_hud_objects))
+			mymob.client.screen |= swaphand_hud_objects
+		if(length(hud_elements))
+			mymob.client.screen |= hud_elements
+		if(length(adding))
+			mymob.client.screen |= adding
+		if(length(hotkeybuttons))
+			mymob.client.screen |= hotkeybuttons
+	hide_inventory()
 
 /datum/hud/proc/get_ui_style()
 	return ui_style2icon(mymob?.client?.prefs?.UI_style) || 'icons/mob/screen/white.dmi'
@@ -137,7 +152,7 @@
 		gripper_datums += mymob.get_inventory_slot_datum(hand_tag)
 	gripper_datums = sortTim(gripper_datums, /proc/cmp_gripper_asc)
 
-	for(var/datum/inventory_slot/inv_slot in gripper_datums)
+	for(var/datum/inventory_slot/gripper/inv_slot in gripper_datums)
 
 		// Re-order the held slot list so it aligns with the display order.
 		var/hand_tag = inv_slot.slot_id
@@ -149,23 +164,24 @@
 			if(existing_box.slot_id == hand_tag)
 				inv_box = existing_box
 				break
+
 		if(!inv_box)
-			inv_box = new /obj/screen/inventory()
+			inv_box = new /obj/screen/inventory(null, mymob, ui_style, ui_color, ui_alpha)
+		else
+			inv_box.icon  = ui_style
+			inv_box.color = ui_color
+			inv_box.alpha = ui_alpha
+
 		inv_box.SetName(hand_tag)
-		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_base"
 
 		inv_box.cut_overlays()
-		inv_box.add_overlay("hand_[hand_tag]")
+		inv_box.add_overlay("hand_[inv_slot.hand_overlay || hand_tag]", TRUE)
 		if(inv_slot.ui_label)
-			inv_box.add_overlay("hand_[inv_slot.ui_label]")
-		if(mymob.get_active_held_item_slot() == hand_tag)
-			inv_box.add_overlay("hand_selected")
-		inv_box.compile_overlays()
+			inv_box.add_overlay("hand_[inv_slot.ui_label]", TRUE)
+		inv_box.update_icon()
 
 		inv_box.slot_id = hand_tag
-		inv_box.color = ui_color
-		inv_box.alpha = ui_alpha
 		inv_box.appearance_flags |= KEEP_TOGETHER
 
 		LAZYDISTINCTADD(hand_hud_objects, inv_box)
@@ -195,8 +211,8 @@
 			inv_box = sublist[2]
 			inv_box.screen_loc = "CENTER:[world.icon_size/2],BOTTOM:[hand_y_offset]"
 		hand_y_offset += world.icon_size
-		if(mymob.client)
-			mymob.client.screen |= inv_box
+	if(mymob.client)
+		mymob.client.screen |= hand_hud_objects
 
 	// Make sure all held items are on the screen and set to the correct screen loc.
 	var/datum/inventory_slot/inv_slot
@@ -236,10 +252,7 @@
 		if(gear_slot in held_slots)
 			continue
 
-		inv_box = new /obj/screen/inventory()
-		inv_box.icon =  ui_style
-		inv_box.color = ui_color
-		inv_box.alpha = ui_alpha
+		inv_box = new /obj/screen/inventory(null, mymob, ui_style, ui_color, ui_alpha)
 
 		var/datum/inventory_slot/inv_slot = inventory_slots[gear_slot]
 		inv_box.SetName(inv_slot.slot_name)
@@ -257,51 +270,29 @@
 			adding += inv_box
 
 	if(has_hidden_gear)
-		var/obj/screen/using = new /obj/screen()
-		using.SetName("toggle")
-		using.icon = ui_style
-		using.icon_state = "other"
-		using.screen_loc = ui_inventory
-		using.color = ui_color
-		using.alpha = ui_alpha
-		adding += using
+		adding += new /obj/screen/toggle(null, mymob, ui_style, ui_color, ui_alpha)
 
 /datum/hud/proc/BuildHandsUI()
+
+	var/list/held_slots = mymob.get_held_item_slots()
+	if(length(held_slots) <= 0)
+		return
 
 	var/ui_style = get_ui_style()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
-	var/obj/screen/using
-
 	// Swap hand and quick equip screen elems.
-	using = new /obj/screen()
-	using.SetName("equip")
-	using.icon = ui_style
-	using.icon_state = "act_equip"
-	using.color = ui_color
-	using.alpha = ui_alpha
+	var/obj/screen/using = new /obj/screen/equip(null, mymob, ui_style, ui_color, ui_alpha)
 	src.adding += using
 	LAZYADD(swaphand_hud_objects, using)
 
-	var/list/held_slots = mymob.get_held_item_slots()
 	if(length(held_slots) > 1)
 
-		using = new /obj/screen/inventory()
-		using.SetName("hand")
-		using.icon = ui_style
-		using.icon_state = "hand1"
-		using.color = ui_color
-		using.alpha = ui_alpha
+		using = new /obj/screen/inventory/swaphand(null, mymob, ui_style, ui_color, ui_alpha)
 		src.adding += using
 		LAZYADD(swaphand_hud_objects, using)
-
-		using = new /obj/screen/inventory()
-		using.SetName("hand")
-		using.icon = ui_style
-		using.icon_state = "hand2"
-		using.color = ui_color
-		using.alpha = ui_alpha
+		using = new /obj/screen/inventory/swaphand/right(null, mymob, ui_style, ui_color, ui_alpha)
 		src.adding += using
 		LAZYADD(swaphand_hud_objects, using)
 
@@ -321,8 +312,6 @@
 		return
 
 	if(!client) return
-	if(client.view != world.view)
-		return
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0
 		if(src.hud_used.adding)
@@ -427,10 +416,3 @@
 
 /mob/new_player/add_click_catcher()
 	return
-
-/obj/screen/stamina
-	name = "stamina"
-	icon = 'icons/effects/progressbar.dmi'
-	icon_state = "prog_bar_100"
-	invisibility = INVISIBILITY_MAXIMUM
-	screen_loc = ui_stamina

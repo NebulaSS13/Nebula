@@ -31,12 +31,17 @@
 }                                                                          \
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {      \
 	path = /obj/item/organ/external/groin;                                 \
-}
-/* Readd if FBP construction is desirable
+}                                                                          \
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/chest {      \
 	path = /obj/item/organ/external/chest;                                 \
 }                                                                          \
-*/
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/head {       \
+	path = /obj/item/organ/external/head;                                  \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {      \
+	path = /obj/item/organ/external/groin;                                 \
+}
+
 /datum/fabricator_recipe/robotics/prosthetic
 	var/model
 
@@ -70,13 +75,13 @@
 	for(var/key in resources)
 		if(!ispath(key, /decl/material/solid))
 			resources -= key
-	var/meat_amount = LAZYACCESS(resources, /decl/material/solid/meat)
+	var/meat_amount = LAZYACCESS(resources, /decl/material/solid/organic/meat)
 	if(meat_amount)
 		if(LAZYACCESS(resources, /decl/material/solid/metal/steel))
 			resources[/decl/material/solid/metal/steel] += meat_amount
 		else
 			LAZYSET(resources, /decl/material/solid/metal/steel, meat_amount)
-		LAZYREMOVE(resources, /decl/material/solid/meat)
+		LAZYREMOVE(resources, /decl/material/solid/organic/meat)
 
 /datum/fabricator_recipe/robotics/prosthetic/get_product_name()
 	. = "prosthetic limb ([..()])"

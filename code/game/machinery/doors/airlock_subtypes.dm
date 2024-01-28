@@ -18,6 +18,10 @@
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_DEEP_SKY_BLUE
 
+/obj/machinery/door/airlock/medical/open
+	icon_state = "open"
+	begins_closed = FALSE
+
 /obj/machinery/door/airlock/virology
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_GREEN
@@ -63,7 +67,7 @@
 	name = "Glass Airlock"
 	icon_state = "preview_glass"
 	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 300
+	max_health = 300
 	explosion_resistance = 5
 	opacity = FALSE
 	glass = TRUE
@@ -145,6 +149,10 @@
 		/decl/stock_part_preset/radio/event_transmitter/airlock/external_air = 1
 	)
 
+/obj/machinery/door/airlock/external/open
+	icon_state = "open"
+	begins_closed = FALSE
+
 /obj/machinery/door/airlock/external/get_auto_access()
 	. = ..()
 	var/area/A = get_area(src)
@@ -185,7 +193,7 @@
 	opacity = FALSE
 
 /obj/machinery/door/airlock/external/glass
-	maxhealth = 300
+	max_health = 300
 	explosion_resistance = 5
 	opacity = FALSE
 	glass = TRUE

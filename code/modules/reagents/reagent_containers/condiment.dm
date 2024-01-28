@@ -12,23 +12,24 @@
 	icon_state = "emptycondiment"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	possible_transfer_amounts = @"[1,5,10]"
-	center_of_mass = @"{'x':16,'y':6}"
+	center_of_mass = @'{"x":16,"y":6}'
 	randpixel = 6
 	volume = 50
+	var/obj/item/chems/condiment/is_special_bottle
 	var/static/list/special_bottles = list(
-		/decl/material/liquid/nutriment/ketchup = /obj/item/chems/condiment/ketchup,
+		/decl/material/liquid/nutriment/ketchup  = /obj/item/chems/condiment/ketchup,
 		/decl/material/liquid/nutriment/barbecue = /obj/item/chems/condiment/barbecue,
-		/decl/material/liquid/capsaicin = /obj/item/chems/condiment/capsaicin,
-		/decl/material/liquid/enzyme = /obj/item/chems/condiment/enzyme,
+		/decl/material/liquid/capsaicin          = /obj/item/chems/condiment/capsaicin,
+		/decl/material/liquid/enzyme             = /obj/item/chems/condiment/enzyme,
 		/decl/material/liquid/nutriment/soysauce = /obj/item/chems/condiment/small/soysauce,
-		/decl/material/liquid/frostoil = /obj/item/chems/condiment/frostoil,
-		/decl/material/solid/sodiumchloride = /obj/item/chems/condiment/small/saltshaker,
-		/decl/material/solid/blackpepper = /obj/item/chems/condiment/small/peppermill,
-		/decl/material/liquid/nutriment/cornoil = /obj/item/chems/condiment/cornoil,
-		/decl/material/liquid/nutriment/sugar = /obj/item/chems/condiment/sugar,
-		/decl/material/liquid/nutriment/mayo = /obj/item/chems/condiment/mayo,
-		/decl/material/liquid/nutriment/vinegar = /obj/item/chems/condiment/vinegar
-		)
+		/decl/material/liquid/frostoil           = /obj/item/chems/condiment/frostoil,
+		/decl/material/solid/sodiumchloride      = /obj/item/chems/condiment/small/saltshaker,
+		/decl/material/solid/blackpepper         = /obj/item/chems/condiment/small/peppermill,
+		/decl/material/liquid/nutriment/cornoil  = /obj/item/chems/condiment/cornoil,
+		/decl/material/liquid/nutriment/sugar    = /obj/item/chems/condiment/sugar,
+		/decl/material/liquid/nutriment/mayo     = /obj/item/chems/condiment/mayo,
+		/decl/material/liquid/nutriment/vinegar  = /obj/item/chems/condiment/vinegar
+	)
 
 /obj/item/chems/condiment/attackby(var/obj/item/W, var/mob/user)
 	if(IS_PEN(W))
@@ -46,13 +47,6 @@
 				to_chat(user, SPAN_NOTICE("You remove the label."))
 				label_text = null
 				on_reagent_change()
-		return
-
-/obj/item/chems/condiment/attack_self(var/mob/user)
-	return
-
-/obj/item/chems/condiment/attack(var/mob/M, var/mob/user, var/def_zone)
-	if(standard_feed_mob(user, M))
 		return
 
 /obj/item/chems/condiment/afterattack(var/obj/target, var/mob/user, var/proximity)
@@ -78,30 +72,30 @@
 	else
 		..()
 
-/obj/item/chems/condiment/feed_sound(var/mob/user)
-	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
-
-/obj/item/chems/condiment/self_feed_message(var/mob/user)
-	to_chat(user, SPAN_NOTICE("You swallow some of contents of \the [src]."))
+/obj/item/chems/condiment/proc/update_center_of_mass()
+	center_of_mass = is_special_bottle ? initial(is_special_bottle.center_of_mass) : initial(center_of_mass)
 
 /obj/item/chems/condiment/on_reagent_change()
-	var/reagent = reagents.primary_reagent
-	if(reagent in special_bottles)
-		var/obj/item/chems/condiment/special_bottle = special_bottles[reagent]
-		name = initial(special_bottle.name)
-		desc = initial(special_bottle.desc)
-		icon_state = initial(special_bottle.icon_state)
-		center_of_mass = initial(special_bottle.center_of_mass)
-	else
-		name = initial(name)
-		desc = initial(desc)
-		center_of_mass = initial(center_of_mass)
-		if(LAZYLEN(reagents.reagent_volumes))
-			icon_state = "mixedcondiments"
-		else
-			icon_state = "emptycondiment"
+	is_special_bottle = reagents?.total_volume && special_bottles[reagents?.primary_reagent]
+	..()
+	update_center_of_mass()
+
+/obj/item/chems/condiment/update_container_name()
+	name = is_special_bottle ? initial(is_special_bottle.name) : initial(name)
 	if(label_text)
 		name = addtext(name," ([label_text])")
+
+/obj/item/chems/condiment/update_container_desc()
+	desc = is_special_bottle ? initial(is_special_bottle.desc) : initial(desc)
+
+/obj/item/chems/condiment/on_update_icon()
+	..()
+	if(is_special_bottle)
+		icon_state = initial(is_special_bottle.icon_state)
+	else if(LAZYLEN(reagents?.reagent_volumes))
+		icon_state = "mixedcondiments"
+	else
+		icon_state = "emptycondiment"
 
 /obj/item/chems/condiment/enzyme
 	name = "universal enzyme"
@@ -180,14 +174,23 @@
 	amount_per_transfer_from_this = 1
 	volume = 20
 
-/obj/item/chems/condiment/small/on_reagent_change()
+/obj/item/chems/condiment/small/update_center_of_mass()
+	return
+
+/obj/item/chems/condiment/small/update_container_name()
+	return
+
+/obj/item/chems/condiment/small/update_container_desc()
+	return
+
+/obj/item/chems/condiment/small/on_update_icon()
 	return
 
 /obj/item/chems/condiment/small/saltshaker
 	name = "salt shaker"
 	desc = "Salt. From space oceans, presumably."
 	icon_state = "saltshakersmall"
-	center_of_mass = @"{'x':16,'y':9}"
+	center_of_mass = @'{"x":16,"y":9}'
 
 /obj/item/chems/condiment/small/saltshaker/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/sodiumchloride, reagents.maximum_volume)
@@ -196,7 +199,7 @@
 	name = "pepper mill"
 	desc = "Often used to flavor food or make people sneeze."
 	icon_state = "peppermillsmall"
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 
 /obj/item/chems/condiment/small/peppermill/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/blackpepper, reagents.maximum_volume)
@@ -205,7 +208,7 @@
 	name = "sugar"
 	desc = "Sweetness in a bottle"
 	icon_state = "sugarsmall"
-	center_of_mass = @"{'x':17,'y':9}"
+	center_of_mass = @'{"x":17,"y":9}'
 
 /obj/item/chems/condiment/small/sugar/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume)
@@ -218,9 +221,6 @@
 
 /obj/item/chems/condiment/small/mint/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, reagents.maximum_volume)
-
-/obj/item/chems/condiment/small/mint/on_reagent_change()
-	return
 
 /obj/item/chems/condiment/small/soysauce
 	name = "soy sauce"
@@ -412,7 +412,13 @@
 /obj/item/chems/condiment/flour/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/nutriment/flour, reagents.maximum_volume)
 
-/obj/item/chems/condiment/flour/on_reagent_change()
+/obj/item/chems/condiment/flour/update_container_name()
+	return
+
+/obj/item/chems/condiment/flour/update_container_desc()
+	return
+
+/obj/item/chems/condiment/flour/on_update_icon()
 	return
 
 /obj/item/chems/condiment/large
@@ -432,5 +438,11 @@
 /obj/item/chems/condiment/large/salt/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/sodiumchloride, reagents.maximum_volume)
 
-/obj/item/chems/condiment/large/salt/on_reagent_change()
+/obj/item/chems/condiment/large/salt/update_container_name()
+	return
+
+/obj/item/chems/condiment/large/salt/update_container_desc()
+	return
+
+/obj/item/chems/condiment/large/salt/on_update_icon()
 	return

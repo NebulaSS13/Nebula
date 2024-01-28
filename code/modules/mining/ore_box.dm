@@ -7,7 +7,7 @@
 	icon                   = 'icons/obj/mining.dmi'
 	icon_state             = "orebox0"
 	density                = TRUE
-	material               = /decl/material/solid/wood
+	material               = /decl/material/solid/organic/wood
 	atom_flags             = ATOM_FLAG_CLIMBABLE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	///Maximum amount of ores of all types that can be stored in the box.

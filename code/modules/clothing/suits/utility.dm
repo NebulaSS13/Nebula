@@ -31,7 +31,7 @@
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/suit/fire/Initialize()
 	. = ..()
@@ -101,11 +101,11 @@
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
 
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/suit/radiation
 	name = "radiation suit"
@@ -122,10 +122,10 @@
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/suit/radiation/Initialize()
 	. = ..()
@@ -137,7 +137,7 @@
 
 /obj/item/clothing/head/chem_hood
 	name = "chemical hood"
-	desc = "A hood that protects the head from chemical comtaminants."
+	desc = "A hood that protects the head from chemical contaminants."
 	icon = 'icons/clothing/head/chem_hood.dmi'
 	permeability_coefficient = 0
 	armor = list(
@@ -146,13 +146,13 @@
 		)
 	flags_inv = HIDEEARS|BLOCK_HEAD_HAIR
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	body_parts_covered = SLOT_HEAD|SLOT_EARS
+	body_parts_covered = SLOT_HEAD|SLOT_EARS|SLOT_FACE
 	siemens_coefficient = 0.9
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/suit/chem_suit
 	name = "chemical suit"
@@ -171,7 +171,7 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	siemens_coefficient = 0.9
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'

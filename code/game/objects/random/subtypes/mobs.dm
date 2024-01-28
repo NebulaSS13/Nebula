@@ -1,7 +1,8 @@
 /obj/random/mouse
 	name = "Random Mouse"
 	desc = "This is a random boring maus."
-	icon_state = "mouse_gray"
+	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
+	icon_state = "world-resting"
 	spawn_nothing_percentage = 15
 
 /obj/random/mouse/spawn_choices()

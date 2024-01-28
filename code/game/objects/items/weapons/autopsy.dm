@@ -8,7 +8,7 @@
 	icon_state = "autopsy_scanner"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'materials':1,'biotech':1}"
+	origin_tech = @'{"materials":1,"biotech":1}'
 	var/list/weapon_data = list()
 	var/list/chemtraces = list()
 	var/target_name
@@ -48,17 +48,17 @@
 	playsound(src, 'sound/effects/fastbeep.ogg', 10)
 
 /obj/item/scanner/autopsy/proc/add_data(var/obj/item/organ/external/O)
-	if(!O.autopsy_data.len) return
+	if(!length(O.autopsy_data))
+		return
 
 	for(var/V in O.autopsy_data)
 		var/datum/autopsy_data/W = O.autopsy_data[V]
-		if(!weapon_data[V])
-			weapon_data[V] = list("data" = W.copy(), "organs" = list(O.name))
-		else
+		if(weapon_data[V])
 			var/datum/autopsy_data/data = weapon_data[V]["data"]
 			data.merge_with(W)
-			var/list/organs = weapon_data[V]["organs"]
-			organs |= O.name
+			weapon_data[V]["organs"] |= O.name
+		else
+			weapon_data[V] = list("data" = W.copy(), "organs" = list(O.name))
 
 /obj/item/scanner/autopsy/proc/get_formatted_data()
 	var/list/scan_data = list("Subject: [target_name]")

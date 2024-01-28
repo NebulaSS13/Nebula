@@ -78,10 +78,14 @@
 			continue
 		if(!isPlayerLevel(A.z))
 			continue
-		var/obj/machinery/alarm/alarm = locate() in A // Only test areas with functional alarms
-		if(!alarm)
-			continue
-		if(alarm.stat & (NOPOWER | BROKEN))
+		// Only test areas with functional alarms
+		var/obj/machinery/alarm/found_alarm
+		for (var/obj/machinery/alarm/alarm in A)
+			if(alarm.inoperable()) // must have at least one functional alarm
+				continue
+			found_alarm = alarm
+
+		if(!found_alarm)
 			continue
 
 		//Make a list of devices that are being controlled by their air alarms
@@ -97,17 +101,37 @@
 		for(var/tag in vents_in_area) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
 			if(!A.air_vent_info[tag])
 				var/obj/machinery/atmospherics/unary/vent_pump/V = vents_in_area[tag]
-				var/logtext = "Vent [A.air_vent_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update the air alarm in area [A]."
-				if(!V.operable())
+				var/logtext = "Vent [A.air_vent_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update [log_info_line(found_alarm)] in area [A]."
+				if(V.inoperable())
 					logtext = "[logtext] The vent was not functional."
+				var/alarm_dist = get_dist(found_alarm, V)
+				if(alarm_dist > 60)
+					logtext += " The vent may be out of transmission range (max 60, was [alarm_dist])."
+				var/V_freq
+				for(var/obj/item/stock_parts/radio/radio_component in V.component_parts)
+					V_freq ||= radio_component.frequency
+				if(isnull(V_freq))
+					logtext += " The vent had no frequency set."
+				else if(V_freq != found_alarm.frequency)
+					logtext += " Frequencies did not match (alarm: [found_alarm.frequency], vent: [V_freq])."
 				log_bad(logtext)
 				failed = TRUE
 		for(var/tag in scrubbers_in_area)
 			if(!A.air_scrub_info[tag])
 				var/obj/machinery/atmospherics/unary/vent_scrubber/V = scrubbers_in_area[tag]
-				var/logtext = "Scrubber [A.air_scrub_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update the air alarm in area [A]."
-				if(!V.operable())
+				var/logtext = "Scrubber [A.air_scrub_names[tag]] ([V.x], [V.y], [V.z]) with id_tag [tag] did not update [log_info_line(found_alarm)] in area [A]."
+				if(V.inoperable())
 					logtext = "[logtext] The scrubber was not functional."
+				var/alarm_dist = get_dist(found_alarm, V)
+				if(alarm_dist > 60)
+					logtext += " The scrubber may be out of transmission range (max 60, was [alarm_dist])."
+				var/V_freq
+				for(var/obj/item/stock_parts/radio/radio_component in V.component_parts)
+					V_freq ||= radio_component.frequency
+				if(isnull(V_freq))
+					logtext += " The scrubber had no frequency set."
+				else if(V_freq != found_alarm.frequency)
+					logtext += " Frequencies did not match (alarm: [found_alarm.frequency], scrubber: [V_freq])."
 				log_bad(logtext)
 				failed = TRUE
 
@@ -275,19 +299,70 @@
 //=======================================================================================
 
 /datum/unit_test/correct_allowed_spawn_test
-	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
+	name = "MAP: All allowed_latejoin_spawns entries should have spawnpoints on map."
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
+
 	var/list/failed = list()
-	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
-		if(!length(spawnpoint.turfs))
+	var/list/check_spawn_flags = list(
+		"SPAWN_FLAG_PRISONERS_CAN_SPAWN"   = SPAWN_FLAG_PRISONERS_CAN_SPAWN,
+		"SPAWN_FLAG_JOBS_CAN_SPAWN"        = SPAWN_FLAG_JOBS_CAN_SPAWN,
+		"SPAWN_FLAG_PERSISTENCE_CAN_SPAWN" = SPAWN_FLAG_PERSISTENCE_CAN_SPAWN
+	)
+
+	// Check that all flags are represented in compiled spawnpoints.
+	// The actual validation will happen at the end of the proc.
+	var/list/all_spawnpoints = decls_repository.get_decls_of_subtype(/decl/spawnpoint)
+	for(var/spawn_type in all_spawnpoints)
+		var/decl/spawnpoint/spawnpoint = all_spawnpoints[spawn_type]
+		// No turfs probably means it isn't mapped; if it's in the allowed list this will be picked up below.
+		if(!length(spawnpoint.get_spawn_turfs()))
+			continue
+		if(spawnpoint.spawn_flags)
+			for(var/spawn_flag in check_spawn_flags)
+				if(spawnpoint.spawn_flags & check_spawn_flags[spawn_flag])
+					check_spawn_flags -= spawn_flag
+		if(!length(check_spawn_flags))
+			break
+
+	// Check if spawn points have any turfs at all associated.
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_latejoin_spawns)
+		if(!length(spawnpoint.get_spawn_turfs()))
 			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
 			failed += spawnpoint.type
 
-	if(length(failed))
-		fail("Some allowed spawnpoints have no spawnpoint turfs:\n[jointext(failed, "\n")]")
-	else
+	// Validate our forced job spawnpoints since they may not be included in allowed_latejoin_spawns.
+	for(var/job_title in SSjobs.titles_to_datums)
+		var/datum/job/job = SSjobs.titles_to_datums[job_title]
+		if(!job.forced_spawnpoint)
+			continue
+		var/decl/spawnpoint/spawnpoint = GET_DECL(job.forced_spawnpoint)
+		if(!spawnpoint.check_job_spawning(job))
+			log_unit_test("Forced spawnpoint for [job_title], [spawnpoint.name], does not permit the job to spawn there.")
+			failed += spawnpoint.type
+		if(!length(spawnpoint.get_spawn_turfs()))
+			log_unit_test("Job [job_title] forces spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
+			failed += spawnpoint.type
+
+	// Observer spawn is special and isn't in the using_map list.
+	var/decl/spawnpoint/observer_spawn = GET_DECL(/decl/spawnpoint/observer)
+	if(!length(observer_spawn.get_spawn_turfs()))
+		log_unit_test("Map has no [observer_spawn.name] spawn turfs.")
+		failed += observer_spawn.type
+	if(!(observer_spawn.spawn_flags & SPAWN_FLAG_GHOSTS_CAN_SPAWN))
+		log_unit_test("[observer_spawn.name] is missing SPAWN_FLAG_GHOSTS_CAN_SPAWN.")
+		failed |= observer_spawn.type
+
+	// Report test outcome.
+	if(!length(failed) && !length(check_spawn_flags))
 		pass("All allowed spawnpoints have spawnpoint turfs.")
+	else
+		var/list/failstring = list()
+		if(length(failed))
+			failstring += "Some allowed spawnpoints have no spawnpoint turfs:\n[jointext(failed, "\n")]"
+		if(length(check_spawn_flags))
+			failstring += "Some required spawn flags are not set on available spawnpoints:\n[jointext(check_spawn_flags, "\n")]"
+		fail(jointext(failstring, "\n"))
 	return 1
 
 //=======================================================================================
@@ -395,7 +470,7 @@
 			pass = FALSE
 
 	if(pass)
-		pass("Have cameras have the c_tag set.")
+		pass("All cameras have the c_tag set.")
 	else
 		fail("One or more cameras do not have the c_tag set.")
 
@@ -688,6 +763,8 @@
 			continue
 		if(is_type_in_list(sort, exempt_junctions))
 			continue
+		if(sort.sort_type in global.using_map.disconnected_disposals_tags)
+			continue
 		var/obj/machinery/disposal/bin = get_bin_from_junction(sort)
 		if(!bin)
 			log_bad("Junction with tag [sort.sort_type] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
@@ -718,6 +795,9 @@
 	is_spawnable_type = FALSE // NO
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 	speed = 100
+
+/obj/structure/disposalholder/unit_test/merge()
+	return FALSE
 
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)

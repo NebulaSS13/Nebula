@@ -13,8 +13,8 @@
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_HOLLOW
-	unacidable = 1 //glass doesn't dissolve in acid
-
+	material = /decl/material/solid/glass
+	abstract_type = /obj/item/chems/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
@@ -37,7 +37,8 @@
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
-		/obj/machinery/radiocarbon_spectrometer
+		/obj/machinery/radiocarbon_spectrometer,
+		/obj/machinery/material_processing/extractor
 	)
 
 /obj/item/chems/glass/examine(mob/user, distance)
@@ -67,20 +68,6 @@
 		return	..()
 	return FALSE
 
-/obj/item/chems/glass/standard_feed_mob(var/mob/user, var/mob/target)
-	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
-		return 1
-	if(user.a_intent == I_HURT)
-		return 1
-	return ..()
-
-/obj/item/chems/glass/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
-	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
-		for(var/R in reagents.reagent_volumes)
-			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)
-
 /obj/item/chems/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity) //Is the container open & are they next to whatever they're clicking?
 		return FALSE //If not, do nothing.
@@ -91,7 +78,7 @@
 		return TRUE
 	if(standard_pour_into(user, target)) //Pouring into another beaker?
 		return TRUE
-	if(standard_feed_mob(user, target))
+	if(handle_eaten_by_mob(user, target) != EATEN_INVALID)
 		return TRUE
 	if(user.a_intent == I_HURT)
 		if(standard_splash_mob(user,target))
@@ -111,15 +98,14 @@
 	desc = "It's a bucket."
 	icon = 'icons/obj/items/bucket.dmi'
 	icon_state = ICON_STATE_WORLD
-	center_of_mass = @"{'x':16,'y':9}"
+	center_of_mass = @'{"x":16,"y":9}'
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = @"[10,20,30,60,120,150,180]"
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
-	unacidable = 0
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	material_force_multiplier = 0.2
 	slot_flags = SLOT_HEAD
 	drop_sound = 'sound/foley/donk1.ogg'
@@ -129,7 +115,7 @@
 	desc = "It's a wooden bucket. How rustic."
 	icon = 'icons/obj/items/wooden_bucket.dmi'
 	volume = 200
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user)
 	if(istype(D, /obj/item/mop))

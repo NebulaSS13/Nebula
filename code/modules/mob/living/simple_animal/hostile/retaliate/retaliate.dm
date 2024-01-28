@@ -42,8 +42,8 @@
 			H.enemies |= enemies
 	return 0
 
-/mob/living/simple_animal/hostile/retaliate/adjustBruteLoss(var/damage)
-	..(damage)
+/mob/living/simple_animal/hostile/retaliate/adjustBruteLoss(var/damage, var/do_update_health = FALSE)
+	..()
 	Retaliate()
 
 /mob/living/simple_animal/hostile/retaliate/buckle_mob(mob/living/M)

@@ -65,7 +65,7 @@
 	desc = "It's a storage unit for tools."
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
-/obj/structure/closet/firecloset/chief/WillContain()
+/obj/structure/closet/toolcloset/WillContain()
 	return list(
 		new /datum/atom_creator/simple(/obj/item/clothing/suit/storage/hazardvest, 40),
 		new /datum/atom_creator/simple(/obj/item/flashlight,                70),
@@ -141,7 +141,7 @@
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	icon = 'icons/obj/closets/bases/wall.dmi'
 
 /obj/structure/closet/hydrant/Initialize(ml, _mat, _reinf_mat)
@@ -170,7 +170,7 @@
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	icon = 'icons/obj/closets/bases/wall.dmi'
 
 /obj/structure/closet/medical_wall/Initialize()
@@ -192,7 +192,7 @@
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	icon = 'icons/obj/closets/bases/wall.dmi'
 
 /obj/structure/closet/shipping_wall/Initialize()

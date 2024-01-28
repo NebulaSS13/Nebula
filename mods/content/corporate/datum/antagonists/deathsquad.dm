@@ -48,7 +48,7 @@
 	l_pocket = /obj/item/pinpointer
 	r_pocket = /obj/item/disk/nuclear
 
-/decl/special_role/deathsquad/equip(var/mob/living/carbon/human/player)
+/decl/special_role/deathsquad/equip_role(var/mob/living/carbon/human/player)
 	if (player.mind == leader)
 		default_outfit = /decl/hierarchy/outfit/commando/leader
 	else

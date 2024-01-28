@@ -8,8 +8,8 @@
 	layer                  = ABOVE_WINDOW_LAYER
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	obj_flags              = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset     = "{'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
-	material               = /decl/material/solid/wood
+	directional_offset     = @'{"SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
+	material               = /decl/material/solid/organic/wood
 	var/tmp/max_notices    = 5
 	var/list/notices
 

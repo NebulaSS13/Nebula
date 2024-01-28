@@ -88,7 +88,7 @@
 	pinged = TRUE
 	show()
 	animate(marker, alpha=255, 0.5 SECOND, 1, LINEAR_EASING)
-	addtimer(CALLBACK(src, .proc/unping), 1 SECOND)
+	addtimer(CALLBACK(src, PROC_REF(unping)), 1 SECOND)
 
 /datum/overmap_contact/proc/unping()
 	animate(marker, alpha=75, 2 SECOND, 1, LINEAR_EASING)

@@ -22,7 +22,7 @@
 						fails++
 						log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is text, must be a type.")
 					else
-						var/decl/cultural_info/culture = ispath(val, /decl/cultural_info) && GET_DECL(val)
+						var/decl/cultural_info/culture = GET_DECL(val)
 						if(!istype(culture))
 							fails++
 							log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
@@ -50,7 +50,7 @@
 						fails++
 						log_bad("Forced cultural value for [species_name] tag '[token]' is text, must be a type.")
 					else
-						var/decl/cultural_info/culture = ispath(val, /decl/cultural_info) && GET_DECL(val)
+						var/decl/cultural_info/culture = GET_DECL(val)
 						if(!istype(culture))
 							fails++
 							log_bad("Forced cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
@@ -77,7 +77,7 @@
 						if(istext(val))
 							log_bad("Available cultural value '[val]' for [species_name] tag '[token]' is text, must be a type.")
 						else
-							var/decl/cultural_info/culture = ispath(val, /decl/cultural_info) && GET_DECL(val)
+							var/decl/cultural_info/culture = GET_DECL(val)
 							if(!istype(culture))
 								fails++
 								log_bad("Available cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")

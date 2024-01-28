@@ -9,7 +9,7 @@
 	desc = "A mechanically activated leg trap. Low-tech, but reliable. Looks like it could really hurt if you set it off."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel
 	can_buckle = 0 //disallow manual un/buckling
 	var/deployed = 0
@@ -90,20 +90,21 @@
 	deployed = 0
 
 /obj/item/beartrap/Crossed(atom/movable/AM)
-	if(deployed && isliving(AM))
-		var/mob/living/L = AM
-		if(!MOVING_DELIBERATELY(L))
-			L.visible_message(
-				"<span class='danger'>[L] steps on \the [src].</span>",
-				"<span class='danger'>You step on \the [src]!</span>",
-				"<b>You hear a loud metallic snap!</b>"
-				)
-			attack_mob(L)
-			if(!buckled_mob)
-				anchored = FALSE
-			deployed = 0
-			update_icon()
 	..()
+	if(!deployed || !isliving(AM))
+		return
+	var/mob/living/L = AM
+	if(MOVING_DELIBERATELY(L))
+		return
+	L.visible_message(
+		SPAN_DANGER("\The [L] steps on \the [src]."),
+		SPAN_DANGER("You step on \the [src]!"),
+		"<b>You hear a loud metallic snap!</b>")
+	attack_mob(L)
+	if(!buckled_mob)
+		anchored = FALSE
+	deployed = 0
+	update_icon()
 
 /obj/item/beartrap/on_update_icon()
 	. = ..()

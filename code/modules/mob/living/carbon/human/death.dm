@@ -17,7 +17,7 @@
 	var/last_loc = loc
 	..(species.gibbed_anim, do_gibs = FALSE)
 	if(last_loc)
-		gibs(last_loc, dna, _fleshcolor = species.get_flesh_colour(src), _bloodcolor = species.get_blood_color(src))
+		gibs(last_loc, _fleshcolor = species.get_flesh_colour(src), _bloodcolor = species.get_blood_color(src))
 
 /mob/living/carbon/human/dust()
 	if(species)
@@ -43,15 +43,18 @@
 	if(SSticker.mode)
 		SSticker.mode.check_win()
 
-	if(config.show_human_death_message)
+	if(get_config_value(/decl/config/toggle/health_show_human_death_message))
 		deathmessage = species.get_death_message(src) || "seizes up and falls limp..."
 	else
 		deathmessage = "no message"
+
 	. = ..(gibbed, deathmessage, show_dead_message)
+
 	if(!gibbed)
 		handle_organs()
 		if(species.death_sound)
 			playsound(loc, species.death_sound, 80, 1, 1)
+
 	handle_hud_list()
 
 /mob/living/carbon/human/proc/is_husked()
@@ -61,9 +64,8 @@
 	if(is_husked())
 		return
 
-	f_style = /decl/sprite_accessory/facial_hair/shaved
-	h_style = /decl/sprite_accessory/hair/bald
-	update_hair(0)
+	set_facial_hairstyle(/decl/sprite_accessory/facial_hair/shaved, skip_update = TRUE)
+	set_hairstyle(/decl/sprite_accessory/hair/bald, skip_update = FALSE)
 
 	mutations.Add(MUTATION_HUSK)
 	for(var/obj/item/organ/external/E in get_external_organs())

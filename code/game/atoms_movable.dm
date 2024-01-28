@@ -10,7 +10,7 @@
 	var/buckle_layer_above = FALSE
 	var/buckle_dir = 0
 	var/buckle_lying = -1             // bed-like behavior, forces mob.lying = buckle_lying if != -1
-	var/buckle_pixel_shift            // ex. @"{'x':0,'y':0,'z':0}" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
+	var/buckle_pixel_shift            // ex. @'{"x":0,"y":0,"z":0}' //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 // require people to be cuffed before being able to buckle. eg: pipes
 	var/buckle_require_same_tile = FALSE
 	var/buckle_sound
@@ -144,7 +144,7 @@
 
 	if (A && yes)
 		A.last_bumped = world.time
-		INVOKE_ASYNC(A, /atom/proc/Bumped, src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
+		INVOKE_ASYNC(A, TYPE_PROC_REF(/atom, Bumped), src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)
@@ -348,7 +348,7 @@
 /atom/movable/proc/can_buckle_mob(var/mob/living/dropping)
 	. = (can_buckle && istype(dropping) && !dropping.buckled && !dropping.anchored && !dropping.buckled_mob && !buckled_mob)
 
-/atom/movable/receive_mouse_drop(atom/dropping, mob/living/user)
+/atom/movable/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && can_buckle_mob(dropping))
 		user_buckle_mob(dropping, user)
@@ -464,5 +464,9 @@
 	if(simulated && !anchored)
 		step_towards(src, S)
 
+/atom/movable/proc/crossed_mob(var/mob/living/victim)
+	return
+
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
+

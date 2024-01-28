@@ -1,5 +1,6 @@
 /mob/living/Initialize()
 
+	current_health = get_max_health()
 	original_fingerprint_seed = sequential_id(/mob)
 	fingerprint               = md5(num2text(original_fingerprint_seed))
 	original_genetic_seed     = sequential_id(/mob)
@@ -185,22 +186,35 @@ default behaviour is:
 
 /mob/living/verb/succumb()
 	set hidden = 1
-	if ((src.health < src.maxHealth/2)) // Health below half of maxhealth.
-		src.adjustBrainLoss(src.health + src.maxHealth * 2) // Deal 2x health in BrainLoss damage, as before but variable.
-		updatehealth()
-		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
+	var/current_max_health = get_max_health()
+	if (current_health < (current_max_health/2)) // Health below half of maxhealth.
+		adjustBrainLoss(current_max_health * 2) // Deal 2x health in BrainLoss damage, as before but variable.
+		to_chat(src, SPAN_NOTICE("You have given up life and succumbed to death."))
 
 /mob/living/proc/update_body(var/update_icons=1)
 	if(update_icons)
 		queue_icon_update()
 
-/mob/living/proc/updatehealth()
-	if(status_flags & GODMODE)
-		health = maxHealth
-		set_stat(CONSCIOUS)
-	else
-		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss()
+/mob/living/proc/should_be_dead()
+	return current_health <= 0
 
+/mob/living/proc/get_total_life_damage()
+	return (getOxyLoss()+getToxLoss()+getFireLoss()+getBruteLoss()+getCloneLoss()+getHalLoss())
+
+/mob/living/proc/update_health()
+	SHOULD_CALL_PARENT(TRUE)
+	if(status_flags & GODMODE)
+		current_health = get_max_health()
+		set_stat(CONSCIOUS)
+		return
+
+	var/max_health = get_max_health()
+	current_health = clamp(max_health-get_total_life_damage(), -(max_health), max_health)
+	if(stat != DEAD && should_be_dead())
+		death()
+		if(!QDELETED(src)) // death() may delete or remove us
+			set_status(STAT_BLIND, 1)
+			set_status(STAT_SILENCE, 0)
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage
@@ -231,19 +245,24 @@ default behaviour is:
 
 	return btemperature
 
-/mob/living/proc/getBruteLoss()
-	return maxHealth - health
+/mob/living/proc/setBruteLoss(var/amount)
+	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
-/mob/living/proc/adjustBruteLoss(var/amount)
-	if (status_flags & GODMODE)
-		return
-	health = clamp(health - amount, 0, maxHealth)
+/mob/living/proc/getBruteLoss()
+	return get_max_health() - current_health
+
+/mob/living/proc/adjustBruteLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(do_update_health)
+		update_health()
 
 /mob/living/proc/getOxyLoss()
 	return 0
 
-/mob/living/proc/adjustOxyLoss(var/amount)
-	return
+/mob/living/proc/adjustOxyLoss(var/damage, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(do_update_health)
+		update_health()
 
 /mob/living/proc/setOxyLoss(var/amount)
 	return
@@ -251,8 +270,8 @@ default behaviour is:
 /mob/living/proc/getToxLoss()
 	return 0
 
-/mob/living/proc/adjustToxLoss(var/amount)
-	adjustBruteLoss(amount * 0.5)
+/mob/living/proc/adjustToxLoss(var/amount, var/do_update_health = TRUE)
+	adjustBruteLoss(amount * 0.5, do_update_health)
 
 /mob/living/proc/setToxLoss(var/amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
@@ -260,8 +279,8 @@ default behaviour is:
 /mob/living/proc/getFireLoss()
 	return
 
-/mob/living/proc/adjustFireLoss(var/amount)
-	adjustBruteLoss(amount * 0.5)
+/mob/living/proc/adjustFireLoss(var/amount, var/do_update_health = TRUE)
+	adjustBruteLoss(amount * 0.5, do_update_health)
 
 /mob/living/proc/setFireLoss(var/amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
@@ -269,17 +288,16 @@ default behaviour is:
 /mob/living/proc/getHalLoss()
 	return 0
 
-/mob/living/proc/adjustHalLoss(var/amount)
-	adjustBruteLoss(amount * 0.5)
+/mob/living/proc/adjustHalLoss(var/amount, var/do_update_health = TRUE)
+	adjustBruteLoss(amount * 0.5, do_update_health)
 
 /mob/living/proc/setHalLoss(var/amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
-/mob/living/proc/getBrainLoss()
-	return 0
-
-/mob/living/proc/adjustBrainLoss(var/amount)
-	return
+/mob/living/proc/adjustBrainLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(do_update_health)
+		update_health()
 
 /mob/living/proc/setBrainLoss(var/amount)
 	return
@@ -290,14 +308,24 @@ default behaviour is:
 /mob/living/proc/setCloneLoss(var/amount)
 	return
 
-/mob/living/proc/adjustCloneLoss(var/amount)
-	return
+/mob/living/proc/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(do_update_health)
+		update_health()
 
-/mob/living/proc/getMaxHealth()
-	return maxHealth
+/mob/living/proc/get_health_ratio() // ratio might be the wrong word
+	return current_health/get_max_health()
 
-/mob/living/proc/setMaxHealth(var/newMaxHealth)
-	maxHealth = newMaxHealth
+/mob/living/proc/get_health_percent(var/sigfig = 1)
+	return round(get_health_ratio()*100, sigfig)
+
+/mob/living/proc/get_max_health()
+	return mob_default_max_health
+
+/mob/living/proc/set_max_health(var/val, var/skip_health_update = FALSE)
+	mob_default_max_health = val
+	if(!skip_health_update)
+		update_health()
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
@@ -344,30 +372,27 @@ default behaviour is:
 
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
-	adjustBruteLoss(-brute)
-	adjustFireLoss(-burn)
-	src.updatehealth()
+/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE, var/update_health = TRUE)
+	adjustBruteLoss(-brute, do_update_health = FALSE)
+	adjustFireLoss(-burn, do_update_health = update_health)
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
-	if(!(status_flags & GODMODE))
-		adjustBruteLoss(brute)
-		adjustFireLoss(burn)
-		updatehealth()
+	if(status_flags & GODMODE)
+		return
+	adjustBruteLoss(brute, do_update_health = FALSE)
+	adjustFireLoss(burn)
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
-	adjustBruteLoss(-brute)
+	adjustBruteLoss(-brute, do_update_health = FALSE)
 	adjustFireLoss(-burn)
-	src.updatehealth()
 
 // damage MANY external organs, in random order
 /mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
 	if(status_flags & GODMODE)	return 0	//godmode
-	adjustBruteLoss(brute)
+	adjustBruteLoss(brute, do_update_health = FALSE)
 	adjustFireLoss(burn)
-	src.updatehealth()
 
 /mob/living/proc/restore_all_organs()
 	return
@@ -470,7 +495,7 @@ default behaviour is:
 			brain.update_icon()
 	..(repair_brain)
 
-/mob/living/proc/UpdateDamageIcon()
+/mob/living/proc/update_damage_icon()
 	return
 
 /mob/living/handle_grabs_after_move(var/turf/old_loc, var/direction)
@@ -719,21 +744,10 @@ default behaviour is:
 	update_icon()
 	return 1
 
-/mob/living/update_icon()
-	..()
-	compile_overlays()
-
-/mob/living/on_update_icon()
-	SHOULD_CALL_PARENT(TRUE)
-	..()
-	cut_overlays()
-	if(auras)
-		for(var/obj/aura/aura as anything in auras)
-			var/image/A = new()
-			A.appearance = aura
-			add_overlay(A)
-
 /mob/living/Destroy()
+	QDEL_NULL(aiming)
+	QDEL_NULL_LIST(_hallucinations)
+	QDEL_NULL_LIST(aimed_at_by)
 	if(stressors) // Do not QDEL_NULL, keys are managed instances.
 		stressors = null
 	if(auras)
@@ -844,8 +858,11 @@ default behaviour is:
 /mob/living/proc/eyecheck()
 	return FLASH_PROTECTION_NONE
 
-/mob/living/proc/get_max_nutrition()
+/mob/living/proc/get_satiated_nutrition()
 	return 500
+
+/mob/living/proc/get_max_nutrition()
+	return 550
 
 /mob/living/proc/set_nutrition(var/amt)
 	nutrition = clamp(amt, 0, get_max_nutrition())
@@ -914,9 +931,6 @@ default behaviour is:
 		else if(skip_delays || do_after(src, 5 SECONDS, user))
 			. = ..()
 
-/mob/living/can_be_injected_by(var/atom/injector)
-	return ..() && (can_inject(null, 0, BP_CHEST) || can_inject(null, 0, BP_GROIN))
-
 /mob/living/handle_grab_damage()
 	..()
 	if(!has_gravity())
@@ -937,19 +951,33 @@ default behaviour is:
 /mob/living/proc/can_do_special_ranged_attack(var/check_flag = TRUE)
 	return TRUE
 
+/mob/living/proc/get_food_satiation()
+	. = get_nutrition() + (get_ingested_reagents()?.total_volume * 10)
+
 /mob/living/proc/get_ingested_reagents()
+	RETURN_TYPE(/datum/reagents)
 	return reagents
 
-/mob/living/proc/should_have_organ(var/organ_check)
-	return FALSE
+/mob/living/proc/should_have_organ(organ_to_check)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	return root_bodytype?.has_organ[organ_to_check]
+
+/// Returns null if the mob's bodytype doesn't have a limb tag by default.
+/// Otherwise, returns the data of the limb instead.
+/mob/living/proc/should_have_limb(limb_to_check)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	return root_bodytype?.has_limbs[limb_to_check]
 
 /mob/living/proc/get_contact_reagents()
+	RETURN_TYPE(/datum/reagents)
 	return reagents
 
 /mob/living/proc/get_injected_reagents()
+	RETURN_TYPE(/datum/reagents)
 	return reagents
 
 /mob/living/proc/get_inhaled_reagents()
+	RETURN_TYPE(/datum/reagents)
 	return reagents
 
 /mob/living/proc/get_adjusted_metabolism(metabolism)
@@ -958,7 +986,7 @@ default behaviour is:
 /mob/living/get_admin_job_string()
 	return "Living"
 
-/mob/living/handle_mouse_drop(atom/over, mob/user)
+/mob/living/handle_mouse_drop(atom/over, mob/user, params)
 	if(!anchored && user == src && user != over)
 
 		if(isturf(over))
@@ -1041,46 +1069,39 @@ default behaviour is:
 	if(hud_used.action_buttons_hidden)
 		if(!hud_used.hide_actions_toggle)
 			hud_used.hide_actions_toggle = new(hud_used)
-			hud_used.hide_actions_toggle.UpdateIcon()
+			hud_used.hide_actions_toggle.update_icon()
 		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
 		client.screen += hud_used.hide_actions_toggle
 		return
 
 	var/button_number = 0
-	for(var/datum/action/A in actions)
+	for(var/datum/action/action in actions)
 		button_number++
-		if(A.button == null)
-			var/obj/screen/action_button/N = new(hud_used)
-			N.owner = A
-			A.button = N
-
-		var/obj/screen/action_button/B = A.button
-
-		B.UpdateIcon()
-
-		B.SetName(A.UpdateName())
-		B.desc = A.UpdateDesc()
-
-		client.screen += B
-		B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
+		if(isnull(action.button))
+			action.button = new /obj/screen/action_button(null, src, null, null, null, action)
+		action.button.SetName(action.UpdateName())
+		action.button.desc = action.UpdateDesc()
+		action.button.update_icon()
+		action.button.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
+		client.screen |= action.button
 
 	if(button_number > 0)
 		if(!hud_used.hide_actions_toggle)
-			hud_used.hide_actions_toggle = new(hud_used)
-			hud_used.hide_actions_toggle.InitialiseIcon(src)
+			hud_used.hide_actions_toggle = new(hud_used, src)
 		hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 		client.screen += hud_used.hide_actions_toggle
 
 /mob/living/handle_fall_effect(var/turf/landing)
 	..()
-	apply_fall_damage(landing)
-	if(client)
-		var/area/A = get_area(landing)
-		if(A)
-			A.alert_on_fall(src)
+	if(istype(landing) && !landing.is_open())
+		apply_fall_damage(landing)
+		if(client)
+			var/area/A = get_area(landing)
+			if(A)
+				A.alert_on_fall(src)
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
-	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
+	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))) * get_fall_height())
 
 /mob/living/proc/get_toxin_resistance()
 	var/decl/species/species = get_species()
@@ -1135,30 +1156,6 @@ default behaviour is:
 /mob/living/proc/get_seconds_until_next_special_ability_string()
 	return ticks2readable(next_special_ability - world.time)
 
-//Get species or synthetic temp if the mob is a FBP/robot. Used when a synthetic mob is exposed to a temp check.
-//Essentially, used when a synthetic mob should act diffferently than a normal type mob.
-/mob/living/get_temperature_threshold(var/threshold)
-	if(isSynthetic())
-		switch(threshold)
-			if(COLD_LEVEL_1)
-				return SYNTH_COLD_LEVEL_1
-			if(COLD_LEVEL_2)
-				return SYNTH_COLD_LEVEL_2
-			if(COLD_LEVEL_3)
-				return SYNTH_COLD_LEVEL_3
-			if(HEAT_LEVEL_1)
-				return SYNTH_HEAT_LEVEL_1
-			if(HEAT_LEVEL_2)
-				return SYNTH_HEAT_LEVEL_2
-			if(HEAT_LEVEL_3)
-				return SYNTH_HEAT_LEVEL_3
-			else
-				CRASH("synthetic get_temperature_threshold() called with invalid threshold value.")
-	var/decl/species/my_species = get_species()
-	if(my_species)
-		return my_species.get_species_temperature_threshold(threshold)
-	return ..()
-
 /mob/living/proc/handle_some_updates()
 	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 	return life_tick <= 5 || !timeofdeath || (timeofdeath >= 5 && (world.time-timeofdeath) <= 10 MINUTES)
@@ -1173,18 +1170,23 @@ default behaviour is:
 	var/decl/species/my_species = get_species()
 	return my_species?.get_footstep(src, footstep_type)
 
-/mob/living/GetIdCards(exceptions = null)
+/mob/living/GetIdCards(list/exceptions)
 	. = ..()
-	var/list/candidates = get_held_items()
-	var/id = get_equipped_item(slot_wear_id_str)
-	if(id)
-		LAZYDISTINCTADD(candidates, id)
-	for(var/atom/movable/candidate in candidates)
-		if(!candidate || is_type_in_list(candidate, exceptions))
-			continue
-		var/list/obj/item/card/id/id_cards = candidate.GetIdCards()
-		if(LAZYLEN(id_cards))
-			LAZYDISTINCTADD(., id_cards)
+	// Grab our equipped ID.
+	// TODO: consider just iterating the entire equipment list here?
+	// Mask/neck slot lanyards or IDs as uniform accessories someday?
+	// TODO: May need handling for a held or equipped item returning
+	// multiple ID cards, currently will take the last one added.
+	var/obj/item/id = get_equipped_item(slot_wear_id_str)
+	if(istype(id))
+		id = id.GetIdCard()
+		if(istype(id) && !is_type_in_list(id, exceptions))
+			LAZYDISTINCTADD(., id)
+	// Go over everything we're holding.
+	for(var/obj/item/thing in get_held_items())
+		thing = thing.GetIdCard()
+		if(istype(thing) && !is_type_in_list(thing, exceptions))
+			LAZYDISTINCTADD(., thing)
 
 /mob/living/proc/update_surgery(update_icons)
 	SHOULD_CALL_PARENT(TRUE)
@@ -1218,3 +1220,92 @@ default behaviour is:
 			LAZYADD(overlays_to_add, image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER))
 		total.overlays |= overlays_to_add
 	set_current_mob_overlay(HO_SURGERY_LAYER, total, update_icons)
+
+/mob/living/get_overhead_text_x_offset()
+	var/decl/bodytype/bodytype = get_bodytype()
+	return ..() + bodytype?.antaghud_offset_x
+
+/mob/living/get_overhead_text_y_offset()
+	var/decl/bodytype/bodytype = get_bodytype()
+	return ..() + bodytype?.antaghud_offset_y
+
+// Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
+/mob/living/proc/get_authentification_rank(if_no_id = "No id", if_no_job = "No job")
+	var/obj/item/card/id/id = GetIdCard()
+	return istype(id) ? (id.position || if_no_job) : if_no_id
+
+//gets assignment from ID or ID inside PDA or PDA itself
+//Useful when player do something with computers
+/mob/living/proc/get_assignment(if_no_id = "No id", if_no_job = "No job")
+	var/obj/item/card/id/id = GetIdCard()
+	if(istype(id))
+		return id.assignment ? id.assignment : if_no_job
+	return if_no_id
+
+//gets name from ID or ID inside PDA or PDA itself
+//Useful when players do something with computers
+/mob/living/proc/get_authentification_name(if_no_id = "Unknown")
+	var/obj/item/card/id/id = GetIdCard()
+	if(istype(id))
+		return id.registered_name
+	return if_no_id
+
+//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
+/mob/living/proc/get_visible_name()
+	var/face_name = get_face_name()
+	var/id_name = get_id_name("")
+	if((face_name == "Unknown") && id_name && (id_name != face_name))
+		return "[face_name] (as [id_name])"
+	return face_name
+
+//Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
+//Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
+/mob/living/proc/get_face_name()
+	if(identity_is_visible())
+		return real_name
+	var/obj/item/clothing/mask = get_equipped_item(slot_wear_mask_str)
+	var/obj/item/clothing/head = get_equipped_item(slot_head_str)
+	if(istype(head) && head.visible_name)
+		return head.visible_name
+	else if(istype(mask) && mask.visible_name)
+		return mask.visible_name
+	else if(get_rig()?.visible_name)
+		return get_rig()?.visible_name
+	return "Unknown"
+
+/mob/living/proc/identity_is_visible()
+	if(!real_name)
+		return FALSE
+	var/obj/item/clothing/mask/mask = get_equipped_item(slot_wear_mask_str)
+	var/obj/item/head = get_equipped_item(slot_head_str)
+	if((mask?.flags_inv & HIDEFACE) || (head?.flags_inv & HIDEFACE))
+		return FALSE
+	if(should_have_limb(BP_HEAD))
+		var/obj/item/organ/external/skull = GET_EXTERNAL_ORGAN(src, BP_HEAD)
+		if(!skull || (skull.status & ORGAN_DISFIGURED))	//Face is unrecognizeable
+			return FALSE
+	return TRUE
+
+//gets name from ID or PDA itself, ID inside PDA doesn't matter
+//Useful when player is being seen by other mobs
+/mob/living/proc/get_id_name(if_no_id = "Unknown")
+	return GetIdCard(exceptions = list(/obj/item/holder))?.registered_name || if_no_id
+
+/mob/living/get_default_temperature_threshold(threshold)
+	if(isSynthetic())
+		switch(threshold)
+			if(COLD_LEVEL_1)
+				return SYNTH_COLD_LEVEL_1
+			if(COLD_LEVEL_2)
+				return SYNTH_COLD_LEVEL_2
+			if(COLD_LEVEL_3)
+				return SYNTH_COLD_LEVEL_3
+			if(HEAT_LEVEL_1)
+				return SYNTH_HEAT_LEVEL_1
+			if(HEAT_LEVEL_2)
+				return SYNTH_HEAT_LEVEL_2
+			if(HEAT_LEVEL_3)
+				return SYNTH_HEAT_LEVEL_3
+			else
+				CRASH("synthetic get_default_temperature_threshold() called with invalid threshold value.")
+	return ..()

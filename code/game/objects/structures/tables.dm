@@ -8,18 +8,19 @@
 	desc = "It's a table, for putting things on. Or standing on, if you really want to."
 	density = TRUE
 	anchored = TRUE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	layer = TABLE_LAYER
 	throwpass = TRUE
 	// Note that mob_offset also determines whether you can walk from one table to another without climbing.
 	// TODO: add 1px step-up?
 	mob_offset = 12
 	handle_generic_blending = TRUE
-	maxhealth = 10
+	max_health = 10
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
+	structure_flags = STRUCTURE_FLAG_SURFACE
 
 	var/can_flip = TRUE
 	var/is_flipped = FALSE
@@ -464,7 +465,7 @@
 			return TRUE
 	return TRUE
 
-/obj/structure/table/receive_mouse_drop(atom/dropping, mob/user)
+/obj/structure/table/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.try_unequip(dropping))
 		var/obj/item/I = dropping
@@ -659,8 +660,8 @@
 /obj/structure/table/gamblingtable
 	icon_state = "gamble_preview"
 	felted = TRUE
-	material =       /decl/material/solid/wood/walnut
-	reinf_material = /decl/material/solid/wood/walnut
+	material =       /decl/material/solid/organic/wood/walnut
+	reinf_material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/table/glass
 	icon_state = "plain_preview"
@@ -674,81 +675,81 @@
 
 /obj/structure/table/holotable
 	icon_state = "holo_preview"
+	holographic = TRUE
 	color = COLOR_OFF_WHITE
 	material = /decl/material/solid/metal/aluminium/holographic
 	reinf_material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/structure/table/holo_plastictable
 	icon_state = "holo_preview"
+	holographic = TRUE
 	color = COLOR_OFF_WHITE
-	material = /decl/material/solid/plastic/holographic
-	reinf_material = /decl/material/solid/plastic/holographic
+	material = /decl/material/solid/organic/plastic/holographic
+	reinf_material = /decl/material/solid/organic/plastic/holographic
 
 /obj/structure/table/holo_woodentable
+	holographic = TRUE
 	icon_state = "holo_preview"
-
-/obj/structure/table/holo_woodentable/Initialize()
-	material = /decl/material/solid/wood/holographic
-	reinf_material = /decl/material/solid/wood/holographic
-	. = ..()
+	material = /decl/material/solid/organic/wood/holographic
+	reinf_material = /decl/material/solid/organic/wood/holographic
 
 //wood wood wood
 /obj/structure/table/woodentable
 	icon_state = "solid_preview"
 	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/wood
-	reinf_material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
+	reinf_material = /decl/material/solid/organic/wood
 
 /obj/structure/table/woodentable/mahogany
 	color = WOOD_COLOR_RICH
-	material =       /decl/material/solid/wood/mahogany
-	reinf_material = /decl/material/solid/wood/mahogany
+	material =       /decl/material/solid/organic/wood/mahogany
+	reinf_material = /decl/material/solid/organic/wood/mahogany
 
 /obj/structure/table/woodentable/maple
 	color = WOOD_COLOR_PALE
-	material =       /decl/material/solid/wood/maple
-	reinf_material = /decl/material/solid/wood/maple
+	material =       /decl/material/solid/organic/wood/maple
+	reinf_material = /decl/material/solid/organic/wood/maple
 
 /obj/structure/table/woodentable/ebony
 	color = WOOD_COLOR_BLACK
-	material =       /decl/material/solid/wood/ebony
-	reinf_material = /decl/material/solid/wood/ebony
+	material =       /decl/material/solid/organic/wood/ebony
+	reinf_material = /decl/material/solid/organic/wood/ebony
 
 /obj/structure/table/woodentable/walnut
 	color = WOOD_COLOR_CHOCOLATE
-	material =       /decl/material/solid/wood/walnut
-	reinf_material = /decl/material/solid/wood/walnut
+	material =       /decl/material/solid/organic/wood/walnut
+	reinf_material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/table/woodentable_reinforced
 	icon_state = "reinf_preview"
 	color = WOOD_COLOR_GENERIC
-	material =                  /decl/material/solid/wood
-	reinf_material =            /decl/material/solid/wood
-	additional_reinf_material = /decl/material/solid/wood
+	material =                  /decl/material/solid/organic/wood
+	reinf_material =            /decl/material/solid/organic/wood
+	additional_reinf_material = /decl/material/solid/organic/wood
 
 /obj/structure/table/woodentable_reinforced/walnut
 	color = WOOD_COLOR_CHOCOLATE
-	material =                  /decl/material/solid/wood/walnut
-	reinf_material =            /decl/material/solid/wood/walnut
-	additional_reinf_material = /decl/material/solid/wood/walnut
+	material =                  /decl/material/solid/organic/wood/walnut
+	reinf_material =            /decl/material/solid/organic/wood/walnut
+	additional_reinf_material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/table/woodentable_reinforced/walnut/maple
-	additional_reinf_material = /decl/material/solid/wood/maple
+	additional_reinf_material = /decl/material/solid/organic/wood/maple
 
 /obj/structure/table/woodentable_reinforced/mahogany
 	color = WOOD_COLOR_RICH
-	material =                  /decl/material/solid/wood/mahogany
-	reinf_material =            /decl/material/solid/wood/mahogany
-	additional_reinf_material = /decl/material/solid/wood/mahogany
+	material =                  /decl/material/solid/organic/wood/mahogany
+	reinf_material =            /decl/material/solid/organic/wood/mahogany
+	additional_reinf_material = /decl/material/solid/organic/wood/mahogany
 
 /obj/structure/table/woodentable_reinforced/mahogany/walnut
-	additional_reinf_material = /decl/material/solid/wood/walnut
+	additional_reinf_material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/table/woodentable_reinforced/ebony
 	color = WOOD_COLOR_BLACK
-	material =                  /decl/material/solid/wood/ebony
-	reinf_material =            /decl/material/solid/wood/ebony
-	additional_reinf_material = /decl/material/solid/wood/ebony
+	material =                  /decl/material/solid/organic/wood/ebony
+	reinf_material =            /decl/material/solid/organic/wood/ebony
+	additional_reinf_material = /decl/material/solid/organic/wood/ebony
 
 /obj/structure/table/woodentable_reinforced/ebony/walnut
-	additional_reinf_material = /decl/material/solid/wood/walnut
+	additional_reinf_material = /decl/material/solid/organic/wood/walnut

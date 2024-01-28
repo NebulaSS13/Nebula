@@ -3,6 +3,7 @@
 	hud_type = /datum/hud/animal
 
 /datum/hud/animal/FinalizeInstantiation()
-	mymob.client.screen = list()
-	action_intent = new /obj/screen/intent()
-	mymob.client.screen |= action_intent
+	action_intent = new(null, mymob)
+	adding += action_intent
+	..()
+

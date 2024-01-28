@@ -8,16 +8,23 @@
 	var/list/passed_designs =    list()
 	var/failed_count = 0
 
+	var/list/stack_types = list(
+		null,
+		/obj/item/stack/material/strut,
+		/obj/item/stack/material/ore
+	)
+
 	for(var/decl/material/mat_datum as anything in SSmaterials.materials)
 
 		var/list/recipes = list()
-		for(var/thing in mat_datum.get_recipes())
-			if(istype(thing, /datum/stack_recipe))
-				recipes += thing
-			else if(istype(thing, /datum/stack_recipe_list))
-				var/datum/stack_recipe_list/recipe_stack = thing
-				if(length(recipe_stack.recipes))
-					recipes |= recipe_stack.recipes
+		for(var/stack_type in stack_types)
+			for(var/thing in mat_datum.get_recipes(stack_type))
+				if(istype(thing, /datum/stack_recipe))
+					recipes += thing
+				else if(istype(thing, /datum/stack_recipe_list))
+					var/datum/stack_recipe_list/recipe_stack = thing
+					if(length(recipe_stack.recipes))
+						recipes |= recipe_stack.recipes
 
 		for(var/datum/stack_recipe/recipe as anything in recipes)
 			var/obj/product = recipe.spawn_result()

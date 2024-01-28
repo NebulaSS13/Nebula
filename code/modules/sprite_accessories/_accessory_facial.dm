@@ -9,14 +9,18 @@
 /decl/sprite_accessory/facial_hair
 	abstract_type = /decl/sprite_accessory/facial_hair
 	icon = 'icons/mob/human_races/species/human/facial.dmi'
+	hidden_by_gear_slot         = slot_head_str
+	hidden_by_gear_flag         = BLOCK_HEAD_HAIR
+	body_parts                  = list(BP_HEAD)
 
-/decl/sprite_accessory/facial_hair/get_validatable_icon_state()
-	return "[icon_state]_s"
+/decl/sprite_accessory/facial_hair/get_hidden_substitute()
+	return GET_DECL(/decl/sprite_accessory/facial_hair/shaved)
 
 /decl/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
 	icon_state = "bald"
-	required_gender = null
+	bodytypes_allowed = null
+	bodytypes_denied = null
 	species_allowed = null
 	subspecies_allowed = null
 	bodytype_categories_allowed = null

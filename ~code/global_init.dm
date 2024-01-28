@@ -14,7 +14,7 @@
 var/global_init = new /datum/global_init()
 
 /datum/global_init/New()
-	load_configuration()
+	SSconfiguration.load_all_configuration()
 	callHook("global_init")
 	qdel(src) //we're done
 

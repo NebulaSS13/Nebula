@@ -1,11 +1,12 @@
 /obj/item/mech_equipment/mounted_system/rcd
 	icon_state = "mech_rcd"
-	holding_type = /obj/item/rcd/mounted
+	holding = /obj/item/rcd/mounted
+	origin_tech = @'{"engineering":4,"materials":3,"powerstorage":1}'
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
@@ -38,21 +39,24 @@
 
 /obj/item/mech_equipment/mounted_system/extinguisher
 	icon_state = "mech_exting"
-	holding_type = /obj/item/chems/spray/extinguisher/mech
+	holding = /obj/item/chems/spray/extinguisher/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
+	origin_tech = @'{"engineering":1,"materials":1}'
 
 /obj/item/mech_equipment/atmos_shields
 	icon_state = "mech_atmoshield_off"
 	name = "exosuit airshield"
-	desc = "A 'Zephyros' portable Atmospheric Isolation and Retention Screen. It keeps air where it should be... Most of the time. Press ctrl-click to switch modes"
+	desc = "A 'Zephyros' portable Atmospheric Isolation and Retention Screen. It keeps air where it should be... most of the time. Press ctrl-click to switch modes."
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
-	var/list/segments
 	equipment_delay = 0.25 SECONDS
+	origin_tech = @'{"engineering":2,"powerstorage":2,"materials":3}'
+	var/list/segments
 	var/current_mode = 0  //0 barrier, 1 bubble
 	var/shield_range = 2
 
+// TODO: convert to alt interaction.
 /obj/item/mech_equipment/atmos_shields/CtrlClick(mob/user)
 	if (owner && ((user in owner.pilots) || user == owner))
 		if (active)
@@ -71,7 +75,7 @@
 	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	density = FALSE
-	invisibility = 0
+	invisibility = INVISIBILITY_NONE
 	atmos_canpass = CANPASS_NEVER
 	var/obj/item/mech_equipment/atmos_shields/shields
 	color = COLOR_SABER_BLUE
@@ -140,14 +144,14 @@
 			if(istype(MS))
 				MS.shields = src
 				segments += MS
-				events_repository.register(/decl/observ/moved, MS, src, .proc/on_moved)
+				events_repository.register(/decl/observ/moved, MS, src, PROC_REF(on_moved))
 
 		passive_power_use = 0.8 KILOWATTS * segments.len
 
 		update_icon()
 		owner.update_icon()
-		events_repository.register(/decl/observ/moved, owner, src, .proc/on_moved)
-		events_repository.register(/decl/observ/dir_set, owner, src, .proc/on_turned)
+		events_repository.register(/decl/observ/moved, owner, src, PROC_REF(on_moved))
+		events_repository.register(/decl/observ/dir_set, owner, src, PROC_REF(on_turned))
 
 /obj/item/mech_equipment/atmos_shields/on_update_icon()
 	. = ..()
@@ -156,13 +160,13 @@
 /obj/item/mech_equipment/atmos_shields/deactivate()
 	for(var/obj/effect/mech_shield/MS in segments)
 		if(istype(MS))
-			events_repository.unregister(/decl/observ/moved, MS, src, .proc/on_moved)
+			events_repository.unregister(/decl/observ/moved, MS, src, PROC_REF(on_moved))
 	if(segments.len)
 		owner.visible_message(SPAN_WARNING("The energy shields in front of \the [owner] disappear!"))
 	QDEL_NULL_LIST(segments)
 	passive_power_use = 0
-	events_repository.unregister(/decl/observ/moved, owner, src, .proc/on_moved)
-	events_repository.unregister(/decl/observ/dir_set, owner, src, .proc/on_turned)
+	events_repository.unregister(/decl/observ/moved, owner, src, PROC_REF(on_moved))
+	events_repository.unregister(/decl/observ/dir_set, owner, src, PROC_REF(on_turned))
 	. = ..()
 	update_icon()
 	owner.update_icon()

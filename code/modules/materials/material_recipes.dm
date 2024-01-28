@@ -1,34 +1,45 @@
-/decl/material/proc/get_recipes(var/reinf_mat)
-	var/key = reinf_mat || "base"
-	if(!LAZYACCESS(recipes,key))
-		LAZYSET(recipes,key,generate_recipes(reinf_mat))
+/decl/material/proc/get_recipes(stack_type, reinf_mat)
+	var/key = "[reinf_mat || "base"]-[stack_type || "general"]"
+	if(!LAZYACCESS(recipes, key))
+		LAZYSET(recipes, key, generate_recipes(stack_type, reinf_mat))
 	return recipes[key]
-
-/decl/material/proc/get_strut_recipes(var/reinf_mat)
-	var/key = reinf_mat || "base"
-	. = LAZYACCESS(strut_recipes, key)
-	if(!islist(.))
-		LAZYSET(strut_recipes, key, generate_strut_recipes(reinf_mat))
-		. = LAZYACCESS(strut_recipes, key)
 
 /decl/material/proc/create_recipe_list(base_type)
 	. = list()
 	for(var/recipe_type in subtypesof(base_type))
 		. += new recipe_type(src)
 
-/decl/material/proc/generate_recipes(var/reinforce_material)
 
-	if(phase_at_temperature() != MAT_PHASE_SOLID)
-		return list()
+/decl/material/proc/generate_recipes(stack_type, reinforce_material)
 
+	// By default we don't let anything be crafted with ore, as it's too raw.
+	// We make an exception for clay as it is being moulded by hand.
 	. = list()
+	if(ispath(stack_type, /obj/item/stack/material/ore) || phase_at_temperature() != MAT_PHASE_SOLID)
+		return
+
+	// Struts have their own recipe set, so we return early for them.
+	if(ispath(stack_type, /obj/item/stack/material/strut))
+		if(wall_support_value >= 10)
+			. += new/datum/stack_recipe/furniture/girder(src)
+			. += new/datum/stack_recipe/furniture/ladder(src)
+		. += new/datum/stack_recipe/railing(src)
+		. += new/datum/stack_recipe/furniture/wall_frame(src)
+		. += new/datum/stack_recipe/furniture/table_frame(src)
+		. += new/datum/stack_recipe/furniture/rack(src)
+		. += new/datum/stack_recipe/butcher_hook(src)
+		. += new/datum/stack_recipe/furniture/bed(src)
+		return
+
+	// We assume a non-ore non-strut stack type is a general type that can use general recipes.
 	if(opacity < 0.6)
 		. += new/datum/stack_recipe/furniture/borderwindow(src, reinforce_material)
 		. += new/datum/stack_recipe/furniture/fullwindow(src, reinforce_material)
 		if(integrity > 75 || reinforce_material)
 			. += new/datum/stack_recipe/furniture/windoor(src, reinforce_material)
 
-	if(reinforce_material)	//recipes below don't support composite materials
+	//recipes below don't support composite materials
+	if(reinforce_material)
 		return
 
 	if(hardness >= MAT_VALUE_FLEXIBLE + 10)
@@ -83,17 +94,3 @@
 					coin_recipes += new /datum/stack_recipe/coin(src, null, denomination)
 		if(length(coin_recipes))
 			. += new/datum/stack_recipe_list("antique coins", coin_recipes)
-
-/decl/material/proc/generate_strut_recipes(var/reinforce_material)
-	. = list()
-
-	if(wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-		. += new/datum/stack_recipe/furniture/ladder(src)
-	. += new/datum/stack_recipe/railing(src)
-	. += new/datum/stack_recipe/furniture/wall_frame(src)
-	. += new/datum/stack_recipe/furniture/table_frame(src)
-	. += new/datum/stack_recipe/furniture/rack(src)
-	. += new/datum/stack_recipe/butcher_hook(src)
-	. += new/datum/stack_recipe/furniture/bed(src)
-	. += new/datum/stack_recipe/furniture/machine(src)

@@ -18,7 +18,7 @@
 
 /datum/level_data/planetoid/exoplanet/volcanic
 	base_area = /area/exoplanet/volcanic
-	base_turf = /turf/exterior/volcanic
+	base_turf = /turf/exterior/rock/volcanic
 	exterior_atmosphere = null
 	exterior_atmos_temp = null
 	level_generators = list(
@@ -111,7 +111,7 @@
 /datum/random_map/noise/exoplanet/volcanic
 	descriptor           = "volcanic exoplanet"
 	smoothing_iterations = 5
-	land_type            = /turf/exterior/volcanic
+	land_type            = /turf/exterior/rock/volcanic
 	water_type           = /turf/exterior/lava
 	water_level_min      = 5
 	water_level_max      = 6
@@ -119,23 +119,7 @@
 	flora_prob           = 3
 	grass_prob           = 0
 	large_flora_prob     = 0
-
-//Squashing most of 1 tile lava puddles
-/datum/random_map/noise/exoplanet/volcanic/cleanup()
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
-			var/current_cell = get_map_cell(x,y)
-			if(noise2value(map[current_cell]) < water_level)
-				continue
-			var/frendos
-			for(var/dx in list(-1,0,1))
-				for(var/dy in list(-1,0,1))
-					var/tmp_cell = get_map_cell(x+dx,y+dy)
-					if(tmp_cell && tmp_cell != current_cell && noise2value(map[tmp_cell]) >= water_level)
-						frendos = 1
-						break
-			if(!frendos)
-				map[current_cell] = 1
+	smooth_single_tiles  = TRUE
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas
@@ -143,4 +127,4 @@
 
 /area/exoplanet/volcanic
 	forced_ambience = list('sound/ambience/magma.ogg')
-	base_turf       = /turf/exterior/volcanic
+	base_turf       = /turf/exterior/rock/volcanic

@@ -54,7 +54,7 @@
 	if(!check_general_join_blockers(joining, job))
 		return
 
-	log_debug("Player: [joining] is now offsite rank: [job.title] ([name]), JCP:[job.current_positions], JPL:[job.total_positions]")
+	log_debug("Player: [joining] is now offsite job: [job.title] ([name]), JCP:[job.current_positions], JPL:[job.total_positions]")
 	joining.faction = name
 	job.current_positions++
 
@@ -74,7 +74,7 @@
 
 			// We need to make sure to use the abstract instance here; it's not the same as the one we were passed.
 			character.skillset.obtain_from_client(SSjobs.get_by_path(job.type), character.client)
-			job.equip(character, "")
+			job.equip_job(character)
 			job.apply_fingerprints(character)
 			var/list/spawn_in_storage = SSjobs.equip_custom_loadout(character, job)
 			if(spawn_in_storage)
@@ -113,7 +113,7 @@
 		log_and_message_admins("has joined the round as offsite role [character.mind.assigned_role].", character)
 		callHook("submap_join", list(job, character))
 		if(character.cannot_stand()) equip_wheelchair(character)
-		job.post_equip_rank(character, job.title)
+		job.post_equip_job_title(character, job.title)
 		qdel(joining)
 
 	return character

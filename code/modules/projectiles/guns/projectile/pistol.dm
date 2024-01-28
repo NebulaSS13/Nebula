@@ -32,7 +32,7 @@
 	caliber = CALIBER_PISTOL_SMALL
 	silenced = 0
 	fire_delay = 4
-	origin_tech = "{'combat':2,'materials':2,'esoteric':8}"
+	origin_tech = @'{"combat":2,"materials":2,"esoteric":8}'
 	magazine_type = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 

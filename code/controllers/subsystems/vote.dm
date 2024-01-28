@@ -69,7 +69,7 @@ SUBSYSTEM_DEF(vote)
 		return FALSE
 
 	if(last_started_time != null && !(is_admin(creator) || automatic))
-		var/next_allowed_time = (last_started_time + config.vote_delay)
+		var/next_allowed_time = (last_started_time + get_config_value(/decl/config/num/vote_delay))
 		if(next_allowed_time > world.time)
 			return FALSE
 
@@ -176,7 +176,7 @@ SUBSYSTEM_DEF(vote)
 
 // Helper proc for determining whether addantag vote can be called.
 /datum/controller/subsystem/vote/proc/is_addantag_allowed(mob/creator, automatic)
-	if(!config.allow_extra_antags)
+	if(!get_config_value(/decl/config/toggle/allow_extra_antags))
 		return 0
 	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
 	if((GAME_STATE <= RUNLEVEL_SETUP) || !SSticker.mode)

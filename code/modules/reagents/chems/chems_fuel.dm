@@ -4,7 +4,8 @@
 	taste_description = "gross metal"
 	color = "#660000"
 	touch_met = 5
-	fuel_value = 1
+	ignition_point = T0C+150
+	accelerant_value = FUEL_VALUE_ACCELERANT + 0.2
 	burn_product = /decl/material/gas/carbon_monoxide
 	gas_flags = XGM_GAS_FUEL
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
@@ -45,5 +46,5 @@
 	metabolism = REM * 0.2
 	touch_met = 5
 	value = 1.2
-	fuel_value = 1.2
+	accelerant_value = FUEL_VALUE_ACCELERANT + 0.5
 	uid = "chem_hydrazine"

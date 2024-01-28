@@ -8,7 +8,7 @@
 	throw_speed = 4
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	origin_tech = "{'magnets':2,'combat':1}"
+	origin_tech = @'{"magnets":2,"combat":1}'
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -126,7 +126,7 @@
 	name = "advanced flash"
 	desc = "A device that produces a very bright flash of light. This is an advanced and expensive version often issued to VIPs."
 	icon = 'icons/obj/items/device/flash_advanced.dmi'
-	origin_tech = "{'combat':2,'magnets':2}"
+	origin_tech = @'{"combat":2,"magnets":2}'
 	str_min = 3
 	str_max = 8
 	material = /decl/material/solid/metal/steel

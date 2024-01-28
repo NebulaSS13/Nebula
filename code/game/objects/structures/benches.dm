@@ -35,8 +35,8 @@
 /obj/structure/table/bench/wooden
 	icon_state = "solid_preview"
 	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/wood
-	reinf_material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
+	reinf_material = /decl/material/solid/organic/wood
 
 /obj/structure/table/bench/padded
 	icon_state = "padded_preview"
@@ -48,3 +48,7 @@
 	color = COLOR_DEEP_SKY_BLUE
 	alpha = 77
 	reinf_material = /decl/material/solid/glass
+
+/obj/structure/table/bench/marble
+	color = COLOR_OFF_WHITE
+	reinf_material = /decl/material/solid/stone/marble

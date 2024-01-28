@@ -311,3 +311,15 @@ var/global/list/bodypart_coverage_cache = list()
 /proc/get_sorted_mob_list()
 	. = sortTim(SSmobs.mob_list.Copy(), /proc/cmp_name_asc)
 	. = sortTim(., /proc/cmp_mob_sortvalue_asc)
+
+/proc/transfer_key_from_mob_to_mob(var/mob/from_mob, var/mob/to_mob)
+	if(!from_mob || !from_mob.key || !to_mob)
+		return FALSE
+	var/initial_key = from_mob.key
+	if(to_mob.key)
+		to_mob.ghostize()
+	if(from_mob.mind)
+		from_mob.mind.transfer_to(to_mob)
+	if(initial_key && to_mob.key != initial_key)
+		to_mob.key = initial_key
+	return to_mob.key == initial_key

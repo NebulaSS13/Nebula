@@ -7,12 +7,11 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	obj_flags = OBJ_FLAG_HOLLOW
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("burnt", "singed")
 	lit_heat = 1500
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	material = /decl/material/solid/organic/plastic
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/tmp/max_fuel = 5
 
 /obj/item/flame/lighter/Initialize()
@@ -30,11 +29,13 @@
 /obj/item/flame/lighter/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 
-/obj/item/flame/lighter/proc/light(mob/user)
+/obj/item/flame/lighter/light(mob/user)
 	if(submerged())
-		to_chat(user, "<span class='warning'>You cannot light \the [src] underwater.</span>")
+		to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
 		return
-	lit = 1
+	if(lit)
+		return
+	..()
 	update_icon()
 	light_effects(user)
 	set_light(2, l_color = COLOR_PALE_ORANGE)
@@ -94,14 +95,14 @@
 			else
 				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
 			return
-	..()
+	return ..()
 
 /obj/item/flame/lighter/Process()
 	if(!submerged() && reagents.has_reagent(/decl/material/liquid/fuel))
 		if(ismob(loc) && prob(10) && REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) < 1)
 			to_chat(loc, "<span class='warning'>\The [src]'s flame flickers.</span>")
 			set_light(0)
-			addtimer(CALLBACK(src, .atom/proc/set_light, 2), 4)
+			addtimer(CALLBACK(src, TYPE_PROC_REF(.atom, set_light), 2), 4)
 		reagents.remove_reagent(/decl/material/liquid/fuel, 0.05)
 	else
 		extinguish()
@@ -189,6 +190,8 @@
 		O.reagents.trans_to_obj(src, max_fuel)
 		to_chat(user, "<span class='notice'>You refuel [src] from \the [O]</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		return TRUE
+	return ..()
 
 /obj/item/flame/lighter/zippo/black
 	color = COLOR_DARK_GRAY

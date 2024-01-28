@@ -13,10 +13,6 @@ if(!click_handlers) { \
 /mob/Destroy()
 	QDEL_NULL(status_markers)
 	QDEL_NULL_LIST(click_handlers)
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	if(hattable?.hat)
-		hattable.hat.dropInto(get_turf(src))
-		hattable.hat = null
 	. = ..()
 
 var/global/const/CLICK_HANDLER_NONE                 = BITFLAG(0)
@@ -32,11 +28,11 @@ var/global/const/CLICK_HANDLER_ALL                  = (CLICK_HANDLER_NONE|CLICK_
 	..()
 	src.user = user
 	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
-		events_repository.register(/decl/observ/logged_out, user, src, /datum/click_handler/proc/OnMobLogout)
+		events_repository.register(/decl/observ/logged_out, user, src, TYPE_PROC_REF(/datum/click_handler, OnMobLogout))
 
 /datum/click_handler/Destroy()
 	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
-		events_repository.unregister(/decl/observ/logged_out, user, src, /datum/click_handler/proc/OnMobLogout)
+		events_repository.unregister(/decl/observ/logged_out, user, src, TYPE_PROC_REF(/datum/click_handler, OnMobLogout))
 	user = null
 	. = ..()
 

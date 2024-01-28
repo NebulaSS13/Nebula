@@ -3,8 +3,7 @@
 	real_name = "Shade"
 	desc = "A bound spirit"
 	icon = 'icons/mob/simple_animal/shade.dmi'
-	maxHealth = 50
-	health = 50
+	mob_default_max_health = 50
 	universal_speak = TRUE
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
@@ -34,6 +33,9 @@
 	skin_material = null
 	skin_amount =   0
 
+/mob/living/simple_animal/shade/check_has_mouth()
+	return FALSE
+
 /obj/item/natural_weapon/shade
 	name = "foul touch"
 	attack_verb = list("drained")
@@ -43,13 +45,7 @@
 /mob/living/simple_animal/shade/on_defilement()
 	return
 
-/mob/living/simple_animal/shade/Life()
-	. = ..()
-	OnDeathInLife()
-
-/mob/living/simple_animal/shade/proc/OnDeathInLife()
-	if(stat == DEAD)
-		new /obj/item/ectoplasm (src.loc)
-		visible_message(SPAN_WARNING("\The [src] lets out a contented sigh as their form unwinds."))
-		ghostize()
-		qdel(src)
+/mob/living/simple_animal/shade/death(gibbed, deathmessage, show_dead_message)
+	new /obj/item/ectoplasm (src.loc)
+	..(deathmessage = "lets out a contented sigh as their form unwinds", show_dead_message = "You have been released from your earthly binds.")
+	qdel(src)

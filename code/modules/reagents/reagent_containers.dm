@@ -4,8 +4,9 @@
 	icon = 'icons/obj/items/chem/container.dmi'
 	icon_state = null
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
+	abstract_type = /obj/item/chems
 
 	var/base_name
 	var/base_desc
@@ -24,6 +25,14 @@
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
+/obj/item/chems/set_custom_name(var/new_name)
+	base_name = new_name
+	update_container_name()
+
+/obj/item/chems/set_custom_desc(var/new_desc)
+	base_desc = new_desc
+	update_container_desc()
+
 /obj/item/chems/proc/cannot_interact(mob/user)
 	if(!CanPhysicallyInteract(user))
 		to_chat(usr, SPAN_WARNING("You're in no condition to do that!"))
@@ -41,7 +50,7 @@
 /obj/item/chems/on_update_icon()
 	. = ..()
 	if(detail_state)
-		add_overlay(overlay_image(icon, "[icon_state][detail_state]", detail_color || COLOR_WHITE, RESET_COLOR))
+		add_overlay(overlay_image(icon, "[initial(icon_state)][detail_state]", detail_color || COLOR_WHITE, RESET_COLOR))
 
 /obj/item/chems/proc/update_container_name()
 	var/newname = get_base_name()
@@ -68,6 +77,7 @@
 	desc = new_desc_list.Join("\n")
 
 /obj/item/chems/on_reagent_change()
+	..()
 	update_container_name()
 	update_container_desc()
 	update_icon()
@@ -142,69 +152,6 @@
 
 	reagents.splash(target, reagents.total_volume)
 	return 1
-
-/obj/item/chems/proc/self_feed_message(var/mob/user)
-	to_chat(user, SPAN_NOTICE("You eat \the [src]"))
-
-/obj/item/chems/proc/other_feed_message_start(var/mob/user, var/mob/target)
-	user.visible_message(SPAN_NOTICE("[user] is trying to feed [target] \the [src]!"))
-
-/obj/item/chems/proc/other_feed_message_finish(var/mob/user, var/mob/target)
-	user.visible_message(SPAN_NOTICE("[user] has fed [target] \the [src]!"))
-
-/obj/item/chems/proc/feed_sound(var/mob/user)
-	return
-
-/obj/item/chems/proc/standard_feed_mob(var/mob/user, var/mob/target) // This goes into attack
-	if(!istype(target))
-		return 0
-
-	if(!reagents || !reagents.total_volume)
-		to_chat(user, SPAN_NOTICE("\The [src] is empty."))
-		return 1
-
-	// only carbons can eat
-	if(iscarbon(target))
-		if(target == user)
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				if(!H.check_has_mouth())
-					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
-					return
-				var/obj/item/blocked = H.check_mouth_coverage()
-				if(blocked)
-					to_chat(user, SPAN_NOTICE("\The [blocked] is in the way!"))
-					return
-
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
-			self_feed_message(user)
-			reagents.trans_to_mob(user, issmall(user) ? CEILING(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
-			feed_sound(user)
-			add_trace_DNA(user)
-			return 1
-
-
-		else
-			if(!user.can_force_feed(target, src))
-				return
-
-			other_feed_message_start(user, target)
-
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_mob(user, target))
-				return
-
-			other_feed_message_finish(user, target)
-
-			var/contained = REAGENT_LIST(src)
-			admin_attack_log(user, target, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
-
-			reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
-			feed_sound(user)
-			add_trace_DNA(target)
-			return 1
-
-	return 0
 
 /obj/item/chems/proc/standard_pour_into(var/mob/user, var/atom/target) // This goes into afterattack and yes, it's atom-level
 	if(!target.reagents)

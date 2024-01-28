@@ -106,13 +106,10 @@
 "an" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bridge)
@@ -138,13 +135,10 @@
 "at" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "casino_bridge";
 	name = "Casino Bridge Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bridge)
@@ -192,7 +186,6 @@
 /area/casino/casino_maintenance)
 "aD" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "casino_dock_outer";
 	name = "Docking Port Airlock"
 	},
@@ -284,7 +277,6 @@
 "aU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "casino_dock_inner";
 	name = "Docking Port Airlock"
 	},
@@ -926,7 +918,6 @@
 "cD" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "casino_shuttle_control"
 	},
 /obj/machinery/door/firedoor,
@@ -1813,13 +1804,10 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -1907,12 +1895,9 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/blast/regular{
-	density = FALSE;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -1949,9 +1934,7 @@
 "fA" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
-	density = FALSE;
 	dir = 8;
-	icon_state = "pdoor0";
 	id_tag = "casino_main"
 	},
 /obj/machinery/door/firedoor,
@@ -2153,13 +2136,10 @@
 /obj/machinery/door/airlock{
 	name = "Casino"
 	},
-/obj/machinery/door/blast/regular{
-	density = FALSE;
+/obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "casino_checkpoint";
 	name = "Casino Checkpoint Blast Doors";
-	opacity = FALSE
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
@@ -4574,7 +4554,6 @@
 "mZ" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "Starboard wide window BD"
 	},
 /turf/simulated/floor/plating,

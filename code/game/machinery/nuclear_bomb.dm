@@ -8,8 +8,8 @@ var/global/bomb_set
 	density = TRUE
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
-	unacidable = 1
 	interact_offline = TRUE
+	wires = /datum/wires/nuclearbomb
 
 	var/deployable = 0
 	var/extended = 0
@@ -25,7 +25,6 @@ var/global/bomb_set
 	var/obj/item/disk/nuclear/auth = null
 	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open, 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
 	var/lastentered
-	wires = /datum/wires/nuclearbomb
 	var/decl/security_level/original_level
 
 /obj/machinery/nuclearbomb/Initialize()
@@ -42,7 +41,7 @@ var/global/bomb_set
 		timeleft = max(timeleft - (wait / 10), 0)
 		playsound(loc, 'sound/items/timer.ogg', 50)
 		if(timeleft <= 0)
-			addtimer(CALLBACK(src, .proc/explode), 0)
+			addtimer(CALLBACK(src, PROC_REF(explode)), 0)
 		SSnano.update_uis(src)
 
 /obj/machinery/nuclearbomb/attackby(obj/item/O, mob/user, params)
@@ -368,18 +367,18 @@ var/global/bomb_set
 	. = ..()
 	global.nuke_disks |= src
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
-	events_repository.register(/decl/observ/moved, src, src, /obj/item/disk/nuclear/proc/check_z_level)
+	events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/item/disk/nuclear, check_z_level))
 
 /obj/item/disk/nuclear/proc/check_z_level()
-	if(!(istype(SSticker.mode, /datum/game_mode/nuclear)))
-		events_repository.unregister(/decl/observ/moved, src, src, /obj/item/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
+	if(!(istype(SSticker.mode, /decl/game_mode/nuclear)))
+		events_repository.unregister(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/item/disk/nuclear, check_z_level)) // However, when we are certain unregister if necessary
 		return
 	var/turf/T = get_turf(src)
 	if(!T || isNotStationLevel(T.z))
 		qdel(src)
 
 /obj/item/disk/nuclear/Destroy()
-	events_repository.unregister(/decl/observ/moved, src, src, /obj/item/disk/nuclear/proc/check_z_level)
+	events_repository.unregister(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/item/disk/nuclear, check_z_level))
 	global.nuke_disks -= src
 	if(!length(global.nuke_disks))
 		var/turf/T = pick_area_turf_by_flag(AREA_FLAG_MAINTENANCE, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))

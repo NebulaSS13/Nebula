@@ -177,9 +177,7 @@
 "ay" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = FALSE
 	},
 /obj/machinery/door/window/northleft{
 	dir = 8;
@@ -207,9 +205,7 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merch_radaway";
-	opacity = FALSE
 	},
 /turf/simulated/floor,
 /area/liberia/engineeringreactor)
@@ -324,7 +320,7 @@
 	dir = 9
 	},
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -643,13 +639,10 @@
 /area/liberia/hallway)
 "bo" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -738,12 +731,12 @@
 	req_access = newlist()
 	},
 /obj/item/storage/secure/briefcase,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
+/obj/item/poster,
+/obj/item/poster,
+/obj/item/poster,
+/obj/item/poster,
+/obj/item/poster,
+/obj/item/poster,
 /obj/item/knife/folding/combat/balisong,
 /obj/item/knife/folding/combat/balisong,
 /turf/simulated/floor/tiled/steel_grid,
@@ -835,13 +828,10 @@
 /area/liberia/mule)
 "bC" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,
@@ -1270,13 +1260,10 @@
 /area/liberia/mule)
 "cp" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1578,13 +1565,10 @@
 	},
 /obj/structure/table/steel,
 /obj/effect/paint/silver,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "merchantdesk";
 	name = "Merchant Desk Shutters";
-	opacity = FALSE
 	},
 /obj/structure/cable/blue{
 	icon_state = "4-8"
@@ -2454,7 +2438,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -3078,10 +3062,10 @@
 	pixel_x = 24;
 	pixel_y = 4
 	},
-/obj/item/chems/ivbag/blood/OPlus,
-/obj/item/chems/ivbag/blood/OPlus,
-/obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/oplus,
+/obj/item/chems/ivbag/blood/oplus,
+/obj/item/chems/ivbag/blood/ominus,
+/obj/item/chems/ivbag/blood/ominus,
 /obj/item/chems/food/candy/donor,
 /obj/item/chems/food/candy/donor,
 /obj/item/chems/food/candy/donor,
@@ -5017,7 +5001,7 @@
 /area/liberia/bridge)
 "jD" = (
 /obj/structure/table/glass,
-/obj/machinery/faxmachine{
+/obj/machinery/faxmachine/mapped{
 	req_access = list("ACCESS_MERCHANT");
 	},
 /obj/effect/floor_decal/corner/blue/mono,
@@ -7984,7 +7968,7 @@
 	dir = 6
 	},
 /obj/structure/closet/emcloset{
-	anchored = TRUE;
+	anchored = 1;
 	name = "anchored emergency closet"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8094,13 +8078,10 @@
 /area/liberia/dockinghall)
 "QE" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 2;
-	icon_state = "shutter0";
 	id_tag = "merchantshuttle";
 	name = "Merchant Window Shutters";
-	opacity = FALSE
 	},
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/yellow,

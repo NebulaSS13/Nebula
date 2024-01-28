@@ -1,32 +1,31 @@
 /obj/machinery/camera/network/engineering
 	preset_channels = list(CAMERA_CAMERA_CHANNEL_ENGINEERING)
-	initial_access = list(access_engine)
+	req_access = list(access_engine)
 
 /obj/machinery/camera/network/ert
 	preset_channels = list(CAMERA_CHANNEL_ERT)
 	cameranet_enabled = FALSE
-	initial_access = list(access_engine)
+	req_access = list(access_engine)
 
 /obj/machinery/camera/network/medbay
 	preset_channels = list(CAMERA_CHANNEL_MEDICAL)
-	initial_access = list(access_medical)
-
+	req_access = list(access_medical)
 /obj/machinery/camera/network/mercenary
 	preset_channels = list(CAMERA_CHANNEL_MERCENARY)
 	cameranet_enabled = FALSE
-	initial_access = list(access_mercenary)
+	req_access = list(access_mercenary)
 
 /obj/machinery/camera/network/mining
 	preset_channels = list(CAMERA_CHANNEL_MINE)
-	initial_access = list(access_mining)
+	req_access = list(access_mining)
 
 /obj/machinery/camera/network/research
 	preset_channels = list(CAMERA_CHANNEL_RESEARCH)
-	initial_access = list(access_research)
+	req_access = list(access_research)
 
 /obj/machinery/camera/network/security
 	preset_channels = list(CAMERA_CHANNEL_SECURITY)
-	initial_access = list(access_security)
+	req_access = list(access_security)
 
 /obj/machinery/camera/network/television
 	preset_channels = list(CAMERA_CHANNEL_TELEVISION)

@@ -1,7 +1,7 @@
 //Space stragglers go here
 /obj/effect/overmap/visitable/sector/temporary
 	name = "Deep Space"
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 /obj/effect/overmap/visitable/sector/temporary/Initialize(mapload, var/nx, var/ny, var/nz)

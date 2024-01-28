@@ -8,7 +8,7 @@
 	force = 10
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
-	origin_tech = "{'combat':3,'magnets':2}"
+	origin_tech = @'{"combat":3,"magnets":2}'
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/midlaser
 	matter = list(
@@ -74,7 +74,7 @@
 	icon_state = "lasercannon"
 	icon = 'icons/obj/guns/laser_cannon.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'materials':3,'powerstorage':3}"
+	origin_tech = @'{"combat":4,"materials":3,"powerstorage":3}'
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	one_hand_penalty = 6 //large and heavy
 	w_class = ITEM_SIZE_HUGE
@@ -98,9 +98,9 @@
 	one_hand_penalty = 0
 	has_safety = FALSE
 
-
 /obj/item/gun/energy/laser/reloadable
 	name = "reloadable laser carbine"
 	desc = "A G40E carbine, designed to kill with concentrated energy blasts. Uses removable energy cells."
-	power_supply = null
-	accepts_cell_type = /obj/item/cell/gun
+
+/obj/item/gun/energy/laser/reloadable/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	return ..(/obj/item/cell/gun, /obj/item/cell/gun, power_supply_extension_type, charge_value)

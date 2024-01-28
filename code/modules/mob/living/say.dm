@@ -6,8 +6,8 @@
 	return FALSE
 
 /mob/living/proc/get_default_language()
-	var/lang = ispath(default_language, /decl/language) && GET_DECL(default_language)
-	if(can_speak(lang))
+	var/decl/language/lang = GET_DECL(default_language)
+	if(istype(lang) && can_speak(lang))
 		return lang
 
 /mob/living/proc/get_any_good_language(set_default=FALSE)
@@ -83,6 +83,7 @@
 // It then processes the message_mode to implement an additional behavior needed for the message, such
 // as retrieving radios or looking for an intercom nearby.
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	SHOULD_CALL_PARENT(TRUE)
 	if(!message_mode)
 		return
 	var/list/assess_items_as_radios = get_radios(message_mode)
@@ -117,6 +118,10 @@
 		message += "."
 
 	return html_encode(message)
+
+/mob/living/proc/handle_mob_specific_speech(message, message_mode, verb = "says", decl/language/speaking)
+	SHOULD_CALL_PARENT(TRUE)
+	return FALSE
 
 /mob/living/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
 	set waitfor = FALSE
@@ -157,6 +162,9 @@
 				to_chat(src, SPAN_WARNING("You don't know a language and cannot speak."))
 				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
 				return
+
+	if(handle_mob_specific_speech(message, message_mode, verb, speaking))
+		return
 
 	// This is broadcast to all mobs with the language,
 	// irrespective of distance or anything else.
@@ -292,10 +300,10 @@
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
-	INVOKE_ASYNC(GLOBAL_PROC, .proc/animate_speech_bubble, speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
-	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(animate_speech_bubble), speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
+	INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), message, speaking, italics, speech_bubble_recipients)
 	if(length(eavesdroppers))
-		INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, stars(message), speaking, italics, eavesdroppers)
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), stars(message), speaking, italics, eavesdroppers)
 
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")

@@ -67,7 +67,7 @@
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	. = (air_group || height == 0 || (istype(mover) && mover.checkpass(PASS_FLAG_TABLE)))
 
-/obj/machinery/optable/receive_mouse_drop(atom/dropping, mob/user)
+/obj/machinery/optable/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
 	if(!.)
 		if(istype(dropping, /obj/item) && user.get_active_hand() == dropping && user.try_unequip(dropping, loc))

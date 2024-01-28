@@ -3,7 +3,7 @@
 	desc = "Curious device that can replicate the effects of anomalies without needing to understand their inner workings."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anobattery0"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/chromium   = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/zinc       = MATTER_AMOUNT_REINFORCEMENT,
@@ -40,7 +40,7 @@
 	desc = "APU allows users to safely (relatively) harness powers beyond their understanding, as long as they've been stored in anomaly power cells."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anodev_empty"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/chromium   = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/gold       = MATTER_AMOUNT_REINFORCEMENT,
@@ -134,7 +134,7 @@
 	activated = 1
 	current_tick = 0
 	START_PROCESSING(SSobj, src)
-	events_repository.register(/decl/observ/moved, src, src, /obj/item/anodevice/proc/on_move)
+	events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/item/anodevice, on_move))
 	if(inserted_battery?.battery_effect?.activated == 0)
 		inserted_battery.battery_effect.ToggleActivate(1)
 

@@ -19,7 +19,7 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
 		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
 		ARMOR_BIO = ARMOR_BIO_MINOR)
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
@@ -42,7 +42,7 @@
 	. = ..()
 	add_overlay(overlay_image(icon, "[icon_state]-botany_fingertips", flags = RESET_COLOR))
 
-/obj/item/clothing/gloves/thick/botany/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/gloves/thick/botany/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && slot == slot_gloves_str)
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-botany_fingertips")
 		I.appearance_flags |= RESET_COLOR
@@ -52,7 +52,7 @@
 /obj/item/clothing/gloves/thick/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
 	color = COLOR_BEASTY_BROWN
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/clothing/gloves/thick/craftable
 	name = "gauntlets"

@@ -3,14 +3,13 @@
 	desc = "A small, twin-bladed machine capable of inflicting very deadly lacerations."
 	icon = 'icons/mob/simple_animal/viscerator.dmi'
 	pass_flags = PASS_FLAG_TABLE
-	health = 15
-	maxHealth = 15
+	mob_default_max_health = 15
 	natural_weapon = /obj/item/natural_weapon/rotating_blade
 	faction = "syndicate"
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-
+	attack_delay = DEFAULT_QUICK_COOLDOWN
 	bleed_colour = SYNTH_BLOOD_COLOR
 
 	meat_type =     null
@@ -27,6 +26,9 @@
 	force = 15
 	edge = 1
 	sharp = 1
+
+/mob/living/simple_animal/hostile/viscerator/check_has_mouth()
+	return FALSE
 
 /mob/living/simple_animal/hostile/viscerator/death(gibbed, deathmessage, show_dead_message)
 	..(null, "is smashed into pieces!", show_dead_message)

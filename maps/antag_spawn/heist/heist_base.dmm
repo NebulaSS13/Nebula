@@ -1002,7 +1002,6 @@
 /area/map_template/skipjack_station/start)
 "cx" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "raider_northwest_lock"
 	},
 /obj/machinery/shield_diffuser,
@@ -1017,12 +1016,9 @@
 /turf/simulated/wall/raidershuttle,
 /area/map_template/skipjack_station/start)
 "cz" = (
-/obj/machinery/door/blast/regular{
-	density = FALSE;
-	icon_state = "pdoor0";
+/obj/machinery/door/blast/regular/open{
 	id_tag = "SkipjackShuttersNorth";
 	name = "Blast Doors";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1179,7 +1175,6 @@
 /area/map_template/skipjack_station/start)
 "cS" = (
 /obj/machinery/door/airlock/external{
-	icon_state = "door_closed";
 	id_tag = "raider_southwest_lock"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -1383,13 +1378,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dt" = (
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1412,13 +1404,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dy" = (
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 8;
-	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersEast";
 	name = "Skipjack Shutters";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/brown,
@@ -1486,13 +1475,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dI" = (
-/obj/machinery/door/blast/shutters{
-	density = FALSE;
+/obj/machinery/door/blast/shutters/open{
 	dir = 4;
-	icon_state = "shutter0";
 	id_tag = "SkipjackShuttersWest";
 	name = "Skipjack Shutters";
-	opacity = FALSE
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,

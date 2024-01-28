@@ -20,7 +20,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
-	origin_tech = "{'materials':4,'magnets':4,'engineering':5,'biotech':3}"
+	origin_tech = @'{"materials":4,"magnets":4,"engineering":5,"biotech":3}'
 
 	var/obj/aura/nanoaura/aura = null
 	var/charges = 4

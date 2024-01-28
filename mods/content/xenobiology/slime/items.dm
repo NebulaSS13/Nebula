@@ -8,7 +8,7 @@
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 6
-	origin_tech = "{'biotech':4}"
+	origin_tech = @'{"biotech":4}'
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material = /decl/material/liquid/slimejelly
 	var/slime_type = /decl/slime_colour/grey
@@ -50,7 +50,7 @@
 	reagents.add_reagent(/decl/material/liquid/slimejelly, 30)
 
 /obj/item/slime_extract/on_reagent_change()
-	. = ..()
+	..()
 	if(reagents?.total_volume)
 		var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 		slime_data.handle_reaction(reagents)
@@ -67,7 +67,6 @@
 	name = "rune"
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "golem"
-	unacidable = 1
 	layer = RUNE_LAYER
 
 /obj/effect/golemrune/Initialize()

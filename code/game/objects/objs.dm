@@ -8,7 +8,6 @@
 	var/list/req_access
 	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
-	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
 	var/throwforce = 1
 	var/sharp = 0		// whether this object cuts
 	var/edge = 0		// whether this object is more likely to dismember
@@ -17,7 +16,23 @@
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
-	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: {'NORTH':{'x':12,'y':5}, 'EAST':{'x':10,'y':50}}
+	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
+
+	///The current health of the obj. Leave to null, unless you want the object to start at a different health than max_health.
+	var/health
+	///The maximum health that the object can have. If set to ITEM_HEALTH_NO_DAMAGE, the object won't take any damage.
+	var/max_health = ITEM_HEALTH_NO_DAMAGE
+
+/obj/Initialize(mapload)
+	//Health should be set to max_health only if it's null.
+	if(isnull(health))
+		health = max_health
+	. = ..()
+	temperature_coefficient = isnull(temperature_coefficient) ? clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
+	create_matter()
+	//Only apply directional offsets if the mappers haven't set any offsets already
+	if(!pixel_x && !pixel_y && !pixel_w && !pixel_z)
+		update_directional_offset()
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
@@ -35,7 +50,7 @@
 	return ..()
 
 /obj/proc/get_matter_amount_modifier()
-	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
+	. = w_class * BASE_OBJECT_MATTER_MULTPLIER
 
 /obj/assume_air(datum/gas_mixture/giver)
 	return loc?.assume_air(giver)
@@ -87,7 +102,7 @@
 	set_invisibility(hide ? INVISIBILITY_MAXIMUM : initial(invisibility))
 
 /obj/proc/hides_under_flooring()
-	return level == 1
+	return level == LEVEL_BELOW_PLATING
 
 /obj/proc/hear_talk(mob/M, text, verb, decl/language/speaking)
 	if(talking_atom)
@@ -168,9 +183,6 @@
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)
 	return
-
-/obj/can_be_injected_by(var/atom/injector)
-	. = ATOM_IS_OPEN_CONTAINER(src) && ..()
 
 /obj/get_mass()
 	return min(2**(w_class-1), 100)
@@ -272,54 +284,51 @@
 /obj/proc/WillContain()
 	return
 
-/**
- * Returns the sum of this obj's matter plus the matter of all its contents.
- * Overrides may add extra handling for things like material storage.
- * Most useful for calculating worth or deconstructing something along with its contents.
- */
-/obj/proc/get_contained_matter()
-	. = matter?.Copy()
-	for(var/obj/contained_obj in get_contained_external_atoms()) // machines handle component parts separately
-		. = MERGE_ASSOCS_WITH_NUM_VALUES(., contained_obj.get_contained_matter())
+/obj/get_contained_matter()
+	. = ..()
+	if(length(matter))
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., matter.Copy())
 
 ////////////////////////////////////////////////////////////////
 // Interactions
 ////////////////////////////////////////////////////////////////
 /**Returns a text string to describe the current damage level of the item, or null if non-applicable. */
-/obj/proc/get_examined_damage_string(var/health_ratio)
-	if(health_ratio >= 1)
+/obj/proc/get_examined_damage_string()
+	if(!can_take_damage())
+		return
+	var/health_percent = get_percent_health()
+	if(health_percent >= 100)
 		return SPAN_NOTICE("It looks fully intact.")
-	else if(health_ratio > 0.75)
+	else if(health_percent > 75)
 		return SPAN_NOTICE("It has a few cracks.")
-	else if(health_ratio > 0.5)
+	else if(health_percent > 50)
 		return SPAN_WARNING("It looks slightly damaged.")
-	else if(health_ratio > 0.25)
+	else if(health_percent > 25)
 		return SPAN_WARNING("It looks moderately damaged.")
 	else
 		return SPAN_DANGER("It looks heavily damaged.")
-
-//
-// Alt Interactions
-//
-/obj/get_alt_interactions(var/mob/user)
-	. = ..()
-	LAZYADD(., /decl/interaction_handler/rotate)
-
-/decl/interaction_handler/rotate
-	name = "Rotate"
-	expected_target_type = /obj
-
-/decl/interaction_handler/rotate/is_possible(atom/target, mob/user, obj/item/prop)
-	. = ..()
-	if(.)
-		var/obj/O = target
-		. = !!(O.obj_flags & OBJ_FLAG_ROTATABLE)
-
-/decl/interaction_handler/rotate/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/O = target
-	O.rotate(user)
 
 /obj/fluid_act(var/datum/reagents/fluids)
 	..()
 	if(!QDELETED(src) && fluids?.total_volume)
 		fluids.touch_obj(src)
+
+// TODO: maybe iterate the entire matter list or do some partial damage handling
+/obj/proc/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	if(!simulated)
+		return FALSE
+	var/decl/material/mat = get_material()
+	return !mat || mat.dissolves_in <= solvent_power
+
+/obj/melt()
+	if(length(matter))
+		var/datum/gas_mixture/environment = loc?.return_air()
+		for(var/mat in matter)
+			var/decl/material/M = GET_DECL(mat)
+			M.add_burn_product(environment, MOLES_PER_MATERIAL_UNIT(matter[mat]))
+		matter = null
+	new /obj/effect/decal/cleanable/molten_item(src)
+	qdel(src)
+
+/obj/can_be_injected_by(var/atom/injector)
+	return ATOM_IS_OPEN_CONTAINER(src)

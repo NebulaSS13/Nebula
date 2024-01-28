@@ -31,19 +31,28 @@
 
 		// Preliminary marking-off...
 		closedlist[next.name] = next
-		map[get_map_cell(next.x,next.y)] = FLOOR_CHAR
+		map[TRANSLATE_COORD(next.x,next.y)] = FLOOR_CHAR
 
 		// Apply the values required and fill gap between this cell and origin point.
+		var/tmp_cell
 		if(next.ox && next.oy)
 			if(next.ox < next.x)
-				map[get_map_cell(next.x-1,next.y)] = FLOOR_CHAR
+				TRANSLATE_AND_VERIFY_COORD(next.x-1, next.y)
+				if(tmp_cell)
+					map[tmp_cell] = FLOOR_CHAR
 			else if(next.ox == next.x)
 				if(next.oy < next.y)
-					map[get_map_cell(next.x,next.y-1)] = FLOOR_CHAR
+					TRANSLATE_AND_VERIFY_COORD(next.x, next.y-1)
+					if(tmp_cell)
+						map[tmp_cell] = FLOOR_CHAR
 				else
-					map[get_map_cell(next.x,next.y+1)] = FLOOR_CHAR
+					TRANSLATE_AND_VERIFY_COORD(next.x, next.y+1)
+					if(tmp_cell)
+						map[tmp_cell] = FLOOR_CHAR
 			else
-				map[get_map_cell(next.x+1,next.y)] = FLOOR_CHAR
+				TRANSLATE_AND_VERIFY_COORD(next.x+1, next.y)
+				if(tmp_cell)
+					map[tmp_cell] = FLOOR_CHAR
 
 		// Grab valid neighbors for use in the open list!
 		add_to_openlist(next.x,next.y+2,next.x,next.y)
@@ -60,6 +69,6 @@
 	if(tx < 1 || ty < 1 || tx > limit_x || ty > limit_y || !isnull(checked_coord_cache["[tx]-[ty]"]))
 		return 0
 	checked_coord_cache["[tx]-[ty]"] = 1
-	map[get_map_cell(tx,ty)] = DOOR_CHAR
+	map[TRANSLATE_COORD(tx,ty)] = DOOR_CHAR
 	var/datum/maze_cell/new_cell = new(tx,ty,nx,ny)
 	openlist |= new_cell

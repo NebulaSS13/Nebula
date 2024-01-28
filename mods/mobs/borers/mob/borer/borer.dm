@@ -48,7 +48,7 @@
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 
 /obj/item/holder/borer
-	origin_tech = "{'biotech':6}"
+	origin_tech = @'{"biotech":6}'
 
 /mob/living/simple_animal/borer/roundstart
 	roundstart = TRUE
@@ -81,24 +81,24 @@
 /mob/living/simple_animal/borer/proc/set_borer_name()
 	truename = "[borer_names[min(generation, borer_names.len)]] [random_id("borer[generation]", 1000, 9999)]"
 
-/mob/living/simple_animal/borer/Life()
+/mob/living/simple_animal/borer/handle_vision()
+	. = ..()
+	set_status(STAT_BLIND,  host ? GET_STATUS(host, STAT_BLIND)  : 0)
+	set_status(STAT_BLURRY, host ? GET_STATUS(host, STAT_BLURRY) : 0)
 
+/mob/living/simple_animal/borer/handle_disabilities()
+	. = ..()
 	sdisabilities = 0
 	if(host)
-		set_status(STAT_BLIND, GET_STATUS(host, STAT_BLIND))
-		set_status(STAT_BLURRY, GET_STATUS(host, STAT_BLURRY))
 		if(host.sdisabilities & BLINDED)
 			sdisabilities |= BLINDED
 		if(host.sdisabilities & DEAFENED)
 			sdisabilities |= DEAFENED
-	else
-		set_status(STAT_BLIND, 0)
-		set_status(STAT_BLURRY, 0)
 
+/mob/living/simple_animal/borer/handle_living_non_stasis_processes()
 	. = ..()
-	if(!.)
-		return FALSE
-
+	if(!. || !host || host.stat)
+		return
 	if(host)
 
 		if(!stat && !host.stat)
@@ -117,27 +117,21 @@
 					else
 						to_chat(src, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
 					docile = 0
-
 			if(chemicals < 250 && host.nutrition >= (neutered ? 200 : 50))
 				host.nutrition--
 				chemicals++
-
 			if(controlling)
-
 				if(neutered)
 					host.release_control()
 					return
-
 				if(docile)
 					to_chat(host, SPAN_NOTICE("You are feeling far too docile to continue controlling your host..."))
 					host.release_control()
 					return
-
 				if(prob(5))
 					host.adjustBrainLoss(0.1)
-
-				if(prob(host.getBrainLoss()/20))
-					INVOKE_ASYNC(host, /mob/proc/say, "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
+	if(prob(host.getBrainLoss()/20))
+		INVOKE_ASYNC(host, TYPE_PROC_REF(/mob, say), "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()
@@ -209,7 +203,7 @@
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
 			thing.color = COLOR_BORER_RED
-	addtimer(CALLBACK(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/simple_animal/borer, reset_ui_callback)), amt)
 #undef COLOR_BORER_RED
 
 /mob/living/simple_animal/borer/proc/leave_host()
@@ -217,8 +211,8 @@
 	var/datum/hud/borer/borer_hud = hud_used
 	if(istype(borer_hud))
 		for(var/obj/thing in borer_hud.borer_hud_elements)
-			thing.alpha =        0
-			thing.invisibility = INVISIBILITY_MAXIMUM
+			thing.alpha = 0
+			thing.set_invisibility(INVISIBILITY_ABSTRACT)
 
 	if(!host) return
 

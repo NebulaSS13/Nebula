@@ -4,33 +4,34 @@
 
 var/global/list/nuke_disks = list()
 
-/datum/game_mode/nuclear
+/decl/game_mode/nuclear
 	name = "Mercenary"
 	round_description = "A mercenary strike force is approaching!"
 	extended_round_description = "A heavily armed merc team is approaching in their warship; whatever their goal is, it can't be good for the crew."
-	config_tag = "mercenary"
+	uid = "mercenary"
 	required_players = 15
 	required_enemies = 1
 	end_on_antag_death = FALSE
-	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
-	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
+	probability = 1
 	associated_antags = list(/decl/special_role/mercenary)
 	cinematic_icon_states = list(
 		"intro_nuke" = 35,
 		"summary_nukewin",
 		"summary_nukefail"
 	)
+	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
+	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
 
 //checks if L has a nuke disk on their person
-/datum/game_mode/nuclear/proc/check_mob(mob/living/L)
+/decl/game_mode/nuclear/proc/check_mob(mob/living/L)
 	for(var/obj/item/disk/nuclear/N in nuke_disks)
 		if(N.storage_depth(L) >= 0)
 			return TRUE
 	return FALSE
 
-/datum/game_mode/nuclear/declare_completion()
+/decl/game_mode/nuclear/declare_completion()
 	var/decl/special_role/merc = GET_DECL(/decl/special_role/mercenary)
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
+	if(get_config_value(/decl/config/enum/objectives_disabled) == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
 		..()
 		return
 	var/disk_rescued = TRUE

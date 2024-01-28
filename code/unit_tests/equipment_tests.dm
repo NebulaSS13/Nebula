@@ -116,7 +116,7 @@
 		"[slot_gloves_str]"    = /obj/item/clothing/gloves/rainbow,
 		"[slot_l_ear_str]"     = /obj/item/clothing/head/hairflower,
 		"[slot_r_ear_str]"     = /obj/item/clothing/head/hairflower,
-		"[slot_belt_str]"      = /obj/item/storage/belt/utility,
+		"[slot_belt_str]"      = /obj/item/storage/ore, // note: this should be an item without ITEM_FLAG_IS_BELT
 		"[slot_wear_suit_str]" = /obj/item/clothing/suit/chickensuit
 	)
 

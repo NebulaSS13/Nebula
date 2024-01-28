@@ -102,7 +102,7 @@ var/global/list/engine_setup_markers = list()
 /obj/effect/engine_setup
 	name = "Engine Setup Marker"
 	desc = "You shouldn't see this."
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	anchored = TRUE
 	density = FALSE
 	icon = 'icons/mob/screen1.dmi'

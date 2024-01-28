@@ -33,47 +33,18 @@
 	pref.bgstate =                R.read("bgstate")
 
 	// Get h_style type.
-	var/list/all_sprite_accessories
-	var/load_h_style = R.read("hair_style_name")
-	var/decl/h_style_decl = decls_repository.get_decl_by_id(load_h_style, validate_decl_type = FALSE)
-	// Grandfather in name-based sprite accessories.
-	if(!istype(h_style_decl) && load_h_style)
-		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
-		for(var/accessory in all_sprite_accessories)
-			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-			if(sprite.name == load_h_style)
-				pref.h_style = accessory
-				break
+	var/decl/h_style_decl = decls_repository.get_decl_by_id_or_var(R.read("hair_style_name"), /decl/sprite_accessory/hair)
 	pref.h_style = istype(h_style_decl) ? h_style_decl.type : /decl/sprite_accessory/hair/bald
-
 	// Get f_style type.
-	var/load_f_style = R.read("facial_style_name")
-	var/decl/f_style_decl = decls_repository.get_decl_by_id(load_f_style, validate_decl_type = FALSE)
-	// Grandfather in name-based accessories.
-	if(!istype(f_style_decl) && load_f_style)
-		all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
-		for(var/accessory in all_sprite_accessories)
-			var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-			if(sprite.name == load_f_style)
-				pref.f_style = accessory
-				break
+	var/decl/f_style_decl = decls_repository.get_decl_by_id_or_var(R.read("facial_style_name"), /decl/sprite_accessory/facial_hair)
 	pref.f_style = istype(f_style_decl) ? f_style_decl.type : /decl/sprite_accessory/facial_hair/shaved
-
 	// Get markings type.
 	var/list/load_markings = R.read("body_markings")
 	pref.body_markings = list()
-	all_sprite_accessories = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
 	if(length(load_markings))
 		for(var/marking in load_markings)
-			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id(marking, validate_decl_type = FALSE)
-			// Grandfather in name-based accessories.
-			if(isnull(loaded_marking))
-				for(var/accessory in all_sprite_accessories)
-					var/decl/sprite_accessory/sprite = all_sprite_accessories[accessory]
-					if(sprite.name == marking)
-						loaded_marking = pref.body_markings[marking]
-						break
-			if(loaded_marking)
+			var/decl/sprite_accessory/marking/loaded_marking = decls_repository.get_decl_by_id_or_var(marking, /decl/sprite_accessory/marking)
+			if(istype(loaded_marking))
 				pref.body_markings[loaded_marking.type] = load_markings[marking]
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
@@ -178,44 +149,59 @@
 		. += "</table>"
 
 	. += "<h3>Colouration</h3>"
-	. += "<table width = '100%'>"
+	. += "<table width = '500px'>"
 	. += "<tr>"
-	. += "<td><b>Hair</b></td>"
-	. += "<td><a href='?src=\ref[src];hair_style=1'>[GET_DECL(pref.h_style)]</a></td>"
-	. += "<td>"
+	. += "<td width = '100px'><b>Hair</b></td>"
+	. += "<td width = '100px'>"
+
+	var/const/up_arrow    = "&#8679;"
+	var/const/down_arrow  = "&#8681;"
+	var/const/left_arrow  = "&#8678;"
+	var/const/right_arrow = "&#8680;"
+
 	if(mob_bodytype.appearance_flags & HAS_HAIR_COLOR)
 		. += "[COLORED_SQUARE(pref.hair_colour)] <a href='?src=\ref[src];hair_color=1'>Change</a>"
 	. += "</td>"
+	. += "<td width = '20px'><a href='?src=\ref[src];hair_prev=1'>[left_arrow]</a></td>"
+	. += "<td width = '260px'><a href='?src=\ref[src];hair_style=1'>[GET_DECL(pref.h_style)]</a></td>"
+	. += "<td width = '20px'><a href='?src=\ref[src];hair_next=1'>[right_arrow]</a></td>"
 	. += "<tr>"
 	. += "</tr>"
-	. += "<td><b>Facial</b></td>"
-	. += "<td><a href='?src=\ref[src];facial_style=1'>[GET_DECL(pref.f_style)]</a></td>"
-	. += "<td>"
+	. += "<td width = '100px'><b>Facial</b></td>"
+	. += "<td width = '100px'>"
 	if(mob_bodytype.appearance_flags & HAS_HAIR_COLOR)
 		. += "[COLORED_SQUARE(pref.facial_hair_colour)] <a href='?src=\ref[src];facial_color=1'>Change</a>"
 	. += "</td>"
+	. += "<td width = '20px'><a href='?src=\ref[src];facial_prev=1'>[left_arrow]</a></td>"
+	. += "<td width = '260px'><a href='?src=\ref[src];facial_style=1'>[GET_DECL(pref.f_style)]</a></td>"
+	. += "<td width = '20px'><a href='?src=\ref[src];facial_next=1'>[right_arrow]</a></td>"
 	. += "</tr>"
 	if(mob_bodytype.appearance_flags & HAS_EYE_COLOR)
 		. += "<tr>"
-		. += "<td><b>Eyes</b></td>"
-		. += "<td>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "<td width = '100px'><b>Eyes</b></td>"
+		. += "<td width = '100px'>[COLORED_SQUARE(pref.eye_colour)] <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "<td colspan = 3 width = '300px'><td>"
 		. += "</tr>"
 	if(mob_bodytype.appearance_flags & HAS_SKIN_COLOR)
 		. += "<tr>"
-		. += "<td><b>Body</b></td>"
-		. += "<td>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "<td width = '100px'><b>Body</b></td>"
+		. += "<td width = '100px'>[COLORED_SQUARE(pref.skin_colour)] <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "<td colspan = 3 width = '300px'><td>"
 		. += "</tr>"
 	. += "</table>"
 
 	. += "<h3>Markings</h3>"
-	. += "<table width = '100%'>"
+	. += "<table width = '500px'>"
 	for(var/M in pref.body_markings)
 		var/decl/sprite_accessory/mark = GET_DECL(M)
 		. += "<tr>"
-		. += "<td>[mark.name]</td><td><a href='?src=\ref[src];marking_remove=\ref[mark]'>Remove</a></td>"
-		. += "<td>[COLORED_SQUARE(pref.body_markings[M])] <a href='?src=\ref[src];marking_color=\ref[mark]'>Change</a></td>"
+		. += "<td width = '100px'><a href='?src=\ref[src];marking_remove=\ref[mark]'>Remove</a></td>"
+		. += "<td width = '100px'>[COLORED_SQUARE(pref.body_markings[M])] <a href='?src=\ref[src];marking_color=\ref[mark]'>Change</a></td>"
+		. += "<td width = '20px'><a href='?src=\ref[src];marking_move_up=\ref[mark]'>[up_arrow]</a></td>"
+		. += "<td width = '260px'>[mark.name]</td>"
+		. += "<td width = '20px'><a href='?src=\ref[src];marking_move_down=\ref[mark]'>[down_arrow]</a></td>"
 		. += "</tr>"
-	. += "<tr><td colspan = 3><a href='?src=\ref[src];marking_style=1'>Add marking</a></td></tr>"
+	. += "<tr><td colspan = 5 width = '500px'><a href='?src=\ref[src];marking_style=1'>Add marking</a></td></tr>"
 	. += "</table>"
 
 	. = jointext(.,null)
@@ -262,13 +248,49 @@
 
 	else if(href_list["hair_style"])
 
-		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
-		mob_species = get_species_by_key(pref.species)
-		var/decl/sprite_accessory/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in mob_species.get_hair_styles(B)
-		mob_species = get_species_by_key(pref.species)
-		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles(B)))
+		var/decl/sprite_accessory/new_h_style = input(user, "Choose your character's hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.h_style)  as null|anything in mob_species.get_hair_styles(mob_bodytype)
+		mob_species =  get_species_by_key(pref.species)
+		mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+		if(new_h_style && CanUseTopic(user) && (new_h_style in mob_species.get_hair_styles(mob_bodytype)))
 			pref.h_style = new_h_style.type
 			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["hair_next"] || href_list["hair_prev"])
+		var/decl/sprite_accessory/current_hair = GET_DECL(pref.h_style)
+		var/list/available_hair = mob_species.get_hair_styles(mob_bodytype)
+		if(current_hair in available_hair)
+			if(href_list["hair_next"])
+				current_hair = next_in_list(current_hair, available_hair)
+			else if(href_list["hair_prev"])
+				current_hair = previous_in_list(current_hair, available_hair)
+			if(istype(current_hair) && pref.h_style != current_hair.type)
+				pref.h_style = current_hair.type
+				return TOPIC_REFRESH_UPDATE_PREVIEW
+
+		return TOPIC_NOACTION
+	else if(href_list["facial_style"])
+
+		var/decl/sprite_accessory/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, GET_DECL(pref.f_style)) as null|anything in mob_species.get_facial_hair_styles(mob_bodytype)
+		mob_species =  get_species_by_key(pref.species)
+		mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(mob_bodytype)))
+			pref.f_style = new_f_style.type
+			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["facial_next"] || href_list["facial_prev"])
+
+		var/decl/sprite_accessory/current_facial_hair = GET_DECL(pref.f_style)
+		var/list/available_facial_hair = mob_species.get_facial_hair_styles(mob_bodytype)
+		if(current_facial_hair in available_facial_hair)
+			if(href_list["facial_next"])
+				current_facial_hair = next_in_list(current_facial_hair, available_facial_hair)
+			else if(href_list["facial_prev"])
+				current_facial_hair = previous_in_list(current_facial_hair, available_facial_hair)
+			if(istype(current_facial_hair) && pref.f_style != current_facial_hair.type)
+				pref.f_style = current_facial_hair.type
+				return TOPIC_REFRESH_UPDATE_PREVIEW
+
+		return TOPIC_NOACTION
 
 	else if(href_list["facial_color"])
 		if(!(mob_bodytype.appearance_flags & HAS_HAIR_COLOR))
@@ -310,37 +332,15 @@
 			pref.skin_colour = new_skin
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
-	else if(href_list["facial_style"])
-
-		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
-		mob_species = get_species_by_key(pref.species)
-		var/decl/sprite_accessory/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, GET_DECL(pref.f_style)) as null|anything in mob_species.get_facial_hair_styles(B)
-		mob_species = get_species_by_key(pref.species)
-		if(new_f_style && CanUseTopic(user) && (new_f_style in mob_species.get_facial_hair_styles(B)))
-			pref.f_style = new_f_style.type
-			return TOPIC_REFRESH_UPDATE_PREVIEW
-
 	//TODO SPRITE ACCESSORY UPDATE
 	else if(href_list["marking_style"])
 
-		var/list/disallowed_markings = list()
-		for (var/M in pref.body_markings)
-			var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
-			disallowed_markings |= mark_style.disallows
-
-		var/list/usable_markings = list()
-		var/list/all_markings = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
-		for(var/M in all_markings)
-			if(M in pref.body_markings)
-				continue
-			var/decl/sprite_accessory/accessory = all_markings[M]
-			mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype)
-			if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(preference_mob(), mob_species, mob_bodytype))
-				usable_markings += accessory
-
-		var/decl/sprite_accessory/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
+		var/decl/sprite_accessory/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in get_usable_markings(preference_mob(), mob_species, mob_bodytype, pref.body_markings)
 		if(new_marking && CanUseTopic(user))
-			pref.body_markings[new_marking.type] = COLOR_BLACK
+			mob_species = get_species_by_key(pref.species)
+			mob_bodytype = mob_species.get_bodytype_by_name(pref.bodytype) || mob_species.default_bodytype
+			if(new_marking in get_usable_markings(preference_mob(), mob_species, mob_bodytype, pref.body_markings))
+				pref.body_markings[new_marking.type] = COLOR_BLACK
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["marking_remove"])
@@ -354,6 +354,44 @@
 		if(mark_color && CanUseTopic(user))
 			pref.body_markings[M.type] = "[mark_color]"
 			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["marking_move_down"])
+		var/decl/sprite_accessory/M = locate(href_list["marking_move_down"])
+		if(istype(M))
+			var/current_index = pref.body_markings.Find(M.type)
+			if(current_index < length(pref.body_markings))
+				var/marking_color = pref.body_markings[M.type]
+				pref.body_markings -= M.type
+				pref.body_markings.Insert(current_index+1, M.type)
+				pref.body_markings[M.type] = marking_color
+				return TOPIC_REFRESH_UPDATE_PREVIEW
+		return TOPIC_NOACTION
+
+	else if(href_list["marking_move_up"])
+		var/decl/sprite_accessory/M = locate(href_list["marking_move_up"])
+		if(istype(M))
+			var/current_index = pref.body_markings.Find(M.type)
+			if(current_index > 1)
+				var/marking_color = pref.body_markings[M.type]
+				pref.body_markings -= M.type
+				pref.body_markings.Insert(current_index-1, M.type)
+				pref.body_markings[M.type] = marking_color
+				return TOPIC_REFRESH_UPDATE_PREVIEW
+		return TOPIC_NOACTION
+
+/datum/category_item/player_setup_item/physical/body/proc/get_usable_markings(mob/pref_mob, decl/species/mob_species, decl/bodytype/mob_bodytype, list/existing_markings)
+	var/list/disallowed_markings = list()
+	for (var/M in existing_markings)
+		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
+		if(length(mark_style.disallows_accessories))
+			disallowed_markings |= mark_style.disallows_accessories
+	var/list/all_markings = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/marking)
+	for(var/M in all_markings)
+		if(M in existing_markings)
+			continue
+		var/decl/sprite_accessory/accessory = all_markings[M]
+		if(!is_type_in_list(accessory, disallowed_markings) && accessory.accessory_is_available(pref_mob, mob_species, mob_bodytype))
+			LAZYADD(., accessory)
 
 /datum/category_item/player_setup_item/proc/ResetAllHair()
 	ResetHair()

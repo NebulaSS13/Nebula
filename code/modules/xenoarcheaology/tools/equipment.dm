@@ -36,7 +36,6 @@
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 	anomaly_shielding = 0.2
-	light_overlay = "hardhat_light"
 
 /obj/item/clothing/suit/space/void/excavation/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/excavation
@@ -71,4 +70,4 @@
 		/obj/item/ano_scanner,
 		/obj/item/stack/tape_roll/barricade_tape/research,
 		/obj/item/pickaxe/xeno/hand)
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth

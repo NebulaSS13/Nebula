@@ -41,39 +41,39 @@
 			return owner.change_skin_tone(new_s_tone)
 
 	if(href_list["skin_color"] && can_change_skin_color())
-		var/new_skin = input(usr, "Choose your character's skin colour: ", "Skin Color", owner.skin_colour) as color|null
-		if(new_skin && can_still_topic(state) && owner.change_skin_color(new_skin))
+		var/new_skin = input(usr, "Choose your character's skin colour: ", "Skin Color", owner.get_skin_colour()) as color|null
+		if(new_skin && can_still_topic(state) && owner.set_skin_colour(new_skin))
 			update_dna()
 			return TRUE
 
 	if(href_list["hair"])
 		var/decl/sprite_accessory/hair = locate(href_list["hair"])
-		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_valid_hairstyle_types()) && owner.change_hair(hair.type))
+		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_valid_hairstyle_types()) && owner.set_hairstyle(hair.type))
 			update_dna()
 			return TRUE
 
 	if(href_list["hair_color"] && can_change(APPEARANCE_HAIR_COLOR))
-		var/new_hair = input("Please select hair color.", "Hair Color", owner.hair_colour) as color|null
-		if(new_hair && can_still_topic(state) && owner.change_hair_color(new_hair))
+		var/new_hair = input("Please select hair color.", "Hair Color", owner.get_hair_colour()) as color|null
+		if(new_hair && can_still_topic(state) && owner.set_hair_colour(new_hair))
 			update_dna()
 			return TRUE
 
 	if(href_list["facial_hair"])
 		var/decl/sprite_accessory/facial_hair = locate(href_list["facial_hair"])
-		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_valid_facial_hairstyle_types()) && owner.change_facial_hair(facial_hair.type))
+		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_valid_facial_hairstyle_types()) && owner.set_facial_hairstyle(facial_hair.type))
 			update_dna()
 			return TRUE
 
 	if(href_list["facial_hair_color"] && can_change(APPEARANCE_FACIAL_HAIR_COLOR))
-		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", owner.facial_hair_colour) as color|null
-		if(new_facial && can_still_topic(state) && owner.change_facial_hair_color(new_facial))
+		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", owner.get_facial_hair_colour()) as color|null
+		if(new_facial && can_still_topic(state) && owner.set_facial_hair_colour(new_facial))
 			update_dna()
 			return TRUE
 
 	if(href_list["eye_color"])
 		if(can_change(APPEARANCE_EYE_COLOR))
-			var/new_eyes = input("Please select eye color.", "Eye Color", owner.eye_colour) as color|null
-			if(new_eyes && can_still_topic(state) && owner.change_eye_color(new_eyes))
+			var/new_eyes = input("Please select eye color.", "Eye Color", owner.get_eye_colour()) as color|null
+			if(new_eyes && can_still_topic(state) && owner.set_eye_colour(new_eyes))
 				update_dna()
 				return TRUE
 
@@ -119,7 +119,8 @@
 			var/decl/sprite_accessory/hair_decl = GET_DECL(hair_style)
 			hair_styles[++hair_styles.len] = list("hairstyle" = hair_decl.name, "ref" = "\ref[hair_decl]")
 		data["hair_styles"] = hair_styles
-		var/decl/sprite_accessory/hair = GET_DECL(owner.h_style)
+		var/hairstyle = owner.get_hairstyle()
+		var/decl/sprite_accessory/hair = GET_DECL(hairstyle)
 		data["hair_style"] = hair.name
 
 	data["change_facial_hair"] = can_change(APPEARANCE_FACIAL_HAIR)
@@ -129,7 +130,8 @@
 			var/decl/sprite_accessory/facial_hair_decl = GET_DECL(facial_hair_style)
 			facial_hair_styles[++facial_hair_styles.len] = list("facialhairstyle" = facial_hair_decl.name, "ref" = "\ref[facial_hair_decl]")
 		data["facial_hair_styles"] = facial_hair_styles
-		var/decl/sprite_accessory/facial_hair = GET_DECL(owner.f_style)
+		var/facial_hairstyle = owner.get_facial_hairstyle()
+		var/decl/sprite_accessory/facial_hair = GET_DECL(facial_hairstyle)
 		data["facial_hair_style"] = facial_hair.name
 
 	data["change_hair_color"] = can_change(APPEARANCE_HAIR_COLOR)

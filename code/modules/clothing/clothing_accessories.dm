@@ -46,18 +46,6 @@
 		. = A.attack_hand(user) || .
 	return TRUE
 
-/obj/item/clothing/check_mousedrop_adjacency(var/atom/over, var/mob/user)
-	. = (loc == user && istype(over, /obj/screen)) || ..()
-
-/obj/item/clothing/handle_mouse_drop(atom/over, mob/user)
-	if(ishuman(user) && loc == user && istype(over, /obj/screen/inventory))
-		var/obj/screen/inventory/inv = over
-		add_fingerprint(user)
-		if(user.try_unequip(src))
-			user.equip_to_slot_if_possible(src, inv.slot_id)
-		return TRUE
-	. = ..()
-
 /obj/item/clothing/proc/update_accessory_slowdown()
 	slowdown_accessory = 0
 	for(var/obj/item/clothing/accessory/A in accessories)
@@ -81,7 +69,7 @@
 	update_clothing_icon()
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
-	if(!A || !(A in accessories))
+	if(!A || !(A in accessories) || !A.removable || !A.canremove)
 		return
 
 	A.on_removed(user)
@@ -106,11 +94,21 @@
 	if(!LAZYLEN(accessories))
 		return
 
+	var/list/removable_accessories = list()
+	for(var/obj/item/clothing/accessory/accessory in accessories)
+		if(accessory.canremove && accessory.removable)
+			removable_accessories += accessory
+
+	if(!length(removable_accessories))
+		to_chat(usr, SPAN_WARNING("You have no removable accessories."))
+		verbs -= /obj/item/clothing/proc/removetie_verb
+		return
+
 	var/obj/item/clothing/accessory/A
-	if(LAZYLEN(accessories) > 1)
-		A = show_radial_menu(M, M, make_item_radial_menu_choices(accessories), radius = 42, tooltips = TRUE)
+	if(LAZYLEN(removable_accessories) > 1)
+		A = show_radial_menu(M, M, make_item_radial_menu_choices(removable_accessories), radius = 42, tooltips = TRUE)
 	else
-		A = accessories[1]
+		A = removable_accessories[1]
 
 	remove_accessory(usr, A)
 

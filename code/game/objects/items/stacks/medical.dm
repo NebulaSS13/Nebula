@@ -54,9 +54,7 @@
 			if(istype(suit))
 				to_chat(user, SPAN_WARNING("You can't apply [src] through [suit]!"))
 				return 1
-
-		H.UpdateDamageIcon()
-
+		H.update_health() // TODO: readd the actual healing logic that goes here, or check that it's applied in afterattack or something
 	else
 
 		M.heal_organ_damage((src.heal_brute/2), (src.heal_burn/2))
@@ -66,13 +64,12 @@
 		)
 		use(1)
 
-	M.updatehealth()
 /obj/item/stack/medical/bruise_pack
 	name = "roll of gauze"
 	singular_name = "gauze length"
 	desc = "Some sterile gauze to wrap around bloody stumps."
 	icon_state = "brutepack"
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	animal_heal = 5
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
 	amount = 10
@@ -130,7 +127,7 @@
 	singular_name = "ointment"
 	icon_state = "ointment"
 	heal_burn = 1
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	animal_heal = 4
 	apply_sounds = list('sound/effects/ointment.ogg')
 
@@ -164,7 +161,7 @@
 	desc = "An advanced trauma kit for severe injuries."
 	icon_state = "traumakit"
 	heal_brute = 0
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	animal_heal = 12
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg','sound/effects/tape.ogg')
 	amount = 10
@@ -220,7 +217,7 @@
 	desc = "An advanced treatment kit for severe burns."
 	icon_state = "burnkit"
 	heal_burn = 5
-	origin_tech = "{'biotech':1}"
+	origin_tech = @'{"biotech":1}'
 	animal_heal = 7
 	apply_sounds = list('sound/effects/ointment.ogg')
 

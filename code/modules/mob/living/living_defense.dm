@@ -170,7 +170,7 @@
 /mob/living/momentum_do(var/power, var/datum/thrownthing/TT, var/atom/movable/AM)
 	if(power >= 0.75)		//snowflake to enable being pinned to walls
 		var/direction = TT.init_dir
-		throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5), callback = CALLBACK(src,/mob/living/proc/pin_to_wall,AM,direction))
+		throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5), callback = CALLBACK(src, TYPE_PROC_REF(/mob/living, pin_to_wall), AM, direction))
 		visible_message(SPAN_DANGER("\The [src] staggers under the impact!"),SPAN_DANGER("You stagger under the impact!"))
 		return
 
@@ -222,23 +222,25 @@
 	if(!damage || !istype(user))
 		return
 
-	adjustBruteLoss(damage)
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
 	src.visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
+	adjustBruteLoss(damage)
 	user.do_attack_animation(src)
-	spawn(1) updatehealth()
 	return 1
 
+/mob/living/proc/can_ignite()
+	return fire_stacks > 0 && !on_fire
+
 /mob/living/proc/IgniteMob()
-	if(fire_stacks > 0 && !on_fire)
-		on_fire = 1
+	if(can_ignite())
+		on_fire = TRUE
 		set_light(4, l_color = COLOR_ORANGE)
 		update_fire()
 
 /mob/living/proc/ExtinguishMob()
 	if(on_fire)
-		on_fire = 0
+		on_fire = FALSE
 		fire_stacks = 0
 		set_light(0)
 		update_fire()
@@ -269,12 +271,16 @@
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
+/mob/living/proc/increase_fire_stacks(exposed_temperature)
+	if(fire_stacks <= 4 || fire_burn_temperature() < exposed_temperature)
+		adjust_fire_stacks(2)
+
 /mob/living/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	//once our fire_burn_temperature has reached the temperature of the fire that's giving fire_stacks, stop adding them.
 	//allow fire_stacks to go up to 4 for fires cooler than 700 K, since are being immersed in flame after all.
-	if(fire_stacks <= 4 || fire_burn_temperature() < exposed_temperature)
-		adjust_fire_stacks(2)
+	increase_fire_stacks(exposed_temperature)
 	IgniteMob()
+	return ..()
 
 /mob/living/proc/get_cold_protection()
 	return 0
@@ -297,4 +303,34 @@
 /mob/living/lava_act(datum/gas_mixture/air, temperature, pressure)
 	fire_act(air, temperature)
 	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
-	. =  (health <= 0) ? ..() : FALSE
+	. =  (current_health <= 0) ? ..() : FALSE
+
+// called when something steps onto a mob
+// this handles mulebots and vehicles
+/mob/living/Crossed(var/atom/movable/AM)
+	AM.crossed_mob(src)
+
+/mob/living/proc/solvent_act(var/severity, var/amount_per_item, var/solvent_power = MAT_SOLVENT_STRONG)
+
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/thing = get_equipped_item(slot)
+		if(!istype(thing))
+			continue
+		if(!thing.solvent_can_melt(solvent_power) || !try_unequip(thing))
+			to_chat(src, SPAN_NOTICE("Your [thing] protects you from the solvent."))
+			return TRUE
+		to_chat(src, SPAN_DANGER("Your [thing] dissolves!"))
+		qdel(thing)
+		severity -= amount_per_item
+		if(severity <= 0)
+			return TRUE
+
+	// TODO move this to a contact var or something.
+	if(solvent_power >= MAT_SOLVENT_STRONG)
+		var/screamed
+		for(var/obj/item/organ/external/affecting in get_external_organs())
+			if(!screamed && affecting.can_feel_pain())
+				screamed = TRUE
+				emote("scream")
+			affecting.status |= ORGAN_DISFIGURED
+		take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)

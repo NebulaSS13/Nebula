@@ -22,6 +22,7 @@
 #define LEVEL_EDGE_CON  3
 
 // Invisibility constants.
+#define INVISIBILITY_NONE         0
 #define INVISIBILITY_LIGHTING    20
 #define INVISIBILITY_LEVEL_ONE   35
 #define INVISIBILITY_LEVEL_TWO   45
@@ -194,11 +195,6 @@
 #define WRINKLES_WRINKLY	1
 #define WRINKLES_NONE		2
 
-//detergent states for clothes
-#define SMELL_DEFAULT	0
-#define SMELL_CLEAN		1
-#define SMELL_STINKY	2
-
 //Shuttle mission stages
 #define SHUTTLE_MISSION_PLANNED  1
 #define SHUTTLE_MISSION_STARTED  2
@@ -313,3 +309,10 @@
 
 ///Formats exceptions into a readable string with all the details.
 #define EXCEPTION_TEXT(E) "'[E.name]' ('[E.type]'): '[E.file]':[E.line]:\n'[E.desc]'"
+
+#define LEVEL_BELOW_PLATING 1
+#define LEVEL_ABOVE_PLATING 2
+
+// Defines for fluorescence (/atom/var/fluorescent)
+#define FLUORESCENT_GLOWS   1	// Glows when under flourescent light
+#define FLUORESCENT_GLOWING 2	// Currently glowing due to flourescent light

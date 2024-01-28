@@ -10,7 +10,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2
 	throw_range = 5
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel
 	max_health = ITEM_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
 	var/elastic
@@ -141,7 +141,7 @@ var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world ca
 	cuff_type = "cable restraints"
 	elastic = 1
 	max_health = 75
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
@@ -179,4 +179,4 @@ var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world ca
 	breakouttime = 200
 	cuff_type = "duct tape"
 	max_health = 50
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic

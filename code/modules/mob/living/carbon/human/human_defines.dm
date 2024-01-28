@@ -1,20 +1,12 @@
 /mob/living/carbon/human
 
-	var/h_style
-	var/f_style
-
-	var/hair_colour
-	var/facial_hair_colour
-	var/skin_colour
-	var/eye_colour
-
 	var/regenerate_body_icon = FALSE // If true, the next icon update will also regenerate the body.
 
 	var/skin_tone = 0  //Skin tone
 
 	var/damage_multiplier = 1 //multiplies melee combat damage
 
-	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
+	var/lip_color = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
 	var/list/worn_underwear = list()
 

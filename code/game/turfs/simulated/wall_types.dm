@@ -60,11 +60,11 @@
 /turf/simulated/wall/plastic
 	color = COLOR_EGGSHELL
 	icon_state = "plastic"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 // A plastic wall with a plastic girder. Very flimsy but very easy to move or remove with just a crowbar.
 /turf/simulated/wall/plastic/facade
-	girder_material = /decl/material/solid/plastic
+	girder_material = /decl/material/solid/organic/plastic
 
 /turf/simulated/wall/sandstone
 	color = COLOR_GOLD
@@ -74,12 +74,12 @@
 /turf/simulated/wall/wood
 	color = COLOR_BROWN
 	icon_state = "wood"
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /turf/simulated/wall/walnut
 	color = COLOR_BROWN_ORANGE
 	icon_state = "wood"
-	material = /decl/material/solid/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
 
 /turf/simulated/wall/raidershuttle
 	color = COLOR_GREEN_GRAY

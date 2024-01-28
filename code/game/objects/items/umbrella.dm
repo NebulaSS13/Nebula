@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/umbrella.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
 	color = COLOR_BEASTY_BROWN
 	var/fabric_color = COLOR_GRAY20
@@ -43,7 +43,7 @@
 	I.appearance_flags |= RESET_COLOR
 	add_overlay(I)
 
-/obj/item/umbrella/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
+/obj/item/umbrella/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(is_open && check_state_in_icon("[overlay.icon_state]-open", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-open"

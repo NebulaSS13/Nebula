@@ -1,12 +1,12 @@
-/obj/item/storage/messenger
-	name = "messenger bag"
+/obj/item/storage/backpack/messenger/corvid_couriers
+	name = "corvid messenger bag"
 	desc = "A small green-grey messenger bag with a blue Corvid Couriers logo on it."
-	icon = 'icons/obj/items/messenger_bag.dmi'
+	icon = 'icons/obj/items/storage/backpack/corvid.dmi'
 	icon_state = ICON_STATE_WORLD
 	storage_slots = 7
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 /mob/living/simple_animal/crow
 	name = "crow"
@@ -26,8 +26,16 @@
 	universal_speak = TRUE
 	pass_flags = PASS_FLAG_TABLE
 
-	var/obj/item/storage/messenger/messenger_bag
-	var/obj/item/card/id/access_card
+
+/mob/living/simple_animal/crow/get_overlay_state_modifier()
+	return (stat == DEAD) ? "-dead" : null
+
+/decl/bodytype/animal/crow
+	name = "crow"
+	bodytype_category = "crow body"
+
+/mob/living/simple_animal/crow/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/crow)
 
 /obj/item/natural_weapon/crow_claws
 	name = "claws"
@@ -38,102 +46,40 @@
 
 /mob/living/simple_animal/crow/Initialize()
 	. = ..()
-	messenger_bag = new(src)
+	add_inventory_slot(new /datum/inventory_slot/back/simple)
+	add_inventory_slot(new /datum/inventory_slot/id)
+	add_held_item_slot(new /datum/inventory_slot/gripper/mouth/simple)
+	equip_to_slot_or_del(new /obj/item/storage/backpack/messenger/corvid_couriers(src), slot_back_str)
 	update_icon()
 
-/mob/living/simple_animal/crow/GetIdCards()
-	. = ..()
-	if (istype(access_card))
-		LAZYDISTINCTADD(., access_card)
-
-/mob/living/simple_animal/crow/show_stripping_window(var/mob/user)
-	if(user.incapacitated())
-		return
-	var/list/dat = list()
-	if(access_card)
-		dat += "<b>ID:</b> [access_card] (<a href='?src=\ref[src];remove_inv=access cuff'>Remove</a>)"
-	else
-		dat += "<b>ID:</b> <a href='?src=\ref[src];add_inv=access cuff'>Nothing</a>"
-	if(messenger_bag)
-		dat += "<b>Back:</b> [messenger_bag] (<a href='?src=\ref[src];remove_inv=back'>Remove</a>)"
-	else
-		dat += "<b>Back:</b> <a href='?src=\ref[src];add_inv=back'>Nothing</a>"
-	var/datum/browser/popup = new(user, "[name]", "Inventory of \the [name]", 350, 150, src)
-	popup.set_content(jointext(dat, "<br>"))
-	popup.open()
+/mob/living/simple_animal/crow/get_dexterity(var/silent)
+	return (DEXTERITY_EQUIP_ITEM|DEXTERITY_HOLD_ITEM)
 
 /mob/living/simple_animal/crow/DefaultTopicState()
 	return global.physical_topic_state
 
-/mob/living/simple_animal/crow/OnTopic(mob/user, href_list)
-	if(!ishuman(user))
-		return ..()
-	if(href_list["remove_inv"])
-		var/obj/item/removed
-		switch(href_list["remove_inv"])
-			if("access cuff")
-				removed = access_card
-				access_card = null
-			if("back")
-				removed = messenger_bag
-				messenger_bag = null
-		if(removed)
-			removed.dropInto(loc)
-			usr.put_in_hands(removed)
-			visible_message("<span class='notice'>\The [usr] removes \the [removed] from \the [src]'s [href_list["remove_inv"]].</span>")
-			show_stripping_window(usr)
-			update_icon()
-		else
-			to_chat(user, "<span class='warning'>There is nothing to remove from \the [src]'s [href_list["remove_inv"]].</span>")
-		return TOPIC_HANDLED
-	if(href_list["add_inv"])
-		var/obj/item/equipping = user.get_active_hand()
-		if(!equipping)
-			to_chat(user, "<span class='warning'>You have nothing in your hand to put on \the [src]'s [href_list["add_inv"]].</span>")
-			return 0
-		var/obj/item/equipped
-		var/checktype
-		switch(href_list["add_inv"])
-			if("access cuff")
-				equipped = access_card
-				checktype = /obj/item/card/id
-			if("back")
-				equipped = messenger_bag
-				checktype = /obj/item/storage/messenger
-		if(equipped)
-			to_chat(user, "<span class='warning'>There is already something worn on \the [src]'s [href_list["add_inv"]].</span>")
-			return TOPIC_HANDLED
-		if(!istype(equipping, checktype))
-			to_chat(user, "<span class='warning'>\The [equipping] won't fit on \the [src]'s [href_list["add_inv"]].</span>")
-			return TOPIC_HANDLED
-		switch(href_list["add_inv"])
-			if("access cuff")
-				access_card = equipping
-			if("back")
-				messenger_bag = equipping
-		if(!user.try_unequip(equipping, src))
-			return TOPIC_HANDLED
-		visible_message("<span class='notice'>\The [user] places \the [equipping] on to \the [src]'s [href_list["add_inv"]].</span>")
-		update_icon()
-		show_stripping_window(user)
-		return TOPIC_HANDLED
+// Let people interact with the Bird Storage.
+/mob/living/simple_animal/crow/attack_hand(mob/user)
+	if(user.a_intent == I_HELP)
+		var/obj/item/backpack = get_equipped_item(slot_back_str)
+		if(backpack)
+			return backpack.attack_hand(user)
 	return ..()
 
-/mob/living/simple_animal/crow/show_examined_worn_held_items(mob/user, distance, infix, suffix, hideflags, decl/pronouns/pronouns)
-	. = ..()
-	if(Adjacent(src))
-		if(messenger_bag)
-			if(messenger_bag.contents.len)
-				to_chat(user, "It's wearing a little messenger bag with a Corvid Couriers logo on it. There's something stuffed inside.")
-			else
-				to_chat(user, "It's wearing a little messenger bag with a Corvid Couriers logo on it. It seems to be empty.")
-		if(access_card)
-			to_chat(user, "It has an access cuff with \the [access_card] inserted.")
+/mob/living/simple_animal/crow/attackby(obj/item/I, mob/user)
+	if(user.a_intent == I_HELP)
+		var/obj/item/backpack = get_equipped_item(slot_back_str)
+		if(backpack)
+			return backpack.attackby(I, user)
+	return ..()
 
 /mob/living/simple_animal/crow/on_update_icon()
 	..()
-	if(messenger_bag)
-		add_overlay("[icon_state]-bag")
+	var/obj/item/backpack = get_equipped_item(slot_back_str)
+	if(backpack)
+		var/overlay_state = "crow-[icon_state]-bag"
+		if(check_state_in_icon(overlay_state, backpack.icon))
+			add_overlay(image(backpack.icon, overlay_state))
 
 /mob/living/simple_animal/crow/cyber
 	name = "cybercrow"

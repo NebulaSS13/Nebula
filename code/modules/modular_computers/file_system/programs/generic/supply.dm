@@ -398,7 +398,7 @@
 	t += "<h3>[global.using_map.station_name] Supply Requisition Reciept</h3><hr>"
 	t += "INDEX: #[O.ordernum]<br>"
 	t += "REQUESTED BY: [O.orderedby]<br>"
-	t += "RANK: [O.orderedrank]<br>"
+	t += "ASSIGNMENT: [O.orderedrank]<br>"
 	t += "REASON: [O.reason]<br>"
 	t += "SUPPLY CRATE TYPE: [O.object.name]<br>"
 	t += "ACCESS RESTRICTION: [get_access_desc(O.object.access)]<br>"

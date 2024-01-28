@@ -5,7 +5,7 @@
 	desc = "A wall-mounted flashbulb device."
 	icon = 'icons/obj/machines/flash_mounted.dmi'
 	icon_state = "mflash1"
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":32}, "WEST":{"x":-32}}'
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/range = 2 //this is roughly the size of brig cell
 	var/disable = 0
@@ -78,10 +78,12 @@
 				flash_time = round(H.getFlashMod() * flash_time)
 				if(flash_time <= 0)
 					return
-				var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, H.get_bodytype().vision_organ)
-				if(E && E.is_bruised() && prob(E.damage + 50))
-					H.flash_eyes()
-					E.damage += rand(1, 5)
+				var/vision_organ = H.get_bodytype()?.vision_organ
+				if(vision_organ)
+					var/obj/item/organ/internal/E = GET_INTERNAL_ORGAN(H, vision_organ)
+					if(E && E.is_bruised() && prob(E.damage + 50))
+						H.flash_eyes()
+						E.damage += rand(1, 5)
 
 		if(!O.is_blind())
 			do_flash(O, flash_time)

@@ -1,58 +1,24 @@
 /datum/storage_ui/default
 	var/list/is_seeing = new/list() //List of mobs which are currently seeing the contents of this item's storage
+	var/obj/screen/storage/boxes/boxes
+	var/obj/screen/storage/close/closer
+	var/obj/screen/storage/start/storage_start //storage UI
+	var/obj/screen/storage/cont/storage_continue
+	var/obj/screen/storage/end/storage_end
+	var/obj/screen/stored_start/stored_start
+	var/obj/screen/stored_cont/stored_continue
+	var/obj/screen/stored_end/stored_end
 
-	var/obj/screen/storage/boxes
-	var/obj/screen/storage/storage_start //storage UI
-	var/obj/screen/storage/storage_continue
-	var/obj/screen/storage/storage_end
-	var/obj/screen/storage/stored_start
-	var/obj/screen/storage/stored_continue
-	var/obj/screen/storage/stored_end
-	var/obj/screen/close/closer
-
-#define storage_ui_default "LEFT+7,BOTTOM+7 to LEFT+10,BOTTOM+8"
 /datum/storage_ui/default/New(var/storage)
 	..()
-	boxes = new /obj/screen/storage(  )
-	boxes.SetName("storage")
-	boxes.master = storage
-	boxes.icon_state = "block"
-	boxes.screen_loc = storage_ui_default
-	boxes.layer = HUD_BASE_LAYER
-
-	storage_start = new /obj/screen/storage(  )
-	storage_start.SetName("storage")
-	storage_start.master = storage
-	storage_start.icon_state = "storage_start"
-	storage_start.screen_loc = storage_ui_default
-	storage_start.layer = HUD_BASE_LAYER
-	storage_continue = new /obj/screen/storage(  )
-	storage_continue.SetName("storage")
-	storage_continue.master = storage
-	storage_continue.icon_state = "storage_continue"
-	storage_continue.screen_loc = storage_ui_default
-	storage_continue.layer = HUD_BASE_LAYER
-	storage_end = new /obj/screen/storage(  )
-	storage_end.SetName("storage")
-	storage_end.master = storage
-	storage_end.icon_state = "storage_end"
-	storage_end.screen_loc = storage_ui_default
-	storage_end.layer = HUD_BASE_LAYER
-
-	stored_start = new /obj //we just need these to hold the icon
-	stored_start.icon_state = "stored_start"
-	stored_start.layer = HUD_BASE_LAYER
-	stored_continue = new /obj
-	stored_continue.icon_state = "stored_continue"
-	stored_continue.layer = HUD_BASE_LAYER
-	stored_end = new /obj
-	stored_end.icon_state = "stored_end"
-	stored_end.layer = HUD_BASE_LAYER
-
-	closer = new /obj/screen/close(  )
-	closer.master = storage
-	closer.icon_state = "x"
-	closer.layer = HUD_BASE_LAYER
+	boxes            = new(null, null, null, null, null, storage)
+	storage_start    = new(null, null, null, null, null, storage)
+	storage_continue = new(null, null, null, null, null, storage)
+	storage_end      = new(null, null, null, null, null, storage)
+	closer           = new(null, null, null, null, null, storage)
+	stored_start     = new
+	stored_continue  = new
+	stored_end       = new
 
 /datum/storage_ui/default/Destroy()
 	close_all()

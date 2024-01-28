@@ -24,9 +24,9 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 			var/decl/special_role/antag = GET_DECL(rank)
 			rank = antag.name
 		if (SSjobs.guest_jobbans(rank))
-			if(config.guest_jobban && IsGuestKey(M.key))
+			if(get_config_value(/decl/config/toggle/on/guest_jobban) && IsGuestKey(M.key))
 				return "Guest Job-ban"
-			if(config.usewhitelist && !check_whitelist(M))
+			if(get_config_value(/decl/config/toggle/usewhitelist) && !check_whitelist(M))
 				return "Whitelisted Job"
 		return ckey_is_jobbanned(M.ckey, rank)
 	return 0
@@ -47,7 +47,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 	return 1
 
 /proc/jobban_loadbanfile()
-	if(config.ban_legacy_system)
+	if(get_config_value(/decl/config/toggle/on/ban_legacy_system))
 		var/savefile/S=new("data/job_full.ban")
 		from_savefile(S, "keys[0]", jobban_keylist)
 		log_admin("Loading jobban_rank")
@@ -60,7 +60,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 		if(!establish_db_connection())
 			error("Database connection failed. Reverting to the legacy ban system.")
 			log_misc("Database connection failed. Reverting to the legacy ban system.")
-			config.ban_legacy_system = 1
+			set_config_value(/decl/config/toggle/on/ban_legacy_system, TRUE)
 			jobban_loadbanfile()
 			return
 

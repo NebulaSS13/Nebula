@@ -171,26 +171,27 @@
 	..()
 	for(var/x in 1 to limit_x - 1)
 		for(var/y in 1 to limit_y - 1)
-			var/value = map[get_map_cell(x,y)]
+			var/value = map[TRANSLATE_COORD(x,y)]
 			if(value != FLOOR_VALUE)
 				continue
 			var/list/neighbors = list()
 			for(var/offset in list(list(0,1), list(0,-1), list(1,0), list(-1,0)))
-				var/char = map[get_map_cell(x + offset[1], y + offset[2])]
+				var/tmp_cell = TRANSLATE_COORD(x + offset[1], y+offset[2])
+				var/char = LAZYACCESS(map, tmp_cell)
 				if(char == FLOOR_VALUE || char == DOOR_VALUE)
-					neighbors.Add(get_map_cell(x + offset[1], y + offset[2]))
+					neighbors.Add(tmp_cell)
 			if(length(neighbors) > 1)
 				continue
 
 			map[neighbors[1]] = DOOR_VALUE
 			if(artifacts_to_spawn)
-				map[get_map_cell(x,y)] = ARTIFACT_VALUE
+				map[TRANSLATE_COORD(x,y)] = ARTIFACT_VALUE
 				artifacts_to_spawn--
 	var/entrance_x = pick(rand(2,limit_x-1), 1, limit_x)
 	var/entrance_y = pick(1, limit_y)
 	if(entrance_x == 1 || entrance_x == limit_x)
 		entrance_y = rand(2,limit_y-1)
-	map[get_map_cell(entrance_x,entrance_y)] = DOOR_VALUE
+	map[TRANSLATE_COORD(entrance_x,entrance_y)] = DOOR_VALUE
 
 /datum/random_map/maze/lab/get_appropriate_path(var/value)
 	if(value == ARTIFACT_VALUE)

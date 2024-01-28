@@ -1,8 +1,3 @@
-#define CREDIT_ROLL_SPEED 185
-#define CREDIT_SPAWN_SPEED 20
-#define CREDIT_ANIMATE_HEIGHT (14 * world.icon_size)
-#define CREDIT_EASE_DURATION 22
-
 var/global/list/end_titles
 
 /client
@@ -17,8 +12,6 @@ var/global/list/end_titles
 	if(!global.end_titles)
 		global.end_titles = generate_titles()
 
-	LAZYINITLIST(credits)
-
 	if(mob)
 		mob.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
 		mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
@@ -30,15 +23,14 @@ var/global/list/end_titles
 					sound_to(mob, sound(pick(global.using_map.credit_sound), wait = 0, volume = 40, channel = sound_channels.lobby_channel))
 			else if(get_preference_value(/datum/client_preference/play_admin_midis) == PREF_YES)
 				sound_to(mob, sound(global.end_credits_song, wait = 0, volume = 40, channel = sound_channels.lobby_channel))
-	sleep(50)
-	var/list/_credits = credits
+
+	sleep(5 SECONDS)
 	verbs += /client/proc/ClearCredits
-	for(var/I in global.end_titles)
-		if(!credits)
-			return
-		var/obj/screen/credit/T = new(null, I, src)
-		_credits += T
-		T.rollem()
+	for(var/credit in global.end_titles)
+		var/obj/screen/credit/credit_obj = new(null, mob)
+		LAZYADD(credits, credit_obj)
+		credit_obj.maptext = {"<div style="font:'Small Fonts'">[credit]</div>"}
+		credit_obj.rollem()
 		sleep(CREDIT_SPAWN_SPEED)
 	sleep(CREDIT_ROLL_SPEED - CREDIT_SPAWN_SPEED)
 
@@ -53,44 +45,6 @@ var/global/list/end_titles
 	mob.clear_fullscreen("fishbed")
 	mob.clear_fullscreen("fadeout")
 	sound_to(mob, sound(null, channel = sound_channels.lobby_channel))
-
-/obj/screen/credit
-	icon_state = "blank"
-	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	alpha = 0
-	screen_loc = "CENTER-7,BOTTOM+1"
-	plane = HUD_PLANE
-	layer = HUD_ABOVE_ITEM_LAYER
-	var/client/parent
-	var/matrix/target
-
-/obj/screen/credit/Initialize(mapload, credited, client/P)
-	. = ..()
-	parent = P
-	maptext = {"<div style="font:'Small Fonts'">[credited]</div>"}
-	maptext_height = world.icon_size * 2
-	maptext_width = world.icon_size * 14
-
-/obj/screen/credit/proc/rollem()
-	var/matrix/M = matrix(transform)
-	M.Translate(0, CREDIT_ANIMATE_HEIGHT)
-	animate(src, transform = M, time = CREDIT_ROLL_SPEED)
-	target = M
-	animate(src, alpha = 255, time = CREDIT_EASE_DURATION, flags = ANIMATION_PARALLEL)
-	spawn(CREDIT_ROLL_SPEED - CREDIT_EASE_DURATION)
-		if(!QDELETED(src))
-			animate(src, alpha = 0, transform = target, time = CREDIT_EASE_DURATION)
-			sleep(CREDIT_EASE_DURATION)
-			qdel(src)
-	parent.screen += src
-
-/obj/screen/credit/Destroy()
-	var/client/P = parent
-	if(istype(P))
-		P.screen -= src
-		LAZYREMOVE(P.credits, src)
-	parent = null
-	return ..()
 
 /proc/generate_titles()
 	var/list/titles = list()

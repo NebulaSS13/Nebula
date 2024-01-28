@@ -13,7 +13,7 @@
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
-	stack_origin_tech = "{'materials':5}"
+	stack_origin_tech = @'{"materials":5}'
 	xarch_source_mineral = /decl/material/solid/phosphorus
 	ore_icon_overlay = "nugget"
 	value = 0.8
@@ -38,11 +38,14 @@
 	ore_icon_overlay = "lump"
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
+	melting_point = 4074
+	boiling_point = 4474
+	ignition_point = 774
+	accelerant_value = 0.8
 	burn_product = /decl/material/gas/carbon_monoxide
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
-	fuel_value = 0.8
 	dirtiness = 15
 
 	flags = MAT_FLAG_FISSIBLE
@@ -66,6 +69,8 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
+	melting_point = 1744
+	boiling_point = 2504
 	color = "#effffe"
 	reflectiveness = MAT_VALUE_SHINY
 	sparse_material_weight = 3
@@ -385,7 +390,8 @@
 	value = 1.2
 	sparse_material_weight = 10
 	rich_material_weight = 5
-	fuel_value = 0.9
+	ignition_point = 774
+	accelerant_value = 0.9
 	dirtiness = 15
 	dissolves_into = list(
 		/decl/material/solid/carbon = 0.1,
@@ -416,7 +422,6 @@
 	value = 0.9
 	sparse_material_weight = 20
 	rich_material_weight = 10
-	fuel_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.8,
 		/decl/material/solid/metal/tungsten = 0.2
@@ -445,7 +450,6 @@
 	value = 0.9
 	sparse_material_weight = 15
 	rich_material_weight = 10
-	fuel_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/tin = 0.1,
 		/decl/material/solid/metal/tungsten = 0.6,
@@ -475,7 +479,6 @@
 	value = 1.1
 	sparse_material_weight = 10
 	rich_material_weight = 5
-	fuel_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/platinum = 0.7,
 		/decl/material/solid/metal/iron = 0.1,
@@ -505,7 +508,6 @@
 	value = 0.8
 	sparse_material_weight = 25
 	rich_material_weight = 15
-	fuel_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/zinc = 0.7,
 		/decl/material/solid/metal/iron = 0.2,
@@ -534,7 +536,6 @@
 	value = 0.8
 	sparse_material_weight = 20
 	rich_material_weight = 10
-	fuel_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/lead = 0.7,
 		/decl/material/solid/metal/iron = 0.2,
@@ -563,7 +564,6 @@
 	value = 0.8
 	sparse_material_weight = 5
 	rich_material_weight = 5
-	fuel_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/gold = 0.7,
 		/decl/material/solid/metal/silver = 0.3
@@ -591,7 +591,6 @@
 	value = 0.9
 	sparse_material_weight = 5
 	rich_material_weight = 10
-	fuel_value = 0.8
 	dissolves_into = list(
 		/decl/material/solid/metal/chromium = 0.6,
 		/decl/material/solid/metal/lead = 0.4

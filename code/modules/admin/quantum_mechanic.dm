@@ -15,6 +15,10 @@
 	if(!check_rights(R_ADMIN|R_DEBUG))
 		return
 
+	if(GAME_STATE < RUNLEVEL_GAME)
+		to_chat(src, SPAN_WARNING("Please wait for the round to start..."))
+		return
+
 	var/T = get_turf(mob)
 	var/mob/living/carbon/human/quantum/Q = new (T)
 
@@ -24,7 +28,7 @@
 	Q.ckey = ckey
 
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/quantum)
-	outfit.equip(Q)
+	outfit.equip_outfit(Q)
 
 	//Sort out ID
 	var/obj/item/card/id/quantum/id = new (Q)
@@ -187,8 +191,6 @@
 	icon = 'icons/clothing/under/uniform_quantum.dmi'
 	cold_protection = SLOT_FULL_BODY
 	heat_protection = SLOT_FULL_BODY
-	sensor_mode = SUIT_SENSOR_OFF
-	has_sensor = FALSE
 	siemens_coefficient = 0
 
 /obj/item/clothing/under/color/quantum/attack_hand(mob/user)

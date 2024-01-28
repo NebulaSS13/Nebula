@@ -22,7 +22,7 @@
 /obj/item/stack/material/cyborg/plastic
 	name = "cyborg plastic synthesiser"
 	icon_state = "sheet"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/stack/material/cyborg/steel
 	name = "cyborg steel synthesiser"
@@ -37,7 +37,7 @@
 /obj/item/stack/material/cyborg/wood
 	name = "cyborg wood synthesiser"
 	icon_state = "sheet-wood"
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/material/cyborg/glass
 	name = "cyborg glass synthesiser"

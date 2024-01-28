@@ -5,8 +5,7 @@
 	icon_state = "egg"
 	pixel_x = -128
 	pixel_y = -128
-	health = 100
-	maxHealth = 100 //I dunno what to do with health at this point.
+	mob_default_max_health = 100
 	universal_understand = TRUE
 	mob_sort_value = 5
 
@@ -52,14 +51,34 @@
 	return STATUS_INTERACTIVE
 
 /mob/living/deity/Destroy()
-	death(0)
-	minions.Cut()
-	structures.Cut()
-	eyeobj.release()
 
+	for(var/phenom in phenomenas)
+		remove_phenomena(phenom)
+
+	if(length(items_by_category))
+		for(var/cat in items_by_category)
+			var/list/L = items_by_category[cat]
+			L.Cut()
+		items_by_category.Cut()
+
+	if(length(items))
+		for(var/i in items)
+			qdel(items[i])
+		items.Cut()
+
+	death(0)
+	if(length(minions))
+		minions.Cut()
+	if(length(structures))
+		structures.Cut()
+
+	if(eyeobj)
+		eyeobj.release()
+		QDEL_NULL(eyeobj)
 	QDEL_NULL(eyenet) //We do it here as some mobs have eyes that have access to the visualnet and we only want to destroy it when the deity is destroyed
-	QDEL_NULL(eyeobj)
+
 	QDEL_NULL(form)
+
 	return ..()
 
 /mob/living/deity/verb/return_to_plane()

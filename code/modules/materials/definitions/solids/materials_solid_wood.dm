@@ -1,4 +1,4 @@
-/decl/material/solid/wood
+/decl/material/solid/organic/wood
 	name = "wood"
 	uid = "solid_wood"
 	liquid_name = "wood pulp"
@@ -22,7 +22,7 @@
 	weight = MAT_VALUE_NORMAL
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
-	stack_origin_tech = "{'materials':1,'biotech':1}"
+	stack_origin_tech = @'{"materials":1,"biotech":1}'
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
 	destruction_desc = "splinters"
@@ -36,14 +36,14 @@
 	value = 1.5
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = MAT_VALUE_NORMAL
-	fuel_value = 0.8
+	accelerant_value = 0.8
 	default_solid_form = /obj/item/stack/material/plank
 	sound_manipulate = 'sound/foley/woodpickup1.ogg'
 	sound_dropped = 'sound/foley/wooddrop1.ogg'
 
-/decl/material/solid/wood/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if(reinforce_material || ispath(stack_type))
 		return
 
 	if(wall_support_value >= 10)
@@ -76,31 +76,27 @@
 	. += new/datum/stack_recipe/prosthetic/right_foot(src)
 	. += new/datum/stack_recipe/campfire(src)
 
-/decl/material/solid/wood/mahogany/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/mahogany/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/mahogany(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += new/datum/stack_recipe/tile/mahogany(src)
 
-/decl/material/solid/wood/maple/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/maple/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/maple(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += new/datum/stack_recipe/tile/maple(src)
 
-/decl/material/solid/wood/ebony/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/ebony/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/ebony(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += new/datum/stack_recipe/tile/ebony(src)
 
-/decl/material/solid/wood/walnut/generate_recipes(var/reinforce_material)
+/decl/material/solid/organic/wood/walnut/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material)
-		return
-	. += new/datum/stack_recipe/tile/walnut(src)
+	if(!reinforce_material && islist(.) && !ispath(stack_type))
+		. += new/datum/stack_recipe/tile/walnut(src)
 
-/decl/material/solid/wood/holographic
+/decl/material/solid/organic/wood/holographic
 	uid = "solid_holographic_wood"
 	color = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	shard_type = SHARD_NONE
@@ -109,10 +105,10 @@
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
-/decl/material/solid/wood/holographic/get_recipes(reinf_mat)
+/decl/material/solid/organic/wood/holographic/get_recipes(stack_type, reinf_mat)
 	return list()
 
-/decl/material/solid/wood/mahogany
+/decl/material/solid/organic/wood/mahogany
 	name = "mahogany"
 	uid = "solid_mahogany"
 	adjective_name = "mahogany"
@@ -121,7 +117,7 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	value = 1.6
 
-/decl/material/solid/wood/maple
+/decl/material/solid/organic/wood/maple
 	name = "maple"
 	uid = "solid_maple"
 	adjective_name = "maple"
@@ -129,7 +125,7 @@
 	color = WOOD_COLOR_PALE
 	value = 1.8
 
-/decl/material/solid/wood/ebony
+/decl/material/solid/organic/wood/ebony
 	name = "ebony"
 	uid = "solid_ebony"
 	adjective_name = "ebony"
@@ -143,7 +139,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
 
-/decl/material/solid/wood/walnut
+/decl/material/solid/organic/wood/walnut
 	name = "walnut"
 	uid = "solid_walnut"
 	adjective_name = "walnut"
@@ -154,7 +150,7 @@
 	weight = MAT_VALUE_NORMAL
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
-/decl/material/solid/wood/bamboo
+/decl/material/solid/organic/wood/bamboo
 	name = "bamboo"
 	uid = "solid_bamboo"
 	liquid_name = "bamboo pulp"
@@ -165,7 +161,7 @@
 	weight = MAT_VALUE_VERY_LIGHT
 	hardness = MAT_VALUE_RIGID
 
-/decl/material/solid/wood/yew
+/decl/material/solid/organic/wood/yew
 	name = "yew"
 	uid = "solid_yew"
 	adjective_name = "yew"

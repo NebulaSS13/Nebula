@@ -7,7 +7,7 @@
 	desc       = "A RFID card reader for various authentication or data sharing usages."
 	icon       = 'icons/obj/items/stock_parts/modular_components.dmi'
 	icon_state = "cardreader"
-	material   = /decl/material/solid/plastic
+	material   = /decl/material/solid/organic/plastic
 	matter     = list(
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE,

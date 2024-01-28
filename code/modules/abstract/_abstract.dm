@@ -1,12 +1,12 @@
 /obj/abstract
-	name =          ""
-	icon =          'icons/effects/landmarks.dmi'
-	icon_state =    "x2"
-	simulated =     FALSE
-	density =       FALSE
-	anchored =      TRUE
-	unacidable =    TRUE
+	name          = ""
+	icon          = 'icons/effects/landmarks.dmi'
+	icon_state    = "x2"
+	simulated     = FALSE
+	density       = FALSE
+	anchored      = TRUE
 	abstract_type = /obj/abstract
+	invisibility  = INVISIBILITY_ABSTRACT
 
 /obj/abstract/Initialize()
 	. = ..()
@@ -15,7 +15,6 @@
 	opacity       =  FALSE
 	alpha         =  0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	invisibility  =  INVISIBILITY_MAXIMUM+1
 
 /obj/abstract/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)

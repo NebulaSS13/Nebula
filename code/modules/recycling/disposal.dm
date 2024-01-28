@@ -112,7 +112,7 @@ var/global/list/diversion_junctions = list()
 
 	update_icon()
 
-/obj/machinery/disposal/receive_mouse_drop(atom/dropping, mob/user)
+/obj/machinery/disposal/receive_mouse_drop(atom/dropping, mob/user, params)
 
 	. = (user?.a_intent != I_HURT && ..())
 
@@ -124,7 +124,7 @@ var/global/list/diversion_junctions = list()
 		var/incapacitation_flags = INCAPACITATION_DEFAULT
 		if(dropping == user)
 			incapacitation_flags &= ~INCAPACITATION_RESTRAINED
-		if(!dropping.can_mouse_drop(src, user, incapacitation_flags))
+		if(!dropping.can_mouse_drop(src, user, incapacitation_flags, params))
 			return FALSE
 
 		// Todo rewrite all of this.
@@ -538,7 +538,7 @@ var/global/list/diversion_junctions = list()
 	anchored = TRUE
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/disposaloutlet/Initialize()
 	. = ..()

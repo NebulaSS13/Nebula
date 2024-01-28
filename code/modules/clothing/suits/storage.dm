@@ -15,8 +15,10 @@
 		return ..(user)
 	return TRUE
 
-/obj/item/clothing/suit/storage/handle_mouse_drop(atom/over, mob/user)
-	. = pockets?.handle_storage_internal_mouse_drop(user, over) && ..()
+/obj/item/clothing/suit/storage/handle_mouse_drop(atom/over, mob/user, params)
+	if(istype(over, /obj/screen/inventory))
+		return ..()
+	return pockets?.handle_storage_internal_mouse_drop(user, over) && ..()
 
 /obj/item/clothing/suit/storage/attackby(obj/item/W, mob/user)
 	..()

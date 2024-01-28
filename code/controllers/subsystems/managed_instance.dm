@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(managed_instances)
 			PRINT_STACK_TRACE("Managed instance was queued for deletion during init! [managed_instance]")
 			category_list[cache_id] -= managed_instance
 		else
-			events_repository.register(/decl/observ/destroyed, managed_instance, src, /datum/controller/subsystem/managed_instances/proc/clear)
+			events_repository.register(/decl/observ/destroyed, managed_instance, src, TYPE_PROC_REF(/datum/controller/subsystem/managed_instances, clear))
 			. = managed_instance
 
 // This is costly, but it also shouldn't be common for managed instances to get qdeleted post-storage.

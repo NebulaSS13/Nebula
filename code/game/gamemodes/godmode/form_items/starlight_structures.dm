@@ -143,7 +143,7 @@
 			for(var/l in get_turf(linked_god))
 				if(istype(l, /mob/living/starlight_soul))
 					to_chat(l, "<span class='notice'>\The [src] is looking for a soul to become a [looking_for]. Accept?</span> (<a href='?\ref[src];accept=[looking_for]'>Yes</a>)")
-			addtimer(CALLBACK(src, .proc/stop_looking_for, FALSE), 30 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(stop_looking_for), FALSE), 30 SECONDS)
 		show_browser(linked_god, null, "window=gateway")
 		return TOPIC_HANDLED
 
@@ -215,8 +215,9 @@
 	. = 0
 	if(istype(I, /obj/item/gun/energy))
 		var/obj/item/gun/energy/energy = I
-		if(energy.power_supply)
-			energy.power_supply.give(energy.charge_cost * energy.max_shots)
+		var/obj/item/cell/power_supply = energy.get_cell()
+		if(power_supply)
+			power_supply.give(energy.charge_cost * energy.max_shots)
 			. = 1
 	else if(istype(I ,/obj/item/knife/ritual/shadow))
 		var/obj/item/knife/ritual/shadow/shad = I

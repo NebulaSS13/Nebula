@@ -6,8 +6,8 @@
 	desc = "An underfloor disposal pipe."
 	anchored = TRUE
 	density = FALSE
-	maxhealth = 10
-	level = 1			// underfloor only
+	max_health = 10
+	level = LEVEL_BELOW_PLATING
 	dir = 0				// dir will contain dominant direction for junction pipes
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
 	layer = ABOVE_TILE_LAYER
@@ -164,7 +164,7 @@
 				var/obj/structure/disposalpipe/broken/P = new(src.loc)
 				P.set_dir(D)
 
-	src.set_invisibility(101)	// make invisible (since we won't delete the pipe immediately)
+	src.set_invisibility(INVISIBILITY_ABSTRACT)	// make invisible (since we won't delete the pipe immediately)
 	var/obj/structure/disposalholder/H = locate() in src
 	if(H)
 		// holder was present

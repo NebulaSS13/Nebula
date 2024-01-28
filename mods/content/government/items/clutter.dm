@@ -7,7 +7,7 @@
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "The iconic flag of the Sol Central Government, a symbol with many different meanings."
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/structure/banner_frame/solgov
 	banner = /obj/item/banner/solgov

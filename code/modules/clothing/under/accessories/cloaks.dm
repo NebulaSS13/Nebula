@@ -25,7 +25,7 @@
 
 // Cloaks should layer over and under everything, so set the layer directly rather
 // than relying on overlay order. This also overlays over inhands but it looks ok.
-/obj/item/clothing/accessory/cloak/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype, var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/accessory/cloak/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 
 	if(slot == slot_wear_suit_str || slot == slot_tie_str || slot == slot_w_uniform_str)
 
@@ -35,8 +35,8 @@
 		var/bodyicon = get_icon_for_bodytype(bodytype)
 		var/decl/bodytype/root_bodytype = user_mob.get_bodytype()
 		if(user_mob && bodytype != root_bodytype.bodytype_category)
-			underlay =  root_bodytype.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-underlay", color, slot)
-			cloverlay = root_bodytype.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-overlay", color, slot)
+			underlay =  root_bodytype.get_offset_overlay_image(bodyicon, "[bodytype]-underlay", color, slot)
+			cloverlay = root_bodytype.get_offset_overlay_image(bodyicon, "[bodytype]-overlay", color, slot)
 		else
 			underlay = image(bodyicon, "[bodytype]-underlay")
 			cloverlay = image(bodyicon, "[bodytype]-overlay")
@@ -127,7 +127,7 @@
 	name = "cloak"
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	armor_type = /datum/extension/armor/ablative
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY

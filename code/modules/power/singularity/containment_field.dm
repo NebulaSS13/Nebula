@@ -7,7 +7,6 @@
 	icon_state = "Contain_F"
 	anchored = TRUE
 	density = FALSE
-	unacidable = 1
 	light_range = 4
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	var/obj/machinery/field_generator/FG1 = null

@@ -49,17 +49,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 0
 	if(can_operate(src,user) != OPERATE_DENY && I.do_surgery(src,user)) //Surgery
 		return 1
-
-	if(user.a_intent == I_HELP && istype(I, /obj/item/clothing/head))
-		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-		if(hattable)
-			if(hattable.hat)
-				to_chat(user, SPAN_WARNING("\The [src] is already wearing \the [hattable.hat]."))
-				return TRUE
-			if(user.try_unequip(I) && hattable.wear_hat(src, I))
-				user.visible_message(SPAN_NOTICE("\The [user] puts \the [I] on \the [src]."))
-				return TRUE
-
 	return I.attack(src, user, user.get_target_zone() || ran_zone())
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
@@ -91,6 +80,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
 /obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone, animate = TRUE)
+
+	if(user?.a_intent != I_HURT && is_edible(M) && handle_eaten_by_mob(user, M) != EATEN_INVALID)
+		return TRUE
+
 	if(item_flags & ITEM_FLAG_NO_BLUDGEON)
 		return FALSE
 

@@ -13,7 +13,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	volume = 30
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 	var/static/list/colorizable_icon_states = list("pill1", "pill2", "pill3", "pill4", "pill5") // if using an icon state from here, color will be derived from reagents
 
 /obj/item/chems/pill/Initialize()
@@ -36,63 +36,24 @@
 /obj/item/chems/pill/dragged_onto(var/mob/user)
 	attack(user, user)
 
-/obj/item/chems/pill/attack(mob/M, mob/user, def_zone)
-	//TODO: replace with standard_feed_mob() call.
-	if(M == user)
-		if(!M.can_eat(src))
-			return
-		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
-		if(reagents?.total_volume)
-			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-		qdel(src)
-		return 1
-
-	else if(ishuman(M))
-		if(!M.can_force_feed(user, src))
-			return
-
-		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(!do_mob(user, M))
-			return
-		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
-		var/contained = REAGENT_LIST(src)
-		admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
-		if(reagents.total_volume)
-			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-		qdel(src)
-		return 1
-
-	return 0
-
 /obj/item/chems/pill/afterattack(obj/target, mob/user, proximity)
-	if(!proximity) return
-
-	if(ATOM_IS_OPEN_CONTAINER(target) && target.reagents)
+	if(proximity && ATOM_IS_OPEN_CONTAINER(target) && target.reagents)
 		if(!target.reagents.total_volume)
-			to_chat(user, "<span class='notice'>[target] is empty. Can't dissolve \the [src].</span>")
+			to_chat(user, SPAN_WARNING("\The [target] is empty. You can't dissolve \the [src] in it."))
 			return
-		to_chat(user, "<span class='notice'>You dissolve \the [src] in [target].</span>")
-
+		to_chat(user, SPAN_NOTICE("You dissolve \the [src] in \the [target]."))
+		user.visible_message(SPAN_NOTICE("\The [user] puts something in \the [target]."), range = 2)
 		admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [REAGENT_LIST(src)]")
 		reagents.trans_to(target, reagents.total_volume)
-		user.visible_message(SPAN_NOTICE("\The [user] puts something in \the [target]."), range = 2)
 		qdel(src)
-	return
+		return
+	return ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Pills. END
 ////////////////////////////////////////////////////////////////////////////////
 
 //We lied - it's pills all the way down
-/obj/item/chems/pill/antitox
-	name = "antitoxins (25u)"
-	desc = "Neutralizes many common toxins."
-	icon_state = "pill1"
-
-/obj/item/chems/pill/antitox/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
-
 /obj/item/chems/pill/bromide
 	name = "bromide pill"
 	desc = "Highly toxic."
@@ -168,12 +129,13 @@
 	reagents.add_reagent(/decl/material/liquid/oxy_meds, 15)
 
 /obj/item/chems/pill/antitoxins
-	name = "antitoxins (15u)"
+	name = "antitoxins (25u)"
 	desc = "A broad-spectrum anti-toxin."
 	icon_state = "pill1"
 
 /obj/item/chems/pill/antitoxins/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 15)
+	// Antitox is easy to make and has no OD threshold so we can get away with big pills.
+	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
 
 /obj/item/chems/pill/brute_meds
 	name = "styptic (20u)"
@@ -266,14 +228,13 @@
 	name = "detergent pod"
 	desc = "Put in water to get space cleaner. Do not eat. Really."
 	icon_state = "pod21"
-	var/smell_clean_time = 10 MINUTES
 
 // Don't overwrite the custom name.
 /obj/item/chems/pill/detergent/update_container_name()
 	return
 
 /obj/item/chems/pill/detergent/populate_reagents()
-	reagents.add_reagent(/decl/material/gas/ammonia, 30)
+	reagents.add_reagent(/decl/material/liquid/contaminant_cleaner, 30)
 
 /obj/item/chems/pill/pod
 	name = "master flavorpod item"

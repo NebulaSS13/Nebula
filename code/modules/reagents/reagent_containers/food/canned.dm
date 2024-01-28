@@ -6,7 +6,7 @@
 /obj/item/chems/food/can
 	name = "empty can"
 	icon = 'icons/obj/food_canned.dmi'
-	center_of_mass = @"{'x':15,'y':9}"
+	center_of_mass = @'{"x":15,"y":9}'
 	atom_flags = 0
 	bitesize = 3
 
@@ -27,22 +27,6 @@
 	playsound(src, 'sound/effects/canopen.ogg', rand(10, 50), 1)
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	sealed = FALSE
-
-/obj/item/chems/food/can/attack(mob/M, mob/user, def_zone)
-	if(force && !(obj_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
-		return ..()
-
-	if(standard_feed_mob(user, M))
-		update_icon(src)
-		return TRUE
-
-	return FALSE
-
-/obj/item/chems/food/can/standard_feed_mob(mob/user, mob/target)
-	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, SPAN_NOTICE("You need to open \the [src] first!"))
-		return TRUE
-	return ..()
 
 /obj/item/chems/food/can/attack_self(mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src) && !open_complexity)
@@ -111,9 +95,6 @@
 /obj/item/chems/food/can/tomato/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 12)
-
-/obj/item/chems/food/can/tomato/feed_sound(var/mob/user)
-	playsound(user, 'sound/items/drink.ogg', rand(10, 50), 1)
 
 /obj/item/chems/food/can/spinach
 	name = "spinach"

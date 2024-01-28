@@ -10,8 +10,7 @@
 	base_name = "syringe"
 	desc = "A syringe."
 	icon = 'icons/obj/syringe.dmi'
-	item_state = "rg0"
-	icon_state = "rg"
+	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/glass
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[1,2,5]"
@@ -19,18 +18,13 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	sharp = 1
-	unacidable = 1 //glass
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	var/mode = SYRINGE_DRAW
-	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
 	var/time = 30
+	var/can_stab = TRUE
 
 /obj/item/chems/syringe/Initialize(var/mapload)
-	. = ..()
-	update_icon()
-
-/obj/item/chems/syringe/on_reagent_change()
 	. = ..()
 	update_icon()
 
@@ -75,7 +69,10 @@
 		return
 
 	if((user.a_intent == I_HURT) && ismob(target))
-		syringestab(target, user)
+		if(can_stab)
+			syringestab(target, user)
+		else
+			to_chat(user, SPAN_WARNING("This syringe is too big to stab someone with it."))
 		return
 
 	handleTarget(target, user)
@@ -83,25 +80,20 @@
 /obj/item/chems/syringe/on_update_icon()
 	. = ..()
 	underlays.Cut()
-
+	icon_state = get_world_inventory_state()
 	if(mode == SYRINGE_BROKEN)
-		icon_state = "broken"
+		icon_state = "[icon_state]_broken"
 		return
-
-	var/rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
-	if (reagents.total_volume == 0)
-		rounded_vol = 0
+	var/rounded_vol = 0
+	if (reagents?.total_volume > 0)
+		rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
 	if(ismob(loc))
-		add_overlay((mode == SYRINGE_DRAW)? "draw" : "inject")
-	icon_state = "[initial(icon_state)][rounded_vol]"
-	item_state = "syringe_[rounded_vol]"
-
-	if(reagents.total_volume)
-		filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
-
-		filling.icon_state = "syringe[rounded_vol]"
-
+		add_overlay((mode == SYRINGE_DRAW)? "[icon_state]_draw" : "[icon_state]_inject")
+	icon_state = "[icon_state]_[rounded_vol]"
+	if(reagents?.total_volume)
+		var/image/filling = image(icon, "[icon_state]_underlay")
 		filling.color = reagents.get_color()
+		filling.appearance_flags |= RESET_COLOR
 		underlays += filling
 
 /obj/item/chems/syringe/proc/handleTarget(var/atom/target, var/mob/user)
@@ -182,7 +174,7 @@
 
 /obj/item/chems/syringe/proc/injectReagents(var/atom/target, var/mob/user)
 
-	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC) && (can_stab == TRUE))
 		syringestab(target, user)
 		return
 
@@ -190,12 +182,14 @@
 		to_chat(user, SPAN_NOTICE("The syringe is empty."))
 		mode = SYRINGE_DRAW
 		return
-	if(istype(target, /obj/item/implantcase/chem))
+
+	if(!user.Adjacent(target))
 		return
 
-	if(!ATOM_IS_OPEN_CONTAINER(target) && !ismob(target) && !istype(target, /obj/item/chems/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/cigarettes))
+	if(!ismob(target) && (!target.reagents || !target.can_be_injected_by(src)))
 		to_chat(user, SPAN_NOTICE("You cannot directly fill this object."))
 		return
+
 	if(!REAGENTS_FREE_SPACE(target.reagents))
 		to_chat(user, SPAN_NOTICE("[target] is full."))
 		return
@@ -315,13 +309,10 @@
 	visible_name = "a giant syringe"
 	time = 300
 	mode = SYRINGE_INJECT
+	can_stab = FALSE
 
 /obj/item/chems/syringe/ld50_syringe/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/heartstopper, reagents.maximum_volume)
-
-/obj/item/chems/syringe/ld50_syringe/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
-	to_chat(user, SPAN_NOTICE("This syringe is too big to stab someone with it."))
-	return // No instant injecting
 
 /obj/item/chems/syringe/ld50_syringe/drawReagents(var/target, var/mob/user)
 	if(ismob(target)) // No drawing 60 units of blood at once
@@ -385,23 +376,23 @@
 	desc = "An advanced syringe that can hold 60 units of chemicals."
 	amount_per_transfer_from_this = 20
 	volume = 60
-	icon_state = "bs"
+	icon = 'icons/obj/syringe_advanced.dmi'
 	material = /decl/material/solid/glass
 	matter = list(
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
-	origin_tech = "{'biotech':3,'materials':4,'exoticmatter':2}"
+	origin_tech = @'{"biotech":3,"materials":4,"exoticmatter":2}'
 
 /obj/item/chems/syringe/noreact
 	name = "cryostasis syringe"
 	desc = "An advanced syringe that stops reagents inside from reacting. It can hold up to 20 units."
 	volume = 20
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
-	icon_state = "cs"
+	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE
+	icon = 'icons/obj/syringe_cryo.dmi'
 	material = /decl/material/solid/glass
 	matter = list(
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
-	origin_tech = "{'biotech':4,'materials':4}"
+	origin_tech = @'{"biotech":4,"materials":4}'

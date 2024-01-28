@@ -8,7 +8,7 @@
 	if(blood_overlay)
 		add_overlay(blood_overlay)
 	if(global.contamination_overlay && contaminated)
-		overlays += global.contamination_overlay
+		add_overlay(global.contamination_overlay)
 
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
@@ -44,21 +44,6 @@
 		melt()
 		return
 	physically_destroyed()
-
-/obj/item/melt()
-	for(var/mat in matter)
-		var/decl/material/M = GET_DECL(mat)
-		if(!M)
-			log_warning("[src] ([type]) has a bad material path in its matter var.")
-			continue
-		var/turf/T = get_turf(src)
-		//TODO: Would be great to just call a proc to do that, like "Material.place_burn_product(loc, amount_matter)" so no need to care if its a gas or something else
-		var/datum/gas_mixture/environment = T?.return_air()
-		if(M.burn_product)
-			environment.adjust_gas(M.burn_product, M.fuel_value * (matter[mat] / SHEET_MATERIAL_AMOUNT))
-
-	new /obj/effect/decal/cleanable/molten_item(src)
-	qdel(src)
 
 /obj/item/proc/shatter(var/consumed)
 	var/turf/T = get_turf(src)

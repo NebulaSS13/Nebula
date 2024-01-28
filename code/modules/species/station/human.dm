@@ -8,9 +8,11 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
 
+	// Add /decl/bodytype/prosthetic/basic_human to this list to allow full-body prosthetics.
 	available_bodytypes = list(
 		/decl/bodytype/human,
-		/decl/bodytype/human/masculine
+		/decl/bodytype/human/masculine,
+		/decl/bodytype/prosthetic/basic_human
 	)
 
 	exertion_effect_chance = 10

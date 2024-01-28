@@ -3,8 +3,8 @@
 	desc = "A device which aids in triangulation of exotic particles."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "flashgun"
-	item_state = "lampgreen"
-	origin_tech = "{'wormholes':3,'magnets':3}"
+	item_state = "flashgun"
+	origin_tech = @'{"wormholes":3,"magnets":3}'
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,

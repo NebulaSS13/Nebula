@@ -33,11 +33,11 @@
 		ARMOR_BOMB = ARMOR_BOMB_MINOR
 		)
 	slot = ACCESSORY_SLOT_ARMOR_C
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
-	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
+	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
 
 /obj/item/clothing/accessory/armor/plate/get_fibers()
 	return null	//plates do not shed
@@ -56,7 +56,7 @@
 	matter = list(
 		/decl/material/solid/metal/plasteel = MATTER_AMOUNT_SECONDARY
 	)
-	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
+	origin_tech = @'{"materials":2,"engineering":1,"combat":2}'
 
 /obj/item/clothing/accessory/armor/plate/tactical
 	name = "tactical armor plate"
@@ -75,7 +75,7 @@
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
-	origin_tech = "{'materials':3,'engineering':2,'combat':2}"
+	origin_tech = @'{"materials":3,"engineering":2,"combat":2}'
 
 //Arm guards
 /obj/item/clothing/accessory/armguards
@@ -94,11 +94,11 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
-	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
+	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
 
 /obj/item/clothing/accessory/armguards/craftable
 	material_armor_multiplier = 1
@@ -122,11 +122,11 @@
 		ARMOR_BOMB = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
-	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
+	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
 
 /obj/item/clothing/accessory/legguards/craftable
 	material_armor_multiplier = 1

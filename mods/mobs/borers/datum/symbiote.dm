@@ -29,7 +29,7 @@ var/global/list/symbiote_starting_points = list()
 /decl/hierarchy/outfit/job/symbiote_host
 	name = "Job - Symbiote Host"
 
-/datum/job/symbiote/post_equip_rank(var/mob/person, var/alt_title)
+/datum/job/symbiote/post_equip_job_title(var/mob/person, var/alt_title)
 
 	var/mob/living/simple_animal/borer/symbiote = person
 	symbiote.SetName(symbiote.truename)
@@ -87,7 +87,7 @@ var/global/list/symbiote_starting_points = list()
 		if(length(global.symbiote_starting_points))
 			symbiote.forceMove(pick(global.symbiote_starting_points))
 		else
-			symbiote.forceMove(pick(global.latejoin_locations))
+			symbiote.forceMove(get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN))
 
 	if(H.mind)
 		H.mind.transfer_to(symbiote)
@@ -118,7 +118,7 @@ var/global/list/symbiote_starting_points = list()
 			return
 
 /datum/job/symbiote/is_position_available()
-	. = ..() && length(find_valid_hosts(TRUE)) 
+	. = ..() && length(find_valid_hosts(TRUE))
 
 /obj/abstract/landmark/symbiote_start
 	name = "Symbiote Start"

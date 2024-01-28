@@ -60,14 +60,13 @@ var/global/list/singularity_beacons = list()
 		if(prob(50))
 			temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
 			src.updateUsrDialog()
-			addtimer(CALLBACK(src, .proc/selfdestruct), rand(5, 20) SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(selfdestruct)), rand(5, 20) SECONDS)
 			return
 		if(ishuman(M))
 			var/mob/living/carbon/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
 			var/decl/special_role/traitors = GET_DECL(/decl/special_role/traitor)
 			traitors.add_antagonist(N.mind)
-			traitors.equip(N)
 			log_and_message_admins("has accepted a traitor objective from a syndicate beacon.", M)
 
 
@@ -77,7 +76,7 @@ var/global/list/singularity_beacons = list()
 
 /obj/machinery/syndicate_beacon/proc/selfdestruct()
 	selfdestructing = 1
-	INVOKE_ASYNC(GLOBAL_PROC, .proc/explosion, src.loc, 1, rand(1, 3), rand(3, 8), 10)
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(explosion), src.loc, 1, rand(1, 3), rand(3, 8), 10)
 
 ////////////////////////////////////////
 //Singularity beacon

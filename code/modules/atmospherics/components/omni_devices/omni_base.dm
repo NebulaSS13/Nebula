@@ -6,7 +6,7 @@
 	icon = 'icons/atmos/omni_devices.dmi'
 	icon_state = "base"
 	initialize_directions = 0
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	var/core_icon
 
 	var/configuring = 0
@@ -213,7 +213,7 @@
 		if(!istype(T))
 			return
 		var/obj/machinery/atmospherics/node = LAZYACCESS(P.nodes, 1)
-		if(!T.is_plating() && istype(node, /obj/machinery/atmospherics/pipe) && node.level == 1 )
+		if(!T.is_plating() && istype(node, /obj/machinery/atmospherics/pipe) && node.level == LEVEL_BELOW_PLATING)
 			pipe_state_key = "down"
 		else
 			pipe_state_key = "intact"

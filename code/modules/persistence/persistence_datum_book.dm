@@ -60,7 +60,7 @@
 		if(length(global.station_bookcases))
 			T = get_turf(pick(global.station_bookcases))
 		else
-			T = pick(global.latejoin_locations)
+			T = get_random_spawn_turf(SPAWN_FLAG_PERSISTENCE_CAN_SPAWN)
 
 	. = ..(T, tokens)
 

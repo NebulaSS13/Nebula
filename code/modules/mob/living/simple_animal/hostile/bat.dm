@@ -5,18 +5,13 @@
 	speak_chance = 0
 	turns_per_move = 3
 	speed = 4
-	maxHealth = 20
-	health = 20
-
+	mob_default_max_health = 20
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite
-
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-
 	environment_smash = 1
-
 	faction = "scarybat"
 	var/mob/living/owner
 

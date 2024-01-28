@@ -20,9 +20,9 @@
 /obj/structure/vending_refill/get_mechanics_info()
 	return "Drag to a vendor to restock. Generally can not be opened."
 
-/obj/structure/vending_refill/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/structure/vending_refill/handle_mouse_drop(atom/over, mob/user, params)
 	if(istype(over, /obj/machinery/vending))
-		var/obj/machinery/vending/vendor = over 
+		var/obj/machinery/vending/vendor = over
 		var/target_type = vendor.base_type || vendor.type
 		if(ispath(expected_type, target_type))
 			for(var/datum/stored_items/R in product_records)

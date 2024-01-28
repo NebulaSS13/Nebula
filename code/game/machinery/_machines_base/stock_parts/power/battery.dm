@@ -43,7 +43,7 @@
 	if(cell)
 		return
 	cell = new_cell
-	events_repository.register(/decl/observ/destroyed, cell, src, .proc/remove_cell)
+	events_repository.register(/decl/observ/destroyed, cell, src, PROC_REF(remove_cell))
 	if(!machine)
 		machine = loc
 	if(istype(machine))
@@ -136,10 +136,9 @@
 /obj/item/stock_parts/power/battery/on_refresh(var/obj/machinery/machine)
 	if(machine && !cell)
 		var/obj/item/stock_parts/building_material/mat = machine.get_component_of_type(/obj/item/stock_parts/building_material)
-		var/obj/item/cell/cell = mat && mat.remove_material(/obj/item/cell, 1)
+		var/obj/item/cell/cell = mat && mat.remove_material(/obj/item/cell, 1, src)
 		if(cell)
 			add_cell(machine, cell)
-			cell.forceMove(src)
 	charge_rate = initial(charge_rate)
 	charge_rate *= 1 + 0.5 * machine.total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
@@ -226,7 +225,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/stock_parts/power/battery/buildable/turbo/get_lore_info()
@@ -241,7 +240,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/stock_parts/power/battery/buildable/responsive/get_lore_info()

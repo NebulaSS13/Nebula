@@ -15,7 +15,6 @@
 	QDEL_NULL(touching)
 	QDEL_NULL(bloodstr)
 	reagents = null //We assume reagents is a reference to bloodstr here
-	QDEL_NULL_LIST(hallucinations)
 	if(loc)
 		for(var/mob/M in contents)
 			M.dropInto(loc)
@@ -61,7 +60,6 @@
 	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, BP_CHEST)
 	if(istype(organ))
 		organ.take_external_damage(d, 0)
-		updatehealth()
 	else
 		take_organ_damage(d)
 	if(prob(getBruteLoss() - 50))
@@ -300,15 +298,8 @@
 /mob/living/carbon/proc/can_devour(atom/movable/victim)
 	return FALSE
 
-/mob/living/carbon/check_has_mouth()
-	// carbon mobs have mouths by default
-	// behavior of this proc for humans is overridden in human.dm
-	return 1
-
-/mob/living/carbon/proc/check_mouth_coverage()
-	// carbon mobs do not have blocked mouths by default
-	// overridden in human_defense.dm
-	return null
+/mob/living/carbon/get_satiated_nutrition()
+	return 350
 
 /mob/living/carbon/get_max_nutrition()
 	return 400

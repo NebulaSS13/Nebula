@@ -9,48 +9,63 @@
 	throwforce = 1
 	throw_speed = 3
 	throw_range = 5
-	origin_tech = "{'biotech':3}"
+	origin_tech = @'{"biotech":3}'
 	attack_verb = list("attacked", "slapped", "whacked")
 	relative_size = 85
 	damage_reduction = 0
 	scale_max_damage_to_species_health = FALSE
-	var/can_use_mmi = TRUE
-	var/mob/living/carbon/brain/brainmob = null
+	transfer_brainmob_with_organ = TRUE
+	var/can_use_brain_interface = TRUE
 	var/should_announce_brain_damage = TRUE
 	var/oxygen_reserve = 6
+	VAR_PRIVATE/mob/living/_brainmob = /mob/living/brain
 
-/obj/item/organ/internal/brain/getToxLoss()
-	return 0
+/obj/item/organ/internal/brain/get_brainmob(var/create_if_missing = FALSE)
+	if(!istype(_brainmob) && create_if_missing)
+		initialize_brainmob()
+	if(istype(_brainmob))
+		return _brainmob
 
-/obj/item/organ/internal/brain/set_species(species_name)
+/obj/item/organ/internal/brain/Initialize()
 	. = ..()
 	if(species)
 		set_max_damage(species.total_health)
 	else
 		set_max_damage(200)
 
+/obj/item/organ/internal/brain/proc/initialize_brainmob()
+	if(istype(_brainmob))
+		return
+	if(!ispath(_brainmob))
+		_brainmob = initial(_brainmob)
+	if(ispath(_brainmob))
+		_brainmob = new _brainmob(src)
+	else
+		_brainmob = null
+
+/obj/item/organ/internal/brain/getToxLoss()
+	return 0
+
+/obj/item/organ/internal/brain/set_species(species_name)
+	. = ..()
+	icon_state = "brain-prosthetic"
+	if(species)
+		set_max_damage(species.total_health)
+	else
+		set_max_damage(200)
+
 /obj/item/organ/internal/brain/Destroy()
-	QDEL_NULL(brainmob)
+	if(istype(_brainmob))
+		QDEL_NULL(_brainmob)
 	. = ..()
 
-/obj/item/organ/internal/brain/proc/transfer_identity(var/mob/living/carbon/H)
-
-	if(!brainmob)
-		brainmob = new(src)
-		brainmob.SetName(H.real_name)
-		brainmob.real_name = H.real_name
-		brainmob.dna = H.dna.Clone()
-		brainmob.timeofhostdeath = H.timeofdeath
-
-	if(H.mind)
-		H.mind.transfer_to(brainmob)
-
-	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
-	callHook("debrain", list(brainmob))
-
-/obj/item/organ/internal/brain/examine(mob/user)
+/obj/item/organ/internal/brain/examine(mob/user, var/distance)
 	. = ..()
-	if(brainmob && brainmob.client)//if thar be a brain inside... the brain.
+	if(distance <= 1)
+		show_brain_status(user)
+
+/obj/item/organ/internal/brain/proc/show_brain_status(mob/user)
+	if(istype(_brainmob) && _brainmob?.client) //if thar be a brain inside... the brain.
 		to_chat(user, "You can feel the small spark of life still left in this one.")
 	else
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
@@ -66,21 +81,6 @@
 		SetName("\the [owner.real_name]'s [initial(name)]")
 	if(!(. = ..()))
 		return
-
-/obj/item/organ/internal/brain/on_remove_effects()
-	if(istype(owner))
-		transfer_identity(owner)
-	return ..()
-
-/obj/item/organ/internal/brain/on_add_effects()
-	if(brainmob)
-		if(brainmob.mind)
-			if(owner.key)
-				owner.ghostize()
-			brainmob.mind.transfer_to(owner)
-		else
-			owner.key = brainmob.key
-	return ..()
 
 /obj/item/organ/internal/brain/can_recover()
 	return !(status & ORGAN_DEAD)
@@ -172,7 +172,7 @@
 		SET_STATUS_MAX(owner, STAT_PARA, damage_secondary)
 		SET_STATUS_MAX(owner, STAT_WEAK, round(damage, 1))
 		if(prob(30))
-			addtimer(CALLBACK(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
+			addtimer(CALLBACK(src, PROC_REF(brain_damage_callback), damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
 
 /obj/item/organ/internal/brain/proc/brain_damage_callback(var/damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
 	if(!QDELETED(owner))
@@ -221,7 +221,7 @@
 /obj/item/organ/internal/brain/surgical_fix(mob/user)
 	var/blood_volume = owner.get_blood_oxygenation()
 	if(blood_volume < BLOOD_VOLUME_SURVIVE)
-		to_chat(user, "<span class='danger'>Parts of [src] didn't survive the procedure due to lack of air supply!</span>")
+		to_chat(user, SPAN_DANGER("Parts of \the [src] didn't survive the procedure due to lack of air supply!"))
 		set_max_damage(FLOOR(max_damage - 0.25*damage))
 	heal_damage(damage)
 
@@ -230,3 +230,8 @@
 
 /obj/item/organ/internal/brain/get_mechanical_assisted_descriptor()
 	return "machine-interface [name]"
+
+/obj/item/organ/internal/brain/die()
+	if(istype(_brainmob) && _brainmob.stat != DEAD)
+		_brainmob.death()
+	..()

@@ -8,8 +8,8 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'esoteric':4,'magnets':4}"
-	material = /decl/material/solid/plastic
+	origin_tech = @'{"esoteric":4,"magnets":4}'
+	material = /decl/material/solid/organic/plastic
 	var/can_use = 1
 	var/obj/effect/dummy/chameleon/active_dummy = null
 	var/saved_item = /obj/item/trash/cigbutt

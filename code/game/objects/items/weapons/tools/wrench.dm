@@ -6,9 +6,9 @@
 	slot_flags = SLOT_LOWER_BODY
 	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'materials':1,'engineering':1}"
+	origin_tech = @'{"materials":1,"engineering":1}'
 	material = /decl/material/solid/metal/steel
-	center_of_mass = @"{'x':17,'y':16}"
+	center_of_mass = @'{"x":17,"y":16}'
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	drop_sound = 'sound/foley/bardrop1.ogg'

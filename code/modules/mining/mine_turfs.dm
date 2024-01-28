@@ -41,51 +41,22 @@
 		LAZYREMOVE(level.mining_turfs, src)
 	return ..()
 
-/turf/simulated/floor/asteroid/explosion_act(severity)
-	SHOULD_CALL_PARENT(FALSE)
-	if(severity == 1 || (severity == 2 && prob(70)))
-		gets_dug()
+/turf/simulated/floor/asteroid/can_be_dug()
+	return !density
 
 /turf/simulated/floor/asteroid/is_plating()
 	return !density
 
+/turf/simulated/floor/asteroid/on_update_icon()
+	..()
+	if(dug)
+		icon_state = "asteroid_dug"
+
 //#TODO: This should probably be generalised?
 /turf/simulated/floor/asteroid/attackby(obj/item/W, mob/user)
 	if(!W || !user)
-		return 0
-
-	var/list/usable_tools = list(
-		/obj/item/shovel,
-		/obj/item/pickaxe/diamonddrill,
-		/obj/item/pickaxe/drill,
-		/obj/item/pickaxe/borgdrill
-		)
-
-	var/valid_tool
-	for(var/valid_type in usable_tools)
-		if(istype(W,valid_type))
-			valid_tool = 1
-			break
-
-	if(valid_tool)
-		if (dug)
-			to_chat(user, "<span class='warning'>This area has already been dug</span>")
-			return TRUE
-
-		var/turf/T = user.loc
-		if (!(istype(T)))
-			return
-
-		to_chat(user, "<span class='warning'>You start digging.</span>")
-		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
-		. = TRUE
-
-		if(!do_after(user,40, src)) return
-
-		to_chat(user, "<span class='notice'>You dug a hole.</span>")
-		gets_dug()
-
-	else if(istype(W,/obj/item/storage/ore)) //#FIXME: Its kinda silly to put this in a specific turf's subtype's attackby.
+		return FALSE
+	if(istype(W,/obj/item/storage/ore)) //#FIXME: Its kinda silly to put this in a specific turf's subtype's attackby.
 		var/obj/item/storage/ore/S = W
 		if(S.collection_mode)
 			for(var/obj/item/stack/material/ore/O in contents)
@@ -95,17 +66,14 @@
 		if(S.collection_mode)
 			for(var/obj/item/fossil/F in contents)
 				return F.attackby(W,user)
+	return ..(W,user)
 
-	else
-		return ..(W,user)
-
-//#TODO: This should probably be generalised?
-/turf/simulated/floor/asteroid/proc/gets_dug()
-	if(dug)
-		return
-	LAZYADD(., new /obj/item/stack/material/ore/glass(src, (rand(3) + 2)))
+/turf/simulated/floor/asteroid/clear_diggable_resources()
 	dug = TRUE
-	icon_state = "asteroid_dug"
+	..()
+
+/turf/simulated/floor/asteroid/get_diggable_resources()
+	return dug ? null : list(/obj/item/stack/material/ore/sand = list(3, 2))
 
 //#TODO: This should probably be generalised?
 /turf/simulated/floor/asteroid/proc/updateMineralOverlays(var/update_neighbors)

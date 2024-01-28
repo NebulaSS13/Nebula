@@ -5,11 +5,11 @@
 	desc = "A display case for prized possessions. It taunts you to kick it."
 	density = TRUE
 	anchored = TRUE
-	unacidable = TRUE //Dissolving the case would also delete the gun.
 	alpha = 150
-	maxhealth = 100
+	max_health = 100
 	hitsound = 'sound/effects/Glasshit.ogg'
 	req_access = null
+	material = /decl/material/solid/glass
 
 	var/destroyed = FALSE
 	var/locked = TRUE
@@ -57,9 +57,9 @@
 	if(!istype(subtracting) || !length(subtracting.matter))
 		return
 	for(var/mat in matter)
-		if(!subtracting[mat])
+		if(!subtracting.matter[mat])
 			continue
-		matter[mat] -= subtracting[mat]
+		matter[mat] -= subtracting.matter[mat]
 		if(matter[mat] <= 0)
 			matter -= mat
 	UNSETEMPTY(matter)

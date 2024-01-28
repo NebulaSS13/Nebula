@@ -14,6 +14,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed/door
 	uncreated_component_parts = null
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
+	max_health = 300
 
 	var/can_open_manually = TRUE
 
@@ -26,8 +27,6 @@
 	var/glass = 0
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
-	var/maxhealth = 300
-	var/health
 	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
@@ -50,6 +49,9 @@
 	atmos_canpass = CANPASS_PROC
 
 	var/set_dir_on_update = TRUE
+	var/begins_closed     = TRUE
+	var/icon_state_open   = "door0"
+	var/icon_state_closed = "door1"
 
 /obj/machinery/door/proc/can_operate(var/mob/user)
 	. = istype(user) && !user.restrained() && (!issmall(user) || ishuman(user) || issilicon(user) || isbot(user))
@@ -68,7 +70,14 @@
 /obj/machinery/door/Initialize(var/mapload, var/d, var/populate_parts = TRUE, var/obj/structure/door_assembly/assembly = null)
 	if(!populate_parts)
 		inherit_from_assembly(assembly)
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, PROC_REF(CheckPenetration))
+
+	if(!begins_closed)
+		icon_state = icon_state_open
+		set_density(FALSE)
+		set_opacity(FALSE)
+		layer = open_layer
+
 	..()
 	. = INITIALIZE_HINT_LATELOAD
 
@@ -83,7 +92,7 @@
 	if (turf_hand_priority)
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
 
-	health = maxhealth
+	health = max_health
 #ifdef UNIT_TEST
 	if(autoset_access && length(req_access))
 		PRINT_STACK_TRACE("A door with mapped access restrictions was set to autoinitialize access.")
@@ -120,7 +129,7 @@
 	if(close_door_at && world.time >= close_door_at)
 		if(autoclose)
 			close_door_at = next_close_time()
-			INVOKE_ASYNC(src, /obj/machinery/door/proc/close)
+			INVOKE_ASYNC(src, TYPE_PROC_REF(/obj/machinery/door, close))
 		else
 			close_door_at = 0
 
@@ -244,7 +253,7 @@
 		if(reason_broken & MACHINE_BROKEN_GENERIC)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return TRUE
-		if(health >= maxhealth)
+		if(health >= max_health)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 			return TRUE
 		if(!density)
@@ -252,7 +261,7 @@
 			return TRUE
 
 		//figure out how much metal we need
-		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
+		var/amount_needed = (max_health - health) / DOOR_REPAIR_AMOUNT
 		amount_needed = CEILING(amount_needed)
 
 		var/obj/item/stack/stack = I
@@ -284,7 +293,7 @@
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				health = clamp(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
+				health = clamp(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, max_health)
 				update_icon()
 				qdel(repairing)
 				repairing = null
@@ -339,11 +348,11 @@
 	if(health <= 0 && initialhealth > 0)
 		visible_message(SPAN_WARNING("\The [src] breaks down!"))
 		set_broken(TRUE)
-	else if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
+	else if(health < max_health / 4 && initialhealth >= max_health / 4)
 		visible_message(SPAN_WARNING("\The [src] looks like it's about to break!"))
-	else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
+	else if(health < max_health / 2 && initialhealth >= max_health / 2)
 		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
-	else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
+	else if(health < max_health * 3/4 && initialhealth >= max_health * 3/4)
 		visible_message(SPAN_WARNING("\The [src] shows signs of damage!"))
 
 	..(component_damage, damtype)
@@ -351,21 +360,21 @@
 
 //How much damage should be passed to components inside even when door health is non zero
 /obj/machinery/door/proc/get_damage_leakthrough(var/damage, damtype=BRUTE)
-	if(health > 0.75 * maxhealth && damage < 10)
+	if(health > 0.75 * max_health && damage < 10)
 		return 0
-	. = round((1 - health/maxhealth) * damage)
+	. = round((1 - health/max_health) * damage)
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()
 	if(src.health <= 0)
 		to_chat(user, "\The [src] is broken!")
-	else if(src.health < src.maxhealth / 4)
+	else if(src.health < src.max_health / 4)
 		to_chat(user, "\The [src] looks like it's about to break!")
-	else if(src.health < src.maxhealth / 2)
+	else if(src.health < src.max_health / 2)
 		to_chat(user, "\The [src] looks seriously damaged!")
-	else if(src.health < src.maxhealth * 3/4)
+	else if(src.health < src.max_health * 3/4)
 		to_chat(user, "\The [src] shows signs of damage!")
-	else if(src.health < src.maxhealth && get_dist(src, user) <= 1)
+	else if(src.health < src.max_health && get_dist(src, user) <= 1)
 		to_chat(user, "\The [src] has some minor scuffing.")
 
 	var/mob/living/carbon/human/H = user
@@ -379,9 +388,9 @@
 
 /obj/machinery/door/on_update_icon()
 	if(density)
-		icon_state = "door1"
+		icon_state = icon_state_closed
 	else
-		icon_state = "door0"
+		icon_state = icon_state_open
 
 	SSradiation.resistance_cache.Remove(get_turf(src))
 
@@ -412,7 +421,7 @@
 	operating = 1
 
 	do_animate("opening")
-	icon_state = "door0"
+	icon_state = icon_state_open
 	set_opacity(FALSE)
 
 	sleep(0.5 SECONDS)
@@ -492,7 +501,7 @@
 		dismantle(TRUE)
 
 /obj/machinery/door/proc/CheckPenetration(var/base_chance, var/damage)
-	. = damage/maxhealth*180
+	. = damage/max_health*180
 	if(glass)
 		. *= 2
 	. = round(.)

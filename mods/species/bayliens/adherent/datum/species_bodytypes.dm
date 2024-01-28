@@ -52,52 +52,52 @@
 /decl/bodytype/crystalline/adherent/Initialize()
 	equip_adjust = list(
 		"[BP_L_HAND]" = list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0, "y" = 14)
+			"[NORTH]" = list(0, 14),
+			"[EAST]"  = list(0, 14),
+			"[SOUTH]" = list(0, 14),
+			"[WEST]"  = list(0, 14)
 		),
 
 		"[BP_R_HAND]" = list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0, "y" = 14)
+			"[NORTH]" = list(0, 14),
+			"[EAST]"  = list(0, 14),
+			"[SOUTH]" = list(0, 14),
+			"[WEST]"  = list(0, 14)
 		),
 
 		"[slot_back_str]" = list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0, "y" = 14)
+			"[NORTH]" = list(0, 14),
+			"[EAST]"  = list(0, 14),
+			"[SOUTH]" = list(0, 14),
+			"[WEST]"  = list(0, 14)
 		),
 
 		"[slot_belt_str]" = list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0, "y" = 14)
+			"[NORTH]" = list(0, 14),
+			"[EAST]"  = list(0, 14),
+			"[SOUTH]" = list(0, 14),
+			"[WEST]"  = list(0, 14)
 		),
 
 		"[slot_head_str]" =   list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 3, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = -3, "y" = 14)
+			"[NORTH]" = list( 0, 14),
+			"[EAST]"  = list( 3, 14),
+			"[SOUTH]" = list( 0, 14),
+			"[WEST]"  = list(-3, 14)
 		),
 
 		"[slot_l_ear_str]" =  list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0,  "y" = 14)
+			"[NORTH]" = list(0, 14),
+			"[EAST]"  = list(0, 14),
+			"[SOUTH]" = list(0, 14),
+			"[WEST]"  = list(0,  14)
 		),
 
 		"[slot_r_ear_str]" =  list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0,  "y" = 14)
+			"[NORTH]" = list(0, 14),
+			"[EAST]"  = list(0, 14),
+			"[SOUTH]" = list(0, 14),
+			"[WEST]"  = list(0,  14)
 		)
 	)
 	. = ..()

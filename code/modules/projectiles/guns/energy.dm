@@ -10,9 +10,8 @@ var/global/list/registered_cyborg_weapons = list()
 	fire_sound_text = "laser blast"
 	accuracy = 1
 
-	var/obj/item/cell/power_supply // What type of power cell this starts with. Uses accepts_cell_type or variable cell if unset.
 	var/charge_cost = 20           // How much energy is needed to fire.
-	var/max_shots = 10             // Determines the capacity of the weapon's power cell. Setting power_supply or accepts_cell_type will override this value.
+	var/max_shots = 10             // Determines the capacity of the weapon's power cell, if the type is not overridded in setup_power_supply().
 	var/modifystate                // Changes the icon_state used for the charge overlay.
 	var/charge_meter = 1           // If set, the icon state will be chosen based on the current charge
 	var/indicator_color            // Color used for overlay based charge meters
@@ -20,31 +19,24 @@ var/global/list/registered_cyborg_weapons = list()
 	var/use_external_power = 0     // If set, the weapon will look for an external power source to draw from, otherwise it recharges magically
 	var/recharge_time = 4          // How many ticks between recharges.
 	var/charge_tick = 0            // Current charge tick tracker.
-	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon.
 
 	// Which projectile type to create when firing.
 	var/projectile_type = /obj/item/projectile/beam/practice
+
+/obj/item/gun/energy/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	accepted_cell_type          = accepted_cell_type          || loaded_cell_type || /obj/item/cell/device/variable
+	loaded_cell_type            = loaded_cell_type            || accepted_cell_type
+	power_supply_extension_type = power_supply_extension_type || /datum/extension/loaded_cell/unremovable
+	return ..(loaded_cell_type, accepted_cell_type, power_supply_extension_type, max_shots*charge_cost)
 
 /obj/item/gun/energy/switch_firemodes()
 	. = ..()
 	if(.)
 		update_icon()
 
-/obj/item/gun/energy/emp_act(severity)
-	..()
-	update_icon()
-
-/obj/item/gun/energy/Initialize()
-
-	if(ispath(power_supply))
-		power_supply = new power_supply(src)
-	else if(accepts_cell_type)
-		power_supply = new accepts_cell_type(src)
-	else
-		power_supply = new /obj/item/cell/device/variable(src, max_shots*charge_cost)
-
+/obj/item/gun/energy/Initialize(var/ml, var/material_key)
+	setup_power_supply()
 	. = ..()
-
 	if(self_recharge)
 		START_PROCESSING(SSobj, src)
 	update_icon()
@@ -52,13 +44,10 @@ var/global/list/registered_cyborg_weapons = list()
 /obj/item/gun/energy/Destroy()
 	if(self_recharge)
 		STOP_PROCESSING(SSobj, src)
-	QDEL_NULL(power_supply)
 	return ..()
 
-/obj/item/gun/energy/get_cell()
-	return power_supply
-
 /obj/item/gun/energy/Process()
+	var/obj/item/cell/power_supply = get_cell()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
 		charge_tick++
 		if(charge_tick < recharge_time) return 0
@@ -77,6 +66,7 @@ var/global/list/registered_cyborg_weapons = list()
 	return 1
 
 /obj/item/gun/energy/consume_next_projectile()
+	var/obj/item/cell/power_supply = get_cell()
 	if(!power_supply)
 		return null
 	if(!ispath(projectile_type))
@@ -90,10 +80,14 @@ var/global/list/registered_cyborg_weapons = list()
 		return loc.get_cell()
 
 /obj/item/gun/energy/proc/get_shots_remaining()
-	. = round(power_supply.charge / charge_cost)
+	var/obj/item/cell/power_supply = get_cell()
+	if(!power_supply)
+		return 0
+	return round(power_supply.charge / charge_cost)
 
 /obj/item/gun/energy/examine(mob/user)
 	. = ..(user)
+	var/obj/item/cell/power_supply = get_cell()
 	if(!power_supply)
 		to_chat(user, "Seems like it's dead.")
 		return
@@ -104,6 +98,7 @@ var/global/list/registered_cyborg_weapons = list()
 
 /obj/item/gun/energy/proc/get_charge_ratio()
 	. = 0
+	var/obj/item/cell/power_supply = get_cell()
 	if(power_supply)
 		var/ratio = power_supply.percent()
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
@@ -119,7 +114,7 @@ var/global/list/registered_cyborg_weapons = list()
 	if(charge_meter)
 		update_charge_meter()
 
-/obj/item/gun/energy/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/gun/energy/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && charge_meter)
 		var/charge_state = get_charge_state(overlay.icon_state)
 		if(charge_state && check_state_in_icon(charge_state, overlay.icon))
@@ -136,52 +131,9 @@ var/global/list/registered_cyborg_weapons = list()
 	if(use_single_icon)
 		add_overlay(mutable_appearance(icon, "[get_world_inventory_state()][get_charge_ratio()]", indicator_color))
 		return
+	var/obj/item/cell/power_supply = get_cell()
 	if(power_supply)
 		if(modifystate)
 			icon_state = "[modifystate][get_charge_ratio()]"
 		else
 			icon_state = "[initial(icon_state)][get_charge_ratio()]"
-
-//For removable cells.
-/obj/item/gun/energy/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src) || isnull(accepts_cell_type) || isnull(power_supply) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
-		return ..()
-	user.put_in_hands(power_supply)
-	power_supply = null
-	user.visible_message(SPAN_NOTICE("\The [user] unloads \the [src]."))
-	playsound(src,'sound/weapons/guns/interaction/smg_magout.ogg' , 50)
-	update_icon()
-	return TRUE
-
-/obj/item/gun/energy/attackby(var/obj/item/A, mob/user)
-
-	if(istype(A, /obj/item/cell))
-
-		if(isnull(accepts_cell_type))
-			to_chat(user, SPAN_WARNING("\The [src] cannot accept a cell."))
-			return TRUE
-
-		if(!istype(A, accepts_cell_type))
-			var/obj/cell_dummy = accepts_cell_type
-			to_chat(user, SPAN_WARNING("\The [src]'s cell bracket can only accept \a [initial(cell_dummy.name)]."))
-			return TRUE
-
-		if(!user.is_holding_offhand(src))
-			to_chat(user, SPAN_WARNING("You must hold \the [src] in your hands to load it."))
-			return TRUE
-
-		if(istype(power_supply) )
-			to_chat(user, SPAN_NOTICE("\The [src] already has \a [power_supply] loaded."))
-			return TRUE
-
-		if(!do_after(user, 5, A, can_move = TRUE))
-			return TRUE
-
-		if(user.try_unequip(A, src))
-			power_supply = A
-			user.visible_message(SPAN_WARNING("\The [user] loads \the [A] into \the [src]!"))
-			playsound(src, 'sound/weapons/guns/interaction/energy_magin.ogg', 80)
-			update_icon()
-		return TRUE
-
-	return ..()

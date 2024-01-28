@@ -7,7 +7,7 @@
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	attack_verb = list("poked", "jabbed")
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 

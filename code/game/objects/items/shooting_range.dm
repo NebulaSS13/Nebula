@@ -5,7 +5,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_h"
 	density = FALSE
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/obj/structure/target_stake/stake
 	var/hp = 1800
 	var/icon/virtualIcon

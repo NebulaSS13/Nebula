@@ -9,7 +9,7 @@
 	active_power_usage = 70
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":32}, "WEST":{"x":-32}}'
 	var/lit = 0
 	var/on_icon = "sign_on"
 

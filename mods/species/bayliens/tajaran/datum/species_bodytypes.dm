@@ -24,21 +24,36 @@
 	eye_low_light_vision_adjustment_speed = 0.3
 
 	override_limb_types = list(
-		BP_EYES = /obj/item/organ/internal/eyes,
 		BP_TAIL = /obj/item/organ/external/tail/cat
 	)
 
 	base_markings = list(/decl/sprite_accessory/marking/tajaran/ears = "#ae7d32")
 
+	cold_level_1 = 200
+	cold_level_2 = 140
+	cold_level_3 = 80
+
+	heat_level_1 = 330
+	heat_level_2 = 380
+	heat_level_3 = 800
+
+	heat_discomfort_level = 294
+	cold_discomfort_level = 230
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+	)
+
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(
-		slot_glasses_str =   list("[NORTH]" = list("x" =  0, "y" = 2), "[EAST]" = list("x" = 0, "y" = 2), "[SOUTH]" = list("x" =  0, "y" = 2),  "[WEST]" = list("x" = 0, "y" = 2)),
-		slot_wear_mask_str = list("[NORTH]" = list("x" =  0, "y" = 2), "[EAST]" = list("x" = 0, "y" = 2), "[SOUTH]" = list("x" =  0, "y" = 2),  "[WEST]" = list("x" = 0, "y" = 2)),
-		slot_head_str =      list("[NORTH]" = list("x" =  0, "y" = 2), "[EAST]" = list("x" = 0, "y" = 2), "[SOUTH]" = list("x" =  0, "y" = 2),  "[WEST]" = list("x" = 0, "y" = 2))
+		slot_glasses_str =   list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2)),
+		slot_wear_mask_str = list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2)),
+		slot_head_str =      list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2))
 	)
 	. = ..()
 
 /obj/item/organ/external/tail/cat
-	tail_animation = 'mods/species/bayliens/tajaran/icons/tail.dmi'
-	tail = "tajtail"
+	tail_icon  = 'mods/species/bayliens/tajaran/icons/tail.dmi'
+	tail       = "tajtail"
 	tail_blend = ICON_MULTIPLY

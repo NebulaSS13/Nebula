@@ -11,15 +11,15 @@
 #define TOOL_PEN         /decl/tool_archetype/pen
 
 // Surgical tools.
-#define TOOL_SCALPEL       /decl/tool_archetype/scalpel
-#define TOOL_RETRACTOR     /decl/tool_archetype/retractor
-#define TOOL_HEMOSTAT      /decl/tool_archetype/hemostat
-#define TOOL_SAW           /decl/tool_archetype/saw
-#define TOOL_CAUTERY       /decl/tool_archetype/cautery
-#define TOOL_SUTURES       /decl/tool_archetype/sutures
-#define TOOL_BONE_GEL      /decl/tool_archetype/bone_gel
-#define TOOL_BONE_SETTER   /decl/tool_archetype/bone_setter
-#define TOOL_DRILL         /decl/tool_archetype/surgical_drill
+#define TOOL_SCALPEL        /decl/tool_archetype/scalpel
+#define TOOL_RETRACTOR      /decl/tool_archetype/retractor
+#define TOOL_HEMOSTAT       /decl/tool_archetype/hemostat
+#define TOOL_SAW            /decl/tool_archetype/saw
+#define TOOL_CAUTERY        /decl/tool_archetype/cautery
+#define TOOL_SUTURES        /decl/tool_archetype/sutures
+#define TOOL_BONE_GEL       /decl/tool_archetype/bone_gel
+#define TOOL_BONE_SETTER    /decl/tool_archetype/bone_setter
+#define TOOL_SURGICAL_DRILL /decl/tool_archetype/surgical_drill
 
 // Tool qualities (positive multplier)
 #define TOOL_QUALITY_WORST    0.1

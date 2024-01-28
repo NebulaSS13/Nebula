@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(typing)
 	var/static/regex/match_verbs
 	/// A list of clients waiting to be polled for input state.
 	var/list/client/queue = list()
-	/// A list of ckey to list, containing current state data. See .proc/get_entry for details.
+	/// A list of ckey to list, containing current state data. See get_entry() for details.
 	var/list/status = list()
 	/* example of an entry:
 		(ckey = list(
@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(typing)
 	*/
 
 /datum/controller/subsystem/typing/Initialize(start_timeofday)
-	if(config.show_typing_indicator_for_whispers)
+	if(get_config_value(/decl/config/toggle/show_typing_indicator_for_whispers))
 		match_verbs = regex("^(Me|Say|Whisper) +\"?\\w+")
 	else
 		match_verbs = regex("^(Me|Say) +\"?\\w+")
@@ -182,7 +182,7 @@ Updated 09/10/2022 to include chatbar using Spookerton's SStyping system from Po
 /atom/movable/typing_indicator/proc/show_typing_indicator()
 
 	// Make it visible after being hidden.
-	set_invisibility(0)
+	set_invisibility(INVISIBILITY_NONE)
 
 	// Update the appearance.
 	if(ismob(master))

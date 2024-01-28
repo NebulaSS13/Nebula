@@ -36,7 +36,7 @@
 	var/forced_spawnpoint                     // If set to a spawnpoint name, will use that spawn point for joining as this job.
 	var/hud_icon                              // icon used for Sec HUD overlay
 
-	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
+	//Job access. The use of minimal_access or access is determined by a config setting: jobs_have_minimal_access
 	var/list/minimal_access = list()          // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()                  // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 
@@ -85,7 +85,7 @@
 /datum/job/dd_SortValue()
 	return title
 
-/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/proc/equip_job(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if (required_language)
 		H.add_language(required_language)
 		H.set_default_language(required_language)
@@ -93,7 +93,7 @@
 	H.set_default_language(/decl/language/human/common)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit)
-		return outfit.equip(H, title, alt_title)
+		return outfit.equip_outfit(H, alt_title || title, job = src, rank = grade)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
@@ -163,10 +163,10 @@
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(!outfit)
 		return FALSE
-	. = outfit.equip(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips)
+	. = outfit.equip_outfit(H, alt_title || title, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips), job = src, rank = grade)
 
 /datum/job/proc/get_access()
-	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
+	if(minimal_access.len && get_config_value(/decl/config/toggle/on/jobs_have_minimal_access))
 		return minimal_access?.Copy()
 	return access?.Copy()
 
@@ -175,7 +175,7 @@
 	return (available_in_days(C) == 0) //Available in 0 days = available right now = player is old enough to play.
 
 /datum/job/proc/available_in_days(client/C)
-	if(C && config.use_age_restriction_for_jobs && isnull(C.holder) && isnum(C.player_age) && isnum(minimal_player_age))
+	if(C && get_config_value(/decl/config/num/use_age_restriction_for_jobs) && isnull(C.holder) && isnum(C.player_age) && isnum(minimal_player_age))
 		return max(0, minimal_player_age - C.player_age)
 	return 0
 
@@ -439,13 +439,13 @@
 		spawnpos = null
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
-		for(var/decl/spawnpoint/candidate as anything in global.using_map.allowed_spawns)
+		for(var/decl/spawnpoint/candidate as anything in global.using_map.allowed_latejoin_spawns)
 			if(candidate?.check_job_spawning(src))
 				spawnpos = candidate
 				break
 	return spawnpos
 
-/datum/job/proc/post_equip_rank(var/mob/person, var/alt_title)
+/datum/job/proc/post_equip_job_title(var/mob/person, var/alt_title, var/rank)
 	if(is_semi_antagonist && person.mind)
 		var/decl/special_role/provocateur/provocateurs = GET_DECL(/decl/special_role/provocateur)
 		provocateurs.add_antagonist(person.mind)

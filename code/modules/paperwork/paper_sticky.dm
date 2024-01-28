@@ -9,7 +9,7 @@
 	icon_state         = "pad_full"
 	item_state         = "paper"
 	w_class            = ITEM_SIZE_SMALL
-	material           = /decl/material/solid/paper
+	material           = /decl/material/solid/organic/paper
 	var/papers         = 50
 	var/tmp/max_papers = 50
 	var/paper_type     = /obj/item/paper/sticky
@@ -21,7 +21,7 @@
 
 /obj/item/sticky_pad/proc/update_matter()
 	matter = list(
-		/decl/material/solid/paper = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
+		/decl/material/solid/organic/paper = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
 	)
 
 /obj/item/sticky_pad/create_matter()
@@ -97,7 +97,7 @@
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
-	events_repository.register(/decl/observ/moved, src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
+	events_repository.register(/decl/observ/moved, src, src, TYPE_PROC_REF(/obj/item/paper/sticky, reset_persistence_tracking))
 
 /obj/item/paper/sticky/proc/reset_persistence_tracking()
 	SSpersistence.forget_value(src, /decl/persistence_handler/paper/sticky)

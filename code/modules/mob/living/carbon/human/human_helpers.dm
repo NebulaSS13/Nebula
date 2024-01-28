@@ -77,8 +77,8 @@
 			equipment_darkness_modifier += G.darkness_view
 			equipment_vision_flags |= G.vision_flags
 			equipment_light_protection += G.light_protection
-			if(G.overlay)
-				equipment_overlays |= G.overlay
+			if(G.screen_overlay)
+				equipment_overlays |= G.screen_overlay
 			if(G.see_invisible >= 0)
 				if(equipment_see_invis)
 					equipment_see_invis = min(equipment_see_invis, G.see_invisible)
@@ -183,7 +183,10 @@
 	return istype(get_equipped_item(slot_l_ear_str), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear_str), /obj/item/radio/headset)
 
 /mob/living/carbon/human/welding_eyecheck()
-	var/obj/item/organ/internal/eyes/E = get_organ(get_bodytype().vision_organ, /obj/item/organ/internal/eyes)
+	var/vision_organ = get_bodytype()?.vision_organ
+	if(!vision_organ)
+		return
+	var/obj/item/organ/internal/eyes/E = get_organ(vision_organ, /obj/item/organ/internal/eyes)
 	if(!E)
 		return
 	var/safety = eyecheck()

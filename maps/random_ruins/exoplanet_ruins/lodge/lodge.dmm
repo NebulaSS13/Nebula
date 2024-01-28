@@ -155,7 +155,7 @@
 /area/template_noop)
 "C" = (
 /obj/structure/table/woodentable,
-/obj/machinery/computer/atmoscontrol/laptop{
+/obj/machinery/computer/central_atmos/laptop{
 	desc = "A cheap, beat-up old laptop.";
 	name = "old laptop"
 	},

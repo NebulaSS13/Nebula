@@ -34,7 +34,7 @@
 	desc = "The Mars Military Industries MA21 Selkie is a weapon that uses a laser pulse to ionise the local atmosphere, creating a disorienting pulse of plasma and deafening shockwave as the wave expands."
 	icon = 'icons/obj/guns/plasma_stun.dmi'
 	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':2,'materials':2,'powerstorage':3}"
+	origin_tech = @'{"combat":2,"materials":2,"powerstorage":3}'
 	fire_delay = 20
 	max_shots = 4
 	projectile_type = /obj/item/projectile/energy/plasmastun
@@ -47,7 +47,7 @@
 	icon = 'icons/obj/guns/confuseray.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
-	origin_tech = "{'combat':2,'materials':2,'powerstorage':2}"
+	origin_tech = @'{"combat":2,"materials":2,"powerstorage":2}'
 	w_class = ITEM_SIZE_SMALL
 	max_shots = 4
 	projectile_type = /obj/item/projectile/beam/confuseray

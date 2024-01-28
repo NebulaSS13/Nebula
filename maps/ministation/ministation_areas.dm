@@ -33,17 +33,29 @@
 	area_flags = AREA_FLAG_HALLWAY
 	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
-/area/ministation/hall/w
-	name = "\improper Port Hallway"
-
-/area/ministation/hall/s
-	name = "\improper Aft Hallway"
-
-/area/ministation/hall/e
-	name = "\improper Starboard Hallway"
-
 /area/ministation/hall/n
 	name = "\improper Forward Hallway"
+
+// first floor hallways
+
+/area/ministation/hall/s1
+	name = "\improper L1 Aft Hallway"
+
+//  second floor hallways
+
+/area/ministation/hall/w2
+	name = "\improper L2 Port Hallway"
+
+/area/ministation/hall/e2
+	name = "\improper L2 Starboard Hallway"
+
+// third floor hallways
+
+/area/ministation/hall/s3
+	name = "\improper L3 Aft Hallway"
+
+/area/ministation/hall/n3
+	name = "\improper L3 Forward Hallway"
 
 //Maintenance
 /area/ministation/maint
@@ -54,29 +66,71 @@
 	secure = TRUE
 	holomap_color = HOLOMAP_AREACOLOR_MAINTENANCE
 
-/area/ministation/maint/nw
-	name = "\improper Port Forward Maintenance"
+// First floor maint
 
-/area/ministation/maint/ne
-	name = "\improper Starboard Forward Maintenance"
+/area/ministation/maint/westatmos
+	name = "\improper West Atmos Maintenance"
 
-/area/ministation/maint/w
-	name = "\improper Port Maintenance"
+/area/ministation/maint/eastatmos
+	name = "\improper East Atmos Maintenance"
 
-/area/ministation/maint/e
-	name = "\improper Starboard Maintenance"
+// /area/ministation/maint/l1nw
+//	name = "\improper Level One North West Maintenance"
 
-/area/ministation/maint/sw
-	name = "\improper Port Quarter Maintenance"
+/area/ministation/maint/l1ne
+	name = "\improper Level One North East Maintenance"
 
-/area/ministation/maint/se
-	name = "\improper Starboard Quarter Maintenance"
+/area/ministation/maint/l1central
+	name = "\improper Level One Central Maintenance"
 
-/area/ministation/maint/sec
+// Second Floor Maint
+
+/area/ministation/maint/l2centraln
+	name = "\improper Level Two Central North Maintenance"
+
+/area/ministation/maint/l2centrals
+	name = "\improper Level Two Central South Maintenance"
+
+/area/ministation/maint/secmaint
 	name = "\improper Security Maintenance"
 
-/area/ministation/maint/detective
-	name = "\improper Detective Office Maintenance"
+/area/ministation/maint/hydromaint
+	name = "\improper Hydro Maintenance"
+
+/area/ministation/maint/l2underpass
+	name = "\improper Level Two Maintenance Underpass"
+
+// Third Floor Maint
+
+/area/ministation/maint/l3nw
+	name = "\improper Level Three Northwest Maintenance"
+
+/area/ministation/maint/l3ne
+	name = "\improper Level Three Northeast Maintenance"
+
+/area/ministation/maint/l3central
+	name = "\improper Level Three Central Maintenance"
+
+/area/ministation/maint/l3sw
+	name = "\improper Level Three Southwest Maintenance"
+
+/area/ministation/maint/l3se
+	name = "\improper Level Three Southeast Maintenance"
+
+// Fourth Floor Maint
+/area/ministation/maint/l4central
+	name = "\improper Level Four Central Maintenance"
+
+/area/ministation/maint/l4overpass
+	name = "\improper Level Four Maintenance Overpass"
+
+//Maint Bypasses
+
+/area/ministation/maint/sebypass
+	name = "\improper Southeast Maintenance Shaft"
+
+/area/ministation/maint/nebypass
+	name = "\improper Northeast Maintenance Shaft"
 
 //Departments
 /area/ministation/hop
@@ -90,13 +144,14 @@
 	req_access = list(access_janitor)
 	icon_state = "janitor"
 
-/area/ministation/commons
-	name = "\improper Common Area"
-	icon_state = "pink"
+/area/ministation/trash
+	name = "\improper Trash Room"
+	req_access = list(access_janitor)
+	icon_state = "janitor"
 
 /area/ministation/cargo
 	name = "\improper Cargo Bay"
-	req_access = list(access_cargo)
+	req_access = list(access_mining)
 	icon_state = "brown"
 	secure = TRUE
 	holomap_color = HOLOMAP_AREACOLOR_CARGO
@@ -106,6 +161,7 @@
 	req_access = list(access_heads)
 	secure = TRUE
 	icon_state = "dark_blue"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/ministation/bridge/vault
 	name = "\improper Vault"
@@ -119,7 +175,6 @@
 	secure = TRUE
 	icon_state = "red"
 	area_flags = AREA_FLAG_SECURITY
-	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/ministation/detective
 	name = "\improper Detective Office"
@@ -137,14 +192,6 @@
 	name = "\improper Library"
 	icon_state = "LIB"
 
-/area/ministation/disused
-	name = "\improper Disused Section"
-	icon_state = "pink"
-
-/area/ministation/disused_office
-	name = "\improper Disused Office"
-	icon_state = "dark_blue"
-
 /area/ministation/atmospherics
 	name = "\improper Atmospherics"
 	req_access = list(access_atmospherics)
@@ -153,10 +200,9 @@
 
 /area/ministation/science
 	name = "\improper Research & Development Laboratory"
-	req_access = list(access_research)
+	req_access = list(access_robotics)
 	secure = TRUE
 	icon_state = "purple"
-	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/ministation/eva
 	name = "\improper EVA Storage"
@@ -172,9 +218,15 @@
 	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/ministation/cryo
-	name = "\improper Cryogenic Storage"
+	name = "\improper Medical Cryogenics"
 	req_access = list()
 	icon_state = "green"
+	secure = FALSE
+
+/area/ministation/dorms
+	name = "\improper Dormatories"
+	req_access = list()
+	icon_state = "red"
 	secure = FALSE
 
 /area/ministation/hydro
@@ -189,11 +241,25 @@
 
 /area/ministation/engine
 	name = "Engineering"
-	req_access = list(access_engine)
+	req_access = list(access_engine_equip)
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
 	secure = TRUE
 	icon_state = "yellow"
 	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
+
+/area/ministation/supermatter
+	name = "\improper Supermatter Engine"
+	req_access = list(access_engine)
+	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
+	secure = TRUE
+	icon_state = "brown"
+
+/area/ministation/smcontrol
+	name = "\improper Supermatter Control"
+	req_access = list(access_engine)
+	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambieng1.ogg')
+	secure = TRUE
+	icon_state = "red"
 
 /area/ministation/telecomms
 	name = "\improper Telecommunications Control"
@@ -202,6 +268,20 @@
 	secure = TRUE
 	icon_state = "light_blue"
 	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
+
+/area/ministation/company_rep
+	name = "\improper Company Representative Chamber"
+	req_access = list(access_lawyer)
+	icon_state = "brown"
+
+/area/ministation/arrival
+	name = "\improper Arrival Shuttle" // I hate this ugly thing
+	icon_state = "white"
+	requires_power = 0
+
+/area/ministation/shuttle/outgoing
+	name = "\improper Science Shuttle"
+	icon_state = "shuttle"
 
 //satellite
 /area/ministation/ai_sat
@@ -225,3 +305,36 @@
 /area/shuttle/escape_shuttle
 	name = "\improper Emergency Shuttle"
 	icon_state = "shuttle"
+
+//Elevator
+
+/area/turbolift
+	name = "\improper Elevator"
+	icon_state = "shuttle"
+	requires_power = 0
+	dynamic_lighting = TRUE
+	sound_env = STANDARD_STATION
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	ambience = list(
+		'sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg'
+	)
+
+	arrival_sound = null
+	lift_announce_str = null
+
+/area/turbolift/alert_on_fall(var/mob/living/carbon/human/H)
+	if(H.client && SSpersistence.elevator_fall_shifts > 0)
+		SSwebhooks.send(WEBHOOK_ELEVATOR_FALL, list("text" = "We managed to make it [SSpersistence.elevator_fall_shifts] shift\s without someone falling down an elevator shaft."))
+		SSpersistence.elevator_fall_shifts = -1
+
+/area/turbolift/l1
+	name = "Station Level 1"
+	base_turf = /turf/simulated/floor
+
+/area/turbolift/l2
+	name = "Station Level 2"
+	base_turf = /turf/simulated/open
+
+/area/turbolift/l3
+	name = "Station Level 3"
+	base_turf = /turf/simulated/open

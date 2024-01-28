@@ -13,8 +13,9 @@ var/global/list/_limb_mask_cache = list()
 	TODO: Proper documentation
 	icon_key is [bodytype.get_icon_cache_uid(src)][g][husk][skin_tone]
 */
-var/global/list/human_icon_cache = list()
-var/global/list/tail_icon_cache = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
+var/global/list/human_icon_cache    = list()
+var/global/list/eye_icon_cache      = list()
+var/global/list/tail_icon_cache     = list() //key is [bodytype.get_icon_cache_uid(src)][skin_colour]
 var/global/list/light_overlay_cache = list()
 
 /proc/overlay_image(icon,icon_state,color,flags)
@@ -65,7 +66,7 @@ There are several things that need to be remembered:
 
 >	There are also these special cases:
 		update_mutations()	//handles updating your appearance for certain mutations.  e.g TK head-glows
-		UpdateDamageIcon()	//handles damage overlays for brute/burn damage //(will rename this when I geta round to it)
+		update_damage_icon()	//handles damage overlays for brute/burn damage //(will rename this when I geta round to it)
 		update_body()	//Handles updating your mob's icon to reflect their gender/race/complexion etc
 		update_hair()	//Handles updating your hair overlay (used to be update_face, but mouth and
 																			...eyes were merged into update_body)
@@ -83,7 +84,7 @@ There are several things that need to be remembered:
 		update_inhand_overlays(FALSE)
 		update_icon()
 
->	If you need to update all overlays you can use refresh_visible_overlays(). it works exactly like update_clothing used to.
+>	If you need to update all overlays you can use try_refresh_visible_overlays(). it works exactly like update_clothing used to.
 
 >	I reimplimented an old unused variable which was in the code called (coincidentally) var/update_icon
 	It can be used as another method of triggering update_icon(). It's basically a flag that when set to non-zero
@@ -100,34 +101,9 @@ Please contact me on #coderbus IRC. ~Carn x
 */
 
 /mob/living/carbon/human
-	var/list/mob_overlays[TOTAL_OVER_LAYERS]
-	var/list/mob_underlays[TOTAL_UNDER_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
 
-/mob/living/carbon/human/get_all_current_mob_overlays()
-	return mob_overlays
-
-/mob/living/carbon/human/set_current_mob_overlay(var/overlay_layer, var/image/overlay, var/redraw_mob = TRUE)
-	mob_overlays[overlay_layer] = overlay
-	..()
-
-/mob/living/carbon/human/get_current_mob_overlay(var/overlay_layer)
-	return mob_overlays[overlay_layer]
-
-/mob/living/carbon/human/get_all_current_mob_underlays()
-	return mob_underlays
-
-/mob/living/carbon/human/set_current_mob_underlay(var/underlay_layer, var/image/underlay, var/redraw_mob = TRUE)
-	mob_underlays[underlay_layer] = underlay
-	..()
-
-/mob/living/carbon/human/get_current_mob_underlay(var/underlay_layer)
-	return mob_underlays[underlay_layer]
-
 /mob/living/carbon/human/refresh_visible_overlays()
-	. = ..()
-	if(!.)
-		return
 	update_mutations(FALSE)
 	update_body(FALSE)
 	update_skin(FALSE)
@@ -137,19 +113,15 @@ Please contact me on #coderbus IRC. ~Carn x
 	update_fire(FALSE)
 	update_surgery(FALSE)
 	update_bandages(FALSE)
-	UpdateDamageIcon(FALSE)
-	update_icon()
-	return TRUE
+	update_damage_icon(FALSE)
+	return ..()
 
 /mob/living/carbon/human/on_update_icon()
-
-	..()
-
 	if(regenerate_body_icon)
 		regenerate_body_icon = FALSE
-		update_body(FALSE)
-		refresh_visible_overlays()
+	..()
 
+/mob/living/carbon/human/apply_visible_overlays()
 	var/list/visible_overlays
 	var/list/visible_underlays
 	if(is_cloaked())
@@ -189,12 +161,6 @@ Please contact me on #coderbus IRC. ~Carn x
 			for(var/image/underlay in entry)
 				underlay.transform = M
 	underlays = visible_underlays
-
-	var/obj/item/organ/external/head/head = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	if(head)
-		var/image/I = head.get_eye_overlay()
-		if(I)
-			add_overlay(I)
 
 /mob/living/carbon/human/proc/get_icon_scale_mult()
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
@@ -243,7 +209,7 @@ var/global/list/damage_icon_parts = list()
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
-/mob/living/carbon/human/UpdateDamageIcon(var/update_icons=1)
+/mob/living/carbon/human/update_damage_icon(var/update_icons=1)
 
 	// first check whether something actually changed about damage appearance
 	var/damage_appearance = ""
@@ -290,63 +256,35 @@ var/global/list/damage_icon_parts = list()
 				LAZYADD(bandage_overlays, image(bandage_icon, "[O.icon_state][bandage_level]"))
 	set_current_mob_overlay(HO_DAMAGE_LAYER, bandage_overlays, update_icons)
 
+/mob/living/carbon/human/proc/get_human_icon_cache_key()
+	. = list()
+	for(var/limb_tag in global.all_limb_tags)
+		. += "[limb_tag]_"
+		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, limb_tag)
+		if(isnull(part) || part.skip_body_icon_draw)
+			. += "skip"
+			continue
+		part.update_icon() // This wil regenerate their icon if needed, and more importantly set their cache key.
+		. += part._icon_cache_key
+	. += "husked_[!!is_husked()]"
+	. = JOINTEXT(.)
+
 //BASE MOB SPRITE
-/mob/living/carbon/human/update_body(var/update_icons=1)
+/mob/living/carbon/human/update_body(var/update_icons = TRUE)
 
 	var/list/limbs = get_external_organs()
 	if(!LAZYLEN(limbs))
 		return // Something is trying to update our body pre-init (probably loading a preview image during world startup).
 
-	var/husk_color_mod = rgb(96,88,80)
-	var/husk = is_husked()
-
-	//CACHING: Generate an index key from visible bodyparts.
-	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
-
-	//Create a new, blank icon for our mob to use.
-	if(stand_icon)
-		qdel(stand_icon)
 	var/decl/bodytype/root_bodytype = get_bodytype()
-	stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi',"blank")
+	var/icon_key = get_human_icon_cache_key()
 
-	var/icon_key = "[root_bodytype.get_icon_cache_uid(src)][skin_tone][skin_colour]"
-	if(lip_style)
-		icon_key += "[lip_style]"
-	else
-		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = get_organ((root_bodytype.vision_organ || BP_EYES), /obj/item/organ/internal/eyes)
-	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
-
-	for(var/limb_tag in global.all_limb_tags)
-		var/obj/item/organ/external/part = GET_EXTERNAL_ORGAN(src, limb_tag)
-		if(isnull(part) || part.skip_body_icon_draw)
-			icon_key += "0"
-			continue
-		for(var/M in part.markings)
-			icon_key += "[M][part.markings[M]]"
-		if(part)
-			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)][part.render_alpha]"
-			icon_key += "[part.skin_tone]"
-			if(part.skin_colour)
-				icon_key += "[part.skin_colour]"
-				icon_key += "[part.skin_blend]"
-			for(var/M in part.markings)
-				icon_key += "[M][part.markings[M]]"
-		if(!BP_IS_PROSTHETIC(part) && (part.status & ORGAN_DEAD))
-			icon_key += "2"
-		else
-			icon_key += "1"
-
-	icon_key = "[icon_key][husk ? 1 : 0]"
-
-	var/icon/base_icon
-	if(human_icon_cache[icon_key])
-		base_icon = human_icon_cache[icon_key]
-	else
+	stand_icon = global.human_icon_cache[icon_key]
+	if(!stand_icon)
 		//BEGIN CACHED ICON GENERATION.
-		base_icon = icon(root_bodytype.icon_template)
+		stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi', "blank")
 		for(var/obj/item/organ/external/part in limbs)
-			var/icon/temp = part.get_icon()
+			var/icon/temp = part.icon // Grabbing the icon excludes overlays.
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
@@ -357,34 +295,28 @@ var/global/list/damage_icon_parts = list()
 					temp2.Insert(new /icon(temp,dir=EAST),dir=EAST)
 				if(!(part.icon_position & RIGHT))
 					temp2.Insert(new /icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_OVERLAY)
+				stand_icon.Blend(temp2, ICON_OVERLAY)
 				if(part.icon_position & LEFT)
 					temp2.Insert(new /icon(temp,dir=EAST),dir=EAST)
 				if(part.icon_position & RIGHT)
 					temp2.Insert(new /icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_UNDERLAY)
+				stand_icon.Blend(temp2, ICON_UNDERLAY)
 			else if(part.icon_position & UNDER)
-				base_icon.Blend(temp, ICON_UNDERLAY)
+				stand_icon.Blend(temp, ICON_UNDERLAY)
 			else
-				base_icon.Blend(temp, ICON_OVERLAY)
-
-		if(husk)
-			base_icon.ColorTone(husk_color_mod)
-
+				stand_icon.Blend(temp, ICON_OVERLAY)
 		//Handle husk overlay.
-		if(husk)
+		if(is_husked())
 			var/husk_icon = root_bodytype.get_husk_icon(src)
 			if(husk_icon)
-				var/icon/mask = new(base_icon)
+				var/icon/mask = new(stand_icon)
 				var/icon/husk_over = new(husk_icon, "")
 				mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
 				husk_over.Blend(mask, ICON_ADD)
-				base_icon.Blend(husk_over, ICON_OVERLAY)
-
-		human_icon_cache[icon_key] = base_icon
-
-	//END CACHED ICON GENERATION.
-	stand_icon.Blend(base_icon,ICON_OVERLAY)
+				stand_icon.Blend(husk_over, ICON_OVERLAY)
+			else
+				stand_icon.ColorTone("#605850")
+		global.human_icon_cache[icon_key] = stand_icon
 
 	//tail
 	update_tail_showing(0)
@@ -395,24 +327,30 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_underwear(var/update_icons=1)
 	var/list/undies = list()
 	for(var/entry in worn_underwear)
+
 		var/obj/item/underwear/UW = entry
-		if (!UW || !UW.icon) // Avoid runtimes for nude underwear types
+		if (!UW?.icon) // Avoid runtimes for nude underwear types
 			continue
-		var/image/I
+
 		var/decl/bodytype/root_bodytype = get_bodytype()
+		if(!root_bodytype)
+			continue // Avoid runtimes for dummy mobs with no bodytype set
+
+		var/image/I
 		if(UW.slot_offset_str && LAZYACCESS(root_bodytype.equip_adjust, UW.slot_offset_str))
-			I = root_bodytype.get_offset_overlay_image(FALSE, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
+			I = root_bodytype.get_offset_overlay_image(UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
 		else
 			I = image(icon = UW.icon, icon_state = UW.icon_state)
 			I.color = UW.color
-		I.appearance_flags |= RESET_COLOR
-		undies += I
+		if(I) // get_offset_overlay_image() may potentially return null
+			I.appearance_flags |= RESET_COLOR
+			undies += I
 	set_current_mob_overlay(HO_UNDERWEAR_LAYER, undies, update_icons)
 
 /mob/living/carbon/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
+	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_mob_overlays() : null), update_icons)
 
-	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_hair_icon() : null), update_icons)
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
 	// todo: make this use bodytype
 	set_current_mob_overlay(HO_SKIN_LAYER, species.update_skin(src), update_icons)
@@ -460,8 +398,8 @@ var/global/list/damage_icon_parts = list()
 		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
 		set_current_mob_underlay(HU_TAIL_LAYER, null, update_icons)
 
-	var/icon/tail_s = get_tail_icon(tail_organ)
-	var/tail_image = image(tail_s, icon_state = "[tail_state]_s")
+	var/icon/tail_s = get_tail_icon_for_organ(tail_organ)
+	var/tail_image = image(tail_s, icon_state = tail_state)
 	animate_tail_reset(0)
 	if(dir == NORTH)
 		set_current_mob_underlay(HU_TAIL_LAYER, null, FALSE)
@@ -470,26 +408,40 @@ var/global/list/damage_icon_parts = list()
 		set_current_mob_overlay(HO_TAIL_LAYER, null, FALSE)
 		set_current_mob_underlay(HU_TAIL_LAYER, tail_image, update_icons)
 
-/mob/living/carbon/human/proc/get_tail_icon(var/obj/item/organ/external/tail/tail_organ)
+/mob/living/carbon/human/proc/get_tail_icon_for_organ(var/obj/item/organ/external/tail/tail_organ)
 	if(!istype(tail_organ))
 		return
-	var/icon_key = "[tail_organ.get_tail()]\ref[tail_organ.icon][tail_organ.get_tail_blend(src)][tail_organ.bodytype.appearance_flags & HAS_SKIN_COLOR][skin_colour][tail_organ.get_tail_hair()][tail_organ.get_tail_hair_blend()][hair_colour]"
-	var/icon/tail_icon = tail_icon_cache[icon_key]
-	if(!tail_icon)
-		//generate a new one
-		var/tail_anim = tail_organ.get_tail_animation() || tail_organ.get_tail_icon()
-		tail_icon = new/icon(tail_anim)
-		if(tail_organ.bodytype.appearance_flags & HAS_SKIN_COLOR)
-			tail_icon.Blend(skin_colour, tail_organ.get_tail_blend(src))
-		// The following will not work with animated tails.
-		var/use_tail = tail_organ.get_tail_hair()
-		if(use_tail)
-			var/icon/hair_icon = icon(tail_organ.get_tail_icon(src), "[tail_organ.get_tail()]_[use_tail]")
-			hair_icon.Blend(hair_colour, tail_organ.get_tail_hair_blend())
-			tail_icon.Blend(hair_icon, ICON_OVERLAY)
-		tail_icon_cache[icon_key] = tail_icon
 
-	return tail_icon
+	var/tail_state = tail_organ.get_tail()
+	var/tail_icon  = tail_organ.get_tail_icon()
+	if(!tail_state || !tail_icon)
+		return // No tail data!
+
+	// These values may be null and are generally optional.
+	var/hair_colour     = get_hair_colour()
+	var/skin_colour     = get_skin_colour()
+	var/tail_hair       = tail_organ.get_tail_hair()
+	var/tail_blend      = tail_organ.get_tail_blend()
+	var/tail_hair_blend = tail_organ.get_tail_hair_blend()
+	var/tail_color      = (tail_organ.bodytype.appearance_flags & HAS_SKIN_COLOR) ? skin_colour : null
+
+	var/icon_key = "[tail_state][tail_icon][tail_blend][tail_color][tail_hair][tail_hair_blend][hair_colour]"
+	var/icon/blended_tail_icon = global.tail_icon_cache[icon_key]
+	if(!blended_tail_icon)
+		//generate a new one
+		blended_tail_icon = icon(tail_icon, tail_state)
+		if(skin_colour && !isnull(tail_blend)) // 0 is a valid blend mode
+			blended_tail_icon.Blend(skin_colour, tail_blend)
+		// The following will not work with animated tails.
+		if(tail_hair)
+			var/tail_hair_state = "[tail_state]_[tail_hair]"
+			if(check_state_in_icon(tail_hair_state, tail_icon))
+				var/icon/hair_icon = icon(tail_icon, tail_hair_state)
+				if(hair_colour && !isnull(tail_hair_blend)) // 0 is a valid blend mode
+					hair_icon.Blend(hair_colour, tail_hair_blend)
+				blended_tail_icon.Blend(hair_icon, ICON_OVERLAY)
+		global.tail_icon_cache[icon_key] = blended_tail_icon
+	return blended_tail_icon
 
 /mob/living/set_dir()
 	. = ..()
@@ -499,14 +451,13 @@ var/global/list/damage_icon_parts = list()
 			update_tail_showing()
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
-	var/image/tail_overlay = get_current_tail_image()
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL, /obj/item/organ/external/tail)
 	if(!tail_organ)
 		return null
-
-	if(tail_overlay && tail_organ.get_tail_animation())
+	var/image/tail_overlay = get_current_tail_image()
+	if(tail_overlay && check_state_in_icon(tail_overlay.icon, t_state))
 		tail_overlay.icon_state = t_state
-		return tail_overlay
+	return tail_overlay
 
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.

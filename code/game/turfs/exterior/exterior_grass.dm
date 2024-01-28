@@ -36,6 +36,7 @@
 /turf/exterior/wildgrass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
 		melt()
+	return ..()
 
 /turf/exterior/wildgrass/melt()
 	if(icon_state != "scorched")

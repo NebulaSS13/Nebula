@@ -130,7 +130,7 @@
 /obj/item/ammo_magazine/pistol
 	name = "pistol magazine"
 	icon_state = "pistol"
-	origin_tech = "{'combat':2}"
+	origin_tech = @'{"combat":2}'
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
 	material = /decl/material/solid/metal/steel
@@ -178,7 +178,7 @@
 /obj/item/ammo_magazine/box/smallpistol
 	name = "ammunition box (pistol, small)"
 	icon_state = "smallpistol"
-	origin_tech = "{'combat':2}"
+	origin_tech = @'{"combat":2}'
 	material = /decl/material/solid/metal/steel
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
@@ -187,7 +187,7 @@
 /obj/item/ammo_magazine/box/pistol
 	name = "ammunition box (pistol)"
 	icon_state = "smallpistol"
-	origin_tech = "{'combat':2}"
+	origin_tech = @'{"combat":2}'
 	caliber = CALIBER_PISTOL
 	material = /decl/material/solid/metal/steel
 	ammo_type = /obj/item/ammo_casing/pistol
@@ -203,7 +203,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol/emp
 	caliber = CALIBER_PISTOL
 	max_ammo = 15
-	origin_tech = "{'combat':2,'magnets':2,'powerstorage':2}"
+	origin_tech = @'{"combat":2,"magnets":2,"powerstorage":2}'
 
 /obj/item/ammo_magazine/box/emp/smallpistol
 	name = "ammunition box (pistol, small, haywire)"
@@ -212,12 +212,12 @@
 	ammo_type = /obj/item/ammo_casing/pistol/small/emp
 	caliber = CALIBER_PISTOL_SMALL
 	max_ammo = 8
-	origin_tech = "{'combat':2,'magnets':2,'powerstorage':2}"
+	origin_tech = @'{"combat":2,"magnets":2,"powerstorage":2}'
 
 /obj/item/ammo_magazine/rifle
 	name = "assault rifle magazine"
 	icon_state = "bullup"
-	origin_tech = "{'combat':2}"
+	origin_tech = @'{"combat":2}'
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE
 	material = /decl/material/solid/metal/steel
@@ -235,7 +235,7 @@
 /obj/item/ammo_magazine/rifle/drum
 	name = "machine gun drum magazine"
 	icon_state = "drum"
-	origin_tech = "{'combat':2}"
+	origin_tech = @'{"combat":2}'
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE
 	material = /decl/material/solid/metal/steel

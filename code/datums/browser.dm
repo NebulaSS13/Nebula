@@ -153,7 +153,7 @@
 		return
 
 	var/param = ref ? "\ref[ref]" : "null"
-	addtimer(CALLBACK(user, /mob/proc/post_onclose, windowid, param), 2)
+	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob, post_onclose), windowid, param), 2)
 
 /mob/proc/post_onclose(windowid, param)
 	if(client)

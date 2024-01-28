@@ -8,7 +8,7 @@
 	throwforce             = 0
 	throw_speed            = 7
 	throw_range            = 15
-	material               = /decl/material/solid/plastic
+	material               = /decl/material/solid/organic/plastic
 	var/pen_flag           = PEN_FLAG_ACTIVE                     //Properties/state of the pen used.
 	var/stroke_colour      = "black"                             //What colour the ink is! Can be hexadecimal colour or a colour name string.
 	var/stroke_colour_name = "black"                             //Human readable name of the stroke colour. Used in text strings, and to identify the nearest colour to the stroke colour.
@@ -22,7 +22,7 @@
 	. = ..()
 	set_extension(src, /datum/extension/tool,
 		list(
-			TOOL_DRILL = TOOL_QUALITY_WORST,
+			TOOL_SURGICAL_DRILL = TOOL_QUALITY_WORST,
 			TOOL_PEN   = pen_quality),
 
 		list(
@@ -35,20 +35,20 @@
 	make_pen_description()
 
 /obj/item/pen/attack(atom/A, mob/user, target_zone)
-	if(ismob(A))
-		var/mob/M = A
-		if(ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
-			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD, /obj/item/organ/external/head)
-			if(istype(head))
-				head.write_on(user, "[stroke_colour_name] [medium_name]")
-		else
-			to_chat(user, SPAN_WARNING("You stab [M] with \the [src]."))
-			admin_attack_log(user, M, "Stabbed using \a [src]", "Was stabbed with \a [src]", "used \a [src] to stab")
 
-	else if(istype(A, /obj/item/organ/external/head))
+	if(isliving(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
+		var/mob/living/M = A
+		var/obj/item/organ/external/head/head = M.get_organ(BP_HEAD, /obj/item/organ/external/head)
+		if(istype(head))
+			head.write_on(user, "[stroke_colour_name] [medium_name]")
+			return TRUE
+
+	if(istype(A, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, "[stroke_colour_name] [medium_name]")
+		return TRUE
+
+	return ..()
 
 /obj/item/pen/proc/toggle()
 	if(pen_flag & PEN_FLAG_ACTIVE)

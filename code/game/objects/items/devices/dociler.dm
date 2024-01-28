@@ -2,11 +2,11 @@
 	name = "dociler"
 	desc = "A complex single use recharging injector that spreads a complex neurological serum that makes animals docile and friendly. Somewhat."
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'biotech':5,'materials':2}"
+	origin_tech = @'{"biotech":5,"materials":2}'
 	icon = 'icons/obj/items/device/animal_tagger.dmi'
 	icon_state = ICON_STATE_WORLD
 	force = 1
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/silicon = MATTER_AMOUNT_REINFORCEMENT)
 	var/loaded = 1
 	var/mode = "completely"

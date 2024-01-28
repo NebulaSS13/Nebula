@@ -4,7 +4,6 @@
 	icon = 'icons/clothing/head/hardhat/yellow.dmi'
 	action_button_name = "Toggle Headlamp"
 	brightness_on = 4 //luminosity when on
-	light_overlay = "hardhat_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
@@ -20,9 +19,9 @@
 	heat_protection = SLOT_HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
+	origin_tech = @'{"materials":1,"engineering":1,"combat":1}'
 
 /obj/item/clothing/head/hardhat/orange
 	icon = 'icons/clothing/head/hardhat/orange.dmi'
@@ -40,7 +39,6 @@
 	name = "\improper EMS helmet"
 	desc = "A polymer helmet worn by EMTs throughout human space to protect their head. This one comes with an attached flashlight and has 'Medic' written on its back in blue lettering."
 	icon = 'icons/clothing/head/hardhat/medic.dmi'
-	light_overlay = "EMS_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,

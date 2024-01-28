@@ -16,7 +16,7 @@
 	name        = "dire goose quill"
 	icon        = 'icons/obj/items/pens/pen_quill.dmi'
 	sharp       = 0
-	material    = /decl/material/solid/skin/feathers
+	material    = /decl/material/solid/organic/skin/feathers
 	pen_quality = TOOL_QUALITY_BEST
 
 /obj/item/pen/fancy/quill/make_pen_description()

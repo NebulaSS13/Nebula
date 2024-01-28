@@ -31,7 +31,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 // Geyser Object
 //////////////////////////////////////////////////////////////////////
 
-///A prop that periodically emit steam spouts and can have a geothermal generator placed on top to generate power.
+/// A prop that periodically emit steam spouts and can have a geothermal generator placed on top to generate power.
 /obj/effect/geyser
 	name       = "geothermal vent"
 	desc       = "A vent leading to an underground geothermally heated reservoir, which periodically spews superheated liquid."
@@ -39,8 +39,8 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	icon_state = "geyser"
 	anchored   = TRUE
 	layer      = TURF_LAYER + 0.01
-	level      = 1 //Goes under floor/plating
-	///The particle emitter that will generate the steam column effect for this geyser
+	level      = LEVEL_BELOW_PLATING // Goes under floor/plating
+	/// The particle emitter that will generate the steam column effect for this geyser
 	var/particles/geyser_steam/steamfx
 
 /obj/effect/geyser/Initialize(ml)
@@ -84,7 +84,10 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	for(var/turf/exterior/seafloor/T in RANGE_TURFS(loc, 5))
 		var/dist = get_dist(loc, T)-1
 		if(prob(100 - (dist * 20)))
-			T = T.ChangeTurf(/turf/exterior/mud)
+			if(prob(25))
+				T = T.ChangeTurf(/turf/exterior/clay)
+			else
+				T = T.ChangeTurf(/turf/exterior/mud)
 		if(prob(50 - (dist * 10)))
 			new /obj/random/seaweed(T)
 
@@ -187,7 +190,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 	current_pressure = clamp(current_pressure + pressure, 0, MAX_GEOTHERMAL_PRESSURE)
 	var/leftover = round(pressure - current_pressure)
 	if(leftover > 0)
-		addtimer(CALLBACK(src, .proc/propagate_pressure, leftover), 5)
+		addtimer(CALLBACK(src, PROC_REF(propagate_pressure), leftover), 5)
 	update_icon()
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
@@ -204,7 +207,7 @@ var/global/const/MAX_GEOTHERMAL_PRESSURE =               12000
 			generate_power(last_generated)
 		remaining_pressure = round(remaining_pressure * GEOTHERMAL_PRESSURE_LOSS)
 		if(remaining_pressure)
-			addtimer(CALLBACK(src, .proc/propagate_pressure, remaining_pressure), 5)
+			addtimer(CALLBACK(src, PROC_REF(propagate_pressure), remaining_pressure), 5)
 	update_icon()
 	if(current_pressure <= 1)
 		return PROCESS_KILL

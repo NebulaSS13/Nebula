@@ -1829,7 +1829,6 @@
 /area/constructionsite/maintenance)
 "gf" = (
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "door_closed";
 	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -1861,7 +1860,6 @@
 /area/constructionsite/ai)
 "gn" = (
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "door_closed";
 	name = "AI Upload"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -2043,7 +2041,6 @@
 /area/constructionsite/hallway/aft)
 "gZ" = (
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "door_closed";
 	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -2169,7 +2166,7 @@
 "hz" = (
 /obj/item/chems/ivbag,
 /obj/item/chems/ivbag,
-/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/ominus,
 /obj/structure/closet/medical_wall{
 	name = "Blood Closet"
 	},
@@ -3382,7 +3379,7 @@
 /area/AIsattele)
 "lZ" = (
 /obj/machinery/emitter{
-	anchored = TRUE;
+	anchored = 1;
 	dir = 4;
 	state = 2
 	},
@@ -3394,7 +3391,7 @@
 /area/constructionsite/engineering)
 "mb" = (
 /obj/machinery/emitter{
-	anchored = TRUE;
+	anchored = 1;
 	dir = 8;
 	state = 2
 	},

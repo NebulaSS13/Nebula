@@ -16,7 +16,7 @@
 	desc = "Does card things."
 	icon = 'icons/obj/card.dmi'
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	slot_flags = SLOT_EARS
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
@@ -90,14 +90,14 @@
 	name = "broken cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = "{'magnets':2,'esoteric':2}"
+	origin_tech = @'{"magnets":2,"esoteric":2}'
 
 /obj/item/card/emag
 	desc = "It's a card with a magnetic strip attached to some circuitry."
 	name = "cryptographic sequencer"
 	icon_state = "emag"
 	item_state = "card-id"
-	origin_tech = "{'magnets':2,'esoteric':2}"
+	origin_tech = @'{"magnets":2,"esoteric":2}'
 	var/uses = 10
 
 	var/static/list/card_choices = list(
@@ -170,8 +170,8 @@ var/global/const/NO_EMAG_ACT = -50
 	var/icon/side
 
 	//alt titles are handled a bit weirdly in order to unobtrusively integrate into existing ID system
-	var/assignment = null	//can be alt title or the actual job
-	var/rank = null			//actual job
+	var/assignment //can be alt title or the actual job
+	var/position   // actual job
 
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
@@ -186,7 +186,7 @@ var/global/const/NO_EMAG_ACT = -50
 	. = ..()
 	update_icon()
 
-/obj/item/card/id/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/card/id/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && detail_color)
 		overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-colors", detail_color, RESET_COLOR)
 	. = ..()
@@ -196,7 +196,7 @@ var/global/const/NO_EMAG_ACT = -50
 	if(detail_color)
 		add_overlay(overlay_image(icon, "[icon_state]-colors", detail_color, RESET_COLOR))
 	for(var/detail in extra_details)
-		add_overlay(overlay_image(icon, detail, flags = RESET_COLOR))
+		add_overlay(overlay_image(icon, "[icon_state]-[detail]", flags = RESET_COLOR))
 
 /obj/item/card/id/Topic(href, href_list, datum/topic_state/state)
 	var/mob/user = usr
@@ -301,11 +301,11 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/GetAccess()
 	return access.Copy()
 
-/obj/item/card/id/GetIdCard()
-	return src
 
-/obj/item/card/id/GetIdCards()
-	return list(src)
+/obj/item/card/id/GetIdCards(list/exceptions)
+	. = ..()
+	if(!is_type_in_list(src, exceptions))
+		LAZYDISTINCTADD(., src)
 
 /obj/item/card/id/verb/read()
 	set name = "Read ID Card"
@@ -385,6 +385,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/captains_spare
 	name = "captain's spare ID"
 	desc = "The spare ID of the High Lord himself."
+	icon_state = ICON_STATE_WORLD
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"

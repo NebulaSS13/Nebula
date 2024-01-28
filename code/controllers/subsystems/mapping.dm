@@ -61,6 +61,8 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 
+	reindex_lists()
+
 	// Load our banned map list, if we have one.
 	if(banned_dmm_location && fexists(banned_dmm_location))
 		banned_maps = cached_json_decode(safe_file2text(banned_dmm_location))
@@ -68,10 +70,6 @@ SUBSYSTEM_DEF(mapping)
 	// Fetch and track all templates before doing anything that might need one.
 	for(var/datum/map_template/MT as anything in get_all_template_instances())
 		register_map_template(MT)
-
-	// Generate turbolifts.
-	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
-		turbolift.build_turbolift()
 
 	// Populate overmap.
 	if(length(global.using_map.overmap_ids))
@@ -89,6 +87,7 @@ SUBSYSTEM_DEF(mapping)
 			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
 		level.setup_level_data()
 
+	old_maxz = world.maxz
 	// Build away sites.
 	global.using_map.build_away_sites()
 	global.using_map.build_planets()
@@ -99,10 +98,9 @@ SUBSYSTEM_DEF(mapping)
 			PRINT_STACK_TRACE("Missing z-level data object for z[num2text(z)]!")
 		level.setup_level_data()
 
-	// Initialize z-level objects.
-#ifdef UNIT_TEST
-	config.roundstart_level_generation = FALSE
-#endif
+	// Generate turbolifts last, since away sites may have elevators to generate too.
+	for(var/obj/abstract/turbolift_spawner/turbolift as anything in turbolifts_to_initialize)
+		turbolift.build_turbolift()
 
 	// Resize the world to the max template size to fix a BYOND bug with world resizing breaking events.
 	// REMOVE WHEN THIS IS FIXED: https://www.byond.com/forum/post/2833191
@@ -117,9 +115,10 @@ SUBSYSTEM_DEF(mapping)
 	if (new_maxy > world.maxy)
 		world.maxy = new_maxy
 
-	for(var/obj/abstract/landmark/map_load_mark/mark in queued_markers)
-		mark.load_subtemplate()
-	queued_markers.Cut()
+	// Initialize z-level objects.
+#ifdef UNIT_TEST
+	set_config_value(/decl/config/toggle/roundstart_level_generation, FALSE) //#FIXME: Shouldn't this be set before running level_data/setup_level_data()?
+#endif
 
 	. = ..()
 

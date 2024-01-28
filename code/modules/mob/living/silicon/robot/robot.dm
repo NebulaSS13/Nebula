@@ -5,8 +5,7 @@
 	real_name = "robot"
 	icon = 'icons/mob/robots/robot.dmi'
 	icon_state = ICON_STATE_WORLD
-	maxHealth = 300
-	health = 300
+	mob_default_max_health = 300
 	mob_sort_value = 4
 
 	z_flags = ZMM_MANGLE_PLANES
@@ -35,13 +34,13 @@
 
 //Hud stuff
 
-	var/obj/screen/inv1 = null
-	var/obj/screen/inv2 = null
-	var/obj/screen/inv3 = null
+	var/obj/screen/robot_module_one/inv1
+	var/obj/screen/robot_module_two/inv2
+	var/obj/screen/robot_module_three/inv3
 	var/obj/screen/robot_drop_grab/ui_drop_grab
 
 	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
-	var/obj/screen/robot_modules_background
+	var/obj/screen/robot_modules_background/robot_modules_background
 
 //3 Modules can be activated at any one time.
 	var/obj/item/robot_module/module = null
@@ -61,7 +60,7 @@
 	// Components are basically robot organs.
 	var/list/components = list()
 
-	var/obj/item/mmi/mmi = null
+	var/obj/item/organ/internal/central_processor
 
 	var/opened = 0
 	var/emagged = 0
@@ -103,8 +102,7 @@
 
 	wires = new(src)
 
-	robot_modules_background = new()
-	robot_modules_background.icon_state = "block"
+	robot_modules_background = new(null, src)
 	ident = random_id(/mob/living/silicon/robot, 1, 999)
 
 	updatename(modtype)
@@ -197,21 +195,15 @@
 		return amount
 	return 0
 
-//If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
-//Improved /N
 /mob/living/silicon/robot/Destroy()
-	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
-		if(mind)
-			mmi.dropInto(loc)
-			if(mmi.brainmob)
-				mind.transfer_to(mmi.brainmob)
-			else
-				to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
-				ghostize()
-				//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
-			mmi = null
+	if(central_processor)
+		central_processor.dropInto(loc)
+		var/mob/living/brainmob = central_processor.get_brainmob()
+		if(mind && brainmob)
+			mind.transfer_to(brainmob)
 		else
-			QDEL_NULL(mmi)
+			ghostize()
+		central_processor = null
 	if(connected_ai)
 		connected_ai.connected_robots -= src
 	connected_ai = null
@@ -282,12 +274,10 @@
 	if(prefix)
 		modtype = prefix
 
-	if(istype(mmi, /obj/item/organ/internal/posibrain))
-		braintype = "Robot"
-	else if(istype(mmi, /obj/item/mmi/digital/robot))
-		braintype = "Drone"
+	if(istype(central_processor))
+		braintype = central_processor.get_synthetic_owner_name()
 	else
-		braintype = "Cyborg"
+		braintype = "Robot"
 
 	var/changed_name = ""
 	if(custom_name)
@@ -497,7 +487,6 @@
 		if (WT.weld(0))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustBruteLoss(-30)
-			updatehealth()
 			add_fingerprint(user)
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the dents on \the [src]!"))
 		else
@@ -512,30 +501,36 @@
 		if (coil.use(1))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			adjustFireLoss(-30)
-			updatehealth()
 			user.visible_message(SPAN_NOTICE("\The [user] has fixed some of the burnt wires on \the [src]!"))
 
 	else if(IS_CROWBAR(W) && user.a_intent != I_HURT)	// crowbar means open or close the cover - we all know what a crowbar is by now
 		if(opened)
 			if(cell)
-				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
+
+				user.visible_message(
+					SPAN_NOTICE("\The [user] begins clasping shut \the [src]'s maintenance hatch."),
+					SPAN_NOTICE("You begin closing up \the [src]."))
+
 				if(do_after(user, 50, src))
-					to_chat(user, "<span class='notice'>You close \the [src]'s maintenance hatch.</span>")
+					to_chat(user, SPAN_NOTICE("You close \the [src]'s maintenance hatch."))
 					opened = 0
 					update_icon()
 
 			else if(wiresexposed && wires.IsAllCut())
-				//Cell is out, wires are exposed, remove MMI, produce damaged chassis, baleet original mob.
-				if(!mmi)
-					to_chat(user, "\The [src] has no brain to remove.")
+				//Cell is out, wires are exposed, remove CPU, produce damaged chassis, baleet original mob.
+				if(!central_processor)
+					to_chat(user, "\The [src] has no central processor to remove.")
 					return
 
-				user.visible_message("<span class='notice'>\The [user] begins ripping [mmi] from [src].</span>", "<span class='notice'>You jam the crowbar into the robot and begin levering [mmi].</span>")
+				user.visible_message(
+					SPAN_NOTICE("\The [user] begins ripping \the [central_processor] out of \the [src]."),
+					SPAN_NOTICE("You jam the crowbar into the robot and begin levering out \the [central_processor]."))
+
 				if(do_after(user, 50, src))
 					dismantle(user)
 
 			else
-				// Okay we're not removing the cell or an MMI, but maybe something else?
+				// Okay we're not removing the cell or a CPU, but maybe something else?
 				var/list/removable_components = list()
 				for(var/V in components)
 					if(V == "power cell") continue
@@ -722,11 +717,6 @@
 
 	if(module_active && istype(module_active, /obj/item/borg/combat/shield))
 		add_overlay("[icon_state]-shield")
-
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	var/image/hat = hattable?.get_hat_overlay(src)
-	if(hat)
-		add_overlay(hat)
 
 /mob/living/silicon/robot/proc/installed_modules()
 	if(weapon_lock)
@@ -1108,7 +1098,10 @@
 	return ASSIGNMENT_ROBOT
 
 /mob/living/silicon/robot/handle_pre_transformation()
-	QDEL_NULL(mmi)
+	clear_brain()
+
+/mob/living/silicon/robot/proc/clear_brain()
+	QDEL_NULL(central_processor)
 
 /mob/living/silicon/robot/do_flash_animation()
 	set waitfor = FALSE

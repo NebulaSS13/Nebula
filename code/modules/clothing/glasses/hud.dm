@@ -1,7 +1,7 @@
 /obj/item/clothing/glasses/hud
 	name = "\improper HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
-	origin_tech = "{'magnets':3,'biotech':2}"
+	origin_tech = @'{"magnets":3,"biotech":2}'
 	electric = TRUE
 	gender = NEUTER
 	toggleable = TRUE

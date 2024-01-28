@@ -5,15 +5,6 @@
 
 	SHOULD_CALL_PARENT(TRUE)
 
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	if(hattable && hattable.hat)
-		hattable.hat.forceMove(get_turf(src))
-		user.put_in_hands(hattable.hat)
-		user.visible_message(SPAN_DANGER("\The [user] removes \the [src]'s [hattable.hat]!"))
-		hattable.hat = null
-		update_icon()
-		return TRUE
-
 	switch(user.a_intent)
 		if(I_HURT)
 			. = default_hurt_interaction(user)

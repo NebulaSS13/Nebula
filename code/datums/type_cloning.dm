@@ -6,3 +6,5 @@
 /matrix/GetCloneArgs()
 	return list(src) //Matrices handle copies themselves
 
+/image/GetCloneArgs()
+	return list(src) //Same for images

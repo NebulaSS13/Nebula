@@ -5,7 +5,7 @@
 	icon_state = "dot"
 	layer = WIRE_LAYER
 	anchored = TRUE
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	var/datum/node/physical/network_node
 
 /obj/structure/network_cable/Initialize(ml, _mat, _reinf_mat)
@@ -163,8 +163,9 @@
 	throw_range = 5
 	material = /decl/material/solid/glass
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
+	matter_multiplier = 0.15
 	item_state = "coil"
 
 /obj/item/stack/net_cable_coil/single

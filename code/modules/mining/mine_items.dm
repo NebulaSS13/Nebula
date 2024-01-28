@@ -36,7 +36,7 @@
 	throwforce = 4
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/steel
-	origin_tech = "{'materials':1,'engineering':1}"
+	origin_tech = @'{"materials":1,"engineering":1}'
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	sharp = 0
 
@@ -55,7 +55,16 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/item/pickaxe/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/pickaxe/Initialize()
+	var/list/tool_qualities = get_initial_tool_qualities()
+	if(length(tool_qualities))
+		set_extension(src, /datum/extension/tool, tool_qualities)
+	. = ..()
+
+/obj/item/pickaxe/proc/get_initial_tool_qualities()
+	return list(TOOL_SHOVEL = TOOL_QUALITY_MEDIOCRE)
+
+/obj/item/pickaxe/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && build_from_parts && check_state_in_icon("[overlay.icon_state]-handle", overlay.icon))
 		var/image/handle = image(overlay.icon, "[overlay.icon_state]-handle")
 		handle.appearance_flags |= RESET_COLOR
@@ -71,35 +80,48 @@
 	name = "advanced mining drill" // Can dig sand as well!
 	icon = 'icons/obj/items/tool/drills/drill_hand.dmi'
 	digspeed = 30
-	origin_tech = "{'materials':2,'powerstorage':3,'engineering':2}"
+	origin_tech = @'{"materials":2,"powerstorage":3,"engineering":2}'
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/pickaxe/drill/Initialize(ml, material_key)
-	. = ..()
-	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_MEDIOCRE))
+/obj/item/pickaxe/drill/get_initial_tool_qualities()
+	return list(
+		TOOL_SURGICAL_DRILL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_DEFAULT
+	)
 
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
 	icon = 'icons/obj/items/tool/drills/jackhammer.dmi'
 	digspeed = 20 //faster than drill, but cannot dig
-	origin_tech = "{'materials':3,'powerstorage':2,'engineering':2}"
+	origin_tech = @'{"materials":3,"powerstorage":2,"engineering":2}'
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 	drill_verb = "hammering"
 
+/obj/item/pickaxe/jackhammer/get_initial_tool_qualities()
+	return list(
+		TOOL_SURGICAL_DRILL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_DECENT
+	)
 /obj/item/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
 	icon = 'icons/obj/items/tool/drills/drill_diamond.dmi'
 	digspeed = 5 //Digs through walls, girders, and can dig up sand
-	origin_tech = "{'materials':6,'powerstorage':4,'engineering':5}"
+	origin_tech = @'{"materials":6,"powerstorage":4,"engineering":5}'
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
+	)
+
+/obj/item/pickaxe/diamonddrill/get_initial_tool_qualities()
+	return list(
+		TOOL_SURGICAL_DRILL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD
 	)
 
 /obj/item/pickaxe/borgdrill
@@ -109,6 +131,12 @@
 	desc = ""
 	drill_verb = "drilling"
 
+/obj/item/pickaxe/borgdrill/get_initial_tool_qualities()
+	return list(
+		TOOL_SURGICAL_DRILL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SHOVEL = TOOL_QUALITY_GOOD
+	)
+
 //****************************actual pickaxes***********************
 /obj/item/pickaxe/silver
 	name = "silver pickaxe"
@@ -116,11 +144,14 @@
 	icon_state = "preview"
 	icon = 'icons/obj/items/tool/drills/pickaxe.dmi'
 	digspeed = 30
-	origin_tech = "{'materials':3}"
+	origin_tech = @'{"materials":3}'
 	drill_verb = "picking"
 	sharp = 1
 	build_from_parts = TRUE
 	hardware_color = COLOR_SILVER
+
+/obj/item/pickaxe/silver/get_initial_tool_qualities()
+	return list(TOOL_SHOVEL = TOOL_QUALITY_DEFAULT)
 
 /obj/item/pickaxe/gold
 	name = "golden pickaxe"
@@ -128,11 +159,14 @@
 	icon_state = "preview"
 	icon = 'icons/obj/items/tool/drills/pickaxe.dmi'
 	digspeed = 20
-	origin_tech = "{'materials':4}"
+	origin_tech = @'{"materials":4}'
 	drill_verb = "picking"
 	sharp = 1
 	build_from_parts = TRUE
 	hardware_color = COLOR_GOLD
+
+/obj/item/pickaxe/gold/get_initial_tool_qualities()
+	return list(TOOL_SHOVEL = TOOL_QUALITY_DECENT)
 
 /obj/item/pickaxe/diamond
 	name = "diamond pickaxe"
@@ -140,12 +174,15 @@
 	icon_state = "preview"
 	icon = 'icons/obj/items/tool/drills/pickaxe.dmi'
 	digspeed = 10
-	origin_tech = "{'materials':6,'engineering':4}"
+	origin_tech = @'{"materials":6,"engineering":4}'
 	drill_verb = "picking"
 	sharp = 1
 	build_from_parts = TRUE
 	hardware_color = COLOR_DIAMOND
 	material = /decl/material/solid/gemstone/diamond
+
+/obj/item/pickaxe/diamond/get_initial_tool_qualities()
+	return list(TOOL_SHOVEL = TOOL_QUALITY_GOOD)
 
 /*****************************Shovel********************************/
 
@@ -158,7 +195,7 @@
 	force       = 8.0
 	throwforce  = 4
 	w_class     = ITEM_SIZE_HUGE
-	origin_tech = "{'materials':1,'engineering':1}"
+	origin_tech = @'{"materials":1,"engineering":1}'
 	material    = /decl/material/solid/metal/steel
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	edge        = 1
@@ -225,7 +262,7 @@
 /obj/item/stack/flag/attack_self(var/mob/user)
 	var/turf/T = get_turf(src)
 
-	if(!istype(T) || !T.is_open())
+	if(!istype(T) || T.is_open())
 		to_chat(user, "<span class='warning'>There's no solid surface to plant \the [singular_name] on.</span>")
 		return
 

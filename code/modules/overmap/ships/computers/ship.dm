@@ -69,9 +69,9 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		for(var/obj/machinery/computer/ship/sensors/sensor in linked.get_linked_machines_of_type(/obj/machinery/computer/ship))
 			sensor.reveal_contacts(user)
 
-	events_repository.register(/decl/observ/moved, user, src, /obj/machinery/computer/ship/proc/unlook)
+	events_repository.register(/decl/observ/moved, user, src, TYPE_PROC_REF(/obj/machinery/computer/ship, unlook))
 	if(isliving(user))
-		events_repository.register(/decl/observ/stat_set, user, src, /obj/machinery/computer/ship/proc/unlook)
+		events_repository.register(/decl/observ/stat_set, user, src, TYPE_PROC_REF(/obj/machinery/computer/ship, unlook))
 	LAZYDISTINCTADD(viewers, weakref(user))
 	if(linked)
 		LAZYDISTINCTADD(linked.navigation_viewers, weakref(user))
@@ -84,9 +84,9 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		for(var/obj/machinery/computer/ship/sensors/sensor in linked.get_linked_machines_of_type(/obj/machinery/computer/ship))
 			sensor.hide_contacts(user)
 
-	events_repository.unregister(/decl/observ/moved, user, src, /obj/machinery/computer/ship/proc/unlook)
+	events_repository.unregister(/decl/observ/moved, user, src, TYPE_PROC_REF(/obj/machinery/computer/ship, unlook))
 	if(isliving(user))
-		events_repository.unregister(/decl/observ/stat_set, user, src, /obj/machinery/computer/ship/proc/unlook)
+		events_repository.unregister(/decl/observ/stat_set, user, src, TYPE_PROC_REF(/obj/machinery/computer/ship, unlook))
 	LAZYREMOVE(viewers, weakref(user))
 	if(linked)
 		LAZYREMOVE(linked.navigation_viewers, weakref(user))

@@ -4,7 +4,7 @@
 	desc = "A beaker."
 	icon = 'icons/obj/items/chem/beakers/beaker.dmi'
 	icon_state = ICON_STATE_WORLD
-	center_of_mass = @"{'x':15,'y':10}"
+	center_of_mass = @'{"x":15,"y":10}'
 	material = /decl/material/solid/glass
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	material_force_multiplier = 0.25
@@ -69,7 +69,7 @@
 	name = "large beaker"
 	desc = "A large beaker."
 	icon = 'icons/obj/items/chem/beakers/large.dmi'
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	volume = 120
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120]"
@@ -80,12 +80,11 @@
 	name = "mixing bowl"
 	desc = "A large mixing bowl."
 	icon = 'icons/obj/items/chem/mixingbowl.dmi'
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	volume = 180
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	unacidable = 0
 	material = /decl/material/solid/metal/steel
 	material_force_multiplier = 0.2
 
@@ -93,21 +92,21 @@
 	name = "cryostasis beaker"
 	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon = 'icons/obj/items/chem/beakers/stasis.dmi'
-	center_of_mass = @"{'x':16,'y':8}"
+	center_of_mass = @'{"x":16,"y":8}'
 	volume = 60
 	amount_per_transfer_from_this = 10
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_CHEM_CHANGE
 	presentation_flags = PRESENTATION_FLAG_NAME
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_NONE
-	origin_tech = "{'materials':2}"
+	origin_tech = @'{"materials":2}'
 	lid_color = COLOR_PALE_BLUE_GRAY
 
 /obj/item/chems/glass/beaker/advanced
 	name = "advanced beaker"
 	desc = "An advanced beaker, powered by experimental technology."
 	icon = 'icons/obj/items/chem/beakers/advanced.dmi'
-	center_of_mass = @"{'x':16,'y':10}"
+	center_of_mass = @'{"x":16,"y":10}'
 	volume = 300
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
@@ -118,14 +117,14 @@
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
-	origin_tech = "{'exoticmatter':2,'materials':6}"
+	origin_tech = @'{"exoticmatter":2,"materials":6}'
 	lid_color = COLOR_CYAN_BLUE
 
 /obj/item/chems/glass/beaker/vial
 	name = "vial"
 	desc = "A small glass vial."
 	icon = 'icons/obj/items/chem/vial.dmi'
-	center_of_mass = @"{'x':15,'y':8}"
+	center_of_mass = @'{"x":15,"y":8}'
 	volume = 30
 	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
@@ -141,21 +140,25 @@
 	name = "insulated beaker"
 	desc = "A glass beaker surrounded with black insulation."
 	icon = 'icons/obj/items/chem/beakers/insulated.dmi'
-	center_of_mass = @"{'x':15,'y':8}"
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	center_of_mass = @'{"x":15,"y":8}'
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
 	temperature_coefficient = 1
 	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_NONE
 	lid_color = COLOR_GRAY40
 
+// Hack around reagent temp changes.
+/obj/item/chems/glass/beaker/insulated/ProcessAtomTemperature()
+	return PROCESS_KILL
+
 /obj/item/chems/glass/beaker/insulated/large
 	name = "large insulated beaker"
 	icon = 'icons/obj/items/chem/beakers/insulated_large.dmi'
-	center_of_mass = @"{'x':16,'y':10}"
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	center_of_mass = @'{"x":16,"y":10}'
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	volume = 120
 
 /obj/item/chems/glass/beaker/sulphuric/populate_reagents()

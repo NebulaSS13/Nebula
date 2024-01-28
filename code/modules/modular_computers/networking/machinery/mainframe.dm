@@ -68,3 +68,20 @@
 
 /obj/machinery/network/mainframe/software
 	initial_roles = list(MF_ROLE_SOFTWARE)
+
+/obj/machinery/network/mainframe/software/Initialize()
+	. = ..()
+	var/obj/item/stock_parts/computer/hard_drive/drive = get_component_of_type(PART_HDD)
+	for(var/F in subtypesof(/datum/computer_file/report))
+		var/datum/computer_file/report/type = F
+		if(TYPE_IS_ABSTRACT(type))
+			continue
+		if(initial(type.available_on_network))
+			drive.store_file(new type, "reports", TRUE)
+
+	for(var/F in subtypesof(/datum/computer_file/program))
+		var/datum/computer_file/program/type = F
+		if(TYPE_IS_ABSTRACT(type))
+			continue
+		if(initial(type.available_on_network))
+			drive.store_file(new type, OS_PROGRAMS_DIR, TRUE)

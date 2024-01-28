@@ -209,7 +209,7 @@
 	return TRUE
 
 /datum/unit_test/aspects_shall_have_unique_names
-	name = "ASPECTS: All Aspects Shall Have Unique Names"
+	name = "UNIQUENESS: All Aspects Shall Have Unique Names"
 
 /datum/unit_test/aspects_shall_have_unique_names/start_test()
 	var/list/aspects_by_name = list()
@@ -229,7 +229,7 @@
 	return 1
 
 /datum/unit_test/submaps_shall_have_a_unique_descriptor
-	name = "SUBMAPS: Archetypes shall have a valid, unique descriptor."
+	name = "UNIQUENESS: Archetypes shall have a valid, unique descriptor."
 
 /datum/unit_test/submaps_shall_have_a_unique_descriptor/start_test()
 	var/list/submaps_by_name = list()
@@ -271,3 +271,29 @@
 	for(var/entry in entries)
 		pretty_print += log_info_line(entry)
 	priv_print(ut, type, key, jointext(pretty_print, "\n"))
+
+/datum/unit_test/holopad_id_uniqueness
+	name = "UNIQUENESS: Holopads Shall Have Unique Valid IDs"
+
+/datum/unit_test/holopad_id_uniqueness/start_test()
+
+	var/list/failures = list()
+
+	var/list/seen_holopad_ids = list()
+	for(var/obj/machinery/hologram/holopad/holopad in global.holopads)
+		var/area/area = get_area(holopad)
+		var/holopad_loc = "x[holopad.x],y[holopad.y],z[holopad.z] - [area?.proper_name || "Unknown"]"
+		if(istext(holopad.holopad_id))
+			LAZYDISTINCTADD(seen_holopad_ids[holopad.holopad_id], holopad_loc)
+		else
+			failures += "[holopad_loc] - null or non-text holopad_id ([isnull(holopad.holopad_id) ? "NULL" : holopad.holopad_id])"
+
+	for(var/holopad_id in seen_holopad_ids)
+		if(length(seen_holopad_ids[holopad_id]) > 1)
+			failures += "overlapping holopad_id ([holopad_id]) - [jointext(seen_holopad_ids[holopad_id], ", ")]"
+
+	if(length(failures))
+		fail("Some holopads had overlapping or invalid ID values:\n[jointext(failures,"\n")]")
+	else
+		pass("All holopads had unique valid ID values.")
+	return 1

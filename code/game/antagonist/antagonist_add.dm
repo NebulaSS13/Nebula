@@ -22,7 +22,7 @@
 /decl/special_role/proc/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance)
 
 	if(!add_antagonist_mind(player, ignore_role))
-		return
+		return FALSE
 
 	load_required_map()
 
@@ -40,11 +40,11 @@
 		if(istype(skill_setter))
 			skill_setter.initialize_skills(player.current.skillset)
 		if(!do_not_equip)
-			equip(player.current)
+			equip_role(player.current)
 
 	if(player.current)
 		player.current.faction = faction
-	return 1
+	return TRUE
 
 /decl/special_role/proc/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg)
 	if(!istype(player))
@@ -60,7 +60,7 @@
 	if(faction_verb)
 		player.current.verbs |= faction_verb
 
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_VERB)
+	if(get_config_value(/decl/config/enum/objectives_disabled) == CONFIG_OBJECTIVE_VERB)
 		player.current.verbs += /mob/proc/add_objectives
 
 	if(player.current.client)

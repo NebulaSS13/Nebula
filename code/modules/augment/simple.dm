@@ -1,13 +1,12 @@
 //Simple toggleabse module. Just put holding in hands or get it back
 /obj/item/organ/internal/augment/active/simple
 	origin_tech = null
-	var/obj/item/holding = null
-	var/holding_type = null
+	var/obj/item/holding
 
 /obj/item/organ/internal/augment/active/simple/Initialize()
 	. = ..()
-	if(holding_type)
-		holding = new holding_type(src)
+	if(ispath(holding))
+		holding = new holding(src)
 		holding.canremove = 0
 		if(!origin_tech)
 			origin_tech = holding.get_origin_tech()
@@ -18,7 +17,6 @@
 		if(holding.loc == src)
 			QDEL_NULL(holding)
 	return ..()
-
 
 /obj/item/organ/internal/augment/active/simple/proc/holding_dropped()
 
@@ -37,7 +35,7 @@
 	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
 		slot = BP_R_HAND
 	if(owner.equip_to_slot_if_possible(holding, slot))
-		events_repository.register(/decl/observ/item_unequipped, holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped)
+		events_repository.register(/decl/observ/item_unequipped, holding, src, TYPE_PROC_REF(/obj/item/organ/internal/augment/active/simple, holding_dropped))
 		var/decl/pronouns/G = owner.get_pronouns()
 		owner.visible_message(
 			SPAN_NOTICE("\The [owner] extends [G.his] [holding.name] from [G.his] [limb.name]."),

@@ -22,7 +22,7 @@
 		/obj/item/chems/glass/paint/purple,
 		/obj/item/chems/glass/paint/black,
 		/obj/item/chems/glass/paint/white,
-		/obj/item/contraband/poster,
+		/obj/item/poster,
 		/obj/item/stack/package_wrap/fifty      = 2,
 		/obj/item/stack/package_wrap/gift/fifty = 2
 	)

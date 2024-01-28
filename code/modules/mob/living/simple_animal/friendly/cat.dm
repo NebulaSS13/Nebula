@@ -16,21 +16,24 @@
 	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
-	skin_material = /decl/material/solid/skin/fur/orange
+	skin_material = /decl/material/solid/organic/skin/fur/orange
 	base_animal_type = /mob/living/simple_animal/cat
-
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
 	var/mob/flee_target
 
-/mob/living/simple_animal/cat/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
+/mob/living/simple_animal/cat/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/cat)
+
+/decl/bodytype/animal/cat/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
 			"[NORTH]" = list( 1,  -9),
 			"[SOUTH]" = list( 1, -12),
 			"[EAST]" =  list( 7, -10),
 			"[WEST]" =  list(-7, -10)
 		)
+	)
 	. = ..()
 
 /mob/living/simple_animal/cat/do_delayed_life_action()
@@ -138,7 +141,7 @@
 	desc = "The by-product of cat farming."
 	icon = 'icons/obj/items/sheet_hide.dmi'
 	icon_state = "sheet-cat"
-	material = /decl/material/solid/leather/fur
+	material = /decl/material/solid/organic/leather/fur
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
@@ -150,7 +153,7 @@
 		var/follow_dist = 4
 		if (friend.stat >= DEAD || friend.is_asystole()) //danger
 			follow_dist = 1
-		else if (friend.stat || friend.health <= 50) //danger or just sleeping
+		else if (friend.stat || friend.current_health <= 50) //danger or just sleeping
 			follow_dist = 2
 		var/near_dist = max(follow_dist - 2, 1)
 		var/current_dist = get_dist(src, friend)
@@ -192,7 +195,7 @@
 								   "brushes against [friend].",
 								   "rubs against [friend].",
 								   "purrs."))
-	else if (friend.health <= 50)
+	else if (friend.current_health <= 50)
 		if (prob(10))
 			var/verb = pick("meows", "mews", "mrowls")
 			audible_emote("[verb] anxiously.")
@@ -226,11 +229,11 @@
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
 	icon = 'icons/mob/simple_animal/cat_black.dmi'
-	skin_material = /decl/material/solid/skin/fur/black
+	skin_material = /decl/material/solid/organic/skin/fur/black
 	holder_type = /obj/item/holder/runtime
 
 /obj/item/holder/runtime
-	origin_tech = "{'programming':1,'biotech':1}"
+	origin_tech = @'{"programming":1,"biotech":1}'
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
@@ -241,14 +244,21 @@
 	bone_amount = 3
 	skin_amount = 3
 
-/mob/living/simple_animal/cat/kitten/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list(
+/mob/living/simple_animal/cat/kitten/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/kitten)
+
+/decl/bodytype/animal/kitten/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
 			"[NORTH]" = list( 1, -14),
 			"[SOUTH]" = list( 1, -14),
 			"[EAST]" =  list( 5, -14),
 			"[WEST]" =  list(-5, -14)
 		)
+	)
+	. = ..()
+
+/mob/living/simple_animal/cat/kitten/Initialize()
 	. = ..()
 	gender = pick(MALE, FEMALE)
 

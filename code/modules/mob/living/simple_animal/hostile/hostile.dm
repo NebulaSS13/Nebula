@@ -12,14 +12,13 @@
 	var/attack_same = 0
 	var/ranged = 0
 	var/rapid = 0
-	var/sa_accuracy = 85 //base chance to hit out of 100
 	var/projectiletype
 	var/projectilesound
 	var/casingtype
 	var/fire_desc = "fires" //"X fire_desc at Y!"
 	var/ranged_range = 6 //tiles of range for ranged attackers to attack
 	var/move_to_delay = 4 //delay for the automated movement.
-	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
+
 	var/list/friends = list()
 	var/break_stuff_probability = 10
 	var/destroy_surroundings = 1
@@ -94,7 +93,10 @@
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
 	return
 
-/mob/living/simple_animal/hostile/proc/MoveToTarget()
+/mob/living/simple_animal/proc/MoveToTarget(var/move_only = FALSE)
+	return
+
+/mob/living/simple_animal/hostile/MoveToTarget(var/move_only = FALSE)
 	if(!can_act())
 		return
 	if(HAS_STATUS(src, STAT_CONFUSE))
@@ -106,7 +108,8 @@
 	if(target_mob in ListTargets(10))
 		if(ranged)
 			if(get_dist(src, target_mob) <= ranged_range)
-				OpenFire(target_mob)
+				if(!move_only)
+					OpenFire(target_mob)
 			else
 				walk_to(src, target_mob, 1, move_to_delay)
 		else
@@ -148,19 +151,11 @@
 
 		return target_mob
 
-	face_atom(target_mob)
-	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
 		return
 	if(isliving(target_mob))
-		if(!prob(get_accuracy()))
-			visible_message("<span class='notice'>\The [src] misses its attack on \the [target_mob]!</span>")
-			return
-		var/mob/living/L = target_mob
-		var/attacking_with = get_natural_weapon()
-		if(attacking_with)
-			L.attackby(attacking_with, src)
-		return L
+		UnarmedAttack(target_mob)
+		return target_mob
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -174,14 +169,11 @@
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	return hearers(src, dist)-src
 
-/mob/living/simple_animal/hostile/proc/get_accuracy()
-	return clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
-
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
 	walk(src, 0)
 
-/mob/living/simple_animal/hostile/Life()
+/mob/living/simple_animal/hostile/handle_regular_status_updates()
 	. = ..()
 	if(!.)
 		walk(src, 0)
@@ -218,57 +210,58 @@
 			target_mob = null
 
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
-	var/oldhealth = health
+	var/oldhealth = current_health
 	. = ..()
-	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
-		MoveToTarget()
+		MoveToTarget(move_only = TRUE)
 
 /mob/living/simple_animal/hostile/default_hurt_interaction(mob/user)
 	. = ..()
 	if(. && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
-		MoveToTarget()
+		MoveToTarget(move_only = TRUE)
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
-	var/oldhealth = health
+	var/oldhealth = current_health
 	. = ..()
-	if(isliving(Proj.firer) && !target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(isliving(Proj.firer) && !target_mob && current_health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
-		MoveToTarget()
+		MoveToTarget(move_only = TRUE)
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
+
+	if(!can_act())
+		return FALSE
+
 	var/target = target_mob
-	visible_message("<span class='danger'>\The [src] [fire_desc] at \the [target]!</span>", 1)
+	visible_message(SPAN_DANGER("\The [src] [fire_desc] at \the [target]!"))
 
 	if(rapid)
-		var/datum/callback/shoot_cb = CALLBACK(src, .proc/shoot_wrapper, target, loc, src)
+		var/datum/callback/shoot_cb = CALLBACK(src, PROC_REF(shoot_wrapper), target, loc, src)
 		addtimer(shoot_cb, 1)
 		addtimer(shoot_cb, 4)
 		addtimer(shoot_cb, 6)
-	else
-		Shoot(target, src.loc, src)
-		if(casingtype)
-			new casingtype
+	else if(Shoot(target, src.loc, src) && casingtype)
+		new casingtype(get_turf(src))
 
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
-	return
+	return TRUE
 
 /mob/living/simple_animal/hostile/proc/shoot_wrapper(target, location, user)
-	Shoot(target, location, user)
-	if (casingtype)
+	if(Shoot(target, location, user) && casingtype)
 		new casingtype(loc)
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
-	if(target == start)
-		return
-
+	if(!can_act() || target == start)
+		return FALSE
 	var/obj/item/projectile/A = new projectiletype(get_turf(user))
+	if(!A)
+		return FALSE
 	playsound(user, projectilesound, 100, 1)
-	if(!A)	return
-	var/def_zone = get_exposed_defense_zone(target)
-	A.launch(target, def_zone)
+	A.launch(target, get_exposed_defense_zone(target))
+	return TRUE
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings() //courtesy of Lohikar
 	if(!can_act())
@@ -281,18 +274,13 @@
 
 		var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
 		if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
-			var/attacking_with = get_natural_weapon()
-			if(attacking_with)
-				S.attackby(attacking_with, src)
+			UnarmedAttack(S)
 			return
 
 		for(var/type in valid_obstacles_by_priority)
 			var/obj/obstacle = locate(type) in targ
 			if(obstacle)
-				face_atom(obstacle)
-				var/attacking_with = get_natural_weapon()
-				if(attacking_with)
-					obstacle.attackby(attacking_with, src)
+				UnarmedAttack(obstacle)
 				return
 
 		if(can_pry)

@@ -84,9 +84,9 @@
 
 	// Seed datum handles gasses, light and pressure.
 	if(mechanical && closed_system)
-		plant_health -= seed.handle_environment(T,environment,tray_light)
+		plant_health -= seed.handle_plant_environment(T,environment,tray_light)
 	else
-		plant_health -= seed.handle_environment(T,environment)
+		plant_health -= seed.handle_plant_environment(T,environment)
 
 	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
 	if (closed_system && get_port())
@@ -119,7 +119,7 @@
 
 	// Handle life and death.
 	// When the plant dies, weeds thrive and pests die off.
-	check_plant_health(0)
+	check_plant_health(FALSE)
 
 	// If enough time (in cycles, not ticks) has passed since the plant was harvested, we're ready to harvest again.
 	if((age > seed.get_trait(TRAIT_MATURATION)) && \

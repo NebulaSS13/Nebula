@@ -27,7 +27,6 @@ var/global/list/wall_fullblend_objects = list(
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 	explosion_resistance = 10
 	color = COLOR_STEEL
-	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
 	var/damage = 0
@@ -67,7 +66,7 @@ var/global/list/wall_fullblend_objects = list(
 		girder_material = GET_DECL(girder_material)
 
 	. = INITIALIZE_HINT_LATELOAD
-	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	set_extension(src, /datum/extension/penetration/proc_call, PROC_REF(CheckPenetration))
 	START_PROCESSING(SSturf, src) //Used for radiation.
 
 /turf/simulated/wall/LateInitialize(var/ml)
@@ -148,7 +147,7 @@ var/global/list/wall_fullblend_objects = list(
 			plant.update_icon()
 			plant.reset_offsets(0)
 
-/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
 	clear_plants()
 	. = ..()
 
@@ -205,6 +204,7 @@ var/global/list/wall_fullblend_objects = list(
 
 /turf/simulated/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air :(
 	burn(exposed_temperature)
+	return ..()
 
 /turf/simulated/wall/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	burn(adj_temp)
@@ -273,7 +273,7 @@ var/global/list/wall_fullblend_objects = list(
 	if(!QDELETED(src) && istype(material) && material.combustion_effect(src, temperature, 0.7))
 		for(var/turf/simulated/wall/W in range(3,src))
 			if(W != src)
-				addtimer(CALLBACK(W, /turf/simulated/wall/proc/burn, temperature/4), 2)
+				addtimer(CALLBACK(W, TYPE_PROC_REF(/turf/simulated/wall, burn), temperature/4), 2)
 		dismantle_wall(TRUE)
 
 /turf/simulated/wall/get_color()

@@ -56,7 +56,7 @@
 	if(ismob(a))
 		var/mob/M = a
 		if(M.stat != DEAD)
-			events_repository.register(/decl/observ/death, M,src,/obj/item/twohanded/fireaxe/cult/proc/gain_power)
+			events_repository.register(/decl/observ/death, M,src, TYPE_PROC_REF(/obj/item/twohanded/fireaxe/cult, gain_power))
 		spawn(30)
 			events_repository.unregister(/decl/observ/death, M,src)
 	return ..()

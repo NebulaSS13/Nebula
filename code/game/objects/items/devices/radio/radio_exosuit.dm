@@ -1,13 +1,16 @@
-//The exosuit  radio subtype. It allows pilots to interact and consumes exosuit power
+//The exosuit radio subtype. It allows pilots to interact and consumes exosuit power
 /obj/item/radio/exosuit
 	name = "exosuit radio"
-	cell = null
+
+/obj/item/radio/exosuit/setup_power_supply(loaded_cell_type, accepted_cell_type, power_supply_extension_type, charge_value)
+	SHOULD_CALL_PARENT(FALSE)
+	return
 
 /obj/item/radio/exosuit/get_cell()
-	. = ..()
-	if(!. && isexosuit(loc))
+	if(isexosuit(loc))
 		var/mob/living/exosuit/E = loc
 		return E.get_cell()
+	return ..()
 
 /obj/item/radio/exosuit/nano_host()
 	if(isexosuit(loc))

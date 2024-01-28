@@ -74,7 +74,7 @@
 
 		airflow_open_directions |= d
 
-		if(unsim.zone_membership_candidate)
+		if(SHOULD_PARTICIPATE_IN_ZONES(unsim))
 
 			unsim.airflow_open_directions |= global.reverse_dir[d]
 
@@ -214,6 +214,7 @@
 	return FALSE
 
 /turf/return_air()
+	RETURN_TYPE(/datum/gas_mixture)
 
 	// ZAS participation
 	if(zone && !zone.invalid)
@@ -222,22 +223,13 @@
 
 	// Exterior turf global atmosphere
 	if((!air && isnull(initial_gas)) || (external_atmosphere_participation && is_outside()))
-		var/datum/level_data/level = SSmapping.levels_by_z[z]
-		var/datum/gas_mixture/gas = level.get_exterior_atmosphere()
-		var/initial_temperature = weather ? weather.adjust_temperature(gas.temperature) : gas.temperature
-		if(length(affecting_heat_sources))
-			for(var/obj/structure/fire_source/heat_source as anything in affecting_heat_sources)
-				gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
-				if(abs(gas.temperature - initial_temperature) >= 100)
-					break
-		return gas
+		return get_external_air()
 
 	// Base behavior
-	. = air
-	if(!.)
-		. = make_air()
-		if(zone)
-			c_copy_air()
+	. = air || make_air()
+	if(zone)
+		c_copy_air()
+		zone = null
 
 /turf/remove_air(amount as num)
 	var/datum/gas_mixture/GM = return_air()
@@ -260,6 +252,21 @@
 		air.gas = initial_gas.Copy()
 	air.update_values()
 	return air
+
+// Returns the external air if this turf is outside, modified by weather and heat sources. Outside checks do not occur in this proc!
+/turf/proc/get_external_air(include_heat_sources = TRUE)
+	var/datum/level_data/level = SSmapping.levels_by_z[z]
+	var/datum/gas_mixture/gas = level.get_exterior_atmosphere()
+	if(!include_heat_sources)
+		return gas
+
+	var/initial_temperature = weather ? weather.adjust_temperature(gas.temperature) : gas.temperature
+	if(length(affecting_heat_sources))
+		for(var/obj/structure/fire_source/heat_source as anything in affecting_heat_sources)
+			gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
+			if(abs(gas.temperature - initial_temperature) >= 100)
+				break
+	return gas
 
 /turf/proc/c_copy_air()
 	if(!air)

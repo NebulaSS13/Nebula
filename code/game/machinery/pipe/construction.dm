@@ -13,7 +13,7 @@ Buildable meters
 	randpixel = 5
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_NORMAL
-	level = 2
+	level = LEVEL_ABOVE_PLATING
 	obj_flags = OBJ_FLAG_ROTATABLE
 	dir = SOUTH
 	material = /decl/material/solid/metal/steel

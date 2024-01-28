@@ -64,14 +64,14 @@
 
 	icon_state = "drone_fab_active"
 	var/elapsed = world.time - time_last_drone
-	drone_progress = round((elapsed/config.drone_build_time)*100)
+	drone_progress = round((elapsed/get_config_value(/decl/config/num/drone_build_time))*100)
 
 	if(drone_progress >= 100)
 		visible_message("\The [src] voices a strident beep, indicating a drone chassis is prepared.")
 
 /obj/machinery/drone_fabricator/examine(mob/user)
 	. = ..()
-	if(produce_drones && drone_progress >= 100 && isghost(user) && config.allow_drone_spawn && count_drones() < config.max_maint_drones)
+	if(produce_drones && drone_progress >= 100 && isghost(user) && get_config_value(/decl/config/toggle/on/allow_drone_spawn) && count_drones() < get_config_value(/decl/config/num/max_maint_drones))
 		to_chat(user, "<BR><B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>")
 
 /obj/machinery/drone_fabricator/proc/create_drone(var/client/player)
@@ -79,7 +79,7 @@
 	if(stat & NOPOWER)
 		return
 
-	if(!produce_drones || !config.allow_drone_spawn || count_drones() >= config.max_maint_drones)
+	if(!produce_drones || !get_config_value(/decl/config/toggle/on/allow_drone_spawn) || count_drones() >= get_config_value(/decl/config/num/max_maint_drones))
 		return
 
 	if(player && !isghost(player.mob))
@@ -110,7 +110,7 @@
 		to_chat(user, "<span class='danger'>The game hasn't started yet!</span>")
 		return
 
-	if(!(config.allow_drone_spawn))
+	if(!get_config_value(/decl/config/toggle/on/allow_drone_spawn))
 		to_chat(user, "<span class='danger'>That verb is not currently permitted.</span>")
 		return
 
@@ -118,7 +118,7 @@
 		to_chat(user, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
 		return
 
-	if(config.use_age_restriction_for_jobs && isnum(user.client.player_age))
+	if(get_config_value(/decl/config/num/use_age_restriction_for_jobs) && isnum(user.client.player_age))
 		if(user.client.player_age <= 3)
 			to_chat(user, "<span class='danger'> Your account is not old enough to play as a maintenance drone.</span>")
 			return

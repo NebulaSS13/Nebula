@@ -84,13 +84,13 @@ var/global/const/AALARM_WIRE_AALARM = 16
 			if(A.shorted == 0)
 				A.shorted = 1
 				A.update_icon()
-			addtimer(CALLBACK(src, .proc/clear_shorted), 20 MINUTES)
+			addtimer(CALLBACK(src, PROC_REF(clear_shorted)), 20 MINUTES)
 
 		if (AALARM_WIRE_AI_CONTROL)
 			if (A.aidisabled == 0)
 				A.aidisabled = 1
 			A.updateDialog()
-			addtimer(CALLBACK(src, .proc/clear_ai_disabled, 10 SECONDS))
+			addtimer(CALLBACK(src, PROC_REF(clear_ai_disabled), 10 SECONDS))
 
 		if(AALARM_WIRE_SYPHON)
 			if(A.mode == 1) // AALARM_MODE_SCRUB

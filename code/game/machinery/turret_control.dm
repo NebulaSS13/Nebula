@@ -14,7 +14,7 @@
 	anchored = TRUE
 	density = FALSE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":-32}, "WEST":{"x":32}}'
 	var/enabled = 0
 	var/lethal = 0
 	var/locked = 1
@@ -202,7 +202,7 @@
 	else if (enabled)
 		if (lethal)
 			icon_state = "control_kill"
-			set_light(1.5, 1,"#990000")
+			set_light(1.5, 1,COLOR_BLOOD_RED)
 		else
 			icon_state = "control_stun"
 			set_light(1.5, 1,"#ff9900")

@@ -1661,8 +1661,8 @@
 /area/map_template/colony/atmospherics)
 "dQ" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/chems/ivbag/nanoblood,
-/obj/item/chems/ivbag/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
+/obj/item/chems/ivbag/blood/nanoblood,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dR" = (
@@ -3926,7 +3926,7 @@
 	dir = 4
 	},
 /obj/structure/casino/roulette_chart{
-	density = TRUE
+	density = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/map_template/colony/commons)
@@ -4242,7 +4242,7 @@
 /obj/machinery/reagent_temperature,
 /obj/item/chems/drinks/shaker,
 /obj/machinery/vending/boozeomat{
-	density = FALSE;
+	density = 0;
 	pixel_y = -32;
 	req_access = list()
 	},
@@ -4795,7 +4795,7 @@
 	dir = 4
 	},
 /obj/structure/casino/roulette{
-	density = TRUE
+	density = 1
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -6331,7 +6331,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
@@ -6386,7 +6385,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -6498,7 +6496,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainblast";
 	name = "Entry Blast Door"
 	},
@@ -7230,7 +7227,6 @@
 	dir = 8
 	},
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "colmainexit"
 	},
 /turf/simulated/floor/tiled/techfloor,

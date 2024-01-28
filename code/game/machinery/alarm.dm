@@ -62,7 +62,7 @@
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 	wires = /datum/wires/alarm
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':-21}, 'WEST':{'x':21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":-21}, "WEST":{"x":21}}'
 
 	var/alarm_id = null
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
@@ -146,7 +146,8 @@
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
 	area_uid = alarm_area.uid
 
-	// breathable air according to human/Life()
+	// breathable air according to default human species
+	// TODO: make it use map default species?
 	var/decl/material/gas_mat = GET_DECL(/decl/material/gas/oxygen)
 	TLV[gas_mat.gas_name] =	list(16, 19, 135, 140) // Partial pressure, kpa
 	gas_mat = GET_DECL(/decl/material/gas/carbon_dioxide)
@@ -795,13 +796,13 @@
 	if(old_area && old_area == alarm_area)
 		alarm_area = null
 		area_uid = null
-		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, PROC_REF(change_area_name))
 	if(new_area)
 		ASSERT(isnull(alarm_area))
 		alarm_area = new_area
 		area_uid = new_area.uid
 		change_area_name(alarm_area, null, alarm_area.name)
-		events_repository.register(/decl/observ/name_set, alarm_area, src, .proc/change_area_name)
+		events_repository.register(/decl/observ/name_set, alarm_area, src, PROC_REF(change_area_name))
 		for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
 			send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 
@@ -824,7 +825,7 @@ FIRE ALARM
 	frame_type = /obj/item/frame/fire_alarm
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc = 1)
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":21}, "WEST":{"x":-21}}'
 
 	var/detecting =    TRUE
 	var/working =      TRUE
@@ -894,10 +895,9 @@ FIRE ALARM
 			overlays += get_cached_overlay("fire0")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(src.detecting)
-		if(exposed_temperature > T0C+200)
-			src.alarm()			// added check of detector status here
-	return
+	if(detecting && exposed_temperature > T0C+200)
+		alarm()
+	return ..()
 
 /obj/machinery/firealarm/bullet_act()
 	return src.alarm()
@@ -1036,7 +1036,7 @@ FIRE ALARM
 	idle_power_usage = 2
 	active_power_usage = 6
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-21}, 'SOUTH':{'y':21}, 'EAST':{'x':21}, 'WEST':{'x':-21}}"
+	directional_offset = @'{"NORTH":{"y":-21}, "SOUTH":{"y":21}, "EAST":{"x":21}, "WEST":{"x":-21}}'
 	var/time =         1 SECOND
 	var/timing =       FALSE
 	var/working =      TRUE

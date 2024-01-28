@@ -258,13 +258,12 @@
 
 //////////////Containment Field START
 /obj/machinery/shieldwall
-	name = "Shield"
+	name = "shield"
 	desc = "An energy shield."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldwall"
 	anchored = TRUE
 	density = TRUE
-	unacidable = 1
 	light_range = 3
 	var/needs_power = 0
 	var/obj/machinery/shieldwallgen/gen_primary

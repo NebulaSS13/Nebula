@@ -24,8 +24,7 @@
 	turns_per_move = 5
 	meat_type = /obj/item/chems/food/sharkmeat
 	speed = 2
-	maxHealth = 100
-	health = 100
+	mob_default_max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	break_stuff_probability = 35
 	faction = "shark"
@@ -64,7 +63,7 @@
 	desc = "A fillet of cosmoshark meat."
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
-	center_of_mass = @"{'x':17,'y':13}"
+	center_of_mass = @'{"x":17,"y":13}'
 	bitesize = 8
 
 /obj/item/chems/food/sharkmeat/populate_reagents()
@@ -80,7 +79,7 @@
 	icon_state = "net_f"
 	anchored = TRUE
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
-	maxhealth = 100
+	max_health = 100
 
 /obj/structure/net/Initialize(var/mapload)
 	. = ..()
@@ -93,16 +92,17 @@
 					continue
 				N.update_connections()
 
-/obj/structure/net/get_examined_damage_string(health_ratio)
-	if(maxhealth == -1)
+/obj/structure/net/get_examined_damage_string()
+	if(!can_take_damage())
 		return
-	if(health_ratio >= 1)
+	var/health_percent = get_percent_health()
+	if(health_percent >= 100)
 		return SPAN_NOTICE("It looks fully intact.")
-	else if (health_ratio < 0.2)
+	else if (health_percent < 20)
 		return SPAN_DANGER("\The [src] is barely hanging on by the last few threads.")
-	else if (health_ratio < 0.5)
+	else if (health_percent < 50)
 		return SPAN_WARNING("Large swathes of \the [src] have been cut.")
-	else if (health_ratio < 0.9)
+	else
 		return SPAN_NOTICE("A few strands of \the [src] have been severed.")
 
 /obj/structure/net/attackby(obj/item/W, mob/user)
@@ -176,7 +176,7 @@
 	throwforce = 5
 	throw_speed = 5
 	throw_range = 10
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_REINFORCEMENT)
 	max_amount = 30
 	center_of_mass = null

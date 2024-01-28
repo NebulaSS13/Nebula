@@ -33,11 +33,10 @@
 
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
-	unacidable = 1
 	material = /decl/material/solid/metal/titanium
 	matter = list(
 		/decl/material/solid/fiberglass           = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/plastic              = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic              = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/copper         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon              = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_TRACE,
@@ -172,7 +171,6 @@
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
 			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
-		piece.unacidable = unacidable
 		if(islist(armor))
 			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
@@ -202,7 +200,7 @@
 		LAZYSET(chest.slowdown_per_slot, slot_wear_suit_str, (active? online_slowdown : offline_slowdown))
 	if(helmet)
 		helmet.tint = (active? vision_restriction : offline_vision_restriction)
-		helmet.update_vision()
+		helmet.update_wearer_vision()
 
 /obj/item/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.get_equipped_item(slot_back_str) != src)
@@ -581,7 +579,7 @@
 		for(var/slot in update_rig_slots)
 			wearer.update_equipment_overlay(slot)
 
-/obj/item/rig/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/rig/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && slot == slot_back_str && !offline && equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)

@@ -12,25 +12,32 @@
 	stat_immune = 0
 	w_class = ITEM_SIZE_HUGE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
-	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':32}, 'WEST':{'x':-32}}"
+	directional_offset = @'{"NORTH":{"y":-32}, "SOUTH":{"y":32}, "EAST":{"x":32}, "WEST":{"x":-32}}'
 	var/list/bodyscans = list()
 	var/selected = 0
 
 /obj/machinery/body_scan_display/proc/add_new_scan(var/list/scan)
 	bodyscans += list(scan.Copy())
 	updateUsrDialog()
+	queue_icon_update()
 
 /obj/machinery/body_scan_display/on_update_icon()
 	. = ..()
 	cut_overlays()
 	if(!(stat & (BROKEN|NOPOWER)))
-		add_overlay("operating")
+		if (selected != 0)
+			add_overlay("operating")
+		else if (bodyscans.len > 0)
+			add_overlay("menu")
+		else
+			add_overlay("standby")
 
 /obj/machinery/body_scan_display/OnTopic(mob/user, href_list)
 	if(href_list["view"])
 		var/selection = text2num(href_list["view"])
 		if(is_valid_index(selection, bodyscans))
 			selected = selection
+			queue_icon_update()
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
 	if(href_list["delete"])
@@ -39,6 +46,7 @@
 			return TOPIC_HANDLED
 		if(selected == selection)
 			selected = 0
+			queue_icon_update()
 		else if(selected > selection)
 			selected--
 		bodyscans -= list(bodyscans[selection])

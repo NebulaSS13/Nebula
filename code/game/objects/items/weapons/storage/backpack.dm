@@ -13,7 +13,7 @@
 	max_w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	open_sound = 'sound/effects/storage/unzip.ogg'
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 
 //Cannot be washed :(
 /obj/item/storage/backpack/can_contaminate()
@@ -41,7 +41,7 @@
 /obj/item/storage/backpack/holding
 	name = "bag of holding"
 	desc = "A backpack that opens into a localized pocket of Blue Space."
-	origin_tech = "{'wormholes':4}"
+	origin_tech = @'{"wormholes":4}'
 	icon = 'icons/obj/items/storage/backpack/backpack_holding.dmi'
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
@@ -49,7 +49,7 @@
 	matter = list(
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/storage/backpack/holding/singularity_act(S, current_size)
@@ -77,7 +77,7 @@
 	matter = list(
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/storage/backpack/santabag
@@ -338,7 +338,7 @@
 /obj/item/storage/backpack/satchel/flat
 	name = "smuggler's satchel"
 	desc = "A very slim satchel that can easily fit into tight spaces."
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	w_class = ITEM_SIZE_NORMAL //Can fit in backpacks itself.
 	storage_slots = 5
 	max_w_class = ITEM_SIZE_NORMAL
@@ -351,7 +351,7 @@
 		/obj/item/crowbar
 	)
 
-/obj/item/storage/backpack/satchel/flat/handle_mouse_drop(var/atom/over, var/mob/user)
+/obj/item/storage/backpack/satchel/flat/handle_mouse_drop(atom/over, mob/user, params)
 	var/turf/T = get_turf(src)
 	if(hides_under_flooring() && isturf(T) && !T.is_plating())
 		return TRUE
@@ -385,7 +385,7 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/item/storage/backpack/ert/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/storage/backpack/ert/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && slot == slot_back_str && marking_state)
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-[marking_state]")
 		I.color = marking_colour

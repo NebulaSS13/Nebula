@@ -25,10 +25,8 @@ var/global/datum/holiday/current_holiday
 /proc/set_holiday_data(var/datum/holiday/holiday_data, var/refresh_station_name = FALSE)
 	if(istext(holiday_data))
 		holiday_data = new(list("name" = holiday_data))
-	if(!holiday_data || !istype(holiday_data))
-		return
-	global.current_holiday = holiday_data
+	if(istype(holiday_data))
+		global.current_holiday = holiday_data
 	if(refresh_station_name)
-		global.using_map.station_name = null
-		station_name()
+		global.using_map.station_name = initial(global.using_map.station_name)
 		world.update_status()

@@ -11,7 +11,7 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER //connects to regular and scrubber pipes
 	identifier = "AScr"
 
-	level = 1
+	level = LEVEL_BELOW_PLATING
 
 	var/hibernate = 0 //Do we even process?
 	var/scrubbing = SCRUBBER_EXCHANGE
@@ -77,11 +77,11 @@
 	if(old_area == new_area)
 		return
 	if(old_area)
-		events_repository.unregister(/decl/observ/name_set, old_area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, old_area, src, PROC_REF(change_area_name))
 		old_area.air_scrub_info -= id_tag
 		old_area.air_scrub_names -= id_tag
 	if(new_area && new_area == get_area(src))
-		events_repository.register(/decl/observ/name_set, new_area, src, .proc/change_area_name)
+		events_repository.register(/decl/observ/name_set, new_area, src, PROC_REF(change_area_name))
 		if(!new_area.air_scrub_names[id_tag])
 			var/new_name = "[new_area.proper_name] Vent Scrubber #[new_area.air_scrub_names.len+1]"
 			new_area.air_scrub_names[id_tag] = new_name
@@ -93,10 +93,10 @@
 		icon_state = "weld"
 	else if((stat & NOPOWER) || !use_power)
 		icon_state = "off"
-	else if(scrubbing == SCRUBBER_EXCHANGE)
-		icon_state = "on"
-	else
+	else if(scrubbing == SCRUBBER_SIPHON)
 		icon_state = "in"
+	else
+		icon_state = "on"
 
 	build_device_underlays()
 
@@ -193,7 +193,7 @@
 		var/turf/T = get_turf(src)
 		var/hidden_pipe_check = FALSE
 		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
-			if(node.level)
+			if(node.level == LEVEL_BELOW_PLATING)
 				hidden_pipe_check = TRUE
 				break
 		if (hidden_pipe_check && isturf(T) && !T.is_plating())

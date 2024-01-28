@@ -47,7 +47,7 @@
 	// Draw walls/floors/doors.
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
-			var/current_cell = get_map_cell(x,y)
+			var/current_cell = TRANSLATE_COORD(x,y)
 			if(!current_cell)
 				continue
 
@@ -73,7 +73,7 @@
 					map[current_cell] = SD_FLOOR_TILE
 
 	// Draw the drop contents.
-	var/current_cell = get_map_cell(x_midpoint,y_midpoint)
+	var/current_cell = TRANSLATE_COORD(x_midpoint,y_midpoint)
 	if(current_cell)
 		map[current_cell] = SD_SUPPLY_TILE
 	return 1
@@ -195,7 +195,7 @@
 			var/antag_type = input("Select an equipment template to use or cancel for nude.", null) as null|anything in all_antag_types
 			if(antag_type)
 				var/decl/special_role/A = all_antag_types[antag_type]
-				A.equip(spawned_mob)
+				A.equip_role(spawned_mob)
 
 	if(alert("Are you SURE you wish to deploy this drop pod? It will cause a sizable explosion and gib anyone underneath it.",,"No","Yes") == "No")
 		if(spawned_mob)

@@ -4,7 +4,8 @@
 	taste_description = "pure alcohol"
 	color = "#404030"
 	touch_met = 5
-	fuel_value = 0.75
+	ignition_point = T0C+150
+	accelerant_value = FUEL_VALUE_ACCELERANT
 	solvent_power = MAT_SOLVENT_MODERATE
 	uid = "chem_ethanol"
 

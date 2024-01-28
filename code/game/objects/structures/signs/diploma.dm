@@ -52,10 +52,10 @@
 	desc          = "A wall-mounted laminated diploma."
 	icon          = 'icons/obj/signs/plaques.dmi'
 	icon_state    = "goldenplaque"
-	material      = /decl/material/solid/wood/maple
+	material      = /decl/material/solid/organic/wood/maple
 	matter        = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/paper = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/organic/paper = MATTER_AMOUNT_TRACE,
 	)
 	parts_type = /obj/item/sign/diploma
 	///Details on the diploma this plaque contains. Can be a path on definition, turns into an instance at runtime.
@@ -84,10 +84,10 @@
 	abstract_type = /obj/item/sign/diploma
 	name          = "diploma"
 	sign_type     = /obj/structure/sign/plaque/diploma
-	material      = /decl/material/solid/wood/maple
+	material      = /decl/material/solid/organic/wood/maple
 	matter        = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/paper = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/organic/paper = MATTER_AMOUNT_TRACE,
 	)
 	///Details on the diploma this plaque contains.  Can be a path on definition, turns into an instance at runtime.
 	var/datum/diploma_details/details = /datum/diploma_details

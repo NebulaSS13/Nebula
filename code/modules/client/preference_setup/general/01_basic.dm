@@ -24,13 +24,10 @@
 	pref.bodytype =       R.read("bodytype")
 	pref.real_name =      R.read("real_name")
 	pref.be_random_name = R.read("name_is_always_random")
-
-	pref.spawnpoint = R.read("spawnpoint")
-	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
-		if(pref.spawnpoint == spawnpoint.name)
-			pref.spawnpoint = spawnpoint.type
-			break
-	if(!ispath(pref.spawnpoint, /decl/spawnpoint))
+	var/decl/spawnpoint/loaded_spawnpoint = decls_repository.get_decl_by_id_or_var(R.read("spawnpoint"), /decl/spawnpoint)
+	if(istype(loaded_spawnpoint) && (loaded_spawnpoint in global.using_map.allowed_latejoin_spawns))
+		pref.spawnpoint = loaded_spawnpoint.type
+	else
 		pref.spawnpoint = global.using_map.default_spawn
 
 /datum/category_item/player_setup_item/physical/basic/save_character(datum/pref_record_writer/W)
@@ -38,14 +35,13 @@
 	W.write("bodytype",              pref.bodytype)
 	W.write("real_name",             pref.real_name)
 	W.write("name_is_always_random", pref.be_random_name)
-
 	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
-	W.write("spawnpoint", spawnpoint.name)
+	W.write("spawnpoint", spawnpoint.uid)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 
 	var/valid_spawn = FALSE
-	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_spawns)
+	for(var/decl/spawnpoint/spawnpoint as anything in global.using_map.allowed_latejoin_spawns)
 		if(pref.spawnpoint == spawnpoint.type)
 			valid_spawn = TRUE
 			break
@@ -93,8 +89,13 @@
 		else
 			. += "<a href='?src=\ref[src];gender=\ref[G]'>[G.pronoun_string]</a>"
 
+	. += "<br><b>Spawnpoint</b>:"
 	var/decl/spawnpoint/spawnpoint = GET_DECL(pref.spawnpoint)
-	. += "<br><b>Spawn point</b>: <a href='?src=\ref[src];spawnpoint=1'>[spawnpoint.name]</a>"
+	for(var/decl/spawnpoint/allowed_spawnpoint in global.using_map.allowed_latejoin_spawns)
+		if(spawnpoint == allowed_spawnpoint)
+			. += "<span class='linkOn'>[allowed_spawnpoint.name]</span>"
+		else
+			. += "<a href='?src=\ref[src];spawnpoint=\ref[allowed_spawnpoint]'>[allowed_spawnpoint.name]</a>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -146,8 +147,8 @@
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["spawnpoint"])
-		var/decl/spawnpoint/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in global.using_map.allowed_spawns
-		if(!istype(choice) || !CanUseTopic(user))
+		var/decl/spawnpoint/choice = locate(href_list["spawnpoint"])
+		if(!istype(choice) || !CanUseTopic(user) || !(choice in global.using_map.allowed_latejoin_spawns))
 			return TOPIC_NOACTION
 		pref.spawnpoint = choice.type
 		return TOPIC_REFRESH

@@ -10,7 +10,7 @@
 	if (!target_url)
 		return -1
 
-	var/result = call(HTTP_POST_DLL_LOCATION, "send_post_request")(target_url, payload, json_encode(list("Content-Type" = "application/json")))
+	var/result = LIBCALL(HTTP_POST_DLL_LOCATION, "send_post_request")(target_url, payload, json_encode(list("Content-Type" = "application/json")))
 
 	result = cached_json_decode(result)
 	if (result["error_code"])
@@ -27,7 +27,7 @@
 	if(!length(message))
 		return FALSE
 
-	if(config.disable_webhook_embeds)
+	if(get_config_value(/decl/config/toggle/disable_webhook_embeds))
 		var/list/embed_content
 		for(var/list/embed in message["embeds"])
 			if(embed["title"])

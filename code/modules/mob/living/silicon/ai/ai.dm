@@ -56,7 +56,11 @@ var/global/list/ai_verbs_default = list(
 	density = TRUE
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
-	maxHealth = 200
+	mob_default_max_health = 200
+
+	silicon_camera = /obj/item/camera/siliconcam/ai_camera
+	silicon_radio = /obj/item/radio/headset/heads/ai_integrated
+
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -65,9 +69,6 @@ var/global/list/ai_verbs_default = list(
 	var/icon/holo_icon_longrange //Yellow hologram.
 	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/multitool/aiMulti = null
-
-	silicon_camera = /obj/item/camera/siliconcam/ai_camera
-	silicon_radio = /obj/item/radio/headset/heads/ai_integrated
 	var/obj/item/radio/headset/heads/ai_integrated/ai_radio
 
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
@@ -103,7 +104,7 @@ var/global/list/ai_verbs_default = list(
 	src.verbs -= ai_verbs_default
 	src.verbs += /mob/living/verb/ghost
 
-/mob/living/silicon/ai/Initialize(mapload, var/datum/ai_laws/L, var/obj/item/mmi/B, var/safety = 0)
+/mob/living/silicon/ai/Initialize(mapload, var/datum/ai_laws/L, var/obj/item/organ/internal/brain_interface/B, var/safety = 0)
 	announcement = new()
 	announcement.title = "A.I. Announcement"
 	announcement.announcement_type = "A.I. Announcement"
@@ -143,11 +144,12 @@ var/global/list/ai_verbs_default = list(
 	add_language(/decl/language/sign, 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
-		if (!B)//If there is no player/brain inside.
+		var/mob/living/brainmob = B?.get_brainmob()
+		if(!brainmob) // If there is no player/brain inside.
 			empty_playable_ai_cores += new/obj/structure/aicore/deactivated(loc)//New empty terminal.
 			. = INITIALIZE_HINT_QDEL
-		else if(B.brainmob.mind)
-			B.brainmob.mind.transfer_to(src)
+		else if(brainmob.mind)
+			brainmob.mind.transfer_to(src)
 			hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 			hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 			hud_list[LIFE_HUD] 		  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")

@@ -12,7 +12,7 @@
 	hardness = MAT_VALUE_RIGID + 10
 	door_icon_base = "metal"
 	reflectiveness = MAT_VALUE_SHINY
-	melting_point = 1873
+	melting_point = 1674
 	boiling_point = null
 	ignition_point = null
 	weight = MAT_VALUE_VERY_LIGHT
@@ -32,7 +32,7 @@
 	return ..() && !is_reinforced()
 
 /decl/material/solid/glass/borosilicate
-	name = "borosilicate glass"
+	name = "heat-resistant glass"
 	codex_name = null
 	uid = "solid_borosilicate_glass"
 	lore_text = "An extremely heat-resistant form of glass."
@@ -42,9 +42,9 @@
 	integrity = 70
 	brute_armor = 2
 	burn_armor = 5
-	melting_point = T0C + 4000
+	melting_point = 4274
 	color = GLASS_COLOR_SILICATE
-	stack_origin_tech = "{'materials':4}"
+	stack_origin_tech = @'{"materials":4}'
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	value = 1.8
 
@@ -54,11 +54,11 @@
 	lore_text = "A form of glass-reinforced plastic made from glass fibers and a polymer resin."
 	dissolves_into = list(
 		/decl/material/solid/glass = 0.7,
-		/decl/material/solid/plastic = 0.3
+		/decl/material/solid/organic/plastic = 0.3
 	)
 	color = COLOR_OFF_WHITE
 	opacity = 0.6
-	melting_point = 1400
+	melting_point = 1674
 	hardness = MAT_VALUE_HARD
 	weight = MAT_VALUE_LIGHT
 	integrity = 120
@@ -69,7 +69,7 @@
 	door_icon_base = "plastic"
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_LIGHT
-	stack_origin_tech = "{'materials':3}"
+	stack_origin_tech = @'{"materials":3}'
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE

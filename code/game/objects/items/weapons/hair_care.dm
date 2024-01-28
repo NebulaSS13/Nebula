@@ -7,7 +7,7 @@
 	icon = 'icons/obj/items/comb.dmi'
 	icon_state = "comb"
 	item_state = "comb"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/haircomb/random/Initialize()
 	. = ..()
@@ -26,12 +26,13 @@
 	slot_flags = null
 	icon_state = "brush"
 	item_state = "brush"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/haircomb/brush/attack_self(mob/user)
 	if(ishuman(user) && !user.incapacitated())
 		var/mob/living/carbon/human/H = user
-		var/decl/sprite_accessory/hair/hair_style = GET_DECL(H.h_style)
+		var/hairstyle = H.get_hairstyle()
+		var/decl/sprite_accessory/hair/hair_style = GET_DECL(hairstyle)
 		if(hair_style.flags & VERY_SHORT)
 			H.visible_message(SPAN_NOTICE("\The [H] just sort of runs \the [src] over their scalp."))
 		else

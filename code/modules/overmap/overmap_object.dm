@@ -54,7 +54,7 @@ var/global/list/overmap_unknown_ids = list()
 		return INITIALIZE_HINT_QDEL
 
 	if(requires_contact)
-		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
+		set_invisibility(INVISIBILITY_OVERMAP) // Effects that require identification have their images cast to the client via sensors.
 
 	if(scannable)
 		unknown_id = "[pick(global.phonetic_alphabet)]-[random_id(/obj/effect/overmap, 100, 999)]"
@@ -64,16 +64,20 @@ var/global/list/overmap_unknown_ids = list()
 	add_filter("glow", 1, list("drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0))
 	update_icon()
 
-/obj/effect/overmap/Crossed(var/obj/effect/overmap/visitable/other)
-	if(istype(other))
-		for(var/obj/effect/overmap/visitable/O in loc)
-			SSskybox.rebuild_skyboxes(O.map_z)
+/obj/effect/overmap/Crossed(atom/movable/AM)
+	var/obj/effect/overmap/visitable/other = AM
+	if(!istype(other))
+		return
+	for(var/obj/effect/overmap/visitable/O in loc)
+		SSskybox.rebuild_skyboxes(O.map_z)
 
-/obj/effect/overmap/Uncrossed(var/obj/effect/overmap/visitable/other)
-	if(istype(other))
-		SSskybox.rebuild_skyboxes(other.map_z)
-		for(var/obj/effect/overmap/visitable/O in loc)
-			SSskybox.rebuild_skyboxes(O.map_z)
+/obj/effect/overmap/Uncrossed(atom/movable/AM)
+	var/obj/effect/overmap/visitable/other = AM
+	if(!istype(other))
+		return
+	SSskybox.rebuild_skyboxes(other.map_z)
+	for(var/obj/effect/overmap/visitable/O in loc)
+		SSskybox.rebuild_skyboxes(O.map_z)
 
 /obj/effect/overmap/on_update_icon()
 	. = ..()

@@ -61,7 +61,7 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
-	origin_tech = "{'materials':2}"
+	origin_tech = @'{"materials":2}'
 	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("shoved", "bashed")
@@ -122,9 +122,9 @@
 	throw_speed = 10
 	throw_range = 20
 	w_class = ITEM_SIZE_HUGE
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/wood = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/wood = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("shoved", "bashed")
 
 /obj/item/shield/buckler/handle_shield(mob/user)
@@ -151,7 +151,7 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'materials':4,'magnets':3,'esoteric':4}"
+	origin_tech = @'{"materials":4,"magnets":3,"esoteric":4}'
 	attack_verb = list("shoved", "bashed")
 	material = /decl/material/solid/metal/titanium
 	matter = list(

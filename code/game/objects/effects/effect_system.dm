@@ -10,7 +10,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	name = "effect"
 	icon = 'icons/effects/effects.dmi'
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	unacidable = 1//So effect are not targeted by alien acid.
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 
 /datum/effect/effect/system
@@ -69,7 +68,7 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/steam_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/effect/effect/system, spread), i), 0)
 
 /datum/effect/effect/system/steam_spread/spread(var/i)
 	set waitfor = 0
@@ -142,7 +141,7 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/spark_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/effect/effect/system, spread), i), 0)
 
 /datum/effect/effect/system/spark_spread/spread(var/i)
 	set waitfor = 0
@@ -182,16 +181,16 @@ steam.start() -- spawns the effect
 	. = ..()
 	if(smoke_duration)
 		time_to_live = smoke_duration
-	addtimer(CALLBACK(src, .proc/end_of_life), time_to_live)
+	addtimer(CALLBACK(src, PROC_REF(end_of_life)), time_to_live)
 
 /obj/effect/effect/smoke/proc/end_of_life()
 	if(!QDELETED(src))
 		qdel(src)
 
-/obj/effect/effect/smoke/Crossed(mob/living/carbon/M)
+/obj/effect/effect/smoke/Crossed(atom/movable/AM)
 	..()
-	if(istype(M))
-		affect(M)
+	if(iscarbon(AM))
+		affect(AM)
 
 /obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
 	if (!istype(M))
@@ -292,8 +291,6 @@ steam.start() -- spawns the effect
 		R.emote("gasp")
 		spawn (20)
 			R.coughedtime = 0
-	R.updatehealth()
-	return
 
 /////////////////////////////////////////////
 // Smoke spread
@@ -321,7 +318,7 @@ steam.start() -- spawns the effect
 	for(i=0, i<src.number, i++)
 		if(src.total_smoke > 20)
 			return
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/effect/effect/system, spread), i), 0)
 
 /datum/effect/effect/system/smoke_spread/spread(var/i)
 	if(holder)

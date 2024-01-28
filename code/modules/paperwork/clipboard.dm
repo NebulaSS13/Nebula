@@ -10,7 +10,7 @@
 	throw_range             = 10
 	slot_flags              = SLOT_LOWER_BODY
 	material_alteration     = MAT_FLAG_ALTERATION_COLOR
-	material                = /decl/material/solid/wood
+	material                = /decl/material/solid/organic/wood
 	drop_sound              = 'sound/foley/tooldrop5.ogg'
 	pickup_sound            = 'sound/foley/paperpickup2.ogg'
 
@@ -26,15 +26,6 @@
 	QDEL_NULL_LIST(papers)
 	stored_pen = null
 	return ..()
-
-/obj/item/clipboard/handle_mouse_drop(atom/over, mob/user)
-	if(ishuman(user) && istype(over, /obj/screen/inventory))
-		var/obj/screen/inventory/inv = over
-		add_fingerprint(user)
-		if(user.try_unequip(src))
-			user.equip_to_slot_if_possible(src, inv.slot_id)
-			return TRUE
-	. = ..()
 
 /obj/item/clipboard/examine(mob/user, distance, infix, suffix)
 	. = ..()
@@ -204,7 +195,7 @@
 		close_browser(user, initial(name))
 
 /obj/item/clipboard/ebony
-	material = /decl/material/solid/wood/ebony
+	material = /decl/material/solid/organic/wood/ebony
 
 /obj/item/clipboard/steel
 	material = /decl/material/solid/metal/steel
@@ -216,4 +207,4 @@
 	material = /decl/material/solid/glass
 
 /obj/item/clipboard/plastic
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic

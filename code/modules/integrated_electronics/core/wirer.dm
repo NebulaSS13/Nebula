@@ -13,7 +13,7 @@
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
@@ -84,7 +84,7 @@
 	if(selected_io)
 		unselect_io(selected_io)
 	selected_io = io
-	events_repository.register(/decl/observ/destroyed, selected_io, src, .proc/unselect_io)
+	events_repository.register(/decl/observ/destroyed, selected_io, src, PROC_REF(unselect_io))
 	switch(mode)
 		if(UNWIRE)
 			mode = UNWIRING

@@ -5,7 +5,7 @@
 	critical = 0
 	icon_state = "cardreader"
 	hardware_size = 1
-	origin_tech = "{'programming':2}"
+	origin_tech = @'{"programming":2}'
 	usage_flags = PROGRAM_ALL & ~PROGRAM_PDA
 	external_slot = TRUE
 	material = /decl/material/solid/metal/steel
@@ -29,7 +29,7 @@
 				read_string_stability = 80
 			. += "Registered Name: [stars(stored_card.registered_name, read_string_stability)]\n"
 			. += "Registered Assignment: [stars(stored_card.assignment, read_string_stability)]\n"
-			. += "Registered Rank: [stars(stored_card.rank, read_string_stability)]\n"
+			. += "Registered Position: [stars(stored_card.position, read_string_stability)]\n"
 			. += "Access Addresses Enabled: \n"
 			var/list/access_list = stored_card.GetAccess()
 			if(!access_list) // "NONE" for empty list

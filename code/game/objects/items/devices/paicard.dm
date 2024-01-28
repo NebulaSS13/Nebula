@@ -5,7 +5,7 @@ var/global/list/pai_cards = list()
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
-	origin_tech = "{'programming':2}"
+	origin_tech = @'{"programming":2}'
 	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -23,7 +23,6 @@ var/global/list/pai_cards = list()
 
 /obj/item/paicard/Initialize()
 	. = ..()
-	overlays += "pai-off"
 	global.pai_cards += src
 
 /obj/item/paicard/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
@@ -289,16 +288,16 @@ var/global/list/pai_cards = list()
 
 /obj/item/paicard/proc/setPersonality(mob/living/silicon/pai/personality)
 	src.pai = personality
-	src.overlays += "pai-happy"
+	src.add_overlay("pai-happy")
 
 /obj/item/paicard/proc/removePersonality()
 	src.pai = null
-	src.overlays.Cut()
-	src.overlays += "pai-off"
+	src.add_overlay("pai-off")
 
 /obj/item/paicard/proc/setEmotion(var/emotion)
 	if(pai)
 		current_emotion = emotion
+		update_icon()
 
 /obj/item/paicard/on_update_icon()
 	. = ..()

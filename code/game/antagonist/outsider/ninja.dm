@@ -18,7 +18,7 @@
 	rig_type = /obj/item/rig/light/ninja
 
 /decl/special_role/ninja/attempt_random_spawn()
-	if(config.ninjas_allowed)
+	if(get_config_value(/decl/config/toggle/ninjas_allowed))
 		..()
 
 /decl/special_role/ninja/create_objectives(var/datum/mind/ninja)
@@ -98,7 +98,7 @@
 	hands =   list(/obj/item/modular_computer/pda/ninja)
 	id_type = /obj/item/card/id/syndicate
 
-/decl/special_role/ninja/equip(var/mob/living/carbon/human/player)
+/decl/special_role/ninja/equip_role(var/mob/living/carbon/human/player)
 	. = ..()
 	if(.)
 		var/decl/uplink_source/pda/uplink_source = GET_DECL(/decl/uplink_source/pda)

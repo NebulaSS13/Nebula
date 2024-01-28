@@ -3,7 +3,7 @@
 	desc = "A finger of fish."
 	icon_state = "fishfingers"
 	filling_color = "#ffdefe"
-	center_of_mass = @"{'x':16,'y':13}"
+	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 3
 
 /obj/item/chems/food/fishfingers/populate_reagents()
@@ -16,7 +16,7 @@
 	icon_state = "cubancarp"
 	trash = /obj/item/trash/plate
 	filling_color = "#e9adff"
-	center_of_mass = @"{'x':12,'y':5}"
+	center_of_mass = @'{"x":12,"y":5}'
 	nutriment_desc = list("toasted bread" = 3)
 	nutriment_amt = 3
 	bitesize = 3
@@ -31,7 +31,7 @@
 	desc = "Best enjoyed wrapped in a newspaper on a cold wet day."
 	icon_state = "fishandchips"
 	filling_color = "#e3d796"
-	center_of_mass = @"{'x':16,'y':16}"
+	center_of_mass = @'{"x":16,"y":16}'
 	nutriment_desc = list("salt" = 1, "chips" = 2, "fish" = 2)
 	nutriment_amt = 3
 	bitesize = 3

@@ -98,6 +98,7 @@
 	icon = 'icons/misc/beach.dmi'
 	base_icon = 'icons/misc/beach.dmi'
 	initial_flooring = null
+	abstract_type = /turf/simulated/floor/holofloor/beach
 
 /turf/simulated/floor/holofloor/beach/sand
 	name = "sand"
@@ -206,9 +207,15 @@
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 
-/obj/structure/bed/chair/holochair/attackby(obj/item/W, mob/user)
-	if(IS_WRENCH(W))
-		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
+/obj/structure/bed/holobed
+	tool_interaction_flags = 0
+	holographic = TRUE
+	material = /decl/material/solid/metal/aluminium/holographic
+
+/obj/structure/bed/chair/holochair
+	tool_interaction_flags = 0
+	holographic = TRUE
+	material = /decl/material/solid/metal/aluminium/holographic
 
 /obj/item/holo
 	damtype = PAIN
@@ -225,7 +232,7 @@
 	throw_range = 5
 	throwforce = 0
 	w_class = ITEM_SIZE_SMALL
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	base_parry_chance = 50
 	var/active = 0
 	var/item_color
@@ -270,19 +277,10 @@
 	return
 
 //BASKETBALL OBJECTS
-
-/obj/item/beach_ball/holoball
-	icon = 'icons/obj/basketball.dmi'
-	icon_state = "basketball"
-	name = "basketball"
-	item_state = "basketball"
-	desc = "Here's your chance, do your dance at the Space Jam."
-	w_class = ITEM_SIZE_LARGE //Stops people from hiding it in their pockets
-
 /obj/structure/holohoop
 	name = "basketball hoop"
 	desc = "Boom, Shakalaka!"
-	icon = 'icons/obj/basketball.dmi'
+	icon = 'icons/obj/structures/basketball.dmi'
 	icon_state = "hoop"
 	anchored = TRUE
 	density = TRUE
@@ -303,19 +301,10 @@
 		return ..(mover, target, height, air_group)
 
 //VOLEYBALL OBJECTS
-
-/obj/item/beach_ball/holovolleyball
-	icon = 'icons/obj/basketball.dmi'
-	icon_state = "volleyball"
-	name = "voleyball"
-	item_state = "volleyball"
-	desc = "You can be my wingman anytime."
-	w_class = ITEM_SIZE_LARGE //Stops people from hiding it in their pockets
-
 /obj/structure/holonet
 	name = "net"
 	desc = "Bullshit, you can be mine!"
-	icon = 'icons/obj/basketball.dmi'
+	icon = 'icons/obj/structures/volleyball.dmi'
 	icon_state = "volleynet_mid"
 	density = TRUE
 	anchored = TRUE

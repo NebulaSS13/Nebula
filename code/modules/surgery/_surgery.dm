@@ -17,22 +17,44 @@ var/global/list/surgery_tool_exception_cache = list()
 /* SURGERY STEPS */
 /decl/surgery_step
 	abstract_type = /decl/surgery_step
+	/// An identifying name string.
 	var/name
+	/// An informative description string.
 	var/description
-	var/list/allowed_tools               // type path referencing tools that can be used for this step, and how well are they suited for it
-	var/list/allowed_species             // type paths referencing races that this step applies to.
-	var/list/disallowed_species          // type paths referencing races that this step applies to.
-	var/min_duration = 0                 // duration of the step
-	var/max_duration = 0                 // duration of the step
-	var/can_infect = 0                   // evil infection stuff that will make everyone hate me
-	var/blood_level = 0                  // How much blood this step can get on surgeon. 1 - hands, 2 - full body.
-	var/shock_level = 0	                 // what shock level will this step put patient on
-	var/delicate = 0                     // if this step NEEDS stable optable or can be done on any valid surface with no penalty
-	var/surgery_candidate_flags = 0      // Various bitflags for requirements of the surgery.
-	var/strict_access_requirement = TRUE // Whether or not this surgery will be fuzzy on size requirements.
-	var/hidden_from_codex                // Is this surgery a secret?
+	/// type path referencing tools that can be used for this step, and how well are they suited for it
+	var/list/allowed_tools
+	/// type paths referencing races that this step applies to.
+	var/list/allowed_species
+	/// type paths referencing races that this step applies to.
+	var/list/disallowed_species
+	/// duration of the step
+	var/min_duration = 0
+	/// duration of the step
+	var/max_duration = 0
+	/// evil infection stuff that will make everyone hate me
+	var/can_infect = 0
+	/// How much blood this step can get on surgeon. 1 - hands, 2 - full body.
+	var/blood_level = 0
+	/// what shock level will this step put patient on
+	var/shock_level = 0
+	/// if this step NEEDS stable optable or can be done on any valid surface with no penalty
+	var/delicate = 0
+	/// Various bitflags for requirements of the surgery.
+	var/surgery_candidate_flags = 0
+	/// Whether or not this surgery will be fuzzy on size requirements.
+	var/strict_access_requirement = TRUE
+	/// Is this surgery a secret?
+	var/hidden_from_codex
+	/// Any additional information to add to the codex entry for this step.
 	var/list/additional_codex_lines
+	/// What mob type does this surgery apply to.
 	var/expected_mob_type = /mob/living/carbon/human
+	/// Sound (or list of sounds) to play on end step.
+	var/end_step_sound = "rustle"
+	/// Sound (or list of sounds) to play on fail step.
+	var/fail_step_sound
+	/// Sound (or list of sounds) to play on begin step.
+	var/begin_step_sound = "rustle"
 
 /decl/surgery_step/proc/is_self_surgery_permitted(var/mob/target, var/bodypart)
 	return TRUE
@@ -86,8 +108,7 @@ var/global/list/surgery_tool_exception_cache = list()
 /decl/surgery_step/proc/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	if(delicate)
 		return SURGERY_SKILLS_DELICATE
-	else
-		return SURGERY_SKILLS_GENERIC
+	return SURGERY_SKILLS_GENERIC
 
 // checks whether this step can be applied with the given user and target
 /decl/surgery_step/proc/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -134,6 +155,9 @@ var/global/list/surgery_tool_exception_cache = list()
 
 // does stuff to begin the step, usually just printing messages. Moved germs transfering and bloodying here too
 /decl/surgery_step/proc/begin_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+	SHOULD_CALL_PARENT(TRUE)
+	if(begin_step_sound)
+		playsound(target, pick(begin_step_sound), 15, 1)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	if (can_infect && affected)
 		spread_germs_to_organ(affected, user)
@@ -149,10 +173,15 @@ var/global/list/surgery_tool_exception_cache = list()
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
 /decl/surgery_step/proc/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	if(end_step_sound)
+		playsound(target, pick(end_step_sound), 15, 1)
 
 // stuff that happens when the step fails
 /decl/surgery_step/proc/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+	SHOULD_CALL_PARENT(TRUE)
+	if(fail_step_sound)
+		playsound(target, pick(fail_step_sound), 15, 1)
 	return null
 
 /decl/surgery_step/proc/success_chance(mob/living/user, mob/living/target, obj/item/tool, target_zone)

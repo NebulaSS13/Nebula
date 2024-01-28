@@ -17,11 +17,10 @@
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
+	max_health = 80
 
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
 	var/raising= 0			//if the turret is currently opening or closing its cover
-	var/health = 80			//the turret's health
-	var/maxhealth = 80		//turrets maximal health.
 	var/auto_repair = 0		//if 1 the turret slowly repairs itself.
 	var/locked = 1			//if the turret's behaviour control access is locked
 	var/controllock = 0		//if the turret responds to control panels
@@ -80,7 +79,7 @@
 	ailock = 0
 	malf_upgraded = 1
 	to_chat(user, "\The [src] has been upgraded. It's damage and rate of fire has been increased. Auto-regeneration system has been enabled. Power usage has increased.")
-	maxhealth = round(initial(maxhealth) * 1.5)
+	max_health = round(initial(max_health) * 1.5)
 	shot_delay = round(initial(shot_delay) / 2)
 	auto_repair = 1
 	change_power_consumption(round(initial(active_power_usage) * 5), POWER_USE_ACTIVE)
@@ -239,7 +238,8 @@ var/global/list/turret_icons
 /obj/machinery/porta_turret/physically_destroyed(skip_qdel)
 	if(installation)
 		var/obj/item/gun/energy/Gun = new installation(loc)
-		Gun.power_supply.charge = gun_charge
+		var/obj/item/cell/power_supply = Gun.get_cell()
+		power_supply?.charge = gun_charge
 		Gun.update_icon()
 	if(prob(50))
 		SSmaterials.create_object(/decl/material/solid/metal/steel, loc, rand(1,4))
@@ -369,7 +369,7 @@ var/global/list/turret_icons
 
 	disabled = 1
 	var/power = 4 - severity
-	addtimer(CALLBACK(src,/obj/machinery/porta_turret/proc/enable), rand(60*power,600*power))
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/machinery/porta_turret, enable)), rand(60*power,600*power))
 
 	..()
 
@@ -414,9 +414,9 @@ var/global/list/turret_icons
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
 			popDown() // no valid targets, close the cover
 
-	if(auto_repair && (health < maxhealth))
+	if(auto_repair && (health < max_health))
 		use_power_oneoff(20000)
-		health = min(health+1, maxhealth) // 1HP for 20kJ
+		health = min(health+1, max_health) // 1HP for 20kJ
 
 /obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
 	switch(assess_living(L))
@@ -703,7 +703,8 @@ var/global/list/turret_icons
 					to_chat(user, "<span class='notice'>\the [I] is stuck to your hand, you cannot put it in \the [src]</span>")
 					return
 				installation = I.type //installation becomes I.type
-				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
+				var/obj/item/cell/power_supply = E.get_cell()
+				gun_charge = power_supply?.charge || 0 //the gun's charge is stored in gun_charge
 				to_chat(user, "<span class='notice'>You add [I] to the turret.</span>")
 				target_type = /obj/machinery/porta_turret
 
@@ -809,7 +810,8 @@ var/global/list/turret_icons
 			return TRUE
 		build_step = 3
 		var/obj/item/gun/energy/Gun = new installation(loc)
-		Gun.power_supply.charge = gun_charge
+		var/obj/item/cell/power_supply = Gun.get_cell()
+		power_supply?.charge = gun_charge
 		Gun.update_icon()
 		installation = null
 		gun_charge = 0

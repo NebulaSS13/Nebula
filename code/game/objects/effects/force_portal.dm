@@ -5,7 +5,6 @@
 	icon_state = "portal"
 	blend_mode = BLEND_SUBTRACT
 	density = TRUE
-	unacidable = 1
 	anchored = TRUE
 	var/boom_time = 1
 

@@ -10,19 +10,13 @@
 /datum/random_map/noise/seafloor/replace_space/get_appropriate_path(var/value)
 	return /turf/exterior/seafloor/flooded
 
-/turf/exterior/mud/flooded
-	flooded = TRUE
-
-/turf/exterior/mud/dark/flooded
-	flooded = TRUE
-
 /datum/random_map/noise/seafloor/get_appropriate_path(var/value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	switch(val)
 		if(6)
-			return /turf/exterior/mud/flooded
+			return /turf/exterior/clay/flooded
 		if(7 to 9)
-			return /turf/exterior/mud/dark/flooded
+			return /turf/exterior/mud/flooded
 
 /datum/random_map/noise/seafloor/get_additional_spawns(var/value, var/turf/T)
 	var/val = min(9,max(0,round((value/cell_range)*10)))

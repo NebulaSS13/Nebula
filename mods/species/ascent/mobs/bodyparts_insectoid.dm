@@ -4,6 +4,7 @@
 	requires_organ_tag = BP_M_HAND
 	ui_label = "M"
 	ui_loc = "CENTER,BOTTOM+1:14"
+	covering_slot_flags = SLOT_HAND_LEFT|SLOT_HAND_RIGHT // todo: generalize?
 
 /obj/item/organ/external/hand/insectoid/midlimb
 	name = "central grasper"
@@ -21,12 +22,14 @@
 	requires_organ_tag = BP_L_HAND_UPPER
 	ui_label = "UL"
 	hand_sort_priority = 2
+	covering_slot_flags = SLOT_HAND_LEFT
 
 /obj/item/organ/external/hand/insectoid/upper
 	name = "left raptorial"
-	joint = "left upper wrist"
-	amputation_point = "left upper wrist"
+	joint = "upper left wrist"
+	amputation_point = "upper left shoulder"
 	organ_tag = BP_L_HAND_UPPER
+	parent_organ = BP_CHEST
 	gripper_type = /datum/inventory_slot/gripper/upper_left_hand
 
 /obj/item/organ/external/hand/insectoid/upper/get_manual_dexterity()
@@ -38,12 +41,14 @@
 	requires_organ_tag = BP_R_HAND_UPPER
 	ui_label = "UR"
 	hand_sort_priority = 2
+	covering_slot_flags = SLOT_HAND_RIGHT
 
 /obj/item/organ/external/hand/right/insectoid/upper
 	name = "right raptorial"
-	joint = "right upper wrist"
-	amputation_point = "right upper wrist"
+	joint = "upper right wrist"
+	amputation_point = "upper right shoulder"
 	organ_tag = BP_R_HAND_UPPER
+	parent_organ = BP_CHEST
 	gripper_type = /datum/inventory_slot/gripper/upper_right_hand
 
 /obj/item/organ/external/hand/right/insectoid/upper/get_manual_dexterity()
@@ -59,7 +64,7 @@
 	. = ..()
 	if(.)
 		action.button_icon_state = "egg-on"
-		if(action.button) action.button.UpdateIcon()
+		action.button?.update_icon()
 
 /obj/item/organ/internal/egg_sac/insectoid/attack_self(var/mob/user)
 	. = ..()

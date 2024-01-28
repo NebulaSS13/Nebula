@@ -11,8 +11,7 @@
 	speak_chance = 1
 	turns_per_move = 3
 	see_in_dark = 6
-	maxHealth = 50
-	health = 50
+	mob_default_max_health = 50
 	response_harm = "stamps on"
 	density = FALSE
 	minbodytemp = 223
@@ -48,12 +47,12 @@
 		if(prob(10))
 			poss.is_angry = TRUE
 
-/mob/living/simple_animal/opossum/adjustBruteLoss(damage)
+/mob/living/simple_animal/opossum/adjustBruteLoss(damage, do_update_health = FALSE)
 	. = ..()
 	if(damage >= 3)
 		respond_to_damage()
 
-/mob/living/simple_animal/opossum/adjustFireLoss(damage)
+/mob/living/simple_animal/opossum/adjustFireLoss(damage, do_update_health = TRUE)
 	. = ..()
 	if(damage >= 3)
 		respond_to_damage()
@@ -93,11 +92,11 @@
 
 /mob/living/simple_animal/opossum/poppy/hear_broadcast(decl/language/language, mob/speaker, speaker_name, message)
 	. = ..()
-	addtimer(CALLBACK(src, .proc/check_keywords, message), rand(1 SECOND, 3 SECONDS))
+	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
 
 /mob/living/simple_animal/opossum/poppy/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	. = ..()
-	addtimer(CALLBACK(src, .proc/check_keywords, message), rand(1 SECOND, 3 SECONDS))
+	addtimer(CALLBACK(src, PROC_REF(check_keywords), message), rand(1 SECOND, 3 SECONDS))
 
 /mob/living/simple_animal/opossum/poppy/proc/check_keywords(var/message)
 	if(!client && stat == CONSCIOUS)

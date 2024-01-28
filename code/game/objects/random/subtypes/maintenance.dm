@@ -2,7 +2,7 @@
 	name = "random maintenance item"
 	desc = "This is a random maintenance item."
 	icon = 'icons/obj/items/gift_wrapped.dmi'
-	icon_state = "gift1"
+	icon_state = "gift_1"
 
 /obj/random/maintenance/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -19,7 +19,7 @@ something, make sure it's not in one of the other lists.*/
 	name = "random clean maintenance item"
 	desc = "This is a random clean maintenance item."
 	icon = 'icons/obj/items/gift_wrapped.dmi'
-	icon_state = "gift2"
+	icon_state = "gift_2"
 
 /obj/random/maintenance/clean/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -60,7 +60,6 @@ something, make sure it's not in one of the other lists.*/
 /*Maintenance loot list. This one is for around medical areas*/
 	name = "random research maintenance item"
 	desc = "This is a random research maintenance item."
-	icon_state = "science"
 
 /obj/random/maintenance/research/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -92,7 +91,6 @@ something, make sure it's not in one of the other lists.*/
 /*Maintenance loot list. This one is for around medical areas*/
 	name = "random engineering maintenance item"
 	desc = "This is a random engineering maintenance item."
-	icon_state = "tool"
 
 /obj/random/maintenance/engineering/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -165,7 +163,6 @@ something, make sure it's not in one of the other lists.*/
 /*Maintenance loot list. This one is for around medical areas*/
 	name = "random medical maintenance item"
 	desc = "This is a random medical maintenance item."
-	icon_state = "medical"
 
 /obj/random/maintenance/medical/spawn_choices()
 	var/static/list/spawnable_choices = list(
@@ -207,7 +204,6 @@ something, make sure it's not in one of the other lists.*/
 /*Maintenance loot list. This one is for around security areas*/
 	name = "random security maintenance item"
 	desc = "This is a random security maintenance item."
-	icon_state = "security"
 
 /obj/random/maintenance/security/spawn_choices()
 	var/static/list/spawnable_choices = list(

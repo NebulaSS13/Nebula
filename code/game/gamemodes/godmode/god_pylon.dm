@@ -33,7 +33,7 @@
 		return
 	to_chat(L, "<span class='notice'>You place your hands on \the [src], feeling yourself intune to its vibrations.</span>")
 	intuned += L
-	events_repository.register(/decl/observ/destroyed, L,src,/obj/structure/deity/pylon/proc/remove_intuned)
+	events_repository.register(/decl/observ/destroyed, L,src, TYPE_PROC_REF(/obj/structure/deity/pylon, remove_intuned))
 
 /obj/structure/deity/pylon/proc/remove_intuned(var/mob/living/L)
 	if(!(L in intuned))

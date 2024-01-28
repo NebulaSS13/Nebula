@@ -6,7 +6,7 @@
 	icon_state = ""
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
 	)
 	force = 10
@@ -87,14 +87,14 @@
 /obj/item/mech_equipment/proc/MouseUpInteraction()
 	return 0
 
-/obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
+/obj/item/mech_equipment/mob_can_unequip(mob/user, slot, disable_warning = FALSE)
 	. = ..()
 	if(. && owner)
 		//Installed equipment shall not be unequiped.
 		return FALSE
 
 /obj/item/mech_equipment/mounted_system
-	var/holding_type
+	abstract_type = /obj/item/mech_equipment/mounted_system
 	var/obj/item/holding
 
 /obj/item/mech_equipment/mounted_system/attack_self(var/mob/user)
@@ -104,26 +104,26 @@
 
 /obj/item/mech_equipment/mounted_system/proc/forget_holding()
 	if(holding) //It'd be strange for this to be called with this var unset
-		events_repository.unregister(/decl/observ/destroyed, holding, src, .proc/forget_holding)
+		events_repository.unregister(/decl/observ/destroyed, holding, src, PROC_REF(forget_holding))
 		holding = null
 		if(!QDELETED(src))
 			qdel(src)
 
 /obj/item/mech_equipment/mounted_system/Initialize()
 	. = ..()
-	if(holding_type)
-		holding = new holding_type(src)
-		events_repository.register(/decl/observ/destroyed, holding, src, .proc/forget_holding)
-	if(holding)
-		if(!icon_state)
-			icon = holding.icon
-			icon_state = holding.icon_state
-		SetName(holding.name)
-		desc = "[holding.desc] This one is suitable for installation on an exosuit."
-
+	if(ispath(holding))
+		holding = new holding(src)
+		events_repository.register(/decl/observ/destroyed, holding, src, PROC_REF(forget_holding))
+	if(!istype(holding))
+		return
+	if(!icon_state)
+		icon = holding.icon
+		icon_state = holding.icon_state
+	SetName(holding.name)
+	desc = "[holding.desc] This one is suitable for installation on an exosuit."
 
 /obj/item/mech_equipment/mounted_system/Destroy()
-	events_repository.unregister(/decl/observ/destroyed, holding, src, .proc/forget_holding)
+	events_repository.unregister(/decl/observ/destroyed, holding, src, PROC_REF(forget_holding))
 	if(holding)
 		QDEL_NULL(holding)
 	. = ..()

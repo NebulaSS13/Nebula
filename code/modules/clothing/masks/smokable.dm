@@ -6,7 +6,7 @@
 	bodytype_equip_flags = null
 	z_flags = ZMM_MANGLE_PLANES
 
-	var/lit = 0
+	var/lit = FALSE
 	var/waterproof = FALSE
 	var/type_butt = null
 	var/chem_volume = 0
@@ -34,7 +34,7 @@
 
 /obj/item/clothing/mask/smokable/Initialize()
 	. = ..()
-	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
+	atom_flags |= ATOM_FLAG_NO_CHEM_CHANGE // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
 /obj/item/clothing/mask/smokable/Destroy()
@@ -50,6 +50,7 @@
 
 /obj/item/clothing/mask/smokable/fire_act()
 	light(0)
+	return ..()
 
 /obj/item/clothing/mask/smokable/proc/smoke(amount, manual)
 	smoketime -= amount
@@ -109,7 +110,7 @@
 		M.update_equipment_overlay(slot_wear_mask_str, FALSE)
 		M.update_inhand_overlays()
 
-/obj/item/clothing/mask/smokable/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/mask/smokable/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && lit && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
 		var/image/on_overlay = emissive_overlay(overlay.icon, "[overlay.icon_state]-on")
 		on_overlay.appearance_flags |= RESET_COLOR
@@ -131,7 +132,7 @@
 		if(submerged())
 			to_chat(usr, SPAN_WARNING("You cannot light \the [src] underwater."))
 			return
-		lit = 1
+		lit = TRUE
 		damtype = BURN
 		if(REAGENT_VOLUME(reagents, /decl/material/liquid/fuel)) // the fuel explodes
 			var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -139,7 +140,7 @@
 			e.start()
 			qdel(src)
 			return
-		atom_flags &= ~ATOM_FLAG_NO_REACT // allowing reagents to react after being lit
+		atom_flags &= ~ATOM_FLAG_NO_CHEM_CHANGE // allowing reagents to react after being lit
 		HANDLE_REACTIONS(reagents)
 		update_icon()
 		if(flavor_text)
@@ -149,7 +150,7 @@
 		START_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/smokable/proc/extinguish(var/mob/user, var/no_message)
-	lit = 0
+	lit = FALSE
 	damtype = BRUTE
 	STOP_PROCESSING(SSobj, src)
 	set_light(0)
@@ -200,6 +201,9 @@
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 	brand = "\improper Trans-Stellar Duty-free"
+
+/obj/item/clothing/mask/smokable/cigarette/can_be_injected_by(var/atom/injector)
+	return TRUE
 
 /obj/item/clothing/mask/smokable/cigarette/Initialize()
 	. = ..()
@@ -351,17 +355,15 @@
 	name = "wooden tip"
 	icon = 'icons/clothing/mask/smokables/cigar_butt.dmi'
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/W, var/mob/user)
-	..()
-
 	if(istype(W, /obj/item/energy_blade/sword))
 		var/obj/item/energy_blade/sword/S = W
 		if(S.active)
 			light(SPAN_WARNING("[user] swings their [W], barely missing their nose. They light their [name] in the process."))
-
-	return
+			return TRUE
+	return ..()
 
 /obj/item/clothing/mask/smokable/cigarette/attack(mob/living/carbon/human/H, mob/user, def_zone)
 	if(lit && H == user && istype(H))
@@ -387,13 +389,12 @@
 	return ..()
 
 /obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/chems/glass/glass, var/mob/user, proximity)
-	..()
 	if(!proximity)
 		return
-	if(istype(glass)) //you can dip cigarettes into beakers
+	if(!lit && istype(glass)) //you can dip unlit cigarettes into beakers. todo: extinguishing lit cigarettes in beakers? disambiguation via intent?
 		if(!ATOM_IS_OPEN_CONTAINER(glass))
 			to_chat(user, SPAN_NOTICE("You need to take the lid off first."))
-			return
+			return TRUE
 		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
 		if(transfered)	//if reagents were transfered, show the message
 			to_chat(user, SPAN_NOTICE("You dip \the [src] into \the [glass]."))
@@ -402,6 +403,8 @@
 				to_chat(user, SPAN_NOTICE("[glass] is empty."))
 			else
 				to_chat(user, SPAN_NOTICE("[src] is full."))
+		return TRUE
+	return ..()
 
 /obj/item/clothing/mask/smokable/cigarette/attack_self(var/mob/user)
 	if(lit == 1)
@@ -451,7 +454,7 @@
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
 	icon = 'icons/clothing/mask/smokables/cigarette_butt.dmi'
-	icon_state = "butt"
+	icon_state = ICON_STATE_WORLD
 	randpixel = 10
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
@@ -465,7 +468,7 @@
 /obj/item/trash/cigbutt/cigarbutt
 	name = "cigar butt"
 	desc = "A manky old cigar butt."
-	icon = 'icons/clothing/mask/smokables/cigar.dmi'
+	icon = 'icons/clothing/mask/smokables/cigar_butt.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/attackby(var/obj/item/W, var/mob/user)
 	..()
@@ -518,7 +521,7 @@
 		if(submerged())
 			to_chat(usr, SPAN_WARNING("You cannot light \the [src] underwater."))
 			return
-		lit = 1
+		lit = TRUE
 		damtype = BURN
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
@@ -542,7 +545,7 @@
 /obj/item/clothing/mask/smokable/pipe/attack_self(var/mob/user)
 	if(lit == 1)
 		user.visible_message(SPAN_NOTICE("[user] puts out [src]."), SPAN_NOTICE("You put out [src]."))
-		lit = 0
+		lit = FALSE
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
 		remove_extension(src, /datum/extension/scent)

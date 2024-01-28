@@ -3,7 +3,7 @@
 	desc = "A coiled metallic tape used to check dimensions and lengths."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "measuring"
-	origin_tech = "{'materials':1}"
+	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel
 	w_class = ITEM_SIZE_SMALL
 
@@ -18,4 +18,4 @@
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/fossil)
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth

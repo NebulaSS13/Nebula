@@ -48,3 +48,6 @@
 				if((mat.gas_flags & XGM_GAS_CONTAMINANT) && env.gas[g] > mat.gas_overlay_limit + 1)
 					I.contaminate()
 					break
+
+	// Handle non-listener proximity triggers.
+	handle_proximity_update(A)

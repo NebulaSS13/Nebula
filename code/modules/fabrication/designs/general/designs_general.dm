@@ -107,7 +107,7 @@
 /datum/fabricator_recipe/fiberglass/get_resources()
 	resources = list(
 		/decl/material/solid/glass =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
-		/decl/material/solid/plastic = CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2)
+		/decl/material/solid/organic/plastic = CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2)
 	)
 
 /datum/fabricator_recipe/struts
@@ -125,7 +125,7 @@
 
 /datum/fabricator_recipe/struts/plastic/get_resources()
 	resources = list(
-		/decl/material/solid/plastic =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
+		/decl/material/solid/organic/plastic =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
 	)
 
 /datum/fabricator_recipe/struts/aluminium
@@ -162,5 +162,12 @@
 
 /datum/fabricator_recipe/package_wrapper
 	path = /obj/item/stack/package_wrap
-/datum/fabricator_recipe/gift_wrapper
+
+/datum/fabricator_recipe/package_wrapper/gift
 	path = /obj/item/stack/package_wrap/gift
+
+/datum/fabricator_recipe/clothes_iron
+	path = /obj/item/ironingiron
+
+/datum/fabricator_recipe/ironing_board
+	path = /obj/item/roller/ironingboard

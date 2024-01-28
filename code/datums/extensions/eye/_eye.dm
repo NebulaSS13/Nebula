@@ -21,7 +21,7 @@
 /datum/extension/eye/proc/look(var/mob/new_looker, var/list/eye_args)
 	if(new_looker.eyeobj || current_looker)
 		return FALSE
-	
+
 	LAZYINSERT(eye_args, get_turf(new_looker), 1) // Make sure that a loc is provided to the eye.
 
 	if(!extension_eye)
@@ -43,29 +43,29 @@
 	unlook_action.Grant(current_looker)
 
 	// Checks for removing the user from the eye outside of unlook actions.
-	events_repository.register(/decl/observ/moved, holder, src, /datum/extension/eye/proc/unlook)
-	events_repository.register(/decl/observ/moved, current_looker, src, /datum/extension/eye/proc/unlook)
+	events_repository.register(/decl/observ/moved, holder, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
+	events_repository.register(/decl/observ/moved, current_looker, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
 
-	events_repository.register(/decl/observ/destroyed, current_looker, src, /datum/extension/eye/proc/unlook)
-	events_repository.register(/decl/observ/destroyed, extension_eye, src, /datum/extension/eye/proc/unlook)
+	events_repository.register(/decl/observ/destroyed, current_looker, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
+	events_repository.register(/decl/observ/destroyed, extension_eye, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
 
 	if(isliving(current_looker))
-		events_repository.register(/decl/observ/stat_set, current_looker, src, /datum/extension/eye/proc/unlook)
-	events_repository.register(/decl/observ/logged_out, current_looker, src, /datum/extension/eye/proc/unlook)
+		events_repository.register(/decl/observ/stat_set, current_looker, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
+	events_repository.register(/decl/observ/logged_out, current_looker, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
 
 	return TRUE
 
 /datum/extension/eye/proc/unlook()
 
-	events_repository.unregister(/decl/observ/moved, holder, src, /datum/extension/eye/proc/unlook)
-	events_repository.unregister(/decl/observ/moved, current_looker, src, /datum/extension/eye/proc/unlook)
-	
-	events_repository.unregister(/decl/observ/destroyed, current_looker, src, /datum/extension/eye/proc/unlook)
-	events_repository.unregister(/decl/observ/destroyed, extension_eye, src, /datum/extension/eye/proc/unlook)
+	events_repository.unregister(/decl/observ/moved, holder, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
+	events_repository.unregister(/decl/observ/moved, current_looker, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
+
+	events_repository.unregister(/decl/observ/destroyed, current_looker, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
+	events_repository.unregister(/decl/observ/destroyed, extension_eye, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
 
 	if(isliving(current_looker))
-		events_repository.unregister(/decl/observ/stat_set, current_looker, src, /datum/extension/eye/proc/unlook)
-	events_repository.unregister(/decl/observ/logged_out, current_looker, src, /datum/extension/eye/proc/unlook)
+		events_repository.unregister(/decl/observ/stat_set, current_looker, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
+	events_repository.unregister(/decl/observ/logged_out, current_looker, src, TYPE_PROC_REF(/datum/extension/eye, unlook))
 
 	QDEL_NULL(extension_eye)
 

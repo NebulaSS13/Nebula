@@ -118,7 +118,7 @@
 		if(href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]
 			return TOPIC_REFRESH
-		
+
 		var/decl/cultural_info/new_token = href_list["set_token_entry_[token]"]
 		if(!isnull(new_token))
 			new_token = locate(new_token)

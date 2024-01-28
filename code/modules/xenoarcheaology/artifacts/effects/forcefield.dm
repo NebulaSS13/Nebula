@@ -50,7 +50,7 @@
 /obj/effect/energy_field/artifact
 	strength = 1
 	density = TRUE
-	invisibility = 0
+	invisibility = INVISIBILITY_NONE
 	is_spawnable_type = FALSE
 	var/datum/artifact_effect/forcefield/owner
 

@@ -12,7 +12,7 @@ Single Use Emergency Pouches
 	icon_state = "pack0"
 	opened = FALSE
 	open_sound = 'sound/effects/rip1.ogg'
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/injury_type = "generic"
 	var/static/image/cross_overlay
 	var/instructions = {"

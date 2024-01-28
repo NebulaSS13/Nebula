@@ -1,0 +1,33 @@
+# FIX WALLOBJ FACING DIRS
+/obj/item/radio/intercom/@SUBTYPES {pixel_y=@UNSET;pixel_x=@NEGATIVE} : @OLD {@OLD;pixel_x=-22;dir=4}
+/obj/item/radio/intercom/@SUBTYPES {pixel_y=@UNSET;pixel_x=@POSITIVE} : @OLD {@OLD;pixel_x=22;dir=8}
+/obj/item/radio/intercom/@SUBTYPES {pixel_x=@UNSET;pixel_y=@NEGATIVE} : @OLD {@OLD;pixel_y=-30;dir=1}
+/obj/item/radio/intercom/@SUBTYPES {pixel_x=@UNSET;pixel_y=@POSITIVE} : @OLD {@OLD;pixel_y=20;dir=@SKIP}
+/obj/structure/extinguisher_cabinet {pixel_x=@POSITIVE;pixel_y=@UNSET} : @OLD {@OLD;pixel_x=29;dir=8}
+/obj/structure/extinguisher_cabinet {pixel_x=@NEGATIVE;pixel_y=@UNSET} : @OLD {@OLD;pixel_x=-29;dir=4}
+/obj/structure/extinguisher_cabinet {pixel_y=@POSITIVE;pixel_x=@UNSET} : @OLD {@OLD;pixel_y=29;dir=@SKIP}
+/obj/structure/extinguisher_cabinet {pixel_y=@NEGATIVE;pixel_x=@UNSET} : @OLD {@OLD;pixel_y=-29;dir=1}
+/obj/machinery/button/@SUBTYPES {pixel_y=@UNSET;pixel_x=@POSITIVE} : @OLD{@OLD;dir=8}
+/obj/machinery/button/@SUBTYPES {pixel_y=@UNSET;pixel_x=@NEGATIVE} : @OLD{@OLD;dir=4}
+/obj/machinery/button/@SUBTYPES {pixel_x=@UNSET;pixel_y=@NEGATIVE} : @OLD{@OLD;dir=1}
+/obj/machinery/status_display/@SUBTYPES {pixel_y=@UNSET;pixel_x=@NEGATIVE} : @OLD{@OLD;dir=8}
+/obj/machinery/status_display/@SUBTYPES {pixel_y=@UNSET;pixel_x=@POSITIVE} : @OLD{@OLD;dir=4}
+/obj/machinery/status_display/@SUBTYPES {pixel_x=@UNSET;pixel_y=@NEGATIVE} : @OLD{@OLD;dir=1}
+/obj/machinery/newscaster/@SUBTYPES {pixel_x=@NEGATIVE;pixel_y=@UNSET} : @OLD{@OLD;dir=8}
+/obj/machinery/newscaster/@SUBTYPES {pixel_x=@POSITIVE;pixel_y=@UNSET} : @OLD{@OLD;dir=4}
+/obj/machinery/newscaster/@SUBTYPES {pixel_y=@NEGATIVE;pixel_x=@UNSET} : @OLD{@OLD;dir=1}
+/obj/structure/closet/@SUBTYPES {pixel_y=@UNSET;pixel_x=@POSITIVE} : @OLD{@OLD;dir=8}
+/obj/structure/closet/@SUBTYPES {pixel_y=@UNSET;pixel_x=@NEGATIVE} : @OLD{@OLD;dir=4}
+/obj/structure/closet/@SUBTYPES {pixel_x=@UNSET;pixel_y=@NEGATIVE} : @OLD{@OLD;dir=1}
+/obj/machinery/recharger/wallcharger/@SUBTYPES {pixel_y=@UNSET;pixel_x=@POSITIVE} : @OLD{@OLD;dir=8}
+/obj/machinery/recharger/wallcharger/@SUBTYPES {pixel_y=@UNSET;pixel_x=@NEGATIVE} : @OLD{@OLD;dir=4}
+/obj/machinery/recharger/wallcharger/@SUBTYPES {pixel_x=@UNSET;pixel_y=@NEGATIVE} : @OLD{@OLD;dir=1}
+/obj/machinery/embedded_controller/@SUBTYPES {pixel_y=@UNSET;pixel_x=@POSITIVE} : @OLD{@OLD;dir=8}
+/obj/machinery/embedded_controller/@SUBTYPES {pixel_y=@UNSET;pixel_x=@NEGATIVE} : @OLD{@OLD;dir=4}
+/obj/machinery/embedded_controller/@SUBTYPES {pixel_x=@UNSET;pixel_y=@NEGATIVE} : @OLD{@OLD;dir=1}
+/obj/machinery/airlock_sensor/@SUBTYPES {pixel_y=@UNSET;pixel_x=@POSITIVE} : @OLD{@OLD;dir=8}
+/obj/machinery/airlock_sensor/@SUBTYPES {pixel_y=@UNSET;pixel_x=@NEGATIVE} : @OLD{@OLD;dir=4}
+/obj/machinery/airlock_sensor/@SUBTYPES {pixel_x=@UNSET;pixel_y=@NEGATIVE} : @OLD{@OLD;dir=1}
+/obj/machinery/light_switch/@SUBTYPES {pixel_y=@UNSET;pixel_x=@POSITIVE} : @OLD{@OLD;dir=8}
+/obj/machinery/light_switch/@SUBTYPES {pixel_y=@UNSET;pixel_x=@NEGATIVE} : @OLD{@OLD;dir=4}
+/obj/machinery/light_switch/@SUBTYPES {pixel_x=@UNSET;pixel_y=@NEGATIVE} : @OLD{@OLD;dir=1}

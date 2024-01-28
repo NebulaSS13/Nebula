@@ -18,6 +18,7 @@
  */
 /obj/item/twohanded
 	w_class = ITEM_SIZE_HUGE
+	item_flags = ITEM_FLAG_IS_WEAPON
 	slot_flags = SLOT_BACK
 	icon_state = ICON_STATE_WORLD
 	pickup_sound = 'sound/foley/scrape1.ogg'
@@ -67,7 +68,7 @@
 	if(wielded)
 		. += wielded_parry_bonus
 
-/obj/item/twohanded/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/twohanded/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay && wielded && (slot in list(BP_L_HAND, BP_R_HAND)))
 		overlay.icon_state = "[overlay.icon_state]-wielded"
 	. = ..()
@@ -137,7 +138,7 @@
 		))
 
 
-/obj/item/twohanded/spear/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/twohanded/spear/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
 	if(overlay)
 		if(check_state_in_icon("[overlay.icon_state]-shaft", overlay.icon))
 			overlay.overlays += get_shaft_overlay("[overlay.icon_state]-shaft")
@@ -158,12 +159,12 @@
 
 /obj/item/twohanded/spear/steel
 	material = /decl/material/solid/metal/steel
-	shaft_material = /decl/material/solid/wood
+	shaft_material = /decl/material/solid/organic/wood
 	cable_color = COLOR_GREEN
 
 /obj/item/twohanded/spear/supermatter
 	material = /decl/material/solid/exotic_matter
-	shaft_material = /decl/material/solid/wood/ebony
+	shaft_material = /decl/material/solid/organic/wood/ebony
 	cable_color = COLOR_INDIGO
 
 /obj/item/twohanded/baseballbat
@@ -174,7 +175,7 @@
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	material = /decl/material/solid/wood/maple
+	material = /decl/material/solid/organic/wood/maple
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	max_force = 40	//for wielded
 	material_force_multiplier = 0.4           // 24 when wielded with weight 60 (steel)

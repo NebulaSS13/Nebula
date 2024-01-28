@@ -158,7 +158,6 @@
 /datum/stack_recipe/furniture/machine/spawn_result(mob/user, location, amount)
 	return new result_type(location)
 
-
 /datum/stack_recipe/furniture/door_assembly
 	time = 50
 

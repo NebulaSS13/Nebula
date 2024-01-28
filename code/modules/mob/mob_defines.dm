@@ -39,27 +39,26 @@
 
 	var/stat = CONSCIOUS //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
-	var/obj/screen/cells = null
-
-	var/obj/screen/hands = null
-	var/obj/screen/internals = null
-	var/obj/screen/oxygen = null
-	var/obj/screen/toxin = null
-	var/obj/screen/fire = null
-	var/obj/screen/bodytemp = null
-	var/obj/screen/healths = null
-	var/obj/screen/throw_icon = null
-	var/obj/screen/nutrition_icon = null
-	var/obj/screen/hydration_icon = null
-	var/obj/screen/pressure = null
-	var/obj/screen/pain = null
-	var/obj/screen/up_hint = null
-	var/obj/screen/gun/item/item_use_icon = null
-	var/obj/screen/gun/radio/radio_use_icon = null
-	var/obj/screen/gun/move/gun_move_icon = null
-	var/obj/screen/gun/mode/gun_setting_icon = null
-
-	var/obj/screen/ability_master/ability_master = null
+	var/obj/screen/robot_module_select/hands
+	var/obj/screen/warning_cells/cells
+	var/obj/screen/internals/internals
+	var/obj/screen/oxygen/oxygen
+	var/obj/screen/toxins/toxin
+	var/obj/screen/fire_warning/fire
+	var/obj/screen/bodytemp/bodytemp
+	var/obj/screen/health_warning/healths
+	var/obj/screen/throw_toggle/throw_icon
+	var/obj/screen/maneuver/maneuver_icon
+	var/obj/screen/food/nutrition_icon
+	var/obj/screen/drink/hydration_icon
+	var/obj/screen/pressure/pressure
+	var/obj/screen/fullscreen/pain/pain
+	var/obj/screen/up_hint/up_hint
+	var/obj/screen/gun/item/item_use_icon
+	var/obj/screen/gun/radio/radio_use_icon
+	var/obj/screen/gun/move/gun_move_icon
+	var/obj/screen/gun/mode/gun_setting_icon
+	var/obj/screen/ability_master/ability_master
 
 	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.
 	A variable should only be globally attached to turfs/objects/whatever, when it is in fact needed as such.
@@ -86,7 +85,6 @@
 
 	var/radio_interrupt_cooldown = 0    // TODO move this to /human
 
-	var/unacidable = 0
 	var/list/pinned                     // Lazylist of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded                   // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // TODO: lazylist this var. For speaking/listening.
@@ -175,3 +173,7 @@
 
 	/// Used for darksight, required on all mobs to ensure lighting renders properly.
 	var/obj/screen/lighting_plane_master/lighting_master
+
+	// Offset the overhead text if necessary.
+	var/offset_overhead_text_x = 0
+	var/offset_overhead_text_y = 0

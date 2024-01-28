@@ -14,7 +14,7 @@
 	name = "jackboots"
 	desc = "Tall synthleather boots with an artificial shine."
 	icon = 'icons/clothing/feet/boots.dmi'
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	force = 3
 	armor = list(
@@ -35,7 +35,7 @@
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	var/artificail_shine = 20
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'
 
 /obj/item/clothing/shoes/jackboots/set_material(var/new_material)
 	..()
@@ -45,7 +45,7 @@
 	name = "workboots"
 	desc = "A pair of steel-toed work boots designed for use in industrial settings. Safety first."
 	icon = 'icons/clothing/feet/boots.dmi'
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 	color = "#d88d4b"
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
@@ -61,4 +61,4 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'materials':2,'engineering':2}"
+	origin_tech = @'{"materials":2,"engineering":2}'

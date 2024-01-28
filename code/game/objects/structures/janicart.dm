@@ -5,7 +5,7 @@
 	icon_state = "cart"
 	anchored = FALSE
 	density = TRUE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
 	movable_flags = MOVABLE_FLAG_WHEELED
 	var/obj/item/storage/bag/trash/mybag	= null
 	var/obj/item/mop/mymop = null
@@ -176,7 +176,7 @@
 	icon_state = "pussywagon"
 	anchored = FALSE
 	density =  TRUE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	buckle_layer_above = TRUE
 	buckle_movable = TRUE
 	movement_handlers = list(
@@ -263,4 +263,4 @@
 	icon_state = "keys"
 	w_class = ITEM_SIZE_TINY
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_TRACE)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE)

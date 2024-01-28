@@ -85,7 +85,7 @@
 	leaves_residue = 0
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'combat':3,'materials':3}"
+	origin_tech = @'{"combat":3,"materials":3}'
 
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"
@@ -140,7 +140,7 @@
 	leaves_residue = 0
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'combat':3,'materials':3}"
+	origin_tech = @'{"combat":3,"materials":3}'
 
 /obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
 	if(prob(100/severity)) BB = null
@@ -164,7 +164,7 @@
 	projectile_type  = /obj/item/projectile/ion
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
-	origin_tech = "{'combat':4,'materials':3}"
+	origin_tech = @'{"combat":4,"materials":3}'
 
 /obj/item/ammo_casing/shell
 	name = "shell casing"
@@ -220,4 +220,4 @@
 	color = COLOR_BLUE_GRAY
 	bullet_color = COLOR_BLUE_LIGHT
 	material = /decl/material/solid/glass
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)

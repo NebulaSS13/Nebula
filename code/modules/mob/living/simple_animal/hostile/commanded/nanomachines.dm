@@ -6,8 +6,7 @@
 	desc = "a cloud of tiny, tiny robots."
 	icon = 'icons/mob/simple_animal/nanomachines.dmi'
 	natural_weapon = /obj/item/natural_weapon/nanomachine
-	health = 10
-	maxHealth = 10
+	mob_default_max_health = 10
 	can_escape = TRUE
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")
 	gene_damage = -1
@@ -15,6 +14,7 @@
 	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET$."
 	response_harm =    "agitates"
 	response_disarm =  "fans at"
+	ai = /datum/ai/nanomachines
 
 	var/regen_time = 0
 	var/emergency_protocols = 0
@@ -25,20 +25,28 @@
 	force = 2
 	sharp = TRUE
 
-/mob/living/simple_animal/hostile/commanded/nanomachine/Life()
-	regen_time++
-	if(regen_time == 2 && health < maxHealth) //slow regen
-		regen_time = 0
-		health++
+/datum/ai/nanomachines
+	expected_type = /mob/living/simple_animal/hostile/commanded/nanomachine
+
+/datum/ai/nanomachines/do_process(time_elapsed)
+	. = ..()
+	var/mob/living/simple_animal/hostile/commanded/nanomachine/swarm = body
+	switch(swarm.stance)
+		if(COMMANDED_HEAL)
+			if(!swarm.target_mob)
+				swarm.target_mob = swarm.FindTarget(COMMANDED_HEAL)
+			if(swarm.target_mob)
+				swarm.move_to_heal()
+		if(COMMANDED_HEALING)
+			swarm.heal()
+
+/mob/living/simple_animal/hostile/commanded/nanomachine/handle_living_non_stasis_processes()
 	. = ..()
 	if(.)
-		switch(stance)
-			if(COMMANDED_HEAL)
-				if(!target_mob)
-					target_mob = FindTarget(COMMANDED_HEAL)
-				move_to_heal()
-			if(COMMANDED_HEALING)
-				heal()
+		regen_time++
+		if(regen_time == 2 && current_health < get_max_health()) //slow regen
+			regen_time = 0
+			heal_overall_damage(1)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/death(gibbed, deathmessage, show_dead_message)
 	..(null, "dissipates into thin air", "You have been destroyed.")
@@ -52,21 +60,21 @@
 		stance = COMMANDED_HEALING
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/proc/heal()
-	if(health <= 3 && !emergency_protocols) //dont die doing this.
+	if(current_health <= 3 && !emergency_protocols) //dont die doing this.
 		return 0
 	if(!target_mob)
 		return 0
 	if(!Adjacent(target_mob) || SA_attackable(target_mob))
 		stance = COMMANDED_HEAL
 		return 0
-	if(target_mob.stat || target_mob.health >= target_mob.maxHealth) //he's either dead or healthy, move along.
+	if(target_mob.stat || target_mob.current_health >= target_mob.get_max_health()) //he's either dead or healthy, move along.
 		allowed_targets -= target_mob
 		target_mob = null
 		stance = COMMANDED_HEAL
 		return 0
 	src.visible_message("\The [src] glows green for a moment, healing \the [target_mob]'s wounds.")
-	health -= 3
-	target_mob.adjustBruteLoss(-5)
+	adjustBruteLoss(3)
+	target_mob.adjustBruteLoss(-5, do_update_health = FALSE)
 	target_mob.adjustFireLoss(-5)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/misc_command(var/mob/speaker,var/text)

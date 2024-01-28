@@ -140,9 +140,9 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 		apply_spell_damage(target)
 
 /spell/targeted/proc/apply_spell_damage(mob/living/target)
-	target.adjustBruteLoss(amt_dam_brute)
-	target.adjustFireLoss(amt_dam_fire)
-	target.adjustToxLoss(amt_dam_tox)
+	target.adjustBruteLoss(amt_dam_brute, do_update_health = FALSE)
+	target.adjustFireLoss(amt_dam_fire, do_update_health = FALSE)
+	target.adjustToxLoss(amt_dam_tox, do_update_health = FALSE)
 	target.adjustOxyLoss(amt_dam_oxy)
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target

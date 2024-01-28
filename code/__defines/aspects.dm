@@ -51,4 +51,19 @@
 	model = MODEL_PATH;                                                                                    \
 	parent = /decl/aspect/prosthetic_limb/right_leg;                                                       \
 	aspect_cost = COST;                                                                                    \
+}                                                                                                          \
+/decl/aspect/prosthetic_limb/head/##MODEL_ID {                                                             \
+	model = MODEL_PATH;                                                                                    \
+	parent = /decl/aspect/prosthetic_limb/head;                                                            \
+	aspect_cost = COST * 0.5;                                                                              \
+}                                                                                                          \
+/decl/aspect/prosthetic_limb/chest/##MODEL_ID {                                                            \
+	model = MODEL_PATH;                                                                                    \
+	parent = /decl/aspect/prosthetic_limb/chest;                                                           \
+	aspect_cost = COST * 0.5;                                                                              \
+}                                                                                                          \
+/decl/aspect/prosthetic_limb/groin/##MODEL_ID {                                                            \
+	model = MODEL_PATH;                                                                                    \
+	parent = /decl/aspect/prosthetic_limb/groin;                                                           \
+	aspect_cost = COST * 0.5;                                                                              \
 }

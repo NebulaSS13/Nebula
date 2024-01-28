@@ -329,13 +329,14 @@
 /turf/simulated/floor/beach
 	name = "beach"
 	icon = 'icons/misc/beach.dmi'
+	abstract_type = /turf/simulated/floor/beach
 
 /turf/simulated/floor/beach/sand
 	name = "sand"
 	icon_state = "sand"
 
 /turf/simulated/floor/beach/sand/desert
-	icon_state = "desert"
+	icon_state = "desert0"
 
 /turf/simulated/floor/beach/sand/desert/Initialize()
 	. = ..()
@@ -368,7 +369,7 @@
 /turf/simulated/floor/crystal
 	name = "crystal floor"
 	icon = 'icons/turf/flooring/crystal.dmi'
-	icon_state = ""
+	icon_state = "crystal"
 	initial_flooring = /decl/flooring/crystal
 
 /turf/simulated/floor/glass
