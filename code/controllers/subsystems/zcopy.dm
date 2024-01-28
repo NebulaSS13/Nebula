@@ -371,6 +371,8 @@ SUBSYSTEM_DEF(zcopy)
 
 		// Handle below atoms.
 
+		var/shadower_set = FALSE
+
 		// Add everything below us to the discovery queue.
 		for (var/thing in T.below)
 			var/atom/movable/object = thing
@@ -385,13 +387,19 @@ SUBSYSTEM_DEF(zcopy)
 
 			// Special case: these are merged into the shadower to reduce memory usage.
 			if (object.type == /atom/movable/lighting_overlay)
-				T.shadower.copy_lighting(object)
+				T.shadower.copy_lighting(object, !(T.below.z_flags & ZM_NO_SHADOW))
 				continue
 
 			// If an atom already has an overlay, we probably don't need to discover it again.
 			// ...but we need to force it if the object was salvaged from another zturf.
 			if (!object.bound_overlay || object.bound_overlay.destruction_timer)
 				discover_movable(object, T)
+
+		if (!shadower_set)
+			if (T.below.z_flags & ZM_NO_SHADOW)
+				T.shadower.color = null
+			else
+				T.shadower.color = SHADOWER_DARKENING_COLOR
 
 		T.z_queued -= 1
 		if (T.above)

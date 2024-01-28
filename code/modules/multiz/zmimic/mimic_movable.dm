@@ -80,32 +80,33 @@
 
 	return ..()
 
-/atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO)
+/atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO, use_shadower_mult = TRUE)
 	appearance = LO
 	layer = MIMICED_LIGHTING_LAYER
 	plane = OPENTURF_MAX_PLANE
 	blend_mode = BLEND_MULTIPLY
 	set_invisibility(INVISIBILITY_NONE)
 
-	if (icon_state == LIGHTING_BASE_ICON_STATE)
-		// We're using a color matrix, so just darken the colors across the board.
-		var/list/c_list = color
-		c_list[CL_MATRIX_RR] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_RG] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_RB] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GR] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GG] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GB] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BR] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BG] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BB] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AR] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
-		color = c_list
-	else
-		// Not a color matrix, so we can just use the color var ourselves.
-		color = SHADOWER_DARKENING_COLOR
+	if (use_shadower_mult)
+		if (icon_state == LIGHTING_BASE_ICON_STATE)
+			// We're using a color matrix, so just darken the colors across the board.
+			var/list/c_list = color
+			c_list[CL_MATRIX_RR] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_RG] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_RB] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_GR] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_GG] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_GB] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_BR] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_BG] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_BB] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_AR] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
+			color = c_list
+		else
+			// Not a color matrix, so we can just use the color var ourselves.
+			color = SHADOWER_DARKENING_COLOR
 
 	if (our_overlays || priority_overlays)
 		compile_overlays()
