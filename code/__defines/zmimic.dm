@@ -1,4 +1,4 @@
-#define ZM_DESTRUCTION_TIMER(TARGET) addtimer(CALLBACK(TARGET, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
+#define ZM_DESTRUCTION_TIMER(TARGET) addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, qdel_self)), 10 SECONDS, TIMER_STOPPABLE)
 #define TURF_IS_MIMICKING(T) (isturf(T) && (T:z_flags & ZM_MIMIC_BELOW))
 #define CHECK_OO_EXISTENCE(OO) if (OO && !MOVABLE_IS_ON_ZTURF(OO) && !OO.destruction_timer) { OO.destruction_timer = ZM_DESTRUCTION_TIMER(OO); }
 #define UPDATE_OO_IF_PRESENT CHECK_OO_EXISTENCE(bound_overlay); if (bound_overlay) { update_above(); }
