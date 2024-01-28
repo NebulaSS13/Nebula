@@ -22,6 +22,9 @@
 	var/smoke_effect = 0
 	var/smoke_amount = 1
 
+/obj/item/clothing/mask/smokable/get_tool_quality(archetype, property)
+	return (!lit && archetype == TOOL_CAUTERY) ? TOOL_QUALITY_NONE : ..()
+
 /obj/item/clothing/mask/smokable/dropped(mob/user)
 	. = ..()
 	if(lit)
