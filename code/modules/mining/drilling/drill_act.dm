@@ -19,15 +19,3 @@
 
 /turf/space/drill_act()
 	SHOULD_CALL_PARENT(FALSE)
-
-/turf/simulated/open/drill_act()
-	SHOULD_CALL_PARENT(FALSE)
-	var/turf/T = GetBelow(src)
-	if(istype(T))
-		T.drill_act()
-
-/turf/exterior/open/drill_act()
-	SHOULD_CALL_PARENT(FALSE)
-	var/turf/T = GetBelow(src)
-	if(istype(T))
-		T.drill_act()

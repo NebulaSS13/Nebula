@@ -96,7 +96,7 @@
 				float_is_usable = TRUE
 				break
 	if(float_is_usable)
-		if(istype(landing, /turf/simulated/open))
+		if(landing.is_open())
 			H.visible_message("\The [H] descends from \the [landing].", "You descend regally.")
 		else
 			H.visible_message("\The [H] floats gracefully down from \the [landing].", "You land gently on \the [landing].")

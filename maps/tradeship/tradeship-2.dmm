@@ -1942,7 +1942,7 @@
 	icon_state = "32-1"
 	},
 /obj/structure/disposalpipe/down,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/crew/hallway/starboard)
 "eL" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2061,7 +2061,7 @@
 /area/ship/trade/cargo)
 "eV" = (
 /obj/structure/catwalk,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "fa" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -2208,7 +2208,7 @@
 "fp" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/catwalk,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "fr" = (
 /obj/structure/closet/crate,
@@ -2218,7 +2218,7 @@
 /obj/random/bomb_supply,
 /obj/item/storage/box/syringes,
 /obj/structure/catwalk,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "fs" = (
 /obj/structure/catwalk,
@@ -2229,7 +2229,7 @@
 	pixel_x = 24;
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "fu" = (
 /obj/structure/cable{
@@ -2328,20 +2328,20 @@
 "fI" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "fJ" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "fK" = (
 /obj/structure/catwalk,
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "fN" = (
 /obj/effect/paint/brown,
@@ -2438,7 +2438,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/crew/hallway/port)
 "fZ" = (
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "ga" = (
 /obj/structure/catwalk,
@@ -2449,7 +2449,7 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "gc" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
@@ -2603,7 +2603,7 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "gt" = (
 /obj/structure/emergency_dispenser/west,
@@ -2691,7 +2691,7 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "gI" = (
 /obj/random/maintenance,
@@ -2717,7 +2717,7 @@
 	dir = 8;
 	icon_state = "warning"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "gN" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -2755,7 +2755,7 @@
 	dir = 1;
 	icon_state = "warning"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "gW" = (
 /obj/structure/catwalk,
@@ -2771,7 +2771,7 @@
 	pixel_y = -20;
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "hb" = (
 /obj/machinery/power/terminal{
@@ -4691,7 +4691,7 @@
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers{
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "nW" = (
 /obj/effect/floor_decal/corner/red/diagonal,
@@ -5178,7 +5178,7 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "sG" = (
 /obj/effect/floor_decal/corner/beige{
@@ -6772,7 +6772,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "KO" = (
 /obj/structure/cable{
@@ -7923,7 +7923,7 @@
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/catwalk,
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/cargo)
 "Yc" = (
 /obj/structure/cable{

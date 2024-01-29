@@ -4,7 +4,7 @@
 		/decl/material/gas/oxygen = MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
-	open_turf_type = /turf/simulated/open
+	open_turf_type = /turf/open
 	zone_membership_candidate = TRUE
 	abstract_type = /turf/simulated
 

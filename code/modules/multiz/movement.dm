@@ -22,7 +22,7 @@
 	if(loc != old_loc)
 		return
 
-	var/turf/simulated/open/O = GetAbove(src)
+	var/turf/open/O = GetAbove(src)
 	var/atom/climb_target
 	if(istype(O))
 		for(var/turf/T in RANGE_TURFS(O, 1))
@@ -171,7 +171,7 @@
 	return TRUE
 
 /obj/item/pipe/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
-	var/turf/simulated/open/below = loc
+	var/turf/open/below = loc
 	below = below.below
 
 	. = ..()

@@ -39,7 +39,7 @@
 /area/example/second)
 "es" = (
 /obj/machinery/light,
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "fJ" = (
 /obj/machinery/light/small{
@@ -181,7 +181,7 @@
 /area/example/second)
 "nB" = (
 /obj/effect/shuttle_landmark/upper_level,
-/turf/simulated/open,
+/turf/open,
 /area/space)
 "nC" = (
 /obj/effect/floor_decal/corner/mauve/mono,
@@ -209,7 +209,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/second)
 "oS" = (
-/turf/simulated/open,
+/turf/open,
 /area/space)
 "pc" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -359,13 +359,13 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/example/second)
 "wP" = (
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "xk" = (
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "xs" = (
 /turf/space,
@@ -509,7 +509,7 @@
 /area/example/second)
 "GG" = (
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "GP" = (
 /obj/machinery/light{
@@ -585,7 +585,7 @@
 /area/example/second)
 "NY" = (
 /obj/structure/ladder,
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "Pc" = (
 /obj/effect/floor_decal/corner/orange{
@@ -655,7 +655,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/example/second)
 "VL" = (
-/turf/simulated/open,
+/turf/open,
 /area/turbolift/example/second)
 "Xm" = (
 /obj/structure/iv_drip,
@@ -669,7 +669,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/example/second)
 "XE" = (
 /turf/simulated/wall/r_wall/prepainted,

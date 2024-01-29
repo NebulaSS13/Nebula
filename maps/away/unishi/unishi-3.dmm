@@ -357,7 +357,7 @@
 	dir = 8;
 	icon_state = "railing0"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/unishi/living)
 "bp" = (
 /turf/simulated/floor/tiled,
@@ -430,7 +430,7 @@
 /obj/structure/cable{
 	icon_state = "32-1"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/unishi/living)
 "bB" = (
 /obj/structure/reagent_dispensers/fueltank,
@@ -2009,7 +2009,7 @@
 /area/unishi/living)
 "XA" = (
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/open,
 /area/unishi/living)
 
 (1,1,1) = {"

@@ -6,7 +6,7 @@
 /turf/unsimulated/mask,
 /area/mine/unexplored)
 "ac" = (
-/turf/simulated/open,
+/turf/open,
 /area/icarus/open)
 "ad" = (
 /turf/exterior/wall,
@@ -861,7 +861,7 @@
 /area/icarus/vessel)
 "cR" = (
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/open,
 /area/icarus/open)
 "cS" = (
 /obj/structure/rack,
@@ -1263,7 +1263,7 @@
 /area/icarus/open)
 "dZ" = (
 /obj/effect/icarus/irradiate,
-/turf/simulated/open,
+/turf/open,
 /area/icarus/open)
 "ea" = (
 /obj/structure/cable{

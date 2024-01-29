@@ -35,7 +35,7 @@
 	arrival_sound = null
 	lift_announce_str = null
 
-	base_turf = /turf/simulated/open
+	base_turf = /turf/open
 
 /area/turbolift/example/first
 	name = "Testing Site First Floor Lift"

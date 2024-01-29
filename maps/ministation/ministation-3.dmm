@@ -229,7 +229,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l4overpass)
 "Aj" = (
 /obj/structure/cable,
@@ -264,7 +264,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l4overpass)
 "CJ" = (
 /obj/structure/cable{
@@ -411,7 +411,7 @@
 /obj/machinery/atmospherics/pipe/zpipe/down/supply{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l4central)
 "VO" = (
 /obj/structure/cable{

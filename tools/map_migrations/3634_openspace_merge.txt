@@ -1,0 +1,2 @@
+/turf/simulated/open/@SUBTYPES : /turf/open/@SUBTYPES{@OLD} 
+/turf/exterior/open/@SUBTYPES : /turf/open/@SUBTYPES{@OLD} 

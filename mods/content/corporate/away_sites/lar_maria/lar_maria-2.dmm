@@ -2100,7 +2100,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/hallway)
 "gD" = (
-/turf/simulated/open,
+/turf/open,
 /area/lar_maria/hallway)
 "gE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2265,7 +2265,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/open,
+/turf/open,
 /area/lar_maria/hallway)
 "hf" = (
 /obj/structure/window/basic{
@@ -2286,7 +2286,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/lar_maria/hallway)
 "hi" = (
 /obj/machinery/power/apc{
@@ -3077,7 +3077,7 @@
 /obj/structure/cable{
 	icon_state = "32-1"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/lar_maria/solar_control)
 "nb" = (
 /obj/structure/tank_rack/oxygen,
