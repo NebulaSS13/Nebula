@@ -161,10 +161,7 @@ var/global/list/telecomms_hubs = list()
 
 	var/formatted_msg = "<span style='color:[channel?.color || default_color]'><small><b>\[[channel?.name || format_frequency(frequency)]\]</b></small> <span class='name'>"
 	var/send_name = istype(speaker) ? speaker.real_name : ("[speaker]" || "unknown")
-	var/overmap_send_name = "[send_name] ([send_overmap_object.name])"
-
 	var/list/listeners = list() // Dictionary of listener -> boolean (include overmap origin)
-
 	// Broadcast to all radio devices in our network.
 	for(var/weakref/W as anything in network.connected_radios)
 		var/obj/item/radio/R = W.resolve()
@@ -180,25 +177,20 @@ var/global/list/telecomms_hubs = list()
 		if(!LAZYACCESS(check_channels, channel))
 			continue
 
-		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors["[speaking_from.z]"]
+		// If we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's
+		// then append the overmap object name to it, so they know where we're from
+		var/listener_overmap_object = istype(speaking_from) && global.overmap_sectors[num2text(speaking_from.z)]
+		var/send_overmap = send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listener_overmap_object
 		for(var/mob/listener in hearers(R.canhear_range, speaking_from))
-			// If we're sending from an overmap object AND our overmap object transmits its identity AND it's different than the listener's
-			// then append the overmap object name to it, so they know where we're from
-			var/send_overmap = send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listener_overmap_object
-			LAZYSET(listeners, listener, send_overmap)
+			listeners[listener] = send_overmap
 
 	// Ghostship is magic: Ghosts can hear radio chatter from anywhere
 	for(var/mob/observer/ghost/ghost_listener as anything in global.ghost_mob_list)
 		if(ghost_listener.get_preference_value(/datum/client_preference/ghost_radio) == PREF_ALL_CHATTER)
-			LAZYSET(listeners, ghost_listener, TRUE)
+			listeners[ghost_listener] = TRUE
 
 	for(var/mob/listener in listeners)
-		var/per_listener_send_name = listeners[listener] ? overmap_send_name : send_name
-		var/per_listener_loc_name
-		if(send_overmap_object && send_overmap_object.ident_transmitter && send_overmap_object != listeners[listener])
-			// then append the overmap object name to it, so they know where we're from
-			per_listener_loc_name = send_overmap_object.name
-		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, per_listener_send_name, per_listener_loc_name)
+		listener.hear_radio(message, message_verb, speaking, formatted_msg, "</span> <span class='message'>", "</span></span>", speaker, message_compression, vname = send_name, vsource = (listeners[listener] ? send_overmap_object.name : null))
 
 	if(!chain_transmit)
 		return
