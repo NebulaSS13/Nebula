@@ -43,6 +43,10 @@
 /obj/structure/stairs/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density
 
+/obj/structure/stairs/catwalk
+	name = "catwalk stairs"
+	icon_state = "catwalk"
+
 // type paths to make mapping easier.
 
 /obj/structure/stairs/long
@@ -62,6 +66,27 @@
 	pixel_x = -32
 
 /obj/structure/stairs/long/west
+	dir = WEST
+	bound_width = 64
+	bound_height = 32
+
+/obj/structure/stairs/long/catwalk
+	name = "catwalk stairs"
+	icon_state = "catwalk"
+
+/obj/structure/stairs/long/catwalk/north
+	dir = NORTH
+	bound_y = -32
+	pixel_y = -32
+
+/obj/structure/stairs/long/catwalk/east
+	dir = EAST
+	bound_width = 64
+	bound_height = 32
+	bound_x = -32
+	pixel_x = -32
+
+/obj/structure/stairs/long/catwalk/west
 	dir = WEST
 	bound_width = 64
 	bound_height = 32
