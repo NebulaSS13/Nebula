@@ -46,7 +46,7 @@
 		var/turf/below = GetBelow(src)
 		if(istype(below) && !isspaceturf(below))
 			var/area/A = get_area(src)
-			N = A?.open_turf || open_turf_type || /turf/simulated/open
+			N = A?.open_turf || open_turf_type || /turf/open
 
 	if (!(atom_flags & ATOM_FLAG_INITIALIZED))
 		return new N(src)

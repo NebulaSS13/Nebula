@@ -13770,7 +13770,7 @@
 	},
 /obj/structure/lattice,
 /turf/simulated/floor/plating,
-/turf/simulated/open,
+/turf/open,
 /area/exodus/engineering/sublevel_access)
 "aDl" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/red{
@@ -13778,7 +13778,7 @@
 	},
 /obj/structure/lattice,
 /turf/simulated/floor/plating,
-/turf/simulated/open,
+/turf/open,
 /area/exodus/engineering/sublevel_access)
 "aDm" = (
 /obj/structure/reagent_dispensers/beerkeg,
@@ -14480,7 +14480,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
-/turf/simulated/open,
+/turf/open,
 /area/exodus/engineering/sublevel_access)
 "aEI" = (
 /obj/structure/shuttle/engine/propulsion/burst{

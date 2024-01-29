@@ -922,7 +922,7 @@
 
 			var/is_bad_door = FALSE
 			for(var/turf/T in D.locs)
-				if((istype(T, /turf/simulated/open) || isspaceturf(T)) && !(T.type in turf_exceptions))
+				if(T.is_open() && !(T.type in turf_exceptions))
 					is_bad_door = TRUE
 					log_bad("Invalid door turf: [log_info_line(T)]")
 			if(is_bad_door)

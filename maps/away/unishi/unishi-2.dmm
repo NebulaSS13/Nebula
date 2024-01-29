@@ -593,7 +593,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "32-1"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/unishi/common)
 "bO" = (
 /obj/machinery/floodlight,

@@ -8,8 +8,7 @@
 		/turf/unsimulated/mimic_edge,
 		/turf/exterior/mimic_edge,
 		/turf/simulated/mimic_edge,
-		/turf/exterior/open,
-		/turf/simulated/open
+		/turf/open
 	)
 
 /datum/unit_test/icon_test/turfs_shall_have_icon_states/start_test()

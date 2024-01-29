@@ -4,7 +4,7 @@
 	footstep_type = /decl/footsteps/asteroid
 	icon_state = "0"
 	layer = PLATING_LAYER
-	open_turf_type = /turf/exterior/open
+	open_turf_type = /turf/open
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 	zone_membership_candidate = TRUE
 	var/base_color

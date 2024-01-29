@@ -14,7 +14,7 @@
 			warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
 			return INITIALIZE_HINT_QDEL
 		if(!above.is_open())
-			above.ChangeTurf(/turf/simulated/open)
+			above.ChangeTurf(/turf/space) // This will be resolved to the appropriate open space type by ChangeTurf().
 	. = ..()
 
 /obj/structure/stairs/CheckExit(atom/movable/mover, turf/target)

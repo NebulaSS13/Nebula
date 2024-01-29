@@ -461,7 +461,7 @@
 	icon_state = "32-2"
 	},
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/maintenance/solars)
 "bg" = (
 /obj/structure/cable{
@@ -995,7 +995,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
 "GP" = (
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/maintenance/solars)
 "HN" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -1273,7 +1273,7 @@
 	dir = 8
 	},
 /obj/structure/lattice,
-/turf/simulated/open,
+/turf/open,
 /area/ship/trade/command/bridge_upper)
 "ZU" = (
 /obj/machinery/network/telecomms_hub{

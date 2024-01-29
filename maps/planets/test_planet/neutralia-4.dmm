@@ -3,19 +3,19 @@
 /turf/unsimulated/dark_filler,
 /area/exoplanet/neutralia/sky)
 "b" = (
-/turf/exterior/open,
+/turf/open,
 /area/exoplanet/neutralia/sky)
 "c" = (
 /obj/abstract/level_data_spawner/neutralia/sky,
-/turf/exterior/open,
+/turf/open,
 /area/exoplanet/neutralia/sky)
 "d" = (
 /obj/abstract/map_data/neutralia,
-/turf/exterior/open,
+/turf/open,
 /area/exoplanet/neutralia/sky)
 "e" = (
 /obj/effect/overmap/visitable/sector/planetoid/neutralia,
-/turf/exterior/open,
+/turf/open,
 /area/exoplanet/neutralia/sky)
 
 (1,1,1) = {"

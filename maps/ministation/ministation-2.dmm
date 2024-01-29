@@ -637,7 +637,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "ch" = (
 /obj/structure/cable{
@@ -1741,7 +1741,7 @@
 "hY" = (
 /obj/structure/lattice,
 /obj/structure/ladder,
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l3nw)
 "if" = (
 /obj/machinery/door/window/eastright,
@@ -3001,7 +3001,7 @@
 "pb" = (
 /obj/structure/lattice,
 /obj/structure/ladder,
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l3sw)
 "pf" = (
 /obj/effect/floor_decal/corner/blue{
@@ -3355,7 +3355,7 @@
 /obj/abstract/landmark{
 	name = "bluespace_a"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "tx" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -3365,7 +3365,7 @@
 "ty" = (
 /obj/structure/lattice,
 /obj/structure/ladder,
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l3se)
 "tA" = (
 /obj/effect/floor_decal/corner/yellow/full,
@@ -3435,7 +3435,7 @@
 /area/ministation/court)
 "ug" = (
 /obj/structure/catwalk,
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "uh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3662,7 +3662,7 @@
 "xc" = (
 /obj/structure/lattice,
 /obj/structure/ladder,
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l3ne)
 "xg" = (
 /obj/machinery/light{
@@ -4546,7 +4546,7 @@
 /obj/machinery/camera/autoname{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "Dp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4842,7 +4842,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/s3)
 "GD" = (
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "GF" = (
 /obj/structure/disposalpipe/segment,
@@ -5132,7 +5132,7 @@
 /obj/structure/disposalpipe/down{
 	dir = 4
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l3central)
 "Kg" = (
 /obj/structure/cable{
@@ -5646,7 +5646,7 @@
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "OG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -5745,7 +5745,7 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "Pg" = (
 /obj/structure/cable{
@@ -6418,7 +6418,7 @@
 	dir = 8;
 	icon_state = "warning"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "TR" = (
 /obj/structure/window/basic{
@@ -6580,7 +6580,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/maint/l3se)
 "Vi" = (
 /obj/machinery/light_switch{
@@ -6904,7 +6904,7 @@
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/railing/mapped,
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "XE" = (
 /obj/structure/catwalk,
@@ -6912,7 +6912,7 @@
 	dir = 8;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ministation/hall/n3)
 "XI" = (
 /obj/effect/floor_decal/carpet/green/corners,

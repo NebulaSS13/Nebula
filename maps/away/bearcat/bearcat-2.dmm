@@ -2608,7 +2608,7 @@
 	pixel_x = 24;
 	req_access = newlist()
 	},
-/turf/simulated/open,
+/turf/open,
 /area/ship/scrap/crew/hallway/starboard)
 "fg" = (
 /obj/structure/lattice,
@@ -2753,7 +2753,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/hallway/port)
 "ft" = (
-/turf/simulated/open,
+/turf/open,
 /area/ship/scrap/cargo)
 "fu" = (
 /obj/structure/cable{
@@ -2929,7 +2929,7 @@
 /area/ship/scrap/crew/hallway/port)
 "fM" = (
 /obj/effect/shuttle_landmark/lift/top,
-/turf/simulated/open,
+/turf/open,
 /area/ship/scrap/cargo)
 "fN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,

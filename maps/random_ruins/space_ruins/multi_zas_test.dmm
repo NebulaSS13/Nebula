@@ -10,7 +10,7 @@
 /turf/simulated/floor,
 /area/template_noop)
 "d" = (
-/turf/simulated/open,
+/turf/open,
 /area/template_noop)
 "e" = (
 /turf/unsimulated/floor/shuttle_ceiling,
