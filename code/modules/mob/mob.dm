@@ -552,6 +552,9 @@
 		return TOPIC_HANDLED
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
+/mob/proc/get_comments_record()
+	return
+
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
 
 	if(href_list["refresh"])
@@ -567,6 +570,14 @@
 		var/datum/browser/popup = new(user, ckey(name), name, 500, 200)
 		var/list/html = list("<h3>Appearance</h3>")
 		html += replacetext(flavor_text, "\n", "<BR>")
+		var/datum/character_information/comments = get_comments_record()
+		if(comments)
+			if(comments.ic_info)
+				html += "<h3>IC Information</h3>"
+				html += "[comments.ic_info]<br/>"
+			if(comments.ooc_info)
+				html += "<h3>OOC Information</h3>"
+				html += "[comments.ooc_info]<br/>"
 		popup.set_content(jointext(html, null))
 		popup.open()
 		return TOPIC_HANDLED

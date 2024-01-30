@@ -213,6 +213,22 @@
 			msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 			msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
 
+	// Show IC/OOC info if available.
+	if(comments_record_id)
+		var/datum/character_information/comments = SScharacter_info.get_record(comments_record_id)
+		if(comments?.show_info_on_examine && (comments.ic_info || comments.ooc_info))
+			msg += "*---------*<br>"
+			if(comments.ic_info)
+				if(length(comments.ic_info) <= 40)
+					msg += "<b>IC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[comments.ic_info]<br/>"
+				else
+					msg += "<b>IC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[copytext_preserve_html(comments.ic_info,1,37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a><br/>"
+			if(comments.ooc_info)
+				if(length(comments.ooc_info) <= 40)
+					msg += "<b>OOC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[comments.ooc_info]<br/>"
+				else
+					msg += "<b>OOC Info:</b><br/>&nbsp;&nbsp;&nbsp;&nbsp;[copytext_preserve_html(comments.ooc_info,1,37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a><br/>"
+
 	msg += "*---------*</span><br>"
 	msg += applying_pressure
 
