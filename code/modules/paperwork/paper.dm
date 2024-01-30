@@ -86,16 +86,20 @@
 
 /obj/item/paper/on_update_icon()
 	. = ..()
+
 	if(is_crumpled)
 		icon_state = "scrap"
-		return //No overlays on crumpled paper
 	else
 		icon_state = initial(icon_state)
-	update_contents_overlays()
+		update_contents_overlays()
+		//The appearence is the key, the type is the value
+		for(var/image/key in applied_stamps)
+			add_overlay(key)
 
-	//The appearence is the key, the type is the value
-	for(var/image/key in applied_stamps)
-		add_overlay(key)
+	// Update clipboard/paper bundle.
+	if(istype(loc, /obj/item/clipboard) || istype(loc, /obj/item/paper_bundle))
+		compile_overlays()
+		loc.update_icon()
 
 /**Applies the overlay displayed when the paper contains some text. */
 /obj/item/paper/proc/update_contents_overlays()
