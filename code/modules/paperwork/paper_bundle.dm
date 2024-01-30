@@ -50,19 +50,21 @@
 		return TRUE
 
 	else if(istype(W, /obj/item/stack/tape_roll/duct_tape))
-		var/obj/P = pages[cur_page]
-		. = P.attackby(W, user)
-		update_icon()
-		updateUsrDialog()
-		return TRUE
+		var/obj/P = LAZYACCESS(pages, cur_page)
+		if(P)
+			. = P.attackby(W, user)
+			update_icon()
+			updateUsrDialog()
+		return
 
 	else if(IS_PEN(W) || istype(W, /obj/item/stamp))
 		close_browser(user, "window=[name]")
-		var/obj/P = pages[cur_page]
-		. = P.attackby(W, user)
-		update_icon()
-		updateUsrDialog()
-		return .
+		var/obj/P = LAZYACCESS(pages, cur_page)
+		if(P)
+			. = P.attackby(W, user)
+			update_icon()
+			updateUsrDialog()
+		return
 
 	return ..()
 
@@ -193,8 +195,7 @@
 
 /obj/item/paper_bundle/interact(mob/user)
 	var/dat
-	var/obj/item/W = pages[cur_page]
-
+	var/obj/item/W = LAZYACCESS(pages, cur_page)
 	//Header
 	dat = "<TABLE STYLE='white-space:nowrap; overflow:clip; width:100%; height:2em; table-layout:fixed;'><TR>"
 	dat += "<TD style='text-align:center;'>"
@@ -298,11 +299,11 @@
 	. = ..()
 
 	underlays.Cut()
-	var/obj/item/paper/P = pages[1]
-	icon       = P.icon
-	icon_state = P.icon_state
-
-	copy_overlays(P)
+	var/obj/item/paper/P = LAZYACCESS(pages, 1)
+	if(P)
+		icon       = P.icon
+		icon_state = P.icon_state
+		copy_overlays(P)
 
 	var/paper_count = 0
 	var/photo_count = 0
