@@ -296,7 +296,7 @@
 				to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
 
 /obj/item/paper/CouldNotUseTopic(mob/user)
-	to_chat(user, SPAN_WARNING("You can't do that!"))
+	to_chat(user, SPAN_WARNING("You can't reach!"))
 
 /obj/item/paper/OnTopic(mob/user, href_list, datum/topic_state/state)
 
@@ -314,9 +314,9 @@
 
 		//If we got a pen that's not in our hands, make sure to move it over
 		if(user.get_active_hand() != I && user.get_empty_hand_slot() && user.put_in_hands(I))
-			to_chat(user, SPAN_NOTICE("You grab your trusty [I]!"))
+			to_chat(user, SPAN_NOTICE("You grab your trusty [I.name]!"))
 		else if(user.get_active_hand() != I)
-			to_chat(user, SPAN_WARNING("You'd use your trusty [I], but your hands are full!"))
+			to_chat(user, SPAN_WARNING("You'd use your trusty [I.name], but your hands are full!"))
 			return TOPIC_NOACTION
 
 		var/pen_flags = I.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG)
