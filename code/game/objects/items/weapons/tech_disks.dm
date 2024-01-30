@@ -128,7 +128,7 @@
 
 /obj/item/disk/survey/examine(mob/user)
 	. = ..()
-	to_chat(user,"A tiny indicator on \the [src] shows it holds [data || 0] good explorer point\s.")
+	to_chat(user, "A tiny indicator on \the [src] shows it holds [data] good explorer point\s.")
 
 /obj/item/disk/survey/get_base_value()
 	. = holographic ? 0 : (sqrt(data) * 5)
