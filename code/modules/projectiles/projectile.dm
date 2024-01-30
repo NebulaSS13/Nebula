@@ -464,7 +464,15 @@
 		M.Turn(Angle)
 		transform = M
 	trajectory.increment(trajectory_multiplier)
+
 	var/turf/T = trajectory.return_turf()
+	if(!T)
+		if(!QDELETED(src))
+			if(loc)
+				on_impact(loc)
+			qdel(src)
+		return
+
 	if(T.z != loc.z)
 		before_move()
 		before_z_change(loc, T)
