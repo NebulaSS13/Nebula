@@ -162,10 +162,12 @@ Please contact me on #coderbus IRC. ~Carn x
 	underlays = visible_underlays
 
 	var/obj/item/organ/external/head/head = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	if(head)
-		var/image/I = head.get_eye_overlay()
-		if(I)
-			add_overlay(I)
+	var/image/I = head?.get_eye_overlay()
+	if(I)
+		z_flags |= ZMM_MANGLE_PLANES
+		add_overlay(I)
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 /mob/living/carbon/human/proc/get_icon_scale_mult()
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
