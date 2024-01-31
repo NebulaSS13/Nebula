@@ -91,7 +91,7 @@
 /mob/living/simple_animal/hostile/retaliate/malf_drone/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)
-		return
+		return FALSE
 
 	//emps and lots of damage can temporarily shut us down
 	if(disabled > 0)

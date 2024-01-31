@@ -1,11 +1,12 @@
 /mob/living/silicon/robot/handle_living_non_stasis_processes()
 	. = ..()
-	if(.)
-		use_power()
-		process_killswitch()
-		process_locks()
-		process_queued_alarms()
-		process_os()
+	if(!.)
+		return FALSE
+	use_power()
+	process_killswitch()
+	process_locks()
+	process_queued_alarms()
+	process_os()
 
 /mob/living/silicon/robot/proc/use_power()
 	used_power_this_tick = 0

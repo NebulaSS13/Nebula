@@ -12,6 +12,8 @@
 
 /mob/living/silicon/ai/handle_living_non_stasis_processes()
 	. = ..()
+	if(!.)
+		return FALSE
 	// If our powersupply object was destroyed somehow, create new one.
 	if(!psupply)
 		create_powersupply()
