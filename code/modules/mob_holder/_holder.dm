@@ -11,6 +11,7 @@
 	use_single_icon = TRUE
 	item_state = null
 	is_spawnable_type = FALSE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/last_holder
 
 /obj/item/holder/Initialize()
@@ -112,7 +113,7 @@
 
 /obj/item/holder/attack(mob/target, mob/user)
 	// Devour on click on self with holder
-	if(target == user && istype(user,/mob/living/carbon))
+	if(target == user && iscarbon(user))
 		var/mob/living/carbon/M = user
 		for(var/mob/victim in src.contents)
 			M.devour(victim)
