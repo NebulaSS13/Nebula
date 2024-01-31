@@ -7,7 +7,7 @@
 			to_chat(src, SPAN_WARNING("Your hands are full!"))
 			return FALSE
 	else if(get_active_hand())
-		to_chat(src, SPAN_WARNING("Your [parse_zone(get_active_hand())] is full!"))
+		to_chat(src, SPAN_WARNING("Your [parse_zone(get_active_held_item_slot())] is full!"))
 		return FALSE
 	if(LAZYLEN(grabbed_by))
 		to_chat(src, SPAN_WARNING("You cannot start grappling while already being grappled!"))
