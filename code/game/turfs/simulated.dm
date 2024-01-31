@@ -14,7 +14,10 @@
 	var/timer_id
 
 // This is not great.
-/turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
+/turf/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
+	return
+
+/turf/simulated/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
 
 	if(is_flooded(absolute = TRUE))
 		return

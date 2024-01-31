@@ -73,6 +73,10 @@
 	/// Used by exterior turfs to determine the warming effect of campfires and such.
 	var/list/affecting_heat_sources
 
+	// Fluid flow tracking vars
+	var/last_slipperiness = 0
+	var/last_flow_strength = 0
+	var/last_flow_dir = 0
 
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
@@ -214,14 +218,12 @@
 				to_chat(user, SPAN_WARNING("There is nothing to be dug out of \the [src]."))
 			return TRUE
 
-	if(ATOM_IS_OPEN_CONTAINER(W) && W.reagents)
-		var/obj/effect/fluid/F = locate() in src
-		if(F && F.reagents?.total_volume >= FLUID_PUDDLE)
-			var/taking = min(F.reagents?.total_volume, REAGENTS_FREE_SPACE(W.reagents))
-			if(taking > 0)
-				to_chat(user, SPAN_NOTICE("You fill \the [W] with [F.reagents.get_primary_reagent_name()] from \the [src]."))
-				F.reagents.trans_to(W, taking)
-				return TRUE
+	if(ATOM_IS_OPEN_CONTAINER(W) && W.reagents && reagents?.total_volume >= FLUID_PUDDLE)
+		var/taking = min(reagents.total_volume, REAGENTS_FREE_SPACE(W.reagents))
+		if(taking > 0)
+			to_chat(user, SPAN_NOTICE("You fill \the [W] with [reagents.get_primary_reagent_name()] from \the [src]."))
+			reagents.trans_to(W, taking)
+			return TRUE
 
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
@@ -636,3 +638,4 @@
 	else
 		to_chat(AM, SPAN_WARNING("Something blocks the path."))
 	return TRUE
+
