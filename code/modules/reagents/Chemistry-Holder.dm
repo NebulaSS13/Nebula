@@ -580,9 +580,9 @@ var/global/obj/temp_reagents_holder = new
 	R.touch_turf(target)
 	if(R?.total_volume <= FLUID_QDEL_POINT || QDELETED(target))
 		return
-	var/obj/effect/fluid/F = locate() in target
-	if(!F) F = new(target)
-	trans_to_holder(F.reagents, amount, multiplier, copy, defer_update = defer_update)
+	if(!target.reagents)
+		target.create_reagents(FLUID_MAX_DEPTH)
+	trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update)
 
 /datum/reagents/proc/trans_to_obj(var/obj/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
 	if(!target || !target.simulated)

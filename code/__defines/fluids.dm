@@ -7,30 +7,24 @@
 #define FLUID_MAX_DEPTH FLUID_DEEP*4 // Arbitrary max value for flooding.
 #define FLUID_PUSH_THRESHOLD 20      // Amount of flow needed to push items.
 
-// Expects /turf for T.
-#define ADD_ACTIVE_FLUID_SOURCE(T)    if(!T.changing_turf) { SSfluids.water_sources[T] = TRUE; }
-#define REMOVE_ACTIVE_FLUID_SOURCE(T) SSfluids.water_sources -= T
-
-// Expects /obj/effect/fluid for F.
-#define ADD_ACTIVE_FLUID(F)           if(!QDELETED(F)) { SSfluids.active_fluids[F] = TRUE; }
-#define REMOVE_ACTIVE_FLUID(F)        SSfluids.active_fluids -= F
-
-// Expects turf for T,
-#define UPDATE_FLUID_BLOCKED_DIRS(T) \
-	if(isnull(T.fluid_blocked_dirs)) {\
-		T.fluid_blocked_dirs = 0; \
-		for(var/obj/structure/window/W in T) { \
-			if(W.density) T.fluid_blocked_dirs |= W.dir; \
-		} \
-		for(var/obj/machinery/door/window/D in T) {\
-			if(D.density) T.fluid_blocked_dirs |= D.dir; \
-		} \
+// Expects /turf for TURF.
+#define ADD_ACTIVE_FLUID_SOURCE(TURF)    if(!TURF.changing_turf) { SSfluids.water_sources[TURF] = TRUE; }
+#define REMOVE_ACTIVE_FLUID_SOURCE(TURF) SSfluids.water_sources -= TURF
+#define ADD_ACTIVE_FLUID(TURF)           if(!QDELETED(TURF)) { SSfluids.active_fluids[TURF] = TRUE; }
+#define REMOVE_ACTIVE_FLUID(TURF)        SSfluids.active_fluids -= TURF
+#define UPDATE_FLUID_BLOCKED_DIRS(TURF)                     \
+	if(isnull(TURF.fluid_blocked_dirs)) {                   \
+		TURF.fluid_blocked_dirs = 0;                        \
+		for(var/obj/structure/window/W in TURF) {           \
+			if(W.density) TURF.fluid_blocked_dirs |= W.dir; \
+		}                                                   \
+		for(var/obj/machinery/door/window/D in TURF) {      \
+			if(D.density) TURF.fluid_blocked_dirs |= D.dir; \
+		}                                                   \
 	}
 
 // We share overlays for all fluid turfs to sync icon animation.
-#define APPLY_FLUID_OVERLAY(img_state) \
-	if(!SSfluids.fluid_images[img_state]) SSfluids.fluid_images[img_state] = image('icons/effects/liquids.dmi',img_state); \
-	add_overlay(SSfluids.fluid_images[img_state]);
+#define APPLY_FLUID_OVERLAY(img_state) if(!SSfluids.fluid_images[img_state]) SSfluids.fluid_images[img_state] = image('icons/effects/liquids.dmi',img_state); add_overlay(SSfluids.fluid_images[img_state]);
 
 #define FLUID_MAX_ALPHA 200
 #define FLUID_MIN_ALPHA 96

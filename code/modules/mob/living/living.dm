@@ -797,22 +797,21 @@ default behaviour is:
 
 /mob/living/handle_drowning()
 	var/turf/T = get_turf(src)
-	if(!can_drown() || !loc.is_flooded(lying))
+	if(!T || !can_drown() || !T.is_flooded(lying))
 		return FALSE
 	if(!lying && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
 		var/datum/reagents/metabolism/inhaled = get_inhaled_reagents()
 		var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-		var/obj/effect/fluid/F = locate() in loc
-		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [(F?.reagents && F.reagents.get_primary_reagent_name()) || "liquid"]!"))
+		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [T.reagents?.get_primary_reagent_name() || "liquid"]!"))
 		var/inhale_amount = 0
 		if(inhaled)
 			inhale_amount = rand(2,5)
-			F?.reagents?.trans_to_holder(inhaled, min(F.reagents.total_volume, inhale_amount))
+			T.reagents?.trans_to_holder(inhaled, min(T.reagents.total_volume, inhale_amount))
 		if(ingested)
 			var/ingest_amount = 5 - inhale_amount
-			F?.reagents?.trans_to_holder(ingested, min(F.reagents.total_volume, ingest_amount))
+			reagents?.trans_to_holder(ingested, min(T.reagents.total_volume, ingest_amount))
 
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.

@@ -219,9 +219,8 @@
 
 	// Cleanup pt. 2
 	chem_refs.Cut()
-	var/obj/effect/fluid/fluid = locate() in spawn_spot
-	if(fluid)
-		qdel(fluid)
+	if(spawn_spot.reagents?.total_volume)
+		spawn_spot.reagents.clear_reagents()
 		failures += "- spawn turf had fluids post-test"
 
 	// Report status.

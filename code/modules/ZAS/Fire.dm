@@ -30,9 +30,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if(!air_contents || exposed_temperature < FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 		return 0
 
-	var/obj/effect/fluid/F = locate() in src
-	if(F)
-		F.vaporize_fuel(air_contents)
+	vaporize_fuel(air_contents)
 
 	var/igniting = 0
 	if(air_contents.check_combustibility())
@@ -127,7 +125,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	// prioritize nearby fuel overlays first
 	for(var/direction in global.cardinal)
 		var/turf/enemy_tile = get_step(my_tile, direction)
-		if(istype(enemy_tile) && (locate(/obj/effect/fluid) in enemy_tile))
+		if(istype(enemy_tile) && enemy_tile.reagents)
 			enemy_tile.hotspot_expose(air_contents.temperature, air_contents.volume)
 
 	//spread
@@ -141,7 +139,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 				//if(!enemy_tile.zone.fire_tiles.len) TODO - optimize
 				var/datum/gas_mixture/acs = enemy_tile.return_air()
-				if(!acs || !acs.check_combustibility(enemy_tile.return_fluid()))
+				if(!acs || !acs.check_combustibility())
 					continue
 
 				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
