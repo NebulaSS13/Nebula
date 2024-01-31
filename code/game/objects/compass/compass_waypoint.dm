@@ -13,11 +13,11 @@
 	y = _y
 	z = _z
 	color = _color
-	compass_overlay = new 
+	compass_overlay = new
 	compass_overlay.loc = src
 
 	compass_overlay.maptext = STYLE_SMALLFONTS_OUTLINE("<center><b>|</b>\n[uppertext(name)]</center>", 9, color, COLOR_BLACK)
-	compass_overlay.add_filter("glow", 1, list(type="drop_shadow", color = "[color]" + "aa", size = 2, offset = 1,x = 0, y = 0))
+	compass_overlay.add_filter("glow", 1, list(type = "drop_shadow", color = "[color]" + "aa", size = 2, offset = 1,x = 0, y = 0))
 	compass_overlay.layer = HUD_BASE_LAYER
 	compass_overlay.plane = HUD_PLANE
 

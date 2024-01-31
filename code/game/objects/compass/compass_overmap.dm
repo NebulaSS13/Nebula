@@ -16,7 +16,7 @@
 	var/owner_color = owner.linked?.color || COLOR_WHITE
 	compass_heading_marker = new /image/compass_marker
 	compass_heading_marker.maptext = STYLE_SMALLFONTS("<center>△</center>", 7, COLOR_WHITE)
-	compass_heading_marker.add_filter("glow", 1, list("drop_shadow", color = "[owner_color]aa", size = 2, offset = 1, x = 0, y = 0))
+	compass_heading_marker.add_filter("glow", 1, list(type = "drop_shadow", color = "[owner_color]aa", size = 2, offset = 1, x = 0, y = 0))
 	compass_heading_marker.layer = HUD_BASE_LAYER
 	compass_heading_marker.plane = HUD_PLANE
 	compass_heading_marker.color = owner_color
