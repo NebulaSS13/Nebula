@@ -1299,19 +1299,19 @@
 /area/casino/casino_storage)
 "dQ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
 /obj/random/tool,
@@ -2265,8 +2265,8 @@
 /area/casino/casino_mainfloor)
 "gv" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/fancy/cigar,
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar,
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/carpet,
@@ -2825,9 +2825,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/storage/fancy/egg_box,
-/obj/item/storage/fancy/egg_box,
-/obj/item/storage/fancy/egg_box,
+/obj/item/storage/box/fancy/egg_box,
+/obj/item/storage/box/fancy/egg_box,
+/obj/item/storage/box/fancy/egg_box,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/sugar,
 /turf/simulated/floor/tiled,
@@ -3619,7 +3619,7 @@
 /area/casino/casino_mainfloor)
 "kp" = (
 /obj/structure/table/marble,
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/tiled,
@@ -4228,7 +4228,7 @@
 /area/casino/casino_private_vip)
 "lZ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/wood,

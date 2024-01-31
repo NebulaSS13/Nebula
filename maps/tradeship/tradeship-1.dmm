@@ -1104,7 +1104,7 @@
 /obj/item/stamp/clown,
 /obj/item/storage/backpack/clown,
 /obj/item/bikehorn,
-/obj/item/storage/fancy/crayons,
+/obj/item/storage/box/fancy/crayons,
 /obj/machinery/newscaster{
 	pixel_y = -32;
 	dir = 1

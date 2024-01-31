@@ -122,7 +122,7 @@
 	var/mode = 1
 
 /obj/item/pen/robopen/make_pen_description()
-	desc = "\A [stroke_colour_name] [medium_name] printing attachment with a paper naming mode."
+	desc = "\A [stroke_color_name] [medium_name] printing attachment with a paper naming mode."
 
 /obj/item/pen/robopen/attack_self(mob/user)
 

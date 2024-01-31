@@ -69,7 +69,7 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/taperecorder)
+	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/storage/box/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/taperecorder)
 	protects_against_weather = TRUE
 
 /obj/item/clothing/suit/storage/det_trench/grey

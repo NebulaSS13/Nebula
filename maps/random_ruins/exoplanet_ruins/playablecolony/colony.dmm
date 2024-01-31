@@ -2698,7 +2698,7 @@
 /area/map_template/colony/messhall)
 "fI" = (
 /obj/structure/table/woodentable_reinforced,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
@@ -3915,7 +3915,7 @@
 	dir = 1
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "hR" = (

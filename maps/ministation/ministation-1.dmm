@@ -1313,7 +1313,7 @@
 	pixel_y = 7
 	},
 /obj/item/pen,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/box/fancy/cigarettes,
 /obj/item/handcuffs,
 /obj/machinery/newscaster{
 	pixel_x = 32;
@@ -4265,7 +4265,7 @@
 /area/ministation/cafe)
 "wQ" = (
 /obj/structure/table/marble,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
@@ -5270,7 +5270,7 @@
 /obj/item/stamp/clown,
 /obj/item/storage/backpack/clown,
 /obj/item/bikehorn,
-/obj/item/storage/fancy/crayons,
+/obj/item/storage/box/fancy/crayons,
 /obj/item/poster,
 /turf/simulated/floor/plating,
 /area/ministation/maint/hydromaint)
@@ -6954,7 +6954,7 @@
 /area/ministation/hall/e2)
 "Pd" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/fancy/cigarettes{
+/obj/item/storage/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /obj/item/flame/lighter/random,

@@ -47,7 +47,7 @@
 	desc = "This robe commands authority."
 	icon = 'icons/clothing/suit/judge.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
-	allowed = list(/obj/item/storage/fancy/cigarettes,/obj/item/cash)
+	allowed = list(/obj/item/storage/box/fancy/cigarettes,/obj/item/cash)
 	flags_inv = HIDEJUMPSUIT
 
 /obj/item/clothing/suit/apron/overalls

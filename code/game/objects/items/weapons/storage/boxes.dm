@@ -29,7 +29,7 @@
 	use_sound = 'sound/effects/storage/box.ogg'
 	material = /decl/material/solid/organic/cardboard
 	obj_flags = OBJ_FLAG_HOLLOW
-	var/foldable = /obj/item/stack/material/cardstock	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
+	var/foldable = /obj/item/stack/material/cardstock
 
 /obj/item/storage/box/large
 	name = "large box"
@@ -56,11 +56,10 @@
 /obj/item/storage/box/attack_self(mob/user)
 	. = ..()
 	if(. || length(contents) || !ispath(foldable) || !istype(material))
-		return
+		return TRUE
 	var/sheet_amount = FLOOR(LAZYACCESS(matter, material.type) / SHEET_MATERIAL_AMOUNT)
 	if(sheet_amount <= 0 || !user.try_unequip(src))
-		return
-
+		return TRUE
 	to_chat(user, SPAN_NOTICE("You fold \the [src] flat."))
 	if(ispath(foldable, /obj/item/stack))
 		new foldable(get_turf(src), sheet_amount, material.type)

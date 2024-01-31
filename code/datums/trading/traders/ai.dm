@@ -48,7 +48,7 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/storage/backpack/dufflebag/syndie        = TRADER_BLACKLIST_SUB,
 		/obj/item/storage/belt/champion                    = TRADER_THIS_TYPE,
 		/obj/item/storage/briefcase                        = TRADER_THIS_TYPE,
-		/obj/item/storage/fancy                            = TRADER_SUBTYPES_ONLY,
+		/obj/item/storage/box/fancy                        = TRADER_SUBTYPES_ONLY,
 		/obj/item/storage/laundry_basket                   = TRADER_THIS_TYPE,
 		/obj/item/storage/secure/briefcase                 = TRADER_THIS_TYPE,
 		/obj/item/storage/plants                           = TRADER_THIS_TYPE,

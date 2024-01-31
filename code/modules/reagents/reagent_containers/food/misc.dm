@@ -167,7 +167,8 @@
 /obj/item/chems/food/cracker
 	name = "cracker"
 	desc = "It's a salted cracker."
-	icon_state = "cracker"
+	icon = 'icons/obj/food/cracker.dmi'
+	icon_state = ICON_STATE_WORLD
 	filling_color = "#f5deb8"
 	center_of_mass = @'{"x":17,"y":6}'
 	nutriment_desc = list("salt" = 1, "cracker" = 2)

@@ -2485,7 +2485,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /obj/effect/floor_decal/corner/red,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/main)
@@ -5138,7 +5138,7 @@
 "akU" = (
 /obj/structure/table/woodentable,
 /obj/item/ashtray/plastic,
-/obj/item/storage/fancy/cigarettes/dromedaryco,
+/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /obj/item/clothing/gloves/forensic,
 /turf/simulated/floor/carpet,
 /area/exodus/security/detectives_office)
@@ -5375,7 +5375,7 @@
 "alo" = (
 /obj/structure/rack,
 /obj/item/flame/lighter/random,
-/obj/item/storage/fancy/cigarettes/dromedaryco,
+/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /turf/simulated/floor/plating,
@@ -6652,7 +6652,7 @@
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/storage/fancy/cigarettes/dromedaryco,
+/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "anU" = (
@@ -7953,7 +7953,7 @@
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/storage/fancy/cigarettes/dromedaryco,
+/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -16768,7 +16768,7 @@
 	pixel_x = -2;
 	pixel_y = 5
 	},
-/obj/item/storage/fancy/crayons,
+/obj/item/storage/box/fancy/crayons,
 /turf/simulated/floor/lino,
 /area/exodus/chapel/office)
 "aJk" = (
@@ -20023,7 +20023,7 @@
 	name = "Prisoner's Locker"
 	},
 /obj/item/flame/lighter/zippo,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/box/fancy/cigarettes,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/prison/dorm)
 "aQb" = (
@@ -20093,7 +20093,7 @@
 /area/exodus/maintenance/arrivals)
 "aQj" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/fancy/cigarettes{
+/obj/item/storage/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /obj/random/single{
@@ -23009,8 +23009,8 @@
 /area/exodus/storage/art)
 "aWZ" = (
 /obj/structure/table,
-/obj/item/storage/fancy/crayons,
-/obj/item/storage/fancy/crayons,
+/obj/item/storage/box/fancy/crayons,
+/obj/item/storage/box/fancy/crayons,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
@@ -25371,7 +25371,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /obj/effect/floor_decal/corner/blue/three_quarters,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/bridge)
@@ -26220,7 +26220,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
-/obj/item/storage/fancy/cigarettes{
+/obj/item/storage/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -28087,7 +28087,7 @@
 /area/exodus/turret_protected/ai)
 "bhU" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
@@ -30472,7 +30472,7 @@
 	dir = 4
 	},
 /obj/structure/table/woodentable,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/bridge/meeting_room)
 "bmF" = (
@@ -50786,7 +50786,7 @@
 	pixel_y = 4
 	},
 /obj/item/clothing/glasses/welding/superior,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/box/fancy/cigarettes,
 /obj/item/book/manual/supermatter_engine,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/heads/chief)
@@ -55993,7 +55993,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/starboardsolar)
 "cmq" = (
-/obj/item/storage/fancy/vials,
+/obj/item/storage/box/fancy/vials,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -58241,7 +58241,7 @@
 "crR" = (
 /obj/structure/table,
 /obj/item/storage/box/matches,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/box/fancy/cigarettes,
 /obj/machinery/light/small{
 	dir = 8
 	},

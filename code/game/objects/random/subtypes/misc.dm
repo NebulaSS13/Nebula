@@ -89,7 +89,7 @@
 		/obj/item/pen/multi,
 		/obj/item/storage/box/matches,
 		/obj/item/stack/material/cardstock/mapped/cardboard,
-		/obj/item/storage/fancy/cigarettes,
+		/obj/item/storage/box/fancy/cigarettes,
 		/obj/item/deck/cards
 	)
 	return spawnable_choices
@@ -243,15 +243,15 @@
 
 /obj/random/smokes/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/fancy/cigarettes =                      5,
-		/obj/item/storage/fancy/cigarettes/dromedaryco =          4,
-		/obj/item/storage/fancy/cigarettes/killthroat =           1,
-		/obj/item/storage/fancy/cigarettes/luckystars =           3,
-		/obj/item/storage/fancy/cigarettes/jerichos =             3,
-		/obj/item/storage/fancy/cigarettes/menthols =             2,
-		/obj/item/storage/fancy/cigarettes/carcinomas =           3,
-		/obj/item/storage/fancy/cigarettes/professionals =        2,
-		/obj/item/storage/fancy/cigar =                           1,
+		/obj/item/storage/box/fancy/cigarettes =                      5,
+		/obj/item/storage/box/fancy/cigarettes/dromedaryco =          4,
+		/obj/item/storage/box/fancy/cigarettes/killthroat =           1,
+		/obj/item/storage/box/fancy/cigarettes/luckystars =           3,
+		/obj/item/storage/box/fancy/cigarettes/jerichos =             3,
+		/obj/item/storage/box/fancy/cigarettes/menthols =             2,
+		/obj/item/storage/box/fancy/cigarettes/carcinomas =           3,
+		/obj/item/storage/box/fancy/cigarettes/professionals =        2,
+		/obj/item/storage/box/fancy/cigar =                           1,
 		/obj/item/clothing/mask/smokable/cigarette =              2,
 		/obj/item/clothing/mask/smokable/cigarette/menthol =      2,
 		/obj/item/clothing/mask/smokable/cigarette/cigar =        1,
@@ -277,7 +277,7 @@
 		/obj/item/storage/box =                            5,
 		/obj/item/storage/box/donkpockets =                3,
 		/obj/item/storage/box/sinpockets =                 1,
-		/obj/item/storage/box/donut =                      2,
+		/obj/item/storage/box/fancy/donut =                      2,
 		/obj/item/storage/box/cups =                       3,
 		/obj/item/storage/box/mousetraps =                 4,
 		/obj/item/storage/box/engineer =                   3,

@@ -9,11 +9,11 @@
 
 /datum/stack_recipe/box/donut
 	title = "donut box"
-	result_type = /obj/item/storage/box/donut/empty
+	result_type = /obj/item/storage/box/fancy/donut/empty
 
 /datum/stack_recipe/box/egg
 	title = "egg box"
-	result_type = /obj/item/storage/fancy/egg_box/empty
+	result_type = /obj/item/storage/box/fancy/egg_box/empty
 
 /datum/stack_recipe/box/light_tubes
 	title = "light tubes box"

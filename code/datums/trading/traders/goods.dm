@@ -383,7 +383,7 @@ Sells devices, odds and ends, and medical stuff
 		/obj/item/organ/internal/kidneys        = TRADER_THIS_TYPE,
 		/obj/item/organ/internal/lungs          = TRADER_THIS_TYPE,
 		/obj/item/organ/internal/heart          = TRADER_THIS_TYPE,
-		/obj/item/storage/fancy/cigarettes      = TRADER_ALL
+		/obj/item/storage/box/fancy/cigarettes  = TRADER_ALL
 	)
 
 	possible_trading_items = list(

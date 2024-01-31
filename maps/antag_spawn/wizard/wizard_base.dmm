@@ -364,7 +364,7 @@
 /area/map_template/wizard_station)
 "aY" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

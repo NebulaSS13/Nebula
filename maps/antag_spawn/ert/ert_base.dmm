@@ -1915,7 +1915,7 @@
 /area/map_template/rescue_base/base)
 "dU" = (
 /obj/structure/table/steel,
-/obj/item/storage/fancy/cigar,
+/obj/item/storage/box/fancy/cigar,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -2835,7 +2835,7 @@
 /area/map_template/rescue_base/start)
 "fU" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/fancy/cigarettes/dromedaryco,
+/obj/item/storage/box/fancy/cigarettes/dromedaryco,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fV" = (

@@ -130,7 +130,7 @@
 		ARMOR_BIO = ARMOR_BIO_MINOR
 		)
 	hood = /obj/item/clothing/head/winterhood
-	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/chems/drinks/flask)
+	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/storage/box/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/chems/drinks/flask)
 	siemens_coefficient = 0.6
 	protects_against_weather = TRUE
 

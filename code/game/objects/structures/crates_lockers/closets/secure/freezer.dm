@@ -32,7 +32,7 @@
 	return list(
 		/obj/item/chems/drinks/milk = 6,
 		/obj/item/chems/drinks/soymilk = 4,
-		/obj/item/storage/fancy/egg_box = 4
+		/obj/item/storage/box/fancy/egg_box = 4
 	)
 
 /obj/structure/closet/secure_closet/freezer/money

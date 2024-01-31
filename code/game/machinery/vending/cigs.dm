@@ -32,15 +32,15 @@
 		/obj/item/storage/chewables/rollable/bad = 2,
 		/obj/item/storage/chewables/rollable/generic = 2,
 		/obj/item/storage/chewables/rollable/fine = 2,
-		/obj/item/storage/fancy/cigarettes = 5,
-		/obj/item/storage/fancy/cigarettes/luckystars = 2,
-		/obj/item/storage/fancy/cigarettes/jerichos = 2,
-		/obj/item/storage/fancy/cigarettes/menthols = 2,
-		/obj/item/storage/fancy/cigarettes/carcinomas = 2,
-		/obj/item/storage/fancy/cigarettes/professionals = 2,
-		/obj/item/storage/fancy/cigarettes/cigarello = 2,
-		/obj/item/storage/fancy/cigarettes/cigarello/mint = 2,
-		/obj/item/storage/fancy/cigarettes/cigarello/variety = 2,
+		/obj/item/storage/box/fancy/cigarettes = 5,
+		/obj/item/storage/box/fancy/cigarettes/luckystars = 2,
+		/obj/item/storage/box/fancy/cigarettes/jerichos = 2,
+		/obj/item/storage/box/fancy/cigarettes/menthols = 2,
+		/obj/item/storage/box/fancy/cigarettes/carcinomas = 2,
+		/obj/item/storage/box/fancy/cigarettes/professionals = 2,
+		/obj/item/storage/box/fancy/cigarettes/cigarello = 2,
+		/obj/item/storage/box/fancy/cigarettes/cigarello/mint = 2,
+		/obj/item/storage/box/fancy/cigarettes/cigarello/variety = 2,
 		/obj/item/storage/box/matches = 10,
 		/obj/item/flame/lighter/random = 4,
 		/obj/item/storage/chewables/tobacco = 2,
@@ -62,6 +62,6 @@
 	contraband = list(
 		/obj/item/flame/lighter/zippo = 4,
 		/obj/item/clothing/mask/smokable/cigarette/rolled/sausage = 3,
-		/obj/item/storage/fancy/cigar = 5,
-		/obj/item/storage/fancy/cigarettes/killthroat = 5
+		/obj/item/storage/box/fancy/cigar = 5,
+		/obj/item/storage/box/fancy/cigarettes/killthroat = 5
 	)

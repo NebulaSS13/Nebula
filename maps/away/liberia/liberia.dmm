@@ -4180,7 +4180,7 @@
 "hz" = (
 /obj/machinery/vending/cigarette{
 	dir = 1;
-	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
+	products = list(/obj/item/storage/box/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/simulated/floor/wood/walnut,
 /area/liberia/bar)
@@ -5242,7 +5242,7 @@
 /area/liberia/library)
 "kc" = (
 /obj/structure/table/woodentable/walnut,
-/obj/item/storage/box/donut,
+/obj/item/storage/box/fancy/donut,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
