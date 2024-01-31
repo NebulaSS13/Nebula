@@ -74,7 +74,7 @@
 	mouseover_highlight_dummy.plane = HUD_ABOVE_ITEM_LAYER
 	mouseover_highlight_dummy.alpha = prefs?.UI_mouseover_alpha || 255
 	mouseover_highlight_dummy.appearance_flags |= (KEEP_TOGETHER|RESET_COLOR)
-	mouseover_highlight_dummy.add_filter("glow", 1, list("drop_shadow", color = (prefs?.UI_mouseover_color || COLOR_AMBER) + "F0", size = 1, offset = 1, x = 0, y = 0))
+	mouseover_highlight_dummy.add_filter("glow", 1, list(type = "drop_shadow", color = (prefs?.UI_mouseover_color || COLOR_AMBER) + "F0", size = 1, offset = 1, x = 0, y = 0))
 
 	// Replanes the overlays to avoid explicit plane/layer setting (such as
 	// computer overlays) interfering with the ordering of the highlight.

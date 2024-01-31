@@ -202,7 +202,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	uid = gl_uid++
 	soundloop = new(list(src), TRUE)
 	update_icon()
-	add_filter("outline",1,list(type = "drop_shadow", size = 0, color = COLOR_WHITE, x = 0, y = 0))
+	add_filter("outline", 1, list(type = "drop_shadow", size = 0, color = COLOR_WHITE, x = 0, y = 0))
 
 /obj/machinery/power/supermatter/Destroy()
 	. = ..()
@@ -556,7 +556,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	if(damage_animation)
 		return
 	if(!get_filter("rays"))
-		add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
+		add_filter("rays", 1 ,list(type = "rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
 	animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
 	animate(time = 10 SECONDS, loop=-1)
 

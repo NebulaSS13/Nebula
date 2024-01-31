@@ -277,7 +277,7 @@
 	// Draw glow filter over target.
 	if(ismovable(target))
 		var/atom/movable/thing = target
-		thing.add_filter("cataloguer_glow", 1, list("drop_shadow", color = glow_colour, size = 4, offset = 1, x = 0, y = 0))
+		thing.add_filter("cataloguer_glow", 1, list(type = "drop_shadow", color = glow_colour, size = 4, offset = 1, x = 0, y = 0))
 
 	scan_beam = user.Beam(target, "scanner", time = scan_delay, maxdistance = scan_range+1, beam_color = glow_colour)
 
