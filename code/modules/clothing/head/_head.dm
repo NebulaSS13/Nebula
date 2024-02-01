@@ -70,7 +70,7 @@
 		add_overlay(light_overlay_cache[cache_key])
 	update_clothing_icon()
 
-/obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))
 		var/image/light_overlay = image(overlay.icon, "[overlay.icon_state]_light")
 		if(ishuman(user_mob))

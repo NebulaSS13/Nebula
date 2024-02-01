@@ -59,7 +59,7 @@
 	else
 		icon_state = get_world_inventory_state()
 
-/obj/item/clothing/suit/storage/toggle/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/suit/storage/toggle/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(buttons && overlay && check_state_in_icon("[overlay.icon_state]_open", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_open"
 	. = ..()

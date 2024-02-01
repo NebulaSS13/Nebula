@@ -385,7 +385,7 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/item/storage/backpack/ert/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/storage/backpack/ert/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && slot == slot_back_str && marking_state)
 		var/image/I = image(overlay.icon, "[overlay.icon_state]-[marking_state]")
 		I.color = marking_colour

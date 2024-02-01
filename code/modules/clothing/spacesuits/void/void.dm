@@ -285,7 +285,7 @@ else if(##equipment_var) {\
 /obj/item/clothing/suit/space/void/attack_self() //sole purpose of existence is to toggle the helmet
 	toggle_helmet()
 
-/obj/item/clothing/suit/space/void/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/suit/space/void/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && tank && slot == slot_back_str)
 		overlay.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
 	. = ..()

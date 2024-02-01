@@ -86,7 +86,7 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()
 
-/obj/item/clothing/head/helmet/riot/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/head/helmet/riot/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && up && check_state_in_icon("[overlay.icon_state]_up", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]_up"
 	. = ..()

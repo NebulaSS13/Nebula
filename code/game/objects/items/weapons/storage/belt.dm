@@ -40,7 +40,7 @@
 		var/mob/M = src.loc
 		M.update_inv_belt()
 
-/obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart, skip_offset = FALSE)
 	var/image/ret = ..()
 	if(ret && slot == slot_belt_str && length(contents))
 		for(var/obj/item/I in contents)

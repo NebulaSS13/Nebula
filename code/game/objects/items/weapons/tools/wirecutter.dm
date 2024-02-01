@@ -27,7 +27,7 @@
 		handle_color = pick(valid_colours)
 	add_overlay(overlay_image(icon, "[get_world_inventory_state()]_handle", handle_color, flags=RESET_COLOR))
 
-/obj/item/wirecutters/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/wirecutters/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay)
 		overlay.color = handle_color
 	. = ..()
