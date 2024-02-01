@@ -42,11 +42,12 @@
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/handle_living_non_stasis_processes()
 	. = ..()
-	if(.)
-		regen_time++
-		if(regen_time == 2 && current_health < get_max_health()) //slow regen
-			regen_time = 0
-			heal_overall_damage(1)
+	if(!.)
+		return FALSE
+	regen_time++
+	if(regen_time == 2 && current_health < get_max_health()) //slow regen
+		regen_time = 0
+		heal_overall_damage(1)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/death(gibbed, deathmessage, show_dead_message)
 	..(null, "dissipates into thin air", "You have been destroyed.")

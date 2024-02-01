@@ -74,6 +74,8 @@
 
 /mob/living/slime/handle_living_non_stasis_processes()
 	. = ..()
+	if(!.)
+		return FALSE
 	set_stat(CONSCIOUS)
 	if(prob(30))
 		adjustOxyLoss(-1, do_update_health = FALSE)

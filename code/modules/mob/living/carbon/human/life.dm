@@ -29,6 +29,9 @@
 	var/stamina = 100
 
 /mob/living/carbon/human/handle_living_non_stasis_processes()
+	. = ..()
+	if(!.)
+		return FALSE
 	last_pain = null // Clear the last cached pain value so further getHalloss() calls won't use an old value.
 	//Organs and blood
 	handle_organs()

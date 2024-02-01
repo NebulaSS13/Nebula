@@ -41,6 +41,7 @@
 	return 1
 
 /mob/living/proc/handle_living_non_stasis_processes()
+	SHOULD_CALL_PARENT(TRUE)
 	// hungy
 	handle_nutrition_and_hydration()
 	// Breathing, if applicable
