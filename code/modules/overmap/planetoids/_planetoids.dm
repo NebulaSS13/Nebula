@@ -49,7 +49,7 @@
 
 ///Update our name, and refs to match the planetoid we're representing
 /obj/effect/overmap/visitable/sector/planetoid/proc/update_from_data(var/datum/planetoid_data/P)
-	SetName("[P.name], \a [name]")
+	SetName("[P.name], \a [initial(name)]")
 	planetoid_id  = P.id
 	surface_color = P.surface_color
 	water_color   = P.water_color

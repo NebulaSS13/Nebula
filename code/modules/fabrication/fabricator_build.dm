@@ -22,16 +22,38 @@
 			step(product, output_dir)
 
 /obj/machinery/fabricator/proc/start_building()
-	if(!(fab_status_flags & FAB_BUSY) && is_functioning())
-		fab_status_flags |= FAB_BUSY
+	if(is_functioning())
 		update_use_power(POWER_USE_ACTIVE)
-		sound_token = play_looping_sound(src, sound_id, fabricator_sound, volume = 30)
 
 /obj/machinery/fabricator/proc/stop_building()
-	if(fab_status_flags & FAB_BUSY)
+	update_use_power(POWER_USE_IDLE)
+
+/obj/machinery/fabricator/power_change()
+	. = ..()
+	if(.)
+		if(stat & (BROKEN|NOPOWER))
+			stop_building()
+		else if(!currently_building)
+			get_next_build()
+		else
+			start_building()
+
+/obj/machinery/fabricator/update_use_power()
+	. = ..()
+	if(use_power == POWER_USE_ACTIVE)
+		fab_status_flags |= FAB_BUSY
+		if(!sound_token)
+			sound_token = play_looping_sound(src, sound_id, fabricator_sound, volume = 30)
+		if(!currently_building)
+			get_next_build()
+	else
 		fab_status_flags &= ~FAB_BUSY
-		update_use_power(POWER_USE_IDLE)
 		QDEL_NULL(sound_token)
+		// This is to allow people to fix the fab when it
+		// gets stuck building a recipe during power loss.
+		if(istype(currently_building))
+			queued_orders.Insert(1, currently_building)
+		currently_building = null
 
 /obj/machinery/fabricator/proc/get_next_build()
 	currently_building = null

@@ -46,14 +46,21 @@
 			add_overlay(icon_keyboard ? "[icon_keyboard]_off" : "keyboard")
 		return
 
-	if(stat & NOPOWER)
+	var/offline = (stat & NOPOWER)
+	if(!offline)
+		var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
+		if(os && !os.on)
+			offline = TRUE
+
+	if(offline)
 		set_light(0)
 		if(icon_keyboard)
 			add_overlay(image(icon,"[icon_keyboard]_off", overlay_layer))
+		if(stat & BROKEN)
+			add_overlay(image(icon,"[icon_state]_broken", overlay_layer))
 		return
-	else
-		set_light(light_range_on, light_power_on, light_color)
 
+	set_light(light_range_on, light_power_on, light_color)
 	if(stat & BROKEN)
 		add_overlay(image(icon,"[icon_state]_broken", overlay_layer))
 	else

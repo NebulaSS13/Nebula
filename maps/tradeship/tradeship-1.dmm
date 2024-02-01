@@ -199,7 +199,7 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/button/access/interior{
 	dir = 8;
-	id_tag = "tradeship_starboard_dock";
+	id_tag = "eva";
 	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/techfloor,

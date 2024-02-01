@@ -21,7 +21,7 @@
 
 /obj/item/scanner/mining/examine(mob/user)
 	. = ..()
-	to_chat(user,"A tiny indicator on the [src] shows it holds [survey_data] good explorer points.")
+	to_chat(user,"A tiny indicator on the [src] shows it holds [survey_data] good explorer point\s.")
 
 /obj/item/scanner/mining/is_valid_scan_target(turf/T)
 	return istype(T)
@@ -33,19 +33,19 @@
 		scan_data = scan_results[1]
 	else
 		scan_data += "<hr>[scan_results[1]]"
-	to_chat(user, "[html_icon(src)] <span class='notice'>\The [src] displays a readout.</span>")
+	to_chat(user, SPAN_NOTICE("[html_icon(src)] \The [src] displays a readout."))
 	to_chat(user, scan_results[1])
 
 	if(scan_results[2])
 		survey_data += scan_results[2]
 		playsound(loc, 'sound/machines/ping.ogg', 40, 1)
-		to_chat(user,"<span class='notice'>New survey data stored - [scan_results[2]] GEP.</span>")
+		to_chat(user, SPAN_NOTICE("New survey data stored - earned [scan_results[2]] GEP."))
 
 /obj/item/scanner/mining/proc/put_disk_in_hand(var/mob/M)
 	if(!survey_data)
-		to_chat(M,"<span class='warning'>There is no survey data stored on the [src].</span>")
-		return 0
-	visible_message("<span class='notice'>The [src] spits out a disk containing [survey_data] GEP.</span>")
+		to_chat(M, SPAN_WARNING("There is no survey data stored on the [src]."))
+		return FALSE
+	visible_message(SPAN_NOTICE("\The [src] spits out a disk containing [survey_data] GEP."))
 	var/obj/item/disk/survey/D = new(get_turf(src))
 	D.data = survey_data
 	survey_data = 0
@@ -63,15 +63,6 @@
 	if(M.incapacitated())
 		return
 	put_disk_in_hand(M)
-
-/obj/item/disk/survey
-	name = "survey data disk"
-	color = COLOR_DARK_BROWN
-	var/data
-
-/obj/item/disk/survey/examine(mob/user)
-	. = ..()
-	to_chat(user,"A tiny indicator on the [src] shows it holds [data] good explorer points.")
 
 //Returns list of two elements, 1 is text output, 2 is amoutn of GEP data
 /proc/mineral_scan_results(turf/target)

@@ -174,7 +174,7 @@
 		S.blend_mode = BLEND_ADD
 		add_overlay(S)
 
-/obj/item/clothing/shoes/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/shoes/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && shine > 0 && slot == slot_shoes_str)
 		var/mutable_appearance/S = mutable_appearance(overlay.icon, "shine")
 		S.alpha = 127 * shine / 100

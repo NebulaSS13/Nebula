@@ -119,7 +119,7 @@ var/global/list/registered_cyborg_weapons = list()
 	if(charge_meter)
 		update_charge_meter()
 
-/obj/item/gun/energy/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/gun/energy/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && charge_meter)
 		var/charge_state = get_charge_state(overlay.icon_state)
 		if(charge_state && check_state_in_icon(charge_state, overlay.icon))
