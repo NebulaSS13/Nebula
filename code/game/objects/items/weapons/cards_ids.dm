@@ -186,7 +186,7 @@ var/global/const/NO_EMAG_ACT = -50
 	. = ..()
 	update_icon()
 
-/obj/item/card/id/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/card/id/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && detail_color)
 		overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]-colors", detail_color, RESET_COLOR)
 	. = ..()

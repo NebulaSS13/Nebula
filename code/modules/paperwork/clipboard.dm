@@ -57,6 +57,7 @@
 		var/mutable_appearance/I = new /mutable_appearance(top_paper)
 		I.appearance_flags |= RESET_COLOR
 		I.plane = FLOAT_PLANE
+		I.layer = FLOAT_LAYER
 		I.pixel_x = 0
 		I.pixel_y = 0
 		I.pixel_w = 0

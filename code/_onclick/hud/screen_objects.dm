@@ -134,7 +134,7 @@
 				to_chat(owner, SPAN_NOTICE(summary))
 		return
 
-	owner.set_default_unarmed_attack(src)
+	owner.set_default_unarmed_attack()
 	return TRUE
 
 /obj/screen/default_attack_selector/Destroy()

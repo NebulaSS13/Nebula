@@ -123,7 +123,7 @@
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
 		icon_state = "[icon_state]-[contents_count]"
 
-/obj/item/clothing/accessory/storage/knifeharness/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/accessory/storage/knifeharness/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay)
 		var/contents_count = min(length(contents), 2)
 		if(contents_count > 0 && check_state_in_icon("[overlay.icon_state]-[contents_count]", overlay.icon))

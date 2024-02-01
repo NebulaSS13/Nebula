@@ -8,6 +8,10 @@
 	var/datum/seed/plant
 	var/harvestable
 
+/obj/structure/flora/plant/large
+	opacity = TRUE
+	density = TRUE
+
 /* Notes for future work moving logic off hydrotrays onto plants themselves:
 /obj/structure/flora/plant/Process()
 	// check our immediate environment
