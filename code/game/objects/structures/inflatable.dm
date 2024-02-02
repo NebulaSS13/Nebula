@@ -75,19 +75,21 @@
 	check_environment()
 
 /obj/structure/inflatable/proc/check_environment()
-	var/min_pressure = INFINITY
-	var/max_pressure = 0
+
+	var/turf/my_turf = get_turf(src)
+	if(!my_turf || !prob(50))
+		return
+
 	var/max_local_temp = 0
+	var/take_environment_damage = get_surrounding_pressure_differential(my_turf) > max_pressure_diff
+	if(!take_environment_damage)
+		for(var/check_dir in global.cardinal)
+			var/turf/neighbor = get_step(my_turf, check_dir)
+			if(!istype(neighbor) || (neighbor.c_airblock(loc) & AIR_BLOCKED))
+				continue
+			max_local_temp = max(max_local_temp, neighbor.return_air()?.temperature)
 
-	for(var/check_dir in global.cardinal)
-		var/turf/T = get_step(get_turf(src), check_dir)
-		var/datum/gas_mixture/env = T.return_air()
-		var/pressure = env.return_pressure()
-		min_pressure = min(min_pressure, pressure)
-		max_pressure = max(max_pressure, pressure)
-		max_local_temp = max(max_local_temp, env.temperature)
-
-	if(prob(50) && (max_pressure - min_pressure > max_pressure_diff || max_local_temp > max_temp))
+	if(take_environment_damage || max_local_temp > max_temp)
 		take_damage(1)
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

@@ -280,7 +280,7 @@
 		var/changed = 0
 		lockdown=0
 		// Pressure alerts
-		pdiff = getOPressureDifferential(src.loc)
+		pdiff = get_surrounding_pressure_differential(src.loc)
 		if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
 			lockdown = 1
 			if(!pdiff_alert)

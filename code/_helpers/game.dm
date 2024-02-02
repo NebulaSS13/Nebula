@@ -400,16 +400,20 @@
 * Gets the highest and lowest pressures from the tiles in cardinal directions
 * around us, then checks the difference.
 */
-/proc/getOPressureDifferential(var/turf/loc)
-	var/minp=16777216;
-	var/maxp=0;
+/proc/get_surrounding_pressure_differential(var/turf/loc)
+	var/minp = INFINITY
+	var/maxp = 0
+	var/has_neighbor = FALSE
 	for(var/dir in global.cardinal)
-		var/turf/T = get_step(loc,dir)
-		var/datum/gas_mixture/environment = T.return_air()
-		var/cp = environment?.return_pressure()
-		if(cp<minp)minp=cp
-		if(cp>maxp)maxp=cp
-	return abs(minp-maxp)
+		var/turf/neighbor = get_step(loc,dir)
+		if(!neighbor || (neighbor.c_airblock(loc) & AIR_BLOCKED))
+			continue
+		var/datum/gas_mixture/environment = neighbor.return_air()
+		var/cp = environment ? environment.return_pressure() : 0
+		has_neighbor = TRUE
+		minp = min(minp, cp)
+		maxp = max(maxp, cp)
+	return has_neighbor ? abs(minp-maxp) : 0
 
 /proc/convert_k2c(var/temp)
 	return ((temp - T0C))
