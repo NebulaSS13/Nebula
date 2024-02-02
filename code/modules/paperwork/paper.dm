@@ -86,16 +86,20 @@
 
 /obj/item/paper/on_update_icon()
 	. = ..()
+
 	if(is_crumpled)
 		icon_state = "scrap"
-		return //No overlays on crumpled paper
 	else
 		icon_state = initial(icon_state)
-	update_contents_overlays()
+		update_contents_overlays()
+		//The appearence is the key, the type is the value
+		for(var/image/key in applied_stamps)
+			add_overlay(key)
 
-	//The appearence is the key, the type is the value
-	for(var/image/key in applied_stamps)
-		add_overlay(key)
+	// Update clipboard/paper bundle.
+	if(istype(loc, /obj/item/clipboard) || istype(loc, /obj/item/paper_bundle))
+		compile_overlays()
+		loc.update_icon()
 
 /**Applies the overlay displayed when the paper contains some text. */
 /obj/item/paper/proc/update_contents_overlays()
@@ -299,7 +303,7 @@
 				to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
 
 /obj/item/paper/CouldNotUseTopic(mob/user)
-	to_chat(user, SPAN_WARNING("You can't do that!"))
+	to_chat(user, SPAN_WARNING("You can't reach!"))
 
 /obj/item/paper/OnTopic(mob/user, href_list, datum/topic_state/state)
 
@@ -317,9 +321,9 @@
 
 		//If we got a pen that's not in our hands, make sure to move it over
 		if(user.get_active_hand() != I && user.get_empty_hand_slot() && user.put_in_hands(I))
-			to_chat(user, SPAN_NOTICE("You grab your trusty [I]!"))
+			to_chat(user, SPAN_NOTICE("You grab your trusty [I.name]!"))
 		else if(user.get_active_hand() != I)
-			to_chat(user, SPAN_WARNING("You'd use your trusty [I], but your hands are full!"))
+			to_chat(user, SPAN_WARNING("You'd use your trusty [I.name], but your hands are full!"))
 			return TOPIC_NOACTION
 
 		var/pen_flags = I.get_tool_property(TOOL_PEN, TOOL_PROP_PEN_FLAG)

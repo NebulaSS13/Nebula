@@ -5,6 +5,9 @@
 	var/lit = FALSE
 	material = /decl/material/solid/organic/wood
 
+/obj/item/flame/get_tool_quality(archetype, property)
+	return (!lit && archetype == TOOL_CAUTERY) ? TOOL_QUALITY_NONE : ..()
+
 /obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
 	lit = FALSE
 	damtype = BRUTE

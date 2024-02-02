@@ -67,8 +67,7 @@
 
 	ingested = new /datum/reagents/metabolism(240, src, CHEM_TOUCH)
 	reagents = ingested
-	// See comment in /mob/living/slime/on_update_icon() regarding alpha mask filters.
-	//render_target = "slime_\ref[src]"
+	render_target = "slime_\ref[src]"
 
 	verbs += /mob/living/proc/ventcrawl
 	slime_type = _stype

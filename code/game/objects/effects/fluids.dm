@@ -128,16 +128,17 @@
 // Permaflood overlay.
 var/global/obj/effect/flood/flood_object = new
 /obj/effect/flood
-	name         = ""
-	icon         = 'icons/effects/liquids.dmi'
-	icon_state   = "ocean"
-	layer        = DEEP_FLUID_LAYER
-	color        = COLOR_LIQUID_WATER
-	alpha        = 140
-	invisibility = INVISIBILITY_NONE
-	simulated    = FALSE
-	density      = FALSE
-	anchored     = TRUE
+	name          = ""
+	icon          = 'icons/effects/liquids.dmi'
+	icon_state    = "ocean"
+	layer         = DEEP_FLUID_LAYER
+	color         = COLOR_LIQUID_WATER
+	alpha         = 140
+	invisibility  = 0
+	simulated     = FALSE
+	density       = FALSE
+	anchored      = TRUE
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/effect/fluid/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()

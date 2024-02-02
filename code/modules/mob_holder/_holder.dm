@@ -11,6 +11,7 @@
 	use_single_icon = TRUE
 	item_state = null
 	is_spawnable_type = FALSE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/last_holder
 
 /obj/item/holder/Initialize()
@@ -25,7 +26,7 @@
 		add_vis_contents(src, AM)
 
 // Grab our inhands from the mob we're wrapping, if they have any.
-/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, force_skip_offset = FALSE)
+/obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, force_skip_offset = FALSE, skip_offset = FALSE)
 	var/mob/M = locate() in contents
 	if(istype(M))
 		icon =  M.get_holder_icon()

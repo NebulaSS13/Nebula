@@ -22,6 +22,9 @@
 	var/smoke_effect = 0
 	var/smoke_amount = 1
 
+/obj/item/clothing/mask/smokable/get_tool_quality(archetype, property)
+	return (!lit && archetype == TOOL_CAUTERY) ? TOOL_QUALITY_NONE : ..()
+
 /obj/item/clothing/mask/smokable/dropped(mob/user)
 	. = ..()
 	if(lit)
@@ -110,7 +113,7 @@
 		M.update_equipment_overlay(slot_wear_mask_str, FALSE)
 		M.update_inhand_overlays()
 
-/obj/item/clothing/mask/smokable/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/mask/smokable/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && lit && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
 		var/image/on_overlay = emissive_overlay(overlay.icon, "[overlay.icon_state]-on")
 		on_overlay.appearance_flags |= RESET_COLOR

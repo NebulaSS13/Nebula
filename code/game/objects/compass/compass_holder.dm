@@ -54,7 +54,7 @@ var/global/list/angle_step_to_dir = list(
 		M.Translate(0, get_label_offset())
 		M.Turn(effective_compass_period * i)
 		I.transform = M
-		I.add_filter("glow", 1, list("drop_shadow", color = "#77777777", size = 2, offset = 1,x = 0, y = 0))
+		I.add_filter("glow", 1, list(type = "drop_shadow", color = "#77777777", size = 2, offset = 1,x = 0, y = 0))
 		I.layer = HUD_BASE_LAYER
 		I.plane = HUD_PLANE
 		LAZYADD(compass_static_labels, I)

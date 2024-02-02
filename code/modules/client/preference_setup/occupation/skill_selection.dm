@@ -192,8 +192,7 @@
 	dat += "<table>"
 	var/decl/hierarchy/skill/skill = GET_DECL(/decl/hierarchy/skill)
 	for(var/decl/hierarchy/skill/cat in skill.children)
-		dat += "<tr><th colspan = 4><b>[cat.name]</b>"
-		dat += "</th></tr>"
+		dat += "<tr><th colspan = 4><b>[cat.name]</b></th></tr>"
 		for(var/decl/hierarchy/skill/S in cat.children)
 			dat += get_skill_row(job, S)
 			for(var/decl/hierarchy/skill/perk in S.children)
@@ -207,7 +206,7 @@
 	var/level = min + (pref.skills_allocated[job] ? pref.skills_allocated[job][S] : 0)				//the current skill level
 	var/cap = pref.get_max_affordable(job, S) //if selecting the skill would make you overspend, it won't be shown
 	dat += "<tr style='text-align:left;'>"
-	dat += "<th><a href='?src=\ref[src];skillinfo=\ref[S]'>[S.name] ([pref.get_spent_points(job, S)])</a></th>"
+	dat += "<td><a href='?src=\ref[src];skillinfo=\ref[S]'>[S.name] ([pref.get_spent_points(job, S)])</a></td>"
 	for(var/i = SKILL_MIN, i <= SKILL_MAX, i++)
 		dat += skill_to_button(S, job, level, i, min, cap)
 	dat += "</tr>"
@@ -222,20 +221,20 @@
 	var/offset = skill.prerequisites ? skill.prerequisites[skill.parent.type] - 1 : 0
 	var/effective_level = selection_level - offset
 	if(effective_level <= 0 || effective_level > length(skill.levels))
-		return "<th></th>"
+		return "<td></td>"
 	var/level_name = skill.levels[effective_level]
 	var/cost = skill.get_cost(effective_level)
 	var/button_label = "[level_name] ([cost])"
 	if(effective_level < min)
-		return "<th><span class='Unavailable'>[button_label]</span></th>"
+		return "<td><span class='Unavailable'>[button_label]</span></td>"
 	else if(effective_level < current_level)
-		return "<th>[add_link(skill, job, button_label, "'Current'", effective_level)]</th>"
+		return "<td>[add_link(skill, job, button_label, "'Current'", effective_level)]</td>"
 	else if(effective_level == current_level)
-		return "<th><span class='Current'>[button_label]</span></th>"
+		return "<td><span class='Current'>[button_label]</span></td>"
 	else if(effective_level <= max)
-		return "<th>[add_link(skill, job, button_label, "'Selectable'", effective_level)]</th>"
+		return "<td>[add_link(skill, job, button_label, "'Selectable'", effective_level)]</td>"
 	else
-		return "<th><span class='Toohigh'>[button_label]</span></th>"
+		return "<td><span class='Toohigh'>[button_label]</span></td>"
 
 /datum/category_item/player_setup_item/occupation/proc/add_link(decl/hierarchy/skill/skill, datum/job/job, text, style, value)
 	if(pref.check_skill_prerequisites(job, skill))

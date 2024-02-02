@@ -19,12 +19,26 @@
 	slot_flags = SLOT_EARS
 	sharp = 1
 	item_flags = ITEM_FLAG_NO_BLUDGEON
+
 	var/mode = SYRINGE_DRAW
 	var/visible_name = "a syringe"
 	var/time = 30
+	var/autolabel = TRUE // if set, will add label with the name of the first initial reagent
 	var/can_stab = TRUE
 
 /obj/item/chems/syringe/Initialize(var/mapload)
+	. = ..()
+	update_icon()
+
+/obj/item/chems/syringe/populate_reagents()
+	SHOULD_CALL_PARENT(TRUE)
+	. = ..()
+	if(reagents.total_volume > 0 && autolabel && !label_text) // don't override preset labels
+		label_text = reagents.get_primary_reagent_name()
+		update_container_name()
+
+
+/obj/item/chems/syringe/on_reagent_change()
 	. = ..()
 	update_icon()
 
@@ -309,9 +323,11 @@
 	visible_name = "a giant syringe"
 	time = 300
 	mode = SYRINGE_INJECT
+	autolabel = FALSE
 	can_stab = FALSE
 
 /obj/item/chems/syringe/ld50_syringe/populate_reagents()
+	SHOULD_CALL_PARENT(FALSE)
 	reagents.add_reagent(/decl/material/liquid/heartstopper, reagents.maximum_volume)
 
 /obj/item/chems/syringe/ld50_syringe/drawReagents(var/target, var/mob/user)
@@ -325,31 +341,30 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /obj/item/chems/syringe/stabilizer
-	name = "syringe (stabilizer)"
 	desc = "Contains stabilizer - for patients in danger of brain damage."
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/stabilizer/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	return ..()
 
 /obj/item/chems/syringe/antitoxin
-	name = "syringe (anti-toxin)"
 	desc = "Contains anti-toxins."
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/antitoxin/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	return ..()
 
 /obj/item/chems/syringe/antibiotic
-	name = "syringe (antibiotics)"
 	desc = "Contains antibiotic agents."
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/antibiotic/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antibiotics, reagents.maximum_volume)
+	return ..()
 
 /obj/item/chems/syringe/drugs
-	name = "syringe (drugs)"
 	desc = "Contains aggressive drugs meant for torture."
 	mode = SYRINGE_INJECT
 
@@ -358,9 +373,9 @@
 	reagents.add_reagent(/decl/material/liquid/psychoactives,   vol_each)
 	reagents.add_reagent(/decl/material/liquid/hallucinogenics, vol_each)
 	reagents.add_reagent(/decl/material/liquid/presyncopics,    vol_each)
+	return ..()
 
 /obj/item/chems/syringe/steroid
-	name = "syringe (anabolic steroids)"
 	desc = "Contains drugs for muscle growth."
 	mode = SYRINGE_INJECT
 
@@ -368,6 +383,7 @@
 	var/vol_third = round(reagents.maximum_volume/3)
 	reagents.add_reagent(/decl/material/liquid/adrenaline,   vol_third)
 	reagents.add_reagent(/decl/material/liquid/amphetamines, 2 * vol_third)
+	return ..()
 
 // TG ports
 

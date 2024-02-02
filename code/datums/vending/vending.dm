@@ -6,13 +6,11 @@
  */
 
 /datum/stored_items/vending_products
-	item_name = "generic" // Display name for the product
-	var/price = 0              // Price to buy one
-	var/display_color = null   // Display color for vending machine listing
-	var/category = CAT_NORMAL  // CAT_HIDDEN for contraband
-
-/datum/stored_items/vending_products/New(var/atom/storing_object, var/path, var/name = null, var/amount = 0, var/price = 0, var/color = null, var/category = CAT_NORMAL)
-	..()
-	src.price = price
-	src.display_color = color
-	src.category = category
+	/// Display name for the product
+	item_name = "generic"
+	/// Price to buy one
+	var/price = 0
+	/// Display color for vending machine listing
+	var/display_color = null
+	// CAT_HIDDEN for contraband
+	var/category = CAT_NORMAL

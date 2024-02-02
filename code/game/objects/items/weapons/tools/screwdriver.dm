@@ -28,7 +28,7 @@
 		handle_color = pick(valid_colours)
 	add_overlay(mutable_appearance(icon, "[get_world_inventory_state()]_handle", handle_color))
 
-/obj/item/screwdriver/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/screwdriver/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay)
 		overlay.color = handle_color
 	. = ..()

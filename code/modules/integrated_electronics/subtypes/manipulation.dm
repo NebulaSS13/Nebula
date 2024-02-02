@@ -111,7 +111,7 @@
 	//Shooting Code:
 	A.shot_from = assembly.name
 	A.firer = assembly
-	A.launch(target, BP_CHEST)
+	A.launch(target)
 	return A
 
 /obj/item/integrated_circuit/manipulation/locomotion
