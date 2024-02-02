@@ -67,17 +67,17 @@
 /obj/item/clothing/proc/needs_vision_update()
 	return flash_protection || tint
 
-/obj/item/clothing/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 
 	if(overlay)
+
+		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
+			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
 
 		if(length(accessories))
 			for(var/obj/item/clothing/accessory/A in accessories)
 				if(A.should_overlay())
-					overlay.overlays += A.get_mob_overlay(user_mob, slot)
-
-		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
-			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
+					overlay.overlays += A.get_mob_overlay(user_mob, slot, skip_offset = TRUE)
 
 		if(!(slot in user_mob?.get_held_item_slots()))
 			if(blood_DNA)

@@ -19,7 +19,7 @@
 /obj/item/clothing/suit/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
 	return TRUE
 
-/obj/item/clothing/suit/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/clothing/suit/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && item_state)
 		overlay.icon_state = item_state
 	. = ..()

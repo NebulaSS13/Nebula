@@ -334,10 +334,12 @@
 
 	return 1
 
-/mob/living/carbon/human/verb/set_default_unarmed_attack(var/atom/radial_target)
+/mob/living/carbon/human/verb/set_default_unarmed_attack()
+
 	set name = "Set Default Unarmed Attack"
 	set category = "IC"
 	set src = usr
+
 	var/list/choices
 	for(var/thing in get_natural_attacks())
 		var/decl/natural_attack/u_attack = GET_DECL(thing)
@@ -345,7 +347,7 @@
 			var/image/radial_button = new
 			radial_button.name = capitalize(u_attack.name)
 			LAZYSET(choices, u_attack, radial_button)
-	var/decl/natural_attack/new_attack = show_radial_menu(src, (radial_target || src), choices, radius = 42, use_labels = TRUE)
+	var/decl/natural_attack/new_attack = show_radial_menu(src, (attack_selector || src), choices, radius = 42, use_labels = TRUE)
 	if(QDELETED(src) || !istype(new_attack) || !(new_attack.type in get_natural_attacks()))
 		return
 	default_attack = new_attack

@@ -22,6 +22,7 @@
 #define TOOL_SURGICAL_DRILL /decl/tool_archetype/surgical_drill
 
 // Tool qualities (positive multplier)
+#define TOOL_QUALITY_NONE     0
 #define TOOL_QUALITY_WORST    0.1
 #define TOOL_QUALITY_BAD      0.5
 #define TOOL_QUALITY_MEDIOCRE 0.75

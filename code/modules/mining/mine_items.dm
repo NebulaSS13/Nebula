@@ -64,7 +64,7 @@
 /obj/item/pickaxe/proc/get_initial_tool_qualities()
 	return list(TOOL_SHOVEL = TOOL_QUALITY_MEDIOCRE)
 
-/obj/item/pickaxe/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/pickaxe/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && build_from_parts && check_state_in_icon("[overlay.icon_state]-handle", overlay.icon))
 		var/image/handle = image(overlay.icon, "[overlay.icon_state]-handle")
 		handle.appearance_flags |= RESET_COLOR

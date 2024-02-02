@@ -1,28 +1,45 @@
-// Can't think of a good way to get gun price from projectile (due to 
+// Can't think of a good way to get gun price from projectile (due to
 // firemodes, projectile types, etc) so this'll have to  do for now.
 /obj/item/gun/get_base_value()
 	. = 100
+	if(silenced)
+		. += 20
+
+	var/static/list/vars_to_value = list(
+		"one_hand_penalty" = -2,
+		"bulk"             = -5,
+		"accuracy"         =  10,
+		"scoped_accuracy"  =  5
+	)
+
+	var/list/max_vars_to_value = list(
+		"one_hand_penalty" =  one_hand_penalty,
+		"bulk"             =  bulk,
+		"accuracy"         =  accuracy,
+		"scoped_accuracy"  =  scoped_accuracy
+	)
+
+	for(var/datum/firemode/F in firemodes)
+		for(var/varname in vars_to_value)
+			if(varname in F.settings)
+				max_vars_to_value[varname] = max(max_vars_to_value[varname], F.settings[varname])
+
+	for(var/varname in max_vars_to_value)
+		. += max_vars_to_value[varname] * vars_to_value[varname]
+
+	var/has_autofire = autofire_enabled
+	if(!has_autofire)
+		for(var/datum/firemode/F in firemodes)
+			if(F.settings["autofire_enabled"])
+				has_autofire = TRUE
+				break
+	if(has_autofire)
+		. += 100
+
+	. *= 10
 
 /obj/item/gun/energy/get_base_value()
 	. = 150
-
-/obj/item/gun/get_base_value()
-	. = 0
-	if(silenced)
-		. += 20
-	. += one_hand_penalty * -2
-	. += bulk * -5
-	. += accuracy * 10
-	. += scoped_accuracy * 5
-	if(!autofire_enabled)
-		for(var/datum/firemode/F in firemodes)
-			if(F.settings["autofire_enabled"])
-				. += 100
-	. *= 10
-	. += ..()
-
-/obj/item/gun/energy/get_base_value()
-	. = ..()
 	if(self_recharge)
 		. += 100
 	var/projectile_value = 1

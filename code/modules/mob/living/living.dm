@@ -521,12 +521,14 @@ default behaviour is:
 		if(QDELETED(G) || QDELETED(G.affecting))
 			mygrabs -= G
 
-	if(!length(mygrabs))
-		return
-
 	if(length(grabbed_by))
+		for(var/obj/item/grab/G as anything in grabbed_by)
+			G.adjust_position()
 		reset_offsets()
 		reset_plane_and_layer()
+
+	if(!length(mygrabs))
+		return
 
 	if(direction & (UP|DOWN))
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"

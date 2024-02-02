@@ -19,6 +19,8 @@ var/global/list/station_bookcases = list()
 		global.station_bookcases += src
 	get_or_create_extension(src, /datum/extension/labels/single)
 	. = ..()
+	if(length(contents))
+		update_icon()
 
 /obj/structure/bookcase/Destroy()
 	global.station_bookcases -= src
@@ -50,18 +52,16 @@ var/global/list/station_bookcases = list()
 	name = "Medical Manuals bookcase"
 
 /obj/structure/bookcase/manuals/medical/Initialize()
-	. = ..()
 	new /obj/item/book/manual/medical_diagnostics_manual(src)
 	new /obj/item/book/manual/medical_diagnostics_manual(src)
 	new /obj/item/book/manual/medical_diagnostics_manual(src)
 	new /obj/item/book/manual/chemistry_recipes(src)
-	update_icon()
+	. = ..()
 
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
 /obj/structure/bookcase/manuals/engineering/Initialize()
-	. = ..()
 	new /obj/item/book/manual/engineering_construction(src)
 	new /obj/item/book/manual/engineering_particle_accelerator(src)
 	new /obj/item/book/manual/engineering_hacking(src)
@@ -70,7 +70,7 @@ var/global/list/station_bookcases = list()
 	new /obj/item/book/manual/engineering_singularity_safety(src)
 	new /obj/item/book/manual/evaguide(src)
 	new /obj/item/book/manual/rust_engine(src)
-	update_icon()
+	. = ..()
 
 /obj/structure/bookcase/cart
 	name = "book cart"

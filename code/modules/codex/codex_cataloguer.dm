@@ -114,7 +114,7 @@
 /obj/item/cataloguer/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(loaded_disk)
-		to_chat(user, "It has \a [loaded_disk] slotted into the storage port. The display indicates it currently holds [loaded_disk.data] Good Explorer Point\s.")
+		to_chat(user, "It has \a [loaded_disk] slotted into the storage port. The display indicates it currently holds [loaded_disk.data] good explorer point\s.")
 
 /obj/item/cataloguer/proc/stop_scan(var/interrupted = TRUE, var/mob/user, var/fade_out = 0)
 
@@ -195,7 +195,7 @@
 	// Draw glow filter over target.
 	if(ismovable(target))
 		var/atom/movable/thing = target
-		thing.add_filter("cataloguer_glow", 1, list("drop_shadow", color = glow_colour, size = 4, offset = 1, x = 0, y = 0))
+		thing.add_filter("cataloguer_glow", 1, list(type = "drop_shadow", color = glow_colour, size = 4, offset = 1, x = 0, y = 0))
 
 	scan_beam = user.Beam(target, "scanner", time = scan_delay, maxdistance = scan_range+1, beam_color = glow_colour)
 
@@ -209,4 +209,4 @@
 		var/datum/codex_entry/scannable/scan_result = scannable.scanned()
 		if(scan_result)
 			loaded_disk.data += scan_result.worth_points
-			to_chat(user, SPAN_NOTICE("You complete the scan of \the [target], earning [scan_result.worth_points] Good Explorer Point\s."))
+			to_chat(user, SPAN_NOTICE("You complete the scan of \the [target], earning [scan_result.worth_points] good explorer point\s."))

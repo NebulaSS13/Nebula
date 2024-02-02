@@ -31,7 +31,6 @@
 /obj/item/flashlight/proc/get_emissive_overlay_color()
 	return COLOR_WHITE // Icons are usually coloured already.
 
-
 /obj/item/flashlight/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
@@ -43,6 +42,10 @@
 			I.appearance_flags |= RESET_COLOR
 			I.pixel_x = offset_on_overlay_x
 			I.pixel_y = offset_on_overlay_y
+			I.pixel_w = 0
+			I.pixel_z = 0
+			I.plane = FLOAT_PLANE
+			I.layer = FLOAT_LAYER
 			add_overlay(I)
 
 /obj/item/flashlight/attack_self(mob/user)
@@ -80,6 +83,11 @@
 	if(light_wedge)
 		set_dir(user.dir)
 		update_light()
+	update_icon()
+
+/obj/item/flashlight/equipped(mob/user, slot)
+	. = ..()
+	update_icon()
 
 /obj/item/flashlight/throw_at()
 	. = ..()
@@ -167,7 +175,7 @@
 
 	//if someone wants to implement inspecting robot eyes here would be the place to do it.
 
-/obj/item/flashlight/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE)
+/obj/item/flashlight/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_offset = FALSE)
 	if(overlay && on)
 		var/icon_state_on = "[overlay.icon_state]-on"
 		if(check_state_in_icon(icon_state_on, overlay.icon))

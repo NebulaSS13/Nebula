@@ -139,6 +139,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	if(lying && (root_bodytype.prone_overlay_offset[1] || root_bodytype.prone_overlay_offset[2]))
 		M.Translate(root_bodytype.prone_overlay_offset[1], root_bodytype.prone_overlay_offset[2])
 
+	var/mangle_planes = FALSE
 	for(var/i = 1 to LAZYLEN(visible_overlays))
 		var/entry = visible_overlays[i]
 		if(istype(entry, /image))
@@ -146,11 +147,18 @@ Please contact me on #coderbus IRC. ~Carn x
 			if(i != HO_DAMAGE_LAYER)
 				overlay.transform = M
 			add_overlay(entry)
+			mangle_planes = mangle_planes || overlay.plane >= ABOVE_LIGHTING_PLANE
 		else if(islist(entry))
 			for(var/image/overlay in entry)
 				if(i != HO_DAMAGE_LAYER)
 					overlay.transform = M
 				add_overlay(overlay)
+				mangle_planes = mangle_planes || overlay.plane >= ABOVE_LIGHTING_PLANE
+
+	if(mangle_planes)
+		z_flags |= ZMM_MANGLE_PLANES
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 	for(var/i = 1 to LAZYLEN(visible_underlays))
 		var/entry = visible_underlays[i]

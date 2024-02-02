@@ -63,7 +63,7 @@
 /datum/appearance_descriptor/proc/get_mob_scale_adjustments(var/offset_value)
 	return
 
-/datum/appearance_descriptor/proc/get_mob_overlay(var/mob/applying, var/offset_value)
+/datum/appearance_descriptor/proc/get_mob_appearance_overlay(var/mob/applying, var/offset_value)
 	return
 
 /datum/appearance_descriptor/proc/get_third_person_message_start(var/decl/pronouns/my_gender)

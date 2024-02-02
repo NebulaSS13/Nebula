@@ -74,16 +74,17 @@
 
 /mob/living/simple_animal/hostile/vagrant/on_update_icon()
 	..()
-	if(cloaked) //It's fun time
-		alpha = 75
-		set_light(0)
-		icon_state = initial(icon_state)
-		move_to_delay = initial(move_to_delay)
-	else //It's fight time
-		alpha = 255
-		icon_state += "-glowing"
-		set_light(3, 0.2)
-		move_to_delay = 2
+	if(stat == CONSCIOUS)
+		if(cloaked) //It's fun time
+			alpha = 75
+			set_light(0)
+			icon_state = initial(icon_state)
+			move_to_delay = initial(move_to_delay)
+		else //It's fight time
+			alpha = 255
+			icon_state += "-glowing"
+			set_light(3, 0.2)
+			move_to_delay = 2
 
 /mob/living/simple_animal/hostile/vagrant/AttackingTarget()
 	. = ..()

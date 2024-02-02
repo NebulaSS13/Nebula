@@ -132,7 +132,7 @@
 	var/weakref/source
 
 /obj/effect/projection/on_update_icon()
-	add_filter("glow", 1, list("drop_shadow", color = COLOR_WHITE, size = 4, offset = 1,x = 0, y = 0))
+	add_filter("glow", 1, list(type = "drop_shadow", color = COLOR_WHITE, size = 4, offset = 1,x = 0, y = 0))
 	project_icon()
 
 /obj/effect/projection/proc/project_icon()
