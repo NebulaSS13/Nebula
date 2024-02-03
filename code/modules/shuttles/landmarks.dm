@@ -144,7 +144,7 @@ var/global/list/shuttle_landmarks = list()
 	for(var/turf/T in range(radius, src))
 		if(T.density)
 			T.ChangeTurf(get_base_turf_by_area(T))
-		T.turf_flags |= TURF_FLAG_NORUINS
+		T.turf_flags |= TURF_FLAG_NO_POINTS_OF_INTEREST
 
 //Used for custom landing locations. Self deletes after a shuttle leaves.
 /obj/effect/shuttle_landmark/temporary

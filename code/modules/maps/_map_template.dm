@@ -27,6 +27,8 @@
 	var/template_parent_type = /datum/map_template
 	///The initial type of level_data to instantiate new z-level with initially. (Is replaced by whatever is in the map file.) If null, will use default.
 	var/level_data_type
+	/// Various tags used for selecting templates for placement on a map.
+	var/template_tags = 0
 
 /datum/map_template/New(var/created_ad_hoc)
 	if(created_ad_hoc != SSmapping.type)
@@ -43,8 +45,8 @@
 /datum/map_template/proc/get_template_cost()
 	return 0
 
-/datum/map_template/proc/get_ruin_tags()
-	return 0
+/datum/map_template/proc/get_template_tags()
+	return template_tags
 
 /datum/map_template/proc/preload_size()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
@@ -99,7 +101,7 @@
 
 	for (var/turf/T as anything in turfs)
 		if(template_flags & TEMPLATE_FLAG_NO_RUINS)
-			T.turf_flags |= TURF_FLAG_NORUINS
+			T.turf_flags |= TURF_FLAG_NO_POINTS_OF_INTEREST
 		if(template_flags & TEMPLATE_FLAG_NO_RADS)
 			qdel(SSradiation.sources_assoc[T])
 		if(istype(T,/turf/simulated))

@@ -288,17 +288,38 @@
 //
 // Level Load/Gen
 //
+/// Helper proc for subtemplate generation.
+/datum/level_data/proc/get_subtemplate_budget()
+	return 0
+/// Helper proc for subtemplate generation.
+/datum/level_data/proc/get_subtemplate_category()
+	return
+/// Helper proc for subtemplate generation.
+/datum/level_data/proc/get_subtemplate_blacklist()
+	return
+/// Helper proc for subtemplate generation.
+/datum/level_data/proc/get_subtemplate_whitelist()
+	return
 
 ///Called when setting up the level. Apply generators and anything that modifies the turfs of the level.
 /datum/level_data/proc/generate_level()
+
 	if(!get_config_value(/decl/config/toggle/roundstart_level_generation))
 		return
+
 	var/origx = level_inner_min_x
 	var/origy = level_inner_min_y
 	var/endx  = level_inner_min_x + level_inner_width
 	var/endy  = level_inner_min_y + level_inner_height
+
+	// Run level generators.
 	for(var/gen_type in level_generators)
 		new gen_type(origx, origy, level_z, endx, endy, FALSE, TRUE, get_base_area_instance())
+
+	// Place points of interest.
+	var/budget = get_subtemplate_budget()
+	if(budget)
+		spawn_subtemplates(budget, get_subtemplate_category(), get_subtemplate_blacklist(), get_subtemplate_whitelist())
 
 ///Apply the parent entity's map generators. (Planets generally)
 ///This proc is to give a chance to level_data subtypes to individually chose to ignore the parent generators.
@@ -592,3 +613,90 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 		CHECK_TICK
 	mining_turfs = null
 
+/datum/level_data/proc/get_subtemplate_areas(template_category, blacklist, whitelist)
+	return list(base_area)
+
+///Try to allocate the given amount of POIs onto our level. Returns the template types that were spawned
+/datum/level_data/proc/spawn_subtemplates(budget = 0, template_category, blacklist, whitelist)
+
+	if(budget <= 0)
+		return
+
+	var/list/possible_subtemplates = list()
+	var/list/all_subtemplates = SSmapping.get_templates_by_category(template_category)
+	for(var/poi_name in all_subtemplates)
+		var/datum/map_template/poi = all_subtemplates[poi_name]
+		var/poi_tags = poi.get_template_tags()
+		if(whitelist && !(whitelist & poi_tags))
+			continue
+		if(blacklist & poi_tags)
+			continue
+		possible_subtemplates += poi
+
+	if(!length(possible_subtemplates))
+		return //If we don't have any templates, don't bother
+
+	if(!length(possible_subtemplates))
+		log_world("Map subtemplate loader was given no templates to pick from.")
+		return
+
+	var/list/areas_whitelist = get_subtemplate_areas(template_category, blacklist, whitelist)
+	var/list/candidate_points_of_interest = possible_subtemplates.Copy()
+	//Each iteration needs to either place a subtemplate or strictly decrease either the budget or templates list length (or break).
+	while(length(candidate_points_of_interest) && (budget > 0))
+		var/datum/map_template/R = pick(candidate_points_of_interest)
+		if((R.get_template_cost() <= budget) && !LAZYISIN(SSmapping.banned_template_names, R.name) && try_place_subtemplate(R, areas_whitelist))
+			LAZYADD(., R)
+			budget -= R.get_template_cost()
+			//Mark spawned no-duplicate POI globally
+			if(!(R.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+				LAZYDISTINCTADD(SSmapping.banned_template_names, R.name)
+		candidate_points_of_interest -= R
+
+	if(budget > 0)
+		log_world("Map subtemplate loader had no templates to pick from with [budget] left to spend.")
+
+///Attempts several times to find turfs where a subtemplate can be placed.
+/datum/level_data/proc/try_place_subtemplate(var/datum/map_template/template, var/list/area_whitelist)
+	//#FIXME: Isn't trying to fit in a subtemplate by rolling randomly a bit inneficient?
+	// Try to place it
+	var/template_full_width  = (2 * TEMPLATE_TAG_MAP_EDGE_PAD) + template.width
+	var/template_full_height = (2 * TEMPLATE_TAG_MAP_EDGE_PAD) + template.height
+	if((template_full_width > level_inner_width) || (template_full_height > level_inner_height)) // Too big and will never fit.
+		return //Return if it won't even fit on the entire level
+
+	var/template_half_width  = TEMPLATE_TAG_MAP_EDGE_PAD + round(template.width/2)  //Half the template size plus the map edge spacing, for testing from the centerpoint
+	var/template_half_height = TEMPLATE_TAG_MAP_EDGE_PAD + round(template.height/2)
+	//Try to fit it in somehwere a few times, then give up if we can't
+	var/sanity = 20
+	while(sanity > 0)
+		sanity--
+		//Pick coordinates inside the level's border within which the template will fit. Including the extra template spacing from the level's borders.
+		var/cturf_x = rand(level_inner_min_x + template_half_width,  level_inner_max_x - template_half_width)
+		var/cturf_y = rand(level_inner_min_y + template_half_height, level_inner_max_y - template_half_height)
+		var/turf/T  = locate(cturf_x, cturf_y, level_z)
+		var/valid   = TRUE
+
+		//#TODO: There's definitely a way to cache what turfs use an area, to avoid doing this for every single templates!
+		//       Could also probably cache TURF_FLAG_NO_POINTS_OF_INTEREST turfs globally.
+		var/list/affected_turfs = template.get_affected_turfs(T, TRUE)
+		for(var/turf/test_turf in affected_turfs)
+			var/area/A = get_area(test_turf)
+			if((length(area_whitelist) && !is_type_in_list(A, area_whitelist)) || (test_turf.turf_flags & TURF_FLAG_NO_POINTS_OF_INTEREST))
+				valid = FALSE
+				break //Break out of the turf check loop, and grab a new set of coordinates
+		if(!valid)
+			continue
+		log_world("Spawned template \"[template.name]\", center: ([T.x], [T.y], [T.z]), min: ([T.x - template_half_width], [T.y - template_half_height]), max: ([T.x + template_half_width], [T.y + template_half_height])")
+		load_subtemplate(T, template)
+		return template
+
+///Actually handles loading a template template at the given turf.
+/datum/level_data/proc/load_subtemplate(turf/central_turf, datum/map_template/template)
+	if(!template)
+		return FALSE
+	for(var/turf/T in template.get_affected_turfs(central_turf, TRUE))
+		for(var/mob/living/simple_animal/monster in T)
+			qdel(monster)
+	template.load(central_turf, centered = TRUE)
+	return TRUE

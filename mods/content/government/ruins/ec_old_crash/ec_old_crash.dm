@@ -8,7 +8,7 @@
 		/area/map_template/ecship/engine = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/ecship/cockpit = NO_SCRUBBER|NO_APC
 	)
-	ruin_tags = RUIN_HUMAN|RUIN_WRECK
+	template_tags = TEMPLATE_TAG_HUMAN|TEMPLATE_TAG_WRECK
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 
 /area/map_template/ecship/crew
