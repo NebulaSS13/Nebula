@@ -121,6 +121,7 @@ var/global/list/icon_state_cache = list()
 			adjusted_overlay.plane =            I.plane
 			adjusted_overlay.layer =            I.layer
 			overlay.overlays += adjusted_overlay
+	return overlay
 
 //Special proc belts use to compose their icon
 /obj/item/proc/get_on_belt_overlay()
