@@ -255,7 +255,7 @@ SUBSYSTEM_DEF(zcopy)
 		if (!T.below)
 			ZM_RECORD_START
 			flush_z_state(T)
-			if (T.z_flags & ZM_MIMIC_BASETURF)
+			if (T.z_flags & ZM_OVERRIDE)
 				simple_appearance_copy(T, get_base_turf_by_area(T), OPENTURF_MAX_PLANE)
 			else
 				simple_appearance_copy(T, SSskybox.dust_cache["[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"])
@@ -287,7 +287,7 @@ SUBSYSTEM_DEF(zcopy)
 		// Get the bottom-most turf, the one we want to mimic.
 		// Baseturf mimics act as false bottoms of the stack.
 		var/turf/Td = T
-		while (Td.below && !(Td.z_flags & ZM_MIMIC_BASETURF))
+		while (Td.below && !(Td.z_flags & (ZM_OVERRIDE|ZM_TERMINATOR)))
 			Td = Td.below
 
 		// Depth must be the depth of the *visible* turf, not self.
@@ -297,9 +297,9 @@ SUBSYSTEM_DEF(zcopy)
 		var/t_target = OPENTURF_MAX_PLANE - turf_depth	// This is where the turf (but not the copied atoms) gets put.
 
 		// Turf is set to mimic baseturf, handle that and bail.
-		if (T.z_flags & ZM_MIMIC_BASETURF)
+		if (T.z_flags & ZM_OVERRIDE)
 			flush_z_state(T)
-			simple_appearance_copy(T, get_base_turf_by_area(T), t_target)
+			simple_appearance_copy(T, Td.z_appearance || get_base_turf_by_area(T), t_target)
 
 			if (T.above)
 				T.above.update_mimic()
@@ -316,7 +316,7 @@ SUBSYSTEM_DEF(zcopy)
 				break
 			continue
 
-		// If we previously were ZM_MIMIC_BASETURF, there might be an orphaned proxy.
+		// If we previously were ZM_OVERRIDE, there might be an orphaned proxy.
 		else if (T.mimic_underlay)
 			QDEL_NULL(T.mimic_underlay)
 
@@ -325,17 +325,11 @@ SUBSYSTEM_DEF(zcopy)
 			T.z_eventually_space = TRUE
 			t_target = SPACE_PLANE
 
-		var/appearance_target
-		if (T.below.z_flags & ZM_OVERRIDE)
-			appearance_target = T.below.z_appearance
-		else
-			appearance_target = Td
-
 		if (T.z_flags & ZM_MIMIC_OVERWRITE)
 			// This openturf doesn't care about its icon, so we can just overwrite it.
 			if (T.below.mimic_proxy)
 				QDEL_NULL(T.below.mimic_proxy)
-			T.appearance = appearance_target	// This used to be T.below rather than Td, not sure why. Legacy artifact?
+			T.appearance = Td.z_appearance || Td
 			T.name = initial(T.name)
 			T.desc = initial(T.desc)
 			T.gender = initial(T.gender)
@@ -346,7 +340,7 @@ SUBSYSTEM_DEF(zcopy)
 			if (!T.below.mimic_proxy)
 				T.below.mimic_proxy = new(T)
 			var/atom/movable/openspace/turf_proxy/TO = T.below.mimic_proxy
-			TO.appearance = appearance_target
+			TO.appearance = Td.z_appearance || Td
 			TO.name = T.name
 			TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
 			TO.opacity = FALSE
@@ -735,8 +729,8 @@ SUBSYSTEM_DEF(zcopy)
 
 	if (!T.below)
 		out += "<h3>Using synthetic rendering (Not Z).<h3>"
-	else if (T.z_flags & ZM_MIMIC_BASETURF)
-		out += "<h3>Using synthetic rendering (BASETURF).</h3>"
+	else if (T.z_flags & ZM_OVERRIDE)
+		out += "<h3>Using synthetic rendering (OVERRIDE).</h3>"
 
 	var/list/found_oo = list(T)
 	var/turf/Tbelow = T

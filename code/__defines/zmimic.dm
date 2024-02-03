@@ -1,4 +1,4 @@
-#define ZM_DESTRUCTION_TIMER(TARGET) addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, qdel_self)), 10 SECONDS, TIMER_STOPPABLE)
+#define ZM_DESTRUCTION_TIMER(TARGET) addtimer(CALLBACK(TARGET, TYPE_PROC_REF(/datum, qdel_self)), 10 SECONDS, TIMER_STOPPABLE)
 #define TURF_IS_MIMICKING(T) (isturf(T) && (T:z_flags & ZM_MIMIC_BELOW))
 #define CHECK_OO_EXISTENCE(OO) if (OO && !MOVABLE_IS_ON_ZTURF(OO) && !OO.destruction_timer) { OO.destruction_timer = ZM_DESTRUCTION_TIMER(OO); }
 #define UPDATE_OO_IF_PRESENT CHECK_OO_EXISTENCE(bound_overlay); if (bound_overlay) { update_above(); }
@@ -30,9 +30,9 @@
 #define ZM_ALLOW_ATMOS     8	//! If this turf permits passage of air.
 #define ZM_MIMIC_NO_AO    16	//! If the turf shouldn't apply regular turf AO and only do Z-mimic AO.
 #define ZM_NO_OCCLUDE     32	//! Don't occlude below atoms if we're a non-mimic z-turf.
-#define ZM_MIMIC_BASETURF 64	//! Mimic baseturf instead of the below atom. Sometimes useful for elevators.
-#define ZM_OVERRIDE      128	//! If this turf is being copied, read the `z_appearance` var instead of our real appearance.
-#define ZM_NO_SHADOW     256	//! If this turf is being copied, hide the shadower.
+#define ZM_OVERRIDE       64	//! Copy only z_appearance or baseturf and bail, do not attempt to copy movables. This is significantly cheaper and allows you to override the mimic, but results in movables not being visible.
+#define ZM_NO_SHADOW     128	//! If this turf is being copied, hide the shadower.
+#define ZM_TERMINATOR    256	//! Consider this turf the terminus of a Z-group, like the bottom of a Z-group or a ZM_OVERRIDE turf.
 
 // Convenience flags.
 #define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)	//! Common defaults for zturfs.
