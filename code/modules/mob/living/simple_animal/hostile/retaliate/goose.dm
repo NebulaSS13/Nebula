@@ -7,7 +7,7 @@
 	emote_hear = list("honks","flaps its wings","clacks")
 	emote_see = list("flaps its wings", "scratches the ground")
 	natural_weapon = /obj/item/natural_weapon/goosefeet
-	mob_default_max_health = 45
+	max_health = 45
 	pass_flags = PASS_FLAG_TABLE
 	faction = "geese"
 	pry_time = 8 SECONDS
@@ -53,7 +53,7 @@
 		attacking_with.force = min((attacking_with.force + potency), max_damage)
 	if(!loose && prob(25) && (attacking_with && attacking_with.force >= loose_threshold)) //second wind
 		loose = TRUE
-		set_max_health(initial(mob_default_max_health) * 1.5)
+		set_max_health(initial(max_health) * 1.5)
 		setBruteLoss(0)
 		setFireLoss(0)
 		enrage_potency = enrage_potency_loose
@@ -64,7 +64,7 @@
 	name = "dire goose"
 	desc = "A large bird. It radiates destructive energy."
 	icon = 'icons/mob/simple_animal/goose_dire.dmi'
-	mob_default_max_health = 250
+	max_health = 250
 	enrage_potency = 3
 	loose_threshold = 20
 	max_damage = 35

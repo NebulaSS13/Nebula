@@ -11,7 +11,7 @@
 	use_single_icon = TRUE
 	item_state = null
 	is_spawnable_type = FALSE
-	obj_max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	var/last_holder
 
 /obj/item/holder/Initialize()

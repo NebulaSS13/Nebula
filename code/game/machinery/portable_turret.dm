@@ -17,7 +17,7 @@
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
-	obj_max_health = 80
+	max_health = 80
 
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
 	var/raising= 0			//if the turret is currently opening or closing its cover
@@ -79,7 +79,7 @@
 	ailock = 0
 	malf_upgraded = 1
 	to_chat(user, "\The [src] has been upgraded. It's damage and rate of fire has been increased. Auto-regeneration system has been enabled. Power usage has increased.")
-	obj_max_health = round(initial(obj_max_health) * 1.5)
+	max_health = round(initial(max_health) * 1.5)
 	shot_delay = round(initial(shot_delay) / 2)
 	auto_repair = 1
 	change_power_consumption(round(initial(active_power_usage) * 5), POWER_USE_ACTIVE)
@@ -332,10 +332,10 @@ var/global/list/turret_icons
 		if(force < 5)
 			return
 
-	health -= force
+	current_health -= force
 	if (force > 5 && prob(45))
 		spark_at(src, amount = 5)
-	if(health <= 0)
+	if(current_health <= 0)
 		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
@@ -383,12 +383,12 @@ var/global/list/turret_icons
 		if(severity == 1 || (severity == 2 && prob(25)))
 			physically_destroyed()
 		else if(severity == 2)
-			take_damage(initial(health) * 8)
+			take_damage(initial(current_health) * 8)
 		else
-			take_damage(initial(health) * 8 / 3)
+			take_damage(initial(current_health) * 8 / 3)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
-	health = 0
+	current_health = 0
 	set_broken(TRUE)
 	spark_at(src, amount = 5)
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
@@ -415,9 +415,9 @@ var/global/list/turret_icons
 			popDown() // no valid targets, close the cover
 
 	var/current_max_health = get_max_health()
-	if(auto_repair && (health < current_max_health))
+	if(auto_repair && (current_health < current_max_health))
 		use_power_oneoff(20000)
-		health = min(health+1, current_max_health) // 1HP for 20kJ
+		current_health = min(current_health+1, current_max_health) // 1HP for 20kJ
 
 /obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
 	switch(assess_living(L))

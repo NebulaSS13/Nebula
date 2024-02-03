@@ -3642,7 +3642,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced{
-	health = 1e+007
+	current_health = 1e+007
 	},
 /obj/machinery/vending/cola{
 	dir = 1

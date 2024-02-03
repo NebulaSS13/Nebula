@@ -3,7 +3,7 @@
 	name = "creature"
 	desc = "You get the feeling you should run."
 	icon = 'icons/mob/simple_animal/vagrant.dmi'
-	mob_default_max_health = 60
+	max_health = 60
 	speed = 5
 	speak_chance = 0
 	turns_per_move = 4

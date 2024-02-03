@@ -13576,7 +13576,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exodus/gateway)
@@ -13590,7 +13590,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exodus/gateway)
@@ -21365,7 +21365,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/research)
@@ -31440,7 +31440,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
@@ -31593,7 +31593,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
@@ -33855,7 +33855,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology)
@@ -34194,7 +34194,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology)
@@ -34303,7 +34303,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology)
@@ -38291,7 +38291,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/item/stack/material/shiny/mapped/aluminium/fifty,
 /obj/item/stack/material/shiny/mapped/aluminium/fifty,
@@ -38349,7 +38349,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
@@ -49738,7 +49738,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/item/clothing/suit/space/void/engineering/prepared,
 /turf/simulated/floor/tiled/steel_grid,
@@ -49992,7 +49992,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -50801,7 +50801,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/machinery/door/window/southleft{
 	name = "Engineering Voidsuits"

@@ -3,7 +3,7 @@
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER
 	abstract_type = /obj/structure
-	obj_max_health = 50
+	max_health = 50
 
 	var/structure_flags
 	var/last_damage_message
@@ -87,7 +87,7 @@
 	return FALSE
 
 /obj/structure/proc/take_damage(var/damage)
-	if(health == -1) // This object does not take damage.
+	if(current_health == -1) // This object does not take damage.
 		return
 
 	if(material && material.is_brittle())
@@ -99,10 +99,10 @@
 
 	playsound(loc, hitsound, 75, 1)
 	var/current_max_health = get_max_health()
-	health = clamp(health - damage, 0, current_max_health)
-	show_damage_message(health/current_max_health)
+	current_health = clamp(current_health - damage, 0, current_max_health)
+	show_damage_message(current_health/current_max_health)
 
-	if(health == 0)
+	if(current_health == 0)
 		physically_destroyed()
 
 /obj/structure/proc/show_damage_message(var/perc)
@@ -217,7 +217,7 @@
 			take_damage(rand(5, 15))
 
 /obj/structure/proc/can_repair(var/mob/user)
-	if(health >= get_max_health())
+	if(current_health >= get_max_health())
 		to_chat(user, SPAN_NOTICE("\The [src] does not need repairs."))
 		return FALSE
 	return TRUE

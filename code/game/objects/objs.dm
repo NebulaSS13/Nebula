@@ -4,6 +4,11 @@
 	is_spawnable_type = TRUE
 	abstract_type = /obj
 
+	///The maximum health that the object can have. If set to ITEM_HEALTH_NO_DAMAGE, the object won't take any damage.
+	max_health = ITEM_HEALTH_NO_DAMAGE
+	///The current health of the obj. Leave to null, unless you want the object to start at a different health than max_health.
+	current_health = null
+
 	var/obj_flags
 	var/list/req_access
 	var/list/matter //Used to store information about the contents of the object.
@@ -18,10 +23,6 @@
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 	var/tmp/directional_offset ///JSON list of directions to x,y offsets to be applied to the object depending on its direction EX: @'{"NORTH":{"x":12,"y":5}, "EAST":{"x":10,"y":50}}'
 
-	///The current health of the obj. Leave to null, unless you want the object to start at a different health than obj_max_health.
-	var/health
-	///The maximum health that the object can have. If set to ITEM_HEALTH_NO_DAMAGE, the object won't take any damage.
-	var/obj_max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/Initialize(mapload)
 	. = ..()
@@ -30,11 +31,8 @@
 	//Only apply directional offsets if the mappers haven't set any offsets already
 	if(!pixel_x && !pixel_y && !pixel_w && !pixel_z)
 		update_directional_offset()
-	if(isnull(health))
-		health = get_max_health()
-
-/obj/proc/get_max_health()
-	return obj_max_health
+	if(isnull(current_health))
+		current_health = get_max_health()
 
 /obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()

@@ -248,15 +248,15 @@
 	var/t
 	if(wall)
 		var/wall_max_health = wall.get_max_health()
-		if(wall.health >= wall_max_health)
+		if(wall.current_health >= wall_max_health)
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
-		t = wall_max_health - wall.health
-		wall.health += t
+		t = wall_max_health - wall.current_health
+		wall.current_health += t
 	else
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
-		t = wall.health
+		t = wall.current_health
 	user.remove_blood_simple(t / 50)
 	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
@@ -269,7 +269,7 @@
 	color = "#ff0000"
 	anchored = TRUE
 	density = TRUE
-	obj_max_health = 200
+	max_health = 200
 	var/obj/effect/rune/wall/rune
 
 /obj/effect/cultwall/Initialize(mapload, var/bcolor)
@@ -287,9 +287,9 @@
 	. = ..()
 	if(iscultist(user))
 		var/current_max_health = get_max_health()
-		if(health == current_max_health)
+		if(current_health == current_max_health)
 			to_chat(user, "<span class='notice'>It is fully intact.</span>")
-		else if(health > current_max_health * 0.5)
+		else if(current_health > current_max_health * 0.5)
 			to_chat(user, "<span class='warning'>It is damaged.</span>")
 		else
 			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
@@ -320,8 +320,8 @@
 	..()
 
 /obj/effect/cultwall/proc/take_damage(var/amount)
-	health -= amount
-	if(health <= 0)
+	current_health -= amount
+	if(current_health <= 0)
 		visible_message("<span class='warning'>\The [src] dissipates.</span>")
 		qdel(src)
 

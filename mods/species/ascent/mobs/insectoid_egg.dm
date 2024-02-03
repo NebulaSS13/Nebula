@@ -11,8 +11,8 @@ var/global/default_gyne
 /obj/structure/insectoid_egg
 	name = "alien egg"
 	desc = "A semi-translucent alien egg."
-	health = 100
-	obj_max_health = 100
+	current_health = 100
+	max_health = 100
 	icon = 'mods/species/ascent/icons/egg.dmi'
 	icon_state = "egg"
 
@@ -41,7 +41,7 @@ var/global/default_gyne
 
 /obj/structure/insectoid_egg/on_update_icon()
 	..()
-	if(hatched || !health)
+	if(hatched || !current_health)
 		icon_state = "egg_broken"
 	else if(hatching)
 		icon_state = "egg_break"
@@ -53,7 +53,7 @@ var/global/default_gyne
 /obj/structure/insectoid_egg/examine(mob/user)
 	. = ..()
 
-	if(hatched || !health)
+	if(hatched || !current_health)
 		to_chat(user, "\icon[src] \The [src] lays in shambles, having been hatched or broken.")
 		return
 
@@ -71,7 +71,7 @@ var/global/default_gyne
 		to_chat(user, "\icon[src] \The [src] is lively and appears ready to hatch at any moment.")
 
 /obj/structure/insectoid_egg/Process()
-	if(!health || hatched || hatching || (world.time <= (last_tick + maturity_rate)))
+	if(!current_health || hatched || hatching || (world.time <= (last_tick + maturity_rate)))
 		return
 
 	last_tick = world.time
@@ -79,7 +79,7 @@ var/global/default_gyne
 
 	// Too high of temp will damage eggs.
 	if(T.temperature > (max_temperature * 1.5))
-		health = max(0, health - 5)
+		current_health = max(0, current_health - 5)
 
 	if(T.temperature < min_temperature || T.temperature > max_temperature)
 		return
@@ -92,7 +92,7 @@ var/global/default_gyne
 		G.request_player(src, "A mantid nymph is ready to hatch and needs a player.")
 
 /obj/structure/insectoid_egg/proc/hatch(var/client/C)
-	if(!health || maturity != 100 || hatched || hatching)
+	if(!current_health || maturity != 100 || hatched || hatching)
 		return
 
 	var/mob/living/carbon/alien/ascent_nymph/new_nymph = new(src, SPECIES_MANTID_NYMPH) // Spawn in the egg.

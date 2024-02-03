@@ -102,7 +102,7 @@
 	real_name = "Juggernaut"
 	desc = "A possessed suit of armour driven by the will of the restless dead"
 	icon = 'icons/mob/simple_animal/construct_behemoth.dmi'
-	mob_default_max_health = 250
+	max_health = 250
 	speak_emote = list("rumbles")
 	response_harm = "harmlessly punches"
 	harm_intent_damage = 0
@@ -159,7 +159,7 @@
 	real_name = "Wraith"
 	desc = "A wicked bladed shell contraption piloted by a bound spirit"
 	icon = 'icons/mob/simple_animal/construct_floating.dmi'
-	mob_default_max_health = 75
+	max_health = 75
 	natural_weapon = /obj/item/natural_weapon/wraith
 	speed = -1
 	environment_smash = 1
@@ -183,7 +183,7 @@
 	real_name = "Artificer"
 	desc = "A bulbous construct dedicated to building and maintaining The Cult of Nar-Sie's armies"
 	icon = 'icons/mob/simple_animal/construct_artificer.dmi'
-	mob_default_max_health = 50
+	max_health = 50
 	response_harm = "viciously beaten"
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/cult_builder
@@ -209,7 +209,7 @@
 	real_name = "Behemoth"
 	desc = "The pinnacle of occult technology, Behemoths are the ultimate weapon in the Cult of Nar-Sie's arsenal."
 	icon = 'icons/mob/simple_animal/construct_behemoth.dmi'
-	mob_default_max_health = 750
+	max_health = 750
 	speak_emote = list("rumbles")
 	response_harm = "harmlessly punches"
 	harm_intent_damage = 0
@@ -232,7 +232,7 @@
 	real_name = "Harvester"
 	desc = "The promised reward of the livings who follow Nar-Sie. Obtained by offering their bodies to the geometer of blood"
 	icon = 'icons/mob/simple_animal/construct_harvester.dmi'
-	mob_default_max_health = 150
+	max_health = 150
 	natural_weapon = /obj/item/natural_weapon/harvester
 	speed = -1
 	environment_smash = 1

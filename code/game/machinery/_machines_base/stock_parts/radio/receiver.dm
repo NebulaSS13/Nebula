@@ -46,6 +46,6 @@
 			method.perform(machine, signal.data[thing])
 
 /obj/item/stock_parts/radio/receiver/buildable
-	obj_max_health = null //Buildable variant may take damage
+	max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel

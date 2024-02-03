@@ -2,7 +2,7 @@
 /obj/item/forensics/sample
 	name = "forensic sample"
 	icon = 'icons/obj/forensics.dmi'
-	obj_max_health = 1
+	max_health = 1
 	var/object
 	var/list/possible_evidence_types = list(/datum/forensics/fibers)
 	var/list/evidence

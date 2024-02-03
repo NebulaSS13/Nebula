@@ -336,7 +336,7 @@
 "ayi" = (
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/showcase{
 	desc = "A self-contained autopilot that controls supply drones.";

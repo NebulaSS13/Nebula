@@ -16,7 +16,7 @@
 		return
 
 	is_adult = TRUE
-	mob_default_max_health = 200
+	max_health = 200
 	amount_grown = 0
 	update_name()
 	update_icon()

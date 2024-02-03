@@ -3,7 +3,7 @@
 	desc = "A lovable, domesticated slime."
 	icon = 'mods/content/xenobiology/icons/slimes/slime_baby.dmi'
 	speak_emote = list("chirps")
-	mob_default_max_health = 100
+	max_health = 100
 	response_harm = "stamps on"
 	emote_see = list("jiggles", "bounces in place")
 	gene_damage = -1

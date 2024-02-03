@@ -1,6 +1,6 @@
 /obj/item/crafting_holder
 	is_spawnable_type = FALSE // Do not manually spawn this, it will runtime/break.
-	obj_max_health = 25
+	max_health = 25
 	var/decl/crafting_stage/current_crafting_stage
 	var/label_name
 

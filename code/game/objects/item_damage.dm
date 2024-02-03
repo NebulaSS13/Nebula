@@ -18,8 +18,8 @@
 		return 0 //must return a number
 
 	//Apply damage
-	damage = min(health, damage)
-	health = clamp(health - damage, 0, get_max_health())
+	damage = min(current_health, damage)
+	current_health = clamp(current_health - damage, 0, get_max_health())
 	check_health(damage, damage_type, damage_flags)
 	return damage
 

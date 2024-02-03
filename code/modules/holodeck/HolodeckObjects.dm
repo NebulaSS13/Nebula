@@ -156,7 +156,7 @@
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			hit(W.force)
-			if(health <= 7)
+			if(current_health <= 7)
 				anchored = FALSE
 				update_nearby_icons()
 				step(src, get_dir(user, src))
@@ -220,7 +220,7 @@
 /obj/item/holo
 	damtype = PAIN
 	no_attack_log = 1
-	obj_max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/holo/esword
 	name = "holosword"

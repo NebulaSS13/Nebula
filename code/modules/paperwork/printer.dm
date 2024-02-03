@@ -17,7 +17,7 @@
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,
 	)
 	base_type  = /obj/item/stock_parts/printer
-	obj_max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 	part_flags = PART_FLAG_QDEL
 	var/list/print_queue               //Contains a single copy of each of the /obj/item/paper or /obj/item/photo that we'll print.
 	var/obj/item/chems/toner_cartridge/toner //Contains our ink
@@ -36,7 +36,7 @@
 //Buildable: Can be removed from the machine, and damaged
 /obj/item/stock_parts/printer/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	obj_max_health = 64
+	max_health = 64
 
 //Buildable + Filled variant: has sheet and toner on spawn
 /obj/item/stock_parts/printer/buildable/filled/Initialize(ml, material_key)

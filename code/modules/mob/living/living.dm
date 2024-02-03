@@ -319,11 +319,8 @@ default behaviour is:
 /mob/living/proc/get_health_percent(var/sigfig = 1)
 	return round(get_health_ratio()*100, sigfig)
 
-/mob/living/proc/get_max_health()
-	return mob_default_max_health
-
 /mob/living/proc/set_max_health(var/val, var/skip_health_update = FALSE)
-	mob_default_max_health = val
+	max_health = val
 	if(!skip_health_update)
 		update_health()
 

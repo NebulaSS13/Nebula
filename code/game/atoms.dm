@@ -52,6 +52,12 @@
 	var/tmp/default_pixel_z
 	var/tmp/default_pixel_w
 
+	// Health vars largely used by obj and mob.
+	var/current_health
+	var/max_health
+
+/atom/proc/get_max_health()
+	return max_health
 
 /**
 	Adjust variables prior to Initialize() based on the map

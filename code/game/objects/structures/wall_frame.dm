@@ -16,7 +16,7 @@
 	material = DEFAULT_WALL_MATERIAL
 	handle_generic_blending = TRUE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
-	obj_max_health = 40
+	max_health = 40
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
 

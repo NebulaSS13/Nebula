@@ -163,7 +163,7 @@
 
 /obj/item/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	obj_max_health = null //Buildable variant may take damage
+	max_health = null //Buildable variant may take damage
 	material = /decl/material/solid/metal/steel
 
 /decl/stock_part_preset/terminal_connect

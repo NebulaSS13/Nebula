@@ -222,8 +222,8 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
 	material = /decl/material/solid/metal/steel
-	health = 30
-	obj_max_health = 30
+	current_health = 30
+	max_health = 30
 	var/burn_damage = 0
 	var/brute_damage = 0
 	var/icon_state_broken = "broken"
@@ -237,19 +237,19 @@
 			burn_damage = clamp(lastdamage, 0, current_max_health)
 
 	//Health works differently for this thing
-	health = clamp(current_max_health - (brute_damage + burn_damage), 0, current_max_health)
+	current_health = clamp(current_max_health - (brute_damage + burn_damage), 0, current_max_health)
 	. = ..()
 
 /obj/item/robot_parts/robot_component/proc/set_bruteloss(var/amount)
 	var/current_max_health = get_max_health()
 	brute_damage = clamp(amount, 0, current_max_health)
-	health = current_max_health - (brute_damage + burn_damage)
+	current_health = current_max_health - (brute_damage + burn_damage)
 	check_health(amount, BRUTE)
 
 /obj/item/robot_parts/robot_component/proc/set_burnloss(var/amount)
 	var/current_max_health = get_max_health()
 	burn_damage = clamp(amount, 0, current_max_health)
-	health = current_max_health - (brute_damage + burn_damage)
+	current_health = current_max_health - (brute_damage + burn_damage)
 	check_health(amount, BURN)
 
 /obj/item/robot_parts/robot_component/physically_destroyed(skip_qdel)

@@ -14,7 +14,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed/door
 	uncreated_component_parts = null
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
-	obj_max_health = 300
+	max_health = 300
 
 	var/can_open_manually = TRUE
 
@@ -253,7 +253,7 @@
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return TRUE
 		var/current_max_health = get_max_health()
-		if(health >= current_max_health)
+		if(current_health >= current_max_health)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 			return TRUE
 		if(!density)
@@ -261,7 +261,7 @@
 			return TRUE
 
 		//figure out how much metal we need
-		var/amount_needed = (current_max_health - health) / DOOR_REPAIR_AMOUNT
+		var/amount_needed = (current_max_health - current_health) / DOOR_REPAIR_AMOUNT
 		amount_needed = CEILING(amount_needed)
 
 		var/obj/item/stack/stack = I
@@ -293,7 +293,7 @@
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				health = clamp(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, get_max_health())
+				current_health = clamp(current_health, current_health + repairing.amount*DOOR_REPAIR_AMOUNT, get_max_health())
 				update_icon()
 				qdel(repairing)
 				repairing = null
@@ -334,7 +334,7 @@
 	return FALSE
 
 /obj/machinery/door/take_damage(var/damage, damtype=BRUTE)
-	if(!health)
+	if(!current_health)
 		..(damage, damtype)
 		update_icon()
 		return
@@ -344,16 +344,16 @@
 
 	//Part of damage is soaked by our own health
 	var/current_max_health = get_max_health()
-	var/initialhealth = health
-	health = max(0, health - damage)
-	if(health <= 0 && initialhealth > 0)
+	var/initialhealth = current_health
+	current_health = max(0, current_health - damage)
+	if(current_health <= 0 && initialhealth > 0)
 		visible_message(SPAN_WARNING("\The [src] breaks down!"))
 		set_broken(TRUE)
-	else if(health < current_max_health / 4 && initialhealth >= current_max_health / 4)
+	else if(current_health < current_max_health / 4 && initialhealth >= current_max_health / 4)
 		visible_message(SPAN_WARNING("\The [src] looks like it's about to break!"))
-	else if(health < current_max_health / 2 && initialhealth >= current_max_health / 2)
+	else if(current_health < current_max_health / 2 && initialhealth >= current_max_health / 2)
 		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
-	else if(health < current_max_health * 3/4 && initialhealth >= current_max_health * 3/4)
+	else if(current_health < current_max_health * 3/4 && initialhealth >= current_max_health * 3/4)
 		visible_message(SPAN_WARNING("\The [src] shows signs of damage!"))
 
 	..(component_damage, damtype)
@@ -362,23 +362,23 @@
 //How much damage should be passed to components inside even when door health is non zero
 /obj/machinery/door/proc/get_damage_leakthrough(var/damage, damtype=BRUTE)
 	var/current_max_health = get_max_health()
-	if(health > 0.75 * current_max_health && damage < 10)
+	if(current_health > 0.75 * current_max_health && damage < 10)
 		return 0
-	. = round((1 - health/current_max_health) * damage)
+	. = round((1 - current_health/current_max_health) * damage)
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()
-	if(health <= 0)
+	if(current_health <= 0)
 		to_chat(user, "\The [src] is broken!")
 	else
 		var/current_max_health = get_max_health()
-		if(health < current_max_health / 4)
+		if(current_health < current_max_health / 4)
 			to_chat(user, "\The [src] looks like it's about to break!")
-		else if(health < current_max_health / 2)
+		else if(current_health < current_max_health / 2)
 			to_chat(user, "\The [src] looks seriously damaged!")
-		else if(health < current_max_health * 3/4)
+		else if(current_health < current_max_health * 3/4)
 			to_chat(user, "\The [src] shows signs of damage!")
-		else if(health < current_max_health && get_dist(src, user) <= 1)
+		else if(current_health < current_max_health && get_dist(src, user) <= 1)
 			to_chat(user, "\The [src] has some minor scuffing.")
 
 	var/mob/living/carbon/human/H = user

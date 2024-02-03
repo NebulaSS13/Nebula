@@ -5,7 +5,7 @@
 	icon_state = "egg"
 	pixel_x = -128
 	pixel_y = -128
-	mob_default_max_health = 100
+	max_health = 100
 	universal_understand = TRUE
 	mob_sort_value = 5
 

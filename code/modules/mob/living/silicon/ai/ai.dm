@@ -56,7 +56,7 @@ var/global/list/ai_verbs_default = list(
 	density = TRUE
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
-	mob_default_max_health = 200
+	max_health = 200
 
 	silicon_camera = /obj/item/camera/siliconcam/ai_camera
 	silicon_radio = /obj/item/radio/headset/heads/ai_integrated

@@ -68,7 +68,7 @@
 	set_extension(src, /datum/extension/tool, list(TOOL_HATCHET = TOOL_QUALITY_DEFAULT))
 
 /obj/item/hatchet/unbreakable
-	obj_max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/hatchet/machete
 	name = "machete"
@@ -94,7 +94,7 @@
 	. = ..()
 
 /obj/item/hatchet/machete/unbreakable
-	obj_max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/hatchet/machete/steel
 	name = "fabricated machete"
@@ -122,7 +122,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/item/minihoe/unbreakable
-	obj_max_health = ITEM_HEALTH_NO_DAMAGE
+	max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/scythe
 	name = "scythe"

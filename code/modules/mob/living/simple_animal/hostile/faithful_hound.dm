@@ -3,7 +3,7 @@
 	desc = "A spooky looking ghost dog. Does not look friendly."
 	icon = 'icons/mob/simple_animal/corgi_ghost.dmi'
 	blend_mode = BLEND_SUBTRACT
-	mob_default_max_health = 100
+	max_health = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	faction = MOB_FACTION_NEUTRAL
 	density = FALSE

@@ -3489,7 +3489,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /turf/simulated/floor/plating,
 /area/map_template/colony/atmospherics)
@@ -3499,7 +3499,7 @@
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -5203,7 +5203,7 @@
 "kc" = (
 /obj/structure/window/reinforced{
 	dir = 1;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -7423,7 +7423,7 @@
 /obj/machinery/door/window/northright,
 /obj/structure/window/reinforced{
 	dir = 8;
-	health = 1e+006
+	current_health = 1e+006
 	},
 /obj/structure/window/reinforced{
 	dir = 4

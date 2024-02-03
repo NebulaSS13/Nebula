@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	alpha = 150
-	obj_max_health = 100
+	max_health = 100
 	hitsound = 'sound/effects/Glasshit.ogg'
 	req_access = null
 	material = /decl/material/solid/glass

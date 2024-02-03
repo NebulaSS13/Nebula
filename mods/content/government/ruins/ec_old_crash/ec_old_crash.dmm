@@ -698,7 +698,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced{
-	health = 1e+007
+	current_health = 1e+007
 	},
 /obj/effect/floor_decal/corner/purple{
 	dir = 6

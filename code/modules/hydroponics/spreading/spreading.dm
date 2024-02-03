@@ -45,8 +45,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = MOUSE_OPACITY_NORMAL
 
-	health = 10
-	obj_max_health = 100
+	current_health = 10
+	max_health = 100
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
@@ -78,19 +78,19 @@
 		return INITIALIZE_HINT_QDEL
 
 	name = seed.display_name
-	obj_max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
+	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(start_matured)
 		mature_time = 0
-		health = obj_max_health
+		current_health = max_health
 
 	if(seed.get_trait(TRAIT_SPREAD) == 2)
 		mouse_opacity = MOUSE_OPACITY_PRIORITY
 		max_growth = VINE_GROWTH_STAGES
-		growth_threshold = obj_max_health/VINE_GROWTH_STAGES
+		growth_threshold = max_health/VINE_GROWTH_STAGES
 		growth_type = seed.get_growth_type()
 	else
 		max_growth = seed.growth_stages
-		growth_threshold = max_growth && obj_max_health/max_growth
+		growth_threshold = max_growth && max_health/max_growth
 
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
@@ -111,7 +111,7 @@
 
 /obj/effect/vine/on_update_icon()
 	overlays.Cut()
-	var/growth = growth_threshold ? min(max_growth, round(health/growth_threshold)) : 1
+	var/growth = growth_threshold ? min(max_growth, round(current_health/growth_threshold)) : 1
 	var/at_fringe = get_dist(src,parent)
 	if(spread_distance > 5)
 		if(at_fringe >= spread_distance-3)
@@ -211,7 +211,7 @@
 			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
 		else
 			seed.harvest(user,0,1)
-		health -= (rand(3,5)*5)
+		current_health -= (rand(3,5)*5)
 	else
 		..()
 		var/damage = W.force
@@ -256,12 +256,12 @@
 		physically_destroyed()
 
 /obj/effect/vine/proc/adjust_health(value)
-	health = clamp(health + value, 0, get_max_health())
-	if(health <= 0)
+	current_health = clamp(current_health + value, 0, get_max_health())
+	if(current_health <= 0)
 		die_off()
 
 /obj/effect/vine/proc/is_mature()
-	return (health >= (get_max_health()/3) && world.time > mature_time)
+	return (current_health >= (get_max_health()/3) && world.time > mature_time)
 
 /obj/effect/vine/is_burnable()
 	return seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
@@ -282,7 +282,7 @@
 		return
 	user.visible_message(SPAN_NOTICE("\The [user] starts chopping down \the [V]."))
 	playsound(get_turf(V), W.hitsound, 100, 1)
-	var/chop_time = (V.health/W.force) * 0.5 SECONDS
+	var/chop_time = (V.current_health/W.force) * 0.5 SECONDS
 	if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 		chop_time *= 0.5
 	if(do_after(user, chop_time, V, TRUE))

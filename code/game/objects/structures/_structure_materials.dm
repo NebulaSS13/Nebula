@@ -29,8 +29,8 @@
 			var/bonus_health = reinf_material.integrity * get_material_health_modifier()
 			current_max_health += bonus_health
 			if(!keep_health)
-				health += bonus_health
-		health = keep_health ? min(health, current_max_health) : current_max_health
+				current_health += bonus_health
+		current_health = keep_health ? min(current_health, current_max_health) : current_max_health
 	update_icon()
 
 /obj/structure/proc/update_material_name(var/override_name)

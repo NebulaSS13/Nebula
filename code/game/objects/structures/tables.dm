@@ -15,7 +15,7 @@
 	// TODO: add 1px step-up?
 	mob_offset = 12
 	handle_generic_blending = TRUE
-	obj_max_health = 10
+	max_health = 10
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	parts_amount = 2

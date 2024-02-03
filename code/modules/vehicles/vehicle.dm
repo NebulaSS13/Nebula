@@ -85,9 +85,9 @@
 		var/obj/item/weldingtool/T = W
 		if(T.welding)
 			var/current_max_health = get_max_health()
-			if(health < current_max_health)
+			if(current_health < current_max_health)
 				if(open)
-					health = min(current_max_health, health+10)
+					current_health = min(current_max_health, current_health+10)
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					user.visible_message("<span class='warning'>\The [user] repairs \the [src]!</span>","<span class='notice'>You repair \the [src]!</span>")
 				else
@@ -100,14 +100,14 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
 			if(BURN)
-				health -= W.force * fire_dam_coeff
+				current_health -= W.force * fire_dam_coeff
 			if(BRUTE)
-				health -= W.force * brute_dam_coeff
+				current_health -= W.force * brute_dam_coeff
 		..()
 		healthcheck()
 
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
+	current_health -= Proj.get_structure_damage()
 	..()
 	healthcheck()
 
@@ -117,11 +117,11 @@
 		explode()
 	else
 		if(severity == 2)
-			health -= rand(5,10)*fire_dam_coeff
-			health -= rand(10,20)*brute_dam_coeff
+			current_health -= rand(5,10)*fire_dam_coeff
+			current_health -= rand(10,20)*brute_dam_coeff
 		else if(prob(50))
-			health -= rand(1,5)*fire_dam_coeff
-			health -= rand(1,5)*brute_dam_coeff
+			current_health -= rand(1,5)*fire_dam_coeff
+			current_health -= rand(1,5)*brute_dam_coeff
 		healthcheck()
 
 /obj/vehicle/emp_act(severity)
@@ -202,7 +202,7 @@
 	qdel(src)
 
 /obj/vehicle/proc/healthcheck()
-	if(health <= 0)
+	if(current_health <= 0)
 		explode()
 
 /obj/vehicle/proc/powercheck()

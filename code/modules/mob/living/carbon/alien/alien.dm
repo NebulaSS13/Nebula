@@ -2,7 +2,7 @@
 	name = "alien"
 	desc = "What IS that?"
 	pass_flags = PASS_FLAG_TABLE
-	mob_default_max_health = 100
+	max_health = 100
 	mob_size = MOB_SIZE_TINY
 	mob_sort_value = 8
 	var/dead_icon

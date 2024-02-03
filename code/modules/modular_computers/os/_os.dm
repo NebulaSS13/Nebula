@@ -164,10 +164,10 @@
 		if(hard_drive)
 			if(prob(10))
 				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(0.5 * hard_drive.health)
+				hard_drive.take_damage(0.5 * hard_drive.current_health)
 			else if(prob(5))
 				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(hard_drive.health)
+				hard_drive.take_damage(hard_drive.current_health)
 
 	update_host_icon()
 

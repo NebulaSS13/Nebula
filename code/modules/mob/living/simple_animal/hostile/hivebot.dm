@@ -2,7 +2,7 @@
 	name = "hivebot"
 	desc = "A junky looking robot with four spiky legs."
 	icon = 'icons/mob/simple_animal/hivebot.dmi'
-	mob_default_max_health = 55
+	max_health = 55
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
 	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	projectiletype = /obj/item/projectile/beam/smalllaser
@@ -39,7 +39,7 @@
 
 /mob/living/simple_animal/hostile/hivebot/strong
 	desc = "A junky looking robot with four spiky legs - this one has thick armour plating."
-	mob_default_max_health = 120
+	max_health = 120
 	ranged = 1
 	can_escape = 1
 	natural_armor = list(
@@ -84,7 +84,7 @@ The megabot
 	name = "hivemind"
 	desc = "A huge quadruped robot equipped with a myriad of weaponry."
 	icon = 'icons/mob/simple_animal/megabot.dmi'
-	mob_default_max_health = 440
+	max_health = 440
 	natural_weapon = /obj/item/natural_weapon/circular_saw
 	speed = 0
 	natural_armor = list(
