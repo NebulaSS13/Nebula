@@ -12,7 +12,7 @@
 	anchored = FALSE
 	density = TRUE
 	icon_state = "barrier0"
-	max_health = 100
+	obj_max_health = 100
 	var/locked = 0.0
 
 /obj/machinery/deployable/barrier/Initialize()
@@ -38,10 +38,11 @@
 				return
 		return
 	else if(IS_WRENCH(W))
-		if (src.health < src.max_health)
-			src.health = src.max_health
-			src.emagged = 0
-			src.req_access = list(access_security)
+		var/current_max_health = get_max_health()
+		if (health < current_max_health)
+			health = current_max_health
+			emagged = 0
+			req_access = list(access_security)
 			visible_message("<span class='warning'>[user] repairs \the [src]!</span>")
 			return
 		else if (src.emagged > 0)

@@ -403,7 +403,7 @@
 	volume            = 20
 	show_reagent_name = TRUE
 	health            = 40
-	max_health        = 40
+	obj_max_health = 40
 	material          = /decl/material/solid/metal/steel
 	var/can_refuel    = TRUE
 	var/size_in_use   = ITEM_SIZE_NORMAL

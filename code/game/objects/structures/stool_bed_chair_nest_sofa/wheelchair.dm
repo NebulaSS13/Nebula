@@ -132,7 +132,7 @@
 	icon_state = "wheelchair-item"
 	item_state = "rbed"
 	w_class = ITEM_SIZE_LARGE
-	max_health = 50
+	obj_max_health = 50
 	var/structure_form_type = /obj/structure/bed/chair/wheelchair
 
 /obj/item/wheelchair_kit/attack_self(mob/user)

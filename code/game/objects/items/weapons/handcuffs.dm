@@ -12,7 +12,7 @@
 	throw_range = 5
 	origin_tech = @'{"materials":1}'
 	material = /decl/material/solid/metal/steel
-	max_health = ITEM_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
+	obj_max_health = ITEM_HEALTH_NO_DAMAGE //#TODO: Once we can work out something different for handling cuff breakout, change this. Since it relies on cuffs health to tell if you can actually breakout.
 	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 2 MINUTES //Deciseconds = 120s = 2 minutes
@@ -32,7 +32,7 @@
 
 /obj/item/handcuffs/examine(mob/user)
 	. = ..()
-	if (health > 0 && max_health > 0)
+	if (health > 0 && get_max_health() > 0)
 		var display = get_percent_health()
 		if (display > 66)
 			return
@@ -140,7 +140,7 @@ var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world ca
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
-	max_health = 75
+	obj_max_health = 75
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/handcuffs/cable/red
@@ -178,5 +178,5 @@ var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world ca
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
-	max_health = 50
+	obj_max_health = 50
 	material = /decl/material/solid/organic/plastic

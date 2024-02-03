@@ -12,7 +12,7 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
-	max_health = 50
+	obj_max_health = 50
 	/// Reference to any banner currently hung on the frame.
 	var/obj/item/banner/banner
 
@@ -84,7 +84,7 @@
 	icon = 'icons/obj/banner.dmi'
 	icon_state = "banner"
 	material = /decl/material/solid/organic/cloth
-	max_health = 20
+	obj_max_health = 20
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	w_class = ITEM_SIZE_NORMAL
 	var/hung_desc = "The banner is rather plain, with no markings."

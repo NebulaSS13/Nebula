@@ -12,7 +12,7 @@
 	pass_flags = 0
 	anchored = FALSE
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	max_health = 30
+	obj_max_health = 30
 	var/list/assembly_components = list()
 	var/list/ckeys_allowed_to_scan = list() // Players who built the circuit can scan it as a ghost.
 	var/max_components = IC_MAX_SIZE_BASE
@@ -109,7 +109,7 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(max_health/health < 0.5 && prob(5))
+	if(get_max_health()/health < 0.5 && prob(5))
 		visible_message(SPAN_WARNING("\The [src] shudders and sparks."))
 		power_failure = TRUE
 	// Now spend it.
@@ -471,7 +471,7 @@
 		var/obj/item/stack/cable_coil/C = I
 		if(is_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src].")
-			health = min(max_health, health + 5)
+			health = min(get_max_health(), health + 5)
 		return TRUE
 
 	else if(user.a_intent != I_HURT)
@@ -560,7 +560,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	max_health = 20
+	obj_max_health = 20
 
 /obj/item/electronic_assembly/medium/default
 	name = "type-a electronic mechanism"
@@ -600,7 +600,7 @@
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
-	max_health = 30
+	obj_max_health = 30
 
 /obj/item/electronic_assembly/large/default
 	name = "type-a electronic machine"
@@ -640,7 +640,7 @@
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
 	obj_flags = 0 //Not anchorable
-	max_health = 50
+	obj_max_health = 50
 
 /obj/item/electronic_assembly/drone/can_move()
 	return TRUE
@@ -680,7 +680,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	max_health = 10
+	obj_max_health = 10
 
 /obj/item/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)
 	if(proximity && istype(a ,/turf) && a.density)

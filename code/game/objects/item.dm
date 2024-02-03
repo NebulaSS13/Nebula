@@ -107,7 +107,7 @@
 
 /obj/item/Initialize(var/ml, var/material_key)
 	if(isnull(health))
-		health = max_health //Make sure to propagate max_health to health var before material setup, for consistency
+		health = obj_max_health //Make sure to propagate obj_max_health to health var before material setup, for consistency
 	if(!ispath(material_key, /decl/material))
 		material_key = material
 	if(material_key)

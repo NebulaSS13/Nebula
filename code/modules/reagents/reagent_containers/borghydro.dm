@@ -5,7 +5,7 @@
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
-	max_health = ITEM_HEALTH_NO_DAMAGE
+	obj_max_health = ITEM_HEALTH_NO_DAMAGE
 
 	var/mode = 1
 	var/charge_cost = 50

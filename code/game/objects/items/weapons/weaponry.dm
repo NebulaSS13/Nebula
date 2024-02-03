@@ -12,7 +12,7 @@
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/glass
-	max_health = ITEM_HEALTH_NO_DAMAGE
+	obj_max_health = ITEM_HEALTH_NO_DAMAGE
 
 /obj/item/nullrod/attack(mob/M, mob/living/user) //Paste from old-code to decult with a null rod.
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
@@ -71,7 +71,7 @@
 	icon_state = "energynet"
 	throwforce = 0
 	force = 0
-	max_health = 100
+	obj_max_health = 100
 	var/net_type = /obj/effect/energy_net
 
 /obj/item/energy_net/safari
@@ -117,7 +117,7 @@
 	anchored = TRUE
 	can_buckle = 0 //no manual buckling or unbuckling
 
-	max_health = 25
+	obj_max_health = 25
 	var/countdown = 15
 	var/temporary = 1
 	var/mob/living/carbon/captured = null
@@ -129,7 +129,7 @@
 	desc = "An energized net meant to subdue animals."
 
 	anchored = FALSE
-	max_health = 5
+	obj_max_health = 5
 	temporary = 0
 	min_free_time = 5
 	max_free_time = 10

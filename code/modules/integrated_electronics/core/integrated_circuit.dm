@@ -5,7 +5,7 @@
 	icon_state = "template"
 	w_class = ITEM_SIZE_TINY
 	matter = list()				// To be filled later
-	max_health = 25 //#TODO: Use material for health
+	obj_max_health = 25 //#TODO: Use material for health
 	var/obj/item/electronic_assembly/assembly // Reference to the assembly holding this circuit, if any.
 	var/extended_desc
 	var/list/inputs

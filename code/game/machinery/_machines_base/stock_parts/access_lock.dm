@@ -4,7 +4,7 @@
 	icon_state = "lock"
 	part_flags = PART_FLAG_QDEL
 	req_access = list(access_engine_equip) // set req_access on this to impose access requirements.
-	max_health = ITEM_HEALTH_NO_DAMAGE
+	obj_max_health = ITEM_HEALTH_NO_DAMAGE
 	var/locked = FALSE
 	var/emagged = FALSE
 	var/autoset = FALSE  // Whether the machine should inherit access from surrounding areas
@@ -106,7 +106,7 @@
 			if(!req_access)
 				locked = FALSE
 			else
-				var/obj/item/card/id/I = user.GetIdCard()				
+				var/obj/item/card/id/I = user.GetIdCard()
 				if(!istype(I, /obj/item/card/id))
 					to_chat(user, SPAN_WARNING("[\src] flashes a yellow LED near the ID scanner. Did you remember to scan your ID or PDA?"))
 					return TOPIC_HANDLED
@@ -151,7 +151,7 @@
 		req_access = conf_access.Copy()
 
 /obj/item/stock_parts/access_lock/buildable
-	max_health = null //Buildable variant may take damage
+	obj_max_health = null //Buildable variant may take damage
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

@@ -400,7 +400,7 @@ About the new airlock wires panel:
 
 		if(stat & BROKEN)
 			damage_overlay = sparks_broken_file
-		else if(health < max_health * 3/4)
+		else if(health < get_max_health() * 3/4)
 			damage_overlay = sparks_damaged_file
 
 	if(welded)
@@ -767,7 +767,7 @@ About the new airlock wires panel:
 			return TRUE
 		else if(!repairing)
 			// Add some minor damage as evidence of forcing.
-			if(health >= max_health)
+			if(health >= get_max_health())
 				take_damage(1)
 			if(arePowerSystemsOn())
 				to_chat(user, SPAN_WARNING("The airlock's motors resist your efforts to force it."))
@@ -1027,7 +1027,7 @@ About the new airlock wires panel:
 				glass = TRUE
 				set_opacity(0)
 				hitsound = 'sound/effects/Glasshit.ogg'
-				max_health = 300
+				obj_max_health = 300
 				explosion_resistance = 5
 			else
 				door_color = mat.color

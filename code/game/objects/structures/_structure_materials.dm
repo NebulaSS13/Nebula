@@ -22,14 +22,15 @@
 	else
 		set_opacity(initial(opacity))
 	hitsound = material?.hitsound || initial(hitsound)
-	if(max_health != -1)
-		max_health = initial(max_health) + material?.integrity * get_material_health_modifier()
+	var/current_max_health = get_max_health()
+	if(current_max_health != -1)
+		current_max_health = initial(current_max_health) + material?.integrity * get_material_health_modifier()
 		if(reinf_material)
 			var/bonus_health = reinf_material.integrity * get_material_health_modifier()
-			max_health += bonus_health
+			current_max_health += bonus_health
 			if(!keep_health)
 				health += bonus_health
-		health = keep_health ? min(health, max_health) : max_health
+		health = keep_health ? min(health, current_max_health) : current_max_health
 	update_icon()
 
 /obj/structure/proc/update_material_name(var/override_name)

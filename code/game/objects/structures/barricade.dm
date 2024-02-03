@@ -8,7 +8,7 @@
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	max_health = 100
+	obj_max_health = 100
 
 	var/spike_damage //how badly it smarts when you run into this like a rube
 	var/list/poke_description = list("gored", "spiked", "speared", "stuck", "stabbed")

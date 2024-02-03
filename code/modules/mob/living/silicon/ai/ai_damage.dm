@@ -55,7 +55,7 @@
 	..()
 	add_ai_verbs(src)
 
-// Returns percentage of AI's remaining backup capacitor charge (max_health - oxyloss).
+// Returns percentage of AI's remaining backup capacitor charge (max health - oxyloss).
 /mob/living/silicon/ai/proc/backup_capacitor()
 	var/current_max_health = get_max_health()
 	return ((getOxyLoss() - current_max_health) / current_max_health) * (-100)

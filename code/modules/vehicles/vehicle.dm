@@ -84,9 +84,10 @@
 	else if(IS_WELDER(W))
 		var/obj/item/weldingtool/T = W
 		if(T.welding)
-			if(health < max_health)
+			var/current_max_health = get_max_health()
+			if(health < current_max_health)
 				if(open)
-					health = min(max_health, health+10)
+					health = min(current_max_health, health+10)
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					user.visible_message("<span class='warning'>\The [user] repairs \the [src]!</span>","<span class='notice'>You repair \the [src]!</span>")
 				else

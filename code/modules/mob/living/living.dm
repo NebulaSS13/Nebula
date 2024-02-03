@@ -208,8 +208,8 @@ default behaviour is:
 		set_stat(CONSCIOUS)
 		return
 
-	var/max_health = get_max_health()
-	current_health = clamp(max_health-get_total_life_damage(), -(max_health), max_health)
+	var/current_max_health = get_max_health()
+	current_health = clamp(current_max_health-get_total_life_damage(), -(current_max_health), current_max_health)
 	if(stat != DEAD && should_be_dead())
 		death()
 		if(!QDELETED(src)) // death() may delete or remove us

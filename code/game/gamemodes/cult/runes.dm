@@ -247,10 +247,11 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(wall.health >= wall.max_health)
+		var/wall_max_health = wall.get_max_health()
+		if(wall.health >= wall_max_health)
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
-		t = wall.max_health - wall.health
+		t = wall_max_health - wall.health
 		wall.health += t
 	else
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
@@ -268,7 +269,7 @@
 	color = "#ff0000"
 	anchored = TRUE
 	density = TRUE
-	max_health = 200
+	obj_max_health = 200
 	var/obj/effect/rune/wall/rune
 
 /obj/effect/cultwall/Initialize(mapload, var/bcolor)
@@ -285,9 +286,10 @@
 /obj/effect/cultwall/examine(mob/user)
 	. = ..()
 	if(iscultist(user))
-		if(health == max_health)
+		var/current_max_health = get_max_health()
+		if(health == current_max_health)
 			to_chat(user, "<span class='notice'>It is fully intact.</span>")
-		else if(health > max_health * 0.5)
+		else if(health > current_max_health * 0.5)
 			to_chat(user, "<span class='warning'>It is damaged.</span>")
 		else
 			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")

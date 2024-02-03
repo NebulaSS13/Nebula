@@ -88,14 +88,14 @@
 		material = GET_DECL(new_material)
 	if(istype(material))
 		//Only set the health if health is null. Some things define their own health value.
-		if(isnull(max_health))
-			max_health = round(material_health_multiplier * material.integrity, 0.01)
-			if(max_health < 1)
-				//Make sure to warn us if the values we set make the max_health be under 1
-				log_warning("The 'max_health' of '[src]'([type]) made out of '[material]' was calculated as [material_health_multiplier] * [material.integrity] == [max_health], which is smaller than 1.")
+		if(isnull(obj_max_health))
+			obj_max_health = round(material_health_multiplier * material.integrity, 0.01)
+			if(obj_max_health < 1)
+				//Make sure to warn us if the values we set make the obj_max_health be under 1
+				log_warning("The 'obj_max_health' of '[src]'([type]) made out of '[material]' was calculated as [material_health_multiplier] * [material.integrity] == [obj_max_health], which is smaller than 1.")
 
 		if(isnull(health)) //only set health if we didn't specify one already, so damaged objects on spawn and etc can be a thing
-			health = max_health
+			health = get_max_health()
 
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)

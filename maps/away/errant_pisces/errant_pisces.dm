@@ -79,7 +79,7 @@
 	icon_state = "net_f"
 	anchored = TRUE
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
-	max_health = 100
+	obj_max_health = 100
 
 /obj/structure/net/Initialize(var/mapload)
 	. = ..()

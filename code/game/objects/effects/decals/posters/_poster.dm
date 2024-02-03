@@ -9,7 +9,7 @@
 	anchored           = TRUE
 	directional_offset = @'{"NORTH":{"y":32}, "SOUTH":{"y":-32}, "WEST":{"x":32}, "EAST":{"x":-32}}'
 	material           = /decl/material/solid/organic/paper
-	max_health          = 10
+	obj_max_health = 10
 	parts_type         = /obj/item/poster
 	parts_amount       = 1
 
