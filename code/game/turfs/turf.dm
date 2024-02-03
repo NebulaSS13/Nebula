@@ -106,9 +106,8 @@
 	if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(mapload)
 
-	if(flooded && !density)
-		make_flooded(TRUE)
-
+	if(flooded)
+		set_flooded(flooded, TRUE, skip_vis_contents_update = TRUE, mapload = mapload)
 	refresh_vis_contents()
 
 	return INITIALIZE_HINT_NORMAL
@@ -540,7 +539,9 @@
 	if(weather)
 		LAZYADD(., weather)
 	if(flooded)
-		LAZYADD(., global.flood_object)
+		var/flood_object = get_flood_overlay(flooded)
+		if(flood_object)
+			LAZYADD(., flood_object)
 
 /**Whether we can place a cable here
  * If you cannot build a cable will return an error code explaining why you cannot.

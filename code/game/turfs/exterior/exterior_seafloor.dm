@@ -9,7 +9,7 @@
 	return dug ? null : list(/obj/item/stack/material/ore/sand = list(3, 2))
 
 /turf/exterior/seafloor/flooded
-	flooded = TRUE
+	flooded = /decl/material/liquid/water
 	color = COLOR_LIQUID_WATER
 
 /turf/exterior/seafloor/Initialize()

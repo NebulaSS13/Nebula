@@ -9,7 +9,7 @@
 	return dug ? null : list(/obj/item/stack/material/ore/clay = list(3, 2))
 
 /turf/exterior/clay/flooded
-	flooded = TRUE
+	flooded = /decl/material/liquid/water
 
 /turf/exterior/mud
 	name = "mud"
@@ -19,7 +19,7 @@
 	footstep_type = /decl/footsteps/mud
 
 /turf/exterior/mud/flooded
-	flooded = TRUE
+	flooded = /decl/material/liquid/water
 
 /turf/exterior/dry
 	name = "dry mud"

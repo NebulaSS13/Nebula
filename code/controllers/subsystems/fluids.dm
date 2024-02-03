@@ -3,6 +3,7 @@ SUBSYSTEM_DEF(fluids)
 	wait = 1 SECOND
 	priority = SS_PRIORITY_FLUIDS
 	flags = SS_NO_INIT
+	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT // So we can flush our queued activity during lobby setup on ocean maps.
 
 	var/tmp/list/water_sources =       list()
 	var/tmp/fluid_sources_copied_yet = FALSE
@@ -84,7 +85,7 @@ SUBSYSTEM_DEF(fluids)
 				continue
 			checked_targets[neighbor] = TRUE
 			flooded_a_neighbor = TRUE
-			neighbor.add_fluid(/decl/material/liquid/water, FLUID_MAX_DEPTH)
+			neighbor.add_fluid(current_turf.flooded, FLUID_MAX_DEPTH)
 
 		if(!flooded_a_neighbor)
 			REMOVE_ACTIVE_FLUID_SOURCE(current_turf)
