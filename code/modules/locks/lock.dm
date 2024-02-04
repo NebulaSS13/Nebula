@@ -39,10 +39,7 @@
 	return 0
 
 /datum/lock/proc/toggle(var/key = "", var/mob/user)
-	if(status & LOCK_LOCKED)
-		return unlock(key, user)
-	else
-		return lock(key, user)
+	return (status & LOCK_LOCKED) ? unlock(key, user) : lock(key, user)
 
 /datum/lock/proc/getComplexity()
 	return length(lock_data)
