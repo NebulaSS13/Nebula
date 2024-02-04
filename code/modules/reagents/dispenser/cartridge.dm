@@ -16,7 +16,7 @@
 		setLabel(reagents.get_primary_reagent_name())
 
 /obj/item/chems/chem_disp_cartridge/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/R in reagents.reagent_volumes)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)

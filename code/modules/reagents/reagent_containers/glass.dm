@@ -47,19 +47,19 @@
 		return
 
 	if(reagents?.total_volume)
-		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
+		to_chat(user, SPAN_NOTICE("It contains [reagents.total_volume] units of liquid."))
 	else
-		to_chat(user, "<span class='notice'>It is empty.</span>")
+		to_chat(user, SPAN_NOTICE("It is empty."))
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>The airtight lid seals it completely.</span>")
+		to_chat(user,SPAN_NOTICE("The airtight lid seals it completely."))
 
 /obj/item/chems/glass/attack_self()
 	..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
+		to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
-		to_chat(usr, "<span class = 'notice'>You take the lid off \the [src].</span>")
+		to_chat(usr, SPAN_NOTICE("You take the lid off \the [src]."))
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
@@ -70,14 +70,14 @@
 
 /obj/item/chems/glass/standard_feed_mob(var/mob/user, var/mob/target)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
+		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
 		return 1
 	if(user.a_intent == I_HURT)
 		return 1
 	return ..()
 
 /obj/item/chems/glass/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/R in reagents.reagent_volumes)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)

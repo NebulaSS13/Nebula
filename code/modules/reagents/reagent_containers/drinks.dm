@@ -54,24 +54,24 @@
 
 /obj/item/chems/drinks/standard_feed_mob(var/mob/user, var/mob/target)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/chems/drinks/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/chems/drinks/standard_pour_into(var/mob/user, var/atom/target)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/chems/drinks/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/R in reagents.reagent_volumes)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)
@@ -84,15 +84,15 @@
 	if(distance > 1)
 		return
 	if(!reagents || reagents.total_volume == 0)
-		to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is empty!"))
 	else if (reagents.total_volume <= volume * 0.25)
-		to_chat(user, "<span class='notice'>\The [src] is almost empty!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is almost empty!"))
 	else if (reagents.total_volume <= volume * 0.66)
-		to_chat(user, "<span class='notice'>\The [src] is half full!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is half full!"))
 	else if (reagents.total_volume <= volume * 0.90)
-		to_chat(user, "<span class='notice'>\The [src] is almost full!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is almost full!"))
 	else
-		to_chat(user, "<span class='notice'>\The [src] is full!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is full!"))
 
 /obj/item/chems/drinks/proc/get_filling_state()
 	var/percent = round((reagents.total_volume / volume) * 100)
