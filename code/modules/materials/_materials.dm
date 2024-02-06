@@ -367,6 +367,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(icon_base && !check_state_in_icon(FALSEWALL_STATE, icon_base))
 		. += "[type] - '[icon_base]' - missing false wall opening animation '[FALSEWALL_STATE]'"
 
+	if(dissolves_in == MAT_SOLVENT_IMMUNE && LAZYLEN(dissolves_into))
+		. += "material is immune to solvents, but has dissolves_into products."
+
 	for(var/i = 0 to 7)
 		if(icon_base)
 			if(!check_state_in_icon("[i]", icon_base))
