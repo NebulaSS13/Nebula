@@ -80,14 +80,25 @@
 	if(!my_turf || !prob(50))
 		return
 
+	var/airblock // zeroed by ATMOS_CANPASS_TURF
 	var/max_local_temp = 0
-	var/take_environment_damage = get_surrounding_pressure_differential(my_turf) > max_pressure_diff
+	var/take_environment_damage = get_surrounding_pressure_differential(my_turf, src) > max_pressure_diff
 	if(!take_environment_damage)
 		for(var/check_dir in global.cardinal)
-			var/turf/neighbor = get_step(my_turf, check_dir)
-			if(!istype(neighbor) || (neighbor.c_airblock(loc) & AIR_BLOCKED))
+			var/turf/neighbour = get_step(my_turf, check_dir)
+			if(!istype(neighbour))
 				continue
-			max_local_temp = max(max_local_temp, neighbor.return_air()?.temperature)
+			for(var/obj/O in my_turf)
+				if(O == src)
+					continue
+				ATMOS_CANPASS_MOVABLE(airblock, O, neighbour)
+				. |= airblock
+			if(airblock & AIR_BLOCKED)
+				continue
+			ATMOS_CANPASS_TURF(airblock, neighbour, my_turf)
+			if(airblock & AIR_BLOCKED)
+				continue
+			max_local_temp = max(max_local_temp, neighbour.return_air()?.temperature)
 
 	if(take_environment_damage || max_local_temp > max_temp)
 		take_damage(1)

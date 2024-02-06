@@ -400,20 +400,31 @@
 * Gets the highest and lowest pressures from the tiles in cardinal directions
 * around us, then checks the difference.
 */
-/proc/get_surrounding_pressure_differential(var/turf/loc)
+/proc/get_surrounding_pressure_differential(var/turf/loc, atom/originator)
 	var/minp = INFINITY
 	var/maxp = 0
-	var/has_neighbor = FALSE
+	var/has_neighbour = FALSE
+	var/airblock // zeroed by ATMOS_CANPASS_TURF, declared early as microoptvar/airblock
 	for(var/dir in global.cardinal)
-		var/turf/neighbor = get_step(loc,dir)
-		if(!neighbor || (neighbor.c_airblock(loc) & AIR_BLOCKED))
+		var/turf/neighbour = get_step(loc,dir)
+		if(!neighbour)
 			continue
-		var/datum/gas_mixture/environment = neighbor.return_air()
+		for(var/obj/O in loc)
+			if(originator && O == originator)
+				continue
+			ATMOS_CANPASS_MOVABLE(airblock, O, neighbour)
+			. |= airblock
+		if(airblock & AIR_BLOCKED)
+			continue
+		ATMOS_CANPASS_TURF(airblock, neighbour, loc)
+		if(airblock & AIR_BLOCKED)
+			continue
+		var/datum/gas_mixture/environment = neighbour.return_air()
 		var/cp = environment ? environment.return_pressure() : 0
-		has_neighbor = TRUE
+		has_neighbour = TRUE
 		minp = min(minp, cp)
 		maxp = max(maxp, cp)
-	return has_neighbor ? abs(minp-maxp) : 0
+	return has_neighbour ? abs(minp-maxp) : 0
 
 /proc/convert_k2c(var/temp)
 	return ((temp - T0C))

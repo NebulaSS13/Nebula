@@ -10,7 +10,8 @@
 		c_copy_air() //not very efficient :(
 		zone = null //Easier than iterating through the list at the zone.
 
-	var/s_block = c_airblock(src)
+	var/s_block
+	ATMOS_CANPASS_TURF(s_block, src, src)
 	if(s_block & AIR_BLOCKED)
 		#ifdef ZASDBG
 		if(verbose)
@@ -43,7 +44,8 @@
 		if(!unsim) //edge of map
 			continue
 
-		var/block = unsim.c_airblock(src)
+		var/block
+		ATMOS_CANPASS_TURF(block, unsim, src)
 		if(block & AIR_BLOCKED)
 
 			#ifdef ZASDBG
@@ -54,7 +56,8 @@
 
 			continue
 
-		var/r_block = c_airblock(unsim)
+		var/r_block
+		ATMOS_CANPASS_TURF(r_block, src, unsim)
 		if(r_block & AIR_BLOCKED)
 
 			#ifdef ZASDBG
