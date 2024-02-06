@@ -175,7 +175,7 @@
 		destruction_timer = ZM_DESTRUCTION_TIMER(src)
 
 /atom/movable/openspace/mimic/proc/reset_internal_layering()
-	if (bound_overlay.override_depth)
+	if (bound_overlay?.override_depth)
 		depth = bound_overlay.override_depth
 	else if (isturf(associated_atom.loc))
 		depth = min(SSzcopy.zlev_maximums[associated_atom.z] - associated_atom.z, OPENTURF_MAX_DEPTH)
