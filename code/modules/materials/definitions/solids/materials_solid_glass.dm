@@ -4,6 +4,7 @@
 	uid = "solid_glass"
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	flags = MAT_FLAG_BRITTLE
+	dissolves_in = MAT_SOLVENT_IMMUNE
 	color = GLASS_COLOR
 	opacity = 0.3
 	integrity = 50

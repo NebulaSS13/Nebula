@@ -193,6 +193,7 @@
 		/decl/material/solid/carbon = 0.02
 	)
 	default_solid_form = /obj/item/stack/material/sheet
+	dissolves_in = MAT_SOLVENT_IMMUNE
 
 /decl/material/solid/metal/steel/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -234,6 +235,7 @@
 	uid = "solid_stainless_steel"
 	lore_text = "A reflective alloy of steel and chromium. Used for its reflective and sturdy properties."
 	wall_support_value = MAT_VALUE_HEAVY
+	dissolves_in = MAT_SOLVENT_IMMUNE
 	integrity = 175
 	burn_armor = 10
 	color = "#a5a5a5"
@@ -304,6 +306,7 @@
 	default_solid_form = /obj/item/stack/material/reinforced
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	dissolves_in = MAT_SOLVENT_IMMUNE
 
 /decl/material/solid/metal/plasteel/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -335,6 +338,7 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	reflectiveness = MAT_VALUE_MATTE
 	default_solid_form = /obj/item/stack/material/reinforced
+	dissolves_in = MAT_SOLVENT_IMMUNE
 
 /decl/material/solid/metal/titanium/generate_recipes(var/reinforce_material)
 	. = ..()

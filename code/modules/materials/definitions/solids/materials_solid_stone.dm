@@ -57,6 +57,7 @@
 	uid = "solid_ceramic"
 	lore_text = "A hard substance produced by firing clay in a kiln."
 	color = COLOR_OFF_WHITE
+	dissolves_in = MAT_SOLVENT_IMMUNE
 
 /decl/material/solid/stone/marble
 	name = "marble"
