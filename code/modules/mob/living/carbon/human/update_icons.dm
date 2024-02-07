@@ -171,6 +171,11 @@ Please contact me on #coderbus IRC. ~Carn x
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
 	return list(icon_scale_x, icon_scale_y)
 
+/mob/living/carbon/human/update_appearance_flags(add_flags, remove_flags)
+	. = ..()
+	if(.)
+		update_icon()
+
 /mob/living/carbon/human/update_transform()
 
 	// First, get the correct size.
@@ -181,15 +186,16 @@ Please contact me on #coderbus IRC. ~Carn x
 	// Apply KEEP_TOGETHER so all the component overlays move properly when
 	// applying a transform, or remove it if we aren't doing any transforms
 	// (due to cost).
-	if(!lying && desired_scale_x == 1 && desired_scale_y == 1)
-		appearance_flags &= ~KEEP_TOGETHER
+	if(!lying && desired_scale_x == 1 && desired_scale_y == 1 && !("turf_alpha_mask" in filter_data))
+		update_appearance_flags(remove_flags = KEEP_TOGETHER)
 	else
-		appearance_flags |= KEEP_TOGETHER
+		update_appearance_flags(add_flags = KEEP_TOGETHER)
 
 	// Scale/translate/rotate and apply the transform.
+	var/turn_angle
 	var/matrix/M = matrix()
+	M.Scale(desired_scale_x, desired_scale_y)
 	if(lying)
-		var/turn_angle
 		if(dir & WEST)
 			turn_angle = -90
 		else if(dir & EAST)
@@ -197,16 +203,28 @@ Please contact me on #coderbus IRC. ~Carn x
 		else
 			turn_angle = pick(-90, 90)
 		M.Turn(turn_angle)
-		M.Scale(desired_scale_y, desired_scale_x)
 		M.Translate(turn_angle == 90 ? 1 : -2, (turn_angle == 90 ? -6 : -5) - default_pixel_z)
 	else
-		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(0, 16 * (desired_scale_y - 1))
 
 	if(transform_animate_time)
 		animate(src, transform = M, time = transform_animate_time)
 	else
 		transform = M
+
+	var/atom/movable/mask = global._alpha_masks[src]
+	if(mask)
+		var/matrix/inverted_transform = matrix()
+		inverted_transform.Scale(desired_scale_y, desired_scale_x)
+		if(lying)
+			inverted_transform.Turn(-turn_angle)
+			inverted_transform.Translate(turn_angle == -90 ? 1 : -2, (turn_angle == -90 ? -6 : -5) - default_pixel_z)
+		else
+			inverted_transform.Translate(0, 16 * (desired_scale_y - 1))
+		if(transform_animate_time)
+			animate(mask, transform = inverted_transform, time = transform_animate_time)
+		else
+			mask.transform = inverted_transform
 
 	return transform
 

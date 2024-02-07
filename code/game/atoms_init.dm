@@ -138,6 +138,11 @@
 	vis_locs = null //clears this atom out of all vis_contents
 	clear_vis_contents(src)
 
+	if(!isnull(updating_turf_alpha_mask))
+		var/atom/movable/mask = global._alpha_masks[src]
+		if(!QDELETED(mask))
+			qdel(mask)
+
 /atom/GetCloneArgs()
 	return list(loc)
 
