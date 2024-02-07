@@ -697,7 +697,7 @@
 			if(statpanel("Turf"))
 				stat(listed_turf)
 				for(var/atom/A in listed_turf)
-					if(!A.mouse_opacity)
+					if(!A.simulated || !A.mouse_opacity)
 						continue
 					if(A.invisibility > see_invisible)
 						continue

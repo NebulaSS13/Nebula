@@ -320,25 +320,27 @@
 
 /mob/living/proc/solvent_act(var/severity, var/amount_per_item, var/solvent_power = MAT_SOLVENT_STRONG)
 
+	// TODO move this to a contact var or something.
+	if(solvent_power < MAT_SOLVENT_STRONG)
+		return
+
 	for(var/slot in global.standard_headgear_slots)
 		var/obj/item/thing = get_equipped_item(slot)
 		if(!istype(thing))
 			continue
 		if(!thing.solvent_can_melt(solvent_power) || !try_unequip(thing))
-			to_chat(src, SPAN_NOTICE("Your [thing] protects you from the solvent."))
+			to_chat(src, SPAN_NOTICE("Your [thing.name] protects you from the solvent."))
 			return TRUE
-		to_chat(src, SPAN_DANGER("Your [thing] dissolves!"))
+		to_chat(src, SPAN_DANGER("Your [thing.name] dissolves!"))
 		qdel(thing)
 		severity -= amount_per_item
 		if(severity <= 0)
 			return TRUE
 
-	// TODO move this to a contact var or something.
-	if(solvent_power >= MAT_SOLVENT_STRONG)
-		var/screamed
-		for(var/obj/item/organ/external/affecting in get_external_organs())
-			if(!screamed && affecting.can_feel_pain())
-				screamed = TRUE
-				emote("scream")
-			affecting.status |= ORGAN_DISFIGURED
-		take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)
+	var/screamed
+	for(var/obj/item/organ/external/affecting in get_external_organs())
+		if(!screamed && affecting.can_feel_pain())
+			screamed = TRUE
+			emote("scream")
+		affecting.status |= ORGAN_DISFIGURED
+	take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)
