@@ -23,7 +23,7 @@
 		/decl/material/liquid/ethanol = 0.75,
 		/decl/material/liquid/water =   0.25
 	)
-	bypass_cooling_products_for_root_type = /decl/material/liquid/ethanol
+	bypass_chilling_products_for_root_type = /decl/material/liquid/ethanol
 	affect_blood_on_ingest = FALSE // prevents automatic toxins/inebriation as though injected
 
 	var/nutriment_factor = 0

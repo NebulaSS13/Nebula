@@ -1,10 +1,14 @@
 /decl/material/proc/get_recipes(var/reinf_mat)
+	if(holographic)
+		return list()
 	var/key = reinf_mat || "base"
 	if(!LAZYACCESS(recipes,key))
 		LAZYSET(recipes,key,generate_recipes(reinf_mat))
 	return recipes[key]
 
 /decl/material/proc/get_strut_recipes(var/reinf_mat)
+	if(holographic)
+		return list()
 	var/key = reinf_mat || "base"
 	. = LAZYACCESS(strut_recipes, key)
 	if(!islist(.))
@@ -18,7 +22,7 @@
 
 /decl/material/proc/generate_recipes(var/reinforce_material)
 
-	if(phase_at_temperature() != MAT_PHASE_SOLID)
+	if(holographic || phase_at_temperature() != MAT_PHASE_SOLID)
 		return list()
 
 	. = list()
