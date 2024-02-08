@@ -25,7 +25,8 @@
 
 /decl/material/nullglass/generate_recipes()
 	. = ..()
-	. += new /datum/stack_recipe/tile/nullglass(src)
+	if(!holographic)
+		. += new /datum/stack_recipe/tile/nullglass(src)
 
 /obj/item/shard/nullglass
 	material = MAT_NULLGLASS

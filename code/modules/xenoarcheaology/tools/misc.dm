@@ -68,7 +68,8 @@
 //Structures
 /decl/material/solid/metal/chromium/generate_recipes(reinforce_material)
 	. = ..()
-	. += /datum/stack_recipe/structure/anomaly_container
+	if(!holographic)
+		. += /datum/stack_recipe/structure/anomaly_container
 
 /datum/stack_recipe/structure/anomaly_container
 	title               = "anomaly container"
