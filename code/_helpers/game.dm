@@ -404,7 +404,7 @@
 	var/minp = INFINITY
 	var/maxp = 0
 	var/has_neighbour = FALSE
-	var/airblock // zeroed by ATMOS_CANPASS_TURF, declared early as microoptvar/airblock
+	var/airblock // zeroed by ATMOS_CANPASS_TURF, declared early as microopt
 	for(var/dir in global.cardinal)
 		var/turf/neighbour = get_step(loc,dir)
 		if(!neighbour)
