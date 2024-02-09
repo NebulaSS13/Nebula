@@ -1038,6 +1038,7 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
+/obj/structure/loot_pile/maint/technical,
 /turf/simulated/floor,
 /area/ship/trade/fore_port_underside_maint)
 "fV" = (
@@ -1439,6 +1440,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/ship/trade/loading_bay)
+"wI" = (
+/obj/structure/loot_pile/surface/medicine_cabinet{
+	pixel_y = 18
+	},
+/turf/simulated/floor/carpet/green,
+/area/ship/trade/disused)
 "wP" = (
 /obj/structure/disposalpipe/trunk,
 /obj/structure/cable{
@@ -1661,6 +1668,11 @@
 	},
 /turf/simulated/floor,
 /area/ship/trade/undercomms)
+"Fy" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/loot_pile/maint/trash,
+/turf/simulated/floor/tiled,
+/area/ship/trade/disused)
 "FD" = (
 /obj/item/mollusc/barnacle{
 	pixel_x = -5;
@@ -1746,6 +1758,10 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/livestock)
+"IA" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/simulated/floor/carpet/green,
+/area/ship/trade/disused)
 "IG" = (
 /obj/structure/bed/chair/comfy/green{
 	dir = 1
@@ -1763,6 +1779,15 @@
 /obj/structure/stairs/long/west,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/loading_bay)
+"IO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/loot_pile/maint/boxfort,
+/turf/simulated/floor,
+/area/ship/trade/fore_port_underside_maint)
 "IQ" = (
 /obj/structure/disposalpipe/trunk{
 	dir = 4
@@ -1958,6 +1983,19 @@
 	},
 /turf/simulated/floor,
 /area/ship/trade/disused)
+"PE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/structure/loot_pile/maint/junk,
+/turf/simulated/floor,
+/area/ship/trade/fore_port_underside_maint)
 "PF" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -2020,6 +2058,10 @@
 /obj/item/stool/padded,
 /turf/simulated/floor,
 /area/ship/trade/disused)
+"RR" = (
+/obj/structure/loot_pile/maint/boxfort,
+/turf/simulated/floor/carpet/red,
+/area/ship/trade/disused)
 "Ss" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/alarm{
@@ -2053,6 +2095,7 @@
 	pixel_y = 20
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/loot_pile/maint/junk,
 /turf/simulated/floor,
 /area/ship/trade/disused)
 "TA" = (
@@ -4771,7 +4814,7 @@ Gb
 fp
 ne
 ne
-ne
+IO
 ne
 aS
 Ss
@@ -4850,7 +4893,7 @@ SC
 Ff
 Ym
 Xe
-Nq
+PE
 ak
 ak
 ak
@@ -5588,7 +5631,7 @@ SC
 rp
 Iu
 oG
-qt
+Fy
 aT
 yO
 LO
@@ -5831,7 +5874,7 @@ aa
 aa
 aa
 SC
-AT
+wI
 Ym
 JQ
 Yh
@@ -5913,8 +5956,8 @@ aa
 aa
 aa
 SC
-AT
-Ym
+IA
+RR
 JQ
 lv
 DT
