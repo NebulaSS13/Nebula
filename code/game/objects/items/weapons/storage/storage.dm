@@ -391,7 +391,12 @@
 	can_hold.Cut()
 	max_w_class = ITEM_SIZE_MIN
 	max_storage_space = 0
-	for(var/obj/item/I in src)
+	calculate_max_storage_space()
+
+/obj/item/storage/proc/calculate_max_storage_space(var/list/fitting)
+	if(!fitting)
+		fitting = contents
+	for(var/obj/item/I in fitting)
 		can_hold[I.type]++
 		max_w_class = max(I.w_class, max_w_class)
 		max_storage_space += I.get_storage_cost()
