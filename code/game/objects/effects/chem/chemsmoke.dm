@@ -243,6 +243,7 @@
 
 	pending += location
 
+	var/airblock // zeroed by ATMOS_CANPASS_TURF
 	while(pending.len)
 		for(var/turf/current in pending)
 			for(var/D in global.cardinal)
@@ -259,9 +260,11 @@
 					continue
 				if(!(target in targetTurfs))
 					continue
-				if(current.c_airblock(target)) //this is needed to stop chemsmoke from passing through thin window walls
+				ATMOS_CANPASS_TURF(airblock, current, target)
+				if(airblock) //this is needed to stop chemsmoke from passing through thin window walls
 					continue
-				if(target.c_airblock(current))
+				ATMOS_CANPASS_TURF(airblock, target, current)
+				if(airblock)
 					continue
 				pending += target
 

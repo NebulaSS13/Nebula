@@ -280,7 +280,7 @@
 		var/changed = 0
 		lockdown=0
 		// Pressure alerts
-		pdiff = getOPressureDifferential(src.loc)
+		pdiff = get_surrounding_pressure_differential(loc, src)
 		if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
 			lockdown = 1
 			if(!pdiff_alert)
@@ -356,14 +356,22 @@
 // Only opens when all areas connecting with our turf have an air alarm and are cleared
 /obj/machinery/door/firedoor/proc/can_safely_open()
 	var/turf/neighbour
+	var/turf/myturf = loc
+	if(!istype(myturf))
+		return TRUE
 	for(var/dir in global.cardinal)
-		neighbour = get_step(src.loc, dir)
-		if(neighbour.c_airblock(src.loc) & AIR_BLOCKED)
+		neighbour = get_step(myturf, dir)
+		if(!neighbour)
 			continue
-		for(var/obj/O in src.loc)
+		var/airblock // zeroed by ATMOS_CANPASS_TURF, declared early as microopt
+		ATMOS_CANPASS_TURF(airblock, neighbour, myturf)
+		if(airblock & AIR_BLOCKED)
+			continue
+		for(var/obj/O in myturf)
 			if(istype(O, /obj/machinery/door))
 				continue
-			. |= O.c_airblock(neighbour)
+			ATMOS_CANPASS_MOVABLE(airblock, O, neighbour)
+			. |= airblock
 		if(. & AIR_BLOCKED)
 			continue
 		var/area/A = get_area(neighbour)

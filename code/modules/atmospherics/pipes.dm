@@ -197,12 +197,12 @@
 /obj/machinery/atmospherics/pipe/Process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
-	else if(parent.air.compare(loc.return_air()))
+	else if(parent.air?.compare(loc.return_air()))
 		update_sound(0)
 		. = PROCESS_KILL
 	else if(leaking)
 		parent.mingle_with_turf(loc, volume)
-		var/air = parent.air && parent.air.return_pressure()
+		var/air = parent.air?.return_pressure()
 		if(!sound_token && air)
 			update_sound(1)
 		else if(sound_token && !air)
