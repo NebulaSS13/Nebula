@@ -599,7 +599,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG && O.solvent_can_melt(solvent_power) && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
 		O.visible_message(SPAN_DANGER("\The [O] dissolves!"))
-		O.melt()
+		O.handle_melting()
 		holder?.remove_reagent(type, solvent_melt_dose)
 	else if(defoliant && istype(O, /obj/effect/vine))
 		qdel(O)

@@ -45,7 +45,7 @@
 
 	//Make sure we have the same matter contents as the sign
 	matter = atom_info_repository.get_matter_for(sign_type)
-	matter = matter.Copy()
+	matter = matter?.Copy()
 
 	//Do this last, so icon update is last
 	set_icon_state(ispath(S)? initial(S.icon_state) : S.icon_state)

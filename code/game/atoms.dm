@@ -434,8 +434,8 @@
 	handle_external_heating(exposed_temperature)
 
 /// Handle this atom being destroyed through melting
-/atom/proc/melt()
-	return
+/atom/proc/handle_melting(list/meltable_materials)
+	SHOULD_CALL_PARENT(TRUE)
 
 /**
 	Handle this atom being exposed to lava. Calls qdel() by default

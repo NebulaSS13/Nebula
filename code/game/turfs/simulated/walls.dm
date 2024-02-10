@@ -174,13 +174,16 @@ var/global/list/wall_fullblend_objects = list(
 	. = SPAN_NOTICE("It has had <font color = '[paint_color]'>a coat of paint</font> applied.")
 
 //Damage
-/turf/simulated/wall/melt()
-	if(can_melt())
-		var/turf/simulated/floor/F = ChangeTurf(/turf/simulated/floor/plating)
-		if(istype(F))
-			F.burn_tile()
-			F.icon_state = "wall_thermite"
-			visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
+/turf/simulated/wall/handle_melting(list/meltable_materials)
+	. = ..()
+	if(!can_melt())
+		return
+	var/turf/simulated/floor/F = ChangeTurf(/turf/simulated/floor/plating)
+	if(!istype(F))
+		return
+	F.burn_tile()
+	F.icon_state = "wall_thermite"
+	visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
 
 /turf/simulated/wall/proc/take_damage(dam)
 	if(dam)

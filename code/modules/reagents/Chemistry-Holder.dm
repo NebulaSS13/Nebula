@@ -9,6 +9,11 @@ var/global/obj/temp_reagents_holder = new
 /atom/proc/remove_any_reagents(amount = 1, defer_update = FALSE)
 	return reagents?.remove_any(amount, defer_update)
 
+/atom/proc/get_reagent_space()
+	if(!reagents?.maximum_volume)
+		return 0
+	return reagents.maximum_volume - reagents.total_volume
+
 /datum/reagents
 	var/primary_reagent
 	var/list/reagent_volumes
