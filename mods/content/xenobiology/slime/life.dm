@@ -53,7 +53,7 @@
 	if(!QDELETED(src) && fluids?.total_volume >= FLUID_SHALLOW && stat == DEAD)
 		var/turf/T = get_turf(src)
 		if(T)
-			T.add_fluid(/decl/material/liquid/slimejelly, (is_adult ? rand(30, 40) : rand(10, 30)))
+			T.add_to_reagents(/decl/material/liquid/slimejelly, (is_adult ? rand(30, 40) : rand(10, 30)))
 		visible_message(SPAN_DANGER("\The [src] melts away...")) // Slimes are water soluble.
 		qdel(src)
 

@@ -1,6 +1,6 @@
 /proc/fill_cigarre_package(var/obj/item/storage/box/fancy/cigarettes/C, var/list/reagents)
 	for(var/reagent in reagents)
-		C.reagents.add_reagent(reagent, reagents[reagent] * C.max_storage_space)
+		C.add_to_reagents(reagent, reagents[reagent] * C.max_storage_space)
 
 /obj/item/storage/box/syndie_kit
 	name = "box"

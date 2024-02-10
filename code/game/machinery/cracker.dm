@@ -46,7 +46,7 @@
 
 		// Drink more water!
 		var/consuming = min(T.reagents.total_volume, fluid_consumption_per_tick)
-		T.reagents.remove_any(consuming)
+		T.remove_any_reagents(consuming)
 		T.show_bubbles()
 
 		// Gas production.

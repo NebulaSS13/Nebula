@@ -36,15 +36,15 @@
 	result = /obj/item/chems/food/slimesoup
 
 /obj/item/chems/food/jellysandwich/slime/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	add_to_reagents(/decl/material/liquid/slimejelly, 5)
 	. = ..()
 
 /obj/item/chems/food/jelliedtoast/slime/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	add_to_reagents(/decl/material/liquid/slimejelly, 5)
 	. = ..()
 
 /obj/item/chems/food/jellyburger/slime/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	add_to_reagents(/decl/material/liquid/slimejelly, 5)
 	. = ..()
 
 /obj/item/chems/food/slimesoup
@@ -56,8 +56,8 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/slimesoup/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
-	reagents.add_reagent(/decl/material/liquid/water, 10)
+	add_to_reagents(/decl/material/liquid/slimejelly, 5)
+	add_to_reagents(/decl/material/liquid/water, 10)
 	. = ..()
 
 /obj/item/chems/food/donut/jelly/slime

@@ -182,7 +182,7 @@
 
 
 /obj/item/chems/hypospray/autoinjector/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/adrenaline, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/adrenaline, reagents.maximum_volume)
 
 /obj/item/chems/hypospray/autoinjector/Initialize()
 	. = ..()
@@ -212,7 +212,7 @@
 	detail_color = COLOR_GREEN
 
 /obj/item/chems/hypospray/autoinjector/detox/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Pain
@@ -222,7 +222,7 @@
 	detail_color = COLOR_PURPLE
 
 /obj/item/chems/hypospray/autoinjector/pain/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/painkillers, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/painkillers, reagents.maximum_volume)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Antirad
@@ -232,7 +232,7 @@
 	detail_color = COLOR_AMBER
 
 /obj/item/chems/hypospray/autoinjector/antirad/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antirads, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antirads, reagents.maximum_volume)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Hallucinogenics
@@ -242,7 +242,7 @@
 	detail_color = COLOR_DARK_GRAY
 
 /obj/item/chems/hypospray/autoinjector/hallucinogenics/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/hallucinogenics, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/hallucinogenics, reagents.maximum_volume)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Clotting agent
@@ -255,8 +255,8 @@
 /obj/item/chems/hypospray/autoinjector/clotting/populate_reagents()
 	. = ..()
 	var/amt = round(reagents.maximum_volume*0.5)
-	reagents.add_reagent(/decl/material/liquid/stabilizer, amt)
-	reagents.add_reagent(/decl/material/liquid/clotting_agent, (reagents.maximum_volume - amt))
+	add_to_reagents(/decl/material/liquid/stabilizer, amt)
+	add_to_reagents(/decl/material/liquid/clotting_agent, (reagents.maximum_volume - amt))
 
 ////////////////////////////////////////////////////////////////////////////////
 // Autoinjector - Empty

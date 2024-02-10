@@ -8,8 +8,8 @@
 
 /obj/item/chems/food/badrecipe/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
-	reagents.add_reagent(/decl/material/solid/carbon,             3)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 1)
+	add_to_reagents(/decl/material/solid/carbon,             3)
 
 /obj/item/chems/food/stuffing
 	name = "stuffing"
@@ -44,7 +44,7 @@
 
 /obj/item/chems/food/loadedbakedpotato/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/spacylibertyduff
 	name = "party jelly"
@@ -59,7 +59,7 @@
 
 /obj/item/chems/food/spacylibertyduff/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/psychotropics, 6)
+	add_to_reagents(/decl/material/liquid/psychotropics, 6)
 
 /obj/item/chems/food/amanitajelly
 	name = "amanita jelly"
@@ -74,8 +74,8 @@
 
 /obj/item/chems/food/amanitajelly/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/amatoxin,      6)
-	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)
+	add_to_reagents(/decl/material/liquid/amatoxin,      6)
+	add_to_reagents(/decl/material/liquid/psychotropics, 3)
 
 /obj/item/chems/food/enchiladas
 	name = "enchiladas"
@@ -90,8 +90,8 @@
 
 /obj/item/chems/food/enchiladas/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
-	reagents.add_reagent(/decl/material/liquid/capsaicin, 6)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/liquid/capsaicin, 6)
 
 /obj/item/chems/food/monkeysdelight
 	name = "monkey's delight"
@@ -104,10 +104,10 @@
 
 /obj/item/chems/food/monkeysdelight/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
-	reagents.add_reagent(/decl/material/solid/blackpepper,         1)
-	reagents.add_reagent(/decl/material/solid/sodiumchloride,      1)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/liquid/drink/juice/banana, 5)
+	add_to_reagents(/decl/material/solid/blackpepper,         1)
+	add_to_reagents(/decl/material/solid/sodiumchloride,      1)
 
 /obj/item/chems/food/candiedapple
 	name = "candied apple"
@@ -129,7 +129,7 @@
 
 /obj/item/chems/food/mint/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, 1)
+	add_to_reagents(/decl/material/liquid/drink/syrup/mint, 1)
 
 /obj/item/chems/food/plumphelmetbiscuit
 	name = "plump helmet biscuit"
@@ -146,8 +146,8 @@
 	if(prob(10))
 		name = "exceptional plump helmet biscuit"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump helmet biscuit!"
-		reagents.add_reagent(/decl/material/liquid/nutriment, 3)
-		reagents.add_reagent(/decl/material/liquid/regenerator, 5)
+		add_to_reagents(/decl/material/liquid/nutriment, 3)
+		add_to_reagents(/decl/material/liquid/regenerator, 5)
 
 /obj/item/chems/food/appletart
 	name = "golden apple streusel tart"
@@ -162,7 +162,7 @@
 
 /obj/item/chems/food/appletart/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/solid/metal/gold, 5)
+	add_to_reagents(/decl/material/solid/metal/gold, 5)
 
 /obj/item/chems/food/cracker
 	name = "cracker"
@@ -192,7 +192,7 @@
 
 /obj/item/chems/food/taco/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/pelmen
 	name = "meat pelmen"
@@ -204,7 +204,7 @@
 
 /obj/item/chems/food/pelmen/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 1)
 
 /obj/item/chems/food/pelmeni_boiled
 	name = "boiled pelmeni"
@@ -216,4 +216,4 @@
 
 /obj/item/chems/food/pelmeni_boiled/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 30)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 30)

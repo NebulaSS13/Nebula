@@ -102,7 +102,7 @@
 	. = ..()
 
 /obj/structure/fountain/mundane/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
+	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume) //Don't give free water when building one
 
 /obj/structure/fountain/mundane/attack_hand(mob/user)
 	if(user.a_intent == I_HURT)

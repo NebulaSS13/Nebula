@@ -7,9 +7,9 @@
 
 /obj/item/chems/food/sliceable/pizza/vegetablepizza/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
-	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup,  6)
-	reagents.add_reagent(/decl/material/liquid/eyedrops,           12)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,  5)
+	add_to_reagents(/decl/material/liquid/nutriment/ketchup,  6)
+	add_to_reagents(/decl/material/liquid/eyedrops,           12)
 
 /obj/item/chems/food/slice/pizza/vegetable
 	name = "vegetable pizza slice"

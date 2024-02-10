@@ -10,5 +10,5 @@
 	bitesize = 2
 
 /obj/item/chems/food/dionaroast/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/metal/radium, 2)
+	add_to_reagents(/decl/material/solid/metal/radium, 2)
 	. = ..()

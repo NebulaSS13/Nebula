@@ -72,7 +72,7 @@
 
 /obj/item/chems/food/can/beef/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 12)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 12)
 
 /obj/item/chems/food/can/beans
 	name = "baked beans"
@@ -94,7 +94,7 @@
 
 /obj/item/chems/food/can/tomato/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 12)
+	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 12)
 
 /obj/item/chems/food/can/spinach
 	name = "spinach"
@@ -107,10 +107,10 @@
 
 /obj/item/chems/food/can/spinach/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment,    5)
-	reagents.add_reagent(/decl/material/liquid/adrenaline,   5)
-	reagents.add_reagent(/decl/material/liquid/amphetamines, 5)
-	reagents.add_reagent(/decl/material/solid/metal/iron,    5)
+	add_to_reagents(/decl/material/liquid/nutriment,    5)
+	add_to_reagents(/decl/material/liquid/adrenaline,   5)
+	add_to_reagents(/decl/material/liquid/amphetamines, 5)
+	add_to_reagents(/decl/material/solid/metal/iron,    5)
 
 //Vending Machine Foods should go here.
 
@@ -134,8 +134,8 @@
 
 /obj/item/chems/food/can/caviar/true/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/liquid/carpotoxin,        1)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/liquid/carpotoxin,        1)
 
 /obj/item/knife/opener
 	name = "can-opener"

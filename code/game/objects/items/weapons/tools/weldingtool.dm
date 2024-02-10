@@ -262,7 +262,7 @@
 	if(get_fuel() < amount)
 		. = FALSE //Try to burn as much as possible anyways
 	if(tank)
-		tank.reagents.remove_reagent(/decl/material/liquid/fuel, amount)
+		tank.remove_from_reagents(/decl/material/liquid/fuel, amount)
 
 //Returns whether or not the welding tool is currently on.
 /obj/item/weldingtool/proc/isOn()
@@ -411,7 +411,7 @@
 	var/lit_force     = 11
 
 /obj/item/chems/welder_tank/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/fuel, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/fuel, reagents.maximum_volume)
 
 /obj/item/chems/welder_tank/examine(mob/user, distance)
 	. = ..()
@@ -533,7 +533,7 @@
 /obj/item/chems/welder_tank/experimental/Process()
 	if(REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) < reagents.maximum_volume)
 		var/gen_amount = ((world.time-last_gen)/25)
-		reagents.add_reagent(/decl/material/liquid/fuel, gen_amount)
+		add_to_reagents(/decl/material/liquid/fuel, gen_amount)
 		last_gen = world.time
 
 #undef WELDING_TOOL_HOTSPOT_TEMP_ACTIVE

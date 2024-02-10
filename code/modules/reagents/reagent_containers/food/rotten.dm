@@ -12,7 +12,7 @@
 
 /obj/item/chems/food/old/populate_reagents()
 	. = ..()
-	reagents.add_reagent(pick(
+	add_to_reagents(pick(
 				/decl/material/liquid/fuel,
 				/decl/material/liquid/amatoxin,
 				/decl/material/liquid/carpotoxin,

@@ -113,7 +113,7 @@
 	if(bodytype)
 		reagent_to_add = bodytype.edible_reagent // can set this to null and skip the next block
 	if(reagent_to_add)
-		reagents.add_reagent(reagent_to_add, reagents.maximum_volume)
+		add_to_reagents(reagent_to_add, reagents.maximum_volume)
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
 	if(istype(bodytype) && (bodytype.body_flags & BODY_FLAG_NO_DNA))
@@ -214,7 +214,7 @@
 		if(prob(40) && reagents.total_volume >= 0.1)
 			if(reagents.has_reagent(/decl/material/liquid/blood))
 				blood_splatter(get_turf(src), src, 1)
-			reagents.remove_any(0.1)
+			remove_any_reagents(0.1)
 		if(get_config_value(/decl/config/toggle/health_organs_decay))
 			take_general_damage(rand(1,3))
 		germ_level += rand(2,6)
@@ -325,9 +325,9 @@
 						germ_level += rand(3,5)
 						var/decl/blood_type/blood_decl = dna?.b_type && get_blood_type_by_name(dna.b_type)
 						if(istype(blood_decl))
-							owner.reagents.add_reagent(blood_decl.transfusion_fail_reagent, round(rand(2,4) * blood_decl.transfusion_fail_percentage))
+							owner.add_to_reagents(blood_decl.transfusion_fail_reagent, round(rand(2,4) * blood_decl.transfusion_fail_percentage))
 						else
-							owner.reagents.add_reagent(/decl/material/liquid/coagulated_blood, rand(1,2))
+							owner.add_to_reagents(/decl/material/liquid/coagulated_blood, rand(1,2))
 
 /obj/item/organ/proc/remove_rejuv()
 	qdel(src)

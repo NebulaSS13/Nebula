@@ -29,7 +29,7 @@
 	var/opening
 
 /obj/item/chems/drinks/bottle/champagne/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/ethanol/champagne, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/ethanol/champagne, reagents.maximum_volume)
 
 /obj/item/chems/drinks/bottle/champagne/open(mob/user)
 	if(ATOM_IS_OPEN_CONTAINER(src))

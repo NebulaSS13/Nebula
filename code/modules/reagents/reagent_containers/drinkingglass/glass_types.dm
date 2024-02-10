@@ -172,7 +172,7 @@
 	base_name = "#1 monkey cup"
 
 /obj/item/chems/drinks/glass2/coffeecup/punitelli/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/juice/banana, reagents.maximum_volume)
 
 /obj/item/chems/drinks/glass2/coffeecup/rainbow
 	name = "rainbow coffee cup"

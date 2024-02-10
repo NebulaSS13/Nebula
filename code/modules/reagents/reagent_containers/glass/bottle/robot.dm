@@ -16,7 +16,7 @@
 	desc = "A small bottle. Contains stabilizer - used to stabilize patients."
 
 /obj/item/chems/glass/bottle/robot/stabilizer/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/stabilizer, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/robot/antitoxin
@@ -26,5 +26,5 @@
 	icon_state = "bottle-4"
 
 /obj/item/chems/glass/bottle/robot/antitoxin/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
 	. = ..()

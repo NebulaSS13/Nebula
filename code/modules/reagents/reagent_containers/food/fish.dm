@@ -22,7 +22,7 @@
 
 		var/toxin_amt = REAGENT_VOLUME(reagents, /decl/material/liquid/carpotoxin)
 		if(toxin_amt && !prob(user.skill_fail_chance(SKILL_COOKING, 100, SKILL_PROF)))
-			reagents.remove_reagent(/decl/material/liquid/carpotoxin, toxin_amt)
+			remove_from_reagents(/decl/material/liquid/carpotoxin, toxin_amt)
 		user.visible_message("<span class='notice'>\The [user] slices \the [src] into thin strips.</span>")
 
 		var/transfer_amt = FLOOR(reagents.total_volume * 0.3)
@@ -39,7 +39,7 @@
 
 /obj/item/chems/food/fish/poison/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/carpotoxin, 6)
+	add_to_reagents(/decl/material/liquid/carpotoxin, 6)
 
 /obj/item/chems/food/fish/shark
 	fish_type = "shark"

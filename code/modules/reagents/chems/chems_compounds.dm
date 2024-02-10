@@ -309,7 +309,7 @@
 
 /decl/material/solid/tobacco/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	M.reagents.add_reagent(/decl/material/liquid/nicotine, nicotine)
+	M.add_to_reagents(/decl/material/liquid/nicotine, nicotine)
 
 /decl/material/solid/tobacco/fine
 	name = "fine tobacco"

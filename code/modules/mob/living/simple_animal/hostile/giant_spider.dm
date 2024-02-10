@@ -172,7 +172,7 @@
 				return
 		var/mob/living/L = .
 		if(L.reagents)
-			L.reagents.add_reagent(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
+			L.add_to_reagents(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
 			if(prob(poison_per_bite))
 				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 

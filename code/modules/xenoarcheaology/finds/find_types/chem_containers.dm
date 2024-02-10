@@ -42,4 +42,4 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/chems/glass/replenishing/Process()
-	reagents.add_reagent(spawning_id, 0.3)
+	add_to_reagents(spawning_id, 0.3)

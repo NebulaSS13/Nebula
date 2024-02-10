@@ -10,7 +10,7 @@
 
 /obj/item/chems/food/rawcutlet/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 1)
 
 /obj/item/chems/food/cutlet
 	name = "cutlet"
@@ -23,7 +23,7 @@
 
 /obj/item/chems/food/cutlet/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/rawmeatball
 	name = "raw meatball"
@@ -36,7 +36,7 @@
 
 /obj/item/chems/food/rawmeatball/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/meatball
 	name = "meatball"
@@ -49,7 +49,7 @@
 
 /obj/item/chems/food/meatball/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/plainsteak
 	name = "plain steak"
@@ -65,7 +65,7 @@
 
 /obj/item/chems/food/plainsteak/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/meatsteak
 	name = "meat steak"
@@ -79,9 +79,9 @@
 
 /obj/item/chems/food/meatsteak/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/solid/sodiumchloride,     1)
-	reagents.add_reagent(/decl/material/solid/blackpepper,        1)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/solid/sodiumchloride,     1)
+	add_to_reagents(/decl/material/solid/blackpepper,        1)
 
 /obj/item/chems/food/meatsteak/synthetic
 	name = "meaty steak"
@@ -101,8 +101,8 @@
 
 /obj/item/chems/food/loadedsteak/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,     2)
-	reagents.add_reagent(/decl/material/liquid/nutriment/garlicsauce, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,     2)
+	add_to_reagents(/decl/material/liquid/nutriment/garlicsauce, 2)
 
 /obj/item/chems/food/tomatomeat
 	name = "tomato slice"
@@ -125,8 +125,8 @@
 
 /obj/item/chems/food/bearmeat/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,     12)
-	reagents.add_reagent(/decl/material/liquid/amphetamines,           5)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,     12)
+	add_to_reagents(/decl/material/liquid/amphetamines,           5)
 
 /obj/item/chems/food/spider
 	name = "giant spider leg"
@@ -139,7 +139,7 @@
 
 /obj/item/chems/food/spider/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 9)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 9)
 
 /obj/item/chems/food/spider/cooked
 	name = "boiled spider meat"
@@ -158,8 +158,8 @@
 
 /obj/item/chems/food/xenomeat/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
-	reagents.add_reagent(/decl/material/liquid/acid/polyacid,     6)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/liquid/acid/polyacid,     6)
 
 /obj/item/chems/food/sausage
 	name = "sausage"
@@ -173,7 +173,7 @@
 
 /obj/item/chems/food/sausage/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/fatsausage
 	name = "spiced sausage"
@@ -186,7 +186,7 @@
 
 /obj/item/chems/food/fatsausage/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/organ
 	name = "organ"
@@ -199,8 +199,8 @@
 
 /obj/item/chems/food/organ/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, rand(3,5))
-	reagents.add_reagent(/decl/material/liquid/bromide,           rand(1,3)) //lolwat?
+	add_to_reagents(/decl/material/liquid/nutriment/protein, rand(3,5))
+	add_to_reagents(/decl/material/liquid/bromide,           rand(1,3)) //lolwat?
 
 /obj/item/chems/food/meatkabob
 	name = "meat-kabob"
@@ -213,4 +213,4 @@
 
 /obj/item/chems/food/meatkabob/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 8)

@@ -163,7 +163,7 @@
 	. = ..()
 	var/mob/living/L = target
 	if(L.reagents)
-		L.reagents.add_reagent(/decl/material/liquid/venom, 5)
+		L.add_to_reagents(/decl/material/liquid/venom, 5)
 
 /obj/item/missile
 	icon = 'icons/obj/items/grenades/missile.dmi'

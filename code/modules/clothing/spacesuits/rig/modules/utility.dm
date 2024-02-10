@@ -221,7 +221,7 @@
 				if((charge.charges + chems_to_transfer) > max_reagent_volume)
 					chems_to_transfer = max_reagent_volume - charge.charges
 				charge.charges += chems_to_transfer
-				input_item.reagents.remove_reagent(rtype, chems_to_transfer)
+				input_item.remove_from_reagents(rtype, chems_to_transfer)
 				total_transferred += chems_to_transfer
 				break
 
@@ -266,7 +266,7 @@
 	if(target_mob != H)
 		to_chat(H, "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>")
 	to_chat(target_mob, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
-	target_mob.reagents.add_reagent(charge.product_type, chems_to_use)
+	target_mob.add_to_reagents(charge.product_type, chems_to_use)
 
 	charge.charges -= chems_to_use
 	if(charge.charges < 0) charge.charges = 0

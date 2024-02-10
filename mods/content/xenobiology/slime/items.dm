@@ -47,7 +47,7 @@
 	. = ..()
 
 /obj/item/slime_extract/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 30)
+	add_to_reagents(/decl/material/liquid/slimejelly, 30)
 
 /obj/item/slime_extract/on_reagent_change()
 	..()

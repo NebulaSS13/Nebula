@@ -103,7 +103,7 @@
 	icon_state = "enzyme"
 
 /obj/item/chems/condiment/enzyme/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/enzyme, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/enzyme, reagents.maximum_volume)
 
 /obj/item/chems/condiment/barbecue
 	name = "barbecue sauce"
@@ -111,14 +111,14 @@
 	icon_state = "barbecue"
 
 /obj/item/chems/condiment/barbecue/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/barbecue, reagents.maximum_volume)
 
 /obj/item/chems/condiment/sugar
 	name = "sugar"
 	desc = "Cavities in a bottle."
 
 /obj/item/chems/condiment/sugar/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume)
 
 /obj/item/chems/condiment/ketchup
 	name = "ketchup"
@@ -126,7 +126,7 @@
 	icon_state = "ketchup"
 
 /obj/item/chems/condiment/ketchup/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/ketchup, reagents.maximum_volume)
 
 /obj/item/chems/condiment/cornoil
 	name = "corn oil"
@@ -134,7 +134,7 @@
 	icon_state = "oliveoil"
 
 /obj/item/chems/condiment/cornoil/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cornoil, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/cornoil, reagents.maximum_volume)
 
 /obj/item/chems/condiment/vinegar
 	name = "vinegar"
@@ -142,7 +142,7 @@
 	desc = "As acidic as it gets in the kitchen."
 
 /obj/item/chems/condiment/vinegar/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/vinegar, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/vinegar, reagents.maximum_volume)
 
 /obj/item/chems/condiment/mayo
 	name = "mayonnaise"
@@ -150,7 +150,7 @@
 	desc = "Mayonnaise, used for centuries to make things edible."
 
 /obj/item/chems/condiment/mayo/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/mayo, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/mayo, reagents.maximum_volume)
 
 /obj/item/chems/condiment/frostoil
 	name = "coldsauce"
@@ -158,7 +158,7 @@
 	icon_state = "coldsauce"
 
 /obj/item/chems/condiment/frostoil/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/frostoil, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/frostoil, reagents.maximum_volume)
 
 /obj/item/chems/condiment/capsaicin
 	name = "hotsauce"
@@ -166,7 +166,7 @@
 	icon_state = "hotsauce"
 
 /obj/item/chems/condiment/capsaicin/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/capsaicin, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/capsaicin, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small
 	name = "small condiment container"
@@ -193,7 +193,7 @@
 	center_of_mass = @'{"x":16,"y":9}'
 
 /obj/item/chems/condiment/small/saltshaker/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/sodiumchloride, reagents.maximum_volume)
+	add_to_reagents(/decl/material/solid/sodiumchloride, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/peppermill
 	name = "pepper mill"
@@ -202,7 +202,7 @@
 	center_of_mass = @'{"x":16,"y":8}'
 
 /obj/item/chems/condiment/small/peppermill/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/blackpepper, reagents.maximum_volume)
+	add_to_reagents(/decl/material/solid/blackpepper, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/sugar
 	name = "sugar"
@@ -211,7 +211,7 @@
 	center_of_mass = @'{"x":17,"y":9}'
 
 /obj/item/chems/condiment/small/sugar/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/mint
 	name = "mint essential oil"
@@ -220,7 +220,7 @@
 	icon_state = "coldsauce"
 
 /obj/item/chems/condiment/small/mint/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/drink/syrup/mint, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/soysauce
 	name = "soy sauce"
@@ -228,7 +228,7 @@
 	icon_state = "soysauce"
 
 /obj/item/chems/condiment/small/soysauce/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/soysauce, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/soysauce, reagents.maximum_volume)
 
 //MRE condiments and drinks.
 
@@ -245,7 +245,7 @@
 	icon_state = "packet_small_white"
 
 /obj/item/chems/condiment/small/packet/salt/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/sodiumchloride, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/solid/sodiumchloride, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/pepper
 	name = "pepper packet"
@@ -253,7 +253,7 @@
 	icon_state = "packet_small_black"
 
 /obj/item/chems/condiment/small/packet/pepper/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/blackpepper, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/solid/blackpepper, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/sugar
 	name = "sugar packet"
@@ -261,7 +261,7 @@
 	icon_state = "packet_small_white"
 
 /obj/item/chems/condiment/small/packet/sugar/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/jelly
 	name = "jelly packet"
@@ -269,7 +269,7 @@
 	icon_state = "packet_medium"
 
 /obj/item/chems/condiment/small/packet/jelly/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/cherryjelly, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/honey
 	name = "honey packet"
@@ -277,7 +277,7 @@
 	icon_state = "packet_medium"
 
 /obj/item/chems/condiment/small/packet/honey/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/capsaicin
 	name = "hot sauce packet"
@@ -285,7 +285,7 @@
 	icon_state = "packet_small_red"
 
 /obj/item/chems/condiment/small/packet/capsaicin/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/capsaicin, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/capsaicin, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/ketchup
 	name = "ketchup packet"
@@ -293,7 +293,7 @@
 	icon_state = "packet_small_red"
 
 /obj/item/chems/condiment/small/packet/ketchup/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/ketchup, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/mayo
 	name = "mayonnaise packet"
@@ -301,7 +301,7 @@
 	icon_state = "packet_small_white"
 
 /obj/item/chems/condiment/small/packet/mayo/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/mayo, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/mayo, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/soy
 	name = "soy sauce packet"
@@ -309,56 +309,56 @@
 	icon_state = "packet_small_black"
 
 /obj/item/chems/condiment/small/packet/soy/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/soysauce, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/soysauce, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/coffee
 	name = "instant coffee powder packet"
 	desc = "Contains 5u of instant coffee powder. Mix with 25u of water."
 
 /obj/item/chems/condiment/small/packet/coffee/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/coffee/instant, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/coffee/instant, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/tea
 	name = "instant tea powder packet"
 	desc = "Contains 5u of instant black tea powder. Mix with 25u of water."
 
 /obj/item/chems/condiment/small/packet/tea/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/tea/instant, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/tea/instant, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/cocoa
 	name = "cocoa powder packet"
 	desc = "Contains 5u of cocoa powder. Mix with 25u of water and heat."
 
 /obj/item/chems/condiment/small/packet/cocoa/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/coco, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/coco, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/grape
 	name = "grape juice powder packet"
 	desc = "Contains 5u of powdered grape juice. Mix with 15u of water."
 
 /obj/item/chems/condiment/small/packet/grape/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/instantjuice/grape, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/instantjuice/grape, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/orange
 	name = "orange juice powder packet"
 	desc = "Contains 5u of powdered orange juice. Mix with 15u of water."
 
 /obj/item/chems/condiment/small/packet/orange/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/instantjuice/orange, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/instantjuice/orange, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/watermelon
 	name = "watermelon juice powder packet"
 	desc = "Contains 5u of powdered watermelon juice. Mix with 15u of water."
 
 /obj/item/chems/condiment/small/packet/watermelon/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/instantjuice/watermelon, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/instantjuice/watermelon, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/apple
 	name = "apple juice powder packet"
 	desc = "Contains 5u of powdered apple juice. Mix with 15u of water."
 
 /obj/item/chems/condiment/small/packet/apple/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/instantjuice/apple, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/instantjuice/apple, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/protein
 	name = "protein powder packet"
@@ -366,38 +366,38 @@
 	icon_state = "packet_medium"
 
 /obj/item/chems/condiment/small/packet/protein/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, reagents.maximum_volume/2)
 
 /obj/item/chems/condiment/small/packet/crayon
 	name = "crayon powder packet"
 	desc = "Contains 10u of powdered crayon. Mix with 30u of water."
 
 /obj/item/chems/condiment/small/packet/crayon/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/crayon/red/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment/red, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment/red, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/crayon/orange/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment/orange, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment/orange, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/crayon/yellow/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment/yellow, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment/yellow, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/crayon/green/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment/green, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment/green, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/crayon/blue/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment/blue, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment/blue, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/crayon/purple/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment/purple, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment/purple, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/crayon/grey/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment/grey, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment/grey, reagents.maximum_volume)
 
 /obj/item/chems/condiment/small/packet/crayon/brown/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/pigment/brown, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/pigment/brown, reagents.maximum_volume)
 
 //End of MRE stuff.
 
@@ -410,7 +410,7 @@
 	randpixel = 10
 
 /obj/item/chems/condiment/flour/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/nutriment/flour, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/nutriment/flour, reagents.maximum_volume)
 
 /obj/item/chems/condiment/flour/update_container_name()
 	return
@@ -436,7 +436,7 @@
 	randpixel = 10
 
 /obj/item/chems/condiment/large/salt/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/sodiumchloride, reagents.maximum_volume)
+	add_to_reagents(/decl/material/solid/sodiumchloride, reagents.maximum_volume)
 
 /obj/item/chems/condiment/large/salt/update_container_name()
 	return

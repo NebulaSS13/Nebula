@@ -76,7 +76,7 @@
 
 /decl/material/liquid/drink/juice/carrot/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()
-	M.reagents.add_reagent(/decl/material/liquid/eyedrops, removed * 0.2)
+	M.add_to_reagents(/decl/material/liquid/eyedrops, removed * 0.2)
 
 /decl/material/liquid/drink/juice/grape
 	name = "grape juice"

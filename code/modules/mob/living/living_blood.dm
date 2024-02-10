@@ -6,7 +6,7 @@
 	var/injected_data = REAGENT_DATA(donor, my_species.blood_reagent)
 	var/chems = LAZYACCESS(injected_data, "trace_chem")
 	for(var/C in chems)
-		src.reagents.add_reagent(C, (text2num(chems[C]) / my_species.blood_volume) * amount)//adds trace chemicals to owner's blood
+		add_to_reagents(C, (text2num(chems[C]) / my_species.blood_volume) * amount)//adds trace chemicals to owner's blood
 
 /mob/living/get_blood_data()
 

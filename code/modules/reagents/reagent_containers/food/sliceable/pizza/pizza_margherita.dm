@@ -6,8 +6,8 @@
 
 /obj/item/chems/food/sliceable/pizza/margherita/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 6)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,  5)
+	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 6)
 
 /obj/item/chems/food/slice/pizza/margherita
 	name = "margherita slice"

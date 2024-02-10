@@ -74,46 +74,46 @@
 	desc = "A small bottle. Contains stabilizer - used to stabilize patients."
 
 /obj/item/chems/glass/bottle/stabilizer/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/stabilizer, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/bromide
 	desc = "A small bottle of bromide. Do not drink, it is poisonous."
 
 /obj/item/chems/glass/bottle/bromide/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/bromide, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/bromide, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/cyanide
 	desc = "A small bottle of cyanide. Bitter almonds?"
 
 /obj/item/chems/glass/bottle/cyanide/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/cyanide, reagents.maximum_volume / 2) //volume changed to match chloral
+	add_to_reagents(/decl/material/liquid/cyanide, reagents.maximum_volume / 2) //volume changed to match chloral
 	. = ..()
 
 /obj/item/chems/glass/bottle/sedatives
 	desc = "A small bottle of soporific medication. Just the fumes make you sleepy."
 
 /obj/item/chems/glass/bottle/sedatives/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/sedatives, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/sedatives, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/antitoxin
 	desc = "A small bottle of antitoxins. Counters poisons, and repairs damage. A wonder drug."
 
 /obj/item/chems/glass/bottle/antitoxin/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/mutagenics
 	desc = "A small bottle of unstable mutagen. Randomly changes the DNA structure of whoever comes in contact."
 
 /obj/item/chems/glass/bottle/mutagenics/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/mutagenics, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/mutagenics, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/ammonia/populate_reagents()
-	reagents.add_reagent(/decl/material/gas/ammonia, reagents.maximum_volume)
+	add_to_reagents(/decl/material/gas/ammonia, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/eznutrient
@@ -124,7 +124,7 @@
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/chems/glass/bottle/eznutrient/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/fertilizer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/fertilizer, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/left4zed
@@ -136,8 +136,8 @@
 
 /obj/item/chems/glass/bottle/left4zed/populate_reagents()
 	var/mutagen_amount = round(reagents.maximum_volume / 6)
-	reagents.add_reagent(/decl/material/liquid/fertilizer, reagents.maximum_volume - mutagen_amount)
-	reagents.add_reagent(/decl/material/liquid/mutagenics, mutagen_amount)
+	add_to_reagents(/decl/material/liquid/fertilizer, reagents.maximum_volume - mutagen_amount)
+	add_to_reagents(/decl/material/liquid/mutagenics, mutagen_amount)
 	. = ..()
 
 /obj/item/chems/glass/bottle/robustharvest
@@ -149,12 +149,12 @@
 
 /obj/item/chems/glass/bottle/robustharvest/populate_reagents()
 	var/amonia_amount = round(reagents.maximum_volume / 6)
-	reagents.add_reagent(/decl/material/liquid/fertilizer, reagents.maximum_volume - amonia_amount)
-	reagents.add_reagent(/decl/material/gas/ammonia,       amonia_amount)
+	add_to_reagents(/decl/material/liquid/fertilizer, reagents.maximum_volume - amonia_amount)
+	add_to_reagents(/decl/material/gas/ammonia,       amonia_amount)
 	. = ..()
 
 /obj/item/chems/glass/bottle/pacid/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/acid/polyacid, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/acid/polyacid, reagents.maximum_volume)
 	. = ..()
 /obj/item/chems/glass/bottle/adminordrazine
 	desc = "A small bottle. Contains the liquid essence of the gods."
@@ -163,19 +163,19 @@
 	label_color = COLOR_CYAN_BLUE
 
 /obj/item/chems/glass/bottle/adminordrazine/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/adminordrazine, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/adminordrazine, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/capsaicin
 	desc = "A small bottle. Contains hot sauce."
 
 /obj/item/chems/glass/bottle/capsaicin/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/capsaicin, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/capsaicin, reagents.maximum_volume)
 	. = ..()
 
 /obj/item/chems/glass/bottle/frostoil
 	desc = "A small bottle. Contains cold sauce."
 
 /obj/item/chems/glass/bottle/frostoil/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/frostoil, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/frostoil, reagents.maximum_volume)
 	. = ..()

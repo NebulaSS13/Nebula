@@ -36,7 +36,7 @@
 
 /obj/item/chems/food/pastatomato/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 10)
+	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 10)
 
 /obj/item/chems/food/nanopasta
 	name = "nanopasta"
@@ -50,7 +50,7 @@
 
 /obj/item/chems/food/nanopasta/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nanitefluid, 10)
+	add_to_reagents(/decl/material/liquid/nanitefluid, 10)
 
 /obj/item/chems/food/meatballspagetti
 	name = "spaghetti & meatballs"
@@ -64,7 +64,7 @@
 	bitesize = 2
 /obj/item/chems/food/meatballspagetti/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/spesslaw
 	name = "spaghetti & too many meatballs"
@@ -78,4 +78,4 @@
 
 /obj/item/chems/food/spesslaw/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 4)

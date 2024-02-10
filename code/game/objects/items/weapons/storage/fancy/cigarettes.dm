@@ -83,7 +83,7 @@
 	return list(/obj/item/clothing/mask/smokable/cigarette/killthroat = 6)
 
 /obj/item/storage/box/fancy/cigarettes/killthroat/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/fuel, (max_storage_space * 4))
+	add_to_reagents(/decl/material/liquid/fuel, (max_storage_space * 4))
 
 // New exciting ways to kill your lungs! - Earthcrusher //
 
@@ -193,9 +193,9 @@
 		desc = "[initial(desc)] 'F' has been scribbled on it."
 
 /obj/item/storage/box/fancy/cigarettes/flash_powder/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/metal/aluminium, max_storage_space)
-	reagents.add_reagent(/decl/material/solid/potassium,       max_storage_space)
-	reagents.add_reagent(/decl/material/solid/sulfur,          max_storage_space)
+	add_to_reagents(/decl/material/solid/metal/aluminium, max_storage_space)
+	add_to_reagents(/decl/material/solid/potassium,       max_storage_space)
+	add_to_reagents(/decl/material/solid/sulfur,          max_storage_space)
 
 //Chemsmoke Pack
 /obj/item/storage/box/fancy/cigarettes/chemsmoke
@@ -211,9 +211,9 @@
 		desc = "[initial(desc)] 'S' has been scribbled on it."
 
 /obj/item/storage/box/fancy/cigarettes/chemsmoke/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/potassium,        max_storage_space)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, max_storage_space)
-	reagents.add_reagent(/decl/material/solid/phosphorus,       max_storage_space)
+	add_to_reagents(/decl/material/solid/potassium,        max_storage_space)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, max_storage_space)
+	add_to_reagents(/decl/material/solid/phosphorus,       max_storage_space)
 
 //Mindbreak Pack (now called /decl/chemical_reaction/hallucinogenics)
 /obj/item/storage/box/fancy/cigarettes/mindbreak
@@ -229,9 +229,9 @@
 		desc = "[initial(desc)] 'MB' has been scribbled on it." //#TODO: maybe fix the lore for that?
 
 /obj/item/storage/box/fancy/cigarettes/mindbreak/populate_reagents()
-	reagents.add_reagent(/decl/material/solid/silicon,         max_storage_space)
-	reagents.add_reagent(/decl/material/liquid/fuel/hydrazine, max_storage_space)
-	reagents.add_reagent(/decl/material/liquid/antitoxins,     max_storage_space)
+	add_to_reagents(/decl/material/solid/silicon,         max_storage_space)
+	add_to_reagents(/decl/material/liquid/fuel/hydrazine, max_storage_space)
+	add_to_reagents(/decl/material/liquid/antitoxins,     max_storage_space)
 
 //Tricord pack (now called /decl/material/liquid/regenerator)
 /obj/item/storage/box/fancy/cigarettes/tricord
@@ -247,4 +247,4 @@
 		desc = "[initial(desc)] 'T' has been scribbled on it." //#TODO: maybe fix the lore for that?
 
 /obj/item/storage/box/fancy/cigarettes/tricord/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/regenerator, (4 * max_storage_space))
+	add_to_reagents(/decl/material/liquid/regenerator, (4 * max_storage_space))

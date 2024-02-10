@@ -46,7 +46,7 @@
 	if(get_fuel() < amount)
 		. = FALSE //Try to burn as much as possible anyways
 	if(linked_pack)
-		linked_pack.reagents.remove_reagent(/decl/material/liquid/fuel, amount)
+		linked_pack.remove_from_reagents(/decl/material/liquid/fuel, amount)
 
 /**Called by the parent when the welderpack is dropped */
 /obj/item/weldingtool/weldpack/proc/on_pack_dropped(var/mob/user)
@@ -77,7 +77,7 @@
 	var/obj/item/weldingtool/weldpack/welder = /obj/item/weldingtool/weldpack
 
 /obj/item/chems/weldpack/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/fuel, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/fuel, reagents.maximum_volume)
 
 /obj/item/chems/weldpack/Initialize(ml, material_key)
 	if(ispath(welder))

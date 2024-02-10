@@ -50,7 +50,7 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	bitesize = 10
 
 /obj/item/chems/food/hydration/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/water, 10)
+	add_to_reagents(/decl/material/liquid/water, 10)
 	. = ..()
 
 /obj/item/storage/box/water/ascent

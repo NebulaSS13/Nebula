@@ -13,7 +13,7 @@
 
 /obj/item/chems/food/meat/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 9)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 9)
 
 /obj/item/chems/food/meat/syntiflesh
 	name = "synthetic meat"

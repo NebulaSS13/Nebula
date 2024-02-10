@@ -27,10 +27,10 @@
 
 	if(is_bruised())
 		if(prob(5) && REAGENT_VOLUME(reagents, /decl/material/solid/potassium) < 5)
-			reagents.add_reagent(/decl/material/solid/potassium, REM*5)
+			add_to_reagents(/decl/material/solid/potassium, REM*5)
 	if(is_broken())
 		if(REAGENT_VOLUME(owner.reagents, /decl/material/solid/potassium) < 15)
-			owner.reagents.add_reagent(/decl/material/solid/potassium, REM*2)
+			owner.add_to_reagents(/decl/material/solid/potassium, REM*2)
 
 	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
 	if(!GET_CHEMICAL_EFFECT(owner, CE_ANTITOX))

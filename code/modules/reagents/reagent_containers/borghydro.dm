@@ -79,7 +79,7 @@
 
 		if(M.reagents)
 			var/t = min(amount_per_transfer_from_this, reagent_volumes[reagent_ids[mode]])
-			M.reagents.add_reagent(reagent_ids[mode], t)
+			M.add_to_reagents(reagent_ids[mode], t)
 			reagent_volumes[reagent_ids[mode]] -= t
 			admin_inject_log(user, M, src, reagent_ids[mode], t)
 			to_chat(user, "<span class='notice'>[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining.</span>")
@@ -180,7 +180,7 @@
 		return
 
 	var/t = min(amount_per_transfer_from_this, reagent_volumes[reagent_ids[mode]])
-	target.reagents.add_reagent(reagent_ids[mode], t)
+	target.add_to_reagents(reagent_ids[mode], t)
 	reagent_volumes[reagent_ids[mode]] -= t
 	to_chat(user, "<span class='notice'>You transfer [t] units of the solution to [target].</span>")
 	return

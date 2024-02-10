@@ -74,4 +74,4 @@
 	amount_per_transfer_from_this = 10
 
 /obj/item/chems/drinks/zombiedrink/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/zombie, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/zombie, reagents.maximum_volume)

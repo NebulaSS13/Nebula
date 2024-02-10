@@ -212,7 +212,7 @@
 			return
 		var/obj/item/chems/glass/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
-		G.reagents.add_reagent(/decl/material/liquid/nutriment/honey, transferred)
+		G.add_to_reagents(/decl/material/liquid/nutriment/honey, transferred)
 		honey -= transferred
 		user.visible_message("<span class='notice'>\The [user] collects honey from \the [src] into \the [G].</span>", "<span class='notice'>You collect [transferred] units of honey from \the [src] into \the [G].</span>")
 		return 1
