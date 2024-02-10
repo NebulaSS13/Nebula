@@ -341,3 +341,25 @@
 
 /obj/can_be_injected_by(var/atom/injector)
 	return ATOM_IS_OPEN_CONTAINER(src)
+
+/obj/ProcessAtomTemperature()
+	. = ..()
+	if(QDELETED(src))
+		return
+	// Bake any matter into the cooked form.
+	if(LAZYLEN(matter))
+		var/new_matter
+		var/remove_matter
+		for(var/matter_type in matter)
+			var/decl/material/mat = GET_DECL(matter_type)
+			if(mat.bakes_into_material && !isnull(mat.bakes_into_at_temperature) && temperature >= mat.bakes_into_at_temperature)
+				LAZYINITLIST(new_matter)
+				new_matter[mat.bakes_into_material] += matter[matter_type]
+				LAZYDISTINCTADD(remove_matter, remove_matter)
+		if(LAZYLEN(new_matter))
+			for(var/mat in new_matter)
+				matter[mat] = new_matter[mat]
+		if(LAZYLEN(remove_matter))
+			for(var/mat in remove_matter)
+				matter -= mat
+		UNSETEMPTY(matter)

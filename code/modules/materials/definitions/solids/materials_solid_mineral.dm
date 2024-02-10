@@ -219,7 +219,7 @@
 	uid = "solid_sand"
 	color = "#e2dbb5"
 	heating_products = list(/decl/material/solid/glass = 1)
-	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_point = 2000 CELSIUS
 	heating_sound = null
 	heating_message = null
 	ore_compresses_to = /decl/material/solid/stone/sandstone
@@ -236,18 +236,17 @@
 
 /decl/material/solid/clay
 	name = "clay"
+	codex_name = "raw clay"
 	uid = "solid_clay"
-	color = COLOR_OFF_WHITE
+	color = "#807f7a"
 	ore_name = "clay"
-	ore_icon_overlay = "lump"
-	heating_products = list(/decl/material/solid/stone/ceramic = 1)
-	heating_point = GENERIC_SMELTING_HEAT_POINT
-	heating_sound = null
-	heating_message = null
 	ore_compresses_to = null
-	ore_icon_overlay = "dust"
+	ore_icon_overlay = "lump"
 	value = 0.8
 	default_solid_form = /obj/item/stack/material/lump
+	bakes_into_material = /decl/material/solid/stone/pottery
+	melting_point = null // Clay is already almost a liquid...
+	bakes_into_at_temperature = 1100 CELSIUS // roughly the temperature expected from a kiln
 
 /decl/material/solid/hematite
 	name = "hematite"

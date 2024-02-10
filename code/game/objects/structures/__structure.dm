@@ -130,6 +130,18 @@
 	if(dmg)
 		take_damage(dmg)
 
+/obj/structure/ProcessAtomTemperature()
+	var/update_mats = FALSE
+	if(material && material.bakes_into_material && !isnull(material.bakes_into_at_temperature) && temperature >= material.bakes_into_at_temperature)
+		material = GET_DECL(material.bakes_into_material)
+		update_mats = TRUE
+	if(reinf_material && reinf_material.bakes_into_material && !isnull(reinf_material.bakes_into_at_temperature) && temperature >= reinf_material.bakes_into_at_temperature)
+		reinf_material = GET_DECL(reinf_material.bakes_into_material)
+		update_mats = TRUE
+	if(update_mats)
+		update_materials()
+	. = ..()
+
 /obj/structure/Destroy()
 	var/turf/T = get_turf(src)
 	. = ..()

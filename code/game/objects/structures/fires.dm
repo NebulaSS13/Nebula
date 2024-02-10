@@ -29,7 +29,7 @@
 	var/const/light_color_low =  "#ff0000"
 
 	var/list/affected_exterior_turfs
-	var/list/exterior_temperature = 30 // Celcius, but it is added directly to a Kelvin value so don't do any conversion.
+	var/list/exterior_temperature = 30 // Celsius, but it is added directly to a Kelvin value so don't do any conversion.
 
 	var/output_temperature = T0C+50  // The amount that the fire will try to heat up the air.
 	var/fuel = 0                     // How much fuel is left?

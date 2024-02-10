@@ -142,6 +142,11 @@
 	alpha = 100 + max(1, amount/25)*(material.opacity * 255)
 	update_state_from_amount()
 
+/obj/item/stack/material/ProcessAtomTemperature()
+	. = ..()
+	if(!QDELETED(src))
+		update_strings()
+
 /obj/item/stack/material/proc/update_state_from_amount()
 	if(max_icon_state && amount == max_amount)
 		icon_state = max_icon_state
