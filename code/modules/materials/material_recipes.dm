@@ -36,6 +36,9 @@
 		. += new/datum/stack_recipe/furniture/bed(src)
 		return
 
+	if(ispath(stack_type, /obj/item/stack/material/brick) && wall_support_value >= 10)
+		. += new/datum/stack_recipe/turfs/wall/brick(src)
+
 	// We assume a non-ore non-strut stack type is a general type that can use general recipes.
 	if(opacity < 0.6)
 		. += new/datum/stack_recipe/furniture/borderwindow(src, reinforce_material)

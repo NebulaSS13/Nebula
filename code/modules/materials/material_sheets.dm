@@ -219,6 +219,7 @@
 	plural_icon_state = "brick-mult"
 	max_icon_state = "brick-max"
 	stack_merge_type = /obj/item/stack/material/brick
+	recipe_stack_type = /obj/item/stack/material/brick
 
 /obj/item/stack/material/bolt
 	name = "bolts"

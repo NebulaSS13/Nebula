@@ -2345,6 +2345,7 @@
 #include "code\modules\materials\recipes_stacks.dm"
 #include "code\modules\materials\recipes_storage.dm"
 #include "code\modules\materials\recipes_structures.dm"
+#include "code\modules\materials\recipes_turfs.dm"
 #include "code\modules\materials\definitions\gasses\_mat_gas.dm"
 #include "code\modules\materials\definitions\gasses\material_gas_alien.dm"
 #include "code\modules\materials\definitions\gasses\material_gas_mundane.dm"

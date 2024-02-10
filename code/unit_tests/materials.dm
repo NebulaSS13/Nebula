@@ -27,23 +27,24 @@
 						recipes |= recipe_stack.recipes
 
 		for(var/datum/stack_recipe/recipe as anything in recipes)
-			var/obj/product = recipe.spawn_result()
+			var/atom/product = recipe.spawn_result()
 			var/failed
 			if(!product)
 				failed = "no product returned"
-			else if(!istype(product))
-				failed = "non-obj product returned ([product.type])"
-			else
-				LAZYINITLIST(product.matter) // For the purposes of the following tests not runtiming.
+			else if(!istype(product, recipe.expected_product_type))
+				failed = "unexpected product type returned ([product.type])"
+			else if(isobj(product))
+				var/obj/product_obj = product
+				LAZYINITLIST(product_obj.matter) // For the purposes of the following tests not runtiming.
 				if(!recipe.use_material && !recipe.use_reinf_material)
-					if(length(product.matter))
+					if(length(product_obj.matter))
 						failed = "unsupplied material types"
-				else if(recipe.use_material && (product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive base material ([recipe.req_amount]/[CEILING(product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
-				else if(recipe.use_reinf_material && (product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive reinf material ([recipe.req_amount]/[CEILING(product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
+				else if(recipe.use_material && (product_obj.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
+					failed = "excessive base material ([recipe.req_amount]/[CEILING(product_obj.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
+				else if(recipe.use_reinf_material && (product_obj.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
+					failed = "excessive reinf material ([recipe.req_amount]/[CEILING(product_obj.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
 				else
-					for(var/mat in product.matter)
+					for(var/mat in product_obj.matter)
 						if(mat != recipe.use_material && mat != recipe.use_reinf_material)
 							failed = "extra material type ([mat])"
 			if(failed) // Try to prune out some duplicate error spam, we have too many materials now

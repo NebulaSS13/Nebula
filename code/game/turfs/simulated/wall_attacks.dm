@@ -158,7 +158,7 @@
 			var/obj/item/weldingtool/WT = W
 			if(!WT.weld(0,user))
 				return
-			dismantle_verb = "cutting"
+			dismantle_verb = "cutting through"
 			dismantle_sound = 'sound/items/Welder.ogg'
 			cut_delay *= 0.7
 
@@ -178,7 +178,7 @@
 				if(!cutter.slice(user))
 					return TRUE
 			dismantle_sound = "sparks"
-			dismantle_verb = "slicing"
+			dismantle_verb = "slicing through"
 			cut_delay *= 0.5
 		else if(istype(W,/obj/item/pickaxe))
 			var/obj/item/pickaxe/P = W
@@ -188,7 +188,7 @@
 
 		if(dismantle_verb)
 			. = TRUE
-			to_chat(user, "<span class='notice'>You begin [dismantle_verb] through the outer plating.</span>")
+			to_chat(user, "<span class='notice'>You begin [dismantle_verb] \the [src].</span>")
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
@@ -199,8 +199,8 @@
 				return
 
 			to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
+			user.visible_message("<span class='warning'>\The [user] finishes [dismantle_verb] \the [src]!</span>")
 			dismantle_wall()
-			user.visible_message("<span class='warning'>\The [src] was torn open by [user]!</span>")
 			return
 
 	//Reinforced dismantling.
