@@ -17,20 +17,31 @@
 /turf/return_fluid()
 	return (locate(/obj/effect/fluid) in contents)
 
-/turf/proc/make_unflooded(var/force)
-	if(force || flooded)
-		flooded = FALSE
-		REMOVE_ACTIVE_FLUID_SOURCE(src)
-		remove_vis_contents(src, global.flood_object)
-		fluid_update() // We are now floodable, so wake up our neighbors.
+/turf/proc/set_flooded(new_flooded, force = FALSE, skip_vis_contents_update = FALSE, mapload = FALSE)
 
-/turf/proc/make_flooded(var/force)
-	if(force || !flooded)
-		flooded = TRUE
+	// Don't do unnecessary work.
+	if(!force && new_flooded == flooded)
+		return
+
+	// Remove our old overlay if necessary.
+	if(flooded && new_flooded != flooded && !skip_vis_contents_update)
+		var/flood_object = get_flood_overlay(flooded)
+		if(flood_object)
+			remove_vis_contents(src, flood_object)
+
+	// Set our flood state.
+	flooded = new_flooded
+	if(flooded)
 		for(var/obj/effect/fluid/fluid in src)
 			qdel(fluid)
 		ADD_ACTIVE_FLUID_SOURCE(src)
-		add_vis_contents(src, global.flood_object)
+		if(!skip_vis_contents_update)
+			var/flood_object = get_flood_overlay(flooded)
+			if(flood_object)
+				add_vis_contents(src, flood_object)
+	else if(!mapload)
+		REMOVE_ACTIVE_FLUID_SOURCE(src)
+		fluid_update() // We are now floodable, so wake up our neighbors.
 
 /turf/is_flooded(var/lying_mob, var/absolute)
 	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))

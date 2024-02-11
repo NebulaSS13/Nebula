@@ -357,6 +357,9 @@
 		return
 	shared_transition_edge_bumped(src, AM, mimic_z)
 
+/turf/unsimulated/mimic_edge/transition/flooded
+	flooded = /decl/material/liquid/water
+
 /turf/unsimulated/mimic_edge/transition/setup_mimic()
 	var/list/coord = shared_transition_edge_get_coordinates_turf_to_mimic(src, shared_transition_edge_get_valid_level_data(src))
 	set_mimic_turf(coord[1], coord[2], coord[3])

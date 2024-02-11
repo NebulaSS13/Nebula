@@ -126,7 +126,19 @@
 	fluid_initial = 10
 
 // Permaflood overlay.
-var/global/obj/effect/flood/flood_object = new
+var/global/list/flood_type_overlay_cache = list()
+/proc/get_flood_overlay(fluid_type)
+	if(!ispath(fluid_type, /decl/material))
+		return null
+	if(!global.flood_type_overlay_cache[fluid_type])
+		var/decl/material/fluid_decl = GET_DECL(fluid_type)
+		var/obj/effect/flood/new_flood = new
+		new_flood.color = fluid_decl.color
+		new_flood.alpha = round(fluid_decl.min_fluid_opacity + ((fluid_decl.max_fluid_opacity - fluid_decl.min_fluid_opacity) * 0.5))
+		global.flood_type_overlay_cache[fluid_type] = new_flood
+		return new_flood
+	return global.flood_type_overlay_cache[fluid_type]
+
 /obj/effect/flood
 	name          = ""
 	icon          = 'icons/effects/liquids.dmi'

@@ -72,7 +72,7 @@
 
 /turf/simulated/open/flooded
 	name = "open water"
-	flooded = TRUE
+	flooded = /decl/material/liquid/water
 
 /turf/simulated/open/update_dirt()
 	return 0
@@ -130,7 +130,7 @@
 
 /turf/exterior/open/flooded
 	name = "open water"
-	flooded = TRUE
+	flooded = /decl/material/liquid/water
 
 /turf/exterior/open/Entered(var/atom/movable/mover, var/atom/oldloc)
 	..()
