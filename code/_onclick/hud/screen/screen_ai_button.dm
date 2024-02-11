@@ -1,8 +1,9 @@
 /obj/screen/ai_button
+	icon = 'icons/mob/screen/ai.dmi'
+	requires_ui_style = FALSE
 	var/mob/living/silicon/ai/ai_verb
 	var/list/input_procs
 	var/list/input_args
-	icon = 'icons/mob/screen_ai.dmi'
 	var/list/template_icon = list(null, "template")
 	var/image/template_undelay
 
@@ -38,7 +39,7 @@
 	call(A, ai_verb)(arglist(input_arguments))
 	return TRUE
 
-/obj/screen/ai_button/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, decl/ai_hud/ai_hud_data)
+/obj/screen/ai_button/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, decl/ai_hud/ai_hud_data)
 	. = ..()
 
 	name        = ai_hud_data.name

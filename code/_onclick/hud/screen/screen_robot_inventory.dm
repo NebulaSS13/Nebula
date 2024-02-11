@@ -1,6 +1,6 @@
 /obj/screen/robot_inventory
 	name       = "inventory"
-	icon       = 'icons/mob/screen1_robot.dmi'
+	icon       = 'icons/mob/screen/styles/robot/panel.dmi'
 	icon_state = "inventory"
 	screen_loc = ui_borg_inventory
 

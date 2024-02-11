@@ -2,10 +2,11 @@
 	name = "hardpoint"
 	icon = 'icons/mecha/mech_hud.dmi'
 	icon_state = "base"
+	requires_ui_style = FALSE
 	var/initial_maptext
 	var/height = 14
 
-/obj/screen/exosuit/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha)
+/obj/screen/exosuit/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_cat, ui_alpha)
 	. = ..()
 	var/mob/living/exosuit/newowner = get_owning_exosuit()
 	if(!istype(newowner))
@@ -133,7 +134,7 @@
 			new_overlays += global.hardpoint_bar_cache[i]
 	overlays = new_overlays
 
-/obj/screen/exosuit/hardpoint/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, newtag)
+/obj/screen/exosuit/hardpoint/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, newtag)
 	. = ..()
 	hardpoint_tag = newtag
 	name = "hardpoint ([hardpoint_tag])"

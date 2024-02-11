@@ -20,7 +20,7 @@
 
 /obj/effect/spawner/newbomb
 	name = "TTV bomb"
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "x"
 
 	var/filler_type =          /decl/material/gas/carbon_dioxide
@@ -102,7 +102,7 @@
 
 /obj/effect/spawner/onetankbomb
 	name = "Single-tank bomb"
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/effects/markers.dmi'
 	icon_state = "x"
 
 /obj/effect/spawner/onetankbomb/Initialize()

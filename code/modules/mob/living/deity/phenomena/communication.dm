@@ -26,7 +26,7 @@
 /datum/phenomena/point/activate(var/atom/a)
 	..()
 	if(!arrow)
-		arrow = image('icons/mob/screen1.dmi', icon_state = "arrow", layer = POINTER_LAYER)
+		arrow = image('icons/effects/markers.dmi', icon_state = "arrow", layer = POINTER_LAYER)
 	var/turf/T = get_turf(a)
 	arrow.loc = T
 	var/list/view = view(7,T)

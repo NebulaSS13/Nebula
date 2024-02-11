@@ -3,12 +3,37 @@ var/global/obj/screen/robot_inventory
 /mob/living/silicon/robot
 	hud_type = /datum/hud/robot
 
+/decl/ui_style/robot
+	name = "Stationbound"
+	restricted = TRUE
+	override_icons = list(
+		UI_ICON_HEALTH      = 'icons/mob/screen/styles/robot/health.dmi',
+		UI_ICON_INTENT      = 'icons/mob/screen/styles/robot/intents.dmi',
+		UI_ICON_STATUS_FIRE = 'icons/mob/screen/styles/robot/status_fire.dmi',
+		UI_ICON_STATUS      = 'icons/mob/screen/styles/robot/status.dmi',
+		UI_ICON_UP_HINT     = 'icons/mob/screen/styles/robot/uphint.dmi',
+		UI_ICON_ZONE_SELECT = 'icons/mob/screen/styles/robot/zone_selector.dmi'
+	)
+
+/datum/hud/robot/get_ui_style_data()
+	return GET_DECL(/decl/ui_style/robot)
+
+/datum/hud/robot/get_ui_color()
+	return COLOR_WHITE
+
+/datum/hud/robot/get_ui_alpha()
+	return 255
+
 /datum/hud/robot/FinalizeInstantiation()
 
 	var/mob/living/silicon/robot/R = mymob
 	if(!istype(R))
 		..()
 		return
+
+	var/decl/ui_style/ui_style = get_ui_style_data()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
 
 	//Radio
 	adding += new /obj/screen/robot_radio(null, mymob)
@@ -27,27 +52,25 @@ var/global/obj/screen/robot_inventory
 	adding += R.ui_drop_grab
 
 	//Intent
-	action_intent = new /obj/screen/intent/robot(null, mymob)
+	action_intent = new /obj/screen/intent/robot(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTENT)
 	action_intent.icon_state = R.a_intent
 	adding += action_intent
 
 	adding            += new /obj/screen/robot_panel(        null, mymob)
-	R.cells            = new /obj/screen/robot_charge(       null, mymob)
-	R.healths          = new /obj/screen/robot_health(       null, mymob)
-	R.hands            = new /obj/screen/robot_module_select(null, mymob)
-	R.throw_icon       = new /obj/screen/robot_store(        null, mymob)
+	R.hands            = new /obj/screen/robot_module/select(null, mymob)
 	robot_inventory    = new /obj/screen/robot_inventory(    null, mymob)
-	R.bodytemp         = new /obj/screen/bodytemp(           null, mymob)
-	R.oxygen           = new /obj/screen/robot_oxygen(       null, mymob)
-	R.fire             = new /obj/screen/robot_fire(         null, mymob)
-	R.up_hint          = new /obj/screen/up_hint(            null, mymob, 'icons/mob/screen1_robot.dmi')
-	R.zone_sel         = new(                                null, mymob, 'icons/mob/screen1_robot.dmi')
-	R.gun_setting_icon = new /obj/screen/gun/mode(           null, mymob)
-	R.item_use_icon    = new /obj/screen/gun/item(           null, mymob)
-	R.gun_move_icon    = new /obj/screen/gun/move(           null, mymob)
-	R.radio_use_icon   = new /obj/screen/gun/radio(          null, mymob)
-
-
+	R.cells            = new /obj/screen/robot_charge(       null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_CHARGE)
+	R.healths          = new /obj/screen/robot_health(       null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HEALTH)
+	R.throw_icon       = new /obj/screen/robot_store(        null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTERACTION)
+	R.bodytemp         = new /obj/screen/bodytemp(           null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
+	R.oxygen           = new /obj/screen/robot_oxygen(       null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
+	R.fire             = new /obj/screen/robot_fire(         null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS_FIRE)
+	R.up_hint          = new /obj/screen/up_hint(            null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_UP_HINT)
+	R.zone_sel         = new(                                null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_ZONE_SELECT)
+	R.gun_setting_icon = new /obj/screen/gun/mode(           null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
+	R.item_use_icon    = new /obj/screen/gun/item(           null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
+	R.gun_move_icon    = new /obj/screen/gun/move(           null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
+	R.radio_use_icon   = new /obj/screen/gun/radio(          null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
 
 	hud_elements = list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
 	..()

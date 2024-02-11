@@ -1,7 +1,7 @@
 /obj/item/contract
 	name = "contract"
 	desc = "written in the blood of some unfortunate fellow."
-	icon = 'icons/mob/screen_spells.dmi'
+	icon = 'icons/mob/screen/spells.dmi'
 	icon_state = "master_open"
 	material = /decl/material/solid/organic/paper
 	var/contract_master = null

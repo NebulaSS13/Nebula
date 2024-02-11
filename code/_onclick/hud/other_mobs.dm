@@ -1,34 +1,76 @@
 /mob/living/simple_animal/construct
 	hud_type = /datum/hud/construct
 
-/mob/living/simple_animal/construct
-	var/hud_construct_type
-
 /mob/living/simple_animal/construct/armoured
-	hud_construct_type = "juggernaut"
+	hud_type = /datum/hud/construct/juggernaut
 
 /mob/living/simple_animal/construct/behemoth
-	hud_construct_type = "juggernaut"
+	hud_type = /datum/hud/construct/juggernaut
 
 /mob/living/simple_animal/construct/builder
-	hud_construct_type = "artificer"
+	hud_type = /datum/hud/construct/artificer
 
 /mob/living/simple_animal/construct/wraith
-	hud_construct_type = "wraith"
+	hud_type = /datum/hud/construct/wraith
 
 /mob/living/simple_animal/construct/harvester
-	hud_construct_type = "harvester"
+	hud_type = /datum/hud/construct/harvester
+
+/datum/hud/construct/get_ui_style_data()
+	return GET_DECL(/decl/ui_style/construct)
+
+/datum/hud/construct/juggernaut/get_ui_style_data()
+	return GET_DECL(/decl/ui_style/construct/juggernaut)
+
+/datum/hud/construct/harvester/get_ui_style_data()
+	return GET_DECL(/decl/ui_style/construct/harvester)
+
+/datum/hud/construct/wraith/get_ui_style_data()
+	return GET_DECL(/decl/ui_style/construct/wraith)
+
+/datum/hud/construct/artificer/get_ui_style_data()
+	return GET_DECL(/decl/ui_style/construct/artificer)
+
+/datum/hud/construct/get_ui_color()
+	return COLOR_WHITE
+
+/datum/hud/construct/get_ui_alpha()
+	return 255
 
 /datum/hud/construct/FinalizeInstantiation()
-	var/constructtype
-	if(isconstruct(mymob))
-		var/mob/living/simple_animal/construct/construct = mymob
-		constructtype = construct.hud_construct_type
-	if(constructtype)
-		mymob.fire = new /obj/screen/construct_fire(null, mymob)
-		mymob.healths = new /obj/screen/construct_health(null, mymob)
-		mymob.healths.icon_state = "[constructtype]_health0"
-		mymob.zone_sel = new(null, mymob, 'icons/mob/screen1_construct.dmi')
-
+	var/decl/ui_style/ui_style = get_ui_style_data()
+	var/ui_color = get_ui_color()
+	var/ui_alpha = get_ui_alpha()
+	mymob.fire = new /obj/screen/construct_fire(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS_FIRE)
+	mymob.healths = new /obj/screen/construct_health(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HEALTH)
+	mymob.zone_sel = new(null, mymob, null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_ZONE_SELECT)
 	adding += list(mymob.fire, mymob.healths, mymob.zone_sel)
 	..()
+
+/decl/ui_style/construct
+	name = "Construct"
+	restricted = TRUE
+	override_icons = list(
+		UI_ICON_STATUS_FIRE = 'icons/mob/screen/styles/constructs/status_fire.dmi',
+		UI_ICON_ZONE_SELECT = 'icons/mob/screen/styles/constructs/zone_selector.dmi'
+	)
+/decl/ui_style/construct/juggernaut
+	name = "Juggernaut"
+/decl/ui_style/construct/juggernaut/Initialize()
+	override_icons[UI_ICON_HEALTH] = 'icons/mob/screen/styles/constructs/juggernaut/health.dmi'
+	return ..()
+/decl/ui_style/construct/harvester
+	name = "Harvester"
+/decl/ui_style/construct/harvester/Initialize()
+	override_icons[UI_ICON_HEALTH] = 'icons/mob/screen/styles/constructs/harvester/health.dmi'
+	return ..()
+/decl/ui_style/construct/wraith
+	name = "Wraith"
+/decl/ui_style/construct/wraith/Initialize()
+	override_icons[UI_ICON_HEALTH] = 'icons/mob/screen/styles/constructs/wraith/health.dmi'
+	return ..()
+/decl/ui_style/construct/artificer
+	name = "Artificer"
+/decl/ui_style/construct/artificer/Initialize()
+	override_icons[UI_ICON_HEALTH] = 'icons/mob/screen/styles/constructs/artificer/health.dmi'
+	return ..()

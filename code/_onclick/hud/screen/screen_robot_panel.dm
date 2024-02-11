@@ -1,6 +1,6 @@
 /obj/screen/robot_panel
 	name       = "panel"
-	icon       = 'icons/mob/screen1_robot.dmi'
+	icon       = 'icons/mob/screen/styles/robot/panel.dmi'
 	icon_state = "panel"
 	screen_loc = ui_borg_panel
 

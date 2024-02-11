@@ -1,5 +1,4 @@
 /datum/hud_data
-	var/icon              // If set, overrides ui_style.
 	var/has_a_intent = 1  // Set to draw intent box.
 	var/has_m_intent = 1  // Set to draw move intent box.
 	var/has_warnings = 1  // Set to draw environment warnings.

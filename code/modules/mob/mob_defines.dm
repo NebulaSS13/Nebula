@@ -39,7 +39,7 @@
 
 	var/stat = CONSCIOUS //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
-	var/obj/screen/robot_module_select/hands
+	var/obj/screen/robot_module/select/hands
 	var/obj/screen/warning_cells/cells
 	var/obj/screen/internals/internals
 	var/obj/screen/oxygen/oxygen

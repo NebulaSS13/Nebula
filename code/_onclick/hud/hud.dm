@@ -25,6 +25,8 @@
 	var/show_intent_icons   = FALSE
 	var/hotkey_ui_hidden    = FALSE     //This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
+	var/default_ui_style = /decl/ui_style/midnight
+
 	var/list/hand_hud_objects
 	var/list/swaphand_hud_objects
 	var/obj/screen/intent/action_intent
@@ -128,8 +130,13 @@
 			mymob.client.screen |= hotkeybuttons
 	hide_inventory()
 
-/datum/hud/proc/get_ui_style()
-	return ui_style2icon(mymob?.client?.prefs?.UI_style) || 'icons/mob/screen/white.dmi'
+/datum/hud/proc/get_ui_style_data()
+	RETURN_TYPE(/decl/ui_style)
+	. = GET_DECL(mymob?.client?.prefs?.UI_style_uid) || GET_DECL(default_ui_style)
+	if(!.)
+		var/list/available_styles = get_ui_styles()
+		if(length(available_styles))
+			. = available_styles[1]
 
 /datum/hud/proc/get_ui_color()
 	return mymob?.client?.prefs?.UI_style_color  || COLOR_WHITE
@@ -139,7 +146,7 @@
 
 /datum/hud/proc/rebuild_hands()
 
-	var/ui_style = get_ui_style()
+	var/decl/ui_style/ui_style = get_ui_style_data()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
@@ -166,9 +173,9 @@
 				break
 
 		if(!inv_box)
-			inv_box = new /obj/screen/inventory(null, mymob, ui_style, ui_color, ui_alpha)
+			inv_box = new /obj/screen/inventory(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HANDS)
 		else
-			inv_box.icon  = ui_style
+			inv_box.set_ui_style(ui_style, UI_ICON_HANDS)
 			inv_box.color = ui_color
 			inv_box.alpha = ui_alpha
 
@@ -237,7 +244,7 @@
 
 /datum/hud/proc/BuildInventoryUI()
 
-	var/ui_style = get_ui_style()
+	var/decl/ui_style/ui_style = get_ui_style_data()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
@@ -252,7 +259,7 @@
 		if(gear_slot in held_slots)
 			continue
 
-		inv_box = new /obj/screen/inventory(null, mymob, ui_style, ui_color, ui_alpha)
+		inv_box = new /obj/screen/inventory(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INVENTORY)
 
 		var/datum/inventory_slot/inv_slot = inventory_slots[gear_slot]
 		inv_box.SetName(inv_slot.slot_name)
@@ -270,7 +277,7 @@
 			adding += inv_box
 
 	if(has_hidden_gear)
-		adding += new /obj/screen/toggle(null, mymob, ui_style, ui_color, ui_alpha)
+		adding += new /obj/screen/toggle(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INVENTORY)
 
 /datum/hud/proc/BuildHandsUI()
 
@@ -278,21 +285,21 @@
 	if(length(held_slots) <= 0)
 		return
 
-	var/ui_style = get_ui_style()
+	var/decl/ui_style/ui_style = get_ui_style_data()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
 	// Swap hand and quick equip screen elems.
-	var/obj/screen/using = new /obj/screen/equip(null, mymob, ui_style, ui_color, ui_alpha)
+	var/obj/screen/using = new /obj/screen/equip(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HANDS)
 	src.adding += using
 	LAZYADD(swaphand_hud_objects, using)
 
 	if(length(held_slots) > 1)
 
-		using = new /obj/screen/inventory/swaphand(null, mymob, ui_style, ui_color, ui_alpha)
+		using = new /obj/screen/inventory/swaphand(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HANDS)
 		src.adding += using
 		LAZYADD(swaphand_hud_objects, using)
-		using = new /obj/screen/inventory/swaphand/right(null, mymob, ui_style, ui_color, ui_alpha)
+		using = new /obj/screen/inventory/swaphand/right(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HANDS)
 		src.adding += using
 		LAZYADD(swaphand_hud_objects, using)
 

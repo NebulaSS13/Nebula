@@ -5,17 +5,17 @@
 	var/obj/screen/storage/start/storage_start //storage UI
 	var/obj/screen/storage/cont/storage_continue
 	var/obj/screen/storage/end/storage_end
-	var/obj/screen/stored_start/stored_start
-	var/obj/screen/stored_cont/stored_continue
-	var/obj/screen/stored_end/stored_end
+	var/obj/screen/stored/start/stored_start
+	var/obj/screen/stored/cont/stored_continue
+	var/obj/screen/stored/end/stored_end
 
 /datum/storage_ui/default/New(var/storage)
 	..()
-	boxes            = new(null, null, null, null, null, storage)
-	storage_start    = new(null, null, null, null, null, storage)
-	storage_continue = new(null, null, null, null, null, storage)
-	storage_end      = new(null, null, null, null, null, storage)
-	closer           = new(null, null, null, null, null, storage)
+	boxes            = new(null, null, null, null, null, null, storage)
+	storage_start    = new(null, null, null, null, null, null, storage)
+	storage_continue = new(null, null, null, null, null, null, storage)
+	storage_end      = new(null, null, null, null, null, null, storage)
+	closer           = new(null, null, null, null, null, null, storage)
 	stored_start     = new
 	stored_continue  = new
 	stored_end       = new

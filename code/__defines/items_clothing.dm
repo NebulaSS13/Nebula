@@ -231,6 +231,14 @@ var/global/list/default_onmob_icons = list(
 	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi'
 )
 
+var/global/list/all_hand_slots = list(
+	BP_L_HAND,
+	BP_R_HAND,
+	BP_L_HAND_UPPER,
+	BP_R_HAND_UPPER,
+	BP_MOUTH
+)
+
 // This list should be sorted by display priority/order for mob examine to look nice.
 var/global/list/all_inventory_slots = list(
 	BP_L_HAND,

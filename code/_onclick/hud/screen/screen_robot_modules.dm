@@ -1,38 +1,35 @@
 /obj/screen/robot_modules_background
 	icon_state = "block"
+	icon = 'icons/mob/screen/effects.dmi'
+	requires_ui_style = FALSE
 
-/obj/screen/robot_module_one
-	name       = "module1"
-	dir        = SOUTHWEST
-	icon       = 'icons/mob/screen1_robot.dmi'
-	icon_state = "inv1"
-	screen_loc = ui_inv1
+/obj/screen/robot_module
+	dir               = SOUTHWEST
+	requires_ui_style = FALSE
+	icon              = 'icons/mob/screen/styles/robot/inventory.dmi'
+	var/module_index
 
-/obj/screen/robot_module_one/handle_click(mob/user, params)
-	if(isrobot(usr))
-		var/mob/living/silicon/robot/R = usr
-		R.toggle_module(1)
+/obj/screen/robot_module/handle_click(mob/user, params)
+	if(isrobot(user) && !isnull(module_index))
+		var/mob/living/silicon/robot/robot = user
+		robot.toggle_module(module_index)
+		return TRUE
+	return ..()
 
-/obj/screen/robot_module_two
-	name       = "module2"
-	dir        = SOUTHWEST
-	icon       = 'icons/mob/screen1_robot.dmi'
-	icon_state = "inv2"
-	screen_loc = ui_inv2
+/obj/screen/robot_module/one
+	name         = "module1"
+	icon_state   = "inv1"
+	screen_loc   = ui_inv1
+	module_index = 1
 
-/obj/screen/robot_module_two/handle_click(mob/user, params)
-	if(isrobot(usr))
-		var/mob/living/silicon/robot/R = usr
-		R.toggle_module(2)
+/obj/screen/robot_module/two
+	name         = "module2"
+	icon_state   = "inv2"
+	screen_loc   = ui_inv2
+	module_index = 2
 
-/obj/screen/robot_module_three
-	name       = "module3"
-	dir        = SOUTHWEST
-	icon       = 'icons/mob/screen1_robot.dmi'
-	icon_state = "inv3"
-	screen_loc = ui_inv3
-
-/obj/screen/robot_module_three/handle_click(mob/user, params)
-	if(isrobot(usr))
-		var/mob/living/silicon/robot/R = usr
-		R.toggle_module(3)
+/obj/screen/robot_module/three
+	name         = "module3"
+	icon_state   = "inv3"
+	screen_loc   = ui_inv3
+	module_index = 3

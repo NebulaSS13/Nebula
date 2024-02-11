@@ -3,7 +3,7 @@
 // a bunch of fairly blobby logic for every click override on these objects.
 /obj/screen/food
 	name = "nutrition"
-	icon = 'icons/mob/status_hunger.dmi'
+	icon = 'icons/mob/screen/styles/nutrition.dmi'
 	pixel_w = 8
 	icon_state = "nutrition1"
 	screen_loc = ui_nutrition_small
@@ -24,7 +24,7 @@
 
 /obj/screen/drink
 	name = "hydration"
-	icon = 'icons/mob/status_hunger.dmi'
+	icon = 'icons/mob/screen/styles/hydration.dmi'
 	icon_state = "hydration1"
 	screen_loc = ui_nutrition_small
 
@@ -44,7 +44,7 @@
 
 /obj/screen/bodytemp
 	name = "body temperature"
-	icon = 'icons/mob/status_indicators.dmi'
+	icon = 'icons/mob/screen/styles/status.dmi'
 	icon_state = "temp1"
 	screen_loc = ui_temp
 
@@ -72,7 +72,7 @@
 
 /obj/screen/pressure
 	name = "pressure"
-	icon = 'icons/mob/status_indicators.dmi'
+	icon = 'icons/mob/screen/styles/status.dmi'
 	icon_state = "pressure0"
 	screen_loc = ui_temp
 
@@ -92,7 +92,7 @@
 
 /obj/screen/toxins
 	name = "toxin"
-	icon = 'icons/mob/status_indicators.dmi'
+	icon = 'icons/mob/screen/styles/status.dmi'
 	icon_state = "tox0"
 	screen_loc = ui_temp
 
@@ -105,7 +105,7 @@
 
 /obj/screen/oxygen
 	name = "oxygen"
-	icon = 'icons/mob/status_indicators.dmi'
+	icon = 'icons/mob/screen/styles/status.dmi'
 	icon_state = "oxy0"
 	screen_loc = ui_temp
 

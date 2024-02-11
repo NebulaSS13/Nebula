@@ -3,14 +3,12 @@
 
 /datum/hud/human/FinalizeInstantiation()
 
-	var/ui_style = get_ui_style()
+	var/decl/ui_style/ui_style = get_ui_style_data()
 	var/ui_color = get_ui_color()
 	var/ui_alpha = get_ui_alpha()
 
 	var/mob/living/carbon/human/target = mymob
 	var/datum/hud_data/hud_data = istype(target) ? target.species.hud : new()
-	if(hud_data.icon)
-		ui_style = hud_data.icon
 
 	hotkeybuttons = list() //These can be disabled for hotkey usersx
 
@@ -19,87 +17,87 @@
 
 	// Draw the attack intent dialogue.
 	if(hud_data.has_a_intent)
-		action_intent = new(null, mymob)
+		action_intent = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTENT)
 		src.adding += action_intent
 		hud_elements |= action_intent
 
 	if(hud_data.has_m_intent)
-		move_intent = new(null, mymob, ui_style, ui_color, ui_alpha)
+		move_intent = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_MOVEMENT)
 		move_intent.icon_state = mymob.move_intent.hud_icon_state
 		src.adding += move_intent
 
 	if(hud_data.has_drop)
-		src.hotkeybuttons += new /obj/screen/drop(null, mymob, ui_style, ui_color, ui_alpha)
+		src.hotkeybuttons += new /obj/screen/drop(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTERACTION)
 
 	if(hud_data.has_resist)
-		src.hotkeybuttons += new /obj/screen/resist(null, mymob, ui_style, ui_color, ui_alpha)
+		src.hotkeybuttons += new /obj/screen/resist(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTERACTION)
 
-	mymob.maneuver_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.maneuver_icon = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTERACTION)
 	src.hotkeybuttons += mymob.maneuver_icon
 	hud_elements |= mymob.maneuver_icon
 
 	if(hud_data.has_throw)
-		mymob.throw_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
+		mymob.throw_icon = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTERACTION)
 		src.hotkeybuttons += mymob.throw_icon
 		hud_elements |= mymob.throw_icon
 
 	if(hud_data.has_internals)
-		mymob.internals = new(null, mymob, ui_style)
+		mymob.internals = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_INTERNALS)
 		hud_elements |= mymob.internals
 
 	if(hud_data.has_warnings)
-		mymob.healths = new(null, mymob, ui_style)
+		mymob.healths = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
 		hud_elements |= mymob.healths
 
-		mymob.oxygen = new(null, mymob)
+		mymob.oxygen = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
 		hud_elements |= mymob.oxygen
 
-		mymob.toxin = new(null, mymob)
+		mymob.toxin = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
 		hud_elements |= mymob.toxin
 
-		mymob.fire = new(null, mymob, ui_style)
+		mymob.fire = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS_FIRE)
 		hud_elements |= mymob.fire
 
 	if(hud_data.has_pressure)
-		mymob.pressure = new(null, mymob)
+		mymob.pressure = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
 		hud_elements |= mymob.pressure
 
 	if(hud_data.has_bodytemp)
-		mymob.bodytemp = new(null, mymob)
+		mymob.bodytemp = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_STATUS)
 		hud_elements |= mymob.bodytemp
 
 	if(target.isSynthetic())
-		target.cells = new(null, mymob)
+		target.cells = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_CHARGE)
 		hud_elements |= target.cells
 
 	else if(hud_data.has_nutrition)
-		mymob.nutrition_icon = new(null, mymob)
+		mymob.nutrition_icon = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_NUTRITION)
 		hud_elements |= mymob.nutrition_icon
 
-		mymob.hydration_icon = new(null, mymob)
+		mymob.hydration_icon = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_HYDRATION)
 		hud_elements |= mymob.hydration_icon
 
 	if(hud_data.has_up_hint)
-		mymob.up_hint = new(null, mymob, ui_style)
+		mymob.up_hint = new(null, mymob, ui_style, ui_style, ui_color, ui_alpha, UI_ICON_UP_HINT)
 		hud_elements |= mymob.up_hint
 
 	mymob.pain = new(null, mymob)
 	hud_elements |= mymob.pain
 
-	mymob.zone_sel = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.zone_sel = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_ZONE_SELECT)
 	mymob.zone_sel.update_icon()
 	hud_elements |= mymob.zone_sel
 
-	target.attack_selector = new(null, mymob, ui_style, ui_color, ui_alpha)
+	target.attack_selector = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_ATTACK)
 	hud_elements |= target.attack_selector
 
 	//Handle the gun settings buttons
-	mymob.gun_setting_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.gun_setting_icon = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
 	hud_elements |= mymob.gun_setting_icon
 
-	mymob.item_use_icon  = new(null, mymob, ui_style, ui_color, ui_alpha)
-	mymob.gun_move_icon  = new(null, mymob, ui_style, ui_color, ui_alpha)
-	mymob.radio_use_icon = new(null, mymob, ui_style, ui_color, ui_alpha)
+	mymob.item_use_icon  = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
+	mymob.gun_move_icon  = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
+	mymob.radio_use_icon = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_FIRE_INTENT)
 
 	..()
 

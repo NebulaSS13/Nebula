@@ -1,6 +1,6 @@
 /obj/screen/intent
 	name       = "intent"
-	icon       = 'icons/mob/screen/white.dmi'
+	icon       = 'icons/mob/screen/styles/intents.dmi'
 	icon_state = "intent_help"
 	screen_loc = ui_acti
 	var/intent = I_HELP
@@ -30,7 +30,7 @@
 /obj/screen/intent/deity/on_update_icon()
 	. = ..()
 	cut_overlays()
-	add_overlay(image('icons/mob/screen_phenomena.dmi', icon_state = "hud", pixel_x = -138, pixel_y = -1))
+	add_overlay(image('icons/mob/screen/phenomena.dmi', icon_state = "hud", pixel_x = -138, pixel_y = -1))
 	compile_overlays()
 
 /obj/screen/intent/deity/proc/sync_to_mob(var/mob)
