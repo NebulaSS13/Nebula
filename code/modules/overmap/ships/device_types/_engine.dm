@@ -76,8 +76,10 @@ var/global/list/ship_engines = list()
 	var/exhaust_dir = global.reverse_dir[M.dir]
 	var/turf/A = get_step(src, exhaust_dir)
 	var/turf/B = A
+	var/airblock
 	while(isturf(A) && !(isspaceturf(A) || A.is_open()))
-		if((B.c_airblock(A)) & AIR_BLOCKED)
+		ATMOS_CANPASS_TURF(airblock, B, A)
+		if(airblock & AIR_BLOCKED)
 			blockage = TRUE
 			break
 		B = A

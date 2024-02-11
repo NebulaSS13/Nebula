@@ -172,6 +172,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	var/list/curr_hotspot = processing_hotspots
 	var/list/curr_zones = zones_to_update
 
+	var/airblock // zeroed by ATMOS_CANPASS_TURF, declared early as microopt
 	while (curr_tiles.len)
 		var/turf/T = curr_tiles[curr_tiles.len]
 		curr_tiles.len--
@@ -185,9 +186,8 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			continue
 
 		//check if the turf is self-zone-blocked
-		var/c_airblock
-		ATMOS_CANPASS_TURF(c_airblock, T, T)
-		if(c_airblock & ZONE_BLOCKED)
+		ATMOS_CANPASS_TURF(airblock, T, T)
+		if(airblock & ZONE_BLOCKED)
 			deferred += T
 			if (no_mc_tick)
 				CHECK_TICK
