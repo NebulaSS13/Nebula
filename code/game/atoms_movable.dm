@@ -254,6 +254,15 @@
 				L = thing
 				L.source_atom.update_light()
 
+		// Z-Mimic.
+		if (bound_overlay)
+			// The overlay will handle cleaning itself up on non-openspace turfs.
+			bound_overlay.forceMove(get_step(src, UP))
+			if (bound_overlay.dir != dir)
+				bound_overlay.set_dir(dir)
+		else if (isturf(loc) && (!old_loc || !TURF_IS_MIMICKING(old_loc)) && MOVABLE_SHALL_MIMIC(src))
+			SSzcopy.discover_movable(src)
+
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	SHOULD_CALL_PARENT(TRUE)

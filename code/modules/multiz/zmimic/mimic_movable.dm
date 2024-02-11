@@ -15,13 +15,6 @@
 		else	// Not a turf, so we need to destroy immediately instead of waiting for the destruction timer to proc.
 			qdel(bound_overlay)
 
-/atom/movable/Move()
-	. = ..()
-	if (. && bound_overlay)
-		bound_overlay.forceMove(get_step(src, UP))
-		if (bound_overlay.dir != dir)
-			bound_overlay.set_dir(dir)
-
 /atom/movable/set_dir(ndir)
 	. = ..()
 	if (. && bound_overlay)
@@ -54,7 +47,7 @@
 	simulated = FALSE
 	anchored = TRUE
 	mouse_opacity = FALSE
-	abstract_type = /atom/movable/openspace // unsure if this is valid, check with Lohi
+	abstract_type = /atom/movable/openspace // unsure if this is valid, check with Lohi -- Yes, it's valid.
 
 /atom/movable/openspace/can_fall()
 	return FALSE
@@ -84,34 +77,36 @@
 	var/turf/myturf = loc
 	if (istype(myturf))
 		myturf.shadower = null
+
 	return ..()
 
-/atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO)
+/atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO, use_shadower_mult = TRUE)
 	appearance = LO
 	layer = MIMICED_LIGHTING_LAYER
 	plane = OPENTURF_MAX_PLANE
 	blend_mode = BLEND_MULTIPLY
 	set_invisibility(INVISIBILITY_NONE)
 
-	if (icon_state == LIGHTING_BASE_ICON_STATE)
-		// We're using a color matrix, so just darken the colors across the board.
-		var/list/c_list = color
-		c_list[CL_MATRIX_RR] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_RG] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_RB] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GR] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GG] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GB] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BR] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BG] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BB] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AR] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
-		color = c_list
-	else
-		// Not a color matrix, so we can just use the color var ourselves.
-		color = SHADOWER_DARKENING_COLOR
+	if (use_shadower_mult)
+		if (icon_state == LIGHTING_BASE_ICON_STATE)
+			// We're using a color matrix, so just darken the colors across the board.
+			var/list/c_list = color
+			c_list[CL_MATRIX_RR] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_RG] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_RB] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_GR] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_GG] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_GB] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_BR] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_BG] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_BB] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_AR] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
+			c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
+			color = c_list
+		else
+			// Not a color matrix, so we can just use the color var ourselves.
+			color = SHADOWER_DARKENING_COLOR
 
 	if (our_overlays || priority_overlays)
 		compile_overlays()
@@ -163,18 +158,32 @@
 	. = associated_atom.examine(arglist(args))	// just pass all the args to the copied atom
 
 /atom/movable/openspace/mimic/forceMove(turf/dest)
+	var/atom/old_loc = loc
 	. = ..()
 	if (TURF_IS_MIMICKING(dest))
 		if (destruction_timer)
 			deltimer(destruction_timer)
 			destruction_timer = null
+		if (old_loc.z != loc.z)
+			reset_internal_layering()
 	else if (!destruction_timer)
-		destruction_timer = addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, qdel_self)), 10 SECONDS, TIMER_STOPPABLE)
+		destruction_timer = ZM_DESTRUCTION_TIMER(src)
 
 // Called when the turf we're on is deleted/changed.
 /atom/movable/openspace/mimic/proc/owning_turf_changed()
 	if (!destruction_timer)
-		destruction_timer = addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, qdel_self)), 10 SECONDS, TIMER_STOPPABLE)
+		destruction_timer = ZM_DESTRUCTION_TIMER(src)
+
+/atom/movable/openspace/mimic/proc/reset_internal_layering()
+	if (bound_overlay?.override_depth)
+		depth = bound_overlay.override_depth
+	else if (isturf(associated_atom.loc))
+		depth = min(SSzcopy.zlev_maximums[associated_atom.z] - associated_atom.z, OPENTURF_MAX_DEPTH)
+		override_depth = depth
+
+	plane = OPENTURF_MAX_PLANE - depth
+
+	bound_overlay?.reset_internal_layering()
 
 // -- TURF PROXY --
 

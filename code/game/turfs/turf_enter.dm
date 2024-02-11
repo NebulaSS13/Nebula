@@ -49,9 +49,5 @@
 					I.contaminate()
 					break
 
-	// Handle zmimic
-	if(!A.bound_overlay && !(A.z_flags & ZMM_IGNORE) && TURF_IS_MIMICKING(above))
-		above.update_mimic()
-
 	// Handle non-listener proximity triggers.
 	handle_proximity_update(A)

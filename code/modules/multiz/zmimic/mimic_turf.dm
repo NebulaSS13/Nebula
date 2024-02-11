@@ -15,6 +15,8 @@
 	/// If this Z-turf leads to space, uninterrupted.
 	var/tmp/z_eventually_space = FALSE
 	var/z_flags = 0
+	/// Use this appearance for our appearance instead of `appearance`. If ZM_OVERRIDE is set, *only* this will be visible, no movables will be copied.
+	var/z_appearance
 
 	// debug
 	var/tmp/z_depth
