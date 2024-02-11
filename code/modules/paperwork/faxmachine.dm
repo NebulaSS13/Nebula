@@ -683,6 +683,10 @@ var/global/list/adminfaxes     = list()	//cache for faxes that have been sent to
 	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[source_fax];replyorigin=[reply_type]'>REPLY</a>)</b>: "
 	msg += "Receiving '[rcvdcopy.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>view message</a></span>"
 
+	if (istype(doc, /obj/item/paper))
+		var/obj/item/paper/paper = doc
+		SSwebhooks.send(WEBHOOK_FAX_SENT, list("title" = "Incoming fax transmission from [sender] in [faxname] for [dest_display_name].", "body" = "[paper.info]"))
+
 	for(var/client/C in global.admins)
 		if(check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)

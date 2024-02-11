@@ -3575,6 +3575,7 @@
 #include "code\modules\webhooks\webhook_ahelp2discord.dm"
 #include "code\modules\webhooks\webhook_custom_event.dm"
 #include "code\modules\webhooks\webhook_elevator_fall.dm"
+#include "code\modules\webhooks\webhook_fax.dm"
 #include "code\modules\webhooks\webhook_roundend.dm"
 #include "code\modules\webhooks\webhook_roundprep.dm"
 #include "code\modules\webhooks\webhook_roundstart.dm"
