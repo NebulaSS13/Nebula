@@ -2,7 +2,7 @@
 
 /obj/item/storage/tray
 	name = "tray"
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food_trays.dmi'
 	icon_state = "tray_material"
 	desc = "A tray to serve food on."
 	force = 4

@@ -2063,7 +2063,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fU" = (
@@ -2091,7 +2091,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/random/snack,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
@@ -2737,7 +2737,7 @@
 /area/casino/casino_mainfloor)
 "ia" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
@@ -2864,13 +2864,13 @@
 /area/casino/casino_mainfloor)
 "iq" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/chems/food/applepie,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "ir" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/chems/food/bigbiteburger,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
@@ -2983,7 +2983,7 @@
 /area/casino/casino_kitchen)
 "iG" = (
 /obj/structure/table/marble,
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "iH" = (
@@ -3051,13 +3051,13 @@
 "iQ" = (
 /obj/machinery/door/firedoor,
 /obj/structure/table/marble,
-/obj/item/trash/tray,
+/obj/item/plate/tray,
 /obj/item/chems/food/stew,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "iR" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/kitchen/utensil/spoon,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
@@ -3472,7 +3472,7 @@
 /area/casino/casino_mainfloor)
 "jU" = (
 /obj/structure/table/woodentable,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/chems/food/waffles,
 /obj/item/chems/drinks/cans/iced_tea,
 /turf/simulated/floor/carpet,

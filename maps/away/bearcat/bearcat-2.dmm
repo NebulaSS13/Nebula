@@ -1162,7 +1162,7 @@
 /obj/structure/sign/poster{
 	pixel_x = 32
 	},
-/obj/item/trash/tray,
+/obj/item/plate/tray,
 /obj/item/circular_saw,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)

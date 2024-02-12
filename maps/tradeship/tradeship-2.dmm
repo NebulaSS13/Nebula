@@ -1267,7 +1267,7 @@
 	pixel_x = 32;
 	dir = 8
 	},
-/obj/item/trash/tray,
+/obj/item/plate/tray,
 /obj/item/circular_saw,
 /obj/machinery/newscaster{
 	pixel_x = 32;

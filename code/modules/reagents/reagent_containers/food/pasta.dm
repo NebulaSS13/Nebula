@@ -16,7 +16,7 @@
 	name = "boiled spaghetti"
 	desc = "A plain dish of pasta, just screaming for sauce."
 	icon_state = "spagettiboiled"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#fcee81"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("noodles" = 2)
@@ -27,7 +27,7 @@
 	name = "spaghetti & tomato"
 	desc = "Spaghetti and crushed tomatoes."
 	icon_state = "pastatomato"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#de4545"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("tomato" = 3, "noodles" = 3)
@@ -42,7 +42,7 @@
 	name = "nanopasta"
 	desc = "Nanomachines, son!"
 	icon_state = "nanopasta"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#535e66"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_amt = 6
@@ -56,7 +56,7 @@
 	name = "spaghetti & meatballs"
 	desc = "Now thats a nice meatball!"
 	icon_state = "meatballspagetti"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#de4545"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("noodles" = 4)

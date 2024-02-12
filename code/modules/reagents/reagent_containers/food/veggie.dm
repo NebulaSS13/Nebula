@@ -47,7 +47,7 @@
 	name = "carrot fries"
 	desc = "Tasty fries from fresh carrots."
 	icon_state = "carrotfries"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#faa005"
 	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("carrot" = 3, "salt" = 1)

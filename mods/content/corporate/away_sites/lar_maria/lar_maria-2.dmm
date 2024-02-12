@@ -2193,7 +2193,7 @@
 /area/lar_maria/mess_hall)
 "gR" = (
 /obj/structure/table,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
@@ -2776,13 +2776,13 @@
 /area/lar_maria/mess_hall)
 "iB" = (
 /obj/structure/table,
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "iC" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iD" = (
@@ -2941,7 +2941,7 @@
 /area/lar_maria/mess_hall)
 "iZ" = (
 /obj/structure/table/marble,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)

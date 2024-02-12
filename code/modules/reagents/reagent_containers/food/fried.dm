@@ -8,7 +8,7 @@
 	name = "onion rings"
 	desc = "Like circular fries but better."
 	icon_state = "onionrings"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#eddd00"
 	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("fried onions" = 5)
@@ -19,7 +19,7 @@
 	name = "chips"
 	desc = "Frenched potato, fried."
 	icon_state = "fries"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#eddd00"
 	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("fresh fries" = 4)
@@ -40,7 +40,7 @@
 	name = "cheesy fries"
 	desc = "Fries. Covered in cheese. Duh."
 	icon_state = "cheesyfries"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#eddd00"
 	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("fresh fries" = 3, "cheese" = 3)

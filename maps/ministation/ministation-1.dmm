@@ -4405,7 +4405,7 @@
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
-/obj/item/trash/tray,
+/obj/item/plate/tray,
 /obj/machinery/door/blast/shutters{
 	id_tag = "barshut";
 	name = "Bar Shutters"

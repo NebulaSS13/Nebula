@@ -1069,10 +1069,10 @@
 /area/lost_supply_base/common)
 "dc" = (
 /obj/structure/table,
-/obj/item/trash/tray{
+/obj/item/plate/tray{
 	pixel_x = 10
 	},
-/obj/item/trash/tray,
+/obj/item/plate/tray,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dd" = (
@@ -1210,7 +1210,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dA" = (

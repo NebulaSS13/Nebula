@@ -3236,7 +3236,7 @@
 /area/errant_pisces/infirmary)
 "iF" = (
 /obj/structure/table,
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3247,7 +3247,7 @@
 /area/errant_pisces/dorms)
 "iH" = (
 /obj/structure/table/marble,
-/obj/item/trash/plate,
+/obj/item/plate,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "iI" = (
