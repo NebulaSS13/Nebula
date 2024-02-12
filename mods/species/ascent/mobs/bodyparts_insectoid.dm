@@ -32,10 +32,8 @@
 	parent_organ = BP_CHEST
 	gripper_type = /datum/inventory_slot/gripper/upper_left_hand
 
-/obj/item/organ/external/hand/insectoid/upper/get_dexterity()
-	. = DEXTERITY_GRIP
-	if(model)
-		. = min(., ..())
+/obj/item/organ/external/hand/insectoid/upper/get_manual_dexterity()
+	return (..() & ~(DEXTERITY_WEAPONS|DEXTERITY_COMPLEX_TOOLS))
 
 /datum/inventory_slot/gripper/upper_right_hand
 	slot_name = "Right Upper Hand"
@@ -53,10 +51,8 @@
 	parent_organ = BP_CHEST
 	gripper_type = /datum/inventory_slot/gripper/upper_right_hand
 
-/obj/item/organ/external/hand/right/insectoid/upper/get_dexterity()
-	. = DEXTERITY_GRIP
-	if(model)
-		. = min(., ..())
+/obj/item/organ/external/hand/right/insectoid/upper/get_manual_dexterity()
+	return (..() & ~(DEXTERITY_WEAPONS|DEXTERITY_COMPLEX_TOOLS))
 
 /obj/item/organ/internal/egg_sac/insectoid
 	name = "gyne egg-sac"

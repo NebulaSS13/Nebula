@@ -31,15 +31,11 @@
 		return
 		// End superhacky stuff.
 
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	if(hattable?.wear_hat(src, A))
-		return
-
 	if((a_intent == I_DISARM || a_intent == I_HELP) && can_collect(A))
 		collect(A)
 		return
 
-	if(istype(A, /mob))
+	if(ismob(A))
 		if(src != A && !gestalt_with(A))
 			visible_message(SPAN_NOTICE("\The [src] butts its head into \the [A]."))
 		return

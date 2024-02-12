@@ -11,9 +11,9 @@
 
 	meat_type = /obj/item/chems/food/meat
 	meat_amount = 3
-	bone_material = /decl/material/solid/bone
+	bone_material = /decl/material/solid/organic/bone
 	bone_amount = 5
-	skin_material = /decl/material/solid/skin
+	skin_material = /decl/material/solid/organic/skin
 	skin_amount = 5
 
 	icon_state = ICON_STATE_WORLD
@@ -47,8 +47,6 @@
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
 	var/fire_alert = 0
 
-	var/list/hat_offsets
-
 	//Atmos effect - Yes, you can make creatures that require arbitrary gasses to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/list/min_gas = list(/decl/material/gas/oxygen = 5)
 	var/list/max_gas = list(
@@ -67,6 +65,7 @@
 	var/armor_type = /datum/extension/armor
 	var/list/natural_armor //what armor animal has
 	var/flash_vulnerability = 1 // whether or not the mob can be flashed; 0 = no, 1 = yes, 2 = very yes
+	var/is_aquatic = FALSE
 
 	//Null rod stuff
 	var/supernatural = 0
@@ -95,13 +94,20 @@
 
 /mob/living/simple_animal/Initialize()
 	. = ..()
-	check_mob_icon_states()
+
+	// Aquatic creatures only care about water, not atmos.
+	add_inventory_slot(new /datum/inventory_slot/head/simple)
+
+	if(is_aquatic)
+		max_gas = list()
+		min_gas = list()
+		minbodytemp = 0
+
+	check_mob_icon_states(TRUE)
 	if(isnull(base_animal_type))
 		base_animal_type = type
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
-	if(islist(hat_offsets))
-		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
 	if(scannable_result)
 		set_extension(src, /datum/extension/scannable, scannable_result)
 	setup_languages()
@@ -109,25 +115,36 @@
 /mob/living/simple_animal/proc/setup_languages()
 	add_language(/decl/language/animal)
 
-/mob/living/simple_animal/proc/check_mob_icon_states()
-	mob_icon_state_flags = 0
-	if(check_state_in_icon("world", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_LIVING_STATE
-	if(check_state_in_icon("world-dead", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_DEAD_STATE
-	if(check_state_in_icon("world-sleeping", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_SLEEP_STATE
-	if(check_state_in_icon("world-resting", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
-	if(check_state_in_icon("world-gib", icon))
-		mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
+var/global/list/simplemob_icon_bitflag_cache = list()
+/mob/living/simple_animal/proc/check_mob_icon_states(var/sa_initializing = FALSE)
+	if(sa_initializing) // Let people force-rebuild the mob cache with proccall if needed.
+		mob_icon_state_flags = global.simplemob_icon_bitflag_cache[type]
+	else
+		mob_icon_state_flags = null
+	if(isnull(mob_icon_state_flags))
+		mob_icon_state_flags = 0
+		if(check_state_in_icon("world", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_LIVING_STATE
+		if(check_state_in_icon("world-dead", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_DEAD_STATE
+		if(check_state_in_icon("world-sleeping", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_SLEEP_STATE
+		if(check_state_in_icon("world-resting", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
+		if(check_state_in_icon("world-gib", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
+		if(check_state_in_icon("world-paralyzed", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_PARALYZED_STATE
+		global.simplemob_icon_bitflag_cache[type] = mob_icon_state_flags
 
 /mob/living/simple_animal/on_update_icon()
 
 	..()
 
 	icon_state = ICON_STATE_WORLD
-	if(stat == DEAD && (mob_icon_state_flags & MOB_ICON_HAS_DEAD_STATE))
+	if(stat != DEAD && HAS_STATUS(src, STAT_PARA) && (mob_icon_state_flags & MOB_ICON_HAS_PARALYZED_STATE))
+		icon_state += "-paralyzed"
+	else if(stat == DEAD && (mob_icon_state_flags & MOB_ICON_HAS_DEAD_STATE))
 		icon_state += "-dead"
 	else if(stat == UNCONSCIOUS && (mob_icon_state_flags & MOB_ICON_HAS_SLEEP_STATE))
 		icon_state += "-sleeping"
@@ -142,11 +159,6 @@
 				z_flags |= ZMM_MANGLE_PLANES
 			add_overlay(I)
 
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	var/image/I = hattable?.get_hat_overlay(src)
-	if(I)
-		add_overlay(I)
-
 /mob/living/simple_animal/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
 	if(check_state_in_icon(eye_icon_state, icon))
@@ -160,6 +172,11 @@
 	. = ..()
 
 /mob/living/simple_animal/Life()
+	if(is_aquatic && !submerged() && stat != DEAD)
+		walk(src, 0)
+		if(!HAS_STATUS(src, STAT_PARA)) // gated to avoid redundant update_icon() calls.
+			SET_STATUS_MAX(src, STAT_PARA, 3)
+			update_icon()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -245,30 +262,29 @@
 
 /mob/living/simple_animal/proc/handle_atmos(var/atmos_suitable = 1)
 	//Atmos
-
 	if(!loc)
 		return
 
 	var/datum/gas_mixture/environment = loc.return_air()
-	if(!(MUTATION_SPACERES in mutations) && environment)
-
-		if(abs(environment.temperature - bodytemperature) > 40 )
-			bodytemperature += ((environment.temperature - bodytemperature) / 5)
-
-		 // don't bother checking it twice if we got a supplied 0 val.
+	if(environment)
+		// don't bother checking it twice if we got a supplied FALSE val.
 		if(atmos_suitable)
-			if(LAZYLEN(min_gas))
+			if(is_aquatic)
+				atmos_suitable = submerged()
+			else if(LAZYLEN(min_gas))
 				for(var/gas in min_gas)
 					if(environment.gas[gas] < min_gas[gas])
 						atmos_suitable = FALSE
 						break
-			if(atmos_suitable && LAZYLEN(max_gas))
-				for(var/gas in max_gas)
-					if(environment.gas[gas] > max_gas[gas])
-						atmos_suitable = FALSE
-						break
+				if(atmos_suitable && LAZYLEN(max_gas))
+					for(var/gas in max_gas)
+						if(environment.gas[gas] > max_gas[gas])
+							atmos_suitable = FALSE
+							break
+		//Atmos effect
+		if(!(MUTATION_SPACERES in mutations) && abs(environment.temperature - bodytemperature) > 40)
+			bodytemperature += ((environment.temperature - bodytemperature) / 5)
 
-	//Atmos effect
 	if(bodytemperature < minbodytemp)
 		fire_alert = 2
 		adjustBruteLoss(cold_damage_per_tick)
@@ -439,7 +455,7 @@
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
-	density = 0
+	density = FALSE
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
 	. = ..(gibbed, deathmessage, show_dead_message)
@@ -619,9 +635,18 @@
 	return ..() || "rough"
 
 /mob/living/simple_animal/proc/can_act()
-	if(QDELETED(src) || incapacitated())
-		return FALSE
-	return TRUE
+	return !(QDELETED(src) || incapacitated() || (is_aquatic && !submerged()))
+
+/mob/living/simple_animal/experiences_hunger_and_thirst()
+	// return !supernatural && !isSynthetic()
+	return FALSE // They need a reliable way to recover nutrition/hydration before this is made general.
+
+/mob/living/simple_animal/get_nutrition()
+	return get_max_nutrition()
+
+/mob/living/simple_animal/get_hydration()
+	return get_max_hydration()
+
 
 /// Adapts our temperature and atmos thresholds to our current z-level.
 /mob/living/simple_animal/proc/adapt_to_current_level()
@@ -654,3 +679,10 @@
 			min_gas[gas] = round(gas_amt * 0.5)
 		if(max_gas)
 			min_gas[gas] = round(gas_amt * 1.5)
+
+// Simple filler bodytype so animals get offsets for their inventory slots.
+/decl/bodytype/animal
+	abstract_type = /decl/bodytype/animal
+	name = "animal"
+	bodytype_flag = 0
+	bodytype_category = "animal body"

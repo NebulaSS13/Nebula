@@ -1,6 +1,6 @@
 /atom
-	/// (1 | 2) Determines if this atom is below `1` or above `2` plating. TODO: Use defines.
-	var/level = 2
+	/// (DEFINE) Determines where this atom sits in terms of turf plating. See misc.dm
+	var/level = LEVEL_ABOVE_PLATING
 	/// (BITFLAG) See flags.dm
 	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 	/// (FLOAT) The world.time that this atom last bumped another. Used mostly by mobs.
@@ -27,8 +27,8 @@
 	var/was_bloodied
 	/// (COLOR) The color of the blood shown on blood overlays.
 	var/blood_color
-	/// (1 | 2 | 3) If it shows up under UV light. 0 doesn't, 1 does, 2 is currently glowing due to UV light. TODO: Use defines
-	var/fluorescent
+	/// (FALSE|DEFINES) How this atom is interacting with UV light. See misc.dm
+	var/fluorescent = FALSE
 
 
 	/// (LIST) A list of all mobs that are climbing or currently on this atom
@@ -97,7 +97,7 @@
 	- TODO: Also sometimes handles resetting of view itself, probably should be more consistent.
 */
 /atom/proc/check_eye(user)
-	if (istype(user, /mob/living/silicon/ai)) // WHY
+	if (isAI(user)) // WHY
 		return 0
 	return -1
 
@@ -116,7 +116,7 @@
 
 /// Handle reagents being modified
 /atom/proc/on_reagent_change()
-	return
+	SHOULD_CALL_PARENT(TRUE)
 
 /**
 	Handle an atom bumping this atom
@@ -331,6 +331,19 @@
 	SHOULD_CALL_PARENT(FALSE) //Don't call the stub plz
 	return
 
+/**
+ * Returns the sum of this atoms's reagents plus the combined matter of all its contents.
+ * Obj adds matter contents. Other overrides may add extra handling for things like material storage.
+ * Most useful for calculating worth or deconstructing something along with its contents.
+ */
+/atom/proc/get_contained_matter()
+	if(length(reagents?.reagent_volumes))
+		LAZYINITLIST(.)
+		for(var/R in reagents.reagent_volumes)
+			.[R] += FLOOR(REAGENT_VOLUME(reagents, R) / REAGENT_UNITS_PER_MATERIAL_UNIT)
+	for(var/atom/contained_obj as anything in get_contained_external_atoms()) // machines handle component parts separately
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., contained_obj.get_contained_matter())
+
 /// Return a list of all simulated atoms inside this one.
 /atom/proc/get_contained_external_atoms()
 	for(var/atom/movable/AM in contents)
@@ -471,7 +484,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(!simulated)
 		return
-	fluorescent = 0
+	fluorescent = FALSE
 	germ_level = 0
 	blood_color = null
 	if(istype(blood_DNA, /list))
@@ -751,15 +764,6 @@
 /atom/proc/get_radio(var/message_mode)
 	RETURN_TYPE(/obj/item/radio)
 	return
-
-/**
-	Get the material cost of this atom.
-
-	- Return: An dictionary where key is the material and value is the amount.
-*/
-/atom/proc/building_cost()
-	RETURN_TYPE(/list)
-	. = list()
 
 /atom/Topic(href, href_list)
 	var/mob/user = usr

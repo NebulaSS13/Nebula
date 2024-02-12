@@ -5,9 +5,9 @@
 	desc = "Small, portable, and far, far heavier than it looks, this gun-shaped device has a port into which one may insert compressed matter cartridges."
 	icon = 'icons/obj/items/device/rcd.dmi'
 	icon_state = "rcd"
-	opacity = 0
-	density = 0
-	anchored = 0.0
+	opacity = FALSE
+	density = FALSE
+	anchored = FALSE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
 	force = 10.0

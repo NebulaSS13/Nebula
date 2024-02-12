@@ -33,11 +33,10 @@
 
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
-	unacidable = 1
 	material = /decl/material/solid/metal/titanium
 	matter = list(
 		/decl/material/solid/fiberglass           = MATTER_AMOUNT_SECONDARY,
-		/decl/material/solid/plastic              = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic              = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/copper         = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon              = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_TRACE,
@@ -172,7 +171,6 @@
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
 			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
-		piece.unacidable = unacidable
 		if(islist(armor))
 			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
@@ -311,16 +309,16 @@
 					switch(msg_type)
 						if("boots")
 							to_chat(wearer, SPAN_HARDSUIT("\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"]."))
-							wearer.update_inv_shoes()
+							wearer.update_equipment_overlay(slot_shoes_str)
 						if("gloves")
 							to_chat(wearer, SPAN_HARDSUIT("\The [piece] [!seal_target ? "tighten around your fingers and wrists" : "become loose around your fingers"]."))
-							wearer.update_inv_gloves()
+							wearer.update_equipment_overlay(slot_gloves_str)
 						if("chest")
 							to_chat(wearer, SPAN_HARDSUIT("\The [piece] [!seal_target ? "cinches tight again your chest" : "releases your chest"]."))
-							wearer.update_inv_wear_suit()
+							wearer.update_equipment_overlay(slot_wear_suit_str)
 						if("helmet")
 							to_chat(wearer, SPAN_HARDSUIT("\The [piece] hisses [!seal_target ? "closed" : "open"]."))
-							wearer.update_inv_head()
+							wearer.update_equipment_overlay(slot_head_str)
 							if(helmet)
 								helmet.update_light(wearer)
 					//sealed pieces become airtight, protecting against diseases
@@ -390,7 +388,7 @@
 	var/mob/living/M
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
 		if(piece.loc != src && !(wearer && piece.loc == wearer))
-			if(istype(piece.loc, /mob/living))
+			if(isliving(piece.loc))
 				M = piece.loc
 				M.drop_from_inventory(piece)
 			piece.forceMove(src)
@@ -413,9 +411,6 @@
 				electrified = 0
 			for(var/obj/item/rig_module/module in installed_modules)
 				module.deactivate()
-		else
-			if(istype(wearer) && !wearer.wearing_rig)
-				wearer.wearing_rig = src
 
 		set_slowdown_and_vision(!offline)
 		if(istype(chest))
@@ -511,13 +506,7 @@
 		data["valveOpen"] = (wearer.internal == air_supply)
 
 		if(!wearer.internal || wearer.internal == air_supply)	// if they have no active internals or if tank is current internal
-			var/found_mask = 0
-			for(var/slot in global.airtight_slots)
-				var/obj/item/gear = wearer.get_equipped_item(slot)
-				if(gear && (gear.item_flags & ITEM_FLAG_AIRTIGHT))
-					found_mask = 1
-					break
-			data["maskConnected"] = found_mask
+			data["maskConnected"] = wearer.check_for_airtight_internals(FALSE)
 
 	data["tankPressure"] = round(air_supply && air_supply.air_contents && air_supply.air_contents.return_pressure() ? air_supply.air_contents.return_pressure() : 0)
 	data["releasePressure"] = round(air_supply && air_supply.distribute_pressure ? air_supply.distribute_pressure : 0)
@@ -578,14 +567,17 @@
 				chest.add_overlay(image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]", "dir" = SOUTH))
 
 	if(wearer)
-		wearer.update_inv_shoes()
-		wearer.update_inv_gloves()
-		wearer.update_inv_head()
-		wearer.update_inv_wear_mask()
-		wearer.update_inv_wear_suit()
-		wearer.update_inv_w_uniform()
-		wearer.update_inv_back()
-	return
+		var/static/list/update_rig_slots = list(
+			slot_shoes_str,
+			slot_gloves_str,
+			slot_head_str,
+			slot_wear_mask_str,
+			slot_wear_suit_str,
+			slot_w_uniform_str,
+			slot_back_str
+		)
+		for(var/slot in update_rig_slots)
+			wearer.update_equipment_overlay(slot)
 
 /obj/item/rig/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && slot == slot_back_str && !offline && equipment_overlay_icon && LAZYLEN(installed_modules))
@@ -690,7 +682,6 @@
 			SPAN_HARDSUIT("<b>[M] struggles into \the [src].</b>"),
 			SPAN_HARDSUIT("<b>You struggle into \the [src].</b>"))
 		wearer = M
-		wearer.wearing_rig = src
 		update_icon()
 
 /obj/item/rig/proc/toggle_piece(var/piece, var/mob/initiator, var/deploy_mode)
@@ -781,7 +772,6 @@
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, user, ONLY_RETRACT)
 	if(wearer)
-		wearer.wearing_rig = null
 		wearer = null
 
 /obj/item/rig/proc/deselect_module()
@@ -935,15 +925,18 @@
 
 // This returns the rig if you are contained inside one, but not if you are wearing it
 /atom/proc/get_rig()
-	if(loc)
-		return loc.get_rig()
-	return null
+	RETURN_TYPE(/obj/item/rig)
+	return loc?.get_rig()
 
 /obj/item/rig/get_rig()
+	RETURN_TYPE(/obj/item/rig)
 	return src
 
-/mob/living/carbon/human/get_rig()
-	return wearing_rig
+/mob/living/get_rig()
+	RETURN_TYPE(/obj/item/rig)
+	var/obj/item/rig/rig = get_equipped_item(slot_back_str)
+	if(istype(rig))
+		return rig
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT

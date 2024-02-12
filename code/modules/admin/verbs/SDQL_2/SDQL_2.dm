@@ -150,8 +150,7 @@
 			to_chat(usr, "<span class='notice'>Query executed on [objs.len] object\s.</span>")
 	catch(var/exception/e)
 		to_chat(usr, "<span class='danger'>An exception has occured during the execution of your query and your query has been aborted.</span>")
-		to_chat(usr, "exception name: [e.name]")
-		to_chat(usr, "file/line: [e.file]/[e.line]")
+		to_chat(usr, EXCEPTION_TEXT(e))
 		return
 
 /proc/SDQL_parse(list/query_list)

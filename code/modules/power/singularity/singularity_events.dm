@@ -27,12 +27,12 @@
 
 /decl/singularity_event/mesmerize/handle_event(obj/effect/singularity/source)
 	for(var/mob/living/carbon/M in oviewers(8, source))
-		if(istype(M, /mob/living/carbon/brain)) //Ignore brains
+		if(isbrain(M)) //Ignore brains
 			continue
 		if(M.status_flags & GODMODE)
 			continue
 		if(M.stat == CONSCIOUS)
-			if(istype(M,/mob/living/carbon/human))
+			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				if(istype(H.get_equipped_item(slot_glasses_str), /obj/item/clothing/glasses/meson))
 					if(source.current_stage.stage_size != STAGE_SUPER)

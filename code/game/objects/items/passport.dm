@@ -8,8 +8,11 @@
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A set of identifying documents."
-	material = /decl/material/solid/cardboard
-	matter = list(/decl/material/solid/leather = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/paper
+	matter = list(
+		/decl/material/solid/organic/leather   = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/cardboard = MATTER_AMOUNT_REINFORCEMENT
+	)
 	var/info
 
 /obj/item/passport/proc/set_info(mob/living/carbon/human/H)
@@ -19,10 +22,7 @@
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_HOMEWORLD)
 	var/pob = culture ? culture.name : "Unset"
 
-	var/fingerprint = "N/A"
-	if(H.dna)
-		fingerprint = md5(H.dna.uni_identity)
-
+	var/fingerprint = H.get_full_print(ignore_blockers = TRUE) || "N/A"
 	var/decl/pronouns/G = H.get_pronouns(ignore_coverings = TRUE)
 	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species_name()]\nGender: [capitalize(G.name)]\nAge: [H.get_age()]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
 

@@ -47,7 +47,7 @@
 	name = BASE_ALARM_NAME
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 80
 	active_power_usage = 1000 //For heating/cooling rooms. 1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
 	power_channel = ENVIRON
@@ -941,7 +941,7 @@ FIRE ALARM
 	var/d2
 
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon) || istype(user, /mob/observer))
+	if (ishuman(user) || issilicon(user) || isobserver(user))
 		A = A.loc
 
 		if (A.fire)
@@ -1051,7 +1051,7 @@ FIRE ALARM
 	ASSERT(isarea(A))
 	var/d1
 	var/d2
-	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
+	if (ishuman(user) || isAI(user))
 
 		if (A.party)
 			d1 = text("<A href='?src=\ref[];reset=1'>No Party :(</A>", src)

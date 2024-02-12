@@ -71,7 +71,7 @@ var/global/list/symbiote_starting_points = list()
 				host = null
 				available_hosts = current_hosts
 	catch(var/exception/e)
-		log_debug("Exception during symbiote join: [e]")
+		log_debug("Exception during symbiote join: [EXCEPTION_TEXT(e)]")
 
 	if(host)
 		var/obj/item/organ/external/head = GET_EXTERNAL_ORGAN(host, BP_HEAD)
@@ -87,7 +87,7 @@ var/global/list/symbiote_starting_points = list()
 		if(length(global.symbiote_starting_points))
 			symbiote.forceMove(pick(global.symbiote_starting_points))
 		else
-			symbiote.forceMove(pick(global.latejoin_locations))
+			symbiote.forceMove(get_random_spawn_turf(SPAWN_FLAG_JOBS_CAN_SPAWN))
 
 	if(H.mind)
 		H.mind.transfer_to(symbiote)

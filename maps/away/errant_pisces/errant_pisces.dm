@@ -78,7 +78,7 @@
 	desc = "A sturdy industrial net of synthetic belts reinforced with plasteel threads."
 	icon = 'maps/away/errant_pisces/icons/net.dmi'
 	icon_state = "net_f"
-	anchored = 1
+	anchored = TRUE
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	maxhealth = 100
 
@@ -145,7 +145,7 @@
 
 /obj/structure/net/net_wall
 	icon_state = "net_w"
-	density = 1
+	density = TRUE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/structure/net/net_wall/Initialize(var/mapload)
@@ -176,7 +176,7 @@
 	throwforce = 5
 	throw_speed = 5
 	throw_range = 10
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_REINFORCEMENT)
 	max_amount = 30
 	center_of_mass = null

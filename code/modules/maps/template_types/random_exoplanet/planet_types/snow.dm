@@ -20,6 +20,7 @@
 	exterior_atmos_temp = null
 	level_generators = list(
 		/datum/random_map/noise/exoplanet/snow,
+		/datum/random_map/noise/ore/poor,
 	)
 
 ////////////////////////////////////////////////////////////////////////////
@@ -84,10 +85,6 @@
 	)
 	//#TODO: Do weather stuff to init properly
 	//water_material  = null // Will prevent the weather system causing rainfall.
-
-	map_generators = list(
-		/datum/random_map/noise/ore/poor
-	)
 
 ////////////////////////////////////////////////////////////////////////////
 // Map Generator Surface

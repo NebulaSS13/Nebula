@@ -63,7 +63,7 @@
 	desc = "An easy to fit wooden floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/tile/wood/cyborg
 	name = "wood floor tile synthesizer"
@@ -81,7 +81,7 @@
 	desc = "An easy to fit mahogany wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/tile/maple
 	name = "maple floor tile"
@@ -89,7 +89,7 @@
 	desc = "An easy to fit maple wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_PALE
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/tile/ebony
 	name = "ebony floor tile"
@@ -97,7 +97,7 @@
 	desc = "An easy to fit ebony floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_BLACK
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/tile/walnut
 	name = "walnut floor tile"
@@ -105,7 +105,7 @@
 	desc = "An easy to fit walnut wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_CHOCOLATE
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/tile/bamboo
 	name = "bamboo floor tile"
@@ -113,7 +113,7 @@
 	desc = "An easy to fit bamboo wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_PALE2
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/tile/yew
 	name = "yew floor tile"
@@ -121,7 +121,7 @@
 	desc = "An easy to fit yew wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_YELLOW
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/stack/tile/floor
 	name = "steel floor tile"
@@ -193,7 +193,7 @@
 	name = "white floor tile"
 	singular_name = "white floor tile"
 	icon_state = "tile_white"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/stack/tile/floor_white/fifty
 	amount = 50
@@ -211,7 +211,7 @@
 	name = "freezer floor tile"
 	singular_name = "freezer floor tile"
 	icon_state = "tile_freezer"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/stack/tile/floor_freezer/fifty
 	amount = 50

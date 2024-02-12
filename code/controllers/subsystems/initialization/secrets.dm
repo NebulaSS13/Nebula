@@ -272,5 +272,5 @@ SUBSYSTEM_DEF(secrets)
 		try
 			file_cache[file_location] = file(file_location)
 		catch(var/exception/e)
-			error("SSsecrets get_file caught exception: [e.name] - [e.file] - [e.line]\n[e.desc]")
+			error("SSsecrets get_file caught exception: [EXCEPTION_TEXT(e)]")
 	return file_cache[file_location]

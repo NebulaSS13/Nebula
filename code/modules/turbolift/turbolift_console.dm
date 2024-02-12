@@ -2,15 +2,15 @@
 /obj/structure/lift
 	name = "turbolift control component"
 	icon = 'icons/obj/turbolift.dmi'
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	layer = ABOVE_OBJ_LAYER
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 	var/datum/turbolift/lift
 
 /obj/structure/lift/proc/pressed(var/mob/user)
-	if(!istype(user, /mob/living/silicon))
+	if(!issilicon(user))
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='danger'>\The [user] hammers on the lift button!</span>")
 		else

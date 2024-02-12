@@ -66,7 +66,8 @@
 /datum/level_data
 	///Name displayed to the player to refer to this level in user interfaces and etc. If null, one will be generated.
 	var/name
-
+	/// Multiplier applied to damage when falling through this level.
+	var/fall_depth = 1
 	/// The z-level that was assigned to this level_data
 	var/level_z
 	/// A unique string identifier for this particular z-level. Used to fetch a level without knowing its z-level.
@@ -144,9 +145,9 @@
 	///This is set to prevent spamming the log when a turf has tried to grab our strata before we've been initialized
 	var/tmp/_has_warned_uninitialized_strata = FALSE
 
+	VAR_PROTECTED/UT_turf_exceptions_by_door_type // An associate list of door types/list of allowed turfs
 	///Determines if edge turfs should be centered on the map dimensions.
 	var/origin_is_world_center = TRUE
-
 /datum/level_data/New(var/_z_level, var/defer_level_setup = FALSE)
 	. = ..()
 	level_z = _z_level

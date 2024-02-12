@@ -1,6 +1,6 @@
 /obj/item/rig/attackby(obj/item/W, mob/user)
 
-	if(!istype(user,/mob/living)) return 0
+	if(!isliving(user)) return 0
 
 	if(electrified != 0)
 		if(shock(user)) //Handles removing charge from the cell, as well. No need to do that here.
@@ -71,7 +71,7 @@
 		// Check if this is a hardsuit upgrade or a modification.
 		else if(istype(W,/obj/item/rig_module))
 
-			if(istype(src.loc,/mob/living/carbon/human))
+			if(ishuman(src.loc))
 				var/mob/living/carbon/human/H = src.loc
 				if(H.get_equipped_item(slot_back_str) == src)
 					to_chat(user, "<span class='danger'>You can't install a hardsuit module while the suit is being worn.</span>")
@@ -129,7 +129,7 @@
 			if(!to_remove)
 				return
 
-			if(istype(src.loc,/mob/living/carbon/human) && to_remove != "cell" && to_remove != "tank")
+			if(ishuman(src.loc) && to_remove != "cell" && to_remove != "tank")
 				var/mob/living/carbon/human/H = src.loc
 				if(H.get_equipped_item(slot_back_str) == src)
 					to_chat(user, "You can't remove an installed device while the hardsuit is being worn.")

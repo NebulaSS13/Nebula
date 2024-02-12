@@ -3,8 +3,8 @@
 	desc = "A small wall mounted cabinet designed to hold a fire extinguisher."
 	icon = 'icons/obj/structures/extinguisher.dmi'
 	icon_state = "extinguisher_closed"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-29}, 'SOUTH':{'y':29}, 'EAST':{'x':-29}, 'WEST':{'x':29}}"
 	var/obj/item/chems/spray/extinguisher/has_extinguisher
@@ -31,7 +31,7 @@
 
 /obj/structure/extinguisher_cabinet/attack_hand(mob/user)
 
-	if(user.check_dexterity(DEXTERITY_GRIP, TRUE) && has_extinguisher)
+	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE) && has_extinguisher)
 		user.put_in_hands(has_extinguisher)
 		to_chat(user, SPAN_NOTICE("You take [has_extinguisher] from [src]."))
 		playsound(src.loc, 'sound/effects/extout.ogg', 50, 0)

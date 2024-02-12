@@ -5,8 +5,12 @@
 	path = "away_sites_testing"
 	overmap_ids = list(OVERMAP_ID_SPACE)
 
-	allowed_spawns = list()
+	allowed_latejoin_spawns = list()
 	default_spawn = null
+
+// Set the observer spawn to include every flag so that CI flag checks pass.
+/decl/spawnpoint/observer
+	spawn_flags = (SPAWN_FLAG_GHOSTS_CAN_SPAWN | SPAWN_FLAG_JOBS_CAN_SPAWN | SPAWN_FLAG_PRISONERS_CAN_SPAWN | SPAWN_FLAG_PERSISTENCE_CAN_SPAWN)
 
 /datum/map/away_sites_testing/build_away_sites()
 	var/list/unsorted_sites = list_values(SSmapping.get_templates_by_category(MAP_TEMPLATE_CATEGORY_AWAYSITE))

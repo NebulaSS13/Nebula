@@ -10,7 +10,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	attack_verb = list("burnt", "singed")
 	lit_heat = 1500
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/tmp/max_fuel = 5
 
@@ -82,7 +82,7 @@
 		add_overlay(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
 /obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
-	if(!istype(M, /mob))
+	if(!ismob(M))
 		return
 
 	if(lit)

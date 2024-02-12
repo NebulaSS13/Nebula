@@ -51,17 +51,20 @@
 	if(scanned.len)
 		for(var/atom/O in scanned)
 			O.set_invisibility(scanned[O])
-			if(O.fluorescent == 2) O.fluorescent = 1
+			if(O.fluorescent == FLUORESCENT_GLOWING)
+				O.fluorescent = FLUORESCENT_GLOWS
 		scanned.Cut()
 	if(stored_alpha.len)
 		for(var/atom/O in stored_alpha)
 			O.alpha = stored_alpha[O]
-			if(O.fluorescent == 2) O.fluorescent = 1
+			if(O.fluorescent == FLUORESCENT_GLOWING)
+				O.fluorescent = FLUORESCENT_GLOWS
 		stored_alpha.Cut()
 	if(reset_objects.len)
 		for(var/obj/item/I in reset_objects)
 			I.overlays -= I.blood_overlay
-			if(I.fluorescent == 2) I.fluorescent = 1
+			if(I.fluorescent == FLUORESCENT_GLOWING)
+				I.fluorescent = FLUORESCENT_GLOWS
 		reset_objects.Cut()
 
 /obj/item/uv_light/Process()
@@ -74,11 +77,11 @@
 		for(var/turf/T in range(range, origin))
 			var/use_alpha = 255 - (step_alpha * get_dist(origin, T))
 			for(var/atom/A in T.contents)
-				if(A.fluorescent == 1)
-					A.fluorescent = 2 //To prevent light crosstalk.
+				if(A.fluorescent == FLUORESCENT_GLOWS)
+					A.fluorescent = FLUORESCENT_GLOWING //To prevent light crosstalk.
 					if(A.invisibility)
 						scanned[A] = A.invisibility
-						A.set_invisibility(0)
+						A.set_invisibility(INVISIBILITY_NONE)
 						stored_alpha[A] = A.alpha
 						A.alpha = use_alpha
 					if(istype(A, /obj/item))

@@ -274,6 +274,3 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 	if(pref.client)
 		return pref.client.mob
-
-/datum/category_item/player_setup_item/proc/preference_species()
-	return get_species_by_key(pref.species || global.using_map.default_species)

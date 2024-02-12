@@ -3,7 +3,7 @@
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
 	origin_tech = "{'combat':1}"
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/armed = 0
 
@@ -51,7 +51,7 @@
 	reset_plane_and_layer()
 	armed = 0
 	update_icon()
-	pulse(0)
+	pulse_device(0)
 
 /obj/item/assembly/mousetrap/proc/toggle_arming(var/mob/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))

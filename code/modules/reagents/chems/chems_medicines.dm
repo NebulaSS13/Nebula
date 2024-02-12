@@ -7,6 +7,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_eyedrops"
 
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -28,6 +29,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_antirads"
 
 /decl/material/liquid/antirads/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -44,6 +46,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
 	fruit_descriptor = "medicinal"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_styptic"
 	var/effectiveness = 1
 
@@ -73,6 +76,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_synthskin"
 	var/effectiveness = 1
 
@@ -89,7 +93,8 @@
 	taste_description = "100% abuse"
 	color = "#c8a5dc"
 	flags = AFFECTS_DEAD //This can even heal dead people.
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	uid = "chem_adminorazine"
 
 	glass_name = "liquid gold"
@@ -110,6 +115,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
 	fruit_descriptor = "astringent"
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_antitoxins"
 	var/remove_generic = 1
 	var/list/remove_toxins = list(
@@ -145,6 +151,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
 	scannable = 1
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_immunobooster"
 
 /decl/material/liquid/immunobooster/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -167,6 +174,7 @@
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_stimulants"
 
 /decl/material/liquid/stimulants/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -191,6 +199,7 @@
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_antidepressants"
 
 /decl/material/liquid/antidepressants/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -214,28 +223,23 @@
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_antibiotics"
 
 /decl/material/liquid/antibiotics/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	var/mob/living/carbon/human/H = M
-	if(!istype(H))
-		return
 	var/volume = REAGENT_VOLUME(holder, type)
-	H.immunity = max(H.immunity - 0.1, 0)
-	H.add_chemical_effect(CE_ANTIBIOTIC, 1)
+	M.immunity = max(M.immunity - 0.1, 0)
+	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
 	if(volume > 10)
-		H.immunity = max(H.immunity - 0.3, 0)
-	if(LAZYACCESS(H.chem_doses, type) > 15)
-		H.immunity = max(H.immunity - 0.25, 0)
+		M.immunity = max(M.immunity - 0.3, 0)
+	if(LAZYACCESS(M.chem_doses, type) > 15)
+		M.immunity = max(M.immunity - 0.25, 0)
 
 /decl/material/liquid/antibiotics/affect_overdose(var/mob/living/M)
 	..()
-	var/mob/living/carbon/human/H = M
-	if(!istype(H))
-		return
-	H.immunity = max(H.immunity - 0.25, 0)
+	M.immunity = max(M.immunity - 0.25, 0)
 	if(prob(2))
-		H.immunity_norm = max(H.immunity_norm - 1, 0)
+		M.immunity_norm = max(M.immunity_norm - 1, 0)
 
 /decl/material/liquid/retrovirals
 	name = "retrovirals"
@@ -245,6 +249,7 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_retrovirals"
 
 /decl/material/liquid/retrovirals/affect_overdose(mob/living/M, datum/reagents/holder)
@@ -309,6 +314,7 @@
 	scannable = 1
 	metabolism = 0.5 * REM
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_stabilizer"
 
 /decl/material/liquid/stabilizer/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -323,6 +329,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_regenerative_serum"
 
 /decl/material/liquid/regenerator/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -341,6 +348,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_neuroannealer"
 
 /decl/material/liquid/neuroannealer/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -357,6 +365,7 @@
 	taste_description = "tasteless slickness"
 	scannable = 1
 	color = COLOR_GRAY80
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_oxygel"
 
 /decl/material/liquid/oxy_meds/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
@@ -410,6 +419,7 @@
 	affect_blood_on_inhale = TRUE
 	affect_blood_on_ingest = FALSE
 	value = 1.5
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 	uid = "chem_detoxifier"
 
 /decl/material/liquid/detoxifier/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)

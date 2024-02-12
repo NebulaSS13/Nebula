@@ -115,7 +115,7 @@
 		var/obj/item/photo/photo = user.get_active_hand()
 		return photo.img
 
-	if(istype(user, /mob/living/silicon))
+	if(issilicon(user))
 		var/mob/living/silicon/tempAI = user
 		var/obj/item/photo/selection = tempAI.GetPicture()
 		if (selection)

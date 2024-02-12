@@ -63,7 +63,7 @@
 		for(var/mob/living/mob in global.living_mob_list_)
 			var/turf/T = get_turf(mob)
 			var/area/A1 = T.loc
-			if(T && (T != TO) && (TO.z == T.z) && !mob.blinded)
+			if(T && (T != TO) && (TO.z == T.z) && !mob.is_blind())
 				var/visible = FALSE
 				if(A1 && (A1.area_flags & AREA_FLAG_EXTERNAL))
 					visible = TRUE

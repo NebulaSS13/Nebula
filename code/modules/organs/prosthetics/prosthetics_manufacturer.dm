@@ -1,45 +1,56 @@
-/decl/prosthetics_manufacturer
-	abstract_type = /decl/prosthetics_manufacturer
-	var/name                                                      // Shown when selecting the limb.
-	var/desc = "A generic unbranded robotic prosthesis."          // Seen when examining a limb.
-	var/icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'     // Icon base to draw from.
-	var/can_eat                                                   // Determines if heads with this model can ingest food/drink.
-	var/has_eyes = TRUE                                           // Determines if eyes should render on heads using this model.
-	var/can_feel_pain                                             // Modifies the return from human can_feel_pain().
-	var/skintone                                                  // Determines if human skintone should be applied to this limb.
-	var/limb_blend                                                // Defines a blending mode to use for human icons with this limb.
-	var/list/bodytypes_cannot_use                                 // Blacklists bodytypes from using this limb.
-	var/list/species_restricted                                   // Determines which species can use this limb.
-	var/list/applies_to_part                                      // Determines which bodyparts can use this limb.
-	var/list/allowed_bodytypes                                    // Determines which bodytypes can apply the limb.
-	var/modifier_string = "robotic"                               // Used to alter the name of the limb.
-	var/hardiness = 1                                             // Modifies min and max broken damage for the limb.
-	var/manual_dexterity = DEXTERITY_FULL                         // For hands, determines the dexterity value passed to get_dexterity().
-	var/movement_slowdown = 0                                     // Applies a slowdown value to this limb.
-	var/is_robotic = TRUE                                         // Determines if EMP damage is applied to this prosthetic.
-	var/modular_prosthetic_tier = MODULAR_BODYPART_INVALID        // Determines how the limb behaves as a prosthetic with regards to manual attachment/detachment.
-	var/limb_tech = "{'engineering':1,'materials':1,'magnets':1}" // What tech levels should limbs of this type use/need?
+/decl/bodytype/prosthetic
+	abstract_type = /decl/bodytype/prosthetic
+	icon_base = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
+	desc = "A generic unbranded robotic prosthesis."
+	limb_tech = "{'engineering':1,'materials':1,'magnets':1}"
+	modifier_string = "robotic"
+	is_robotic = TRUE
+	body_flags = BODY_FLAG_NO_DNA | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_EAT
+	material = /decl/material/solid/metal/steel
+	eye_flash_mod = 1
+	eye_darksight_range = 2
+	associated_gender = PLURAL
+	bodyfall_sounds = list(
+		'sound/foley/metal1.ogg'
+	)
+	has_organ = list(
+		BP_BRAIN = /obj/item/organ/internal/mmi_holder,
+		BP_EYES  = /obj/item/organ/internal/eyes,
+		BP_CELL  = /obj/item/organ/internal/cell
+	)
+	/// Determines which bodyparts can use this limb.
+	var/list/applies_to_part
 
-/decl/prosthetics_manufacturer/validate()
-	. = ..()
-	if(icon && (!applies_to_part || (BP_CHEST in applies_to_part)))
-		if(check_state_in_icon("torso", icon))
-			. += "deprecated \"torso\" state present in [icon]"
-		if(!check_state_in_icon(BP_CHEST, icon))
-			. += "[BP_CHEST] state not present in [icon]"
+/decl/bodytype/prosthetic/get_user_species_for_validation()
+	if(bodytype_category)
+		for(var/species_name in get_all_species())
+			var/decl/species/species = get_species_by_key(species_name)
+			for(var/decl/bodytype/bodytype_data in species.available_bodytypes)
+				if(bodytype_data.bodytype_category == bodytype_category)
+					return species_name
+	return ..()
 
-/decl/prosthetics_manufacturer/proc/check_can_install(var/target_slot, var/target_bodytype, var/target_species)
+/decl/bodytype/prosthetic/apply_bodytype_organ_modifications(obj/item/organ/org)
+	..()
+	BP_SET_PROSTHETIC(org)
+	if(istype(org, /obj/item/organ/external))
+		var/obj/item/organ/external/external_organ = org
+		external_organ.limb_flags &= (~ORGAN_FLAG_CAN_DISLOCATE)
+		if(external_organ.owner)
+			for(var/obj/item/organ/thing in external_organ.internal_organs)
+				if(!thing.is_vital_to_owner() && !BP_IS_PROSTHETIC(thing))
+					qdel(thing)
+			external_organ.owner.refresh_modular_limb_verbs()
+
+/**
+ * Used to check if a prosthetic bodytype can be installed with a certain base bodytype/for a certain organ slot.
+ * Parameters: var/target_slot
+ * Parameters: var/target_bodytype - the bodytype_category we're checking
+ */
+/decl/bodytype/prosthetic/proc/check_can_install(target_slot, target_bodytype)
 	. = istext(target_slot)
 	if(.)
 		if(islist(applies_to_part) && !(target_slot in applies_to_part))
 			return FALSE
-		if(target_bodytype)
-			if(islist(allowed_bodytypes) && !(target_bodytype in allowed_bodytypes))
-				return FALSE
-			if(islist(bodytypes_cannot_use) && (target_bodytype in bodytypes_cannot_use))
-				return FALSE
-		if(target_species && islist(species_restricted) && !(target_species in species_restricted))
+		if(target_bodytype && bodytype_category != target_bodytype)
 			return FALSE
-
-/decl/prosthetics_manufacturer/proc/get_base_icon(var/mob/living/carbon/human/owner)
-	return icon

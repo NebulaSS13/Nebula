@@ -5,7 +5,7 @@
 	var/name = "curtain"
 	var/color = COLOR_WHITE
 	var/alpha = 255
-	var/material_key = /decl/material/solid/plastic
+	var/material_key = /decl/material/solid/organic/plastic
 
 /decl/curtain_kind/proc/make_item(var/loc)
 	var/obj/item/curtain/C = new(loc)
@@ -21,7 +21,7 @@
 
 //Cloth curtains
 /decl/curtain_kind/cloth
-	material_key = /decl/material/solid/cloth
+	material_key = /decl/material/solid/organic/cloth
 
 /decl/curtain_kind/cloth/bed
 	name = "bed curtain"
@@ -39,7 +39,7 @@
 /decl/curtain_kind/plastic
 	name = "plastic curtain"
 	color = "#b8f5e3"
-	material_key = /decl/material/solid/plastic
+	material_key = /decl/material/solid/organic/plastic
 
 /decl/curtain_kind/plastic/medical
 	alpha = 200

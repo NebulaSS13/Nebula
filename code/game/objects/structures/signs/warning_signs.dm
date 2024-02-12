@@ -28,10 +28,20 @@
 	name       = "\improper EXTERNAL AIRLOCK"
 	icon_state = "doors"
 
+/obj/structure/sign/warning/evac
+	name       = "\improper KEEP CLEAR: EVAC DOCKING AREA"
+	icon       = 'icons/obj/signs/warnings.dmi'
+	icon_state = "evac"
+
 /obj/structure/sign/warning/deathsposal
 	name       = "\improper DISPOSAL LEADS TO SPACE"
-	icon       = 'icons/obj/signs/warnings.dmi' //This one is a full-size sign
+	icon       = 'icons/obj/signs/warnings.dmi'
 	icon_state = "deathsposal"
+
+/obj/structure/sign/warning/shock
+	name       = "\improper HIGH VOLTAGE"
+	icon       = 'icons/obj/signs/warnings.dmi'
+	icon_state = "shock"
 
 /obj/structure/sign/warning/compressed_gas
 	name       = "\improper COMPRESSED GAS"

@@ -16,6 +16,13 @@
 
 	var/mob_ref = weakref(src)
 	if(istype(weather))
-		weather.mob_shown_weather -=     mob_ref
-		weather.mob_shown_wind -=        mob_ref
-	global.current_mob_ambience -= mob_ref
+		weather.mob_shown_weather -= mob_ref
+		weather.mob_shown_wind    -= mob_ref
+	global.current_mob_ambience   -= mob_ref
+
+	// Update our equipped item presence.
+	for(var/slot in (get_inventory_slots()|get_held_item_slots()))
+		var/datum/inventory_slot/inv_slot = get_inventory_slot_datum(slot)
+		var/obj/item/held = inv_slot?.get_equipped_item()
+		if(held)
+			held.reconsider_client_screen_presence(client, slot)

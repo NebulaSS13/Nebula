@@ -15,7 +15,7 @@
 	//Added by Strumpetplaya - AI shouldn't be able to  (you're both stupid, need CanPhysicallyInteract --Chinsky)
 	//activate emergency lockers.  This fixes that.  (Does this make sense, the AI can't call attack_hand, can it? --Mloc)
 	//(It uses the Nano helper and a dexterity check now anyway. --Loaf)
-	if(!CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!CanPhysicallyInteract(user) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(!amount)
 		to_chat(user, SPAN_WARNING("It's empty."))

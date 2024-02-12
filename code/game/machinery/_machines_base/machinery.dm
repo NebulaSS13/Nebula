@@ -400,7 +400,7 @@ Class Procs:
 
 /obj/machinery/CouldUseTopic(var/mob/user)
 	..()
-	if(clicksound && istype(user, /mob/living/carbon))
+	if(clicksound && iscarbon(user))
 		playsound(src, clicksound, clickvol)
 
 /obj/machinery/proc/display_parts(mob/user)
@@ -460,15 +460,6 @@ Class Procs:
 	if(battery && (!functional_only || battery.is_functional()))
 		return battery.get_cell()
 
-/obj/machinery/building_cost()
-	. = ..()
-	var/list/component_types = types_of_component(/obj/item/stock_parts)
-	for(var/path in component_types)
-		var/obj/item/stock_parts/part = get_component_of_type(path)
-		var/list/part_costs = part.building_cost()
-		for(var/key in part_costs)
-			.[key] += part_costs[key] * component_types[path]
-
 /obj/machinery/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()
 	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
@@ -486,6 +477,16 @@ Class Procs:
 	. = ..()
 	LAZYREMOVE(., component_parts)
 
+// This only includes external atoms by default, so we need to add components back.
+/obj/machinery/get_contained_matter()
+	. = ..()
+	var/list/component_types = types_of_component(/obj/item/stock_parts)
+	for(var/path in component_types)
+		for(var/obj/item/stock_parts/part in get_all_components_of_type(path))
+			var/list/part_costs = part.get_contained_matter()
+			for(var/key in part_costs)
+				.[key] += part_costs[key] * component_types[path]
+
 /obj/machinery/proc/get_auto_access()
 	var/area/A = get_area(src)
 	return A?.req_access?.Copy()
@@ -501,3 +502,6 @@ Class Procs:
 // Make sure that mapped subtypes get the right codex entry.
 /obj/machinery/get_codex_value()
 	return base_type || ..()
+
+/obj/machinery/solvent_can_melt(var/solvent_power = MAT_SOLVENT_STRONG)
+	return FALSE

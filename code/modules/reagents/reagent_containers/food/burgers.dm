@@ -9,7 +9,7 @@
 	filling_color = "#f2b6ea"
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/brainburger/populate_reagents()
 	. = ..()
@@ -28,7 +28,7 @@
 
 /obj/item/chems/food/human
 	filling_color = "#d63c3c"
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 	var/hname = ""
 
 /obj/item/chems/food/human/burger
@@ -129,7 +129,7 @@
 	volume = 100
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 0.1
-	
+
 /obj/item/chems/food/roburgerbig/populate_reagents()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nanitefluid, reagents.maximum_volume)
@@ -226,7 +226,7 @@
 	bitesize = 2
 	center_of_mass = @"{'x':16,'y':17}"
 	nutriment_type = /decl/material/liquid/nutriment/bread
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/hotdog/populate_reagents()
 	. = ..()
@@ -238,7 +238,7 @@
 	icon_state = "hotcorgi"
 	bitesize = 6
 	center_of_mass = @"{'x':16,'y':17}"
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/classichotdog/populate_reagents()
 	. = ..()

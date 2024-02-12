@@ -4,7 +4,7 @@
 	living_eye = FALSE
 
 /mob/observer/eye/freelook/cult/EyeMove()
-	if(owner && istype(owner, /mob/living/deity))
+	if(isdeity(owner))
 		var/mob/living/deity/D = owner
 		if(D.following)
 			D.stop_follow()

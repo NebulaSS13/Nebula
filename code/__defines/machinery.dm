@@ -176,3 +176,4 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define  PART_SCANNER  	/obj/item/stock_parts/computer/scanner							// One of several optional scanner attachments.
 #define  PART_D_SLOT	/obj/item/stock_parts/computer/drive_slot				// Portable drive slot.
 #define  PART_MSTICK	/obj/item/stock_parts/computer/charge_stick_slot		// Charge-slot component for transactions /w charge sticks.
+#define  PART_DSKSLOT	/obj/item/stock_parts/computer/data_disk_drive			// Temporary modcomp version of the disk reader component.

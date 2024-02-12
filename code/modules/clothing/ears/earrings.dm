@@ -2,12 +2,12 @@
 	name = "stud earrings"
 	desc = "A pair of small stud earrings."
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	material = /decl/material/solid/bone/pearl
+	material = /decl/material/solid/organic/bone/pearl
 
 /obj/item/clothing/ears/stud/glass
 	material = /decl/material/solid/glass
 /obj/item/clothing/ears/stud/wood
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 /obj/item/clothing/ears/stud/iron
 	material = /decl/material/solid/metal/iron
 /obj/item/clothing/ears/stud/steel
@@ -25,12 +25,12 @@
 	name = "dangle earrings"
 	icon = 'icons/clothing/ears/earring_dangle.dmi'
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	material = /decl/material/solid/bone/pearl
+	material = /decl/material/solid/organic/bone/pearl
 
 /obj/item/clothing/ears/dangle/glass
 	material = /decl/material/solid/glass
 /obj/item/clothing/ears/dangle/wood
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 /obj/item/clothing/ears/dangle/iron
 	material = /decl/material/solid/metal/iron
 /obj/item/clothing/ears/dangle/steel

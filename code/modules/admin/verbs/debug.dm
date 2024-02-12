@@ -45,7 +45,7 @@
 	if(GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
-	if(istype(M, /mob/living/carbon/human))
+	if(ishuman(M))
 		log_admin("[key_name(src)] has robotized [M.key].")
 		spawn(10)
 			M:Robotize()
@@ -65,7 +65,7 @@
 		alert("That mob doesn't seem to exist, close the panel and try again.")
 		return
 
-	if(istype(M, /mob/new_player))
+	if(isnewplayer(M))
 		alert("The mob must not be a new_player.")
 		return
 
@@ -141,7 +141,7 @@
 	if (GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/card/id/id = H.GetIdCard()
 		if(id)
@@ -155,7 +155,6 @@
 			id.assignment = "Captain"
 			id.SetName("[id.registered_name]'s ID Card ([id.assignment])")
 			H.equip_to_slot_or_del(id, slot_wear_id_str)
-			H.update_inv_wear_id()
 	else
 		alert("Invalid mob")
 	SSstatistics.add_field_details("admin_verb","GFA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -363,7 +362,7 @@
 	if(GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")
 		return
-	if(istype(M, /mob/living/carbon))
+	if(iscarbon(M))
 		M.dna.SetSEState(block,!M.dna.GetSEState(block))
 		domutcheck(M,null,MUTCHK_FORCED)
 		M.update_mutations()

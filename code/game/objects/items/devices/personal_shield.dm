@@ -3,7 +3,7 @@
 	desc = "Truely a life-saver: this device protects its user from being hit by objects moving very, very fast, though only for a few shots."
 	icon = 'icons/obj/items/weapon/batterer.dmi'
 	icon_state = ICON_STATE_WORLD
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/gold     = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/silicon        = MATTER_AMOUNT_REINFORCEMENT,

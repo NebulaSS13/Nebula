@@ -14,10 +14,9 @@
 	bodytype_equip_flags = BODY_FLAG_HUMANOID
 	var/obj/item/clothing/ring/covering_ring
 
-/obj/item/clothing/gloves/update_clothing_icon()
-	if(ismob(loc))
-		var/mob/M = loc
-		M.update_inv_gloves()
+/obj/item/clothing/gloves/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_gloves_str)
 
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return
@@ -25,16 +24,18 @@
 /obj/item/clothing/gloves/get_fibers()
 	return "material from a pair of [name]."
 
-/obj/item/clothing/gloves/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/clothing/gloves/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	var/obj/item/clothing/ring/check_ring
 	var/obj/item/gloves = user?.get_equipped_item(slot_gloves_str)
 	if(slot == slot_gloves_str && gloves)
-		check_ring = gloves
-		if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !user.try_unequip(check_ring, src))
-			to_chat(user, SPAN_WARNING("You are unable to wear \the [src] as \the [gloves] are in the way."))
-			return FALSE
+		if(!ignore_equipped && gloves != src)
+			check_ring = gloves
+			if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !user.try_unequip(check_ring, src))
+				if(!disable_warning)
+					to_chat(user, SPAN_WARNING("You are unable to wear \the [src] as \the [gloves] are in the way."))
+				return FALSE
 	. = ..()
-	if(check_ring)
+	if(check_ring && check_ring != src)
 		if(.)
 			covering_ring = check_ring
 			to_chat(user, SPAN_NOTICE("You slip \the [src] on over \the [covering_ring]."))

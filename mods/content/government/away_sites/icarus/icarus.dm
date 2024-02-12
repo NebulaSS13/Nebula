@@ -74,7 +74,7 @@
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "dead_personnel"
 	w_class = ITEM_SIZE_LARGE//pile of bones
-	material = /decl/material/solid/bone
+	material = /decl/material/solid/organic/bone
 
 /obj/item/disk/icarus
 	name = "black box backup disk"
@@ -158,7 +158,7 @@
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "model"
 
-/obj/structure/sign/icarus/solgov
+/obj/structure/sign/solgov
 	name = "\improper SolGov Seal"
 	desc = "A familiar seal showing this vessel is SolGov property."
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
@@ -169,13 +169,14 @@
 	desc = "An older model of the utility uniform of the SCG Expeditionary Corps. It has a patch on the left sleeve signifying the wearer served on the SEV Icarus."
 	icon = 'icons/clothing/under/uniform_ec.dmi'
 
-/obj/structure/sign/double/icarus/solgovflag
+/obj/structure/sign/double/solgovflag
 	name = "Sol Central Government Flag"
 	desc = "The iconic flag of the Sol Central Government, a symbol with many different meanings."
+	abstract_type = /obj/structure/sign/double/solgovflag
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 
-/obj/structure/sign/double/icarus/solgovflag/left
+/obj/structure/sign/double/solgovflag/left
 	icon_state = "solgovflag-left"
 
-/obj/structure/sign/double/icarus/solgovflag/right
+/obj/structure/sign/double/solgovflag/right
 	icon_state = "solgovflag-right"

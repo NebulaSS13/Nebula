@@ -30,7 +30,7 @@
 		/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
 		/obj/item/chems/pill/bromide = 3,
 		/obj/item/chems/pill/stox = 4,
-		/obj/item/chems/pill/antitox = 6
+		/obj/item/chems/pill/antitoxins = 6
 	)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
@@ -42,7 +42,7 @@
 	icon_deny = "wallmed-deny"
 	icon_vend = "wallmed-vend"
 	base_type = /obj/machinery/vending/wallmed1
-	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
+	density = FALSE //It is wall-mounted, and thus, not dense. --Superxpdude
 	products = list(
 		/obj/item/stack/medical/bruise_pack = 3,
 		/obj/item/stack/medical/ointment = 3,
@@ -64,7 +64,7 @@
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
 	icon_vend = "wallmed-vend"
-	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
+	density = FALSE //It is wall-mounted, and thus, not dense. --Superxpdude
 	base_type = /obj/machinery/vending/wallmed2
 	products = list(
 		/obj/item/chems/hypospray/autoinjector = 5,

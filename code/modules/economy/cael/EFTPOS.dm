@@ -3,7 +3,7 @@
 	desc = "Swipe your ID card to make purchases electronically."
 	icon = 'icons/obj/items/device/eftpos.dmi'
 	icon_state = "eftpos"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/silicon = MATTER_AMOUNT_REINFORCEMENT, /decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT)
 	var/machine_id = ""
 	var/eftpos_name = "Default EFTPOS scanner"
@@ -35,10 +35,10 @@
 	txt += "2. Lock the new transaction. If you want to modify or cancel the transaction, you simply have to reset your EFTPOS device.<br>"
 	txt += "3. Give the EFTPOS device to your customer, he/she must finish the transaction by swiping their ID card or a charge card with enough funds.<br>"
 	txt += "4. If everything is done correctly, the money will be transferred. To unlock the device you will have to reset the EFTPOS device.<br>"
-	
+
 	var/obj/item/paper/R = new(src.loc, null, txt, "Steps to success: Correct EFTPOS Usage")
 	R.apply_custom_stamp(
-		overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR), 
+		overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR),
 		"by \the [src]")
 
 	//by default, connect to the station account
@@ -46,14 +46,14 @@
 	linked_account = station_account
 
 /obj/item/eftpos/proc/print_reference()
-	var/obj/item/paper/R = new(src.loc, null, 
-		"<b>[eftpos_name] reference</b><br><br>Access code: [access_code]<br><br><b>Do not lose or misplace this code.</b><br>", 
+	var/obj/item/paper/R = new(src.loc, null,
+		"<b>[eftpos_name] reference</b><br><br>Access code: [access_code]<br><br><b>Do not lose or misplace this code.</b><br>",
 		"Reference: [eftpos_name]")
 	R.apply_custom_stamp(
-		overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR), 
+		overlay_image('icons/obj/bureaucracy.dmi', icon_state = "paper_stamp-boss", flags = RESET_COLOR),
 		"by the [src]")
-	
-	
+
+
 	var/obj/item/parcel/D = new(R.loc, null, R, "EFTPOS access code")
 	D.attach_label(usr, null, "EFTPOS access code")
 

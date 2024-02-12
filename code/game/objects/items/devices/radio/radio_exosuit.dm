@@ -5,12 +5,12 @@
 
 /obj/item/radio/exosuit/get_cell()
 	. = ..()
-	if(!. && istype(loc, /mob/living/exosuit))
+	if(!. && isexosuit(loc))
 		var/mob/living/exosuit/E = loc
 		return E.get_cell()
 
 /obj/item/radio/exosuit/nano_host()
-	if(istype(loc, /mob/living/exosuit))
+	if(isexosuit(loc))
 		return loc
 
 /obj/item/radio/exosuit/attack_self(var/mob/user)

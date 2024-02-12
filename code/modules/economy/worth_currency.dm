@@ -16,7 +16,7 @@
 	marked_value = value
 	overlay = image(currency, state)
 	overlay.color = colour
-	overlay.appearance_flags |= RESET_COLOR | PIXEL_SCALE
+	overlay.appearance_flags |= RESET_COLOR
 	overlay.plane = FLOAT_PLANE
 	overlay.layer = FLOAT_LAYER
 	if(mark)
@@ -45,7 +45,7 @@
 	var/name_prefix
 	var/name_suffix
 	var/icon = 'icons/obj/items/money.dmi'
-	var/material = /decl/material/solid/plastic
+	var/material = /decl/material/solid/organic/plastic
 	var/absolute_value = 1 // Divisor for cash pile worth. Should never be <1 or non-integer (think of it like cents).
 	var/list/denominations = list()
 	var/list/denominations_by_value = list()

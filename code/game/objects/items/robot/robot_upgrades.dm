@@ -188,7 +188,7 @@
 	require_module = 1
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'materials':2,'engineering':3,'programming':3,'magnets':3}"

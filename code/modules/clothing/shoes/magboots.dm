@@ -63,15 +63,17 @@
 			overlay.icon_state = new_state
 	. = ..()
 
-/obj/item/clothing/shoes/magboots/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/clothing/shoes/magboots/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	var/obj/item/clothing/shoes/check_shoes
 	if(slot == slot_shoes_str)
-		check_shoes = user?.get_equipped_item(slot_shoes_str)
-		if(istype(check_shoes) && (!check_shoes.can_fit_under_magboots || !user.try_unequip(check_shoes, src)))
-			to_chat(user, SPAN_WARNING("You are unable to wear \the [src] as \the [check_shoes] are in the way."))
-			return FALSE
+		check_shoes = user.get_equipped_item(slot_shoes_str)
+		if(!ignore_equipped && check_shoes != src)
+			if(istype(check_shoes) && (!check_shoes.can_fit_under_magboots || !user.try_unequip(check_shoes, src)))
+				if(!disable_warning)
+					to_chat(user, SPAN_WARNING("You are unable to wear \the [src] as \the [check_shoes] are in the way."))
+				return FALSE
 	. = ..()
-	if(check_shoes)
+	if(check_shoes && check_shoes != src)
 		if(.)
 			covering_shoes = check_shoes
 			to_chat(user, SPAN_NOTICE("You slip \the [src] on over \the [covering_shoes]."))

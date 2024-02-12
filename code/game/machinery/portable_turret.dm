@@ -11,9 +11,9 @@
 	name = "turret"
 	icon = 'icons/obj/turrets.dmi'
 	icon_state = "turretCover"
-	anchored = 1
+	anchored = TRUE
 
-	density = 0
+	density = FALSE
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
@@ -281,12 +281,12 @@ var/global/list/turret_icons
 			//This code handles moving the turret around. After all, it's a portable turret!
 			if(!anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-				anchored = 1
+				anchored = TRUE
 				update_icon()
 				to_chat(user, "<span class='notice'>You secure the exterior bolts on the turret.</span>")
 			else if(anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-				anchored = 0
+				anchored = FALSE
 				to_chat(user, "<span class='notice'>You unsecure the exterior bolts on the turret.</span>")
 				update_icon()
 		wrenching = 0
@@ -625,7 +625,7 @@ var/global/list/turret_icons
 	name = "turret frame"
 	icon = 'icons/obj/turrets.dmi'
 	icon_state = "turret_frame"
-	density=1
+	density = TRUE
 	var/target_type = /obj/machinery/porta_turret	// The type we intend to build
 	var/build_step = 0			//the current step in the building process
 	var/finish_name="turret"	//the name applied to the product turret
@@ -640,7 +640,7 @@ var/global/list/turret_icons
 			if(IS_WRENCH(I) && !anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You secure the external bolts.</span>")
-				anchored = 1
+				anchored = TRUE
 				build_step = 1
 				return
 
@@ -664,7 +664,7 @@ var/global/list/turret_icons
 			else if(IS_WRENCH(I))
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 				to_chat(user, "<span class='notice'>You unfasten the external bolts.</span>")
-				anchored = 0
+				anchored = FALSE
 				build_step = 0
 				return
 
@@ -802,7 +802,7 @@ var/global/list/turret_icons
 
 
 /obj/machinery/porta_turret_construct/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		return ..()
 	if(build_step == 4)
 		if(!installation)

@@ -84,7 +84,7 @@
 				line += " (AFK - [C.inactivity2text()])"
 			if(isghost(C.mob))
 				line += " - Observing"
-			else if(istype(C.mob,/mob/new_player))
+			else if(isnewplayer(C.mob))
 				line += " - Lobby"
 			else
 				line += " - Playing"

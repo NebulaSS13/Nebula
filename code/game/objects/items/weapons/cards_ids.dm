@@ -16,7 +16,7 @@
 	desc = "Does card things."
 	icon = 'icons/obj/card.dmi'
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	slot_flags = SLOT_EARS
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
@@ -259,10 +259,9 @@ var/global/const/NO_EMAG_ACT = -50
 		id_card.card_gender = "Unset"
 	id_card.set_id_photo(src)
 
-	if(dna)
-		id_card.blood_type		= dna.b_type
-		id_card.dna_hash		= dna.unique_enzymes
-		id_card.fingerprint_hash= md5(dna.uni_identity)
+	id_card.blood_type       = get_blood_type()                       || "Unset"
+	id_card.dna_hash         = get_unique_enzymes()                   || "Unset"
+	id_card.fingerprint_hash = get_full_print(ignore_blockers = TRUE) || "Unset"
 
 /mob/living/carbon/human/set_id_info(var/obj/item/card/id/id_card)
 	..()

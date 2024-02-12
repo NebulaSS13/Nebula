@@ -242,15 +242,15 @@ meteor_act
 				var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
 				if(mask)
 					mask.add_blood(src)
-					update_inv_wear_mask(0)
+					update_equipment_overlay(slot_wear_mask_str, FALSE)
 				var/obj/item/head = get_equipped_item(slot_head_str)
 				if(head)
 					head.add_blood(src)
-					update_inv_head(0)
+					update_equipment_overlay(slot_head_str, FALSE)
 				var/obj/item/glasses = get_equipped_item(slot_glasses_str)
 				if(glasses && prob(33))
 					glasses.add_blood(src)
-					update_inv_glasses(0)
+					update_equipment_overlay(slot_glasses_str, FALSE)
 			if(BP_CHEST)
 				bloody_body(src)
 
@@ -382,17 +382,18 @@ meteor_act
 		gloves.add_blood(source, amount)
 	else
 		add_blood(source, amount)
-	update_inv_gloves()		//updates on-mob overlays for bloody hands and/or bloody gloves
+	//updates on-mob overlays for bloody hands and/or bloody gloves
+	update_equipment_overlay(slot_gloves_str)
 
 /mob/living/carbon/human/proc/bloody_body(var/mob/living/source)
 	var/obj/item/gear = get_equipped_item(slot_wear_suit_str)
 	if(gear)
 		gear.add_blood(source)
-		update_inv_wear_suit(0)
+		update_equipment_overlay(slot_wear_suit_str, redraw_mob = FALSE)
 	gear = get_equipped_item(slot_w_uniform_str)
 	if(gear)
 		gear.add_blood(source)
-		update_inv_w_uniform(0)
+		update_equipment_overlay(slot_w_uniform_str, redraw_mob = FALSE)
 
 /mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
 
@@ -400,8 +401,8 @@ meteor_act
 	if(damtype != BURN && damtype != BRUTE) return
 
 	// The rig might soak this hit, if we're wearing one.
-	var/obj/item/rig/rig = get_equipped_item(slot_back_str)
-	if(istype(rig))
+	var/obj/item/rig/rig = get_rig()
+	if(rig)
 		rig.take_hit(damage)
 
 	// We may also be taking a suit breach.
@@ -528,8 +529,9 @@ meteor_act
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
 	var/total_protection = flash_protection
-	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype.has_organ[root_bodytype.vision_organ])
+		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(!I?.is_usable())
 			return FLASH_PROTECTION_MAJOR
 		total_protection = I.get_total_protection(flash_protection)
@@ -538,15 +540,17 @@ meteor_act
 	return total_protection
 
 /mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype.has_organ[root_bodytype.vision_organ])
+		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
 		if(I)
 			I.additional_flash_effects(intensity)
 	return ..()
 
 /mob/living/carbon/human/proc/getFlashMod()
-	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_organ(species.vision_organ, /obj/item/organ/internal/eyes)
-		if(istype(I))
-			return I.flash_mod
-	return species.flash_mod
+	var/decl/bodytype/root_bodytype = get_bodytype()
+	if(root_bodytype.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_organ(root_bodytype.vision_organ, /obj/item/organ/internal/eyes)
+		if(I) // get_organ with a type passed already does a typecheck
+			return I.get_flash_mod()
+	return root_bodytype.eye_flash_mod

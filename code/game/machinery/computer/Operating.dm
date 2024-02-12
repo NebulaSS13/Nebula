@@ -2,8 +2,8 @@
 
 /obj/machinery/computer/operating
 	name = "patient monitoring console"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
 	var/mob/living/carbon/human/victim = null
@@ -23,7 +23,7 @@
 
 /obj/machinery/computer/operating/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
-		if (!istype(user, /mob/living/silicon))
+		if (!issilicon(user))
 			user.unset_machine()
 			close_browser(user, "window=op")
 			return

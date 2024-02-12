@@ -6,8 +6,8 @@
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	icon_state = "control_box"
 	reference = "control_box"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	idle_power_usage = 500
 	active_power_usage = 70000 //70 kW per unit of strength
 	construction_state = 0
@@ -76,7 +76,7 @@
 /obj/machinery/particle_accelerator/control_box/Topic(href, href_list)
 	..()
 	//Ignore input if we are broken, !silicon guy cant touch us, or nonai controlling from super far away
-	if(stat & (BROKEN|NOPOWER) || (get_dist(src, usr) > 1 && !istype(usr, /mob/living/silicon)) || (get_dist(src, usr) > 8 && !istype(usr, /mob/living/silicon/ai)))
+	if(stat & (BROKEN|NOPOWER) || (get_dist(src, usr) > 1 && !issilicon(usr)) || (get_dist(src, usr) > 8 && !isAI(usr)))
 		usr.unset_machine()
 		close_browser(usr, "window=pacontrol")
 		return
@@ -224,7 +224,7 @@
 
 /obj/machinery/particle_accelerator/control_box/interact(mob/user)
 	if((get_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
-		if(!istype(user, /mob/living/silicon))
+		if(!issilicon(user))
 			user.unset_machine()
 			close_browser(user, "window=pacontrol")
 			return

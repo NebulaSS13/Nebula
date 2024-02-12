@@ -8,11 +8,11 @@ SUBSYSTEM_DEF(ticker)
 
 	var/pregame_timeleft = 3 MINUTES
 	var/start_ASAP = FALSE          //the game will start as soon as possible, bypassing all pre-game nonsense
-	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(config_tag = number of votes).
+	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(uid = number of votes).
 	var/bypass_gamemode_vote = 0    //Intended for use with admin tools. Will avoid voting and ignore any results.
 
-	var/master_mode = "extended"    //The underlying game mode (so "secret" or the voted mode). Saved to default back to previous round's mode in case the vote failed. This is a config_tag.
-	var/datum/game_mode/mode        //The actual gamemode, if selected.
+	var/master_mode = "extended"    //The underlying game mode (so "secret" or the voted mode). Saved to default back to previous round's mode in case the vote failed. This is a uid.
+	var/decl/game_mode/mode        //The actual gamemode, if selected.
 	var/round_progressing = 1       //Whether the lobby clock is ticking down.
 
 	var/list/bad_modes = list()     //Holds modes we tried to start and failed to.
@@ -206,7 +206,7 @@ Helpers
 	. = (revotes_allowed && !bypass_gamemode_vote) ? CHOOSE_GAMEMODE_REVOTE : CHOOSE_GAMEMODE_RESTART
 
 	var/mode_to_try = master_mode //This is the config tag
-	var/datum/game_mode/mode_datum
+	var/decl/game_mode/mode_datum
 
 	//Decide on the mode to try.
 	if(!bypass_gamemode_vote && gamemode_vote_results)
@@ -223,20 +223,20 @@ Helpers
 		return
 
 	//Find the relevant datum, resolving secret in the process.
-	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(config_tag = weight)
+	var/list/base_runnable_modes = config.get_runnable_modes() //format: list(uid = weight)
 	if((mode_to_try=="random") || (mode_to_try=="secret"))
 		var/list/runnable_modes = base_runnable_modes - bad_modes
 		if(secret_force_mode != "secret") // Config option to force secret to be a specific mode.
-			mode_datum = config.pick_mode(secret_force_mode)
+			mode_datum = decls_repository.get_decl_by_id(secret_force_mode, validate_decl_type = FALSE)
 		else if(!length(runnable_modes))  // Indicates major issues; will be handled on return.
 			bad_modes += mode_to_try
 			return
 		else
-			mode_datum = config.pick_mode(pickweight(runnable_modes))
+			mode_datum = decls_repository.get_decl_by_id(pickweight(runnable_modes), validate_decl_type = FALSE)
 			if(length(runnable_modes) > 1) // More to pick if we fail; we won't tell anyone we failed unless we fail all possibilities, though.
 				. = CHOOSE_GAMEMODE_SILENT_REDO
 	else
-		mode_datum = config.pick_mode(mode_to_try)
+		mode_datum = decls_repository.get_decl_by_id(mode_to_try, validate_decl_type = FALSE)
 	if(!istype(mode_datum))
 		bad_modes += mode_to_try
 		return
@@ -250,7 +250,7 @@ Helpers
 	if(mode_datum.startRequirements())
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()
-		bad_modes += mode_datum.config_tag
+		bad_modes += mode_datum.uid
 		return
 
 	//Declare victory, make an announcement.
@@ -261,7 +261,7 @@ Helpers
 		to_world("<B>The current game mode is Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
-			var/datum/game_mode/M = gamemode_cache[mode_tag]
+			var/decl/game_mode/M = decls_repository.get_decl_by_id(mode_tag, validate_decl_type = FALSE)
 			if(M)
 				mode_names += M.name
 		if (config.secret_hide_possibilities)
@@ -295,7 +295,7 @@ Helpers
 				SScustomitems.equip_custom_items(player)
 	if(captainless)
 		for(var/mob/M in global.player_list)
-			if(!istype(M,/mob/new_player))
+			if(!isnewplayer(M))
 				to_chat(M, "Captainship not forced on anyone.")
 
 /datum/controller/subsystem/ticker/proc/attempt_late_antag_spawn(var/list/antag_choices)
@@ -383,7 +383,7 @@ Helpers
 	to_world("<br>")
 
 	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
-		if (aiPlayer.stat != 2)
+		if (aiPlayer.stat != DEAD)
 			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>")
 
 		else
@@ -401,12 +401,12 @@ Helpers
 
 	for (var/mob/living/silicon/robot/robo in SSmobs.mob_list)
 
-		if(istype(robo,/mob/living/silicon/robot/drone))
+		if(isdrone(robo))
 			dronecount++
 			continue
 
 		if (!robo.connected_ai)
-			if (robo.stat != 2)
+			if (robo.stat != DEAD)
 				to_world("<b>[robo.name] (Played by: [robo.key]) survived as an AI-less synthetic! Its laws were:</b>")
 
 			else

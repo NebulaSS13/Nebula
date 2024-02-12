@@ -2,10 +2,10 @@
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "puddle"
-	anchored = 1
+	anchored = TRUE
 	simulated = 0
-	opacity = 0
-	mouse_opacity = 0
+	opacity = FALSE
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	layer = FLY_LAYER
 	alpha = 0
 	color = COLOR_LIQUID_WATER
@@ -34,7 +34,7 @@
 	return FALSE
 
 /obj/effect/fluid/on_reagent_change()
-	. = ..()
+	..()
 
 	if(reagents?.total_volume)
 		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
@@ -138,8 +138,7 @@ var/global/obj/effect/flood/flood_object = new
 	simulated     = FALSE
 	density       = FALSE
 	anchored      = TRUE
-	unacidable    = TRUE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/effect/fluid/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()

@@ -1,6 +1,6 @@
 /obj/structure/cult
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	icon = 'icons/obj/cult.dmi'
 
 /obj/structure/cult/talisman
@@ -93,9 +93,8 @@
 	desc = "You're pretty sure that abyss is staring back."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "hole"
-	density = 1
-	unacidable = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	var/spawnable = null
 
 /obj/effect/gateway/active
@@ -126,7 +125,7 @@
 	new t(src.loc)
 	qdel(src)
 
-/obj/effect/gateway/active/Crossed(atom/movable/AM)
+/obj/effect/gateway/active/Crossed(var/atom/movable/AM)
 	if(!isliving(AM))
 		return
 
@@ -147,7 +146,7 @@
 	M.AddMovementHandler(/datum/movement_handler/mob/transformation)
 	M.icon = null
 	M.overlays.len = 0
-	M.set_invisibility(101)
+	M.set_invisibility(INVISIBILITY_ABSTRACT)
 
 	if(isrobot(M))
 		var/mob/living/silicon/robot/Robot = M

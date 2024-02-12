@@ -5,9 +5,9 @@ var/global/list/navbeacons = list()
 	icon_state = "navbeacon0-f"
 	name = "navigation beacon"
 	desc = "A radio beacon used for bot navigation."
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	layer = ABOVE_WIRE_LAYER
-	anchored = 1
+	anchored = TRUE
 
 	var/open = 0		// true if cover is open
 	var/locked = 1		// true if controls are locked
@@ -113,7 +113,7 @@ Transponder Codes:<UL>"}
 	..()
 	if (usr.stat)
 		return
-	if ((in_range(src, usr) && isturf(src.loc)) || (istype(usr, /mob/living/silicon)))
+	if ((in_range(src, usr) && isturf(src.loc)) || (issilicon(usr)))
 		if(open && !locked)
 			usr.set_machine(src)
 

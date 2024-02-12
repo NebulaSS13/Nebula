@@ -17,8 +17,8 @@ var/global/list/pai_cards = list()
 /obj/item/paicard/relaymove(var/mob/user, var/direction)
 	if(user.incapacitated(INCAPACITATION_KNOCKOUT))
 		return
-	var/obj/item/rig/rig = src.get_rig()
-	if(istype(rig))
+	var/obj/item/rig/rig = get_rig()
+	if(rig)
 		rig.forced_move(direction, user)
 
 /obj/item/paicard/Initialize()
@@ -245,14 +245,14 @@ var/global/list/pai_cards = list()
 	if(href_list["setdna"])
 		if(pai.master_dna)
 			return
-		var/mob/M = usr
-		if(!istype(M, /mob/living/carbon))
-			to_chat(usr, "<span class='notice'>You don't have any DNA, or your DNA is incompatible with this device.</span>")
+		var/unique_enzymes = usr.get_unique_enzymes()
+		if(unique_enzymes)
+			pai.master     = usr.real_name
+			pai.master_dna = unique_enzymes
+			to_chat(pai, SPAN_NOTICE("You have been bound to a new master."))
 		else
-			var/datum/dna/dna = usr.dna
-			pai.master = M.real_name
-			pai.master_dna = dna.unique_enzymes
-			to_chat(pai, "<span class='warning'>You have been bound to a new master.</span>")
+			to_chat(usr, SPAN_WARNING("You don't have any DNA, or your DNA is incompatible with this device."))
+
 	if(href_list["request"])
 		src.looking_for_personality = 1
 		paiController.findPAI(src, usr)

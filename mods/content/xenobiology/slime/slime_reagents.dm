@@ -12,6 +12,7 @@
 	heating_message = "becomes clear."
 	color = "#cf3600"
 	metabolism = REM * 0.25
+	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/water/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()

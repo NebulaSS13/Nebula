@@ -66,18 +66,18 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 	var/has_ambience = FALSE
 
-	t1 = new_turf
-	z = new_turf.z
+	t1 = new_turf.resolve_to_actual_turf()
+	z = t1.z
 	t1i = oi
 
-	if (new_turf.ambient_light)
+	if (t1.ambient_light)
 		has_ambience = TRUE
 
 	var/vertical   = diagonal & ~(diagonal - 1) // The horizontal directions (4 and 8) are bigger than the vertical ones (1 and 2), so we can reliably say the lsb is the horizontal direction.
 	var/horizontal = diagonal & ~vertical       // Now that we know the horizontal one we can get the vertical one.
 
-	x = new_turf.x + (horizontal == EAST  ? 0.5 : -0.5)
-	y = new_turf.y + (vertical   == NORTH ? 0.5 : -0.5)
+	x = t1.x + (horizontal == EAST  ? 0.5 : -0.5)
+	y = t1.y + (vertical   == NORTH ? 0.5 : -0.5)
 
 	// My initial plan was to make this loop through a list of all the dirs (horizontal, vertical, diagonal).
 	// Issue being that the only way I could think of doing it was very messy, slow and honestly overengineered.
@@ -86,7 +86,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 
 
 	// Diagonal one is easy.
-	T = get_step(new_turf, diagonal)
+	T = get_step_resolving_mimic(t1, diagonal)
 	if (T) // In case we're on the map's border.
 		if (!T.corners)
 			T.corners = new(4)
@@ -98,7 +98,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 			has_ambience = TRUE
 
 	// Now the horizontal one.
-	T = get_step(new_turf, horizontal)
+	T = get_step_resolving_mimic(t1, horizontal)
 	if (T) // Ditto.
 		if (!T.corners)
 			T.corners = new(4)
@@ -110,7 +110,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 			has_ambience = TRUE
 
 	// And finally the vertical one.
-	T = get_step(new_turf, vertical)
+	T = get_step_resolving_mimic(t1, vertical)
 	if (T)
 		if (!T.corners)
 			T.corners = new(4)

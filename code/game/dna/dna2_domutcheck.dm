@@ -9,7 +9,10 @@
 		var/mob/living/carbon/human/H = M
 		if(!H.should_have_organ(BP_HEART))
 			return
-	for(var/datum/dna/gene/gene in dna_genes)
+
+	var/list/all_genes = decls_repository.get_decls_of_subtype(/decl/gene)
+	for(var/gene_type in all_genes)
+		var/decl/gene/gene = all_genes[gene_type]
 		if(!M || !M.dna)
 			return
 		if(!gene.block)

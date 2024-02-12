@@ -9,7 +9,7 @@
 
 	message = sanitize(message)
 
-	if(stat == 2)
+	if(stat == DEAD)
 		return say_dead(message)
 
 	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/custom_emote))

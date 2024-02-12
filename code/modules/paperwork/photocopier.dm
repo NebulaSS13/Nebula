@@ -198,7 +198,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["aipic"])
-		if(!istype(user,/mob/living/silicon))
+		if(!issilicon(user))
 			return TOPIC_NOACTION
 		if(printer?.has_enough_to_print(TONER_USAGE_PHOTO))
 			var/mob/living/silicon/tempAI = user

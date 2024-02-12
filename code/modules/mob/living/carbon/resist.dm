@@ -89,7 +89,7 @@
 			QDEL_NULL(cuffs)
 			if(buckled && buckled.buckle_require_restraints)
 				buckled.unbuckle_mob()
-			update_inv_handcuffed()
+			update_equipment_overlay(slot_handcuffed_str)
 			return
 	visible_message(
 		SPAN_WARNING("\The [src] manages to remove \the [cuffs]!"),

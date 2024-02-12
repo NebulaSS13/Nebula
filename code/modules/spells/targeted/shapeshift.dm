@@ -43,7 +43,7 @@
 			trans.add_language(L.name)
 
 		trans.SetName("[trans.name] ([M])")
-		if(istype(M,/mob/living/carbon/human) && drop_items)
+		if(ishuman(M) && drop_items)
 			for(var/obj/item/I in M.contents)
 				M.drop_from_inventory(I)
 		if(M.mind)

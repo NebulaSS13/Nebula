@@ -43,7 +43,7 @@
 	var/firing_temperature = 300
 
 /obj/item/projectile/temp/on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
-	if(istype(target, /mob/living))
+	if(isliving(target))
 		var/mob/M = target
 		M.bodytemperature = firing_temperature
 	return 1
@@ -65,7 +65,7 @@
 	A.explosion_act(2)
 	playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
 	for(var/mob/M in range(10, src))
-		if(!M.stat && !istype(M, /mob/living/silicon/ai))
+		if(!M.stat && !isAI(M))
 			shake_camera(M, 3, 1)
 	qdel(src)
 	return TRUE
@@ -100,7 +100,7 @@
 			else
 				M.adjustFireLoss(rand(5,15))
 				M.show_message("<span class='danger'>The radiation beam singes you!</span>")
-	else if(istype(target, /mob/living/carbon/))
+	else if(iscarbon(target))
 		M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
 	else
 		return 1
@@ -128,7 +128,7 @@
 		var/mob/living/carbon/human/H = M
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			H.adjust_nutrition(30)
-	else if (istype(target, /mob/living/carbon/))
+	else if (iscarbon(target))
 		M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
 	else
 		return 1

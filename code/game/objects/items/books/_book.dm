@@ -6,8 +6,8 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
 	attack_verb = list("bashed", "whacked", "educated")
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/paper = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/organic/plastic
+	matter = list(/decl/material/solid/organic/paper = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/dat			 // Actual page content
 	var/pencode_dat  // Cache pencode if input, so it can be edited later.

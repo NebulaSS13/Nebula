@@ -157,7 +157,7 @@
 		return
 
 	var/mob/living/carbon/human/h_user = null
-	if (!istype(user, /mob/living/carbon/human))
+	if (!ishuman(user))
 		return
 	else
 		h_user = user

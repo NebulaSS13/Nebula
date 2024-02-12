@@ -4,8 +4,8 @@
 	desc = "A portable generator for emergency backup power."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	interact_offline = TRUE
 
 	var/active = 0
@@ -178,10 +178,8 @@
 
 /obj/machinery/port_gen/pacman/proc/process_exhaust()
 	var/decl/material/mat = GET_DECL(sheet_material)
-	if(mat && mat.burn_product)
-		var/datum/gas_mixture/environment = loc.return_air()
-		if(environment)
-			environment.adjust_gas(mat.burn_product, 0.05*power_output)
+	if(mat)
+		mat.add_burn_product(loc, 0.05*power_output)
 
 /obj/machinery/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet
@@ -338,9 +336,9 @@
 
 	var/data[0]
 	data["active"] = active
-	if(istype(user, /mob/living/silicon/ai))
+	if(isAI(user))
 		data["is_ai"] = 1
-	else if(istype(user, /mob/living/silicon/robot) && !Adjacent(user))
+	else if(isrobot(user) && !Adjacent(user))
 		data["is_ai"] = 1
 	else
 		data["is_ai"] = 0
@@ -455,7 +453,7 @@
 	time_per_sheet = 400
 	rad_power = 12
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	anchored = 1
+	anchored = TRUE
 
 /obj/machinery/port_gen/pacman/super/potato/Initialize()
 	create_reagents(120)

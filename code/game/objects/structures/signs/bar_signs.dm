@@ -6,6 +6,7 @@
 	icon = 'icons/obj/signs/bar.dmi'
 	//The bar sign always faces south
 	directional_offset = "{'NORTH':{'y':32}, 'SOUTH':{'y':32}, 'WEST':{'y':32}, 'EAST':{'y':32}}"
+	abstract_type = /obj/structure/sign/double/maltesefalcon
 
 /obj/structure/sign/double/maltesefalcon/left
 	icon_state = "maltesefalcon-left"

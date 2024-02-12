@@ -292,7 +292,7 @@
 /area/lar_maria/cells)
 "aV" = (
 /obj/structure/bed/padded,
-/obj/item/contraband/poster,
+/obj/item/poster,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "aW" = (
@@ -2529,7 +2529,7 @@
 /area/lar_maria/cells)
 "gC" = (
 /obj/structure/closet/crate,
-/obj/item/contraband/poster,
+/obj/item/poster,
 /obj/item/inflatable_duck,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -3058,7 +3058,7 @@
 /area/lar_maria/cells)
 "hW" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/contraband/poster,
+/obj/item/poster,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hX" = (

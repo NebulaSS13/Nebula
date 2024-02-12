@@ -2,7 +2,7 @@
 	name = "wreckage"
 	desc = "It might have some salvagable parts."
 	density = TRUE
-	opacity = 1
+	opacity = TRUE
 	anchored = TRUE
 	icon_state = "wreck"
 	icon = 'icons/mecha/mech_part_items.dmi'
@@ -50,7 +50,7 @@
 
 /obj/structure/mech_wreckage/attack_hand(var/mob/user)
 	var/list/contained_atoms = get_contained_external_atoms()
-	if(!length(contained_atoms) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!length(contained_atoms) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/item/thing = pick(contained_atoms)
 	thing.forceMove(get_turf(user))

@@ -51,7 +51,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'programming':6,'materials':5,'engineering':6}"
@@ -90,7 +90,7 @@
 
 	// Check if there's actually an AI to deal with.
 	var/mob/living/silicon/ai/target_ai
-	if(istype(input_device, /mob/living/silicon/ai))
+	if(isAI(input_device))
 		target_ai = input_device
 	else
 		target_ai = locate(/mob/living/silicon/ai) in input_device.contents
@@ -98,7 +98,7 @@
 	var/obj/item/aicard/card = ai_card
 
 	// Downloading from/loading to a terminal.
-	if(istype(input_device,/mob/living/silicon/ai) || istype(input_device,/obj/structure/aicore/deactivated))
+	if(isAI(input_device) || istype(input_device,/obj/structure/aicore/deactivated))
 
 		// If we're stealing an AI, make sure we have a card for it.
 		if(!card)
@@ -345,7 +345,7 @@
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 	var/atom/interfaced_with // Currently draining power from this device.

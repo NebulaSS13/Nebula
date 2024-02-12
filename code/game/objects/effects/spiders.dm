@@ -3,8 +3,8 @@
 	name = "web"
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	var/health = 15
 
 //similar to weeds, but only barfed out by nurses manually
@@ -82,7 +82,7 @@
 	if(air_group || (height==0)) return 1
 	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
 		return 1
-	else if(istype(mover, /mob/living))
+	else if(isliving(mover))
 		if(prob(50))
 			to_chat(mover, "<span class='warning'>You get stuck in \the [src] for a moment.</span>")
 			return 0
@@ -141,7 +141,7 @@
 	name = "spiderling"
 	desc = "It never stays still for long."
 	icon_state = "lesser"
-	anchored = 0
+	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
@@ -327,7 +327,7 @@
 	desc = "Green squishy mess."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
-	anchored = 1
+	anchored = TRUE
 	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon

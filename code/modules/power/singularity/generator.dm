@@ -4,8 +4,8 @@
 	desc = "An odd device which produces a gravitational singularity when set up."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "TheSingGen"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	use_power = POWER_USE_OFF
 	matter = list(
 		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,

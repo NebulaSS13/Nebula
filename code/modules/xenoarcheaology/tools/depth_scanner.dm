@@ -2,8 +2,7 @@
 	name = "depth analysis scanner"
 	desc = "A device used to check spatial depth and density of rock outcroppings."
 	icon = 'icons/obj/items/device/depth_scanner.dmi'
-	icon_state = "crap"
-	item_state = "analyzer"
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'magnets':2,'engineering':2,'wormholes':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(

@@ -10,7 +10,7 @@
 	hud_state = "invisibility"
 
 /spell/invisibility/choose_targets()
-	if(istype(holder, /mob/living/carbon/human))
+	if(ishuman(holder))
 		return holder
 
 /spell/invisibility/cast(var/mob/living/carbon/human/H, var/mob/user)

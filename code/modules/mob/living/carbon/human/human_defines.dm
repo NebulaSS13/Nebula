@@ -16,8 +16,6 @@
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
-	var/b_type	//Player's bloodtype
-
 	var/list/worn_underwear = list()
 
 	var/datum/backpack_setup/backpack_setup
@@ -80,6 +78,9 @@
 	var/last_pain
 
 	var/vital_organ_missing_time
+
+	/// Used to look up records when the client is logged out.
+	var/comments_record_id
 
 	ai = /datum/ai/human
 

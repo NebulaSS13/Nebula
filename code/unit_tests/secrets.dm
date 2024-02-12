@@ -23,7 +23,7 @@
 	try
 		example = new test_path
 	catch(var/exception/e)
-		fail("Got exception during example secret load/instantiation: [e.name], [e.file]/[e.line]")
+		fail("Got exception during example secret load/instantiation: [EXCEPTION_TEXT(e)]")
 	if(!istype(example))
 		fail("Example secret was not created successfully.")
 	else

@@ -104,7 +104,7 @@
 			continue
 		else
 			var/mob/M = I.loc
-			if (M.stat == 2)
+			if (M.stat == DEAD)
 				if (M.timeofdeath + 6000 < world.time)
 					continue
 			var/turf/T = get_turf(M)
@@ -134,7 +134,7 @@
 	set src in oview(1)
 	set desc = "ID Tag:"
 
-	if(stat & (NOPOWER|BROKEN) || !istype(usr,/mob/living))
+	if(stat & (NOPOWER|BROKEN) || !isliving(usr))
 		return
 	if (t)
 		src.id = t

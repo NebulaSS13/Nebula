@@ -9,7 +9,7 @@
 	throw_speed = 4
 	throw_range = 20
 	origin_tech = "{'wormholes':4}"
-	material = /decl/material/solid/cardboard //#TODO: Replace with paper
+	material = /decl/material/solid/organic/paper
 
 /obj/item/teleportation_scroll/attack_self(mob/user)
 	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
@@ -31,9 +31,9 @@
 /obj/item/teleportation_scroll/Topic(href, href_list)
 	if(..())
 		return 1
-	var/mob/living/carbon/human/H = usr
-	if (!( istype(H, /mob/living/carbon/human)))
+	if (!ishuman(usr))
 		return 1
+	var/mob/living/carbon/human/H = usr
 	if ((usr == src.loc || (in_range(src, usr) && isturf(src.loc))))
 		usr.set_machine(src)
 		if (href_list["spell_teleport"])

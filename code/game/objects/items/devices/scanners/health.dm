@@ -2,8 +2,6 @@
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	icon = 'icons/obj/items/device/scanner/health_scanner.dmi'
-	icon_state = "health"
-	item_state = "analyzer"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	material = /decl/material/solid/metal/aluminium
 	origin_tech = "{'magnets':1,'biotech':1}"
@@ -11,7 +9,7 @@
 	var/mode = 1
 
 /obj/item/scanner/health/is_valid_scan_target(atom/O)
-	return istype(O, /mob/living/carbon/human) || istype(O, /obj/structure/closet/body_bag)
+	return ishuman(O) || istype(O, /obj/structure/closet/body_bag)
 
 /obj/item/scanner/health/scan(atom/A, mob/user)
 	scan_data = medical_scan_action(A, user, src, mode)
@@ -28,7 +26,7 @@
 		return
 
 	var/mob/living/carbon/human/scan_subject = null
-	if (istype(target, /mob/living/carbon/human))
+	if (ishuman(target))
 		scan_subject = target
 	else if (istype(target, /obj/structure/closet/body_bag))
 		var/obj/structure/closet/body_bag/B = target
@@ -117,13 +115,13 @@
 		if(H.status_flags & FAKEDEATH)
 			pulse_result = 0
 		else
-			pulse_result = H.get_pulse(GETPULSE_TOOL)
+			pulse_result = H.get_pulse_as_string(GETPULSE_TOOL)
 		pulse_result = "[pulse_result]bpm"
-		if(H.pulse() == PULSE_NONE)
+		if(H.get_pulse() == PULSE_NONE)
 			pulse_result = "<span class='scan_danger'>[pulse_result]</span>"
-		else if(H.pulse() < PULSE_NORM)
+		else if(H.get_pulse() < PULSE_NORM)
 			pulse_result = "<span class='scan_notice'>[pulse_result]</span>"
-		else if(H.pulse() > PULSE_NORM)
+		else if(H.get_pulse() > PULSE_NORM)
 			pulse_result = "<span class='scan_warning'>[pulse_result]</span>"
 	else
 		pulse_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"

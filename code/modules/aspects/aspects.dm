@@ -92,7 +92,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 	if((ignore_unticked && !ticked) || (caller && !is_available_to(caller.pref)))
 		return ""
 
-	var/result = "<tr><td width=50%>"
+	var/result = "<tr><td style='max-width:50%;'>"
 	if(recurse_level)
 		for(var/x = 1 to recurse_level)
 			result += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"

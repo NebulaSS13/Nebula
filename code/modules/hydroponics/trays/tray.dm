@@ -3,13 +3,13 @@
 	desc = "A mechanical basin designed to nurture plants and other aquatic life. It has various useful sensors."
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	volume = 100
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_NO_CHEM_CHANGE
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
@@ -358,7 +358,7 @@
 
 	if(usr.incapacitated())
 		return
-	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
+	if(ishuman(usr) || isrobot(usr))
 		var/new_light = input("Specify a light level.") as null|anything in list(0,1,2,3,4,5,6,7,8,9,10)
 		if(new_light)
 			tray_light = new_light
@@ -583,7 +583,7 @@
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
 
-		if(closed_system && (connected_port || holding))
+		if(closed_system && (get_port() || holding))
 			environment = air_contents
 
 		if(!environment)
@@ -611,7 +611,7 @@
 	if(usr.incapacitated())
 		return
 
-	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
+	if(ishuman(usr) || isrobot(usr))
 		close_lid(usr)
 	return
 

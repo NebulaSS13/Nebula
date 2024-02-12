@@ -81,7 +81,7 @@
 		canremove = TRUE
 		return
 
-	to_chat(H, SPAN_WARNING("You feel a strange tugging sensation as \the [src] begins removing the slave-minds from your brain..."))
+	to_chat(H, SPAN_WARNING("You feel a strange tugging sensation as \the [src] begins removing the subpersonas from your brain..."))
 	playsound(H, 'sound/weapons/circsawhit.ogg', 50, 1, -1)
 	operating = TRUE
 
@@ -90,7 +90,7 @@
 	if(H.psi)
 		H.psi.reset()
 
-	to_chat(H, SPAN_NOTICE("\The [src] chimes quietly as it finishes removing the slave-minds from your brain."))
+	to_chat(H, SPAN_NOTICE("\The [src] chimes quietly as it finishes removing the subpersonas from your brain."))
 
 	canremove = TRUE
 	operating = FALSE

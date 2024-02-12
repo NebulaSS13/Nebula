@@ -6,7 +6,7 @@
 	body_parts_covered = SLOT_FACE|SLOT_EYES
 	blood_overlay_type = "maskblood"
 	material = /decl/material/solid/fiberglass
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'materials':1,'engineering':1}"
 
 	var/voicechange = 0
@@ -29,10 +29,9 @@
 		action_button_name = "Adjust Mask"
 		verbs += .verb/adjust_mask
 
-/obj/item/clothing/mask/update_clothing_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_wear_mask()
+/obj/item/clothing/mask/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_wear_mask_str)
 
 /obj/item/clothing/mask/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && hanging && slot == slot_wear_mask_str && check_state_in_icon("[overlay.icon_state]-down", overlay.icon))

@@ -29,7 +29,7 @@
 	addtimer(CALLBACK(src, .proc/check_loc), 1) // Swapping hands or passing to another person should not deactivate the sword.
 
 /obj/item/energy_blade/sword/proc/check_loc()
-	if(!istype(loc, /mob) && active)
+	if(!ismob(loc) && active)
 		toggle_active()
 
 /obj/item/energy_blade/sword/on_update_icon()

@@ -271,9 +271,6 @@
 	if(user == assailant)
 		current_grab.item_attack(src, W)
 
-/obj/item/grab/proc/can_absorb()
-	return current_grab.can_absorb
-
 /obj/item/grab/proc/assailant_reverse_facing()
 	return current_grab.reverse_facing
 

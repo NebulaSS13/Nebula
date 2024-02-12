@@ -186,7 +186,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aR" = (
-/obj/structure/sign/icarus/solgov{
+/obj/structure/sign/solgov{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled,
@@ -2584,7 +2584,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/engine{
-	anchored = 0
+	anchored = FALSE
 	},
 /turf/unsimulated/beach/sand,
 /area/icarus/open)

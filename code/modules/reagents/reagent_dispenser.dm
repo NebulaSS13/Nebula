@@ -6,7 +6,7 @@
 	icon_state                        = "watertank"
 	density                           = TRUE
 	anchored                          = FALSE
-	material                          = /decl/material/solid/plastic
+	material                          = /decl/material/solid/organic/plastic
 	matter                            = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
 	maxhealth                         = 100
 	tool_interaction_flags            = TOOL_INTERACTION_DECONSTRUCT
@@ -22,7 +22,8 @@
 		verbs -= /obj/structure/reagent_dispensers/verb/set_amount_dispensed
 
 /obj/structure/reagent_dispensers/on_reagent_change()
-	if(reagents.total_volume > 0)
+	..()
+	if(reagents?.total_volume > 0)
 		tool_interaction_flags = 0
 	else
 		tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
@@ -44,11 +45,6 @@
 	if(. && unwrenched)
 		leak()
 
-/obj/structure/reagent_dispensers/Process()
-	if(!unwrenched)
-		return PROCESS_KILL
-	leak()
-
 /obj/structure/reagent_dispensers/examine(mob/user, distance)
 	. = ..()
 	if(unwrenched)
@@ -69,19 +65,13 @@
 	if(reagents?.maximum_volume)
 		to_chat(user, "It may contain up to [reagents.maximum_volume] units of fluid.")
 
-/obj/structure/reagent_dispensers/Destroy()
-	. = ..()
-	STOP_PROCESSING(SSprocessing, src)
-
 /obj/structure/reagent_dispensers/attackby(obj/item/W, mob/user)
 	if(IS_WRENCH(W))
 		unwrenched = !unwrenched
 		visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s tap [unwrenched ? "open" : "shut"]."))
 		if(unwrenched)
 			log_and_message_admins("opened a tank at [get_area_name(loc)].")
-			START_PROCESSING(SSprocessing, src)
-		else
-			STOP_PROCESSING(SSprocessing, src)
+			leak()
 		return TRUE
 	. = ..()
 
@@ -165,7 +155,7 @@
 		to_chat(user, SPAN_WARNING("There is some kind of device rigged to the tank."))
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand(var/mob/user)
-	if (!rig || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if (!rig || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	visible_message(SPAN_NOTICE("\The [user] begins to detach \the [rig] from \the [src]."))
 	if(!user.do_skilled(2 SECONDS, SKILL_ELECTRICAL, src))
@@ -257,7 +247,7 @@
 	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
-	if(user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return dispense_cup(user)
 	return ..()
 

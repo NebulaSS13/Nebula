@@ -1,8 +1,17 @@
 /mob/proc/can_emote(var/emote_type)
+	. = check_mob_can_emote(emote_type)
+	if(!.)
+		to_chat(src, SPAN_WARNING("You cannot currently [emote_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!"))
+
+/mob/proc/check_mob_can_emote(var/emote_type)
+	SHOULD_CALL_PARENT(TRUE)
 	return (stat == CONSCIOUS)
 
-/mob/living/can_emote(var/emote_type)
-	return (..() && !(HAS_STATUS(src, STAT_SILENCE) && emote_type == AUDIBLE_MESSAGE))
+/mob/living/check_mob_can_emote(var/emote_type)
+	return ..() && !(HAS_STATUS(src, STAT_SILENCE) && emote_type == AUDIBLE_MESSAGE)
+
+/mob/living/carbon/brain/check_mob_can_emote(var/emote_type)
+	return ..() && (istype(container, /obj/item/mmi) || istype(loc, /obj/item/organ/internal/posibrain))
 
 /mob/proc/emote(var/act, var/m_type, var/message)
 	set waitfor = FALSE
@@ -20,7 +29,6 @@
 			return
 
 		if(!can_emote(m_type))
-			to_chat(src, "<span class='warning'>You cannot currently [m_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!</span>")
 			return
 
 		if(act == "me")
@@ -119,8 +127,7 @@
 
 /mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)
 
-	if((usr && stat) || (!use_me && usr == src))
-		to_chat(src, "You are unable to emote.")
+	if(!can_emote(m_type))
 		return
 
 	var/input

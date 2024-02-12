@@ -4,11 +4,11 @@
 
 var/global/list/nuke_disks = list()
 
-/datum/game_mode/nuclear
+/decl/game_mode/nuclear
 	name = "Mercenary"
 	round_description = "A mercenary strike force is approaching!"
 	extended_round_description = "A heavily armed merc team is approaching in their warship; whatever their goal is, it can't be good for the crew."
-	config_tag = "mercenary"
+	uid = "mercenary"
 	required_players = 15
 	required_enemies = 1
 	end_on_antag_death = FALSE
@@ -22,13 +22,13 @@ var/global/list/nuke_disks = list()
 	)
 
 //checks if L has a nuke disk on their person
-/datum/game_mode/nuclear/proc/check_mob(mob/living/L)
+/decl/game_mode/nuclear/proc/check_mob(mob/living/L)
 	for(var/obj/item/disk/nuclear/N in nuke_disks)
 		if(N.storage_depth(L) >= 0)
 			return TRUE
 	return FALSE
 
-/datum/game_mode/nuclear/declare_completion()
+/decl/game_mode/nuclear/declare_completion()
 	var/decl/special_role/merc = GET_DECL(/decl/special_role/mercenary)
 	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
 		..()

@@ -3,8 +3,8 @@
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock-dark"
 	blocks_air = 1
-	density = 1
-	opacity = 1
+	density = TRUE
+	opacity = TRUE
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
 /**********************Asteroid**************************/
@@ -136,7 +136,7 @@
 //#TODO: This should probably be generalised?
 /turf/simulated/floor/asteroid/Entered(atom/movable/M)
 	..()
-	if(istype(M,/mob/living/silicon/robot))
+	if(isrobot(M))
 		var/mob/living/silicon/robot/R = M
 		if(R.module)
 			if(istype(R.module_state_1,/obj/item/storage/ore))

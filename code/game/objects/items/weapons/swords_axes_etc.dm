@@ -15,7 +15,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	force = 10
 	item_flags = ITEM_FLAG_IS_WEAPON
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/classic_baton/attack(mob/M, mob/living/user)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))

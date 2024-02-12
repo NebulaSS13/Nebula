@@ -3,7 +3,7 @@
 /////////////////////////////////////////////
 /obj/effect/effect/smoke/chem
 	icon = 'icons/effects/chemsmoke.dmi'
-	opacity = 0
+	opacity = FALSE
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE | PASS_FLAG_GLASS //PASS_FLAG_GLASS is fine here, it's just so the visual effect can "flow" around glass
@@ -162,7 +162,7 @@
 			chemholder.reagents.touch_turf(T)
 		for(var/turf/T in targetTurfs)
 			for(var/atom/A in T.contents)
-				if(istype(A, /obj/effect/effect/smoke/chem) || istype(A, /mob))
+				if(istype(A, /obj/effect/effect/smoke/chem) || ismob(A))
 					continue
 				else if(isobj(A) && !A.simulated)
 					chemholder.reagents.touch_obj(A)

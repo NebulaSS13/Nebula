@@ -12,9 +12,8 @@
 /datum/inventory_slot/gripper/GetCloneArgs()
 	return list(slot_id, ui_loc, overlay_slot, ui_label)
 
-/datum/inventory_slot/gripper/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	. = ..()
-	user.update_inv_hands(redraw_mob)
+/datum/inventory_slot/gripper/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	user.update_inhand_overlays(redraw_mob)
 
 /datum/inventory_slot/gripper/equipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE, var/delete_old_item = TRUE)
 	. = ..()
@@ -24,10 +23,12 @@
 /datum/inventory_slot/gripper/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(owner, slot_id)
+		if(user == owner)
+			return "You are holding [_holding.get_examine_line()] in your [E?.name || lowertext(slot_name)]."
 		return "[pronouns.He] [pronouns.is] holding [_holding.get_examine_line()] in [pronouns.his] [E?.name || lowertext(slot_name)]."
 
 /datum/inventory_slot/gripper/can_equip_to_slot(var/mob/user, var/obj/item/prop, var/disable_warning)
-	return ..() && user.check_dexterity(DEXTERITY_GRIP)
+	return ..() && user.check_dexterity(DEXTERITY_EQUIP_ITEM)
 
 // Hand subtypes below
 /datum/inventory_slot/gripper/mouth
@@ -39,7 +40,7 @@
 	ui_label = "M"
 	hand_sort_priority = 3
 
-/datum/inventory_slot/gripper/mouth/can_equip_to_slot(mob/user, obj/item/prop, disable_warning)
+/datum/inventory_slot/gripper/mouth/can_equip_to_slot(mob/user, obj/item/prop, disable_warning, ignore_equipped)
 	. = ..() && prop.w_class <= user.can_pull_size
 
 // Mouths are used by diona nymphs and Ascent babies to eat stuff, not just hold stuff in the mouth.

@@ -3,8 +3,8 @@
 	desc = "The compressor stage of a gas turbine generator."
 	icon = 'icons/obj/pipes.dmi'
 	icon_state = "compressor"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/obj/machinery/turbine/turbine
 	var/datum/gas_mixture/gas_contained
 	var/turf/simulated/inturf
@@ -22,8 +22,8 @@
 	desc = "A gas turbine used for backup power generation."
 	icon = 'icons/obj/pipes.dmi'
 	icon_state = "turbine"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/obj/machinery/compressor/compressor
 	var/turf/simulated/outturf
 	var/lastgen
@@ -38,8 +38,8 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "tech_key"
 	icon_screen = "turbinecomp"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/obj/machinery/compressor/compressor
 	var/list/obj/machinery/door/blast/doors
 	var/door_status = 0
@@ -155,7 +155,7 @@
 
 /obj/machinery/turbine/interact(mob/user)
 
-	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
+	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!isAI(user)) )
 		user.machine = null
 		close_browser(user, "window=turbine")
 		return

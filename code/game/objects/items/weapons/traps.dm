@@ -27,7 +27,7 @@
 		if(do_after(user, 60, src))
 			user.visible_message("<span class='notice'>\The [buckled_mob] has been freed from \the [src] by \the [user].</span>")
 			unbuckle_mob()
-			anchored = 0
+			anchored = FALSE
 
 /obj/item/beartrap/attack_self(mob/user)
 	..()
@@ -47,10 +47,10 @@
 
 			deployed = 1
 			update_icon()
-			anchored = 1
+			anchored = TRUE
 
 /obj/item/beartrap/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(buckled_mob)
 		user_unbuckle_mob(user)
@@ -68,7 +68,7 @@
 			SPAN_NOTICE("You have disarmed \the [src]!")
 		)
 		deployed = 0
-		anchored = 0
+		anchored = FALSE
 		update_icon()
 	return TRUE
 
@@ -102,7 +102,7 @@
 		"<b>You hear a loud metallic snap!</b>")
 	attack_mob(L)
 	if(!buckled_mob)
-		anchored = 0
+		anchored = FALSE
 	deployed = 0
 	update_icon()
 

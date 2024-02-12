@@ -35,7 +35,6 @@
 
 	process_queued_alarms()
 	handle_regular_hud_updates()
-	handle_status_effects()
 
 	switch(src.sensor_mode)
 		if (SEC_HUD)
@@ -44,6 +43,7 @@
 			process_med_hud(src,0,src.eyeobj,get_computer_network())
 
 	process_os()
+	handle_status_effects()
 
 	if(controlling_drone && stat != CONSCIOUS)
 		controlling_drone.release_ai_control("<b>WARNING: Primary control loop failure.</b> Session terminated.")

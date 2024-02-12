@@ -7,7 +7,7 @@
 	icon                   = 'icons/obj/mining.dmi'
 	icon_state             = "orebox0"
 	density                = TRUE
-	material               = /decl/material/solid/wood
+	material               = /decl/material/solid/organic/wood
 	atom_flags             = ATOM_FLAG_CLIMBABLE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	///Maximum amount of ores of all types that can be stored in the box.
@@ -18,7 +18,7 @@
 	var/list/stored_ore
 
 /obj/structure/ore_box/attack_hand(mob/user)
-	if(total_ores <= 0 || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(total_ores <= 0 || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/item/stack/material/ore/O = pick(get_contained_external_atoms())
 	if(!remove_ore(O, user))
@@ -87,7 +87,7 @@
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return FALSE
-	if(user && !user.check_dexterity(DEXTERITY_GRIP))
+	if(user && !user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		to_chat(user, SPAN_WARNING("You lack the dexterity to empty \the [src]!"))
 		return FALSE
 
@@ -106,7 +106,7 @@
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return FALSE
-	if(user && !user.check_dexterity(DEXTERITY_GRIP))
+	if(user && !user.check_dexterity(DEXTERITY_HOLD_ITEM))
 		to_chat(user, SPAN_WARNING("You lack the dexterity to empty \the [src]!"))
 		return FALSE
 	if(user)

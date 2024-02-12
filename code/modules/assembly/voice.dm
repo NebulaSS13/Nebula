@@ -27,7 +27,7 @@
 		T.visible_message("[html_icon(src)] beeps, \"Activation message is '[recorded]'.\"")
 	else
 		if(findtext(msg, recorded))
-			pulse(0)
+			pulse_device(0)
 
 /obj/item/assembly/voice/activate()
 	if(secured)

@@ -75,7 +75,8 @@
 	icon_state = "default"
 	screen_loc = ui_center_fullscreen
 	plane = FULLSCREEN_PLANE
-	mouse_opacity = 0
+	layer = FULLSCREEN_LAYER
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/severity = 0
 	var/allstate = 0 //shows if it should show up for dead people too
 
@@ -134,14 +135,12 @@
 	icon = 'icons/effects/static.dmi'
 	icon_state = "1 light"
 	screen_loc = ui_entire_screen
-	layer = FULLSCREEN_LAYER
 	alpha = 127
 
 /obj/screen/fullscreen/fadeout
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "black"
 	screen_loc = ui_entire_screen
-	layer = FULLSCREEN_LAYER
 	alpha = 0
 	allstate = 1
 
@@ -154,7 +153,6 @@
 	icon_state = "scanlines"
 	screen_loc = ui_entire_screen
 	alpha = 50
-	layer = FULLSCREEN_LAYER
 
 /obj/screen/fullscreen/fishbed
 	icon_state = "fishbed"
@@ -169,4 +167,3 @@
 	icon_state = "base"
 	screen_loc = ui_entire_screen
 	alpha = 100
-	layer = FULLSCREEN_LAYER

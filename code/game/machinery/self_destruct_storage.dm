@@ -6,7 +6,7 @@
 	anchored = TRUE
 	density = FALSE
 
-	required_interaction_dexterity = DEXTERITY_GRIP
+	required_interaction_dexterity = DEXTERITY_HOLD_ITEM
 	construct_state = /decl/machine_construction/default/panel_closed
 	base_type = /obj/machinery/nuclear_cylinder_storage/buildable
 

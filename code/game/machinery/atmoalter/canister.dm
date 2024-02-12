@@ -2,7 +2,7 @@
 	name = "\improper Canister: \[CAUTION\]"
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
-	density = 1
+	density = TRUE
 	var/health = 100.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
@@ -117,7 +117,7 @@
 	update_flag = 0
 	if(holding)
 		update_flag |= 1
-	if(connected_port)
+	if(get_port())
 		update_flag |= 2
 
 	var/tank_pressure = return_pressure()
@@ -268,7 +268,7 @@ update_flag
 		healthcheck()
 
 /obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W, var/mob/user)
-	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/tank/jetpack))
+	if(isrobot(user) && istype(W, /obj/item/tank/jetpack))
 		var/obj/item/tank/jetpack/pack = W
 		var/datum/gas_mixture/thejetpack = pack.air_contents
 		if(!thejetpack)
@@ -298,7 +298,7 @@ update_flag
 	var/data[0]
 	data["name"] = name
 	data["canLabel"] = can_label ? 1 : 0
-	data["portConnected"] = connected_port ? 1 : 0
+	data["portConnected"] = get_port() ? 1 : 0
 	data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
 	data["releasePressure"] = round(release_pressure ? release_pressure : 0)
 	data["minReleasePressure"] = round(0.1 ATM)

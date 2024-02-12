@@ -29,13 +29,15 @@
 	if(href_list["bodytype"] && can_change(APPEARANCE_BODY))
 		var/decl/species/species = owner.get_species()
 		var/decl/bodytype/B = species.get_bodytype_by_name(href_list["bodytype"])
-		if(istype(B) && (B in owner.species.available_bodytypes) && owner.set_bodytype(B, TRUE))
+		if(istype(B) && (B in owner.species.available_bodytypes) && owner.set_bodytype(B))
 			return TRUE
 
 	if(href_list["skin_tone"] && can_change_skin_tone())
-		var/new_s_tone = input(usr, "Choose your character's skin-tone:\n1 (lighter) - [owner.species.max_skin_tone()] (darker)", "Skin Tone", -owner.skin_tone + 35) as num|null
-		if(isnum(new_s_tone) && can_still_topic(state) && owner.species.appearance_flags & HAS_SKIN_TONE_NORMAL)
-			new_s_tone = 35 - max(min(round(new_s_tone), owner.species.max_skin_tone()), 1)
+		var/decl/bodytype/root_bodytype = owner.get_bodytype()
+		var/new_s_tone = input(usr, "Choose your character's skin-tone:\n1 (lighter) - [root_bodytype.max_skin_tone()] (darker)", "Skin Tone", -owner.skin_tone + 35) as num|null
+		root_bodytype = owner.get_bodytype() // gotta make sure just in case, since input sleeps
+		if(isnum(new_s_tone) && can_still_topic(state) && root_bodytype.appearance_flags & HAS_SKIN_TONE_NORMAL)
+			new_s_tone = 35 - max(min(round(new_s_tone), root_bodytype.max_skin_tone()), 1)
 			return owner.change_skin_tone(new_s_tone)
 
 	if(href_list["skin_color"] && can_change_skin_color())
@@ -46,7 +48,7 @@
 
 	if(href_list["hair"])
 		var/decl/sprite_accessory/hair = locate(href_list["hair"])
-		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_valid_hairstyle_types(check_gender = FALSE)) && owner.change_hair(hair.type))
+		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_valid_hairstyle_types()) && owner.change_hair(hair.type))
 			update_dna()
 			return TRUE
 
@@ -98,7 +100,7 @@
 			genders[++genders.len] =  list("gender_name" = G.pronoun_string, "gender_key" = G.name)
 		data["genders"] = genders
 
-	data["bodytype"] = capitalize(owner.bodytype.name)
+	data["bodytype"] = capitalize(owner.get_bodytype().name)
 	data["change_bodytype"] = can_change(APPEARANCE_BODY)
 	if(data["change_bodytype"])
 		var/bodytypes[0]
@@ -113,7 +115,7 @@
 
 	if(data["change_hair"])
 		var/hair_styles[0]
-		for(var/hair_style in owner.get_valid_hairstyle_types(check_gender = FALSE))
+		for(var/hair_style in owner.get_valid_hairstyle_types())
 			var/decl/sprite_accessory/hair_decl = GET_DECL(hair_style)
 			hair_styles[++hair_styles.len] = list("hairstyle" = hair_decl.name, "ref" = "\ref[hair_decl]")
 		data["hair_styles"] = hair_styles
@@ -123,7 +125,7 @@
 	data["change_facial_hair"] = can_change(APPEARANCE_FACIAL_HAIR)
 	if(data["change_facial_hair"])
 		var/facial_hair_styles[0]
-		for(var/facial_hair_style in owner.get_valid_facial_hairstyle_types(check_gender = FALSE))
+		for(var/facial_hair_style in owner.get_valid_facial_hairstyle_types())
 			var/decl/sprite_accessory/facial_hair_decl = GET_DECL(facial_hair_style)
 			facial_hair_styles[++facial_hair_styles.len] = list("facialhairstyle" = facial_hair_decl.name, "ref" = "\ref[facial_hair_decl]")
 		data["facial_hair_styles"] = facial_hair_styles
@@ -147,7 +149,7 @@
 	return owner && (flags & flag)
 
 /datum/nano_module/appearance_changer/proc/can_change_skin_tone()
-	return owner && (flags & APPEARANCE_SKIN) && owner.species.appearance_flags & HAS_A_SKIN_TONE
+	return owner && (flags & APPEARANCE_SKIN) && owner.get_bodytype().appearance_flags & HAS_A_SKIN_TONE
 
 /datum/nano_module/appearance_changer/proc/can_change_skin_color()
-	return owner && (flags & APPEARANCE_SKIN) && owner.species.appearance_flags & HAS_SKIN_COLOR
+	return owner && (flags & APPEARANCE_SKIN) && owner.get_bodytype().appearance_flags & HAS_SKIN_COLOR

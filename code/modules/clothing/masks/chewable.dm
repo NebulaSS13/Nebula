@@ -14,7 +14,7 @@
 
 /obj/item/clothing/mask/chewable/Initialize()
 	. = ..()
-	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
+	atom_flags |= ATOM_FLAG_NO_CHEM_CHANGE // so it doesn't react until you light it
 	initialize_reagents()
 
 /obj/item/clothing/mask/chewable/initialize_reagents(populate = TRUE)
@@ -64,7 +64,7 @@
 	chem_volume = 50
 	chewtime = 300
 	brand = "tobacco"
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 
 /obj/item/trash/cigbutt/spitwad
 	name = "spit wad"

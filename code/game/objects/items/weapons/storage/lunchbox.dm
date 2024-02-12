@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
 	attack_verb = list("lunched")
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/tmp/filled = FALSE
 
 /obj/item/storage/lunchbox/WillContain()

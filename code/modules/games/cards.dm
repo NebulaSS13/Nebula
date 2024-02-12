@@ -21,7 +21,7 @@ var/global/list/card_decks = list()
 /obj/item/deck
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/items/playing_cards.dmi'
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	var/list/cards = list()
 
 /obj/item/deck/Initialize()
@@ -63,7 +63,7 @@ var/global/list/card_decks = list()
 	name = "card box"
 	desc = "A small leather case to show how classy you are compared to everyone else."
 	icon_state = "card_holder"
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/deck/cards
 	name = "deck of cards"
@@ -137,7 +137,7 @@ var/global/list/card_decks = list()
 			cards += P
 
 /obj/item/deck/attack_hand(mob/user)
-	if(user.a_intent == I_GRAB || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(user.a_intent == I_GRAB || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	draw_card(user)
 	return TRUE
@@ -168,7 +168,7 @@ var/global/list/card_decks = list()
 
 	if(usr.stat || !Adjacent(usr)) return
 
-	if(!istype(usr,/mob/living/carbon))
+	if(!iscarbon(usr))
 		return
 
 	var/mob/living/carbon/user = usr
@@ -276,7 +276,7 @@ var/global/list/card_decks = list()
 	icon_state = "card_pack"
 	icon = 'icons/obj/items/playing_cards.dmi'
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	var/list/cards = list()
 
 
@@ -297,7 +297,7 @@ var/global/list/card_decks = list()
 	icon = 'icons/obj/items/playing_cards.dmi'
 	icon_state = "empty"
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/cardboard
+	material = /decl/material/solid/organic/cardboard
 	var/concealed = 0
 	var/list/datum/playingcard/cards = list()
 
@@ -307,7 +307,7 @@ var/global/list/card_decks = list()
 	user.visible_message("\The [user] [concealed ? "conceals" : "reveals"] their hand.")
 
 /obj/item/hand/attack_hand(mob/user)
-	if(loc != user && !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(loc != user && !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
 	// build the list of cards in the hand

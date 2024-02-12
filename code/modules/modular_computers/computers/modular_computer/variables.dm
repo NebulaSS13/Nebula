@@ -6,7 +6,7 @@
 	icon_state = ICON_STATE_WORLD
 	center_of_mass = null
 	randpixel = 0
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	var/screen_icon
 	var/dark_screen_state

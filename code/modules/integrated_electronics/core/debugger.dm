@@ -13,7 +13,7 @@
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/integrated_electronics/debugger/attack_self(mob/user)

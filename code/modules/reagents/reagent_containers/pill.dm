@@ -13,7 +13,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	volume = 30
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 	var/static/list/colorizable_icon_states = list("pill1", "pill2", "pill3", "pill4", "pill5") // if using an icon state from here, color will be derived from reagents
 
 /obj/item/chems/pill/Initialize()
@@ -47,7 +47,7 @@
 		qdel(src)
 		return 1
 
-	else if(istype(M, /mob/living/carbon/human))
+	else if(ishuman(M))
 		if(!M.can_force_feed(user, src))
 			return
 
@@ -85,14 +85,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 //We lied - it's pills all the way down
-/obj/item/chems/pill/antitox
-	name = "antitoxins (25u)"
-	desc = "Neutralizes many common toxins."
-	icon_state = "pill1"
-
-/obj/item/chems/pill/antitox/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
-
 /obj/item/chems/pill/bromide
 	name = "bromide pill"
 	desc = "Highly toxic."
@@ -168,12 +160,13 @@
 	reagents.add_reagent(/decl/material/liquid/oxy_meds, 15)
 
 /obj/item/chems/pill/antitoxins
-	name = "antitoxins (15u)"
+	name = "antitoxins (25u)"
 	desc = "A broad-spectrum anti-toxin."
 	icon_state = "pill1"
 
 /obj/item/chems/pill/antitoxins/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, 15)
+	// Antitox is easy to make and has no OD threshold so we can get away with big pills.
+	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
 
 /obj/item/chems/pill/brute_meds
 	name = "styptic (20u)"

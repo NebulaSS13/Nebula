@@ -116,12 +116,10 @@
 	// Copied from the SM for proof of concept. //Not any more --Cirra //Use the whole z proc --Leshana
 	SSradiation.z_radiate(locate(1, 1, holder.z), radiation_level, 1)
 
-	for(var/mob/living/mob in global.living_mob_list_)
-		var/turf/T = get_turf(mob)
+	for(var/mob/living/carbon/human/H in global.living_mob_list_)
+		var/turf/T = get_turf(H)
 		if(T && (holder.z == T.z))
-			if(istype(mob, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = mob
-				H.set_hallucination(rand(100,150), 51)
+			H.set_hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
 		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == /decl/material/solid/exotic_matter)

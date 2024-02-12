@@ -24,6 +24,8 @@
 	conductive = 0
 	wall_support_value = MAT_VALUE_LIGHT
 	default_solid_form = /obj/item/stack/material/pane
+	dissolves_in = MAT_SOLVENT_IMMUNE
+	dissolves_into = null
 
 /decl/material/solid/glass/proc/is_reinforced()
 	return (integrity > 75) //todo
@@ -54,7 +56,7 @@
 	lore_text = "A form of glass-reinforced plastic made from glass fibers and a polymer resin."
 	dissolves_into = list(
 		/decl/material/solid/glass = 0.7,
-		/decl/material/solid/plastic = 0.3
+		/decl/material/solid/organic/plastic = 0.3
 	)
 	color = COLOR_OFF_WHITE
 	opacity = 0.6

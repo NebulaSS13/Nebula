@@ -11,7 +11,7 @@
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 	value = 2.5
-	opacity = 1
+	opacity = TRUE
 	min_fluid_opacity = FLUID_MAX_ALPHA
 	max_fluid_opacity = 240
 
@@ -95,3 +95,4 @@
 	hidden_from_codex = TRUE
 	toxicity = 4
 	value = 0
+	exoplanet_rarity_gas = MAT_RARITY_UNCOMMON

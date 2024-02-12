@@ -108,8 +108,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon = 'icons/obj/supermatter_48.dmi'
 	icon_state = "supermatter"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	light_range = 4
 	layer = ABOVE_HUMAN_LAYER
 	matter = list(
@@ -202,7 +202,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	uid = gl_uid++
 	soundloop = new(list(src), TRUE)
 	update_icon()
-	add_filter("outline",1,list(type = "drop_shadow", size = 0, color = COLOR_WHITE, x = 0, y = 0))
+	add_filter("outline", 1, list(type = "drop_shadow", size = 0, color = COLOR_WHITE, x = 0, y = 0))
 
 /obj/machinery/power/supermatter/Destroy()
 	. = ..()
@@ -292,7 +292,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		return
 
 	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
-	anchored = 1
+	anchored = TRUE
 	grav_pulling = 1
 	exploded = 1
 	sleep(pull_time)
@@ -410,7 +410,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 			global.using_map.unbolt_saferooms()
 			for(var/mob/M in global.player_list)
 				var/turf/T = get_turf(M)
-				if(T && isStationLevel(T.z) && !istype(M,/mob/new_player) && !isdeaf(M))
+				if(T && isStationLevel(T.z) && !isnewplayer(M) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
 			do_telecomms_announcement(src, alert_msg, "Supermatter Monitor")
@@ -444,7 +444,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	// Vary volume by power produced.
 	if(power)
-		// Volume will be 1 at no power, ~12.5 at ENERGY_NITROGEN, and 20+ at ENERGY_PHORON.
+		// Volume will be 1 at no power, ~12.5 at ENERGY_NITROGEN, and 20+ at ENERGY_HYDROGEN.
+		// (this is probably wrong since hydrogen heat cap is changed from phoron)
 		// Capped to 20 volume since higher volumes get annoying and it sounds worse.
 		// Formula previously was min(round(power/10)+1, 20)
 		soundloop.volume = clamp((50 + (power / 50)), 50, 100)
@@ -555,7 +556,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	if(damage_animation)
 		return
 	if(!get_filter("rays"))
-		add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
+		add_filter("rays", 1 ,list(type = "rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
 	animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
 	animate(time = 10 SECONDS, loop=-1)
 

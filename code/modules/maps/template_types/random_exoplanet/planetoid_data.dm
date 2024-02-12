@@ -448,18 +448,30 @@
 	for(var/mat_type in all_materials)
 		var/decl/material/mat = all_materials[mat_type]
 		//Check if this material is allowed
-		if((mat.gas_flags & blacklisted_flags) || (mat.exoplanet_rarity == MAT_RARITY_NOWHERE))
+		if((mat.gas_flags & blacklisted_flags) || (mat.exoplanet_rarity_gas == MAT_RARITY_NOWHERE))
+			continue
+		// No gaseous ice.
+		// Maybe consider adding heating products instead, but it'd have to change how this loop is done.
+		// Also that'd result in a ton of water vapor when really we'd only be interested in the volatiles...
+		if(!isnull(mat.heating_point) && length(mat.heating_products) && atmos_temperature >= mat.heating_point)
+			continue
+		if(!isnull(mat.chilling_point) && length(mat.chilling_products) && atmos_temperature <= mat.chilling_point)
 			continue
 		//Check if this gas can exist in the atmosphere
-		var/mat_phase       = mat.phase_at_temperature(atmos_temperature, atmos_pressure)
+		// For now, we skip materials above their ignition point entirely.
+		// However, it's also checked in generate_atmosphere and applies the fuel flag,
+		// so if including them is ever desirable it'll be handled properly.
+		if(!isnull(mat.ignition_point) && atmos_temperature >= mat.ignition_point)
+			continue
 		var/will_condensate = !isnull(mat.gas_condensation_point) && (atmos_temperature <= mat.gas_condensation_point)
-		if(mat_phase == MAT_PHASE_LIQUID)
-			if(will_condensate)
-				continue //A liquid below dew point cannot be in the atmosphere
-			//Otherwise allow liquids if they may exist as vapor
-		else if(mat_phase == MAT_PHASE_SOLID || mat_phase == MAT_PHASE_PLASMA)
-			continue //In any other cases if we're not a gas skip
-		candidates[mat.type] = mat.exoplanet_rarity
+		switch(mat.phase_at_temperature(atmos_temperature, atmos_pressure))
+			if(MAT_PHASE_LIQUID)
+				if(will_condensate)
+					continue //A liquid below dew point cannot be in the atmosphere
+				//Otherwise allow liquids if they may exist as vapor
+			if(MAT_PHASE_SOLID, MAT_PHASE_PLASMA)
+				continue //In any other cases if we're not a gas skip
+		candidates[mat.type] = mat.exoplanet_rarity_gas
 
 	if(prob(50)) //alium gas should be slightly less common than mundane shit
 		candidates -= /decl/material/gas/alien
@@ -567,16 +579,33 @@
 
 				// Make sure atmosphere is not flammable
 				var/decl/material/mat = GET_DECL(picked_gas)
-				if((!(mat.gas_flags & XGM_GAS_OXIDIZER) && !(mat.gas_flags & XGM_GAS_FUEL)) || \
-					((current_merged_flags & XGM_GAS_OXIDIZER) && !(mat.gas_flags & XGM_GAS_FUEL)) || \
-					((current_merged_flags & XGM_GAS_FUEL) && !(mat.gas_flags & XGM_GAS_OXIDIZER)))
+				if(((current_merged_flags & XGM_GAS_OXIDIZER) && (mat.gas_flags & XGM_GAS_FUEL)) || \
+					((current_merged_flags & XGM_GAS_FUEL) && (mat.gas_flags & XGM_GAS_OXIDIZER)))
+					continue
+				
+				// If we have an ignition point we're basically XGM_GAS_FUEL, kind of. TODO: Combine those somehow?
+				// These don't actually burn but it's still weird to see vaporized skin gas in an oxygen-rich atmosphere,
+				// so skip them.
+				if(!isnull(mat.ignition_point) && new_atmos.temperature >= mat.ignition_point)
+					if(current_merged_flags & XGM_GAS_OXIDIZER)
+						continue
+					current_merged_flags |= XGM_GAS_FUEL
 
-					current_merged_flags |= mat.gas_flags
-					var/part = available_moles * (rand(10,90)/100) //allocate percentage to it
-					if(i == number_gases || !length(candidate_gases)) //if it's last gas, let it have all remaining moles
-						part = available_moles
-					new_atmos.gas[picked_gas] += part
-					available_moles = max(available_moles - part, 0)
+				current_merged_flags |= mat.gas_flags
+				var/min_percent = 10
+				var/max_percent = 90
+				switch(mat.exoplanet_rarity_gas)
+					if(MAT_RARITY_UNCOMMON)
+						min_percent = 5
+						max_percent = 60
+					if(MAT_RARITY_EXOTIC)
+						min_percent = 1
+						max_percent = 10
+				var/part = available_moles * (rand(min_percent, max_percent)/100) //allocate percentage to it
+				if(i == number_gases || !length(candidate_gases)) //if it's last gas, let it have all remaining moles
+					part = available_moles
+				new_atmos.gas[picked_gas] += part
+				available_moles = max(available_moles - part, 0)
 				i++
 
 	new_atmos.update_values()

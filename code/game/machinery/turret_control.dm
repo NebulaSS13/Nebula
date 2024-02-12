@@ -11,8 +11,8 @@
 	desc = "Used to control a room's automated defenses."
 	icon = 'icons/obj/machines/turret_control.dmi'
 	icon_state = "control_standby"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 	var/enabled = 0

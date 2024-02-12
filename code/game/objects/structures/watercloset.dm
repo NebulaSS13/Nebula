@@ -100,8 +100,8 @@ var/global/list/hygiene_props = list()
 	desc = "The HT-451, a torque rotation-based, waste disposal unit for small matter. This one seems remarkably clean."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "toilet00"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 
 	var/open = 0			//if the lid is up
@@ -115,7 +115,7 @@ var/global/list/hygiene_props = list()
 	update_icon()
 
 /obj/structure/hygiene/toilet/attack_hand(var/mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 
 	if(swirlie)
@@ -186,7 +186,7 @@ var/global/list/hygiene_props = list()
 				playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 		return
 
-	if(cistern && !istype(user,/mob/living/silicon/robot)) //STOP PUTTING YOUR MODULES IN THE TOILET.
+	if(cistern && !isrobot(user)) //STOP PUTTING YOUR MODULES IN THE TOILET.
 		if(I.w_class > ITEM_SIZE_NORMAL)
 			to_chat(user, SPAN_WARNING("\The [I] does not fit."))
 			return
@@ -206,8 +206,8 @@ var/global/list/hygiene_props = list()
 	desc = "The HU-452, an experimental urinal."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "urinal"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	directional_offset = "{'NORTH':{'y':-32}, 'SOUTH':{'y':32}, 'EAST':{'x':-32}, 'WEST':{'x':32}}"
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 
@@ -228,8 +228,8 @@ var/global/list/hygiene_props = list()
 	desc = "The HS-451. Installed in the 2200s by the Hygiene Division."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "shower"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	clogged = -1
 	can_drain = 1
 	drainage = 0.2 			//showers are tiny, drain a little slower
@@ -278,8 +278,8 @@ var/global/list/hygiene_props = list()
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mist"
 	layer = MOB_LAYER + 1
-	anchored = 1
-	mouse_opacity = 0
+	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /obj/effect/mist/Initialize()
 	. = ..()
@@ -335,24 +335,23 @@ var/global/list/hygiene_props = list()
 	M.bodytemperature += temp_adj
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(water_temperature >= H.species.heat_level_1)
+		if(water_temperature >= H.get_temperature_threshold(HEAT_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is searing hot!"))
-		else if(water_temperature <= H.species.cold_level_1)
+		else if(water_temperature <= H.get_temperature_threshold(COLD_LEVEL_1))
 			to_chat(H, SPAN_DANGER("The water is freezing cold!"))
 
 /obj/item/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl
-	icon = 'icons/obj/watercloset.dmi'
-	icon_state = "rubberducky"
-	item_state = "rubberducky"
+	icon = 'icons/obj/rubber_duck.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/structure/hygiene/sink
 	name = "sink"
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "sink"
 	desc = "A sink used for washing one's hands and face."
-	anchored = 1
+	anchored = TRUE
 	var/busy = 0 	//Something's being washed at the moment
 
 /obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
@@ -544,7 +543,7 @@ var/global/list/hygiene_props = list()
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "faucet"
 	desc = "An outlet for liquids. Water you waiting for?"
-	anchored = 1
+	anchored = TRUE
 	drainage = 0
 	clogged = -1
 

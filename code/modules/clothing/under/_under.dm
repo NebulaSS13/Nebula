@@ -48,9 +48,9 @@
 		if(rolled_down && check_state_in_icon("[overlay.icon_state]-rolled", overlay.icon))
 			overlay.icon_state = "[overlay.icon_state]-rolled"
 		else
-			var/mob/living/carbon/human/user_human = user_mob
-			if(istype(user_human) && user_human.bodytype.uniform_state_modifier && check_state_in_icon("[overlay.icon_state]-[user_human.bodytype.uniform_state_modifier]", overlay.icon))
-				overlay.icon_state = "[overlay.icon_state]-[user_human.bodytype.uniform_state_modifier]"
+			var/decl/bodytype/root_bodytype = user_mob.get_bodytype()
+			if(istype(root_bodytype) && root_bodytype.uniform_state_modifier && check_state_in_icon("[overlay.icon_state]-[root_bodytype.uniform_state_modifier]", overlay.icon))
+				overlay.icon_state = "[overlay.icon_state]-[root_bodytype.uniform_state_modifier]"
 			if(rolled_sleeves && check_state_in_icon("[overlay.icon_state]-sleeves", overlay.icon))
 				overlay.icon_state = "[overlay.icon_state]-sleeves"
 	. = ..()
@@ -83,11 +83,10 @@
 		to_chat(usr, SPAN_NOTICE("You roll [rolled_sleeves ? "up" : "down"] the sleeves of \the [src]."))
 		update_clothing_icon()
 
-/obj/item/clothing/under/update_clothing_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_w_uniform(0)
-		M.update_inv_wear_id()
+/obj/item/clothing/under/get_associated_equipment_slots()
+	. = ..()
+	var/static/list/under_slots = list(slot_w_uniform_str, slot_wear_id_str)
+	LAZYDISTINCTADD(., under_slots)
 
 /obj/item/clothing/under/examine(mob/user)
 	. = ..()

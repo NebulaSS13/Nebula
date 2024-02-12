@@ -14,7 +14,7 @@
 	health = 5
 	maxHealth = 5
 	response_harm = "stamps on"
-	density = 0
+	density = FALSE
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
 	universal_speak = FALSE
@@ -30,33 +30,34 @@
 	meat_amount =   1
 	bone_amount =   1
 	skin_amount =   1
-	skin_material = /decl/material/solid/skin/fur
+	skin_material = /decl/material/solid/organic/skin/fur
+
+	ai = /datum/ai/mouse
 
 	var/body_color //brown, gray and white, leave blank for random
 	var/splatted = FALSE
 
-/mob/living/simple_animal/mouse/has_dexterity(dex_level)
-	return FALSE // Mice are troll bait, give them no power.
+/mob/living/simple_animal/mouse/get_dexterity(var/silent = FALSE)
+	return DEXTERITY_NONE // Mice are troll bait, give them no power.
 
-/mob/living/simple_animal/mouse/Life()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(prob(speak_chance))
-		for(var/mob/M in view())
-			sound_to(M, 'sound/effects/mousesqueek.ogg')
+/datum/ai/mouse
+	expected_type = /mob/living/simple_animal/mouse
 
-	if(!ckey && stat == CONSCIOUS && prob(0.5))
-		set_stat(UNCONSCIOUS)
-		wander = 0
-		speak_chance = 0
-		//snuffles
-	else if(stat == UNCONSCIOUS)
-		if(ckey || prob(1))
-			set_stat(CONSCIOUS)
-			wander = 1
+/datum/ai/mouse/do_process()
+	..()
+	var/mob/living/simple_animal/mouse/mouse = body
+	if(prob(mouse.speak_chance))
+		playsound(mouse.loc, 'sound/effects/mousesqueek.ogg', 50)
+	if(mouse.stat == CONSCIOUS && prob(0.5))
+		mouse.set_stat(UNCONSCIOUS)
+		mouse.wander = 0
+		mouse.speak_chance = 0
+	else if(mouse.stat == UNCONSCIOUS)
+		if(prob(1))
+			mouse.set_stat(CONSCIOUS)
+			mouse.wander = 1
 		else if(prob(5))
-			INVOKE_ASYNC(src, .proc/audible_emote, "snuffles.")
+			INVOKE_ASYNC(mouse, /mob/living/simple_animal/proc/audible_emote, "snuffles.")
 
 /mob/living/simple_animal/mouse/Initialize()
 	verbs += /mob/living/proc/ventcrawl
@@ -72,10 +73,10 @@
 		body_color = pick( list("brown","gray","white") )
 	switch(body_color)
 		if("gray")
-			skin_material = /decl/material/solid/skin/fur/gray
+			skin_material = /decl/material/solid/organic/skin/fur/gray
 			icon = 'icons/mob/simple_animal/mouse_gray.dmi'
 		if("white")
-			skin_material = /decl/material/solid/skin/fur/white
+			skin_material = /decl/material/solid/organic/skin/fur/white
 			icon = 'icons/mob/simple_animal/mouse_white.dmi'
 		if("brown")
 			icon = 'icons/mob/simple_animal/mouse_brown.dmi'
@@ -130,7 +131,7 @@
 	desc = "A large rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 	body_color = "rat"
 	icon = 'icons/mob/simple_animal/rat.dmi'
-	skin_material = /decl/material/solid/skin/fur/gray
+	skin_material = /decl/material/solid/organic/skin/fur/gray
 	maxHealth = 20
 	health = 20
 

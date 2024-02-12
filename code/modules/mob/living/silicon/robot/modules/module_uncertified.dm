@@ -20,7 +20,7 @@
 	equipment = list(
 		/obj/item/boombox,
 		/obj/item/bikehorn/airhorn,
-		/obj/item/party_light,
+		/obj/item/flashlight/party,
 		/obj/item/gun/launcher/money
 	)
 

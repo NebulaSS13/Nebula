@@ -2,9 +2,6 @@
 	name = "reagent scanner"
 	desc = "A hand-held reagent scanner which identifies chemical agents."
 	icon = 'icons/obj/items/device/scanner/spectrometer.dmi'
-	icon_state = "spectrometer"
-	item_state = "analyzer"
-
 	origin_tech = "{'magnets':2,'biotech':2}"
 	scan_sound = 'sound/effects/scanbeep.ogg'
 	var/details = 0
@@ -30,6 +27,6 @@
 
 /obj/item/scanner/reagent/adv
 	name = "advanced reagent scanner"
-	icon_state = "adv_spectrometer"
+	icon = 'icons/obj/items/device/scanner/advanced_spectrometer.dmi'
 	details = 1
 	origin_tech = "{'magnets':4,'biotech':2}"

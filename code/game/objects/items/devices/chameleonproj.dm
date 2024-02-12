@@ -9,7 +9,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'esoteric':4,'magnets':4}"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/can_use = 1
 	var/obj/effect/dummy/chameleon/active_dummy = null
 	var/saved_item = /obj/item/trash/cigbutt
@@ -84,8 +84,8 @@
 /obj/effect/dummy/chameleon
 	name = ""
 	desc = ""
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	is_spawnable_type = FALSE
 	var/can_move = 1
 	var/obj/item/chameleon/master = null

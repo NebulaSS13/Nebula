@@ -143,7 +143,7 @@
 	if(T && !T.density)
 		var/can = 1
 		for(var/atom/movable/M in T)
-			if(istype(M, /mob/living) || M.density)
+			if(isliving(M) || M.density)
 				can = 0
 				break
 		if(can)

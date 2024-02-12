@@ -6,7 +6,7 @@
 	allow_quick_empty = 1
 	use_to_pickup = 1
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 
 /obj/item/storage/bag/handle_item_insertion(obj/item/W, prevent_warning = 0)
@@ -70,7 +70,7 @@
 	max_storage_space = 56
 	desc = "The latest and greatest in custodial convenience, a trashbag that is capable of holding vast quantities of garbage."
 	icon_state = "bluetrashbag"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
@@ -113,7 +113,7 @@
 	max_w_class = ITEM_SIZE_HUGE
 	w_class = ITEM_SIZE_SMALL
 	can_hold = list(/obj/item/coin, /obj/item/cash)
-	material = /decl/material/solid/leather/synth
+	material = /decl/material/solid/organic/leather/synth
 
 /obj/item/storage/bag/cash/filled/Initialize()
 	. = ..()

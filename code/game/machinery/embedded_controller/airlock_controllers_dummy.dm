@@ -6,7 +6,6 @@
 	icon_state         = "airlock_control_off"
 	layer              = ABOVE_OBJ_LAYER
 	obj_flags          = OBJ_FLAG_MOVES_UNSUPPORTED
-	unacidable         = TRUE
 	base_type          = /obj/machinery/dummy_airlock_controller
 	construct_state    = /decl/machine_construction/wall_frame/panel_closed
 	frame_type         = /obj/item/frame/button/airlock_controller

@@ -4,7 +4,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 
 	. = ..()
 
-	invisibility = 0
+	set_invisibility(INVISIBILITY_NONE)
 
 	// Bookkeeping/rightclick guards.
 	verbs.Cut()

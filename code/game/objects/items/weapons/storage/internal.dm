@@ -23,7 +23,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return TRUE //make sure this is never picked up
 
-/obj/item/storage/internal/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/storage/internal/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	SHOULD_CALL_PARENT(FALSE)
 	return FALSE //make sure this is never picked up
 

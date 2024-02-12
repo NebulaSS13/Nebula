@@ -22,7 +22,7 @@
 /obj/effect/step_trigger/teleporter/random{
 	affect_ghosts = 1;
 	name = "escapeshuttle_leave";
-	opacity = 0;
+	opacity = FALSE;
 	teleport_x = 25;
 	teleport_x_offset = 245;
 	teleport_y = 25;

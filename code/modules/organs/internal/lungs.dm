@@ -93,7 +93,7 @@
 		return
 
 	if(owner.vital_organ_missing_time)
-		owner.losebreath = max(10, owner.losebreath)
+		owner.ticks_since_last_successful_breath = max(10, owner.ticks_since_last_successful_breath)
 		return
 
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
@@ -125,7 +125,7 @@
 			else
 				to_chat(owner, "<span class='danger'>You're having trouble getting enough [breath_type]!</span>")
 
-			owner.losebreath = max(3, owner.losebreath)
+			owner.ticks_since_last_successful_breath = max(3, owner.ticks_since_last_successful_breath)
 
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
@@ -147,7 +147,7 @@
 		if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 			rupture()
 
-/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, var/forced)
+/obj/item/organ/internal/lungs/proc/handle_owner_breath(datum/gas_mixture/breath, var/forced)
 
 	if(!owner)
 		return 1
@@ -271,14 +271,16 @@
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
 	// Hot air hurts :(
-	if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(MUTATION_COLD_RESISTANCE in owner.mutations))
+	var/cold_1 = species.get_species_temperature_threshold(COLD_LEVEL_1)
+	var/heat_1 = species.get_species_temperature_threshold(HEAT_LEVEL_1)
+	if((breath.temperature < cold_1 || breath.temperature > heat_1) && !(MUTATION_COLD_RESISTANCE in owner.mutations))
 		var/damage = 0
-		if(breath.temperature <= species.cold_level_1)
+		if(breath.temperature <= cold_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
-			if(breath.temperature < species.cold_level_3)
+			if(breath.temperature < species.get_species_temperature_threshold(COLD_LEVEL_3))
 				damage = COLD_GAS_DAMAGE_LEVEL_3
-			else if(breath.temperature < species.cold_level_2)
+			else if(breath.temperature < species.get_species_temperature_threshold(COLD_LEVEL_2))
 				damage = COLD_GAS_DAMAGE_LEVEL_2
 			else
 				damage = COLD_GAS_DAMAGE_LEVEL_1
@@ -288,13 +290,13 @@
 			else
 				src.damage += damage
 			owner.fire_alert = 1
-		else if(breath.temperature >= species.heat_level_1)
+		else if(breath.temperature >= heat_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
-			if(breath.temperature < species.heat_level_2)
+			if(breath.temperature < species.get_species_temperature_threshold(HEAT_LEVEL_2))
 				damage = HEAT_GAS_DAMAGE_LEVEL_1
-			else if(breath.temperature < species.heat_level_3)
+			else if(breath.temperature < species.get_species_temperature_threshold(HEAT_LEVEL_3))
 				damage = HEAT_GAS_DAMAGE_LEVEL_2
 			else
 				damage = HEAT_GAS_DAMAGE_LEVEL_3

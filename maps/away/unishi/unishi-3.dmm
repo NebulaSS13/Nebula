@@ -1441,7 +1441,7 @@
 /area/unishi/living)
 "eb" = (
 /obj/structure/table/woodentable,
-/obj/item/contraband/poster,
+/obj/item/poster,
 /obj/item/haircomb/random,
 /obj/random/advdevice,
 /turf/simulated/floor/tiled,

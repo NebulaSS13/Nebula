@@ -239,55 +239,6 @@ var/global/list/priv_region_access
 		"Emergency Response Team",
 		"Emergency Response Team Leader")
 
-/mob/observer/ghost
-	var/static/obj/item/card/id/all_access/ghost_all_access
-
-/mob/observer/ghost/GetIdCards(list/exceptions)
-	. = ..()
-	if(is_admin(src))
-		if (!ghost_all_access)
-			ghost_all_access = new()
-		if(!is_type_in_list(ghost_all_access, exceptions))
-			LAZYDISTINCTADD(., ghost_all_access)
-
-/mob/living/GetIdCards(list/exceptions)
-	. = ..()
-	// Grab our equipped ID.
-	// TODO: consider just iterating the entire equipment list here?
-	// Mask/neck slot lanyards or IDs as uniform accessories someday?
-	// TODO: May need handling for a held or equipped item returning
-	// multiple ID cards, currently will take the last one added.
-	var/obj/item/id = get_equipped_item(slot_wear_id_str)
-	if(istype(id))
-		id = id.GetIdCard()
-		if(istype(id) && !is_type_in_list(id, exceptions))
-			LAZYDISTINCTADD(., id)
-	// Go over everything we're holding.
-	for(var/obj/item/thing in get_held_items())
-		thing = thing.GetIdCard()
-		if(istype(thing) && !is_type_in_list(thing, exceptions))
-			LAZYDISTINCTADD(., thing)
-
-/mob/living/bot/GetIdCards(list/exceptions)
-	. = ..()
-	if(istype(botcard) && !is_type_in_list(botcard, exceptions))
-		LAZYDISTINCTADD(., botcard)
-
-/mob/living/carbon/human/GetAccess(var/union = TRUE)
-	. = ..(union)
-
-/mob/living/silicon/GetIdCards(list/exceptions)
-	. = ..()
-	// Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
-	if(istype(idcard) && !stat && !(ckey && !client) && !is_type_in_list(idcard, exceptions))
-		LAZYDISTINCTADD(., idcard)
-
-/proc/FindNameFromID(var/mob/M, var/missing_id_name = "Unknown")
-	var/obj/item/card/id/C = M.GetIdCard()
-	if(C)
-		return C.registered_name
-	return missing_id_name
-
 /proc/get_all_job_icons() //For all existing HUD icons
 	return SSjobs.titles_to_datums + list("Prisoner")
 

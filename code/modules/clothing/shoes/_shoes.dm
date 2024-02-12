@@ -12,7 +12,7 @@
 	permeability_coefficient = 0.50
 	force = 2
 	blood_overlay_type = "shoeblood"
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 	origin_tech = "{'materials':1,'engineering':1}"
 
 	var/can_fit_under_magboots = TRUE
@@ -48,7 +48,7 @@
 			to_chat(user, SPAN_ITALIC("Something is hidden inside."))
 
 /obj/item/clothing/shoes/attack_hand(var/mob/user)
-	if(user.check_dexterity(DEXTERITY_GRIP, TRUE) && remove_hidden(user))
+	if(user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE) && remove_hidden(user))
 		return TRUE
 	return ..()
 
@@ -157,10 +157,9 @@
 			attached_cuffs = null
 	return
 
-/obj/item/clothing/shoes/update_clothing_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_shoes()
+/obj/item/clothing/shoes/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_shoes_str)
 
 /obj/item/clothing/shoes/set_material(var/new_material)
 	..()

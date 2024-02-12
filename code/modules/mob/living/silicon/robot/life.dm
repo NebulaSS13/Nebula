@@ -2,18 +2,15 @@
 
 	SHOULD_CALL_PARENT(FALSE)
 
-	set invisibility = 0
+	set invisibility = FALSE
 	set background = 1
 
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 
-	src.blinded = null
-
 	//Status updates, death etc.
 	clamp_values()
 	handle_regular_status_updates()
-	handle_status_effects()
 	handle_actions()
 
 	if(client)
@@ -25,6 +22,8 @@
 		process_locks()
 		process_queued_alarms()
 		process_os()
+
+	handle_status_effects()
 	UpdateLyingBuckledAndVerbStatus()
 
 /mob/living/silicon/robot/proc/clamp_values()
@@ -83,25 +82,21 @@
 	if (stat != DEAD) //Alive.
 		// This previously used incapacitated(INCAPACITATION_DISRUPTED) but that was setting the robot to be permanently unconscious, which isn't ideal.
 		if(!has_power || incapacitated(INCAPACITATION_STUNNED) || HAS_STATUS(src, STAT_PARA))
-			blinded = TRUE
+			SET_STATUS_MAX(src, STAT_BLIND, 2)
 			set_stat(UNCONSCIOUS)
 		else
-			blinded = FALSE
 			set_stat(CONSCIOUS)
 
 	else //Dead.
 		cameranet.update_visibility(src, FALSE)
-		blinded = TRUE
-
-	if(HAS_STATUS(src, STAT_BLIND))
-		ADJ_STATUS(src, STAT_BLIND, -1)
-		blinded = TRUE
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 	set_density(!lying)
 	if(sdisabilities & BLINDED)
-		blinded = TRUE
-	if(sdisabilities & DEAFENED)
-		set_status(STAT_DEAF, 1)
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
+
+	if(src.sdisabilities & DEAFENED)
+		src.set_status(STAT_DEAF, 1)
 
 	//update the state of modules and components here
 	if (stat != CONSCIOUS)
@@ -113,10 +108,8 @@
 		else
 			silicon_radio.on = 1
 
-	if(isnull(components["camera"]) || is_component_functioning("camera"))
-		blinded = FALSE
-	else
-		blinded = TRUE
+	if(!isnull(components["camera"]) && !is_component_functioning("camera"))
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 		cameranet.update_visibility(src, FALSE)
 
 	return 1
@@ -135,15 +128,15 @@
 				process_med_hud(src,0,network = get_computer_network())
 
 	if(length(get_active_grabs()))
-		ui_drop_grab.invisibility = 0
+		ui_drop_grab.set_invisibility(INVISIBILITY_NONE)
 		ui_drop_grab.alpha = 255
 	else
-		ui_drop_grab.invisibility = INVISIBILITY_MAXIMUM
+		ui_drop_grab.set_invisibility(INVISIBILITY_ABSTRACT)
 		ui_drop_grab.alpha = 0
 
 	if (src.healths)
-		if (src.stat != 2)
-			if(istype(src,/mob/living/silicon/robot/drone))
+		if (src.stat != DEAD)
+			if(isdrone(src))
 				switch(health)
 					if(35 to INFINITY)
 						src.healths.icon_state = "health0"
@@ -229,7 +222,7 @@
 			src.oxygen.icon_state = "oxy1"
 
 	if(stat != DEAD)
-		if(blinded)
+		if(is_blind())
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		else
 			clear_fullscreen("blind")

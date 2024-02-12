@@ -3,8 +3,8 @@
 	desc = "It produces common day to day items from a variety of materials."
 	icon = 'icons/obj/machines/fabricators/autolathe.dmi'
 	icon_state = "autolathe"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 10
 	active_power_usage = 2000
 	clicksound = "keyboard"
@@ -228,3 +228,8 @@
 
 /obj/machinery/fabricator/proc/get_color_list()
 	return pipe_colors //override with null for hex color selections
+
+// Our stored_material is just the right format to be added to the matter list.
+/obj/machinery/fabricator/get_contained_matter()
+	. = ..()
+	. = MERGE_ASSOCS_WITH_NUM_VALUES(., stored_material)

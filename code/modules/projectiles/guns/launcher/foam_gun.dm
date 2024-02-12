@@ -13,7 +13,7 @@
 	one_hand_penalty = 0
 	fire_sound = 'sound/weapons/foamblaster.ogg'
 	fire_sound_text = "a pleasing 'pomp'"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 	var/max_darts = 1
 	var/list/darts = new/list()
@@ -89,7 +89,7 @@
 	throwforce = 0
 	throw_range = 3
 	does_spin = FALSE
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/item/foam_dart/Initialize()
 	mix_up()

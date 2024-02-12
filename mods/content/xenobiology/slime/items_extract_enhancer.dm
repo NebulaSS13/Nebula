@@ -3,7 +3,7 @@
 	desc = "A potent chemical mix that will give a slime extract three uses."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle17"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 
 /obj/item/slime_extract_enhancer/afterattack(obj/target, mob/user , flag)

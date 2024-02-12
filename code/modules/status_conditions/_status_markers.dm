@@ -1,6 +1,6 @@
 /obj/status_marker
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	simulated = FALSE
 	alpha = 0
 	plane = DEFAULT_PLANE
@@ -18,7 +18,7 @@
 
 	// Throwing these in here in the hopes of preventing the markers showing up in right click.
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	verbs.Cut()
 
 /datum/status_marker_holder

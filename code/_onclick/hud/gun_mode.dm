@@ -1,7 +1,6 @@
 /obj/screen/gun
 	name = "gun"
 	icon = 'icons/mob/screen1.dmi'
-	master = null
 	dir = SOUTH
 
 /obj/screen/gun/Click(location, control, params)

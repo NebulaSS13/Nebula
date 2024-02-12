@@ -151,7 +151,7 @@
 		ARMOR_BIO = ARMOR_BIO_SHIELDED
 		)
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 	origin_tech = "{'materials':1,'engineering':2}"
 
 /obj/item/clothing/mask/gas/clown_hat

@@ -3,8 +3,8 @@
 
 /obj/machinery/chem_master
 	name = "\improper ChemMaster 3000"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	icon = 'icons/obj/machines/chemistry/chemmaster.dmi'
 	icon_state = "mixer0"
 	layer = BELOW_OBJ_LAYER

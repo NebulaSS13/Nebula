@@ -1,12 +1,11 @@
 /obj/machinery/shield
-	name = "Emergency energy shield"
+	name = "emergency energy shield"
 	desc = "An energy shield used to contain hull breaches."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shield-old"
-	density = 1
-	opacity = 0
-	anchored = 1
-	unacidable = 1
+	density = TRUE
+	opacity = FALSE
+	anchored = TRUE
 	var/const/max_health = 200
 	var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
 	var/shield_generate_power = 7500	//how much power we use when regenerating
@@ -107,9 +106,9 @@
 	desc = "Used to seal minor hull breaches."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "shieldoff"
-	density = 1
-	opacity = 0
-	anchored = 0
+	density = TRUE
+	opacity = FALSE
+	anchored = FALSE
 	initial_access = list(access_engine)
 	var/const/max_health = 100
 	var/health = max_health
@@ -295,12 +294,12 @@
 			if(active)
 				to_chat(user, "<span class='notice'>The [src] shuts off!</span>")
 				src.shields_down()
-			anchored = 0
+			anchored = FALSE
 		else
 			if(isspaceturf(get_turf(src))) return //No wrenching these in space!
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>You secure the [src] to the floor!</span>")
-			anchored = 1
+			anchored = TRUE
 
 
 	else if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))

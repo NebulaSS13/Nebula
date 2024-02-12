@@ -12,7 +12,7 @@
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 		)
 
-/obj/item/clothing/head/helmet/space/void/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/clothing/head/helmet/space/void/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
 	if(. && user?.get_bodytype()?.name != BODYTYPE_SKRELL)
 		return FALSE
@@ -25,7 +25,7 @@
 	desc = "A helmet built for use by a Skrell. This one appears to be fairly standard and reliable."
 	icon = 'mods/species/bayliens/skrell/icons/clothing/head/helmet_skrell.dmi'
 
-/obj/item/clothing/head/helmet/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/clothing/head/helmet/skrell/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
 	if(. && user?.get_bodytype()?.name != BODYTYPE_SKRELL)
 		return FALSE

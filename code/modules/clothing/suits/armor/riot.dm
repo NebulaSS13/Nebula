@@ -16,7 +16,7 @@
 	siemens_coefficient = 0.5
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY
+		/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY
 		)
 	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 
@@ -40,7 +40,7 @@
 	siemens_coefficient = 0.5
 	slowdown = 1
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY)
+	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY)
 	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 
 /obj/item/clothing/accessory/armguards/riot
@@ -57,6 +57,6 @@
 	color = null
 	siemens_coefficient = 0.5
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY)
+	matter = list(/decl/material/solid/organic/cloth = MATTER_AMOUNT_SECONDARY)
 	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 

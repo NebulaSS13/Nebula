@@ -5,7 +5,7 @@
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
@@ -71,7 +71,7 @@
 	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	density = FALSE
-	invisibility = 0
+	invisibility = INVISIBILITY_NONE
 	atmos_canpass = CANPASS_NEVER
 	var/obj/item/mech_equipment/atmos_shields/shields
 	color = COLOR_SABER_BLUE

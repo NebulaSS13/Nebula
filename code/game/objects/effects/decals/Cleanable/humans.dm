@@ -32,14 +32,14 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/reveal_blood()
 	if(!fluorescent)
-		fluorescent = 1
+		fluorescent = FLUORESCENT_GLOWS
 		basecolor = COLOR_LUMINOL
 		update_icon()
 
 /obj/effect/decal/cleanable/blood/clean_blood()
-	fluorescent = 0
-	if(invisibility != 100)
-		set_invisibility(100)
+	fluorescent = FALSE
+	if(invisibility != INVISIBILITY_ABSTRACT)
+		set_invisibility(INVISIBILITY_ABSTRACT)
 		amount = 0
 		STOP_PROCESSING(SSobj, src)
 		remove_extension(src, /datum/extension/scent)
@@ -110,7 +110,7 @@ var/global/list/image/splatter_cache=list()
 		var/obj/structure/bed/chair/wheelchair/W = M.buckled
 		W.bloodiness = 4
 
-	M.update_inv_shoes(1)
+	M.update_equipment_overlay(slot_shoes_str)
 	amount--
 
 /obj/effect/decal/cleanable/blood/proc/dry()

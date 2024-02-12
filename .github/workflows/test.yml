@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        map_path: [example, tradeship, nexus, exodus, ministation, away_sites_testing, modpack_testing, planets_testing]
+        map_path: [example, tradeship, exodus, ministation, away_sites_testing, modpack_testing, planets_testing]
     steps:
       - uses: actions/checkout@v3
       - name: Setup Cache

@@ -14,7 +14,7 @@
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':3, 'engineering':3}"
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
 	)
 
@@ -36,7 +36,7 @@
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':3, 'engineering':3}"
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
 	)
 
@@ -91,6 +91,6 @@
 	flags_inv = HIDEGLOVES|HIDEJUMPSUIT|HIDETAIL
 	origin_tech = "{'materials':1,'engineering':1,'biotech':1}"
 	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
 	)

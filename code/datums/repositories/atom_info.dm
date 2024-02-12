@@ -26,13 +26,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 	var/atom/instance
 	if(!matter_cache[key])
 		instance = get_instance_of(path, material, amount)
-		var/matter_list = instance.building_cost()
-		if(istype(instance, /obj/item/ammo_magazine) || istype(instance, /obj/item/storage))
-			for(var/obj/thing in instance)
-				var/list/thing_matter = thing.building_cost()
-				for(var/mat in thing_matter)
-					matter_cache[mat] += thing_matter[mat] 
-		matter_cache[key] = matter_list
+		matter_cache[key] = instance.get_contained_matter()
 	if(!combined_worth_cache[key])
 		instance = instance || get_instance_of(path, material, amount)
 		combined_worth_cache[key] = instance.get_combined_monetary_worth()

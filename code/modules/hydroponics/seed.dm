@@ -136,10 +136,10 @@
 		return
 
 	if(!istype(target))
-		if(istype(target, /mob/living/simple_animal/mouse))
+		if(ismouse(target))
 			new /obj/item/remains/mouse(get_turf(target))
 			qdel(target)
-		else if(istype(target, /mob/living/simple_animal/lizard))
+		else if(islizard(target))
 			new /obj/item/remains/lizard(get_turf(target))
 			qdel(target)
 		return
@@ -259,7 +259,7 @@
 		splatter(origin_turf,thrown)
 		return
 
-	if(istype(target,/mob/living))
+	if(isliving(target))
 		splatted = apply_special_effect(target,thrown)
 	else if(isturf(target))
 		for(var/mob/living/M in target)
@@ -389,7 +389,7 @@
 	display_name = "[name] plant"
 
 //Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
-/datum/seed/proc/randomize(var/temperature = T20C)
+/datum/seed/proc/randomize(var/temperature = T20C, var/pressure = 1 ATM)
 
 	roundstart = 0
 	mysterious = 1
@@ -428,14 +428,21 @@
 	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
 	for(var/mat_type in all_materials)
 		var/decl/material/mat = all_materials[mat_type]
-		if(mat.exoplanet_rarity == MAT_RARITY_NOWHERE)
+		if(mat.exoplanet_rarity_plant == MAT_RARITY_NOWHERE)
 			continue
 		if(skip_toxins && mat.toxicity)
 			continue
-		if(!isnull(mat.boiling_point) && mat.boiling_point <= temperature && (isnull(mat.gas_condensation_point) || mat.gas_condensation_point > temperature))
-			gasses[mat.type] = mat.exoplanet_rarity
-		else if(!isnull(mat.melting_point) && mat.melting_point <= temperature)
-			liquids[mat.type] = mat.exoplanet_rarity
+		if(!isnull(mat.heating_point) && length(mat.heating_products) && temperature >= mat.heating_point)
+			// TODO: Maybe add products, but that could lead to having a lot of water or something.
+			continue
+		if(!isnull(mat.chilling_point) && length(mat.chilling_products) && temperature <= mat.chilling_point)
+			continue
+		switch(mat.phase_at_temperature(temperature, pressure))
+			if(MAT_PHASE_GAS)
+				if(isnull(mat.gas_condensation_point) || mat.gas_condensation_point > temperature)
+					gasses[mat.type] = mat.exoplanet_rarity_plant
+			if(MAT_PHASE_LIQUID)
+				liquids[mat.type] = mat.exoplanet_rarity_plant
 	liquids -= /decl/material/liquid/nutriment
 
 	if(length(gasses))
@@ -740,7 +747,7 @@
 				product.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
 
 			//Handle spawning in living, mobile products.
-			if(istype(product,/mob/living))
+			if(isliving(product))
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)
 				if(istype(product,/mob/living/simple_animal/mushroom)) // Gross.

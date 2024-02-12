@@ -2,7 +2,7 @@
 	name = "clothing"
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':1,'engineering':1}"
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
@@ -32,7 +32,7 @@
 	return TRUE
 
 // Sort of a placeholder for proper tailoring.
-#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/organic/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	var/rags = RAG_COUNT(src)
@@ -52,7 +52,7 @@
 				new /obj/item/chems/glass/rag(get_turf(src))
 			if(loc == user)
 				user.drop_from_inventory(src)
-			LAZYREMOVE(matter, /decl/material/solid/cloth)
+			LAZYREMOVE(matter, /decl/material/solid/organic/cloth)
 			physically_destroyed()
 		return TRUE
 	. = ..()
@@ -81,14 +81,12 @@
 					overlay.overlays += A.get_mob_overlay(user_mob, slot, skip_offset = TRUE)
 
 		if(!(slot in user_mob?.get_held_item_slots()))
-			if(ishuman(user_mob))
-				var/mob/living/carbon/human/user_human = user_mob
-				if(blood_DNA)
-					var/mob_blood_overlay = user_human.bodytype.get_blood_overlays(user_human)
-					if(mob_blood_overlay)
-						var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
-						bloodsies.appearance_flags |= NO_CLIENT_COLOR
-						overlay.overlays += bloodsies
+			if(blood_DNA)
+				var/mob_blood_overlay = user_mob.get_bodytype()?.get_blood_overlays(user_mob)
+				if(mob_blood_overlay)
+					var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
+					bloodsies.appearance_flags |= NO_CLIENT_COLOR
+					overlay.overlays += bloodsies
 			if(markings_icon && markings_color)
 				overlay.overlays += mutable_appearance(overlay.icon, markings_icon, markings_color)
 
@@ -133,7 +131,7 @@
 	if(markings_color && markings_icon)
 		update_icon()
 
-/obj/item/clothing/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/clothing/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
 	if(!. || slot == slot_s_store_str || (slot in global.pocket_slots))
 		return

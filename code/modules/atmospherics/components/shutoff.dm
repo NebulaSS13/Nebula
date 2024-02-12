@@ -7,7 +7,7 @@ var/global/list/shutoff_valves = list()
 	name = "automatic shutoff valve"
 	desc = "An automatic valve with control circuitry and pipe integrity sensor, capable of automatically isolating damaged segments of the pipe network."
 	var/close_on_leaks = TRUE	// If false it will be always open
-	level = 1
+	level = LEVEL_BELOW_PLATING
 	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR | CONNECT_TYPE_FUEL
 	build_icon_state = "svalve"
 	base_type = /obj/machinery/atmospherics/valve/shutoff/buildable
@@ -41,9 +41,9 @@ var/global/list/shutoff_valves = list()
 
 /obj/machinery/atmospherics/valve/shutoff/hide(var/do_hide)
 	if(do_hide)
-		if(level == 1)
+		if(level == LEVEL_BELOW_PLATING)
 			layer = PIPE_LAYER
-		else if(level == 2)
+		else if(level == LEVEL_ABOVE_PLATING)
 			..()
 	else
 		reset_plane_and_layer()

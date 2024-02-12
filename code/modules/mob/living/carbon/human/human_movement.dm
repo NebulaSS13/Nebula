@@ -4,7 +4,7 @@
 /mob/living/carbon/human/get_movement_delay(var/travel_dir)
 	var/tally = ..()
 
-	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_GROIN) // gets species slowdown, which can be reset by robotize()
+	var/obj/item/organ/external/H = GET_EXTERNAL_ORGAN(src, BP_GROIN) // gets bodytype slowdown, which can be reset by set_bodytype
 	if(H)
 		tally += H.slowdown
 
@@ -149,6 +149,6 @@
 				var/mob/M = buckled
 				M.unbuckle_mob()
 			var/decl/bodytype/B = get_bodytype()
-			playsound(loc, isSynthetic() ? pick(B.synthetic_bodyfall_sounds) : pick(B.bodyfall_sounds), 50, TRUE, -1)
+			playsound(loc, B.bodyfall_sounds, 50, TRUE, -1)
 		else if(!lying && !old_buckled_lying)
 			handle_stance() // Force an immediate stance update.

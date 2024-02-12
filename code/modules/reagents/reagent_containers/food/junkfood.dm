@@ -6,7 +6,7 @@
 	filling_color = "#631212"
 	center_of_mass = @"{'x':15,'y':9}"
 	bitesize = 2
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/sosjerky/populate_reagents()
 	. = ..()
@@ -163,7 +163,7 @@
 	filling_color = "#7a3d11"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 3
-	material = /decl/material/solid/meat
+	material = /decl/material/solid/organic/meat
 
 /obj/item/chems/food/meatcube/populate_reagents()
 	. = ..()

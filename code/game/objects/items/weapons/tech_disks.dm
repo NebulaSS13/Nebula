@@ -3,11 +3,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 /obj/item/disk
 	name                   = "data disk"
-	desc                   = "A standard 3.5 inches floppy disk for storing computer files... What's even an inch?"
+	desc                   = "A standard 3.5 inch floppy disk for storing computer files... What's even an inch?"
 	icon                   = 'icons/obj/items/device/diskette.dmi'
 	icon_state             = ICON_STATE_WORLD
 	w_class                = ITEM_SIZE_TINY
-	material               = /decl/material/solid/plastic
+	material               = /decl/material/solid/organic/plastic
 	matter                 = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 	throw_range            = 10
 	throw_speed            = 6
@@ -31,6 +31,7 @@
 	if(existing && existing != F)
 		delete_file(F.filename)
 
+	F.holder = weakref(src)
 	LAZYSET(stored_files, F.filename, F)
 	free_blocks = clamp(round(free_blocks - F.block_size), 0, block_capacity)
 	return TRUE
@@ -50,8 +51,18 @@
 	if(!F || (F.read_only && !force))
 		return FALSE
 	free_blocks = clamp(round(free_blocks + F.block_size), 0, block_capacity)
-	qdel(LAZYACCESS(stored_files, name))
+	// do not qdel; should be GC'd once it has no references anyway
+	F.holder = null
 	LAZYREMOVE(stored_files, name)
+	return TRUE
+
+/**Renames a file's handle on the disk. Does not rename the file itself. */
+/obj/item/disk/proc/rename_file(var/oldname, var/newname, var/force = FALSE)
+	var/datum/computer_file/data/F = LAZYACCESS(stored_files, oldname)
+	if(!F || (F.unrenamable && !force))
+		return FALSE
+	stored_files -= oldname
+	stored_files[newname] = F
 	return TRUE
 
 /**Like a full disk format. Erase all files, even if write protected! */
@@ -111,7 +122,7 @@
 	var/datum/fabricator_recipe/blueprint
 
 /obj/item/disk/design_disk/attack_hand(mob/user)
-	if(user.a_intent != I_HURT || !blueprint || !user.has_dexterity(DEXTERITY_KEYBOARDS))
+	if(user.a_intent != I_HURT || !blueprint || !user.check_dexterity(DEXTERITY_KEYBOARDS))
 		return ..()
 	blueprint = null
 	SetName(initial(name))

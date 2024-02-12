@@ -68,7 +68,7 @@
 			var/list/hearturfs = list()
 
 			for(var/I in hear)
-				if(istype(I, /mob/))
+				if(ismob(I))
 					var/mob/M = I
 					listening += M
 					hearturfs += M.locs[1]

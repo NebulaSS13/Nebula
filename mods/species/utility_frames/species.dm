@@ -17,17 +17,12 @@
 	base_prosthetics_model = null
 
 	blood_types = list(/decl/blood_type/coolant)
-	vital_organs = list(
-		BP_POSIBRAIN,
-		BP_CELL
-	)
 
-	available_bodytypes = list(/decl/bodytype/utility_frame)
+	available_bodytypes = list(/decl/bodytype/prosthetic/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
 	hidden_from_codex =     FALSE
-	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_SYNTHETIC
+	species_flags =         SPECIES_FLAG_NO_POISON
 	spawn_flags =           SPECIES_CAN_JOIN
-	appearance_flags =      HAS_SKIN_COLOR | HAS_EYE_COLOR
 	strength =              STR_HIGH
 	warning_low_pressure =  50
 	hazard_low_pressure =  -1
@@ -45,14 +40,6 @@
 
 	preview_outfit = null
 
-	base_color = "#333355"
-	base_eye_color = "#00ccff"
-	base_markings = list(
-		/decl/sprite_accessory/marking/frame/plating = "#8888cc",
-		/decl/sprite_accessory/marking/frame/plating/legs = "#8888cc",
-		/decl/sprite_accessory/marking/frame/plating/head = "#8888cc"
-	)
-
 	heat_discomfort_strings = list(
 		"You are dangerously close to overheating!"
 	)
@@ -68,12 +55,6 @@
 	available_cultural_info = list(
 		TAG_CULTURE = list(/decl/cultural_info/culture/synthetic)
 	)
-	override_limb_types = list(BP_HEAD = /obj/item/organ/external/head/utility_frame)
-	has_organ = list(
-		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES      = /obj/item/organ/internal/eyes/robot/utility_frame,
-		BP_CELL = /obj/item/organ/internal/cell
-	)
 
 	exertion_effect_chance = 10
 	exertion_charge_scale = 1
@@ -82,17 +63,8 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-/obj/item/organ/internal/eyes/robot/utility_frame
-	eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
-
 /obj/item/organ/external/head/utility_frame
 	glowing_eyes = TRUE
-
-/decl/species/utility_frame/apply_species_organ_modifications(obj/item/organ/org)
-	..()
-	if(istype(org, /obj/item/organ/external))
-		var/obj/item/organ/external/E = org
-		E.robotize(/decl/prosthetics_manufacturer/utility_frame, FALSE, TRUE, /decl/material/solid/metal/steel, BODYTYPE_HUMANOID, SPECIES_FRAME)
 
 /decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

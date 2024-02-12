@@ -1,17 +1,21 @@
-/decl/bodytype/golem
+/decl/bodytype/crystalline/golem
 	name =              "humanoid"
 	bodytype_category = BODYTYPE_HUMANOID
 	icon_base =         'icons/mob/human_races/species/golem/body.dmi'
 	husk_icon =         'icons/mob/human_races/species/golem/husk.dmi'
+	body_flags =        BODY_FLAG_NO_DNA | BODY_FLAG_NO_PAIN | BODY_FLAG_NO_DEFIB | BODY_FLAG_NO_STASIS
+	has_organ = list(
+		BP_BRAIN = /obj/item/organ/internal/brain/golem
+	)
 
 /decl/species/golem
 	name = SPECIES_GOLEM
 	name_plural = "Golems"
 
-	available_bodytypes = list(/decl/bodytype/golem)
+	available_bodytypes = list(/decl/bodytype/crystalline/golem)
 
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
-	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_CRYSTALLINE
+	species_flags = SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 
@@ -33,10 +37,6 @@
 	heat_level_1 = SYNTH_HEAT_LEVEL_1
 	heat_level_2 = SYNTH_HEAT_LEVEL_2
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
-
-	has_organ = list(
-		BP_BRAIN = /obj/item/organ/internal/brain/golem
-	)
 
 	death_message = "becomes completely motionless..."
 	available_pronouns = list(/decl/pronouns/neuter)

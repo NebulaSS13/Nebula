@@ -7,7 +7,7 @@
 /obj/item/sign
 	name     = "sign"
 	w_class  = ITEM_SIZE_NORMAL
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	///The type of the sign this item will turn into upon installation
 	var/sign_type
 

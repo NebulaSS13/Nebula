@@ -5,8 +5,8 @@
 	name = "Body Scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 	construct_state = /decl/machine_construction/default/panel_closed

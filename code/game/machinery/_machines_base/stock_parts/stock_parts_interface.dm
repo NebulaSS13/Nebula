@@ -23,7 +23,7 @@
 	desc = "A standard part required by many machines to recieve user input."
 	icon_state = "input"
 	origin_tech = "{'materials':1}"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	base_type = /obj/item/stock_parts/keyboard
 	part_flags = PART_FLAG_HAND_REMOVE
 	w_class = ITEM_SIZE_TINY
@@ -33,4 +33,3 @@
 	..()
 	if(is_functional())
 		machine.set_noinput(FALSE)
-		

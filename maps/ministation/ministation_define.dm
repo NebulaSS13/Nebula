@@ -39,7 +39,7 @@
 
 	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Station wide maintenance access has been granted. Please take shelter within the nearest maintenance tunnel."
 
-	allowed_spawns = list(
+	allowed_latejoin_spawns = list(
 		/decl/spawnpoint/arrivals,
 		/decl/spawnpoint/cryo
 	)

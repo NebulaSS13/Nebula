@@ -5,10 +5,10 @@
 	icon_state = "blob"
 	light_range = 2
 	light_color = BLOB_COLOR_PULS
-	density = 1
-	opacity = 1
-	anchored = 1
-	mouse_opacity = 2
+	density = TRUE
+	opacity = TRUE
+	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_PRIORITY
 
 	layer = BLOB_SHIELD_LAYER
 
@@ -122,7 +122,7 @@
 	else
 		new expandType(T, min(health, 30))
 
-/obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
+/obj/effect/blob/proc/do_pulse(var/forceLeft, var/list/dirs)
 	set waitfor = FALSE
 	sleep(4)
 	var/pushDir = pick(dirs)
@@ -133,7 +133,7 @@
 			expand(T)
 		return
 	if(forceLeft)
-		B.pulse(forceLeft - 1, dirs)
+		B.do_pulse(forceLeft - 1, dirs)
 
 /obj/effect/blob/proc/attack_living(var/mob/L)
 	if(!L)
@@ -272,7 +272,7 @@ regen() will cover update_icon() for this proc
 	process_core_health()
 	regen()
 	for(var/I in 1 to times_to_pulse)
-		pulse(20, global.alldirs)
+		do_pulse(20, global.alldirs)
 	attempt_attack(global.alldirs)
 	attempt_attack(global.alldirs)
 	blob_may_process = 1
@@ -347,7 +347,7 @@ regen() will cover update_icon() for this proc
 	item_state = "blob_tendril"
 	w_class = ITEM_SIZE_LARGE
 	attack_verb = list("smacked", "smashed", "whipped")
-	material = /decl/material/solid/plantmatter
+	material = /decl/material/solid/organic/plantmatter
 	var/is_tendril = TRUE
 	var/types_of_tendril = list("solid", "fire")
 

@@ -2,18 +2,11 @@
 	hud_type = /datum/hud/deity
 
 /datum/hud/deity/FinalizeInstantiation()
-	src.adding = list()
-	src.other = list()
-
-	var/obj/screen/intent/deity/D = new()
-
-	src.adding += D
-	action_intent = D
-
-	mymob.client.screen = list()
-	mymob.client.screen += src.adding
+	action_intent = new /obj/screen/intent/deity
+	adding += action_intent
+	..()
+	var/obj/screen/intent/deity/D = action_intent
 	D.sync_to_mob(mymob)
-
 
 /obj/screen/intent/deity
 	var/list/desc_screens = list()
@@ -28,7 +21,7 @@
 	for(var/i in 1 to D.control_types.len)
 		var/obj/screen/S = new()
 		S.SetName(null) //Don't want them to be able to actually right click it.
-		S.mouse_opacity = 0
+		S.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 		S.icon_state = "blank"
 		desc_screens[D.control_types[i]] = S
 		S.maptext_width = 128
@@ -41,7 +34,7 @@
 	update_text()
 
 /obj/screen/intent/deity/proc/update_text()
-	if(!istype(usr, /mob/living/deity))
+	if(!isdeity(usr))
 		return
 	var/mob/living/deity/D = usr
 	for(var/i in D.control_types)

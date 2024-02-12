@@ -31,4 +31,4 @@
 
 	badge_string = pob
 
-	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species_name()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [religion]\nBlood type: [H.b_type]"
+	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species_name()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [religion]\nBlood type: [H.get_blood_type()]"

@@ -6,7 +6,6 @@
 	icon = 'icons/obj/rift.dmi'
 	icon_state = "rift"
 	anchored = TRUE
-	unacidable = TRUE
 	pixel_x = -236
 	pixel_y = -256
 	plane = ABOVE_LIGHTING_PLANE
@@ -31,7 +30,7 @@
 /obj/effect/wormhole_exit/proc/transit_to_exit(const/atom/A)
 	if(!A.simulated)
 		return FALSE
-	if (istype(A, /mob/living))
+	if (isliving(A))
 
 		var/mob/living/L = A
 		if(!length(global.endgame_safespawns))

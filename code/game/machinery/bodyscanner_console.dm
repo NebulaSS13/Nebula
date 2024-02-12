@@ -4,8 +4,8 @@
 	name = "Body Scanner Console"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scannerconsole"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0

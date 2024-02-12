@@ -42,7 +42,8 @@
 	pixel_y = _pixel_y
 
 /datum/position/proc/return_turf()
-	return locate(x, y, z)
+	var/turf/T = locate(x, y, z)
+	return T?.resolve_to_actual_turf()
 
 /datum/position/proc/return_px()
 	return pixel_x
@@ -111,7 +112,8 @@
 	AM.pixel_y = return_py()
 
 /datum/point/proc/return_turf()
-	return locate(CEILING(x / world.icon_size), CEILING(y / world.icon_size), z)
+	var/turf/T = locate(CEILING(x / world.icon_size), CEILING(y / world.icon_size), z)
+	return T?.resolve_to_actual_turf()
 
 /datum/point/proc/return_coordinates()		//[turf_x, turf_y, z]
 	return list(CEILING(x / world.icon_size), CEILING(y / world.icon_size), z)

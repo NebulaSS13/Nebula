@@ -1,7 +1,7 @@
 /obj/structure/ship_munition
 	name = "munitions"
 	icon = 'icons/obj/munitions.dmi'
-	density = 1
+	density = TRUE
 	material = /decl/material/solid/metal/titanium
 	var/static/list/move_sounds = list( // some nasty sounds to make when moving the board
 		'sound/effects/metalscrape1.ogg',

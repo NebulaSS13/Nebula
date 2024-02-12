@@ -3,8 +3,8 @@
 	icon = 'icons/obj/modules/module_id.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'programming':2}"
-	density = 0
-	anchored = 0
+	density = FALSE
+	anchored = FALSE
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0

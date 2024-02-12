@@ -14,7 +14,6 @@ var/global/list/cached_icons = list()
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[10,20,30,60]"
 	volume = 60
-	unacidable = 0
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	var/pigment
 

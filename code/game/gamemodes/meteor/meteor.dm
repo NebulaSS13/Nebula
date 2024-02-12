@@ -2,11 +2,11 @@
 #define METEOR_FAILSAFE_THRESHOLD 45 MINUTES	// Failsafe that guarantees Severity will be at least 15 when the round hits this time.
 
 // In general, a PVE oriented game mode. A middle ground between Extended and actual antagonist based rounds.
-/datum/game_mode/meteor
+/decl/game_mode/meteor
 	name = "Meteor"
 	round_description = "You are about to enter an asteroid belt!"
 	extended_round_description = "We are on an unavoidable collision course with an asteroid field. You have only a moment to prepare before you are barraged by dust and meteors. As if it was not enough, all kinds of negative events seem to happen more frequently. Good luck."
-	config_tag = "meteor"
+	uid = "meteor"
 	required_players = 15				// Definitely not good for low-pop
 	votable = 1
 	shuttle_delay = 2
@@ -29,33 +29,33 @@
 	event_delay_mod_major = 0.3
 
 /decl/vv_set_handler/meteor_severity_handler
-	handled_type = /datum/game_mode/meteor
+	handled_type = /decl/game_mode/meteor
 	handled_vars = list(
-		"meteor_severity" = /datum/game_mode/meteor/proc/set_meteor_severity,
-		"meteor_wave_delay" = /datum/game_mode/meteor/proc/set_meteor_wave_delay
+		"meteor_severity" = /decl/game_mode/meteor/proc/set_meteor_severity,
+		"meteor_wave_delay" = /decl/game_mode/meteor/proc/set_meteor_wave_delay
 	)
 
-/datum/game_mode/meteor/proc/set_meteor_severity(value)
+/decl/game_mode/meteor/proc/set_meteor_severity(value)
 	meteor_severity = clamp(value, 0, maximal_severity)
 
-/datum/game_mode/meteor/proc/set_meteor_wave_delay(value)
+/decl/game_mode/meteor/proc/set_meteor_wave_delay(value)
 	meteor_wave_delay = max(10 SECONDS, value)
 
-/datum/game_mode/meteor/VV_static()
+/decl/game_mode/meteor/VV_static()
 	return ..() + "maximal_severity"
 
-/datum/game_mode/meteor/post_setup()
+/decl/game_mode/meteor/post_setup()
 	..()
 	alert_title = "Automated Beacon AB-[rand(10, 99)]"
 	alert_text = "This is an automatic warning. Your facility: [global.using_map.full_name] is on a collision course with a nearby asteroid belt. Estimated time until impact is: [meteor_grace_period / 1200] MINUTES. Please perform necessary actions to secure your ship or station from the threat. Have a nice day."
 	start_text = "This is an automatic warning. Your facility: [global.using_map.full_name] has entered an asteroid belt. Estimated time until you leave the belt is: [rand(20,30)] HOURS and [rand(1, 59)] MINUTES. For your safety, please consider changing course or using protective equipment. Have a nice day."
 	next_wave = round_duration_in_ticks + meteor_grace_period
 
-/datum/game_mode/meteor/proc/on_meteor_warn()
+/decl/game_mode/meteor/proc/on_meteor_warn()
 	alert_sent = 1
 	command_announcement.Announce(alert_text, alert_title)
 
-/datum/game_mode/meteor/proc/on_enter_field()
+/decl/game_mode/meteor/proc/on_enter_field()
 	alert_sent = 2
 	command_announcement.Announce(start_text, alert_title)
 	for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
@@ -70,7 +70,7 @@
 				T.add_overlay(image('icons/obj/overmap.dmi', "meteor[rand(1,4)]"))
 	next_wave = round_duration_in_ticks + meteor_wave_delay
 
-/datum/game_mode/meteor/process()
+/decl/game_mode/meteor/process()
 	// Send an alert halfway through the round.
 	if((round_duration_in_ticks >= (next_wave / 2)) && !alert_sent)
 		on_meteor_warn()
@@ -94,7 +94,7 @@
 		if(send_admin_broadcasts)
 			log_and_message_admins("Meteor: Wave fired. Escalation: [escalated ? "Yes" : "No"]. Severity: [meteor_severity]/[maximal_severity]")
 
-/datum/game_mode/meteor/proc/get_meteor_types()
+/decl/game_mode/meteor/proc/get_meteor_types()
 	switch(meteor_severity)
 		if(1 to 9)
 			return meteors_dust

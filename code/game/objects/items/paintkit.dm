@@ -1,7 +1,7 @@
 /obj/item/kit
 	icon_state = "modkit"
 	icon = 'icons/obj/items/modkit.dmi'
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/new_name = "exosuit"     // What is the variant called?
 	var/new_desc = "An exosuit." // How is the new exosuit described?
 	var/new_icon                 // What base icon will the new exosuit use?
@@ -41,15 +41,11 @@
 
 	if(istype(O,/obj/item/kit/suit))
 		var/obj/item/kit/suit/kit = O
-
 		to_chat(user, SPAN_NOTICE("You set about modifying \the [src] into \a [kit.new_name] void helmet."))
 		SetName("[kit.new_name] void helmet")
 		desc = kit.new_desc
 		icon = kit.new_icon
-
-		var/mob/living/carbon/human/H = user
-		if(istype(H))
-			bodytype_equip_flags = H.bodytype.bodytype_flag
+		bodytype_equip_flags = user.get_bodytype()?.bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE
@@ -60,15 +56,11 @@
 
 	if(istype(O, /obj/item/kit/suit))
 		var/obj/item/kit/suit/kit = O
-
 		to_chat(user, SPAN_NOTICE("You set about modifying \the [src] into \a [kit.new_name] voidsuit."))
 		SetName("[kit.new_name] voidsuit")
 		desc = kit.new_desc
 		icon = kit.new_icon
-
-		var/mob/living/carbon/human/H = user
-		if(istype(H))
-			bodytype_equip_flags = H.bodytype.bodytype_flag
+		bodytype_equip_flags = user.get_bodytype()?.bodytype_flag
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE

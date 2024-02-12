@@ -18,30 +18,40 @@
 	natural_armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES
 		)
+	ai = /datum/ai/crab
 
 	meat_amount =   3
-	skin_material = /decl/material/solid/skin/insect
+	skin_material = /decl/material/solid/organic/skin/insect
 	skin_amount =   10
 	bone_material = null
 	bone_amount =   0
 
-/mob/living/simple_animal/crab/Initialize()
-	if(isnull(hat_offsets))
-		hat_offsets = list("[SOUTH]" = list(-1, -10))
+/mob/living/simple_animal/crab/get_bodytype()
+	return GET_DECL(/decl/bodytype/animal/crab)
+
+/decl/bodytype/animal/crab/Initialize()
+	equip_adjust = list(
+		slot_head_str = list(
+			"[NORTH]" = list(-1, -10),
+			"[SOUTH]" = list(-1, -10),
+			"[EAST]" =  list(-1, -10),
+			"[WEST]" =  list(-1, -10)
+		)
+	)
 	. = ..()
 
-/mob/living/simple_animal/crab/Life()
+/datum/ai/crab
+	expected_type = /mob/living/simple_animal/crab
+
+/datum/ai/crab/do_process(time_elapsed)
 	. = ..()
-	if(!.)
-		return FALSE
-	//CRAB movement
-	if(!ckey && !stat)
-		if(isturf(src.loc) && !resting && !buckled)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
-			turns_since_move++
-			if(turns_since_move >= turns_per_move)
-				Move(get_step(src,pick(4,8)))
-				turns_since_move = 0
-	update_icon()
+	var/mob/living/simple_animal/crab/crab = body
+	if(!isturf(crab.loc) || crab.resting || crab.buckled)
+		return
+	crab.turns_since_move++
+	if(crab.turns_since_move >= crab.turns_per_move)
+		crab.Move(get_step(crab,pick(4,8)))
+		crab.turns_since_move = 0
 
 //COFFEE! SQUEEEEEEEEE!
 /mob/living/simple_animal/crab/Coffee

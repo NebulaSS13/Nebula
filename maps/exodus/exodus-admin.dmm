@@ -1316,11 +1316,11 @@
 /area/shuttle/escape_shuttle)
 "aLF" = (
 /obj/machinery/door/blast/regular{
-	density = 0;
+	density = FALSE;
 	icon_state = "pdoor0";
 	id_tag = "CentComPort";
 	name = "Security Doors";
-	opacity = 0
+	opacity = FALSE
 	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
@@ -3023,7 +3023,6 @@
 	},
 /obj/machinery/camera/network/television{
 	c_tag = "Thunderdome - Red Team";
-	invisibility = 101
 	},
 /turf/unsimulated/floor{
 	dir = 5;
@@ -3061,7 +3060,6 @@
 	},
 /obj/machinery/camera/network/television{
 	c_tag = "Green Team";
-	invisibility = 101
 	},
 /turf/unsimulated/floor{
 	dir = 5;
@@ -3077,7 +3075,6 @@
 "pQZ" = (
 /obj/machinery/camera/network/television{
 	c_tag = "Thunderdome Arena";
-	invisibility = 101
 	},
 /turf/unsimulated/floor{
 	icon_state = "bcircuit"

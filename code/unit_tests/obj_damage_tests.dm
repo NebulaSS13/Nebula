@@ -96,6 +96,6 @@
 		I.take_damage(damage_dealt, BRUTE, 0, "TEST", ARMOR_PIERCING_BYPASSED) //Just let the exception handler do its job
 		. = TRUE
 	catch(var/exception/E)
-		IT.report_failure(src, I.type, "Threw an exception when destroyed by brute damage! '[E]', [E.file]:[E.line].")
+		IT.report_failure(src, I.type, "Threw an exception when destroyed by brute damage!: [EXCEPTION_TEXT(E)]")
 		. = FALSE
 		throw E

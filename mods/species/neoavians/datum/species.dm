@@ -26,11 +26,6 @@
 
 	meat_type = /obj/item/chems/food/meat/chicken
 
-	base_color = "#252525"
-	base_eye_color = "#f5c842"
-	base_markings = list(/decl/sprite_accessory/marking/avian = "#454545")
-	default_h_style = /decl/sprite_accessory/hair/avian
-
 	preview_outfit = /decl/hierarchy/outfit/job/generic/assistant/avian
 
 	available_bodytypes = list(
@@ -41,14 +36,12 @@
 	)
 
 	total_health = 120
-	mob_size = MOB_SIZE_SMALL
 	holder_type = /obj/item/holder
 	gluttonous = GLUT_TINY
 	blood_volume = 320
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.6
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SIMPLE_ANIMAL
 	push_flags = MONKEY|SIMPLE_ANIMAL
@@ -57,18 +50,6 @@
 		"Your feathers prickle in the heat.",
 		"You feel uncomfortably warm.",
 		)
-
-	has_organ = list(
-		BP_STOMACH =  /obj/item/organ/internal/stomach,
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_LUNGS =    /obj/item/organ/internal/lungs,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes/avian
-	)
-
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/avian)
 
 	unarmed_attacks = list(
 		/decl/natural_attack/bite/sharp,
@@ -91,9 +72,6 @@
 
 /decl/species/neoavian/get_holder_color(var/mob/living/carbon/human/H)
 	return H.skin_colour
-
-/obj/item/organ/internal/eyes/avian
-	eye_icon = 'mods/species/neoavians/icons/eyes.dmi'
 
 /decl/hierarchy/outfit/job/generic/assistant/avian
 	name = "Job - Avian Assistant"

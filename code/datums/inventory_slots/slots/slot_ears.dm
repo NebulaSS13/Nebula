@@ -8,13 +8,21 @@
 	can_be_hidden = TRUE
 	requires_organ_tag = BP_HEAD
 	requires_slot_flags = SLOT_EARS
+	mob_overlay_layer = HO_L_EAR_LAYER
 	quick_equip_priority = 7
 
-/datum/inventory_slot/ear/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	user.update_inv_ears(redraw_mob)
+/datum/inventory_slot/ear/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	for(var/slot in global.airtight_slots)
+		var/obj/item/gear = get_equipped_item(slot)
+		if(gear?.flags_inv & BLOCK_ALL_HAIR)
+			user.set_current_mob_overlay(mob_overlay_layer, null, redraw_mob)
+			return
+	..()
 
 /datum/inventory_slot/ear/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEEARS))
+		if(user == owner)
+			return "You have [_holding.get_examine_line()] on your [lowertext(slot_name)]."
 		return "[pronouns.He] [pronouns.has] [_holding.get_examine_line()] on [pronouns.his] [lowertext(slot_name)]."
 
 /datum/inventory_slot/ear/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
@@ -34,4 +42,5 @@
 	slot_name = "Right Ear"
 	slot_id = slot_r_ear_str
 	ui_loc = ui_r_ear
+	mob_overlay_layer = HO_R_EAR_LAYER
 	quick_equip_priority = 6

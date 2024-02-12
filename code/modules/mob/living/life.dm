@@ -1,12 +1,18 @@
 /mob/living/Life()
-	set invisibility = 0
+	set invisibility = FALSE
 	set background = BACKGROUND_ENABLED
 
 	..()
 
 	if (HasMovementHandler(/datum/movement_handler/mob/transformation/))
 		return
-	if (!loc)
+
+	// update the current life tick, can be used to e.g. only do something every 4 ticks
+	// This is handled before the loc check as unit tests use this to delay until the mob
+	// has processed a few times. Not really sure why but heigh ho.
+	life_tick++
+
+	if(!loc)
 		return
 
 	if(machine && (machine.CanUseTopic(src, machine.DefaultTopicState()) == STATUS_CLOSE)) // unsure if this is a good idea, but using canmousedrop was ???
@@ -15,12 +21,17 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(loc.return_air())
 
-	if(stat != DEAD)
+	if(stat != DEAD && !is_in_stasis())
+		//Breathing, if applicable
+		handle_breathing()
 		handle_nutrition_and_hydration()
+		handle_immunity()
+		//Body temperature adjusts itself (self-regulation)
+		stabilize_body_temperature()
 
-	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
+	handle_stasis()
 
 	if(stat != DEAD)
 		aura_check(AURA_TYPE_LIFE)
@@ -41,34 +52,93 @@
 
 	return 1
 
+/mob/living/proc/experiences_hunger_and_thirst()
+	return TRUE
+
+/mob/living/proc/get_hunger_factor()
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		return my_species.hunger_factor
+	return 0
+
+/mob/living/proc/get_thirst_factor()
+	var/decl/species/my_species = get_species()
+	if(my_species)
+		return my_species.hunger_factor
+	return 0
+
 /mob/living/proc/handle_nutrition_and_hydration()
 	SHOULD_CALL_PARENT(TRUE)
-	var/nut =    get_nutrition()
-	var/maxnut = get_max_nutrition()
-	if(nut < (maxnut * 0.3))
-		add_stressor(/datum/stressor/hungry_very, STRESSOR_DURATION_INDEFINITE)
-	else
-		remove_stressor(/datum/stressor/hungry_very)
-		if(nut < (maxnut * 0.5))
-			add_stressor(/datum/stressor/hungry, STRESSOR_DURATION_INDEFINITE)
-		else
-			remove_stressor(/datum/stressor/hungry)
-	var/hyd =    get_hydration()
-	var/maxhyd = get_max_hydration()
-	if(hyd < (maxhyd * 0.3))
-		add_stressor(/datum/stressor/thirsty_very, STRESSOR_DURATION_INDEFINITE)
-	else
-		remove_stressor(/datum/stressor/thirsty_very)
-		if(hyd < (maxhyd * 0.5))
-			add_stressor(/datum/stressor/thirsty, STRESSOR_DURATION_INDEFINITE)
-		else
-			remove_stressor(/datum/stressor/thirsty)
+	if(!experiences_hunger_and_thirst())
+		return
+	if(get_nutrition() > 0)
+		var/hunger_factor = get_hunger_factor()
+		if(hunger_factor)
+			adjust_nutrition(-(hunger_factor))
+	if(get_hydration() > 0)
+		var/thirst_factor = get_thirst_factor()
+		if(thirst_factor)
+			adjust_hydration(-(thirst_factor))
 
-/mob/living/proc/handle_breathing()
-	return
-
+#define RADIATION_SPEED_COEFFICIENT 0.025
 /mob/living/proc/handle_mutations_and_radiation()
-	return
+	SHOULD_CALL_PARENT(TRUE)
+
+	radiation = clamp(radiation,0,500)
+	var/decl/species/my_species = get_species()
+	var/decl/bodytype/my_bodytype = get_bodytype()
+	if(my_species && my_bodytype && (my_bodytype.appearance_flags & RADIATION_GLOWS))
+		if(radiation)
+			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), my_species.get_flesh_colour(src))
+		else
+			set_light(0)
+
+	if(radiation <= 0)
+		return
+
+	var/damage = 0
+	radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+	if(prob(25))
+		damage = 2
+
+	if (radiation > 50)
+		damage = 2
+		radiation -= 2 * RADIATION_SPEED_COEFFICIENT
+		if(!isSynthetic())
+			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
+				radiation -= 5 * RADIATION_SPEED_COEFFICIENT
+				to_chat(src, "<span class='warning'>You feel weak.</span>")
+				SET_STATUS_MAX(src, STAT_WEAK, 3)
+				if(!lying)
+					emote("collapse")
+			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
+				lose_hair()
+
+	if (radiation > 75)
+		damage = 3
+		radiation -= 3 * RADIATION_SPEED_COEFFICIENT
+		if(!isSynthetic())
+			if(prob(5))
+				take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
+			if(prob(1))
+				to_chat(src, "<span class='warning'>You feel strange!</span>")
+				adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
+				emote("gasp")
+	if(radiation > 150)
+		damage = 8
+		radiation -= 4 * RADIATION_SPEED_COEFFICIENT
+
+	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
+	if(damage)
+		adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
+		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
+		updatehealth()
+		var/list/limbs = get_external_organs()
+		if(!isSynthetic() && LAZYLEN(limbs))
+			var/obj/item/organ/external/O = pick(limbs)
+			if(istype(O))
+				O.add_autopsy_data("Radiation Poisoning", damage)
+#undef RADIATION_SPEED_COEFFICIENT
 
 // Get valid, unique reagent holders for metabolizing. Avoids metabolizing the same holder twice in a tick.
 /mob/living/proc/get_unique_metabolizing_reagent_holders()
@@ -192,7 +262,7 @@
 			set_stat(UNCONSCIOUS)
 		else
 			set_stat(CONSCIOUS)
-		return 1
+		return TRUE
 
 /mob/living/proc/handle_disabilities()
 	handle_impaired_vision()
@@ -204,7 +274,7 @@
 
 /mob/living/proc/handle_impaired_hearing()
 	if((sdisabilities & DEAFENED) || stat) //disabled-deaf, doesn't get better on its own
-		SET_STATUS_MAX(src, STAT_TINNITUS, 1)
+		SET_STATUS_MAX(src, STAT_TINNITUS, 2)
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
@@ -223,22 +293,22 @@
 		return
 
 	// No loc or species means we should just assume no adjustment.
-	var/decl/species/species = get_species()
+	var/decl/bodytype/my_bodytype = get_bodytype()
 	var/turf/my_turf = get_turf(src)
-	if(!isturf(my_turf) || !species)
+	if(!isturf(my_turf) || !my_bodytype)
 		lighting_master.set_alpha(255)
 		return
 
 	// TODO: handling for being inside atoms.
-	var/target_value = 255 * (1-species.base_low_light_vision)
+	var/target_value = 255 * (1-my_bodytype.eye_base_low_light_vision)
 	var/loc_lumcount = my_turf.get_lumcount()
-	if(loc_lumcount < species.low_light_vision_threshold)
-		target_value = round(target_value * (1-species.low_light_vision_effectiveness))
+	if(loc_lumcount < my_bodytype.eye_low_light_vision_threshold)
+		target_value = round(target_value * (1-my_bodytype.eye_low_light_vision_effectiveness))
 
 	if(lighting_master.alpha == target_value)
 		return
 
-	var/difference = round((target_value-lighting_master.alpha) * species.low_light_vision_adjustment_speed)
+	var/difference = round((target_value-lighting_master.alpha) * my_bodytype.eye_low_light_vision_adjustment_speed)
 	if(abs(difference) > 1)
 		target_value = lighting_master.alpha + difference
 	lighting_master.set_alpha(target_value)
@@ -249,7 +319,7 @@
 	if(stat == DEAD)
 		return
 
-	if(GET_STATUS(src, STAT_BLIND))
+	if(is_blind())
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else
 		clear_fullscreen("blind")

@@ -18,20 +18,24 @@
 
 /decl/sprite_accessory
 	abstract_type = /decl/sprite_accessory
+	decl_flags = DECL_FLAG_MANDATORY_UID
 	var/name                                       // The preview name of the accessory
 	var/icon                                       // the icon file the accessory is located in
 	var/icon_state                                 // the icon_state of the accessory
-	var/gender = null                              // Restricted to specific genders. null matches any
+	var/required_gender = null                     // Restricted to specific genders. null matches any
 	var/list/species_allowed = list(SPECIES_HUMAN) // Restrict some styles to specific root species names
 	var/list/subspecies_allowed                    // Restrict some styles to specific species names, irrespective of root species name
-	var/bodytypes_allowed = null                   // Restrict some styles to specific bodytypes
-	var/bodytypes_denied =  null                   // Restrict some styles to specific bodytypes
+	var/body_flags_allowed = null                  // Restrict some styles to specific bodytype flags
+	var/body_flags_denied =  null                  // Restrict some styles to specific bodytype flags
+	var/list/bodytype_categories_allowed = null    // Restricts some styles to specific bodytype categories
+	var/list/bodytype_categories_denied = null     // Restricts some styles to specific bodytype categories
+
 	var/do_colouration = 1                         // Whether or not the accessory can be affected by colouration
 	var/blend = ICON_ADD
 	var/flags = 0
 
-/decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/bodytype_flags, var/check_gender)
-	if(!isnull(check_gender) && gender && check_gender != gender)
+/decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype)
+	if(!isnull(required_gender) && bodytype.associated_gender != required_gender)
 		return FALSE
 	if(species)
 		var/species_is_permitted = TRUE
@@ -41,8 +45,27 @@
 			species_is_permitted = (species.name in subspecies_allowed)
 		if(!species_is_permitted)
 			return FALSE
-	if(!isnull(bodytypes_allowed) && !(bodytypes_allowed & bodytype_flags))
-		return FALSE
-	if(!isnull(bodytypes_denied) && (bodytypes_denied & bodytype_flags))
-		return FALSE
+	if(bodytype)
+		if(!isnull(bodytype_categories_allowed) && !(bodytype.bodytype_category in bodytype_categories_allowed))
+			return FALSE
+		if(!isnull(bodytype_categories_denied) && (bodytype.bodytype_category in bodytype_categories_denied))
+			return FALSE
+		if(!isnull(body_flags_allowed) && !(body_flags_allowed & bodytype.bodytype_flag))
+			return FALSE
+		if(!isnull(body_flags_denied) && (body_flags_denied & bodytype.bodytype_flag))
+			return FALSE
 	return TRUE
+
+/decl/sprite_accessory/proc/get_validatable_icon_state()
+	return icon_state
+
+/decl/sprite_accessory/validate()
+	. = ..()
+	if(!icon)
+		. += "missing icon"
+	else
+		var/actual_icon_state = get_validatable_icon_state()
+		if(!actual_icon_state)
+			. += "missing icon_state"
+		else if(!check_state_in_icon(actual_icon_state, icon))
+			. += "missing icon state \"[actual_icon_state]\" in [icon]"

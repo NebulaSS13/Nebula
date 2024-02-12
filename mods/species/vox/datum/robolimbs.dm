@@ -1,11 +1,10 @@
-/decl/prosthetics_manufacturer/vox
+/decl/bodytype/prosthetic/vox
 	name = "Arkmade"
-	icon = 'mods/species/vox/icons/body/primalis_cyberlimbs.dmi'
-	allowed_bodytypes = list(BODYTYPE_VOX)
-	species_restricted = list(SPECIES_VOX)
+	icon_base = 'mods/species/vox/icons/body/primalis_cyberlimbs.dmi'
+	bodytype_category = BODYTYPE_VOX
 
-/decl/prosthetics_manufacturer/vox/crap
+/decl/bodytype/prosthetic/vox/crap
 	name = "Improvised"
-	icon = 'mods/species/vox/icons/body/improvised_cyberlimbs.dmi'
+	icon_base = 'mods/species/vox/icons/body/improvised_cyberlimbs.dmi'
 
-DEFINE_ROBOLIMB_MODEL_ASPECTS_WITH_SPECIES_BODYTYPE(/decl/prosthetics_manufacturer/vox, arkmade, 2, SPECIES_VOX, BODYTYPE_VOX)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/bodytype/prosthetic/vox, arkmade, 2)

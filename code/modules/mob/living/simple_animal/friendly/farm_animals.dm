@@ -17,10 +17,46 @@
 	meat_type = /obj/item/chems/food/meat/goat
 	meat_amount = 4
 	bone_amount = 8
-	skin_material = /decl/material/solid/skin/goat
+	skin_material = /decl/material/solid/organic/skin/goat
 	skin_amount = 8
 
+	ai = /datum/ai/goat
+
 	var/datum/reagents/udder = null
+
+/datum/ai/goat
+	expected_type = /mob/living/simple_animal/hostile/retaliate/goat
+
+/datum/ai/goat/do_process(time_elapsed)
+	. = ..()
+	var/mob/living/simple_animal/hostile/retaliate/goat/goat = body
+
+	//chance to go crazy and start wacking stuff
+	if(!length(goat.enemies) && prob(1))
+		goat.Retaliate()
+
+	if(length(goat.enemies) && prob(10))
+		goat.enemies = list()
+		goat.LoseTarget()
+		goat.visible_message(SPAN_NOTICE("\The [goat] calms down."))
+
+	var/obj/effect/vine/SV = locate() in goat.loc
+	if(SV)
+		if(prob(60))
+			goat.visible_message(SPAN_NOTICE("\The [goat] eats the plants."))
+			SV.die_off(1)
+			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in goat.loc
+			if(SP)
+				qdel(SP)
+		else if(prob(20))
+			goat.visible_message(SPAN_NOTICE("\The [goat] chews on the plants."))
+		return
+
+	if(!LAZYLEN(goat.grabbed_by))
+		var/obj/effect/vine/food = locate(/obj/effect/vine) in oview(5,goat.loc)
+		if(food)
+			var/step = get_step_to(goat, food, 0)
+			goat.Move(step)
 
 /mob/living/simple_animal/hostile/retaliate/goat/Initialize()
 	. = ..()
@@ -30,40 +66,10 @@
 	QDEL_NULL(udder)
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/Life()
+/mob/living/simple_animal/hostile/retaliate/goat/handle_regular_status_updates()
 	. = ..()
-	if(.)
-		//chance to go crazy and start wacking stuff
-		if(!enemies.len && prob(1))
-			Retaliate()
-
-		if(enemies.len && prob(10))
-			enemies = list()
-			LoseTarget()
-			src.visible_message("<span class='notice'>\The [src] calms down.</span>")
-
-		if(stat == CONSCIOUS)
-			if(udder && prob(5))
-				udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
-
-		if(locate(/obj/effect/vine) in loc)
-			var/obj/effect/vine/SV = locate() in loc
-			if(prob(60))
-				src.visible_message("<span class='notice'>\The [src] eats the plants.</span>")
-				SV.die_off(1)
-				if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
-					var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
-					qdel(SP)
-			else if(prob(20))
-				src.visible_message("<span class='notice'>\The [src] chews on the plants.</span>")
-			return
-
-		if(!LAZYLEN(grabbed_by))
-			var/obj/effect/vine/food
-			food = locate(/obj/effect/vine) in oview(5,loc)
-			if(food)
-				var/step = get_step_to(src, food, 0)
-				Move(step)
+	if(. && stat == CONSCIOUS && udder && prob(5))
+		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
 
 /mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
 	..()
@@ -99,7 +105,7 @@
 	meat_type = /obj/item/chems/food/meat/beef
 	meat_amount = 6
 	bone_amount = 10
-	skin_material = /decl/material/solid/skin/cow
+	skin_material = /decl/material/solid/organic/skin/cow
 	skin_amount = 10
 
 	var/datum/reagents/udder = null
@@ -134,11 +140,9 @@
 		return TRUE
 	. = ..()
 
-/mob/living/simple_animal/cow/Life()
+/mob/living/simple_animal/cow/handle_regular_status_updates()
 	. = ..()
-	if(!.)
-		return FALSE
-	if(udder && prob(5))
+	if(. && udder && prob(5))
 		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
 
 /mob/living/simple_animal/cow/default_disarm_interaction(mob/user)
@@ -171,7 +175,7 @@
 	meat_amount = 1
 	bone_amount = 3
 	skin_amount = 3
-	skin_material = /decl/material/solid/skin/feathers
+	skin_material = /decl/material/solid/organic/skin/feathers
 
 	var/amount_grown = 0
 
@@ -208,7 +212,7 @@ var/global/chicken_count = 0
 
 	meat_type = /obj/item/chems/food/meat/chicken
 	meat_amount = 2
-	skin_material = /decl/material/solid/skin/feathers
+	skin_material = /decl/material/solid/organic/skin/feathers
 
 	var/eggsleft = 0
 	var/body_color

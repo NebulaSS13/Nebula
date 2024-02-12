@@ -33,9 +33,10 @@ if(other_init) { \
 #define ADJUST_TAG_VAR(variable, map_hash) (istext(variable) && (variable += map_hash))
 
 /// Map template categories for mass retrieval.
-#define MAP_TEMPLATE_CATEGORY_EXOPLANET      "exoplanet_template"
-#define MAP_TEMPLATE_CATEGORY_EXOPLANET_SITE "exoplanet_site_template"
-#define MAP_TEMPLATE_CATEGORY_PLANET         "planet_template"
-#define MAP_TEMPLATE_CATEGORY_PLANET_SITE    "planet_site_template"
-#define MAP_TEMPLATE_CATEGORY_SPACE          "space_template"
-#define MAP_TEMPLATE_CATEGORY_AWAYSITE       "awaysite_template"
+#define MAP_TEMPLATE_CATEGORY_EXOPLANET       "exoplanet_template"
+#define MAP_TEMPLATE_CATEGORY_EXOPLANET_SITE  "exoplanet_site_template"
+#define MAP_TEMPLATE_CATEGORY_PLANET          "planet_template"
+#define MAP_TEMPLATE_CATEGORY_PLANET_SITE     "planet_site_template"
+#define MAP_TEMPLATE_CATEGORY_SPACE           "space_template"
+#define MAP_TEMPLATE_CATEGORY_AWAYSITE        "awaysite_template"
+#define MAP_TEMPLATE_CATEGORY_LANDMARK_LOADED "landmark_template"

@@ -131,7 +131,7 @@
 /decl/hierarchy/supply_pack/galley/beer_dispenser
 	name = "Equipment - Booze dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser/bar_alc{anchored = 0}
+			/obj/machinery/chemical_dispenser/bar_alc{anchored = FALSE}
 		)
 	containertype = /obj/structure/largecrate
 	containername = "booze dispenser crate"
@@ -139,7 +139,7 @@
 /decl/hierarchy/supply_pack/galley/soda_dispenser
 	name = "Equipment - Soda dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser/bar_soft{anchored = 0}
+			/obj/machinery/chemical_dispenser/bar_soft{anchored = FALSE}
 		)
 	containertype = /obj/structure/largecrate
 	containername = "soda dispenser crate"

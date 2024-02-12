@@ -54,14 +54,14 @@ var/global/list/overmap_unknown_ids = list()
 		return INITIALIZE_HINT_QDEL
 
 	if(requires_contact)
-		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
+		set_invisibility(INVISIBILITY_OVERMAP) // Effects that require identification have their images cast to the client via sensors.
 
 	if(scannable)
 		unknown_id = "[pick(global.phonetic_alphabet)]-[random_id(/obj/effect/overmap, 100, 999)]"
 
 	update_moving()
 
-	add_filter("glow", 1, list("drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0))
+	add_filter("glow", 1, list(type = "drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0))
 	update_icon()
 
 /obj/effect/overmap/Crossed(atom/movable/AM)

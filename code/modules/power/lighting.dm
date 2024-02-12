@@ -23,7 +23,7 @@
 	var/base_state = "tube"		// base description and icon_state
 	icon_state = "tube_map"
 	desc = "A lighting fixture."
-	anchored = 1
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	layer = ABOVE_HUMAN_LAYER  					// They were appearing under mobs which is a little weird - Ostaf
 	use_power = POWER_USE_ACTIVE
@@ -95,7 +95,7 @@
 		if (WEST)
 			light_offset_x = WORLD_ICON_SIZE * -0.5
 
-	if(populate_parts)
+	if(populate_parts && ispath(light_type))
 		lightbulb = new light_type(src)
 		if(prob(lightbulb.broken_chance))
 			broken(1)
@@ -144,6 +144,7 @@
 		add_overlay(I)
 
 	if(on)
+		compile_overlays() // force a compile so that we update prior to the light being set
 
 		update_use_power(POWER_USE_ACTIVE)
 
@@ -316,7 +317,7 @@
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
 		return TRUE
 
-	if(istype(user,/mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			visible_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass.")
@@ -578,7 +579,7 @@
 	I.color = null
 	add_overlay(I)
 
-/obj/item/light/Initialize(mapload, obj/machinery/light/fixture = null)
+/obj/item/light/Initialize(mapload)
 	. = ..()
 	update_icon()
 
@@ -591,7 +592,7 @@
 		to_chat(user, "You inject the solution into \the [src].")
 		for(var/rtype in S.reagents?.reagent_volumes)
 			var/decl/material/R = GET_DECL(rtype)
-			if(R.fuel_value)
+			if(R.accelerant_value > FUEL_VALUE_ACCELERANT)
 				rigged = TRUE
 				log_and_message_admins("injected a light with flammable reagents, rigging it to explode.", user)
 				break

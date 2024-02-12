@@ -14,7 +14,7 @@
 	return ..()
 
 /obj/item/mech_equipment/clamp/attack_hand(mob/user)
-	if(!owner || !LAZYISIN(owner.pilots, user) || owner.hatch_closed || !length(carrying) || !user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!owner || !LAZYISIN(owner.pilots, user) || owner.hatch_closed || !length(carrying) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/obj/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying
 	if(chosen_obj && do_after(user, 20, owner) && !owner.hatch_closed && !QDELETED(chosen_obj) && (chosen_obj in carrying))
@@ -111,7 +111,7 @@
 				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 
 		//attacking - Cannot be carrying something, cause then your clamp would be full
-		else if(istype(target,/mob/living))
+		else if(isliving(target))
 			var/mob/living/M = target
 			if(user.a_intent == I_HURT)
 				admin_attack_log(user, M, "attempted to clamp [M] with [src] ", "Was subject to a clamping attempt.", ", using \a [src], attempted to clamp")
@@ -435,26 +435,24 @@
 	if (!..()) // /obj/item/mech_equipment/afterattack implements a usage guard
 		return
 
-	if (istype(target, /obj/item/drill_head))
-		attach_head(target, user)
+	if(!target.simulated)
 		return
 
 	if (!drill_head)
-		to_chat(user, SPAN_WARNING("\The [src] doesn't have a head!"))
+		if (istype(target, /obj/item/drill_head))
+			attach_head(target, user)
+		else
+			to_chat(user, SPAN_WARNING("\The [src] doesn't have a head!"))
 		return
 
 	if (ismob(target))
-		var/mob/tmob = target
-		if (tmob.unacidable)
-			to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
-			return
-		else
-			to_chat(tmob, FONT_HUGE(SPAN_DANGER("You're about to get drilled - dodge!")))
+		to_chat(target, FONT_HUGE(SPAN_DANGER("You're about to get drilled - dodge!")))
 
 	else if (isobj(target))
 		var/obj/tobj = target
-		if (tobj.unacidable)
-			to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
+		var/decl/material/mat = tobj.get_material()
+		if (mat && mat.hardness < drill_head.material?.hardness)
+			to_chat(user, SPAN_WARNING("\The [target] is too hard to be destroyed by [drill_head.material ? "a [drill_head.material.adjective_name]" : "this"] drill."))
 			return
 
 	else if (istype(target, /turf/unsimulated))

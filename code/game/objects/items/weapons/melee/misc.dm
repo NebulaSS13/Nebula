@@ -12,7 +12,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':4}"
 	attack_verb = list("flicked", "whipped", "lashed")
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/whip/abyssal
 	name = "abyssal whip"
@@ -36,7 +36,7 @@
 	force = 19
 	edge = TRUE
 	origin_tech = "{'combat':6,'materials':5}"
-	material = /decl/material/solid/leather/lizard
+	material = /decl/material/solid/organic/leather/lizard
 
 /obj/item/whip/chainofcommand
 	name = "chain of command"

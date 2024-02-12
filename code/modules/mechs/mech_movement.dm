@@ -145,14 +145,14 @@
 	//Regardless of modules, emp prevents control
 
 	if(has_gravity() || throwing || !isturf(loc) || length(grabbed_by) || check_space_footing() || locate(/obj/structure/lattice) in range(1, get_turf(src)))
-		anchored = 1
+		anchored = TRUE
 		return TRUE
 
 	var/obj/item/mech_equipment/ionjets/J = hardpoints[HARDPOINT_BACK]
 	if(istype(J) && ((allow_movement || J.stabilizers) && J.allowSpaceMove()))
 		return TRUE
 
-	anchored = 0
+	anchored = FALSE
 	return FALSE
 
 /mob/living/exosuit/check_space_footing() //mechs can't push off things to move around in space, they stick to hull or float away

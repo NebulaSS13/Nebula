@@ -7,7 +7,7 @@
 	desc       = "A floppy disk drive for installation in most machines. Able to read most floppy disks."
 	icon       = 'icons/obj/items/stock_parts/modular_components.dmi'
 	icon_state = "floppy_drive"
-	material   = /decl/material/solid/plastic
+	material   = /decl/material/solid/organic/plastic
 	matter     = list(
 		/decl/material/solid/metal/steel  = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/copper = MATTER_AMOUNT_REINFORCEMENT,

@@ -3,7 +3,7 @@
 	name = "automatic floor layer"
 	icon = 'icons/obj/machines/pipe_dispenser.dmi'
 	icon_state = "pipe_d"
-	density = 1
+	density = TRUE
 	interact_offline = TRUE
 	var/turf/old_turf
 	var/on = 0

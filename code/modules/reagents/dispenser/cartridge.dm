@@ -6,14 +6,20 @@
 	w_class = ITEM_SIZE_NORMAL
 	volume = CARTRIDGE_VOLUME_LARGE
 	amount_per_transfer_from_this = 50
+	material = /decl/material/solid/stone/ceramic
 	// Large, but inaccurate. Use a chem dispenser or beaker for accuracy.
 	possible_transfer_amounts = @"[50,100]"
-	unacidable = 1
 
 /obj/item/chems/chem_disp_cartridge/initialize_reagents(populate = TRUE)
 	. = ..()
 	if(populate && reagents.primary_reagent)
 		setLabel(reagents.get_primary_reagent_name())
+
+/obj/item/chems/chem_disp_cartridge/self_feed_message(var/mob/user)
+	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
+	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
+		for(var/R in reagents.reagent_volumes)
+			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)
 
 /obj/item/chems/chem_disp_cartridge/examine(mob/user)
 	. = ..()

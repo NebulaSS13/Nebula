@@ -1,7 +1,7 @@
 /obj/item/underwear
 	icon = 'icons/mob/human.dmi'
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/cloth
+	material = /decl/material/solid/organic/cloth
 	var/required_free_body_parts
 	var/slot_offset_str
 
@@ -18,7 +18,7 @@
 /obj/item/underwear/proc/CanEquipUnderwear(var/mob/user, var/mob/living/carbon/human/H)
 	if(!CanAdjustUnderwear(user, H, "put on"))
 		return FALSE
-	if(!(H.species && (H.species.appearance_flags & HAS_UNDERWEAR)))
+	if(!(H.species && (H.get_bodytype()?.appearance_flags & HAS_UNDERWEAR)))
 		to_chat(user, "<span class='warning'>\The [H]'s species cannot wear underwear of this nature.</span>")
 		return FALSE
 	if(is_path_in_list(type, H.worn_underwear))

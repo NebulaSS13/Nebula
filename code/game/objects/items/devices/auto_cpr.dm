@@ -6,7 +6,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'magnets':2,'biotech':2}"
 	slot_flags = SLOT_OVER_BODY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_SECONDARY,
 		/decl/material/solid/metal/copper    = MATTER_AMOUNT_REINFORCEMENT,
@@ -17,7 +17,7 @@
 	var/last_pump
 	var/skilled_setup
 
-/obj/item/auto_cpr/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/auto_cpr/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
 	if(. && slot == slot_wear_suit_str)
 		. = user?.get_bodytype_category() == BODYTYPE_HUMANOID

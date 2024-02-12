@@ -220,4 +220,4 @@
 	color = COLOR_BLUE_GRAY
 	bullet_color = COLOR_BLUE_LIGHT
 	material = /decl/material/solid/glass
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)

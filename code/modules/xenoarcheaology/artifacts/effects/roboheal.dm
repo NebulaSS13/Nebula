@@ -7,7 +7,7 @@
 	origin_type = pick(EFFECT_ELECTRO, EFFECT_PARTICLE)
 
 /datum/artifact_effect/roboheal/DoEffectTouch(var/mob/user)
-	if(istype(user, /mob/living/silicon/robot))
+	if(isrobot(user))
 		var/mob/living/silicon/robot/R = user
 		to_chat(R, "<span class='notice'>Your systems report damaged components mending by themselves!</span>")
 		R.heal_overall_damage(rand(10,30), rand(10,30))

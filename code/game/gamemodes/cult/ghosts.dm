@@ -246,8 +246,9 @@
 		return
 
 	to_chat(choice, "<span class='danger'>You feel as if something cold passed through you!</span>")
-	if(choice.bodytemperature >= choice.species.cold_level_1 + 1)
-		choice.bodytemperature = max(choice.species.cold_level_1 + 1, choice.bodytemperature - 30)
+	var/temp_threshold = choice.get_temperature_threshold(COLD_LEVEL_1)
+	if(choice.bodytemperature >= temp_threshold + 1)
+		choice.bodytemperature = max(temp_threshold + 1, choice.bodytemperature - 30)
 	to_chat(src, "<span class='notice'>You pass through \the [choice], giving them a sudden chill.</span>")
 
 	log_and_message_admins("used ghost magic to chill \the [choice] - [x]-[y]-[z]")
@@ -281,9 +282,9 @@
 		to_chat(src, "<span class='info'>You are now invisible.</span>")
 		visible_message("<span class='emote'>It fades from sight...</span>")
 		set_invisibility(INVISIBILITY_OBSERVER)
-		mouse_opacity = 1
+		mouse_opacity = MOUSE_OPACITY_NORMAL
 	else
 		ghost_magic_cd = world.time + 60 SECONDS
 		to_chat(src, "<span class='info'>You are now visible.</span>")
-		set_invisibility(0)
-		mouse_opacity = 0 // This is so they don't make people invincible to melee attacks by hovering over them
+		set_invisibility(INVISIBILITY_NONE)
+		mouse_opacity = MOUSE_OPACITY_UNCLICKABLE // This is so they don't make people invincible to melee attacks by hovering over them

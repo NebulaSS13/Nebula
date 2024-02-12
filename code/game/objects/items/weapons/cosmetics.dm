@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	color = "#e00606"
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	var/color_desc = "ruby"
 	var/open = FALSE
 

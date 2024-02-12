@@ -3,9 +3,9 @@
 	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "boulder1"
-	density = 1
-	opacity = 1
-	anchored = 1
+	density = TRUE
+	opacity = TRUE
+	anchored = TRUE
 	material = /decl/material/solid/stone/sandstone
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/excavation_level = 0
@@ -73,13 +73,13 @@
 
 /obj/structure/boulder/Bumped(AM)
 	. = ..()
-	if(istype(AM,/mob/living/carbon/human))
+	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
 		var/obj/item/pickaxe/P = (locate() in H.get_inactive_held_items())
 		if(istype(P))
 			src.attackby(P, H)
 
-	else if(istype(AM,/mob/living/silicon/robot))
+	else if(isrobot(AM))
 		var/mob/living/silicon/robot/R = AM
 		if(istype(R.module_active,/obj/item/pickaxe))
 			attackby(R.module_active,R)

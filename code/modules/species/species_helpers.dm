@@ -36,63 +36,11 @@ var/global/list/stored_shock_by_ref = list()
 /decl/species/proc/get_digestion_product()
 	return /decl/material/liquid/nutriment
 
-/decl/species/proc/handle_post_species_pref_set(var/datum/preferences/pref)
-	if(!pref)
-		return
-	if(length(base_markings))
-		for(var/mark_type in base_markings)
-			if(!LAZYACCESS(pref.body_markings, mark_type))
-				LAZYSET(pref.body_markings, mark_type, base_markings[mark_type])
-
-	pref.skin_colour = base_color
-	pref.eye_colour = base_eye_color
-	pref.hair_colour = base_hair_color
-	pref.facial_hair_colour = base_hair_color
-
-/decl/species/proc/customize_preview_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
-
-	if(length(base_markings))
-		for(var/mark_type in base_markings)
-			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
-			for(var/bodypart in mark_decl.body_parts)
-				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(mannequin, bodypart)
-				if(O && !LAZYACCESS(O.markings, mark_type))
-					LAZYSET(O.markings, mark_type, base_markings[mark_type])
-
-	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
-		E.skin_colour = base_color
-
-	mannequin.eye_colour = base_eye_color
-	mannequin.hair_colour = base_hair_color
-	mannequin.facial_hair_colour = base_hair_color
-	set_default_hair(mannequin)
-
-	if(preview_outfit)
-		var/decl/hierarchy/outfit/outfit = outfit_by_type(preview_outfit)
-		outfit.equip_outfit(mannequin, equip_adjustments = (OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR|OUTFIT_ADJUSTMENT_SKIP_BACKPACK))
-
-	mannequin.force_update_limbs()
-	mannequin.update_mutations(0)
-	mannequin.update_body(0)
-	mannequin.update_underwear(0)
-	mannequin.update_hair(0)
-	mannequin.update_icon()
-	mannequin.update_transform()
-
-/decl/species/proc/get_resized_organ_w_class(var/organ_w_class)
-	. = clamp(organ_w_class + mob_size_difference(mob_size, MOB_SIZE_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
-
-/decl/species/proc/resize_organ(var/obj/item/organ/organ)
-	if(!istype(organ))
-		return
-	organ.w_class = get_resized_organ_w_class(initial(organ.w_class))
-	if(!istype(organ, /obj/item/organ/external))
-		return
-	var/obj/item/organ/external/limb = organ
-	for(var/bp_tag in has_organ)
-		var/obj/item/organ/internal/I = has_organ[bp_tag]
-		if(initial(I.parent_organ) == organ.organ_tag)
-			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))
+/decl/species/proc/handle_post_species_pref_set(datum/preferences/pref)
+	pref.skin_colour = default_bodytype.base_color
+	pref.eye_colour = default_bodytype.base_eye_color
+	pref.hair_colour = default_bodytype.base_hair_color
+	pref.facial_hair_colour = default_bodytype.base_hair_color
 
 /decl/species/proc/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))

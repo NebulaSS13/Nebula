@@ -15,10 +15,14 @@
 	requires_slot_flags = SLOT_UPPER_BODY
 	quick_equip_priority = 11
 
-/datum/inventory_slot/uniform/update_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
-	if(prop.flags_inv & HIDESHOES)
-		user.update_inv_shoes(0)
-	user.update_inv_w_uniform(redraw_mob)
+/datum/inventory_slot/uniform/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
+	if(prop?.flags_inv & HIDESHOES)
+		user.update_equipment_overlay(slot_shoes_str, FALSE)
+	var/obj/item/suit = user.get_equipped_item(slot_wear_suit_str)
+	if(_holding && (!suit || !(suit.flags_inv & HIDEJUMPSUIT)))
+		user.set_current_mob_overlay(HO_UNIFORM_LAYER, _holding.get_mob_overlay(user, slot_w_uniform_str), redraw_mob)
+	else
+		user.set_current_mob_overlay(HO_UNIFORM_LAYER, null, redraw_mob)
 
 /datum/inventory_slot/uniform/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding && !(hideflags & HIDEJUMPSUIT))

@@ -20,8 +20,8 @@ var/global/list/wall_fullblend_objects = list(
 	desc = "A huge chunk of metal used to seperate rooms."
 	icon = 'icons/turf/walls/_previews.dmi'
 	icon_state = "solid"
-	opacity = 1
-	density = 1
+	opacity = TRUE
+	density = TRUE
 	blocks_air = 1
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
@@ -147,7 +147,7 @@ var/global/list/wall_fullblend_objects = list(
 			plant.update_icon()
 			plant.reset_offsets(0)
 
-/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
 	clear_plants()
 	. = ..()
 
@@ -229,7 +229,7 @@ var/global/list/wall_fullblend_objects = list(
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
 			var/obj/structure/sign/poster/P = O
-			P.roll_and_drop(src)
+			P.dismantle()
 		else
 			O.forceMove(src)
 	clear_plants()

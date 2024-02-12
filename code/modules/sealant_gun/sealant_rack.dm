@@ -27,7 +27,7 @@
 		add_overlay("tanks[length(tanks)]")
 
 /obj/structure/sealant_rack/attack_hand(mob/user)
-	if(!user.check_dexterity(DEXTERITY_GRIP, TRUE))
+	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	if(loaded_gun)
 		loaded_gun.dropInto(loc)

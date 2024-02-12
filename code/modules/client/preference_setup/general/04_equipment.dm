@@ -64,8 +64,8 @@
 					pref.all_underwear[WRC.name] = WRI.name
 					break
 
-	var/decl/species/mob_species = get_species_by_key(pref.species)
-	if(!(mob_species && mob_species.appearance_flags & HAS_UNDERWEAR))
+	var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
+	if(!(mob_bodytype.appearance_flags & HAS_UNDERWEAR))
 		pref.all_underwear.Cut()
 
 	if(!istype(pref.all_underwear_metadata))
@@ -113,8 +113,8 @@
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
 	. += "<b>Equipment:</b><br>"
-	var/decl/species/mob_species = get_species_by_key(pref.species)
-	if(mob_species?.appearance_flags & HAS_UNDERWEAR)
+	var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
+	if(mob_bodytype?.appearance_flags & HAS_UNDERWEAR)
 		for(var/datum/category_group/underwear/UWC in global.underwear.categories)
 			var/item_name = (pref.all_underwear && pref.all_underwear[UWC.name]) ? pref.all_underwear[UWC.name] : "None"
 			. += "[UWC.name]: <a href='?src=\ref[src];change_underwear=[UWC.name]'><b>[item_name]</b></a>"

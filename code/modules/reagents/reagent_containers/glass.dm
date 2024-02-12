@@ -13,8 +13,8 @@
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	obj_flags = OBJ_FLAG_HOLLOW
-	unacidable = 1 //glass doesn't dissolve in acid
-
+	material = /decl/material/solid/glass
+	abstract_type = /obj/item/chems/glass
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
@@ -37,7 +37,8 @@
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
-		/obj/machinery/radiocarbon_spectrometer
+		/obj/machinery/radiocarbon_spectrometer,
+		/obj/machinery/material_processing/extractor
 	)
 
 /obj/item/chems/glass/examine(mob/user, distance)
@@ -46,19 +47,19 @@
 		return
 
 	if(reagents?.total_volume)
-		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
+		to_chat(user, SPAN_NOTICE("It contains [reagents.total_volume] units of liquid."))
 	else
-		to_chat(user, "<span class='notice'>It is empty.</span>")
+		to_chat(user, SPAN_NOTICE("It is empty."))
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>The airtight lid seals it completely.</span>")
+		to_chat(user,SPAN_NOTICE("The airtight lid seals it completely."))
 
 /obj/item/chems/glass/attack_self()
 	..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
+		to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
-		to_chat(usr, "<span class = 'notice'>You take the lid off \the [src].</span>")
+		to_chat(usr, SPAN_NOTICE("You take the lid off \the [src]."))
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
@@ -69,14 +70,14 @@
 
 /obj/item/chems/glass/standard_feed_mob(var/mob/user, var/mob/target)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
+		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
 		return 1
 	if(user.a_intent == I_HURT)
 		return 1
 	return ..()
 
 /obj/item/chems/glass/self_feed_message(var/mob/user)
-	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
+	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/R in reagents.reagent_volumes)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R)
@@ -118,8 +119,7 @@
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	presentation_flags = PRESENTATION_FLAG_NAME
-	unacidable = 0
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	material_force_multiplier = 0.2
 	slot_flags = SLOT_HEAD
 	drop_sound = 'sound/foley/donk1.ogg'
@@ -129,7 +129,7 @@
 	desc = "It's a wooden bucket. How rustic."
 	icon = 'icons/obj/items/wooden_bucket.dmi'
 	volume = 200
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user)
 	if(istype(D, /obj/item/mop))

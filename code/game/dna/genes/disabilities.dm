@@ -6,28 +6,23 @@
 // Gene is always activated.
 /////////////////////
 
-/datum/dna/gene/disability
+/decl/gene/disability
 	name="DISABILITY"
-
-	// Mutation to give (or 0)
+	/// Mutation to give (or 0)
 	var/mutation=0
-
-	// Disability to give (or 0)
+	/// Disability to give (or 0)
 	var/disability=0
-
-	// SDisability to give (or 0)
+	/// SDisability to give (or 0)
 	var/sdisability=0
-
-	// Activation message
+	/// Activation message
 	var/activation_message=""
-
-	// Yay, you're no longer growing 3 arms
+	/// Yay, you're no longer growing 3 arms
 	var/deactivation_message=""
 
-/datum/dna/gene/disability/can_activate(var/mob/M,var/flags)
+/decl/gene/disability/can_activate(var/mob/M,var/flags)
 	return 1 // Always set!
 
-/datum/dna/gene/disability/activate(var/mob/M, var/connected, var/flags)
+/decl/gene/disability/activate(var/mob/M, var/connected, var/flags)
 	if(mutation && !(mutation in M.mutations))
 		M.mutations.Add(mutation)
 	if(disability)
@@ -39,7 +34,7 @@
 	else
 		testing("[name] has no activation message.")
 
-/datum/dna/gene/disability/deactivate(var/mob/M, var/connected, var/flags)
+/decl/gene/disability/deactivate(var/mob/M, var/connected, var/flags)
 	if(mutation && (mutation in M.mutations))
 		M.mutations.Remove(mutation)
 	if(disability)
@@ -52,78 +47,87 @@
 		testing("[name] has no deactivation message.")
 
 // Note: Doesn't seem to do squat, at the moment.
-/datum/dna/gene/disability/hallucinate
+/decl/gene/disability/hallucinate
 	name="Hallucinate"
 	activation_message="Your mind says 'Hello'."
 	mutation=mHallucination
 
-/datum/dna/gene/disability/hallucinate/New()
+/decl/gene/disability/hallucinate/Initialize()
+	. = ..()
 	block=global.HALLUCINATIONBLOCK
 
-/datum/dna/gene/disability/epilepsy
+/decl/gene/disability/epilepsy
 	name="Epilepsy"
 	activation_message="You get a headache."
 	disability=EPILEPSY
 
-/datum/dna/gene/disability/epilepsy/New()
+/decl/gene/disability/epilepsy/Initialize()
+	. = ..()
 	block=global.HEADACHEBLOCK
 
-/datum/dna/gene/disability/cough
+/decl/gene/disability/cough
 	name="Coughing"
 	activation_message="You start coughing."
 	disability=COUGHING
 
-/datum/dna/gene/disability/cough/New()
+/decl/gene/disability/cough/Initialize()
+	. = ..()
 	block=global.COUGHBLOCK
 
-/datum/dna/gene/disability/clumsy
+/decl/gene/disability/clumsy
 	name="Clumsiness"
 	activation_message="You feel lightheaded."
 	mutation=MUTATION_CLUMSY
 
-/datum/dna/gene/disability/clumsy/New()
+/decl/gene/disability/clumsy/Initialize()
+	. = ..()
 	block=global.CLUMSYBLOCK
 
-/datum/dna/gene/disability/tourettes
+/decl/gene/disability/tourettes
 	name="Tourettes"
 	activation_message="You twitch."
 	disability=TOURETTES
 
-/datum/dna/gene/disability/tourettes/New()
+/decl/gene/disability/tourettes/Initialize()
+	. = ..()
 	block=global.TWITCHBLOCK
 
-/datum/dna/gene/disability/nervousness
+/decl/gene/disability/nervousness
 	name="Nervousness"
 	activation_message="You feel nervous."
 	disability=NERVOUS
 
-/datum/dna/gene/disability/nervousness/New()
+/decl/gene/disability/nervousness/Initialize()
+	. = ..()
 	block=global.NERVOUSBLOCK
 
-/datum/dna/gene/disability/blindness
+/decl/gene/disability/blindness
 	name="Blindness"
 	activation_message="You can't seem to see anything."
 	sdisability=BLINDED
 
-/datum/dna/gene/disability/blindness/New()
+/decl/gene/disability/blindness/Initialize()
+	. = ..()
 	block=global.BLINDBLOCK
 
-/datum/dna/gene/disability/deaf
+/decl/gene/disability/deaf
 	name="Deafness"
 	activation_message="It's kinda quiet."
 	sdisability=DEAFENED
 
-/datum/dna/gene/disability/deaf/New()
+/decl/gene/disability/deaf/Initialize()
+	. = ..()
 	block=global.DEAFBLOCK
 
-/datum/dna/gene/disability/deaf/activate(var/mob/M, var/connected, var/flags)
+/decl/gene/disability/deaf/activate(var/mob/M, var/connected, var/flags)
 	..(M,connected,flags)
 	M.set_status(STAT_DEAF, 1)
 
-/datum/dna/gene/disability/nearsighted
+/decl/gene/disability/nearsighted
 	name="Nearsightedness"
 	activation_message="Your eyes feel weird..."
 	disability=NEARSIGHTED
 
-/datum/dna/gene/disability/nearsighted/New()
+/decl/gene/disability/nearsighted/Initialize()
+	. = ..()
 	block=global.GLASSESBLOCK

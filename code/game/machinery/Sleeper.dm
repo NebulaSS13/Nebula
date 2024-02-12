@@ -94,6 +94,12 @@
 	LAZYREMOVE(., loaded_canisters)
 	LAZYREMOVE(., beaker)
 
+/obj/machinery/sleeper/get_contained_matter()
+	. = ..()
+	. = MERGE_ASSOCS_WITH_NUM_VALUES(., beaker.get_contained_matter())
+	for(var/obj/canister in loaded_canisters)
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., canister.get_contained_matter())
+
 /obj/machinery/sleeper/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
 	if(populate_parts)
@@ -161,9 +167,8 @@
 		else
 			toggle_lavage()
 
-
-	if(iscarbon(occupant) && stasis > 1)
-		occupant.SetStasis(stasis)
+	if(isliving(occupant) && stasis > 1)
+		occupant.set_stasis(stasis)
 
 /obj/machinery/sleeper/on_update_icon()
 	cut_overlays()

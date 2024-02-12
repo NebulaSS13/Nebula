@@ -19,7 +19,7 @@
 		ARMOR_ENERGY = ARMOR_ENERGY_SMALL,
 		ARMOR_BOMB = ARMOR_BOMB_RESISTANT,
 		ARMOR_BIO = ARMOR_BIO_MINOR)
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
@@ -52,7 +52,7 @@
 /obj/item/clothing/gloves/thick/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
 	color = COLOR_BEASTY_BROWN
-	material = /decl/material/solid/leather
+	material = /decl/material/solid/organic/leather
 
 /obj/item/clothing/gloves/thick/craftable
 	name = "gauntlets"

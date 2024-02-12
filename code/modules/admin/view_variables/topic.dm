@@ -341,19 +341,47 @@
 
 		var/mob/living/carbon/human/H = locate(href_list["setspecies"])
 		if(!istype(H))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/carbon/human"))
 			return
 
 		var/new_species = input("Please choose a new species.","Species",null) as null|anything in get_all_species()
 
 		if(!H)
-			to_chat(usr, "Mob doesn't exist anymore")
+			to_chat(usr, SPAN_WARNING("Mob doesn't exist anymore"))
+			return
+
+		if(!new_species)
 			return
 
 		if(H.change_species(new_species))
-			to_chat(usr, "Set species of [H] to [H.species].")
+			to_chat(usr, SPAN_NOTICE("Set species of [H] to [H.species]."))
 		else
-			to_chat(usr, "Failed! Something went wrong.")
+			to_chat(usr, SPAN_WARNING("Failed! Something went wrong."))
+
+	else if(href_list["setbodytype"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/living/carbon/human/H = locate(href_list["setbodytype"])
+		if(!istype(H))
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of type /mob/living/carbon/human"))
+			return
+
+		var/new_bodytype = input("Please choose a new bodytype.","Bodytype",null) as null|anything in H.species.available_bodytypes
+
+		if(!new_bodytype)
+			return
+
+		if(!H)
+			to_chat(usr, SPAN_WARNING("Mob doesn't exist anymore"))
+			return
+
+		if(!(new_bodytype in H.species.available_bodytypes))
+			to_chat(usr, SPAN_WARNING("Bodytype is no longer available to the mob species."))
+
+		if(H.set_bodytype(new_bodytype))
+			to_chat(usr, SPAN_NOTICE("Set bodytype of [H] to [H.get_bodytype()]."))
+		else
+			to_chat(usr, SPAN_WARNING("Failed! Something went wrong."))
 
 	else if(href_list["addlanguage"])
 		if(!check_rights(R_SPAWN))	return
@@ -536,7 +564,7 @@
 		if(!istype(H))
 			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
 			return
-		H.refresh_visible_overlays()
+		H.try_refresh_visible_overlays()
 
 	else if(href_list["adjustDamage"] && href_list["mobToDamage"])
 		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
@@ -613,7 +641,7 @@
 			return
 		var/duration = clamp(input("Enter a duration ([STRESSOR_DURATION_INDEFINITE] for permanent).", "Add Stressor") as num|null, STRESSOR_DURATION_INDEFINITE, INFINITY)
 		if(duration && L.add_stressor(stressor, duration))
-			log_and_message_admins("added [stressor] to \the [src] for duration [duration].")
+			log_and_message_admins("added [stressor] to \the [L] for duration [duration].")
 
 	else if(href_list["removestressor"])
 		if(!check_rights(R_DEBUG))
@@ -626,7 +654,28 @@
 			return
 		var/datum/stressor/stressor = input("Select a stressor to remove.", "Remove Stressor") as null|anything in L.stressors
 		if(L.remove_stressor(stressor))
-			log_and_message_admins("removed [stressor] from \the [src].")
+			log_and_message_admins("removed [stressor] from \the [L].")
+
+	else if(href_list["setstatuscond"])
+		if(!check_rights(R_DEBUG))
+			return
+		var/mob/living/L = locate(href_list["setstatuscond"])
+		if(!istype(L))
+			return
+		var/list/all_status_conditions = decls_repository.get_decls_of_subtype(/decl/status_condition)
+		var/list/select_from_conditions = list()
+		for(var/status_cond in all_status_conditions)
+			select_from_conditions += all_status_conditions[status_cond]
+		var/decl/status_condition/selected_condition = input("Select a status condition to set.", "Set Status Condition") as null|anything in select_from_conditions
+		if(!selected_condition || QDELETED(L) || !check_rights(R_DEBUG))
+			return
+		var/amt = input("Enter an amount to set the condition to.", "Set Status Condition") as num|null
+		if(isnull(amt) || QDELETED(L) || !check_rights(R_DEBUG))
+			return
+		if(amt < 0)
+			amt += GET_STATUS(L, selected_condition.type)
+		L.set_status(selected_condition.type, amt)
+		log_and_message_admins("set [selected_condition.name] to [amt] on \the [L].")
 
 	else if(href_list["setmaterial"])
 		if(!check_rights(R_DEBUG))	return

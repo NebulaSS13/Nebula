@@ -449,12 +449,16 @@
 			return TOPIC_REFRESH
 
 	if(href_list["set_default"])
-		var/amount = input(user, "Input an angle between [leftmost_traverse] and [rightmost_traverse] degrees. Click cancel to disable default.", "Set Default Bearing", default_bearing) as null|num
+		var/leftmost_default = leftmost_traverse
+		var/rightmost_default = rightmost_traverse
+		if(traverse >= 360)
+			leftmost_default = 0
+			rightmost_default = 360
+		var/amount = input(user, "Input an angle between [leftmost_default] and [rightmost_default] degrees. Click cancel to disable default.", "Set Default Bearing", default_bearing) as null|num
 		if(isnum(amount))
-			default_bearing = clamp(amount, leftmost_traverse, rightmost_traverse)
+			default_bearing = clamp(amount, leftmost_default, rightmost_default)
 		else
 			default_bearing = null
-
 		return TOPIC_REFRESH
 
 	if(href_list["manual_fire"])
@@ -499,13 +503,13 @@
 	if(!turret_stand)
 		turret_stand = image(icon, "turretCover")
 		turret_stand.layer = src.layer - 0.02
-		turret_stand.appearance_flags = KEEP_APART|RESET_TRANSFORM|TILE_BOUND|PIXEL_SCALE
+		turret_stand.appearance_flags |= KEEP_APART|RESET_TRANSFORM|TILE_BOUND
 		add_overlay(turret_stand)
 
 	if(!turret_ray)
 		turret_ray = image(icon, "turret_ray")
 		turret_ray.plane = ABOVE_LIGHTING_PLANE
-		turret_ray.appearance_flags = KEEP_APART|RESET_COLOR|TILE_BOUND|PIXEL_SCALE
+		turret_ray.appearance_flags |= KEEP_APART|RESET_COLOR|TILE_BOUND
 		turret_ray.mouse_opacity = FALSE
 
 		var/matrix/M = matrix(turret_ray.transform)
@@ -518,7 +522,7 @@
 	if(!transverse_left && leftmost_traverse)
 		transverse_left = image(icon, "transverse_indicator_left")
 		transverse_left.layer = src.layer - 0.01
-		transverse_left.appearance_flags = KEEP_APART|RESET_TRANSFORM|TILE_BOUND|PIXEL_SCALE
+		transverse_left.appearance_flags |= KEEP_APART|RESET_TRANSFORM|TILE_BOUND
 
 		// Rotate according to transverse
 		var/matrix/M = matrix(transverse_left.transform)
@@ -529,7 +533,7 @@
 	if(!transverse_right && rightmost_traverse)
 		transverse_right = image(icon, "transverse_indicator_right")
 		transverse_right.layer = src.layer - 0.01
-		transverse_right.appearance_flags = KEEP_APART|RESET_TRANSFORM|TILE_BOUND|PIXEL_SCALE
+		transverse_right.appearance_flags |= KEEP_APART|RESET_TRANSFORM|TILE_BOUND
 
 		// Rotate according to transverse
 		var/matrix/M = matrix(transverse_right.transform)

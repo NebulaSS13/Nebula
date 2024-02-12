@@ -1,4 +1,5 @@
-/mob/living/carbon/get_organ(var/organ_tag, var/expected_type)
+/mob/living/carbon/get_organ(var/organ_tag, var/expected_type = /obj/item/organ)
+	RETURN_TYPE(expected_type)
 	var/obj/item/organ = LAZYACCESS(organs_by_tag, organ_tag)
 	if(!expected_type || istype(organ, expected_type))
 		return organ
@@ -19,9 +20,8 @@
 	return LAZYLEN(internal_organs) > 0
 
 //Deletes all references to organs
-/mob/living/carbon/proc/delete_organs()
-	for(var/obj/item/organ/O in get_organs())
-		qdel(O)
+/mob/living/carbon/delete_organs()
+	..()
 	organs_by_tag = null
 	internal_organs = null
 	external_organs = null
@@ -53,3 +53,8 @@
 		LAZYREMOVE(internal_organs, O)
 	else
 		LAZYREMOVE(external_organs, O)
+
+/mob/living/carbon/get_bodytype()
+	RETURN_TYPE(/decl/bodytype)
+	// If the root organ ever changes/isn't always the chest, this will need to be changed.
+	return get_organ(BP_CHEST, /obj/item/organ)?.bodytype

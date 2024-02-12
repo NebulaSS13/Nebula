@@ -5,13 +5,9 @@
 	icon_state = initial(icon_state)
 	if(stat == DEAD)
 		icon_state = "[icon_state]-[cores ? "dead" : "nocore"]"
-		layer = initial(layer)
 	else if(feeding_on)
-		var/mob/feed_mob = feeding_on.resolve()
 		icon_state = "[icon_state]-eat"
-		layer = feed_mob.layer + 0.5
-	else
-		layer = initial(layer)
+	reset_layer()
 
 	..()
 
@@ -24,7 +20,13 @@
 		var/mutable_appearance/MA = new(AM)
 		MA.layer = FLOAT_LAYER
 		MA.plane = FLOAT_PLANE
-		// Revisit this on 514, alpha filters are behaving strangely on 513
-		//MA.add_filter("slime_mask", 1, list("alpha", render_source="slime_\ref[src]", flags=MASK_INVERSE))
+		MA.add_filter("slime_mask", 1, list(type = "alpha", render_source="slime_\ref[src]", flags=MASK_INVERSE))
 		LAZYADD(new_underlays, MA)
 	underlays = new_underlays
+
+/mob/living/slime/get_base_layer()
+	if(stat != DEAD && feeding_on)
+		var/atom/feed_mob = feeding_on.resolve()
+		if(istype(feed_mob))
+			return max(ABOVE_HUMAN_LAYER, feed_mob.layer + 0.5)
+	return ..()

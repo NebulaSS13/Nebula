@@ -24,7 +24,7 @@
 
 /datum/extension/deity_be_near/proc/check_movement()
 	var/obj/item/I = holder
-	if(!istype(I.loc, /mob/living))
+	if(!isliving(I.loc))
 		return
 	var/min_dist = INFINITY
 	for(var/s in connected_deity.structures)

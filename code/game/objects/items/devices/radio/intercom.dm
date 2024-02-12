@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/device/radio/intercom.dmi'
 	icon_state = "intercom"
 	randpixel = 0
-	anchored = 1
+	anchored = TRUE
 	w_class = ITEM_SIZE_STRUCTURE
 	canhear_range = 2
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD

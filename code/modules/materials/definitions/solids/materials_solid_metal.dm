@@ -18,6 +18,7 @@
 	abstract_type = /decl/material/solid/metal
 	icon_base = 'icons/turf/walls/metal.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/uranium
 	name = "uranium"
@@ -38,7 +39,8 @@
 	reflectiveness = MAT_VALUE_MATTE
 	value = 1.5
 	default_solid_form = /obj/item/stack/material/puck
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 	neutron_cross_section = 10
 	neutron_interactions = list(
@@ -117,7 +119,8 @@
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
 	value = 1.4
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/redgold
 	name = "red gold"
@@ -126,7 +129,8 @@
 	color = "#ff7a59"
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.4
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/brass
 	name = "brass"
@@ -136,7 +140,8 @@
 	reflectiveness = MAT_VALUE_VERY_SHINY
 	value = 1.2
 	default_solid_form = /obj/item/stack/material/sheet
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/copper
 	name = "copper"
@@ -191,7 +196,7 @@
 
 /decl/material/solid/metal/steel/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if(holographic || reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/furniture/closet(src)
 	. += new/datum/stack_recipe/furniture/tank_dispenser(src)
@@ -214,14 +219,7 @@
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
 	uid = "solid_holographic_steel"
-	shard_type = SHARD_NONE
-	conductive = 0
-	hidden_from_codex = TRUE
-	value = 0
-	exoplanet_rarity = MAT_RARITY_NOWHERE
-
-/decl/material/solid/metal/steel/holographic/get_recipes(reinf_mat)
-	return list()
+	holographic = TRUE
 
 /decl/material/solid/metal/stainlesssteel
 	name = "stainless steel"
@@ -239,7 +237,10 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	reflectiveness = MAT_VALUE_MIRRORED
 	value = 1.3
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	dissolves_in = MAT_SOLVENT_IMMUNE
+	dissolves_into = null
 
 /decl/material/solid/metal/aluminium
 	name = "aluminium"
@@ -258,20 +259,14 @@
 
 /decl/material/solid/metal/aluminium/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if(holographic || reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/grenade(src)
 
 /decl/material/solid/metal/aluminium/holographic
 	name = "holoaluminium"
 	uid = "solid_holographic_aluminium"
-	shard_type = SHARD_NONE
-	conductive = 0
-	hidden_from_codex = TRUE
-	exoplanet_rarity = MAT_RARITY_NOWHERE
-
-/decl/material/solid/metal/aluminium/holographic/get_recipes(reinf_mat)
-	return list()
+	holographic = TRUE
 
 /decl/material/solid/metal/plasteel
 	name = "plasteel"
@@ -294,11 +289,14 @@
 	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
 	default_solid_form = /obj/item/stack/material/reinforced
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	dissolves_in = MAT_SOLVENT_IMMUNE
+	dissolves_into = null
 
 /decl/material/solid/metal/plasteel/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if(holographic || reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/ai_core(src)
 	. += new/datum/stack_recipe/furniture/crate(src)
@@ -326,10 +324,12 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	reflectiveness = MAT_VALUE_MATTE
 	default_solid_form = /obj/item/stack/material/reinforced
+	dissolves_in = MAT_SOLVENT_IMMUNE
+	dissolves_into = null
 
 /decl/material/solid/metal/titanium/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if(holographic || reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/ai_core(src)
 	. += new/datum/stack_recipe/furniture/crate(src)
@@ -351,7 +351,8 @@
 	stack_origin_tech = "{'materials':3}"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
-	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/osmium
 	name = "osmium"
@@ -458,7 +459,8 @@
 	hidden_from_codex = TRUE
 	value = 3
 	default_solid_form = /obj/item/stack/material/cubes
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	use_reinf_state = null
@@ -471,7 +473,8 @@
 	color = "#666666"
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/sheet
-	exoplanet_rarity = MAT_RARITY_NOWHERE
+	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 
 /decl/material/solid/metal/tungsten
 	name = "tungsten"

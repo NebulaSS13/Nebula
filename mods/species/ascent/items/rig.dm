@@ -228,7 +228,7 @@
 		/obj/item/rig_module/maneuvering_jets
 	)
 
-/obj/item/rig/mantid/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
+/obj/item/rig/mantid/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	. = ..()
 	if(!. || slot != slot_back_str || !mantid_caste)
 		return

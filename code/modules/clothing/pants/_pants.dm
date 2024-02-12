@@ -28,8 +28,7 @@
 		ACCESSORY_SLOT_OVER
 	)
 
-/obj/item/clothing/pants/update_clothing_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_w_uniform(0)
-		M.update_inv_wear_id()
+/obj/item/clothing/pants/get_associated_equipment_slots()
+	. = ..()
+	var/static/list/pants_slots = list(slot_w_uniform_str, slot_wear_id_str)
+	LAZYDISTINCTADD(., pants_slots)

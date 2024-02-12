@@ -49,23 +49,23 @@
 			mob.hotkey_drop()
 
 /mob/proc/hotkey_drop()
-	. = has_extension(src, /datum/extension/hattable)
+	return FALSE
 
 /mob/living/hotkey_drop()
-	if(length(get_active_grabs()) || ..())
-		drop_item()
-
-/mob/living/carbon/hotkey_drop()
-	var/obj/item/hand = get_active_hand()
-	if(hand?.can_be_dropped_by_client(src) || ..())
+	if(length(get_active_grabs()))
+		. = TRUE
+	else
+		var/obj/item/hand = get_active_hand()
+		. = hand?.can_be_dropped_by_client(src)
+	if(.)
 		drop_item()
 
 /client/verb/swap_hand()
 	set hidden = 1
-	if(istype(mob, /mob/living/carbon))
+	if(iscarbon(mob))
 		var/mob/M = mob
 		M.swap_hand()
-	if(istype(mob,/mob/living/silicon/robot))
+	if(isrobot(mob))
 		var/mob/living/silicon/robot/R = mob
 		R.cycle_modules()
 	return
@@ -78,7 +78,7 @@
 
 /client/verb/toggle_throw_mode()
 	set hidden = 1
-	if(!istype(mob, /mob/living/carbon))
+	if(!iscarbon(mob))
 		return
 	if (!mob.stat && isturf(mob.loc) && !mob.restrained())
 		mob:toggle_throw_mode()

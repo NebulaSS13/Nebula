@@ -1,20 +1,3 @@
-/decl/language/ling
-	name = "Changeling"
-	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
-	speech_verb = "says"
-	colour = "changeling"
-	key = "g"
-	flags = LANG_FLAG_RESTRICTED | LANG_FLAG_HIVEMIND
-	shorthand = "N/A"
-	hidden_from_codex = TRUE
-
-/decl/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
-
-	if(speaker.mind && speaker.mind.changeling)
-		..(speaker,message,speaker.mind.changeling.changelingID)
-	else
-		..(speaker,message)
-
 /decl/language/cultcommon
 	name = "Cult"
 	desc = "The chants of the occult, the incomprehensible."

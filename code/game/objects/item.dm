@@ -183,7 +183,7 @@
 /obj/item/proc/update_held_icon()
 	if(ismob(src.loc))
 		var/mob/M = src.loc
-		M.update_inv_hands()
+		M.update_inhand_overlays()
 
 /obj/item/proc/is_held_twohanded(mob/living/M)
 	if(!M)
@@ -253,8 +253,6 @@
 
 	return ..(user, distance, "", desc_comp)
 
-// This is going to need a solid go-over to properly integrate all the movement procs into each
-// other and make sure everything is updating nicely. Snowflaking it for now. ~Jan 2020
 /obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
 	. = (loc == user && istype(over, /obj/screen/inventory)) || ..()
 
@@ -274,7 +272,7 @@
 			bag.remove_from_storage(src)
 			dropInto(get_turf(bag))
 		// Otherwise remove it from our inventory if necessary.
-		else if(istype(loc, /mob))
+		else if(ismob(loc))
 			var/mob/M = loc
 			if(!M.try_unequip(src, get_turf(src)))
 				return ..()
@@ -297,9 +295,9 @@
 	if(anchored)
 		return ..()
 
-	if(!user.check_dexterity(DEXTERITY_GRIP, silent = TRUE))
+	if(!user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = TRUE))
 
-		if(user.check_dexterity(DEXTERITY_KEYBOARDS, silent = TRUE))
+		if(user.check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
 
 			if(loc == user)
 				to_chat(user, SPAN_NOTICE("You begin trying to remove \the [src]..."))
@@ -457,8 +455,8 @@
 
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
 //Set disable_warning to 1 if you wish it to not give you outputs.
-/obj/item/proc/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE)
-	SHOULD_CALL_PARENT(TRUE)
+//Set ignore_equipped to 1 if you wish to ignore covering checks etc. when this item is already equipped.
+/obj/item/proc/mob_can_equip(mob/user, slot, disable_warning = FALSE, force = FALSE, ignore_equipped = FALSE)
 	if(!slot || !user)
 		return FALSE
 
@@ -481,14 +479,16 @@
 				return FALSE
 
 	var/datum/inventory_slot/inv_slot = user.get_inventory_slot_datum(slot)
-	if(!inv_slot || !inv_slot.is_accessible(user, src, disable_warning) || !inv_slot.can_equip_to_slot(user, src, disable_warning))
+	if(!inv_slot)
 		return FALSE
-	var/already_equipped = inv_slot.get_equipped_item()
-	if(already_equipped)
-		if(!force)
+
+	if(!force)
+		if(!ignore_equipped && !inv_slot.is_accessible(user, src, disable_warning))
 			return FALSE
-		inv_slot.clear_slot()
-		qdel(already_equipped)
+
+	if(!inv_slot.can_equip_to_slot(user, src, disable_warning, ignore_equipped))
+		return FALSE
+
 	return TRUE
 
 /obj/item/proc/mob_can_unequip(mob/user, slot, disable_warning = FALSE)
@@ -569,7 +569,7 @@
 
 /obj/item/reveal_blood()
 	if(was_bloodied && !fluorescent)
-		fluorescent = 1
+		fluorescent = FLUORESCENT_GLOWS
 		blood_color = COLOR_LUMINOL
 		blood_overlay.color = COLOR_LUMINOL
 		update_icon()
@@ -593,8 +593,10 @@
 		forensics.add_data(/datum/forensics/blood_dna, sample_dna)
 	add_coating(/decl/material/liquid/blood, amount, blood_data)
 
-	if(!LAZYACCESS(blood_DNA, M.dna.unique_enzymes))
-		LAZYSET(blood_DNA, M.dna.unique_enzymes, M.dna.b_type)
+	var/unique_enzymes = M.get_unique_enzymes()
+	var/blood_type = M.get_blood_type()
+	if(unique_enzymes && blood_type && !LAZYACCESS(blood_DNA, unique_enzymes))
+		LAZYSET(blood_DNA, unique_enzymes, blood_type)
 
 	return TRUE
 
@@ -811,17 +813,32 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	update_icon()
 	update_clothing_icon()
 
+// Used to call appropriate slot updates in update_clothing_icon()
+/obj/item/proc/get_associated_equipment_slots()
+	SHOULD_CALL_PARENT(TRUE)
+	if(item_flags & ITEM_FLAG_IS_BELT)
+		LAZYADD(., slot_belt_str)
+
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/proc/update_clothing_icon()
-	return
+	var/mob/wearer = loc
+	if(!istype(wearer))
+		return FALSE
+	var/equip_slots = get_associated_equipment_slots()
+	if(!islist(equip_slots))
+		return FALSE
+	for(var/slot in equip_slots)
+		wearer.update_equipment_overlay(slot, FALSE)
+	wearer.update_icon()
+	return TRUE
 
 /obj/item/proc/reconsider_client_screen_presence(var/client/client, var/slot)
-	if(!ismob(loc) || !client) // Storage handles screen loc updating/setting itself so should be fine
-		screen_loc = null
-	else if(client)
+	if(!client)
+		return
+	if(client.mob?.item_should_have_screen_presence(src, slot))
 		client.screen |= src
-		if(!client.mob?.item_should_have_screen_presence(src, slot))
-			screen_loc = null
+	else
+		client.screen -= src
 
 /obj/item/proc/gives_weather_protection()
 	return FALSE
@@ -847,6 +864,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(current_size > STAGE_ONE)
 		step_towards(src,S)
 	else ..()
+
+/obj/item/check_mousedrop_adjacency(var/atom/over, var/mob/user)
+	. = (loc == user && istype(over, /obj/screen)) || ..()
 
 // Supplied during loadout gear tweaking.
 /obj/item/proc/set_custom_name(var/new_name)

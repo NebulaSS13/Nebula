@@ -38,25 +38,6 @@
 	update_icon(user)
 	user.update_action_buttons()
 
-/obj/item/clothing/head/attack_ai(var/mob/user)
-	if(!mob_wear_hat(user))
-		return ..()
-
-/obj/item/clothing/head/attack_animal(var/mob/user)
-	if(!mob_wear_hat(user))
-		return ..()
-
-/obj/item/clothing/head/proc/mob_wear_hat(var/mob/user)
-	var/datum/extension/hattable/hattable = get_extension(user, /datum/extension/hattable)
-	if(Adjacent(user) && hattable)
-		if(hattable.hat)
-			to_chat(user, SPAN_WARNING("You are already wearing a hat."))
-			return TRUE
-		if(hattable.wear_hat(user, src))
-			to_chat(user, SPAN_NOTICE("You are now wearing \the [src]."))
-			return TRUE
-	return FALSE
-
 /obj/item/clothing/head/on_update_icon(var/mob/user)
 	. = ..()
 	if(on)
@@ -72,15 +53,14 @@
 
 /obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))
-		var/image/light_overlay = image(overlay.icon, "[overlay.icon_state]_light")
-		if(ishuman(user_mob))
-			var/mob/living/carbon/human/H = user_mob
-			if(H.get_bodytype_category() != bodytype)
-				light_overlay = H.bodytype.get_offset_overlay_image(FALSE, light_overlay.icon, light_overlay.icon_state, null, slot)
+		var/light_overlay
+		if(user_mob.get_bodytype_category() != bodytype)
+			light_overlay = user_mob.get_bodytype()?.get_offset_overlay_image(overlay.icon, "[overlay.icon_state]_light", null, slot)
+		if(!light_overlay)
+			light_overlay = image(overlay.icon, "[overlay.icon_state]_light")
 		overlay.overlays += light_overlay
 	. = ..()
 
-/obj/item/clothing/head/update_clothing_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_head()
+/obj/item/clothing/head/get_associated_equipment_slots()
+	. = ..()
+	LAZYDISTINCTADD(., slot_head_str)

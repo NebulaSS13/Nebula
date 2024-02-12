@@ -185,7 +185,7 @@
 	if(T)
 		forceMove(T)
 		visible_message(SPAN_DANGER("[src] is pinned to the wall by [O]!"),SPAN_DANGER("You are pinned to the wall by [O]!"))
-		src.anchored = 1
+		src.anchored = TRUE
 		LAZYADD(pinned, O)
 		if(!LAZYISIN(embedded,O))
 			embed(O)
@@ -303,3 +303,28 @@
 // this handles mulebots and vehicles
 /mob/living/Crossed(var/atom/movable/AM)
 	AM.crossed_mob(src)
+
+/mob/living/proc/solvent_act(var/severity, var/amount_per_item, var/solvent_power = MAT_SOLVENT_STRONG)
+
+	for(var/slot in global.standard_headgear_slots)
+		var/obj/item/thing = get_equipped_item(slot)
+		if(!istype(thing))
+			continue
+		if(!thing.solvent_can_melt(solvent_power) || !try_unequip(thing))
+			to_chat(src, SPAN_NOTICE("Your [thing] protects you from the solvent."))
+			return TRUE
+		to_chat(src, SPAN_DANGER("Your [thing] dissolves!"))
+		qdel(thing)
+		severity -= amount_per_item
+		if(severity <= 0)
+			return TRUE
+
+	// TODO move this to a contact var or something.
+	if(solvent_power >= MAT_SOLVENT_STRONG)
+		var/screamed
+		for(var/obj/item/organ/external/affecting in get_external_organs())
+			if(!screamed && affecting.can_feel_pain())
+				screamed = TRUE
+				emote("scream")
+			affecting.status |= ORGAN_DISFIGURED
+		take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)

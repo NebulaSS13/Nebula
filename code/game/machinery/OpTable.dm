@@ -3,8 +3,8 @@
 	desc = "Used for advanced medical procedures."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "table2-idle"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	throwpass = 1
 	idle_power_usage = 1
 	active_power_usage = 5
@@ -94,7 +94,7 @@
 	icon_state = "table2-idle"
 	if(ishuman(victim))
 		var/mob/living/carbon/human/H = victim
-		if(H.pulse())
+		if(H.get_pulse())
 			icon_state = "table2-active"
 
 /obj/machinery/optable/Process()

@@ -3,8 +3,8 @@
 	desc = "This machine creates a microscopic wormhole between here and a suitable target, allowing for FTL communication."
 	icon = 'icons/obj/machines/tcomms/bs_relay.dmi'
 	icon_state = "bspacerelay"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	idle_power_usage = 15000
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

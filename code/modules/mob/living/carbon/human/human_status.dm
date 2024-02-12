@@ -9,6 +9,6 @@
 	. = ..()
 
 /mob/living/carbon/human/handle_status_effects()
-	if(ssd_check() && species.get_ssd(src) || player_triggered_sleeping)
+	if((ssd_check() && species.get_ssd(src)) || player_triggered_sleeping)
 		SET_STATUS_MAX(src, STAT_ASLEEP, 2)
 	. = ..()

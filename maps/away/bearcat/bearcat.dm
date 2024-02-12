@@ -69,7 +69,7 @@
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
 	icon_screen = "lift"
-	density = 0
+	density = FALSE
 
 /obj/effect/shuttle_landmark/lift/top
 	name = "Top Deck"
@@ -119,6 +119,7 @@
 	outfit.equip_outfit(corpse)
 	corpse.adjustOxyLoss(corpse.maxHealth)
 	corpse.setBrainLoss(corpse.maxHealth)
+	corpse.death(FALSE, deathmessage = "no message", show_dead_message = FALSE)
 	var/obj/structure/bed/chair/C = locate() in T
 	if(C)
 		C.buckle_mob(corpse)

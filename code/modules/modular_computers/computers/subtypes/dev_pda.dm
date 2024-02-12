@@ -7,7 +7,7 @@
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic =     MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/organic/plastic =     MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass =       MATTER_AMOUNT_TRACE
 	)
 	w_class = ITEM_SIZE_SMALL
@@ -26,7 +26,7 @@
 	. = ..()
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.get_equipped_item(slot_wear_id_str) == src)
-		H.update_inv_wear_id()
+		H.update_equipment_overlay(slot_wear_id_str)
 
 // PDA box
 /obj/item/storage/box/PDAs

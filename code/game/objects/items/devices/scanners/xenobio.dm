@@ -2,15 +2,14 @@
 	name = "xenolife scanner"
 	desc = "Multipurpose organic life scanner. With spectral breath analyzer you can find out what snacks Ian had! Or what gasses alien life breathes."
 	icon = 'icons/obj/items/device/scanner/xenobio_scanner.dmi'
-	icon_state = "xenobio"
-	item_state = "analyzer"
+	icon_state = ICON_STATE_WORLD
 	scan_sound = 'sound/effects/scanbeep.ogg'
 	printout_color = "#f3e6ff"
 	origin_tech = "{'magnets':1,'biotech':1}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
+		/decl/material/solid/organic/plastic = MATTER_AMOUNT_TRACE
 	)
 
 	var/list/valid_targets = list(

@@ -23,7 +23,7 @@
 		target = new recipient_type(test_loc)
 	if(!target.reagents)
 		target.create_reagents(container_volume)
-	if(istype(target, /mob))
+	if(ismob(target))
 		var/mob/victim = target
 		victim.death() // to prevent reagent processing
 
@@ -173,4 +173,60 @@
 	else
 		pass("No reactions had conflicts.")
 
+	return 1
+
+/datum/unit_test/chemistry_premade_bottles_shall_not_melt
+	name = "CHEMISTRY: Reagent containers shall not be destroyed by their contents"
+	// List of master types that can be reasonably expected to spawn with chems inside them.
+	var/static/list/master_types = list(
+		/obj/item/chems,
+		/obj/structure/reagent_dispensers
+	)
+	// Types to be skipped for reasons other than abstraction/spawnability.
+	var/static/list/excepted_types = list()
+
+/datum/unit_test/chemistry_premade_bottles_shall_not_melt/start_test()
+
+	// Main test.
+	var/list/chem_refs = list()
+	var/turf/spawn_spot = get_safe_turf()
+	var/list/failures = list()
+	for(var/master_type in master_types)
+		for(var/chem_type in subtypesof(master_type))
+			if(chem_type in excepted_types)
+				continue
+			var/atom/chem = chem_type
+			if(TYPE_IS_ABSTRACT(chem))
+				continue
+			chem = new chem(spawn_spot)
+			if(QDELETED(chem))
+				failures += "- [type] qdeleted after Initialize()"
+				continue
+			chem_refs[chem.type] = weakref(chem)
+
+	// Let SSmaterials process chemical reactions and solvents.
+	sleep(SSmaterials.wait * 2)
+
+	// Followup status checking.
+	for(var/chem_type in chem_refs)
+		var/weakref/chem_ref = chem_refs[chem_type]
+		var/atom/chem_instance = istype(chem_ref) && chem_ref.resolve()
+		if(QDELETED(chem_instance) || !istype(chem_instance, chem_type) || chem_instance.loc != spawn_spot)
+			failures += "- [chem_type] qdeleted after reacting"
+		else
+			// Cleanup pt. 1
+			qdel(chem_instance)
+
+	// Cleanup pt. 2
+	chem_refs.Cut()
+	var/obj/effect/fluid/fluid = locate() in spawn_spot
+	if(fluid)
+		qdel(fluid)
+		failures += "- spawn turf had fluids post-test"
+
+	// Report status.
+	if(length(failures))
+		fail("At least one subtype was qdeleted:\n[jointext(failures, "\n")]")
+	else
+		pass("No subtypes melted.")
 	return 1

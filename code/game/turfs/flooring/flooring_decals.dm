@@ -8,6 +8,7 @@ var/global/list/floor_decals = list()
 	icon = 'icons/turf/flooring/decals.dmi'
 	layer = DECAL_LAYER
 	appearance_flags = RESET_COLOR
+	abstract_type = /obj/effect/floor_decal
 	var/supplied_dir
 	var/detail_overlay
 	var/detail_color
@@ -780,6 +781,9 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/corner/research/bordercee
 	icon_state = "bordercolorcee"
 
+/obj/effect/floor_decal/spline
+	abstract_type = /obj/effect/floor_decal/spline
+
 /obj/effect/floor_decal/spline/plain
 	name = "spline - plain"
 	icon_state = "spline_plain"
@@ -852,6 +856,22 @@ var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal/spline/fancy/wood/three_quarters
 	icon_state = "spline_fancy_full"
+
+/obj/effect/floor_decal/industrial
+	abstract_type = /obj/effect/floor_decal/industrial
+
+/obj/effect/floor_decal/industrial/danger
+	name = "hazard stripes"
+	icon_state = "danger"
+
+/obj/effect/floor_decal/industrial/danger/corner
+	icon_state = "dangercorner"
+
+/obj/effect/floor_decal/industrial/danger/full
+	icon_state = "dangerfull"
+
+/obj/effect/floor_decal/industrial/danger/cee
+	icon_state = "dangercee"
 
 /obj/effect/floor_decal/industrial/warning
 	name = "hazard stripes"
@@ -1076,6 +1096,9 @@ var/global/list/floor_decals = list()
 	name = "chapel"
 	icon_state = "chapel"
 
+/obj/effect/floor_decal/ss13
+	abstract_type = /obj/effect/floor_decal/ss13
+
 /obj/effect/floor_decal/ss13/l1
 	name = "L1"
 	icon_state = "L1"
@@ -1158,6 +1181,15 @@ var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal/sign/d
 	icon_state = "white_d"
+
+/obj/effect/floor_decal/sign/d/one
+	icon_state = "white_d1"
+
+/obj/effect/floor_decal/sign/d/two
+	icon_state = "white_d2"
+
+/obj/effect/floor_decal/sign/d/three
+	icon_state = "white_d3"
 
 /obj/effect/floor_decal/sign/ex
 	icon_state = "white_ex"
@@ -1399,3 +1431,71 @@ var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal/rust/steel_decals_rusted2
 	icon_state = "steel_decals_rusted2"
+
+/obj/effect/floor_decal/rust/color_rusted
+	icon_state = "color_rusted"
+
+/obj/effect/floor_decal/rust/color_rustedcorner
+	icon_state = "color_rustedcorner"
+
+/obj/effect/floor_decal/rust/color_rustedfull
+	icon_state = "color_rustedfull"
+
+/obj/effect/floor_decal/rust/color_rustedcee
+	icon_state = "color_rustedcee"
+
+/obj/effect/floor_decal/sign/small_a
+	icon_state = "small_a"
+
+/obj/effect/floor_decal/sign/small_b
+	icon_state = "small_b"
+
+/obj/effect/floor_decal/sign/small_c
+	icon_state = "small_c"
+
+/obj/effect/floor_decal/sign/small_d
+	icon_state = "small_d"
+
+/obj/effect/floor_decal/sign/small_e
+	icon_state = "small_e"
+
+/obj/effect/floor_decal/sign/small_f
+	icon_state = "small_f"
+
+/obj/effect/floor_decal/sign/small_g
+	icon_state = "small_g"
+
+/obj/effect/floor_decal/sign/small_h
+	icon_state = "small_h"
+
+/obj/effect/floor_decal/sign/small_1
+	icon_state = "small_1"
+
+/obj/effect/floor_decal/sign/small_2
+	icon_state = "small_2"
+
+/obj/effect/floor_decal/sign/small_3
+	icon_state = "small_3"
+
+/obj/effect/floor_decal/sign/small_4
+	icon_state = "small_4"
+
+/obj/effect/floor_decal/sign/small_5
+	icon_state = "small_5"
+
+/obj/effect/floor_decal/sign/small_6
+	icon_state = "small_6"
+
+/obj/effect/floor_decal/sign/small_7
+	icon_state = "small_7"
+
+/obj/effect/floor_decal/sign/small_8
+	icon_state = "small_8"
+
+/obj/effect/floor_decal/arrow
+	name = "floor arrow"
+	icon_state = "arrow_single"
+
+/obj/effect/floor_decal/arrows
+	name = "floor arrows"
+	icon_state = "arrows"

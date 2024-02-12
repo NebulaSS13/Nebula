@@ -4,7 +4,7 @@
 
 /datum/chunk/cultnet/acquire_visible_turfs(var/list/visible)
 	for(var/source in sources)
-		if(istype(source, /mob/living))
+		if(isliving(source))
 			var/mob/living/L = source
 			if(L.stat == DEAD)
 				continue

@@ -22,6 +22,7 @@
 #define LEVEL_EDGE_CON  3
 
 // Invisibility constants.
+#define INVISIBILITY_NONE         0
 #define INVISIBILITY_LIGHTING    20
 #define INVISIBILITY_LEVEL_ONE   35
 #define INVISIBILITY_LEVEL_TWO   45
@@ -300,3 +301,23 @@
 
 //Damage stuff
 #define ITEM_HEALTH_NO_DAMAGE -1
+
+/// Causes the atom to ignore clicks, hovers, etc.
+#define MOUSE_OPACITY_UNCLICKABLE 0
+/// Causes the atom to catch clicks, hovers, etc.
+#define MOUSE_OPACITY_NORMAL 1
+/// Causes the atom to catch clicks, hovers, etc, taking priority over NORMAL for a shared pointer target.
+#define MOUSE_OPACITY_PRIORITY 2
+
+// Set on many base types.
+#define DEFAULT_APPEARANCE_FLAGS (PIXEL_SCALE)
+
+///Formats exceptions into a readable string with all the details.
+#define EXCEPTION_TEXT(E) "'[E.name]' ('[E.type]'): '[E.file]':[E.line]:\n'[E.desc]'"
+
+#define LEVEL_BELOW_PLATING 1
+#define LEVEL_ABOVE_PLATING 2
+
+// Defines for fluorescence (/atom/var/fluorescent)
+#define FLUORESCENT_GLOWS   1	// Glows when under flourescent light
+#define FLUORESCENT_GLOWING 2	// Currently glowing due to flourescent light

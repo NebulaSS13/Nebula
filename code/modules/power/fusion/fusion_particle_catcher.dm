@@ -1,8 +1,8 @@
 /obj/effect/fusion_particle_catcher
 	icon = 'icons/effects/effects.dmi'
-	density = 1
-	anchored = 1
-	invisibility = 101
+	density = TRUE
+	anchored = TRUE
+	invisibility = INVISIBILITY_ABSTRACT
 	light_color = COLOR_BLUE
 	is_spawnable_type = FALSE // invalid without parent passed
 

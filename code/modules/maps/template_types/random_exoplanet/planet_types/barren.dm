@@ -20,6 +20,7 @@
 	exterior_atmos_temp = null //Generate me
 	level_generators    = list(
 		/datum/random_map/noise/exoplanet/barren,
+		/datum/random_map/noise/ore/rich,
 	)
 
 ////////////////////////////////////////////////////////////////////////////
@@ -86,9 +87,6 @@
 	)
 	possible_themes = list(
 		/datum/exoplanet_theme/mountains
-	)
-	map_generators = list(
-		/datum/random_map/noise/ore/rich
 	)
 
 /datum/map_template/planetoid/random/exoplanet/barren/get_spawn_weight()

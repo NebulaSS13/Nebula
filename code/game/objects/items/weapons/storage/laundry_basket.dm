@@ -18,7 +18,7 @@
 	allow_quick_empty = 1
 	allow_quick_gather = 1
 	collection_mode = 1
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 	var/linked
 

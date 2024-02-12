@@ -5,13 +5,7 @@
 	faction = "fishes"
 	maxHealth = 20
 	health = 20
-
 	meat_type = /obj/item/chems/food/fish/carp
-	meat_amount = 3
-	bone_amount = 5
-	skin_amount = 5
-	bone_material = /decl/material/solid/bone/fish
-	skin_material = /decl/material/solid/skin/fish
 
 /mob/living/simple_animal/hostile/retaliate/aquatic/carp/Initialize()
 	. = ..()

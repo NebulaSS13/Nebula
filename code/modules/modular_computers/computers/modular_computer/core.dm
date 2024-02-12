@@ -4,6 +4,12 @@
 	if(assembly)
 		LAZYREMOVE(., assembly.parts)
 
+/obj/item/modular_computer/get_contained_matter()
+	. = ..()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	for(var/obj/part in assembly?.parts)
+		. = MERGE_ASSOCS_WITH_NUM_VALUES(., part.get_contained_matter())
+
 /obj/item/modular_computer/Process()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly)

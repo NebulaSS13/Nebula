@@ -2,7 +2,7 @@
 	name = null
 	plane = HUD_PLANE
 	layer = UNDER_HUD_LAYER
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	screen_loc = "CENTER,CENTER"
 	icon = 'icons/screen/scanner.dmi'
 	icon_state = "blank"
@@ -91,7 +91,7 @@
 	force = 0
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 	matter = list(
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE,
@@ -277,7 +277,7 @@
 	// Draw glow filter over target.
 	if(ismovable(target))
 		var/atom/movable/thing = target
-		thing.add_filter("cataloguer_glow", 1, list("drop_shadow", color = glow_colour, size = 4, offset = 1, x = 0, y = 0))
+		thing.add_filter("cataloguer_glow", 1, list(type = "drop_shadow", color = glow_colour, size = 4, offset = 1, x = 0, y = 0))
 
 	scan_beam = user.Beam(target, "scanner", time = scan_delay, maxdistance = scan_range+1, beam_color = glow_colour)
 

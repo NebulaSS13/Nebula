@@ -114,7 +114,9 @@
 
 	if(lock)
 		if(istype(I, /obj/item/key))
-			if(!lock.toggle(I))
+			if(lock.toggle(I))
+				to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [I]."))
+			else
 				to_chat(user, SPAN_WARNING("\The [I] does not fit in the lock!"))
 			return TRUE
 		if(lock.pick_lock(I,user))
@@ -174,32 +176,32 @@
 	material = /decl/material/solid/gemstone/diamond
 
 /obj/structure/door/wood
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 
 /obj/structure/door/mahogany
-	material = /decl/material/solid/wood/mahogany
+	material = /decl/material/solid/organic/wood/mahogany
 
 /obj/structure/door/maple
-	material = /decl/material/solid/wood/maple
+	material = /decl/material/solid/organic/wood/maple
 
 /obj/structure/door/ebony
-	material = /decl/material/solid/wood/ebony
+	material = /decl/material/solid/organic/wood/ebony
 
 /obj/structure/door/walnut
-	material = /decl/material/solid/wood/walnut
+	material = /decl/material/solid/organic/wood/walnut
 
 /obj/structure/door/cult
 	material = /decl/material/solid/stone/cult
 
 /obj/structure/door/wood/saloon
-	material = /decl/material/solid/wood
+	material = /decl/material/solid/organic/wood
 	opacity = FALSE
 
 /obj/structure/door/glass
 	material = /decl/material/solid/glass
 
 /obj/structure/door/plastic
-	material = /decl/material/solid/plastic
+	material = /decl/material/solid/organic/plastic
 
 /obj/structure/door/exotic_matter
 	material = /decl/material/solid/exotic_matter

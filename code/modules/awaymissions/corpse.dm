@@ -37,7 +37,7 @@
 	..()
 	if(!species) species = global.using_map.default_species
 	var/species_choice = islist(species) ? pickweight(species) : species
-	new /mob/living/carbon/human/corpse(loc, species_choice, src)
+	new /mob/living/carbon/human/corpse(loc, species_choice, null, null, src)
 	return INITIALIZE_HINT_QDEL
 
 /obj/abstract/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)
@@ -57,7 +57,7 @@
 		if(species_choice in skin_colors_per_species)
 			M.change_skin_color(pick(skin_colors_per_species[species_choice]))
 		else
-			M.skin_tone = random_skin_tone(M.species)
+			M.randomize_skin_color()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
 		if(species_choice in hair_colors_per_species)

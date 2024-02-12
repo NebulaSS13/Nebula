@@ -24,7 +24,7 @@
 /mob/living/simple_animal/hostile/rogue_drone/ValidTarget(var/atom/A)
 	. = ..()
 	if(.)
-		if(istype(A,/mob/living/silicon/))
+		if(issilicon(A))
 			return FALSE
 		if(ishuman(A))
 			var/mob/living/carbon/human/H = A

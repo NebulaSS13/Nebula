@@ -222,7 +222,7 @@ var/global/list/laser_wavelengths
 
 	if(ismob(loc))
 		var/mob/M = loc
-		M.update_inv_hands()
+		M.update_inhand_overlays()
 
 /obj/item/gun/energy/capacitor/apply_gun_mob_overlays(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart, var/skip_offset = FALSE)
 	..()

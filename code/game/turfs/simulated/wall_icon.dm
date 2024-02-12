@@ -101,8 +101,8 @@
 			if(handle_structure_blending)
 				var/success = 0
 				for(var/O in T)
-					for(var/b_type in global.wall_blend_objects)
-						if(istype(O, b_type))
+					for(var/blend_type in global.wall_blend_objects)
+						if(istype(O, blend_type))
 							success = TRUE
 							break
 					for(var/nb_type in global.wall_noblend_objects)

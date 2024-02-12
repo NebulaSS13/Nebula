@@ -19,7 +19,7 @@
 
 /obj/item/star/throw_impact(atom/hit_atom)
 	..()
-	if(material.radioactivity>0 && istype(hit_atom,/mob/living))
+	if(material.radioactivity>0 && isliving(hit_atom))
 		var/mob/living/M = hit_atom
 		var/urgh = material.radioactivity
 		M.adjustToxLoss(rand(urgh/2,urgh))

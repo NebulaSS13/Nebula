@@ -23,6 +23,7 @@
 	exterior_atmos_temp = null
 	level_generators    = list(
 		/datum/random_map/noise/exoplanet/shrouded,
+		/datum/random_map/noise/ore/poor,
 	)
 
 ////////////////////////////////////////////////////////////////////////////
@@ -91,9 +92,6 @@
 		/datum/level_data/planetoid/exoplanet/shrouded,
 		/datum/level_data/planetoid/exoplanet/underground
 	)
-	map_generators = list(
-		/datum/random_map/noise/ore/poor
-	)
 
 /datum/map_template/planetoid/random/exoplanet/shrouded/get_spawn_weight()
 	return 50
@@ -115,7 +113,7 @@
 
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(var/value, var/turf/T)
 	..()
-	if(prob(2))
+	if(!T.density && prob(0.045)) // about 1 in 10 screens or so
 		new /obj/structure/leech_spawner/exoplanet(T)
 
 ////////////////////////////////////////////////////////////////////////////
