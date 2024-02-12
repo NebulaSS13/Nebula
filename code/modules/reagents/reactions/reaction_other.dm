@@ -13,6 +13,5 @@
 /decl/chemical_reaction/soap_key/on_reaction(var/datum/reagents/holder)
 	var/obj/item/soap/S = holder.get_reaction_loc(chemical_reaction_flags)
 	if(istype(S) && S.key_data)
-		var/obj/item/key/soap/key = new(get_turf(S), null, S.key_data)
-		key.uses = strength
+		new /obj/item/key/temporary(get_turf(S), /decl/material/liquid/cleaner, S.key_data, strength)
 	..()

@@ -32,7 +32,7 @@
 
 /decl/material/solid/organic/plastic/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/furniture/crate/plastic(src)
 		. += new/datum/stack_recipe/bag(src)
 		. += new/datum/stack_recipe/ivbag(src)
@@ -68,13 +68,7 @@
 /decl/material/solid/organic/plastic/holographic
 	name = "holographic plastic"
 	uid = "solid_holographic_plastic"
-	shard_type = SHARD_NONE
-	hidden_from_codex = TRUE
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-
-/decl/material/solid/organic/plastic/holographic/get_recipes(stack_type, reinf_mat)
-	return list()
+	holographic = TRUE
 
 /decl/material/solid/organic/cardboard
 	name = "cardboard"
@@ -107,7 +101,7 @@
 
 /decl/material/solid/organic/cardboard/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += create_recipe_list(/datum/stack_recipe/box)
 		. += new/datum/stack_recipe/cardborg_suit(src)
 		. += new/datum/stack_recipe/cardborg_helmet(src)
@@ -146,7 +140,7 @@
 
 /decl/material/solid/organic/paper/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/paper_sheets(src)
 
 /decl/material/solid/organic/cloth //todo
@@ -175,7 +169,7 @@
 
 /decl/material/solid/organic/cloth/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/cloak(src)
 		. += new/datum/stack_recipe/banner(src)
 
@@ -333,7 +327,7 @@
 
 /decl/material/solid/organic/skin/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/cloak(src)
 		. += new/datum/stack_recipe/banner(src)
 		. += new/datum/stack_recipe/shoes(src)
@@ -462,7 +456,7 @@
 
 /decl/material/solid/organic/bone/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type) && wall_support_value >= 10)
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type) && wall_support_value >= 10)
 		. += new/datum/stack_recipe/furniture/girder(src)
 		. += new/datum/stack_recipe/furniture/ladder(src)
 
@@ -517,7 +511,7 @@
 
 /decl/material/solid/organic/leather/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/cloak(src)
 		. += new/datum/stack_recipe/banner(src)
 		. += new/datum/stack_recipe/shoes(src)

@@ -43,7 +43,7 @@
 
 /decl/material/solid/organic/wood/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(reinforce_material || ispath(stack_type))
+	if(holographic || reinforce_material || ispath(stack_type))
 		return
 
 	if(wall_support_value >= 10)
@@ -78,35 +78,29 @@
 
 /decl/material/solid/organic/wood/mahogany/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/tile/mahogany(src)
 
 /decl/material/solid/organic/wood/maple/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/tile/maple(src)
 
 /decl/material/solid/organic/wood/ebony/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/tile/ebony(src)
 
 /decl/material/solid/organic/wood/walnut/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new/datum/stack_recipe/tile/walnut(src)
 
 /decl/material/solid/organic/wood/holographic
+	name = "holographic wood"
 	uid = "solid_holographic_wood"
 	color = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
-	shard_type = SHARD_NONE
-	value = 0
-	hidden_from_codex = TRUE
-	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
-	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
-
-/decl/material/solid/organic/wood/holographic/get_recipes(stack_type, reinf_mat)
-	return list()
+	holographic = TRUE
 
 /decl/material/solid/organic/wood/mahogany
 	name = "mahogany"

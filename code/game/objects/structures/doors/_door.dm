@@ -114,7 +114,9 @@
 
 	if(lock)
 		if(istype(I, /obj/item/key))
-			if(!lock.toggle(I))
+			if(lock.toggle(I))
+				to_chat(user, SPAN_NOTICE("You [lock.status ? "lock" : "unlock"] \the [src] with \the [I]."))
+			else
 				to_chat(user, SPAN_WARNING("\The [I] does not fit in the lock!"))
 			return TRUE
 		if(lock.pick_lock(I,user))

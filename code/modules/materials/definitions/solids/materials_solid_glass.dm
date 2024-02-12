@@ -24,6 +24,8 @@
 	conductive = 0
 	wall_support_value = MAT_VALUE_LIGHT
 	default_solid_form = /obj/item/stack/material/pane
+	dissolves_in = MAT_SOLVENT_IMMUNE
+	dissolves_into = null
 
 /decl/material/solid/glass/proc/is_reinforced()
 	return (integrity > 75) //todo
