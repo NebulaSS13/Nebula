@@ -51,3 +51,10 @@
 	containertype = /obj/structure/largecrate/animal
 	containername = "chicken crate"
 	access = access_hydroponics
+
+/decl/hierarchy/supply_pack/livecargo/duck
+	name = "Live - Duck"
+	contains = list(/mob/living/simple_animal/fowl/duck = 3)
+	containertype = /obj/structure/largecrate/animal
+	containername = "duck crate"
+	access = access_hydroponics

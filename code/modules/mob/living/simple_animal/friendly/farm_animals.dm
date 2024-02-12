@@ -193,13 +193,31 @@
 		return FALSE
 	amount_grown += rand(1,2)
 	if(amount_grown >= 100)
-		new /mob/living/simple_animal/chicken(src.loc)
+		new /mob/living/simple_animal/fowl/chicken(src.loc)
 		qdel(src)
+
+/mob/living/simple_animal/fowl
+	mob_default_max_health = 10
+	pass_flags = PASS_FLAG_TABLE
+	mob_size = MOB_SIZE_SMALL
+	meat_type = /obj/item/chems/food/meat/chicken
+	meat_amount = 2
+	skin_material = /decl/material/solid/organic/skin/feathers
+	speak_chance = 2
+	turns_per_move = 3
+	abstract_type = /mob/living/simple_animal/fowl
+	var/body_color
+
+/mob/living/simple_animal/fowl/Initialize()
+	if(!default_pixel_x)
+		default_pixel_x = rand(-6, 6)
+	if(!default_pixel_y)
+		default_pixel_y = rand(0, 10)
+	. = ..()
 
 var/global/const/MAX_CHICKENS = 50
 var/global/chicken_count = 0
-
-/mob/living/simple_animal/chicken
+/mob/living/simple_animal/fowl/chicken
 	name = "chicken"
 	desc = "Hopefully the eggs are good this season."
 	icon = 'icons/mob/simple_animal/chicken_white.dmi'
@@ -207,23 +225,17 @@ var/global/chicken_count = 0
 	speak_emote = list("clucks","croons")
 	emote_hear = list("clucks")
 	emote_see = list("pecks at the ground","flaps its wings viciously")
-	speak_chance = 2
-	turns_per_move = 3
-	mob_default_max_health = 10
-	pass_flags = PASS_FLAG_TABLE
-	mob_size = MOB_SIZE_SMALL
-
-	meat_type = /obj/item/chems/food/meat/chicken
-	meat_amount = 2
-	skin_material = /decl/material/solid/organic/skin/feathers
-
 	var/eggsleft = 0
-	var/body_color
 
-/mob/living/simple_animal/chicken/Initialize()
+/mob/living/simple_animal/fowl/chicken/Initialize()
 	. = ..()
 	if(!body_color)
-		body_color = pick( list("brown","black","white") )
+		body_color = pick("brown", "black", "white")
+		update_icon()
+	global.chicken_count += 1
+
+/mob/living/simple_animal/fowl/chicken/on_update_icon()
+	. = ..()
 	switch(body_color)
 		if("brown")
 			icon = 'icons/mob/simple_animal/chicken_brown.dmi'
@@ -231,15 +243,12 @@ var/global/chicken_count = 0
 			icon = 'icons/mob/simple_animal/chicken_black.dmi'
 		else
 			icon = 'icons/mob/simple_animal/chicken_white.dmi'
-	pixel_x = rand(-6, 6)
-	pixel_y = rand(0, 10)
-	chicken_count += 1
 
-/mob/living/simple_animal/chicken/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/fowl/chicken/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
-	chicken_count -= 1
+	global.chicken_count -= 1
 
-/mob/living/simple_animal/chicken/attackby(var/obj/item/O, var/mob/user)
+/mob/living/simple_animal/fowl/chicken/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/chems/food/grown)) //feedin' dem chickens
 		var/obj/item/chems/food/grown/G = O
 		if(G.seed && G.seed.kitchen_tag == "wheat")
@@ -254,7 +263,7 @@ var/global/chicken_count = 0
 	else
 		..()
 
-/mob/living/simple_animal/chicken/handle_living_non_stasis_processes()
+/mob/living/simple_animal/fowl/chicken/handle_living_non_stasis_processes()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -267,6 +276,31 @@ var/global/chicken_count = 0
 		if(chicken_count < MAX_CHICKENS && prob(10))
 			E.amount_grown = 1
 			START_PROCESSING(SSobj, E)
+
+/mob/living/simple_animal/fowl/duck
+	name = "duck"
+	desc = "It's a duck. Quack."
+	icon = 'icons/mob/simple_animal/duck_white.dmi'
+	speak = list("Wak!","Wak wak wak!","Wak wak.")
+	speak_emote = list("quacks")
+	emote_hear = list("quacks")
+	emote_see = list("preens itself", "waggles its tail")
+
+/mob/living/simple_animal/fowl/duck/Initialize()
+	. = ..()
+	if(!body_color)
+		body_color = pick("brown", "mallard", "white")
+		update_icon()
+
+/mob/living/simple_animal/fowl/duck/on_update_icon()
+	. = ..()
+	switch(body_color)
+		if("brown")
+			icon = 'icons/mob/simple_animal/duck_brown.dmi'
+		if("mallard")
+			icon = 'icons/mob/simple_animal/duck_mallard.dmi'
+		else
+			icon = 'icons/mob/simple_animal/duck_white.dmi'
 
 /obj/item/chems/food/egg
 	var/amount_grown = 0
