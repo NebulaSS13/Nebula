@@ -120,10 +120,8 @@
 			spawnable_choices[trash_type] = 95
 		for(var/trash_type in typesof(/obj/item/trash/cigbutt))
 			spawnable_choices[trash_type] = 95
-		spawnable_choices -= /obj/item/trash/plate
 		spawnable_choices -= /obj/item/trash/snack_bowl
 		spawnable_choices -= /obj/item/trash/syndi_cakes
-		spawnable_choices -= /obj/item/trash/tray
 		var/lunches = lunchables_lunches()
 		for(var/lunch in lunches)
 			spawnable_choices[lunches[lunch]] = 1

@@ -107,7 +107,7 @@
 	name = "cheese omelette"
 	desc = "Omelette with cheese!"
 	icon_state = "omelette"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#fff9a8"
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 1

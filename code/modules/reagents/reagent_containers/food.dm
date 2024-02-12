@@ -35,7 +35,8 @@
 	var/list/nutriment_desc = list("food" = 1)    // List of flavours and flavour strengths. The flavour strength text is determined by the ratio of flavour strengths in the snack.
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
 	var/filling_color = "#ffffff" //Used by sandwiches.
-	var/trash = null
+	var/trash
+	var/obj/item/plate/plate
 	var/list/attack_products //Items you can craft together. Like bomb making, but with food and less screwdrivers.
 	// Uses format list(ingredient = result_type). The ingredient can be a typepath or a kitchen_tag string (used for mobs or plants)
 
@@ -54,6 +55,8 @@
 /obj/item/chems/food/Initialize()
 	.=..()
 	amount_per_transfer_from_this = bitesize
+	if(ispath(plate))
+		plate = new plate(src)
 
 /obj/item/chems/food/attack_self(mob/user)
 	attack(user, user)
@@ -65,14 +68,16 @@
 	. = ..()
 	if(distance > 1)
 		return
+	if(plate)
+		to_chat(user, SPAN_NOTICE("\The [src] has been arranged on \a [plate]."))
 	if (bitecount==0)
 		return
 	else if (bitecount==1)
-		to_chat(user, "<span class='notice'>\The [src] was bitten by someone!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] was bitten by someone!"))
 	else if (bitecount<=3)
-		to_chat(user, "<span class='notice'>\The [src] was bitten [bitecount] time\s!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] was bitten [bitecount] time\s!"))
 	else
-		to_chat(user, "<span class='notice'>\The [src] was bitten multiple times!</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] was bitten multiple times!"))
 
 /obj/item/chems/food/attackby(obj/item/W, mob/living/user)
 	if(!istype(user))
@@ -80,6 +85,13 @@
 	if(istype(W,/obj/item/storage))
 		..()// -> item/attackby()
 		return
+
+	// Plating food.
+	if(istype(W, /obj/item/plate))
+		var/obj/item/plate/plate = W
+		plate.try_plate_food(src, user)
+		return TRUE
+
 	// Eating with forks
 	if(istype(W,/obj/item/kitchen/utensil))
 		var/obj/item/kitchen/utensil/U = W
@@ -178,6 +190,7 @@
 	return (slices_num && slice_path && slices_num > 0)
 
 /obj/item/chems/food/proc/on_dry(var/atom/newloc)
+	drop_plate(get_turf(newloc))
 	if(dried_type == type)
 		SetName("dried [name]")
 		color = "#a38463"
@@ -188,7 +201,19 @@
 	. = new dried_type(newloc || get_turf(src))
 	qdel(src)
 
+/obj/item/chems/food/proc/drop_plate(var/drop_loc)
+	if(istype(plate))
+		plate.dropInto(drop_loc || loc)
+		plate.make_dirty(src)
+	plate = null
+
+/obj/item/chems/food/physically_destroyed()
+	drop_plate()
+	return ..()
+
 /obj/item/chems/food/Destroy()
+	QDEL_NULL(plate)
+	trash = null
 	if(contents)
 		for(var/atom/movable/something in contents)
 			something.dropInto(loc)
@@ -207,9 +232,22 @@
 	update_icon()
 
 /obj/item/chems/food/on_update_icon()
+	underlays.Cut()
 	. = ..()
 	//Since other things that don't have filling override this, slap it into its own proc to avoid the overhead of scanning through the icon file
 	apply_filling_overlay() //#TODO: Maybe generalise food item icons.
+	// If we have a plate, add it to our icon.
+	if(plate)
+		var/image/I = new
+		I.appearance = plate
+		I.layer = FLOAT_LAYER
+		I.plane = FLOAT_PLANE
+		I.pixel_x = 0
+		I.pixel_y = 0
+		I.pixel_z = 0
+		I.pixel_w = 0
+		I.appearance_flags |= RESET_TRANSFORM|RESET_COLOR
+		underlays += list(I)
 
 /obj/item/chems/food/proc/apply_filling_overlay()
 	if(check_state_in_icon("[icon_state]_filling", icon))

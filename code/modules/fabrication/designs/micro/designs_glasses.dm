@@ -35,3 +35,14 @@
 
 /datum/fabricator_recipe/drinkingglass/metalcoffecup
 	path = /obj/item/chems/drinks/glass2/coffeecup/metal
+
+/datum/fabricator_recipe/dinnerware
+	category = "Dinnerware"
+	fabricator_types = list(FABRICATOR_CLASS_MICRO)
+	path = /obj/item/plate
+
+/datum/fabricator_recipe/dinnerware/platter
+	path = /obj/item/plate/platter
+
+/datum/fabricator_recipe/dinnerware/tray
+	path = /obj/item/plate/tray

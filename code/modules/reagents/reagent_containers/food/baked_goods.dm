@@ -16,7 +16,7 @@
 	name = "banana cream pie"
 	desc = "Just like back home, on clown planet! HONK!"
 	icon_state = "pie"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#fbffb8"
 	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("pie" = 3, "cream" = 2)
@@ -37,7 +37,7 @@
 	name = "berry clafoutis"
 	desc = "No black birds, this is a good sign."
 	icon_state = "berryclafoutis"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("sweetness" = 2, "pie" = 3)
 	nutriment_amt = 4
@@ -77,7 +77,7 @@
 	name = "pancakes"
 	desc = "Pancakes without blueberries, still delicious."
 	icon_state = "pancakes"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	center_of_mass = @'{"x":15,"y":11}'
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
@@ -87,7 +87,7 @@
 	name = "blueberry pancakes"
 	desc = "Pancakes with blueberries, delicious."
 	icon_state = "pancakes"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	center_of_mass = @'{"x":15,"y":11}'
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
@@ -97,7 +97,7 @@
 	name = "eggplant parmigiana"
 	desc = "The only good recipe for eggplant."
 	icon_state = "eggplantparm"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#4d2f5e"
 	center_of_mass = @'{"x":16,"y":11}'
 	nutriment_desc = list("cheese" = 3, "eggplant" = 3)
@@ -132,7 +132,7 @@
 	name = "meat-pie"
 	icon_state = "meatpie"
 	desc = "An old barber recipe, very delicious!"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#948051"
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 2
@@ -145,7 +145,7 @@
 	name = "tofu-pie"
 	icon_state = "meatpie"
 	desc = "A delicious tofu pie."
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#fffee0"
 	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("tofu" = 2, "pie" = 8)
@@ -188,7 +188,7 @@
 	name = "xeno-pie"
 	icon_state = "xenomeatpie"
 	desc = "A delicious meatpie. Probably heretical."
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#43de18"
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 2

@@ -126,7 +126,7 @@
 		/obj/item/trash/stick,
 		/obj/item/trash/liquidfood,
 		/obj/item/trash/pistachios,
-		/obj/item/trash/plate,
+		/obj/item/plate,
 		/obj/item/trash/popcorn,
 		/obj/item/trash/raisins,
 		/obj/item/trash/semki,
@@ -135,7 +135,6 @@
 		/obj/item/trash/syndi_cakes,
 		/obj/item/trash/tastybread,
 		/obj/item/chems/drinks/sillycup,
-		/obj/item/trash/tray,
 		/obj/item/trash/driedfish,
 		/obj/item/trash/waffles,
 		/obj/item/trash/beef,
@@ -159,6 +158,8 @@
 
 /obj/structure/loot_pile/maint/trash/get_uncommon_loot()
 	var/static/list/uncommon_loot = list(
+		/obj/item/plate,
+		/obj/item/plate/tray,
 		/obj/item/chems/syringe/steroid,
 		/obj/item/storage/pill_bottle/zoom,
 		/obj/item/storage/pill_bottle/happy,

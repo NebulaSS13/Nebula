@@ -6,7 +6,7 @@
 	name = "sandwich"
 	desc = "A grand creation of meat, cheese, bread, and several leaves of lettuce!"
 	icon_state = "sandwich"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#d9be29"
 	center_of_mass = @'{"x":16,"y":4}'
 	nutriment_desc = list("bread" = 3, "cheese" = 3)
@@ -22,7 +22,7 @@
 	name = "toasted sandwich"
 	desc = "Now if you only had a pepper bar."
 	icon_state = "toastedsandwich"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#d9be29"
 	center_of_mass = @'{"x":16,"y":4}'
 	nutriment_desc = list("toasted bread" = 3, "cheese" = 3)
@@ -39,7 +39,7 @@
 	name = "grilled cheese sandwich"
 	desc = "Goes great with Tomato soup!"
 	icon_state = "toastedsandwich"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#d9be29"
 	nutriment_desc = list("toasted bread" = 3, "cheese" = 3)
 	nutriment_amt = 3
@@ -70,7 +70,7 @@
 	name = "jellied toast"
 	desc = "A slice of bread covered with delicious jam."
 	icon_state = "jellytoast"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#b572ab"
 	center_of_mass = @'{"x":16,"y":8}'
 	nutriment_desc = list("toasted bread" = 2)
@@ -86,7 +86,7 @@
 	name = "jelly sandwich"
 	desc = "You wish you had some peanut butter to go with this..."
 	icon_state = "jellysandwich"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#9e3a78"
 	center_of_mass = @'{"x":16,"y":8}'
 	nutriment_desc = list("bread" = 2)

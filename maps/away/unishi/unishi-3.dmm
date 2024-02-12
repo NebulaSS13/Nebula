@@ -1382,7 +1382,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dT" = (
-/obj/item/trash/plate,
+/obj/item/plate,
 /obj/machinery/light/small{
 	dir = 8
 	},

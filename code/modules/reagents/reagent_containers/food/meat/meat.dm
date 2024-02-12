@@ -71,7 +71,7 @@
 	name = "meat steak"
 	desc = "A piece of hot spicy meat."
 	icon_state = "meatstake"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#7a3d11"
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 3
@@ -91,7 +91,7 @@
 	name = "loaded steak"
 	desc = "A steak slathered in sauce with sauteed onions and mushrooms."
 	icon_state = "meatstake"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#7a3d11"
 	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("onion" = 2, "mushroom" = 2)

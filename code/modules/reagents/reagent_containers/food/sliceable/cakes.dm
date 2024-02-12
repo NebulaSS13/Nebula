@@ -19,7 +19,7 @@
 	name = "carrot cake slice"
 	desc = "Carrotty slice of carrot cake, carrots are good for your eyes! It's true! Probably!"
 	icon_state = "carrotcake_slice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#ffd675"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -50,7 +50,7 @@
 	name = "brain cake slice"
 	desc = "Lemme tell you something about prions. THEY'RE DELICIOUS."
 	icon_state = "braincakeslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#e6aedb"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":12}'
@@ -79,7 +79,7 @@
 	name = "cheese cake slice"
 	desc = "Slice of pure cheestisfaction."
 	icon_state = "cheesecake_slice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#faf7af"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -104,7 +104,7 @@
 	name = "vanilla cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "plaincake_slice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#f7edd5"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -129,7 +129,7 @@
 	name = "orange cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "orangecake_slice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#fada8e"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -154,7 +154,7 @@
 	name = "lime cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "limecake_slice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#cbfa8e"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -179,7 +179,7 @@
 	name = "lemon cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "lemoncake_slice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#fafa8e"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -204,7 +204,7 @@
 	name = "chocolate cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "chocolatecake_slice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#805930"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -234,7 +234,7 @@
 	name = "birthday cake slice"
 	desc = "A slice of your birthday."
 	icon_state = "birthdaycakeslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#ffd6d6"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -259,7 +259,7 @@
 	name = "apple cake slice"
 	desc = "A slice of heavenly cake."
 	icon_state = "applecakeslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#ebf5b8"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":14}'
@@ -283,7 +283,7 @@
 	name = "pumpkin pie slice"
 	desc = "A slice of pumpkin pie, with whipped cream on top. Perfection."
 	icon_state = "pumpkinpieslice"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#f5b951"
 	bitesize = 2
 	center_of_mass = @'{"x":16,"y":12}'

@@ -14,7 +14,7 @@
 	name = "\improper Cuban Carp"
 	desc = "A sandwich that burns your tongue and then leaves it numb!"
 	icon_state = "cubancarp"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#e9adff"
 	center_of_mass = @'{"x":12,"y":5}'
 	nutriment_desc = list("toasted bread" = 3)

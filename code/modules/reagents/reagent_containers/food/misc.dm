@@ -81,7 +81,7 @@
 	name = "enchiladas"
 	desc = "Not to be confused with an echidna, though I don't know how you would."
 	icon_state = "enchiladas"
-	trash = /obj/item/trash/tray
+	plate = /obj/item/plate/tray
 	filling_color = "#a36a1f"
 	center_of_mass = @'{"x":16,"y":13}'
 	nutriment_desc = list("tortilla" = 3, "corn" = 3)
@@ -97,7 +97,7 @@
 	name = "monkey's delight"
 	desc = "Eeee Eee!"
 	icon_state = "monkeysdelight"
-	trash = /obj/item/trash/tray
+	plate = /obj/item/plate/tray
 	filling_color = "#5c3c11"
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 6
@@ -153,7 +153,7 @@
 	name = "golden apple streusel tart"
 	desc = "A tasty dessert that won't make it through a metal detector."
 	icon_state = "gappletart"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#ffff00"
 	center_of_mass = @'{"x":16,"y":18}'
 	nutriment_desc = list("apple" = 8)

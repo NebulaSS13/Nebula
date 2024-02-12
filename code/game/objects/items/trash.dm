@@ -59,10 +59,6 @@
 	name = "waffles"
 	icon_state = "waffles"
 
-/obj/item/trash/plate
-	name = "plate"
-	icon_state = "plate"
-
 /obj/item/trash/snack_bowl
 	name = "snack bowl"
 	icon_state	= "snack_bowl"
@@ -98,10 +94,6 @@
 /obj/item/trash/driedfish
 	name = "vobla pack"
 	icon_state = "driedfish"
-
-/obj/item/trash/tray
-	name = "tray"
-	icon_state = "tray"
 
 /obj/item/trash/candle
 	name = "candle"

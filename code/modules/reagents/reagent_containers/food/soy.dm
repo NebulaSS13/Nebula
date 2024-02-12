@@ -16,7 +16,7 @@
 	name = "soy dope"
 	desc = "Dope from a soy."
 	icon_state = "soydope"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	filling_color = "#c4bf76"
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("slime" = 2, "soy" = 2)
@@ -48,7 +48,7 @@
 	name = "stewed soy meat"
 	desc = "Even non-vegetarians will LOVE this!"
 	icon_state = "stewedsoymeat"
-	trash = /obj/item/trash/plate
+	plate = /obj/item/plate
 	center_of_mass = @'{"x":16,"y":10}'
 	nutriment_desc = list("soy" = 4, "tomato" = 4)
 	nutriment_amt = 8
