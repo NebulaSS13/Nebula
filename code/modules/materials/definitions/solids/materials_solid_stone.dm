@@ -20,7 +20,7 @@
 
 /decl/material/solid/stone/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		if(wall_support_value >= 10)
 			. += new/datum/stack_recipe/furniture/girder(src)
 		. += new/datum/stack_recipe/furniture/planting_bed(src)
@@ -56,6 +56,8 @@
 	uid = "solid_ceramic"
 	lore_text = "A hard substance produced by firing clay in a kiln."
 	color = COLOR_OFF_WHITE
+	dissolves_in = MAT_SOLVENT_IMMUNE
+	dissolves_into = null
 
 /decl/material/solid/stone/marble
 	name = "marble"

@@ -1,4 +1,6 @@
 /decl/material/proc/get_recipes(stack_type, reinf_mat)
+	if(holographic)
+		return list()
 	var/key = "[reinf_mat || "base"]-[stack_type || "general"]"
 	if(!LAZYACCESS(recipes, key))
 		LAZYSET(recipes, key, generate_recipes(stack_type, reinf_mat))
@@ -12,10 +14,13 @@
 
 /decl/material/proc/generate_recipes(stack_type, reinforce_material)
 
+	if(holographic || phase_at_temperature() != MAT_PHASE_SOLID)
+		return list()
+
 	// By default we don't let anything be crafted with ore, as it's too raw.
 	// We make an exception for clay as it is being moulded by hand.
 	. = list()
-	if(ispath(stack_type, /obj/item/stack/material/ore) || phase_at_temperature() != MAT_PHASE_SOLID)
+	if(ispath(stack_type, /obj/item/stack/material/ore))
 		return
 
 	// Struts have their own recipe set, so we return early for them.

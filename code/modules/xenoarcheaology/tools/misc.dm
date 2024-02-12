@@ -68,7 +68,7 @@
 //Structures
 /decl/material/solid/metal/chromium/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += /datum/stack_recipe/structure/anomaly_container
 
 /datum/stack_recipe/structure/anomaly_container

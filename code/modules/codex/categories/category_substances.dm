@@ -55,7 +55,7 @@
 				material_info += "<li>It is a moderately strong solvent, capable of removing ink.</li>"
 			else if(mat.solvent_power <= MAT_SOLVENT_STRONG)
 				material_info += "<li>It is a strong solvent and will burn exposed skin on contact.</li>"
-		if(LAZYLEN(mat.dissolves_into))
+		if(mat.dissolves_in != MAT_SOLVENT_IMMUNE && LAZYLEN(mat.dissolves_into))
 			var/chems = list()
 			for(var/chemical in mat.dissolves_into)
 				var/decl/material/R = chemical

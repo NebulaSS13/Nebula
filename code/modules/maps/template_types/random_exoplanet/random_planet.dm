@@ -154,6 +154,10 @@
 	if(!gen_data)
 		gen_data = create_planetoid_instance()
 
+	// Update our blacklist for habitability
+	if(gen_data.habitability_class >= HABITABILITY_BAD)
+		ruin_tags_blacklist |= RUIN_HABITABLE
+
 	//Generate some of the background stuff for our new planet
 	before_planet_gen(gen_data)
 

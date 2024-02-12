@@ -247,7 +247,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/chilling_message = "crackles and freezes!"
 	var/chilling_sound = 'sound/effects/bubbles.ogg'
 	var/list/chilling_products
-	var/bypass_cooling_products_for_root_type
+	var/bypass_chilling_products_for_root_type
 
 	var/heating_point
 	var/heating_message = "begins to boil!"
@@ -278,6 +278,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/sound_manipulate          //Default sound something like a material stack made of this material does when picked up
 	var/sound_dropped             //Default sound something like a material stack made of this material does when hitting the ground or placed down
+
+	var/holographic // Set to true if this material is fake/visual only.
 
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
@@ -320,6 +322,32 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	solid_name     ||= use_name
 	gas_name       ||= use_name
 	adjective_name ||= use_name
+
+	// Null/clear a bunch of physical vars as this material is fake.
+	if(holographic)
+		shard_type             = SHARD_NONE
+		conductive             = 0
+		hidden_from_codex      = TRUE
+		value                  = 0
+		exoplanet_rarity_plant = MAT_RARITY_NOWHERE
+		exoplanet_rarity_gas   = MAT_RARITY_NOWHERE
+		dissolves_into         = null
+		dissolves_in           = MAT_SOLVENT_IMMUNE
+		solvent_power          = MAT_SOLVENT_NONE
+		heating_products       = null
+		chilling_products      = null
+		heating_point          = null
+		chilling_point         = null
+		solvent_melt_dose      = 0
+		solvent_max_damage     = 0
+		slipperiness           = 0
+		ignition_point         = null
+		melting_point          = null
+		boiling_point          = null
+		accelerant_value       = FUEL_VALUE_NONE
+		burn_product           = null
+		vapor_products         = null
+
 	if(!shard_icon)
 		shard_icon = shard_type
 	if(!burn_armor)
@@ -331,12 +359,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	global.materials_by_gas_symbol[gas_symbol] = type
 	generate_armor_values()
 
-	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
-	for(var/ctype in cocktails)
-		var/decl/cocktail/cocktail = cocktails[ctype]
-		if(type in cocktail.ratios)
-			cocktail_ingredient = TRUE
-			break
+	if(!holographic)
+		var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
+		for(var/ctype in cocktails)
+			var/decl/cocktail/cocktail = cocktails[ctype]
+			if(type in cocktail.ratios)
+				cocktail_ingredient = TRUE
+				break
 
 #define FALSEWALL_STATE "fwall_open"
 /decl/material/validate()
@@ -366,6 +395,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				. += "[field] adds up to [total] (should be 1)"
 	if(icon_base && !check_state_in_icon(FALSEWALL_STATE, icon_base))
 		. += "[type] - '[icon_base]' - missing false wall opening animation '[FALSEWALL_STATE]'"
+
+	if(dissolves_in == MAT_SOLVENT_IMMUNE && LAZYLEN(dissolves_into))
+		. += "material is immune to solvents, but has dissolves_into products."
 
 	for(var/i = 0 to 7)
 		if(icon_base)

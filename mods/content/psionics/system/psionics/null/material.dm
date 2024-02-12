@@ -26,7 +26,7 @@
 
 /decl/material/nullglass/generate_recipes(stack_type, reinforce_material)
 	. = ..()
-	if(!reinforce_material && islist(.) && !ispath(stack_type))
+	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
 		. += new /datum/stack_recipe/tile/nullglass(src)
 
 /obj/item/shard/nullglass
