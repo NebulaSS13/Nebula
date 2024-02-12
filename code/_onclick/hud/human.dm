@@ -78,7 +78,7 @@
 		hud_elements |= mymob.hydration_icon
 
 	if(hud_data.has_up_hint)
-		mymob.up_hint = new(null, mymob, ui_style, ui_style, ui_color, ui_alpha, UI_ICON_UP_HINT)
+		mymob.up_hint = new(null, mymob, ui_style, ui_color, ui_alpha, UI_ICON_UP_HINT)
 		hud_elements |= mymob.up_hint
 
 	mymob.pain = new(null, mymob)

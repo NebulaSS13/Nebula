@@ -1,6 +1,7 @@
 /obj/screen/pai
 	icon = 'icons/mob/screen/pai.dmi'
 	abstract_type = /obj/screen/pai
+	requires_ui_style = FALSE
 
 /obj/screen/pai/shell
 	name = "Toggle Chassis"

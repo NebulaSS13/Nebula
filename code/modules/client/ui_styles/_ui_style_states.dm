@@ -58,7 +58,11 @@ var/global/list/_ui_expected_states
 			"health5",
 			"health6",
 			"health7",
-			"health_numb"
+			"health_numb",
+			"softcrit",
+			"hardcrit",
+			"fullhealth",
+			"burning"
 		),
 		UI_ICON_HYDRATION = list(
 			"hydration0",
@@ -72,7 +76,8 @@ var/global/list/_ui_expected_states
 			"intent_help",
 			"intent_disarm",
 			"intent_grab",
-			"intent_harm"
+			"intent_harm",
+			"intent_none"
 		),
 		UI_ICON_INTERACTION = list(
 			"act_resist",
@@ -174,3 +179,5 @@ var/global/list/_ui_expected_states
 		var/slot_string = initial(slot.slot_state)
 		if(slot_string)
 			global._ui_expected_states[UI_ICON_INVENTORY] |= slot_string
+
+	return global._ui_expected_states

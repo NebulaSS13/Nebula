@@ -10,3 +10,4 @@
 	else
 		user.client.screen += user.hud_used.other
 		user.hud_used.show_inventory()
+	return TRUE

@@ -2,6 +2,7 @@
 	icon = 'icons/misc/mark.dmi'
 	layer = HUD_ITEM_LAYER
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	var/active = TRUE
 	var/datum/station_holomap/holomap
 
@@ -10,6 +11,7 @@
 	layer = HUD_ITEM_LAYER
 	maptext_width = 96
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 
 /obj/screen/holomap_text/Initialize()
 	. = ..()
@@ -44,6 +46,7 @@
 	pixel_x = HOLOMAP_LEGEND_X
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	var/saved_color
 	var/datum/station_holomap/holomap = null
 	var/has_areas = FALSE

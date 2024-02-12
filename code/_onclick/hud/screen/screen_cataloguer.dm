@@ -8,6 +8,7 @@
 	icon_state = "blank"
 	alpha = 180
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	var/scan_range
 	var/image/holder_image
 

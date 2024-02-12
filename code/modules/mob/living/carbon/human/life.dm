@@ -505,7 +505,7 @@
 
 
 				// Apply a fire overlay if we're burning.
-				var/health_icon = get_ui_icon(client?.prefs?.UI_style_uid, UI_ICON_HEALTH)
+				var/health_icon = get_ui_icon(client?.prefs?.UI_style, UI_ICON_HEALTH)
 				if(on_fire)
 					health_images += image(health_icon, "burning")
 

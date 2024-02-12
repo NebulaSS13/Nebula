@@ -5,6 +5,7 @@
 	plane = FULLSCREEN_PLANE
 	layer = FULLSCREEN_LAYER
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	requires_ui_style = FALSE
 	var/severity = 0
 	var/allstate = 0 //shows if it should show up for dead people too
 

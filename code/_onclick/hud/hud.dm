@@ -132,7 +132,7 @@
 
 /datum/hud/proc/get_ui_style_data()
 	RETURN_TYPE(/decl/ui_style)
-	. = GET_DECL(mymob?.client?.prefs?.UI_style_uid) || GET_DECL(default_ui_style)
+	. = GET_DECL(mymob?.client?.prefs?.UI_style) || GET_DECL(default_ui_style)
 	if(!.)
 		var/list/available_styles = get_ui_styles()
 		if(length(available_styles))

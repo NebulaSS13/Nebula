@@ -46,14 +46,13 @@
 		var/check_icon = icons[ui_key]
 		var/list/missing_states  = list()
 		var/list/checking_states = states_to_check[ui_key]
-		checking_states = checking_states.Copy()
+		var/list/remaining_states = icon_states(check_icon)
 		for(var/check_state in checking_states)
-			if(check_state_in_icon(check_state, check_icon))
-				checking_states -= check_state
-			else
+			remaining_states -= check_state
+			if(!check_state_in_icon(check_state, check_icon))
 				missing_states |= check_state
-		if(length(checking_states))
-			. += "icon [check_icon] for key [ui_key] had extraneous states: '[jointext(checking_states, "', '")]'"
+		if(length(remaining_states))
+			. += "icon [check_icon] for key [ui_key] has extraneous states: '[jointext(remaining_states, "', '")]'"
 		if(length(missing_states))
 			. += "icon [check_icon] for key [ui_key] is missing states: '[jointext(missing_states, "', '")]'"
 

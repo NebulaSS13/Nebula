@@ -3,6 +3,7 @@
 	layer = HUD_ABOVE_ITEM_LAYER
 	plane = HUD_PLANE
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	var/datum/radial_menu/parent
 
 /obj/screen/radial/Destroy()

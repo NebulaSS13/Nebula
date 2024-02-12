@@ -8,9 +8,7 @@ var/global/obj/screen/robot_inventory
 	restricted = TRUE
 	override_icons = list(
 		UI_ICON_HEALTH      = 'icons/mob/screen/styles/robot/health.dmi',
-		UI_ICON_INTENT      = 'icons/mob/screen/styles/robot/intents.dmi',
 		UI_ICON_STATUS_FIRE = 'icons/mob/screen/styles/robot/status_fire.dmi',
-		UI_ICON_STATUS      = 'icons/mob/screen/styles/robot/status.dmi',
 		UI_ICON_UP_HINT     = 'icons/mob/screen/styles/robot/uphint.dmi',
 		UI_ICON_ZONE_SELECT = 'icons/mob/screen/styles/robot/zone_selector.dmi'
 	)

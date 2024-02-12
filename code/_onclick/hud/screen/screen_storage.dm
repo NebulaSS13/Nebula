@@ -35,6 +35,7 @@
 
 /obj/screen/storage/close
 	name       = "close"
+	icon       = 'icons/effects/markers.dmi'
 	icon_state = "x"
 	layer      = HUD_BASE_LAYER
 

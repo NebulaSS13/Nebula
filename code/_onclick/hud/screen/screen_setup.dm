@@ -4,6 +4,7 @@
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 	requires_owner = FALSE
+	requires_ui_style = FALSE
 	var/datum/preferences/pref
 
 /obj/screen/setup_preview/Destroy()
