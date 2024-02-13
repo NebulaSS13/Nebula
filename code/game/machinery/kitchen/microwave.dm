@@ -255,7 +255,7 @@
 	var/result = recipe.result
 	var/list/cooked_items = list()
 	while(recipe)
-		cooked_items += recipe.make_food(src)
+		cooked_items += recipe.produce_result(src)
 		recipe = select_recipe()
 		if (!recipe || (recipe.result != result))
 			break
