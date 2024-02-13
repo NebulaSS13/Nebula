@@ -20,8 +20,19 @@
 	/// A data list passed to the result if set to a material type.
 	var/result_data
 
+	/// A minimum cooking temperature for this recipe to be considered.
 	var/minimum_temperature = 0
+	/// A maximum temperature for this recipe to be considered.
 	var/maximum_temperature = INFINITY
+
+	// Enum for indicating what kind of heat this recipe requires to cook.
+	// COOKING_HEAT_ANY, COOKING_HEAT_DIRECT, COOKING_HEAT_INDIRECT
+	var/cooking_heat_type = COOKING_HEAT_ANY 
+
+	/// A reagent that must be present in the cooking contianer, but will not be consumed.
+	var/cooking_medium_type
+	/// A minimum about of the above reagent required.
+	var/cooking_medium_amount
 
 	var/const/REAGENT_REPLACE = 0 //Reagents in the ingredients are discarded (only the reagents present in the result at compiletime are used)
 	var/const/REAGENT_MAX     = 1 //The result will contain the maximum of each reagent present between the two pools. Compiletime result, and sum of ingredients
@@ -249,13 +260,12 @@
 	if(length(.) == 1)
 		var/atom/movable/result_obj = .[1]
 		holder = result_obj.reagents
-	else if(length(.) > 1)
+	else
 		temporary_holder = new /datum/reagents(INFINITY, global.temp_reagents_holder)
 		holder = temporary_holder
-		for(var/atom/movable/result_obj in .)
-			result_obj.reagents.trans_to_holder(holder, result_obj.reagents.total_volume)
-	else
-		holder = container.reagents
+		if(length(.) > 1)
+			for(var/atom/movable/result_obj in .)
+				result_obj.reagents.trans_to_holder(holder, result_obj.reagents.total_volume)
 
 	switch(reagent_mix)
 

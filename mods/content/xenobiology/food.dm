@@ -1,3 +1,6 @@
+/obj/item/chems/food/bun/Initialize()
+	LAZYSET(attack_products, /obj/item/slime_extract, /obj/item/chems/food/jellyburger)
+
 /decl/recipe/slimetoast
 	display_name = "Slime Toast"
 	reagents = list(/decl/material/liquid/slimejelly = 5)
@@ -13,14 +16,6 @@
 		/obj/item/chems/food/dough
 	)
 	result = /obj/item/chems/food/donut/jelly/slime
-
-/decl/recipe/slimeburger
-	display_name = "Slime Burger"
-	reagents = list(/decl/material/liquid/slimejelly = 5)
-	items = list(
-		/obj/item/chems/food/bun
-	)
-	result = /obj/item/chems/food/jellyburger/slime
 
 /decl/recipe/slimesandwich
 	display_name = "Slime Sandwich"

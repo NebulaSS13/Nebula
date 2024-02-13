@@ -1,0 +1,3 @@
+#define COOKING_HEAT_ANY      0
+#define COOKING_HEAT_DIRECT   1
+#define COOKING_HEAT_INDIRECT 2

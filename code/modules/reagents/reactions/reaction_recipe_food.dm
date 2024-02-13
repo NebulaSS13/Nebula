@@ -9,7 +9,10 @@
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))
 	if(obj_result && isturf(location))
 		for(var/i = 1, i <= created_volume, i++)
-			new obj_result(location)
+			create_food(location)
+
+/decl/chemical_reaction/recipe/food/proc/create_food(location)
+	return new obj_result(location)
 
 /decl/chemical_reaction/recipe/food/cheesewheel
 	name = "Enzyme Cheesewheel"
@@ -79,3 +82,68 @@
 	mix_message = "The solution thickens and hardens into a glossy brown substance."
 	obj_result = /obj/item/chems/food/chocolatebar
 	minimum_temperature = 70 CELSIUS
+
+/decl/chemical_reaction/recipe/food/stuffing
+	name = "Stuffing"
+	required_reagents = list(
+		/decl/material/liquid/water = 10,
+		/decl/material/solid/sodiumchloride = 1,
+		/decl/material/solid/blackpepper = 1
+		/decl/material/liquid/nutriment/bread = 5
+	)
+	mix_message = "The breadcrumbs and water clump together to form a thick stuffing."
+	obj_result = /obj/item/chems/food/stuffing
+
+/decl/chemical_reaction/recipe/food/mint
+	name = "Mint"
+	required_reagents = list(
+		/decl/material/liquid/nutriment/sugar = 5, 
+		/decl/material/liquid/frostoil = 5
+	)
+	mix_message = "The solution thickens and hardens into a glossy brown substance."
+	obj_result = /obj/item/chems/food/mint
+
+/decl/chemical_reaction/recipe/food/pudding
+	abstract_type = /decl/chemical_reaction/recipe/food/pudding
+	minimum_temperature = T0C + 80
+
+/decl/chemical_reaction/recipe/food/pudding/chazuke
+	name = "Chazuke"
+	required_reagents = list(
+		/decl/material/liquid/nutriment/rice  = 5, 
+		/decl/material/liquid/drink/tea/green = 1
+	)
+	mix_message = "The tea mingles with and cooks the rice."
+	obj_result = /obj/item/chems/food/chazuke
+
+/decl/chemical_reaction/recipe/food/pudding/ricepudding
+	name = "Rice Pudding"
+	required_reagents = list(
+		/decl/material/liquid/drink/milk = 5, 
+		/decl/material/liquid/nutriment/rice = 10
+	)
+	obj_result = /obj/item/chems/food/ricepudding
+
+/decl/chemical_reaction/recipe/food/pudding/spacylibertyduff
+	name = "Space Liberty Duff"
+	required_reagents = list(
+		/decl/material/liquid/water = 10, 
+		/decl/material/liquid/ethanol/vodka = 5, 
+		/decl/material/liquid/psychotropics = 5
+	)
+	obj_result = /obj/item/chems/food/spacylibertyduff
+
+/decl/chemical_reaction/recipe/food/pudding/amanitajelly
+	name = "Amanita Jelly"
+	required_reagents = list(
+		/decl/material/liquid/water = 10, 
+		/decl/material/liquid/ethanol/vodka = 5, 
+		/decl/material/liquid/amatoxin = 5
+	)
+	obj_result = /obj/item/chems/food/amanitajelly
+
+/decl/chemical_reaction/recipe/food/pudding/amanitajelly/create_food(location)
+	var/obj/item/chems/food/amanitajelly/being_cooked = ..()
+	if(being_cooked?.reagents)
+		being_cooked.reagents.clear_reagent(/decl/material/liquid/amatoxin)
+	return being_cooked
