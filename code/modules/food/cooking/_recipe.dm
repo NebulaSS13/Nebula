@@ -7,6 +7,8 @@
 
 /decl/recipe
 
+	abstract_type = /decl/recipe
+
 	var/display_name              // Descriptive name of the recipe, should be unique to avoid codex pages being unsearchable. If not set, codex uses initial name of product.
 	var/list/reagents             // example: = list(/decl/material/liquid/drink/juice/berry = 5) // do not list same reagent twice
 	var/list/items                // example: = list(/obj/item/crowbar, /obj/item/welder, /obj/item/screwdriver = 2) // place /foo/bar before /foo
@@ -14,7 +16,7 @@
 	var/time = 100                // Cooking time in deciseconds.
 
 	/// How many items to create, or how many reagent units to add.
-	var/result_quantity = 1       
+	var/result_quantity = 1
 	/// An atom type to create, or a /decl/material type if you want to place a reagent into the container.
 	var/result
 	/// A data list passed to the result if set to a material type.
@@ -27,7 +29,7 @@
 
 	// Enum for indicating what kind of heat this recipe requires to cook.
 	// COOKING_HEAT_ANY, COOKING_HEAT_DIRECT, COOKING_HEAT_INDIRECT
-	var/cooking_heat_type = COOKING_HEAT_ANY 
+	var/cooking_heat_type = COOKING_HEAT_ANY
 
 	/// A reagent that must be present in the cooking contianer, but will not be consumed.
 	var/cooking_medium_type
@@ -147,7 +149,7 @@
 				O.reagents.trans_to_obj(produced, O.reagents.total_volume)
 				qdel(O)
 		return produced
-	
+
 	if(ispath(result, /decl/material))
 		container.reagents.add_reagent(result, result_quantity, get_result_data(container, used_ingredients))
 		return null
@@ -246,7 +248,7 @@
 
 	/// Set the appropriate flag on the food for stressor updates.
 	for(var/obj/item/chems/food/food in .)
-		food.cooked_food = TRUE
+		food.cooked_food = FOOD_COOKED
 
 	// We only care about the outputs, so we can go home now.
 	if(reagent_mix == REAGENT_REPLACE)

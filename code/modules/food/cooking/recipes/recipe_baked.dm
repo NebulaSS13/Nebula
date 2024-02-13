@@ -40,16 +40,6 @@
 	items = list(/obj/item/chems/food/sliceable/flatdough)
 	result = /obj/item/chems/food/amanita_pie
 
-/decl/recipe/baked/plump_pie
-	fruit = list("plumphelmet" = 1)
-	items = list(/obj/item/chems/food/sliceable/flatdough)
-	result = /obj/item/chems/food/plump_pie
-
-/decl/recipe/baked/applepie
-	fruit = list("apple" = 1)
-	items = list(/obj/item/chems/food/sliceable/flatdough)
-	result = /obj/item/chems/food/applepie
-
 /decl/recipe/baked/pumpkinpie
 	fruit = list("pumpkin" = 1)
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
@@ -70,13 +60,6 @@
 		/obj/item/chems/food/sliceable/flatdough,
 	)
 	result = /obj/item/chems/food/cherrypie
-
-/decl/recipe/baked/berryclafoutis
-	fruit = list("berries" = 1)
-	items = list(
-		/obj/item/chems/food/sliceable/flatdough,
-	)
-	result = /obj/item/chems/food/berryclafoutis
 
 /decl/recipe/baked/chaosdonut
 	reagents = list(/decl/material/liquid/frostoil = 5, /decl/material/liquid/capsaicin = 5, /decl/material/liquid/nutriment/sugar = 5)
@@ -148,18 +131,6 @@
 		/obj/item/chems/food/cheesewedge = 3,
 	)
 	result = /obj/item/chems/food/sliceable/tofubread
-
-/decl/recipe/baked/loadedbakedpotato
-	fruit = list("potato" = 1)
-	items = list(/obj/item/chems/food/cheesewedge)
-	result = /obj/item/chems/food/loadedbakedpotato
-
-/decl/recipe/baked/cheesyfries
-	items = list(
-		/obj/item/chems/food/fries,
-		/obj/item/chems/food/cheesewedge,
-	)
-	result = /obj/item/chems/food/cheesyfries
 
 /decl/recipe/baked/cookie
 	display_name = "plain cookie"
@@ -339,3 +310,29 @@
 /decl/recipe/baked/cake/brain
 	items = list(/obj/item/organ/internal/brain)
 	result = /obj/item/chems/food/sliceable/braincake
+
+// Stub recipes for cooking pies.
+/decl/recipe/baked/meatpie
+	items  = list(/obj/item/chems/food/meatpie/raw)
+	result = /obj/item/chems/food/meatpie
+/decl/recipe/baked/tofupie
+	items  = list(/obj/item/chems/food/tofupie/raw)
+	result = /obj/item/chems/food/tofupie
+/decl/recipe/baked/xemeatpie
+	items  = list(/obj/item/chems/food/xemeatpie/raw)
+	result = /obj/item/chems/food/xemeatpie
+/decl/recipe/baked/applepie
+	items  = list(/obj/item/chems/food/applepie/raw)
+	result = /obj/item/chems/food/applepie
+/decl/recipe/baked/berryclafoutis
+	items  = list(/obj/item/chems/food/berryclafoutis/raw)
+	result = /obj/item/chems/food/berryclafoutis
+/decl/recipe/baked/plump_pie
+	items  = list(/obj/item/chems/food/plump_pie/raw)
+	result = /obj/item/chems/food/plump_pie
+/decl/recipe/baked/loadedbakedpotato
+	items  = list(/obj/item/chems/food/loadedbakedpotato/raw)
+	result = /obj/item/chems/food/loadedbakedpotato
+/decl/recipe/baked/cheesyfries
+	items  = list(/obj/item/chems/food/cheesyfries/raw)
+	result = /obj/item/chems/food/cheesyfries

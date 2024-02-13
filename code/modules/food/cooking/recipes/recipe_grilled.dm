@@ -46,13 +46,13 @@
 
 /decl/recipe/grilled/meatball
 	items = list(
-		/obj/item/chems/food/rawmeatball
+		/obj/item/chems/food/meatball/raw
 	)
 	result = /obj/item/chems/food/meatball
 
 /decl/recipe/grilled/cutlet
 	items = list(
-		/obj/item/chems/food/rawcutlet
+		/obj/item/chems/food/cutlet/raw
 	)
 	result = /obj/item/chems/food/cutlet
 
