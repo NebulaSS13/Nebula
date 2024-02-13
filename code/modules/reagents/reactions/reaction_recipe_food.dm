@@ -39,7 +39,7 @@
 	)
 	result_amount = 3
 	mix_message = "The flour thickens the processed meat until it clumps."
-	obj_result = /obj/item/chems/food/rawmeatball
+	obj_result = /obj/item/chems/food/meatball/raw
 
 /decl/chemical_reaction/recipe/food/dough
 	name = "Plain dough"
@@ -88,7 +88,7 @@
 	required_reagents = list(
 		/decl/material/liquid/water = 10,
 		/decl/material/solid/sodiumchloride = 1,
-		/decl/material/solid/blackpepper = 1
+		/decl/material/solid/blackpepper = 1,
 		/decl/material/liquid/nutriment/bread = 5
 	)
 	mix_message = "The breadcrumbs and water clump together to form a thick stuffing."

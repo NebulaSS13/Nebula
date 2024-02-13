@@ -12,10 +12,10 @@
 		. = ..()
 
 /obj/item/get_value_multiplier()
-	. = length(matter) ? ..() : (material?.value || 1)
+	. = length(matter) ? ..() : ((istype(material) && material.value) || 1)
 
 /obj/structure/get_value_multiplier()
-	. = length(matter) ? ..() : (material?.value || 1)
+	. = length(matter) ? ..() : ((istype(material) && material.value) || 1)
 
 /obj/get_base_value()
 	if(holographic)

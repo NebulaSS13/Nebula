@@ -1,5 +1,7 @@
-/obj/item/chems/food/bun/Initialize()
-	LAZYSET(attack_products, /obj/item/slime_extract, /obj/item/chems/food/jellyburger)
+/obj/item/chems/food/bun/get_combined_food_products()
+	var/list/combined_food_products = ..()
+	LAZYSET(combined_food_products, /obj/item/slime_extract, /obj/item/chems/food/jellyburger)
+	return combined_food_products
 
 /decl/recipe/slimetoast
 	display_name = "Slime Toast"

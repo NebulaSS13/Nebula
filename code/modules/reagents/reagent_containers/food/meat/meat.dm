@@ -1,21 +1,4 @@
 // Processed meats
-/obj/item/chems/food/rawcutlet
-	name = "raw cutlet"
-	desc = "A thin piece of raw meat."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "rawcutlet"
-	bitesize = 1
-	center_of_mass = @'{"x":17,"y":20}'
-	material = /decl/material/solid/organic/meat
-	backyard_grilling_product = /obj/item/chems/food/cutlet
-	backyard_grilling_announcement = "sizzles as it is grilled through."
-	drying_wetness = 30
-	dried_type = /obj/item/chems/food/jerky/cutlet
-
-/obj/item/chems/food/rawcutlet/populate_reagents()
-	. = ..()
-	add_to_reagents(/decl/material/solid/organic/meat, 1)
-
 /obj/item/chems/food/cutlet
 	name = "cutlet"
 	desc = "A tasty meat slice."
@@ -25,22 +8,24 @@
 	center_of_mass = @'{"x":17,"y":20}'
 	material = /decl/material/solid/organic/meat
 
+/obj/item/chems/food/cutlet/raw
+	desc = "A thin piece of raw meat."
+	icon_state = "rawcutlet"
+	cooked_food = FOOD_RAW
+	backyard_grilling_product = /obj/item/chems/food/cutlet
+	backyard_grilling_announcement = "sizzles as it is grilled through."
+	drying_wetness = 30
+	dried_type = /obj/item/chems/food/jerky/cutlet
+
+/obj/item/chems/food/cutlet/raw/populate_reagents()
+	. = ..()
+	add_to_reagents(/decl/material/solid/organic/meat, 1)
+
 /obj/item/chems/food/cutlet/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 2)
 
-/obj/item/chems/food/rawmeatball
-	name = "raw meatball"
-	desc = "A raw meatball."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "rawmeatball"
-	bitesize = 2
-	center_of_mass = @'{"x":16,"y":15}'
-	material = /decl/material/solid/organic/meat
-	backyard_grilling_product = /obj/item/chems/food/meatball
-	backyard_grilling_announcement = "sizzles as it is grilled through."
-
-/obj/item/chems/food/rawmeatball/populate_reagents()
+/obj/item/chems/food/meatball/raw/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 2)
 
@@ -56,6 +41,14 @@
 /obj/item/chems/food/meatball/populate_reagents()
 	. = ..()
 	add_to_reagents(/decl/material/solid/organic/meat, 3)
+
+/obj/item/chems/food/meatball/raw
+	desc = "A raw meatball."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "rawmeatball"
+	cooked_food = FOOD_RAW
+	backyard_grilling_product = /obj/item/chems/food/meatball
+	backyard_grilling_announcement = "sizzles as it is grilled through."
 
 /obj/item/chems/food/plainsteak
 	name = "plain steak"

@@ -8,6 +8,11 @@
 	desc = "neat and tidy."
 	stress_value = -(STRESSOR_DEGREE_MILD)
 
+/datum/stressor/ate_raw_food
+	name = "Ate Raw Food"
+	desc = "queasy from raw food."
+	stress_value = STRESSOR_DEGREE_MILD
+
 /datum/stressor/hungry
 	name = "Hungry"
 	desc = "hungry."
