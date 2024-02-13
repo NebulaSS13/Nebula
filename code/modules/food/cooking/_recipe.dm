@@ -54,7 +54,7 @@
 		complexity += isnum(value) ? value : 1
 	complexity += length(uniquelist(items)) // add how many unique items there are; will prioritise burgers over 2 bunbuns and 1 wasted meat, for example
 
-/decl/recipe/proc/check_reagents(var/datum/reagents/avail_reagents)
+/decl/recipe/proc/check_reagents(datum/reagents/avail_reagents)
 	SHOULD_BE_PURE(TRUE)
 	if(length(avail_reagents?.reagent_volumes) < length(reagents))
 		return FALSE
@@ -63,7 +63,7 @@
 			return FALSE
 	return TRUE
 
-/decl/recipe/proc/check_fruit(var/obj/container)
+/decl/recipe/proc/check_fruit(obj/container)
 	// SHOULD_BE_PURE(TRUE) // We cannot set SHOULD_BE_PURE here as
 	// get_contained_external_atoms() retrieves an extension, which is impure.
 	if(!length(fruit))
@@ -93,7 +93,7 @@
 			return FALSE
 	return TRUE
 
-/decl/recipe/proc/check_items(var/obj/container)
+/decl/recipe/proc/check_items(obj/container)
 	// SHOULD_BE_PURE(TRUE) // We cannot set SHOULD_BE_PURE here as
 	// get_contained_external_atoms() retrieves an extension, which is impure.
 	if(!length(items))
@@ -151,7 +151,7 @@
 	return result_data
 
 // food-related
-/decl/recipe/proc/make_food(var/obj/container)
+/decl/recipe/proc/produce_result(obj/container)
 
 	/*
 	We will subtract all the ingredients from the container, and transfer their reagents into a holder
@@ -258,11 +258,12 @@
 		holder = container.reagents
 
 	switch(reagent_mix)
-		if (REAGENT_SUM)
+
+		if(REAGENT_SUM)
 			//Sum is easy, just shove the entire buffer into the result
 			buffer.trans_to_holder(holder, buffer.total_volume)
 
-		if (REAGENT_MAX)
+		if(REAGENT_MAX)
 			//We want the highest of each.
 			//Iterate through everything in buffer. If the target has less than the buffer, then top it up
 			for (var/reagent_type in buffer.reagent_volumes)
@@ -272,7 +273,7 @@
 					//Transfer the difference
 					buffer.trans_type_to_holder(holder, reagent_type, bvol-rvol)
 
-		if (REAGENT_MIN)
+		if(REAGENT_MIN)
 			//Min is slightly more complex. We want the result to have the lowest from each side
 			//But zero will not count. Where a side has zero its ignored and the side with a nonzero value is used
 			for (var/reagent_type in buffer.reagent_volumes)
@@ -297,5 +298,5 @@
 	// Clean up after ourselves.
 	if(buffer)
 		qdel(buffer)
-	if(temporary_holder)
+	if(temporary_holder && holder)
 		qdel(holder)
