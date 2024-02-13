@@ -6,6 +6,7 @@ var/global/obj/screen/robot_inventory
 /decl/ui_style/robot
 	name = "Stationbound"
 	restricted = TRUE
+	uid = "ui_style_robot"
 	override_icons = list(
 		UI_ICON_HEALTH      = 'icons/mob/screen/styles/robot/health.dmi',
 		UI_ICON_STATUS_FIRE = 'icons/mob/screen/styles/robot/status_fire.dmi',

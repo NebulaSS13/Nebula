@@ -354,3 +354,17 @@ var/global/list/sparring_attack_cache = list()
 	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
 		zone = BP_CHEST
 	. = ..()
+
+/decl/natural_attack/forelimb_slash
+	name = "forelimb slash"
+	selector_icon_state = "attack_slash"
+	attack_verb = list("mauled", "slashed", "struck", "pierced")
+	attack_noun = list("forelimb")
+	damage = 8
+	shredding = 1
+	sharp = 1
+	edge = 1
+	delay = 20
+	eye_attack_text = "a forelimb"
+	eye_attack_text_victim = "a forelimb"
+	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
