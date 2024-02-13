@@ -24,7 +24,7 @@
 		display_message("No biological signature detected in [src].")
 		return TRUE
 
-	if(!isspecies(target, SPECIES_MANTID_ALATE))
+	if(target.get_species_name() != SPECIES_MANTID_ALATE)
 		display_message("Invalid biological signature detected. Safety mechanisms engaged, only alates may undergo metamorphosis.")
 		return TRUE
 
@@ -59,8 +59,8 @@
 
 /obj/machinery/ascent_magnetotron/proc/get_total_gynes()
 	for(var/mob/living/carbon/human/H in global.living_mob_list_)
-		if(isspecies(H, SPECIES_MANTID_GYNE))
-			.+= 1
+		if(H.get_species_name() == SPECIES_MANTID_GYNE)
+			. += 1
 
 /obj/item/stock_parts/circuitboard/ascent_magnetotron
 	name = "circuitboard (Ascent magnetotron)"

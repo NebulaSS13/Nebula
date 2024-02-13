@@ -35,8 +35,10 @@
 		mob_passthrough_check = 0
 	. = ..()
 
-	if(. == 1 && iscarbon(target_mob))
-		damage *= 0.7 //squishy mobs absorb KE
+	if(. == 1 && isliving(target_mob))
+		var/mob/living/squish = target_mob
+		if(!squish.isSynthetic())
+			damage *= 0.7 //squishy mobs absorb KE
 
 /obj/item/projectile/bullet/can_embed()
 	//prevent embedding if the projectile is passing through the mob

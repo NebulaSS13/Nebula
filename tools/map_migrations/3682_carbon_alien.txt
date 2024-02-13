@@ -1,0 +1,1 @@
+/mob/living/carbon/alien/@SUBTYPES : /mob/living/simple_animal/alien/@SUBTYPES{@OLD}

@@ -117,12 +117,10 @@
 	. = ..()
 	if(!. || !anchored || disable || last_flash && world.time < last_flash + 150)
 		return
-	if(iscarbon(AM))
-		var/mob/living/carbon/M = AM
+	if(isliving(AM))
+		var/mob/living/M = AM
 		if(!MOVING_DELIBERATELY(M))
 			flash()
-	if(isanimal(AM))
-		flash()
 
 /obj/machinery/flasher/portable/attackby(obj/item/W, mob/user)
 	if(IS_WRENCH(W))

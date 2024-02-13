@@ -464,3 +464,8 @@
 /mob/living/silicon/get_total_life_damage()
 	return (getBruteLoss() + getFireLoss())
 
+/mob/living/silicon/get_death_message(gibbed)
+	return "gives one shrill beep before falling lifeless."
+
+/mob/living/silicon/get_self_death_message(gibbed)
+	return "You have suffered a critical system failure, and are dead."

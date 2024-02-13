@@ -1,4 +1,5 @@
-#define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
+/// Multiplier for amount of power cyborgs use.
+#define CYBORG_POWER_USAGE_MULTIPLIER 2.5
 
 /mob/living/silicon/robot
 	name = "robot"
@@ -7,67 +8,57 @@
 	icon_state = ICON_STATE_WORLD
 	max_health = 300
 	mob_sort_value = 4
-
 	z_flags = ZMM_MANGLE_PLANES
-
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
-	mob_push_flags = ~HEAVY //trundle trundle
+	mob_push_flags = ~HEAVY
 	skillset = /datum/skillset/silicon/robot
+	silicon_camera = /obj/item/camera/siliconcam/robot_camera
+	silicon_radio = /obj/item/radio/borg
+	light_wedge = LIGHT_WIDE
 
 	var/panel_icon = 'icons/mob/robots/_panels.dmi'
-
-	var/lights_on = 0 // Is our integrated light on?
+	 /// Is our integrated light on?
+	var/lights_on = 0
 	var/used_power_this_tick = 0
 	var/power_efficiency = 1
 	var/sight_mode = 0
 	var/custom_name = ""
-	var/crisis //Admin-settable for combat module use.
+	/// Admin-settable for combat module use.
+	var/crisis
 	var/crisis_override = 0
 	var/integrated_light_power = 0.6
 	var/integrated_light_range = 4
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
-
-	var/icon_selected = TRUE //If icon selection has been completed yet
-
-//Hud stuff
-
+	/// If icon selection has been completed yet
+	var/icon_selected = TRUE
+	/// Hud stuff
 	var/obj/screen/robot_module/one/inv1
 	var/obj/screen/robot_module/two/inv2
 	var/obj/screen/robot_module/three/inv3
 	var/obj/screen/robot_drop_grab/ui_drop_grab
-
-	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
+	/// Used to determine whether they have the module menu shown or not
+	var/shown_robot_modules = 0
 	var/obj/screen/robot_modules_background/robot_modules_background
-
-//3 Modules can be activated at any one time.
+	/// 3 Modules can be activated at any one time.
 	var/obj/item/robot_module/module = null
 	var/obj/item/module_active
 	var/obj/item/module_state_1
 	var/obj/item/module_state_2
 	var/obj/item/module_state_3
-
-	silicon_camera = /obj/item/camera/siliconcam/robot_camera
-	silicon_radio = /obj/item/radio/borg
-
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/cell/cell = /obj/item/cell/high
-
 	var/cell_emp_mult = 2.5
-
-	// Components are basically robot organs.
+	/// Components are basically robot organs.
 	var/list/components = list()
-
 	var/obj/item/organ/internal/central_processor
-
 	var/opened = 0
 	var/emagged = 0
 	var/wiresexposed = 0
 	var/locked = 1
 	var/has_power = 1
-
 	var/spawn_sound = 'sound/voice/liveagain.ogg'
 	var/pitch_toggle = 1
 	var/list/req_access = list(access_robotics)
@@ -77,21 +68,24 @@
 	var/killswitch_time = 60
 	var/weapon_lock = 0
 	var/weaponlock_time = 120
-	var/lawupdate = 1 //Cyborgs will sync their laws with their AI by default
-	var/lockcharge //If a robot is locked down
-	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
-	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
-	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
+	/// Cyborgs will sync their laws with their AI by default
+	var/lawupdate = 1
+	/// If a robot is locked down
+	var/lockcharge
+	/// Cause sec borgs gotta go fast //No they dont!
+	var/speed = 0
+	/// Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
+	var/scrambledcodes = 0
+	/// The number of known entities currently accessing the internal camera
+	var/tracking_entities = 0
 	var/braintype = "Cyborg"
-	var/intenselight = 0	// Whether cyborg's integrated light was upgraded
+	/// Whether cyborg's integrated light was upgraded
+	var/intenselight = 0
 	var/vtec = FALSE
-
 	var/list/robot_verbs_default = list(
 		/mob/living/silicon/robot/proc/sensor_mode,
 		/mob/living/silicon/robot/proc/robot_checklaws
 	)
-
-	light_wedge = LIGHT_WIDE
 
 /mob/living/silicon/robot/Initialize()
 	. = ..()

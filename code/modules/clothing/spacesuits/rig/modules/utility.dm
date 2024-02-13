@@ -256,22 +256,23 @@
 
 	var/mob/living/carbon/target_mob
 	if(target)
-		if(iscarbon(target))
-			target_mob = target
-		else
-			return 0
+		if(!isliving(target))
+			return FALSE
+		target_mob = target
 	else
 		target_mob = H
+	var/datum/reagents/bloodstream = target_mob.get_injected_reagents()
+	if(!bloodstream)
+		return FALSE
 
 	if(target_mob != H)
-		to_chat(H, "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>")
-	to_chat(target_mob, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
+		to_chat(H, SPAN_DANGER("You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name]."))
+	to_chat(target_mob, SPAN_DANGER("You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected."))
 	target_mob.add_to_reagents(charge.product_type, chems_to_use)
-
 	charge.charges -= chems_to_use
-	if(charge.charges < 0) charge.charges = 0
-
-	return 1
+	if(charge.charges < 0) 
+		charge.charges = 0
+	return TRUE
 
 /obj/item/rig_module/chem_dispenser/combat
 

@@ -25,11 +25,10 @@
 
 /datum/inventory_slot/head/unequipped(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	. = ..()
-	if(. && iscarbon(user))
+	if(. && istype(user))
 		var/obj/item/clothing/mask/mask = user.get_equipped_item(slot_wear_mask_str)
 		if(!mask || !(mask.item_flags & ITEM_FLAG_AIRTIGHT))
-			var/mob/living/carbon/C = user
-			C.set_internals(null)
+			user.set_internals(null)
 
 /datum/inventory_slot/head/get_examined_string(mob/owner, mob/user, distance, hideflags, decl/pronouns/pronouns)
 	if(_holding)

@@ -3,7 +3,7 @@
 	origin_type = EFFECT_ORGANIC
 
 /datum/artifact_effect/heal/DoEffectTouch(var/mob/toucher)
-	if(iscarbon(toucher))
+	if(isliving(toucher))
 		heal(toucher, 25, 1)
 		return 1
 
@@ -20,18 +20,18 @@
 			heal(C, 5)
 
 //todo: check over this properly
-/datum/artifact_effect/heal/proc/heal(mob/living/carbon/C, amount, strong, msg_prob = 100)
-	var/weakness = GetAnomalySusceptibility(C)
+/datum/artifact_effect/heal/proc/heal(mob/living/M, amount, strong, msg_prob = 100)
+	var/weakness = GetAnomalySusceptibility(M)
 	if(prob(weakness * 100))
 		if(prob(msg_prob))
-			to_chat(C, "<span class='notice'>A wave of energy invigorates you.</span>")
+			to_chat(M, SPAN_NOTICE("A wave of energy invigorates you."))
 		var/force = amount * weakness
-		C.apply_damages(-force, -force, -force, -force)
-		C.adjustBrainLoss(-force)
+		M.apply_damages(-force, -force, -force, -force)
+		M.adjustBrainLoss(-force)
 		if(strong)
-			C.apply_radiation(-25 * weakness)
-			C.bodytemperature = C.species?.body_temperature || initial(C.bodytemperature)
-			C.adjust_nutrition(50 * weakness)
-			if(ishuman(C))
-				var/mob/living/carbon/human/H = C
+			M.apply_radiation(-25 * weakness)
+			M.bodytemperature = M.get_species()?.body_temperature || initial(M.bodytemperature)
+			M.adjust_nutrition(50 * weakness)
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
 				H.regenerate_blood(5 * weakness)

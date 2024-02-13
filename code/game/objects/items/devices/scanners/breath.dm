@@ -9,7 +9,10 @@
 	var/mode = 1
 
 /obj/item/scanner/breath/is_valid_scan_target(atom/O)
-	return iscarbon(O)
+	if(isliving(O))
+		var/mob/living/M = O
+		return !!M.get_inhaled_reagents()
+	return FALSE
 
 /obj/item/scanner/breath/scan(atom/A, mob/user)
 	scan_data = breath_scan_action(A, user, src, mode)

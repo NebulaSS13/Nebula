@@ -681,13 +681,12 @@
 		if(N)
 			continue
 		affected |= M
-		if(iscarbon(M))
-			var/mob/living/carbon/C = M
-			SET_STATUS_MAX(C, STAT_BLURRY, 50)
-			SET_STATUS_MAX(C, STAT_WEAK, 3)
-			SET_STATUS_MAX(C, STAT_STUN, 5)
-		else if(issilicon(M))
+		if(issilicon(M))
 			SET_STATUS_MAX(M, STAT_WEAK, 10)
+		else
+			SET_STATUS_MAX(M, STAT_BLURRY, 50)
+			SET_STATUS_MAX(M, STAT_WEAK, 3)
+			SET_STATUS_MAX(M, STAT_STUN, 5)
 
 	admin_attacker_log_many_victims(user, affected, "Used a confuse rune.", "Was victim of a confuse rune.", "used a confuse rune on")
 	qdel(src)

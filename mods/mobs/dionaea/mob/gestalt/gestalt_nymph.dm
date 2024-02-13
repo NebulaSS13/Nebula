@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/diona/proc/gestalt_with(var/mob/living/carbon/alien/diona/chirp)
+/mob/living/simple_animal/alien/diona/proc/gestalt_with(var/mob/living/simple_animal/alien/diona/chirp)
 	if(!istype(chirp) || chirp == src || chirp.incapacitated() || incapacitated())
 		return FALSE
 	if(istype(chirp.loc, /obj/structure/diona_gestalt) || istype(loc, /obj/structure/diona_gestalt))
@@ -9,7 +9,7 @@
 	blob.roll_up_atom(src, silent = TRUE)
 	return TRUE
 
-/obj/structure/diona_gestalt/proc/roll_up_atom(var/mob/living/carbon/alien/diona/chirp, var/silent)
+/obj/structure/diona_gestalt/proc/roll_up_atom(var/mob/living/simple_animal/alien/diona/chirp, var/silent)
 	if(!istype(chirp))
 		return
 	if(!silent)
@@ -45,7 +45,7 @@
 /obj/structure/diona_gestalt/proc/check_nymphs()
 	if(LAZYLEN(nymphs.len) >= 2)
 		for(var/nimp in nymphs)
-			var/mob/living/carbon/alien/diona/chirp = nimp
+			var/mob/living/simple_animal/alien/diona/chirp = nimp
 			if(chirp.client)
 				return
 	visible_message("<span class='danger'>\The [src] has completely split apart!</span>")

@@ -68,7 +68,7 @@
 		..()
 
 /obj/item/implanter/attack(mob/M, mob/user)
-	if (!iscarbon(M))
+	if (!ishuman(M))
 		return
 	if (user && src.imp)
 		M.visible_message("<span class='warning'>[user] is attemping to implant [M].</span>")

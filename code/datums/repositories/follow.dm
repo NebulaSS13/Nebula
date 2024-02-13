@@ -180,7 +180,7 @@ var/global/repository/follow/follow_repository = new()
 
 /datum/follow_holder/alien
 	sort_order = 4
-	followed_type = /mob/living/carbon/alien
+	followed_type = /mob/living/simple_animal/alien
 	suffix = "Alien"
 
 /datum/follow_holder/ghost

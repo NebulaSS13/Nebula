@@ -57,10 +57,7 @@
 
 /obj/screen/action_button/hide_toggle/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat)
 	. = ..()
-	if(isalien(_owner))
-		icon_state = "bg_alien"
-	else
-		icon_state = "bg_default"
+	icon_state = "bg_default"
 	update_icon()
 
 /obj/screen/action_button/hide_toggle/handle_click(mob/user, params)

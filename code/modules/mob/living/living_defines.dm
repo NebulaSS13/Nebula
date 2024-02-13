@@ -66,3 +66,5 @@
 	var/original_genetic_seed
 	var/unique_enzymes
 	var/blood_type = "A+"
+
+	var/last_cough = 0

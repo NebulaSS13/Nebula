@@ -67,7 +67,7 @@ INITIALIZE_IMMEDIATE(/obj/abstract/landmark/map_load_mark)
 /obj/abstract/landmark/clear
 	name = "clear turf"
 	icon_state = "clear"
-	//Don't set deleteme to true, since we work inside lateinitialize
+	//Don't set delete_me to true, since we work inside lateinitialize
 
 /obj/abstract/landmark/clear/Initialize()
 	..()

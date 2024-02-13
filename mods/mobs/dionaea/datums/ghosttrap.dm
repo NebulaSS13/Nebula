@@ -1,4 +1,4 @@
-#define isdiona(X) istype(X, /mob/living/carbon/alien/diona)
+#define isdiona(X) istype(X, /mob/living/simple_animal/alien/diona)
 
 /decl/ghosttrap/sentient_plant/welcome_candidate(var/mob/target)
 	..()

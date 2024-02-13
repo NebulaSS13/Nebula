@@ -18,7 +18,7 @@
 	requires_ui_style = FALSE
 
 /obj/screen/ascent_nymph_molt/handle_click(mob/user, params)
-	var/mob/living/carbon/alien/ascent_nymph/nymph = user
+	var/mob/living/simple_animal/alien/kharmaan/nymph = user
 	if(istype(nymph)) nymph.molt()
 
 /datum/hud/ascent_nymph

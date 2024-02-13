@@ -97,8 +97,8 @@
 	return
 
 
-/obj/machinery/implantchair/proc/put_mob(mob/living/carbon/M)
-	if(!iscarbon(M))
+/obj/machinery/implantchair/proc/put_mob(mob/living/M)
+	if(!ishuman(M))
 		to_chat(usr, "<span class='warning'>\The [src] cannot hold this!</span>")
 		return
 	if(src.occupant)
@@ -115,7 +115,7 @@
 
 
 /obj/machinery/implantchair/proc/implant(var/mob/M)
-	if (!iscarbon(M))
+	if (!ishuman(M))
 		return
 	if(!implant_list.len)	return
 	for(var/obj/item/implant/loyalty/imp in implant_list)

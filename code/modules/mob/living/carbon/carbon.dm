@@ -286,12 +286,6 @@
 		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
 		. = TRUE
 
-/**
- *  Return FALSE if victim can't be devoured, DEVOUR_FAST if they can be devoured quickly, DEVOUR_SLOW for slow devour
- */
-/mob/living/carbon/proc/can_devour(atom/movable/victim)
-	return FALSE
-
 /mob/living/carbon/get_satiated_nutrition()
 	return 350
 

@@ -12,7 +12,7 @@ var/global/datum/matchmaker/matchmaker = new()
 			R.holder = character.mind
 			R.info = character.client.prefs.relations_info[T]
 			character.mind.gen_relations_info = character.client.prefs.relations_info["general"]
-	if(!iscarbon(character))
+	if(!ishuman(character))
 		return TRUE
 	if(!job.create_record)
 		return TRUE

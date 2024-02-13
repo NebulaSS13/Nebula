@@ -24,6 +24,7 @@
 	var/species                                       // List of species to pick from.
 	var/corpse_outfits = list(/decl/hierarchy/outfit) // List of outfits to pick from. Uses pickweight()
 	var/spawn_flags = (~0)
+	var/weakref/my_corpse
 
 	var/skin_colors_per_species   = list() // Custom skin colors, per species -type-, if any. For example if you want dead aliens to always have blue hair, or similar
 	var/skin_tones_per_species    = list() // Custom skin tones, per species -type-, if any. See above as to why.
@@ -37,7 +38,7 @@
 	..()
 	if(!species) species = global.using_map.default_species
 	var/species_choice = islist(species) ? pickweight(species) : species
-	new /mob/living/carbon/human/corpse(loc, species_choice, null, null, src)
+	my_corpse = weakref(new /mob/living/carbon/human/corpse(loc, species_choice, null, null, src))
 	return INITIALIZE_HINT_QDEL
 
 /obj/abstract/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)

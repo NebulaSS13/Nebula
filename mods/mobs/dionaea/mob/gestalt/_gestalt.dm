@@ -10,7 +10,7 @@
 	z_flags = ZMM_MANGLE_PLANES
 
 	var/list/nymphs                  = list()
-	var/list/valid_things_to_roll_up = list(/mob/living/carbon/alien/diona = TRUE, /mob/living/carbon/alien/diona/sterile = TRUE)
+	var/list/valid_things_to_roll_up = list(/mob/living/simple_animal/alien/diona = TRUE, /mob/living/simple_animal/alien/diona/sterile = TRUE)
 	var/tmp/image/eyes_overlay
 
 /obj/structure/diona_gestalt/mob_breakout(var/mob/living/escapee)

@@ -213,19 +213,20 @@
 
 		var/tramount = abs(transfer_amount)
 
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
-			var/injection_status = C.can_inject(null, BP_CHEST)
+		if(ishuman(AM))
+			var/mob/living/carbon/human/H = AM
+			var/injection_status = H.can_inject(null, BP_CHEST)
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)
 				injection_delay += INJECTION_PORT_DELAY
-			if(!C.dna || !injection_status)
+			if(!H.dna || !injection_status)
 				activate_pin(3)
 				return
-			C.visible_message("<span class='danger'>\The [acting_object] is trying to take a blood sample from [C]!</span>", \
-								"<span class='danger'>\The [acting_object] is trying to take a blood sample from you!</span>")
+			H.visible_message(
+				SPAN_DANGER("\The [acting_object] is trying to take a blood sample from \the [H]!"),
+				SPAN_DANGER("\The [acting_object] is trying to take a blood sample from you!"))
 			busy = TRUE
-			addtimer(CALLBACK(src, PROC_REF(draw_after), weakref(C), tramount), injection_delay)
+			addtimer(CALLBACK(src, PROC_REF(draw_after), weakref(H), tramount), injection_delay)
 			return
 
 		else

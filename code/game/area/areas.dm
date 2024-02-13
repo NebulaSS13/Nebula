@@ -419,7 +419,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 		addtimer(CALLBACK(src, PROC_REF(throw_unbuckled_occupant), M, maxrange, speed, direction), 0)
 
 /area/proc/throw_unbuckled_occupant(var/mob/M, var/maxrange, var/speed, var/direction)
-	if(iscarbon(M))
+	if(isliving(M))
 		if(M.buckled)
 			to_chat(M, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
 			shake_camera(M, 3, 1)

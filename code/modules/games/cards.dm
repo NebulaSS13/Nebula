@@ -166,13 +166,11 @@ var/global/list/card_decks = list()
 	set desc = "Draw a card from a deck."
 	set src in view(1)
 
-	if(usr.stat || !Adjacent(usr)) return
-
-	if(!iscarbon(usr))
+	// TODO: let dogs play poker
+	if(!ishuman(usr) || usr.incapacitated() || !Adjacent(usr))
 		return
 
-	var/mob/living/carbon/user = usr
-
+	var/mob/living/carbon/human/user = usr
 	if(!cards.len)
 		to_chat(usr, "There are no cards in the deck.")
 		return

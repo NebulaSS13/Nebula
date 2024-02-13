@@ -6,13 +6,13 @@
 	origin_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
 
 /datum/artifact_effect/stun/DoEffectTouch(var/mob/toucher)
-	if(iscarbon(toucher))
-		var/mob/living/carbon/C = toucher
-		var/susceptibility = GetAnomalySusceptibility(C)
+	if(isliving(toucher))
+		var/mob/living/M = toucher
+		var/susceptibility = GetAnomalySusceptibility(M)
 		if(prob(susceptibility * 100))
-			to_chat(C, "<span class='warning'>A powerful force overwhelms your consciousness.</span>")
-			SET_STATUS_MAX(C, STAT_WEAK, rand(1,10) * susceptibility)
-			SET_STATUS_MAX(C, STAT_STUTTER, 10 * susceptibility)
+			to_chat(M, SPAN_DANGER("A powerful force overwhelms your consciousness."))
+			SET_STATUS_MAX(M, STAT_WEAK, rand(1,10) * susceptibility)
+			SET_STATUS_MAX(M, STAT_STUTTER, 10 * susceptibility)
 
 /datum/artifact_effect/stun/DoEffectAura()
 	if(holder)

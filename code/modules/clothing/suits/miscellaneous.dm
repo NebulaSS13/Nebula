@@ -128,11 +128,11 @@
 /obj/item/clothing/suit/straight_jacket/equipped(var/mob/user, var/slot)
 	. = ..()
 	if(slot == slot_wear_suit_str)
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			var/obj/item/cuffs = C.get_equipped_item(slot_handcuffed_str)
+		if(isliving(user))
+			var/mob/living/M = user
+			var/obj/item/cuffs = M.get_equipped_item(slot_handcuffed_str)
 			if(cuffs)
-				C.try_unequip(cuffs)
+				M.try_unequip(cuffs)
 		user.drop_held_items()
 
 /obj/item/clothing/suit/ianshirt

@@ -33,7 +33,7 @@
 	return
 
 /mob/living/simple_animal/hostile/carp/shark/death(gibbed)
-	..()
+	. = ..()
 	if(. && !gibbed)
 		var/datum/gas_mixture/environment = loc.return_air()
 		if (environment)
