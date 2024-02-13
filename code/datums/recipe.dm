@@ -6,13 +6,22 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /decl/recipe
+
 	var/display_name              // Descriptive name of the recipe, should be unique to avoid codex pages being unsearchable. If not set, codex uses initial name of product.
 	var/list/reagents             // example: = list(/decl/material/liquid/drink/juice/berry = 5) // do not list same reagent twice
 	var/list/items                // example: = list(/obj/item/crowbar, /obj/item/welder, /obj/item/screwdriver = 2) // place /foo/bar before /foo
 	var/list/fruit                // example: = list("fruit" = 3)
-	var/result                    // example: = /obj/item/chems/food/donut
 	var/time = 100                // Cooking time in deciseconds.
-	var/result_quantity = 1       // How many items to create. Where possible, just use fewer ingredients instead.
+
+	/// How many items to create, or how many reagent units to add.
+	var/result_quantity = 1       
+	/// An atom type to create, or a /decl/material type if you want to place a reagent into the container.
+	var/result
+	/// A data list passed to the result if set to a material type.
+	var/result_data
+
+	var/minimum_temperature = 0
+	var/maximum_temperature = INFINITY
 
 	var/const/REAGENT_REPLACE = 0 //Reagents in the ingredients are discarded (only the reagents present in the result at compiletime are used)
 	var/const/REAGENT_MAX     = 1 //The result will contain the maximum of each reagent present between the two pools. Compiletime result, and sum of ingredients
@@ -28,6 +37,13 @@
 	var/lore_text         // IC description of recipe/food.
 	var/mechanics_text    // Mechanical description of recipe/food.
 	var/antag_text        // Any antagonist-relevant stuff relating to this recipe.
+
+/decl/recipe/validate()
+	. = ..()
+	if(!ispath(result))
+		. += "invalid or null result type: [result || "NULL"]"
+	if(!isnum(result_quantity) || result_quantity <= 0)
+		. += "invalid or null result amount: [result_quantity || "NULL"]"
 
 /decl/recipe/Initialize()
 	. = ..()
@@ -104,65 +120,79 @@
 			break
 	return !length(needed_items)
 
-//general version
-/decl/recipe/proc/make(var/obj/container)
-	var/obj/result_obj = new result(container)
-	var/list/contained_atoms = container.get_contained_external_atoms()
-	if(contained_atoms)
-		contained_atoms -= result_obj
-		for(var/obj/O in contained_atoms)
-			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-			qdel(O)
-	container.reagents.clear_reagents()
-	return result_obj
+/decl/recipe/proc/create_result(atom/container, list/used_ingredients)
+
+	if(!istype(container) || QDELETED(container) || !container.simulated)
+		CRASH("Recipe trying to create a result with null or invalid container: [container || "NULL"], [container?.simulated || "NULL"]")
+	if(!container.reagents?.total_volume)
+		CRASH("Recipe trying to create a result in a container with null or zero capacity reagent holder: [container.reagents?.total_volume || "NULL"]")
+
+	if(ispath(result, /atom/movable))
+		var/produced = create_result_atom(container, used_ingredients)
+		var/list/contained_atoms = container.get_contained_external_atoms()
+		if(contained_atoms)
+			contained_atoms -= produced
+			for(var/obj/O in contained_atoms)
+				O.reagents.trans_to_obj(produced, O.reagents.total_volume)
+				qdel(O)
+		return produced
+	
+	if(ispath(result, /decl/material))
+		container.reagents.add_reagent(result, result_quantity, get_result_data(container, used_ingredients))
+		return null
+
+// Create the actual result atom. Handled by a proc to allow for recipes to override it.
+/decl/recipe/proc/create_result_atom(atom/container, list/used_ingredients)
+	return new result(container)
+
+/// Return a data list to pass to a reagent creation proc. Allows for overriding/mutation based on ingredients.
+/// Actually place or create the result of the recipe. Returns the produced item, or the container for reagents.
+/decl/recipe/proc/get_result_data(atom/container, list/used_ingredients)
+	return result_data
 
 // food-related
 /decl/recipe/proc/make_food(var/obj/container)
-	if(!result)
-		log_error("<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>")
-		return
+
 	/*
 	We will subtract all the ingredients from the container, and transfer their reagents into a holder
 	We will not touch things which are not required for this recipe. They will be left behind for the caller
 	to decide what to do. They may be used again to make another recipe or discarded, or merged into the results,
 	thats no longer the concern of this proc
 	*/
-	var/datum/reagents/buffer = new /datum/reagents(1e12, global.temp_reagents_holder)//
+
+	// We collected the used ingredients before removing them in case
+	// the result proc needs to check the list for procedural products.
+	var/list/used_ingredients = list(
+		"items"    = list(),
+		"fruit"    = list(),
+		"reagents" = list()
+	)
+
+	// Find items we need.
 	var/list/container_contents = container.get_contained_external_atoms()
-	//Find items we need
-	if (LAZYLEN(items))
-		for (var/i in items)
-			var/cnt = 1
-			if (isnum(items[i]))
-				cnt = items[i]
-			for (cnt, cnt > 0, cnt--)
-				var/obj/item/I = locate(i) in container_contents
-				if (I && I.reagents)
-					container_contents -= I
-					I.reagents.trans_to_holder(buffer,I.reagents.total_volume)
-					qdel(I)
+	if(LAZYLEN(items))
+		for(var/item_type in items)
+			for(var/item_count in 1 to max(1, items[item_type]))
+				var/obj/item/item = locate(item_type) in container_contents
+				container_contents -= item
+				used_ingredients["items"] += item
 
-	//Find fruits
-	if (LAZYLEN(fruit))
-		var/list/checklist = list()
-		checklist = fruit.Copy()
-
-		for(var/obj/item/chems/food/grown/G in container_contents)
-			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]))
+	// Find fruits that we need.
+	if(LAZYLEN(fruit))
+		var/list/checklist = fruit.Copy()
+		for(var/obj/item/chems/food/grown/fruit in container_contents)
+			if(!fruit.seed?.kitchen_tag || isnull(checklist[fruit.seed.kitchen_tag]))
 				continue
-
-			if (checklist[G.seed.kitchen_tag] > 0)
+			if(checklist[fruit.seed.kitchen_tag] > 0)
 				//We found a thing we need
-				checklist[G.seed.kitchen_tag]--
-				if (G && G.reagents)
-					G.reagents.trans_to_holder(buffer,G.reagents.total_volume)
-				qdel(G)
+				container_contents -= fruit
+				checklist[fruit.seed.kitchen_tag]--
+				used_ingredients["fruits"] += fruit
 
-	//And lastly deduct necessary quantities of reagents
-	if (LAZYLEN(reagents))
-		for (var/r in reagents)
-			//Doesnt matter whether or not there's enough, we assume that check is done before
-			container.reagents.trans_type_to_holder(buffer, r, reagents[r])
+	// And lastly deduct necessary quantities of reagents.
+	if(LAZYLEN(reagents))
+		for(var/reagent_type in reagents)
+			used_ingredients["reagents"][reagent_type] += reagents[reagent_type]
 
 	/*
 	Now we've removed all the ingredients that were used and we have the buffer containing the total of
@@ -171,62 +201,101 @@
 	If, as in the most common case, there is only a single result, then it will just be a reference to
 	the single-result's reagents
 	*/
-	var/datum/reagents/holder = new/datum/reagents(INFINITY, global.temp_reagents_holder)
-	var/list/results = list()
-	for (var/_ in 1 to result_quantity)
-		var/obj/result_obj = new result(container)
-		results.Add(result_obj)
 
-		if (!result_obj.reagents)//This shouldn't happen
-			//If the result somehow has no reagents defined, then create a new holder
-			result_obj.create_reagents(buffer.total_volume*1.5)
+	// Create our food products.
+	// Note that this will simply put reagents into the container for non-object recipes.
+	for(var/_ in 1 to result_quantity)
+		var/atom/movable/result_obj = create_result(container, used_ingredients)
+		if(istype(result_obj))
+			LAZYADD(., result_obj)
 
-		if (result_quantity == 1)
-			qdel(holder)
-			holder = result_obj.reagents
+	// Collect all our ingredient reagents in a buffer.
+	// If we aren't using a buffer, just discard the reagents.
+	var/datum/reagents/buffer = (reagent_mix != REAGENT_REPLACE) ? new(INFINITY, global.temp_reagents_holder) : null
+	for(var/atom/item as anything in used_ingredients["items"])
+		if(item.reagents)
+			if(buffer)
+				item.reagents.trans_to_holder(buffer, item.reagents.total_volume)
+			else
+				item.reagents.clear_reagents()
+		item.physically_destroyed()
+	for(var/atom/fruit as anything in used_ingredients["fruits"])
+		if(fruit.reagents)
+			if(buffer)
+				fruit.reagents.trans_to_holder(buffer, fruit.reagents.total_volume)
+			else
+				fruit.reagents.clear_reagents()
+		fruit.physically_destroyed()
+	for(var/reagent_type in used_ingredients["reagents"])
+		var/reagent_amount = used_ingredients["reagents"][reagent_type]
+		if(buffer)
+			container.reagents.trans_type_to_holder(buffer, reagent_type, reagent_amount)
 		else
-			result_obj.reagents.trans_to_holder(holder, result_obj.reagents.total_volume)
+			container.reagents.remove_reagent(reagent_type, reagent_amount)
 
+	/// Set the appropriate flag on the food for stressor updates.
+	for(var/obj/item/chems/food/food in .)
+		food.cooked_food = TRUE
+
+	// We only care about the outputs, so we can go home now.
+	if(reagent_mix == REAGENT_REPLACE)
+		if(buffer)
+			qdel(buffer)
+		return
+
+	// Collect all of the resulting food reagents.
+	var/temporary_holder
+	var/datum/reagents/holder
+	if(length(.) == 1)
+		var/atom/movable/result_obj = .[1]
+		holder = result_obj.reagents
+	else if(length(.) > 1)
+		temporary_holder = new /datum/reagents(INFINITY, global.temp_reagents_holder)
+		holder = temporary_holder
+		for(var/atom/movable/result_obj in .)
+			result_obj.reagents.trans_to_holder(holder, result_obj.reagents.total_volume)
+	else
+		holder = container.reagents
 
 	switch(reagent_mix)
-		if (REAGENT_REPLACE)
-			//We do no transferring
 		if (REAGENT_SUM)
 			//Sum is easy, just shove the entire buffer into the result
 			buffer.trans_to_holder(holder, buffer.total_volume)
+
 		if (REAGENT_MAX)
 			//We want the highest of each.
 			//Iterate through everything in buffer. If the target has less than the buffer, then top it up
-			for (var/_R in buffer.reagent_volumes)
-				var/rvol = REAGENT_VOLUME(holder, _R)
-				var/bvol = REAGENT_VOLUME(buffer, _R)
+			for (var/reagent_type in buffer.reagent_volumes)
+				var/rvol = REAGENT_VOLUME(holder, reagent_type)
+				var/bvol = REAGENT_VOLUME(buffer, reagent_type)
 				if (rvol < bvol)
 					//Transfer the difference
-					buffer.trans_type_to_holder(holder, _R, bvol-rvol)
+					buffer.trans_type_to_holder(holder, reagent_type, bvol-rvol)
 
 		if (REAGENT_MIN)
 			//Min is slightly more complex. We want the result to have the lowest from each side
 			//But zero will not count. Where a side has zero its ignored and the side with a nonzero value is used
-			for (var/_R in buffer.reagent_volumes)
-				var/rvol = REAGENT_VOLUME(holder, _R)
-				var/bvol = REAGENT_VOLUME(buffer, _R)
+			for (var/reagent_type in buffer.reagent_volumes)
+				var/rvol = REAGENT_VOLUME(holder, reagent_type)
+				var/bvol = REAGENT_VOLUME(buffer, reagent_type)
 				if (rvol == 0) //If the target has zero of this reagent
-					buffer.trans_type_to_holder(holder, _R, bvol)
+					buffer.trans_type_to_holder(holder, reagent_type, bvol)
 					//Then transfer all of ours
 
 				else if (rvol > bvol)
 					//if the target has more than ours
 					//Remove the difference
-					holder.remove_reagent(_R, rvol-bvol)
+					holder.remove_reagent(reagent_type, rvol-bvol)
 
-	if (length(results) > 1)
-		//If we're here, then holder is a buffer containing the total reagents for all the results.
-		//So now we redistribute it among them
-		var/total = holder.total_volume
-		for(var/atom/a as anything in results)
-			holder.trans_to(a, total / length(results))
+	if(length(.) > 1)
+		// If we're here, then holder is a buffer containing the total reagents
+		// for all the results. So now we redistribute it among them.
+		var/total = round(holder.total_volume / length(.))
+		for(var/atom/result as anything in .)
+			holder.trans_to(result, total)
 
-	for(var/obj/item/chems/food/food in results)
-		food.cooked_food = TRUE
-
-	return results
+	// Clean up after ourselves.
+	if(buffer)
+		qdel(buffer)
+	if(temporary_holder)
+		qdel(holder)
