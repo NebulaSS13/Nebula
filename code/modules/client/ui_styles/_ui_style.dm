@@ -11,6 +11,7 @@
 		UI_ICON_FIRE_INTENT = 'icons/mob/screen/styles/midnight/fire_intent.dmi',
 		UI_ICON_HANDS       = 'icons/mob/screen/styles/midnight/hands.dmi',
 		UI_ICON_HEALTH      = 'icons/mob/screen/styles/health.dmi',
+		UI_ICON_CRIT_MARKER = 'icons/mob/screen/styles/crit_markers.dmi',
 		UI_ICON_HYDRATION   = 'icons/mob/screen/styles/hydration.dmi',
 		UI_ICON_INTENT      = 'icons/mob/screen/styles/intents.dmi',
 		UI_ICON_INTERACTION = 'icons/mob/screen/styles/midnight/interaction.dmi',

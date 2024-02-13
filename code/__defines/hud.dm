@@ -7,6 +7,7 @@
 #define UI_ICON_HANDS       "icon_hands"
 #define UI_ICON_INTERNALS   "icon_internals"
 #define UI_ICON_HEALTH      "icon_health"
+#define UI_ICON_CRIT_MARKER "icon_crit_marker"
 #define UI_ICON_NUTRITION   "icon_nutrition"
 #define UI_ICON_HYDRATION   "icon_hydration"
 #define UI_ICON_FIRE_INTENT "icon_fire_intent"

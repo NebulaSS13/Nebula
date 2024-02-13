@@ -14,6 +14,7 @@
 	var/obj/screen/diona_held/held
 
 /decl/ui_style/diona
+	name = "Diona"
 	restricted = TRUE
 	uid  = "ui_style_diona"
 	override_icons = list(

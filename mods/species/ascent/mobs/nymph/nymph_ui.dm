@@ -27,6 +27,7 @@
 	var/obj/screen/drink/drink
 
 /decl/ui_style/ascent
+	name = "Ascent"
 	restricted = TRUE
 	uid  = "ui_style_ascent"
 	override_icons = list(

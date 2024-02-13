@@ -58,7 +58,9 @@ var/global/list/_ui_expected_states
 			"health5",
 			"health6",
 			"health7",
-			"health_numb",
+			"health_numb"
+		),
+		UI_ICON_CRIT_MARKER = list(
 			"softcrit",
 			"hardcrit",
 			"fullhealth",

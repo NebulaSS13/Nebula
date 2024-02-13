@@ -505,21 +505,21 @@
 
 
 				// Apply a fire overlay if we're burning.
-				var/health_icon = get_ui_icon(client?.prefs?.UI_style, UI_ICON_HEALTH)
+				var/crit_markers = get_ui_icon(client?.prefs?.UI_style, UI_ICON_CRIT_MARKER)
 				if(on_fire)
-					health_images += image(health_icon, "burning")
+					health_images += image(crit_markers, "burning")
 
 				// Show a general pain/crit indicator if needed.
 				if(is_asystole())
-					health_images += image(health_icon, "hardcrit")
+					health_images += image(crit_markers, "hardcrit")
 				else if(trauma_val)
 					if(can_feel_pain())
 						if(trauma_val > 0.7)
-							health_images += image(health_icon, "softcrit")
+							health_images += image(crit_markers, "softcrit")
 						if(trauma_val >= 1)
-							health_images += image(health_icon, "hardcrit")
+							health_images += image(crit_markers, "hardcrit")
 				else if(no_damage)
-					health_images += image(health_icon, "fullhealth")
+					health_images += image(crit_markers, "fullhealth")
 				healths_ma.overlays += health_images
 			healths.appearance = healths_ma
 

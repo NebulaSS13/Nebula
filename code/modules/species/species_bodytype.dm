@@ -578,6 +578,7 @@ var/global/list/bodytypes_by_category = list()
 var/global/list/limbs_with_nails = list(
 	BP_L_HAND,
 	BP_R_HAND,
+	BP_M_HAND,
 	BP_L_FOOT,
 	BP_R_FOOT
 )
