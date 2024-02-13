@@ -16,7 +16,13 @@
 /decl/ui_style/diona
 	restricted = TRUE
 	uid  = "ui_style_diona"
-	//'mods/mobs/dionaea/icons/ui.dmi'
+	override_icons = list(
+		UI_ICON_HEALTH      = 'mods/mobs/dionaea/icons/ui_health.dmi',
+		UI_ICON_HANDS       = 'mods/mobs/dionaea/icons/ui_hands.dmi',
+		UI_ICON_INTENT      = 'mods/mobs/dionaea/icons/ui_intents.dmi',
+		UI_ICON_INTERACTION = 'mods/mobs/dionaea/icons/ui_interactions.dmi',
+		UI_ICON_INVENTORY   = 'mods/mobs/dionaea/icons/ui_inventory.dmi'
+	)
 
 /datum/hud/diona_nymph/get_ui_style_data()
 	return GET_DECL(/decl/ui_style/diona)

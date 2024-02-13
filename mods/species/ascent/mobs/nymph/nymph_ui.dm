@@ -12,7 +12,7 @@
 
 /obj/screen/ascent_nymph_molt
 	name = "molt"
-	icon = 'icons/obj/action_buttons/organs.dmi'
+	icon = 'mods/species/ascent/icons/ui_molt.dmi'
 	screen_loc =  ANYMPH_SCREEN_LOC_MOLT
 	icon_state = "molt-on"
 	requires_ui_style = FALSE
@@ -29,7 +29,13 @@
 /decl/ui_style/ascent
 	restricted = TRUE
 	uid  = "ui_style_ascent"
-	//'mods/species/ascent/icons/ui.dmi'
+	override_icons = list(
+		UI_ICON_HEALTH      = 'mods/species/ascent/icons/ui_health.dmi',
+		UI_ICON_HANDS       = 'mods/species/ascent/icons/ui_hands.dmi',
+		UI_ICON_INTENT      = 'mods/species/ascent/icons/ui_intents.dmi',
+		UI_ICON_INTERACTION = 'mods/species/ascent/icons/ui_interactions.dmi',
+		UI_ICON_INVENTORY   = 'mods/species/ascent/icons/ui_inventory.dmi'
+	)
 
 /datum/hud/ascent_nymph/get_ui_style_data()
 	return GET_DECL(/decl/ui_style/ascent)
