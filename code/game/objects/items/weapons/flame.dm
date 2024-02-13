@@ -63,9 +63,8 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/flame/match/Process()
-	if(isliving(loc))
-		var/mob/living/M = loc
-		M.IgniteMob()
+	if(loc)
+		loc.ignite_fire()
 	var/turf/location = get_turf(src)
 	smoketime--
 	if(submerged() || smoketime < 1)

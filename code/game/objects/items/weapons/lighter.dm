@@ -81,13 +81,13 @@
 	else
 		add_overlay(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
-/obj/item/flame/lighter/attack(var/mob/living/M, var/mob/living/carbon/user)
-	if(!ismob(M))
-		return
+/obj/item/flame/lighter/attack(var/atom/A, var/mob/living/carbon/user)
 
 	if(lit)
-		M.IgniteMob()
-
+		A.ignite_fire()
+		var/mob/M = A
+		if(!ismob(M))
+			return
 		var/obj/item/clothing/mask/smokable/cigarette/cig = M.get_equipped_item(slot_wear_mask_str)
 		if(istype(cig) && user.get_target_zone() == BP_MOUTH)
 			if(M == user)

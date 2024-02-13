@@ -272,15 +272,3 @@
 				to_chat(src, "<span class='danger'>Weapon Lock Timed Out!</span>")
 			weapon_lock = 0
 			weaponlock_time = 120
-
-/mob/living/silicon/robot/update_fire()
-	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
-	if(on_fire)
-		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
-
-//Silicons don't gain stacks from hotspots, but hotspots can ignite them
-/mob/living/silicon/increase_fire_stacks(exposed_temperature)
-	return
-
-/mob/living/silicon/can_ignite()
-	return !on_fire

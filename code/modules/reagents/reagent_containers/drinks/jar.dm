@@ -14,6 +14,7 @@
 
 /obj/item/chems/drinks/jar/update_container_name()
 	if(LAZYLEN(reagents?.reagent_volumes))
+
 		SetName("jar of something")
 	else
 		SetName(initial(name))

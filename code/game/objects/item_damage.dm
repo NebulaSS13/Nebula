@@ -51,9 +51,6 @@
 /obj/item/proc/explosion_severity_damage_multiplier()
 	return CEILING(max_health / 3)
 
-/obj/item/is_burnable()
-	return simulated
-
 /obj/item/proc/get_volume_by_throwforce_and_or_w_class()
 	if(throwforce && w_class)
 		return clamp((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100

@@ -160,8 +160,8 @@
 	to_chat(L, "<span class='danger'>You feel yourself burn!</span>")
 	L.adjustFireLoss(10)
 	if(L.getFireLoss() > 60)
-		L.fire_stacks += 50
-		L.IgniteMob()
+		L.fire_intensity += 50
+		L.ignite_fire()
 
 /datum/phenomena/divine_right
 	name = "Divine Right"

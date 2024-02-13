@@ -86,8 +86,8 @@
 	return FALSE
 
 /decl/species/serpentid/handle_environment_special(var/mob/living/carbon/human/H)
-	if(!H.on_fire && H.fire_stacks < 2)
-		H.fire_stacks += 0.2
+	if(!H.is_on_fire() && H.fire_intensity < 2)
+		H.fire_intensity += 0.2
 	return
 
 /decl/species/serpentid/can_fall(var/mob/living/carbon/human/H)

@@ -346,10 +346,10 @@
 			set_light(0)
 
 /obj/structure/fire_source/proc/burn(var/atom/movable/victim)
+	victim.ignite_fire()
 	if(isliving(victim))
 		var/mob/living/M = victim
 		to_chat(M, SPAN_DANGER("You are burned by \the [src]!"))
-		M.IgniteMob()
 		M.apply_damage(rand(5, 15), BURN)
 
 #undef FUEL_CONSUMPTION_CONSTANT

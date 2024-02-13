@@ -31,7 +31,7 @@
 			animation.anchored = TRUE
 			animation.icon = 'icons/mob/mob.dmi'
 			animation.layer = FLY_LAYER
-			target.ExtinguishMob()
+			target.extinguish_fire()
 			if(target.buckled)
 				target.buckled = null
 			jaunt_disappear(animation, target)

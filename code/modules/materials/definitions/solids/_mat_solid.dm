@@ -19,3 +19,4 @@
 	if(!ore_compresses_to)
 		ore_compresses_to = type
 	. = ..()
+

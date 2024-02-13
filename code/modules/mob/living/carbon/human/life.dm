@@ -272,7 +272,7 @@
 	return
 
 /mob/living/carbon/human/get_bodytemperature_difference()
-	if (on_fire)
+	if (is_on_fire())
 		return 0 //too busy for pesky metabolic regulation
 	return ..()
 
@@ -502,7 +502,7 @@
 					health_images += E.get_damage_hud_image()
 
 				// Apply a fire overlay if we're burning.
-				if(on_fire)
+				if(is_on_fire())
 					health_images += image('icons/mob/screen1_health.dmi',"burning")
 
 				// Show a general pain/crit indicator if needed.

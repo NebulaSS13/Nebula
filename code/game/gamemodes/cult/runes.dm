@@ -462,8 +462,8 @@
 		if(casters.len < 3)
 			break
 		//T.turf_animation('icons/effects/effects.dmi', "rune_sac")
-		victim.fire_stacks = max(2, victim.fire_stacks)
-		victim.IgniteMob()
+		victim.fire_intensity = max(2, victim.fire_intensity)
+		victim.ignite_fire()
 		var/dam_amt = 2 + length(casters)
 		victim.take_organ_damage(dam_amt, dam_amt) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
 		if(ishuman(victim))
@@ -506,7 +506,7 @@
 		to_chat(victim, "<span class='cult'>The Geometer of Blood claims your body.</span>")
 		victim.dust()
 	if(victim)
-		victim.ExtinguishMob() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
+		victim.extinguish_fire() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
 		victim = null
 
 
