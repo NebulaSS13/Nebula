@@ -382,6 +382,7 @@ SUBSYSTEM_DEF(zcopy)
 			// Special case: these are merged into the shadower to reduce memory usage.
 			if (object.type == /atom/movable/lighting_overlay)
 				T.shadower.copy_lighting(object, !(T.below.z_flags & ZM_NO_SHADOW))
+				shadower_set = TRUE
 				continue
 
 			// If an atom already has an overlay, we probably don't need to discover it again.
