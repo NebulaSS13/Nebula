@@ -46,7 +46,9 @@ var/global/list/mimic_defines = list(
 	"ZM_ALLOW_ATMOS",
 	"ZM_MIMIC_NO_AO",
 	"ZM_NO_OCCLUDE",
-	"ZM_MIMIC_BASETURF"
+	"ZM_OVERRIDE",
+	"ZM_NO_SHADOW",
+	"ZM_TERMINATOR"
 )
 
 // Movable flags.
