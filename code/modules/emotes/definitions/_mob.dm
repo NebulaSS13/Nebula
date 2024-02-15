@@ -1,6 +1,3 @@
-/mob
-	var/list/usable_emotes
-
 /mob/proc/get_default_emotes()
 	return
 

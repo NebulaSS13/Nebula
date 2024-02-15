@@ -7,5 +7,5 @@
 	)
 	treated_by_item_cost = 3
 	third_person_treatment_message = "$USER$ patches $TARGET$'s faulty $ORGAN$ with $ITEM$."
-	self_treatment_message = "$USER$ patches $USER_HIS$ faulty $ORGAN$ with $ITEM$."
+	self_treatment_message = "$USER$ patches $USER_THEIR$ faulty $ORGAN$ with $ITEM$."
 	initial_ailment_message = "Damage to your $ORGAN$ has caused a fault..."

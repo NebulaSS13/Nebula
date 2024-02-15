@@ -384,7 +384,7 @@
 	for(var/obj/item/organ/external/affecting in get_external_organs())
 		if(!screamed && affecting.can_feel_pain())
 			screamed = TRUE
-			emote("scream")
+			emote(/decl/emote/audible/scream)
 		affecting.status |= ORGAN_DISFIGURED
 	take_organ_damage(0, severity, override_droplimb = DISMEMBER_METHOD_ACID)
 

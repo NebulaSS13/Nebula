@@ -68,7 +68,7 @@
 	if((status & ORGAN_BROKEN) && brute)
 		jostle_bone(brute)
 		if(can_feel_pain() && prob(40))
-			owner.emote("scream")	//getting hit on broken hand hurts
+			owner.emote(/decl/emote/audible/scream)	//getting hit on broken hand hurts
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	var/datum/wound/created_wound
@@ -282,7 +282,7 @@
 			return
 	pain = max(0,min(max_damage,pain+amount))
 	if(owner && ((amount > 15 && prob(20)) || (amount > 30 && prob(60))))
-		owner.emote("scream")
+		owner.emote(/decl/emote/audible/scream)
 	return pain-last_pain
 
 /obj/item/organ/external/proc/stun_act(var/stun_amount, var/agony_amount)

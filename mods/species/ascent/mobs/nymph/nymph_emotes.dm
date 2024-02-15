@@ -4,7 +4,7 @@
 		/decl/emote/visible/scratch,
 		/decl/emote/visible/drool,
 		/decl/emote/visible/nod,
-		/decl/emote/visible/tail/sway,
+		/decl/emote/visible/sway,
 		/decl/emote/visible/sulk,
 		/decl/emote/visible/twitch,
 		/decl/emote/visible/roll,

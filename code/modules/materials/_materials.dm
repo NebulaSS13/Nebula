@@ -739,7 +739,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(prob(10))
 			M.SelfMove(pick(global.cardinal))
 		if(prob(narcosis))
-			M.emote(pick("twitch", "drool", "moan"))
+			M.emote(pick(/decl/emote/visible/twitch, /decl/emote/visible/drool, /decl/emote/audible/moan))
 
 	if(euphoriant)
 		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)

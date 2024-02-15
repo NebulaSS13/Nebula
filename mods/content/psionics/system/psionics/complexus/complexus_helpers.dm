@@ -78,7 +78,8 @@
 	stunned(value * 2)
 	set_cooldown(value * 100)
 
-	if(prob(value*10)) owner.emote("scream")
+	if(prob(value*10))
+		owner.emote(/decl/emote/audible/scream)
 
 	// Your head asplode.
 	owner.adjustBrainLoss(value)

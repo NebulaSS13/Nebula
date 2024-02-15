@@ -166,5 +166,5 @@
 
 /decl/emote/audible/vox_shriek
 	key = "shriek"
-	emote_message_3p = "USER SHRIEKS!"
+	emote_message_3p = "$USER$ SHRIEKS!"
 	emote_sound = 'mods/species/vox/sounds/shriek1.ogg'

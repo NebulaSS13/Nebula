@@ -143,7 +143,7 @@
 		SET_STATUS_MAX(M, STAT_DROWSY, 3)
 		SET_STATUS_MAX(M, STAT_SLUR, 3)
 	if(prob(20))
-		M.emote(pick("giggle", "laugh"))
+		M.emote(pick(/decl/emote/audible/giggle, /decl/emote/audible/laugh))
 	M.add_chemical_effect(CE_PULSE, -1)
 
 /decl/material/gas/nitrogen

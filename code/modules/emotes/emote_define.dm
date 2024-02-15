@@ -1,15 +1,15 @@
 // Note about emote messages:
-// - USER / TARGET will be replaced with the relevant name, in bold.
-// - USER_THEM / TARGET_THEM / USER_THEIR / TARGET_THEIR will be replaced with a
+// - $USER$ / $TARGET$ will be replaced with the relevant name, in bold.
+// - $USER_THEM$ / $TARGET_THEM$ / $USER_THEIR$ / $TARGET_THEIR$ will be replaced with a
 //   gender-appropriate version of the same.
 // - Impaired messages do not do any substitutions.
 
-var/global/list/emotes_by_key = list()
+var/global/list/_emotes_by_key
 
 /proc/get_emote_by_key(var/key)
-	if(!global.emotes_by_key)
-		decls_repository.get_decls_of_type(/decl/emote) // emotes_by_key will be updated in emote Initialize()
-	return global.emotes_by_key[key]
+	if(!global._emotes_by_key)
+		decls_repository.get_decls_of_type(/decl/emote) // _emotes_by_key will be updated in emote Initialize()
+	return global._emotes_by_key[key]
 
 /decl/emote
 	/// Command to use emote ie. '*[key]'
@@ -69,7 +69,7 @@ var/global/list/emotes_by_key = list()
 /decl/emote/Initialize()
 	. = ..()
 	if(key)
-		global.emotes_by_key[key] = src
+		LAZYSET(global._emotes_by_key, key, src)
 
 /decl/emote/validate()
 	. = ..()
@@ -80,6 +80,38 @@ var/global/list/emotes_by_key = list()
 			continue
 		if(key == emote.key)
 			. += "non-unique key, overlaps with [emote.type]"
+
+// validate() is never called outside of unit testing, but
+// this feels foul to have in non-unit test main code.
+#ifdef UNIT_TEST
+	var/static/obj/dummy_emote_target = new
+	dummy_emote_target.name = "\proper Barry's hat"
+	var/static/mob/dummy_emote_user = new
+	dummy_emote_user.name = "\proper Barry"
+	dummy_emote_user.set_gender(MALE)
+	// This should catch misspelled tokens, TARGET_HIM etc as well as leftover TARGET and USER.
+	var/static/list/tokens = list("$", "TARGET", "USER")
+	var/all_strings = list(
+		"emote_message_1p"                  = emote_message_1p,
+		"emote_message_3p"                  = emote_message_3p,
+		"emote_message_synthetic_1p"        = emote_message_synthetic_1p,
+		"emote_message_synthetic_3p"        = emote_message_synthetic_3p,
+		"emote_message_1p_target"           = emote_message_1p_target,
+		"emote_message_3p_target"           = emote_message_3p_target,
+		"emote_message_synthetic_1p_target" = emote_message_synthetic_1p_target,
+		"emote_message_synthetic_3p_target" = emote_message_synthetic_3p_target
+	)
+	for(var/string_key in all_strings)
+		var/emote_string = all_strings[string_key]
+		if(!length(emote_string))
+			continue
+		emote_string = replace_target_tokens(emote_string, dummy_emote_target)
+		emote_string = replace_user_tokens(emote_string, dummy_emote_user)
+		emote_string = uppertext(emote_string)
+		for(var/token in tokens)
+			if(findtext(emote_string, token))
+				. += "malformed emote token [token] in [string_key]"
+#endif
 
 /decl/emote/proc/get_emote_message_1p(var/atom/user, var/atom/target, var/extra_params)
 	if(target)
@@ -115,7 +147,7 @@ var/global/list/emotes_by_key = list()
 	if(ismob(user) && check_restraints)
 		var/mob/M = user
 		if(M.restrained())
-			to_chat(user, "<span class='warning'>You are restrained and cannot do that.</span>")
+			to_chat(user, SPAN_WARNING("You are restrained and cannot do that."))
 			return
 
 	var/atom/target
@@ -152,7 +184,7 @@ var/global/list/emotes_by_key = list()
 	if(use_3p)
 		if(target)
 			use_3p = replace_target_tokens(use_3p, target)
-		use_3p = "<span class='emote'><b>\The [user]</b> [replace_user_tokens(use_3p, user)]</span>"
+		use_3p = "<span class='emote'>[replace_user_tokens(use_3p, user)]</span>"
 
 	var/use_radio = get_radio_message(user)
 	if(use_radio)
@@ -184,19 +216,19 @@ var/global/list/emotes_by_key = list()
 	. = msg
 	if(istype(target))
 		var/decl/pronouns/target_gender = target.get_pronouns()
-		. = replacetext(., "TARGET_THEM",  target_gender.him)
-		. = replacetext(., "TARGET_THEIR", target_gender.his)
-		. = replacetext(., "TARGET_SELF",  target_gender.self)
-		. = replacetext(., "TARGET",       "<b>\the [target]</b>")
+		. = replacetext(., "$TARGET_THEM$",  target_gender.him)
+		. = replacetext(., "$TARGET_THEIR$", target_gender.his)
+		. = replacetext(., "$TARGET_SELF$",  target_gender.self)
+		. = replacetext(., "$TARGET$",       "<b>\the [target]</b>")
 
 /decl/emote/proc/replace_user_tokens(var/msg, var/atom/user)
 	. = msg
 	if(istype(user))
 		var/decl/pronouns/user_gender = user.get_pronouns()
-		. = replacetext(., "USER_THEM",  user_gender.him)
-		. = replacetext(., "USER_THEIR", user_gender.his)
-		. = replacetext(., "USER_SELF",  user_gender.self)
-		. = replacetext(., "USER",       "<b>\the [user]</b>")
+		. = replacetext(., "$USER_THEM$",  user_gender.him)
+		. = replacetext(., "$USER_THEIR$", user_gender.his)
+		. = replacetext(., "$USER_SELF$",  user_gender.self)
+		. = replacetext(., "$USER$",       "<b>\the [user]</b>")
 
 /decl/emote/proc/get_radio_message(var/atom/user)
 	if(emote_message_radio_synthetic && check_synthetic(user))
@@ -216,8 +248,8 @@ var/global/list/emotes_by_key = list()
 		sound_to_play = pick(sound_to_play)
 	return playsound(user.loc, sound_to_play, 50, 0)
 
-/decl/emote/proc/mob_can_use(var/mob/user)
-	return istype(user) && user.stat != DEAD && (type in user.get_default_emotes())
+/decl/emote/proc/mob_can_use(mob/living/user, assume_available = FALSE)
+	return istype(user) && user.stat != DEAD && (assume_available || (type in user.get_default_emotes()))
 
 /decl/emote/proc/can_target()
 	return (emote_message_1p_target || emote_message_3p_target)

@@ -59,7 +59,7 @@
 	var/container = get_container()
 	return istype(container, /obj/item/organ/internal/brain_interface) || istype(container, /obj/item/organ/internal/brain/robotic)
 
-/mob/living/brain/can_emote()
+/mob/living/brain/can_emote(emote_type, show_message)
 	return is_in_interface() && ..()
 
 /mob/living/brain/can_use_rig()

@@ -1241,7 +1241,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"<span class='danger'>You hear a sickening crack.</span>")
 		jostle_bone()
 		if(can_feel_pain())
-			owner.emote("scream")
+			owner.emote(/decl/emote/audible/scream)
 
 	playsound(src.loc, "fracture", 100, 1, -2)
 	status |= ORGAN_BROKEN

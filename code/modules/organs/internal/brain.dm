@@ -188,7 +188,7 @@
 		SET_STATUS_MAX(owner, STAT_STUN, 10)
 		switch(rand(1, 3))
 			if(1)
-				owner.emote("twitch")
+				owner.emote(/decl/emote/visible/twitch)
 			if(2 to 3)
 				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
 		ADJ_STATUS(owner, STAT_JITTER, 100)

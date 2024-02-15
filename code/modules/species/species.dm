@@ -478,9 +478,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/handle_sleeping(var/mob/living/carbon/human/H)
 	if(prob(2) && !H.failed_last_breath && !H.isSynthetic())
 		if(!HAS_STATUS(H, STAT_PARA))
-			H.emote("snore")
+			H.emote(/decl/emote/audible/snore)
 		else
-			H.emote("groan")
+			H.emote(/decl/emote/audible/groan)
 
 /decl/species/proc/handle_environment_special(var/mob/living/carbon/human/H)
 	return
@@ -724,8 +724,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
 		if(pain_level >= pain_power)
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
-			var/decl/emote/E = GET_DECL(pick(pain_emotes))
-			return E.key
+			return pick(pain_emotes)
 
 /decl/species/proc/handle_post_move(var/mob/living/carbon/human/H)
 	handle_exertion(H)

@@ -4,7 +4,7 @@
 		/decl/emote/visible/scratch,
 		/decl/emote/visible/drool,
 		/decl/emote/visible/nod,
-		/decl/emote/visible/tail/sway,
+		/decl/emote/visible/sway,
 		/decl/emote/visible/sulk,
 		/decl/emote/visible/twitch,
 		/decl/emote/visible/dance,
@@ -28,5 +28,5 @@
 
 /decl/emote/audible/chirp
 	key = "chirp"
-	emote_message_3p = "USER chirps!"
+	emote_message_3p = "$USER$ chirps!"
 	emote_sound = 'mods/mobs/dionaea/sounds/nymphchirp.ogg'

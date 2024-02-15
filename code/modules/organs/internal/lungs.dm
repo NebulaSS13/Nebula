@@ -189,7 +189,7 @@
 	if(inhale_efficiency < 1)
 		if(prob(20) && active_breathing)
 			if(inhale_efficiency < 0.6)
-				owner.emote("gasp")
+				owner.emote(/decl/emote/audible/gasp)
 			else if(prob(20))
 				to_chat(owner, SPAN_WARNING("It's hard to breathe..."))
 		breath_fail_ratio = clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
@@ -259,9 +259,9 @@
 	if(prob(15) && !owner.nervous_system_failure())
 		if(!owner.is_asystole())
 			if(active_breathing)
-				owner.emote("gasp")
+				owner.emote(/decl/emote/audible/gasp)
 		else
-			owner.emote(pick("shiver","twitch"))
+			owner.emote(pick(/decl/emote/visible/shiver,/decl/emote/visible/twitch))
 
 	if(damage || GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS) || world.time > last_successful_breath + 2 MINUTES)
 		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)

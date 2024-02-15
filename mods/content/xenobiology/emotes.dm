@@ -2,7 +2,7 @@
 	var/static/list/default_emotes = list(
 		/decl/emote/audible/moan,
 		/decl/emote/visible/twitch,
-		/decl/emote/visible/tail/sway,
+		/decl/emote/visible/sway,
 		/decl/emote/visible/shiver,
 		/decl/emote/visible/bounce,
 		/decl/emote/visible/jiggle,
@@ -27,7 +27,7 @@
 		slime_ai.mood = mood
 		user.update_icon()
 
-/decl/emote/slime/mob_can_use(var/atom/user)
+/decl/emote/slime/mob_can_use(mob/living/user, assume_available = FALSE)
 	return isslime(user) && ..()
 
 /decl/emote/slime/pout

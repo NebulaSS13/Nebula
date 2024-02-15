@@ -2,7 +2,7 @@
 /decl/emote/visible/tail
 	abstract_type = /decl/emote/visible/tail
 
-/decl/emote/visible/tail/mob_can_use(mob/living/user)
+/decl/emote/visible/tail/mob_can_use(mob/living/user, assume_available = FALSE)
 	return ishuman(user) && ..()
 
 /decl/emote/visible/tail/swish

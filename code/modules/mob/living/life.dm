@@ -123,7 +123,7 @@
 				to_chat(src, "<span class='warning'>You feel weak.</span>")
 				SET_STATUS_MAX(src, STAT_WEAK, 3)
 				if(!lying)
-					emote("collapse")
+					emote(/decl/emote/visible/collapse)
 			if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 				lose_hair()
 
@@ -136,7 +136,7 @@
 			if(prob(1))
 				to_chat(src, "<span class='warning'>You feel strange!</span>")
 				adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
-				emote("gasp")
+				emote(/decl/emote/audible/gasp)
 	if(radiation > 150)
 		damage = 8
 		radiation -= 4 * RADIATION_SPEED_COEFFICIENT

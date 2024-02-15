@@ -193,7 +193,7 @@
 
 	if(prob(1))
 		if(prob(50))
-			body.emote(pick("bounce","sway","light","vibrate","jiggle"))
+			body.emote(pick(/decl/emote/visible/bounce, /decl/emote/visible/sway, /decl/emote/visible/lightup, /decl/emote/visible/vibrate, /decl/emote/visible/jiggle))
 		else
 			var/list/possible_comments
 			var/list/all_slime_comments = decls_repository.get_decls_of_subtype(/decl/slime_comment)
