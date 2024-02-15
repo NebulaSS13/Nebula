@@ -1311,3 +1311,110 @@ default behaviour is:
 			else
 				CRASH("synthetic get_default_temperature_threshold() called with invalid threshold value.")
 	return ..()
+
+/mob/living/clean(clean_forensics = TRUE)
+
+	SHOULD_CALL_PARENT(FALSE)
+
+	for(var/obj/item/thing in get_held_items())
+		thing.clean()
+
+	var/obj/item/back = get_equipped_item(slot_back_str)
+	if(back)
+		back.clean()
+
+	//flush away reagents on the skin
+	var/datum/reagents/touching_reagents = get_contact_reagents()
+	if(touching_reagents)
+		var/remove_amount = touching_reagents.maximum_volume * reagent_permeability() //take off your suit first
+		touching_reagents.remove_any(remove_amount)
+
+	var/obj/item/mask = get_equipped_item(slot_wear_mask_str)
+	if(mask)
+		mask.clean()
+
+	var/washgloves  = TRUE
+	var/washshoes   = TRUE
+	var/washmask    = TRUE
+	var/washears    = TRUE
+	var/washglasses = TRUE
+
+	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
+	if(suit)
+		washgloves = !(suit.flags_inv & HIDEGLOVES)
+		washshoes = !(suit.flags_inv & HIDESHOES)
+
+	var/obj/item/head = get_equipped_item(slot_head_str)
+	if(head)
+		washmask = !(head.flags_inv & HIDEMASK)
+		washglasses = !(head.flags_inv & HIDEEYES)
+		washears = !(head.flags_inv & HIDEEARS)
+
+	if(mask)
+		if (washears)
+			washears = !(mask.flags_inv & HIDEEARS)
+		if (washglasses)
+			washglasses = !(mask.flags_inv & HIDEEYES)
+
+	if(head)
+		head.clean()
+
+	if(suit)
+		suit.clean()
+	else
+		var/obj/item/uniform = get_equipped_item(slot_w_uniform_str)
+		if(uniform)
+			uniform.clean()
+
+	if(washgloves)
+		var/obj/item/gloves = get_equipped_item(slot_gloves_str)
+		if(gloves)
+			gloves.clean()
+		else
+			germ_level = 0
+
+	var/obj/item/shoes = get_equipped_item(slot_shoes_str)
+	if(shoes && washshoes)
+		shoes.clean()
+
+	if(mask && washmask)
+		mask.clean()
+
+	if(washglasses)
+		var/obj/item/glasses = get_equipped_item(slot_glasses_str)
+		if(glasses)
+			glasses.clean()
+
+	if(washears)
+		var/obj/item/ear = get_equipped_item(slot_l_ear_str)
+		if(ear)
+			ear.clean()
+		ear = get_equipped_item(slot_r_ear_str)
+		if(ear)
+			ear.clean()
+
+	var/obj/item/belt = get_equipped_item(slot_belt_str)
+	if(belt)
+		belt.clean()
+
+	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
+	if(gloves)
+		gloves.clean()
+		gloves.germ_level = 0
+		for(var/organ_tag in get_held_item_slots())
+			var/obj/item/organ/external/organ = get_organ(organ_tag)
+			if(organ)
+				organ.clean()
+	else
+		germ_level = 0
+	update_equipment_overlay(slot_gloves_str, FALSE)
+
+	if(!get_equipped_item(slot_shoes_str))
+		var/static/list/clean_slots = list(BP_L_FOOT, BP_R_FOOT)
+		for(var/organ_tag in clean_slots)
+			var/obj/item/organ/external/organ = get_organ(organ_tag)
+			if(organ)
+				organ.clean()
+	update_equipment_overlay(slot_shoes_str)
+
+	return TRUE

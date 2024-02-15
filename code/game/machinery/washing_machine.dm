@@ -255,7 +255,7 @@
 /obj/machinery/washing_machine/on_update_icon()
 	icon_state = "wm_[state][panel_open]"
 
-/obj/machinery/washing_machine/clean_blood()
+/obj/machinery/washing_machine/clean(clean_forensics = TRUE)
 	. = ..()
 	state &= ~WASHER_STATE_BLOODY
 	update_icon()

@@ -42,9 +42,9 @@
 		overlays -= wet_overlay
 		wet_overlay = null
 
-/turf/simulated/clean_blood()
+/turf/simulated/clean(clean_forensics = TRUE)
 	for(var/obj/effect/decal/cleanable/blood/B in contents)
-		B.clean_blood()
+		B.clean(clean_forensics)
 	. = ..()
 
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor=COLOR_BLOOD_HUMAN)

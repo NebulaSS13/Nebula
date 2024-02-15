@@ -626,10 +626,6 @@
 	playsound(target, hitsound, 50, 1, -1)
 	return 1
 
-/obj/item/clean_blood()
-	. = ..()
-	clean()
-
 /obj/item/reveal_blood()
 	if(was_bloodied && !fluorescent)
 		fluorescent = FLUORESCENT_GLOWS
@@ -862,9 +858,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 	coating.remove_any(amount)
 	if(coating.total_volume <= MINIMUM_CHEMICAL_VOLUME)
-		clean(0)
+		clean(FALSE)
 
-/obj/item/proc/clean(clean_forensics=TRUE)
+/obj/item/clean(clean_forensics=TRUE)
+	. = ..()
 	QDEL_NULL(coating)
 	blood_overlay = null
 	if(clean_forensics)

@@ -384,7 +384,7 @@ var/global/list/hygiene_props = list()
 		return TRUE
 	busy = FALSE
 
-	user.clean_blood()
+	user.clean()
 	user.visible_message(
 		SPAN_NOTICE("\The [user] washes their hands using \the [src]."),
 		SPAN_NOTICE("You wash your hands using \the [src]."))
@@ -452,7 +452,7 @@ var/global/list/hygiene_props = list()
 
 	if(istype(O, /obj/item/chems/spray/extinguisher)) return TRUE // We're washing, not filling.
 
-	O.clean_blood()
+	O.clean()
 	user.visible_message( \
 		SPAN_NOTICE("\The [user] washes \a [I] using \the [src]."),
 		SPAN_NOTICE("You wash \a [I] using \the [src]."))

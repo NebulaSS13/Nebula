@@ -490,7 +490,7 @@
 
 	- Return: `TRUE` if blood with DNA was removed
 */
-/atom/proc/clean_blood()
+/atom/proc/clean(clean_forensics = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	if(!simulated)
 		return
@@ -504,6 +504,7 @@
 			forensics.remove_data(/datum/forensics/blood_dna)
 			forensics.remove_data(/datum/forensics/gunshot_residue)
 		return TRUE
+	return FALSE
 
 /// Only used by Sandbox_Spacemove, which is used by nothing
 /// - TODO: Remove this

@@ -838,7 +838,7 @@
 		if(module.type == /obj/item/robot_module/janitor)
 			var/turf/tile = loc
 			if(isturf(tile))
-				tile.clean_blood()
+				tile.clean()
 				if (istype(tile, /turf/simulated))
 					var/turf/simulated/S = tile
 					S.dirt = 0
@@ -848,25 +848,25 @@
 							qdel(A)
 					else if(istype(A, /obj/item))
 						var/obj/item/cleaned_item = A
-						cleaned_item.clean_blood()
+						cleaned_item.clean()
 					else if(ishuman(A))
 						var/mob/living/carbon/human/cleaned_human = A
 						if(cleaned_human.lying)
 							var/obj/item/head = cleaned_human.get_equipped_item(slot_head_str)
 							if(head)
-								head.clean_blood()
+								head.clean()
 							var/obj/item/suit = cleaned_human.get_equipped_item(slot_wear_suit_str)
 							if(suit)
-								suit.clean_blood()
+								suit.clean()
 							else
 								var/obj/item/uniform = cleaned_human.get_equipped_item(slot_w_uniform_str)
 								if(uniform)
-									uniform.clean_blood()
+									uniform.clean()
 							var/obj/item/shoes = cleaned_human.get_equipped_item(slot_shoes_str)
 							if(shoes)
-								shoes.clean_blood()
-							cleaned_human.clean_blood(1)
-							to_chat(cleaned_human, "<span class='warning'>[src] cleans your face!</span>")
+								shoes.clean()
+							cleaned_human.clean()
+							to_chat(cleaned_human, SPAN_WARNING("\The [src] cleans your face!"))
 		return
 
 /mob/living/silicon/robot/proc/self_destruct()

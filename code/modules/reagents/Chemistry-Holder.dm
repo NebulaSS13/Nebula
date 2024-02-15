@@ -506,7 +506,7 @@ var/global/obj/temp_reagents_holder = new
 		current.touch_turf(target, REAGENT_VOLUME(src, rtype), src)
 	var/dirtiness = get_dirtiness()
 	if(dirtiness <= DIRTINESS_CLEAN)
-		target.clean_blood()
+		target.clean()
 		target.remove_cleanables()
 	if(dirtiness != DIRTINESS_NEUTRAL)
 		if(dirtiness > DIRTINESS_NEUTRAL)
@@ -524,7 +524,7 @@ var/global/obj/temp_reagents_holder = new
 				for(var/obj/effect/decal/cleanable/blood/B in target)
 					qdel(B)
 			if(dirtiness <= DIRTINESS_CLEAN)
-				target.clean_blood()
+				target.clean()
 				if(istype(target, /turf/simulated))
 					var/turf/simulated/simulated_turf = target
 					simulated_turf.dirt = 0
