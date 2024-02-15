@@ -52,16 +52,22 @@
 	)
 	possible_wanted_items = list()
 	possible_trading_items = list(
+		/obj/item/utensil/chopsticks                    = TRADER_THIS_TYPE,
+		/obj/item/utensil/chopsticks/plastic            = TRADER_THIS_TYPE,
+		/obj/item/chems/condiment/small/soysauce        = TRADER_THIS_TYPE,
+		/obj/item/chems/condiment/capsaicin             = TRADER_THIS_TYPE,
+		/obj/item/chems/food/boiledrice/chazuke         = TRADER_THIS_TYPE,
+		/obj/item/chems/food/katsucurry                 = TRADER_THIS_TYPE,
 		/obj/item/chems/food/meatkabob    	            = TRADER_THIS_TYPE,
-		/obj/item/chems/food/monkeysdelight             = TRADER_THIS_TYPE,
+		/obj/item/chems/food/boiledegg                  = TRADER_THIS_TYPE,
+		/obj/item/chems/food/boiledrice                 = TRADER_THIS_TYPE,
 		/obj/item/chems/food/ricepudding                = TRADER_THIS_TYPE,
-		/obj/item/chems/food/slice/xenomeatbread/filled = TRADER_THIS_TYPE,
 		/obj/item/chems/food/soydope                    = TRADER_THIS_TYPE,
 		/obj/item/chems/food/stewedsoymeat              = TRADER_THIS_TYPE,
 		/obj/item/chems/drinks/dry_ramen                = TRADER_THIS_TYPE
 	)
 
-	var/list/fortunes = list(
+	var/static/list/fortunes = list(
 		"Today it's up to you to create the peacefulness you long for.",
 		"If you refuse to accept anything but the best, you very often get it.",
 		"A smile is your passport into the hearts of others.",

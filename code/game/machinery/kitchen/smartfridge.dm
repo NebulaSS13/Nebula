@@ -122,7 +122,7 @@
 	icon_contents = "food"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/chems/food) || istype(O,/obj/item/kitchen/utensil))
+	if(istype(O,/obj/item/chems/food) || istype(O,/obj/item/utensil))
 		return 1
 
 /obj/machinery/smartfridge/drying_rack

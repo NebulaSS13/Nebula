@@ -81,6 +81,7 @@
 			. += new/datum/stack_recipe/rod(src)
 
 		. += new/datum/stack_recipe/fork(src)
+		. += new/datum/stack_recipe/chopsticks(src)
 		. += new/datum/stack_recipe/knife(src)
 		. += new/datum/stack_recipe/bell(src)
 		. += new/datum/stack_recipe/blade(src)

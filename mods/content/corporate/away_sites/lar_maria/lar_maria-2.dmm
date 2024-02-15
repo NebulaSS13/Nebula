@@ -2194,7 +2194,7 @@
 "gR" = (
 /obj/structure/table,
 /obj/item/plate,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "gS" = (
@@ -2309,7 +2309,7 @@
 "hk" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hl" = (
@@ -2603,7 +2603,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "ic" = (
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "id" = (
@@ -2942,7 +2942,7 @@
 "iZ" = (
 /obj/structure/table/marble,
 /obj/item/plate,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ja" = (

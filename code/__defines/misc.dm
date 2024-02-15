@@ -314,5 +314,17 @@
 #define LEVEL_ABOVE_PLATING 2
 
 // Defines for fluorescence (/atom/var/fluorescent)
-#define FLUORESCENT_GLOWS   1	// Glows when under flourescent light
-#define FLUORESCENT_GLOWING 2	// Currently glowing due to flourescent light
+/// Glows when under flourescent light
+#define FLUORESCENT_GLOWS   1
+/// Currently glowing due to flourescent light
+#define FLUORESCENT_GLOWING 2
+
+// Flags used for utensil-food interaction.
+/// Solid or semi-solid food; chopsticks, forks.
+#define UTENSIL_FLAG_COLLECT BITFLAG(0)
+/// Soft, liquid or semi-liquid food; soups, stews, pudding.
+#define UTENSIL_FLAG_SCOOP   BITFLAG(1)
+/// Foods that need to be sliced before eating; steak, grapefruit.
+#define UTENSIL_FLAG_SLICE   BITFLAG(2)
+/// Unimplemented; condiments that are collected before being spread on other food.
+#define UTENSIL_FLAG_SPREAD  BITFLAG(3)

@@ -112,8 +112,8 @@
 		/obj/item/hatchet,
 		/obj/item/knife,
 	)
-	new /obj/item/knife/table/primitive(hold)
-	new /obj/item/knife/table/primitive(hold)
+	new /obj/item/knife/primitive(hold)
+	new /obj/item/knife/primitive(hold)
 	update_icon()
 
 /obj/item/clothing/accessory/storage/knifeharness/on_update_icon()

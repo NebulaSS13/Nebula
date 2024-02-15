@@ -45,7 +45,7 @@
 			unseal()
 			return
 
-	else if(istype(W,/obj/item/kitchen/utensil))
+	else if(istype(W,/obj/item/utensil))
 		if(ATOM_IS_OPEN_CONTAINER(src))
 			..()
 		else
@@ -91,6 +91,7 @@
 	filling_color = "#ae0000"
 	nutriment_desc = list("tomato" = 1)
 	eat_sound = 'sound/items/drink.ogg'
+	utensil_flags = UTENSIL_FLAG_SCOOP
 
 /obj/item/chems/food/can/tomato/populate_reagents()
 	. = ..()

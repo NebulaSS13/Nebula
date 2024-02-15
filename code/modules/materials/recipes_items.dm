@@ -48,16 +48,20 @@
 
 /datum/stack_recipe/fork
 	title = "fork"
-	result_type = /obj/item/kitchen/utensil/fork/plastic
+	result_type = /obj/item/utensil/fork
+
+/datum/stack_recipe/chopsticks
+	title = "chopsticks"
+	result_type = /obj/item/utensil/chopsticks
 
 /datum/stack_recipe/knife
 	title = "table knife"
-	result_type = /obj/item/knife/table
+	result_type = /obj/item/utensil/knife
 	difficulty = 2
 
 /datum/stack_recipe/spoon
 	title = "spoon"
-	result_type = /obj/item/kitchen/utensil/spoon/plastic
+	result_type = /obj/item/utensil/spoon
 
 /datum/stack_recipe/blade
 	title = "knife"
