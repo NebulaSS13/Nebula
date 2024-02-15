@@ -2,16 +2,6 @@
 	name = "brain"
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "brain1"
-	default_emotes = list(
-		/decl/emote/audible/alarm,
-		/decl/emote/audible/alert,
-		/decl/emote/audible/notice,
-		/decl/emote/audible/whistle,
-		/decl/emote/audible/synth,
-		/decl/emote/audible/boop,
-		/decl/emote/visible/blink,
-		/decl/emote/visible/flash
-	)
 
 	// Used for EMP damage when inside an interface or robobrain.
 	var/emp_damage = 0
@@ -22,6 +12,19 @@
 		SPAN_NOTICE("Primary systems are now online."),
 		SPAN_DANGER("Major electrical distruption detected: System rebooting.")
 	)
+
+/mob/living/brain/get_base_default_emotes()
+	var/static/list/default_emotes = list(
+		/decl/emote/audible/alarm,
+		/decl/emote/audible/alert,
+		/decl/emote/audible/notice,
+		/decl/emote/audible/whistle,
+		/decl/emote/audible/synth,
+		/decl/emote/audible/boop,
+		/decl/emote/visible/blink,
+		/decl/emote/visible/flash
+	)
+	return default_emotes
 
 /mob/living/brain/handle_regular_status_updates()
 	. = ..()

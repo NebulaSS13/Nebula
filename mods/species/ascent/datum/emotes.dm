@@ -11,12 +11,13 @@
 		/decl/emote/visible/ascent_dazzle
 	)
 
-/mob/living/silicon/robot/flying/ascent
-	default_emotes = list(
+/mob/living/silicon/robot/flying/ascent/get_base_default_emotes()
+	var/static/list/default_emotes = list(
 		/decl/emote/audible/ascent_purr,
 		/decl/emote/audible/ascent_hiss,
 		/decl/emote/audible/ascent_snarl
 	)
+	return default_emotes
 
 /decl/emote/audible/ascent_purr
 	key = "purr"

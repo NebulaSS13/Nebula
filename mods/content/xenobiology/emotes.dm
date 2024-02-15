@@ -1,5 +1,5 @@
-/mob/living/slime
-	default_emotes = list(
+/mob/living/slime/get_base_default_emotes()
+	var/static/list/default_emotes = list(
 		/decl/emote/audible/moan,
 		/decl/emote/visible/twitch,
 		/decl/emote/visible/sway,
@@ -14,8 +14,9 @@
 		/decl/emote/slime/angry,
 		/decl/emote/slime/frown,
 		/decl/emote/slime/smile
-		)
-		
+	)
+	return default_emotes
+
 /decl/emote/slime
 	key = "nomood"
 	var/mood
