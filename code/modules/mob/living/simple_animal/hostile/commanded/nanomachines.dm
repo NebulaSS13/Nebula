@@ -49,8 +49,14 @@
 		regen_time = 0
 		heal_overall_damage(1)
 
-/mob/living/simple_animal/hostile/commanded/nanomachine/death(gibbed, deathmessage, show_dead_message)
-	..(null, "dissipates into thin air", "You have been destroyed.")
+/mob/living/simple_animal/hostile/commanded/nanomachine/get_death_message(gibbed)
+	return "dissipates into thin air."
+
+/mob/living/simple_animal/hostile/commanded/nanomachine/get_self_death_message(gibbed)
+	return "You have been destroyed."
+
+/mob/living/simple_animal/hostile/commanded/nanomachine/death(gibbed)
+	. = ..()
 	qdel(src)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/proc/move_to_heal()

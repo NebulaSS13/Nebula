@@ -14,6 +14,3 @@
 			message = SPAN_NOTICE("The data cable rapidly retracts back into its spool."), \
 			blind_message = SPAN_NOTICE("You hear a click and the sound of wire spooling rapidly."))
 		QDEL_NULL(cable)
-
-/mob/living/silicon/pai/death(gibbed, deathmessage, show_dead_message)
-	return ..(deathmessage = "gives one shrill beep before falling lifeless.")

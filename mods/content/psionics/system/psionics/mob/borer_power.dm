@@ -16,7 +16,7 @@
 	M.Scale(0.33)
 	aura_image.transform = M
 
-/mob/living/simple_animal/borer/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/borer/death(gibbed)
 	if(aura_image)
 		destroy_aura_image(aura_image)
 		aura_image = null

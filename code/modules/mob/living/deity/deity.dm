@@ -32,7 +32,7 @@
 	eyeobj.possess(src)
 	eyenet.add_source(src)
 
-/mob/living/deity/death()
+/mob/living/deity/death(gibbed)
 	. = ..()
 	if(.)
 		for(var/m in minions)
@@ -66,7 +66,7 @@
 			qdel(items[i])
 		items.Cut()
 
-	death(0)
+	death()
 	if(length(minions))
 		minions.Cut()
 	if(length(structures))

@@ -69,7 +69,7 @@
 /mob/living/bot/get_total_life_damage()
 	return getFireLoss() + getBruteLoss()
 
-/mob/living/bot/death()
+/mob/living/bot/death(gibbed)
 	if(stat == DEAD)
 		return
 	set_stat(DEAD)

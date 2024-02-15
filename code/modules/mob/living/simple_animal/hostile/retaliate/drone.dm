@@ -175,8 +175,14 @@
 	hostile_drone = 0
 	walk(src,0)
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/death()
-	..(null,"suddenly breaks apart.", "You have been destroyed.")
+/mob/living/simple_animal/hostile/retaliate/malf_drone/get_death_message(gibbed)
+	return "suddenly breaks apart."
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/get_self_death_message(gibbed)
+	return "You have been destroyed."
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/death(gibbed)
+	. = ..()
 	physically_destroyed()
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()

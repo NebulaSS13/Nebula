@@ -69,8 +69,13 @@
 	damtype = BURN
 	attack_verb = list("touched")
 
-/mob/living/simple_animal/familiar/horror/death(gibbed, deathmessage, show_dead_message)
-	..(null,"rapidly deteriorates","The bonds tying you to this mortal plane have been severed.")
+/mob/living/simple_animal/familiar/horror/get_death_message(gibbed)
+	return "rapidly deteriorates"
+/mob/living/simple_animal/familiar/horror/get_self_death_message(gibbed)
+	return "The bonds tying you to this mortal plane have been severed."
+
+/mob/living/simple_animal/familiar/horror/death(gibbed)
+	. = ..()
 	ghostize()
 	if(!gibbed)
 		gib()

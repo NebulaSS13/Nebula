@@ -94,11 +94,11 @@ var/global/list/protected_objects = list(/obj/machinery,
 		return TRUE
 	return FALSE
 
-/mob/living/simple_animal/hostile/mimic/death()
+/mob/living/simple_animal/hostile/mimic/death(gibbed)
 	if(!copy_of)
 		return
 	var/atom/movable/C = copy_of.resolve()
-	..(null, "dies!")
+	. = ..()
 	if(C)
 		C.forceMove(src.loc)
 

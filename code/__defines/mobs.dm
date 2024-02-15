@@ -403,3 +403,7 @@ var/global/list/dexterity_levels = list(
 #define GET_FACIAL_HAIR_STYLE(TARGET)                       (TARGET.get_organ_sprite_accessory_by_category(SAC_FACIAL_HAIR, BP_HEAD))
 #define SET_FACIAL_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null, SAC_FACIAL_HAIR, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
 #define GET_FACIAL_HAIR_COLOUR(TARGET)                      (TARGET.get_organ_sprite_accessory(GET_FACIAL_HAIR_STYLE(TARGET), BP_HEAD))
+
+// Used in death() to skip message broadcast.
+#define SKIP_DEATH_MESSAGE "no message"
+

@@ -42,8 +42,8 @@
 	var/obj/abstract/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
 
-/mob/living/simple_animal/hostile/lar_maria/death(gibbed, deathmessage, show_dead_message)
-	..(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/lar_maria/death(gibbed)
+	. = ..()
 	if(corpse)
 		new corpse (src.loc)
 	if (weapon)

@@ -45,7 +45,13 @@
 /mob/living/simple_animal/shade/on_defilement()
 	return
 
-/mob/living/simple_animal/shade/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/shade/get_death_message(gibbed)
+	return "lets out a contented sigh as their form unwinds"
+
+/mob/living/simple_animal/shade/get_self_death_message(gibbed)
+	return "You have been released from your earthly binds."
+
+/mob/living/simple_animal/shade/death(gibbed)
 	new /obj/item/ectoplasm (src.loc)
-	..(deathmessage = "lets out a contented sigh as their form unwinds", show_dead_message = "You have been released from your earthly binds.")
+	. = ..()
 	qdel(src)

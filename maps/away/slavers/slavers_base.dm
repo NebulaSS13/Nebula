@@ -145,8 +145,8 @@
 	var/corpse = /obj/abstract/landmark/corpse/abolitionist
 	var/weapon = /obj/item/gun/energy/laser
 
-/mob/living/simple_animal/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
-	. = ..(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/abolition_extremist/death(gibbed)
+	. = ..()
 	if(corpse)
 		new corpse(loc)
 	if(weapon)

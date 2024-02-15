@@ -211,8 +211,8 @@
 		visible_message(SPAN_MFAUNA("\The [src] shrieks as the seal on his power breaks and his wool sheds off!"))
 		new /obj/item/towel/fleece(src.loc)
 
-/mob/living/simple_animal/hostile/retaliate/goat/king/death()
-	..()
+/mob/living/simple_animal/hostile/retaliate/goat/king/death(gibbed)
+	. = ..()
 	OnDeath()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Destroy()

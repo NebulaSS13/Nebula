@@ -4,7 +4,7 @@
 
 	set waitfor = FALSE
 
-	death(1)
+	death(gibbed = TRUE)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
@@ -28,7 +28,7 @@
 //Originally created for wizard disintegrate. I've removed the virus code since it's irrelevant here.
 //Dusting robots does not eject the brain, so it's a bit more powerful than gib() /N
 /mob/proc/dust(anim="dust-m",remains=/obj/effect/decal/cleanable/ash)
-	death(1)
+	death(gibbed = TRUE)
 	var/atom/movable/overlay/animation = null
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
@@ -46,15 +46,24 @@
 	QDEL_IN(animation, 15)
 	QDEL_IN(src, 15)
 
-/mob/proc/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")
+/mob/proc/get_death_message(gibbed)
+	return SKIP_DEATH_MESSAGE
+
+/mob/proc/get_self_death_message(gibbed)
+	return "You have died."
+
+/mob/proc/death(gibbed)
 
 	if(stat == DEAD)
-		return 0
+		return FALSE
 
+	walk(src, 0)
 	facing_dir = null
 
-	if(!gibbed && deathmessage != "no message") // This is gross, but reliable. Only brains use it.
-		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
+	if(!gibbed)
+		var/death_message = get_death_message(gibbed)
+		if(death_message != SKIP_DEATH_MESSAGE)
+			visible_message("<b>\The [src]</b> [death_message]")
 
 	for(var/obj/item/organ/O in get_organs())
 		O.on_holder_death(gibbed)
@@ -92,5 +101,9 @@
 
 	if(SSticker.mode)
 		SSticker.mode.check_win()
-	to_chat(src,"<span class='deadsay'>[show_dead_message]</span>")
-	return 1
+
+	var/show_dead_message = get_self_death_message(gibbed)
+	if(show_dead_message)
+		to_chat(src,"<span class='deadsay'>[show_dead_message]</span>")
+
+	return TRUE

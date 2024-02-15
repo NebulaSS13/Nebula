@@ -13,7 +13,7 @@
 /decl/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
 
-/decl/species/proc/get_death_message(var/mob/living/carbon/human/H)
+/decl/species/proc/get_species_death_message(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "gives one shrill beep before falling lifeless." : death_message)
 
 /decl/species/proc/get_ssd(var/mob/living/carbon/human/H)

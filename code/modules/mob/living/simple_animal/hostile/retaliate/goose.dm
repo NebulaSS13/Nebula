@@ -43,7 +43,7 @@
 	if(stat != DEAD && loose)
 		icon_state += "-loose"
 
-/mob/living/simple_animal/hostile/retaliate/goose/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/retaliate/goose/death(gibbed)
 	. = ..()
 	update_icon()
 

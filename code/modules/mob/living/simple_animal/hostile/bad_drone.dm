@@ -36,8 +36,8 @@
 			if(istype(H.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cardborg) && istype(head, /obj/item/clothing/head/cardborg))
 				return FALSE
 
-/mob/living/simple_animal/hostile/rogue_drone/death(gibbed, deathmessage, show_dead_message)
-	.=..()
+/mob/living/simple_animal/hostile/rogue_drone/death(gibbed)
+	. = ..()
 	if(corpse)
 		new corpse (loc)
 	qdel(src)

@@ -1,10 +1,16 @@
-/mob/living/brain/death(gibbed)
-	var/death_message = "no message"
+/mob/living/brain/get_death_message(gibbed)
 	var/obj/item/organ/internal/brain_interface/container = get_container()
 	if(!gibbed && istype(container))
-		death_message = "beeps shrilly as \the [container] flatlines!"
-	. = ..(gibbed, death_message)
-	if(istype(container))
+		return "beeps shrilly as \the [container] flatlines!"
+	return ..()
+
+/mob/living/brain/death(gibbed)
+	var/obj/item/organ/holder = loc
+	var/obj/item/organ/internal/brain_interface/container = get_container()
+	. = ..()
+	if(stat == DEAD && istype(holder))
+		holder.die()
+	if(istype(container) && !QDELETED(container))
 		container.update_icon()
 
 /mob/living/brain/gib()

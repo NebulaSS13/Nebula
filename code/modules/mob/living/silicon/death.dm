@@ -1,3 +1,9 @@
+/mob/living/silicon/get_death_message(gibbed)
+	return "gives one shrill beep before falling lifeless."
+
+/mob/living/silicon/get_self_death_message(gibbed)
+	return "You have suffered a critical system failure, and are dead."
+
 /mob/living/silicon/gib()
 	..("gibbed-r")
 	gibs()
@@ -8,8 +14,8 @@
 /mob/living/silicon/dust()
 	..("dust-r", /obj/item/remains/robot)
 
-/mob/living/silicon/death(gibbed, deathmessage, show_dead_message)
+/mob/living/silicon/death(gibbed)
 	if(in_contents_of(/obj/machinery/recharge_station))//exit the recharge station
 		var/obj/machinery/recharge_station/RC = loc
 		RC.go_out()
-	return ..(gibbed, deathmessage, show_dead_message)
+	return ..()

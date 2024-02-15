@@ -17,9 +17,12 @@
 	var/list/allowed_mobs = list() //Who we allow past us
 	var/last_check = 0
 
-/mob/living/simple_animal/faithful_hound/death()
+/mob/living/simple_animal/faithful_hound/get_death_message(gibbed)
+	return "disappears!"
+
+/mob/living/simple_animal/faithful_hound/death(gibbed)
 	new /obj/item/ectoplasm (get_turf(src))
-	..(null, "disappears!")
+	. = ..()
 	qdel(src)
 
 /mob/living/simple_animal/faithful_hound/Destroy()

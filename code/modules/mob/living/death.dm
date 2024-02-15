@@ -1,5 +1,5 @@
-/mob/living/death(gibbed, deathmessage="seizes up and falls limp...", show_dead_message)
-	. = ..(gibbed, deathmessage, show_dead_message)
+/mob/living/death(gibbed)
+	. = ..()
 	if(buckled_mob)
 		unbuckle_mob()
 	if(hiding)

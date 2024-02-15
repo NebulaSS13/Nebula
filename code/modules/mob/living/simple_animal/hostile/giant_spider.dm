@@ -215,7 +215,7 @@ Guard caste procs
 	if(spooder.paired_nurse && !spooder.busy && spooder.stance == HOSTILE_STANCE_IDLE)
 		spooder.protect(spooder.paired_nurse)
 
-/mob/living/simple_animal/hostile/giant_spider/guard/death()
+/mob/living/simple_animal/hostile/giant_spider/guard/death(gibbed)
 	. = ..()
 	divorce()
 
@@ -269,7 +269,7 @@ Nurse caste procs
 			paired_guard.paired_nurse = null
 	paired_guard = null
 
-/mob/living/simple_animal/hostile/giant_spider/nurse/death()
+/mob/living/simple_animal/hostile/giant_spider/nurse/death(gibbed)
 	. = ..()
 	if(paired_guard)
 		paired_guard.vengance = rand(50,100)

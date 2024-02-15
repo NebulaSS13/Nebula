@@ -25,8 +25,11 @@
 	if(.)
 		audible_emote("growls at [.]")
 
-/mob/living/simple_animal/hostile/tree/death(gibbed, deathmessage, show_dead_message)
-	..(null,"is hacked into pieces!", show_dead_message)
+/mob/living/simple_animal/hostile/tree/get_death_message(gibbed)
+	return "is hacked into pieces!"
+
+/mob/living/simple_animal/hostile/tree/death(gibbed)
+	. = ..()
 	var/decl/material/mat = GET_DECL(/decl/material/solid/organic/wood)
 	mat.place_shards(loc)
 	qdel(src)

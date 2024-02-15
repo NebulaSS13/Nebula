@@ -169,10 +169,6 @@
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	return hearers(src, dist)-src
 
-/mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
-	..(gibbed, deathmessage, show_dead_message)
-	walk(src, 0)
-
 /mob/living/simple_animal/hostile/handle_regular_status_updates()
 	. = ..()
 	if(!.)

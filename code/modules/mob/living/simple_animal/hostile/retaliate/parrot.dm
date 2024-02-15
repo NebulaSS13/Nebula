@@ -101,12 +101,11 @@
 		held_item = null
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/parrot/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/retaliate/parrot/death(gibbed)
 	if(held_item)
 		held_item.dropInto(loc)
 		held_item = null
-	walk(src,0)
-	..(gibbed, deathmessage, show_dead_message)
+	. = ..()
 
 /mob/living/simple_animal/hostile/retaliate/parrot/Stat()
 	. = ..()

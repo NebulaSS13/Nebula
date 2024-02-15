@@ -243,7 +243,7 @@
 		to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and [G.his] commands."))
 	return 1
 
-/mob/living/silicon/robot/drone/death()
+/mob/living/silicon/robot/drone/death(gibbed)
 	if(stat != DEAD && should_be_dead())
 		self_destruct()
 		return FALSE

@@ -10,6 +10,9 @@
 	var/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."
 	var/instance_num
 
+/mob/living/carbon/alien/get_death_message()
+	return death_msg || ..()
+
 /mob/living/carbon/alien/Initialize()
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide

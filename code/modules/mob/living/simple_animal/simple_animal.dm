@@ -97,6 +97,9 @@
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN // How long in ds that a creature winds up before attacking.
 	var/sa_accuracy = 85 //base chance to hit out of 100
 
+	// Visible message shown when the mob dies.
+	var/death_message = "dies!"
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
@@ -425,10 +428,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(statpanel("Status") && show_stat_health)
 		stat(null, "Health: [get_health_percent()]%")
 
-/mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
+/mob/living/simple_animal/get_death_message(gibbed)
+	if(!gibbed && death_message)
+		return death_message
+	return ..()
+
+/mob/living/simple_animal/death(gibbed)
 	density = FALSE
 	walk_to(src,0)
-	. = ..(gibbed, deathmessage, show_dead_message)
+	. = ..()
 
 /mob/living/simple_animal/explosion_act(severity)
 	..()

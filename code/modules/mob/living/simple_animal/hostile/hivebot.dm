@@ -46,8 +46,11 @@
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT
 		)
 
-/mob/living/simple_animal/hostile/hivebot/death()
-	..(null, "blows apart!")
+/mob/living/simple_animal/hostile/hivebot/get_death_message(gibbed)
+	return "blows apart!"
+
+/mob/living/simple_animal/hostile/hivebot/death(gibbed)
+	. = ..()
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
 	spark_at(src, cardinal_only = TRUE)
 	qdel(src)
