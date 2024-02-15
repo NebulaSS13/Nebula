@@ -1100,7 +1100,7 @@
 /mob/living/silicon/robot/try_breathe()
 	return FALSE
 
-/mob/living/silicon/robot/get_base_default_emotes()
+/mob/living/silicon/robot/get_default_emotes()
 	var/static/list/default_emotes = list(
 		/decl/emote/audible/clap,
 		/decl/emote/visible/bow,

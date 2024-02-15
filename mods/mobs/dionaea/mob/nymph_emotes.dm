@@ -1,10 +1,10 @@
-/mob/living/carbon/alien/diona/get_base_default_emotes()
+/mob/living/carbon/alien/diona/get_default_emotes()
 	var/static/list/default_emotes = list(
 		/decl/emote/visible,
 		/decl/emote/visible/scratch,
 		/decl/emote/visible/drool,
 		/decl/emote/visible/nod,
-		/decl/emote/visible/sway,
+		/decl/emote/visible/tail/sway,
 		/decl/emote/visible/sulk,
 		/decl/emote/visible/twitch,
 		/decl/emote/visible/dance,

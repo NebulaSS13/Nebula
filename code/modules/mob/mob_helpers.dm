@@ -24,7 +24,6 @@
 			if(BP_IS_PROSTHETIC(E))
 				robolimb_count++
 		full_prosthetic = robolimb_count > 0 && (robolimb_count == LAZYLEN(limbs)) //If no organs, no way to tell
-		update_emotes()
 	return full_prosthetic
 
 /mob/living/silicon/isSynthetic()

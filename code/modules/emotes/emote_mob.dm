@@ -1,3 +1,8 @@
+/mob
+	var/next_emote
+	var/next_emote_refresh
+	var/last_emote_summary
+
 /mob/proc/can_emote(var/emote_type)
 	. = check_mob_can_emote(emote_type)
 	if(!.)
@@ -13,19 +18,32 @@
 /mob/living/brain/check_mob_can_emote(var/emote_type)
 	return ..() && istype(get_container(), /obj/item/organ/internal/brain_interface)
 
+#define EMOTE_REFRESH_SPAM_COOLDOWN (5 SECONDS)
 /mob/proc/emote(var/act, var/m_type, var/message)
 	set waitfor = FALSE
-	// s-s-snowflake
-	if(src.stat == DEAD && act != "deathgasp")
+
+	if(stat == DEAD && act != "deathgasp")
 		return
 
 	if(usr == src) //client-called emote
-		if (client && (client.prefs.muted & MUTE_IC))
-			to_chat(src, "<span class='warning'>You cannot send IC messages (muted).</span>")
+		if (client?.prefs?.muted & MUTE_IC)
+			to_chat(src, SPAN_WARNING("You cannot send IC messages (muted)."))
+			return
+
+		if(world.time < next_emote)
+			to_chat(src, SPAN_WARNING("You cannot use another emote yet."))
 			return
 
 		if(act == "help")
-			to_chat(src,"<b>Usable emotes:</b> [english_list(usable_emotes)]")
+			if(world.time >= next_emote_refresh)
+				var/list/usable_emotes = list()
+				next_emote_refresh = world.time + EMOTE_REFRESH_SPAM_COOLDOWN
+				for(var/emote in get_default_emotes())
+					var/decl/emote/emote_datum = decls_repository.get_decl(emote)
+					if(emote_datum.mob_can_use(src))
+						usable_emotes[emote_datum.key] = emote_datum
+				last_emote_summary = english_list(sortTim(usable_emotes, /proc/cmp_text_asc, associative = TRUE))
+			to_chat(src, "<b>Usable emotes:</b> [last_emote_summary].")
 			return
 
 		if(!can_emote(m_type))
@@ -52,23 +70,30 @@
 		act = copytext(tempstr,1,splitpoint)
 		message = copytext(tempstr,splitpoint+1,0)
 
-	var/decl/emote/use_emote = usable_emotes[act]
-	if(!use_emote)
-		to_chat(src, "<span class='warning'>Unknown emote '[act]'. Type <b>say *help</b> for a list of usable emotes.</span>")
+	var/decl/emote/use_emote = get_emote_by_key(act)
+	if(!istype(use_emote))
+		to_chat(src, SPAN_WARNING("Unknown emote '[act]'. Type <b>say *help</b> for a list of usable emotes."))
+		return
+
+	if(!use_emote.mob_can_use(src))
+		to_chat(src, SPAN_WARNING("You cannot use the emote '[act]'. Type <b>say *help</b> for  a list of usable emotes."))
 		return
 
 	if(m_type != use_emote.message_type && use_emote.conscious && stat != CONSCIOUS)
 		return
 
 	if(use_emote.message_type == AUDIBLE_MESSAGE && get_item_blocking_speech())
-		audible_message("<b>\The [src]</b> makes a muffled sound.")
+		audible_message("<b>\The [src]</b> [use_emote.emote_message_muffled || "makes a muffled sound."]")
 		return
-	else
-		use_emote.do_emote(src, message)
+
+	next_emote = world.time + use_emote.emote_delay
+	use_emote.do_emote(src, message)
 
 	for (var/obj/item/implant/I in src)
 		if (I.implanted)
 			I.trigger(act, src)
+
+#undef EMOTE_REFRESH_SPAM_COOLDOWN
 
 /mob/proc/format_emote(var/emoter = null, var/message = null)
 	var/pretext

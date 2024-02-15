@@ -540,7 +540,6 @@
 	set_move_intent(GET_DECL(move_intents[1]))
 	if(!istype(move_intent))
 		set_next_usable_move_intent()
-	update_emotes()
 	apply_species_inventory_restrictions()
 	refresh_ai_handler()
 
@@ -1174,7 +1173,7 @@
 		return SScharacter_info.get_record(comments_record_id, TRUE)
 	return ..()
 
-/mob/living/carbon/human/get_base_default_emotes()
+/mob/living/carbon/human/get_default_emotes()
 	var/static/list/default_emotes = list(
 		/decl/emote/visible/blink,
 		/decl/emote/audible/synth,
@@ -1204,7 +1203,7 @@
 		/decl/emote/audible/moan,
 		/decl/emote/audible/grunt,
 		/decl/emote/audible/slap,
-		/decl/emote/human/deathgasp,
+		/decl/emote/audible/deathgasp,
 		/decl/emote/audible/giggle,
 		/decl/emote/audible/scream,
 		/decl/emote/visible/airguitar,

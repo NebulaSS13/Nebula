@@ -1,8 +1,8 @@
-/mob/living/slime/get_base_default_emotes()
+/mob/living/slime/get_default_emotes()
 	var/static/list/default_emotes = list(
 		/decl/emote/audible/moan,
 		/decl/emote/visible/twitch,
-		/decl/emote/visible/sway,
+		/decl/emote/visible/tail/sway,
 		/decl/emote/visible/shiver,
 		/decl/emote/visible/bounce,
 		/decl/emote/visible/jiggle,
@@ -27,25 +27,25 @@
 		slime_ai.mood = mood
 		user.update_icon()
 
-/decl/emote/slime/check_user(var/atom/user)
-	return isslime(user)
+/decl/emote/slime/mob_can_use(var/atom/user)
+	return isslime(user) && ..()
 
 /decl/emote/slime/pout
-	key = "pout"
+	key = "slimepout"
 	mood = "pout"
 
 /decl/emote/slime/sad
-	key = "sad"
+	key = "slimesad"
 	mood = "sad"
 
 /decl/emote/slime/angry
-	key = "angry"
+	key = "slimeangry"
 	mood = "angry"
 
 /decl/emote/slime/frown
-	key = "frown"
+	key = "slimefrown"
 	mood = "mischevous"
 
 /decl/emote/slime/smile
-	key = "smile"
+	key = "slimesmile"
 	mood = ":3"

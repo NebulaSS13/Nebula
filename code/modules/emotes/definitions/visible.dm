@@ -1,5 +1,5 @@
 /decl/emote/visible
-	key ="tail"
+	key = "tail"
 	emote_message_3p = "USER waves USER_THEIR tail."
 	message_type = VISIBLE_MESSAGE
 
@@ -9,48 +9,48 @@
 	emote_message_3p = "USER scratches."
 
 /decl/emote/visible/drool
-	key ="drool"
+	key = "drool"
 	emote_message_3p = "USER drools."
 	conscious = 0
 
 /decl/emote/visible/nod
-	key ="nod"
+	key = "nod"
 	emote_message_3p_target = "USER nods USER_THEIR head at TARGET."
 	emote_message_3p = "USER nods USER_THEIR head."
 
-/decl/emote/visible/sway
-	key ="sway"
+/decl/emote/visible/tail/sway
+	key = "sways"
 	emote_message_3p = "USER sways around dizzily."
 
 /decl/emote/visible/sulk
-	key ="sulk"
+	key = "sulk"
 	emote_message_3p = "USER sulks down sadly."
 
 /decl/emote/visible/dance
-	key ="dance"
+	key = "dance"
 	check_restraints = TRUE
 	emote_message_3p = "USER dances around happily."
 
 /decl/emote/visible/roll
-	key ="roll"
+	key = "roll"
 	check_restraints = TRUE
 	emote_message_3p = "USER rolls."
 
 /decl/emote/visible/shake
-	key ="shake"
+	key = "shake"
 	emote_message_3p = "USER shakes USER_THEIR head."
 
 /decl/emote/visible/jump
-	key ="jump"
+	key = "jump"
 	emote_message_3p = "USER jumps!"
 
 /decl/emote/visible/shiver
-	key ="shiver"
+	key = "shiver"
 	emote_message_3p = "USER shivers."
 	conscious = 0
 
 /decl/emote/visible/collapse
-	key ="collapse"
+	key = "collapse"
 	emote_message_3p = "USER collapses!"
 
 /decl/emote/visible/collapse/do_extra(var/mob/user)
@@ -214,7 +214,7 @@
 	emote_message_3p = "USER vibrates!"
 
 /decl/emote/visible/deathgasp_robot
-	key = "deathgasp"
+	key = "rdeathgasp"
 	emote_message_3p = "USER shudders violently for a moment, then becomes motionless, USER_THEIR eyes slowly darkening."
 
 /decl/emote/visible/handshake
@@ -234,9 +234,6 @@
 	emote_message_3p_target = "USER signals at TARGET."
 	emote_message_3p = "USER signals."
 	check_restraints = TRUE
-
-/decl/emote/visible/signal/check_user(atom/user)
-	return ismob(user)
 
 /decl/emote/visible/signal/get_emote_message_3p(var/mob/living/user, var/atom/target, var/extra_params)
 	if(istype(user) && user.get_empty_hand_slot())
@@ -337,15 +334,17 @@
 	key = "spin"
 	check_restraints = TRUE
 	emote_message_3p = "USER spins!"
+	emote_delay = 2 SECONDS
 
 /decl/emote/visible/spin/do_extra(mob/user)
 	if(istype(user))
-		user.spin(20, 1)
+		user.spin(emote_delay, 1)
 
 /decl/emote/visible/sidestep
 	key = "sidestep"
 	check_restraints = TRUE
 	emote_message_3p = "USER steps rhythmically and moves side to side."
+	emote_delay = 1.2 SECONDS
 
 /decl/emote/visible/sidestep/do_extra(mob/user)
 	if(istype(user))
@@ -357,7 +356,7 @@
 /decl/emote/visible/vomit
 	key = "vomit"
 
-/decl/emote/visible/vomit/check_user(var/mob/living/carbon/human/user)
+/decl/emote/visible/vomit/mob_can_use(mob/living/user)
 	. = ..() && user.check_has_mouth() && !user.isSynthetic()
 
 /decl/emote/visible/vomit/do_emote(var/atom/user, var/extra_params)

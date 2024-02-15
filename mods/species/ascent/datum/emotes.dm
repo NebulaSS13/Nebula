@@ -11,7 +11,7 @@
 		/decl/emote/visible/ascent_dazzle
 	)
 
-/mob/living/silicon/robot/flying/ascent/get_base_default_emotes()
+/mob/living/silicon/robot/flying/ascent/get_default_emotes()
 	var/static/list/default_emotes = list(
 		/decl/emote/audible/ascent_purr,
 		/decl/emote/audible/ascent_hiss,
@@ -25,7 +25,7 @@
 	emote_sound = 'mods/species/ascent/sounds/ascent1.ogg'
 
 /decl/emote/audible/ascent_hiss
-	key ="hiss"
+	key = "hiss"
 	emote_message_3p = "USER hisses."
 	emote_sound = 'mods/species/ascent/sounds/razorweb.ogg'
 

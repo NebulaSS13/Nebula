@@ -3,10 +3,8 @@
 	emote_message_3p = "USER beeps."
 	emote_sound = 'sound/machines/twobeep.ogg'
 
-/decl/emote/audible/synth/check_user(var/mob/living/user)
-	if(istype(user) && user.isSynthetic())
-		return ..()
-	return FALSE
+/decl/emote/audible/synth/mob_can_use(var/mob/living/user)
+	return ..() && user.isSynthetic()
 
 /decl/emote/audible/synth/ping
 	key = "ping"
@@ -34,8 +32,11 @@
 	emote_message_3p_target = "USER shows TARGET USER_THEIR legal authorization barcode."
 	emote_sound = 'sound/voice/biamthelaw.ogg'
 
-/decl/emote/audible/synth/security/check_user(var/mob/living/silicon/robot/user)
-	return (istype(user) && istype(user.module,/obj/item/robot_module/security))
+/decl/emote/audible/synth/security/mob_can_use(mob/living/user)
+	var/mob/living/silicon/robot/robot_user = user
+	if(!istype(robot_user))
+		return FALSE
+	return istype(robot_user.module, /obj/item/robot_module/security) && ..()
 
 /decl/emote/audible/synth/security/halt
 	key = "halt"
