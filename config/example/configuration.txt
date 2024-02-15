@@ -96,6 +96,9 @@
 ## Remove the # to let aliens spawn. Uncomment to enable.
 #ALIENS_ALLOWED
 
+## Remove the # to allow people to leave public comments on each other's characters via the comments system. Uncomment to enable.
+#ALLOW_CHARACTER_COMMENTS
+
 ## Allow multiple input keys to be pressed for diagonal movement. Uncomment to enable.
 #ALLOW_DIAGONAL_MOVEMENT
 
@@ -137,6 +140,9 @@
 
 ## Whether or not all human mobs have very basic darksight by default. Uncomment to enable.
 #GRANT_DEFAULT_DARKSIGHT
+
+## Specify a number of days after which to hide comments on public profiles (to avoid bloat from retired characters).
+#HIDE_COMMENTS_OLDER_THAN 0
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
 #HUMAN_DELAY 0
@@ -342,10 +348,10 @@
 #FEATURE_OBJECT_SPELL_SYSTEM
 
 ## Allowed modes.
-#MODES []
+#MODES ["crossfire","cult","extended","god","heist","mercenary","ninja","revolution","siege","spyvspy","traitor","uprising","wizard"]
 
 ## Mode names.
-#MODE_NAMES []
+#MODE_NAMES {"calamity":"Calamity","cult":"Cult","extended":"Extended","god":"Deity","heist":"Heist","meteor":"Meteor","crossfire":"Mercenary & heist","siege":"Mercenary & revolution","spyvspy":"Spy v. spy","uprising":"Cult & revolution","ninja":"Ninja","mercenary":"Mercenary","revolution":"Revolution","traitor":"Traitor","wizard":"Wizard"}
 
 ## Relative probability of each mode.
 #PROBABILITIES {"calamity":0,"cult":1,"extended":1,"god":0,"heist":0,"meteor":0,"crossfire":0,"siege":0,"spyvspy":0,"uprising":0,"ninja":0,"mercenary":1,"revolution":0,"traitor":0,"wizard":1}

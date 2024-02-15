@@ -16,10 +16,28 @@
 /decl/config/lists/mode_names
 	uid = "mode_names"
 	desc = "Mode names."
+	default_value = list()
+
+/decl/config/lists/mode_names/Initialize()
+	var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
+	for(var/mode_type in all_modes)
+		var/decl/game_mode/game_mode = all_modes[mode_type]
+		default_value[game_mode.uid] = game_mode.name
+	return ..()
 
 /decl/config/lists/mode_allowed
 	uid = "modes"
 	desc = "Allowed modes."
+	default_value = list()
+
+/decl/config/lists/mode_allowed/Initialize()
+	var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
+	for(var/mode_type in all_modes)
+		var/decl/game_mode/game_mode = all_modes[mode_type]
+		if(game_mode.available_by_default)
+			default_value += game_mode.uid
+	default_value = sortTim(default_value, /proc/cmp_text_asc)
+	return ..()
 
 /decl/config/lists/mode_votable
 	uid = "votable_modes"
@@ -31,7 +49,7 @@
 	var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
 	for(var/mode_type in all_modes)
 		var/decl/game_mode/game_mode = all_modes[mode_type]
-		if(initial(game_mode.votable))
+		if(game_mode.votable)
 			default_value += game_mode.uid
 	default_value = sortTim(default_value, /proc/cmp_text_asc)
 	return ..()

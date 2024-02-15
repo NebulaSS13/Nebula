@@ -46,11 +46,14 @@ SUBSYSTEM_DEF(configuration)
 			continue
 		LAZYADD(config_lines["[modify_write_prefix][config_cat.configuration_file_location]"], config_cat.get_config_category_text())
 
+	. = list()
 	for(var/filename in config_lines)
 		if(fexists(filename))
 			fdel(filename)
 		var/write_file = file(filename)
 		to_file(write_file, jointext(config_lines[filename], "\n\n"))
+		. += filename
+	return length(.) ? english_list(.) : "NULL"
 
 /datum/controller/subsystem/configuration/proc/load_files()
 
@@ -149,5 +152,5 @@ SUBSYSTEM_DEF(configuration)
 	if(!ishost(usr?.client))
 		to_chat(usr, SPAN_WARNING("This verb can only be used by the host."))
 		return
-	SSconfiguration.write_default_configuration(modify_write_prefix = "temp/")
-	to_chat(usr, SPAN_NOTICE("All done!"))
+	var/write_loc = SSconfiguration.write_default_configuration(modify_write_prefix = "temp/")
+	to_chat(usr, SPAN_NOTICE("All done! The configuration file has been written to [write_loc] on your host."))
