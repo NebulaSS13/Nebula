@@ -288,14 +288,14 @@
 	var/list/all_modes = decls_repository.get_decls_of_subtype(/decl/game_mode)
 	for (var/mode_type in all_modes)
 		var/decl/game_mode/game_mode = all_modes[mode_type]
-		if (!game_mode.uid || !(game_mode.uid in modes))
+		if (!game_mode.uid)
 			continue
 		log_misc("Adding game mode [game_mode.name] ([game_mode.uid]) to configuration.")
-		src.modes += game_mode.uid
+		src.modes |= game_mode.uid
 		src.mode_names[game_mode.uid] = game_mode.name
 		src.probabilities[game_mode.uid] = game_mode.probability
 		if (game_mode.votable)
-			src.votable_modes += game_mode.uid
+			src.votable_modes |= game_mode.uid
 	src.votable_modes += "secret"
 
 /datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
