@@ -302,7 +302,7 @@ var/global/list/diversion_junctions = list()
 
 // update the icon & overlays to reflect mode & status
 /obj/machinery/disposal/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(stat & BROKEN)
 		mode = 0
 		flush = 0
@@ -310,7 +310,7 @@ var/global/list/diversion_junctions = list()
 
 	// flush handle
 	if(flush)
-		overlays += image(icon, "[icon_state]-handle")
+		add_overlay("[icon_state]-handle")
 
 	// only handle is shown if no power
 	if(stat & NOPOWER || mode == -1)
@@ -318,13 +318,13 @@ var/global/list/diversion_junctions = list()
 
 	// 	check for items in disposal - occupied light
 	if(contents.len > LAZYLEN(component_parts))
-		overlays += image(icon, "[icon_state]-full")
+		add_overlay("[icon_state]-full")
 
 	// charging and ready light
 	if(mode == 1)
-		overlays += image(icon, "[icon_state]-charge")
+		add_overlay("[icon_state]-charge")
 	else if(mode == 2)
-		overlays += image(icon, "[icon_state]-ready")
+		add_overlay("[icon_state]-ready")
 
 // timed process
 // charge the gas reservoir and perform flush if ready
