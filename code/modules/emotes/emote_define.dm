@@ -20,7 +20,7 @@
 	var/list/emote_sound = null
 
 	var/message_type = VISIBLE_MESSAGE // Audible/visual flag
-	var/targetted_emote                // Whether or not this emote needs a target.
+	var/mandatory_targetted_emote      // Whether or not this emote -must- have a target.
 	var/check_restraints               // Can this emote be used while restrained?
 	var/check_range                    // falsy, or a range outside which the emote will not work
 	var/conscious = TRUE               // Do we need to be awake to emote this?
@@ -45,20 +45,27 @@
 
 	var/atom/target
 	if(can_target() && extra_params)
-		extra_params = lowertext(extra_params)
-		for(var/atom/thing in view(user))
-			if(extra_params == lowertext(thing.name))
-				target = thing
-				break
+		var/target_dist
+		extra_params = trim(lowertext(extra_params))
+		for(var/atom/thing in view((isnull(check_range) ? world.view : check_range), user))
 
-	if(targetted_emote && !target)
+			if(!isturf(thing.loc))
+				continue
+
+			var/new_target_dist = get_dist(thing, user)
+			if(!isnull(target_dist) && target_dist > new_target_dist)
+				continue
+
+			if(findtext(lowertext(thing.name), extra_params))
+				target_dist = new_target_dist
+				target = thing
+
+		if(!target)
+			to_chat(user, SPAN_WARNING("You cannot see a '[extra_params]' within range."))
+
+	if(mandatory_targetted_emote && !target)
 		to_chat(user, SPAN_WARNING("You can't do that to thin air."))
 		return
-
-	if(target && target != user && check_range)
-		if (get_dist(user, target) > check_range)
-			to_chat(user, SPAN_WARNING("\The [target] is too far away."))
-			return
 
 	var/decl/pronouns/user_gender =   user.get_pronouns()
 	var/decl/pronouns/target_gender = target?.get_pronouns()
