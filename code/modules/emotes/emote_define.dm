@@ -26,6 +26,16 @@
 	var/conscious = TRUE               // Do we need to be awake to emote this?
 	var/emote_range = 0                // If >0, restricts emote visibility to viewers within range.
 
+/decl/emote/validate()
+	. = ..()
+	var/list/all_emotes = decls_repository.get_decls_of_type(/decl/emote)
+	for(var/emote_type in all_emotes)
+		var/decl/emote/emote = all_emotes[emote_type]
+		if(emote == src)
+			continue
+		if(key == emote.key)
+			. += "non-unique key, overlaps with [emote.type]"
+
 /decl/emote/proc/get_emote_message_1p(var/atom/user, var/atom/target, var/extra_params)
 	if(target)
 		return emote_message_1p_target
