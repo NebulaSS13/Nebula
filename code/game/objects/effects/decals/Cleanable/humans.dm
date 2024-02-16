@@ -161,6 +161,14 @@ var/global/list/image/splatter_cache=list()
 	. = ..()
 	drips = list(icon_state)
 
+/obj/effect/decal/cleanable/blood/drip/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
+	set_overlays(drips?.Copy())
+
+/obj/effect/decal/cleanable/blood/drip/Destroy()
+	LAZYCLEARLIST(drips)
+	return ..()
+
 /obj/effect/decal/cleanable/blood/writing
 	icon = 'icons/effects/writing.dmi'
 	icon_state = "writing"

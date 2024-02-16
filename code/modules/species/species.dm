@@ -593,7 +593,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/blood_type/blood = get_blood_decl(H)
 	return istype(blood) ? blood.splatter_name : "blood"
 
-/decl/species/proc/get_blood_color(var/mob/living/carbon/human/H)
+/decl/species/proc/get_species_blood_color(var/mob/living/carbon/human/H)
 	var/decl/blood_type/blood = get_blood_decl(H)
 	return istype(blood) ? blood.splatter_colour : COLOR_BLOOD_HUMAN
 

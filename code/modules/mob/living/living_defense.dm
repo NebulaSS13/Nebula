@@ -44,6 +44,17 @@
 	var/list/impact_sounds = LAZYACCESS(P.impact_sounds, get_bullet_impact_effect_type(def_zone))
 	if(length(impact_sounds))
 		playsound(src, pick(impact_sounds), 75)
+	if(get_bullet_impact_effect_type(def_zone) != BULLET_IMPACT_MEAT)
+		return
+	if(!damage || P.damtype != BRUTE)
+		return
+	var/hit_dir = get_dir(P.starting, src)
+	var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
+	if(!QDELETED(B))
+		B.icon_state = pick("dir_splatter_1","dir_splatter_2")
+		var/scale = min(1, round(mob_size / MOB_SIZE_MEDIUM, 0.1))
+		B.set_scale(scale)
+	new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, get_blood_color())
 
 /mob/living/get_bullet_impact_effect_type(var/def_zone)
 	return BULLET_IMPACT_MEAT
@@ -103,15 +114,12 @@
 	if(I.attack_message_name())
 		weapon_mention = " with [I.attack_message_name()]"
 	if(effective_force)
-		visible_message("<span class='danger'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"][weapon_mention] by [user]!</span>")
+		visible_message(SPAN_DANGER("\The [src] has been [DEFAULTPICK(I.attack_verb, "attacked")][weapon_mention] by [user]!"))
 	else
-		visible_message("<span class='warning'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"][weapon_mention] by [user]!</span>")
-
+		visible_message(SPAN_WARNING("\The [src] has been [DEFAULTPICK(I.attack_verb, "attacked")][weapon_mention] by \the [user]!"))
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
-
-	if(I.damtype == BRUTE && prob(33)) // Added blood for whacking non-humans too
-		var/turf/simulated/location = get_turf(src)
-		if(istype(location)) location.add_blood_floor(src)
+	if(I.damtype == BRUTE && prob(33))
+		blood_splatter(get_turf(loc), src)
 
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)

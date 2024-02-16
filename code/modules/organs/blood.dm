@@ -49,7 +49,7 @@
 		"donor"       = weakref(src),
 		"species"     = get_species_name(),
 		"blood_DNA"   = get_unique_enzymes(),
-		"blood_color" = species.get_blood_color(src),
+		"blood_color" = species.get_species_blood_color(src),
 		"blood_type"  = get_blood_type(),
 		"trace_chem"  = null
 	))
@@ -130,9 +130,7 @@
 		return 0
 	if(!amt)
 		return 0
-
 	amt *= ((src.mob_size/MOB_SIZE_MEDIUM) ** 0.5)
-
 	return vessel.remove_any(amt)
 
 /****************************************************
@@ -217,55 +215,64 @@
 	data["trace_chem"]  = temp_chem
 	data["dose_chem"]   = chem_doses ? chem_doses.Copy() : list()
 
-	var/decl/species/my_species = get_species()
-	if(my_species)
-		data["has_oxy"]     = my_species.blood_oxy
-		data["blood_color"] = my_species.get_blood_color(src)
-	else if(isSynthetic())
+	if(isSynthetic())
 		data["has_oxy"]     = FALSE
 		data["blood_color"] = SYNTH_BLOOD_COLOR
 	else
-		data["has_oxy"]     = TRUE
-		data["blood_color"] = COLOR_BLOOD_HUMAN
+		data["has_oxy"]     = get_blood_oxy()
+		data["blood_color"] = get_blood_color()
 	return data
 
-/proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
+/mob/living/proc/get_flesh_color()
+	return get_species()?.get_species_flesh_color(src) || COLOR_GREY
+
+/mob/living/proc/get_gibber_type()
+	return /obj/effect/gibspawner/generic
+
+/mob/living/proc/get_blood_color()
+	return get_species()?.get_species_blood_color(src) || COLOR_BLOOD_HUMAN
+
+/mob/living/proc/get_blood_oxy()
+	var/decl/species/my_species = get_species()
+	return my_species ? my_species.blood_oxy : TRUE
+
+/proc/blood_splatter(atom/target, atom/source, var/large = FALSE, var/spray_dir)
 
 	var/obj/effect/decal/cleanable/blood/splatter
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter
-	var/turf/T = get_turf(target)
+	var/turf/bleed_turf = get_turf(target)
 
 	// Are we dripping or splattering?
-	var/list/drips = list()
+	var/list/drips
 	// Only a certain number of drips (or one large splatter) can be on a given turf.
-	for(var/obj/effect/decal/cleanable/blood/drip/drop in T)
-		drips |= drop.drips
+	for(var/obj/effect/decal/cleanable/blood/drip/drop in bleed_turf)
+		LAZYDISTINCTADD(drips, drop.drips)
 		qdel(drop)
-	if(!large && drips.len < 3)
+	if(!large && LAZYLEN(drips) < 3)
 		decal_type = /obj/effect/decal/cleanable/blood/drip
 
 	// Find a blood decal or create a new one.
-	if(T)
-		var/list/existing = filter_list(T.contents, decal_type)
+	if(bleed_turf)
+		var/list/existing = filter_list(bleed_turf.contents, decal_type)
 		if(length(existing) > 3)
 			splatter = pick(existing)
 	if(!splatter)
-		splatter = new decal_type(T)
+		splatter = new decal_type(bleed_turf)
 
 	if(QDELETED(splatter))
 		return
 
-	if(istype(splatter, /obj/effect/decal/cleanable/blood/drip) && drips && drips.len && !large)
-		var/obj/effect/decal/cleanable/blood/drip/drop = splatter
-		drop.overlays |= drips
+	var/obj/effect/decal/cleanable/blood/drip/drop = splatter
+	if(istype(drop) && LAZYLEN(drips) && !large)
 		drop.drips |= drips
+		drop.update_icon()
 
 	// If there's no data to copy, call it quits here.
 	var/blood_data
 	var/blood_type
-	if(ishuman(source))
-		var/mob/living/carbon/human/donor = source
-		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
+	if(isliving(source))
+		var/mob/living/donor = source
+		blood_data = donor.get_blood_data()
 		blood_type = donor.get_blood_type()
 	else if(isatom(source))
 		var/atom/donor = source
@@ -276,6 +283,7 @@
 	if(spray_dir)
 		splatter.icon_state = "squirt"
 		splatter.set_dir(spray_dir)
+
 	// Update blood information.
 	if(LAZYACCESS(blood_data, "blood_DNA"))
 		LAZYSET(splatter.blood_data, blood_data["blood_DNA"], blood_data)

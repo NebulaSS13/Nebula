@@ -1210,12 +1210,12 @@ default behaviour is:
 		var/list/overlays_to_add
 		if(check_state_in_icon(overlay_state, surgery_icon))
 			var/image/flesh = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
-			flesh.color = E.species.get_flesh_colour(src)
+			flesh.color = E.species.get_species_flesh_color(src)
 			LAZYADD(overlays_to_add, flesh)
 		overlay_state = "[base_state]-blood"
 		if(check_state_in_icon(overlay_state, surgery_icon))
 			var/image/blood = image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER)
-			blood.color = E.species.get_blood_color(src)
+			blood.color = E.species.get_species_blood_color(src)
 			LAZYADD(overlays_to_add, blood)
 		overlay_state = "[base_state]-bones"
 		if(check_state_in_icon(overlay_state, surgery_icon))

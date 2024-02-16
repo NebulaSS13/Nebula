@@ -1,6 +1,9 @@
 /mob/living/silicon/gib()
 	..("gibbed-r")
-	gibs(loc, gibber_type = /obj/effect/gibspawner/robot)
+	gibs()
+
+/mob/living/silicon/get_gibber_type()
+	return /obj/effect/gibspawner/robot
 
 /mob/living/silicon/dust()
 	..("dust-r", /obj/item/remains/robot)
