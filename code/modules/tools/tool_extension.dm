@@ -56,7 +56,7 @@
 	return FALSE
 
 // Returns a failure message as a string if the interaction fails.
-/datum/extension/tool/proc/do_tool_interaction(var/archetype, var/mob/user, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/check_skill_threshold, var/check_skill_prob = 50)
+/datum/extension/tool/proc/do_tool_interaction(var/archetype, var/mob/user, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/check_skill_threshold, var/check_skill_prob = 50, var/set_cooldown = FALSE)
 
 	if(!istype(user) || !istype(target))
 		return TOOL_USE_FAILURE_NOMESSAGE
@@ -87,10 +87,10 @@
 	if(delay)
 		delay = max(5, CEILING(delay * get_tool_speed(archetype)))
 		if(check_skill)
-			if(!user.do_skilled(delay, check_skill, target, check_holding = TRUE))
+			if(!user.do_skilled(delay, check_skill, target, check_holding = TRUE, set_cooldown = set_cooldown))
 				return TOOL_USE_FAILURE_NOMESSAGE
 		else
-			if(!do_after(user, delay, target, check_holding = TRUE))
+			if(!do_after(user, delay, target, check_holding = TRUE, set_cooldown = set_cooldown))
 				return TOOL_USE_FAILURE_NOMESSAGE
 
 	// Basic skill check for the action - do it post-delay so they can't just spamclick.

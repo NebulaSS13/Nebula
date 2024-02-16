@@ -20,9 +20,18 @@
 /obj/structure/flora/proc/init_appearance()
 	return
 
+// We rely on overrides to spawn appropriate materials for flora structures.
+/obj/structure/flora/create_dismantled_products(turf/T)
+	matter = null
+	material = null
+	reinf_material = null
+	return ..()
+
 /obj/structure/flora/attackby(obj/item/O, mob/user)
-	if(can_cut_down(O, user))
-		return cut_down(O, user)
+	if(user.a_intent != I_HURT && can_cut_down(O, user))
+		play_cut_sound()
+		cut_down(O, user)
+		return TRUE
 	. = ..()
 
 /**Whether the item used by user can cause cut_down to be called. Used to bypass default attack proc for some specific items/tools. */
@@ -30,9 +39,13 @@
 	return (I.force >= 5) && I.sharp //Anything sharp and relatively strong can cut us instantly
 
 /**What to do when the can_cut_down check returns true. Normally simply calls dismantle. */
-/obj/structure/flora/proc/cut_down(var/obj/item/I, var/mob/user)
+/obj/structure/flora/proc/play_cut_sound()
+	set waitfor = FALSE
 	if(snd_cut)
 		playsound(src, snd_cut, 40, TRUE)
+
+/obj/structure/flora/proc/cut_down(var/obj/item/I, var/mob/user)
+
 	dismantle()
 	return TRUE
 
