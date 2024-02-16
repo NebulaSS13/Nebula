@@ -91,7 +91,7 @@
 	planetoid_data_type        = /datum/planetoid_data/random/volcanic
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/volcanic
 	max_themes                 = 1
-	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_WATER
+	template_tags_blacklist    = TEMPLATE_TAG_HABITAT|TEMPLATE_TAG_WATER
 	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/volcanic
 	prefered_level_data_per_z  = list(

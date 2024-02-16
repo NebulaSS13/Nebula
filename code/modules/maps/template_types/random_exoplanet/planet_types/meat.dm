@@ -90,7 +90,7 @@
 	name                       = "organic exoplanet"
 	planetoid_data_type        = /datum/planetoid_data/random/meat
 	overmap_marker_type        = /obj/effect/overmap/visitable/sector/planetoid/exoplanet/meat
-	ruin_tags_blacklist        = RUIN_HABITAT|RUIN_HUMAN|RUIN_WATER
+	template_tags_blacklist    = TEMPLATE_TAG_HABITAT|TEMPLATE_TAG_HUMAN|TEMPLATE_TAG_WATER
 	template_parent_type       = /datum/map_template/planetoid/random/exoplanet
 	level_data_type            = /datum/level_data/planetoid/exoplanet/meat
 	prefered_level_data_per_z  = null

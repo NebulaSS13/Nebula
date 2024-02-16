@@ -1,16 +1,16 @@
 #define DEBUG
 // Turf-only flags.
-#define TURF_FLAG_NOJAUNT             BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
-#define TURF_FLAG_NORUINS             BITFLAG(1) // Used by the ruin generator to skip placing loaded ruins on this turf.
-#define TURF_FLAG_BACKGROUND          BITFLAG(2) // Used by shuttle movement to determine if it should be ignored by turf translation.
-#define TURF_IS_HOLOMAP_OBSTACLE      BITFLAG(3)
-#define TURF_IS_HOLOMAP_PATH          BITFLAG(4)
-#define TURF_IS_HOLOMAP_ROCK          BITFLAG(5)
+#define TURF_FLAG_NOJAUNT               BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
+#define TURF_FLAG_NO_POINTS_OF_INTEREST BITFLAG(1) // Used by the level subtemplate generator to skip placing loaded templates on this turf.
+#define TURF_FLAG_BACKGROUND            BITFLAG(2) // Used by shuttle movement to determine if it should be ignored by turf translation.
+#define TURF_IS_HOLOMAP_OBSTACLE        BITFLAG(3)
+#define TURF_IS_HOLOMAP_PATH            BITFLAG(4)
+#define TURF_IS_HOLOMAP_ROCK            BITFLAG(5)
 
 ///Width or height of a transition edge area along the map's borders where transition edge turfs are placed to connect levels together.
 #define TRANSITIONEDGE 7
-///Extra spacing needed between any random ruins and the transition edge of a level.
-#define RUIN_MAP_EDGE_PAD 15
+///Extra spacing needed between any random level templates and the transition edge of a level.
+#define TEMPLATE_TAG_MAP_EDGE_PAD 15
 
 ///Enum value for a level edge that's to be untouched
 #define LEVEL_EDGE_NONE 0
