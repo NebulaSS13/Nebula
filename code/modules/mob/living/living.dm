@@ -1162,6 +1162,9 @@ default behaviour is:
 	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 	return life_tick <= 5 || !timeofdeath || (timeofdeath >= 5 && (world.time-timeofdeath) <= 10 MINUTES)
 
+/mob/living/proc/check_dna()
+	dna?.check_integrity(src)
+
 /mob/living/get_unique_enzymes()
 	return unique_enzymes
 

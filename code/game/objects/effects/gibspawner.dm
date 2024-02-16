@@ -1,8 +1,3 @@
-/mob/living/proc/gibs(atom/location = loc)
-	var/gibber_type = get_gibber_type()
-	if(gibber_type)
-		return new gibber_type(location, get_blood_type(), get_unique_enzymes(), get_flesh_color(), get_blood_color())
-
 /obj/effect/gibspawner
 	var/sparks = 0 //whether sparks spread on Gib()
 	var/list/gibtypes = list()

@@ -430,6 +430,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	return 1
 
 /mob/new_player/get_species_name()
+	SHOULD_CALL_PARENT(FALSE)
 	var/decl/species/chosen_species
 	if(client.prefs.species)
 		chosen_species = get_species_by_key(client.prefs.species)

@@ -319,9 +319,6 @@
 	RETURN_TYPE(/decl/species)
 	return species
 
-/mob/living/carbon/get_species_name()
-	return species.name
-
 /mob/living/carbon/get_contact_reagents()
 	return touching
 
