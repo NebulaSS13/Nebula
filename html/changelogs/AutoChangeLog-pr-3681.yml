@@ -1,5 +1,0 @@
-author: MistakeNot4892
-changes:
-  - {tweak: 'Plates are no longer part of food when it emerges from the microwave,
-      and must be retrieved from the dinnerware vendor and used to plate food.'}
-delete-after: true
