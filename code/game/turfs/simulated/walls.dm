@@ -219,13 +219,12 @@ var/global/list/wall_fullblend_objects = list(
 		var/list/obj/structure/girder/placed_girders
 		if(girder_material)
 			placed_girders = girder_material.place_dismantled_girder(src, reinf_material)
-			material.place_dismantled_product(src,devastated)
-		else
-			placed_girders = material.place_dismantled_girder(src, reinf_material)
 		for(var/obj/structure/girder/placed_girder in placed_girders)
 			placed_girder.anchored = TRUE
 			placed_girder.prepped_for_fakewall = can_open
 			placed_girder.update_icon()
+		if(material)
+			material.place_dismantled_product(src, devastated)
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))

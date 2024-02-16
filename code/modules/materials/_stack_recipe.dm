@@ -15,6 +15,7 @@
 	var/difficulty = 1 // higher difficulty requires higher skill level to make.
 	var/apply_material_name = 1 //Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
 	var/set_dir_on_spawn = TRUE
+	var/expected_product_type = /obj
 
 /datum/stack_recipe/New(decl/material/material, var/reinforce_material)
 	if(material)

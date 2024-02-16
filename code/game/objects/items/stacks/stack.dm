@@ -183,8 +183,8 @@
 		if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
 			to_chat(user, "<span class='warning'>You waste some [name] and fail to build \the [recipe.display_name()]!</span>")
 			return
-		var/atom/O = recipe.spawn_result(user, user.loc, produced)
-		if(!QDELETED(O)) // In case of stack merger.
+		var/atom/movable/O = recipe.spawn_result(user, user.loc, produced)
+		if(istype(O) && !QDELETED(O)) // In case of stack merger.
 			O.add_fingerprint(user)
 			user.put_in_hands(O)
 
