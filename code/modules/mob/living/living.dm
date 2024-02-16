@@ -1,6 +1,6 @@
 /mob/living/Initialize()
 
-	current_health = get_max_health()
+	current_health            = get_max_health()
 	original_fingerprint_seed = sequential_id(/mob)
 	fingerprint               = md5(num2text(original_fingerprint_seed))
 	original_genetic_seed     = sequential_id(/mob)

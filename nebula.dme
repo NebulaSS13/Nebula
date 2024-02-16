@@ -2670,6 +2670,7 @@
 #include "code\modules\mob\living\simple_animal\shade.dm"
 #include "code\modules\mob\living\simple_animal\simple_animal.dm"
 #include "code\modules\mob\living\simple_animal\simple_animal_codex.dm"
+#include "code\modules\mob\living\simple_animal\simple_animal_damage.dm"
 #include "code\modules\mob\living\simple_animal\aquatic\_aquatic.dm"
 #include "code\modules\mob\living\simple_animal\aquatic\_aquatic_hostile.dm"
 #include "code\modules\mob\living\simple_animal\aquatic\_aquatic_retaliate.dm"
