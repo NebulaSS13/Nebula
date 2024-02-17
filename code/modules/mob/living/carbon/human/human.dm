@@ -420,23 +420,6 @@
 		verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
-/mob/living/carbon/human/clean_blood(var/clean_feet)
-	. = ..()
-	var/obj/item/gloves = get_equipped_item(slot_gloves_str)
-	if(gloves)
-		gloves.clean()
-		gloves.germ_level = 0
-	else
-		germ_level = 0
-
-	for(var/obj/item/organ/external/organ in get_external_organs())
-		//TODO check that organ is not covered
-		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
-			organ.clean()
-	update_equipment_overlay(slot_gloves_str, FALSE)
-	update_equipment_overlay(slot_shoes_str)
-	return TRUE
-
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
 
 	var/list/visible_implants = list()

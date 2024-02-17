@@ -60,7 +60,7 @@
 		to_chat(user, SPAN_NOTICE("You need to take that [target.name] off before cleaning it."))
 	else if(istype(target,/obj/effect/decal/cleanable/blood))
 		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
-		target.clean_blood() //Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
+		target.clean() //Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
 		cleaned = TRUE
 	else if(istype(target,/obj/effect/decal/cleanable))
 		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
@@ -80,7 +80,7 @@
 		wet()
 	else
 		to_chat(user, SPAN_NOTICE("You clean \the [target.name]."))
-		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
+		target.clean() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
 
 	if(cleaned)
@@ -98,7 +98,7 @@
 			user.visible_message(SPAN_NOTICE("\The [user] cleans \the [target]."))
 			if(reagents)
 				reagents.trans_to(target, reagents.total_volume / 8)
-			target.clean_blood()
+			target.clean()
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
 		return TRUE
 	return ..()
