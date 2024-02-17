@@ -1,3 +1,3 @@
 # REPATH /trash/plate to /plate
 /obj/item/trash/plate/@SUBTYPES : /obj/item/plate/@SUBTYPES{@OLD}
-/obj/item/trash/tray/@SUBTYPES : /obj/item/tray/@SUBTYPES{@OLD}
+/obj/item/trash/tray/@SUBTYPES : /obj/item/plate/tray/@SUBTYPES{@OLD}
