@@ -40,7 +40,7 @@
 // We chop several times to cut down a tree.
 /obj/structure/flora/tree/play_cut_sound()
 	shake()
-	for(var/i = 1 to 4)
+	for(var/i = 1 to 5)
 		sleep(1 SECOND)
 		if(QDELETED(src))
 			return
@@ -49,7 +49,6 @@
 	sleep(1 SECOND)
 	if(QDELETED(src))
 		return
-	shake()
 	return ..()
 
 // Tree shake animation stolen from Polaris.
