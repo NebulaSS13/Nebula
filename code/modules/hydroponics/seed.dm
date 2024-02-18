@@ -726,33 +726,41 @@
 				total_yield = max(1,total_yield)
 
 		. = list()
-		for(var/i = 0;i<total_yield;i++)
-			var/obj/item/product = new product_type(get_turf(user),name)
-			. += product
+		if(ispath(product_type, /obj/item/stack))
+			var/obj/item/stack/stack = product_type
+			var/remaining_yield = total_yield
+			var/per_stack = initial(stack.max_amount)
+			while(remaining_yield > 0)
+				var/using_yield = min(remaining_yield, per_stack)
+				remaining_yield -= using_yield
+				. += new product_type(get_turf(user), using_yield)
+		else
+			for(var/i = 1 to total_yield)
+				var/obj/item/product = new product_type(get_turf(user),name)
+				. += product
 
-			if(get_trait(TRAIT_PRODUCT_COLOUR))
-				if(istype(product, /obj/item/chems/food))
+				if(get_trait(TRAIT_PRODUCT_COLOUR) && istype(product, /obj/item/chems/food))
 					var/obj/item/chems/food/snack = product
 					snack.color = get_trait(TRAIT_PRODUCT_COLOUR)
 					snack.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
-			if(mysterious)
-				product.name += "?"
-				product.desc += " On second thought, something about this one looks strange."
+				if(mysterious)
+					product.name += "?"
+					product.desc += " On second thought, something about this one looks strange."
 
-			if(get_trait(TRAIT_BIOLUM))
-				var/clr
-				if(get_trait(TRAIT_BIOLUM_COLOUR))
-					clr = get_trait(TRAIT_BIOLUM_COLOUR)
-				product.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
+				if(get_trait(TRAIT_BIOLUM))
+					var/clr
+					if(get_trait(TRAIT_BIOLUM_COLOUR))
+						clr = get_trait(TRAIT_BIOLUM_COLOUR)
+					product.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
 
-			//Handle spawning in living, mobile products.
-			if(isliving(product))
-				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
-				handle_living_product(product)
-				if(istype(product,/mob/living/simple_animal/mushroom)) // Gross.
-					var/mob/living/simple_animal/mushroom/mush = product
-					mush.seed = src
+				//Handle spawning in living, mobile products.
+				if(isliving(product))
+					product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
+					handle_living_product(product)
+					if(istype(product,/mob/living/simple_animal/mushroom)) // Gross.
+						var/mob/living/simple_animal/mushroom/mush = product
+						mush.seed = src
 
 // When the seed in this machine mutates/is modified, the tray seed value
 // is set to a new datum copied from the original. This datum won't actually

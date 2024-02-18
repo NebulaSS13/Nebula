@@ -47,6 +47,7 @@
 	if(material.sound_dropped)
 		drop_sound = material.sound_dropped
 	update_strings()
+	update_icon()
 
 /obj/item/stack/material/get_recipes()
 	return material.get_recipes(recipe_stack_type, reinf_material?.type)
@@ -295,6 +296,30 @@
 	plural_icon_state = "sheet-wood-mult"
 	max_icon_state = "sheet-wood-max"
 	stack_merge_type = /obj/item/stack/material/plank
+	pickup_sound = 'sound/foley/wooden_drop.ogg'
+	drop_sound = 'sound/foley/wooden_drop.ogg'
+
+/obj/item/stack/material/log
+	name = "logs"
+	singular_name = "log"
+	plural_name = "logs"
+	icon_state = "log"
+	plural_icon_state = "log-mult"
+	max_icon_state = "log-max"
+	stack_merge_type = /obj/item/stack/material/log
+	recipe_stack_type = /obj/item/stack/material/log
+	var/plank_type = /obj/item/stack/material/plank
+
+/obj/item/stack/material/log/attackby(obj/item/W, mob/user)
+	if(plank_type && (IS_HATCHET(W) || IS_SAW(W)))
+		var/tool_type = W.get_tool_quality(TOOL_HATCHET) >= W.get_tool_quality(TOOL_SAW) ? TOOL_HATCHET : TOOL_SAW
+		if(W.do_tool_interaction(tool_type, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src))
+			var/obj/item/stack/planks = new plank_type(loc, 1, material?.type, reinf_material?.type)
+			planks.add_to_stacks(user, TRUE)
+			playsound(loc, 'sound/foley/wooden_drop.ogg', 40, TRUE)
+			use(1)
+		return TRUE
+	return ..()
 
 /obj/item/stack/material/segment
 	name = "segments"

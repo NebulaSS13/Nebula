@@ -536,6 +536,10 @@
 	display_name = "towercap thicket"
 	chems = list(/decl/material/solid/organic/wood = list(10,1))
 	mutants = null
+	product_type = /obj/item/stack/material/log/towercap
+
+/obj/item/stack/material/log/towercap
+	material = /decl/material/solid/organic/wood/fungal
 
 /datum/seed/mushroom/towercap/New()
 	..()

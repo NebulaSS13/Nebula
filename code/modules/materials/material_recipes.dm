@@ -17,10 +17,10 @@
 	if(holographic || phase_at_temperature() != MAT_PHASE_SOLID)
 		return list()
 
-	// By default we don't let anything be crafted with ore, as it's too raw.
+	// By default we don't let anything be crafted with ore or logs, as they are too raw.
 	// We make an exception for clay as it is being moulded by hand.
 	. = list()
-	if(ispath(stack_type, /obj/item/stack/material/ore))
+	if(ispath(stack_type, /obj/item/stack/material/ore) || ispath(stack_type, /obj/item/stack/material/log))
 		return
 
 	// Struts have their own recipe set, so we return early for them.

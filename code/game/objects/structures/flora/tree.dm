@@ -11,8 +11,16 @@
 	w_class      = ITEM_SIZE_STRUCTURE
 	hitsound     = 'sound/effects/hit_wood.ogg'
 	snd_cut      = 'sound/effects/plants/tree_fall.ogg'
+
+	/// What kind of log we leave behind.
+	var/log_type = /obj/item/stack/material/log
+	/// Whether or not you can shelter under this tree.
 	var/protects_against_weather = TRUE
-	var/stump_type //What kind of tree stump we're leaving behind
+	/// What kind of tree stump we leaving behind.
+	var/stump_type
+	/// How much to shake the tree when struck.
+	/// Larger trees should have smaller numbers or it looks weird.
+	var/shake_animation_degrees = 4
 
 /obj/structure/flora/tree/get_material_health_modifier()
 	return 2.5 //Prefer removing via tools than bashing
@@ -24,12 +32,42 @@
 	if(I.do_tool_interaction(TOOL_HATCHET, user, src, 5 SECONDS))
 		. = ..()
 
-/obj/structure/flora/tree/dismantle()
-	var/turf/T = get_turf(src)
-	if(T)
+/obj/structure/flora/tree/take_damage(damage)
+	. = ..()
+	if(!QDELETED(src) && damage >= 5)
+		shake()
+
+// We chop several times to cut down a tree.
+/obj/structure/flora/tree/play_cut_sound()
+	shake()
+	for(var/i = 1 to 5)
+		sleep(1 SECOND)
+		if(QDELETED(src))
+			return
+		shake()
+		playsound(src, 'sound/items/axe_wood.ogg', 40, TRUE)
+	sleep(1 SECOND)
+	if(QDELETED(src))
+		return
+	return ..()
+
+// Tree shake animation stolen from Polaris.
+/obj/structure/flora/tree/proc/shake()
+	set waitfor = FALSE
+	var/init_px = pixel_x
+	var/shake_dir = pick(-1, 1)
+	var/matrix/M = matrix()
+	M.Scale(icon_scale_x, icon_scale_y)
+	M.Translate(0, 16*(icon_scale_y-1))
+	animate(src, transform=turn(M, shake_animation_degrees * shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
+	animate(transform=M, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
+
+/obj/structure/flora/tree/create_dismantled_products(turf/T)
+	if(log_type)
+		new log_type(T, rand(3,5), material?.type, reinf_material?.type)
+	if(stump_type)
 		var/obj/structure/flora/stump/stump = new stump_type(T, material, reinf_material)
-		if(istype(stump))
-			stump.icon_state = icon_state //A bit dirty maybe, but its probably not worth writing a whole system for this when we have 3 kinds of trees..
+		stump.icon_state = icon_state //A bit dirty maybe, but its probably not worth writing a whole system for this when we have 3 kinds of trees..
 	. = ..()
 
 /obj/structure/flora/tree/pine
@@ -60,5 +98,64 @@
 	protects_against_weather = FALSE
 	stump_type               = /obj/structure/flora/stump/tree/dead
 
-/obj/structure/flora/tree/dead/init_appearance()
+/obj/structure/flora/tree/dead/random/init_appearance()
 	icon_state = "tree_[rand(1, 6)]"
+
+/obj/structure/flora/tree/dead/ebony
+	icon_state = "dead_ebony_1"
+
+/obj/structure/flora/tree/dead/mahogany
+	icon_state = "dead_mahogany_1"
+
+/obj/structure/flora/tree/dead/walnut
+	icon_state = "dead_walnut_1"
+
+/obj/structure/flora/tree/dead/maple
+	icon_state = "dead_maple_1"
+
+/obj/structure/flora/tree/dead/yew
+	icon_state = "dead_yew_1"
+
+/obj/structure/flora/tree/softwood
+	icon          = 'icons/obj/flora/softwood.dmi'
+	abstract_type = /obj/structure/flora/tree/softwood
+
+/obj/structure/flora/tree/softwood/towercap
+	name       = "towercap mushroom"
+	icon_state = "towercap_1"
+	material   = /decl/material/solid/organic/wood/fungal
+	stump_type = /obj/structure/flora/stump/tree/towercap
+
+/obj/structure/flora/tree/hardwood
+	icon          = 'icons/obj/flora/hardwood.dmi'
+	abstract_type = /obj/structure/flora/tree/hardwood
+
+/obj/structure/flora/tree/hardwood/ebony
+	name       = "ebony tree"
+	icon_state = "ebony_1"
+	material   = /decl/material/solid/organic/wood/ebony
+	stump_type = /obj/structure/flora/stump/tree/ebony
+
+/obj/structure/flora/tree/hardwood/mahogany
+	name       = "mahogany tree"
+	icon_state = "mahogany_1"
+	material   = /decl/material/solid/organic/wood/mahogany
+	stump_type = /obj/structure/flora/stump/tree/mahogany
+
+/obj/structure/flora/tree/hardwood/maple
+	name       = "maple tree"
+	icon_state = "maple_1"
+	material   = /decl/material/solid/organic/wood/maple
+	stump_type = /obj/structure/flora/stump/tree/maple
+
+/obj/structure/flora/tree/hardwood/yew
+	name       = "yew tree"
+	icon_state = "yew_1"
+	material   = /decl/material/solid/organic/wood/yew
+	stump_type = /obj/structure/flora/stump/tree/yew
+
+/obj/structure/flora/tree/hardwood/walnut
+	name       = "walnut tree"
+	icon_state = "walnut_1"
+	material   = /decl/material/solid/organic/wood/walnut
+	stump_type = /obj/structure/flora/stump/tree/walnut

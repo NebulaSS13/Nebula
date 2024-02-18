@@ -76,6 +76,12 @@
 	. += new/datum/stack_recipe/prosthetic/right_foot(src)
 	. += new/datum/stack_recipe/campfire(src)
 
+/decl/material/solid/organic/wood/fungal
+	name = "towercap"
+	uid = "solid_wood_fungal"
+	color = "#e6d8dd"
+	hardness = MAT_VALUE_FLEXIBLE + 1
+
 /decl/material/solid/organic/wood/mahogany/generate_recipes(stack_type, reinforce_material)
 	. = ..()
 	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))

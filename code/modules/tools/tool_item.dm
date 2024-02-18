@@ -16,13 +16,13 @@
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
 	. = tool?.set_tool_property(archetype, property, value)
 
-/obj/item/proc/do_tool_interaction(var/archetype, var/mob/user, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/check_skill_threshold, var/check_skill_prob = 50)
+/obj/item/proc/do_tool_interaction(var/archetype, var/mob/user, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/check_skill_threshold, var/check_skill_prob = 50, var/set_cooldown = FALSE)
 
 	if(get_tool_quality(archetype) <= 0)
 		return FALSE
 
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
-	. = tool.do_tool_interaction(archetype, user, target, delay, start_message, success_message, failure_message, fuel_expenditure, check_skill, check_skill_threshold, check_skill_prob)
+	. = tool.do_tool_interaction(archetype, user, target, delay, start_message, success_message, failure_message, fuel_expenditure, check_skill, check_skill_threshold, check_skill_prob, set_cooldown)
 
 	if(QDELETED(user) || QDELETED(target))
 		return FALSE
