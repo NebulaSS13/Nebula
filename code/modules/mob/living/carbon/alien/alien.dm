@@ -25,6 +25,9 @@
 	gender = NEUTER
 	. = ..()
 
+/mob/living/carbon/alien/get_blood_color()
+	return COLOR_LIME
+
 /mob/living/carbon/alien/restrained()
 	return 0
 

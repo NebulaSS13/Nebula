@@ -1,6 +1,3 @@
-/proc/gibs(var/atom/location, var/gibber_type = /obj/effect/gibspawner/generic, var/_blood_type, var/_unique_enzymes, var/_fleshcolor, var/_bloodcolor)
-	new gibber_type(location, _blood_type, _unique_enzymes, _fleshcolor, _bloodcolor)
-
 /obj/effect/gibspawner
 	var/sparks = 0 //whether sparks spread on Gib()
 	var/list/gibtypes = list()

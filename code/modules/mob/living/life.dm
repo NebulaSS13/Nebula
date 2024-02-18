@@ -99,11 +99,10 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	radiation = clamp(radiation,0,500)
-	var/decl/species/my_species = get_species()
 	var/decl/bodytype/my_bodytype = get_bodytype()
-	if(my_species && my_bodytype && (my_bodytype.appearance_flags & RADIATION_GLOWS))
+	if(my_bodytype?.appearance_flags & RADIATION_GLOWS)
 		if(radiation)
-			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), my_species.get_flesh_colour(src))
+			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), get_flesh_color())
 		else
 			set_light(0)
 
@@ -142,6 +141,7 @@
 		damage = 8
 		radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
+	var/decl/species/my_species = get_species()
 	damage = FLOOR(damage * (my_species ? my_species.get_radiation_mod(src) : 1))
 	if(damage)
 		immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)

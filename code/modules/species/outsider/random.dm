@@ -101,7 +101,7 @@
 
 	. = ..()
 
-/decl/species/alium/get_blood_color(mob/living/carbon/human/H)
+/decl/species/alium/get_species_blood_color(mob/living/carbon/human/H)
 	if(istype(H) && H.isSynthetic())
 		return ..()
 	return blood_color

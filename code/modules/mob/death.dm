@@ -18,7 +18,7 @@
 
 	flick(anim, animation)
 	if(do_gibs)
-		gibs(loc, _blood_type = get_blood_type(), _unique_enzymes = get_unique_enzymes())
+		gibs()
 
 	QDEL_IN(animation, 15)
 	QDEL_IN(src, 15)

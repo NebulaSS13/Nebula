@@ -1039,8 +1039,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	if(species && istype(., /obj/effect/decal/cleanable/blood/gibs))
 		var/obj/effect/decal/cleanable/blood/gibs/G = .
-		G.fleshcolor = species.get_flesh_colour(owner)
-		G.basecolor =  species.get_blood_color(owner)
+		G.fleshcolor = species.get_species_flesh_color(owner)
+		G.basecolor =  species.get_species_blood_color(owner)
 		G.update_icon()
 
 //Handles dismemberment

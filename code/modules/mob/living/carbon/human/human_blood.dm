@@ -1,7 +1,3 @@
-/****************************************************
-				BLOOD SYSTEM
-****************************************************/
-
 /mob/living/carbon/human
 	var/datum/reagents/vessel // Container for blood and BLOOD ONLY. Do not transfer other chems here.
 
@@ -49,7 +45,7 @@
 		"donor"       = weakref(src),
 		"species"     = get_species_name(),
 		"blood_DNA"   = get_unique_enzymes(),
-		"blood_color" = species.get_blood_color(src),
+		"blood_color" = species.get_species_blood_color(src),
 		"blood_type"  = get_blood_type(),
 		"trace_chem"  = null
 	))
@@ -130,19 +126,38 @@
 		return 0
 	if(!amt)
 		return 0
-
 	amt *= ((src.mob_size/MOB_SIZE_MEDIUM) ** 0.5)
-
 	return vessel.remove_any(amt)
 
-/****************************************************
-				BLOOD TRANSFERS
-****************************************************/
+//Transfers blood from reagents to vessel, respecting blood types compatability.
+/mob/living/carbon/human/inject_blood(var/amount, var/datum/reagents/donor)
+	if(!should_have_organ(BP_HEART))
+		reagents.add_reagent(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
+		return
+	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
+	var/injected_b_type = LAZYACCESS(injected_data, "blood_type")
+	if(is_blood_incompatible(injected_b_type))
+		var/decl/blood_type/blood_decl = injected_b_type && get_blood_type_by_name(injected_b_type)
+		if(istype(blood_decl))
+			reagents.add_reagent(blood_decl.transfusion_fail_reagent, amount * blood_decl.transfusion_fail_percentage)
+		else
+			reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
+	else
+		adjust_blood(amount, injected_data)
+	..()
 
-//Gets blood from mob to the container, preserving all data in it.
-/mob/living/carbon/proc/take_blood(obj/item/chems/container, var/amount)
-	container.reagents.add_reagent(species.blood_reagent, amount, get_blood_data())
-	return 1
+/mob/living/carbon/human/proc/regenerate_blood(var/amount)
+	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
+
+	var/stress_modifier = get_stress_modifier()
+	if(stress_modifier)
+		amount *= 1-(get_config_value(/decl/config/num/health_stress_blood_recovery_constant) * stress_modifier)
+
+	var/blood_volume_raw = vessel.total_volume
+	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
+	if(amount)
+		adjust_blood(amount, get_blood_data())
+	return amount
 
 //For humans, blood does not appear from blue, it comes from vessels.
 /mob/living/carbon/human/take_blood(obj/item/chems/container, var/amount)
@@ -160,150 +175,6 @@
 		LAZYSET(vessel.reagent_data, species.blood_reagent, get_blood_data())
 	vessel.trans_to_holder(container.reagents, amount)
 	return 1
-
-//Transfers blood from container ot vessels
-/mob/living/carbon/proc/inject_blood(var/amount, var/datum/reagents/donor)
-	if(!species.blood_volume)
-		return //Don't divide by 0
-	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
-	var/chems = LAZYACCESS(injected_data, "trace_chem")
-	for(var/C in chems)
-		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
-
-//Transfers blood from reagents to vessel, respecting blood types compatability.
-/mob/living/carbon/human/inject_blood(var/amount, var/datum/reagents/donor)
-	if(!should_have_organ(BP_HEART))
-		reagents.add_reagent(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
-		return
-	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
-	var/injected_b_type = LAZYACCESS(injected_data, "blood_type")
-	if(blood_incompatible(injected_b_type))
-		var/decl/blood_type/blood_decl = injected_b_type && get_blood_type_by_name(injected_b_type)
-		if(istype(blood_decl))
-			reagents.add_reagent(blood_decl.transfusion_fail_reagent, amount * blood_decl.transfusion_fail_percentage)
-		else
-			reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
-	else
-		adjust_blood(amount, injected_data)
-	..()
-
-/mob/living/carbon/human/proc/blood_incompatible(blood_type)
-	return species.is_blood_incompatible(dna?.b_type, blood_type)
-
-/mob/living/carbon/human/proc/regenerate_blood(var/amount)
-	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
-
-	var/stress_modifier = get_stress_modifier()
-	if(stress_modifier)
-		amount *= 1-(get_config_value(/decl/config/num/health_stress_blood_recovery_constant) * stress_modifier)
-
-	var/blood_volume_raw = vessel.total_volume
-	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
-	if(amount)
-		adjust_blood(amount, get_blood_data())
-	return amount
-
-/mob/living/proc/get_blood_data()
-
-	var/data = list()
-	data["donor"]      = weakref(src)
-	data["blood_DNA"]  = get_unique_enzymes()
-	data["blood_type"] = get_blood_type()
-	data["species"]    = get_species_name()
-
-	var/list/temp_chem = list()
-	for(var/R in reagents.reagent_volumes)
-		temp_chem[R] = REAGENT_VOLUME(reagents, R)
-	data["trace_chem"]  = temp_chem
-	data["dose_chem"]   = chem_doses ? chem_doses.Copy() : list()
-
-	var/decl/species/my_species = get_species()
-	if(my_species)
-		data["has_oxy"]     = my_species.blood_oxy
-		data["blood_color"] = my_species.get_blood_color(src)
-	else if(isSynthetic())
-		data["has_oxy"]     = FALSE
-		data["blood_color"] = SYNTH_BLOOD_COLOR
-	else
-		data["has_oxy"]     = TRUE
-		data["blood_color"] = COLOR_BLOOD_HUMAN
-	return data
-
-/proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
-
-	var/obj/effect/decal/cleanable/blood/splatter
-	var/decal_type = /obj/effect/decal/cleanable/blood/splatter
-	var/turf/T = get_turf(target)
-
-	// Are we dripping or splattering?
-	var/list/drips = list()
-	// Only a certain number of drips (or one large splatter) can be on a given turf.
-	for(var/obj/effect/decal/cleanable/blood/drip/drop in T)
-		drips |= drop.drips
-		qdel(drop)
-	if(!large && drips.len < 3)
-		decal_type = /obj/effect/decal/cleanable/blood/drip
-
-	// Find a blood decal or create a new one.
-	if(T)
-		var/list/existing = filter_list(T.contents, decal_type)
-		if(length(existing) > 3)
-			splatter = pick(existing)
-	if(!splatter)
-		splatter = new decal_type(T)
-
-	if(QDELETED(splatter))
-		return
-
-	if(istype(splatter, /obj/effect/decal/cleanable/blood/drip) && drips && drips.len && !large)
-		var/obj/effect/decal/cleanable/blood/drip/drop = splatter
-		drop.overlays |= drips
-		drop.drips |= drips
-
-	// If there's no data to copy, call it quits here.
-	var/blood_data
-	var/blood_type
-	if(ishuman(source))
-		var/mob/living/carbon/human/donor = source
-		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
-		blood_type = donor.get_blood_type()
-	else if(isatom(source))
-		var/atom/donor = source
-		blood_data = REAGENT_DATA(donor.reagents, /decl/material/liquid/blood)
-	if(!islist(blood_data))
-		return splatter
-
-	if(spray_dir)
-		splatter.icon_state = "squirt"
-		splatter.set_dir(spray_dir)
-	// Update blood information.
-	if(LAZYACCESS(blood_data, "blood_DNA"))
-		LAZYSET(splatter.blood_data, blood_data["blood_DNA"], blood_data)
-		splatter.blood_DNA = list()
-		if(LAZYACCESS(blood_data, "blood_type"))
-			splatter.blood_DNA[blood_data["blood_DNA"]] = blood_data["blood_type"]
-		else
-			splatter.blood_DNA[blood_data["blood_DNA"]] = "O+"
-		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(splatter, /datum/extension/forensic_evidence)
-		forensics.add_data(/datum/forensics/blood_dna, blood_data["blood_DNA"])
-
-	if(!blood_type && LAZYACCESS(blood_data, "blood_type"))
-		blood_type = LAZYACCESS(blood_data, "blood_type")
-
-	// Update appearance.
-	if(blood_type)
-		var/decl/blood_type/blood_type_decl = get_blood_type_by_name(blood_type)
-		splatter.name =      blood_type_decl.splatter_name
-		splatter.desc =      blood_type_decl.splatter_desc
-		splatter.basecolor = blood_type_decl.splatter_colour
-
-	if(LAZYACCESS(blood_data, "blood_color"))
-		splatter.basecolor = blood_data["blood_color"]
-
-	splatter.update_icon()
-	splatter.fluorescent = FALSE
-	splatter.set_invisibility(INVISIBILITY_NONE)
-	return splatter
 
 //Percentage of maximum blood volume.
 /mob/living/carbon/human/proc/get_blood_volume()

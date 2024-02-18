@@ -89,7 +89,7 @@
 		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
-		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
+		var/obj/effect/rune/R = new rune(T, get_blood_color(), get_blood_name())
 		var/area/A = get_area(R)
 		log_and_message_admins("created \an [R.cultname] rune at \the [A.proper_name].")
 		R.add_fingerprint(src)
@@ -128,12 +128,6 @@
 
 /mob/living/carbon/human/mob_needs_tome()
 	return 1
-
-/mob/proc/get_rune_color()
-	return "#c80000"
-
-/mob/living/carbon/human/get_rune_color()
-	return species.get_blood_color(src)
 
 var/global/list/Tier1Runes = list(
 	/mob/proc/convert_rune,
