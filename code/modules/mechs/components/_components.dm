@@ -21,6 +21,7 @@
 	var/damage_state = 1
 	var/list/has_hardpoints = list()
 	var/decal
+	var/decal_blend = BLEND_MULTIPLY
 	var/power_use = 0
 
 /obj/item/mech_component/set_color(new_color)

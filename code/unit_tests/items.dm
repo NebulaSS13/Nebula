@@ -79,7 +79,12 @@
 /datum/unit_test/paint_kits_shall_have_existing_states
 	name = "ITEMS: Paint Kits Shall Have Existing Icon States"
 	var/mech_decal_icon = 'icons/mecha/mech_decals.dmi'
-
+	var/static/list/blend_modes = list(
+		BLEND_OVERLAY,
+		BLEND_ADD,
+		BLEND_MULTIPLY,
+		BLEND_SUBTRACT
+	)
 // TODO: add other kits in here for validation somehow.
 /datum/unit_test/paint_kits_shall_have_existing_states/start_test()
 	var/list/failures
@@ -89,9 +94,13 @@
 			continue
 		var/kit_state = initial(paintkit.new_state)
 		if(!kit_state)
-			LAZYADD(failures, "non-abstract kit type [kit_type] has no decal state defined.")
+			LAZYADD(failures, "kit type [kit_type] has no decal state defined.")
 		else if(!check_state_in_icon(kit_state, mech_decal_icon))
 			LAZYADD(failures, "kit type [kit_type] decal state '[kit_state]' not present in '[mech_decal_icon]'")
+		else
+			var/kit_blend = initial(paintkit.new_blend)
+			if(!(kit_blend in blend_modes))
+				LAZYADD(failures, "kit type [kit_type] decal blend '[kit_blend || "NULL"]' not present in blend mode list")
 
 	if(length(failures))
 		fail("[length(failures)] type\s had problems:\n[jointext(failures, "\n")]")
