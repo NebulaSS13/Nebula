@@ -842,10 +842,6 @@
 			var/turf/above = GetAbove(src)
 			up_hint.icon_state = "uphint[!!(above && TURF_IS_MIMICKING(above))]"
 
-/mob/living/silicon/robot/proc/self_destruct()
-	gib()
-	return
-
 /mob/living/silicon/robot/proc/UnlinkSelf()
 	disconnect_from_ai()
 	lawupdate = 0

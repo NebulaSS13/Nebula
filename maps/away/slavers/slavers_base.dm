@@ -147,11 +147,12 @@
 
 /mob/living/simple_animal/hostile/abolition_extremist/death(gibbed)
 	. = ..()
-	if(corpse)
-		new corpse(loc)
-	if(weapon)
-		new weapon(loc)
-	qdel(src)
+	if(. && !gibbed)
+		if(corpse)
+			new corpse(loc)
+		if(weapon)
+			new weapon(loc)
+		qdel(src)
 
 /obj/abstract/landmark/corpse/abolitionist
 	name = "abolitionist"

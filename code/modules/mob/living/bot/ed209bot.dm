@@ -22,10 +22,8 @@
 	..()
 	icon_state = "ed2090"
 
-/mob/living/bot/secbot/ed209/explode()
-	visible_message("<span class='warning'>[src] blows apart!</span>")
+/mob/living/bot/secbot/ed209/gib()
 	var/turf/Tsec = get_turf(src)
-
 	var/obj/item/gun/energy/taser/G = new /obj/item/gun/energy/taser(Tsec)
 	var/obj/item/cell/power_supply = G.get_cell()
 	power_supply?.charge = 0
@@ -38,11 +36,7 @@
 			new /obj/item/clothing/head/helmet(Tsec)
 		else
 			new /obj/item/clothing/suit/armor/vest(Tsec)
-
-	spark_at(src, cardinal_only = TRUE)
-
-	new /obj/effect/decal/cleanable/blood/oil(Tsec)
-	qdel(src)
+	return ..()
 
 /mob/living/bot/secbot/ed209/handleRangedTarget()
 	RangedAttack(target)

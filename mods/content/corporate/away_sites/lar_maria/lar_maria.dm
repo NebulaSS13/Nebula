@@ -44,12 +44,13 @@
 
 /mob/living/simple_animal/hostile/lar_maria/death(gibbed)
 	. = ..()
-	if(corpse)
-		new corpse (src.loc)
-	if (weapon)
-		new weapon(src.loc)
-	visible_message("<span class='warning'>Small shining spores float away from dying [src]!</span>")
-	qdel(src)
+	if(. && !gibbed)
+		if(corpse)
+			new corpse (src.loc)
+		if (weapon)
+			new weapon(src.loc)
+		visible_message(SPAN_WARNING("Small shining spores float away from the dying [name]!"))
+		qdel(src)
 
 /mob/living/simple_animal/hostile/lar_maria/test_subject
 	name = "test subject"

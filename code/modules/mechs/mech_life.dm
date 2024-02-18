@@ -90,13 +90,14 @@
 	hud_heat.Update()
 
 /mob/living/exosuit/death(gibbed)
-	// Eject the pilot.
-	if(LAZYLEN(pilots))
-		hatch_locked = 0 // So they can get out.
-		for(var/pilot in pilots)
-			eject(pilot, silent=1)
-	new wreckage_path(get_turf(src), src, gibbed)
-	return ..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
+	. = ..()
+	if(.)
+		// Eject the pilot.
+		if(LAZYLEN(pilots))
+			hatch_locked = 0 // So they can get out.
+			for(var/pilot in pilots)
+				eject(pilot, silent=1)
+		new wreckage_path(get_turf(src), src, gibbed)
 
 /mob/living/exosuit/get_death_message(gibbed)
 	return gibbed ? "explodes!" : "grinds to a halt before collapsing!"

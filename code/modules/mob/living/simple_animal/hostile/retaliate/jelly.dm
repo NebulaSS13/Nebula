@@ -50,7 +50,7 @@
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/death(gibbed)
 	if(split_type)
 		jelly_split()
-		return
+		return TRUE
 	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/proc/jelly_split()

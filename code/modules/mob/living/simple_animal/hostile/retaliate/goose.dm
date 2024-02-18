@@ -45,7 +45,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/goose/death(gibbed)
 	. = ..()
-	update_icon()
+	if(. && !gibbed)
+		update_icon()
 
 /mob/living/simple_animal/hostile/retaliate/goose/proc/enrage(var/potency)
 	var/obj/item/attacking_with = get_natural_weapon()

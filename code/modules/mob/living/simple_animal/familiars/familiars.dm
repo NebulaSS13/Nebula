@@ -76,9 +76,9 @@
 
 /mob/living/simple_animal/familiar/horror/death(gibbed)
 	. = ..()
-	ghostize()
-	if(!gibbed)
-		gib()
+	if(. && !gibbed)
+		gibs(loc)
+		qdel(src)
 
 /mob/living/simple_animal/familiar/minor_amaros
 	name = "minor amaros"

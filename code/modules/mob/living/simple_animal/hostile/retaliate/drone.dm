@@ -183,7 +183,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death(gibbed)
 	. = ..()
-	physically_destroyed()
+	if(. && !gibbed)
+		physically_destroyed()
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
 	QDEL_NULL(ion_trail)

@@ -430,5 +430,5 @@
 	return "You have been destroyed."
 
 /mob/living/simple_animal/hostile/carp/holodeck/death(gibbed)
-	..(gibbed = FALSE)
+	. = ..()
 	qdel(src)

@@ -8,10 +8,11 @@
 	var/obj/item/organ/holder = loc
 	var/obj/item/organ/internal/brain_interface/container = get_container()
 	. = ..()
-	if(stat == DEAD && istype(holder))
-		holder.die()
-	if(istype(container) && !QDELETED(container))
-		container.update_icon()
+	if(.)
+		if(stat == DEAD && istype(holder))
+			holder.die()
+		if(istype(container) && !QDELETED(container))
+			container.update_icon()
 
 /mob/living/brain/gib()
 	var/obj/item/organ/internal/brain_interface/container = get_container()

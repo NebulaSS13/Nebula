@@ -54,6 +54,8 @@
 
 /mob/proc/death(gibbed)
 
+	SHOULD_CALL_PARENT(TRUE)
+
 	if(stat == DEAD)
 		return FALSE
 

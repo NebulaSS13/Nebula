@@ -434,9 +434,9 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	return ..()
 
 /mob/living/simple_animal/death(gibbed)
-	density = FALSE
-	walk_to(src,0)
 	. = ..()
+	if(.)
+		density = FALSE
 
 /mob/living/simple_animal/explosion_act(severity)
 	..()

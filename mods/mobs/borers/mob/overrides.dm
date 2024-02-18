@@ -50,7 +50,8 @@
 	. = ..()
 
 /mob/death(gibbed)
-	var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
-	if(B && B.controlling)
-		B.detach_from_host()
 	. = ..()
+	if(. && !gibbed)
+		var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
+		if(B && B.controlling)
+			B.detach_from_host()

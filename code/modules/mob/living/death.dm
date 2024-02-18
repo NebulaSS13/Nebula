@@ -1,11 +1,11 @@
 /mob/living/death(gibbed)
 	. = ..()
-	if(buckled_mob)
-		unbuckle_mob()
-	if(hiding)
-		hiding = FALSE
-	var/obj/item/rig/rig = get_rig()
-	if(rig)
-		rig.notify_ai(SPAN_DANGER("Warning: user death event. Mobility control passed to integrated intelligence system."))
 	if(.)
+		if(buckled_mob)
+			unbuckle_mob()
+		if(hiding)
+			hiding = FALSE
+		var/obj/item/rig/rig = get_rig()
+		if(rig)
+			rig.notify_ai(SPAN_DANGER("Warning: user death event. Mobility control passed to integrated intelligence system."))
 		stop_aiming(no_message=1)

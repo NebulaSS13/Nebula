@@ -57,7 +57,8 @@
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/death(gibbed)
 	. = ..()
-	qdel(src)
+	if(. && !gibbed)
+		qdel(src)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/proc/move_to_heal()
 	if(!target_mob)

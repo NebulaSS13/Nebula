@@ -213,7 +213,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/death(gibbed)
 	. = ..()
-	OnDeath()
+	if(.)
+		OnDeath()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Destroy()
 	QDEL_NULL(boss_theme)

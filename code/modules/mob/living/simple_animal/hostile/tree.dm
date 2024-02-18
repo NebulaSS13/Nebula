@@ -30,6 +30,7 @@
 
 /mob/living/simple_animal/hostile/tree/death(gibbed)
 	. = ..()
-	var/decl/material/mat = GET_DECL(/decl/material/solid/organic/wood)
-	mat.place_shards(loc)
-	qdel(src)
+	if(. && !gibbed)
+		var/decl/material/mat = GET_DECL(/decl/material/solid/organic/wood)
+		mat.place_shards(loc)
+		qdel(src)

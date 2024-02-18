@@ -227,24 +227,17 @@
 				tank.reagents.splash(A, 100)
 	return TRUE
 
-/mob/living/bot/farmbot/explode()
-	visible_message("<span class='danger'>[src] blows apart!</span>")
+/mob/living/bot/farmbot/gib()
 	var/turf/Tsec = get_turf(src)
-
 	new /obj/item/minihoe(Tsec)
 	new /obj/item/chems/glass/bucket(Tsec)
 	new /obj/item/assembly/prox_sensor(Tsec)
 	new /obj/item/scanner/plant(Tsec)
-
 	if(tank)
 		tank.forceMove(Tsec)
-
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
-
-	spark_at(src, cardinal_only = TRUE)
-	qdel(src)
-	return
+	return ..()
 
 /mob/living/bot/farmbot/confirmTarget(var/atom/targ)
 	if(!..())

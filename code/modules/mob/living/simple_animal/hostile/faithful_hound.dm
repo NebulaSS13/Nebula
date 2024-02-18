@@ -21,9 +21,10 @@
 	return "disappears!"
 
 /mob/living/simple_animal/faithful_hound/death(gibbed)
-	new /obj/item/ectoplasm (get_turf(src))
 	. = ..()
-	qdel(src)
+	if(. && !gibbed)
+		new /obj/item/ectoplasm(get_turf(src))
+		qdel(src)
 
 /mob/living/simple_animal/faithful_hound/Destroy()
 	allowed_mobs.Cut()

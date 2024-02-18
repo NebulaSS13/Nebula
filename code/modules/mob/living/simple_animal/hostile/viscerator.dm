@@ -35,7 +35,8 @@
 
 /mob/living/simple_animal/hostile/viscerator/death(gibbed)
 	. = ..()
-	qdel(src)
+	if(. && !gibbed)
+		qdel(src)
 
 /mob/living/simple_animal/hostile/viscerator/hive
 	faction = "hivebot"

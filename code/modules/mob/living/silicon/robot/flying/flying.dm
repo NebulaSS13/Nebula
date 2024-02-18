@@ -40,7 +40,7 @@
 
 /mob/living/silicon/robot/flying/death(gibbed)
 	. = ..()
-	if(!QDELETED(src) && stat == DEAD)
+	if(. && !gibbed)
 		stop_flying()
 
 /mob/living/silicon/robot/flying/Process_Spacemove()

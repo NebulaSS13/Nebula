@@ -22,10 +22,7 @@
 	if(holding)
 		to_chat(user, "<span class='notice'>It is holding \the [html_icon(holding)] [holding].</span>")
 
-/mob/living/bot/remotebot/explode()
-	on = 0
-	new /obj/effect/decal/cleanable/blood/oil(get_turf(src.loc))
-	visible_message("<span class='danger'>[src] blows apart!</span>")
+/mob/living/bot/remotebot/gib()
 	if(controller)
 		controller.bot = null
 		controller = null
@@ -33,9 +30,7 @@
 		var/obj/item/stack/material/cardstock/mapped/cardboard/C = new(src.loc)
 		if(prob(50))
 			C.forceMove(get_step(src, pick(global.alldirs)))
-
-	spark_at(src, cardinal_only = TRUE)
-	qdel(src)
+	return ..()
 
 /mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/bot_controller) && !controller)

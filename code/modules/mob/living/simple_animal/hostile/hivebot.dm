@@ -51,10 +51,10 @@
 
 /mob/living/simple_animal/hostile/hivebot/death(gibbed)
 	. = ..()
-	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
-	spark_at(src, cardinal_only = TRUE)
-	qdel(src)
-	return
+	if(. && !gibbed)
+		new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
+		spark_at(src, cardinal_only = TRUE)
+		qdel(src)
 
 /*
 Special projectiles

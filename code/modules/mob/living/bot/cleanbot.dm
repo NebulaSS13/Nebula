@@ -82,19 +82,16 @@
 	update_icon()
 	return TRUE
 
-/mob/living/bot/cleanbot/explode()
-	on = 0
-	visible_message("<span class='danger'>[src] blows apart!</span>")
+/mob/living/bot/cleanbot/gib()
+	on = FALSE
+	visible_message(SPAN_DANGER("\The [src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
-
 	new /obj/item/chems/glass/bucket(Tsec)
 	new /obj/item/assembly/prox_sensor(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
-
 	spark_at(src, cardinal_only = TRUE)
-	qdel(src)
-	return
+	return ..()
 
 /mob/living/bot/cleanbot/on_update_icon()
 	..()

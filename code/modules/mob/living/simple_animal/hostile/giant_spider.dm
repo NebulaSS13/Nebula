@@ -217,7 +217,8 @@ Guard caste procs
 
 /mob/living/simple_animal/hostile/giant_spider/guard/death(gibbed)
 	. = ..()
-	divorce()
+	if(.)
+		divorce()
 
 /mob/living/simple_animal/hostile/giant_spider/guard/Destroy()
 	. = ..()
@@ -271,12 +272,13 @@ Nurse caste procs
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/death(gibbed)
 	. = ..()
-	if(paired_guard)
-		paired_guard.vengance = rand(50,100)
-		if(prob(paired_guard.vengance))
-			paired_guard.berserking = TRUE
-			paired_guard.go_berserk()
-	divorce()
+	if(.)
+		if(paired_guard)
+			paired_guard.vengance = rand(50,100)
+			if(prob(paired_guard.vengance))
+				paired_guard.berserking = TRUE
+				paired_guard.go_berserk()
+		divorce()
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/Destroy()
 	. = ..()

@@ -19,11 +19,12 @@
 	qdel(src)
 
 /mob/living/slime/death(gibbed)
+	// Handle splitting instead of dying.
 	if(stat != DEAD && !gibbed && is_adult)
 		physically_destroyed()
 		return TRUE
 	. = ..()
-	if(stat == DEAD)
+	if(.)
 		set_feeding_on()
 		for(var/atom/movable/AM in contents)
 			AM.dropInto(loc)

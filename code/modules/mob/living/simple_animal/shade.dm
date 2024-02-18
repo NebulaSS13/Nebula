@@ -52,6 +52,7 @@
 	return "You have been released from your earthly binds."
 
 /mob/living/simple_animal/shade/death(gibbed)
-	new /obj/item/ectoplasm (src.loc)
 	. = ..()
-	qdel(src)
+	if(. && !gibbed)
+		new /obj/item/ectoplasm(src.loc)
+		qdel(src)

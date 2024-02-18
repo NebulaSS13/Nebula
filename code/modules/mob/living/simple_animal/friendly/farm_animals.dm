@@ -246,7 +246,8 @@ var/global/chicken_count = 0
 
 /mob/living/simple_animal/fowl/chicken/death(gibbed)
 	. = ..()
-	global.chicken_count -= 1
+	if(.)
+		global.chicken_count -= 1
 
 /mob/living/simple_animal/fowl/chicken/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/chems/food/grown)) //feedin' dem chickens

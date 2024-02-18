@@ -38,6 +38,7 @@
 
 /mob/living/simple_animal/hostile/rogue_drone/death(gibbed)
 	. = ..()
-	if(corpse)
-		new corpse (loc)
-	qdel(src)
+	if(. && !gibbed)
+		if(corpse)
+			new corpse (loc)
+		qdel(src)

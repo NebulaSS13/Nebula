@@ -212,18 +212,13 @@
 	flick(attack_state, src)
 	return TRUE
 
-/mob/living/bot/secbot/explode()
-	visible_message("<span class='warning'>[src] blows apart!</span>")
+/mob/living/bot/secbot/gib()
 	var/turf/Tsec = get_turf(src)
 	new /obj/item/assembly/prox_sensor(Tsec)
 	new /obj/item/baton(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
-
-	spark_at(src, cardinal_only = TRUE)
-
-	new /obj/effect/decal/cleanable/blood/oil(Tsec)
-	qdel(src)
+	return ..()
 
 /mob/living/bot/secbot/proc/target_name(mob/living/T)
 	if(ishuman(T))
