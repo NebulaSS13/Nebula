@@ -266,9 +266,9 @@
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
-		icon_state = "shuttle_chair-b"
+		base_icon = "shuttle_chair-b"
 	else
-		icon_state = "shuttle_chair"
+		base_icon = "shuttle_chair"
 	..()
 
 /obj/structure/bed/chair/shuttle/blue
