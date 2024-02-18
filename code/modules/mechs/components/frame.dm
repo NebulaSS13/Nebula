@@ -56,8 +56,8 @@
 
 /obj/structure/heavy_vehicle_frame/on_update_icon()
 	..()
-	for(var/overlay in get_mech_images(list(legs, head, body, arms), layer))
-		add_overlay(overlay)
+	for(var/obj/item/mech_component/comp in list(legs, head, body, arms))
+		get_mech_image(comp.decal, comp.icon_state, comp.on_mech_icon, comp.color, overlay_layer = FLOAT_LAYER)
 	if(body)
 		set_density(TRUE)
 		add_overlay(get_mech_image(null, "[body.icon_state]_cockpit", body.icon, body.color))

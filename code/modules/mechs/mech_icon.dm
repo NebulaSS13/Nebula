@@ -12,9 +12,9 @@
 			var/decal_key = "[decal]-[cache_key]"
 			if(!global.mech_icon_cache[decal_key])
 				var/template_key = "template-[cache_key]"
+				var/icon/decal_icon = icon('icons/mecha/mech_decals.dmi', decal)
 				if(!global.mech_icon_cache[template_key])
 					global.mech_icon_cache[template_key] = icon(cache_icon, "[cache_key]_mask")
-				var/icon/decal_icon = icon('icons/mecha/mech_decals.dmi', decal)
 				decal_icon.AddAlphaMask(global.mech_icon_cache[template_key])
 				global.mech_icon_cache[decal_key] = decal_icon
 			var/image/decal_image = get_mech_image(null, decal_key, global.mech_icon_cache[decal_key])
@@ -29,16 +29,11 @@
 	I.appearance = global.mech_image_cache[use_key]
 	return I
 
-/proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAYER)
-	var/list/all_images = list()
-	for(var/obj/item/mech_component/comp in components)
-		all_images += get_mech_image(comp.decal, comp.icon_state, comp.on_mech_icon, comp.color, overlay_layer)
-	return all_images
-
 /mob/living/exosuit/on_update_icon()
 	..()
-	var/list/new_overlays = get_mech_images(list(body, head), MECH_BASE_LAYER)
+	var/list/new_overlays = list()
 	if(body)
+		new_overlays += get_mech_image(body.decal, body.icon_state, body.on_mech_icon, body.color, overlay_layer = MECH_BASE_LAYER)
 		new_overlays += get_mech_image(body.decal, "[body.icon_state]_cockpit", body.on_mech_icon, overlay_layer = MECH_INTERMEDIATE_LAYER)
 	update_pilots(FALSE)
 	if(LAZYLEN(pilot_overlays))
