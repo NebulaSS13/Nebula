@@ -1,4 +1,5 @@
 /proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, var/overlay_layer = FLOAT_LAYER)
+
 	var/use_key = "[cache_key]-[cache_icon]-[overlay_layer]-[decal ? decal : "none"]-[image_colour ? image_colour : "none"]"
 	if(!global.mech_image_cache[use_key])
 		var/image/I = image(icon = cache_icon, icon_state = cache_key)
@@ -13,7 +14,7 @@
 				var/template_key = "template-[cache_key]"
 				if(!global.mech_icon_cache[template_key])
 					global.mech_icon_cache[template_key] = icon(cache_icon, "[cache_key]_mask")
-				var/icon/decal_icon = icon('icons/mecha/mech_decals.dmi',decal)
+				var/icon/decal_icon = icon('icons/mecha/mech_decals.dmi', decal)
 				decal_icon.AddAlphaMask(global.mech_icon_cache[template_key])
 				global.mech_icon_cache[decal_key] = decal_icon
 			var/image/decal_image = get_mech_image(null, decal_key, global.mech_icon_cache[decal_key])
@@ -23,7 +24,10 @@
 		I.layer = overlay_layer
 		I.plane = FLOAT_PLANE
 		global.mech_image_cache[use_key] = I
-	return global.mech_image_cache[use_key]
+
+	var/image/I = new
+	I.appearance = global.mech_image_cache[use_key]
+	return I
 
 /proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAYER)
 	var/list/all_images = list()
@@ -61,8 +65,8 @@
 				else
 					color = head.color
 					decal = head.decal
-
 				new_overlays += get_mech_image(decal, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', color, hardpoint_object.mech_layer )
+
 	set_overlays(new_overlays)
 
 /mob/living/exosuit/proc/update_pilots(var/update_overlays = TRUE)
@@ -91,7 +95,7 @@
 			var/diff_x = 8 - draw_pilot.pixel_x
 			var/diff_y = 8 - draw_pilot.pixel_y
 			draw_pilot.add_filter("pilot_mask", 1, list(type = "alpha", icon = icon(body.on_mech_icon, "[body.icon_state]_pilot_mask[hatch_closed ? "" : "_open"]", dir), x = diff_x, y = diff_y))
-			
+
 			LAZYADD(pilot_overlays, draw_pilot)
 		if(update_overlays && LAZYLEN(pilot_overlays))
 			overlays += pilot_overlays

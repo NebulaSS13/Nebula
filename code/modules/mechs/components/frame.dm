@@ -59,17 +59,17 @@
 	for(var/overlay in get_mech_images(list(legs, head, body, arms), layer))
 		add_overlay(overlay)
 	if(body)
-		density = TRUE
-		overlays += get_mech_image(null, "[body.icon_state]_cockpit", body.icon, body.color)
+		set_density(TRUE)
+		add_overlay(get_mech_image(null, "[body.icon_state]_cockpit", body.icon, body.color))
 		if(body.pilot_coverage < 100 || body.transparent_cabin)
 			add_overlay(get_mech_image(null, "[body.icon_state]_open_overlay", body.icon, body.color))
 	else
-		density = FALSE
+		set_density(FALSE)
 	if(density != opacity)
 		set_opacity(density)
 
 /obj/structure/heavy_vehicle_frame/set_dir()
-	..(SOUTH)
+	return ..(SOUTH)
 
 /obj/structure/heavy_vehicle_frame/attackby(var/obj/item/thing, var/mob/user)
 
