@@ -796,15 +796,15 @@ default behaviour is:
 	return (!L || L.can_drown())
 
 /mob/living/handle_drowning()
-	var/turf/T = get_turf(src)
-	if(!T || !can_drown() || !T.is_flooded(lying))
+	if(!can_drown() || !loc?.is_flooded(lying))
 		return FALSE
+	var/turf/T = get_turf(src)
 	if(!lying && T.above && T.above.is_open() && !T.above.is_flooded() && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
 		var/datum/reagents/metabolism/inhaled = get_inhaled_reagents()
 		var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [T.reagents?.get_primary_reagent_name() || "liquid"]!"))
+		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [T.get_fluid_name()]!"))
 		var/inhale_amount = 0
 		if(inhaled)
 			inhale_amount = rand(2,5)

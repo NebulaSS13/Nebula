@@ -77,6 +77,7 @@
 	var/last_slipperiness = 0
 	var/last_flow_strength = 0
 	var/last_flow_dir = 0
+	var/atom/movable/fluid_overlay/fluid_overlay
 
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
@@ -162,6 +163,8 @@
 	if(weather)
 		remove_vis_contents(src, weather.vis_contents_additions)
 		weather = null
+
+	QDEL_NULL(fluid_overlay)
 
 	..()
 
@@ -639,3 +642,8 @@
 		to_chat(AM, SPAN_WARNING("Something blocks the path."))
 	return TRUE
 
+/turf/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
+	return
+
+/turf/proc/unwet_floor(var/check_very_wet = TRUE)
+	return
