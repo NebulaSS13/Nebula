@@ -16,7 +16,13 @@
 /obj/item/mech_equipment/clamp/attack_hand(mob/user)
 	if(!owner || !LAZYISIN(owner.pilots, user) || owner.hatch_closed || !length(carrying) || !user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
-	var/obj/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying
+	// Filter out non-items.
+	var/list/carrying_items = list()
+	for(var/obj/item/thing in carrying)
+		carrying_items += thing
+	if(!length(carrying_items))
+		return TRUE
+	var/obj/item/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying_items
 	if(chosen_obj && do_after(user, 20, owner) && !owner.hatch_closed && !QDELETED(chosen_obj) && (chosen_obj in carrying))
 		owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [chosen_obj] from \the [src]."))
 		playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
@@ -133,11 +139,11 @@
 	if(.)
 		drop_carrying(user, TRUE)
 
-/obj/item/mech_equipment/clamp/CtrlClick(mob/user)
-	if(owner)
+/obj/item/mech_equipment/clamp/AltClick(mob/user)
+	if(owner?.hatch_closed)
 		drop_carrying(user, FALSE)
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/item/mech_equipment/clamp/proc/drop_carrying(var/mob/user, var/choose_object)
 	if(!length(carrying))
@@ -614,13 +620,12 @@
 	else
 		activate()
 
-/obj/item/mech_equipment/ionjets/CtrlClick(mob/user)
-	if (owner && ((user in owner.pilots) || user == owner))
-		if (active)
-			stabilizers = !stabilizers
-			to_chat(user, SPAN_NOTICE("You toggle the stabilizers [stabilizers ? "on" : "off"]"))
-	else
-		..()
+/obj/item/mech_equipment/ionjets/AltClick(mob/user)
+	if(owner?.hatch_closed && ((user in owner.pilots) || user == owner) && active)
+		stabilizers = !stabilizers
+		to_chat(user, SPAN_NOTICE("You toggle the stabilizers [stabilizers ? "on" : "off"]"))
+		return TRUE
+	return ..()
 
 /obj/item/mech_equipment/ionjets/proc/activate()
 	passive_power_use = activated_passive_power
