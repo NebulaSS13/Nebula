@@ -72,6 +72,7 @@
 /obj/item/kit/paint
 	name = "exosuit decal kit"
 	desc = "A kit containing all the needed tools and parts to repaint a exosuit."
+	abstract_type = /obj/item/kit/paint
 
 /obj/item/kit/paint/examine(mob/user)
 	. = ..()
