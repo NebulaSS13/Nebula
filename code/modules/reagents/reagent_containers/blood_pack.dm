@@ -26,15 +26,15 @@
 
 /obj/item/chems/ivbag/on_reagent_change()
 	..()
-	if(reagents.total_volume > volume/2)
+	if(reagents?.total_volume > volume/2)
 		w_class = ITEM_SIZE_SMALL
 	else
 		w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/ivbag/on_update_icon()
 	. = ..()
-	var/percent = round(reagents.total_volume / volume * 100)
-	if(reagents.total_volume)
+	var/percent = round(reagents?.total_volume / volume * 100)
+	if(percent)
 		add_overlay(overlay_image(icon, "[round(percent,25)]", reagents.get_color()))
 	add_overlay(attached? "dongle" : "top")
 

@@ -26,7 +26,7 @@ var/global/list/cached_icons = list()
 
 /obj/item/chems/glass/paint/on_update_icon()
 	. = ..()
-	if(reagents.total_volume)
+	if(reagents?.total_volume)
 		add_overlay(overlay_image('icons/obj/reagentfillings.dmi', "paintbucket", reagents.get_color()))
 
 /obj/item/chems/glass/paint/red

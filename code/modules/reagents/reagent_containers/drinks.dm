@@ -86,9 +86,8 @@
 
 /obj/item/chems/drinks/on_update_icon()
 	. = ..()
-	if(LAZYLEN(reagents.reagent_volumes))
-		if(filling_states)
-			add_overlay(overlay_image(icon, "[base_icon][get_filling_state()]", reagents.get_color()))
+	if(LAZYLEN(reagents?.reagent_volumes) && filling_states)
+		add_overlay(overlay_image(icon, "[base_icon][get_filling_state()]", reagents.get_color()))
 
 
 ////////////////////////////////////////////////////////////////////////////////

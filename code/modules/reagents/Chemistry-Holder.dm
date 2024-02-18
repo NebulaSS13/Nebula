@@ -24,7 +24,8 @@ var/global/obj/temp_reagents_holder = new
 	if(my_atom)
 		if(my_atom.reagents == src)
 			my_atom.reagents = null
-			my_atom.on_reagent_change()
+			if(total_volume > 0) // we can assume 0 reagents and null reagents are broadly identical for the purposes of atom logic
+				my_atom.on_reagent_change()
 		my_atom = null
 
 /datum/reagents/GetCloneArgs()

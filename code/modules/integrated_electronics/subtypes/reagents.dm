@@ -19,7 +19,7 @@
 		push_vol()
 
 /obj/item/integrated_circuit/reagent/proc/push_vol()
-	set_pin_data(IC_OUTPUT, 1, reagents.total_volume)
+	set_pin_data(IC_OUTPUT, 1, reagents?.total_volume || 0)
 	push_data()
 
 /obj/item/integrated_circuit/reagent/smoke
@@ -49,7 +49,7 @@
 	var/smoke_radius = 5
 	var/notified = FALSE
 
-/obj/item/integrated_circuit/reagent/smoke/on_reagent_change()
+/obj/item/integrated_circuit/reagent/on_reagent_change()
 	..()
 	push_vol()
 
@@ -108,10 +108,6 @@
 	var/direction_mode = IC_REAGENTS_INJECT
 	var/transfer_amount = 10
 	var/busy = FALSE
-
-/obj/item/integrated_circuit/reagent/injector/on_reagent_change(changetype)
-	..()
-	push_vol()
 
 /obj/item/integrated_circuit/reagent/injector/on_data_written()
 	var/new_amount = get_pin_data(IC_INPUT, 2)
@@ -323,10 +319,6 @@
 /obj/item/integrated_circuit/reagent/storage/do_work()
 	set_pin_data(IC_OUTPUT, 2, weakref(src))
 	push_data()
-
-/obj/item/integrated_circuit/reagent/storage/on_reagent_change(changetype)
-	..()
-	push_vol()
 
 /obj/item/integrated_circuit/reagent/storage/big
 	name = "big reagent storage"
@@ -599,10 +591,6 @@
 		if(3)
 			set_pin_data(IC_OUTPUT, 4, weakref(src))
 			push_data()
-
-/obj/item/integrated_circuit/reagent/temp/on_reagent_change()
-	..()
-	push_vol()
 
 /obj/item/integrated_circuit/reagent/temp/power_fail()
 	active = 0
