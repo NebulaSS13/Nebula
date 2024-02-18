@@ -29,8 +29,6 @@
 	flooded = new_flooded
 	if(flooded)
 		QDEL_NULL(reagents)
-		for(var/obj/effect/fluid_overlay/fluid in src)
-			qdel(fluid)
 		ADD_ACTIVE_FLUID_SOURCE(src)
 		if(!skip_vis_contents_update)
 			var/flood_object = get_flood_overlay(flooded)
@@ -47,7 +45,8 @@
 	. = (get_fluid_depth() >= min)
 
 /turf/proc/get_fluid_name()
-	return reagents?.get_primary_reagent_name() || "liquid"
+	var/decl/material/mat = reagents?.get_primary_reagent_decl()
+	return mat?.liquid_name || "liquid"
 
 /turf/get_fluid_depth()
 	if(is_flooded(absolute=1))
@@ -61,9 +60,9 @@
 	set waitfor = FALSE
 	if(flooded)
 		return
-	var/obj/effect/fluid_overlay/F = locate() in src
-	if(istype(F))
-		flick("bubbles",F)
+	var/atom/movable/fluid_overlay/fluid = locate() in src
+	if(istype(fluid))
+		flick("bubbles", fluid)
 
 /turf/fluid_update(var/ignore_neighbors)
 	fluid_blocked_dirs = null
@@ -136,25 +135,26 @@
 	return FALSE
 
 /turf/on_reagent_change()
+
 	..()
 
-	// Update fluid status and wake neighbors.
-	ADD_ACTIVE_FLUID(src)
+	if(reagents?.total_volume)
+		ADD_ACTIVE_FLUID(src)
+		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
+		if(primary_reagent)
+			last_slipperiness = primary_reagent.slipperiness
+		if(!fluid_overlay)
+			fluid_overlay = new(src, TRUE)
+		fluid_overlay.update_icon()
+		unwet_floor(FALSE)
+	else
+		QDEL_NULL(fluid_overlay)
+		REMOVE_ACTIVE_FLUID(src)
+		SSfluids.pending_flows -= src
+		if(last_slipperiness > 0)
+			wet_floor(last_slipperiness)
+
 	for(var/checkdir in global.cardinal)
 		var/turf/neighbor = get_step(src, checkdir)
 		if(neighbor)
 			ADD_ACTIVE_FLUID(neighbor)
-
-	// Update slipperiness.
-	if(reagents?.total_volume)
-		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
-		if(primary_reagent)
-			last_slipperiness = primary_reagent.slipperiness
-		// Update fluid overlay.
-		var/obj/effect/fluid_overlay/fluid_overlay = (locate() in src) || new /obj/effect/fluid_overlay(src)
-		fluid_overlay.update_lighting = TRUE
-		fluid_overlay.update_icon()
-	else
-		// Clear fluid overlays.
-		for(var/obj/effect/fluid_overlay/fluid_overlay in src)
-			qdel(fluid_overlay)

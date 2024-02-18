@@ -24,6 +24,7 @@ var/global/obj/temp_reagents_holder = new
 	if(my_atom)
 		if(my_atom.reagents == src)
 			my_atom.reagents = null
+			my_atom.on_reagent_change()
 		my_atom = null
 
 /datum/reagents/GetCloneArgs()

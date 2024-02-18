@@ -21,7 +21,6 @@ SUBSYSTEM_DEF(fluids)
 	var/tmp/active_fluids_copied_yet = FALSE
 	var/tmp/list/processing_fluids
 
-	var/tmp/list/fluid_images =        list()
 	var/tmp/list/checked_targets =     list()
 	var/tmp/list/gurgles =             list(
 		'sound/effects/gurgle1.ogg',

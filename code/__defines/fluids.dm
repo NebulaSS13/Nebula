@@ -23,9 +23,6 @@
 		}                                                   \
 	}
 
-// We share overlays for all fluid turfs to sync icon animation.
-#define APPLY_FLUID_OVERLAY(img_state) if(!SSfluids.fluid_images[img_state]) SSfluids.fluid_images[img_state] = image('icons/effects/liquids.dmi',img_state); add_overlay(SSfluids.fluid_images[img_state]);
-
 #define FLUID_MAX_ALPHA 200
 #define FLUID_MIN_ALPHA 96
 #define TANK_WATER_MULTIPLIER 5
