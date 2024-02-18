@@ -362,7 +362,7 @@
 			for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
 				comp.icon = P.new_icon
 
-		queue_icon_update()
+		update_icon()
 		P.use(1, user)
 		return TRUE
 
