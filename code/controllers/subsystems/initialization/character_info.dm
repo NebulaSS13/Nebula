@@ -4,6 +4,7 @@ SUBSYSTEM_DEF(character_info)
 	flags = SS_NEEDS_SHUTDOWN
 	init_order = SS_INIT_EARLY
 	wait = 1 SECOND
+	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT // We want to save changes made during pre-round lobby.
 	var/static/comments_source = "data/character_info/"
 	var/list/_comment_holders_by_id = list()
 	var/list/_ids_to_save = list()

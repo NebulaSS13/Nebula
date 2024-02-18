@@ -91,12 +91,8 @@
 		var/datum/pref_record_reader/R = load_pref_record(get_slot_key(slot))
 		if(!R)
 			R = new /datum/pref_record_reader/null_reader(PREF_SER_VERSION)
-		// Load/reload our character info record - mass preload is
-		// done if comments are enabled, but not done otherwise.
-		if(!SScharacter_info.get_record(record_id, TRUE))
-			SScharacter_info.load_record(record_id)
-		else
-			SScharacter_info.reload_record(record_id)
+		// Load/reload our character info record - mass preload is done if comments are enabled, but not done otherwise.
+		SScharacter_info.reload_record(record_id)
 		player_setup.load_character(R)
 
 	update_preview_icon()
