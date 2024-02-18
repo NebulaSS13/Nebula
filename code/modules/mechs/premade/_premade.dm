@@ -5,22 +5,20 @@
 	desc = "It seems to be saying 'please let me die'."
 	abstract_type = /mob/living/exosuit/premade
 	var/decal
+	var/decal_blend = BLEND_MULTIPLY
 
 /mob/living/exosuit/premade/Initialize()
-	if(arms)
-		arms.decal = decal
-		arms.prebuild()
-	if(legs)
-		legs.decal = decal
-		legs.prebuild()
-	if(head)
-		head.decal = decal
-		head.prebuild()
-	if(body)
-		body.decal = decal
-		body.prebuild()
+
+	for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
+		if(decal)
+			comp.decal = decal
+		if(!isnull(decal_blend))
+			comp.decal_blend = decal_blend
+		comp.prebuild()
+
 	if(!material)
 		material = GET_DECL(/decl/material/solid/metal/steel)
+
 	. = ..()
 
 	spawn_mech_equipment()

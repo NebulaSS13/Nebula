@@ -358,6 +358,10 @@
 			for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
 				comp.decal = P.new_state
 
+		if(!isnull(P.new_blend))
+			for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
+				comp.decal_blend = P.new_blend
+
 		if(P.new_icon)
 			for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
 				comp.icon = P.new_icon
