@@ -121,7 +121,7 @@
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/on_reagent_change(changetype)
 	..()
-	set_pin_data(IC_OUTPUT, 1, reagents.total_volume)
+	set_pin_data(IC_OUTPUT, 1, reagents?.total_volume || 0)
 	push_data()
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/make_energy()

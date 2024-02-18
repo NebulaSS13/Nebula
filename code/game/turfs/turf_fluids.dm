@@ -58,11 +58,9 @@
 
 /turf/proc/show_bubbles()
 	set waitfor = FALSE
-	if(flooded)
-		return
-	var/atom/movable/fluid_overlay/fluid = locate() in src
-	if(istype(fluid))
-		flick("bubbles", fluid)
+	// TODO: make flooding show bubbles.
+	if(!flooded && fluid_overlay)
+		flick("bubbles", fluid_overlay)
 
 /turf/fluid_update(var/ignore_neighbors)
 	fluid_blocked_dirs = null
