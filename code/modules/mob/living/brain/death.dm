@@ -14,11 +14,12 @@
 		if(istype(container) && !QDELETED(container))
 			container.update_icon()
 
-/mob/living/brain/gib()
+/mob/living/brain/gib(do_gibs)
 	var/obj/item/organ/internal/brain_interface/container = get_container()
 	var/obj/item/organ/internal/brain/sponge = loc
-	. = ..(null, 1)
-	if(container && !QDELETED(container))
-		qdel(container)
-	if(istype(sponge) && !QDELETED(sponge))
-		qdel(sponge)
+	. = ..()
+	if(.)
+		if(!QDELETED(container))
+			qdel(container)
+		if(!QDELETED(sponge))
+			qdel(sponge)

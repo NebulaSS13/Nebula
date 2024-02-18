@@ -69,11 +69,16 @@
 /mob/living/bot/get_total_life_damage()
 	return getFireLoss() + getBruteLoss()
 
-/mob/living/bot/gib()
-	turn_off()
-	visible_message(SPAN_DANGER("\The [src] blows apart!"))
-	spark_at(src, cardinal_only = TRUE)
-	new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
+/mob/living/bot/get_dusted_remains()
+	return /obj/effect/decal/cleanable/blood/oil
+
+/mob/living/bot/gib(do_gibs)
+	if(stat != DEAD)
+		death(gibbed = TRUE)
+	if(stat == DEAD)
+		turn_off()
+		visible_message(SPAN_DANGER("\The [src] blows apart!"))
+		spark_at(src, cardinal_only = TRUE)
 	return ..()
 
 /mob/living/bot/death(gibbed)

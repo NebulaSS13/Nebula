@@ -102,30 +102,35 @@
 /mob/living/exosuit/get_death_message(gibbed)
 	return gibbed ? "explodes!" : "grinds to a halt before collapsing!"
 
-/mob/living/exosuit/gib(anim="gibbed-m",do_gibs)
-	death(gibbed = TRUE)
+/mob/living/exosuit/get_gibbed_state(dusted)
+	return null
 
-	// Get a turf to play with.
-	var/turf/T = get_turf(src)
-	if(!T)
+/mob/living/exosuit/get_gibbed_icon()
+	return null
+
+/mob/living/exosuit/gib(do_gibs)
+	SHOULD_CALL_PARENT(FALSE)
+	if(stat != DEAD)
+		death(gibbed = TRUE)
+	if(stat == DEAD)
+		// Get a turf to play with.
+		var/turf/T = get_turf(src)
+		if(T)
+			// Hurl our component pieces about.
+			var/list/stuff_to_throw = list()
+			for(var/obj/item/thing in list(arms, legs, head, body))
+				if(thing)
+					stuff_to_throw += thing
+			for(var/hardpoint in hardpoints)
+				if(hardpoints[hardpoint])
+					var/obj/item/thing = hardpoints[hardpoint]
+					thing.screen_loc = null
+					stuff_to_throw += thing
+			for(var/obj/item/thing in stuff_to_throw)
+				thing.forceMove(T)
+				thing.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(3,6),40)
+			explosion(T, -1, 0, 2)
 		qdel(src)
-		return
-
-	// Hurl our component pieces about.
-	var/list/stuff_to_throw = list()
-	for(var/obj/item/thing in list(arms, legs, head, body))
-		if(thing) stuff_to_throw += thing
-	for(var/hardpoint in hardpoints)
-		if(hardpoints[hardpoint])
-			var/obj/item/thing = hardpoints[hardpoint]
-			thing.screen_loc = null
-			stuff_to_throw += thing
-	for(var/obj/item/thing in stuff_to_throw)
-		thing.forceMove(T)
-		thing.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(3,6),40)
-	explosion(T, -1, 0, 2)
-	qdel(src)
-	return
 
 /mob/living/exosuit/handle_vision()
 	var/was_blind = sight & BLIND

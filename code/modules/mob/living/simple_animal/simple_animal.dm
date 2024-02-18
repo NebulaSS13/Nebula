@@ -141,6 +141,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
 		if(check_state_in_icon("world-gib", icon))
 			mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
+		if(check_state_in_icon("world-dust", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_DUST_STATE
 		if(check_state_in_icon("world-paralyzed", icon))
 			mob_icon_state_flags |= MOB_ICON_HAS_PARALYZED_STATE
 		global.simplemob_icon_bitflag_cache[type] = mob_icon_state_flags
@@ -288,8 +290,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	O.unbuckle_mob(M)
 	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
 
-/mob/living/simple_animal/gib()
-	..(((mob_icon_state_flags & MOB_ICON_HAS_GIB_STATE) ? "world-gib" : null), TRUE)
+/mob/living/simple_animal/get_gibbed_state(dusted)
+	if(dusted)
+		return (mob_icon_state_flags & MOB_ICON_HAS_DUST_STATE) ? "world-dust" : null
+	return (mob_icon_state_flags & MOB_ICON_HAS_GIB_STATE) ? "world-gib" : null
 
 /mob/living/simple_animal/proc/visible_emote(var/act_desc)
 	custom_emote(1, act_desc)

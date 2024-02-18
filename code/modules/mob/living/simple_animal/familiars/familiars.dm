@@ -77,7 +77,7 @@
 /mob/living/simple_animal/familiar/horror/death(gibbed)
 	. = ..()
 	if(. && !gibbed)
-		gibs(loc)
+		spawn_gibber(loc)
 		qdel(src)
 
 /mob/living/simple_animal/familiar/minor_amaros

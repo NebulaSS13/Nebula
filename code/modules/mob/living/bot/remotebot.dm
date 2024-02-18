@@ -22,15 +22,17 @@
 	if(holding)
 		to_chat(user, "<span class='notice'>It is holding \the [html_icon(holding)] [holding].</span>")
 
-/mob/living/bot/remotebot/gib()
-	if(controller)
-		controller.bot = null
-		controller = null
-	for(var/i in 1 to rand(3,5))
-		var/obj/item/stack/material/cardstock/mapped/cardboard/C = new(src.loc)
-		if(prob(50))
-			C.forceMove(get_step(src, pick(global.alldirs)))
-	return ..()
+/mob/living/bot/remotebot/gib(do_gibs)
+	var/turf/my_turf = get_turf(src)
+	. = ..()
+	if(. && my_turf)
+		if(controller)
+			controller.bot = null
+			controller = null
+		for(var/i in 1 to rand(3,5))
+			var/obj/item/stack/material/cardstock/mapped/cardboard/C = new(my_turf)
+			if(prob(50))
+				C.forceMove(get_step(src, pick(global.alldirs)))
 
 /mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/bot_controller) && !controller)

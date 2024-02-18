@@ -212,13 +212,14 @@
 	flick(attack_state, src)
 	return TRUE
 
-/mob/living/bot/secbot/gib()
-	var/turf/Tsec = get_turf(src)
-	new /obj/item/assembly/prox_sensor(Tsec)
-	new /obj/item/baton(Tsec)
-	if(prob(50))
-		new /obj/item/robot_parts/l_arm(Tsec)
-	return ..()
+/mob/living/bot/secbot/gib(do_gibs)
+	var/turf/my_turf = get_turf(src)
+	. = ..()
+	if(. && my_turf)
+		new /obj/item/assembly/prox_sensor(my_turf)
+		new /obj/item/baton(my_turf)
+		if(prob(50))
+			new /obj/item/robot_parts/l_arm(my_turf)
 
 /mob/living/bot/secbot/proc/target_name(mob/living/T)
 	if(ishuman(T))

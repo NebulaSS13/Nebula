@@ -178,13 +178,13 @@
 
 /obj/vehicle/proc/explode()
 	src.visible_message("<span class='danger'>\The [src] blows apart!</span>")
-	var/turf/Tsec = get_turf(src)
+	var/turf/my_turf = get_turf(src)
 
 	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 2, /obj/item/stack/material/rods)
-	new /obj/item/stack/cable_coil/cut(Tsec)
+	new /obj/item/stack/cable_coil/cut(my_turf)
 
 	if(cell)
-		cell.forceMove(Tsec)
+		cell.forceMove(my_turf)
 		cell.update_icon()
 		cell = null
 
@@ -195,7 +195,7 @@
 
 	unload()
 
-	new /obj/effect/gibspawner/robot(Tsec)
+	new /obj/effect/gibspawner/robot(my_turf)
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 
 	qdel(src)

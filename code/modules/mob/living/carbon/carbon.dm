@@ -65,12 +65,6 @@
 	if(prob(getBruteLoss() - 50))
 		gib()
 
-/mob/living/carbon/gib(anim="gibbed-m",do_gibs)
-	for(var/mob/M in contents)
-		M.dropInto(loc)
-		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
-	..()
-
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
 

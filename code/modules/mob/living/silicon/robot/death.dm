@@ -1,6 +1,7 @@
-/mob/living/silicon/robot/dust()
-	clear_brain()
-	..()
+/mob/living/silicon/robot/dust(do_gibs)
+	. = ..()
+	if(.)
+		clear_brain()
 
 /mob/living/silicon/robot/get_death_message(gibbed)
 	return "shudders violently for a moment, then becomes motionless, its eyes slowly darkening."
