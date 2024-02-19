@@ -31,7 +31,7 @@
 			var/obj/item/organ/internal/lungs/L = test_subject.get_organ(test_subject.get_bodytype().breathing_organ, /obj/item/organ/internal/lungs)
 			if(L)
 				L.last_successful_breath = -INFINITY
-			test_subjects["[bodytype.type]"] = list(test_subject, damage_check(test_subject, OXY))
+			test_subjects["[bodytype.type]"] = list(test_subject, test_subject.get_damage(OXY))
 	return 1
 
 /datum/unit_test/human_breath/check_result()
@@ -43,7 +43,7 @@
 	var/failcount = 0
 	for(var/i in test_subjects)
 		var/mob/living/carbon/human/test_subject = test_subjects[i][1]
-		var/ending_oxyloss = damage_check(test_subject, OXY)
+		var/ending_oxyloss = test_subject.get_damage(OXY)
 		var/starting_oxyloss = test_subjects[i][2]
 		if(starting_oxyloss >= ending_oxyloss)
 			failcount++
@@ -86,32 +86,6 @@ var/global/default_mobloc = null
 	test_result["mobref"] = "\ref[H]"
 
 	return test_result
-
-//Generic Check
-// TODO: Need to make sure I didn't just recreate the wheel here.
-
-/proc/damage_check(var/mob/living/M, var/damage_type)
-	var/loss = null
-
-	switch(damage_type)
-		if(BRUTE)
-			loss = M.getBruteLoss()
-		if(BURN)
-			loss = M.getFireLoss()
-		if(TOX)
-			loss = M.getToxLoss()
-		if(OXY)
-			loss = M.getOxyLoss()
-		if(CLONE)
-			loss = M.getCloneLoss()
-		if(PAIN)
-			loss = M.getHalLoss()
-
-	if(!loss && ishuman(M))
-		var/mob/living/carbon/human/H = M            // Synthetics have robot limbs which don't report damage to getXXXLoss()
-		if(H.isSynthetic())                          // So we have to hard code this check or create a different one for them.
-			return H.species.total_health - H.current_health
-	return loss
 
 // ==============================================================================================================
 
@@ -171,9 +145,9 @@ var/global/default_mobloc = null
 		if(L)
 			L.last_successful_breath = -INFINITY
 
-	H.apply_damage(damage_amount, damagetype, damage_location)
+	H.take_damage(damage_amount, damagetype, damage_location)
 
-	var/ending_damage = damage_check(H, damagetype)
+	var/ending_damage = H.get_damage(damagetype)
 
 	var/ending_health = H.current_health
 	qdel(H)

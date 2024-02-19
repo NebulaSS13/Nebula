@@ -11,21 +11,25 @@
 		armor_degradation_coef = _armor_degradation_speed
 
 /datum/extension/armor/ablative/on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
-	if(!(damage_type == BRUTE || damage_type == BURN))
+	if(!armor_degradation_coef)
 		return
-	if(armor_degradation_coef)
-		var/key = SSmaterials.get_armor_key(damage_type, damage_flags)
-		var/damage_blocked = round(damage * blocked)
-		if(damage_blocked)
-			var/new_armor = max(0, get_value(key) - armor_degradation_coef * damage_blocked)
-			set_value(key, new_armor)
-			var/mob/M = holder.get_recursive_loc_of_type(/mob)
-			if(istype(M))
-				var/list/visible = get_visible_damage()
-				for(var/k in visible)
-					if(LAZYACCESS(last_reported_damage, k) != visible[k])
-						LAZYSET(last_reported_damage, k, visible[k])
-						to_chat(M, SPAN_WARNING("The [k] armor on your [holder] has [visible[k]] damage now!"))
+	var/decl/damage_handler/damage_type_data = GET_DECL(damage_type)
+	if(!damage_type_data.blocked_by_ablative)
+		return
+	var/damage_blocked = round(damage * blocked)
+	if(!damage_blocked)
+		return
+	var/key = damage_type_data.get_armor_key(damage_flags)
+	var/new_armor = max(0, get_value(key) - armor_degradation_coef * damage_blocked)
+	set_value(key, new_armor)
+	var/mob/M = holder.get_recursive_loc_of_type(/mob)
+	if(!istype(M))
+		return
+	var/list/visible = get_visible_damage()
+	for(var/k in visible)
+		if(LAZYACCESS(last_reported_damage, k) != visible[k])
+			LAZYSET(last_reported_damage, k, visible[k])
+			to_chat(M, SPAN_WARNING("The [k] armor on your [holder] has [visible[k]] damage now!"))
 
 /datum/extension/armor/ablative/proc/get_damage()
 	for(var/key in armor_values)

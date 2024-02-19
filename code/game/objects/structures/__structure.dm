@@ -86,7 +86,7 @@
 	set waitfor = FALSE
 	return FALSE
 
-/obj/structure/proc/take_damage(var/damage)
+/obj/structure/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	if(health == -1) // This object does not take damage.
 		return
 
@@ -128,7 +128,7 @@
 	if(istype(material))
 		dmg = round(dmg * material.combustion_effect(get_turf(src),temperature, 0.3))
 	if(dmg)
-		take_damage(dmg)
+		take_damage(dmg, BURN)
 
 /obj/structure/Destroy()
 	var/turf/T = get_turf(src)
@@ -182,13 +182,13 @@
 		if (prob(30 * (1 - blocked)))
 			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 
-		affecting_mob.apply_damage(8, BRUTE, BP_HEAD)
+		affecting_mob.take_damage(8, BRUTE, BP_HEAD)
 		visible_message(SPAN_DANGER("[G.assailant] slams [affecting_mob]'s face against \the [src]!"))
 		if (material)
 			playsound(loc, material.tableslam_noise, 50, 1)
 		else
 			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-		var/list/L = take_damage(rand(1,5))
+		var/list/L = take_damage(rand(1,5), BRUTE)
 		for(var/obj/item/shard/S in L)
 			if(S.sharp && prob(50))
 				affecting_mob.visible_message(SPAN_DANGER("\The [S] slices into [affecting_mob]'s face!"), SPAN_DANGER("\The [S] slices into your face!"))
@@ -212,9 +212,9 @@
 		if(severity == 1)
 			physically_destroyed()
 		else if(severity == 2)
-			take_damage(rand(20, 30))
+			take_damage(rand(20, 30), BRUTE)
 		else
-			take_damage(rand(5, 15))
+			take_damage(rand(5, 15), BRUTE)
 
 /obj/structure/proc/can_repair(var/mob/user)
 	if(health >= max_health)
@@ -223,7 +223,7 @@
 	return TRUE
 
 /obj/structure/bullet_act(var/obj/item/projectile/Proj)
-	if(take_damage(Proj.get_structure_damage()))
+	if(take_damage(Proj.get_structure_damage(), Proj.damage_type, damage_flags = Proj.damage_flags))
 		return PROJECTILE_CONTINUE
 
 /*

@@ -268,15 +268,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	if(bodytemperature < minbodytemp)
 		fire_alert = 2
-		adjustBruteLoss(cold_damage_per_tick)
+		take_damage(cold_damage_per_tick, BRUTE)
 	else if(bodytemperature > maxbodytemp)
 		fire_alert = 1
-		adjustBruteLoss(heat_damage_per_tick)
+		take_damage(heat_damage_per_tick, BRUTE)
 	else
 		fire_alert = 0
 
 	if(!atmos_suitable)
-		adjustBruteLoss(unsuitable_atmos_damage)
+		take_damage(unsuitable_atmos_damage, BRUTE)
 
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
@@ -300,7 +300,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 		damage = Proj.damage / 6
 	if(Proj.damtype == BRUTE)
 		damage = Proj.damage / 2
-	if(Proj.damtype == BURN)
+	if(Proj.damtype == BRUTE)
 		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
@@ -309,7 +309,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	bullet_impact_visuals(Proj)
-	adjustBruteLoss(damage)
+	take_damage(damage, BRUTE)
 	Proj.on_hit(src)
 	return 0
 
@@ -342,7 +342,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 				harm_verb = pick(attack.attack_verb)
 				if(attack.sharp || attack.edge)
 					adjustBleedTicks(dealt_damage)
-		adjustBruteLoss(dealt_damage)
+		take_damage(dealt_damage, BRUTE)
 		user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
 		user.do_attack_animation(src)
 		return TRUE
@@ -355,7 +355,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			if(!MED.animal_heal)
 				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
 			else if(current_health < get_max_health() && MED.can_use(1))
-				adjustBruteLoss(-MED.animal_heal)
+				heal_damage(MED.animal_heal, BRUTE)
 				visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
 				MED.use(1)
 		else
@@ -394,12 +394,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	var/damage = O.force
 	if (O.damtype == PAIN)
 		damage = 0
-	if (O.damtype == STUN)
-		damage = (O.force / 8)
 	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2
 		purge = 3
-	adjustBruteLoss(damage)
+	take_damage(damage, BRUTE)
 	if(O.edge || O.sharp)
 		adjustBleedTicks(damage)
 
@@ -424,7 +422,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
 	density = FALSE
-	adjustBruteLoss(get_max_health()) //Make sure dey dead.
+	take_damage(get_max_health(), BRUTE) //Make sure dey dead.
 	walk_to(src,0)
 	. = ..(gibbed, deathmessage, show_dead_message)
 
@@ -438,7 +436,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			damage = 120
 		if(3)
 			damage = 30
-	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
+	take_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
 /mob/living/simple_animal/proc/SA_attackable(target_mob)
 	if (isliving(target_mob))
@@ -508,7 +506,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/handle_bleeding()
 	bleed_ticks--
-	adjustBruteLoss(1)
+	take_damage(1, BRUTE)
 
 	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
 	drip.basecolor = bleed_colour
@@ -530,7 +528,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/carbon/human/attacker, var/damage_type, var/description)
 	if(attacker.a_intent == I_HURT)
-		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, attacker.get_active_held_item_slot(), used_weapon = description)
+		attacker.take_damage(rand(return_damage_min, return_damage_max), damage_type, attacker.get_active_held_item_slot(), used_weapon = description)
 		if(rand(25))
 			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))
 
@@ -538,22 +536,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(ispath(natural_weapon))
 		natural_weapon = new natural_weapon(src)
 	return natural_weapon
-
-/mob/living/simple_animal/getCloneLoss()
-	. = max(0, gene_damage)
-
-/mob/living/simple_animal/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(FALSE)
-	setCloneLoss(gene_damage + amount)
-	if(do_update_health)
-		update_health()
-
-/mob/living/simple_animal/setCloneLoss(amount)
-	if(gene_damage >= 0)
-		var/current_max_health = get_max_health()
-		gene_damage = clamp(amount, 0, current_max_health)
-		if(gene_damage >= current_max_health)
-			death()
 
 /mob/living/simple_animal/get_admin_job_string()
 	return "Animal"
@@ -633,3 +615,23 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/check_has_mouth()
 	return TRUE
+
+/mob/living/simple_animal/get_handled_damage_types()
+	var/static/list/mob_damage_types = list(
+		BRUTE,
+		BURN,
+		TOX,
+		OXY,
+		CLONE
+	)
+	return mob_damage_types
+
+/mob/living/simple_animal/get_lethal_damage_types()
+	var/static/list/lethal_damage_types = list(
+		BRUTE,
+		BURN,
+		TOX,
+		OXY,
+		CLONE
+	)
+	return lethal_damage_types

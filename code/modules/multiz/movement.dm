@@ -245,7 +245,7 @@
 				if(M == src)
 					continue
 				visible_message("\The [src] hits \the [M.name]!")
-				M.take_overall_damage(fall_damage)
+				M.take_damage(fall_damage, BRUTE)
 		return TRUE
 	return FALSE
 
@@ -267,15 +267,15 @@
 	var/fall_height = get_fall_height()
 	var/min_damage = 7  * fall_height
 	var/max_damage = 14 * fall_height
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_HEAD, armor_pen = 50)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_CHEST, armor_pen = 50)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_GROIN, armor_pen = 75)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_L_LEG, armor_pen = 100)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_R_LEG, armor_pen = 100)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_L_FOOT, armor_pen = 100)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_R_FOOT, armor_pen = 100)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_L_ARM, armor_pen = 75)
-	apply_damage(rand(min_damage, max_damage), BRUTE, BP_R_ARM, armor_pen = 75)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_HEAD, armor_pen = 50)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_CHEST, armor_pen = 50)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_GROIN, armor_pen = 75)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_L_LEG, armor_pen = 100)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_R_LEG, armor_pen = 100)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_L_FOOT, armor_pen = 100)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_R_FOOT, armor_pen = 100)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_L_ARM, armor_pen = 75)
+	take_damage(rand(min_damage, max_damage), BRUTE, BP_R_ARM, armor_pen = 75)
 	SET_STATUS_MAX(src, STAT_WEAK, 3)
 	if(prob(skill_fail_chance(SKILL_HAULING, 40, SKILL_EXPERT, 2)))
 		var/list/victims = list()

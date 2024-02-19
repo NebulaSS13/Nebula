@@ -156,7 +156,7 @@
 			severed = TRUE
 
 	if(!severed && !armour_prob)
-		L.apply_damage(rand(25, 50), used_weapon = src)
+		L.take_damage(rand(25, 50), used_weapon = src)
 		visible_message(SPAN_DANGER("The crystalline strands cut deeply into \the [L]!"))
 
 	if(prob(break_chance))

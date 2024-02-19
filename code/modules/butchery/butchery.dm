@@ -134,7 +134,7 @@
 
 		if(secures_occupant)
 			user.visible_message(SPAN_DANGER("\The [user] impales \the [target] on \the [src]!"))
-			target.adjustBruteLoss(rand(30, 45))
+			target.take_damage(rand(30, 45), BRUTE)
 		else
 			user.visible_message(SPAN_DANGER("\The [user] hangs \the [target] from \the [src]!"))
 
@@ -176,7 +176,7 @@
 /obj/structure/kitchenspike/proc/set_carcass_state(var/_state)
 	occupant_state = _state
 	if(occupant)
-		occupant.adjustBruteLoss(rand(50,60))
+		occupant.take_damage(rand(50,60), BRUTE)
 		if(occupant.stat != DEAD)
 			occupant.death()
 	if(QDELETED(occupant))
@@ -197,7 +197,7 @@
 	var/mob/living/last_occupant = occupant
 
 	user.visible_message(SPAN_NOTICE("\The [user] begins [butchery_string] \the [occupant]."))
-	occupant.adjustBruteLoss(rand(50,60))
+	occupant.take_damage(rand(50,60), BRUTE)
 	update_icon()
 
 	if(do_after(user, 3 SECONDS, src) && !QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)

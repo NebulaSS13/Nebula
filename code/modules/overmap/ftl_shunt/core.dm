@@ -379,7 +379,7 @@
 		to_chat(H, SPAN_WARNING("Being untethered from a ship entering FTL is a bad idea, but you roll the dice..."))
 		if(prob(50))
 			to_chat(H, SPAN_NOTICE("and win, surviving the energy dancing over your body. Not unharmed, however."))
-			H.apply_damage(300, IRRADIATE, damage_flags = DAM_DISPERSED)
+			H.take_damage(300, IRRADIATE, damage_flags = DAM_DISPERSED)
 			return
 		else
 			to_chat(H, SPAN_DANGER("and lose, being ripped apart in a nanosecond by energies beyond comprehension."))

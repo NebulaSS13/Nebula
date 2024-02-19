@@ -77,7 +77,8 @@
 
 /mob/living/simple_animal/hostile/antlion/proc/process_healing()
 	if(!incapacitated() && healing && current_health < get_max_health())
-		heal_overall_damage(rand(heal_amount), rand(heal_amount))
+		heal_damage(rand(heal_amount), BRUTE, skip_update_health = TRUE)
+		heal_damage(rand(heal_amount), BURN)
 
 /mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
 	stop_automated_movement = new_bool

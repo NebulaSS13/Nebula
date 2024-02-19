@@ -148,11 +148,11 @@
 			return
 		if(MUTATION_XRAY in H.mutations)
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils give an eerie glow!"))
-		if(vision.damage)
+		if(vision.organ_damage)
 			to_chat(user, SPAN_WARNING("There's visible damage to [H]'s [vision.name]!"))
 		else if(HAS_STATUS(H, STAT_BLURRY))
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils react slower than normally."))
-		if(H.getBrainLoss() > 15)
+		if(H.get_brain_damage() > 15)
 			to_chat(user, SPAN_NOTICE("There's visible lag between left and right pupils' reactions."))
 
 		var/static/list/pinpoint = list(

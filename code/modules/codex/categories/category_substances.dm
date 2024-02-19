@@ -110,16 +110,18 @@
 		material_info += "</ul>"
 
 		material_info += "As a building or crafting material, it has the following properties:<ul>"
-		if(mat.brute_armor < 2)
+		var/brute_armor = mat.wall_armor[BRUTE]
+		if(brute_armor < 2)
 			material_info += "<li>It is weak to physical impacts.</li>"
-		else if(mat.brute_armor > 2)
-			material_info += "<li>It is [mat.brute_armor > 4 ? "very " : null]resistant to physical impacts.</li>"
+		else if(brute_armor > 2)
+			material_info += "<li>It is [brute_armor > 4 ? "very " : null]resistant to physical impacts.</li>"
 		else
 			material_info += "<li>It has average resistance to physical impacts.</li>"
-		if(mat.burn_armor < 2)
+		var/burn_armor = mat.wall_armor[BURN]
+		if(burn_armor < 2)
 			material_info += "<li>It is weak to applied energy.</li>"
-		else if(mat.burn_armor > 2)
-			material_info += "<li>It is [mat.burn_armor > 4 ? "very " : null]resistant to applied energy.</li>"
+		else if(burn_armor > 2)
+			material_info += "<li>It is [burn_armor > 4 ? "very " : null]resistant to applied energy.</li>"
 		else
 			material_info += "<li>It has average resistance to applied energy.</li>"
 		if(mat.conductive)

@@ -45,8 +45,8 @@
 				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
 				if(M.mind && godcult.is_antagonist(M.mind))
 					if(REAGENT_VOLUME(holder, type) > 5)
-						M.adjustHalLoss(5, do_update_health = FALSE)
-						M.adjustBruteLoss(1)
+						M.take_damage(5, PAIN, skip_update_health = TRUE)
+						M.take_damage(1, BRUTE)
 						if(prob(10)) //Only annoy them a /bit/
 							to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]")
 

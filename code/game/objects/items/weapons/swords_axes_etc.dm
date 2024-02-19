@@ -21,11 +21,7 @@
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
 		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BP_HEAD)
-		else
-			user.take_organ_damage(2*force)
+		user.take_damage(2*force, BRUTE, BP_HEAD)
 		return
 	return ..()
 
@@ -78,11 +74,7 @@
 		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 			to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
 			SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				H.apply_damage(2*force, BRUTE, BP_HEAD)
-			else
-				user.take_organ_damage(2*force)
+			user.take_damage(2*force, BRUTE, BP_HEAD)
 			return
 		if(..())
 			//playsound(src.loc, "swing_hit", 50, 1, -1)

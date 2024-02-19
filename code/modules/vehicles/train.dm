@@ -63,7 +63,7 @@
 			visible_message("<span class='warning'>[src] knocks over [M]!</span>")
 			var/def_zone = ran_zone()
 			M.apply_effects(5, 5)				//knock people down if you hit them
-			M.apply_damage(22 / move_delay, BRUTE, def_zone)	// and do damage according to how fast the train is going
+			M.take_damage(22 / move_delay, BRUTE, def_zone)	// and do damage according to how fast the train is going
 			if(ishuman(load))
 				var/mob/living/D = load
 				to_chat(D, "<span class='warning'>You hit [M]!</span>")

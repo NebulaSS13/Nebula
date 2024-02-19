@@ -151,7 +151,7 @@
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	if (attached_cuffs && running)
-		attached_cuffs.take_damage(1, armor_pen = 100)
+		attached_cuffs.take_damage(1, BRUTE, armor_pen = 100)
 		if(QDELETED(attached_cuffs))
 			verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
 			attached_cuffs = null

@@ -86,16 +86,16 @@
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
 
-/obj/item/organ/internal/proc/getToxLoss()
+/obj/item/organ/internal/proc/get_toxins_damage()
 	if(BP_IS_PROSTHETIC(src))
-		return damage * 0.5
-	return damage
+		return organ_damage * 0.5
+	return organ_damage
 
 /obj/item/organ/internal/proc/bruise()
-	damage = max(damage, min_bruised_damage)
+	organ_damage = max(organ_damage, min_bruised_damage)
 
 /obj/item/organ/internal/proc/is_bruised()
-	return damage >= min_bruised_damage
+	return organ_damage >= min_bruised_damage
 
 /obj/item/organ/internal/proc/set_max_damage(var/ndamage)
 	max_damage = FLOOR(ndamage)
@@ -104,17 +104,14 @@
 	if(damage_threshold_count > 0)
 		damage_threshold_value = round(max_damage / damage_threshold_count)
 
-/obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
-	take_internal_damage(amount, silent)
-
-/obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
+/obj/item/organ/internal/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	if(BP_IS_PROSTHETIC(src))
-		damage = clamp(0, src.damage + (amount * 0.8), max_damage)
+		damage = clamp(0, organ_damage + (damage * 0.8), max_damage)
 	else
-		damage = clamp(0, src.damage + amount, max_damage)
+		damage = clamp(0, organ_damage + damage, max_damage)
 
 		//only show this if the organ is not robotic
-		if(owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))
+		if(owner && can_feel_pain() && parent_organ && (damage > 5 || prob(10)))
 			var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(owner, parent_organ)
 			if(parent && !silent)
 				var/degree = ""
@@ -122,16 +119,16 @@
 					degree = " a lot"
 				if(damage < 5)
 					degree = " a bit"
-				owner.custom_pain("Something inside your [parent.name] hurts[degree].", amount, affecting = parent)
+				owner.custom_pain("Something inside your [parent.name] hurts[degree].", damage, affecting = parent)
 
 /obj/item/organ/internal/proc/get_visible_state()
-	if(damage > max_damage)
+	if(organ_damage > max_damage)
 		. = "bits and pieces of a destroyed "
 	else if(is_broken())
 		. = "broken "
 	else if(is_bruised())
 		. = "badly damaged "
-	else if(damage > 5)
+	else if(organ_damage > 5)
 		. = "damaged "
 	if(status & ORGAN_DEAD)
 		if(can_recover())
@@ -147,7 +144,7 @@
 /obj/item/organ/internal/Process()
 	SHOULD_CALL_PARENT(TRUE)
 	..()
-	if(owner && damage && !(status & ORGAN_DEAD))
+	if(owner && organ_damage && !(status & ORGAN_DEAD))
 		handle_damage_effects()
 
 /obj/item/organ/internal/proc/handle_damage_effects()
@@ -163,18 +160,18 @@
 
 		// We clamp/round here so that we don't accidentally heal past the threshold and
 		// cheat our way into a full second threshold of healing.
-		damage = clamp(damage-get_organ_heal_amount(), min_heal_val, absolute_max_damage)
+		organ_damage = clamp(organ_damage-get_organ_heal_amount(), min_heal_val, absolute_max_damage)
 
 		// If we're within 1 damage of the nearest threshold (such as 0), round us down.
 		// This should be removed when float-aware modulo comes in in 515, but for now is needed
 		// as modulo only deals with integers, but organ regeneration is <= 0.3 by default.
-		if(!(damage % damage_threshold_value))
-			damage = round(damage)
+		if(!(organ_damage % damage_threshold_value))
+			organ_damage = round(organ_damage)
 
 /obj/item/organ/internal/proc/get_organ_heal_amount()
-	if(damage >= min_broken_damage)
+	if(organ_damage >= min_broken_damage)
 		return 0.1
-	if(damage >= min_bruised_damage)
+	if(organ_damage >= min_bruised_damage)
 		return 0.2
 	return 0.3
 
@@ -183,7 +180,7 @@
 	if(!damage_threshold_count || !damage_threshold_value || BP_IS_PROSTHETIC(src))
 		return FALSE
 	// Our owner is under stress.
-	if(owner.get_blood_oxygenation() < BLOOD_VOLUME_SAFE || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.radiation || owner.is_asystole())
+	if(owner.get_blood_oxygenation() < BLOOD_VOLUME_SAFE || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.get_damage(IRRADIATE) || owner.is_asystole())
 		return FALSE
 	// If we haven't hit the regeneration cutoff point, heal.
 	if(min_regeneration_cutoff_threshold && !past_damage_threshold(min_regeneration_cutoff_threshold))
@@ -192,19 +189,19 @@
 	// - do not have a max cutoff threshold (point at which no further regeneration will occur)
 	// - are not past our max cutoff threshold
 	// - are dosed with stabilizer (ignores max cutoff threshold)
-	if((damage % damage_threshold_value) && (!max_regeneration_cutoff_threshold || !past_damage_threshold(max_regeneration_cutoff_threshold) || GET_CHEMICAL_EFFECT(owner, CE_STABLE)))
+	if((organ_damage % damage_threshold_value) && (!max_regeneration_cutoff_threshold || !past_damage_threshold(max_regeneration_cutoff_threshold) || GET_CHEMICAL_EFFECT(owner, CE_STABLE)))
 		return TRUE
 	return FALSE
 
 /obj/item/organ/internal/proc/surgical_fix(mob/user)
-	if(damage > min_broken_damage)
-		var/scarring = damage/max_damage
+	if(organ_damage > min_broken_damage)
+		var/scarring = organ_damage/max_damage
 		scarring = 1 - 0.3 * scarring ** 2 // Between ~15 and 30 percent loss
 		var/new_max_dam = FLOOR(scarring * max_damage)
 		if(new_max_dam < max_damage)
 			to_chat(user, SPAN_WARNING("Not every part of [src] could be saved; some dead tissue had to be removed, making it more susceptible to damage in the future."))
 			set_max_damage(new_max_dam)
-	heal_damage(damage)
+	heal_damage(organ_damage, TOX)
 
 /obj/item/organ/internal/proc/get_scarring_level()
 	. = (absolute_max_damage - max_damage)/absolute_max_damage
@@ -220,11 +217,11 @@
 		return
 	switch (severity)
 		if (1)
-			take_internal_damage(16)
+			take_damage(16, BURN)
 		if (2)
-			take_internal_damage(9)
+			take_damage(9, BURN)
 		if (3)
-			take_internal_damage(6.5)
+			take_damage(6.5, BURN)
 
 /obj/item/organ/internal/on_update_icon()
 	. = ..()
@@ -238,7 +235,7 @@
 
 // Damage recovery procs! Very exciting.
 /obj/item/organ/internal/proc/get_current_damage_threshold()
-	return damage_threshold_value > 0 ? round(damage / damage_threshold_value) : INFINITY
+	return damage_threshold_value > 0 ? round(organ_damage / damage_threshold_value) : INFINITY
 
 /obj/item/organ/internal/proc/past_damage_threshold(var/threshold)
 	return (get_current_damage_threshold() > threshold)

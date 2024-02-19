@@ -466,7 +466,7 @@
 			SPAN_DANGER("Your movement jostles [O] in your [organ.name] painfully."),       \
 			SPAN_DANGER("Your movement jostles [O] in your [organ.name] painfully."))
 		custom_pain(msg,40,affecting = organ)
-	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
+	organ.take_damage(rand(1,3) + O.w_class, BRUTE, damage_flags = DAM_EDGE)
 
 /mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype)
 	if(ispath(new_bodytype))
@@ -865,7 +865,7 @@
 					status += "is irrecoverably damaged"
 				else
 					status += "is grey and necrotic"
-			else if(org.damage >= org.max_damage && org.germ_level >= INFECTION_LEVEL_TWO)
+			else if(org.organ_damage >= org.max_damage && org.germ_level >= INFECTION_LEVEL_TWO)
 				status += "is likely beyond saving, and has begun to decay"
 			if(!org.is_usable() || org.is_dislocated())
 				status += "dangling uselessly"
@@ -893,8 +893,8 @@
 
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
 		var/oxyloss_threshold = round(species.total_health * 0.35)
-		if(getOxyLoss() >= oxyloss_threshold)
-			setOxyLoss(oxyloss_threshold)
+		if(get_damage(OXY) >= oxyloss_threshold)
+			set_damage(oxyloss_threshold, OXY)
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
 		return TRUE
@@ -913,7 +913,7 @@
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
 /mob/living/carbon/human/nervous_system_failure()
-	return getBrainLoss() >= get_max_health() * 0.75
+	return get_brain_damage() >= get_max_health() * 0.75
 
 /mob/living/carbon/human/melee_accuracy_mods()
 	. = ..()
@@ -976,7 +976,7 @@
 	..()
 	if(should_have_organ(BP_STOMACH))
 		var/obj/item/organ/internal/stomach = GET_INTERNAL_ORGAN(src, BP_STOMACH)
-		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.damage)))
+		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.organ_damage)))
 			if(should_have_organ(BP_HEART))
 				vessel.trans_to_obj(vomit, 5)
 			else

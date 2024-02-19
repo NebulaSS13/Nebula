@@ -148,9 +148,9 @@
 
 	if(passthrough)
 		. = PROJECTILE_CONTINUE
-		damage = clamp(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
+		damage = clamp(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE ? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
 
-	take_damage(damage*0.2)
+	take_damage(damage*0.2, BRUTE)
 
 /obj/structure/grille/proc/cut_grille()
 	playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -201,12 +201,14 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-		switch(W.damtype)
-			if(BURN)
-				take_damage(W.force)
-			if(BRUTE)
-				take_damage(W.force * 0.1)
+		take_damage(W.force, W.damtype)
 	..()
+
+// TODO: handle this with armour or something.
+/obj/structure/grille/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
+	if(damage_type == BURN)
+		damage = round(damage * 0.1)
+	return ..()
 
 /obj/structure/grille/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
@@ -240,9 +242,8 @@
 	return 0
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(!destroyed)
-		if(exposed_temperature > material.melting_point)
-			take_damage(1)
+	if(!destroyed && exposed_temperature > material.melting_point)
+		take_damage(1, BURN)
 	..()
 
 // Used in mapping to avoid
@@ -253,7 +254,7 @@
 
 /obj/structure/grille/broken/Initialize()
 	. = ..()
-	take_damage(rand(1, 5)) //In the destroyed but not utterly threshold.
+	take_damage(rand(1, 5), BRUTE) //In the destroyed but not utterly threshold.
 
 /obj/structure/grille/cult
 	name = "cult grille"

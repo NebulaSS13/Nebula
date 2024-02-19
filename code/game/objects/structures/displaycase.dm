@@ -45,11 +45,11 @@
 				AM.dropInto(loc)
 			qdel(src)
 		else if(prob(50))
-			take_damage(20 - (severity * 5))
+			take_damage(20 - (severity * 5), BRUTE)
 
 /obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
 	..()
-	take_damage(Proj.get_structure_damage())
+	take_damage(Proj.get_structure_damage(), Proj.damage_type)
 
 /obj/structure/proc/subtract_matter(var/obj/subtracting)
 	if(!length(matter))
@@ -132,5 +132,5 @@
 
 	else if(!destroyed && user.a_intent == I_HURT)
 		visible_message(SPAN_WARNING("[user] kicks \the [src]."), SPAN_WARNING("You kick \the [src]."))
-		take_damage(2)
+		take_damage(2, BRUTE)
 		return TRUE

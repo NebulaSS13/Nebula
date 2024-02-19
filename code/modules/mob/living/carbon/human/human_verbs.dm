@@ -312,7 +312,7 @@
 		"<span class='danger'>[self ? "You pop" : "[U] pops"] your [current_limb.joint] in the WRONG place!</span>" \
 		)
 		current_limb.add_pain(30)
-		current_limb.take_external_damage(5)
+		current_limb.take_damage(5, BRUTE)
 		shock_stage += 20
 	else
 		visible_message( \

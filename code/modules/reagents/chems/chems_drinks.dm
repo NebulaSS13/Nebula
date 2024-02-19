@@ -14,7 +14,7 @@
 	var/adj_temp = 0
 
 /decl/material/liquid/drink/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
+	M.take_damage(removed, TOX) // Probably not a good idea; not very deadly though
 
 /decl/material/liquid/drink/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -118,7 +118,7 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.adjustToxLoss(-0.5 * removed)
+	M.heal_damage(0.5 * removed, TOX)
 
 /decl/material/liquid/drink/juice/orange
 	name = "orange juice"
@@ -137,7 +137,7 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.adjustOxyLoss(-2 * removed)
+	M.heal_damage(2 * removed, TOX)
 
 /decl/material/liquid/poisonberryjuice
 	name = "poison berry juice"
@@ -200,7 +200,7 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.heal_organ_damage(0, 0.5 * removed)
+	M.heal_damage(0.5 * removed, BURN)
 
 /decl/material/liquid/drink/juice/watermelon
 	name = "watermelon juice"
@@ -276,7 +276,7 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.heal_organ_damage(0.5 * removed, 0)
+	M.heal_damage(0.5 * removed, BRUTE)
 
 /decl/material/liquid/drink/milk/cream
 	name = "cream"
@@ -664,7 +664,7 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.adjustToxLoss(-0.5 * removed)
+	M.heal_damage(0.5 * removed, TOX)
 
 /decl/material/liquid/drink/tea/black
 	name = "black tea"

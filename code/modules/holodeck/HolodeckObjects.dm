@@ -183,8 +183,7 @@
 		var/aforce = I.force
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<span class='danger'>\The [src] was hit by \the [I].</span>")
-		if(I.damtype == BRUTE || I.damtype == BURN)
-			take_damage(aforce)
+		take_damage(aforce, I.damtype)
 		return
 
 	src.add_fingerprint(user)

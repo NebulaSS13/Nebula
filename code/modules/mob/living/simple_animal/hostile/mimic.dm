@@ -151,9 +151,11 @@ var/global/list/protected_objects = list(/obj/machinery,
 		src.visible_message("<b>\The [src]</b> starts to move!")
 		awake = 1
 
-/mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(var/damage, var/do_update_health = FALSE)
-	..(damage)
-	trigger()
+/mob/living/simple_animal/hostile/mimic/sleeping/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
+	. = ..()
+	if(damage_type == BRUTE)
+		trigger()
+	..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping/attack_hand()
 	trigger()

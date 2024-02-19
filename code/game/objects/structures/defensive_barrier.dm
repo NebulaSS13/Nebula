@@ -106,7 +106,7 @@
 
 	var/decl/species/species = user.get_species()
 	if(ishuman(user) && species?.can_shred(user) && user.a_intent == I_HURT)
-		take_damage(20)
+		take_damage(20, BRUTE)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		return TRUE
 
@@ -141,7 +141,7 @@
 
 	. = ..()
 
-/obj/structure/defensive_barrier/take_damage(damage)
+/obj/structure/defensive_barrier/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	if(damage)
 		playsound(src.loc, 'sound/effects/bang.ogg', 75, 1)
 		damage = round(damage * 0.5)

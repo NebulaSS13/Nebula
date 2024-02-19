@@ -227,8 +227,11 @@
 	mode = RANDOM_CHEM_EFFECT_INT
 	desc = "acute toxicity"
 
-/decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/removed, var/value)
-	M.adjustToxLoss(value * removed)
+/decl/random_chem_effect/random_properties/tox_damage/affect_blood(var/mob/living/M, var/removed, var/value)
+	if(value > 0)
+		M.take_damage(value * removed, TOX)
+	else
+		M.heal_damage(value * removed, TOX)
 
 /decl/random_chem_effect/random_properties/heal_brute
 	beneficial = 1
@@ -236,7 +239,7 @@
 	desc = "tissue repair"
 
 /decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/removed, var/value)
-	M.heal_organ_damage(removed * value, 0)
+	M.heal_damage(removed * value, BRUTE)
 
 /decl/random_chem_effect/random_properties/heal_burns
 	beneficial = 1
@@ -244,7 +247,7 @@
 	desc = "burn repair"
 
 /decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/M, var/removed, var/value)
-	M.heal_organ_damage(0, removed * value)
+	M.heal_damage(removed * value, BURN)
 
 #undef RANDOM_CHEM_EFFECT_TRUE
 #undef RANDOM_CHEM_EFFECT_INT

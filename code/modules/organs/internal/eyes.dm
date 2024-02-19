@@ -67,7 +67,7 @@
 		if(istype(head))
 			head._icon_cache_key = null
 
-/obj/item/organ/internal/eyes/take_internal_damage(amount, var/silent=0)
+/obj/item/organ/internal/eyes/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	var/oldbroken = is_broken()
 	. = ..()
 	if(is_broken() && !oldbroken && owner && !owner.stat)

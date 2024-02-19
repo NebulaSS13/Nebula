@@ -85,12 +85,12 @@
 	if(prob(value*10)) owner.emote("scream")
 
 	// Your head asplode.
-	owner.adjustBrainLoss(value)
+	owner.adjust_brain_damage(value)
 	if(ishuman(owner))
 		var/mob/living/carbon/human/pop = owner
 		if(pop.should_have_organ(BP_BRAIN))
 			var/obj/item/organ/internal/sponge = GET_INTERNAL_ORGAN(pop, BP_BRAIN)
-			if(sponge && sponge.damage >= sponge.max_damage)
+			if(sponge && sponge.organ_damage >= sponge.max_damage)
 				var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(pop, sponge.parent_organ)
 				if(affecting)
 					affecting.dismember(0, DISMEMBER_METHOD_BLUNT)

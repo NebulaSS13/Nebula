@@ -82,7 +82,7 @@
 			damage = 10
 		if(bodytemperature > material.melting_point * 2.15 )
 			damage = 15
-		apply_damage(damage, BURN)
+		take_damage(damage, BURN)
 	//A possibility is to hook up interface icons here. But this works pretty well in my experience
 		if(prob(damage))
 			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))

@@ -23,4 +23,4 @@
 	affecting.drop_held_items()
 	if(affecting.lying)
 		SET_STATUS_MAX(affecting, STAT_WEAK, 4)
-	affecting.adjustOxyLoss(1)
+	affecting.take_damage(1, OXY)

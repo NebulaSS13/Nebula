@@ -128,7 +128,7 @@ var/global/last_chew = 0 //#FIXME: Its funny how only one person in the world ca
 		SPAN_DANGER("You chew on your [O.name]!"))
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
-	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
+	O.take_damage(3, BRUTE, damage_flags = DAM_SHARP|DAM_EDGE, used_weapon = "teeth marks")
 
 	last_chew = world.time
 

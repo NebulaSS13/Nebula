@@ -194,7 +194,7 @@
 	if(severity == 1)
 		broken(0)
 	else
-		take_damage(rand(5,15))
+		take_damage(rand(5,15), BRUTE)
 
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct

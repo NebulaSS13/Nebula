@@ -56,8 +56,8 @@
 				return 1
 		H.update_health() // TODO: readd the actual healing logic that goes here, or check that it's applied in afterattack or something
 	else
-
-		M.heal_organ_damage((src.heal_brute/2), (src.heal_burn/2))
+		M.heal_damage(heal_brute/2, BRUTE)
+		M.heal_damage(heal_burn/2,  BURN)
 		user.visible_message( \
 			SPAN_NOTICE("[M] has been applied with [src] by [user]."), \
 			SPAN_NOTICE("You apply \the [src] to [M].") \
@@ -102,7 +102,7 @@
 					user.visible_message(SPAN_NOTICE("\The [user] bandages \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You bandage \a [W.desc] on [M]'s [affecting.name]."))
 					//H.add_side_effect("Itch")
-				else if (W.damage_type == BRUISE)
+				else if (W.wound_type == WOUND_BRUISE)
 					user.visible_message(SPAN_NOTICE("\The [user] places a bruise patch over \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You place a bruise patch over \a [W.desc] on [M]'s [affecting.name].") )
 				else
@@ -191,7 +191,7 @@
 				if (W.current_stage <= W.max_bleeding_stage)
 					user.visible_message(SPAN_NOTICE("\The [user] cleans \a [W.desc] on [M]'s [affecting.name] and seals the edges with bioglue."), \
 					                     SPAN_NOTICE("You clean and seal \a [W.desc] on [M]'s [affecting.name].") )
-				else if (W.damage_type == BRUISE)
+				else if (W.wound_type == WOUND_BRUISE)
 					user.visible_message(SPAN_NOTICE("\The [user] places a medical patch over \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You place a medical patch over \a [W.desc] on [M]'s [affecting.name].") )
 				else
@@ -200,7 +200,7 @@
 				playsound(src, pick(apply_sounds), 25)
 				W.bandage()
 				W.disinfect()
-				W.heal_damage(heal_brute)
+				W.heal_wound_damage(heal_brute)
 				used++
 			affecting.update_damages()
 			if(used == amount)
@@ -242,7 +242,7 @@
 				return 1
 			user.visible_message( 	SPAN_NOTICE("[user] covers wounds on [M]'s [affecting.name] with regenerative membrane."), \
 									SPAN_NOTICE("You cover wounds on [M]'s [affecting.name] with regenerative membrane.") )
-			affecting.heal_damage(0,heal_burn)
+			affecting.heal_damage(heal_burn, BURN)
 			use(1)
 			affecting.salve()
 			affecting.disinfect()
@@ -355,5 +355,7 @@
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] patches the fractures on \the [M]'s [affecting.name] with resin."), \
 			SPAN_NOTICE("You patch fractures on \the [M]'s [affecting.name] with resin."))
-		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
+		// TODO: reimplement synthetic repair
+		affecting.heal_damage(heal_brute, BRUTE)
+		affecting.heal_damage(heal_burn, BURN)
 		use(1)

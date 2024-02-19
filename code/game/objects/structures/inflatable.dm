@@ -101,13 +101,13 @@
 			max_local_temp = max(max_local_temp, neighbour.return_air()?.temperature)
 
 	if(take_environment_damage || max_local_temp > max_temp)
-		take_damage(1)
+		take_damage(1, BRUTE)
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
 
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
-	take_damage(Proj.get_structure_damage())
+	take_damage(Proj.get_structure_damage(), Proj.damage_type, damage_flags = Proj.damage_flags)
 	if(QDELETED(src))
 		return PROJECTILE_CONTINUE
 

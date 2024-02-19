@@ -51,11 +51,8 @@
 			return
 		return
 	else
-		switch(W.damtype)
-			if(BURN)
-				src.health -= W.force * 0.75
-			if(BRUTE)
-				src.health -= W.force * 0.5
+		var/decl/damage_handler/damage_type_data = GET_DECL(W.damtype)
+		health -= W.force * damage_type_data.barrier_damage_multiplier
 		if (src.health <= 0)
 			src.explode()
 		..()

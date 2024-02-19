@@ -95,7 +95,7 @@
 
 	if(owner)
 		var/functioning = is_usable()
-		if(damage >= min_bruised_damage && prob((damage / max_damage) * 100))
+		if(organ_damage >= min_bruised_damage && prob((organ_damage / max_damage) * 100))
 			functioning = FALSE
 
 		if(functioning)
@@ -104,9 +104,9 @@
 					qdel(M)
 					continue
 
-				M.adjustBruteLoss(3, do_update_health = FALSE)
-				M.adjustFireLoss(3, do_update_health = FALSE)
-				M.adjustToxLoss(3)
+				M.take_damage(3, BRUTE, skip_update_health = TRUE)
+				M.take_damage(3, BURN, skip_update_health = TRUE)
+				M.take_damage(3, TOX)
 
 				var/digestion_product = M.get_digestion_product()
 				if(digestion_product)

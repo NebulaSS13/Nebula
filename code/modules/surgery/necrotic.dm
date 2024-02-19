@@ -86,7 +86,7 @@
 		user.visible_message(
 			SPAN_DANGER("\The [user]'s hand slips, slicing into a healthy portion of \the [target]'s [affected.name] with \the [tool]!"),
 			SPAN_DANGER("Your hand slips, slicing into a healthy portion of [target]'s [affected.name] with \the [tool]!"))
-		affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+		affected.take_damage(10, BRUTE, damage_flags = (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -180,7 +180,7 @@
 				SPAN_NOTICE("You treat \the [target]'s [O.name] with \the [tool]'s contents."))
 
 			O &= ~ORGAN_DEAD
-			O.heal_damage(O.max_damage * (0.75 * (usable_amount / 5))) //Assuming they're using a dropper and completely pure chems, put the organ back to a working point
+			O.heal_damage(O.max_damage * (0.75 * (usable_amount / 5)), TOX) //Assuming they're using a dropper and completely pure chems, put the organ back to a working point
 	else
 		to_chat(user,SPAN_WARNING("You transferred too little for the organ to regenerate!"))
 	qdel(temp_reagents)

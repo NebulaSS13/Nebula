@@ -41,7 +41,7 @@
 					affecting = GET_EXTERNAL_ORGAN(H, type)
 					SET_STATUS_MAX(H, STAT_STUN, 3)
 		if(affecting)
-			affecting.take_external_damage(1, 0)
+			affecting.take_damage(1, BRUTE)
 
 	else if(ismouse(target))
 		var/mob/living/simple_animal/mouse/M = target

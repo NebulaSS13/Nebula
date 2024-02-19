@@ -47,7 +47,7 @@
 	else if(src == user.get_equipped_item(BP_R_HAND))
 		hand = GET_INTERNAL_ORGAN(user, BP_R_HAND)
 	if(hand)
-		hand.take_external_damage(burn = 2 * burn_power)
+		hand.take_damage(2 * burn_power, BURN)
 	if(burn_power > 5)
 		user.fire_stacks += 15
 		user.IgniteMob()

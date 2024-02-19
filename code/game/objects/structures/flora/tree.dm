@@ -32,7 +32,7 @@
 	if(I.do_tool_interaction(TOOL_HATCHET, user, src, 5 SECONDS))
 		. = ..()
 
-/obj/structure/flora/tree/take_damage(damage)
+/obj/structure/flora/tree/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	. = ..()
 	if(!QDELETED(src) && damage >= 5)
 		shake()

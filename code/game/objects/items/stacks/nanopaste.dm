@@ -15,10 +15,10 @@
 		return 0
 	if (isrobot(M))	//Repairing cyborgs
 		var/mob/living/silicon/robot/R = M
-		if (R.getBruteLoss() || R.getFireLoss() )
+		if (R.get_damage(BRUTE) || R.get_damage(BURN) )
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			R.adjustBruteLoss(-15, do_update_health = FALSE)
-			R.adjustFireLoss(-15)
+			R.heal_damage(15, BRUTE, skip_update_health = TRUE)
+			R.heal_damage(15, BURN)
 			use(1)
 			user.visible_message("<span class='notice'>\The [user] applied some [src] on [R]'s damaged areas.</span>",\
 				"<span class='notice'>You apply some [src] at [R]'s damaged areas.</span>")
@@ -42,7 +42,9 @@
 				to_chat(user, "<span class='notice'>Nothing to fix here.</span>")
 			else if(can_use(1))
 				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-				S.heal_damage(15, 15, robo_repair = 1)
+				// TODO synthetic repair
+				S.heal_damage(15, BRUTE)
+				S.heal_damage(15, BURN)
 				use(1)
 				user.visible_message("<span class='notice'>\The [user] applies some nanite paste on [user != M ? "[M]'s [S.name]" : "[S]"] with [src].</span>",\
 				"<span class='notice'>You apply some nanite paste on [user == M ? "your" : "[M]'s"] [S.name].</span>")

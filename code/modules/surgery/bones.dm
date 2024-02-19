@@ -107,7 +107,7 @@
 	user.visible_message("<span class='warning'>\The [user]'s hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!</span>" , \
 		"<span class='warning'>Your hand slips, damaging the [affected.encased ? affected.encased : "bones"] in \the [target]'s [affected.name] with \the [tool]!</span>")
 	affected.fracture()
-	affected.take_external_damage(5, used_weapon = tool)
+	affected.take_damage(5, BRUTE, used_weapon = tool)
 	..()
 
 //////////////////////////////////////////////////////////////////

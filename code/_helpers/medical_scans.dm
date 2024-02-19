@@ -10,7 +10,7 @@
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = 0
 		else if(H.stat != DEAD)
-			brain_result = round(max(0,(1 - brain.damage/brain.max_damage)*100))
+			brain_result = round(max(0,(1 - brain.organ_damage/brain.max_damage)*100))
 	else
 		brain_result = -1
 	scan["brain_activity"] = brain_result
@@ -38,12 +38,12 @@
 	scan["blood_volume"] =     H.vessel.total_volume
 	scan["blood_volume_max"] = H.vessel.maximum_volume
 	scan["temperature"] =      H.bodytemperature
-	scan["trauma"] =           H.getBruteLoss()
-	scan["burn"] =             H.getFireLoss()
-	scan["toxin"] =            H.getToxLoss()
-	scan["oxygen"] =           H.getOxyLoss()
-	scan["radiation"] =        H.radiation
-	scan["genetic"] =          H.getCloneLoss()
+	scan["trauma"] =           H.get_damage(BRUTE)
+	scan["burn"] =             H.get_damage(BURN)
+	scan["toxin"] =            H.get_damage(TOX)
+	scan["oxygen"] =           H.get_damage(OXY)
+	scan["radiation"] =        H.get_damage(IRRADIATE)
+	scan["genetic"] =          H.get_damage(CLONE)
 	scan["paralysis"] =        GET_STATUS(H, STAT_PARA)
 	scan["immune_system"] =    H.get_immunity()
 	scan["reagents"] = list()
@@ -78,7 +78,7 @@
 		O["name"] =                I.name
 		O["is_broken"] =           I.is_broken()
 		O["is_bruised"] =          I.is_bruised()
-		O["is_damaged"] =          I.damage > 0
+		O["is_damaged"] =          I.organ_damage > 0
 		O["scan_results"] =        I.get_scan_results(tag)
 		O["ailments"] =            I.has_diagnosable_ailments(scanner = TRUE)
 		scan["internal_organs"] += list(O)

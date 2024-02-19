@@ -111,10 +111,10 @@
 
 		if(redaction_rank >= PSI_RANK_GRANDMASTER)
 			for(var/obj/item/organ/internal/I in E.internal_organs)
-				if(!BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0 && I.organ_tag != BP_BRAIN)
+				if(!BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.organ_damage > 0 && I.organ_tag != BP_BRAIN)
 					to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [I] to repair itself."))
 					var/heal_rate = redaction_rank
-					I.damage = max(0, I.damage - rand(heal_rate,heal_rate*2))
+					I.organ_damage = max(0, I.organ_damage - rand(heal_rate,heal_rate*2))
 					return TRUE
 
 		to_chat(user, SPAN_NOTICE("You can find nothing within \the [target]'s [E.name] to mend."))
@@ -135,19 +135,13 @@
 	if(.)
 		// No messages, as Mend procs them even if it fails to heal anything, and Cleanse is always checked after Mend.
 		var/removing = rand(20,25)
-		if(target.radiation)
+		if(target.get_damage(IRRADIATE))
 			to_chat(user, SPAN_NOTICE("You repair some of the radiation-damaged tissue within \the [target]..."))
-			if(target.radiation > removing)
-				target.radiation -= removing
-			else
-				target.radiation = 0
+			target.heal_damage(removing, IRRADIATE)
 			return TRUE
-		if(target.getCloneLoss())
+		if(target.get_damage(CLONE))
 			to_chat(user, SPAN_NOTICE("You stitch together some of the mangled DNA within \the [target]..."))
-			if(target.getCloneLoss() >= removing)
-				target.adjustCloneLoss(-removing)
-			else
-				target.adjustCloneLoss(-(target.getCloneLoss()))
+			target.heal_damage(removing, CLONE)
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You can find no genetic damage or radiation to heal within \the [target]."))
 		return TRUE
@@ -186,6 +180,6 @@
 				break
 		to_chat(target, SPAN_NOTICE("<font size = 3><b>Life floods back into your body!</b></font>"))
 		target.visible_message(SPAN_NOTICE("\The [target] shudders violently!"))
-		target.adjustOxyLoss(-rand(15,20))
+		target.heal_damage(rand(15,20), OXY)
 		target.basic_revival()
 		return TRUE

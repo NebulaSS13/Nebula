@@ -82,7 +82,10 @@
 	use_reinf_state = null
 	color = "#aaaaaa"
 	hardness = MAT_VALUE_SOFT
-	brute_armor = 1
+	wall_armor = list(
+		BRUTE = 1,
+		BURN  = 1
+	)
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
 	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
@@ -126,7 +129,6 @@
 	weight                  = MAT_VALUE_EXTREMELY_LIGHT - 9
 	construction_difficulty = MAT_VALUE_EASY_DIY
 	wall_flags              = PAINT_PAINTABLE | PAINT_STRIPABLE | WALL_HAS_EDGES
-	brute_armor             = 0.5
 	ignition_point          = T0C + 232 //"the temperature at which book-paper catches fire, and burns." close enough
 	melting_point           = T0C + 232
 	conductive              = FALSE
@@ -137,6 +139,10 @@
 	exoplanet_rarity_gas    = MAT_RARITY_NOWHERE
 	sound_manipulate        = 'sound/foley/paperpickup2.ogg'
 	sound_dropped           = 'sound/foley/paperpickup1.ogg'
+	wall_armor = list(
+		BRUTE = 0.5,
+		BURN  = 0.5
+	)
 
 /decl/material/solid/organic/paper/generate_recipes(stack_type, reinforce_material)
 	. = ..()
@@ -153,7 +159,10 @@
 	ignition_point = T0C+232
 	melting_point = T0C+300
 	flags = MAT_FLAG_PADDING
-	brute_armor = 1
+	wall_armor = list(
+		BRUTE = 1,
+		BURN  = 1
+	)
 	conductive = 0
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -350,7 +359,10 @@
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
 	weight = MAT_VALUE_VERY_LIGHT
-	brute_armor = 2
+	wall_armor = list(
+		BRUTE = 2,
+		BURN  = 2
+	)
 	sound_manipulate = 'sound/foley/paperpickup2.ogg'
 	sound_dropped = 'sound/foley/paperpickup1.ogg'
 
@@ -544,5 +556,8 @@
 	color = "#5c5a54"
 	hardness = MAT_VALUE_HARD
 	weight = MAT_VALUE_NORMAL
-	brute_armor = 2
+	wall_armor = list(
+		BRUTE = 2,
+		BURN  = 2
+	)
 	wall_support_value = MAT_VALUE_NORMAL

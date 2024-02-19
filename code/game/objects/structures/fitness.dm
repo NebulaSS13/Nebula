@@ -79,7 +79,7 @@
 		if(weight - skill > max_weight/2)
 			if(prob(50))
 				message = ", getting hurt in the process"
-				H.apply_damage(5)
+				H.take_damage(5, BRUTE)
 			else
 				message = "; this does not look safe"
 		else

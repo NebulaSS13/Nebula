@@ -226,7 +226,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='notice'>[user] finishes patching damage to [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You finish patching damage to [target]'s [affected.name] with \the [tool].</span>")
-	affected.heal_damage(rand(30,50),0,1,1)
+	affected.heal_damage(rand(30,50), BRUTE) // todo robo repair
 	affected.status &= ~ORGAN_DISFIGURED
 	..()
 
@@ -234,7 +234,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>",
 	"<span class='warning'>Your [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>")
-	target.apply_damage(rand(5,10), BURN, affected)
+	target.take_damage(rand(5,10), BURN, affected)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -274,7 +274,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user] causes some of \the [target]'s [affected.name] to crumble!</span>",
 	"<span class='warning'>You cause some of \the [target]'s [affected.name] to crumble!</span>")
-	target.apply_damage(rand(5,10), BRUTE, affected)
+	target.take_damage(rand(5,10), BRUTE, affected)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -325,7 +325,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='notice'>[user] finishes splicing cable into [target]'s [affected.name].</span>", \
 	"<span class='notice'>You finishes splicing new cable into [target]'s [affected.name].</span>")
-	affected.heal_damage(0,rand(30,50),1,1)
+	affected.heal_damage(rand(30,50), BURN) // todo robo repair
 	affected.status &= ~ORGAN_DISFIGURED
 	..()
 
@@ -333,7 +333,7 @@
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user] causes a short circuit in [target]'s [affected.name]!</span>",
 	"<span class='warning'>You cause a short circuit in [target]'s [affected.name]!</span>")
-	target.apply_damage(rand(5,10), BURN, affected)
+	target.take_damage(rand(5,10), BURN, affected)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -361,7 +361,7 @@
 	var/obj/item/organ/external/affected = ..()
 	if(affected)
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
+			if(BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.organ_damage > 0)
 				if(I.surface_accessible)
 					return affected
 				if(affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED) || affected.hatch_state == HATCH_OPENED)
@@ -370,7 +370,7 @@
 /decl/surgery_step/robotics/fix_organ_robotic/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	for(var/obj/item/organ/I in affected.internal_organs)
-		if(I && I.damage > 0)
+		if(I && I.organ_damage > 0)
 			if(BP_IS_PROSTHETIC(I))
 				user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 				"You start mending the damage to [target]'s [I.name]'s mechanisms." )
@@ -379,23 +379,23 @@
 /decl/surgery_step/robotics/fix_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	for(var/obj/item/organ/I in affected.internal_organs)
-		if(I && I.damage > 0)
+		if(I && I.organ_damage > 0)
 			if(BP_IS_PROSTHETIC(I))
 				user.visible_message("<span class='notice'>[user] repairs [target]'s [I.name] with [tool].</span>", \
 				"<span class='notice'>You repair [target]'s [I.name] with [tool].</span>" )
-				I.damage = 0
+				I.organ_damage = 0
 	..()
 
 /decl/surgery_step/robotics/fix_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>")
-	target.adjustToxLoss(5)
-	affected.createwound(CUT, 5)
+	target.take_damage(5, TOX)
+	affected.createwound(WOUND_CUT, 5)
 	for(var/internal in affected.internal_organs)
 		var/obj/item/organ/internal/I = internal
 		if(I)
-			I.take_internal_damage(rand(3,5))
+			I.take_damage(rand(3,5), BRUTE)
 	..()
 
 //////////////////////////////////////////////////////////////////

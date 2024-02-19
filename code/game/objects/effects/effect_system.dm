@@ -230,7 +230,7 @@ steam.start() -- spawns the effect
 	if (!..())
 		return 0
 	M.drop_held_items()
-	M.adjustOxyLoss(1)
+	M.take_damage(1, OXY)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.cough()
@@ -285,7 +285,7 @@ steam.start() -- spawns the effect
 	if (R.get_equipped_item(slot_wear_suit_str))
 		return 0
 
-	R.take_overall_damage(0, 0.75)
+	R.take_damage(0.75, BURN)
 	if (R.coughedtime != 1)
 		R.coughedtime = 1
 		R.emote("gasp")

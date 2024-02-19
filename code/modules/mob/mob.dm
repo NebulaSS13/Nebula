@@ -596,7 +596,7 @@
 	return 0
 
 /mob/living/carbon/human/pull_damage()
-	if(!lying || getBruteLoss() + getFireLoss() < 100)
+	if(!lying || get_damage(BRUTE) + get_damage(BURN) < 100)
 		return FALSE
 	for(var/obj/item/organ/external/e in get_external_organs())
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
@@ -829,8 +829,8 @@
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	LAZYREMOVE(embedded, implant)
-	adjustBruteLoss(5, do_update_health = FALSE)
-	adjustFireLoss(10)
+	take_damage(5, BRUTE, skip_update_health = TRUE)
+	take_damage(10, BURN)
 	. = ..()
 
 /mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
@@ -846,7 +846,7 @@
 			LAZYREMOVE(wound.embedded_objects, implant)
 		if(!surgical_removal)
 			shock_stage+=20
-			affected.take_external_damage((implant.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
+			affected.take_damage((implant.w_class * 3), BRUTE, damage_flags = DAM_EDGE, used_weapon = "Embedded object extraction")
 			if(!BP_IS_PROSTHETIC(affected) && prob(implant.w_class * 5) && affected.sever_artery()) //I'M SO ANEMIC I COULD JUST -DIE-.
 				custom_pain("Something tears wetly in your [affected.name] as [implant] is pulled free!", 50, affecting = affected)
 	. = ..()
@@ -1100,10 +1100,11 @@
 
 	// Work out if we have any brain damage impacting our dexterity.
 	var/dex_malus = 0
-	if(getBrainLoss())
+	var/brainloss = get_brain_damage()
+	if(brainloss)
 		var/brainloss_threshold = get_config_value(/decl/config/num/dex_malus_brainloss_threshold)
-		if(getBrainLoss() > brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
-			dex_malus = clamp(CEILING((getBrainLoss()-brainloss_threshold)/10), 0, length(global.dexterity_levels))
+		if(brainloss > brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
+			dex_malus = clamp(CEILING((brainloss-brainloss_threshold)/10), 0, length(global.dexterity_levels))
 			if(dex_malus > 0)
 				dex_malus = global.dexterity_levels[dex_malus]
 
@@ -1452,9 +1453,6 @@
 
 /mob/can_be_injected_by(var/atom/injector)
 	return FALSE // Handled elsewhere in syringe logic.
-
-/mob/proc/getBrainLoss()
-	return 0
 
 /mob/proc/get_bodytype_category()
 	return get_bodytype()?.bodytype_category

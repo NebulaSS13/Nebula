@@ -5,9 +5,9 @@
 	var/tox_mult = 1
 
 /obj/aura/regenerating/life_tick()
-	user.adjustBruteLoss(-brute_mult, do_update_health = FALSE)
-	user.adjustFireLoss(-fire_mult, do_update_health = FALSE)
-	user.adjustToxLoss(-tox_mult)
+	user.heal_damage(brute_mult, BRUTE, skip_update_health = TRUE)
+	user.heal_damage(fire_mult,  BURN, skip_update_health = TRUE)
+	user.heal_damage(tox_mult,   TOX)
 
 /obj/aura/regenerating/human
 	var/nutrition_damage_mult = 1 //How much nutrition it takes to heal regular damage
@@ -37,25 +37,25 @@
 
 	var/update_health = FALSE
 	var/organ_regen = get_config_value(/decl/config/num/health_organ_regeneration_multiplier)
-	if(brute_mult && H.getBruteLoss())
-		update_health = TRUE
-		H.adjustBruteLoss(-brute_mult * organ_regen, do_update_health = FALSE)
+	if(brute_mult && H.get_damage(BRUTE))
+		H.heal_damage(brute_mult * organ_regen, BRUTE, skip_update_health = TRUE)
 		H.adjust_nutrition(-nutrition_damage_mult)
-	if(fire_mult && H.getFireLoss())
 		update_health = TRUE
-		H.adjustFireLoss(-fire_mult * organ_regen, do_update_health = FALSE)
+	if(fire_mult && H.get_damage(BURN))
+		H.heal_damage(fire_mult * organ_regen, BURN, skip_update_health = TRUE)
 		H.adjust_nutrition(-nutrition_damage_mult)
-	if(tox_mult && H.getToxLoss())
 		update_health = TRUE
-		H.adjustToxLoss(-tox_mult * organ_regen, do_update_health = FALSE)
+	if(tox_mult && H.get_damage(TOX))
+		H.heal_damage(tox_mult * organ_regen, TOX, skip_update_health = TRUE)
 		H.adjust_nutrition(-nutrition_damage_mult)
+		update_health = TRUE
 	if(update_health)
 		H.update_health()
 
 	if(!can_regenerate_organs())
 		return 1
 	if(organ_mult)
-		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
+		if(prob(10) && H.nutrition >= 150 && !H.get_damage(BRUTE) && !H.get_damage(BURN))
 			var/obj/item/organ/external/D = GET_EXTERNAL_ORGAN(H, BP_HEAD)
 			if (D.status & ORGAN_DISFIGURED)
 				if (H.nutrition >= 20)
@@ -69,9 +69,9 @@
 			if(BP_IS_PROSTHETIC(regen_organ) || regen_organ.organ_tag == ignore_tag)
 				continue
 			if(istype(regen_organ))
-				if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
+				if(regen_organ.organ_damage > 0 && !(regen_organ.status & ORGAN_DEAD))
 					if (H.nutrition >= organ_mult)
-						regen_organ.damage = max(regen_organ.damage - organ_mult, 0)
+						regen_organ.organ_damage = max(regen_organ.organ_damage - organ_mult, 0)
 						H.adjust_nutrition(-organ_mult)
 						if(prob(5))
 							to_chat(H, replacetext(regen_message,"ORGAN", regen_organ.name))

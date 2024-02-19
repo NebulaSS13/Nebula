@@ -47,14 +47,9 @@
 		if(prob(10))
 			poss.is_angry = TRUE
 
-/mob/living/simple_animal/opossum/adjustBruteLoss(damage, do_update_health = FALSE)
+/mob/living/simple_animal/opossum/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	. = ..()
-	if(damage >= 3)
-		respond_to_damage()
-
-/mob/living/simple_animal/opossum/adjustFireLoss(damage, do_update_health = TRUE)
-	. = ..()
-	if(damage >= 3)
+	if(damage >= 3 && (damage_type == BRUTE || damage_type == BURN))
 		respond_to_damage()
 
 /mob/living/simple_animal/opossum/lay_down()

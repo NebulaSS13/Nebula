@@ -71,8 +71,8 @@
 		var/repaired = FALSE
 		for(var/obj/item/mech_component/MC in charging)
 			if(MC)
-				MC.repair_brute_damage(repair)
-				MC.repair_burn_damage(repair)
+				MC.heal_damage(repair, BRUTE)
+				MC.heal_damage(repair, BURN)
 				remaining_energy -= repair * repair_power_usage
 				repaired = TRUE
 			if(remaining_energy <= 0)

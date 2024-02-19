@@ -132,7 +132,7 @@
 
 	return TRUE
 
-/obj/machinery/door/window/take_damage(var/damage)
+/obj/machinery/door/window/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	src.health = max(0, src.health - damage)
 	if (src.health <= 0)
 		shatter()
@@ -144,7 +144,7 @@
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message("<span class='danger'>[user] smashes against the [src.name].</span>", 1)
-			take_damage(25)
+			take_damage(25, BRUTE)
 			return TRUE
 	return ..()
 

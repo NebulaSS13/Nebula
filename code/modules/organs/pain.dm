@@ -26,7 +26,7 @@
 		if(affecting)
 			affecting.add_pain(CEILING(power/2))
 		else
-			adjustHalLoss(CEILING(power/2))
+			take_damage(CEILING(power/2), PAIN)
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks
@@ -85,7 +85,7 @@
 		custom_pain(msg, maxdam, prob(10), damaged_organ, TRUE)
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/internal/I in get_internal_organs())
-		if(prob(1) && !((I.status & ORGAN_DEAD) || BP_IS_PROSTHETIC(I)) && I.damage > 5)
+		if(prob(1) && !((I.status & ORGAN_DEAD) || BP_IS_PROSTHETIC(I)) && I.organ_damage > 5)
 			var/obj/item/organ/external/parent = GET_EXTERNAL_ORGAN(src, I.parent_organ)
 			if(parent)
 				var/pain = 10
@@ -100,14 +100,15 @@
 
 
 	if(prob(1))
-		switch(getToxLoss())
+		var/organ_damage = get_damage(TOX)
+		switch(organ_damage)
 			if(5 to 17)
-				custom_pain("Your body stings slightly.", getToxLoss())
+				custom_pain("Your body stings slightly.", organ_damage)
 			if(17 to 35)
-				custom_pain("Your body stings.", getToxLoss())
+				custom_pain("Your body stings.", organ_damage)
 			if(35 to 60)
-				custom_pain("Your body stings strongly.", getToxLoss())
+				custom_pain("Your body stings strongly.", organ_damage)
 			if(60 to 100)
-				custom_pain("Your whole body hurts badly.", getToxLoss())
+				custom_pain("Your whole body hurts badly.", organ_damage)
 			if(100 to INFINITY)
-				custom_pain("Your body aches all over, it's driving you mad.", getToxLoss())
+				custom_pain("Your body aches all over, it's driving you mad.", organ_damage)

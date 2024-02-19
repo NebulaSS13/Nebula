@@ -1,5 +1,5 @@
 /**Basic damage handling for items. Returns the amount of damage taken after armor if the item was damaged.*/
-/obj/item/proc/take_damage(var/damage, var/damage_type = BRUTE, var/damage_flags = 0, var/inflicter = null, var/armor_pen = 0)
+/obj/item/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	if(!can_take_damage()) // This object does not take damage.
 		return 0 //Must return a number
 	if(damage < 0)
@@ -42,7 +42,7 @@
 	if(QDELETED(src))
 		return
 	. = ..()
-	take_damage(explosion_severity_damage(severity), BURN, DAM_EXPLODE | DAM_DISPERSED, "explosion")
+	take_damage(explosion_severity_damage(severity), BURN, damage_flags = (DAM_EXPLODE | DAM_DISPERSED), used_weapon = "explosion")
 
 /obj/item/proc/explosion_severity_damage(var/severity)
 	var/mult = explosion_severity_damage_multiplier()
@@ -104,8 +104,8 @@
 				self_message = SPAN_DANGER("You stab yourself in the eyes with \the [src]!"))
 
 		var/obj/item/organ/internal/eyes = GET_INTERNAL_ORGAN(H, BP_EYES)
-		eyes.damage += rand(3,4)
-		if(eyes.damage >= eyes.min_bruised_damage)
+		eyes.organ_damage += rand(3,4)
+		if(eyes.organ_damage >= eyes.min_bruised_damage)
 			if(M.stat != DEAD)
 				if(!BP_IS_PROSTHETIC(eyes)) //robot eyes bleeding might be a bit silly
 					to_chat(M, SPAN_DANGER("Your eyes start to bleed profusely!"))
@@ -116,13 +116,13 @@
 				SET_STATUS_MAX(M, STAT_BLURRY, 10)
 				SET_STATUS_MAX(M, STAT_PARA, 1)
 				SET_STATUS_MAX(M, STAT_WEAK, 4)
-			if (eyes.damage >= eyes.min_broken_damage)
+			if (eyes.organ_damage >= eyes.min_broken_damage)
 				if(M.stat != DEAD)
 					to_chat(M, SPAN_WARNING("You go blind!"))
 
 		var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(H, eyes.parent_organ)
-		affecting.take_external_damage(7)
+		affecting.take_damage(7, BRUTE)
 	else
-		M.take_organ_damage(7)
+		M.take_damage(7, BRUTE)
 	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return

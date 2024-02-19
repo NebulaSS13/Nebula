@@ -48,6 +48,7 @@
 #include "slime/slime_codex.dm"
 #include "slime/slime_commands.dm"
 #include "slime/slime_comments.dm"
+#include "slime/slime_damage_handlers.dm"
 #include "slime/slime_follow.dm"
 #include "slime/slime_hud.dm"
 #include "slime/slime_reagents.dm"

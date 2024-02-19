@@ -46,7 +46,7 @@
 		if(emagged)
 			for(var/mob/living/M in input_turf)
 				visible_message(SPAN_DANGER("\The [src] squashes \the [src] with its stacking mechanism!"))
-				M.take_overall_damage(rand(10, 20), 0)
+				M.take_damage(rand(10, 20), BRUTE)
 				break
 
 	if(output_turf)

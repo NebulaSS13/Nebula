@@ -31,8 +31,8 @@
 			spawn owner.vomit()
 
 	//Detox can heal small amounts of damage
-	if (damage < max_damage && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN))
-		heal_damage(0.2 * GET_CHEMICAL_EFFECT(owner, CE_ANTITOX))
+	if (organ_damage < max_damage && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN))
+		heal_damage(0.2 * GET_CHEMICAL_EFFECT(owner, CE_ANTITOX), TOX)
 
 	var/alco = GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL)
 	var/alcotox = GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL_TOXIC)
@@ -50,10 +50,10 @@
 	// If you're not filtering well, you're in trouble. Ammonia buildup to toxic levels and damage from alcohol
 	if(filter_effect < 2)
 		if(alco)
-			owner.adjustToxLoss(0.5 * max(2 - filter_effect, 0) * (alcotox + 0.5 * alco))
+			owner.take_damage(0.5 * max(2 - filter_effect, 0) * (alcotox + 0.5 * alco), TOX)
 
 	if(alcotox)
-		take_internal_damage(alcotox, prob(90)) // Chance to warn them
+		take_damage(alcotox, TOX, silent = prob(90)) // Chance to warn them
 
 	//Blood regeneration if there is some space
 	owner.regenerate_blood(0.1 + GET_CHEMICAL_EFFECT(owner, CE_BLOODRESTORE))

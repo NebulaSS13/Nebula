@@ -8,9 +8,9 @@
 			change = -(change)
 		bodytemperature += (min(environment.temperature, bodytemperature + change) - bodytemperature)
 	if(bodytemperature <= die_temperature)
-		adjustToxLoss(200)
+		take_damage(200, TOX)
 	else if(bodytemperature <= hurt_temperature)
-		adjustToxLoss(30)
+		take_damage(30, TOX)
 
 	// If we're standing on top of a dead mob or small items, we can
 	// ingest it (or just melt it a little if we're too small)
@@ -78,11 +78,11 @@
 		return FALSE
 	set_stat(CONSCIOUS)
 	if(prob(30))
-		adjustOxyLoss(-1, do_update_health = FALSE)
-		adjustToxLoss(-1, do_update_health = FALSE)
-		adjustFireLoss(-1, do_update_health = FALSE)
-		adjustCloneLoss(-1, do_update_health = FALSE)
-		adjustBruteLoss(-1)
+		heal_damage(1, OXY,   skip_update_health = TRUE)
+		heal_damage(1, TOX,   skip_update_health = TRUE)
+		heal_damage(1, BURN,  skip_update_health = TRUE)
+		heal_damage(1, CLONE, skip_update_health = TRUE)
+		heal_damage(1, BRUTE)
 
 /mob/living/slime/handle_nutrition_and_hydration()
 	. = ..()
@@ -126,7 +126,7 @@
 
 	// Update starvation and nutrition.
 	if(nutrition <= 0)
-		adjustToxLoss(2)
+		take_damage(2, TOX)
 		if (client && prob(5))
 			to_chat(src, SPAN_DANGER("You are starving!"))
 	else if(nutrition >= get_grow_nutrition() && amount_grown < SLIME_EVOLUTION_THRESHOLD)

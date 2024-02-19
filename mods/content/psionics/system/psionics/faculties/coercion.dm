@@ -2,7 +2,7 @@
 	id = PSI_COERCION
 	name = "Coercion"
 	associated_intent = I_DISARM
-	armour_types = list(PSIONIC)
+	armour_types = list(DAM_PSIONIC)
 
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
@@ -37,7 +37,7 @@
 		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
 			if(M == user)
 				continue
-			var/blocked = 100 * M.get_blocked_ratio(null, PSIONIC)
+			var/blocked = 100 * M.get_blocked_ratio(null, DAM_PSIONIC)
 			if(prob(blocked))
 				to_chat(M, SPAN_DANGER("A psionic onslaught strikes your mind, but you withstand it!"))
 				continue
@@ -187,7 +187,7 @@
 			to_chat(user,   SPAN_WARNING("\The [target] resists your glamour, writhing in your grip. You hurriedly release them before too much damage is done, but the psyche is left tattered. They should have no memory of this encounter, at least."))
 			to_chat(target, SPAN_DANGER("You resist \the [user], struggling free of their influence at the cost of your own mind!"))
 			to_chat(target, SPAN_DANGER("You fall into darkness, losing all memory of the encounter..."))
-			target.adjustBrainLoss(rand(25,40))
+			target.adjust_brain_damage(rand(25,40))
 			SET_STATUS_MAX(target, STAT_PARA, 10 SECONDS)
 
 		return TRUE

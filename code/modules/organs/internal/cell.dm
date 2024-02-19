@@ -25,7 +25,7 @@
 		return 0
 	if(status & ORGAN_DEAD)
 		return 0
-	return round(cell.charge*(1 - damage/max_damage))
+	return round(cell.charge*(1 - organ_damage/max_damage))
 
 /obj/item/organ/internal/cell/proc/checked_use(var/amount)
 	if(!is_usable())
@@ -38,7 +38,7 @@
 	return cell && cell.use(amount)
 
 /obj/item/organ/internal/cell/proc/get_power_drain()
-	var/damage_factor = 1 + 10 * damage/max_damage
+	var/damage_factor = 1 + 10 * organ_damage/max_damage
 	return servo_cost * damage_factor
 
 /obj/item/organ/internal/cell/Process()

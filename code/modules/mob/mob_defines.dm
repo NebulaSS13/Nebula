@@ -121,8 +121,6 @@
 	var/list/mutations = list() // TODO: Lazylist this var.
 	//see: setup.dm for list of mutations
 
-	var/radiation = 0.0//Carbon
-
 	var/voice_name = "unidentifiable voice"
 
 	var/faction = MOB_FACTION_NEUTRAL //Used for checking whether hostile simple animals will attack you, possibly more stuff later

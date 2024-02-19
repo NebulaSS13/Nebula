@@ -59,10 +59,10 @@
 	playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 	var/obj/item/organ/external/organ = GET_EXTERNAL_ORGAN(src, BP_CHEST)
 	if(istype(organ))
-		organ.take_external_damage(d, 0)
+		organ.take_damage(d, BRUTE)
 	else
-		take_organ_damage(d)
-	if(prob(getBruteLoss() - 50))
+		take_damage(d, BRUTE)
+	if(prob(get_damage(BRUTE) - 50))
 		gib()
 
 /mob/living/carbon/gib(anim="gibbed-m",do_gibs)
@@ -119,7 +119,7 @@
 		return 0
 	if(shock_damage < 1)
 		shock_damage = 1
-	apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
+	take_damage(shock_damage, BURN, def_zone, used_weapon = "Electrocution")
 	return(shock_damage)
 
 /mob/proc/swap_hand()

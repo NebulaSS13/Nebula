@@ -41,8 +41,11 @@
 	rarity_value = 4
 	hud_type = /datum/hud_data/serpentid
 	total_health = 200
-	brute_mod = 0.9
-	burn_mod =  1.35
+
+	damage_modifiers = list(
+		BURN  = 1.35,
+		BRUTE = 0.9,
+	)
 
 	natural_armour_values = list(
 		ARMOR_MELEE = ARMOR_MELEE_KNIVES,

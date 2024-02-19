@@ -80,7 +80,7 @@
 	has_lips = (bodytype.appearance_flags & HAS_LIPS)
 	can_intake_reagents = !(bodytype.body_flags & BODY_FLAG_NO_EAT)
 
-/obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
+/obj/item/organ/external/head/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
 	. = ..()
 	if (!(status & ORGAN_DISFIGURED))
 		if (brute_dam > 40)

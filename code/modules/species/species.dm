@@ -72,17 +72,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		)
 
 	var/list/natural_armour_values            // Armour values used if naked.
-	var/brute_mod =      1                    // Physical damage multiplier.
-	var/burn_mod =       1                    // Burn damage multiplier.
-	var/toxins_mod =     1                    // Toxloss modifier
-	var/radiation_mod =  1                    // Radiation modifier
-
-	var/oxy_mod =        1                    // Oxyloss modifier
+	var/list/damage_modifiers                 // Various damage multipliers. Defaults to 1.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
 	var/stun_mod =       1                    // Stun period modifier.
 	var/paralysis_mod =  1                    // Paralysis period modifier.
 	var/weaken_mod =     1                    // Weaken period modifier.
-
 	var/vision_flags = SEE_SELF               // Same flags as glasses.
 
 	// Death vars.
@@ -250,9 +244,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		codex_traits += "<li>Has a plantlike physiology.</li>"
 
 	var/list/codex_damage_types = list(
-		"physical trauma" = brute_mod,
-		"burns" = burn_mod,
-		"lack of air" = oxy_mod,
+		"physical trauma" = get_damage_modifier(null, BRUTE),
+		"burns"           = get_damage_modifier(null, BURN),
+		"lack of air"     = get_damage_modifier(null, OXY),
 	)
 	for(var/kind in codex_damage_types)
 		if(codex_damage_types[kind] > 1)
@@ -826,3 +820,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
+/decl/species/proc/get_damage_modifier(var/mob/living/owner, var/damage_type)
+	if(damage_type in damage_modifiers)
+		. = damage_modifiers[damage_type]
+		if(owner?.isSynthetic() && damage_type == IRRADIATE)
+			. *= 0.5

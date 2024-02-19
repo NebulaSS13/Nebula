@@ -18,7 +18,10 @@
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks
 	hardness = MAT_VALUE_FLEXIBLE + 10
-	brute_armor = 1
+	wall_armor = list(
+		BRUTE = 1,
+		BURN  = 1
+	)
 	weight = MAT_VALUE_NORMAL
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288

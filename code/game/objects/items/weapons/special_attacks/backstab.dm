@@ -31,7 +31,9 @@ Proc returns a boolean if successful.
 /obj/item/proc/backstab(var/mob/living/target, mob/user, var/damage = 30, var/damage_type = BRUTE, var/damage_flags, var/target_zone = BP_CHEST, var/location_check = TRUE)
 
 	//Runtime prevention.
-	if( !( damage_type in list( BRUTE, BURN, TOX, OXY, CLONE, PAIN ) ) ) //End the proc with a false return if we're not doing a valid damage type.
+	//End the proc with a false return if we're not doing a valid damage type.
+	var/decl/damage_handler/damage_type_data = GET_DECL(damage_type)
+	if(!damage_type_data?.usable_with_backstab)
 		return FALSE
 
 	if(!iscarbon(target)) //No. You cannot backstab the borg.
@@ -84,12 +86,12 @@ Proc returns a boolean if successful.
 			if( !prob(H.get_blocked_ratio(target_zone, BRUTE, damage_flags, 0, damage) * 100) && !isnull(stabbed_part) && LAZYLEN(stabbed_part.internal_organs) )
 				var/obj/item/organ/internal/damaged_organ = pick(stabbed_part.internal_organs) //This could be improved by checking the size of an internal organ.
 				var/organ_damage = damage * 0.20
-				damaged_organ.take_internal_damage(organ_damage)
+				damaged_organ.take_damage(organ_damage)
 				var/decl/pronouns/G = target.get_pronouns()
 				to_chat(user, SPAN_DANGER("You stab [target] in the back of [G.his] [stabbed_part.name]!"))
 				H.custom_pain(SPAN_DANGER("<font size='10'>You feel a stabbing pain in the back of your [stabbed_part.name]!</font>")) //Only the stabber and stabbed should know how bad this is.
 		else
-			target.apply_damage(damage, damage_type, target_zone, DAM_SHARP, src) //Backstabbing. Does extra damage to simple mobs only.
+			target.take_damage(damage, damage_type, target_zone, DAM_SHARP, src) //Backstabbing. Does extra damage to simple mobs only.
 			to_chat(user, SPAN_DANGER("You stab [target] in the back!"))
 
 	return TRUE //Returns a value in case you want to layer additional behavior on this.

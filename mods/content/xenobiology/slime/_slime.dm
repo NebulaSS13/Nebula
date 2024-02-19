@@ -47,19 +47,8 @@
 		AM.dropInto(loc)
 	. = ..()
 
-/mob/living/slime/getToxLoss()
-	return toxloss
-
 /mob/living/slime/get_digestion_product()
 	return /decl/material/liquid/slimejelly
-
-/mob/living/slime/adjustToxLoss(var/amount, var/do_update_health = TRUE)
-	toxloss = clamp(toxloss + amount, 0, get_max_health())
-	if(do_update_health)
-		update_health()
-
-/mob/living/slime/setToxLoss(var/amount)
-	adjustToxLoss(amount-getToxLoss())
 
 /mob/living/slime/Initialize(mapload, var/_stype = /decl/slime_colour/grey)
 
@@ -163,9 +152,6 @@
 
 		stat(null,"Power Level: [powerlevel]")
 
-/mob/living/slime/adjustFireLoss(amount, do_update_health = TRUE)
-	..(-abs(amount), do_update_health) // Heals them
-
 /mob/living/slime/bullet_act(var/obj/item/projectile/Proj)
 	var/datum/ai/slime/slime_ai = ai
 	if(istype(slime_ai))
@@ -265,7 +251,7 @@
 				return TRUE
 			playsound(loc, "punch", 25, 1, -1)
 			visible_message(SPAN_DANGER("\The [user] has punched \the [src]!"))
-			adjustBruteLoss(damage)
+			take_damage(damage, BRUTE)
 			return TRUE
 
 	return ..()
@@ -308,7 +294,7 @@
 		powerlevel++
 		if(powerlevel > 10)
 			powerlevel = 10
-			adjustToxLoss(-10)
+			heal_damage(10, TOX)
 
 /mob/living/slime/proc/get_hunger_state()
 	. = 0

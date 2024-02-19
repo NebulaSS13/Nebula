@@ -31,11 +31,11 @@
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, organ)
 		if(!E)
 			continue
-		E.take_external_damage(burn=10, used_weapon = "hot iron")
+		E.take_damage(10, BURN, used_weapon = "hot iron")
 		if(E.can_feel_pain())
 			E.check_pain_disarm()
 		else
-			E.take_external_damage(burn=6, used_weapon = "hot iron")
+			E.take_damage(6, BURN, used_weapon = "hot iron")
 			to_chat(H, SPAN_WARNING("You notice that your [E] is burned."))
 
 /spell/hand/burning_grip/tower

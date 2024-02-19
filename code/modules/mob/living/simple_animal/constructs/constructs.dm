@@ -69,7 +69,7 @@
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
 		if(current_health < get_max_health())
-			adjustBruteLoss(-5)
+			heal_damage(5, BRUTE)
 			user.visible_message("<span class='notice'>\The [user] mends some of \the [src]'s wounds.</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] is undamaged.</span>")
@@ -131,7 +131,7 @@
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
 		var/reflectchance = 80 - round(P.damage/3)
 		if(prob(reflectchance))
-			adjustBruteLoss(P.damage * 0.5)
+			take_damage(P.damage * 0.5, BRUTE)
 			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
 							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
 

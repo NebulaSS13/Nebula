@@ -398,7 +398,7 @@
 				dismantle()
 				return
 			else if(IS_WELDER(thing))
-				if(!getBruteLoss())
+				if(!get_damage(BRUTE))
 					return
 				var/list/damaged_parts = list()
 				for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
@@ -409,7 +409,7 @@
 					to_fix.repair_brute_generic(thing, user)
 				return
 			else if(IS_COIL(thing))
-				if(!getFireLoss())
+				if(!get_damage(BURN))
 					return
 				var/list/damaged_parts = list()
 				for(var/obj/item/mech_component/MC in list(arms, legs, body, head))

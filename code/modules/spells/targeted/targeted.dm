@@ -140,22 +140,24 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 		apply_spell_damage(target)
 
 /spell/targeted/proc/apply_spell_damage(mob/living/target)
-	target.adjustBruteLoss(amt_dam_brute, do_update_health = FALSE)
-	target.adjustFireLoss(amt_dam_fire, do_update_health = FALSE)
-	target.adjustToxLoss(amt_dam_tox, do_update_health = FALSE)
-	target.adjustOxyLoss(amt_dam_oxy)
+	target.take_damage(amt_dam_brute, BRUTE, skip_update_health = TRUE)
+	target.take_damage(amt_dam_fire,  BURN, skip_update_health = TRUE)
+	target.take_damage(amt_dam_tox,   TOX, skip_update_health = TRUE)
+	target.take_damage(amt_dam_oxy,   OXY)
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		for(var/obj/item/organ/internal/affecting in H.get_internal_organs())
 			if(affecting && istype(affecting))
-				affecting.heal_damage(amt_organ, amt_organ)
+				affecting.heal_damage(amt_organ, BRUTE)
+				affecting.heal_damage(amt_organ, BURN)
 		for(var/obj/item/organ/external/affecting in H.get_external_organs())
 			if(affecting && istype(affecting))
 				var/dam = BP_IS_PROSTHETIC(affecting) ? -amt_dam_robo : amt_organ
-				affecting.heal_damage(dam, dam, robo_repair = BP_IS_PROSTHETIC(affecting))
+				affecting.heal_damage(dam, BRUTE) // TODO, robo_repair = BP_IS_PROSTHETIC(affecting))
+				affecting.heal_damage(dam, BURN) // TODO, robo_repair = BP_IS_PROSTHETIC(affecting))
 		H.adjust_blood(amt_blood)
-		H.adjustBrainLoss(amt_brain)
-		H.radiation += min(H.radiation, amt_radiation)
+		H.adjust_brain_damage(amt_brain)
+		H.take_damage(amt_radiation, IRRADIATE)
 
 	target.update_icon()
 	//disabling

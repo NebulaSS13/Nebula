@@ -53,7 +53,7 @@
 		var/list/faculties = list(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS)
 		for(var/i = 1 to new_latencies)
 			to_chat(victim, SPAN_DANGER("<font size = 3>[pick(psi_operancy_messages)]</font>"))
-			victim.adjustBrainLoss(rand(10,20))
+			victim.adjust_brain_damage(rand(10,20))
 			victim.set_psi_rank(pick_n_take(faculties), 1)
 			sleep(30)
 		victim.psi.update()

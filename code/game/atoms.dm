@@ -458,7 +458,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if(isliving(AM))
 		var/mob/living/M = AM
-		M.apply_damage(TT.speed*5, BRUTE)
+		M.take_damage(TT.speed*5, BRUTE)
 
 /**
 	Attempt to add blood to this atom
@@ -733,10 +733,10 @@
 			var/obj/item/organ/external/affecting = SAFEPICK(M.get_external_organs())
 			if(!affecting)
 				to_chat(M, SPAN_DANGER("You land heavily!"))
-				M.adjustBruteLoss(damage)
+				M.take_damage(damage, BRUTE)
 			else
 				to_chat(M, SPAN_DANGER("You land heavily on your [affecting.name]!"))
-				affecting.take_external_damage(damage, 0)
+				affecting.take_damage(damage, BRUTE)
 				if(affecting.parent)
 					affecting.parent.add_autopsy_data("Misadventure", damage)
 

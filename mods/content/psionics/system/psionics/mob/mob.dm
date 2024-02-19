@@ -23,7 +23,7 @@
 		psi.set_rank(faculty, rank, defer_update, temporary)
 
 /mob/living/proc/deflect_psionic_attack(var/attacker)
-	var/blocked = 100 * get_blocked_ratio(null, PSIONIC)
+	var/blocked = 100 * get_blocked_ratio(null, DAM_PSIONIC)
 	if(prob(blocked))
 		if(attacker)
 			to_chat(attacker, SPAN_WARNING("Your mental attack is deflected by \the [src]'s defenses!"))
@@ -33,7 +33,8 @@
 
 /mob/living/carbon/human/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/obj/item/projectile/P = damage_source
-	if(istype(P) && !P.disrupts_psionics() && psi && P.starting && prob(psi.get_armour(SSmaterials.get_armor_key(P.damage_type, P.damage_flags())) * 0.5) && psi.spend_power(round(damage/10)))
+	var/decl/damage_handler/psi_damage = GET_DECL(/decl/damage_handler/psionic)
+	if(istype(P) && !P.disrupts_psionics() && psi && P.starting && prob(psi.get_armour(psi_damage.get_armor_key(P.damage_flags())) * 0.5) && psi.spend_power(round(damage/10)))
 		visible_message("<span class='danger'>\The [src] deflects [attack_text]!</span>")
 		P.redirect(P.starting.x + rand(-2,2), P.starting.y + rand(-2,2), get_turf(src), src)
 		return PROJECTILE_FORCE_MISS

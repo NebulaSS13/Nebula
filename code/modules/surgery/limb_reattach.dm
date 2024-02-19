@@ -118,7 +118,7 @@
 	var/obj/item/organ/external/E = tool
 	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
 	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
-	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
+	target.take_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
 	..()
 
 //////////////////////////////////////////////////////////////////
@@ -163,5 +163,5 @@
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
 	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
 	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
-	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
+	target.take_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
 	..()

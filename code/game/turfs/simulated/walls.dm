@@ -29,7 +29,7 @@ var/global/list/wall_fullblend_objects = list(
 	color = COLOR_STEEL
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
 
-	var/damage = 0
+	var/wall_damage = 0
 	var/can_open = 0
 	var/decl/material/material
 	var/decl/material/reinf_material
@@ -113,21 +113,13 @@ var/global/list/wall_fullblend_objects = list(
 	else if(istype(Proj,/obj/item/projectile/ion))
 		burn(500)
 
-	var/proj_damage = Proj.get_structure_damage()
-
 	if(Proj.ricochet_sounds && prob(15))
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
-
-	if(reinf_material)
-		if(Proj.damage_type == BURN)
-			proj_damage /= reinf_material.burn_armor
-		else if(Proj.damage_type == BRUTE)
-			proj_damage /= reinf_material.brute_armor
-
+	var/proj_damage = Proj.get_structure_damage()
+	if(Proj.damage_type in reinf_material?.wall_armor)
+		proj_damage = round(proj_damage / reinf_material.wall_armor[Proj.damage_type])
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
-	var/damage = min(proj_damage, 100)
-
-	take_damage(damage)
+	take_damage(min(proj_damage, 100), Proj.damage_type, damage_flags = Proj.damage_flags)
 
 /turf/simulated/wall/hitby(AM, var/datum/thrownthing/TT)
 	..()
@@ -136,7 +128,7 @@ var/global/list/wall_fullblend_objects = list(
 		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src, hitsound, tforce >= 15 ? 60 : 25, TRUE)
 		if(tforce > 0)
-			take_damage(tforce)
+			take_damage(tforce, BRUTE)
 
 /turf/simulated/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)
@@ -155,10 +147,10 @@ var/global/list/wall_fullblend_objects = list(
 /turf/simulated/wall/examine(mob/user)
 	. = ..()
 
-	if(!damage)
+	if(!wall_damage)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
-		var/dam = damage / material.integrity
+		var/dam = wall_damage / material.integrity
 		if(dam <= 0.3)
 			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
 		else if(dam <= 0.6)
@@ -182,9 +174,11 @@ var/global/list/wall_fullblend_objects = list(
 			F.icon_state = "wall_thermite"
 			visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
 
-/turf/simulated/wall/proc/take_damage(dam)
-	if(dam)
-		damage = max(0, damage + dam)
+/turf/simulated/wall/take_damage(damage, damage_type = BRUTE, def_zone, damage_flags = 0, used_weapon, armor_pen, silent = FALSE, override_droplimb, skip_update_health = FALSE)
+	if(reinf_material && (damage_type in reinf_material.wall_armor))
+		damage = round(damage / reinf_material.wall_armor[damage_type])
+	if(damage)
+		wall_damage = max(0, wall_damage + damage)
 		update_damage()
 
 /turf/simulated/wall/proc/update_damage()
@@ -195,7 +189,7 @@ var/global/list/wall_fullblend_objects = list(
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		cap = cap / 10
 
-	if(damage >= cap)
+	if(wall_damage >= cap)
 		dismantle_wall(1)
 	else
 		update_icon()
@@ -209,7 +203,7 @@ var/global/list/wall_fullblend_objects = list(
 /turf/simulated/wall/adjacent_fire_act(turf/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	burn(adj_temp)
 	if(adj_temp > material.melting_point)
-		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - material.melting_point)))
+		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - material.melting_point)), BURN)
 	return ..()
 
 /turf/simulated/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
@@ -241,11 +235,11 @@ var/global/list/wall_fullblend_objects = list(
 		dismantle_wall(1,1,1)
 	else if(severity == 2)
 		if(prob(75))
-			take_damage(rand(150, 250))
+			take_damage(rand(150, 250), BRUTE)
 		else
 			dismantle_wall(1,1)
 	else if(severity == 3)
-		take_damage(rand(0, 250))
+		take_damage(rand(0, 250), BRUTE)
 
 // Wall-rot effect, a nasty fungus that destroys walls.
 /turf/simulated/wall/proc/rot()

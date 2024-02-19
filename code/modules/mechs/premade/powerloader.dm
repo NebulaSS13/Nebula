@@ -162,11 +162,11 @@
 			MC.color = rgb(255,rand(188, 225),rand(55, 136))
 	//Damage it
 	var/obj/item/mech_component/damaged = pick(parts)
-	damaged.take_brute_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED)
+	damaged.take_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED, BRUTE)
 	if(prob(33))
 		parts -= damaged
 		damaged = pick(parts)
-		damaged.take_brute_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED)
+		damaged.take_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED, BRUTE)
 
 /mob/living/exosuit/premade/powerloader/old/spawn_mech_equipment()
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)

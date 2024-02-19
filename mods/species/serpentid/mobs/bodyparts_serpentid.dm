@@ -9,10 +9,9 @@
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/additional_flash_effects(var/intensity)
 	if(!eyes_shielded)
-		take_internal_damage(max(0, 4 * (intensity)))
+		take_damage(max(0, 4 * (intensity)), BURN)
 		return 1
-	else
-		return -1
+	return -1
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/refresh_action_button()
 	. = ..()
@@ -70,12 +69,12 @@
 	var/mob/living/carbon/human/H = owner
 
 	var/oxygenated = GET_CHEMICAL_EFFECT(owner, CE_OXYGENATED)
-	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * oxygenated))
+	H.heal_damage(HUMAN_MAX_OXYLOSS * oxygenated, OXY)
 
 	if(breath_fail_ratio < 0.25 && oxygenated)
 		H.oxygen_alert = 0
-	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_successful_breath + 2 MINUTES))
-		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
+	if(breath_fail_ratio >= 0.25 && (organ_damage || world.time > last_successful_breath + 2 MINUTES))
+		H.take_damage(HUMAN_MAX_OXYLOSS * breath_fail_ratio, OXY)
 		if(oxygenated)
 			H.oxygen_alert = 1
 		else
@@ -114,7 +113,7 @@
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
 				SET_STATUS_MAX(owner, STAT_PARA, 2)
 				var/obj/item/organ/internal/I = pick(owner.internal_organs)
-				I.take_internal_damage(5)
+				I.take_damage(5, TOX)
 	..()
 
 /obj/item/organ/external/chest/insectoid/serpentid

@@ -76,7 +76,7 @@
 
 	attack_cooldown = initial(attack_cooldown)
 	if(material)
-		armor_penetration += 2*max(0, material.brute_armor - 2)
+		armor_penetration += 2*max(0, material.wall_armor[BRUTE] - 2)
 		throwforce = material.get_blunt_damage() * thrown_material_force_multiplier
 		if(obj_flags & OBJ_FLAG_HOLLOW)
 			throwforce *= HOLLOW_OBJECT_MATTER_MULTIPLIER
