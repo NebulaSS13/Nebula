@@ -55,7 +55,7 @@
 				to_chat(user, SPAN_WARNING("You can't apply [src] through [suit]!"))
 				return 1
 
-		H.UpdateDamageIcon()
+		H.update_damage_overlays()
 
 	else
 

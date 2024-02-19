@@ -118,7 +118,7 @@
 		owner.update_bandages()
 
 	if(owner && update_damstate())
-		owner.UpdateDamageIcon()
+		owner.update_damage_overlays()
 
 	if(created_wound && isobj(used_weapon))
 		var/obj/O = used_weapon

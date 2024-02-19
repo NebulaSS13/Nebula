@@ -737,7 +737,7 @@
 				to_chat(H, "<span class='danger'>You land heavily!</span>")
 				H.adjustBruteLoss(damage)
 
-			H.UpdateDamageIcon()
+			H.update_damage_overlays()
 			H.updatehealth()
 	return
 
