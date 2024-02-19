@@ -428,7 +428,7 @@
 					if(emagged > 0)
 						to_chat(usr, "[html_icon(src)] <span class='warning'>The ATM card reader rejected your ID because this machine has been sabotaged!</span>")
 					else
-						var/obj/item/I = usr.get_active_hand()
+						var/obj/item/I = usr.get_active_held_item()
 						if (istype(I, /obj/item/card/id))
 							if(!usr.try_unequip(I, src))
 								return
@@ -456,6 +456,6 @@
 	authenticated_account = null
 	account_security_level = 0
 
-	if(ishuman(human_user) && !human_user.get_active_hand())
+	if(ishuman(human_user) && !human_user.get_active_held_item())
 		human_user.put_in_hands(held_card)
 	held_card = null

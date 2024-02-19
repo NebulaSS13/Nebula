@@ -467,7 +467,7 @@
 
 /obj/structure/table/receive_mouse_drop(atom/dropping, mob/user, params)
 	. = ..()
-	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.try_unequip(dropping))
+	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_held_item() == dropping && user.try_unequip(dropping))
 		var/obj/item/I = dropping
 		I.dropInto(get_turf(src))
 		return TRUE

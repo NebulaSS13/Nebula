@@ -474,7 +474,7 @@
 	set name = "Activate Held Object"
 	set category = "Object"
 	set src = usr
-	var/obj/item/W = get_active_hand()
+	var/obj/item/W = get_active_held_item()
 	W?.attack_self(src)
 	return W
 
@@ -1452,3 +1452,7 @@
 
 /mob/proc/nervous_system_failure()
 	return FALSE
+
+/mob/proc/mob_throw_item(atom/target)
+	return
+

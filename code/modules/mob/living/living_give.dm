@@ -8,7 +8,7 @@
 		return
 	if(!istype(target) || target.incapacitated() || target.client == null)
 		return
-	var/obj/item/I = get_active_hand()
+	var/obj/item/I = get_active_held_item()
 	if(!I)
 		var/list/inactive_hands = get_inactive_held_items()
 		if(length(inactive_hands))

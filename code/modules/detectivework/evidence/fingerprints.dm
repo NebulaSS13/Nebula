@@ -56,7 +56,7 @@
 		return
 
 	//Using prints from severed hand items!
-	var/obj/item/organ/external/E = M.get_active_hand()
+	var/obj/item/organ/external/E = M.get_active_held_item()
 	if(istype(E) && E.get_fingerprint())
 		full_print = E.get_fingerprint()
 		ignore_gloves = 1

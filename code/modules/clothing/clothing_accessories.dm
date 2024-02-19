@@ -10,7 +10,7 @@
 
 // Override for action buttons.
 /obj/item/clothing/attack_self(mob/user)
-	if(loc == user && user.get_active_hand() != src)
+	if(loc == user && user.get_active_held_item() != src)
 		return attack_hand_with_interaction_checks(user)
 	return ..()
 

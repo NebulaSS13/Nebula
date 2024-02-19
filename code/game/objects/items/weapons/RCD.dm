@@ -41,7 +41,7 @@
 	return 0
 
 /obj/item/rcd/proc/can_use(var/mob/user,var/turf/T)
-	return (user.Adjacent(T) && user.get_active_hand() == src && !user.incapacitated())
+	return (user.Adjacent(T) && user.get_active_held_item() == src && !user.incapacitated())
 
 /obj/item/rcd/examine(mob/user)
 	. = ..()

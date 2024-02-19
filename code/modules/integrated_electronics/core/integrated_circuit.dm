@@ -244,7 +244,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		return 1
 
 	. = IC_TOPIC_HANDLED
-	var/obj/held_item = usr.get_active_hand()
+	var/obj/held_item = usr.get_active_held_item()
 	if(href_list["pin"] && assembly)
 		var/datum/integrated_io/pin = locate(href_list["pin"]) in inputs + outputs + activators
 		if(pin)

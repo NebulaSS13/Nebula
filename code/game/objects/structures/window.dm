@@ -233,7 +233,7 @@
 			toggle()
 		else
 			var/response = input(user, "New Window ID:", name, id) as null | text
-			if (isnull(response) || user.incapacitated() || !user.Adjacent(src) || user.get_active_hand() != W)
+			if (isnull(response) || user.incapacitated() || !user.Adjacent(src) || user.get_active_held_item() != W)
 				return
 			id = sanitize_safe(response, MAX_NAME_LEN)
 			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))

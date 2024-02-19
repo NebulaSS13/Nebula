@@ -59,7 +59,7 @@
 	. = ..()
 	if(statpanel("Status"))
 
-		var/obj/item/gps/G = get_active_hand()
+		var/obj/item/gps/G = get_active_held_item()
 		if(istype(G))
 			stat("Coordinates:", "[G.get_coordinates()]")
 

@@ -118,7 +118,7 @@
 	. = ..()
 	if(!. && !ramp_slope_direction && ismob(AM))
 		var/mob/M = AM
-		var/obj/item/held = M.get_active_hand()
+		var/obj/item/held = M.get_active_held_item()
 		if(IS_PICK(held))
 			attackby(held, M)
 			return TRUE

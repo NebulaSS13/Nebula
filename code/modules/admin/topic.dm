@@ -1223,7 +1223,7 @@
 			if ( !( ishuman(usr) || issmall(usr) ) )
 				to_chat(usr, "Can only spawn in hand when you're a human or a monkey.")
 				where = "onfloor"
-			else if ( usr.get_active_hand() )
+			else if ( usr.get_active_held_item() )
 				to_chat(usr, "Your active hand is full. Spawning on floor.")
 				where = "onfloor"
 

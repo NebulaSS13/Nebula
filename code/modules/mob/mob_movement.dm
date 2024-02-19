@@ -55,7 +55,7 @@
 	if(length(get_active_grabs()))
 		. = TRUE
 	else
-		var/obj/item/hand = get_active_hand()
+		var/obj/item/hand = get_active_held_item()
 		. = hand?.can_be_dropped_by_client(src)
 	if(.)
 		drop_item()

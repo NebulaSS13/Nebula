@@ -289,7 +289,7 @@ meteor_act
 
 /mob/living/carbon/human/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	// empty active hand and we're in throw mode, so we can catch it
-	if(isobj(AM) && in_throw_mode && !get_active_hand() && TT.speed <= THROWFORCE_SPEED_DIVISOR && !incapacitated() && isturf(AM.loc))
+	if(isobj(AM) && in_throw_mode && !get_active_held_item() && TT.speed <= THROWFORCE_SPEED_DIVISOR && !incapacitated() && isturf(AM.loc))
 		put_in_active_hand(AM)
 		visible_message(SPAN_NOTICE("\The [src] catches \the [AM]!"))
 		throw_mode_off()
