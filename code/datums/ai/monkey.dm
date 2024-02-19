@@ -21,7 +21,7 @@
 				var/obj/item/gun/G = held
 				G.Fire(T, body)
 			else
-				body.throw_item(T)
+				body.mob_throw_item(T)
 		else
 			body.try_unequip(held)
 

@@ -98,10 +98,10 @@
 
 	if(in_throw_mode)
 		if(isturf(A) || isturf(A.loc))
-			throw_item(A)
+			mob_throw_item(A)
 			trigger_aiming(TARGET_CAN_CLICK)
 			return 1
-		throw_mode_off()
+		toggle_throw_mode(FALSE)
 
 	var/obj/item/W = get_active_hand()
 

@@ -78,7 +78,7 @@
 		if(owner.put_in_hands(web))
 			playsound(user, 'mods/species/ascent/sounds/razorweb.ogg', 100)
 			to_chat(owner, SPAN_WARNING("You spit up a wad of razorweb, ready to throw!"))
-			owner.throw_mode_on()
+			owner.toggle_throw_mode(TRUE)
 			cooldown = TRUE
 			refresh_action_button()
 			addtimer(CALLBACK(src, PROC_REF(reset_cooldown)), cooldown_time)
