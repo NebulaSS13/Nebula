@@ -18,9 +18,28 @@
 
 /obj/machinery/network/mainframe/Initialize()
 	. = ..()
+
 	var/datum/extension/network_device/mainframe/M = get_extension(src, /datum/extension/network_device)
 	M.roles |= initial_roles
 	M.update_roles()
+
+	if(!(MF_ROLE_SOFTWARE in initial_roles))
+		return
+
+	var/obj/item/stock_parts/computer/hard_drive/drive = get_component_of_type(PART_HDD)
+	for(var/F in subtypesof(/datum/computer_file/report))
+		var/datum/computer_file/report/type = F
+		if(TYPE_IS_ABSTRACT(type))
+			continue
+		if(initial(type.available_on_network))
+			drive.store_file(new type, "reports", TRUE)
+
+	for(var/F in subtypesof(/datum/computer_file/program))
+		var/datum/computer_file/program/type = F
+		if(TYPE_IS_ABSTRACT(type))
+			continue
+		if(initial(type.available_on_network))
+			drive.store_file(new type, OS_PROGRAMS_DIR, TRUE)
 
 /obj/machinery/network/mainframe/ui_data(mob/user, ui_key)
 	var/data = ..()
@@ -68,20 +87,3 @@
 
 /obj/machinery/network/mainframe/software
 	initial_roles = list(MF_ROLE_SOFTWARE)
-
-/obj/machinery/network/mainframe/software/Initialize()
-	. = ..()
-	var/obj/item/stock_parts/computer/hard_drive/drive = get_component_of_type(PART_HDD)
-	for(var/F in subtypesof(/datum/computer_file/report))
-		var/datum/computer_file/report/type = F
-		if(TYPE_IS_ABSTRACT(type))
-			continue
-		if(initial(type.available_on_network))
-			drive.store_file(new type, "reports", TRUE)
-
-	for(var/F in subtypesof(/datum/computer_file/program))
-		var/datum/computer_file/program/type = F
-		if(TYPE_IS_ABSTRACT(type))
-			continue
-		if(initial(type.available_on_network))
-			drive.store_file(new type, OS_PROGRAMS_DIR, TRUE)
