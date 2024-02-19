@@ -25,6 +25,15 @@
 		AM.vis_flags |= (VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE)
 		add_vis_contents(src, AM)
 
+// No scooping mobs and handing them to people who can't scoop them.
+/obj/item/holder/equipped(mob/user, slot)
+	. = ..()
+	for(var/mob/living/mob in contents)
+		if(!mob.scoop_check(user))
+			to_chat(user, SPAN_DANGER("You are unable to keep hold of \the [src]!"))
+			user.drop_from_inventory(src)
+			break
+
 // Grab our inhands from the mob we're wrapping, if they have any.
 /obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, force_skip_offset = FALSE, skip_offset = FALSE)
 	var/mob/M = locate() in contents
