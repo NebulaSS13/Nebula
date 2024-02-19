@@ -17,9 +17,10 @@ var/global/list/ventcrawl_machinery = list(
 	/obj/item/sword/cultblade
 	)
 
-/mob/living/var/list/icon/pipes_shown = list()
-/mob/living/var/is_ventcrawling = 0
-/mob/var/next_play_vent = 0
+/mob/living
+	var/list/image/pipes_shown
+	var/is_ventcrawling = FALSE
+	var/next_play_vent = 0
 
 /mob/living/proc/can_ventcrawl()
 	if(!client)
@@ -141,7 +142,7 @@ var/global/list/ventcrawl_machinery = list(
 	add_ventcrawl(vent_found)
 
 /mob/living/proc/add_ventcrawl(obj/machinery/atmospherics/starting_machine)
-	is_ventcrawling = 1
+	is_ventcrawling = TRUE
 	//candrop = 0
 	var/datum/pipe_network/network = starting_machine.return_network(starting_machine)
 	if(!network)
@@ -150,15 +151,13 @@ var/global/list/ventcrawl_machinery = list(
 		for(var/obj/machinery/atmospherics/A in (pipeline.members || pipeline.edges))
 			if(!A.pipe_image)
 				A.pipe_image = emissive_overlay(icon = A, loc = A.loc, dir = A.dir)
-			pipes_shown += A.pipe_image
+			LAZYDISTINCTADD(pipes_shown, A.pipe_image)
 			client.images += A.pipe_image
 
 /mob/living/proc/remove_ventcrawl()
-	is_ventcrawling = 0
-	//candrop = 1
+	is_ventcrawling = FALSE
 	if(client)
 		for(var/image/current_image in pipes_shown)
 			client.images -= current_image
 		client.eye = src
-
-	pipes_shown.len = 0
+	LAZYCLEARLIST(pipes_shown)
