@@ -80,6 +80,7 @@
 			dudes -= player.current
 		for(var/datum/objective/obj in player.objectives)
 			dudes -= obj.owner?.current
+			dudes -= obj.target?.current
 
 		if(length(dudes))
 			var/mob/living/carbon/human/M = pick(dudes)
