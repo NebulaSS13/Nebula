@@ -843,38 +843,31 @@ FIRE ALARM
 		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
-/obj/machinery/firealarm/proc/get_cached_overlay(key)
-	if(!LAZYACCESS(overlays_cache, key))
-		var/state
-		switch(key)
-			if(/decl/machine_construction/wall_frame/panel_open)
-				state = "b2"
-			if(/decl/machine_construction/wall_frame/no_wires)
-				state = "b1"
-			if(/decl/machine_construction/wall_frame/no_circuit)
-				state = "b0"
-			else
-				state = key
-		LAZYSET(overlays_cache, key, image(icon, state))
-	return overlays_cache[key]
-
 /obj/machinery/firealarm/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	icon_state = "casing"
 	if(construct_state && !istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
-		overlays += get_cached_overlay(construct_state.type)
+		var/construct_icon_state
+		switch(construct_state.type)
+			if(/decl/machine_construction/wall_frame/panel_open)
+				construct_icon_state = "b2"
+			if(/decl/machine_construction/wall_frame/no_wires)
+				construct_icon_state = "b1"
+			if(/decl/machine_construction/wall_frame/no_circuit)
+				construct_icon_state = "b0"
+		add_overlay(construct_icon_state)
 		set_light(0)
 		return
 
 	if(stat & BROKEN)
-		overlays += get_cached_overlay("broken")
+		add_overlay("broken")
 		set_light(0)
 	else if(stat & NOPOWER)
-		overlays += get_cached_overlay("unpowered")
+		add_overlay("unpowered")
 		set_light(0)
 	else
 		if(!detecting)
-			overlays += get_cached_overlay("fire1")
+			add_overlay("fire1")
 			set_light(2, 0.25, COLOR_RED)
 		else if(isContactLevel(z))
 			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
@@ -885,14 +878,14 @@ FIRE ALARM
 			if(sl.alarm_appearance.alarm_icon)
 				var/image/alert1 = image(sl.icon, sl.alarm_appearance.alarm_icon)
 				alert1.color = sl.alarm_appearance.alarm_icon_color
-				overlays |= alert1
+				add_overlay(alert1)
 
 			if(sl.alarm_appearance.alarm_icon_twotone)
 				var/image/alert2 = image(sl.icon, sl.alarm_appearance.alarm_icon_twotone)
 				alert2.color = sl.alarm_appearance.alarm_icon_twotone_color
-				overlays |= alert2
+				add_overlay(alert2)
 		else
-			overlays += get_cached_overlay("fire0")
+			add_overlay("fire0")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(detecting && exposed_temperature > T0C+200)
