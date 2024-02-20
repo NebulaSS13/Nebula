@@ -81,11 +81,10 @@
 	return ..()
 
 /atom/movable/openspace/multiplier/proc/copy_lighting(atom/movable/lighting_overlay/LO, use_shadower_mult = TRUE)
-	appearance = LO
-	layer = MIMICED_LIGHTING_LAYER
-	plane = OPENTURF_MAX_PLANE
-	blend_mode = BLEND_MULTIPLY
-	set_invisibility(INVISIBILITY_NONE)
+	var/mutable_appearance/MA = new /mutable_appearance(LO)
+	MA.layer = MIMICED_LIGHTING_LAYER
+	MA.plane = OPENTURF_MAX_PLANE
+	MA.blend_mode = BLEND_MULTIPLY
 
 	if (use_shadower_mult)
 		if (icon_state == LIGHTING_BASE_ICON_STATE)
@@ -103,10 +102,12 @@
 			c_list[CL_MATRIX_AR] *= SHADOWER_DARKENING_FACTOR
 			c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
 			c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
-			color = c_list
+			MA.color = c_list
 		else
 			// Not a color matrix, so we can just use the color var ourselves.
-			color = SHADOWER_DARKENING_COLOR
+			MA.color = SHADOWER_DARKENING_COLOR
+	set_invisibility(INVISIBILITY_NONE)
+	appearance = MA
 
 	if (our_overlays || priority_overlays)
 		compile_overlays()
