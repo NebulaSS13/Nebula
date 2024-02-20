@@ -178,5 +178,5 @@
 			wet_floor(last_slipperiness)
 		for(var/checkdir in global.cardinal)
 			var/turf/neighbor = get_step(src, checkdir)
-			if(neighbor?.reagents?.total_volume)
+			if(neighbor?.reagents?.total_volume > FLUID_QDEL_POINT)
 				ADD_ACTIVE_FLUID(neighbor)

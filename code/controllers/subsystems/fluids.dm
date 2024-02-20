@@ -34,24 +34,6 @@ SUBSYSTEM_DEF(fluids)
 
 /datum/controller/subsystem/fluids/fire(resumed = 0)
 
-	// Predeclaring a bunch of vars for performance purposes.
-	var/turf/other_fluid_holder        = null
-	var/turf/current_fluid_holder      = null
-	var/datum/reagents/reagent_holder  = null
-	var/turf/neighbor                  = null
-	var/turf/lowest_neighbor           = null
-
-	var/removing =                       0
-	var/spread_dir =                     0
-	var/coming_from =                    0
-	var/flow_amount =                    0
-	var/current_depth =                  0
-	var/current_turf_depth =             0
-	var/neighbor_depth =                 0
-	var/lowest_neighbor_flow =           0
-	var/flooded_a_neighbor =             FALSE
-	var/lowest_neighbor_depth =          INFINITY
-
 	if(!resumed)
 		active_fluids_copied_yet = FALSE
 		holders_copied_yet =       FALSE
@@ -63,7 +45,15 @@ SUBSYSTEM_DEF(fluids)
 		fluid_sources_copied_yet = TRUE
 		processing_sources = water_sources.Copy()
 
-	var/i = 0
+	// Predeclaring a bunch of vars for performance purposes.
+	var/flooded_a_neighbor            = FALSE
+	var/spread_dir                    = 0
+	var/i                             = 0
+	var/turf/current_fluid_holder     = null
+	var/datum/reagents/reagent_holder = null
+	var/turf/neighbor                 = null
+	var/turf/lowest_neighbor          = null
+
 	while(i < processing_sources.len)
 		i++
 		current_fluid_holder = processing_sources[i]
@@ -94,6 +84,16 @@ SUBSYSTEM_DEF(fluids)
 	if(!active_fluids_copied_yet)
 		active_fluids_copied_yet = TRUE
 		processing_fluids = active_fluids.Copy()
+
+	var/removing                = 0
+	var/coming_from             = 0
+	var/flow_amount             = 0
+	var/current_depth           = 0
+	var/current_turf_depth      = 0
+	var/neighbor_depth          = 0
+	var/lowest_neighbor_flow    = 0
+	var/lowest_neighbor_depth   = INFINITY
+	var/turf/other_fluid_holder = null
 
 	i = 0
 	while(i < processing_fluids.len)
