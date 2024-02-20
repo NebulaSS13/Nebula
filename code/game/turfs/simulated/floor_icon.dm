@@ -134,18 +134,14 @@ var/global/list/flooring_cache = list()
 			else if (floor_smooth != SMOOTH_NONE)
 				//If we get here it must be using a whitelist or blacklist
 				if (floor_smooth == SMOOTH_WHITELIST)
-					for (var/v in flooring_whitelist)
-						if (istype(t.flooring, v))
-							//Found a match on the list
-							is_linked = TRUE
-							break
+					if (flooring_whitelist[t.flooring.type])
+						//Found a match on the typecache
+						is_linked = TRUE
 				else if(floor_smooth == SMOOTH_BLACKLIST)
 					is_linked = TRUE //Default to true for the blacklist, then make it false if a match comes up
-					for (var/v in flooring_blacklist)
-						if (istype(t.flooring, v))
-							//Found a match on the list
-							is_linked = FALSE
-							break
+					if (flooring_blacklist[t.flooring.type])
+						//Found a match on the typecache
+						is_linked = FALSE
 	return is_linked
 
 /decl/flooring/proc/symmetric_test_link(var/turf/A, var/turf/B)
