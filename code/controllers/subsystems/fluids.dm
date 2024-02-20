@@ -64,10 +64,10 @@ SUBSYSTEM_DEF(fluids)
 		fluid_sources_copied_yet = TRUE
 		processing_sources = water_sources.Copy()
 
-	while(processing_sources.len)
-
-		current_fluid_holder = processing_sources[processing_sources.len]
-		processing_sources.len--
+	var/i = 0
+	while(i < processing_sources.len)
+		i++
+		current_fluid_holder = processing_sources[i]
 
 		flooded_a_neighbor = FALSE
 		UPDATE_FLUID_BLOCKED_DIRS(current_fluid_holder)
@@ -88,16 +88,18 @@ SUBSYSTEM_DEF(fluids)
 			REMOVE_ACTIVE_FLUID_SOURCE(current_fluid_holder)
 
 		if (MC_TICK_CHECK)
+			processing_sources.Cut(1, i+1)
 			return
+	processing_sources.Cut()
 
 	if(!active_fluids_copied_yet)
 		active_fluids_copied_yet = TRUE
 		processing_fluids = active_fluids.Copy()
 
-	while(processing_fluids.len)
-
-		current_fluid_holder = processing_fluids[processing_fluids.len]
-		processing_fluids.len--
+	i = 0
+	while(i < processing_fluids.len)
+		i++
+		current_fluid_holder = processing_fluids[i]
 
 		REMOVE_ACTIVE_FLUID(current_fluid_holder) // This will be refreshed if our level changes at all in this iteration of the subsystem.
 
@@ -191,29 +193,35 @@ SUBSYSTEM_DEF(fluids)
 			current_fluid_holder.last_flow_dir = 0
 
 		if (MC_TICK_CHECK)
-			break
+			processing_fluids.Cut(1, i+1)
+			return
+	processing_fluids.Cut()
 
 	if(!holders_copied_yet)
 		holders_copied_yet = TRUE
 		processing_holders = holders_to_update.Copy()
 
-	while(processing_holders.len)
-		reagent_holder = processing_holders[processing_holders.len]
-		processing_holders.len--
+	i = 0
+	while(i < processing_holders.len)
+		i++
+		reagent_holder = processing_holders[i]
 		if(!QDELETED(reagent_holder))
 			reagent_holder.handle_update()
 		else
 			holders_to_update -= reagent_holder
 		if(MC_TICK_CHECK)
+			processing_holders.Cut(1, i+1)
 			return
+	processing_holders.Cut()
 
 	if(!flows_copied_yet)
 		flows_copied_yet = TRUE
 		processing_flows = pending_flows.Copy()
 
-	while(processing_flows.len)
-		current_fluid_holder = processing_flows[processing_flows.len]
-		processing_flows.len--
+	i = 0
+	while(i < processing_flows.len)
+		i++
+		current_fluid_holder = processing_flows[i]
 		if(!istype(current_fluid_holder) || QDELETED(current_fluid_holder))
 			continue
 		reagent_holder = current_fluid_holder.reagents
@@ -226,7 +234,9 @@ SUBSYSTEM_DEF(fluids)
 		if(pushed_something && prob(1))
 			playsound(current_fluid_holder, 'sound/effects/slosh.ogg', 25, 1)
 		if(MC_TICK_CHECK)
+			processing_flows.Cut(1, i+1)
 			return
+	processing_flows.Cut()
 
 /datum/controller/subsystem/fluids/StartLoadingMap()
 	suspend()
