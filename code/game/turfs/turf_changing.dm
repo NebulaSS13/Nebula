@@ -12,6 +12,7 @@
 	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 	if(L)
 		qdel(L)
+
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()

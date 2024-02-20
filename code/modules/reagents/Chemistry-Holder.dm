@@ -176,6 +176,9 @@ var/global/obj/temp_reagents_holder = new
 
 /* Holder-to-chemical */
 /datum/reagents/proc/handle_update(var/safety)
+	if(QDELETED(src))
+		return
+	SSfluids.holders_to_update -= src
 	update_total()
 	if(!safety)
 		HANDLE_REACTIONS(src)
