@@ -38,7 +38,6 @@ SUBSYSTEM_DEF(fluids)
 	var/turf/other_fluid_holder        = null
 	var/turf/current_fluid_holder      = null
 	var/datum/reagents/reagent_holder  = null
-	var/list/candidates                = null
 	var/turf/neighbor                  = null
 	var/turf/lowest_neighbor           = null
 
@@ -151,13 +150,11 @@ SUBSYSTEM_DEF(fluids)
 						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_volume), defer_update = TRUE)
 						current_depth = current_fluid_holder.get_fluid_depth()
 
-		if(current_depth <= FLUID_PUDDLE)
-			continue
+		// Short-circuit spread behavior here and just wake up our neighbors, as they will likely want to flow into our turf.
 
 		// Flow into the lowest level neighbor.
 		lowest_neighbor_depth = INFINITY
 		lowest_neighbor_flow =  0
-		candidates = list()
 		current_turf_depth = current_depth + current_fluid_holder.get_physical_height()
 		for(spread_dir in global.cardinal)
 			if(current_fluid_holder.fluid_blocked_dirs & spread_dir)
@@ -175,15 +172,16 @@ SUBSYSTEM_DEF(fluids)
 
 			if(flow_amount <= FLUID_MINIMUM_TRANSFER)
 				continue
-			if(neighbor_depth < lowest_neighbor_depth)
-				candidates = list(neighbor)
+			ADD_ACTIVE_FLUID(neighbor)
+			if(neighbor_depth < lowest_neighbor_depth || (neighbor_depth == lowest_neighbor_depth && prob(50)))
+				lowest_neighbor = neighbor
 				lowest_neighbor_depth = neighbor_depth
 				lowest_neighbor_flow = flow_amount
-			else if(neighbor_depth == lowest_neighbor_depth)
-				candidates += neighbor
 
-		if(length(candidates))
-			lowest_neighbor = pick(candidates)
+		if(current_depth <= FLUID_PUDDLE)
+			continue
+
+		if(lowest_neighbor)
 			current_fluid_holder.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow, defer_update = TRUE)
 			pending_flows[current_fluid_holder] = TRUE
 			if(lowest_neighbor_flow >= FLUID_PUSH_THRESHOLD)
