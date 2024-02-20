@@ -150,8 +150,6 @@ SUBSYSTEM_DEF(fluids)
 						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_volume), defer_update = TRUE)
 						current_depth = current_fluid_holder.get_fluid_depth()
 
-		// Short-circuit spread behavior here and just wake up our neighbors, as they will likely want to flow into our turf.
-
 		// Flow into the lowest level neighbor.
 		lowest_neighbor_depth = INFINITY
 		lowest_neighbor_flow =  0
@@ -169,7 +167,8 @@ SUBSYSTEM_DEF(fluids)
 			other_fluid_holder = neighbor
 			neighbor_depth = (other_fluid_holder?.reagents?.total_volume || 0) + neighbor.get_physical_height()
 			flow_amount = round((current_turf_depth - neighbor_depth)*0.5)
-
+			// TODO: multiply flow amount or minimum transfer amount by some
+			// viscosity calculation to allow for piles of jelly vs piles of water.
 			if(flow_amount <= FLUID_MINIMUM_TRANSFER)
 				continue
 			ADD_ACTIVE_FLUID(neighbor)

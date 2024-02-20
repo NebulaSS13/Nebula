@@ -95,7 +95,7 @@
 				T.fluid_update(TRUE)
 	if(flooded)
 		ADD_ACTIVE_FLUID_SOURCE(src)
-	else
+	else if(reagents?.total_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 
 /turf/proc/add_fluid(var/fluid_type, var/fluid_amount, var/defer_update)
