@@ -100,7 +100,7 @@
 			qdel(old_fire)
 
 	if(old_flooded != W.flooded)
-		set_flooded(old_flooded && !W.density)
+		set_flooded(old_flooded)
 
 	// Raise appropriate events.
 	W.post_change()
