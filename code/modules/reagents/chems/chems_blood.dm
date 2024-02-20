@@ -51,7 +51,7 @@
 	if(!istype(T) || REAGENT_VOLUME(holder, type) < 3)
 		return
 	var/weakref/W = LAZYACCESS(data, "donor")
-	blood_splatter(T, W.resolve() || holder.my_atom, 1)
+	blood_splatter(T, W?.resolve() || holder.my_atom, 1)
 
 /decl/material/liquid/blood/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
