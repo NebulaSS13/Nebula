@@ -57,15 +57,15 @@
 	var/shield_range = 2
 
 // TODO: convert to alt interaction.
-/obj/item/mech_equipment/atmos_shields/CtrlClick(mob/user)
-	if (owner && ((user in owner.pilots) || user == owner))
+/obj/item/mech_equipment/atmos_shields/AltClick(mob/user)
+	if (owner?.hatch_closed && ((user in owner.pilots) || user == owner))
 		if (active)
 			to_chat(user, SPAN_WARNING("You cannot modify the projection mode while the shield is active."))
 		else
 			current_mode = !current_mode
 			to_chat(user, SPAN_NOTICE("You set the shields to [current_mode ? "bubble" : "barrier"] mode."))
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/effect/mech_shield
 	name = "energy shield"

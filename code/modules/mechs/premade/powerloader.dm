@@ -111,12 +111,13 @@
 	name = "APLU \"Firestarter\""
 	desc = "An ancient, but well-liked cargo handling exosuit. This one has cool red flames."
 	decal = "flames_red"
+	decal_blend = BLEND_OVERLAY
 
 /mob/living/exosuit/premade/powerloader/flames_blue
 	name = "APLU \"Burning Chrome\""
 	desc = "An ancient, but well-liked cargo handling exosuit. This one has cool blue flames."
 	decal = "flames_blue"
-
+	decal_blend = BLEND_OVERLAY
 
 /mob/living/exosuit/premade/firefighter
 	name = "firefighting exosuit"

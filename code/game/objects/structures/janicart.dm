@@ -174,8 +174,10 @@
 	name = "janicart"
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "pussywagon"
+	base_icon = "pussywagon"
 	anchored = FALSE
 	density =  TRUE
+	material_alteration = MAT_FLAG_ALTERATION_NONE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	buckle_layer_above = TRUE
 	buckle_movable = TRUE

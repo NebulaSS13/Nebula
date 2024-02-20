@@ -1,4 +1,5 @@
-/obj/structure/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
+//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
+/obj/structure/bed/chair
 	name = "chair"
 	desc = "You sit in this, either by will or force."
 	icon_state = "chair_preview"
@@ -265,9 +266,9 @@
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
-		icon_state = "shuttle_chair-b"
+		base_icon = "shuttle_chair-b"
 	else
-		icon_state = "shuttle_chair"
+		base_icon = "shuttle_chair"
 	..()
 
 /obj/structure/bed/chair/shuttle/blue
