@@ -44,16 +44,17 @@
 #define SS_INIT_OVERLAY          1
 #define SS_INIT_DEFAULT          0
 #define SS_INIT_AIR             -1
-#define SS_INIT_MISC_LATE       -2
-#define SS_INIT_MISC_CODEX      -3
-#define SS_INIT_ALARM           -4
-#define SS_INIT_SHUTTLE         -5
-#define SS_INIT_GOALS           -5
-#define SS_INIT_LIGHTING        -6
-#define SS_INIT_WEATHER         -7
-#define SS_INIT_ZCOPY           -8
-#define SS_INIT_HOLOMAP         -9
-#define SS_INIT_XENOARCH        -10
+#define SS_INIT_VIS_CONTENTS    -2
+#define SS_INIT_MISC_LATE       -3
+#define SS_INIT_MISC_CODEX      -4
+#define SS_INIT_ALARM           -5
+#define SS_INIT_SHUTTLE         -6
+#define SS_INIT_GOALS           -7
+#define SS_INIT_LIGHTING        -8
+#define SS_INIT_WEATHER         -9
+#define SS_INIT_ZCOPY           -10
+#define SS_INIT_HOLOMAP         -11
+#define SS_INIT_XENOARCH        -12
 #define SS_INIT_TICKER          -20
 #define SS_INIT_UNIT_TESTS      -100
 

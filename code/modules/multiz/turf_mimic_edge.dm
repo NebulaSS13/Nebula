@@ -88,7 +88,7 @@
 	mimic_z = _z? _z : z
 	mimic_x = _x
 	mimic_y = _y
-	refresh_vis_contents()
+	update_vis_contents()
 
 //Prevent ambient completely, we're not a real turf
 /turf/simulated/mimic_edge/set_ambient_light(color, multiplier)
@@ -164,7 +164,7 @@
 	mimic_z = _z? _z : z
 	mimic_x = _x
 	mimic_y = _y
-	refresh_vis_contents()
+	update_vis_contents()
 
 //Prevent ambient completely, we're not a real turf
 /turf/unsimulated/mimic_edge/set_ambient_light(color, multiplier)
@@ -240,7 +240,7 @@
 	mimic_z = _z? _z : z
 	mimic_x = _x
 	mimic_y = _y
-	refresh_vis_contents()
+	update_vis_contents()
 
 //Prevent ambient completely, we're not a real turf
 /turf/exterior/mimic_edge/set_ambient_light(color, multiplier)

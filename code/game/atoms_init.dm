@@ -136,7 +136,7 @@
 		QDEL_NULL(bound_overlay)
 
 	vis_locs = null //clears this atom out of all vis_contents
-	clear_vis_contents(src)
+	clear_vis_contents()
 
 /atom/GetCloneArgs()
 	return list(loc)

@@ -56,7 +56,7 @@
 		if(!skip_vis_contents_update)
 			var/flood_object = get_flood_overlay(flooded)
 			if(flood_object)
-				add_vis_contents(src, flood_object)
+				add_vis_contents(flood_object)
 	else if(!mapload)
 		REMOVE_ACTIVE_FLUID_SOURCE(src)
 		fluid_update() // We are now floodable, so wake up our neighbors.

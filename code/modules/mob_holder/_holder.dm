@@ -20,10 +20,10 @@
 
 /obj/item/holder/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE)
-	clear_vis_contents(src)
+	clear_vis_contents()
 	for(var/atom/movable/AM in src)
 		AM.vis_flags |= (VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE)
-		add_vis_contents(src, AM)
+		add_vis_contents(AM)
 
 // No scooping mobs and handing them to people who can't scoop them.
 /obj/item/holder/equipped(mob/user, slot)
@@ -60,7 +60,7 @@
 	destroy_all()
 
 /obj/item/holder/Destroy()
-	clear_vis_contents(src)
+	clear_vis_contents()
 	for(var/atom/movable/AM in src)
 		unregister_all_movement(last_holder, AM)
 		AM.vis_flags = initial(AM.vis_flags)
