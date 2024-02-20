@@ -327,15 +327,14 @@
 
 /mob/living/exosuit/attackby(var/obj/item/thing, var/mob/user)
 
+	// Install equipment.
 	if(user.a_intent != I_HURT && istype(thing, /obj/item/mech_equipment))
 		if(hardpoints_locked)
 			to_chat(user, SPAN_WARNING("Hardpoint system access is disabled."))
-			return
-
+			return TRUE
 		var/obj/item/mech_equipment/realThing = thing
 		if(realThing.owner)
-			return
-
+			return TRUE
 		var/free_hardpoints = list()
 		for(var/hardpoint in hardpoints)
 			if(hardpoints[hardpoint] == null)
@@ -343,12 +342,12 @@
 		var/to_place = input("Where would you like to install it?") as null|anything in (realThing.restricted_hardpoints & free_hardpoints)
 		if(!to_place)
 			to_chat(user, SPAN_WARNING("There is no room to install \the [thing]."))
-		if(install_system(thing, to_place, user))
-			return
-		to_chat(user, SPAN_WARNING("\The [thing] could not be installed in that hardpoint."))
-		return
+		else if(!install_system(thing, to_place, user))
+			to_chat(user, SPAN_WARNING("\The [thing] could not be installed in that hardpoint."))
+		return TRUE
 
-	else if(istype(thing, /obj/item/kit/paint))
+	// Apply customisation.
+	if(istype(thing, /obj/item/kit/paint))
 		user.visible_message(SPAN_NOTICE("\The [user] opens \the [thing] and spends some quality time customising \the [src]."))
 
 		var/obj/item/kit/paint/P = thing
@@ -359,77 +358,83 @@
 			for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
 				comp.decal = P.new_state
 
+		if(!isnull(P.new_blend))
+			for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
+				comp.decal_blend = P.new_blend
+
 		if(P.new_icon)
 			for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
 				comp.icon = P.new_icon
 
-		queue_icon_update()
+		update_icon()
 		P.use(1, user)
-		return 1
+		return TRUE
 
-	else
-		if(user.a_intent != I_HURT)
-			if(IS_MULTITOOL(thing))
-				if(hardpoints_locked)
-					to_chat(user, SPAN_WARNING("Hardpoint system access is disabled."))
-					return
+	// Various tool and construction interactions.
+	if(user.a_intent != I_HURT)
 
-				var/list/parts = list()
-				for(var/hardpoint in hardpoints)
-					if(hardpoints[hardpoint])
-						parts += hardpoint
-
-				var/to_remove = input("Which component would you like to remove") as null|anything in parts
-
-				if(remove_system(to_remove, user))
-					return
+		// Removing systems from hardpoints.
+		if(IS_MULTITOOL(thing))
+			if(hardpoints_locked)
+				to_chat(user, SPAN_WARNING("Hardpoint system access is disabled."))
+				return TRUE
+			var/list/parts = list()
+			for(var/hardpoint in hardpoints)
+				if(hardpoints[hardpoint])
+					parts += hardpoint
+			var/to_remove = input("Which component would you like to remove") as null|anything in parts
+			if(!remove_system(to_remove, user))
 				to_chat(user, SPAN_WARNING("\The [src] has no hardpoint systems to remove."))
-				return
-			else if(IS_WRENCH(thing))
-				if(!maintenance_protocols)
-					to_chat(user, SPAN_WARNING("The securing bolts are not visible while maintenance protocols are disabled."))
-					return
+			return TRUE
 
-				visible_message(SPAN_WARNING("\The [user] begins unwrenching the securing bolts holding \the [src] together."))
-				var/delay = 60 * user.skill_delay_mult(SKILL_DEVICES)
-				if(!do_after(user, delay) || !maintenance_protocols)
-					return
+		// Dismantling an exosuit entirely.
+		if(IS_WRENCH(thing))
+			if(!maintenance_protocols)
+				to_chat(user, SPAN_WARNING("The securing bolts are not visible while maintenance protocols are disabled."))
+				return TRUE
+			visible_message(SPAN_WARNING("\The [user] begins unwrenching the securing bolts holding \the [src] together."))
+			var/delay = 60 * user.skill_delay_mult(SKILL_DEVICES)
+			if(do_after(user, delay) && maintenance_protocols)
 				visible_message(SPAN_NOTICE("\The [user] loosens and removes the securing bolts, dismantling \the [src]."))
 				dismantle()
-				return
-			else if(IS_WELDER(thing))
-				if(!getBruteLoss())
-					return
-				var/list/damaged_parts = list()
-				for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
-					if(MC && MC.brute_damage)
-						damaged_parts += MC
-				var/obj/item/mech_component/to_fix = input(user,"Which component would you like to fix") as null|anything in damaged_parts
-				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.brute_damage)
-					to_fix.repair_brute_generic(thing, user)
-				return
-			else if(IS_COIL(thing))
-				if(!getFireLoss())
-					return
-				var/list/damaged_parts = list()
-				for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
-					if(MC && MC.burn_damage)
-						damaged_parts += MC
-				var/obj/item/mech_component/to_fix = input(user,"Which component would you like to fix") as null|anything in damaged_parts
-				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.burn_damage)
-					to_fix.repair_burn_generic(thing, user)
-				return
-			else if(IS_SCREWDRIVER(thing))
-				if(!maintenance_protocols)
-					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
-					return
-				if(!body || !body.cell)
-					to_chat(user, SPAN_WARNING("There is no cell here for you to remove!"))
-					return
-				var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
-				if(!do_after(user, delay) || !maintenance_protocols || !body || !body.cell)
-					return
+			return TRUE
 
+		// Brute damage repair.
+		if(IS_WELDER(thing))
+			if(!getBruteLoss())
+				return TRUE
+			var/list/damaged_parts = list()
+			for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
+				if(MC && MC.brute_damage)
+					damaged_parts += MC
+			var/obj/item/mech_component/to_fix = input(user,"Which component would you like to fix") as null|anything in damaged_parts
+			if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.brute_damage)
+				to_fix.repair_brute_generic(thing, user)
+			return TRUE
+
+		// Burn damage repair.
+		if(IS_COIL(thing))
+			if(!getFireLoss())
+				return TRUE
+			var/list/damaged_parts = list()
+			for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
+				if(MC && MC.burn_damage)
+					damaged_parts += MC
+			var/obj/item/mech_component/to_fix = input(user,"Which component would you like to fix") as null|anything in damaged_parts
+			if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.burn_damage)
+				to_fix.repair_burn_generic(thing, user)
+			return TRUE
+
+		// Cell removal.
+		if(IS_SCREWDRIVER(thing))
+			if(!maintenance_protocols)
+				to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
+				return TRUE
+			if(!body || !body.cell)
+				to_chat(user, SPAN_WARNING("There is no cell here for you to remove!"))
+				return TRUE
+			var/delay = (2 SECONDS) * user.skill_delay_mult(SKILL_DEVICES)
+			if(do_after(user, delay) && maintenance_protocols && body?.cell)
 				user.put_in_hands(body.cell)
 				to_chat(user, SPAN_NOTICE("You remove \the [body.cell] from \the [src]."))
 				playsound(user.loc, 'sound/items/Crowbar.ogg', 50, 1)
@@ -437,17 +442,18 @@
 				power = MECH_POWER_OFF
 				hud_power_control.queue_icon_update()
 				body.cell = null
-				return
-			else if(IS_CROWBAR(thing))
-				if(!hatch_locked)
-					to_chat(user, SPAN_NOTICE("The cockpit isn't locked. There is no need for this."))
-					return
-				if(!body) //Error
-					return
-				var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
-				visible_message(SPAN_NOTICE("\The [user] starts forcing the \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
-				if(!do_after(user, delay, src))
-					return
+			return TRUE
+
+		// Force-opening the cockpit.
+		if(IS_CROWBAR(thing))
+			if(!hatch_locked)
+				to_chat(user, SPAN_NOTICE("The cockpit isn't locked. There is no need for this."))
+				return TRUE
+			if(!body) //Error
+				return TRUE
+			var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
+			visible_message(SPAN_NOTICE("\The [user] starts forcing the \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
+			if(do_after(user, delay, src))
 				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using the \the [thing]."))
 				playsound(user.loc, 'sound/machines/bolts_up.ogg', 25, 1)
 				hatch_locked = FALSE
@@ -456,28 +462,32 @@
 					eject(pilot, silent = 1)
 				hud_open.queue_icon_update()
 				queue_icon_update()
-				return
-			else if(istype(thing, /obj/item/cell))
-				if(!maintenance_protocols)
-					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
-					return
-				if(!body || body.cell)
-					to_chat(user, SPAN_WARNING("There is already a cell in there!"))
-					return
+			return TRUE
 
-				if(user.try_unequip(thing))
-					thing.forceMove(body)
-					body.cell = thing
-					to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))
-					playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-					visible_message(SPAN_NOTICE("\The [user] installs \the [body.cell] into \the [src]."))
-				return
-			else if(istype(thing, /obj/item/robotanalyzer))
-				to_chat(user, SPAN_NOTICE("Diagnostic Report for \the [src]:"))
-				for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
-					if(MC)
-						MC.return_diagnostics(user)
-				return
+		// Cell replacement.
+		if(istype(thing, /obj/item/cell))
+			if(!maintenance_protocols)
+				to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
+				return TRUE
+			if(body?.cell)
+				to_chat(user, SPAN_WARNING("There is already a cell in there!"))
+				return TRUE
+			if(user.try_unequip(thing))
+				thing.forceMove(body)
+				body.cell = thing
+				to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))
+				playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				visible_message(SPAN_NOTICE("\The [user] installs \the [body.cell] into \the [src]."))
+			return TRUE
+
+		// Diagnostic scan.
+		if(istype(thing, /obj/item/robotanalyzer))
+			to_chat(user, SPAN_NOTICE("Diagnostic Report for \the [src]:"))
+			for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
+				if(MC)
+					MC.return_diagnostics(user)
+			return TRUE
+
 	return ..()
 
 /mob/living/exosuit/default_interaction(var/mob/user)

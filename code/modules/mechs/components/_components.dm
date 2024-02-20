@@ -21,6 +21,7 @@
 	var/damage_state = 1
 	var/list/has_hardpoints = list()
 	var/decal
+	var/decal_blend = BLEND_MULTIPLY
 	var/power_use = 0
 
 /obj/item/mech_component/set_color(new_color)
@@ -98,6 +99,7 @@
 		update_components()
 
 /obj/item/mech_component/attackby(var/obj/item/thing, var/mob/user)
+
 	if(IS_SCREWDRIVER(thing))
 		if(contents.len)
 			//Filter non movables
@@ -106,27 +108,30 @@
 				if(!A.anchored)
 					valid_contents += A
 			if(!valid_contents.len)
-				return
+				return TRUE
 			var/obj/item/removed = pick(valid_contents)
 			if(!(removed in contents))
-				return
+				return TRUE
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [removed] from \the [src]."))
 			removed.forceMove(user.loc)
 			playsound(user.loc, 'sound/effects/pop.ogg', 50, 0)
 			update_components()
 		else
 			to_chat(user, SPAN_WARNING("There is nothing to remove."))
-		return
+		return TRUE
+
 	if(IS_WELDER(thing))
 		repair_brute_generic(thing, user)
-		return
+		return TRUE
+
 	if(IS_COIL(thing))
 		repair_burn_generic(thing, user)
-		return
+		return TRUE
+
 	if(istype(thing, /obj/item/robotanalyzer))
 		to_chat(user, SPAN_NOTICE("Diagnostic Report for \the [src]:"))
 		return_diagnostics(user)
-		return
+		return TRUE
 
 	return ..()
 
