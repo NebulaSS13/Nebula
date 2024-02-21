@@ -29,6 +29,11 @@ var/global/list/wall_fullblend_objects = list(
 	explosion_resistance = 10
 	color = COLOR_STEEL
 	turf_flags = TURF_IS_HOLOMAP_OBSTACLE
+	initial_gas = list(
+		/decl/material/gas/oxygen = MOLES_O2STANDARD,
+		/decl/material/gas/nitrogen = MOLES_N2STANDARD
+	)
+	zone_membership_candidate = TRUE
 
 	var/damage = 0
 	var/can_open = 0

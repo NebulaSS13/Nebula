@@ -46,7 +46,7 @@
 */
 
 /proc/is_holy_turf(var/turf/T)
-	return T && T.holy
+	return (T?.turf_flags & TURF_FLAG_HOLY)
 
 /proc/is_not_holy_turf(var/turf/T)
 	return !is_holy_turf(T)

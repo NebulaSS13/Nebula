@@ -109,7 +109,11 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	var/cleanup_failed = FALSE
 
 	if(!async && check_cleanup) // Async tests run at the same time, so cleaning up after any one completes risks breaking other tests
-		var/ignored_types = list(/atom/movable/lighting_overlay, /obj/abstract/landmark/test)
+		var/static/list/ignored_types = list(
+			/atom/movable/lighting_overlay,
+			/obj/effect/decal/cleanable/dirt,
+			/obj/abstract/landmark/test
+		)
 		var/z_levels = list()
 		var/turf/safe = get_safe_turf()
 		var/turf/space = get_space_turf()

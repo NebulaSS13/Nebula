@@ -31,11 +31,11 @@
 	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
 	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS
 	turf_flags = TURF_FLAG_BACKGROUND
-	zone_membership_candidate = TRUE
 	initial_gas = list(
 		/decl/material/gas/oxygen = MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
+	zone_membership_candidate = TRUE
 
 /turf/open/flooded
 	name = "open water"
@@ -50,11 +50,6 @@
 	. = ..()
 	if(!QDELETED(AM))
 		AM.fall()
-
-// override to make sure nothing is hidden
-/turf/open/levelupdate()
-	for(var/obj/O in src)
-		O.hide(0)
 
 /turf/open/examine(mob/user, distance, infix, suffix)
 	. = ..()

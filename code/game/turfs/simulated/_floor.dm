@@ -7,6 +7,11 @@
 	heat_capacity = 10000
 	explosion_resistance = 1
 	turf_flags = TURF_IS_HOLOMAP_PATH
+	initial_gas = list(
+		/decl/material/gas/oxygen = MOLES_O2STANDARD,
+		/decl/material/gas/nitrogen = MOLES_N2STANDARD
+	)
+	zone_membership_candidate = TRUE
 
 	// Damage to flooring.
 	// These are icon state suffixes, NOT booleans!
@@ -64,6 +69,8 @@
 
 	queue_icon_update(SSatoms.initialized) // only update neighbors if we're setting flooring after SSatoms has finished
 	levelupdate()
+	if(flooring)
+		layer = TURF_LAYER
 
 //This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.
@@ -103,15 +110,6 @@
 
 	if(!defer_icon_update)
 		update_icon(1)
-
-/turf/simulated/floor/levelupdate()
-	for(var/obj/O in src)
-		O.hide(O.hides_under_flooring() && src.flooring)
-
-	if(flooring)
-		layer = TURF_LAYER
-	else
-		layer = PLATING_LAYER
 
 /turf/simulated/floor/can_engrave()
 	return (!flooring || flooring.can_engrave)

@@ -795,7 +795,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/turf/simulated/T = get_turf(owner)
 	for(var/datum/wound/W in wounds)
 		//Open wounds can become infected
-		if(max(istype(T) && T.dirt*10, 2*owner.germ_level) > W.germ_level && W.infection_check())
+		if(max(istype(T) && T.get_dirt()*10, 2*owner.germ_level) > W.germ_level && W.infection_check())
 			W.germ_level++
 
 	var/antibiotics = GET_CHEMICAL_EFFECT(owner, CE_ANTIBIOTIC)

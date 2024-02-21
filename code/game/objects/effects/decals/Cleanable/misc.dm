@@ -15,26 +15,11 @@
 /obj/effect/decal/cleanable/ash/attack_hand(var/mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	to_chat(user, "<span class='notice'>[src] sifts through your fingers.</span>")
-	var/turf/simulated/floor/F = get_turf(src)
+	var/turf/F = get_turf(src)
 	if (istype(F))
-		F.dirt += 4
+		F.add_dirt(4)
 	qdel(src)
 	return TRUE
-
-/obj/effect/decal/cleanable/dirt
-	name = "dirt"
-	desc = "Someone should clean that up."
-	gender = PLURAL
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "dirt"
-	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
-	persistent = TRUE
-
-/obj/effect/decal/cleanable/dirt/Destroy()
-	var/turf/simulated/T = loc
-	. = ..()
-	if(istype(T) && !(locate(/obj/effect/decal/cleanable/dirt) in T))
-		T.dirt = 0
 
 /obj/effect/decal/cleanable/flour
 	name = "flour"

@@ -476,7 +476,7 @@
 	- `M?`: The mob whose blood will be used
 	- Returns: TRUE if made bloody, otherwise FALSE
 */
-/atom/proc/add_blood(mob/living/M)
+/atom/proc/add_blood(mob/living/M, amount = 2, list/blood_data)
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return FALSE
 
@@ -894,3 +894,7 @@
 
 /atom/proc/can_be_injected_by(var/atom/injector)
 	return FALSE
+
+/atom/proc/OnSimulatedTurfEntered(turf/simulated/T, old_loc)
+	set waitfor = FALSE
+	return

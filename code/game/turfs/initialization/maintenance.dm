@@ -23,12 +23,12 @@
 
 	var/cardinal_turfs = T.CardinalTurfs()
 
-	T.dirt = get_dirt_amount()
+	var/add_dirt = get_dirt_amount()
 	// If a neighbor is dirty, then we get dirtier.
 	var/how_dirty = dirty_neighbors(cardinal_turfs)
 	for(var/i = 0; i < how_dirty; i++)
-		T.dirt += rand(0,5)
-	T.update_dirt()
+		add_dirt += rand(0,5)
+	T.add_dirt(add_dirt)
 
 	if(prob(oil_probability))
 		new /obj/effect/decal/cleanable/blood/oil(T)
@@ -47,9 +47,9 @@
 
 /decl/turf_initializer/maintenance/proc/dirty_neighbors(var/list/cardinal_turfs)
 	var/how_dirty = 0
-	for(var/turf/simulated/T in cardinal_turfs)
+	for(var/turf/T in cardinal_turfs)
 		// Considered dirty if more than halfway to visible dirt
-		if(T.dirt > 25)
+		if(T.get_dirt() > 25)
 			how_dirty++
 	return how_dirty
 

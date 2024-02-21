@@ -3,9 +3,10 @@
 #define TURF_FLAG_NOJAUNT               BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
 #define TURF_FLAG_NO_POINTS_OF_INTEREST BITFLAG(1) // Used by the level subtemplate generator to skip placing loaded templates on this turf.
 #define TURF_FLAG_BACKGROUND            BITFLAG(2) // Used by shuttle movement to determine if it should be ignored by turf translation.
-#define TURF_IS_HOLOMAP_OBSTACLE        BITFLAG(3)
-#define TURF_IS_HOLOMAP_PATH            BITFLAG(4)
-#define TURF_IS_HOLOMAP_ROCK            BITFLAG(5)
+#define TURF_FLAG_HOLY                  BITFLAG(3)
+#define TURF_IS_HOLOMAP_OBSTACLE        BITFLAG(4)
+#define TURF_IS_HOLOMAP_PATH            BITFLAG(5)
+#define TURF_IS_HOLOMAP_ROCK            BITFLAG(6)
 
 ///Width or height of a transition edge area along the map's borders where transition edge turfs are placed to connect levels together.
 #define TRANSITIONEDGE 7

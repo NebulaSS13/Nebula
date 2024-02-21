@@ -48,3 +48,6 @@
 
 	// Handle non-listener proximity triggers.
 	handle_proximity_update(A)
+
+	if(simulated)
+		A.OnSimulatedTurfEntered(src, old_loc)

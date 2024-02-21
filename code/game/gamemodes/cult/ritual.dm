@@ -39,7 +39,7 @@
 	if(istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes_str), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
-	if(T.holy)
+	if(is_holy_turf(T))
 		to_chat(src, "<span class='warning'>This place is blessed, you may not draw runes on it - defile it first.</span>")
 		return
 	if(!istype(T, /turf/simulated))

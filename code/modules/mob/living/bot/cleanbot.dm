@@ -68,15 +68,10 @@
 	visible_message("\The [src] begins to clean up \the [D].")
 	update_icon()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
-	if(do_after(src, cleantime, progress = 0))
-		if(istype(loc, /turf/simulated))
-			var/turf/simulated/f = loc
-			f.dirt = 0
-		if(!D)
-			return
-		qdel(D)
+	if(do_after(src, cleantime, progress = 0) && !QDELETED(D))
 		if(D == target)
 			target = null
+		qdel(D)
 	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
 	update_icon()

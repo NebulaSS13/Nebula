@@ -405,7 +405,7 @@
 	UpdateAppearance()
 	..()
 
-/mob/living/carbon/human/add_blood(mob/living/carbon/human/M, amount = 2, blood_data)
+/mob/living/add_blood(mob/living/M, amount = 2, list/blood_data)
 	if (!..())
 		return 0
 	var/bloodied
