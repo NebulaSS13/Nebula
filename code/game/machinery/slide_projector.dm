@@ -3,9 +3,7 @@
 	desc = "A handy device capable of showing an enlarged projection of whatever you can fit inside."
 	icon = 'icons/obj/items/device/projector.dmi'
 	icon_state = "projector0"
-	max_w_class = ITEM_SIZE_SMALL
-	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_SMALL)
-	use_sound = 'sound/effects/storage/toolbox.ogg'
+	storage_type = /datum/extension/storage/slide_projector
 	material = /decl/material/solid/metal/steel
 	var/static/list/projection_types = list(
 		/obj/item/photo = /obj/effect/projection/photo,
@@ -27,16 +25,6 @@
 /obj/item/storage/slide_projector/get_mechanics_info()
 	. = ..()
 	. += "Use in hand to open the interface."
-
-/obj/item/storage/slide_projector/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
-	. = ..()
-	if(. && W == current_slide)
-		set_slide(length(contents) ? contents[1] : null)
-
-/obj/item/storage/slide_projector/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
-	. = ..()
-	if(. && !current_slide)
-		set_slide(W)
 
 /obj/item/storage/slide_projector/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!current_slide)

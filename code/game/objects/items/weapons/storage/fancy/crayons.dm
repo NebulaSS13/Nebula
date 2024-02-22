@@ -8,10 +8,9 @@
 	icon = 'icons/obj/items/crayon_box.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 6
 	key_type = /obj/item/pen/crayon
 	use_single_icon_overlay_state = "crayonbox"
+	storage_type = /datum/extension/storage/box/crayons
 
 /obj/item/storage/box/fancy/crayons/update_icon_state()
 	icon_state = get_world_inventory_state()

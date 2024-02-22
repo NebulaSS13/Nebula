@@ -13,8 +13,7 @@
 /obj/item/storage/secure
 	name = "secstorage"
 	w_class = ITEM_SIZE_NORMAL
-	max_w_class = ITEM_SIZE_SMALL
-	max_storage_space = DEFAULT_BOX_STORAGE
+	storage_type = /datum/extension/storage/secure
 	material = /decl/material/solid/metal/steel
 	var/lock_type = /datum/extension/lockable/storage
 	var/icon_locking = "secureb"
@@ -66,13 +65,6 @@
 	else if(lock.open)
 		add_overlay(icon_opened)
 
-/obj/item/storage/secure/open(mob/user)
-	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	if(lock.locked)
-		add_fingerprint(user)
-		return
-	. = ..()
-
 // -----------------------------
 //        Secure Briefcase
 // -----------------------------
@@ -86,22 +78,22 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_BACKPACK_STORAGE
-	use_sound = 'sound/effects/storage/briefcase.ogg'
+	storage_type = /datum/extension/storage/secure/briefcase
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user as mob)
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
-	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	if (loc == user && lock.locked)
-		to_chat(user, SPAN_WARNING("[src] is locked and cannot be opened!"))
-		return TRUE
-	if (loc == user && !lock.locked)
-		open(user)
-		add_fingerprint(user)
-		return TRUE
+	var/datum/extension/lockable/lock   = get_extension(src, /datum/extension/lockable)
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(lock && storage)
+		if (loc == user && lock.locked)
+			to_chat(user, SPAN_WARNING("\The [src] is locked and cannot be opened!"))
+			return TRUE
+		if (loc == user && !lock.locked)
+			storage.open(user)
+			add_fingerprint(user)
+			return TRUE
 	return ..()
 
 // -----------------------------
@@ -114,14 +106,12 @@
 	icon_state = "safe"
 	force = 8
 	w_class = ITEM_SIZE_STRUCTURE
-	max_w_class = ITEM_SIZE_HUGE
-	max_storage_space = 56
 	anchored = TRUE
 	density = FALSE
-	cant_hold = list(/obj/item/storage/secure/briefcase)
 	lock_type = /datum/extension/lockable/storage/safe
 	icon_locking = "safeb"
 	icon_opened = "safe0"
+	storage_type = /datum/extension/storage/secure/safe
 
 /obj/item/storage/secure/safe/WillContain()
 	return list(

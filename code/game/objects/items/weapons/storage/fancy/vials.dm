@@ -6,10 +6,9 @@
 	icon_state = "vialbox0"
 	name = "vial storage box"
 	w_class = ITEM_SIZE_NORMAL
-	max_w_class = ITEM_SIZE_TINY
-	storage_slots = 12
 	material = /decl/material/solid/organic/plastic
 	key_type = /obj/item/chems/glass/beaker/vial
+	storage_type = /datum/extension/storage/box/vials
 
 /obj/item/storage/box/fancy/vials/WillContain()
 	return list(/obj/item/chems/glass/beaker/vial = 12)
@@ -29,9 +28,6 @@
 	icon_state = "vialbox0"
 	item_state = "syringe_kit"
 	w_class = ITEM_SIZE_NORMAL
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = null
-	storage_slots = 12
 	req_access = list(access_virology)
 	material = /decl/material/solid/metal/stainlesssteel
 

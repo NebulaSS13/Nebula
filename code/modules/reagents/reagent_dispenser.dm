@@ -259,13 +259,13 @@
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/W, mob/user)
 	//Allow refilling with a box
-	if((cups < max_cups) && istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		for(var/obj/item/chems/drinks/C in S)
+	var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
+	if(cups < max_cups && storage)
+		for(var/obj/item/chems/drinks/C in storage.get_contents())
 			if(cups >= max_cups)
 				break
 			if(istype(C, cup_type))
-				S.remove_from_storage(C, src)
+				storage.remove_from_storage(C, src)
 				qdel(C)
 				cups++
 		return TRUE

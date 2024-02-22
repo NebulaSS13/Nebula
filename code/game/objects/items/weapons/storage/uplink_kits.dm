@@ -146,8 +146,9 @@
 
 /obj/item/storage/secure/briefcase/heavysniper/Initialize(ml, material_key)
 	. = ..()
-	if(length(contents))
-		make_exact_fit()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(length(contents) && storage)
+		storage.make_exact_fit()
 
 /obj/item/storage/secure/briefcase/money/WillContain()
 	return list(/obj/item/cash/c1000 = 10)

@@ -6,14 +6,14 @@
 	icon_state = ICON_STATE_WORLD
 	color = COLOR_GRAY40
 	gender = PLURAL
-	slots = 2
+	storage_type = /datum/extension/storage/pouches
 	accessory_slot = ACCESSORY_SLOT_ARMOR_S
 
 /obj/item/clothing/accessory/storage/pouches/large
 	name = "large storage pouches"
 	desc = "A collection of black pouches that can be attached to a plate carrier. Carries up to four items."
 	icon = 'icons/clothing/accessories/pouches/lpouches.dmi'
-	slots = 4
+	storage_type = /datum/extension/storage/pouches/large
 	accessory_slowdown = 1
 
 /obj/item/clothing/accessory/storage/pouches/large/tan

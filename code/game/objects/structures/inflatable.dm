@@ -307,8 +307,7 @@
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
 	w_class = ITEM_SIZE_LARGE
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE
-	can_hold = list(/obj/item/inflatable)
+	storage_type = /datum/extension/storage/briefcase/inflatables
 
 /obj/item/storage/briefcase/inflatable/WillContain()
 	return list(

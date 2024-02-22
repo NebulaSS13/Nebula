@@ -5,18 +5,13 @@
 	icon_state = "pill_pack"
 	pop_sound = 'sound/effects/pop.ogg'
 	color = COLOR_GRAY80
+	storage_type = /datum/extension/storage/pillbottle/foil
 	var/pill_type
 	var/pill_count = 4
 	var/pill_positions
 
 /obj/item/storage/pill_bottle/foil_pack/painkillers
 	pill_type = /obj/item/chems/pill/painkillers
-
-/obj/item/storage/pill_bottle/foil_pack/remove_from_storage(obj/item/W, atom/new_location, NoUpdate)
-	. = ..()
-	if(. && W.loc != src && pill_positions)
-		pill_positions -= W
-		update_icon()
 
 /obj/item/storage/pill_bottle/foil_pack/Initialize()
 	. = ..()
@@ -36,9 +31,6 @@
 /obj/item/storage/pill_bottle/foil_pack/Destroy()
 	pill_positions = null
 	. = ..()
-
-/obj/item/storage/pill_bottle/foil_pack/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
-	return FALSE
 
 /obj/item/storage/pill_bottle/foil_pack/on_update_icon()
 	..()

@@ -158,11 +158,11 @@
 
 /datum/extension/lockable/storage
 	base_type = /datum/extension/lockable
-	expected_type = /obj/item/storage
+	expected_type = /obj/item
 
 /datum/extension/lockable/storage/safe
 	base_type = /datum/extension/lockable
-	expected_type = /obj/item/storage
+	expected_type = /obj/item
 
 /datum/extension/lockable/charge_stick
 	base_type = /datum/extension/lockable

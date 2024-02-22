@@ -14,11 +14,9 @@
 	icon_state = "firstaid"
 	throw_speed = 2
 	throw_range = 8
-	max_w_class = ITEM_SIZE_SMALL
-	max_storage_space = DEFAULT_BOX_STORAGE
-	use_sound = 'sound/effects/storage/box.ogg'
 	obj_flags = OBJ_FLAG_HOLLOW
 	material = /decl/material/solid/organic/plastic
+	storage_type = /datum/extension/storage/firstaid
 
 /obj/item/storage/firstaid/empty
 	icon_state = "firstaid"
@@ -136,25 +134,7 @@
 	icon = 'icons/obj/items/storage/surgerykit.dmi'
 	icon_state = "surgerykit"
 	item_state = "firstaid-surgery"
-
-	storage_slots = 14
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = null
-	use_sound = 'sound/effects/storage/briefcase.ogg'
-
-	can_hold = list(
-		/obj/item/bonesetter,
-		/obj/item/cautery,
-		/obj/item/circular_saw,
-		/obj/item/hemostat,
-		/obj/item/retractor,
-		/obj/item/scalpel,
-		/obj/item/surgicaldrill,
-		/obj/item/bonegel,
-		/obj/item/sutures,
-		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/stack/nanopaste
-	)
+	storage_type = /datum/extension/storage/firstaid/surgery
 
 /obj/item/storage/firstaid/surgery/WillContain()
 	return list(
@@ -172,15 +152,7 @@
 
 /obj/item/storage/firstaid/surgery/ghetto // Mostly just for debugging.
 	name = "shady surgery kit"
-	can_hold = list(
-		/obj/item/screwdriver,
-		/obj/item/wrench,
-		/obj/item/hatchet,
-		/obj/item/utensil/fork,
-		/obj/item/shard,
-		/obj/item/flame/fuelled/lighter,
-		/obj/item/stack/cable_coil
-	)
+	storage_type = /datum/extension/storage/firstaid/surgery/ghetto
 
 /obj/item/storage/firstaid/surgery/ghetto/WillContain()
 	return list(

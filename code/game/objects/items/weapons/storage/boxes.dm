@@ -25,18 +25,16 @@
 	icon = 'icons/obj/items/storage/box.dmi'
 	icon_state = "box"
 	item_state = "syringe_kit"
-	max_storage_space = DEFAULT_BOX_STORAGE
-	use_sound = 'sound/effects/storage/box.ogg'
 	material = /decl/material/solid/organic/cardboard
 	obj_flags = OBJ_FLAG_HOLLOW
+	storage_type = /datum/extension/storage/box
 	var/foldable = /obj/item/stack/material/cardstock
 
 /obj/item/storage/box/large
 	name = "large box"
 	icon_state = "largebox"
 	w_class = ITEM_SIZE_LARGE
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE
+	storage_type = /datum/extension/storage/box/large
 
 /obj/item/storage/box/union_cards
 	name = "box of union cards"
@@ -67,10 +65,6 @@
 		new foldable(get_turf(src), material.type)
 	qdel(src)
 	return TRUE
-
-/obj/item/storage/box/make_exact_fit()
-	..()
-	foldable = null //special form fitted boxes should not be foldable.
 
 /obj/item/storage/box/survival
 	name = "crew survival kit"
@@ -161,7 +155,7 @@
 	icon = 'icons/obj/items/storage/ammobox.dmi'
 	icon_state = "ammo"
 	desc = "A sturdy metal box with several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	use_sound = 'sound/effects/closet_open.ogg'
+	storage_type = /datum/extension/storage/box/metal
 
 /obj/item/storage/box/ammo/blanks
 	name = "box of blank shells"
@@ -361,7 +355,8 @@
 	desc = "Drymate brand monkey cubes. Just add water!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
-	can_hold = list(/obj/item/chems/food/monkeycube)
+	storage_type = /datum/extension/storage/box/monkey
+
 /obj/item/storage/box/monkeycubes/WillContain()
 	return list(/obj/item/chems/food/monkeycube/wrapped = 5)
 
@@ -417,7 +412,7 @@
 	desc = "Eight wrappers of fun! Ages 8 and up. Not suitable for children."
 	icon = 'icons/obj/toy/toy.dmi'
 	icon_state = "spbox"
-	can_hold = list(/obj/item/toy/snappop)
+	storage_type = /datum/extension/storage/box/snappop
 
 /obj/item/storage/box/snappops/WillContain()
 	return list(/obj/item/toy/snappop = 8)
@@ -435,12 +430,13 @@
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
-	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
+	storage_type = /datum/extension/storage/box/lights
 
 /obj/item/storage/box/lights/Initialize(ml, material_key)
 	. = ..()
-	if(length(contents))
-		make_exact_fit()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(length(contents) && storage)
+		storage.make_exact_fit()
 
 /obj/item/storage/box/lights/bulbs/WillContain()
 	return list(/obj/item/light/bulb = 21)
@@ -515,11 +511,8 @@
 	icon_state = "portafreezer"
 	item_state = "medicalpack"
 	foldable = null
-	max_w_class = ITEM_SIZE_NORMAL
+	storage_type = /datum/extension/storage/box/freezer
 	w_class = ITEM_SIZE_LARGE
-	can_hold = list(/obj/item/organ, /obj/item/chems/food, /obj/item/chems/drinks, /obj/item/chems/condiment, /obj/item/chems/glass)
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE
-	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 	temperature = -16 CELSIUS
 
 /obj/item/storage/box/freezer/ProcessAtomTemperature()
@@ -529,9 +522,9 @@
 	name = "checkers box"
 	desc = "This box holds a nifty portion of checkers. Foam-shaped on the inside so that only checkers may fit."
 	icon_state = "checkers"
-	max_storage_space = 24
+	storage_type = /datum/extension/storage/box/checkers
 	foldable = null
-	can_hold = list(/obj/item/checker)
+
 /obj/item/storage/box/checkers/WillContain()
 	return list(
 			/obj/item/checker = 12,
@@ -716,7 +709,6 @@
 	icon_state = "big"
 	icon_state = "part"
 	w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_BOX_STORAGE
 
 /obj/item/storage/box/parts/WillContain()
 	return list(
@@ -731,7 +723,7 @@
 	icon = 'icons/obj/items/storage/part_pack.dmi'
 	icon_state = "part"
 	w_class = ITEM_SIZE_SMALL
-	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_SMALL)
+	storage_type = /datum/extension/storage/box/parts_pack
 
 /obj/item/storage/box/parts_pack/Initialize(ml, material_key)
 	setup_name()

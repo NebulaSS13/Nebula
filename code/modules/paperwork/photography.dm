@@ -181,15 +181,15 @@
 	icon_state    = "album"
 	item_state    = "briefcase"
 	w_class       = ITEM_SIZE_NORMAL //same as book
-	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
-	can_hold = list(/obj/item/photo)
+	storage_type  = /datum/extension/storage/photo_album 
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && in_range(src, user) || loc == user)
 		if(user.active_storage)
 			user.active_storage.close(user)
-		show_to(user)
+		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+		storage?.show_to(user)
 		return TRUE
 	. = ..()
 

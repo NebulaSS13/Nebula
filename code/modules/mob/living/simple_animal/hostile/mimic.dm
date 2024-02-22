@@ -2,19 +2,21 @@
 // Abstract Class
 //
 
-var/global/list/protected_objects = list(/obj/machinery,
-										 /obj/structure/table,
-										 /obj/structure/cable,
-										 /obj/structure/window,
-										 /obj/structure/wall_frame,
-										 /obj/structure/grille,
-										 /obj/structure/catwalk,
-										 /obj/structure/ladder,
-										 /obj/structure/stairs,
-										 /obj/structure/sign,
-										 /obj/structure/railing,
-										 /obj/item/modular_computer,
-										 /obj/item/projectile/animate)
+var/global/list/protected_objects = list(
+	/obj/machinery,
+	/obj/structure/table,
+	/obj/structure/cable,
+	/obj/structure/window,
+	/obj/structure/wall_frame,
+	/obj/structure/grille,
+	/obj/structure/catwalk,
+	/obj/structure/ladder,
+	/obj/structure/stairs,
+	/obj/structure/sign,
+	/obj/structure/railing,
+	/obj/item/modular_computer,
+	/obj/item/projectile/animate
+)
 
 /mob/living/simple_animal/hostile/mimic
 	name = "crate"
@@ -104,11 +106,11 @@ var/global/list/protected_objects = list(/obj/machinery,
 		if(istype(C,/obj/structure/closet))
 			for(var/atom/movable/M in src)
 				M.forceMove(C)
-		if(istype(C,/obj/item/storage))
-			var/obj/item/storage/S = C
+		var/datum/extension/storage/storage = get_extension(C, /datum/extension/storage)
+		if(storage)
 			for(var/atom/movable/M in src)
-				if(S.can_be_inserted(M,null,1))
-					S.handle_item_insertion(M)
+				if(storage.can_be_inserted(M,null,1))
+					storage.handle_item_insertion(M)
 				else
 					M.forceMove(src.loc)
 		for(var/atom/movable/M in src)

@@ -325,18 +325,19 @@
 		return TRUE
 
 	if(istype(O, /obj/item/storage/plants))
-		var/obj/item/storage/P = O
-		var/loaded = 0
-		for(var/obj/item/seeds/G in P.contents)
-			++loaded
-			P.remove_from_storage(G, src, 1)
-			add(G, 1)
-		P.finish_bulk_removal()
-		if (loaded)
-			user.visible_message(SPAN_NOTICE("\The [user] puts the seeds from \the [O] into \the [src]."))
-		else
-			to_chat(user, SPAN_WARNING("There are no seeds in \the [O.name]."))
-		return TRUE
+		var/datum/extension/storage/storage = get_extension(O, /datum/extension/storage)
+		if(storage)
+			var/loaded = 0
+			for(var/obj/item/seeds/G in storage.get_contents())
+				++loaded
+				storage.remove_from_storage(G, src, 1)
+				add(G, 1)
+			storage.finish_bulk_removal()
+			if (loaded)
+				user.visible_message(SPAN_NOTICE("\The [user] puts the seeds from \the [O] into \the [src]."))
+			else
+				to_chat(user, SPAN_WARNING("There are no seeds in \the [O.name]."))
+			return TRUE
 
 	return ..()
 
@@ -346,9 +347,9 @@
 			var/mob/user = O.loc
 			if(!user.try_unequip(O, src))
 				return
-		else if(istype(O.loc,/obj/item/storage))
-			var/obj/item/storage/S = O.loc
-			S.remove_from_storage(O, src)
+		else if(isobj(O.loc))
+			var/datum/extension/storage/storage = get_extension(O.loc, /datum/extension/storage)
+			storage?.remove_from_storage(O, src)
 
 	O.forceMove(src)
 	var/newID = 0

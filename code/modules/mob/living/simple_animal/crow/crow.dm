@@ -3,9 +3,8 @@
 	desc = "A small green-grey messenger bag with a blue Corvid Couriers logo on it."
 	icon = 'icons/obj/items/storage/backpack/corvid.dmi'
 	icon_state = ICON_STATE_WORLD
-	storage_slots = 7
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_SMALL
+	storage_type = /datum/extension/storage/backpack/crow
 	material = /decl/material/solid/organic/cloth
 
 /mob/living/simple_animal/crow

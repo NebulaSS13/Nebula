@@ -96,22 +96,22 @@
 
 	if(ingredients >= capacity)
 		to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
-	else if(istype(O, /obj/item/storage/plants))
-		var/obj/item/storage/plants/P = O
-		var/hadPlants = 0
-		for(var/obj/item/chems/food/grown/G in P.contents)
-			hadPlants = 1
-			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
-			ingredients++
-			if(ingredients >= capacity)
-				to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
-				break
-		P.finish_bulk_removal() //Now do the UI stuff once.
-		if(!hadPlants)
-			to_chat(user, "<span class='notice'>\The [P] has no produce inside.</span>")
-		else if(ingredients < capacity)
-			to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
-
+	else if(isobj(O))
+		var/datum/extension/storage/storage = get_extension(O, /datum/extension/storage)
+		if(storage)
+			var/hadPlants = 0
+			for(var/obj/item/chems/food/grown/G in storage.get_contents())
+				hadPlants = 1
+				storage.remove_from_storage(G, src, 1) //No UI updates until we are all done.
+				ingredients++
+				if(ingredients >= capacity)
+					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
+					break
+			storage.finish_bulk_removal() //Now do the UI stuff once.
+			if(!hadPlants)
+				to_chat(user, "<span class='notice'>\The [O] has no produce inside.</span>")
+			else if(ingredients < capacity)
+				to_chat(user, "<span class='notice'>You empty \the [O] into \the [src].</span>")
 
 	else if(!istype(O, /obj/item/chems/food/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")

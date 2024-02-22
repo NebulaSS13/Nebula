@@ -33,8 +33,7 @@
 	icon_state = "cigpaperbook"
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 10
+	storage_type = /datum/extension/storage/cigpapers
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/plastic
@@ -65,8 +64,7 @@
 	icon_state = "placeholder"
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 6
+	storage_type = /datum/extension/storage/chewables
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/tin
@@ -77,7 +75,7 @@
 //loose leaf
 /obj/item/storage/chewables/rollable
 	name = "bag of tobacco"
-	max_storage_space = 8
+	storage_type = /datum/extension/storage/chewables/rollable
 
 /obj/item/storage/chewables/rollable/bad
 	name = "bag of Men at Arms tobacco"
@@ -138,7 +136,7 @@
 	name = "pack of Getmore Cookies"
 	desc = "A pack of delicious cookies, and possibly the only product in Getmores Chocolate Corp lineup that has any trace of chocolate in it."
 	icon_state = "cookiebag"
-	max_storage_space = 6
+	storage_type = /datum/extension/storage/chewables/cookies
 
 /obj/item/storage/chewables/candy/cookies/WillContain()
 	return list(/obj/item/chems/food/cookie = 6)
@@ -147,7 +145,7 @@
 	name = "pack of Rainbo-Gums"
 	desc = "A mixed pack of delicious fruit flavored bubble-gums!"
 	icon_state = "gumpack"
-	max_storage_space = 8
+	storage_type = /datum/extension/storage/chewables/gum
 
 /obj/item/storage/chewables/candy/gum/WillContain()
 	return list(/obj/item/clothing/mask/chewable/candy/gum = 8)
@@ -156,7 +154,7 @@
 	name = "pack of medicinal lollipops"
 	desc = "A mixed pack of medicinal flavored lollipops. These have no business being on store shelves."
 	icon_state = "lollipack"
-	max_storage_space = 20
+	storage_type = /datum/extension/storage/chewables/lollipops
 
 /obj/item/storage/chewables/candy/medicallollis/WillContain()
 	return list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 20)
@@ -166,10 +164,10 @@
 	desc = "A mixed pack of flavored medicinal lollipops. Perfect for small boo-boos."
 	icon = 'icons/obj/items/storage/lollijar.dmi'
 	icon_state = "lollijar"
-	max_storage_space = 20
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 	material = /decl/material/solid/glass
+	storage_type = /datum/extension/storage/chewables/lollipops
 
 /obj/item/storage/medical_lolli_jar/WillContain()
 	return list(/obj/item/clothing/mask/chewable/candy/lolli/weak_meds = 15)

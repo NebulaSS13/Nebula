@@ -74,9 +74,10 @@
 			var/mob/living/carbon/human/H = A.loc
 			if(!H.try_unequip(A))
 				return
-		else if(istype(A.loc,/obj/item/storage))
-			var/obj/item/storage/S = A.loc
-			S.remove_from_storage(A)
+		else if(isobj(A.loc))
+			var/datum/extension/storage/storage = get_extension(A.loc, /datum/extension/storage)
+			if(storage)
+				storage.remove_from_storage(A)
 		c.scanned = A
 		A.forceMove(src)  //Store it inside
 		safe = 2

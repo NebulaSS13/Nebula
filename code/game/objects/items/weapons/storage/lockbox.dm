@@ -7,10 +7,10 @@
 	icon_state = "lockbox+l"
 	item_state = "syringe_kit"
 	w_class = ITEM_SIZE_HUGE
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = 32 //The sum of the w_classes of all the items in this storage item.
+	storage_type = /datum/extension/storage/lockbox
 	req_access = list(access_armory)
 	material = /decl/material/solid/metal/stainlesssteel
+
 	var/locked = 1
 	var/broken = 0
 	var/icon_locked = "lockbox+l"
@@ -28,7 +28,8 @@
 			if(src.locked)
 				src.icon_state = src.icon_locked
 				to_chat(user, "<span class='notice'>You lock \the [src]!</span>")
-				close_all()
+				var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+				storage?.close_all()
 				return
 			else
 				src.icon_state = src.icon_closed
@@ -45,14 +46,6 @@
 		..()
 	else
 		to_chat(user, "<span class='warning'>It's locked!</span>")
-	return
-
-
-/obj/item/storage/lockbox/show_to(mob/user as mob)
-	if(locked)
-		to_chat(user, "<span class='warning'>It's locked!</span>")
-	else
-		..()
 	return
 
 /obj/item/storage/lockbox/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")

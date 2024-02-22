@@ -901,6 +901,34 @@
 /atom/proc/can_be_injected_by(var/atom/injector)
 	return FALSE
 
+//Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
+//Returns -1 if the atom was not found on container.
+/atom/proc/storage_depth(atom/container)
+	. = 0
+	var/atom/cur_atom = src
+	while (cur_atom && !(cur_atom in container.contents))
+		if (isarea(cur_atom))
+			return -1
+		if(cur_atom.loc && has_extension(cur_atom.loc, /datum/extension/storage))
+			.++
+		cur_atom = cur_atom.loc
+	if (!cur_atom)
+		. = -1	//inside something with a null loc.
+
+//Like storage depth, but returns the depth to the nearest turf
+//Returns -1 if no top level turf (a loc was null somewhere, or a non-turf atom's loc was an area somehow).
+/atom/proc/storage_depth_turf()
+	. = 0
+	var/atom/cur_atom = src
+	while (cur_atom && !isturf(cur_atom))
+		if (isarea(cur_atom))
+			return -1
+		if(cur_atom.loc && has_extension(cur_atom.loc, /datum/extension/storage))
+			.++
+		cur_atom = cur_atom.loc
+	if (!cur_atom)
+		. = -1	//inside something with a null loc.
+
 /atom/proc/OnSimulatedTurfEntered(turf/T, old_loc)
 	set waitfor = FALSE
 	return

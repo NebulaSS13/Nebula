@@ -109,32 +109,24 @@
 	item_state        = "utility"
 	desc              = "A rugged case containing a set of standardized picks used in archaeological digs."
 	item_state        = "syringe_kit"
-	storage_slots     = 7
 	slot_flags        = SLOT_LOWER_BODY
 	w_class           = ITEM_SIZE_NORMAL
-	can_hold          = list(/obj/item/tool/xeno)
-	max_storage_space = 18
-	max_w_class       = ITEM_SIZE_NORMAL
-	use_to_pickup     = 1
 	material          = /decl/material/solid/organic/leather/synth
+	storage_type      = /datum/extension/storage/excavation
 
 /obj/item/storage/excavation/WillContain()
 	return list(
-			/obj/item/tool/xeno/brush,
-			/obj/item/tool/xeno/one_pick,
-			/obj/item/tool/xeno/two_pick,
-			/obj/item/tool/xeno/three_pick,
-			/obj/item/tool/xeno/four_pick,
-			/obj/item/tool/xeno/five_pick,
-			/obj/item/tool/xeno/six_pick
-		)
+		/obj/item/tool/xeno/brush,
+		/obj/item/tool/xeno/one_pick,
+		/obj/item/tool/xeno/two_pick,
+		/obj/item/tool/xeno/three_pick,
+		/obj/item/tool/xeno/four_pick,
+		/obj/item/tool/xeno/five_pick,
+		/obj/item/tool/xeno/six_pick
+	)
 
 /obj/item/storage/excavation/empty/WillContain()
 	return
-
-/obj/item/storage/excavation/handle_item_insertion()
-	..()
-	sort_picks()
 
 /obj/item/storage/excavation/proc/sort_picks()
 	var/list/obj/item/tool/xeno/picksToSort = list()
@@ -153,4 +145,6 @@
 		var/obj/item/tool/xeno/smallest = picksToSort[selected]
 		smallest.forceMove(src)
 		picksToSort -= smallest
-	prepare_ui()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage)
+		storage.prepare_ui()

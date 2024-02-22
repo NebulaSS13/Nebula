@@ -11,11 +11,8 @@
 	throw_range = 5
 	melee_accuracy_bonus = -10
 	w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_BOX_STORAGE
+	storage_type = /datum/extension/storage/tray
 	attack_verb = list("served","slammed","hit")
-	use_to_pickup = 1
-	allow_quick_gather = 1
-	use_sound = null
 	material = /decl/material/solid/organic/cardboard
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/cooldown = 0	//Cooldown for banging the tray with a rolling pin. based on world.time. very silly
@@ -27,15 +24,13 @@
 		return
 	. = ..()
 
-/obj/item/storage/tray/gather_all(var/turf/T, var/mob/user)
-	..()
-	update_icon()
-
 /obj/item/storage/tray/proc/scatter_contents(var/neatly = FALSE, target_loc = get_turf(src))
 	set waitfor = 0
-	for(var/obj/item/I in contents)
-		if(remove_from_storage(I, target_loc) && !neatly)
-			I.throw_at(get_edge_target_turf(I.loc, pick(global.alldirs)), rand(1,3), round(10/I.w_class))
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage)
+		for(var/obj/item/I in storage.get_contents())
+			if(storage.remove_from_storage(I, target_loc) && !neatly)
+				I.throw_at(get_edge_target_turf(I.loc, pick(global.alldirs)), rand(1,3), round(10/I.w_class))
 	update_icon()
 
 /obj/item/storage/tray/shatter(consumed)
@@ -97,8 +92,9 @@
 /obj/item/storage/tray/dump_contents(atom/forced_loc = loc, mob/user)
 	if(!isturf(forced_loc)) //to handle hand switching
 		return FALSE
-	if(user)
-		close(user)
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(user && storage)
+		storage.close(user)
 	if(!(locate(/obj/structure/table) in forced_loc) && contents.len)
 		if(user)
 			visible_message(SPAN_DANGER("Everything falls off the [name]! Good job, [user]."))
@@ -126,12 +122,6 @@
 		I.vis_flags |= VIS_INHERIT_PLANE | VIS_INHERIT_LAYER
 		I.appearance_flags |= RESET_COLOR
 		add_vis_contents(I)
-
-/obj/item/storage/tray/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
-	. = ..()
-	W.vis_flags = initial(W.vis_flags)
-	W.appearance_flags = initial(W.appearance_flags)
-	W.update_icon() // in case it updates vis_flags
 
 /obj/item/storage/tray/examine(mob/user) // So when you look at the tray you can see whats on it.
 	. = ..()

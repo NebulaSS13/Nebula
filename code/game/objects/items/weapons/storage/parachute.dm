@@ -6,8 +6,10 @@
 	var/packed = TRUE
 
 /obj/item/storage/backpack/parachute/Initialize(ml, material_key)
-	max_storage_space = round(max_storage_space * 0.5)
 	. = ..()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage)
+		storage.max_storage_space = max(1, round(storage.max_storage_space * 0.5))
 
 /obj/item/storage/backpack/parachute/examine(mob/user)
 	. = ..()

@@ -6,19 +6,19 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
-	max_w_class = ITEM_SIZE_SMALL
-	max_storage_space = 4
 	material = /decl/material/solid/organic/paper
 	matter = list(
 		/decl/material/solid/organic/cardboard = MATTER_AMOUNT_REINFORCEMENT
 	)
+	storage_type = /datum/extension/storage/bible
 	var/renamed = 0
 	var/icon_changed = 0
 
 /obj/item/storage/bible/Initialize()
 	. = ..()
-	if(length(contents))
-		make_exact_fit()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(length(contents) && storage)
+		storage.make_exact_fit()
 
 /obj/item/storage/bible/booze
 	name = "bible"
@@ -93,8 +93,9 @@
 			LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = TRUE))
 
 /obj/item/storage/bible/attackby(obj/item/W, mob/user)
-	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage?.use_sound)
+		playsound(loc, storage.use_sound, 50, 1, -5)
 	return ..()
 
 /obj/item/storage/bible/attack_self(mob/user)

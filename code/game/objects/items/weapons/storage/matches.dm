@@ -7,6 +7,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_LOWER_BODY
 	can_hold = list(/obj/item/flame/match)
+	storage_type = /datum/extension/storage/box/matches
 
 /obj/item/storage/box/matches/WillContain()
 	return list(/obj/item/flame/match = 10)

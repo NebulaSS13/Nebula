@@ -8,30 +8,19 @@
 	icon = 'icons/obj/items/storage/pillbottle.dmi'
 	item_state = "contsolid"
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_TINY
+	storage_type = /datum/extension/storage/pillbottle
 	obj_flags = OBJ_FLAG_HOLLOW
-	max_storage_space = 21
-	can_hold = list(
-		/obj/item/chems/pill,
-		/obj/item/dice,
-		/obj/item/paper
-	)
-	allow_quick_gather = 1
-	use_to_pickup = 1
-	use_sound = 'sound/effects/storage/pillbottle.ogg'
 	material = /decl/material/solid/organic/plastic
-
 	var/pop_sound = 'sound/effects/peelz.ogg'
 	var/wrapper_color
 	/// If a string, a label with this value will be added.
 	var/labeled_name = null
 
-/obj/item/storage/pill_bottle/remove_from_storage(obj/item/W, atom/new_location, NoUpdate)
-	. = ..()
-	if(. && pop_sound)
-		playsound(get_turf(src), pop_sound, 50)
-
 /obj/item/storage/pill_bottle/proc/pop_pill(var/mob/user)
+
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(!storage)
+		return FALSE
 
 	var/target_mouth = (user.get_target_zone() == BP_MOUTH)
 	if(target_mouth)
@@ -49,7 +38,7 @@
 		return TRUE
 
 	var/obj/item/chems/pill/pill = pick(pills_here)
-	if(remove_from_storage(pill, user))
+	if(storage.remove_from_storage(pill, user))
 		if(target_mouth)
 			user.visible_message(SPAN_NOTICE("\The [user] pops a pill from \the [src]."))
 			pill.use_on_mob(user, user)

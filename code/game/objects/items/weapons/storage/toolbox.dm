@@ -11,11 +11,9 @@
 	throw_speed = 1
 	throw_range = 7
 	w_class = ITEM_SIZE_LARGE
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE //enough to hold all starting contents
+	storage_type = /datum/extension/storage/toolbox
 	origin_tech = @'{"combat":1}'
 	attack_verb = list("robusted")
-	use_sound = 'sound/effects/storage/toolbox.ogg'
 	material = /decl/material/solid/metal/aluminium
 
 /obj/item/storage/toolbox/emergency

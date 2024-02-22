@@ -273,11 +273,12 @@
 			reagents.trans_to(W, taking)
 			return TRUE
 
-	if(istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		if(S.use_to_pickup && S.collection_mode)
-			S.gather_all(src, user)
-		return TRUE
+	if(istype(W, /obj/item))
+		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+		if(istype(storage))
+			if(storage.use_to_pickup && storage.collection_mode)
+				storage.gather_all(src, user)
+			return TRUE
 
 	if(istype(W, /obj/item/grab))
 		var/obj/item/grab/G = W

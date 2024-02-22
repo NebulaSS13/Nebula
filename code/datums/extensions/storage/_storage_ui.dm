@@ -1,3 +1,48 @@
+/datum/storage_ui
+	var/datum/extension/storage/_storage
+
+/datum/storage_ui/New(var/owner)
+	_storage = owner
+	..()
+
+/datum/storage_ui/Destroy()
+	if(_storage)
+		if(_storage.storage_ui == src)
+			_storage.storage_ui = null
+		_storage = null
+	. = ..()
+
+/datum/storage_ui/proc/show_to(var/mob/user)
+	return
+
+/datum/storage_ui/proc/hide_from(var/mob/user)
+	return
+
+/datum/storage_ui/proc/prepare_ui()
+	return
+
+/datum/storage_ui/proc/close_all()
+	return
+
+/datum/storage_ui/proc/on_open(var/mob/user)
+	return
+
+/datum/storage_ui/proc/after_close(var/mob/user)
+	return
+
+/datum/storage_ui/proc/on_insertion(var/mob/user)
+	return
+
+/datum/storage_ui/proc/on_pre_remove(var/mob/user, var/obj/item/W)
+	return
+
+/datum/storage_ui/proc/on_post_remove(var/mob/user, var/obj/item/W)
+	return
+
+/datum/storage_ui/proc/on_hand_attack(var/mob/user)
+	return
+
+// Default subtype
 /datum/storage_ui/default
 	var/list/is_seeing = new/list() //List of mobs which are currently seeing the contents of this item's storage
 	var/obj/screen/storage/boxes/boxes
@@ -44,9 +89,10 @@
 		user.active_storage.show_to(user)
 
 /datum/storage_ui/default/on_pre_remove(var/mob/user, var/obj/item/W)
-	for(var/mob/M in range(1, storage.loc))
-		if (M.active_storage == storage)
-			if (M.client)
+	var/atom/atom_holder = _storage?.holder
+	if(istype(atom_holder))
+		for(var/mob/M in range(1, atom_holder.loc))
+			if (M.active_storage == _storage && M.client)
 				M.client.screen -= W
 
 /datum/storage_ui/default/on_post_remove(var/mob/user)
@@ -55,12 +101,13 @@
 
 /datum/storage_ui/default/on_hand_attack(var/mob/user)
 	for(var/mob/M in range(1))
-		if (M.active_storage == storage)
-			storage.close(M)
+		if (M.active_storage == _storage)
+			_storage.close(M)
 
 /datum/storage_ui/default/show_to(var/mob/user)
-	if(user.active_storage != storage)
-		for(var/obj/item/I in storage)
+	var/list/contents = _storage?.get_contents()
+	if(user.active_storage != _storage)
+		for(var/obj/item/I in contents)
 			if(I.on_found(user))
 				return
 	if(user.active_storage)
@@ -70,17 +117,18 @@
 	user.client.screen -= storage_continue
 	user.client.screen -= storage_end
 	user.client.screen -= closer
-	user.client.screen -= storage.contents
+	user.client.screen -= contents
 	user.client.screen += closer
-	user.client.screen += storage.contents
-	if(storage.storage_slots)
+	if(length(contents))
+		user.client.screen += contents
+	if(_storage.storage_slots)
 		user.client.screen += boxes
 	else
 		user.client.screen += storage_start
 		user.client.screen += storage_continue
 		user.client.screen += storage_end
 	is_seeing |= user
-	user.active_storage = storage
+	user.active_storage = _storage
 
 /datum/storage_ui/default/hide_from(var/mob/user)
 	is_seeing -= user
@@ -91,27 +139,27 @@
 	user.client.screen -= storage_continue
 	user.client.screen -= storage_end
 	user.client.screen -= closer
-	user.client.screen -= storage.contents
-	if(user.active_storage == storage)
+	user.client.screen -= _storage.get_contents()
+	if(user.active_storage == _storage)
 		user.active_storage = null
 
 //Creates the storage UI
 /datum/storage_ui/default/prepare_ui()
 	//if storage slots is null then use the storage space UI, otherwise use the slots UI
-	if(storage.storage_slots == null)
+	if(_storage.storage_slots == null)
 		space_orient_objs()
 	else
 		slot_orient_objs()
 
 /datum/storage_ui/default/close_all()
 	for(var/mob/M in can_see_contents())
-		storage.close(M)
+		_storage.close(M)
 		. = 1
 
 /datum/storage_ui/default/proc/can_see_contents()
 	var/list/cansee = list()
 	for(var/mob/M in is_seeing)
-		if(M.active_storage == storage && M.client)
+		if(M.active_storage == _storage && M.client)
 			cansee |= M
 		else
 			is_seeing -= M
@@ -123,7 +171,7 @@
 	var/cx = tx
 	var/cy = ty
 	boxes.screen_loc = "LEFT+[tx],BOTTOM+[ty] to LEFT+[mx],BOTTOM+[my]"
-	for(var/obj/O in storage.contents)
+	for(var/obj/O in _storage.get_contents())
 		O.screen_loc = "LEFT+[cx],BOTTOM+[cy]"
 		O.hud_layerise()
 		cx++
@@ -135,9 +183,9 @@
 
 //This proc determins the size of the inventory to be displayed. Please touch it only if you know what you're doing.
 /datum/storage_ui/default/proc/slot_orient_objs()
-	var/adjusted_contents = storage.contents.len
+	var/adjusted_contents = length(_storage.get_contents())
 	var/row_num = 0
-	var/col_count = min(7,storage.storage_slots) -1
+	var/col_count = min(7,_storage.storage_slots) -1
 	if (adjusted_contents > 7)
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, col_count)
@@ -152,7 +200,7 @@
 	var/cy = SCREEN_LOC_MOD_SECOND + rows
 	boxes.screen_loc = "LEFT+[SCREEN_LOC_MOD_FIRST]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND]:[SCREEN_LOC_MOD_DIVIDED] to LEFT+[SCREEN_LOC_MOD_FIRST + cols]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[SCREEN_LOC_MOD_SECOND + rows]:[SCREEN_LOC_MOD_DIVIDED]"
 
-	for(var/obj/O in storage.contents)
+	for(var/obj/O in _storage.get_contents())
 		O.screen_loc = "LEFT+[cx]:[SCREEN_LOC_MOD_DIVIDED],BOTTOM+[cy]:[SCREEN_LOC_MOD_DIVIDED]"
 		O.maptext = ""
 		O.hud_layerise()
@@ -168,7 +216,7 @@
 	var/baseline_max_storage_space = DEFAULT_BOX_STORAGE //storage size corresponding to 224 pixels
 	var/storage_cap_width = 2 //length of sprite for start and end of the box representing total storage space
 	var/stored_cap_width = 4 //length of sprite for start and end of the box representing the stored item
-	var/storage_width = min( round( 224 * storage.max_storage_space/baseline_max_storage_space ,1) ,284) //length of sprite for the box representing total storage space
+	var/storage_width = min( round( 224 * _storage.max_storage_space/baseline_max_storage_space ,1) ,284) //length of sprite for the box representing total storage space
 
 	storage_start.overlays.Cut()
 
@@ -183,9 +231,9 @@
 	var/startpoint = 0
 	var/endpoint = 1
 
-	for(var/obj/item/O in storage.contents)
+	for(var/obj/item/O in _storage.get_contents())
 		startpoint = endpoint + 1
-		endpoint += storage_width * O.get_storage_cost()/storage.max_storage_space
+		endpoint += storage_width * O.get_storage_cost()/_storage.max_storage_space
 
 		var/matrix/M_start = matrix()
 		var/matrix/M_continue = matrix()
@@ -210,10 +258,10 @@
 // Sets up numbered display to show the stack size of each stored mineral
 // NOTE: numbered display is turned off currently because it's broken
 /datum/storage_ui/default/sheetsnatcher/prepare_ui(var/mob/user)
-	var/adjusted_contents = storage.contents.len
+	var/adjusted_contents = length(_storage.get_contents())
 
 	var/row_num = 0
-	var/col_count = min(7,storage.storage_slots) -1
+	var/col_count = min(7,_storage.storage_slots) -1
 	if (adjusted_contents > 7)
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, col_count)

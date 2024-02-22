@@ -82,13 +82,14 @@ var/global/list/diversion_junctions = list()
 		return
 
 	if(istype(I, /obj/item/storage/bag/trash))
-		var/obj/item/storage/bag/trash/T = I
-		to_chat(user, "<span class='notice'>You empty the bag.</span>")
-		for(var/obj/item/O in T.contents)
-			T.remove_from_storage(O,src, 1)
-		T.finish_bulk_removal()
-		update_icon()
-		return
+		var/datum/extension/storage/trash_storage = get_extension(I, /datum/extension/storage)
+		if(trash_storage)
+			to_chat(user, "<span class='notice'>You empty the bag.</span>")
+			for(var/obj/item/O in trash_storage.get_contents())
+				trash_storage.remove_from_storage(O, src, 1)
+			trash_storage.finish_bulk_removal()
+			update_icon()
+			return
 
 	var/obj/item/grab/G = I
 	if(istype(G))	// handle grabbed mob

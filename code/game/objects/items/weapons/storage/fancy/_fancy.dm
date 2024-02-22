@@ -14,7 +14,8 @@
 
 /obj/item/storage/box/fancy/proc/update_icon_state()
 	icon_state = initial(icon_state)
-	if(key_type && opened)
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(key_type && storage?.opened)
 		icon_state = "[icon_state][count_by_type(contents, key_type)]"
 
 /obj/item/storage/box/fancy/proc/add_contents_overlays()

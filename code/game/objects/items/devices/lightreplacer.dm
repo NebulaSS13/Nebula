@@ -65,21 +65,22 @@
 /obj/item/lightreplacer/resolve_attackby(var/atom/A, mob/user)
 
 	//Check for lights in a container, refilling our charges.
-	if(istype(A, /obj/item/storage/))
-		var/obj/item/storage/S = A
-		var/amt_inserted = 0
-		var/turf/T = get_turf(user)
-		for(var/obj/item/light/L in S.contents)
-			if(!user.stat && src.uses < src.max_uses && L.status == 0)
-				src.AddUses(1)
-				amt_inserted++
-				S.remove_from_storage(L, T, 1)
-				qdel(L)
-		S.finish_bulk_removal()
-		if(amt_inserted)
-			to_chat(user, "You insert [amt_inserted] light\s into \The [src]. It has [uses] light\s remaining.")
-			add_fingerprint(user)
-			return
+	if(isobj(A))
+		var/datum/extension/storage/storage = get_extension(A, /datum/extension/storage)
+		if(storage)
+			var/amt_inserted = 0
+			var/turf/T = get_turf(user)
+			for(var/obj/item/light/L in storage.get_contents())
+				if(!user.stat && src.uses < src.max_uses && L.status == 0)
+					src.AddUses(1)
+					amt_inserted++
+					storage.remove_from_storage(L, T, 1)
+					qdel(L)
+			storage.finish_bulk_removal()
+			if(amt_inserted)
+				to_chat(user, "You insert [amt_inserted] light\s into \The [src]. It has [uses] light\s remaining.")
+				add_fingerprint(user)
+				return
 
 	//Actually replace the light.
 	if(istype(A, /obj/machinery/light/))
