@@ -186,7 +186,8 @@
 				reagents.trans_to_obj(P,amount_per_pill)
 				P.update_icon()
 				if(loaded_pill_bottle)
-					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.max_storage_space)
+					var/datum/extension/storage/bottle = get_extension(loaded_pill_bottle, /datum/extension/storage)
+					if(bottle && loaded_pill_bottle.contents.len < bottle.max_storage_space)
 						P.forceMove(loaded_pill_bottle)
 
 		else if (href_list["createbottle"])
@@ -261,8 +262,9 @@
 	dat += "[name] Menu:"
 	if(!beaker)
 		dat += "Please insert beaker.<BR>"
-		if(loaded_pill_bottle)
-			dat += "<A href='?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.max_storage_space]\]</A><BR><BR>"
+		var/datum/extension/storage/bottle = loaded_pill_bottle && get_extension(loaded_pill_bottle, /datum/extension/storage)
+		if(bottle)
+			dat += "<A href='?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[bottle.max_storage_space]\]</A><BR><BR>"
 		else
 			dat += "No pill bottle inserted.<BR><BR>"
 		dat += "<A href='?src=\ref[src];close=1'>Close</A>"
@@ -270,8 +272,9 @@
 		var/datum/reagents/R = beaker.reagents
 		dat += "<A href='?src=\ref[src];eject=1'>Eject beaker and Clear Buffer</A><BR>"
 		dat += "Toggle purification mode: <A href='?src=\ref[src];toggle_sloppy=1'>[sloppy ? "Quick" : "Thorough"]</A><BR>"
-		if(loaded_pill_bottle)
-			dat += "<A href='?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.max_storage_space]\]</A><BR><BR>"
+		var/datum/extension/storage/bottle = loaded_pill_bottle && get_extension(loaded_pill_bottle, /datum/extension/storage)
+		if(bottle)
+			dat += "<A href='?src=\ref[src];ejectp=1'>Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[bottle.max_storage_space]\]</A><BR><BR>"
 		else
 			dat += "No pill bottle inserted.<BR><BR>"
 		if(!R.total_volume)

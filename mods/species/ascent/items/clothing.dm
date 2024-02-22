@@ -71,6 +71,9 @@
 
 /obj/item/clothing/suit/storage/ascent/Initialize()
 	. = ..()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(!storage)
+		return
 	for(var/tool in list(
 		/obj/item/gun/energy/particle/small,
 		/obj/item/multitool/mantid,
@@ -80,7 +83,8 @@
 		/obj/item/stack/medical/resin
 	))
 		allowed |= tool
-		new tool(pockets)
-	pockets.make_exact_fit()
+		storage.handle_item_insertion(new tool(src))
+	if(length(storage.get_contents()))
+		storage.make_exact_fit()
+		storage.can_hold |= /obj/item/chems/drinks/cans/waterbottle/ascent
 	allowed |= /obj/item/chems/drinks/cans/waterbottle/ascent
-	pockets.can_hold |= /obj/item/chems/drinks/cans/waterbottle/ascent

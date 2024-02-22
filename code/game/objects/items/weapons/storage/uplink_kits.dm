@@ -1,6 +1,7 @@
 /proc/fill_cigarre_package(var/obj/item/storage/box/fancy/cigarettes/C, var/list/reagents)
+	var/datum/extension/storage/storage = get_extension(C, /datum/extension/storage)
 	for(var/reagent in reagents)
-		C.add_to_reagents(reagent, reagents[reagent] * C.max_storage_space)
+		C.add_to_reagents(reagent, reagents[reagent] * max(1, storage?.max_storage_space))
 
 /obj/item/storage/box/syndie_kit
 	name = "box"
@@ -150,8 +151,9 @@
 
 /obj/item/storage/secure/briefcase/heavysniper/Initialize(ml, material_key)
 	. = ..()
-	if(length(contents))
-		make_exact_fit()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(length(contents) && storage)
+		storage.make_exact_fit()
 
 /obj/item/storage/secure/briefcase/money/WillContain()
 	return list(/obj/item/cash/c1000 = 10)

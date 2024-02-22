@@ -20,7 +20,7 @@
 	name = "incense box"
 	desc = "A pack of 'Tres' brand incense cones, in a variety of scents."
 	icon_state = "incensebox"
-	max_storage_space = 9
+	storage_type = /datum/extension/storage/box/incense
 
 /obj/item/storage/candle_box/incense/WillContain()
 	return list(/obj/item/flame/candle/scented/incense = 9)

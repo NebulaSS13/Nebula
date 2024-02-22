@@ -59,10 +59,13 @@
 	var/bad_tests = 0
 
 	// obj/item/storage/internal cannot be tested sadly, as they expect their host object to create them
-	for(var/storage_type in subtypesof(/obj/item/storage) - typesof(/obj/item/storage/internal))
-		var/obj/item/storage/S = new storage_type(null) //should be fine to put it in nullspace...
-		var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\]"
-		bad_tests += test_storage_capacity(S, bad_msg)
+	for(var/storage_type in typesof(/obj))
+		var/obj/thing = storage_type
+		if(TYPE_IS_ABSTRACT(thing) || !ispath(initial(thing.storage_type), /datum/extension/storage))
+			continue
+		thing = new thing //should be fine to put it in nullspace...
+		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type]/[thing.storage_type]\]"
+		bad_tests += test_storage_capacity(thing, get_extension(thing, /datum/extension/storage), bad_msg)
 
 	if(bad_tests)
 		fail("\[[bad_tests]\] Some storage item types were not able to hold their default initial contents.")
@@ -71,25 +74,28 @@
 
 	return 1
 
-/proc/test_storage_capacity(obj/item/storage/S, var/bad_msg)
+/proc/test_storage_capacity(obj/thing, datum/extension/storage/storage, bad_msg)
 	var/bad_tests = 0
-
-	if(!isnull(S.storage_slots) && S.contents.len > S.storage_slots)
-		log_unit_test("[bad_msg] Contains more items than it has slots for ([S.contents.len] / [S.storage_slots]). [ascii_reset]")
+	var/list/contents = storage?.get_contents()
+	if(isnull(storage))
+		log_unit_test("[bad_msg] Null storage extension. [ascii_reset]")
+		bad_tests++
+	else if(!isnull(storage.storage_slots) && length(contents) > storage.storage_slots)
+		log_unit_test("[bad_msg] Contains more items than it has slots for ([length(contents)] / [storage.storage_slots]). [ascii_reset]")
 		bad_tests++
 
 	var/total_storage_space = 0
-	for(var/obj/item/I in S.contents)
-		if(I.w_class > S.max_w_class)
-			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [S.max_w_class]). [ascii_reset]")
+	for(var/obj/item/I in contents)
+		if(I.w_class > storage.max_w_class)
+			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [storage.max_w_class]). [ascii_reset]")
 			bad_tests++
-		if(istype(I, /obj/item/storage) && I.w_class >= S.w_class)
-			log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [S.w_class]). [ascii_reset]")
+		if(has_extension(I, /datum/extension/storage) && I.w_class >= thing.w_class)
+			log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [thing.w_class]). [ascii_reset]")
 			bad_tests++
 		total_storage_space += I.get_storage_cost()
 
-	if(total_storage_space > S.max_storage_space)
-		log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [S.max_storage_space]). [ascii_reset]")
+	if(total_storage_space > storage.max_storage_space)
+		log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [storage.max_storage_space]). [ascii_reset]")
 		bad_tests++
 
 	return bad_tests

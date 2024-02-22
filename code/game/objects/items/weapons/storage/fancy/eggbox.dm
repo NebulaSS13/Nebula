@@ -7,24 +7,20 @@
 	icon = 'icons/obj/food/containers/eggbox.dmi'
 	icon_state = ICON_STATE_WORLD
 	item_state = null
-	storage_slots = 12
-	max_w_class = ITEM_SIZE_SMALL
-	max_storage_space = ITEM_SIZE_SMALL * 12
 	w_class = ITEM_SIZE_NORMAL
 	key_type = /obj/item/chems/food/egg
 	use_single_icon_overlay_state = "eggbox"
-	can_hold = list(
-		/obj/item/chems/food/egg,
-		/obj/item/chems/food/boiledegg
-	)
+	storage_type = /datum/extension/storage/box/egg
 
 /obj/item/storage/box/fancy/egg_box/update_icon_state()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	icon_state = get_world_inventory_state()
-	if(opened)
+	if(storage?.opened)
 		icon_state = "[icon_state]_open"
 
 /obj/item/storage/box/fancy/egg_box/add_contents_overlays()
-	return opened && ..()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	return storage?.opened && ..()
 
 /obj/item/storage/box/fancy/egg_box/adjust_contents_overlay(var/overlay_index, var/image/overlay)
 	if(overlay)

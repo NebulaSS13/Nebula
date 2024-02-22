@@ -1,8 +1,6 @@
 /obj/item/storage/mech
 	w_class = ITEM_SIZE_NO_CONTAINER
-	max_w_class = ITEM_SIZE_LARGE
-	storage_slots = 4
-	use_sound = 'sound/effects/storage/toolbox.ogg'
+	storage_type = /datum/extension/storage/mech
 	anchored = TRUE
 	max_health = ITEM_HEALTH_NO_DAMAGE
 

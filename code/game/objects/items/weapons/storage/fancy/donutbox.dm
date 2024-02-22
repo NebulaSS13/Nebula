@@ -7,9 +7,8 @@
 	icon = 'icons/obj/food/containers/donutbox.dmi'
 	icon_state = ICON_STATE_WORLD
 	item_state = null
-	max_storage_space = ITEM_SIZE_SMALL * 6
-	can_hold = list(/obj/item/chems/food/donut)
 	use_single_icon_overlay_state = "donutbox"
+	storage_type = /datum/extension/storage/box/donut
 
 /obj/item/storage/box/fancy/donut/update_icon_state()
 	icon_state = get_world_inventory_state()

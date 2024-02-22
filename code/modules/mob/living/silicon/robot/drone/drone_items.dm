@@ -210,12 +210,11 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			if(I == user.active_storage)
-				var/obj/item/storage/storage = I
-				storage.close(user) //Closes the ui.
-			if(istype(I.loc, /obj/item/storage))
-				var/obj/item/storage/storage = I.loc
-				if(!storage.remove_from_storage(I, src))
+			if(I == user.active_storage?.holder)
+				user.active_storage.close(user) //Closes the ui.
+			var/datum/extension/storage/loc_storage = get_extension(I.loc, /datum/extension/storage)
+			if(loc_storage)
+				if(!loc_storage.remove_from_storage(I, src))
 					return
 			else
 				I.forceMove(src)

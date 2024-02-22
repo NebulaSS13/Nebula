@@ -4,36 +4,37 @@
 /obj/item/storage/get_mechanics_info()
 	. = ..()
 	var/list/storage_info_list = list()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage)
+		storage_info_list += "Storage items are holdable or wearable objects used for storing items. You can hold an appropriate item in your hand and click on the storage item to put the item inside. You can then take items out by accessing the storage UI. To do this, either hold the storage in your hand and click it with the other, or click+drag the storage item onto yourself (this works if the storage item is not being held too!).<BR>"
 
-	storage_info_list += "Storage items are holdable or wearable objects used for storing items. You can hold an appropriate item in your hand and click on the storage item to put the item inside. You can then take items out by accessing the storage UI. To do this, either hold the storage in your hand and click it with the other, or click+drag the storage item onto yourself (this works if the storage item is not being held too!).<BR>"
+		if(storage.can_hold.len)
+			storage_info_list += "* It can only hold specific items."
 
-	if(can_hold.len)
-		storage_info_list += "* It can only hold specific items."
+		switch(storage.max_w_class)
+			if(ITEM_SIZE_TINY)
+				storage_info_list += "* It can only hold tiny sized items."
+			if(ITEM_SIZE_SMALL)
+				storage_info_list += "* It can hold small sized items, and tiny sized items."
+			if(ITEM_SIZE_NORMAL)
+				storage_info_list += "* It can hold normal sized items, and anything smaller."
+			if(ITEM_SIZE_LARGE)
+				storage_info_list += "* It can hold large sized items, and anything smaller."
+			if(ITEM_SIZE_HUGE)
+				storage_info_list += "* It can hold huge sized items, and anything smaller."
+			if(ITEM_SIZE_GARGANTUAN)
+				storage_info_list += "* It can hold gargantuan sized items, and anything smaller!"
+		if(storage.max_storage_space)
+			storage_info_list += "* It has a capacity of [storage.max_storage_space]. (That means it could potentially hold that many tiny items, or half that many small items.)"
+		if(storage.storage_slots)
+			storage_info_list += "* It has [storage.storage_slots] slots for items."
 
-	switch(max_w_class)
-		if(ITEM_SIZE_TINY)
-			storage_info_list += "* It can only hold tiny sized items."
-		if(ITEM_SIZE_SMALL)
-			storage_info_list += "* It can hold small sized items, and tiny sized items."
-		if(ITEM_SIZE_NORMAL)
-			storage_info_list += "* It can hold normal sized items, and anything smaller."
-		if(ITEM_SIZE_LARGE)
-			storage_info_list += "* It can hold large sized items, and anything smaller."
-		if(ITEM_SIZE_HUGE)
-			storage_info_list += "* It can hold huge sized items, and anything smaller."
-		if(ITEM_SIZE_GARGANTUAN)
-			storage_info_list += "* It can hold gargantuan sized items, and anything smaller!"
-	if(max_storage_space)
-		storage_info_list += "* It has a capacity of [max_storage_space]. (That means it could potentially hold that many tiny items, or half that many small items.)"
-	if(storage_slots)
-		storage_info_list += "* It has [storage_slots] slots for items."
-
-	if(use_to_pickup)
-		storage_info_list += "* You can hold this storage item in your hand and click on valid items with it to put them into the storage item."
-	if(allow_quick_empty)
-		storage_info_list += "* It can use the 'empty' object verb to drop all the contents where you stand."
-	if(allow_quick_gather)
-		storage_info_list += "* It can use the 'toggle-mode' object verb which allows gathering all valid objects at a location by clicking on the turf under them."
+		if(storage.use_to_pickup)
+			storage_info_list += "* You can hold this storage item in your hand and click on valid items with it to put them into the storage item."
+		if(storage.allow_quick_empty)
+			storage_info_list += "* It can use the 'empty' object verb to drop all the contents where you stand."
+		if(storage.allow_quick_gather)
+			storage_info_list += "* It can use the 'toggle-mode' object verb which allows gathering all valid objects at a location by clicking on the turf under them."
 
 	var/list/slots = list()
 	for(var/name in string_slot_flags)

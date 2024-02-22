@@ -106,9 +106,11 @@
 			// Store any held or equipped items.
 			var/obj/item/storage/backpack/pack = victim.get_equipped_item(slot_back_str)
 			if(istype(pack))
-				for(var/atom/movable/thing in victim.get_held_items())
-					victim.drop_from_inventory(thing)
-					pack.handle_item_insertion(thing)
+				var/datum/extension/storage/storage = get_extension(pack, /datum/extension/storage)
+				if(storage)
+					for(var/atom/movable/thing in victim.get_held_items())
+						victim.drop_from_inventory(thing)
+						storage.handle_item_insertion(thing)
 
 			C.set_occupant(victim, 1)
 			SET_STATUS_MAX(victim, STAT_ASLEEP, rand(1,3))

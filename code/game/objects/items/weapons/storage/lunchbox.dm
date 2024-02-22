@@ -1,13 +1,12 @@
 /obj/item/storage/lunchbox
-	max_storage_space = 8 //slightly smaller than a toolbox
 	name = "rainbow lunchbox"
 	desc = "A little lunchbox. This one is the colors of the rainbow!"
 	icon = 'icons/obj/items/storage/lunchboxes/lunchbox_rainbow.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
-	max_w_class = ITEM_SIZE_SMALL
 	attack_verb = list("lunched")
 	material = /decl/material/solid/organic/plastic
+	storage_type = /datum/extension/storage/lunchbox
 	var/tmp/filled = FALSE
 
 /obj/item/storage/lunchbox/WillContain()

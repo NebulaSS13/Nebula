@@ -477,13 +477,13 @@
 			to_chat(user, "<span class='notice'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
 
 	else if (istype(O, /obj/item/storage/plants))
-
 		physical_attack_hand(user) // Harvests and clears out dead plants.
-		var/obj/item/storage/plants/S = O
-		for (var/obj/item/chems/food/grown/G in locate(user.x,user.y,user.z))
-			if(!S.can_be_inserted(G, user))
-				return
-			S.handle_item_insertion(G, 1)
+		var/datum/extension/storage/storage = get_extension(O, /datum/extension/storage)
+		if(storage)
+			for (var/obj/item/chems/food/grown/G in get_turf(user))
+				if(!storage.can_be_inserted(G, user))
+					return
+				storage.handle_item_insertion(G, 1)
 
 	else if ( istype(O, /obj/item/plantspray) )
 

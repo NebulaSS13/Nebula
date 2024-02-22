@@ -194,18 +194,18 @@
 		update_icon()
 		return TRUE
 
-	if(istype(O, /obj/item/storage))
-		var/obj/item/storage/bag/P = O
+	var/datum/extension/storage/storage = isobj(O) && get_extension(O, /datum/extension/storage)
+	if(storage)
 		var/plants_loaded = 0
-		for(var/obj/G in P.contents)
-			if(accept_check(G) && P.remove_from_storage(G, src, 1))
+		for(var/obj/G in storage.get_contents())
+			if(accept_check(G) && storage.remove_from_storage(G, src, 1))
 				plants_loaded++
 				stock_item(G)
-		P.finish_bulk_removal()
+		storage.finish_bulk_removal()
 
 		if(plants_loaded)
-			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [P].</span>", "<span class='notice'>You load \the [src] with the contents of \the [P].</span>")
-			if(P.contents.len > 0)
+			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [O].</span>", "<span class='notice'>You load \the [src] with the contents of \the [O].</span>")
+			if(length(storage.get_contents()) > 0)
 				to_chat(user, "<span class='notice'>Some items were refused.</span>")
 		return TRUE
 	return ..()

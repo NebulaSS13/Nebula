@@ -8,12 +8,11 @@
 	icon_state = "cigpacket"
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_LOWER_BODY
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	atom_flags = ATOM_FLAG_NO_CHEM_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	storage_type = /datum/extension/storage/box/cigarettes
 
 /obj/item/storage/box/fancy/cigarettes/WillContain()
 	return list(/obj/item/clothing/mask/smokable/cigarette = 6)
@@ -23,15 +22,9 @@
 	initialize_reagents()
 
 /obj/item/storage/box/fancy/cigarettes/initialize_reagents(populate)
-	create_reagents(5 * max_storage_space)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	create_reagents(5 * max(storage?.max_storage_space, 1)) //so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 	. = ..()
-
-/obj/item/storage/box/fancy/cigarettes/remove_from_storage(obj/item/W, atom/new_location)
-	// Don't try to transfer reagents to lighters
-	if(istype(W, /obj/item/clothing/mask/smokable/cigarette))
-		var/obj/item/clothing/mask/smokable/cigarette/C = W
-		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
-	..()
 
 /obj/item/storage/box/fancy/cigarettes/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!ismob(M))
@@ -55,7 +48,9 @@
 
 		// We call remove_from_storage first to manage the reagent transfer and
 		// UI updates.
-		remove_from_storage(cig, null)
+
+		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+		storage?.remove_from_storage(cig, null)
 		user.equip_to_slot(cig, slot_wear_mask_str)
 
 		reagents.maximum_volume = 5 * contents.len
@@ -83,7 +78,8 @@
 	return list(/obj/item/clothing/mask/smokable/cigarette/killthroat = 6)
 
 /obj/item/storage/box/fancy/cigarettes/killthroat/populate_reagents()
-	add_to_reagents(/decl/material/liquid/fuel, (max_storage_space * 4))
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	add_to_reagents(/decl/material/liquid/fuel, (max(1, storage?.max_storage_space) * 4))
 
 // New exciting ways to kill your lungs! - Earthcrusher //
 
@@ -145,8 +141,8 @@
 	icon = 'icons/obj/items/storage/cigpack/cigarillo.dmi'
 	icon_state = "CRpacket"
 	item_state = "Dpacket"
-	max_storage_space = 5
 	key_type = /obj/item/clothing/mask/smokable/cigarette/trident
+	storage_type = /datum/extension/storage/box/cigarettes/cigarello
 
 /obj/item/storage/box/fancy/cigarettes/cigarello/WillContain()
 	return list(/obj/item/clothing/mask/smokable/cigarette/trident = 5)
@@ -193,6 +189,8 @@
 		desc = "[initial(desc)] 'F' has been scribbled on it."
 
 /obj/item/storage/box/fancy/cigarettes/flash_powder/populate_reagents()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	var/max_storage_space = max(1, storage?.max_storage_space)
 	add_to_reagents(/decl/material/solid/metal/aluminium, max_storage_space)
 	add_to_reagents(/decl/material/solid/potassium,       max_storage_space)
 	add_to_reagents(/decl/material/solid/sulfur,          max_storage_space)
@@ -211,6 +209,8 @@
 		desc = "[initial(desc)] 'S' has been scribbled on it."
 
 /obj/item/storage/box/fancy/cigarettes/chemsmoke/populate_reagents()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	var/max_storage_space = max(1, storage?.max_storage_space)
 	add_to_reagents(/decl/material/solid/potassium,        max_storage_space)
 	add_to_reagents(/decl/material/liquid/nutriment/sugar, max_storage_space)
 	add_to_reagents(/decl/material/solid/phosphorus,       max_storage_space)
@@ -229,6 +229,8 @@
 		desc = "[initial(desc)] 'MB' has been scribbled on it." //#TODO: maybe fix the lore for that?
 
 /obj/item/storage/box/fancy/cigarettes/mindbreak/populate_reagents()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	var/max_storage_space = max(1, storage?.max_storage_space)
 	add_to_reagents(/decl/material/solid/silicon,         max_storage_space)
 	add_to_reagents(/decl/material/liquid/fuel/hydrazine, max_storage_space)
 	add_to_reagents(/decl/material/liquid/antitoxins,     max_storage_space)
@@ -247,4 +249,6 @@
 		desc = "[initial(desc)] 'T' has been scribbled on it." //#TODO: maybe fix the lore for that?
 
 /obj/item/storage/box/fancy/cigarettes/tricord/populate_reagents()
-	add_to_reagents(/decl/material/liquid/regenerator, (4 * max_storage_space))
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	var/max_storage_space = max(1, storage?.max_storage_space)
+	add_to_reagents(/decl/material/liquid/regenerator, (4 * max(1, storage?.max_storage_space)))

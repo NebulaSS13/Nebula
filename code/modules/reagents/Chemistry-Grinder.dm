@@ -71,29 +71,30 @@
 		return FALSE
 
 	if(is_type_in_list(O, bag_whitelist))
-		var/obj/item/storage/bag = O
-		var/failed = TRUE
-		for(var/obj/item/G in O)
-			if(!G.reagents || !G.reagents.total_volume)
-				continue
-			failed = FALSE
-			bag.remove_from_storage(G, src)
-			holdingitems += G
-			if(LAZYLEN(holdingitems) >= limit)
-				break
+		var/datum/extension/storage/bag = get_extension(O, /datum/extension/storage)
+		if(bag)
+			var/failed = TRUE
+			for(var/obj/item/G in O)
+				if(!G.reagents || !G.reagents.total_volume)
+					continue
+				failed = FALSE
+				bag.remove_from_storage(G, src)
+				holdingitems += G
+				if(LAZYLEN(holdingitems) >= limit)
+					break
 
-		if(failed)
-			to_chat(user, SPAN_NOTICE("Nothing in \the [O] is usable."))
-			return TRUE
-		bag.finish_bulk_removal()
+			if(failed)
+				to_chat(user, SPAN_NOTICE("Nothing in \the [O] is usable."))
+				return TRUE
+			bag.finish_bulk_removal()
 
-		if(!length(O.contents))
-			to_chat(user, "You empty \the [O] into \the [src].")
-		else
-			to_chat(user, "You fill \the [src] from \the [O].")
+			if(!length(O.contents))
+				to_chat(user, "You empty \the [O] into \the [src].")
+			else
+				to_chat(user, "You fill \the [src] from \the [O].")
 
-		SSnano.update_uis(src)
-		return FALSE
+			SSnano.update_uis(src)
+			return FALSE
 
 	if(O.w_class > item_size_limit)
 		to_chat(user, SPAN_NOTICE("\The [src] cannot fit \the [O]."))

@@ -258,17 +258,18 @@ var/global/list/closets = list()
 			return TRUE
 
 		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
-			var/obj/item/storage/laundry_basket/LB = W
-			var/turf/T = get_turf(src)
-			for(var/obj/item/I in LB.contents)
-				LB.remove_from_storage(I, T, 1)
-			LB.finish_bulk_removal()
-			user.visible_message(
-				SPAN_NOTICE("\The [user] empties \the [LB] into \the [src]."),
-				SPAN_NOTICE("You empty \the [LB] into \the [src]."),
-				SPAN_NOTICE("You hear rustling of clothes.")
-			)
-			return TRUE
+			var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
+			if(storage)
+				var/turf/T = get_turf(src)
+				for(var/obj/item/I in storage.get_contents())
+					storage.remove_from_storage(I, T, 1)
+				storage.finish_bulk_removal()
+				user.visible_message(
+					SPAN_NOTICE("\The [user] empties \the [W] into \the [src]."),
+					SPAN_NOTICE("You empty \the [W] into \the [src]."),
+					SPAN_NOTICE("You hear rustling of clothes.")
+				)
+				return TRUE
 
 		if(user.try_unequip(W, loc))
 			W.pixel_x = 0

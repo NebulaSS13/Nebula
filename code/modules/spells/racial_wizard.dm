@@ -35,16 +35,11 @@
 	to_chat(user, "\The [src] crumbles in your hands.")
 	qdel(src)
 
-/obj/item/storage/bag/cash/infinite/WillContain()
-	return /obj/item/cash/c1000
+/obj/item/storage/bag/cash/infinite
+	storage_type = /datum/extension/storage/bag/cash/infinite
 
-//HUMAN
-/obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W, atom/new_location)
-	. = ..()
-	if(.)
-		if(istype(W,/obj/item/cash)) //only matters if its spacecash.
-			var/obj/item/I = new /obj/item/cash/c1000()
-			src.handle_item_insertion(I,1)
+/obj/item/storage/bag/cash/infinite/WillContain()
+	return list(/obj/item/cash/c1000)
 
 /spell/messa_shroud/choose_targets()
 	return list(get_turf(holder))

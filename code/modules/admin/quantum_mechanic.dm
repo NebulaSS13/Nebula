@@ -152,8 +152,7 @@
 
 // Bag o Holding
 /obj/item/storage/backpack/holding/quantum
-	storage_slots = 56
-	max_w_class = 400
+	storage_type = /datum/extension/storage/bag/quantum
 
 /obj/item/storage/backpack/holding/quantum/attack_hand(mob/user)
 	if(!user)

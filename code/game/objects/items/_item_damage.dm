@@ -33,6 +33,10 @@
 	// we do not use get_cell() here as some devices may return a non-extension cell
 	var/datum/extension/loaded_cell/cell_loaded = get_extension(src, /datum/extension/loaded_cell)
 	var/obj/item/cell/cell = cell_loaded?.get_cell()
+	for(var/obj/O in contents)
+		if(O == cell)
+			continue
+		O.emp_act(severity)
 	if(cell)
 		cell.emp_act(severity)
 		update_icon()

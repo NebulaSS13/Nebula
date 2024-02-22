@@ -4,44 +4,7 @@
 	icon = 'icons/obj/items/wallet.dmi'
 	icon_state = "wallet-white"
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_SMALL //Don't worry, see can_hold[]
-	max_storage_space = 8
-	can_hold = list(
-		/obj/item/cash,
-		/obj/item/card,
-		/obj/item/clothing/mask/smokable,
-		/obj/item/cosmetics,
-		/obj/item/grooming,
-		/obj/item/mirror,
-		/obj/item/clothing/accessory/locket,
-		/obj/item/clothing/head/hairflower,
-		/obj/item/flashlight/pen,
-		/obj/item/flashlight,
-		/obj/item/seeds,
-		/obj/item/coin,
-		/obj/item/dice,
-		/obj/item/disk,
-		/obj/item/implant,
-		/obj/item/implanter,
-		/obj/item/flame,
-		/obj/item/paper,
-		/obj/item/paper_bundle,
-		/obj/item/passport,
-		/obj/item/pen,
-		/obj/item/photo,
-		/obj/item/chems/dropper,
-		/obj/item/chems/syringe,
-		/obj/item/chems/pill,
-		/obj/item/chems/hypospray/autoinjector,
-		/obj/item/chems/glass/beaker/vial,
-		/obj/item/radio/headset,
-		/obj/item/paicard,
-		/obj/item/stamp,
-		/obj/item/key,
-		/obj/item/clothing/accessory/badge,
-		/obj/item/clothing/accessory/medal,
-		/obj/item/clothing/accessory/armor/tag,
-		)
+	storage_type = /datum/extension/storage/wallet
 	slot_flags = SLOT_ID
 	material = /decl/material/solid/organic/leather
 
@@ -59,25 +22,6 @@
 		front_stick.dropInto(loc)
 		front_stick = null
 	. = ..()
-
-/obj/item/storage/wallet/remove_from_storage(obj/item/W, atom/new_location)
-	. = ..(W, new_location)
-	if(.)
-		if(W == front_id)
-			front_id = null
-			SetName(initial(name))
-			update_icon()
-		if(W == front_stick)
-			front_stick = null
-
-/obj/item/storage/wallet/handle_item_insertion(obj/item/W, prevent_warning = 0)
-	. = ..(W, prevent_warning)
-	if(.)
-		if(!front_id && istype(W, /obj/item/card/id))
-			front_id = W
-			update_icon()
-		if(!front_stick && istype(W, /obj/item/charge_stick))
-			front_stick = W
 
 /obj/item/storage/wallet/on_update_icon()
 	. = ..()
@@ -150,8 +94,10 @@
 	. = ..() && ishuman(user)
 
 /decl/interaction_handler/remove_id/wallet/invoked(atom/target, mob/user, obj/item/prop)
-	var/obj/item/storage/wallet/W = target
-	var/obj/item/card/id/id = W.GetIdCard()
-	if (istype(id))
-		W.remove_from_storage(id)
-		user.put_in_hands(id)
+	var/datum/extension/storage/storage = get_extension(target, /datum/extension/storage)
+	if(storage)
+		var/atom/movable/atom_target = target
+		var/obj/item/card/id/id = atom_target.GetIdCard()
+		if (istype(id))
+			storage.remove_from_storage(id)
+			user.put_in_hands(id)

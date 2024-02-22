@@ -12,24 +12,25 @@
 	fire_sound = 'sound/weapons/tablehit1.ogg'
 
 	var/fire_pressure                           // Used in fire checks/pressure checks.
-	var/max_w_class = ITEM_SIZE_NORMAL          // Hopper intake size.
-	var/max_storage_space = DEFAULT_BOX_STORAGE // Total internal storage size.
 	var/obj/item/tank/tank = null               // Tank of gas for use in firing the cannon.
 
-	var/obj/item/storage/item_storage
+	var/obj/item/storage/hopper/item_storage = /obj/item/storage/hopper
 	var/possible_pressure_amounts = list(5,10,20,25,50) // Possible pressure settings.
 	var/pressure_setting = 10                   // Percentage of the gas in the tank used to fire the projectile.
 	var/force_divisor = 400                     // Force equates to speed. Speed/5 equates to a damage multiplier for whoever you hit.
 	                                            // For reference, a fully pressurized oxy tank at 50% gas release firing a health
 	                                            // analyzer with a force_divisor of 10 hit with a damage multiplier of 3000+.
 
+/obj/item/storage/hopper
+	name = "hopper"
+	storage_type = /datum/extension/storage/hopper
+
 /obj/item/gun/launcher/pneumatic/Initialize()
 	. = ..()
-	item_storage = new(src)
-	item_storage.SetName("hopper")
-	item_storage.max_w_class = max_w_class
-	item_storage.max_storage_space = max_storage_space
-	item_storage.use_sound = null
+	if(ispath(item_storage))
+		item_storage = new item_storage(src)
+	else
+		item_storage = null
 
 /obj/item/gun/launcher/pneumatic/verb/set_pressure() //set amount of tank pressure.
 	set name = "Set Valve Pressure"
@@ -51,9 +52,10 @@
 	update_icon()
 
 /obj/item/gun/launcher/pneumatic/proc/unload_hopper(mob/user)
-	if(item_storage.contents.len > 0)
+	var/datum/extension/storage/storage = item_storage && get_extension(item_storage, /datum/extension/storage)
+	if(length(storage?.get_contents()) > 0)
 		var/obj/item/removing = item_storage.contents[item_storage.contents.len]
-		item_storage.remove_from_storage(removing, src.loc)
+		storage.remove_from_storage(removing, src.loc)
 		user.put_in_hands(removing)
 		to_chat(user, "You remove [removing] from the hopper.")
 	else
@@ -70,14 +72,18 @@
 		tank = W
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
 		update_icon()
-	else if(istype(W) && item_storage.can_be_inserted(W, user))
-		item_storage.handle_item_insertion(W)
+	else if(istype(W))
+		var/datum/extension/storage/storage = item_storage && get_extension(item_storage, /datum/extension/storage)
+		if(storage?.can_be_inserted(W, user))
+			storage.handle_item_insertion(W)
 
 /obj/item/gun/launcher/pneumatic/attack_self(mob/user)
 	eject_tank(user)
 
 /obj/item/gun/launcher/pneumatic/consume_next_projectile(atom/movable/firer)
-	if(!item_storage.contents.len)
+	var/datum/extension/storage/storage = item_storage && get_extension(item_storage, /datum/extension/storage)
+	var/list/storage_contents = storage?.get_contents()
+	if(!length(storage_contents))
 		return null
 	if (!tank)
 		to_chat(firer, "There is no gas tank in [src]!")
@@ -95,8 +101,8 @@
 		to_chat(firer, "There isn't enough gas in the tank to fire [src].")
 		return null
 
-	var/obj/item/launched = item_storage.contents[1]
-	item_storage.remove_from_storage(launched, src)
+	var/obj/item/launched = storage_contents[1]
+	storage.remove_from_storage(launched, src)
 	return launched
 
 /obj/item/gun/launcher/pneumatic/examine(mob/user, distance)
@@ -141,5 +147,9 @@
 /obj/item/gun/launcher/pneumatic/small
 	name = "small pneumatic cannon"
 	desc = "It looks smaller than your garden variety cannon"
-	max_w_class = ITEM_SIZE_TINY
 	w_class = ITEM_SIZE_NORMAL
+	item_storage = /obj/item/storage/hopper/small
+
+/obj/item/storage/hopper/small
+	name = "small hopper"
+	storage_type = /datum/extension/storage/hopper/small

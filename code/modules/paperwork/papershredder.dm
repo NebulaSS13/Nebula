@@ -142,7 +142,7 @@
 		if(user)
 			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
 		return
-	if(empty_into && !istype(empty_into)) // Make sure we can store paper in the thing
+	if(empty_into && !istype(empty_into) || !has_extension(empty_into, /datum/extension/storage)) // Make sure we can store paper in the thing
 		if(user)
 			to_chat(user, SPAN_NOTICE("You cannot put shredded paper into the [empty_into]."))
 		return
@@ -150,9 +150,10 @@
 	//If we got a container put what we can into it
 	var/list/shredded = create_shredded()
 	if(empty_into)
+		var/datum/extension/storage/storage = get_extension(empty_into, /datum/extension/storage)
 		for(var/obj/item/I in shredded)
-			if(empty_into.can_be_inserted(I, user, !isnull(user)))
-				empty_into.handle_item_insertion(I, TRUE)
+			if(storage.can_be_inserted(I, user, !isnull(user)))
+				storage.handle_item_insertion(I, TRUE)
 				LAZYREMOVE(shredded, I)
 
 		// Report on how we did

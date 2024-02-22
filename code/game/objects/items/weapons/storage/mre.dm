@@ -7,10 +7,7 @@ MRE Stuff
 	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "mre"
-	storage_slots = 7
-	max_w_class = ITEM_SIZE_SMALL
-	opened = FALSE
-	open_sound = 'sound/effects/rip1.ogg'
+	storage_type = /datum/extension/storage/mre
 	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 	var/main_meal = /obj/item/storage/mrebag
@@ -29,8 +26,9 @@ MRE Stuff
 
 /obj/item/storage/mre/Initialize(ml, material_key)
 	. = ..()
-	if(length(contents))
-		make_exact_fit()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(length(contents) && storage)
+		storage.make_exact_fit()
 
 /obj/item/storage/mre/examine(mob/user)
 	. = ..()
@@ -38,16 +36,16 @@ MRE Stuff
 
 /obj/item/storage/mre/on_update_icon()
 	. = ..()
-	if(opened)
-		icon_state = "[initial(icon_state)][opened]"
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage?.opened)
+		icon_state = "[initial(icon_state)][storage.opened]"
 
 /obj/item/storage/mre/attack_self(mob/user)
-	open(user)
-
-/obj/item/storage/mre/open(mob/user)
-	if(!opened)
-		to_chat(usr, "<span class='notice'>You tear open the bag, breaking the vacuum seal.</span>")
-	. = ..()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage && !storage.opened)
+		storage.open(user)
+		return TRUE
+	return ..()
 
 /obj/item/storage/mre/menu2
 	meal_desc = "This one is menu 2, margherita."
@@ -136,11 +134,8 @@ MRE Stuff
 	desc = "A vacuum-sealed bag containing the MRE's main course. Self-heats when opened."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "pouch_medium"
-	storage_slots = 1
+	storage_type = /datum/extension/storage/mrebag
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_SMALL
-	opened = FALSE
-	open_sound = 'sound/effects/bubbles.ogg'
 	material = /decl/material/solid/organic/plastic
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE)
 
@@ -149,16 +144,16 @@ MRE Stuff
 
 /obj/item/storage/mrebag/on_update_icon()
 	. = ..()
-	if(opened)
-		icon_state = "[initial(icon_state)][opened]"
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage?.opened)
+		icon_state = "[initial(icon_state)][storage.opened]"
 
 /obj/item/storage/mrebag/attack_self(mob/user)
-	open(user)
-
-/obj/item/storage/mrebag/open(mob/user)
-	if(!opened)
-		to_chat(usr, "<span class='notice'>The pouch heats up as you break the vaccum seal.</span>")
-	. = ..()
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if(storage && !storage.opened)
+		storage.open(user)
+		return TRUE
+	return ..()
 
 /obj/item/storage/mrebag/menu2/WillContain()
 	return list(/obj/item/chems/food/slice/pizza/margherita/filled)
@@ -191,7 +186,7 @@ MRE Stuff
 	name = "dessert"
 	desc = "A vacuum-sealed bag containing the MRE's dessert."
 	icon_state = "pouch_small"
-	open_sound = 'sound/effects/rip1.ogg'
+	storage_type = /datum/extension/storage/mrebag/dessert
 
 /obj/item/storage/mrebag/dessert/WillContain()
 	return list(/obj/random/mre/dessert)

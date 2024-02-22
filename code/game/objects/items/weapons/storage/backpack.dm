@@ -10,9 +10,7 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
-	max_w_class = ITEM_SIZE_LARGE
-	max_storage_space = DEFAULT_BACKPACK_STORAGE
-	open_sound = 'sound/effects/storage/unzip.ogg'
+	storage_type = /datum/extension/storage/backpack
 	material = /decl/material/solid/organic/leather/synth
 
 //Cannot be washed :(
@@ -25,14 +23,17 @@
 	..()
 
 /obj/item/storage/backpack/attackby(obj/item/W, mob/user)
-	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	if (storage?.use_sound)
+		playsound(src.loc, storage.use_sound, 50, 1, -5)
 	return ..()
 
 /obj/item/storage/backpack/equipped(var/mob/user, var/slot)
-	if (slot == slot_back_str && src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
-	..(user, slot)
+	if (slot == slot_back_str)
+		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+		if(storage?.use_sound)
+			playsound(loc, storage.use_sound, 50, 1, -5)
+	return ..(user, slot)
 
 /*
  * Backpack Types
@@ -43,8 +44,7 @@
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = @'{"wormholes":4}'
 	icon = 'icons/obj/items/storage/backpack/backpack_holding.dmi'
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = 56
+	storage_type = /datum/extension/storage/backpack/holding
 	material = /decl/material/solid/metal/gold
 	matter = list(
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
@@ -64,12 +64,6 @@
 		return 1
 	return ..()
 
-	//Please don't clutter the parent storage item with stupid hacks.
-/obj/item/storage/backpack/holding/can_be_inserted(obj/item/W, stop_messages = 0)
-	if(istype(W, /obj/item/storage/backpack/holding))
-		return 1
-	return ..()
-
 /obj/item/storage/backpack/holding/duffle
 	name = "dufflebag of holding"
 	icon = 'icons/obj/items/storage/backpack/dufflebag_holding.dmi'
@@ -85,8 +79,7 @@
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon = 'icons/obj/items/storage/backpack/giftbag.dmi'
 	w_class = ITEM_SIZE_HUGE
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = 400 // can store a ton of shit!
+	storage_type = /datum/extension/storage/backpack/santa
 
 /obj/item/storage/backpack/cultpack
 	name = "trophy rack"
@@ -176,7 +169,7 @@
 	desc = "A large dufflebag for holding extra things."
 	icon = 'icons/obj/items/storage/backpack/dufflebag.dmi'
 	w_class = ITEM_SIZE_HUGE
-	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
+	storage_type = /datum/extension/storage/backpack/duffle
 
 /obj/item/storage/backpack/dufflebag/Initialize()
 	. = ..()
@@ -279,12 +272,10 @@
 	name = "black pocketbook"
 	desc = "A neat little folding clasp pocketbook with a shoulder sling."
 	icon = 'icons/obj/items/storage/backpack/pocketbook.dmi'
-
 	w_class = ITEM_SIZE_HUGE // to avoid recursive backpacks
 	slot_flags = SLOT_BACK
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	color = "#212121"
+	storage_type = /datum/extension/storage/backpack/pocketbook
 
 /obj/item/storage/backpack/satchel/pocketbook/brown
 	name = "brown pocketbook"
@@ -340,10 +331,7 @@
 	desc = "A very slim satchel that can easily fit into tight spaces."
 	level = LEVEL_BELOW_PLATING
 	w_class = ITEM_SIZE_NORMAL //Can fit in backpacks itself.
-	storage_slots = 5
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = 15
-	cant_hold = list(/obj/item/storage/backpack/satchel/flat) //muh recursive backpacks
+	storage_type = /datum/extension/storage/backpack/smuggler
 
 /obj/item/storage/backpack/satchel/flat/WillContain()
 	return list(
