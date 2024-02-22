@@ -13,6 +13,29 @@
 	if(reagents)
 		reagents.remove_any(amount)
 
+/turf/proc/displace_all_reagents()
+	UPDATE_FLUID_BLOCKED_DIRS(src)
+	var/list/spread_into_neighbors
+	var/turf/neighbor
+	var/coming_from
+	for(var/spread_dir in global.cardinal)
+		if(fluid_blocked_dirs & spread_dir)
+			continue
+		neighbor = get_step(src, spread_dir)
+		if(!neighbor)
+			continue
+		UPDATE_FLUID_BLOCKED_DIRS(neighbor)
+		coming_from = global.reverse_dir[spread_dir]
+		if((neighbor.fluid_blocked_dirs & coming_from) || !neighbor.CanFluidPass(coming_from) || neighbor.is_flooded(absolute = TRUE) || !neighbor.CanFluidPass(global.reverse_dir[spread_dir]))
+			continue
+		LAZYDISTINCTADD(spread_into_neighbors, neighbor)
+	if(length(spread_into_neighbors))
+		var/spreading = round(reagents.total_volume / length(spread_into_neighbors))
+		if(spreading > 0)
+			for(var/turf/spread_into_turf as anything in spread_into_neighbors)
+				reagents.trans_to_turf(spread_into_turf, spreading)
+	reagents?.clear_reagents()
+
 /turf/proc/set_flooded(new_flooded, force = FALSE, skip_vis_contents_update = FALSE, mapload = FALSE)
 
 	// Don't do unnecessary work.
@@ -72,6 +95,8 @@
 				T.fluid_update(TRUE)
 	if(flooded)
 		ADD_ACTIVE_FLUID_SOURCE(src)
+	else if(reagents?.total_volume > FLUID_QDEL_POINT)
+		ADD_ACTIVE_FLUID(src)
 
 /turf/proc/add_fluid(var/fluid_type, var/fluid_amount, var/defer_update)
 	if(!reagents)
@@ -136,7 +161,7 @@
 
 	..()
 
-	if(reagents?.total_volume)
+	if(reagents?.total_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 		var/decl/material/primary_reagent = reagents.get_primary_reagent_decl()
 		if(primary_reagent)
@@ -151,8 +176,7 @@
 		SSfluids.pending_flows -= src
 		if(last_slipperiness > 0)
 			wet_floor(last_slipperiness)
-
-	for(var/checkdir in global.cardinal)
-		var/turf/neighbor = get_step(src, checkdir)
-		if(neighbor)
-			ADD_ACTIVE_FLUID(neighbor)
+		for(var/checkdir in global.cardinal)
+			var/turf/neighbor = get_step(src, checkdir)
+			if(neighbor?.reagents?.total_volume > FLUID_QDEL_POINT)
+				ADD_ACTIVE_FLUID(neighbor)

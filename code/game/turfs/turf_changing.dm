@@ -12,6 +12,7 @@
 	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 	if(L)
 		qdel(L)
+
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
@@ -100,7 +101,7 @@
 			qdel(old_fire)
 
 	if(old_flooded != W.flooded)
-		set_flooded(old_flooded && !W.density)
+		set_flooded(old_flooded)
 
 	// Raise appropriate events.
 	W.post_change()

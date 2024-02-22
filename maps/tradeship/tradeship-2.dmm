@@ -3391,7 +3391,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/abstract/fluid_mapped/fuel,
+/obj/abstract/landmark/mapped_fluid/fuel,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "in" = (

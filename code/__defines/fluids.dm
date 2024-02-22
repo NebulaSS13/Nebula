@@ -6,22 +6,45 @@
 #define FLUID_DEEP 800               // Depth deep icon is used
 #define FLUID_MAX_DEPTH FLUID_DEEP*4 // Arbitrary max value for flooding.
 #define FLUID_PUSH_THRESHOLD 20      // Amount of flow needed to push items.
+/turf
+	var/_fluid_source_is_active = FALSE
+	var/_fluid_turf_is_active = FALSE
 
 // Expects /turf for TURF.
-#define ADD_ACTIVE_FLUID_SOURCE(TURF)    if(!TURF.changing_turf) { SSfluids.water_sources[TURF] = TRUE; }
-#define REMOVE_ACTIVE_FLUID_SOURCE(TURF) SSfluids.water_sources -= TURF
-#define ADD_ACTIVE_FLUID(TURF)           if(!QDELETED(TURF)) { SSfluids.active_fluids[TURF] = TRUE; }
-#define REMOVE_ACTIVE_FLUID(TURF)        SSfluids.active_fluids -= TURF
-#define UPDATE_FLUID_BLOCKED_DIRS(TURF)                     \
-	if(isnull(TURF.fluid_blocked_dirs)) {                   \
-		TURF.fluid_blocked_dirs = 0;                        \
-		for(var/obj/structure/window/W in TURF) {           \
-			if(W.density) TURF.fluid_blocked_dirs |= W.dir; \
-		}                                                   \
-		for(var/obj/machinery/door/window/D in TURF) {      \
-			if(D.density) TURF.fluid_blocked_dirs |= D.dir; \
-		}                                                   \
-	}
+#define ADD_ACTIVE_FLUID_SOURCE(TURF)                                         \
+if(!QDELETED(TURF) && !TURF.changing_turf && !TURF._fluid_source_is_active) { \
+	TURF._fluid_source_is_active = TRUE;                                      \
+	SSfluids.water_sources += TURF;                                           \
+}
+
+#define REMOVE_ACTIVE_FLUID_SOURCE(TURF)                                      \
+if(!QDELETED(TURF) && TURF._fluid_source_is_active) {                         \
+	TURF._fluid_source_is_active = FALSE;                                     \
+	SSfluids.water_sources -= TURF;                                           \
+}
+
+#define ADD_ACTIVE_FLUID(TURF)                                                \
+if(!QDELETED(TURF) && !TURF._fluid_turf_is_active) {                          \
+	TURF._fluid_turf_is_active = TRUE;                                        \
+	SSfluids.active_fluids += TURF;                                           \
+}
+
+#define REMOVE_ACTIVE_FLUID(TURF)                                             \
+if(!QDELETED(TURF) && TURF._fluid_turf_is_active) {                           \
+	TURF._fluid_turf_is_active = FALSE;                                       \
+	SSfluids.active_fluids -= TURF;                                           \
+}
+
+#define UPDATE_FLUID_BLOCKED_DIRS(TURF)                                       \
+if(isnull(TURF.fluid_blocked_dirs)) {                                         \
+	TURF.fluid_blocked_dirs = 0;                                              \
+	for(var/obj/structure/window/W in TURF) {                                 \
+		if(W.density) TURF.fluid_blocked_dirs |= W.dir;                       \
+	}                                                                         \
+	for(var/obj/machinery/door/window/D in TURF) {                            \
+		if(D.density) TURF.fluid_blocked_dirs |= D.dir;                       \
+	}                                                                         \
+}
 
 #define FLUID_MAX_ALPHA 200
 #define FLUID_MIN_ALPHA 96
