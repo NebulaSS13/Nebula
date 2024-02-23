@@ -41,7 +41,7 @@
 	item_state = "firstaid-ointment"
 
 /obj/item/storage/firstaid/trauma/WillContain()
-	return list(/obj/item/storage/med_pouch/trauma = 4)
+	return list(/obj/item/med_pouch/trauma = 4)
 
 /obj/item/storage/firstaid/trauma/Initialize(ml, material_key)
 	. = ..()
@@ -54,7 +54,7 @@
 	item_state = "firstaid-ointment"
 
 /obj/item/storage/firstaid/fire/WillContain()
-	return list(/obj/item/storage/med_pouch/burn = 4)
+	return list(/obj/item/med_pouch/burn = 4)
 
 /obj/item/storage/firstaid/fire/Initialize(ml, material_key)
 	. = ..()
@@ -67,7 +67,7 @@
 	item_state = "firstaid-toxin"
 
 /obj/item/storage/firstaid/toxin/WillContain()
-	return list(/obj/item/storage/med_pouch/toxin = 4)
+	return list(/obj/item/med_pouch/toxin = 4)
 
 /obj/item/storage/firstaid/toxin/Initialize(ml, material_key)
 	. = ..()
@@ -80,7 +80,7 @@
 	item_state = "firstaid-o2"
 
 /obj/item/storage/firstaid/o2/WillContain()
-	return list(/obj/item/storage/med_pouch/oxyloss = 4)
+	return list(/obj/item/med_pouch/oxyloss = 4)
 
 /obj/item/storage/firstaid/adv
 	name = "advanced first-aid kit"
@@ -121,11 +121,11 @@
 
 /obj/item/storage/firstaid/stab/WillContain()
 	return list(
-		/obj/item/storage/med_pouch/trauma,
-		/obj/item/storage/med_pouch/burn,
-		/obj/item/storage/med_pouch/oxyloss,
-		/obj/item/storage/med_pouch/toxin,
-		/obj/item/storage/med_pouch/radiation,
+		/obj/item/med_pouch/trauma,
+		/obj/item/med_pouch/burn,
+		/obj/item/med_pouch/oxyloss,
+		/obj/item/med_pouch/toxin,
+		/obj/item/med_pouch/radiation,
 		)
 
 /obj/item/storage/firstaid/surgery

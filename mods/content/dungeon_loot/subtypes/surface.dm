@@ -21,11 +21,11 @@
 		/obj/item/pill_bottle/sugariron,
 		/obj/item/stack/medical/bruise_pack,
 		/obj/item/stack/medical/ointment,
-		/obj/item/storage/med_pouch/trauma,
-		/obj/item/storage/med_pouch/burn,
-		/obj/item/storage/med_pouch/toxin,
-		/obj/item/storage/med_pouch/radiation,
-		/obj/item/storage/med_pouch/oxyloss,
+		/obj/item/med_pouch/trauma,
+		/obj/item/med_pouch/burn,
+		/obj/item/med_pouch/toxin,
+		/obj/item/med_pouch/radiation,
+		/obj/item/med_pouch/oxyloss,
 		/obj/item/chems/hypospray/autoinjector
 	)
 	return common_loot
