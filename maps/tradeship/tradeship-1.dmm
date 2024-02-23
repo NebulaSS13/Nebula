@@ -552,7 +552,7 @@
 /obj/structure/handrail{
 	dir = 8
 	},
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/regular,
 /obj/structure/closet/crate,
 /obj/item/stack/tile/carpet/fifty,
 /obj/item/bodybag,

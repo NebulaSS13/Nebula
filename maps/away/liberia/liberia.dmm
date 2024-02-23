@@ -758,8 +758,8 @@
 /obj/machinery/door/window/brigdoor/southright{
 	req_access = newlist()
 	},
-/obj/item/storage/firstaid/combat,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/combat,
+/obj/item/firstaid/surgery,
 /obj/item/stack/nanopaste,
 /obj/item/stack/nanopaste,
 /obj/item/auto_cpr,
@@ -5879,19 +5879,19 @@
 	dir = 8;
 	pixel_x = 32
 	},
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/adv{
+/obj/item/firstaid/adv{
 	pixel_x = -2
 	},
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = 2;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/o2,
-/obj/item/storage/firstaid/toxin,
+/obj/item/firstaid/o2,
+/obj/item/firstaid/toxin,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
@@ -5931,7 +5931,7 @@
 /area/liberia/medbay)
 "ls" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/surgery{
+/obj/item/firstaid/surgery{
 	pixel_y = 6
 	},
 /obj/item/stack/medical/advanced/bruise_pack,
@@ -6139,12 +6139,12 @@
 /area/liberia/engineeringreactor)
 "mO" = (
 /obj/structure/closet/crate/med_crate,
-/obj/item/storage/firstaid/fire,
-/obj/item/storage/firstaid/o2,
-/obj/item/storage/firstaid/regular,
-/obj/item/storage/firstaid/surgery,
-/obj/item/storage/firstaid/toxin,
-/obj/item/storage/firstaid/trauma,
+/obj/item/firstaid/fire,
+/obj/item/firstaid/o2,
+/obj/item/firstaid/regular,
+/obj/item/firstaid/surgery,
+/obj/item/firstaid/toxin,
+/obj/item/firstaid/trauma,
 /obj/item/defibrillator,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,

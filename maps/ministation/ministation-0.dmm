@@ -2548,7 +2548,7 @@
 /area/ministation/atmospherics)
 "me" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = 6;
 	pixel_y = -5
 	},
@@ -8370,7 +8370,7 @@
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/mask/breath/emergency,
-/obj/item/storage/firstaid/o2,
+/obj/item/firstaid/o2,
 /turf/floor/tiled/techfloor,
 /area/ministation/atmospherics)
 "Kj" = (
@@ -9700,7 +9700,7 @@
 /area/space)
 "Oy" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = 6;
 	pixel_y = -5
 	},

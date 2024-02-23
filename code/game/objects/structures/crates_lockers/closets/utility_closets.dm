@@ -27,7 +27,7 @@
 	. += new/datum/atom_creator/simple(list(/obj/item/toolbox/emergency, /obj/item/inflatable = 2, /obj/item/inflatable/door = 1), 75)
 	. += new/datum/atom_creator/simple(list(/obj/item/tank/emergency/oxygen/engi, /obj/item/clothing/mask/gas/half), 10)
 	. += new/datum/atom_creator/simple(/obj/item/oxycandle, 15)
-	. += new/datum/atom_creator/simple(/obj/item/storage/firstaid/o2, 25)
+	. += new/datum/atom_creator/simple(/obj/item/firstaid/o2, 25)
 	. += new/datum/atom_creator/simple(list(/obj/item/clothing/suit/space/emergency,/obj/item/clothing/head/helmet/space/emergency), 25)
 
 /*

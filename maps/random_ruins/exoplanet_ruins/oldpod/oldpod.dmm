@@ -348,7 +348,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/effect/decal/cleanable/dirt,
 /turf/floor/tiled/white/monotile,
 /area/map_template/oldpod)

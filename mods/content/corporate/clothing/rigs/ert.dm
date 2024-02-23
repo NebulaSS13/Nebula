@@ -39,7 +39,7 @@
 		/obj/item/storage/briefcase/inflatable,
 		/obj/item/baton,
 		/obj/item/gun,
-		/obj/item/storage/firstaid,
+		/obj/item/firstaid,
 		/obj/item/chems/hypospray,
 		/obj/item/roller
 	)

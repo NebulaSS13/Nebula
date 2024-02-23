@@ -462,12 +462,12 @@
 /obj/item/chems/spray/cleaner,
 /obj/item/chems/spray/antiseptic,
 /obj/item/defibrillator/loaded,
-/obj/item/storage/firstaid/combat,
+/obj/item/firstaid/combat,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/mask/surgical,
 /obj/item/bodybag/cryobag,
 /obj/item/chems/ivbag/blood/nanoblood,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /turf/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "aT" = (
@@ -737,7 +737,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bt" = (
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/structure/table,
 /obj/item/stack/nanopaste,
 /obj/machinery/light{

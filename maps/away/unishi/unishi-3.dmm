@@ -564,7 +564,7 @@
 /area/unishi/med)
 "bR" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
