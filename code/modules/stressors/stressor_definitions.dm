@@ -3,6 +3,11 @@
 	desc = "well fed."
 	stress_value = -(STRESSOR_DEGREE_MILD)
 
+/datum/stressor/well_groomed
+	name = "Well Groomed"
+	desc = "neat and tidy."
+	stress_value = -(STRESSOR_DEGREE_MILD)
+
 /datum/stressor/hungry
 	name = "Hungry"
 	desc = "hungry."

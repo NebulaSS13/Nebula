@@ -15,6 +15,15 @@
 	is_heritable          = TRUE
 	accessory_category    = SAC_FACIAL_HAIR
 	accessory_flags       = HAIR_LOSS_VULNERABLE
+	grooming_flags        = GROOMABLE_BRUSH | GROOMABLE_COMB
+
+/decl/sprite_accessory/facial_hair/get_grooming_descriptor(grooming_result, obj/item/organ/external/organ, obj/item/grooming/tool)
+	return grooming_result == GROOMING_RESULT_PARTIAL ? "chin and cheeks" : "facial hair"
+
+/decl/sprite_accessory/facial_hair/can_be_groomed_with(obj/item/organ/external/organ, obj/item/grooming/tool)
+	. = ..()
+	if(. == GROOMING_RESULT_SUCCESS && (accessory_flags & VERY_SHORT))
+		return GROOMING_RESULT_PARTIAL
 
 /decl/sprite_accessory/facial_hair/get_hidden_substitute()
 	return GET_DECL(/decl/sprite_accessory/facial_hair/shaved)
@@ -26,6 +35,7 @@
 /decl/sprite_accessory/facial_hair/shaved
 	name                        = "Shaved"
 	icon_state                  = "bald"
+	uid                         = "acc_fhair_shaved"
 	bodytypes_allowed           = null
 	bodytypes_denied            = null
 	species_allowed             = null
@@ -35,7 +45,7 @@
 	body_flags_allowed          = null
 	body_flags_denied           = null
 	draw_accessory              = FALSE
-	uid                         = "acc_fhair_shaved"
+	grooming_flags              = null
 
 /decl/sprite_accessory/facial_hair/watson
 	name = "Watson Mustache"

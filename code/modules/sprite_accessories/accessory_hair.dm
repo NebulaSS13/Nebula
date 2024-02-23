@@ -15,6 +15,15 @@
 	is_heritable          = TRUE
 	accessory_category    = SAC_HAIR
 	accessory_flags       = HAIR_LOSS_VULNERABLE
+	grooming_flags        = GROOMABLE_BRUSH | GROOMABLE_COMB
+
+/decl/sprite_accessory/hair/get_grooming_descriptor(grooming_result, obj/item/organ/external/organ, obj/item/grooming/tool)
+	return grooming_result == GROOMING_RESULT_PARTIAL ? "scalp" : "hair"
+
+/decl/sprite_accessory/hair/can_be_groomed_with(obj/item/organ/external/organ, obj/item/grooming/tool)
+	. = ..()
+	if(. == GROOMING_RESULT_SUCCESS && (accessory_flags & VERY_SHORT))
+		return GROOMING_RESULT_PARTIAL
 
 /decl/sprite_accessory/hair/get_hidden_substitute()
 	if(accessory_flags & VERY_SHORT)
@@ -28,6 +37,7 @@
 /decl/sprite_accessory/hair/bald
 	name                        = "Bald"
 	icon_state                  = "bald"
+	uid                         = "acc_hair_bald"
 	accessory_flags             = VERY_SHORT | HAIR_BALD
 	bodytypes_allowed           = null
 	bodytypes_denied            = null
@@ -38,7 +48,7 @@
 	body_flags_allowed          = null
 	body_flags_denied           = null
 	draw_accessory              = FALSE
-	uid                         = "acc_hair_bald"
+	grooming_flags              = null
 
 /decl/sprite_accessory/hair/short
 	name = "Short Hair"	  // try to capatilize the names please~

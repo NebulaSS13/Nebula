@@ -10,6 +10,7 @@
 	associated_gender      = FEMALE
 	uniform_state_modifier = "f"
 	appearance_flags       = HAS_SKIN_TONE_NORMAL | HAS_UNDERWEAR | HAS_EYE_COLOR
+	nail_noun              = "nails"
 
 /decl/bodytype/human/masculine
 	name                   = "masculine"

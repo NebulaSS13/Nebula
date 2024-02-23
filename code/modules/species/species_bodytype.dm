@@ -22,6 +22,8 @@ var/global/list/bodytypes_by_category = list()
 	var/associated_gender
 	var/appearance_flags = 0 // Appearance/display related features.
 
+	/// Used when filing your nails.
+	var/nail_noun
 	/// What tech levels should limbs of this type use/need?
 	var/limb_tech = @'{"biotech":2}'
 	var/icon_cache_uid
@@ -566,3 +568,18 @@ var/global/list/bodytypes_by_category = list()
 		if(src in species.available_bodytypes)
 			return species_name
 
+// Defined as a global so modpacks can add to it.
+var/global/list/limbs_with_nails = list(
+	BP_L_HAND,
+	BP_R_HAND,
+	BP_L_FOOT,
+	BP_R_FOOT
+)
+
+/decl/bodytype/proc/get_default_grooming_results(obj/item/organ/external/limb, obj/item/grooming/tool)
+	if(nail_noun && (tool.grooming_flags & GROOMABLE_FILE) && (limb?.organ_tag in limbs_with_nails))
+		return list(
+			"success"    = GROOMING_RESULT_SUCCESS,
+			"descriptor" = nail_noun
+		)
+	return null

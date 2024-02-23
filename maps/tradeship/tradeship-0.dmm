@@ -870,7 +870,7 @@
 	icon_state = "1-8"
 	},
 /obj/random/trash,
-/obj/item/haircomb/random,
+/obj/item/grooming/comb/colorable/random,
 /obj/random/tech_supply,
 /obj/random/single/textbook,
 /turf/simulated/floor,

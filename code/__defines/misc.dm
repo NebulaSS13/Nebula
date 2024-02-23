@@ -332,3 +332,19 @@
 #define UTENSIL_FLAG_SLICE   BITFLAG(2)
 /// Unimplemented; condiments that are collected before being spread on other food.
 #define UTENSIL_FLAG_SPREAD  BITFLAG(3)
+
+// Default.
+#define GROOMABLE_NONE  0
+// Hair, feathers.
+#define GROOMABLE_COMB  BITFLAG(0)
+// Hair, beards.
+#define GROOMABLE_BRUSH BITFLAG(1)
+// Horns.
+#define GROOMABLE_FILE  BITFLAG(2)
+
+// Nothing to groom on this organ.
+#define GROOMING_RESULT_FAILED  0
+// Can groom somewhat (short hair with a comb)
+#define GROOMING_RESULT_PARTIAL 1
+// Can groom properly (long hair with a brush)
+#define GROOMING_RESULT_SUCCESS 2

@@ -680,6 +680,15 @@
 	if(length(default_languages) && isnull(default_language))
 		default_language = default_languages[1]
 
+/mob/living/proc/bodypart_is_covered(target_zone)
+	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, target_zone)
+	if(!affecting?.body_part)
+		return FALSE
+	for(var/obj/item/clothing/thing in get_equipped_items())
+		if(thing.body_parts_covered & affecting.body_part)
+			return thing
+	return FALSE
+
 /mob/living/carbon/human/can_inject(var/mob/user, var/target_zone)
 	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, target_zone)
 

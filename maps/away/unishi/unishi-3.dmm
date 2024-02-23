@@ -1442,7 +1442,7 @@
 "eb" = (
 /obj/structure/table/woodentable,
 /obj/item/poster,
-/obj/item/haircomb/random,
+/obj/item/grooming/comb/colorable/random,
 /obj/random/advdevice,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1720,7 +1720,7 @@
 /area/unishi/living)
 "eJ" = (
 /obj/structure/table/woodentable,
-/obj/item/haircomb/brush,
+/obj/item/grooming/brush,
 /obj/item/cosmetics/lipstick/black,
 /obj/item/cosmetics/lipstick/green,
 /obj/item/cosmetics/lipstick/violet,

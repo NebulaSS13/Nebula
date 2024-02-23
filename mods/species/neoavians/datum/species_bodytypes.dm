@@ -10,6 +10,7 @@
 	base_color           = "#252525"
 	base_eye_color       = "#f5c842"
 	mob_size             = MOB_SIZE_SMALL
+	nail_noun            = "talons"
 	has_organ            = list(
 		BP_STOMACH = /obj/item/organ/internal/stomach,
 		BP_HEART   = /obj/item/organ/internal/heart,

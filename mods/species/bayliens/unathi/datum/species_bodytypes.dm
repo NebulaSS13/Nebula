@@ -16,6 +16,7 @@
 	appearance_flags = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	eye_darksight_range = 3
 	eye_flash_mod = 1.2
+	nail_noun = "claws"
 
 	default_sprite_accessories = list(
 		SAC_FRILLS = list(
@@ -51,6 +52,14 @@
 		"You feel sluggish and cold.",
 		"Your scales bristle against the cold."
 	)
+
+/decl/bodytype/lizard/get_default_grooming_results(obj/item/organ/external/limb, obj/item/grooming/tool)
+	if(tool?.grooming_flags & GROOMABLE_FILE)
+		return list(
+			"success"    = GROOMING_RESULT_SUCCESS,
+			"descriptor" = "[limb.name] scales"
+		)
+	return ..()
 
 /decl/bodytype/lizard/masculine
 	name =                   "masculine"

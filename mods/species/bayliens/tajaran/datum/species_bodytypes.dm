@@ -13,6 +13,7 @@
 	appearance_flags     = HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	base_color           = "#ae7d32"
 	base_eye_color       = "#00aa00"
+	nail_noun            = "claws"
 
 	eye_darksight_range  = 7
 	eye_flash_mod        = 2
@@ -53,6 +54,14 @@
 		slot_head_str =      list("[NORTH]" = list(0, 2), "[EAST]" = list(0, 2), "[SOUTH]" = list( 0, 2),  "[WEST]" = list(0, 2))
 	)
 	. = ..()
+
+/decl/bodytype/feline/get_default_grooming_results(obj/item/organ/external/limb, obj/item/grooming/tool)
+	if(tool?.grooming_flags & GROOMABLE_BRUSH)
+		return list(
+			"success"    = GROOMING_RESULT_SUCCESS,
+			"descriptor" = "[limb.name] fur"
+		)
+	return ..()
 
 /obj/item/organ/external/tail/cat
 	tail_icon  = 'mods/species/bayliens/tajaran/icons/tail.dmi'

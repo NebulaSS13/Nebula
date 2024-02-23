@@ -49,6 +49,7 @@
 	name           = "No Cosmetics"
 	icon_state     = "nothing"
 	draw_accessory = FALSE
+	grooming_flags = FALSE
 	uid            = "acc_cosmetics_nothing"
 
 /decl/sprite_accessory/cosmetics/lipstick
