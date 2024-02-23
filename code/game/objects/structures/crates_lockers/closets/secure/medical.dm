@@ -37,8 +37,8 @@
 
 /obj/structure/closet/secure_closet/medical3/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/med, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/medic, /obj/item/backpack/satchel/med)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/med, 50),
 		/obj/item/clothing/under/nursesuit,
 		/obj/item/clothing/head/nursehat,
 		/obj/item/clothing/under/medical,
@@ -91,8 +91,8 @@
 
 /obj/structure/closet/secure_closet/cmo/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/med, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/medic, /obj/item/backpack/satchel/med)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/med, 50),
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/color/white,

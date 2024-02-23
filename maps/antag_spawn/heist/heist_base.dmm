@@ -721,7 +721,7 @@
 /obj/item/storage/tray{
 	pixel_y = 5
 	},
-/obj/item/storage/backpack,
+/obj/item/backpack,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -869,7 +869,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "cf" = (
-/obj/item/storage/backpack,
+/obj/item/backpack,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},

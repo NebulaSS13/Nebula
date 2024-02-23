@@ -67,7 +67,7 @@
 
 /obj/structure/closet/secure_closet/pilot/WillContain()
 	return list(
-		/obj/item/storage/backpack/parachute,
+		/obj/item/backpack/parachute,
 		/obj/item/knife/utility,
 		/obj/item/clothing/under/pilot,
 		/obj/item/clothing/suit/storage/toggle/bomber,
@@ -81,5 +81,5 @@
 		/obj/item/storage/box/flares,
 		/obj/item/cell/device,
 		/obj/item/radio,
-		/obj/item/storage/backpack/satchel
+		/obj/item/backpack/satchel
 	)

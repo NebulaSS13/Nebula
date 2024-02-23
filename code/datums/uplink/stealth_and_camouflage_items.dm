@@ -38,7 +38,7 @@
 	desc = "Comes with a full set of appearance changing clothing you need to impersonate most people.  \
 	Accessories, backpack, and gun included!"
 	item_cost = 20
-	path = /obj/item/storage/backpack/chameleon/sydie_kit
+	path = /obj/item/backpack/chameleon/sydie_kit
 
 /datum/uplink_item/item/stealth_items/voice
 	name = "Modified Gas Mask"
@@ -65,7 +65,7 @@
 	desc = "This satchel is thin enough to be hidden in the gap between plating and tiling, \
 	great for stashing your stolen goods. Comes with a crowbar and a floor tile."
 	item_cost = 20
-	path = /obj/item/storage/backpack/satchel/flat
+	path = /obj/item/backpack/satchel/flat
 
 /datum/uplink_item/item/stealth_items/warez
 	name = "Warez Disk"

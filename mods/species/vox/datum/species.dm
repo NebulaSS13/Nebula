@@ -139,7 +139,7 @@
 
 /decl/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask_str)
-	var/obj/item/storage/backpack/backpack = H.get_equipped_item(slot_back_str)
+	var/obj/item/backpack/backpack = H.get_equipped_item(slot_back_str)
 	if(istype(backpack))
 		H.equip_to_slot_or_del(new /obj/item/storage/box/vox(backpack), slot_in_backpack_str)
 		var/obj/item/tank/nitrogen/tank = new(H)

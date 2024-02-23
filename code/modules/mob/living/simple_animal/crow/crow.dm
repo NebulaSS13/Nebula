@@ -1,4 +1,4 @@
-/obj/item/storage/backpack/messenger/corvid_couriers
+/obj/item/backpack/messenger/corvid_couriers
 	name = "corvid messenger bag"
 	desc = "A small green-grey messenger bag with a blue Corvid Couriers logo on it."
 	icon = 'icons/obj/items/storage/backpack/corvid.dmi'
@@ -48,7 +48,7 @@
 	add_inventory_slot(new /datum/inventory_slot/back/simple)
 	add_inventory_slot(new /datum/inventory_slot/id)
 	add_held_item_slot(new /datum/inventory_slot/gripper/mouth/simple)
-	equip_to_slot_or_del(new /obj/item/storage/backpack/messenger/corvid_couriers(src), slot_back_str)
+	equip_to_slot_or_del(new /obj/item/backpack/messenger/corvid_couriers(src), slot_back_str)
 	update_icon()
 
 /mob/living/simple_animal/crow/get_dexterity(var/silent)

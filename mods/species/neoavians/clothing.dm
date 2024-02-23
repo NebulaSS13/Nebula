@@ -20,7 +20,7 @@
 
 //Backpacks & tanks
 
-/obj/item/storage/backpack/satchel/Initialize()
+/obj/item/backpack/satchel/Initialize()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/satchel.dmi')
 

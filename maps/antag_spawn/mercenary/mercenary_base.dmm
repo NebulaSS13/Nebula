@@ -1559,7 +1559,7 @@
 	icon_state = "1-4"
 	},
 /obj/item/storage/toolbox/syndicate,
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
+/obj/item/backpack/dufflebag/syndie/ammo,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
@@ -2155,7 +2155,7 @@
 /area/map_template/merc_spawn)
 "vg" = (
 /obj/structure/table,
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
+/obj/item/backpack/dufflebag/syndie/ammo,
 /turf/floor/tiled,
 /area/map_template/merc_spawn)
 "vM" = (
@@ -2610,7 +2610,7 @@
 /turf/floor/plating,
 /area/map_template/merc_spawn)
 "QW" = (
-/obj/item/storage/backpack/dufflebag/syndie/ammo,
+/obj/item/backpack/dufflebag/syndie/ammo,
 /turf/floor/plating,
 /area/map_template/merc_spawn)
 "QX" = (

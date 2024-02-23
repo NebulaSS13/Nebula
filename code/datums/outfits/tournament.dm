@@ -44,7 +44,7 @@
 /decl/hierarchy/outfit/tournament_gear/janitor
 	name = "Tournament gear - Janitor"
 	uniform = /obj/item/clothing/under/janitor
-	back = /obj/item/storage/backpack
+	back = /obj/item/backpack
 	hands = list(
 		/obj/item/mop,
 		/obj/item/chems/glass/bucket

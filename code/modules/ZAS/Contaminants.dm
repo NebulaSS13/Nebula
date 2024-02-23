@@ -59,7 +59,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 		if(prob(1)) suit_contamination() // Contaminants can sometimes get through such an open suit.
 
 //Cannot wash backpacks currently.
-//	if(istype(back,/obj/item/storage/backpack))
+//	if(istype(back,/obj/item/backpack))
 //		back.contaminate()
 
 /mob/proc/handle_contaminants()

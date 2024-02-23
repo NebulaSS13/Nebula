@@ -7,7 +7,7 @@
 /area/map_template/wizard_station)
 "ac" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/cultpack,
+/obj/item/backpack/cultpack,
 /turf/floor/carpet,
 /area/map_template/wizard_station)
 "ad" = (
@@ -23,7 +23,7 @@
 /area/map_template/wizard_station)
 "af" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/satchel/grey/withwallet,
+/obj/item/backpack/satchel/grey/withwallet,
 /turf/floor/carpet,
 /area/map_template/wizard_station)
 "ag" = (
@@ -75,7 +75,7 @@
 /area/map_template/wizard_station)
 "ao" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/satchel/grey/withwallet,
+/obj/item/backpack/satchel/grey/withwallet,
 /obj/item/clothing/glasses/eyepatch/monocle,
 /turf/floor/carpet,
 /area/map_template/wizard_station)

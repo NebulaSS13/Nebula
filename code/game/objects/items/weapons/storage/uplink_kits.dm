@@ -4,12 +4,12 @@
 	icon_state = "box_of_doom"
 
 //For uplink kits that provide bulkier items
-/obj/item/storage/backpack/satchel/syndie_kit
+/obj/item/backpack/satchel/syndie_kit
 	desc = "A sleek, sturdy satchel."
 	icon = 'icons/obj/items/storage/backpack/satchel_grey.dmi'
 
 //In case an uplink kit provides a lot of gear
-/obj/item/storage/backpack/dufflebag/syndie_kit
+/obj/item/backpack/dufflebag/syndie_kit
 	name = "black dufflebag"
 	desc = "A sleek, sturdy dufflebag."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_syndie.dmi'
@@ -37,7 +37,7 @@
 		)
 
 // Space suit uplink kit
-/obj/item/storage/backpack/satchel/syndie_kit/space/WillContain()
+/obj/item/backpack/satchel/syndie_kit/space/WillContain()
 	return list(
 			/obj/item/clothing/suit/space/void/merc,
 			/obj/item/clothing/head/helmet/space/void/merc,
@@ -46,7 +46,7 @@
 		)
 
 // Chameleon uplink kit
-/obj/item/storage/backpack/chameleon/sydie_kit
+/obj/item/backpack/chameleon/sydie_kit
 	material = /decl/material/solid/metal/gold
 	matter = list(
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
@@ -55,7 +55,7 @@
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/storage/backpack/chameleon/sydie_kit/WillContain()
+/obj/item/backpack/chameleon/sydie_kit/WillContain()
 	return list(
 			/obj/item/clothing/under/chameleon,
 			/obj/item/clothing/suit/chameleon,
@@ -77,7 +77,7 @@
 		)
 
 // Clerical uplink kit
-/obj/item/storage/backpack/satchel/syndie_kit/clerical/WillContain()
+/obj/item/backpack/satchel/syndie_kit/clerical/WillContain()
 	return list(
 			/obj/item/stack/package_wrap/twenty_five,
 			/obj/item/hand_labeler,
@@ -99,7 +99,7 @@
 		/obj/item/ammo_magazine/pistol/small
 	)
 
-/obj/item/storage/backpack/satchel/syndie_kit/revolver/WillContain()
+/obj/item/backpack/satchel/syndie_kit/revolver/WillContain()
 	return list(
 		/obj/item/gun/projectile/revolver,
 		/obj/item/ammo_magazine/speedloader
@@ -132,7 +132,7 @@
 		)
 
 //Rig Electrowarfare and Voice Synthesiser kit
-/obj/item/storage/backpack/satchel/syndie_kit/ewar_voice/WillContain()
+/obj/item/backpack/satchel/syndie_kit/ewar_voice/WillContain()
 	return list(
 			/obj/item/rig_module/electrowarfare_suite,
 			/obj/item/rig_module/voice,
@@ -153,7 +153,7 @@
 /obj/item/storage/secure/briefcase/money/WillContain()
 	return list(/obj/item/cash/c1000 = 10)
 
-/obj/item/storage/backpack/satchel/syndie_kit/armor/WillContain()
+/obj/item/backpack/satchel/syndie_kit/armor/WillContain()
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/merc,
 		/obj/item/clothing/head/helmet/merc

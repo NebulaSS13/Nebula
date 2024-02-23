@@ -177,7 +177,7 @@
 	. = ..()
 	if(!.)
 		// This is very silly, but it can be refined and made more appropriate as our multiz turf system is expanded.
-		var/obj/item/storage/backpack/parachute/parachute = get_equipped_item(slot_back_str)
+		var/obj/item/backpack/parachute/parachute = get_equipped_item(slot_back_str)
 		if(istype(parachute) && parachute.packed)
 			parachute.packed = FALSE
 			return TRUE

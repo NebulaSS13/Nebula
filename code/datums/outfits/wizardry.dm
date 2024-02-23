@@ -7,7 +7,7 @@
 		/obj/item/staff,
 		/obj/item/spellbook
 	)
-	back = /obj/item/storage/backpack
+	back = /obj/item/backpack
 	backpack_contents = list(/obj/item/storage/box = 1)
 	abstract_type = /decl/hierarchy/outfit/wizard
 	outfit_flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT

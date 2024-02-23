@@ -24,7 +24,7 @@
 		/obj/item/bikehorn/airhorn,
 		/obj/item/gun/projectile/revolver/capgun,
 		/obj/item/grenade/fake,
-		/obj/item/storage/backpack/clown,
+		/obj/item/backpack/clown,
 		/obj/item/organ/external/head,
 		/obj/item/clothing/glasses/night
 	)

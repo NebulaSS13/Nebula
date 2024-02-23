@@ -111,7 +111,7 @@
 		/obj/item/clothing/shoes/clown_shoes       = TRADER_THIS_TYPE,
 		/obj/item/clothing/under/clown             = TRADER_THIS_TYPE,
 		/obj/item/stamp/clown                      = TRADER_THIS_TYPE,
-		/obj/item/storage/backpack/clown           = TRADER_THIS_TYPE,
+		/obj/item/backpack/clown           = TRADER_THIS_TYPE,
 		/obj/item/bananapeel                       = TRADER_THIS_TYPE,
 		/obj/item/gun/launcher/money               = TRADER_THIS_TYPE,
 		/obj/item/chems/food/pie                   = TRADER_THIS_TYPE,

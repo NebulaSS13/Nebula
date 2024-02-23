@@ -38,7 +38,7 @@
 			/obj/item/storage/wallet/leather = 100,
 			/obj/item/clothing/gloves/thick/botany = 250,
 			/obj/item/storage/belt/utility = 300,
-			/obj/item/storage/backpack/satchel = 400,
+			/obj/item/backpack/satchel = 400,
 			/obj/item/storage/bag/cash = 400,
 			/obj/item/clothing/shoes/workboots = 400,
 			/obj/item/clothing/shoes/craftable = 400,
