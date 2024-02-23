@@ -2133,7 +2133,7 @@
 /area/ship/trade/science)
 "lg" = (
 /obj/structure/closet/crate/plastic,
-/obj/item/storage/ore,
+/obj/item/ore,
 /obj/item/tool/pickaxe,
 /obj/item/stack/flag/yellow,
 /obj/item/box/glowsticks,
@@ -2940,7 +2940,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -21

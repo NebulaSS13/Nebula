@@ -1236,7 +1236,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /turf/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms2)
 "cK" = (
@@ -1920,7 +1920,7 @@
 /area/ship/scrap/maintenance/storage)
 "ef" = (
 /obj/structure/closet/crate/plastic,
-/obj/item/storage/ore,
+/obj/item/ore,
 /obj/item/tool/pickaxe,
 /obj/item/stack/flag/yellow,
 /obj/item/box/glowsticks,

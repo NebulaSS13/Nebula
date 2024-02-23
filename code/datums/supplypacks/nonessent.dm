@@ -14,7 +14,7 @@
 		/obj/item/box/fancy/crayons,
 		/obj/item/camera,
 		/obj/item/camera_film = 2,
-		/obj/item/storage/photo_album,
+		/obj/item/photo_album,
 		/obj/item/chems/glass/paint/red,
 		/obj/item/chems/glass/paint/green,
 		/obj/item/chems/glass/paint/blue,

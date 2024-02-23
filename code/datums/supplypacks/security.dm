@@ -203,9 +203,9 @@
 					/obj/item/taperecorder,
 					/obj/item/scanner/spectrometer,
 					/obj/item/camera_film = 2,
-					/obj/item/storage/photo_album,
+					/obj/item/photo_album,
 					/obj/item/scanner/reagent,
-					/obj/item/storage/briefcase/crimekit = 2)
+					/obj/item/briefcase/crimekit = 2)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "forensic equipment crate"
 	access = access_forensics_lockers

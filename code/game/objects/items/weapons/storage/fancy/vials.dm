@@ -21,7 +21,7 @@
 /*
  * Not actually a "fancy" storage...
  */
-/obj/item/storage/lockbox/vials
+/obj/item/lockbox/vials
 	name = "secure vial storage box"
 	desc = "A locked box for keeping things away from children."
 	icon = 'icons/obj/vialbox.dmi'
@@ -31,11 +31,11 @@
 	req_access = list(access_virology)
 	material = /decl/material/solid/metal/stainlesssteel
 
-/obj/item/storage/lockbox/vials/Initialize()
+/obj/item/lockbox/vials/Initialize()
 	. = ..()
 	update_icon()
 
-/obj/item/storage/lockbox/vials/on_update_icon()
+/obj/item/lockbox/vials/on_update_icon()
 	. = ..()
 	var/total_contents = count_by_type(contents, /obj/item/chems/glass/beaker/vial)
 	icon_state = "vialbox[FLOOR(total_contents/2)]"
@@ -46,6 +46,6 @@
 	else
 		add_overlay("ledb")
 
-/obj/item/storage/lockbox/vials/attackby(obj/item/W, mob/user)
+/obj/item/lockbox/vials/attackby(obj/item/W, mob/user)
 	. = ..()
 	update_icon()

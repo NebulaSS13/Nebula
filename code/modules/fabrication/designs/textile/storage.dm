@@ -15,7 +15,7 @@
 	path= /obj/item/belt/utility
 
 /datum/fabricator_recipe/textiles/storage/mining_satchel
-	path = /obj/item/storage/ore
+	path = /obj/item/ore
 
 /datum/fabricator_recipe/textiles/storage/botanical_satchel
 	path = /obj/item/storage/plants

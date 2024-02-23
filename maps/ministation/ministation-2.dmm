@@ -3612,7 +3612,7 @@
 /area/ministation/science)
 "sM" = (
 /obj/structure/closet,
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24

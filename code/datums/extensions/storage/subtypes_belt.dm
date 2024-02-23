@@ -152,7 +152,7 @@
 		/obj/item/anodevice,
 		/obj/item/clothing/glasses,
 		/obj/item/wrench,
-		/obj/item/storage/excavation,
+		/obj/item/excavation,
 		/obj/item/anobattery,
 		/obj/item/ano_scanner,
 		/obj/item/stack/tape_roll/barricade_tape/research,

@@ -7,6 +7,6 @@
 
 /datum/extension/storage/excavation/handle_item_insertion()
 	. = ..()
-	var/obj/item/storage/excavation/picks = holder
+	var/obj/item/excavation/picks = holder
 	if(istype(picks))
 		picks.sort_picks()

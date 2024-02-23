@@ -315,5 +315,5 @@
 		/obj/item/clothing/suit/storage/toggle/suit/black = 2,
 		/obj/item/clothing/shoes/color/brown = 2,
 		/obj/item/clothing/glasses/sunglasses/big = 2,
-		/obj/item/storage/briefcase = 2,
+		/obj/item/briefcase = 2,
 	)

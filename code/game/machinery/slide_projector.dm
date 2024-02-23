@@ -1,4 +1,4 @@
-/obj/item/storage/slide_projector
+/obj/item/slide_projector
 	name = "slide projector"
 	desc = "A handy device capable of showing an enlarged projection of whatever you can fit inside."
 	icon = 'icons/obj/items/device/projector.dmi'
@@ -13,43 +13,43 @@
 	var/obj/item/current_slide
 	var/obj/effect/projection/projection
 
-/obj/item/storage/slide_projector/Destroy()
+/obj/item/slide_projector/Destroy()
 	current_slide = null
 	stop_projecting()
 	. = ..()
 
-/obj/item/storage/slide_projector/on_update_icon()
+/obj/item/slide_projector/on_update_icon()
 	. = ..()
 	icon_state = "projector[!!projection]"
 
-/obj/item/storage/slide_projector/get_mechanics_info()
+/obj/item/slide_projector/get_mechanics_info()
 	. = ..()
 	. += "Use in hand to open the interface."
 
-/obj/item/storage/slide_projector/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/slide_projector/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!current_slide)
 		return
 	project_at(get_turf(target))
 
-/obj/item/storage/slide_projector/proc/set_slide(obj/item/new_slide)
+/obj/item/slide_projector/proc/set_slide(obj/item/new_slide)
 	current_slide = new_slide
 	playsound(loc, 'sound/machines/slide_change.ogg', 50)
 	if(projection)
 		project_at(get_turf(projection))
 
-/obj/item/storage/slide_projector/proc/check_projections()
+/obj/item/slide_projector/proc/check_projections()
 	if(!projection)
 		return
 	if(!(projection in view(7,get_turf(src))))
 		stop_projecting()
 
-/obj/item/storage/slide_projector/proc/stop_projecting()
+/obj/item/slide_projector/proc/stop_projecting()
 	if(projection)
 		QDEL_NULL(projection)
 	events_repository.unregister(/decl/observ/moved, src, src, PROC_REF(check_projections))
 	update_icon()
 
-/obj/item/storage/slide_projector/proc/project_at(turf/target)
+/obj/item/slide_projector/proc/project_at(turf/target)
 	stop_projecting()
 	if(!current_slide)
 		return
@@ -63,10 +63,10 @@
 	events_repository.register(/decl/observ/moved, src, src, PROC_REF(check_projections))
 	update_icon()
 
-/obj/item/storage/slide_projector/attack_self(mob/user)
+/obj/item/slide_projector/attack_self(mob/user)
 	interact(user)
 
-/obj/item/storage/slide_projector/interact(mob/user)
+/obj/item/slide_projector/interact(mob/user)
 	var/data = list()
 	if(projection)
 		data += "<a href='?src=\ref[src];stop_projector=1'>Disable projector</a>"
@@ -87,7 +87,7 @@
 	popup.set_content(jointext(data, "<br>"))
 	popup.open()
 
-/obj/item/storage/slide_projector/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
+/obj/item/slide_projector/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	. = ..()
 	if(.)
 		return

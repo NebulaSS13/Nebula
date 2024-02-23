@@ -31,8 +31,8 @@
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
 		machine.update_icon()
 		return
-	if(istype(I, /obj/item/storage/part_replacer))
-		var/obj/item/storage/part_replacer/replacer = I
+	if(istype(I, /obj/item/part_replacer))
+		var/obj/item/part_replacer/replacer = I
 		if(replacer.remote_interaction)
 			machine.part_replacement(user, replacer)
 		machine.display_parts(user)
@@ -77,7 +77,7 @@
 		machine.update_icon()
 		return
 
-	if(istype(I, /obj/item/storage/part_replacer))
+	if(istype(I, /obj/item/part_replacer))
 		return machine.part_replacement(user, I)
 
 	if(IS_WRENCH(I))

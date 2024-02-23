@@ -28,10 +28,10 @@
 /datum/extension/storage/lockbox
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 32 //The sum of the w_classes of all the items in this storage item.
-	expected_type = /obj/item/storage/lockbox
+	expected_type = /obj/item/lockbox
 
 /datum/extension/storage/lockbox/show_to(mob/user)
-	var/obj/item/storage/lockbox/container = holder
+	var/obj/item/lockbox/container = holder
 	if(istype(container) && container.locked)
 		to_chat(user, SPAN_WARNING("\The [holder] is locked!"))
 		return

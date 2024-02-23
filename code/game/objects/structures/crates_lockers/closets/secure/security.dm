@@ -160,7 +160,7 @@
 		/obj/item/gun/projectile/pistol,
 		/obj/item/clothing/accessory/storage/holster/armpit,
 		/obj/item/chems/drinks/flask/detflask,
-		/obj/item/storage/briefcase/crimekit,
+		/obj/item/briefcase/crimekit,
 		/obj/item/holowarrant
 	)
 
@@ -198,7 +198,7 @@
 		/obj/item/pen ,
 		/obj/item/clothing/suit/judgerobe,
 		/obj/item/clothing/head/powdered_wig ,
-		/obj/item/storage/briefcase,
+		/obj/item/briefcase,
 	)
 
 /obj/structure/closet/secure_closet/wall

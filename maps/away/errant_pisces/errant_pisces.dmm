@@ -4261,7 +4261,7 @@
 /area/errant_pisces/general_storage)
 "lE" = (
 /obj/structure/rack,
-/obj/item/storage/ore,
+/obj/item/ore,
 /obj/random/tool,
 /turf/floor/plating,
 /area/errant_pisces/general_storage)

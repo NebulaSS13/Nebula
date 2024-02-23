@@ -36,7 +36,7 @@
 		/obj/item/multitool,
 		/obj/item/radio,
 		/obj/item/scanner/gas,
-		/obj/item/storage/briefcase/inflatable,
+		/obj/item/briefcase/inflatable,
 		/obj/item/baton,
 		/obj/item/gun,
 		/obj/item/firstaid,

@@ -28,8 +28,8 @@
 /decl/machine_construction/wall_frame/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
-	if(istype(I, /obj/item/storage/part_replacer))
-		var/obj/item/storage/part_replacer/replacer = I
+	if(istype(I, /obj/item/part_replacer))
+		var/obj/item/part_replacer/replacer = I
 		if(replacer.remote_interaction)
 			machine.part_replacement(user, replacer)
 		machine.display_parts(user)
@@ -83,7 +83,7 @@
 	if((. = up_interaction(I, user, machine)))
 		return
 
-	if(istype(I, /obj/item/storage/part_replacer))
+	if(istype(I, /obj/item/part_replacer))
 		return machine.part_replacement(user, I)
 
 	if(IS_WRENCH(I))
@@ -143,7 +143,7 @@
 	if((. = down_interaction(I, user, machine)))
 		return
 
-	if(istype(I, /obj/item/storage/part_replacer))
+	if(istype(I, /obj/item/part_replacer))
 		return machine.part_replacement(user, I)
 
 	if(IS_WRENCH(I))

@@ -9,7 +9,7 @@
 //        Mining Satchel
 // -----------------------------
 
-/obj/item/storage/ore
+/obj/item/ore
 	name = "mining satchel"
 	desc = "This sturdy bag can be used to store and transport ores."
 	icon = 'icons/obj/mining.dmi'

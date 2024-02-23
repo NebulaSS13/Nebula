@@ -1769,7 +1769,7 @@
 /area/lost_supply_base/supply)
 "fA" = (
 /obj/structure/table,
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /turf/floor/tiled/airless,
 /area/lost_supply_base/supply)
 "fB" = (

@@ -4941,11 +4941,11 @@
 /area/exodus/security/detectives_office)
 "akC" = (
 /obj/structure/rack,
-/obj/item/storage/briefcase{
+/obj/item/briefcase{
 	pixel_x = -2;
 	pixel_y = -5
 	},
-/obj/item/storage/briefcase{
+/obj/item/briefcase{
 	pixel_x = 3
 	},
 /obj/structure/disposalpipe/segment{
@@ -6624,7 +6624,7 @@
 	pixel_x = 22
 	},
 /obj/structure/table/woodentable,
-/obj/item/storage/photo_album{
+/obj/item/photo_album{
 	pixel_y = -10
 	},
 /obj/item/camera_film,
@@ -17284,14 +17284,14 @@
 	dir = 8
 	},
 /obj/structure/table/reinforced,
-/obj/item/storage/briefcase/inflatable{
+/obj/item/briefcase/inflatable{
 	pixel_x = 3;
 	pixel_y = 6
 	},
-/obj/item/storage/briefcase/inflatable{
+/obj/item/briefcase/inflatable{
 	pixel_y = 3
 	},
-/obj/item/storage/briefcase/inflatable{
+/obj/item/briefcase/inflatable{
 	pixel_x = -3
 	},
 /turf/floor/tiled/steel_grid,
@@ -35674,7 +35674,7 @@
 "bxn" = (
 /obj/structure/table/woodentable,
 /obj/item/camera,
-/obj/item/storage/photo_album{
+/obj/item/photo_album{
 	pixel_y = -10
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -54173,11 +54173,11 @@
 /turf/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "ciu" = (
-/obj/item/storage/briefcase/inflatable{
+/obj/item/briefcase/inflatable{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/briefcase/inflatable,
+/obj/item/briefcase/inflatable,
 /obj/machinery/power/apc{
 	dir = 8;
 	name = "west bump";
@@ -55921,7 +55921,7 @@
 /turf/unsimulated/mask,
 /area/exodus/engineering/sublevel_access)
 "cmk" = (
-/obj/item/storage/lockbox/vials,
+/obj/item/lockbox/vials,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/chems/syringe/antibiotic,
 /obj/item/chems/syringe/antibiotic,

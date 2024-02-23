@@ -426,7 +426,7 @@
 /turf/floor/airless,
 /area/space)
 "ce" = (
-/obj/item/storage/ore,
+/obj/item/ore,
 /turf/floor/airless,
 /area/space)
 "cf" = (

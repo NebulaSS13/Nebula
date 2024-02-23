@@ -285,8 +285,8 @@
 /obj/random/storage/spawn_choices()
 	var/static/list/spawnable_choices = list(
 		/obj/item/secure_storage/briefcase =               2,
-		/obj/item/storage/briefcase =                      4,
-		/obj/item/storage/briefcase/inflatable =           3,
+		/obj/item/briefcase =                      4,
+		/obj/item/briefcase/inflatable =           3,
 		/obj/item/backpack =                       5,
 		/obj/item/backpack/satchel =               5,
 		/obj/item/backpack/dufflebag =             2,
@@ -304,7 +304,7 @@
 		/obj/item/box/large =                      2,
 		/obj/item/box/glowsticks =                 3,
 		/obj/item/wallet =                         1,
-		/obj/item/storage/ore =                            2,
+		/obj/item/ore =                            2,
 		/obj/item/belt/utility/full =              2,
 		/obj/item/belt/medical/emt =               2,
 		/obj/item/belt/medical =                   2,

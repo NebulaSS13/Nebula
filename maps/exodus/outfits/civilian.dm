@@ -54,7 +54,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/color/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
-	hands = list(/obj/item/storage/briefcase)
+	hands = list(/obj/item/briefcase)
 	id_type = /obj/item/card/id/civilian/internal_affairs_agent
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 

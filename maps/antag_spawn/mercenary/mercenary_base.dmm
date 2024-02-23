@@ -1214,8 +1214,8 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/item/storage/briefcase/inflatable,
-/obj/item/storage/briefcase/inflatable,
+/obj/item/briefcase/inflatable,
+/obj/item/briefcase/inflatable,
 /obj/item/inflatable_dispenser,
 /obj/item/spaceflare,
 /obj/item/spaceflare,

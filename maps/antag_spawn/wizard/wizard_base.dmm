@@ -474,7 +474,7 @@
 /area/map_template/wizard_station)
 "bl" = (
 /obj/structure/closet,
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
