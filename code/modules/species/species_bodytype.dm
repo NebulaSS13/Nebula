@@ -235,6 +235,18 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/validate()
 	. = ..()
 
+	var/damage_icon = get_damage_overlays()
+	if(damage_icon)
+		for(var/brute = 0 to 3)
+			for(var/burn = 0 to 3)
+				var/damage_state = "[brute][burn]"
+				if(!check_state_in_icon(damage_state, damage_icon))
+					. += "missing state '[damage_state]' in icon '[damage_icon]'"
+		if(!check_state_in_icon("", damage_icon))
+			. += "missing default empty state in icon '[damage_icon]'"
+	else
+		. += "null damage overlay icon"
+
 	if(eye_base_low_light_vision > 1)
 		. += "base low light vision is greater than 1 (over 100%)"
 	else if(eye_base_low_light_vision < 0)
