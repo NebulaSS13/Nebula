@@ -17,7 +17,7 @@
 		/obj/item/chems/glass/bottle,
 		/obj/item/chems/glass/beaker,
 		/obj/item/chems/pill,
-		/obj/item/storage/pill_bottle,
+		/obj/item/pill_bottle,
 		/obj/item/paper)
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_RESISTANT

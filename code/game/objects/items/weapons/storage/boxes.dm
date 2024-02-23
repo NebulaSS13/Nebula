@@ -405,7 +405,7 @@
 	desc = "It has pictures of pill bottles on its front."
 
 /obj/item/box/pillbottles/WillContain()
-	return list(/obj/item/storage/pill_bottle = 7)
+	return list(/obj/item/pill_bottle = 7)
 
 /obj/item/box/snappops
 	name = "snap pop box"

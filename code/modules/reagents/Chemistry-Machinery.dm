@@ -19,7 +19,7 @@
 	core_skill = SKILL_CHEMISTRY
 
 	var/obj/item/chems/beaker = null
-	var/obj/item/storage/pill_bottle/loaded_pill_bottle = null
+	var/obj/item/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0
 	var/useramount = 30 // Last used amount
 	var/pillamount = 10
@@ -57,7 +57,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] will only accept beakers."))
 		return TRUE
 
-	if(istype(B, /obj/item/storage/pill_bottle))
+	if(istype(B, /obj/item/pill_bottle))
 
 		if(loaded_pill_bottle)
 			to_chat(user, SPAN_WARNING("A pill bottle is already loaded into the machine."))

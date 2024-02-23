@@ -2150,7 +2150,7 @@
 /turf/floor/plating,
 /area/ship/trade/crew/medbay)
 "fg" = (
-/obj/item/storage/pill_bottle/happy,
+/obj/item/pill_bottle/happy,
 /obj/machinery/power/apc{
 	dir = 1;
 	pixel_y = 22
@@ -5528,10 +5528,10 @@
 /obj/item/tank/oxygen,
 /obj/item/roller,
 /obj/item/storage/firstaid/adv,
-/obj/item/storage/pill_bottle/painkillers,
-/obj/item/storage/pill_bottle/antitoxins,
-/obj/item/storage/pill_bottle/antibiotics,
-/obj/item/storage/pill_bottle/burn_meds,
+/obj/item/pill_bottle/painkillers,
+/obj/item/pill_bottle/antitoxins,
+/obj/item/pill_bottle/antibiotics,
+/obj/item/pill_bottle/burn_meds,
 /obj/item/scanner/health,
 /obj/structure/handrail{
 	dir = 4

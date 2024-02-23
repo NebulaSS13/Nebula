@@ -676,7 +676,7 @@
 	},
 /obj/effect/floor_decal/corner/brown/half,
 /obj/item/chems/pill/stimulants,
-/obj/item/storage/pill_bottle/gleam,
+/obj/item/pill_bottle/gleam,
 /obj/item/plastique,
 /obj/item/plastique,
 /obj/item/beartrap,

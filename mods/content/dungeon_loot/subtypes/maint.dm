@@ -161,9 +161,9 @@
 		/obj/item/plate,
 		/obj/item/plate/tray,
 		/obj/item/chems/syringe/steroid,
-		/obj/item/storage/pill_bottle/zoom,
-		/obj/item/storage/pill_bottle/happy,
-		/obj/item/storage/pill_bottle/painkillers
+		/obj/item/pill_bottle/zoom,
+		/obj/item/pill_bottle/happy,
+		/obj/item/pill_bottle/painkillers
 	)
 	return uncommon_loot
 

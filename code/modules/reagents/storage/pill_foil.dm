@@ -1,4 +1,4 @@
-/obj/item/storage/pill_bottle/foil_pack
+/obj/item/pill_bottle/foil_pack
 	name = "foil pack"
 	desc = "A package of pills."
 	icon = 'icons/obj/pill_pack.dmi'
@@ -10,10 +10,10 @@
 	var/pill_count = 4
 	var/pill_positions
 
-/obj/item/storage/pill_bottle/foil_pack/painkillers
+/obj/item/pill_bottle/foil_pack/painkillers
 	pill_type = /obj/item/chems/pill/painkillers
 
-/obj/item/storage/pill_bottle/foil_pack/Initialize()
+/obj/item/pill_bottle/foil_pack/Initialize()
 	. = ..()
 	if(pill_type && pill_count)
 		for(var/i = 1 to pill_count)
@@ -24,15 +24,15 @@
 		SetName("[initial(name)] ([pill.name])")
 	update_icon()
 
-/obj/item/storage/pill_bottle/foil_pack/pop_pill(var/mob/user)
+/obj/item/pill_bottle/foil_pack/pop_pill(var/mob/user)
 	. = ..()
 	update_icon()
 
-/obj/item/storage/pill_bottle/foil_pack/Destroy()
+/obj/item/pill_bottle/foil_pack/Destroy()
 	pill_positions = null
 	. = ..()
 
-/obj/item/storage/pill_bottle/foil_pack/on_update_icon()
+/obj/item/pill_bottle/foil_pack/on_update_icon()
 	..()
 	var/offset = 0
 	for(var/obj/item/chems/pill/pill in pill_positions)
@@ -49,7 +49,7 @@
 		add_overlay(I)
 		offset -= 3
 
-/obj/item/storage/pill_bottle/foil_pack/examine(mob/user)
+/obj/item/pill_bottle/foil_pack/examine(mob/user)
 	. = ..()
 	to_chat(user, SPAN_NOTICE("It has the following pills in it:"))
 	for(var/obj/item/chems/pill/C in pill_positions)

@@ -138,10 +138,10 @@
 
 /obj/structure/closet/secure_closet/medical_wall/pills/WillContain()
 	return list(
-		/obj/item/storage/pill_bottle/antibiotics = 1,
-		/obj/item/storage/pill_bottle/painkillers = 1,
-		/obj/item/storage/pill_bottle/antitoxins  = 1,
-		/obj/item/storage/pill_bottle/burn_meds   = 1,
+		/obj/item/pill_bottle/antibiotics = 1,
+		/obj/item/pill_bottle/painkillers = 1,
+		/obj/item/pill_bottle/antitoxins  = 1,
+		/obj/item/pill_bottle/burn_meds   = 1,
 		/obj/random/medical/pillbottle            = 1
 	)
 
@@ -158,7 +158,7 @@
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
-		/obj/item/storage/pill_bottle/antidepressants,
+		/obj/item/pill_bottle/antidepressants,
 		/obj/item/chems/pill/stimulants,
 		/obj/item/clipboard,
 		/obj/item/folder/cyan,
@@ -182,7 +182,7 @@
 		/obj/item/chems/dropper = 2,
 		/obj/item/chems/glass/beaker = 2,
 		/obj/item/chems/glass/bottle/stabilizer,
-		/obj/item/storage/pill_bottle/antibiotics,
+		/obj/item/pill_bottle/antibiotics,
 		/obj/item/chems/syringe/antibiotic,
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/box/masks,
@@ -207,8 +207,8 @@
 		/obj/item/clothing/suit/straight_jacket,
 		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
-		/obj/item/storage/pill_bottle/antidepressants,
-		/obj/item/storage/pill_bottle/stimulants,
+		/obj/item/pill_bottle/antidepressants,
+		/obj/item/pill_bottle/stimulants,
 		/obj/item/clothing/under/psych/turtleneck,
 		/obj/item/clothing/under/psych
 	)

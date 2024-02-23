@@ -65,7 +65,7 @@
 		/obj/item/chems/glass,
 		/obj/item/chems/pill,
 		/obj/item/chems/ivbag,
-		/obj/item/storage/pill_bottle
+		/obj/item/pill_bottle
 	)
 
 /obj/item/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc

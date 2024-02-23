@@ -4652,7 +4652,7 @@
 /area/ministation/court)
 "DQ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/pill_bottle/dice,
+/obj/item/pill_bottle/dice,
 /turf/floor/carpet/green,
 /area/ministation/library)
 "DX" = (
