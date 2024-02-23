@@ -2191,7 +2191,7 @@
 /area/centcom/holding)
 "bDh" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -3151,7 +3151,7 @@
 /area/tdome)
 "sDZ" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},

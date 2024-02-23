@@ -1607,7 +1607,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/multitool{
 	pixel_x = 3
 	},
@@ -1894,8 +1894,8 @@
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "ee" = (
-/obj/item/storage/toolbox/electrical,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical,
+/obj/item/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
 	},
@@ -2262,11 +2262,11 @@
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "eH" = (
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = 5;
 	pixel_y = -7
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/clothing/head/welding,
 /obj/item/scanner/gas,
 /obj/effect/floor_decal/corner/yellow{

@@ -2454,7 +2454,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/floor/airless,
 /area/slavers_base/powatm)
 "gN" = (

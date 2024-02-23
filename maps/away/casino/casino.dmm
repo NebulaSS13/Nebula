@@ -1329,7 +1329,7 @@
 /area/casino/casino_storage)
 "dS" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/stack/cable_coil,
 /turf/floor/plating,
 /area/casino/casino_storage)
@@ -1666,7 +1666,7 @@
 /area/casino/casino_storage)
 "eR" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /turf/floor/plating,
 /area/casino/casino_storage)
 "eS" = (

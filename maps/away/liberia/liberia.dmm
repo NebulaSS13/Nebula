@@ -247,7 +247,7 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
 	},
@@ -4535,7 +4535,7 @@
 "io" = (
 /obj/structure/table,
 /obj/machinery/cell_charger,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
 	},
@@ -5503,7 +5503,7 @@
 /area/liberia/dockinghall)
 "kC" = (
 /obj/structure/table/steel,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/storage/belt/utility/full,
 /obj/effect/floor_decal/borderfloor{
 	dir = 9

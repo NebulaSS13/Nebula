@@ -9,7 +9,7 @@
 	desc = "A hefty toolbox filled with all the equipment you need to get past any construction or electrical issues. \
 	Instructions and materials not included."
 	item_cost = 8
-	path = /obj/item/storage/toolbox/syndicate
+	path = /obj/item/toolbox/syndicate
 
 /datum/uplink_item/item/tools/ductape
 	name = "Duct Tape"

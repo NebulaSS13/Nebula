@@ -151,7 +151,7 @@ something, make sure it's not in one of the other lists.*/
 		/obj/item/handcuffs =                              2,
 		/obj/item/storage/belt/utility =                   2,
 		/obj/item/backpack/dufflebag/syndie/ammo = 1,
-		/obj/item/storage/toolbox/syndicate =              1,
+		/obj/item/toolbox/syndicate =              1,
 		/obj/item/storage/belt/utility/full =              1,
 		/obj/item/destTagger =                             1,
 		/obj/item/clothing/under/syndicate/combat =        1,

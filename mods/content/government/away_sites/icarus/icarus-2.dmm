@@ -230,7 +230,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/item/storage/toolbox/emergency,
+/obj/item/toolbox/emergency,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "aW" = (
@@ -535,7 +535,7 @@
 "bT" = (
 /obj/structure/closet,
 /obj/item/backpack/industrial,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /turf/floor/tiled,
 /area/icarus/vessel)
 "bU" = (
@@ -547,7 +547,7 @@
 "bV" = (
 /obj/structure/closet,
 /obj/item/backpack/industrial,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/floor/tiled,
 /area/icarus/vessel)

@@ -12,7 +12,7 @@
 /decl/hierarchy/supply_pack/science/robotics
 	name = "Parts - Robotics"
 	contains = list(/obj/item/assembly/prox_sensor = 3,
-					/obj/item/storage/toolbox/electrical,
+					/obj/item/toolbox/electrical,
 					/obj/item/flash = 4,
 					/obj/item/cell/high = 2)
 	containertype = /obj/structure/closet/crate/secure/gear

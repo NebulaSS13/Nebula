@@ -5692,7 +5692,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/stack/cable_coil{
 	pixel_x = 3;
 	pixel_y = -7

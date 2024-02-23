@@ -2020,11 +2020,11 @@
 /turf/floor/tiled,
 /area/ship/trade/maintenance/lower)
 "iH" = (
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = 5;
 	pixel_y = -7
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/clothing/head/welding,
 /obj/item/scanner/gas,
 /obj/structure/rack,
@@ -3343,8 +3343,8 @@
 /turf/floor/plating,
 /area/ship/trade/drunk_tank)
 "Zb" = (
-/obj/item/storage/toolbox/electrical,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical,
+/obj/item/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
 	},

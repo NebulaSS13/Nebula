@@ -38,10 +38,10 @@
 
 /obj/random/toolbox/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/toolbox/mechanical = 30,
-		/obj/item/storage/toolbox/electrical = 20,
-		/obj/item/storage/toolbox/emergency =  20,
-		/obj/item/storage/toolbox/repairs =    20,
-		/obj/item/storage/toolbox/syndicate =   1
+		/obj/item/toolbox/mechanical = 30,
+		/obj/item/toolbox/electrical = 20,
+		/obj/item/toolbox/emergency =  20,
+		/obj/item/toolbox/repairs =    20,
+		/obj/item/toolbox/syndicate =   1
 	)
 	return spawnable_choices

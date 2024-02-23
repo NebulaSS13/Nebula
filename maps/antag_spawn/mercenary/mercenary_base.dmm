@@ -1558,7 +1558,7 @@
 /obj/structure/cable/yellow{
 	icon_state = "1-4"
 	},
-/obj/item/storage/toolbox/syndicate,
+/obj/item/toolbox/syndicate,
 /obj/item/backpack/dufflebag/syndie/ammo,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4

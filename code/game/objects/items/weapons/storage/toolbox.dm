@@ -1,4 +1,4 @@
-/obj/item/storage/toolbox
+/obj/item/toolbox
 	name = "toolbox"
 	desc = "Bright red toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon = 'icons/obj/items/storage/toolboxes/toolbox_red.dmi'
@@ -16,10 +16,10 @@
 	attack_verb = list("robusted")
 	material = /decl/material/solid/metal/aluminium
 
-/obj/item/storage/toolbox/emergency
+/obj/item/toolbox/emergency
 	name = "emergency toolbox"
 
-/obj/item/storage/toolbox/emergency/WillContain()
+/obj/item/toolbox/emergency/WillContain()
 	return list(
 		new /datum/atom_creator/weighted(list(/obj/item/flashlight, /obj/item/flashlight/flare,  /obj/item/flashlight/flare/glowstick/red)),
 		/obj/item/crowbar/red,
@@ -29,12 +29,12 @@
 		/obj/item/chems/welder_tank/mini
 	)
 
-/obj/item/storage/toolbox/mechanical
+/obj/item/toolbox/mechanical
 	name = "mechanical toolbox"
 	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon = 'icons/obj/items/storage/toolboxes/toolbox_blue.dmi'
 
-/obj/item/storage/toolbox/mechanical/WillContain()
+/obj/item/toolbox/mechanical/WillContain()
 	return list(
 			/obj/item/screwdriver,
 			/obj/item/wrench,
@@ -44,13 +44,13 @@
 			/obj/item/wirecutters
 		)
 
-/obj/item/storage/toolbox/electrical
+/obj/item/toolbox/electrical
 	name = "electrical toolbox"
 	desc = "Bright yellow toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon = 'icons/obj/items/storage/toolboxes/toolbox_yellow.dmi'
 
 
-/obj/item/storage/toolbox/electrical/WillContain()
+/obj/item/toolbox/electrical/WillContain()
 	return list(
 			new /datum/atom_creator/weighted(list(/obj/item/clothing/gloves/insulated = 5, /obj/item/stack/cable_coil/random = 95)),
 			/obj/item/stack/cable_coil/random = 2,
@@ -60,14 +60,14 @@
 			/obj/item/crowbar
 		)
 
-/obj/item/storage/toolbox/syndicate
+/obj/item/toolbox/syndicate
 	name = "black and red toolbox"
 	desc = "A toolbox in black, with stylish red trim. This one feels particularly heavy, yet balanced."
 	icon = 'icons/obj/items/storage/toolboxes/toolbox_black_red.dmi'
 	origin_tech = @'{"combat":1,"esoteric":1}'
 	attack_cooldown = 10
 
-/obj/item/storage/toolbox/syndicate/WillContain()
+/obj/item/toolbox/syndicate/WillContain()
 	return list(
 			/obj/item/clothing/gloves/insulated,
 			/obj/item/screwdriver,
@@ -78,7 +78,7 @@
 			/obj/item/multitool
 		)
 
-/obj/item/storage/toolbox/syndicate/powertools/WillContain()
+/obj/item/toolbox/syndicate/powertools/WillContain()
 	return list(
 			/obj/item/clothing/gloves/insulated,
 			/obj/item/tool/power_drill,
@@ -87,12 +87,12 @@
 			/obj/item/multitool
 		)
 
-/obj/item/storage/toolbox/repairs
+/obj/item/toolbox/repairs
 	name = "electronics toolbox"
 	desc = "A box full of boxes, with electrical machinery parts and tools needed to get them where they're needed."
 	icon = 'icons/obj/items/storage/toolboxes/toolbox_yellow_striped.dmi'
 
-/obj/item/storage/toolbox/repairs/WillContain()
+/obj/item/toolbox/repairs/WillContain()
 	return list(
 		/obj/item/stack/cable_coil,
 		/obj/item/screwdriver,
