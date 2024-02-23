@@ -43,8 +43,8 @@
 
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user)
-	if(istype(loc, /obj/item/clothing))
-		return TRUE //we aren't an object on the ground so don't call parent
+	if(istype(loc, /obj/item/clothing) && !has_extension(src, /datum/extension/storage))
+		return FALSE //we aren't an object on the ground so don't call parent
 	return ..()
 
 /obj/item/clothing/accessory/get_pressure_weakness(pressure,zone)

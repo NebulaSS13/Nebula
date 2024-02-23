@@ -63,7 +63,7 @@
 		if(TYPE_IS_ABSTRACT(thing) || !ispath(initial(thing.storage_type), /datum/extension/storage))
 			continue
 		thing = new thing //should be fine to put it in nullspace...
-		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type]/[thing.storage_type]\]"
+		var/bad_msg = "[ascii_red]--------------- [thing.name] \[[thing.type] | [thing.storage_type]\]"
 		bad_tests += test_storage_capacity(thing, get_extension(thing, /datum/extension/storage), bad_msg)
 
 	if(bad_tests)

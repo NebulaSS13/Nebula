@@ -40,11 +40,11 @@
 
 /obj/item/clothing/attack_hand(var/mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
-	if(!length(accessories) || loc != user)
-		return ..()
-	for(var/obj/item/clothing/accessory/A in accessories)
-		. = A.attack_hand(user) || .
-	return TRUE
+	if(loc == user)
+		for(var/obj/item/clothing/accessory/A in accessories)
+			if(A.attack_hand(user))
+				return TRUE
+	return ..()
 
 /obj/item/clothing/proc/update_accessory_slowdown()
 	slowdown_accessory = 0

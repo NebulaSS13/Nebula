@@ -231,6 +231,12 @@
 		return 1 //already unequipped, so success
 	return I.mob_can_unequip(src, slot)
 
+/obj/item/proc/get_equipped_slot()
+	if(!ismob(loc))
+		return null
+	var/mob/mob = loc
+	return mob.get_equipped_slot_for_item(src)
+
 /mob/proc/get_equipped_slot_for_item(obj/item/I)
 	var/list/slots = get_inventory_slots()
 	if(!length(slots))

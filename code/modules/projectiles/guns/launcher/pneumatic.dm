@@ -10,27 +10,21 @@
 	fire_sound_text = "a loud whoosh of moving air"
 	fire_delay = 50
 	fire_sound = 'sound/weapons/tablehit1.ogg'
+	storage_type = /datum/extension/storage/hopper
 
 	var/fire_pressure                           // Used in fire checks/pressure checks.
 	var/obj/item/tank/tank = null               // Tank of gas for use in firing the cannon.
 
-	var/obj/item/hopper/item_storage = /obj/item/hopper
 	var/possible_pressure_amounts = list(5,10,20,25,50) // Possible pressure settings.
 	var/pressure_setting = 10                   // Percentage of the gas in the tank used to fire the projectile.
 	var/force_divisor = 400                     // Force equates to speed. Speed/5 equates to a damage multiplier for whoever you hit.
 	                                            // For reference, a fully pressurized oxy tank at 50% gas release firing a health
 	                                            // analyzer with a force_divisor of 10 hit with a damage multiplier of 3000+.
 
-/obj/item/hopper
-	name = "hopper"
-	storage_type = /datum/extension/storage/hopper
-
-/obj/item/gun/launcher/pneumatic/Initialize()
+/obj/item/gun/launcher/pneumatic/get_stored_inventory()
 	. = ..()
-	if(ispath(item_storage))
-		item_storage = new item_storage(src)
-	else
-		item_storage = null
+	if(length(.) && tank)
+		. -= tank
 
 /obj/item/gun/launcher/pneumatic/verb/set_pressure() //set amount of tank pressure.
 	set name = "Set Valve Pressure"
@@ -52,9 +46,10 @@
 	update_icon()
 
 /obj/item/gun/launcher/pneumatic/proc/unload_hopper(mob/user)
-	var/datum/extension/storage/storage = item_storage && get_extension(item_storage, /datum/extension/storage)
-	if(length(storage?.get_contents()) > 0)
-		var/obj/item/removing = item_storage.contents[item_storage.contents.len]
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+	var/list/item_contents = storage?.get_contents()
+	if(length(item_contents))
+		var/obj/item/removing = item_contents[item_contents.len]
 		storage.remove_from_storage(removing, src.loc)
 		user.put_in_hands(removing)
 		to_chat(user, "You remove [removing] from the hopper.")
@@ -68,20 +63,21 @@
 	return TRUE
 
 /obj/item/gun/launcher/pneumatic/attackby(obj/item/W, mob/user)
-	if(!tank && istype(W,/obj/item/tank) && user.try_unequip(W, src))
+	if(!tank && istype(W, /obj/item/tank) && user.try_unequip(W, src))
 		tank = W
-		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
+		user.visible_message(
+			"\The [user] jams \the [W] into [src]'s valve and twists it closed.",
+			"You jam \the [W] into \the [src]'s valve and twist it closed."
+		)
 		update_icon()
-	else if(istype(W))
-		var/datum/extension/storage/storage = item_storage && get_extension(item_storage, /datum/extension/storage)
-		if(storage?.can_be_inserted(W, user))
-			storage.handle_item_insertion(W)
+		return TRUE
+	return ..()
 
 /obj/item/gun/launcher/pneumatic/attack_self(mob/user)
 	eject_tank(user)
 
 /obj/item/gun/launcher/pneumatic/consume_next_projectile(atom/movable/firer)
-	var/datum/extension/storage/storage = item_storage && get_extension(item_storage, /datum/extension/storage)
+	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	var/list/storage_contents = storage?.get_contents()
 	if(!length(storage_contents))
 		return null
@@ -148,8 +144,4 @@
 	name = "small pneumatic cannon"
 	desc = "It looks smaller than your garden variety cannon"
 	w_class = ITEM_SIZE_NORMAL
-	item_storage = /obj/item/hopper/small
-
-/obj/item/hopper/small
-	name = "small hopper"
 	storage_type = /datum/extension/storage/hopper/small

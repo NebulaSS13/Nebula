@@ -89,8 +89,8 @@
 		user.active_storage.show_to(user)
 
 /datum/storage_ui/default/on_pre_remove(var/mob/user, var/obj/item/W)
-	var/atom/atom_holder = _storage?.holder
-	if(istype(atom_holder))
+	if(isatom(_storage?.holder))
+		var/atom/atom_holder = _storage.holder
 		for(var/mob/M in range(1, atom_holder.loc))
 			if (M.active_storage == _storage && M.client)
 				M.client.screen -= W

@@ -17,8 +17,8 @@
 
 /datum/extension/storage/bag/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	var/mob/living/carbon/human/H = ishuman(user) ? user : null // if we're human, then we need to check if bag in a pocket
-	var/atom/atom_holder = holder
-	if(istype(atom_holder))
+	if(isatom(holder))
+		var/atom/atom_holder = holder
 		if(has_extension(atom_holder.loc, /datum/extension/storage) || H?.is_in_pocket(holder))
 			if(!stop_messages)
 				to_chat(user, SPAN_NOTICE("Take \the [atom_holder] out of [istype(atom_holder.loc, /obj) ? "\the [atom_holder.loc]" : "the pocket"] first."))

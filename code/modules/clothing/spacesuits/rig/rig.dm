@@ -104,6 +104,12 @@
 
 	var/list/original_access // Used to restore access after emagging/mending
 
+/obj/item/rig/get_stored_inventory()
+	. = ..()
+	if(length(.))
+		for(var/obj/thing in list(boots, chest, helmet, gloves, air_supply, cell))
+			. -= thing
+
 /obj/item/rig/get_cell()
 	return cell
 

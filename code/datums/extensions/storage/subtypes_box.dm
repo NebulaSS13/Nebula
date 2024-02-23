@@ -48,7 +48,7 @@
 	storage_slots = 7
 
 /datum/extension/storage/box/cigar/remove_from_storage(obj/item/W, atom/new_location)
-	if(istype(W, /obj/item/clothing/mask/smokable/cigarette/cigar) && istype(holder, /atom))
+	if(istype(W, /obj/item/clothing/mask/smokable/cigarette/cigar) && isatom(holder))
 		var/atom/atom_holder = holder
 		if(atom_holder.reagents)
 			atom_holder.reagents.trans_to_obj(W, (atom_holder.reagents.total_volume/max(1, length(get_contents()))))
@@ -60,7 +60,7 @@
 
 /datum/extension/storage/box/cigarettes/remove_from_storage(obj/item/W, atom/new_location)
 	// Don't try to transfer reagents to lighters
-	if(istype(W, /obj/item/clothing/mask/smokable/cigarette) && istype(holder, /atom))
+	if(istype(W, /obj/item/clothing/mask/smokable/cigarette) && isatom(holder))
 		var/atom/atom_holder = holder
 		if(atom_holder.reagents)
 			atom_holder.reagents.trans_to_obj(W, (atom_holder.reagents.total_volume/max(1, length(get_contents()))))
