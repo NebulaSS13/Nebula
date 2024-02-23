@@ -11,7 +11,7 @@
 /decl/hierarchy/supply_pack/atmospherics/evacuation
 	name = "Gear - Emergency Suits"
 	contains = list(/obj/item/toolbox/emergency = 2,
-					/obj/item/clothing/suit/storage/hazardvest = 2,
+					/obj/item/clothing/suit/hazardvest = 2,
 					/obj/item/tank/emergency/oxygen/engi = 2,
 			 		/obj/item/clothing/suit/space/emergency = 2,
 					/obj/item/clothing/head/helmet/space/emergency = 2,

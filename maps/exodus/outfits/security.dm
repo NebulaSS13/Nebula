@@ -29,7 +29,7 @@
 	name = "Job - Detective"
 	head = /obj/item/clothing/head/det
 	uniform = /obj/item/clothing/under/det
-	suit = /obj/item/clothing/suit/storage/det_trench
+	suit = /obj/item/clothing/suit/det_trench
 	l_pocket = /obj/item/flame/fuelled/lighter/zippo
 	shoes = /obj/item/clothing/shoes/dress
 	hands = list(/obj/item/briefcase/crimekit)
@@ -44,7 +44,7 @@
 /decl/hierarchy/outfit/job/security/detective/forensic
 	name = "Job - Forensic technician"
 	head = null
-	suit = /obj/item/clothing/suit/storage/forensics/blue
+	suit = /obj/item/clothing/suit/forensics/blue
 
 /decl/hierarchy/outfit/job/security/officer
 	name = "Job - Security Officer"

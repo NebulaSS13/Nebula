@@ -50,7 +50,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	l_ear = /obj/item/radio/headset/headset_sec
 	uniform = /obj/item/clothing/under/det
-	suit = /obj/item/clothing/suit/storage/det_trench
+	suit = /obj/item/clothing/suit/det_trench
 	l_pocket = /obj/item/flame/fuelled/lighter/zippo
 	shoes = /obj/item/clothing/shoes/dress
 	hands = list(/obj/item/briefcase/crimekit)

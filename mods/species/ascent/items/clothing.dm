@@ -15,7 +15,7 @@
 
 /decl/hierarchy/outfit/job/ascent/tech
 	name = "Ascent - Technician"
-	suit = /obj/item/clothing/suit/storage/ascent
+	suit = /obj/item/clothing/suit/ascent
 
 /obj/item/clothing/mask/gas/ascent
 	name = "mantid facemask"
@@ -52,7 +52,7 @@
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_gyne.dmi'
 	)
 
-/obj/item/clothing/suit/storage/ascent
+/obj/item/clothing/suit/ascent
 	name = "mantid gear harness"
 	desc = "A complex tangle of articulated cables and straps."
 	bodytype_equip_flags = BODY_FLAG_GYNE | BODY_FLAG_ALATE
@@ -61,6 +61,7 @@
 	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_harness_gyne.dmi')
 	body_parts_covered = 0
 	slot_flags = SLOT_OVER_BODY | SLOT_LOWER_BODY
+	storage_type = /datum/extension/storage/pockets/suit
 	allowed = list(
 		/obj/item/flashlight,
 		/obj/item/tank,
@@ -69,7 +70,7 @@
 		/obj/item/rcd
 	)
 
-/obj/item/clothing/suit/storage/ascent/Initialize()
+/obj/item/clothing/suit/ascent/Initialize()
 	. = ..()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(!storage)

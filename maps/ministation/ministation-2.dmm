@@ -4784,7 +4784,7 @@
 /area/ministation/telecomms)
 "Bx" = (
 /obj/structure/table,
-/obj/item/clothing/suit/storage/toggle/wintercoat,
+/obj/item/clothing/suit/toggle/wintercoat,
 /obj/item/radio/intercom{
 	name = "Station Intercom (General)";
 	pixel_y = 20

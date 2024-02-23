@@ -19,7 +19,7 @@
 
 /decl/loadout_option/suit/labcoat_corp
 	name = "labcoat, corporate colors"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
+	path = /obj/item/clothing/suit/toggle/labcoat/science
 	loadout_flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corporate
@@ -79,8 +79,8 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/storage/leather_jacket/nanotrasen,
-		/obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+		/obj/item/clothing/suit/leather_jacket/nanotrasen,
+		/obj/item/clothing/suit/toggle/brown_jacket/nanotrasen
 	)
 
 /decl/loadout_option/suit/science_poncho
@@ -89,13 +89,13 @@
 
 /decl/loadout_option/suit/hoodie_nt
 	name = "hoodie, NanoTrasen"
-	path = /obj/item/clothing/suit/storage/toggle/nt_hoodie
+	path = /obj/item/clothing/suit/toggle/nt_hoodie
 
 /decl/loadout_option/suit/wintercoat_dais
 	name = "winter coat, DAIS"
-	path = /obj/item/clothing/suit/storage/toggle/wintercoat/dais
+	path = /obj/item/clothing/suit/toggle/wintercoat/dais
 
 /decl/loadout_option/suit/leather/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
-	.[/datum/gear_tweak/path/specified_types_list] |= /obj/item/clothing/suit/storage/mbill
+	.[/datum/gear_tweak/path/specified_types_list] |= /obj/item/clothing/suit/mbill

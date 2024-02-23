@@ -6,7 +6,7 @@
 /obj/structure/closet/secure_closet/scientist/WillContain()
 	return list(
 		/obj/item/clothing/under/color/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
@@ -21,7 +21,7 @@
 /obj/structure/closet/secure_closet/xenobio/WillContain()
 	return list(
 		/obj/item/clothing/under/color/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
@@ -39,7 +39,7 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/scientist = 2,
 		/obj/item/clothing/head/bio_hood/scientist = 2,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/radio/headset/heads/rd,
@@ -70,7 +70,7 @@
 		/obj/item/backpack/parachute,
 		/obj/item/knife/utility,
 		/obj/item/clothing/under/pilot,
-		/obj/item/clothing/suit/storage/toggle/bomber,
+		/obj/item/clothing/suit/toggle/bomber,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/gloves/color/black,

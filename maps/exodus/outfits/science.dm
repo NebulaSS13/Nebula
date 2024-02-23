@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/science
 	abstract_type = /decl/hierarchy/outfit/job/science
 	l_ear = /obj/item/radio/headset/headset_sci
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	suit = /obj/item/clothing/suit/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/science
 
@@ -18,7 +18,7 @@
 	name = "Job - Scientist"
 	uniform = /obj/item/clothing/under/color/white
 	id_type = /obj/item/card/id/science
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
+	suit = /obj/item/clothing/suit/toggle/labcoat/science
 
 /decl/hierarchy/outfit/job/science/roboticist
 	name = "Job - Roboticist"

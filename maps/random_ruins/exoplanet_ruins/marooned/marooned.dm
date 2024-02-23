@@ -27,7 +27,7 @@
 /decl/hierarchy/outfit/marooned_officer
 	name = "Dead Magnitka's fleet officer"
 	uniform = /obj/item/clothing/under/magintka_uniform
-	suit = /obj/item/clothing/suit/storage/toggle/wintercoat
+	suit = /obj/item/clothing/suit/toggle/wintercoat
 	shoes = /obj/item/clothing/shoes/jackboots/jungleboots
 	gloves = /obj/item/clothing/gloves/thick
 	head = /obj/item/clothing/head/beret

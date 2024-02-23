@@ -8,7 +8,7 @@
 /decl/hierarchy/outfit/job/generic/scientist
 	name = "Job - Default Scientist"
 	l_ear = /obj/item/radio/headset/headset_sci
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
+	suit = /obj/item/clothing/suit/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/science
 	uniform = /obj/item/clothing/under/color/white
@@ -32,7 +32,7 @@
 /decl/hierarchy/outfit/job/generic/doctor
 	name = "Job - Default Doctor"
 	uniform = /obj/item/clothing/under/medical
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	suit = /obj/item/clothing/suit/toggle/labcoat
 	hands = list(/obj/item/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
 	l_ear = /obj/item/radio/headset/headset_med

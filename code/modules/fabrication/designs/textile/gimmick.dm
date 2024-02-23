@@ -91,7 +91,7 @@
 	path = /obj/item/clothing/head/helmet/gladiator
 	
 /datum/fabricator_recipe/textiles/gimmick/maddoclabcoat
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/mad
+	path = /obj/item/clothing/suit/toggle/labcoat/mad
 
 /datum/fabricator_recipe/textiles/gimmick/holidaypriest
 	path = /obj/item/clothing/suit/holidaypriest

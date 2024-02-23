@@ -1,11 +1,11 @@
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
-/obj/item/clothing/suit/storage/toggle/get_assumed_clothing_state_modifiers()
+/obj/item/clothing/suit/toggle/get_assumed_clothing_state_modifiers()
 	var/static/list/expected_state_modifiers = list(
 		GET_DECL(/decl/clothing_state_modifier/buttons)
 	)
 	return expected_state_modifiers
 
-/obj/item/clothing/suit/storage/toggle/wintercoat
+/obj/item/clothing/suit/toggle/wintercoat
 	name = "winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs."
 	icon = 'icons/clothing/suit/wintercoat/coat.dmi'
@@ -37,7 +37,7 @@
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 	protects_against_weather = TRUE
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/captain
+/obj/item/clothing/suit/toggle/wintercoat/captain
 	name = "captain's winter coat"
 	icon = 'icons/clothing/suit/wintercoat/captain.dmi'
 	hood = /obj/item/clothing/head/winterhood/captain
@@ -52,7 +52,7 @@
 /obj/item/clothing/head/winterhood/captain
 	icon = 'icons/clothing/head/hood_winter_captain.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/security
+/obj/item/clothing/suit/toggle/wintercoat/security
 	name = "security winter coat"
 	icon = 'icons/clothing/suit/wintercoat/sec.dmi'
 	hood = /obj/item/clothing/head/winterhood/security
@@ -67,7 +67,7 @@
 /obj/item/clothing/head/winterhood/security
 	icon = 'icons/clothing/head/hood_winter_sec.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/medical
+/obj/item/clothing/suit/toggle/wintercoat/medical
 	name = "medical winter coat"
 	icon = 'icons/clothing/suit/wintercoat/med.dmi'
 	hood = /obj/item/clothing/head/winterhood/medical
@@ -78,7 +78,7 @@
 /obj/item/clothing/head/winterhood/medical
 	icon = 'icons/clothing/head/hood_winter_med.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/science
+/obj/item/clothing/suit/toggle/wintercoat/science
 	name = "science winter coat"
 	icon = 'icons/clothing/suit/wintercoat/sci.dmi'
 	hood = /obj/item/clothing/head/winterhood/science
@@ -89,7 +89,7 @@
 /obj/item/clothing/head/winterhood/science
 	icon = 'icons/clothing/head/hood_winter_sci.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/engineering
+/obj/item/clothing/suit/toggle/wintercoat/engineering
 	name = "engineering winter coat"
 	icon = 'icons/clothing/suit/wintercoat/eng.dmi'
 	hood = /obj/item/clothing/head/winterhood/engineering
@@ -100,7 +100,7 @@
 /obj/item/clothing/head/winterhood/engineering
 	icon = 'icons/clothing/head/hood_winter_eng.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/engineering/atmos
+/obj/item/clothing/suit/toggle/wintercoat/engineering/atmos
 	name = "atmospherics winter coat"
 	hood = /obj/item/clothing/head/winterhood/atmos
 	icon = 'icons/clothing/suit/wintercoat/atmos.dmi'
@@ -108,7 +108,7 @@
 /obj/item/clothing/head/winterhood/atmos
 	icon = 'icons/clothing/head/hood_winter_atmos.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/hydro
+/obj/item/clothing/suit/toggle/wintercoat/hydro
 	name = "hydroponics winter coat"
 	hood = /obj/item/clothing/head/winterhood/hydroponics
 	icon = 'icons/clothing/suit/wintercoat/hydro.dmi'
@@ -116,7 +116,7 @@
 /obj/item/clothing/head/winterhood/hydroponics
 	icon = 'icons/clothing/head/hood_winter_hydro.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/cargo
+/obj/item/clothing/suit/toggle/wintercoat/cargo
 	name = "cargo winter coat"
 	hood = /obj/item/clothing/head/winterhood/cargo
 	icon = 'icons/clothing/suit/wintercoat/cargo.dmi'
@@ -124,7 +124,7 @@
 /obj/item/clothing/head/winterhood/cargo
 	icon = 'icons/clothing/head/hood_winter_cargo.dmi'
 
-/obj/item/clothing/suit/storage/toggle/wintercoat/miner
+/obj/item/clothing/suit/toggle/wintercoat/miner
 	name = "mining winter coat"
 	hood = /obj/item/clothing/head/winterhood/mining
 	icon = 'icons/clothing/suit/wintercoat/mining.dmi'
@@ -135,7 +135,7 @@
 /obj/item/clothing/head/winterhood/mining
 	icon = 'icons/clothing/head/hood_winter_mining.dmi'
 
-/obj/item/clothing/suit/storage/toggle/hoodie
+/obj/item/clothing/suit/toggle/hoodie
 	name = "hoodie"
 	desc = "A warm sweatshirt."
 	icon = 'icons/clothing/suit/hoodie.dmi'

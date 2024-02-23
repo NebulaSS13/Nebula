@@ -18,7 +18,7 @@
 	name = "Tradeship - Job - Head Engineer"
 	uniform = /obj/item/clothing/under/chief_engineer
 	glasses = /obj/item/clothing/glasses/welding/superior
-	suit = /obj/item/clothing/suit/storage/hazardvest
+	suit = /obj/item/clothing/suit/hazardvest
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_type = /obj/item/modular_computer/pda/heads/ce
