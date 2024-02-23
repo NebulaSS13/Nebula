@@ -75,7 +75,7 @@ var/global/list/flooring_cache = list()
 	if(update_neighbors)
 		for(var/turf/simulated/floor/F in orange(src, 1))
 			F.queue_ao(FALSE)
-			F.update_icon()
+			F.queue_icon_update()
 
 /turf/simulated/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0, var/external = FALSE)
 	if(!flooring_cache[cache_key])
