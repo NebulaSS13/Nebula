@@ -36,5 +36,5 @@
 /obj/structure/closet/wizard/souls/WillContain()
 	return list(
 		/obj/item/contract/boon/wizard/artificer,
-		/obj/item/storage/belt/soulstone/full,
+		/obj/item/belt/soulstone/full,
 	)

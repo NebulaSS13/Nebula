@@ -3533,8 +3533,8 @@
 	},
 /obj/item/clothing/gloves/thick,
 /obj/item/clothing/gloves/thick,
-/obj/item/storage/belt/utility/atmostech,
-/obj/item/storage/belt/utility/atmostech,
+/obj/item/belt/utility/atmostech,
+/obj/item/belt/utility/atmostech,
 /obj/structure/table/steel,
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/atmos)

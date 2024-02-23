@@ -2271,7 +2271,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/storage/belt/champion,
+/obj/item/belt/champion,
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "gJ" = (

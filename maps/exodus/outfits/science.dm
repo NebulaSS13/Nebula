@@ -24,7 +24,7 @@
 	name = "Job - Roboticist"
 	uniform = /obj/item/clothing/under/color/white
 	shoes = /obj/item/clothing/shoes/color/black
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 	id_type = /obj/item/card/id/science
 	pda_slot = slot_r_store_str
 	pda_type = /obj/item/modular_computer/pda/science

@@ -480,7 +480,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bl" = (
 /obj/structure/rack,
-/obj/item/storage/belt/medical,
+/obj/item/belt/medical,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -968,7 +968,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cr" = (
 /obj/structure/rack,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/item/multitool,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
@@ -1075,7 +1075,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cD" = (
 /obj/structure/rack,
-/obj/item/storage/belt/holster/security/tactical,
+/obj/item/belt/holster/security/tactical,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"

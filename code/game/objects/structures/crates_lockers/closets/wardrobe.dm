@@ -269,7 +269,7 @@
 		/obj/item/clothing/head/helmet/tactical,
 		/obj/item/clothing/mask/balaclava/tactical,
 		/obj/item/clothing/glasses/tacgoggles,
-		/obj/item/storage/belt/holster/security/tactical,
+		/obj/item/belt/holster/security/tactical,
 		/obj/item/clothing/shoes/jackboots/tactical,
 		/obj/item/clothing/gloves/tactical,
 	)

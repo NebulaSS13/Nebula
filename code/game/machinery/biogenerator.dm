@@ -37,7 +37,7 @@
 		"Leather" = list(
 			/obj/item/wallet/leather = 100,
 			/obj/item/clothing/gloves/thick/botany = 250,
-			/obj/item/storage/belt/utility = 300,
+			/obj/item/belt/utility = 300,
 			/obj/item/backpack/satchel = 400,
 			/obj/item/bag/cash = 400,
 			/obj/item/clothing/shoes/workboots = 400,

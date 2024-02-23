@@ -27,7 +27,7 @@
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clipboard,
-		/obj/item/storage/belt/archaeology,
+		/obj/item/belt/archaeology,
 		/obj/item/storage/excavation,
 		/obj/item/stack/tape_roll/barricade_tape/research,
 	)
@@ -38,7 +38,7 @@
 
 /obj/structure/closet/excavation/WillContain()
 	return list(
-		/obj/item/storage/belt/archaeology,
+		/obj/item/belt/archaeology,
 		/obj/item/storage/excavation,
 		/obj/item/flashlight/lantern,
 		/obj/item/ano_scanner,
@@ -119,7 +119,7 @@
 	path = /obj/item/bag/fossils
 
 /datum/fabricator_recipe/textiles/storage/archeology_tool_belt
-	path = /obj/item/storage/belt/archaeology
+	path = /obj/item/belt/archaeology
 
 /datum/fabricator_recipe/textiles/storage/excavation_bag
 	path = /obj/item/storage/excavation/empty

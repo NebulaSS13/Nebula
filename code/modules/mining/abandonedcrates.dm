@@ -128,7 +128,7 @@
 		if(98)
 			new /obj/item/energy_blade/sword(src)
 		if(99)
-			new /obj/item/storage/belt/champion(src)
+			new /obj/item/belt/champion(src)
 			new /obj/item/clothing/mask/luchador(src)
 		if(100)
 			new /obj/item/clothing/head/bearpelt(src)

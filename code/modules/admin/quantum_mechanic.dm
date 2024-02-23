@@ -53,7 +53,7 @@
 	l_ear =    /obj/item/radio/headset/ert/quantum
 	back =     /obj/item/backpack/holding/quantum
 	head =     /obj/item/clothing/head/beret
-	belt =     /obj/item/storage/belt/utility/full/quantum
+	belt =     /obj/item/belt/utility/full/quantum
 	id_slot =  slot_wear_id_str
 
 /mob/living/carbon/human/quantum
@@ -291,7 +291,7 @@
 	return ..()
 
 // Belt
-/obj/item/storage/belt/utility/full/quantum/Initialize()
+/obj/item/belt/utility/full/quantum/Initialize()
 	. = ..()
 	// Full set of tools
 	new /obj/item/multitool(src)

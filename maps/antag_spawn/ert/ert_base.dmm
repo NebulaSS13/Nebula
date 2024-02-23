@@ -241,7 +241,7 @@
 /area/map_template/rescue_base/base)
 "aI" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/item/assembly/igniter,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -929,8 +929,8 @@
 /obj/structure/rack,
 /obj/item/backpack/ert/security,
 /obj/item/backpack/ert/security,
-/obj/item/storage/belt/holster/security/tactical,
-/obj/item/storage/belt/holster/security/tactical,
+/obj/item/belt/holster/security/tactical,
+/obj/item/belt/holster/security/tactical,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -984,10 +984,10 @@
 /obj/structure/rack,
 /obj/item/backpack/ert/medical,
 /obj/item/backpack/ert/medical,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical/emt,
-/obj/item/storage/belt/medical/emt,
+/obj/item/belt/medical,
+/obj/item/belt/medical,
+/obj/item/belt/medical/emt,
+/obj/item/belt/medical/emt,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -2031,7 +2031,7 @@
 "ej" = (
 /obj/structure/rack,
 /obj/item/backpack/ert/commander,
-/obj/item/storage/belt/holster/security/tactical,
+/obj/item/belt/holster/security/tactical,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -2154,8 +2154,8 @@
 /obj/structure/rack,
 /obj/item/backpack/ert/engineer,
 /obj/item/backpack/ert/engineer,
-/obj/item/storage/belt/utility/full,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/gloves/insulated,

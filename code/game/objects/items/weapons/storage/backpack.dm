@@ -219,7 +219,7 @@
 
 /obj/item/backpack/dufflebag/firefighter/WillContain()
 	return list(
-		/obj/item/storage/belt/fire_belt/full,
+		/obj/item/belt/fire_belt/full,
 		/obj/item/clothing/suit/fire,
 		/obj/item/chems/spray/extinguisher,
 		/obj/item/clothing/gloves/fire,

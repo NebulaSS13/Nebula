@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/ministation/engineer
 	name = "Job - Station Engineer"
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_slot = slot_l_store_str

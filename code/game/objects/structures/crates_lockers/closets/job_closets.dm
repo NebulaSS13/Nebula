@@ -67,7 +67,7 @@
 		/obj/item/bag/trash,
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/soap,
-		/obj/item/storage/belt/janitor
+		/obj/item/belt/janitor
 	)
 
 /*

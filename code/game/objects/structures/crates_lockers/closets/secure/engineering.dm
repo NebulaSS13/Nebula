@@ -21,7 +21,7 @@
 		/obj/item/flash,
 		/obj/item/stack/tape_roll/barricade_tape/engineering,
 		/obj/item/crowbar/brace_jack,
-		/obj/item/storage/belt/utility/full
+		/obj/item/belt/utility/full
 	)
 
 /obj/structure/closet/secure_closet/engineering_electrical
@@ -68,7 +68,7 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/stack/tape_roll/barricade_tape/engineering,
-		/obj/item/storage/belt/utility/full
+		/obj/item/belt/utility/full
 	)
 
 /obj/structure/closet/secure_closet/atmos_personal
@@ -88,5 +88,5 @@
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/stack/tape_roll/barricade_tape/atmos,
-		/obj/item/storage/belt/utility/atmostech
+		/obj/item/belt/utility/atmostech
 	)

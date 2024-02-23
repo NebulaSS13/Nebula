@@ -305,11 +305,11 @@
 		/obj/item/box/glowsticks =                 3,
 		/obj/item/wallet =                         1,
 		/obj/item/storage/ore =                            2,
-		/obj/item/storage/belt/utility/full =              2,
-		/obj/item/storage/belt/medical/emt =               2,
-		/obj/item/storage/belt/medical =                   2,
-		/obj/item/storage/belt/holster/security =          2,
-		/obj/item/storage/belt/holster/security/tactical = 1
+		/obj/item/belt/utility/full =              2,
+		/obj/item/belt/medical/emt =               2,
+		/obj/item/belt/medical =                   2,
+		/obj/item/belt/holster/security =          2,
+		/obj/item/belt/holster/security/tactical = 1
 	)
 	return spawnable_choices
 

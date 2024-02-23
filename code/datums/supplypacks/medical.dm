@@ -91,7 +91,7 @@
 
 /decl/hierarchy/supply_pack/medical/medicalextragear
 	name = "Gear - Medical surplus equipment"
-	contains = list(/obj/item/storage/belt/medical = 3,
+	contains = list(/obj/item/belt/medical = 3,
 					/obj/item/clothing/glasses/hud/health = 3)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical surplus equipment crate"
@@ -99,7 +99,7 @@
 
 /decl/hierarchy/supply_pack/medical/cmogear
 	name = "Gear - Chief medical officer equipment"
-	contains = list(/obj/item/storage/belt/medical,
+	contains = list(/obj/item/belt/medical,
 					/obj/item/radio/headset/heads/cmo,
 					/obj/item/clothing/under/chief_medical_officer,
 					/obj/item/chems/hypospray/vial,
@@ -120,7 +120,7 @@
 
 /decl/hierarchy/supply_pack/medical/doctorgear
 	name = "Gear - Medical Doctor equipment"
-	contains = list(/obj/item/storage/belt/medical,
+	contains = list(/obj/item/belt/medical,
 					/obj/item/radio/headset/headset_med,
 					/obj/item/clothing/under/medical,
 					/obj/item/clothing/accessory/stethoscope,
@@ -160,7 +160,7 @@
 
 /decl/hierarchy/supply_pack/medical/paramedicgear
 	name = "Gear - Paramedic equipment"
-	contains = list(/obj/item/storage/belt/medical/emt,
+	contains = list(/obj/item/belt/medical/emt,
 					/obj/item/radio/headset/headset_med,
 					/obj/item/clothing/under/medical/scrubs/black,
 					/obj/item/clothing/accessory/armband/medgreen,
@@ -295,7 +295,7 @@
 					/obj/item/clothing/head/surgery/green = 2,
 					/obj/item/box/masks,
 					/obj/item/box/gloves,
-					/obj/item/storage/belt/medical = 3)
+					/obj/item/belt/medical = 3)
 	containertype = /obj/structure/closet/crate
 	containername = "sterile clothes crate"
 

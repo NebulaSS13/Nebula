@@ -5134,11 +5134,11 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/belt,
-/obj/item/storage/belt,
-/obj/item/storage/belt,
-/obj/item/storage/belt,
-/obj/item/storage/belt,
+/obj/item/belt,
+/obj/item/belt,
+/obj/item/belt,
+/obj/item/belt,
+/obj/item/belt,
 /obj/machinery/light{
 	dir = 1;
 	icon_state = "tube1"
@@ -5715,7 +5715,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /obj/item/wrench,
 /obj/item/weldingtool,
 /obj/item/clothing/head/welding,
@@ -5785,7 +5785,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /obj/item/wrench,
 /obj/item/weldingtool,
 /obj/item/clothing/head/welding/engie,

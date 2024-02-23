@@ -1,7 +1,7 @@
 #define BELT_OVERLAY_ITEMS		1
 #define BELT_OVERLAY_HOLSTER	2
 
-/obj/item/storage/belt
+/obj/item/belt
 	name = "belt"
 	desc = "Can hold various things."
 	icon = 'icons/clothing/belt/utility.dmi'
@@ -13,18 +13,18 @@
 	material = /decl/material/solid/organic/leather/synth
 	var/overlay_flags
 
-/obj/item/storage/belt/get_associated_equipment_slots()
+/obj/item/belt/get_associated_equipment_slots()
 	. = ..()
 	LAZYDISTINCTADD(., slot_belt_str)
 
-/obj/item/storage/belt/verb/toggle_layer()
+/obj/item/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
 	set category = "Object"
 
 	use_alt_layer = !use_alt_layer
 	update_icon()
 
-/obj/item/storage/belt/on_update_icon()
+/obj/item/belt/on_update_icon()
 	. = ..()
 	if(overlay_flags & BELT_OVERLAY_ITEMS)
 		var/list/cur_overlays
@@ -38,7 +38,7 @@
 			add_overlay(cur_overlays)
 	update_clothing_icon()
 
-/obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
+/obj/item/belt/get_mob_overlay(mob/user_mob, slot, bodypart, use_fallback_if_icon_missing = TRUE, skip_adjustment = FALSE)
 	var/image/ret = ..()
 	if(ret && slot == slot_belt_str && length(contents))
 		for(var/obj/item/I in contents)
@@ -47,7 +47,7 @@
 				ret.overlays += new_overlay
 	return ret
 
-/obj/item/storage/belt/holster
+/obj/item/belt/holster
 	name = "holster belt"
 	icon = 'icons/clothing/belt/holster.dmi'
 	desc = "Can holster various things."
@@ -57,18 +57,18 @@
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
 	var/sound_out = 'sound/effects/holster/holsterout.ogg'
 
-/obj/item/storage/belt/holster/Initialize()
+/obj/item/belt/holster/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/holster, get_extension(src, /datum/extension/storage), sound_in, sound_out, can_holster)
 
-/obj/item/storage/belt/holster/attackby(obj/item/W, mob/user)
+/obj/item/belt/holster/attackby(obj/item/W, mob/user)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(H.holster(W, user))
 		return
 	else
 		. = ..(W, user)
 
-/obj/item/storage/belt/holster/attack_hand(mob/user)
+/obj/item/belt/holster/attack_hand(mob/user)
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
@@ -76,12 +76,12 @@
 		return TRUE
 	return ..()
 
-/obj/item/storage/belt/holster/examine(mob/user)
+/obj/item/belt/holster/examine(mob/user)
 	. = ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	H.examine_holster(user)
 
-/obj/item/storage/belt/holster/on_update_icon()
+/obj/item/belt/holster/on_update_icon()
 	. = ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(overlay_flags)
@@ -98,7 +98,7 @@
 
 	update_clothing_icon()
 
-/obj/item/storage/belt/utility
+/obj/item/belt/utility
 	name = "tool belt"
 	desc = "A belt of durable leather, festooned with hooks, slots, and pouches."
 	icon = 'icons/clothing/belt/utility.dmi'
@@ -106,7 +106,7 @@
 	storage_type = /datum/extension/storage/belt/utility
 	material = /decl/material/solid/organic/leather
 
-/obj/item/storage/belt/utility/full/WillContain()
+/obj/item/belt/utility/full/WillContain()
 	return list(
 		/obj/item/screwdriver,
 		/obj/item/wrench,
@@ -116,7 +116,7 @@
 		/obj/item/stack/cable_coil/random,
 	)
 
-/obj/item/storage/belt/utility/atmostech/WillContain()
+/obj/item/belt/utility/atmostech/WillContain()
 	return list(
 		/obj/item/screwdriver,
 		/obj/item/wrench,
@@ -126,59 +126,59 @@
 		/obj/item/t_scanner,
 	)
 
-/obj/item/storage/belt/medical
+/obj/item/belt/medical
 	name = "medical belt"
 	desc = "Can hold various medical equipment."
 	icon = 'icons/clothing/belt/medical.dmi'
 	storage_type = /datum/extension/storage/belt/medical
 
-/obj/item/storage/belt/medical/emt
+/obj/item/belt/medical/emt
 	name = "EMT belt"
 	desc = "A sturdy black webbing belt with attached pouches."
 	icon = 'icons/clothing/belt/emt_belt.dmi'
 
-/obj/item/storage/belt/holster/security
+/obj/item/belt/holster/security
 	name = "security holster belt"
 	desc = "Can hold security gear like handcuffs and flashes. This one has a convenient holster."
 	icon = 'icons/clothing/belt/security_holster.dmi'
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
 	storage_type = /datum/extension/storage/holster/security
 
-/obj/item/storage/belt/security
+/obj/item/belt/security
 	name = "security belt"
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon = 'icons/clothing/belt/security.dmi'
 	overlay_flags = BELT_OVERLAY_ITEMS
 	storage_type = /datum/extension/storage/belt/security
 
-/obj/item/storage/belt/general
+/obj/item/belt/general
 	name = "equipment belt"
 	desc = "Can hold general equipment such as tablets, folders, and other office supplies."
 	icon = 'icons/clothing/belt/gearbelt.dmi'
 	overlay_flags = BELT_OVERLAY_ITEMS
 	storage_type = /datum/extension/storage/belt/general
 
-/obj/item/storage/belt/janitor
+/obj/item/belt/janitor
 	name = "janibelt"
 	desc = "A belt used to hold most janitorial supplies."
 	icon = 'icons/clothing/belt/janitor.dmi'
 	storage_type = /datum/extension/storage/belt/janitor
 
-/obj/item/storage/belt/holster/general
+/obj/item/belt/holster/general
 	name = "holster belt"
 	desc = "Can hold general equipment such as tablets, folders, and other office supplies. Comes with a holster."
 	icon = 'icons/clothing/belt/command.dmi'
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
 	storage_type = /datum/extension/storage/holster/general
 
-/obj/item/storage/belt/holster/forensic
+/obj/item/belt/holster/forensic
 	name = "forensic belt"
 	desc = "Can hold forensic gear like fingerprint powder and luminol."
 	icon = 'icons/clothing/belt/forensic.dmi'
 	overlay_flags = BELT_OVERLAY_HOLSTER
 	storage_type = /datum/extension/storage/holster/forensic
 
-/obj/item/storage/belt/holster/machete
+/obj/item/belt/holster/machete
 	name = "machete belt"
 	desc = "Can hold general surveying equipment used for exploration, as well as your very own machete."
 	icon = 'icons/clothing/belt/machete.dmi'
@@ -188,33 +188,33 @@
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
 
-/obj/item/storage/belt/soulstone
+/obj/item/belt/soulstone
 	name = "soul stone belt"
 	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away."
 	icon = 'icons/clothing/belt/soulstones.dmi'
 	storage_type = /datum/extension/storage/belt/soulstone
 
-/obj/item/storage/belt/soulstone/full/WillContain()
+/obj/item/belt/soulstone/full/WillContain()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	return list(/obj/item/soulstone = max(1, storage?.storage_slots))
 
-/obj/item/storage/belt/champion
+/obj/item/belt/champion
 	name = "championship belt"
 	desc = "Proves to the world that you are the strongest!"
 	icon = 'icons/clothing/belt/champion.dmi'
 	storage_type = /datum/extension/storage/belt/champion
 
-/obj/item/storage/belt/holster/security/tactical
+/obj/item/belt/holster/security/tactical
 	name = "combat belt"
 	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
 	icon = 'icons/clothing/belt/swatbelt.dmi'
 	storage_type = /datum/extension/storage/holster/security/tactical
 
-/obj/item/storage/belt/holster/security/tactical/Initialize(ml, material_key)
+/obj/item/belt/holster/security/tactical/Initialize(ml, material_key)
 	.=..()
 	LAZYSET(slowdown_per_slot, slot_belt_str, 1)
 
-/obj/item/storage/belt/waistpack
+/obj/item/belt/waistpack
 	name = "waist pack"
 	desc = "A small bag designed to be worn on the waist. May make your butt look big."
 	icon = 'icons/clothing/belt/fannypack.dmi'
@@ -223,18 +223,18 @@
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	storage_type = /datum/extension/storage/belt/waistpack
 
-/obj/item/storage/belt/waistpack/big
+/obj/item/belt/waistpack/big
 	name = "large waist pack"
 	desc = "A bag designed to be worn on the waist. Definitely makes your butt look big."
 	icon = 'icons/clothing/belt/fannypack_big.dmi'
 	w_class = ITEM_SIZE_LARGE
 	storage_type = /datum/extension/storage/belt/waistpack/big
 
-/obj/item/storage/belt/waistpack/big/Initialize(ml, material_key)
+/obj/item/belt/waistpack/big/Initialize(ml, material_key)
 	.=..()
 	LAZYSET(slowdown_per_slot, slot_belt_str, 1)
 
-/obj/item/storage/belt/fire_belt
+/obj/item/belt/fire_belt
 	name = "firefighting equipment belt"
 	desc = "A belt specially designed for firefighting."
 	icon = 'icons/clothing/belt/firefighter.dmi'
@@ -242,7 +242,7 @@
 	material = /decl/material/solid/fiberglass //need something that doesn't burn
 	storage_type = /datum/extension/storage/belt/firefighter
 
-/obj/item/storage/belt/fire_belt/full/WillContain()
+/obj/item/belt/fire_belt/full/WillContain()
 	return list(
 		/obj/item/inflatable = 2,
 		/obj/item/inflatable/door,

@@ -408,7 +408,7 @@
 /obj/item/stack/material/ingot/mapped/gold,
 /obj/item/stack/material/ingot/mapped/gold,
 /obj/item/stack/material/ingot/mapped/gold,
-/obj/item/storage/belt/champion,
+/obj/item/belt/champion,
 /turf/floor/tiled,
 /area/ministation/bridge/vault)
 "bz" = (

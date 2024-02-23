@@ -694,7 +694,7 @@
 	req_access = list("ACCESS_MERCHANT")
 	},
 /obj/effect/floor_decal/corner/brown/half,
-/obj/item/storage/belt/holster/security/tactical,
+/obj/item/belt/holster/security/tactical,
 /obj/item/clothing/accessory/armor/plate/tactical,
 /obj/item/clothing/mask/balaclava,
 /obj/item/clothing/mask/balaclava,
@@ -5504,7 +5504,7 @@
 "kC" = (
 /obj/structure/table/steel,
 /obj/item/toolbox/mechanical,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/effect/floor_decal/borderfloor{
 	dir = 9
 	},

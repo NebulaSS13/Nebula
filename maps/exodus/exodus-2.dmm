@@ -2549,7 +2549,7 @@
 "afA" = (
 /obj/structure/rack,
 /obj/item/toolbox/mechanical,
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -12697,7 +12697,7 @@
 "aAL" = (
 /obj/structure/table/reinforced,
 /obj/item/clothing/head/welding,
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
@@ -14830,7 +14830,7 @@
 "aFt" = (
 /obj/structure/closet/crate,
 /obj/item/stack/material/ingot/mapped/gold,
-/obj/item/storage/belt/champion,
+/obj/item/belt/champion,
 /obj/machinery/camera/network/command{
 	c_tag = "Vault";
 	dir = 4
@@ -30714,8 +30714,8 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/storage/belt/utility,
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
+/obj/item/belt/utility,
 /turf/floor/tiled/white/monotile,
 /area/exodus/research/robotics)
 "bnf" = (
@@ -31915,7 +31915,7 @@
 /area/exodus/crew_quarters/captain)
 "bpH" = (
 /obj/structure/table,
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /obj/item/clothing/gloves/latex,
 /obj/item/stock_parts/computer/hard_drive/portable,
 /obj/item/stock_parts/computer/hard_drive/portable,
@@ -38717,11 +38717,11 @@
 /area/exodus/medical/medbay3)
 "bDr" = (
 /obj/structure/rack,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical,
+/obj/item/belt/medical,
+/obj/item/belt/medical,
+/obj/item/belt/medical,
+/obj/item/belt/medical,
+/obj/item/belt/medical,
 /obj/item/clothing/accessory/stethoscope,
 /obj/item/clothing/accessory/stethoscope,
 /obj/item/clothing/accessory/stethoscope,
@@ -40893,7 +40893,7 @@
 /obj/machinery/light_switch{
 	pixel_y = 24
 	},
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
 /turf/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
 "bHD" = (
@@ -43476,7 +43476,7 @@
 /obj/structure/closet/secure_closet/cmo,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/accessory/stethoscope,
-/obj/item/storage/belt/medical,
+/obj/item/belt/medical,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/flashlight/pen,
 /turf/floor/tiled/white,
@@ -60183,8 +60183,8 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering)
 "cyy" = (
-/obj/item/storage/belt/utility,
-/obj/item/storage/belt/utility,
+/obj/item/belt/utility,
+/obj/item/belt/utility,
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil{
 	pixel_x = 3;

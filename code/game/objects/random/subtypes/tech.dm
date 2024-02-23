@@ -67,8 +67,8 @@
 		/obj/item/clothing/gloves/insulated/cheap = 1,
 		/obj/item/stack/cable_coil/random =         2,
 		/obj/random/toolbox =                       2,
-		/obj/item/storage/belt/utility =            2,
-		/obj/item/storage/belt/utility/atmostech =  1,
+		/obj/item/belt/utility =            2,
+		/obj/item/belt/utility/atmostech =  1,
 		/obj/random/tool =                          5,
 		/obj/item/stack/tape_roll/duct_tape =       2
 	)

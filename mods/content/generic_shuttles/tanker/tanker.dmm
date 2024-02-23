@@ -397,7 +397,7 @@
 /area/tanker)
 "Km" = (
 /obj/structure/rack,
-/obj/item/storage/belt/utility/atmostech,
+/obj/item/belt/utility/atmostech,
 /obj/item/wrench,
 /obj/item/twohanded/pipewrench,
 /obj/item/radio/off,

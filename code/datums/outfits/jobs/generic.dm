@@ -18,7 +18,7 @@
 	head = /obj/item/clothing/head/hardhat
 	uniform = /obj/item/clothing/under/engineer
 	r_pocket = /obj/item/t_scanner
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_type = /obj/item/modular_computer/pda/engineering
