@@ -52,7 +52,7 @@
 "af" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/rd,
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 34
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -730,7 +730,7 @@
 /obj/machinery/door/window/brigdoor/southright{
 	req_access = newlist()
 	},
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /obj/item/poster,
 /obj/item/poster,
 /obj/item/poster,
@@ -952,7 +952,7 @@
 	pixel_x = -7;
 	pixel_y = 32
 	},
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 30
 	},
 /obj/machinery/power/smes/buildable{

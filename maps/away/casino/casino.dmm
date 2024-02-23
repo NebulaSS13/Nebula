@@ -2481,7 +2481,7 @@
 /turf/floor/tiled,
 /area/casino/casino_mainfloor)
 "hi" = (
-/obj/item/storage/secure/briefcase/money,
+/obj/item/secure_storage/briefcase/money,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -4140,7 +4140,7 @@
 /turf/floor/wood,
 /area/casino/casino_private_vip)
 "lJ" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 30
 	},
 /turf/floor/wood,
@@ -4153,7 +4153,7 @@
 /turf/floor/wood,
 /area/casino/casino_private1)
 "lM" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 30
 	},
 /turf/floor/wood,
@@ -4166,7 +4166,7 @@
 /turf/floor/wood,
 /area/casino/casino_private2)
 "lP" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 25
 	},
 /turf/floor/wood,

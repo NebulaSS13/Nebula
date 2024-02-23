@@ -93,7 +93,7 @@
 	name = "Anti-materiel Sniper Rifle"
 	desc = "A secure briefcase that contains an immensely powerful penetrating rifle, as well as seven extra sniper rounds."
 	item_cost = 68
-	path = /obj/item/storage/secure/briefcase/heavysniper
+	path = /obj/item/secure_storage/briefcase/heavysniper
 	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/visible_weapons/combat_shotgun

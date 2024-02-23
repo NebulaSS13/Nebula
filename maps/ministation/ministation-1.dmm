@@ -266,7 +266,7 @@
 /turf/floor/plating,
 /area/ministation/maint/l2centraln)
 "bx" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 4;
 	pixel_y = 26
 	},

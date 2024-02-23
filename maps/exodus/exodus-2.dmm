@@ -4957,7 +4957,7 @@
 "akD" = (
 /obj/structure/table/woodentable,
 /obj/item/flashlight/lamp/green,
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 6;
 	pixel_y = 28
 	},
@@ -6355,7 +6355,7 @@
 /turf/floor/tiled/dark,
 /area/exodus/lawoffice)
 "ano" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = -23
 	},
 /obj/structure/table/woodentable,
@@ -6673,7 +6673,7 @@
 /turf/floor/tiled/dark,
 /area/exodus/lawoffice)
 "anW" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 32
 	},
 /obj/structure/filing_cabinet/chestdrawer,
@@ -12542,7 +12542,7 @@
 /area/exodus/hallway/secondary/entry/fore)
 "aAu" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
@@ -14534,7 +14534,7 @@
 /turf/floor/tiled/dark,
 /area/exodus/security/checkpoint2)
 "aEP" = (
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = -22
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -30011,7 +30011,7 @@
 /obj/structure/table/woodentable,
 /obj/item/pinpointer,
 /obj/item/disk/nuclear,
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 35;
 	pixel_y = 5
 	},
@@ -58865,7 +58865,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/storage/secure/safe{
+/obj/item/secure_storage/safe{
 	pixel_x = 5;
 	pixel_y = 29
 	},

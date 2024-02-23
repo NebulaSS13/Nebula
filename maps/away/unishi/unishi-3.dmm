@@ -1324,7 +1324,7 @@
 /obj/structure/bed/padded,
 /obj/item/bedsheet/green,
 /obj/item/gun/projectile/pistol/holdout,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /obj/item/card/emag_broken,
 /obj/item/plastique,
 /obj/item/ammo_casing/pistol/used,

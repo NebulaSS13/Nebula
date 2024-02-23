@@ -138,19 +138,19 @@
 			/obj/item/rig_module/voice,
 		)
 
-/obj/item/storage/secure/briefcase/heavysniper/WillContain()
+/obj/item/secure_storage/briefcase/heavysniper/WillContain()
 	return list(
 		/obj/item/gun/projectile/bolt_action/sniper,
 		/obj/item/box/ammo/sniperammo
 	)
 
-/obj/item/storage/secure/briefcase/heavysniper/Initialize(ml, material_key)
+/obj/item/secure_storage/briefcase/heavysniper/Initialize(ml, material_key)
 	. = ..()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)
 		storage.make_exact_fit()
 
-/obj/item/storage/secure/briefcase/money/WillContain()
+/obj/item/secure_storage/briefcase/money/WillContain()
 	return list(/obj/item/cash/c1000 = 10)
 
 /obj/item/backpack/satchel/syndie_kit/armor/WillContain()

@@ -52,7 +52,7 @@
 
 /decl/hierarchy/outfit/reaper/post_equip(var/mob/living/carbon/human/H)
 	..()
-	var/obj/item/storage/secure/briefcase/sec_briefcase = new(H)
+	var/obj/item/secure_storage/briefcase/sec_briefcase = new(H)
 	for(var/obj/item/briefcase_item in sec_briefcase)
 		qdel(briefcase_item)
 	for(var/i=3, i>0, i--)

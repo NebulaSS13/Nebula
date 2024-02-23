@@ -398,7 +398,7 @@
 /area/ministation/bridge)
 "bx" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /obj/item/flash,
 /obj/item/flash,
 /turf/floor/tiled,

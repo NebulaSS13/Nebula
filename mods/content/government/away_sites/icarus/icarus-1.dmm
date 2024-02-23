@@ -46,7 +46,7 @@
 /area/icarus/vessel)
 "ao" = (
 /obj/structure/bed/chair/comfy/black,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /turf/floor/wood,
 /area/icarus/vessel)
 "ap" = (

@@ -2093,7 +2093,7 @@
 /area/map_template/rescue_base/base)
 "et" = (
 /obj/structure/rack,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /obj/item/clothing/head/beret/corp/centcom/captain,
 /turf/unsimulated/floor{
 	dir = 1;

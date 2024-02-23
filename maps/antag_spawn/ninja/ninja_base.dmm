@@ -947,7 +947,7 @@
 /area/map_template/ninja_dojo/dojo)
 "co" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/secure/briefcase/money,
+/obj/item/secure_storage/briefcase/money,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"

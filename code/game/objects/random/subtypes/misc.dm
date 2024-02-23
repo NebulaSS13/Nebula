@@ -24,7 +24,7 @@
 		/obj/item/knife/folding/wood =                     1,
 		/obj/item/knife/folding/combat/balisong =          2,
 		/obj/item/knife/folding/combat/switchblade =       1,
-		/obj/item/storage/secure/briefcase/money =         1,
+		/obj/item/secure_storage/briefcase/money =         1,
 		/obj/item/box/syndie_kit/cigarette =       1,
 		/obj/item/stack/telecrystal =                      1,
 		/obj/item/clothing/under/syndicate =               2,
@@ -284,7 +284,7 @@
 
 /obj/random/storage/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/secure/briefcase =               2,
+		/obj/item/secure_storage/briefcase =               2,
 		/obj/item/storage/briefcase =                      4,
 		/obj/item/storage/briefcase/inflatable =           3,
 		/obj/item/backpack =                       5,

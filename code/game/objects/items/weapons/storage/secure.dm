@@ -10,7 +10,7 @@
 // -----------------------------
 //         Generic Item
 // -----------------------------
-/obj/item/storage/secure
+/obj/item/secure_storage
 	name = "secstorage"
 	w_class = ITEM_SIZE_NORMAL
 	storage_type = /datum/extension/storage/secure
@@ -19,11 +19,11 @@
 	var/icon_locking = "secureb"
 	var/icon_opened = "secure0"
 
-/obj/item/storage/secure/Initialize()
+/obj/item/secure_storage/Initialize()
 	. = ..()
 	set_extension(src, lock_type)
 
-/obj/item/storage/secure/attackby(var/obj/item/W, var/mob/user)
+/obj/item/secure_storage/attackby(var/obj/item/W, var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.attackby(W, user))
 		return
@@ -33,29 +33,29 @@
 		. = ..()
 
 
-/obj/item/storage/secure/handle_mouse_drop(atom/over, mob/user, params)
+/obj/item/secure_storage/handle_mouse_drop(atom/over, mob/user, params)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
 		add_fingerprint(user)
 		return TRUE
 	. = ..()
 
-/obj/item/storage/secure/attack_self(var/mob/user)
+/obj/item/secure_storage/attack_self(var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	lock.ui_interact(user)
 
-/obj/item/storage/secure/examine(mob/user, distance)
+/obj/item/secure_storage/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 		to_chat(user, text("The service panel is [lock.open ? "open" : "closed"]."))
 
-/obj/item/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
+/obj/item/secure_storage/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	.= lock.emag_act(remaining_charges, user, feedback)
 	update_icon()
 
-/obj/item/storage/secure/on_update_icon()
+/obj/item/secure_storage/on_update_icon()
 	. = ..()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(!istype(lock))
@@ -68,7 +68,7 @@
 // -----------------------------
 //        Secure Briefcase
 // -----------------------------
-/obj/item/storage/secure/briefcase
+/obj/item/secure_storage/briefcase
 	name = "secure briefcase"
 	icon = 'icons/obj/items/storage/briefcase.dmi'
 	icon_state = "secure"
@@ -81,7 +81,7 @@
 	storage_type = /datum/extension/storage/secure/briefcase
 	matter = list(/decl/material/solid/organic/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/storage/secure/briefcase/attack_hand(mob/user as mob)
+/obj/item/secure_storage/briefcase/attack_hand(mob/user as mob)
 	if(!user.check_dexterity(DEXTERITY_HOLD_ITEM, TRUE))
 		return ..()
 	var/datum/extension/lockable/lock   = get_extension(src, /datum/extension/lockable)
@@ -100,7 +100,7 @@
 //        Secure Safe
 // -----------------------------
 
-/obj/item/storage/secure/safe
+/obj/item/secure_storage/safe
 	name = "secure safe"
 	icon = 'icons/obj/items/storage/safe.dmi'
 	icon_state = "safe"
@@ -113,7 +113,7 @@
 	icon_opened = "safe0"
 	storage_type = /datum/extension/storage/secure/safe
 
-/obj/item/storage/secure/safe/WillContain()
+/obj/item/secure_storage/safe/WillContain()
 	return list(
 		/obj/item/pen,
 		/obj/item/paper

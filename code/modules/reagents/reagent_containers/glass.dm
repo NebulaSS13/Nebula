@@ -28,7 +28,7 @@
 		/obj/item/storage,
 		/obj/item/grenade/chem_grenade,
 		/mob/living/bot/medbot,
-		/obj/item/storage/secure/safe,
+		/obj/item/secure_storage/safe,
 		/obj/structure/iv_drip,
 		/obj/machinery/disposal,
 		/mob/living/simple_animal/cow,
