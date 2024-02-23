@@ -152,7 +152,7 @@
 "aP" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/firstaid/regular,
-/obj/item/storage/toolbox/emergency,
+/obj/item/toolbox/emergency,
 /turf/floor/tiled,
 /area/ministation/bridge)
 "aQ" = (
@@ -947,7 +947,7 @@
 /area/ministation/science)
 "dw" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -2211,11 +2211,11 @@
 /area/ministation/science)
 "jv" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = 2;
 	pixel_y = 3
 	},
@@ -5147,7 +5147,7 @@
 "De" = (
 /obj/structure/table,
 /obj/item/multitool,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},

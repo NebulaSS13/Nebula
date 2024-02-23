@@ -1730,7 +1730,7 @@
 /area/magshield/north)
 "eQ" = (
 /obj/structure/table/steel,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/floor/airless,
 /area/magshield/north)
 "eR" = (

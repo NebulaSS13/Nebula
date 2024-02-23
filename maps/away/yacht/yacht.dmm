@@ -820,7 +820,7 @@
 /obj/structure/cable{
 	icon_state = "1-8"
 	},
-/obj/item/storage/toolbox/syndicate,
+/obj/item/toolbox/syndicate,
 /turf/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -1211,7 +1211,7 @@
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4

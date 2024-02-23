@@ -2168,8 +2168,8 @@
 /area/template_noop)
 "eM" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/toolbox/mechanical,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/integrated_circuit_printer/upgraded,
 /turf/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
@@ -2359,7 +2359,7 @@
 /area/template_noop)
 "fd" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/toolbox/syndicate,
+/obj/item/toolbox/syndicate,
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/crowbar/brace_jack,
@@ -3318,8 +3318,8 @@
 /area/map_template/colony/atmospherics)
 "gH" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/toolbox/electrical,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /obj/machinery/light{
 	dir = 4
 	},

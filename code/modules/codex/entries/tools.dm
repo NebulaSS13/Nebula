@@ -74,7 +74,7 @@
 	antag_text = "RCDs can be incredibly dangerous in the wrong hands. Use them to swiftly block off corridors, or instantly breach the ship wherever you want."
 
 /datum/codex_entry/toolbox
-	associated_paths = list(/obj/item/storage/toolbox)
+	associated_paths = list(/obj/item/toolbox)
 	mechanics_text = "The toolbox is a general-purpose storage item with lots of space. With an item in your hand, click on it to store it inside."
 	lore_text = "No one remembers which company designed this particular toolbox. It's been mass-produced, retired, brought out of retirement, and counterfeited for decades."
 	antag_text = "Carrying one of these and being bald tends to instill a certain primal fear in most people."

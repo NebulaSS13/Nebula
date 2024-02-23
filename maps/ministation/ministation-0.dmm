@@ -366,11 +366,11 @@
 /area/ministation/mining)
 "bV" = (
 /obj/structure/table,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -6138,8 +6138,8 @@
 /obj/structure/table/gamblingtable,
 /obj/item/stack/cable_coil/random,
 /obj/item/stack/cable_coil/random,
-/obj/item/storage/toolbox/mechanical,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/mechanical,
+/obj/item/toolbox/electrical,
 /obj/item/clothing/gloves/insulated/cheap,
 /obj/item/clothing/gloves/insulated/cheap,
 /obj/structure/disposalpipe/segment{
@@ -6938,7 +6938,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_y = 5
 	},
 /obj/item/radio/intercom{
@@ -6946,7 +6946,7 @@
 	pixel_y = 20
 	},
 /obj/item/clothing/gloves/insulated,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_y = 5
 	},
 /turf/floor/tiled/steel_grid,
@@ -9850,11 +9850,11 @@
 /area/ministation/ai_sat)
 "Lg" = (
 /obj/structure/rack,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = -3;
 	pixel_y = 3
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/multitool,
 /turf/floor/tiled,
 /area/ministation/ai_sat)

@@ -2414,7 +2414,7 @@
 "afm" = (
 /obj/structure/grille/broken,
 /obj/structure/lattice,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -2548,7 +2548,7 @@
 /area/exodus/security/meeting)
 "afA" = (
 /obj/structure/rack,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/storage/belt/utility,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -13240,7 +13240,7 @@
 	dir = 8
 	},
 /obj/structure/table/reinforced,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -14038,7 +14038,7 @@
 	dir = 8
 	},
 /obj/structure/table/reinforced,
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 1;
 	pixel_y = -1
 	},
@@ -17802,7 +17802,7 @@
 /area/exodus/maintenance/substation/civilian_west)
 "aLx" = (
 /obj/structure/closet/secure_closet/scientist,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -22934,7 +22934,7 @@
 /turf/floor/plating,
 /area/exodus/medical/patient_b)
 "aWQ" = (
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -23123,7 +23123,7 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/bridge)
 "aXn" = (
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -24797,7 +24797,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-8"
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/box/lights/mixed,
 /obj/item/flashlight,
 /obj/item/multitool,
@@ -30907,7 +30907,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 1;
 	pixel_y = 6
 	},
@@ -30919,8 +30919,8 @@
 	pixel_x = -3;
 	pixel_y = 5
 	},
-/obj/item/storage/toolbox/mechanical,
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical,
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -32888,7 +32888,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
@@ -33148,7 +33148,7 @@
 /obj/structure/rack,
 /obj/item/crowbar,
 /obj/item/crowbar,
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /obj/item/roller,
 /obj/item/roller,
 /obj/item/roller,
@@ -33351,7 +33351,7 @@
 /turf/floor/tiled/dark,
 /area/exodus/research/lab)
 "bsA" = (
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -34928,7 +34928,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/item/storage/toolbox/mechanical,
+/obj/item/toolbox/mechanical,
 /turf/floor/tiled/steel_grid,
 /area/exodus/research/robotics)
 "bvD" = (
@@ -36512,7 +36512,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -38655,7 +38655,7 @@
 	name = "Emergency Kit"
 	},
 /obj/machinery/door/firedoor,
-/obj/item/storage/toolbox/emergency,
+/obj/item/toolbox/emergency,
 /obj/item/bodybag/cryobag{
 	pixel_x = 6
 	},
@@ -40886,7 +40886,7 @@
 /obj/structure/rack{
 	dir = 1
 	},
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -45391,7 +45391,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 1;
 	pixel_y = -1
 	},
@@ -46655,7 +46655,7 @@
 /obj/structure/rack{
 	dir = 8
 	},
-/obj/item/storage/toolbox/electrical{
+/obj/item/toolbox/electrical{
 	pixel_x = 1;
 	pixel_y = -1
 	},
@@ -49937,7 +49937,7 @@
 /area/space)
 "bZQ" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /obj/machinery/camera/network/engineering{
 	c_tag = "Engineering Drone Fabrication";
 	dir = 8
@@ -51766,7 +51766,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/item/storage/toolbox/emergency,
+/obj/item/toolbox/emergency,
 /obj/item/flashlight,
 /obj/item/flashlight,
 /turf/floor/tiled/white,
@@ -58599,7 +58599,7 @@
 /turf/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "csT" = (
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
 	},
@@ -60298,13 +60298,13 @@
 /turf/floor/plating,
 /area/exodus/engineering/atmos/storage)
 "cyY" = (
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_y = 5
 	},
-/obj/item/storage/toolbox/mechanical{
+/obj/item/toolbox/mechanical{
 	pixel_y = 5
 	},
-/obj/item/storage/toolbox/electrical,
+/obj/item/toolbox/electrical,
 /obj/structure/table/steel,
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)

@@ -53,7 +53,7 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/storage/secure/briefcase                 = TRADER_THIS_TYPE,
 		/obj/item/storage/plants                           = TRADER_THIS_TYPE,
 		/obj/item/storage/ore                              = TRADER_THIS_TYPE,
-		/obj/item/storage/toolbox                          = TRADER_ALL,
+		/obj/item/toolbox                          = TRADER_ALL,
 		/obj/item/wallet                           = TRADER_THIS_TYPE,
 		/obj/item/storage/photo_album                      = TRADER_THIS_TYPE,
 		/obj/item/clothing/glasses                         = TRADER_SUBTYPES_ONLY,

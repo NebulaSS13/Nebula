@@ -30,7 +30,7 @@
 		ARMOR_BIO = ARMOR_BIO_SHIELDED,
 		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
 
 /obj/item/clothing/suit/space/void/engineering/Initialize()
 	. = ..()
@@ -180,7 +180,7 @@
 		/obj/item/flashlight,
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
-		/obj/item/storage/toolbox,
+		/obj/item/toolbox,
 		/obj/item/storage/briefcase/inflatable,
 		/obj/item/t_scanner,
 		/obj/item/rcd
@@ -380,7 +380,7 @@
 		ARMOR_BIO = ARMOR_BIO_SHIELDED,
 		ARMOR_RAD = ARMOR_RAD_RESISTANT
 		)
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
 
 /obj/item/clothing/suit/space/void/engineering/salvage/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage
@@ -410,7 +410,7 @@
 		ARMOR_BIO = ARMOR_BIO_SHIELDED,
 		ARMOR_RAD = ARMOR_RAD_SMALL
 		)
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/t_scanner,/obj/item/rcd)
 
 /obj/item/clothing/suit/space/void/expedition/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/expedition
