@@ -39,7 +39,7 @@
 		/obj/item/rsf,
 		/obj/item/chems/dropper/industrial,
 		/obj/item/flame/fuelled/lighter/zippo,
-		/obj/item/storage/tray/robotray,
+		/obj/item/plate/tray/robotray,
 		/obj/item/chems/borghypo/service
 	)
 	emag = /obj/item/chems/drinks/bottle/small/beer
