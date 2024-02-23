@@ -17,18 +17,19 @@ var/global/list/ventcrawl_machinery = list(
 	/obj/item/sword/cultblade
 	)
 
-/mob/living/var/list/icon/pipes_shown = list()
-/mob/living/var/is_ventcrawling = 0
-/mob/var/next_play_vent = 0
+/mob/living
+	var/list/image/pipes_shown
+	var/is_ventcrawling = FALSE
+	var/next_play_vent = 0
 
 /mob/living/proc/can_ventcrawl()
 	if(!client)
 		return FALSE
 	if(!(/mob/living/proc/ventcrawl in verbs))
-		to_chat(src, "<span class='warning'>You don't possess the ability to ventcrawl!</span>")
+		to_chat(src, SPAN_WARNING("You don't possess the ability to ventcrawl!"))
 		return FALSE
 	if(incapacitated())
-		to_chat(src, "<span class='warning'>You cannot ventcrawl in your current state!</span>")
+		to_chat(src, SPAN_WARNING("You cannot ventcrawl in your current state!"))
 		return FALSE
 	return ventcrawl_carry()
 
@@ -56,7 +57,7 @@ var/global/list/ventcrawl_machinery = list(
 /mob/living/proc/ventcrawl_carry()
 	for(var/atom/A in contents)
 		if(!is_allowed_vent_crawl_item(A))
-			to_chat(src, "<span class='warning'>You can't carry \the [A] while ventcrawling!</span>")
+			to_chat(src, SPAN_WARNING("You can't carry \the [A] while ventcrawling!"))
 			return FALSE
 	return TRUE
 
@@ -86,67 +87,62 @@ var/global/list/ventcrawl_machinery = list(
 	return 1
 
 /mob/living/proc/handle_ventcrawl(var/atom/clicked_on)
+
 	if(!can_ventcrawl())
 		return
 
-	var/obj/machinery/atmospherics/unary/vent_found
-	if(clicked_on && Adjacent(clicked_on))
-		vent_found = clicked_on
-		if(!istype(vent_found) || !vent_found.can_crawl_through())
-			vent_found = null
+	var/obj/machinery/atmospherics/unary/vent_found = clicked_on
+	if(!istype(vent_found) || !vent_found.can_crawl_through() || !Adjacent(vent_found))
+		vent_found = null
+		for(var/obj/machinery/atmospherics/unary/machine in range(1,src))
+			if(!Adjacent(machine))
+				continue
+			if(!is_type_in_list(machine, ventcrawl_machinery))
+				continue
+			if(!machine.can_crawl_through())
+				continue
+			vent_found = machine
+			break
 
 	if(!vent_found)
-		for(var/obj/machinery/atmospherics/machine in range(1,src))
-			if(is_type_in_list(machine, ventcrawl_machinery))
-				vent_found = machine
-
-			if(!vent_found || !vent_found.can_crawl_through())
-				vent_found = null
-
-			if(vent_found)
-				break
-
-	if(vent_found)
-		var/datum/pipe_network/network = vent_found.network_in_dir(vent_found.dir)
-		if(network && (network.normal_members.len || network.line_members.len))
-
-			to_chat(src, "You begin climbing into the ventilation system...")
-			if(vent_found.air_contents && !issilicon(src))
-
-				switch(vent_found.air_contents.temperature)
-					if(0 to BODYTEMP_COLD_DAMAGE_LIMIT)
-						to_chat(src, "<span class='danger'>You feel a painful freeze coming from the vent!</span>")
-					if(BODYTEMP_COLD_DAMAGE_LIMIT to T0C)
-						to_chat(src, "<span class='warning'>You feel an icy chill coming from the vent.</span>")
-					if(T0C + 40 to BODYTEMP_HEAT_DAMAGE_LIMIT)
-						to_chat(src, "<span class='warning'>You feel a hot wash coming from the vent.</span>")
-					if(BODYTEMP_HEAT_DAMAGE_LIMIT to INFINITY)
-						to_chat(src, "<span class='danger'>You feel a searing heat coming from the vent!</span>")
-				switch(vent_found.air_contents.return_pressure())
-					if(0 to HAZARD_LOW_PRESSURE)
-						to_chat(src, "<span class='danger'>You feel a rushing draw pulling you into the vent!</span>")
-					if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
-						to_chat(src, "<span class='warning'>You feel a strong drag pulling you into the vent.</span>")
-					if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
-						to_chat(src, "<span class='warning'>You feel a strong current pushing you away from the vent.</span>")
-					if(HAZARD_HIGH_PRESSURE to INFINITY)
-						to_chat(src, "<span class='danger'>You feel a roaring wind pushing you away from the vent!</span>")
-			if(!do_after(src, 45, vent_found, 1, 1))
-				return
-			if(!can_ventcrawl())
-				return
-
-			visible_message("<B>[src] scrambles into the ventilation ducts!</B>", "You climb into the ventilation system.")
-
-			forceMove(vent_found)
-			add_ventcrawl(vent_found)
-
-		else
-			to_chat(src, "This vent is not connected to anything.")
-	else
 		to_chat(src, "You must be standing on or beside an air vent to enter it.")
+		return
+
+	var/datum/pipe_network/network = vent_found.network_in_dir(vent_found.dir)
+	if(!network || (!length(network.normal_members) && !length(network.line_members)))
+		to_chat(src, "This vent is not connected to anything.")
+		return
+
+	to_chat(src, "You begin climbing into the ventilation system...")
+	if(vent_found.air_contents && !issilicon(src))
+		switch(vent_found.air_contents.temperature)
+			if(0 to BODYTEMP_COLD_DAMAGE_LIMIT)
+				to_chat(src, SPAN_DANGER("You feel a painful freeze coming from the vent!"))
+			if(BODYTEMP_COLD_DAMAGE_LIMIT to T0C)
+				to_chat(src, SPAN_WARNING("You feel an icy chill coming from the vent."))
+			if(T0C + 40 to BODYTEMP_HEAT_DAMAGE_LIMIT)
+				to_chat(src, SPAN_WARNING("You feel a hot wash coming from the vent."))
+			if(BODYTEMP_HEAT_DAMAGE_LIMIT to INFINITY)
+				to_chat(src, SPAN_DANGER("You feel a searing heat coming from the vent!"))
+		switch(vent_found.air_contents.return_pressure())
+			if(0 to HAZARD_LOW_PRESSURE)
+				to_chat(src, SPAN_DANGER("You feel a rushing draw pulling you into the vent!"))
+			if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
+				to_chat(src, SPAN_WARNING("You feel a strong drag pulling you into the vent."))
+			if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
+				to_chat(src, SPAN_WARNING("You feel a strong current pushing you away from the vent."))
+			if(HAZARD_HIGH_PRESSURE to INFINITY)
+				to_chat(src, SPAN_DANGER("You feel a roaring wind pushing you away from the vent!"))
+
+	if(!do_after(src, 45, vent_found, 1, 1) || !can_ventcrawl())
+		return
+
+	visible_message("<B>\The [src] scrambles into the ventilation ducts!</B>", "You climb into the ventilation system.")
+	forceMove(vent_found)
+	add_ventcrawl(vent_found)
+
 /mob/living/proc/add_ventcrawl(obj/machinery/atmospherics/starting_machine)
-	is_ventcrawling = 1
+	is_ventcrawling = TRUE
 	//candrop = 0
 	var/datum/pipe_network/network = starting_machine.return_network(starting_machine)
 	if(!network)
@@ -155,15 +151,13 @@ var/global/list/ventcrawl_machinery = list(
 		for(var/obj/machinery/atmospherics/A in (pipeline.members || pipeline.edges))
 			if(!A.pipe_image)
 				A.pipe_image = emissive_overlay(icon = A, loc = A.loc, dir = A.dir)
-			pipes_shown += A.pipe_image
+			LAZYDISTINCTADD(pipes_shown, A.pipe_image)
 			client.images += A.pipe_image
 
 /mob/living/proc/remove_ventcrawl()
-	is_ventcrawling = 0
-	//candrop = 1
+	is_ventcrawling = FALSE
 	if(client)
 		for(var/image/current_image in pipes_shown)
 			client.images -= current_image
 		client.eye = src
-
-	pipes_shown.len = 0
+	LAZYCLEARLIST(pipes_shown)

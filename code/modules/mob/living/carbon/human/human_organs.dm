@@ -283,7 +283,7 @@
 		update_inhand_overlays(FALSE)
 		update_body(FALSE)
 		update_bandages(FALSE)
-		update_damage_icon(FALSE)
+		update_damage_overlays(FALSE)
 		hud_reset()
 		queue_icon_update() //Avoids calling icon updates 50 times when adding multiple organs
 
