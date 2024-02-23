@@ -11,12 +11,56 @@
 	desc = "A soft cotton towel."
 	material = /decl/material/solid/organic/cloth
 
+/obj/item/towel/Initialize()
+	. = ..()
+	initialize_reagents()
+	START_PROCESSING(SSobj, src)
+
+/obj/item/towel/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+// Slowly dry out.
+/obj/item/towel/Process()
+	if(reagents?.total_volume)
+		reagents.remove_any(max(1, round(reagents.total_volume * 0.05)))
+
+/obj/item/towel/initialize_reagents()
+	create_reagents(50)
+	. = ..()
+
+/obj/item/towel/on_reagent_change()
+	. = ..()
+	if(reagents?.total_volume)
+		SetName("damp [initial(name)]")
+	else
+		SetName(initial(name))
+
+/obj/item/towel/attack(mob/living/M, mob/living/user, var/target_zone, animate = TRUE)
+	if(user.a_intent == I_HURT)
+		return ..()
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	var/reagent_space = reagents.maximum_volume - reagents.total_volume
+	if(reagent_space <= 0)
+		to_chat(user, SPAN_WARNING("\The [src] is too saturated to dry [user == M ? "yourself" : "\the [M]"] off effectively."))
+	else
+		var/decl/pronouns/G = M.get_pronouns()
+		var/datum/reagents/touching_reagents = M.get_contact_reagents()
+		if(!touching_reagents?.total_volume)
+			to_chat(user, SPAN_WARNING("[user == M ? "You are" : "\The [M] [G.is]"] already dry."))
+		else
+			user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to towel [user == M ? G.self : "\the M"] dry."))
+			touching_reagents.trans_to(src, min(touching_reagents.total_volume, reagent_space))
+			playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
+	return TRUE
+
 /obj/item/towel/attack_self(mob/user)
 	if(user.a_intent == I_GRAB)
 		lay_out()
-		return
-	user.visible_message(SPAN_NOTICE("[user] uses [src] to towel themselves off."))
-	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
+		return TRUE
+	if(user.a_intent != I_HURT)
+		return attack(user, user, user.get_target_zone())
+	return ..()
 
 /obj/item/towel/random/Initialize()
 	. = ..()

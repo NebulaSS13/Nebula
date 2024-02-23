@@ -191,6 +191,8 @@
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
 			SET_STATUS_MAX(M, STAT_STUN, 3)
 
+	return TRUE
+
 /decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
@@ -223,6 +225,7 @@
 /decl/material/liquid/mutagenics/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(33))
 		affect_blood(M, removed, holder)
+	return TRUE
 
 /decl/material/liquid/mutagenics/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(prob(67))

@@ -102,6 +102,7 @@
 
 /decl/material/liquid/adminordrazine/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	affect_blood(M, removed, holder)
+	return TRUE
 
 /decl/material/liquid/adminordrazine/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	M.rejuvenate()
