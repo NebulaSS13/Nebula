@@ -762,7 +762,7 @@
 	var/list/cnt = WillContain()
 	if((islist(cnt) || ispath(cnt)) && length(cnt))
 		var/atom/movable/AM = ispath(cnt)? cnt : cnt[1]
-		SetName("[initial(AM.name)] pack")
+		SetName("[atom_info_repository.get_name_for(AM)] pack")
 
 /obj/item/storage/box/parts_pack/manipulator
 	icon_state = "mainpulator"

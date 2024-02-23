@@ -18,6 +18,7 @@
 	use_sound = null
 	material = /decl/material/solid/organic/cardboard
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	lazyload_contents = FALSE
 	var/cooldown = 0	//Cooldown for banging the tray with a rolling pin. based on world.time. very silly
 	var/no_drop = FALSE
 
