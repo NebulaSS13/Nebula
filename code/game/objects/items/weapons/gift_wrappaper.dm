@@ -52,7 +52,7 @@
 
 /obj/item/a_gift/attack_self(mob/M)
 	var/gift_type = pick(
-		/obj/item/storage/wallet,
+		/obj/item/wallet,
 		/obj/item/storage/photo_album,
 		/obj/item/box/snappops,
 		/obj/item/box/fancy/crayons,

@@ -1176,7 +1176,7 @@
 /turf/floor/airless,
 /area/magshield/north)
 "dn" = (
-/obj/item/storage/wallet/random,
+/obj/item/wallet/random,
 /turf/floor/airless,
 /area/magshield/north)
 "do" = (
@@ -2180,7 +2180,7 @@
 /area/magshield/west)
 "gt" = (
 /obj/structure/closet,
-/obj/item/storage/wallet/leather,
+/obj/item/wallet/leather,
 /obj/random/clothing,
 /obj/random/smokes,
 /turf/floor/carpet/blue,

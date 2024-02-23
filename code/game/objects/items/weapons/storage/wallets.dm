@@ -1,4 +1,4 @@
-/obj/item/storage/wallet
+/obj/item/wallet
 	name = "wallet"
 	desc = "It can hold a few small and personal things."
 	icon = 'icons/obj/items/wallet.dmi'
@@ -11,10 +11,10 @@
 	var/obj/item/card/id/front_id = null
 	var/obj/item/charge_stick/front_stick = null
 
-/obj/item/storage/wallet/leather
+/obj/item/wallet/leather
 	color = COLOR_SEDONA
 
-/obj/item/storage/wallet/Destroy()
+/obj/item/wallet/Destroy()
 	if(front_id)
 		front_id.dropInto(loc)
 		front_id = null
@@ -23,7 +23,7 @@
 		front_stick = null
 	. = ..()
 
-/obj/item/storage/wallet/on_update_icon()
+/obj/item/wallet/on_update_icon()
 	. = ..()
 	if(front_id)
 		var/tiny_state = "id-generic"
@@ -31,15 +31,15 @@
 			tiny_state = "id-"+front_id.icon_state
 		add_overlay(overlay_image(icon, tiny_state, flags = RESET_COLOR))
 
-/obj/item/storage/wallet/GetIdCards(list/exceptions)
+/obj/item/wallet/GetIdCards(list/exceptions)
 	. = ..()
 	if(istype(front_id) && !is_type_in_list(front_id, exceptions))
 		LAZYDISTINCTADD(., front_id)
 
-/obj/item/storage/wallet/GetChargeStick()
+/obj/item/wallet/GetChargeStick()
 	return front_stick
 
-/obj/item/storage/wallet/random/WillContain()
+/obj/item/wallet/random/WillContain()
 	. = list(
 		new /datum/atom_creator/weighted(list(/obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)),
 		new /datum/atom_creator/weighted(list(/obj/item/coin/silver, /obj/item/coin/silver, /obj/item/coin/gold, /obj/item/coin/iron, /obj/item/coin/iron, /obj/item/coin/iron)),
@@ -47,20 +47,20 @@
 	if(prob(50))
 		. += new /datum/atom_creator/weighted(list(/obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500))
 
-/obj/item/storage/wallet/random/Initialize(ml, material_key)
+/obj/item/wallet/random/Initialize(ml, material_key)
 	. = ..()
 	update_icon()
 
-/obj/item/storage/wallet/poly
+/obj/item/wallet/poly
 	name = "polychromic wallet"
 	desc = "You can recolor it! Fancy! The future is NOW!"
 
-/obj/item/storage/wallet/poly/Initialize(ml, material_key)
+/obj/item/wallet/poly/Initialize(ml, material_key)
 	. = ..()
 	color = get_random_colour()
 	update_icon()
 
-/obj/item/storage/wallet/poly/verb/change_color()
+/obj/item/wallet/poly/verb/change_color()
 	set name = "Change Wallet Color"
 	set category = "Object"
 	set desc = "Change the color of the wallet."
@@ -74,7 +74,7 @@
 		return
 	color = new_color
 
-/obj/item/storage/wallet/poly/emp_act()
+/obj/item/wallet/poly/emp_act()
 	icon_state = "wallet-emp"
 	update_icon()
 
@@ -83,12 +83,12 @@
 			icon_state = initial(icon_state)
 			update_icon()
 
-/obj/item/storage/wallet/get_alt_interactions(var/mob/user)
+/obj/item/wallet/get_alt_interactions(var/mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/remove_id/wallet)
 
 /decl/interaction_handler/remove_id/wallet
-	expected_target_type = /obj/item/storage/wallet
+	expected_target_type = /obj/item/wallet
 
 /decl/interaction_handler/remove_id/wallet/is_possible(atom/target, mob/user, obj/item/prop)
 	. = ..() && ishuman(user)

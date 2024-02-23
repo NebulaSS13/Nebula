@@ -7802,7 +7802,7 @@
 	pixel_x = -22
 	},
 /obj/item/clothing/mask/horsehead,
-/obj/item/storage/wallet/random{
+/obj/item/wallet/random{
 	pixel_z = -11
 	},
 /obj/item/classic_baton{
