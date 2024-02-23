@@ -102,7 +102,7 @@
 
 /decl/loadout_option/matchbook
 	name = "matchbook"
-	path = /obj/item/storage/box/matches
+	path = /obj/item/box/matches
 
 /decl/loadout_option/lighter
 	name = "cheap lighter"

@@ -6,13 +6,13 @@
 	icon_screen = "invaders"
 	var/random = TRUE
 	var/static/list/prizes = list(
-		/obj/item/storage/box/snappops =                         200,
+		/obj/item/box/snappops =                         200,
 		/obj/item/toy/blink =                                    200,
 		/obj/item/clothing/under/syndicate/tacticool =           200,
 		/obj/item/energy_blade/sword/toy =                       200,
 		/obj/item/gun/projectile/revolver/capgun =               200,
 		/obj/item/gun/launcher/foam/crossbow =                   200,
-		/obj/item/storage/box/fancy/crayons =                    200,
+		/obj/item/box/fancy/crayons =                    200,
 		/obj/item/toy/spinningtoy =                              200,
 		/obj/item/toy/prize/powerloader =                        100,
 		/obj/item/toy/prize/fireripley =                         100,
@@ -29,11 +29,11 @@
 		/obj/random/action_figure =                              100,
 		/obj/random/plushie =                                    100,
 		/obj/item/sword/cult_toy =                               100,
-		/obj/item/storage/box/large/foam_gun =                   100,
-		/obj/item/storage/box/large/foam_gun/burst =             50,
-		/obj/item/storage/box/large/foam_gun/revolver =          25,
+		/obj/item/box/large/foam_gun =                   100,
+		/obj/item/box/large/foam_gun/burst =             50,
+		/obj/item/box/large/foam_gun/revolver =          25,
 		/obj/random/plushie/large =                              20,
-		/obj/item/storage/box/large/foam_gun/revolver/tampered = 1
+		/obj/item/box/large/foam_gun/revolver/tampered = 1
 	)
 
 /obj/machinery/computer/arcade/Initialize()

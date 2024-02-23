@@ -56,8 +56,8 @@
 	return list(
 		/obj/item/assembly/signaler,
 		/obj/item/gun/launcher/syringe/rapid,
-		/obj/item/storage/box/syringegun,
-		/obj/item/storage/box/syringes,
+		/obj/item/box/syringegun,
+		/obj/item/box/syringes,
 		/obj/item/chems/glass/bottle/sedatives
 	)
 
@@ -78,7 +78,7 @@
 		/obj/item/flashlight,
 		/obj/item/chems/food/liquidfood,
 		/obj/item/chems/drinks/cans/waterbottle,
-		/obj/item/storage/box/flares,
+		/obj/item/box/flares,
 		/obj/item/cell/device,
 		/obj/item/radio,
 		/obj/item/backpack/satchel

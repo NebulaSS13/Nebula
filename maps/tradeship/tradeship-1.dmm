@@ -1105,7 +1105,7 @@
 /obj/item/stamp/clown,
 /obj/item/backpack/clown,
 /obj/item/bikehorn,
-/obj/item/storage/box/fancy/crayons,
+/obj/item/box/fancy/crayons,
 /obj/machinery/newscaster{
 	pixel_y = -32;
 	dir = 1
@@ -2136,7 +2136,7 @@
 /obj/item/storage/ore,
 /obj/item/tool/pickaxe,
 /obj/item/stack/flag/yellow,
-/obj/item/storage/box/glowsticks,
+/obj/item/box/glowsticks,
 /obj/item/scanner/mining,
 /obj/item/paint_sprayer,
 /obj/item/radio,
@@ -2228,8 +2228,8 @@
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
-/obj/item/storage/box/lights/mixed,
-/obj/item/storage/box/lights/bulbs,
+/obj/item/box/lights/mixed,
+/obj/item/box/lights/bulbs,
 /turf/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
 "nn" = (

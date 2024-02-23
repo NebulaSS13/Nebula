@@ -8,7 +8,7 @@
 	name = "Box of Sin-Pockets"
 	desc = "A box of filled dough pockets. Great for a quick meal when you're hiding from Security. Instructions included on the box."
 	item_cost = 8
-	path = /obj/item/storage/box/sinpockets
+	path = /obj/item/box/sinpockets
 
 /datum/uplink_item/item/medical/stabilisation
 	name = "Stabilisation First Aid Kit"

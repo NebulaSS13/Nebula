@@ -24,17 +24,17 @@
 
 /decl/hierarchy/supply_pack/supply/tapes
 	name = "Supplies - Blank Tapes (14)"
-	contains = list (/obj/item/storage/box/tapes)
+	contains = list (/obj/item/box/tapes)
 	containername = "blank tapes crate"
 
 /decl/hierarchy/supply_pack/supply/taperolls
 	name = "Supplies - Barricade Tapes (mixed)"
-	contains = list (/obj/item/storage/box/taperolls)
+	contains = list (/obj/item/box/taperolls)
 	containername = "barricade tape crate"
 
 /decl/hierarchy/supply_pack/supply/bogrolls
 	name = "Custodial - Toilet paper (12)"
-	contains = list (/obj/item/storage/box/bogrolls = 2)
+	contains = list (/obj/item/box/bogrolls = 2)
 	containername = "toilet paper crate"
 
 /decl/hierarchy/supply_pack/supply/scanner_module
@@ -54,42 +54,42 @@
 
 /decl/hierarchy/supply_pack/supply/water
 	name = "Refills - Bottled water"
-	contains = list (/obj/item/storage/box/water = 2)
+	contains = list (/obj/item/box/water = 2)
 	containername = "bottled water crate"
 
 /decl/hierarchy/supply_pack/supply/sodas
 	num_contained = 2
-	contains = list(/obj/item/storage/box/cola,
-					/obj/item/storage/box/cola/spacewind,
-					/obj/item/storage/box/cola/drgibb,
-					/obj/item/storage/box/cola/starkist,
-					/obj/item/storage/box/cola/spaceup,
-					/obj/item/storage/box/cola/lemonlime,
-					/obj/item/storage/box/cola/icedtea,
-					/obj/item/storage/box/cola/grapejuice,
-					/obj/item/storage/box/cola/sodawater)
+	contains = list(/obj/item/box/cola,
+					/obj/item/box/cola/spacewind,
+					/obj/item/box/cola/drgibb,
+					/obj/item/box/cola/starkist,
+					/obj/item/box/cola/spaceup,
+					/obj/item/box/cola/lemonlime,
+					/obj/item/box/cola/icedtea,
+					/obj/item/box/cola/grapejuice,
+					/obj/item/box/cola/sodawater)
 	name = "Refills - Soda cans"
 	containername = "soda can crate"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/supply/snacks
 	num_contained = 2
-	contains = list(/obj/item/storage/box/snack,
-					/obj/item/storage/box/snack/noraisin,
-					/obj/item/storage/box/snack/cheesehonks,
-					/obj/item/storage/box/snack/tastybread,
-					/obj/item/storage/box/snack/candy,
-					/obj/item/storage/box/snack/chips)
+	contains = list(/obj/item/box/snack,
+					/obj/item/box/snack/noraisin,
+					/obj/item/box/snack/cheesehonks,
+					/obj/item/box/snack/tastybread,
+					/obj/item/box/snack/candy,
+					/obj/item/box/snack/chips)
 	name = "Refills - Snack foods"
 	containername = "snack foods crate"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/supply/canned
 	num_contained = 2
-	contains = list(/obj/item/storage/box/canned,
-					/obj/item/storage/box/canned/beef,
-					/obj/item/storage/box/canned/beans,
-					/obj/item/storage/box/canned/tomato,
+	contains = list(/obj/item/box/canned,
+					/obj/item/box/canned/beef,
+					/obj/item/box/canned/beans,
+					/obj/item/box/canned/tomato,
 )
 	name = "Emergency - Canned foods"
 	containername = "canneds crate"

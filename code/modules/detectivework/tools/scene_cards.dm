@@ -1,11 +1,11 @@
-/obj/item/storage/box/csi_markers
+/obj/item/box/csi_markers
 	name = "crime scene markers box"
 	desc = "A cardboard box for crime scene marker cards."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "cards"
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/storage/box/csi_markers/WillContain()
+/obj/item/box/csi_markers/WillContain()
 	return list(
 		/obj/item/csi_marker/n1,
 		/obj/item/csi_marker/n2,
@@ -16,7 +16,7 @@
 		/obj/item/csi_marker/n7
 	)
 
-/obj/item/storage/box/csi_markers/Initialize(ml, material_key)
+/obj/item/box/csi_markers/Initialize(ml, material_key)
 	. = ..()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)

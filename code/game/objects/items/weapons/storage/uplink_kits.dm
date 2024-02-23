@@ -1,4 +1,4 @@
-/obj/item/storage/box/syndie_kit
+/obj/item/box/syndie_kit
 	name = "box"
 	desc = "A sleek, sturdy box."
 	icon_state = "box_of_doom"
@@ -14,22 +14,22 @@
 	desc = "A sleek, sturdy dufflebag."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_syndie.dmi'
 
-/obj/item/storage/box/syndie_kit/imp_freedom/WillContain()
+/obj/item/box/syndie_kit/imp_freedom/WillContain()
 	return list(/obj/item/implanter/freedom)
 
-/obj/item/storage/box/syndie_kit/imp_uplink/WillContain()
+/obj/item/box/syndie_kit/imp_uplink/WillContain()
 	return list(/obj/item/implanter/uplink)
 
-/obj/item/storage/box/syndie_kit/imp_compress/WillContain()
+/obj/item/box/syndie_kit/imp_compress/WillContain()
 	return list(/obj/item/implanter/compressed)
 
-/obj/item/storage/box/syndie_kit/imp_explosive/WillContain()
+/obj/item/box/syndie_kit/imp_explosive/WillContain()
 	return list(
 			/obj/item/implanter/explosive,
 			/obj/item/implantpad
 		)
 
-/obj/item/storage/box/syndie_kit/imp_imprinting/WillContain()
+/obj/item/box/syndie_kit/imp_imprinting/WillContain()
 	return list(
 			/obj/item/implanter/imprinting,
 			/obj/item/implantpad,
@@ -62,11 +62,11 @@
 			/obj/item/clothing/shoes/chameleon,
 			/obj/item/clothing/head/chameleon,
 			/obj/item/clothing/mask/chameleon,
-			/obj/item/storage/box/syndie_kit/chameleon,
+			/obj/item/box/syndie_kit/chameleon,
 			/obj/item/gun/energy/chameleon,
 		)
 
-/obj/item/storage/box/syndie_kit/chameleon/WillContain()
+/obj/item/box/syndie_kit/chameleon/WillContain()
 	return list(
 			/obj/item/clothing/gloves/chameleon,
 			/obj/item/clothing/glasses/chameleon,
@@ -86,13 +86,13 @@
 			/obj/item/destTagger,
 		)
 
-/obj/item/storage/box/syndie_kit/spy/WillContain()
+/obj/item/box/syndie_kit/spy/WillContain()
 	return list(
 		/obj/item/spy_bug = 6,
 		/obj/item/spy_monitor
 	)
 
-/obj/item/storage/box/syndie_kit/silenced/WillContain()
+/obj/item/box/syndie_kit/silenced/WillContain()
 	return list(
 		/obj/item/gun/projectile/pistol/holdout,
 		/obj/item/silencer,
@@ -105,29 +105,29 @@
 		/obj/item/ammo_magazine/speedloader
 	)
 
-/obj/item/storage/box/syndie_kit/toxin/WillContain()
+/obj/item/box/syndie_kit/toxin/WillContain()
 	return list(
 		/obj/item/chems/glass/beaker/vial/random/toxin,
 		/obj/item/chems/syringe
 	)
 
-/obj/item/storage/box/syndie_kit/syringegun/WillContain()
+/obj/item/box/syndie_kit/syringegun/WillContain()
 	return list(
 		/obj/item/gun/launcher/syringe/disguised,
 		/obj/item/syringe_cartridge = 4,
 		/obj/item/chems/syringe = 4
 	)
 
-/obj/item/storage/box/syndie_kit/cigarette
+/obj/item/box/syndie_kit/cigarette
 	name = "\improper Tricky smokes"
 	desc = "Smokes so good, you'd think it was a trick!"
 
-/obj/item/storage/box/syndie_kit/cigarette/WillContain()
+/obj/item/box/syndie_kit/cigarette/WillContain()
 	return list(
-		/obj/item/storage/box/fancy/cigarettes/flash_powder = 2,
-		/obj/item/storage/box/fancy/cigarettes/chemsmoke = 2,
-		/obj/item/storage/box/fancy/cigarettes/mindbreak,
-		/obj/item/storage/box/fancy/cigarettes/tricord,
+		/obj/item/box/fancy/cigarettes/flash_powder = 2,
+		/obj/item/box/fancy/cigarettes/chemsmoke = 2,
+		/obj/item/box/fancy/cigarettes/mindbreak,
+		/obj/item/box/fancy/cigarettes/tricord,
 		/obj/item/flame/fuelled/lighter/zippo/random,
 		)
 
@@ -141,7 +141,7 @@
 /obj/item/storage/secure/briefcase/heavysniper/WillContain()
 	return list(
 		/obj/item/gun/projectile/bolt_action/sniper,
-		/obj/item/storage/box/ammo/sniperammo
+		/obj/item/box/ammo/sniperammo
 	)
 
 /obj/item/storage/secure/briefcase/heavysniper/Initialize(ml, material_key)

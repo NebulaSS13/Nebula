@@ -97,7 +97,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/chems/condiment/flour,
 		/obj/item/chems/drinks/milk,
 		/obj/item/chems/drinks/milk,
-		/obj/item/storage/box/fancy/egg_box,
+		/obj/item/box/fancy/egg_box,
 		/obj/item/chems/food/tofu,
 		/obj/item/chems/food/tofu,
 		/obj/item/chems/food/butchery/meat,
@@ -153,8 +153,8 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/chems/glass/bottle/stabilizer,
 		/obj/item/chems/glass/bottle/sedatives,
-		/obj/item/storage/box/syringes,
-		/obj/item/storage/box/autoinjectors)
+		/obj/item/box/syringes,
+		/obj/item/box/autoinjectors)
 
 /datum/supply_drop_loot/power
 	name = "Power"

@@ -449,7 +449,7 @@
 /obj/structure/sign/warning/nosmoking_1/heist{
 	pixel_y = 32
 	},
-/obj/item/storage/box/fancy/cigarettes/dromedaryco,
+/obj/item/box/fancy/cigarettes/dromedaryco,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -728,7 +728,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bM" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/glasses/rocks,
+/obj/item/box/glasses/rocks,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1301,7 +1301,7 @@
 /area/map_template/skipjack_station/start)
 "di" = (
 /obj/structure/table,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/fancy/cigarettes,
 /obj/item/flame/fuelled/lighter/zippo/random,
 /obj/item/clothing/gloves/insulated,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -1488,7 +1488,7 @@
 "dK" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/item/clothing/mask/gas/cyborg,
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
@@ -1707,7 +1707,7 @@
 /obj/item/chems/glass/bottle/sedatives,
 /obj/item/chems/syringe,
 /obj/item/gun/launcher/syringe/rapid,
-/obj/item/storage/box/syringegun,
+/obj/item/box/syringegun,
 /obj/item/chems/glass/beaker/vial/random/toxin,
 /turf/floor/shuttle/white,
 /area/map_template/skipjack_station/start)

@@ -1208,9 +1208,9 @@
 /area/casino/casino_security)
 "dB" = (
 /obj/structure/rack,
-/obj/item/storage/box/ammo/shotgunammo,
-/obj/item/storage/box/ammo/shotgunammo,
-/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunammo,
 /turf/floor/tiled,
 /area/casino/casino_security)
 "dC" = (
@@ -1305,19 +1305,19 @@
 /area/casino/casino_storage)
 "dQ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigar{
+/obj/item/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/box/fancy/cigar{
+/obj/item/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/box/fancy/cigar{
+/obj/item/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/box/fancy/cigar{
+/obj/item/box/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/storage/box/fancy/cigar{
+/obj/item/box/fancy/cigar{
 	pixel_y = 5
 	},
 /obj/random/tool,
@@ -2270,8 +2270,8 @@
 /area/casino/casino_mainfloor)
 "gv" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigar,
-/obj/item/storage/box/fancy/cigar{
+/obj/item/box/fancy/cigar,
+/obj/item/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/floor/carpet,
@@ -2830,9 +2830,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/storage/box/fancy/egg_box,
-/obj/item/storage/box/fancy/egg_box,
-/obj/item/storage/box/fancy/egg_box,
+/obj/item/box/fancy/egg_box,
+/obj/item/box/fancy/egg_box,
+/obj/item/box/fancy/egg_box,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/sugar,
 /turf/floor/tiled,
@@ -3446,11 +3446,11 @@
 /area/casino/casino_crew_atmos)
 "jQ" = (
 /obj/structure/table/marble,
-/obj/item/storage/box/glass_extras/sticks,
-/obj/item/storage/box/glass_extras/straws,
-/obj/item/storage/box/glass_extras,
-/obj/item/storage/box/glasses/pint,
-/obj/item/storage/box/glasses/wine,
+/obj/item/box/glass_extras/sticks,
+/obj/item/box/glass_extras/straws,
+/obj/item/box/glass_extras,
+/obj/item/box/glasses/pint,
+/obj/item/box/glasses/wine,
 /obj/item/radio,
 /turf/floor/tiled,
 /area/casino/casino_kitchen)
@@ -3624,7 +3624,7 @@
 /area/casino/casino_mainfloor)
 "kp" = (
 /obj/structure/table/marble,
-/obj/item/storage/box/fancy/cigar{
+/obj/item/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/floor/tiled,
@@ -4233,7 +4233,7 @@
 /area/casino/casino_private_vip)
 "lZ" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigar{
+/obj/item/box/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/floor/wood,

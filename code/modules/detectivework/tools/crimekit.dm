@@ -10,11 +10,11 @@
 
 /obj/item/storage/briefcase/crimekit/WillContain()
 	return list(
-		/obj/item/storage/box/fingerprints,
+		/obj/item/box/fingerprints,
 		/obj/item/chems/spray/luminol,
 		/obj/item/uv_light,
 		/obj/item/forensics/sample_kit/swabs,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
-		/obj/item/storage/box/csi_markers
+		/obj/item/box/csi_markers
 		)

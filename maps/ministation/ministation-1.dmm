@@ -4960,7 +4960,7 @@
 "vH" = (
 /obj/structure/table,
 /obj/item/chems/dropper,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/item/mollusc/clam,
 /obj/machinery/alarm{
 	pixel_y = 23
@@ -5012,7 +5012,7 @@
 /area/ministation/medical)
 "vN" = (
 /obj/structure/table,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
 /obj/item/pen,
 /obj/item/radio/intercom{
 	dir = 1;
@@ -5297,7 +5297,7 @@
 /area/ministation/cafe)
 "wQ" = (
 /obj/structure/table/marble,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
@@ -7735,7 +7735,7 @@
 "Ir" = (
 /obj/structure/table,
 /obj/item/folder/blue,
-/obj/item/storage/box/PDAs,
+/obj/item/box/PDAs,
 /obj/machinery/status_display{
 	pixel_y = 30
 	},
@@ -8929,7 +8929,7 @@
 /area/ministation/medical)
 "Pd" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigarettes{
+/obj/item/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /obj/item/flame/fuelled/lighter/random,

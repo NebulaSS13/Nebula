@@ -1756,7 +1756,7 @@
 	dir = 9
 	},
 /obj/structure/table,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/item/chems/glass/beaker/large,
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -2990,8 +2990,8 @@
 	dir = 4
 	},
 /obj/structure/table,
-/obj/item/storage/box/syringes,
-/obj/item/storage/box/botanydisk,
+/obj/item/box/syringes,
+/obj/item/box/botanydisk,
 /obj/item/chems/glass/beaker/large,
 /obj/item/scanner/plant,
 /obj/item/scanner/gas,
@@ -4167,7 +4167,7 @@
 "wY" = (
 /obj/structure/table/woodentable/ebony,
 /obj/item/pen/fancy,
-/obj/item/storage/box/fancy/crayons,
+/obj/item/box/fancy/crayons,
 /obj/effect/floor_decal/stoneborder{
 	dir = 6
 	},
@@ -4947,7 +4947,7 @@
 	dir = 4
 	},
 /obj/structure/table,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/structure/disposalpipe/segment{
 	dir = 4

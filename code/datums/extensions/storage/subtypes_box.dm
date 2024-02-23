@@ -4,7 +4,7 @@
 
 /datum/extension/storage/box/make_exact_fit()
 	..()
-	var/obj/item/storage/box/box = holder
+	var/obj/item/box/box = holder
 	if(istype(box))
 		box.foldable = null //special form fitted boxes should not be foldable.
 

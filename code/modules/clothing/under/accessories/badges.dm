@@ -125,11 +125,11 @@
 		return
 	..()
 
-/obj/item/storage/box/holobadge
+/obj/item/box/holobadge
 	name = "holobadge box"
 	desc = "A box containing security holobadges."
 
-/obj/item/storage/box/holobadge/WillContain()
+/obj/item/box/holobadge/WillContain()
 	return list(
 			/obj/item/clothing/accessory/badge/holo      = 4,
 			/obj/item/clothing/accessory/badge/holo/cord = 2

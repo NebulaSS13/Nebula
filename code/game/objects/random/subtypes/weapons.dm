@@ -84,10 +84,10 @@
 
 /obj/random/ammo/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/box/ammo/beanbags =      6,
-		/obj/item/storage/box/ammo/shotgunammo =   2,
-		/obj/item/storage/box/ammo/shotgunshells = 4,
-		/obj/item/storage/box/ammo/stunshells =    1,
+		/obj/item/box/ammo/beanbags =      6,
+		/obj/item/box/ammo/shotgunammo =   2,
+		/obj/item/box/ammo/shotgunshells = 4,
+		/obj/item/box/ammo/stunshells =    1,
 		/obj/item/ammo_magazine/pistol =           2,
 		/obj/item/ammo_magazine/smg =              2,
 		/obj/item/ammo_magazine/smg/rubber =       6

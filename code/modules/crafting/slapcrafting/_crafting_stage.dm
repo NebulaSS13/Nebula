@@ -118,5 +118,5 @@
 /decl/crafting_stage/empty_storage/can_begin_with(obj/item/thing)
 	. = ..()
 	if(. && istype(thing, /obj/item/storage))
-		var/obj/item/storage/box = thing
+		var/obj/item/box = thing
 		. = (length(box.contents) == 0)

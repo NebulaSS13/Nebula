@@ -476,7 +476,7 @@
 /turf/floor/airless,
 /area/exodus/solar/fore)
 "abn" = (
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/structure/rack{
 	dir = 1
 	},
@@ -627,8 +627,8 @@
 	},
 /obj/structure/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/storage/box/flashbangs,
-/obj/item/storage/box/teargas,
+/obj/item/box/flashbangs,
+/obj/item/box/teargas,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -1303,7 +1303,7 @@
 /obj/effect/floor_decal/corner/pink/three_quarters{
 	dir = 1
 	},
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/main)
 "acR" = (
@@ -1502,7 +1502,7 @@
 /obj/effect/floor_decal/corner/white{
 	dir = 9
 	},
-/obj/item/storage/box,
+/obj/item/box,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/main)
 "adp" = (
@@ -1652,11 +1652,11 @@
 /area/exodus/security/armoury)
 "adG" = (
 /obj/structure/rack,
-/obj/item/storage/box/chemimp{
+/obj/item/box/chemimp{
 	pixel_x = 4;
 	pixel_y = 3
 	},
-/obj/item/storage/box/trackimp,
+/obj/item/box/trackimp,
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
@@ -1895,7 +1895,7 @@
 	pixel_x = 4;
 	pixel_y = -28
 	},
-/obj/item/storage/box/cdeathalarm_kit,
+/obj/item/box/cdeathalarm_kit,
 /turf/floor/tiled/dark,
 /area/exodus/security/tactical)
 "aei" = (
@@ -2485,7 +2485,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/effect/floor_decal/corner/red,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/main)
@@ -3047,7 +3047,7 @@
 /obj/item/hand_labeler,
 /obj/effect/floor_decal/corner/red,
 /obj/item/stack/package_wrap,
-/obj/item/storage/box,
+/obj/item/box,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/main)
 "agH" = (
@@ -4559,7 +4559,7 @@
 /area/exodus/crew_quarters/heads/hos)
 "ajR" = (
 /obj/structure/table,
-/obj/item/storage/box/evidence,
+/obj/item/box/evidence,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -5138,7 +5138,7 @@
 "akU" = (
 /obj/structure/table/woodentable,
 /obj/item/ashtray/plastic,
-/obj/item/storage/box/fancy/cigarettes/dromedaryco,
+/obj/item/box/fancy/cigarettes/dromedaryco,
 /obj/item/clothing/gloves/forensic,
 /turf/floor/carpet,
 /area/exodus/security/detectives_office)
@@ -5375,7 +5375,7 @@
 "alo" = (
 /obj/structure/rack,
 /obj/item/flame/fuelled/lighter/random,
-/obj/item/storage/box/fancy/cigarettes/dromedaryco,
+/obj/item/box/fancy/cigarettes/dromedaryco,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /turf/floor/plating,
@@ -6652,7 +6652,7 @@
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/storage/box/fancy/cigarettes/dromedaryco,
+/obj/item/box/fancy/cigarettes/dromedaryco,
 /turf/floor/tiled/dark,
 /area/exodus/lawoffice)
 "anU" = (
@@ -7483,7 +7483,7 @@
 	pixel_x = 24
 	},
 /obj/structure/table/glass,
-/obj/item/storage/box/gloves{
+/obj/item/box/gloves{
 	pixel_x = 4;
 	pixel_y = 4
 	},
@@ -7850,7 +7850,7 @@
 "aqt" = (
 /obj/structure/table/gamblingtable,
 /obj/item/board,
-/obj/item/storage/box/checkers/chess/red,
+/obj/item/box/checkers/chess/red,
 /turf/floor/wood,
 /area/exodus/maintenance/dormitory)
 "aqu" = (
@@ -7953,7 +7953,7 @@
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/storage/box/fancy/cigarettes/dromedaryco,
+/obj/item/box/fancy/cigarettes/dromedaryco,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -8094,7 +8094,7 @@
 /area/exodus/security/prison)
 "aqW" = (
 /obj/structure/table,
-/obj/item/storage/box/cups,
+/obj/item/box/cups,
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
@@ -8259,16 +8259,16 @@
 /obj/structure/closet{
 	name = "Evidence Closet"
 	},
-/obj/item/storage/box/bodybags,
-/obj/item/storage/box/evidence,
-/obj/item/storage/box/swabs,
+/obj/item/box/bodybags,
+/obj/item/box/evidence,
+/obj/item/box/swabs,
 /obj/machinery/camera/network/security{
 	c_tag = "Security - Forensic Office Aft";
 	dir = 1
 	},
-/obj/item/storage/box/fingerprints,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/syringes,
+/obj/item/box/fingerprints,
+/obj/item/box/beakers,
+/obj/item/box/syringes,
 /turf/floor/tiled/white,
 /area/exodus/security/detectives_office)
 "ark" = (
@@ -8479,7 +8479,7 @@
 /area/exodus/maintenance/evahallway)
 "arD" = (
 /obj/structure/table/gamblingtable,
-/obj/item/storage/box/checkers/chess,
+/obj/item/box/checkers/chess,
 /turf/floor/wood,
 /area/exodus/maintenance/dormitory)
 "arE" = (
@@ -10603,8 +10603,8 @@
 /area/exodus/maintenance/library)
 "awp" = (
 /obj/structure/table,
-/obj/item/storage/box/donkpockets,
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets,
+/obj/item/box/donkpockets{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -12668,11 +12668,11 @@
 /area/exodus/ai_monitored/storage/eva)
 "aAJ" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/box/PDAs{
+/obj/item/box/PDAs{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/ids,
+/obj/item/box/ids,
 /turf/floor/tiled/steel_grid,
 /area/exodus/bridge)
 "aAK" = (
@@ -16767,7 +16767,7 @@
 	pixel_x = -2;
 	pixel_y = 5
 	},
-/obj/item/storage/box/fancy/crayons,
+/obj/item/box/fancy/crayons,
 /turf/floor/lino,
 /area/exodus/chapel/office)
 "aJk" = (
@@ -20022,7 +20022,7 @@
 	name = "Prisoner's Locker"
 	},
 /obj/item/flame/fuelled/lighter/zippo,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/fancy/cigarettes,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/prison/dorm)
 "aQb" = (
@@ -20092,7 +20092,7 @@
 /area/exodus/maintenance/arrivals)
 "aQj" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigarettes{
+/obj/item/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /obj/random/single{
@@ -20587,7 +20587,7 @@
 /obj/item/clothing/mask/breath,
 /obj/item/flashlight,
 /obj/item/flashlight,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/item/chems/spray/extinguisher,
 /turf/floor/plating,
 /area/exodus/storage/emergency2)
@@ -23009,8 +23009,8 @@
 /area/exodus/storage/art)
 "aWZ" = (
 /obj/structure/table,
-/obj/item/storage/box/fancy/crayons,
-/obj/item/storage/box/fancy/crayons,
+/obj/item/box/fancy/crayons,
+/obj/item/box/fancy/crayons,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
@@ -23269,7 +23269,7 @@
 "aXD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/table/woodentable,
-/obj/item/storage/box/checkers/chess/red,
+/obj/item/box/checkers/chess/red,
 /turf/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "aXE" = (
@@ -23379,7 +23379,7 @@
 /area/exodus/bridge)
 "aXP" = (
 /obj/structure/table/gamblingtable,
-/obj/item/storage/box/checkers,
+/obj/item/box/checkers,
 /turf/floor/wood,
 /area/exodus/maintenance/dormitory)
 "aXQ" = (
@@ -23736,7 +23736,7 @@
 /area/exodus/crew_quarters/locker)
 "aYF" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/checkers,
+/obj/item/box/checkers,
 /turf/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "aYG" = (
@@ -24798,7 +24798,7 @@
 	icon_state = "1-8"
 	},
 /obj/item/storage/toolbox/mechanical,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/item/flashlight,
 /obj/item/multitool,
 /obj/effect/floor_decal/corner/blue/three_quarters{
@@ -25371,7 +25371,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/effect/floor_decal/corner/blue/three_quarters,
 /turf/floor/tiled/steel_grid,
 /area/exodus/bridge)
@@ -25540,7 +25540,7 @@
 	dir = 8
 	},
 /obj/structure/table/marble,
-/obj/item/storage/box/glasses/square,
+/obj/item/box/glasses/square,
 /turf/floor/tiled/white,
 /area/exodus/crew_quarters/kitchen)
 "bct" = (
@@ -26220,7 +26220,7 @@
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
-/obj/item/storage/box/fancy/cigarettes{
+/obj/item/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /turf/floor/tiled/dark/monotile,
@@ -26494,10 +26494,10 @@
 /turf/floor/wood/walnut,
 /area/exodus/library)
 "bez" = (
-/obj/item/storage/box,
+/obj/item/box,
 /obj/structure/table,
-/obj/item/storage/box,
-/obj/item/storage/box,
+/obj/item/box,
+/obj/item/box,
 /obj/item/radio/intercom{
 	pixel_y = 20
 	},
@@ -27038,7 +27038,7 @@
 "bfG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/table/woodentable,
-/obj/item/storage/box/checkers/chess,
+/obj/item/box/checkers/chess,
 /turf/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "bfH" = (
@@ -28087,7 +28087,7 @@
 /area/exodus/turret_protected/ai)
 "bhU" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/structure/cable/green{
 	icon_state = "4-8"
 	},
@@ -30144,7 +30144,7 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
-/obj/item/storage/box/cups,
+/obj/item/box/cups,
 /obj/structure/table{
 	name = "plastic table frame"
 	},
@@ -30471,7 +30471,7 @@
 	dir = 4
 	},
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /turf/floor/wood/walnut,
 /area/exodus/bridge/meeting_room)
 "bmF" = (
@@ -31152,8 +31152,8 @@
 /area/exodus/maintenance/locker)
 "boa" = (
 /obj/structure/table,
-/obj/item/storage/box/lights/mixed,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/random/tech_supply,
 /turf/floor/plating,
 /area/exodus/storage/emergency)
@@ -32023,8 +32023,8 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_two)
 "bpQ" = (
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
+/obj/item/box/beakers,
 /obj/item/chems/dropper,
 /obj/structure/table/glass,
 /turf/floor/tiled/white,
@@ -33006,7 +33006,7 @@
 /turf/floor/tiled/white,
 /area/exodus/medical/chemistry)
 "brO" = (
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -33118,7 +33118,7 @@
 	pixel_x = -6;
 	pixel_y = 4
 	},
-/obj/item/storage/box/rxglasses,
+/obj/item/box/rxglasses,
 /obj/structure/table{
 	name = "plastic table frame"
 	},
@@ -33158,8 +33158,8 @@
 /area/exodus/medical/sleeper)
 "bsd" = (
 /obj/structure/table,
-/obj/item/storage/box/bodybags,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
+/obj/item/box/bodybags,
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -22
@@ -33304,8 +33304,8 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/storage/box/cups,
-/obj/item/storage/box/cups{
+/obj/item/box/cups,
+/obj/item/box/cups{
 	pixel_x = 2;
 	pixel_y = 5
 	},
@@ -35503,7 +35503,7 @@
 /area/exodus/medical/medbay2)
 "bwU" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/matches,
+/obj/item/box/matches,
 /obj/item/clothing/mask/smokable/cigarette/cigar,
 /obj/item/chems/drinks/flask{
 	pixel_x = 8
@@ -35568,7 +35568,7 @@
 	dir = 1
 	},
 /obj/structure/closet/secure_closet/chemical,
-/obj/item/storage/box/pillbottles,
+/obj/item/box/pillbottles,
 /obj/item/radio/headset/headset_med,
 /obj/machinery/camera/network/medbay{
 	c_tag = "Medbay Drug Storage"
@@ -35816,7 +35816,7 @@
 	dir = 6
 	},
 /obj/structure/table,
-/obj/item/storage/box/bodybags{
+/obj/item/box/bodybags{
 	pixel_x = -1;
 	pixel_y = -2
 	},
@@ -36944,12 +36944,12 @@
 /area/exodus/teleporter)
 "bzW" = (
 /obj/structure/table,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/syringes{
+/obj/item/box/beakers,
+/obj/item/box/syringes{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/radio/intercom{
 	dir = 8;
@@ -38741,11 +38741,11 @@
 "bDs" = (
 /obj/structure/table,
 /obj/machinery/light,
-/obj/item/storage/box/gloves{
+/obj/item/box/gloves{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/masks,
+/obj/item/box/masks,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -42616,11 +42616,11 @@
 	dir = 4
 	},
 /obj/structure/table,
-/obj/item/storage/box/gloves{
+/obj/item/box/gloves{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/masks,
+/obj/item/box/masks,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
@@ -44009,8 +44009,8 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/janitor)
 "bNO" = (
-/obj/item/storage/box/lights/mixed,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/machinery/light_switch{
 	pixel_y = 28
 	},
@@ -45558,8 +45558,8 @@
 /turf/floor/tiled/steel_grid,
 /area/exodus/janitor)
 "bQW" = (
-/obj/item/storage/box/mousetraps,
-/obj/item/storage/box/mousetraps,
+/obj/item/box/mousetraps,
+/obj/item/box/mousetraps,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -47745,7 +47745,7 @@
 /area/exodus/crew_quarters/heads/chief)
 "bVr" = (
 /obj/structure/table,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /obj/item/chems/food/monkeycube/wrapped,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/tiled/white,
@@ -50045,7 +50045,7 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/structure/table/steel,
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/engine_smes)
@@ -50779,7 +50779,7 @@
 	pixel_y = 4
 	},
 /obj/item/clothing/glasses/welding/superior,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/fancy/cigarettes,
 /obj/item/book/manual/supermatter_engine,
 /turf/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/heads/chief)
@@ -51758,7 +51758,7 @@
 /area/exodus/medical/patient_wing)
 "cdw" = (
 /obj/structure/table,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/machinery/light_switch{
 	name = "light switch ";
 	pixel_y = 22
@@ -52535,7 +52535,7 @@
 /area/exodus/engineering/foyer)
 "cfa" = (
 /obj/structure/table,
-/obj/item/storage/box/cdeathalarm_kit,
+/obj/item/box/cdeathalarm_kit,
 /obj/item/bodybag/cryobag{
 	pixel_x = -3
 	},
@@ -52547,7 +52547,7 @@
 /area/exodus/medical/biostorage)
 "cfb" = (
 /obj/structure/table,
-/obj/item/storage/box/glasses/square{
+/obj/item/box/glasses/square{
 	pixel_x = 1;
 	pixel_y = 4
 	},
@@ -52601,7 +52601,7 @@
 /obj/item/crowbar,
 /obj/item/clothing/gloves/thick,
 /obj/item/clothing/gloves/thick,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/structure/table/steel,
 /turf/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
@@ -53156,11 +53156,11 @@
 	pixel_y = 24
 	},
 /obj/structure/table,
-/obj/item/storage/box/botanydisk{
+/obj/item/box/botanydisk{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/botanydisk,
+/obj/item/box/botanydisk,
 /turf/floor/tiled/white,
 /area/exodus/research/xenobiology/xenoflora)
 "cgx" = (
@@ -53844,7 +53844,7 @@
 "chL" = (
 /obj/structure/table,
 /obj/item/gun/launcher/syringe,
-/obj/item/storage/box/syringegun,
+/obj/item/box/syringegun,
 /turf/floor/tiled/white,
 /area/exodus/medical/biostorage)
 "chM" = (
@@ -54550,7 +54550,7 @@
 /area/exodus/medical/ward)
 "cjp" = (
 /obj/structure/table,
-/obj/item/storage/box/gloves{
+/obj/item/box/gloves{
 	pixel_x = 4;
 	pixel_y = 4
 	},
@@ -54562,7 +54562,7 @@
 	name = "west bump";
 	pixel_x = -24
 	},
-/obj/item/storage/box/masks,
+/obj/item/box/masks,
 /obj/structure/cable/green{
 	icon_state = "0-4"
 	},
@@ -54704,11 +54704,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/storage/box/beakers{
+/obj/item/box/beakers{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /turf/floor/tiled/white,
 /area/exodus/research/xenobiology/xenoflora)
 "cjF" = (
@@ -55139,7 +55139,7 @@
 /area/exodus/research/xenobiology/xenoflora)
 "ckG" = (
 /obj/structure/rack,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/tech_supply,
@@ -55246,7 +55246,7 @@
 /area/exodus/maintenance/starboardsolar)
 "ckQ" = (
 /obj/structure/table,
-/obj/item/storage/box/donkpockets,
+/obj/item/box/donkpockets,
 /obj/machinery/status_display{
 	pixel_y = 32
 	},
@@ -55986,7 +55986,7 @@
 /turf/floor/plating,
 /area/exodus/maintenance/starboardsolar)
 "cmq" = (
-/obj/item/storage/box/fancy/vials,
+/obj/item/box/fancy/vials,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -56570,11 +56570,11 @@
 /turf/wall/r_wall/prepainted,
 /area/exodus/engineering/engineering_monitoring)
 "cnH" = (
-/obj/item/storage/box/syringes{
+/obj/item/box/syringes{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
 /obj/item/chems/dropper,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -58233,8 +58233,8 @@
 /area/exodus/research/xenobiology)
 "crR" = (
 /obj/structure/table,
-/obj/item/storage/box/matches,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/matches,
+/obj/item/box/fancy/cigarettes,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -58319,11 +58319,11 @@
 /area/space)
 "csm" = (
 /obj/structure/table,
-/obj/item/storage/box/beakers{
+/obj/item/box/beakers{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /turf/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "csn" = (
@@ -58911,11 +58911,11 @@
 /area/exodus/research/xenobiology)
 "ctT" = (
 /obj/structure/table,
-/obj/item/storage/box/gloves{
+/obj/item/box/gloves{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/masks,
+/obj/item/box/masks,
 /turf/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "ctU" = (
@@ -59408,8 +59408,8 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/rack,
-/obj/item/storage/box/handcuffs,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/floor/tiled/steel_grid,
 /area/exodus/security/warden)
 "cuY" = (
@@ -59560,11 +59560,11 @@
 /area/exodus/solar/starboard)
 "cvq" = (
 /obj/structure/table,
-/obj/item/storage/box/monkeycubes,
-/obj/item/storage/box/monkeycubes,
-/obj/item/storage/box/monkeycubes,
-/obj/item/storage/box/monkeycubes,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
+/obj/item/box/monkeycubes,
+/obj/item/box/monkeycubes,
+/obj/item/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /obj/item/chems/food/monkeycube/wrapped,
 /turf/floor/tiled/white,
 /area/exodus/research/xenobiology)
@@ -59647,11 +59647,11 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/item/storage/box/gloves{
+/obj/item/box/gloves{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/storage/box/masks,
+/obj/item/box/masks,
 /obj/machinery/camera/network/medbay{
 	c_tag = "Virology Port";
 	dir = 4
@@ -59877,10 +59877,10 @@
 /area/exodus/engineering/storage)
 "cwQ" = (
 /obj/structure/table,
-/obj/item/storage/box/monkeycubes,
-/obj/item/storage/box/monkeycubes,
-/obj/item/storage/box/monkeycubes,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
+/obj/item/box/monkeycubes,
+/obj/item/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /turf/floor/tiled/white,
 /area/exodus/medical/virology)
 "cwR" = (
@@ -60741,7 +60741,7 @@
 /area/exodus/medical/virology)
 "cBt" = (
 /obj/structure/table,
-/obj/item/storage/box/cups,
+/obj/item/box/cups,
 /turf/floor/tiled/white,
 /area/exodus/medical/virology)
 "cBu" = (
@@ -60942,11 +60942,11 @@
 /area/exodus/medical/virology)
 "cCY" = (
 /obj/structure/table,
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},

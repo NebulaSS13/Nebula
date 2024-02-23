@@ -1923,7 +1923,7 @@
 /obj/item/storage/ore,
 /obj/item/tool/pickaxe,
 /obj/item/stack/flag/yellow,
-/obj/item/storage/box/glowsticks,
+/obj/item/box/glowsticks,
 /obj/item/scanner/mining,
 /turf/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
@@ -2346,8 +2346,8 @@
 /obj/structure/table,
 /obj/item/flashlight,
 /obj/item/flashlight,
-/obj/item/storage/box/lights/bulbs,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/bulbs,
+/obj/item/box/lights/mixed,
 /obj/structure/cable,
 /obj/machinery/power/apc/derelict{
 	name = "Tools Storage APC"

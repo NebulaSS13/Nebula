@@ -1739,7 +1739,7 @@
 /area/magshield/north)
 "eS" = (
 /obj/structure/table/steel,
-/obj/item/storage/box/lights,
+/obj/item/box/lights,
 /turf/floor/airless,
 /area/magshield/north)
 "eT" = (
@@ -2261,7 +2261,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/storage/box/checkers,
+/obj/item/box/checkers,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},

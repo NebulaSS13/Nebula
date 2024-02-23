@@ -20,7 +20,7 @@
 		/obj/item/chems/syringe/antitoxin =                2,
 		/obj/item/chems/syringe/antibiotic =               1,
 		/obj/item/chems/syringe/stabilizer =               2,
-		/obj/item/storage/box/freezer =                    1,
+		/obj/item/box/freezer =                    1,
 		/obj/item/stack/nanopaste =                        1
 	)
 	return spawnable_choices

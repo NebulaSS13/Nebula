@@ -36,4 +36,4 @@
 	hands = list(/obj/item/clothing/suit/armor/bulletproof)
 	id_type = /obj/item/card/id/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop
-	backpack_contents = list(/obj/item/storage/box/ids = 1)
+	backpack_contents = list(/obj/item/box/ids = 1)

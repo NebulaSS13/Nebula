@@ -2033,7 +2033,7 @@
 	pixel_y = 24
 	},
 /obj/structure/table/steel,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/item/chems/spray/cleaner,
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
@@ -3504,7 +3504,7 @@
 /area/liberia/bar)
 "gl" = (
 /obj/structure/table/woodentable/walnut,
-/obj/item/storage/box/glasses/pint,
+/obj/item/box/glasses/pint,
 /turf/floor/wood/ebony,
 /area/liberia/bar)
 "gm" = (
@@ -4199,7 +4199,7 @@
 "hC" = (
 /obj/structure/table/woodentable/walnut,
 /obj/item/ashtray,
-/obj/item/storage/box/matches,
+/obj/item/box/matches,
 /obj/random/smokes,
 /turf/floor/carpet/red,
 /area/liberia/captain)
@@ -4281,7 +4281,7 @@
 /area/liberia/bar)
 "hL" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/box/donkpockets,
+/obj/item/box/donkpockets,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -5242,7 +5242,7 @@
 /area/liberia/library)
 "kc" = (
 /obj/structure/table/woodentable/walnut,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
@@ -6153,7 +6153,7 @@
 /obj/item/roller,
 /obj/item/roller,
 /obj/item/auto_cpr,
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light,
 /turf/floor/tiled/techfloor/grid,
@@ -7311,12 +7311,12 @@
 /area/liberia/engineeringstorage)
 "Ep" = (
 /obj/structure/rack/dark,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/bloodpacks,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/masks,
-/obj/item/storage/box/syringes,
-/obj/item/storage/box/bodybags,
+/obj/item/box/gloves,
+/obj/item/box/bloodpacks,
+/obj/item/box/beakers,
+/obj/item/box/masks,
+/obj/item/box/syringes,
+/obj/item/box/bodybags,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)

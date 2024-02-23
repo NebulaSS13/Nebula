@@ -56,7 +56,7 @@
 	hands = list(/obj/item/storage/briefcase/crimekit)
 	id_type = /obj/item/card/id/ministation/security
 	pda_type = /obj/item/modular_computer/pda/forensics
-	backpack_contents = list(/obj/item/storage/box/evidence = 1)
+	backpack_contents = list(/obj/item/box/evidence = 1)
 	gloves = /obj/item/clothing/gloves/thick
 
 /decl/hierarchy/outfit/job/ministation/detective/Initialize()

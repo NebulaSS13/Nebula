@@ -37,7 +37,7 @@
 		/obj/item/backpack,
 		/obj/item/backpack/satchel,
 		/obj/item/backpack/dufflebag,
-		/obj/item/storage/box,
+		/obj/item/box,
 		/obj/item/storage/wallet,
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/clothing/shoes/color/black,
@@ -179,47 +179,47 @@
 
 /obj/structure/loot_pile/maint/boxfort/get_common_loot()
 	var/static/list/common_loot = list(
-		/obj/item/storage/box,
-		/obj/item/storage/box/beakers,
-		/obj/item/storage/box/botanydisk,
-		/obj/item/storage/box/cups,
-		/obj/item/storage/box/botanydisk,
-		/obj/item/storage/box/donkpockets,
-		/obj/item/storage/box/fancy/donut,
-		/obj/item/storage/box/fancy/donut/empty,
-		/obj/item/storage/box/evidence,
-		/obj/item/storage/box/lights/mixed,
-		/obj/item/storage/box/lights/tubes,
-		/obj/item/storage/box/lights/bulbs,
-		/obj/item/storage/box/autoinjectors,
-		/obj/item/storage/box/masks,
-		/obj/item/storage/box/ids,
-		/obj/item/storage/box/mousetraps,
-		/obj/item/storage/box/syringes,
-		/obj/item/storage/box/survival,
-		/obj/item/storage/box/gloves,
-		/obj/item/storage/box/PDAs,
+		/obj/item/box,
+		/obj/item/box/beakers,
+		/obj/item/box/botanydisk,
+		/obj/item/box/cups,
+		/obj/item/box/botanydisk,
+		/obj/item/box/donkpockets,
+		/obj/item/box/fancy/donut,
+		/obj/item/box/fancy/donut/empty,
+		/obj/item/box/evidence,
+		/obj/item/box/lights/mixed,
+		/obj/item/box/lights/tubes,
+		/obj/item/box/lights/bulbs,
+		/obj/item/box/autoinjectors,
+		/obj/item/box/masks,
+		/obj/item/box/ids,
+		/obj/item/box/mousetraps,
+		/obj/item/box/syringes,
+		/obj/item/box/survival,
+		/obj/item/box/gloves,
+		/obj/item/box/PDAs,
 	)
 	return common_loot
 
 /obj/structure/loot_pile/maint/boxfort/get_uncommon_loot()
 	var/static/list/uncommon_loot = list(
-		/obj/item/storage/box/sinpockets,
-		/obj/item/storage/box/ammo/practiceshells,
-		/obj/item/storage/box/ammo/blanks,
-		/obj/item/storage/box/smokes,
-		/obj/item/storage/box/metalfoam,
-		/obj/item/storage/box/handcuffs
+		/obj/item/box/sinpockets,
+		/obj/item/box/ammo/practiceshells,
+		/obj/item/box/ammo/blanks,
+		/obj/item/box/smokes,
+		/obj/item/box/metalfoam,
+		/obj/item/box/handcuffs
 	)
 	return uncommon_loot
 
 /obj/structure/loot_pile/maint/boxfort/get_rare_loot()
 	var/static/list/rare_loot = list(
-		/obj/item/storage/box/flashbangs,
-		/obj/item/storage/box/empslite,
-		/obj/item/storage/box/ammo/flashshells,
-		/obj/item/storage/box/ammo/stunshells,
-		/obj/item/storage/box/teargas,
+		/obj/item/box/flashbangs,
+		/obj/item/box/empslite,
+		/obj/item/box/ammo/flashshells,
+		/obj/item/box/ammo/stunshells,
+		/obj/item/box/teargas,
 	)
 	return rare_loot
 

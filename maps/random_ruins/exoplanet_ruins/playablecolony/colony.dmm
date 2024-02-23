@@ -1625,7 +1625,7 @@
 "dL" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/firstaid/adv,
-/obj/item/storage/box/gloves,
+/obj/item/box/gloves,
 /turf/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dM" = (
@@ -1667,7 +1667,7 @@
 /area/map_template/colony/surgery)
 "dR" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/storage/box/pillbottles,
+/obj/item/box/pillbottles,
 /obj/item/storage/firstaid/adv,
 /obj/item/storage/firstaid/adv,
 /obj/item/storage/firstaid/stab,
@@ -1753,9 +1753,9 @@
 /area/map_template/colony/engineering)
 "ea" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/syringes,
-/obj/item/storage/box/autoinjectors,
-/obj/item/storage/box/autoinjectors,
+/obj/item/box/syringes,
+/obj/item/box/autoinjectors,
+/obj/item/box/autoinjectors,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2
@@ -1863,8 +1863,8 @@
 	pixel_y = -28
 	},
 /obj/structure/cable,
-/obj/item/storage/box/freezer,
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
+/obj/item/box/freezer,
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
@@ -2185,8 +2185,8 @@
 	},
 /obj/structure/cable,
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
+/obj/item/box/beakers,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
@@ -2698,7 +2698,7 @@
 /area/map_template/colony/messhall)
 "fI" = (
 /obj/structure/table/woodentable_reinforced,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
@@ -2956,10 +2956,10 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/structure/table/marble,
-/obj/item/storage/box/glasses/mug,
-/obj/item/storage/box/glasses/pint,
-/obj/item/storage/box/glasses/square,
-/obj/item/storage/box/glass_extras/straws,
+/obj/item/box/glasses/mug,
+/obj/item/box/glasses/pint,
+/obj/item/box/glasses/square,
+/obj/item/box/glass_extras/straws,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
@@ -3010,10 +3010,10 @@
 /obj/item/pizzabox/margherita,
 /obj/item/pizzabox/mushroom,
 /obj/item/pizzabox/vegetable,
-/obj/item/storage/box/cola/spaceup,
-/obj/item/storage/box/cola/spacewind,
-/obj/item/storage/box/cola/icedtea,
-/obj/item/storage/box/cola/drgibb,
+/obj/item/box/cola/spaceup,
+/obj/item/box/cola/spacewind,
+/obj/item/box/cola/icedtea,
+/obj/item/box/cola/drgibb,
 /obj/item/chems/drinks/shaker,
 /obj/item/chems/drinks/pitcher,
 /obj/item/chems/glass/beaker/bowl,
@@ -3184,11 +3184,11 @@
 	level = 2
 	},
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/storage/box/snack/tastybread,
-/obj/item/storage/box/snack/tastybread,
-/obj/item/storage/box/snack/noraisin,
-/obj/item/storage/box/snack,
-/obj/item/storage/box/snack/candy,
+/obj/item/box/snack/tastybread,
+/obj/item/box/snack/tastybread,
+/obj/item/box/snack/noraisin,
+/obj/item/box/snack,
+/obj/item/box/snack/candy,
 /turf/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gs" = (
@@ -3760,10 +3760,10 @@
 /obj/item/ammo_magazine/pistol/small,
 /obj/item/ammo_magazine/pistol/small,
 /obj/item/ammo_magazine/pistol/rubber,
-/obj/item/storage/box/ammo/shotgunshells,
-/obj/item/storage/box/ammo/shotgunshells,
-/obj/item/storage/box/ammo/shotgunammo,
-/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunammo,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -3915,7 +3915,7 @@
 	dir = 1
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "hR" = (
@@ -4899,7 +4899,7 @@
 "jD" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/detergent,
+/obj/item/box/detergent,
 /obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -28
@@ -5509,7 +5509,7 @@
 /obj/item/chems/spray/pepper,
 /obj/machinery/recharger,
 /obj/item/radio,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "kG" = (
@@ -6171,8 +6171,8 @@
 	dir = 6
 	},
 /obj/structure/closet/crate/trashcart,
-/obj/item/storage/box/detergent,
-/obj/item/storage/box/detergent,
+/obj/item/box/detergent,
+/obj/item/box/detergent,
 /obj/item/mop,
 /obj/item/chems/glass/bucket,
 /obj/item/storage/bag/trash,
@@ -6187,8 +6187,8 @@
 	},
 /obj/item/plunger,
 /obj/item/lightreplacer,
-/obj/item/storage/box/lights/mixed,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
 "lX" = (
@@ -7432,9 +7432,9 @@
 /obj/item/cell/super,
 /obj/item/cell/super,
 /obj/item/scanner/mining,
-/obj/item/storage/box/greenglowsticks,
-/obj/item/storage/box/greenglowsticks,
-/obj/item/storage/box/greenglowsticks,
+/obj/item/box/greenglowsticks,
+/obj/item/box/greenglowsticks,
+/obj/item/box/greenglowsticks,
 /obj/item/stack/flag/yellow,
 /obj/item/stack/flag/yellow,
 /obj/item/stack/flag/yellow,

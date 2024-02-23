@@ -1031,8 +1031,8 @@
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves{
+/obj/item/box/masks,
+/obj/item/box/gloves{
 	pixel_x = 3;
 	pixel_y = 4
 	},
@@ -1152,11 +1152,11 @@
 /area/centcom/holding)
 "aLb" = (
 /obj/structure/table,
-/obj/item/storage/box/gloves{
+/obj/item/box/gloves{
 	pixel_x = 3;
 	pixel_y = 4
 	},
-/obj/item/storage/box/masks,
+/obj/item/box/masks,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -2640,7 +2640,7 @@
 /obj/item/chems/drinks/bottle/small/beer,
 /obj/item/chems/drinks/bottle/small/beer,
 /obj/item/flame/fuelled/lighter/zippo/random,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/fancy/cigarettes,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -2787,19 +2787,19 @@
 /turf/floor/tiled,
 /area/shuttle/escape_shuttle)
 "kSw" = (
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
@@ -3179,7 +3179,7 @@
 /area/tdome/tdomeadmin)
 "sRb" = (
 /obj/structure/table,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},

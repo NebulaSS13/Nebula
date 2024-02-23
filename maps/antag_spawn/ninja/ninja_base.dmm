@@ -115,7 +115,7 @@
 /area/map_template/ninja_dojo/dojo)
 "aw" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/beakers,
+/obj/item/box/beakers,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -569,7 +569,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bx" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/glasses,
+/obj/item/box/glasses,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -577,7 +577,7 @@
 /area/map_template/ninja_dojo/dojo)
 "by" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/sinpockets,
+/obj/item/box/sinpockets,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -1096,7 +1096,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cF" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/anti_photons,
+/obj/item/box/anti_photons,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"

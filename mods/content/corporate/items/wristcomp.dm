@@ -33,10 +33,10 @@
 	return ..()
 
 // wrist box //
-/obj/item/storage/box/wrist
+/obj/item/box/wrist
 	name = "box of spare wrist computers"
 	desc = "A box of spare wrist microcomputers."
 	icon_state = "pda"
 
-/obj/item/storage/box/wrist/WillContain()
+/obj/item/box/wrist/WillContain()
 	return list(/obj/item/modular_computer/pda/wrist = 5)
