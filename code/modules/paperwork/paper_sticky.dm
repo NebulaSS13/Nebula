@@ -124,7 +124,7 @@
 
 /obj/item/paper/sticky/afterattack(var/A, var/mob/user, var/flag, var/params)
 
-	if(!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/storage) || is_crumpled)
+	if(!in_range(user, A) || istype(A, /obj/machinery/door) || has_extension(A, /datum/extension/storage) || is_crumpled)
 		return
 
 	var/turf/target_turf = get_turf(A)

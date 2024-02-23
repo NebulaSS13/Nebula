@@ -63,11 +63,11 @@
 	if(istype(A) && imp)
 		var/obj/item/implant/compressed/c = imp
 		if (c.scanned)
-			if (!istype(A,/obj/item/storage))
+			if (!has_extension(A, /datum/extension/storage))
 				to_chat(user, "<span class='warning'>Something is already compressed inside the implant!</span>")
 			return
 		else if(safe)
-			if (!istype(A,/obj/item/storage))
+			if (!has_extension(A, /datum/extension/storage))
 				to_chat(user, "<span class='warning'>The matter compressor safeties prevent you from doing that.</span>")
 			return
 		if(ishuman(A.loc))

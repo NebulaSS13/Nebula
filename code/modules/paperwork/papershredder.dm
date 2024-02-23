@@ -115,7 +115,7 @@
 /obj/machinery/papershredder/attackby(var/obj/item/W, var/mob/user)
 	if(!has_extension(W, /datum/extension/tool)) //Silently skip tools
 		var/trying_to_smack = !(W.item_flags & ITEM_FLAG_NO_BLUDGEON) && user && user.a_intent == I_HURT
-		if(istype(W, /obj/item/storage))
+		if(has_extension(W, /datum/extension/storage))
 			empty_bin(user, W)
 			return TRUE
 
@@ -137,7 +137,7 @@
 	LAZYCLEARLIST(shredder_bin)
 
 /**Empties the paper bin into the given container, and/or on the floor. If violent is on, and there's no container passed, we're going to throw around the trash. */
-/obj/machinery/papershredder/proc/empty_bin(var/mob/living/user, var/obj/item/storage/empty_into, var/violent = FALSE)
+/obj/machinery/papershredder/proc/empty_bin(var/mob/living/user, var/obj/item/empty_into, var/violent = FALSE)
 	if(is_bin_empty())
 		if(user)
 			to_chat(user, SPAN_NOTICE("\The [src] is empty."))

@@ -25,7 +25,6 @@
 		/obj/structure/table,
 		/obj/structure/closet,
 		/obj/structure/hygiene/sink,
-		/obj/item/storage,
 		/obj/item/grenade/chem_grenade,
 		/mob/living/bot/medbot,
 		/obj/item/secure_storage/safe,
@@ -72,6 +71,8 @@
 /obj/item/chems/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity) //Is the container open & are they next to whatever they're clicking?
 		return FALSE //If not, do nothing.
+	if(has_extension(target, /datum/extension/storage))
+		return TRUE
 	for(var/type in can_be_placed_into) //Is it something it can be placed into?
 		if(istype(target, type))
 			return TRUE
