@@ -69,16 +69,16 @@
 /decl/hierarchy/supply_pack/galley/rations
 	num_contained = 6
 	name = "Emergency - MREs"
-	contains = list(/obj/item/storage/mre,
-					/obj/item/storage/mre/menu2,
-					/obj/item/storage/mre/menu3,
-					/obj/item/storage/mre/menu4,
-					/obj/item/storage/mre/menu5,
-					/obj/item/storage/mre/menu6,
-					/obj/item/storage/mre/menu7,
-					/obj/item/storage/mre/menu8,
-					/obj/item/storage/mre/menu9,
-					/obj/item/storage/mre/menu10)
+	contains = list(/obj/item/mre,
+					/obj/item/mre/menu2,
+					/obj/item/mre/menu3,
+					/obj/item/mre/menu4,
+					/obj/item/mre/menu5,
+					/obj/item/mre/menu6,
+					/obj/item/mre/menu7,
+					/obj/item/mre/menu8,
+					/obj/item/mre/menu9,
+					/obj/item/mre/menu10)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "emergency rations"
 	supply_method = /decl/supply_method/randomized

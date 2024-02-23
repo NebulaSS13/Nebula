@@ -423,11 +423,11 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 9
 	},
-/obj/item/storage/mre/menu10,
-/obj/item/storage/mre/menu9,
-/obj/item/storage/mre/random,
-/obj/item/storage/mre/random,
-/obj/item/storage/mre/random,
+/obj/item/mre/menu10,
+/obj/item/mre/menu9,
+/obj/item/mre/random,
+/obj/item/mre/random,
+/obj/item/mre/random,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
 "bj" = (
@@ -6645,21 +6645,21 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 10
 	},
-/obj/item/storage/mre/menu10,
-/obj/item/storage/mre/menu9,
-/obj/item/storage/mre/random,
-/obj/item/storage/mre/random,
-/obj/item/storage/mre/random,
+/obj/item/mre/menu10,
+/obj/item/mre/menu9,
+/obj/item/mre/random,
+/obj/item/mre/random,
+/obj/item/mre/random,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
 "mN" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/effect/floor_decal/techfloor,
-/obj/item/storage/mre/menu10,
-/obj/item/storage/mre/menu9,
-/obj/item/storage/mre/random,
-/obj/item/storage/mre/random,
-/obj/item/storage/mre/random,
+/obj/item/mre/menu10,
+/obj/item/mre/menu9,
+/obj/item/mre/random,
+/obj/item/mre/random,
+/obj/item/mre/random,
 /turf/floor/tiled/techfloor,
 /area/map_template/colony)
 "mO" = (
