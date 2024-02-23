@@ -2261,7 +2261,7 @@
 	pixel_x = 32;
 	dir = 8
 	},
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /obj/random/medical,
 /obj/item/stack/medical/advanced/bruise_pack,
 /obj/item/chems/syringe/antibiotic,
@@ -3202,7 +3202,7 @@
 /obj/structure/closet/hydrant{
 	pixel_y = 32
 	},
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/regular,
 /obj/structure/handrail,
 /turf/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
@@ -5527,7 +5527,7 @@
 /obj/item/tank/oxygen,
 /obj/item/tank/oxygen,
 /obj/item/roller,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /obj/item/pill_bottle/painkillers,
 /obj/item/pill_bottle/antitoxins,
 /obj/item/pill_bottle/antibiotics,
@@ -5651,7 +5651,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/item/chems/glass/rag,
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/regular,
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "yF" = (
@@ -7303,7 +7303,7 @@
 	dir = 1
 	},
 /obj/item/stack/tape_roll/duct_tape,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/floor/tiled/white,
 /area/ship/trade/crew/medbay)
 "QS" = (

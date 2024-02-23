@@ -1765,10 +1765,10 @@
 /area/map_template/skipjack_station/start)
 "eC" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = 1
 	},
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = 3;
 	pixel_y = 3
 	},
@@ -1776,10 +1776,10 @@
 /area/map_template/skipjack_station/start)
 "eD" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/adv{
+/obj/item/firstaid/adv{
 	pixel_x = 1
 	},
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = 3;
 	pixel_y = 3
 	},

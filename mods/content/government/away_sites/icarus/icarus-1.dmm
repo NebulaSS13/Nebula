@@ -1309,7 +1309,7 @@
 /area/icarus/open)
 "ex" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/empty,
+/obj/item/firstaid/empty,
 /turf/floor/tiled,
 /area/icarus/open)
 "ey" = (

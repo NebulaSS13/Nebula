@@ -1624,7 +1624,7 @@
 /area/map_template/colony/surgery)
 "dL" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /obj/item/box/gloves,
 /turf/floor/tiled/freezer,
 /area/map_template/colony/surgery)
@@ -1634,7 +1634,7 @@
 /area/map_template/colony/dorms)
 "dN" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -1668,11 +1668,11 @@
 "dR" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/box/pillbottles,
-/obj/item/storage/firstaid/adv,
-/obj/item/storage/firstaid/adv,
-/obj/item/storage/firstaid/stab,
-/obj/item/storage/firstaid/stab,
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/adv,
+/obj/item/firstaid/adv,
+/obj/item/firstaid/stab,
+/obj/item/firstaid/stab,
+/obj/item/firstaid/regular,
 /obj/machinery/alarm{
 	locked = 0;
 	pixel_y = 20

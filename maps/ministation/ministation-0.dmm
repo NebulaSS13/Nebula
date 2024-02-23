@@ -2923,7 +2923,7 @@
 /area/ministation/atmospherics)
 "me" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = 6;
 	pixel_y = -5
 	},
@@ -10897,7 +10897,7 @@
 /area/space)
 "Oy" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = 6;
 	pixel_y = -5
 	},

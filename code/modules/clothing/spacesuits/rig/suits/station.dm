@@ -288,7 +288,7 @@
 	boots =  /obj/item/clothing/shoes/magboots/rig/medical
 	gloves = /obj/item/clothing/gloves/rig/medical
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/firstaid,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
 
 	req_access = list(access_medical_equip)
 

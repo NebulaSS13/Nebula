@@ -104,7 +104,7 @@
 		if(92)
 			new /obj/item/sword/katana(src)
 		if(93)
-			new /obj/item/storage/firstaid/combat(src) // Probably the least OP
+			new /obj/item/firstaid/combat(src) // Probably the least OP
 		if(94) // Why the hell not
 			new /obj/item/backpack/clown(src)
 			new /obj/item/clothing/under/clown(src)

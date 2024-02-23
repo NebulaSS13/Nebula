@@ -144,12 +144,12 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/medical/New()
 	..()
 	contents = list(
-		/obj/item/storage/firstaid/regular,
-		/obj/item/storage/firstaid/trauma,
-		/obj/item/storage/firstaid/fire,
-		/obj/item/storage/firstaid/toxin,
-		/obj/item/storage/firstaid/o2,
-		/obj/item/storage/firstaid/adv,
+		/obj/item/firstaid/regular,
+		/obj/item/firstaid/trauma,
+		/obj/item/firstaid/fire,
+		/obj/item/firstaid/toxin,
+		/obj/item/firstaid/o2,
+		/obj/item/firstaid/adv,
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/chems/glass/bottle/stabilizer,
 		/obj/item/chems/glass/bottle/sedatives,

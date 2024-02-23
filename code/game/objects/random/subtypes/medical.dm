@@ -74,14 +74,14 @@
 
 /obj/random/firstaid/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/storage/firstaid/regular = 4,
-		/obj/item/storage/firstaid/trauma =  3,
-		/obj/item/storage/firstaid/toxin =   3,
-		/obj/item/storage/firstaid/o2 =      3,
-		/obj/item/storage/firstaid/stab =    2,
-		/obj/item/storage/firstaid/adv =     2,
-		/obj/item/storage/firstaid/combat =  1,
-		/obj/item/storage/firstaid/empty =   2,
-		/obj/item/storage/firstaid/fire =    3
+		/obj/item/firstaid/regular = 4,
+		/obj/item/firstaid/trauma =  3,
+		/obj/item/firstaid/toxin =   3,
+		/obj/item/firstaid/o2 =      3,
+		/obj/item/firstaid/stab =    2,
+		/obj/item/firstaid/adv =     2,
+		/obj/item/firstaid/combat =  1,
+		/obj/item/firstaid/empty =   2,
+		/obj/item/firstaid/fire =    3
 	)
 	return spawnable_choices

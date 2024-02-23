@@ -43,7 +43,7 @@
 /area/map_template/rescue_base/base)
 "aj" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/firstaid/regular,
+/obj/item/firstaid/regular,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -63,7 +63,7 @@
 /area/map_template/rescue_base/base)
 "am" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -1434,15 +1434,15 @@
 /area/map_template/rescue_base/base)
 "cU" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/firstaid/fire,
-/obj/item/storage/firstaid/fire,
-/obj/item/storage/firstaid/fire,
-/obj/item/storage/firstaid/toxin,
-/obj/item/storage/firstaid/toxin,
-/obj/item/storage/firstaid/toxin,
-/obj/item/storage/firstaid/o2,
-/obj/item/storage/firstaid/o2,
-/obj/item/storage/firstaid/o2,
+/obj/item/firstaid/fire,
+/obj/item/firstaid/fire,
+/obj/item/firstaid/fire,
+/obj/item/firstaid/toxin,
+/obj/item/firstaid/toxin,
+/obj/item/firstaid/toxin,
+/obj/item/firstaid/o2,
+/obj/item/firstaid/o2,
+/obj/item/firstaid/o2,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1450,15 +1450,15 @@
 /area/map_template/rescue_base/base)
 "cV" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/firstaid/regular,
-/obj/item/storage/firstaid/regular,
-/obj/item/storage/firstaid/regular,
-/obj/item/storage/firstaid/adv,
-/obj/item/storage/firstaid/adv,
-/obj/item/storage/firstaid/adv,
-/obj/item/storage/firstaid/combat,
-/obj/item/storage/firstaid/combat,
-/obj/item/storage/firstaid/combat,
+/obj/item/firstaid/regular,
+/obj/item/firstaid/regular,
+/obj/item/firstaid/regular,
+/obj/item/firstaid/adv,
+/obj/item/firstaid/adv,
+/obj/item/firstaid/adv,
+/obj/item/firstaid/combat,
+/obj/item/firstaid/combat,
+/obj/item/firstaid/combat,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -3245,7 +3245,7 @@
 /area/map_template/rescue_base/start)
 "hh" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "hi" = (

@@ -15,7 +15,7 @@
 	uniform = /obj/item/clothing/under/chief_medical_officer
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	shoes = /obj/item/clothing/shoes/color/brown
-	hands = list(/obj/item/storage/firstaid/adv)
+	hands = list(/obj/item/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
 	id_type = /obj/item/card/id/medical/head
 	pda_type = /obj/item/modular_computer/pda/heads
@@ -24,7 +24,7 @@
 	name = "Job - Medical Doctor"
 	uniform = /obj/item/clothing/under/medical
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	hands = list(/obj/item/storage/firstaid/adv)
+	hands = list(/obj/item/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
 	id_type = /obj/item/card/id/medical
 

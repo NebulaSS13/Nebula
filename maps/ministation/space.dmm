@@ -195,7 +195,7 @@
 /area/shuttle/escape_shuttle)
 "aE" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /turf/floor/shuttle/blue,
 /area/shuttle/escape_shuttle)
 "aF" = (

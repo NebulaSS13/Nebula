@@ -33,7 +33,7 @@
 	name = "Job - Default Doctor"
 	uniform = /obj/item/clothing/under/medical
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	hands = list(/obj/item/storage/firstaid/adv)
+	hands = list(/obj/item/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
 	l_ear = /obj/item/radio/headset/headset_med
 	shoes = /obj/item/clothing/shoes/color/white

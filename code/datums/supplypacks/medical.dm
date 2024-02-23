@@ -4,13 +4,13 @@
 
 /decl/hierarchy/supply_pack/medical/medical
 	name = "Refills - Medical supplies"
-	contains = list(/obj/item/storage/firstaid/regular,
-					/obj/item/storage/firstaid/trauma,
-					/obj/item/storage/firstaid/fire,
-					/obj/item/storage/firstaid/toxin,
-					/obj/item/storage/firstaid/o2,
-					/obj/item/storage/firstaid/adv,
-					/obj/item/storage/firstaid/stab,
+	contains = list(/obj/item/firstaid/regular,
+					/obj/item/firstaid/trauma,
+					/obj/item/firstaid/fire,
+					/obj/item/firstaid/toxin,
+					/obj/item/firstaid/o2,
+					/obj/item/firstaid/adv,
+					/obj/item/firstaid/stab,
 					/obj/item/chems/glass/bottle/antitoxin,
 					/obj/item/chems/glass/bottle/stabilizer,
 					/obj/item/chems/glass/bottle/sedatives,
@@ -30,32 +30,32 @@
 
 /decl/hierarchy/supply_pack/medical/trauma
 	name = "EMERGENCY - Trauma pouches"
-	contains = list(/obj/item/storage/firstaid/trauma = 3)
+	contains = list(/obj/item/firstaid/trauma = 3)
 	containername = "trauma pouch crate"
 
 /decl/hierarchy/supply_pack/medical/burn
 	name = "EMERGENCY - Burn pouches"
-	contains = list(/obj/item/storage/firstaid/fire = 3)
+	contains = list(/obj/item/firstaid/fire = 3)
 	containername = "burn pouch crate"
 
 /decl/hierarchy/supply_pack/medical/toxin
 	name = "EMERGENCY - Toxin pouches"
-	contains = list(/obj/item/storage/firstaid/toxin = 3)
+	contains = list(/obj/item/firstaid/toxin = 3)
 	containername = "toxin pouch crate"
 
 /decl/hierarchy/supply_pack/medical/oxyloss
 	name = "EMERGENCY - Low oxygen pouches"
-	contains = list(/obj/item/storage/firstaid/o2 = 3)
+	contains = list(/obj/item/firstaid/o2 = 3)
 	containername = "low oxygen pouch crate"
 
 /decl/hierarchy/supply_pack/medical/stab
 	name = "Triage - Stability kit"
-	contains = list(/obj/item/storage/firstaid/stab = 3)
+	contains = list(/obj/item/firstaid/stab = 3)
 	containername = "stability kit crate"
 
 /decl/hierarchy/supply_pack/medical/clotting
 	name = "EMERGENCY - Clotting kit"
-	contains = list(/obj/item/storage/firstaid/clotting = 3)
+	contains = list(/obj/item/firstaid/clotting = 3)
 	containername = "clotting kit crate"
 
 /decl/hierarchy/supply_pack/medical/bloodpack
@@ -127,7 +127,7 @@
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
 					/obj/item/clothing/mask/surgical,
-					/obj/item/storage/firstaid/adv,
+					/obj/item/firstaid/adv,
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
@@ -171,7 +171,7 @@
 					/obj/item/clothing/mask/gas,
 					/obj/item/clothing/under/medical/paramedic,
 					/obj/item/clothing/accessory/stethoscope,
-					/obj/item/storage/firstaid/adv,
+					/obj/item/firstaid/adv,
 					/obj/item/clothing/shoes/jackboots,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,

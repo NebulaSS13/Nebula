@@ -46,7 +46,7 @@
 
 /obj/structure/closet/crate/med_crate/toxin/WillContain()
 	return list(
-		/obj/item/storage/firstaid/surgery,
+		/obj/item/firstaid/surgery,
 		/obj/item/pill_bottle/antitoxins = 2,
 		/obj/item/chems/pill/antirads = 12
 			)

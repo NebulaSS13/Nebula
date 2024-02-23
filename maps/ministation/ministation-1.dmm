@@ -5579,11 +5579,11 @@
 /area/ministation/medical)
 "xH" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -5750,11 +5750,11 @@
 /area/ministation/medical)
 "yh" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = -2;
 	pixel_y = 4
 	},

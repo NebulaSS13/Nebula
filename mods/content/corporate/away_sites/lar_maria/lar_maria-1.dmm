@@ -746,7 +746,7 @@
 /area/lar_maria/vir_main)
 "cn" = (
 /obj/machinery/door/window/northright,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)
 "co" = (
@@ -902,7 +902,7 @@
 /area/lar_maria/vir_main)
 "cF" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/machinery/light,
 /turf/floor/tiled/white,
 /area/lar_maria/vir_main)

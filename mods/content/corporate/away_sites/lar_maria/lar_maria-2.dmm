@@ -1565,7 +1565,7 @@
 	icon_state = "tube1"
 	},
 /obj/structure/table,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/floor/tiled/white,
 /area/lar_maria/office)
 "eR" = (

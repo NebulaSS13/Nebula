@@ -364,7 +364,7 @@
 		/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten = 9,
 		/obj/item/stack/material/ingot/mapped/copper/ten =        8,
 		/obj/item/box/monkeycubes =                       5,
-		/obj/item/storage/firstaid/surgery =                      4,
+		/obj/item/firstaid/surgery =                      4,
 		/obj/item/cell/infinite =                                 1,
 		/obj/random/archaeological_find =                         2,
 		/obj/item/multitool/hacktool =                            2,

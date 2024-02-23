@@ -34847,7 +34847,7 @@
 /area/exodus/medical/reception)
 "bvv" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/regular{
+/obj/item/firstaid/regular{
 	pixel_x = 5;
 	pixel_y = 5
 	},
@@ -35839,9 +35839,9 @@
 /area/exodus/research/chargebay)
 "bxE" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/empty,
-/obj/item/storage/firstaid/empty,
-/obj/item/storage/firstaid/empty,
+/obj/item/firstaid/empty,
+/obj/item/firstaid/empty,
+/obj/item/firstaid/empty,
 /obj/item/scanner/health,
 /obj/item/scanner/health,
 /obj/item/scanner/health,
@@ -36739,7 +36739,7 @@
 	dir = 10
 	},
 /obj/structure/table,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/item/radio/intercom{
 	pixel_y = 20
 	},
@@ -36993,7 +36993,7 @@
 /area/exodus/hallway/primary/central_two)
 "bAc" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = 5;
 	pixel_y = 5
 	},
@@ -37016,7 +37016,7 @@
 /area/exodus/storage/tech)
 "bAe" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = 5;
 	pixel_y = 5
 	},
@@ -37044,7 +37044,7 @@
 /area/exodus/medical/chemistry)
 "bAg" = (
 /obj/structure/table,
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = 5;
 	pixel_y = 5
 	},

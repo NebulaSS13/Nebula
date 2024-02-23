@@ -540,7 +540,7 @@
 /obj/item/scalpel/laser/advanced,
 /obj/item/robotanalyzer,
 /obj/item/scanner/health,
-/obj/item/storage/firstaid/adv,
+/obj/item/firstaid/adv,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)
@@ -558,7 +558,7 @@
 /area/example/second)
 "LK" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)

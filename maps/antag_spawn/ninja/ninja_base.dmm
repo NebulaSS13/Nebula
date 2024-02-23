@@ -38,7 +38,7 @@
 /area/map_template/ninja_dojo/dojo)
 "ak" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/surgery,
+/obj/item/firstaid/surgery,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -99,11 +99,11 @@
 /area/map_template/ninja_dojo/dojo)
 "at" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/o2{
+/obj/item/firstaid/o2{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/fire{
+/obj/item/firstaid/fire{
 	pixel_x = 1
 	},
 /obj/structure/window/reinforced/crescent{
@@ -160,11 +160,11 @@
 /area/map_template/ninja_dojo/dojo)
 "aC" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/toxin{
+/obj/item/firstaid/toxin{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/storage/firstaid/adv{
+/obj/item/firstaid/adv{
 	pixel_x = 1
 	},
 /obj/structure/window/reinforced/crescent{
@@ -220,8 +220,8 @@
 /area/map_template/ninja_dojo/dojo)
 "aJ" = (
 /obj/structure/table/glass,
-/obj/item/storage/firstaid/regular,
-/obj/item/storage/firstaid/combat,
+/obj/item/firstaid/regular,
+/obj/item/firstaid/combat,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
