@@ -14,6 +14,6 @@
 		/obj/item/chems/drinks/bottle/holywater,
 		/obj/item/nullrod,
 		/obj/item/storage/bible,
-		/obj/item/storage/belt/general,
+		/obj/item/belt/general,
 		/obj/item/urn
 	)

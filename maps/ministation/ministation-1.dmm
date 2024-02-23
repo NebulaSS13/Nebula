@@ -5921,7 +5921,7 @@
 /obj/item/roller{
 	pixel_y = 10
 	},
-/obj/item/storage/belt/medical/emt,
+/obj/item/belt/medical/emt,
 /obj/item/mollusc/clam,
 /obj/item/mollusc/clam,
 /obj/item/mollusc/clam,

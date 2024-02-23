@@ -1283,8 +1283,8 @@
 /area/map_template/skipjack_station/start)
 "dg" = (
 /obj/structure/rack,
-/obj/item/storage/belt/utility/full,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/item/multitool,
 /obj/item/multitool,
 /obj/item/clothing/shoes/magboots,

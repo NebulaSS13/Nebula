@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/engineering
 	abstract_type = /decl/hierarchy/outfit/job/engineering
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_slot = slot_l_store_str
@@ -30,5 +30,5 @@
 /decl/hierarchy/outfit/job/engineering/atmos
 	name = "Job - Atmospheric technician"
 	uniform = /obj/item/clothing/under/atmospheric_technician
-	belt = /obj/item/storage/belt/utility/atmostech
+	belt = /obj/item/belt/utility/atmostech
 	pda_type = /obj/item/modular_computer/pda/engineering

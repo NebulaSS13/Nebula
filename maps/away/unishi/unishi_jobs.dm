@@ -29,7 +29,7 @@
 	name = "CTI Research Vessel - Job - Unishi Crewman"
 	r_pocket = /obj/item/radio
 	shoes = /obj/item/clothing/shoes/color/black
-	belt = /obj/item/storage/belt/utility/full
+	belt = /obj/item/belt/utility/full
 
 /decl/hierarchy/outfit/job/unishi/researcher
 	name = "CTI Research Vessel - Job - Researcher"

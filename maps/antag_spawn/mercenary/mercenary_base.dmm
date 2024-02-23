@@ -1919,10 +1919,10 @@
 /obj/item/box/bodybags,
 /obj/item/box/gloves,
 /obj/item/box/masks,
-/obj/item/storage/belt/medical/emt,
-/obj/item/storage/belt/medical/emt,
-/obj/item/storage/belt/medical,
-/obj/item/storage/belt/medical,
+/obj/item/belt/medical/emt,
+/obj/item/belt/medical/emt,
+/obj/item/belt/medical,
+/obj/item/belt/medical,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},
@@ -2604,9 +2604,9 @@
 /area/map_template/merc_spawn)
 "QJ" = (
 /obj/structure/rack,
-/obj/item/storage/belt/utility/full,
-/obj/item/storage/belt/utility/full,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
+/obj/item/belt/utility/full,
+/obj/item/belt/utility/full,
 /turf/floor/plating,
 /area/map_template/merc_spawn)
 "QW" = (

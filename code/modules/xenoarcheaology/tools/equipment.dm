@@ -56,7 +56,7 @@
 /obj/item/clothing/suit/space/void/excavation/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/excavation
 
-/obj/item/storage/belt/archaeology
+/obj/item/belt/archaeology
 	name = "excavation gear-belt"
 	desc = "Can hold various excavation gear."
 	icon = 'icons/clothing/belt/gearbelt.dmi'

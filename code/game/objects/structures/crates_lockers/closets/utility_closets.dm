@@ -75,7 +75,7 @@
 		new /datum/atom_creator/simple(/obj/item/crowbar,                   70),
 		new /datum/atom_creator/simple(/obj/item/wirecutters,               70),
 		new /datum/atom_creator/simple(/obj/item/t_scanner,                 70),
-		new /datum/atom_creator/simple(/obj/item/storage/belt/utility,      20),
+		new /datum/atom_creator/simple(/obj/item/belt/utility,      20),
 		new /datum/atom_creator/simple(/obj/item/stack/cable_coil/random,   30),
 		new /datum/atom_creator/simple(/obj/item/stack/cable_coil/random,   30),
 		new /datum/atom_creator/simple(/obj/item/stack/cable_coil/random,   30),

@@ -303,7 +303,7 @@
 	pixel_y = 25
 	},
 /obj/random/action_figure,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 24;
@@ -1668,7 +1668,7 @@
 	},
 /obj/structure/closet/wardrobe/mixed,
 /obj/item/backpack/dufflebag/med,
-/obj/item/storage/belt/utility/full,
+/obj/item/belt/utility/full,
 /turf/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "du" = (

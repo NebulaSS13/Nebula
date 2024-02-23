@@ -12,7 +12,7 @@
 	path = /obj/item/backpack/messenger
 
 /datum/fabricator_recipe/textiles/storage/tool_belt
-	path= /obj/item/storage/belt/utility
+	path= /obj/item/belt/utility
 
 /datum/fabricator_recipe/textiles/storage/mining_satchel
 	path = /obj/item/storage/ore

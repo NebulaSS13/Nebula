@@ -407,7 +407,7 @@
 /obj/item/stack/material/ingot/mapped/gold,
 /obj/item/stack/material/ingot/mapped/gold,
 /obj/item/stack/material/ingot/mapped/gold,
-/obj/item/storage/belt/champion,
+/obj/item/belt/champion,
 /turf/floor/tiled,
 /area/ministation/bridge/vault)
 "bz" = (
@@ -478,7 +478,7 @@
 /area/ministation/bridge/vault)
 "bG" = (
 /obj/structure/closet/secure_closet/captains,
-/obj/item/storage/belt/holster,
+/obj/item/belt/holster,
 /turf/floor/carpet/red,
 /area/ministation/bridge)
 "bH" = (

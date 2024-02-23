@@ -49,7 +49,7 @@
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_med,
 		/obj/item/stack/tape_roll/barricade_tape/medical,
-		/obj/item/storage/belt/medical/emt,
+		/obj/item/belt/medical/emt,
 		RANDOM_SCRUBS,
 		RANDOM_SCRUBS
 	)
@@ -66,7 +66,7 @@
 		/obj/item/box/syringes,
 		/obj/item/chems/glass/bottle/stabilizer,
 		/obj/item/chems/glass/bottle/antitoxin,
-		/obj/item/storage/belt/medical/emt,
+		/obj/item/belt/medical/emt,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -166,7 +166,7 @@
 		/obj/item/magnetic_tape/random = 3,
 		/obj/item/camera,
 		/obj/random/plush/therapy,
-		/obj/item/storage/belt/general
+		/obj/item/belt/general
 	)
 
 /obj/structure/closet/secure_closet/virology

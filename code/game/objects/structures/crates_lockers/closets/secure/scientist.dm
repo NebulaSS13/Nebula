@@ -27,7 +27,7 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clipboard,
-		/obj/item/storage/belt/general
+		/obj/item/belt/general
 	)
 
 /obj/structure/closet/secure_closet/research_director
