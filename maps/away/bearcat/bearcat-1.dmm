@@ -1937,7 +1937,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
 	},
-/obj/item/storage/bag/trash,
+/obj/item/bag/trash,
 /turf/floor/usedup,
 /area/ship/scrap/maintenance/storage)
 "eh" = (

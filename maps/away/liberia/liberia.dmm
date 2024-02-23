@@ -570,7 +570,7 @@
 /area/liberia/traidingroom)
 "bl" = (
 /obj/structure/rack,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /obj/effect/floor_decal/borderfloor{
 	dir = 5
 	},

@@ -4,7 +4,7 @@
 	available_to_map_tech_level = MAP_TECH_LEVEL_SPACE
 
 /decl/stack_recipe/panels/bag
-	result_type       = /obj/item/storage/bag/flimsy
+	result_type       = /obj/item/bag/flimsy
 	on_floor          = TRUE
 
 /decl/stack_recipe/panels/ivbag

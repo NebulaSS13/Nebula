@@ -12,7 +12,7 @@
 	equipment = list(
 		/obj/item/flash,
 		/obj/item/soap,
-		/obj/item/storage/bag/trash,
+		/obj/item/bag/trash,
 		/obj/item/mop/advanced,
 		/obj/item/holosign_creator,
 		/obj/item/lightreplacer,

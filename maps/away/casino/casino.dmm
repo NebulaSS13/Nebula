@@ -1364,7 +1364,7 @@
 /obj/structure/bed/chair/comfy/captain{
 	dir = 1
 	},
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/floor/shuttle/yellow,
 /area/casino/casino_cutter)
 "dZ" = (
@@ -1581,7 +1581,7 @@
 "eE" = (
 /obj/random/coin,
 /obj/random/coin,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /mob/living/simple_animal/hostile/carp,
 /turf/floor/plating,
 /area/casino/casino_security)
@@ -4353,7 +4353,7 @@
 /obj/structure/bed/chair/comfy/red{
 	dir = 8
 	},
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/floor/wood,
 /area/casino/casino_private_vip)
 "mt" = (

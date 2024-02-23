@@ -36,8 +36,8 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/uplink                                   = TRADER_BLACKLIST
 	)
 	possible_trading_items = list(
-		/obj/item/storage/bag                              = TRADER_SUBTYPES_ONLY,
-		/obj/item/storage/bag/cash/infinite                = TRADER_BLACKLIST,
+		/obj/item/bag                              = TRADER_SUBTYPES_ONLY,
+		/obj/item/bag/cash/infinite                = TRADER_BLACKLIST,
 		/obj/item/backpack                         = TRADER_ALL,
 		/obj/item/backpack/cultpack                = TRADER_BLACKLIST,
 		/obj/item/backpack/holding                 = TRADER_BLACKLIST,

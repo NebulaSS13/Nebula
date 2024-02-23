@@ -5,14 +5,14 @@
 
 /datum/extension/storage/bag/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	. = ..()
-	if(. && istype(holder, /obj/item/storage/bag))
-		var/obj/item/storage/bag/bag = holder
+	if(. && istype(holder, /obj/item/bag))
+		var/obj/item/bag/bag = holder
 		bag.update_w_class()
 
 /datum/extension/storage/bag/remove_from_storage(obj/item/W, atom/new_location)
 	. = ..()
-	if(. && istype(holder, /obj/item/storage/bag))
-		var/obj/item/storage/bag/bag = holder
+	if(. && istype(holder, /obj/item/bag))
+		var/obj/item/bag/bag = holder
 		bag.update_w_class()
 
 /datum/extension/storage/bag/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)

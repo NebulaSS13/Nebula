@@ -49,7 +49,7 @@
 		/obj/item/clothing/glasses/meson,
 		/obj/item/tool,
 		/obj/item/measuring_tape,
-		/obj/item/storage/bag/fossils,
+		/obj/item/bag/fossils,
 		/obj/item/hand_labeler,
 		/obj/item/stack/tape_roll/barricade_tape/research,
 	)
@@ -116,7 +116,7 @@
 
 //Bags
 /datum/fabricator_recipe/textiles/storage/fossils_bag
-	path = /obj/item/storage/bag/fossils
+	path = /obj/item/bag/fossils
 
 /datum/fabricator_recipe/textiles/storage/archeology_tool_belt
 	path = /obj/item/storage/belt/archaeology

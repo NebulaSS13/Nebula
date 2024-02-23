@@ -1,13 +1,13 @@
 /*
 	Represents flexible bags that expand based on the size of their contents.
 */
-/obj/item/storage/bag
+/obj/item/bag
 	storage_type = /datum/extension/storage/bag
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/plastic
 	obj_flags = OBJ_FLAG_HOLLOW
 
-/obj/item/storage/bag/proc/update_w_class()
+/obj/item/bag/proc/update_w_class()
 	w_class = initial(w_class)
 	for(var/obj/item/I in contents)
 		w_class = max(w_class, I.w_class)
@@ -17,7 +17,7 @@
 		while(BASE_STORAGE_CAPACITY(w_class) < cur_storage_space)
 			w_class++
 
-/obj/item/storage/bag/get_storage_cost()
+/obj/item/bag/get_storage_cost()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		var/used_ratio = storage.storage_space_used()/storage.max_storage_space
@@ -27,7 +27,7 @@
 // -----------------------------
 //          Trash bag
 // -----------------------------
-/obj/item/storage/bag/trash
+/obj/item/bag/trash
 	name = "trash bag"
 	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!"
 	icon = 'icons/obj/items/storage/trashbag.dmi'
@@ -36,11 +36,11 @@
 	storage_type = /datum/extension/storage/bag/trash
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/storage/bag/trash/update_w_class()
+/obj/item/bag/trash/update_w_class()
 	..()
 	update_icon()
 
-/obj/item/storage/bag/trash/on_update_icon()
+/obj/item/bag/trash/on_update_icon()
 	. = ..()
 	switch(w_class)
 		if(2) icon_state = "[initial(icon_state)]"
@@ -48,7 +48,7 @@
 		if(4) icon_state = "[initial(icon_state)]2"
 		if(5 to INFINITY) icon_state = "[initial(icon_state)]3"
 
-/obj/item/storage/bag/trash/advanced
+/obj/item/bag/trash/advanced
 	name = "trash bag of holding"
 	desc = "The latest and greatest in custodial convenience, a trashbag that is capable of holding vast quantities of garbage."
 	icon_state = "bluetrashbag"
@@ -60,8 +60,8 @@
 	origin_tech = @'{"exoticmatter":5,"materials":6}'
 	storage_type = /datum/extension/storage/bag/trash/advanced
 
-/obj/item/storage/bag/trash/advanced/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/backpack/holding) || istype(W, /obj/item/storage/bag/trash/advanced))
+/obj/item/bag/trash/advanced/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/backpack/holding) || istype(W, /obj/item/bag/trash/advanced))
 		to_chat(user, "<span class='warning'>The spatial interfaces of the two devices conflict and malfunction.</span>")
 		qdel(W)
 		return 1
@@ -71,7 +71,7 @@
 //        Plastic Bag
 // -----------------------------
 
-/obj/item/storage/bag/flimsy
+/obj/item/bag/flimsy
 	name = "bag"
 	desc = "It's a very flimsy, very noisy alternative to a bag."
 	icon = 'icons/obj/items/storage/plasticbag.dmi'
@@ -87,7 +87,7 @@
 //           Cash Bag
 // -----------------------------
 
-/obj/item/storage/bag/cash
+/obj/item/bag/cash
 	name = "cash bag"
 	icon = 'icons/obj/items/storage/cashbag.dmi'
 	icon_state = "cashbag"
@@ -96,7 +96,7 @@
 	storage_type = /datum/extension/storage/bag/cash
 	material = /decl/material/solid/organic/leather/synth
 
-/obj/item/storage/bag/cash/filled/Initialize()
+/obj/item/bag/cash/filled/Initialize()
 	. = ..()
 	new /obj/item/cash/c1000(src)
 	new /obj/item/cash/c1000(src)

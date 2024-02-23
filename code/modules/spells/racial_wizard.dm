@@ -11,7 +11,7 @@
 	force = 15
 	material = /decl/material/solid/stone/cult
 	var/list/potentials = list(
-		SPECIES_HUMAN = /obj/item/storage/bag/cash/infinite
+		SPECIES_HUMAN = /obj/item/bag/cash/infinite
 	)
 
 /obj/item/magic_rock/attack_self(mob/user)
@@ -35,10 +35,10 @@
 	to_chat(user, "\The [src] crumbles in your hands.")
 	qdel(src)
 
-/obj/item/storage/bag/cash/infinite
+/obj/item/bag/cash/infinite
 	storage_type = /datum/extension/storage/bag/cash/infinite
 
-/obj/item/storage/bag/cash/infinite/WillContain()
+/obj/item/bag/cash/infinite/WillContain()
 	return list(/obj/item/cash/c1000)
 
 /spell/messa_shroud/choose_targets()

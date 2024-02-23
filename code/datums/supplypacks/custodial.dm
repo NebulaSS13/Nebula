@@ -6,7 +6,7 @@
 	contains = list(/obj/item/chems/glass/bucket,
 					/obj/item/mop,
 					/obj/item/caution = 4,
-					/obj/item/storage/bag/trash,
+					/obj/item/bag/trash,
 					/obj/item/lightreplacer,
 					/obj/item/chems/spray/cleaner,
 					/obj/item/box/lights/mixed,

@@ -946,8 +946,8 @@
 /area/map_template/crashed_pod)
 "bY" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/item/storage/bag/trash,
-/obj/item/storage/bag/trash,
+/obj/item/bag/trash,
+/obj/item/bag/trash,
 /obj/item/box/donkpockets,
 /obj/item/box/donkpockets,
 /obj/item/box/fancy/egg_box,

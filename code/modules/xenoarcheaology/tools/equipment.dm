@@ -37,7 +37,7 @@
 		/obj/item/gps,
 		/obj/item/pinpointer/radio,
 		/obj/item/radio/beacon,
-		/obj/item/storage/bag/fossils
+		/obj/item/bag/fossils
 	)
 
 /obj/item/clothing/head/helmet/space/void/excavation
