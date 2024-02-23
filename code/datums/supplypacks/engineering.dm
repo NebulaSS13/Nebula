@@ -40,7 +40,7 @@
 /decl/hierarchy/supply_pack/engineering/mechanical
 	name = "Gear - Mechanical maintenance"
 	contains = list(/obj/item/belt/utility/full = 3,
-					/obj/item/clothing/suit/storage/hazardvest = 3,
+					/obj/item/clothing/suit/hazardvest = 3,
 					/obj/item/clothing/head/welding = 2,
 					/obj/item/clothing/head/hardhat)
 	containername = "mechanical maintenance crate"

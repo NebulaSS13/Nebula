@@ -1139,7 +1139,7 @@
 /area/icarus/vessel)
 "dF" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/labcoat/blue,
+/obj/item/clothing/suit/toggle/labcoat/blue,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -1147,7 +1147,7 @@
 /area/icarus/vessel)
 "dG" = (
 /obj/structure/closet,
-/obj/item/clothing/suit/storage/toggle/labcoat/blue,
+/obj/item/clothing/suit/toggle/labcoat/blue,
 /obj/item/disk/survey,
 /turf/floor/tiled,
 /area/icarus/vessel)

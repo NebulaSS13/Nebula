@@ -1174,7 +1174,7 @@
 	icon_state = "tube1"
 	},
 /obj/item/cane,
-/obj/item/clothing/suit/storage/det_trench/grey,
+/obj/item/clothing/suit/det_trench/grey,
 /obj/item/clothing/ring/cti,
 /obj/item/clothing/under/lawyer/oldman,
 /obj/structure/table/woodentable,

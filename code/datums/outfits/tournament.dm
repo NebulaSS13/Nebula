@@ -21,7 +21,7 @@
 	name = "Tournament gear - Gangster"
 	head = /obj/item/clothing/head/det
 	uniform = /obj/item/clothing/under/det
-	suit_store = /obj/item/clothing/suit/storage/det_trench
+	suit_store = /obj/item/clothing/suit/det_trench
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	hands = list(
 		/obj/item/knife/combat,

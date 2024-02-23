@@ -2069,7 +2069,7 @@
 "oc" = (
 /obj/structure/rack,
 /obj/random/maintenance,
-/obj/item/clothing/suit/storage/toggle/bomber,
+/obj/item/clothing/suit/toggle/bomber,
 /turf/floor/plating,
 /area/ministation/maint/secmaint)
 "od" = (
@@ -5248,7 +5248,7 @@
 "Av" = (
 /obj/structure/closet/chefcloset,
 /obj/item/box/ammo/beanbags,
-/obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
+/obj/item/clothing/suit/toggle/wintercoat/hydro,
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn{
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	},

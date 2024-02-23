@@ -11,7 +11,7 @@
 	path = /obj/item/clothing/suit/chaplain_hoodie
 
 /datum/fabricator_recipe/textiles/job/engineerhazardvest
-	path = /obj/item/clothing/suit/storage/hazardvest
+	path = /obj/item/clothing/suit/hazardvest
 
 /datum/fabricator_recipe/textiles/job/overalls
 	path = /obj/item/clothing/suit/apron/overalls
@@ -92,34 +92,34 @@
 	path = /obj/item/clothing/suit/surgicalapron
 
 /datum/fabricator_recipe/textiles/job/medical/genericlab
-	path = /obj/item/clothing/suit/storage/toggle/labcoat
+	path = /obj/item/clothing/suit/toggle/labcoat
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatcmo
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
+	path = /obj/item/clothing/suit/toggle/labcoat/cmo
 
 /datum/fabricator_recipe/textiles/job/medical/chemistlab
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
+	path = /obj/item/clothing/suit/toggle/labcoat/chemist
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatgenetics
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/genetics
+	path = /obj/item/clothing/suit/toggle/labcoat/genetics
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatvirologist
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
+	path = /obj/item/clothing/suit/toggle/labcoat/virologist
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatblue
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
+	path = /obj/item/clothing/suit/toggle/labcoat/blue
 
 /datum/fabricator_recipe/textiles/job/medical/labcoatrd
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
+	path = /obj/item/clothing/suit/toggle/labcoat/rd
 
 /datum/fabricator_recipe/textiles/job/medical/suithospital
 	path = /obj/item/clothing/suit/hospital
 	
 /datum/fabricator_recipe/textiles/job/medical/suitmedicalresponder
-	path = /obj/item/clothing/suit/storage/toggle/fr_jacket
+	path = /obj/item/clothing/suit/toggle/fr_jacket
 	
 /datum/fabricator_recipe/textiles/job/medical/medicalchestrig
-	path = /obj/item/clothing/suit/storage/medical_chest_rig
+	path = /obj/item/clothing/suit/medical_chest_rig
 
 // Security
 /datum/fabricator_recipe/textiles/job/security
@@ -127,13 +127,13 @@
 	path = /obj/item/clothing/under/security
 
 /datum/fabricator_recipe/textiles/job/security/forensics
-	path = /obj/item/clothing/suit/storage/forensics
+	path = /obj/item/clothing/suit/forensics
 
 /datum/fabricator_recipe/textiles/job/security/coatspace_agent
-	path = /obj/item/clothing/suit/storage/toggle/agent_jacket
+	path = /obj/item/clothing/suit/toggle/agent_jacket
 
 /datum/fabricator_recipe/textiles/job/security/detcoat
-	path = /obj/item/clothing/suit/storage/det_trench/reinforced
+	path = /obj/item/clothing/suit/det_trench/reinforced
 
 /datum/fabricator_recipe/textiles/job/security/warden
 	path = /obj/item/clothing/under/warden

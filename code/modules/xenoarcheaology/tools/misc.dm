@@ -21,7 +21,7 @@
 		new /datum/atom_creator/simple(/obj/item/backpack/toxins,    50),
 		new /datum/atom_creator/simple(/obj/item/backpack/dufflebag, 50),
 		/obj/item/clothing/under/color/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/glasses/science,
 		/obj/item/radio/headset/headset_sci,

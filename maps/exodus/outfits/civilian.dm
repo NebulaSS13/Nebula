@@ -51,7 +51,7 @@
 	name = "Job - Internal affairs agent"
 	l_ear = /obj/item/radio/headset/heads/ia
 	uniform = /obj/item/clothing/under/internalaffairs
-	suit = /obj/item/clothing/suit/storage/toggle/suit/black
+	suit = /obj/item/clothing/suit/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/color/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	hands = list(/obj/item/briefcase)
