@@ -44,14 +44,14 @@
 /decl/hierarchy/supply_pack/operations/webbing
 	name = "Gear - Webbing, vests, holsters."
 	num_contained = 4
-	contains = list(/obj/item/clothing/accessory/storage,
-					/obj/item/clothing/accessory/storage/holster,
-					/obj/item/clothing/accessory/storage/vest/black,
-					/obj/item/clothing/accessory/storage/vest/brown,
-					/obj/item/clothing/accessory/storage/vest,
-					/obj/item/clothing/accessory/storage/drop_pouches/black,
-					/obj/item/clothing/accessory/storage/drop_pouches/brown,
-					/obj/item/clothing/accessory/storage/drop_pouches/white)
+	contains = list(/obj/item/clothing/accessory/webbing,
+					/obj/item/clothing/accessory/webbing/holster,
+					/obj/item/clothing/accessory/webbing/vest/black,
+					/obj/item/clothing/accessory/webbing/vest/brown,
+					/obj/item/clothing/accessory/webbing/vest,
+					/obj/item/clothing/accessory/webbing/drop_pouches/black,
+					/obj/item/clothing/accessory/webbing/drop_pouches/brown,
+					/obj/item/clothing/accessory/webbing/drop_pouches/white)
 	containername = "webbing crate"
 
 /decl/hierarchy/supply_pack/operations/voidsuit_engineering

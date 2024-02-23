@@ -81,7 +81,7 @@
 		/obj/item/crowbar,
 		/obj/item/chems/spray/extinguisher/mini,
 		/obj/item/box/freezer,
-		/obj/item/clothing/accessory/storage/vest
+		/obj/item/clothing/accessory/webbing/vest
 	)
 
 /obj/structure/closet/secure_closet/cmo

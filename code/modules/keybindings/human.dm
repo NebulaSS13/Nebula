@@ -29,7 +29,7 @@
 	var/obj/item/clothing/under/U = H.get_equipped_item(slot_w_uniform_str)
 	if(istype(U))
 		for(var/obj/S in U.accessories)
-			if(istype(S, /obj/item/clothing/accessory/storage/holster))
+			if(istype(S, /obj/item/clothing/accessory/webbing/holster))
 				var/datum/extension/holster/E = get_extension(S, /datum/extension/holster)
 				if(!E.holstered)
 					if(!H.get_active_held_item())

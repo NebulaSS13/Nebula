@@ -384,6 +384,9 @@
 		return TRUE
 	return FALSE
 
+/obj/item/can_interact_with_storage(user, strict = FALSE)
+	return ..() && (!strict || loc == user)
+
 /obj/item/proc/squash_item(skip_qdel = FALSE)
 
 	if(!istype(material) || material.hardness > MAT_VALUE_MALLEABLE)
@@ -432,18 +435,12 @@
 
 /obj/item/attack_hand(mob/user)
 
-	if(!user)
-		return FALSE
+	. = ..()
+	if(.)
+		return
 
 	if(anchored)
 		return ..()
-
-	// Open our storage UI if the item is currently equipped.
-	if(loc == user && has_extension(src, /datum/extension/storage) && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
-		add_fingerprint(user)
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-		storage.open(user)
-		return TRUE
 
 	if(!user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = TRUE))
 		if(user.check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
@@ -513,7 +510,7 @@
 	if(SSfabrication.try_craft_with(W, src, user))
 		return TRUE
 
-	if(istype(W, /obj/item))
+	if(istype(W, /atom/movable))
 		var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
 		if(storage?.use_to_pickup)
 			if(storage.collection_mode) //Mode is set to collect all items
@@ -531,16 +528,7 @@
 		else if(istype(W, /obj/item/cell))
 			return cell_loaded.try_load(user, W)
 
-	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-	if(storage)
-		if(isrobot(user) && (W == user.get_active_hand()))
-			return //Robots can't store their modules.
-		if(!storage.can_be_inserted(W, user))
-			return
-		W.add_fingerprint(user)
-		return storage.handle_item_insertion(W)
-
-	return FALSE
+	return ..()
 
 /obj/item/attack_ghost(mob/user)
 	var/mob/observer/ghost/G = user

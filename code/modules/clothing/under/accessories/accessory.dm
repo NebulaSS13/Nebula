@@ -12,6 +12,33 @@
 	if(slot != BP_L_HAND && slot != BP_R_HAND)
 		return slot_tie_str
 
+/obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)
+	if(istype(S))
+		forceMove(S)
+		if(user)
+			to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [S]."))
+			src.add_fingerprint(user)
+
+/obj/item/clothing/accessory/proc/on_removed(var/mob/user)
+	var/obj/item/clothing/suit = loc
+	if(istype(suit))
+		if(user)
+			usr.put_in_hands(src)
+			src.add_fingerprint(user)
+		else
+			dropInto(loc)
+
+//default attack_hand behaviour
+/obj/item/clothing/accessory/attack_hand(mob/user)
+	if(istype(loc, /obj/item/clothing))
+		if(has_extension(src, /datum/extension/storage) && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
+			add_fingerprint(user)
+			var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+			storage.open(user)
+			return TRUE
+		return FALSE //we aren't an object on the ground so don't call parent
+	return ..()
+
 /obj/item/clothing/accessory/get_pressure_weakness(pressure,zone)
 	if(body_parts_covered & zone)
 		return ..()

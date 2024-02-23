@@ -935,6 +935,12 @@
 	if (!cur_atom)
 		. = -1	//inside something with a null loc.
 
+/atom/proc/storage_inserted(atom/movable/thing)
+	return
+
+/atom/proc/storage_removed(atom/movable/thing)
+	return
+
 /atom/proc/OnSimulatedTurfEntered(turf/T, old_loc)
 	set waitfor = FALSE
 	return

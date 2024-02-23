@@ -515,7 +515,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bq" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest,
+/obj/item/clothing/accessory/webbing/vest,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -960,7 +960,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cq" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1026,7 +1026,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/webbing/bandolier,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -1067,7 +1067,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cC" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"

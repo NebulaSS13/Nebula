@@ -1670,12 +1670,12 @@
 /area/map_template/rescue_base/base)
 "ds" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest,
-/obj/item/clothing/accessory/storage/vest,
+/obj/item/clothing/accessory/webbing/vest,
+/obj/item/clothing/accessory/webbing/vest,
+/obj/item/clothing/accessory/webbing/vest,
+/obj/item/clothing/accessory/webbing/vest,
+/obj/item/clothing/accessory/webbing/vest,
+/obj/item/clothing/accessory/webbing/vest,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1683,12 +1683,12 @@
 /area/map_template/rescue_base/base)
 "dt" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest/black,
-/obj/item/clothing/accessory/storage/vest/black,
-/obj/item/clothing/accessory/storage/vest/black,
-/obj/item/clothing/accessory/storage/vest/black,
-/obj/item/clothing/accessory/storage/vest/black,
-/obj/item/clothing/accessory/storage/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
+/obj/item/clothing/accessory/webbing/vest/black,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1696,12 +1696,12 @@
 /area/map_template/rescue_base/base)
 "du" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest/brown,
-/obj/item/clothing/accessory/storage/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
+/obj/item/clothing/accessory/webbing/vest/brown,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1709,12 +1709,12 @@
 /area/map_template/rescue_base/base)
 "dv" = (
 /obj/structure/rack,
-/obj/item/clothing/accessory/storage/holster/thigh,
-/obj/item/clothing/accessory/storage/holster/thigh,
-/obj/item/clothing/accessory/storage/holster/thigh,
-/obj/item/clothing/accessory/storage/holster/thigh,
-/obj/item/clothing/accessory/storage/holster/thigh,
-/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/webbing/holster/thigh,
+/obj/item/clothing/accessory/webbing/holster/thigh,
+/obj/item/clothing/accessory/webbing/holster/thigh,
+/obj/item/clothing/accessory/webbing/holster/thigh,
+/obj/item/clothing/accessory/webbing/holster/thigh,
+/obj/item/clothing/accessory/webbing/holster/thigh,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
