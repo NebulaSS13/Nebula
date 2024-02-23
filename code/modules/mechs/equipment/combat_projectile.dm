@@ -17,11 +17,11 @@
 
 /obj/item/gun/projectile/automatic/get_hardpoint_status_value()
 	if(!isnull(ammo_magazine))
-		return ammo_magazine.stored_ammo.len
+		return ammo_magazine.get_stored_ammo_count()
 
 /obj/item/gun/projectile/automatic/get_hardpoint_maptext()
 	if(!isnull(ammo_magazine))
-		return "[ammo_magazine.stored_ammo.len]/[ammo_magazine.max_ammo]"
+		return "[ammo_magazine.get_stored_ammo_count()]/[ammo_magazine.max_ammo]"
 	return 0
 
 //Weapons below this.
