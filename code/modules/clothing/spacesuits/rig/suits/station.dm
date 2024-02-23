@@ -242,7 +242,7 @@
 		/obj/item/gps,
 		/obj/item/pinpointer/radio,
 		/obj/item/radio/beacon,
-		/obj/item/storage/bag/fossils
+		/obj/item/bag/fossils
 	)
 
 	anomaly_shielding = 1

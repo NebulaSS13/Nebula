@@ -58,7 +58,7 @@
 	return 1000
 
 /obj/item/backpack/holding/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/backpack/holding) || istype(W, /obj/item/storage/bag/trash/advanced))
+	if(istype(W, /obj/item/backpack/holding) || istype(W, /obj/item/bag/trash/advanced))
 		to_chat(user, "<span class='warning'>The spatial interfaces of the two devices conflict and malfunction.</span>")
 		qdel(W)
 		return 1

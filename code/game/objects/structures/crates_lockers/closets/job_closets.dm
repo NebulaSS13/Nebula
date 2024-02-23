@@ -64,7 +64,7 @@
 		/obj/item/flashlight,
 		/obj/item/caution = 4,
 		/obj/item/lightreplacer,
-		/obj/item/storage/bag/trash,
+		/obj/item/bag/trash,
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/soap,
 		/obj/item/storage/belt/janitor

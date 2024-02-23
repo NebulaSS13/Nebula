@@ -531,7 +531,7 @@
 /turf/floor/airless,
 /area/slavers_base/cells)
 "bJ" = (
-/obj/item/storage/bag/trash,
+/obj/item/bag/trash,
 /turf/floor/airless,
 /area/slavers_base/cells)
 "bK" = (
@@ -2682,12 +2682,12 @@
 	dir = 1
 	},
 /obj/structure/safe,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/floor/airless,
 /area/slavers_base/demo)
 "ht" = (
 /obj/structure/safe,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/floor/airless,
 /area/slavers_base/demo)
 "hu" = (
@@ -2977,7 +2977,7 @@
 /area/slavers_base/demo)
 "ij" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/bag/cash,
+/obj/item/bag/cash,
 /turf/floor/tiled/airless,
 /area/slavers_base/demo)
 "ik" = (

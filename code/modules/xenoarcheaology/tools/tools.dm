@@ -7,7 +7,7 @@
 	material = /decl/material/solid/metal/steel
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/storage/bag/fossils
+/obj/item/bag/fossils
 	name = "fossil satchel"
 	desc = "Transports delicate fossils in suspension so they don't break during transit."
 	icon = 'icons/obj/mining.dmi'

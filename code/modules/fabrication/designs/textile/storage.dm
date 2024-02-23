@@ -24,4 +24,4 @@
 	path = /obj/item/storage/wallet/leather
 
 /datum/fabricator_recipe/textiles/storage/money_bag
-	path = /obj/item/storage/bag/cash 
+	path = /obj/item/bag/cash 

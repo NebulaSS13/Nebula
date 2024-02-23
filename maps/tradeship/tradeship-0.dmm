@@ -1513,7 +1513,7 @@
 /obj/item/assembly/mousetrap,
 /obj/item/assembly/mousetrap,
 /obj/item/radio,
-/obj/item/storage/bag/trash,
+/obj/item/bag/trash,
 /obj/item/chems/glass/rag,
 /obj/item/caution,
 /obj/item/caution,

@@ -1551,7 +1551,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/storage/bag/trash,
+/obj/item/bag/trash,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fd" = (

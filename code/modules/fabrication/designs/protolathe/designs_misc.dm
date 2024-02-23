@@ -39,7 +39,7 @@
 	path = /obj/item/mop/advanced
 
 /datum/fabricator_recipe/protolathe/misc/advancedtrash
-	path = /obj/item/storage/bag/trash/advanced
+	path = /obj/item/bag/trash/advanced
 
 /datum/fabricator_recipe/protolathe/misc/holosign
 	path = /obj/item/holosign_creator

@@ -81,7 +81,7 @@ var/global/list/diversion_junctions = list()
 	if(stat & BROKEN || !I || !user)
 		return
 
-	if(istype(I, /obj/item/storage/bag/trash))
+	if(istype(I, /obj/item/bag/trash))
 		var/datum/extension/storage/trash_storage = get_extension(I, /datum/extension/storage)
 		if(trash_storage)
 			to_chat(user, "<span class='notice'>You empty the bag.</span>")

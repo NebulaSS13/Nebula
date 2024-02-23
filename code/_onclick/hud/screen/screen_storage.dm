@@ -8,7 +8,7 @@
 	requires_ui_style = FALSE
 	var/weakref/storage_master_ref
 
-/obj/screen/storage/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, obj/item/storage/_storage_master)
+/obj/screen/storage/Initialize(mapload, mob/_owner, ui_style, ui_color, ui_alpha, ui_cat, datum/extension/storage/_storage_master)
 	. = ..()
 	storage_master_ref = _storage_master && weakref(_storage_master)
 
