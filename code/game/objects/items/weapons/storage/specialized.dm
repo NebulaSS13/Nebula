@@ -23,7 +23,7 @@
 // -----------------------------
 //          Evidence bag
 // -----------------------------
-/obj/item/storage/evidence
+/obj/item/evidence
 	name = "evidence case"
 	desc = "A heavy steel case for storing evidence."
 	icon = 'icons/obj/forensics.dmi'
@@ -55,7 +55,7 @@
 // However, making it a storage/bag allows us to reuse existing code in some places. -Sayu
 // This is old and terrible
 
-/obj/item/storage/sheetsnatcher
+/obj/item/sheetsnatcher
 	name = "sheet snatcher"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "sheetsnatcher"
@@ -68,7 +68,7 @@
 //    Sheet Snatcher (Cyborg)
 // -----------------------------
 
-/obj/item/storage/sheetsnatcher/borg
+/obj/item/sheetsnatcher/borg
 	name = "sheet snatcher 9000"
 	desc = ""
 	storage_type = /datum/extension/storage/sheets/robot

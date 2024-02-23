@@ -34,25 +34,28 @@
 		I.color = is_dirty
 		add_overlay(I)
 
+// Return TRUE to terminate attacky past this proc.
 /obj/item/plate/proc/try_plate_food(obj/item/chems/food/food, mob/user)
+	if(!istype(food))
+		return FALSE
 	if(food.plate)
 		to_chat(user, SPAN_WARNING("\The [food] has already been plated."))
-		return
+		return TRUE
 	if(ismob(loc))
 		var/mob/M = loc
 		if(!M.try_unequip(src))
-			return
+			return FALSE
+	if(user && !user.try_unequip(food))
+		return FALSE
 	forceMove(food)
 	food.plate = src
 	user?.visible_message(SPAN_NOTICE("\The [user] places \the [food] on \the [src]."))
 	food.update_icon()
+	return TRUE
 
 /obj/item/plate/attackby(obj/item/W, mob/living/user)
 	// Plating food.
-	if(istype(W, /obj/item/chems/food))
-		if(!user.try_unequip(W))
-			return TRUE
-		try_plate_food(W, user)
+	if(try_plate_food(W, user))
 		return TRUE
 	return ..()
 
@@ -61,11 +64,4 @@
 	desc     = "A large white platter, suitable for serving cakes or other large food."
 	icon     = 'icons/obj/food/plates/platter.dmi'
 	material = /decl/material/solid/glass
-	w_class  = ITEM_SIZE_NORMAL
-
-/obj/item/plate/tray
-	name     = "tray"
-	desc     = "A large tray, suitable for serving several servings of food."
-	icon     = 'icons/obj/food/plates/tray.dmi'
-	material = /decl/material/solid/organic/plastic
 	w_class  = ITEM_SIZE_NORMAL

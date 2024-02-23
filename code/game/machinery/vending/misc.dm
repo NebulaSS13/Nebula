@@ -29,7 +29,7 @@
 		/obj/item/plate = 10,
 		/obj/item/plate/platter = 5,
 		/obj/item/chems/glass/beaker/bowl = 2,
-		/obj/item/storage/tray/metal/aluminium = 8,
+		/obj/item/plate/tray/metal/aluminium = 8,
 		/obj/item/knife/kitchen = 3,
 		/obj/item/kitchen/rollingpin = 2,
 		/obj/item/chems/drinks/pitcher = 2,
@@ -46,7 +46,7 @@
 		/obj/item/lunchbox/syndicate = 3,
 		/obj/item/knife/kitchen/cleaver = 1
 	)
-	contraband = list(/obj/item/knife/kitchen/cleaver/bronze = 1,/obj/item/storage/tray/metal/silver = 1)
+	contraband = list(/obj/item/knife/kitchen/cleaver/bronze = 1,/obj/item/plate/tray/metal/silver = 1)
 
 /obj/machinery/vending/fashionvend
 	name = "Smashing Fashions"

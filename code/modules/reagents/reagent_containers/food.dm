@@ -92,8 +92,8 @@
 	// Plating food.
 	if(istype(W, /obj/item/plate))
 		var/obj/item/plate/plate = W
-		plate.try_plate_food(src, user)
-		return TRUE
+		if(plate.try_plate_food(src, user))
+			return TRUE
 
 	// Eating with forks
 	if(user.a_intent == I_HELP && do_utensil_interaction(W, user))

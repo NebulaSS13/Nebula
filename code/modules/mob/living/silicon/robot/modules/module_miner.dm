@@ -26,7 +26,7 @@
 		/obj/item/screwdriver,
 		/obj/item/ore,
 		/obj/item/tool/drill/advanced,
-		/obj/item/storage/sheetsnatcher/borg,
+		/obj/item/sheetsnatcher/borg,
 		/obj/item/gripper/miner,
 		/obj/item/scanner/mining,
 		/obj/item/crowbar

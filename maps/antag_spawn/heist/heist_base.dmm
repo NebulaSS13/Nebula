@@ -28,7 +28,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "ah" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/tray{
+/obj/item/plate/tray{
 	pixel_y = 5
 	},
 /turf/unsimulated/floor{
@@ -718,7 +718,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bL" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/tray{
+/obj/item/plate/tray{
 	pixel_y = 5
 	},
 /obj/item/backpack,
