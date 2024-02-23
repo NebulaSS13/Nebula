@@ -85,11 +85,12 @@
 #define SLOT_TIE         BITFLAG(17)
 #define SLOT_HOLSTER     BITFLAG(18)
 #define SLOT_POCKET      BITFLAG(19)
+#define SLOT_TAIL        BITFLAG(20)
 #define SLOT_LEGS        (SLOT_LEG_LEFT|SLOT_LEG_RIGHT)
 #define SLOT_FEET        (SLOT_FOOT_LEFT|SLOT_FOOT_RIGHT)
 #define SLOT_ARMS        (SLOT_ARM_LEFT|SLOT_ARM_RIGHT)
 #define SLOT_HANDS       (SLOT_HAND_LEFT|SLOT_HAND_RIGHT)
-#define SLOT_FULL_BODY   (SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS|SLOT_UPPER_BODY|SLOT_LOWER_BODY)
+#define SLOT_FULL_BODY   (SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS|SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_TAIL)
 
 // Bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection().

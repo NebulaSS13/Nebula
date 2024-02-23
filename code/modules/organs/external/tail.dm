@@ -6,7 +6,7 @@
 	max_damage = 20
 	min_broken_damage = 10
 	w_class = ITEM_SIZE_NORMAL
-	body_part = SLOT_LOWER_BODY
+	body_part = SLOT_TAIL
 	parent_organ = BP_GROIN
 	joint = "tail"
 	amputation_point = "tail"

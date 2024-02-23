@@ -16,7 +16,7 @@
 	name = "fiend's cowl"
 	desc = "A charred black duster with red trim. In its fabric, you can see the faint outline of millions of eyes."
 	icon = 'icons/clothing/suit/wizard/servant/fiend_cowl.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_TAIL
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_RESISTANT,
 		ARMOR_BULLET = ARMOR_BALLISTIC_PISTOL,

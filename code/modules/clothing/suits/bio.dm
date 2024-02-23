@@ -25,7 +25,7 @@
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 	allowed = list(/obj/item/tank/emergency,/obj/item/pen,/obj/item/flashlight/pen,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/ano_scanner,/obj/item/clothing/head/bio_hood,/obj/item/clothing/mask/gas)
 	armor = list(
 		ARMOR_BIO = ARMOR_BIO_SHIELDED,
