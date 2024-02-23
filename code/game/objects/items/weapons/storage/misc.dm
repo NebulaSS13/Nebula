@@ -26,7 +26,7 @@
 	)
 
 //misc tobacco nonsense
-/obj/item/storage/cigpaper
+/obj/item/cigpaper
 	name = "\improper Gen. Eric cigarette paper"
 	desc = "A ubiquitous brand of cigarette paper, allegedly endorsed by 24th century war hero General Eric Osmundsun for rolling your own cigarettes. Osmundsun died in a freak kayak accident. As it ate him alive during his last campaign. It was pretty freaky."
 	icon = 'icons/obj/cigarettes.dmi'
@@ -38,23 +38,23 @@
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/organic/plastic
 
-/obj/item/storage/cigpaper/WillContain()
+/obj/item/cigpaper/WillContain()
 	return list(/obj/item/paper/cig = 10)
 
-/obj/item/storage/cigpaper/fancy
+/obj/item/cigpaper/fancy
 	name = "\improper Trident cigarette paper"
 	desc = "A fancy brand of Trident cigarette paper, for rolling your own cigarettes. Like a person who appreciates the finer things in life."
 	icon_state = "fancycigpaperbook"
 
-/obj/item/storage/cigpaper/fancy/WillContain()
+/obj/item/cigpaper/fancy/WillContain()
 	return list(/obj/item/paper/cig/fancy = 10)
 
-/obj/item/storage/cigpaper/filters
+/obj/item/cigpaper/filters
 	name = "box of cigarette filters"
 	desc = "A box of generic cigarette filters for those who rolls their own but prefers others to inhale the fumes. Not endorsed by Late General Osmundsun."
 	icon_state = "filterbin"
 
-/obj/item/storage/cigpaper/filters/WillContain()
+/obj/item/cigpaper/filters/WillContain()
 	return list(/obj/item/paper/cig/filter = 10)
 
 /obj/item/storage/chewables

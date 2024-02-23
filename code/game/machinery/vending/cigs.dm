@@ -26,9 +26,9 @@
 	icon_deny = "cigs-deny"
 	base_type = /obj/machinery/vending/cigarette
 	products = list(
-		/obj/item/storage/cigpaper/filters = 5,
-		/obj/item/storage/cigpaper = 3,
-		/obj/item/storage/cigpaper/fancy = 2,
+		/obj/item/cigpaper/filters = 5,
+		/obj/item/cigpaper = 3,
+		/obj/item/cigpaper/fancy = 2,
 		/obj/item/storage/chewables/rollable/bad = 2,
 		/obj/item/storage/chewables/rollable/generic = 2,
 		/obj/item/storage/chewables/rollable/fine = 2,
