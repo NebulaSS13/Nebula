@@ -20,7 +20,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/holder_icon
 	var/list/available_bodytypes = list()
 	var/decl/bodytype/default_bodytype
-	var/base_prosthetics_model = /decl/bodytype/prosthetic/basic_human
+	var/base_external_prosthetics_model = /decl/bodytype/prosthetic/basic_human
+	var/base_internal_prosthetics_model
 
 	var/list/blood_types = list(
 		/decl/blood_type/aplus,
@@ -294,6 +295,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/Initialize()
 
 	. = ..()
+
+	if(!base_internal_prosthetics_model && base_external_prosthetics_model)
+		base_internal_prosthetics_model = base_external_prosthetics_model
 
 	// Populate blood type table.
 	for(var/blood_type in blood_types)
