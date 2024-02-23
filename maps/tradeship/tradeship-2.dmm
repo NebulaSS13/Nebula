@@ -635,8 +635,8 @@
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
-/obj/item/storage/box/fancy/egg_box,
-/obj/item/storage/box/fancy/egg_box,
+/obj/item/box/fancy/egg_box,
+/obj/item/box/fancy/egg_box,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/flour,
 /obj/item/chems/condiment/flour,
@@ -1976,7 +1976,7 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/obj/item/storage/box/donkpockets,
+/obj/item/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/kitchen/rollingpin,
 /obj/item/chems/condiment/small/saltshaker{
@@ -2216,7 +2216,7 @@
 /obj/random/bomb_supply,
 /obj/random/bomb_supply,
 /obj/random/bomb_supply,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/structure/catwalk,
 /turf/open,
 /area/ship/trade/cargo)
@@ -2658,7 +2658,7 @@
 /area/space)
 "gA" = (
 /obj/machinery/washing_machine,
-/obj/item/storage/box/monkeycubes{
+/obj/item/box/monkeycubes{
 	pixel_y = 13
 	},
 /turf/floor/tiled/freezer,
@@ -5405,7 +5405,7 @@
 /obj/structure/closet/cabinet,
 /obj/item/storage/secure/briefcase,
 /obj/item/backpack/dufflebag/syndie,
-/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunshells,
 /obj/item/handcuffs,
 /obj/item/boombox,
 /obj/item/stack/tape_roll/barricade_tape/bureaucracy,
@@ -6136,10 +6136,10 @@
 	req_access = list("ACCESS_HEAD_OF_PERSONNEL")
 	},
 /obj/item/clothing/suit/armor/vest,
-/obj/item/storage/box/ids,
+/obj/item/box/ids,
 /obj/item/flash,
 /obj/item/clothing/glasses/sunglasses,
-/obj/item/storage/box/evidence,
+/obj/item/box/evidence,
 /obj/item/stack/tape_roll/barricade_tape/police,
 /obj/item/holowarrant,
 /obj/item/storage/briefcase/crimekit,

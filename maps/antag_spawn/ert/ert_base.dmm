@@ -56,7 +56,7 @@
 /area/map_template/rescue_base/base)
 "al" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -197,14 +197,14 @@
 /area/map_template/rescue_base/base)
 "aF" = (
 /obj/structure/rack,
-/obj/item/storage/box/ammo/stunshells,
-/obj/item/storage/box/ammo/stunshells,
-/obj/item/storage/box/ammo/beanbags,
-/obj/item/storage/box/ammo/beanbags,
-/obj/item/storage/box/ammo/shotgunammo,
-/obj/item/storage/box/ammo/shotgunammo,
-/obj/item/storage/box/ammo/shotgunshells,
-/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/box/ammo/stunshells,
+/obj/item/box/ammo/stunshells,
+/obj/item/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
+/obj/item/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunammo,
+/obj/item/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunshells,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -454,7 +454,7 @@
 /area/map_template/rescue_base/base)
 "bh" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/handcuffs,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -592,8 +592,8 @@
 /obj/item/clothing/glasses/science,
 /obj/item/chems/spray/plantbgone,
 /obj/item/chems/spray/plantbgone,
-/obj/item/storage/box/lights/mixed,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/grenade/chem_grenade/cleaner,
@@ -626,7 +626,7 @@
 "by" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/storage/box/donkpockets{
+/obj/item/box/donkpockets{
 	pixel_x = 3;
 	pixel_y = 3
 	},
@@ -636,7 +636,7 @@
 /area/map_template/rescue_base/base)
 "bz" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/storage/box/sinpockets,
+/obj/item/box/sinpockets,
 /obj/structure/closet/secure_closet/freezer/kitchen,
 /obj/item/chems/condiment/enzyme,
 /turf/unsimulated/floor{
@@ -683,9 +683,9 @@
 /area/map_template/rescue_base/base)
 "bF" = (
 /obj/structure/rack,
-/obj/item/storage/box/smokes,
-/obj/item/storage/box/smokes,
-/obj/item/storage/box/flashbangs,
+/obj/item/box/smokes,
+/obj/item/box/smokes,
+/obj/item/box/flashbangs,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -749,11 +749,11 @@
 /area/map_template/rescue_base/base)
 "bN" = (
 /obj/structure/rack,
-/obj/item/storage/box/teargas,
-/obj/item/storage/box/teargas,
-/obj/item/storage/box/emps,
-/obj/item/storage/box/emps,
-/obj/item/storage/box/frags,
+/obj/item/box/teargas,
+/obj/item/box/teargas,
+/obj/item/box/emps,
+/obj/item/box/emps,
+/obj/item/box/frags,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -887,12 +887,12 @@
 /area/map_template/rescue_base/base)
 "cc" = (
 /obj/structure/rack,
-/obj/item/storage/box/handcuffs,
-/obj/item/storage/box/handcuffs,
-/obj/item/storage/box/teargas,
-/obj/item/storage/box/teargas,
-/obj/item/storage/box/flashbangs,
-/obj/item/storage/box/flashbangs,
+/obj/item/box/handcuffs,
+/obj/item/box/handcuffs,
+/obj/item/box/teargas,
+/obj/item/box/teargas,
+/obj/item/box/flashbangs,
+/obj/item/box/flashbangs,
 /obj/item/flash,
 /obj/item/flash,
 /obj/item/baton/loaded,
@@ -999,9 +999,9 @@
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/masks,
+/obj/item/box/gloves,
+/obj/item/box/gloves,
+/obj/item/box/masks,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1013,20 +1013,20 @@
 /obj/item/flash,
 /obj/item/baton/loaded,
 /obj/item/baton/loaded,
-/obj/item/storage/box/syringes,
-/obj/item/storage/box/syringes,
-/obj/item/storage/box/autoinjectors,
-/obj/item/storage/box/autoinjectors,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/pillbottles,
-/obj/item/storage/box/pillbottles,
-/obj/item/storage/box/bodybags,
-/obj/item/storage/box/bodybags,
-/obj/item/storage/box/syringegun,
-/obj/item/storage/box/syringegun,
-/obj/item/storage/box/syringegun,
-/obj/item/storage/box/syringegun,
+/obj/item/box/syringes,
+/obj/item/box/syringes,
+/obj/item/box/autoinjectors,
+/obj/item/box/autoinjectors,
+/obj/item/box/beakers,
+/obj/item/box/beakers,
+/obj/item/box/pillbottles,
+/obj/item/box/pillbottles,
+/obj/item/box/bodybags,
+/obj/item/box/bodybags,
+/obj/item/box/syringegun,
+/obj/item/box/syringegun,
+/obj/item/box/syringegun,
+/obj/item/box/syringegun,
 /obj/item/gun/launcher/syringe/rapid,
 /obj/item/gun/launcher/syringe/rapid,
 /turf/unsimulated/floor{
@@ -1422,7 +1422,7 @@
 /obj/item/chems/spray/cleaner,
 /obj/item/chems/spray/antiseptic,
 /obj/item/chems/spray/antiseptic,
-/obj/item/storage/box/bloodpacks,
+/obj/item/box/bloodpacks,
 /obj/item/stack/tape_roll/barricade_tape/medical,
 /obj/item/stack/tape_roll/barricade_tape/medical,
 /obj/item/flashlight/pen,
@@ -1785,8 +1785,8 @@
 /area/map_template/rescue_base/base)
 "dD" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/box/trackimp,
-/obj/item/storage/box/cdeathalarm_kit,
+/obj/item/box/trackimp,
+/obj/item/box/cdeathalarm_kit,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1915,7 +1915,7 @@
 /area/map_template/rescue_base/base)
 "dU" = (
 /obj/structure/table/steel,
-/obj/item/storage/box/fancy/cigar,
+/obj/item/box/fancy/cigar,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -2010,9 +2010,9 @@
 /area/map_template/rescue_base/base)
 "eh" = (
 /obj/structure/rack,
-/obj/item/storage/box/flashbangs,
-/obj/item/storage/box/teargas,
-/obj/item/storage/box/handcuffs,
+/obj/item/box/flashbangs,
+/obj/item/box/teargas,
+/obj/item/box/handcuffs,
 /obj/item/baton/loaded,
 /turf/unsimulated/floor{
 	dir = 1;
@@ -2759,8 +2759,8 @@
 /area/map_template/rescue_base/start)
 "fK" = (
 /obj/structure/closet,
-/obj/item/storage/box/sinpockets,
-/obj/item/storage/box/sinpockets,
+/obj/item/box/sinpockets,
+/obj/item/box/sinpockets,
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fL" = (
@@ -2835,7 +2835,7 @@
 /area/map_template/rescue_base/start)
 "fU" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/box/fancy/cigarettes/dromedaryco,
+/obj/item/box/fancy/cigarettes/dromedaryco,
 /turf/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fV" = (

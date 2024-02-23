@@ -32,7 +32,7 @@
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/head/helmet,
 		/obj/item/radio/headset/heads/hop,
-		/obj/item/storage/box/ids = 2,
+		/obj/item/box/ids = 2,
 		/obj/item/flash
 	)
 
@@ -75,7 +75,7 @@
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/shield/riot,
-		/obj/item/storage/box/flashbangs,
+		/obj/item/box/flashbangs,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/flash,
 		/obj/item/baton/loaded,
@@ -101,13 +101,13 @@
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/stack/tape_roll/barricade_tape/police,
-		/obj/item/storage/box/flashbangs,
-		/obj/item/storage/box/teargas,
+		/obj/item/box/flashbangs,
+		/obj/item/box/teargas,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/chems/spray/pepper,
 		/obj/item/baton/loaded,
 		/obj/item/gun/energy/gun,
-		/obj/item/storage/box/holobadge,
+		/obj/item/box/holobadge,
 		/obj/item/holowarrant
 	)
 
@@ -153,7 +153,7 @@
 		/obj/item/clothing/head/det,
 		/obj/item/clothing/head/det/grey,
 		/obj/item/clothing/shoes/dress,
-		/obj/item/storage/box/evidence,
+		/obj/item/box/evidence,
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/pcarrier/detective,
 		/obj/item/stack/tape_roll/barricade_tape/police,

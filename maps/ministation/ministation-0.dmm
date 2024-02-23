@@ -1046,7 +1046,7 @@
 	},
 /obj/structure/table,
 /obj/item/stack/package_wrap,
-/obj/item/storage/box,
+/obj/item/box,
 /obj/item/megaphone,
 /turf/floor/tiled,
 /area/ministation/cargo)
@@ -3541,7 +3541,7 @@
 	dir = 4
 	},
 /obj/item/grenade/chem_grenade/cleaner,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/item/grenade/chem_grenade/cleaner,
 /turf/floor/tiled,
 /area/ministation/janitor)
@@ -4285,8 +4285,8 @@
 "wC" = (
 /obj/structure/closet,
 /obj/item/gun/launcher/foam/crossbow,
-/obj/item/storage/box/foam_darts,
-/obj/item/storage/box/foam_darts,
+/obj/item/box/foam_darts,
+/obj/item/box/foam_darts,
 /obj/item/gun/launcher/foam/revolver,
 /obj/item/gun/launcher/foam/revolver,
 /obj/item/gun/launcher/foam,
@@ -7914,7 +7914,7 @@
 /obj/structure/table,
 /obj/item/stack/package_wrap,
 /obj/item/stack/package_wrap,
-/obj/item/storage/box,
+/obj/item/box,
 /turf/floor/tiled,
 /area/ministation/cargo)
 "IP" = (

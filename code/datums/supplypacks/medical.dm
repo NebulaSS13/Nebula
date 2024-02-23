@@ -14,8 +14,8 @@
 					/obj/item/chems/glass/bottle/antitoxin,
 					/obj/item/chems/glass/bottle/stabilizer,
 					/obj/item/chems/glass/bottle/sedatives,
-					/obj/item/storage/box/syringes,
-					/obj/item/storage/box/autoinjectors)
+					/obj/item/box/syringes,
+					/obj/item/box/autoinjectors)
 	containername = "medical crate"
 
 /decl/hierarchy/supply_pack/medical/atk
@@ -60,7 +60,7 @@
 
 /decl/hierarchy/supply_pack/medical/bloodpack
 	name = "Refills - Blood Bags (Empty)"
-	contains = list(/obj/item/storage/box/bloodpacks = 3)
+	contains = list(/obj/item/box/bloodpacks = 3)
 	containername = "blood pack crate"
 
 /decl/hierarchy/supply_pack/medical/blood
@@ -70,7 +70,7 @@
 
 /decl/hierarchy/supply_pack/medical/bodybag
 	name = "Equipment - Body bags"
-	contains = list(/obj/item/storage/box/bodybags = 3)
+	contains = list(/obj/item/box/bodybags = 3)
 	containername = "body bag crate"
 
 /decl/hierarchy/supply_pack/medical/stretcher
@@ -140,9 +140,9 @@
 
 /decl/hierarchy/supply_pack/medical/chemistgear
 	name = "Gear - Pharmacist equipment"
-	contains = list(/obj/item/storage/box/beakers,
+	contains = list(/obj/item/box/beakers,
 					/obj/item/radio/headset/headset_med,
-					/obj/item/storage/box/autoinjectors,
+					/obj/item/box/autoinjectors,
 					/obj/item/clothing/under/chemist,
 					/obj/item/clothing/glasses/science,
 					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
@@ -152,7 +152,7 @@
 					/obj/item/chems/dropper,
 					/obj/item/scanner/health,
 					/obj/item/scanner/breath,
-					/obj/item/storage/box/pillbottles,
+					/obj/item/box/pillbottles,
 					/obj/item/chems/syringe)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "pharmacist equipment crate"
@@ -209,8 +209,8 @@
 					/obj/item/clothing/head/surgery/purple,
 					/obj/item/clothing/head/surgery/blue,
 					/obj/item/clothing/head/surgery/green,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/box/masks,
+					/obj/item/box/gloves)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical scrubs crate"
 	access = access_medical_equip
@@ -222,8 +222,8 @@
 					/obj/item/camera_film = 2,
 					/obj/item/scanner/autopsy,
 					/obj/item/scalpel,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves,
+					/obj/item/box/masks,
+					/obj/item/box/gloves,
 					/obj/item/pen)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "autopsy equipment crate"
@@ -246,8 +246,8 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat/genetics,
 					/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/box/masks,
+					/obj/item/box/gloves)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical uniform crate"
 	access = access_medical_equip
@@ -260,15 +260,15 @@
 					/obj/item/clothing/suit/bio_suit/cmo = 2,
 					/obj/item/clothing/mask/gas = 5,
 					/obj/item/tank/oxygen = 5,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/box/masks,
+					/obj/item/box/gloves)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical biohazard equipment crate"
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/portablefreezers
 	name = "Equipment - Portable freezers"
-	contains = list(/obj/item/storage/box/freezer = 7)
+	contains = list(/obj/item/box/freezer = 7)
 	containertype = /obj/structure/closet/crate/secure
 	containername = "portable freezers crate"
 	access = access_medical_equip
@@ -293,8 +293,8 @@
 	name = "Gear - Sterile clothes"
 	contains = list(/obj/item/clothing/under/medical/scrubs/green = 2,
 					/obj/item/clothing/head/surgery/green = 2,
-					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves,
+					/obj/item/box/masks,
+					/obj/item/box/gloves,
 					/obj/item/storage/belt/medical = 3)
 	containertype = /obj/structure/closet/crate
 	containername = "sterile clothes crate"

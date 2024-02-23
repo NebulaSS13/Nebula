@@ -1350,10 +1350,10 @@
 /area/ship/trade/loading_bay)
 "rI" = (
 /obj/structure/table,
-/obj/item/storage/box/beakers,
-/obj/item/storage/box/syringes,
+/obj/item/box/beakers,
+/obj/item/box/syringes,
 /obj/item/scalpel,
-/obj/item/storage/box/monkeycubes,
+/obj/item/box/monkeycubes,
 /obj/item/circular_saw,
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 29
@@ -1400,7 +1400,7 @@
 /area/ship/trade/loading_bay)
 "un" = (
 /obj/structure/janitorialcart,
-/obj/item/storage/box/water{
+/obj/item/box/water{
 	pixel_x = -10;
 	pixel_y = -5
 	},
@@ -1509,7 +1509,7 @@
 /obj/item/paint_sprayer,
 /obj/item/chems/glass/bucket,
 /obj/item/mop,
-/obj/item/storage/box/lights/mixed,
+/obj/item/box/lights/mixed,
 /obj/item/assembly/mousetrap,
 /obj/item/assembly/mousetrap,
 /obj/item/radio,
@@ -1919,7 +1919,7 @@
 	},
 /obj/structure/table,
 /obj/item/stack/material/puck/mapped/uranium/ten,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /turf/floor/tiled/white,
 /area/ship/trade/livestock)
 "MI" = (

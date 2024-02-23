@@ -154,7 +154,7 @@
 /area/icarus/vessel)
 "aL" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigar,
+/obj/item/box/fancy/cigar,
 /turf/floor/wood,
 /area/icarus/vessel)
 "aM" = (

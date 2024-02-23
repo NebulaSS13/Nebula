@@ -17,11 +17,11 @@
 			genes = list()
 			genesource = "unknown"
 
-/obj/item/storage/box/botanydisk
+/obj/item/box/botanydisk
 	name = "flora disk box"
 	desc = "A box of flora data disks, apparently."
 
-/obj/item/storage/box/botanydisk/WillContain()
+/obj/item/box/botanydisk/WillContain()
 	return list(/obj/item/disk/botany = 14)
 
 /obj/machinery/botany

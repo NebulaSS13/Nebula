@@ -1,7 +1,7 @@
 /*
  * Vial Box
  */
-/obj/item/storage/box/fancy/vials
+/obj/item/box/fancy/vials
 	icon = 'icons/obj/vialbox.dmi'
 	icon_state = "vialbox0"
 	name = "vial storage box"
@@ -10,10 +10,10 @@
 	key_type = /obj/item/chems/glass/beaker/vial
 	storage_type = /datum/extension/storage/box/vials
 
-/obj/item/storage/box/fancy/vials/WillContain()
+/obj/item/box/fancy/vials/WillContain()
 	return list(/obj/item/chems/glass/beaker/vial = 12)
 
-/obj/item/storage/box/fancy/vials/on_update_icon()
+/obj/item/box/fancy/vials/on_update_icon()
 	. = ..()
 	var/key_count = count_by_type(contents, key_type)
 	icon_state = "[initial(icon_state)][FLOOR(key_count/2)]"

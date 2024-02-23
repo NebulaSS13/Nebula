@@ -99,9 +99,9 @@
 		/obj/item/wrench,
 		/obj/item/crowbar,
 		/obj/item/wirecutters,
-		/obj/item/storage/box/parts_pack/manipulator,
-		/obj/item/storage/box/parts_pack/laser,
-		/obj/item/storage/box/parts_pack/capacitor,
-		/obj/item/storage/box/parts_pack/keyboard,
-		/obj/item/storage/box/parts
+		/obj/item/box/parts_pack/manipulator,
+		/obj/item/box/parts_pack/laser,
+		/obj/item/box/parts_pack/capacitor,
+		/obj/item/box/parts_pack/keyboard,
+		/obj/item/box/parts
 	)

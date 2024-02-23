@@ -255,7 +255,7 @@
 		var/obj/item/organ/O = loc
 		return O.is_preserved()
 	var/static/list/preserved_types = list(
-		/obj/item/storage/box/freezer,
+		/obj/item/box/freezer,
 		/obj/structure/closet/crate/freezer,
 		/obj/structure/closet/body_bag/cryobag
 	)

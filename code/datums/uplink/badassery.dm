@@ -29,7 +29,7 @@
 	name = "Modded foam gun"
 	desc = "It's a Jorf revolver blaster and 14 weighted darts. Even after aftermarket modification to increase its range and launch velocity, it's not a very effective weapon."
 	item_cost = 32
-	path = /obj/item/storage/box/large/foam_gun/revolver/tampered
+	path = /obj/item/box/large/foam_gun/revolver/tampered
 
 /**************
 * Random Item *

@@ -5999,7 +5999,7 @@
 /area/exodus/maintenance/telecomms)
 "Nw" = (
 /obj/structure/table/steel,
-/obj/item/storage/box/cups,
+/obj/item/box/cups,
 /obj/machinery/power/apc/hyper{
 	dir = 4;
 	name = "east bump";

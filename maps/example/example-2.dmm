@@ -384,8 +384,8 @@
 /area/example/second)
 "ys" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/syringes,
-/obj/item/storage/box/freezer,
+/obj/item/box/syringes,
+/obj/item/box/freezer,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)
@@ -524,8 +524,8 @@
 /area/example/second)
 "Hn" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/masks,
+/obj/item/box/gloves,
+/obj/item/box/masks,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/floor/tiled/white/monotile,
 /area/example/second)

@@ -1032,11 +1032,11 @@
 /area/ministation/security)
 "hx" = (
 /obj/structure/table,
-/obj/item/storage/box/handcuffs{
+/obj/item/box/handcuffs{
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/item/storage/box/flashbangs,
+/obj/item/box/flashbangs,
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 25
 	},
@@ -1313,7 +1313,7 @@
 	pixel_y = 7
 	},
 /obj/item/pen,
-/obj/item/storage/box/fancy/cigarettes,
+/obj/item/box/fancy/cigarettes,
 /obj/item/handcuffs,
 /obj/machinery/newscaster{
 	pixel_x = 32;
@@ -1875,7 +1875,7 @@
 /area/ministation/hall/e2)
 "mL" = (
 /obj/structure/table,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/machinery/light,
 /turf/floor/tiled/white,
 /area/ministation/medical)
@@ -2037,8 +2037,8 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/item/storage/box/ammo/shotgunshells,
-/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunshells,
+/obj/item/box/ammo/shotgunshells,
 /turf/floor/tiled,
 /area/ministation/security)
 "nX" = (
@@ -2392,8 +2392,8 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
+/obj/item/box/masks,
+/obj/item/box/gloves,
 /turf/floor/tiled/white,
 /area/ministation/medical)
 "pN" = (
@@ -3022,8 +3022,8 @@
 /area/ministation/medical)
 "sn" = (
 /obj/structure/table,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/masks,
+/obj/item/box/gloves,
+/obj/item/box/masks,
 /obj/item/clothing/suit/surgicalapron,
 /obj/item/clothing/suit/surgicalapron,
 /obj/item/chems/spray/cleaner,
@@ -3964,7 +3964,7 @@
 "vH" = (
 /obj/structure/table,
 /obj/item/chems/dropper,
-/obj/item/storage/box/syringes,
+/obj/item/box/syringes,
 /obj/item/mollusc/clam,
 /turf/floor/tiled/white,
 /area/ministation/medical)
@@ -4012,7 +4012,7 @@
 /area/ministation/medical)
 "vN" = (
 /obj/structure/table,
-/obj/item/storage/box/bodybags,
+/obj/item/box/bodybags,
 /obj/item/pen,
 /obj/item/radio/intercom{
 	dir = 1;
@@ -4265,7 +4265,7 @@
 /area/ministation/cafe)
 "wQ" = (
 /obj/structure/table/marble,
-/obj/item/storage/box/fancy/donut,
+/obj/item/box/fancy/donut,
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
@@ -5247,7 +5247,7 @@
 /area/ministation/hydro)
 "Av" = (
 /obj/structure/closet/chefcloset,
-/obj/item/storage/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
 /obj/item/clothing/suit/storage/toggle/wintercoat/hydro,
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn{
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
@@ -5270,7 +5270,7 @@
 /obj/item/stamp/clown,
 /obj/item/backpack/clown,
 /obj/item/bikehorn,
-/obj/item/storage/box/fancy/crayons,
+/obj/item/box/fancy/crayons,
 /obj/item/poster,
 /turf/floor/plating,
 /area/ministation/maint/hydromaint)
@@ -6149,7 +6149,7 @@
 "Ir" = (
 /obj/structure/table,
 /obj/item/folder/blue,
-/obj/item/storage/box/PDAs,
+/obj/item/box/PDAs,
 /obj/machinery/status_display{
 	pixel_y = 30
 	},
@@ -6954,7 +6954,7 @@
 /area/ministation/hall/e2)
 "Pd" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/box/fancy/cigarettes{
+/obj/item/box/fancy/cigarettes{
 	pixel_y = 2
 	},
 /obj/item/flame/lighter/random,
@@ -7699,7 +7699,7 @@
 /obj/structure/window/reinforced,
 /obj/structure/table,
 /obj/machinery/recharger,
-/obj/item/storage/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
 /obj/item/ammo_magazine/rifle/practice,
 /obj/item/ammo_magazine/rifle/practice,
 /obj/item/ammo_magazine/rifle/practice,
@@ -7879,8 +7879,8 @@
 /obj/item/shield/riot,
 /obj/item/shield/riot,
 /obj/item/clothing/suit/armor/reactive,
-/obj/item/storage/box/ammo/beanbags,
-/obj/item/storage/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
+/obj/item/box/ammo/beanbags,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},

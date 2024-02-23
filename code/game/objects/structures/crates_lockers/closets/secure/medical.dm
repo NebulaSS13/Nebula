@@ -19,15 +19,15 @@
 
 /obj/structure/closet/secure_closet/medical1/WillContain()
 	return list(
-		/obj/item/storage/box/autoinjectors,
-		/obj/item/storage/box/syringes,
+		/obj/item/box/autoinjectors,
+		/obj/item/box/syringes,
 		/obj/item/chems/dropper = 2,
 		/obj/item/chems/glass/beaker = 2,
 		/obj/item/chems/glass/bottle/stabilizer = 2,
 		/obj/item/chems/glass/bottle/antitoxin = 2,
 		/obj/random/firstaid,
-		/obj/item/storage/box/masks,
-		/obj/item/storage/box/gloves
+		/obj/item/box/masks,
+		/obj/item/box/gloves
 	)
 
 /obj/structure/closet/secure_closet/medical3
@@ -62,8 +62,8 @@
 
 /obj/structure/closet/secure_closet/paramedic/WillContain()
 	return list(
-		/obj/item/storage/box/autoinjectors,
-		/obj/item/storage/box/syringes,
+		/obj/item/box/autoinjectors,
+		/obj/item/box/syringes,
 		/obj/item/chems/glass/bottle/stabilizer,
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/storage/belt/medical/emt,
@@ -80,7 +80,7 @@
 		/obj/random/medical,
 		/obj/item/crowbar,
 		/obj/item/chems/spray/extinguisher/mini,
-		/obj/item/storage/box/freezer,
+		/obj/item/box/freezer,
 		/obj/item/clothing/accessory/storage/vest
 	)
 
@@ -115,7 +115,7 @@
 
 /obj/structure/closet/secure_closet/chemical/WillContain()
 	return list(
-		/obj/item/storage/box/pillbottles = 2,
+		/obj/item/box/pillbottles = 2,
 		/obj/random/medical = 12
 	)
 
@@ -177,16 +177,16 @@
 
 /obj/structure/closet/secure_closet/virology/WillContain()
 	return list(
-		/obj/item/storage/box/autoinjectors,
-		/obj/item/storage/box/syringes,
+		/obj/item/box/autoinjectors,
+		/obj/item/box/syringes,
 		/obj/item/chems/dropper = 2,
 		/obj/item/chems/glass/beaker = 2,
 		/obj/item/chems/glass/bottle/stabilizer,
 		/obj/item/storage/pill_bottle/antibiotics,
 		/obj/item/chems/syringe/antibiotic,
 		/obj/item/chems/glass/bottle/antitoxin,
-		/obj/item/storage/box/masks,
-		/obj/item/storage/box/gloves,
+		/obj/item/box/masks,
+		/obj/item/box/gloves,
 		/obj/item/clothing/under/virologist,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,

@@ -29,10 +29,10 @@
 		H.update_equipment_overlay(slot_wear_id_str)
 
 // PDA box
-/obj/item/storage/box/PDAs
+/obj/item/box/PDAs
 	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
 	icon_state = "pdabox"
 
-/obj/item/storage/box/PDAs/WillContain()
+/obj/item/box/PDAs/WillContain()
 	return list(/obj/item/modular_computer/pda = 5)

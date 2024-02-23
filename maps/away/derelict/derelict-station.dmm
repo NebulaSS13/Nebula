@@ -2338,7 +2338,7 @@
 /turf/floor/airless,
 /area/constructionsite/medical)
 "il" = (
-/obj/item/storage/box/freezer,
+/obj/item/box/freezer,
 /turf/floor/airless,
 /area/constructionsite/medical)
 "im" = (

@@ -555,7 +555,7 @@
 /area/unishi/living)
 "bP" = (
 /obj/item/stool/padded,
-/obj/item/storage/box/lights/bulbs,
+/obj/item/box/lights/bulbs,
 /turf/floor,
 /area/unishi/living)
 "bQ" = (
@@ -1256,8 +1256,8 @@
 /area/unishi/kitchen)
 "dB" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
-/obj/item/storage/box/emps,
-/obj/item/storage/box/smokes,
+/obj/item/box/emps,
+/obj/item/box/smokes,
 /turf/floor/tiled,
 /area/unishi/living)
 "dC" = (

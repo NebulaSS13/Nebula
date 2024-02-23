@@ -41,7 +41,7 @@
 	desc = "A kit with a pocket-sized holdout pistol, silencer, and an extra magazine. \
 			Attaching the silencer will make it too big to conceal in your pocket."
 	item_cost = 32
-	path = /obj/item/storage/box/syndie_kit/silenced
+	path = /obj/item/box/syndie_kit/silenced
 
 /datum/uplink_item/item/badassery/money_cannon
 	name = "Modified Money Cannon"

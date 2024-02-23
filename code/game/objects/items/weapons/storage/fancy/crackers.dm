@@ -1,7 +1,7 @@
 /*
  * Cracker Packet
  */
-/obj/item/storage/box/fancy/crackers
+/obj/item/box/fancy/crackers
 	name = "bag of crackers"
 	icon = 'icons/obj/food/containers/crackerbag.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -10,17 +10,17 @@
 	use_single_icon_overlay_state = "crackerbag"
 	storage_type = /datum/extension/storage/box/crackers
 
-/obj/item/storage/box/fancy/crackers/adjust_contents_overlay(var/overlay_index, var/image/overlay)
+/obj/item/box/fancy/crackers/adjust_contents_overlay(var/overlay_index, var/image/overlay)
 	overlay?.pixel_x = -(overlay_index)
 	return overlay
 
-/obj/item/storage/box/fancy/crackers/WillContain()
+/obj/item/box/fancy/crackers/WillContain()
 	return list(/obj/item/chems/food/cracker = 6)
 
-/obj/item/storage/box/fancy/crackers/update_icon_state()
+/obj/item/box/fancy/crackers/update_icon_state()
 	icon_state = get_world_inventory_state()
 
-/obj/item/storage/box/fancy/crackers/on_update_icon()
+/obj/item/box/fancy/crackers/on_update_icon()
 	. = ..()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage?.opened)

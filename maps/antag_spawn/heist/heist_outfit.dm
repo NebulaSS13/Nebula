@@ -113,7 +113,7 @@
 				if(prob(20)) //don't want to give them too much
 					H.equip_to_slot_or_del(new bullet_thrower.magazine_type(H), slot_r_store_str)
 			else if(bullet_thrower.ammo_type)
-				var/obj/item/storage/box/ammobox = new(get_turf(H.loc))
+				var/obj/item/box/ammobox = new(get_turf(H.loc))
 				for(var/i in 1 to rand(3,5) + rand(0,2))
 					new bullet_thrower.ammo_type(ammobox)
 				H.put_in_hands(ammobox)
