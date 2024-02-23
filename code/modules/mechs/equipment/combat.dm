@@ -210,13 +210,14 @@
 
 /obj/aura/mechshield/hitby(atom/movable/M, var/datum/thrownthing/TT)
 	. = ..()
-	if(!active)
-		return
-	if(shields.charge && TT.speed <= 5)
-		user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash briefly as they deflect \the [M]."))
-		flick("shield_impact", src)
-		playsound(user,'sound/effects/basscannon.ogg',10,1)
-		return AURA_FALSE|AURA_CANCEL
+	if(.)
+		if(!active)
+			return
+		if(shields.charge && TT.speed <= 5)
+			user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash briefly as they deflect \the [M]."))
+			flick("shield_impact", src)
+			playsound(user,'sound/effects/basscannon.ogg',10,1)
+			return AURA_FALSE|AURA_CANCEL
 	//Too fast!
 
 //Melee! As a general rule I would recommend using regular objects and putting logic in them.
@@ -419,12 +420,11 @@
 
 /obj/aura/mech_ballistic/hitby(atom/movable/M, datum/thrownthing/TT)
 	. = ..()
-	if (shield)
+	if (. && shield)
 		var/throw_damage = 0
 		if (istype(M,/obj/))
 			var/obj/O = M
 			throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
-
 		if (prob(shield.block_chance(throw_damage, 0, source = M, attacker = TT.thrower)))
 			user.visible_message(SPAN_WARNING("\The [M] bounces off \the [user]'s [shield]."))
 			playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)

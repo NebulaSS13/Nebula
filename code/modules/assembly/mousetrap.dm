@@ -95,8 +95,8 @@
 
 
 /obj/item/assembly/mousetrap/hitby(atom/A)
-	..()
-	if(armed)
+	. = ..()
+	if(. && armed)
 		visible_message(SPAN_WARNING("\The [src] is triggered by \the [A]."))
 		triggered(A)
 

@@ -488,7 +488,7 @@
 					to_chat(src, SPAN_DANGER("You feel something rip out of your [stomach.name]!"))
 					O.dropInto(loc)
 					if(parent)
-						parent.embed(O)
+						parent.embed_in_organ(O)
 				else
 					jostle_internal_object(parent, O)
 

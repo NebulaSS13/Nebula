@@ -112,16 +112,6 @@ meteor_act
 		if(istype(gear) && (gear.body_parts_covered & SLOT_FACE) && !(gear.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 			return gear
 
-/mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	var/list/checking_slots = get_held_items()
-	var/obj/item/suit = get_equipped_item(slot_wear_suit_str)
-	if(suit)
-		LAZYDISTINCTADD(checking_slots, suit)
-	for(var/obj/item/shield in checking_slots)
-		if(shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text))
-			return TRUE
-	return FALSE
-
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 
 	for (var/obj/item/grab/G in grabbed_by)
@@ -297,84 +287,15 @@ meteor_act
 	affecting.status |= ORGAN_SABOTAGED
 	return 1
 
-//this proc handles being hit by a thrown atom
 /mob/living/carbon/human/hitby(atom/movable/AM, var/datum/thrownthing/TT)
-
-	if(istype(AM,/obj/))
-		var/obj/O = AM
-
-		if(in_throw_mode && !get_active_hand() && TT.speed <= THROWFORCE_SPEED_DIVISOR)	//empty active hand and we're in throw mode
-			if(!incapacitated())
-				if(isturf(O.loc))
-					put_in_active_hand(O)
-					visible_message("<span class='warning'>[src] catches [O]!</span>")
-					throw_mode_off()
-					process_momentum(AM, TT)
-					return
-
-		var/dtype = O.damtype
-		var/throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
-
-		var/zone = BP_CHEST
-		if (TT.target_zone)
-			zone = check_zone(TT.target_zone, src)
-		else
-			zone = ran_zone()	//Hits a random part of the body, -was already geared towards the chest
-
-		//check if we hit
-		var/miss_chance = max(15*(TT.dist_travelled-2),0)
-		zone = get_zone_with_miss_chance(zone, src, miss_chance, ranged_attack=1)
-
-		if(zone && TT.thrower && TT.thrower != src)
-			var/shield_check = check_shields(throw_damage, O, TT.thrower, zone, "[O]")
-			if(shield_check == PROJECTILE_FORCE_MISS)
-				zone = null
-			else if(shield_check)
-				return
-
-		var/obj/item/organ/external/affecting = (zone && GET_EXTERNAL_ORGAN(src, zone))
-		if(!affecting)
-			visible_message(SPAN_NOTICE("\The [O] misses \the [src] narrowly!"))
-			return
-
-		var/datum/wound/created_wound
-		visible_message(SPAN_DANGER("\The [src] has been hit in \the [affecting.name] by \the [O]."))
-		created_wound = apply_damage(throw_damage, dtype, zone, O.damage_flags(), O, O.armor_penetration)
-
-		if(TT.thrower)
-			var/client/assailant = TT.thrower.client
-			if(assailant)
-				admin_attack_log(TT.thrower, src, "Threw \an [O] at their victim.", "Had \an [O] thrown at them", "threw \an [O] at")
-
-		//thrown weapon embedded object code.
-		if(dtype == BRUTE && istype(O,/obj/item))
-			var/obj/item/I = O
-			if (!is_robot_module(I))
-				var/sharp = I.can_embed()
-				var/damage = throw_damage //the effective damage used for embedding purposes, no actual damage is dealt here
-				damage *= (1 - get_blocked_ratio(zone, BRUTE, O.damage_flags(), O.armor_penetration, I.force))
-
-				//blunt objects should really not be embedding in things unless a huge amount of force is involved
-				var/embed_chance = sharp? damage/I.w_class : damage/(I.w_class*3)
-				var/embed_threshold = sharp? 5*I.w_class : 15*I.w_class
-
-				//Sharp objects will always embed if they do enough damage.
-				//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
-				if((sharp && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
-					affecting.embed(I, supplied_wound = created_wound)
-					I.has_embedded()
-
+	// empty active hand and we're in throw mode, so we can catch it
+	if(isobj(AM) && in_throw_mode && !get_active_hand() && TT.speed <= THROWFORCE_SPEED_DIVISOR && !incapacitated() && isturf(AM.loc))
+		put_in_active_hand(AM)
+		visible_message(SPAN_NOTICE("\The [src] catches \the [AM]!"))
+		throw_mode_off()
 		process_momentum(AM, TT)
-
-	else
-		..()
-
-/mob/living/carbon/human/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
-	if(!def_zone) ..()
-
-	var/obj/item/organ/external/affecting = GET_EXTERNAL_ORGAN(src, def_zone)
-	if(affecting)
-		affecting.embed(O, supplied_wound = supplied_wound)
+		return FALSE
+	return ..()
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 	var/obj/item/clothing/gloves/gloves = get_equipped_item(slot_gloves_str)
