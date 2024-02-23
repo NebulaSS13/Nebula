@@ -20,7 +20,7 @@
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
 	item_cost = 8
-	path = /obj/item/storage/secure/briefcase/money
+	path = /obj/item/secure_storage/briefcase/money
 /datum/uplink_item/item/tools/money/New()
 	. = ..()
 	desc = "A briefcase with a very large sum of untraceable local currency. Makes a great bribe if they're willing to take you up on your offer."

@@ -2847,7 +2847,7 @@
 /area/slavers_base/demo)
 "hP" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/secure/briefcase/money,
+/obj/item/secure_storage/briefcase/money,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -3570,7 +3570,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/item/storage/secure/briefcase/money,
+/obj/item/secure_storage/briefcase/money,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,

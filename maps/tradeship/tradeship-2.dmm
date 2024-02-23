@@ -5403,7 +5403,7 @@
 	icon_state = "tube1"
 	},
 /obj/structure/closet/cabinet,
-/obj/item/storage/secure/briefcase,
+/obj/item/secure_storage/briefcase,
 /obj/item/backpack/dufflebag/syndie,
 /obj/item/box/ammo/shotgunshells,
 /obj/item/handcuffs,

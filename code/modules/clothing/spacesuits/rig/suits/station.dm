@@ -8,7 +8,7 @@
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/briefcase, /obj/item/storage/secure/briefcase)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/storage/briefcase, /obj/item/secure_storage/briefcase)
 
 	req_access = list(access_lawyer)
 

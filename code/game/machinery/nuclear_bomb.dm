@@ -390,10 +390,10 @@ var/global/bomb_set
 	return ..()
 
 //====the nuclear football (holds the disk and instructions)====
-/obj/item/storage/secure/briefcase/nukedisk
+/obj/item/secure_storage/briefcase/nukedisk
 	desc = "A large briefcase with a digital locking system."
 
-/obj/item/storage/secure/briefcase/nukedisk/WillContain()
+/obj/item/secure_storage/briefcase/nukedisk/WillContain()
 	return list(
 		/obj/item/disk/nuclear,
 		/obj/item/pinpointer,
@@ -401,7 +401,7 @@ var/global/bomb_set
 		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap
 	)
 
-/obj/item/storage/secure/briefcase/nukedisk/examine(mob/user)
+/obj/item/secure_storage/briefcase/nukedisk/examine(mob/user)
 	. = ..()
 	to_chat(user,"On closer inspection, you see \a [global.using_map.company_name] emblem is etched into the front of it.")
 

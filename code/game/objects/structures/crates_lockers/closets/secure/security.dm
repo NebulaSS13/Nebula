@@ -223,5 +223,5 @@
 		/obj/item/camera = 2,
 		/obj/item/camera_film = 2,
 		/obj/item/taperecorder = 2,
-		/obj/item/storage/secure/briefcase = 2,
+		/obj/item/secure_storage/briefcase = 2,
 	)

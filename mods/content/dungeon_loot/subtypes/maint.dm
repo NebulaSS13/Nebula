@@ -32,7 +32,7 @@
 		/obj/item/clothing/mask/breath,
 		/obj/item/chems/glass/rag,
 		/obj/item/chems/food/liquidfood,
-		/obj/item/storage/secure/briefcase,
+		/obj/item/secure_storage/briefcase,
 		/obj/item/storage/briefcase,
 		/obj/item/backpack,
 		/obj/item/backpack/satchel,
