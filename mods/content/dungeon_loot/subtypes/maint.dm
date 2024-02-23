@@ -38,7 +38,7 @@
 		/obj/item/backpack/satchel,
 		/obj/item/backpack/dufflebag,
 		/obj/item/box,
-		/obj/item/storage/wallet,
+		/obj/item/wallet,
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/shoes/dress,

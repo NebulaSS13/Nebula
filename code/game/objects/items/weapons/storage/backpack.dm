@@ -241,7 +241,7 @@
 	name = "grey satchel"
 
 /obj/item/backpack/satchel/grey/withwallet/WillContain()
-	return /obj/item/storage/wallet/random
+	return /obj/item/wallet/random
 
 /obj/item/backpack/satchel/leather //brown, master type
 	name = "brown leather satchel"

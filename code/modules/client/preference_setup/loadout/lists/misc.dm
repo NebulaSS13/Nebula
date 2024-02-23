@@ -166,12 +166,12 @@
 
 /decl/loadout_option/wallet
 	name = "wallet, colour select"
-	path = /obj/item/storage/wallet
+	path = /obj/item/wallet
 	loadout_flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/wallet_poly
 	name = "wallet, polychromic"
-	path = /obj/item/storage/wallet/poly
+	path = /obj/item/wallet/poly
 	cost = 2
 
 

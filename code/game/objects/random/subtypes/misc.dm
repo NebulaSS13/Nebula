@@ -303,7 +303,7 @@
 		/obj/item/box/gloves =                     3,
 		/obj/item/box/large =                      2,
 		/obj/item/box/glowsticks =                 3,
-		/obj/item/storage/wallet =                         1,
+		/obj/item/wallet =                         1,
 		/obj/item/storage/ore =                            2,
 		/obj/item/storage/belt/utility/full =              2,
 		/obj/item/storage/belt/medical/emt =               2,

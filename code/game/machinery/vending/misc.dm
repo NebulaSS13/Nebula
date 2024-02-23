@@ -63,7 +63,7 @@
 		/obj/item/clothing/glasses/eyepatch/monocle = 5,
 		/obj/item/clothing/glasses/sunglasses = 5,
 		/obj/random/makeup = 3,
-		/obj/item/storage/wallet/poly = 2
+		/obj/item/wallet/poly = 2
 	)
 	contraband = list(
 		/obj/item/clothing/glasses/eyepatch = 2,

@@ -40,8 +40,8 @@
 
 /datum/extension/storage/wallet/remove_from_storage(obj/item/W, atom/new_location)
 	. = ..(W, new_location)
-	if(. && istype(holder, /obj/item/storage/wallet))
-		var/obj/item/storage/wallet/wallet = holder
+	if(. && istype(holder, /obj/item/wallet))
+		var/obj/item/wallet/wallet = holder
 		if(W == wallet.front_id)
 			wallet.front_id = null
 			wallet.SetName(initial(wallet.name))
@@ -51,8 +51,8 @@
 
 /datum/extension/storage/wallet/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	. = ..(W, prevent_warning)
-	if(. && istype(holder, /obj/item/storage/wallet))
-		var/obj/item/storage/wallet/wallet = holder
+	if(. && istype(holder, /obj/item/wallet))
+		var/obj/item/wallet/wallet = holder
 		if(!wallet.front_id && istype(W, /obj/item/card/id))
 			wallet.front_id = W
 			wallet.update_icon()
