@@ -106,7 +106,7 @@
 /area/icarus/vessel)
 "aD" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/lunchbox/mars,
+/obj/item/lunchbox/mars,
 /turf/floor/wood,
 /area/icarus/vessel)
 "aE" = (
