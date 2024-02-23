@@ -780,7 +780,7 @@
 	req_access = list("ACCESS_RESEARCH");
 	name = "Science locker"
 	},
-/obj/item/storage/med_pouch/trauma,
+/obj/item/med_pouch/trauma,
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/shield/buckler,
 /obj/item/gps/explorer,
@@ -4468,7 +4468,7 @@
 	name = "Science locker"
 	},
 /obj/machinery/light,
-/obj/item/storage/med_pouch/trauma,
+/obj/item/med_pouch/trauma,
 /obj/item/stack/tape_roll/duct_tape,
 /obj/item/shield/buckler,
 /obj/item/gps/explorer,

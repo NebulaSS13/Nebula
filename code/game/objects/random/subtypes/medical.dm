@@ -45,11 +45,11 @@
 		/obj/item/chems/hypospray/autoinjector/stabilizer = 3,
 		/obj/item/pill_bottle/burn_meds                   = 2,
 		/obj/item/pill_bottle/antitoxins                  = 2,
-		/obj/item/storage/med_pouch/trauma                = 2,
-		/obj/item/storage/med_pouch/burn                  = 2,
-		/obj/item/storage/med_pouch/toxin                 = 2,
-		/obj/item/storage/med_pouch/radiation             = 2,
-		/obj/item/storage/med_pouch/oxyloss               = 2
+		/obj/item/med_pouch/trauma                        = 2,
+		/obj/item/med_pouch/burn                          = 2,
+		/obj/item/med_pouch/toxin                         = 2,
+		/obj/item/med_pouch/radiation                     = 2,
+		/obj/item/med_pouch/oxyloss                       = 2
 	)
 	return spawnable_choices
 

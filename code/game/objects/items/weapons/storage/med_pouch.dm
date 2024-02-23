@@ -2,7 +2,7 @@
 Single Use Emergency Pouches
  */
 
-/obj/item/storage/med_pouch
+/obj/item/med_pouch
 	name = "emergency medical pouch"
 	desc = "For use in emergency situations only."
 	icon = 'icons/obj/med_pouch.dmi'
@@ -23,7 +23,7 @@ Single Use Emergency Pouches
 	8) Stay in place once they respond.\
 		"}
 
-/obj/item/storage/med_pouch/Initialize(ml, material_key)
+/obj/item/med_pouch/Initialize(ml, material_key)
 	. = ..()
 	SetName("emergency [injury_type] pouch")
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
@@ -32,7 +32,7 @@ Single Use Emergency Pouches
 	for(var/obj/item/chems/C in contents)
 		C.set_detail_color(color)
 
-/obj/item/storage/med_pouch/on_update_icon()
+/obj/item/med_pouch/on_update_icon()
 	. = ..()
 	if(!cross_overlay)
 		cross_overlay = overlay_image(icon, "cross", flags = RESET_COLOR)
@@ -40,26 +40,26 @@ Single Use Emergency Pouches
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	icon_state = "pack[!!(storage?.opened)]"
 
-/obj/item/storage/med_pouch/examine(mob/user)
+/obj/item/med_pouch/examine(mob/user)
 	. = ..()
 	to_chat(user, "<A href='?src=\ref[src];show_info=1'>Please read instructions before use.</A>")
 
-/obj/item/storage/med_pouch/CanUseTopic()
+/obj/item/med_pouch/CanUseTopic()
 	return STATUS_INTERACTIVE
 
-/obj/item/storage/med_pouch/OnTopic(var/user, var/list/href_list)
+/obj/item/med_pouch/OnTopic(var/user, var/list/href_list)
 	if(href_list["show_info"])
 		to_chat(user, instructions)
 		return TOPIC_HANDLED
 
-/obj/item/storage/med_pouch/attack_self(mob/user)
+/obj/item/med_pouch/attack_self(mob/user)
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage && !storage.opened)
 		storage.open(user)
 		return TRUE
 	return ..()
 
-/obj/item/storage/med_pouch/trauma
+/obj/item/med_pouch/trauma
 	name = "trauma pouch"
 	injury_type = "trauma"
 	color = COLOR_RED
@@ -73,7 +73,7 @@ Single Use Emergency Pouches
 	7) Stay in place once they respond.\
 		"}
 
-/obj/item/storage/med_pouch/trauma/WillContain()
+/obj/item/med_pouch/trauma/WillContain()
 	return list(
 			/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
 			/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
@@ -82,7 +82,7 @@ Single Use Emergency Pouches
 			/obj/item/stack/medical/bruise_pack = 2,
 		)
 
-/obj/item/storage/med_pouch/burn
+/obj/item/med_pouch/burn
 	name = "burn pouch"
 	injury_type = "burn"
 	color = COLOR_SEDONA
@@ -96,7 +96,7 @@ Single Use Emergency Pouches
 	7) Stay in place once they respond.\
 		"}
 
-/obj/item/storage/med_pouch/burn/WillContain()
+/obj/item/med_pouch/burn/WillContain()
 	return list(
 			/obj/item/chems/hypospray/autoinjector/pouch_auto/nanoblood,
 			/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
@@ -105,7 +105,7 @@ Single Use Emergency Pouches
 			/obj/item/stack/medical/ointment = 2,
 		)
 
-/obj/item/storage/med_pouch/oxyloss
+/obj/item/med_pouch/oxyloss
 	name = "low oxygen pouch"
 	injury_type = "low oxygen"
 	color = COLOR_BLUE
@@ -120,7 +120,7 @@ Single Use Emergency Pouches
 	8) Stay in place once they respond.\
 		"}
 
-/obj/item/storage/med_pouch/oxyloss/WillContain()
+/obj/item/med_pouch/oxyloss/WillContain()
 	return list(
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
 		/obj/item/chems/inhaler/pouch_auto/oxy_meds,
@@ -129,7 +129,7 @@ Single Use Emergency Pouches
 		/obj/item/chems/pill/pouch_pill/oxy_meds
 	)
 
-/obj/item/storage/med_pouch/toxin
+/obj/item/med_pouch/toxin
 	name = "toxin pouch"
 	injury_type = "toxin"
 	color = COLOR_GREEN
@@ -142,13 +142,13 @@ Single Use Emergency Pouches
 	6) Stay in place once they respond.\
 		"}
 
-/obj/item/storage/med_pouch/toxin/WillContain()
+/obj/item/med_pouch/toxin/WillContain()
 	return list(
 			/obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins,
 			/obj/item/chems/pill/pouch_pill/antitoxins
 		)
 
-/obj/item/storage/med_pouch/radiation
+/obj/item/med_pouch/radiation
 	name = "radiation pouch"
 	injury_type = "radiation"
 	color = COLOR_AMBER
@@ -161,13 +161,13 @@ Single Use Emergency Pouches
 	6) Stay in place once they respond.\
 		"}
 
-/obj/item/storage/med_pouch/radiation/WillContain()
+/obj/item/med_pouch/radiation/WillContain()
 	return list(
 			/obj/item/chems/hypospray/autoinjector/antirad,
 			/obj/item/chems/pill/pouch_pill/antitoxins
 		)
 
-/obj/item/storage/med_pouch/overdose
+/obj/item/med_pouch/overdose
 	name = "overdose treatment pouch"
 	injury_type = "overdose"
 	color = COLOR_PALE_BLUE_GRAY
@@ -181,7 +181,7 @@ Single Use Emergency Pouches
 	8) Stay in place once they respond.\
 		"}
 
-/obj/item/storage/med_pouch/overdose/WillContain()
+/obj/item/med_pouch/overdose/WillContain()
 	return list(
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer,
 		/obj/item/chems/inhaler/pouch_auto/oxy_meds,

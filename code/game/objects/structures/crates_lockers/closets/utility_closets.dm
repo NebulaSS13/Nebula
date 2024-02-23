@@ -41,7 +41,7 @@
 
 /obj/structure/closet/firecloset/WillContain()
 	return list(
-		/obj/item/storage/med_pouch/burn,
+		/obj/item/med_pouch/burn,
 		/obj/item/backpack/dufflebag/firefighter,
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight
@@ -49,7 +49,7 @@
 
 /obj/structure/closet/firecloset/chief/WillContain()
 	return list(
-		/obj/item/storage/med_pouch/burn,
+		/obj/item/med_pouch/burn,
 		/obj/item/clothing/suit/fire,
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight,
@@ -95,7 +95,7 @@
 
 /obj/structure/closet/radiation/WillContain()
 	return list(
-		/obj/item/storage/med_pouch/radiation = 2,
+		/obj/item/med_pouch/radiation = 2,
 		/obj/item/clothing/suit/radiation = 2,
 		/obj/item/clothing/head/radiation = 2,
 		/obj/item/geiger = 2)
@@ -152,7 +152,7 @@
 	return list(
 		/obj/item/inflatable = 2,
 		/obj/item/inflatable/door = 2,
-		/obj/item/storage/med_pouch/burn = 2,
+		/obj/item/med_pouch/burn = 2,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/backpack/dufflebag/firefighter
 		)

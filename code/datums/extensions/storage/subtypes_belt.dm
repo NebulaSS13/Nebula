@@ -52,7 +52,7 @@
 		/obj/item/flashlight,
 		/obj/item/stack/tape_roll,
 		/obj/item/chems/spray/extinguisher/mini,
-		/obj/item/storage/med_pouch,
+		/obj/item/med_pouch,
 		/obj/item/bodybag,
 		/obj/item/clothing/gloves
 	)
