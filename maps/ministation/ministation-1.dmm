@@ -2080,7 +2080,7 @@
 	name = "Common Channel";
 	pixel_y = 20
 	},
-/obj/item/storage/pill_bottle,
+/obj/item/pill_bottle,
 /obj/machinery/light{
 	dir = 4
 	},

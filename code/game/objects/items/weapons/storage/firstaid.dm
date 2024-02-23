@@ -29,8 +29,8 @@
 	return list(
 		/obj/item/stack/medical/bruise_pack = 2,
 		/obj/item/stack/medical/ointment = 2,
-		/obj/item/storage/pill_bottle/antibiotics,
-		/obj/item/storage/pill_bottle/painkillers,
+		/obj/item/pill_bottle/antibiotics,
+		/obj/item/pill_bottle/painkillers,
 		/obj/item/stack/medical/splint
 		)
 
@@ -90,7 +90,7 @@
 
 /obj/item/storage/firstaid/adv/WillContain()
 	return list(
-		/obj/item/storage/pill_bottle/assorted,
+		/obj/item/pill_bottle/assorted,
 		/obj/item/stack/medical/advanced/bruise_pack = 3,
 		/obj/item/stack/medical/advanced/ointment = 2,
 		/obj/item/stack/medical/splint
@@ -104,12 +104,12 @@
 
 /obj/item/storage/firstaid/combat/WillContain()
 	return list(
-		/obj/item/storage/pill_bottle/brute_meds,
-		/obj/item/storage/pill_bottle/burn_meds,
-		/obj/item/storage/pill_bottle/oxygen,
-		/obj/item/storage/pill_bottle/antitoxins,
-		/obj/item/storage/pill_bottle/strong_painkillers,
-		/obj/item/storage/pill_bottle/antibiotics,
+		/obj/item/pill_bottle/brute_meds,
+		/obj/item/pill_bottle/burn_meds,
+		/obj/item/pill_bottle/oxygen,
+		/obj/item/pill_bottle/antitoxins,
+		/obj/item/pill_bottle/strong_painkillers,
+		/obj/item/pill_bottle/antibiotics,
 		/obj/item/stack/medical/splint,
 		)
 

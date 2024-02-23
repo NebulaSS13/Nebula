@@ -908,13 +908,13 @@
 /obj/random/firstaid,
 /obj/item/storage/firstaid/surgery,
 /obj/item/storage/firstaid/stab,
-/obj/item/storage/pill_bottle/antibiotics,
-/obj/item/storage/pill_bottle/antibiotics,
+/obj/item/pill_bottle/antibiotics,
+/obj/item/pill_bottle/antibiotics,
 /obj/item/storage/med_pouch/radiation,
 /obj/item/storage/med_pouch/radiation,
 /obj/item/storage/med_pouch/radiation,
 /obj/item/storage/med_pouch/radiation,
-/obj/item/storage/pill_bottle/assorted,
+/obj/item/pill_bottle/assorted,
 /turf/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "bX" = (

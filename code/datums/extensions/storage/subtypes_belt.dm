@@ -39,7 +39,7 @@
 		/obj/item/chems/syringe,
 		/obj/item/flame/fuelled/lighter/zippo,
 		/obj/item/box/fancy/cigarettes,
-		/obj/item/storage/pill_bottle,
+		/obj/item/pill_bottle,
 		/obj/item/stack/medical,
 		/obj/item/flashlight/pen,
 		/obj/item/clothing/mask/surgical,

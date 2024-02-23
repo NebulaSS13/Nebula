@@ -39,7 +39,7 @@
 	path = /obj/item/implanter
 
 /datum/fabricator_recipe/medical/pill_bottle
-	path = /obj/item/storage/pill_bottle
+	path = /obj/item/pill_bottle
 
 /datum/fabricator_recipe/medical/hypospray/autoinjector
 	path = /obj/item/chems/hypospray/autoinjector/empty

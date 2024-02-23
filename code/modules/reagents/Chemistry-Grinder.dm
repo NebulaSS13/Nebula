@@ -16,7 +16,7 @@
 	var/list/holdingitems = list()
 
 	var/list/bag_whitelist = list(
-		/obj/item/storage/pill_bottle,
+		/obj/item/pill_bottle,
 		/obj/item/storage/plants
 		)
 	var/blacklisted_types = list()

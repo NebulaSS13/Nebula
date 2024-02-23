@@ -73,7 +73,7 @@
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O)
 	if(istype(O,/obj/item/chems/glass))
 		return 1
-	if(istype(O,/obj/item/storage/pill_bottle))
+	if(istype(O,/obj/item/pill_bottle))
 		return 1
 	if(istype(O,/obj/item/chems/pill))
 		return 1
@@ -99,7 +99,7 @@
 	icon_contents = "chem"
 
 /obj/machinery/smartfridge/chemistry/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/storage/pill_bottle) || istype(O,/obj/item/chems))
+	if(istype(O,/obj/item/pill_bottle) || istype(O,/obj/item/chems))
 		return 1
 	return 0
 

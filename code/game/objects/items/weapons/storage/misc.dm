@@ -1,20 +1,20 @@
-/obj/item/storage/pill_bottle/dice	//7d6
+/obj/item/pill_bottle/dice	//7d6
 	name = "bag of dice"
 	desc = "It's a small bag with dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"
 	material = /decl/material/solid/organic/cloth
 
-/obj/item/storage/pill_bottle/dice/WillContain()
+/obj/item/pill_bottle/dice/WillContain()
 	return list(/obj/item/dice = 7)
 
-/obj/item/storage/pill_bottle/dice_nerd	//DnD dice
+/obj/item/pill_bottle/dice_nerd	//DnD dice
 	name = "bag of gaming dice"
 	desc = "It's a small bag with gaming dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "magicdicebag"
 
-/obj/item/storage/pill_bottle/dice_nerd/WillContain()
+/obj/item/pill_bottle/dice_nerd/WillContain()
 	return list(
 		/obj/item/dice/d4,
 		/obj/item/dice,

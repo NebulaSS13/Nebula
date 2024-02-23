@@ -49,7 +49,7 @@
 		/obj/item/photo,
 		/obj/item/marshalling_wand,
 		/obj/item/chems/pill,
-		/obj/item/storage/pill_bottle
+		/obj/item/pill_bottle
 	)
 
 /datum/extension/storage/pockets/suit

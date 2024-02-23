@@ -2192,10 +2192,10 @@
 	},
 /obj/item/storage/belt/medical,
 /obj/item/scanner/health,
-/obj/item/storage/pill_bottle/painkillers,
-/obj/item/storage/pill_bottle/painkillers,
-/obj/item/storage/pill_bottle/antibiotics,
-/obj/item/storage/pill_bottle/antibiotics,
+/obj/item/pill_bottle/painkillers,
+/obj/item/pill_bottle/painkillers,
+/obj/item/pill_bottle/antibiotics,
+/obj/item/pill_bottle/antibiotics,
 /obj/item/chems/glass/beaker/large,
 /turf/floor/tiled/white,
 /area/map_template/colony/medbay)
@@ -4487,8 +4487,8 @@
 /obj/structure/closet/crate,
 /obj/item/deck/cards,
 /obj/item/deck/cards,
-/obj/item/storage/pill_bottle/dice,
-/obj/item/storage/pill_bottle/dice_nerd,
+/obj/item/pill_bottle/dice,
+/obj/item/pill_bottle/dice_nerd,
 /obj/random/drinkbottle,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9

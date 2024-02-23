@@ -1531,7 +1531,7 @@
 "fa" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/storage/pill_bottle/antibiotics,
+/obj/item/pill_bottle/antibiotics,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fb" = (

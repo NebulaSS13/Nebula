@@ -4,11 +4,11 @@
 
 /decl/loadout_option/dice
 	name = "dice pack"
-	path = /obj/item/storage/pill_bottle/dice
+	path = /obj/item/pill_bottle/dice
 
 /decl/loadout_option/dice/nerd
 	name = "dice pack (gaming)"
-	path = /obj/item/storage/pill_bottle/dice_nerd
+	path = /obj/item/pill_bottle/dice_nerd
 
 /decl/loadout_option/cards
 	name = "deck of cards"
