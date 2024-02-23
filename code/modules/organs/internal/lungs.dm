@@ -328,7 +328,8 @@
 		species.get_environment_discomfort(owner,"cold")
 
 /obj/item/organ/internal/lungs/listen()
-	if(owner.failed_last_breath || !active_breathing)
+
+	if((status & (ORGAN_DEAD|ORGAN_CUT_AWAY)) || !owner || owner.failed_last_breath || !active_breathing)
 		return "no respiration"
 
 	if(BP_IS_PROSTHETIC(src))
