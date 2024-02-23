@@ -257,9 +257,9 @@
 		/obj/item/chems/drinks/glass2/fitnessflask/proteinshake = 8,
 		/obj/item/chems/drinks/glass2/fitnessflask = 8,
 		/obj/item/chems/food/candy/proteinbar = 8,
-		/obj/item/storage/mre/random = 8,
-		/obj/item/storage/mre/menu9 = 4,
-		/obj/item/storage/mre/menu10 = 4,
+		/obj/item/mre/random = 8,
+		/obj/item/mre/menu9 = 4,
+		/obj/item/mre/menu10 = 4,
 		/obj/item/towel/random = 8
 	)
 	contraband = list(/obj/item/chems/syringe/steroid = 4)

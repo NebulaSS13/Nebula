@@ -23,7 +23,7 @@
 	name = "Crayon MRE"
 	desc = "Exceptionally robust MRE"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
-	path = /obj/item/storage/mre/menu11/special
+	path = /obj/item/mre/menu11/special
 
 /datum/uplink_item/item/badassery/modded_foam_gun
 	name = "Modded foam gun"
