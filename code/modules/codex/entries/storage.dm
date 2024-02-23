@@ -1,7 +1,7 @@
-/obj/item/storage/get_lore_info()
+/obj/item/get_lore_info()
 	return desc
 
-/obj/item/storage/get_mechanics_info()
+/obj/item/get_mechanics_info()
 	. = ..()
 	var/list/storage_info_list = list()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
