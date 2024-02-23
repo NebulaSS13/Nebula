@@ -324,7 +324,7 @@
 		user.visible_message(SPAN_NOTICE("\The [user] puts \the [O] into \the [src]."))
 		return TRUE
 
-	if(istype(O, /obj/item/storage/plants))
+	if(istype(O, /obj/item/plants))
 		var/datum/extension/storage/storage = get_extension(O, /datum/extension/storage)
 		if(storage)
 			var/loaded = 0

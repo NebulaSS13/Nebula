@@ -1,4 +1,4 @@
-/obj/item/storage/bible
+/obj/item/bible
 	name = "bible"
 	desc = "Apply to head repeatedly."
 	icon = 'icons/obj/items/storage/bible.dmi'
@@ -14,59 +14,59 @@
 	var/renamed = 0
 	var/icon_changed = 0
 
-/obj/item/storage/bible/Initialize()
+/obj/item/bible/Initialize()
 	. = ..()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(length(contents) && storage)
 		storage.make_exact_fit()
 
-/obj/item/storage/bible/booze
+/obj/item/bible/booze
 	name = "bible"
 	desc = "To be applied to the head repeatedly."
 	icon_state ="bible"
 
-/obj/item/storage/bible/booze/WillContain()
+/obj/item/bible/booze/WillContain()
 	return list(
 		/obj/item/chems/drinks/bottle/small/beer,
 		/obj/item/cash/c50,
 		/obj/item/cash/c50,
 	)
 
-/obj/item/storage/bible/bible
+/obj/item/bible/bible
 	name = "\improper Bible"
 	desc = "The central religious text of Christianity."
 	renamed = 1
 	icon_changed = 1
 
-/obj/item/storage/bible/tanakh
+/obj/item/bible/tanakh
 	name = "\improper Tanakh"
 	desc = "The central religious text of Judaism."
 	icon_state = "torah"
 	renamed = 1
 	icon_changed = 1
 
-/obj/item/storage/bible/quran
+/obj/item/bible/quran
 	name = "\improper Quran"
 	desc = "The central religious text of Islam."
 	icon_state = "koran"
 	renamed = 1
 	icon_changed = 1
 
-/obj/item/storage/bible/kojiki
+/obj/item/bible/kojiki
 	name = "\improper Kojiki"
 	desc = "A collection of myths from ancient Japan."
 	icon_state = "kojiki"
 	renamed = 1
 	icon_changed = 1
 
-/obj/item/storage/bible/aqdas
+/obj/item/bible/aqdas
 	name = "\improper Kitab-i-Aqdas"
 	desc = "The central religious text of the Baha'i Faith."
 	icon_state = "ninestar"
 	renamed = 1
 	icon_changed = 1
 
-/obj/item/storage/bible/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
+/obj/item/bible/use_on_mob(mob/living/target, mob/living/user, animate = TRUE)
 
 	if(user == target || !ishuman(user) || !ishuman(target))
 		return ..()
@@ -86,19 +86,19 @@
 
 	return ..()
 
-/obj/item/storage/bible/afterattack(atom/A, mob/user, proximity)
+/obj/item/bible/afterattack(atom/A, mob/user, proximity)
 	if(proximity && user?.mind?.assigned_job?.is_holy)
 		if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water)) //blesses all the water in the holder
 			to_chat(user, SPAN_NOTICE("You bless \the [A].")) // I wish it was this easy in nethack
 			LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = TRUE))
 
-/obj/item/storage/bible/attackby(obj/item/W, mob/user)
+/obj/item/bible/attackby(obj/item/W, mob/user)
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage?.use_sound)
 		playsound(loc, storage.use_sound, 50, 1, -5)
 	return ..()
 
-/obj/item/storage/bible/attack_self(mob/user)
+/obj/item/bible/attack_self(mob/user)
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/preacher = user
@@ -110,7 +110,7 @@
 				if(preacher.get_cultural_value(TAG_RELIGION) == H.get_cultural_value(TAG_RELIGION))
 					to_chat(H, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 
-/obj/item/storage/bible/verb/rename_bible()
+/obj/item/bible/verb/rename_bible()
 	set name = "Rename Bible"
 	set category = "Object"
 	set desc = "Click to rename your bible."
@@ -125,7 +125,7 @@
 			renamed = 1
 			return 1
 
-/obj/item/storage/bible/verb/set_icon()
+/obj/item/bible/verb/set_icon()
 	set name = "Change Icon"
 	set category = "Object"
 	set desc = "Click to change your book's icon."

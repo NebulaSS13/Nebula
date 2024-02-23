@@ -61,6 +61,6 @@
 /decl/hierarchy/outfit/job/chaplain
 	name = "Job - Chaplain"
 	uniform = /obj/item/clothing/under/chaplain
-	hands = list(/obj/item/storage/bible)
+	hands = list(/obj/item/bible)
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda/medical

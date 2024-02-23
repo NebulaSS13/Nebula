@@ -58,7 +58,6 @@
 /datum/unit_test/storage_capacity_test/start_test()
 	var/bad_tests = 0
 
-	// obj/item/storage/internal cannot be tested sadly, as they expect their host object to create them
 	for(var/storage_type in typesof(/obj))
 		var/obj/thing = storage_type
 		if(TYPE_IS_ABSTRACT(thing) || !ispath(initial(thing.storage_type), /datum/extension/storage))

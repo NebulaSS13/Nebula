@@ -2873,7 +2873,7 @@
 /obj/machinery/door/firedoor{
 	dir = 8
 	},
-/obj/item/storage/medical_lolli_jar{
+/obj/item/medical_lolli_jar{
 	pixel_y = 7
 	},
 /obj/effect/floor_decal/corner/paleblue/full,

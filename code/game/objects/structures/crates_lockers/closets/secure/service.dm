@@ -13,7 +13,7 @@
 		/obj/item/deck/tarot,
 		/obj/item/chems/drinks/bottle/holywater,
 		/obj/item/nullrod,
-		/obj/item/storage/bible,
+		/obj/item/bible,
 		/obj/item/belt/general,
 		/obj/item/urn
 	)

@@ -669,7 +669,7 @@
 	pixel_y = -3
 	},
 /obj/random/coin,
-/obj/item/storage/bible/booze{
+/obj/item/bible/booze{
 	pixel_x = 10
 	},
 /obj/item/paper/smug_4{

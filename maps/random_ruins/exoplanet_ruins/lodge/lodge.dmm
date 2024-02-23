@@ -41,7 +41,7 @@
 "j" = (
 /obj/structure/table/woodentable,
 /obj/item/clothing/mask/smokable/pipe/cobpipe,
-/obj/item/storage/chewables/rollable/generic,
+/obj/item/chewables/rollable/generic,
 /obj/item/ashtray,
 /turf/floor/carpet/green,
 /area/template_noop)

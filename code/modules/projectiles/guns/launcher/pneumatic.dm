@@ -14,14 +14,14 @@
 	var/fire_pressure                           // Used in fire checks/pressure checks.
 	var/obj/item/tank/tank = null               // Tank of gas for use in firing the cannon.
 
-	var/obj/item/storage/hopper/item_storage = /obj/item/storage/hopper
+	var/obj/item/hopper/item_storage = /obj/item/hopper
 	var/possible_pressure_amounts = list(5,10,20,25,50) // Possible pressure settings.
 	var/pressure_setting = 10                   // Percentage of the gas in the tank used to fire the projectile.
 	var/force_divisor = 400                     // Force equates to speed. Speed/5 equates to a damage multiplier for whoever you hit.
 	                                            // For reference, a fully pressurized oxy tank at 50% gas release firing a health
 	                                            // analyzer with a force_divisor of 10 hit with a damage multiplier of 3000+.
 
-/obj/item/storage/hopper
+/obj/item/hopper
 	name = "hopper"
 	storage_type = /datum/extension/storage/hopper
 
@@ -148,8 +148,8 @@
 	name = "small pneumatic cannon"
 	desc = "It looks smaller than your garden variety cannon"
 	w_class = ITEM_SIZE_NORMAL
-	item_storage = /obj/item/storage/hopper/small
+	item_storage = /obj/item/hopper/small
 
-/obj/item/storage/hopper/small
+/obj/item/hopper/small
 	name = "small hopper"
 	storage_type = /datum/extension/storage/hopper/small

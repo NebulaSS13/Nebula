@@ -37,7 +37,7 @@
 //          Plant bag
 // -----------------------------
 
-/obj/item/storage/plants
+/obj/item/plants
 	name = "botanical satchel"
 	desc = "This bag can be used to store all kinds of plant products and botanical specimen."
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'

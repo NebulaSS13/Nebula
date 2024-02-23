@@ -257,7 +257,7 @@ var/global/list/closets = list()
 				slice_into_parts(W, user)
 			return TRUE
 
-		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
+		if(istype(W, /obj/item/laundry_basket) && W.contents.len)
 			var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
 			if(storage)
 				var/turf/T = get_turf(src)
