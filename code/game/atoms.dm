@@ -367,8 +367,14 @@
 		if(cell)
 			LAZYREMOVE(., cell)
 
+// Return a list of all stored (in inventory) atoms, defaulting to above.
+/atom/proc/get_stored_inventory()
+	SHOULD_CALL_PARENT(TRUE)
+	return get_contained_external_atoms()
+
 // Return a list of all temperature-sensitive atoms, defaulting to above.
 /atom/proc/get_contained_temperature_sensitive_atoms()
+	SHOULD_CALL_PARENT(TRUE)
 	return get_contained_external_atoms()
 
 /// Dump the contents of this atom onto its loc

@@ -438,27 +438,15 @@
 	if(anchored)
 		return ..()
 
-	var/datum/extension/storage/storage     = get_extension(src, /datum/extension/storage)
-	var/datum/extension/storage/loc_storage = loc && get_extension(loc, /datum/extension/storage)
-
-	if(storage && user.check_dexterity(DEXTERITY_SIMPLE_MACHINES, TRUE))
-		for(var/slot in global.pocket_slots)
-			var/obj/item/pocket = user.get_equipped_item(slot)
-			if(pocket == src && !user.get_active_hand()) //Prevents opening if it's in a pocket.
-				if(user.try_unequip(src))
-					user.put_in_hands(src)
-				return TRUE
-		if(loc == user)
-			storage.open(user)
-		else
-			storage.storage_ui.on_hand_attack(user)
+	// Open our storage UI if the item is currently equipped.
+	if(loc == user && has_extension(src, /datum/extension/storage) && user.check_dexterity((DEXTERITY_HOLD_ITEM|DEXTERITY_EQUIP_ITEM), TRUE))
 		add_fingerprint(user)
+		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
+		storage.open(user)
 		return TRUE
 
 	if(!user.check_dexterity(DEXTERITY_EQUIP_ITEM, silent = TRUE))
-
 		if(user.check_dexterity(DEXTERITY_HOLD_ITEM, silent = TRUE))
-
 			if(loc == user)
 				to_chat(user, SPAN_NOTICE("You begin trying to remove \the [src]..."))
 				if(do_after(user, 3 SECONDS, src) && user.try_unequip(src))
@@ -466,24 +454,23 @@
 				else
 					to_chat(user, SPAN_WARNING("You fail to remove \the [src]!"))
 				return TRUE
-
 			if(isturf(loc))
 				if(loc == get_turf(user))
 					attack_self(user)
 				else
 					dropInto(get_turf(user))
 				return TRUE
-
+			var/datum/extension/storage/loc_storage = get_extension(loc, /datum/extension/storage)
 			if(loc_storage)
 				visible_message(SPAN_NOTICE("\The [user] fumbles \the [src] out of \the [loc]."))
 				loc_storage.remove_from_storage(src)
 				dropInto(get_turf(loc))
 				return TRUE
-
 		to_chat(user, SPAN_WARNING("You are not dexterous enough to pick up \the [src]."))
 		return TRUE
 
 	var/old_loc = loc
+	var/datum/extension/storage/loc_storage = get_extension(loc, /datum/extension/storage)
 	if(loc_storage)
 		loc_storage.remove_from_storage(src)
 
@@ -495,24 +482,14 @@
 		if(cell_handler.try_unload(user))
 			return TRUE
 
-	if (loc == user)
-		if(!user.try_unequip(src))
-			return TRUE
-	else if(isliving(loc))
+	if(!user.try_unequip(src))
 		return TRUE
 
 	if(!QDELETED(src) && user.put_in_active_hand(src))
-		on_picked_up(user)
 		if (isturf(old_loc))
 			var/obj/effect/temporary/item_pickup_ghost/ghost = new(old_loc, src)
 			ghost.animate_towards(user)
-		if(randpixel)
-			pixel_x = rand(-randpixel, randpixel)
-			pixel_y = rand(-randpixel/2, randpixel/2)
-			pixel_z = 0
-		else if(randpixel == 0)
-			pixel_x = 0
-			pixel_y = 0
+		on_picked_up(user)
 		return TRUE
 
 	return FALSE
@@ -594,7 +571,13 @@
 
 // called just after an item is picked up, after it has been equipped to the mob.
 /obj/item/proc/on_picked_up(mob/user)
-	return
+	if(randpixel)
+		pixel_x = rand(-randpixel, randpixel)
+		pixel_y = rand(-randpixel/2, randpixel/2)
+		pixel_z = 0
+	else if(randpixel == 0)
+		pixel_x = 0
+		pixel_y = 0
 
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
 /obj/item/proc/on_exit_storage(datum/extension/storage/S)

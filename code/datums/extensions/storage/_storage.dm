@@ -41,16 +41,17 @@
 		QDEL_NULL(storage_ui)
 	. = ..()
 
-/datum/extension/storage/proc/get_contents(var/copy = FALSE)
-	var/atom/atom_holder = isatom(holder) && holder
-	return atom_holder ? (copy ? atom_holder.contents.Copy() : atom_holder.contents) : null
+/datum/extension/storage/proc/get_contents()
+	var/atom/atom_holder = isatom(holder) ? holder : null
+	return atom_holder?.get_stored_inventory()
 
 /datum/extension/storage/proc/return_inv()
-	. = get_contents(copy = TRUE) || list()
+	. = get_contents()
 	for(var/obj/item/thing in .)
 		var/datum/extension/storage/storage = get_extension(thing, /datum/extension/storage)
-		if(storage)
-			. |= storage.return_inv()
+		var/list/storage_inv = storage?.return_inv()
+		if(storage_inv)
+			LAZYDISTINCTADD(., storage_inv)
 
 /datum/extension/storage/proc/show_to(mob/user)
 	if(storage_ui)
