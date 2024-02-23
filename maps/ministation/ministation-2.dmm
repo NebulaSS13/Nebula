@@ -3252,7 +3252,7 @@
 /area/ministation/shuttle/outgoing)
 "sM" = (
 /obj/structure/closet,
-/obj/item/storage/briefcase,
+/obj/item/briefcase,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
@@ -3656,7 +3656,7 @@
 /obj/effect/floor_decal/stoneborder{
 	dir = 6
 	},
-/obj/item/storage/candle_box,
+/obj/item/candle_box,
 /turf/floor/wood/walnut,
 /area/ministation/library)
 "xc" = (

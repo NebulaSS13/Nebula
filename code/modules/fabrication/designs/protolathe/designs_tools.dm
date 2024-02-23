@@ -99,7 +99,7 @@
 	path = /obj/item/depth_scanner
 
 /datum/fabricator_recipe/protolathe/tool/rped
-	path = /obj/item/storage/part_replacer
+	path = /obj/item/part_replacer
 
 /datum/fabricator_recipe/protolathe/tool/rped_advanced
-	path = /obj/item/storage/part_replacer/advanced
+	path = /obj/item/part_replacer/advanced

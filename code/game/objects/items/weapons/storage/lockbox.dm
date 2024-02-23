@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-/obj/item/storage/lockbox
+/obj/item/lockbox
 	name = "lockbox"
 	desc = "A locked box."
 	icon = 'icons/obj/items/storage/lockbox.dmi'
@@ -18,7 +18,7 @@
 	var/icon_broken = "lockbox+b"
 
 
-/obj/item/storage/lockbox/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/lockbox/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/card/id))
 		if(src.broken)
 			to_chat(user, "<span class='warning'>It appears to be broken.</span>")
@@ -48,7 +48,7 @@
 		to_chat(user, "<span class='warning'>It's locked!</span>")
 	return
 
-/obj/item/storage/lockbox/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")
+/obj/item/lockbox/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")
 	if(!broken)
 		if(visual_feedback)
 			visual_feedback = "<span class='warning'>[visual_feedback]</span>"
@@ -66,20 +66,20 @@
 		visible_message(visual_feedback, audible_feedback)
 		return 1
 
-/obj/item/storage/lockbox/loyalty
+/obj/item/lockbox/loyalty
 	name = "lockbox of loyalty implants"
 	req_access = list(access_security)
 
-/obj/item/storage/lockbox/loyalty/WillContain()
+/obj/item/lockbox/loyalty/WillContain()
 	return list(
 		/obj/item/implantcase/loyalty = 3,
 		/obj/item/implanter/loyalty
 	)
 
-/obj/item/storage/lockbox/clusterbang
+/obj/item/lockbox/clusterbang
 	name = "lockbox of clusterbangs"
 	desc = "You have a bad feeling about opening this."
 	req_access = list(access_security)
 
-/obj/item/storage/lockbox/clusterbang/WillContain()
+/obj/item/lockbox/clusterbang/WillContain()
 	return list(/obj/item/grenade/flashbang/clusterbang)

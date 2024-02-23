@@ -45,7 +45,7 @@
 
 /obj/structure/closet/wardrobe/chaplain_black/WillContain()
 	return list(
-		/obj/item/storage/candle_box = 2,
+		/obj/item/candle_box = 2,
 		/obj/item/clothing/under/chaplain,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/suit/nun,
@@ -315,5 +315,5 @@
 		/obj/item/clothing/suit/storage/toggle/suit/black = 2,
 		/obj/item/clothing/shoes/color/brown = 2,
 		/obj/item/clothing/glasses/sunglasses/big = 2,
-		/obj/item/storage/briefcase = 2,
+		/obj/item/briefcase = 2,
 	)

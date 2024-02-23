@@ -16,11 +16,11 @@
 					   /decl/scent_type/lavender,
 					   /decl/scent_type/sandalwood)
 
-/obj/item/storage/candle_box/incense
+/obj/item/candle_box/incense
 	name = "incense box"
 	desc = "A pack of 'Tres' brand incense cones, in a variety of scents."
 	icon_state = "incensebox"
 	storage_type = /datum/extension/storage/box/incense
 
-/obj/item/storage/candle_box/incense/WillContain()
+/obj/item/candle_box/incense/WillContain()
 	return list(/obj/item/flame/candle/scented/incense = 9)

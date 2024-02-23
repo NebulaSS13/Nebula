@@ -111,7 +111,7 @@
 /area/icarus/vessel)
 "aE" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/photo_album,
+/obj/item/photo_album,
 /turf/floor/wood,
 /area/icarus/vessel)
 "aF" = (

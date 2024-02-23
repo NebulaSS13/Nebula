@@ -40,7 +40,7 @@
 	suit = /obj/item/clothing/suit/storage/det_trench
 	l_pocket = /obj/item/flame/lighter/zippo
 	shoes = /obj/item/clothing/shoes/dress
-	hands = list(/obj/item/storage/briefcase/crimekit)
+	hands = list(/obj/item/briefcase/crimekit)
 	id_type = /obj/item/card/id/ministation/security
 	pda_type = /obj/item/modular_computer/pda/forensics
 	backpack_contents = list(/obj/item/box/evidence = 1)

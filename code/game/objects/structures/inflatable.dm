@@ -300,7 +300,7 @@
 	to_chat(user, "<span class='notice'>The inflatable door is too torn to be inflated!</span>")
 	add_fingerprint(user)
 
-/obj/item/storage/briefcase/inflatable
+/obj/item/briefcase/inflatable
 	name = "inflatable barrier box"
 	desc = "Contains inflatable walls and doors."
 	icon = 'icons/obj/items/storage/inflatables.dmi'
@@ -309,7 +309,7 @@
 	w_class = ITEM_SIZE_LARGE
 	storage_type = /datum/extension/storage/briefcase/inflatables
 
-/obj/item/storage/briefcase/inflatable/WillContain()
+/obj/item/briefcase/inflatable/WillContain()
 	return list(
 			/obj/item/inflatable/door = 2,
 			/obj/item/inflatable      = 3

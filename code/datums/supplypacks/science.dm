@@ -43,7 +43,7 @@
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/color/black,
 					/obj/item/scanner/gas,
-					/obj/item/storage/ore,
+					/obj/item/ore,
 					/obj/item/flashlight/lantern,
 					/obj/item/tool/shovel,
 					/obj/item/tool/pickaxe,

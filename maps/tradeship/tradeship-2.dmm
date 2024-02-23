@@ -6142,7 +6142,7 @@
 /obj/item/box/evidence,
 /obj/item/stack/tape_roll/barricade_tape/police,
 /obj/item/holowarrant,
-/obj/item/storage/briefcase/crimekit,
+/obj/item/briefcase/crimekit,
 /obj/item/taperecorder,
 /obj/item/camera,
 /turf/floor/wood,

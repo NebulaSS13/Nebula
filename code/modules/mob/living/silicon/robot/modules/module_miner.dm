@@ -24,7 +24,7 @@
 		/obj/item/borg/sight/meson,
 		/obj/item/wrench,
 		/obj/item/screwdriver,
-		/obj/item/storage/ore,
+		/obj/item/ore,
 		/obj/item/tool/drill/advanced,
 		/obj/item/storage/sheetsnatcher/borg,
 		/obj/item/gripper/miner,

@@ -33,7 +33,7 @@
 		/obj/item/chems/glass/rag,
 		/obj/item/chems/food/liquidfood,
 		/obj/item/secure_storage/briefcase,
-		/obj/item/storage/briefcase,
+		/obj/item/briefcase,
 		/obj/item/backpack,
 		/obj/item/backpack/satchel,
 		/obj/item/backpack/dufflebag,

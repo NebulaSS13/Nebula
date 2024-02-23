@@ -1,5 +1,5 @@
 //crime scene kit
-/obj/item/storage/briefcase/crimekit
+/obj/item/briefcase/crimekit
 	name = "crime scene kit"
 	desc = "A stainless steel-plated carrycase for all your forensic needs. Feels heavy."
 	icon = 'icons/obj/forensics.dmi'
@@ -8,7 +8,7 @@
 	material = /decl/material/solid/organic/leather/synth
 	matter = list(/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/storage/briefcase/crimekit/WillContain()
+/obj/item/briefcase/crimekit/WillContain()
 	return list(
 		/obj/item/box/fingerprints,
 		/obj/item/chems/spray/luminol,

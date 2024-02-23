@@ -21,7 +21,7 @@
 
 /decl/hierarchy/supply_pack/atmospherics/inflatable
 	name = "Equipment - Inflatable barriers"
-	contains = list(/obj/item/storage/briefcase/inflatable = 3)
+	contains = list(/obj/item/briefcase/inflatable = 3)
 	containertype = /obj/structure/closet/crate
 	containername = "inflatable barrier crate"
 

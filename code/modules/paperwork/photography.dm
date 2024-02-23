@@ -175,7 +175,7 @@
 * photo album *
 **************/
 //#TODO: This thing is awful. Might as well use a trashbag instead since you get the same thing, just with more space....
-/obj/item/storage/photo_album
+/obj/item/photo_album
 	name          = "photo album"
 	icon          = 'icons/obj/photography.dmi'
 	icon_state    = "album"
@@ -184,7 +184,7 @@
 	storage_type  = /datum/extension/storage/photo_album 
 	material = /decl/material/solid/organic/plastic
 
-/obj/item/storage/photo_album/handle_mouse_drop(atom/over, mob/user, params)
+/obj/item/photo_album/handle_mouse_drop(atom/over, mob/user, params)
 	if(over == user && in_range(src, user) || loc == user)
 		if(user.active_storage)
 			user.active_storage.close(user)

@@ -14,7 +14,7 @@
 		/obj/item/box/fancy/crayons,
 		/obj/item/camera,
 		/obj/item/camera_film = 2,
-		/obj/item/storage/photo_album,
+		/obj/item/photo_album,
 		/obj/item/chems/glass/paint/red,
 		/obj/item/chems/glass/paint/green,
 		/obj/item/chems/glass/paint/blue,
@@ -228,7 +228,7 @@
 					/obj/item/clothing/head/chaplain_hood,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/under/wedding/bride_white,
-					/obj/item/storage/candle_box = 3)
+					/obj/item/candle_box = 3)
 	containername = "chaplain equipment crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
@@ -246,7 +246,7 @@
 	name = "Rec - Aromatherapy"
 	contains = list(
 		/obj/item/paper/aromatherapy_disclaimer,
-		/obj/item/storage/candle_box/scented = 3,
-		/obj/item/storage/candle_box/incense = 6,
+		/obj/item/candle_box/scented = 3,
+		/obj/item/candle_box/incense = 6,
 		/obj/item/flame/lighter/random)
 	containername = "aromatherapy crate"
