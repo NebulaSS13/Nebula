@@ -20,7 +20,7 @@
 	starting_accessories = list(/obj/item/clothing/accessory/armor/plate, /obj/item/clothing/accessory/armor/tag/press)
 
 /obj/item/clothing/suit/armor/pcarrier/medium
-	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/medium, /obj/item/clothing/accessory/storage/pouches)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/medium, /obj/item/clothing/accessory/webbing/pouches)
 
 /obj/item/clothing/suit/armor/pcarrier/blue
 	name = "blue plate carrier"

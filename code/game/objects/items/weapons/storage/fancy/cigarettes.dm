@@ -250,5 +250,4 @@
 
 /obj/item/box/fancy/cigarettes/tricord/populate_reagents()
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-	var/max_storage_space = max(1, storage?.max_storage_space)
 	add_to_reagents(/decl/material/liquid/regenerator, (4 * max(1, storage?.max_storage_space)))

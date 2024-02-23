@@ -80,7 +80,7 @@
 		/obj/item/flash,
 		/obj/item/baton/loaded,
 		/obj/item/gun/energy/gun,
-		/obj/item/clothing/accessory/storage/holster/waist,
+		/obj/item/clothing/accessory/webbing/holster/waist,
 		/obj/item/telebaton,
 		/obj/item/holowarrant
 	)
@@ -130,7 +130,7 @@
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/hailer,
-		/obj/item/clothing/accessory/storage/vest/black,
+		/obj/item/clothing/accessory/webbing/vest/black,
 		/obj/item/gun/energy/taser,
 		/obj/item/holowarrant,
 	)
@@ -158,7 +158,7 @@
 		/obj/item/clothing/suit/armor/pcarrier/detective,
 		/obj/item/stack/tape_roll/barricade_tape/police,
 		/obj/item/gun/projectile/pistol,
-		/obj/item/clothing/accessory/storage/holster/armpit,
+		/obj/item/clothing/accessory/webbing/holster/armpit,
 		/obj/item/chems/drinks/flask/detflask,
 		/obj/item/briefcase/crimekit,
 		/obj/item/holowarrant

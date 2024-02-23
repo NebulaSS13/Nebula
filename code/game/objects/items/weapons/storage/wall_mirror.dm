@@ -31,14 +31,13 @@
 	clear_ui_users(ui_users)
 	. = ..()
 
-/obj/structure/mirror/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item))
-		var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
-		if(storage?.can_be_inserted(W, user) && user.try_unequip(W))
-			storage.handle_item_insertion(W)
-			flick("mirror_open",src)
-			return TRUE
-	return ..()
+/obj/structure/mirror/storage_inserted(atom/movable/thing)
+	. = ..()
+	flick("mirror_open",src)
+
+/obj/structure/mirror/storage_removed(atom/movable/thing)
+	. = ..()
+	flick("mirror_open",src)
 
 /obj/structure/mirror/take_damage(damage)
 	if(prob(damage))
@@ -47,15 +46,15 @@
 	. = ..()
 
 /obj/structure/mirror/attack_hand(mob/user)
-	SHOULD_CALL_PARENT(FALSE)
-	use_mirror(user)
-	return TRUE
+	. = ..()
+	return use_mirror(user)
 
 /obj/structure/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
 	if(shattered)
 		to_chat(user, SPAN_WARNING("You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out."))
-		return
-	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", mirror = src)
+	else
+		open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", mirror = src)
+	return TRUE
 
 /obj/structure/mirror/proc/shatter()
 	if(shattered)	return

@@ -1,0 +1,5 @@
+/obj/item/storage/mech/@SUBTYPES : /obj/item/mech_storage/@SUBTYPES{@OLD}
+/obj/item/storage/secure/@SUBTYPES : /obj/item/secure_storage/@SUBTYPES{@OLD}
+/obj/item/storage/@SUBTYPES : /obj/item/@SUBTYPES{@OLD}
+/obj/item/clothing/suit/storage/@SUBTYPES : /obj/item/clothing/suit/@SUBTYPES{@OLD}
+/obj/item/clothing/accessory/storage/@SUBTYPES : /obj/item/clothing/accessory/webbing/@SUBTYPES{@OLD}

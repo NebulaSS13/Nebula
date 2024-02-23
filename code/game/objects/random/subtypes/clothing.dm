@@ -176,16 +176,16 @@
 
 /obj/random/accessory/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/accessory/storage =                3,
-		/obj/item/clothing/accessory/storage/webbing_large =  3,
-		/obj/item/clothing/accessory/storage/vest/black =     2,
-		/obj/item/clothing/accessory/storage/vest/brown =     2,
-		/obj/item/clothing/accessory/storage/vest =           2,
-		/obj/item/clothing/accessory/storage/bandolier =      1,
-		/obj/item/clothing/accessory/storage/holster/thigh =  1,
-		/obj/item/clothing/accessory/storage/holster/hip =    1,
-		/obj/item/clothing/accessory/storage/holster/waist =  1,
-		/obj/item/clothing/accessory/storage/holster/armpit = 1,
+		/obj/item/clothing/accessory/webbing =                3,
+		/obj/item/clothing/accessory/webbing/webbing_large =  3,
+		/obj/item/clothing/accessory/webbing/vest/black =     2,
+		/obj/item/clothing/accessory/webbing/vest/brown =     2,
+		/obj/item/clothing/accessory/webbing/vest =           2,
+		/obj/item/clothing/accessory/webbing/bandolier =      1,
+		/obj/item/clothing/accessory/webbing/holster/thigh =  1,
+		/obj/item/clothing/accessory/webbing/holster/hip =    1,
+		/obj/item/clothing/accessory/webbing/holster/waist =  1,
+		/obj/item/clothing/accessory/webbing/holster/armpit = 1,
 		/obj/item/clothing/accessory/kneepads =               3,
 		/obj/item/clothing/accessory/stethoscope =            2
 	)

@@ -5540,12 +5540,12 @@
 /obj/item/backpack/satchel/leather/reddish,
 /obj/item/backpack/messenger/med,
 /obj/item/backpack/messenger/chem,
-/obj/item/clothing/accessory/storage/drop_pouches/black,
-/obj/item/clothing/accessory/storage/drop_pouches/black,
-/obj/item/clothing/accessory/storage/drop_pouches/brown,
-/obj/item/clothing/accessory/storage/drop_pouches/brown,
-/obj/item/clothing/accessory/storage/drop_pouches/white,
-/obj/item/clothing/accessory/storage/drop_pouches/white,
+/obj/item/clothing/accessory/webbing/drop_pouches/black,
+/obj/item/clothing/accessory/webbing/drop_pouches/black,
+/obj/item/clothing/accessory/webbing/drop_pouches/brown,
+/obj/item/clothing/accessory/webbing/drop_pouches/brown,
+/obj/item/clothing/accessory/webbing/drop_pouches/white,
+/obj/item/clothing/accessory/webbing/drop_pouches/white,
 /turf/floor/wood/walnut,
 /area/map_template/colony/dorms)
 "kI" = (
