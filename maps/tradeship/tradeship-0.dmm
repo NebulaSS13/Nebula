@@ -1320,7 +1320,7 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/storage/backpack/dufflebag,
+/obj/item/backpack/dufflebag,
 /obj/item/chems/glass/rag,
 /obj/item/chems/glass/bucket,
 /obj/machinery/firealarm{

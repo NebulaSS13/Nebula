@@ -36,8 +36,8 @@
 
 /decl/hierarchy/supply_pack/science/minergear
 	name = "Shaft miner equipment"
-	contains = list(/obj/item/storage/backpack/industrial,
-					/obj/item/storage/backpack/satchel/eng,
+	contains = list(/obj/item/backpack/industrial,
+					/obj/item/backpack/satchel/eng,
 					/obj/item/radio/headset/headset_cargo,
 					/obj/item/clothing/under/miner,
 					/obj/item/clothing/gloves/thick,

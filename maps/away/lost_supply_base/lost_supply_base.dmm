@@ -1184,7 +1184,7 @@
 	dir = 6;
 	icon_state = "warning"
 	},
-/obj/item/storage/backpack/dufflebag,
+/obj/item/backpack/dufflebag,
 /turf/floor/airless,
 /area/lost_supply_base)
 "dv" = (

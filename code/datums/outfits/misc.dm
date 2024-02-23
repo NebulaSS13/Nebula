@@ -14,7 +14,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots/swat/combat
 	head = /obj/item/clothing/head/ushanka
 	gloves = /obj/item/clothing/gloves/thick/combat
-	back = /obj/item/storage/backpack/satchel
+	back = /obj/item/backpack/satchel
 	belt = /obj/item/gun/projectile/revolver
 
 /decl/hierarchy/outfit/soviet_soldier/admiral
@@ -39,4 +39,4 @@
 
 /decl/hierarchy/outfit/clown/Initialize()
 	. = ..()
-	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/storage/backpack/clown
+	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/backpack/clown

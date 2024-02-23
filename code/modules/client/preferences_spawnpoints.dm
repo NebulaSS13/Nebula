@@ -104,7 +104,7 @@
 		if(!C.occupant)
 
 			// Store any held or equipped items.
-			var/obj/item/storage/backpack/pack = victim.get_equipped_item(slot_back_str)
+			var/obj/item/backpack/pack = victim.get_equipped_item(slot_back_str)
 			if(istype(pack))
 				var/datum/extension/storage/storage = get_extension(pack, /datum/extension/storage)
 				if(storage)

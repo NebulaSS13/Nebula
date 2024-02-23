@@ -24,7 +24,7 @@
 	var/list/potential_special_theft_targets = list(
 		"nuclear gun"         = /obj/item/gun/energy/gun/nuclear,
 		"diamond drill"       = /obj/item/tool/drill/diamond,
-		"bag of holding"      = /obj/item/storage/backpack/holding,
+		"bag of holding"      = /obj/item/backpack/holding,
 		"hyper-capacity cell" = /obj/item/cell/hyper,
 		"10 diamonds"         = list(/obj/item/stack/material/gemstone, 10, /decl/material/solid/gemstone/diamond),
 		"50 gold ingots"      = list(/obj/item/stack/material/ingot,    50, /decl/material/solid/metal/gold),

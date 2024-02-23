@@ -5,8 +5,8 @@
 
 /obj/structure/closet/secure_closet/captains/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/captain, /obj/item/storage/backpack/satchel/cap)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/captain, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/captain, /obj/item/backpack/satchel/cap)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/captain, 50),
 		/obj/item/clothing/suit/captunic,
 		/obj/item/clothing/suit/captunic/capjacket,
 		/obj/item/clothing/head/caphat/cap,
@@ -65,7 +65,7 @@
 
 /obj/structure/closet/secure_closet/hos/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/security, /obj/item/backpack/satchel/sec)),
 		/obj/item/clothing/head/HoS,
 		/obj/item/clothing/suit/armor/vest/heavy/hos,
 		/obj/item/clothing/under/head_of_security/jensen,
@@ -92,8 +92,8 @@
 
 /obj/structure/closet/secure_closet/warden/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/sec, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/security, /obj/item/backpack/satchel/sec)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/suit/armor/vest/heavy/warden,
 		/obj/item/clothing/under/warden,
 		/obj/item/clothing/suit/armor/warden,
@@ -118,8 +118,8 @@
 
 /obj/structure/closet/secure_closet/security/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/sec, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/backpack/security, /obj/item/backpack/satchel/sec)),
+		new/datum/atom_creator/simple(/obj/item/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/head/helmet,
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/storage/belt/holster/security,

@@ -59,7 +59,7 @@
 	name = "Magnum Revolver"
 	desc = "A high-caliber revolver. Includes an extra speedloader of ammo."
 	item_cost = 56
-	path = /obj/item/storage/backpack/satchel/syndie_kit/revolver
+	path = /obj/item/backpack/satchel/syndie_kit/revolver
 
 /datum/uplink_item/item/visible_weapons/grenade_launcher
 	name = "Grenade Launcher"

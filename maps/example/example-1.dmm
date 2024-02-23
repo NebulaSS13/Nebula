@@ -633,7 +633,7 @@
 /area/example/first)
 "Eh" = (
 /obj/structure/table,
-/obj/item/storage/backpack/holding,
+/obj/item/backpack/holding,
 /turf/floor/tiled/steel_grid,
 /area/example/first)
 "Er" = (

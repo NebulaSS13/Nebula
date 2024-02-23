@@ -2554,7 +2554,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 9
 	},
-/obj/item/storage/backpack/dufflebag,
+/obj/item/backpack/dufflebag,
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "gp" = (
@@ -3035,7 +3035,7 @@
 	name = "Medical Bay APC";
 	pixel_y = -22
 	},
-/obj/item/storage/backpack/dufflebag/syndie,
+/obj/item/backpack/dufflebag/syndie,
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -21
@@ -4861,7 +4861,7 @@
 	dir = 5
 	},
 /obj/structure/closet/toolcloset,
-/obj/item/storage/backpack/dufflebag/eng,
+/obj/item/backpack/dufflebag/eng,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/structure/handrail,
@@ -5404,7 +5404,7 @@
 	},
 /obj/structure/closet/cabinet,
 /obj/item/storage/secure/briefcase,
-/obj/item/storage/backpack/dufflebag/syndie,
+/obj/item/backpack/dufflebag/syndie,
 /obj/item/storage/box/ammo/shotgunshells,
 /obj/item/handcuffs,
 /obj/item/boombox,
@@ -7690,7 +7690,7 @@
 	dir = 8
 	},
 /obj/random/closet,
-/obj/item/storage/backpack/dufflebag,
+/obj/item/backpack/dufflebag,
 /obj/machinery/airlock_sensor{
 	dir = 8;
 	id_tag = "bee_interior_sensor";

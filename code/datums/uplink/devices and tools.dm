@@ -29,7 +29,7 @@
 	name = "Morphic Clerical Kit"
 	desc = "Comes with everything you need to fake paperwork, assuming you know how to forge the required documents."
 	item_cost = 16
-	path = /obj/item/storage/backpack/satchel/syndie_kit/clerical
+	path = /obj/item/backpack/satchel/syndie_kit/clerical
 
 /datum/uplink_item/item/tools/plastique
 	name = "C-4"
@@ -42,7 +42,7 @@
 	desc = "This satchel holds a combat helmet and fully equipped plate carrier. \
 	Suit up, and strap in, things are about to get hectic."
 	item_cost = 16
-	path = /obj/item/storage/backpack/satchel/syndie_kit/armor
+	path = /obj/item/backpack/satchel/syndie_kit/armor
 
 /datum/uplink_item/item/tools/encryptionkey_radio
 	name = "Encrypted Radio Channel Key"
@@ -94,7 +94,7 @@
 	desc = "A satchel containing a non-regulation voidsuit, voidsuit helmet, tactical mask, and oxygen tank. \
 	Conceal your identity, while also not dying in space."
 	item_cost = 28
-	path = /obj/item/storage/backpack/satchel/syndie_kit/space
+	path = /obj/item/backpack/satchel/syndie_kit/space
 
 /datum/uplink_item/item/tools/thermal
 	name = "Thermal Imaging Glasses"

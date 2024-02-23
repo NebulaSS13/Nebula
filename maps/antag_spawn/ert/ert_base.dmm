@@ -927,8 +927,8 @@
 /area/map_template/rescue_base/base)
 "ce" = (
 /obj/structure/rack,
-/obj/item/storage/backpack/ert/security,
-/obj/item/storage/backpack/ert/security,
+/obj/item/backpack/ert/security,
+/obj/item/backpack/ert/security,
 /obj/item/storage/belt/holster/security/tactical,
 /obj/item/storage/belt/holster/security/tactical,
 /turf/unsimulated/floor{
@@ -982,8 +982,8 @@
 /area/map_template/rescue_base/base)
 "cj" = (
 /obj/structure/rack,
-/obj/item/storage/backpack/ert/medical,
-/obj/item/storage/backpack/ert/medical,
+/obj/item/backpack/ert/medical,
+/obj/item/backpack/ert/medical,
 /obj/item/storage/belt/medical,
 /obj/item/storage/belt/medical,
 /obj/item/storage/belt/medical/emt,
@@ -2030,7 +2030,7 @@
 /area/map_template/rescue_base/base)
 "ej" = (
 /obj/structure/rack,
-/obj/item/storage/backpack/ert/commander,
+/obj/item/backpack/ert/commander,
 /obj/item/storage/belt/holster/security/tactical,
 /turf/unsimulated/floor{
 	dir = 1;
@@ -2152,8 +2152,8 @@
 /area/map_template/rescue_base/base)
 "ey" = (
 /obj/structure/rack,
-/obj/item/storage/backpack/ert/engineer,
-/obj/item/storage/backpack/ert/engineer,
+/obj/item/backpack/ert/engineer,
+/obj/item/backpack/ert/engineer,
 /obj/item/storage/belt/utility/full,
 /obj/item/storage/belt/utility/full,
 /obj/item/clothing/gloves/insulated,

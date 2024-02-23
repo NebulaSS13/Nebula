@@ -42,7 +42,7 @@
 /obj/structure/closet/firecloset/WillContain()
 	return list(
 		/obj/item/storage/med_pouch/burn,
-		/obj/item/storage/backpack/dufflebag/firefighter,
+		/obj/item/backpack/dufflebag/firefighter,
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight
 		)
@@ -154,7 +154,7 @@
 		/obj/item/inflatable/door = 2,
 		/obj/item/storage/med_pouch/burn = 2,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/storage/backpack/dufflebag/firefighter
+		/obj/item/backpack/dufflebag/firefighter
 		)
 
 /*

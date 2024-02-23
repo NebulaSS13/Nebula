@@ -27,9 +27,9 @@
 
 /decl/hierarchy/outfit/job/service/gardener/Initialize()
 	. = ..()
-	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/hydroponics
-	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/hyd
-	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/hyd
+	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/backpack/hydroponics
+	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/backpack/satchel/hyd
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/backpack/messenger/hyd
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = "Job - Janitor"

@@ -534,7 +534,7 @@
 /area/icarus/vessel)
 "bT" = (
 /obj/structure/closet,
-/obj/item/storage/backpack/industrial,
+/obj/item/backpack/industrial,
 /obj/item/storage/toolbox/electrical,
 /turf/floor/tiled,
 /area/icarus/vessel)
@@ -546,7 +546,7 @@
 /area/icarus/vessel)
 "bV" = (
 /obj/structure/closet,
-/obj/item/storage/backpack/industrial,
+/obj/item/backpack/industrial,
 /obj/item/storage/toolbox/mechanical,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/floor/tiled,
@@ -648,7 +648,7 @@
 /area/icarus/vessel)
 "cl" = (
 /obj/structure/table/woodentable,
-/obj/item/storage/backpack/captain,
+/obj/item/backpack/captain,
 /obj/machinery/alarm{
 	alarm_id = "xenobio3_alarm";
 	dir = 8;

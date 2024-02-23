@@ -972,7 +972,7 @@
 /area/map_template/crashed_pod)
 "ca" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/storage/backpack/dufflebag/eng,
+/obj/item/backpack/dufflebag/eng,
 /obj/item/ashtray,
 /obj/item/paper_bin,
 /obj/item/chems/drinks/cans/speer,
