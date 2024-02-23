@@ -586,7 +586,7 @@
 /obj/item/bodybag,
 /obj/item/bodybag,
 /obj/item/roller,
-/obj/item/storage/chewables/candy/medicallollis,
+/obj/item/chewables/candy/medicallollis,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -1127,10 +1127,10 @@
 /area/unishi/living)
 "dl" = (
 /obj/structure/table,
-/obj/item/storage/laundry_basket,
+/obj/item/laundry_basket,
 /obj/item/chems/pill/detergent,
 /obj/item/chems/pill/detergent,
-/obj/item/storage/chewables/candy/gum,
+/obj/item/chewables/candy/gum,
 /turf/floor/tiled,
 /area/unishi/living)
 "dm" = (

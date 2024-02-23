@@ -11,8 +11,8 @@
 	base_type = /obj/machinery/vending/snack
 	products = list(
 		/obj/item/clothing/mask/chewable/candy/lolli = 8,
-		/obj/item/storage/chewables/candy/gum = 4,
-		/obj/item/storage/chewables/candy/cookies = 4,
+		/obj/item/chewables/candy/gum = 4,
+		/obj/item/chewables/candy/cookies = 4,
 		/obj/item/chems/food/candy = 6,
 		/obj/item/chems/drinks/dry_ramen = 6,
 		/obj/item/chems/food/chips = 6,

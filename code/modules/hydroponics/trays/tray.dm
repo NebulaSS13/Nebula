@@ -476,7 +476,7 @@
 		else
 			to_chat(user, "<span class='notice'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
 
-	else if (istype(O, /obj/item/storage/plants))
+	else if (istype(O, /obj/item/plants))
 		physical_attack_hand(user) // Harvests and clears out dead plants.
 		var/datum/extension/storage/storage = get_extension(O, /datum/extension/storage)
 		if(storage)

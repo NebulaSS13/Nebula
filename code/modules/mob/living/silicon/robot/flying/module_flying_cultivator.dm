@@ -8,7 +8,7 @@
 	module_sprites = list("Drone" = 'icons/mob/robots/flying/flying_hydro.dmi')
 
 	equipment = list(
-		/obj/item/storage/plants,
+		/obj/item/plants,
 		/obj/item/wirecutters/clippers,
 		/obj/item/minihoe/unbreakable,
 		/obj/item/hatchet/unbreakable,

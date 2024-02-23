@@ -3030,7 +3030,7 @@
 /obj/structure/table,
 /obj/machinery/light/small,
 /obj/item/chems/spray/cleaner,
-/obj/item/storage/laundry_basket,
+/obj/item/laundry_basket,
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/item/cell/high,
 /turf/floor/tiled/usedup,
@@ -3389,7 +3389,7 @@
 /obj/structure/table/reinforced,
 /obj/item/flashlight/lamp,
 /obj/item/cash/c1000,
-/obj/item/storage/bible/booze,
+/obj/item/bible/booze,
 /obj/item/cell/high,
 /turf/floor/usedup,
 /area/ship/scrap/hidden)

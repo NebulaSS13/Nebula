@@ -1047,7 +1047,7 @@
 /obj/item/seeds/towercap,
 /obj/item/seeds/glowbell,
 /obj/item/seeds/whitebeetseed,
-/obj/item/storage/plants,
+/obj/item/plants,
 /obj/item/seeds/bananaseed,
 /turf/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)

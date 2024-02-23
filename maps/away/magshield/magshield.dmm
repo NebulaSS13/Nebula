@@ -2284,7 +2284,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/storage/bible/booze,
+/obj/item/bible/booze,
 /turf/floor/carpet/blue,
 /area/magshield/west)
 "gL" = (

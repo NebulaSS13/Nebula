@@ -2674,7 +2674,7 @@
 /obj/structure/table,
 /obj/machinery/light,
 /obj/item/chems/spray/cleaner,
-/obj/item/storage/laundry_basket,
+/obj/item/laundry_basket,
 /obj/random_multi/single_item/captains_spare_id,
 /turf/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
@@ -6478,7 +6478,7 @@
 	dir = 8;
 	pixel_x = -21
 	},
-/obj/item/storage/medical_lolli_jar,
+/obj/item/medical_lolli_jar,
 /obj/structure/table,
 /turf/floor/tiled/white,
 /area/ship/trade/crew/medbay)

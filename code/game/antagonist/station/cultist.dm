@@ -77,9 +77,11 @@
 			player.equip_to_slot(T, slot)
 			if(T.loc == player)
 				return
-		var/obj/item/storage/S = locate() in player.contents
-		if(istype(S))
-			T.forceMove(S)
+		for(var/obj/item/thing in player.get_contents())
+			var/datum/extension/storage/storage = get_extension(thing, /datum/extension/storage)
+			if(storage)
+				T.forceMove(thing)
+				break
 
 /decl/special_role/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())

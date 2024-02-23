@@ -135,19 +135,19 @@
 
 /decl/loadout_option/bible
 	name = "holy book"
-	path = /obj/item/storage/bible
+	path = /obj/item/bible
 	cost = 2
 
 /decl/loadout_option/bible/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"bible (adjustable)" = /obj/item/storage/bible,
-		"Bible" =              /obj/item/storage/bible/bible,
-		"Tanakh" =             /obj/item/storage/bible/tanakh,
-		"Quran" =              /obj/item/storage/bible/quran,
-		"Kitab-i-Aqdas" =      /obj/item/storage/bible/aqdas,
-		"Kojiki" =             /obj/item/storage/bible/kojiki
+		"bible (adjustable)" = /obj/item/bible,
+		"Bible" =              /obj/item/bible/bible,
+		"Tanakh" =             /obj/item/bible/tanakh,
+		"Quran" =              /obj/item/bible/quran,
+		"Kitab-i-Aqdas" =      /obj/item/bible/aqdas,
+		"Kojiki" =             /obj/item/bible/kojiki
 	)
 
 /decl/loadout_option/cross
