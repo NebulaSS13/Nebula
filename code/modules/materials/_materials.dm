@@ -696,6 +696,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		var/dose = LAZYACCESS(M.chem_doses, type) + effective
 		LAZYSET(M.chem_doses, type, dose)
 
+	var/remove_dose = TRUE
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(metabolism_class)
 			if(CHEM_INJECT)
@@ -703,10 +704,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			if(CHEM_INGEST)
 				affect_ingest(M, effective, holder)
 			if(CHEM_TOUCH)
-				affect_touch(M, effective, holder)
+				remove_dose = affect_touch(M, effective, holder)
 			if(CHEM_INHALE)
 				affect_inhale(M, effective, holder)
-	holder.remove_reagent(type, removed)
+	if(remove_dose)
+		holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.status_flags & GODMODE)
@@ -755,13 +757,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(affect_blood_on_inhale)
 		affect_blood(M, removed * 0.75, holder)
 
+// Slightly different to other reagent processing - return TRUE to consume the removed amount, FALSE not to consume.
 /decl/material/proc/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 
 	if(!istype(M))
-		return
+		return FALSE
 
 	if(radioactivity)
 		M.apply_damage((radioactivity / 2) * removed, IRRADIATE)
+		. = TRUE
 
 	if(dirtiness <= DIRTINESS_STERILE)
 		if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
@@ -769,7 +773,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		for(var/obj/item/I in M.contents)
 			I.was_bloodied = null
 		M.was_bloodied = null
+		. = TRUE
 
+	// TODO: clean should add the gross reagents washed off to a holder to dump on the loc.
 	if(dirtiness <= DIRTINESS_CLEAN)
 		for(var/obj/item/thing in M.get_held_items())
 			thing.clean()
@@ -799,6 +805,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(solvent_power > MAT_SOLVENT_NONE && removed >= solvent_melt_dose && M.solvent_act(min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), solvent_melt_dose, solvent_power))
 		holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
+		. = TRUE
 
 /decl/material/proc/affect_overdose(var/mob/living/M) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)

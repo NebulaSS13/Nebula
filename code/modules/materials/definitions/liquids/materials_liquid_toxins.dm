@@ -226,6 +226,7 @@
 /decl/material/liquid/hair_remover/affect_touch(var/mob/M, var/removed, var/datum/reagents/holder)
 	M.lose_hair()
 	holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
+	return TRUE
 
 /decl/material/liquid/zombie
 	name = "liquid corruption"
@@ -244,6 +245,7 @@
 
 /decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	affect_blood(M, removed * 0.5, holder)
+	return TRUE
 
 /decl/material/liquid/zombie/affect_blood(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	..()

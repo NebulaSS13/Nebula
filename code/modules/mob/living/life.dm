@@ -233,6 +233,16 @@
 
 	SHOULD_CALL_PARENT(TRUE)
 
+	// TODO: process dripping outside of Life() so corpses don't become sponges.
+	// TODO: factor temperature and vapor into this so warmer locations dry you off.
+	// TODO: apply a dripping overlay a la fire to show someone is saturated.
+	if(loc)
+		var/datum/reagents/touching_reagents = get_contact_reagents()
+		if(touching_reagents?.total_volume)
+			var/drip_amount = max(1, round(touching_reagents.total_volume * 0.1))
+			if(drip_amount)
+				touching_reagents.trans_to(loc, drip_amount)
+
 	// Handle physical effects of weather.
 	var/decl/state/weather/weather_state
 	var/obj/abstract/weather_system/weather = get_affecting_weather()

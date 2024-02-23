@@ -15,7 +15,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/water/affect_touch(var/mob/living/M, var/removed, var/datum/reagents/holder)
-	..()
+	. = ..()
 	if(isslime(M))
 		M.adjustToxLoss(10 * removed)
 		var/mob/living/slime/S = M

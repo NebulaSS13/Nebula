@@ -5,7 +5,7 @@
 	if(!reagents)
 		reagents = bloodstr
 	if(!touching)
-		touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
+		touching = new/datum/reagents/metabolism(mob_size * 100, src, CHEM_TOUCH)
 
 	if (!default_language && species_language)
 		default_language = species_language
@@ -303,8 +303,9 @@
 
 /mob/living/carbon/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(QDELETED(src) || !fluids?.total_volume || !touching)
+	if(QDELETED(src) || !fluids?.total_volume || !touching || fluids.total_volume <= touching.total_volume)
 		return
+	// TODO: review saturation logic so we can end up with more than like 15 water in our contact reagents.
 	var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching.total_volume)
 	if(saturation > 0)
 		fluids.trans_to_holder(touching, saturation)
