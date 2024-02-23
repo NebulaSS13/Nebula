@@ -38,12 +38,12 @@
 		/obj/item/chems/drinks/glass2/carafe = 2,
 		/obj/item/chems/drinks/glass2/square = 8,
 		/obj/item/clothing/suit/chef/classic = 2,
-		/obj/item/storage/lunchbox = 3,
-		/obj/item/storage/lunchbox/heart = 3,
-		/obj/item/storage/lunchbox/cat = 3,
-		/obj/item/storage/lunchbox/mars = 3,
-		/obj/item/storage/lunchbox/cti = 3,
-		/obj/item/storage/lunchbox/syndicate = 3,
+		/obj/item/lunchbox = 3,
+		/obj/item/lunchbox/heart = 3,
+		/obj/item/lunchbox/cat = 3,
+		/obj/item/lunchbox/mars = 3,
+		/obj/item/lunchbox/cti = 3,
+		/obj/item/lunchbox/syndicate = 3,
 		/obj/item/knife/kitchen/cleaver = 1
 	)
 	contraband = list(/obj/item/knife/kitchen/cleaver/bronze = 1,/obj/item/storage/tray/metal/silver = 1)
