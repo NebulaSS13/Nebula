@@ -1,0 +1,2 @@
+# REPATH /obj/abstract/fluid_mapped TO /obj/abstract/landmark/mapped_fluid
+/obj/abstract/fluid_mapped/@SUBTYPES : /obj/abstract/landmark/mapped_fluid/@SUBTYPES{@OLD}
