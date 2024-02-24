@@ -1,18 +1,31 @@
 /datum/build_mode/areas
 	name = "Area Editor"
 	icon_state = "buildmode10"
-	var/help_text = {"\
-********* Build Mode: Areas ********
-Left Click        - Set Turf Area
-Left Click + Ctrl - Copy Turf Area
-Middle Click      - Copy Turf Area
-Right Click       - List/Create Area
-************************************\
-"}
-	var/list/distinct_colors = list(
-		"#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", "#42d4f4",
-		"#f032e6", "#fabebe", "#469990", "#e6beff", "#9a6324", "#fffac8",
-		"#800000", "#aaffc3", "#000075", "#a9a9a9", "#ffffff", "#000000"
+	click_interactions = list(
+		/decl/build_mode_interaction/areas/set_turf_area,
+		/decl/build_mode_interaction/areas/copy_turf_area,
+		/decl/build_mode_interaction/areas/copy_turf_area/alt
+	)
+
+	var/static/list/distinct_colors = list(
+		"#e6194b",
+		"#3cb44b",
+		"#ffe119",
+		"#4363d8",
+		"#f58231",
+		"#42d4f4",
+		"#f032e6",
+		"#fabebe",
+		"#469990",
+		"#e6beff",
+		"#9a6324",
+		"#fffac8",
+		"#800000",
+		"#aaffc3",
+		"#000075",
+		"#a9a9a9",
+		"#ffffff",
+		"#000000"
 	)
 	var/area/selected_area
 	var/list/vision_images = list()
@@ -22,25 +35,6 @@ Right Click       - List/Create Area
 	Unselected()
 	. = ..()
 
-/datum/build_mode/areas/Help()
-	to_chat(user, SPAN_NOTICE(help_text))
-
-/datum/build_mode/areas/OnClick(var/atom/A, var/list/parameters)
-	if (parameters["right"])
-		Configurate()
-		return
-	var/turf/T = get_turf(A)
-	var/area/R = T?.loc
-	if ((!T) || (!R))
-		return
-	if (parameters["ctrl"] || parameters["middle"])
-		selected_area = R
-		to_chat(user, "Picked area [selected_area.proper_name]")
-	else if (selected_area)
-		ChangeArea(T, selected_area)
-		to_chat(user, "Set area of turf [T.name] to [selected_area.proper_name]")
-	else
-		to_chat(user, "Pick or create an area first")
 
 /datum/build_mode/areas/Configurate()
 	var/mode = alert("Pick or Create an area.", "Build Mode: Areas", "Pick", "Create", "Cancel")
@@ -111,3 +105,51 @@ Right Click       - List/Create Area
 	if(!has_turf)
 		qdel(selected_area)
 	selected_area = null
+
+/decl/build_mode_interaction/areas
+	abstract_type = /decl/build_mode_interaction/areas
+
+/decl/build_mode_interaction/areas/set_turf_area
+	description    = "Set turf area."
+	trigger_params = list("left")
+
+/decl/build_mode_interaction/areas/set_turf_area/Invoke(datum/build_mode/build_mode, atom/A, list/parameters)
+	var/turf/T = get_turf(A)
+	var/datum/build_mode/areas/area_mode = build_mode
+	if(!istype(T) || !istype(area_mode))
+		return FALSE
+	if (area_mode.selected_area)
+		ChangeArea(T, area_mode.selected_area)
+		to_chat(build_mode.user, SPAN_NOTICE("Set area of turf [T.name] to [area_mode.selected_area.proper_name]"))
+		return TRUE
+	to_chat(build_mode.user, SPAN_WARNING("Pick or create an area first"))
+	return FALSE
+
+/decl/build_mode_interaction/areas/copy_turf_area
+	description    = "Copy turf area."
+	trigger_params = list("left", "ctrl")
+
+/decl/build_mode_interaction/areas/copy_turf_area/Invoke(datum/build_mode/build_mode, atom/A, list/parameters)
+	var/datum/build_mode/areas/area_mode = build_mode
+	if(istype(area_mode))
+		area_mode.selected_area = get_area(A)
+		if(area_mode.selected_area)
+			to_chat(build_mode.user, SPAN_NOTICE("Picked area [area_mode.selected_area.proper_name]"))
+		else
+			to_chat(build_mode.user, SPAN_NOTICE("Cleared selected area."))
+		return TRUE
+	return FALSE
+
+/decl/build_mode_interaction/areas/copy_turf_area/alt
+	trigger_params = list("middle")
+
+/decl/build_mode_interaction/areas/list_or_create_area
+	description    = "List or create area."
+	trigger_params = list("right")
+
+/decl/build_mode_interaction/areas/list_or_create_area/Invoke(datum/build_mode/build_mode, atom/A, list/parameters)
+	var/datum/build_mode/areas/area_mode = build_mode
+	if(istype(area_mode))
+		area_mode.Configurate()
+		return TRUE
+	return FALSE
