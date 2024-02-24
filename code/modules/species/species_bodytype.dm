@@ -243,16 +243,28 @@ var/global/list/bodytypes_by_category = list()
 	else if(eye_low_light_vision_adjustment_speed < 0)
 		. += "low light vision adjustment speed is less than 0 (below 0%)"
 
-	if(icon_base)
-		if(check_state_in_icon("torso", icon_base))
-			. += "deprecated \"torso\" state present in icon_base"
-		if(!check_state_in_icon(BP_CHEST, icon_base))
-			. += "\"[BP_CHEST]\" state not present in icon_base"
-	if(icon_deformed && icon_deformed != icon_base)
-		if(check_state_in_icon("torso", icon_deformed))
-			. += "deprecated \"torso\" state present in icon_deformed"
-		if(!check_state_in_icon(BP_CHEST, icon_deformed))
-			. += "\"[BP_CHEST]\" state not present in icon_deformed"
+	if(icon_base || icon_deformed)
+
+		var/list/limb_tags = list()
+		for(var/limb in has_limbs)
+			limb_tags |= limb
+		for(var/limb in override_limb_types)
+			limb_tags |= limb
+
+		if(icon_base)
+			if(check_state_in_icon("torso", icon_base))
+				. += "deprecated \"torso\" state present in icon_base"
+			for(var/limb in limb_tags)
+				if(!check_state_in_icon(limb, icon_base))
+					. += "missing required state in [icon_base]: [limb]"
+
+		if(icon_deformed && icon_deformed != icon_base)
+			if(check_state_in_icon("torso", icon_deformed))
+				. += "deprecated \"torso\" state present in icon_deformed"
+			for(var/limb in limb_tags)
+				if(!check_state_in_icon(limb, icon_deformed))
+					. += "missing required state in [icon_deformed]: [limb]"
+
 	if((appearance_flags & HAS_SKIN_COLOR) && isnull(base_color))
 		. += "uses skin color but missing base_color"
 	if((appearance_flags & HAS_HAIR_COLOR) && isnull(base_hair_color))
