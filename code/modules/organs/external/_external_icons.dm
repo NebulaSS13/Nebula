@@ -69,10 +69,10 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
 	. = ..()
 	icon_state = organ_tag
-	icon_cache_key = "[icon_state]_[species.name][bodytype.name][render_alpha]"
+	icon_cache_key = list(icon_state, species.name, bodytype.type, render_alpha)
 
 	update_limb_icon_file()
-	mob_icon = apply_colouration(new/icon(icon, icon_state))
+	mob_icon = apply_colouration(new /icon(icon, icon_state))
 
 	//Body markings, does not include head, duplicated (sadly) above.
 	for(var/M in markings)
@@ -84,6 +84,8 @@ var/global/list/limb_icon_cache = list()
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
 			icon_cache_key += "[M][mark_color]"
+
+	icon_cache_key = JOINTEXT(icon_cache_key)
 
 	if(render_alpha < 255)
 		mob_icon += rgb(,,,render_alpha)
@@ -103,6 +105,9 @@ var/global/list/flesh_hud_colours = list("#00ff00","#aaff00","#ffff00","#ffaa00"
 var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#666666","#444444","#222222","#000000")
 
 /obj/item/organ/external/proc/get_damage_hud_image()
+
+	if(skip_body_icon_draw)
+		return null
 
 	// Generate the greyscale base icon and cache it for later.
 	// icon_cache_key is set by any get_icon() calls that are made.
@@ -147,6 +152,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 		else
 			applying.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
 		icon_cache_key += "_tone_[skin_tone]"
+
 	if(bodytype.appearance_flags & HAS_SKIN_COLOR)
 		if(skin_colour)
 			applying.Blend(skin_colour, skin_blend)

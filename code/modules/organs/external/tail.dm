@@ -33,12 +33,12 @@
 	var/mob/living/carbon/human/H = owner
 	if(!(. = ..()))
 		return
-	if(update_icon && !istype(H) && H != owner)
+	if(update_icon && !istype(H) && !QDELETED(H) && H != owner)
 		H.update_tail_showing(FALSE)
 
 /obj/item/organ/external/tail/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
 	. = ..()
-	if(update_icon && istype(owner))
+	if(update_icon && istype(owner) && !QDELETED(owner))
 		owner.update_tail_showing(FALSE)
 
 /obj/item/organ/external/tail/proc/get_tail()

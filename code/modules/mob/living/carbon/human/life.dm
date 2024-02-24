@@ -542,7 +542,9 @@
 				for(var/obj/item/organ/external/E in get_external_organs())
 					if(no_damage && (E.brute_dam || E.burn_dam))
 						no_damage = 0
-					health_images += E.get_damage_hud_image()
+					var/damage_image = E.get_damage_hud_image()
+					if(damage_image)
+						health_images += damage_image
 
 				// Apply a fire overlay if we're burning.
 				if(on_fire)

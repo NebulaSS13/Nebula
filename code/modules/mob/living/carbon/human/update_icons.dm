@@ -1,5 +1,5 @@
 var/global/list/_limb_mask_cache = list()
-/proc/get_limb_mask_for(var/obj/item/external/organ/limb)
+/proc/get_limb_mask_for(obj/item/organ/external/limb)
 	var/decl/bodytype/bodytype = limb?.bodytype
 	var/bodypart = limb?.icon_state
 	if(!bodytype || !bodypart)
