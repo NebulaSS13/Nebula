@@ -498,7 +498,7 @@ default behaviour is:
 		var/cache_index = "[O.damage_state]/[O.bodytype.type]/[O.icon_state]/[use_colour]/[O.species.name]"
 		if(damage_icon_parts[cache_index] == null)
 			DI = new /icon(O.bodytype.get_damage_overlays(src), O.damage_state) // the damage icon for whole human
-			DI.Blend(get_limb_mask_for(O.bodytype, O.icon_state), ICON_MULTIPLY)  // mask with this organ's pixels
+			DI.Blend(get_limb_mask_for(O), ICON_MULTIPLY)  // mask with this organ's pixels
 			DI.Blend(use_colour, ICON_MULTIPLY)
 			damage_icon_parts[cache_index] = DI
 		else

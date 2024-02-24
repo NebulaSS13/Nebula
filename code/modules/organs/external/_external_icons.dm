@@ -1,7 +1,10 @@
 var/global/list/limb_icon_cache = list()
 
+/obj/item/organ/external
+	var/force_limb_dir = SOUTH
+
 /obj/item/organ/external/set_dir()
-	return ..(SOUTH)
+	return ..(force_limb_dir)
 
 /obj/item/organ/external/proc/compile_icon()
 	//#FIXME: We REALLY shouldn't be messing with overlays outside on_update_icon. And on_update_icon doesn't call this.
@@ -49,7 +52,7 @@ var/global/list/limb_icon_cache = list()
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
 			var/mark_color = markings[M]
-			var/icon/mark_s = mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			var/icon/mark_s = mark_style.get_cached_marking_icon(src, mark_color)
 			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
@@ -76,7 +79,7 @@ var/global/list/limb_icon_cache = list()
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
 			var/mark_color = markings[M]
-			var/icon/mark_s = mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			var/icon/mark_s = mark_style.get_cached_marking_icon(src, mark_color)
 			//#TODO: This probably should be added to a list that's applied on update icon, otherwise its gonna act really wonky!
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons

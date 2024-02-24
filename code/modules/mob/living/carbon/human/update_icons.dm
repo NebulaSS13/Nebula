@@ -1,5 +1,9 @@
 var/global/list/_limb_mask_cache = list()
-/proc/get_limb_mask_for(var/decl/bodytype/bodytype, var/bodypart)
+/proc/get_limb_mask_for(var/obj/item/external/organ/limb)
+	var/decl/bodytype/bodytype = limb?.bodytype
+	var/bodypart = limb?.icon_state
+	if(!bodytype || !bodypart)
+		return
 	LAZYINITLIST(_limb_mask_cache[bodytype])
 	if(!_limb_mask_cache[bodytype][bodypart])
 		var/icon/limb_mask = icon(bodytype.icon_base, bodypart)

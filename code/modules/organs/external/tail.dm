@@ -14,6 +14,7 @@
 	arterial_bleed_severity = 0.3
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 	skip_body_icon_draw = TRUE
+	force_limb_dir = WEST
 
 	/// Name of tail state in species effects icon file. Used as a prefix for animated states.
 	var/tail

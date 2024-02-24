@@ -13,7 +13,11 @@
 	var/list/icons = list()
 	var/mask_to_bodypart = TRUE
 
-/decl/sprite_accessory/marking/proc/get_cached_marking_icon(var/decl/bodytype/bodytype, var/bodypart, var/color = COLOR_WHITE)
+/decl/sprite_accessory/marking/proc/get_cached_marking_icon(var/obj/item/external/organ/limb, var/color = COLOR_WHITE)
+	var/decl/bodytype/bodytype = limb?.bodytype
+	var/bodypart = limb?.icon_state
+	if(!bodytype || !bodypart)
+		return
 	LAZYINITLIST(icons[bodytype])
 	LAZYINITLIST(icons[bodytype][bodypart])
 	if(!icons[bodytype][bodypart][color])
