@@ -332,7 +332,7 @@ var/global/list/assigned_blocks[DNA_SE_LENGTH]
 	SetSEBlock(block,newBlock,defer)
 
 /proc/EncodeDNABlock(var/value)
-	return num2hex(value, 3)
+	return num2hex_padded(value, 3)
 
 /datum/dna/proc/UpdateUI()
 	src.uni_identity=""

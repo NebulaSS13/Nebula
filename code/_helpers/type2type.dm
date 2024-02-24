@@ -1,17 +1,12 @@
 /*
  * Holds procs designed to change one type of value, into another.
  * Contains:
- *			hex2num & num2hex
  *			text2list & list2text
  *			file2list
  *			angle2dir
  *			angle2text
  *			worldtime2text
  */
-
-// Returns the hex value of a number given a value assumed to be a base-ten value
-/proc/num2hex(num, len=2)
-	return num2text(num, len, 16)
 
 /proc/text2numlist(text, delimiter="\n")
 	var/list/num_list = list()
