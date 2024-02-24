@@ -98,22 +98,23 @@
 	return B
 
 /obj/item/chems/drinks/bottle/attackby(obj/item/W, mob/user)
-	if(!rag && istype(W, /obj/item/chems/glass/rag))
-		insert_rag(W, user)
-		return
+	if(istype(W, /obj/item/chems/glass/rag))
+		return insert_rag(W, user)
 	if(rag && W.isflamesource())
-		rag.attackby(W, user)
-		return
-	..()
+		return rag.attackby(W, user)
+	return ..()
 
 /obj/item/chems/drinks/bottle/attack_self(mob/user)
-	if(rag)
-		remove_rag(user)
-	else
-		..()
+	return rag ? remove_rag(user) : ..()
 
 /obj/item/chems/drinks/bottle/proc/insert_rag(obj/item/chems/glass/rag/R, mob/user)
-	if(!material?.type != /decl/material/solid/glass || rag) return
+	if(material?.type != /decl/material/solid/glass)
+		to_chat(user, SPAN_WARNING("\The [src] isn't made of glass, you can't make a good Molotov with it."))
+		return TRUE
+
+	if(rag) 
+		to_chat(user, SPAN_WARNING("\The [src] already has \a [rag] stuffed into it."))
+		return TRUE
 
 	if(user.try_unequip(R))
 		to_chat(user, SPAN_NOTICE("You stuff [R] into [src]."))
@@ -132,6 +133,7 @@
 
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 		update_icon()
+	return TRUE
 
 /obj/item/chems/drinks/bottle/proc/remove_rag(mob/user)
 	if(!rag) return
