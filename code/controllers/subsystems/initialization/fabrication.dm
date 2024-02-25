@@ -33,6 +33,7 @@ SUBSYSTEM_DEF(fabrication)
 				LAZYADD(locked_recipes[fab_type], recipe)
 			else
 				LAZYADD(initial_recipes[fab_type], recipe)
+		CHECK_TICK
 
 	// Slapcrafting trees.
 	var/list/all_crafting_handlers = decls_repository.get_decls_of_subtype(/decl/crafting_stage)

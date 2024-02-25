@@ -13,7 +13,7 @@
 /decl/species/adherent
 	name = SPECIES_ADHERENT
 	name_plural = "Adherents"
-	base_prosthetics_model = null
+	base_external_prosthetics_model = null
 
 	description = "The Vigil is a loose collection of floating squid-like machines made of a crystalline composite. \
 	They once served their creators faithfully, but were left orphaned by a stellar apocalypse."
