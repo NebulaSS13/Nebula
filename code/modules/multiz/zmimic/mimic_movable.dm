@@ -87,9 +87,9 @@
 	MA.blend_mode = BLEND_MULTIPLY
 
 	if (use_shadower_mult)
-		if (icon_state == LIGHTING_BASE_ICON_STATE)
+		if (MA.icon_state == LIGHTING_BASE_ICON_STATE)
 			// We're using a color matrix, so just darken the colors across the board.
-			var/list/c_list = color
+			var/list/c_list = MA.color
 			c_list[CL_MATRIX_RR] *= SHADOWER_DARKENING_FACTOR
 			c_list[CL_MATRIX_RG] *= SHADOWER_DARKENING_FACTOR
 			c_list[CL_MATRIX_RB] *= SHADOWER_DARKENING_FACTOR
@@ -106,8 +106,8 @@
 		else
 			// Not a color matrix, so we can just use the color var ourselves.
 			MA.color = SHADOWER_DARKENING_COLOR
-	set_invisibility(INVISIBILITY_NONE)
 	appearance = MA
+	set_invisibility(INVISIBILITY_NONE)
 
 	if (our_overlays || priority_overlays)
 		compile_overlays()
