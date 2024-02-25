@@ -415,8 +415,8 @@ var/global/list/time_prefs_fixed = list()
 
 	if(character.dna)
 		character.dna.ready_dna(character)
-		if(client.prefs?.blood_type)
-			character.dna.b_type = client.prefs.blood_type
+		if(blood_type)
+			character.dna.b_type = blood_type
 
 	character.force_update_limbs()
 	character.update_mutations(0)
