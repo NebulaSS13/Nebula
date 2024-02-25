@@ -219,6 +219,6 @@
 		return
 
 	if(reagents?.total_volume)
-		reagents.remove_reagent(/decl/material/liquid/fuel, reagents.maximum_volume/25)
+		remove_from_reagents(/decl/material/liquid/fuel, reagents.maximum_volume/25)
 	update_name()
 	burn_time--

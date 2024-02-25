@@ -74,9 +74,9 @@
 
 /obj/item/chems/food/egg/lizard/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein/egg, 5)
+	add_to_reagents(/decl/material/liquid/nutriment/protein/egg, 5)
 	if(prob(30))	//extra nutriment
-		reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
+		add_to_reagents(/decl/material/liquid/nutriment/protein, 5)
 
 /obj/item/chems/food/friedegg
 	name = "fried egg"
@@ -88,9 +88,9 @@
 
 /obj/item/chems/food/friedegg/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/solid/sodiumchloride,     1)
-	reagents.add_reagent(/decl/material/solid/blackpepper,        1)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 3)
+	add_to_reagents(/decl/material/solid/sodiumchloride,     1)
+	add_to_reagents(/decl/material/solid/blackpepper,        1)
 
 /obj/item/chems/food/boiledegg
 	name = "boiled egg"
@@ -101,7 +101,7 @@
 
 /obj/item/chems/food/boiledegg/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/omelette
 	name = "cheese omelette"
@@ -114,7 +114,7 @@
 
 /obj/item/chems/food/omelette/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/chawanmushi
 	name = "chawanmushi"
@@ -127,4 +127,4 @@
 
 /obj/item/chems/food/chawanmushi/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 5)

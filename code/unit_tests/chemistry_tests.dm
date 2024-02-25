@@ -12,7 +12,7 @@
 
 	var/atom/from = new donor_type(test_loc)
 	from.create_reagents(container_volume)
-	from.reagents.add_reagent(/decl/material/liquid/water, container_volume)
+	from.add_to_reagents(/decl/material/liquid/water, container_volume)
 
 	var/atom/target
 	if(ispath(recipient_type, /turf) && istype(test_loc, recipient_type))

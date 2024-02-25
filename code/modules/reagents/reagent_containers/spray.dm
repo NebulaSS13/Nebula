@@ -137,21 +137,21 @@
 	particle_move_delay = 6
 
 /obj/item/chems/spray/cleaner/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/cleaner, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/cleaner, reagents.maximum_volume)
 
 /obj/item/chems/spray/antiseptic
 	name = "antiseptic spray"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
 
 /obj/item/chems/spray/antiseptic/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antiseptic, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antiseptic, reagents.maximum_volume)
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"
 	desc = "Very effective at removing hair, feathers, spines and horns."
 
 /obj/item/chems/spray/hair_remover/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/hair_remover, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/hair_remover, reagents.maximum_volume)
 
 /obj/item/chems/spray/pepper
 	name = "pepperspray"
@@ -164,7 +164,7 @@
 	safety = TRUE
 
 /obj/item/chems/spray/pepper/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/capsaicin/condensed, reagents.maximum_volume)
 
 /obj/item/chems/spray/pepper/has_safety()
 	return TRUE
@@ -180,7 +180,7 @@
 	volume = 10
 
 /obj/item/chems/spray/waterflower/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"
@@ -219,7 +219,7 @@
 	volume = 100
 
 /obj/item/chems/spray/plantbgone/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/weedkiller, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/weedkiller, reagents.maximum_volume)
 
 /obj/item/chems/spray/plantbgone/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return

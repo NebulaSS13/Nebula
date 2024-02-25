@@ -87,7 +87,7 @@
 
 /obj/item/chems/ivbag/blood/populate_reagents()
 	if(blood_fill_type)
-		reagents.add_reagent(blood_fill_type, reagents.maximum_volume, get_initial_blood_data())
+		add_to_reagents(blood_fill_type, reagents.maximum_volume, get_initial_blood_data())
 
 /obj/item/chems/ivbag/blood/nanoblood
 	label_text = "synthetic"

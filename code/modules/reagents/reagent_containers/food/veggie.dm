@@ -15,7 +15,7 @@
 
 /obj/item/chems/food/aesirsalad/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/regenerator, 8)
+	add_to_reagents(/decl/material/liquid/regenerator, 8)
 
 /obj/item/chems/food/tossedsalad
 	name = "tossed salad"
@@ -41,7 +41,7 @@
 
 /obj/item/chems/food/validsalad/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/carrotfries
 	name = "carrot fries"
@@ -56,7 +56,7 @@
 
 /obj/item/chems/food/carrotfries/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/eyedrops, 3)
+	add_to_reagents(/decl/material/liquid/eyedrops, 3)
 
 /obj/item/chems/food/hugemushroomslice
 	name = "huge mushroom slice"
@@ -70,4 +70,4 @@
 
 /obj/item/chems/food/hugemushroomslice/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)
+	add_to_reagents(/decl/material/liquid/psychotropics, 3)

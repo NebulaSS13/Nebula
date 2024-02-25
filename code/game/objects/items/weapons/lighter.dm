@@ -27,7 +27,7 @@
 	. = ..()
 
 /obj/item/flame/lighter/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
+	add_to_reagents(/decl/material/liquid/fuel, max_fuel)
 
 /obj/item/flame/lighter/light(mob/user)
 	if(submerged())
@@ -103,7 +103,7 @@
 			to_chat(loc, "<span class='warning'>\The [src]'s flame flickers.</span>")
 			set_light(0)
 			addtimer(CALLBACK(src, TYPE_PROC_REF(.atom, set_light), 2), 4)
-		reagents.remove_reagent(/decl/material/liquid/fuel, 0.05)
+		remove_from_reagents(/decl/material/liquid/fuel, 0.05)
 	else
 		extinguish()
 		return

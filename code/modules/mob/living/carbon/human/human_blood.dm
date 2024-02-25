@@ -132,16 +132,16 @@
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(var/amount, var/datum/reagents/donor)
 	if(!should_have_organ(BP_HEART))
-		reagents.add_reagent(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
+		add_to_reagents(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
 		return
 	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
 	var/injected_b_type = LAZYACCESS(injected_data, "blood_type")
 	if(is_blood_incompatible(injected_b_type))
 		var/decl/blood_type/blood_decl = injected_b_type && get_blood_type_by_name(injected_b_type)
 		if(istype(blood_decl))
-			reagents.add_reagent(blood_decl.transfusion_fail_reagent, amount * blood_decl.transfusion_fail_percentage)
+			add_to_reagents(blood_decl.transfusion_fail_reagent, amount * blood_decl.transfusion_fail_percentage)
 		else
-			reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
+			add_to_reagents(/decl/material/liquid/coagulated_blood, amount * 0.5)
 	else
 		adjust_blood(amount, injected_data)
 	..()

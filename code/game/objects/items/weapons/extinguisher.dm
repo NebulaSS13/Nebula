@@ -48,7 +48,7 @@
 	)
 
 /obj/item/chems/spray/extinguisher/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/water, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/water, reagents.maximum_volume)
 
 /obj/item/chems/spray/extinguisher/has_safety()
 	return TRUE

@@ -258,4 +258,4 @@
 	. = ..()
 	SHOULD_CALL_PARENT(TRUE)
 	if(nutriment_amt)
-		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
+		add_to_reagents(nutriment_type, nutriment_amt, nutriment_desc)

@@ -25,7 +25,7 @@
 
 /obj/item/chems/food/bananapie/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream, 5)
+	add_to_reagents(/decl/material/liquid/nutriment/banana_cream, 5)
 
 /obj/item/chems/food/pie/throw_impact(atom/hit_atom)
 	..()
@@ -45,7 +45,7 @@
 
 /obj/item/chems/food/berryclafoutis/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/berry, 5)
+	add_to_reagents(/decl/material/liquid/drink/juice/berry, 5)
 
 /obj/item/chems/food/waffles
 	name = "waffles"
@@ -71,7 +71,7 @@
 
 /obj/item/chems/food/rofflewaffles/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/psychotropics, 8)
+	add_to_reagents(/decl/material/liquid/psychotropics, 8)
 
 /obj/item/chems/food/pancakes
 	name = "pancakes"
@@ -115,7 +115,7 @@
 
 /obj/item/chems/food/soylentgreen/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/soylenviridians
 	name = "\improper Soylen Virdians"
@@ -139,7 +139,7 @@
 
 /obj/item/chems/food/meatpie/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/tofupie
 	name = "tofu-pie"
@@ -164,8 +164,8 @@
 
 /obj/item/chems/food/amanita_pie/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/amatoxin,      3)
-	reagents.add_reagent(/decl/material/liquid/psychotropics, 1)
+	add_to_reagents(/decl/material/liquid/amatoxin,      3)
+	add_to_reagents(/decl/material/liquid/psychotropics, 1)
 
 /obj/item/chems/food/plump_pie
 	name = "plump pie"
@@ -182,7 +182,7 @@
 	if(prob(10)) //#TODO: have this depend on cook's skill within the recipe handling instead maybe?
 		name = "exceptional plump pie"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
-		reagents.add_reagent(/decl/material/liquid/regenerator, 5)
+		add_to_reagents(/decl/material/liquid/regenerator, 5)
 
 /obj/item/chems/food/xemeatpie
 	name = "xeno-pie"
@@ -195,7 +195,7 @@
 
 /obj/item/chems/food/xemeatpie/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/poppypretzel
 	name = "poppy pretzel"

@@ -139,7 +139,7 @@
 	for(var/R in M.reagents?.reagent_volumes)
 		var/decl/material/chem = GET_DECL(R)
 		if((remove_generic && chem.toxicity) || (R in remove_toxins))
-			M.reagents.remove_reagent(R, removing)
+			M.remove_from_reagents(R, removing)
 			return
 
 /decl/material/liquid/immunobooster

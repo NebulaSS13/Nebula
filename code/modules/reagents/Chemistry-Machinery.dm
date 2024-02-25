@@ -129,9 +129,9 @@
 						for(var/decl/material/reagent in contaminants)
 							reagents.trans_type_to(beaker, reagent.type, round(rand()*amount, 0.1))
 					else
-						reagents.remove_reagent(my_reagents.type, amount)
+						remove_from_reagents(my_reagents.type, amount)
 						for(var/decl/material/reagent in contaminants)
-							reagents.remove_reagent(reagent.type, round(rand()*amount, 0.1))
+							remove_from_reagents(reagent.type, round(rand()*amount, 0.1))
 
 		else if (href_list["removecustom"])
 			var/decl/material/my_reagents = locate(href_list["removecustom"])

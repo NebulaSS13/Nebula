@@ -3,7 +3,7 @@
 	set desc = "Flood the turf you are standing on."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN)) 
+	if(!check_rights(R_SPAWN))
 		return
 
 	var/mob/user = usr
@@ -18,7 +18,7 @@
 		return
 	var/turf/flooding = get_turf(user)
 	for(var/turf/T as anything in RANGE_TURFS(flooding, spawn_range))
-		T.add_fluid(reagent_type, reagent_amount)
+		T.add_to_reagents(reagent_type, reagent_amount)
 
 /datum/admins/proc/jump_to_fluid_source()
 

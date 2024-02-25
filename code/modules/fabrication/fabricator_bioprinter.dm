@@ -39,7 +39,7 @@
 				if(H && istype(H) && H.species && H.dna)
 					loaded_dna = H.dna.Clone()
 					to_chat(user, SPAN_INFO("You inject the blood sample into \the [src]."))
-					S.reagents.remove_any(BIOPRINTER_BLOOD_SAMPLE_SIZE) 
+					S.remove_any_reagents(BIOPRINTER_BLOOD_SAMPLE_SIZE)
 					//Tell nano to do its job
 					SSnano.update_uis(src)
 					return TRUE
@@ -64,7 +64,7 @@
 		"UE"        = loaded_dna.unique_enzymes,
 		"species"   = loaded_dna.species,
 		"btype"     = loaded_dna.b_type,
-	) 
+	)
 
 /obj/machinery/fabricator/bioprinter/ui_draw_config(mob/user, ui_key)
 	return TRUE //Always draw it for us

@@ -123,7 +123,7 @@
 	if(istype(thing) && thing.reagents && thing.reagents.total_volume && ATOM_IS_OPEN_CONTAINER(thing))
 		for(var/R in thing.reagents.reagent_volumes)
 			var/taking_reagent = REAGENT_VOLUME(thing.reagents, R)
-			thing.reagents.remove_reagent(R, taking_reagent)
+			thing.remove_from_reagents(R, taking_reagent)
 			stored_material[R] += taking_reagent
 
 		to_chat(user, SPAN_NOTICE("You add the contents of \the [thing] to \the [src]'s material buffer."))

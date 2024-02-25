@@ -110,7 +110,7 @@
 
 /obj/item/mop/advanced/Process()
 	if(reagents.total_volume < reagents.maximum_volume)
-		reagents.add_reagent(refill_reagent, refill_rate)
+		add_to_reagents(refill_reagent, refill_rate)
 
 /obj/item/mop/advanced/examine(mob/user)
 	. = ..()

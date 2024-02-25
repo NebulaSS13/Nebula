@@ -76,8 +76,8 @@
 	origin_tech = @'{"materials":2,"esoteric":5}'
 
 /obj/item/clothing/ring/reagent/sleepy/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/paralytics, 10)
-	reagents.add_reagent(/decl/material/liquid/sedatives,   5)
+	add_to_reagents(/decl/material/liquid/paralytics, 10)
+	add_to_reagents(/decl/material/liquid/sedatives,   5)
 
 /////////////////////////////////////////
 //Seals and Signet Rings

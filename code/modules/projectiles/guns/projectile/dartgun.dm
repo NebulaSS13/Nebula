@@ -31,7 +31,7 @@
 		return
 	for(var/chem in starting_chems)
 		var/obj/B = new container_type(src)
-		B.reagents.add_reagent(chem, 60)
+		B.add_to_reagents(chem, 60)
 		beakers += B
 
 /obj/item/gun/projectile/dartgun/on_update_icon()

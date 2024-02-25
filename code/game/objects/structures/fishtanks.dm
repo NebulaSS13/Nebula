@@ -60,7 +60,7 @@ var/global/list/fishtank_cache = list()
 	. = ..()
 
 /obj/structure/glass_tank/populate_reagents()
-	reagents.add_reagent(fill_type, reagents.maximum_volume)
+	add_to_reagents(fill_type, reagents.maximum_volume)
 
 /obj/structure/glass_tank/attack_hand(var/mob/user)
 	if(user.a_intent == I_HURT)

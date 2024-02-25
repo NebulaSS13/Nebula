@@ -191,7 +191,7 @@ Class Procs:
 				if(condense_amt < 1)
 					break
 				air.adjust_gas(g, -condense_amt)
-				flooding.add_fluid(g, condense_amt * REAGENT_UNITS_PER_GAS_MOLE)
+				flooding.add_to_reagents(g, condense_amt * REAGENT_UNITS_PER_GAS_MOLE)
 		CHECK_TICK
 	condensing = FALSE
 

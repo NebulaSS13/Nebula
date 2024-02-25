@@ -43,7 +43,7 @@
 	update_icon()
 
 /obj/item/soap/proc/wet()
-	reagents.add_reagent(/decl/material/liquid/cleaner, SOAP_CLEANER_ON_WET)
+	add_to_reagents(/decl/material/liquid/cleaner, SOAP_CLEANER_ON_WET)
 
 /obj/item/soap/Crossed(atom/movable/AM)
 	if(!isliving(AM))

@@ -162,4 +162,4 @@
 	volume = 120
 
 /obj/item/chems/glass/beaker/sulphuric/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/acid, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/acid, reagents.maximum_volume)

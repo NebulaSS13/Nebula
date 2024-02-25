@@ -77,7 +77,7 @@ var/global/list/hygiene_props = list()
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
 			var/adding = min(flood_amt-T?.reagents?.total_volume, rand(30,50)*clogged)
 			if(adding > 0)
-				T.add_fluid(/decl/material/liquid/water, adding)
+				T.add_to_reagents(/decl/material/liquid/water, adding)
 
 /obj/structure/hygiene/proc/drain()
 	if(!can_drain) return
@@ -320,7 +320,7 @@ var/global/list/hygiene_props = list()
 		for(var/thing in loc.get_contained_external_atoms())
 			wash_mob(thing)
 			process_heat(thing)
-		reagents.add_reagent(/decl/material/liquid/water, REAGENTS_FREE_SPACE(reagents))
+		add_to_reagents(/decl/material/liquid/water, REAGENTS_FREE_SPACE(reagents))
 		if(world.time >= next_wash)
 			next_wash = world.time + (10 SECONDS)
 			reagents.splash(get_turf(src), reagents.total_volume, max_spill = 0)
@@ -402,7 +402,7 @@ var/global/list/hygiene_props = list()
 			SPAN_NOTICE("\The [user] fills \the [RG] using \the [src]."),
 			SPAN_NOTICE("You fill \the [RG] using \the [src]."))
 		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
-		RG.reagents.add_reagent(/decl/material/liquid/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
+		RG.add_to_reagents(/decl/material/liquid/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		return 1
 
 	else if (istype(O, /obj/item/baton))
@@ -426,7 +426,7 @@ var/global/list/hygiene_props = list()
 				return 1
 	else if(istype(O, /obj/item/mop))
 		if(REAGENTS_FREE_SPACE(O.reagents) >= 5)
-			O.reagents.add_reagent(/decl/material/liquid/water, 5)
+			O.add_to_reagents(/decl/material/liquid/water, 5)
 			to_chat(user, SPAN_NOTICE("You wet \the [O] in \the [src]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else
@@ -579,7 +579,7 @@ var/global/list/hygiene_props = list()
 		next_gurgle = world.time + 80
 		playsound(T, pick(SSfluids.gurgles), 50, 1)
 
-	T.add_fluid(/decl/material/liquid/water, min(75, fill_level - T.get_fluid_depth()))
+	T.add_to_reagents(/decl/material/liquid/water, min(75, fill_level - T.get_fluid_depth()))
 
 /obj/structure/hygiene/faucet/Process()
 	..()

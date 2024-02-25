@@ -19,8 +19,8 @@
 
 /obj/item/chems/toner_cartridge/populate_reagents()
 	//Normally this would be toner powder, but probably not worth making a material for that.
-	reagents.add_reagent(/decl/material/liquid/paint,         reagents.maximum_volume/2)
-	reagents.add_reagent(/decl/material/liquid/pigment/black, reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/paint,         reagents.maximum_volume/2)
+	add_to_reagents(/decl/material/liquid/pigment/black, reagents.maximum_volume/2)
 
 /obj/item/chems/toner_cartridge/dump_contents()
 	. = ..()
@@ -48,5 +48,5 @@
 		return
 	var/amt_each = round(amount/2)
 	if(reagents.has_reagent(/decl/material/liquid/pigment/black, amt_each) && reagents.has_reagent(/decl/material/liquid/paint, amt_each))
-		reagents.remove_any(amount)
+		remove_any_reagents(amount)
 		return TRUE

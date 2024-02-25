@@ -1,5 +1,14 @@
 var/global/obj/temp_reagents_holder = new
 
+/atom/proc/add_to_reagents(reagent_type, amount, data, safety = FALSE, defer_update = FALSE)
+	return reagents?.add_reagent(reagent_type, amount, data, safety, defer_update)
+
+/atom/proc/remove_from_reagents(reagent_type, amount, safety = FALSE, defer_update = FALSE)
+	return reagents?.remove_reagent(reagent_type, amount, safety, defer_update)
+
+/atom/proc/remove_any_reagents(amount = 1, defer_update = FALSE)
+	return reagents?.remove_any(amount, defer_update)
+
 /datum/reagents
 	var/primary_reagent
 	var/list/reagent_volumes

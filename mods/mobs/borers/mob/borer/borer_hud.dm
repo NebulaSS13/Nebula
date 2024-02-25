@@ -139,7 +139,7 @@
 		return
 
 	to_chat(worm, SPAN_NOTICE("You squirt a measure of [chem] from your reservoirs into \the [worm.host]'s bloodstream."))
-	worm.host.reagents.add_reagent(worm.chemical_types[chem], 10)
+	worm.host.add_to_reagents(worm.chemical_types[chem], 10)
 	worm.chemicals -= 50
 	return TRUE
 

@@ -888,7 +888,7 @@ default behaviour is:
 	return null
 
 /mob/living/proc/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
-	vomit.reagents.add_reagent(/decl/material/liquid/acid/stomach, 5)
+	vomit.add_to_reagents(/decl/material/liquid/acid/stomach, 5)
 
 /mob/living/proc/eyecheck()
 	return FLASH_PROTECTION_NONE

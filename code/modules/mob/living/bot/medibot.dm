@@ -140,7 +140,7 @@
 		if(t == 1)
 			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_INJECT)
 		else
-			H.reagents.add_reagent(t, injection_amount)
+			H.add_to_reagents(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
 	busy = 0
 	update_icon()

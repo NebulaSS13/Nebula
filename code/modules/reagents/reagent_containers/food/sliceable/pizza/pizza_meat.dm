@@ -7,8 +7,8 @@
 
 /obj/item/chems/food/sliceable/pizza/meatpizza/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  34)
-	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, 6)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,  34)
+	add_to_reagents(/decl/material/liquid/nutriment/barbecue, 6)
 
 /obj/item/chems/food/slice/pizza/meat
 	name = "meatpizza slice"

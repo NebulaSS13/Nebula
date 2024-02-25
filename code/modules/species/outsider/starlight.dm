@@ -103,7 +103,7 @@
 /decl/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
 	..()
 	var/turf/T = get_turf(H)
-	T.add_fluid(/decl/material/liquid/fuel, 20)
+	T.add_to_reagents(/decl/material/liquid/fuel, 20)
 	T.hotspot_expose(FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 
 /decl/bodytype/starlight/blueforged

@@ -10,7 +10,7 @@
 
 /obj/item/chems/food/tofu/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/plant_protein, 6)
+	add_to_reagents(/decl/material/liquid/nutriment/plant_protein, 6)
 
 /obj/item/chems/food/soydope
 	name = "soy dope"

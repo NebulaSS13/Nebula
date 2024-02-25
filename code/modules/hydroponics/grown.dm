@@ -57,7 +57,7 @@
 				rtotal += round(potency/reagent_amounts[2])
 			if(rid == /decl/material/liquid/nutriment)
 				LAZYSET(data, seed.seed_name, max(1,rtotal))
-			reagents.add_reagent(rid,max(1,rtotal),data)
+			add_to_reagents(rid,max(1,rtotal),data)
 
 /obj/item/chems/food/grown/proc/update_desc()
 	set waitfor = FALSE
@@ -254,7 +254,7 @@ var/global/list/_wood_materials = list(
 	if(seed && seed.get_trait(TRAIT_STINGS))
 		if(!reagents || reagents.total_volume <= 0)
 			return
-		reagents.remove_any(rand(1,3))
+		remove_any_reagents(rand(1,3))
 		seed.thrown_at(src, target)
 		sleep(-1)
 		if(!src)
@@ -312,7 +312,7 @@ var/global/list/_wood_materials = list(
 			return
 		if(!reagents || reagents.total_volume <= 0)
 			return
-		reagents.remove_any(rand(1,3)) //Todo, make it actually remove the reagents the seed uses.
+		remove_any_reagents(rand(1,3)) //Todo, make it actually remove the reagents the seed uses.
 		var/affected = pick(BP_R_HAND,BP_L_HAND)
 		seed.do_thorns(H,src,affected)
 		seed.do_sting(H,src,affected)

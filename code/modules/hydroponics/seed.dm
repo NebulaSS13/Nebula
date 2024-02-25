@@ -189,7 +189,7 @@
 			to_chat(target, "<span class='danger'>You are stung by \the [fruit] in your [affecting.name]!</span>")
 			for(var/rid in chems)
 				var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))
-				target.reagents.add_reagent(rid,injecting)
+				target.add_to_reagents(rid,injecting)
 		else
 			to_chat(target, "<span class='danger'>Sharp spines scrape against your armour!</span>")
 

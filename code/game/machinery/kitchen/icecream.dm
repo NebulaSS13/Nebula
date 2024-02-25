@@ -75,10 +75,10 @@
 	. = ..()
 
 /obj/machinery/icecream_vat/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/drink/milk, 5)
-	reagents.add_reagent(/decl/material/liquid/nutriment/flour, 5)
-	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)
-	reagents.add_reagent(/decl/material/solid/ice, 5)
+	add_to_reagents(/decl/material/liquid/drink/milk, 5)
+	add_to_reagents(/decl/material/liquid/nutriment/flour, 5)
+	add_to_reagents(/decl/material/liquid/nutriment/sugar, 5)
+	add_to_reagents(/decl/material/solid/ice, 5)
 
 /obj/machinery/icecream_vat/interface_interact(mob/user)
 	interact(user)
@@ -121,7 +121,7 @@
 			//	if(beaker)
 			//		beaker.reagents.trans_to(I, 10)
 				if(I.reagents.total_volume < 10)
-					I.reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 10 - I.reagents.total_volume)
+					I.add_to_reagents(/decl/material/liquid/nutriment/sugar, 10 - I.reagents.total_volume)
 			else
 				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
 		else
@@ -140,7 +140,7 @@
 		break
 	if(amount)
 		for(var/R in get_ingredient_list(make_type))
-			reagents.remove_reagent(R, amount)
+			remove_from_reagents(R, amount)
 		product_types[make_type] += amount
 		var/flavour = get_flavour_name(make_type)
 		if(make_type > 6)
@@ -203,7 +203,7 @@
 
 /obj/item/chems/food/icecream/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment, 5)
+	add_to_reagents(/decl/material/liquid/nutriment, 5)
 	update_icon()
 
 /obj/item/chems/food/icecream/on_update_icon()

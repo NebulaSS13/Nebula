@@ -13,7 +13,7 @@
 
 /obj/item/chems/food/sliceable/carrotcake/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/eyedrops, 10)
+	add_to_reagents(/decl/material/liquid/eyedrops, 10)
 
 /obj/item/chems/food/slice/carrotcake
 	name = "carrot cake slice"
@@ -43,8 +43,8 @@
 
 /obj/item/chems/food/sliceable/braincake/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 25)
-	reagents.add_reagent(/decl/material/liquid/neuroannealer,     10)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 25)
+	add_to_reagents(/decl/material/liquid/neuroannealer,     10)
 
 /obj/item/chems/food/slice/braincake
 	name = "brain cake slice"
@@ -73,7 +73,7 @@
 
 /obj/item/chems/food/sliceable/cheesecake/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
+	add_to_reagents(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/slice/cheesecake
 	name = "cheese cake slice"
@@ -228,7 +228,7 @@
 
 /obj/item/chems/food/sliceable/birthdaycake/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
+	add_to_reagents(/decl/material/liquid/nutriment/sprinkles, 10)
 
 /obj/item/chems/food/slice/birthdaycake
 	name = "birthday cake slice"

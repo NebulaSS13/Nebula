@@ -14,8 +14,8 @@
 
 /obj/item/chems/food/meatballsoup/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  8)
-	reagents.add_reagent(/decl/material/liquid/water,              5)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,  8)
+	add_to_reagents(/decl/material/liquid/water,              5)
 
 /obj/item/chems/food/bloodsoup
 	name = "tomato soup"
@@ -28,9 +28,9 @@
 
 /obj/item/chems/food/bloodsoup/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  2)
-	reagents.add_reagent(/decl/material/liquid/blood,              10)
-	reagents.add_reagent(/decl/material/liquid/water,              5)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,  2)
+	add_to_reagents(/decl/material/liquid/blood,              10)
+	add_to_reagents(/decl/material/liquid/water,              5)
 
 /obj/item/chems/food/clownstears
 	name = "clown's tears"
@@ -45,8 +45,8 @@
 
 /obj/item/chems/food/clownstears/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
-	reagents.add_reagent(/decl/material/liquid/water,              10)
+	add_to_reagents(/decl/material/liquid/drink/juice/banana, 5)
+	add_to_reagents(/decl/material/liquid/water,              10)
 
 /obj/item/chems/food/vegetablesoup
 	name = "vegetable soup"
@@ -62,7 +62,7 @@
 
 /obj/item/chems/food/vegetablesoup/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 5)
+	add_to_reagents(/decl/material/liquid/water, 5)
 
 /obj/item/chems/food/nettlesoup
 	name = "nettle soup"
@@ -78,8 +78,8 @@
 
 /obj/item/chems/food/nettlesoup/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water,       5)
-	reagents.add_reagent(/decl/material/liquid/regenerator, 5)
+	add_to_reagents(/decl/material/liquid/water,       5)
+	add_to_reagents(/decl/material/liquid/regenerator, 5)
 
 /obj/item/chems/food/mysterysoup
 	name = "mystery soup"
@@ -141,7 +141,7 @@
 	. = ..()
 	var/list/fillings = pick(get_random_fillings())
 	for(var/filling in fillings)
-		reagents.add_reagent(filling, fillings[filling])
+		add_to_reagents(filling, fillings[filling])
 
 /obj/item/chems/food/wishsoup
 	name = "\improper Wish Soup"
@@ -155,10 +155,10 @@
 
 /obj/item/chems/food/wishsoup/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 10)
+	add_to_reagents(/decl/material/liquid/water, 10)
 	if(prob(25))
 		src.desc = "A wish come true!"
-		reagents.add_reagent(/decl/material/liquid/nutriment, 8, list("something good" = 8))
+		add_to_reagents(/decl/material/liquid/nutriment, 8, list("something good" = 8))
 
 /obj/item/chems/food/hotchili
 	name = "hot chili"
@@ -173,9 +173,9 @@
 
 /obj/item/chems/food/hotchili/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  3)
-	reagents.add_reagent(/decl/material/liquid/capsaicin,          3)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,  3)
+	add_to_reagents(/decl/material/liquid/capsaicin,          3)
+	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 2)
 
 /obj/item/chems/food/coldchili
 	name = "cold chili"
@@ -190,9 +190,9 @@
 
 /obj/item/chems/food/coldchili/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,   3)
-	reagents.add_reagent(/decl/material/liquid/frostoil,            3)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato,  2)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,   3)
+	add_to_reagents(/decl/material/liquid/frostoil,            3)
+	add_to_reagents(/decl/material/liquid/drink/juice/tomato,  2)
 
 /obj/item/chems/food/tomatosoup
 	name = "tomato soup"
@@ -208,7 +208,7 @@
 
 /obj/item/chems/food/tomatosoup/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 10)
+	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 10)
 
 /obj/item/chems/food/stew
 	name = "stew"
@@ -222,10 +222,10 @@
 
 /obj/item/chems/food/stew/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  4)
-	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 5)
-	reagents.add_reagent(/decl/material/liquid/eyedrops,           5)
-	reagents.add_reagent(/decl/material/liquid/water,              5)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,  4)
+	add_to_reagents(/decl/material/liquid/drink/juice/tomato, 5)
+	add_to_reagents(/decl/material/liquid/eyedrops,           5)
+	add_to_reagents(/decl/material/liquid/water,              5)
 
 /obj/item/chems/food/milosoup
 	name = "milosoup"
@@ -240,7 +240,7 @@
 
 /obj/item/chems/food/milosoup/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/water, 5)
+	add_to_reagents(/decl/material/liquid/water, 5)
 
 /obj/item/chems/food/mushroomsoup
 	name = "chantrelle soup"

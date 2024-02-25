@@ -200,7 +200,7 @@
 			if(istype(thing, /obj/item/chems/food/meat))
 				var/obj/item/chems/food/meat/slab = thing
 				slab.SetName("[slab_name] [slab.name]")
-				slab.reagents.add_reagent(/decl/material/liquid/nutriment,slab_nutrition)
+				slab.add_to_reagents(/decl/material/liquid/nutriment,slab_nutrition)
 
 /obj/machinery/gibber/proc/finish_gibbing()
 	operating = 0

@@ -11,7 +11,7 @@
 
 /turf/proc/remove_fluid(var/amount = 0)
 	if(reagents)
-		reagents.remove_any(amount)
+		remove_any_reagents(amount)
 
 /turf/proc/displace_all_reagents()
 	UPDATE_FLUID_BLOCKED_DIRS(src)
@@ -98,10 +98,10 @@
 	else if(reagents?.total_volume > FLUID_QDEL_POINT)
 		ADD_ACTIVE_FLUID(src)
 
-/turf/proc/add_fluid(var/fluid_type, var/fluid_amount, var/defer_update)
+/turf/add_to_reagents(reagent_type, amount, data, safety = FALSE, defer_update = FALSE)
 	if(!reagents)
 		create_reagents(FLUID_MAX_DEPTH)
-	reagents.add_reagent(fluid_type, min(fluid_amount, FLUID_MAX_DEPTH - reagents.total_volume), defer_update = defer_update)
+	return ..()
 
 /turf/proc/get_physical_height()
 	return 0
@@ -119,7 +119,7 @@
 /turf/proc/remove_fluids(var/amount, var/defer_update)
 	if(!reagents?.total_volume)
 		return
-	reagents.remove_any(amount, defer_update = defer_update)
+	remove_any_reagents(amount, defer_update = defer_update)
 	if(defer_update && !QDELETED(reagents))
 		SSfluids.holders_to_update[reagents] = TRUE
 
@@ -150,7 +150,7 @@
 			var/moles = round(reagents.reagent_volumes[rtype] / REAGENT_UNITS_PER_GAS_MOLE)
 			if(moles > 0)
 				air.adjust_gas(rtype, moles, FALSE)
-				reagents.remove_reagent(round(moles * REAGENT_UNITS_PER_GAS_MOLE))
+				remove_from_reagents(round(moles * REAGENT_UNITS_PER_GAS_MOLE))
 				update_air = TRUE
 	if(update_air)
 		air.update_values()

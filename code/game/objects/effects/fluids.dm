@@ -80,7 +80,7 @@
 	..()
 	var/turf/my_turf = get_turf(src)
 	if(my_turf)
-		my_turf.add_fluid(fluid_type, fluid_initial)
+		my_turf.add_to_reagents(fluid_type, fluid_initial)
 	return INITIALIZE_HINT_QDEL
 
 /obj/abstract/landmark/mapped_fluid/fuel

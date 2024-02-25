@@ -15,7 +15,7 @@
 /mob/proc/take_blood(obj/item/chems/container, var/amount)
 	var/decl/species/my_species = get_species()
 	if(my_species?.blood_reagent)
-		container.reagents.add_reagent(my_species.blood_reagent, amount, get_blood_data())
+		container.add_to_reagents(my_species.blood_reagent, amount, get_blood_data())
 		return TRUE
 	return FALSE
 

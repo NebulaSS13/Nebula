@@ -54,7 +54,7 @@
 
 	if(tray.dead)
 		if(tray.remove_dead(src, silent = TRUE))
-			reagents.add_reagent(/decl/material/liquid/nutriment/glucose, rand(10,20))
+			add_to_reagents(/decl/material/liquid/nutriment/glucose, rand(10,20))
 			visible_message(SPAN_NOTICE("<b>\The [src]</b> chews up the dead plant, clearing \the [tray] out."), SPAN_NOTICE("You devour the dead plant, clearing \the [tray]."))
 			return TRUE
 		return FALSE
@@ -66,7 +66,7 @@
 		return FALSE
 
 	if(tray.weedlevel || tray.pestlevel)
-		reagents.add_reagent(/decl/material/liquid/nutriment/glucose, (tray.weedlevel + tray.pestlevel))
+		add_to_reagents(/decl/material/liquid/nutriment/glucose, (tray.weedlevel + tray.pestlevel))
 		tray.weedlevel = 0
 		tray.pestlevel = 0
 		visible_message(SPAN_NOTICE("<b>\The [src]</b> begins rooting through \the [tray], ripping out pests and weeds, and eating them noisily."),SPAN_NOTICE("You begin rooting through \the [tray], ripping out pests and weeds, and eating them noisily."))

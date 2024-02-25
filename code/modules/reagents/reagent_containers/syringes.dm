@@ -328,7 +328,7 @@
 
 /obj/item/chems/syringe/ld50_syringe/populate_reagents()
 	SHOULD_CALL_PARENT(FALSE)
-	reagents.add_reagent(/decl/material/liquid/heartstopper, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/heartstopper, reagents.maximum_volume)
 
 /obj/item/chems/syringe/ld50_syringe/drawReagents(var/target, var/mob/user)
 	if(ismob(target)) // No drawing 60 units of blood at once
@@ -345,7 +345,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/stabilizer/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/stabilizer, reagents.maximum_volume)
 	return ..()
 
 /obj/item/chems/syringe/antitoxin
@@ -353,7 +353,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/antitoxin/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antitoxins, reagents.maximum_volume)
 	return ..()
 
 /obj/item/chems/syringe/antibiotic
@@ -361,7 +361,7 @@
 	mode = SYRINGE_INJECT
 
 /obj/item/chems/syringe/antibiotic/populate_reagents()
-	reagents.add_reagent(/decl/material/liquid/antibiotics, reagents.maximum_volume)
+	add_to_reagents(/decl/material/liquid/antibiotics, reagents.maximum_volume)
 	return ..()
 
 /obj/item/chems/syringe/drugs
@@ -370,9 +370,9 @@
 
 /obj/item/chems/syringe/drugs/populate_reagents()
 	var/vol_each = round(reagents.maximum_volume / 3)
-	reagents.add_reagent(/decl/material/liquid/psychoactives,   vol_each)
-	reagents.add_reagent(/decl/material/liquid/hallucinogenics, vol_each)
-	reagents.add_reagent(/decl/material/liquid/presyncopics,    vol_each)
+	add_to_reagents(/decl/material/liquid/psychoactives,   vol_each)
+	add_to_reagents(/decl/material/liquid/hallucinogenics, vol_each)
+	add_to_reagents(/decl/material/liquid/presyncopics,    vol_each)
 	return ..()
 
 /obj/item/chems/syringe/steroid
@@ -381,8 +381,8 @@
 
 /obj/item/chems/syringe/steroid/populate_reagents()
 	var/vol_third = round(reagents.maximum_volume/3)
-	reagents.add_reagent(/decl/material/liquid/adrenaline,   vol_third)
-	reagents.add_reagent(/decl/material/liquid/amphetamines, 2 * vol_third)
+	add_to_reagents(/decl/material/liquid/adrenaline,   vol_third)
+	add_to_reagents(/decl/material/liquid/amphetamines, 2 * vol_third)
 	return ..()
 
 // TG ports

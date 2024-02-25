@@ -7,7 +7,7 @@
 
 /obj/item/chems/food/sliceable/pizza/mushroompizza/populate_reagents()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein,  5)
+	add_to_reagents(/decl/material/liquid/nutriment/protein,  5)
 
 /obj/item/chems/food/slice/pizza/mushroom
 	name = "mushroompizza slice"
