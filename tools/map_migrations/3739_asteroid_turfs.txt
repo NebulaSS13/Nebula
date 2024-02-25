@@ -1,0 +1,9 @@
+/turf/simulated/floor/airless/lava/@SUBTYPES : /turf/exterior/lava/@SUBTYPES{@OLD}
+/turf/simulated/floor/ice/@SUBTYPES : /turf/exterior/ice/@SUBTYPES{@OLD}
+/turf/simulated/floor/snow/@SUBTYPES : /turf/exterior/snow/@SUBTYPES{@OLD}
+/turf/simulated/floor/airless/ceiling/@SUBTYPES : /turf/simulated/floor/airless/@SUBTYPES{@OLD}
+/turf/simulated/floor/beach/sand/@SUBTYPES : /turf/exterior/sand/@SUBTYPES{@OLD}
+/turf/simulated/floor/beach/sand/desert/@SUBTYPES : /turf/exterior/sand/@SUBTYPES{@OLD}
+/turf/simulated/floor/beach/coastline/@SUBTYPES : /turf/exterior/water/@SUBTYPES{@OLD}
+/turf/simulated/floor/beach/water/@SUBTYPES : /turf/exterior/water/@SUBTYPES{@OLD}
+/turf/simulated/floor/beach/water/ocean/@SUBTYPES : /turf/exterior/water/@SUBTYPES{@OLD}

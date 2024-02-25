@@ -10720,7 +10720,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "Su" = (
-/turf/simulated/floor/beach/water/ocean,
+/turf/exterior/water,
 /area/ministation/dorms)
 "Sv" = (
 /obj/machinery/light{
