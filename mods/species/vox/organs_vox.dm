@@ -166,7 +166,7 @@
 
 /obj/item/organ/internal/voxstack/Initialize(mapload, material_key, datum/dna/given_dna, decl/bodytype/new_bodytype)
 	var/decl/species/dna_species = given_dna && get_species_by_key(given_dna.species)
-	. = ..(mapload, material_key, given_dna, dna_species?.base_prosthetics_model)
+	. = ..(mapload, material_key, given_dna, dna_species?.base_internal_prosthetics_model)
 	do_backup()
 
 /obj/item/organ/internal/voxstack/examine(mob/user)

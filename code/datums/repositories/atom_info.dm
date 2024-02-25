@@ -26,7 +26,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 	var/atom/instance
 	if(!matter_cache[key])
 		instance = get_instance_of(path, material, amount)
-		matter_cache[key] = instance.get_contained_matter()
+		matter_cache[key] = instance.get_contained_matter() || list()
 	if(!combined_worth_cache[key])
 		instance = instance || get_instance_of(path, material, amount)
 		combined_worth_cache[key] = instance.get_combined_monetary_worth()

@@ -28,7 +28,7 @@
 	if(.)
 		var/obj/item/organ/internal/I = GET_INTERNAL_ORGAN(holder, apply_to_organ)
 		if(I)
-			I.set_bodytype(holder.species.base_prosthetics_model)
+			I.set_bodytype(holder.species.base_internal_prosthetics_model)
 
 /decl/aspect/prosthetic_organ/eyes
 	name = "Prosthetic Eyes"

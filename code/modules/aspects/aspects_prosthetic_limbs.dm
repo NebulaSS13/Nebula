@@ -17,7 +17,7 @@
 	if(!species_name)
 		return /decl/bodytype/prosthetic/basic_human
 	var/decl/species/species = species_name ? get_species_by_key(species_name) : global.using_map.default_species
-	return species?.base_prosthetics_model
+	return species?.base_external_prosthetics_model
 
 /decl/aspect/prosthetic_limb/Initialize()
 	. = ..()

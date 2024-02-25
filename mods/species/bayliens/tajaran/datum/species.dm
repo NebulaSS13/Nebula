@@ -14,7 +14,7 @@
 /decl/species/tajaran
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
-	base_prosthetics_model = null
+	base_external_prosthetics_model = null
 
 	description = "A small mammalian carnivore. If you are reading this, you are probably a Tajaran."
 	hidden_from_codex = FALSE

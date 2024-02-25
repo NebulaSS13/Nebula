@@ -29,7 +29,7 @@
 	name_plural =            "Kharmaan Alates"
 	show_ssd =               "quiescent"
 
-	base_prosthetics_model = null
+	base_external_prosthetics_model = null
 	available_bodytypes = list(/decl/bodytype/crystalline/mantid/alate)
 
 	description = "When human surveyors finally arrived at the outer reaches of explored space, they hoped to find \
