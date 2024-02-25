@@ -7,6 +7,8 @@
 	var/tmp/is_processing = FALSE
 	/// Used by the SStimer subsystem
 	var/list/active_timers
+	/// Used to avoid unnecessary refstring creation in Destroy().
+	var/tmp/has_state_machine = FALSE
 
 #ifdef TESTING
 	var/tmp/running_find_references
@@ -49,11 +51,12 @@
 	if (!isturf(src))	// Not great, but the 'correct' way to do it would add overhead for little benefit.
 		cleanup_events(src)
 
-	var/list/machines = global.state_machines["\ref[src]"]
-	if(length(machines))
-		for(var/base_type in machines)
-			qdel(machines[base_type])
-		global.state_machines -= "\ref[src]"
+	if(has_state_machine)
+		var/list/machines = global.state_machines["\ref[src]"]
+		if(length(machines))
+			for(var/base_type in machines)
+				qdel(machines[base_type])
+			global.state_machines -= "\ref[src]"
 
 	return QDEL_HINT_QUEUE
 

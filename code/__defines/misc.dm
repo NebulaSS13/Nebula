@@ -262,6 +262,10 @@
 #define ICON_STATE_INV   "inventory"
 
 #define hex2num(X) text2num(X, 16)
+/// Returns the hex value of a number given a value assumed to be a base-ten value, padded to a minimum length of 2.
+#define num2hex(num) num2text(num, 2, 16)
+/// Returns the hex value of a number given a value assumed to be a base-ten value, padded to a supplied minimum length.
+#define num2hex_padded(num, len) num2text(num, len, 16)
 
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
 

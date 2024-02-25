@@ -127,32 +127,25 @@
 	return .
 
 //remove the old powernet and replace it with a new one throughout the network.
-/proc/propagate_network(var/obj/O, var/datum/powernet/PN)
+/proc/propagate_network(var/obj/structure/cable/cable, var/datum/powernet/PN)
 	//to_world_log("propagating new network")
-	var/list/worklist = list()
+	var/list/cables = list()
 	var/list/found_machines = list()
 	var/index = 1
-	var/obj/P = null
+	var/obj/structure/cable/working_cable = null
 
-	worklist+=O //start propagating from the passed object
-
-	while(index<=worklist.len) //until we've exhausted all power objects
-		P = worklist[index] //get the next power object found
+	// add the first cable to the list
+	cables[cable] = TRUE // associative list for speedy deduplication
+	while(index <= length(cables)) //until we've exhausted all power objects
+		working_cable = cables[index] //get the next power object found
 		index++
 
-		if( istype(P,/obj/structure/cable))
-			var/obj/structure/cable/C = P
-			if(C.powernet != PN) //add it to the powernet, if it isn't already there
-				PN.add_cable(C)
-			worklist |= C.get_connections() //get adjacents power objects, with or without a powernet
+		for(var/new_cable in working_cable.get_cable_connections()) //get adjacent cables, with or without a powernet
+			cables[new_cable] = TRUE
 
-		else if(P.anchored && istype(P,/obj/machinery/power))
-			var/obj/machinery/power/M = P
-			found_machines |= M //we wait until the powernet is fully propagates to connect the machines
-
-		else
-			continue
-
+	for(var/obj/structure/cable/cable_entry in cables)
+		PN.add_cable(cable_entry)
+		found_machines += cable_entry.get_machine_connections()
 	//now that the powernet is set, connect found machines to it
 	for(var/obj/machinery/power/PM in found_machines)
 		if(!PM.connect_to_network()) //couldn't find a node on its turf...

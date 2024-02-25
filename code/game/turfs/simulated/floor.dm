@@ -62,7 +62,7 @@
 	else
 		disable_zmimic()
 
-	update_icon(1)
+	queue_icon_update(SSatoms.initialized) // only update neighbors if we're setting flooring after SSatoms has finished
 	levelupdate()
 
 //This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf

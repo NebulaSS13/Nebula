@@ -75,7 +75,7 @@ var/global/list/flooring_cache = list()
 	if(update_neighbors)
 		for(var/turf/simulated/floor/F in orange(src, 1))
 			F.queue_ao(FALSE)
-			F.update_icon()
+			F.queue_icon_update()
 
 /turf/simulated/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0, var/external = FALSE)
 	if(!flooring_cache[cache_key])
@@ -107,45 +107,41 @@ var/global/list/flooring_cache = list()
 		flooring_cache[cache_key] = I
 	return flooring_cache[cache_key]
 
-/decl/flooring/proc/test_link(var/turf/origin, var/turf/T)
+/decl/flooring/proc/test_link(var/turf/origin, var/turf/opponent)
 	var/is_linked = FALSE
-	if(istype(origin) && istype(T))
+	if(istype(origin) && istype(opponent))
 		//is_wall is true for wall turfs and for floors containing a low wall
-		if(T.is_wall())
+		if(opponent.is_wall())
 			if(wall_smooth == SMOOTH_ALL)
 				is_linked = TRUE
 		//If is_hole is true, then it's space or openspace
-		else if(T.is_open())
+		else if(opponent.is_open())
 			if(space_smooth == SMOOTH_ALL)
 				is_linked = TRUE
 
 		//If we get here then its a normal floor
-		else if (istype(T, /turf/simulated/floor))
-			var/turf/simulated/floor/t = T
-			//Check for window frames.
-			if(wall_smooth == SMOOTH_ALL)
-				for(var/obj/structure/wall_frame/WF in T.contents)
-					is_linked = TRUE
+		else if (istype(opponent, /turf/simulated/floor))
+			var/turf/simulated/floor/floor_opponent = opponent
 			//If the floor is the same as us,then we're linked,
-			if (istype(src, t.flooring))
+			if (istype(src, floor_opponent.flooring))
 				is_linked = TRUE
 			else if (floor_smooth == SMOOTH_ALL)
 				is_linked = TRUE
 			else if (floor_smooth != SMOOTH_NONE)
 				//If we get here it must be using a whitelist or blacklist
 				if (floor_smooth == SMOOTH_WHITELIST)
-					for (var/v in flooring_whitelist)
-						if (istype(t.flooring, v))
-							//Found a match on the list
-							is_linked = TRUE
-							break
+					if (flooring_whitelist[floor_opponent.flooring.type])
+						//Found a match on the typecache
+						is_linked = TRUE
 				else if(floor_smooth == SMOOTH_BLACKLIST)
 					is_linked = TRUE //Default to true for the blacklist, then make it false if a match comes up
-					for (var/v in flooring_blacklist)
-						if (istype(t.flooring, v))
-							//Found a match on the list
-							is_linked = FALSE
-							break
+					if (flooring_blacklist[floor_opponent.flooring.type])
+						//Found a match on the typecache
+						is_linked = FALSE
+			//Check for window frames.
+			if (!is_linked && wall_smooth == SMOOTH_ALL)
+				if(locate(/obj/structure/wall_frame) in opponent)
+					is_linked = TRUE
 	return is_linked
 
 /decl/flooring/proc/symmetric_test_link(var/turf/A, var/turf/B)

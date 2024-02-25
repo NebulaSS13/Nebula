@@ -1,39 +1,12 @@
 /*
  * Holds procs designed to change one type of value, into another.
  * Contains:
- *			hex2num & num2hex
  *			text2list & list2text
  *			file2list
  *			angle2dir
  *			angle2text
  *			worldtime2text
  */
-
-// Returns the hex value of a number given a value assumed to be a base-ten value
-/proc/num2hex(num, len=2)
-	if(!isnum(num))
-		num = 0
-	num = round(abs(num))
-	. = ""
-	var/i=0
-	while(1)
-		if(len<=0)
-			if(!num)
-				break
-		else
-			if(i>=len)
-				break
-		var/remainder = num/16
-		num = round(remainder)
-		remainder = (remainder - num) * 16
-		switch(remainder)
-			if(9,8,7,6,5,4,3,2,1)
-				. = "[remainder]" + .
-			if(10,11,12,13,14,15)
-				. = ascii2text(remainder+87) + .
-			else
-				. = "0" + .
-		i++
 
 /proc/text2numlist(text, delimiter="\n")
 	var/list/num_list = list()

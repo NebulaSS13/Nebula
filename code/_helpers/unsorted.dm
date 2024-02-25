@@ -773,16 +773,10 @@ var/global/list/WALLITEMS = list(
 	return 0
 
 /proc/get_random_colour(var/simple = FALSE, var/lower = 0, var/upper = 255)
-	var/colour
 	if(simple)
-		colour = pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))
+		return pick(list("#ff0000","#ff7f00","#ffff00","#00ff00","#0000ff","#4b0082","#8f00ff"))
 	else
-		for(var/i=1;i<=3;i++)
-			var/temp_col = "[num2hex(rand(lower,upper))]"
-			if(length(temp_col )<2)
-				temp_col = "0[temp_col]"
-			colour += temp_col
-	return "#[colour]"
+		return rgb(rand(lower, upper), rand(lower, upper), rand(lower, upper))
 
 // call to generate a stack trace and print to runtime logs
 /proc/get_stack_trace(msg, file, line)
