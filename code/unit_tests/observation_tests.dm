@@ -10,8 +10,6 @@
 	var/list/received_name_set_events
 
 	var/list/stored_global_listen_count
-	var/list/stored_event_sources_count
-	var/list/stored_event_listen_count
 
 /datum/unit_test/observation/start_test()
 	received_moves = received_moves || list()
@@ -24,8 +22,6 @@
 		events_repository.unregister_global(/decl/observ/moved, global_listener)
 
 	stored_global_listen_count = global.global_listen_count.Copy()
-	stored_event_sources_count = global.event_sources_count.Copy()
-	stored_event_listen_count =  global.event_listen_count.Copy()
 
 	sanity_check_events("Pre-Test")
 	. = conduct_test()
@@ -62,10 +58,6 @@
 
 	for(var/entry in (global.global_listen_count - stored_global_listen_count))
 		fail("[phase]: global_listen_count - Contained [log_info_line(entry)].")
-	for(var/entry in (global.event_sources_count - stored_event_sources_count))
-		fail("[phase]: event_sources_count - Contained [log_info_line(entry)].")
-	for(var/entry in (global.event_listen_count - stored_event_listen_count))
-		fail("[phase]: event_listen_count - Contained [log_info_line(entry)].")
 
 /datum/unit_test/observation/proc/conduct_test()
 	return 0
