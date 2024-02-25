@@ -212,51 +212,6 @@
 
 	return 1
 
-// Should have updated this to work with the new mechs
-/*
-/datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop
-	name = "OBSERVATION: Moved - Shall Only Trigger Once For Recursive Drop"
-
-/datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop/conduct_test()
-	var/turf/T = get_safe_turf()
-	var/obj/exosuit/exosuit = get_named_instance(/obj/exosuit, T, "exosuit")
-	var/obj/item/wrench/held_item = get_named_instance(/obj/item/wrench, T, "Wrench")
-	var/mob/living/carbon/human/dummy/held_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Held Mob")
-	var/mob/living/carbon/human/dummy/holding_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Holding Mob")
-
-	held_mob.mob_size = MOB_SIZE_SMALL
-	held_mob.put_in_active_hand(held_item)
-	held_mob.get_scooped(holding_mob, holding_mob)
-
-	holding_mob.forceMove(exosuit)
-
-	exosuit.occupant = holding_mob
-
-	events_repository.register(/decl/observ/moved, held_item, src, TYPE_PROC_REF(/datum/unit_test/observation, receive_move))
-	holding_mob.drop_from_inventory(held_item)
-
-	if(received_moves.len != 1)
-		fail("Expected 1 raised moved event, were [received_moves.len].")
-		dump_received_moves()
-		return 1
-
-	var/list/event = received_moves[1]
-	if(event[1] != held_item || event[2] != held_mob || event[3] != exosuit)
-		fail("Unexpected move event received. Expected [held_item], was [event[1]]. Expected [held_mob], was [event[2]]. Expected [exosuit], was [event[3]]")
-	else if(!(held_item in exosuit.dropped_items))
-		fail("Expected \the [held_item] to be in the mechs' dropped item list")
-	else
-		pass("One one moved event with expected arguments raised.")
-
-	events_repository.unregister(/decl/observ/moved, held_item, src)
-	qdel(exosuit)
-	qdel(held_item)
-	qdel(held_mob)
-	qdel(holding_mob)
-
-	return 1
-*/
-
 /datum/unit_test/observation/moved_shall_not_unregister_recursively_one
 	name = "OBSERVATION: Moved - Shall Not Unregister Recursively - One"
 
@@ -385,4 +340,104 @@
 	else
 		pass("The event source listener list does not contain a null key.")
 	qdel(event_source)
+	return 1
+
+/datum/unit_test/observation/sanity_shall_be_possible_to_register_multiple_times
+	name = "OBSERVATION: Sanity - Shall be possible to register multiple times"
+
+/datum/unit_test/observation/sanity_shall_be_possible_to_register_multiple_times/conduct_test()
+	var/turf/T = get_safe_turf()
+	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
+	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
+
+	var/initial_event_source_count = event_source.event_source_count
+	var/initial_event_listen_count = listener.event_listen_count
+	events_repository.register(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	events_repository.register(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	var/event_source_count_diff = event_source.event_source_count - initial_event_source_count
+	var/event_listener_count_diff = listener.event_listen_count - initial_event_listen_count
+
+	if (event_source_count_diff != 1 || event_listener_count_diff != 1)
+		fail("Incorrect count. Expected a source diff count of 1, was [event_source_count_diff]. Expected a listener diff count of 1, was [event_listener_count_diff]")
+	else
+		pass("Count was correct.")
+
+	qdel(event_source)
+	qdel(listener)
+	return 1
+
+/datum/unit_test/observation/sanity_shall_be_possible_to_unregister_multiple_times
+	name = "OBSERVATION: Sanity - Shall be possible to unregister multiple times"
+
+/datum/unit_test/observation/sanity_shall_be_possible_to_unregister_multiple_times/conduct_test()
+	var/turf/T = get_safe_turf()
+	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
+	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
+
+	var/initial_event_source_count = event_source.event_source_count
+	var/initial_event_listen_count = listener.event_listen_count
+	events_repository.register(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	events_repository.unregister(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	events_repository.unregister(/decl/observ/moved, event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	var/event_source_count_diff = event_source.event_source_count - initial_event_source_count
+	var/event_listener_count_diff = listener.event_listen_count - initial_event_listen_count
+
+	if (event_source_count_diff != 0 || event_listener_count_diff != 0)
+		fail("Incorrect count. Expected a source diff count of 0, was [event_source_count_diff]. Expected a listener diff count of 0, was [event_listener_count_diff]")
+	else
+		pass("Count was correct.")
+
+	qdel(event_source)
+	qdel(listener)
+	return 1
+
+/datum/unit_test/observation/sanity_deleting_one_of_multiple_sources_shall_result_in_correct_count
+	name = "OBSERVATION: Sanity - Deleting one of multiple sources shall result in correct count"
+
+/datum/unit_test/observation/sanity_deleting_one_of_multiple_sources_shall_result_in_correct_count/conduct_test()
+	var/turf/T = get_safe_turf()
+	var/mob/event_source_A = get_named_instance(/mob, T, "Event Source A")
+	var/mob/event_source_B = get_named_instance(/mob, T, "Event Source B")
+	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
+
+	var/initial_event_listen_count = listener.event_listen_count
+	events_repository.register(/decl/observ/moved, event_source_A, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	events_repository.register(/decl/observ/moved, event_source_B, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	qdel(event_source_A)
+	var/event_listener_count_diff = listener.event_listen_count - initial_event_listen_count
+
+	if (event_listener_count_diff != 1)
+		fail("Incorrect count. Listener had a listen diff count of [event_listener_count_diff], expected 1.")
+	else
+		pass("Count was correct.")
+
+	qdel(event_source_B)
+	qdel(listener)
+	return 1
+
+
+/datum/unit_test/observation/sanity_deleting_one_of_multiple_listeners_shall_result_in_correct_count
+	name = "OBSERVATION: Sanity - Deleting one of multiple listeners shall result in correct count"
+
+/datum/unit_test/observation/sanity_deleting_one_of_multiple_listeners_shall_result_in_correct_count/conduct_test()
+	var/turf/T = get_safe_turf()
+	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
+	var/mob/listener_A = get_named_instance(/mob, T, "Event Listener A")
+	var/mob/listener_B = get_named_instance(/mob, T, "Event Listener B")
+
+	var/initial_event_source_count = event_source.event_source_count
+	var/initial_event_listen_count = listener_B.event_listen_count
+	events_repository.register(/decl/observ/moved, event_source, listener_A, TYPE_PROC_REF(/atom/movable, recursive_move))
+	events_repository.register(/decl/observ/moved, event_source, listener_B, TYPE_PROC_REF(/atom/movable, recursive_move))
+	qdel(listener_A)
+	var/event_source_count_diff = event_source.event_source_count - initial_event_source_count
+	var/event_listener_count_diff = listener_B.event_listen_count - initial_event_listen_count
+
+	if (event_source_count_diff != 1 || listener_B.event_listen_count != 1)
+		fail("Incorrect count. Event Source had a listen diff count of [event_source_count_diff], expected 1. Listener had a listen diff count of [event_listener_count_diff], expected 1.")
+	else
+		pass("Count was correct.")
+
+	qdel(event_source)
+	qdel(listener_B)
 	return 1
