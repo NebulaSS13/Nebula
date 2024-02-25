@@ -585,8 +585,6 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 	base_turf = /turf/unsimulated/dark_filler
 	transition_turf_type = null
 
-//#TODO: This seems like it could be generalized in a much better way?
-// Used specifically by /turf/simulated/floor/asteroid, and some away sites to generate mining turfs
 /datum/level_data/mining_level
 	level_flags = (ZLEVEL_PLAYER|ZLEVEL_SEALED)
 	var/list/mining_turfs
@@ -596,22 +594,11 @@ INITIALIZE_IMMEDIATE(/obj/abstract/level_data_spawner)
 	return ..()
 
 /datum/level_data/mining_level/asteroid
-	base_turf = /turf/simulated/floor/asteroid
+	base_turf = /turf/exterior/barren
 	level_generators = list(
 		/datum/random_map/automata/cave_system,
 		/datum/random_map/noise/ore
 	)
-
-/datum/level_data/mining_level/after_generate_level()
-	..()
-	refresh_mining_turfs()
-
-/datum/level_data/mining_level/proc/refresh_mining_turfs()
-	set waitfor = FALSE
-	for(var/turf/simulated/floor/asteroid/mining_turf as anything in mining_turfs)
-		mining_turf.updateMineralOverlays()
-		CHECK_TICK
-	mining_turfs = null
 
 /datum/level_data/proc/get_subtemplate_areas(template_category, blacklist, whitelist)
 	return list(base_area)

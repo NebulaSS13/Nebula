@@ -414,12 +414,7 @@ var/global/list/natural_walls = list()
 		ramp_slope_direction = null
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
-	var/turf/new_turf = ChangeTurf(floor_type || get_base_turf_by_area(src))
-	if(istype(new_turf, /turf/simulated/floor/asteroid))
-		var/turf/simulated/floor/asteroid/debris = .
-		debris.overlay_detail = "asteroid[rand(0,9)]"
-		debris.updateMineralOverlays(1)
-	return new_turf
+	return ChangeTurf(floor_type || get_base_turf_by_area(src))
 
 /turf/exterior/wall/proc/get_default_material()
 	. = /decl/material/solid/stone/sandstone

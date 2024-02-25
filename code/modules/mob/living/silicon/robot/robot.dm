@@ -829,45 +829,18 @@
 /mob/living/silicon/robot/proc/radio_menu()
 	silicon_radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code
 
-
 /mob/living/silicon/robot/Move(a, b, flag)
-
 	. = ..()
-
-	if(module)
-		if(module.type == /obj/item/robot_module/janitor)
-			var/turf/tile = loc
-			if(isturf(tile))
-				tile.clean()
-				if (istype(tile, /turf/simulated))
-					var/turf/simulated/S = tile
-					S.dirt = 0
-				for(var/A in tile)
-					if(istype(A, /obj/effect))
-						if(istype(A, /obj/effect/rune) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay))
-							qdel(A)
-					else if(istype(A, /obj/item))
-						var/obj/item/cleaned_item = A
-						cleaned_item.clean()
-					else if(ishuman(A))
-						var/mob/living/carbon/human/cleaned_human = A
-						if(cleaned_human.lying)
-							var/obj/item/head = cleaned_human.get_equipped_item(slot_head_str)
-							if(head)
-								head.clean()
-							var/obj/item/suit = cleaned_human.get_equipped_item(slot_wear_suit_str)
-							if(suit)
-								suit.clean()
-							else
-								var/obj/item/uniform = cleaned_human.get_equipped_item(slot_w_uniform_str)
-								if(uniform)
-									uniform.clean()
-							var/obj/item/shoes = cleaned_human.get_equipped_item(slot_shoes_str)
-							if(shoes)
-								shoes.clean()
-							cleaned_human.clean()
-							to_chat(cleaned_human, SPAN_WARNING("\The [src] cleans your face!"))
-		return
+	if(.)
+		if(module && isturf(loc))
+			var/obj/item/storage/ore/orebag = locate() in list(module_state_1, module_state_2, module_state_3)
+			if(orebag)
+				loc.attackby(orebag, src)
+			if(istype(module, /obj/item/robot_module/janitor))
+				loc.clean()
+		if(client)
+			var/turf/above = GetAbove(src)
+			up_hint.icon_state = "uphint[!!(above && TURF_IS_MIMICKING(above))]"
 
 /mob/living/silicon/robot/proc/self_destruct()
 	gib()
