@@ -356,5 +356,5 @@
 
 /obj/item/clothing/suit/space/rig/zero
 	breach_threshold = 18
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_TAIL
 	icon = 'icons/clothing/rigs/chests/chest_null.dmi'

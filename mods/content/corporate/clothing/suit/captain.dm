@@ -8,7 +8,7 @@
 	permeability_coefficient = 0.02
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	min_pressure_protection = 0
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_TAIL
 	allowed = list(/obj/item/tank/emergency, /obj/item/flashlight,/obj/item/gun/energy, /obj/item/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/baton,/obj/item/handcuffs)
 	armor = list(
 		ARMOR_MELEE = ARMOR_MELEE_MAJOR,
