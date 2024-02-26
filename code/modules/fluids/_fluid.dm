@@ -1,16 +1,18 @@
 /atom/movable/fluid_overlay
-	name                = ""
-	icon                = 'icons/effects/liquids.dmi'
-	icon_state          = ""
-	anchored            = TRUE
-	simulated           = FALSE
-	opacity             = FALSE
-	mouse_opacity       = MOUSE_OPACITY_UNCLICKABLE
-	layer               = FLY_LAYER
-	alpha               = 0
-	color               = COLOR_LIQUID_WATER
-	is_spawnable_type   = FALSE
+	name              = ""
+	icon              = 'icons/effects/liquids.dmi'
+	icon_state        = ""
+	anchored          = TRUE
+	simulated         = FALSE
+	opacity           = FALSE
+	mouse_opacity     = MOUSE_OPACITY_UNCLICKABLE
+	layer             = FLY_LAYER
+	alpha             = 0
+	color             = COLOR_LIQUID_WATER
+	is_spawnable_type = FALSE
+	appearance_flags  = KEEP_TOGETHER
 	var/last_update_depth
+	var/updating_edge_mask
 
 /atom/movable/fluid_overlay/on_update_icon()
 
@@ -54,14 +56,69 @@
 			set_overlays("deep_still")
 		else
 			set_overlays("ocean")
-		compile_overlays()
+	else
+		cut_overlays()
+	compile_overlays()
 
 	// Update alpha masks.
-	if((last_update_depth > FLUID_PUDDLE && last_update_depth <= FLUID_SHALLOW) != (reagent_volume > FLUID_PUDDLE && reagent_volume <= FLUID_SHALLOW) && length(loc?.contents))
-		for(var/atom/movable/AM in loc.contents)
-			if(AM.simulated)
-				AM.update_turf_alpha_mask()
+	if((last_update_depth > FLUID_PUDDLE) != (reagent_volume > FLUID_PUDDLE))
+		// This includes ourselves.
+		for(var/turf/neighbor as anything in RANGE_TURFS(loc, 1))
+			if(neighbor.fluid_overlay && !neighbor.fluid_overlay.updating_edge_mask)
+				neighbor.fluid_overlay.update_alpha_mask()
+		// Update everything on our atom too.
+		if(length(loc?.contents) && (last_update_depth > FLUID_PUDDLE && last_update_depth <= FLUID_SHALLOW) != (reagent_volume <= FLUID_SHALLOW))
+			for(var/atom/movable/AM in loc.contents)
+				if(AM.simulated)
+					AM.update_turf_alpha_mask()
 	last_update_depth = reagent_volume
+
+var/global/list/_fluid_edge_mask_cache = list()
+/atom/movable/fluid_overlay/proc/update_alpha_mask()
+
+	set waitfor = FALSE
+	// Delay to avoid multiple updates.
+	if(updating_edge_mask)
+		return
+	updating_edge_mask = TRUE
+	sleep(-1)
+	updating_edge_mask = FALSE
+
+	if(loc?.reagents?.total_volume <= FLUID_PUDDLE)
+		remove_filter("fluid_edge_mask")
+		return
+
+	// Collect neighbor info.
+	var/list/ignored
+	var/list/connections
+	for(var/checkdir in global.alldirs)
+		var/turf/neighbor = get_step(loc, checkdir)
+		if(!neighbor || neighbor.density || neighbor?.reagents?.total_volume > FLUID_PUDDLE)
+			LAZYADD(connections, checkdir)
+		else
+			LAZYADD(ignored, checkdir)
+
+	if(!LAZYLEN(connections))
+		remove_filter("fluid_edge_mask")
+		return
+
+	// Generate and apply an alpha filter for our edges.
+	// Need to use icons here due to overlays being hell with directional states.
+
+	var/cache_key = "[length(connections) ? jointext(connections, "-") : 0]|[length(ignored) ? jointext(ignored, "-") : 0]"
+	var/icon/edge_mask = global._fluid_edge_mask_cache[cache_key]
+	if(isnull(edge_mask))
+		connections = dirs_to_corner_states(connections)
+		edge_mask = icon(icon, "blank")
+		for(var/i = 1 to 4)
+			if(length(connections) >= i)
+				edge_mask.Blend(icon(icon, "edgemask[connections[i]]", dir = BITFLAG(i-1)), ICON_OVERLAY)
+		global._fluid_edge_mask_cache[cache_key] = edge_mask || FALSE
+
+	if(edge_mask)
+		add_filter("fluid_edge_mask", 1, list(type = "alpha", icon = edge_mask, flags = MASK_INVERSE))
+	else
+		remove_filter("fluid_edge_mask")
 
 /atom/movable/fluid_overlay/Destroy()
 	var/atom/oldloc = loc

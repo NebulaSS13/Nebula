@@ -4,6 +4,7 @@
 #define FLUID_SHALLOW 200            // Depth shallow icon is used
 #define FLUID_OVER_MOB_HEAD 300      // Depth icon layers over mobs.
 #define FLUID_DEEP 800               // Depth deep icon is used
+#define FLUID_VERY_DEEP FLUID_DEEP*2 // Solid fill icon is used
 #define FLUID_MAX_DEPTH FLUID_DEEP*4 // Arbitrary max value for flooding.
 #define FLUID_PUSH_THRESHOLD 20      // Amount of flow needed to push items.
 /turf

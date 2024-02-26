@@ -11,8 +11,6 @@ var/global/list/_alpha_masks = list()
 /atom/movable/alpha_mask
 	name = ""
 	simulated = FALSE
-	default_pixel_x = -16
-	default_pixel_y = -16
 	var/atom/movable/owner
 
 // Set our appearance state to avoid showing up in right-click.
