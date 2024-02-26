@@ -15,10 +15,10 @@
 	id_title = "Actor"
 
 /decl/hierarchy/outfit/actor
-	name =    "Special Role - Actor"
-	uniform = /obj/item/clothing/under/chameleon
-	shoes =   /obj/item/clothing/shoes/chameleon
-	l_ear =   /obj/item/radio/headset/entertainment
+	name    = "Special Role - Actor"
+	pants   = /obj/item/clothing/jumpsuit/chameleon
+	shoes   = /obj/item/clothing/shoes/chameleon
+	l_ear   = /obj/item/radio/headset/entertainment
 	id_type = /obj/item/card/id/syndicate
 
 /decl/special_role/actor/greet(var/datum/mind/player)

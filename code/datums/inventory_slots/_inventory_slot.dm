@@ -69,13 +69,17 @@
 	update_mob_equipment_overlay(user, prop, redraw_mob)
 	return TRUE
 
+/datum/inventory_slot/proc/use_alt_layer()
+	return !!(_holding?.use_alt_layer)
+
 /datum/inventory_slot/proc/update_mob_equipment_overlay(var/mob/living/user, var/obj/item/prop, var/redraw_mob = TRUE)
 	if(!mob_overlay_layer || !slot_id)
 		return
 	if(alt_mob_overlay_layer)
 		if(_holding)
-			user.set_current_mob_overlay((_holding.use_alt_layer ? alt_mob_overlay_layer : mob_overlay_layer), _holding.get_mob_overlay(user, slot_id, use_fallback_if_icon_missing = use_overlay_fallback_slot), FALSE)
-			user.set_current_mob_overlay((_holding.use_alt_layer ? mob_overlay_layer : alt_mob_overlay_layer), null, redraw_mob)
+			var/use_alt_layer = use_alt_layer(user)
+			user.set_current_mob_overlay((use_alt_layer ? alt_mob_overlay_layer : mob_overlay_layer), _holding.get_mob_overlay(user, slot_id, use_fallback_if_icon_missing = use_overlay_fallback_slot), FALSE)
+			user.set_current_mob_overlay((use_alt_layer ? mob_overlay_layer : alt_mob_overlay_layer), null, redraw_mob)
 		else
 			user.set_current_mob_overlay(mob_overlay_layer, null, FALSE)
 			user.set_current_mob_overlay(alt_mob_overlay_layer, null, redraw_mob)

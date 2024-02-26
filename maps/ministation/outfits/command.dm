@@ -1,11 +1,11 @@
 /decl/hierarchy/outfit/job/ministation/captain
-	name = "Ministation - Job - Captain"
-	head = /obj/item/clothing/head/caphat
-	glasses = /obj/item/clothing/glasses/sunglasses
-	uniform = /obj/item/clothing/under/captain
-	l_ear = /obj/item/radio/headset/heads/captain
-	shoes = /obj/item/clothing/shoes/color/brown
-	id_type = /obj/item/card/id/gold
+	name     = "Ministation - Job - Captain"
+	head     = /obj/item/clothing/head/caphat
+	glasses  = /obj/item/clothing/glasses/sunglasses
+	pants    = /obj/item/clothing/jumpsuit/captain
+	l_ear    = /obj/item/radio/headset/heads/captain
+	shoes    = /obj/item/clothing/shoes/color/brown
+	id_type  = /obj/item/card/id/gold
 	pda_type = /obj/item/modular_computer/pda/heads/captain
 
 /decl/hierarchy/outfit/job/ministation/captain/Initialize()
@@ -28,12 +28,10 @@
 				qdel(medal)
 
 /decl/hierarchy/outfit/job/ministation/hop
-	name = "Ministation - Job - Lieutenant"
-	uniform = /obj/item/clothing/under/head_of_personnel
-	l_ear = /obj/item/radio/headset/heads/hop
-	shoes = /obj/item/clothing/shoes/color/brown
-	r_pocket = /obj/item/gun/energy/taser
-	hands = list(/obj/item/clothing/suit/armor/bulletproof)
-	id_type = /obj/item/card/id/silver
-	pda_type = /obj/item/modular_computer/pda/heads/hop
+	name              = "Ministation - Job - Lieutenant"
+	pants             = /obj/item/clothing/jumpsuit/head_of_personnel
+	l_ear             = /obj/item/radio/headset/heads/hop
+	shoes             = /obj/item/clothing/shoes/color/brown
+	id_type           = /obj/item/card/id/silver
+	pda_type          = /obj/item/modular_computer/pda/heads/hop
 	backpack_contents = list(/obj/item/storage/box/ids = 1)

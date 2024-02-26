@@ -1,21 +1,12 @@
 /decl/hierarchy/outfit/job/tradeship/captain
 	name = "Tradeship - Job - Tradehouse Captain"
-	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
+	pants = /obj/item/clothing/pants/baggy/casual/classicjeans
+	uniform = /obj/item/clothing/accessory/toggleable/hawaii/random
 	shoes = /obj/item/clothing/shoes/color/black
 	pda_type = /obj/item/modular_computer/pda/heads/captain
 	r_pocket = /obj/item/radio
 	id_type = /obj/item/card/id/gold
 	l_ear = /obj/item/radio/headset/heads/captain
-
-/decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/carbon/human/H)
-	..()
-	var/obj/item/clothing/uniform = H.get_equipped_item(slot_w_uniform_str)
-	if(uniform)
-		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
-		if(uniform.can_attach_accessory(eyegore))
-			uniform.attach_accessory(null, eyegore)
-		else
-			qdel(eyegore)
 
 /decl/hierarchy/outfit/job/tradeship/mate
 	name = "Tradeship - Job - Tradehouse First Mate"

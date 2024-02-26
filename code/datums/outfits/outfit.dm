@@ -24,6 +24,7 @@ var/global/list/outfits_decls_by_type_
 	abstract_type = /decl/hierarchy/outfit
 	expected_type = /decl/hierarchy/outfit
 
+	var/pants = null
 	var/uniform = null
 	var/suit = null
 	var/back = null
@@ -62,12 +63,11 @@ var/global/list/outfits_decls_by_type_
 		outfits_decls_by_type_[type] = src
 		dd_insertObjectList(outfits_decls_, src)
 
-// This proc is structured slightly strangely because I will be adding pants to it.
 /decl/hierarchy/outfit/validate()
 	. = ..()
-	if(uniform && (outfit_flags & OUTFIT_HAS_VITALS_SENSOR))
-		if(!ispath(uniform, /obj/item/clothing))
-			. += "outfit is flagged for sensors, but uniform cannot take accessories"
+	if((uniform || pants) && (outfit_flags & OUTFIT_HAS_VITALS_SENSOR))
+		if(!ispath(uniform, /obj/item/clothing) && !ispath(pants, /obj/item/clothing))
+			. += "outfit is flagged for sensors, but uniform and pants cannot take accessories"
 		var/succeeded = FALSE
 		var/obj/item/sensor = new /obj/item/clothing/accessory/vitals_sensor
 		if(uniform)
@@ -75,8 +75,13 @@ var/global/list/outfits_decls_by_type_
 			if(wear_uniform.can_attach_accessory(sensor))
 				succeeded = TRUE
 			qdel(wear_uniform)
+		if(!succeeded && pants)
+			var/obj/item/clothing/wear_pants = new pants
+			if(wear_pants.can_attach_accessory(sensor))
+				succeeded = TRUE
+			qdel(wear_pants)
 		if(!succeeded)
-			. += "outfit is flagged for sensors, but uniform does not accept sensors"
+			. += "outfit is flagged for sensors, but uniform and pants do not accept sensors"
 		qdel(sensor)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
@@ -117,6 +122,9 @@ var/global/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H, var/equip_adjustments)
 	set waitfor = FALSE
 	pre_equip(H)
+
+	if(pants)
+		H.equip_to_slot_or_del(new pants(H), slot_lower_body_str)
 
 	//Start with uniform,suit,backpack for additional slots
 	if(uniform)

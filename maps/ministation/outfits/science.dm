@@ -1,9 +1,10 @@
 /decl/hierarchy/outfit/job/ministation/scientist
-	l_ear = /obj/item/radio/headset/headset_sci
-	shoes = /obj/item/clothing/shoes/color/white
+	name     = "Ministation - Job - Scientist"
+	l_ear    = /obj/item/radio/headset/headset_sci
+	shoes    = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/science
 	name = "Ministation - Job - Researcher"
-	uniform = /obj/item/clothing/under/color/white
+	uniform = /obj/item/clothing/jumpsuit/white
 	id_type = /obj/item/card/id/ministation/scientist
 
 /obj/item/card/id/ministation/scientist

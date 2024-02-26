@@ -1,5 +1,5 @@
 /datum/fabricator_recipe/textiles
-	path = /obj/item/clothing/under/color/grey
+	path = /obj/item/clothing/jumpsuit/grey
 	category = "Textiles"
 	fabricator_types = list(FABRICATOR_CLASS_TEXTILE)
 

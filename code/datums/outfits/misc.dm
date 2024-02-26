@@ -3,19 +3,20 @@
 	shoes = /obj/item/clothing/shoes/color/black
 	head = /obj/item/clothing/head/helmet/space
 	suit = /obj/item/clothing/suit/space
-	uniform = /obj/item/clothing/under/color/grey
+	pants = /obj/item/clothing/jumpsuit/grey
 	back = /obj/item/tank/jetpack/oxygen
 	mask = /obj/item/clothing/mask/breath
 	outfit_flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/soviet_soldier
-	name = "Soviet soldier"
+	name    = "Soviet soldier"
 	uniform = /obj/item/clothing/under/soviet
-	shoes = /obj/item/clothing/shoes/jackboots/swat/combat
-	head = /obj/item/clothing/head/ushanka
-	gloves = /obj/item/clothing/gloves/thick/combat
-	back = /obj/item/storage/backpack/satchel
-	belt = /obj/item/gun/projectile/revolver
+	pants   = /obj/item/clothing/pants/soviet
+	shoes   = /obj/item/clothing/shoes/jackboots/swat/combat
+	head    = /obj/item/clothing/head/ushanka
+	gloves  = /obj/item/clothing/gloves/thick/combat
+	back    = /obj/item/storage/backpack/satchel
+	belt    = /obj/item/gun/projectile/revolver
 
 /decl/hierarchy/outfit/soviet_soldier/admiral
 	name = "Soviet admiral"

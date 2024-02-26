@@ -21,11 +21,29 @@
 	var/volume_multiplier = 1
 	var/markings_icon	// simple colored overlay that would be applied to the icon
 	var/markings_color	// for things like colored parts of labcoats or shoes
+	var/displays_id = TRUE
+	var/rolled_sleeves = FALSE
 
 /obj/item/clothing/Initialize()
 	. = ..()
 	if(markings_icon && markings_color)
 		update_icon()
+	if((slot_w_uniform_str in get_associated_equipment_slots()) && check_state_in_icon("[BODYTYPE_HUMANOID]-[slot_w_uniform_str]-sleeves", icon))
+		verbs |= /obj/item/clothing/proc/roll_up_sleeves
+
+/obj/item/clothing/proc/roll_up_sleeves()
+
+	set name = "Roll Up Sleeves"
+	set category = "IC"
+	set src in usr
+
+	if(!rolled_sleeves && check_state_in_icon("[icon_state]-sleeves", icon))
+		to_chat(usr, SPAN_WARNING("You cannot roll up the sleeves of \the [src]."))
+		verbs -= /obj/item/clothing/proc/roll_up_sleeves
+	else
+		rolled_sleeves = !rolled_sleeves
+		to_chat(usr, SPAN_NOTICE("You roll [rolled_sleeves ? "up" : "down"] the sleeves of \the [src]."))
+		update_clothing_icon()
 
 /obj/item/clothing/can_contaminate()
 	return TRUE
@@ -88,6 +106,9 @@
 					overlay.overlays += bloodsies
 			if(markings_icon && markings_color)
 				overlay.overlays += mutable_appearance(overlay.icon, markings_icon, markings_color)
+
+		if(slot == slot_w_uniform_str && rolled_sleeves && check_state_in_icon("[overlay.icon_state]-sleeves", overlay.icon))
+			overlay.icon_state = "[overlay.icon_state]-sleeves"
 
 	. = ..()
 
@@ -257,6 +278,9 @@
 	var/obj/item/clothing/accessory/vitals_sensor/sensor = locate() in accessories
 	if(sensor)
 		sensor.user_set_sensors(user)
+
+/obj/item/clothing/proc/get_accessory_overlay_state_modifier(obj/item/clothing/accessory/accessory, slot)
+	return (slot == slot_w_uniform_str && rolled_sleeves) ? "sleeves" : null
 
 /obj/item/clothing/handle_loadout_equip_replacement(obj/item/old_item)
 	. = ..()

@@ -1,14 +1,14 @@
 // items not part of the colour changing system
 
-/obj/item/clothing/under/psyche
+/obj/item/clothing/jumpsuit/psyche
 	name = "psychedelic jumpsuit"
 	desc = "Groovy!"
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psychadelic.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_psychadelic.dmi'
 
-/obj/item/clothing/under/color/orange
+/obj/item/clothing/jumpsuit/orange
 	name = "orange jumpsuit"
 	desc = "It's standardised prisoner-wear. Its suit sensor controls are permanently set to the \"Fully On\" position."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_prisoner.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_prisoner.dmi'
 
 /obj/item/clothing/under/color/orange/Initialize()
 	. = ..()
@@ -17,56 +17,51 @@
 	sensor.set_sensor_mode(VITALS_SENSOR_TRACKING)
 	attach_accessory(null, sensor)
 
-/obj/item/clothing/under/color/blackjumpshorts
+/obj/item/clothing/jumpsuit/blackjumpshorts
 	name = "black jumpsuit shorts"
 	desc = "The latest in space fashion, in a ladies' cut with shorts."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit_shorts.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit_shorts.dmi'
 
-/obj/item/clothing/under/color
-	name = "jumpsuit"
-	desc = "The latest in space fashion."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
-
-/obj/item/clothing/under/color/white
+/obj/item/clothing/jumpsuit/white
 	name = "white jumpsuit"
 	color = "#ffffff"
 
-/obj/item/clothing/under/color/black
+/obj/item/clothing/jumpsuit/black
 	name = "black jumpsuit"
 	color = "#3d3d3d"
 
-/obj/item/clothing/under/color/grey
+/obj/item/clothing/jumpsuit/grey
 	name = "grey jumpsuit"
 	color = "#c4c4c4"
 
-/obj/item/clothing/under/color/blue
+/obj/item/clothing/jumpsuit/blue
 	name = "blue jumpsuit"
 	color = "#0066ff"
 
-/obj/item/clothing/under/color/lightblue
+/obj/item/clothing/jumpsuit/lightblue
 	name = "light blue jumpsuit"
 	color = COLOR_LIGHT_CYAN
 
-/obj/item/clothing/under/color/pink
+/obj/item/clothing/jumpsuit/pink
 	name = "pink jumpsuit"
 	color = "#df20a6"
 
-/obj/item/clothing/under/color/red
+/obj/item/clothing/jumpsuit/red
 	name = "red jumpsuit"
 	color = "#ee1511"
 
-/obj/item/clothing/under/color/green
+/obj/item/clothing/jumpsuit/green
 	name = "green jumpsuit"
 	color = "#42a345"
 
-/obj/item/clothing/under/color/yellow
+/obj/item/clothing/jumpsuit/yellow
 	name = "yellow jumpsuit"
 	color = "#ffee00"
 
-/obj/item/clothing/under/color/lightpurple
+/obj/item/clothing/jumpsuit/lightpurple
 	name = "light purple jumpsuit"
 	color = "#c600fc"
 
-/obj/item/clothing/under/color/brown
+/obj/item/clothing/jumpsuit/brown
 	name = "brown jumpsuit"
 	color = "#c08720"

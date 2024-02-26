@@ -65,7 +65,7 @@
 		/obj/item/clothing/suit/storage/toggle/brown_jacket,
 		/obj/item/clothing/suit/storage/leather_jacket,
 		/obj/item/clothing/suit/apron,
-		/obj/item/clothing/under/color/grey,
+		/obj/item/clothing/jumpsuit/grey,
 		/obj/item/clothing/under/syndicate/tacticool,
 		/obj/item/clothing/pants/casual/camo,
 		/obj/item/clothing/under/harness,

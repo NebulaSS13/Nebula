@@ -11,21 +11,20 @@
 	if(prob(50))
 		equip_to_appropriate_slot(new /obj/item/clothing/under/waiter/monke(src))
 	else
-		var/obj/item/clothing/C = new /obj/item/clothing/pants/casual/mustangjeans/monke(src)
-		C.attach_accessory(null, new /obj/item/clothing/accessory/toggleable/hawaii/random(src))
-		equip_to_appropriate_slot(C)
+		equip_to_appropriate_slot(new /obj/item/clothing/pants/casual/mustangjeans/monke(src))
+		equip_to_appropriate_slot(new /obj/item/clothing/accessory/toggleable/hawaii/random(src))
 		if(prob(10))
 			equip_to_appropriate_slot(new /obj/item/clothing/head/collectable/petehat(src))
 
 /decl/hierarchy/outfit/blank_subject
-	name = "Test Subject"
-	uniform = /obj/item/clothing/under/color/white/blank
+	name  = "Test Subject"
+	pants = /obj/item/clothing/jumpsuit/white/blank
 	shoes = /obj/item/clothing/shoes/color/white
-	head = /obj/item/clothing/head/helmet/facecover
-	mask = /obj/item/clothing/mask/muzzle
-	suit = /obj/item/clothing/suit/straight_jacket
+	head  = /obj/item/clothing/head/helmet/facecover
+	mask  = /obj/item/clothing/mask/muzzle
+	suit  = /obj/item/clothing/suit/straight_jacket
 
-/obj/item/clothing/under/color/white/blank/Initialize()
+/obj/item/clothing/jumpsuit/white/blank/Initialize()
 	. = ..()
 	var/obj/item/clothing/accessory/vitals_sensor/sensor = new(src)
 	sensor.set_sensors_locked(TRUE)

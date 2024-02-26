@@ -91,12 +91,12 @@
 	player.name = H.name
 
 /decl/hierarchy/outfit/ninja
-	name =    "Special Role - Ninja"
-	l_ear =   /obj/item/radio/headset
-	uniform = /obj/item/clothing/under/color/black
-	belt =    /obj/item/flashlight
-	hands =   list(/obj/item/modular_computer/pda/ninja)
+	name    = "Special Role - Ninja"
+	l_ear   = /obj/item/radio/headset
+	pants   = /obj/item/clothing/jumpsuit/black
+	belt    = /obj/item/flashlight
 	id_type = /obj/item/card/id/syndicate
+	hands   = list(/obj/item/modular_computer/pda/ninja)
 
 /decl/special_role/ninja/equip_role(var/mob/living/carbon/human/player)
 	. = ..()

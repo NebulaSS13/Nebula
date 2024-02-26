@@ -2220,7 +2220,7 @@
 /area/unishi/smresearch)
 "gg" = (
 /obj/item/remains,
-/obj/item/clothing/under/chief_engineer,
+/obj/item/clothing/jumpsuit/chief_engineer,
 /obj/random/shoes,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
 	name = "\improper labcoat"
@@ -2502,6 +2502,7 @@
 /obj/item/remains,
 /obj/random/shoes,
 /obj/item/clothing/under/pj/blue,
+/obj/item/clothing/pants/pj/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gN" = (

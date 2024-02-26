@@ -5,9 +5,12 @@
 
 /obj/structure/closet/secure_closet/hydroponics/WillContain()
 	return list(
-		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/apron, /obj/item/clothing/suit/apron/overalls)),
+		new /datum/atom_creator/weighted(list(
+			/obj/item/clothing/suit/apron,
+			/obj/item/clothing/jumpsuit/overalls/blue
+		)),
 		/obj/item/storage/plants,
-		/obj/item/clothing/under/hydroponics,
+		/obj/item/clothing/jumpsuit/hydroponics,
 		/obj/item/scanner/plant,
 		/obj/item/radio/headset/headset_service,
 		/obj/item/clothing/mask/bandana/botany,

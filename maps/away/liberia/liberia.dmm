@@ -4233,8 +4233,8 @@
 "hG" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/color/black,
-/obj/item/clothing/under/overalls,
-/obj/item/clothing/under/skirt,
+/obj/item/clothing/jumpsuit/overalls,
+/obj/item/clothing/under/blackskirt,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
@@ -6596,8 +6596,8 @@
 /obj/structure/closet/cabinet,
 /obj/item/clothing/shoes/jackboots,
 /obj/item/clothing/shoes/jackboots,
-/obj/item/clothing/under/engineer,
-/obj/item/clothing/under/security,
+/obj/item/clothing/jumpsuit/engineer,
+/obj/item/clothing/jumpsuit/security,
 /obj/machinery/light/small{
 	dir = 4
 	},

@@ -56,7 +56,7 @@
 
 /obj/structure/closet/jcloset/WillContain()
 	return list(
-		/obj/item/clothing/under/janitor,
+		/obj/item/clothing/jumpsuit/janitor,
 		/obj/item/radio/headset/headset_service,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/head/soft/purple,
@@ -84,9 +84,9 @@
 		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
-		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/suit/storage/toggle/suit/blue,
-		/obj/item/clothing/under/lawyer/purpsuit,
+		/obj/item/clothing/under/lawyer/blue,
 		/obj/item/clothing/suit/storage/toggle/suit/purple,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/color/black

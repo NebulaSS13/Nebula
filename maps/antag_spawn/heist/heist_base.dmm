@@ -667,8 +667,8 @@
 	},
 /obj/effect/floor_decal/carpet,
 /obj/item/clothing/under/lawyer,
-/obj/item/clothing/under/lawyer/bluesuit,
-/obj/item/clothing/under/mailman,
+/obj/item/clothing/under/lawyer/blue,
+/obj/item/clothing/jumpsuit/mailman,
 /obj/item/clothing/accessory/storage,
 /obj/item/clothing/under/dispatch,
 /turf/unsimulated/floor{
@@ -1755,7 +1755,7 @@
 "eA" = (
 /obj/structure/closet/crate,
 /obj/item/clothing/suit/armor/pirate,
-/obj/item/clothing/under/medical/scrubs/black,
+/obj/item/clothing/jumpsuit/medical/scrubs/black,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "eB" = (

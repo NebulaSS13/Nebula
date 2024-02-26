@@ -128,43 +128,43 @@
 
 /obj/random/suit/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/suit/storage/hazardvest =          4,
-		/obj/item/clothing/suit/storage/toggle/labcoat =      4,
-		/obj/item/clothing/suit/space/emergency =             1,
-		/obj/item/clothing/suit/armor/vest =                  4,
-		/obj/item/clothing/suit/armor/pcarrier/tactical =     1,
-		/obj/item/clothing/suit/armor/vest/heavy =            3,
-		/obj/item/clothing/suit/storage/toggle/bomber =       3,
-		/obj/item/clothing/suit/chef/classic =                3,
-		/obj/item/clothing/suit/surgicalapron =               2,
-		/obj/item/clothing/suit/apron/overalls =              3,
-		/obj/item/clothing/suit/bio_suit/general =            1,
+		/obj/item/clothing/suit/storage/hazardvest          = 4,
+		/obj/item/clothing/suit/storage/toggle/labcoat      = 4,
+		/obj/item/clothing/suit/space/emergency             = 1,
+		/obj/item/clothing/suit/armor/vest                  = 4,
+		/obj/item/clothing/suit/armor/pcarrier/tactical     = 1,
+		/obj/item/clothing/suit/armor/vest/heavy            = 3,
+		/obj/item/clothing/suit/storage/toggle/bomber       = 3,
+		/obj/item/clothing/suit/chef/classic                = 3,
+		/obj/item/clothing/suit/surgicalapron               = 2,
+		/obj/item/clothing/jumpsuit/overalls/blue           = 3,
+		/obj/item/clothing/suit/bio_suit/general            = 1,
 		/obj/item/clothing/suit/storage/toggle/hoodie/black = 3,
 		/obj/item/clothing/suit/storage/toggle/brown_jacket = 3,
-		/obj/item/clothing/suit/storage/leather_jacket =      3,
-		/obj/item/clothing/suit/apron =                       4
+		/obj/item/clothing/suit/storage/leather_jacket      = 3,
+		/obj/item/clothing/suit/apron                       = 4
 	)
 	return spawnable_choices
 
 /obj/random/clothing
 	name = "random clothes"
 	desc = "This is a random piece of clothing."
-	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
+	icon = 'icons/clothing/jumpsuits/jumpsuit.dmi'
 	icon_state = ICON_STATE_WORLD
 
 /obj/random/clothing/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/clothing/under/syndicate/tacticool = 2,
-		/obj/item/clothing/under/syndicate/combat =    1,
-		/obj/item/clothing/under/hazard =              4,
-		/obj/item/clothing/under/sterile =             4,
-		/obj/item/clothing/pants/casual/camo =         2,
-		/obj/item/clothing/under/frontier =            2,
-		/obj/item/clothing/under/harness =             2,
-		/obj/item/clothing/under/medical/paramedic =   2,
-		/obj/item/clothing/under/overalls =            2,
-		/obj/item/clothing/head/earmuffs =             2,
-		/obj/item/clothing/under/tactical =            1
+		/obj/item/clothing/under/syndicate/tacticool  = 2,
+		/obj/item/clothing/under/syndicate/combat     = 1,
+		/obj/item/clothing/jumpsuit/hazard            = 4,
+		/obj/item/clothing/jumpsuit/sterile           = 4,
+		/obj/item/clothing/pants/casual/camo          = 2,
+		/obj/item/clothing/jumpsuit/overalls             = 2,
+		/obj/item/clothing/jumpsuit/overalls/laborer     = 2,
+		/obj/item/clothing/under/harness              = 2,
+		/obj/item/clothing/jumpsuit/medical/paramedic = 2,
+		/obj/item/clothing/head/earmuffs              = 2,
+		/obj/item/clothing/under/tactical             = 1
 	)
 	return spawnable_choices
 

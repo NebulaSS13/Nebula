@@ -14,13 +14,13 @@
 	default_outfit = /decl/hierarchy/outfit/paramount
 
 /decl/hierarchy/outfit/paramount
-	name =    "Special Role - Paramount Grandmaster"
-	head =    /obj/item/clothing/head/helmet/space/psi_amp
-	uniform = /obj/item/clothing/under/psysuit
-	suit =    /obj/item/clothing/suit/wizrobe/psypurple
-	shoes =   /obj/item/clothing/shoes/jackboots
-	back =    /obj/item/storage/backpack/satchel
-	gloves =  /obj/item/clothing/gloves/color/grey
+	name    = "Special Role - Paramount Grandmaster"
+	head    = /obj/item/clothing/head/helmet/space/psi_amp
+	pants   = /obj/item/clothing/jumpsuit/psysuit
+	suit    = /obj/item/clothing/suit/wizrobe/psypurple
+	shoes   = /obj/item/clothing/shoes/jackboots
+	back    = /obj/item/storage/backpack/satchel
+	gloves  = /obj/item/clothing/gloves/color/grey
 	id_type = /obj/item/card/id/syndicate
 
 /decl/special_role/paramount/equip_role(var/mob/living/carbon/human/player)

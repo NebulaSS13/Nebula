@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/wizard
-	uniform = /obj/item/clothing/under/color/lightpurple
+	pants = /obj/item/clothing/jumpsuit/lightpurple
 	shoes = /obj/item/clothing/shoes/sandal
 	l_ear = /obj/item/radio/headset
 	r_pocket = /obj/item/teleportation_scroll

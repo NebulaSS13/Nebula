@@ -11,18 +11,18 @@
 	BACKPACK_OVERRIDE_SECURITY
 
 /decl/hierarchy/outfit/job/security/hos
-	name = "Job - Head of security"
-	l_ear = /obj/item/radio/headset/heads/hos
-	uniform = /obj/item/clothing/under/head_of_security
-	id_type = /obj/item/card/id/security/head
-	pda_type = /obj/item/modular_computer/pda/heads
+	name              = "Job - Head of security"
+	l_ear             = /obj/item/radio/headset/heads/hos
+	pants             = /obj/item/clothing/jumpsuit/head_of_security
+	id_type           = /obj/item/card/id/security/head
+	pda_type          = /obj/item/modular_computer/pda/heads
 	backpack_contents = list(/obj/item/handcuffs = 1)
 
 /decl/hierarchy/outfit/job/security/warden
-	name = "Job - Warden"
-	uniform = /obj/item/clothing/under/warden
+	name     = "Job - Warden"
+	pants    = /obj/item/clothing/jumpsuit/warden
 	l_pocket = /obj/item/flash
-	id_type = /obj/item/card/id/security
+	id_type  = /obj/item/card/id/security
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/security/detective
@@ -47,9 +47,9 @@
 	suit = /obj/item/clothing/suit/storage/forensics/blue
 
 /decl/hierarchy/outfit/job/security/officer
-	name = "Job - Security Officer"
-	uniform = /obj/item/clothing/under/security
+	name     = "Job - Security Officer"
+	pants    = /obj/item/clothing/jumpsuit/security
 	l_pocket = /obj/item/flash
 	r_pocket = /obj/item/handcuffs
-	id_type = /obj/item/card/id/security
+	id_type  = /obj/item/card/id/security
 	pda_type = /obj/item/modular_computer/pda

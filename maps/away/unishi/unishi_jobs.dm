@@ -32,10 +32,10 @@
 	belt = /obj/item/storage/belt/utility/full
 
 /decl/hierarchy/outfit/job/unishi/researcher
-	name = "CTI Research Vessel - Job - Researcher"
-	uniform = /obj/item/clothing/under/engineer
-	suit = /obj/item/clothing/suit/storage/toggle/hoodie
-	shoes = /obj/item/clothing/shoes/color/black
+	name     = "CTI Research Vessel - Job - Researcher"
+	pants    = /obj/item/clothing/jumpsuit/engineer
+	suit     = /obj/item/clothing/suit/storage/toggle/hoodie
+	shoes    = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
 	l_pocket = /obj/item/crowbar
 

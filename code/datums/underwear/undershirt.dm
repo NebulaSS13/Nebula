@@ -128,11 +128,6 @@
 	icon_state = "undershirt_long_female"
 	has_color = TRUE
 
-/datum/category_item/underwear/undershirt/turtleneck
-	name = "Turtleneck Sweater"
-	icon_state = "turtleneck"
-	has_color = TRUE
-
 /datum/category_item/underwear/undershirt/tanktop_alt_female
 	name = "Tanktop alt, Female"
 	underwear_name = "tanktop"

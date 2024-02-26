@@ -16,18 +16,19 @@
 	id_pda_assignment = "Tunnel Clown!"
 
 /decl/hierarchy/outfit/masked_killer
-	name = "Masked killer"
-	uniform = /obj/item/clothing/under/overalls
-	shoes = /obj/item/clothing/shoes/color/white
-	gloves = /obj/item/clothing/gloves/latex
-	mask = /obj/item/clothing/mask/surgical
-	head = /obj/item/clothing/head/welding
-	l_ear = /obj/item/radio/headset
-	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
-	suit = /obj/item/clothing/suit/apron
+	name     = "Masked killer"
+	uniform  = /obj/item/clothing/accessory/toggleable/flannel
+	pants    = /obj/item/clothing/jumpsuit/overalls/laborer
+	shoes    = /obj/item/clothing/shoes/color/white
+	gloves   = /obj/item/clothing/gloves/latex
+	mask     = /obj/item/clothing/mask/surgical
+	head     = /obj/item/clothing/head/welding
+	l_ear    = /obj/item/radio/headset
+	glasses  = /obj/item/clothing/glasses/thermal/plain/monocle
+	suit     = /obj/item/clothing/suit/apron
 	l_pocket = /obj/item/knife/combat
 	r_pocket = /obj/item/scalpel
-	hands = list(/obj/item/twohanded/fireaxe)
+	hands    = list(/obj/item/twohanded/fireaxe)
 
 /decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/carbon/human/H)
 	..()

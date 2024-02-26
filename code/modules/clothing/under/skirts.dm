@@ -1,44 +1,49 @@
-/obj/item/clothing/under/skirt
-	name = "black skirt"
-	desc = "A black skirt, very fancy!"
-	icon = 'icons/clothing/under/skirts/skirt_black.dmi'
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
-	rolled_sleeves = -1
-
-/obj/item/clothing/under/skirt/plaid_blue
-	name = "blue plaid skirt"
-	desc = "A preppy blue skirt with a white blouse."
-	icon = 'icons/clothing/under/dresses/dress_plaid_blue.dmi'
-
-/obj/item/clothing/under/skirt/plaid_red
-	name = "red plaid skirt"
-	desc = "A preppy red skirt with a white blouse."
-	icon = 'icons/clothing/under/dresses/dress_plaid_red.dmi'
-
-/obj/item/clothing/under/skirt/plaid_purple
-	name = "blue purple skirt"
-	desc = "A preppy purple skirt with a white blouse."
-	icon = 'icons/clothing/under/dresses/dress_plaid_purple.dmi'
-
-/obj/item/clothing/under/skirt/khaki
-	name = "khaki skirt"
-	desc = "A khaki skirt with a flare at the hem."
-	icon = 'icons/clothing/under/skirts/skirt_khaki.dmi'
+/obj/item/clothing/pants/skirt
+	name = "red skirt"
+	desc = "A red skirt, very fancy!"
+	icon = 'icons/clothing/pants/skirts/skirt_black.dmi'
 	body_parts_covered = SLOT_LOWER_BODY
 
-/obj/item/clothing/under/skirt/swept
+/obj/item/clothing/pants/skirt/plaid_blue
+	name = "blue plaid skirt"
+	desc = "A preppy blue skirt."
+	icon = 'icons/clothing/pants/skirts/skirt_plaid_blue.dmi'
+
+/obj/item/clothing/pants/skirt/plaid_red
+	name = "red plaid skirt"
+	desc = "A preppy red skirt."
+	icon = 'icons/clothing/pants/skirts/skirt_plaid_red.dmi'
+
+/obj/item/clothing/pants/skirt/plaid_purple
+	name = "purple plaid skirt"
+	desc = "A preppy purple skirt."
+	icon = 'icons/clothing/pants/skirts/skirt_plaid_purple.dmi'
+
+/obj/item/clothing/pants/skirt/khaki
+	name = "khaki skirt"
+	desc = "A khaki skirt with a flare at the hem."
+	icon = 'icons/clothing/pants/skirts/skirt_khaki.dmi'
+	body_parts_covered = SLOT_LOWER_BODY
+
+/obj/item/clothing/pants/skirt/swept
 	name = "swept skirt"
 	desc = "A skirt that is swept to one side."
-	icon = 'icons/clothing/under/skirts/skirt_swept.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_swept.dmi'
 	body_parts_covered = SLOT_LOWER_BODY
 
 /obj/item/clothing/under/skirt_c
 	name = "short skirt"
 	desc = "A short skirt, made of some semi-gloss material."
-	icon = 'icons/clothing/under/skirts/skirt_short.dmi'
+	icon = 'icons/clothing/pants/skirts/skirt_short.dmi'
 	body_parts_covered = SLOT_LOWER_BODY
 
 // dresses
+/obj/item/clothing/under/blouse
+	name = "white blouse"
+	desc = "A preppy white blouse."
+	icon = 'icons/clothing/under/blouse.dmi'
+	body_parts_covered = SLOT_UPPER_BODY
+
 /obj/item/clothing/under/skirt_c/dress
 	name = "short dress"
 	desc = "A short plain sleeveless dress."

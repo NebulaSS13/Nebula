@@ -3,13 +3,13 @@
 	abstract_type = /decl/hierarchy/outfit/job/cargo
 
 /decl/hierarchy/outfit/job/cargo/qm
-	name = "Job - Cargo"
-	uniform = /obj/item/clothing/under/cargo
-	shoes = /obj/item/clothing/shoes/color/brown
-	glasses = /obj/item/clothing/glasses/sunglasses
-	hands = list(/obj/item/clipboard)
-	id_type = /obj/item/card/id/cargo/head
+	name     = "Job - Cargo"
+	pants    = /obj/item/clothing/jumpsuit/cargo
+	shoes    = /obj/item/clothing/shoes/color/brown
+	glasses  = /obj/item/clothing/glasses/sunglasses
+	id_type  = /obj/item/card/id/cargo/head
 	pda_type = /obj/item/modular_computer/pda/cargo
+	hands    = list(/obj/item/clipboard)
 
 /obj/item/card/id/cargo/head
 	name = "identification card"
@@ -17,18 +17,18 @@
 	extra_details = list("goldstripe")
 
 /decl/hierarchy/outfit/job/cargo/cargo_tech
-	name = "Job - Cargo technician"
-	uniform = /obj/item/clothing/under/cargotech
-	id_type = /obj/item/card/id/cargo
+	name     = "Job - Cargo technician"
+	pants    = /obj/item/clothing/jumpsuit/cargotech
+	id_type  = /obj/item/card/id/cargo
 	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/cargo/mining
-	name = "Job - Shaft miner"
-	uniform = /obj/item/clothing/under/miner
-	id_type = /obj/item/card/id/cargo
-	pda_type = /obj/item/modular_computer/pda/science
+	name              = "Job - Shaft miner"
+	pants             = /obj/item/clothing/jumpsuit/miner
+	id_type           = /obj/item/card/id/cargo
+	pda_type          = /obj/item/modular_computer/pda/science
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/storage/ore = 1)
-	outfit_flags = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
+	outfit_flags      = OUTFIT_HAS_BACKPACK | OUTFIT_EXTENDED_SURVIVAL | OUTFIT_HAS_VITALS_SENSOR
 
 /decl/hierarchy/outfit/job/cargo/mining/Initialize()
 	. = ..()

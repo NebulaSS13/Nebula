@@ -111,7 +111,7 @@
 /obj/structure/closet/bombcloset/WillContain()
 	return list(
 		/obj/item/clothing/suit/bomb_suit,
-		/obj/item/clothing/under/color/black,
+		/obj/item/clothing/jumpsuit/black,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/head/bomb_hood)
 
@@ -124,7 +124,7 @@
 /obj/structure/closet/bombclosetsecurity/WillContain()
 	return list(
 		/obj/item/clothing/suit/bomb_suit/security,
-		/obj/item/clothing/under/security,
+		/obj/item/clothing/jumpsuit/security,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/head/bomb_hood/security)
 
