@@ -36,7 +36,7 @@
 /turf/exterior/wildgrass,
 /area/template_noop)
 "j" = (
-/turf/exterior/water,
+/turf/exterior/sand/water,
 /area/template_noop)
 "k" = (
 /obj/structure/flora/grass/both,
@@ -45,7 +45,7 @@
 /area/template_noop)
 "l" = (
 /obj/structure/flora/bush/reedbush,
-/turf/exterior/water,
+/turf/exterior/sand/water,
 /area/template_noop)
 "m" = (
 /obj/structure/flora/grass/both,

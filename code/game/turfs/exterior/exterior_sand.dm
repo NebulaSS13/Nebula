@@ -13,6 +13,15 @@
 		melt()
 	return ..()
 
+/turf/exterior/sand/water
+	color = COLOR_SKY_BLUE
+	reagent_type = /decl/material/liquid/water
+	height = -(FLUID_SHALLOW)
+
+/turf/exterior/sand/water/deep
+	color = COLOR_BLUE
+	height = -(FLUID_DEEP)
+
 /turf/exterior/sand/get_diggable_resources()
 	return dug ? null : list(/obj/item/stack/material/ore/sand = list(3, 2))
 

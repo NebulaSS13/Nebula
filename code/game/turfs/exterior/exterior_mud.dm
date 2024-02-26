@@ -18,6 +18,15 @@
 	icon_edge_layer = EXT_EDGE_MUD
 	footstep_type = /decl/footsteps/mud
 
+/turf/exterior/mud/water
+	color = COLOR_SKY_BLUE
+	reagent_type = /decl/material/liquid/water
+	height = -(FLUID_SHALLOW)
+
+/turf/exterior/mud/water/deep
+	color = COLOR_BLUE
+	height = -(FLUID_DEEP)
+
 /turf/exterior/mud/flooded
 	flooded = /decl/material/liquid/water
 

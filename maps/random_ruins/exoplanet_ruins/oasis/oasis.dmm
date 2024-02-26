@@ -19,11 +19,11 @@
 /turf/exterior/wildgrass,
 /area/template_noop)
 "g" = (
-/turf/exterior/water,
+/turf/exterior/sand/water,
 /area/template_noop)
 "h" = (
 /obj/structure/flora/bush/reedbush,
-/turf/exterior/water,
+/turf/exterior/sand/water,
 /area/template_noop)
 "i" = (
 /obj/structure/flora/bush,

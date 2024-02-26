@@ -134,7 +134,7 @@
 /datum/random_map/noise/exoplanet/grass
 	descriptor       = "grass exoplanet"
 	land_type        = /turf/exterior/wildgrass
-	water_type       = /turf/exterior/water
+	water_type       = /turf/exterior/mud/water
 	coast_type       = /turf/exterior/mud
 	water_level_min  = 3
 	flora_prob       = 10
