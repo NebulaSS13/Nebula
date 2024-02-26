@@ -469,4 +469,3 @@
 
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
-

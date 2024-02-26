@@ -232,10 +232,10 @@
 
 /obj/item/grab/on_update_icon()
 	. = ..()
-	if(current_grab.icon)
-		icon = current_grab.icon
-	if(current_grab.icon_state)
-		icon_state = current_grab.icon_state
+	if(current_grab.grab_icon)
+		icon = current_grab.grab_icon
+	if(current_grab.grab_icon_state)
+		icon_state = current_grab.grab_icon_state
 
 /obj/item/grab/proc/throw_held()
 	return current_grab.throw_held(src)

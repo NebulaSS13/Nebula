@@ -1454,3 +1454,51 @@ default behaviour is:
 	update_equipment_overlay(slot_shoes_str)
 
 	return TRUE
+
+/mob/living/proc/can_direct_mount(var/mob/user)
+	if(can_buckle && istype(user) && !user.incapacitated() && user == buckled_mob)
+		// TODO: Piloting skillcheck for hands-free moving? Stupid but amusing
+		for(var/obj/item/grab/reins in user.get_held_items())
+			if(istype(reins.current_grab, /decl/grab/simple/control) && reins.get_affecting_mob() == src)
+				return TRUE
+	return FALSE
+
+/mob/living/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
+	if(can_direct_mount(mob))
+		if(HAS_STATUS(mob, STAT_CONFUSE))
+			direction = turn(direction, pick(90, -90))
+		SelfMove(direction)
+	return MOVEMENT_HANDLED
+
+/mob/living/show_buckle_message(var/mob/buckled, var/mob/buckling)
+	if(buckled == buckling)
+		visible_message(SPAN_NOTICE("\The [buckled] climbs onto \the [src]."))
+	else
+		visible_message(SPAN_NOTICE("\The [buckled] is lifted onto \the [src] by \the [buckling]."))
+
+/mob/living/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
+	if(buckled == buckling)
+		visible_message(SPAN_NOTICE("\The [buckled] steps down from \the [src]."))
+	else
+		visible_message(SPAN_NOTICE("\The [buckled] is pulled off \the [src] by \the [buckling]."))
+
+/mob/living/buckle_mob(mob/living/M)
+	. = ..()
+	if(buckled_mob)
+		buckled_mob.reset_layer()
+		for(var/obj/item/grab/G in buckled_mob.get_held_items())
+			if(G.get_affecting_mob() == src && !istype(G.current_grab, /decl/grab/simple/control))
+				qdel(G)
+
+/mob/living/can_buckle_mob(var/mob/living/dropping)
+	. = ..() && stat == CONSCIOUS && !buckled && dropping.mob_size <= mob_size
+
+/mob/living/refresh_buckled_mob()
+	..()
+	if(buckled_mob)
+		if(dir == SOUTH)
+			buckled_mob.layer = layer - 0.01
+		else
+			buckled_mob.layer = layer + 0.01
+		buckled_mob.plane = plane
+

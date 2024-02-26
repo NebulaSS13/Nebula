@@ -73,6 +73,9 @@
 	sleep(4)
 	reset_offsets()
 
+	if(buckled_mob)
+		buckled_mob.do_attack_animation(A, weapon)
+
 /mob/proc/clear_shown_overlays(var/list/show_to, var/image/I)
 	for(var/client/C in show_to)
 		C.images -= I

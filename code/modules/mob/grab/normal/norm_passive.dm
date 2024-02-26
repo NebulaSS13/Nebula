@@ -1,13 +1,13 @@
 /decl/grab/normal/passive
-	name = "passive hold"
-	upgrab = /decl/grab/normal/struggle
-	shift = 8
-	stop_move = 0
-	reverse_facing = 0
-	shield_assailant = 0
-	point_blank_mult = 1.1
-	same_tile = 0
-	icon_state = "reinforce"
+	name               = "passive hold"
+	upgrab             = /decl/grab/normal/struggle
+	shift              = 8
+	stop_move          = 0
+	reverse_facing     = 0
+	shield_assailant   = 0
+	point_blank_mult   = 1.1
+	same_tile          = 0
+	grab_icon_state    = "reinforce"
 	break_chance_table = list(15, 60, 100)
 
 /decl/grab/normal/passive/on_hit_disarm(var/obj/item/grab/G, var/atom/A, var/proximity)

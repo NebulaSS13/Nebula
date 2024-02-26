@@ -2456,6 +2456,7 @@
 #include "code\modules\mob\grab\normal\norm_neck.dm"
 #include "code\modules\mob\grab\normal\norm_passive.dm"
 #include "code\modules\mob\grab\normal\norm_struggle.dm"
+#include "code\modules\mob\grab\simple\simple_control.dm"
 #include "code\modules\mob\grab\simple\simple_passive.dm"
 #include "code\modules\mob\language\animal.dm"
 #include "code\modules\mob\language\generic.dm"
