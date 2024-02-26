@@ -101,7 +101,7 @@
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor           = "chlorine exoplanet"
 	land_type            = /turf/exterior/chlorine_sand
-	water_type           = /turf/exterior/water/chlorine
+	water_type           = /turf/exterior/chlorine_sand/marsh
 	water_level_min      = 2
 	water_level_max      = 3
 	fauna_prob           = 2

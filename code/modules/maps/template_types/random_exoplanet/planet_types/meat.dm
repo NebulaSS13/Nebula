@@ -111,7 +111,7 @@
 	water_level_max      = 3
 	water_level_min      = 2
 	land_type            = /turf/exterior/meat
-	water_type           = /turf/exterior/water/stomach
+	water_type           = /turf/exterior/meat/acid
 
 ////////////////////////////////////////////////////////////////////////////
 // Areas
@@ -138,12 +138,9 @@
 /turf/exterior/meat/get_diggable_resources()
 	return dug ? null : list(/obj/item/stack/material/ore/meat = list(3, 2))
 
-/turf/exterior/water/stomach
+/turf/exterior/meat/acid
 	name         = "juices"
 	desc         = "Half-digested chunks of vines are floating in the puddle of some liquid."
 	gender       = PLURAL
-	icon         = 'icons/turf/exterior/water_still.dmi'
 	reagent_type = /decl/material/liquid/acid/stomach
-	color        = "#c7c27c"
-	base_color   = "#c7c27c"
-	dirt_color   = "#c40031"
+	height       = -(FLUID_SHALLOW)
