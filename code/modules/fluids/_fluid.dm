@@ -21,7 +21,7 @@
 
 	// Update layer.
 	var/new_layer
-	if(reagent_volume > FLUID_OVER_MOB_HEAD)
+	if(reagent_volume > FLUID_DEEP)
 		new_layer = DEEP_FLUID_LAYER
 	else
 		new_layer = SHALLOW_FLUID_LAYER

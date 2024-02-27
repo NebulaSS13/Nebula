@@ -85,5 +85,8 @@ var/global/list/_alpha_masks = list()
 		if(moving_mob.can_overcome_gravity())
 			return null
 	var/fluid_depth = get_fluid_depth()
-	if(fluid_depth <= FLUID_SHALLOW && fluid_depth > FLUID_PUDDLE)
-		return "mask_basic"
+	if(fluid_depth > FLUID_PUDDLE)
+		if(fluid_depth <= FLUID_SHALLOW)
+			return "mask_shallow"
+		if(fluid_depth <= FLUID_DEEP)
+			return "mask_deep"
