@@ -113,7 +113,7 @@
 
 	if(flooded)
 		set_flooded(flooded, TRUE, skip_vis_contents_update = TRUE, mapload = mapload)
-	refresh_vis_contents()
+	update_vis_contents()
 
 	return INITIALIZE_HINT_NORMAL
 
@@ -161,7 +161,7 @@
 		connections.erase_all()
 
 	if(weather)
-		remove_vis_contents(src, weather.vis_contents_additions)
+		remove_vis_contents(weather.vis_contents_additions)
 		weather = null
 
 	QDEL_NULL(fluid_overlay)
@@ -429,14 +429,14 @@
 	if(istype(new_weather) && is_outside())
 		if(weather != new_weather)
 			if(weather)
-				remove_vis_contents(src, weather.vis_contents_additions)
+				remove_vis_contents(weather.vis_contents_additions)
 			weather = new_weather
-			add_vis_contents(src, weather.vis_contents_additions)
+			add_vis_contents(weather.vis_contents_additions)
 			. = TRUE
 
 	// We are indoors or there is no local weather system, clear our vis contents.
 	else if(weather)
-		remove_vis_contents(src, weather.vis_contents_additions)
+		remove_vis_contents(weather.vis_contents_additions)
 		weather = null
 		. = TRUE
 
@@ -537,7 +537,7 @@
 	var/datum/gas_mixture/environment = return_air()
 	return environment?.graphic
 
-/turf/proc/get_vis_contents_to_add()
+/turf/get_vis_contents_to_add()
 	var/air_graphic = get_air_graphic()
 	if(length(air_graphic))
 		LAZYADD(., air_graphic)

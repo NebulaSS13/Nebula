@@ -74,7 +74,7 @@ Class Procs:
 	if(T.fire)
 		fire_tiles.Add(T)
 		SSair.active_fire_zones |= src
-	T.refresh_vis_contents()
+	T.update_vis_contents()
 
 /zone/proc/remove(turf/T)
 #ifdef ZASDBG
@@ -88,7 +88,7 @@ Class Procs:
 	contents.Remove(T)
 	fire_tiles.Remove(T)
 	T.zone = null
-	T.refresh_vis_contents()
+	T.update_vis_contents()
 	if(contents.len)
 		air.group_multiplier = contents.len
 	else
@@ -106,7 +106,7 @@ Class Procs:
 		if(!T.zone_membership_candidate)
 			continue
 		into.add(T)
-		T.refresh_vis_contents()
+		T.update_vis_contents()
 		#ifdef ZASDBG
 		T.dbg(zasdbgovl_merged)
 		#endif
@@ -130,7 +130,7 @@ Class Procs:
 	if(invalid) return //Short circuit for explosions where rebuild is called many times over.
 	c_invalidate()
 	for(var/turf/T as anything in contents)
-		T.refresh_vis_contents()
+		T.update_vis_contents()
 		T.needs_air_update = 0 //Reset the marker so that it will be added to the list.
 		SSair.mark_for_update(T)
 		CHECK_TICK
@@ -154,7 +154,7 @@ Class Procs:
 	// Update gas overlays.
 	if(air.check_tile_graphic(graphic_add, graphic_remove))
 		for(var/turf/T as anything in contents)
-			T.refresh_vis_contents()
+			T.update_vis_contents()
 			CHECK_TICK
 		graphic_add.len = 0
 		graphic_remove.len = 0
