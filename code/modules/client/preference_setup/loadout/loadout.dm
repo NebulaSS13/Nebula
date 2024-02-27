@@ -407,16 +407,18 @@ var/global/list/gear_datums = list()
 /datum/gear_data
 	var/path
 	var/location
+	var/material
 
-/datum/gear_data/New(var/path, var/location)
+/datum/gear_data/New(var/path, var/location, var/material)
 	src.path = path
 	src.location = location
+	src.material = material
 
 /decl/loadout_option/proc/spawn_item(user, location, metadata)
 	var/datum/gear_data/gd = new(path, location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_gear_data(islist(metadata) && metadata["[gt]"], gd)
-	var/item = new gd.path(gd.location)
+	var/item = new gd.path(gd.location, gd.material)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_item(user, item, (islist(metadata) && metadata["[gt]"]))
 	. = item
