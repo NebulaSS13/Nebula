@@ -30,3 +30,14 @@
 
 /turf/proc/dig_pit()
 	return can_dig_pit() && new /obj/structure/pit(src)
+
+/turf/proc/can_dig_trench()
+	return FALSE
+
+/turf/proc/try_dig_trench(mob/user, obj/item/tool)
+	if((!user && !tool) || tool.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS, set_cooldown = TRUE))
+		return dig_trench()
+	return null
+
+/turf/proc/dig_trench()
+	return FALSE

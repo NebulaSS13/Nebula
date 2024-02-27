@@ -532,8 +532,8 @@
 
 /datum/seed/mushroom/towercap
 	name = "towercap"
-	seed_name = "towercap"
-	display_name = "towercap thicket"
+	seed_name = "dwarf towercap"
+	display_name = "dwarf towercap thicket"
 	chems = list(/decl/material/solid/organic/wood = list(10,1))
 	mutants = null
 	product_type = /obj/item/stack/material/log/towercap

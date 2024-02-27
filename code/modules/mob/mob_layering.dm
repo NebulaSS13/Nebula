@@ -7,7 +7,11 @@
 	var/last_layer = layer
 	var/new_layer = get_base_layer()
 	if(isturf(loc))
-		if(buckled && buckled.buckle_layer_above)
+
+		var/turf/T = loc
+		if(T.pixel_z < 0)
+			new_layer = T.layer + 0.25
+		else if(buckled && buckled.buckle_layer_above)
 			new_layer = buckled.layer + ((buckled.dir == SOUTH) ? -0.1 : 0.1)
 		else if(length(grabbed_by))
 			var/draw_under = TRUE
@@ -83,6 +87,11 @@
 		for(var/obj/structure/struct in loc)
 			structure_offset = max(structure_offset, struct.mob_offset)
 		new_pixel_z += structure_offset
+
+		// Update offsets from loc.
+		var/turf/exterior/ext = loc
+		if(istype(ext) && ext.height < 0)
+			new_pixel_z += ext.pixel_z
 
 		// Update offsets from our buckled atom.
 		if(buckled && buckled.buckle_pixel_shift)

@@ -33,6 +33,27 @@
 		regenerate_ao()
 #endif
 
+	if(isturf(old_loc) && has_gravity() && A.can_fall() && !(weakref(A) in skip_height_fall_for))
+		var/turf/old_turf  = old_loc
+		var/old_height     = old_turf.get_physical_height() + old_turf.reagents?.total_volume
+		var/current_height = get_physical_height() + reagents?.total_volume
+		var/height_difference = abs(current_height - old_height)
+
+		if(current_height < old_height && height_difference > FLUID_SHALLOW)
+			visible_message("\The [A] falls into \the [reagents?.get_primary_reagent_name() || "hole"]!")
+			if(isliving(A))
+				var/mob/living/mover = A
+				var/decl/bodytype/body = mover.get_bodytype()
+				if(body)
+					playsound(src, body.bodyfall_sounds, 50, 1, 1)
+				SET_STATUS_MAX(mover, STAT_WEAK, rand(3,4))
+				// TODO: generalized fall damage calc
+				// TODO: take into account falling into fluid from a height/surface tension
+				mover.take_overall_damage(min(1, round(height_difference * 0.05)))
+
+	// Handle non-listener proximity triggers.
+	handle_proximity_update(A)
+
 	//Items that are in ZAS contaminants, but not on a mob, can still be contaminated.
 	if(isitem(A))
 		var/obj/item/I = A
@@ -46,8 +67,18 @@
 					I.contaminate()
 					break
 
-	// Handle non-listener proximity triggers.
-	handle_proximity_update(A)
+	if(isturf(old_loc) && ismob(A))
+		var/turf/T = old_loc
+		if(T.get_physical_height() != get_physical_height())
+			// Delay to allow transition to the new turf and avoid layering issues.
+			var/mob/M = A
+			M.reset_offsets()
+			if(get_physical_height() > T.get_physical_height())
+				M.reset_layer()
+			else
+				// arbitrary timing value that feels good in practice. it sucks and is inconsistent:(
+				addtimer(CALLBACK(M, TYPE_PROC_REF(/atom, reset_layer)), max(0, CEILING(M.next_move - world.time)) + 1 SECOND)
 
 	if(simulated)
 		A.OnSimulatedTurfEntered(src, old_loc)
+

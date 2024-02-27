@@ -10,5 +10,8 @@
 		for(var/turf/neighbor as anything in RANGE_TURFS(src, 1))
 			neighbor.update_icon()
 		fluid_update()
+		var/atom/movable/fluid_overlay/fluids = locate() in src
+		if(fluids)
+			fluids.update_icon()
 		return TRUE
 	return FALSE
