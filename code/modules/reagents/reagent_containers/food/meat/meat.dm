@@ -62,6 +62,7 @@
 	center_of_mass = @'{"x":16,"y":13}'
 	bitesize = 3
 	material = /decl/material/solid/organic/meat
+	utensil_flags = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
 
 /obj/item/chems/food/plainsteak/populate_reagents()
 	. = ..()

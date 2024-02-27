@@ -1,0 +1,3 @@
+/obj/item/kitchen/utensil/@SUBTYPES : /obj/item/utensil/@SUBTYPES{@OLD}
+/obj/item/knife/table/primitive/@SUBTYPES : /obj/item/knife/primitive/@SUBTYPES{@OLD}
+/obj/item/knife/table/@SUBTYPES : /obj/item/utensil/knife/@SUBTYPES{@OLD}

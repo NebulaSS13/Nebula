@@ -23,8 +23,9 @@
 		)
 
 /obj/proc/handle_consumed(mob/feeder, mob/eater, consumption_method = EATING_METHOD_EAT)
-	transfer_eaten_material(eater, get_food_default_transfer_amount(eater))
-	play_feed_sound(eater, consumption_method)
+	if(eater)
+		transfer_eaten_material(eater, get_food_default_transfer_amount(eater))
+		play_feed_sound(eater, consumption_method)
 	if(!get_edible_material_amount(eater))
 		if(feeder && eater)
 			show_food_consumed_message(feeder, eater)

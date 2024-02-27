@@ -7,6 +7,8 @@
 
 /obj/item/chems/food/sliceable
 	w_class = ITEM_SIZE_NORMAL //whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
+	utensil_flags = UTENSIL_FLAG_COLLECT | UTENSIL_FLAG_SLICE
+
 /**
  *  A food item slice
  *

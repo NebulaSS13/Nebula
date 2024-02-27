@@ -2053,7 +2053,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fT" = (
@@ -2738,7 +2738,7 @@
 "ia" = (
 /obj/structure/table/woodentable,
 /obj/item/plate,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "ib" = (
@@ -3058,7 +3058,7 @@
 "iR" = (
 /obj/structure/table/woodentable,
 /obj/item/plate,
-/obj/item/kitchen/utensil/spoon,
+/obj/item/utensil/spoon,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iS" = (

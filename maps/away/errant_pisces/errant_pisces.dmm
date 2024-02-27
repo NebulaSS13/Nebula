@@ -3114,7 +3114,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ih" = (
-/obj/item/knife/table,
+/obj/item/utensil/knife,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ii" = (
@@ -3237,7 +3237,7 @@
 "iF" = (
 /obj/structure/table,
 /obj/item/plate,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "iG" = (
@@ -3517,7 +3517,7 @@
 /area/errant_pisces/hallway)
 "js" = (
 /obj/structure/table,
-/obj/item/kitchen/utensil/fork/plastic,
+/obj/item/utensil/fork/plastic,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3646,7 +3646,7 @@
 /area/errant_pisces/infirmary)
 "jK" = (
 /obj/structure/table,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
 /obj/machinery/light,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)

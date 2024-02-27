@@ -2206,7 +2206,7 @@
 	},
 /obj/structure/table,
 /obj/item/stack/material/puck/mapped/uranium,
-/obj/item/knife/table/plastic,
+/obj/item/utensil/knife/plastic,
 /obj/item/clothing/accessory/bowtie/ugly,
 /obj/random/action_figure,
 /turf/simulated/floor,

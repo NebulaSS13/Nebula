@@ -1600,7 +1600,7 @@
 /obj/structure/table,
 /obj/item/chems/glass/rag,
 /obj/item/trash/stick,
-/obj/item/kitchen/utensil/spoon,
+/obj/item/utensil/spoon,
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "kS" = (
@@ -4251,8 +4251,8 @@
 /area/ministation/hydro)
 "wO" = (
 /obj/item/chems/condiment/small/peppermill,
-/obj/item/knife/table,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/knife,
+/obj/item/utensil/fork,
 /obj/structure/table/gamblingtable,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/dark,
@@ -4378,7 +4378,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/l2centrals)
 "xo" = (
-/obj/item/kitchen/utensil/spoon,
+/obj/item/utensil/spoon,
 /obj/item/chems/condiment/small/saltshaker,
 /obj/item/chems/condiment/small/sugar,
 /obj/structure/table/gamblingtable,

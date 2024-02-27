@@ -54,6 +54,7 @@
 	filling_color = "#c4dba0"
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
+	utensil_flags = UTENSIL_FLAG_SCOOP
 
 /obj/item/chems/food/slimesoup/populate_reagents()
 	add_to_reagents(/decl/material/liquid/slimejelly, 5)

@@ -23250,8 +23250,8 @@
 /area/exodus/research/mixing)
 "aXz" = (
 /obj/structure/table/woodentable,
-/obj/item/kitchen/utensil/fork,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "aXA" = (
@@ -24959,12 +24959,12 @@
 /area/exodus/hallway/primary/starboard)
 "bbg" = (
 /obj/structure/table/woodentable,
-/obj/item/kitchen/utensil/fork,
-/obj/item/kitchen/utensil/fork,
-/obj/item/kitchen/utensil/fork,
-/obj/item/kitchen/utensil/fork,
-/obj/item/kitchen/utensil/fork,
-/obj/item/kitchen/utensil/fork,
+/obj/item/utensil/fork,
+/obj/item/utensil/fork,
+/obj/item/utensil/fork,
+/obj/item/utensil/fork,
+/obj/item/utensil/fork,
+/obj/item/utensil/fork,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "bbh" = (
