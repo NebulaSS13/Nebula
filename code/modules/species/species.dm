@@ -296,8 +296,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	. = ..()
 
-	if(!base_internal_prosthetics_model && base_external_prosthetics_model)
-		base_internal_prosthetics_model = base_external_prosthetics_model
+	if(!base_internal_prosthetics_model)
+		// internal bodytypes don't care about icons so this is safe, and also necessary for the default map species
+		base_internal_prosthetics_model = base_external_prosthetics_model || /decl/bodytype/prosthetic/basic_human
 
 	// Populate blood type table.
 	for(var/blood_type in blood_types)
