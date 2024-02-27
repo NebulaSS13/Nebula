@@ -94,7 +94,7 @@ var/global/list/gear_datums = list()
 			for(var/gear_name in gears)
 				var/mob/user = preference_mob()
 				var/decl/loadout_option/LO = global.gear_datums[gear_name]
-				if(!LO || !LO.can_be_taken_by(user, pref) || !LO.can_afford(user, pref))
+				if(!LO || !(GET_DECL(LO.category) in global.using_map.loadout_categories) || !LO.can_be_taken_by(user, pref) || !LO.can_afford(user, pref))
 					gears -= gear_name
 				else
 					pref.total_loadout_cost += LO.cost
@@ -134,16 +134,15 @@ var/global/list/gear_datums = list()
 
 	. += "<tr><td colspan=3><center><b>"
 	var/firstcat = 1
-	var/decl/loadout_category/current_category_decl = GET_DECL(current_tab || /decl/loadout_category)
-	var/list/all_loadout_categories = decls_repository.get_decls_of_type(/decl/loadout_category)
-	for(var/category in all_loadout_categories)
+	current_tab = current_tab || global.using_map.loadout_categories[1].type
+	var/decl/loadout_category/current_category_decl = GET_DECL(current_tab)
+	for(var/decl/loadout_category/LC as anything in global.using_map.loadout_categories)
 
 		if(firstcat)
 			firstcat = FALSE
 		else
 			. += " |"
 
-		var/decl/loadout_category/LC = all_loadout_categories[category]
 		var/category_cost = 0
 		for(var/gear in LC.gear)
 			var/decl/loadout_option/G = LC.gear[gear]
@@ -157,9 +156,9 @@ var/global/list/gear_datums = list()
 			if(LC.max_selections < INFINITY)
 				category_selections = " - [LC.max_selections - pref.total_loadout_selections[category]] remaining"
 			if(category_cost)
-				. += " <a href='?src=\ref[src];select_category=[LC.name]'><font color = '#e67300'>[LC.name] - [category_cost][category_selections]</font></a> "
+				. += " <a href='?src=\ref[src];select_category=\ref[LC]'><font color = '#e67300'>[LC.name] - [category_cost][category_selections]</font></a> "
 			else
-				. += " <a href='?src=\ref[src];select_category=[LC.name]'>[LC.name] - 0[category_selections]</a> "
+				. += " <a href='?src=\ref[src];select_category=\ref[LC]'>[LC.name] - 0[category_selections]</a> "
 
 	. += "</b></center></td></tr>"
 
@@ -309,12 +308,11 @@ var/global/list/gear_datums = list()
 		recalculate_loadout_cost()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["select_category"])
-		var/list/all_loadout_categories = decls_repository.get_decls_of_type(/decl/loadout_category)
-		for(var/category in all_loadout_categories)
-			var/decl/loadout_category/LC = all_loadout_categories[category]
-			if(LC.name == href_list["select_category"])
-				current_tab = category
-				break
+		var/decl/loadout_category/LC = locate(href_list["select_category"])
+		if(istype(LC) && (LC in global.using_map.loadout_categories))
+			current_tab = LC.type
+		else
+			current_tab = global.using_map.loadout_categories[1].type
 		return TOPIC_REFRESH
 	if(href_list["clear_loadout"])
 		var/list/gear = pref.gear_list[pref.gear_slot]
@@ -391,10 +389,12 @@ var/global/list/gear_datums = list()
 	. = ..()
 	if(!name)
 		. += "missing display name"
-	else if(isnull(cost) || cost < 0)
+	if(isnull(cost) || cost < 0)
 		. += "invalid cost"
-	else if(!path)
+	if(!path)
 		. += "missing path definition"
+	if(!ispath(category, /decl/loadout_category))
+		. += "null or invalid category: [category || "NULL"]"
 
 /decl/loadout_option/proc/get_gear_tweak_options()
 	. = list()
