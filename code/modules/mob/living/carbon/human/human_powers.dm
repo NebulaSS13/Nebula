@@ -20,10 +20,10 @@
 		to_chat(src, SPAN_WARNING("You can't mess with your hair right now!"))
 		return
 
-	var/hairstyle = get_hairstyle()
+	var/hairstyle = GET_HAIR_STYLE(src)
 	if(hairstyle)
 		var/decl/sprite_accessory/hair/hair_style = GET_DECL(hairstyle)
-		if(!(hair_style.flags & HAIR_TIEABLE))
+		if(!(hair_style.accessory_flags & HAIR_TIEABLE))
 			to_chat(src, SPAN_WARNING("Your hair isn't long enough to tie."))
 			return
 
@@ -32,7 +32,7 @@
 		var/list/hairstyle_instances = list()
 		for(var/hair_type in valid_hairstyles)
 			var/decl/sprite_accessory/hair/test = valid_hairstyles[hair_type]
-			if(test.flags & HAIR_TIEABLE)
+			if(test.accessory_flags & HAIR_TIEABLE)
 				hairstyle_instances += test
 		var/decl/selected_decl = input("Select a new hairstyle", "Your hairstyle", hair_style) as null|anything in hairstyle_instances
 		if(selected_decl)
@@ -41,8 +41,7 @@
 			to_chat(src, SPAN_WARNING("You can't mess with your hair right now!"))
 			return
 		if(selected_type && hairstyle != selected_type)
-			set_hairstyle(selected_type)
-			try_refresh_visible_overlays()
+			SET_HAIR_STYLE(src, selected_type, FALSE)
 			visible_message(SPAN_NOTICE("\The [src] pauses a moment to style their hair."))
 		else
 			to_chat(src, SPAN_NOTICE("You're already using that style."))

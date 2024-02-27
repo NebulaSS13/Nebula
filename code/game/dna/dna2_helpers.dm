@@ -137,44 +137,27 @@
 	unique_enzymes       = dna.unique_enzymes
 	set_skin_colour(       rgb(dna.GetUIValueRange(DNA_UI_SKIN_R,255),  dna.GetUIValueRange(DNA_UI_SKIN_G,255),  dna.GetUIValueRange(DNA_UI_SKIN_B,255)))
 	set_eye_colour(        rgb(dna.GetUIValueRange(DNA_UI_EYES_R,255),  dna.GetUIValueRange(DNA_UI_EYES_G,255),  dna.GetUIValueRange(DNA_UI_EYES_B,255)))
-	set_hair_colour(       rgb(dna.GetUIValueRange(DNA_UI_HAIR_R,255),  dna.GetUIValueRange(DNA_UI_HAIR_G,255),  dna.GetUIValueRange(DNA_UI_HAIR_B,255)))
-	set_facial_hair_colour(rgb(dna.GetUIValueRange(DNA_UI_BEARD_R,255), dna.GetUIValueRange(DNA_UI_BEARD_G,255), dna.GetUIValueRange(DNA_UI_BEARD_B,255)))
 	skin_tone            = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
 
 
 	// TODO: update DNA gender to not be a bool - use bodytype and pronouns
 	//Body markings
-	for(var/tag in dna.body_markings)
+	for(var/tag in dna.heritable_sprite_accessories)
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(src, tag)
 		if(E)
-			var/list/marklist = dna.body_markings[tag]
+			var/list/marklist = dna.heritable_sprite_accessories[tag]
 			if(length(marklist))
-				E.markings = marklist.Copy()
+				for(var/accessory in marklist)
+					E.set_sprite_accessory(accessory, null, marklist[accessory], skip_update = TRUE)
 			else
-				LAZYCLEARLIST(E.markings)
+				E.clear_sprite_accessories(skip_update = TRUE)
 
 	//Base skin and blend
 	for(var/obj/item/organ/organ in get_organs())
 		organ.set_dna(dna)
 
-	//Hair
-	var/update_hair = FALSE
-	var/list/hair_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
-	var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE, length(hair_subtypes))
-	if(hair > 0 && hair <= length(hair_subtypes))
-		set_hairstyle(hair_subtypes[hair], skip_update = TRUE)
-		update_hair = TRUE
-
-	//Facial Hair
-	var/list/beard_subtypes = decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
-	var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE, length(beard_subtypes))
-	if((0 < beard) && (beard <= length(beard_subtypes)))
-		set_facial_hairstyle(beard_subtypes[beard], skip_update = TRUE)
-		update_hair = TRUE
-
 	force_update_limbs()
-	if(update_hair)
-		update_hair(update_icons = FALSE)
+	update_hair(update_icons = FALSE)
 	update_eyes()
 	return TRUE
 

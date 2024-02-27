@@ -36,9 +36,11 @@
 	var/skin_colour                    // skin colour
 	var/skin_blend = ICON_ADD          // How the skin colour is applied.
 	var/hair_colour                    // hair colour
-	var/list/markings                  // Markings (body_markings) to apply to the icon
 	var/render_alpha = 255
 	var/skip_body_icon_draw = FALSE    // Set to true to skip including this organ on the human body sprite.
+
+	/// Sprite accessories like hair and markings to apply to the organ icon and owner.
+	VAR_PRIVATE/list/_sprite_accessories
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often

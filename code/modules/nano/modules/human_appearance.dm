@@ -48,25 +48,25 @@
 
 	if(href_list["hair"])
 		var/decl/sprite_accessory/hair = locate(href_list["hair"])
-		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_valid_hairstyle_types()) && owner.set_hairstyle(hair.type))
+		if(can_change(APPEARANCE_HAIR) && istype(hair) && (hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_HAIR)) && SET_HAIR_STYLE(owner, hair.type, FALSE))
 			update_dna()
 			return TRUE
 
 	if(href_list["hair_color"] && can_change(APPEARANCE_HAIR_COLOR))
-		var/new_hair = input("Please select hair color.", "Hair Color", owner.get_hair_colour()) as color|null
-		if(new_hair && can_still_topic(state) && owner.set_hair_colour(new_hair))
+		var/new_hair = input("Please select hair color.", "Hair Color", GET_HAIR_COLOUR(owner)) as color|null
+		if(new_hair && can_still_topic(state) && SET_HAIR_COLOUR(owner, new_hair, FALSE))
 			update_dna()
 			return TRUE
 
 	if(href_list["facial_hair"])
 		var/decl/sprite_accessory/facial_hair = locate(href_list["facial_hair"])
-		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_valid_facial_hairstyle_types()) && owner.set_facial_hairstyle(facial_hair.type))
+		if(can_change(APPEARANCE_FACIAL_HAIR) && istype(facial_hair) && (facial_hair.type in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_FACIAL_HAIR)) && SET_FACIAL_HAIR_STYLE(owner, facial_hair.type, FALSE))
 			update_dna()
 			return TRUE
 
 	if(href_list["facial_hair_color"] && can_change(APPEARANCE_FACIAL_HAIR_COLOR))
-		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", owner.get_facial_hair_colour()) as color|null
-		if(new_facial && can_still_topic(state) && owner.set_facial_hair_colour(new_facial))
+		var/new_facial = input("Please select facial hair color.", "Facial Hair Color", GET_FACIAL_HAIR_COLOUR(owner)) as color|null
+		if(new_facial && can_still_topic(state) && SET_FACIAL_HAIR_COLOUR(owner, new_facial, FALSE))
 			update_dna()
 			return TRUE
 
@@ -115,22 +115,22 @@
 
 	if(data["change_hair"])
 		var/hair_styles[0]
-		for(var/hair_style in owner.get_valid_hairstyle_types())
+		for(var/hair_style in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_HAIR))
 			var/decl/sprite_accessory/hair_decl = GET_DECL(hair_style)
 			hair_styles[++hair_styles.len] = list("hairstyle" = hair_decl.name, "ref" = "\ref[hair_decl]")
 		data["hair_styles"] = hair_styles
-		var/hairstyle = owner.get_hairstyle()
+		var/hairstyle = GET_HAIR_STYLE(owner)
 		var/decl/sprite_accessory/hair = GET_DECL(hairstyle)
 		data["hair_style"] = hair.name
 
 	data["change_facial_hair"] = can_change(APPEARANCE_FACIAL_HAIR)
 	if(data["change_facial_hair"])
 		var/facial_hair_styles[0]
-		for(var/facial_hair_style in owner.get_valid_facial_hairstyle_types())
+		for(var/facial_hair_style in owner.get_species()?.get_available_accessory_types(owner.get_bodytype(), SAC_FACIAL_HAIR))
 			var/decl/sprite_accessory/facial_hair_decl = GET_DECL(facial_hair_style)
 			facial_hair_styles[++facial_hair_styles.len] = list("facialhairstyle" = facial_hair_decl.name, "ref" = "\ref[facial_hair_decl]")
 		data["facial_hair_styles"] = facial_hair_styles
-		var/facial_hairstyle = owner.get_facial_hairstyle()
+		var/facial_hairstyle = GET_FACIAL_HAIR_STYLE(owner)
 		var/decl/sprite_accessory/facial_hair = GET_DECL(facial_hairstyle)
 		data["facial_hair_style"] = facial_hair.name
 

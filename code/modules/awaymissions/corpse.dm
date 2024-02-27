@@ -41,6 +41,7 @@
 	return INITIALIZE_HINT_QDEL
 
 /obj/abstract/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)
+
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
 		if(species_choice in genders_per_species)
 			M.set_gender(pick(genders_per_species[species_choice]), TRUE)
@@ -59,24 +60,30 @@
 		else
 			M.randomize_skin_color()
 
+	var/decl/species/species_decl = get_species_by_key(species_choice)
+	var/decl/bodytype/root_bodytype = M.get_bodytype()
+	var/update_hair = FALSE
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
 		if(species_choice in hair_colors_per_species)
-			M.set_hair_colour(pick(hair_colors_per_species[species_choice]))
+			SET_HAIR_COLOUR(M, pick(hair_colors_per_species[species_choice]), TRUE)
 		else
-			M.randomize_hair_color()
-		M.set_facial_hair_colour(M.get_hair_colour())
-
+			SET_HAIR_COLOUR(M, get_random_colour(), TRUE)
+		SET_FACIAL_HAIR_COLOUR(M, GET_HAIR_COLOUR(M), TRUE)
+		update_hair = TRUE
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_STYLE))
 		if(species_choice in hair_styles_per_species)
-			M.set_hairstyle(pick(hair_styles_per_species[species_choice]))
+			SET_HAIR_STYLE(M, pick(hair_styles_per_species[species_choice]), TRUE)
 		else
-			M.randomize_hair_style()
-
+			SET_HAIR_STYLE(M, pick(species_decl.get_available_accessory_types(root_bodytype, SAC_HAIR)), TRUE)
+		update_hair = TRUE
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_FACIAL_STYLE))
 		if(species_choice in facial_styles_per_species)
-			M.set_facial_hairstyle(pick(facial_styles_per_species[species_choice]))
+			SET_FACIAL_HAIR_STYLE(M, pick(facial_styles_per_species[species_choice]), TRUE)
 		else
-			M.randomize_facial_hair_style()
+			SET_FACIAL_HAIR_STYLE(M, pick(species_decl.get_available_accessory_types(root_bodytype, SAC_FACIAL_HAIR)), TRUE)
+		update_hair = TRUE
+	if(update_hair)
+		M.update_hair()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_EYE_COLOR))
 		if(species_choice in eye_colors_per_species)

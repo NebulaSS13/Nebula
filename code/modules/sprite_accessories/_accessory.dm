@@ -1,6 +1,6 @@
 /*
 
-	Hello and welcome to sprite_accessories: For sprite accessories, such as hair,
+	Hello and welcome to sprite accessories: For sprite accessories, such as hair,
 	facial hair, and possibly tattoos and stuff somewhere along the line. This file is
 	intended to be friendly for people with little to no actual coding experience.
 	The process of adding in new hairstyles has been made pain-free and easy to do.
@@ -45,10 +45,8 @@
 	var/hidden_by_gear_slot
 	/// Flag to check equipment for when hiding this accessory.
 	var/hidden_by_gear_flag
-	/// Whether or not the accessory can be affected by colouration
-	var/do_colouration = TRUE
 	/// Various flags controlling some checks and behavior.
-	var/flags = 0
+	var/accessory_flags = 0
 	/// Flags to check when applying this accessory to the mob.
 	var/requires_appearance_flags = 0
 	/// Icon cache for various icon generation steps.
@@ -65,6 +63,15 @@
 	var/sprite_overlay_layer
 	/// A list of sprite accessory types that are disallowed by this one being included.
 	var/list/disallows_accessories
+	/// Whether or not this accessory is transferred via DNA (ie. not a scar or tattoo)
+	var/is_heritable = FALSE
+	/// What category does this accessory fall under?
+	var/accessory_category
+	/// Whether or not this accessory should be drawn on the mob at all.
+	var/draw_accessory = TRUE
+
+/decl/sprite_accessory/proc/refresh_mob(var/mob/living/subject)
+	return
 
 /decl/sprite_accessory/proc/accessory_is_available(var/mob/owner, var/decl/species/species, var/decl/bodytype/bodytype)
 	if(species)
@@ -94,6 +101,8 @@
 
 /decl/sprite_accessory/validate()
 	. = ..()
+	if(!ispath(accessory_category, /decl/sprite_accessory_category))
+		. += "invalid sprite accessory category: [accessory_category || "null"]"
 	if(!icon)
 		. += "missing icon"
 	else
@@ -132,7 +141,7 @@
 			return null
 		if(mask_to_bodypart)
 			accessory_icon.Blend(get_limb_mask_for(organ.bodytype, organ.organ_tag), ICON_MULTIPLY)
-		if(do_colouration && color)
+		if(!isnull(color) && !isnull(color_blend))
 			accessory_icon.Blend(color, color_blend)
 		cached_icons[organ.bodytype][organ.organ_tag][color] = accessory_icon
 	return accessory_icon

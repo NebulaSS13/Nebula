@@ -13,12 +13,10 @@
 	encased = "skull"
 	artery_name = "carotid artery"
 	cavity_name = "cranial"
-
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 
 	var/glowing_eyes = FALSE
 	var/can_intake_reagents = TRUE
-	var/has_lips = TRUE
 	var/forehead_graffiti
 	var/graffiti_style
 
@@ -77,7 +75,6 @@
 
 /obj/item/organ/external/head/set_bodytype(decl/bodytype/new_bodytype, override_material = null, apply_to_internal_organs = TRUE)
 	. = ..()
-	has_lips = (bodytype.appearance_flags & HAS_LIPS)
 	can_intake_reagents = !(bodytype.body_flags & BODY_FLAG_NO_EAT)
 
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
@@ -97,29 +94,13 @@
 
 /obj/item/organ/external/head/get_icon_cache_key_components()
 	. = ..()
-	if(bodytype.has_eyes)
-		. += "_eyes[get_eyes_organ()?.eye_colour][bodytype.eye_icon]"
-	if(bodytype.appearance_flags & HAS_LIPS)
-		var/lip_icon = bodytype.get_lip_icon(owner)
-		if(lip_icon)
-			. += "_lips[lip_icon][owner?.lip_color || "skip"]"
+	. += "_eyes_[bodytype.eye_icon || "none"]_[get_eyes_organ()?.eye_colour || "none"]"
 
 /obj/item/organ/external/head/generate_mob_icon()
 	var/icon/ret = ..()
-	// Eye icon.
-	if(bodytype.has_eyes)
-		var/icon/eyes_icon = get_eyes_organ()?.get_onhead_icon()
-		if(eyes_icon)
-			ret.Blend(eyes_icon, ICON_OVERLAY)
-	// Lip icon.
-	if(owner && (bodytype.appearance_flags & HAS_LIPS))
-		var/lip_icon = bodytype.get_lip_icon(owner)
-		if(lip_icon)
-			var/lip_color = owner?.lip_color
-			if(lip_color)
-				var/icon/lip_appearance = new/icon(lip_icon, "lipstick_s")
-				lip_appearance.Blend(lip_color || COLOR_BLACK, ICON_MULTIPLY)
-				ret.Blend(lip_appearance, ICON_OVERLAY)
+	var/icon/eyes_icon = get_eyes_organ()?.get_onhead_icon()
+	if(eyes_icon)
+		ret.Blend(eyes_icon, ICON_OVERLAY)
 	return ret
 
 /obj/item/organ/external/head/get_mob_overlays()
@@ -127,15 +108,3 @@
 	var/image/eye_glow = get_organ_eyes_overlay()
 	if(eye_glow)
 		LAZYADD(., eye_glow)
-	if(!owner)
-		return
-	var/facial_hairstyle = owner.get_facial_hairstyle()
-	if(facial_hairstyle)
-		var/decl/sprite_accessory/facial_hair_style = resolve_accessory_to_decl(facial_hairstyle)
-		if(facial_hair_style?.accessory_is_available(owner, species, bodytype))
-			LAZYADD(., image(facial_hair_style.get_cached_accessory_icon(src, owner.get_facial_hair_colour())))
-	var/hairstyle = owner.get_hairstyle()
-	if(hairstyle)
-		var/decl/sprite_accessory/hair/hair_style = resolve_accessory_to_decl(hairstyle)
-		if(hair_style?.accessory_is_available(owner, species, bodytype))
-			LAZYADD(., image(hair_style.get_cached_accessory_icon(src, owner.get_hair_colour())))

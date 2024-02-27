@@ -385,3 +385,21 @@ var/global/list/dexterity_levels = list(
 // Enum for type of consumption, largely just cosmetic currently.
 #define EATING_METHOD_EAT   0
 #define EATING_METHOD_DRINK 1
+
+#define SAC_HAIR        /decl/sprite_accessory_category/hair
+#define SAC_FACIAL_HAIR /decl/sprite_accessory_category/facial_hair
+#define SAC_COSMETICS   /decl/sprite_accessory_category/cosmetics
+#define SAC_MARKINGS    /decl/sprite_accessory_category/markings
+#define SAC_HORNS       /decl/sprite_accessory_category/horns
+#define SAC_FRILLS      /decl/sprite_accessory_category/frills
+
+// Helpers for setting mob appearance. They are extremely ugly, hence the helpers.
+#define SET_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)          (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
+#define GET_HAIR_STYLE(TARGET)                              (TARGET.get_organ_sprite_accessory_by_category(SAC_HAIR, BP_HEAD))
+#define SET_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE)        (TARGET.set_organ_sprite_accessory_by_category(null, SAC_HAIR, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
+#define GET_HAIR_COLOUR(TARGET)                             (TARGET.get_organ_sprite_accessory(GET_HAIR_STYLE(TARGET), BP_HEAD))
+
+#define SET_FACIAL_HAIR_STYLE(TARGET, STYLE, SKIP_UPDATE)   (TARGET.set_organ_sprite_accessory_by_category((STYLE), SAC_FACIAL_HAIR, null, TRUE, FALSE, BP_HEAD, SKIP_UPDATE))
+#define GET_FACIAL_HAIR_STYLE(TARGET)                       (TARGET.get_organ_sprite_accessory_by_category(SAC_FACIAL_HAIR, BP_HEAD))
+#define SET_FACIAL_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null, SAC_FACIAL_HAIR, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
+#define GET_FACIAL_HAIR_COLOUR(TARGET)                      (TARGET.get_organ_sprite_accessory(GET_FACIAL_HAIR_STYLE(TARGET), BP_HEAD))

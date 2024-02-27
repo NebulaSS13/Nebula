@@ -39,8 +39,8 @@ var/global/list/stored_shock_by_ref = list()
 /decl/species/proc/handle_post_species_pref_set(datum/preferences/pref)
 	pref.skin_colour = default_bodytype.base_color
 	pref.eye_colour = default_bodytype.base_eye_color
-	pref.hair_colour = default_bodytype.base_hair_color
-	pref.facial_hair_colour = default_bodytype.base_hair_color
+//	pref.hair_colour = default_bodytype.base_hair_color
+//	pref.facial_hair_colour = default_bodytype.base_hair_color
 
 /decl/species/proc/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))

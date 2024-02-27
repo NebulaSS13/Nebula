@@ -64,8 +64,13 @@
 
 /decl/loadout_option/lipstick
 	name = "lipstick selection"
-	path = /obj/item/lipstick
-	loadout_flags = GEAR_HAS_TYPE_SELECTION
+	path = /obj/item/cosmetics/lipstick
+	loadout_flags = GEAR_HAS_SUBTYPE_SELECTION
+
+/decl/loadout_option/eyeshadow
+	name = "eyeshadow selection"
+	path = /obj/item/cosmetics/eyeshadow
+	loadout_flags = GEAR_HAS_SUBTYPE_SELECTION
 
 /decl/loadout_option/comb
 	name = "plastic comb"

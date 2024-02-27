@@ -763,12 +763,12 @@ var/global/list/admin_verbs_mod = list(
 	var/update_hair = FALSE
 	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
 	if(new_facial)
-		M.set_facial_hair_colour(new_facial, skip_update = TRUE)
+		SET_FACIAL_HAIR_COLOUR(M, new_facial, TRUE)
 		update_hair = TRUE
 
 	var/new_hair = input("Please select hair color.", "Character Generation") as color
 	if(new_hair)
-		M.set_hair_colour(new_hair, skip_update = TRUE)
+		SET_HAIR_COLOUR(M, new_hair, TRUE)
 		update_hair = TRUE
 
 	var/new_eyes = input("Please select eye color.", "Character Generation") as color
@@ -788,13 +788,13 @@ var/global/list/admin_verbs_mod = list(
 	// hair
 	var/new_hairstyle = input(usr, "Select a hair style", "Grooming") as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/hair)
 	if(new_hairstyle)
-		M.set_hairstyle(new_hairstyle, skip_update = TRUE)
+		SET_HAIR_STYLE(M, new_hairstyle, TRUE)
 		update_hair = TRUE
 
 	// facial hair
 	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in decls_repository.get_decl_paths_of_subtype(/decl/sprite_accessory/facial_hair)
 	if(new_fstyle)
-		M.set_facial_hairstyle(new_fstyle, skip_update = TRUE)
+		SET_FACIAL_HAIR_STYLE(M, new_fstyle, TRUE)
 		update_hair = TRUE
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neuter")

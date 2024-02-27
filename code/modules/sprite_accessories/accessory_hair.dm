@@ -1,47 +1,55 @@
-/*
-////////////////////////////
-/  =--------------------=  /
-/  == Hair Definitions ==  /
-/  =--------------------=  /
-////////////////////////////
-*/
+/decl/sprite_accessory_category/hair
+	name                  = "Hair"
+	base_accessory_type   = /decl/sprite_accessory/hair
+	default_accessory     = /decl/sprite_accessory/hair/bald
+	always_apply_defaults = TRUE
+	uid                   = "acc_cat_hair"
 
 /decl/sprite_accessory/hair
-	abstract_type = /decl/sprite_accessory/hair
-	icon = 'icons/mob/human_races/species/human/hair.dmi'
-	hidden_by_gear_slot = slot_head_str
-	hidden_by_gear_flag = BLOCK_HEAD_HAIR
-	body_parts          = list(BP_HEAD)
+	abstract_type         = /decl/sprite_accessory/hair
+	icon                  = 'icons/mob/human_races/species/human/hair.dmi'
+	hidden_by_gear_slot   = slot_head_str
+	hidden_by_gear_flag   = BLOCK_HEAD_HAIR
+	body_parts            = list(BP_HEAD)
+	sprite_overlay_layer  = FLOAT_LAYER
+	is_heritable          = TRUE
+	accessory_category    = SAC_HAIR
+	accessory_flags       = HAIR_LOSS_VULNERABLE
 
 /decl/sprite_accessory/hair/get_hidden_substitute()
-	if(flags & VERY_SHORT)
+	if(accessory_flags & VERY_SHORT)
 		return src
 	return GET_DECL(/decl/sprite_accessory/hair/short)
 
+/decl/sprite_accessory/hair/refresh_mob(var/mob/living/subject)
+	if(istype(subject))
+		subject.update_hair()
+
 /decl/sprite_accessory/hair/bald
-	name = "Bald"
-	icon_state = "bald"
-	flags = VERY_SHORT | HAIR_BALD
-	bodytypes_allowed = null
-	bodytypes_denied = null
-	species_allowed = null
-	subspecies_allowed = null
+	name                        = "Bald"
+	icon_state                  = "bald"
+	accessory_flags             = VERY_SHORT | HAIR_BALD
+	bodytypes_allowed           = null
+	bodytypes_denied            = null
+	species_allowed             = null
+	subspecies_allowed          = null
 	bodytype_categories_allowed = null
-	bodytype_categories_denied = null
-	body_flags_allowed = null
-	body_flags_denied = null
-	uid = "acc_hair_bald"
+	bodytype_categories_denied  = null
+	body_flags_allowed          = null
+	body_flags_denied           = null
+	draw_accessory              = FALSE
+	uid                         = "acc_hair_bald"
 
 /decl/sprite_accessory/hair/short
 	name = "Short Hair"	  // try to capatilize the names please~
 	icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_short"
 
 /decl/sprite_accessory/hair/twintail
 	name = "Twintail"
 	icon_state = "hair_twintail"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_twintail"
 
 /decl/sprite_accessory/hair/short2
@@ -52,43 +60,43 @@
 /decl/sprite_accessory/hair/cut
 	name = "Cut Hair"
 	icon_state = "hair_c"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_cut"
 
 /decl/sprite_accessory/hair/flair
 	name = "Flaired Hair"
 	icon_state = "hair_flair"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_flair"
 
 /decl/sprite_accessory/hair/long
 	name = "Shoulder-length Hair"
 	icon_state = "hair_b"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_shoulder"
 
 /decl/sprite_accessory/hair/longer
 	name = "Long Hair"
 	icon_state = "hair_vlong"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_long"
 
 /decl/sprite_accessory/hair/longest
 	name = "Very Long Hair"
 	icon_state = "hair_longest"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_verylong"
 
 /decl/sprite_accessory/hair/longfringe
 	name = "Long Fringe"
 	icon_state = "hair_longfringe"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_longfringe"
 
 /decl/sprite_accessory/hair/longestalt
 	name = "Longer Fringe"
 	icon_state = "hair_vlongfringe"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_longestalt"
 
 /decl/sprite_accessory/hair/halfbang
@@ -104,43 +112,43 @@
 /decl/sprite_accessory/hair/ponytail1
 	name = "Ponytail 1"
 	icon_state = "hair_ponytail"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_ponytail1"
 
 /decl/sprite_accessory/hair/ponytail2
 	name = "Ponytail 2"
 	icon_state = "hair_pa"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_ponytail2"
 
 /decl/sprite_accessory/hair/ponytail3
 	name = "Ponytail 3"
 	icon_state = "hair_ponytail3"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_ponytail3"
 
 /decl/sprite_accessory/hair/ponytail4
 	name = "Ponytail 4"
 	icon_state = "hair_ponytail4"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_ponytail4"
 
 /decl/sprite_accessory/hair/ponytail5
 	name = "Ponytail 5"
 	icon_state = "hair_ponytail5"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_ponytail5"
 
 /decl/sprite_accessory/hair/ponytail6
 	name = "Ponytail 6"
 	icon_state = "hair_ponytail6"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_ponytail6"
 
 /decl/sprite_accessory/hair/sideponytail
 	name = "Side Ponytail"
 	icon_state = "hair_stail"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_sideponytail"
 
 /decl/sprite_accessory/hair/parted
@@ -156,7 +164,7 @@
 /decl/sprite_accessory/hair/sleeze
 	name = "Sleeze"
 	icon_state = "hair_sleeze"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_sleeze"
 
 /decl/sprite_accessory/hair/quiff
@@ -177,13 +185,13 @@
 /decl/sprite_accessory/hair/bedhead3
 	name = "Bedhead 3"
 	icon_state = "hair_bedheadv3"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_bedhead3"
 
 /decl/sprite_accessory/hair/beehive
 	name = "Beehive"
 	icon_state = "hair_beehive"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_beehive"
 
 /decl/sprite_accessory/hair/beehive2
@@ -194,19 +202,19 @@
 /decl/sprite_accessory/hair/bobcurl
 	name = "Bobcurl"
 	icon_state = "hair_bobcurl"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_bobcurl"
 
 /decl/sprite_accessory/hair/bob
 	name = "Bob"
 	icon_state = "hair_bobcut"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_bob"
 
 /decl/sprite_accessory/hair/bobcutalt
 	name = "Chin Length Bob"
 	icon_state = "hair_bobcutalt"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_bobcutalt"
 
 /decl/sprite_accessory/hair/bowl
@@ -217,13 +225,13 @@
 /decl/sprite_accessory/hair/buzz
 	name = "Buzzcut"
 	icon_state = "hair_buzzcut"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_buzz"
 
 /decl/sprite_accessory/hair/crew
 	name = "Crewcut"
 	icon_state = "hair_crewcut"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_crew"
 
 /decl/sprite_accessory/hair/combover
@@ -254,7 +262,7 @@
 /decl/sprite_accessory/hair/curls
 	name = "Curls"
 	icon_state = "hair_curls"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_curls"
 
 /decl/sprite_accessory/hair/afro
@@ -275,19 +283,19 @@
 /decl/sprite_accessory/hair/rows
 	name = "Rows"
 	icon_state = "hair_rows1"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_rows"
 
 /decl/sprite_accessory/hair/rows2
 	name = "Rows 2"
 	icon_state = "hair_rows2"
-	flags = VERY_SHORT | HAIR_TIEABLE
+	accessory_flags = VERY_SHORT | HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_rows2"
 
 /decl/sprite_accessory/hair/sargeant
 	name = "Flat Top"
 	icon_state = "hair_sargeant"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_flattop"
 
 /decl/sprite_accessory/hair/emo
@@ -303,19 +311,19 @@
 /decl/sprite_accessory/hair/longemo
 	name = "Long Emo"
 	icon_state = "hair_emolong"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_longemo"
 
 /decl/sprite_accessory/hair/shortovereye
 	name = "Overeye Short"
 	icon_state = "hair_shortovereye"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_overeye_short"
 
 /decl/sprite_accessory/hair/longovereye
 	name = "Overeye Long"
 	icon_state = "hair_longovereye"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_overeye_long"
 
 /decl/sprite_accessory/hair/flow
@@ -326,7 +334,7 @@
 /decl/sprite_accessory/hair/feather
 	name = "Feather"
 	icon_state = "hair_feather"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_feather"
 
 /decl/sprite_accessory/hair/hitop
@@ -352,7 +360,7 @@
 /decl/sprite_accessory/hair/gentle
 	name = "Gentle"
 	icon_state = "hair_gentle"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_gentle"
 
 /decl/sprite_accessory/hair/spiky
@@ -368,67 +376,67 @@
 /decl/sprite_accessory/hair/kagami
 	name = "Pigtails"
 	icon_state = "hair_kagami"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_kagami"
 
 /decl/sprite_accessory/hair/himecut
 	name = "Hime Cut"
 	icon_state = "hair_himecut"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_himecut"
 
 /decl/sprite_accessory/hair/shorthime
 	name = "Short Hime Cut"
 	icon_state = "hair_shorthime"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_shorthime"
 
 /decl/sprite_accessory/hair/grandebraid
 	name = "Grande Braid"
 	icon_state = "hair_grande"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_grande"
 
 /decl/sprite_accessory/hair/mbraid
 	name = "Medium Braid"
 	icon_state = "hair_shortbraid"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_mbraid"
 
 /decl/sprite_accessory/hair/braid2
 	name = "Long Braid"
 	icon_state = "hair_hbraid"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_braid2"
 
 /decl/sprite_accessory/hair/odango
 	name = "Odango"
 	icon_state = "hair_odango"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_odango"
 
 /decl/sprite_accessory/hair/ombre
 	name = "Ombre"
 	icon_state = "hair_ombre"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_ombre"
 
 /decl/sprite_accessory/hair/updo
 	name = "Updo"
 	icon_state = "hair_updo"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_updo"
 
 /decl/sprite_accessory/hair/skinhead
 	name = "Skinhead"
 	icon_state = "hair_skinhead"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_skinhead"
 
 /decl/sprite_accessory/hair/balding
 	name = "Balding Hair"
 	icon_state = "hair_e"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_balding"
 
 /decl/sprite_accessory/hair/familyman
@@ -439,13 +447,13 @@
 /decl/sprite_accessory/hair/mahdrills
 	name = "Drillruru"
 	icon_state = "hair_drillruru"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_drillruru"
 
 /decl/sprite_accessory/hair/fringetail
 	name = "Fringetail"
 	icon_state = "hair_fringetail"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_fringetail"
 
 /decl/sprite_accessory/hair/dandypomp
@@ -456,7 +464,7 @@
 /decl/sprite_accessory/hair/poofy
 	name = "Poofy"
 	icon_state = "hair_poofy"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_poofy"
 
 /decl/sprite_accessory/hair/crono
@@ -487,7 +495,7 @@
 /decl/sprite_accessory/hair/nitori
 	name = "Nitori"
 	icon_state = "hair_nitori"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_nitori"
 
 /decl/sprite_accessory/hair/joestar
@@ -498,13 +506,13 @@
 /decl/sprite_accessory/hair/volaju
 	name = "Volaju"
 	icon_state = "hair_volaju"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_volaju"
 
 /decl/sprite_accessory/hair/longeralt2
 	name = "Long Hair Alt 2"
 	icon_state = "hair_longeralt2"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_longeralt2"
 
 /decl/sprite_accessory/hair/shortbangs
@@ -515,157 +523,157 @@
 /decl/sprite_accessory/hair/shavedbun
 	name = "Shaved Bun"
 	icon_state = "hair_shavedbun"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_shavedbun"
 
 /decl/sprite_accessory/hair/halfshaved
 	name = "Half-Shaved"
 	icon_state = "hair_halfshaved"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_halfshaved"
 
 /decl/sprite_accessory/hair/halfshavedemo
 	name = "Half-Shaved Emo"
 	icon_state = "hair_halfshavedemo"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_halfshavedemo"
 
 /decl/sprite_accessory/hair/longsideemo
 	name = "Long Side Emo"
 	icon_state = "hair_longsideemo"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_longsideemo"
 
 /decl/sprite_accessory/hair/bun
 	name = "Low Bun"
 	icon_state = "hair_bun"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_lowbun"
 
 /decl/sprite_accessory/hair/bun2
 	name = "High Bun"
 	icon_state = "hair_bun2"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_highbun"
 
 /decl/sprite_accessory/hair/doublebun
 	name = "Double-Bun"
 	icon_state = "hair_doublebun"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_doublebun"
 
 /decl/sprite_accessory/hair/lowfade
 	name = "Low Fade"
 	icon_state = "hair_lowfade"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_lowfade"
 
 /decl/sprite_accessory/hair/medfade
 	name = "Medium Fade"
 	icon_state = "hair_medfade"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_medfade"
 
 /decl/sprite_accessory/hair/highfade
 	name = "High Fade"
 	icon_state = "hair_highfade"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_highfade"
 
 /decl/sprite_accessory/hair/baldfade
 	name = "Balding Fade"
 	icon_state = "hair_baldfade"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_baldfade"
 
 /decl/sprite_accessory/hair/nofade
 	name = "Regulation Cut"
 	icon_state = "hair_nofade"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_nofade"
 
 /decl/sprite_accessory/hair/trimflat
 	name = "Trimmed Flat Top"
 	icon_state = "hair_trimflat"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_trimflat"
 
 /decl/sprite_accessory/hair/shaved
 	name = "Shaved"
 	icon_state = "hair_shaved"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_shaved"
 
 /decl/sprite_accessory/hair/trimmed
 	name = "Trimmed"
 	icon_state = "hair_trimmed"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_trimmed"
 
 /decl/sprite_accessory/hair/tightbun
 	name = "Tight Bun"
 	icon_state = "hair_tightbun"
-	flags = VERY_SHORT | HAIR_TIEABLE
+	accessory_flags = VERY_SHORT | HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_tightbun"
 
 /decl/sprite_accessory/hair/coffeehouse
 	name = "Coffee House Cut"
 	icon_state = "hair_coffeehouse"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_coffeehouse"
 
 /decl/sprite_accessory/hair/undercut
 	name = "Undercut"
 	icon_state = "hair_undercut"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_undercut"
 
 /decl/sprite_accessory/hair/partfade
 	name = "Parted Fade"
 	icon_state = "hair_shavedpart"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_partfade"
 
 /decl/sprite_accessory/hair/hightight
 	name = "High and Tight"
 	icon_state = "hair_hightight"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_hightight"
 
 /decl/sprite_accessory/hair/rowbun
 	name = "Row Bun"
 	icon_state = "hair_rowbun"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_rowbun"
 
 /decl/sprite_accessory/hair/rowdualbraid
 	name = "Row Dual Braid"
 	icon_state = "hair_rowdualtail"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_rowdualbraid"
 
 /decl/sprite_accessory/hair/rowbraid
 	name = "Row Braid"
 	icon_state = "hair_rowbraid"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_rowbraid"
 
 /decl/sprite_accessory/hair/regulationmohawk
 	name = "Regulation Mohawk"
 	icon_state = "hair_shavedmohawk"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_regulationmohawk"
 
 /decl/sprite_accessory/hair/topknot
 	name = "Topknot"
 	icon_state = "hair_topknot"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_topknot"
 
 /decl/sprite_accessory/hair/ronin
 	name = "Ronin"
 	icon_state = "hair_ronin"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_ronin"
 
 /decl/sprite_accessory/hair/bowlcut2
@@ -676,25 +684,25 @@
 /decl/sprite_accessory/hair/thinning
 	name = "Thinning"
 	icon_state = "hair_thinning"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT
 	uid = "acc_hair_thinning"
 
 /decl/sprite_accessory/hair/thinningfront
 	name = "Thinning Front"
 	icon_state = "hair_thinningfront"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_thinningfront"
 
 /decl/sprite_accessory/hair/thinningback
 	name = "Thinning Back"
 	icon_state = "hair_thinningrear"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_thinningback"
 
 /decl/sprite_accessory/hair/manbun
 	name = "Manbun"
 	icon_state = "hair_manbun"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_manbun"
 
 /decl/sprite_accessory/hair/leftsidecut
@@ -715,7 +723,7 @@
 /decl/sprite_accessory/hair/messyhair
 	name = "Messy"
 	icon_state = "hair_messyhair"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_messyhair"
 
 /decl/sprite_accessory/hair/averagejoe
@@ -746,19 +754,19 @@
 /decl/sprite_accessory/hair/amazon
 	name = "Amazon"
 	icon_state = "hair_amazon"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_amazon"
 
 /decl/sprite_accessory/hair/straightlong
 	name = "Straight Long"
 	icon_state = "hair_straightlong"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_straightlong"
 
 /decl/sprite_accessory/hair/marysue
 	name = "Mary Sue"
 	icon_state = "hair_marysue"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_marysue"
 
 /decl/sprite_accessory/hair/messyhair2
@@ -774,7 +782,7 @@
 /decl/sprite_accessory/hair/sideundercut
 	name = "Side Undercut"
 	icon_state = "hair_sideundercut"
-	flags = VERY_SHORT
+	accessory_flags = VERY_SHORT | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_sideundercut"
 
 /decl/sprite_accessory/hair/bighawk
@@ -785,23 +793,23 @@
 /decl/sprite_accessory/hair/donutbun
 	name = "Donut Bun"
 	icon_state = "hair_donutbun"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_donutbun"
 
 /decl/sprite_accessory/hair/gentle2
 	name = "Gentle 2"
 	icon_state = "hair_gentle2"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_gentle2"
 
 /decl/sprite_accessory/hair/gentle2long
 	name = "Gentle 2 Long"
 	icon_state = "hair_gentle2long"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_gentle2long"
 
 /decl/sprite_accessory/hair/trimrsidecut
 	name = "Trimmed Right Sidecut"
 	icon_state = "hair_rightside_trim"
-	flags = HAIR_TIEABLE
+	accessory_flags = HAIR_TIEABLE | HAIR_LOSS_VULNERABLE
 	uid = "acc_hair_trimrightsidecut"

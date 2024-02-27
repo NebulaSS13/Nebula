@@ -28,6 +28,13 @@
 		/decl/natural_attack/bite/sharp
 	)
 
+	available_accessory_categories = list(
+		SAC_HORNS,
+		SAC_FRILLS,
+		SAC_COSMETICS,
+		SAC_MARKINGS
+	)
+
 	primitive_form = "Stok"
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH

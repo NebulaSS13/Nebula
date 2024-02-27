@@ -17,47 +17,40 @@
 			add_overlay(A)
 	try_refresh_visible_overlays()
 
+/mob/living/proc/set_organ_sprite_accessory(var/accessory_type, var/accessory_category, var/accessory_color, var/organ_tag, var/skip_update = FALSE)
+	if(!accessory_category || !organ_tag)
+		return
+	var/obj/item/organ/external/organ = organ_tag && GET_EXTERNAL_ORGAN(src, organ_tag)
+	if(!organ)
+		return
+	if(!accessory_type)
+		accessory_type = organ.get_sprite_accessory_by_category(accessory_category)
+	if(accessory_type)
+		return organ.set_sprite_accessory(accessory_type, accessory_category, accessory_color, skip_update)
+
+/mob/living/proc/get_organ_sprite_accessory(var/accessory_type, var/organ_tag)
+	var/obj/item/organ/external/organ = organ_tag && GET_EXTERNAL_ORGAN(src, organ_tag)
+	return organ?.get_sprite_accessory_value(accessory_type)
+
+/mob/living/proc/get_organ_sprite_accessory_by_category(var/accessory_category, var/organ_tag)
+	var/obj/item/organ/external/organ = organ_tag && GET_EXTERNAL_ORGAN(src, organ_tag)
+	return organ?.get_sprite_accessory_by_category(accessory_category)
+
+/mob/living/proc/set_organ_sprite_accessory_by_category(var/accessory_type, var/accessory_category, var/accessory_color, var/preserve_colour = TRUE, var/preserve_type = TRUE, var/organ_tag, var/skip_update = FALSE)
+	var/obj/item/organ/external/organ = organ_tag && GET_EXTERNAL_ORGAN(src, organ_tag)
+	return organ?.set_sprite_accessory_by_category(accessory_type, accessory_category, accessory_color, preserve_colour, preserve_type, skip_update)
+
 /mob/living/proc/get_skin_colour()
 	return
+
+/mob/living/proc/set_skin_colour(var/new_color, var/skip_update = FALSE)
+	return get_skin_colour() != new_color
 
 /mob/living/proc/get_eye_colour()
 	return
 
-/mob/living/proc/get_lip_colour()
-	return
-
-/mob/living/proc/get_hairstyle()
-	return
-
-/mob/living/proc/get_facial_hairstyle()
-	return
-
-/mob/living/proc/get_hair_colour()
-	return
-
-/mob/living/proc/get_facial_hair_colour()
-	return
-
-/mob/living/proc/set_skin_colour(var/new_color)
-	return get_skin_colour() != new_color
-
-/mob/living/proc/set_eye_colour(var/new_color)
+/mob/living/proc/set_eye_colour(var/new_color, var/skip_update = FALSE)
 	return get_eye_colour() != new_color
-
-/mob/living/proc/set_lip_colour(var/new_color)
-	return get_lip_colour() != new_color
-
-/mob/living/proc/set_facial_hair_colour(var/new_color, var/skip_update = FALSE)
-	return get_facial_hair_colour() != new_color
-
-/mob/living/proc/set_hair_colour(var/new_color, var/skip_update = FALSE)
-	return get_hair_colour() != new_color
-
-/mob/living/proc/set_hairstyle(var/new_hairstyle)
-	return new_hairstyle && get_hairstyle() != new_hairstyle && ispath(new_hairstyle, /decl/sprite_accessory/hair)
-
-/mob/living/proc/set_facial_hairstyle(var/new_facial_hairstyle)
-	return new_facial_hairstyle && get_facial_hairstyle() != new_facial_hairstyle && ispath(new_facial_hairstyle, /decl/sprite_accessory/facial_hair)
 
 /mob/living/get_all_current_mob_overlays()
 	return mob_overlays

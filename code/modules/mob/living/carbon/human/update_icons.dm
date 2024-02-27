@@ -317,7 +317,8 @@ Please contact me on #coderbus IRC. ~Carn x
 
 /mob/living/carbon/human/update_hair(var/update_icons=1)
 	var/obj/item/organ/external/head/head_organ = get_organ(BP_HEAD, /obj/item/organ/external/head)
-	set_current_mob_overlay(HO_HAIR_LAYER, (istype(head_organ) ? head_organ.get_mob_overlays() : null), update_icons)
+	var/list/new_accessories = head_organ?.get_mob_overlays()
+	set_current_mob_overlay(HO_HAIR_LAYER, new_accessories, update_icons)
 
 /mob/living/carbon/human/proc/update_skin(var/update_icons=1)
 	// todo: make this use bodytype
@@ -386,7 +387,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		return // No tail data!
 
 	// These values may be null and are generally optional.
-	var/hair_colour     = get_hair_colour()
+	var/hair_colour     = GET_HAIR_COLOUR(src)
 	var/skin_colour     = get_skin_colour()
 	var/tail_hair       = tail_organ.get_tail_hair()
 	var/tail_blend      = tail_organ.get_tail_blend()

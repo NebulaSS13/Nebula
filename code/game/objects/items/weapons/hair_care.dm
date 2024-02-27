@@ -29,11 +29,16 @@
 	material = /decl/material/solid/organic/plastic
 
 /obj/item/haircomb/brush/attack_self(mob/user)
-	if(ishuman(user) && !user.incapacitated())
-		var/mob/living/carbon/human/H = user
-		var/hairstyle = H.get_hairstyle()
+	if(user.incapacitated() || !isliving(user))
+		return ..()
+	var/mob/living/user_living = user
+	var/hairstyle = GET_HAIR_STYLE(user_living)
+	if(hairstyle)
 		var/decl/sprite_accessory/hair/hair_style = GET_DECL(hairstyle)
-		if(hair_style.flags & VERY_SHORT)
-			H.visible_message(SPAN_NOTICE("\The [H] just sort of runs \the [src] over their scalp."))
+		if(hair_style.accessory_flags & VERY_SHORT)
+			user_living.visible_message(SPAN_NOTICE("\The [user_living] just sort of runs \the [src] over their scalp."))
 		else
-			H.visible_message(SPAN_NOTICE("\The [H] meticulously brushes their hair with \the [src]."))
+			user_living.visible_message(SPAN_NOTICE("\The [user_living] meticulously brushes their hair with \the [src]."))
+	else
+		to_chat(user_living, SPAN_WARNING("You don't have any hair to brush!"))
+	return TRUE

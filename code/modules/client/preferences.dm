@@ -382,12 +382,6 @@ var/global/list/time_prefs_fixed = list()
 
 	character.set_eye_colour(eye_colour, skip_update = TRUE)
 
-	character.set_hairstyle(h_style, skip_update = TRUE)
-	character.set_hair_colour(hair_colour, skip_update = TRUE)
-
-	character.set_facial_hairstyle(f_style, skip_update = TRUE)
-	character.set_facial_hair_colour(facial_hair_colour, skip_update = TRUE)
-
 	character.set_skin_colour(skin_colour, skip_update = TRUE)
 	character.skin_tone = skin_tone
 
@@ -409,16 +403,16 @@ var/global/list/time_prefs_fixed = list()
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
 	for(var/obj/item/organ/external/O in character.get_external_organs())
-		LAZYCLEARLIST(O.markings)
+		O.clear_sprite_accessories(skip_update = TRUE)
 
-	for(var/M in body_markings)
-		var/decl/sprite_accessory/marking/mark_datum = GET_DECL(M)
-		var/mark_color = "[body_markings[M]]"
-
-		for(var/bodypart in mark_datum.body_parts)
-			var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
-			if(O)
-				LAZYSET(O.markings, M, mark_color)
+	for(var/accessory_category in sprite_accessories)
+		for(var/accessory in sprite_accessories[accessory_category])
+			var/decl/sprite_accessory/accessory_decl = GET_DECL(accessory)
+			var/accessory_colour = sprite_accessories[accessory_category][accessory]
+			for(var/bodypart in accessory_decl.body_parts)
+				var/obj/item/organ/external/O = GET_EXTERNAL_ORGAN(character, bodypart)
+				if(O)
+					O.set_sprite_accessory(accessory, accessory_category, accessory_colour, skip_update = TRUE)
 
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()

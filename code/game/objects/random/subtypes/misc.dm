@@ -381,23 +381,71 @@
 /obj/random/lipstick
 	name = "random lipstick"
 	desc = "This is a tube of lipstick."
-	icon = 'icons/obj/items/lipstick.dmi'
-	icon_state = "lipstick_0"
+	icon = 'icons/obj/items/cosmetics/lipstick.dmi'
+	icon_state = "lipstick_closed"
 
 /obj/random/lipstick/spawn_choices()
 	var/static/list/spawnable_choices = list(
-		/obj/item/lipstick,
-		/obj/item/lipstick/blue,
-		/obj/item/lipstick/green,
-		/obj/item/lipstick/turquoise,
-		/obj/item/lipstick/violet,
-		/obj/item/lipstick/yellow,
-		/obj/item/lipstick/orange,
-		/obj/item/lipstick/white,
-		/obj/item/lipstick/black
+		/obj/item/cosmetics/lipstick/red,
+		/obj/item/cosmetics/lipstick/blue,
+		/obj/item/cosmetics/lipstick/green,
+		/obj/item/cosmetics/lipstick/turquoise,
+		/obj/item/cosmetics/lipstick/violet,
+		/obj/item/cosmetics/lipstick/yellow,
+		/obj/item/cosmetics/lipstick/orange,
+		/obj/item/cosmetics/lipstick/white,
+		/obj/item/cosmetics/lipstick/black
 	)
 	return spawnable_choices
 
+/obj/random/eyeshadow
+	name = "random eyeshadow"
+	desc = "This is a tube of eyeshadow."
+	icon = 'icons/obj/items/cosmetics/eyeshadow.dmi'
+	icon_state = "eyeshadow_closed"
+
+/obj/random/eyeshadow/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/cosmetics/eyeshadow/red,
+		/obj/item/cosmetics/eyeshadow/blue,
+		/obj/item/cosmetics/eyeshadow/green,
+		/obj/item/cosmetics/eyeshadow/turquoise,
+		/obj/item/cosmetics/eyeshadow/violet,
+		/obj/item/cosmetics/eyeshadow/yellow,
+		/obj/item/cosmetics/eyeshadow/orange,
+		/obj/item/cosmetics/eyeshadow/white,
+		/obj/item/cosmetics/eyeshadow/black
+	)
+	return spawnable_choices
+
+/obj/random/makeup
+	name = "random makeup"
+	desc = "This is a tube of makeup."
+	icon = 'icons/obj/items/cosmetics/lipstick.dmi'
+	icon_state = "lipstick_closed"
+
+/obj/random/makeup/spawn_choices()
+	var/static/list/spawnable_choices = list(
+		/obj/item/cosmetics/lipstick/red,
+		/obj/item/cosmetics/lipstick/blue,
+		/obj/item/cosmetics/lipstick/green,
+		/obj/item/cosmetics/lipstick/turquoise,
+		/obj/item/cosmetics/lipstick/violet,
+		/obj/item/cosmetics/lipstick/yellow,
+		/obj/item/cosmetics/lipstick/orange,
+		/obj/item/cosmetics/lipstick/white,
+		/obj/item/cosmetics/lipstick/black,
+		/obj/item/cosmetics/eyeshadow/red,
+		/obj/item/cosmetics/eyeshadow/blue,
+		/obj/item/cosmetics/eyeshadow/green,
+		/obj/item/cosmetics/eyeshadow/turquoise,
+		/obj/item/cosmetics/eyeshadow/violet,
+		/obj/item/cosmetics/eyeshadow/yellow,
+		/obj/item/cosmetics/eyeshadow/orange,
+		/obj/item/cosmetics/eyeshadow/white,
+		/obj/item/cosmetics/eyeshadow/black
+	)
+	return spawnable_choices
 
 /obj/random/crayon
 	name = "random crayon"

@@ -153,7 +153,8 @@
 	return TRUE
 
 /obj/item/paper/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(user.get_target_zone() == BP_EYES)
+	var/target_zone = user.get_target_zone()
+	if(target_zone == BP_EYES)
 		user.visible_message(
 			SPAN_NOTICE("You show the paper to [M]."),
 			SPAN_NOTICE("[user] holds up a paper and shows it to [M].")
@@ -161,22 +162,23 @@
 		M.examinate(src)
 		return TRUE
 
-	if(user.get_target_zone() == BP_MOUTH && M.get_lip_colour())
+	target_zone = check_zone(target_zone)
+	if(M.get_organ_sprite_accessory_by_category(SAC_COSMETICS, target_zone))
 		var/mob/living/carbon/human/H = M
 		if(H == user)
-			to_chat(user, SPAN_NOTICE("You wipe off the lipstick with [src]."))
-			H.set_lip_colour()
+			to_chat(user, SPAN_NOTICE("You wipe off the makeup with [src]."))
+			H.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] begins to wipe \the [H]'s lipstick off with \the [src]."),
-			SPAN_NOTICE("You begin to wipe off [H]'s lipstick.")
+			SPAN_NOTICE("\The [user] begins to wipe \the [H]'s makeup  off with \the [src]."),
+			SPAN_NOTICE("You begin to wipe off [H]'s makeup .")
 		)
 		if(do_after(user, 10, H) && do_after(H, 10, check_holding = 0))	//user needs to keep their active hand, H does not.
 			user.visible_message(
-				SPAN_NOTICE("\The [user] wipes \the [H]'s lipstick off with \the [src]."),
-				SPAN_NOTICE("You wipe off \the [H]'s lipstick.")
+				SPAN_NOTICE("\The [user] wipes \the [H]'s makeup  off with \the [src]."),
+				SPAN_NOTICE("You wipe off \the [H]'s makeup .")
 			)
-		H.set_lip_colour()
+		H.set_organ_sprite_accessory_by_category(null, SAC_COSMETICS, null, FALSE, FALSE, target_zone, FALSE)
 		return TRUE
 
 	. = ..()

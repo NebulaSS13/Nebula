@@ -74,7 +74,7 @@
 		else
 			to_chat(user, "<span class='cultannounce'>You touch the fountain. All the memories of your life seem to fade into the distant past as seconds drag like years. You feel the inexplicable sensation of your skin tightening and thinning across your entire body as your muscles degrade and your joints weaken. Time returns to its 'normal' pace. You can only just barely remember touching the fountain.</span>")
 			user.became_older = TRUE
-			user.set_hair_colour(COLOR_GRAY80)
+			SET_HAIR_COLOUR(user, COLOR_GRAY80, FALSE)
 			var/max_age = age.standalone_value_descriptors[age.standalone_value_descriptors[length(age.standalone_value_descriptors)]]
 			if(new_age >= max_age)
 				to_chat(user, "<span class='cultannounce'><b>The burden of the years is too much, and you are reduced to dust.</b></span>")
