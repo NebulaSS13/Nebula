@@ -188,6 +188,7 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	value = 1.1
+	dissolves_in = MAT_SOLVENT_STRONGEST
 	dissolves_into = list(
 		/decl/material/solid/metal/iron = 0.98,
 		/decl/material/solid/carbon = 0.02
