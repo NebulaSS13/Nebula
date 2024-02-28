@@ -60,25 +60,6 @@
 /obj/machinery/alarm/monitor/isolation
 	req_access = list(list(access_research, access_atmospherics, access_engine_equip))
 
-//
-// Archeology designs
-//
-
-//Structures
-/decl/material/solid/metal/chromium/generate_recipes(stack_type, reinforce_material)
-	. = ..()
-	if(!holographic && !reinforce_material && islist(.) && !ispath(stack_type))
-		. += /datum/stack_recipe/structure/anomaly_container
-
-/datum/stack_recipe/structure/anomaly_container
-	title               = "anomaly container"
-	result_type         = /obj/structure/anomaly_container
-	time                = 10 SECONDS
-	one_per_turf        = TRUE
-	on_floor            = TRUE
-	difficulty          = MAT_VALUE_VERY_HARD_DIY
-	apply_material_name = FALSE
-
 //Devices
 /datum/fabricator_recipe/protolathe/tool/anomaly_battery
 	path = /obj/item/anobattery

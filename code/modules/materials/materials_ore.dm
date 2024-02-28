@@ -18,7 +18,7 @@
 	material_alteration        = MAT_FLAG_ALTERATION_COLOR //Name is handled in override
 	randpixel                  = 6
 	is_spawnable_type          = TRUE
-	recipe_stack_type          = /obj/item/stack/material/ore
+	crafting_stack_type        = /obj/item/stack/material/ore
 
 	///Associative list of cache key to the generate icons for the ore piles. We pre-generate a pile of all possible ore icon states, and make them available
 	var/static/list/cached_ore_icon_states

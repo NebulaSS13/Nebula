@@ -3,19 +3,14 @@ SUBSYSTEM_DEF(fabrication)
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_MISC_LATE
 
-	var/list/all_recipes =                 list()
 	var/list/locked_recipes =              list()
 	var/list/initial_recipes =             list()
 	var/list/categories =                  list()
 	var/list/crafting_procedures_by_type = list()
 	var/list/recipes_by_product_type =     list()
 	var/list/fields_by_id =                list()
-
 	// Weakrefs to fabricators who want their initial recipies
 	var/list/fabricators_to_init =         list()
-	// These should be removed after rewriting crafting to respect init order.
-	var/list/crafting_recipes_to_init = list()
-	var/post_recipe_init = FALSE
 
 /datum/controller/subsystem/fabrication/Initialize()
 
@@ -27,7 +22,6 @@ SUBSYSTEM_DEF(fabrication)
 		recipe = new recipe
 		recipes_by_product_type[recipe.path] = recipe
 		for(var/fab_type in recipe.fabricator_types)
-			LAZYADD(all_recipes[fab_type], recipe)
 			LAZYDISTINCTADD(categories[fab_type], recipe.category)
 			if(recipe.required_technology)
 				LAZYADD(locked_recipes[fab_type], recipe)
@@ -47,19 +41,7 @@ SUBSYSTEM_DEF(fabrication)
 		fab?.refresh_design_cache()
 	fabricators_to_init.Cut()
 
-	for(var/datum/stack_recipe/recipe in crafting_recipes_to_init)
-		recipe.InitializeMaterials()
-	crafting_recipes_to_init.Cut()
-
-	post_recipe_init = TRUE
-
 	. = ..()
-
-/datum/controller/subsystem/fabrication/proc/init_crafting_recipe(var/datum/stack_recipe/recipe)
-	if(post_recipe_init)
-		recipe.InitializeMaterials()
-	else
-		crafting_recipes_to_init |= recipe
 
 /datum/controller/subsystem/fabrication/proc/get_research_field_by_id(var/rnd_id)
 	if(!length(fields_by_id))
@@ -71,9 +53,6 @@ SUBSYSTEM_DEF(fabrication)
 
 /datum/controller/subsystem/fabrication/proc/get_categories(var/fab_type)
 	. = categories[fab_type]
-
-/datum/controller/subsystem/fabrication/proc/get_all_recipes(var/fab_type)
-	. = all_recipes[fab_type]
 
 /datum/controller/subsystem/fabrication/proc/get_initial_recipes(var/fab_type)
 	. = initial_recipes[fab_type]

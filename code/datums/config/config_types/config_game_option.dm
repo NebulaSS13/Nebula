@@ -30,7 +30,9 @@
 		/decl/config/toggle/aliens_allowed,
 		/decl/config/toggle/ninjas_allowed,
 		/decl/config/toggle/allow_character_comments,
-		/decl/config/num/hide_comments_older_than
+		/decl/config/num/hide_comments_older_than,
+		/decl/config/toggle/stack_crafting_uses_tools,
+		/decl/config/toggle/on/stack_crafting_uses_types
 	)
 
 /decl/config/num/movement_human
@@ -172,3 +174,11 @@
 /decl/config/num/hide_comments_older_than
 	uid = "hide_comments_older_than"
 	desc = "Specify a number of days after which to hide comments on public profiles (to avoid bloat from retired characters)."
+
+/decl/config/toggle/stack_crafting_uses_tools
+	uid = "stack_crafting_uses_tools"
+	desc = "Enables or disables checking for specific tool types by some stack crafting recipes."
+
+/decl/config/toggle/on/stack_crafting_uses_types
+	uid = "stack_crafting_uses_types"
+	desc = "Enables or disables checking for specific stack types by some stack crafting recipes."

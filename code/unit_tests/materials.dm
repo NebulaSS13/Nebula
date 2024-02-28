@@ -17,16 +17,17 @@
 	for(var/decl/material/mat_datum as anything in SSmaterials.materials)
 
 		var/list/recipes = list()
-		for(var/stack_type in stack_types)
-			for(var/thing in mat_datum.get_recipes(stack_type))
-				if(istype(thing, /datum/stack_recipe))
-					recipes += thing
-				else if(istype(thing, /datum/stack_recipe_list))
-					var/datum/stack_recipe_list/recipe_stack = thing
-					if(length(recipe_stack.recipes))
-						recipes |= recipe_stack.recipes
+		for(var/tool_archetype in decls_repository.get_decls_of_type(/decl/tool_archetype))
+			for(var/stack_type in stack_types)
+				for(var/thing in get_stack_recipes(mat_datum, null, stack_type, tool_archetype))
+					if(istype(thing, /decl/stack_recipe))
+						recipes += thing
+					else if(istype(thing, /datum/stack_recipe_list))
+						var/datum/stack_recipe_list/recipe_stack = thing
+						if(length(recipe_stack.recipes))
+							recipes |= recipe_stack.recipes
 
-		for(var/datum/stack_recipe/recipe as anything in recipes)
+		for(var/decl/stack_recipe/recipe as anything in recipes)
 			var/atom/product = recipe.spawn_result()
 			var/failed
 			if(!product)
