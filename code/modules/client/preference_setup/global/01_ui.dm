@@ -114,10 +114,7 @@ var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 		var/new_fps = input(user, "Choose your desired fps.[version_message]\n(0 = synced with server tick rate (currently:[world.fps]))", "Global Preference") as num|null
 		if (isnum(new_fps) && CanUseTopic(user))
 			pref.clientfps = clamp(new_fps, CLIENT_MIN_FPS, CLIENT_MAX_FPS)
-
-			var/mob/target_mob = preference_mob()
-			if(target_mob && target_mob.client)
-				target_mob.client.apply_fps(pref.clientfps)
+			pref.client?.apply_fps(pref.clientfps)
 			return TOPIC_REFRESH
 
 	else if(href_list["select_tooltip_style"])
