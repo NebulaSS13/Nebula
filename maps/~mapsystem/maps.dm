@@ -151,6 +151,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	)
 	var/secrets_directory
 
+	/// A list of /decl/loadout_category types which will be available for characters made on this map. Uses all categories if null.
+	var/list/decl/loadout_category/loadout_categories
+
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(LAZYLEN(lobby_tracks) == 1)
@@ -162,6 +165,15 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return GET_DECL(lobby_track_type)
 
 /datum/map/proc/setup_map()
+
+	if(!length(loadout_categories))
+		loadout_categories = list()
+		for(var/decl_type in decls_repository.get_decls_of_subtype(/decl/loadout_category))
+			loadout_categories += decl_type
+
+	for(var/loadout_category in loadout_categories)
+		loadout_categories -= loadout_category
+		loadout_categories += GET_DECL(loadout_category)
 
 	if(secrets_directory)
 		secrets_directory = trim(lowertext(secrets_directory))
