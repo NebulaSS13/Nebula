@@ -21,7 +21,6 @@
 	var/can_have_rider = TRUE
 	var/max_rider_size = MOB_SIZE_SMALL
 
-	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
 
 	var/list/speak = list("...")
@@ -272,10 +271,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 	if(bodytemperature < minbodytemp)
 		fire_alert = 2
-		adjustBruteLoss(cold_damage_per_tick)
+		adjustFireLoss(cold_damage_per_tick)
 	else if(bodytemperature > maxbodytemp)
 		fire_alert = 1
-		adjustBruteLoss(heat_damage_per_tick)
+		adjustFireLoss(heat_damage_per_tick)
 	else
 		fire_alert = 0
 
@@ -428,7 +427,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
 	density = FALSE
-	adjustBruteLoss(get_max_health()) //Make sure dey dead.
 	walk_to(src,0)
 	. = ..(gibbed, deathmessage, show_dead_message)
 
@@ -542,22 +540,6 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(ispath(natural_weapon))
 		natural_weapon = new natural_weapon(src)
 	return natural_weapon
-
-/mob/living/simple_animal/getCloneLoss()
-	. = max(0, gene_damage)
-
-/mob/living/simple_animal/adjustCloneLoss(var/amount, var/do_update_health = TRUE)
-	SHOULD_CALL_PARENT(FALSE)
-	setCloneLoss(gene_damage + amount)
-	if(do_update_health)
-		update_health()
-
-/mob/living/simple_animal/setCloneLoss(amount)
-	if(gene_damage >= 0)
-		var/current_max_health = get_max_health()
-		gene_damage = clamp(amount, 0, current_max_health)
-		if(gene_damage >= current_max_health)
-			death()
 
 /mob/living/simple_animal/get_admin_job_string()
 	return "Animal"
