@@ -976,6 +976,7 @@
 #include "code\game\objects\item_damage.dm"
 #include "code\game\objects\item_interactions.dm"
 #include "code\game\objects\item_materials.dm"
+#include "code\game\objects\item_melting.dm"
 #include "code\game\objects\item_mob_overlay.dm"
 #include "code\game\objects\munition.dm"
 #include "code\game\objects\obj_edibility.dm"

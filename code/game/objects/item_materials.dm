@@ -41,7 +41,7 @@
 			shatter(consumed)
 			return
 	else if(lastdamtype == BURN)
-		melt()
+		handle_melting()
 		return
 	physically_destroyed()
 

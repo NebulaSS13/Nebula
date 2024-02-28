@@ -18,10 +18,11 @@
 		. += snow.get_movement_delay(travel_dir, mover)
 
 /turf/exterior/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	melt()
+	handle_melting()
 	return ..()
 
-/turf/exterior/snow/melt()
+/turf/exterior/snow/handle_melting(list/meltable_materials)
+	. = ..()
 	if(icon_state != "permafrost")
 		SetName("permafrost")
 		icon_state = "permafrost"

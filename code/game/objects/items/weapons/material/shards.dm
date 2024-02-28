@@ -129,7 +129,7 @@
 	if(health > 0 || !can_take_damage())
 		return //If invincible, or if we're not dead yet, skip
 	if(lastdamtype == BURN)
-		melt()
+		handle_melting()
 		return
 	physically_destroyed()
 

@@ -10,13 +10,14 @@
 
 /turf/exterior/sand/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
-		melt()
+		handle_melting()
 	return ..()
 
 /turf/exterior/sand/get_diggable_resources()
 	return dug ? null : list(/obj/item/stack/material/ore/sand = list(3, 2))
 
-/turf/exterior/sand/melt()
+/turf/exterior/sand/handle_melting(list/meltable_materials)
+	. = ..()
 	if(icon_state != "glass")
 		SetName("molten silica")
 		desc = "A glassed patch of sand."

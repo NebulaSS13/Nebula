@@ -22,7 +22,7 @@ var/global/universe_has_ended = 0
 /datum/universal_state/supermatter_cascade/DecayTurf(var/turf/T)
 	if(istype(T,/turf/simulated/wall))
 		var/turf/simulated/wall/W=T
-		W.melt()
+		W.handle_melting()
 		return
 	if(istype(T,/turf/simulated/floor))
 		var/turf/simulated/floor/F=T
