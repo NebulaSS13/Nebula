@@ -102,7 +102,7 @@
 	var/low_skin_tone = mob_bodytype ? (35 - mob_bodytype.max_skin_tone()) : -185
 	sanitize_integer(pref.skin_tone, low_skin_tone, 34, initial(pref.skin_tone))
 
-	var/pref_mob = preference_mob()
+	var/acc_mob = get_mannequin(pref.client?.ckey)
 	LAZYINITLIST(pref.sprite_accessories)
 	for(var/acc_cat in pref.sprite_accessories)
 		if(!(acc_cat in mob_species.available_accessory_categories))
@@ -111,7 +111,7 @@
 		var/decl/sprite_accessory_category/accessory_category = GET_DECL(acc_cat)
 		for(var/acc in pref.sprite_accessories[acc_cat])
 			var/decl/sprite_accessory/accessory = GET_DECL(acc)
-			if(!istype(accessory, accessory_category.base_accessory_type) || !accessory.accessory_is_available(pref_mob, mob_species, mob_bodytype))
+			if(!istype(accessory, accessory_category.base_accessory_type) || !accessory.accessory_is_available(acc_mob, mob_species, mob_bodytype))
 				pref.sprite_accessories[acc_cat] -= acc
 
 	for(var/accessory_category in mob_species.available_accessory_categories)
@@ -260,7 +260,7 @@
 					return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["random"])
-		pref.randomize_appearance_and_body_for(preference_mob())
+		pref.randomize_appearance_and_body_for(get_mannequin(pref.client?.ckey))
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["blood_type"])
@@ -303,8 +303,8 @@
 
 		else if(href_list["acc_style"])
 
-			var/decl/sprite_accessory/new_accessory = input(user, "Choose an accessory:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in pref.get_usable_sprite_accessories(preference_mob(), mob_species, mob_bodytype, accessory_category.type, current_accessories - accessory_decl.type)
-			if(!(new_accessory in pref.get_usable_sprite_accessories(preference_mob(), mob_species, mob_bodytype, accessory_category.type, current_accessories)))
+			var/decl/sprite_accessory/new_accessory = input(user, "Choose an accessory:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in pref.get_usable_sprite_accessories(get_mannequin(pref.client?.ckey), mob_species, mob_bodytype, accessory_category.type, current_accessories - accessory_decl?.type)
+			if(!(new_accessory in pref.get_usable_sprite_accessories(get_mannequin(pref.client?.ckey), mob_species, mob_bodytype, accessory_category.type, current_accessories)))
 				return TOPIC_NOACTION
 			var/style_colour = (accessory_decl && current_accessories[accessory_decl.type]) || accessory_category.default_accessory_color
 			if(accessory_category.single_selection)
@@ -318,7 +318,7 @@
 				return TOPIC_NOACTION
 			var/decl/sprite_accessory/next_accessory_decl
 			var/style_colour = current_accessories[accessory_decl.type]
-			var/list/available_accessories = pref.get_usable_sprite_accessories(preference_mob(), mob_species, mob_bodytype, accessory_category.type, current_accessories - accessory_decl.type)
+			var/list/available_accessories = pref.get_usable_sprite_accessories(get_mannequin(pref.client?.ckey), mob_species, mob_bodytype, accessory_category.type, current_accessories - accessory_decl?.type)
 			if(href_list["acc_next"])
 				next_accessory_decl = next_in_list(accessory_decl, available_accessories)
 			else if(href_list["acc_prev"])
@@ -388,7 +388,7 @@
 			pref.skin_colour = new_skin
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
-/datum/preferences/proc/get_usable_sprite_accessories(mob/pref_mob, decl/species/mob_species, decl/bodytype/mob_bodytype, accessory_category, list/existing_accessories)
+/datum/preferences/proc/get_usable_sprite_accessories(mob/acc_mob, decl/species/mob_species, decl/bodytype/mob_bodytype, accessory_category, list/existing_accessories)
 	var/decl/sprite_accessory_category/accessory_category_decl = GET_DECL(accessory_category)
 	if(!istype(accessory_category_decl))
 		return
@@ -402,5 +402,5 @@
 		if(accessory in existing_accessories)
 			continue
 		var/decl/sprite_accessory/accessory_decl = all_accessories[accessory]
-		if(istype(accessory_decl) && !is_type_in_list(accessory_decl, disallowed_accessories) && accessory_decl.accessory_is_available(pref_mob, mob_species, mob_bodytype))
+		if(istype(accessory_decl) && !is_type_in_list(accessory_decl, disallowed_accessories) && accessory_decl.accessory_is_available(acc_mob, mob_species, mob_bodytype))
 			LAZYADD(., accessory_decl)

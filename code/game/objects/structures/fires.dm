@@ -148,13 +148,14 @@
 			burn(user)
 		else
 			visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
+		update_icon()
 		return TRUE
 
 	if(lit != FIRE_LIT && user.a_intent == I_HURT)
 		to_chat(user, SPAN_DANGER("You start stomping on \the [src], trying to destroy it."))
 		if(do_after(user, 5 SECONDS, src))
 			visible_message(SPAN_DANGER("\The [user] stamps and kicks at \the [src] until it is completely destroyed."))
-			qdel(src)
+			physically_destroyed()
 		return TRUE
 
 	return ..()
