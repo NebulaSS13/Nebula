@@ -264,7 +264,7 @@
 	A.AltClick(src)
 
 /atom/proc/AltClick(var/mob/user)
-	if(try_handle_interactions(user, get_alt_interactions(user)))
+	if(try_handle_interactions(user, get_alt_interactions(user), user?.get_active_hand()))
 		return TRUE
 	if(user?.get_preference_value(/datum/client_preference/show_turf_contents) == PREF_ALT_CLICK)
 		. = show_atom_list_for_turf(user, get_turf(src))
