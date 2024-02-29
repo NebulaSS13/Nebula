@@ -8,6 +8,14 @@
 	icon_has_corners = TRUE
 	possible_states = 4
 
+/turf/exterior/sand/get_diggable_resources()
+	return dug ? null : list(/obj/item/stack/material/ore/sand = list(3, 2))
+
+/turf/exterior/sand/drop_diggable_resources()
+	if(!dug && prob(15))
+		new /obj/item/rock(src, /decl/material/solid/stone/flint)
+	return ..()
+
 /turf/exterior/sand/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
 		handle_melting()
@@ -21,9 +29,6 @@
 /turf/exterior/sand/water/deep
 	color = COLOR_BLUE
 	height = -(FLUID_DEEP)
-
-/turf/exterior/sand/get_diggable_resources()
-	return dug ? null : list(/obj/item/stack/material/ore/sand = list(3, 2))
 
 /turf/exterior/sand/handle_melting(list/meltable_materials)
 	. = ..()

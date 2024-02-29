@@ -9,6 +9,11 @@
 /turf/exterior/clay/get_diggable_resources()
 	return dug ? null : list(/obj/item/stack/material/ore/clay = list(3, 2))
 
+/turf/exterior/clay/drop_diggable_resources()
+	if(!dug && prob(15))
+		new /obj/item/rock(src, /decl/material/solid/stone/flint)
+	return ..()
+
 /turf/exterior/clay/flooded
 	flooded = /decl/material/liquid/water
 
