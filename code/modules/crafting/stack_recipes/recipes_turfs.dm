@@ -1,9 +1,8 @@
 /decl/stack_recipe/turfs
 	abstract_type         = /decl/stack_recipe/turfs
 	expected_product_type = /turf
-	/// Arbitrary values since turfs don't behave like objs in terms of material/matter/w_class/time
-	time                  = 5 SECONDS
-	req_amount            = 5
+	time                  = 5 SECONDS // Arbitrary value since turfs don't behave like objs in terms of w_class/time
+	req_amount            = 5         // Arbitrary value since turfs have no matter return weird matter values.
 
 // See req_amount above.
 /decl/stack_recipe/turfs/update_req_amount()
@@ -15,7 +14,7 @@
 		return
 	var/turf/result = build_turf.ChangeTurf(result_type)
 	if(istype(result) && (use_material || use_reinf_material))
-		result.set_turf_materials(use_material, use_reinf_material)
+		result.set_turf_materials(mat?.type, reinf_mat?.type)
 	return result
 
 /decl/stack_recipe/turfs/wall
@@ -26,3 +25,4 @@
 	var/turf/simulated/wall/wall = ..()
 	if(istype(wall))
 		wall.set_material(MATERIAL_RECIPE_PARAMS)
+	return wall

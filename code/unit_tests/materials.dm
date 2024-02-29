@@ -10,17 +10,22 @@
 
 	// Assemble our lists of parameters for recipes.
 	var/list/stack_types = list(null)
-	for(var/stack_type in subtypesof(/obj/item/stack))
-		var/obj/item/stack/stack = stack_type
-		var/craft_type = initial(stack.crafting_stack_type)
-		if(craft_type)
-			stack_types |= craft_type
 	var/list/tool_types = list(null)
-	for(var/tool_type in decls_repository.get_decls_of_type(/decl/tool_archetype))
-		tool_types |= tool_type
+
+	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/stack_recipe)
+	for(var/recipe_type in all_recipes)
+		var/decl/stack_recipe/recipe = all_recipes[recipe_type]
+		if(recipe.required_tool)
+			tool_types |= recipe.required_tool
+		if(recipe.craft_stack_types)
+			stack_types |= recipe.craft_stack_types
+
+	var/list/all_materials = decls_repository.get_decls_of_type(/decl/material)
 	var/list/material_types = list(null)
-	for(var/material_type in decls_repository.get_decls_of_type(/decl/material))
-		material_types |= material_type
+	for(var/material_type in all_materials)
+		var/decl/material/mat = all_materials[material_type]
+		if(!mat.holographic && mat.phase_at_temperature() == MAT_PHASE_SOLID)
+			material_types |= material_type
 
 	// Force config to be the most precise recipes possible.
 	var/decl/config/config = GET_DECL(/decl/config/toggle/on/stack_crafting_uses_types)
@@ -49,6 +54,8 @@
 
 					// Handle the actual validation.
 					for(var/decl/stack_recipe/recipe as anything in recipes)
+						if(ispath(recipe.result_type, /turf)) // Cannot exist without a loc and doesn't have matter, cannot assess here.
+							continue
 						var/atom/product = recipe.spawn_result(null, null, 1, material, reinforced)
 						var/failed
 						if(!product)

@@ -9,10 +9,13 @@
 	apply_material_name         = FALSE
 	result_type                 = /obj/structure/fire_source
 
+// TODO: make this a firepit recipe using bricks or something instead.
 /decl/stack_recipe/logs/campfire/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	var/obj/structure/fire_source/product = ..()
-	for(var/material in product.matter)
-		var/decl/material/material_decl = GET_DECL(mat)
-		if(material_decl.accelerant_value > FUEL_VALUE_NONE)
-			product.fuel += material_decl.accelerant_value * round(product.matter[material] / SHEET_MATERIAL_AMOUNT)
+	var/obj/structure/fire_source/product = ..(user, location, amount) // Discard the material since we're putting it into the fuel var.
+	if(product)
+		product.matter = null
+		product.material = null
+		product.update_materials(TRUE)
+		if(mat?.accelerant_value > FUEL_VALUE_NONE)
+			product.fuel += round(mat.accelerant_value * (req_amount * (amount / res_amount) * SHEET_MATERIAL_AMOUNT))
 	return product

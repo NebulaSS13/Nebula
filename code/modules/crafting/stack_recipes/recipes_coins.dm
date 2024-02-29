@@ -6,24 +6,21 @@
 	category          = "antique coins"
 	abstract_type     = /decl/stack_recipe/coin
 	var/currency
-	var/denomination_name
 	var/datum/denomination/denomination
 
 /decl/stack_recipe/coin/Initialize()
 	. = ..()
 	var/decl/currency/currency_decl = GET_DECL(currency)
-	if(currency_decl && denomination_name)
+	if(currency_decl && name)
 		for(var/datum/denomination/currency_denomination in currency_decl.denominations)
-			if(currency_denomination.name == denomination_name)
+			if(currency_denomination.name == name)
 				denomination = currency_denomination
-				break
+				return
 
 /decl/stack_recipe/coin/validate()
 	. = ..()
 	if(!ispath(currency, /decl/currency))
 		. += "invalid or null currency: [currency || "NULL"]"
-	if(!istext(denomination_name))
-		. += "invalid or null denomination name: [denomination_name || "NULL"]"
 	if(!istype(denomination))
 		. += "invalid or null denomination: [denomination || "NULL"]"
 

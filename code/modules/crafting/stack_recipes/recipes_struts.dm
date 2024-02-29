@@ -19,6 +19,7 @@
 /decl/stack_recipe/strut/girder
 	result_type                 = /obj/structure/girder
 	required_wall_support_value = 10
+	req_amount                  = 5 // Arbitrary value since girders return weird matter values.
 
 /decl/stack_recipe/strut/wall_frame
 	result_type                 = /obj/structure/wall_frame

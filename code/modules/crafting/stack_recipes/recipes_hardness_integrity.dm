@@ -10,6 +10,7 @@
 
 /decl/stack_recipe/hardness/integrity/furniture/door
 	result_type        = /obj/structure/door
+	req_amount         = 5 // Arbitrary value since doors return weird matter values.
 
 /decl/stack_recipe/hardness/integrity/furniture/barricade
 	result_type        = /obj/structure/barricade

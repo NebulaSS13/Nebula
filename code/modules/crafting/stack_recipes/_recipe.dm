@@ -14,6 +14,7 @@
  * Recipe datum
  */
 /decl/stack_recipe
+	abstract_type = /decl/stack_recipe
 	/// Descriptive name, omitting any materials etc. Taken from product if null.
 	var/name
 	/// Descriptive name for multiple products, uses "[name]s" if null.
@@ -69,7 +70,7 @@
 	/// Tool archetype required, if any.
 	var/required_tool
 	/// Can this recipe use a material? Set to type for a specific material.
-	var/required_material                = MATERIAL_ALLOWED
+	var/required_material                = MATERIAL_REQUIRED
 	/// Can this recipe use a reinforced material? Set to type for a specific material.
 	var/required_reinforce_material      = MATERIAL_FORBIDDEN
 
@@ -326,7 +327,7 @@
 		O.set_dir(user?.dir)
 
 	// Temp block pending material/matter rework
-	if(mat?.type != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
+	if(mat && mat?.type != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
 		var/obj/struct = O
 		if(LAZYACCESS(struct.matter, DEFAULT_FURNITURE_MATERIAL) > 0)
 			struct.matter[mat.type] = max(struct.matter[mat.type], struct.matter[DEFAULT_FURNITURE_MATERIAL])

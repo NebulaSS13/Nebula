@@ -42,7 +42,7 @@
 	abstract_type     = /decl/stack_recipe/tile/steel
 	required_material = /decl/material/solid/metal/steel
 
-/decl/stack_recipe/tile/steel/metal/floor
+/decl/stack_recipe/tile/steel/floor
 	result_type       = /obj/item/stack/tile/floor
 
 /decl/stack_recipe/tile/steel/roof

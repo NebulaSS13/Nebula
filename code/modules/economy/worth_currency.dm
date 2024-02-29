@@ -103,9 +103,9 @@
 	. = "[name_prefix][FLOOR(amt / absolute_value)][name_suffix]"
 
 /decl/currency/proc/build_denominations()
+	denominations = sortTim(denominations, /proc/cmp_currency_denomination_des)
 	for(var/datum/denomination/denomination in denominations)
 		denominations_by_value["[denomination.marked_value]"] = denomination
-	sortTim(denominations, /proc/cmp_currency_denomination_des)
 
 /decl/currency/credits
 	name =          "credits"
@@ -127,11 +127,11 @@
 	..()
 
 /decl/stack_recipe/coin/credits
-	currency = /decl/currency/trader
-	denomination = "two"
+	name = "two credit coin"
+	currency = /decl/currency/credits
 
 /decl/stack_recipe/coin/credits/one
-	denomination = "one"
+	name = "one credit coin"
 
 /datum/denomination/coin/mid
 	state = "coin_medium"
@@ -154,13 +154,13 @@
 
 /decl/stack_recipe/coin/trader
 	currency = /decl/currency/trader
-	denomination = "ten"
+	name = "ten scrip coin"
 
 /decl/stack_recipe/coin/trader/mid
-	denomination = "five"
+	name = "five scrip coin"
 
 /decl/stack_recipe/coin/trader/small
-	denomination = "one"
+	name = "one scrip coin"
 
 /decl/currency/scav
 	name = "scavbucks"

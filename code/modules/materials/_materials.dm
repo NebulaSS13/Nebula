@@ -506,6 +506,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		else
 			log_warning("Invalid phase '[phase]' passed to get_mols_from_units!")
 			return units
+
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
@@ -513,6 +514,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	hidden_from_codex = TRUE
 	exoplanet_rarity_plant = MAT_RARITY_NOWHERE
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
+	holographic = TRUE
 
 /// Generic material product (sheets, bricks, etc). Used ALL THE TIME.
 /// May return an instance list, a single instance, or nothing if there is no instance produced.

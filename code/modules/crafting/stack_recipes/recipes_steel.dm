@@ -53,6 +53,7 @@
 /decl/stack_recipe/steel/furniture/door_assembly
 	name              = "standard airlock assembly"
 	category          = "airlock assemblies"
+	abstract_type     = /decl/stack_recipe/steel/furniture/door_assembly
 
 /decl/stack_recipe/steel/furniture/door_assembly/standard
 	result_type       = /obj/structure/door_assembly
