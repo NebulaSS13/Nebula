@@ -363,14 +363,17 @@
 			stacks |= item
 	for (var/obj/item/stack/item in user?.loc)
 		stacks |= item
+	for (var/obj/item/stack/item in loc)
+		stacks |= item
 	for (var/obj/item/stack/item in stacks)
 		if(item == src || !(can_merge_stacks(item) || item.can_merge_stacks(src)))
 			continue
-		var/transfer = src.transfer_to(item)
+		var/transfer = transfer_to(item)
 		if(user && transfer)
-			to_chat(user, "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>")
+			to_chat(user, SPAN_NOTICE("You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."))
 		if(!amount)
 			break
+	return !QDELETED(src)
 
 /obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
 	. = ..()

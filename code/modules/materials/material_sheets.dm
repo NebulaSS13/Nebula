@@ -314,10 +314,11 @@
 	if(plank_type && (IS_HATCHET(W) || IS_SAW(W)))
 		var/tool_type = W.get_tool_quality(TOOL_HATCHET) >= W.get_tool_quality(TOOL_SAW) ? TOOL_HATCHET : TOOL_SAW
 		if(W.do_tool_interaction(tool_type, user, src, 1 SECOND, set_cooldown = TRUE) && !QDELETED(src))
-			var/obj/item/stack/planks = new plank_type(loc, 1, material?.type, reinf_material?.type)
-			planks.add_to_stacks(user, TRUE)
+			var/obj/item/stack/planks = new plank_type(get_turf(src), rand(2,4), material?.type, reinf_material?.type) // todo: change plank amount based on carpentry skillcheck
 			playsound(loc, 'sound/foley/wooden_drop.ogg', 40, TRUE)
 			use(1)
+			if(planks.add_to_stacks(user, TRUE))
+				user.put_in_hands(planks)
 		return TRUE
 	return ..()
 
