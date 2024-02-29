@@ -4,12 +4,11 @@
 #define MATERIAL_ALLOWED    0
 #define MATERIAL_REQUIRED   1
 
-#define BASE_CRAFTING_TIME (2 SECONDS)
+#define BASE_CRAFTING_TIME (1 SECOND)
 // Normalize crafting time to item size.
-#define CRAFT_TIME_SIZE(X) ((ITEM_SIZE_NORMAL/X) * (0.5 SECONDS))
+#define CRAFT_TIME_SIZE(X) ((ITEM_SIZE_NORMAL/X) * (1 SECOND))
 // Add half a second per difficulty level.
 #define CRAFT_TIME_DIFFICULTY(X) (X * (0.5 SECONDS))
-
 
 /*
  * Recipe datum
@@ -27,8 +26,8 @@
 	var/req_amount
 	/// Amount of stuff that is produced in one batch (e.g. 4 for floor tiles).
 	var/res_amount                       = 1
-	// Caps the amount that can be produced in one craft action.
-	var/max_res_amount                   = 1
+	// Caps the amount that can be produced in one craft action. Set to null for no cap.
+	var/max_res_amount
 	/// Time it takes for this recipe to be crafted (not including skill and tool modifiers). If null, generates from product w_class and difficulty.
 	var/time
 	/// If set, only one of this object can be made per turf.
@@ -93,12 +92,20 @@
 		if(isnull(name))
 			name = initial(result.name)
 		if(isnull(time))
-			time = round(BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(initial(result.w_class)) + CRAFT_TIME_DIFFICULTY(difficulty), 0.5)
+			time = max(0.5 SECONDS, round(BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(initial(result.w_class)) + CRAFT_TIME_DIFFICULTY(difficulty), 5))
 		if(isnull(gender))
 			gender = initial(result.gender)
 
+	// Clamp stack max amount to this regardless of anything else
+	// so we don't lose material on crafting an impossible stack.
+	if(ispath(result_type, /obj/item/stack))
+		var/obj/item/stack/result_stack = result_type
+		var/stack_max = initial(result_stack.max_amount)
+		if(isnull(max_res_amount) || max_res_amount > stack_max)
+			max_res_amount = stack_max
+
 	if(isnull(name_plural))
-		name_plural = (gender == PLURAL) ? name : "[name]s"
+		name_plural = "[name]s"
 
 	// Wipe our tool requirements if the server is not configured to use them.
 	if(required_tool && !get_config_value(/decl/config/toggle/stack_crafting_uses_tools))
@@ -154,18 +161,15 @@
 	. = list("<tr>")
 
 	. += "<td width = '150px'>"
-	if (res_amount > 1)
-		. += "[res_amount]x [get_display_name(res_amount)]\s"
-	else
-		. += get_display_name(1)
+	. += get_display_name(res_amount, apply_article = FALSE)
 	. += "</td>"
 
 	. += "<td width = '75px'>"
-	. += "[req_amount] [stack.singular_name]\s"
+	. += "[req_amount] [req_amount == 1 ? stack.singular_name : stack.plural_name]"
 	. += "</td>"
 
 	. += "<td width = '75px'>"
-	. += "[time / 10] second\s"
+	. += "[round(time / 10, 0.5)] second\s"
 	. += "</td>"
 
 	. += "<td width = '200px'>"
@@ -181,14 +185,15 @@
 	. += "<td width = '200px'>"
 	var/max_multiplier = round(stack.get_amount() / req_amount)
 	if(max_multiplier)
-		max_multiplier = min(max_multiplier, round(max_res_amount / res_amount))
-		var/static/list/multipliers = list(1, 5, 10, 25)
+		if(max_res_amount > 0)
+			max_multiplier = min(max_multiplier, round(max_res_amount / res_amount))
+		var/static/list/multipliers = list(1, 5, 10, 25, 50)
 		for(var/n in multipliers)
 			if(max_multiplier < n)
 				break
 			. += "<a href='?src=\ref[stack];make=\ref[src];multiplier=[n]'>[n*res_amount]x</a>"
 		if(!(max_multiplier in multipliers))
-			. += " <a href='?src=\ref[stack];make=\ref[src];multiplier=[max_multiplier]'>[max_multiplier*res_amount]x</a>"
+			. += "<a href='?src=\ref[stack];make=\ref[src];multiplier=[max_multiplier]'>[max_multiplier*res_amount]x</a>"
 	. += "</td>"
 	. += "</tr>"
 
@@ -291,8 +296,14 @@
 		if(LAZYLEN(material_strings))
 			material_strings = "[english_list(material_strings)]"
 	if(amount != 1)
-		return jointext(list(amount, material_strings, name_plural), " ")
-	return jointext(list(material_strings, apply_article ? "\a [name]" : name), " ")
+		. = jointext(list("[amount]x", material_strings, name_plural), " ")
+	else
+		. = jointext(list(material_strings, name), " ")
+		if(apply_article)
+			if(gender == PLURAL)
+				. = "some [.]"
+			else
+				. = ADD_ARTICLE(.)
 
 /decl/stack_recipe/proc/req_mat_to_type(decl/material/mat, mat_req)
 	if(mat_req != MATERIAL_FORBIDDEN)

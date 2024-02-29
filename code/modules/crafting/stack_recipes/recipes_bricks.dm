@@ -5,9 +5,9 @@
 		/obj/item/stack/material/slab
 	)
 	forbidden_craft_stack_types = list(
-        /obj/item/stack/material/ore,
-        /obj/item/stack/material/log,
-        /obj/item/stack/material/lump
+		/obj/item/stack/material/ore,
+		/obj/item/stack/material/log,
+		/obj/item/stack/material/lump
 	)
 
 /decl/stack_recipe/bricks/furniture
