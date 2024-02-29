@@ -3,37 +3,30 @@
 	required_material = /decl/material/solid/metal/steel
 
 /decl/stack_recipe/steel/apc
-	name              = "APC frame"
 	result_type       = /obj/item/frame/apc
 	difficulty        = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/air_alarm
-	name              = "air alarm frame"
 	result_type       = /obj/item/frame/air_alarm
 	difficulty        = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/fire_alarm
-	name              = "fire alarm frame"
 	result_type       = /obj/item/frame/fire_alarm
 	difficulty        = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/light
-	name              = "light fixture frame"
 	result_type       = /obj/item/frame/light
 	difficulty        = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/light_small
-	name              = "small light fixture frame"
 	result_type       = /obj/item/frame/light/small
 	difficulty        = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/light_switch
-	name              = "light switch frame"
 	result_type       = /obj/item/frame/button/light_switch
 	difficulty        = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/light_switch/windowtint
-	name              = "window tint switch frame"
 	result_type       = /obj/item/frame/button/light_switch/windowtint
 	difficulty        = MAT_VALUE_HARD_DIY
 
@@ -41,68 +34,18 @@
 	required_material = /decl/material/solid/metal/steel
 
 /decl/stack_recipe/steel/cannon
-	name              = "cannon frame"
 	result_type       = /obj/item/cannonframe
-	time              = 1.5 SECONDS
 	difficulty        = MAT_VALUE_VERY_HARD_DIY
-
-/decl/stack_recipe/steel/tile
-	abstract_type     = /decl/stack_recipe/steel/tile
-	category          = "tiling"
-
-/decl/stack_recipe/steel/tile/metal/floor
-	name              = "regular floor tile"
-	result_type       = /obj/item/stack/tile/floor
-
-/decl/stack_recipe/steel/tile/roof
-	name              = "roofing tile"
-	result_type       = /obj/item/stack/tile/roof
-
-/decl/stack_recipe/steel/tile/mono
-	name              = "mono floor tile"
-	result_type       = /obj/item/stack/tile/mono
-
-/decl/stack_recipe/steel/tile/mono_dark
-	name              = "dark mono floor tile"
-	result_type       = /obj/item/stack/tile/mono/dark
-
-/decl/stack_recipe/steel/tile/grid
-	name              = "grid floor tile"
-	result_type       = /obj/item/stack/tile/grid
-
-/decl/stack_recipe/steel/tile/ridged
-	name              = "ridged floor tile"
-	result_type       = /obj/item/stack/tile/ridge
-
-/decl/stack_recipe/steel/tile/tech_grey
-	name              = "grey techfloor tile"
-	result_type       = /obj/item/stack/tile/techgrey
-
-/decl/stack_recipe/steel/tile/tech_grid
-	name              = "grid techfloor tile"
-	result_type       = /obj/item/stack/tile/techgrid
-
-/decl/stack_recipe/steel/tile/tech_maint
-	name              = "dark techfloor tile"
-	result_type       = /obj/item/stack/tile/techmaint
-
-/decl/stack_recipe/steel/tile/dark
-	name              = "dark floor tile"
-	result_type       = /obj/item/stack/tile/floor_dark
-
 
 /decl/stack_recipe/steel/furniture
 	abstract_type     = /decl/stack_recipe/steel/furniture
 	one_per_turf      = TRUE
 	on_floor          = TRUE
 	difficulty        = MAT_VALUE_HARD_DIY
-	time              = 5 SECONDS
 
 /decl/stack_recipe/steel/furniture/computerframe
-	name              = "computer frame"
 	result_type       = /obj/machinery/constructable_frame/computerframe
-	req_amount        = 5
-	time              = 2.5 SECONDS
+	req_amount        = 5 // Arbitrary value since machines don't handle matter properly yet.
 
 /decl/stack_recipe/steel/furniture/computerframe/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	return new result_type(location)
@@ -134,7 +77,6 @@
 	name              = "unidirectional emergency shutter assembly"
 	result_type       = /obj/structure/firedoor_assembly/border
 	one_per_turf      = FALSE
-	time              = 1 SECOND
 
 /decl/stack_recipe/steel/furniture/door_assembly/double
 	name              = "double airlock assembly"
@@ -153,17 +95,8 @@
 	result_type       = /obj/structure/door_assembly/blast/morgue
 
 /decl/stack_recipe/steel/furniture/canister
-	name              = "canister"
 	result_type       = /obj/machinery/portable_atmospherics/canister
-	req_amount        = 20
-	time              = 1 SECOND
+	req_amount        = 20 // Arbitrary value since machines don't handle matter properly yet.
 
 /decl/stack_recipe/steel/furniture/tank
-	name              = "pressure tank"
 	result_type       = /obj/item/pipe/tank
-	time              = 2 SECONDS
-
-/decl/stack_recipe/tile/pool
-	name              = "pool floor tile"
-	result_type       = /obj/item/stack/tile/pool
-	required_material = /decl/material/solid/metal/steel

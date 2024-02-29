@@ -243,7 +243,7 @@
 	if(busy || load || get_dist(C, src) > 1 || !isturf(C.loc) || C.anchored)
 		return
 
-	for(var/obj/structure/plasticflaps/P in src.loc)//Takes flaps into account
+	for(var/obj/structure/flaps/P in src.loc)//Takes flaps into account
 		if(!CanPass(C,P))
 			return
 

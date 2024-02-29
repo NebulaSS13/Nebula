@@ -1,8 +1,8 @@
 /decl/stack_recipe/turfs
 	abstract_type         = /decl/stack_recipe/turfs
 	expected_product_type = /turf
-	time                  = 3 SECONDS
-	/// Arbitrary value since turfs don't behave like objs in terms of material/matter
+	/// Arbitrary values since turfs don't behave like objs in terms of material/matter/w_class/time
+	time                  = 5 SECONDS
 	req_amount            = 5
 
 // See req_amount above.

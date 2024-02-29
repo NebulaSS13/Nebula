@@ -154,16 +154,16 @@
 /obj/item/stack/proc/produce_recipe(decl/stack_recipe/recipe, var/quantity, mob/user)
 	var/required = quantity*recipe.req_amount
 	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
+	var/decl/material/mat       = get_material()
+	var/decl/material/reinf_mat = get_reinforced_material()
+
 	if (!can_use(required))
-		if (produced>1)
-			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \a [produced] [recipe.display_name(get_material(), get_reinforced_material())]\s!"))
-		else
-			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \a [recipe.display_name(get_material(), get_reinforced_material())]!"))
+		to_chat(user, SPAN_WARNING("You haven't got enough [plural_name] to build [recipe.get_display_name(produced, mat, reinf_mat)]!"))
 		return
 	if(!recipe.can_make(user))
 		return
 	if (recipe.time)
-		to_chat(user, SPAN_NOTICE("You set about building \a [recipe.display_name(get_material(), get_reinforced_material())]..."))
+		to_chat(user, SPAN_NOTICE("You set about making [recipe.get_display_name(produced, mat, reinf_mat)]..."))
 		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION))
 			return
 
@@ -171,10 +171,10 @@
 		return
 
 	if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
-		to_chat(user, SPAN_WARNING("You waste some [name] and fail to build \a [recipe.display_name(get_material(), get_reinforced_material())]!"))
+		to_chat(user, SPAN_WARNING("You waste some [name] and fail to make [recipe.get_display_name(produced, mat, reinf_mat)]!"))
 		return
-	to_chat(user, SPAN_NOTICE("You complete \a [recipe.display_name(get_material(), get_reinforced_material())]!"))
-	var/atom/movable/O = recipe.spawn_result(user, user.loc, produced, get_material(), get_reinforced_material())
+	to_chat(user, SPAN_NOTICE("You complete [recipe.get_display_name(produced, mat, reinf_mat)]!"))
+	var/atom/movable/O = recipe.spawn_result(user, user.loc, produced, mat, reinf_mat)
 	if(istype(O) && !QDELETED(O)) // In case of stack merger.
 		O.add_fingerprint(user)
 		user.put_in_hands(O)

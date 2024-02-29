@@ -1,12 +1,10 @@
 //Recipes that produce items which aren't stacks or storage.
 /decl/stack_recipe/grenade
-	name              = "grenade casing"
 	result_type       = /obj/item/grenade/chem_grenade
 	difficulty        = MAT_VALUE_VERY_HARD_DIY
 	required_material = /decl/material/solid/metal/aluminium
 
 /decl/stack_recipe/candle
-	name              = "candle"
 	result_type       = /obj/item/flame/candle
 	difficulty        = MAT_VALUE_EASY_DIY
 	required_material = /decl/material/solid/organic/wax

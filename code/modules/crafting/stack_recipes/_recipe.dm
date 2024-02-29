@@ -6,66 +6,126 @@
 
 #define BASE_CRAFTING_TIME (2 SECONDS)
 // Normalize crafting time to item size.
-#define CRAFT_TIME_SIZE_MULT(X) round((ITEM_SIZE_NORMAL/X) * (0.5 SECONDS))
+#define CRAFT_TIME_SIZE(X) ((ITEM_SIZE_NORMAL/X) * (0.5 SECONDS))
 // Add half a second per difficulty level.
-#define CRAFT_TIME_DIFFICULTY_MULT(X) round(X * (0.5 SECONDS))
+#define CRAFT_TIME_DIFFICULTY(X) (X * (0.5 SECONDS))
 
 
 /*
  * Recipe datum
  */
 /decl/stack_recipe
-
+	/// Descriptive name, omitting any materials etc. Taken from product if null.
 	var/name
+	/// Descriptive name for multiple products, uses "[name]s" if null.
+	var/name_plural
+	/// Used for name grammar, grabbed from product if null.
+	var/gender
+	// Object path to the desired product.
 	var/result_type
-	/// amount of sheets/ingots/etc needed for this recipe
+	/// Amount of sheets/ingots/etc needed for this recipe. If null, generates from result matter.
 	var/req_amount
-	/// amount of stuff that is produced in one batch (e.g. 4 for floor tiles)
+	/// Amount of stuff that is produced in one batch (e.g. 4 for floor tiles).
 	var/res_amount                       = 1
+	// Caps the amount that can be produced in one craft action.
 	var/max_res_amount                   = 1
-	var/time                             = 0
+	/// Time it takes for this recipe to be crafted (not including skill and tool modifiers). If null, generates from product w_class and difficulty.
+	var/time
+	/// If set, only one of this object can be made per turf.
 	var/one_per_turf                     = FALSE
+	/// If set will be created on the floor instead of in-hand.
 	var/on_floor                         = FALSE
-	// higher difficulty requires higher skill level to make.
+	/// Higher difficulty requires higher skill level to make.
 	var/difficulty                       = MAT_VALUE_NORMAL_DIY
-	//Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
+	/// Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'.
 	var/apply_material_name              = TRUE
+	/// Sets direction to the crafting user on creation.
 	var/set_dir_on_spawn                 = TRUE
+	/// Used to validate some checks like matter (since /turf has no matter).
 	var/expected_product_type            = /obj
+	/// Used for providing a display name.
 
+	/// What stack types can be used to make this recipe?
 	var/list/craft_stack_types           = list(
 		/obj/item/stack/material/sheet,
 		/obj/item/stack/material/ingot,
 		/obj/item/stack/material/plank,
 		/obj/item/stack/material/bar,
 		/obj/item/stack/material/puck
-
 	)
+	/// What stack types cannot be used to make this recipe?
 	var/list/forbidden_craft_stack_types = list(
 		/obj/item/stack/material/ore,
 		/obj/item/stack/material/log,
 		/obj/item/stack/material/lump,
 		/obj/item/stack/material/slab
 	)
-
+	/// If set, will group recipes under a stack recipe list.
 	var/category
+	/// Modifies the matter values retrieved by req_amount calculation. Should always be more than 1.
 	var/crafting_extra_cost_factor       = 1.2
+	/// Skill to check for the recipe.
 	var/recipe_skill                     = SKILL_CONSTRUCTION
 
+	/// Tool archetype required, if any.
 	var/required_tool
-	var/required_reinforce_material      = MATERIAL_FORBIDDEN
+	/// Can this recipe use a material? Set to type for a specific material.
 	var/required_material                = MATERIAL_ALLOWED
+	/// Can this recipe use a reinforced material? Set to type for a specific material.
+	var/required_reinforce_material      = MATERIAL_FORBIDDEN
 
+	/// Minimum material wall support value.
 	var/required_wall_support_value
+	/// Minimum material integrity value.
 	var/required_integrity
+	/// Minimum material hardness value.
 	var/required_hardness
+	/// Maximum material opacity value.
 	var/required_max_opacity
+
+/decl/stack_recipe/Initialize()
+	. = ..()
+
+	// Use initial() instead of atom info repo
+	// to avoid grabbing the material name.
+	if(result_type)
+		var/obj/result = result_type
+		if(isnull(name))
+			name = initial(result.name)
+		if(isnull(time))
+			time = round(BASE_CRAFTING_TIME + CRAFT_TIME_SIZE(initial(result.w_class)) + CRAFT_TIME_DIFFICULTY(difficulty), 0.5)
+		if(isnull(gender))
+			gender = initial(result.gender)
+
+	if(isnull(name_plural))
+		name_plural = (gender == PLURAL) ? name : "[name]s"
+
+	// Wipe our tool requirements if the server is not configured to use them.
+	if(required_tool && !get_config_value(/decl/config/toggle/stack_crafting_uses_tools))
+		required_tool = null
+
+	// We keep the stack blacklists because they're mainly there to stop people crafting with raw forms.
+	if(craft_stack_types && !get_config_value(/decl/config/toggle/on/stack_crafting_uses_types))
+		craft_stack_types = null
+
+	update_req_amount()
 
 /decl/stack_recipe/validate()
 	. = ..()
 
-	if(isnull(name))
-		. += "null name"
+	if(isnull(initial(req_amount)) && crafting_extra_cost_factor < 1)
+		. += "crafting cost factor is less than one, this may result in free materials."
+
+	if(!istext(name))
+		. += "null or non-text name: [name || "NULL"]"
+	if(!isnum(time))
+		. += "null or non-text crafting time: [time || "NULL"]"
+	if(!ispath(result_type))
+		. += "null or non-path result type: [result_type || "NULL"]"
+	else if(!ispath(expected_product_type))
+		. += "null or non-path expected product type: [expected_product_type || "NULL"]"
+	else if(!ispath(result_type, expected_product_type))
+		. += "result type [result_type || "NULL"] is not subtype of expected product type [expected_product_type || "NULL"]"
 
 	if(isnull(required_material) || required_material == MATERIAL_FORBIDDEN)
 		if(!isnull(required_wall_support_value))
@@ -95,9 +155,9 @@
 
 	. += "<td width = '150px'>"
 	if (res_amount > 1)
-		. += "[res_amount]x [display_name()]\s"
+		. += "[res_amount]x [get_display_name(res_amount)]\s"
 	else
-		. += display_name()
+		. += get_display_name(1)
 	. += "</td>"
 
 	. += "<td width = '75px'>"
@@ -212,47 +272,27 @@
 	// All good!
 	return TRUE
 
-/decl/stack_recipe/Initialize()
-	. = ..()
-
-	// Use initial() instead of atom info repo
-	// to avoid grabbing the material name.
-	if(result_type)
-		var/obj/result = result_type
-		if(isnull(name))
-			name = initial(result.name)
-		if(isnull(time))
-			time = BASE_CRAFTING_TIME + CRAFT_TIME_SIZE_MULT(initial(result.w_class)) + CRAFT_TIME_DIFFICULT_MULT(difficulty)
-
-	// Wipe our tool requirements if the server is not configured to use them.
-	if(required_tool && !get_config_value(/decl/config/toggle/stack_crafting_uses_tools))
-		required_tool = null
-
-	// We keep the stack blacklists because they're mainly there to stop people crafting with raw forms.
-	if(craft_stack_types && !get_config_value(/decl/config/toggle/on/stack_crafting_uses_types))
-		craft_stack_types = null
-
-	update_req_amount()
-
 /decl/stack_recipe/proc/update_req_amount()
 	if(result_type && isnull(req_amount))
 		req_amount = 0
-		var/list/materials = atom_info_repository.get_matter_for(result_type, ispath(required_material) ? required_material : null, res_amount)
+		var/list/materials
+		materials = atom_info_repository.get_matter_for(result_type, (ispath(required_material) ? required_material : null), res_amount)
 		for(var/mat in materials)
 			req_amount += round(materials[mat]/res_amount)
 		req_amount = clamp(CEILING(((req_amount*crafting_extra_cost_factor)/SHEET_MATERIAL_AMOUNT) * res_amount), 1, 50)
 
-/decl/stack_recipe/proc/display_name(decl/material/mat, decl/material/reinf_mat)
-	if(!apply_material_name)
-		return name
-	var/list/material_strings = list()
-	if(mat && required_material != MATERIAL_FORBIDDEN)
-		material_strings += mat.use_name
-	if(reinf_mat && required_reinforce_material != MATERIAL_FORBIDDEN)
-		material_strings += reinf_mat.use_name
-	if(length(material_strings))
-		return "[english_list(material_strings)] [name]"
-	return name
+/decl/stack_recipe/proc/get_display_name(amount, decl/material/mat, decl/material/reinf_mat, apply_article = TRUE)
+	var/material_strings
+	if(apply_material_name)
+		if(mat && required_material != MATERIAL_FORBIDDEN)
+			LAZYDISTINCTADD(material_strings, mat.use_name)
+		if(reinf_mat && required_reinforce_material != MATERIAL_FORBIDDEN)
+			LAZYDISTINCTADD(material_strings, reinf_mat.use_name)
+		if(LAZYLEN(material_strings))
+			material_strings = "[english_list(material_strings)]"
+	if(amount != 1)
+		return jointext(list(amount, material_strings, name_plural), " ")
+	return jointext(list(material_strings, apply_article ? "\a [name]" : name), " ")
 
 /decl/stack_recipe/proc/req_mat_to_type(decl/material/mat, mat_req)
 	if(mat_req != MATERIAL_FORBIDDEN)
@@ -291,10 +331,10 @@
 
 /decl/stack_recipe/proc/can_make(mob/user)
 	if (one_per_turf && (locate(result_type) in user.loc))
-		to_chat(user, SPAN_WARNING("There is another [display_name()] here!"))
+		to_chat(user, SPAN_WARNING("There is already [get_display_name(1)] here!"))
 		return FALSE
 	var/turf/T = get_turf(user.loc)
 	if (on_floor && (!istype(T) || !T.is_floor()))
-		to_chat(user, SPAN_WARNING("\The [display_name()] must be constructed on the floor!"))
+		to_chat(user, SPAN_WARNING("[capitalize(get_display_name(1))] must be constructed on the floor!"))
 		return FALSE
 	return TRUE

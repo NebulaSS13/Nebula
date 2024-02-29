@@ -3,12 +3,10 @@
 	required_max_opacity = 0.5
 	on_floor             = TRUE
 	difficulty           = MAT_VALUE_HARD_DIY
-	time                 = 0.5 SECONDS
 
 /decl/stack_recipe/opacity/fullwindow
 	name                 = "full-tile window"
 	result_type          = /obj/structure/window
-	time                 = 1.5 SECONDS
 
 /decl/stack_recipe/opacity/fullwindow/can_make(mob/user)
 	. = ..()
@@ -24,7 +22,6 @@
 /decl/stack_recipe/opacity/borderwindow
 	name                 = "border window"
 	result_type          = /obj/structure/window
-	time                 = 0.5 SECONDS
 	one_per_turf         = 0
 
 /decl/stack_recipe/opacity/borderwindow/can_make(mob/user)
@@ -39,9 +36,7 @@
 	return new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, user?.dir, TRUE)
 
 /decl/stack_recipe/opacity/windoor
-	name                 = "windoor assembly"
 	result_type          = /obj/structure/windoor_assembly
-	time                 = 2 SECONDS
 
 /decl/stack_recipe/opacity/windoor/can_make(mob/user)
 	. = ..()

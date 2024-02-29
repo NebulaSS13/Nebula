@@ -1,4 +1,4 @@
-/obj/structure/plasticflaps/Initialize()
+/obj/structure/flaps/Initialize()
 	. = ..()
 	mobs_can_pass |= /mob/living/slime
 

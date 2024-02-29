@@ -4,8 +4,6 @@
 	forbidden_craft_stack_types = /obj/item/stack/material/ore
 
 /decl/stack_recipe/logs/campfire
-	name                        = "campfire"
-	time                        = 4 SECONDS
 	on_floor                    = TRUE
 	one_per_turf                = TRUE
 	apply_material_name         = FALSE
