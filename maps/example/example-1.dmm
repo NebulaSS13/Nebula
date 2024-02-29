@@ -77,11 +77,11 @@
 /area/example/first)
 "dE" = (
 /obj/structure/rack,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/ingot/mapped/gold/ten,
 /obj/item/stack/material/segment/mapped/mhydrogen/ten,
 /obj/item/stack/material/ingot/mapped/silver/ten,

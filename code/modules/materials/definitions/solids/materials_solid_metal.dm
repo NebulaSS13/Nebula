@@ -256,7 +256,7 @@
 	color = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	taste_description = "metal"
-	default_solid_form = /obj/item/stack/material/shiny
+	default_solid_form = /obj/item/stack/material/sheet/shiny
 
 /decl/material/solid/metal/aluminium/holographic
 	name = "holoaluminium"
@@ -283,7 +283,7 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
-	default_solid_form = /obj/item/stack/material/reinforced
+	default_solid_form = /obj/item/stack/material/sheet/reinforced
 	exoplanet_rarity_plant = MAT_RARITY_UNCOMMON
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	dissolves_in = MAT_SOLVENT_IMMUNE
@@ -312,7 +312,7 @@
 	stack_origin_tech = @'{"materials":2}'
 	hitsound = 'sound/weapons/smash.ogg'
 	reflectiveness = MAT_VALUE_MATTE
-	default_solid_form = /obj/item/stack/material/reinforced
+	default_solid_form = /obj/item/stack/material/sheet/reinforced
 	dissolves_in = MAT_SOLVENT_IMMUNE
 	dissolves_into = null
 

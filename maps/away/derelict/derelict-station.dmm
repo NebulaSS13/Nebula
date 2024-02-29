@@ -1253,7 +1253,7 @@
 /area/constructionsite/teleporter)
 "ep" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark,

@@ -1,8 +1,6 @@
-//Furniture is in a separate file.
-
 /decl/stack_recipe/railing
-	name = "railing"
+	name        = "railing"
 	result_type = /obj/structure/railing
-	time = 40
-	on_floor = 1
-	difficulty = MAT_VALUE_HARD_DIY
+	time        = 4 SECONDS
+	on_floor    = TRUE
+	difficulty  = MAT_VALUE_HARD_DIY

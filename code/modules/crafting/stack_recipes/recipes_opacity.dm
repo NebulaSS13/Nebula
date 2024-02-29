@@ -1,14 +1,14 @@
 /decl/stack_recipe/opacity
 	abstract_type        = /decl/stack_recipe/opacity
 	required_max_opacity = 0.5
-	on_floor             = 1
+	on_floor             = TRUE
 	difficulty           = MAT_VALUE_HARD_DIY
-	time                 = 5
+	time                 = 0.5 SECONDS
 
 /decl/stack_recipe/opacity/fullwindow
 	name                 = "full-tile window"
 	result_type          = /obj/structure/window
-	time                 = 15
+	time                 = 1.5 SECONDS
 
 /decl/stack_recipe/opacity/fullwindow/can_make(mob/user)
 	. = ..()
@@ -19,12 +19,12 @@
 				return FALSE
 
 /decl/stack_recipe/opacity/fullwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return new result_type(user?.loc, (required_material != MATERIAL_FORBIDDEN ? mat.type : null), (required_reinforce_material != MATERIAL_FORBIDDEN ? reinf_mat.type : null), SOUTHWEST, TRUE)
+	return new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, SOUTHWEST, TRUE)
 
 /decl/stack_recipe/opacity/borderwindow
 	name                 = "border window"
 	result_type          = /obj/structure/window
-	time                 = 5
+	time                 = 0.5 SECONDS
 	one_per_turf         = 0
 
 /decl/stack_recipe/opacity/borderwindow/can_make(mob/user)
@@ -36,12 +36,12 @@
 				return FALSE
 
 /decl/stack_recipe/opacity/borderwindow/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return new result_type(user?.loc, (required_material != MATERIAL_FORBIDDEN ? mat.type : null), (required_reinforce_material != MATERIAL_FORBIDDEN ? reinf_mat.type : null), user?.dir, TRUE)
+	return new result_type(user?.loc, MATERIAL_RECIPE_PARAMS, user?.dir, TRUE)
 
 /decl/stack_recipe/opacity/windoor
 	name                 = "windoor assembly"
-	result_type = /obj/structure/windoor_assembly
-	time = 20
+	result_type          = /obj/structure/windoor_assembly
+	time                 = 2 SECONDS
 
 /decl/stack_recipe/opacity/windoor/can_make(mob/user)
 	. = ..()
@@ -51,4 +51,4 @@
 			return FALSE
 
 /decl/stack_recipe/opacity/windoor/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
-	return new result_type(user?.loc, (required_material != MATERIAL_FORBIDDEN ? mat.type : null), (required_reinforce_material != MATERIAL_FORBIDDEN ? reinf_mat.type : null))
+	return new result_type(user?.loc, MATERIAL_RECIPE_PARAMS)

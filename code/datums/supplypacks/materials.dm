@@ -9,7 +9,7 @@
 
 /decl/hierarchy/supply_pack/materials/alum50
 	name = "50 aluminium sheets"
-	contains = list(/obj/item/stack/material/shiny/mapped/aluminium/fifty)
+	contains = list(/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty)
 	containername = "aluminium sheets crate"
 
 /decl/hierarchy/supply_pack/materials/glass50
@@ -19,7 +19,7 @@
 
 /decl/hierarchy/supply_pack/materials/fiberglass50
 	name = "50 fiberglass sheets"
-	contains = list(/obj/item/stack/material/reinforced/mapped/fiberglass/fifty)
+	contains = list(/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty)
 	containername = "fiberglass sheets crate"
 
 /decl/hierarchy/supply_pack/materials/plastic50
@@ -34,7 +34,7 @@
 
 /decl/hierarchy/supply_pack/materials/plasteel50
 	name = "50 plasteel sheets"
-	contains = list(/obj/item/stack/material/reinforced/mapped/plasteel/fifty)
+	contains = list(/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty)
 	containername = "plasteel sheets crate"
 
 /decl/hierarchy/supply_pack/materials/copper50
@@ -44,12 +44,12 @@
 
 /decl/hierarchy/supply_pack/materials/titanium50
 	name = "50 titanium sheets"
-	contains = list(/obj/item/stack/material/reinforced/mapped/titanium/fifty)
+	contains = list(/obj/item/stack/material/sheet/reinforced/mapped/titanium/fifty)
 	containername = "titanium sheets crate"
 
 /decl/hierarchy/supply_pack/materials/ocp50
 	name = "50 osmium carbide plasteel sheets"
-	contains = list(/obj/item/stack/material/reinforced/mapped/ocp/fifty)
+	contains = list(/obj/item/stack/material/sheet/reinforced/mapped/ocp/fifty)
 	containername = "osmium carbide plasteel sheets crate"
 
 /decl/hierarchy/supply_pack/materials/graphite50
@@ -64,17 +64,17 @@
 
 /decl/hierarchy/supply_pack/materials/plasteel10
 	name = "10 plasteel sheets"
-	contains = list(/obj/item/stack/material/reinforced/mapped/plasteel/ten)
+	contains = list(/obj/item/stack/material/sheet/reinforced/mapped/plasteel/ten)
 	containername = "plasteel sheets crate"
 
 /decl/hierarchy/supply_pack/materials/titanium10
 	name = "10 titanium sheets"
-	contains = list(/obj/item/stack/material/reinforced/mapped/titanium/ten)
+	contains = list(/obj/item/stack/material/sheet/reinforced/mapped/titanium/ten)
 	containername = "titanium sheets crate"
 
 /decl/hierarchy/supply_pack/materials/ocp10
 	name = "10 osmium carbide plasteel sheets"
-	contains = list(/obj/item/stack/material/reinforced/mapped/ocp/ten)
+	contains = list(/obj/item/stack/material/sheet/reinforced/mapped/ocp/ten)
 	containername = "osmium carbide plasteel sheets crate"
 
 /decl/hierarchy/supply_pack/materials/gold10

@@ -3571,14 +3571,14 @@
 	dir = 1
 	},
 /obj/structure/closet/crate,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
 /turf/simulated/floor/tiled,
 /area/ministation/eva)
@@ -7596,18 +7596,18 @@
 /obj/structure/table,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/rglass,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "HQ" = (
 /obj/structure/table,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "HR" = (
 /obj/structure/table,
-/obj/item/stack/material/reinforced/mapped/plasteel,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "HS" = (
@@ -10929,7 +10929,7 @@
 	},
 /obj/item/stack/material/pane/mapped/glass/ten,
 /obj/item/stack/material/sheet/mapped/steel/ten,
-/obj/item/stack/material/shiny/mapped/aluminium/ten,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/ten,
 /obj/machinery/camera/network/mining,
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)

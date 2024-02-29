@@ -2254,7 +2254,7 @@
 /obj/structure/rack,
 /obj/item/stock_parts/circuitboard/pacman/super/potato,
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,
-/obj/item/stack/material/reinforced/mapped/ocp/ten,
+/obj/item/stack/material/sheet/reinforced/mapped/ocp/ten,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
@@ -2370,7 +2370,7 @@
 /area/ship/scrap/maintenance/storage)
 "eS" = (
 /obj/item/stack/tape_roll/duct_tape,
-/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -2380,7 +2380,7 @@
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
-/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eT" = (

@@ -17,7 +17,6 @@
 	plural_name = "sheets"
 	abstract_type = /obj/item/stack/material
 	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
-	crafting_stack_type = /obj/item/stack/material
 	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
@@ -166,6 +165,7 @@
 	plural_icon_state = "ingot-mult"
 	max_icon_state = "ingot-max"
 	stack_merge_type = /obj/item/stack/material/ingot
+	crafting_stack_type = /obj/item/stack/material/ingot
 
 /obj/item/stack/material/sheet
 	name = "sheets"
@@ -173,6 +173,7 @@
 	plural_icon_state = "sheet-mult"
 	max_icon_state = "sheet-max"
 	stack_merge_type = /obj/item/stack/material/sheet
+	crafting_stack_type = /obj/item/stack/material/sheet
 
 /obj/item/stack/material/panel
 	name = "panels"
@@ -192,6 +193,7 @@
 	singular_name = "length"
 	plural_name = "lengths"
 	stack_merge_type = /obj/item/stack/material/skin
+	crafting_stack_type = /obj/item/stack/material/skin
 
 /obj/item/stack/material/skin/pelt
 	name = "pelts"
@@ -213,6 +215,7 @@
 	singular_name = "length"
 	plural_name = "lengths"
 	stack_merge_type = /obj/item/stack/material/bone
+	crafting_stack_type = /obj/item/stack/material/bone
 
 /obj/item/stack/material/brick
 	name = "bricks"
@@ -230,6 +233,7 @@
 	singular_name = "bolt"
 	plural_name = "bolts"
 	stack_merge_type = /obj/item/stack/material/bolt
+	crafting_stack_type = /obj/item/stack/material/bolt
 
 /obj/item/stack/material/pane
 	name = "panes"
@@ -239,6 +243,7 @@
 	plural_icon_state = "sheet-clear-mult"
 	max_icon_state = "sheet-clear-max"
 	stack_merge_type = /obj/item/stack/material/pane
+	crafting_stack_type = /obj/item/stack/material/pane
 
 /obj/item/stack/material/pane/update_state_from_amount()
 	if(reinf_material)
@@ -268,6 +273,7 @@
 	plural_icon_state = "diamond-mult"
 	max_icon_state = "diamond-max"
 	stack_merge_type = /obj/item/stack/material/gemstone
+	crafting_stack_type = /obj/item/stack/material/gemstone
 
 /obj/item/stack/material/puck
 	name = "pucks"
@@ -277,6 +283,7 @@
 	plural_icon_state = "puck-mult"
 	max_icon_state = "puck-max"
 	stack_merge_type = /obj/item/stack/material/puck
+	crafting_stack_type = /obj/item/stack/material/puck
 
 /obj/item/stack/material/aerogel
 	name = "aerogel"
@@ -286,6 +293,7 @@
 	plural_icon_state = "puck-mult"
 	max_icon_state = "puck-max"
 	stack_merge_type = /obj/item/stack/material/aerogel
+	crafting_stack_type = /obj/item/stack/material/aerogel
 
 // Aerogel melting point is below 0 as it is a physical container for gas; hack around that here.
 /obj/item/stack/material/aerogel/ProcessAtomTemperature()
@@ -298,9 +306,9 @@
 	icon_state = "sheet-wood"
 	plural_icon_state = "sheet-wood-mult"
 	max_icon_state = "sheet-wood-max"
-	stack_merge_type = /obj/item/stack/material/plank
 	pickup_sound = 'sound/foley/wooden_drop.ogg'
 	drop_sound = 'sound/foley/wooden_drop.ogg'
+	stack_merge_type = /obj/item/stack/material/plank
 	crafting_stack_type = /obj/item/stack/material/plank
 
 /obj/item/stack/material/log
@@ -332,21 +340,21 @@
 	plural_name = "segments"
 	icon_state = "sheet-mythril"
 	stack_merge_type = /obj/item/stack/material/segment
+	crafting_stack_type = /obj/item/stack/material/segment
 
-/obj/item/stack/material/reinforced
+/obj/item/stack/material/sheet/reinforced
 	icon_state = "sheet-reinf"
 	item_state = "sheet-metal"
 	plural_icon_state = "sheet-reinf-mult"
 	max_icon_state = "sheet-reinf-max"
-	stack_merge_type = /obj/item/stack/material/reinforced
-	crafting_stack_type = /obj/item/stack/material/reinforced
+	stack_merge_type = /obj/item/stack/material/sheet/reinforced
 
-/obj/item/stack/material/shiny
+/obj/item/stack/material/sheet/shiny
 	icon_state = "sheet-sheen"
 	item_state = "sheet-shiny"
 	plural_icon_state = "sheet-sheen-mult"
 	max_icon_state = "sheet-sheen-max"
-	stack_merge_type = /obj/item/stack/material/shiny
+	stack_merge_type = /obj/item/stack/material/sheet/shiny
 
 /obj/item/stack/material/cubes
 	name = "cube"
@@ -359,6 +367,7 @@
 	max_amount = 100
 	attack_verb = list("cubed")
 	stack_merge_type = /obj/item/stack/material/cubes
+	crafting_stack_type = /obj/item/stack/material // cubes can be used for any crafting
 
 /obj/item/stack/material/lump
 	name = "lumps"
@@ -368,6 +377,7 @@
 	plural_icon_state = "lump-mult"
 	max_icon_state = "lump-max"
 	stack_merge_type = /obj/item/stack/material/lump
+	crafting_stack_type = /obj/item/stack/material/lump
 
 /obj/item/stack/material/slab
 	name = "slabs"
@@ -377,6 +387,7 @@
 	plural_icon_state = "puck-mult"
 	max_icon_state = "puck-max"
 	stack_merge_type = /obj/item/stack/material/slab
+	crafting_stack_type = /obj/item/stack/material/slab
 
 /obj/item/stack/material/strut
 	name = "struts"
@@ -407,3 +418,4 @@
 	plural_icon_state = "bar-mult"
 	max_icon_state = "bar-max"
 	stack_merge_type = /obj/item/stack/material/bar
+	crafting_stack_type = /obj/item/stack/material/bar

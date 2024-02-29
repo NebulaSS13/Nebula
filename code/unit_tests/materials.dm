@@ -22,6 +22,12 @@
 	for(var/material_type in decls_repository.get_decls_of_type(/decl/material))
 		material_types |= material_type
 
+	// Force config to be the most precise recipes possible.
+	var/decl/config/config = GET_DECL(/decl/config/toggle/on/stack_crafting_uses_types)
+	config.set_value(TRUE)
+	config = GET_DECL(/decl/config/toggle/stack_crafting_uses_tools)
+	config.set_value(TRUE)
+
 	// This is obscene, but completeness requires it.
 	for(var/stack_type in stack_types)
 		for(var/tool_type in tool_types)
@@ -41,6 +47,7 @@
 					if(!length(recipes))
 						continue
 
+					// Handle the actual validation.
 					for(var/decl/stack_recipe/recipe as anything in recipes)
 						var/atom/product = recipe.spawn_result(null, null, 1, material, reinforced)
 						var/failed

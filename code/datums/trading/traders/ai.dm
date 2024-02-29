@@ -89,7 +89,7 @@ They sell generic supplies and ask for generic supplies.
 		/obj/item/stack/material/aerogel/mapped/tritium     = TRADER_THIS_TYPE,
 		/obj/item/stack/material/ingot/mapped/osmium        = TRADER_THIS_TYPE,
 		/obj/item/stack/material/sheet/mapped/steel         = TRADER_THIS_TYPE,
-		/obj/item/stack/material/reinforced/mapped/plasteel = TRADER_THIS_TYPE,
+		/obj/item/stack/material/sheet/reinforced/mapped/plasteel = TRADER_THIS_TYPE,
 		/obj/machinery/mining                               = TRADER_SUBTYPES_ONLY
 	)
 

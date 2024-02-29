@@ -25,4 +25,4 @@
 /decl/stack_recipe/turfs/wall/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	var/turf/simulated/wall/wall = ..()
 	if(istype(wall))
-		wall.set_material((required_material != MATERIAL_FORBIDDEN ? mat.type : null), (required_reinforce_material != MATERIAL_FORBIDDEN ? reinf_mat.type : null))
+		wall.set_material(MATERIAL_RECIPE_PARAMS)

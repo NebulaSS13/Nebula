@@ -1,10 +1,10 @@
 // These are tracked/validated by currency decls.
 /decl/stack_recipe/coin
-	name = "antique coin"
-	result_type = /obj/item/coin
+	name              = "antique coin"
+	result_type       = /obj/item/coin
 	required_hardness = MAT_VALUE_FLEXIBLE
-	category = "antique coins"
-	abstract_type = /decl/stack_recipe/coin
+	category          = "antique coins"
+	abstract_type     = /decl/stack_recipe/coin
 	var/currency
 	var/denomination_name
 	var/datum/denomination/denomination

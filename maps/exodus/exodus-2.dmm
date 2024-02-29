@@ -13637,7 +13637,7 @@
 /area/exodus/ai_monitored/storage/eva)
 "aCW" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
 /obj/item/stack/material/sheet/mapped/steel{
@@ -31423,13 +31423,13 @@
 /area/exodus/research/robotics)
 "boJ" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
 /obj/item/stack/material/panel/mapped/plastic{
@@ -34109,7 +34109,7 @@
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/robotics)
 "bug" = (
-/obj/item/stack/material/reinforced/mapped/plasteel{
+/obj/item/stack/material/sheet/reinforced/mapped/plasteel{
 	amount = 10
 	},
 /obj/item/stack/cable_coil,
@@ -35916,7 +35916,7 @@
 /obj/item/stack/material/sheet/mapped/steel{
 	amount = 50
 	},
-/obj/item/stack/material/shiny/mapped/aluminium,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium,
 /obj/item/clothing/glasses/welding,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/lab)
@@ -36711,7 +36711,7 @@
 	pixel_y = 3
 	},
 /obj/item/stack/material/sheet/mapped/steel/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /obj/item/multitool,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/office)
@@ -38293,9 +38293,9 @@
 	dir = 1;
 	current_health = 1e+006
 	},
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
-/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/shiny/mapped/aluminium/fifty,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/workshop)
 "bCA" = (

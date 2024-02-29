@@ -132,7 +132,8 @@
 		return
 
 	dat += "<p>[capitalize(plural_name)] left: [get_amount()]</p>"
-	dat += "<table>"
+	dat += "<table border = '1px' padding = '1px' style = 'margin-left: auto; margin-right: auto;'>"
+	dat += "<tr><th width = '150px'>Product</th><th width = '75px'>Cost</th><th width = '75px'>Time</th><th width = '200px'>Required skill</th><th width = '200px'>Amount to craft</tr>"
 	var/list/recipe_strings = list()
 	for(var/thing in recipes)
 		if(istype(thing, /decl/stack_recipe))
@@ -145,7 +146,7 @@
 		dat += recipe_strings[recipe_name]
 	dat += "</table>"
 
-	var/datum/browser/popup = new(user, "stack_crafting", popup_title, 600, 800)
+	var/datum/browser/popup = new(user, "stack_crafting", popup_title, 800, 800)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
 

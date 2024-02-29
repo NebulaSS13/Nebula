@@ -321,7 +321,7 @@
 	amount_per_transfer_from_this = 60
 	volume = 60
 	visible_name = "a giant syringe"
-	time = 300
+	time = 30 SECONDS
 	mode = SYRINGE_INJECT
 	autolabel = FALSE
 	can_stab = FALSE
