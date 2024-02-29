@@ -25,6 +25,12 @@
 	footstep_type = /decl/footsteps/mud
 	is_fundament_turf = TRUE
 
+/turf/exterior/mud/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if(!reagents?.total_volume)
+		ChangeTurf(/turf/exterior/dry, keep_air = TRUE, keep_air_below = TRUE)
+		return
+	return ..()
+
 /turf/exterior/mud/water
 	color = COLOR_SKY_BLUE
 	reagent_type = /decl/material/liquid/water
@@ -43,3 +49,9 @@
 	dirt_color = "#ae9e66"
 	icon = 'icons/turf/exterior/seafloor.dmi'
 	is_fundament_turf = TRUE
+
+/turf/exterior/dry/fluid_act(datum/reagents/fluids)
+	SHOULD_CALL_PARENT(FALSE)
+	var/turf/new_turf = ChangeTurf(/turf/exterior/mud, keep_air = TRUE, keep_air_below = TRUE)
+	return new_turf.fluid_act(fluids)
+
