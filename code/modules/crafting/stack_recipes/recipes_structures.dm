@@ -5,4 +5,4 @@
 	result_type = /obj/structure/railing
 	time = 40
 	on_floor = 1
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY

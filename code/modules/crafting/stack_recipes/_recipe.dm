@@ -1,6 +1,6 @@
-#define REINFORCE_FORBIDDEN -1
-#define REINFORCE_ALLOWED    0
-#define REINFORCE_REQUIRED   1
+#define MATERIAL_FORBIDDEN -1
+#define MATERIAL_ALLOWED    0
+#define MATERIAL_REQUIRED   1
 
 /*
  * Recipe datum
@@ -9,18 +9,21 @@
 
 	var/name
 	var/result_type
-	var/req_amount     // amount of material needed for this recipe
-	var/res_amount = 1 // amount of stuff that is produced in one batch (e.g. 4 for floor tiles)
-	var/max_res_amount = 1
-	var/time = 0
-	var/one_per_turf = 0
-	var/on_floor = 0
-	var/use_material
-	var/use_reinf_material
-	var/difficulty = 1 // higher difficulty requires higher skill level to make.
-	var/apply_material_name = 1 //Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
-	var/set_dir_on_spawn = TRUE
-	var/expected_product_type = /obj
+	/// amount of sheets/ingots/etc needed for this recipe
+	var/req_amount
+	/// amount of stuff that is produced in one batch (e.g. 4 for floor tiles)
+	var/res_amount                      = 1
+	var/max_res_amount                  = 1
+	var/time                            = 0
+	var/one_per_turf                    = FALSE
+	var/on_floor                        = FALSE
+	// higher difficulty requires higher skill level to make.
+	var/difficulty                      = MAT_VALUE_NORMAL_DIY
+	//Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
+	var/apply_material_name             = TRUE
+	var/set_dir_on_spawn                = TRUE
+	var/expected_product_type           = /obj
+
 	var/list/craft_stack_types
 	var/list/forbidden_craft_stack_type = list(
 		/obj/item/stack/material/ore,
@@ -28,12 +31,12 @@
 	)
 
 	var/category
-	var/crafting_extra_cost_factor = 1.2
-	var/recipe_skill = SKILL_CONSTRUCTION
+	var/crafting_extra_cost_factor      = 1.2
+	var/recipe_skill                    = SKILL_CONSTRUCTION
 
 	var/required_tool
-	var/required_reinforce_material = REINFORCE_FORBIDDEN
-	var/required_material
+	var/required_reinforce_material     = MATERIAL_FORBIDDEN
+	var/required_material               = MATERIAL_ALLOWED
 
 	var/required_wall_support_value
 	var/required_integrity
@@ -42,7 +45,7 @@
 
 /decl/stack_recipe/validate()
 	. = ..()
-	if(!required_material)
+	if(isnull(required_material) || required_material == MATERIAL_FORBIDDEN)
 		if(!isnull(required_wall_support_value))
 			. += "null required material but non-null wall support value"
 		if(!isnull(required_integrity))
@@ -51,6 +54,13 @@
 			. += "null required material but non-null max opacity value"
 		if(!isnull(required_hardness))
 			. += "null required material but non-null hardness value"
+
+	if(recipe_skill && difficulty > 0)
+		var/decl/hierarchy/skill/used_skill = GET_DECL(recipe_skill)
+		if(!istype(used_skill))
+			. += "invalid skill decl [recipe_skill]"
+		else if(length(used_skill.levels) < difficulty)
+			. += "required skill [recipe_skill] is missing skill level [isnull(difficulty) ? "NULL" : json_encode(difficulty)]"
 
 /decl/stack_recipe/proc/get_list_display(mob/user, obj/item/stack/stack)
 
@@ -89,12 +99,18 @@
 /decl/stack_recipe/proc/can_be_made_from(stack_type, tool_type, decl/material/mat, decl/material/reinf_mat)
 
 	// Check if they're using the appropriate materials.
-	if(required_material && !istype(mat, craft_stack_types))
+	if(ispath(required_material) && !istype(mat, required_material))
+		return FALSE
+	else if(required_material == required_material && mat)
+		return FALSE
+	else if(required_material == MATERIAL_REQUIRED && !mat)
 		return FALSE
 
-	if(required_reinforce_material == REINFORCE_FORBIDDEN && reinf_mat)
+	if(ispath(required_reinforce_material) && !istype(reinf_mat, required_reinforce_material))
 		return FALSE
-	else if(required_reinforce_material == REINFORCE_REQUIRED && !reinf_mat)
+	else if(required_reinforce_material == MATERIAL_FORBIDDEN && reinf_mat)
+		return FALSE
+	else if(required_reinforce_material == MATERIAL_REQUIRED && !reinf_mat)
 		return FALSE
 
 	// Check if the material has the appropriate properties.
@@ -174,51 +190,56 @@
 /decl/stack_recipe/proc/update_req_amount()
 	if(result_type && isnull(req_amount))
 		req_amount = 0
-		var/list/materials = atom_info_repository.get_matter_for(result_type, use_material, res_amount)
+		var/list/materials = atom_info_repository.get_matter_for(result_type, ispath(required_material) ? required_material : null, res_amount)
 		for(var/mat in materials)
 			req_amount += round(materials[mat]/res_amount)
 		req_amount = clamp(CEILING(((req_amount*crafting_extra_cost_factor)/SHEET_MATERIAL_AMOUNT) * res_amount), 1, 50)
 
-/decl/stack_recipe/proc/display_name()
-	if(!use_material || !apply_material_name)
+/decl/stack_recipe/proc/display_name(decl/material/mat, decl/material/reinf_mat)
+	if(!apply_material_name)
 		return name
-	var/decl/material/material = GET_DECL(use_material)
-	. = "[material.solid_name] [name]"
-	if(use_reinf_material)
-		material = GET_DECL(use_reinf_material)
-		. = "[material.solid_name]-reinforced [.]"
+	var/list/material_strings = list()
+	if(mat && required_material != MATERIAL_FORBIDDEN)
+		material_strings += mat.use_name
+	if(reinf_mat && required_reinforce_material != MATERIAL_FORBIDDEN)
+		material_strings += reinf_mat.use_name
+	if(length(material_strings))
+		return "[english_list(material_strings)] [name]"
+	return name
 
-/decl/stack_recipe/proc/spawn_result(mob/user, location, amount)
+/decl/stack_recipe/proc/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	var/atom/O
-	if(use_material)
-		//TODO: standardize material argument passing in Initialize().
-		if(ispath(result_type, /obj/item/stack)) // Amount is set manually in some overrides as well.
-			O = new result_type(location, amount, use_material, use_reinf_material)
-		else
-			O = new result_type(location, use_material, use_reinf_material)
+
+	//TODO: standardize material argument passing in Initialize().
+	if(ispath(result_type, /obj/item/stack)) // Amount is set manually in some overrides as well.
+		O = new result_type(location, amount, (required_material != MATERIAL_FORBIDDEN ? mat.type : null), (required_reinforce_material != MATERIAL_FORBIDDEN ? reinf_mat.type : null))
 	else
-		O = new result_type(location)
+		O = new result_type(location, (required_material != MATERIAL_FORBIDDEN ? mat.type : null), (required_reinforce_material != MATERIAL_FORBIDDEN ? reinf_mat.type : null))
+
 	if(user && set_dir_on_spawn)
 		O.set_dir(user?.dir)
 
 	// Temp block pending material/matter rework
-	if(use_material && use_material != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
+	if(mat?.type != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
 		var/obj/struct = O
 		if(LAZYACCESS(struct.matter, DEFAULT_FURNITURE_MATERIAL) > 0)
-			struct.matter[use_material] = max(struct.matter[use_material], struct.matter[DEFAULT_FURNITURE_MATERIAL])
+			struct.matter[mat.type] = max(struct.matter[mat.type], struct.matter[DEFAULT_FURNITURE_MATERIAL])
 			struct.matter -= DEFAULT_FURNITURE_MATERIAL
 	// End temp block
 
-	return O
+	if(user && istype(O, /obj/item/stack))
+		var/obj/item/stack/S = O
+		S.add_to_stacks(user, 1)
+
+	if(!QDELETED(O))
+		return O
 
 /decl/stack_recipe/proc/can_make(mob/user)
 	if (one_per_turf && (locate(result_type) in user.loc))
-		to_chat(user, "<span class='warning'>There is another [display_name()] here!</span>")
+		to_chat(user, SPAN_WARNING("There is another [display_name()] here!"))
 		return FALSE
-
 	var/turf/T = get_turf(user.loc)
-	if (on_floor && !T.is_floor())
-		to_chat(user, "<span class='warning'>\The [display_name()] must be constructed on the floor!</span>")
+	if (on_floor && (!istype(T) || !T.is_floor()))
+		to_chat(user, SPAN_WARNING("\The [display_name()] must be constructed on the floor!"))
 		return FALSE
-
 	return TRUE

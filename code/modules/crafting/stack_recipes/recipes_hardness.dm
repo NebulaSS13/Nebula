@@ -5,7 +5,6 @@
 /decl/stack_recipe/improvised_armour
 	name = "improvised armour"
 	result_type = /obj/item/clothing/suit/armor/crafted
-	one_per_turf = 1
 
 /decl/stack_recipe/armguards
 	name = "arm guards"
@@ -30,7 +29,7 @@
 /decl/stack_recipe/knife
 	name = "table knife"
 	result_type = /obj/item/utensil/knife
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/bell
 	name = "bell"
@@ -45,7 +44,7 @@
 	name = "knife"
 	result_type = /obj/item/butterflyblade
 	time = 20
-	difficulty = 1
+	difficulty = MAT_VALUE_NORMAL_DIY
 
 /decl/stack_recipe/urn
 	name = "urn"
@@ -54,18 +53,17 @@
 /decl/stack_recipe/drill_head
 	name = "drill head"
 	result_type = /obj/item/drill_head
-	difficulty = 0
+	difficulty = MAT_VALUE_EASY_DIY
 
 /decl/stack_recipe/baseball_bat
 	name = "baseball bat"
 	result_type = /obj/item/twohanded/baseballbat
 	time = 20
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/ashtray
 	name = "ashtray"
 	result_type = /obj/item/ashtray
-	one_per_turf = 1
 
 /decl/stack_recipe/ring
 	name = "ring"

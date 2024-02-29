@@ -4,11 +4,11 @@
 	res_amount = 4
 	max_res_amount = 20
 	time = 5
-	difficulty = 1
+	difficulty = MAT_VALUE_NORMAL_DIY
 	apply_material_name = FALSE
 	category = "tiling"
 
-/decl/stack_recipe/tile/spawn_result(user, location, amount)
+/decl/stack_recipe/tile/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	var/obj/item/stack/S = ..()
 	if(istype(S))
 		S.amount = amount
@@ -33,7 +33,7 @@
 
 /decl/stack_recipe/tile/ebony
 	name = "ebony floor tile"
-	difficulty = 3
+	difficulty = MAT_VALUE_VERY_HARD_DIY
 	result_type = /obj/item/stack/tile/ebony
 	required_material = /decl/material/solid/organic/wood/ebony
 

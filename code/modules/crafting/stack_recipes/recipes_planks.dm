@@ -10,7 +10,7 @@
 	name = "crossbow frame"
 	result_type = /obj/item/crossbowframe
 	time = 25
-	difficulty = 3
+	difficulty = MAT_VALUE_VERY_HARD_DIY
 
 /decl/stack_recipe/planks/beehive_assembly
 	name = "beehive assembly"
@@ -23,27 +23,27 @@
 /decl/stack_recipe/planks/zipgunframe
 	name = "zip gun frame"
 	result_type = /obj/item/zipgunframe
-	difficulty = 3
+	difficulty = MAT_VALUE_VERY_HARD_DIY
 
 /decl/stack_recipe/planks/coilgun
 	name = "coilgun stock"
 	result_type = /obj/item/coilgun_assembly
-	difficulty = 3
+	difficulty = MAT_VALUE_VERY_HARD_DIY
 
 /decl/stack_recipe/planks/stick
 	name = "stick"
 	result_type = /obj/item/stick
-	difficulty = 0
+	difficulty = MAT_VALUE_EASY_DIY
 
 /decl/stack_recipe/planks/noticeboard
 	name = "noticeboard"
 	result_type = /obj/structure/noticeboard
 	time = 50
 	on_floor = 1
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 	set_dir_on_spawn = FALSE
 
-/decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount)
+/decl/stack_recipe/planks/noticeboard/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	var/obj/structure/noticeboard/board = ..()
 	if(istype(board) && user)
 		board.set_dir(global.reverse_dir[user.dir])
@@ -51,16 +51,16 @@
 
 /decl/stack_recipe/planks/prosthetic
 	abstract_type = /decl/stack_recipe/planks/prosthetic
-	difficulty = 0
+	difficulty = MAT_VALUE_EASY_DIY
 	category = "prosthetics"
 	var/prosthetic_species = SPECIES_HUMAN
 	var/prosthetic_model = /decl/bodytype/prosthetic/wooden
 
-/decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount)
+/decl/stack_recipe/planks/prosthetic/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	var/obj/item/organ/external/limb = ..()
 	if(limb)
 		limb.set_species(prosthetic_species)
-		limb.set_bodytype(prosthetic_model, override_material = use_material)
+		limb.set_bodytype(prosthetic_model, override_material = (required_material != MATERIAL_FORBIDDEN ? mat?.type : null))
 		limb.status |= ORGAN_CUT_AWAY
 	return limb
 
@@ -98,9 +98,9 @@
 
 /decl/stack_recipe/planks/furniture
 	abstract_type = /decl/stack_recipe/planks/furniture
-	one_per_turf = 1
+	one_per_turf = TRUE
 	on_floor = 1
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 	time = 5
 
 /decl/stack_recipe/planks/furniture/coffin

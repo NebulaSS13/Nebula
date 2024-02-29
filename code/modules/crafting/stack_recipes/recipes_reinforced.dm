@@ -3,7 +3,7 @@
 	craft_stack_types = /obj/item/stack/material/reinforced
 	time = 5 SECONDS
 	one_per_turf = TRUE
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/reinforced/ai_core
 	name = "AI core"
@@ -18,5 +18,5 @@
 	name = "knife grip"
 	result_type = /obj/item/butterflyhandle
 	time = 2 SECONDS
-	difficulty = 1
+	difficulty = MAT_VALUE_NORMAL_DIY
 	one_per_turf = FALSE

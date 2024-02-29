@@ -37,12 +37,12 @@
 /decl/stack_recipe/cardstock/cardborg_suit
 	name = "cardborg suit"
 	result_type = /obj/item/clothing/suit/cardborg
-	difficulty = 0
+	difficulty = MAT_VALUE_EASY_DIY
 
 /decl/stack_recipe/cardstock/cardborg_helmet
 	name = "cardborg helmet"
 	result_type = /obj/item/clothing/head/cardborg
-	difficulty = 0
+	difficulty = MAT_VALUE_EASY_DIY
 
 /decl/stack_recipe/cardstock/folder
 	name = "folder"

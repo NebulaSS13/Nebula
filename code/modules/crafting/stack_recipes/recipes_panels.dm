@@ -10,11 +10,11 @@
 /decl/stack_recipe/panels/ivbag
 	name = "IV bag"
 	result_type = /obj/item/chems/ivbag
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/panels/cartridge
 	name = "dispenser cartridge"
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 	category = "dispenser cartridges"
 	abstract_type = /decl/stack_recipe/panels/cartridge
 
@@ -49,9 +49,9 @@
 
 /decl/stack_recipe/panels/furniture
 	abstract_type = /decl/stack_recipe/panels/furniture
-	one_per_turf = 1
+	one_per_turf = TRUE
 	on_floor = 1
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 	time = 5
 
 /decl/stack_recipe/panels/furniture/crate

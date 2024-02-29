@@ -1,9 +1,9 @@
 /decl/stack_recipe/strut
 	abstract_type = /decl/stack_recipe/strut
 	craft_stack_types = /obj/item/stack/material/strut
-	one_per_turf = 1
+	one_per_turf = TRUE
 	on_floor = 1
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 	time = 5 SECONDS
 
 /decl/stack_recipe/strut/ladder
@@ -35,8 +35,8 @@
 	name = "meat hook"
 	result_type = /obj/structure/kitchenspike
 	time = 40
-	one_per_turf = 1
-	difficulty = 1
+	one_per_turf = TRUE
+	difficulty = MAT_VALUE_NORMAL_DIY
 
 /decl/stack_recipe/strut/bed
 	name = "bed"
@@ -51,5 +51,5 @@
 	time = 25
 	required_material = /decl/material/solid/metal/steel
 
-/decl/stack_recipe/strut/machine/spawn_result(mob/user, location, amount)
+/decl/stack_recipe/strut/machine/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	return new result_type(location)

@@ -1,14 +1,15 @@
 /decl/stack_recipe/turfs
-	abstract_type = /decl/stack_recipe/turfs
+	abstract_type         = /decl/stack_recipe/turfs
 	expected_product_type = /turf
-	time = 3 SECONDS
-	req_amount = 5 // Arbitrary value since turfs don't behave like objs in terms of material/matter
+	time                  = 3 SECONDS
+	/// Arbitrary value since turfs don't behave like objs in terms of material/matter
+	req_amount            = 5
 
 // See req_amount above.
 /decl/stack_recipe/turfs/update_req_amount()
 	return
 
-/decl/stack_recipe/turfs/spawn_result(mob/user, location, amount)
+/decl/stack_recipe/turfs/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	var/turf/build_turf = get_turf(location)
 	if(!build_turf)
 		return
@@ -21,7 +22,7 @@
 	abstract_type = /decl/stack_recipe/turfs/wall
 	expected_product_type = /turf/simulated/wall
 
-/decl/stack_recipe/turfs/wall/spawn_result(mob/user, location, amount)
+/decl/stack_recipe/turfs/wall/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	var/turf/simulated/wall/wall = ..()
 	if(istype(wall))
-		wall.set_material(use_material, use_reinf_material)
+		wall.set_material((required_material != MATERIAL_FORBIDDEN ? mat.type : null), (required_reinforce_material != MATERIAL_FORBIDDEN ? reinf_mat.type : null))

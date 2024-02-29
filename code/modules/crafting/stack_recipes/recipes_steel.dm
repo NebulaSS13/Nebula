@@ -5,37 +5,37 @@
 /decl/stack_recipe/steel/apc
 	name = "APC frame"
 	result_type = /obj/item/frame/apc
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/air_alarm
 	name = "air alarm frame"
 	result_type = /obj/item/frame/air_alarm
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/fire_alarm
 	name = "fire alarm frame"
 	result_type = /obj/item/frame/fire_alarm
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/light
 	name = "light fixture frame"
 	result_type = /obj/item/frame/light
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/light_small
 	name = "small light fixture frame"
 	result_type = /obj/item/frame/light/small
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/light_switch
 	name = "light switch frame"
 	result_type = /obj/item/frame/button/light_switch
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/steel/light_switch/windowtint
 	name = "window tint switch frame"
 	result_type = /obj/item/frame/button/light_switch/windowtint
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 
 /decl/stack_recipe/grenade/steel
 	required_material = /decl/material/solid/metal/steel
@@ -44,7 +44,7 @@
 	name = "cannon frame"
 	result_type = /obj/item/cannonframe
 	time = 15
-	difficulty = 3
+	difficulty = MAT_VALUE_VERY_HARD_DIY
 
 /decl/stack_recipe/steel/tile
 	abstract_type = /decl/stack_recipe/steel/tile
@@ -93,9 +93,9 @@
 
 /decl/stack_recipe/steel/furniture
 	abstract_type = /decl/stack_recipe/steel/furniture
-	one_per_turf = 1
+	one_per_turf = TRUE
 	on_floor = 1
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 	time = 5
 
 /decl/stack_recipe/steel/furniture/computerframe
@@ -104,7 +104,7 @@
 	req_amount = 5
 	time = 25
 
-/decl/stack_recipe/steel/furniture/computerframe/spawn_result(mob/user, location, amount)
+/decl/stack_recipe/steel/furniture/computerframe/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	return new result_type(location)
 
 /decl/stack_recipe/steel/furniture/door_assembly

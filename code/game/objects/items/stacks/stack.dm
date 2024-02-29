@@ -105,6 +105,7 @@
 /obj/item/stack/proc/get_reinforced_material()
 	return null
 
+// TODO: add some kind of tracking for the last viewed list so the user can go back up one level for nested lists
 /obj/item/stack/proc/list_recipes(mob/user, list/recipes)
 
 	if(!user?.client)
@@ -154,14 +155,14 @@
 	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
 	if (!can_use(required))
 		if (produced>1)
-			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \a [produced] [recipe.display_name()]\s!"))
+			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \a [produced] [recipe.display_name(get_material(), get_reinforced_material())]\s!"))
 		else
-			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \a [recipe.display_name()]!"))
+			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \a [recipe.display_name(get_material(), get_reinforced_material())]!"))
 		return
 	if(!recipe.can_make(user))
 		return
 	if (recipe.time)
-		to_chat(user, SPAN_NOTICE("You set about building \a [recipe.display_name()]..."))
+		to_chat(user, SPAN_NOTICE("You set about building \a [recipe.display_name(get_material(), get_reinforced_material())]..."))
 		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION))
 			return
 
@@ -169,10 +170,10 @@
 		return
 
 	if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
-		to_chat(user, SPAN_WARNING("You waste some [name] and fail to build \a [recipe.display_name()]!"))
+		to_chat(user, SPAN_WARNING("You waste some [name] and fail to build \a [recipe.display_name(get_material(), get_reinforced_material())]!"))
 		return
-	to_chat(user, SPAN_NOTICE("You complete \a [recipe.display_name()]!"))
-	var/atom/movable/O = recipe.spawn_result(user, user.loc, produced)
+	to_chat(user, SPAN_NOTICE("You complete \a [recipe.display_name(get_material(), get_reinforced_material())]!"))
+	var/atom/movable/O = recipe.spawn_result(user, user.loc, produced, get_material(), get_reinforced_material())
 	if(istype(O) && !QDELETED(O)) // In case of stack merger.
 		O.add_fingerprint(user)
 		user.put_in_hands(O)
@@ -185,7 +186,11 @@
 		return TOPIC_NOACTION
 
 	if(href_list["back"])
-		list_recipes(user)
+		var/datum/stack_recipe_list/previous_list = locate(href_list["back"])
+		if(istype(previous_list))
+			list_recipes(user, previous_list)
+		else
+			list_recipes(user)
 		return TOPIC_HANDLED
 
 	if(href_list["sublist"])

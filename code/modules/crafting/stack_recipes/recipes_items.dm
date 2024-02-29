@@ -2,13 +2,13 @@
 /decl/stack_recipe/grenade
 	name = "grenade casing"
 	result_type = /obj/item/grenade/chem_grenade
-	difficulty = 3
+	difficulty = MAT_VALUE_VERY_HARD_DIY
 	required_material = /decl/material/solid/metal/aluminium
 
 /decl/stack_recipe/candle
 	name = "candle"
 	result_type = /obj/item/flame/candle
-	difficulty = 0
+	difficulty = MAT_VALUE_EASY_DIY
 	required_material = /decl/material/solid/organic/wax
 
 /decl/stack_recipe/paper_sheets
@@ -18,7 +18,7 @@
 	max_res_amount    = 30
 	required_material = /decl/material/solid/organic/paper
 
-/decl/stack_recipe/paper_sheets/spawn_result(user, location, amount)
+/decl/stack_recipe/paper_sheets/spawn_result(mob/user, location, amount, decl/material/mat, decl/material/reinf_mat)
 	var/obj/item/paper/P = ..()
 	if(amount > 1)
 		var/obj/item/paper_bundle/B = new(location)

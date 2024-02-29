@@ -4,9 +4,9 @@
 
 /decl/stack_recipe/hardness/integrity/furniture
 	abstract_type = /decl/stack_recipe/hardness/integrity/furniture
-	one_per_turf = 1
+	one_per_turf = TRUE
 	on_floor = 1
-	difficulty = 2
+	difficulty = MAT_VALUE_HARD_DIY
 	time = 5
 
 /decl/stack_recipe/hardness/integrity/furniture/door
@@ -106,10 +106,4 @@
 	res_amount = 2
 	max_res_amount = 60
 	time = 5
-	difficulty = 1
-
-/decl/stack_recipe/hardness/integrity/rod/spawn_result(user, location, amount)
-	var/obj/item/stack/S = new result_type(location, amount, use_material)
-	if(user)
-		S.add_to_stacks(user, 1)
-	return S
+	difficulty = MAT_VALUE_NORMAL_DIY
