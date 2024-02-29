@@ -274,6 +274,7 @@
 	rich_material_weight = 20
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
+	ferrous = TRUE
 
 /decl/material/solid/rutile
 	name = "rutile"

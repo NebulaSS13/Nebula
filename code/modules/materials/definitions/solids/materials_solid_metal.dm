@@ -210,6 +210,7 @@
 		/decl/material/solid/carbon = 0.02
 	)
 	default_solid_form = /obj/item/stack/material/sheet
+	ferrous = TRUE
 
 /decl/material/solid/metal/steel/generate_recipes(stack_type, reinforce_material)
 	. = ..()
@@ -261,6 +262,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	dissolves_in = MAT_SOLVENT_IMMUNE
 	dissolves_into = null
+	ferrous = TRUE
 
 /decl/material/solid/metal/aluminium
 	name = "aluminium"
@@ -314,6 +316,7 @@
 	exoplanet_rarity_gas = MAT_RARITY_NOWHERE
 	dissolves_in = MAT_SOLVENT_IMMUNE
 	dissolves_into = null
+	ferrous = TRUE
 
 /decl/material/solid/metal/plasteel/generate_recipes(stack_type, reinforce_material)
 	. = ..()
@@ -418,6 +421,7 @@
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metal"
+	ferrous = TRUE
 
 /decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))

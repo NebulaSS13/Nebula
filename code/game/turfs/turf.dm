@@ -640,6 +640,15 @@
 		if(fluid_depth <= FLUID_DEEP)
 			return "mask_deep"
 
+/turf/proc/spark_act(obj/effect/sparks/sparks)
+	if(simulated)
+		hotspot_expose(1000,100)
+		if(prob(25))
+			for(var/obj/structure/fire_source/fire in contents)
+				fire.light()
+		return TRUE
+	return FALSE
+
 /turf/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/show_turf_contents)

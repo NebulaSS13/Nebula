@@ -16,8 +16,8 @@
 
 // TODO: craft a flint striker from a flint and a piece of metal
 /obj/item/rock/attackby(obj/item/W, mob/user)
-	if(W.material?.type == /decl/material/solid/metal/iron && material?.type == /decl/material/solid/stone/flint)
-		spark_at(get_turf(src), amount = 2, spark_type = /datum/effect/effect/system/spark_spread)
+	if(W.material?.ferrous && material?.type == /decl/material/solid/stone/flint)
+		spark_at(get_turf(src), amount = 2, spark_type = /datum/effect/effect/system/spark_spread/non_electrical)
 		return TRUE
 	. = ..()
 
