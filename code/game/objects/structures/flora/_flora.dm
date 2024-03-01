@@ -29,7 +29,7 @@
 
 /obj/structure/flora/attackby(obj/item/O, mob/user)
 	if(user.a_intent != I_HURT && can_cut_down(O, user))
-		play_cut_sound()
+		play_cut_sound(user)
 		cut_down(O, user)
 		return TRUE
 	. = ..()
@@ -39,7 +39,7 @@
 	return (I.force >= 5) && I.sharp //Anything sharp and relatively strong can cut us instantly
 
 /**What to do when the can_cut_down check returns true. Normally simply calls dismantle. */
-/obj/structure/flora/proc/play_cut_sound()
+/obj/structure/flora/proc/play_cut_sound(mob/user)
 	set waitfor = FALSE
 	if(snd_cut)
 		playsound(src, snd_cut, 40, TRUE)
