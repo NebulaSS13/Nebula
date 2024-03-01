@@ -423,3 +423,12 @@
 	if(amount == 1)
 		return indefinite_article ? "[indefinite_article] [singular_name]" : ADD_ARTICLE(singular_name)
 	return "[amount] [plural_name]"
+
+/obj/item/stack/ProcessAtomTemperature()
+	. = ..()
+	if(QDELETED(src))
+		return
+	matter_per_piece = list()
+	for(var/mat in matter)
+		matter_per_piece[mat] = round(matter[mat] / amount)
+	update_icon()

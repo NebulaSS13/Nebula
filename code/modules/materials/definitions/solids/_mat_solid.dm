@@ -10,6 +10,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	default_solid_form = /obj/item/stack/material/brick
 	abstract_type = /decl/material/solid
+	bakes_into_material = null
 
 /decl/material/solid/Initialize()
 	if(!liquid_name)

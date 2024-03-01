@@ -281,6 +281,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/holographic // Set to true if this material is fake/visual only.
 
+	/// Does high temperature baking change this material into something else?
+	var/bakes_into_material
+	var/bakes_into_at_temperature
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))
@@ -370,6 +374,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 #define FALSEWALL_STATE "fwall_open"
 /decl/material/validate()
 	. = ..()
+
+	if(!isnull(bakes_into_at_temperature))
+		if(!isnull(melting_point) && melting_point <= bakes_into_at_temperature)
+			. += "baking point is set but melting point is lower or equal to it"
+		if(!isnull(boiling_point) && boiling_point <= bakes_into_at_temperature)
+			. += "baking point is set but boiling point is lower or equal to it"
+
 	if(accelerant_value > FUEL_VALUE_NONE && isnull(ignition_point))
 		. += "accelerant value larger than zero but null ignition point"
 	if(!isnull(ignition_point) && accelerant_value <= FUEL_VALUE_NONE)

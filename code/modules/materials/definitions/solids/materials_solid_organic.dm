@@ -3,6 +3,10 @@
 	ignition_point = T0C+500 // Based on loose ignition temperature of plastic
 	accelerant_value = 0.1
 	burn_product = /decl/material/gas/carbon_monoxide
+/* TODO: burn products for solids
+	bakes_into_at_temperature = T0C+500
+	bakes_into_material = /decl/material/solid/carbon
+*/
 
 /decl/material/solid/organic/plastic
 	name = "plastic"
