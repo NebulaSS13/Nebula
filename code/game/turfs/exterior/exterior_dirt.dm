@@ -4,3 +4,4 @@
 	icon = 'icons/turf/exterior/dirt.dmi'
 	icon_edge_layer = EXT_EDGE_DIRT
 	footstep_type = /decl/footsteps/asteroid
+	is_fundament_turf = TRUE
