@@ -1,7 +1,10 @@
 var/global/list/limb_icon_cache = list()
 
+/obj/item/organ/external
+	var/force_limb_dir = SOUTH
+
 /obj/item/organ/external/set_dir()
-	return ..(SOUTH)
+	return ..(force_limb_dir)
 
 /obj/item/organ/external/proc/compile_icon()
 	 // This is a kludge, only one icon has more than one generation of children though.
@@ -261,8 +264,11 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 // amount to represent the obfuscation of being in agonizing pain.
 /obj/item/organ/external/proc/get_damage_hud_image()
 
+	if(skip_body_icon_draw)
+		return null
+
 	// Generate the greyscale base icon and cache it for later.
-	// icon_cache_key is set by any get_icon() calls that are made.
+	// _icon_cache_key is set by any get_icon() calls that are made.
 	// This looks convoluted, but it's this way to avoid icon proc calls.
 	if(!hud_damage_image)
 		update_icon()

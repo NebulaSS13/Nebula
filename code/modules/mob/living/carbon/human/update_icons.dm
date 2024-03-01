@@ -1,5 +1,9 @@
 var/global/list/_limb_mask_cache = list()
-/proc/get_limb_mask_for(var/decl/bodytype/bodytype, var/bodypart)
+/proc/get_limb_mask_for(obj/item/organ/external/limb)
+	var/decl/bodytype/bodytype = limb?.bodytype
+	var/bodypart = limb?.icon_state
+	if(!bodytype || !bodypart)
+		return
 	LAZYINITLIST(_limb_mask_cache[bodytype])
 	if(!_limb_mask_cache[bodytype][bodypart])
 		var/icon/limb_mask = icon(bodytype.icon_base, bodypart)
@@ -270,7 +274,9 @@ Please contact me on #coderbus IRC. ~Carn x
 		//BEGIN CACHED ICON GENERATION.
 		stand_icon = new(root_bodytype.icon_template || 'icons/mob/human.dmi', "blank")
 		for(var/obj/item/organ/external/part in limbs)
-			var/icon/temp = part.icon // Grabbing the icon excludes overlays.
+			if(isnull(part) || part.skip_body_icon_draw)
+				continue
+			var/icon/temp = part.icon
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
