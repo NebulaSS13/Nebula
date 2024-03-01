@@ -238,6 +238,10 @@
 	stack_merge_type = /obj/item/stack/material/brick
 	crafting_stack_type = /obj/item/stack/material/brick
 
+// Extra subtype defined for the clay stack recipes to not freak out about null material.
+/obj/item/stack/material/brick/clay
+	material = /decl/material/solid/clay
+
 /obj/item/stack/material/bolt
 	name = "bolts"
 	icon_state = "sheet-cloth"
@@ -389,6 +393,13 @@
 	max_icon_state = "lump-max"
 	stack_merge_type = /obj/item/stack/material/lump
 	crafting_stack_type = /obj/item/stack/material/lump
+
+/obj/item/stack/material/lump/clay
+	base_state        = "lump_large"
+	icon_state        = "lump_large"
+	plural_icon_state = "lump_large-mult"
+	max_icon_state    = "lump_large-max"
+	material = /decl/material/solid/clay
 
 /obj/item/stack/material/slab
 	name = "slabs"

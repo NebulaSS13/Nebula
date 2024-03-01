@@ -118,9 +118,9 @@
 /obj/item/stack/material/ore/coal
 	material = /decl/material/solid/graphite
 /obj/item/stack/material/ore/sand
-	material = /decl/material/solid/sand
-/obj/item/stack/material/ore/clay
-	material = /decl/material/solid/clay
+	singular_name = "handful"
+	plural_name   = "handfuls"
+	material      = /decl/material/solid/sand
 /obj/item/stack/material/ore/silver
 	material = /decl/material/solid/metal/silver
 /obj/item/stack/material/ore/gold
