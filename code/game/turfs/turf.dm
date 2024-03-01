@@ -216,7 +216,7 @@
 
 		if(IS_SHOVEL(W) && can_be_dug())
 			if(get_diggable_resources())
-				if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS))
+				if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS, set_cooldown = TRUE))
 					drop_diggable_resources()
 			else if(can_dig_pit())
 				try_dig_pit(user, W)
@@ -622,3 +622,32 @@
 
 /turf/proc/unwet_floor(var/check_very_wet = TRUE)
 	return
+
+/turf/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/show_turf_contents)
+	if(user && IS_SHOVEL(user.get_active_hand()))
+		if(can_dig_pit())
+			LAZYADD(., /decl/interaction_handler/dig/pit)
+
+/decl/interaction_handler/show_turf_contents
+	name = "Show Turf Contents"
+	expected_user_type = /mob
+	interaction_flags = 0
+
+/decl/interaction_handler/show_turf_contents/invoked(atom/target, mob/user, obj/item/prop)
+	target.show_atom_list_for_turf(user, get_turf(target))
+
+/decl/interaction_handler/dig
+	abstract_type = /decl/interaction_handler/dig
+	expected_user_type = /mob
+	expected_target_type = /turf
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
+
+/decl/interaction_handler/dig/pit
+	name = "Dig Pit"
+
+/decl/interaction_handler/dig/pit/invoked(atom/target, mob/user, obj/item/prop)
+	var/turf/T = get_turf(target)
+	if(T.can_dig_pit())
+		T.try_dig_pit(user, prop)
