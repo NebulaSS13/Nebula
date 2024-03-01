@@ -38,7 +38,7 @@
 			else
 				above.ChangeTurf(open_turf_type, update_open_turfs_above = FALSE)
 
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_air_below = FALSE, var/update_open_turfs_above = TRUE, var/keep_height = FALSE)
 	if (!N)
 		return
 
@@ -69,6 +69,7 @@
 	var/old_is_open =          is_open()
 	var/old_open_turf_type =   open_turf_type
 	var/old_affecting_heat_sources = affecting_heat_sources
+	var/old_height =           get_physical_height()
 
 	var/old_ambience =         ambient_light
 	var/old_ambience_mult =    ambient_light_multiplier
@@ -77,7 +78,6 @@
 	var/old_ambient_light_old_b = ambient_light_old_b
 
 	changing_turf = TRUE
-
 
 	qdel(src)
 	. = new N(src)
@@ -154,6 +154,9 @@
 			below.update_external_atmos_participation(!keep_air_below)
 
 	W.update_weather(force_update_below = W.is_open() != old_is_open)
+
+	if(keep_height)
+		W.set_height(old_height)
 
 	if(update_open_turfs_above)
 		update_open_above(old_open_turf_type)
