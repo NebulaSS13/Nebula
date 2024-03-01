@@ -1,0 +1,4 @@
+author: MistakeNot4892
+changes:
+  - {tweak: Static fluid turfs are now dynamic fluid turfs.}
+delete-after: true
