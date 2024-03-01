@@ -63,7 +63,7 @@ SUBSYSTEM_DEF(fluids)
 		for(spread_dir in global.cardinal)
 			if(current_fluid_holder.fluid_blocked_dirs & spread_dir)
 				continue
-			neighbor = get_step(current_fluid_holder, spread_dir)
+			neighbor = get_step_resolving_mimic(current_fluid_holder, spread_dir)
 			if(!istype(neighbor) || neighbor.flooded)
 				continue
 			UPDATE_FLUID_BLOCKED_DIRS(neighbor)
@@ -129,7 +129,7 @@ SUBSYSTEM_DEF(fluids)
 		// Wash our turf.
 		current_fluid_holder.fluid_act(reagent_holder)
 
-		if(isspaceturf(current_fluid_holder) || istype(current_fluid_holder, /turf/exterior))
+		if(isspaceturf(current_fluid_holder) || (istype(current_fluid_holder, /turf/exterior) && (current_fluid_holder.reagents?.total_volume + current_fluid_holder.get_physical_height()) > 0))
 			removing = round(current_depth * 0.5)
 			if(removing > 0)
 				current_fluid_holder.remove_fluids(removing, defer_update = TRUE)
@@ -157,7 +157,7 @@ SUBSYSTEM_DEF(fluids)
 		for(spread_dir in global.cardinal)
 			if(current_fluid_holder.fluid_blocked_dirs & spread_dir)
 				continue
-			neighbor = get_step(current_fluid_holder, spread_dir)
+			neighbor = get_step_resolving_mimic(current_fluid_holder, spread_dir)
 			if(!neighbor)
 				continue
 			UPDATE_FLUID_BLOCKED_DIRS(neighbor)
@@ -222,9 +222,8 @@ SUBSYSTEM_DEF(fluids)
 		current_fluid_holder = processing_flows[i]
 		if(!istype(current_fluid_holder) || QDELETED(current_fluid_holder))
 			continue
-		reagent_holder = current_fluid_holder.reagents
 		var/pushed_something = FALSE
-		if(reagent_holder.total_volume > FLUID_SHALLOW && current_fluid_holder.last_flow_strength >= 10)
+		if(current_fluid_holder.reagents?.total_volume > FLUID_SHALLOW && current_fluid_holder.last_flow_strength >= 10)
 			for(var/atom/movable/AM as anything in current_fluid_holder.get_contained_external_atoms())
 				if(AM.is_fluid_pushable(current_fluid_holder.last_flow_strength))
 					AM.pushed(current_fluid_holder.last_flow_dir)

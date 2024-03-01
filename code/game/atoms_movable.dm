@@ -37,6 +37,9 @@
 	var/inertia_move_delay = 5
 	var/atom/movable/inertia_ignore
 
+	// Marker for alpha mask update process. null == never update, TRUE == currently updating, FALSE == finished updating.
+	var/updating_turf_alpha_mask = null
+
 // This proc determines if the instance is preserved when the process() despawn of crypods occurs.
 /atom/movable/proc/preserve_in_cryopod(var/obj/machinery/cryopod/pod)
 	return FALSE
@@ -507,4 +510,12 @@
 		holder.drop_from_inventory(src)
 	else
 		. = null // We might keep burning them next time.
+
+/atom/movable/proc/update_appearance_flags(add_flags, remove_flags)
+	var/old_appearance = appearance_flags
+	if(add_flags)
+		appearance_flags |= add_flags
+	if(remove_flags)
+		appearance_flags &= ~remove_flags
+	return old_appearance != appearance_flags
 

@@ -15,17 +15,14 @@
 
 #undef ENTER_PROXIMITY_LOOP_SANITY
 /turf/Entered(var/atom/movable/A, var/atom/old_loc)
-
 	..()
-
-	if(!istype(A))
+	if(!istype(A) || !A.simulated)
 		return
-
-	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
-		H.handle_footsteps()
-
+	if(isliving(A))
+		var/mob/living/walker = A
+		walker.handle_footsteps()
 	queue_temperature_atoms(A)
+	A.update_turf_alpha_mask()
 
 // If an opaque movable atom moves around we need to potentially update visibility.
 	if(A?.opacity && !has_opaque_atom)

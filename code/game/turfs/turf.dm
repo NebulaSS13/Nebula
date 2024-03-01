@@ -185,6 +185,9 @@
 	. = get_base_movement_delay(travel_dir, mover)
 	if(weather)
 		. += weather.get_movement_delay(return_air(), travel_dir)
+	// TODO: check user species webbed feet, wearing swimming gear
+	if(reagents?.total_volume > FLUID_PUDDLE)
+		. += (reagents.total_volume > FLUID_SHALLOW) ? 6 : 3
 
 /turf/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(FALSE)

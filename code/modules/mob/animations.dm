@@ -20,7 +20,8 @@
 
 /mob/proc/start_floating()
 
-	is_floating = 1
+	is_floating = TRUE
+	update_turf_alpha_mask()
 
 	var/amplitude = 2 //maximum displacement from original position
 	var/period = 36 //time taken for the mob to go up > down > original position, in deciseconds. Should be multiple of 4
@@ -37,7 +38,8 @@
 /mob/proc/stop_floating()
 	animate(src, pixel_z = default_pixel_z, time = 5, easing = SINE_EASING | EASE_IN) //halt animation
 	//reset the pixel offsets to zero
-	is_floating = 0
+	is_floating = FALSE
+	update_turf_alpha_mask()
 
 /atom/movable/proc/do_attack_animation(atom/A, atom/movable/weapon)
 

@@ -109,7 +109,7 @@
 	water_level_max      = 3
 	water_level_min      = 2
 	land_type            = /turf/exterior/shrouded
-	water_type           = /turf/exterior/water/tar
+	water_type           = /turf/exterior/shrouded/tar
 
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(var/value, var/turf/T)
 	..()
