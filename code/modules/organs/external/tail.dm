@@ -14,6 +14,7 @@
 	arterial_bleed_severity = 0.3
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_CAN_DISLOCATE
 	skip_body_icon_draw = TRUE
+	force_limb_dir = WEST
 
 	/// Name of tail state in species effects icon file. Used as a prefix for animated states.
 	var/tail
@@ -32,12 +33,12 @@
 	var/mob/living/carbon/human/H = owner
 	if(!(. = ..()))
 		return
-	if(update_icon && !istype(H) && H != owner)
+	if(update_icon && !istype(H) && !QDELETED(H) && H != owner)
 		H.update_tail_showing(FALSE)
 
 /obj/item/organ/external/tail/do_install(mob/living/carbon/human/target, affected, in_place, update_icon, detached)
 	. = ..()
-	if(update_icon && istype(owner))
+	if(update_icon && istype(owner) && !QDELETED(owner))
 		owner.update_tail_showing(FALSE)
 
 /obj/item/organ/external/tail/proc/get_tail()

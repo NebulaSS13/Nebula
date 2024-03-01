@@ -140,7 +140,7 @@
 			cached_icons[organ.bodytype][organ.organ_tag][color] = null
 			return null
 		if(mask_to_bodypart)
-			accessory_icon.Blend(get_limb_mask_for(organ.bodytype, organ.organ_tag), ICON_MULTIPLY)
+			accessory_icon.Blend(get_limb_mask_for(organ), ICON_MULTIPLY)
 		if(!isnull(color) && !isnull(color_blend))
 			accessory_icon.Blend(color, color_blend)
 		cached_icons[organ.bodytype][organ.organ_tag][color] = accessory_icon
