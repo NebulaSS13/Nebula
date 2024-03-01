@@ -202,7 +202,7 @@ var/global/list/natural_walls = list()
 		update_neighboring_ramps(destroying_self = TRUE)
 	. = ..()
 
-/turf/exterior/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial)
+/turf/exterior/wall/set_materials(var/decl/material/newmaterial, var/decl/material/newrmaterial)
 	material = newmaterial
 	if(ispath(material, /decl/material))
 		material = GET_DECL(material)
