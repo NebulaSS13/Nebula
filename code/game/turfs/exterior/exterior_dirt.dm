@@ -1,6 +1,15 @@
 /turf/exterior/dirt
 	name = "dirt"
-	desc = "A flat expanse of dry, cracked earth."
-	icon = 'icons/turf/exterior/dirt.dmi'
+	icon = 'icons/turf/flooring/dirt.dmi'
+	icon_state = "dirt"
+	flooring_layers = /decl/flooring/dirt
+
+/decl/flooring/dirt
+	name = "dirt"
+	desc = "Widely considered to be some of the area's top soil."
+	icon = 'icons/turf/flooring/dirt.dmi'
+	icon_base = "dirt"
 	icon_edge_layer = EXT_EDGE_DIRT
+	damage_temperature = T0C+80
+	can_engrave = FALSE
 	footstep_type = /decl/footsteps/asteroid

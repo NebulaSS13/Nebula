@@ -72,7 +72,6 @@
 		"Bulkhead black" = COLOR_WALL_GUNMETAL
 		)
 
-
 /obj/item/paint_sprayer/Initialize()
 	. = ..()
 	var/random_preset = pick(preset_colors)
@@ -142,7 +141,6 @@
 		playsound(get_turf(src), 'sound/effects/spray3.ogg', 30, 1, -6)
 	return .
 
-
 /obj/item/paint_sprayer/proc/paint_wall(var/turf/simulated/wall/W, var/mob/user)
 	if(istype(W) && (!W.material || !W.material.wall_flags))
 		to_chat(user, SPAN_WARNING("You can't paint this wall type."))
@@ -161,7 +159,6 @@
 	else if(choice == PAINT_REGION_STRIPE)
 		W.stripe_wall(paint_color)
 
-
 /obj/item/paint_sprayer/proc/pick_color_from_wall(var/turf/simulated/wall/W, var/mob/user)
 	if (!W.material || !W.material.wall_flags)
 		return FALSE
@@ -174,7 +171,6 @@
 		else
 			return FALSE
 
-
 /obj/item/paint_sprayer/proc/select_wall_region(var/turf/simulated/wall/W, var/mob/user, var/input_text)
 	var/list/choices = list()
 	if (W.material.wall_flags & PAINT_PAINTABLE)
@@ -186,7 +182,6 @@
 		return FALSE
 	return choice
 
-
 /obj/item/paint_sprayer/proc/paint_wall_frame(var/obj/structure/wall_frame/WF, var/mob/user)
 	var/choice = input(user, "What do you wish to paint?") as null|anything in list(PAINT_REGION_PAINT,PAINT_REGION_STRIPE)
 	if (user.incapacitated() || !WF || !user.Adjacent(WF))
@@ -195,7 +190,6 @@
 		WF.paint_wall_frame(paint_color)
 	else if(choice == PAINT_REGION_STRIPE)
 		WF.stripe_wall_frame(paint_color)
-
 
 /obj/item/paint_sprayer/proc/pick_color_from_wall_frame(var/obj/structure/wall_frame/WF, var/mob/user)
 	switch (select_wall_frame_region(WF, user, "Where do you wish to select the color from?"))
@@ -206,7 +200,6 @@
 		else
 			return FALSE
 
-
 /obj/item/paint_sprayer/proc/select_wall_frame_region(var/obj/structure/wall_frame/WF, var/mob/user, var/input_text)
 	var/list/choices = list(PAINT_REGION_PAINT, PAINT_REGION_STRIPE)
 	var/choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
@@ -214,13 +207,13 @@
 		return FALSE
 	return choice
 
-
-/obj/item/paint_sprayer/proc/paint_floor(var/turf/simulated/floor/F, var/mob/user, var/params)
-	if(!F.flooring)
+/obj/item/paint_sprayer/proc/paint_floor(var/turf/F, var/mob/user, var/params)
+	var/decl/flooring/flooring = F.get_flooring()
+	if(!flooring)
 		to_chat(user, SPAN_WARNING("You need flooring to paint on."))
 		return FALSE
 
-	if(!F.flooring.can_paint || F.broken || F.burnt)
+	if(!flooring.can_paint || !isnull(F.is_turf_broken()) || !isnull(F.is_turf_burned()))
 		to_chat(user, SPAN_WARNING("\The [src] cannot paint \the [F.name]."))
 		return FALSE
 
@@ -273,7 +266,6 @@
 	new painting_decal(F, painting_dir, painting_color)
 	return TRUE
 
-
 /obj/item/paint_sprayer/proc/pick_color_from_floor(var/turf/simulated/floor/F, var/mob/user)
 	if (!F.decals || !F.decals.len)
 		return FALSE
@@ -288,7 +280,6 @@
 		if (user.incapacitated() || !user.Adjacent(F)) // must check due to input blocking
 			return FALSE
 	return picked_color
-
 
 /obj/item/paint_sprayer/proc/paint_airlock(var/obj/machinery/door/airlock/D, var/mob/user)
 	if (!D.paintable)
@@ -306,7 +297,6 @@
 			return FALSE
 	return TRUE
 
-
 /obj/item/paint_sprayer/proc/pick_color_from_airlock(var/obj/machinery/door/airlock/D, var/mob/user)
 	if (!D.paintable)
 		return FALSE
@@ -320,7 +310,6 @@
 			return D.window_color
 		else
 			return FALSE
-
 
 /obj/item/paint_sprayer/proc/select_airlock_region(var/obj/machinery/door/airlock/D, var/mob/user, var/input_text)
 	var/choice
@@ -336,7 +325,6 @@
 		return FALSE
 	return choice
 
-
 /obj/item/paint_sprayer/attack_self(var/mob/user)
 	switch(input("What do you wish to change?") as null|anything in list("Decal","Direction", "Color", "Preset Color", "Mode"))
 		if("Decal")
@@ -350,14 +338,12 @@
 		if("Mode")
 			toggle_mode()
 
-
 /obj/item/paint_sprayer/proc/change_color(var/new_color, var/mob/user)
 	if (new_color && new_color != paint_color)
 		paint_color = new_color
 		if (user)
 			to_chat(user, SPAN_NOTICE("You set \the [src] to paint with <span style='color:[paint_color]'>a new color</span>."))
 		update_icon()
-
 
 /obj/item/paint_sprayer/examine(mob/user)
 	. = ..(user)
@@ -368,7 +354,6 @@
 		toggle_mode()
 	else
 		. = ..()
-
 
 /obj/item/paint_sprayer/verb/choose_color()
 	set name = "Choose color"

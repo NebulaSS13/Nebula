@@ -7,21 +7,23 @@
 	break_tile()
 
 /turf/simulated/floor/proc/break_tile()
-	if(!flooring || !(flooring.flags & TURF_CAN_BREAK) || !isnull(broken))
+	var/decl/flooring/flooring = get_flooring()
+	if(!flooring || !(flooring.flags & TURF_CAN_BREAK) || !isnull(is_turf_broken()))
 		return
 	if(flooring.has_damage_range)
-		broken = text2num(rand(0,flooring.has_damage_range))
+		set_turf_broken(num2text(rand(0,flooring.has_damage_range)), skip_icon_update = TRUE)
 	else
-		broken = "0"
-	remove_decals()
+		set_turf_broken("0", skip_icon_update = TRUE)
+	LAZYCLEARLIST(decals)
 	update_icon()
 
 /turf/simulated/floor/proc/burn_tile(var/exposed_temperature)
-	if(!flooring || !(flooring.flags & TURF_CAN_BURN) || !isnull(burnt))
+	var/decl/flooring/flooring = get_flooring()
+	if(!flooring || !(flooring.flags & TURF_CAN_BURN) || !isnull(is_turf_burned()))
 		return
 	if(flooring.has_burn_range)
-		burnt = text2num(rand(0,flooring.has_burn_range))
+		set_turf_burned(num2text(rand(0,flooring.has_burn_range)), skip_icon_update = TRUE)
 	else
-		burnt = "0"
-	remove_decals()
+		set_turf_burned("0", skip_icon_update = TRUE)
+	LAZYCLEARLIST(decals)
 	update_icon()

@@ -164,27 +164,18 @@
 			make_air()
 		air.copy_from(other.zone.air)
 		other.zone.remove(other)
-	if(!istype(other, src.type))
-		return 0
-	src.set_dir(other.dir)
-	src.icon_state = other.icon_state
-	src.icon = other.icon
-	src.overlays = other.overlays.Copy()
-	src.underlays = other.underlays.Copy()
-	if(other.decals)
-		src.decals = other.decals.Copy()
-		src.update_icon()
-	return 1
-
-/turf/simulated/floor/transport_properties_from(turf/simulated/floor/other)
-	if(!..())
+	if(!isturf(other))
 		return FALSE
-
-	broken = other.broken
-	burnt = other.burnt
-	if(broken || burnt)
-		queue_icon_update()
-	set_flooring(other.flooring)
+	set_dir(other.dir)
+	icon_state = other.icon_state
+	icon = other.icon
+	overlays = other.overlays.Copy()
+	underlays = other.underlays.Copy()
+	set_turf_broken(other.is_turf_broken(), skip_icon_update = TRUE)
+	set_turf_burned(other.is_turf_burned(), skip_icon_update = TRUE)
+	set_flooring_layers(other.flooring_layers, defer_icon_update = TRUE)
+	decals = other.decals?.Copy()
+	queue_icon_update()
 	return TRUE
 
 /turf/simulated/wall/transport_properties_from(turf/simulated/wall/other)

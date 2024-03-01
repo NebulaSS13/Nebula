@@ -668,18 +668,12 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "aGF" = (
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/centcom/holding)
 "aGG" = (
 /obj/item/stool/padded,
 /obj/item/stool/padded,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/centcom/holding)
 "aGP" = (
 /obj/effect/wingrille_spawn/reinforced/crescent,
@@ -703,17 +697,11 @@
 /area/shuttle/escape_shuttle)
 "aHb" = (
 /obj/item/stool/padded,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/centcom/holding)
 "aHc" = (
 /obj/effect/wingrille_spawn/reinforced/crescent,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/centcom/holding)
 "aHe" = (
 /obj/machinery/computer/modular/preset/security,
@@ -760,9 +748,7 @@
 /obj/machinery/sleeper{
 	dir = 8
 	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/centcom/holding)
 "aHr" = (
 /turf/unsimulated/floor{
@@ -803,10 +789,7 @@
 /area/shuttle/escape_shuttle)
 "aHz" = (
 /obj/structure/table/reinforced,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/centcom/holding)
 "aHA" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -878,9 +861,7 @@
 	},
 /area/centcom/holding)
 "aIj" = (
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/centcom/holding)
 "aIk" = (
 /obj/machinery/light{
@@ -949,17 +930,13 @@
 /obj/machinery/bodyscanner{
 	dir = 8
 	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/centcom/holding)
 "aJv" = (
 /obj/machinery/body_scanconsole{
 	dir = 8
 	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/centcom/holding)
 "aJW" = (
 /obj/structure/table,
@@ -972,9 +949,7 @@
 	pixel_x = 2;
 	pixel_y = 3
 	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/space)
 "aKa" = (
 /obj/machinery/door/airlock/command{
@@ -994,10 +969,7 @@
 	c_tag = "Crescent Arrivals - Holding Cell";
 	dir = 4
 	},
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/centcom/holding)
 "aKd" = (
 /obj/machinery/door/airlock/glass/security{
@@ -1094,9 +1066,7 @@
 /obj/item/storage/firstaid/adv{
 	pixel_x = -2
 	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/space)
 "aKW" = (
 /obj/machinery/light/small{
@@ -1117,10 +1087,7 @@
 "aKX" = (
 /obj/structure/bed,
 /obj/item/bedsheet/red,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/centcom/holding)
 "aKY" = (
 /obj/effect/floor_decal/corner/red{
@@ -1157,9 +1124,7 @@
 	pixel_y = 4
 	},
 /obj/item/storage/box/masks,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/space)
 "aLc" = (
 /obj/structure/bed/chair/shuttle/black{
@@ -1239,9 +1204,7 @@
 /obj/item/roller,
 /obj/item/roller,
 /obj/item/roller,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/centcom/holding)
 "aLs" = (
 /obj/structure/closet/hydrant{
@@ -1261,18 +1224,14 @@
 	name = "Emergency NanoMed";
 	pixel_y = -32
 	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/centcom/holding)
 "aLu" = (
 /obj/structure/table,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/chems/spray/cleaner,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/space)
 "aLv" = (
 /obj/structure/table/reinforced,
@@ -1361,9 +1320,7 @@
 	autoset_access = 0;
 	name = "Arrivals Medbay"
 	},
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/centcom/holding)
 "aLL" = (
 /obj/structure/table,
@@ -2583,20 +2540,14 @@
 /area/tdome)
 "hAQ" = (
 /obj/structure/closet/secure_closet/bar,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/tdome)
 "hBn" = (
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/tdome)
 "hDq" = (
 /obj/machinery/gibber,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/tdome)
 "hFt" = (
 /obj/effect/floor_decal/corner/blue{
@@ -2706,9 +2657,7 @@
 /area/tdome/tdomeadmin)
 "jRy" = (
 /obj/structure/closet/secure_closet/freezer/meat,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/tdome)
 "jRE" = (
 /turf/unsimulated/floor{
@@ -2726,9 +2675,7 @@
 /area/shuttle/escape_shuttle)
 "kca" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/tdome)
 "kfk" = (
 /obj/structure/bed/chair,
@@ -2804,22 +2751,16 @@
 	pixel_y = 3
 	},
 /obj/structure/table,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/tdome)
 "kXc" = (
 /obj/structure/table,
 /obj/machinery/microwave,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/tdome)
 "lcs" = (
 /obj/structure/table/reinforced,
-/turf/unsimulated/floor{
-	icon_state = "white"
-	},
+/turf/unsimulated/floor/white,
 /area/tdome)
 "ljR" = (
 /obj/item/camera,
@@ -2885,15 +2826,11 @@
 	name = "Blocker"
 	},
 /obj/effect/wingrille_spawn/reinforced/crescent,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "lTa" = (
 /obj/structure/disposalpipe/segment,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "mgi" = (
 /obj/effect/forcefield{
@@ -2902,15 +2839,11 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/effect/wingrille_spawn/reinforced/crescent,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "mhI" = (
 /obj/machinery/igniter,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "mHo" = (
 /obj/item/grenade/chem_grenade/cleaner,
@@ -2929,9 +2862,7 @@
 	},
 /area/tdome/tdomeadmin)
 "mXz" = (
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "mZU" = (
 /obj/effect/shuttle_landmark/escape_pod/out/pod3,
@@ -2995,17 +2926,13 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "ofF" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 6
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "oNm" = (
 /obj/machinery/recharger{
@@ -3105,9 +3032,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 5
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "rsb" = (
 /obj/machinery/light{
@@ -3137,17 +3062,13 @@
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 1
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "sCN" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 9
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "sDZ" = (
 /obj/structure/table,
@@ -3186,9 +3107,7 @@
 /area/tdome/tdomeadmin)
 "tda" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "trW" = (
 /obj/effect/floor_decal/industrial/warning/corner,
@@ -3323,9 +3242,7 @@
 /obj/machinery/door/airlock/command{
 	name = "Thunderdome Administration"
 	},
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "xog" = (
 /obj/abstract/landmark{
@@ -3356,9 +3273,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/effect/wingrille_spawn/reinforced/crescent,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
+/turf/unsimulated/floor/dark,
 /area/tdome)
 "yda" = (
 /obj/machinery/atmospherics/valve,

@@ -340,6 +340,7 @@
 	plural_icon_state = "sheet-reinf-mult"
 	max_icon_state = "sheet-reinf-max"
 	stack_merge_type = /obj/item/stack/material/reinforced
+
 /obj/item/stack/material/shiny
 	icon_state = "sheet-sheen"
 	item_state = "sheet-shiny"

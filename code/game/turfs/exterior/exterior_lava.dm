@@ -1,10 +1,17 @@
 /turf/exterior/lava
 	name = "lava"
-	icon = 'icons/turf/exterior/lava.dmi'
-	movement_delay = 4
+	icon = 'icons/turf/flooring/lava.dmi'
+	icon_state = "lava"
 	dirt_color = COLOR_GRAY20
-	footstep_type = /decl/footsteps/lava
+	flooring_layers = /decl/flooring/lava
 	var/list/victims
+
+/decl/flooring/lava
+	name = "lava"
+	icon = 'icons/turf/flooring/lava.dmi'
+	icon_base = "lava"
+	movement_delay = 4
+	footstep_type = /decl/footsteps/lava
 
 /turf/exterior/lava/Initialize()
 	. = ..()

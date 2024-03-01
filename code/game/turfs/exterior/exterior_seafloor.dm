@@ -1,12 +1,17 @@
 /turf/exterior/seafloor
 	name = "sea floor"
-	desc = "A thick layer of silt and debris from above."
-	icon = 'icons/turf/exterior/seafloor.dmi'
-	icon_edge_layer = EXT_EDGE_SEAFLOOR
+	icon = 'icons/turf/flooring/seafloor.dmi'
+	icon_state = "seafloor"
+	flooring_layers = /decl/flooring/seafloor
 	var/detail_decal
 
-/turf/exterior/seafloor/get_diggable_resources()
-	return dug ? null : list(/obj/item/stack/material/ore/sand = list(3, 2))
+/decl/flooring/seafloor
+	name = "sea floor"
+	desc = "A thick layer of silt and debris from above."
+	icon = 'icons/turf/flooring/seafloor.dmi'
+	icon_base = "seafloor"
+	icon_edge_layer = EXT_EDGE_SEAFLOOR
+	diggable_resources = list(/obj/item/stack/material/ore/sand = list(3, 2))
 
 /turf/exterior/seafloor/flooded
 	flooded = /decl/material/liquid/water

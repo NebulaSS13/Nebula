@@ -88,7 +88,8 @@ What is the naming convention for planes or layers?
 	#define ABOVE_WIRE_LAYER            1.08
 	//TURF PLANE
 	//TURF_LAYER = 2
-	#define TURF_DETAIL_LAYER           2.01
+	#define TURF_DAMAGE_LAYER           2.01
+	#define TURF_DETAIL_LAYER           2.015
 	#define TURF_SHADOW_LAYER           2.02
 	//ABOVE TURF
 	#define DECAL_LAYER                 2.03

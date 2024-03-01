@@ -462,7 +462,7 @@ var/global/bomb_set
 	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
 	for(var/turf/simulated/floor/T in get_area(src))
-		if(istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+		if(istype(T.get_flooring(), /decl/flooring/reinforced/circuit/red))
 			flash_tiles += T
 	update_icon()
 	for(var/obj/machinery/self_destruct/ch in get_area(src))
@@ -529,7 +529,7 @@ var/global/bomb_set
 /obj/machinery/nuclearbomb/station/on_update_icon()
 	var/target_icon_state
 	if(lighthack)
-		target_icon_state = "rcircuit_off"
+		target_icon_state = "rcircuit_broken0"
 		icon_state = "idle"
 	else if(timing == -1)
 		target_icon_state = "rcircuitanim"
@@ -541,13 +541,13 @@ var/global/bomb_set
 		target_icon_state = "rcircuit"
 		icon_state = "greenlight"
 	else
-		target_icon_state = "rcircuit_off"
+		target_icon_state = "rcircuit_broken0"
 		icon_state = "idle"
 
 	if(!last_turf_state || target_icon_state != last_turf_state)
 		for(var/thing in flash_tiles)
 			var/turf/simulated/floor/T = thing
-			if(!istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+			if(!istype(T.get_flooring(), /decl/flooring/reinforced/circuit/red))
 				flash_tiles -= T
 				continue
 			T.icon_state = target_icon_state

@@ -123,24 +123,3 @@
 		"sound/ambience/spookyspace1.ogg",
 		"sound/ambience/spookyspace2.ogg"
 	)
-
-////////////////////////////////////////////////////////////////////////////
-// Turfs
-////////////////////////////////////////////////////////////////////////////
-
-/turf/exterior/meat
-	name          = "fleshy ground"
-	icon          = 'icons/turf/exterior/flesh.dmi'
-	desc          = "It's disgustingly soft to the touch. And warm. Too warm."
-	dirt_color    = "#c40031"
-	footstep_type = /decl/footsteps/mud
-
-/turf/exterior/meat/get_diggable_resources()
-	return dug ? null : list(/obj/item/stack/material/ore/meat = list(3, 2))
-
-/turf/exterior/meat/acid
-	name         = "juices"
-	desc         = "Half-digested chunks of vines are floating in the puddle of some liquid."
-	gender       = PLURAL
-	reagent_type = /decl/material/liquid/acid/stomach
-	height       = -(FLUID_SHALLOW)

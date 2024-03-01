@@ -267,10 +267,7 @@
 /area/map_template/wizard_station)
 "aM" = (
 /obj/structure/closet/coffin,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "aN" = (
 /obj/structure/bed/chair/wood/wings{
@@ -497,33 +494,21 @@
 	},
 /area/map_template/wizard_station)
 "bo" = (
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "bp" = (
 /obj/item/radio/intercom/wizard{
 	pixel_y = 22
 	},
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "bq" = (
 /obj/structure/cult/pylon,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "br" = (
 /obj/structure/kitchenspike,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "bs" = (
 /obj/item/remains/human,
@@ -563,32 +548,20 @@
 "bx" = (
 /obj/structure/cult/talisman,
 /obj/item/knife/ritual,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "by" = (
 /obj/structure/table/woodentable,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "bz" = (
 /obj/effect/gateway/active/cult,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "bA" = (
 /obj/structure/table/marble,
 /obj/item/flashlight/slime,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "bB" = (
 /mob/living/simple_animal/hostile/retaliate/goat{
@@ -608,10 +581,7 @@
 /area/map_template/wizard_station)
 "bD" = (
 /obj/structure/flora/pottedplant/unusual,
-/turf/unsimulated/floor{
-	icon_state = "cult";
-	name = "plating"
-	},
+/turf/unsimulated/floor/cult,
 /area/map_template/wizard_station)
 "bE" = (
 /turf/unsimulated/floor{

@@ -3,9 +3,9 @@
 
 /turf/simulated/floor/fixed
 	name = "floor"
-	icon = 'icons/turf/flooring/tiles.dmi'
+	icon = 'icons/turf/flooring/static/floors.dmi'
 	icon_state = "steel"
-	initial_flooring = null
+	flooring_layers = null
 	footstep_type = /decl/footsteps/plating
 	is_outside = OUTSIDE_AREA
 
@@ -14,13 +14,13 @@
 		return
 	return ..()
 
-/turf/simulated/floor/fixed/on_update_icon()
+/turf/simulated/floor/fixed/on_update_icon(var/update_neighbors = FALSE)
 	queue_ao(FALSE)
 
 /turf/simulated/floor/fixed/is_plating()
 	return 0
 
-/turf/simulated/floor/fixed/set_flooring()
+/turf/simulated/floor/fixed/set_flooring_layers(var/decl/flooring/new_flooring, var/defer_icon_update, var/assume_unchanged = FALSE)
 	return
 
 /turf/simulated/floor/fixed/alium
