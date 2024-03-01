@@ -14,7 +14,7 @@
 	if(isnull(val)) val = 0
 	switch(val)
 		if(0 to 1)
-			return /turf/exterior/water
+			return /turf/exterior/sand/water
 		else
 			return /turf/exterior/sand
 
