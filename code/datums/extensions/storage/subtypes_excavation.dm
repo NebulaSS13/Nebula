@@ -1,6 +1,6 @@
 /datum/extension/storage/excavation
 	storage_slots = 7
-	can_hold = list(/obj/item/pickaxe/xeno)
+	can_hold = list(/obj/item/tool/xeno)
 	max_storage_space = 18
 	max_w_class = ITEM_SIZE_NORMAL
 	use_to_pickup = 1

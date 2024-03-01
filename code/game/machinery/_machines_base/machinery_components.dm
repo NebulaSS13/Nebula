@@ -190,7 +190,7 @@ var/global/list/machine_path_to_circuit_type
 	if(R)
 		var/datum/extension/storage/storage = get_extension(R, /datum/extension/storage)
 		if(storage)
-			storage.remove_from_storage(new_part, src)
+			storage.remove_from_storage(user, new_part, src)
 			storage.handle_item_insertion(old_part, 1)
 		R.part_replacement_sound()
 	install_component(new_part)

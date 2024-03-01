@@ -78,7 +78,7 @@
 				if(!G.reagents || !G.reagents.total_volume)
 					continue
 				failed = FALSE
-				bag.remove_from_storage(G, src)
+				bag.remove_from_storage(user, G, src)
 				holdingitems += G
 				if(LAZYLEN(holdingitems) >= limit)
 					break

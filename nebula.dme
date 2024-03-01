@@ -448,6 +448,7 @@
 #include "code\datums\extensions\storage\_storage_ui.dm"
 #include "code\datums\extensions\storage\subtypes_backpack.dm"
 #include "code\datums\extensions\storage\subtypes_bag.dm"
+#include "code\datums\extensions\storage\subtypes_basket.dm"
 #include "code\datums\extensions\storage\subtypes_belt.dm"
 #include "code\datums\extensions\storage\subtypes_box.dm"
 #include "code\datums\extensions\storage\subtypes_excavation.dm"

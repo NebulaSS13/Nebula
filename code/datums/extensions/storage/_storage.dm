@@ -11,21 +11,21 @@
 	/// List of objects which this item can't store (in effect only if can_hold isn't set)
 	var/list/cant_hold = list()
 	/// Max size of objects that this object can store (in effect only if can_hold isn't set)
-	var/max_w_class = ITEM_SIZE_SMALL 
+	var/max_w_class = ITEM_SIZE_SMALL
 	/// Total storage cost of items this can hold. Will be autoset based on storage_slots if left null.
 	var/max_storage_space
 	/// The number of storage slots in this container.
 	var/storage_slots
 	/// Set this boolean variable to make it possible to use this item in an inverse way, so you can have the item in your hand and click items on the floor to pick them up.
-	var/use_to_pickup 
+	var/use_to_pickup
 	/// Set this boolean variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
-	var/allow_quick_empty 
+	var/allow_quick_empty
 	/// Set this boolean variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
-	var/allow_quick_gather 
+	var/allow_quick_gather
 	/// FALSE = pick one at a time, TRUE = pick all on tile
 	var/collection_mode = TRUE
 	/// sound played when used. null for no sound.
-	var/use_sound = "rustle" 
+	var/use_sound = "rustle"
 	/// What storage UI do we use?
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
 
@@ -207,22 +207,22 @@
 		storage_ui.on_post_remove(usr)
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
-/datum/extension/storage/proc/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
-	if(!istype(W)) 
-		return 0
+/datum/extension/storage/proc/remove_from_storage(mob/user, obj/item/W, atom/new_location, var/NoUpdate = 0)
+	if(!istype(W))
+		return FALSE
 	new_location = new_location || get_turf(holder)
 	if(storage_ui)
-		storage_ui.on_pre_remove(usr, W)
+		storage_ui.on_pre_remove(user, W)
 	if(isatom(holder))
 		var/atom/atom_holder = holder
 		if(ismob(atom_holder.loc))
-			W.dropped(usr)
+			W.dropped(user)
 	if(ismob(new_location))
 		W.hud_layerise()
 	else
 		W.reset_plane_and_layer()
 	W.forceMove(new_location)
-	if(usr && !NoUpdate)
+	if(user && !NoUpdate)
 		update_ui_after_item_removal()
 	if(W.maptext)
 		W.maptext = ""
@@ -307,5 +307,27 @@
 /datum/extension/storage/proc/quick_empty(mob/user, var/turf/dump_loc)
 	hide_from(user)
 	for(var/obj/item/I in get_contents())
-		remove_from_storage(I, dump_loc, 1)
+		remove_from_storage(user, I, dump_loc, 1)
 	finish_bulk_removal()
+
+/datum/extension/storage/proc/handle_mouse_drop(mob/user, obj/over_object, params)
+	var/atom/atom = holder
+	if(!istype(atom))
+		return FALSE
+	if (ishuman(user) || issmall(user)) //so monkeys can take off their backpacks -- Urist
+		if(over_object == user && atom.Adjacent(user)) // this must come before the screen objects only block
+			open(user)
+			return FALSE
+		if(!istype(over_object, /obj/screen/inventory))
+			return TRUE
+		//makes sure master_item is equipped before putting it in hand, so that we can't drag it into our hand from miles away.
+		//there's got to be a better way of doing this...
+		if(!user.isEquipped(holder) || !isitem(holder))
+			return FALSE
+		if(!user.incapacitated())
+			var/obj/screen/inventory/inv = over_object
+			atom.add_fingerprint(user)
+			if(user.try_unequip(holder))
+				user.equip_to_slot_if_possible(holder, inv.slot_id)
+			return FALSE
+	return FALSE

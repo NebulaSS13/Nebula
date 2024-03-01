@@ -32,7 +32,7 @@
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		for(var/obj/item/I in storage.get_contents())
-			if(storage.remove_from_storage(I, target_loc) && !neatly)
+			if(storage.remove_from_storage(null, I, target_loc) && !neatly)
 				I.throw_at(get_edge_target_turf(I.loc, pick(global.alldirs)), rand(1,3), round(10/I.w_class))
 	update_icon()
 

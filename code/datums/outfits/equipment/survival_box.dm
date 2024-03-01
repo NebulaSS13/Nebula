@@ -10,7 +10,7 @@
 
 /decl/survival_box_option/survival
 	name = "survival kit"
-	box_type = /obj/item/storage/box/survival
+	box_type = /obj/item/box/survival
 	uid = "survival_box_kit"
 
 /decl/survival_box_option/lunchbox

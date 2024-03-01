@@ -38,8 +38,8 @@
 		/obj/item/clothing/accessory/armor/tag,
 	)
 
-/datum/extension/storage/wallet/remove_from_storage(obj/item/W, atom/new_location)
-	. = ..(W, new_location)
+/datum/extension/storage/wallet/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
+	. = ..()
 	if(. && istype(holder, /obj/item/wallet))
 		var/obj/item/wallet/wallet = holder
 		if(W == wallet.front_id)

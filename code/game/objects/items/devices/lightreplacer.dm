@@ -74,7 +74,7 @@
 				if(!user.stat && src.uses < src.max_uses && L.status == 0)
 					src.AddUses(1)
 					amt_inserted++
-					storage.remove_from_storage(L, T, 1)
+					storage.remove_from_storage(user, L, T, 1)
 					qdel(L)
 			storage.finish_bulk_removal()
 			if(amt_inserted)

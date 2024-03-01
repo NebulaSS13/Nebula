@@ -27,7 +27,7 @@
 		/obj/item/tank,
 		/obj/item/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/storage/excavation,
+		/obj/item/excavation,
 		/obj/item/tool,
 		/obj/item/scanner/breath,
 		/obj/item/measuring_tape,

@@ -156,7 +156,7 @@
 		/obj/item/anobattery,
 		/obj/item/ano_scanner,
 		/obj/item/stack/tape_roll/barricade_tape/research,
-		/obj/item/pickaxe/xeno/hand
+		/obj/item/tool/xeno/hand
 	)
 
 /datum/extension/storage/belt/soulstone
