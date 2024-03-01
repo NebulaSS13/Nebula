@@ -2,7 +2,7 @@
 
 	if(!length(interactions))
 		return FALSE
-	
+
 	var/list/possibilities
 	for(var/interaction_type in interactions)
 		var/decl/interaction_handler/interaction = GET_DECL(interaction_type)
@@ -19,7 +19,7 @@
 		choice = possibilities[1]
 	else
 		choice = show_radial_menu(user, src, possibilities, use_labels = TRUE)
-		if(!istype(choice) || !(choice.type in get_alt_interactions()) || !choice.is_possible(src, user, prop))
+		if(!istype(choice) || QDELETED(user) || !(choice.type in get_alt_interactions(user)) || !choice.is_possible(src, user, prop))
 			return TRUE
 
 	user.face_atom(src)

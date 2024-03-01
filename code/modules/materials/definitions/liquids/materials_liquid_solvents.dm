@@ -7,7 +7,7 @@
 	metabolism = REM * 2
 	touch_met = 50 // It's acid!
 	value = 1.2
-	solvent_power = MAT_SOLVENT_STRONG + 2
+	solvent_power = MAT_SOLVENT_VERY_STRONG
 	solvent_melt_dose = 10
 	melting_point = 284
 	boiling_point = 611
@@ -34,7 +34,7 @@
 	lore_text = "Polytrinic acid is a an extremely corrosive chemical substance."
 	taste_description = "acid"
 	color = "#8e18a9"
-	solvent_power = MAT_SOLVENT_STRONG + 7
+	solvent_power = MAT_SOLVENT_STRONGEST
 	solvent_melt_dose = 4
 	solvent_max_damage = 60
 	value = 1.8

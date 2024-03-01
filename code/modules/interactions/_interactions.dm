@@ -21,7 +21,7 @@
 	if(expected_target_type && !istype(target, expected_target_type))
 		return FALSE
 
-	if(isturf(target.loc))
+	if(isturf(target) || isturf(target.loc))
 		if(interaction_flags & INTERACTION_NEEDS_INVENTORY)
 			return FALSE
 	else
@@ -35,7 +35,7 @@
 	else if((interaction_flags & INTERACTION_NEEDS_ADJACENCY) && !user.Adjacent(target))
 		return FALSE
 
-	// CanPhysicallyInteract() also checks default incapacitation, so don't set 
+	// CanPhysicallyInteract() also checks default incapacitation, so don't set
 	// incapacitation_flags unless needed.
 	if(incapacitation_flags && user.incapacitated(incapacitation_flags))
 		return FALSE

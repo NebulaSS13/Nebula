@@ -89,7 +89,7 @@
 		//If no safety, we just toggle the nozzle
 		var/decl/interaction_handler/IH = GET_DECL(/decl/interaction_handler/next_spray_amount)
 		if(IH.is_possible(src, user))
-			IH.invoked(src, user)
+			IH.invoked(src, user, src)
 			return TRUE
 
 ///Whether the spray has a safety toggle
