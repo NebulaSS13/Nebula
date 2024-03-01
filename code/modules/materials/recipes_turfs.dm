@@ -12,17 +12,31 @@
 	var/turf/build_turf = get_turf(location)
 	if(!build_turf)
 		return
-	return build_turf.ChangeTurf(result_type)
+	var/turf/result = build_turf.ChangeTurf(result_type)
+	if(istype(result) && (use_material || use_reinf_material))
+		result.set_turf_materials(use_material, use_reinf_material)
+	return result
 
 /datum/stack_recipe/turfs/wall
 	abstract_type = /datum/stack_recipe/turfs/wall
 	expected_product_type = /turf/simulated/wall
 
-/datum/stack_recipe/turfs/wall/spawn_result(mob/user, location, amount)
-	var/turf/simulated/wall/wall = ..()
-	if(istype(wall))
-		wall.set_material(use_material, use_reinf_material)
-
 /datum/stack_recipe/turfs/wall/brick
 	title = "brick wall"
 	result_type = /turf/simulated/wall/brick
+
+/datum/stack_recipe/turfs/path
+	abstract_type = /datum/stack_recipe/turfs/path
+	expected_product_type = /turf/exterior
+
+/datum/stack_recipe/turfs/path
+	title = "cobble path"
+	result_type = /turf/exterior/path
+
+/datum/stack_recipe/turfs/path/herringbone
+	title = "herringbone path"
+	result_type = /turf/exterior/path/herringbone
+
+/datum/stack_recipe/turfs/path/running_bond
+	title = "running bond path"
+	result_type = /turf/exterior/path/running_bond

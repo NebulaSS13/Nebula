@@ -5,7 +5,7 @@
 		else
 			construction_stage = null
 	if(!material)
-		material = GET_DECL(get_default_material())
+		material = get_default_material()
 	if(material)
 		explosion_resistance = material.explosion_resistance
 		hitsound = material.hitsound
@@ -42,32 +42,6 @@
 	else
 		SetName("[material.solid_name] [material.wall_name]")
 		desc = "It seems to be a section of hull plated with [material.solid_name]."
-
-/turf/simulated/wall/proc/get_default_material()
-	. = DEFAULT_WALL_MATERIAL
-
-/turf/simulated/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial, var/decl/material/newgmaterial)
-
-	material = newmaterial
-	if(ispath(material, /decl/material))
-		material = GET_DECL(material)
-	else if(!istype(material))
-		PRINT_STACK_TRACE("Wall has been supplied non-material '[newmaterial]'.")
-		material = GET_DECL(get_default_material())
-
-	reinf_material = newrmaterial
-	if(ispath(reinf_material, /decl/material))
-		reinf_material = GET_DECL(reinf_material)
-	else if(!istype(reinf_material))
-		reinf_material = null
-
-	girder_material = newgmaterial
-	if(ispath(girder_material, /decl/material))
-		girder_material = GET_DECL(girder_material)
-	else if(!istype(girder_material))
-		girder_material = null
-
-	update_material()
 
 /turf/simulated/wall/proc/get_wall_icon()
 	. = (istype(material) && material.icon_base) || 'icons/turf/walls/solid.dmi'

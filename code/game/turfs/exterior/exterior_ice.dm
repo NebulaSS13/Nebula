@@ -2,6 +2,18 @@
 	name = "ice"
 	icon = 'icons/turf/exterior/ice.dmi'
 	footstep_type = /decl/footsteps/plating
+	base_color = COLOR_LIQUID_WATER
+	color = COLOR_LIQUID_WATER
+
+/turf/exterior/ice/Initialize()
+	. = ..()
+	update_icon()
+
+/turf/exterior/ice/on_update_icon()
+	. = ..()
+	var/image/I = image(icon, "shine")
+	I.appearance_flags |= RESET_COLOR
+	add_overlay(I)
 
 /turf/exterior/snow
 	name = "snow"
@@ -23,8 +35,4 @@
 
 /turf/exterior/snow/handle_melting(list/meltable_materials)
 	. = ..()
-	if(icon_state != "permafrost")
-		SetName("permafrost")
-		icon_state = "permafrost"
-		icon_edge_layer = -1
-		footstep_type = /decl/footsteps/asteroid
+	ChangeTurf(/turf/exterior/ice)

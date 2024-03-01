@@ -7,6 +7,11 @@
 	open_turf_type = /turf/open
 	turf_flags = TURF_FLAG_BACKGROUND | TURF_IS_HOLOMAP_PATH
 	zone_membership_candidate = TRUE
+	initial_gas = list(
+		/decl/material/gas/oxygen = MOLES_O2STANDARD,
+		/decl/material/gas/nitrogen = MOLES_N2STANDARD
+	)
+
 	var/base_color
 	var/dirt_color = "#7c5e42"
 	var/possible_states = 0
