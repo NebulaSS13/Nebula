@@ -143,7 +143,7 @@
 
 	var/datum/extension/storage/loc_storage = get_extension(AM.loc, /datum/extension/storage)
 	if(loc_storage)
-		loc_storage.remove_from_storage(AM, src)
+		loc_storage.remove_from_storage(user, AM, src)
 		loc_storage.handle_item_insertion(src, TRUE)
 	else
 		AM.forceMove(src)

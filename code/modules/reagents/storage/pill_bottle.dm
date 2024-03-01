@@ -38,7 +38,7 @@
 		return TRUE
 
 	var/obj/item/chems/pill/pill = pick(pills_here)
-	if(storage.remove_from_storage(pill, user))
+	if(storage.remove_from_storage(user, pill, user))
 		if(target_mouth)
 			user.visible_message(SPAN_NOTICE("\The [user] pops a pill from \the [src]."))
 			pill.use_on_mob(user, user)

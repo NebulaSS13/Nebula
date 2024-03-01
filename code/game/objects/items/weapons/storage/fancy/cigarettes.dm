@@ -50,7 +50,7 @@
 		// UI updates.
 
 		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-		storage?.remove_from_storage(cig, null)
+		storage?.remove_from_storage(user, cig, null)
 		user.equip_to_slot(cig, slot_wear_mask_str)
 		reagents.maximum_volume = 5 * contents.len
 		to_chat(user, SPAN_NOTICE("You take a cigarette out of the pack."))

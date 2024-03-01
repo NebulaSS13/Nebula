@@ -265,7 +265,7 @@
 			if(cups >= max_cups)
 				break
 			if(istype(C, cup_type))
-				storage.remove_from_storage(C, src)
+				storage.remove_from_storage(user, C, src)
 				qdel(C)
 				cups++
 		return TRUE

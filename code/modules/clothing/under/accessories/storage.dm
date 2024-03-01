@@ -31,7 +31,7 @@
 
 /obj/item/clothing/accessory/webbing/drop_pouches
 	storage_type = /datum/extension/storage/pockets/pouches
-	
+
 /obj/item/clothing/accessory/webbing/drop_pouches/black
 	name = "black drop pouches"
 	desc = "Robust black synthcotton bags to hold whatever you need, but cannot hold in hands."
@@ -58,7 +58,7 @@
 	var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
 	if(storage)
 		for(var/i = 1 to 2)
-			var/obj/item/knife = new /obj/item/knife/table/primitive(src)
+			var/obj/item/knife/primitive/knife = new(src)
 			if(storage.can_be_inserted(knife, null, TRUE))
 				storage.handle_item_insertion(knife)
 	update_icon()

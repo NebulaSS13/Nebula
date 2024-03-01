@@ -260,11 +260,10 @@
 
 			return TRUE
 
-		if(istype(W, /obj/item/storage))
-			var/obj/item/storage/storage = W
-			if(storage.collection_mode)
-				storage.gather_all(src, user)
-				return TRUE
+		var/datum/extension/storage/storage = get_extension(W, /datum/extension/storage)
+		if(storage?.collection_mode)
+			storage.gather_all(src, user)
+			return TRUE
 
 	if(ATOM_IS_OPEN_CONTAINER(W) && W.reagents && reagents?.total_volume >= FLUID_PUDDLE)
 		var/taking = min(reagents.total_volume, REAGENTS_FREE_SPACE(W.reagents))

@@ -77,7 +77,7 @@
 		else if(isobj(A.loc))
 			var/datum/extension/storage/storage = get_extension(A.loc, /datum/extension/storage)
 			if(storage)
-				storage.remove_from_storage(A)
+				storage.remove_from_storage(user, A)
 		c.scanned = A
 		A.forceMove(src)  //Store it inside
 		safe = 2

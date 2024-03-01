@@ -34,10 +34,10 @@
 /datum/extension/storage/box/freezer
 	max_w_class = ITEM_SIZE_NORMAL
 	can_hold = list(
-		/obj/item/organ, 
-		/obj/item/chems/food, 
-		/obj/item/chems/drinks, 
-		/obj/item/chems/condiment, 
+		/obj/item/organ,
+		/obj/item/chems/food,
+		/obj/item/chems/drinks,
+		/obj/item/chems/condiment,
 		/obj/item/chems/glass
 	)
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
@@ -47,7 +47,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 7
 
-/datum/extension/storage/box/cigar/remove_from_storage(obj/item/W, atom/new_location)
+/datum/extension/storage/box/cigar/remove_from_storage(mob/user, obj/item/W, atom/new_location)
 	if(istype(W, /obj/item/clothing/mask/smokable/cigarette/cigar) && isatom(holder))
 		var/atom/atom_holder = holder
 		if(atom_holder.reagents)
@@ -58,7 +58,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 
-/datum/extension/storage/box/cigarettes/remove_from_storage(obj/item/W, atom/new_location)
+/datum/extension/storage/box/cigarettes/remove_from_storage(mob/user, obj/item/W, atom/new_location)
 	// Don't try to transfer reagents to lighters
 	if(istype(W, /obj/item/clothing/mask/smokable/cigarette) && isatom(holder))
 		var/atom/atom_holder = holder

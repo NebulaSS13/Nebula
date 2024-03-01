@@ -13,7 +13,6 @@
 	var/shattered = FALSE
 	var/list/ui_users
 
-
 /obj/structure/mirror/WillContain()
 	return list(
 			/obj/item/grooming/comb/colorable/random,
@@ -46,10 +45,8 @@
 	. = ..()
 
 /obj/structure/mirror/attack_hand(mob/user)
-	. = ..()
-	return use_mirror(user)
-
-/obj/structure/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
+	if(user.a_intent == I_HURT)
+		return ..()
 	if(shattered)
 		to_chat(user, SPAN_WARNING("You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out."))
 	else

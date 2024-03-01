@@ -99,5 +99,5 @@
 		var/atom/movable/atom_target = target
 		var/obj/item/card/id/id = atom_target.GetIdCard()
 		if (istype(id))
-			storage.remove_from_storage(id)
+			storage.remove_from_storage(user, id)
 			user.put_in_hands(id)

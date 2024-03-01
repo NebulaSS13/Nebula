@@ -102,7 +102,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pack for holding pickaxes
 
-/obj/item/storage/excavation
+/obj/item/excavation
 	name              = "excavation pick set"
 	icon              = 'icons/obj/items/storage/excavation.dmi'
 	icon_state        = "excavation"
@@ -114,7 +114,7 @@
 	material          = /decl/material/solid/organic/leather/synth
 	storage_type      = /datum/extension/storage/excavation
 
-/obj/item/storage/excavation/WillContain()
+/obj/item/excavation/WillContain()
 	return list(
 		/obj/item/tool/xeno/brush,
 		/obj/item/tool/xeno/one_pick,
@@ -125,10 +125,10 @@
 		/obj/item/tool/xeno/six_pick
 	)
 
-/obj/item/storage/excavation/empty/WillContain()
+/obj/item/excavation/empty/WillContain()
 	return
 
-/obj/item/storage/excavation/proc/sort_picks()
+/obj/item/excavation/proc/sort_picks()
 	var/list/obj/item/tool/xeno/picksToSort = list()
 	for(var/obj/item/tool/xeno/P in src)
 		picksToSort += P

@@ -4,7 +4,7 @@
 	allow_quick_gather = 1
 	use_sound = null
 
-/datum/extension/storage/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
+/datum/extension/storage/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
 	. = ..()
 	W.vis_flags = initial(W.vis_flags)
 	W.appearance_flags = initial(W.appearance_flags)

@@ -330,7 +330,7 @@
 			var/loaded = 0
 			for(var/obj/item/seeds/G in storage.get_contents())
 				++loaded
-				storage.remove_from_storage(G, src, 1)
+				storage.remove_from_storage(user, G, src, 1)
 				add(G, 1)
 			storage.finish_bulk_removal()
 			if (loaded)
@@ -349,7 +349,7 @@
 				return
 		else if(isobj(O.loc))
 			var/datum/extension/storage/storage = get_extension(O.loc, /datum/extension/storage)
-			storage?.remove_from_storage(O, src)
+			storage?.remove_from_storage(null, O, src)
 
 	O.forceMove(src)
 	var/newID = 0

@@ -36,7 +36,7 @@
 		for(var/obj/item/stack/material/ore/O in storage.get_contents())
 			if(total_ores >= maximum_ores)
 				break
-			storage.remove_from_storage(O, src, TRUE) //This will move the item to this item's contents
+			storage.remove_from_storage(user, O, src, TRUE) //This will move the item to this item's contents
 			insert_ore(O)
 			added_ore = TRUE
 		if(added_ore)

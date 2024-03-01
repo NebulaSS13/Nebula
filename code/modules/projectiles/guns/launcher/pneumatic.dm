@@ -50,7 +50,7 @@
 	var/list/item_contents = storage?.get_contents()
 	if(length(item_contents))
 		var/obj/item/removing = item_contents[item_contents.len]
-		storage.remove_from_storage(removing, src.loc)
+		storage.remove_from_storage(user, removing, src.loc)
 		user.put_in_hands(removing)
 		to_chat(user, "You remove [removing] from the hopper.")
 	else
@@ -98,7 +98,7 @@
 		return null
 
 	var/obj/item/launched = storage_contents[1]
-	storage.remove_from_storage(launched, src)
+	storage.remove_from_storage((ismob(firer) ? firer : null), launched, src)
 	return launched
 
 /obj/item/gun/launcher/pneumatic/examine(mob/user, distance)

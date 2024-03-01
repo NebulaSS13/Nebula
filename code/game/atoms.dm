@@ -914,12 +914,12 @@
 	var/atom/cur_atom = src
 	while (cur_atom && !(cur_atom in container.contents))
 		if (isarea(cur_atom))
-			return -1
+			return
 		if(cur_atom.loc && has_extension(cur_atom.loc, /datum/extension/storage))
 			.++
 		cur_atom = cur_atom.loc
 	if (!cur_atom)
-		. = -1	//inside something with a null loc.
+		return -1	//inside something with a null loc.
 
 //Like storage depth, but returns the depth to the nearest turf
 //Returns -1 if no top level turf (a loc was null somewhere, or a non-turf atom's loc was an area somehow).
@@ -928,7 +928,7 @@
 	var/atom/cur_atom = src
 	while (cur_atom && !isturf(cur_atom))
 		if (isarea(cur_atom))
-			return -1
+			return
 		if(cur_atom.loc && has_extension(cur_atom.loc, /datum/extension/storage))
 			.++
 		cur_atom = cur_atom.loc

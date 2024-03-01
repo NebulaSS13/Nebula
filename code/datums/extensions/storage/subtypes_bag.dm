@@ -9,7 +9,7 @@
 		var/obj/item/bag/bag = holder
 		bag.update_w_class()
 
-/datum/extension/storage/bag/remove_from_storage(obj/item/W, atom/new_location)
+/datum/extension/storage/bag/remove_from_storage(mob/user, obj/item/W, atom/new_location)
 	. = ..()
 	if(. && istype(holder, /obj/item/bag))
 		var/obj/item/bag/bag = holder
@@ -38,12 +38,10 @@
 	max_w_class = ITEM_SIZE_HUGE
 	can_hold = list(/obj/item/coin, /obj/item/cash)
 
-/datum/extension/storage/bag/cash/infinite/remove_from_storage(obj/item/W, atom/new_location)
+/datum/extension/storage/bag/cash/infinite/remove_from_storage(mob/user, obj/item/W, atom/new_location)
 	. = ..()
 	if(. && istype(W,/obj/item/cash)) //only matters if its spacecash.
-		var/datum/extension/storage/storage = get_extension(src, /datum/extension/storage)
-		if(storage)
-			storage.handle_item_insertion(new /obj/item/cash/c1000, 1)
+		handle_item_insertion(new /obj/item/cash/c1000, 1)
 
 /datum/extension/storage/bag/quantum
 	storage_slots = 56

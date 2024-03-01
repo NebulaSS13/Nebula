@@ -827,7 +827,7 @@
 	. = ..()
 	if(.)
 		if(module && isturf(loc))
-			var/obj/item/storage/ore/orebag = locate() in list(module_state_1, module_state_2, module_state_3)
+			var/obj/item/ore/orebag = locate() in list(module_state_1, module_state_2, module_state_3)
 			if(orebag)
 				loc.attackby(orebag, src)
 			if(istype(module, /obj/item/robot_module/janitor))

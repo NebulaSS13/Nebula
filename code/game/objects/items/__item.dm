@@ -355,7 +355,7 @@
 		// Remove the item from our bag if necessary.
 		var/datum/extension/storage/storage = loc && get_extension(loc, /datum/extension/storage)
 		if(istype(storage))
-			storage.remove_from_storage(src)
+			storage.remove_from_storage(user, src)
 			dropInto(get_turf(loc))
 		// Otherwise remove it from our inventory if necessary.
 		else if(ismob(loc))
@@ -460,7 +460,7 @@
 			var/datum/extension/storage/loc_storage = get_extension(loc, /datum/extension/storage)
 			if(loc_storage)
 				visible_message(SPAN_NOTICE("\The [user] fumbles \the [src] out of \the [loc]."))
-				loc_storage.remove_from_storage(src)
+				loc_storage.remove_from_storage(user, src)
 				dropInto(get_turf(loc))
 				return TRUE
 		to_chat(user, SPAN_WARNING("You are not dexterous enough to pick up \the [src]."))
@@ -469,7 +469,7 @@
 	var/old_loc = loc
 	var/datum/extension/storage/loc_storage = get_extension(loc, /datum/extension/storage)
 	if(loc_storage)
-		loc_storage.remove_from_storage(src)
+		loc_storage.remove_from_storage(user, src)
 
 	if(!QDELETED(throwing))
 		throwing.finalize(hit=TRUE)
@@ -479,7 +479,10 @@
 		if(cell_handler.try_unload(user))
 			return TRUE
 
-	if(!user.try_unequip(src))
+	if(loc == user)
+		if(!user.try_unequip(src))
+			return TRUE
+	else if(isliving(loc))
 		return TRUE
 
 	if(!QDELETED(src) && user.put_in_active_hand(src))

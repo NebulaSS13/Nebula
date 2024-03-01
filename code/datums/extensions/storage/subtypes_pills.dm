@@ -10,7 +10,7 @@
 	use_to_pickup = 1
 	use_sound = 'sound/effects/storage/pillbottle.ogg'
 
-/datum/extension/storage/pillbottle/remove_from_storage(obj/item/W, atom/new_location, NoUpdate)
+/datum/extension/storage/pillbottle/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
 	. = ..()
 	if(. && istype(holder, /obj/item/pill_bottle/foil_pack))
 		var/obj/item/pill_bottle/foil_pack/pop = holder
@@ -20,7 +20,7 @@
 /datum/extension/storage/pillbottle/foil/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	return FALSE
 
-/datum/extension/storage/pillbottle/foil/remove_from_storage(obj/item/W, atom/new_location, NoUpdate)
+/datum/extension/storage/pillbottle/foil/remove_from_storage(mob/user, obj/item/W, atom/new_location, NoUpdate)
 	. = ..()
 	if(. && W.loc != holder && istype(W, /obj/item/pill_bottle/foil_pack))
 		var/obj/item/pill_bottle/foil_pack/pop = holder
