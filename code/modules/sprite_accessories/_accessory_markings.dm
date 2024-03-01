@@ -13,13 +13,17 @@
 	var/list/icons = list()
 	var/mask_to_bodypart = TRUE
 
-/decl/sprite_accessory/marking/proc/get_cached_marking_icon(var/decl/bodytype/bodytype, var/bodypart, var/color = COLOR_WHITE)
+/decl/sprite_accessory/marking/proc/get_cached_marking_icon(obj/item/organ/external/limb, color = COLOR_WHITE)
+	var/decl/bodytype/bodytype = limb?.bodytype
+	var/bodypart = limb?.icon_state
+	if(!bodytype || !bodypart)
+		return
 	LAZYINITLIST(icons[bodytype])
 	LAZYINITLIST(icons[bodytype][bodypart])
 	if(!icons[bodytype][bodypart][color])
 		var/icon/marking_icon = icon(icon, icon_state) // make a new one to avoid mutating the base
 		if(mask_to_bodypart)
-			marking_icon.Blend(get_limb_mask_for(bodytype, bodypart), ICON_MULTIPLY)
+			marking_icon.Blend(get_limb_mask_for(limb), ICON_MULTIPLY)
 		marking_icon.Blend(color, blend)
 		icons[bodytype][bodypart][color] = marking_icon
 	return icons[bodytype][bodypart][color]

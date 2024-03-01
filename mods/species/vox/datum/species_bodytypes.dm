@@ -97,7 +97,6 @@
 		//BP_TAIL = /obj/item/organ/external/tail/vox/stanchion
 	)
 
-
 /decl/bodytype/vox/servitor/alchemist
 	name       = "alchemist voxform"
 	icon_base  = 'mods/species/vox/icons/body/servitor/body_alchemist.dmi'

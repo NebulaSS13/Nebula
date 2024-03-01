@@ -496,15 +496,17 @@ default behaviour is:
 		var/icon/DI
 		var/use_colour = (BP_IS_PROSTHETIC(O) ? SYNTH_BLOOD_COLOR : O.species.get_blood_color(src))
 		var/cache_index = "[O.damage_state]/[O.bodytype.type]/[O.icon_state]/[use_colour]/[O.species.name]"
-		if(damage_icon_parts[cache_index] == null)
-			DI = new /icon(O.bodytype.get_damage_overlays(src), O.damage_state) // the damage icon for whole human
-			DI.Blend(get_limb_mask_for(O.bodytype, O.icon_state), ICON_MULTIPLY)  // mask with this organ's pixels
-			DI.Blend(use_colour, ICON_MULTIPLY)
-			damage_icon_parts[cache_index] = DI
+		if(!(cache_index in damage_icon_parts))
+			var/damage_overlay_icon = O.bodytype.get_damage_overlays(src)
+			if(check_state_in_icon(O.damage_state, damage_overlay_icon))
+				DI = new /icon(damage_overlay_icon, O.damage_state) // the damage icon for whole human
+				DI.Blend(get_limb_mask_for(O), ICON_MULTIPLY)  // mask with this organ's pixels
+				DI.Blend(use_colour, ICON_MULTIPLY)
+			damage_icon_parts[cache_index] = DI || FALSE
 		else
 			DI = damage_icon_parts[cache_index]
-
-		standing_image.overlays += DI
+		if(DI)
+			standing_image.overlays += DI
 	set_current_mob_overlay(HO_DAMAGE_LAYER, standing_image, update_icons)
 
 /mob/living/handle_grabs_after_move(var/turf/old_loc, var/direction)

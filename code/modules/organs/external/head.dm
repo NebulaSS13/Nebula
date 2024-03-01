@@ -155,7 +155,7 @@
 					mark_color = rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone)
 			else
 				mark_color = markings[M]
-			res.overlays |= mark_style.get_cached_marking_icon(bodytype, icon_state, mark_color)
+			res.overlays |= mark_style.get_cached_marking_icon(src, mark_color)
 			icon_cache_key += "[M][mark_color]"
 
 	return res

@@ -106,6 +106,8 @@
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL && isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
+	if(force_limb_dir && force_limb_dir != SOUTH)
+		set_dir(force_limb_dir)
 
 /obj/item/organ/external/Destroy()
 	//Update the hierarchy BEFORE clearing all the vars and refs
