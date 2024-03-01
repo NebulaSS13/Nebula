@@ -13,6 +13,11 @@ var/global/list/areas = list()
 	luminosity =    0
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
+	// If set, will apply ambient light of this power to turfs under a ceiling.
+	var/interior_ambient_light_level
+	// If set, will apply ambient light of this colour to turfs under a ceiling.
+	var/interior_ambient_light_color
+
 	var/proper_name /// Automatically set by SetName and Initialize; cached result of strip_improper(name).
 	var/holomap_color	// Color of this area on the holomap. Must be a hex color (as string) or null.
 
@@ -111,6 +116,9 @@ var/global/list/areas = list()
 	var/area/old_area = get_area(T)
 	if(old_area == A)
 		return
+
+	var/old_area_ambience = old_area?.interior_ambient_light_level
+
 	A.contents.Add(T)
 	if(old_area)
 		old_area.Exited(T, A)
@@ -130,9 +138,13 @@ var/global/list/areas = list()
 			adjacent_turf.update_registrations_on_adjacent_area_change()
 
 	T.last_outside_check = OUTSIDE_UNCERTAIN
-	if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
+	var/outside_changed = T.is_outside() != old_outside
+	if(T.is_outside == OUTSIDE_AREA && outside_changed)
 		T.update_weather()
 		T.update_external_atmos_participation()
+
+	if(A.interior_ambient_light_level != old_area_ambience || outside_changed)
+		SSambience.queued |= T
 
 /turf/proc/update_registrations_on_adjacent_area_change()
 	for(var/obj/machinery/door/firedoor/door in src)
