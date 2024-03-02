@@ -1,28 +1,42 @@
-/obj/item/pick/xeno
-	name              = "master xenoarch pickaxe"
-	desc              = "A miniature excavation tool for precise digging."
-	icon              = 'icons/obj/xenoarchaeology.dmi'
-	item_state        = "screwdriver_brown"
-	force             = 3
-	throwforce        = 0
-	attack_verb       = list("stabbed", "jabbed", "spiked", "attacked")
-	material          = /decl/material/solid/metal/chromium
-	matter            = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
-	w_class           = ITEM_SIZE_SMALL
-	sharp             = 1
-	excavation_verb   = "delicately picking"
-	excavation_amount = 0
-	abstract_type     = obj/item/pick/xeno
+/obj/item/tool/xeno
+	name                  = "master xenoarch pickaxe"
+	desc                  = "A miniature excavation tool for precise digging."
+	icon                  = 'icons/obj/xenoarchaeology.dmi'
+	item_state            = "screwdriver_brown"
+	force                 = 3
+	throwforce            = 0
+	attack_verb           = list("stabbed", "jabbed", "spiked", "attacked")
+	material              = /decl/material/solid/metal/chromium
+	matter                = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY)
+	w_class               = ITEM_SIZE_SMALL
+	sharp                 = 1
+	abstract_type         = /obj/item/tool/xeno
+	material_alteration   = 0
+	handle_material       = /decl/material/solid/organic/plastic
 
-/obj/item/pick/xeno/get_initial_tool_qualities()
-	return list(TOOL_PICK = TOOL_QUALITY_DEFAULT)
+	var/excavation_verb   = "delicately picking"
+	var/excavation_sound  = 'sound/weapons/thudswoosh.ogg'
+	var/excavation_amount = 0
 
-/obj/item/pick/xeno/examine(mob/user)
+/obj/item/tool/xeno/get_initial_tool_properties()
+	return list(
+		TOOL_PICK = list(
+			TOOL_PROP_VERB             = excavation_verb,
+			TOOL_PROP_SOUND            = excavation_sound,
+			TOOL_PROP_EXCAVATION_DEPTH = excavation_amount
+		)
+	)
+
+/obj/item/tool/xeno/get_initial_tool_qualities()
+	var/static/list/tool_qualities = list(TOOL_PICK = TOOL_QUALITY_DEFAULT)
+	return tool_qualities
+
+/obj/item/tool/xeno/examine(mob/user)
 	. = ..()
 	if(IS_PICK(src))
 		to_chat(user, "This tool has a [get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH) || 0] centimetre excavation depth.")
 
-/obj/item/pick/xeno/brush
+/obj/item/tool/xeno/brush
 	name              = "wire brush"
 	icon_state        = "pick_brush"
 	slot_flags        = SLOT_EARS
@@ -36,42 +50,42 @@
 	excavation_sound  = 'sound/weapons/thudswoosh.ogg'
 	excavation_verb   = "brushing"
 
-/obj/item/pick/xeno/one_pick
+/obj/item/tool/xeno/one_pick
 	name              = "2cm pick"
 	icon_state        = "pick1"
 	excavation_amount = 2
 	excavation_sound  = 'sound/items/Screwdriver.ogg'
 
-/obj/item/pick/xeno/two_pick
+/obj/item/tool/xeno/two_pick
 	name              = "4cm pick"
 	icon_state        = "pick2"
 	excavation_amount = 4
 	excavation_sound  = 'sound/items/Screwdriver.ogg'
 
-/obj/item/pick/xeno/three_pick
+/obj/item/tool/xeno/three_pick
 	name              = "6cm pick"
 	icon_state        = "pick3"
 	excavation_amount = 6
 	excavation_sound  = 'sound/items/Screwdriver.ogg'
 
-/obj/item/pick/xeno/four_pick
+/obj/item/tool/xeno/four_pick
 	name              = "8cm pick"
 	icon_state        = "pick4"
 	excavation_amount = 8
 	excavation_sound  = 'sound/items/Screwdriver.ogg'
 
-/obj/item/pick/xeno/five_pick
+/obj/item/tool/xeno/five_pick
 	name              = "10cm pick"
 	icon_state        = "pick5"
 	excavation_amount = 10
 	excavation_sound  = 'sound/items/Screwdriver.ogg'
 
-/obj/item/pick/xeno/six_pick
+/obj/item/tool/xeno/six_pick
 	name              = "12cm pick"
 	icon_state        = "pick6"
 	excavation_amount = 12
 
-/obj/item/pick/xeno/hand
+/obj/item/tool/xeno/hand
 	name              = "hand pickaxe"
 	icon_state        = "pick_hand"
 	item_state        = "sword0"
@@ -98,7 +112,7 @@
 	storage_slots     = 7
 	slot_flags        = SLOT_LOWER_BODY
 	w_class           = ITEM_SIZE_NORMAL
-	can_hold          = list(/obj/item/pick/xeno)
+	can_hold          = list(/obj/item/tool/xeno)
 	max_storage_space = 18
 	max_w_class       = ITEM_SIZE_NORMAL
 	use_to_pickup     = 1
@@ -106,13 +120,13 @@
 
 /obj/item/storage/excavation/WillContain()
 	return list(
-			/obj/item/pick/xeno/brush,
-			/obj/item/pick/xeno/one_pick,
-			/obj/item/pick/xeno/two_pick,
-			/obj/item/pick/xeno/three_pick,
-			/obj/item/pick/xeno/four_pick,
-			/obj/item/pick/xeno/five_pick,
-			/obj/item/pick/xeno/six_pick
+			/obj/item/tool/xeno/brush,
+			/obj/item/tool/xeno/one_pick,
+			/obj/item/tool/xeno/two_pick,
+			/obj/item/tool/xeno/three_pick,
+			/obj/item/tool/xeno/four_pick,
+			/obj/item/tool/xeno/five_pick,
+			/obj/item/tool/xeno/six_pick
 		)
 
 /obj/item/storage/excavation/empty/WillContain()
@@ -123,20 +137,20 @@
 	sort_picks()
 
 /obj/item/storage/excavation/proc/sort_picks()
-	var/list/obj/item/pick/xeno/picksToSort = list()
-	for(var/obj/item/pick/xeno/P in src)
+	var/list/obj/item/tool/xeno/picksToSort = list()
+	for(var/obj/item/tool/xeno/P in src)
 		picksToSort += P
 		P.forceMove(null)
 	while(picksToSort.len)
 		var/min = 200 // No pick is bigger than 200
 		var/selected = 0
 		for(var/i = 1 to picksToSort.len)
-			var/obj/item/pick/xeno/current = picksToSort[i]
+			var/obj/item/tool/xeno/current = picksToSort[i]
 			var/excav_amount = current.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH)
 			if(excav_amount <= min)
 				selected = i
 				min = excav_amount
-		var/obj/item/pick/xeno/smallest = picksToSort[selected]
+		var/obj/item/tool/xeno/smallest = picksToSort[selected]
 		smallest.forceMove(src)
 		picksToSort -= smallest
 	prepare_ui()

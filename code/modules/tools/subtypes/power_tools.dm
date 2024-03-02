@@ -1,4 +1,4 @@
-/obj/item/hydraulic_cutter
+/obj/item/tool/hydraulic_cutter
 	name                      = "hydraulic cutter"
 	desc                      = "A universal, miniturized hydraulic tool with interchangable heads for either prying or cutting. But not both at the same time."
 	icon                      = 'icons/obj/items/tool/cutter.dmi'
@@ -12,7 +12,7 @@
 	attack_verb               = list("bashed", "battered", "bludgeoned", "whacked")
 	drop_sound                = 'sound/foley/bardrop1.ogg'
 
-/obj/item/hydraulic_cutter/on_update_icon()
+/obj/item/tool/hydraulic_cutter/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
 	if(IS_CROWBAR(src))
@@ -20,15 +20,19 @@
 	else if(IS_WIRECUTTER(src))
 		add_overlay("[icon_state]-cut")
 
-/obj/item/hydraulic_cutter/Initialize()
+/obj/item/tool/hydraulic_cutter/Initialize()
 	. = ..()
-	var/datum/extension/tool/variable/tool = get_or_create_extension(src, /datum/extension/tool/variable, list(
+	var/datum/extension/tool/variable/tool = get_extension(src, /datum/extension/tool)
+	tool?.set_sound_overrides('sound/items/jaws_pry.ogg', 'sound/items/change_jaws.ogg')
+
+/obj/item/tool/hydraulic_cutter/get_initial_tool_qualities()
+	var/static/list/tool_qualities = list(
 		TOOL_CROWBAR     = TOOL_QUALITY_GOOD,
 		TOOL_WIRECUTTERS = TOOL_QUALITY_GOOD
-	))
-	tool.set_sound_overrides('sound/items/jaws_pry.ogg', 'sound/items/change_jaws.ogg')
+	)
+	return tool_qualities
 
-/obj/item/power_drill
+/obj/item/tool/power_drill
 	name                      = "power drill"
 	desc                      = "A universal power drill, with heads for most common screw and bolt types."
 	icon                      = 'icons/obj/items/tool/powerdrill.dmi'
@@ -42,15 +46,19 @@
 	attack_verb               = list("bashed", "battered", "bludgeoned", "whacked")
 	drop_sound                = 'sound/foley/bardrop1.ogg'
 
-/obj/item/power_drill/Initialize()
+/obj/item/tool/power_drill/Initialize()
 	. = ..()
-	var/datum/extension/tool/variable/tool = get_or_create_extension(src, /datum/extension/tool/variable, list(
+	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
+	tool?.set_sound_overrides('sound/items/airwrench.ogg', 'sound/items/change_drill.ogg')
+
+/obj/item/tool/power_drill/get_initial_tool_qualities()
+	var/static/list/tool_qualities = list(
 		TOOL_WRENCH      = TOOL_QUALITY_GOOD,
 		TOOL_SCREWDRIVER = TOOL_QUALITY_GOOD
-	))
-	tool.set_sound_overrides('sound/items/airwrench.ogg', 'sound/items/change_drill.ogg')
+	)
+	return tool_qualities
 
-/obj/item/power_drill/on_update_icon()
+/obj/item/tool/power_drill/on_update_icon()
 	. = ..()
 	icon_state = get_world_inventory_state()
 	if(IS_SCREWDRIVER(src))

@@ -1920,7 +1920,7 @@
 "ef" = (
 /obj/structure/closet/crate/plastic,
 /obj/item/storage/ore,
-/obj/item/pick/axe,
+/obj/item/tool/pickaxe,
 /obj/item/stack/flag/yellow,
 /obj/item/storage/box/glowsticks,
 /obj/item/scanner/mining,

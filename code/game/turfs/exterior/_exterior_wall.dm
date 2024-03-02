@@ -245,7 +245,7 @@ var/global/list/natural_walls = list()
 				to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [excavation_level]cm."))
 			return TRUE
 
-		if(istype(W, /obj/item/pick/xeno))
+		if(istype(W, /obj/item/tool/xeno))
 			return handle_xenoarch_tool_interaction(W, user)
 
 	// Drill out natural walls.

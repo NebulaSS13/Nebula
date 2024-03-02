@@ -41,7 +41,7 @@
 		pass_geodata_to(new /obj/item/strangerock(src, F.find_type))
 	finds.Remove(F)
 
-/turf/exterior/wall/proc/handle_xenoarch_tool_interaction(var/obj/item/pick/xeno/P, var/mob/user)
+/turf/exterior/wall/proc/handle_xenoarch_tool_interaction(var/obj/item/tool/xeno/P, var/mob/user)
 	. = TRUE
 	if(last_excavation + 2 SECONDS > world.time)//prevents message spam
 		return

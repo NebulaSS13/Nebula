@@ -58,7 +58,7 @@
 		/obj/item/storage/box/fancy/crayons,
 		/obj/item/storage/backpack/holding,
 		/obj/item/storage/belt/champion,
-		/obj/item/pick/axe/titanium,
+		/obj/item/tool/pickaxe/titanium,
 		/obj/item/pen/invisible,
 		/obj/random/makeup,
 		/obj/item/grenade/smokebomb,

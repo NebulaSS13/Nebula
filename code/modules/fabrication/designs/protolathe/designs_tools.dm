@@ -81,19 +81,19 @@
 	path = /obj/item/bodybag/cryobag
 
 /datum/fabricator_recipe/protolathe/tool/jackhammer
-	path = /obj/item/pick/hammer/jack
+	path = /obj/item/tool/hammer/jack
 
 /datum/fabricator_recipe/protolathe/tool/drill
-	path = /obj/item/pick/drill
+	path = /obj/item/tool/drill
 
 /datum/fabricator_recipe/protolathe/tool/plasmacutter
 	path = /obj/item/gun/energy/plasmacutter
 
 /datum/fabricator_recipe/protolathe/tool/pick_titanium
-	path = /obj/item/pick/axe/titanium
+	path = /obj/item/tool/pickaxe/titanium
 
 /datum/fabricator_recipe/protolathe/tool/drill_diamond
-	path = /obj/item/pick/drill/diamond
+	path = /obj/item/tool/drill/diamond
 
 /datum/fabricator_recipe/protolathe/tool/depth_scanner
 	path = /obj/item/depth_scanner

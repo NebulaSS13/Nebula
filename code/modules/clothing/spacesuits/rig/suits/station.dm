@@ -66,7 +66,7 @@
 		/obj/item/stack/flag,
 		/obj/item/storage/ore,
 		/obj/item/t_scanner,
-		/obj/item/pick,
+		/obj/item/tool,
 		/obj/item/rcd
 	)
 
@@ -170,7 +170,7 @@
 		/obj/item/storage/briefcase/inflatable,
 		/obj/item/inflatable_dispenser,
 		/obj/item/t_scanner,
-		/obj/item/pick,
+		/obj/item/tool,
 		/obj/item/rcd
 	)
 
@@ -232,7 +232,7 @@
 		/obj/item/suit_cooling_unit,
 		/obj/item/stack/flag,
 		/obj/item/storage/excavation,
-		/obj/item/pick,
+		/obj/item/tool,
 		/obj/item/scanner/health,
 		/obj/item/scanner/breath,
 		/obj/item/measuring_tape,

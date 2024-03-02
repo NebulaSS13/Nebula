@@ -75,7 +75,7 @@
 		/obj/item/suit_cooling_unit,
 		/obj/item/storage/ore,
 		/obj/item/t_scanner,
-		/obj/item/pick,
+		/obj/item/tool,
 		/obj/item/rcd
 	)
 

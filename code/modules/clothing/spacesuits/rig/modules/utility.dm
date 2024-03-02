@@ -67,7 +67,7 @@
 	use_power_cost = 3600 //2 Wh per use
 	module_cooldown = 0
 	origin_tech = @'{"materials":6,"powerstorage":4,"engineering":6}'
-	device = /obj/item/pick/drill/diamond
+	device = /obj/item/tool/drill/diamond
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

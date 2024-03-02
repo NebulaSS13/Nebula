@@ -78,6 +78,12 @@
 			. += new/datum/stack_recipe/lock(src)
 			. += new/datum/stack_recipe/key(src)
 			. += new/datum/stack_recipe/rod(src)
+			. += new/datum/stack_recipe/tool/handle/long(src)
+			. += new/datum/stack_recipe/tool/handle/short(src)
+			. += new/datum/stack_recipe/tool/head/shovel(src)
+			. += new/datum/stack_recipe/tool/head/pickaxe(src)
+			. += new/datum/stack_recipe/tool/head/hammer(src)
+			. += new/datum/stack_recipe/tool/head/sledgehammer(src)
 
 		. += new/datum/stack_recipe/fork(src)
 		. += new/datum/stack_recipe/chopsticks(src)

@@ -41666,10 +41666,10 @@
 /obj/structure/rack{
 	dir = 1
 	},
-/obj/item/pick/axe{
+/obj/item/tool/pickaxe{
 	pixel_x = 5
 	},
-/obj/item/shovel{
+/obj/item/tool/shovel{
 	pixel_x = -5
 	},
 /turf/simulated/floor/tiled/steel_grid,

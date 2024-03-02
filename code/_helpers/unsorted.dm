@@ -706,7 +706,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //For items that can puncture e.g. thick plastic but aren't necessarily sharp
 //Returns 1 if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape.
 /obj/item/proc/can_puncture()
-	return src.sharp
+	return sharp
 
 /obj/item/screwdriver/can_puncture()
 	return 1

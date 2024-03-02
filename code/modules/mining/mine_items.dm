@@ -18,8 +18,8 @@
 		/obj/item/scanner/gas,
 		/obj/item/storage/ore,
 		/obj/item/flashlight/lantern,
-		/obj/item/shovel,
-		/obj/item/pick/axe,
+		/obj/item/tool/shovel,
+		/obj/item/tool/pickaxe,
 		/obj/item/clothing/glasses/meson
 	)
 

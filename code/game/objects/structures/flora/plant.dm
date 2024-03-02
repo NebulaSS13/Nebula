@@ -60,7 +60,6 @@
 
 /obj/structure/flora/plant/attackby(obj/item/O, mob/user)
 
-	// TODO: tool categories or something.
 	if(IS_SHOVEL(O) || IS_HATCHET(O))
 		user.visible_message(SPAN_NOTICE("\The [user] uproots \the [src] with \the [O]!"))
 		physically_destroyed()
