@@ -1,36 +1,36 @@
 /decl/tool_archetype/scalpel
-	name = "scalpel"
-	use_message = "slicing"
+	name         = "scalpel"
+	tool_message = "slicing"
 
 /decl/tool_archetype/retractor
-	name = "retractor"
-	use_message = "retracting"
+	name         = "retractor"
+	tool_message = "retracting"
 
 /decl/tool_archetype/hemostat
-	name = "hemostat"
+	name         = "hemostat"
 
 /decl/tool_archetype/saw
-	name = "surgical saw"
-	use_message = "sawwing"
+	name         = "surgical saw"
+	tool_message = "sawwing"
 
 /decl/tool_archetype/cautery
-	name = "cautery"
-	use_message = "cauterizing"
+	name         = "cautery"
+	tool_message = "cauterizing"
 
 /decl/tool_archetype/sutures
-	name = "sutures"
-	article = FALSE
-	use_message = "suturing"
+	name         = "sutures"
+	article      = FALSE
+	tool_message = "suturing"
 
 /decl/tool_archetype/bone_gel
-	name = "bone gel"
-	article = FALSE
-	use_message = "gluing"
+	name         = "bone gel"
+	article      = FALSE
+	tool_message = "gluing"
 
 /decl/tool_archetype/bone_setter
-	name = "bone setter"
-	use_message = "setting"
+	name         = "bone setter"
+	tool_message = "setting"
 
 /decl/tool_archetype/surgical_drill
-	name = "surgical drill"
-	use_message = "drilling"
+	name         = "surgical drill"
+	tool_message = "drilling"

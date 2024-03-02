@@ -4,7 +4,7 @@
 	desc = "Seems like a wetsuit with reinforced plating seamlessly attached to it. Very chic."
 	allowed = list(
 		/obj/item/rcd,
-		/obj/item/pickaxe,
+		/obj/item/pick,
 		/obj/item/t_scanner,
 		/obj/item/storage/ore,
 		/obj/item/tank

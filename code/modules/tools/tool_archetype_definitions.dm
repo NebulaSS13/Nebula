@@ -1,40 +1,45 @@
 /decl/tool_archetype/cable_coil
-	name = "cable coil"
-	use_message = "rewiring"
+	name         = "cable coil"
+	tool_message = "rewiring"
 
 /decl/tool_archetype/wirecutters
-	name = "wirecutters"
-	article = FALSE
-	use_sound = 'sound/items/Wirecutter.ogg'
-	codex_key = TOOL_CODEX_WIRECUTTERS
-	use_message = "snipping"
+	name         = "wirecutters"
+	article      = FALSE
+	tool_sound   = 'sound/items/Wirecutter.ogg'
+	codex_key    = TOOL_CODEX_WIRECUTTERS
+	tool_message = "snipping"
 
 /decl/tool_archetype/screwdriver
-	name = "screwdriver"
-	use_sound = 'sound/items/Screwdriver.ogg'
-	codex_key = TOOL_CODEX_SCREWDRIVER
+	name         = "screwdriver"
+	tool_sound   = 'sound/items/Screwdriver.ogg'
+	codex_key    = TOOL_CODEX_SCREWDRIVER
 
 /decl/tool_archetype/multitool
-	name = "multitool"
-	codex_key = TOOL_CODEX_MULTITOOL
-	use_message = "reconfiguring"
+	name         = "multitool"
+	codex_key    = TOOL_CODEX_MULTITOOL
+	tool_message = "reconfiguring"
 
 /decl/tool_archetype/crowbar
-	name = "crowbar"
-	codex_key = TOOL_CODEX_CROWBAR
-	use_message = "levering"
+	name         = "crowbar"
+	codex_key    = TOOL_CODEX_CROWBAR
+	tool_message = "levering"
 
 /decl/tool_archetype/hatchet
-	name = "hatchet"
-	use_sound = 'sound/items/axe_wood.ogg'
-	use_message = "chopping"
+	name         = "hatchet"
+	tool_sound   = 'sound/items/axe_wood.ogg'
+	tool_message = "chopping"
 
 /decl/tool_archetype/wrench
-	name = "wrench"
-	use_sound = 'sound/items/Ratchet.ogg'
-	codex_key = TOOL_CODEX_WRENCH
+	name         = "wrench"
+	tool_sound   = 'sound/items/Ratchet.ogg'
+	codex_key    = TOOL_CODEX_WRENCH
 
 /decl/tool_archetype/shovel
-	name = "shovel"
-	use_sound = 'sound/items/shovel_dirt.ogg'
-	use_message = "digging"
+	name         = "shovel"
+	tool_sound   = 'sound/items/shovel_dirt.ogg'
+	tool_message = "digging"
+
+/decl/tool_archetype/pick
+	name         = "pick"
+	tool_sound   = 'sound/weapons/Genhit.ogg'
+	tool_message = "excavating"

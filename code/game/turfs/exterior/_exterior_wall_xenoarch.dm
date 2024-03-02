@@ -41,26 +41,22 @@
 		pass_geodata_to(new /obj/item/strangerock(src, F.find_type))
 	finds.Remove(F)
 
-/turf/exterior/wall/proc/handle_xenoarch_tool_interaction(var/obj/item/pickaxe/xeno/P, var/mob/user)
+/turf/exterior/wall/proc/handle_xenoarch_tool_interaction(var/obj/item/pick/xeno/P, var/mob/user)
 	. = TRUE
-	if(last_excavation + P.digspeed > world.time)//prevents message spam
+	if(last_excavation + 2 SECONDS > world.time)//prevents message spam
 		return
 	last_excavation = world.time
-	playsound(user, P.drill_sound, 20, 1)
-	var/newDepth = excavation_level + P.excavation_amount // Used commonly below
+	var/newDepth = excavation_level + P.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH) // Used commonly below
 	//handle any archaeological finds we might uncover
-	to_chat(user, SPAN_NOTICE("You start [P.drill_verb][destroy_artifacts(P, newDepth)]."))
-	if(!do_after(user,P.digspeed, src))
+	if(!P.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(P, newDepth)))
 		return
-	
+
 	if(length(finds))
 		var/datum/find/F = finds[1]
 		if(newDepth == F.excavation_required) // When the pick hits that edge just right, you extract your find perfectly, it's never confined in a rock
 			excavate_find(1, F)
 		else if(newDepth > F.excavation_required - F.clearance_range) // Not quite right but you still extract your find, the closer to the bottom the better, but not above 80%
 			excavate_find(prob(80 * (F.excavation_required - newDepth) / F.clearance_range), F)
-
-	to_chat(user, SPAN_NOTICE("You finish [P.drill_verb] \the [src]."))
 
 	if(newDepth >= 200) // This means the rock is mined out fully
 		if(artifact_find)
@@ -76,7 +72,8 @@
 		dismantle_wall()
 		return
 
-	excavation_level += P.excavation_amount
+	var/excav_level = P.get_tool_property(TOOL_PICK, TOOL_PROP_EXCAVATION_DEPTH)
+	excavation_level += excav_level
 	//archaeo overlays
 	if(!archaeo_overlay && finds && finds.len)
 		var/datum/find/F = finds[1]
@@ -90,13 +87,13 @@
 	//there's got to be a better way to do this
 	var/update_excav_overlay = 0
 	if(excavation_level >= 150)
-		if(excavation_level - P.excavation_amount < 150)
+		if(excavation_level - excav_level < 150)
 			update_excav_overlay = 1
 	else if(excavation_level >= 100)
-		if(excavation_level - P.excavation_amount < 100)
+		if(excavation_level - excav_level < 100)
 			update_excav_overlay = 1
 	else if(excavation_level >= 50)
-		if(excavation_level - P.excavation_amount < 50)
+		if(excavation_level - excav_level < 50)
 			update_excav_overlay = 1
 
 	//update overlays displaying excavation level
@@ -106,7 +103,7 @@
 		queue_icon_update()
 
 	//drop some rocks
-	next_rock += P.excavation_amount
+	next_rock += excav_level
 	var/amount_rocks = round(next_rock / 50)
 	next_rock = next_rock % 50
 	if(amount_rocks > 0)

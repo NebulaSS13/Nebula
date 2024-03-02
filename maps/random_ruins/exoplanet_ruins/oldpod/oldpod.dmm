@@ -226,7 +226,7 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/item/pickaxe,
+/obj/item/pick/axe,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)

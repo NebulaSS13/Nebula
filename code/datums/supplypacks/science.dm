@@ -46,7 +46,7 @@
 					/obj/item/storage/ore,
 					/obj/item/flashlight/lantern,
 					/obj/item/shovel,
-					/obj/item/pickaxe,
+					/obj/item/pick/axe,
 					/obj/item/scanner/mining,
 					/obj/item/clothing/glasses/material,
 					/obj/item/clothing/glasses/meson)

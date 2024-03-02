@@ -41666,7 +41666,7 @@
 /obj/structure/rack{
 	dir = 1
 	},
-/obj/item/pickaxe{
+/obj/item/pick/axe{
 	pixel_x = 5
 	},
 /obj/item/shovel{

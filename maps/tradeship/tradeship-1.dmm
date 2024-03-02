@@ -2133,7 +2133,7 @@
 "lg" = (
 /obj/structure/closet/crate/plastic,
 /obj/item/storage/ore,
-/obj/item/pickaxe,
+/obj/item/pick/axe,
 /obj/item/stack/flag/yellow,
 /obj/item/storage/box/glowsticks,
 /obj/item/scanner/mining,

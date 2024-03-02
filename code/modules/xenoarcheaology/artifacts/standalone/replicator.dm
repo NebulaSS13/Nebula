@@ -57,7 +57,7 @@
 	/obj/item/flame/lighter,
 	/obj/item/light/bulb,
 	/obj/item/light/tube,
-	/obj/item/pickaxe,
+	/obj/item/pick/axe,
 	/obj/item/shovel,
 	/obj/item/weldingtool,
 	/obj/item/wirecutters,

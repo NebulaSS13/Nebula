@@ -207,7 +207,7 @@ var/global/list/meteors_cataclysm = list(\
 	return
 
 /obj/effect/meteor/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/pickaxe))
+	if(IS_PICK(W))
 		qdel(src)
 		return
 	..()

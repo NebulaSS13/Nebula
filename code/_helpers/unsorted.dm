@@ -720,9 +720,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /obj/item/screwdriver/can_puncture()
 	return 1
 
-/obj/item/shovel/can_puncture() //includes spades
-	return 1
-
 /obj/item/flame/can_puncture()
 	return src.lit
 

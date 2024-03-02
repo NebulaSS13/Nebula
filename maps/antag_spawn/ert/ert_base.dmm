@@ -2194,8 +2194,8 @@
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/inflatable_dispenser,
 /obj/item/inflatable_dispenser,
-/obj/item/pickaxe/diamonddrill,
-/obj/item/pickaxe/diamonddrill,
+/obj/item/pick/drill/diamond,
+/obj/item/pick/drill/diamond,
 /obj/item/storage/briefcase/inflatable{
 	pixel_x = 3;
 	pixel_y = 3
@@ -3209,7 +3209,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "hc" = (
-/obj/item/pickaxe/diamonddrill,
+/obj/item/pick/drill/diamond,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
