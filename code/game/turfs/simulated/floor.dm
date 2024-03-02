@@ -135,3 +135,6 @@
 
 /turf/simulated/floor/is_defiled()
 	return flooring?.type == /decl/flooring/reinforced/cult || ..()
+
+/turf/simulated/floor/get_physical_height()
+	return flooring?.height || 0

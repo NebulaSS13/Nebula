@@ -218,7 +218,7 @@
 
 		if(IS_SHOVEL(W) && can_be_dug())
 			if(get_diggable_resources())
-				if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS))
+				if(W.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS, set_cooldown = TRUE))
 					drop_diggable_resources()
 			else if(can_dig_pit())
 				try_dig_pit(user, W)
@@ -596,40 +596,6 @@
 /turf/proc/resolve_to_actual_turf()
 	return src
 
-/// Return an assoc list of resource item type to a base and a random component
-/// ex. return list(/obj/item/stack/material/ore/sand = list(3, 2))
-/turf/proc/get_diggable_resources()
-	return null
-
-/turf/proc/clear_diggable_resources()
-	SHOULD_CALL_PARENT(TRUE)
-	update_icon()
-
-/turf/proc/can_be_dug()
-	return FALSE
-
-/turf/proc/drop_diggable_resources()
-	SHOULD_CALL_PARENT(TRUE)
-	var/list/diggable_resources = get_diggable_resources()
-	if(!length(diggable_resources))
-		return
-	for(var/resource_type in diggable_resources)
-		var/list/resource_amounts = diggable_resources[resource_type]
-		LAZYADD(., new resource_type(src, resource_amounts[1] + rand(resource_amounts[2])))
-	clear_diggable_resources()
-
-
-/turf/proc/can_dig_pit()
-	return can_be_dug() && !(locate(/obj/structure/pit) in src)
-
-/turf/proc/try_dig_pit(var/mob/user, var/obj/item/tool)
-	if(!user || !tool || tool.do_tool_interaction(TOOL_SHOVEL, user, src, 4 SECONDS))
-		return dig_pit()
-	return null
-
-/turf/proc/dig_pit()
-	return can_dig_pit() && new /obj/structure/pit(src)
-
 // Largely copied from stairs.
 /turf/proc/can_move_up_ramp(atom/movable/AM, turf/above_wall, turf/under_atom, turf/above_atom)
 	if(!istype(AM) || !istype(above_wall) || !istype(under_atom) || !istype(above_atom))
@@ -658,3 +624,32 @@
 
 /turf/proc/unwet_floor(var/check_very_wet = TRUE)
 	return
+
+/turf/get_alt_interactions(mob/user)
+	. = ..()
+	LAZYADD(., /decl/interaction_handler/show_turf_contents)
+	if(user && IS_SHOVEL(user.get_active_hand()))
+		if(can_dig_pit())
+			LAZYADD(., /decl/interaction_handler/dig/pit)
+
+/decl/interaction_handler/show_turf_contents
+	name = "Show Turf Contents"
+	expected_user_type = /mob
+	interaction_flags = 0
+
+/decl/interaction_handler/show_turf_contents/invoked(atom/target, mob/user, obj/item/prop)
+	target.show_atom_list_for_turf(user, get_turf(target))
+
+/decl/interaction_handler/dig
+	abstract_type = /decl/interaction_handler/dig
+	expected_user_type = /mob
+	expected_target_type = /turf
+	interaction_flags = INTERACTION_NEEDS_PHYSICAL_INTERACTION | INTERACTION_NEEDS_TURF
+
+/decl/interaction_handler/dig/pit
+	name = "Dig Pit"
+
+/decl/interaction_handler/dig/pit/invoked(atom/target, mob/user, obj/item/prop)
+	var/turf/T = get_turf(target)
+	if(T.can_dig_pit())
+		T.try_dig_pit(user, prop)

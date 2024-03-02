@@ -108,12 +108,6 @@
 		create_reagents(FLUID_MAX_DEPTH)
 	return ..()
 
-/turf/proc/get_physical_height()
-	return 0
-
-/turf/simulated/floor/get_physical_height()
-	return flooring?.height || 0
-
 /turf/fluid_act(var/datum/reagents/fluids)
 	..()
 	if(!QDELETED(src) && fluids?.total_volume)
