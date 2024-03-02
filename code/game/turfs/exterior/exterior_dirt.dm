@@ -7,3 +7,7 @@
 	base_color = COLOR_BEASTY_BROWN
 	footstep_type = /decl/footsteps/asteroid
 	is_fundament_turf = TRUE
+
+/turf/exterior/wall/dirt
+	material = /decl/material/solid/soil
+	color = COLOR_BEASTY_BROWN
