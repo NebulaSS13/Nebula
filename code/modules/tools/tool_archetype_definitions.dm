@@ -43,3 +43,8 @@
 	name         = "pick"
 	tool_sound   = 'sound/weapons/Genhit.ogg'
 	tool_message = "excavating"
+
+/decl/tool_archetype/hammer
+	name         = "hammer"
+	tool_sound   = 'sound/weapons/Genhit.ogg'
+	tool_message = "striking"

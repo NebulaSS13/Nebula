@@ -1,17 +1,18 @@
 // Engineering tools.
-#define TOOL_WELDER      /decl/tool_archetype/welder
-#define TOOL_CABLECOIL   /decl/tool_archetype/cable_coil
-#define TOOL_WIRECUTTERS /decl/tool_archetype/wirecutters
-#define TOOL_SCREWDRIVER /decl/tool_archetype/screwdriver
-#define TOOL_MULTITOOL   /decl/tool_archetype/multitool
-#define TOOL_CROWBAR     /decl/tool_archetype/crowbar
-#define TOOL_HATCHET     /decl/tool_archetype/hatchet
-#define TOOL_WRENCH      /decl/tool_archetype/wrench
-#define TOOL_SHOVEL      /decl/tool_archetype/shovel
-#define TOOL_PICK        /decl/tool_archetype/pick
+#define TOOL_WELDER         /decl/tool_archetype/welder
+#define TOOL_CABLECOIL      /decl/tool_archetype/cable_coil
+#define TOOL_WIRECUTTERS    /decl/tool_archetype/wirecutters
+#define TOOL_SCREWDRIVER    /decl/tool_archetype/screwdriver
+#define TOOL_MULTITOOL      /decl/tool_archetype/multitool
+#define TOOL_CROWBAR        /decl/tool_archetype/crowbar
+#define TOOL_HATCHET        /decl/tool_archetype/hatchet
+#define TOOL_WRENCH         /decl/tool_archetype/wrench
+#define TOOL_SHOVEL         /decl/tool_archetype/shovel
+#define TOOL_PICK           /decl/tool_archetype/pick
+#define TOOL_HAMMER         /decl/tool_archetype/hammer
 
 // Misc tools.
-#define TOOL_PEN         /decl/tool_archetype/pen
+#define TOOL_PEN            /decl/tool_archetype/pen
 
 // Surgical tools.
 #define TOOL_SCALPEL        /decl/tool_archetype/scalpel
