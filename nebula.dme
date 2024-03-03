@@ -1652,7 +1652,7 @@
 #include "code\modules\alarm\fire_alarm.dm"
 #include "code\modules\alarm\motion_alarm.dm"
 #include "code\modules\alarm\power_alarm.dm"
-#include "code\modules\aspects\aspects.dm"
+#include "code\modules\aspects\_aspects.dm"
 #include "code\modules\aspects\aspects_amputations.dm"
 #include "code\modules\aspects\aspects_handicaps.dm"
 #include "code\modules\aspects\aspects_perks.dm"

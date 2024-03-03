@@ -82,7 +82,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 /decl/aspect/dd_SortValue()
 	return sort_value
 
-/decl/aspect/proc/apply(var/mob/living/carbon/human/holder)
+/decl/aspect/proc/apply(mob/living/holder)
 	return (istype(holder))
 
 // Called by preferences selection for HTML display.

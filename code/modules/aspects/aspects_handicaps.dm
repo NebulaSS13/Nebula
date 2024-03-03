@@ -8,7 +8,7 @@
 	desc = "Your vision is somewhat impaired, and you need prescription glasses to see clearly."
 	incompatible_with = list(/decl/aspect/prosthetic_organ/eyes)
 
-/decl/aspect/handicap/impaired_vision/apply(mob/living/carbon/human/holder)
+/decl/aspect/handicap/impaired_vision/apply(mob/living/holder)
 	. = ..()
 	if(.)
 		holder.dna.SetSEState(global.GLASSESBLOCK,1,0)
@@ -30,7 +30,7 @@
 	)
 	var/client_color = /datum/client_color/deuteranopia
 
-/decl/aspect/handicap/colourblind/apply(mob/living/carbon/human/holder)
+/decl/aspect/handicap/colourblind/apply(mob/living/holder)
 	. = ..()
 	if(. && ispath(client_color, /datum/client_color))
 		holder.add_client_color(client_color)
