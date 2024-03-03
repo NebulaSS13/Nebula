@@ -23,6 +23,10 @@
 		PRINT_STACK_TRACE("Grown initializing with null or invalid seed type '[seed || "NULL"]'")
 		return INITIALIZE_HINT_QDEL
 
+	if(!seed?.chems)
+		return INITIALIZE_HINT_QDEL // No reagent contents, no froot
+
+	potency = seed.get_trait(TRAIT_POTENCY)
 	if(seed.scannable_result)
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
 

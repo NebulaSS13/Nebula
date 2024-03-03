@@ -7,25 +7,29 @@
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
 	var/obj/item/drying
 
-/obj/structure/drying_rack/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src) // SSObj fires ~every 2s , starting from wetness 30 takes ~1m
-
 /obj/structure/drying_rack/Destroy()
 	QDEL_NULL(drying)
-	STOP_PROCESSING(SSobj, src)
+	if(is_processing)
+		STOP_PROCESSING(SSobj, src)
 	return ..()
 
+// SSObj fires ~every 2s , starting from wetness 30 takes ~1m
 /obj/structure/drying_rack/Process()
+	if(!drying)
+		return
 	var/dry_product = drying?.dry_out(src)
 	if(dry_product)
 		if(drying != dry_product)
 			if(drying && !QDELETED(drying))
 				drying.dropInto(loc)
 			drying = dry_product
+			if(is_processing)
+				STOP_PROCESSING(SSobj, src)
 		if(drying)
 			drying.forceMove(src)
-		update_icon()
+	if(drying)
+		drying.update_icon()
+	update_icon()
 
 /obj/structure/drying_rack/examine(mob/user, distance, infix, suffix)
 	. = ..()
@@ -44,6 +48,8 @@
 		if(user.try_unequip(W))
 			W.forceMove(src)
 			drying = W
+			if(!is_processing)
+				START_PROCESSING(SSobj, src)
 			update_icon()
 		return TRUE
 
@@ -54,6 +60,8 @@
 		drying.dropInto(loc)
 		user.put_in_hands(drying)
 		drying = null
+		if(is_processing)
+			STOP_PROCESSING(SSobj, src)
 		update_icon()
 	return ..()
 

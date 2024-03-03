@@ -1,3 +1,9 @@
+// TODO notes:
+// - fuel should just be burning atoms when atom fires are in.
+// - fire source should just be an interaction and safety wrapper for an atom fire
+//   ie. all fire behavior comes from the fuel atoms in the fire, but spread and
+//   click behavior is curtailed by the fire_source.
+
 #define DIRECT_HEAT 1000
 #define IDEAL_FUEL  15
 #define HIGH_FUEL   10
@@ -31,9 +37,14 @@
 	var/list/affected_exterior_turfs
 	var/list/exterior_temperature = 30 // Celsius, but it is added directly to a Kelvin value so don't do any conversion.
 
-	var/output_temperature = T0C+50  // The amount that the fire will try to heat up the air.
-	var/fuel = 0                     // How much fuel is left?
-	var/lit = 0
+	/// Arbitrary direct temperature from fire, todo: material burn
+	var/burn_temperature   = DIRECT_HEAT
+	/// The amount that the fire will try to heat up the air.
+	var/output_temperature = T0C+50
+	/// How much fuel is left? TODO: function of fuel atoms
+	var/fuel = 0
+	/// Are we on fire?
+	var/lit = FALSE
 
 /obj/structure/fire_source/Initialize()
 	. = ..()
@@ -150,7 +161,7 @@
 		user.put_in_hands(removing)
 		if(lit == FIRE_LIT)
 			visible_message(SPAN_DANGER("\The [user] fishes \the [removing] out of \the [src]!"))
-			burn(user)
+			user.fire_act(null, burn_temperature)
 		else
 			visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
 		update_icon()
@@ -177,7 +188,7 @@
 	affecting_mob.forceMove(get_turf(src))
 	SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 	visible_message(SPAN_DANGER("\The [G.assailant] hurls \the [affecting_mob] onto \the [src]!"))
-	burn(affecting_mob)
+	affecting_mob.fire_act(null, burn_temperature)
 	return TRUE
 
 /obj/structure/fire_source/isflamesource()
@@ -313,10 +324,12 @@
 	// Burn anyone sitting in the fire.
 	var/turf/T = loc
 	if(istype(T))
-		T.hotspot_expose(DIRECT_HEAT, 500, 1)
-		for(var/mob/living/M in T)
-			burn(M)
-			visible_message(SPAN_DANGER("Flames from \the [src] lick around \the [M]!"))
+
+		T.hotspot_expose(burn_temperature, null, 1)
+		for(var/atom/thing in loc)
+			if(!thing.simulated)
+				return
+			thing.fire_act(null, burn_temperature)
 
 		// Copied from space heaters. Heat up the air on our tile, heat will percolate out.
 		var/datum/gas_mixture/GM = T.return_air()
@@ -327,6 +340,7 @@
 				var/heat_transfer = removed.get_thermal_energy_change(output_temperature)
 				if(heat_transfer > 0) removed.add_thermal_energy(heat_transfer)
 			GM.merge(removed)
+
 	queue_icon_update()
 
 /obj/structure/fire_source/on_update_icon()
@@ -350,13 +364,6 @@
 			set_light(0)
 		else
 			set_light(0)
-
-/obj/structure/fire_source/proc/burn(var/atom/movable/victim)
-	if(isliving(victim))
-		var/mob/living/M = victim
-		to_chat(M, SPAN_DANGER("You are burned by \the [src]!"))
-		M.IgniteMob()
-		M.apply_damage(rand(5, 15), BURN)
 
 #undef FUEL_CONSUMPTION_CONSTANT
 #undef FIRE_LIT
