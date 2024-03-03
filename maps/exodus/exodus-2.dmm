@@ -26718,7 +26718,7 @@
 /obj/structure/cable/green{
 	icon_state = "1-4"
 	},
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/effect/floor_decal/corner/lime/three_quarters{
 	dir = 8
 	},
@@ -53004,7 +53004,7 @@
 	pixel_x = 27;
 	dir = 8
 	},
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/effect/floor_decal/corner/purple/three_quarters{
 	dir = 1
 	},

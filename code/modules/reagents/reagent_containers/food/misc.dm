@@ -5,6 +5,23 @@
 	filling_color = "#211f02"
 	center_of_mass = @'{"x":16,"y":12}'
 	bitesize = 2
+	backyard_grilling_product = null
+	backyard_grilling_rawness = 10
+
+/obj/item/chems/food/badrecipe/grill(var/atom/heat_source)
+	if(backyard_grilling_rawness <= 0) // Smoke on our first grill
+		// Produce nasty smoke.
+		playsound(src.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
+		var/datum/effect/effect/system/smoke_spread/bad/smoke = new
+		smoke.attach(src)
+		smoke.set_up(10, 0, get_turf(src))
+		// Set off fire alarms!
+		var/obj/machinery/firealarm/FA = locate() in get_area(src)
+		if(FA)
+			FA.alarm()
+	backyard_grilling_rawness--
+	if(backyard_grilling_rawness <= 0)
+		qdel(src)
 
 /obj/item/chems/food/badrecipe/populate_reagents()
 	. = ..()

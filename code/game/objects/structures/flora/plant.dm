@@ -104,6 +104,8 @@
 
 	var/harvested = plant.harvest(user, force_amount = 1)
 	if(harvested)
+		if(islist(harvested))
+			harvested = list(harvested)
 		harvestable -= length(harvested)
 		for(var/thing in harvested)
 			user.put_in_hands(thing)

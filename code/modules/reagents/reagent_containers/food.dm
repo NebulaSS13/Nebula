@@ -28,7 +28,6 @@
 	var/bitecount = 0
 	var/slice_path
 	var/slices_num
-	var/dried_type = null
 	var/dry = 0
 	var/nutriment_amt = 0
 	var/nutriment_type = /decl/material/liquid/nutriment // Used to determine which base nutriment type is spawned for this item.
@@ -66,10 +65,16 @@
 
 /obj/item/chems/food/examine(mob/user, distance)
 	. = ..()
+
 	if(distance > 1)
 		return
+
+	if(backyard_grilling_rawness > 0 && backyard_grilling_rawness != initial(backyard_grilling_rawness))
+		to_chat(user, "\The [src] is [get_backyard_grilling_text()].")
+
 	if(plate)
 		to_chat(user, SPAN_NOTICE("\The [src] has been arranged on \a [plate]."))
+
 	if (bitecount==0)
 		return
 	else if (bitecount==1)
@@ -138,18 +143,6 @@
 
 /obj/item/chems/food/proc/is_sliceable()
 	return (slices_num && slice_path && slices_num > 0)
-
-/obj/item/chems/food/proc/on_dry(var/atom/newloc)
-	drop_plate(get_turf(newloc))
-	if(dried_type == type)
-		SetName("dried [name]")
-		color = "#a38463"
-		dry = TRUE
-		if(isloc(newloc))
-			forceMove(newloc)
-		return src
-	. = new dried_type(newloc || get_turf(src))
-	qdel(src)
 
 /obj/item/chems/food/proc/drop_plate(var/drop_loc)
 	if(istype(plate))

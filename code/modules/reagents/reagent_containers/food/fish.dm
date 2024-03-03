@@ -7,6 +7,10 @@
 	bitesize = 6
 	nutriment_amt = 6
 	nutriment_type = /decl/material/liquid/nutriment/protein
+	drying_wetness = 60
+	dried_type = /obj/item/chems/food/jerky/fish
+	backyard_grilling_product = /obj/item/chems/food/fish/grilled
+	backyard_grilling_announcement = "steams gently."
 	var/fish_type = "fish"
 
 /obj/item/chems/food/fish/Initialize()
@@ -33,6 +37,19 @@
 
 	else
 		..()
+
+/obj/item/chems/food/fish/grilled
+	name = "grilled fish fillet"
+	desc = "A lightly grilled fish fillet."
+	icon_state = "grilledfish"
+	nutriment_amt = 8
+	bitesize = 2
+	nutriment_desc = list("flaky grilled fish" = 5)
+	fish_type = "grilled fish"
+	drying_wetness = 0
+	dried_type = null
+	backyard_grilling_product = null
+	backyard_grilling_announcement = null
 
 /obj/item/chems/food/fish/poison
 	fish_type = "space carp"

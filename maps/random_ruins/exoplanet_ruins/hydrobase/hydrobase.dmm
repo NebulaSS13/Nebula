@@ -1388,7 +1388,7 @@
 	dir = 1;
 	icon_state = "tube1"
 	},
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "dO" = (

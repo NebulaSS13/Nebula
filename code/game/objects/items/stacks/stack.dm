@@ -323,6 +323,11 @@
 	var/orig_amount = src.get_amount()
 	if (transfer && src.use(transfer))
 		S.add(transfer)
+		S.drying_wetness = max(drying_wetness, S.drying_wetness)
+		if(!S.dried_type && dried_type)
+			S.dried_type = dried_type
+		if(!QDELETED(src))
+			drying_wetness = S.drying_wetness
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(S)
 		return transfer
@@ -346,6 +351,8 @@
 
 /obj/item/stack/proc/copy_from(var/obj/item/stack/other)
 	color = other.color
+	dried_type = other.dried_type
+	drying_wetness = other.drying_wetness
 
 /obj/item/stack/proc/get_amount()
 	if(uses_charge)

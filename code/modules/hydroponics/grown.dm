@@ -8,6 +8,8 @@
 	slot_flags = SLOT_HOLSTER
 	material = /decl/material/solid/organic/plantmatter
 	is_spawnable_type = FALSE // Use the Spawn-Fruit verb instead.
+	drying_wetness = 45
+
 	var/datum/seed/seed
 
 /obj/item/chems/food/grown/Initialize(mapload, material_key, _seed)
@@ -25,12 +27,16 @@
 		set_extension(src, /datum/extension/scannable, seed.scannable_result)
 
 	SetName("[seed.seed_name]")
-	trash = seed.get_trash_type()
+	trash                          = seed.get_trash_type()
+	backyard_grilling_product      = seed.backyard_grilling_product
+	backyard_grilling_rawness      = seed.backyard_grilling_rawness
+	backyard_grilling_announcement = seed.backyard_grilling_announcement
+
+
 	if(!dried_type)
 		dried_type = type
 
 	. = ..(mapload) //Init reagents
-	update_icon()
 
 /obj/item/chems/food/grown/initialize_reagents(populate)
 	if(reagents)
@@ -43,6 +49,8 @@
 	update_desc()
 	if(reagents.total_volume > 0)
 		bitesize = 1 + round(reagents.total_volume / 2, 1)
+
+	update_icon()
 
 /obj/item/chems/food/grown/populate_reagents()
 	. = ..()

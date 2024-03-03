@@ -823,6 +823,8 @@
 	chems = list(/decl/material/liquid/nutriment = list(1,10), /decl/material/liquid/nutriment/cornoil = list(1,10))
 	kitchen_tag = "corn"
 	trash_type = /obj/item/corncob
+	backyard_grilling_product = /obj/item/chems/food/popcorn
+	backyard_grilling_announcement = "pops enthusiastically!"
 
 /datum/seed/corn/New()
 	..()

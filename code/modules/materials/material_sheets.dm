@@ -131,11 +131,22 @@
 
 	return ..()
 
+/obj/item/stack/material/get_max_drying_wetness()
+	return 120
+
 /obj/item/stack/material/on_update_icon()
 	. = ..()
 	color = material.color
 	alpha = 100 + max(1, amount/25)*(material.opacity * 255)
 	update_state_from_amount()
+
+	if(drying_wetness > 0)
+		var/image/I = new(icon, icon_state)
+		I.appearance_flags |= RESET_COLOR | RESET_ALPHA
+		I.alpha = 255 * (get_max_drying_wetness() / drying_wetness)
+		I.color = COLOR_GRAY40
+		I.blend_mode = BLEND_MULTIPLY
+		add_overlay(I)
 
 /obj/item/stack/material/ProcessAtomTemperature()
 	. = ..()

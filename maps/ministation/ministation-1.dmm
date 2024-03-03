@@ -7892,7 +7892,7 @@
 /turf/floor/plating,
 /area/ministation/maint/hydromaint)
 "WL" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/floor/plating,
 /area/ministation/maint/hydromaint)
 "WN" = (

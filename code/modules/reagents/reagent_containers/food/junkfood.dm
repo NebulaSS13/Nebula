@@ -560,6 +560,25 @@
 	. = ..()
 	add_to_reagents(/decl/material/liquid/nutriment/protein, 2)
 
+/obj/item/chems/food/donkpocket/grill(var/atom/heat_source)
+
+	backyard_grilling_rawness--
+	if(backyard_grilling_rawness <= 0)
+		backyard_grilling_rawness = initial(backyard_grilling_rawness)
+
+		// We're already warm, so we burn.
+		if(warm)
+			var/obj/item/chems/food/badrecipe/whoops = new
+			whoops.dropInto(loc)
+			visible_message(SPAN_DANGER("\The [src] chars and blackens!"))
+			qdel(src)
+			return whoops
+
+		// Otherwise we just warm up.
+		heat()
+		visible_message(SPAN_NOTICE("\The [src] steams gently!"))
+		return src
+
 /obj/item/chems/food/donkpocket/proc/heat()
 	if(warm)
 		return

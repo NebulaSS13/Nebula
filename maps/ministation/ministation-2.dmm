@@ -4623,7 +4623,7 @@
 /area/ministation/bridge)
 "DB" = (
 /obj/effect/floor_decal/corner/green/full,
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/floor/tiled/white,
 /area/ministation/science)
 "DC" = (
