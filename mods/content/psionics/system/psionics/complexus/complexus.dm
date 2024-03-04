@@ -1,4 +1,4 @@
-/datum/psi_complexus
+/datum/ability_handler/psionics
 
 	var/announced = FALSE             // Whether or not we have been announced to our holder yet.
 	var/suppressed = TRUE             // Whether or not we are suppressing our psi powers.
@@ -16,7 +16,7 @@
 	var/list/latencies                // List of all currently latent faculties.
 	var/list/ranks                    // Assoc list of psi faculties to current rank.
 	var/list/base_ranks               // Assoc list of psi faculties to base rank, in case reset is needed
-	var/list/manifested_items         // List of atoms manifested/maintained by psychic power.
+
 	var/next_latency_trigger = 0      // world.time minimum before a trigger can be attempted again.
 	var/last_aura_size
 	var/last_aura_alpha
@@ -31,10 +31,9 @@
 	var/list/powers_by_faculty        // All powers within a given faculty.
 
 	var/obj/screen/psi/hub/ui	      // Reference to the master psi UI object.
-	var/mob/living/owner              // Reference to our owner.
 	var/image/_aura_image             // Client image
 
-/datum/psi_complexus/proc/get_aura_image()
+/datum/ability_handler/psionics/proc/get_aura_image()
 	if(_aura_image && !istype(_aura_image))
 		var/atom/A = _aura_image
 		log_debug("Non-image found in psi complexus: \ref[A] - \the [A] - [istype(A) ? A.type : "non-atom"]")
@@ -55,7 +54,7 @@
 	aura_image.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	aura_image.appearance_flags = 0
 	for(var/thing in SSpsi.processing)
-		var/datum/psi_complexus/psychic = thing
+		var/datum/ability_handler/psionics/psychic = thing
 		if(psychic.owner.client && !psychic.suppressed)
 			psychic.owner.client.images += aura_image
 	SSpsi.all_aura_images[aura_image] = TRUE
@@ -63,17 +62,18 @@
 
 /proc/destroy_aura_image(var/image/aura_image)
 	for(var/thing in SSpsi.processing)
-		var/datum/psi_complexus/psychic = thing
+		var/datum/ability_handler/psionics/psychic = thing
 		if(psychic.owner.client)
 			psychic.owner.client.images -= aura_image
 	SSpsi.all_aura_images -= aura_image
 
-/datum/psi_complexus/New(var/mob/_owner)
-	owner = _owner
-	START_PROCESSING(SSpsi, src)
-	set_extension(src, /datum/extension/armor/psionic)
+/datum/ability_handler/psionics/New(_master)
+	..()
+	if(istype(master) && istype(owner))
+		START_PROCESSING(SSpsi, src)
+		set_extension(src, /datum/extension/armor/psionic)
 
-/datum/psi_complexus/Destroy()
+/datum/ability_handler/psionics/Destroy()
 	destroy_aura_image(_aura_image)
 	STOP_PROCESSING(SSpsi, src)
 	if(owner)
@@ -83,11 +83,5 @@
 			for(var/thing in SSpsi.all_aura_images)
 				owner.client.images -= thing
 		QDEL_NULL(ui)
-		owner.psi = null
-		owner = null
 
-	if(manifested_items)
-		for(var/thing in manifested_items)
-			qdel(thing)
-		manifested_items.Cut()
 	. = ..()

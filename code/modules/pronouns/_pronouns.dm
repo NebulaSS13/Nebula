@@ -46,6 +46,7 @@
 
 // Atom helpers.
 /atom/proc/get_pronouns(var/ignore_coverings)
+	RETURN_TYPE(/decl/pronouns)
 	. = get_pronouns_by_gender(gender)
 
 var/global/list/byond_genders = list(MALE, FEMALE, NEUTER, PLURAL)

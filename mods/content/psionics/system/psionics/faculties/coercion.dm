@@ -32,9 +32,10 @@
 		return FALSE
 	. = ..()
 	if(.)
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
 		user.visible_message(SPAN_DANGER("\The [user] suddenly throws back their head, as though screaming silently!"))
 		to_chat(user, SPAN_DANGER("You strike at all around you with a deafening psionic scream!"))
-		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
+		for(var/mob/living/M in orange(user, psi?.get_rank(PSI_COERCION)))
 			if(M == user)
 				continue
 			var/blocked = 100 * M.get_blocked_ratio(null, PSIONIC)
@@ -209,7 +210,8 @@
 		to_chat(user, SPAN_NOTICE("You insinuate your mentality into that of \the [target]..."))
 		to_chat(target, SPAN_WARNING("Your persona is being probed by the psychic lens of \the [user]."))
 		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target, 0, 1))
-			user.psi.backblast(rand(5,10))
+			var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+			psi?.backblast(rand(5,10))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You retreat from \the [target], holding your new knowledge close."))
 		to_chat(target, SPAN_DANGER("Your mental complexus is laid bare to judgement of \the [user]."))
@@ -229,16 +231,17 @@
 		return FALSE
 	. = ..()
 	if(.)
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
 		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
 		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments.."))
 		to_chat(target, SPAN_WARNING("Your mind is being cleansed of ailments by \the [user]."))
 		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target, 0, 1))
-			user.psi.backblast(rand(5,10))
+			psi?.backblast(rand(5,10))
 			return TRUE
 		to_chat(user, SPAN_WARNING("You clear \the [target]'s mind of ailments."))
 		to_chat(target, SPAN_WARNING("Your mind is cleared of ailments."))
 
-		var/coercion_rank = user.psi.get_rank(PSI_COERCION)
+		var/coercion_rank = psi?.get_rank(PSI_COERCION)
 		if(coercion_rank >= PSI_RANK_GRANDMASTER)
 			ADJ_STATUS(target, STAT_PARA, -1)
 		target.set_status(STAT_DROWSY, 0)

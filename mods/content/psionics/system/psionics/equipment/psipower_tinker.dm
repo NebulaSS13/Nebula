@@ -1,15 +1,16 @@
-/obj/item/psychic_power/tinker
+/obj/item/ability/psionic/tinker
 	name = "psychokinetic tool"
 	icon_state = "tinker"
 	force = 1
 
-/obj/item/psychic_power/tinker/Initialize()
+/obj/item/ability/psionic/tinker/Initialize()
 	. = ..()
 
 	var/use_tool_quality = TOOL_QUALITY_WORST
 	var/mob/living/owner = loc
-	if(istype(owner) && owner.psi)
-		switch(owner.psi.get_rank(PSI_PSYCHOKINESIS))
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(psi)
+		switch(psi.get_rank(PSI_PSYCHOKINESIS))
 			if(PSI_RANK_LATENT)
 				use_tool_quality = TOOL_QUALITY_BAD
 			if(PSI_RANK_OPERANT)
@@ -21,7 +22,7 @@
 			if(PSI_RANK_PARAMOUNT)
 				use_tool_quality = TOOL_QUALITY_BEST
 
-	set_extension(src, /datum/extension/tool/variable, 
+	set_extension(src, /datum/extension/tool/variable,
 		list(
 			TOOL_CROWBAR =     use_tool_quality,
 			TOOL_SCREWDRIVER = use_tool_quality,
@@ -37,7 +38,7 @@
 		)
 	)
 
-/obj/item/psychic_power/tinker/on_update_icon()
+/obj/item/ability/psionic/tinker/on_update_icon()
 	. = ..()
 	var/datum/extension/tool/variable/tool = get_extension(src, /datum/extension/tool)
 	if(istype(tool))

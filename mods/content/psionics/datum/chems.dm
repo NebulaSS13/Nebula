@@ -1,11 +1,11 @@
 /decl/material/liquid/crystal_agent/do_material_check(var/mob/living/carbon/M)
 	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
-	. = (M.psi || (M.mind && wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : ..()
+	. = (M.get_ability_handler(/datum/ability_handler/psionics, FALSE) || (M.mind && wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : ..()
 
 /decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/M)
 	..()
-	if(M.psi)
-		M.psi.check_latency_trigger(30, "a [name] overdose")
+	var/datum/ability_handler/psionics/psi = M.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	psi?.check_latency_trigger(30, "a [name] overdose")
 
 /decl/chemical_reaction/synthesis/nullglass
 	name = "Soulstone"
@@ -18,7 +18,7 @@
 	var/weakref/donor_ref = LAZYACCESS(blood_data, "donor")
 	var/mob/living/donor = donor_ref?.resolve()
 	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
-	. = (istype(donor) && (donor.psi || (donor.mind && wizards.is_antagonist(donor.mind))))
+	. = (istype(donor) && (!!donor.get_ability_handler(/datum/ability_handler/psionics, FALSE) || (donor.mind && wizards.is_antagonist(donor.mind))))
 
 /decl/chemical_reaction/synthesis/nullglass/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	var/location = get_turf(holder.get_reaction_loc(chemical_reaction_flags))

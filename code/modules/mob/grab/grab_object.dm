@@ -95,7 +95,11 @@
 			upgrade()
 
 /obj/item/grab/attack(mob/M, mob/living/user)
-	return FALSE
+	if(affecting == M)
+		var/datum/extension/abilities/abilities = get_extension(user, /datum/extension/abilities)
+		if(abilities?.do_grabbed_invocation(M))
+			return TRUE
+	. = ..()
 
 /obj/item/grab/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(QDELETED(src) || !current_grab || !assailant || proximity_flag) // Close-range is handled in resolve_attackby().

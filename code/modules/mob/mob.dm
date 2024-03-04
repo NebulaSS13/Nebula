@@ -1461,3 +1461,6 @@
 
 /mob/proc/get_overlay_state_modifier()
 	return
+
+/mob/proc/nervous_system_failure()
+	return FALSE

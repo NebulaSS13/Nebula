@@ -6,15 +6,17 @@
 /obj/screen/psi/armour/on_update_icon()
 	..()
 	var/mob/living/owner = owner_ref.resolve()
-	if(istype(owner) && invisibility == 0)
-		icon_state = owner?.psi.use_psi_armour ? "psiarmour_on" : "psiarmour_off"
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(psi && invisibility == 0)
+		icon_state = psi.use_psi_armour ? "psiarmour_on" : "psiarmour_off"
 
 /obj/screen/psi/armour/handle_click(mob/user, params)
 	var/mob/living/owner = owner_ref?.resolve()
-	if(!istype(owner) || !owner.psi)
+	var/datum/ability_handler/psionics/psi = istype(owner) && owner.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+	if(!psi)
 		return
-	owner.psi.use_psi_armour = !owner.psi.use_psi_armour
-	if(owner.psi.use_psi_armour)
+	psi.use_psi_armour = !psi.use_psi_armour
+	if(psi.use_psi_armour)
 		to_chat(owner, SPAN_NOTICE("You will now use your psionics to deflect or block incoming attacks."))
 	else
 		to_chat(owner, SPAN_NOTICE("You will no longer use your psionics to deflect or block incoming attacks."))

@@ -32,17 +32,17 @@
 
 /obj/item/implant/psi_control/removed()
 	var/mob/living/M = imp_in
-	if(disrupts_psionics() && istype(M) && M.psi)
+	if(disrupts_psionics() && istype(M) && M.get_ability_handler(/datum/ability_handler/psionics, FALSE))
 		to_chat(M, SPAN_NOTICE("You feel the chilly shackles around your psionic faculties fade away."))
 	. = ..()
 
 /obj/item/implant/psi_control/proc/update_functionality(var/silent)
 	var/mob/living/M = imp_in
 	if(get_psi_mode() == PSI_IMPLANT_DISABLED || malfunction)
-		if(implanted && !silent && istype(M) && M.psi)
+		if(implanted && !silent && istype(M) && M.get_ability_handler(/datum/ability_handler/psionics, FALSE))
 			to_chat(M, SPAN_NOTICE("You feel the chilly shackles around your psionic faculties fade away."))
 	else
-		if(implanted && !silent && istype(M) && M.psi)
+		if(implanted && !silent && istype(M) && M.get_ability_handler(/datum/ability_handler/psionics, FALSE))
 			to_chat(M, SPAN_NOTICE("Bands of hollow ice close themselves around your psionic faculties."))
 
 /obj/item/implant/psi_control/meltdown()
@@ -104,6 +104,7 @@
 				SET_STATUS_MAX(imp_in, STAT_WEAK, 5)
 				if(isliving(imp_in))
 					var/mob/living/M = imp_in
-					if(M.psi) M.psi.stunned(5)
+					var/datum/ability_handler/psionics/psi = M.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+					psi?.stunned(5)
 			else if(use_psi_mode == PSI_IMPLANT_WARN)
 				to_chat(imp_in, SPAN_WARNING("Your psi dampener primly informs you it has reported this violation."))

@@ -23,15 +23,16 @@
 		return FALSE
 	. = ..()
 	if(.)
-		switch(user.psi.get_rank(faculty))
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		switch(psi?.get_rank(faculty))
 			if(PSI_RANK_PARAMOUNT)
-				return new /obj/item/psychic_power/psiblade/master/grand/paramount(user, user)
+				return new /obj/item/ability/psionic/psiblade/master/grand/paramount(user, user)
 			if(PSI_RANK_GRANDMASTER)
-				return new /obj/item/psychic_power/psiblade/master/grand(user, user)
+				return new /obj/item/ability/psionic/psiblade/master/grand(user, user)
 			if(PSI_RANK_MASTER)
-				return new /obj/item/psychic_power/psiblade/master(user, user)
+				return new /obj/item/ability/psionic/psiblade/master(user, user)
 			else
-				return new /obj/item/psychic_power/psiblade(user, user)
+				return new /obj/item/ability/psionic/psiblade(user, user)
 
 /decl/psionic_power/psychokinesis/tinker
 	name =            "Tinker"
@@ -46,7 +47,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		return new /obj/item/psychic_power/tinker(user)
+		return new /obj/item/ability/psionic/tinker(user)
 
 /decl/psionic_power/psychokinesis/telekinesis
 	name =            "Telekinesis"
@@ -69,12 +70,13 @@
 	if(.)
 
 		var/distance = get_dist(user, target)
-		if(distance > user.psi.get_rank(PSI_PSYCHOKINESIS))
+		var/datum/ability_handler/psionics/psi = user?.get_ability_handler(/datum/ability_handler/psionics, FALSE)
+		if(distance > psi?.get_rank(PSI_PSYCHOKINESIS))
 			to_chat(user, "<span class='warning'>Your telekinetic power won't reach that far.</span>")
 			return FALSE
 
 		if(ismob(target) || istype(target, /obj))
-			var/obj/item/psychic_power/telekinesis/tk = new(user)
+			var/obj/item/ability/psionic/telekinesis/tk = new(user)
 			if(tk.set_focus(target))
 				tk.sparkle()
 				user.visible_message(SPAN_NOTICE("\The [user] reaches out."))
