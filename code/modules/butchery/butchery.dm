@@ -188,7 +188,7 @@
 		QDEL_NULL(occupant)
 	update_icon()
 
-/obj/structure/kitchenspike/proc/do_butchery_step(var/mob/user, var/next_state, var/butchery_string)
+/obj/structure/kitchenspike/proc/do_butchery_step(var/mob/user, obj/item/tool, var/next_state, var/butchery_string)
 
 	if(QDELETED(occupant))
 		return FALSE
@@ -196,12 +196,11 @@
 	var/last_state = occupant_state
 	var/mob/living/last_occupant = occupant
 
-	user.visible_message(SPAN_NOTICE("\The [user] begins [butchery_string] \the [occupant]."))
 	occupant.adjustBruteLoss(rand(50,60))
 	update_icon()
-
-	if(do_after(user, 3 SECONDS, src) && !QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
-		user.visible_message(SPAN_NOTICE("\The [user] finishes [butchery_string] \the [occupant]."))
+	if(!tool?.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = butchery_string, success_message = butchery_string, check_skill = SKILL_COOKING))
+		return FALSE
+	if(!QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
 		switch(next_state)
 			if(CARCASS_SKINNED)
 				occupant.harvest_skin()
@@ -211,10 +210,11 @@
 				occupant.harvest_meat()
 		set_carcass_state(next_state)
 		return TRUE
+
 	return FALSE
 
 /obj/structure/kitchenspike/attackby(var/obj/item/thing, var/mob/user)
-	if(!thing.sharp)
+	if(!IS_KNIFE(thing))
 		return ..()
 	if(!occupant)
 		to_chat(user, SPAN_WARNING("There is nothing on \the [src] to butcher."))
@@ -223,13 +223,14 @@
 		busy = TRUE
 		switch(occupant_state)
 			if(CARCASS_FRESH)
-				do_butchery_step(user, CARCASS_SKINNED, "skinning")
+				do_butchery_step(user, thing, CARCASS_SKINNED, "skinning")
 			if(CARCASS_SKINNED)
-				do_butchery_step(user, CARCASS_JOINTED, "deboning")
+				do_butchery_step(user, thing, CARCASS_JOINTED, "deboning")
 			if(CARCASS_JOINTED)
-				do_butchery_step(user, CARCASS_EMPTY,   "butchering")
+				do_butchery_step(user, thing, CARCASS_EMPTY,   "butchering")
 		busy = FALSE
 		return TRUE
+
 #undef CARCASS_EMPTY
 #undef CARCASS_FRESH
 #undef CARCASS_SKINNED
