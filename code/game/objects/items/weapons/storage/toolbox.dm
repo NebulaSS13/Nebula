@@ -83,9 +83,9 @@
 /obj/item/storage/toolbox/syndicate/powertools/WillContain()
 	return list(
 			/obj/item/clothing/gloves/insulated,
-			/obj/item/power_drill,
+			/obj/item/tool/power_drill,
 			/obj/item/weldingtool/electric,
-			/obj/item/hydraulic_cutter,
+			/obj/item/tool/hydraulic_cutter,
 			/obj/item/multitool
 		)
 

@@ -94,7 +94,7 @@
 /turf/simulated/floor/airless,
 /area/slavers_base/mort)
 "av" = (
-/obj/item/shovel,
+/obj/item/tool/shovel,
 /turf/exterior/barren,
 /area/space)
 "aw" = (

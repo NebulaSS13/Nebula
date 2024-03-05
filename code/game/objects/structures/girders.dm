@@ -108,11 +108,11 @@
 			visible_message(SPAN_NOTICE("\The [user] slices apart \the [src] with \the [W]."))
 			dismantle()
 		return TRUE
-	if(istype(W, /obj/item/pickaxe/diamonddrill))
-		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		visible_message(SPAN_NOTICE("\The [user] begins drilling through \the [src] with \the [W]."))
-		if(do_after(user,reinf_material ? 60 : 40,src))
-			visible_message(SPAN_NOTICE("\The [user] drills through \the [src] with \the [W]."))
+
+	if(IS_PICK(W))
+		if(W.get_tool_quality(TOOL_PICK) < TOOL_QUALITY_GOOD)
+			to_chat(user, SPAN_WARNING("\The [W] is not powerful enough to destroy \the [src]."))
+		else if(W.do_tool_interaction(TOOL_PICK, user, src, (reinf_material ? 6 : 4) SECONDS, set_cooldown = TRUE))
 			dismantle()
 		return TRUE
 	// Reinforcing a girder, or turning it into a wall.

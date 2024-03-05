@@ -25,8 +25,8 @@
 		/obj/random/tool =                 320,
 		/obj/item/weldingtool/electric =    15,
 		/obj/item/weldingtool/experimental = 3,
-		/obj/item/hydraulic_cutter =         1,
-		/obj/item/power_drill =              1
+		/obj/item/tool/hydraulic_cutter =         1,
+		/obj/item/tool/power_drill =              1
 	)
 	return spawnable_choices
 

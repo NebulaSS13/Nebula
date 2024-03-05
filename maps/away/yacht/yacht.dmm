@@ -938,7 +938,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/item/shovel/spade,
+/obj/item/tool/spade,
 /obj/item/chems/glass/bucket,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,

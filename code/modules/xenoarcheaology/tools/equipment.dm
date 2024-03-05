@@ -22,7 +22,23 @@
 		ARMOR_RAD = ARMOR_RAD_SHIELDED
 	)
 	anomaly_shielding = 0.6
-	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/scanner/health,/obj/item/scanner/breath,/obj/item/measuring_tape,/obj/item/ano_scanner,/obj/item/depth_scanner,/obj/item/core_sampler,/obj/item/gps,/obj/item/pinpointer/radio,/obj/item/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
+	allowed = list(
+		/obj/item/flashlight,
+		/obj/item/tank,
+		/obj/item/suit_cooling_unit,
+		/obj/item/stack/flag,
+		/obj/item/storage/excavation,
+		/obj/item/tool,
+		/obj/item/scanner/breath,
+		/obj/item/measuring_tape,
+		/obj/item/ano_scanner,
+		/obj/item/depth_scanner,
+		/obj/item/core_sampler,
+		/obj/item/gps,
+		/obj/item/pinpointer/radio,
+		/obj/item/radio/beacon,
+		/obj/item/storage/bag/fossils
+	)
 
 /obj/item/clothing/head/helmet/space/void/excavation
 	name = "excavation voidsuit helmet"
@@ -53,7 +69,7 @@
 		/obj/item/gps,
 		/obj/item/measuring_tape,
 		/obj/item/flashlight,
-		/obj/item/pickaxe,
+		/obj/item/tool,
 		/obj/item/depth_scanner,
 		/obj/item/camera,
 		/obj/item/paper,
@@ -68,6 +84,6 @@
 		/obj/item/storage/excavation,
 		/obj/item/anobattery,
 		/obj/item/ano_scanner,
-		/obj/item/stack/tape_roll/barricade_tape/research,
-		/obj/item/pickaxe/xeno/hand)
+		/obj/item/stack/tape_roll/barricade_tape/research
+	)
 	material = /decl/material/solid/organic/leather/synth

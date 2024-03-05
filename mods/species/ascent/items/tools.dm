@@ -1,5 +1,5 @@
 MANTIDIFY(/obj/item/storage/bag/trash/purple,   "sample collection carrier", "material storage")
-MANTIDIFY(/obj/item/pickaxe/diamonddrill,       "lithobliterator",           "drilling")
+MANTIDIFY(/obj/item/tool/drill/diamond,         "lithobliterator",           "drilling")
 MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "propulsion")
 
 /obj/item/light/tube/ascent

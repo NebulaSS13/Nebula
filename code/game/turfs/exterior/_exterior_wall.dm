@@ -67,7 +67,9 @@ var/global/list/natural_walls = list()
 
 /turf/exterior/wall/AltClick(mob/user)
 
-	if(user.Adjacent(src) && istype(user.get_active_hand(), /obj/item/pickaxe) && HasAbove(z))
+	var/obj/item/P = user.get_active_hand()
+	if(user.Adjacent(src) && IS_PICK(P) && HasAbove(z))
+
 		var/user_dir = get_dir(src, user)
 		if(!(user_dir in global.cardinal))
 			to_chat(user, SPAN_WARNING("You must be standing at a cardinal angle to create a ramp."))
@@ -78,11 +80,7 @@ var/global/list/natural_walls = list()
 			to_chat(user, SPAN_WARNING("You cannot cut a ramp into a wall with no additional walls behind it."))
 			return TRUE
 
-		var/obj/item/pickaxe/P = user.get_active_hand()
-		playsound(user, P.drill_sound, 20, 1)
-		to_chat(user, SPAN_NOTICE("You start [P.drill_verb] \the [src], forming it into a ramp."))
-		if(do_after(user, round(P.digspeed*0.5), src) && !ramp_slope_direction)
-			to_chat(user, SPAN_NOTICE("You finish [P.drill_verb] \the [src] into a ramp."))
+		if(P.do_tool_interaction(TOOL_PICK, user, src, 3 SECONDS, suffix_message = ", forming it into a ramp") && !ramp_slope_direction)
 			make_ramp(user, user_dir)
 		return TRUE
 
@@ -223,17 +221,12 @@ var/global/list/natural_walls = list()
 				to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [excavation_level]cm."))
 			return TRUE
 
-		if(istype(W, /obj/item/pickaxe/xeno))
+		if(istype(W, /obj/item/tool/xeno))
 			return handle_xenoarch_tool_interaction(W, user)
 
 	// Drill out natural walls.
-	if(istype(W, /obj/item/pickaxe))
-		var/obj/item/pickaxe/P = W
-		playsound(user, P.drill_sound, 20, 1)
-		to_chat(user, SPAN_NOTICE("You start [P.drill_verb][destroy_artifacts(P, INFINITY)]."))
-		if(do_after(user, (ramp_slope_direction ? round(P.digspeed*0.5) : P.digspeed), src))
-			to_chat(user, SPAN_NOTICE("You finish [P.drill_verb] \the [src]."))
-			dismantle_wall()
+	if(W.do_tool_interaction(TOOL_PICK, user, src, 2 SECONDS, suffix_message = destroy_artifacts(W, INFINITY)))
+		dismantle_wall()
 		return TRUE
 
 	. = ..()
@@ -403,8 +396,8 @@ var/global/list/natural_walls = list()
 	. = ..()
 	if(!. && !ramp_slope_direction && ismob(AM))
 		var/mob/M = AM
-		var/obj/item/pickaxe/held = M.get_active_hand()
-		if(istype(held))
+		var/obj/item/held = M.get_active_hand()
+		if(IS_PICK(held))
 			attackby(held, M)
 			return TRUE
 

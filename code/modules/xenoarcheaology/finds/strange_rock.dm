@@ -19,7 +19,7 @@
 	. = ..()
 
 /obj/item/strangerock/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/pickaxe/xeno/brush))
+	if(istype(I, /obj/item/tool/xeno/brush))
 		if(inside)
 			inside.dropInto(loc)
 			visible_message(SPAN_NOTICE("\The [src] is brushed away, revealing \the [inside]."))

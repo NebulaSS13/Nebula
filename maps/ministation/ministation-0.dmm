@@ -1207,14 +1207,14 @@
 /area/ministation/cargo)
 "fL" = (
 /obj/structure/rack,
-/obj/item/pickaxe,
-/obj/item/pickaxe{
+/obj/item/tool/pickaxe,
+/obj/item/tool/pickaxe{
 	pixel_x = 5
 	},
-/obj/item/shovel{
+/obj/item/tool/shovel{
 	pixel_x = -5
 	},
-/obj/item/shovel{
+/obj/item/tool/shovel{
 	pixel_x = -5
 	},
 /obj/effect/floor_decal/corner/beige{

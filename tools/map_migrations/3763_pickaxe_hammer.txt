@@ -1,0 +1,12 @@
+/obj/item/pickaxe/silver/@SUBTYPES : /obj/item/tool/pickaxe/titanium/@SUBTYPES{@OLD}
+/obj/item/pickaxe/borgdrill/@SUBTYPES : /obj/item/tool/drill/advanced/@SUBTYPES{@OLD}
+/obj/item/pickaxe/gold/@SUBTYPES : /obj/item/tool/pickaxe/plasteel/@SUBTYPES{@OLD}
+/obj/item/pickaxe/jackhammer/@SUBTYPES : /obj/item/tool/hammer/jack/@SUBTYPES{@OLD}
+/obj/item/pickaxe/drill/@SUBTYPES : /obj/item/tool/drill/@SUBTYPES{@OLD}
+/obj/item/pickaxe/diamond/@SUBTYPES : /obj/item/tool/pickaxe/ocp/@SUBTYPES{@OLD}
+/obj/item/pickaxe/diamonddrill/@SUBTYPES : /obj/item/tool/drill/diamond/@SUBTYPES{@OLD}
+/obj/item/shovel/spade/@SUBTYPES : /obj/item/tool/spade/@SUBTYPES{@OLD}
+/obj/item/shovel/@SUBTYPES : /obj/item/tool/shovel/@SUBTYPES{@OLD}
+/obj/item/power_drill/@SUBTYPES : /obj/item/power_drill/@SUBTYPES{@OLD}
+/obj/item/hydraulic_cutter/@SUBTYPES : /obj/item/tool/hydraulic_cutter/@SUBTYPES{@OLD}
+/obj/item/pickaxe/@SUBTYPES : /obj/item/tool/pickaxe/@SUBTYPES{@OLD}

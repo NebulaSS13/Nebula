@@ -1,8 +1,8 @@
 /decl/tool_archetype/pen
-	name        = "pen"
-	use_message = "writing"
-	use_sound   = list('sound/effects/pen1.ogg','sound/effects/pen2.ogg')
-	properties  = list(
+	name         = "pen"
+	tool_message = "writing"
+	tool_sound   = list('sound/effects/pen1.ogg','sound/effects/pen2.ogg')
+	properties   = list(
 		TOOL_PROP_COLOR           = "black",
 		TOOL_PROP_COLOR_NAME      = "black",
 		TOOL_PROP_PEN_FLAG        = 0,

@@ -1890,8 +1890,8 @@
 /area/map_template/merc_spawn)
 "km" = (
 /obj/structure/rack,
-/obj/item/pickaxe/diamonddrill,
-/obj/item/pickaxe/diamonddrill,
+/obj/item/tool/drill/diamond,
+/obj/item/tool/drill/diamond,
 /obj/structure/railing/mapped/no_density{
 	dir = 4
 	},

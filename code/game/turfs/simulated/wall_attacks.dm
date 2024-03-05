@@ -145,7 +145,7 @@
 	// Basic dismantling.
 	if(isnull(construction_stage) || !reinf_material)
 
-		var/cut_delay = 60 - material.cut_delay
+		var/cut_delay = (6 SECONDS) - material.cut_delay
 		var/dismantle_verb
 		var/dismantle_sound
 
@@ -180,11 +180,11 @@
 			dismantle_sound = "sparks"
 			dismantle_verb = "slicing through"
 			cut_delay *= 0.5
-		else if(istype(W,/obj/item/pickaxe))
-			var/obj/item/pickaxe/P = W
-			dismantle_verb = P.drill_verb
-			dismantle_sound = P.drill_sound
-			cut_delay -= P.digspeed
+
+		else if(IS_PICK(W))
+			dismantle_verb  = W.get_tool_message(TOOL_PICK)
+			dismantle_sound = W.get_tool_sound(TOOL_PICK)
+			cut_delay       = W.get_expected_tool_use_delay(TOOL_PICK, cut_delay)
 
 		if(dismantle_verb)
 			. = TRUE

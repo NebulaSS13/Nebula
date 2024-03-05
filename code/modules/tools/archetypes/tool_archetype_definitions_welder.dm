@@ -1,8 +1,8 @@
 /decl/tool_archetype/welder
-	name = "welder"
-	use_sound = list('sound/items/Welder.ogg','sound/items/Welder2.ogg')
-	codex_key = TOOL_CODEX_WELDER
-	use_message = "welding"
+	name         = "welder"
+	tool_sound   = list('sound/items/Welder.ogg','sound/items/Welder2.ogg')
+	codex_key    = TOOL_CODEX_WELDER
+	tool_message = "welding"
 
 /decl/tool_archetype/welder/handle_pre_interaction(var/mob/user, var/obj/item/tool, var/expend_fuel = 0)
 	var/obj/item/weldingtool/welder = tool

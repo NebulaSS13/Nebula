@@ -76,7 +76,7 @@
 /*
  * Fireaxe
  */
-/obj/item/twohanded/fireaxe  // DEM AXES MAN, marker -Agouri
+/obj/item/twohanded/fireaxe
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 	icon = 'icons/obj/items/tool/fireaxe.dmi'
