@@ -66,7 +66,7 @@
 /obj/item/chems/glass/bottle/populate_reagents()
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()
-	if(reagents.total_volume > 0 && autolabel && !label_text) // don't override preset labels
+	if(reagents?.total_volume > 0 && autolabel && !label_text) // don't override preset labels
 		label_text = reagents.get_primary_reagent_name()
 		update_container_name()
 
