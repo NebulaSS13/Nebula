@@ -14,13 +14,25 @@
 	slot_flags = SLOT_EARS
 	volume = 30
 	material = /decl/material/solid/organic/plantmatter
+	var/autolabel = TRUE  		// if set, will add label with the name of the first initial reagent
 	var/static/list/colorizable_icon_states = list("pill1", "pill2", "pill3", "pill4", "pill5") // if using an icon state from here, color will be derived from reagents
+
+/obj/item/chems/pill/dispensed
+	autolabel = FALSE
 
 /obj/item/chems/pill/Initialize()
 	. = ..()
 	if(!icon_state)
 		icon_state = pick(colorizable_icon_states) //preset pills only use colour changing or unique icons
 	update_icon()
+	if(label_text)
+		update_container_name()
+
+/obj/item/chems/pill/populate_reagents()
+	SHOULD_CALL_PARENT(TRUE)
+	. = ..()
+	if(reagents?.total_volume > 0 && autolabel && !label_text) // don't override preset labels
+		label_text = reagents.get_primary_reagent_name()
 
 /obj/item/chems/pill/on_update_icon()
 	. = ..()
@@ -93,6 +105,7 @@
 
 /obj/item/chems/pill/bromide/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/bromide, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/cyanide
 	name = "strange pill"
@@ -102,6 +115,7 @@
 
 /obj/item/chems/pill/cyanide/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/cyanide, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/adminordrazine
 	name = "Adminordrazine pill"
@@ -110,6 +124,7 @@
 
 /obj/item/chems/pill/adminordrazine/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/adminordrazine, 1)
+	. = ..()
 
 /obj/item/chems/pill/stox
 	name = "sedatives (15u)"
@@ -118,6 +133,7 @@
 
 /obj/item/chems/pill/stox/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/sedatives, 15)
+	. = ..()
 
 /obj/item/chems/pill/burn_meds
 	name = "synthskin (15u)"
@@ -126,6 +142,7 @@
 
 /obj/item/chems/pill/burn_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/burn_meds, 15)
+	. = ..()
 
 /obj/item/chems/pill/painkillers
 	name = "painkillers (15u)"
@@ -134,6 +151,7 @@
 
 /obj/item/chems/pill/painkillers/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/painkillers, 15)
+	. = ..()
 
 /obj/item/chems/pill/strong_painkillers
 	name = "strong painkillers (15u)"
@@ -142,6 +160,7 @@
 
 /obj/item/chems/pill/strong_painkillers/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/painkillers/strong, 15)
+	. = ..()
 
 /obj/item/chems/pill/stabilizer
 	name = "stabilizer (30u)"
@@ -150,6 +169,7 @@
 
 /obj/item/chems/pill/stabilizer/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/stabilizer, 30)
+	. = ..()
 
 /obj/item/chems/pill/oxygen
 	name = "oxygen (15u)"
@@ -158,6 +178,7 @@
 
 /obj/item/chems/pill/oxygen/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/oxy_meds, 15)
+	. = ..()
 
 /obj/item/chems/pill/antitoxins
 	name = "antitoxins (25u)"
@@ -166,6 +187,7 @@
 
 /obj/item/chems/pill/antitoxins/populate_reagents()
 	// Antitox is easy to make and has no OD threshold so we can get away with big pills.
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
 
 /obj/item/chems/pill/brute_meds
@@ -175,6 +197,7 @@
 
 /obj/item/chems/pill/brute_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/brute_meds, 20)
+	. = ..()
 
 /obj/item/chems/pill/happy
 	name = "happy pill"
@@ -184,6 +207,7 @@
 /obj/item/chems/pill/happy/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/psychoactives,   15)
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 15)
+	. = ..()
 
 /obj/item/chems/pill/zoom
 	name = "zoom pill"
@@ -195,6 +219,7 @@
 	reagents.add_reagent(/decl/material/liquid/antidepressants, 5)
 	reagents.add_reagent(/decl/material/liquid/stimulants,      5)
 	reagents.add_reagent(/decl/material/liquid/amphetamines,    5)
+	. = ..()
 
 /obj/item/chems/pill/gleam
 	name = "strange pill"
@@ -203,6 +228,7 @@
 
 /obj/item/chems/pill/gleam/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/glowsap/gleam, 10)
+	. = ..()
 
 /obj/item/chems/pill/antibiotics
 	name = "antibiotics (10u)"
@@ -211,6 +237,7 @@
 
 /obj/item/chems/pill/antibiotics/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antibiotics, 10)
+	. = ..()
 
 //Psychiatry pills.
 /obj/item/chems/pill/stimulants
@@ -220,6 +247,7 @@
 
 /obj/item/chems/pill/stimulants/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/stimulants, 15)
+	. = ..()
 
 /obj/item/chems/pill/antidepressants
 	name = "antidepressants (15u)"
@@ -228,6 +256,7 @@
 
 /obj/item/chems/pill/antidepressants/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antidepressants, 15)
+	. = ..()
 
 /obj/item/chems/pill/antirads
 	name = "antirads (7u)"
@@ -236,6 +265,7 @@
 
 /obj/item/chems/pill/antirads/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antirads, 7)
+	. = ..()
 
 /obj/item/chems/pill/antirad
 	name = "AntiRad"
@@ -244,6 +274,7 @@
 
 /obj/item/chems/pill/antirad/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antirads,   5)
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/antitoxins, 10)
 
 /obj/item/chems/pill/sugariron
@@ -253,6 +284,7 @@
 
 /obj/item/chems/pill/sugariron/populate_reagents()
 	reagents.add_reagent(/decl/material/solid/metal/iron,       5)
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)
 
 /obj/item/chems/pill/detergent
@@ -267,6 +299,7 @@
 
 /obj/item/chems/pill/detergent/populate_reagents()
 	reagents.add_reagent(/decl/material/gas/ammonia, 30)
+	. = ..()
 
 /obj/item/chems/pill/pod
 	name = "master flavorpod item"
@@ -282,21 +315,25 @@
 
 /obj/item/chems/pill/pod/cream/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/drink/milk, 5)
+	. = ..()
 
 /obj/item/chems/pill/pod/cream_soy
 	name = "non-dairy creamer pod"
 
 /obj/item/chems/pill/pod/cream_soy/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/drink/milk/soymilk, 5)
+	. = ..()
 
 /obj/item/chems/pill/pod/orange
 	name = "orange flavorpod"
 
 /obj/item/chems/pill/pod/orange/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/orange, 5)
+	. = ..()
 
 /obj/item/chems/pill/pod/mint
 	name = "mint flavorpod"
 
 /obj/item/chems/pill/pod/mint/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, 1)
+	. = ..()

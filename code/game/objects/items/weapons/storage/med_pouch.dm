@@ -213,21 +213,27 @@ Single Use Emergency Pouches
 
 /obj/item/chems/pill/pouch_pill/stabilizer/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/stabilizer, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/antitoxins/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/antitoxins, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/oxy_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/oxy_meds, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/painkillers/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/painkillers, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/brute_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/brute_meds, reagents.maximum_volume)
+	. = ..()
 
 /obj/item/chems/pill/pouch_pill/burn_meds/populate_reagents()
 	reagents.add_reagent(/decl/material/liquid/burn_meds, reagents.maximum_volume)
+	. = ..()
 
 // Injectors
 
