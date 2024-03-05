@@ -400,6 +400,15 @@
 	stack_merge_type = /obj/item/stack/material/slab
 	crafting_stack_type = /obj/item/stack/material/slab
 
+/obj/item/stack/material/bundle
+	name = "bundles"
+	singular_name = "bundle"
+	plural_name = "bundles"
+	icon_state = "bundle"
+	plural_icon_state = "bundle-mult"
+	max_icon_state = "bundle-max"
+	stack_merge_type = /obj/item/stack/material/bundle
+
 /obj/item/stack/material/strut
 	name = "struts"
 	singular_name = "strut"

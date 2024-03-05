@@ -1,7 +1,7 @@
 /obj/item/proc/get_tool_quality(var/archetype)
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
 	. = tool?.get_tool_quality(archetype)
-	if(isnull(.))
+	if(!.)
 		var/decl/tool_archetype/tool_arch = GET_DECL(archetype)
 		. = tool_arch.get_default_quality(src)
 
@@ -15,7 +15,7 @@
 /obj/item/proc/get_tool_speed(var/archetype)
 	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
 	. = tool?.get_tool_speed(archetype)
-	if(isnull(.))
+	if(!.)
 		var/decl/tool_archetype/tool_arch = GET_DECL(archetype)
 		. = tool_arch.get_default_speed(src)
 

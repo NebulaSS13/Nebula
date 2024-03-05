@@ -50,7 +50,7 @@
 			. = SPAN_NOTICE(.)
 
 /decl/tool_archetype/proc/get_default_quality(obj/item/tool)
-	return
+	return 0
 
 /decl/tool_archetype/proc/get_default_speed(obj/item/tool)
 	return

@@ -20,6 +20,27 @@
 /turf/exterior/wildgrass/get_movable_alpha_mask_state(atom/movable/mover)
 	. = ..() || "mask_grass"
 
+/obj/item/stack/material/bundle/grass
+	drying_wetness = 60
+	dried_type = /obj/item/stack/material/bundle/grass/dry
+	material = /decl/material/solid/organic/plantmatter/grass
+	is_spawnable_type = TRUE
+
+/obj/item/stack/material/bundle/grass/dry
+	drying_wetness = null
+	dried_type = null
+	material = /decl/material/solid/organic/plantmatter/grass/dry
+
+/turf/exterior/wildgrass/attackby(obj/item/W, mob/user)
+	if(IS_KNIFE(W))
+		if(W.do_tool_interaction(TOOL_KNIFE, user, src, 3 SECONDS, start_message = "harvesting", success_message = "harvesting"))
+			if(QDELETED(src) || !istype(src, /turf/exterior/wildgrass))
+				return TRUE
+			new /obj/item/stack/material/bundle/grass(src, rand(2,5))
+			ChangeTurf(/turf/exterior/grass)
+		return TRUE
+	return ..()
+
 /turf/exterior/wildgrass/Initialize(mapload, no_update_icon)
 	. = ..()
 	//It's possible we're created on a level that's not a planet!
