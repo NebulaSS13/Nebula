@@ -19131,7 +19131,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/floor/tiled/freezer,
 /area/exodus/crew_quarters/kitchen)
 "aOo" = (
@@ -19925,7 +19925,7 @@
 /turf/floor/tiled/techfloor/grid,
 /area/exodus/research)
 "aPM" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/floor/tiled/freezer,
 /area/exodus/crew_quarters/kitchen)
 "aPN" = (

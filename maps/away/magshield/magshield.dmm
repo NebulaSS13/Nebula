@@ -3612,7 +3612,7 @@
 /turf/floor/tiled/white,
 /area/magshield/south)
 "kK" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/floor/tiled/freezer,
 /area/magshield/south)
 "kL" = (

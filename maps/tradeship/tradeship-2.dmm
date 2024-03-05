@@ -6622,7 +6622,7 @@
 "Jp" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /obj/machinery/newscaster{
 	pixel_y = -32;
 	dir = 1

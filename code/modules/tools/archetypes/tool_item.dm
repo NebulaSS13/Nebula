@@ -46,7 +46,7 @@
 	if(get_tool_quality(archetype) <= 0)
 		return FALSE
 
-	. = do_tool_interaction(archetype, user, src, target, delay, start_message, success_message, failure_message, fuel_expenditure, check_skill, prefix_message, suffix_message, check_skill_threshold, check_skill_prob, set_cooldown)
+	. = handle_tool_interaction(archetype, user, src, target, delay, start_message, success_message, failure_message, fuel_expenditure, check_skill, prefix_message, suffix_message, check_skill_threshold, check_skill_prob, set_cooldown)
 
 	if(QDELETED(user) || QDELETED(target))
 		return FALSE

@@ -70,7 +70,7 @@
 	. = max(round(.), 5)
 
 // Returns a failure message as a string if the interaction fails.
-/proc/do_tool_interaction(var/archetype, var/mob/user, var/obj/item/tool, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/prefix_message, var/suffix_message, var/check_skill_threshold, var/check_skill_prob = 50, var/set_cooldown = FALSE)
+/proc/handle_tool_interaction(var/archetype, var/mob/user, var/obj/item/tool, var/atom/target, var/delay = (1 SECOND), var/start_message, var/success_message, var/failure_message, var/fuel_expenditure = 0, var/check_skill = SKILL_CONSTRUCTION, var/prefix_message, var/suffix_message, var/check_skill_threshold, var/check_skill_prob = 50, var/set_cooldown = FALSE)
 
 	if(!istype(user) || !istype(target))
 		return TOOL_USE_FAILURE_NOMESSAGE

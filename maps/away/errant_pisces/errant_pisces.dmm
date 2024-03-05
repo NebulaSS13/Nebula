@@ -5810,11 +5810,11 @@
 /turf/floor/tiled,
 /area/errant_pisces/fishing_wing)
 "pt" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/floor/tiled/freezer,
 /area/errant_pisces/fishing_wing)
 "pu" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /obj/machinery/light/small,
 /turf/floor/tiled/freezer,
 /area/errant_pisces/fishing_wing)

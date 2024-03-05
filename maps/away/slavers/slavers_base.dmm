@@ -151,11 +151,11 @@
 /turf/floor/airless,
 /area/slavers_base/mort)
 "aH" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /turf/floor/airless,
 /area/slavers_base/mort)
 "aI" = (
-/obj/structure/kitchenspike,
+/obj/structure/meat_hook,
 /obj/machinery/light/small,
 /turf/floor/airless,
 /area/slavers_base/mort)
