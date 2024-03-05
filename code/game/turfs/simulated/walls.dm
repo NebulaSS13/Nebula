@@ -52,18 +52,7 @@ var/global/list/wall_fullblend_objects = list(
 	icon_state = "blank"
 	color = null
 
-	if(!ispath(material, /decl/material))
-		material = materialtype || get_default_material()
-	if(ispath(material, /decl/material))
-		material = GET_DECL(material)
-
-	if(!ispath(reinf_material, /decl/material))
-		reinf_material = rmaterialtype
-	if(ispath(reinf_material, /decl/material))
-		reinf_material = GET_DECL(reinf_material)
-
-	if(ispath(girder_material, /decl/material))
-		girder_material = GET_DECL(girder_material)
+	set_turf_materials((materialtype || material || get_default_material()), (rmaterialtype || reinf_material), TRUE, girder_material)
 
 	. = INITIALIZE_HINT_LATELOAD
 	set_extension(src, /datum/extension/penetration/proc_call, PROC_REF(CheckPenetration))
@@ -104,7 +93,7 @@ var/global/list/wall_fullblend_objects = list(
 	if(!radiate())
 		return PROCESS_KILL
 
-/turf/simulated/wall/proc/get_material()
+/turf/simulated/wall/get_material()
 	return material
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
@@ -303,7 +292,7 @@ var/global/list/wall_fullblend_objects = list(
 		new_rmaterial = /decl/material/solid/stone/cult/reinforced
 	if(new_material || new_rmaterial)
 		..()
-		set_material(new_material, new_rmaterial)
+		set_turf_materials(new_material, new_rmaterial)
 
 /turf/simulated/wall/is_defiled()
 	return material?.type == /decl/material/solid/stone/cult || reinf_material?.type == /decl/material/solid/stone/cult/reinforced || ..()

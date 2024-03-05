@@ -8,12 +8,7 @@
 
 /turf/exterior/rock/Initialize(mapload, no_update_icon)
 	. = ..()
-	material = SSmaterials.get_strata_material_type(src)
-	if(material)
-		var/decl/material/M = GET_DECL(material)
-		name = "[M.adjective_name] floor"
-		dirt_color = M.color
-		color = M.color
+	set_turf_materials(SSmaterials.get_strata_material_type(src))
 
 /turf/exterior/rock/volcanic
 	name = "volcanic floor"

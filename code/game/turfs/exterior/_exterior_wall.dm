@@ -160,20 +160,10 @@ var/global/list/natural_walls = list()
 		make_ramp(null, ramp_slope_direction, TRUE)
 
 	// Init materials.
-	material = SSmaterials.get_strata_material_type(src)
 
 	global.natural_walls += src
-
 	set_extension(src, /datum/extension/geological_data)
-	if(!ispath(material, /decl/material))
-		material = materialtype || get_default_material()
-	if(ispath(material, /decl/material))
-		material = GET_DECL(material)
-	if(!ispath(reinf_material, /decl/material))
-		reinf_material = rmaterialtype
-	if(ispath(reinf_material, /decl/material))
-		reinf_material = GET_DECL(reinf_material)
-
+	set_turf_materials((materialtype || material || get_default_material()), (rmaterialtype || reinf_material), force = TRUE)
 	. = INITIALIZE_HINT_LATELOAD
 
 /turf/exterior/wall/LateInitialize(var/ml)
@@ -202,20 +192,6 @@ var/global/list/natural_walls = list()
 		update_neighboring_ramps(destroying_self = TRUE)
 	. = ..()
 
-/turf/exterior/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial)
-	material = newmaterial
-	if(ispath(material, /decl/material))
-		material = GET_DECL(material)
-	else if(!istype(material))
-		PRINT_STACK_TRACE("Wall has been supplied non-material '[newmaterial]'.")
-		material = GET_DECL(get_default_material())
-	reinf_material = newrmaterial
-	if(ispath(reinf_material, /decl/material))
-		reinf_material = GET_DECL(reinf_material)
-	else if(!istype(reinf_material))
-		reinf_material = null
-	update_material()
-
 /turf/exterior/wall/proc/spread_deposit()
 	if(!istype(reinf_material) || reinf_material.ore_spread_chance <= 0)
 		return
@@ -225,7 +201,7 @@ var/global/list/natural_walls = list()
 		var/turf/exterior/wall/target_turf = get_step_resolving_mimic(src, trydir)
 		if(!istype(target_turf) || !isnull(target_turf.reinf_material))
 			continue
-		target_turf.set_material(target_turf.material, reinf_material)
+		target_turf.set_turf_materials(target_turf.material, reinf_material)
 		target_turf.spread_deposit()
 
 /turf/exterior/wall/attackby(obj/item/W, mob/user, click_params)
@@ -271,8 +247,6 @@ var/global/list/natural_walls = list()
 		desc = "A natural cliff face composed of bare [material.solid_name]."
 
 /turf/exterior/wall/proc/update_material(var/update_neighbors)
-	if(!material)
-		material = GET_DECL(get_default_material())
 	if(material)
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
@@ -415,9 +389,6 @@ var/global/list/natural_walls = list()
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	return ChangeTurf(floor_type || get_base_turf_by_area(src))
-
-/turf/exterior/wall/proc/get_default_material()
-	. = /decl/material/solid/stone/sandstone
 
 /turf/exterior/wall/proc/pass_geodata_to(obj/O)
 	var/datum/extension/geological_data/ours = get_extension(src, /datum/extension/geological_data)

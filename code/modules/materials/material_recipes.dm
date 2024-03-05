@@ -37,6 +37,9 @@
 
 	if(ispath(stack_type, /obj/item/stack/material/brick) && wall_support_value >= 10)
 		. += new/datum/stack_recipe/turfs/wall/brick(src)
+		. += new/datum/stack_recipe/turfs/path(src)
+		. += new/datum/stack_recipe/turfs/path/herringbone(src)
+		. += new/datum/stack_recipe/turfs/path/running_bond(src)
 
 	// We assume a non-ore non-strut stack type is a general type that can use general recipes.
 	if(opacity < 0.6)

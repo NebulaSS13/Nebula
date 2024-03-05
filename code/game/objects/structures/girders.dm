@@ -161,7 +161,7 @@
 	var/turf/Tsrc = get_turf(src)
 	Tsrc.ChangeTurf(/turf/simulated/wall)
 	var/turf/simulated/wall/T = get_turf(src)
-	T.set_material(S.material, reinf_material, material)
+	T.set_turf_materials(S.material, reinf_material, null, material)
 	T.can_open = prepped_for_fakewall
 	T.add_hiddenprint(usr)
 	material = null

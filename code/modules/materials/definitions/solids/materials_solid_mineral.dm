@@ -242,6 +242,17 @@
 	melting_point = null // Clay is already almost a liquid...
 	bakes_into_at_temperature = 1100 CELSIUS // roughly the temperature expected from a kiln
 
+/decl/material/solid/soil
+	name = "soil"
+	codex_name = "soil"
+	uid = "solid_soil"
+	color = COLOR_BEASTY_BROWN
+	value = 0
+	default_solid_form = /obj/item/stack/material/lump
+	melting_point = null
+	hardness = 0
+	integrity = 0
+
 /decl/material/solid/hematite
 	name = "hematite"
 	uid = "solid_hematite"
