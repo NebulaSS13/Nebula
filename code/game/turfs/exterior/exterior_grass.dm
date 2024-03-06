@@ -4,17 +4,16 @@
 	icon = 'icons/turf/exterior/grass.dmi'
 	footstep_type = /decl/footsteps/grass
 	icon_edge_layer = EXT_EDGE_GRASS
-	color = "#799c4b"
-	base_color = "#799c4b"
+	color = "#5e7a3b"
+	base_color = "#5e7a3b"
 
 /turf/exterior/wildgrass
 	name = "wild grass"
 	icon = 'icons/turf/exterior/wildgrass.dmi'
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
-	icon_has_corners = TRUE
 	footstep_type = /decl/footsteps/grass
-	color = "#799c4b"
-	base_color = "#799c4b"
+	color = "#5e7a3b"
+	base_color = "#5e7a3b"
 
 /turf/exterior/wildgrass/Initialize(mapload, no_update_icon)
 	. = ..()
