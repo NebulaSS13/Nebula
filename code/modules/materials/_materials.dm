@@ -671,11 +671,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
-	if(!(flags & IGNORE_MOB_SIZE) && metabolism_class != CHEM_TOUCH)
+	if(!(flags & IGNORE_MOB_SIZE))
 		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
+	if(metabolism_class != CHEM_TOUCH)
+		var/dose = LAZYACCESS(M.chem_doses, type) + effective
+		LAZYSET(M.chem_doses, type, dose)
 
-	var/dose = LAZYACCESS(M.chem_doses, type) + effective
-	LAZYSET(M.chem_doses, type, dose)
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(metabolism_class)
 			if(CHEM_INJECT)
