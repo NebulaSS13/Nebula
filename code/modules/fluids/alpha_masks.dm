@@ -49,8 +49,8 @@ var/global/list/_alpha_masks = list()
 	forceMove(get_turf(owner.loc))
 
 // Override proc to change the overlays used by an atom type.
-/atom/movable/proc/get_fluid_alpha_mask_states()
-	return 'icons/effects/fluid_mask.dmi'
+/atom/movable/proc/get_turf_alpha_mask_states()
+	return 'icons/effects/alpha_mask.dmi'
 
 // Proc called by /turf/Entered() to update a mob's mask overlay.
 /atom/movable/proc/update_turf_alpha_mask()
@@ -66,7 +66,7 @@ var/global/list/_alpha_masks = list()
 	if(mask_state)
 		var/atom/movable/alpha_mask/mask = get_or_create_alpha_mask(src)
 		if(mask)
-			var/mask_icon_file = get_fluid_alpha_mask_states() || 'icons/effects/fluid_mask.dmi'
+			var/mask_icon_file = get_turf_alpha_mask_states() || 'icons/effects/alpha_mask.dmi'
 			mask.render_target = "*render_\ref[src]"
 			if(mask.icon != mask_icon_file)
 				mask.icon = mask_icon_file

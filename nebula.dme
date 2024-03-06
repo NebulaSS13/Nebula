@@ -2176,7 +2176,7 @@
 #include "code\modules\fluids\_fluid.dm"
 #include "code\modules\fluids\fluid_flood.dm"
 #include "code\modules\fluids\fluid_mapped.dm"
-#include "code\modules\fluids\fluid_masks.dm"
+#include "code\modules\fluids\alpha_masks.dm"
 #include "code\modules\food\recipes_microwave.dm"
 #include "code\modules\food\plates\_plate.dm"
 #include "code\modules\food\utensils\_utensil.dm"

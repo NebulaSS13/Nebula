@@ -6,6 +6,7 @@
 	icon_edge_layer = EXT_EDGE_GRASS
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
+	icon_has_corners = TRUE
 
 /turf/exterior/wildgrass
 	name = "wild grass"
@@ -14,6 +15,10 @@
 	footstep_type = /decl/footsteps/grass
 	color = "#5e7a3b"
 	base_color = "#5e7a3b"
+	icon_has_corners = TRUE
+
+/turf/exterior/wildgrass/get_movable_alpha_mask_state(atom/movable/mover)
+	. = ..() || "mask_grass"
 
 /turf/exterior/wildgrass/Initialize(mapload, no_update_icon)
 	. = ..()

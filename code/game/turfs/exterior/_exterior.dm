@@ -58,9 +58,7 @@
 		return
 
 	// If this is a mapload, then our neighbors will be updating their own icons too -- doing it for them is rude.
-	if(mapload)
-		update_icon()
-	else
+	if(!mapload)
 		for(var/direction in global.alldirs)
 			var/turf/target_turf = get_step_resolving_mimic(src, direction)
 			if(istype(target_turf))
@@ -68,6 +66,7 @@
 					target_turf.queue_icon_update()
 				else
 					target_turf.update_icon()
+	update_icon()
 
 	if(reagent_type && height < 0)
 		add_to_reagents(reagent_type, abs(height))

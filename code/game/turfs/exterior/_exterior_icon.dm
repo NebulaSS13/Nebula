@@ -54,3 +54,4 @@
 					else if(direction & WEST)
 						I.pixel_x -= world.icon_size
 					add_overlay(I)
+	compile_overlays()
