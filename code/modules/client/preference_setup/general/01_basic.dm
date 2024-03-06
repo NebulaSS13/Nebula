@@ -78,9 +78,9 @@
 	var/decl/species/S = get_species_by_key(pref.species)
 	for(var/decl/bodytype/B in S.available_bodytypes)
 		if(B.name == pref.bodytype)
-			. += "<span class='linkOn'>[capitalize(B.name)]</span>"
+			. += "<span class='linkOn'>[capitalize(B.pref_name)]</span>"
 		else
-			. += "<a href='?src=\ref[src];bodytype=\ref[B]'>[capitalize(B.name)]</a>"
+			. += "<a href='?src=\ref[src];bodytype=\ref[B]'>[capitalize(B.pref_name)]</a>"
 
 	. += "<br><b>Pronouns:</b> "
 	for(var/decl/pronouns/G in S.available_pronouns)

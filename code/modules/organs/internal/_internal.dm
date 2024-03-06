@@ -57,6 +57,9 @@
 		affected.update_internal_organs_cost()
 
 /obj/item/organ/internal/do_uninstall(in_place, detach, ignore_children, update_icon)
+
+	var/mob/living/victim = owner // cleared in parent proc
+
 	//Make sure we're removed from whatever parent organ we have, either in a mob or not
 	var/obj/item/organ/external/affected
 	if(owner)
@@ -69,6 +72,7 @@
 	if(affected)
 		LAZYREMOVE(affected.internal_organs, src)
 		affected.update_internal_organs_cost()
+
 	. = ..()
 
 	//Remove it from the implants if we are fully removing, or add it to the implants if we are detaching
@@ -77,6 +81,9 @@
 			LAZYDISTINCTADD(affected.implants, src)
 		else
 			LAZYREMOVE(affected.implants, src)
+
+	if(transfer_brainmob_with_organ && istype(victim))
+		transfer_key_to_brainmob(victim, update_brainmob = TRUE)
 
 //#TODO: Remove rejuv hacks
 /obj/item/organ/internal/remove_rejuv()
@@ -290,9 +297,3 @@
 		var/mob/living/brainmob = get_brainmob(create_if_missing = FALSE)
 		if(brainmob?.key)
 			transfer_key_from_mob_to_mob(brainmob, owner)
-
-/obj/item/organ/internal/do_uninstall(in_place, detach, ignore_children, update_icon)
-	var/mob/living/victim = owner // cleared in parent proc
-	. = ..()
-	if(transfer_brainmob_with_organ && istype(victim))
-		transfer_key_to_brainmob(victim, update_brainmob = TRUE)

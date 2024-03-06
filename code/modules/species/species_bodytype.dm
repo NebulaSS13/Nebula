@@ -1,7 +1,10 @@
 var/global/list/bodytypes_by_category = list()
 
 /decl/bodytype
+	/// Name used in general.
 	var/name = "default"
+	/// Name used in preference bodytype selection. Defaults to name.
+	var/pref_name
 	/// Seen when examining a prosthetic limb, if non-null.
 	var/desc
 	var/icon_base
@@ -191,6 +194,9 @@ var/global/list/bodytypes_by_category = list()
 /decl/bodytype/Initialize()
 	. = ..()
 	icon_deformed ||= icon_base
+
+	if(!pref_name)
+		pref_name = name
 
 	LAZYDISTINCTADD(global.bodytypes_by_category[bodytype_category], src)
 	//If the species has eyes, they are the default vision organ

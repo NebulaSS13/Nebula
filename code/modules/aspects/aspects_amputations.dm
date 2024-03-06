@@ -49,7 +49,7 @@
 			if(!(limb in mob_bodytype.has_limbs))
 				return FALSE
 
-/decl/aspect/amputation/apply(var/mob/living/carbon/human/holder)
+/decl/aspect/amputation/apply(mob/living/holder)
 	. = ..()
 	if(. && apply_to_limbs)
 		for(var/limb in apply_to_limbs)
