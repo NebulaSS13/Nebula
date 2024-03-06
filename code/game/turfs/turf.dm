@@ -625,6 +625,21 @@
 /turf/proc/unwet_floor(var/check_very_wet = TRUE)
 	return
 
+// Proc called in /turf/Entered() to supply an appropriate fluid overlay.
+/turf/proc/get_movable_alpha_mask_state(atom/movable/mover)
+	if(flooded)
+		return null
+	if(ismob(mover))
+		var/mob/moving_mob = mover
+		if(moving_mob.can_overcome_gravity())
+			return null
+	var/fluid_depth = get_fluid_depth()
+	if(fluid_depth > FLUID_PUDDLE)
+		if(fluid_depth <= FLUID_SHALLOW)
+			return "mask_shallow"
+		if(fluid_depth <= FLUID_DEEP)
+			return "mask_deep"
+
 /turf/get_alt_interactions(mob/user)
 	. = ..()
 	LAZYADD(., /decl/interaction_handler/show_turf_contents)
