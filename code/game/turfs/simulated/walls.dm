@@ -48,7 +48,7 @@ var/global/list/wall_fullblend_objects = list(
 	..(ml)
 
 	// Clear mapping icons.
-	icon = 'icons/turf/walls/solid.dmi'
+	icon = get_wall_icon()
 	icon_state = "blank"
 	color = null
 
