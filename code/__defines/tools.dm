@@ -10,7 +10,8 @@
 #define TOOL_SHOVEL         /decl/tool_archetype/shovel
 #define TOOL_PICK           /decl/tool_archetype/pick
 #define TOOL_HAMMER         /decl/tool_archetype/hammer
-#define TOOL_KNIFE       /decl/tool_archetype/knife
+#define TOOL_KNIFE          /decl/tool_archetype/knife
+
 // Misc tools.
 #define TOOL_PEN            /decl/tool_archetype/pen
 

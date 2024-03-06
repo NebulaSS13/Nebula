@@ -85,15 +85,12 @@
 		return check_result
 
 	user.visible_message(
-		SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.use_message] \the [target] with \the [tool]."),
-		SPAN_NOTICE("You begin [start_message || tool_archetype.use_message] \the [target] with \the [tool].")
+		SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.tool_message] \the [target] with \the [tool]."),
+		SPAN_NOTICE("You begin [start_message || tool_archetype.tool_message] \the [target] with \the [tool].")
 	)
 
 	var/datum/extension/tool/tool_data = get_extension(tool, /datum/extension/tool)
 	var/use_sound = istype(tool_data) ? tool_data.get_tool_sound(archetype) : null
-	 //If no sound overrides, grab the archetype's sound/sound list
-	if(!use_sound)
-		use_sound = tool_archetype.use_sound
 	if(islist(use_sound))
 		if(length(use_sound))
 			use_sound = pick(use_sound)

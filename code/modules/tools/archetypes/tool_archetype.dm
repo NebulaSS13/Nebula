@@ -53,4 +53,4 @@
 	return 0
 
 /decl/tool_archetype/proc/get_default_speed(obj/item/tool)
-	return
+	return TOOL_SPEED_WORST // Need to return a non-zero/null value to avoid bugs.
