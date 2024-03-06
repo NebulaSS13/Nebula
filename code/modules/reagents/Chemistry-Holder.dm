@@ -388,9 +388,6 @@ var/global/obj/temp_reagents_holder = new
 			return TRUE
 		return splash_mob(target, amount, copy, defer_update = defer_update)
 	if(isturf(target))
-		touch_turf(target)
-		if(QDELETED(target))
-			return TRUE
 		return trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update)
 	if(isobj(target))
 		touch_obj(target)
@@ -588,12 +585,16 @@ var/global/obj/temp_reagents_holder = new
 	R.touch_mob(target)
 	qdel(R)
 
-/datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE) // Turfs don't have any reagents (at least, for now). Just touch it.
+/datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE)
 	if(!target?.simulated)
 		return
 	if(!target.reagents)
 		target.create_reagents(FLUID_MAX_DEPTH)
 	trans_to_holder(target.reagents, amount, multiplier, copy, defer_update = defer_update)
+	// Deferred updates are presumably being done by SSfluids.
+	// Do an immediate fluid_act call rather than waiting for SSfluids to proc.
+	if(!defer_update)
+		target.fluid_act(target.reagents)
 
 /datum/reagents/proc/trans_to_obj(var/obj/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/defer_update = FALSE) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
 	if(!target || !target.simulated)

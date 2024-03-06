@@ -288,7 +288,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/bakes_into_material
 	var/bakes_into_at_temperature
 
-	// Used by leather.
+	/// If set to a material type, stacks of this material will be able to be tanned on a drying rack after being wetted to convert them to tans_to.
 	var/tans_to
 
 // Placeholders for light tiles and rglass.

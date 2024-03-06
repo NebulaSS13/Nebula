@@ -64,7 +64,7 @@
 /turf/is_flooded(var/lying_mob, var/absolute)
 	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))
 
-/turf/check_fluid_depth(var/min)
+/turf/check_fluid_depth(var/min = 1)
 	. = (get_fluid_depth() >= min)
 
 /turf/proc/get_fluid_name()
@@ -122,12 +122,12 @@
 	if(defer_update && !QDELETED(reagents))
 		SSfluids.holders_to_update[reagents] = TRUE
 
-/turf/proc/transfer_fluids_to(var/turf/target, var/amount, var/defer_update)
+/turf/proc/transfer_fluids_to(var/turf/target, var/amount, var/defer_update = TRUE)
 	if(!reagents?.total_volume)
 		return
 	if(!target.reagents)
 		target.create_reagents(FLUID_MAX_DEPTH)
-	reagents.trans_to_holder(target.reagents, min(reagents.total_volume, min(FLUID_MAX_DEPTH - target.reagents.total_volume, amount)), defer_update = defer_update)
+	reagents.trans_to_turf(target, min(reagents.total_volume, min(target.reagents.maximum_volume - target.reagents.total_volume, amount)), defer_update = defer_update)
 	if(defer_update)
 		if(!QDELETED(reagents))
 			SSfluids.holders_to_update[reagents] = TRUE

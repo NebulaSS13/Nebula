@@ -147,7 +147,7 @@ SUBSYSTEM_DEF(fluids)
 				UPDATE_FLUID_BLOCKED_DIRS(other_fluid_holder)
 				if(!(other_fluid_holder.fluid_blocked_dirs & UP) && other_fluid_holder.CanFluidPass(UP))
 					if(!QDELETED(other_fluid_holder) && other_fluid_holder.reagents?.total_volume < FLUID_MAX_DEPTH)
-						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_volume), defer_update = TRUE)
+						current_fluid_holder.transfer_fluids_to(other_fluid_holder, min(FLOOR(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid_holder.reagents?.total_volume))
 						current_depth = current_fluid_holder.get_fluid_depth()
 
 		// Flow into the lowest level neighbor.
@@ -181,7 +181,7 @@ SUBSYSTEM_DEF(fluids)
 			continue
 
 		if(lowest_neighbor)
-			current_fluid_holder.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow, defer_update = TRUE)
+			current_fluid_holder.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow)
 			pending_flows[current_fluid_holder] = TRUE
 			if(lowest_neighbor_flow >= FLUID_PUSH_THRESHOLD)
 				current_fluid_holder.last_flow_strength = lowest_neighbor_flow

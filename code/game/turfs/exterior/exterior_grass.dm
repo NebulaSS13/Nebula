@@ -26,6 +26,15 @@
 	material = /decl/material/solid/organic/plantmatter/grass
 	is_spawnable_type = TRUE
 
+/obj/item/stack/material/bundle/grass/attack_self(mob/user)
+	if(use(1))
+		to_chat(user, SPAN_NOTICE("You make a grass tile out of \the [src]!"))
+		var/obj/item/stack/tile/grass/G = new(user.loc, 2)
+		G.color = material?.color
+		G.add_to_stacks(user, TRUE)
+		return TRUE
+	return ..()
+
 /obj/item/stack/material/bundle/grass/dry
 	drying_wetness = null
 	dried_type = null
