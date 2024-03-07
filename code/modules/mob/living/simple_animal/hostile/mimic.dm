@@ -94,18 +94,16 @@ var/global/list/protected_objects = list(/obj/machinery,
 		return TRUE
 	return FALSE
 
-/mob/living/simple_animal/hostile/mimic/death()
+/mob/living/simple_animal/hostile/mimic/death(gibbed)
 	if(!copy_of)
 		return
 	var/atom/movable/C = copy_of.resolve()
-	..(null, "dies!")
-	if(C)
+	. = ..()
+	if(. && C)
 		C.forceMove(src.loc)
-
 		if(istype(C,/obj/structure/closet))
 			for(var/atom/movable/M in src)
 				M.forceMove(C)
-
 		if(istype(C,/obj/item/storage))
 			var/obj/item/storage/S = C
 			for(var/atom/movable/M in src)
@@ -113,11 +111,9 @@ var/global/list/protected_objects = list(/obj/machinery,
 					S.handle_item_insertion(M)
 				else
 					M.forceMove(src.loc)
-
 		for(var/atom/movable/M in src)
 			M.dropInto(loc)
 		qdel(src)
-
 
 /mob/living/simple_animal/hostile/mimic/DestroySurroundings()
 	if(destroy_objects)

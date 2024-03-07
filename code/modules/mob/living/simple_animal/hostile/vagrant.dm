@@ -39,7 +39,7 @@
 
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
 	. = ..()
-	if(stat == DEAD && !QDELETED(src) && !gibbed)
+	if(. && !gibbed)
 		gib()
 
 /mob/living/simple_animal/hostile/vagrant/handle_living_non_stasis_processes()

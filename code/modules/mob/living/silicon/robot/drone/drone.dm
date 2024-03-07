@@ -65,14 +65,12 @@
 /mob/living/silicon/robot/drone/proc/on_moved(var/atom/movable/am, var/turf/old_loc, var/turf/new_loc)
 	old_loc = get_turf(old_loc)
 	new_loc = get_turf(new_loc)
-
 	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
 		return
 	if(LEVELS_ARE_Z_CONNECTED(old_loc.z, new_loc.z))
 		return
-
 	// None of the tests passed, good bye
-	self_destruct()
+	gib()
 
 /mob/living/silicon/robot/drone/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	if(!istype(possessor) || !possessor.client || !possessor.ckey)
@@ -243,15 +241,10 @@
 		to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and [G.his] commands."))
 	return 1
 
-/mob/living/silicon/robot/drone/death()
-	if(stat != DEAD && should_be_dead())
-		self_destruct()
-		return FALSE
+/mob/living/silicon/robot/drone/death(gibbed)
 	. = ..()
-
-/mob/living/silicon/robot/drone/self_destruct()
-	timeofdeath = world.time
-	gib()
+	if(. && !gibbed)
+		gib()
 
 //DRONE MOVEMENT.
 /mob/living/silicon/robot/drone/slip_chance(var/prob_slip)

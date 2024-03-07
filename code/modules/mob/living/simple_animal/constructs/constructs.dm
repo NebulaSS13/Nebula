@@ -60,11 +60,17 @@
 	set_light(1.5, -2, COLOR_WHITE)
 	update_icon()
 
-/mob/living/simple_animal/construct/death(gibbed, deathmessage, show_dead_message)
-	new /obj/item/ectoplasm (src.loc)
-	..(null,"collapses in a shattered heap.","The bonds tying you to this mortal plane have been severed.")
-	ghostize()
-	qdel(src)
+/mob/living/simple_animal/construct/get_death_message(gibbed)
+	return "collapses in a shattered heap."
+
+/mob/living/simple_animal/construct/get_self_death_message(gibbed)
+	return "The bonds tying you to this mortal plane have been severed."
+
+/mob/living/simple_animal/construct/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		new /obj/item/ectoplasm(src.loc)
+		qdel(src)
 
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))

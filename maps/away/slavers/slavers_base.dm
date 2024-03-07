@@ -145,13 +145,14 @@
 	var/corpse = /obj/abstract/landmark/corpse/abolitionist
 	var/weapon = /obj/item/gun/energy/laser
 
-/mob/living/simple_animal/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
-	. = ..(gibbed, deathmessage, show_dead_message)
-	if(corpse)
-		new corpse(loc)
-	if(weapon)
-		new weapon(loc)
-	qdel(src)
+/mob/living/simple_animal/hostile/abolition_extremist/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		if(corpse)
+			new corpse(loc)
+		if(weapon)
+			new weapon(loc)
+		qdel(src)
 
 /obj/abstract/landmark/corpse/abolitionist
 	name = "abolitionist"

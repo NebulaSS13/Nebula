@@ -284,24 +284,18 @@
 		update_icon()
 		. = 1
 
-/mob/living/bot/medbot/explode()
-	on = 0
-	visible_message("<span class='danger'>[src] blows apart!</span>")
-	var/turf/Tsec = get_turf(src)
-
-	new /obj/item/storage/firstaid(Tsec)
-	new /obj/item/assembly/prox_sensor(Tsec)
-	new /obj/item/scanner/health(Tsec)
-	if (prob(50))
-		new /obj/item/robot_parts/l_arm(Tsec)
-
-	if(reagent_glass)
-		reagent_glass.forceMove(Tsec)
-		reagent_glass = null
-
-	spark_at(src, cardinal_only = TRUE)
-	qdel(src)
-	return
+/mob/living/bot/medbot/gib(do_gibs)
+	var/turf/my_turf = get_turf(src)
+	. = ..()
+	if(. && my_turf)
+		new /obj/item/storage/firstaid(my_turf)
+		new /obj/item/assembly/prox_sensor(my_turf)
+		new /obj/item/scanner/health(my_turf)
+		if (prob(50))
+			new /obj/item/robot_parts/l_arm(my_turf)
+		if(reagent_glass)
+			reagent_glass.forceMove(my_turf)
+			reagent_glass = null
 
 /mob/living/bot/medbot/confirmTarget(var/mob/living/carbon/human/H)
 	if(!..())

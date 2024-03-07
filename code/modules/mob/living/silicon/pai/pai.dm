@@ -143,7 +143,7 @@ var/global/list/possible_say_verbs = list(
 		visible_message( \
 			message = SPAN_DANGER("A shower of sparks spray from [src]'s inner workings!"), \
 			blind_message = SPAN_DANGER("You hear and smell the ozone hiss of electrical sparks being expelled violently."))
-		return death(0)
+		return death()
 
 	switch(pick(1,2,3))
 		if(1)

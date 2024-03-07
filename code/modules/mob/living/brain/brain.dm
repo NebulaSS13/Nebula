@@ -28,12 +28,6 @@
 	if(emp_damage || stat == DEAD || !is_in_interface())
 		SET_STATUS_MAX(src, STAT_SILENCE, 2)
 
-/mob/living/brain/death()
-	var/obj/item/organ/holder = loc
-	. = ..()
-	if(stat == DEAD && istype(holder))
-		holder.die()
-
 /mob/living/brain/is_deaf()
 	return emp_damage || stat == DEAD || !is_in_interface()
 

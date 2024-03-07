@@ -1,15 +1,26 @@
-/mob/living/silicon/gib()
-	..("gibbed-r")
-	gibs()
+/mob/living/silicon/get_death_message(gibbed)
+	return "gives one shrill beep before falling lifeless."
+
+/mob/living/silicon/get_self_death_message(gibbed)
+	return "You have suffered a critical system failure, and are dead."
+
+/mob/living/silicon/get_dusted_remains()
+	return /obj/item/remains/robot
+
+/mob/living/silicon/get_gibbed_state(dusted)
+	return dusted ? "dust-r" : "gibbed-r"
 
 /mob/living/silicon/get_gibber_type()
 	return /obj/effect/gibspawner/robot
 
-/mob/living/silicon/dust()
-	..("dust-r", /obj/item/remains/robot)
+/mob/living/silicon/gib(do_gibs)
+	var/turf/my_turf = get_turf(src)
+	. = ..(do_gibs = FALSE)
+	if(. && my_turf)
+		spawn_gibber(my_turf)
 
-/mob/living/silicon/death(gibbed, deathmessage, show_dead_message)
-	if(in_contents_of(/obj/machinery/recharge_station))//exit the recharge station
+/mob/living/silicon/death(gibbed)
+	. = ..()
+	if(. && in_contents_of(/obj/machinery/recharge_station))//exit the recharge station
 		var/obj/machinery/recharge_station/RC = loc
 		RC.go_out()
-	return ..(gibbed, deathmessage, show_dead_message)

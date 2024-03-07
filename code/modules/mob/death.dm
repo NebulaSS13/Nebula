@@ -1,60 +1,87 @@
-//This is the proc for gibbing a mob. Cannot gib ghosts.
-//added different sort of gibs and animations. N
-/mob/proc/gib(anim="gibbed-m",do_gibs)
+/mob/proc/handle_existence_failure(dusted)
 
-	set waitfor = FALSE
+	// Make sure they're actually dead.
+	if(stat != DEAD)
+		death(gibbed = TRUE)
+		if(stat != DEAD)
+			return FALSE
 
-	death(1)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
+
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
-	UpdateLyingBuckledAndVerbStatus()
-	remove_from_dead_mob_list()
 	dump_contents()
+	QDEL_IN(src, 1.5 SECONDS)
 
-	var/atom/movable/overlay/animation = new(src)
-	animation.icon_state = "blank"
-	animation.icon = 'icons/mob/mob.dmi'
+	var/animation_state = get_gibbed_state(dusted)
+	var/animation_icon  = get_gibbed_icon()
+	if(animation_state && animation_icon)
+		var/atom/movable/overlay/animation
+		animation = new(loc)
+		animation.icon_state = "blank"
+		animation.icon = animation_icon
+		animation.master = src
+		flick(animation_state, animation)
+		QDEL_IN(animation, 1.5 SECONDS)
 
-	flick(anim, animation)
-	if(do_gibs)
-		gibs()
+	return TRUE
 
-	QDEL_IN(animation, 15)
-	QDEL_IN(src, 15)
+/mob/proc/get_dusted_remains()
+	var/decl/species/my_species = get_species()
+	return my_species ? my_species.remains_type : /obj/effect/decal/cleanable/ash
 
+/mob/proc/get_gibbed_state(dusted)
+	var/decl/species/my_species = get_species()
+	if(dusted)
+		return my_species ? my_species.dusted_anim : "dust-m"
+	return my_species ? my_species.gibbed_anim : "gibbed-m"
+
+/mob/proc/get_gibbed_icon()
+	return 'icons/mob/mob.dmi'
+
+//This is the proc for gibbing a mob. Cannot gib ghosts.
+//added different sort of gibs and animations. N
+/mob/proc/gib(do_gibs)
+	SHOULD_CALL_PARENT(TRUE)
+	set waitfor = FALSE
+	var/lastloc = loc
+	. = handle_existence_failure(dusted = FALSE)
+	if(. && do_gibs)
+		spawn_gibber(lastloc)
 
 //This is the proc for turning a mob into ash. Mostly a copy of gib code (above).
 //Originally created for wizard disintegrate. I've removed the virus code since it's irrelevant here.
 //Dusting robots does not eject the brain, so it's a bit more powerful than gib() /N
-/mob/proc/dust(anim="dust-m",remains=/obj/effect/decal/cleanable/ash)
-	death(1)
-	var/atom/movable/overlay/animation = null
-	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	icon = null
-	set_invisibility(INVISIBILITY_ABSTRACT)
+/mob/proc/dust()
+	SHOULD_CALL_PARENT(TRUE)
+	set waitfor = FALSE
+	var/lastloc = loc
+	. = handle_existence_failure(dusted = TRUE)
+	if(. && lastloc)
+		var/remains = get_dusted_remains()
+		if(remains)
+			new remains(lastloc)
 
-	animation = new(loc)
-	animation.icon_state = "blank"
-	animation.icon = 'icons/mob/mob.dmi'
-	animation.master = src
+/mob/proc/get_death_message(gibbed)
+	return SKIP_DEATH_MESSAGE
 
-	flick(anim, animation)
-	new remains(loc)
+/mob/proc/get_self_death_message(gibbed)
+	return "You have died."
 
-	remove_from_dead_mob_list()
-	QDEL_IN(animation, 15)
-	QDEL_IN(src, 15)
+/mob/proc/death(gibbed)
 
-/mob/proc/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")
+	SHOULD_CALL_PARENT(TRUE)
 
 	if(stat == DEAD)
-		return 0
+		return FALSE
 
+	walk(src, 0)
 	facing_dir = null
 
-	if(!gibbed && deathmessage != "no message") // This is gross, but reliable. Only brains use it.
-		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
+	if(!gibbed)
+		var/death_message = get_death_message(gibbed)
+		if(death_message != SKIP_DEATH_MESSAGE)
+			visible_message("<b>\The [src]</b> [death_message]")
 
 	for(var/obj/item/organ/O in get_organs())
 		O.on_holder_death(gibbed)
@@ -92,5 +119,9 @@
 
 	if(SSticker.mode)
 		SSticker.mode.check_win()
-	to_chat(src,"<span class='deadsay'>[show_dead_message]</span>")
-	return 1
+
+	var/show_dead_message = get_self_death_message(gibbed)
+	if(show_dead_message)
+		to_chat(src,"<span class='deadsay'>[show_dead_message]</span>")
+
+	return TRUE

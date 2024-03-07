@@ -50,11 +50,21 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 /mob/observer/CanPass()
 	return TRUE
 
+/mob/observer/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
+
+/mob/observer/handle_existence_failure(dusted)
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
+
 /mob/observer/dust()	//observers can't be vaporised.
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /mob/observer/gib()		//observers can't be gibbed.
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /mob/observer/is_blind()	//Not blind either.
 	return

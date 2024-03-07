@@ -30,9 +30,13 @@
 /mob/living/simple_animal/hostile/viscerator/check_has_mouth()
 	return FALSE
 
-/mob/living/simple_animal/hostile/viscerator/death(gibbed, deathmessage, show_dead_message)
-	..(null, "is smashed into pieces!", show_dead_message)
-	qdel(src)
+/mob/living/simple_animal/hostile/viscerator/get_death_message(gibbed)
+	return "is smashed into pieces!"
+
+/mob/living/simple_animal/hostile/viscerator/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		qdel(src)
 
 /mob/living/simple_animal/hostile/viscerator/hive
 	faction = "hivebot"

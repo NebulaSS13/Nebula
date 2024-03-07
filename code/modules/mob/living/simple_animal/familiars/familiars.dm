@@ -69,11 +69,16 @@
 	damtype = BURN
 	attack_verb = list("touched")
 
-/mob/living/simple_animal/familiar/horror/death(gibbed, deathmessage, show_dead_message)
-	..(null,"rapidly deteriorates","The bonds tying you to this mortal plane have been severed.")
-	ghostize()
-	if(!gibbed)
-		gib()
+/mob/living/simple_animal/familiar/horror/get_death_message(gibbed)
+	return "rapidly deteriorates"
+/mob/living/simple_animal/familiar/horror/get_self_death_message(gibbed)
+	return "The bonds tying you to this mortal plane have been severed."
+
+/mob/living/simple_animal/familiar/horror/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		spawn_gibber(loc)
+		qdel(src)
 
 /mob/living/simple_animal/familiar/minor_amaros
 	name = "minor amaros"

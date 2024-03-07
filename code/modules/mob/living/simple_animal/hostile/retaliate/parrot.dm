@@ -101,12 +101,15 @@
 		held_item = null
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/parrot/death(gibbed, deathmessage, show_dead_message)
-	if(held_item)
-		held_item.dropInto(loc)
-		held_item = null
-	walk(src,0)
-	..(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/retaliate/parrot/death(gibbed)
+	var/oldloc = loc
+	. = ..()
+	if(. && held_item)
+		if(oldloc)
+			held_item.dropInto(oldloc)
+			held_item = null
+		else
+			QDEL_NULL(held_item)
 
 /mob/living/simple_animal/hostile/retaliate/parrot/Stat()
 	. = ..()

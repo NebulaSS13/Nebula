@@ -38,9 +38,9 @@
 	default_pixel_y = -8
 	stop_floating()
 
-/mob/living/silicon/robot/flying/death()
+/mob/living/silicon/robot/flying/death(gibbed)
 	. = ..()
-	if(!QDELETED(src) && stat == DEAD)
+	if(. && !gibbed)
 		stop_flying()
 
 /mob/living/silicon/robot/flying/Process_Spacemove()

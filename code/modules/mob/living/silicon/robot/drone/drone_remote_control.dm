@@ -70,15 +70,16 @@
 
 
 /mob/living/silicon/robot/drone/death(gibbed)
-	if(controlling_ai)
-		release_ai_control("<b>WARNING: remote system failure.</b> Connection timed out.")
-	drone_silicon_radio = null
-	. = ..(gibbed)
+	. = ..()
+	if(.)
+		if(controlling_ai)
+			release_ai_control("<b>WARNING: remote system failure.</b> Connection timed out.")
+		drone_silicon_radio = null
 
 /mob/living/silicon/ai/death(gibbed)
-	if(controlling_drone)
+	. = ..()
+	if(. && controlling_drone)
 		controlling_drone.release_ai_control("<b>WARNING: Primary control loop failure.</b> Session terminated.")
-	. = ..(gibbed)
 
 /mob/living/silicon/robot/drone/proc/release_ai_control_verb()
 	set name = "Release Control"

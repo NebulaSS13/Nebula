@@ -5,7 +5,7 @@
 	key = "deathgasp"
 
 /decl/emote/human/deathgasp/get_emote_message_3p(var/mob/living/carbon/human/user)
-	return "USER [user.species.get_death_message()]"
+	return "USER [user.species.get_species_death_message()]"
 
 /decl/emote/human/swish
 	key = "swish"

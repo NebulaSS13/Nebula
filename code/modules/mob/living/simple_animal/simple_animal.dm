@@ -97,6 +97,9 @@
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN // How long in ds that a creature winds up before attacking.
 	var/sa_accuracy = 85 //base chance to hit out of 100
 
+	// Visible message shown when the mob dies.
+	var/death_message = "dies!"
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 
@@ -138,6 +141,8 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 			mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
 		if(check_state_in_icon("world-gib", icon))
 			mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
+		if(check_state_in_icon("world-dust", icon))
+			mob_icon_state_flags |= MOB_ICON_HAS_DUST_STATE
 		if(check_state_in_icon("world-paralyzed", icon))
 			mob_icon_state_flags |= MOB_ICON_HAS_PARALYZED_STATE
 		global.simplemob_icon_bitflag_cache[type] = mob_icon_state_flags
@@ -285,8 +290,10 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	O.unbuckle_mob(M)
 	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
 
-/mob/living/simple_animal/gib()
-	..(((mob_icon_state_flags & MOB_ICON_HAS_GIB_STATE) ? "world-gib" : null), TRUE)
+/mob/living/simple_animal/get_gibbed_state(dusted)
+	if(dusted)
+		return (mob_icon_state_flags & MOB_ICON_HAS_DUST_STATE) ? "world-dust" : null
+	return (mob_icon_state_flags & MOB_ICON_HAS_GIB_STATE) ? "world-gib" : null
 
 /mob/living/simple_animal/proc/visible_emote(var/act_desc)
 	custom_emote(1, act_desc)
@@ -425,10 +432,15 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 	if(statpanel("Status") && show_stat_health)
 		stat(null, "Health: [get_health_percent()]%")
 
-/mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
-	density = FALSE
-	walk_to(src,0)
-	. = ..(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/get_death_message(gibbed)
+	if(!gibbed && death_message)
+		return death_message
+	return ..()
+
+/mob/living/simple_animal/death(gibbed)
+	. = ..()
+	if(.)
+		density = FALSE
 
 /mob/living/simple_animal/explosion_act(severity)
 	..()

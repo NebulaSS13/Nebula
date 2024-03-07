@@ -69,11 +69,22 @@
 /mob/living/bot/get_total_life_damage()
 	return getFireLoss() + getBruteLoss()
 
-/mob/living/bot/death()
+/mob/living/bot/get_dusted_remains()
+	return /obj/effect/decal/cleanable/blood/oil
+
+/mob/living/bot/gib(do_gibs)
+	if(stat != DEAD)
+		death(gibbed = TRUE)
 	if(stat == DEAD)
-		return
-	set_stat(DEAD)
-	explode()
+		turn_off()
+		visible_message(SPAN_DANGER("\The [src] blows apart!"))
+		spark_at(src, cardinal_only = TRUE)
+	return ..()
+
+/mob/living/bot/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		gib()
 
 /mob/living/bot/attackby(var/obj/item/O, var/mob/user)
 	if(O.GetIdCard())
@@ -355,9 +366,6 @@
 	on = 0
 	set_light(0)
 	update_icon()
-
-/mob/living/bot/proc/explode()
-	qdel(src)
 
 /******************************************************************/
 // Navigation procs

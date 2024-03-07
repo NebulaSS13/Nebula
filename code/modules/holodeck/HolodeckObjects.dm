@@ -420,9 +420,22 @@
 		faction = "carp"
 		natural_weapon.force = initial(natural_weapon.force)
 
-/mob/living/simple_animal/hostile/carp/holodeck/gib(anim="gibbed-m",do_gibs)
-	death()
+/mob/living/simple_animal/hostile/carp/holodeck/gib(do_gibs)
+	SHOULD_CALL_PARENT(FALSE)
+	if(stat != DEAD)
+		death(gibbed = TRUE)
+	if(stat == DEAD)
+		qdel(src)
+		return TRUE
+	return FALSE
 
-/mob/living/simple_animal/hostile/carp/holodeck/death()
-	..(null, "fades away!", "You have been destroyed.")
-	qdel(src)
+/mob/living/simple_animal/hostile/carp/get_death_message(gibbed)
+	return "fades away..."
+
+/mob/living/simple_animal/hostile/carp/holodeck/get_self_death_message(gibbed)
+	return "You have been destroyed."
+
+/mob/living/simple_animal/hostile/carp/holodeck/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		gib()

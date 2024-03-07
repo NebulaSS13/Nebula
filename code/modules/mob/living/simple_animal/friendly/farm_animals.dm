@@ -244,9 +244,10 @@ var/global/chicken_count = 0
 		else
 			icon = 'icons/mob/simple_animal/chicken_white.dmi'
 
-/mob/living/simple_animal/fowl/chicken/death(gibbed, deathmessage, show_dead_message)
-	..(gibbed, deathmessage, show_dead_message)
-	global.chicken_count -= 1
+/mob/living/simple_animal/fowl/chicken/death(gibbed)
+	. = ..()
+	if(.)
+		global.chicken_count -= 1
 
 /mob/living/simple_animal/fowl/chicken/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/chems/food/grown)) //feedin' dem chickens

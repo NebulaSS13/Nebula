@@ -28,7 +28,7 @@
 					H.make_husked()
 				else
 					M = new type()
-				M.death(0)
+				M.death()
 				M.forceMove(C1)
 				item_spawns += M
 		check = locate(truex + (direction ? width - 2 : 0), truey + (direction ? 0 : height - 2), zorigin)
@@ -44,6 +44,6 @@
 					H.make_husked()
 				else
 					M = new type()
-				M.death(0)
+				M.death()
 				M.forceMove(C2)
 				item_spawns += M

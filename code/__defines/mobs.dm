@@ -340,7 +340,8 @@ var/global/list/dexterity_levels = list(
 #define MOB_ICON_HAS_REST_STATE      BITFLAG(2)
 #define MOB_ICON_HAS_SLEEP_STATE     BITFLAG(3)
 #define MOB_ICON_HAS_GIB_STATE       BITFLAG(4)
-#define MOB_ICON_HAS_PARALYZED_STATE BITFLAG(5)
+#define MOB_ICON_HAS_DUST_STATE      BITFLAG(5)
+#define MOB_ICON_HAS_PARALYZED_STATE BITFLAG(6)
 #define NEUTER_ANIMATE "animate singular neutral"
 
 // Equipment Overlays Indices //
@@ -403,3 +404,7 @@ var/global/list/dexterity_levels = list(
 #define GET_FACIAL_HAIR_STYLE(TARGET)                       (TARGET.get_organ_sprite_accessory_by_category(SAC_FACIAL_HAIR, BP_HEAD))
 #define SET_FACIAL_HAIR_COLOUR(TARGET, COLOUR, SKIP_UPDATE) (TARGET.set_organ_sprite_accessory_by_category(null, SAC_FACIAL_HAIR, (COLOUR), FALSE, TRUE, BP_HEAD, SKIP_UPDATE))
 #define GET_FACIAL_HAIR_COLOUR(TARGET)                      (TARGET.get_organ_sprite_accessory(GET_FACIAL_HAIR_STYLE(TARGET), BP_HEAD))
+
+// Used in death() to skip message broadcast.
+#define SKIP_DEATH_MESSAGE "no message"
+

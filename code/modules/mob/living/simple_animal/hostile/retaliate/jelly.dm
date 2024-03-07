@@ -47,11 +47,11 @@
 		megajelly_color = color_matrix_rotate_hue(round(rand(0,360),20))
 	color = megajelly_color
 
-/mob/living/simple_animal/hostile/retaliate/jelly/mega/death()
+/mob/living/simple_animal/hostile/retaliate/jelly/mega/death(gibbed)
 	if(split_type)
 		jelly_split()
-	else
-		..()
+		return TRUE
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/proc/jelly_split()
 	visible_message(SPAN_MFAUNA("\The [src] rumbles briefly before splitting into two!"))
