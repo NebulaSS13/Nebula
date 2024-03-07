@@ -35,11 +35,14 @@
 		. += new/datum/stack_recipe/furniture/bed(src)
 		return
 
-	if(ispath(stack_type, /obj/item/stack/material/brick) && wall_support_value >= 10)
-		. += new/datum/stack_recipe/turfs/wall/brick(src)
-		. += new/datum/stack_recipe/turfs/path(src)
-		. += new/datum/stack_recipe/turfs/path/herringbone(src)
-		. += new/datum/stack_recipe/turfs/path/running_bond(src)
+	if(wall_support_value >= 10)
+		if(ispath(stack_type, /obj/item/stack/material/brick))
+			. += new/datum/stack_recipe/turfs/wall/brick(src)
+			. += new/datum/stack_recipe/turfs/path(src)
+			. += new/datum/stack_recipe/turfs/path/herringbone(src)
+			. += new/datum/stack_recipe/turfs/path/running_bond(src)
+		else if(ispath(stack_type, /obj/item/stack/material/log))
+			. += new/datum/stack_recipe/turfs/wall/log(src)
 
 	// We assume a non-ore non-strut stack type is a general type that can use general recipes.
 	if(opacity < 0.6)

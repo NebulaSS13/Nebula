@@ -66,25 +66,6 @@
 /turf/simulated/wall/plastic/facade
 	girder_material = /decl/material/solid/organic/plastic
 
-/turf/simulated/wall/brick
-	icon_state = "brick"
-	material = /decl/material/solid/stone/sandstone
-	girder_material = null
-
-/turf/simulated/wall/brick/get_wall_icon()
-	return 'icons/turf/walls/brick.dmi'
-
-/turf/simulated/wall/brick/sandstone
-	color = COLOR_GOLD
-
-/turf/simulated/wall/log
-	icon_state = "log"
-	material = /decl/material/solid/organic/wood
-	girder_material = null
-
-/turf/simulated/wall/log/get_wall_icon()
-	return 'icons/turf/walls/log.dmi'
-
 /turf/simulated/wall/wood
 	color = COLOR_BROWN
 	icon_state = "wood"
