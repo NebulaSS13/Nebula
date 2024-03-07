@@ -1593,3 +1593,21 @@ Note that amputating the affected organ does in fact remove the infection from t
 					vital_to_owner = TRUE
 					break
 	return vital_to_owner
+
+/obj/item/organ/external/proc/get_grooming_results(obj/item/grooming/tool)
+
+	for(var/accessory_category in _sprite_accessories)
+		var/list/draw_accessories = _sprite_accessories[accessory_category]
+		for(var/accessory in draw_accessories)
+			var/decl/sprite_accessory/accessory_decl = resolve_accessory_to_decl(accessory)
+			var/grooming_result = accessory_decl.can_be_groomed_with(src, tool)
+			. = list(
+				"success"    = grooming_result,
+				"descriptor" = accessory_decl.get_grooming_descriptor(grooming_result, src, tool)
+			)
+			if(grooming_result != GROOMING_RESULT_FAILED)
+				return
+
+	var/default_results = bodytype.get_default_grooming_results(src, tool)
+	if(default_results)
+		. = default_results

@@ -13,6 +13,10 @@
 	icon                 = 'icons/mob/human_races/species/default_horns.dmi'
 	accessory_category   = SAC_HORNS
 	abstract_type        = /decl/sprite_accessory/horns
+	grooming_flags       = GROOMABLE_FILE
+
+/decl/sprite_accessory/horns/get_grooming_descriptor(grooming_result, obj/item/organ/external/organ, obj/item/grooming/tool)
+	return grooming_result == GROOMING_RESULT_PARTIAL ? "nubs" : "horns"
 
 /decl/sprite_accessory/horns/none
 	name                        = "No Horns"
@@ -27,3 +31,4 @@
 	body_flags_allowed          = null
 	body_flags_denied           = null
 	draw_accessory              = FALSE
+	grooming_flags              = null

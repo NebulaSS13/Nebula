@@ -59,7 +59,7 @@
 	product_ads = "Impress the love of your life!;Don't look poor, look rich!;100% authentic designers!;All sales are final!;Lowest prices guaranteed!"
 	products = list(
 		/obj/item/mirror = 8,
-		/obj/item/haircomb = 8,
+		/obj/item/grooming/comb = 8,
 		/obj/item/clothing/glasses/eyepatch/monocle = 5,
 		/obj/item/clothing/glasses/sunglasses = 5,
 		/obj/random/makeup = 3,
@@ -121,8 +121,9 @@
 	products = list(
 		/obj/item/soap = 12,
 		/obj/item/mirror = 8,
-		/obj/item/haircomb/random = 8,
-		/obj/item/haircomb/brush = 4,
+		/obj/item/grooming/comb/colorable/random = 8,
+		/obj/item/grooming/brush/colorable/random = 4,
+		/obj/item/grooming/file = 1,
 		/obj/item/towel/random = 6,
 		/obj/item/chems/spray/cleaner/deodorant = 5
 	)

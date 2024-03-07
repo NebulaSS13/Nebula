@@ -27,4 +27,4 @@
 	body_flags_allowed          = null
 	body_flags_denied           = null
 	draw_accessory              = FALSE
-
+	grooming_flags              = null

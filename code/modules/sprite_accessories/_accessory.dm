@@ -69,6 +69,8 @@
 	var/accessory_category
 	/// Whether or not this accessory should be drawn on the mob at all.
 	var/draw_accessory = TRUE
+	/// Bitflags indicating what grooming tools work on this accessory.
+	var/grooming_flags = GROOMABLE_NONE
 
 /decl/sprite_accessory/proc/refresh_mob(var/mob/living/subject)
 	return
@@ -126,6 +128,14 @@
 
 /decl/sprite_accessory/proc/get_accessory_icon(var/obj/item/organ/external/organ)
 	return icon
+
+/decl/sprite_accessory/proc/can_be_groomed_with(obj/item/organ/external/organ, obj/item/grooming/tool)
+	if(istype(tool) && (grooming_flags & tool.grooming_flags))
+		return GROOMING_RESULT_SUCCESS
+	return GROOMING_RESULT_FAILED
+
+/decl/sprite_accessory/proc/get_grooming_descriptor(grooming_result, obj/item/organ/external/organ, obj/item/grooming/tool)
+	return "mystery grooming target"
 
 /decl/sprite_accessory/proc/get_cached_accessory_icon(var/obj/item/organ/external/organ, var/color = COLOR_WHITE)
 	ASSERT(istext(color) && (length(color) == 7 || length(color) == 9))

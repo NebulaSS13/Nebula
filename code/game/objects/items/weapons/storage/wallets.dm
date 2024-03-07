@@ -11,7 +11,7 @@
 		/obj/item/card,
 		/obj/item/clothing/mask/smokable,
 		/obj/item/cosmetics,
-		/obj/item/haircomb,
+		/obj/item/grooming,
 		/obj/item/mirror,
 		/obj/item/clothing/accessory/locket,
 		/obj/item/clothing/head/hairflower,

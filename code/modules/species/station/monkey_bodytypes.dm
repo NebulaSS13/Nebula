@@ -10,6 +10,7 @@
 		BP_TAIL = /obj/item/organ/external/tail/monkey
 	)
 	mob_size = MOB_SIZE_SMALL
+	nail_noun = "nails"
 
 /decl/bodytype/monkey/Initialize()
 	equip_adjust = list(
