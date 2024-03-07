@@ -123,6 +123,11 @@
 		if(oxidizer.gas_flags & XGM_GAS_OXIDIZER)
 			return TRUE
 
+/obj/structure/fire_source/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	. = ..()
+	if(!QDELETED(src))
+		light()
+
 /obj/structure/fire_source/proc/light(var/force)
 	if(!check_atmos())
 		return FALSE

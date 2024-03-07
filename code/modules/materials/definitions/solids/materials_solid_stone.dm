@@ -26,12 +26,20 @@
 		. += new/datum/stack_recipe/furniture/planting_bed(src)
 		. += new/datum/stack_recipe/fountain(src)
 
+// Placeholder for firemaking.
 /decl/material/solid/stone/sandstone
 	name = "sandstone"
 	uid = "solid_sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	value = 1.5
 	melting_point = T0C + 600
+
+/decl/material/solid/stone/flint
+	name      = "flint"
+	uid       = "solid_flint"
+	lore_text = "A hard, smooth stone traditionally used for making fire."
+	value     = 3
+	color     = "#615f5f"
 
 /decl/material/solid/stone/granite
 	name                   = "granite"
