@@ -214,15 +214,12 @@
 		// Check that the recipe is still available to us.
 		var/list/recipes = get_stack_recipes(get_material(), get_reinforced_material(), crafting_stack_type, user?.get_active_hand()?.get_best_tool_archetype())
 		if(!(recipe in recipes))
-			world << 1
 			var/found_recipe = FALSE
 			for(var/datum/stack_recipe_list/recipe_list in recipes)
 				if(recipe in recipe_list.recipes)
 					found_recipe = TRUE
-					world << 2
 					break
 			if(!found_recipe)
-				world << 3
 				return TOPIC_NOACTION
 
 		// Validate the target amount and create the product.
