@@ -58,10 +58,16 @@
 		"hot",
 		"cold"
 	)
-
-	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
-
 	var/allow_multiple_instances_on_same_tile = FALSE
+
+/obj/machinery/door/firedoor/get_blend_objects()
+	var/static/list/blend_objects = list(
+		/obj/machinery/door/firedoor, 
+		/obj/structure/wall_frame, 
+		/turf/unsimulated/wall, 
+		/obj/structure/window
+	) // Objects which to blend with
+	return blend_objects
 
 /obj/machinery/door/firedoor/autoset
 	autoset_access = TRUE	//subtype just to make mapping away sites with custom access usage

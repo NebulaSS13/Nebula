@@ -1,5 +1,6 @@
 var/global/list/wall_blend_objects = list(
 	/obj/machinery/door,
+	/obj/structure/door,
 	/obj/structure/wall_frame,
 	/obj/structure/grille,
 	/obj/structure/window/reinforced/full,
@@ -48,7 +49,7 @@ var/global/list/wall_fullblend_objects = list(
 	..(ml)
 
 	// Clear mapping icons.
-	icon = 'icons/turf/walls/solid.dmi'
+	icon = get_wall_icon()
 	icon_state = "blank"
 	color = null
 
@@ -204,9 +205,15 @@ var/global/list/wall_fullblend_objects = list(
 		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - material.melting_point)))
 	return ..()
 
+/turf/simulated/wall/proc/get_dismantle_stack_type()
+	return
+
+/turf/simulated/wall/proc/get_dismantle_sound()
+	return 'sound/items/Welder.ogg'
+
 /turf/simulated/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
 
-	playsound(src, 'sound/items/Welder.ogg', 100, 1)
+	playsound(src, get_dismantle_sound(), 100, 1)
 	if(!no_product)
 		var/list/obj/structure/girder/placed_girders
 		if(girder_material)
@@ -216,7 +223,7 @@ var/global/list/wall_fullblend_objects = list(
 			placed_girder.prepped_for_fakewall = can_open
 			placed_girder.update_icon()
 		if(material)
-			material.place_dismantled_product(src, devastated)
+			material.place_dismantled_product(src, devastated, amount = rand(3, 5), drop_type = get_dismantle_stack_type())
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))

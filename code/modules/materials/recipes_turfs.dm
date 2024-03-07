@@ -25,6 +25,10 @@
 	title = "brick wall"
 	result_type = /turf/simulated/wall/brick
 
+/datum/stack_recipe/turfs/wall/log
+	title = "log wall"
+	result_type = /turf/simulated/wall/log
+
 /datum/stack_recipe/turfs/path
 	abstract_type = /datum/stack_recipe/turfs/path
 	expected_product_type = /turf/exterior
