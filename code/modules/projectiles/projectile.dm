@@ -341,7 +341,7 @@
 		var/obj/item/shrapnel = get_shrapnel()
 		if(shrapnel)
 			shrapnel.forceMove(organ)
-			organ.embed(shrapnel)
+			organ.embed_in_organ(shrapnel)
 	else if(prob(2 * damage_prob))
 		organ.sever_artery()
 

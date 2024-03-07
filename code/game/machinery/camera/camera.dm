@@ -187,8 +187,8 @@
 		set_broken(TRUE)
 
 /obj/machinery/camera/hitby(var/atom/movable/AM)
-	..()
-	if (istype(AM, /obj))
+	. = ..()
+	if(. && istype(AM, /obj))
 		var/obj/O = AM
 		if (O.throwforce >= src.toughness)
 			visible_message(SPAN_WARNING("[src] was hit by [O]!"))

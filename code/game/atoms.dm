@@ -443,12 +443,14 @@
 
 	- `AM`: The atom hitting this atom
 	- `TT`: A datum wrapper for a thrown atom, containing important info
+	- Returns: TRUE if successfully hit the atom.
 */
 /atom/proc/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	SHOULD_CALL_PARENT(TRUE)
 	if(isliving(AM))
 		var/mob/living/M = AM
 		M.apply_damage(TT.speed*5, BRUTE)
+	return TRUE
 
 /**
 	Attempt to add blood to this atom

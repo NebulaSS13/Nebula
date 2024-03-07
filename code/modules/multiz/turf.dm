@@ -83,7 +83,7 @@
 
 // Called when thrown object lands on this turf.
 /turf/simulated/open/hitby(var/atom/movable/AM)
-	..()
+	. = ..()
 	if(!QDELETED(AM))
 		AM.fall()
 
@@ -137,7 +137,7 @@
 	mover.fall(oldloc)
 
 /turf/exterior/open/hitby(var/atom/movable/AM)
-	..()
+	. = ..()
 	if(!QDELETED(AM))
 		AM.fall()
 

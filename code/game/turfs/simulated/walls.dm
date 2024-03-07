@@ -130,8 +130,8 @@ var/global/list/wall_fullblend_objects = list(
 	take_damage(damage)
 
 /turf/simulated/wall/hitby(AM, var/datum/thrownthing/TT)
-	..()
-	if(density && !ismob(AM))
+	. = ..()
+	if(. && density && !ismob(AM))
 		var/obj/O = AM
 		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src, hitsound, tforce >= 15 ? 60 : 25, TRUE)

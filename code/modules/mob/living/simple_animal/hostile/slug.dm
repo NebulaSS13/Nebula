@@ -41,7 +41,7 @@
 	var/obj/item/organ/external/chest = GET_EXTERNAL_ORGAN(H, BP_CHEST)
 	var/obj/item/holder/slug/holder = new(get_turf(src))
 	src.forceMove(holder)
-	chest.embed(holder,0,"\The [src] latches itself onto \the [H]!")
+	chest.embed_in_organ(holder, FALSE, "\The [src] latches itself onto \the [H]!")
 	holder.sync(src)
 
 /mob/living/simple_animal/hostile/slug/AttackingTarget()
