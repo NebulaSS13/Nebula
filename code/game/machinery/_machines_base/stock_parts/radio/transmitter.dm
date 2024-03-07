@@ -14,10 +14,7 @@
 		return
 	if(!buffer)
 		buffer = data
-		if(latency)
-			addtimer(CALLBACK(src, PROC_REF(transmit)), latency)
-		else
-			transmit()
+		addtimer(CALLBACK(src, PROC_REF(transmit)), latency)
 	else
 		buffer |= data
 
