@@ -59,7 +59,12 @@
 		"cold"
 	)
 
-	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
+	blend_objects = list(
+		/obj/machinery/door/firedoor, 
+		/obj/structure/wall_frame, 
+		/turf/unsimulated/wall, 
+		/obj/structure/window
+	) // Objects which to blend with
 
 	var/allow_multiple_instances_on_same_tile = FALSE
 

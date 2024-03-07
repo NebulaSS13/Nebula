@@ -72,6 +72,7 @@
 					if(2)
 						wall_dirs += get_dir(src, T)
 						other_dirs += get_dir(src, T)
+
 			if(handle_structure_blending)
 				var/success = 0
 				for(var/O in T)
@@ -94,6 +95,7 @@
 							if(!blendable)
 								other_dirs += get_dir(src, T)
 						break
+
 		wall_connections = dirs_to_corner_states(wall_dirs)
 		other_connections = dirs_to_corner_states(other_dirs)
 
