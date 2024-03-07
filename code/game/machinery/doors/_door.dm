@@ -35,12 +35,6 @@
 	var/block_air_zones = 1 //If set, air zones cannot merge across the door even when it is opened.
 	var/close_door_at = 0 //When to automatically close the door, if possible
 	var/connections = 0
-	var/list/blend_objects = list(
-		/obj/structure/wall_frame, 
-		/obj/structure/window, 
-		/obj/structure/grille, 
-		/obj/machinery/door
-	) // Objects which to blend with
 
 	var/autoset_access = TRUE // Determines whether the door will automatically set its access from the areas surrounding it. Can be used for mapping.
 
@@ -57,6 +51,15 @@
 	var/begins_closed     = TRUE
 	var/icon_state_open   = "door0"
 	var/icon_state_closed = "door1"
+
+/obj/machinery/door/get_blend_objects()
+	var/static/list/blend_objects = list(
+		/obj/structure/wall_frame, 
+		/obj/structure/window, 
+		/obj/structure/grille, 
+		/obj/machinery/door
+	) // Objects which to blend with
+	return blend_objects
 
 /obj/machinery/door/proc/can_operate(var/mob/user)
 	. = istype(user) && !user.restrained() && (!issmall(user) || ishuman(user) || issilicon(user) || isbot(user))
@@ -539,7 +542,7 @@
 			success = 1
 		else
 			for(var/obj/O in T)
-				for(var/blend_type in blend_objects)
+				for(var/blend_type in get_blend_objects())
 					if( istype(O, blend_type))
 						success = 1
 

@@ -363,3 +363,6 @@
 			for(var/mat in remove_matter)
 				matter -= mat
 		UNSETEMPTY(matter)
+
+/obj/proc/get_blend_objects()
+	return
