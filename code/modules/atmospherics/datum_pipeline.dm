@@ -255,7 +255,7 @@
 
 			air.temperature -= heat/total_heat_capacity
 			// Only increase the temperature of the target if it's simulated.
-			if(istype(target, /turf/simulated))
+			if(target.simulated)
 				target.temperature += heat/target.heat_capacity
 
 	if(network)

@@ -136,3 +136,11 @@
 
 /turf/simulated/floor/get_physical_height()
 	return flooring?.height || 0
+
+/turf/simulated/floor/handle_universal_decay()
+	if(!burnt)
+		burn_tile()
+	else if(flooring)
+		break_tile_to_plating()
+	else
+		ReplaceWithLattice()

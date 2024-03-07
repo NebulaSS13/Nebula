@@ -895,6 +895,6 @@
 /atom/proc/can_be_injected_by(var/atom/injector)
 	return FALSE
 
-/atom/proc/OnSimulatedTurfEntered(turf/simulated/T, old_loc)
+/atom/proc/OnSimulatedTurfEntered(turf/T, old_loc)
 	set waitfor = FALSE
 	return

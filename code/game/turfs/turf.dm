@@ -717,3 +717,6 @@
 	var/turf/T = get_turf(target)
 	if(T.can_dig_pit())
 		T.try_dig_pit(user, prop)
+
+/turf/proc/handle_universal_decay()
+	return

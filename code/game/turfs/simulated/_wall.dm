@@ -308,3 +308,6 @@ var/global/list/wall_fullblend_objects = list(
 
 /turf/simulated/wall/is_defiled()
 	return material?.type == /decl/material/solid/stone/cult || reinf_material?.type == /decl/material/solid/stone/cult/reinforced || ..()
+
+/turf/simulated/wall/handle_universal_decay()
+	handle_melting()

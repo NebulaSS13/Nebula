@@ -12,8 +12,9 @@
 /datum/hallucination/mirage/start()
 	. = ..()
 	var/list/possible_points = list()
-	for(var/turf/simulated/floor/F in view(holder, world.view+1))
-		possible_points += F
+	for(var/turf/F in view(holder, world.view+1))
+		if(F.simulated && F.is_floor())
+			possible_points += F
 	if(possible_points.len)
 		for(var/i = 1 to number)
 			var/image/thing = generate_mirage()

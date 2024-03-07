@@ -52,8 +52,8 @@
 
 	var/doodle_color = COLOR_BLOOD_HUMAN
 
-	var/turf/simulated/T = get_turf(src)
-	if(!istype(T))
+	var/turf/T = get_turf(src)
+	if(!T?.simulated)
 		to_chat(src, "<span class='warning'>You cannot doodle there.</span>")
 		return
 
